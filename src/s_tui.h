@@ -261,23 +261,24 @@ namespace s_tui
 	class Action_item : public CallbackComponent
     {
     public:
-		Action_item(const string& _label = "", const string& sp = "Enter/Escape") :
-			CallbackComponent(), label(_label), string_prompt(sp) {;}
+		Action_item(const string& _label = "", const string& sp1 = "Do", const string& sp2 = "Done") :
+			CallbackComponent(), label(_label), string_prompt1(sp1), string_prompt2(sp2) {tempo = clock();}
 		virtual bool onKey(SDLKey, S_TUI_VALUE);
 		virtual string getString(void);
 		virtual bool isEditable(void) const {return true;}
     protected:
 		string label;
-		string string_prompt;
+		string string_prompt1;
+		string string_prompt2;
+		int tempo;
     };
 
 	// Same as before but ask for a confirmation
 	class ActionConfirm_item : public Action_item
     {
     public:
-		ActionConfirm_item(const string& _label = "", const string& sp = "Enter/Escape",
-			const string& sc = "Are you sure ? (Enter/Escape)") :
-				Action_item(_label, sp), isConfirming(false), string_confirm(sc) {;}
+		ActionConfirm_item(const string& _label = "", const string& sp1 = "Do", const string& sp2 = "Done",	const string& sc = "Are you sure ?") :
+				Action_item(_label, sp1, sp2), isConfirming(false), string_confirm(sc) {;}
 		virtual bool onKey(SDLKey, S_TUI_VALUE);
 		virtual string getString(void);
     protected:

@@ -604,11 +604,22 @@ string Time_item::getString(void)
 
 string Action_item::getString(void)
 {
-	if (active)
+	if (clock() - tempo > CLOCKS_PER_SEC)
 	{
-		return label + start_active + string_prompt + stop_active;
+		if (active)
+		{
+			return label + start_active + string_prompt1 + stop_active;
+		}
+		else return label + string_prompt1;
 	}
-	else return label + string_prompt;
+	else
+	{
+		if (active)
+		{
+			return label + start_active + string_prompt2 + stop_active;
+		}
+		else return label + string_prompt2;
+	}
 }
 
 bool Action_item::onKey(SDLKey k, S_TUI_VALUE v)
@@ -617,6 +628,7 @@ bool Action_item::onKey(SDLKey k, S_TUI_VALUE v)
 	{
 		// Call the callback if enter is pressed
 		if (!onChangeCallback.empty()) onChangeCallback();
+		tempo = clock();
 		return true;
 	}
 	return false;
@@ -632,10 +644,10 @@ string ActionConfirm_item::getString(void)
 		}
 		else
 		{
-			return label + start_active + string_prompt + stop_active;
+			return label + start_active + string_prompt1 + stop_active;
 		}
 	}
-	else return label + string_prompt;
+	else return label + string_prompt1;
 }
 
 bool ActionConfirm_item::onKey(SDLKey k, S_TUI_VALUE v)
