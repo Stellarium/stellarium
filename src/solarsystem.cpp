@@ -249,7 +249,8 @@ void SolarSystem::compute_trans_matrices(double date)
 
 // Draw all the elements of the solar system
 // We are supposed to be in heliocentric coordinate
-void SolarSystem::draw(int hint_ON, Projector * prj, const navigator * nav, const tone_reproductor* eye, bool _gravity_label, int flag_point, int flag_orbits)
+void SolarSystem::draw(int hint_ON, Projector * prj, const navigator * nav, const tone_reproductor* eye, bool _gravity_label, 
+		       int flag_point, int flag_orbits, int flag_trails)
 {
 	planet::set_gravity_label_flag(_gravity_label);
 
@@ -289,7 +290,7 @@ void SolarSystem::draw(int hint_ON, Projector * prj, const navigator * nav, cons
 	iter = system_planets.begin();
     while (iter != system_planets.end())
     {
-        if (*iter!=earth) (*iter)->draw(hint_ON, prj, nav, eye, flag_point, flag_orbits);
+        if (*iter!=earth) (*iter)->draw(hint_ON, prj, nav, eye, flag_point, flag_orbits, flag_trails);
         ++iter;
     }
 
@@ -392,4 +393,40 @@ void SolarSystem::set_sky_locale(string _sky_locale) {
   }
   fclose(cnFile);
  
+}
+
+void SolarSystem::update_trails(const navigator* nav) {
+
+  vector<planet*>::iterator iter;      
+  for( iter = system_planets.begin(); iter < system_planets.end(); iter++ ) {
+    (*iter)->update_trail(nav);
+  }
+
+}
+
+void SolarSystem::start_trails(void) {
+
+  vector<planet*>::iterator iter;      
+  for( iter = system_planets.begin(); iter < system_planets.end(); iter++ ) {
+    (*iter)->start_trail();
+  }
+
+}
+
+void SolarSystem::end_trails(void) {
+
+  vector<planet*>::iterator iter;      
+  for( iter = system_planets.begin(); iter < system_planets.end(); iter++ ) {
+    (*iter)->end_trail();
+  }
+
+}
+
+void SolarSystem::set_trail_color(const Vec3f _color) {
+
+  vector<planet*>::iterator iter;      
+  for( iter = system_planets.begin(); iter < system_planets.end(); iter++ ) {
+    (*iter)->set_trail_color(_color);
+  }
+
 }
