@@ -1,5 +1,13 @@
 0.7.0 [in progress]
-Added "planet" trails - hit "4" or "," once for ecliptic, again for trails (advance time to observe)
+Added planet trails - hit "4" or "," once for ecliptic, again for trails (advance time to observe)
+Added precession of the equinoxes
+	
+0.6.2 [2004-11-18]
+Fixed time display bug (1 hour ahead of actual sky time during standard time if your timezone has daylight savings).  
+NOTE: Time is only displayed as standard time (no daylight savings effects).
+Fixed Milky Way drawing incorrectly (inside out) in desktop mode.
+Fixed Milky Way always on regardless of config setting.
+Fixed atmosphere flashing bug (for the final time, we hope).
 
 0.6.1 [2004-10-17]
 Added time control buttons on bottom right part of the screen.
