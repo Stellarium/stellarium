@@ -46,15 +46,18 @@ using namespace std;
 #include "landscape.h"
 #include "meteor_mgr.h"
 #include "sky_localizer.h"
-
+#include "script_mgr.h"
 
 // Predeclaration of the StelCommandInterface class
 class StelCommandInterface;
+class ScriptMgr;
+
 
 
 class stel_core
 {
 friend class stel_ui;
+friend class StelCommandInterface;
 public:
     stel_core();
     virtual ~stel_core();
@@ -151,7 +154,8 @@ private:
 	string config_file;
 
 	// Main elements of the program
-	StelCommandInterface * commander;              // interface to perform all UI and scripting actions
+	StelCommandInterface * commander;               // interface to perform all UI and scripting actions
+	ScriptMgr * scripts;                            // manage playing and recording scripts
 	navigator * navigation;				// Manage all navigation parameters, coordinate transformations etc..
 	Observator * observatory;			// Manage observer position and locales for its country
 	Projector * projection;				// Manage the projection mode and matrix

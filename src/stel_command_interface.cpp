@@ -25,6 +25,7 @@
 
 using namespace std;
 
+
 StelCommandInterface::StelCommandInterface(stel_core * core) {
   stcore = core;
 }
@@ -53,11 +54,10 @@ int StelCommandInterface::execute_command(string commandline) {
 
   if( status ) {
 
-    // if recording commands, do that now...
+    // if recording commands, do that now
+    stcore->scripts->record_command(commandline);
 
-    // temp debugging output
-    cout << commandline << endl;
-
+    //    cout << commandline << endl;
 
   } else {
     cout << "Could not execute: " << commandline << endl;
