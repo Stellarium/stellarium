@@ -665,11 +665,12 @@ int stel_ui::handle_keys(SDLKey key, S_GUI_VALUE state)
 	if(key==SDLK_6) {
 	  // pause/unpause script
 	  core->commander->execute_command( "script action pause");
-	}
-	if(key==SDLK_k) {
+	} else if(key==SDLK_k) {
 	  core->commander->execute_command( "script action resume");
-	}
-	if(key==SDLK_7) core->commander->execute_command( "script action end");
+	} else if(key==SDLK_7 || 
+		  (key==SDLK_c && (SDL_GetModState() & KMOD_CTRL)))
+	  core->commander->execute_command( "script action end");
+	else cout << "Playing a script.  Press ctrl-C (or 7) to stop." << endl;
 
 	return 0;
       }
