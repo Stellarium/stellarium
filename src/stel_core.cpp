@@ -27,7 +27,7 @@ extern s_texture * texIds[200];            // Common Textures TODO : Remove that
 
 stel_core::stel_core() : screen_W(800), screen_H(600), bppMode(16), Fullscreen(0),
 	navigation(NULL), projection(NULL), selected_object(NULL), hip_stars(NULL), asterisms(NULL),
-	nebulas(NULL), atmosphere(NULL), tone_converter(NULL), conf(NULL),
+	nebulas(NULL), atmosphere(NULL), tone_converter(NULL), selected_constellation(NULL), conf(NULL),
 	frame(0), timefr(0), timeBase(0), deltaFov(0.), deltaAlt(0.), deltaAz(0.), move_speed(0.001)
 {
 	TextureDir[0] = 0;
@@ -230,9 +230,20 @@ void stel_core::draw(int delta_time)
 	glClear(GL_DEPTH_BUFFER_BIT);
 
 	// Draw all the constellations
-	if (FlagAsterismDrawing) asterisms->draw(projection);
+	if (FlagAsterismDrawing)
+	{
+		if (FlagConstellationPick && selected_constellation)
+			selected_constellation->draw_alone(projection);
+		else asterisms->draw(projection);
+	}
+
 	// Draw the constellations's names
-    if (FlagAsterismName) asterisms->draw_names(projection);
+	if (FlagAsterismName)
+	{
+		if (FlagConstellationPick && selected_constellation)
+			asterisms->draw_one_name(projection, selected_constellation);
+		else asterisms->draw_names(projection);
+	}
 
 	// Draw the nebula if they are visible
 	if (FlagNebula && (!FlagAtmosphere || sky_brightness<0.1)) nebulas->Draw(FlagNebulaName, projection);
@@ -369,6 +380,7 @@ void stel_core::load_config(void)
 	// Viewing section
 	FlagAsterismDrawing		= conf->get_boolean("viewing:flag_constellation_drawing");
 	FlagAsterismName		= conf->get_boolean("viewing:flag_constellation_name");
+	FlagConstellationPick	= conf->get_boolean("viewing:flag_constellation_pick");
 	FlagAzimutalGrid		= conf->get_boolean("viewing:flag_azimutal_grid");
 	FlagEquatorialGrid		= conf->get_boolean("viewing:flag_equatorial_grid");
 	FlagEquator				= conf->get_boolean("viewing:flag_equator");
