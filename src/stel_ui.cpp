@@ -265,7 +265,7 @@ Component* stel_ui::createFlagButtons(void)
 void stel_ui::cb(void)
 {
 	core->FlagConstellationDrawing 	= bt_flag_constellation_draw->getState();
-	core->FlagConstellationName 		= bt_flag_constellation_name->getState();
+	core->FlagConstellationName 	= bt_flag_constellation_name->getState();
 	core->FlagAzimutalGrid 		= bt_flag_azimuth_grid->getState();
 	core->FlagEquatorialGrid 	= bt_flag_equator_grid->getState();
 	core->FlagGround	 		= bt_flag_ground->getState();
@@ -679,13 +679,14 @@ void stel_ui::update(void)
 	// To prevent a minor bug
 	if (!core->FlagShowSelectedObjectInfos) info_select_ctr->setVisible(0);
 	else if (core->selected_object) info_select_ctr->setVisible(1);
+	bt_flag_ctr->setVisible(core->FlagMenu);
 }
 
 
 // Update the infos about the selected object in the TextLabel widget
 void stel_ui::updateInfoSelectString(void)
 {
-	char objectInfo[300];
+	static char objectInfo[300];
     objectInfo[0]='\0';
 	core->selected_object->get_info_string(objectInfo, core->navigation);
     info_select_txtlbl->setLabel(objectInfo);
@@ -696,4 +697,39 @@ void stel_ui::updateInfoSelectString(void)
 		info_select_txtlbl->setTextColor(Vec3f(1.0f,0.3f,0.3f));
 	if (core->selected_object->get_type()==STEL_OBJECT_STAR)
 		info_select_txtlbl->setTextColor(core->selected_object->get_RGB());
+}
+
+// Draw simple gravity text ui.
+void stel_ui::draw_gravity_ui(void)
+{
+	// Normal transparency mode
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+    static char str[255];
+	ln_date d;
+
+	if (core->FlagUTC_Time) get_date(core->navigation->get_JDay(),&d);
+	else get_date(core->navigation->get_JDay()+core->navigation->get_time_zone()*JD_HOUR,&d);
+
+	if (core->FlagUTC_Time) sprintf(str,
+	"%.2d/%.2d/%.4d %.2d:%.2d:%.2d (UTC)",d.days,d.months,d.years,d.hours,d.minutes,(int)d.seconds);
+	else sprintf(str,"%.2d/%.2d/%.4d %.2d:%.2d:%.2d FPS:%4.2f",
+		d.days,d.months,d.years,d.hours,d.minutes,(int)d.seconds, core->fps);
+
+	int x = core->projection->view_left() + core->projection->viewW()/2;
+	int y = core->projection->view_bottom() + core->projection->viewH()/2;
+	int shift = (int)(M_SQRT2 / 2 * MY_MIN(x,y));
+
+	glColor3f(0.1,0.9,0.1);
+	core->projection->print_gravity180(spaceFont, x-shift + 10, y-shift + 10, str);
+
+	if (core->selected_object)
+	{
+		core->selected_object->get_short_info_string(str, core->navigation);
+		if (core->selected_object->get_type()==STEL_OBJECT_NEBULA) glColor3f(0.4f,0.5f,0.8f);
+		if (core->selected_object->get_type()==STEL_OBJECT_PLANET) glColor3f(1.0f,0.3f,0.3f);
+		if (core->selected_object->get_type()==STEL_OBJECT_STAR) glColor3fv(core->selected_object->get_RGB());
+		core->projection->print_gravity180(spaceFont, x+shift - 10, y+shift - 10, str);
+	}
+
 }

@@ -40,6 +40,7 @@ public:
     void draw_name(const s_font * star_font);
 	virtual Vec3f get_RGB(void) const {return RGB;}
 	virtual void get_info_string(char * s, const navigator * nav = NULL) const;
+	virtual void get_short_info_string(char * s, const navigator * nav = NULL) const;
 	virtual STEL_OBJECT_TYPE get_type(void) const {return STEL_OBJECT_STAR;}
 	virtual Vec3d get_earth_equ_pos(const navigator* nav=NULL) const {return Vec3d(XYZ[0],XYZ[1],XYZ[2]);}
 

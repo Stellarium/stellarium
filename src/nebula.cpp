@@ -53,6 +53,11 @@ void Nebula::get_info_string(char * s, const navigator * nav) const
 		print_angle_hms(tempRA*180./M_PI), print_angle_dms_stel(tempDE*180./M_PI), mag);
 }
 
+void Nebula::get_short_info_string(char * s, const navigator * nav) const
+{
+	sprintf(s,"%s - Mag %.2f", name, mag);
+}
+
 int Nebula::read(FILE * catalogue)
 // Lis les infos de la nébuleuse dans le fichier et calcule x,y et z;
 {

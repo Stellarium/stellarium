@@ -75,6 +75,7 @@ public:
 
 	// Return the information string "ready to print" :)
 	void get_info_string(char * s, const navigator * nav) const;
+	void get_short_info_string(char * s, const navigator * nav) const;
 
 	// Compute the position in the parent planet coordinate system
 	void compute_position(double date);

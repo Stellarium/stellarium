@@ -64,11 +64,12 @@ void Fisheye_projector::update_openGL(void) const
 bool Fisheye_projector::project_custom(const Vec3d& v, Vec3d& win, const Mat4d& mat) const
 {
 	static Vec3d w;
+	static double z;
+	
 	w = v;
 	w.transfo4d(mat);
 	w.normalize();
 	w.transfo4d(mat_projection);
-	static double z;
 	z = w[2];
 	double a = fabs(M_PI_2 - asin(w[2]));
 	w[2] = 0;

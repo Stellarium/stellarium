@@ -43,6 +43,8 @@ public:
 	void draw(void);		// Display the ui
 	void update(void);		// Update changing values
 
+	void draw_gravity_ui(void);	// Draw simple gravity text ui.
+
 	// Handle mouse clics
 	int handle_clic(Uint16 x, Uint16 y, Uint8 state, Uint8 button);
 	// Handle mouse move
@@ -51,7 +53,7 @@ public:
 	int handle_keys(SDLKey key, S_GUI_VALUE state);
 
 private:
-	stel_core * core;
+	stel_core * core;		// The main core can be access because stel_ui is a friend class
 
 	s_font * spaceFont;		// The standard font
 	s_font * courierFont;	// The standard fixed size font
@@ -110,8 +112,8 @@ private:
 	Component* createConfigWindow(void);
 	void config_win_hideBtCallback(void);
 
-
 	TabContainer * config_tab_ctr;
+
 	void updateConfigVariables(void);
 	void updateConfigForm(void);
 };

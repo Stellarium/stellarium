@@ -48,15 +48,24 @@ Hip_Star::~Hip_Star()
 
 void Hip_Star::get_info_string(char * s, const navigator * nav) const
 {
-	char tempStr[20];
+	static char tempStr[20];
 	sprintf(tempStr,"HP %d",HP);
 
 	float tempDE, tempRA;
 	rect_to_sphe(&tempRA,&tempDE,XYZ);
-	sprintf(s,"Name :%s %s\nHip : %.4d\nRA : %s\nDE : %s\nMag : %.2f",
-		CommonName==NULL ? "" : CommonName,
+	sprintf(s,"Name :%s%s%s\nHip : %.4d\nRA : %s\nDE : %s\nMag : %.2f",
+		CommonName==NULL ? "" : CommonName, CommonName==NULL ? "" : " ",
 		Name==NULL ? tempStr : Name, HP, print_angle_hms(tempRA*180./M_PI),
 			print_angle_dms_stel(tempDE*180./M_PI), Mag);
+}
+
+void Hip_Star::get_short_info_string(char * s, const navigator * nav) const
+{
+	static char tempStr[20];
+	sprintf(tempStr,"HP %d",HP);
+
+	if (CommonName || Name) sprintf(s,"%s - Mag %.2f", CommonName==NULL ? Name : CommonName, Mag);
+	else sprintf(s,"%s - Mag %.2f", tempStr, Mag);
 }
 
 int Hip_Star::read(FILE * catalog)

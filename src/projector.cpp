@@ -379,3 +379,27 @@ void Projector::print_gravity(const s_font* font, float x, float y, const char *
 	}
 	reset_perspective_projection();
 }
+
+void Projector::print_gravity180(const s_font* font, float x, float y, const char * str,
+	float xshift, float yshift) const
+{
+	static float dx, dy, d;
+	dx = x-(vec_viewport[0] + vec_viewport[2]/2);
+	dy = y-(vec_viewport[1] + vec_viewport[3]/2);
+	d = sqrt(dx*dx + dy*dy);
+	float theta = M_PI + atan2(dx, dy);
+	float psi = atan2((float)font->getStrLen(str)/strlen(str),d) * 180./M_PI;
+	if (psi>20) psi = 20;
+	set_orthographic_projection();
+	glTranslatef(x,y,0);
+	glRotatef(theta*180./M_PI,0,0,-1);
+	glTranslatef(sinf(xshift/d)*d,(1.f-cosf(xshift/d))*d + yshift,0);
+	glRotatef(xshift/d*180./M_PI,0,0,1);
+	glScalef(1, -1, 1);
+	for (unsigned int i=0;i<strlen(str);++i)
+	{
+		font->print_char(str[i]);
+		glRotatef(psi,0,0,-1);
+	}
+	reset_perspective_projection();
+}
