@@ -692,7 +692,19 @@ int stel_ui::handle_keys(SDLKey key, S_GUI_VALUE state)
 		core->navigation->set_JDay(get_julian_from_sys());
 	      }
 	  }
-		
+
+	if(key==SDLK_9) {
+	  int zhr = core->meteors->get_ZHR();
+
+	  if(zhr <= 10 ) {
+	    core->meteors->set_ZHR( 80 );  // standard Perseids rate
+	  } else if( zhr <= 80 ) {
+	    core->meteors->set_ZHR( 3000 );  // exceptional Leonid rate
+	  } else {
+	    core->meteors->set_ZHR( 10 );  // set to ***default base rate (10 is normal, 0 would be none)
+	  }
+	}
+
         if(key==SDLK_LEFTBRACKET)
         {
         	core->navigation->set_JDay(core->navigation->get_JDay()-7*JD_DAY);
