@@ -116,6 +116,8 @@ private:
 
 
 	TabContainer * config_tab_ctr;
+	void updateConfigVariables(void);
+	void updateConfigForm(void);
 };
 
 #endif  //_STEL_UI_H

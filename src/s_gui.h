@@ -144,6 +144,7 @@ namespace s_gui
 		virtual void setTextColor(const s_color& c) {painter.setTextColor(c);}
 		virtual void setBaseColor(const s_color& c) {painter.setBaseColor(c);}
 		virtual void setPainter(const Painter& p) {painter = p;}
+		virtual int isIn(int x, int y);
 		static void setDefaultPainter(const Painter& p) {defaultPainter=p;}
 		static void initScissor(int winW, int winH);
 		static void enableScissor(void) {scissor->activate();}
@@ -155,7 +156,6 @@ namespace s_gui
         int active;
         int focus;
 		Painter painter;
-		virtual int isIn(int x, int y);
 		static Painter defaultPainter;
 		static Scissor* scissor;
     private:
@@ -279,9 +279,11 @@ namespace s_gui
 
 	class LabeledCheckBox : public Container
 	{
+	public:
 		LabeledCheckBox(int state = 0, const char* label = NULL);
 		virtual int getState(void) const {return checkbx->getState();}
 		virtual void setState(int s) {checkbx->setState(s);}
+        virtual void setOnPressCallback(const s_callback0& c) {checkbx->setOnPressCallback(c);}
     protected:
 		CheckBox* checkbx;
 		Label* lbl;
@@ -350,7 +352,7 @@ namespace s_gui
 	{
 	public:
 		TabContainer(const s_font* _font = NULL);
-		void addTab(Component* c, const char* name = NULL);
+		void addTab(Component* c, const char* name);
 		virtual void draw(void);
 		virtual int onClic(int, int, S_GUI_VALUE, S_GUI_VALUE);
 	protected:
@@ -360,23 +362,26 @@ namespace s_gui
 		int headerHeight;
 	};
 
-	/*
+
     class CursorBar : public Component
 	{
 	public:
-	    CursorBar(vec2_i _position, vec2_i _size, float _minBarValue, float _maxBarValue, float _barValue, void(*_onValueChangeCallBack)(float _barValue, Component *));
-	    virtual void render(GraphicsContext&);
-	    virtual void CursorBarClicCallback(int x, enum guiValue button,enum guiValue state);
-	    virtual void CursorBarMoveCallback(int x, enum guiValue action);
-        virtual float getValue(void) { return barValue;}
-		virtual void setValue(float _barValue);
+	    CursorBar(float _min, float _max, float _val = 0);
+	    virtual void draw(void);
+        virtual float getValue(void) {return barVal;}
+		virtual void setValue(float _barVal);
+		virtual void setOnChangeCallback(const s_callback0& c) {onChangeCallback = c;}
+		virtual int onClic(int, int, S_GUI_VALUE, S_GUI_VALUE);
+		virtual int onMove(int, int);
 	private:
-	    int mouseOn;
-	    float minBarValue, maxBarValue, barValue;
-	    void (*onValueChangeCallBack)(float,Component *);
+		int dragging;
+		Button cursor;
+	    float minBar, maxBar, barVal;
+		s_callback0 onChangeCallback;
+		s_vec2i oldPos;
 	};
 
-
+/*
     class Picture : public Component
 	{
 	public:

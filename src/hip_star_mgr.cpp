@@ -131,7 +131,7 @@ void Hip_Star_mgr::Load(char * font_fileName, char * hipCatFile, char * commonNa
 
     fclose(hipFile);
 
-	starTexture = new s_texture("star16x16");  // Load star texture
+	starTexture = new s_texture("star16x16",TEX_LOAD_TYPE_PNG_SOLID);  // Load star texture
 
     starFont=new s_font(11.f,"spacefont", font_fileName); // load Font
     if (!starFont)

@@ -196,6 +196,8 @@ void stel_core::draw(int delta_time)
     // Set openGL drawings in equatorial coordinates
     navigation->switch_to_earth_equatorial();
 
+	glBlendFunc(GL_ONE, GL_ONE);//_MINUS_SRC_ALPHA);
+
 	// Draw the milky way. If not activated, need at least to clear the color buffer
 	if (!FlagMilkyWay) glClear(GL_COLOR_BUFFER_BIT);
 	else DrawMilkyWay(sky_brightness);
@@ -243,7 +245,7 @@ void stel_core::draw(int delta_time)
 
 	// Draw the planets
 	// TODO : manage FlagPlanetsHintDrawing
-	if (FlagPlanets) Sun->draw(FlagPlanetsHintDrawing, du, navigation);
+	if (FlagPlanets) Sun->draw(FlagPlanetsHints, du, navigation);
 
 	// Set openGL drawings in local coordinates i.e. generally altazimuthal coordinates
 	navigation->switch_to_local();
@@ -255,6 +257,11 @@ void stel_core::draw(int delta_time)
 		DrawMeridiensAzimut();		// Draw the "Altazimuthal meridian" lines
         DrawParallelsAzimut();		// Draw the "Altazimuthal parallel" lines
 	}
+
+
+
+	// Normal transparency mode
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 	// Draw the mountains
 	// TODO custom decor type
@@ -319,6 +326,7 @@ void stel_core::load_config(void)
 	navigation->set_flag_lock_equ_pos(conf->get_boolean("navigation:flag_lock_equ_pos"));
     // init the time parameters with current time and date
 	const ln_date * pDate = str_to_date(conf->get_str("navigation:date"),conf->get_str("navigation:time"));
+	printf("date\n");
 	if (pDate) navigation->set_JDay(get_julian_day(pDate));
 	else navigation->set_JDay(get_julian_from_sys());
 
@@ -342,7 +350,7 @@ void stel_core::load_config(void)
 	FlagStars				= conf->get_boolean("astro:flag_stars");
 	FlagStarName			= conf->get_boolean("astro:flag_star_name");
 	FlagPlanets				= conf->get_boolean("astro:flag_planets");
-	FlagPlanetsHintDrawing	= conf->get_boolean("astro:flag_planets_hints");
+	FlagPlanetsHints		= conf->get_boolean("astro:flag_planets_hints");
 	FlagNebula				= conf->get_boolean("astro:flag_nebula");
 	FlagNebulaName			= conf->get_boolean("astro:flag_nebula_name");
 	FlagMilkyWay			= conf->get_boolean("astro:flag_milky_way");
@@ -364,7 +372,7 @@ void stel_core::load_base_textures(void)
     texIds[10]= new s_texture("zenith");
 
     texIds[12]= new s_texture("pointeur2");
-    texIds[25]= new s_texture("etoile32x32");
+    texIds[25]= new s_texture("etoile32x32",TEX_LOAD_TYPE_PNG_SOLID);
     texIds[26]= new s_texture("pointeur4");
     texIds[27]= new s_texture("pointeur5");
     texIds[11]= new s_texture("nadir");

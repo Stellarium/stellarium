@@ -31,16 +31,126 @@ Component* stel_ui::createConfigWindow(void)
 	config_tab_ctr = new TabContainer();
 	config_tab_ctr->setSize(config_win->getSize());
 
-	Label* test = new Label("Bonjour!");
-	Label* test2 = new Label("Bonjour2!");
-	test2->setPos(50,50);
+	// The current drawing position
+	int x,y;
+	x=10; y=10;
 
-	config_tab_ctr->addTab(test, "Vision");
-	config_tab_ctr->addTab(test2, "Time & Date");
+	// Rendering options
+	FilledContainer* tab_render = new FilledContainer();
+	tab_render->setSize(config_tab_ctr->getSize());
 
+	LabeledCheckBox* stars_cbx = new LabeledCheckBox(core->FlagStars, "Stars");
+	stars_cbx->setOnPressCallback(makeFunctor((s_pcallback0)0,*this, &stel_ui::updateConfigVariables));
+	tab_render->addComponent(stars_cbx);
+	stars_cbx->setPos(x,y); y+=15;
+
+	LabeledCheckBox* star_names_cbx = new LabeledCheckBox(core->FlagStarName, "Star Names");
+	star_names_cbx->setOnPressCallback(makeFunctor((s_pcallback0)0,*this, &stel_ui::updateConfigVariables));
+	tab_render->addComponent(star_names_cbx);
+	star_names_cbx->setPos(x,y); y+=15;
+
+	LabeledCheckBox* star_twinkle_cbx = new LabeledCheckBox(core->FlagStarTwinkle, "Star Twinkle");
+	star_twinkle_cbx->setOnPressCallback(makeFunctor((s_pcallback0)0,*this, &stel_ui::updateConfigVariables));
+	tab_render->addComponent(star_twinkle_cbx);
+	star_twinkle_cbx->setPos(x,y); y+=30;
+
+
+	LabeledCheckBox* asterism_cbx = new LabeledCheckBox(core->FlagAsterismDrawing, "Asterisms");
+	asterism_cbx->setOnPressCallback(makeFunctor((s_pcallback0)0,*this, &stel_ui::updateConfigVariables));
+	tab_render->addComponent(asterism_cbx);
+	asterism_cbx->setPos(x,y); y+=15;
+
+	LabeledCheckBox* asterism_name_cbx = new LabeledCheckBox(core->FlagAsterismName, "Asterisms Names");
+	asterism_name_cbx->setOnPressCallback(makeFunctor((s_pcallback0)0,*this, &stel_ui::updateConfigVariables));
+	tab_render->addComponent(asterism_name_cbx);
+	asterism_name_cbx->setPos(x,y); y+=15;
+
+	LabeledCheckBox* sel_asterism_cbx = new LabeledCheckBox(core->FlagSelectAsterism, "Selected Asterism Only");
+	sel_asterism_cbx->setOnPressCallback(makeFunctor((s_pcallback0)0,*this, &stel_ui::updateConfigVariables));
+	tab_render->addComponent(sel_asterism_cbx);
+	sel_asterism_cbx->setPos(x,y); y+=30;
+
+
+	LabeledCheckBox* nebulas_cbx = new LabeledCheckBox(core->FlagNebula, "Nebulas");
+	nebulas_cbx->setOnPressCallback(makeFunctor((s_pcallback0)0,*this, &stel_ui::updateConfigVariables));
+	tab_render->addComponent(nebulas_cbx);
+	nebulas_cbx->setPos(x,y); y+=15;
+
+	LabeledCheckBox* nebulas_names_cbx = new LabeledCheckBox(core->FlagNebulaName, "Nebulas Names");
+	nebulas_names_cbx->setOnPressCallback(makeFunctor((s_pcallback0)0,*this, &stel_ui::updateConfigVariables));
+	tab_render->addComponent(nebulas_names_cbx);
+	nebulas_names_cbx->setPos(x,y); y+=30;
+
+	LabeledCheckBox* planets_cbx = new LabeledCheckBox(core->FlagPlanets, "Planets");
+	planets_cbx->setOnPressCallback(makeFunctor((s_pcallback0)0,*this, &stel_ui::updateConfigVariables));
+	tab_render->addComponent(planets_cbx);
+	planets_cbx->setPos(x,y); y+=15;
+
+	LabeledCheckBox* planets_hints_cbx = new LabeledCheckBox(core->FlagPlanetsHints, "Planets Hints");
+	planets_hints_cbx->setOnPressCallback(makeFunctor((s_pcallback0)0,*this, &stel_ui::updateConfigVariables));
+	tab_render->addComponent(planets_hints_cbx);
+	planets_hints_cbx->setPos(x,y); y+=30;
+
+	LabeledCheckBox* equator_grid_cbx = new LabeledCheckBox(core->FlagEquatorialGrid, "Equatorial Grid");
+	equator_grid_cbx->setOnPressCallback(makeFunctor((s_pcallback0)0,*this, &stel_ui::updateConfigVariables));
+	tab_render->addComponent(equator_grid_cbx);
+	equator_grid_cbx->setPos(x,y); y+=15;
+
+	LabeledCheckBox* azimuth_grid_cbx = new LabeledCheckBox(core->FlagAzimutalGrid, "Azimuthal Grid");
+	azimuth_grid_cbx->setOnPressCallback(makeFunctor((s_pcallback0)0,*this, &stel_ui::updateConfigVariables));
+	tab_render->addComponent(azimuth_grid_cbx);
+	azimuth_grid_cbx->setPos(x,y); y+=15;
+
+	LabeledCheckBox* equator_cbx = new LabeledCheckBox(core->FlagEquator, "Equator Line");
+	equator_cbx->setOnPressCallback(makeFunctor((s_pcallback0)0,*this, &stel_ui::updateConfigVariables));
+	tab_render->addComponent(equator_cbx);
+	equator_cbx->setPos(x,y); y+=15;
+
+	LabeledCheckBox* ecliptic_cbx = new LabeledCheckBox(core->FlagEcliptic, "Ecliptic Line");
+	ecliptic_cbx->setOnPressCallback(makeFunctor((s_pcallback0)0,*this, &stel_ui::updateConfigVariables));
+	tab_render->addComponent(ecliptic_cbx);
+	ecliptic_cbx->setPos(x,y); y+=15;
+
+	LabeledCheckBox* cardinal_cbx = new LabeledCheckBox(core->FlagCardinalPoints, "Cardinal Points");
+	cardinal_cbx->setOnPressCallback(makeFunctor((s_pcallback0)0,*this, &stel_ui::updateConfigVariables));
+	tab_render->addComponent(cardinal_cbx);
+	cardinal_cbx->setPos(x,y); y+=15;
+
+
+	CursorBar* star_scale_cbar = new CursorBar(0,20,2);
+	star_scale_cbar->setOnChangeCallback(makeFunctor((s_pcallback0)0,*this, &stel_ui::updateConfigVariables));
+	tab_render->addComponent(star_scale_cbar);
+	star_scale_cbar->setPos(x,y); y+=15;
+
+	// Date & Time options
+	FilledContainer* tab_time = new FilledContainer();
+	tab_time->setSize(config_tab_ctr->getSize());
+
+	// Location options
+	FilledContainer* tab_location = new FilledContainer();
+	tab_location->setSize(config_tab_ctr->getSize());
+
+	// GUI options
+	FilledContainer* tab_gui = new FilledContainer();
+	tab_gui->setSize(config_tab_ctr->getSize());
+
+	config_tab_ctr->addTab(tab_render, "Rendering");
+	config_tab_ctr->addTab(tab_time, "Date & Time");
+	config_tab_ctr->addTab(tab_location, "Location");
+	config_tab_ctr->addTab(tab_gui, "GUI");
 	config_win->addComponent(config_tab_ctr);
 
 	return config_win;
+}
+
+void stel_ui::updateConfigVariables(void)
+{
+	printf("updateConfigVariables\n");
+}
+
+void stel_ui::updateConfigForm(void)
+{
+	printf("updateConfigForm\n");
 }
 
 /*

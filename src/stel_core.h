@@ -111,8 +111,9 @@ private:
     int FlagShowFps;
     int FlagStars;
 	int FlagStarName;
+	int FlagStarTwinkle;
     int FlagPlanets;
-    int FlagPlanetsHintDrawing;
+    int FlagPlanetsHints;
     int FlagNebula;
     int FlagNebulaName;
     int FlagNebulaCircle; // TODO is this useless?
@@ -122,6 +123,7 @@ private:
     int FlagAtmosphere;
     int FlagAsterismDrawing;
     int FlagAsterismName;
+	int FlagSelectAsterism;
     int FlagAzimutalGrid;
     int FlagEquatorialGrid;
     int FlagEquator;
