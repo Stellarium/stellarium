@@ -32,8 +32,8 @@ using namespace gui;
 GraphicsContext::GraphicsContext(int _winW, int _winH) :
         backGroundTexture(NULL),
         headerTexture(NULL),
-        baseColor(vec3_t(0.1, 0.4, 0.6)),
-        textColor(vec3_t(0.8, 0.9, 1.0)),
+        baseColor(vec3_t(0.6, 0.4, 0.1)),
+        textColor(vec3_t(0.1, 0.9, 0.8)),
         scissorPos(vec2_i(0, 0)),
         winW(_winW),
         winH(_winH),
@@ -292,6 +292,15 @@ void FilledContainer::render(GraphicsContext& gc)
         glTexCoord2f(1.0f, 1.0f); glVertex2f(pos[0] + sz[0]-0.5, pos[1]+0.5); // Haut Droit
         glTexCoord2f(0.0f, 1.0f); glVertex2f(pos[0]+0.5, pos[1]+0.5); // Haut Gauche
     glEnd ();
+ 
+    glColor3fv(gc.baseColor*0.7);
+    glDisable(GL_TEXTURE_2D);
+    glBegin(GL_LINE_LOOP);
+        glVertex2f(pos[0] +0.5, pos[1]+0.5);
+        glVertex2f(pos[0] + sz[0]-0.5, pos[1]+0.5);
+        glVertex2f(pos[0] + sz[0]-0.5, pos[1] + sz[1]-0.5);
+        glVertex2f(pos[0]+0.5, pos[1] + sz[1]-0.5);
+    glEnd();
  
     Container::render(gc);
 }

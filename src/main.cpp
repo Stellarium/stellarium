@@ -416,11 +416,12 @@ int main(int argc, char **argv)
     char tempName[255];
     char tempName2[255];
     
-    printf("Loading configuration file...\n");
     strcpy(tempName,global.ConfigDir);
     strcat(tempName,"config.txt");
     strcpy(tempName2,global.ConfigDir);
     strcat(tempName2,"location.txt");
+
+    printf("Loading configuration file... (%s)\n",tempName);
 
     loadConfig(tempName,tempName2);  // Load the params from config.txt
 
