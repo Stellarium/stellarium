@@ -38,7 +38,7 @@ public:
 	static stel_object * find_stel_object(Vec3d);
 	virtual void get_info_string(char * s);
 	virtual unsigned char get_type(void)=0;
-	virtual Vec3d get_equ_pos(void)=0;
+	virtual Vec3d get_earth_equ_pos(void)=0;
 	virtual vec3_t get_RGB(void) {return vec3_t(0.,0.,0.);}
 private:
 };

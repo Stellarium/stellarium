@@ -82,6 +82,10 @@ public:
 	Vec3d helio_to_local(Vec3d*);		// Transform vector from heliocentric coordinate to local
 	Vec3d helio_to_earth_equ(Vec3d*);	// Transform vector from heliocentric coordinate to earth equatorial
 
+	// Transform vector from heliocentric coordinate to false equatorial : equatorial
+	// coordinate but centered on the observer position (usefull for objects close to earth)
+	Vec3d helio_to_earth_pos_equ(Vec3d* v);
+
 	// Viewing direction function : 1 move, 0 stop.
 	void move_to(Vec3d _aim);
 	void turn_right(int);

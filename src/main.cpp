@@ -97,7 +97,6 @@ void Draw(int delta_time)
 	if (!global.FlagMilkyWay)
 	{
 		glClear(GL_COLOR_BUFFER_BIT);
-		return;
 	}
     else DrawMilkyWay();                  // Draw the milky way --> init the buffers
 
