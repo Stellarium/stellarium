@@ -80,9 +80,16 @@ void planet::get_short_info_string(char * s, const navigator * nav) const
 	sprintf(s,"%s%s: mag %.1f",name.c_str(), scale_str, compute_magnitude(nav->get_observer_helio_pos()));
 }
 
-double planet::get_best_fov(const navigator* nav) const
+double planet::get_close_fov(const navigator* nav) const
 {
 	return atanf(radius*sphere_scale*2.f/get_earth_equ_pos(nav).length())*180./M_PI * 4;
+}
+
+double planet::get_satellites_fov(const navigator * nav) const
+{
+	if (name=="Jupiter") return atanf(0.005/get_earth_equ_pos(nav).length())*180./M_PI * 4;
+	if (name=="Saturn") return atanf(0.005/get_earth_equ_pos(nav).length())*180./M_PI * 4;
+	return -1.;
 }
 
 // Set the orbital elements
@@ -226,7 +233,7 @@ void planet::set_big_halo(const string& halotexfile)
 }
 
 // Return the radius of a circle containing the object on screen
-float planet::get_on_screen_size(const navigator * nav, const Projector* prj)
+float planet::get_on_screen_size(const Projector* prj, const navigator * nav)
 {
 	return atanf(radius*sphere_scale*2.f/get_earth_equ_pos(nav).length())*180./M_PI/prj->get_fov()*prj->viewH();
 }
@@ -246,7 +253,7 @@ void planet::draw(int hint_ON, Projector* prj, const navigator * nav, const tone
 	mat = nav->get_helio_to_eye_mat() * mat;
 
 	// Compute the 2D position and check if in the screen
-	float screen_sz = get_on_screen_size(nav, prj);
+	float screen_sz = get_on_screen_size(prj, nav);
 	float viewport_left = prj->view_left();
 	float viewport_bottom = prj->view_bottom();
 	if (prj->project_custom(Vec3f(0,0,0), screenPos, mat) &&
@@ -303,7 +310,7 @@ void planet::draw_hints(const navigator* nav, const Projector* prj)
 	static char scale_str[100];
 	if (sphere_scale == 1.f) sprintf(scale_str,"%s", name.c_str());
 	else sprintf(scale_str,"%s (x%.1f)", name.c_str(), sphere_scale);
-	float tmp = 10.f + get_on_screen_size(nav, prj)/sphere_scale/2.f; // Shift for name printing
+	float tmp = 10.f + get_on_screen_size(prj, nav)/sphere_scale/2.f; // Shift for name printing
 	gravity_label ? prj->print_gravity180(planet_name_font, screenPos[0],screenPos[1], scale_str, tmp, tmp) :
 		planet_name_font->print(screenPos[0]+tmp,screenPos[1]+tmp, scale_str);
 
@@ -383,7 +390,7 @@ void planet::draw_halo(const navigator* nav, const Projector* prj, const tone_re
 	rmag*=planet::star_scale;
 
 	glBlendFunc(GL_ONE, GL_ONE);
-	float screen_r = get_on_screen_size(nav, prj);
+	float screen_r = get_on_screen_size(prj, nav);
 	cmag *= rmag/screen_r;
 	if (cmag>1.f) cmag = 1.f;
 
@@ -432,7 +439,7 @@ void planet::draw_point_halo(const navigator* nav, const Projector* prj, const t
 	//rmag*=planet::star_scale;
 
 	glBlendFunc(GL_ONE, GL_ONE);
-	float screen_r = get_on_screen_size(nav, prj);
+	float screen_r = get_on_screen_size(prj, nav);
 	cmag *= rmag/screen_r;
 	if (cmag>1.f) cmag = 1.f;
 
@@ -462,7 +469,7 @@ void planet::draw_point_halo(const navigator* nav, const Projector* prj, const t
 void planet::draw_big_halo(const navigator* nav, const Projector* prj, const tone_reproductor* eye)
 {
 	glBlendFunc(GL_ONE, GL_ONE);
-	float screen_r = get_on_screen_size(nav, prj);
+	float screen_r = get_on_screen_size(prj, nav);
 
 	float rmag = big_halo_size/2;
 

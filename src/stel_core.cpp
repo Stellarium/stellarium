@@ -27,7 +27,7 @@ stel_core::stel_core() : screen_W(800), screen_H(600), bppMode(16), Fullscreen(0
 	navigation(NULL), observatory(NULL), projection(NULL), selected_object(NULL), hip_stars(NULL), asterisms(NULL),
 	nebulas(NULL), atmosphere(NULL), tone_converter(NULL), selected_constellation(NULL),
 	frame(0), timefr(0), timeBase(0), deltaFov(0.), deltaAlt(0.), deltaAz(0.),
-	move_speed(0.001), FlagTimePause(0), FlagIsGoZoomOnObject(0)
+	move_speed(0.001), FlagTimePause(0)
 {
 	ProjectorType = PERSPECTIVE_PROJECTOR;
 }
@@ -96,13 +96,13 @@ void stel_core::init(void)
 	switch (ProjectorType)
 	{
 	case PERSPECTIVE_PROJECTOR :
-		projection = new Projector(screen_W, screen_H, initFov);
+		projection = new Projector(screen_W, screen_H, InitFov);
 		break;
 	case FISHEYE_PROJECTOR :
-		projection = new Fisheye_projector(screen_W, screen_H, initFov);
+		projection = new Fisheye_projector(screen_W, screen_H, InitFov);
 		break;
 	default :
-		projection = new Projector(screen_W, screen_H, initFov);
+		projection = new Projector(screen_W, screen_H, InitFov);
 		break;
 	}
 
@@ -138,7 +138,7 @@ void stel_core::init(void)
 
 	// Make the viewport as big as possible
 	projection->set_screen_size(screen_W, screen_H);
-	projection->set_fov(initFov);
+	projection->set_fov(InitFov);
 
 	switch (ViewportType)
 	{
@@ -450,7 +450,7 @@ void stel_core::load_config_from(const string& confFile)
 	StartupTimeMode 	= conf.get_str("navigation:startup_time_mode");	// Can be "now" or "preset"
 	FlagEnableZoomKeys	= conf.get_boolean("navigation:flag_enable_zoom_keys");
 	FlagEnableMoveKeys	= conf.get_boolean("navigation:flag_enable_move_keys");
-	initFov				= conf.get_double ("navigation","init_fov",60.);
+	InitFov				= conf.get_double ("navigation","init_fov",60.);
 	InitViewPos 		= str_to_vec3f(conf.get_str("navigation:init_view_pos").c_str());
 	auto_move_duration	= conf.get_double ("navigation","auto_move_duration",1.5);
 	FlagUTC_Time		= conf.get_boolean("navigation:flag_utc_time");
@@ -551,7 +551,7 @@ void stel_core::save_config_to(const string& confFile)
 	conf.set_str	("navigation:startup_time_mode", StartupTimeMode);
 	conf.set_boolean("navigation:flag_enable_zoom_keys", FlagEnableZoomKeys);
 	conf.set_boolean("navigation:flag_enable_move_keys", FlagEnableMoveKeys);
-	conf.set_double ("navigation:init_fov", initFov);
+	conf.set_double ("navigation:init_fov", InitFov);
 	conf.set_str	("navigation:init_view_pos", vec3f_to_str(InitViewPos));
 	conf.set_double ("navigation:auto_move_duration", auto_move_duration);
 	conf.set_boolean("navigation:flag_utc_time", FlagUTC_Time);
@@ -871,34 +871,42 @@ void stel_core::goto_stel_object(const stel_object* obj, float move_duration) co
 	navigation->move_to(obj->get_earth_equ_pos(navigation), move_duration);
 }
 
-// Zoom to the given object
-void stel_core::zoomto_stel_object(const stel_object* obj, float move_duration) const
-{
-	if (!obj) return;
-	projection->zoom_to(obj->get_best_fov(navigation), move_duration);
-}
 
 // Go and zoom temporary to the selected object. Old position is reverted by calling the function again
-void stel_core::toggle_selected_object_gozoom(float move_duration)
+void stel_core::auto_zoom_in(float move_duration)
 {
-	if (!FlagIsGoZoomOnObject && selected_object)
+	if (!selected_object) return;
+
+	navigation->set_flag_traking(true);
+	goto_stel_object(selected_object, move_duration);
+	float satfov = selected_object->get_satellites_fov(navigation);
+	float closefov = selected_object->get_close_fov(navigation);
+
+	if (satfov>0. && projection->get_fov()>satfov) projection->zoom_to(satfov, move_duration);
+	else if (projection->get_fov()>closefov) projection->zoom_to(closefov, move_duration);
+}
+
+// Unzoom to the old position is reverted by calling the function again
+void stel_core::auto_zoom_out(float move_duration)
+{
+	if (!selected_object)
 	{
-		FlagIsGoZoomOnObject = 1;
-		previous_equ_pos = navigation->get_local_vision();
-		previous_fov = projection->get_fov();
-		previous_tracking = navigation->get_flag_traking();
-		goto_stel_object(selected_object, move_duration);
-		zoomto_stel_object(selected_object, move_duration);
-		navigation->set_flag_traking(true);
+		projection->zoom_to(InitFov, move_duration);
+		navigation->move_to(InitViewPos, move_duration, true);
+		navigation->set_flag_traking(false);
+		return;
 	}
-	else
+
+	float satfov = selected_object->get_satellites_fov(navigation);
+
+	if (projection->get_fov()<=satfov*0.9 && satfov>0.)
 	{
-		if (FlagIsGoZoomOnObject)
-		{
-			FlagIsGoZoomOnObject = 0;
-			navigation->move_to(previous_equ_pos, move_duration, true);
-			projection->zoom_to(previous_fov, move_duration);
-			navigation->set_flag_traking(previous_tracking);
-		}
+		projection->zoom_to(satfov, move_duration);
+		return;
 	}
+
+	projection->zoom_to(InitFov, move_duration);
+	navigation->move_to(InitViewPos, move_duration, true);
+	navigation->set_flag_traking(false);
+
 }
