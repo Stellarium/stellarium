@@ -37,9 +37,6 @@ Observator::Observator() : longitude(0.), latitude(0.), altitude(0), GMT_shift(0
 {
 	name = "Anonymous_Location";
 
-	// Set the program global intern timezones variables from the system locale
-	tzset();
-
 	// Set the time format global intern variables from the system locale
 	setlocale(LC_TIME, "");
 }
@@ -68,27 +65,30 @@ void Observator::load(const string& file, const string& section)
 	altitude = conf.get_int(section, "altitude");
 	landscape_name = conf.get_str(section, "landscape_name", "sea");
 
-	string tzmodestr = conf.get_str(section, "time_zone");
-	if (tzmodestr == "system_default")
+	string tzstr = conf.get_str(section, "time_zone");
+	if (tzstr == "system_default")
 	{
 		time_zone_mode = S_TZ_SYSTEM_DEFAULT;
+		// Set the program global intern timezones variables from the system locale
+		tzset();
 	}
 	else
 	{
-		if (tzmodestr == "custom")
+		if (tzstr == "gmt+x") // TODO : handle GMT+X timezones form
 		{
-			time_zone_mode = S_TZ_CUSTOM;
+			time_zone_mode = S_TZ_GMT_SHIFT;
+			// GMT_shift = x;
 		}
 		else
 		{
-			cout << "ERROR : unrecognized timezone mode " << tzmodestr << endl;
-			exit(-1);
+			// We have a custom time zone name
+			time_zone_mode = S_TZ_CUSTOM;
+			set_custom_tz_name(tzstr);
 		}
 	}
 
 	time_format = string_to_s_time_format(conf.get_str(section, "time_display_format"));
 	date_format = string_to_s_date_format(conf.get_str(section, "date_display_format"));
-
 }
 
 void Observator::save(const string& file, const string& section)
@@ -104,8 +104,18 @@ void Observator::save(const string& file, const string& section)
 	conf.set_int(section + ":altitude", altitude);
 	conf.set_str(section + ":landscape_name", landscape_name);
 
-	if (time_zone_mode == S_TZ_CUSTOM) conf.set_str(section + ":time_zone", "custom");
-	else conf.set_str(section + ":time_zone", "system_default");
+	if (time_zone_mode == S_TZ_CUSTOM)
+	{
+		conf.set_str(section + ":time_zone", custom_tz_name);
+	}
+	if (time_zone_mode == S_TZ_SYSTEM_DEFAULT)
+	{
+		conf.set_str(section + ":time_zone", "system_default");
+	}
+	if (time_zone_mode == S_TZ_GMT_SHIFT)
+	{
+		conf.set_str(section + ":time_zone", "gmt+x");
+	}
 
 	conf.set_str(section + ":time_display_format", get_time_format_str());
 	conf.set_str(section + ":date_display_format", get_date_format_str());
@@ -113,9 +123,22 @@ void Observator::save(const string& file, const string& section)
 	conf.save(file);
 }
 
+void Observator::set_custom_tz_name(const string& tzname)
+{
+	custom_tz_name = tzname;
+	time_zone_mode = S_TZ_CUSTOM;
+
+	if( custom_tz_name != "")
+	{
+		// set the TZ environement variable and update c locale stuff
+		putenv(strdup((string("TZ=") + custom_tz_name).c_str()));
+		tzset();
+	}
+}
+
 int Observator::get_GMT_shift(double JD) const
 {
-	if (time_zone_mode == S_TZ_CUSTOM) return GMT_shift;
+	if (time_zone_mode == S_TZ_GMT_SHIFT) return GMT_shift;
 	else return get_GMT_shift_from_system(JD);
 }
 
@@ -201,10 +224,10 @@ string Observator::get_printable_date_local(double JD) const
 {
 	struct tm time_local;
 
-	if (time_zone_mode == S_TZ_SYSTEM_DEFAULT)
-		get_tm_from_julian(JD + get_GMT_shift_from_system(JD)*0.041666666666, &time_local);
-	else
+	if (time_zone_mode == S_TZ_GMT_SHIFT)
 		get_tm_from_julian(JD + GMT_shift, &time_local);
+	else
+		get_tm_from_julian(JD + get_GMT_shift_from_system(JD)*0.041666666666, &time_local);
 
 	static char date[255];
 	switch(date_format)
@@ -223,10 +246,10 @@ string Observator::get_printable_time_local(double JD) const
 {
 	struct tm time_local;
 
-	if (time_zone_mode == S_TZ_SYSTEM_DEFAULT)
-		get_tm_from_julian(JD + get_GMT_shift_from_system(JD)*0.041666666666, &time_local);
-	else
+	if (time_zone_mode == S_TZ_GMT_SHIFT)
 		get_tm_from_julian(JD + GMT_shift, &time_local);
+	else
+		get_tm_from_julian(JD + get_GMT_shift_from_system(JD)*0.041666666666, &time_local);
 
 	static char heure[255];
 	switch(time_format)

@@ -1,6 +1,6 @@
 /*
  * Stellarium
- * Copyright (C) 2003 Fabien Chéreau
+ * Copyright (C) 2003 Fabien Ch?reau
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -296,6 +296,32 @@ void Landscape_fisheye::draw(tone_reproductor * eye, const Projector* prj, const
 	glEnable(GL_BLEND);
 	glBindTexture(GL_TEXTURE_2D, map_tex->getID());
 	if (flag_ground) prj->sSphere_map(radius,40,20, nav->get_local_to_eye_mat(), tex_fov, 1);
+
+	#ifdef RMS
+	// Flat mode, only usable in 180 deg view mode directed toward vertical direction
+	{
+		Mat4d mat = nav->get_local_to_eye_mat();
+		glDisable(GL_CULL_FACE);
+		glPushMatrix();
+		glLoadMatrixd(mat);
+
+		// this should use actual fov instead of 180 -- why necessary to divide by 2?
+		float rad = (tex_fov*180.f/(175.f*M_PI))*radius/2;
+
+		glBegin(GL_QUADS);
+			glTexCoord2f(0,1);
+			glVertex3f(rad*-1, rad,0);
+			glTexCoord2f(1,1);
+			glVertex3f(rad, rad, 0);
+			glTexCoord2f(1,0);
+			glVertex3f(rad, rad*-1, 0);
+			glTexCoord2f(0,0);
+			glVertex3f(rad*-1, rad*-1, 0);
+		glEnd();
+
+		glPopMatrix();
+	}
+	#endif
 
     glDisable(GL_CULL_FACE);
 }
