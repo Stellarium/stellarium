@@ -76,11 +76,23 @@ int StelCommandInterface::execute_command(string commandline, int &wait) {
 
     //    cout << "wait is: " << wait << endl; 
 
+  } else if (command == "select") {
+    if(args["hp"]!=""){
+      unsigned int hpnum;
+      std::istringstream istr(args["hp"]);
+      istr >> hpnum;
+      stcore->selected_object = stcore->hip_stars->search(hpnum);
+    } else if(args["planet"]!=""){
+      stcore->selected_object = stcore->ssystem->search(args["planet"]);
+    }
 
   } else if (command == "set") {
 
 
-  } // else if (command == 
+  } else {
+    cout << "Unrecognized command: " << commandline << endl;
+    return 0;
+  }
 
   if( status ) {
 
