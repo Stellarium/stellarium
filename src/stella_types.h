@@ -23,6 +23,14 @@
 #include "vector.h"
 #include "AstroOps.h"
 
+typedef struct			// We Use A Struct To Hold Application Runtime Data
+{
+	bool Visible;		// Is The Application Visible? Or Iconified?
+	bool MouseFocus;	// Is The Mouse Cursor In The Application Field?
+	bool KeyboardFocus;	// Is The Input Focus On Our Application?
+}
+	S_AppStatus;
+
 typedef struct          // Struct used to store data on the selected star
 {   vec3_t XYZ;
     float Mag;

@@ -83,6 +83,7 @@ void resetPerspectiveProjection()
     glMatrixMode(GL_MODELVIEW);     // get back to GL_MODELVIEW matrix
 }
 
+/*
 void renderBitmapString(float x, float y, void *font,char *string)
 {   char *c;
     glRasterPos2f(x, y);            // set position to start drawing fonts
@@ -90,6 +91,7 @@ void renderBitmapString(float x, float y, void *font,char *string)
     {   glutBitmapCharacter(font, *c);
     }
 }
+*/
 
 void RADE_to_XYZ(double RA, double DE, vec3_t &XYZ)
 {   const double cosLat = cos( DE );

@@ -133,9 +133,8 @@ void Update_variables(void)
 
 // *********************************************************************
 // Increment time every second for real time mode and every frame for accelered time mode
-void Update_time(Planet_mgr &_SolarSystem)
+void Update_time(int DeltaTemps,Planet_mgr &_SolarSystem)
 {   global.Frame++;
-    int DeltaTemps=glutGet(GLUT_ELAPSED_TIME)-global.Timefr;
     global.Timefr+=DeltaTemps;
     if (global.Timefr-global.Timebase > 1000) 
     {   global.Fps=global.Frame*1000.0/(global.Timefr-global.Timebase);     // Calc the PFS rate
