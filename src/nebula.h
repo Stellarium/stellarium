@@ -74,7 +74,7 @@ public:
 
 protected:
 	// Return the radius of a circle containing the object on screen
-	virtual float get_on_screen_size(const navigator * nav, const Projector* prj);
+	virtual float get_on_screen_size(const Projector* prj, const navigator * nav = NULL);
 
 private:
 	unsigned int NGC_nb;			// NGC catalog number

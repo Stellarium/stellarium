@@ -168,7 +168,7 @@ void Nebula::draw_circle(const Projector* prj)
 }
 
 // Return the radius of a circle containing the object on screen
-float Nebula::get_on_screen_size(const navigator * nav, const Projector* prj)
+float Nebula::get_on_screen_size(const Projector* prj, const navigator * nav)
 {
 	return angular_size*180./M_PI/prj->get_fov()*prj->viewH();
 }
@@ -176,7 +176,8 @@ float Nebula::get_on_screen_size(const navigator * nav, const Projector* prj)
 void Nebula::draw_name(const Projector* prj)
 {   
     glColor3f(0.4,0.3,0.5);
-	gravity_label ? prj->print_gravity180(nebula_font, XY[0], XY[1], name, 3, 3) :
-		nebula_font->print(XY[0]+3,XY[1]+3, name);
+	float shift = 15.f + get_on_screen_size(prj)/2.f;
+	gravity_label ? prj->print_gravity180(nebula_font, XY[0]+shift, XY[1]+shift, name, 0, 0) :
+		nebula_font->print(XY[0]+shift, XY[1]+shift, name);
 }
 
