@@ -68,5 +68,12 @@ private:
 	static bool gravity_label;
 };
 
+struct Hip_Star_Mag_Comparer : public std::binary_function<Hip_Star*,Hip_Star*,bool> {
+     const bool operator()( Hip_Star* const & x, Hip_Star* const & y) const {
+       return x->get_mag() >= y->get_mag(); 
+     }
+};
+
+
 
 #endif // _STAR_H_
