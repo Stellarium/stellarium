@@ -22,16 +22,10 @@
 
 #if defined ( __MWERKS__ ) || defined( _MSC_VER )
 #   define NATIVE_WIN32_COMPILER 1
-#else
-// Assume UNIX compatible by default 
-#   define COMPILER_IS_UNIX_COMPATIBLE 1
-# ifndef HAVE_STRCASECMP
-#   define HAVE_STRCASECMP
-# endif
 #endif
 
-#if defined( WIN32 ) || defined( __CYGWIN__ ) || \
-    defined ( NATIVE_WIN32_COMPILER )
+#if defined( WIN32 ) || \
+	defined ( NATIVE_WIN32_COMPILER )
 #  ifndef WIN32
 #     define WIN32
 #  endif

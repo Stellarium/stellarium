@@ -42,18 +42,8 @@ Hip_Star::~Hip_Star()
 int Hip_Star::Read(FILE * catalog)
 // Read datas in binary catalog and compute x,y,z;
 {  
-    char err;
-    float RA=0, DE=0, paralax=0;
-    char errParalax=0;
-    
-    HP=0;
-    fread((char*)&HP,4,1,catalog);
-    LE_TO_CPU_INT32(HP,HP);
-    
-    int HD=0;
-    fread((char*)&HD,4,1,catalog);
-    LE_TO_CPU_INT32(HD,HD);
-    
+    float RA=0, DE=0;
+
     fread((char*)&RA,4,1,catalog);
     LE_TO_CPU_FLOAT(RA, RA);
     
@@ -61,12 +51,8 @@ int Hip_Star::Read(FILE * catalog)
     LE_TO_CPU_FLOAT(DE, DE);
     
     RA/=12./PI;     // Convert from hours to rad
-    
     DE/=180./PI;    // Convert from deg to rad 
-    
-    fread((char*)&paralax,4,1,catalog);
-    LE_TO_CPU_FLOAT(paralax, paralax);
-    
+
     unsigned short int mag;
     fread((char*)&mag,2,1,catalog);
     LE_TO_CPU_INT16(mag, mag);
@@ -77,11 +63,6 @@ int Hip_Star::Read(FILE * catalog)
     fread((char*)&type,2,1,catalog);
 	LE_TO_CPU_INT16(type, type);
 	 
-    fread((char*)&errParalax,1,1,catalog);
-	
-    //printf("HP=%u RA=%f DE=%f parax=%f mag=%f type=%u err=%d\n",HP,RA,DE,paralax, Mag,(unsigned int) type, (int)errParalax);
-	SpType = 'O';
-
     // Calc the Cartesian coord with RA and DE
     RADE_to_XYZ((double)RA,(double)DE,XYZ);
     XYZ*=RAYON;
@@ -107,7 +88,7 @@ int Hip_Star::Read(FILE * catalog)
     
 
     switch (SpType)             // Color depending on the spectral type
-    {   
+    {    
         case 'O':   RGB[0]=0.8f;  RGB[1]=1.0f; RGB[2]=1.3f;  break;
         case 'B':   RGB[0]=0.9f;  RGB[1]=1.0f; RGB[2]=1.2f;  break;
         case 'A':   RGB[0]=0.95f; RGB[1]=1.0f; RGB[2]=1.15f; break;
@@ -126,7 +107,8 @@ int Hip_Star::Read(FILE * catalog)
     float L=pow(100,-Mag/4.1);
     MaxColorValue=myMax(RGB[0],RGB[2]);
     rmag_t = sqrt(L/(pow(L,0.46666)+7.079))*sqrt(MaxColorValue)*1200.;
-
+	
+	if (mag==0 && type==0) return 0;
     return 1;
 }
 
@@ -137,6 +119,7 @@ void Hip_Star::Draw(void)
     if ( XY[0]<0 || XY[0]>global.X_Resolution || 
          XY[1]<0 || XY[1]>global.Y_Resolution ) 
         return;
+
     // Random coef for star twinkling
     coef=(float)rand()/RAND_MAX*global.StarTwinkleAmount/10;
 

@@ -831,12 +831,16 @@ void updateStandardWidgets(void)
 
     float reste;
     if (global.FlagUTC_Time)
-    {   DateOps::dayToDmy((long int)global.JDay,jour,mois,annee);
+    {   
+	DateOps::dayToDmy((long int)global.JDay,jour,mois,annee);
         reste=global.JDay-DateOps::dmyToDay(jour,mois,annee);
     }
     else
-    {   DateOps::dayToDmy((double)(global.JDay+global.TimeZone*HEURE),jour,mois,annee);
-        reste=global.JDay+global.TimeZone*HEURE-(float)DateOps::dmyToDay(jour,mois,annee);
+    {   
+	DateOps::dayToDmy((double)(global.JDay+global.TimeZone*HEURE),jour,
+			  mois,annee);
+        reste=global.JDay+global.TimeZone*HEURE - 
+	    (float)DateOps::dmyToDay(jour,mois,annee);
     }
     double heure=reste*24;
     double minute=(double)(heure-(int)heure)*60;
