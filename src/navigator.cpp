@@ -231,8 +231,8 @@ void navigator::update_transform_matrices(Vec3d earth_ecliptic_pos)
 	// otherwise sky jumps in rotation when reach poles
 
 	// This is a kludge
-	//	if( lat > 89 )  lat = 89.5;
-	//if( lat < -89 ) lat = -89.5;
+	if( lat > 89 )  lat = 89.5;
+	if( lat < -89 ) lat = -89.5;
 
 
 	mat_local_to_earth_equ =Mat4d::zrotation((get_apparent_sidereal_time(JDay)+position->get_longitude())*M_PI/180.) *
@@ -243,10 +243,18 @@ void navigator::update_transform_matrices(Vec3d earth_ecliptic_pos)
 	mat_helio_to_earth_equ =Mat4d::xrotation(get_mean_obliquity(JDay)*M_PI/180.) *
 							Mat4d::translation(-earth_ecliptic_pos);
 
+					
+										
+									
+							
 	// These two next have to take into account the position of the observer on the earth
 	Mat4d tmp = Mat4d::xrotation(-23.438855*M_PI/180.) *
-	  Mat4d::yrotation((90.-lat)*M_PI/180.) *
-	  Mat4d::zrotation((position->get_longitude()+get_mean_sidereal_time(JDay))*M_PI/180.);
+	
+	 Mat4d::zrotation((position->get_longitude()+get_mean_sidereal_time(JDay))*M_PI/180.) *
+	 Mat4d::yrotation((90.-position->get_latitude())*M_PI/180.);
+	 
+	  //Mat4d::yrotation((90.-lat)*M_PI/180.) *
+	  //Mat4d::zrotation((position->get_longitude()+get_mean_sidereal_time(JDay))*M_PI/180.);
 
 
 	mat_local_to_helio = 	Mat4d::translation(earth_ecliptic_pos) *
