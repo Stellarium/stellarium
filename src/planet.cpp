@@ -1,6 +1,6 @@
 /*
  * Stellarium
- * Copyright (C) 2002 Fabien Chï¿½eau
+ * Copyright (C) 2002 Fabien Chéreau
  * 
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -55,6 +55,7 @@ planet::planet(const string& _name, int _flagHalo, int _flag_lighting, double _r
 	last_trailJD = 0; // for now
 	trail_color = Vec3f(1,.7,.7);
 	trail_on = 0;
+	first_point = 1;
 }
 
 
@@ -77,7 +78,7 @@ void planet::get_info_string(char * s, const navigator * nav) const
 	static char scale_str[100];
 	if (sphere_scale == 1.f) scale_str[0] = '\0';
 	else sprintf(scale_str," (x%.1f)", sphere_scale);
-	
+
 	Vec3d equPos = get_earth_equ_pos(nav);
 	rect_to_sphe(&tempRA,&tempDE,equPos);
 	sprintf(s,_("Name :%s%s\nRA : %s\nDE : %s\nDistance : %.8f UA\nMagnitude : %.2f"),
@@ -725,8 +726,6 @@ void planet::draw_orbit(const navigator * nav, const Projector* prj) {
 // draw trail of planet as seen from earth
 void planet::draw_trail(const navigator * nav, const Projector* prj) {
 
-  if(trail.begin() == trail.end()) return;
-
   Vec3d onscreen1;
   Vec3d onscreen2;
 
@@ -745,22 +744,25 @@ void planet::draw_trail(const navigator * nav, const Projector* prj) {
   list<TrailPoint>::iterator begin = trail.begin();
   //  begin++;
 
-  nextiter = trail.end();
-  nextiter--;
+  if(trail.begin() != trail.end()) {
 
-  for( iter=nextiter; iter != begin; iter--) {
-
+    nextiter = trail.end();
     nextiter--;
-    if( prj->project_earth_equ_line_check( (*iter).point, onscreen1, (*(nextiter)).point, onscreen2) ) {
-      glBegin(GL_LINE_STRIP);
-      glVertex3d(onscreen1[0], onscreen1[1], 0);
-      glVertex3d(onscreen2[0], onscreen2[1], 0);
-      glEnd();
+
+    for( iter=nextiter; iter != begin; iter--) {
+
+      nextiter--;
+      if( prj->project_earth_equ_line_check( (*iter).point, onscreen1, (*(nextiter)).point, onscreen2) ) {
+	glBegin(GL_LINE_STRIP);
+	glVertex3d(onscreen1[0], onscreen1[1], 0);
+	glVertex3d(onscreen2[0], onscreen2[1], 0);
+	glEnd();
+      }
     }
   }
 
-  // finish at current planet position
-  if( prj->project_earth_equ_line_check( (*trail.begin()).point, onscreen1, get_earth_equ_pos(nav), onscreen2) ) {
+  // draw final segment to finish at current planet position
+  if( !first_point && prj->project_earth_equ_line_check( (*trail.begin()).point, onscreen1, get_earth_equ_pos(nav), onscreen2) ) {
     glBegin(GL_LINE_STRIP);
     glVertex3d(onscreen1[0], onscreen1[1], 0);
     glVertex3d(onscreen2[0], onscreen2[1], 0);
@@ -781,14 +783,15 @@ void planet::update_trail(const navigator* nav) {
   if(!trail_on) return;
 
   double date = nav->get_JDay();
-  // planet trails
-  int dt = abs(int((date-last_trailJD)/DeltaTrail));
-  if(dt>MaxTrail) {
+
+  int dt=0;
+  if(first_point || (dt=abs(int((date-last_trailJD)/DeltaTrail))) > MaxTrail) {
     dt=1; 
     // clear old trail
     trail.clear();
+    first_point = 0;
   } 
-    
+
   // Note that when jump by a week or day at a time, loose detail on trails
   // particularly for moon (if decide to show moon trail)
 
@@ -832,7 +835,7 @@ void planet::set_trail_color(const Vec3f _color) {
 
 // start accumulating new trail data (clear old data)
 void planet::start_trail(void) {
-  trail.clear();
+  first_point = 1;
 
   //  printf("trail for %s: %f\n", name.c_str(), re.sidereal_period);
 
