@@ -44,6 +44,8 @@
 #include "vecmath.h"
 #include "callback.h"
 
+using namespace std;
+
 // gui Return Values:
 enum S_GUI_VALUE
 {
@@ -93,6 +95,8 @@ namespace s_gui
 		void drawSquareFill(const s_vec2i& pos, const s_vec2i& sz, const s_color& c) const;
 		void drawSquareFill(const s_vec2i& pos, const s_vec2i& sz, const s_color& c, const s_texture * t) const;
 		void drawCross(const s_vec2i& pos, const s_vec2i& sz) const;
+		void drawLine(const s_vec2i& pos1, const s_vec2i& pos2) const;
+		void drawLine(const s_vec2i& pos1, const s_vec2i& pos2, const s_color& c) const;
 		void print(int x, int y, const char * str) const;
 		void setTexture(const s_texture* tex) {tex1 = tex;}
 		void setFont(const s_font* f) {font = f;}
@@ -216,6 +220,7 @@ namespace s_gui
 		CheckBox(int state = 0);
         virtual void draw();
 		virtual int getState(void) const {return isChecked;}
+		virtual void setState(int s) {isChecked = s;}
 		virtual int onClic(int, int, S_GUI_VALUE, S_GUI_VALUE);
     protected:
 		int isChecked;
@@ -244,12 +249,18 @@ namespace s_gui
         char * label;
     };
 
-    class Labeled_Button : public FilledButton
+    class LabeledButton : public Button
     {
     public:
-        Labeled_Button(const char * _label = NULL);
-        virtual void draw();
-    private:
+        LabeledButton(const char * _label = NULL, const s_font* font = NULL);
+		virtual ~LabeledButton();
+        virtual void draw(void);
+		virtual void setActive(int _active) {Button::setActive(_active); label->setActive(_active);}
+		virtual void setFont(const s_font* f) {Button::setFont(f); label->setFont(f);}
+		virtual void setTextColor(const s_color& c) {Button::setTextColor(c); label->setTextColor(c);}
+		virtual void setPainter(const Painter& p) {Button::setPainter(p); label->setPainter(p);}
+    protected:
+		Label* label;
     };
 
 
@@ -266,6 +277,15 @@ namespace s_gui
         char * label;
 	};
 
+	class LabeledCheckBox : public Container
+	{
+		LabeledCheckBox(int state = 0, const char* label = NULL);
+		virtual int getState(void) const {return checkbx->getState();}
+		virtual void setState(int s) {checkbx->setState(s);}
+    protected:
+		CheckBox* checkbx;
+		Label* lbl;
+	};
 
     class FramedContainer : public Container
     {
@@ -308,10 +328,36 @@ namespace s_gui
 	public:
 	    StdBtWin(const char * _title = NULL, s_texture* _header_tex = NULL,
 			s_font * _winfont = NULL, int headerSize = 18);
-		virtual void StdBtWin::draw();
+		virtual void draw();
+		virtual void setOnHideBtCallback(const s_callback0& c) {onHideBtCallback = c;}
 	protected:
-		void onCloseBt(void) {visible=0;}
-		Button * closeBt;
+		void onHideBt(void);
+		Button * hideBt;
+		s_callback0 onHideBtCallback;
+	};
+
+	class TabHeader : public LabeledButton
+	{
+	public:
+		TabHeader(Component*, const char* _label = NULL, const s_font* _font = NULL);
+		void draw(void);
+		void setActive(int);
+	protected:
+		Component* assoc;
+	};
+
+	class TabContainer : public Container
+	{
+	public:
+		TabContainer(const s_font* _font = NULL);
+		void addTab(Component* c, const char* name = NULL);
+		virtual void draw(void);
+		virtual int onClic(int, int, S_GUI_VALUE, S_GUI_VALUE);
+	protected:
+		int getHeadersSize(void);
+		void select(TabHeader*);
+		list<TabHeader*> headers;
+		int headerHeight;
 	};
 
 	/*

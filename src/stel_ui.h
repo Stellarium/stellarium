@@ -103,6 +103,19 @@ private:
 	TextLabel * licence_txtlbl;
 	Component* createLicenceWindow(void);
 
+	// The window containing the help info
+	StdBtWin * help_win;
+	TextLabel * help_txtlbl;
+	Component* createHelpWindow(void);
+	void help_win_hideBtCallback(void);
+
+	// The window containing the help info
+	StdBtWin* config_win;
+	Component* createConfigWindow(void);
+	void config_win_hideBtCallback(void);
+
+
+	TabContainer * config_tab_ctr;
 };
 
 #endif  //_STEL_UI_H

@@ -61,7 +61,10 @@ public:
 	void set_display_gamma(float _gamma) {gamma = _gamma;}
 
 	// Return adapted luminance from world to display
-	inline float adapt_luminance(float world_luminance);
+	float adapt_luminance(float world_luminance)
+	{
+		return powf(world_luminance*M_PI*0.0001f,alpha_wa_over_alpha_da) * term2;
+	}
 
 	// Convert from xyY color system to RGB
 	void xyY_to_RGB(float*);

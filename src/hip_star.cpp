@@ -48,7 +48,8 @@ void Hip_Star::get_info_string(char * s) const
 	rect_to_sphe(&tempRA,&tempDE,&XYZ);
 	sprintf(s,"Name :%s %s\nHip : %.4d\nRA : %s\nDE : %s\nMag : %.2f",
 		CommonName==NULL ? "-" : CommonName,
-		Name==NULL ? "-" : Name, HP, print_angle_hms(tempRA*180./M_PI), print_angle_dms_stel(tempDE*180./M_PI), Mag);
+		Name==NULL ? "-" : Name, HP, print_angle_hms(tempRA*180./M_PI),
+			print_angle_dms_stel(tempDE*180./M_PI), Mag);
 }
 
 int Hip_Star::Read(FILE * catalog)

@@ -63,12 +63,6 @@ void tone_reproductor::set_world_adaptation_luminance(float _Lwa)
 	term2 = powf(10.f, (beta_wa-beta_da)/alpha_da) / (M_PI*0.0001f);
 }
 
-// Return adapted luminance from world to display
-inline float tone_reproductor::adapt_luminance(float L)
-{
-	return powf(L*M_PI*0.0001f,alpha_wa_over_alpha_da) * term2;
-}
-
 // Convert from xyY color system to RGB according to the adaptation
 // The Y component is in cd/m^2
 void tone_reproductor::xyY_to_RGB(float* color)
