@@ -32,19 +32,21 @@
 # include <GL/glu.h>
 #endif
 
+#include <string>
+
+using namespace std;
+
 #define TEX_LOAD_TYPE_PNG_ALPHA 0
 #define TEX_LOAD_TYPE_PNG_SOLID 1
 #define TEX_LOAD_TYPE_PNG_BLEND3 2
 #define TEX_LOAD_TYPE_PNG_REPEAT 3
 #define TEX_LOAD_TYPE_PNG_SOLID_REPEAT 4
 
-#include <string.h>
-
 class s_texture
 {
 public:
-    s_texture(const char * _textureName);
-    s_texture(const char * _textureName, int _loadType);
+    s_texture(const string& _textureName);
+    s_texture(const string& _textureName, int _loadType);
     virtual ~s_texture();
     int load();
     void unload();
@@ -52,15 +54,15 @@ public:
     unsigned int getID(void) const {return texID;}
 	// Return the average texture luminance : 0 is black, 1 is white
 	float get_average_luminance(void) const;
-	static void set_texDir(char * _texDir) {strncpy(s_texture::texDir, _texDir, sizeof(texDir));}
-	static void set_suffix(char * _suffix) {strncpy(s_texture::suffix, _suffix, sizeof(suffix));}
+	static void set_texDir(const string& _texDir) {s_texture::texDir = _texDir;}
+	static void set_suffix(const string& _suffix) {s_texture::suffix = _suffix;}
 private:
-    char * textureName;
+    string textureName;
     GLuint texID;
     int loadType;
     int loadType2;
-	static char texDir[255];
-	static char suffix[10];
+	static string texDir;
+	static string suffix;
 };
 
 

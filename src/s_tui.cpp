@@ -121,7 +121,7 @@ bool MenuBranch::onKey(SDLKey k, S_TUI_VALUE v)
 		if (isEditing)
 		{
 			if ((*Branch::current)->onKey(k, v)) return true;
-			if (v==S_TUI_PRESSED && (k==SDLK_LEFT || k==SDLK_ESCAPE))
+			if (v==S_TUI_PRESSED && (k==SDLK_LEFT || k==SDLK_ESCAPE || k==SDLK_RETURN))
 			{
 				isEditing = false;
 				return true;
@@ -140,7 +140,7 @@ bool MenuBranch::onKey(SDLKey k, S_TUI_VALUE v)
 				if (Branch::current!=--Branch::childs.end()) ++Branch::current;
 				return true;
 			}
-			if (v==S_TUI_PRESSED && k==SDLK_RIGHT)
+			if (v==S_TUI_PRESSED && (k==SDLK_RIGHT || k==SDLK_RETURN))
 			{
 				if ((*Branch::current)->isEditable()) isEditing = true;
 				return true;
@@ -167,8 +167,9 @@ bool MenuBranch::onKey(SDLKey k, S_TUI_VALUE v)
 
 string MenuBranch::getString(void)
 {
+	if (!isNavigating) return label;
 	if (isEditing) (*Branch::current)->setActive(true);
-	string s(label + Branch::getString());
+	string s(Branch::getString());
 	if (isEditing) (*Branch::current)->setActive(false);
 	return s;
 }
@@ -318,8 +319,6 @@ void Time_item::compute_ymdhms(void)
 
     double dday = c - e - (int) (30.6001 * f) + ((JD + 0.5) - (int) (JD + 0.5));
 
-    /* This following used to be 14.0, but gcc was computing it incorrectly, so
-       it was changed to 14 */
     ymdhms[1] = f - 1 - 12 * (int) (f / 14);
     ymdhms[0] = d - 4715 - (int) ((7.0 + ymdhms[1]) / 10.0);
     ymdhms[2] = (int) dday;
@@ -370,8 +369,64 @@ string Time_item::getString(void)
 		s2[current_edit] = stop_active;
 	}
 
-	os 	<< s1[0] << ymdhms[0] << s2[0] << "/" << s1[1] << ymdhms[1] << s2[1] << "/"
+	os 	<< label << s1[0] << ymdhms[0] << s2[0] << "/" << s1[1] << ymdhms[1] << s2[1] << "/"
 		<< s1[2] << ymdhms[2] << s2[2] << " " << s1[3] << ymdhms[3] << s2[3] << ":"
 		<< s1[4] << ymdhms[4] << s2[4] << ":"<< s1[5] << (int)round(second) << s2[5];
 	return os.str();
+}
+
+string Action_item::getString(void)
+{
+	if (active)
+	{
+		return label + start_active + string_prompt + stop_active;
+	}
+	else return label + string_prompt;
+}
+
+bool Action_item::onKey(SDLKey k, S_TUI_VALUE v)
+{
+	if (v==S_TUI_PRESSED && k==SDLK_RETURN)
+	{
+		// Call the callback if enter is pressed
+		if (!onChangeCallback.empty()) onChangeCallback();
+		return true;
+	}
+	return false;
+}
+
+string ActionConfirm_item::getString(void)
+{
+	if (active)
+	{
+		if (isConfirming)
+		{
+			return label + start_active + string_confirm + stop_active;
+		}
+		else
+		{
+			return label + start_active + string_prompt + stop_active;
+		}
+	}
+	else return label + string_prompt;
+}
+
+bool ActionConfirm_item::onKey(SDLKey k, S_TUI_VALUE v)
+{
+	if (v==S_TUI_PRESSED && k==SDLK_RETURN)
+	{
+		if (isConfirming)
+		{
+			// Call the callback if enter is pressed
+			if (!onChangeCallback.empty()) onChangeCallback();
+			isConfirming = false;
+			return true;
+		}
+		else
+		{
+			isConfirming = true;
+			return true;
+		}
+	}
+	return false;
 }

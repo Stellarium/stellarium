@@ -1,8 +1,6 @@
 /*
  * Stellarium
  * Copyright (C) 2002 Fabien Chéreau
- * Inspired by the s_gui.h by Chris Laurel <claurel@shatters.net>
- * in his Open Source Software Celestia
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,6 +17,8 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
+// TODO : remove the maximum of char* and replace by string to make the soft safer
+
 #ifndef _GUI_H_
 #define _GUI_H_
 
@@ -34,10 +34,12 @@
 # include <GL/glu.h>
 #endif
 
-#include "SDL.h" // Just for the key codes, i'm lasy to redefine them
-		 // This is TODO to make the s_ library independent
+// SDL is used only for the key codes, i'm lasy to redefine them
+// This is TODO to make the s_ library independent
+#include "SDL.h"
 
 #include <list>
+#include <string>
 
 #include "s_texture.h"
 #include "s_font.h"
@@ -91,7 +93,7 @@ namespace s_gui
 		void drawCross(const s_vec2i& pos, const s_vec2i& sz) const;
 		void drawLine(const s_vec2i& pos1, const s_vec2i& pos2) const;
 		void drawLine(const s_vec2i& pos1, const s_vec2i& pos2, const s_color& c) const;
-		void print(int x, int y, const char * str) const;
+		void print(int x, int y, const string& str) const;
 		void setTexture(const s_texture* tex) {tex1 = tex;}
 		void setFont(const s_font* f) {font = f;}
 		void setTextColor(const s_color& c) {textColor = c;}
@@ -223,7 +225,7 @@ namespace s_gui
 	class FlagButton : public CheckBox
     {
     public:
-		FlagButton(int state = 0, const s_texture* tex = NULL, const char* specificTexName = NULL);
+		FlagButton(int state = 0, const s_texture* tex = NULL, const string& specificTexName = "");
         virtual ~FlagButton();
 		virtual void draw();
     protected:
@@ -233,48 +235,48 @@ namespace s_gui
     class Label : public Component
     {
     public:
-        Label(const char* _label = NULL, const s_font* _font = NULL);
+        Label(const string& _label = "", const s_font* _font = NULL);
         virtual ~Label();
-        virtual const char * getLabel() const {return label;}
-        virtual void setLabel(const char *);
+        virtual const string& getLabel() const {return label;}
+        virtual void setLabel(const string&);
         virtual void draw();
 		virtual void adjustSize(void);
     protected:
-        char * label;
+        string label;
     };
 
     class LabeledButton : public Button
     {
     public:
-        LabeledButton(const char * _label = NULL, const s_font* font = NULL);
+        LabeledButton(const string& _label = "", const s_font* font = NULL);
 		virtual ~LabeledButton();
         virtual void draw(void);
-		virtual void setActive(int _active) {Button::setActive(_active); label->setActive(_active);}
-		virtual void setFont(const s_font* f) {Button::setFont(f); label->setFont(f);}
-		virtual void setTextColor(const s_color& c) {Button::setTextColor(c); label->setTextColor(c);}
-		virtual void setPainter(const Painter& p) {Button::setPainter(p); label->setPainter(p);}
+		virtual void setActive(int _active) {Button::setActive(_active); label.setActive(_active);}
+		virtual void setFont(const s_font* f) {Button::setFont(f); label.setFont(f);}
+		virtual void setTextColor(const s_color& c) {Button::setTextColor(c); label.setTextColor(c);}
+		virtual void setPainter(const Painter& p) {Button::setPainter(p); label.setPainter(p);}
     protected:
-		Label* label;
+		Label label;
     };
 
 
     class TextLabel : public Container
 	{
 	public:
-	    TextLabel(const char * _label = NULL, const s_font* _font = NULL);
+	    TextLabel(const string& _label = "", const s_font* _font = NULL);
 	    virtual ~TextLabel();
-        virtual const char * getLabel() const {return label;}
-        virtual void setLabel(const char *);
+        virtual const string& getLabel() const {return label;}
+        virtual void setLabel(const string&);
 		virtual void adjustSize(void);
 		virtual void setTextColor(const s_color& c);
 	protected:
-        char * label;
+        string label;
 	};
 
 	class LabeledCheckBox : public Container
 	{
 	public:
-		LabeledCheckBox(int state = 0, const char* label = NULL);
+		LabeledCheckBox(int state = 0, const string& label = "");
 		virtual int getState(void) const {return checkbx->getState();}
 		virtual void setState(int s) {checkbx->setState(s);}
         virtual void setOnPressCallback(const callback<void>& c) {checkbx->setOnPressCallback(c);}
@@ -308,7 +310,7 @@ namespace s_gui
 	    StdWin(const char * _title = NULL, s_texture* _header_tex = NULL,
 			s_font * _winfont = NULL, int headerSize = 18);
 	   	virtual void draw();
-	    virtual const char * getTitle() const {return titleLabel->getLabel();}
+	    virtual const char * getTitle() const {return titleLabel->getLabel().c_str();}
 	    virtual void setTitle(const char * _title);
 		virtual int onClic(int, int, S_GUI_VALUE, S_GUI_VALUE);
 		virtual int onMove(int, int);
@@ -335,7 +337,7 @@ namespace s_gui
 	class TabHeader : public LabeledButton
 	{
 	public:
-		TabHeader(Component*, const char* _label = NULL, const s_font* _font = NULL);
+		TabHeader(Component*, const string& _label = "", const s_font* _font = NULL);
 		void draw(void);
 		void setActive(int);
 	protected:
@@ -346,7 +348,7 @@ namespace s_gui
 	{
 	public:
 		TabContainer(const s_font* _font = NULL);
-		void addTab(Component* c, const char* name);
+		void addTab(Component* c, const string& name);
 		virtual void draw(void);
 		virtual int onClic(int, int, S_GUI_VALUE, S_GUI_VALUE);
 	protected:
