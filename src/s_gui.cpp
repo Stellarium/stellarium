@@ -166,7 +166,10 @@ Painter::Painter(const s_texture* _tex1, const s_font* _font,
 		baseColor(_baseColor),
 		textColor(_textColor)
 {
+}
 
+Painter::~Painter()
+{
 }
 
 // Draw the edges of the defined square with the default base color
@@ -392,11 +395,8 @@ Container::~Container()
     list<Component*>::iterator iter = childs.begin();
     while (iter != childs.end())
     {
-        if (*iter)
-        {
-            delete (*iter);
-            (*iter)=NULL;
-        }
+        delete (*iter);
+        (*iter)=NULL;
         iter++;
     }
 }
@@ -1073,11 +1073,12 @@ int CursorBar::onMove(int x, int y)
 IntIncDec::IntIncDec(const s_font* _font, const s_texture* tex_up,
 		const s_texture* tex_down, int _min, int _max,
 		int _init_value, int _inc) :
-	Container(), value(_init_value), min(_min), max(_max), inc(_inc), btmore(NULL), btless(NULL)
+	Container(), value(_init_value), min(_min), max(_max), inc(_inc), btmore(NULL), btless(NULL), label(NULL)
 {
-	if (_font) label.setFont(_font);
-	label.setSize(30,10);
-	label.setPos(9,2);
+	label = new Label;
+	if (_font) label->setFont(_font);
+	label->setSize(30,10);
+	label->setPos(9,2);
 	btmore = new TexturedButton(tex_up);
 	btmore->setSize(8,8);
 	btmore->setPos(0,0);
@@ -1090,14 +1091,12 @@ IntIncDec::IntIncDec(const s_font* _font, const s_texture* tex_up,
 	btless->setOnPressCallback(callback<void>(this, &IntIncDec::dec_value));
 	addComponent(btmore);
 	addComponent(btless);
-	addComponent(&label);
+	addComponent(label);
 	setSize(40,20);
 }
 
 IntIncDec::~IntIncDec()
 {
-	if (btmore) delete btmore;
-	if (btless) delete btless;
 }
 
 void IntIncDec::draw()
@@ -1105,7 +1104,7 @@ void IntIncDec::draw()
 	if (!visible) return;
 	ostringstream os;
 	os << value;
-	label.setLabel(os.str());
+	label->setLabel(os.str());
 	Container::draw();
 }
 
@@ -1114,7 +1113,7 @@ IntIncDecVert::IntIncDecVert(const s_font* _font, const s_texture* tex_up,
 		const s_texture* tex_down, int _min, int _max,
 		int _init_value, int _inc) : IntIncDec(_font, tex_up, tex_down, _min, _max, _init_value, _inc)
 {
-	label.setPos(0,3);
+	label->setPos(0,3);
 	btmore->setPos(_max/10 * 8 + 8, 0);
 	btless->setPos(_max/10 * 8 + 8, 8);
 	setSize(_max/10 * 8 + 16,40);
@@ -1123,11 +1122,12 @@ IntIncDecVert::IntIncDecVert(const s_font* _font, const s_texture* tex_up,
 FloatIncDec::FloatIncDec(const s_font* _font, const s_texture* tex_up,
 		const s_texture* tex_down, float _min, float _max,
 		float _init_value, float _inc) :
-	Container(), value(_init_value), min(_min), max(_max), inc(_inc), btmore(NULL), btless(NULL)
+	Container(), value(_init_value), min(_min), max(_max), inc(_inc), btmore(NULL), btless(NULL), label(NULL)
 {
-	if (_font) label.setFont(_font);
-	label.setSize(30,10);
-	label.setPos(9,2);
+	label = new Label;
+	if (_font) label->setFont(_font);
+	label->setSize(30,10);
+	label->setPos(9,2);
 	btless = new TexturedButton(tex_up);
 	btless->setSize(8,8);
 	btless->setPos(0,0);
@@ -1140,14 +1140,12 @@ FloatIncDec::FloatIncDec(const s_font* _font, const s_texture* tex_up,
 	btmore->setOnPressCallback(callback<void>(this, &FloatIncDec::dec_value));
 	addComponent(btmore);
 	addComponent(btless);
-	addComponent(&label);
+	addComponent(label);
 	setSize(50,20);
 }
 
 FloatIncDec::~FloatIncDec()
 {
-	if (btmore) delete btmore;
-	if (btless) delete btless;
 }
 
 void FloatIncDec::draw()
@@ -1155,7 +1153,7 @@ void FloatIncDec::draw()
 	if (!visible) return;
 	ostringstream os;
 	os << value;
-	label.setLabel(os.str());
+	label->setLabel(os.str());
 	Container::draw();
 }
 

@@ -82,6 +82,7 @@ namespace s_gui
     {
     public:
         Painter();
+		~Painter();
 		Painter(const s_texture* _tex1, const s_font* _font, const s_color& _baseColor, const s_color& _textColor);
 		void drawSquareEdge(const s_vec2i& pos, const s_vec2i& sz) const;
 		void drawSquareEdge(const s_vec2i& pos, const s_vec2i& sz, const s_color& c) const;
@@ -304,7 +305,7 @@ namespace s_gui
         int value, min, max, inc;
 		TexturedButton* btmore;
 		TexturedButton* btless;
-		Label label;
+		Label * label;
 	};
 
 	class IntIncDecVert : public IntIncDec
@@ -331,7 +332,7 @@ namespace s_gui
         float value, min, max, inc;
 		TexturedButton* btmore;
 		TexturedButton* btless;
-		Label label;
+		Label * label;
 	};
 
 	// Widget used to set time and date.

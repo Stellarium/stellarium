@@ -131,7 +131,6 @@ void stel_ui::init(void)
 	desktop->addComponent(createLicenceWindow());
 	desktop->addComponent(createHelpWindow());
 	desktop->addComponent(createConfigWindow());
-
 }
 
 ////////////////////////////////////////////////////////////////////////////////
