@@ -242,11 +242,31 @@ string print_angle_dms(double location)
     double deg = 0.0;
     double min = 0.0;
     double sec = 0.0;
+
     *buf = 0;
+
     sec = 60.0 * (modf(location, &deg));
     if (sec <= 0.0)
         sec *= -1;
     sec = 60.0 * (modf(sec, &min));
+
+    // this solves some rounding errors
+    // try 122d 18m 0s for example --> was coming out 122 17 60
+    // which error handling turns into 0.0!
+    // would be better to store as ints to avoid fp errors
+    if ( sec > 59.9 ) {
+      sec = 0.0;
+      min++;
+    }
+    if( min > 59 ) {
+      min = 0.0;
+      if( deg >= 0 ) {
+	deg++;
+      } else {
+	deg--;
+      }
+    }
+
     sprintf(buf,"%+.2dº%.2d'%.2f\"",(int)deg, (int) min, sec);
     return buf;
 }
