@@ -359,12 +359,15 @@ void planet::draw_halo(const navigator* nav, const Projector* prj, const tone_re
     	}
 	}
 
+
 	// Global scaling
 	rmag*=planet::star_scale;
 
 	glBlendFunc(GL_ONE, GL_ONE);
 	float screen_r = get_on_screen_size(nav, prj);
 	cmag *= rmag/screen_r;
+	if (cmag>1.f) cmag = 1.f;
+
 	if (rmag<screen_r) rmag = screen_r;
 
 	prj->set_orthographic_projection();    	// 2D coordinate
