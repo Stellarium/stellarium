@@ -210,12 +210,12 @@ void Nebula::draw_name(const Projector* prj)
     glColor3fv(fontcolor);
     float size = get_on_screen_size(prj);
     float shift = 8.f + size/2.f;
-    gravity_label ? prj->print_gravity180(nebula_font, XY[0]+shift, XY[1]+shift, name, 0, 0) :
+    gravity_label ? prj->print_gravity180(nebula_font, XY[0]+shift, XY[1]+shift, name, 1, 0, 0) :
       nebula_font->print(XY[0]+shift, XY[1]+shift, name);
 
     // draw image credit, if it fits easily
     if( size > nebula_font->getStrLen(credit) ) {
-      gravity_label ? prj->print_gravity180(nebula_font, XY[0]-shift-40, XY[1]+-shift-40, credit, 0, 0) :
+      gravity_label ? prj->print_gravity180(nebula_font, XY[0]-shift-40, XY[1]+-shift-40, credit, 1, 0, 0) :
 	nebula_font->print(XY[0]-shift, XY[1]-shift-60, credit);
     }
 }

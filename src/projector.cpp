@@ -550,7 +550,12 @@ void Projector::print_gravity180(const s_font* font, float x, float y, const str
 	for (unsigned int i=0;i<str.length();++i)
 	{
 
-		font->print_char(str[i]);
+	  if( !speed_optimize ) {
+	    font->print_char_outlined(str[i]);
+	  } else {
+	    font->print_char(str[i]);
+	  }
+
 		if (str[i]!=16 && str[i]!=17 &&str[i]!=18) {
 
 		  if( !speed_optimize ) {
@@ -565,3 +570,4 @@ void Projector::print_gravity180(const s_font* font, float x, float y, const str
 	}
 	reset_perspective_projection();
 }
+

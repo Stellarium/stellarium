@@ -370,7 +370,7 @@ void Constellation_mgr::set_sky_locale(const string& _sky_locale) {
   string filename = dataDir + "sky_cultures/" + skyCulture + "/constellation_names." + _sky_locale + ".fab";
   cnFile=fopen(filename.c_str(),"r");
   if (!cnFile) {
-    printf("ERROR %s NOT FOUND\n",filename.c_str());
+    printf("WARNING %s NOT FOUND\n",filename.c_str());
     return;
   }
 

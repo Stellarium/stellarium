@@ -321,8 +321,21 @@ Cardinals::~Cardinals()
 
 
 // Draw the cardinals points : N S E W
-void Cardinals::draw(const Projector* prj, bool gravityON) const
+// handles special cases at poles
+void Cardinals::draw(const Projector* prj, double latitude, bool gravityON) const
 {
+
+  // direction text
+  string d[4];
+
+  d[0] = "N";
+  d[1] = "S";
+  d[2] = "E";
+  d[3] = "W";
+
+  // fun polar special cases
+  if(latitude ==  90.0 ) d[0] = d[1] = d[2] = d[3] = "S";
+  if(latitude == -90.0 ) d[0] = d[1] = d[2] = d[3] = "N";
 
     glColor3fv(color);
 	glEnable(GL_BLEND);
@@ -341,37 +354,37 @@ void Cardinals::draw(const Projector* prj, bool gravityON) const
 	{
 		// N for North
 		pos.set(-1.f, 0.f, 0.22f);
-		if (prj->project_local(pos,xy)) prj->print_gravity180(font, xy[0], xy[1], "N", -shift, -shift);
+		if (prj->project_local(pos,xy)) prj->print_gravity180(font, xy[0], xy[1], d[0], -shift, -shift);
 
 		// S for South
 		pos.set(1.f, 0.f, 0.22f);
-		if (prj->project_local(pos,xy)) prj->print_gravity180(font, xy[0], xy[1], "S", -shift, -shift);
+		if (prj->project_local(pos,xy)) prj->print_gravity180(font, xy[0], xy[1], d[1], -shift, -shift);
 
 		// E for East
 		pos.set(0.f, 1.f, 0.22f);
-		if (prj->project_local(pos,xy)) prj->print_gravity180(font, xy[0], xy[1], "E", -shift, -shift);
+		if (prj->project_local(pos,xy)) prj->print_gravity180(font, xy[0], xy[1], d[2], -shift, -shift);
 
 		// W for West
 		pos.set(0.f, -1.f, 0.22f);
-		if (prj->project_local(pos,xy)) prj->print_gravity180(font, xy[0], xy[1], "W", -shift, -shift);
+		if (prj->project_local(pos,xy)) prj->print_gravity180(font, xy[0], xy[1], d[3], -shift, -shift);
 	}
 	else
 	{
 		// N for North
 		pos.set(-1.f, 0.f, 0.f);
-		if (prj->project_local(pos,xy)) font->print(xy[0]-shift, xy[1]-shift, "N");
+		if (prj->project_local(pos,xy)) font->print(xy[0]-shift, xy[1]-shift, d[0]);
 
 		// S for South
 		pos.set(1.f, 0.f, 0.f);
-		if (prj->project_local(pos,xy)) font->print(xy[0]-shift, xy[1]-shift, "S");
+		if (prj->project_local(pos,xy)) font->print(xy[0]-shift, xy[1]-shift, d[1]);
 
 		// E for East
 		pos.set(0.f, 1.f, 0.f);
-		if (prj->project_local(pos,xy)) font->print(xy[0]-shift, xy[1]-shift, "E");
+		if (prj->project_local(pos,xy)) font->print(xy[0]-shift, xy[1]-shift, d[2]);
 
 		// W for West
 		pos.set(0.f, -1.f, 0.f);
-		if (prj->project_local(pos,xy)) font->print(xy[0]-shift, xy[1]-shift, "W");
+		if (prj->project_local(pos,xy)) font->print(xy[0]-shift, xy[1]-shift, d[3]);
 	}
 
 	prj->reset_perspective_projection();

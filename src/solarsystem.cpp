@@ -360,7 +360,7 @@ void SolarSystem::set_sky_locale(string _sky_locale) {
   string filename = dataDir + "planet_names." + _sky_locale + ".fab";
   cnFile=fopen(filename.c_str(),"r");
   if (!cnFile) {
-    printf("ERROR %s NOT FOUND\n",filename.c_str());
+    printf("WARNING %s NOT FOUND\n",filename.c_str());
     return;
   }
 

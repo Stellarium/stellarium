@@ -23,6 +23,7 @@
 #include <fstream>
 #include <iomanip>
 #include <map>
+#include <string>
 #include "stel_ui.h"
 #include "stellastro.h"
 
@@ -58,7 +59,7 @@ void stel_ui::draw_gravity_ui(void)
 		if (core->FlagShowFps) os << "  FPS " << core->fps;
 
 		glColor3f(0.5,1,0.5);
-		core->projection->print_gravity180(spaceFont, x-shift + 30, y-shift + 38, os.str());
+		core->projection->print_gravity180(spaceFont, x-shift + 30, y-shift + 38, os.str(), 0);
 	}
 
 	if (core->selected_object && core->FlagShowTuiShortInfo)
@@ -68,7 +69,7 @@ void stel_ui::draw_gravity_ui(void)
 		if (core->selected_object->get_type()==STEL_OBJECT_NEBULA) glColor3fv(core->NebulaLabelColor);
 		if (core->selected_object->get_type()==STEL_OBJECT_PLANET) glColor3fv(core->PlanetNamesColor);
 		if (core->selected_object->get_type()==STEL_OBJECT_STAR) glColor3fv(core->selected_object->get_RGB());
-		core->projection->print_gravity180(spaceFont, x+shift - 30, y+shift - 38, str);
+		core->projection->print_gravity180(spaceFont, x+shift - 30, y+shift - 38, str, 0);
 	}
 }
 
@@ -130,13 +131,13 @@ void stel_ui::init_tui(void)
 
 	// sky culture goes here
 	tui_general_sky_culture = new s_tui::MultiSet_item<string>("3.1 Sky Culture: ");
-	// temporary - read from directory structure or file
+	// temporary - get list from sky localization object
 	tui_general_sky_culture->addItemList("western\npolynesian");
 	tui_general_sky_culture->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb_tui_general_change_sky_culture));
 	tui_menu_general->addComponent(tui_general_sky_culture);
 
-	tui_general_sky_locale = new s_tui::MultiSet_item<string>("3.1 Sky Locale: ");
-	// temporary - read from directory structure or file
+	tui_general_sky_locale = new s_tui::MultiSet_item<string>("3.2 Sky Locale: ");
+	// temporary - get list from sky localization object
 	tui_general_sky_locale->addItemList("eng\nesl\nfra\nhaw");
 
 	tui_general_sky_locale->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb_tui_general_change_sky_locale));
@@ -144,7 +145,7 @@ void stel_ui::init_tui(void)
 
 
 
-	tui_general_manual_zoom = new s_tui::Boolean_item(false, "3.2 Manual zoom: ", "Yes","No");
+	tui_general_manual_zoom = new s_tui::Boolean_item(false, "3.3 Manual zoom: ", "Yes","No");
 	tui_general_manual_zoom->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb1));
 	tui_menu_general->addComponent(tui_general_manual_zoom);
 
