@@ -73,25 +73,11 @@ void Projector::set_disk_viewport(void)
 {
   set_square_viewport();
 
-	glClear(GL_COLOR_BUFFER_BIT);
-	glClear(GL_STENCIL_BUFFER_BIT);
-	glEnable(GL_STENCIL_TEST);
- 	glStencilFunc(GL_ALWAYS, 0x1, 0x1);
-    glStencilOp(GL_ZERO, GL_REPLACE, GL_REPLACE);
+  // NOTE - no longer use stencil buffer (needed for other purposes)
 
-	// Draw the disk in the stencil buffer
-	set_2Dfullscreen_projection();
-	glTranslatef(hoffset+screenW/2,voffset+screenH/2,0.f);
-	GLUquadricObj * p = gluNewQuadric();
-	gluDisk(p, 0., MY_MIN(screenW,screenH)/2, 256, 1);
-	gluDeleteQuadric(p);
-	restore_from_2Dfullscreen_projection();
+  glClear(GL_COLOR_BUFFER_BIT);
 
-	glStencilFunc(GL_NOTEQUAL, 0x1, 0x1);
-	glStencilOp(GL_KEEP, GL_KEEP, GL_KEEP);
-	glDisable(GL_STENCIL_TEST);
-	viewport_type = DISK;
-	glClear(GL_COLOR_BUFFER_BIT);
+  viewport_type = DISK;
 }
 
 void Projector::set_viewport_type(VIEWPORT_TYPE t)
@@ -112,18 +98,15 @@ void Projector::set_viewport_type(VIEWPORT_TYPE t)
 void Projector::draw_viewport_shape(void)
 {
 	if (viewport_type != DISK) return;
-	glEnable(GL_STENCIL_TEST);
+
 	glDisable(GL_BLEND);
-	set_2Dfullscreen_projection();
 	glColor3f(0.f,0.f,0.f);
-	glBegin(GL_QUADS);
-		glVertex2i(0, 0);
-		glVertex2i(screenW, 0);
-		glVertex2i(screenW, screenH);
-		glVertex2i(0, screenH);
-	glEnd();
+	set_2Dfullscreen_projection();
+	glTranslatef(hoffset+screenW/2,voffset+screenH/2,0.f);
+	GLUquadricObj * p = gluNewQuadric();
+	gluDisk(p, MY_MIN(screenW,screenH)/2, screenW+screenH, 256, 1);  // should always cover whole screen
+	gluDeleteQuadric(p);
 	restore_from_2Dfullscreen_projection();
-	glDisable(GL_STENCIL_TEST);
 }
 
 void Projector::set_viewport(int x, int y, int w, int h)

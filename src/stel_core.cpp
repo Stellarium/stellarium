@@ -213,7 +213,7 @@ void stel_core::init(void)
 
 
 	// could load a startup script
-	// scripts->play_script("./scripts/startup.sts");
+	commander->execute_command("script action play filename ./scripts/startup.sts");
 
 
 }

@@ -75,6 +75,8 @@ private:
 	void load(const string& planetfile);// Load the bodies data from a file
 	vector<planet*> system_planets;		// Vector containing all the bodies of the system
 	vector<EllipticalOrbit*> ell_orbits;// Pointers on created elliptical orbits
+	void draw_earth_shadow(const navigator * nav, Projector * prj);  
+	// draw earth shadow on moon for lunar eclipses
 
 	// And sort them from the furthest to the closest to the observer
 	struct bigger_distance : public binary_function<planet*, planet*, bool>
@@ -83,6 +85,8 @@ private:
 	};
 
 	string dataDir;
+	s_texture *tex_earth_penumbra;  // for lunar eclipses
+	s_texture *tex_earth_umbra;  // for lunar eclipses
 };
 
 
