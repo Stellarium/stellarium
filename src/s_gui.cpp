@@ -188,7 +188,8 @@ void Container::render(GraphicsContext& gc)
     
     vec2_i pos = getPosition();
     vec2_i sz = getSize();
-    
+
+    /*
     glColor3fv(gc.baseColor*2);
     glDisable(GL_TEXTURE_2D);
     glBegin(GL_LINE_LOOP);
@@ -197,6 +198,7 @@ void Container::render(GraphicsContext& gc)
         glVertex2f(pos[0] + sz[0]-0.5, pos[1] + sz[1]-0.5);
         glVertex2f(pos[0]+0.5, pos[1] + sz[1]-0.5);
     glEnd();
+    */
     
     vector<Component*>::iterator iter = components.begin();
     glPushMatrix();
@@ -285,10 +287,10 @@ void FilledContainer::render(GraphicsContext& gc)
     glEnable(GL_BLEND);
     glBindTexture(GL_TEXTURE_2D, gc.backGroundTexture->getID());
     glBegin(GL_QUADS );
-        glTexCoord2f(0.0f, 0.0f); glVertex2i(pos[0], pos[1] + sz[1]); // Bas Gauche
-        glTexCoord2f(1.0f, 0.0f); glVertex2i(pos[0] + sz[0], pos[1] + sz[1]); // Bas Droite
-        glTexCoord2f(1.0f, 1.0f); glVertex2i(pos[0] + sz[0], pos[1]); // Haut Droit
-        glTexCoord2f(0.0f, 1.0f); glVertex2i(pos[0], pos[1]); // Haut Gauche
+        glTexCoord2f(0.0f, 0.0f); glVertex2f(pos[0]+0.5, pos[1] + sz[1]-0.5); // Bas Gauche
+        glTexCoord2f(1.0f, 0.0f); glVertex2f(pos[0] + sz[0]-0.5, pos[1] + sz[1]-0.5); // Bas Droite
+        glTexCoord2f(1.0f, 1.0f); glVertex2f(pos[0] + sz[0]-0.5, pos[1]+0.5); // Haut Droit
+        glTexCoord2f(0.0f, 1.0f); glVertex2f(pos[0]+0.5, pos[1]+0.5); // Haut Gauche
     glEnd ();
  
     Container::render(gc);
@@ -326,10 +328,10 @@ void Button::render(GraphicsContext& gc)
     vec2_i pos = getPosition();
     vec2_i sz = getSize();
     glBegin(GL_LINE_LOOP);
-        glVertex2i(pos[0], pos[1]);
-        glVertex2i(pos[0] + sz[0], pos[1]);
-        glVertex2i(pos[0] + sz[0], pos[1] + sz[1]);
-        glVertex2i(pos[0], pos[1] + sz[1]);
+        glVertex2f(pos[0]+0.5, pos[1]+0.5);
+        glVertex2f(pos[0] + sz[0]-0.5, pos[1]+0.5);
+        glVertex2f(pos[0] + sz[0]-0.5, pos[1] + sz[1]-0.5);
+        glVertex2f(pos[0]+0.5, pos[1] + sz[1]-0.5);
     glEnd();
 }
 
@@ -612,10 +614,10 @@ void FilledTextLabel::render(GraphicsContext& gc)
 
     glDisable(GL_TEXTURE_2D);
     glBegin(GL_LINE_LOOP);
-        glVertex2i(pos[0], pos[1]);
-        glVertex2i(pos[0] + sz[0], pos[1]);
-        glVertex2i(pos[0] + sz[0], pos[1] + sz[1]);
-        glVertex2i(pos[0], pos[1] + sz[1]);
+        glVertex2f(pos[0]+0.5, pos[1]+0.5);
+        glVertex2f(pos[0] + sz[0]-0.5, pos[1]+0.5);
+        glVertex2f(pos[0] + sz[0]-0.5, pos[1] + sz[1]-0.5);
+        glVertex2f(pos[0]+0.5, pos[1] + sz[1]-0.5);
     glEnd();
 
     TextLabel::render(gc);
@@ -666,14 +668,14 @@ void CursorBar::render(GraphicsContext& gc)
     glVertex2i(pos[0] + 3 , pos[1] + sz[1] / 2 + 1);
     glVertex2i(pos[0] + 3 , pos[1] + sz[1] / 2 - 1);
     glEnd();
-    int xpos = (int)(pos[0] + 3 + (sz[0] - 6) * ((float)(barValue - minBarValue) / (float)(maxBarValue - minBarValue)));
+    float xpos = pos[0] + 3 + (sz[0] - 6) * ((float)(barValue - minBarValue) / (float)(maxBarValue - minBarValue));
     glColor3fv(gc.baseColor*2);
     glBegin(GL_LINE_LOOP);
-    glVertex2i(xpos - 2 , pos[1] + sz[1] / 2 - 5);
-    glVertex2i(xpos + 2 , pos[1] + sz[1] / 2 - 5);
-    glVertex2i(xpos + 2 , pos[1] + sz[1] / 2 + 5);
-    glVertex2i(xpos - 2 , pos[1] + sz[1] / 2 + 5);
-    glVertex2i(xpos - 2 , pos[1] + sz[1] / 2 - 5);
+    glVertex2f(xpos - 2 , sz[1] / 2 + pos[1] - 5);
+    glVertex2f(xpos + 2 , sz[1] / 2 + pos[1] - 5);
+    glVertex2f(xpos + 2 , sz[1] / 2 + pos[1] + 5);
+    glVertex2f(xpos - 2 , sz[1] / 2 + pos[1] + 5);
+    glVertex2f(xpos - 2 , sz[1] / 2 + pos[1] - 5);
     glEnd();
 }
 

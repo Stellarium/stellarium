@@ -164,7 +164,7 @@ StdBtWin::StdBtWin(int posx, int posy,
 {
     closeBt = new Button();
     closeBt->setOnClicCallback(closeBtOnClicCallback);
-    closeBt->reshape(size[0]-headerSize,3,headerSize-4,headerSize-4);
+    closeBt->reshape(size[0]-headerSize,2,headerSize-4,headerSize-4);
     Container::addComponent(closeBt);
 }
 
@@ -176,5 +176,5 @@ void StdBtWin::Hide(void)
 void StdBtWin::setInSize(vec2_i newInSize)
 {   
     StdWin::setInSize(newInSize);
-    closeBt->reshape(size[0]-headerSize,3,headerSize-4,headerSize-4);
+    closeBt->reshape(size[0]-headerSize,2,headerSize-4,headerSize-4);
 }
