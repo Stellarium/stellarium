@@ -157,15 +157,18 @@ Container::Container() : Component()
 
 Container::~Container()
 {
+    //printf("Enter Container destructor %d\n",this);
     vector<Component*>::iterator iter = components.begin();
     while (iter != components.end())
     {
         if (*iter)
         {
             delete (*iter);
+            (*iter)=NULL;
         }
         iter++;
     }
+    //printf("Quit Container destructor %d\n",this);
 }
 
 int Container::getComponentCount() const
@@ -321,6 +324,11 @@ Button::Button() :
     setMoveCallback(ExtButtonMoveCallback);
 }
 
+Button::~Button()
+{
+    //printf("Destructor Button.\n");
+}
+
 void Button::render(GraphicsContext& gc)
 {
     if (mouseOn) glColor3fv(gc.baseColor / 2);
@@ -365,6 +373,7 @@ void Button::ButtonMoveCallback(enum guiValue action)
     }
     if (onMouseOverCallback != NULL) onMouseOverCallback(action, this);
 }
+
 
 
 /**** Labeled_Button ****/
