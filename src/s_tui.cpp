@@ -323,7 +323,7 @@ bool Integer_item::onKey(SDLKey k, S_TUI_VALUE v)
 	}
 	else	// numInput == true
 	{
-		if (k==SDLK_RETURN)
+		if (k==SDLK_RETURN || k==SDLK_LEFT)
 		{
 			numInput=false;
 			istringstream is(strInput);
@@ -368,7 +368,7 @@ bool Integer_item::onKey(SDLKey k, S_TUI_VALUE v)
 			return true;
 		}
 
-		if (k==SDLK_ESCAPE || k==SDLK_LEFT)
+		if (k==SDLK_ESCAPE)
 		{
 			numInput=false;
 			return false;
@@ -430,7 +430,7 @@ bool Decimal_item::onKey(SDLKey k, S_TUI_VALUE v)
 	}
 	else	// numInput == true
 	{
-		if (k==SDLK_RETURN)
+		if (k==SDLK_RETURN || k==SDLK_LEFT)
 		{
 			numInput=false;
 			istringstream is(strInput);
@@ -475,7 +475,7 @@ bool Decimal_item::onKey(SDLKey k, S_TUI_VALUE v)
 			return true;
 		}
 
-		if (k==SDLK_ESCAPE || k==SDLK_LEFT)
+		if (k==SDLK_ESCAPE)
 		{
 			numInput=false;
 			return false;

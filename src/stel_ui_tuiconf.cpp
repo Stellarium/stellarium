@@ -193,7 +193,7 @@ void stel_ui::init_tui(void)
 	tui_effect_landscape->addItemList(Landscape::get_file_content(core->DataDir + "landscapes.ini"));
 	tui_effect_landscape->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb_tui_effect_change_landscape));
 	tui_menu_effects->addComponent(tui_effect_landscape);
-	tui_effect_atmosphere = new s_tui::Boolean_item(false, "7.2 Atmopshere: ", "Yes","No");
+	tui_effect_atmosphere = new s_tui::Boolean_item(false, "7.2 Atmosphere: ", "Yes","No");
 	tui_effect_atmosphere->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb1));
 	tui_menu_effects->addComponent(tui_effect_atmosphere);
 
