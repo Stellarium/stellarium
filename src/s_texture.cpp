@@ -31,11 +31,13 @@ s_texture::s_texture(char * _textureName) : loadType(PNG_BLEND3)
 
 s_texture::s_texture(char * _textureName, int _loadType)
 {   
+	loadType2=GL_CLAMP;
     switch (_loadType)
     {
         case TEX_LOAD_TYPE_PNG_ALPHA : loadType=PNG_ALPHA; break;
         case TEX_LOAD_TYPE_PNG_SOLID : loadType=PNG_SOLID; break;
-        case TEX_LOAD_TYPE_PNG_BLEND3: loadType=PNG_BLEND3; break;
+        case TEX_LOAD_TYPE_PNG_BLEND3: loadType=PNG_BLEND1; break;
+        case TEX_LOAD_TYPE_PNG_REPEAT: loadType=PNG_BLEND3; loadType2=GL_REPEAT; break;
         default : loadType=PNG_BLEND3;
     }
     texID=0;
@@ -58,7 +60,7 @@ int s_texture::load()
     if (!tempFile) printf("WARNING : Can't load texture %s!\n",fullName);
     pngInfo info;
     pngSetStandardOrientation(1);
-    texID = pngBind(fullName, PNG_BUILDMIPMAPS, loadType, &info, GL_CLAMP, GL_LINEAR, GL_LINEAR);
+    texID = pngBind(fullName, PNG_BUILDMIPMAPS, loadType, &info, loadType2, GL_LINEAR, GL_LINEAR);
     return (texID!=0);
 }
 
