@@ -82,8 +82,9 @@ public:
 
 	// Flags controls
 	void set_flag_traking(int v) {flag_traking=v;}
+	int get_flag_traking(void) const {return flag_traking;}
 	void set_flag_lock_equ_pos(int v) {flag_lock_equ_pos=v;}
-	int get_flag_lock_equ_pos() const {return flag_lock_equ_pos;}
+	int get_flag_lock_equ_pos(void) const {return flag_lock_equ_pos;}
 
 	// Get vision direction
 	const Vec3d& get_equ_vision(void) const {return equ_vision;}
@@ -148,6 +149,7 @@ private:
 	    float speed;
 	    float coef;
 	}auto_move;
+
 
 	// Matrices used for every coordinate transfo
 	Mat4d mat_helio_to_local;		// Transform from Heliocentric to Observator local coordinate

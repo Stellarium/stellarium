@@ -65,6 +65,14 @@ void get_ln_date_from_sys(ln_date * date);
 // Uses the current date if s1 is "today" and current time if s2 is "now"
 const ln_date * str_to_date(const char * s1, const char * s2);
 
+// Calculate tm struct from julian day
+void get_tm_from_julian(double JD, struct tm * tm_time);
+
+// Return the number of hours to add to gmt time to get the local time
+// taking the parameters from system. This takes into account the daylight saving
+// time if there is.
+int get_gmt_shift_from_system(void);
+
 /* puts a large angle in the correct range 0 - 360 degrees */
 double range_degrees (double angle);
 

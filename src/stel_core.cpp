@@ -301,9 +301,10 @@ void stel_core::draw(int delta_time)
 	if (FlagAtmosphere)
 	{
 		//navigation->switch_to_local();
-		atmosphere->compute_color(sunPos, moonPos,
+		atmosphere->compute_color(navigation->get_JDay(), sunPos, moonPos,
 		 	ssystem->get_moon()->get_phase(ssystem->get_earth()->get_heliocentric_ecliptic_pos()),
-		 	tone_converter, projection);
+		 	tone_converter, projection, navigation->get_latitude(), navigation->get_altitude(),
+			15.f, 40.f);	// Temperature = 15°c, relative humidity = 40%
 	}
 
 	// Draw the atmosphere
@@ -795,8 +796,10 @@ void stel_core::toggle_selected_object_gozoom(float move_duration)
 		FlagIsGoZoomOnObject = 1;
 		previous_equ_pos = navigation->get_equ_vision();
 		previous_fov = projection->get_fov();
+		previous_tracking = navigation->get_flag_traking();
 		goto_stel_object(selected_object, move_duration);
 		zoomto_stel_object(selected_object, move_duration);
+		navigation->set_flag_traking(true);
 	}
 	else
 	{
@@ -805,6 +808,7 @@ void stel_core::toggle_selected_object_gozoom(float move_duration)
 			FlagIsGoZoomOnObject = 0;
 			navigation->move_to(previous_equ_pos, move_duration);
 			projection->zoom_to(previous_fov, move_duration);
+			navigation->set_flag_traking(previous_tracking);
 		}
 	}
 }

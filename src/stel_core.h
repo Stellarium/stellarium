@@ -225,7 +225,8 @@ private:
 	int FlagIsGoZoomOnObject;			// 1 if we are currently on a temporary position on an object
 	Vec3d previous_equ_pos;
 	double previous_fov;
-
+	int previous_tracking;
+	
 	// Viewing direction function : 1 move, 0 stop.
 	void turn_right(int);
 	void turn_left(int);

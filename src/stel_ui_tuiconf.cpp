@@ -317,14 +317,33 @@ void stel_ui::tui_update_widgets(void)
 // Set time zone function. TODO this is not very correct it seems
 void stel_ui::tui_cb_settimezone(void)
 {
-	tzset();	// Set the internal variables from the system
 	extern long timezone;
-	core->navigation->set_time_zone((int)-timezone/3600);
-	//cout << timezone/3600 << endl;
+	extern int daylight;
+	extern char *tzname[2];
 
-	/*extern char *tzname[2];
-	extern int daylight;*/
+	time_t rawtime;
+	time(&rawtime);
+
+	cout << "-------------------------------------" << endl;
+	//cout << "ctime " << ctime(&rawtime);
+
+	tzset();
+
+	cout << "daylight " << daylight << endl;
+	cout << "timezone " << timezone << endl;
+	cout << "Time locale " << setlocale(LC_TIME, "") << endl;
+	cout << "Time zone name " << tzname[0] << "" << tzname[1] << endl;
+
+	struct tm * timeinfo;
+	timeinfo = localtime(&rawtime);
+	cout << "gmttime " << asctime(timeinfo);
+	cout << "daylight in effect " << timeinfo->tm_isdst << endl;
+
+	char heure[255];
+	strftime(heure, 255, "%x %X %z %Z", timeinfo);
+	cout << "heure " << heure << endl;
 }
+
 
 // Set actual time function
 void stel_ui::tui_cb_actualtime(void)

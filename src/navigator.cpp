@@ -104,18 +104,36 @@ void navigator::update_vision_vector(int delta_time, stel_object* selected)
 {
     if (flag_auto_move)
     {
-		equ_vision = move.aim*move.coef;
-        Vec3d temp = move.start*(1.0-move.coef);
-        equ_vision+=temp;
-        equ_vision.normalize();
+		double ra_aim, de_aim, ra_start, de_start, ra_now, de_now;
+		rect_to_sphe(&ra_aim, &de_aim, earth_equ_to_local(move.aim));
+		rect_to_sphe(&ra_start, &de_start, earth_equ_to_local(move.start));
+
+		// Trick to choose the good moving direction and never make a distance > PI
+		float delta = ra_start;
+		ra_start -= delta;		// ra_start = 0
+		ra_aim -= delta;
+
+		if (ra_aim > M_PI) ra_aim = -2.*M_PI + ra_aim;
+		if (ra_aim < -M_PI) ra_aim = 2.*M_PI + ra_aim;
+
+		// Use a smooth function
+		float smooth = 5.f;
+		double c = atanf(smooth * 2.*move.coef-smooth)/atanf(smooth)/2+0.5;
+		ra_now = ra_aim*c + ra_start*(1. - c);
+		de_now = de_aim*c + de_start*(1. - c);
+
+		ra_now += delta;
+
+		sphe_to_rect(ra_now, de_now, local_vision);
+		equ_vision = local_to_earth_equ(local_vision);
+
         move.coef+=move.speed*delta_time;
         if (move.coef>=1.)
         {
 			flag_auto_move=0;
             equ_vision=move.aim;
+			local_vision=earth_equ_to_local(equ_vision);
         }
-		// Recalc local vision vector
-		local_vision=earth_equ_to_local(equ_vision);
     }
 	else
 	{

@@ -20,6 +20,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 #include "stellastro.h"
 #include <time.h>
 #include <math.h>
+#include <stdlib.h>
 
 /* Calculate the julian day from a calendar day.
  * Valid for positive and negative years but not for negative JD.
@@ -61,11 +62,45 @@ unsigned int get_day_of_week (const ln_date *date)
     return (int)JD % 7;
 }
 
+// Return the number of hours to add to gmt time to get the local time
+// taking the parameters from system. This takes into account the daylight saving
+// time if there is.
+int get_gmt_shift_from_system(void)
+{
+	time_t rawtime;
+	time(&rawtime);
+
+	// Set the timezones variables from the system
+	tzset();
+
+	struct tm * timeinfo;
+	timeinfo = localtime(&rawtime);
+	char heure[20];
+	heure[0] = 0;
+	strftime(heure, 19, "%z", timeinfo);
+	heure[3] = '\0';
+	return atoi(heure);
+}
+
+
+// Calculate tm struct from julian day
+void get_tm_from_julian(double JD, struct tm * tm_time)
+{
+	ln_date date;
+	get_date(JD, &date);
+	tm_time->tm_sec = date.seconds;
+	tm_time->tm_min = date.minutes;
+	tm_time->tm_hour = date.hours;
+	tm_time->tm_mday = date.days;
+	tm_time->tm_mon = date.months -1;
+	tm_time->tm_year = date.years - 1900;
+	tm_time->tm_isdst = 0;
+}
 
 /* Calculate the date from the Julian day
  * params : JD Julian day, date Pointer to new calendar date. */
  // Code originally from libnova which appeared to be totally wrong... New code from celestia
-void get_date (double jd, ln_date * date)
+void get_date(double jd, ln_date * date)
 {
     int a = (int) (jd + 0.5);
     double c;
