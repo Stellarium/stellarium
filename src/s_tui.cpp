@@ -95,6 +95,38 @@ void Branch::addComponent(Component* c)
 	if (childs.size()==1) current = childs.begin();
 }
 
+bool Branch::setValue(const string& s)
+{
+	list<Component*>::iterator c;
+	for (c=childs.begin();c!=childs.end();c++)
+	{
+		cout << (*c)->getCleanString() << endl;
+		if ((*c)->getCleanString()==s)
+		{
+			current = c;
+			return true;
+		}
+	}
+	return false;
+}
+
+bool Branch::setValue_Specialslash(const string& s)
+{
+	list<Component*>::iterator c;
+	for (c=childs.begin();c!=childs.end();c++)
+	{
+		string cs = (*c)->getCleanString();
+		int pos = cs.find('/');
+		string ccs = cs.substr(0,pos);
+		if (ccs==s)
+		{
+			current = c;
+			return true;
+		}
+	}
+	return false;
+}
+
 bool Branch::onKey(SDLKey k, S_TUI_VALUE v)
 {
 	if (!*current) return false;
