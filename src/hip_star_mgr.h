@@ -20,7 +20,7 @@
 #ifndef _HIP_STAR_MGR_H_
 #define _HIP_STAR_MGR_H_
 
-#include <map>
+#include <vector>
 #include "hip_star.h"
 #include "grid.h"
         
@@ -33,15 +33,15 @@ public:
     virtual ~Hip_Star_mgr();
     int Read(FILE *);						// Used by Load
     void Draw(float star_scale, float twinkle_amount, int name_ON, float maxMagStarName,
-		Vec3f equ_vision, draw_utility * du);	// Draw all the stars
+		Vec3f equ_vision, draw_utility * du, tone_reproductor* _eye);	// Draw all the stars
     void Save(void);                    	// Debug function
     // Load all the stars from the files
     void Load(char * font_fileName, char * hipCatFile, char * commonNameFile, char * nameFile);
     Hip_Star * search(vec3_t Pos);  	// Search the star by position
 	Hip_Star * search(unsigned int);	// Search the star by HP number
 private:
-    multimap<int, Hip_Star*> Liste;         // map of star* with the grid id as key
-    Grid HipGrid;                           // Grid for opimisation
+	vector<Hip_Star*>* starZones;       // array of star vector with the grid id as array rank
+    Grid HipGrid;                       // Grid for opimisation
     Hip_Star ** StarArray;  // The simple array of the star for sequential research
     int StarArraySize;      // Number of star in the array
 	s_texture * starTexture;

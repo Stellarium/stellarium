@@ -45,7 +45,7 @@ stel_atmosphere::~stel_atmosphere()
 	if (tab_sky) delete tab_sky;
 }
 
-void stel_atmosphere::compute_color(int ground_ON, Vec3d sunPos, tone_reproductor * eye, draw_utility * du)
+void stel_atmosphere::compute_color(int ground_ON, Vec3d sunPos, Vec3d moonPos, tone_reproductor * eye, draw_utility * du)
 {
 	static    GLdouble M[16];
 	static    GLdouble P[16];
@@ -54,18 +54,25 @@ void stel_atmosphere::compute_color(int ground_ON, Vec3d sunPos, tone_reproducto
 	static    GLdouble objz[1];
 	static    GLint V[4];
 
-	//skylight_struct b;
 	skylight_struct2 b2;
 
 	sunPos.normalize();
+	moonPos.normalize();
 
-	//sky.set_params(M_PI_2-asinf(sunPos[2]),5.f);
 	float sun_pos[3];
 	sun_pos[0] = sunPos[0];
 	sun_pos[1] = sunPos[1];
 	sun_pos[2] = sunPos[2];
 
+	float moon_pos[3];
+	moon_pos[0] = moonPos[0];
+	moon_pos[1] = moonPos[1];
+	moon_pos[2] = moonPos[2];
+
 	sky.set_paramsv(sun_pos,5.f);
+
+	skyb.set_sun_moon(moon_pos[2], sun_pos[2]);
+	skyb.set_date(2003, 07, M_PI_2);
 
 	// Convert x,y screen pos in 3D vector
 	glGetDoublev(GL_MODELVIEW_MATRIX,M);
@@ -89,7 +96,7 @@ void stel_atmosphere::compute_color(int ground_ON, Vec3d sunPos, tone_reproducto
 		{
 			for(int y=0; y<=sky_resolution; y++)
 			{
-				tab_sky[x][y].set(0.f,0.f,-10.f);
+				tab_sky[x][y].set(0.f,0.f,0.f);
 			}
 		}
 		return;
@@ -103,19 +110,29 @@ void stel_atmosphere::compute_color(int ground_ON, Vec3d sunPos, tone_reproducto
 		{
 			for(int y=0; y<startY; y++)
 			{
-				tab_sky[x][y].set(0.f,0.f,-10.f);
+				tab_sky[x][y].set(0.f,0.f,0.f);
 			}
 		}
 
 		// Set the values of the first line bellow the ground
 		for (int x=0; x<=sky_resolution; x++)
 		{
-			gluUnProject(x*stepX,yHoriz,1,M,P,V,objx,objy,objz);
+			gluUnProject(x*stepX,yHoriz+1,1,M,P,V,objx,objy,objz);
 			point.set(*objx,*objy,*objz);
-					//printf("1 %d %f %f\n",startY ,point[1] ,point[2] );
 			point.normalize();
 			b2.pos[0] = point[0]; b2.pos[1] = point[1]; b2.pos[2] = point[2];
 			sky.get_xyY_valuev(&b2);
+
+			// Make a smooth transition between the skylight.cpp and the skybright.cpp 's models.
+			float s = (2000.f - b2.color[2])/2000.f;
+			if (s>0)
+			{
+				b2.color[2]*=1.f-s;
+				b2.color[2]+=s * skyb.get_luminance(moon_pos[0]*b2.pos[0]+moon_pos[1]*b2.pos[1]+
+					moon_pos[2]*b2.pos[2], sun_pos[0]*b2.pos[0]+sun_pos[1]*b2.pos[1]+
+					sun_pos[2]*b2.pos[2], b2.pos[2]);
+			}
+
 			eye->xyY_to_RGB(b2.color);
 			tab_sky[x][startY].set(b2.color[0],b2.color[1],b2.color[2]);
 		}
@@ -138,6 +155,16 @@ void stel_atmosphere::compute_color(int ground_ON, Vec3d sunPos, tone_reproducto
 			point.normalize();
 			b2.pos[0] = point[0]; b2.pos[1] = point[1]; b2.pos[2] = point[2];
 			sky.get_xyY_valuev(&b2);
+
+			// Make a smooth transition between the skylight.cpp and the skybright.cpp 's models.
+			float s = (1000.f - b2.color[2])/1000.f;
+			if (s>0)
+			{
+				b2.color[2]*=1.f-s;
+				b2.color[2]+=s * skyb.get_luminance(moon_pos[0]*b2.pos[0]+moon_pos[1]*b2.pos[1]+
+					moon_pos[2]*b2.pos[2], sun_pos[0]*b2.pos[0]+sun_pos[1]*b2.pos[1]+
+					sun_pos[2]*b2.pos[2], b2.pos[2]);
+			}
 			sum_lum+=b2.color[2];
 			nb_lum++;
 			eye->xyY_to_RGB(b2.color);
@@ -146,9 +173,8 @@ void stel_atmosphere::compute_color(int ground_ON, Vec3d sunPos, tone_reproducto
 	}
 
 	// Update world adaptation luminance from the previous values
-	//printf("average %f\n",sum_lum/nb_lum);
-	if ((sum_lum/nb_lum)<1000.f) eye->set_world_adaptation_luminance(1000.f);
-	else eye->set_world_adaptation_luminance(sum_lum/nb_lum*2);
+	if (sum_lum/nb_lum<1.5f) eye->set_world_adaptation_luminance(3.75f);
+	else eye->set_world_adaptation_luminance(sum_lum/nb_lum*2.5);
 	sum_lum = 0.f;
 	nb_lum = 0;
 }
@@ -168,8 +194,6 @@ void stel_atmosphere::draw(draw_utility * du)
 	du->set_orthographic_projection();	// set 2D coordinate
 	for (int y2=startYtemp-1; y2<sky_resolution; y2++)
 	{
-		//printf("tabsby2 %f\n", tab_sky[0][y2+1][2]);
-		if (tab_sky[0][y2+1][2]==-10.f) continue;	// Don't draw if value == -10 i.e. under ground
 		glBegin(GL_TRIANGLE_STRIP);
 			for(int x2=0; x2<sky_resolution+1; x2++)
 			{

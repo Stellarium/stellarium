@@ -27,9 +27,6 @@
 
 skylight::skylight() : thetas(0.f), T(0.f)
 {
-//	sun_pos[0] = 1.f;
-//	sun_pos[1] = 0.f;
-//	sun_pos[2] = 0.f;
 }
 
 skylight::~skylight()

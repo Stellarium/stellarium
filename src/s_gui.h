@@ -61,10 +61,6 @@ namespace s_gui
 	typedef CBFunctor0 * s_pcallback0;
 	typedef CBFunctor0 s_callback0;
 
-	//typedef CBFunctor2wRet<int,int,int> *t_moveCallback;
-	//typedef CBFunctor2wRet<SDLKey,S_GUI_VALUE,int> *t_keyCallback;
-
-
 	typedef Vec4f s_color;
 	typedef Vec4i s_square;
 	typedef Vec2i s_vec2i;

@@ -29,14 +29,13 @@ rotation_elements::rotation_elements() : period(1.), offset(0.), epoch(J2000), o
 }
 
 planet::planet(char * _name, int _flagHalo, double _radius, vec3_t _color,
-				s_texture * _planetTexture, s_texture * _haloTexture,
-				void (*_coord_func)(double JD, double *, double *, double *)) :
-					flagHalo(_flagHalo), radius(_radius), color(_color), axis_rotation(0.),
+				s_texture * _planetTexture, s_texture * _haloTexture, pos_func_type _coord_func) :
+					name(NULL), flagHalo(_flagHalo), radius(_radius), color(_color), axis_rotation(0.),
 					planetTexture(_planetTexture), haloTexture(_haloTexture),
 					coord_func(_coord_func), parent(NULL)
 {
 	ecliptic_pos=Vec3d(0.,0.,0.);
-	name=strdup(_name);
+	if (_name) name=strdup(_name);
 }
 
 
@@ -72,7 +71,7 @@ Vec3d planet::get_earth_equ_pos(navigator * nav) const
 {
 	Vec3d v = get_heliocentric_ecliptic_pos();
 	return nav->helio_to_earth_pos_equ(&v); 	// this is earth equatorial but centered
-												// on observer position (latitude, longitude)
+												// on observer's position (latitude, longitude)
 	//return navigation.helio_to_earth_equ(&v); this is the real equatorial
 }
 
@@ -81,8 +80,8 @@ void planet::compute_position(double date)
 {
 	coord_func(date, &(ecliptic_pos[0]), &(ecliptic_pos[1]), &(ecliptic_pos[2]));
 	ecliptic_pos=ecliptic_pos;
-	//printf("%s : %.30lf %.30lf %.30lf\n",name,ecliptic_pos[0],ecliptic_pos[1],ecliptic_pos[2]);
-    // Compute for the satellites
+
+	// Compute for the satellites
     list<planet*>::iterator iter = satellites.begin();
     while (iter != satellites.end())
     {
@@ -338,7 +337,6 @@ void sun_planet::compute_position(double date)
         (*iter)->compute_position(date);
         iter++;
     }
-	glDisable(GL_LIGHTING);
 }
 
 // Get a matrix which converts from the parent's ecliptic coordinates to local ecliptic
@@ -402,7 +400,7 @@ void sun_planet::draw(int hint_ON, draw_utility * du, navigator* nav)
 
 	// Set the lighting with the sun as light source
     float tmp[4] = {0,0,0,0};
-	float tmp2[4] = {0.1,0.1,0.1,0.1};
+	float tmp2[4] = {0.05,0.05,0.05,0.05};
     float tmp3[4] = {2,2,2,2};
     float tmp4[4] = {1,1,1,1};
     glLightfv(GL_LIGHT0,GL_AMBIENT,tmp2);

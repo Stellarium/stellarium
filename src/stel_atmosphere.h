@@ -29,6 +29,7 @@
 #include "vecmath.h"
 #include "navigator.h"
 #include "tone_reproductor.h"
+#include "skybright.h"
 
 using namespace std;
 
@@ -37,11 +38,12 @@ class stel_atmosphere
 public:
     stel_atmosphere();
     virtual ~stel_atmosphere();
-	void compute_color(int ground_ON, Vec3d sunPos, tone_reproductor * eye, draw_utility * du);
+	void compute_color(int ground_ON, Vec3d sunPos, Vec3d moonPos, tone_reproductor * eye, draw_utility * du);
 	void draw(draw_utility * du);
 	const float * get_zenith_color(tone_reproductor * eye) const;
 private:
 	skylight sky;
+	skybright skyb;
 	int sky_resolution;
 	Vec3f ** tab_sky;	// For Atmosphere calculation
 	int startY;			// intern variable used to store the Horizon Y screen value

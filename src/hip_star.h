@@ -24,6 +24,7 @@
 #include "stel_utility.h"
 #include "s_font.h"
 #include "stel_object.h"
+#include "tone_reproductor.h"
 
 class Hip_Star : public stel_object
 {
@@ -59,6 +60,7 @@ private:
 
 	static float twinkle_amount;
 	static float star_scale;
+	static tone_reproductor* eye;
 };
 
 
