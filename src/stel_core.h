@@ -47,6 +47,7 @@ using namespace std;
 #include "meteor_mgr.h"
 #include "sky_localizer.h"
 #include "script_mgr.h"
+#include "image_mgr.h"
 
 // Predeclaration of the StelCommandInterface class
 class StelCommandInterface;
@@ -175,6 +176,7 @@ private:
 	Landscape * landscape;				// The landscape ie the fog, the ground and "decor"
 	tone_reproductor * tone_converter;	// Tones conversion between stellarium world and display device
 	stel_ui * ui;						// The main User Interface
+	ImageMgr * images;                      // for script loaded image display
 
 	Constellation* selected_constellation;
 	planet* selected_planet;
