@@ -217,7 +217,7 @@ void stel_core::update(int delta_time)
 void stel_core::draw(int delta_time)
 {
 	// Init openGL viewing with fov, screen size and clip planes
-	projection->set_clipping_planes(0.0005 ,35);
+	projection->set_clipping_planes(0.0005 ,50);
 
 	// Give the updated standard projection matrices to the projector
 	projection->set_modelview_matrices(	navigation->get_earth_equ_to_eye_mat(),

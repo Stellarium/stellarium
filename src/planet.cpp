@@ -257,6 +257,8 @@ void planet::draw(int hint_ON, Projector* prj, const navigator * nav, const tone
 			draw_hints(nav, prj);
         }
 
+		if (tex_big_halo) draw_big_halo(nav, prj, eye);
+
 		if (rings && screen_sz>1)
 		{
 			double dist = get_earth_equ_pos(nav).length();
@@ -281,7 +283,6 @@ void planet::draw(int hint_ON, Projector* prj, const navigator * nav, const tone
 			if (tex_halo) draw_halo(nav, prj, eye);
 		}
 
-		if (tex_big_halo) draw_big_halo(nav, prj, eye);
     }
 
 }
