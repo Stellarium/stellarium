@@ -363,11 +363,6 @@ void SolarSystem::set_sky_locale(string _sky_locale) {
   FILE *cnFile;
   cnFile = NULL;
 
-  // clear previous names
-  for( iter = system_planets.begin(); iter < system_planets.end(); iter++ ) {
-    (*iter)->set_common_name("");
-  }
-
   string filename = dataDir + "planet_names." + _sky_locale + ".fab";
   cnFile=fopen(filename.c_str(),"r");
   if (!cnFile) {
