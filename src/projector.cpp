@@ -57,7 +57,7 @@ void Projector::set_disk_viewport(void)
 	
 	glClear(GL_COLOR_BUFFER_BIT);
 	glClear(GL_STENCIL_BUFFER_BIT);	
-	
+
 	glEnable(GL_STENCIL_TEST);
  	glStencilFunc(GL_ALWAYS, 0x1, 0x1);
     glStencilOp(GL_ZERO, GL_REPLACE, GL_REPLACE);
@@ -94,6 +94,7 @@ void Projector::set_viewport_type(VIEWPORT_TYPE t)
 void Projector::draw_viewport_shape(void)
 {
 	if (viewport_type != DISK) return;
+
 	glEnable(GL_STENCIL_TEST);
 	glDisable(GL_BLEND);
 	set_2Dfullscreen_projection();

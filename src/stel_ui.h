@@ -203,6 +203,7 @@ private:
 	
 	// 4. Effect
 	s_tui::MultiSet_item<string>* tui_effect_landscape;
+	s_tui::Boolean_item* tui_effect_manual_zoom;
 
 	// 5. Administration
 	s_tui::ActionConfirm_item* tui_admin_loaddefault;
