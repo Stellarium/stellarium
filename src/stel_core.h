@@ -24,10 +24,41 @@
 
 using namespace std;
 
+/*#include "draw.h"
+#include "constellation.h"
+
+#include "nebula.h"
+
+#include "s_texture.h"
+#include "stellarium_ui.h"
+#include "s_gui.h"
+
+#include "shooting.h"
+#include "stel_config.h"
+#include "solarsystem.h"
+*/
+
+#include "navigator.h"
+#include "stel_object.h"
+#include "hip_star_mgr.h"
+#include "constellation_mgr.h"
+#include "nebula_mgr.h"
+#include "stel_atmosphere.h"
+#include "tone_reproductor.h"
+#include "stel_ui.h"
+
+#include "solarsystem.h"
+
 // Globals
-typedef struct {
-	int X_Resolution;
-	int Y_Resolution;
+class core_globals {
+public:
+	// Set the default global options
+	core_globals();
+
+	virtual ~core_globals();
+
+	int screen_W;
+	int screen_H;
 	int bppMode;
 	int Fullscreen;
 
@@ -35,27 +66,39 @@ typedef struct {
     char TextureDir[255];
     char ConfigDir[255];
     char DataDir[255];
-} core_globals;
+};
 
 
 class stel_core
 {
+friend class stel_ui;
+friend class stel_sdl;
 public:
     stel_core();
     virtual ~stel_core();
 	void init(void);
+	void load_config(void);
+
+	// Set the main data, textures and configuration directories
+	void set_directories(char * DDIR, char * TDIR, char * CDIR);
+
+	// Set the 2 config files names.
 	void set_config_files(char * config_file, char * location_file);
-	void load_config();
 
-	// Update all the objects in function of the time
-	void update(int delta_time);
+	void update(int delta_time);		// Update all the objects in function of the time
+	void draw(int delta_time);			// Execute all the drawing functions
 
-	// Execute all the drawing functions
-	void draw(int delta_time);
+	core_globals global;				// Public variables
 
 private:
-	// Load the textures "for non object oriented stuff" TODO : remove that
-	void load_base_textures(void);
+	// Read the configuration file
+	void loadConfig(char * configFile, char * locationFile);
+	// Dump the configuration file
+	void dumpConfig(void);
+	// Dump the location file
+	void dumpLocation(void);
+
+	int initialized;					// If the core has been initialized or not
 
 	navigator * navigation;				// Manage all navigation parameters, coordinate transformations etc..
 	stel_object * selected_object;		// The selected object in stellarium
@@ -64,11 +107,9 @@ private:
 	Nebula_mgr * nebulas;				// Manage the nebulas
 	stel_atmosphere * atmosphere;		// Atmosphere
 	tone_reproductor * tone_converter;	// Tones conversion between stellarium world and display device
+	stel_ui * ui;						// The main User Interface
 
-
-	s_texture * texIds[200];			// Common Textures TODO : remove that!
-
-    int LandscapeNumber;		// number of the landscape
+    int LandscapeNumber;				// landscape "skin" number
 
 	float fps;
     float sky_brightness;
@@ -107,6 +148,11 @@ private:
     int FlagInfos;
     int FlagMilkyWay;
     int FlagConfig;
+
+	// Load the textures "for non object oriented stuff" TODO : remove that
+	void load_base_textures(void);
+	s_texture * texIds[200];			// Common Textures TODO : remove that!
+
 };
 
 #endif // _STEL_CORE_H_

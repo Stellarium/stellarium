@@ -17,19 +17,37 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-// Module to manage User Interface
+// Class which handles a stellarium User Interface
 
-#ifndef _STELLARIUM_UI_H
-#define _STELLARIUM_UI_H
+#ifndef _STEL_UI_H
+#define _STEL_UI_H
 
-#include "SDL.h"
+#include "stellarium.h"
 
-void initUi(void);
-void clearUi(void);
-void renderUi();
-void GuiHandleClic(Uint16 x, Uint16 y, Uint8 state, Uint8 button);
-void GuiHandleMove(int x, int y);
-bool GuiHandleKeys(SDLKey key, int state);
-void GuiHandleMove(Uint16 x, Uint16 y);
+class stel_ui
+{
+public:
+	stel_ui();			// Create and initialize a stellarium ui.
+    virtual ~stel_ui();	// Delete the ui
 
-#endif  //_STELLARIUM_UI_H
+	void renderUi();	// Display the ui
+
+	// TODO : for the following functions, get rid of the SDL macro def and types
+	// need the creation of an interface between s_gui and SDL
+
+	// Handle mouse clics
+	void GuiHandleClic(Uint16 x, Uint16 y, Uint8 state, Uint8 button);
+
+	// Handle mouse move
+	void GuiHandleMove(int x, int y);
+
+	// Handle key press and release
+	bool GuiHandleKeys(SDLKey key, int state);
+
+	// Handle mouse movements
+	void GuiHandleMove(Uint16 x, Uint16 y);
+private:
+
+};
+
+#endif  //_STEL_UI_H
