@@ -163,7 +163,7 @@ void navigator::zoom_out(int s)
 
 void navigator::update_vision_vector(int delta_time)
 {
-#if 0
+
     if (flag_auto_move)
     {
 		equ_vision = move.aim*move.coef;
@@ -201,7 +201,7 @@ void navigator::update_vision_vector(int delta_time)
 			}
 		}
 	}
-#endif
+
 	equ_vision=local_to_earth_equ(&local_vision);
 	// Update now the deplacement
 	update_move(delta_time);
