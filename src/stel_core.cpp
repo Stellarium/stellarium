@@ -259,8 +259,28 @@ void stel_core::draw(int delta_time)
 										navigation->get_helio_to_eye_mat(),
 										navigation->get_local_to_eye_mat());
 
-    // Set openGL drawings in equatorial coordinates
-    navigation->switch_to_earth_equatorial();
+	// Set openGL drawings in local coordinates i.e. generally altazimuthal coordinates
+	navigation->switch_to_local();
+
+	// Compute the sun position in local coordinate
+	Vec3d temp2(0.,0.,0.);
+	Vec3d sunPos = navigation->helio_to_local(temp2);
+	sunPos.normalize();
+
+	// Compute the moon position in local coordinate
+	temp2 = ssystem->get_moon()->get_heliocentric_ecliptic_pos();
+	Vec3d moonPos = navigation->helio_to_local(temp2);
+	moonPos.normalize();
+
+	// Compute the atmosphere color and intensity 
+	atmosphere->compute_color(navigation->get_JDay(), delta_time, sunPos, moonPos,
+				  ssystem->get_moon()->get_phase(ssystem->get_earth()->get_heliocentric_ecliptic_pos()),
+				  tone_converter, projection, observatory->get_latitude(), observatory->get_altitude(),
+				  15.f, 40.f);	// Temperature = 15°c, relative humidity = 40%
+
+
+	// Set openGL drawings in equatorial coordinates
+	navigation->switch_to_earth_equatorial();
 
 	glBlendFunc(GL_ONE, GL_ONE);
 
@@ -308,7 +328,7 @@ void stel_core::draw(int delta_time)
 	Vec3d tempv = navigation->get_equ_vision();
 	Vec3f temp(tempv[0],tempv[1],tempv[2]);
 
-	//	printf("sky: %f\n", sky_brightness);
+	//	printf("sky: %f\tatm_int: %f\n", sky_brightness, atmosphere->get_intensity());
 	if (FlagStars && sky_brightness<=0.11)
 	{
 		if (FlagPointStar) hip_stars->draw_point(StarScale, StarMagScale,
@@ -350,16 +370,6 @@ void stel_core::draw(int delta_time)
 	// Set openGL drawings in local coordinates i.e. generally altazimuthal coordinates
 	navigation->switch_to_local();
 
-	// Compute the sun position in local coordinate
-	Vec3d temp2(0.,0.,0.);
-	Vec3d sunPos = navigation->helio_to_local(temp2);
-	sunPos.normalize();
-
-	// Compute the moon position in local coordinate
-	temp2 = ssystem->get_moon()->get_heliocentric_ecliptic_pos();
-	Vec3d moonPos = navigation->helio_to_local(temp2);
-	moonPos.normalize();
-
 	// Draw meteors
 	meteors->update(projection, navigation, tone_converter, delta_time);
 
@@ -376,12 +386,6 @@ void stel_core::draw(int delta_time)
 	} else {
 	  atmosphere->hide_atmosphere();
 	}
-
-	// Compute the atmosphere color (if necessary)
-	atmosphere->compute_color(navigation->get_JDay(), sunPos, moonPos,
-				  ssystem->get_moon()->get_phase(ssystem->get_earth()->get_heliocentric_ecliptic_pos()),
-				  tone_converter, projection, observatory->get_latitude(), observatory->get_altitude(),
-				  15.f, 40.f);	// Temperature = 15°c, relative humidity = 40%
 
 	// Draw the atmosphere
 	atmosphere->draw(projection, delta_time);
