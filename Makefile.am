@@ -1,2 +1,3 @@
-EXTRA_DIST = TODO README NEWS
-SUBDIRS = config data src textures
+pkgdatadir = $(datadir)/@PACKAGE@/textures/landscapes
+pkgdata_DATA = $(wildcard *.png)
+EXTRA_DIST = $(pkgdata_DATA)

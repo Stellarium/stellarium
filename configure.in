@@ -1,29 +1,64 @@
+dnl Modified for CYGWIN
 dnl Process this file with autoconf to produce a configure script.
 AC_INIT(src/main.cpp)
 AM_INIT_AUTOMAKE(stellarium,0.4.7)
 
-dnl Checks for programs.
+dnl Check system type
+AC_CANONICAL_HOST
+
+dnl Check for compilers.
 AC_PROG_CC
 AC_PROG_CXX
 
+CFLAGS="-Wall -O3 "
+CXXFLAGS="-O3"
+
+dnl Checks for programs.
+AC_PROG_CPP
+AC_PROG_CXXCPP
 AC_PROG_INSTALL
 AC_PROG_RANLIB
 
+dnl Check for X11.
+AC_PATH_XTRA
+LIBS="$LIBS $X_LIBS"
+
+dnl
+dnl GL and GLUT libs
+dnl
 
 AC_CHECK_HEADER(GL/gl.h,,AC_MSG_ERROR(gl.h not found - please install OpenGL- or Mesa-devel))
 AC_CHECK_HEADER(GL/glu.h,,AC_MSG_ERROR(glu.h not found - please install GLU- or MesaGLU-devel))
 AC_CHECK_HEADER(GL/glut.h,,AC_MSG_ERROR(glut.h not found - please install GLUT- or MesaGLUT-devel))
 
-AC_CHECK_LIB(m,fabs,LIBS="$LIBS -lm",AC_MSG_RESULT(math library not found))
-AC_CHECK_LIB(GL,glEnable,LIBS="$LIBS -lGL",AC_MSG_ERROR(GL not found - please install GL or MesaGL))
-AC_CHECK_LIB(GLU,gluPerspective,LIBS="$LIBS -lGLU",AC_MSG_ERROR(GLU not found - please install GLU or MesaGLU))
-AC_CHECK_LIB(glut,glutMainLoop,LIBS="$LIBS -lglut",AC_MSG_ERROR(GLUT not found - please install GLUT or MesaGLUT))
-AC_CHECK_LIB(Xmu,_XEditResCheckMessages,LIBS="$LIBS -lXmu",AC_MSG_RESULT(Xmu not found - this library is required on some systems.))
-AC_CHECK_LIB(X11, XSendEvent,LIBS="$LIBS -lX11",AC_MSG_RESULT(X11 not found - this library is required on some systems.))
+
+if test $host = i686-pc-cygwin ; then 
+   LIBS="$LIBS -lopengl32 -lglu32 -lglut32"
+else
+   AC_CHECK_LIB(GL,glEnable)
+dnl   if test "$ac_cv_lib_GL_glEnable" = no ; then
+dnl      AC_CHECK_LIB(MesaGL,glEnable,,AC_MSG_ERROR(GL not found - please install GL or MesaGL))
+dnl   fi
+
+   AC_CHECK_LIB(GLU,gluPerspective)
+dnl   if test "$ac_cv_lib_GLU_gluPerspective" = no ; then
+dnl      AC_CHECK_LIB(MesaGLU,gluPerspective,,AC_MSG_ERROR(GLU not found - please install GLU or MesaGLU))
+dnl   fi
+
+dnl   AC_CHECK_LIB(glut,glutMainLoop,,AC_MSG_ERROR(GLUT not found - please install GLUT))
+fi
+
+LIBS="$LIBS -lGL -lGLU -lglut"
+
 dnl Checks for library functions.
 AC_CHECK_FUNCS(strdup toupper)
+AC_CHECK_LIB(m,fabs,LIBS="$LIBS -lm",AC_MSG_RESULT(math library not found))
 
-CFLAGS="$CFLAGS -Wall"
+dnl assign the package directory variable
+if test "$prefix" = "NONE" ; then
+   prefix=$ac_default_prefix
+fi
+PKGDATADIR=`eval echo "${datadir}/$PACKAGE"`
+AC_DEFINE_UNQUOTED(CONFIG_DATA_DIR, "$PKGDATADIR")
 
-AC_OUTPUT(Makefile src/Makefile src/astrolib/Makefile src/glpng/Makefile config/Makefile data/Makefile textures/Makefile)
-
+AC_OUTPUT(Makefile src/Makefile src/astrolib/Makefile src/glpng/Makefile config/Makefile data/Makefile textures/Makefile textures/landscapes/Makefile)

@@ -33,8 +33,6 @@ includedir = ${prefix}/include
 oldincludedir = /usr/include
 
 DESTDIR =
-
-pkgdatadir = $(datadir)/stellarium
 pkglibdir = $(libdir)/stellarium
 pkgincludedir = $(includedir)/stellarium
 
@@ -57,21 +55,28 @@ POST_INSTALL = :
 NORMAL_UNINSTALL = :
 PRE_UNINSTALL = :
 POST_UNINSTALL = :
+host_alias = i686-pc-linux
+host_triplet = i686-pc-linux-gnu
 CC = gcc
+CPP = gcc -E
 CXX = c++
+CXXCPP = c++ -E
 MAKEINFO = makeinfo
 PACKAGE = stellarium
 RANLIB = ranlib
 VERSION = 0.4.7
 
-EXTRA_DIST = TODO README NEWS
-SUBDIRS = config data src textures
+pkgdatadir = $(datadir)/stellarium/textures/landscapes
+pkgdata_DATA = $(wildcard *.png)
+EXTRA_DIST = $(pkgdata_DATA)
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
 CONFIG_CLEAN_FILES = 
+DATA =  $(pkgdata_DATA)
+
 DIST_COMMON =  README AUTHORS COPYING ChangeLog INSTALL Makefile.am \
-Makefile.in NEWS TODO aclocal.m4 configure configure.in install-sh \
-missing mkinstalldirs
+Makefile.in NEWS TODO aclocal.m4 config.guess config.sub configure \
+configure.in install-sh missing mkinstalldirs
 
 
 DISTFILES = $(DIST_COMMON) $(SOURCES) $(HEADERS) $(TEXINFOS) $(EXTRA_DIST)
@@ -95,94 +100,27 @@ config.status: $(srcdir)/configure $(CONFIG_STATUS_DEPENDENCIES)
 $(srcdir)/configure: $(srcdir)/configure.in $(ACLOCAL_M4) $(CONFIGURE_DEPENDENCIES)
 	cd $(srcdir) && $(AUTOCONF)
 
-# This directory's subdirectories are mostly independent; you can cd
-# into them and run `make' without going through this Makefile.
-# To change the values of `make' variables: instead of editing Makefiles,
-# (1) if the variable is set in `config.status', edit `config.status'
-#     (which will cause the Makefiles to be regenerated when you run `make');
-# (2) otherwise, pass the desired values on the `make' command line.
-
-
-
-all-recursive install-data-recursive install-exec-recursive \
-installdirs-recursive install-recursive uninstall-recursive  \
-check-recursive installcheck-recursive info-recursive dvi-recursive:
-	@set fnord $(MAKEFLAGS); amf=$$2; \
-	dot_seen=no; \
-	target=`echo $@ | sed s/-recursive//`; \
-	list='$(SUBDIRS)'; for subdir in $$list; do \
-	  echo "Making $$target in $$subdir"; \
-	  if test "$$subdir" = "."; then \
-	    dot_seen=yes; \
-	    local_target="$$target-am"; \
-	  else \
-	    local_target="$$target"; \
-	  fi; \
-	  (cd $$subdir && $(MAKE) $(AM_MAKEFLAGS) $$local_target) \
-	   || case "$$amf" in *=*) exit 1;; *k*) fail=yes;; *) exit 1;; esac; \
-	done; \
-	if test "$$dot_seen" = "no"; then \
-	  $(MAKE) $(AM_MAKEFLAGS) "$$target-am" || exit 1; \
-	fi; test -z "$$fail"
-
-mostlyclean-recursive clean-recursive distclean-recursive \
-maintainer-clean-recursive:
-	@set fnord $(MAKEFLAGS); amf=$$2; \
-	dot_seen=no; \
-	rev=''; list='$(SUBDIRS)'; for subdir in $$list; do \
-	  rev="$$subdir $$rev"; \
-	  test "$$subdir" = "." && dot_seen=yes; \
-	done; \
-	test "$$dot_seen" = "no" && rev=". $$rev"; \
-	target=`echo $@ | sed s/-recursive//`; \
-	for subdir in $$rev; do \
-	  echo "Making $$target in $$subdir"; \
-	  if test "$$subdir" = "."; then \
-	    local_target="$$target-am"; \
-	  else \
-	    local_target="$$target"; \
-	  fi; \
-	  (cd $$subdir && $(MAKE) $(AM_MAKEFLAGS) $$local_target) \
-	   || case "$$amf" in *=*) exit 1;; *k*) fail=yes;; *) exit 1;; esac; \
-	done && test -z "$$fail"
-tags-recursive:
-	list='$(SUBDIRS)'; for subdir in $$list; do \
-	  test "$$subdir" = . || (cd $$subdir && $(MAKE) $(AM_MAKEFLAGS) tags); \
+install-pkgdataDATA: $(pkgdata_DATA)
+	@$(NORMAL_INSTALL)
+	$(mkinstalldirs) $(DESTDIR)$(pkgdatadir)
+	@list='$(pkgdata_DATA)'; for p in $$list; do \
+	  if test -f $(srcdir)/$$p; then \
+	    echo " $(INSTALL_DATA) $(srcdir)/$$p $(DESTDIR)$(pkgdatadir)/$$p"; \
+	    $(INSTALL_DATA) $(srcdir)/$$p $(DESTDIR)$(pkgdatadir)/$$p; \
+	  else if test -f $$p; then \
+	    echo " $(INSTALL_DATA) $$p $(DESTDIR)$(pkgdatadir)/$$p"; \
+	    $(INSTALL_DATA) $$p $(DESTDIR)$(pkgdatadir)/$$p; \
+	  fi; fi; \
 	done
 
+uninstall-pkgdataDATA:
+	@$(NORMAL_UNINSTALL)
+	list='$(pkgdata_DATA)'; for p in $$list; do \
+	  rm -f $(DESTDIR)$(pkgdatadir)/$$p; \
+	done
 tags: TAGS
+TAGS:
 
-ID: $(HEADERS) $(SOURCES) $(LISP)
-	list='$(SOURCES) $(HEADERS)'; \
-	unique=`for i in $$list; do echo $$i; done | \
-	  awk '    { files[$$0] = 1; } \
-	       END { for (i in files) print i; }'`; \
-	here=`pwd` && cd $(srcdir) \
-	  && mkid -f$$here/ID $$unique $(LISP)
-
-TAGS: tags-recursive $(HEADERS) $(SOURCES)  $(TAGS_DEPENDENCIES) $(LISP)
-	tags=; \
-	here=`pwd`; \
-	list='$(SUBDIRS)'; for subdir in $$list; do \
-   if test "$$subdir" = .; then :; else \
-	    test -f $$subdir/TAGS && tags="$$tags -i $$here/$$subdir/TAGS"; \
-   fi; \
-	done; \
-	list='$(SOURCES) $(HEADERS)'; \
-	unique=`for i in $$list; do echo $$i; done | \
-	  awk '    { files[$$0] = 1; } \
-	       END { for (i in files) print i; }'`; \
-	test -z "$(ETAGS_ARGS)$$unique$(LISP)$$tags" \
-	  || (cd $(srcdir) && etags $(ETAGS_ARGS) $$tags  $$unique $(LISP) -o $$here/TAGS)
-
-mostlyclean-tags:
-
-clean-tags:
-
-distclean-tags:
-	-rm -f TAGS ID
-
-maintainer-clean-tags:
 
 distdir = $(PACKAGE)-$(VERSION)
 top_distdir = $(distdir)
@@ -237,41 +175,31 @@ distdir: $(DISTFILES)
 	    || cp -p $$d/$$file $(distdir)/$$file || :; \
 	  fi; \
 	done
-	for subdir in $(SUBDIRS); do \
-	  if test "$$subdir" = .; then :; else \
-	    test -d $(distdir)/$$subdir \
-	    || mkdir $(distdir)/$$subdir \
-	    || exit 1; \
-	    chmod 777 $(distdir)/$$subdir; \
-	    (cd $$subdir && $(MAKE) $(AM_MAKEFLAGS) top_distdir=../$(distdir) distdir=../$(distdir)/$$subdir distdir) \
-	      || exit 1; \
-	  fi; \
-	done
 info-am:
-info: info-recursive
+info: info-am
 dvi-am:
-dvi: dvi-recursive
+dvi: dvi-am
 check-am: all-am
-check: check-recursive
+check: check-am
 installcheck-am:
-installcheck: installcheck-recursive
+installcheck: installcheck-am
 install-exec-am:
-install-exec: install-exec-recursive
+install-exec: install-exec-am
 
-install-data-am:
-install-data: install-data-recursive
+install-data-am: install-pkgdataDATA
+install-data: install-data-am
 
 install-am: all-am
 	@$(MAKE) $(AM_MAKEFLAGS) install-exec-am install-data-am
-install: install-recursive
-uninstall-am:
-uninstall: uninstall-recursive
-all-am: Makefile
-all-redirect: all-recursive
+install: install-am
+uninstall-am: uninstall-pkgdataDATA
+uninstall: uninstall-am
+all-am: Makefile $(DATA)
+all-redirect: all-am
 install-strip:
 	$(MAKE) $(AM_MAKEFLAGS) AM_INSTALL_PROGRAM_FLAGS=-s install
-installdirs: installdirs-recursive
-installdirs-am:
+installdirs:
+	$(mkinstalldirs)  $(DESTDIR)$(pkgdatadir)
 
 
 mostlyclean-generic:
@@ -283,38 +211,31 @@ distclean-generic:
 	-rm -f config.cache config.log stamp-h stamp-h[0-9]*
 
 maintainer-clean-generic:
-mostlyclean-am:  mostlyclean-tags mostlyclean-generic
+mostlyclean-am:  mostlyclean-generic
 
-mostlyclean: mostlyclean-recursive
+mostlyclean: mostlyclean-am
 
-clean-am:  clean-tags clean-generic mostlyclean-am
+clean-am:  clean-generic mostlyclean-am
 
-clean: clean-recursive
+clean: clean-am
 
-distclean-am:  distclean-tags distclean-generic clean-am
+distclean-am:  distclean-generic clean-am
 
-distclean: distclean-recursive
+distclean: distclean-am
 	-rm -f config.status
 
-maintainer-clean-am:  maintainer-clean-tags maintainer-clean-generic \
-		distclean-am
+maintainer-clean-am:  maintainer-clean-generic distclean-am
 	@echo "This command is intended for maintainers to use;"
 	@echo "it deletes files that may require special tools to rebuild."
 
-maintainer-clean: maintainer-clean-recursive
+maintainer-clean: maintainer-clean-am
 	-rm -f config.status
 
-.PHONY: install-data-recursive uninstall-data-recursive \
-install-exec-recursive uninstall-exec-recursive installdirs-recursive \
-uninstalldirs-recursive all-recursive check-recursive \
-installcheck-recursive info-recursive dvi-recursive \
-mostlyclean-recursive distclean-recursive clean-recursive \
-maintainer-clean-recursive tags tags-recursive mostlyclean-tags \
-distclean-tags clean-tags maintainer-clean-tags distdir info-am info \
-dvi-am dvi check check-am installcheck-am installcheck install-exec-am \
-install-exec install-data-am install-data install-am install \
-uninstall-am uninstall all-redirect all-am all installdirs-am \
-installdirs mostlyclean-generic distclean-generic clean-generic \
+.PHONY: uninstall-pkgdataDATA install-pkgdataDATA tags distdir info-am \
+info dvi-am dvi check check-am installcheck-am installcheck \
+install-exec-am install-exec install-data-am install-data install-am \
+install uninstall-am uninstall all-redirect all-am all installdirs \
+mostlyclean-generic distclean-generic clean-generic \
 maintainer-clean-generic clean mostlyclean distclean maintainer-clean
 
 

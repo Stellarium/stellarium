@@ -12,50 +12,27 @@
 # config.status only pays attention to the cache file if you give it the
 # --recheck option to rerun configure.
 #
-ac_cv_c_const=${ac_cv_c_const=no}
-ac_cv_c_cross=${ac_cv_c_cross=no}
-ac_cv_c_inline=${ac_cv_c_inline=no}
 ac_cv_func_connect=${ac_cv_func_connect=yes}
 ac_cv_func_gethostbyname=${ac_cv_func_gethostbyname=yes}
-ac_cv_func_glGenTextures=${ac_cv_func_glGenTextures=no}
 ac_cv_func_remove=${ac_cv_func_remove=yes}
 ac_cv_func_shmat=${ac_cv_func_shmat=yes}
 ac_cv_func_strdup=${ac_cv_func_strdup=no}
-ac_cv_func_strerror=${ac_cv_func_strerror=no}
-ac_cv_func_strstr=${ac_cv_func_strstr=no}
-ac_cv_func_strtod=${ac_cv_func_strtod=no}
-ac_cv_func_strtol=${ac_cv_func_strtol=no}
-ac_cv_func_strtoul=${ac_cv_func_strtoul=no}
-ac_cv_func_toupper=${ac_cv_func_toupper=yes}
+ac_cv_func_toupper=${ac_cv_func_toupper=no}
 ac_cv_have_x=${ac_cv_have_x='have_x=yes 		ac_x_includes=/usr/X11R6/include ac_x_libraries=/usr/X11R6/lib'}
 ac_cv_header_GL_gl_h=${ac_cv_header_GL_gl_h=yes}
 ac_cv_header_GL_glu_h=${ac_cv_header_GL_glu_h=yes}
 ac_cv_header_GL_glut_h=${ac_cv_header_GL_glut_h=yes}
-ac_cv_header_limits_h=${ac_cv_header_limits_h=yes}
-ac_cv_header_malloc_h=${ac_cv_header_malloc_h=yes}
-ac_cv_header_stdc=${ac_cv_header_stdc=no}
-ac_cv_header_strings_h=${ac_cv_header_strings_h=yes}
-ac_cv_header_unistd_h=${ac_cv_header_unistd_h=yes}
-ac_cv_lib_GLU_gluPerspective=${ac_cv_lib_GLU_gluPerspective=yes}
-ac_cv_lib_GL_glEnable=${ac_cv_lib_GL_glEnable=yes}
-ac_cv_lib_GL_glGenTextures=${ac_cv_lib_GL_glGenTextures=no}
+ac_cv_lib_GLU_gluPerspective=${ac_cv_lib_GLU_gluPerspective=no}
+ac_cv_lib_GL_glEnable=${ac_cv_lib_GL_glEnable=no}
 ac_cv_lib_ICE_IceConnectionNumber=${ac_cv_lib_ICE_IceConnectionNumber=yes}
-ac_cv_lib_X11_XSendEvent=${ac_cv_lib_X11_XSendEvent=no}
-ac_cv_lib_Xmu_XmuCreateArea=${ac_cv_lib_Xmu_XmuCreateArea=no}
-ac_cv_lib_Xmu_XmuCvtStringToOrientation=${ac_cv_lib_Xmu_XmuCvtStringToOrientation=no}
-ac_cv_lib_Xmu__XEditResCheckMessages=${ac_cv_lib_Xmu__XEditResCheckMessages=no}
-ac_cv_lib_Xmu_main=${ac_cv_lib_Xmu_main=no}
 ac_cv_lib_dnet_dnet_ntoa=${ac_cv_lib_dnet_dnet_ntoa=no}
 ac_cv_lib_dnet_stub_dnet_ntoa=${ac_cv_lib_dnet_stub_dnet_ntoa=no}
-ac_cv_lib_glut_glutMainLoop=${ac_cv_lib_glut_glutMainLoop=yes}
 ac_cv_lib_m_fabs=${ac_cv_lib_m_fabs=yes}
-ac_cv_lib_m_main=${ac_cv_lib_m_main=yes}
 ac_cv_path_install=${ac_cv_path_install='/usr/bin/install -c'}
-ac_cv_prog_AWK=${ac_cv_prog_AWK=mawk}
 ac_cv_prog_CC=${ac_cv_prog_CC=gcc}
-ac_cv_prog_CPP=${ac_cv_prog_CPP='cc -E'}
+ac_cv_prog_CPP=${ac_cv_prog_CPP='gcc -E'}
 ac_cv_prog_CXX=${ac_cv_prog_CXX=c++}
-ac_cv_prog_LN_S=${ac_cv_prog_LN_S='ln -s'}
+ac_cv_prog_CXXCPP=${ac_cv_prog_CXXCPP='c++ -E'}
 ac_cv_prog_RANLIB=${ac_cv_prog_RANLIB=ranlib}
 ac_cv_prog_cc_cross=${ac_cv_prog_cc_cross=no}
 ac_cv_prog_cc_g=${ac_cv_prog_cc_g=yes}
@@ -64,15 +41,5 @@ ac_cv_prog_cxx_cross=${ac_cv_prog_cxx_cross=no}
 ac_cv_prog_cxx_g=${ac_cv_prog_cxx_g=yes}
 ac_cv_prog_cxx_works=${ac_cv_prog_cxx_works=yes}
 ac_cv_prog_gcc=${ac_cv_prog_gcc=yes}
-ac_cv_prog_gcc_g=${ac_cv_prog_gcc_g=yes}
 ac_cv_prog_gxx=${ac_cv_prog_gxx=yes}
 ac_cv_prog_make_make_set=${ac_cv_prog_make_make_set=yes}
-ac_cv_search_glAccum=${ac_cv_search_glAccum=-lGL}
-ac_cv_search_glXChooseVisual=${ac_cv_search_glXChooseVisual='none required'}
-ac_cv_search_gluBeginCurve=${ac_cv_search_gluBeginCurve=-lGLU}
-ac_cv_search_glutInit=${ac_cv_search_glutInit=-lglut}
-ac_cv_struct_tm=${ac_cv_struct_tm=sys/time.h}
-ac_cv_type_size_t=${ac_cv_type_size_t=yes}
-am_cv_CC_dependencies_compiler_type=${am_cv_CC_dependencies_compiler_type=gcc}
-am_cv_CXX_dependencies_compiler_type=${am_cv_CXX_dependencies_compiler_type=gcc}
-mdl_cv_have_OpenGL=${mdl_cv_have_OpenGL=yes}

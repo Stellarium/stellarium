@@ -57,8 +57,12 @@ POST_INSTALL = :
 NORMAL_UNINSTALL = :
 PRE_UNINSTALL = :
 POST_UNINSTALL = :
+host_alias = @host_alias@
+host_triplet = @host@
 CC = @CC@
+CPP = @CPP@
 CXX = @CXX@
+CXXCPP = @CXXCPP@
 MAKEINFO = @MAKEINFO@
 PACKAGE = @PACKAGE@
 RANLIB = @RANLIB@
@@ -81,6 +85,10 @@ DEFS = @DEFS@ -I. -I$(srcdir)
 CPPFLAGS = @CPPFLAGS@
 LDFLAGS = @LDFLAGS@
 LIBS = @LIBS@
+X_CFLAGS = @X_CFLAGS@
+X_LIBS = @X_LIBS@
+X_EXTRA_LIBS = @X_EXTRA_LIBS@
+X_PRE_LIBS = @X_PRE_LIBS@
 libglpng_a_DEPENDENCIES =  adler32.o infcodes.o inftrees.o pngrio.o \
 crc32.o pngerror.o pngrtran.o zutil.o glpng.o inffast.o infutil.o \
 pngget.o pngrutil.o pngmem.o pngset.o infblock.o png.o pngpread.o \
