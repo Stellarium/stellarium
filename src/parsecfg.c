@@ -20,16 +20,32 @@
 /*                                                                        */
 /**************************************************************************/
 
-/* $Id: parsecfg.c 56 2002-10-21 00:22:38Z xalioth $ */
+/* $Id: parsecfg.c 152 2003-05-03 15:58:16Z xalioth $ */
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <limits.h>
 #include <errno.h>
-#include "intl.h"
 #include "parsecfg.h"
 
+#ifdef ENABLE_NLS
+#  include <libintl.h>
+#  define _(String) dgettext(PACKAGE,String)
+#  ifdef gettext_noop
+#    define N_(String) gettext_noop(String)
+#  else
+#    define N_(String) (String)
+#  endif /* gettext_noop */
+#else
+#  define _(String) (String)
+#  define N_(String) (String)
+#  define textdomain(String) (String)
+#  define gettext(String) (String)
+#  define dgettext(Domain,String) (String)
+#  define dcgettext(Domain,String,Type) (String)
+#  define bindtextdomain(Domain,Directory) (Domain)
+#endif /* ENABLE_NLS */
 
 /* proto type declaration of private functions */
 
