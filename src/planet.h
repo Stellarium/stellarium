@@ -110,6 +110,7 @@ public:
 	sun_planet(char * _name, int _flagHalo, double _radius, vec3_t _color, s_texture * _planetTexture, s_texture * _haloTexture, s_texture * _bigHaloTexture);
 	virtual void compute_position(double date);
 	virtual void compute_trans_matrix(double date);
+	virtual void draw();
 protected:
 	s_texture * bigHaloTexture;				// Big halo texture
 };
