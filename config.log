@@ -1,0 +1,38 @@
+This file contains any messages produced by compilers while
+running configure, to aid debugging if configure makes a mistake.
+
+configure:556: checking for a BSD compatible install
+configure:609: checking whether build environment is sane
+configure:666: checking whether make sets ${MAKE}
+configure:712: checking for working aclocal
+configure:725: checking for working autoconf
+configure:738: checking for working automake
+configure:751: checking for working autoheader
+configure:764: checking for working makeinfo
+configure:782: checking for gcc
+configure:895: checking whether the C compiler (gcc  ) works
+configure:911: gcc -o conftest    conftest.c  1>&5
+/usr/ucb/ld:
+Warning: Linking some objects which contain exception information sections
+	and some which do not. This may cause fatal runtime exception handling
+	problems (last obj encountered without exceptions was /tmp/ccoeRr78.o).
+configure:937: checking whether the C compiler (gcc  ) is a cross-compiler
+configure:942: checking whether we are using GNU C
+configure:970: checking whether gcc accepts -g
+configure:1004: checking for ranlib
+configure:1034: checking how to run the C preprocessor
+configure:1114: checking for ANSI C header files
+configure:1221: checking for limits.h
+configure:1221: checking for malloc.h
+configure:1221: checking for strings.h
+configure:1221: checking for unistd.h
+configure:1259: checking for working const
+configure:1334: checking for inline
+configure:1374: checking for size_t
+configure:1407: checking whether struct tm is in sys/time.h or time.h
+configure:1444: checking for strdup
+configure:1444: checking for strerror
+configure:1444: checking for strstr
+configure:1444: checking for strtod
+configure:1444: checking for strtol
+configure:1444: checking for strtoul

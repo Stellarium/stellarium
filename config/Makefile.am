@@ -1,0 +1,1 @@
+EXTRA_DIST = config_no_3D_acceleration.txt  config.txt  location_examples.txt  location.txt

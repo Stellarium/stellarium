@@ -1,0 +1,75 @@
+################################
+#   SETTINGS FOR STELLARIUM    #
+################################
+
+######## Video settings ########
+# Fullscreen mode is faster than windowed mode but a few videos cards don't support it.
+# When fullscreen = false, stellarium execute in windowed mode, but it resize
+# the window to the size of your screen, so it looks like fullscreen mode but it isn't...
+# true=fullscreen mode, false=windowed mode
+
+FULLSCREEN = false
+
+# Available resolution (for fullscreen mode) are : 400x300, 640x480, 800x600,
+# 1024x768, 1280x768 and maybe more but my screen can't reach it so I never tried it...
+# Width of the fullscreen
+
+X_RESOLUTION = 800
+
+# Height of the fullscreen
+
+Y_RESOLUTION = 600
+
+#
+# Number of Bit Per Pixels : set the number of possible colors. Available values are 32 and 16.
+# (16 faster than 32 but reduce the number of colors)
+
+BBP_MODE = 32
+
+######## Option settings ########
+# Initial values of various options, some can be changed during the execution, some can't.
+LANDSCAPE_NUMBER = 3                # Number of the landscape skin : 1 sea, 2 rocky mountains, 3 snowy mountains
+STAR_SCALE = 3.8                    # Set the star scaling, the more it is the bigger are the stars
+STAR_TWINKLE_AMOUNT = 1.5           # Change the star twinkling amount (value between 0 and 10)
+FLAG_FOLLOW_EARTH = true            # Activate the Compensation of the earth rotation.
+FLAG_FPS = true                     # Display nb of Frame Per Seconde if true.
+FLAG_STARS = true                   # Draw stars if true.
+FLAG_STAR_NAME = true               # Draw brightest stars names if true.
+MAX_MAG_STAR_NAME = 1.5             # Draw the common name of the star with magnitude < FLAG_MAG_STAR_NAME
+FLAG_PLANETS = true                 # Draw planets if true.
+FLAG_PLANETS_NAME = true            # Draw the planets names.
+FLAG_NEBULA = true                  # Draw zoomable nebulas if true.
+FLAG_NEBULA_NAME = false            # Draw the names of the nebulas and yellow circles.
+FLAG_GROUND = true                  # Draw the ground if true.
+FLAG_HORIZON = true                 # Draw the horizon (ie the mountains) if true.
+FLAG_FOG = true                     # Draw fog near the horizon if true.
+FLAG_ATMOSPHERE = true              # Draw atmosphere (ie blue sky daytime) if true.
+FLAG_CONSTELLATION_DRAWING = false  # Draw the constellations lines if true.
+FLAG_CONSTELLATION_NAME = false     # Print the name of the constellations if true.
+FLAG_AZIMUTAL_GRID = false          # Display the azimutal grid if true.
+FLAG_EQUATORIAL_GRID = false        # Display the equatorial grid if true.
+FLAG_EQUATOR = false                # Display the celestial equator line if true.
+FLAG_ECLIPTIC = false               # Display the ecliptic line if true.
+FLAG_CARDINAL_POINTS = true         # Display the cardinal points if true.
+FLAG_REAL_TIME = true               # Real time mode activated if true.
+FLAG_ACCELERED_TIME = false         # Accelered time mode activated if true.
+FLAG_VERY_FAST_TIME = false         # Very fast time mode activated if true.
+FLAG_MENU = true                    # Display menu bar if true.
+FLAG_HELP = false                   # Display help window if true.
+FLAG_INFOS = false                  # Display infos about stellarium if true.
+FLAG_MILKY_WAY = true               # Display the milky way, put it to false 
+                                    # if your computer have no 3D hardware acceleration
+FLAG_UTC_TIME = false               # Display time in UTC format (Greenwich time) if true,
+                                    # local time if false : set your Time Zone above in this file!
+
+
+######## Date and time ########
+# default date is today
+# modify and uncomment next line to choose another date
+#DATE = mm/dd/yyyy
+#DATE = 09/17/1980
+
+# default time is now (UT time)
+# modify and uncomment next line to choose another time
+#TIME = hh:mm:ss
+#TIME = 06:20:00
