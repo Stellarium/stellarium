@@ -113,7 +113,6 @@ void Projector::init_project_matrix(void)
 							0., f, 0., 0.,
 							0., 0., (zFar + zNear)/(zNear - zFar), -1.,
 							0., 0., (2.*zFar*zNear)/(zNear - zFar), 0.);
-
 	glMatrixMode(GL_PROJECTION);
 	glLoadMatrixd(mat_projection);
     glMatrixMode(GL_MODELVIEW);

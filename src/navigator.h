@@ -113,13 +113,13 @@ public:
 
 
 	// Place openGL in earth equatorial coordinates
-	void switch_to_earth_equatorial(void) { glLoadMatrixd(mat_earth_equ_to_eye); }
+	void switch_to_earth_equatorial(void) const { glLoadMatrixd(mat_earth_equ_to_eye); }
 
 	// Place openGL in heliocentric ecliptical coordinates
-	void switch_to_heliocentric(void) { glLoadMatrixd(mat_helio_to_eye); }
+	void switch_to_heliocentric(void) const { glLoadMatrixd(mat_helio_to_eye); }
 
 	// Place openGL in local viewer coordinates (Usually somewhere on earth viewing in a specific direction)
-	void switch_to_local(void) { glLoadMatrixd(mat_local_to_eye); }
+	void switch_to_local(void) const { glLoadMatrixd(mat_local_to_eye); }
 
 
 	// Transform vector from local coordinate to equatorial

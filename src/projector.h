@@ -119,6 +119,9 @@ public:
 	{glVertex3d(x,y,z);}
 
 	void update_openGL(void) const;
+
+	const Vec3d convert_pos(const Vec3d& v, const Mat4d& mat) const {return v;}
+
 protected:
 	// Init the viewing matrix from the fov, the clipping planes and screen ratio
 	// The function is a reimplementation of gluPerspective
