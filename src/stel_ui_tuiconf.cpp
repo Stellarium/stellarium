@@ -179,19 +179,27 @@ void stel_ui::init_tui(void)
 	tui_menu_refpoints->addComponent(tui_refpoints_azimutalgrid);
 
 	// 7. Effects
+	tui_effect_landscape = new s_tui::MultiSet_item<string>("7.1 Landscape: ");
+	tui_effect_landscape->addItem("TODO!");
+	tui_menu_effects->addComponent(tui_effect_landscape);
 	tui_effect_atmosphere = new s_tui::Boolean_item(false, "7.2 Atmopshere: ", "Yes","No");
 	tui_effect_atmosphere->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb1));
 	tui_menu_effects->addComponent(tui_effect_atmosphere);
 
 	// 8. Administration
-	tui_admin_loaddefault = new s_tui::ActionConfirm_item("8.1 Load Default Configuration: ");
+	tui_admin_loaddefault = new s_tui::ActionConfirm_item("8.1 Load Default Configuration: ", "1", "?2");
+	tui_admin_loaddefault->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb_admin_load_default));
 	tui_admin_savedefault = new s_tui::ActionConfirm_item("8.2 Save Current Configuration as Default: ");
+	tui_admin_loaddefault->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb_admin_save_default));
 	tui_admin_setlocal = new s_tui::Action_item("8.3 Set Locale: ");
+	tui_admin_loaddefault->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb_admin_set_locale));
 	tui_admin_updateme = new s_tui::Action_item("8.4 Update me via Internet: ");
+	tui_admin_loaddefault->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb_admin_updateme));
 	tui_menu_administration->addComponent(tui_admin_loaddefault);
 	tui_menu_administration->addComponent(tui_admin_savedefault);
 	tui_menu_administration->addComponent(tui_admin_setlocal);
 	tui_menu_administration->addComponent(tui_admin_updateme);
+
 }
 
 // Display the tui
@@ -262,6 +270,49 @@ void stel_ui::tui_cb1(void)
 
 }
 
+// Update all the tui widgets with values taken from the core parameters
+void stel_ui::tui_update_widgets(void)
+{
+	// 1. Location
+	tui_location_latitude->setValue(core->navigation->get_latitude());
+	tui_location_longitude->setValue(core->navigation->get_longitude());
+	tui_location_altitude->setValue(core->navigation->get_altitude());
+
+	// 2. Date & Time
+	tui_time_skytime->setJDay(core->navigation->get_JDay());
+	tui_time_presetskytime->setJDay(core->PresetSkyTime);
+	tui_time_startuptime->setCurrent(core->StartupTimeMode);
+	tui_time_displayformat->setCurrent(core->TimeDisplayFormat);
+
+	// 3. Constellation
+	tui_constellation_culture->setCurrent(core->ConstellationCulture);
+	tui_constellation_lines->setValue(core->FlagConstellationDrawing);
+	tui_constellation_art->setValue(core->FlagConstellationArt);
+
+	// 4. Stars
+	tui_stars_show->setValue(core->FlagStars);
+	tui_star_labelmaxmag->setValue(core->MaxMagStarName);
+	tui_stars_twinkle->setValue(core->FlagStarTwinkle);
+
+	// 5. Labels
+	tui_label_stars->setValue(core->FlagStarName);
+	tui_label_constellations->setValue(core->FlagConstellationName);
+	tui_label_nebulas->setValue(core->FlagNebulaName);
+	tui_label_nebulas->setValue(core->FlagNebulaCircle);
+	tui_label_planets->setValue(core->FlagPlanetsHints);
+	tui_label_timeinfo->setValue(core->FlagShowTuiDateTime);
+	tui_label_timeinfo->setValue(core->FlagShowTuiShortInfo);
+
+	// 6. Reference points
+	tui_refpoints_cardinalpoints->setValue(core->FlagCardinalPoints);
+	tui_refpoints_ecliptic->setValue(core->FlagEclipticLine);
+	tui_refpoints_equator->setValue(core->FlagEquatorLine);
+	tui_refpoints_equatorialgrid->setValue(core->FlagEquatorialGrid);
+	tui_refpoints_azimutalgrid->setValue(core->FlagAzimutalGrid);
+
+	// 7. Effect
+	tui_effect_atmosphere->setValue(core->FlagAtmosphere);
+}
 
 // Set time zone function. TODO this is not very correct it seems
 void stel_ui::tui_cb_settimezone(void)
@@ -299,6 +350,7 @@ void stel_ui::tui_cb_admin_save_default(void)
 void stel_ui::tui_cb_admin_set_locale(void)
 {
 	//	TODO
+	// Use setlocale() from clocal header
 }
 
 // Launch script for internet update

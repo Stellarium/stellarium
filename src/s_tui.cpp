@@ -590,5 +590,14 @@ bool ActionConfirm_item::onKey(SDLKey k, S_TUI_VALUE v)
 			return true;
 		}
 	}
-	return false;
+	if (v==S_TUI_PRESSED && ( k==SDLK_ESCAPE || k==SDLK_LEFT) )
+	{
+		if (isConfirming)
+		{
+			isConfirming = false;
+			return true;
+		}
+		return false;
+	}
+	return true;
 }
