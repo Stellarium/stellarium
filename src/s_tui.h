@@ -305,6 +305,11 @@ namespace s_tui
 		virtual bool onKey(SDLKey k, S_TUI_VALUE v)
 		{
 			if (current==items.end() || v==S_TUI_RELEASED) return false;
+			if (k==SDLK_RETURN && !onTriggerCallback.empty())
+			{
+				onTriggerCallback();
+				return true;
+			}
 			if (k==SDLK_UP)
 			{
 				if (current!=items.begin()) --current;
@@ -340,52 +345,15 @@ namespace s_tui
 			else current = items.find(i); return true;
 		}
 		string getLabel(void) const {return label;}
+		virtual void set_OnTriggerCallback(const callback<void>& c) {onTriggerCallback = c;}
     protected:
 		T emptyT;
 		multiset<T> items;
 		typename multiset<T>::iterator current;
 		string label;
+		callback<void> onTriggerCallback;
     };
 
-	// Same as MultiSet_item, but with two states
-	template <class T>
-	class MultiSet_item_active : public MultiSet_item<T>
-    {
-	public:
-		MultiSet_item_active(const string& _label = string()) : MultiSet_item<T>(_label), isEditing(false) {;}
-		virtual bool onKey(SDLKey k, S_TUI_VALUE v)
-		{
-			if (!isEditing)
-			{
-				if (k==SDLK_RIGHT || k==SDLK_RETURN)
-				{
-					isEditing = true;
-					return true;
-				}
-				else
-				{
-					return false;
-				}
-			}
-			if (isEditing && !MultiSet_item<T>::onKey(k, v) && (k==SDLK_LEFT || k==SDLK_ESCAPE))
-			{
-				isEditing = false;
-				return false;
-			}
-			return false;
-		}
-
-		virtual string getString(void)
-		{
-			if (current==items.end()) return label;
-			ostringstream os;
-			os<< ((active && !isEditing) ? start_active : "") << label << ((active && !isEditing) ? stop_active : "") <<
-				((active && isEditing) ? start_active : "") << *current << ((active && isEditing) ? stop_active : "");
-			return os.str();
-		}
-	private:
-		bool isEditing;
-	};
 
 }; // namespace s_tui
 
