@@ -39440,6 +39440,6 @@ void get_lunar_geo_posn_prec(double JD, double * X, double * Y, double * Z, doub
 /* Same with lowest precision by default */
 void get_lunar_geo_posn(double JD, double * X, double * Y, double * Z)
 {
-	get_lunar_geo_posn_prec(JD, X, Y, Z, 0.001);
+	get_lunar_geo_posn_prec(JD, X, Y, Z, 0.0001);
 }
 

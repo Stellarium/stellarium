@@ -27,16 +27,22 @@ static s_texture * mercury_map;
 static s_texture * venus_map;
 static s_texture * earth_map;
 static s_texture * moon_map;
+static s_texture * mars_map;
+static s_texture * jupiter_map;
+static s_texture * saturn_map;
 
 // Planet small halo texture
 static s_texture * small_halo;
 static s_texture * sun_halo;
 
-planet * Sun;             	  		  // Sun, center of the solar system
-planet * Moon;             	  		  // Moon, around earth
-planet * Earth;
+planet * Sun;		// Sun, center of the solar system
 planet * Mercury;
 planet * Venus;
+planet * Mars;
+planet * Earth;
+planet * Moon;		// Moon, around earth
+planet * Jupiter;
+planet * Saturn;
 
  // Create and init the solar system
 void InitSolarSystem(void)
@@ -57,7 +63,10 @@ void InitSolarSystem(void)
     moon_map = new s_texture("lune",TEX_LOAD_TYPE_PNG_SOLID);
     mercury_map = new s_texture("mercury",TEX_LOAD_TYPE_PNG_SOLID);
     venus_map = new s_texture("venus",TEX_LOAD_TYPE_PNG_SOLID);
-    
+    jupiter_map = new s_texture("jupiter",TEX_LOAD_TYPE_PNG_SOLID);
+    mars_map = new s_texture("mars",TEX_LOAD_TYPE_PNG_SOLID);
+    saturn_map = new s_texture("saturn",TEX_LOAD_TYPE_PNG_SOLID);
+
 	small_halo = new s_texture("star16x16");
 	sun_halo = new s_texture("halo");
 
@@ -66,14 +75,25 @@ void InitSolarSystem(void)
 	Earth = new planet("Earth", NO_HALO, 6378.1/UA, vec3_t(1.,1.,1.), earth_map, NULL, get_earth_helio_coords);
 	Mercury = new planet("Mercury", NO_HALO, 2439.7/UA, vec3_t(1.,1.,1.), mercury_map, NULL, get_mercury_helio_coords);
 	Venus = new planet("Venus", NO_HALO, 6052./UA, vec3_t(1.,1.,1.), venus_map, NULL, get_venus_helio_coords);
-	
-    Venus->set_rotation_elements(5832.479839/24., 137.45, J2000, -178.78*M_PI/180., 76.681*M_PI/180., 0);
+	Mars = new planet("Mars", NO_HALO, 3394./UA, vec3_t(1.,1.,1.), mars_map, NULL, get_mars_helio_coords);
+	Jupiter = new planet("Jupiter", NO_HALO, 71398./UA, vec3_t(1.,1.,1.), jupiter_map, NULL, get_jupiter_helio_coords);
+	Saturn = new planet("Saturn", NO_HALO, 60330./UA, vec3_t(1.,1.,1.), saturn_map, NULL, get_saturn_helio_coords);
+
+
     Mercury->set_rotation_elements(1407.509405/24., 291.20, J2000, -7.01*M_PI/180., 48.33167*M_PI/180., 0);
+    Venus->set_rotation_elements(5832.479839/24., 137.45, J2000, -178.78*M_PI/180., 76.681*M_PI/180., 0);
     Earth->set_rotation_elements(23.9344694/24., 280.5, J2000, 23.438855*M_PI/180., -11.2606423*M_PI/180., 0);
 	Moon->set_rotation_elements((27.321661*24)/24., 38, J2000, 23.45*M_PI/180., 0., 0);
+    Mars->set_rotation_elements(24.622962/24., 136.005, J2000, -26.72*M_PI/180., 82.91*M_PI/180., 0);
+    Jupiter->set_rotation_elements(9.927953/24., 16, J2000, -2.222461*M_PI/180., -22.203*M_PI/180., 0);
+    Saturn->set_rotation_elements(10.65622/24., 358.922, J2000, -2.222461*M_PI/180., 169.530*M_PI/180., 0);
+
 
 	Sun->addSatellite(Mercury);
 	Sun->addSatellite(Venus);
 	Sun->addSatellite(Earth);
 	Earth->addSatellite(Moon);
+	Sun->addSatellite(Mars);
+	Sun->addSatellite(Jupiter);
+	Sun->addSatellite(Saturn);
 }
