@@ -163,6 +163,10 @@ public:
 	virtual void sHalfSphere(GLdouble radius, GLint slices, GLint stacks,
 		const Mat4d& mat, int orient_inside = 0) const;
 
+	// Draw a disk with a special texturing mode having texture center at center
+	virtual void sDisk(GLdouble radius, GLint slices, GLint stacks,
+		const Mat4d& mat, int orient_inside = 0) const;	
+		
 	// Draw a fisheye texture in a sphere
 	virtual void sSphere_map(GLdouble radius, GLint slices, GLint stacks,
 		const Mat4d& mat, double texture_fov = 2.*M_PI, int orient_inside = 0) const;
