@@ -101,7 +101,7 @@ void Nebula_mgr::draw(int names_ON, Projector* prj, const navigator * nav, tone_
 		if ( !prj->project_earth_equ_check((*iter)->XYZ,(*iter)->XY) ) continue;
 
 		prj->set_orthographic_projection();
-		if ((*iter)->get_on_screen_size(prj, nav)>5) (*iter)->draw_tex(prj, eye, bright_nebulae);
+		if ((*iter)->get_on_screen_size(prj, nav)>5) (*iter)->draw_tex(prj, eye, bright_nebulae && (*iter)->get_on_screen_size(prj, nav)>15 );
     	if (names_ON && (*iter)->mag <= max_mag_name)
     	{
 			(*iter)->draw_name(prj);
