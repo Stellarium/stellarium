@@ -116,6 +116,7 @@ void Constellation_mgr::load(const string& fileName, const string& artfileName, 
 {
 	printf("Loading constellation data...\n");
 
+	JustLoaded=1;
 
 	FILE * fic = fopen(fileName.c_str(),"r");
     if (!fic)
@@ -176,7 +177,6 @@ void Constellation_mgr::load(const string& fileName, const string& artfileName, 
 	
 	int current=0;
     glDisable(GL_BLEND);
-    glLineWidth(2);
 	
     while(!feof(fic))
     {
@@ -195,10 +195,23 @@ void Constellation_mgr::load(const string& fileName, const string& artfileName, 
 		}
 
 		// Draw loading bar
-		glClear(GL_COLOR_BUFFER_BIT);
-		sprintf(tmpstr, "Loading constellations: %d/%d", current, total);
-		glColor3f(1,1,1);
+		sprintf(tmpstr, "Loading Constellation Art: %d/%d", current, total);
+
 		glDisable(GL_TEXTURE_2D);
+		
+		// black out background of text for redraws (so can keep sky unaltered)
+		glColor3f(0,0,0);
+		glBegin(GL_TRIANGLE_STRIP);
+			glTexCoord2i(1,0);              // Bottom Right
+			glVertex3f(barx+302,bary+36, 0.0f);
+			glTexCoord2i(0,0);              // Bottom Left
+			glVertex3f(barx-2,bary+36, 0.0f);
+			glTexCoord2i(1,1);              // Top Right
+			glVertex3f(barx+302, bary+22,0.0f);
+			glTexCoord2i(0,1);              // Top Left
+			glVertex3f(barx-2,bary+22,0.0f);
+		glEnd ();
+		glColor3f(1,1,1);
 		glBegin(GL_TRIANGLE_STRIP);
 			glTexCoord2i(1,0);              // Bottom Right
 			glVertex3f(barx+302,bary+22, 0.0f);
@@ -282,16 +295,16 @@ void Constellation_mgr::load(const string& fileName, const string& artfileName, 
 // Draw all the constellations in the vector
 void Constellation_mgr::draw(Projector* prj) const
 {
-	glDisable(GL_TEXTURE_2D);
+    glDisable(GL_TEXTURE_2D);
     glDisable(GL_BLEND);
     glColor3fv(lines_color);
-	prj->set_orthographic_projection();	// set 2D coordinate
+    prj->set_orthographic_projection();	// set 2D coordinate
     vector<Constellation *>::const_iterator iter;
     for(iter=asterisms.begin();iter!=asterisms.end();++iter)
     {
-		(*iter)->draw_optim(prj);
+      (*iter)->draw_optim(prj);
     }
-	prj->reset_perspective_projection();
+    prj->reset_perspective_projection();
 }
 
 // Draw one constellation of internationnal name abr
@@ -305,15 +318,19 @@ void Constellation_mgr::draw(Projector* prj, char abr[4]) const
     (*iter)->draw(prj, lines_color);
 }
 
-void Constellation_mgr::draw_art(Projector* prj, int delta_time) const
+void Constellation_mgr::draw_art(Projector* prj, int delta_time)
 {
 	glBlendFunc(GL_ONE, GL_ONE);
 	glEnable(GL_TEXTURE_2D);
 	glEnable(GL_BLEND);
 	glEnable(GL_CULL_FACE);
 
-	// for fading in art
-	//    glColor3f(1,1,1);
+	if(JustLoaded) {
+	  // so that newly loaded art will fade in, even if it took
+	  // longer than fade time to load the textures
+	  JustLoaded=0;
+	  delta_time = 1;
+	}
 
 	prj->set_orthographic_projection();
     vector<Constellation *>::const_iterator iter;
