@@ -9,6 +9,7 @@ Use double precision for every planet, orbit and navigation calculation.
 Centralized all the navigation/time variables and operations in a new class "navigator" instead of the old non-object old navigation module.
 The position of the observer on the earth is now taken into account in every calculation : the precision is dramaticaly improved, sun eclipses works etc...
 Changed the command line handling : changes submitted by Cedric Delfosse.
+Simplified light operation for planets.
 Fixed many many bugs.
 
 0.5.2 [29/04/2003]

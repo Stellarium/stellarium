@@ -86,7 +86,7 @@ protected:
 	float axis_rotation;					// Rotation angle of the planet on it's axis
     s_texture * planetTexture;				// Planet map texture
 	s_texture * haloTexture;				// Little halo texture
-	void (*coord_func)(double JD, double *, double *, double *); // The function called for the calculation of the rect heliocentric position at time JD.
+	void (*coord_func)(double JD, double *, double *, double *); // The function called for the calculation of the equatorial rect heliocentric position at time JD.
 	planet * parent;
 	list<planet *> satellites;				// satellites of the planet
 };
