@@ -1,5 +1,4 @@
 \documentclass[11pt,oneside] {article}
-\usepackage[pdftex]{graphicx}
 \usepackage{float}
 \usepackage{html}
 
@@ -21,7 +20,7 @@ This document is aimed at giving a global vision on the organization of the prog
 \section{Introduction}
 Stellarium is almost totally designed in an object oriented way. Its source code is thus quite easy to understand and is well subdivided.
 The interface with the OS is done using the SDL library which has proven to be powerfull, truly multiplateform and fast.
-Project managment is done using sourceforge.net services for cvs hosting, bug tracking, forums etc.. Globally, everything usefull for the project is available at the main project page \htmladdnormallink{http://sourceforge.net/projects/stellarium/}.
+Project managment is done using sourceforge.net services for cvs hosting, bug tracking, forums etc.. Globally, everything usefull for the project is available at the main project page \htmladdnormallink{http://sourceforge.net/projects/stellarium/}{http://sourceforge.net/projects/stellarium/}.
 
 \section{I want to contribute in developing stellarium. How to start?}
 First of all, as stellarium is mainly programmed in C++ you will need some knowledge in object oriented programming.
@@ -30,7 +29,7 @@ You will then need to use the GNU development tools and utilities that are requi
 Stellarium source code is stored on sourceforge.net server using cvs (concurent version system). This enable everybody to download the last changes in the sources. The cvs version of stellarium is usually on development and might not work at all.
 
 
-Here are the first steps to start working on the sourcecode : (see detailed instructions from \htmladdnormallink{http://sourceforge.net/cvs/?group\_id=48857})
+Here are the first steps to start working on the sourcecode : (see detailed instructions from \htmladdnormallink{sourceforge cvs page}{http://sourceforge.net/cvs/?group\_id=48857})
 In the stellarium cvs repository, there is only one module called "stellarium"
 containing all the project files. So, to get the files as anonymous developer, just type (as explained) :
 
@@ -54,9 +53,15 @@ Here you are!
 You can now have a look at the {\tt src/} directory where you will find the source files described below.
 Edit whatever you want in it and when your new great feature is done you will need to share it with the community of stellarium developers.
 
-At this point, an official developer just have to type {\tt cvs commit} to update the repository version. But as you are not an official developer (yet!) you will need to create a patch file which will contain all the changes you did on the source code and post it on the sourceforge website in the patches section.
+At this point, an official developer just have to type {\tt cvs commit} to update the repository version. But as you are not an official developer (yet!) you will need to create a patch file which will contain all the changes you did on the source code.
 
-The project administrator will then have a look at it and decide whether the patch is accepted or rejected for integration in the project.
+{\tt cd directory-you-want-to-diff}
+
+{\tt cvs -z3 diff -u > mypatch.diff}
+
+You can now submit mypatch.diff on the sourceforge stellarium page in the \htmladdnormallink{patches section}{http://sourceforge.net/tracker/?group_id=48857&atid=454375} with a clear comment on what is the patch doing.
+
+The project administrator will then have a look at it and decide whether the patch is accepted or rejected for integration into stellarium.
 
 \section{Main files description}
 All the files starting with a s\_ are "theoricaly" independent of the main program. They manage textures, font and user interface and could be re-used for any other openGL application.
