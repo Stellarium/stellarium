@@ -110,8 +110,9 @@ void stel_core::init(void)
 
 	nebulas   = new Nebula_mgr(NebulaLabelColor, NebulaCircleColor);
 
+	// Create and init the solar system
+	ssystem = new SolarSystem(DataDir, SkyLocale, "spacefont.txt", PlanetNamesColor, PlanetOrbitsColor );
 
-	ssystem = new SolarSystem();
 	atmosphere = new stel_atmosphere();
 	tone_converter = new tone_reproductor();
 
@@ -130,10 +131,6 @@ void stel_core::init(void)
 
 	// Load constellations
 	asterisms = new Constellation_mgr(DataDir, SkyCulture, SkyLocale, hip_stars, "spacefont.txt", ConstLinesColor, ConstNamesColor);
-
-
-	// Create and init the solar system
-	ssystem->init(DataDir, SkyLocale, "spacefont.txt", PlanetNamesColor, PlanetOrbitsColor );
 
 	landscape = Landscape::create_from_file(DataDir + "landscapes.ini", observatory->get_landscape_name());
 

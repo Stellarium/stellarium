@@ -144,13 +144,6 @@ void stel_ui::init_tui(void)
 	tui_menu_general->addComponent(tui_general_sky_locale);
 
 
-
-	tui_general_manual_zoom = new s_tui::Boolean_item(false, "3.3 Manual zoom: ", "Yes","No");
-	tui_general_manual_zoom->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb1));
-	tui_menu_general->addComponent(tui_general_manual_zoom);
-
-
-
 	// 4. Stars
 	tui_stars_show = new s_tui::Boolean_item(false, "4.1 Show: ", "Yes","No");
 	tui_stars_show->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb1));
@@ -169,9 +162,17 @@ void stel_ui::init_tui(void)
 	// 5. Effects
 	tui_effect_landscape = new s_tui::MultiSet_item<string>("5.1 Landscape: ");
 	tui_effect_landscape->addItemList(Landscape::get_file_content(core->DataDir + "landscapes.ini"));
-
 	tui_effect_landscape->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb_tui_effect_change_landscape));
 	tui_menu_effects->addComponent(tui_effect_landscape);
+
+	tui_effect_zoom_duration = new s_tui::Decimal_item(1, 10, 2, "5.2 Zoom duration: ");
+	tui_effect_zoom_duration->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb1));
+	tui_menu_effects->addComponent(tui_effect_zoom_duration);
+
+	tui_effect_manual_zoom = new s_tui::Boolean_item(false, "5.3 Manual zoom: ", "Yes","No");
+	tui_effect_manual_zoom->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb1));
+	tui_menu_effects->addComponent(tui_effect_manual_zoom);
+
 
 	// 6. Administration
 	tui_admin_loaddefault = new s_tui::ActionConfirm_item("6.1 Load Default Configuration: ");
@@ -238,14 +239,16 @@ void stel_ui::tui_cb1(void)
 	core->PresetSkyTime 		= tui_time_presetskytime->getJDay();
 	core->StartupTimeMode 		= tui_time_startuptime->getCurrent();
 
-	// 3. general
-	core->FlagManualZoom 		= tui_general_manual_zoom->getValue();
-
 	// 4. Stars
 	core->FlagStars 			= tui_stars_show->getValue();
 	core->MaxMagStarName 		= tui_star_labelmaxmag->getValue();
 	core->StarTwinkleAmount		= tui_stars_twinkle->getValue();
 	core->StarMagScale			= tui_star_magscale->getValue();
+
+	// 5. effects
+	core->auto_move_duration	= tui_effect_zoom_duration->getValue();
+	core->FlagManualZoom 		= tui_effect_manual_zoom->getValue();
+
 
 }
 
@@ -265,9 +268,8 @@ void stel_ui::tui_update_widgets(void)
 	tui_time_displayformat->setCurrent(core->observatory->get_time_format_str());
 
 	// 3. general
-	tui_general_sky_culture->setValue(core->SkyCulture);  // could be out of sync...?
-	tui_general_sky_locale->setValue(core->SkyLocale);  // could be out of sync...?
-	tui_general_manual_zoom->setValue(core->FlagManualZoom);
+	tui_general_sky_culture->setValue(core->SkyCulture);
+	tui_general_sky_locale->setValue(core->SkyLocale);
 
 	// 4. Stars
 	tui_stars_show->setValue(core->FlagStars);
@@ -277,6 +279,8 @@ void stel_ui::tui_update_widgets(void)
 
 	// 5. effects
 	tui_effect_landscape->setValue(core->observatory->get_landscape_name());
+	tui_effect_zoom_duration->setValue(core->auto_move_duration);
+	tui_effect_manual_zoom->setValue(core->FlagManualZoom);
 
 	// 6. admin
 	tui_admin_voffset->setValue(core->verticalOffset);
