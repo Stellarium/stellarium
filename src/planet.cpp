@@ -25,6 +25,7 @@
 s_font* planet::planet_name_font = NULL;
 float planet::star_scale = 1.f;
 bool planet::gravity_label = false;
+Vec3f planet::label_color = Vec3f(.4,.4,.8);
 
 rotation_elements::rotation_elements() : period(1.), offset(0.), epoch(J2000),
 		obliquity(0.), ascendingNode(0.), precessionRate(0.)
@@ -35,8 +36,7 @@ planet::planet(const string& _name, int _flagHalo, int _flag_lighting, double _r
 	float _albedo, const string& tex_map_name, const string& tex_halo_name, pos_func_type _coord_func) :
 		name(_name), flagHalo(_flagHalo), flag_lighting(_flag_lighting), radius(_radius), color(_color),
 		albedo(_albedo), axis_rotation(0.),	tex_map(NULL), tex_halo(NULL), tex_big_halo(NULL), rings(NULL),
-		sphere_scale(1.f), lastJD(J2000), deltaJD(JD_SECOND), coord_func(_coord_func), parent(NULL),
-		label_color(0.5f,0.5f,0.7f)
+		sphere_scale(1.f), lastJD(J2000), deltaJD(JD_SECOND), coord_func(_coord_func), parent(NULL)
 {
 	ecliptic_pos=Vec3d(0.,0.,0.);
 	mat_local_to_parent = Mat4d::identity();

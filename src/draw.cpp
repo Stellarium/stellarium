@@ -22,13 +22,23 @@
 #include "stel_utility.h"
 
 // rms added color as parameter
-SkyGrid::SkyGrid(SKY_GRID_TYPE grid_type, Vec3f grid_color, unsigned int _nb_meridian, unsigned int _nb_parallel, double _radius,
+SkyGrid::SkyGrid(SKY_GRID_TYPE grid_type, Vec3f grid_color, const string& font_file, const string& tex_file, unsigned int _nb_meridian, unsigned int _nb_parallel, double _radius,
 	unsigned int _nb_alt_segment, unsigned int _nb_azi_segment) :
 	nb_meridian(_nb_meridian), nb_parallel(_nb_parallel), 	radius(_radius),
 	nb_alt_segment(_nb_alt_segment), nb_azi_segment(_nb_azi_segment)
 {
+
+	font = new s_font(12, tex_file, font_file);
+	if (!font)
+	{
+		printf("Can't create skygrid font\n");
+		exit(-1);
+	}
+
+
 	transparent_top = true;
 	color = grid_color; // rms Vec3f(0.2,0.2,0.2);
+	gtype = grid_type;
 	switch (grid_type)
 	{
 		case ALTAZIMUTAL : proj_func = &Projector::project_local; break;
@@ -70,6 +80,9 @@ SkyGrid::~SkyGrid()
 		delete alt_points[nm];
 	}
 	delete alt_points;
+	if (font) delete font;
+	font = NULL;
+
 }
 
 void SkyGrid::draw(const Projector* prj) const
@@ -102,17 +115,81 @@ void SkyGrid::draw(const Projector* prj) const
 			}
 
 			glDisable(GL_BLEND);
+
 			glColor3fv(color);
+
 			for (unsigned int i=1;i<nb_alt_segment-1;++i)
 			{
 				if ((prj->*proj_func)(alt_points[nm][i], pt1) &&
 					(prj->*proj_func)(alt_points[nm][i+1], pt2) )
 				{
-					glBegin(GL_LINES);
-						glVertex2f(pt1[0],pt1[1]);
-						glVertex2f(pt2[0],pt2[1]);
-        			glEnd();
+				  
+
+				  glBegin(GL_LINES);
+				  glVertex2f(pt1[0],pt1[1]);
+				  glVertex2f(pt2[0],pt2[1]);
+				  glEnd();
+				  
+				  
+				  static char str[255];	// TODO use c++ string 
+				  
+				  glEnable(GL_TEXTURE_2D);
+
+				  double angle;
+				  double d;
+
+				  // TODO: allow for other numbers of meridians and parallels without
+				  // screwing up labels?
+				  if( gtype == EQUATORIAL && i == 8 ) {
+
+				    // draw labels along equator for RA
+				    d = sqrt( (pt1[0]-pt2[0])*(pt1[0]-pt2[0]) + (pt1[1]-pt2[1])*(pt1[1]-pt2[1]) );
+				  
+				    angle = acos((pt1[1]-pt2[1])/d);
+				    if( pt1[0] < pt2[0] ) {
+				      angle *= -1;
+				    }
+
+				    sprintf( str, "%dh", nm);
+
+				    prj->set_orthographic_projection();
+				  
+				    glTranslatef(pt2[0],pt2[1],0);
+				    glRotatef(90+angle*180./M_PI,0,0,-1);
+				    font->print(2,-2,str);
+
+				    prj->reset_perspective_projection();
+
+
+				  } else if (nm % 8 == 0 && i != 16) {
+					  
+				    d = sqrt( (pt1[0]-pt2[0])*(pt1[0]-pt2[0]) + (pt1[1]-pt2[1])*(pt1[1]-pt2[1]) );
+				  
+				    angle = acos((pt1[1]-pt2[1])/d);
+				    if( pt1[0] < pt2[0] ) {
+				      angle *= -1;
+				    }
+
+				    sprintf( str, "%d", (i-8)*10);
+					    
+				    if( gtype == ALTAZIMUTAL || 
+					(gtype == EQUATORIAL && i > 8)) {
+				      angle += M_PI;
+				    }
+
+				    prj->set_orthographic_projection();
+
+				    glTranslatef(pt2[0],pt2[1],0);
+				    glRotatef(angle*180./M_PI,0,0,-1);
+				    font->print(2,-2,str);
+				    prj->reset_perspective_projection();
+
+				  }
+				  glDisable(GL_TEXTURE_2D);
+				  
 				}
+
+
 			}
 
 			if ((prj->*proj_func)(alt_points[nm][nb_alt_segment-1], pt1) &&

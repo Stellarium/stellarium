@@ -36,6 +36,7 @@ navigator::navigator(Observator* obs) : flag_traking(0), flag_lock_equ_pos(0), f
 	}
 	local_vision=Vec3d(1.,0.,0.);
 	equ_vision=Vec3d(1.,0.,0.);
+	viewing_mode = VIEW_HORIZON;  // default
 }
 
 navigator::~navigator()
@@ -107,7 +108,10 @@ void navigator::update_vision_vector(int delta_time, stel_object* selected)
 		{
 			equ_vision=selected->get_earth_equ_pos(this);
 			// Recalc local vision vector
+			
+			// rms - work here on stopping horizon leveling rotation...
 			local_vision=earth_equ_to_local(equ_vision);
+			
 		}
 		else
 		{
@@ -203,20 +207,38 @@ void navigator::update_transform_matrices(Vec3d earth_ecliptic_pos)
 // Update the modelview matrices
 void navigator::update_model_view_mat(void)
 {
-	Vec3d f(local_vision);
-	f.normalize();
-	Vec3d s(f[1],-f[0],0.);
-	Vec3d u(s^f);
-	s.normalize();
-	u.normalize();
 
-	mat_local_to_eye.set(s[0],u[0],-f[0],0.,
-				s[1],u[1],-f[1],0.,
-				s[2],u[2],-f[2],0.,
-				0.,0.,0.,1.);
-				
-	mat_earth_equ_to_eye = mat_local_to_eye*mat_earth_equ_to_local;
-	mat_helio_to_eye = mat_local_to_eye*mat_helio_to_local;
+  Vec3d f;
+
+  if( viewing_mode == VIEW_EQUATOR) {
+    // view will use equatorial coordinates, so that north is always up
+    f = local_to_earth_equ(local_vision);
+  } else {
+    // view will correct for horizon (always down)
+    f = local_vision;
+  }
+
+  f.normalize();
+  Vec3d s(f[1],-f[0],0.);
+  Vec3d u(s^f);
+  s.normalize();
+  u.normalize();
+
+  if( viewing_mode == VIEW_EQUATOR) {
+    // convert everything back to local coord
+    f = earth_equ_to_local( f );
+    s = earth_equ_to_local( s );
+    u = earth_equ_to_local( u );
+  }
+
+  mat_local_to_eye.set(s[0],u[0],-f[0],0.,
+		       s[1],u[1],-f[1],0.,
+		       s[2],u[2],-f[2],0.,
+		       0.,0.,0.,1.);
+
+  mat_earth_equ_to_eye = mat_local_to_eye*mat_earth_equ_to_local;
+  mat_helio_to_eye = mat_local_to_eye*mat_helio_to_local;
+
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -248,4 +270,16 @@ void navigator::move_to(const Vec3d& _aim, float move_duration, bool _local_pos,
     move.coef=0.;
 	move.local_pos = _local_pos;
     flag_auto_move = true;
+}
+
+
+////////////////////////////////////////////////////////////////////////////////
+// Set type of viewing mode (align with horizon or equatorial coordinates)
+void navigator::set_viewing_mode(VIEWING_MODE_TYPE view_mode)
+{
+  viewing_mode = view_mode;
+
+  // TODO: include some nice smoothing function trigger here to rotate between
+  // the two modes 
+
 }

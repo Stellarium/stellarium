@@ -35,7 +35,7 @@ public:
     virtual ~SolarSystem();
 
 	// Init and load the solar system data from the file "planetfile".
-	void init(const string& font_fileName, const string& planetfile);
+	void init(const string& font_fileName, const string& planetfile, Vec3f label_color);
 
 	// Compute the position for every elements of the solar system.
 	void compute_positions(double date);
@@ -55,9 +55,6 @@ public:
 	planet* get_sun(void) {return sun;}
 	planet* get_earth(void) {return earth;}
 	planet* get_moon(void) {return moon;}
-
-	// Set the font color
-	void set_planet_font_color(const Vec3f& c);
 
 private:
 	planet* sun;

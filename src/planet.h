@@ -80,7 +80,7 @@ public:
 	virtual double get_satellites_fov(const navigator * nav) const;
 	virtual float get_mag(const navigator * nav) const {return compute_magnitude(nav);}
 
-	void setLabelColor(const Vec3f& v) {label_color = v;}
+	//	void setLabelColor(const Vec3f& v) {label_color = v;}
 
 	// Compute the position in the parent planet coordinate system
 	void compute_position(double date);
@@ -138,6 +138,8 @@ public:
 	static void set_font(s_font* f) {planet_name_font = f;}
 	static void set_star_scale(float s) {star_scale = s;}
 	static void set_gravity_label_flag(bool gl) {gravity_label = gl;}
+	static void set_label_color(const Vec3f& lc) {label_color = lc;}
+
 protected:
 	// Return the radius of a circle containing the object on screen
 	float get_on_screen_size(const Projector* prj, const navigator * nav);
@@ -196,8 +198,7 @@ protected:
 	static s_font* planet_name_font;// Font for names
 	static float star_scale;
 	static bool gravity_label;
-
-	Vec3f label_color;
+	static Vec3f label_color;
 };
 
 #endif // _PLANET_H_
