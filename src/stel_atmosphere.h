@@ -28,6 +28,7 @@
 #include "skylight.h"
 #include "vecmath.h"
 #include "navigator.h"
+#include "tone_reproductor.h"
 
 using namespace std;
 
@@ -36,7 +37,7 @@ class stel_atmosphere
 public:
     stel_atmosphere();
     virtual ~stel_atmosphere();
-	void compute_color(navigator *);
+	void compute_color(navigator *, tone_reproductor *);
 	void draw();
 private:
 	skylight sky;

@@ -25,7 +25,6 @@
 #include "stellarium.h"
 #include "stel_utility.h"
 #include "stel_atmosphere.h"
-#inlcude "tone_reproductor.h"
 
 stel_atmosphere::stel_atmosphere() : sky_resolution(64), tab_sky(NULL)
 {
@@ -41,7 +40,7 @@ stel_atmosphere::~stel_atmosphere()
 {
 }
 
-void stel_atmosphere::compute_color(navigator * nav)
+void stel_atmosphere::compute_color(navigator * nav, tone_reproductor * eye)
 {
 	static    GLdouble M[16]; 
 	static    GLdouble P[16];
@@ -93,8 +92,8 @@ void stel_atmosphere::compute_color(navigator * nav)
 			b.zenith_angle = M_PI_2-asinf(point[2]);
 			b.dist_sun = acosf(point.dot(sunPos));
 			if (b.dist_sun<0) b.dist_sun=-b.dist_sun;
-			sky.get_RGB_value(&b);
-
+			sky.get_xyY_value(&b);
+			eye->xyY_to_RGB(b.color);
 			tab_sky[x][y].set(b.color[0],b.color[1],b.color[2]);
 		}
 	}

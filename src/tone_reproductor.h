@@ -39,7 +39,7 @@ public:
 	// Set the eye adaptation luminance for the display and precompute what can be
 	// Usual luminance range is 1-100 cd/m^2 for a CRT screen
 	// default value = 50 cd/m^2
-	set_display_adaptation_luminance(float display_adaptation_luminance);
+	void set_display_adaptation_luminance(float display_adaptation_luminance);
 
 	// Set the eye adaptation luminance for the world and precompute what can be
 	// default value = 100000 cd/m^2
@@ -47,17 +47,17 @@ public:
 	// Moon Light      : 0.1    cd/m^2
 	// Indoor Lighting : 100    cd/m^2
 	// Sun Light       : 100000 cd/m^2
-	set_world_adaptation_luminance(float world_adaptation_luminance);
+	void set_world_adaptation_luminance(float world_adaptation_luminance);
 
 	// Set the maximum display luminance : default value = 100 cd/m^2
 	// This value is used to scale the RGB range
-	set_max_display_luminance(float _MaxdL) {MaxdL = MaxdL};
+	void set_max_display_luminance(float _MaxdL) {MaxdL = MaxdL;}
 
 	// Return adapted luminance from world to display
 	inline float adapt_luminance(float world_luminance);
 
 	// Convert from xyY color system to RGB
-	void xyY_to_RGB(float[3]);
+	void xyY_to_RGB(float*);
 
 private:
 	float Lda;		// Display luminance adaptation
@@ -68,7 +68,7 @@ private:
 	float beta_da;
 	float alpha_wa;
 	float beta_wa;
-	float alpha_aw_over_alpha_ad;
+	float alpha_wa_over_alpha_da;
 	float term2;
 };
 
