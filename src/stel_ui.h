@@ -136,7 +136,7 @@ private:
 
 	// 2. Time & Date
 	s_tui::MultiSet_item<string>* tui_time_settmz;
-	s_tui::Time_item* tui_time_skytime;
+	s_tui::Time_item2* tui_time_skytime;
 	s_tui::Time_item* tui_time_presetskytime;
 	s_tui::Time_item* tui_time_actual;
 	s_tui::MultiSet_item<string>* tui_time_startuptime;

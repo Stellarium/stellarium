@@ -104,7 +104,7 @@ void stel_ui::init_tui(void)
 	// 2. Time
 	tui_time_settmz = create_tree_from_time_zone_file(core->DataDir + "zone.tab");
 	tui_time_settmz->set_OnTriggerCallback(callback<void>(this, &stel_ui::tui_cb_settimezone));
-	tui_time_skytime = new s_tui::Time_item("2.2 Sky Time: ");
+	tui_time_skytime = new s_tui::Time_item2("2.2 Sky Time: ");
 	tui_time_skytime->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb1));
 	tui_time_presetskytime = new s_tui::Time_item("2.3 Preset Sky Time: ");
 	tui_time_presetskytime->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb1));
