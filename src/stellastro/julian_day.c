@@ -62,27 +62,6 @@ unsigned int get_day_of_week (const ln_date *date)
     return (int)JD % 7;
 }
 
-// Return the number of hours to add to gmt time to get the local time
-// taking the parameters from system. This takes into account the daylight saving
-// time if there is.
-int get_gmt_shift_from_system(void)
-{
-	time_t rawtime;
-	time(&rawtime);
-
-	// Set the timezones variables from the system
-	tzset();
-
-	struct tm * timeinfo;
-	timeinfo = localtime(&rawtime);
-	char heure[20];
-	heure[0] = 0;
-	strftime(heure, 19, "%z", timeinfo);
-	heure[3] = '\0';
-	return atoi(heure);
-}
-
-
 // Calculate tm struct from julian day
 void get_tm_from_julian(double JD, struct tm * tm_time)
 {
@@ -92,7 +71,7 @@ void get_tm_from_julian(double JD, struct tm * tm_time)
 	tm_time->tm_min = date.minutes;
 	tm_time->tm_hour = date.hours;
 	tm_time->tm_mday = date.days;
-	tm_time->tm_mon = date.months -1;
+	tm_time->tm_mon = date.months - 1;
 	tm_time->tm_year = date.years - 1900;
 	tm_time->tm_isdst = 0;
 }
@@ -166,4 +145,24 @@ void get_ln_date_from_sys(ln_date * date)
 	date->days = ptm->tm_mday;
 	date->months = ptm->tm_mon + 1;
 	date->years = ptm->tm_year + 1900;
+}
+
+
+// Calculate time_t from julian day
+time_t get_time_t_from_julian(double JD)
+{
+	struct tm loctime;
+	ln_date date;
+
+	get_date(JD, &date);
+
+	loctime.tm_sec = date.seconds;
+	loctime.tm_min = date.minutes;
+	loctime.tm_hour = date.hours;
+	loctime.tm_mday =date.days;
+	loctime.tm_mon = date.months -1;
+	loctime.tm_year = date.years - 1900;
+	loctime.tm_isdst = 0;
+
+	return mktime(&loctime);
 }

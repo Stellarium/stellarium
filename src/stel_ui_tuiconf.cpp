@@ -22,7 +22,7 @@
 #include "stel_ui.h"
 #include "stellastro.h"
 #include <iostream>
-
+#include <iomanip>
 
 // Draw simple gravity text ui.
 void stel_ui::draw_gravity_ui(void)
@@ -30,29 +30,35 @@ void stel_ui::draw_gravity_ui(void)
 	// Normal transparency mode
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-    static char str[255];
-	ln_date d;
-
 	int x = core->projection->view_left() + core->projection->viewW()/2;
 	int y = core->projection->view_bottom() + core->projection->viewH()/2;
 	int shift = (int)(M_SQRT2 / 2 * MY_MIN(x,y));
 
 	if (core->FlagShowTuiDateTime)
 	{
-		if (core->FlagUTC_Time) get_date(core->navigation->get_JDay(),&d);
-		else get_date(core->navigation->get_JDay()+core->navigation->get_time_zone()*JD_HOUR,&d);
+		double jd = core->navigation->get_JDay();
+		ostringstream os;
 
-		if (core->FlagUTC_Time) sprintf(str,
-		"%.2d/%.2d/%.4d %.2d:%.2d:%.2d (UTC)",d.days,d.months,d.years,d.hours,d.minutes,(int)d.seconds);
-		else sprintf(str,"%.2d/%.2d/%.4d %.2d:%.2d:%.2d FPS:%4.2f",
-			d.days,d.months,d.years,d.hours,d.minutes,(int)d.seconds, core->fps);
+		if (core->FlagUTC_Time)
+		{
+			os << core->observatory->get_printable_date_UTC(jd) << " " <<
+			core->observatory->get_printable_time_UTC(jd) << " (UTC)";
+		}
+		else
+		{
+			os << core->observatory->get_printable_date_local(jd) << " " <<
+			core->observatory->get_printable_time_local(jd);
+		}
+
+		os << " fov " << setprecision(3) << core->projection->get_fov() << "  FPS " << core->fps;
 
 		glColor3f(0.1,0.9,0.1);
-		core->projection->print_gravity180(spaceFont, x-shift + 10, y-shift + 10, str);
+		core->projection->print_gravity180(spaceFont, x-shift + 10, y-shift + 10, os.str());
 	}
 
 	if (core->selected_object && core->FlagShowTuiShortInfo)
 	{
+	    static char str[255];	// TODO use c++ string for get_short_info_string() func
 		core->selected_object->get_short_info_string(str, core->navigation);
 		if (core->selected_object->get_type()==STEL_OBJECT_NEBULA) glColor3f(0.4f,0.5f,0.8f);
 		if (core->selected_object->get_type()==STEL_OBJECT_PLANET) glColor3f(1.0f,0.3f,0.3f);
@@ -97,8 +103,10 @@ void stel_ui::init_tui(void)
 	tui_menu_location->addComponent(tui_location_altitude);
 
 	// 2. Time
-	tui_time_settmz = new s_tui::Action_item("2.1 Set Time Zone: ");
+	tui_time_settmz = new s_tui::MultiSet_item<string>("2.1 Set Time Zone: ");
 	tui_time_settmz->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb_settimezone));
+	tui_time_settmz->addItem("Paris");
+	tui_time_settmz->addItem("New York");
 	tui_time_skytime = new s_tui::Time_item("2.2 Sky Time: ");
 	tui_time_skytime->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb1));
 	tui_time_presetskytime = new s_tui::Time_item("2.3 Preset Sky Time: ");
@@ -191,7 +199,10 @@ void stel_ui::init_tui(void)
 	tui_admin_loaddefault->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb_admin_load_default));
 	tui_admin_savedefault = new s_tui::ActionConfirm_item("8.2 Save Current Configuration as Default: ");
 	tui_admin_savedefault->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb_admin_save_default));
-	tui_admin_setlocal = new s_tui::Action_item("8.3 Set Locale: ");
+	tui_admin_setlocal = new s_tui::MultiSet_item<string>("8.3 Set Locale: ");
+	tui_admin_setlocal->addItem("fr_FR");
+	tui_admin_setlocal->addItem("en_EN");
+	tui_admin_setlocal->addItem("en_US");
 	tui_admin_setlocal->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb_admin_set_locale));
 	tui_admin_updateme = new s_tui::Action_item("8.4 Update me via Internet: ");
 	tui_admin_updateme->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb_admin_updateme));
@@ -229,15 +240,14 @@ int stel_ui::handle_keys_tui(SDLKey key, s_tui::S_TUI_VALUE state)
 void stel_ui::tui_cb1(void)
 {
 	// 1. Location
-	core->navigation->set_latitude(tui_location_latitude->getValue());
-	core->navigation->set_longitude(tui_location_longitude->getValue());
-	core->navigation->set_altitude(tui_location_altitude->getValue());
+	core->observatory->set_latitude(tui_location_latitude->getValue());
+	core->observatory->set_longitude(tui_location_longitude->getValue());
+	core->observatory->set_altitude(tui_location_altitude->getValue());
 
 	// 2. Date & Time
 	core->navigation->set_JDay(tui_time_skytime->getJDay());
 	core->PresetSkyTime 		= tui_time_presetskytime->getJDay();
 	core->StartupTimeMode 		= tui_time_startuptime->getCurrent();
-	core->TimeDisplayFormat 	= tui_time_displayformat->getCurrent();
 
 	// 3. Constellation
 	core->ConstellationCulture 	= tui_constellation_culture->getCurrent();
@@ -274,15 +284,14 @@ void stel_ui::tui_cb1(void)
 void stel_ui::tui_update_widgets(void)
 {
 	// 1. Location
-	tui_location_latitude->setValue(core->navigation->get_latitude());
-	tui_location_longitude->setValue(core->navigation->get_longitude());
-	tui_location_altitude->setValue(core->navigation->get_altitude());
+	tui_location_latitude->setValue(core->observatory->get_latitude());
+	tui_location_longitude->setValue(core->observatory->get_longitude());
+	tui_location_altitude->setValue(core->observatory->get_altitude());
 
 	// 2. Date & Time
 	tui_time_skytime->setJDay(core->navigation->get_JDay());
 	tui_time_presetskytime->setJDay(core->PresetSkyTime);
 	tui_time_startuptime->setCurrent(core->StartupTimeMode);
-	tui_time_displayformat->setCurrent(core->TimeDisplayFormat);
 
 	// 3. Constellation
 	tui_constellation_culture->setCurrent(core->ConstellationCulture);
@@ -314,41 +323,16 @@ void stel_ui::tui_update_widgets(void)
 	tui_effect_atmosphere->setValue(core->FlagAtmosphere);
 }
 
-// Set time zone function. TODO this is not very correct it seems
+// Launch script to set time zone in the system locales
 void stel_ui::tui_cb_settimezone(void)
 {
-	extern long timezone;
-	extern int daylight;
-	extern char *tzname[2];
-
-	time_t rawtime;
-	time(&rawtime);
-
-	cout << "-------------------------------------" << endl;
-	//cout << "ctime " << ctime(&rawtime);
-
-	tzset();
-
-	cout << "daylight " << daylight << endl;
-	cout << "timezone " << timezone << endl;
-	cout << "Time locale " << setlocale(LC_TIME, "") << endl;
-	cout << "Time zone name " << tzname[0] << "" << tzname[1] << endl;
-
-	struct tm * timeinfo;
-	timeinfo = localtime(&rawtime);
-	cout << "gmttime " << asctime(timeinfo);
-	cout << "daylight in effect " << timeinfo->tm_isdst << endl;
-
-	char heure[255];
-	strftime(heure, 255, "%x %X %z %Z", timeinfo);
-	cout << "heure " << heure << endl;
+	//	TODO
 }
 
-
-// Set actual time function
+// Launch script to set system time
 void stel_ui::tui_cb_actualtime(void)
 {
-	core->navigation->set_JDay(get_julian_from_sys());
+	//	TODO
 }
 
 // 8. Administration actions functions

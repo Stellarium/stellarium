@@ -40,15 +40,6 @@
 
 #include <config.h>
 
-// TODO : remove the useless ones
-#include <cmath>
-#include <cstdlib>
-#include <cstdio>
-
-#include <ctime>
-#include <cstring>
-#include <cctype>
-
 
 #define APP_NAME "Stellarium v "VERSION
 
