@@ -27,7 +27,7 @@ Projector::Projector(int _screenW, int _screenH, double _fov, double _min_fov, d
 {
 	set_fov(_fov);
 	set_screen_size(_screenW,_screenH);
-	viewport_type = UNKNOWN;
+	maximize_viewport();
 }
 
 Projector::~Projector()
@@ -72,6 +72,20 @@ void Projector::set_disk_viewport(void)
 	glStencilOp(GL_KEEP, GL_KEEP, GL_KEEP);
 	glDisable(GL_STENCIL_TEST);
 	viewport_type = DISK;
+}
+
+void Projector::set_viewport_type(VIEWPORT_TYPE t)
+{
+	switch (t)
+	{
+		case SQUARE :
+			set_square_viewport(); break;
+		case DISK :
+			set_disk_viewport(); break;
+		case MAXIMIZED :
+		default :
+			maximize_viewport(); break;
+	}
 }
 
 // Fill with black around the circle

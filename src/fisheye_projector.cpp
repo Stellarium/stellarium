@@ -18,13 +18,14 @@
  */
 
 #include <stdio.h>
+#include <iostream>
 #include "fisheye_projector.h"
 
 
 Fisheye_projector::Fisheye_projector(int _screenW, int _screenH, double _fov,
 	double _min_fov, double _max_fov) : Projector(800, 600, 180.f, _min_fov, _max_fov)
 {
-	change_fov(_fov);
+	set_fov(_fov);
 	set_screen_size(_screenW,_screenH);
 	mat_projection.set(1., 0., 0., 0.,
 							0., 1., 0., 0.,
@@ -34,6 +35,21 @@ Fisheye_projector::Fisheye_projector(int _screenW, int _screenH, double _fov,
 							0., 2., 0., 0.,
 							0., 0., -1, 0.,
 							0., 0., 0., 1.);
+}
+
+Fisheye_projector::Fisheye_projector(const Projector& p) : Projector(800, 600, 180.f, 0.001, 300.)
+{
+	set_fov(p.get_fov());
+	set_screen_size(p.get_screenW(),p.get_screenH());
+	mat_projection.set(1., 0., 0., 0.,
+							0., 1., 0., 0.,
+							0., 0., -1, 0.,
+							0., 0., 0., 1.);
+	mat_projection2.set(2., 0., 0., 0.,
+							0., 2., 0., 0.,
+							0., 0., -1, 0.,
+							0., 0., 0., 1.);
+	set_viewport_type(p.get_viewport_type());
 }
 
 // For a fisheye, ratio is alway = 1

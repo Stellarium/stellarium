@@ -164,7 +164,15 @@ private:
 	void setCurrentTimeFromConfig(void);
 
 	Time_zone_item* tzselector;
+	Label* system_tz_lbl2;
 	void setTimeZone(void);
+
+	// Video Options
+	LabeledCheckBox* fisheye_projection_cbx;
+	LabeledCheckBox* disk_viewport_cbx;
+	StringList* screen_size_sl;
+	void setVideoSize(void);
+	void updateVideoVariables(void);
 
 	void updateConfigVariables(void);
 	void updateConfigForm(void);
