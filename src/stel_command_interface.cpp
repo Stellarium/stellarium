@@ -45,8 +45,8 @@ int StelCommandInterface::execute_command(string commandline ) {
 int StelCommandInterface::execute_command(string commandline, unsigned long int &wait) {
   string command;
   stringHash_t args;
-  int status = 0;
-
+  int status = 0;  // true if command was understood
+  int recordable = 1;  // true if command should be recorded (if recording)
 
   wait = 0;  // default, no wait between commands
 
@@ -61,12 +61,8 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 
   }  else if (command == "wait" && args["duration"]!="") {
 
-    float fdelay;
-
-    fdelay = str_to_double(args["duration"]);
-
+    float fdelay = str_to_double(args["duration"]);
     if(fdelay > 0) wait = (int)(fdelay*1000);
-    //    cout << "wait is: " << wait << endl; 
 
   } else if (command == "set") {
     // set core globals
@@ -113,17 +109,12 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
     //  else if(args["vertical_offset"]!="") stcore->VerticalOffset = str_to_double(args["vertical_offset"]);
     //  else if(args["viewing_mode"]!="") stcore->ViewingMode = args["viewing_mode"];
     //  else if(args["viewport"]!="") stcore->Viewport = args["viewport"];
-    else {
-      status = 0;
-      cout << "Unrecognized arguments to \"set\" command.\n";
-    }
+    else status = 0;
 
   } else if (command == "select") {
 
-    // default is to deselect
+    // default is to deselect current object
     stcore->selected_object=NULL;
-    stcore->selected_planet=NULL;
-    stcore->selected_constellation=NULL;
 
     if(args["hp"]!=""){
       unsigned int hpnum;
@@ -131,16 +122,29 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
       istr >> hpnum;
       stcore->selected_object = stcore->hip_stars->search(hpnum);
       stcore->selected_constellation=stcore->asterisms->is_star_in((Hip_Star*)stcore->selected_object);
+      stcore->selected_planet=NULL;
     } else if(args["planet"]!=""){
       stcore->selected_object = stcore->selected_planet = stcore->ssystem->search(args["planet"]);
+      stcore->selected_constellation=NULL;
     } else if(args["nebula"]!=""){
       stcore->selected_object = stcore->nebulas->search(args["nebula"]);
+      stcore->selected_planet=NULL;
+      stcore->selected_constellation=NULL;
+    } else if(args["constellation"]!=""){
+      stcore->selected_constellation = stcore->asterisms->find_from_short_name(args["constellation"]);
+      stcore->selected_object = NULL;
+      stcore->selected_planet=NULL;
     }
 
     if (stcore->selected_object) {
       if (stcore->navigation->get_flag_traking()) stcore->navigation->set_flag_lock_equ_pos(1);
       stcore->navigation->set_flag_traking(0);
     }
+
+  } else if (command == "deselect") {
+    stcore->selected_object = NULL;
+    stcore->selected_planet = NULL;
+    stcore->selected_constellation = NULL;
 
   } else if(command == "autozoom") {
 
@@ -165,7 +169,7 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
       stcore->FlagTimePause = 0;
       stcore->navigation->set_time_speed(stcore->temp_time_velocity);
 
-    }else if(args["action"]=="increment") {
+    } else if(args["action"]=="increment") {
       // speed up time rate
       double s = stcore->navigation->get_time_speed();
       if (s>=JD_SECOND) s*=10.;
@@ -177,7 +181,7 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
       // for safest script replay, record as absolute amount
       commandline = "timerate rate " + double_to_str(s/JD_SECOND);
 
-    }else if(args["action"]=="decrement") {
+    } else if(args["action"]=="decrement") {
       double s = stcore->navigation->get_time_speed();
       if (s>JD_SECOND) s/=10.;
       else if (s<=-JD_SECOND) s*=10.;
@@ -187,7 +191,7 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 
       // for safest script replay, record as absolute amount
       commandline = "timerate rate " + double_to_str(s/JD_SECOND);
-    }
+    } else status=0;
     
   } else if(command == "date") {
 
@@ -203,7 +207,7 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
     } else if(args["relative"]!="") {  // value is a float number of days
       double days = str_to_double(args["relative"]);
       stcore->navigation->set_JDay(stcore->navigation->get_JDay() + days );
-    }
+    } else status=0;
     
   } else if (command == "moveto") {
 
@@ -220,35 +224,33 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
       delay = str_to_int(args["duration"]);
 
       stcore->observatory->move_to(lat,lon,alt,delay);
-    } else {
-      cout << "Insufficient arguments" << endl;
+    } else status = 0;
+
+  } else if(command=="image") {
+
+    if(args["name"]=="") {
+      cout << "Image name required" << endl;
       status = 0;
-    }
-
-  } else if(command=="imageload") {
-    if(args["filename"]!="" && args["name"]!="") {
-      stcore->script_images->load_image(args["filename"], args["name"]);
+    } else if(args["action"]=="drop") {
+      stcore->script_images->drop_image(args["name"]);
     } else {
-      cout << "Incomplete or incorrect arguments." << endl;
-    }
-
-  } else if(command=="imageprop") {
-    if(args["name"]!=""){
+      if(args["action"]=="load" && args["filename"]!="")
+	stcore->script_images->load_image(args["filename"], args["name"]);
+      
       Image * img = stcore->script_images->get_image(args["name"]);
-
-      if(img != NULL ) {
+      
+      if(img != NULL) {
 	if(args["alpha"]!="") img->set_alpha(str_to_double(args["alpha"]), 
 					     str_to_double(args["duration"]));
 	if(args["scale"]!="") img->set_scale(str_to_double(args["scale"]), 
 					     str_to_double(args["duration"]));
 	if(args["rotation"]!="") img->set_rotation(str_to_double(args["rotation"]), 
-					     str_to_double(args["duration"]));
+						   str_to_double(args["duration"]));
 	if(args["xpos"]!="" && args["ypos"]!="") 
 	  img->set_location(str_to_double(args["xpos"]), 
 			    str_to_double(args["ypos"]), 
 			    str_to_double(args["duration"]));
       }
-
     }
 
   } else if(command=="audio" && args["action"]=="play" && args["filename"]!="") {
@@ -272,45 +274,38 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
       // TODO unmount disk...
       stcore->ScriptRemoveableDiskMounted = 0;
 
-    }
-
-    if(args["action"]=="play" && args["filename"]!="") {
+    } else if(args["action"]=="play" && args["filename"]!="") {
       stcore->scripts->play_script(args["filename"]);
-    }
-
-    // n.b. action=pause TOGGLES pause
-    if(args["action"]=="pause" && !stcore->scripts->is_paused()) {
+    } else if(args["action"]=="record") {  // TEMP
+      //    if(args["action"]=="record" && args["filename"]!="") {
+      stcore->scripts->record_script(args["filename"]);
+      recordable = 0;  // don't record this command!
+    } else if(args["action"]=="cancelrecord") {
+      stcore->scripts->cancel_record_script();
+      recordable = 0;  // don't record this command!
+    } else if(args["action"]=="pause" && !stcore->scripts->is_paused()) {
+      // n.b. action=pause TOGGLES pause
       audio->pause();
       stcore->scripts->pause_script();
     } else if (args["action"]=="pause" || args["action"]=="resume") {
       stcore->scripts->resume_script();
       audio->resume();
-    }
-
-    if(args["action"]=="record") {  // TEMP
-    //    if(args["action"]=="record" && args["filename"]!="") {
-      stcore->scripts->record_script(args["filename"]);
-      commandline = "";  // don't record this command!
-    }
-
-    if(args["action"]=="cancelrecord") {
-      stcore->scripts->cancel_record_script();
-      commandline = "";  // don't record this command!
-    }
+    } else status =0;
 
   } else {
-    cout << "Unrecognized command: " << commandline << endl;
+    cout << "Unrecognized command: " << command << endl;
     return 0;
   }
 
-  if( status ) {
+
+  if(status && recordable) {
 
     // if recording commands, do that now
     stcore->scripts->record_command(commandline);
 
     //    cout << commandline << endl;
 
-  } else {
+  } else if(recordable) {
     cout << "Could not execute: " << commandline << endl;
   }
 
