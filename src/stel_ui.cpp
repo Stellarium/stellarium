@@ -179,7 +179,7 @@ void stel_ui::updateTopBar(void)
 	char str[30];
     if (core->FlagShowFov)
 	{
-		sprintf(str,"fov=%2.3f\6", core->projection->get_fov());
+		sprintf(str,"fov=%2.3f\6", core->projection->get_visible_fov());
 		top_bar_fov_lbl->setLabel(str);
 		top_bar_fov_lbl->adjustSize();
 	}
