@@ -529,7 +529,7 @@ void stel_ui::updateConfigForm(void)
 	lat_incdec->setValue(core->observatory->get_latitude());
 
 	time_current->setJDay(core->navigation->get_JDay() + core->observatory->get_GMT_shift(core->navigation->get_JDay())*JD_HOUR);
-	system_tz_lbl2 = new Label("(" +
+	system_tz_lbl2->setLabel("(" +
 		 core->observatory->get_time_zone_name_from_system(core->navigation->get_JDay()) + ")");
 
 	static char tempstr[100];
