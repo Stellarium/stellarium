@@ -24,7 +24,7 @@
 
 #include "draw.h"
 #include "s_texture.h"
-#include "navigator.h"
+#include "stel_utility.h"
 #include "solarsystem.h"
 #include "stellastro.h"
 
@@ -52,7 +52,8 @@ SkyGrid::SkyGrid(SKY_GRID_TYPE grid_type, unsigned int _nb_meridian, unsigned in
 		for (unsigned int i=0;i<nb_alt_segment+1;++i)
 		{
 			sphe_to_rect((float)nm/(nb_meridian)*2.f*M_PI,
-				(float)i/nb_alt_segment*M_PI-M_PI_2, &alt_points[nm][i]);
+				(float)i/nb_alt_segment*M_PI-M_PI_2, alt_points[nm][i]);
+			alt_points[nm][i] *= radius;
 		}
 	}
 
@@ -64,7 +65,8 @@ SkyGrid::SkyGrid(SKY_GRID_TYPE grid_type, unsigned int _nb_meridian, unsigned in
 		for (unsigned int i=0;i<nb_azi_segment+1;++i)
 		{
 			sphe_to_rect((float)i/(nb_azi_segment)*2.f*M_PI,
-				(float)(np+1)/(nb_parallel+1)*M_PI-M_PI_2, &azi_points[np][i]);
+				(float)(np+1)/(nb_parallel+1)*M_PI-M_PI_2, azi_points[np][i]);
+			alt_points[np][i] *= radius;
 		}
 	}
 }
@@ -78,7 +80,7 @@ SkyGrid::~SkyGrid()
 	delete alt_points;
 }
 
-void SkyGrid::draw(Projector* prj) const
+void SkyGrid::draw(const Projector* prj) const
 {
 	glColor3fv(color);
 	glDisable(GL_TEXTURE_2D);
@@ -98,9 +100,9 @@ void SkyGrid::draw(Projector* prj) const
 			if ((prj->*proj_func)(alt_points[nm][0], pt1) &&
 				(prj->*proj_func)(alt_points[nm][1], pt2) )
 			{
+				glColor4f(color[0],color[1],color[2],0.f);
 				glEnable(GL_BLEND);
 				glBegin (GL_LINES);
-					glColor4f(color[0],color[1],color[2],0.f);
 					glVertex2f(pt1[0],pt1[1]);
 					glColor3fv(color);
 					glVertex2f(pt2[0],pt2[1]);
@@ -124,9 +126,9 @@ void SkyGrid::draw(Projector* prj) const
 			if ((prj->*proj_func)(alt_points[nm][nb_alt_segment-1], pt1) &&
 				(prj->*proj_func)(alt_points[nm][nb_alt_segment], pt2) )
 			{
+				glColor3fv(color);
 				glEnable(GL_BLEND);
 				glBegin (GL_LINES);
-					glColor3fv(color);
 					glVertex2f(pt1[0],pt1[1]);
 					glColor4f(color[0],color[1],color[2],0.f);
 					glVertex2f(pt2[0],pt2[1]);
@@ -177,7 +179,7 @@ void SkyGrid::draw(Projector* prj) const
 SkyLine::SkyLine(SKY_LINE_TYPE line_type, double _radius, unsigned int _nb_segment) :
 	radius(_radius), nb_segment(_nb_segment)
 {
-	color = Vec3f(0.2,0.2,0.2);
+	color = Vec3f(0.2,0.2,0.6);
 	float inclinaison = 0.f;
 	switch (line_type)
 	{
@@ -188,13 +190,15 @@ SkyLine::SkyLine(SKY_LINE_TYPE line_type, double _radius, unsigned int _nb_segme
 		default : proj_func = &Projector::project_earth_equ;
 	}
 
+	Mat4f r = Mat4f::xrotation(inclinaison*M_PI/180.f);
 
-	// Alt points are the points to draw along the meridian
-	points = new Vec3f[nb_segment];
+	// Points to draw along the circle
+	points = new Vec3f[nb_segment+1];
 	for (unsigned int i=0;i<nb_segment+1;++i)
 	{
-		sphe_to_rect((float)i/(nb_segment)*2.f*M_PI,
-			(float)i/(nb_segment)*inclinaison*M_PI/180.-M_PI_2, &points[i]);
+		sphe_to_rect((float)i/(nb_segment)*2.f*M_PI, 0.f, points[i]);
+		points[i] *= radius;
+		points[i].transfo4d(r);
 	}
 }
 
@@ -203,81 +207,86 @@ SkyLine::~SkyLine()
 	delete points;
 }
 
-void SkyLine::draw(Projector* prj) const
+void SkyLine::draw(const Projector* prj) const
 {
+	static Vec3d pt1;
+	static Vec3d pt2;
+
+	glColor3fv(color);
+	glDisable(GL_BLEND);
+	glDisable(GL_TEXTURE_2D);
+
+	prj->set_orthographic_projection();	// set 2D coordinate
+
+	for (unsigned int i=0;i<nb_segment;++i)
+	{
+		if ((prj->*proj_func)(points[i], pt1) &&
+			(prj->*proj_func)(points[i+1], pt2) )
+		{
+			glBegin (GL_LINES);
+				glVertex2f(pt1[0],pt1[1]);
+				glVertex2f(pt2[0],pt2[1]);
+       		glEnd();
+		}
+	}
+
+	prj->reset_perspective_projection();
 }
 
 
-// Draw the cardinals points : N S E W (and Z (Zenith) N (Nadir))
-void DrawCardinaux(Projector * prj)
-{   
-/*	GLdouble M[16];
-	GLdouble P[16];
-	GLint V[4];
-	glGetDoublev(GL_MODELVIEW_MATRIX,M);
-	glGetDoublev(GL_PROJECTION_MATRIX,P);
-	glGetIntegerv(GL_VIEWPORT,V);
+Cardinals::Cardinals(const char* font_file, const char* tex_file, double size, double _radius) :
+	radius(radius), font(NULL)
+{
+	font = new s_font(size, tex_file, font_file);
+	if (!font)
+	{
+		printf("Can't create cardinalFont\n");
+		exit(-1);
+	}
+	color = Vec3f(0.6,0.2,0.2);
+}
 
-	double x[4],y[4],z[4];
-	gluProject(-1.0f, 0.0f, 0.0f,M,P,V,&x[0],&y[0],&z[0]); // North
-	gluProject( 1.0f, 0.0f, 0.0f,M,P,V,&x[1],&y[1],&z[1]); // South
-	gluProject( 0.0f, 1.0f, 0.0f,M,P,V,&x[2],&y[2],&z[2]); // East
-	gluProject( 0.0f,-1.0f, 0.0f,M,P,V,&x[3],&y[3],&z[3]); // West
+Cardinals::~Cardinals()
+{
+    if (font) delete font;
+	font = NULL;
+}
 
-	du->set_orthographic_projection();
 
-	glColor3f(0.8f, 0.1f, 0.1f);
-	glEnable(GL_TEXTURE_2D);
+// Draw the cardinals points : N S E W
+void Cardinals::draw(const Projector* prj) const
+{
+
+    glColor3fv(color);
 	glEnable(GL_BLEND);
+	glEnable(GL_TEXTURE_2D);
+	// Normal transparency mode
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-	int r=24;
-	
-	if (z[0]<1)
-	{
-		glBindTexture(GL_TEXTURE_2D,texIds[6]->getID());     //North
-		glBegin(GL_QUADS );
-			glTexCoord2f(0.0f,0.0f);    glVertex2f(x[0]-r,y[0]-r);  // Bottom Left
-			glTexCoord2f(1.0f,0.0f);    glVertex2f(x[0]+r,y[0]-r);  // Bottom Right
-			glTexCoord2f(1.0f,1.0f);    glVertex2f(x[0]+r,y[0]+r);  // Top Right
-			glTexCoord2f(0.0f,1.0f);    glVertex2f(x[0]-r,y[0]+r);  // Top Left
-		glEnd ();
-	}
+	Vec3f pos;
+	Vec3d xy;
 
-	if (z[1]<1)
-	{
-		glBindTexture(GL_TEXTURE_2D, texIds[7]->getID());    //South
-		glBegin(GL_QUADS );
-			glTexCoord2f(0.0f,0.0f);    glVertex2f(x[1]-r,y[1]-r);  // Bottom Left
-			glTexCoord2f(1.0f,0.0f);    glVertex2f(x[1]+r,y[1]-r);  // Bottom Right
-			glTexCoord2f(1.0f,1.0f);    glVertex2f(x[1]+r,y[1]+r);  // Top Right
-			glTexCoord2f(0.0f,1.0f);    glVertex2f(x[1]-r,y[1]+r);  // Top Left
-		glEnd ();
-	}
+	prj->set_orthographic_projection();
 
-	if (z[2]<1)
-	{
-		glBindTexture(GL_TEXTURE_2D, texIds[8]->getID());    //East
-		glBegin(GL_QUADS );
-			glTexCoord2f(0.0f,0.0f);    glVertex2f(x[2]-r,y[2]-r);  // Bottom Left
-			glTexCoord2f(1.0f,0.0f);    glVertex2f(x[2]+r,y[2]-r);  // Bottom Right
-			glTexCoord2f(1.0f,1.0f);    glVertex2f(x[2]+r,y[2]+r);  // Top Right
-			glTexCoord2f(0.0f,1.0f);    glVertex2f(x[2]-r,y[2]+r);  // Top Left
-		glEnd ();
-	}
+	// N for North
+	pos.set(-1.f, 0.f, 0.f);
+	if (prj->project_local(pos,xy)) font->print(xy[0], xy[1], "N");
 
-	if (z[3]<1)
-	{
-		glBindTexture(GL_TEXTURE_2D, texIds[9]->getID());    //West
-		glBegin(GL_QUADS );
-			glTexCoord2f(0.0f,0.0f);    glVertex2f(x[3]-r,y[3]-r);  // Bottom Left
-			glTexCoord2f(1.0f,0.0f);    glVertex2f(x[3]+r,y[3]-r);  // Bottom Right
-			glTexCoord2f(1.0f,1.0f);    glVertex2f(x[3]+r,y[3]+r);  // Top Right
-			glTexCoord2f(0.0f,1.0f);    glVertex2f(x[3]-r,y[3]+r);  // Top Left
-		glEnd ();
-	}
-	
-	du->reset_perspective_projection();*/
+	// S for South
+	pos.set(1.f, 0.f, 0.f);
+	if (prj->project_local(pos,xy)) font->print(xy[0], xy[1], "S");
+
+	// E for East
+	pos.set(0.f, 1.f, 0.f);
+	if (prj->project_local(pos,xy)) font->print(xy[0], xy[1], "E");
+
+	// W for West
+	pos.set(0.f, -1.f, 0.f);
+	if (prj->project_local(pos,xy)) font->print(xy[0], xy[1], "W");
+
+	prj->reset_perspective_projection();
 }
+
 
 // Draw the milky way : used too to 'clear' the buffer
 void DrawMilkyWay(tone_reproductor * eye)
@@ -303,25 +312,6 @@ void DrawMilkyWay(tone_reproductor * eye)
 	glPopMatrix();
 }
 
-
-// Draw the celestrial equator
-/*void DrawEquator(void)
-{       
-	glPushMatrix();
-	glDisable(GL_TEXTURE_2D);
-	glDisable(GL_BLEND);
-	float coef = (float)(1.0f * rand() / RAND_MAX);
-	glColor3f(0.2*coef+0.3,0.025*coef+0.1,0.025*coef+0.1);
-	for(int j=0;j<49;++j)
-	{
-		glBegin(GL_LINES);
-			glVertex3f(DmeriParal [j] [0]*20.0f, DmeriParal [j] [1]*20.0f, 0.0f);
-			glVertex3f(DmeriParal[j+1][0]*20.0f, DmeriParal[j+1][1]*20.0f, 0.0f);
-		glEnd();
-	}
-	glPopMatrix();
-}
-*/
 
 // Draw the horizon fog
 void DrawFog(float sky_brightness)
@@ -366,7 +356,7 @@ void DrawDecor(int nb, float sky_brightness)
 	{   
 		glBindTexture(GL_TEXTURE_2D, texIds[31+ntex%4]->getID());
 		for (int nDecoupe=0;nDecoupe<4;nDecoupe++)
-		{   
+		{
 			glBegin(GL_QUADS );
 				//Haut Gauche
 				glTexCoord2f((float)nDecoupe/4,0.5f);

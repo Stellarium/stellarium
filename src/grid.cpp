@@ -21,7 +21,7 @@
 #include "stel_utility.h"
 #include "draw.h"
 
-void moy(vec3_t * p, int a, int b, int c)
+void moy(Vec3f * p, int a, int b, int c)
 {
 	p[c] = p[a] + p[b];
 	p[c].normalize();
@@ -692,7 +692,7 @@ Grid::Grid()
 {0.6554,0.1490,-0.740  },
 {0.6554,-0.1490,-0.740 }};
 */
-	Points = new vec3_t[NbPoints];
+	Points = new Vec3f[NbPoints];
 	for (int i=0;i<NbPoints;i++)
 	{
 		Points[i]=tempTab[i];
@@ -704,7 +704,7 @@ Grid::~Grid()
     delete Points;
 }
 
-int Grid::GetNearest(vec3_t v)
+int Grid::GetNearest(Vec3f v)
 {
     static int bestI;
     static float bestDot;
@@ -733,7 +733,7 @@ void Grid::Draw(void)
 }
 
 // Return an array with the number of the zones in the field of view
-int Grid::Intersect(vec3_t pos, float fieldAngle, int * &result)
+int Grid::Intersect(Vec3f pos, float fieldAngle, int * &result)
 {
 	if (result==NULL) result = new int[NbPoints];
 

@@ -80,20 +80,20 @@ public:
 	// Place openGL in local viewer coordinates (Usually somewhere on earth viewing in a specific direction)
 	void switch_to_local(void);
 
-	Vec3d local_to_earth_equ(Vec3d*);	// Transform vector from local coordinate to equatorial
-	Vec3d earth_equ_to_local(Vec3d*);	// Transform vector from equatorial coordinate to local
-	Vec3d helio_to_local(Vec3d*);		// Transform vector from heliocentric coordinate to local
-	Vec3d helio_to_earth_equ(Vec3d*);	// Transform vector from heliocentric coordinate to earth equatorial
+	Vec3d local_to_earth_equ(const Vec3d&);	// Transform vector from local coordinate to equatorial
+	Vec3d earth_equ_to_local(const Vec3d&);	// Transform vector from equatorial coordinate to local
+	Vec3d helio_to_local(const Vec3d&);		// Transform vector from heliocentric coordinate to local
+	Vec3d helio_to_earth_equ(const Vec3d&);	// Transform vector from heliocentric coordinate to earth equatorial
 
 	// Transform vector from heliocentric coordinate to false equatorial : equatorial
 	// coordinate but centered on the observer position (usefull for objects close to earth)
-	Vec3d helio_to_earth_pos_equ(Vec3d* v);
+	Vec3d helio_to_earth_pos_equ(const Vec3d&);
 
 	// Home made gluLookAt(0., 0., 0.,local_vision[0],local_vision[1],local_vision[2],0.,0.,1.);
 	// to keep a better precision to prevent the shaking bug..
 	void update_local_to_eye(void);
 
-	void move_to(Vec3d _aim);
+	void move_to(const Vec3d& _aim);
 
 	// Loads
 	void load_position(const char *);		// Load the position info in the file name given
@@ -110,9 +110,9 @@ public:
 	int get_flag_lock_equ_pos() const {return flag_lock_equ_pos;}
 
 	// Get vision direction
-	Vec3d get_equ_vision(void) const {return equ_vision;}
-	Vec3d get_local_vision(void) const {return local_vision;}
-	void set_local_vision(Vec3d _pos);
+	const Vec3d& get_equ_vision(void) const {return equ_vision;}
+	const Vec3d& get_local_vision(void) const {return local_vision;}
+	void set_local_vision(const Vec3d& _pos);
 
 	// Observer position
 	void set_time_zone(int t) {position.time_zone=t;}
@@ -125,14 +125,14 @@ public:
 	int get_altitude(void) const {return position.altitude;}
 
 	// Return the observer heliocentric position
-	Vec3d get_observer_helio_pos(void);
+	Vec3d get_observer_helio_pos(void) const;
 
 	// Return the modelview matrix for some coordinate systems
-	Mat4d get_helio_to_eye_mat(void) {return mat_helio_to_eye;}
-	Mat4d get_earth_equ_to_eye_mat(void) {return mat_earth_equ_to_eye;}
-	Mat4d get_local_to_eye_mat(void) {return mat_local_to_eye;}
+	const Mat4d& get_helio_to_eye_mat(void) const {return mat_helio_to_eye;}
+	const Mat4d& get_earth_equ_to_eye_mat(void) const {return mat_earth_equ_to_eye;}
+	const Mat4d& get_local_to_eye_mat(void) const {return mat_local_to_eye;}
 
-	void navigator::update_move(double deltaAz, double deltaAlt);
+	void update_move(double deltaAz, double deltaAlt);
 
 private:
 

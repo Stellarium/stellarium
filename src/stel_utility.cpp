@@ -45,36 +45,36 @@ double dms_to_rad(int d, double m)
 }
 
 
-void sphe_to_rect(double lng, double lat, Vec3d * v)
+void sphe_to_rect(double lng, double lat, Vec3d& v)
 {
 	const double cosLat = cos(lat);
-    v->set(cos(lng) * cosLat, sin(lng) * cosLat, sin(lat));
+    v.set(cos(lng) * cosLat, sin(lng) * cosLat, sin(lat));
 }
 
-void sphe_to_rect(double lng, double lat, double r, Vec3d *v)
+void sphe_to_rect(double lng, double lat, double r, Vec3d& v)
 {
 	const double cosLat = cos(lat);
-    v->set(cos(lng) * cosLat * r, sin(lng) * cosLat * r, sin(lat) * r);
+    v.set(cos(lng) * cosLat * r, sin(lng) * cosLat * r, sin(lat) * r);
 }
 
-void sphe_to_rect(float lng, float lat, Vec3f * v)
+void sphe_to_rect(float lng, float lat, Vec3f& v)
 {
 	const double cosLat = cos(lat);
-    v->set(cos(lng) * cosLat, sin(lng) * cosLat, sin(lat));
+    v.set(cos(lng) * cosLat, sin(lng) * cosLat, sin(lat));
 }
 
-void rect_to_sphe(double *lng, double *lat, const Vec3d *v)
+void rect_to_sphe(double *lng, double *lat, const Vec3d& v)
 {
-	double r = v->length();
-    *lat = asin((*v)[2]/r);
-    *lng = atan2((*v)[1],(*v)[0]);
+	double r = v.length();
+    *lat = asin(v[2]/r);
+    *lng = atan2(v[1],v[0]);
 }
 
-void rect_to_sphe(float *lng, float *lat, const Vec3f *v)
+void rect_to_sphe(float *lng, float *lat, const Vec3f& v)
 {
-	double r = v->length();
-    *lat = asin((*v)[2]/r);
-    *lng = atan2((*v)[1],(*v)[0]);
+	double r = v.length();
+    *lat = asin(v[2]/r);
+    *lng = atan2(v[1],v[0]);
 }
 
 
@@ -108,11 +108,11 @@ static char *trim(char *x)
 static void skipwhite(char **s)
 {
    while(iswhite(**s))
-        (*s)++;
+        ++(*s);
 }
 
 
-double get_dec_angle(char *s)
+double get_dec_angle(const char *s)
 {
 
 	char *ptr, *dec, *hh;
@@ -201,7 +201,7 @@ double get_dec_angle(char *s)
 *
 * Obtains a human readable location in the form: ddºmm'ss.ss"
 */
-char * print_angle_dms(double location)
+const char * print_angle_dms(double location)
 {
     static char buf[16];
     double deg = 0.0;
@@ -216,7 +216,7 @@ char * print_angle_dms(double location)
     return buf;
 }
 
-char * print_angle_dms_stel(double location)
+const char * print_angle_dms_stel(double location)
 {
     static char buf[16];
     double deg = 0.0;
@@ -232,7 +232,7 @@ char * print_angle_dms_stel(double location)
 }
 
 /* Obtains a human readable angle in the form: hhhmmmss.sss" */
-char * print_angle_hms(double angle)
+const char * print_angle_hms(double angle)
 {
     static char buf[16];
     double hr = 0.0;

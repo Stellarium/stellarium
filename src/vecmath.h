@@ -26,6 +26,7 @@
 
 #include <cmath>
 #include <string.h>
+#include <stdio.h>
 
 template<class T> class Vector2;
 template<class T> class Vector3;
@@ -34,12 +35,9 @@ template<class T> class Matrix4;
 
 typedef Vector2<float>	Vec2f;
 typedef Vector2<int>	Vec2i;
-typedef Vector2<int>	vec2_i;
-typedef Vector2<float>	vec2_t;
 
 typedef Vector3<float>	Vec3f;
 typedef Vector3<double>	Vec3d;
-typedef Vector3<float>	vec3_t;
 
 typedef Vector4<double>	Vec4d;
 typedef Vector4<float>	Vec4f;
@@ -134,7 +132,7 @@ public:
     inline void normalize();
 
 	inline void transfo4d(const Mat4d&);
-
+	inline void transfo4d(const Mat4f&);
 	T v[3];		// The 3 values
 };
 
@@ -193,6 +191,7 @@ template<class T> class Matrix4
     Matrix4();
     Matrix4(const Matrix4<T>& m);
 	Matrix4(T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T);
+	Matrix4(const T*);
 
 	inline Matrix4& operator=(const Matrix4<T>&);
 	inline Matrix4& operator=(const T*);
@@ -222,7 +221,7 @@ template<class T> class Matrix4
     Matrix4<T> transpose() const;
     Matrix4<T> inverse() const;
 
-	//inline void print(void) const;
+	inline void print(void) const;
 
     T r[16];
 };
@@ -520,6 +519,11 @@ template<class T> void Vector3<T>::transfo4d(const Mat4d& m)
 	(*this)=m*(*this);
 }
 
+template<class T> void Vector3<T>::transfo4d(const Mat4f& m)
+{
+	(*this)=m*(*this);
+}
+
 ////////////////////////// Vector4 class methods ///////////////////////////////
 
 template<class T> Vector4<T>::Vector4()
@@ -680,6 +684,11 @@ template<class T> Matrix4<T>::Matrix4(const Matrix4<T>& m)
 	memcpy(r,m.r,sizeof(m.r));
 }
 
+template<class T> Matrix4<T>::Matrix4(const T* m)
+{
+	memcpy(r,m,sizeof(T)*16);
+}
+
 template<class T> Matrix4<T>& Matrix4<T>::operator=(const Matrix4<T>& m)
 {
 	memcpy(r,m.r,sizeof(m.r));
@@ -791,7 +800,7 @@ template<class T> Matrix4<T> Matrix4<T>::scaling(T scale)
     return scaling(Vector3<T>(scale, scale, scale));
 }
 
-// multiply column vector by a 4x4 matrix in homogeneous coordinate (considere a[3]=1)
+// multiply column vector by a 4x4 matrix in homogeneous coordinate (use a[3]=1)
 template<class T> Vector3<T> Matrix4<T>::operator*(const Vector3<T>& a) const
 {
     return Vector3<T>(	r[0]*a.v[0] + r[4]*a.v[1] +  r[8]*a.v[2] + r[12],
@@ -842,58 +851,193 @@ template<class T> Matrix4<T> Matrix4<T>::operator-(const Matrix4<T>& a) const
 						r[12]-a.r[12], r[13]-a.r[13], r[14]-a.r[14], r[15]-a.r[15] );
 }
 
-// Compute inverse using Gauss-Jordan elimination; caller is responsible
-// for ensuring that the matrix isn't singular.
-/*template<class T> Matrix4<T> Matrix4<T>::inverse() const
+/*
+ * Code ripped from the GLU library
+ * Compute inverse of 4x4 transformation matrix.
+ * Code contributed by Jacques Leroy jle@star.be
+ * Return zero matrix on failure (singular matrix)
+ */
+template<class T> Matrix4<T> Matrix4<T>::inverse() const
 {
-    Matrix4<T> a(*this);
-    Matrix4<T> b(Matrix4<T>::identity());
-    int i, j;
-    int p;
+	const T * m = r;
+	T out[16];
 
-    for (j = 0; j < 4; j++)
-    {
-        p = j;
-        for (i = j + 1; i < 4; i++)
-        {
-            if (fabs(a[i][j]) > fabs(a[p][j]))
-                p = i;
-        }
+/* NB. OpenGL Matrices are COLUMN major. */
+#define SWAP_ROWS(a, b) { T *_tmp = a; (a)=(b); (b)=_tmp; }
+#define MAT(m,r,c) (m)[(c)*4+(r)]
 
-        // Swap rows p and j
-        Vector4<T> t;
-		t[0] = a[p][0]; t[1] = a[p][1]; t[2] = a[p][2]; t[3] = a[p][3];
-        a[p][0] = a[j][0]; a[p][1] = a[j][1]; a[p][2] = a[j][2]; a[p][3] = a[j][3];
-        a[j][0] = t[0]; a[j][1] = t[1]; a[j][2] = t[2]; a[j][3] = t[3];
+   T wtmp[4][8];
+   T m0, m1, m2, m3, s;
+   T *r0, *r1, *r2, *r3;
 
-        t[0] = b[p][0]; t[1] = b[p][1]; t[2] = b[p][2]; t[3] = b[p][3];
-        b[p][0] = b[j][0]; b[p][1] = b[j][1]; b[p][2] = b[j][2]; b[p][3] = b[j][3];
-        b[j][0] = t[0]; b[j][1] = t[1]; b[j][2] = t[2]; b[j][3] = t[3];
+   r0 = wtmp[0], r1 = wtmp[1], r2 = wtmp[2], r3 = wtmp[3];
 
-        T s = a[j][j];  // if s == 0, the matrix is singular
-        a[j][0] *= (1.0f / s); a[j][1] *= (1.0f / s); a[j][2] *= (1.0f / s); a[j][3] *= (1.0f / s);
-        b[j][0] *= (1.0f / s); b[j][1] *= (1.0f / s); b[j][2] *= (1.0f / s); b[j][3] *= (1.0f / s);
+   r0[0] = MAT(m, 0, 0), r0[1] = MAT(m, 0, 1),
+      r0[2] = MAT(m, 0, 2), r0[3] = MAT(m, 0, 3),
+      r0[4] = 1.0, r0[5] = r0[6] = r0[7] = 0.0,
+      r1[0] = MAT(m, 1, 0), r1[1] = MAT(m, 1, 1),
+      r1[2] = MAT(m, 1, 2), r1[3] = MAT(m, 1, 3),
+      r1[5] = 1.0, r1[4] = r1[6] = r1[7] = 0.0,
+      r2[0] = MAT(m, 2, 0), r2[1] = MAT(m, 2, 1),
+      r2[2] = MAT(m, 2, 2), r2[3] = MAT(m, 2, 3),
+      r2[6] = 1.0, r2[4] = r2[5] = r2[7] = 0.0,
+      r3[0] = MAT(m, 3, 0), r3[1] = MAT(m, 3, 1),
+      r3[2] = MAT(m, 3, 2), r3[3] = MAT(m, 3, 3),
+      r3[7] = 1.0, r3[4] = r3[5] = r3[6] = 0.0;
 
-        // Eliminate off-diagonal elements
-        for (i = 0; i < 4; i++)
-        {
-            if (i != j)
-            {
-                b[i][0] -= a[i][j] * b[j][0]; b[i][1] -= a[i][j] * b[j][1];
-				b[i][2] -= a[i][j] * b[j][2]; b[i][3] -= a[i][j] * b[j][3];
-                a[i][0] -= a[i][j] * a[j][0]; a[i][1] -= a[i][j] * a[j][1];
-				a[i][2] -= a[i][j] * a[j][2]; a[i][3] -= a[i][j] * a[j][3];
-            }
-        }
-    }
+   /* choose pivot - or die */
+   if (fabs(r3[0]) > fabs(r2[0]))
+      SWAP_ROWS(r3, r2);
+   if (fabs(r2[0]) > fabs(r1[0]))
+      SWAP_ROWS(r2, r1);
+   if (fabs(r1[0]) > fabs(r0[0]))
+      SWAP_ROWS(r1, r0);
+   if (0.0 == r0[0])
+      return Matrix4<T>();
 
-    return b;
+   /* eliminate first variable     */
+   m1 = r1[0] / r0[0];
+   m2 = r2[0] / r0[0];
+   m3 = r3[0] / r0[0];
+   s = r0[1];
+   r1[1] -= m1 * s;
+   r2[1] -= m2 * s;
+   r3[1] -= m3 * s;
+   s = r0[2];
+   r1[2] -= m1 * s;
+   r2[2] -= m2 * s;
+   r3[2] -= m3 * s;
+   s = r0[3];
+   r1[3] -= m1 * s;
+   r2[3] -= m2 * s;
+   r3[3] -= m3 * s;
+   s = r0[4];
+   if (s != 0.0) {
+      r1[4] -= m1 * s;
+      r2[4] -= m2 * s;
+      r3[4] -= m3 * s;
+   }
+   s = r0[5];
+   if (s != 0.0) {
+      r1[5] -= m1 * s;
+      r2[5] -= m2 * s;
+      r3[5] -= m3 * s;
+   }
+   s = r0[6];
+   if (s != 0.0) {
+      r1[6] -= m1 * s;
+      r2[6] -= m2 * s;
+      r3[6] -= m3 * s;
+   }
+   s = r0[7];
+   if (s != 0.0) {
+      r1[7] -= m1 * s;
+      r2[7] -= m2 * s;
+      r3[7] -= m3 * s;
+   }
+
+   /* choose pivot - or die */
+   if (fabs(r3[1]) > fabs(r2[1]))
+      SWAP_ROWS(r3, r2);
+   if (fabs(r2[1]) > fabs(r1[1]))
+      SWAP_ROWS(r2, r1);
+   if (0.0 == r1[1])
+      return Matrix4<T>();
+
+   /* eliminate second variable */
+   m2 = r2[1] / r1[1];
+   m3 = r3[1] / r1[1];
+   r2[2] -= m2 * r1[2];
+   r3[2] -= m3 * r1[2];
+   r2[3] -= m2 * r1[3];
+   r3[3] -= m3 * r1[3];
+   s = r1[4];
+   if (0.0 != s) {
+      r2[4] -= m2 * s;
+      r3[4] -= m3 * s;
+   }
+   s = r1[5];
+   if (0.0 != s) {
+      r2[5] -= m2 * s;
+      r3[5] -= m3 * s;
+   }
+   s = r1[6];
+   if (0.0 != s) {
+      r2[6] -= m2 * s;
+      r3[6] -= m3 * s;
+   }
+   s = r1[7];
+   if (0.0 != s) {
+      r2[7] -= m2 * s;
+      r3[7] -= m3 * s;
+   }
+
+   /* choose pivot - or die */
+   if (fabs(r3[2]) > fabs(r2[2]))
+      SWAP_ROWS(r3, r2);
+   if (0.0 == r2[2])
+      return Matrix4<T>();
+
+   /* eliminate third variable */
+   m3 = r3[2] / r2[2];
+   r3[3] -= m3 * r2[3], r3[4] -= m3 * r2[4],
+      r3[5] -= m3 * r2[5], r3[6] -= m3 * r2[6], r3[7] -= m3 * r2[7];
+
+   /* last check */
+   if (0.0 == r3[3])
+      return Matrix4<T>();
+
+   s = 1.0 / r3[3];		/* now back substitute row 3 */
+   r3[4] *= s;
+   r3[5] *= s;
+   r3[6] *= s;
+   r3[7] *= s;
+
+   m2 = r2[3];			/* now back substitute row 2 */
+   s = 1.0 / r2[2];
+   r2[4] = s * (r2[4] - r3[4] * m2), r2[5] = s * (r2[5] - r3[5] * m2),
+      r2[6] = s * (r2[6] - r3[6] * m2), r2[7] = s * (r2[7] - r3[7] * m2);
+   m1 = r1[3];
+   r1[4] -= r3[4] * m1, r1[5] -= r3[5] * m1,
+      r1[6] -= r3[6] * m1, r1[7] -= r3[7] * m1;
+   m0 = r0[3];
+   r0[4] -= r3[4] * m0, r0[5] -= r3[5] * m0,
+      r0[6] -= r3[6] * m0, r0[7] -= r3[7] * m0;
+
+   m1 = r1[2];			/* now back substitute row 1 */
+   s = 1.0 / r1[1];
+   r1[4] = s * (r1[4] - r2[4] * m1), r1[5] = s * (r1[5] - r2[5] * m1),
+      r1[6] = s * (r1[6] - r2[6] * m1), r1[7] = s * (r1[7] - r2[7] * m1);
+   m0 = r0[2];
+   r0[4] -= r2[4] * m0, r0[5] -= r2[5] * m0,
+      r0[6] -= r2[6] * m0, r0[7] -= r2[7] * m0;
+
+   m0 = r0[1];			/* now back substitute row 0 */
+   s = 1.0 / r0[0];
+   r0[4] = s * (r0[4] - r1[4] * m0), r0[5] = s * (r0[5] - r1[5] * m0),
+      r0[6] = s * (r0[6] - r1[6] * m0), r0[7] = s * (r0[7] - r1[7] * m0);
+
+   MAT(out, 0, 0) = r0[4];
+   MAT(out, 0, 1) = r0[5], MAT(out, 0, 2) = r0[6];
+   MAT(out, 0, 3) = r0[7], MAT(out, 1, 0) = r1[4];
+   MAT(out, 1, 1) = r1[5], MAT(out, 1, 2) = r1[6];
+   MAT(out, 1, 3) = r1[7], MAT(out, 2, 0) = r2[4];
+   MAT(out, 2, 1) = r2[5], MAT(out, 2, 2) = r2[6];
+   MAT(out, 2, 3) = r2[7], MAT(out, 3, 0) = r3[4];
+   MAT(out, 3, 1) = r3[5], MAT(out, 3, 2) = r3[6];
+   MAT(out, 3, 3) = r3[7];
+
+   return Matrix4<T>(out);
+
+#undef MAT
+#undef SWAP_ROWS
 }
-*/
-//template<class T> void Matrix4<T>::print(void) const
-//{
-	//printf("[%.2lf %.2lf %.2lf %.2lf]\n[%.2lf %.2lf %.2lf %.2lf]\n[%.2lf %.2lf %.2lf %.2lf]\n[%.2lf %.2lf %.2lf %.2lf]\n",
-	//r[0],r[4],r[8],r[12],r[1],r[5],r[9],r[13],r[2],r[6],r[10],r[14],r[3],r[7],r[11],r[15]);
-//}
+
+
+template<class T> void Matrix4<T>::print(void) const
+{
+	printf("[%.2lf %.2lf %.2lf %.2lf]\n[%.2lf %.2lf %.2lf %.2lf]\n[%.2lf %.2lf %.2lf %.2lf]\n[%.2lf %.2lf %.2lf %.2lf]\n",
+	r[0],r[4],r[8],r[12],r[1],r[5],r[9],r[13],r[2],r[6],r[10],r[14],r[3],r[7],r[11],r[15]);
+}
 
 #endif // _VECMATH_H_

@@ -33,7 +33,7 @@ public:
     virtual ~Nebula_mgr();
     int Read(char * font_fileName, char * fileName);
     void Draw(int names_ON, Projector* prj);            // Draw all the Nebulaes
-    stel_object * search(vec3_t Pos);             // Search the Nebulae by position
+    stel_object * search(Vec3f Pos);             // Search the Nebulae by position
 private:
     vector<Nebula*> Liste;              // list of Nebulaes*
 	s_font* nebulaFont;

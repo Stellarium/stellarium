@@ -35,25 +35,25 @@ double hms_to_rad(unsigned int h, double m);
 double dms_to_rad(int d, double m);
 
 //void rad_to_hms(unsigned int *h, unsigned int *m, double *s, double r);
-void sphe_to_rect(double lng, double lat, Vec3d *v);
-void sphe_to_rect(double lng, double lat, double r, Vec3d *v);
-void sphe_to_rect(float lng, float lat, Vec3f *v);
-void rect_to_sphe(double *lng, double *lat, const Vec3d * v);
-void rect_to_sphe(float *lng, float *lat, const Vec3f * v);
+void sphe_to_rect(double lng, double lat, Vec3d& v);
+void sphe_to_rect(double lng, double lat, double r, Vec3d& v);
+void sphe_to_rect(float lng, float lat, Vec3f& v);
+void rect_to_sphe(double *lng, double *lat, const Vec3d& v);
+void rect_to_sphe(float *lng, float *lat, const Vec3f& v);
 
 // Obtains a Vec3f from a string
 Vec3f str_to_vec3f(const char * s);
 
 /* Obtains Latitude, Longitude, RA or Declination from a string. */
-double get_dec_angle(char *s);
+double get_dec_angle(const char *s);
 
 /* Obtains a human readable angle in the form: ddºmm'ss.ss" */
-char * print_angle_dms(double location);
+const char * print_angle_dms(double location);
 
 /* Obtains a human readable angle in the form: dd\6mm'ss.ss" */
-char * print_angle_dms_stel(double location);
+const char * print_angle_dms_stel(double location);
 
 /* Obtains a human readable angle in the form: hhhmmmss.sss" */
-char * print_angle_hms(double location);
+const char * print_angle_hms(double location);
 
 #endif

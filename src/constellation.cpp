@@ -20,7 +20,7 @@
 #include "constellation.h"
 #include "projector.h"
 
-#define RADIUS_CONST 8.
+#define RADIUS_CONST 1.
 
 Constellation::Constellation() : name(NULL), inter(NULL), asterism(NULL)
 {
@@ -43,15 +43,15 @@ int Constellation::read(FILE *  fic, Hip_Star_mgr * _VouteCeleste)
 	char buff2[40];
     unsigned int HP;
 
-	fscanf(fic,"%s %s %s %u ",short_name,buff1,buff2,&nb_segments);
+	if (fscanf(fic,"%s %s %s %u ",short_name,buff1,buff2,&nb_segments)!=4) return 0;
 
 	name=strdup(buff1);
 	inter=strdup(buff2);
 
     asterism = new Hip_Star*[nb_segments*2];
-    for (unsigned int i=0;i<nb_segments*2;i++)
+    for (unsigned int i=0;i<nb_segments*2;++i)
     {
-        fscanf(fic,"%u",&HP);
+        if (fscanf(fic,"%u",&HP)!=1) printf("ERROR while loading constellation data\n");
         asterism[i]=_VouteCeleste->search(HP);
 		if (!asterism[i])
 		{
@@ -59,9 +59,9 @@ int Constellation::read(FILE *  fic, Hip_Star_mgr * _VouteCeleste)
 		}
     }
 
-	fscanf(fic,"\n");
+	if (fscanf(fic,"\n")) printf("ERROR while loading constellation data\n");
 
-    for(unsigned int ii=0;ii<nb_segments*2;ii++)
+    for(unsigned int ii=0;ii<nb_segments*2;++ii)
     {
 		XYZname+=(*asterism[ii]).XYZ;
     }
@@ -82,7 +82,7 @@ void Constellation::draw(Projector* prj)
 		if (prj->project_earth_equ(asterism[2*i]->XYZ,star1) &&
 			prj->project_earth_equ(asterism[2*i+1]->XYZ,star2))
 		{
-			glBegin (GL_LINES);
+			glBegin(GL_LINES);
 				glVertex2f(star1[0],star1[1]);
 				glVertex2f(star2[0],star2[1]);
         	glEnd();
