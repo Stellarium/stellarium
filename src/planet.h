@@ -35,7 +35,7 @@ typedef boost::callback<void, double, double*> pos_func_type;
 
 // epoch J2000: 12 UT on 1 Jan 2000
 #define J2000 2451545.0
-#define ORBIT_SEGMENTS 48
+#define ORBIT_SEGMENTS 72
 
 using namespace std;
 
