@@ -74,10 +74,10 @@ CONFIG_CLEAN_FILES =
 LIBRARIES =  $(noinst_LIBRARIES)
 
 
-DEFS =  -DPACKAGE=\"stellarium\" -DVERSION=\"0.4.7\" -DHAVE_LIMITS_H=1 -DHAVE_MALLOC_H=1 -DHAVE_STRINGS_H=1 -DHAVE_UNISTD_H=1 -DHAVE_GL_GL_H=1 -DHAVE_GL_GLU_H=1 -DHAVE_GL_GLUT_H=1 -Dinline= -DTM_IN_SYS_TIME=1  -I. -I$(srcdir) 
+DEFS =  -DPACKAGE=\"stellarium\" -DVERSION=\"0.4.7\" -DHAVE_GL=1 -DHAVE_GLU=1 -DHAVE_GLUT=1  -I. -I$(srcdir) 
 CPPFLAGS = 
-LDFLAGS = 
-LIBS = 
+LDFLAGS =  -lm
+LIBS =  -lGL -lGLU -lglut
 libglpng_a_DEPENDENCIES =  adler32.o infcodes.o inftrees.o pngrio.o \
 crc32.o pngerror.o pngrtran.o zutil.o glpng.o inffast.o infutil.o \
 pngget.o pngrutil.o pngmem.o pngset.o infblock.o png.o pngpread.o \
@@ -87,7 +87,7 @@ pngerror.o pngrtran.o zutil.o glpng.o inffast.o infutil.o pngget.o \
 pngrutil.o pngmem.o pngset.o infblock.o png.o pngpread.o pngtrans.o \
 inflate.o pngread.o
 AR = ar
-CFLAGS = -g -O2
+CFLAGS = -g -O2 -Wall
 COMPILE = $(CC) $(DEFS) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
 CCLD = $(CC)
 LINK = $(CCLD) $(AM_CFLAGS) $(CFLAGS) $(LDFLAGS) -o $@

@@ -21,19 +21,14 @@ configure:1053: c++ -o conftest    conftest.C  1>&5
 configure:1079: checking whether the C++ compiler (c++  ) is a cross-compiler
 configure:1084: checking whether we are using GNU C++
 configure:1112: checking whether c++ accepts -g
-configure:1155: checking for a BSD compatible install
-configure:1210: checking for ranlib
-configure:1240: checking how to run the C preprocessor
-configure:1320: checking for ANSI C header files
-configure:1427: checking for limits.h
-configure:1427: checking for malloc.h
-configure:1427: checking for strings.h
-configure:1427: checking for unistd.h
-configure:1467: checking for GL/gl.h
-configure:1467: checking for GL/glu.h
-configure:1467: checking for GL/glut.h
-configure:1505: checking for inline
-configure:1545: checking for size_t
-configure:1578: checking whether struct tm is in sys/time.h or time.h
-configure:1615: checking for strdup
-configure:1615: checking for glGenTextures
+configure:1158: checking for a BSD compatible install
+configure:1213: checking for ranlib
+configure:1243: checking how to run the C preprocessor
+configure:1324: checking for GL/gl.h
+configure:1361: checking for GL/glu.h
+configure:1398: checking for GL/glut.h
+configure:1435: checking for glEnable in -lGL
+configure:1476: checking for gluPerspective in -lGLU
+configure:1517: checking for glutMainLoop in -lglut
+configure:1559: checking for ANSI C header files
+configure:1666: checking for strdup

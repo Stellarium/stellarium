@@ -5,22 +5,28 @@ AM_INIT_AUTOMAKE(stellarium,0.4.7)
 dnl Checks for programs.
 AC_PROG_CC
 AC_PROG_CXX
+
+LDFLAGS="$LDFLAGS -lm"
+
 AC_PROG_INSTALL
 AC_PROG_RANLIB
 
-dnl Checks for libraries.
+
+AC_CHECK_HEADER(GL/gl.h,AC_DEFINE(HAVE_GL),AC_MSG_ERROR(gl.h not found - please install OpenGL- or Mesa-devel))
+AC_CHECK_HEADER(GL/glu.h,AC_DEFINE(HAVE_GLU),AC_MSG_ERROR(glu.h not found - please install GLU- or MesaGLU-devel))
+AC_CHECK_HEADER(GL/glut.h,AC_DEFINE(HAVE_GLUT),AC_MSG_ERROR(glut.h not found - please install GLUT- or MesaGLUT-devel))
+
+AC_CHECK_LIB(GL,glEnable,LIBS="$LIBS -lGL",AC_MSG_ERROR(GL not found - please install GL or MesaGL))
+AC_CHECK_LIB(GLU,gluPerspective,LIBS="$LIBS -lGLU",AC_MSG_ERROR(GLU not found - please install GLU or MesaGLU))
+AC_CHECK_LIB(glut,glutMainLoop,LIBS="$LIBS -lglut",AC_MSG_ERROR(GLUT not found - please install GLUT or MesaGLUT))
 
 dnl Checks for header files.
 AC_HEADER_STDC
-AC_CHECK_HEADERS(limits.h malloc.h strings.h unistd.h)
-AC_CHECK_HEADERS(GL/gl.h GL/glu.h GL/glut.h)
-
-dnl Checks for typedefs, structures, and compiler characteristics.
-AC_C_INLINE
-AC_TYPE_SIZE_T
-AC_STRUCT_TM
 
 dnl Checks for library functions.
-AC_CHECK_FUNCS(strdup glGenTextures)
+AC_CHECK_FUNCS(strdup)
+
+CFLAGS="$CFLAGS -Wall"
 
 AC_OUTPUT(Makefile src/Makefile src/astrolib/Makefile src/glpng/Makefile config/Makefile data/Makefile textures/Makefile)
+
