@@ -30,6 +30,7 @@ Improved optimization using gprof.
 Finally fixed the planet shaking bug!
 Updated fog and decor displaying (faster and nicer)
 Added a projector class which will handle different projection mode (fisheye, ortho etc..)
+Made a fisheye projection mode which override gl/glu functions so that 3D drawing occures in fisheye projection mode.
 
 0.5.2 [29/04/2003]
 Changed the configuration file to $HOME/.stellarium/VERSION/ on unix system to prevent conflicts between versions.
