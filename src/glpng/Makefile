@@ -39,10 +39,10 @@ pkglibdir = $(libdir)/stellarium
 pkgincludedir = $(includedir)/stellarium
 top_builddir = ../..
 
-ACLOCAL = ${SHELL} /home/Fabien/work/stellarium/missing --run aclocal
-AUTOCONF = ${SHELL} /home/Fabien/work/stellarium/missing --run autoconf
-AUTOMAKE = ${SHELL} /home/Fabien/work/stellarium/missing --run automake
-AUTOHEADER = ${SHELL} /home/Fabien/work/stellarium/missing --run autoheader
+ACLOCAL = ${SHELL} /home/Fabien/work2/stellarium/missing --run aclocal
+AUTOCONF = ${SHELL} /home/Fabien/work2/stellarium/missing --run autoconf
+AUTOMAKE = ${SHELL} /home/Fabien/work2/stellarium/missing --run automake
+AUTOHEADER = ${SHELL} /home/Fabien/work2/stellarium/missing --run autoheader
 
 am__cd = CDPATH="$${ZSH_VERSION+.}$(PATH_SEPARATOR)" && cd
 INSTALL = /usr/bin/install -c
@@ -58,13 +58,17 @@ POST_INSTALL = :
 NORMAL_UNINSTALL = :
 PRE_UNINSTALL = :
 POST_UNINSTALL = :
+build_alias = 
+build_triplet = i686-pc-cygwin
 host_alias = 
 host_triplet = i686-pc-cygwin
+target_alias = 
+target_triplet = i686-pc-cygwin
 
 EXEEXT = .exe
 OBJEXT = o
 PATH_SEPARATOR = :
-AMTAR = ${SHELL} /home/Fabien/work/stellarium/missing --run tar
+AMTAR = ${SHELL} /home/Fabien/work2/stellarium/missing --run tar
 AWK = gawk
 CC = gcc
 CPP = gcc -E
@@ -81,7 +85,7 @@ X_LIBS =
 X_PRE_LIBS = 
 am__include = include
 am__quote = 
-install_sh = /home/Fabien/work/stellarium/install-sh
+install_sh = /home/Fabien/work2/stellarium/install-sh
 
 noinst_LIBRARIES = libglpng.a
 
@@ -108,7 +112,7 @@ am_libglpng_a_OBJECTS = adler32.$(OBJEXT) infcodes.$(OBJEXT) \
 	pngread.$(OBJEXT)
 libglpng_a_OBJECTS = $(am_libglpng_a_OBJECTS)
 
-DEFS = -DPACKAGE=\"stellarium\" -DVERSION=\"0.4.9\" -DX_DISPLAY_MISSING=1 -DHAVE_TOUPPER=1 -DHAVE_STRCASECMP=1 -DCONFIG_DATA_DIR=\"/usr/local/share/stellarium\" 
+DEFS = -DPACKAGE=\"stellarium\" -DVERSION=\"0.4.9\" -DX_DISPLAY_MISSING=1 -DHAVE_TOUPPER=1 -DHAVE_STRCASECMP=1 -DHAVE_STRDUP=1 -DCONFIG_DATA_DIR=\"/usr/local/share/stellarium\" 
 DEFAULT_INCLUDES =  -I. -I$(srcdir)
 CPPFLAGS = 
 LDFLAGS = 
