@@ -1416,7 +1416,7 @@ int StringList::onClic(int x, int y, S_GUI_VALUE button, S_GUI_VALUE state)
 {
 	if (!visible || state!=S_GUI_PRESSED || !isIn(x,y)) return 0;
 	int poss = (y-pos[1])/itemSize;
-	if (items.begin()+poss == items.end()) return 1;
+	if (items.begin()+poss == items.end() || (unsigned int)poss>items.size()) return 1;
 	current = items.begin()+poss;
 	if (!onPressCallback.empty()) onPressCallback();
 	return 1;

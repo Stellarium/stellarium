@@ -499,6 +499,7 @@ namespace s_gui
 		void addItem(const string &);
 		const string getValue() const;
 		bool setValue(const string &);
+		void adjustSize(void) {setSizey(elemsSize);}
 	private:
 		int elemsSize;
 		int itemSize;

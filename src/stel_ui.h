@@ -93,7 +93,7 @@ private:
 	FlagButton * bt_flag_atmosphere;
 	FlagButton * bt_flag_nebula_name;
 	FlagButton * bt_flag_help;
-	FlagButton * bt_flag_follow_earth;
+	FlagButton * bt_flag_equatorial_mode;
 	FlagButton * bt_flag_config;
 	FlagButton * bt_flag_quit;
 	Component* createFlagButtons(void);
@@ -165,13 +165,15 @@ private:
 
 	Time_zone_item* tzselector;
 	Label* system_tz_lbl2;
+	Label* time_speed_lbl2;
 	void setTimeZone(void);
+
 
 	// Video Options
 	LabeledCheckBox* fisheye_projection_cbx;
 	LabeledCheckBox* disk_viewport_cbx;
 	StringList* screen_size_sl;
-	void setVideoSize(void);
+	void setVideoOption(void);
 	void updateVideoVariables(void);
 
 	void updateConfigVariables(void);
