@@ -74,7 +74,7 @@ Component::Component() :
         moveCallback(NULL),
         mouseIn(false),
         active(true),
-        focus(false),
+        focus(false)
 {
 }
 
