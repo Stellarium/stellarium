@@ -61,12 +61,25 @@ float stel_atmosphere::get_intensity(void)
   return atm_intensity;
 }
 
-void stel_atmosphere::compute_color(double JD, Vec3d sunPos, Vec3d moonPos, float moon_phase,
+void stel_atmosphere::compute_color(double JD,  int delta_time, Vec3d sunPos, Vec3d moonPos, float moon_phase,
 	tone_reproductor * eye, Projector* prj,
 	float latitude, float altitude, float temperature, float relative_humidity)
 {
+
+	float delta_intensity = delta_time/3000.f;
+	// update fade
+	if(!atm_on) {
+	  if( ai > delta_intensity ) {ai -= delta_intensity;} 
+	  else {ai = 0;}
+	} else {
+	  if( ai + delta_intensity <= 1 ) {ai += delta_intensity;} 
+	  else {ai = 1;}
+	}
+
+	atm_intensity = ai*ai;
+
 	// no need to calculate if not visible
-    if( atm_intensity < .001)
+	if( atm_intensity < .001)
 	{
 		eye->set_world_adaptation_luminance(3.75f);
 		return;
@@ -154,45 +167,36 @@ void stel_atmosphere::compute_color(double JD, Vec3d sunPos, Vec3d moonPos, floa
 // Draw the atmosphere using the precalc values stored in tab_sky
 void stel_atmosphere::draw(Projector* prj, int delta_time)
 {
-	// 5 second fade
-	float delta_intensity = delta_time/2000.f;
-	// update fade
-	if(!atm_on)
-	{
-    	if( atm_intensity > delta_intensity ) {atm_intensity -= delta_intensity;} 
-		else {atm_intensity = 0; return;}
+
+	if(atm_intensity > 0 ) {
+
+	  // printf("Atm int: %f\n", atm_intensity);
+	  glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_COLOR);
+
+	  float stepX = (float)prj->viewW() / sky_resolution;
+	  float stepY = (float)prj->viewH() / sky_resolution;
+	  float viewport_left = (float)prj->view_left();
+	  float view_bottom = (float)prj->view_bottom();
+
+	  glDisable(GL_TEXTURE_2D);
+	  glEnable(GL_BLEND);
+	  prj->set_orthographic_projection();	// set 2D coordinate
+	  for (int y2=0; y2<sky_resolution; ++y2)
+	    {
+	      glBegin(GL_TRIANGLE_STRIP);
+	      for(int x2=0; x2<sky_resolution+1; ++x2)
+		{
+		  glColor3f(atm_intensity*tab_sky[x2][y2][0],atm_intensity*tab_sky[x2][y2][1],
+			    atm_intensity*tab_sky[x2][y2][2]);
+		  glVertex2i((int)(viewport_left+x2*stepX),(int)(view_bottom+y2*stepY));
+		  glColor3f(atm_intensity*tab_sky[x2][y2+1][0],atm_intensity*tab_sky[x2][y2+1][1],
+			    atm_intensity*tab_sky[x2][y2+1][2]);
+		  glVertex2i((int)(viewport_left+x2*stepX),(int)(view_bottom+(y2+1)*stepY));
+		}
+	      glEnd();
+	    }
+	  prj->reset_perspective_projection();
 	}
 
-	glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_COLOR);
 
-	float stepX = (float)prj->viewW() / sky_resolution;
-	float stepY = (float)prj->viewH() / sky_resolution;
-	float viewport_left = (float)prj->view_left();
-	float view_bottom = (float)prj->view_bottom();
-
-	glDisable(GL_TEXTURE_2D);
-	glEnable(GL_BLEND);
-	prj->set_orthographic_projection();	// set 2D coordinate
-	for (int y2=0; y2<sky_resolution; ++y2)
-	{
-		glBegin(GL_TRIANGLE_STRIP);
-			for(int x2=0; x2<sky_resolution+1; ++x2)
-			{
-				glColor3f(atm_intensity*tab_sky[x2][y2][0],atm_intensity*tab_sky[x2][y2][1],
-					  atm_intensity*tab_sky[x2][y2][2]);
-				glVertex2i((int)(viewport_left+x2*stepX),(int)(view_bottom+y2*stepY));
-				glColor3f(atm_intensity*tab_sky[x2][y2+1][0],atm_intensity*tab_sky[x2][y2+1][1],
-					  atm_intensity*tab_sky[x2][y2+1][2]);
-				glVertex2i((int)(viewport_left+x2*stepX),(int)(view_bottom+(y2+1)*stepY));
-			}
-		glEnd();
-	}
-	prj->reset_perspective_projection();
-
-	// smoother initial fade in when increment after drawing
-	if(atm_on)
-	{
-		if( atm_intensity + delta_intensity <= 1 ) {atm_intensity += delta_intensity;} 
-		else {atm_intensity = 1;}
-	}
 }
