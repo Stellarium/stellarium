@@ -40,4 +40,7 @@
 #define MY_MAX(a,b) (((a)>(b))?(a):(b))
 #define MY_MIN(a,b) (((a)<(b))?(a):(b))
 
+// needed for bug workarounds
+// #define NVIDIA TRUE
+
 #endif /*_STELLARIUM_H_*/
