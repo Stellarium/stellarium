@@ -34,8 +34,8 @@ rotation_elements::rotation_elements() : period(1.), offset(0.), epoch(J2000),
 planet::planet(const char * _name, int _flagHalo, int _flag_lighting, double _radius, Vec3f _color,
 	float _albedo, const char* tex_map_name, const char* tex_halo_name, pos_func_type _coord_func) :
 		name(NULL), flagHalo(_flagHalo), flag_lighting(_flag_lighting), radius(_radius), color(_color),
-		albedo(_albedo), axis_rotation(0.),	tex_map(NULL), tex_halo(NULL), rings(NULL), lastJD(J2000),
-		deltaJD(JD_SECOND), coord_func(_coord_func), parent(NULL)
+		albedo(_albedo), axis_rotation(0.),	tex_map(NULL), tex_halo(NULL), rings(NULL), sphere_scale(1.f),
+		lastJD(J2000), deltaJD(JD_SECOND), coord_func(_coord_func), parent(NULL)
 {
 	ecliptic_pos=Vec3d(0.,0.,0.);
 	mat_local_to_parent = Mat4d::identity();
@@ -61,10 +61,14 @@ planet::~planet()
 void planet::get_info_string(char * s, const navigator * nav) const
 {
 	double tempDE, tempRA;
+	static char scale_str[100];
+	if (sphere_scale == 1.f) scale_str[0] = '\0';
+	else sprintf(scale_str," (x%.1f)", sphere_scale);
+
 	Vec3d equPos = get_earth_equ_pos(nav);
 	rect_to_sphe(&tempRA,&tempDE,equPos);
-	sprintf(s,"Name :%s\nRA : %s\nDE : %s\nDistance : %.8f UA\nMagnitude : %.2f",
-	name, print_angle_hms(tempRA*180./M_PI), print_angle_dms_stel(tempDE*180./M_PI), equPos.length(),
+	sprintf(s,"Name :%s%s\nRA : %s\nDE : %s\nDistance : %.8f UA\nMagnitude : %.2f",
+	name, scale_str, print_angle_hms(tempRA*180./M_PI), print_angle_dms_stel(tempDE*180./M_PI), equPos.length(),
 	compute_magnitude(nav->get_observer_helio_pos()));
 }
 
@@ -200,7 +204,7 @@ void planet::add_satellite(planet*p)
 // Return the radius of a circle containing the object on screen
 float planet::get_on_screen_size(const navigator * nav, const Projector* prj)
 {
-	return atanf(radius*2.f/get_earth_equ_pos(nav).length())*180./M_PI/prj->get_fov()*prj->viewH();
+	return atanf(radius*sphere_scale*2.f/get_earth_equ_pos(nav).length())*180./M_PI/prj->get_fov()*prj->viewH();
 }
 
 // Draw the planet and all the related infos : name, circle etc..
@@ -268,9 +272,13 @@ void planet::draw_hints(const navigator* nav, const Projector* prj)
 	glDisable(GL_LIGHTING);
 	glEnable(GL_TEXTURE_2D);
 
+	// Draw name + scaling if it's not == 1.
+	static char scale_str[100];
+	if (sphere_scale == 1.f) sprintf(scale_str,"%s", name);
+	else sprintf(scale_str,"%s (x%.1f)", name, sphere_scale);
 	float tmp = 10.f + get_on_screen_size(nav, prj)/2.f; // Shift for name printing
-	gravity_label ? prj->print_gravity(planet_name_font, screenPos[0],screenPos[1], name, tmp, tmp) :
-		planet_name_font->print(screenPos[0]+tmp,screenPos[1]+tmp, name);
+	gravity_label ? prj->print_gravity(planet_name_font, screenPos[0],screenPos[1], scale_str, tmp, tmp) :
+		planet_name_font->print(screenPos[0]+tmp,screenPos[1]+tmp, scale_str);
 
 	// hint disapears smoothly on close view
 	tmp -= 10.f;
@@ -302,8 +310,7 @@ void planet::draw_sphere(const Projector* prj, const Mat4d& mat)
 
 	// Rotate and add an extra half rotation because of the convention in all
     // planet texture maps where zero deg long. is in the middle of the texture.
-	//printf("%s\n", name);
-	prj->sSphere(radius,40,40, mat * Mat4d::zrotation(M_PI/180*(axis_rotation + 180.)));
+	prj->sSphere(radius*sphere_scale,40,40, mat * Mat4d::zrotation(M_PI/180*(axis_rotation + 180.)));
 
     glDisable(GL_CULL_FACE);
 	glDisable(GL_LIGHTING);
