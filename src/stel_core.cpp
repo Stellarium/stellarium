@@ -267,6 +267,7 @@ void stel_core::update(int delta_time)
 	// Move the view direction and/or fov
 	update_move(delta_time);
 
+
 	// Update info about selected object
 	if (selected_object) selected_object->update();
 
@@ -1336,7 +1337,11 @@ int stel_core::set_flag(string name, string value, bool &newval, bool trusted) {
     else if(name=="ecliptic_line") newval = (FlagEclipticLine = !FlagEclipticLine);
     else if(name=="cardinal_points") newval = (FlagCardinalPoints = !FlagCardinalPoints);
     else if(name=="gravity_labels") newval = (FlagGravityLabels = !FlagGravityLabels);
-    else if(name=="init_moon_scaled") newval = (FlagInitMoonScaled = !FlagInitMoonScaled);
+    else if(name=="init_moon_scaled") {
+      if(newval = (FlagInitMoonScaled = !FlagInitMoonScaled)) 
+	ssystem->get_moon()->set_sphere_scale(MoonScale);
+      else ssystem->get_moon()->set_sphere_scale(1.);
+    }
     else if(name=="stars") newval = (FlagStars = !FlagStars);
     else if(name=="star_name") newval = (FlagStarName = !FlagStarName);
     else if(name=="planets") newval = (FlagPlanets = !FlagPlanets);
@@ -1391,7 +1396,10 @@ int stel_core::set_flag(string name, string value, bool &newval, bool trusted) {
     else if(name=="ecliptic_line") FlagEclipticLine = newval;
     else if(name=="cardinal_points") FlagCardinalPoints = newval;
     else if(name=="gravity_labels") FlagGravityLabels = newval;
-    else if(name=="init_moon_scaled") FlagInitMoonScaled = newval;
+    else if(name=="init_moon_scaled") {
+      if((FlagInitMoonScaled = newval)) ssystem->get_moon()->set_sphere_scale(MoonScale);
+      else ssystem->get_moon()->set_sphere_scale(1.);
+    }
     else if(name=="stars") FlagStars = newval;
     else if(name=="star_name") FlagStarName = newval;
     else if(name=="planets") FlagPlanets = newval;
