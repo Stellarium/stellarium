@@ -663,7 +663,7 @@ int stel_core::handle_keys(SDLKey key, s_gui::S_GUI_VALUE state)
 
 void stel_core::turn_right(int s)
 {
-	if (s)
+	if (s && FlagEnableMoveKeys)
 	{
 		deltaAz = 1;
 		navigation->set_flag_traking(0);
@@ -673,7 +673,7 @@ void stel_core::turn_right(int s)
 
 void stel_core::turn_left(int s)
 {
-	if (s)
+	if (s && FlagEnableMoveKeys)
 	{
 		deltaAz = -1;
 		navigation->set_flag_traking(0);
@@ -683,7 +683,7 @@ void stel_core::turn_left(int s)
 
 void stel_core::turn_up(int s)
 {
-	if (s)
+	if (s && FlagEnableMoveKeys)
 	{
 		deltaAlt = 1;
 		navigation->set_flag_traking(0);
@@ -693,7 +693,7 @@ void stel_core::turn_up(int s)
 
 void stel_core::turn_down(int s)
 {
-	if (s)
+	if (s && FlagEnableMoveKeys)
 	{
 		deltaAlt = -1;
 		navigation->set_flag_traking(0);
@@ -703,12 +703,12 @@ void stel_core::turn_down(int s)
 
 void stel_core::zoom_in(int s)
 {
-	deltaFov = -1*(s!=0);
+	if (FlagEnableZoomKeys) deltaFov = -1*(s!=0);
 }
 
 void stel_core::zoom_out(int s)
 {
-	deltaFov = (s!=0);
+	if (FlagEnableZoomKeys) deltaFov = (s!=0);
 }
 
 
@@ -758,8 +758,8 @@ void stel_core::update_move(int delta_time)
         }
     }
 
-	if (FlagEnableZoomKeys) projection->change_fov(deltaFov);
-	if (FlagEnableMoveKeys) navigation->update_move(deltaAz, deltaAlt);
+	projection->change_fov(deltaFov);
+	navigation->update_move(deltaAz, deltaAlt);
 }
 
 void stel_core::set_screen_size(int w, int h)
