@@ -1,4 +1,4 @@
-/* 
+/*
  * Stellarium
  * Copyright (C) 2002 Fabien Chéreau
  * 
@@ -75,7 +75,6 @@
 // The global structure
 extern stellariumParams global;
 extern stellariumParams globalInit;
-
 
 #define code_not_reached() \
     check_assertion( 0, "supposedly unreachable code reached!" )

@@ -1,4 +1,4 @@
-/* 
+/*
  * Stellarium
  * Copyright (C) 2002 Fabien Chéreau
  * 
@@ -24,10 +24,10 @@ ShootingStar::ShootingStar() :
 	Dead(0)
 {	
 	ShootTexture = new s_texture("etoile32x32");
-	XYZ0.Set(000.,500,0);
-	XYZ1.Set(1000.,40,0);
-	XYZ0.Normalize();
-	XYZ1.Normalize();
+	XYZ0=vec3_t(000.,500,0);
+	XYZ1=vec3_t(1000.,40,0);
+	XYZ0.normalize();
+	XYZ1.normalize();
 	
 }
 
@@ -55,7 +55,7 @@ void ShootingStar::Draw()
 	XYZ=XYZ1*coef;
 	vec3_t temp = XYZ0*(1.0-coef);
 	XYZ+=temp;
-	XYZ.Normalize();
+	XYZ.normalize();
 	coef+=0.02;//speed;
 	if (coef>=1.)
 	{   

@@ -18,16 +18,17 @@
  */
 
 #include "stelconfig.h"
-#include "DateOps.h"
 #include "parsecfg.h"
+#include "stellarium.h"
+#include "navigator.h"
 
-double tempLatitude=0;
-double tempLongitude=0;
+char * tempLatitude=NULL;
+char * tempLongitude=NULL;
 char * tempDate = NULL;
 char * tempTime = NULL;
 char * tempGuiBaseColor = NULL;
 char * tempGuiTextColor = NULL;
-
+double tempFov=60.;
 
 // array of cfgStruct for reading on config file
 cfgStruct cfgini[] =
@@ -77,8 +78,8 @@ cfgStruct cfgini[] =
 
 cfgStruct cfgini2[] =
 {// parameter               type        address of variable
-	{"LATITUDE",            CFG_DOUBLE, &tempLatitude},
-	{"LONGITUDE",           CFG_DOUBLE, &tempLongitude},
+	{"LATITUDE",            CFG_STRING, &tempLatitude},
+	{"LONGITUDE",           CFG_STRING, &tempLongitude},
 	{"ALTITUDE",            CFG_INT,    &global.Altitude},
 	{"TIME_ZONE",           CFG_INT,    &global.TimeZone},
     {"LANDSCAPE_NUMBER",    CFG_INT,    &global.LandscapeNumber},
@@ -203,22 +204,14 @@ void setDirectories(void)
 void loadConfig(char * configFile, char * locationFile)
 {
     global.SkyBrightness=0;
-    global.Fov=60.;
     global.X_Resolution=800;
     global.Y_Resolution=600;
-    global.RaZenith=0;
-    global.DeZenith=0;
-    global.AzVision=0;
-    global.deltaFov=0;
-    global.deltaAlt=0;
-    global.deltaAz=0;
-    global.Fps=40;
+    global.Fps=60;
     global.FlagSelect=false;
     global.FlagRealMode=false;
     global.FlagConfig = false;
     global.StarTwinkleAmount = 2;
     global.FlagTraking = false;
-    global.TimeDirection = 1;
     global.Altitude = 100;
     global.FlagRealTime=1;
     
@@ -233,37 +226,65 @@ void loadConfig(char * configFile, char * locationFile)
 		printf("An error was detected in the location file\n");
         exit(-1);
     }
-    
+
+
     // init the time parameters with current time and date
-    int d,m,y,hour,min,sec;
-    time_t rawtime;
-    tm * ptm;
-    time ( &rawtime );
-    ptm = gmtime ( &rawtime );
-    y=ptm->tm_year+1900;
-    m=ptm->tm_mon+1;
-    d=ptm->tm_mday;
-    hour=ptm->tm_hour;
-    min=ptm->tm_min;
-    sec=ptm->tm_sec;
+	ln_date * date=NULL;
+	get_ln_date_from_sys(date);
 
     // If no date given -> default today
     if (tempDate!=NULL && strcmp(tempDate,"today"))
     {
-    	if (tempDate!=NULL && (sscanf(tempDate,"%d/%d/%d\n",&m,&d,&y) != 3))
+    	if (tempDate!=NULL && (sscanf(tempDate,"%d/%d/%d\n",&(date->months),&(date->days),&(date->years)) != 3))
     	{
 			printf("ERROR, bad date format : please change config.txt\n\n");
         	exit(-1);
         }
     }
+
 	if (tempTime!=NULL && strcmp(tempTime,"now"))
 	{
-    	if (tempTime!=NULL && (sscanf(tempTime,"%d:%d:%d\n",&hour,&min,&sec) != 3))
+    	if (tempTime!=NULL && (sscanf(tempTime,"%d:%d:%lf\n",&(date->hours),&(date->minutes),&(date->seconds)) != 3))
     	{
 			printf("ERROR, bad time format : please change config.txt\n\n");
         	exit(-1);
         }
     }
+
+    if (date->months>12 || date->months<1 || date->days<1 || date->days>31)
+    {
+		printf("ERROR, bad month value : please change config.txt\n\n");
+        exit(-1);
+    }
+
+    if (date->hours>23 || date->hours<0 || date->minutes<0 || date->minutes>59 || date->seconds<0 || date->seconds>=60)
+    {
+		printf("ERROR, bad time value : please change config.txt\n\n");
+        exit(-1);
+    }
+
+    if (tempDate) delete tempDate;
+	tempDate=NULL;
+
+    if (tempTime)
+    {
+        date->hours-=global.TimeZone;	// maybe bug if time zone+hours>23
+        delete tempTime;
+		tempTime=NULL;
+    }
+
+    // calc the julian date and store it in the global variable JDay
+    navigation.set_JDay(get_julian_day(date));
+
+
+    // set the read latitude and longitude
+    global.ThePlace.lng=get_dec_location(tempLongitude);
+    global.ThePlace.lat=get_dec_location(tempLatitude);
+
+	if (tempLongitude) delete tempLongitude;
+	tempLongitude=NULL;
+	if (tempLatitude) delete tempLatitude;
+	tempLatitude=NULL;
 
 
 	float r,g,b;
@@ -287,46 +308,12 @@ void loadConfig(char * configFile, char * locationFile)
 		global.GuiTextColor=vec3_t(r,g,b);
     }
 
-    if (m>12 || m<1 || d<1 || d>31)
-    {
-		printf("ERROR, bad month value : please change config.txt\n\n");
-        exit(-1);
-    }
-
-    if (hour>23 || hour<0 || min<0 || min>59 || sec<0 || sec>59)
-    {
-		printf("ERROR, bad time value : please change config.txt\n\n");
-        exit(0);
-    }
-
 	if (tempGuiBaseColor) delete tempGuiBaseColor;
 	tempGuiBaseColor=NULL;
 
 	if (tempGuiTextColor) delete tempGuiTextColor;
 	tempGuiTextColor=NULL;
 
-    if (tempDate) delete tempDate;
-	tempDate=NULL;
-
-    if (tempTime)
-    {
-        hour-=global.TimeZone;
-        delete tempTime;
-		tempTime=NULL;
-    }
-    // calc the julian date and store it in the global variable JDay
-    global.JDay=DateOps::dmyToDay(d,m,y);
-    global.JDay+=((double)hour*HEURE+((double)min+(double)sec/60)*MINUTE);
-
-
-    // arrange the latitude/longitude to fit with astroOps conventions
-    tempLatitude=90.-tempLatitude;
-    tempLongitude=-tempLongitude;
-    if (tempLongitude<0)
-	tempLongitude=360.+tempLongitude;
-    // Set the change in the position
-    global.ThePlace.setLongitude(tempLongitude);
-    global.ThePlace.setLatitude(tempLatitude);
 }
 
 // *******************  Dump the configuration file  **************************
@@ -375,11 +362,8 @@ void dumpConfig(void)
 void dumpLocation(void)
 {
 	// Set the position values in config file format
-	tempLatitude = global.ThePlace.degLatitude();
-	tempLatitude = 90.-tempLatitude;
-    tempLongitude = global.ThePlace.degLongitude();
-    if (tempLongitude>180) tempLongitude-=360;
-	tempLongitude=-tempLongitude;
+	tempLatitude=get_humanr_location(global.ThePlace.lat);
+	tempLongitude=get_humanr_location(global.ThePlace.lng);
 
 	char tempName[255];
     strcpy(tempName,global.ConfigDir);
@@ -401,4 +385,10 @@ void dumpLocation(void)
     }
     fprintf(f,"#\n# See the file location_examples.txt for options description.\n# Go on this website to findout what your location is : http://www.heavens-above.com/countries.asp\n#");
     fclose(f);
+
+	// Delete the created strings
+	if (tempLongitude) delete tempLongitude;
+	tempLongitude=NULL;
+	if (tempLatitude) delete tempLatitude;
+	tempLatitude=NULL;
 }

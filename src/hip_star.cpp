@@ -19,6 +19,8 @@
 
 #include "hip_star.h"
 #include "bytes.h"
+#include "stellarium.h"
+#include "navigator.h"
 
 extern unsigned int starTextureId;
 extern s_font * starFont;
@@ -64,7 +66,7 @@ int Hip_Star::Read(FILE * catalog)
 	LE_TO_CPU_INT16(type, type);
 	 
     // Calc the Cartesian coord with RA and DE
-    RADE_to_XYZ((double)RA,(double)DE,XYZ);
+    sphe_to_rect(RA,DE,&XYZ);
     XYZ*=RAYON;
 
     switch(type >> 8 & 0xf)
@@ -122,7 +124,7 @@ void Hip_Star::Draw(void)
         return;
 
     // Calculation of the demi-size of the star texture
-    rmag = rmag_t/pow(global.Fov,0.85);
+    rmag = rmag_t/pow(navigation.get_fov(),0.85);
 
     cmag = 1.;
     
@@ -146,7 +148,7 @@ void Hip_Star::Draw(void)
     // Calculation of the luminosity
     cmag*=(1.-coef);
     rmag*=global.StarScale/3;
-    glColor3fv(RGB/MaxColorValue*cmag);
+    glColor3fv(RGB*(cmag/MaxColorValue));
     glPushMatrix();
     glLoadIdentity();
     glTranslatef(XY[0],global.Y_Resolution-XY[1],0);
@@ -161,6 +163,6 @@ void Hip_Star::Draw(void)
 
 void Hip_Star::DrawName(void)
 {   
-    glColor3fv(RGB/2.5);
+    glColor3fv(RGB*(1./2.5));
 	starFont->print(XY[0]+6,global.Y_Resolution-XY[1]+6, CommonName);
 }

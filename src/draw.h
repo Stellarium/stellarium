@@ -1,4 +1,4 @@
-/* 
+/*
  * Stellarium
  * Copyright (C) 2002 Fabien Chéreau
  * 
@@ -26,7 +26,7 @@
 void InitMeriParal(void);
 void drawIntro(void);
 void DrawPoint(float X,float Y,float Z);
-void DrawPointer(vec3_t,float,vec3_t,int);
+void DrawPointer(Vec3d,float,vec3_t,int);
 
 void DrawCardinaux(void);
 void DrawMilkyWay(void);

@@ -3,7 +3,7 @@ dnl Process this file with autoconf to produce a configure script.
 
 AC_INIT(src/main.cpp)
 AM_CONFIG_HEADER(src/config.h)
-AM_INIT_AUTOMAKE(stellarium,0.5.2)
+AM_INIT_AUTOMAKE(stellarium,0.5.3b)
 
 dnl Check system type
 AC_CANONICAL_HOST
@@ -94,5 +94,4 @@ esac
 dnl Checks for library functions.
 AC_CHECK_FUNCS(toupper strcasecmp strdup)
 
-
-AC_OUTPUT(Makefile src/Makefile src/astrolib/Makefile src/glpng/Makefile config/Makefile data/Makefile textures/Makefile textures/landscapes/Makefile)
+AC_OUTPUT(Makefile stellarium.spec src/Makefile src/glpng/Makefile config/Makefile data/Makefile textures/Makefile textures/landscapes/Makefile)

@@ -1,4 +1,4 @@
-/* 
+/*
  * Stellarium
  * Copyright (C) 2002 Fabien Chéreau
  * 
@@ -132,7 +132,8 @@ void Nebula_mgr::Draw()
 
 // Look for a nebulae by XYZ coords
 int Nebula_mgr::Rechercher(vec3_t Pos)
-{   Pos.Normalize();
+{
+	Pos.normalize();
     vector<Nebula *>::iterator iter;
     Nebula * plusProche=NULL;
     float anglePlusProche=3.15;
