@@ -63,6 +63,7 @@ void Meteor_mgr::update(int delta_time) {
       // remove dead meteor
       //      printf("Meteor \tdied\n");
 
+      delete *iter;
       active.erase(iter);
       iter--;  // important!
     }
