@@ -21,6 +21,7 @@
 #define _PLANET_H_
 
 #include <list>
+#include <string>
 #include "stellarium.h"
 #include "stel_utility.h"
 #include "s_font.h"
@@ -54,7 +55,7 @@ class rotation_elements
 class ring
 {
 public:
-	ring(float _radius, const char* _texname);
+	ring(float _radius, const string& _texname);
 	virtual ~ring();
 	void draw(const Projector* prj, const Mat4d& mat);
 	double get_size(void) const {return radius;}
@@ -67,8 +68,8 @@ private:
 class planet : public stel_object
 {
 public:
-	planet(const char * _name, int _flagHalo, int _flag_lighting, double _radius, Vec3f _color,
-	float _albedo, const char* tex_map_name, const char* tex_halo_name, pos_func_type _coord_func);
+	planet(const string& _name, int _flagHalo, int _flag_lighting, double _radius, Vec3f _color,
+	float _albedo, const string& tex_map_name, const string& tex_halo_name, pos_func_type _coord_func);
 
     virtual ~planet();
 
@@ -116,7 +117,7 @@ public:
 	// Return the planet position in rectangular earth equatorial coordinate
 	Vec3d get_earth_equ_pos(const navigator * nav) const;
 
-	const char* get_name(void) const {return name;}
+	string get_name(void) const {return name;}
 
 	// Return the radius of a circle containing the object on screen
 	float get_on_screen_size(const navigator * nav, const Projector* prj);
@@ -142,7 +143,7 @@ protected:
 	// Draw the circle and name of the planet
 	void draw_hints(const navigator* nav, const Projector* prj);
 
-    char * name;
+    string name;
 	int flagHalo;					// Set wether a little "star like" halo will be drawn
 	int flag_lighting;				// Set wether light computation has to be proceed
 	rotation_elements re;			// Rotation param

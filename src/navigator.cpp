@@ -27,23 +27,20 @@
 ////////////////////////////////////////////////////////////////////////////////
 observator_pos::observator_pos() : planet(3), longitude(0.), latitude(0.), time_zone(0), altitude(0)
 {
-	name = strdup("Anonymous_Location");
+	name = "Anonymous_Location";
 }
 
 observator_pos::~observator_pos()
 {
-	if (name) delete name;
 }
 
 void observator_pos::save(FILE * f)
 {
 	// Set the position values in config file format
-	char * tempLatitude=strdup(print_angle_dms(latitude));
-	char * tempLongitude=strdup(print_angle_dms(longitude));
-	fprintf(f,"%s %s %d %d %s\n",tempLongitude, tempLatitude, altitude, time_zone, name);
-	printf("SAVE location : %s %s %d %d %s\n",tempLongitude, tempLatitude, altitude, time_zone, name);
-	if (tempLatitude) delete tempLatitude;
-	if (tempLongitude) delete tempLongitude;
+	string tempLatitude = print_angle_dms(latitude);
+	string tempLongitude = print_angle_dms(longitude);
+	fprintf(f,"%s %s %d %d %s\n",tempLongitude.c_str(), tempLatitude.c_str(), altitude, time_zone, name.c_str());
+	printf("SAVE location : %s %s %d %d %s\n",tempLongitude.c_str(), tempLatitude.c_str(), altitude, time_zone, name.c_str());
 }
 
 void observator_pos::load(FILE * f)
@@ -51,8 +48,8 @@ void observator_pos::load(FILE * f)
 	char tempLatitude[20], tempLongitude[20], tempName[100];
 	tempName[0]=0;
 	fscanf(f,"%s %s %d %d %s\n",tempLongitude, tempLatitude, &altitude, &time_zone, tempName);
-	name=strdup(tempName);
-	printf("LOAD location : %s %s %d %d %s\n",tempLongitude, tempLatitude, altitude, time_zone, name);
+	name = tempName;
+	printf("LOAD location : %s %s %d %d %s\n",tempLongitude, tempLatitude, altitude, time_zone, name.c_str());
     // set the read latitude and longitude
     longitude=get_dec_angle(tempLongitude);
     latitude=get_dec_angle(tempLatitude);
@@ -72,16 +69,16 @@ navigator::~navigator()
 
 ////////////////////////////////////////////////////////////////////////////////
 // Load the position info in the file name given
-void navigator::load_position(const char * fileName)
+void navigator::load_position(const string& fileName)
 {
 	FILE * f = NULL;
-	f=fopen(fileName,"rt");
+	f=fopen(fileName.c_str(),"rt");
 	if (!f)
 	{
-        printf("ERROR %s NOT FOUND\n",fileName);
+        printf("ERROR %s NOT FOUND\n",fileName.c_str());
         exit(-1);
 	}
-	printf("Loading location file... (%s)\n",fileName);
+	printf("Loading location file... (%s)\n",fileName.c_str());
 	position.load(f);
 
 	fclose(f);
@@ -89,13 +86,13 @@ void navigator::load_position(const char * fileName)
 
 ////////////////////////////////////////////////////////////////////////////////
 // Save the position info in the file name given
-void navigator::save_position(const char * fileName)
+void navigator::save_position(const string& fileName)
 {
 	FILE * f = NULL;
-	f=fopen(fileName,"wt");
+	f=fopen(fileName.c_str(),"wt");
 	if (!f)
 	{
-        printf("ERROR %s NOT FOUND\n",fileName);
+        printf("ERROR %s NOT FOUND\n",fileName.c_str());
         exit(-1);
 	}
 	position.save(f);

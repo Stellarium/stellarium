@@ -22,14 +22,18 @@
 #ifndef _INIT_PARSER_H_
 #define _INIT_PARSER_H_
 
+#include <string>
+#include <iostream>
 #include "iniparser.h"
+
+using namespace std;
 
 class init_parser
 {
 public:
 	// Create the parser object from the given file
 	// You need to call load() before using the get() functions
-    init_parser(const char * file);
+    init_parser(const string& file);
     virtual ~init_parser();
 
 	// Load the config file (the parsing operation)
@@ -39,36 +43,36 @@ public:
 	void save(void) const;
 
 	// Save the current config state in the given file
-	void save_to(const char * file_name) const;
+	void save_to(const string& file_name) const;
 
 	// Get a string from the key.
-	const char * get_str(const char * key) const;
-	const char * get_str(const char * section, const char * key) const;
-	const char * get_str(const char * section, const char * key, const char * def) const;
+	string get_str(const string& key) const;
+	string get_str(const string& section, const string& key) const;
+	string get_str(const string& section, const string& key, const string& def) const;
 
 	// Get a integer from the key.
-	int get_int(const char * key) const;
-	int get_int(const char * section, const char * key) const;
-	int get_int(const char * section, const char * key, int def) const;
+	int get_int(const string& key) const;
+	int get_int(const string& section, const string& key) const;
+	int get_int(const string& section, const string& key, int def) const;
 
 	// Get a double from the key.
-	double get_double(const char * key) const;
-	double get_double(const char * section, const char * key) const;
-	double get_double(const char * section, const char * key, double def) const;
+	double get_double(const string& key) const;
+	double get_double(const string& section, const string& key) const;
+	double get_double(const string& section, const string& key, double def) const;
 
 	// Get a boolean (int) from the key.
-	int get_boolean(const char * key) const;
-	int get_boolean(const char * section, const char * key) const;
-	int get_boolean(const char * section, const char * key, int def) const;
+	int get_boolean(const string& key) const;
+	int get_boolean(const string& section, const string& key) const;
+	int get_boolean(const string& section, const string& key, int def) const;
 
 	int get_nsec(void) const;					// Get number of sections.
-	const char * get_secname(int n) const;		// Get name for section n.
-	int find_entry(const char * entry) const;	// Return 1 if the entry exists, 0 otherwise
+	string get_secname(int n) const;			// Get name for section n.
+	int find_entry(const string& entry) const;	// Return 1 if the entry exists, 0 otherwise
 	
 private:
 	void free_dico(void);	// Unalloc memory
 	dictionary * dico;		// The dictionnary containing the parsed data
-	char file[255];			// The config file name.
+	string file;			// The config file name.
 };
 
 #endif // _INIT_PARSER_H_
