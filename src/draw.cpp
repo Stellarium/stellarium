@@ -246,7 +246,7 @@ Cardinals::~Cardinals()
 
 
 // Draw the cardinals points : N S E W
-void Cardinals::draw(const Projector* prj) const
+void Cardinals::draw(const Projector* prj, bool gravityON) const
 {
 
     glColor3fv(color);
@@ -260,21 +260,42 @@ void Cardinals::draw(const Projector* prj) const
 
 	prj->set_orthographic_projection();
 
-	// N for North
-	pos.set(-1.f, 0.f, 0.f);
-	if (prj->project_local(pos,xy)) font->print(xy[0], xy[1], "N");
+	if (gravityON)
+	{
+		// N for North
+		pos.set(-1.f, 0.f, 0.1f);
+		if (prj->project_local(pos,xy)) prj->print_gravity(font, xy[0], xy[1], "N");
 
-	// S for South
-	pos.set(1.f, 0.f, 0.f);
-	if (prj->project_local(pos,xy)) font->print(xy[0], xy[1], "S");
+		// S for South
+		pos.set(1.f, 0.f, 0.1f);
+		if (prj->project_local(pos,xy)) prj->print_gravity(font, xy[0], xy[1], "S");
 
-	// E for East
-	pos.set(0.f, 1.f, 0.f);
-	if (prj->project_local(pos,xy)) font->print(xy[0], xy[1], "E");
+		// E for East
+		pos.set(0.f, 1.f, 0.1f);
+		if (prj->project_local(pos,xy)) prj->print_gravity(font, xy[0], xy[1], "E");
 
-	// W for West
-	pos.set(0.f, -1.f, 0.f);
-	if (prj->project_local(pos,xy)) font->print(xy[0], xy[1], "W");
+		// W for West
+		pos.set(0.f, -1.f, 0.1f);
+		if (prj->project_local(pos,xy)) prj->print_gravity(font, xy[0], xy[1], "W");
+	}
+	else
+	{
+		// N for North
+		pos.set(-1.f, 0.f, 0.f);
+		if (prj->project_local(pos,xy)) font->print(xy[0], xy[1], "N");
+
+		// S for South
+		pos.set(1.f, 0.f, 0.f);
+		if (prj->project_local(pos,xy)) font->print(xy[0], xy[1], "S");
+
+		// E for East
+		pos.set(0.f, 1.f, 0.f);
+		if (prj->project_local(pos,xy)) font->print(xy[0], xy[1], "E");
+
+		// W for West
+		pos.set(0.f, -1.f, 0.f);
+		if (prj->project_local(pos,xy)) font->print(xy[0], xy[1], "W");
+	}
 
 	prj->reset_perspective_projection();
 }
