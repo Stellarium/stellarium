@@ -17,7 +17,7 @@ Added experimentaly jupiter satellites.
 Improved object search and planets hints displaying.
 Created a new class to render daylight atmosphere, with a faster and better algorithm.
 Created a new class used to convert tone from high range luminance to CRT display luminance : the aim is to have an homogeneous luminance conversion to use with daylight sky as well as night sky and stars.
-Changed the configuration file parser. The new one is much more convenient. It is called iniparser and it's made by N.Devillard.
+Changed the configuration file parser. The new one is much more convenient. It is based on a library called iniparser made by N.Devillard. I made a c++ wraper (init_parser class).
 Re-made the old ui widget classes in a better way using functor callbacks and painters.
 Re-thinked and made all the interface. stel_ui is now correct object oriented code.
 Added a tab widget.
@@ -35,6 +35,9 @@ Added gravity font.
 Added many options in the configuration files.
 Made a class for landscapes managment. Handle fisheye projection and panoramic fisheye pictures projection. The andscapes are loaded from a file so that it's easy to add custom landscapes.
 Stellarium is now fully object oriented.
+Replaced most of the char* with c++ strings to prevent bugs.
+Added a full text user interface.
+Improved configuration managment.
 
 0.5.2 [29/04/2003]
 Changed the configuration file to $HOME/.stellarium/VERSION/ on unix system to prevent conflicts between versions.

@@ -22,7 +22,6 @@
 
 #include "s_gui.h"
 
-using namespace std;
 using namespace s_gui;
 
 Scissor* Component::scissor = NULL;			// Default initialization

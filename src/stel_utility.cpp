@@ -17,7 +17,9 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#include "malloc.h"
+
+#include <sstream>
+#include <cstdlib>
 #include "stel_utility.h"
 #include "stellarium.h"
 
@@ -79,14 +81,20 @@ void rect_to_sphe(float *lng, float *lat, const Vec3f& v)
 
 
 // Obtains a Vec3f from a string with the form x,y,z
-Vec3f str_to_vec3f(const char * s)
+Vec3f str_to_vec3f(const string& s)
 {
 	float x, y, z;
-	if (s==NULL || (sscanf(s,"%f,%f,%f",&x, &y, &z)!=3)) return Vec3f(0.f,0.f,0.f);
+	if (s.empty() || (sscanf(s.c_str(),"%f,%f,%f",&x, &y, &z)!=3)) return Vec3f(0.f,0.f,0.f);
 	return Vec3f(x,y,z);
 }
 
-
+// Obtains a string from a Vec3f with the form x,y,z
+string vec3f_to_str(const Vec3f& v)
+{
+	ostringstream os;
+	os << v[0] << "," << v[1] << "," << v[2];
+	return os.str();
+}
 
 // strips trailing whitespaces from buf.
 #define iswhite(c)  ((c)== ' ' || (c)=='\t')

@@ -33,17 +33,14 @@ class init_parser
 public:
 	// Create the parser object from the given file
 	// You need to call load() before using the get() functions
-    init_parser(const string& file);
+    init_parser();
     virtual ~init_parser();
 
 	// Load the config file (the parsing operation)
-	void load(void);
+	void load(const string& file_name);
 
 	// Save the current config state in the original file
-	void save(void) const;
-
-	// Save the current config state in the given file
-	void save_to(const string& file_name) const;
+	void save(const string& file_name) const;
 
 	// Get a string from the key.
 	string get_str(const string& key) const;
@@ -60,19 +57,25 @@ public:
 	double get_double(const string& section, const string& key) const;
 	double get_double(const string& section, const string& key, double def) const;
 
-	// Get a boolean (int) from the key.
-	int get_boolean(const string& key) const;
-	int get_boolean(const string& section, const string& key) const;
-	int get_boolean(const string& section, const string& key, int def) const;
+	// Get a boolean from the key.
+	bool get_boolean(const string& key) const;
+	bool get_boolean(const string& section, const string& key) const;
+	bool get_boolean(const string& section, const string& key, bool def) const;
+
+	// Set the given entry with the provided value. If the entry cannot be found
+	// -1 is returned and the entry is created. Else 0 is returned.
+	int set_str(const string& key, const string& val);
+	int set_int(const string& key, int val);
+	int set_double(const string& key, double val);
+	int set_boolean(const string& key, bool val);
 
 	int get_nsec(void) const;					// Get number of sections.
 	string get_secname(int n) const;			// Get name for section n.
 	int find_entry(const string& entry) const;	// Return 1 if the entry exists, 0 otherwise
-	
+
 private:
 	void free_dico(void);	// Unalloc memory
 	dictionary * dico;		// The dictionnary containing the parsed data
-	string file;			// The config file name.
 };
 
 #endif // _INIT_PARSER_H_
