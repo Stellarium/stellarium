@@ -104,13 +104,11 @@ void stel_core::init(void)
 	projection->set_viewport_offset(horizontalOffset, verticalOffset);
 	projection->set_viewport_type(ViewportType);
 
-    // Load hipparcos stars & names
-    hip_stars = new Hip_Star_mgr(DataDir, SkyCulture, "spacefont.txt" );
+	// Load hipparcos stars & names
+	hip_stars = new Hip_Star_mgr(DataDir, SkyCulture, "spacefont.txt" );
 
 
-    nebulas   = new Nebula_mgr(NebulaLabelColor, NebulaCircleColor);
-
-
+	nebulas   = new Nebula_mgr(NebulaLabelColor, NebulaCircleColor);
 
 
 	ssystem = new SolarSystem();
@@ -130,8 +128,8 @@ void stel_core::init(void)
 	meteors = new Meteor_mgr(projection, navigation, tone_converter, 10, 60);
 
 
-    // Load constellations
-    asterisms = new Constellation_mgr(DataDir, SkyCulture, hip_stars, "spacefont.txt", ConstLinesColor, ConstNamesColor);
+	// Load constellations
+	asterisms = new Constellation_mgr(DataDir, SkyCulture, hip_stars, "spacefont.txt", ConstLinesColor, ConstNamesColor);
 
 
 	// Create and init the solar system
@@ -148,8 +146,7 @@ void stel_core::init(void)
 
 	ui->init_tui();
 
-	if (FlagAtmosphere) tone_converter->set_world_adaptation_luminance(40000.f);
-	else tone_converter->set_world_adaptation_luminance(3.75f);
+	tone_converter->set_world_adaptation_luminance(3.75f + atmosphere->get_intensity()*40000.f);
 
 	// Set the default moon scaling
 	if (FlagInitMoonScaled) ssystem->get_moon()->set_sphere_scale(moon_scale);
@@ -223,9 +220,11 @@ void stel_core::update(int delta_time)
 	Vec3d temp(0.,0.,0.);
 	Vec3d sunPos = navigation->helio_to_local(temp);
 	sunPos.normalize();
-	if (FlagAtmosphere) sky_brightness = sunPos[2];
-	else sky_brightness = 0.1;
-	if (sky_brightness<0) sky_brightness=0;
+	sky_brightness = sunPos[2] * atmosphere->get_intensity();
+	if( sky_brightness < 0 ) {
+	  sky_brightness = 0;
+	} else if (sky_brightness<0.1) sky_brightness=0.1;
+
 	landscape->set_sky_brightness(sky_brightness);
 
 	ui->gui_update_widgets();
@@ -237,7 +236,6 @@ void stel_core::update(int delta_time)
 void stel_core::draw(int delta_time)
 {
 
-  static float ConstellationArtBrightness = 0.0;
 
 	// Init openGL viewing with fov, screen size and clip planes
 	projection->set_clipping_planes(0.0005 ,50);
@@ -295,7 +293,7 @@ void stel_core::draw(int delta_time)
 	// Draw the hipparcos stars
 	Vec3d tempv = navigation->get_equ_vision();
 	Vec3f temp(tempv[0],tempv[1],tempv[2]);
-	if (FlagStars && (!FlagAtmosphere || sky_brightness<0.1))
+	if (FlagStars && (!FlagAtmosphere || sky_brightness<=0.1))
 	{
 		if (FlagPointStar) hip_stars->draw_point(StarScale, StarMagScale,
 			FlagStarTwinkle ? StarTwinkleAmount : 0.f, FlagStarName,
@@ -351,19 +349,23 @@ void stel_core::draw(int delta_time)
 	  projection->reset_perspective_projection(); 
 	}
 
+	
 
-	// Compute the atmosphere color
-	if (FlagAtmosphere)
-	{
-		//navigation->switch_to_local();
-		atmosphere->compute_color(navigation->get_JDay(), sunPos, moonPos,
-		 	ssystem->get_moon()->get_phase(ssystem->get_earth()->get_heliocentric_ecliptic_pos()),
-		 	tone_converter, projection, observatory->get_latitude(), observatory->get_altitude(),
-			15.f, 40.f);	// Temperature = 15°c, relative humidity = 40%
+	if (FlagAtmosphere) {
+	  atmosphere->show_atmosphere();
+	} else {
+	  atmosphere->hide_atmosphere();
 	}
 
+	// Compute the atmosphere color (if necessary)
+	atmosphere->compute_color(navigation->get_JDay(), sunPos, moonPos,
+				  ssystem->get_moon()->get_phase(ssystem->get_earth()->get_heliocentric_ecliptic_pos()),
+				  tone_converter, projection, observatory->get_latitude(), observatory->get_altitude(),
+				  15.f, 40.f);	// Temperature = 15°c, relative humidity = 40%
+
 	// Draw the atmosphere
-	if (FlagAtmosphere)	atmosphere->draw(projection);
+	atmosphere->draw(projection);
+
 
 	// Draw the landscape
 	landscape->draw(tone_converter, projection, navigation,	FlagFog, FlagHorizon && FlagGround, FlagGround);

@@ -593,8 +593,7 @@ int stel_ui::handle_keys(SDLKey key, S_GUI_VALUE state)
         if(key==SDLK_a)
         {	
         	core->FlagAtmosphere=!core->FlagAtmosphere;
-			if (!core->FlagAtmosphere) core->tone_converter->set_world_adaptation_luminance(3.75f);
-		}
+	}
         if(key==SDLK_h)
         {	
         	core->FlagHelp=!core->FlagHelp;
