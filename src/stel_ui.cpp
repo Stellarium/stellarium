@@ -434,7 +434,7 @@ void stel_ui::draw(void)
 
 /*******************************************************************************/
 int stel_ui::handle_move(int x, int y)
-{   
+{
 	return desktop->onMove(x, y);
 }
 
@@ -716,7 +716,10 @@ int stel_ui::handle_keys(SDLKey key, S_GUI_VALUE state)
         {
 			core->FlagConstellationArt = !core->FlagConstellationArt;
 		}
-
+		if(key==SDLK_RETURN)
+        {
+			core->navigation->switch_viewing_mode();
+		}
     }
     return 0;
 }
