@@ -134,6 +134,7 @@ void stel_core::init(void)
 
 	// Create and init the solar system
 	ssystem = new SolarSystem(DataDir, SkyLocale, "spacefont.txt", PlanetNamesColor, PlanetOrbitsColor );
+	ssystem->set_object_scale(StarScale);
 	ssystem->set_trail_color(ObjectTrailsColor);
 	if(FlagObjectTrails) ssystem->start_trails();
 

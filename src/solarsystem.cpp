@@ -582,3 +582,10 @@ void SolarSystem::draw_earth_shadow(const navigator * nav, Projector * prj) {
     glDisable(GL_STENCIL_TEST);
 
 }
+
+
+void SolarSystem::set_object_scale(float scale) {
+
+	planet::set_object_scale(scale);
+	
+}
