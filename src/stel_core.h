@@ -103,6 +103,8 @@ public:
 	// Unzoom to the old position is reverted by calling the function again
 	void auto_zoom_out(float move_duration = 1.f);
 
+	int get_mouse_zoom(void) const {return MouseZoom;}
+
 	// Quit the application
 	void stel_core::quit(void);
 
@@ -260,6 +262,7 @@ private:
 	string StartupTimeMode;
 	Vec3d InitViewPos;
 	VIEWING_MODE_TYPE ViewingMode;
+	int MouseZoom;
 
 	// Locale
 	int FlagUTC_Time;					// if true display UTC time
