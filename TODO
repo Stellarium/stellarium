@@ -2,10 +2,18 @@ Stellarium TODO list :
 
 Please help me continuing this program
 
-* A way to enter exact time from within the program
-    - need the implementation of the widget "edit" in gui
-* Selection of any object available in a list
-    - need the implementation of the widget "list" in gui
+Known bugs :
+* Moon position is quite unaccurate.
+* Very big zooming makes objects "shaky" : arithmetic precision?
+* On unix, configuration files might conflict between versions.
+
+Important features :
+* A way to enter exact time from within the program.
+    - need the implementation of the widget "edit" in gui.
+* Selection of any object available in a list.
+    - need the implementation of the widget "list" in gui.
+
+Other cool features :
 * A popup with the photo of the selected object
 * Shooting star and meteor shower
 * Northern Lights
