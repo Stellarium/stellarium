@@ -31,14 +31,14 @@ s_texture * stel_object::pointer_nebula = NULL;
 int stel_object::local_time = 0;
 
 // Draw a nice animated pointer around the object
-void stel_object::draw_pointer(int delta_time, draw_utility * du, navigator * nav)
+void stel_object::draw_pointer(int delta_time, Projector* prj, navigator * nav)
 {
 	local_time+=delta_time;
 	Vec3d pos=get_earth_equ_pos(nav);
 	Vec3d screenpos;
 	// Compute 2D pos and return if outside screen
-	if (!nav->project_earth_equ_to_screen(pos, screenpos)) return;
-    du->set_orthographic_projection();
+	if (!prj->project_earth_equ(pos, screenpos)) return;
+    prj->set_orthographic_projection();
 
 	if (get_type()==STEL_OBJECT_NEBULA) glColor3f(0.4f,0.5f,0.8f);
 	if (get_type()==STEL_OBJECT_PLANET) glColor3f(1.0f,0.3f,0.3f);
@@ -59,7 +59,7 @@ void stel_object::draw_pointer(int delta_time, draw_utility * du, navigator * na
         glEnd ();
     }
 
-	float size = get_on_screen_size(nav, du);
+	float size = get_on_screen_size(nav, prj);
 	size+=20.f;
 	size+=10.f*sin(0.002f * local_time);
 
@@ -112,7 +112,7 @@ void stel_object::draw_pointer(int delta_time, draw_utility * du, navigator * na
         glEnd ();
     }
 
-    du->reset_perspective_projection();
+    prj->reset_perspective_projection();
 }
 
 

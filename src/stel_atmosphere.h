@@ -38,8 +38,8 @@ class stel_atmosphere
 public:
     stel_atmosphere();
     virtual ~stel_atmosphere();
-	void compute_color(Vec3d sunPos, Vec3d moonPos, float moon_phase, tone_reproductor * eye, draw_utility * du);
-	void draw(draw_utility * du);
+	void compute_color(Vec3d sunPos, Vec3d moonPos, float moon_phase, tone_reproductor * eye, Projector* prj);
+	void draw(Projector* prj);
 private:
 	skylight sky;
 	skybright skyb;

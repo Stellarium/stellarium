@@ -21,6 +21,7 @@
 #define _SOLARSYSTEM_H_
 
 #include <vector>
+#include <functional>
 
 #include "stellarium.h"
 #include "planet.h"
@@ -43,7 +44,7 @@ public:
     void compute_trans_matrices(double date);
 
 	// Draw all the elements of the solar system
-    void draw(int hint_ON, draw_utility * du, navigator * nav);
+    void draw(int hint_ON, Projector * du, navigator * nav);
 
 	// Search if any planet is close to position given in earth equatorial position.
 	planet* search(Vec3d, navigator * nav);
@@ -51,6 +52,7 @@ public:
 	planet* get_earth(void) {return earth;}
 
 	planet* get_moon(void) {return moon;}
+	
 private:
 	planet* sun;
 	planet* moon;
@@ -60,6 +62,12 @@ private:
 	void load(const char* planetfile);	// Load the bodies data from a file
 	vector<planet*> system_planets;		// Vector containing all the bodies of the system
 	vector<EllipticalOrbit*> ell_orbits;			// Pointers on created elliptical orbits
+
+	// And sort them from the furthest to the closest to the observer
+	struct bigger_distance : public binary_function<planet*, planet*, bool>
+	{
+		bool operator()(planet* p1, planet* p2) { return p1->get_distance() > p2->get_distance(); }
+	};
 };
 
 

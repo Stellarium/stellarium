@@ -21,7 +21,7 @@
 #define _STEL_OBJECT_H_
 
 #include "vecmath.h"
-#include "stel_utility.h"
+#include "projector.h"
 #include "navigator.h"
 #include "s_texture.h"
 
@@ -30,13 +30,13 @@
 #define STEL_OBJECT_NEBULA 3
 
 class navigator;
-class draw_utility;
+//class projector;
 
 class stel_object
 {
 public:
 	virtual void update(void) {return;}
-	void draw_pointer(int delta_time, draw_utility * du, navigator * nav);
+	void draw_pointer(int delta_time, Projector* prj, navigator * nav);
 
 	virtual void get_info_string(char * s, navigator * nav) const;
 	virtual unsigned char get_type(void) const =0;
@@ -44,7 +44,7 @@ public:
 	virtual vec3_t get_RGB(void) const {return vec3_t(0.,0.,0.);}
 	static void init_textures(void);
 protected:
-	virtual float get_on_screen_size(navigator * nav, draw_utility * du) {return -1.;}
+	virtual float get_on_screen_size(navigator * nav, Projector* prj) {return -1.;}
 private:
 	static int local_time;
 	static s_texture * pointer_star;

@@ -155,6 +155,13 @@ Vec3d planet::get_heliocentric_ecliptic_pos() const
 	return pos;
 }
 
+// Compute the distance to the given position in heliocentric coordinate (in AU)
+double planet::compute_distance(const Vec3d& obs_helio_pos)
+{
+	distance = (obs_helio_pos-get_heliocentric_ecliptic_pos()).length();
+	return distance;
+}
+
 // Get the phase angle for an observer at pos obs_pos in the heliocentric coordinate (dist in AU)
 double planet::get_phase(Vec3d obs_pos)
 {
@@ -193,13 +200,13 @@ void planet::add_satellite(planet*p)
 }
 
 // Return the radius of a circle containing the object on screen
-float planet::get_on_screen_size(navigator * nav, draw_utility * du)
+float planet::get_on_screen_size(navigator * nav, Projector* prj)
 {
-	return atanf(radius*2.f/get_earth_equ_pos(nav).length())*180./M_PI/du->fov*du->screenH;
+	return atanf(radius*2.f/get_earth_equ_pos(nav).length())*180./M_PI/prj->get_fov()*prj->scrH();
 }
 
 // Draw the planet and all the related infos : name, circle etc..
-void planet::draw(int hint_ON, draw_utility * du, navigator * nav)
+void planet::draw(int hint_ON, Projector* prj, navigator * nav)
 {
 	Mat4d mat = mat_local_to_parent;
 	planet * p = parent;
@@ -209,28 +216,28 @@ void planet::draw(int hint_ON, draw_utility * du, navigator * nav)
 		p = p->parent;
 	}
 
+	// This removed totally the planet shaking bug!!!
+	mat = nav->get_helio_to_eye_mat() * mat;
+
 	glPushMatrix();
-	// Removed totally the planet shaking bug!!!
-	glLoadMatrixd(nav->get_switch_to_heliocentric_mat()*mat);
 
-	// Compute the 2D position
-	du->project(0., 0., 0., screenPos[0], screenPos[1], screenPos[2]);
+	glLoadMatrixd(mat);
 
-	// Check if in the screen
-	float screen_sz = get_on_screen_size(nav, du);
-	if (screenPos[2] < 1 &&
-		screenPos[1]>-screen_sz && screenPos[1]<du->screenH+screen_sz &&
-		screenPos[0]>-screen_sz && screenPos[0]<du->screenW+screen_sz)
+	// Compute the 2D position and check if in the screen
+	float screen_sz = get_on_screen_size(nav, prj);
+	if (prj->project_custom(Vec3f(0,0,0), screenPos, mat) &&
+		screenPos[1]>-screen_sz && screenPos[1]<prj->scrH()+screen_sz &&
+		screenPos[0]>-screen_sz && screenPos[0]<prj->scrW()+screen_sz)
 	{
 		// Draw the name, and the circle if it's not too close from the body it's turning around
 		// this prevents name overlaping (ie for jupiter satellites)
-		float ang_dist = 300.f*atan(get_ecliptic_pos().length()/get_earth_equ_pos(nav).length())/du->fov;
+		float ang_dist = 300.f*atan(get_ecliptic_pos().length()/get_earth_equ_pos(nav).length())/prj->get_fov();
 		if (ang_dist==0.f) ang_dist = 1.f; // if ang_dist == 0, the planet is sun..
      	if (hint_ON && ang_dist>0.25)
     	{
 			if (ang_dist>1.f) ang_dist = 1.f;
 			glColor4f(0.5f*ang_dist,0.5f*ang_dist,0.7f*ang_dist,1.f*ang_dist);
-			draw_hints(nav, du);
+			draw_hints(nav, prj);
         }
 
 		if (screen_sz>1)
@@ -238,30 +245,30 @@ void planet::draw(int hint_ON, draw_utility * du, navigator * nav)
 			if (rings)
 			{
 				double dist = get_earth_equ_pos(nav).length();
-				nav->init_project_matrix(du->screenW, du->screenH, dist-rings->get_size(), dist+rings->get_size());
+				prj->set_clipping_planes(dist-rings->get_size(), dist+rings->get_size());
 				glEnable(GL_DEPTH_TEST);
 				draw_sphere();
-				rings->draw(nav);
+				rings->draw();
 				glDisable(GL_DEPTH_TEST);
 			}
 			else draw_sphere();
 		}
 
-		if (tex_halo) draw_halo(nav, du);
+		if (tex_halo) draw_halo(nav, prj);
     }
 
 	glPopMatrix();
 }
 
-void planet::draw_hints(navigator* nav, draw_utility * du)
+void planet::draw_hints(navigator* nav, Projector* prj)
 {
-	du->set_orthographic_projection();    // 2D coordinate
+	prj->set_orthographic_projection();    // 2D coordinate
 
 	glEnable(GL_BLEND);
 	glDisable(GL_LIGHTING);
 	glEnable(GL_TEXTURE_2D);
 
-	float tmp = 10.f + get_on_screen_size(nav, du)/2.f; // Shift for name printing
+	float tmp = 10.f + get_on_screen_size(nav, prj)/2.f; // Shift for name printing
 	planet_name_font->print(screenPos[0]+tmp,screenPos[1]+tmp, name);
 
 	// hint disapears smoothly on close view
@@ -278,7 +285,7 @@ void planet::draw_hints(navigator* nav, draw_utility * du)
 		}
 	glEnd();
 
-	du->reset_perspective_projection();		// Restore the other coordinate
+	prj->reset_perspective_projection();		// Restore the other coordinate
 }
 
 void planet::draw_sphere(void)
@@ -306,7 +313,7 @@ void planet::draw_sphere(void)
 	glDisable(GL_LIGHTING);
 }
 
-void planet::draw_halo(navigator* nav, draw_utility * du)
+void planet::draw_halo(navigator* nav, Projector* prj)
 {
 	float rmag = 5;//lim*du->screenH*100;
 	if (rmag>0.5)
@@ -327,11 +334,11 @@ void planet::draw_halo(navigator* nav, draw_utility * du)
 
 		glBlendFunc(GL_ONE, GL_ONE);
 
-		float screen_r = get_on_screen_size(nav, du);
+		float screen_r = get_on_screen_size(nav, prj);
 		cmag *= rmag/screen_r;
 		if (rmag<screen_r) rmag = screen_r;
 
-		du->set_orthographic_projection();    	// 2D coordinate
+		prj->set_orthographic_projection();    	// 2D coordinate
 
 		glBindTexture(GL_TEXTURE_2D, tex_halo->getID());
 		glEnable(GL_BLEND);
@@ -346,7 +353,7 @@ void planet::draw_halo(navigator* nav, draw_utility * du)
 			glTexCoord2i(0,1);	glVertex3f(-rmag,-rmag,0.f);	// Top Left
 		glEnd();
 
-		du->reset_perspective_projection();		// Restore the other coordinate
+		prj->reset_perspective_projection();		// Restore the other coordinate
 	}
 }
 
@@ -362,7 +369,7 @@ ring::~ring()
 	tex = NULL;
 }
 
-void ring::draw(const navigator* nav)
+void ring::draw(void)
 {
 	// Normal transparency mode
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -381,116 +388,4 @@ void ring::draw(const navigator* nav)
 		glTexCoord2f(1,1); glVertex3d(-r, r, 0.);	// Top right
 		glTexCoord2f(0,1); glVertex3d(-r,-r, 0.);	// Top left
 	glEnd ();
-	//glDisable(GL_DEPTH_TEST);
 }
-
-
-	/*
-    float rmag;
-    if (num==0)                                                                     // Sun
-    {   glBindTexture (GL_TEXTURE_2D, texIds[48]->getID());
-        rmag=25*Rayon*DIST_PLANET/Distance_to_obs*(global.Fov/60);                  // Rayon du halo
-        glColor3fv(Colour);
-    }
-    else
-    {   glBindTexture (GL_TEXTURE_2D, texIds[25]->getID());
-        glColor3fv(Colour*(1.8-global.SkyBrightness));                              // Calcul de la couleur
-        rmag=300*Rayon*DIST_PLANET/Distance_to_obs*global.Fov/60;                   // Rayon de "l'eclat"
-        if (num==5) rmag=150*Rayon*DIST_PLANET/Distance_to_obs*global.Fov/60;
-    }
-
-    if (num!=10)                                // != luna
-    {   glEnable(GL_BLEND);
-                                                // Draw a light point like a star for naked eye simulation
-        glPushMatrix();
-        glRotatef(RaRad*180/PI,0,1,0);
-        glRotatef(DecRad*180/PI,-1,0,0);
-        glBegin(GL_TRIANGLE_STRIP);
-            glTexCoord2i(1,0);                  //Bas Droite
-            glVertex3f(rmag,-rmag,0.0f);
-            glTexCoord2i(0,0);                  //Bas Gauche
-            glVertex3f(-rmag,-rmag,0.0f);
-            glTexCoord2i(1,1);                  //Haut Droit
-            glVertex3f(rmag,rmag,0.0f);
-            glTexCoord2i(0,1);                  //Haut Gauche
-            glVertex3f(-rmag,rmag,0.0f);
-        glEnd ();
-        glPopMatrix();      
-    }
-
-
-    if (num==10)
-    {   glBindTexture (GL_TEXTURE_2D, texIds[50]->getID());
-        rmag=20*Rayon*DIST_PLANET/Distance_to_obs*(global.Fov/60);                  // Lune : Rayon du halo
-        glColor3f(0.07*(1-posSun.Dot(normGeoCoord)),0.07*(1-posSun.Dot(normGeoCoord)),0.07*(1-posSun.Dot(normGeoCoord)));
-        glEnable(GL_BLEND);
-                                        // Draw a light point like a star for naked eye simulation
-        glPushMatrix();
-        glRotatef(RaRad*180/PI,0,1,0);
-        glRotatef(DecRad*180/PI,-1,0,0);
-        glBegin(GL_TRIANGLE_STRIP);
-            glTexCoord2i(1,0);                  //Bas Droite
-            glVertex3f(rmag,-rmag,0.0f);
-            glTexCoord2i(0,0);                  //Bas Gauche
-            glVertex3f(-rmag,-rmag,0.0f);
-            glTexCoord2i(1,1);                  //Haut Droit
-            glVertex3f(rmag,rmag,0.0f);
-            glTexCoord2i(0,1);                  //Haut Gauche
-            glVertex3f(-rmag,rmag,0.0f);
-        glEnd ();
-        glPopMatrix();  
-    }
-
-
-
-    glRotatef(90,1,0,0);
-
-
-    if (num==6)                             // Draw saturn rings 1/2
-    {   double rAn=2.5*Rayon*DIST_PLANET/Distance_to_obs;
-        glColor3f(1.0f, 1.0f, 1.0f);
-        glBindTexture (GL_TEXTURE_2D, texIds[47]->getID());
-        glEnable(GL_BLEND);
-        glPushMatrix();
-
-        glRotatef(RaRad*180./PI,0,0,1);
-            glBegin(GL_TRIANGLE_STRIP);
-            glTexCoord2f(1,0);              //Bas Droite
-            glVertex3f(rAn,-rAn,0.0f);
-            glTexCoord2f(0,0);              //Bas Gauche
-            glVertex3f(-rAn,-rAn,0.0f);
-            glTexCoord2f(1,0.5);            //Haut Droit
-            glVertex3f(rAn,0.0f,0.0f);
-            glTexCoord2f(0,0.5);            //Haut Gauche
-            glVertex3f(-rAn,0.0f,0.0f);
-        glEnd ();
-        glPopMatrix();
-    }
-
-    if (asin(Rayon*2/Distance_to_obs)*180./PI>3*global.Fov/global.Y_Resolution)     //Draw the sphere if big enough
-
-
-    if (num==6)                                 // Draw saturn rings 2/2
-    {   double rAn=2.5*Rayon*DIST_PLANET/Distance_to_obs;
-        glColor3f(1.0f, 1.0f, 1.0f); //SkyBrightness
-        glBindTexture (GL_TEXTURE_2D, texIds[47]->getID());
-        glEnable(GL_BLEND);
-        glPushMatrix();
-        glRotatef(RaRad*180./PI+180,0,0,1);
-        glBegin(GL_TRIANGLE_STRIP);
-            glTexCoord2f(1,0);                  //Bas Droite
-            glVertex3f(rAn,-rAn,0.0f);
-            glTexCoord2f(0,0);                  //Bas Gauche
-            glVertex3f(-rAn,-rAn,0.0f);
-            glTexCoord2f(1,0.5);                //Haut Droit
-            glVertex3f(rAn,0.0f,0.0f);
-            glTexCoord2f(0,0.5);                //Haut Gauche
-            glVertex3f(-rAn,0.0f,0.0f);
-        glEnd ();
-        glPopMatrix();
-    }
-
-    glPopMatrix();
-}
-*/
-

@@ -56,7 +56,7 @@ class ring
 public:
 	ring(float _radius, const char* _texname);
 	virtual ~ring();
-	void draw(const navigator* nav);
+	void draw(void);
 	double get_size(void) const {return radius;}
 private:
 	float radius;
@@ -88,7 +88,7 @@ public:
 	float compute_magnitude(Vec3d obs_pos);
 
 	// Draw the planet, if hint_ON is != 0 draw a circle and the name as well
-    void draw(int hint_ON, draw_utility * du, navigator * nav);
+    void draw(int hint_ON, Projector* prj, navigator * nav);
 
 	// Add the given planet in the satellite list
 	void add_satellite(planet*);
@@ -103,6 +103,10 @@ public:
 	// Return the heliocentric ecliptical position
 	Vec3d get_heliocentric_ecliptic_pos() const;
 
+	// Compute the distance to the given position in heliocentric coordinate (in AU)
+	double compute_distance(const Vec3d& obs_helio_pos);
+	double get_distance(void) {return distance;}
+
 	// Get a matrix which converts from heliocentric ecliptic coordinate to local geographic coordinate
 	Mat4d get_helio_to_geo_matrix();
 
@@ -114,7 +118,7 @@ public:
 	const char* get_name(void) const {return name;}
 
 	// Return the radius of a circle containing the object on screen
-	float get_on_screen_size(navigator * nav, draw_utility * du);
+	float get_on_screen_size(navigator * nav, Projector* prj);
 
 	void set_rings(ring* r) {rings = r;}
 
@@ -128,10 +132,10 @@ protected:
 	void draw_sphere(void);
 
 	// Draw the small star like 2D halo
-	void draw_halo(navigator* nav, draw_utility * du);
+	void draw_halo(navigator* nav, Projector* prj);
 
 	// Draw the circle and name of the planet
-	void draw_hints(navigator* nav, draw_utility * du);
+	void draw_hints(navigator* nav, Projector* prj);
 
     char * name;
 	int flagHalo;					// Set wether a little "star like" halo will be drawn
@@ -149,6 +153,9 @@ protected:
 	s_texture * tex_halo;			// Little halo texture
 
 	ring* rings;					// Planet rings
+
+	double distance;				// Temporary variable used to store the distance to a given point
+									// it is used for sorting while drawing
 
 	double lastJD;
 	double deltaJD;

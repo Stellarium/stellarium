@@ -89,30 +89,32 @@ public:
 	// coordinate but centered on the observer position (usefull for objects close to earth)
 	Vec3d helio_to_earth_pos_equ(Vec3d* v);
 
-	// Viewing direction function : 1 move, 0 stop.
+	// Home made gluLookAt(0., 0., 0.,local_vision[0],local_vision[1],local_vision[2],0.,0.,1.);
+	// to keep a better precision to prevent the shaking bug..
+	void update_local_to_eye(void);
+
 	void move_to(Vec3d _aim);
-	void turn_right(int);
-	void turn_left(int);
-	void turn_up(int);
-	void turn_down(int);
-	void zoom_in(int);
-	void zoom_out(int);
 
 	// Loads
-	void load_position(char *);		// Load the position info in the file name given
-	void save_position(char *);		// Save the position info in the file name given
+	void load_position(const char *);		// Load the position info in the file name given
+	void save_position(const char *);		// Save the position info in the file name given
 
-	// Sets and gets
+	// Time controls
 	void set_JDay(double JD) {JDay=JD;}
+	double get_JDay(void) const {return JDay;}
 	void set_time_speed(double ts) {time_speed=ts;}
+
+	// Flags controls
 	void set_flag_traking(int v) {flag_traking=v;}
 	void set_flag_lock_equ_pos(int v) {flag_lock_equ_pos=v;}
 	int get_flag_lock_equ_pos() const {return flag_lock_equ_pos;}
-	double get_JDay(void) const {return JDay;}
-	double get_fov(void) const {return fov;}
+
+	// Get vision direction
 	Vec3d get_equ_vision(void) const {return equ_vision;}
 	Vec3d get_local_vision(void) const {return local_vision;}
 	void set_local_vision(Vec3d _pos);
+
+	// Observer position
 	void set_time_zone(int t) {position.time_zone=t;}
 	int get_time_zone(void) const {return position.time_zone;}
 	void set_latitude(double l) {position.latitude=l;}
@@ -122,25 +124,17 @@ public:
 	void set_altitude(int a) {position.altitude=a;}
 	int get_altitude(void) const {return position.altitude;}
 
-	Vec3d get_observer_helio_pos(void);	// Return the observer heliocentric position
+	// Return the observer heliocentric position
+	Vec3d get_observer_helio_pos(void);
 
-	// Return the matrix which place openGL in heliocentric coordinates
-	// Function used to overide standard openGL transformation while planet drawing to prevent
-	// the boring shaking bug..
-	Mat4d get_switch_to_heliocentric_mat(void);
+	// Return the modelview matrix for some coordinate systems
+	Mat4d get_helio_to_eye_mat(void) {return mat_helio_to_eye;}
+	Mat4d get_earth_equ_to_eye_mat(void) {return mat_earth_equ_to_eye;}
+	Mat4d get_local_to_eye_mat(void) {return mat_local_to_eye;}
 
-	// Return in vector "win" the projection on the screen of point v in earth equatorial coordinate
-	// according to the current modelview and projection matrices
-	// This is a reimplementation of gluProject
-	bool project_earth_equ_to_screen(const Vec3d& v, Vec3d& win);
-	bool project_earth_equ_to_screen(const Vec3f& v, Vec3d& win);
-	// Same but return true if inside screen
-	bool project_earth_equ_to_screen_check(const Vec3f& v, Vec3d& win);
+	void navigator::update_move(double deltaAz, double deltaAlt);
+
 private:
-	// Home made gluLookAt(0., 0., 0.,local_vision[0],local_vision[1],local_vision[2],0.,0.,1.);
-	// to keep a better precision to prevent a little bit the shaking bug..
-	Mat4d lookAt(void);
-	void update_move(int deltaTime);
 
 	// Matrices used for every coordinate transfo
 	Mat4d mat_helio_to_local;		// Transform from Heliocentric to Observator local coordinate
@@ -149,15 +143,12 @@ private:
 	Mat4d mat_earth_equ_to_local;	// Transform from Observator local coordinate to Earth Equatorial
 	Mat4d mat_helio_to_earth_equ;	// Transform from Heliocentric to earth equatorial coordinate
 
-	Mat4d mat_projection;			// Projection matrix
-	Mat4d mat_earth_equ_to_screen;	// Transform from earth equatorial coordinate to normalized screen
-	GLint vect_viewport[4];
+	Mat4d mat_local_to_eye;			// Modelview matrix for observer local drawing
+	Mat4d mat_earth_equ_to_eye;		// Modelview matrix for geocentric equatorial drawing
+	Mat4d mat_helio_to_eye;			// Modelview matrix for heliocentric equatorial drawing
 
 	// Vision variables
-	double fov;							// Field of view
     Vec3d local_vision, equ_vision;		// Viewing direction in local and equatorial coordinates
-    double deltaFov,deltaAlt,deltaAz;	// View movement
-	double move_speed;					// Speed of movement
 	int flag_traking;					// Define if the selected object is followed
 	int flag_lock_equ_pos;				// Define if the equatorial position is locked
 
@@ -171,33 +162,6 @@ private:
 
 	// Position variables
 	observator_pos position;
-};
-
-
-// Convenient class which groups commonly used variables and functions
-class draw_utility
-{
-public:
-	draw_utility();
-	virtual ~draw_utility();
-
-	double fov;
-	int screenW;
-	int screenH;
-	void set_params(double _fov, int _screenW, int _screenH);
-
-	// OpenGL projections and camera setting
-	void project(float objx_i,float objy_i,float objz_i,double & x ,double & y ,double & z);
-	Vec3d unproject(double x ,double y);
-
-	void set_orthographic_projection(void);
-	void reset_perspective_projection(void);
-
-private:
-	// Used to store openGL matrices and vectors
-	GLdouble M[16];
-    GLdouble P[16];
-    GLint V[4];
 };
 
 #endif //_NAVIGATOR_H_
