@@ -43,7 +43,6 @@ int Hip_Star::Read(FILE * catalog)
 // Read datas in binary catalog and compute x,y,z;
 {  
     float RA=0, DE=0;
-
     fread((char*)&RA,4,1,catalog);
     LE_TO_CPU_FLOAT(RA, RA);
     
@@ -56,7 +55,8 @@ int Hip_Star::Read(FILE * catalog)
     unsigned short int mag;
     fread((char*)&mag,2,1,catalog);
     LE_TO_CPU_INT16(mag, mag);
-    Mag = ((float)mag + 5) / 256.0;
+    
+    Mag = (5. + mag) / 256.0;
     if (Mag>250) Mag = Mag - 256;
 
     unsigned short int type;
@@ -66,7 +66,6 @@ int Hip_Star::Read(FILE * catalog)
     // Calc the Cartesian coord with RA and DE
     RADE_to_XYZ((double)RA,(double)DE,XYZ);
     XYZ*=RAYON;
-
 
     switch(type >> 8 & 0xf)
     {
@@ -85,7 +84,6 @@ int Hip_Star::Read(FILE * catalog)
         case 12: SpType = '?'; break;
         default: SpType = '?';
     }
-    
 
     switch (SpType)             // Color depending on the spectral type
     {    
@@ -108,7 +106,10 @@ int Hip_Star::Read(FILE * catalog)
     MaxColorValue=myMax(RGB[0],RGB[2]);
     rmag_t = sqrt(L/(pow(L,0.46666)+7.079))*sqrt(MaxColorValue)*1200.;
 	
-	if (mag==0 && type==0) return 0;
+	if (mag==0 && type==0) 
+	{
+		return 0;
+	}
     return 1;
 }
 
