@@ -104,6 +104,7 @@ public:
 	double get_JDay(void) {return JDay;}
 	double get_fov(void) {return fov;}
 	Vec3d get_equ_vision(void) {return equ_vision;}
+	Vec3d get_local_vision(void) {return local_vision;}
 	void set_time_zone(int t) {position.time_zone=t;}
 	int get_time_zone(void) {return position.time_zone;}
 	void set_latitude(double l) {position.latitude=l;}

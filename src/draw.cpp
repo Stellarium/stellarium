@@ -396,10 +396,10 @@ void DrawFog(void)
 
 // Draw a point... (used for tests)
 void DrawPoint(float X,float Y,float Z)
-{       glColor3f(0.5, 1.0, 0.5);
+{       glColor3f(0.8, 1.0, 0.8);
         glDisable(GL_TEXTURE_2D);
         //glEnable(GL_BLEND);
-        glPointSize(5);
+        glPointSize(20.);
         glBegin(GL_POINTS);
         glVertex3f(X,Y,Z);
         glEnd();
