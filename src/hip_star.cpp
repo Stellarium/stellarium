@@ -194,22 +194,35 @@ void Hip_Star::draw(void)
 void Hip_Star::draw_point(void)
 {
 	static float cmag;
-	glDisable(GL_TEXTURE_2D);
+	static float rmag;
+
     // Compute the equivalent star luminance for a 5 arc min circle and convert it
 	// in function of the eye adaptation
-	cmag = eye->adapt_luminance(term1);
-	cmag = cmag/powf(proj->get_fov(),0.85f)*50.f;
+	rmag = eye->adapt_luminance(term1);
+	rmag = rmag/powf(proj->get_fov(),0.85f)*50.f;
+
+    cmag = 1.f;
+
+    // if size of star is too small (blink) we put its size to 1.2 --> no more blink
+    // And we compensate the difference of brighteness with cmag
+        cmag=rmag*rmag/1.44f;
+		if (rmag/star_scale<0.1f || cmag<0.1/star_mag_scale) return;
+        rmag=1.2f;
 
     // Calculation of the luminosity
     // Random coef for star twinkling
     cmag*=(1.-twinkle_amount*rand()/RAND_MAX);
 
 	// Global scaling
+	rmag*=star_scale;
 	cmag*=star_mag_scale;
 
     glColor3fv(RGB*(cmag/MaxColorValue));
-    glBegin(GL_POINTS);
-		glVertex2f(XY[0],XY[1]);
+    glBegin(GL_QUADS );
+        glTexCoord2i(0,0);    glVertex2f(XY[0]-rmag,XY[1]-rmag);	// Bottom left
+        glTexCoord2i(1,0);    glVertex2f(XY[0]+rmag,XY[1]-rmag);	// Bottom right
+        glTexCoord2i(1,1);    glVertex2f(XY[0]+rmag,XY[1]+rmag);	// Top right
+        glTexCoord2i(0,1);    glVertex2f(XY[0]-rmag,XY[1]+rmag);	// Top left
     glEnd();
 }
 
