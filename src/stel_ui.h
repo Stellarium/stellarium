@@ -184,7 +184,7 @@ private:
 	void tui_cb_admin_save_default(void);	// Save default configuration
 	void tui_cb_admin_set_locale(void);		// Set locale parameter (LANG)
 	void tui_cb_admin_updateme(void);		// Launch script for internet update
-
+	void tui_cb_tui_effect_change_landscape(void);	// Select a new landscape skin
 };
 
 #endif  //_STEL_UI_H

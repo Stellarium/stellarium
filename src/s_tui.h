@@ -288,17 +288,28 @@ namespace s_tui
 			{
 				if (current!=items.begin()) --current;
 				else current = --items.end();
+				if (!onChangeCallback.empty()) onChangeCallback();
 				return true;
 			}
 			if (k==SDLK_DOWN)
 			{
 				if (current!=--items.end()) ++current;
 				else current = items.begin();
+				if (!onChangeCallback.empty()) onChangeCallback();
 				return true;
 			}
 			return false;
 		}
 		void addItem(const T& newitem) {items.insert(newitem); if(current==items.end()) current = items.begin();}
+		void addItemList(string s)
+		{
+			istringstream is(s);
+			T elem;
+			while(getline(is, elem))
+			{
+				addItem(elem);
+			}
+		}
 		const T& getCurrent(void) const {if(current==items.end()) return emptyT; else return *current;}
 		void setCurrent(const T& i) {current = items.find(i);}
     protected:

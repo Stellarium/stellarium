@@ -62,6 +62,8 @@ public:
 	double get_longitude(void) const {return longitude;}
 	void set_altitude(int a) {altitude=a;}
 	int get_altitude(void) const {return altitude;}
+	void set_landscape_name(string s) {landscape_name = s;}
+	string get_landscape_name(void) const {return landscape_name;}
 
 private:
 	string name;			// Position name
@@ -69,7 +71,6 @@ private:
 	double latitude;		// Latitude in degree
 	int altitude;			// Altitude in meter
 	string landscape_name;
-	string time_zone_name;
 	S_TIME_FORMAT time_format;
 	S_DATE_FORMAT date_format;
 	S_TZ_FORMAT time_zone_mode;		// Can be the system default or a user defined value
@@ -78,7 +79,7 @@ private:
 	unsigned int planet;	// Planet number : 0 floating, 1 Mercure - 9 pluton
 
 	// Return the time zone name taken from system locale
-	string get_time_zone_name_from_system(void) const;
+	string get_time_zone_name_from_system(double JD) const;
 
 	// Return the number of hours to add to gmt time to get the local time at tim JD
 	// taking the parameters from system. This takes into account the daylight saving

@@ -44,6 +44,7 @@ public:
 	virtual void draw(tone_reproductor * eye, const Projector* prj, const navigator* nav,
 		bool flag_fog, bool flag_decor, bool flag_ground) = 0;
 	static Landscape* create_from_file(const string& landscape_file, const string& section_name);
+	static string get_file_content(const string& landscape_file);
 protected:
 	float radius;
 	string name;
