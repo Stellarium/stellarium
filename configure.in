@@ -39,10 +39,10 @@ dnl Check for SDL
 case "$host" in
 *-*-darwin*)
 SDL_VERSION=1.2.0
-AM_PATH_SDL($SDL_VERSION,
-           	:,
-           	AC_MSG_ERROR([*** SDL version $SDL_VERSION not found!])
-)
+dnl AM_PATH_SDL($SDL_VERSION,
+dnl            	:,
+dnl            	AC_MSG_ERROR([*** SDL version $SDL_VERSION not found!])
+dnl )
 ;;
 
 dnl Other systems
