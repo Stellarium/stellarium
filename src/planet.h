@@ -234,7 +234,7 @@ protected:
 	double DeltaTrail;
 	int MaxTrail;
 	double last_trailJD;
-
+	bool first_point;  // if need to take first point of trail still
 
 };
 
