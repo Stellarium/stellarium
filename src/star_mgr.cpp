@@ -132,7 +132,6 @@ int Star_mgr::Read(FILE * catalog)
         }
     }
     fclose(pFile);
-
     strcpy(tempName,global.DataDir);
     strcat(tempName,"spacefont.txt");
     starFont=new s_font(0.012*global.X_Resolution,"spacefont", tempName); // load Font

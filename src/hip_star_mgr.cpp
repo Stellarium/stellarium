@@ -22,10 +22,11 @@
 #include "hip_star_mgr.h"
 #include "s_texture.h"
 #include "grid.h"
+#include "bytes.h"
 
 s_texture * hipStarTexture;
 
-Hip_Star_mgr::Hip_Star_mgr() : HipGrid(8)
+Hip_Star_mgr::Hip_Star_mgr() : HipGrid()
 {	
     hipStarTexture=NULL;
     Selectionnee=NULL;
@@ -65,6 +66,8 @@ int Hip_Star_mgr::Read(FILE * catalog)
 {   
     unsigned int catalogSize=0;
     fread((char*)&catalogSize,4,1,catalog);
+    LE_TO_CPU_INT32(catalogSize,catalogSize);
+    
     Hip_Star * e = NULL;
     for(int i=0;i<catalogSize;i++)
     {   

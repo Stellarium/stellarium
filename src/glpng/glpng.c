@@ -25,7 +25,11 @@
 	#include <windows.h>
 #endif
 
-#include <GL/gl.h>
+#ifdef MACOSX
+# include <OpenGL/gl.h>
+#else
+# include <GL/gl.h>
+#endif
 #include "glpng.h"
 #include <stdlib.h>
 #include <math.h>

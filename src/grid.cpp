@@ -21,22 +21,54 @@
 #include "s_utility.h"
 #include "draw.h"
 
+void moy(vec3_t * p, int a, int b, int c)
+{
+	p[c] = p[a] + p[b];
+	p[c].Normalize();
+}
 
-Grid::Grid(int NbPoint_t) : NbPoints(NbPoint_t)
+Grid::Grid()
 {   
-    int resolution = 20;
-    NbPoints = resolution*resolution;
-    Points = new vec3_t[NbPoints];
-    
-    for(int i=0;i<resolution;i++)
-        for(int j=0;j<resolution;j++)
-        {
-            RADE_to_XYZ((double)i*2.*PI/resolution ,(double)j*PI/resolution-PI/2 , Points[i*resolution+j]);
-            Points[i*resolution+j].Normalize();
-        }
+		
+	NbPoints = 66;
+	Points = new vec3_t[NbPoints];
+	
+	// Starting 6 points
+	Points[0].Set(0,0,1);
+	Points[1].Set(1,0,0);
+	Points[2].Set(0,1,0);
+	moy(Points,0,1,3); moy(Points,0,2,4); moy(Points,1,2,5);
+	
+	// 12 next subdivs
+	moy(Points,0,3,6); moy(Points,0,4,7); moy(Points,0,5,8);
+	moy(Points,3,1,9); moy(Points,1,5,10); moy(Points,3,5,11);
+	moy(Points,4,5,12); moy(Points,2,5,14); moy(Points,2,4,13);
 
-    Angle = 2*PI/resolution;
-   
+	Points[0]=Points[14]; Points[7]=Points[12]; Points[4]=Points[11]; Points[2]=Points[10];
+
+	int i,j;
+	
+	for(i=10;i<40;i++)
+	{
+		Points[i] = Points[i-10];
+		Points[i].RotateZ(PI/2);
+	}
+
+	// Top half sphere is done
+	j=40;
+	for(i=0;i<40;i++)
+	{
+		if(Points[i][2]!=0)
+		{
+			Points[j] = Points[i];
+			Points[j][2]=-Points[j][2];
+			j++;
+		}
+	}
+	Points[j++].Set(0,0,1);
+	Points[j++].Set(0,0,-1);
+	
+    Angle = PI/8*1.4;
 }
 
 Grid::~Grid()

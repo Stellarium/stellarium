@@ -25,7 +25,7 @@
 class Grid  
 {
 public:
-    Grid(int NbPoint_t);
+    Grid();
     virtual ~Grid();
     int GetNearest(vec3_t);
 	void Draw(void);
