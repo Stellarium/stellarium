@@ -25,13 +25,19 @@
 #include "tone_reproductor.h"
 #include "navigator.h"
 
+enum SKY_GRID_TYPE
+{
+	EQUATORIAL,
+	ALTAZIMUTAL
+};
+
 // Class which manages a grid to display in the sky
 class SkyGrid
 {
 public:
 	// Create and precompute positions of a SkyGrid
-	SkyGrid(unsigned int _nb_meridian = 24, unsigned int _nb_parallel = 17, double _radius = 1.,
-			unsigned int _nb_alt_segment = 18, unsigned int _nb_azi_segment = 50);
+	SkyGrid(SKY_GRID_TYPE grid_type = EQUATORIAL, unsigned int _nb_meridian = 24, unsigned int _nb_parallel = 17,
+	 double _radius = 1., unsigned int _nb_alt_segment = 18, unsigned int _nb_azi_segment = 50);
     virtual ~SkyGrid();
 	void draw(Projector* prj) const;
 private:
@@ -44,6 +50,31 @@ private:
 	Vec3f color;
 	Vec3f** alt_points;
 	Vec3f** azi_points;
+	bool (Projector::*proj_func)(const Vec3f&, Vec3d&);
+};
+
+
+enum SKY_LINE_TYPE
+{
+	EQUATOR,
+	ECLIPTIC,
+	LOCAL
+};
+
+// Class which manages a line to display around the sky like the ecliptic line
+class SkyLine
+{
+public:
+	// Create and precompute positions of a SkyGrid
+	SkyLine(SKY_LINE_TYPE line_type = EQUATOR, double _radius = 1., unsigned int _nb_segment = 24);
+    virtual ~SkyLine();
+	void draw(Projector* prj) const;
+private:
+	double radius;
+	unsigned int nb_segment;
+	Vec3f color;
+	Vec3f* points;
+	bool (Projector::*proj_func)(const Vec3f&, Vec3d&);
 };
 
 

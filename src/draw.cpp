@@ -30,13 +30,19 @@
 
 extern s_texture * texIds[200];            // Common Textures
 
-SkyGrid::SkyGrid(unsigned int _nb_meridian, unsigned int _nb_parallel, double _radius,
+SkyGrid::SkyGrid(SKY_GRID_TYPE grid_type, unsigned int _nb_meridian, unsigned int _nb_parallel, double _radius,
 	unsigned int _nb_alt_segment, unsigned int _nb_azi_segment) :
 	nb_meridian(_nb_meridian), nb_parallel(_nb_parallel), 	radius(_radius),
 	nb_alt_segment(_nb_alt_segment), nb_azi_segment(_nb_azi_segment)
 {
 	transparent_top = true;
 	color = Vec3f(0.2,0.2,0.2);
+	switch (grid_type)
+	{
+		case ALTAZIMUTAL : proj_func = &Projector::project_local; break;
+		case EQUATORIAL : proj_func = &Projector::project_earth_equ; break;
+		default : proj_func = &Projector::project_earth_equ;
+	}
 
 	// Alt points are the points to draw along the meridian
 	alt_points = new Vec3f*[nb_meridian];
@@ -76,10 +82,8 @@ void SkyGrid::draw(Projector* prj) const
 {
 	glColor3fv(color);
 	glDisable(GL_TEXTURE_2D);
-	glEnable(GL_BLEND);
 	// Normal transparency mode
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
 
 	static Vec3d pt1;
 	static Vec3d pt2;
@@ -91,9 +95,10 @@ void SkyGrid::draw(Projector* prj) const
 	{
 		if (transparent_top)	// Transparency for the first and last points
 		{
-			if (prj->project_earth_equ(alt_points[nm][0], pt1) &&
-				prj->project_earth_equ(alt_points[nm][1], pt2) )
+			if ((prj->*proj_func)(alt_points[nm][0], pt1) &&
+				(prj->*proj_func)(alt_points[nm][1], pt2) )
 			{
+				glEnable(GL_BLEND);
 				glBegin (GL_LINES);
 					glColor4f(color[0],color[1],color[2],0.f);
 					glVertex2f(pt1[0],pt1[1]);
@@ -102,11 +107,12 @@ void SkyGrid::draw(Projector* prj) const
         		glEnd();
 			}
 
+			glDisable(GL_BLEND);
 			glColor3fv(color);
 			for (unsigned int i=1;i<nb_alt_segment-1;++i)
 			{
-				if (prj->project_earth_equ(alt_points[nm][i], pt1) &&
-					prj->project_earth_equ(alt_points[nm][i+1], pt2) )
+				if ((prj->*proj_func)(alt_points[nm][i], pt1) &&
+					(prj->*proj_func)(alt_points[nm][i+1], pt2) )
 				{
 					glBegin(GL_LINES);
 						glVertex2f(pt1[0],pt1[1]);
@@ -115,9 +121,10 @@ void SkyGrid::draw(Projector* prj) const
 				}
 			}
 
-			if (prj->project_earth_equ(alt_points[nm][nb_alt_segment-1], pt1) &&
-				prj->project_earth_equ(alt_points[nm][nb_alt_segment], pt2) )
+			if ((prj->*proj_func)(alt_points[nm][nb_alt_segment-1], pt1) &&
+				(prj->*proj_func)(alt_points[nm][nb_alt_segment], pt2) )
 			{
+				glEnable(GL_BLEND);
 				glBegin (GL_LINES);
 					glColor3fv(color);
 					glVertex2f(pt1[0],pt1[1]);
@@ -129,11 +136,12 @@ void SkyGrid::draw(Projector* prj) const
 		}
 		else	// No transparency
 		{
+			glDisable(GL_BLEND);
 			glColor3fv(color);
 			for (unsigned int i=0;i<nb_alt_segment;++i)
 			{
-				if (prj->project_earth_equ(alt_points[nm][i], pt1) &&
-					prj->project_earth_equ(alt_points[nm][i+1], pt2) )
+				if ((prj->*proj_func)(alt_points[nm][i], pt1) &&
+					(prj->*proj_func)(alt_points[nm][i+1], pt2) )
 				{
 					glBegin (GL_LINES);
 						glVertex2f(pt1[0],pt1[1]);
@@ -146,12 +154,13 @@ void SkyGrid::draw(Projector* prj) const
 
 	// Draw parallels
 	glColor3fv(color);
+	glDisable(GL_BLEND);
 	for (unsigned int np=0;np<nb_parallel;++np)
 	{
 		for (unsigned int i=0;i<nb_azi_segment;++i)
 		{
-			if (prj->project_earth_equ(azi_points[np][i], pt1) &&
-				prj->project_earth_equ(azi_points[np][i+1], pt2) )
+			if ((prj->*proj_func)(azi_points[np][i], pt1) &&
+				(prj->*proj_func)(azi_points[np][i+1], pt2) )
 			{
 				glBegin (GL_LINES);
 					glVertex2f(pt1[0],pt1[1]);
@@ -162,6 +171,40 @@ void SkyGrid::draw(Projector* prj) const
 	}
 
 	prj->reset_perspective_projection();
+}
+
+
+SkyLine::SkyLine(SKY_LINE_TYPE line_type, double _radius, unsigned int _nb_segment) :
+	radius(_radius), nb_segment(_nb_segment)
+{
+	color = Vec3f(0.2,0.2,0.2);
+	float inclinaison = 0.f;
+	switch (line_type)
+	{
+		case LOCAL : proj_func = &Projector::project_local; break;
+		case ECLIPTIC : proj_func = &Projector::project_earth_equ;
+						inclinaison = 23.45f; break;
+		case EQUATOR : proj_func = &Projector::project_earth_equ; break;
+		default : proj_func = &Projector::project_earth_equ;
+	}
+
+
+	// Alt points are the points to draw along the meridian
+	points = new Vec3f[nb_segment];
+	for (unsigned int i=0;i<nb_segment+1;++i)
+	{
+		sphe_to_rect((float)i/(nb_segment)*2.f*M_PI,
+			(float)i/(nb_segment)*inclinaison*M_PI/180.-M_PI_2, &points[i]);
+	}
+}
+
+SkyLine::~SkyLine()
+{
+	delete points;
+}
+
+void SkyLine::draw(Projector* prj) const
+{
 }
 
 
