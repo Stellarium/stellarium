@@ -1,7 +1,7 @@
 dnl Modified for CYGWIN support
 dnl Process this file with autoconf to produce a configure script.
 AC_INIT(src/main.cpp)
-AM_INIT_AUTOMAKE(stellarium,0.4.7)
+AM_INIT_AUTOMAKE(stellarium,0.4.8)
 
 dnl Check system type
 AC_CANONICAL_HOST
@@ -46,12 +46,12 @@ dnl      AC_CHECK_LIB(MesaGLU,gluPerspective,,AC_MSG_ERROR(GLU not found - pleas
 dnl   fi
 
 dnl   AC_CHECK_LIB(glut,glutMainLoop,,AC_MSG_ERROR(GLUT not found - please install GLUT))
-fi
 
 LIBS="$LIBS -lGL -lGLU -lglut"
+fi
 
 dnl Checks for library functions.
-AC_CHECK_FUNCS(strdup toupper)
+AC_CHECK_FUNCS(toupper strcasecmp)
 AC_CHECK_LIB(m,fabs,LIBS="$LIBS -lm",AC_MSG_RESULT(math library not found))
 
 dnl assign the package directory variable

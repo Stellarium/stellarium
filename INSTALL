@@ -1,9 +1,9 @@
------- INSTALLATION INSTRUCTIONS ------
+------ STELLARIUM INSTALLATION INSTRUCTIONS ------
 
 WINDOWS USERS : 
 unzip stellarium.zip then just execute stellarium.exe!
 
-LINUX :
+LINUX - POSIX - CYGWIN :
 untar the tar.gz archive
 ~$ tar -xzf stellariumXXX.tar.gs
 ~$ cd stellarium
@@ -12,14 +12,11 @@ then type
 ~$ ./configure
 ~$ make
 
-then to launch the program type
+then to launch the local version of the program type
 ~$ ./src/stellarium
 
-or install with
-
+to fully install stellarium (launch from every where) type
 ~$ make install
-
-Rq : Some systems need to include the library Xmu (-lXmu)
 
 -----------------------------------------------------------------------------
 

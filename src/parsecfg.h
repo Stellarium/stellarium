@@ -20,7 +20,7 @@
 /*                                                                        */
 /**************************************************************************/
 
-/* $Id: parsecfg.h 2 2002-07-12 17:35:08Z xalioth $ */
+/* $Id: parsecfg.h 33 2002-08-14 07:55:53Z xalioth $ */
 
 #ifndef PARSECFG_H_INCLUDED
 #define PARSECFG_H_INCLUDED
@@ -131,6 +131,7 @@ void cfgFree(cfgStruct cfg[], cfgFileType type, int numSections);
 # endif 
 
 # ifdef USE_OUR_OWN_STRCASECMP 
+#  ifdef HAVE_TOUPPER
 int strcasecmp(const char *first, const char *second) 
 { 
   while (*first && *second) 
@@ -142,7 +143,8 @@ int strcasecmp(const char *first, const char *second)
   } 
   return toupper((int)*first) - toupper((int)*second); 
 } 
-# endif 
+#  endif /* HAVE_TOUPPER */
+# endif /*USE_OUR_OWN_STRCASECMP */ 
 #endif /* HAVE_STRCASECMP */ 
 
 #endif /* PARSECFG_H_INCLUDED */

@@ -83,10 +83,14 @@ int Star_mgr::Read(FILE * catalog)
     
     strTmp2[0] = 0;
     FILE * pFile;
-    pFile=fopen(DATA_DIR "/name.txt","r");
+    
+    char tempName[255];
+    strcpy(tempName,global.DataDir);
+    strcat(tempName,"name.txt");
+    pFile=fopen(tempName,"r");
     if (pFile==NULL)
     {   
-	    printf("ERROR : " DATA_DIR "/name.txt is an invalid file");
+	    printf("ERROR : %s is an invalid file",tempName);
         return 1;
     }
     fgets(ligne,200,pFile);
@@ -129,7 +133,9 @@ int Star_mgr::Read(FILE * catalog)
     }
     fclose(pFile);
 
-    starFont=new s_font(0.012*global.X_Resolution,"spacefont", DATA_DIR "/spacefont.txt"); // load Font
+    strcpy(tempName,global.DataDir);
+    strcat(tempName,"spacefont.txt");
+    starFont=new s_font(0.012*global.X_Resolution,"spacefont", tempName); // load Font
     if (!starFont)
     {
 	    printf("Can't create starFont\n");
