@@ -306,6 +306,7 @@ void navigator::update_transform_matrices(void)
 	                    Mat4d::xrotation(get_mean_obliquity(JDay)*M_PI/180.); /*
 	                    Mat4d::translation(LOC_to_GEI * Vec3d(0.,0.,6378.1/UA+(double)position.altitude/UA*100));*/
 
+
 	Mat4d HSE_to_GEI = 	//Mat4d::translation(LOC_to_GEI * Vec3d(0.,0.,-6378.1/UA-(double)position.altitude/UA*100)) *
 	                    Mat4d::xrotation(get_mean_obliquity(JDay)*M_PI/180.) *
 	                    Mat4d::translation(-Earth->get_ecliptic_pos());
