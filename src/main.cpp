@@ -84,10 +84,13 @@ void check_command_line(int argc, char **argv)
 // Set the data, textures, and config directories in core.global : test the default
 // installation dir and try to find the files somewhere else if not found there
 // This enable to launch stellarium from the local directory without installing it
-void setDirectories(void)
+void setDirectories(const char* executableName)
 {
 	// The variable CONFIG_DATA_DIR must have been set by the configure script
 	// Its value is the dataRoot directory, ie the one containing data/ and textures/
+
+#if !defined(MACOSX) && !defined(XCODE)	
+
 
 	// Check the presence of a file in possible data directories and set the
 	// dataRoot string if the directory was found.
@@ -124,6 +127,16 @@ void setDirectories(void)
 	}
     fclose(tempFile);
 	tempFile = NULL;
+
+#else
+	char *lastSlash = rindex(executableName, '/');
+	int len = lastSlash - executableName;
+	char tempName[255];
+	strncpy(tempName, executableName, len);
+	*(tempName + len) = '\0';
+	strcat(tempName, "/../Resources/");
+	DATA_ROOT = string(tempName);
+#endif
 
 	// We now have a valid dataRoot directory, we can then set the data and textures dir
 	DDIR = DATA_ROOT + "/data/";
@@ -208,7 +221,7 @@ int main(int argc, char **argv)
     drawIntro();
 
 	// Find what are the main Data, Textures and Config directories
-    setDirectories();
+    setDirectories(argv[0]);
 
 	// Create the core of stellarium, it has to be initialized
 	stel_core* core = new stel_core();
