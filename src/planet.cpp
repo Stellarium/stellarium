@@ -213,10 +213,17 @@ void planet::compute_position(double date)
 // Compute the transformation matrix from the local planet coordinate to the parent planet coordinate
 void planet::compute_trans_matrix(double date)
 {
-	mat_local_to_parent = Mat4d::translation(ecliptic_pos) // * Mat4d::zrotation(-re.ascendingNode)
-		* Mat4d::xrotation(-re.obliquity);
 
 	compute_geographic_rotation(date);
+
+	//	mat_local_to_parent = Mat4d::translation(ecliptic_pos) // * Mat4d::zrotation(-re.ascendingNode)
+	//	* Mat4d::xrotation(-re.obliquity);
+
+	// re.ascendingNode is needed for correct Galilean moon positions viewed from Earth, for example
+	// However, most values grabbed from celestia are incorrect, at least for stellarium
+	// TODO: Figure out the discrepancy
+	mat_local_to_parent = Mat4d::translation(ecliptic_pos) * Mat4d::zrotation(re.ascendingNode)
+	  * Mat4d::xrotation(-re.obliquity); 
 }
 
 
@@ -244,7 +251,7 @@ void planet::compute_geographic_rotation(double date)
     double wholeRotations = floor(rotations);
     double remainder = rotations - wholeRotations;
 
-	axis_rotation = remainder * 360. + re.offset;
+    axis_rotation = remainder * 360. + re.offset;
 
 }
 
