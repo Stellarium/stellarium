@@ -505,6 +505,7 @@ template<class T> T Vector3<T>::dot(const Vector3<T>& b) const
 }
 
 
+// cross product
 template<class T> Vector3<T> Vector3<T>::operator^(const Vector3<T>& b) const
 {
     return Vector3<T>(v[1] * b.v[2] - v[2] * b.v[1],

@@ -29,6 +29,7 @@ using namespace std;
 #include "stellarium.h"
 #include "init_parser.h"
 
+#include "draw.h"
 
 SolarSystem::SolarSystem(const string& _data_dir, const string& _sky_locale, const string& _font_filename, 
 			 Vec3f label_color, Vec3f orbit_color) : 
@@ -66,6 +67,8 @@ SolarSystem::~SolarSystem()
 	earth = NULL;
 
 	if (planet_name_font) delete planet_name_font;
+	if(tex_earth_penumbra) delete tex_earth_penumbra;
+	if(tex_earth_umbra) delete tex_earth_umbra;
 }
 
 
@@ -221,6 +224,10 @@ void SolarSystem::load(const string& planetfile)
 		system_planets.push_back(p);
 	}
 
+	// special case: load earth shadow texture
+	tex_earth_penumbra = new s_texture("earth-penumbra", TEX_LOAD_TYPE_PNG_ALPHA);
+	tex_earth_umbra = new s_texture("earth-umbra", TEX_LOAD_TYPE_PNG_ALPHA);
+
 }
 
 // Compute the position for every elements of the solar system.
@@ -294,7 +301,13 @@ void SolarSystem::draw(int hint_ON, Projector * prj, const navigator * nav, cons
         ++iter;
     }
 
-	glDisable(GL_LIGHT0);
+    glDisable(GL_LIGHT0);
+
+
+    // special case: draw earth shadow over moon if appropriate
+    // stencil buffer is set up in moon drawing above
+    draw_earth_shadow(nav, prj);
+
 }
 
 planet* SolarSystem::search(string planet_name) {
@@ -435,3 +448,153 @@ void SolarSystem::set_trail_color(const Vec3f _color) {
 
 }
 
+
+// draws earth shadow overlapping the moon using stencil buffer
+// umbra and penumbra are sized separately for accuracy
+
+void SolarSystem::draw_earth_shadow(const navigator * nav, Projector * prj) {
+
+    Vec3d e = get_earth()->get_ecliptic_pos();
+    Vec3d m = get_moon()->get_ecliptic_pos();  // relative to earth
+    Vec3d mh = get_moon()->get_heliocentric_ecliptic_pos();  // relative to sun
+    float mscale = get_moon()->get_sphere_scale();
+
+    // shadow location at earth + moon distance along earth vector from sun
+    Vec3d en = e;
+    en.normalize();
+    Vec3d shadow = en * (e.length() + m.length());
+
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    glColor3f(1,1,1);
+    
+    // find shadow radii in AU
+    double r_penumbra = shadow.length()*702378.1/AU/e.length() - 696000/AU;
+    double r_umbra = 6378.1/AU - m.length()*(689621.9/AU/e.length());
+
+    // find vector orthogonal to sun-earth vector using cross product with
+    // a non-parallel vector
+    Vec3d rpt = shadow^Vec3d(0,0,1);
+    rpt.normalize();
+    Vec3d upt = rpt*r_umbra*mscale*1.02;  // point on umbra edge
+    rpt *= r_penumbra*mscale;  // point on penumbra edge
+
+    // modify shadow location for scaled moon
+    Vec3d mdist = shadow - mh;
+    if(mdist.length() > r_penumbra + 2000/AU) {
+      // not visible so don't bother drawing
+      return;
+    }
+
+    // get moon stencil created
+    get_moon()->create_stencil(nav, prj);
+   
+    shadow = mh + mdist*mscale;
+
+    r_penumbra *= mscale;
+    Vec3d left = shadow - rpt;
+    Vec3d right = shadow + rpt;
+    double top = shadow[2] + r_penumbra;
+    double bottom = shadow[2] - r_penumbra;
+
+    nav->switch_to_heliocentric();
+
+    glEnable(GL_STENCIL_TEST);
+
+    right = shadow + upt;
+    Vec3d uleft = shadow - upt;
+    top = shadow[2] + r_umbra*mscale*1.02;
+    bottom = shadow[2] - r_umbra*mscale*1.02;
+
+    prj->set_orthographic_projection();    // 2D coordinate
+
+    Vec3d screenPos, screenRad;
+    
+    prj->project_helio(shadow, screenPos);
+    prj->project_helio(left, screenRad);
+
+    float x = screenPos[0];
+    float y = screenPos[1];
+    float rad = sqrt(pow(screenRad[0]-x,2) + pow(screenRad[1]-y,2));
+
+    Vec3d screenURad;
+    prj->project_helio(uleft, screenURad);
+    float urad = sqrt(pow(screenURad[0]-x,2) + pow(screenURad[1]-y,2));
+
+
+    // penumbra
+    glBindTexture(GL_TEXTURE_2D, tex_earth_penumbra->getID());
+
+    glBegin(GL_TRIANGLE_STRIP);
+    float r;
+    for (int i=0; i<=48; i++) {
+      r = i*2*M_PI/48.;
+
+      glTexCoord2f(1,0);
+      glVertex3f(x + rad * sin(r), y + rad * cos(r), 0.0f);
+      glTexCoord2f(0,0);
+      glVertex3f(x + .98*urad * sin(r), y + .98*urad * cos(r), 0.0f);
+      // .98 is to overlap with umbra texture
+    }
+    glEnd();
+
+    /*
+      Show rings for debug
+
+    Mat4d mat = nav->get_helio_to_eye_mat();
+
+    glDisable(GL_TEXTURE_2D);
+    glColor3f(1,0,0);
+    glDisable(GL_BLEND);
+    glTranslatef(x,y,0);
+    GLUquadricObj * p = gluNewQuadric();
+    gluDisk(p, rad-1, rad, 256, 1);
+    gluDeleteQuadric(p);
+
+
+    // umbra
+
+    glColor3f(0,1,0);
+    p = gluNewQuadric();
+    gluDisk(p, urad-1, urad, 256, 1);
+    gluDeleteQuadric(p);
+
+
+    glColor4f(1,1,1,1);
+    glEnable(GL_TEXTURE_2D);
+    glEnable(GL_BLEND);
+    
+*/
+
+    // draw umbra
+    glBindTexture(GL_TEXTURE_2D, tex_earth_umbra->getID());
+
+    /*
+    glBegin(GL_TRIANGLE_STRIP); {
+      glTexCoord2i(1,0);              // Bottom Right
+      prj->sVertex3(right[0], right[1], bottom, mat);
+      glTexCoord2i(0,0);              // Bottom Left
+      prj->sVertex3(uleft[0], uleft[1],bottom, mat);
+      glTexCoord2i(1,1);              // Top Right
+      prj->sVertex3(right[0], right[1],top, mat);
+      glTexCoord2i(0,1);              // Top Left
+      prj->sVertex3(uleft[0], uleft[1],top, mat); }
+    glEnd(); 
+    */
+
+    glBegin(GL_TRIANGLE_STRIP);
+    for (int i=0; i<=100; i++) {
+      r = i*2*M_PI/100.;
+
+      glTexCoord2f(0,0);
+      glVertex3f(x,y,0);
+      glTexCoord2f(1,0);              // Bottom Left
+      glVertex3f(x + urad * sin(r), y + urad * cos(r), 0.0f);
+    }
+    glEnd();
+
+
+    prj->reset_perspective_projection();		// Restore the other coordinate
+    glDisable(GL_STENCIL_TEST);
+
+}
