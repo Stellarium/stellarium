@@ -30,8 +30,8 @@ Landscape::~Landscape()
 
 Landscape* Landscape::create_from_file(const string& landscape_file, const string& section_name)
 {
-	init_parser pd(landscape_file);	// The landscape data ini file parser
-	pd.load();
+	init_parser pd;	// The landscape data ini file parser
+	pd.load(landscape_file);
 	string s;
 	s = pd.get_str(section_name, "type");
 	if (s.empty())
@@ -78,8 +78,8 @@ Landscape_old_style::~Landscape_old_style()
 
 void Landscape_old_style::load(const string& landscape_file, const string& section_name)
 {
-	init_parser pd(landscape_file);	// The landscape data ini file parser
-	pd.load();
+	init_parser pd;	// The landscape data ini file parser
+	pd.load(landscape_file);
 
 	name = pd.get_str(section_name, "name");
 
@@ -245,8 +245,8 @@ Landscape_fisheye::~Landscape_fisheye()
 
 void Landscape_fisheye::load(const string& landscape_file, const string& section_name)
 {
-	init_parser pd(landscape_file);	// The landscape data ini file parser
-	pd.load();
+	init_parser pd;	// The landscape data ini file parser
+	pd.load(landscape_file);
 	name = pd.get_str(section_name, "name");
 	map_tex = new s_texture(pd.get_str(section_name, "maptex"),TEX_LOAD_TYPE_PNG_ALPHA);
 	tex_fov = pd.get_double(section_name, "texturefov", 360) * M_PI/180.;
@@ -267,5 +267,4 @@ void Landscape_fisheye::draw(tone_reproductor * eye, const Projector* prj, const
 	if (flag_ground) prj->sSphere_map(radius,40,20, nav->get_local_to_eye_mat(), tex_fov, 1);
 
     glDisable(GL_CULL_FACE);
-
 }

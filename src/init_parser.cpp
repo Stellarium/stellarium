@@ -21,30 +21,32 @@
 
 #include "init_parser.h"
 
-init_parser::init_parser(const string& _file) : dico(NULL)
+init_parser::init_parser(void) : dico(NULL)
 {
-	// Check file presence
-	FILE * fp = NULL;
-	fp = fopen(_file.c_str(),"rt");
-	if (fp)
-	{
-		file = _file;
-		fclose(fp);
-	}
-	else
-	{
-		cout << "ERROR : Can't find config file " << _file << endl;
-		exit(-1);
-	}
+	dico = new dictionary();
 }
 
 init_parser::~init_parser()
 {
-	free_dico();
+	if (dico) free_dico();
+	dico = NULL;
 }
 
-void init_parser::load(void)
+void init_parser::load(const string& file)
 {
+	// Check file presence
+	FILE * fp = NULL;
+	fp = fopen(file.c_str(),"rt");
+	if (fp)
+	{
+		fclose(fp);
+	}
+	else
+	{
+		cout << "ERROR : Can't find config file " << file << endl;
+		exit(-1);
+	}
+
 	if (dico) free_dico();
 	dico = NULL;
 	dico = iniparser_load(file.c_str());
@@ -55,12 +57,7 @@ void init_parser::load(void)
 	}
 }
 
-void init_parser::save(void) const
-{
-	save_to(file.c_str());
-}
-
-void init_parser::save_to(const string& file_name) const
+void init_parser::save(const string& file_name) const
 {
 	// Check file presence
 	FILE * fp = NULL;
@@ -75,7 +72,6 @@ void init_parser::save_to(const string& file_name) const
 		exit(-1);
 	}
 }
-
 
 string init_parser::get_str(const string& key) const
 {
@@ -144,7 +140,7 @@ double init_parser::get_double(const string& section, const string& key, double 
 	return iniparser_getdouble(dico, (section+":"+key).c_str(), def);
 }
 
-int init_parser::get_boolean(const string& key) const
+bool init_parser::get_boolean(const string& key) const
 {
 	int b = iniparser_getboolean(dico, key.c_str(), -10);
 	// To be sure :) (bugfree)
@@ -159,14 +155,54 @@ int init_parser::get_boolean(const string& key) const
 	return b;
 }
 
-int init_parser::get_boolean(const string& section, const string& key) const
+bool init_parser::get_boolean(const string& section, const string& key) const
 {
 	return get_boolean((section+":"+key).c_str());
 }
 
-int init_parser::get_boolean(const string& section, const string& key, int def) const
+bool init_parser::get_boolean(const string& section, const string& key, bool def) const
 {
 	return iniparser_getboolean(dico, (section+":"+key).c_str(), def);
+}
+
+// Set the given entry with the provided value. If the entry cannot be found
+// -1 is returned and the entry is created. Else 0 is returned.
+int init_parser::set_str(const string& key, const string& val)
+{
+	int return_val;
+	if (find_entry(key)) return_val = 0;
+	else return_val = -1;
+
+	dictionary_set(dico, key.c_str(), val.c_str());
+
+	return return_val;
+}
+
+int init_parser::set_int(const string& key, int val)
+{
+	int return_val;
+	if (find_entry(key)) return_val = 0;
+	else return_val = -1;
+
+	dictionary_setint(dico, key.c_str(), val);
+
+	return return_val;
+}
+
+int init_parser::set_double(const string& key, double val)
+{
+	int return_val;
+	if (find_entry(key)) return_val = 0;
+	else return_val = -1;
+
+	dictionary_setdouble(dico, key.c_str(), val);
+
+	return return_val;
+}
+
+int init_parser::set_boolean(const string& key, bool val)
+{
+	return set_int(key, val);
 }
 
 // Get number of sections

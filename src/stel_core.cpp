@@ -25,15 +25,11 @@
 
 stel_core::stel_core() : screen_W(800), screen_H(600), bppMode(16), Fullscreen(0),
 	navigation(NULL), projection(NULL), selected_object(NULL), hip_stars(NULL), asterisms(NULL),
-	nebulas(NULL), atmosphere(NULL), tone_converter(NULL), selected_constellation(NULL), conf(NULL),
+	nebulas(NULL), atmosphere(NULL), tone_converter(NULL), selected_constellation(NULL),
 	frame(0), timefr(0), timeBase(0), deltaFov(0.), deltaAlt(0.), deltaAz(0.),
 	move_speed(0.001), FlagTimePause(0)
 {
-	TextureDir[0] = 0;
-    ConfigDir[0] = 0;
-    DataDir[0] = 0;
-	landscape_name[0] = 0;
-	projector_type = PERSPECTIVE_PROJECTOR;
+	ProjectorType = PERSPECTIVE_PROJECTOR;
 }
 
 stel_core::~stel_core()
@@ -94,7 +90,7 @@ void stel_core::init(void)
 	azi_grid = new SkyGrid(ALTAZIMUTAL);
 	equator_line = new SkyLine(EQUATOR);
 	ecliptic_line = new SkyLine(ECLIPTIC);
-	switch (projector_type)
+	switch (ProjectorType)
 	{
 	case PERSPECTIVE_PROJECTOR :
 		projection = new Projector(screen_W, screen_H, initFov);
@@ -141,7 +137,7 @@ void stel_core::init(void)
 	projection->set_screen_size(screen_W, screen_H);
 	projection->set_fov(initFov);
 
-	switch (viewport_type)
+	switch (ViewportType)
 	{
 		case MAXIMIZED : projection->maximize_viewport(); break;
 		case SQUARE : projection->set_square_viewport(); break;
@@ -208,7 +204,7 @@ void stel_core::update(int delta_time)
 	if (sky_brightness<0) sky_brightness=0;
 
 	ui->update();
-	ui->tui_update_widgets();
+	if (FlagShowTui) ui->tui_update_widgets();
 }
 
 // Execute all the drawing functions
@@ -308,12 +304,9 @@ void stel_core::draw(int delta_time)
 	// Daw the cardinal points
     if (FlagCardinalPoints) cardinals_points->draw(projection, FlagGravityLabels);
 
-    // ---- 2D Displays
-
+    // Draw the Graphical ui and the Text ui
     ui->draw();
-
 	if (FlagShowTui) ui->draw_tui();
-
 	ui->draw_gravity_ui();
 }
 
@@ -321,130 +314,252 @@ void stel_core::load_config(void)
 {
 	PositionFile = ConfigDir + location_file;
 
-    cout << "Loading configuration file... " << ConfigDir + config_file << endl;
-
-	if (conf) delete (conf);
-	conf = new init_parser(ConfigDir + config_file);
-	conf->load();
+	init_parser conf;
+	conf.load(ConfigDir + config_file);
 
 	// Main section
-	string version 		= conf->get_str("main:version");
+	string version = conf.get_str("main:version");
 	if (version!=string(VERSION))
 	{
 		// The config file is too old to try an importation
-		delete conf;
-		conf = NULL;
 		cout << "The current config file is from a version too old (" <<
 			(version.empty() ? "<0.6.0" : version) << ")." << endl;
 		cout << "It will be replaced by the default config file." << endl;
 		system( (string("cp -f ") + DataRoot + "/config/default_config.txt " + ConfigDir + config_file).c_str() );
 		system( (string("cp -f ") + DataRoot + "/config/default_location.txt " + ConfigDir + location_file).c_str() );
-
-		// Reload the new one
-		conf = new init_parser(ConfigDir + config_file);
-		conf->load();
 	}
 
+	// Actually load the config file
+	load_config_from(ConfigDir + config_file);
 
+}
+
+void stel_core::save_config(void)
+{
+	// The config file is supposed to be valid and from the correct stellarium version.
+	// This is normally the case if the program is running.
+	save_config_to(ConfigDir + config_file);
+}
+
+void stel_core::load_config_from(const string& confFile)
+{
+    cout << "Loading configuration file " << confFile << " ..." << endl;
+	init_parser conf;
+	conf.load(confFile);
+
+	// Main section (check for version mismatch)
+	string version = conf.get_str("main:version");
+	if (version!=string(VERSION))
+	{
+		cout << "ERROR : The current config file is from a version too old (" <<
+			(version.empty() ? "<0.6.0" : version) << ")." << endl;
+		exit(-1);
+	}
 
 	// Video Section
-	Fullscreen			= conf->get_boolean("video:fullscreen");
-	screen_W			= conf->get_int	   ("video:screen_w");
-	screen_H			= conf->get_int	   ("video:screen_h");
-	bppMode				= conf->get_int    ("video:bbp_mode");
+	Fullscreen			= conf.get_boolean("video:fullscreen");
+	screen_W			= conf.get_int	   ("video:screen_w");
+	screen_H			= conf.get_int	   ("video:screen_h");
+	bppMode				= conf.get_int    ("video:bbp_mode");
 
 	// Projector
-	string tmpstr = conf->get_str("projection:type");
-	if (tmpstr=="perspective") projector_type = PERSPECTIVE_PROJECTOR;
-	else
-	if (tmpstr=="fisheye") projector_type = FISHEYE_PROJECTOR;
+	string tmpstr = conf.get_str("projection:type");
+	if (tmpstr=="perspective") ProjectorType = PERSPECTIVE_PROJECTOR;
 	else
 	{
-		cout << "ERROR : Unknown projector type : " << tmpstr << endl;
-		exit(-1);
+		if (tmpstr=="fisheye") ProjectorType = FISHEYE_PROJECTOR;
+		else
+		{
+			cout << "ERROR : Unknown projector type : " << tmpstr << endl;
+			exit(-1);
+		}
 	}
 
-	tmpstr = conf->get_str("projection:viewport");
-	if (tmpstr=="maximized") viewport_type = MAXIMIZED;
+	tmpstr = conf.get_str("projection:viewport");
+	if (tmpstr=="maximized") ViewportType = MAXIMIZED;
 	else
-	if (tmpstr=="square") viewport_type = SQUARE;
-	else
-	if (tmpstr=="disk") viewport_type = DISK;
+	if (tmpstr=="square") ViewportType = SQUARE;
 	else
 	{
-		cout << "ERROR : Unknown viewport type : " << tmpstr << endl;
-		exit(-1);
+		if (tmpstr=="disk") ViewportType = DISK;
+		else
+		{
+			cout << "ERROR : Unknown viewport type : " << tmpstr << endl;
+			exit(-1);
+		}
 	}
 
 	// Star section
-	StarScale			= conf->get_double ("stars:star_scale");
-	StarMagScale		= conf->get_double ("stars:star_mag_scale");
-	StarTwinkleAmount	= conf->get_double ("stars:star_twinkle_amount");
-	MaxMagStarName		= conf->get_double ("stars:max_mag_star_name");
-	FlagStarTwinkle		= conf->get_boolean("stars:flag_star_twinkle");
+	StarScale			= conf.get_double ("stars:star_scale");
+	StarMagScale		= conf.get_double ("stars:star_mag_scale");
+	StarTwinkleAmount	= conf.get_double ("stars:star_twinkle_amount");
+	MaxMagStarName		= conf.get_double ("stars:max_mag_star_name");
+	FlagStarTwinkle		= conf.get_boolean("stars:flag_star_twinkle");
 
 	// Ui section
-	FlagShowFps			= conf->get_boolean("gui:flag_show_fps");
-	FlagMenu			= conf->get_boolean("gui:flag_menu");
-	FlagHelp			= conf->get_boolean("gui:flag_help");
-	FlagInfos			= conf->get_boolean("gui:flag_infos");
-	FlagShowTopBar		= conf->get_boolean("gui:flag_show_topbar");
-	FlagShowTime		= conf->get_boolean("gui:flag_show_time");
-	FlagShowDate		= conf->get_boolean("gui:flag_show_date");
-	FlagShowAppName		= conf->get_boolean("gui:flag_show_appname");
-	FlagShowFov			= conf->get_boolean("gui:flag_show_fov");
-	FlagShowSelectedObjectInfos = conf->get_boolean("gui:flag_show_selected_object_info");
-	GuiBaseColor		= str_to_vec3f(conf->get_str("gui:gui_base_color").c_str());
-	GuiTextColor		= str_to_vec3f(conf->get_str("gui:gui_text_color").c_str());
+	FlagShowFps			= conf.get_boolean("gui:flag_show_fps");
+	FlagMenu			= conf.get_boolean("gui:flag_menu");
+	FlagHelp			= conf.get_boolean("gui:flag_help");
+	FlagInfos			= conf.get_boolean("gui:flag_infos");
+	FlagShowTopBar		= conf.get_boolean("gui:flag_show_topbar");
+	FlagShowTime		= conf.get_boolean("gui:flag_show_time");
+	FlagShowDate		= conf.get_boolean("gui:flag_show_date");
+	FlagShowAppName		= conf.get_boolean("gui:flag_show_appname");
+	FlagShowFov			= conf.get_boolean("gui:flag_show_fov");
+	FlagShowSelectedObjectInfos = conf.get_boolean("gui:flag_show_selected_object_info");
+	GuiBaseColor		= str_to_vec3f(conf.get_str("gui:gui_base_color").c_str());
+	GuiTextColor		= str_to_vec3f(conf.get_str("gui:gui_text_color").c_str());
 
 	// Text ui section
-	FlagShowTui = conf->get_boolean("tui:flag_show_tui");
-	FlagShowTuiDateTime = conf->get_boolean("tui:flag_show_tui_datetime");
-	FlagShowTuiShortInfo = conf->get_boolean("tui:flag_show_tui_short_obj_info");
+	FlagShowTui = conf.get_boolean("tui:flag_show_tui");
+	FlagShowTuiDateTime = conf.get_boolean("tui:flag_show_tui_datetime");
+	FlagShowTuiShortInfo = conf.get_boolean("tui:flag_show_tui_short_obj_info");
 
 	// Navigation section
-	PresetSkyTime 		= conf->get_double ("navigation","preset_sky_time",2451545.);
-	StartupTimeMode = conf->get_str("navigation:startup_time_mode");	// Can be "now" or "preset"
-	FlagEnableZoomKeys	= conf->get_boolean("navigation:flag_enable_zoom_keys");
-	FlagEnableMoveKeys	= conf->get_boolean("navigation:flag_enable_move_keys");
-	initFov				= conf->get_double ("navigation","init_fov",60.);
-	InitViewPos 		= str_to_vec3f(conf->get_str("navigation:init_view_pos").c_str());
-	auto_move_duration	= conf->get_double ("navigation","auto_move_duration",1.);
-	FlagUTC_Time		= conf->get_boolean("navigation:flag_utc_time");
-	TimeDisplayFormat	= conf->get_str("navigation:flag_time_display_format");
+	PresetSkyTime 		= conf.get_double ("navigation","preset_sky_time",2451545.);
+	StartupTimeMode = conf.get_str("navigation:startup_time_mode");	// Can be "now" or "preset"
+	FlagEnableZoomKeys	= conf.get_boolean("navigation:flag_enable_zoom_keys");
+	FlagEnableMoveKeys	= conf.get_boolean("navigation:flag_enable_move_keys");
+	initFov				= conf.get_double ("navigation","init_fov",60.);
+	InitViewPos 		= str_to_vec3f(conf.get_str("navigation:init_view_pos").c_str());
+	auto_move_duration	= conf.get_double ("navigation","auto_move_duration",1.);
+	FlagUTC_Time		= conf.get_boolean("navigation:flag_utc_time");
+	TimeDisplayFormat	= conf.get_str("navigation:flag_time_display_format");
 
 	// Landscape section
-	landscape_name 		= conf->get_str("landscape:landscape_name");
-	FlagGround			= conf->get_boolean("landscape:flag_ground");
-	FlagHorizon			= conf->get_boolean("landscape:flag_horizon");
-	FlagFog				= conf->get_boolean("landscape:flag_fog");
-	FlagAtmosphere		= conf->get_boolean("landscape:flag_atmosphere");
+	landscape_name 		= conf.get_str("landscape:landscape_name");
+	FlagGround			= conf.get_boolean("landscape:flag_ground");
+	FlagHorizon			= conf.get_boolean("landscape:flag_horizon");
+	FlagFog				= conf.get_boolean("landscape:flag_fog");
+	FlagAtmosphere		= conf.get_boolean("landscape:flag_atmosphere");
 
 	// Viewing section
-	FlagConstellationDrawing= conf->get_boolean("viewing:flag_constellation_drawing");
-	FlagConstellationName	= conf->get_boolean("viewing:flag_constellation_name");
-	FlagConstellationArt	= conf->get_boolean("viewing:flag_constellation_art");
-	FlagConstellationPick	= conf->get_boolean("viewing:flag_constellation_pick");
-	FlagAzimutalGrid		= conf->get_boolean("viewing:flag_azimutal_grid");
-	FlagEquatorialGrid		= conf->get_boolean("viewing:flag_equatorial_grid");
-	FlagEquatorLine			= conf->get_boolean("viewing:flag_equator_line");
-	FlagEclipticLine		= conf->get_boolean("viewing:flag_ecliptic_line");
-	FlagCardinalPoints		= conf->get_boolean("viewing:flag_cardinal_points");
-	FlagGravityLabels		= conf->get_boolean("viewing:flag_gravity_labels");
-	FlagInitMoonScaled		= conf->get_boolean("viewing:flag_init_moon_scaled");
-	moon_scale				= conf->get_double ("viewing","moon_scale",4.);
-	ConstellationCulture	= conf->get_str("viewing:constellation_culture");
+	FlagConstellationDrawing= conf.get_boolean("viewing:flag_constellation_drawing");
+	FlagConstellationName	= conf.get_boolean("viewing:flag_constellation_name");
+	FlagConstellationArt	= conf.get_boolean("viewing:flag_constellation_art");
+	FlagConstellationPick	= conf.get_boolean("viewing:flag_constellation_pick");
+	FlagAzimutalGrid		= conf.get_boolean("viewing:flag_azimutal_grid");
+	FlagEquatorialGrid		= conf.get_boolean("viewing:flag_equatorial_grid");
+	FlagEquatorLine			= conf.get_boolean("viewing:flag_equator_line");
+	FlagEclipticLine		= conf.get_boolean("viewing:flag_ecliptic_line");
+	FlagCardinalPoints		= conf.get_boolean("viewing:flag_cardinal_points");
+	FlagGravityLabels		= conf.get_boolean("viewing:flag_gravity_labels");
+	FlagInitMoonScaled		= conf.get_boolean("viewing:flag_init_moon_scaled");
+	moon_scale				= conf.get_double ("viewing","moon_scale",4.);
+	ConstellationCulture	= conf.get_str("viewing:constellation_culture");
 
 	// Astro section
-	FlagStars				= conf->get_boolean("astro:flag_stars");
-	FlagStarName			= conf->get_boolean("astro:flag_star_name");
-	FlagPlanets				= conf->get_boolean("astro:flag_planets");
-	FlagPlanetsHints		= conf->get_boolean("astro:flag_planets_hints");
-	FlagNebula				= conf->get_boolean("astro:flag_nebula");
-	FlagNebulaName			= conf->get_boolean("astro:flag_nebula_name");
-	FlagMilkyWay			= conf->get_boolean("astro:flag_milky_way");
+	FlagStars				= conf.get_boolean("astro:flag_stars");
+	FlagStarName			= conf.get_boolean("astro:flag_star_name");
+	FlagPlanets				= conf.get_boolean("astro:flag_planets");
+	FlagPlanetsHints		= conf.get_boolean("astro:flag_planets_hints");
+	FlagNebula				= conf.get_boolean("astro:flag_nebula");
+	FlagNebulaName			= conf.get_boolean("astro:flag_nebula_name");
+	FlagMilkyWay			= conf.get_boolean("astro:flag_milky_way");
+}
 
-	//conf->save();
+void stel_core::save_config_to(const string& confFile)
+{
+    cout << "Saving configuration file " << confFile << " ..." << endl;
+	init_parser conf;
+
+	// Main section
+	conf.set_str	("main:version", string(VERSION));
+
+	// Video Section
+	conf.set_boolean("video:fullscreen", Fullscreen);
+	conf.set_int	("video:screen_w", screen_W);
+	conf.set_int	("video:screen_h", screen_H);
+	conf.set_int	("video:bbp_mode", bppMode);
+
+	// Projector
+	string tmpstr;
+	switch (ProjectorType)
+	{
+		case PERSPECTIVE_PROJECTOR : tmpstr="perspective";	break;
+		case FISHEYE_PROJECTOR : tmpstr=="fisheye";		break;
+		default : tmpstr="perspective";
+	}
+	conf.set_str	("projection:type",tmpstr);
+
+	switch (ViewportType)
+	{
+		case MAXIMIZED : tmpstr="maximized";	break;
+		case SQUARE : tmpstr=="square";	break;
+		case DISK : tmpstr=="disk";		break;
+		default : tmpstr="maximized";
+	}
+	conf.set_str	("projection:viewport", tmpstr);
+
+	// Star section
+	conf.set_double ("stars:star_scale", StarScale);
+	conf.set_double ("stars:star_mag_scale", StarMagScale);
+	conf.set_double ("stars:star_twinkle_amount", StarTwinkleAmount);
+	conf.set_double ("stars:max_mag_star_name", MaxMagStarName);
+	conf.set_boolean("stars:flag_star_twinkle", FlagStarTwinkle);
+
+	// Ui section
+	conf.set_boolean("gui:flag_show_fps" ,FlagShowFps);
+	conf.set_boolean("gui:flag_menu", FlagMenu);
+	conf.set_boolean("gui:flag_help", FlagHelp);
+	conf.set_boolean("gui:flag_infos", FlagInfos);
+	conf.set_boolean("gui:flag_show_topbar", FlagShowTopBar);
+	conf.set_boolean("gui:flag_show_time", FlagShowTime);
+	conf.set_boolean("gui:flag_show_date", FlagShowDate);
+	conf.set_boolean("gui:flag_show_appname", FlagShowAppName);
+	conf.set_boolean("gui:flag_show_fov", FlagShowFov);
+	conf.set_boolean("gui:flag_show_selected_object_info", FlagShowSelectedObjectInfos);
+	conf.set_str	("gui:gui_base_color", vec3f_to_str(GuiBaseColor));
+	conf.set_str	("gui:gui_text_color", vec3f_to_str(GuiTextColor));
+
+	// Text ui section
+	conf.set_boolean("tui:flag_show_tui", FlagShowTui);
+	conf.set_boolean("tui:flag_show_tui_datetime", FlagShowTuiDateTime);
+	conf.set_boolean("tui:flag_show_tui_short_obj_info", FlagShowTuiShortInfo);
+
+	// Navigation section
+	conf.set_double ("navigation:preset_sky_time", PresetSkyTime);
+	conf.set_str	("navigation:startup_time_mode", StartupTimeMode);
+	conf.set_boolean("navigation:flag_enable_zoom_keys", FlagEnableZoomKeys);
+	conf.set_boolean("navigation:flag_enable_move_keys", FlagEnableMoveKeys);
+	conf.set_double ("navigation:init_fov", initFov);
+	conf.set_str	("navigation:init_view_pos", vec3f_to_str(InitViewPos));
+	conf.set_double ("navigation:auto_move_duration", auto_move_duration);
+	conf.set_boolean("navigation:flag_utc_time", FlagUTC_Time);
+	conf.set_str	("navigation:flag_time_display_format", TimeDisplayFormat);
+
+	// Landscape section
+	conf.set_str	("landscape:landscape_name", landscape_name);
+	conf.set_boolean("landscape:flag_ground", FlagGround);
+	conf.set_boolean("landscape:flag_horizon", FlagHorizon);
+	conf.set_boolean("landscape:flag_fog", FlagFog);
+	conf.set_boolean("landscape:flag_atmosphere", FlagAtmosphere);
+
+	// Viewing section
+	conf.set_boolean("viewing:flag_constellation_drawing", FlagConstellationDrawing);
+	conf.set_boolean("viewing:flag_constellation_name", FlagConstellationName);
+	conf.set_boolean("viewing:flag_constellation_art", FlagConstellationArt);
+	conf.set_boolean("viewing:flag_constellation_pick", FlagConstellationPick);
+	conf.set_boolean("viewing:flag_azimutal_grid", FlagAzimutalGrid);
+	conf.set_boolean("viewing:flag_equatorial_grid", FlagEquatorialGrid);
+	conf.set_boolean("viewing:flag_equator_line", FlagEquatorLine);
+	conf.set_boolean("viewing:flag_ecliptic_line", FlagEclipticLine);
+	conf.set_boolean("viewing:flag_cardinal_points", FlagCardinalPoints);
+	conf.set_boolean("viewing:flag_gravity_labels", FlagGravityLabels);
+	conf.set_boolean("viewing:flag_init_moon_scaled", FlagInitMoonScaled);
+	conf.set_double ("viewing:moon_scale", moon_scale);
+	conf.set_str	("viewing:constellation_culture", ConstellationCulture);
+
+	// Astro section
+	conf.set_boolean("astro:flag_stars", FlagStars);
+	conf.set_boolean("astro:flag_star_name", FlagStarName);
+	conf.set_boolean("astro:flag_planets", FlagPlanets);
+	conf.set_boolean("astro:flag_planets_hints", FlagPlanetsHints);
+	conf.set_boolean("astro:flag_nebula", FlagNebula);
+	conf.set_boolean("astro:flag_nebula_name", FlagNebulaName);
+	conf.set_boolean("astro:flag_milky_way", FlagMilkyWay);
+
+	conf.save(confFile);
 }
 
 

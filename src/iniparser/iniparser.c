@@ -4,16 +4,16 @@
    @file    iniparser.c
    @author  N. Devillard
    @date    Mar 2000
-   @version $Revision: 260 $
+   @version $Revision: 279 $
    @brief   Parser for ini files.
 */
 /*--------------------------------------------------------------------------*/
 
 /*
-    $Id: iniparser.c 260 2003-08-18 18:41:31Z xalioth $
+    $Id: iniparser.c 279 2003-08-25 16:29:59Z xalioth $
     $Author: xalioth $
-    $Date: 2003-08-18 19:41:31 +0100 (Mon, 18 Aug 2003) $
-    $Revision: 260 $
+    $Date: 2003-08-25 17:29:59 +0100 (Mon, 25 Aug 2003) $
+    $Revision: 279 $
 */
 
 /*---------------------------------------------------------------------------
@@ -398,7 +398,7 @@ int iniparser_find_entry(
   @return   int 0 if Ok, -1 otherwise.
 
   If the given entry can be found in the dictionary, it is modified to
-  contain the provided value. If it cannot be found, -1 is returned.
+  contain the provided value. If it cannot be found the entry is created.
   It is Ok to set val to NULL.
  */
 /*--------------------------------------------------------------------------*/

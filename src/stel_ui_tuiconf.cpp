@@ -187,14 +187,14 @@ void stel_ui::init_tui(void)
 	tui_menu_effects->addComponent(tui_effect_atmosphere);
 
 	// 8. Administration
-	tui_admin_loaddefault = new s_tui::ActionConfirm_item("8.1 Load Default Configuration: ", "1", "?2");
+	tui_admin_loaddefault = new s_tui::ActionConfirm_item("8.1 Load Default Configuration: ");
 	tui_admin_loaddefault->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb_admin_load_default));
 	tui_admin_savedefault = new s_tui::ActionConfirm_item("8.2 Save Current Configuration as Default: ");
-	tui_admin_loaddefault->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb_admin_save_default));
+	tui_admin_savedefault->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb_admin_save_default));
 	tui_admin_setlocal = new s_tui::Action_item("8.3 Set Locale: ");
-	tui_admin_loaddefault->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb_admin_set_locale));
+	tui_admin_setlocal->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb_admin_set_locale));
 	tui_admin_updateme = new s_tui::Action_item("8.4 Update me via Internet: ");
-	tui_admin_loaddefault->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb_admin_updateme));
+	tui_admin_updateme->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb_admin_updateme));
 	tui_menu_administration->addComponent(tui_admin_loaddefault);
 	tui_menu_administration->addComponent(tui_admin_savedefault);
 	tui_menu_administration->addComponent(tui_admin_setlocal);
@@ -337,20 +337,20 @@ void stel_ui::tui_cb_actualtime(void)
 // Load default configuration
 void stel_ui::tui_cb_admin_load_default(void)
 {
-	//	TODO
+	core->load_config();
 }
 
 // Load default configuration
 void stel_ui::tui_cb_admin_save_default(void)
 {
-	//	TODO
+	core->save_config();
 }
 
 // Set locale parameter (LANG)
 void stel_ui::tui_cb_admin_set_locale(void)
 {
 	//	TODO
-	// Use setlocale() from clocal header
+	// Use localeconv() from clocal header
 }
 
 // Launch script for internet update

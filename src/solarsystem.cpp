@@ -70,8 +70,8 @@ void SolarSystem::init(const string& font_fileName, const string& planetfile)
 void SolarSystem::load(const string& planetfile)
 {
 	printf("Loading Solar System data...\n");
-	init_parser pd(planetfile);	// The planet data ini file parser
-	pd.load();
+	init_parser pd;	// The planet data ini file parser
+	pd.load(planetfile);
 
 	int nbSections = pd.get_nsec();
 	for (int i = 0;i<nbSections;++i)
