@@ -76,7 +76,7 @@ void get_tm_from_julian(double JD, struct tm * tm_time)
 	tm_time->tm_mday = date.days;
 	tm_time->tm_mon = date.months - 1;
 	tm_time->tm_year = date.years - 1900;
-	tm_time->tm_isdst = 0;
+	tm_time->tm_isdst = -1;
 }
 
 /* Calculate the date from the Julian day
@@ -169,7 +169,7 @@ time_t get_time_t_from_julian(double JD)
 	loctime.tm_mday =date.days;
 	loctime.tm_mon = date.months -1;
 	loctime.tm_year = date.years - 1900;
-	loctime.tm_isdst = 0;
+	loctime.tm_isdst = -1;
 
 	return mktime(&loctime);
 }

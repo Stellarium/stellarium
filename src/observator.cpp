@@ -138,10 +138,10 @@ void Observator::set_custom_tz_name(const string& tzname)
 	}
 }
 
-float Observator::get_GMT_shift(double JD) const
+float Observator::get_GMT_shift(double JD, bool _local) const
 {
 	if (time_zone_mode == S_TZ_GMT_SHIFT) return GMT_shift;
-	else return get_GMT_shift_from_system(JD);
+	else return get_GMT_shift_from_system(JD,_local);
 }
 
 // Return the time zone name taken from system locale
@@ -164,7 +164,7 @@ string Observator::get_time_zone_name_from_system(double JD) const
 // time if there is. (positive for Est of GMT)
 // TODO : %z in strftime only works on GNU compiler
 // Fixed 31-05-2004 Now use the extern variables set by tzset()
-float Observator::get_GMT_shift_from_system(double JD) const
+float Observator::get_GMT_shift_from_system(double JD, bool _local) const
 {
 #if defined( MACOSX )
 	struct tm *timeinfo;
@@ -172,26 +172,42 @@ float Observator::get_GMT_shift_from_system(double JD) const
 	timeinfo = localtime(&rawtime);
 	return (float)timeinfo->tm_gmtoff/3600 + (timeinfo->tm_isdst!=0);
 #else
-	return -(float)timezone/3600 + (daylight!=0);
-
-#endif
+	// doesn't account for dst changes
+	// TODO come up with correct and portable solution 
+	return -(float)timezone/3600;
 	
-/*	time_t rawtime = get_time_t_from_julian(JD);
-
+	/* 
+	// correct, but not portable
 	struct tm * timeinfo;
-	timeinfo = localtime(&rawtime);
+
+	if(!_local) {
+	  // JD is UTC
+	  struct tm rawtime;
+	  get_tm_from_julian(JD, &rawtime);
+	  time_t ltime = timegm(&rawtime);
+	  timeinfo = localtime(&ltime);
+	} else {
+	  time_t rtime;
+	  rtime = get_time_t_from_julian(JD);
+	  timeinfo = localtime(&rtime);
+	}
+
 	static char heure[20];
 	heure[0] = '\0';
-	my_strftime(heure, 19, "%z", timeinfo);
-	cout << heure << endl;
 
-	cout << timezone << endl;
+	my_strftime(heure, 19, "%z", timeinfo);
+	//	cout << heure << endl;
+
+	//cout << timezone << endl;
 	
 	heure[5] = '\0';
 	float min = 1.f/60.f * atoi(&heure[3]);
 	heure[3] = '\0';
 	return min + atoi(heure);
 	*/
+
+#endif
+	
 }
 
 // Return the time in ISO 8601 format that is : %Y-%m-%d %H:%M:%S

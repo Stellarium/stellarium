@@ -165,22 +165,26 @@ void Nebula_mgr::draw(int names_ON, Projector* prj, const navigator * nav, tone_
 
 	glEnable(GL_TEXTURE_2D);
     glEnable(GL_BLEND);
+    Vec3f pXYZ; 
 
     vector<Nebula *>::iterator iter;
-    for(iter=neb_array.begin();iter!=neb_array.end();iter++)
-    {   
-        // project in 2D to check if the nebula is in screen
-		if ( !prj->project_earth_equ_check((*iter)->XYZ,(*iter)->XY) ) continue;
+    for(iter=neb_array.begin();iter!=neb_array.end();iter++) {   
 
-		prj->set_orthographic_projection();
-		if ((*iter)->get_on_screen_size(prj, nav)>5) (*iter)->draw_tex(prj, eye, bright_nebulae && (*iter)->get_on_screen_size(prj, nav)>15 );
-    	if (names_ON && (*iter)->mag <= max_mag_name)
+      // correct for precession
+      pXYZ = nav->prec_earth_equ_to_earth_equ((*iter)->XYZ);
+
+      // project in 2D to check if the nebula is in screen
+      if ( !prj->project_earth_equ_check(pXYZ,(*iter)->XY) ) continue;
+
+      prj->set_orthographic_projection();
+      if ((*iter)->get_on_screen_size(prj, nav)>5) (*iter)->draw_tex(prj, eye, bright_nebulae && (*iter)->get_on_screen_size(prj, nav)>15 );
+      if (names_ON && (*iter)->mag <= max_mag_name)
     	{
-			(*iter)->draw_name(prj);
-			(*iter)->draw_circle(prj, nav);
+	  (*iter)->draw_name(prj);
+	  (*iter)->draw_circle(prj, nav);
     	}
-		prj->reset_perspective_projection();
-	}
+      prj->reset_perspective_projection();
+    }
 }
 
 // Look for a nebulae by XYZ coords
