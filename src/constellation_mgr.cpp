@@ -261,7 +261,7 @@ void Constellation_mgr::draw(Projector* prj) const
 {
 	if (lines_fader==false) return;
     glDisable(GL_TEXTURE_2D);
-    glDisable(GL_BLEND);
+    glEnable(GL_BLEND);
     glColor3fv(lines_color*lines_fader.get_interstate());
     prj->set_orthographic_projection();	// set 2D coordinate
 	
