@@ -74,7 +74,7 @@ DEPDIR = .deps
 INSTALL_STRIP_PROGRAM = ${SHELL} $(install_sh) -c -s
 PACKAGE = stellarium
 RANLIB = ranlib
-VERSION = 0.4.8
+VERSION = 0.4.9
 X_CFLAGS = 
 X_EXTRA_LIBS = 
 X_LIBS = 
@@ -86,7 +86,7 @@ install_sh = /home/Fabien/work/stellarium/install-sh
 EXTRA_DIST = stellarium.PRJ stellarium.rc
 
 bin_PROGRAMS = stellarium
-stellarium_SOURCES = bytes.h shooting.h shooting.cpp grid.h grid.cpp constellation.h  nebula.h  planet.h s_gui.h  s_utility.h   vector.h constellation_mgr.cpp intl.h  nebula_mgr.cpp  planet_mgr.cpp  s_gui_window.cpp  star.cpp hip_star.cpp stellarium.h vislimit.cpp  constellation_mgr.h main.cpp  nebula_mgr.h planet_mgr.h  s_gui_window.h star.h hip_star.h vislimit.h  navigation.cpp parsecfg.c s_font.cpp s_texture.cpp star_mgr.cpp hip_star_mgr.cpp stellarium_ui.cpp draw.cpp navigation.h parsecfg.h s_font.h  s_texture.h   star_mgr.h hip_star_mgr.h stellarium_ui.h constellation.cpp  draw.h nebula.cpp  planet.cpp s_gui.cpp  s_utility.cpp stella_types.h  utility.h
+stellarium_SOURCES = bytes.h shooting.h shooting.cpp grid.h grid.cpp constellation.h  nebula.h  planet.h s_gui.h  s_utility.h   vector.h constellation_mgr.cpp intl.h  nebula_mgr.cpp  planet_mgr.cpp  s_gui_window.cpp hip_star.cpp stellarium.h vislimit.cpp  constellation_mgr.h main.cpp  nebula_mgr.h planet_mgr.h  s_gui_window.h  hip_star.h vislimit.h  navigation.cpp parsecfg.c s_font.cpp s_texture.cpp hip_star_mgr.cpp stellarium_ui.cpp draw.cpp navigation.h parsecfg.h s_font.h  s_texture.h hip_star_mgr.h stellarium_ui.h constellation.cpp  draw.h nebula.cpp  planet.cpp s_gui.cpp  s_utility.cpp stella_types.h  utility.h
 
 stellarium_LDADD = $(top_builddir)/src/glpng/libglpng.a $(top_builddir)/src/astrolib/libastrolib.a
 
@@ -101,19 +101,18 @@ PROGRAMS = $(bin_PROGRAMS)
 
 am_stellarium_OBJECTS = shooting.$(OBJEXT) grid.$(OBJEXT) \
 	constellation_mgr.$(OBJEXT) nebula_mgr.$(OBJEXT) \
-	planet_mgr.$(OBJEXT) s_gui_window.$(OBJEXT) star.$(OBJEXT) \
-	hip_star.$(OBJEXT) vislimit.$(OBJEXT) main.$(OBJEXT) \
-	navigation.$(OBJEXT) parsecfg.$(OBJEXT) s_font.$(OBJEXT) \
-	s_texture.$(OBJEXT) star_mgr.$(OBJEXT) hip_star_mgr.$(OBJEXT) \
-	stellarium_ui.$(OBJEXT) draw.$(OBJEXT) constellation.$(OBJEXT) \
-	nebula.$(OBJEXT) planet.$(OBJEXT) s_gui.$(OBJEXT) \
-	s_utility.$(OBJEXT)
+	planet_mgr.$(OBJEXT) s_gui_window.$(OBJEXT) hip_star.$(OBJEXT) \
+	vislimit.$(OBJEXT) main.$(OBJEXT) navigation.$(OBJEXT) \
+	parsecfg.$(OBJEXT) s_font.$(OBJEXT) s_texture.$(OBJEXT) \
+	hip_star_mgr.$(OBJEXT) stellarium_ui.$(OBJEXT) draw.$(OBJEXT) \
+	constellation.$(OBJEXT) nebula.$(OBJEXT) planet.$(OBJEXT) \
+	s_gui.$(OBJEXT) s_utility.$(OBJEXT)
 stellarium_OBJECTS = $(am_stellarium_OBJECTS)
 stellarium_DEPENDENCIES = $(top_builddir)/src/glpng/libglpng.a \
 	$(top_builddir)/src/astrolib/libastrolib.a
 stellarium_LDFLAGS =
 
-DEFS = -DPACKAGE=\"stellarium\" -DVERSION=\"0.4.8\" -DX_DISPLAY_MISSING=1 -DHAVE_TOUPPER=1 -DHAVE_STRCASECMP=1 -DCONFIG_DATA_DIR=\"/usr/local/share/stellarium\" 
+DEFS = -DPACKAGE=\"stellarium\" -DVERSION=\"0.4.9\" -DX_DISPLAY_MISSING=1 -DHAVE_TOUPPER=1 -DHAVE_STRCASECMP=1 -DCONFIG_DATA_DIR=\"/usr/local/share/stellarium\" 
 DEFAULT_INCLUDES =  -I. -I$(srcdir)
 CPPFLAGS = 
 LDFLAGS = 
@@ -129,7 +128,6 @@ DEP_FILES = $(DEPDIR)/constellation.Po \
 	$(DEPDIR)/s_font.Po $(DEPDIR)/s_gui.Po \
 	$(DEPDIR)/s_gui_window.Po $(DEPDIR)/s_texture.Po \
 	$(DEPDIR)/s_utility.Po $(DEPDIR)/shooting.Po \
-	$(DEPDIR)/star.Po $(DEPDIR)/star_mgr.Po \
 	$(DEPDIR)/stellarium_ui.Po $(DEPDIR)/vislimit.Po
 COMPILE = $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) \
 	$(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
@@ -213,8 +211,6 @@ include $(DEPDIR)/s_gui_window.Po
 include $(DEPDIR)/s_texture.Po
 include $(DEPDIR)/s_utility.Po
 include $(DEPDIR)/shooting.Po
-include $(DEPDIR)/star.Po
-include $(DEPDIR)/star_mgr.Po
 include $(DEPDIR)/stellarium_ui.Po
 include $(DEPDIR)/vislimit.Po
 

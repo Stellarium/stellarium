@@ -38,7 +38,7 @@ Constellation_mgr::~Constellation_mgr()
 }
 
 // Load from file
-void Constellation_mgr::Load(char * fileName, Star_mgr * _VouteCeleste)
+void Constellation_mgr::Load(char * fileName, Hip_Star_mgr * _VouteCeleste)
 {   
     char tempName[255];
     strcpy(tempName,global.DataDir);
@@ -58,22 +58,20 @@ void Constellation_mgr::Load(char * fileName, Star_mgr * _VouteCeleste)
 }
 
 // Read the dat and store in the vector of "constellation *"
-int Constellation_mgr::Read(FILE * fic, Star_mgr * _VouteCeleste)
+int Constellation_mgr::Read(FILE * fic, Hip_Star_mgr * _VouteCeleste)
 {   printf("Loading constellation data...\n");
     constellation * cons = NULL;
     while(!feof(fic))
-    {   //printf("va creer constellation\n");
+    {   
         cons = new constellation;
-        //printf("constellation cree : %x\n",cons);
         if (cons && cons->Read(fic, _VouteCeleste))
-        {   //printf("constellation lue\n");
+        {   
             Liste.push_back(cons);
-            //printf("constellation ajoutee\n");
         }
         else
-        {   if (cons) delete cons;
+        {   
+        	if (cons) delete cons;
         }
-        //printf("eof = %d\n",feof(fic));
     }
     return 0;
 }

@@ -28,8 +28,6 @@ static float coef;
 static float cmag;
 static float rmag;
 
-
-
 Star::Star() : CommonName(NULL), ShortCommonName(NULL), haveShortCommonName(false)
 {
 }

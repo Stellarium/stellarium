@@ -26,7 +26,8 @@ constellation::constellation() : Name(NULL), Inter(NULL), Asterism(NULL)
 }
 
 constellation::~constellation()
-{   if (Asterism) delete [] Asterism;
+{   
+	if (Asterism) delete [] Asterism;
     Asterism = NULL;
     if (Name) delete Name;
     Name = NULL;
@@ -34,56 +35,30 @@ constellation::~constellation()
     Inter = NULL;
 }
 
-char * removeEndSpaces1(char * str)
+int constellation::Read(FILE *  fic, Hip_Star_mgr * _VouteCeleste)
+// Read constellation datas and grab cartesian positions of stars
 {   
-	unsigned int i=0;
-    while (str[i]!='\0' && str[i]!='\n' && str[i]!='\r') {i++;}
-    str[i]='\0';
-    i--;
-    while(str[i]==' ') {str[i]='\0'; i--;}
-    char * result = strdup(str);
-    return result;
-}
+	char buff1[40];
+	char buff2[40];
+    unsigned int HP;
 
-int constellation::Read(FILE *  fic, Star_mgr * _VouteCeleste)
-// Lis les infos de la constellation et récupère les x,y et z des etoiles
-// Le fichier des constellation doit etre fini sur une ligne vide (faire entree sur la derniere ligne quoi....)
-{   char buff[400];
-    unsigned int HR;
+	fscanf(fic,"%s %s %s %u ",Abreviation,buff1,buff2,&NbSegments);
 
-    fgets(buff,22,fic);
-    buff[22]='\0';
-    Name = removeEndSpaces1(buff);
+	Name=strdup(buff1);
+	Inter=strdup(buff2);
 
-    if (feof(fic)) return 0;
-
-    fgets(Abreviation,4,fic);
-    Abreviation[3]='\0';
-
-    fgets(buff,19,fic);
-    buff[19]='\0';
-    Inter = removeEndSpaces1(buff);
-
-    fscanf(fic,"%2u:",&NbSegments);
-
-//    printf("%s %s %s %u\n",Name,Abreviation,Inter,NbSegments);
-
-    fgets(buff,NbSegments*8+NbSegments*2,fic);
-    char c = fgetc(fic);
-    while (c!='\n') {c = fgetc(fic);}
-
-    Asterism = new Star*[NbSegments*2];
+    Asterism = new Hip_Star*[NbSegments*2];
     for (int i=0;i<NbSegments*2;i++)
     {
-        sscanf(buff+i*5,"%4u",&HR);
-        Asterism[i]=_VouteCeleste->Rechercher(HR);
+        fscanf(fic,"%u",&HP);
+        Asterism[i]=_VouteCeleste->Rechercher(HP);
 		if (!Asterism[i])
 		{
-			printf("Error in constellation %s asterism : can't find star HR=%d\n",Inter,HR);
-			exit(1);
+			printf("Error in constellation %s asterism : can't find star HP=%d\n",Inter,HP);
 		}
-//        printf("HR = %u %x\n",HR,Asterism[i]);
     }
+
+	fscanf(fic,"\n");
 
     Xnom=0;
     Ynom=0;

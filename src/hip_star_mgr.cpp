@@ -23,13 +23,16 @@
 #include "s_texture.h"
 #include "grid.h"
 #include "bytes.h"
+#include "stellarium.h"
 
 s_texture * hipStarTexture;
+s_font * starFont;
 
 Hip_Star_mgr::Hip_Star_mgr() : HipGrid()
 {	
     hipStarTexture=NULL;
     Selectionnee=NULL;
+    StarArray = NULL;
 }
 
 Hip_Star_mgr::~Hip_Star_mgr()
@@ -42,41 +45,97 @@ Hip_Star_mgr::~Hip_Star_mgr()
 
     if (hipStarTexture) delete hipStarTexture;
     hipStarTexture=NULL;
+    if (starFont) delete starFont;
+    starFont=NULL;
+    
+    if (StarArray) delete StarArray;
 }
 
 // Load from file ( create the stream and call the Read function )
-void Hip_Star_mgr::Load(char * NameFichier)
+void Hip_Star_mgr::Load(char * hipCatFile, char * commonNameFile, char * nameFile)
 {   
     printf("Loading Hipparcos star data...\n");
-    FILE * pFile;
-    pFile=fopen(NameFichier,"r");
-    if (pFile==NULL)
+    FILE * hipFile, *cnFile, * nFile;
+    hipFile=fopen(hipCatFile,"r");
+    if (!hipFile)
     {   
-        printf("ERROR %s NOT FOUND\n",NameFichier);
+        printf("ERROR %s NOT FOUND\n",hipCatFile);
         return;
     }
-    Hip_Star_mgr::Read(pFile);
-    fclose(pFile);
+    cnFile=fopen(commonNameFile,"r");
+    if (!cnFile)
+    {   
+        printf("ERROR %s NOT FOUND\n",cnFile);
+        return;
+    }
+    nFile=fopen(nameFile,"r");
+    if (!nFile)
+    {   
+        printf("ERROR %s NOT FOUND\n",nameFile);
+        return;
+    }
     
-    hipStarTexture=new s_texture("etoile16x16Aigrettes");  // Load star texture
-}
-
-
-int Hip_Star_mgr::Read(FILE * catalog)
-{   
+	// Read number of stars in the Hipparcos catalog
     unsigned int catalogSize=0;
-    fread((char*)&catalogSize,4,1,catalog);
-    LE_TO_CPU_INT32(catalogSize,catalogSize);
+    fread((char*)&catalogSize,4,1,hipFile);
+    LE_TO_CPU_INT32(catalogSize,catalogSize);  
     
+    StarArraySize = 120417;
+    // Create the sequential array
+    StarArray = new (Hip_Star *)[StarArraySize];
+    
+	// Read common names & names catalog
+	char ** commonNames = new (char *)[120000];
+	char ** names = new (char *)[120000];
+	
+	int tmp;
+	char tmpName[20];
+	
+	while(!feof(cnFile))
+	{
+		fscanf(cnFile,"%d|%s\n",&tmp,tmpName);
+		commonNames[tmp] = strdup(tmpName);
+	}
+	while(!feof(nFile))
+	{
+		fscanf(nFile,"%d|%s\n",&tmp,tmpName);
+		names[tmp] = strdup(tmpName);
+	}
+
+	// Read binary file Hipparcos catalog  
     Hip_Star * e = NULL;
     for(int i=0;i<catalogSize;i++)
     {   
 	    e = new Hip_Star;
-        e->Read(catalog);
+        e->Read(hipFile);
+        // Set names if any
+        if(commonNames[e->HP]) e->CommonName=commonNames[e->HP];
+        if(names[e->HP]) e->Name=names[e->HP];
         Liste.insert(pair<int, Hip_Star*>(HipGrid.GetNearest(e->XYZ), e));
+        StarArray[e->HP]=e;
     }
-	return 0;
+
+	delete commonNames;
+	delete names;
+
+    fclose(hipFile);
+    fclose(cnFile);
+    fclose(nFile);
+    
+    hipStarTexture=new s_texture("etoile16x16Aigrettes");  // Load star texture
+    
+    char tempName[255];
+    strcpy(tempName,global.DataDir);
+    strcat(tempName,"spacefont.txt");
+    starFont=new s_font(0.012*global.X_Resolution,"spacefont", tempName); // load Font
+    if (!starFont)
+    {
+	    printf("Can't create starFont\n");
+        exit(1);
+    }
+    
 }
+
 
 // Draw all the stars
 void Hip_Star_mgr::Draw(void)
@@ -103,24 +162,29 @@ void Hip_Star_mgr::Draw(void)
 	int nbZones=0, * zoneList=NULL;
 	nbZones = HipGrid.Intersect(global.XYZVision, global.Fov*PI/180, zoneList);
 	
-for(int i=0;i<nbZones;i++)
-{
-    p = Liste.equal_range(zoneList[i]);
-    for(multimap<int,Hip_Star *>::iterator iter = p.first; iter != p.second; iter++)
-    {   
-		if ((*iter).second->Mag>6+60./global.Fov) continue;
-	    gluProject( ((*iter).second)->XYZ[0],((*iter).second)->XYZ[1],
-	        ((*iter).second)->XYZ[2],M,P,V,&(((*iter).second)->XY[0]),
-	        &(((*iter).second)->XY[1]),&z);
-        if (z<1) 
-        {
-	        ((*iter).second)->Draw();
-        }
-    }
-}
+	for(int i=0;i<nbZones;i++)
+	{
+    	p = Liste.equal_range(zoneList[i]);
+    	for(multimap<int,Hip_Star *>::iterator iter = p.first; iter != p.second; iter++)
+    	{   
+			if ((*iter).second->Mag>6+60./global.Fov) continue;
+	    	gluProject( ((*iter).second)->XYZ[0],((*iter).second)->XYZ[1],
+		        ((*iter).second)->XYZ[2],M,P,V,&(((*iter).second)->XY[0]),
+	        	&(((*iter).second)->XY[1]),&z);
+        	if (z<1) 
+        	{
+		        ((*iter).second)->Draw();
+		        if (global.FlagStarName && ((*iter).second)->CommonName && ((*iter).second)->Mag<global.MaxMagStarName) 
+            	{   
+		        	((*iter).second)->DrawName();
+                	glBindTexture (GL_TEXTURE_2D, hipStarTexture->getID());
+            	}
+        	}
+	    }
+	}
 
-delete zoneList;
-zoneList = NULL;
+	delete zoneList;
+	zoneList = NULL;
 
     glPopMatrix();
     resetPerspectiveProjection();
@@ -149,4 +213,12 @@ int Hip_Star_mgr::Rechercher(vec3_t Pos)
         return 0;
     }
     else return 1;
+}
+
+// Search the star by HP number
+Hip_Star * Hip_Star_mgr::Rechercher(unsigned int _HP)
+{
+	if (StarArray[_HP] && StarArray[_HP]->HP == _HP)
+		return StarArray[_HP];
+    return NULL;
 }
