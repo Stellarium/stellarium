@@ -152,11 +152,13 @@ namespace s_tui
     {
     public:
 		Integer_item(int _min, int _max, int init_value, const string& _label = string()) :
-			Integer(init_value), min(_min), max(_max), label(_label) {;}
-		virtual string getString(void) {return label + Integer::getString();}
+			Integer(init_value), numInput(false), min(_min), max(_max), label(_label) {;}
+		virtual string getString(void);
 		virtual bool isEditable(void) const {return true;}
 		virtual bool onKey(SDLKey, S_TUI_VALUE);
     protected:
+		bool numInput;
+		string strInput;
 		int min, max;
 		string label;
     };
@@ -166,11 +168,13 @@ namespace s_tui
     {
     public:
 		Decimal_item(double _min, double _max, double init_value, const string& _label = string()) :
-			Decimal(init_value), min(_min), max(_max), label(_label) {;}
-		virtual string getString(void) {return label + Decimal::getString();}
+			Decimal(init_value), numInput(false), min(_min), max(_max), label(_label) {;}
+		virtual string getString(void);
 		virtual bool isEditable(void) const {return true;}
 		virtual bool onKey(SDLKey, S_TUI_VALUE);
     protected:
+		bool numInput;
+		string strInput;
 		double min, max;
 		string label;
     };

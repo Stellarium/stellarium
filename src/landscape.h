@@ -20,6 +20,7 @@
 #ifndef _LANDSCAPE_H_
 #define _LANDSCAPE_H_
 
+#include <string>
 #include "s_texture.h"
 #include "vecmath.h"
 #include "tone_reproductor.h"
@@ -38,14 +39,14 @@ class Landscape
 public:
 	Landscape(float _radius = 1.);
     virtual ~Landscape();
-	virtual void load(const char* file_name, const char* section_name) = 0;
+	virtual void load(const string& file_name, const string& section_name) = 0;
 	void set_parameters(const Vec3f& sun_pos);
 	virtual void draw(tone_reproductor * eye, const Projector* prj, const navigator* nav,
 		bool flag_fog, bool flag_decor, bool flag_ground) = 0;
-	static Landscape* create_from_file(const char* landscape_file, const char* section_name);
+	static Landscape* create_from_file(const string& landscape_file, const string& section_name);
 protected:
 	float radius;
-	char* name;
+	string name;
 	float sky_brightness;
 };
 
@@ -60,7 +61,7 @@ class Landscape_old_style : public Landscape
 public:
 	Landscape_old_style(float _radius = 1.);
     virtual ~Landscape_old_style();
-	virtual void load(const char* fileName, const char* section_name);
+	virtual void load(const string& fileName, const string& section_name);
 	virtual void draw(tone_reproductor * eye, const Projector* prj, const navigator* nav,
 		bool flag_fog, bool flag_decor, bool flag_ground);
 private:
@@ -87,7 +88,7 @@ class Landscape_fisheye : public Landscape
 public:
 	Landscape_fisheye(float _radius = 1.);
     virtual ~Landscape_fisheye();
-	virtual void load(const char* fileName, const char* section_name);
+	virtual void load(const string& fileName, const string& section_name);
 	virtual void draw(tone_reproductor * eye, const Projector* prj, const navigator* nav,
 		bool flag_fog, bool flag_decor, bool flag_ground);
 private:

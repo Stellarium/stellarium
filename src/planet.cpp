@@ -31,15 +31,14 @@ rotation_elements::rotation_elements() : period(1.), offset(0.), epoch(J2000),
 {
 }
 
-planet::planet(const char * _name, int _flagHalo, int _flag_lighting, double _radius, Vec3f _color,
-	float _albedo, const char* tex_map_name, const char* tex_halo_name, pos_func_type _coord_func) :
-		name(NULL), flagHalo(_flagHalo), flag_lighting(_flag_lighting), radius(_radius), color(_color),
+planet::planet(const string& _name, int _flagHalo, int _flag_lighting, double _radius, Vec3f _color,
+	float _albedo, const string& tex_map_name, const string& tex_halo_name, pos_func_type _coord_func) :
+		name(_name), flagHalo(_flagHalo), flag_lighting(_flag_lighting), radius(_radius), color(_color),
 		albedo(_albedo), axis_rotation(0.),	tex_map(NULL), tex_halo(NULL), rings(NULL), sphere_scale(1.f),
 		lastJD(J2000), deltaJD(JD_SECOND), coord_func(_coord_func), parent(NULL)
 {
 	ecliptic_pos=Vec3d(0.,0.,0.);
 	mat_local_to_parent = Mat4d::identity();
-	if (_name) name=strdup(_name);
 	tex_map = new s_texture(tex_map_name, TEX_LOAD_TYPE_PNG_SOLID_REPEAT);
 	if (flagHalo) tex_halo = new s_texture(tex_halo_name);
 }
@@ -47,8 +46,6 @@ planet::planet(const char * _name, int _flagHalo, int _flag_lighting, double _ra
 
 planet::~planet()
 {
-	if (name) free(name);
-	name=NULL;
 	if (tex_map) delete tex_map;
 	tex_map = NULL;
 	if (tex_halo) delete tex_halo;
@@ -68,7 +65,7 @@ void planet::get_info_string(char * s, const navigator * nav) const
 	Vec3d equPos = get_earth_equ_pos(nav);
 	rect_to_sphe(&tempRA,&tempDE,equPos);
 	sprintf(s,"Name :%s%s\nRA : %s\nDE : %s\nDistance : %.8f UA\nMagnitude : %.2f",
-	name, scale_str, print_angle_hms(tempRA*180./M_PI), print_angle_dms_stel(tempDE*180./M_PI), equPos.length(),
+	name.c_str(), scale_str, print_angle_hms(tempRA*180./M_PI), print_angle_dms_stel(tempDE*180./M_PI), equPos.length(),
 	compute_magnitude(nav->get_observer_helio_pos()));
 }
 
@@ -78,7 +75,7 @@ void planet::get_short_info_string(char * s, const navigator * nav) const
 	static char scale_str[100];
 	if (sphere_scale == 1.f) scale_str[0] = '\0';
 	else sprintf(scale_str," (x%.1f)", sphere_scale);
-	sprintf(s,"%s%s: mag %.1f",name, scale_str, compute_magnitude(nav->get_observer_helio_pos()));
+	sprintf(s,"%s%s: mag %.1f",name.c_str(), scale_str, compute_magnitude(nav->get_observer_helio_pos()));
 }
 
 // Set the orbital elements
@@ -283,8 +280,8 @@ void planet::draw_hints(const navigator* nav, const Projector* prj)
 
 	// Draw name + scaling if it's not == 1.
 	static char scale_str[100];
-	if (sphere_scale == 1.f) sprintf(scale_str,"%s", name);
-	else sprintf(scale_str,"%s (x%.1f)", name, sphere_scale);
+	if (sphere_scale == 1.f) sprintf(scale_str,"%s", name.c_str());
+	else sprintf(scale_str,"%s (x%.1f)", name.c_str(), sphere_scale);
 	float tmp = 10.f + get_on_screen_size(nav, prj)/2.f; // Shift for name printing
 	gravity_label ? prj->print_gravity(planet_name_font, screenPos[0],screenPos[1], scale_str, tmp, tmp) :
 		planet_name_font->print(screenPos[0]+tmp,screenPos[1]+tmp, scale_str);
@@ -384,7 +381,7 @@ void planet::draw_halo(const navigator* nav, const Projector* prj, const tone_re
 }
 
 
-ring::ring(float _radius, const char* _texname) : radius(_radius), tex(NULL)
+ring::ring(float _radius, const string& _texname) : radius(_radius), tex(NULL)
 {
 	tex = new s_texture(_texname,TEX_LOAD_TYPE_PNG_ALPHA);
 }

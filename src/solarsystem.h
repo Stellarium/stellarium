@@ -35,7 +35,7 @@ public:
     virtual ~SolarSystem();
 
 	// Init and load the solar system data from the file "planetfile".
-	void init(const char * font_fileName, const char* planetfile);
+	void init(const string& font_fileName, const string& planetfile);
 
 	// Compute the position for every elements of the solar system.
 	void compute_positions(double date);
@@ -59,7 +59,7 @@ private:
 	planet* earth;
 
 	s_font* planet_name_font;
-	void load(const char* planetfile);	// Load the bodies data from a file
+	void load(const string& planetfile);// Load the bodies data from a file
 	vector<planet*> system_planets;		// Vector containing all the bodies of the system
 	vector<EllipticalOrbit*> ell_orbits;// Pointers on created elliptical orbits
 

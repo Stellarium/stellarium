@@ -24,6 +24,8 @@
 
 using namespace std;
 
+#include <string>
+
 #include "navigator.h"
 #include "projector.h"
 #include "fisheye_projector.h"
@@ -150,6 +152,7 @@ private:
 	Vec3f GuiTextColor;
 
 	// Text UI
+	int FlagShowTui;
 	int FlagShowTuiDateTime;
 	int FlagShowTuiShortInfo;
 
@@ -168,7 +171,7 @@ private:
     int FlagHorizon;
     int FlagFog;
     int FlagAtmosphere;
-    char landscape_name[255];
+    string landscape_name;
 	float sky_brightness;
 
 	// Viewing
@@ -185,9 +188,13 @@ private:
 	int FlagInitMoonScaled;
 
 	// Navigation
+	string PositionFile;
 	int FlagEnableZoomKeys;
 	int FlagEnableMoveKeys;
 	float initFov;
+	double PresetSkyTime;
+	string InitDate;
+	Vec3d InitViewPos;
 
 	int frame, timefr, timeBase;		// Used for fps counter
 

@@ -123,8 +123,57 @@ private:
 	void updateConfigVariables(void);
 	void updateConfigForm(void);
 
+	////////////////////////////////////////////////////////////////////////////
 	// Text UI components
 	s_tui::Branch* tui_root;
+
+	// 1. Location
+	s_tui::Decimal_item* tui_location_latitude;
+	s_tui::Decimal_item* tui_location_longitude;
+	s_tui::Integer_item* tui_location_altitude;
+
+	// 2. Time & Date
+	s_tui::Action_item* tui_time_settmz;
+	s_tui::Time_item* tui_time_skytime;
+	s_tui::Time_item* tui_time_presetskytime;
+	s_tui::Action_item* tui_time_actual;
+	s_tui::Boolean_item* tui_time_startuptime;
+	s_tui::Boolean_item* tui_time_displayformat;
+
+	// 3. Constellation
+	s_tui::Boolean_item* tui_constellation_lines;
+	s_tui::Boolean_item* tui_constellation_art;
+
+	// 4. Stars
+	s_tui::Boolean_item* tui_stars_show;
+	s_tui::Decimal_item* tui_star_labelmaxmag;
+	s_tui::Boolean_item* tui_stars_twinkle;
+
+	// 5. Labels
+	s_tui::Boolean_item* tui_label_stars;
+	s_tui::Boolean_item* tui_label_constellations;
+	s_tui::Boolean_item* tui_label_nebulas;
+	s_tui::Boolean_item* tui_label_planets;
+	s_tui::Boolean_item* tui_label_timeinfo;
+
+	// 6. Reference points
+	s_tui::Boolean_item* tui_refpoints_cardinalpoints;
+	s_tui::Boolean_item* tui_refpoints_ecliptic;
+	s_tui::Boolean_item* tui_refpoints_equator;
+	s_tui::Boolean_item* tui_refpoints_equatorialgrid;
+	s_tui::Boolean_item* tui_refpoints_azimutalgrid;
+
+	// 7. Effect
+	s_tui::Boolean_item* tui_effect_atmosphere;
+
+	// 8. Administration
+	s_tui::ActionConfirm_item* tui_admin_loaddefault;
+	s_tui::ActionConfirm_item* tui_admin_savedefault;
+	s_tui::Action_item* tui_admin_setlocal;
+	s_tui::Action_item* tui_admin_updateme;
+
+	// Tui Callbacks
+	void tui_cb1(void);
 };
 
 #endif  //_STEL_UI_H

@@ -19,6 +19,7 @@
 
 // Class which manages a Text User Interface "widgets"
 
+#include <iomanip>
 #include "s_tui.h"
 
 using namespace std;
@@ -216,56 +217,216 @@ string Decimal::getString(void)
 
 bool Integer_item::onKey(SDLKey k, S_TUI_VALUE v)
 {
-	if (v==S_TUI_PRESSED && k==SDLK_UP)
+	if (v==S_TUI_RELEASED) return false;
+	if (!numInput)
 	{
-		++value;
-		if (value>max)
+		if (k==SDLK_UP)
 		{
-			value = max;
+			++value;
+			if (value>max)
+			{
+				value = max;
+				return true;
+			}
+			if (!onChangeCallback.empty()) onChangeCallback();
 			return true;
 		}
-		if (!onChangeCallback.empty()) onChangeCallback();
-		return true;
-	}
-	if (v==S_TUI_PRESSED && k==SDLK_DOWN)
-	{
-		--value;
-		if (value<min)
+		if (k==SDLK_DOWN)
 		{
-			value = min;
+			--value;
+			if (value<min)
+			{
+				value = min;
+				return true;
+			}
+			if (!onChangeCallback.empty()) onChangeCallback();
 			return true;
 		}
-		if (!onChangeCallback.empty()) onChangeCallback();
-		return true;
+
+		if (k==SDLK_0 || k==SDLK_1 || k==SDLK_2 || k==SDLK_3 || k==SDLK_4 || k==SDLK_5 ||
+			k==SDLK_6 || k==SDLK_7 || k==SDLK_8 || k==SDLK_9 || k==SDLK_MINUS)
+		{
+			// Start editing with numerical numbers
+			numInput = true;
+			strInput.clear();
+
+			char c = k;
+			strInput += c;
+
+			return true;
+		}
 	}
+	else	// numInput == true
+	{
+		if (k==SDLK_RETURN)
+		{
+			numInput=false;
+			istringstream is(strInput);
+			is >> value;
+			if (value>max) value = max;
+			if (value<min) value = min;
+			if (!onChangeCallback.empty()) onChangeCallback();
+			return false;
+		}
+
+		if (k==SDLK_UP)
+		{
+			istringstream is(strInput);
+			is >> value;
+			++value;
+			if (value>max) value = max;
+			if (value<min) value = min;
+			ostringstream os;
+			os << value;
+			strInput = os.str();
+			return true;
+		}
+		if (k==SDLK_DOWN)
+		{
+			istringstream is(strInput);
+			is >> value;
+			--value;
+			if (value>max) value = max;
+			if (value<min) value = min;
+			ostringstream os;
+			os << value;
+			strInput = os.str();
+			return true;
+		}
+
+		if (k==SDLK_0 || k==SDLK_1 || k==SDLK_2 || k==SDLK_3 || k==SDLK_4 || k==SDLK_5 ||
+			k==SDLK_6 || k==SDLK_7 || k==SDLK_8 || k==SDLK_9 || k==SDLK_MINUS)
+		{
+			// The user was already editing
+			char c = k;
+			strInput += c;
+			return true;
+		}
+
+		if (k==SDLK_ESCAPE || k==SDLK_LEFT)
+		{
+			numInput=false;
+			return false;
+		}
+		return true; // Block every other characters
+	}
+
 	return false;
+}
+
+string Integer_item::getString(void)
+{
+	ostringstream os;
+	if (numInput) os << label << (active ? start_active : "") << strInput << (active ? stop_active : "");
+	else os << label << (active ? start_active : "") << value << (active ? stop_active : "");
+	return os.str();
 }
 
 bool Decimal_item::onKey(SDLKey k, S_TUI_VALUE v)
 {
-	if (v==S_TUI_PRESSED && k==SDLK_UP)
+	if (v==S_TUI_RELEASED) return false;
+	if (!numInput)
 	{
-		++value;
-		if (value>max)
+		if (k==SDLK_UP)
 		{
-			value = max;
+			++value;
+			if (value>max)
+			{
+				value = max;
+				return true;
+			}
+			if (!onChangeCallback.empty()) onChangeCallback();
 			return true;
 		}
-		if (!onChangeCallback.empty()) onChangeCallback();
-		return true;
-	}
-	if (v==S_TUI_PRESSED && k==SDLK_DOWN)
-	{
-		--value;
-		if (value<min)
+		if (k==SDLK_DOWN)
 		{
-			value = min;
+			--value;
+			if (value<min)
+			{
+				value = min;
+				return true;
+			}
+			if (!onChangeCallback.empty()) onChangeCallback();
 			return true;
 		}
-		if (!onChangeCallback.empty()) onChangeCallback();
-		return true;
+
+		if (k==SDLK_0 || k==SDLK_1 || k==SDLK_2 || k==SDLK_3 || k==SDLK_4 || k==SDLK_5 ||
+			k==SDLK_6 || k==SDLK_7 || k==SDLK_8 || k==SDLK_9 || k==SDLK_PERIOD || k==SDLK_MINUS)
+		{
+			// Start editing with numerical numbers
+			numInput = true;
+			strInput.clear();
+
+			char c = k;
+			strInput += c;
+
+			return true;
+		}
 	}
+	else	// numInput == true
+	{
+		if (k==SDLK_RETURN)
+		{
+			numInput=false;
+			istringstream is(strInput);
+			is >> value;
+			if (value>max) value = max;
+			if (value<min) value = min;
+			if (!onChangeCallback.empty()) onChangeCallback();
+			return false;
+		}
+
+		if (k==SDLK_UP)
+		{
+			istringstream is(strInput);
+			is >> value;
+			++value;
+			if (value>max) value = max;
+			if (value<min) value = min;
+			ostringstream os;
+			os << value;
+			strInput = os.str();
+			return true;
+		}
+		if (k==SDLK_DOWN)
+		{
+			istringstream is(strInput);
+			is >> value;
+			--value;
+			if (value>max) value = max;
+			if (value<min) value = min;
+			ostringstream os;
+			os << value;
+			strInput = os.str();
+			return true;
+		}
+
+		if (k==SDLK_0 || k==SDLK_1 || k==SDLK_2 || k==SDLK_3 || k==SDLK_4 || k==SDLK_5 ||
+			k==SDLK_6 || k==SDLK_7 || k==SDLK_8 || k==SDLK_9 || k==SDLK_PERIOD || k==SDLK_MINUS)
+		{
+			// The user was already editing
+			char c = k;
+			strInput += c;
+			return true;
+		}
+
+		if (k==SDLK_ESCAPE || k==SDLK_LEFT)
+		{
+			numInput=false;
+			return false;
+		}
+		return true; // Block every other characters
+	}
+
 	return false;
+}
+
+string Decimal_item::getString(void)
+{
+	ostringstream os;
+	if (numInput) os << label << (active ? start_active : "") << strInput << (active ? stop_active : "");
+	else os << label << (active ? start_active : "") << value << (active ? stop_active : "");
+	return os.str();
 }
 
 bool Time_item::onKey(SDLKey k, S_TUI_VALUE v)
@@ -293,6 +454,7 @@ bool Time_item::onKey(SDLKey k, S_TUI_VALUE v)
 		if (current_edit==5) second += (k==SDLK_UP ? 1 : -1);
 		else ymdhms[current_edit] += (k==SDLK_UP ? 1 : -1);
 		compute_JD();
+		if (!onChangeCallback.empty()) onChangeCallback();
 		return true;
 	}
 	return false;

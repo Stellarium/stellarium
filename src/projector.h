@@ -146,10 +146,10 @@ public:
 
 	const Vec3d convert_pos(const Vec3d& v, const Mat4d& mat) const {return v;}
 
-	void print_gravity(const s_font* font, float x, float y, const char * str,
+	void print_gravity(const s_font* font, float x, float y, const string& str,
 		float xshift = 0, float yshift = 0) const;
 
-	void print_gravity180(const s_font* font, float x, float y, const char * str,
+	void print_gravity180(const s_font* font, float x, float y, const string& str,
 		float xshift = 0, float yshift = 0) const;
 
 protected:

@@ -145,6 +145,8 @@ void stel_sdl::start_main_loop(void)
 							TerminateApplication();
 						}
 					}
+					// Rescue escape in case of lock : CTRL + ESC forces brutal quit
+					if (E.key.keysym.sym==SDLK_ESCAPE && (SDL_GetModState() & KMOD_CTRL)) TerminateApplication();
 					break;
 
 				case SDL_KEYUP:

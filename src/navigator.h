@@ -48,7 +48,7 @@ public:
 	~observator_pos();
 	void save(FILE *);
 	void load(FILE *);
-	char * name;
+	string name;
 	unsigned int planet;// Planet number : 0 floating, 1 Mercure - 9 pluton
     double longitude;	// Longitude in degree
 	double latitude;	// Latitude in degree
@@ -79,15 +79,15 @@ public:
 	void move_to(const Vec3d& _aim, float move_duration = 1.);
 
 	// Loads
-	void load_position(const char *);		// Load the position info in the file name given
-	void save_position(const char *);		// Save the position info in the file name given
+	void load_position(const string&);		// Load the position info in the file name given
+	void save_position(const string&);		// Save the position info in the file name given
 
 	// Time controls
 	void set_JDay(double JD) {JDay=JD;}
 	double get_JDay(void) const {return JDay;}
 	void set_time_speed(double ts) {time_speed=ts;}
 	double get_time_speed(void) const {return time_speed;}
-	
+
 	// Flags controls
 	void set_flag_traking(int v) {flag_traking=v;}
 	void set_flag_lock_equ_pos(int v) {flag_lock_equ_pos=v;}
