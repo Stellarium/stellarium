@@ -258,13 +258,6 @@ void loadConfig(char * configFile, char * locationFile)
     if (tempDate) delete tempDate;
 	tempDate=NULL;
 
-    if (tempTime)
-    {
-        date.hours-=navigation.get_time_zone();	// maybe bug if time zone+hours>23
-        delete tempTime;
-		tempTime=NULL;
-    }
-
     // calc the julian date and store it in the global variable JDay
     navigation.set_JDay(get_julian_day(&date));
 
@@ -342,8 +335,6 @@ void dumpConfig(void)
 
 void dumpLocation(void)
 {
-
-
 	char tempName[255];
     strcpy(tempName,global.ConfigDir);
     strcat(tempName,"location.txt");
