@@ -45,7 +45,7 @@ stel_atmosphere::~stel_atmosphere()
 	if (tab_sky) delete tab_sky;
 }
 
-void stel_atmosphere::compute_color(int ground_ON, Vec3d sunPos, Vec3d moonPos, float moon_phase, tone_reproductor * eye, draw_utility * du)
+void stel_atmosphere::compute_color(Vec3d sunPos, Vec3d moonPos, float moon_phase, tone_reproductor * eye, draw_utility * du)
 {
 	static    GLdouble M[16];
 	static    GLdouble P[16];
@@ -99,6 +99,7 @@ void stel_atmosphere::compute_color(int ground_ON, Vec3d sunPos, Vec3d moonPos, 
 				tab_sky[x][y].set(0.f,0.f,0.f);
 			}
 		}
+		eye->set_world_adaptation_luminance(3.75f);
 		return;
 	}
 
@@ -124,13 +125,13 @@ void stel_atmosphere::compute_color(int ground_ON, Vec3d sunPos, Vec3d moonPos, 
 			sky.get_xyY_valuev(&b2);
 
 			// Make a smooth transition between the skylight.cpp and the skybright.cpp 's models.
-			float s = (2000.f - b2.color[2])/2000.f;
+			float s = (1000.f - b2.color[2])/1000.f;
 			if (s>0)
 			{
 				b2.color[2]*=1.f-s;
 				b2.color[2]+=s * skyb.get_luminance(moon_pos[0]*b2.pos[0]+moon_pos[1]*b2.pos[1]+
-					moon_pos[2]*b2.pos[2], sun_pos[0]*b2.pos[0]+sun_pos[1]*b2.pos[1]+
-					sun_pos[2]*b2.pos[2], b2.pos[2]);
+					moon_pos[2]*b2.pos[2] - 0.00000001, sun_pos[0]*b2.pos[0]+sun_pos[1]*b2.pos[1]+
+					sun_pos[2]*b2.pos[2] - 0.00000001, b2.pos[2]);
 			}
 
 			eye->xyY_to_RGB(b2.color);
@@ -205,14 +206,4 @@ void stel_atmosphere::draw(draw_utility * du)
 		glEnd();
 	}
 	du->reset_perspective_projection();
-}
-
-
-// return the atmosphere zenith luminance
-const float * stel_atmosphere::get_zenith_color(tone_reproductor * eye) const
-{
-	static float v[3];
-	sky.get_zenith_color(v);
-	eye->xyY_to_RGB(v);
-	return v;
 }

@@ -239,7 +239,7 @@ void SolarSystem::draw(int hint_ON, draw_utility * du, navigator * nav)
     vector<planet*>::iterator iter = system_planets.begin();
     while (iter != system_planets.end())
     {
-        /*if (*iter!=earth)*/ (*iter)->draw(hint_ON, du, nav);
+        if (*iter!=earth) (*iter)->draw(hint_ON, du, nav);
         iter++;
     }
 }
