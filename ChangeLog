@@ -1,3 +1,13 @@
+0.5.3b [28/04/2003]
+Spring cleaning :
+Stopped using the previous unreliable astro library with badly defined licence and use the hopefully reliable LGPL libnova library instead.
+Removed the module/class planet_mgr and use a hierarchical unified planet class instead to manage all the solar system bodies with objective to add planet satellites, asteroids, comete and manage planet obliquity, and rotation of the textures.
+Remade in a coherent way all the s_utility conversion functions (in double precision).
+Created a new class "selection" to manage the selected object in a good object oriented way.
+Abandoned my previous vector class for a modified version of the vecmath class from celestia.
+Use double precision for every planet,orbit and navigation calculation.
+Centralized all the navigation/time variables and operation in a new class "navigator" instead of the old non-object old navigation module.
+
 0.5.2 [29/04/2003]
 Changed the configuration file to $HOME/.stellarium/VERSION/ on unix system to prevent conflicts between versions.
 Correctly configure SDL in configure.in (patch by Kipp Canon)

@@ -1,4 +1,4 @@
-/* 
+/*
  * Stellarium
  * Copyright (C) 2002 Fabien Chéreau
  * 
@@ -161,7 +161,7 @@ void DrawAtmosphere2(void)
     glPushMatrix();
     glLoadIdentity();
     for (int y2=0; y2<skyResolution-1+1; y2++)
-    {   
+    {
         glBegin(GL_TRIANGLE_STRIP);
             for(int x2=0; x2<skyResolution+1; x2++)
             {
@@ -414,7 +414,7 @@ void DrawPoint(float X,float Y,float Z)
 }
 
 // Draw the pointer
-void DrawPointer(vec3_t obj, float size, vec3_t RGB, int ObjType)
+void DrawPointer(Vec3d obj, float size, vec3_t RGB, int ObjType)
 {   double x,y;
     Project(obj[0],obj[1],obj[2],x,y);
     setOrthographicProjection(global.X_Resolution, global.Y_Resolution);
@@ -490,8 +490,8 @@ void DrawPointer(vec3_t obj, float size, vec3_t RGB, int ObjType)
             glTexCoord2f(0.0f,1.0f);    glVertex3f(-10,10,0);       //Haut Gauche
         glEnd ();
     }
-        glPopMatrix();
-        resetPerspectiveProjection();
+    glPopMatrix();
+    resetPerspectiveProjection();
 }
 
 // Draw the mountains with a few pieces of a big texture

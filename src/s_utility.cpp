@@ -19,38 +19,86 @@
 
 #include "s_utility.h"
 #include "stellarium.h"
-#include "MathOps.h"
 
-float RA_en_Rad(int RAh, int RAm, float RAs)
-{   return (float)RAh*2*PI/24+(float)RAm*(2*PI/24)/60+RAs*((2*PI/24)/60)/60;
+/* puts a large angle in the correct range 0 - 2PI radians */
+double range_radians (double angle)
+{
+    double temp;
+
+    if (angle >= 0.0 && angle < (2.0 * M_PI))
+    	return(angle);
+
+	temp = (int)(angle / (M_PI * 2.0));
+
+	if ( angle < 0.0 )
+		temp --;
+	temp *= (M_PI * 2.0);
+	return angle - temp;
 }
 
-float RA_en_Rad(int RAh, float RAm)
-{   return (float)RAh*2*PI/24+RAm*(2*PI/24)/60;
+double hms_to_rad(unsigned int h, unsigned int m, double s)
+{
+	return (double)PI/24.*h*2.+(double)PI/12.*m/60.+s*PI/43200.;
 }
 
-float DE_en_Rad(bool DEsign,int Deg, int Arcmin, int Arcsec)
-{   float tps=(float)Deg*PI/180+(float)Arcmin*(PI/180)/60+(float)Arcsec*((PI/180)/60)/60;
-    if (DEsign) return -1*tps; else return tps;
-} 
-
-float DE_en_Rad(int Deg, float Arcmin)
-{   return (float)Deg*PI/180+Arcmin*(PI/180)/60;
-} 
-
-void RA_en_hms(int & RAh, int & RAm, float & RAs, float RA)
-{   RAh=(int)(RA*12/PI);
-    RAm=(int)(RA*720/PI-RAh*60);
-    RAs=RA*43200/PI-RAm*60-RAh*3600;
+double dms_to_rad(int d, int m, double s)
+{
+	return (double)PI/180.*d+(double)PI/10800.*m+s*PI/648000.;
 }
+
+void rad_to_hms(unsigned int * h, unsigned int * m, double * s, double r)
+{
+	*h = (int)(r*12./PI);
+    *m = (int)(r*720./PI-h*60.);
+    *s = r*43200./PI-m*60.-h*3600.;
+}
+
+void sphe_to_rect(double lng, double lat, const Vec3d * v)
+{
+	const double cosLat = cos(lat);
+    v[0] = sin(lng) * cosLat;
+    v[1] = sin(lat);
+    v[2] = cos(lng) * cosLat;
+}
+
+void sphe_to_rect(float lng, float lat, Vec3f &v)
+{
+	const double cosLat = cos(lat);
+    v[0] = sin(lng) * cosLat;
+    v[1] = sin(lat);
+    v[2] = cos(lng) * cosLat;
+}
+
+void rect_to_sphe(double &lng, double &lat, Vec3d *v)
+{
+	double xz_dist = sqrt(v[0]*v[0]+v[2]*v[2]);
+    lat = atan2(v[1],xz_dist);
+    lng = atan2(v[0],v[2]);
+    lng = range_radians(lng);
+}
+
 
 void Equ_to_altAz(vec3_t &leVect, float raZen, float deZen)
-{   leVect.RotateY(raZen);
+{
+	leVect.RotateY(raZen);
     leVect.RotateX(Astro::PI_OVER_TWO-deZen);
 }
 
 void AltAz_to_equ(vec3_t &leVect, float raZen, float deZen)
-{   leVect.RotateX(deZen - Astro::PI_OVER_TWO);
+{
+	leVect.RotateX(deZen - Astro::PI_OVER_TWO);
+    leVect.RotateY(-raZen);
+}
+
+void Equ_to_altAz(Vec3d &leVect, double raZen, double deZen)
+{
+	leVect.RotateY(raZen);
+    leVect.RotateX(Astro::PI_OVER_TWO-deZen);
+}
+
+void AltAz_to_equ(Vec3d &leVect, double raZen, double deZen)
+{
+	leVect.RotateX(deZen - Astro::PI_OVER_TWO);
     leVect.RotateY(-raZen);
 }
 
@@ -96,26 +144,4 @@ void resetPerspectiveProjection()
     glMatrixMode(GL_MODELVIEW);     // get back to GL_MODELVIEW matrix
 }
 
-/*
-void renderBitmapString(float x, float y, void *font,char *string)
-{   char *c;
-    glRasterPos2f(x, y);            // set position to start drawing fonts
-    for (c=string; *c != '\0'; c++) // loop all the characters in the string
-    {   glutBitmapCharacter(font, *c);
-    }
-}
-*/
 
-void RADE_to_XYZ(double RA, double DE, vec3_t &XYZ)
-{   const double cosLat = cos( DE );
-    XYZ[0] = sin( RA ) * cosLat;
-    XYZ[1] = sin( DE );
-    XYZ[2] = cos( RA ) * cosLat;
-}
-
-void XYZ_to_RADE(double &RA, double &DE, vec3_t XYZ)
-{   float xz_dist = (float)sqrt(XYZ[0]*XYZ[0]+XYZ[2]*XYZ[2]);
-    DE = atan2(XYZ[1],xz_dist);
-    RA = atan2(XYZ[0],XYZ[2]);
-    RA=AstroOps::normalizeRadians(RA);
-}

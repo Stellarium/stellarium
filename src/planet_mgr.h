@@ -1,4 +1,4 @@
-/* 
+/*
  * Stellarium
  * Copyright (C) 2002 Fabien Chéreau
  * 
@@ -30,7 +30,7 @@ class Planet_mgr
 public:
     Planet_mgr();
     virtual ~Planet_mgr();
-    void Compute(double date, ObsInfo lieu);    // Compute the position of the planets
+    void Compute(double date, ln_lnlat_posn lieu);    // Compute the position of the planets
     void Draw();                                // Draw the planets...  
     int Planet_mgr::Rechercher(vec3_t Pos);
 	void loadTextures();

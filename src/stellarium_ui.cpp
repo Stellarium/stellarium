@@ -25,7 +25,7 @@
 #include "s_texture.h"
 #include "s_utility.h"
 #include "s_gui_window.h"
-#include "navigation.h"
+#include "navigator.h"
 #include "nebula_mgr.h"
 #include "hip_star_mgr.h"
 #include "stellarium.h"
@@ -921,33 +921,7 @@ void findObject(int x, int y)
 void updateInfoSelectString(void)
 {   char objectInfo[300];
     objectInfo[0]=0;
-    if (global.SelectedObject.type==0)  //Star
-    {   glColor3f(0.4f,0.7f,0.3f);
-        sprintf(objectInfo,"Info : %s\nName :%s\nHip : %.4d\nRA  : %.2dh %.2dm %.2fs\nDE  : %.2fdeg\nMag : %.2f",
-            global.SelectedObject.CommonName==NULL ? "-" : global.SelectedObject.CommonName,
-            global.SelectedObject.Name==NULL ? "-" : global.SelectedObject.Name,
-            global.SelectedObject.HR,
-            global.SelectedObject.RAh,global.SelectedObject.RAm,global.SelectedObject.RAs,
-            global.SelectedObject.DE*180/PI,
-            global.SelectedObject.Mag); 
-    }
-    if (global.SelectedObject.type==1)  //Nebulae
-    {   glColor3f(0.4f,0.5f,0.8f);
-        sprintf(objectInfo,"Name: %s\nNGC : %d\nRA  : %.2dh %.2dm %.2fs\nDE  : %.2fdeg\nMag : %.2f",
-            global.SelectedObject.Name,
-            global.SelectedObject.NGCNum,
-            global.SelectedObject.RAh,global.SelectedObject.RAm,global.SelectedObject.RAs,
-            global.SelectedObject.DE*180/PI,
-            global.SelectedObject.Mag);     
-    }
-    if (global.SelectedObject.type==2)  //Planet
-    {   glColor3f(1.0f,0.3f,0.3f);
-        sprintf(objectInfo,"Name: %s\nRA  : %.2dh %.2dm %.2fs\nDE  : %.2fdeg\nDistance : %.4f AU",
-            global.SelectedObject.Name,
-            global.SelectedObject.RAh,global.SelectedObject.RAm,global.SelectedObject.RAs,
-            global.SelectedObject.DE*180/PI,
-            global.SelectedObject.Distance);    
-    }
+	strcpy(objectInfo,selected_object.get_info_string());
     InfoSelectLabel->setLabel(objectInfo);
     InfoSelectLabel->setVisible(true);
 }

@@ -23,25 +23,25 @@
 // Utilities
 
 #include <math.h>
-#include "vector.h"
+#include "vecmath.h"
 
-float RA_en_Rad(int RAh, int RAm, float RAs);
-float RA_en_Rad(int RAh, float RAm);
-float DE_en_Rad(bool DEsign,int Dec, int Arcmin, int Arcsec);
-float DE_en_Rad(int Dec, float Arcmin);
-void RA_en_hms(int & RAh, int & RAm, float & RAs, float RA);
-
-void RADE_to_XYZ(double RA, double DE, vec3_t &XYZ);
-void XYZ_to_RADE(double &RA, double &DE, vec3_t XYZ);
+double hms_to_rad(unsigned int h, unsigned int m, double s);
+double dms_to_rad(int sign, int d, int m, double s);
+void rad_to_hms(unsigned int *h, unsigned int *m, double *s, double r);
+void sphe_to_rect(double lng, double lat, Vec3d *v);
+void sphe_to_rect(float lng, float lat, Vec3f *v);
+void rect_to_sphe(double *lng, double *lat, const Vec3d * v);
 
 void Equ_to_altAz(vec3_t &leVect, float raZen, float deZen);
 void AltAz_to_equ(vec3_t &leVect, float raZen, float deZen);
+void Equ_to_altAz(Vec3d &leVect, double raZen, double deZen);
+void AltAz_to_equ(Vec3d &leVect, double raZen, double deZen);
 
 void Project(float objx_i,float objy_i,float objz_i,double & x ,double & y);
 void Project(float objx_i,float objy_i,float objz_i,double & x ,double & y ,double & z);
 
 void setOrthographicProjection(int w, int h);
 void resetPerspectiveProjection();
-void renderBitmapString(float x, float y, void *font,char *string);
+//void renderBitmapString(float x, float y, void *font,char *string);
 
 #endif
