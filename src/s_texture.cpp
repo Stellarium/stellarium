@@ -104,6 +104,7 @@ float s_texture::get_average_luminance(void) const
 	glGetTexLevelParameteriv(GL_TEXTURE_2D, 0, GL_TEXTURE_WIDTH, &w);
 	glGetTexLevelParameteriv(GL_TEXTURE_2D, 0, GL_TEXTURE_HEIGHT, &h);
 	GLfloat* p = (GLfloat*)calloc(w*h, sizeof(GLfloat));
+
 	glGetTexImage(GL_TEXTURE_2D, 0, GL_LUMINANCE, GL_FLOAT, p);
 	float sum = 0.f;
 	for (int i=0;i<w*h;++i)
@@ -112,11 +113,30 @@ float s_texture::get_average_luminance(void) const
 	}
 	free(p);
 
-#ifdef NVIDIA
-	return sum*2.56f/(w*h);
-#else
+
+	/*
+	// This provides more correct result on some video cards (matrox)
+	// TODO test more before switching
+
+	GLubyte* pix = (GLubyte*)calloc(w*h*3, sizeof(GLubyte));
+
+	glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+	glGetTexImage(GL_TEXTURE_2D, 0, GL_RGB, GL_UNSIGNED_BYTE, pix);
+
+	float lum = 0.f;
+	for (int i=0;i<w*h*3;i+=3)
+	{
+	  double r = pix[i]/255.;
+	  double g = pix[i+1]/255.;
+	  double b = pix[i+2]/255.;
+	  lum += r*.299 + g*.587 + b*.114;
+	}
+	free(pix);
+
+	printf("Luminance calc 2: Sum %f\tw %d h %d\tlum %f\n", lum, w, h, lum/(w*h));
+	*/
+
 	return sum/(w*h);
-#endif
 
 }
 
