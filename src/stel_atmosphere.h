@@ -31,8 +31,6 @@
 #include "tone_reproductor.h"
 #include "skybright.h"
 
-#define FADE_INCREMENT 0.03
-
 using namespace std;
 
 class stel_atmosphere
@@ -46,7 +44,7 @@ public:
 	void show_atmosphere(void);
 	void hide_atmosphere(void);
 	float get_intensity(void);  // let's you know how far faded in or out the atm is (0-1)
-	void draw(Projector* prj);
+	void draw(Projector* prj, int delta_time);
 private:
 	skylight sky;
 	skybright skyb;

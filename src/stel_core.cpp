@@ -274,7 +274,7 @@ void stel_core::draw(int delta_time)
 	} else {
 	  asterisms->hide_art();
 	}
-	asterisms->draw_art(projection);
+	asterisms->draw_art(projection, delta_time);
 
 	// Draw the constellations's names
 	if (FlagConstellationName)
@@ -364,7 +364,7 @@ void stel_core::draw(int delta_time)
 				  15.f, 40.f);	// Temperature = 15°c, relative humidity = 40%
 
 	// Draw the atmosphere
-	atmosphere->draw(projection);
+	atmosphere->draw(projection, delta_time);
 
 
 	// Draw the landscape

@@ -36,11 +36,11 @@ public:
     int read(FILE *, Hip_Star_mgr * _VouteCeleste);
     void draw(Projector* prj, const Vec3f& lines_color) const;
     void draw_name(s_font * constfont, Projector* prj) const;
-    void draw_art(Projector* prj);
+    void draw_art(Projector* prj, int delta_time);
     const Constellation* is_star_in(const Hip_Star *) const;
 private:
     void draw_optim(Projector* prj) const;
-	void draw_art_optim(Projector* prj);
+    void draw_art_optim(Projector* prj, int delta_time);
     char * name;
     char short_name[4];
     char * inter;

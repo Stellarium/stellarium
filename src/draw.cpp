@@ -96,6 +96,7 @@ void SkyGrid::draw(const Projector* prj) const
 	static Vec3d pt2;
 
 	prj->set_orthographic_projection();	// set 2D coordinate
+	glEnable(GL_BLEND);
 
 	// Draw meridians
 	for (unsigned int nm=0;nm<nb_meridian;++nm)
@@ -106,15 +107,13 @@ void SkyGrid::draw(const Projector* prj) const
 				(prj->*proj_func)(alt_points[nm][1], pt2) )
 			{
 				glColor4f(color[0],color[1],color[2],0.f);
-				glEnable(GL_BLEND);
+
 				glBegin (GL_LINES);
 					glVertex2f(pt1[0],pt1[1]);
 					glColor3fv(color);
 					glVertex2f(pt2[0],pt2[1]);
         		glEnd();
 			}
-
-			glDisable(GL_BLEND);
 
 			glColor3fv(color);
 
@@ -196,7 +195,6 @@ void SkyGrid::draw(const Projector* prj) const
 				(prj->*proj_func)(alt_points[nm][nb_alt_segment], pt2) )
 			{
 				glColor3fv(color);
-				glEnable(GL_BLEND);
 				glBegin (GL_LINES);
 					glVertex2f(pt1[0],pt1[1]);
 					glColor4f(color[0],color[1],color[2],0.f);

@@ -148,21 +148,29 @@ void Constellation::draw_name(s_font * constfont, Projector* prj) const
 }
 
 // Draw the art texture, optimized function to be called thru a constellation manager only
-void Constellation::draw_art_optim(Projector* prj) 
+void Constellation::draw_art_optim(Projector* prj, int delta_time) 
 {
 
 
 	if (art_tex)
 	{
 
+	  
+	  // 3 second fade
+	  float delta_intensity = delta_time/3000.f;
+
+	  
 	  // update fade
 	  if( art_on ) {
-	    if( art_intensity < 1 ) {
-	      art_intensity += .05f;
+	    if( art_intensity + delta_intensity <= 1) {
+	      art_intensity += delta_intensity;
+	    } else {
+	      art_intensity = 1;
 	    }
-	  } else if( art_intensity > 0 ) {
-	    art_intensity -= .05f;
+	  } else if( art_intensity > delta_intensity ) {
+	    art_intensity -= delta_intensity;
 	  } else {
+	    art_intensity = 0;
 	    return;
 	  }
 
@@ -200,22 +208,30 @@ void Constellation::draw_art_optim(Projector* prj)
 }
 
 // Draw the art texture
-void Constellation::draw_art(Projector* prj) 
+void Constellation::draw_art(Projector* prj, int delta_time) 
 {
 
 	if (art_tex)
 	{
 
+	  // 3 second fade
+	  float delta_intensity = delta_time/3000.f;
+
+	  
 	  // update fade
 	  if( art_on ) {
-	    if( art_intensity < 1 ) {
-	      art_intensity += .05f;
+	    if( art_intensity + delta_intensity <= 1) {
+	      art_intensity += delta_intensity;
+	    } else {
+	      art_intensity = 1;
 	    }
-	  } else if( art_intensity > 0 ) {
-	    art_intensity -= .05f;
+	  } else if( art_intensity > delta_intensity ) {
+	    art_intensity -= delta_intensity;
 	  } else {
+	    art_intensity = 0;
 	    return;
 	  }
+
 		static Vec3d v;
 
 		glBlendFunc(GL_ONE, GL_ONE);
