@@ -137,7 +137,7 @@ void stel_sdl::start_main_loop(void)
 					if (!core->handle_keys(E.key.keysym.sym,S_GUI_PRESSED))
 					{
 						if (E.key.keysym.sym==SDLK_F1) SDL_WM_ToggleFullScreen(Screen); // Try fullscreen
-						if (E.key.keysym.sym==SDLK_ESCAPE)
+						if (E.key.keysym.sym==SDLK_q && (SDL_GetModState() & KMOD_CTRL))
 						{
 							TerminateApplication();
 						}
