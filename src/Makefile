@@ -69,18 +69,11 @@ RANLIB = ranlib
 VERSION = 0.4.7
 
 EXTRA_DIST = stellarium.PRJ stellarium.rc
-
 bin_PROGRAMS = stellarium
 stellarium_SOURCES = constellation.h  nebula.h  planet.h s_gui.h  s_utility.h   vector.h constellation_mgr.cpp intl.h  nebula_mgr.cpp  planet_mgr.cpp  s_gui_window.cpp  star.cpp  stellarium.h vislimit.cpp  constellation_mgr.h main.cpp  nebula_mgr.h planet_mgr.h  s_gui_window.h star.h vislimit.h  navigation.cpp  parsecfg.c  s_font.cpp    s_texture.cpp star_mgr.cpp   stellarium_ui.cpp draw.cpp navigation.h parsecfg.h s_font.h  s_texture.h   star_mgr.h stellarium_ui.h constellation.cpp  draw.h nebula.cpp  planet.cpp s_gui.cpp  s_utility.cpp stella_types.h  utility.h
-
 stellarium_LDADD = $(top_builddir)/src/glpng/libglpng.a $(top_builddir)/src/astrolib/libastrolib.a
-
 INCLUDES = -I$(top_srcdir)/src/glpng -I$(top_srcdir)/src/astrolib
-
 SUBDIRS = glpng astrolib
-
-CFLAGS = -O3
-CXXFLAGS = -O3
 mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
 CONFIG_CLEAN_FILES = 
 PROGRAMS =  $(bin_PROGRAMS)
@@ -101,9 +94,11 @@ nebula.o planet.o s_gui.o s_utility.o
 stellarium_DEPENDENCIES =  $(top_builddir)/src/glpng/libglpng.a \
 $(top_builddir)/src/astrolib/libastrolib.a
 stellarium_LDFLAGS = 
+CXXFLAGS = -O3
 CXXCOMPILE = $(CXX) $(DEFS) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS)
 CXXLD = $(CXX)
 CXXLINK = $(CXXLD) $(AM_CXXFLAGS) $(CXXFLAGS) $(LDFLAGS) -o $@
+CFLAGS = -Wall -O3 
 COMPILE = $(CC) $(DEFS) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
 CCLD = $(CC)
 LINK = $(CCLD) $(AM_CFLAGS) $(CFLAGS) $(LDFLAGS) -o $@
@@ -429,6 +424,10 @@ install-data-am install-data install-am install uninstall-am uninstall \
 all-redirect all-am all installdirs-am installdirs mostlyclean-generic \
 distclean-generic clean-generic maintainer-clean-generic clean \
 mostlyclean distclean maintainer-clean
+
+
+
+
 
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
