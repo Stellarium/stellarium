@@ -308,10 +308,10 @@ namespace s_tui
 		virtual bool onKey(SDLKey k, S_TUI_VALUE v)
 		{
 			if (current==items.end() || v==S_TUI_RELEASED) return false;
-			if (k==SDLK_RETURN && !onTriggerCallback.empty())
+			if (k==SDLK_RETURN)
 			{
-				onTriggerCallback();
-				return true;
+				if (!onTriggerCallback.empty()) onTriggerCallback();
+				return false;
 			}
 			if (k==SDLK_UP)
 			{

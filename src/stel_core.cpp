@@ -892,15 +892,7 @@ stel_object * stel_core::clever_find(int x, int y) const
 	return clever_find(v);
 }
 
-// Goto the given object
-void stel_core::goto_stel_object(const stel_object* obj, float move_duration) const
-{
-	if (!obj) return;
-	navigation->move_to(obj->get_earth_equ_pos(navigation), move_duration);
-}
-
-
-// Go and zoom temporary to the selected object. Old position is reverted by calling the function again
+// Go and zoom to the selected object.
 void stel_core::auto_zoom_in(float move_duration)
 {
 	if (!selected_object) return;
@@ -908,7 +900,7 @@ void stel_core::auto_zoom_in(float move_duration)
 	if (!navigation->get_flag_traking())
 	{
 		navigation->set_flag_traking(true);
-		goto_stel_object(selected_object, move_duration);
+		navigation->move_to(selected_object->get_earth_equ_pos(navigation), move_duration, false, 1);
 	}
 	float satfov = selected_object->get_satellites_fov(navigation);
 	float closefov = selected_object->get_close_fov(navigation);
@@ -917,13 +909,13 @@ void stel_core::auto_zoom_in(float move_duration)
 	else if (projection->get_fov()>closefov) projection->zoom_to(closefov, move_duration);
 }
 
-// Unzoom to the old position is reverted by calling the function again
+// Unzoom and go to the init position
 void stel_core::auto_zoom_out(float move_duration)
 {
 	if (!selected_object)
 	{
 		projection->zoom_to(InitFov, move_duration);
-		navigation->move_to(InitViewPos, move_duration, true);
+		navigation->move_to(InitViewPos, move_duration, true, -1);
 		navigation->set_flag_traking(false);
 		navigation->set_flag_lock_equ_pos(0);
 		return;
@@ -950,7 +942,7 @@ void stel_core::auto_zoom_out(float move_duration)
 	}
 
 	projection->zoom_to(InitFov, move_duration);
-	navigation->move_to(InitViewPos, move_duration, true);
+	navigation->move_to(InitViewPos, move_duration, true, -1);
 	navigation->set_flag_traking(false);
 	navigation->set_flag_lock_equ_pos(0);
 

@@ -93,9 +93,6 @@ public:
 	stel_object * clever_find(const Vec3d& pos) const;
 	stel_object * clever_find(int x, int y) const;
 
-	// Goto the given object
-	void goto_stel_object(const stel_object*, float move_duration = 1.f) const;
-
 	// Go and zoom temporary to the selected object.
 	void auto_zoom_in(float move_duration = 1.f);
 

@@ -68,9 +68,15 @@ void navigator::update_vision_vector(int delta_time, stel_object* selected)
 		if (ra_aim > M_PI) ra_aim = -2.*M_PI + ra_aim;
 		if (ra_aim < -M_PI) ra_aim = 2.*M_PI + ra_aim;
 
+
 		// Use a smooth function
 		float smooth = 4.f;
-		double c = atanf(smooth * 2.*move.coef-smooth)/atanf(smooth)/2+0.5;
+		double c;
+
+		if (zooming_mode == 1) c = 1. - (1.-move.coef) * (1.-move.coef) * (1.-move.coef);
+		else if (zooming_mode == -1) c = move.coef * move.coef * move.coef;
+		else c = atanf(smooth * 2.*move.coef-smooth)/atanf(smooth)/2+0.5;
+
 		ra_now = ra_aim*c + ra_start*(1. - c);
 		de_now = de_aim*c + de_start*(1. - c);
 
@@ -223,8 +229,9 @@ Vec3d navigator::get_observer_helio_pos(void) const
 
 ////////////////////////////////////////////////////////////////////////////////
 // Move to the given equatorial position
-void navigator::move_to(const Vec3d& _aim, float move_duration, bool _local_pos)
+void navigator::move_to(const Vec3d& _aim, float move_duration, bool _local_pos, int zooming)
 {
+	zooming_mode = zooming;
 	move.aim=_aim;
     move.aim.normalize();
     move.aim*=2.;
