@@ -44,7 +44,7 @@ dnl MACOSX
 case "$host" in 
 *-*-darwin*)
 	AC_DEFINE_UNQUOTED(MACOSX,1)
-	LDFLAGS="$LDFLAGS -flat_namespace -undefined suppress "
+	LDFLAGS="$LDFLAGS -flat_namespace -undefined suppress -lz "
 	LIBS="$LIBS -framework GLUT -framework OpenGL -lobjc "
 	AC_CHECK_HEADER(OpenGL/gl.h,,AC_MSG_ERROR(gl.h not found - please install OpenGL))
 	AC_CHECK_HEADER(OpenGL/glu.h,,AC_MSG_ERROR(glu.h not found - please install GLU))
