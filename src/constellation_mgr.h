@@ -26,22 +26,34 @@
 class Constellation_mgr  
 {
 public:
-    Constellation_mgr(Vec3f lines_color = Vec3f(0.1, 0.15, 0.2), Vec3f lines_color = Vec3f(0.1,0.2,0.3));
+  //    Constellation_mgr(Vec3f lines_color = Vec3f(0.1, 0.15, 0.2), Vec3f lines_color = Vec3f(0.1,0.2,0.3));
+    Constellation_mgr(string _data_dir, string _sky_culture, Hip_Star_mgr *_hip_stars, string _font_filename, 
+		      Vec3f _lines_color, Vec3f _names_color);
     virtual ~Constellation_mgr();
-    void load(const string& font_fileName, const string& catName, const string& artCatName,
-		Hip_Star_mgr * _VouteCeleste);
+    void set_sky_culture(string _sky_culture);
     void draw(Projector* prj) const;
 	// Draw one constellation of internationnal name Abr
 	void draw(Projector* prj, char abr[4]) const;
     void draw_names(Projector* prj, bool gravity_label);
-	void draw_one_name(Projector* prj, Constellation*, bool gravity_label) const;
-	void draw_art(Projector* prj) const;
-	Constellation* is_star_in(const Hip_Star *) const;
-	Constellation* find_from_short_name(const string& shortname) const;
+    void draw_one_name(Projector* prj, Constellation*, bool gravity_label) const;
+    void draw_art(Projector* prj) const;
+    Constellation* is_star_in(const Hip_Star *) const;
+    Constellation* find_from_short_name(const string& shortname) const;
+    // test that sky culture seems valid 
+    bool validate_sky_culture(string _sky_culture);
+
 private:
+
+    void load(const string& catName, const string& artCatName,
+		Hip_Star_mgr * _VouteCeleste);
+
     vector<Constellation*> asterisms;
-	s_font * asterFont;
-	Vec3f lines_color, names_color;
+    s_font * asterFont;
+    Vec3f lines_color, names_color;
+    Hip_Star_mgr * hipStarMgr;
+    string dataDir;
+    string skyCulture;
+
 };
 
 #endif // _CONSTELLATION_MGR_H_

@@ -111,7 +111,7 @@ void stel_core::init(void)
 	
 
     hip_stars = new Hip_Star_mgr();
-    asterisms = new Constellation_mgr(ConstLinesColor, ConstNamesColor);
+
     nebulas   = new Nebula_mgr(NebulaLabelColor, NebulaCircleColor);
 
 
@@ -137,9 +137,8 @@ void stel_core::init(void)
     hip_stars->load(DataDir + "spacefont.txt", DataDir + "hipparcos.fab",
 		DataDir + "commonname.fab",	DataDir + "name.fab");
 
-	// Load constellations
-    asterisms->load(DataDir + "spacefont.txt", DataDir + "constellationship.fab", DataDir + "constellationsart.fab", hip_stars);
-
+    // Load constellations
+    asterisms = new Constellation_mgr(DataDir, SkyCulture, hip_stars, "spacefont.txt", ConstLinesColor, ConstNamesColor);
 
 
 	// Create and init the solar system
@@ -487,6 +486,9 @@ void stel_core::load_config_from(const string& confFile)
 		}
 	}
 
+	// localization section
+	SkyCulture = conf.get_str("localization:sky_culture");
+
 	// Star section
 	StarScale			= conf.get_double ("stars:star_scale");
 	StarMagScale		= conf.get_double ("stars:star_mag_scale");
@@ -578,6 +580,7 @@ void stel_core::load_config_from(const string& confFile)
 	FlagStarName			= conf.get_boolean("astro:flag_star_name");
 	FlagPlanets				= conf.get_boolean("astro:flag_planets");
 	FlagPlanetsHints		= conf.get_boolean("astro:flag_planets_hints");
+	FlagPlanetsOrbits		= conf.get_boolean("astro:flag_planets_orbits");
 	FlagNebula				= conf.get_boolean("astro:flag_nebula");
 	FlagNebulaName			= conf.get_boolean("astro:flag_nebula_name");
 	MaxMagNebulaName		= conf.get_double("astro:max_mag_nebula_name");
@@ -617,6 +620,9 @@ void stel_core::save_config_to(const string& confFile)
 		default : tmpstr="maximized";
 	}
 	conf.set_str	("projection:viewport", tmpstr);
+
+	// localization section
+	conf.set_str    ("localization:sky_culture", SkyCulture);
 
 	// Star section
 	conf.set_double ("stars:star_scale", StarScale);
@@ -701,6 +707,7 @@ void stel_core::save_config_to(const string& confFile)
 	conf.set_boolean("astro:flag_star_name", FlagStarName);
 	conf.set_boolean("astro:flag_planets", FlagPlanets);
 	conf.set_boolean("astro:flag_planets_hints", FlagPlanetsHints);
+	conf.set_boolean("astro:flag_planets_orbits", FlagPlanetsOrbits);
 	conf.set_boolean("astro:flag_nebula", FlagNebula);
 	conf.set_boolean("astro:flag_nebula_name", FlagNebulaName);
 	conf.set_double("astro:max_mag_nebula_name", MaxMagNebulaName);
