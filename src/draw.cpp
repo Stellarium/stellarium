@@ -21,14 +21,14 @@
 #include "s_texture.h"
 #include "stel_utility.h"
 
-
-SkyGrid::SkyGrid(SKY_GRID_TYPE grid_type, unsigned int _nb_meridian, unsigned int _nb_parallel, double _radius,
+// rms added color as parameter
+SkyGrid::SkyGrid(SKY_GRID_TYPE grid_type, Vec3f grid_color, unsigned int _nb_meridian, unsigned int _nb_parallel, double _radius,
 	unsigned int _nb_alt_segment, unsigned int _nb_azi_segment) :
 	nb_meridian(_nb_meridian), nb_parallel(_nb_parallel), 	radius(_radius),
 	nb_alt_segment(_nb_alt_segment), nb_azi_segment(_nb_azi_segment)
 {
 	transparent_top = true;
-	color = Vec3f(0.2,0.2,0.2);
+	color = grid_color; // rms Vec3f(0.2,0.2,0.2);
 	switch (grid_type)
 	{
 		case ALTAZIMUTAL : proj_func = &Projector::project_local; break;
@@ -168,10 +168,10 @@ void SkyGrid::draw(const Projector* prj) const
 }
 
 
-SkyLine::SkyLine(SKY_LINE_TYPE line_type, double _radius, unsigned int _nb_segment) :
+SkyLine::SkyLine(SKY_LINE_TYPE line_type, Vec3f line_color, double _radius, unsigned int _nb_segment) :
 	radius(_radius), nb_segment(_nb_segment)
 {
-	color = Vec3f(0.2,0.2,0.6);
+  color = line_color;  // rms Vec3f(0.2,0.2,0.6);
 	float inclinaison = 0.f;
 	switch (line_type)
 	{

@@ -23,7 +23,8 @@
 #include "constellation_mgr.h"
 
 
-Constellation_mgr::Constellation_mgr() : asterFont(NULL)
+Constellation_mgr::Constellation_mgr(Vec3f _lines_color, Vec3f _names_color) :
+	asterFont(NULL), lines_color(_lines_color), names_color(_names_color)
 {
 }
 
@@ -146,7 +147,7 @@ void Constellation_mgr::draw(Projector* prj) const
 {
 	glDisable(GL_TEXTURE_2D);
     glDisable(GL_BLEND);
-    glColor3f(0.1,0.15,0.2);
+    glColor3fv(lines_color);
 	prj->set_orthographic_projection();	// set 2D coordinate
     vector<Constellation *>::const_iterator iter;
     for(iter=asterisms.begin();iter!=asterisms.end();++iter)
@@ -188,7 +189,7 @@ void Constellation_mgr::draw_art(Projector* prj) const
 void Constellation_mgr::draw_names(Projector* prj, bool _gravity_label)
 {
 	Constellation::gravity_label = _gravity_label;
-    glColor3f(0.7,0.1,0.1);
+    glColor3fv(names_color);
     glEnable(GL_BLEND);
     glEnable(GL_TEXTURE_2D);
     prj->set_orthographic_projection();	// set 2D coordinate
