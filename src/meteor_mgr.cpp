@@ -19,22 +19,13 @@
 
 #include "meteor_mgr.h"
 
-// static variables
-Projector* Meteor_mgr::projection = NULL;
-navigator* Meteor_mgr::navigation = NULL;
-tone_reproductor* Meteor_mgr::eye = NULL;
-
-Meteor_mgr::Meteor_mgr( Projector *proj, navigator *nav, tone_reproductor* tr, int zhr, int maxv ) {
-
-  projection = proj;
-  navigation = nav;
-  eye = tr;
+Meteor_mgr::Meteor_mgr(int zhr, int maxv )
+{
   ZHR = zhr;
   max_velocity = maxv;
 
   // calculate factor for whole earth visible meteor rate per second since know visible area ZHR is for
   zhr_to_wsr = 28.44f/3600.f;
-
 }
 
 Meteor_mgr::~Meteor_mgr() {
@@ -52,7 +43,7 @@ void Meteor_mgr::set_max_velocity(int maxv) {
   max_velocity = maxv;
 }
 
-void Meteor_mgr::update(int delta_time) {
+void Meteor_mgr::update(Projector *proj, navigator* nav, tone_reproductor* eye, int delta_time) {
 
   // step through and update all active meteors
   int n =0;
@@ -71,7 +62,7 @@ void Meteor_mgr::update(int delta_time) {
 
   // only makes sense given lifetimes of meteors to draw when time_speed is realtime
   // integer speed multiplier would be nicer
-  if( abs( navigation->get_time_speed() * 86400.f - 1.0f ) > 0.1f ) {
+  if(nav->get_time_speed() > 1.1 ){
     // don't start any more meteors
     return;
   }
@@ -101,7 +92,7 @@ void Meteor_mgr::update(int delta_time) {
     // start new meteor based on ZHR time probability
     double prob = (double)rand()/((double)RAND_MAX+1);
     if( ZHR > 0 && prob < ((double)ZHR*zhr_to_wsr*(double)delta_time/1000.0f/(double)mpf) ) {
-      Meteor *m = new Meteor(projection, navigation, eye, max_velocity);
+      Meteor *m = new Meteor(proj, nav, eye, max_velocity);
       active.push_back(m);
       mlaunch++;
     }
@@ -113,11 +104,11 @@ void Meteor_mgr::update(int delta_time) {
 }
 
 
-void Meteor_mgr::draw(void) {
+void Meteor_mgr::draw(Projector *proj, navigator* nav) {
 
   // step through and draw all active meteors
   for(vector<Meteor*>::iterator iter = active.begin(); iter != active.end(); ++iter) {
-    (*iter)->draw();
+    (*iter)->draw(proj, nav);
   }
 
 }

@@ -126,7 +126,7 @@ void stel_core::init(void)
 	cardinals_points->set_color(CardinalColor);
 
 	milky_way = new MilkyWay("milkyway");
-	meteors = new Meteor_mgr(projection, navigation, tone_converter, 10, 60);
+	meteors = new Meteor_mgr(10, 60);
 
 	landscape = Landscape::create_from_file(DataDir + "landscapes.ini", observatory->get_landscape_name());
 
@@ -294,8 +294,6 @@ void stel_core::draw(int delta_time)
 	//	printf("sky: %f\n", sky_brightness);
 	if (FlagStars && sky_brightness<=0.11)
 	{
-
-	  //	  printf("draw stars\n");
 		if (FlagPointStar) hip_stars->draw_point(StarScale, StarMagScale,
 			FlagStarTwinkle ? StarTwinkleAmount : 0.f, FlagStarName,
 			MaxMagStarName, temp, tone_converter, projection, FlagGravityLabels);
@@ -346,11 +344,11 @@ void stel_core::draw(int delta_time)
 	moonPos.normalize();
 
 	// Draw meteors
-	meteors->update(delta_time);
+	meteors->update(projection, navigation, tone_converter, delta_time);
 
 	if(!FlagAtmosphere || sky_brightness<0.01) {
 	  projection->set_orthographic_projection(); 
-	  meteors->draw();
+	  meteors->draw(projection, navigation);
 	  projection->reset_perspective_projection(); 
 	}
 

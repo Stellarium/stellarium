@@ -30,13 +30,13 @@ class Meteor_mgr
 {
 
  public:
-  Meteor_mgr( Projector *proj, navigator *nav, tone_reproductor* eye, int zhr, int maxv );  // base_zhr is zenith hourly rate sans meteor shower
+  Meteor_mgr(int zhr, int maxv );  // base_zhr is zenith hourly rate sans meteor shower
   virtual ~Meteor_mgr();
   void set_ZHR(int zhr);   // set zenith hourly rate
   int get_ZHR(void);   
   void set_max_velocity(int maxv);   // set maximum meteoroid velocity km/s
-  void update(int delta_time);          // update positions
-  void draw(void);		// Draw the meteors
+  void update(Projector *proj, navigator* nav, tone_reproductor* eye, int delta_time);          // update positions
+  void draw(Projector *proj, navigator* nav);		// Draw the meteors
 
 
  private:
@@ -44,9 +44,6 @@ class Meteor_mgr
   int ZHR;
   int max_velocity;
   double zhr_to_wsr;  // factor to convert from zhr to whole earth per second rate
-  static Projector * projection;
-  static navigator * navigation;
-  static tone_reproductor* eye;
 };
 
 
