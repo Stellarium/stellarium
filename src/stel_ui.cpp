@@ -657,12 +657,12 @@ int stel_ui::handle_keys(SDLKey key, S_GUI_VALUE state)
 		}
         if(key==SDLK_c)
         {
-        	core->FlagConstellationDrawing=!core->FlagConstellationDrawing;
-		}
+	  core->commander->execute_command( "flag constellation_drawing toggle");
+	}
         if(key==SDLK_d)
         {
-        	core->FlagStarName=!core->FlagStarName;
-		}
+	  core->commander->execute_command( "flag star_name toggle");
+	}
         if(key==SDLK_1)
         {
         	core->FlagConfig=!core->FlagConfig;
@@ -740,8 +740,8 @@ int stel_ui::handle_keys(SDLKey key, S_GUI_VALUE state)
 		}
         if(key==SDLK_s && !(SDL_GetModState() & KMOD_CTRL))
         {	
-        	core->FlagStars=!core->FlagStars;
-		}
+	  core->commander->execute_command( "flag stars toggle");
+	}
         if(key==SDLK_SPACE)
         {	
         	if (core->selected_object)

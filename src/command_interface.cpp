@@ -24,7 +24,7 @@
 
 using namespace std;
 
-#define PARSE_DEBUG 1
+//#define PARSE_DEBUG 1
 
 CommandInterface::CommandInterface() {
 }
@@ -32,27 +32,6 @@ CommandInterface::CommandInterface() {
 CommandInterface::~CommandInterface() {
 }
 
-int CommandInterface::execute_command(string commandline) {  //, void *executor  ??
-  string command;
-  stringHash_t args;
-  int status;
-
-  status = parse_command(commandline, command, args);
-
-  // execution logic would go here if this wasn't generic
-  
-  
-#ifdef PARSE_DEBUG
-
-  cout << "Command: " << command << endl << "Argument hash:" << endl;
-
-   for ( stringHashIter_t iter = args.begin(); iter != args.end(); ++iter ) {
-     cout << "\t" << iter->first << " : " << iter->second << endl;
-  }
-
-#endif
-
-}
   
 int CommandInterface::parse_command(string command_line, string &command, stringHash_t &arguments) {
 
@@ -80,6 +59,17 @@ int CommandInterface::parse_command(string command_line, string &command, string
 
    }
 
+
+#ifdef PARSE_DEBUG
+
+  cout << "Command: " << command << endl << "Argument hash:" << endl;
+
+   for ( stringHashIter_t iter = arguments.begin(); iter != arguments.end(); ++iter ) {
+     cout << "\t" << iter->first << " : " << iter->second << endl;
+  }
+
+#endif
+
    return 1;  // no error checking yet
      
 }
@@ -91,16 +81,14 @@ int CommandInterface::parse_command(string command_line, string &command, string
 
 main() {
 
-  CommandInterface *ci = new CommandInterface();
+  string command;
+  stringHash_t args;
+  int status;
 
-  ci->execute_command( "flag art on atmosphere off location \"West Virginia\"");
+  string commandline("flag art on atmosphere off location \"West Virginia\"");
 
-  ci->execute_command( "print text \"Hello there this is a test.\"");
-
-  ci->execute_command( "set ConstellationLineColor 1.0,0.8,0.0");
-
-  delete ci;
-
+  // if static...
+  status = CommandInterface::parse_command(commandline, command, args);
 
 }
 

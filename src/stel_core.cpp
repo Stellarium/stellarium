@@ -54,6 +54,7 @@ stel_core::~stel_core()
 	if (tone_converter) delete tone_converter;
 	if (ssystem) delete ssystem;
 	if (ui) delete ui;
+	if (commander) delete commander;
 	
 	stel_object::delete_textures(); // Load the pointer textures 
 }
@@ -79,6 +80,8 @@ void stel_core::init(void)
 	// Set textures directory and suffix
 	s_texture::set_texDir(TextureDir);
 	s_texture::set_suffix(".png");
+
+	commander = new StelCommandInterface(this);
 
 	observatory = new Observator();
 	observatory->load(ConfigDir + config_file, "init_location");
@@ -1236,5 +1239,33 @@ void stel_core::set_sky_locale(string _locale)
   hip_stars->load_common_names(DataDir + "star_names." + SkyLocale + ".fab");
   ssystem->set_sky_locale(_locale);
   asterisms->set_sky_locale(_locale);
+
+}
+
+// set a core flag
+int stel_core::set_flag(string name, string value) {
+
+  // value can be "on", "off", or "toggle"
+  if(value == "toggle") {
+
+    if(name=="constellation_drawing") FlagConstellationDrawing = !FlagConstellationDrawing;
+    else if(name=="stars") FlagStars = !FlagStars;
+    else if(name=="star_name") FlagStarName = !FlagStarName;
+    else if(name=="planets") FlagPlanets = !FlagPlanets;
+    else return(0);  // no matching flag found
+
+  } else {
+
+    bool val = (value == "on");
+
+    if(name=="constellation_drawing") FlagConstellationDrawing = val;
+    else if(name=="stars") FlagStars = val;
+    else if(name=="star_name") FlagStarName = val;
+    else if(name=="planets") FlagPlanets = val;
+    else return(0);  // no matching flag found
+
+  }
+
+  return(1);  // everything worked 
 
 }

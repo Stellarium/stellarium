@@ -37,6 +37,7 @@ using namespace std;
 #include "stel_atmosphere.h"
 #include "tone_reproductor.h"
 #include "s_gui.h"
+#include "stel_command_interface.h"
 #include "stel_ui.h"
 #include "solarsystem.h"
 #include "stel_utility.h"
@@ -45,6 +46,11 @@ using namespace std;
 #include "landscape.h"
 #include "meteor_mgr.h"
 #include "sky_localizer.h"
+
+
+// Predeclaration of the StelCommandInterface class
+class StelCommandInterface;
+
 
 class stel_core
 {
@@ -103,6 +109,8 @@ public:
 	// Only the function listed here should be called by them
 	// ---------------------------------------------------------------
 	
+	// IDEA: replace flags and settings with a hash of structs or classes...
+	int set_flag(string name, string value);  // set a core flag
 	// Set the value of the parameter TODO
 	void set_param(string& key, float value);
 	// Zoom to the given FOV
@@ -143,6 +151,7 @@ private:
 	string config_file;
 
 	// Main elements of the program
+	StelCommandInterface * commander;              // interface to perform all UI and scripting actions
 	navigator * navigation;				// Manage all navigation parameters, coordinate transformations etc..
 	Observator * observatory;			// Manage observer position and locales for its country
 	Projector * projection;				// Manage the projection mode and matrix

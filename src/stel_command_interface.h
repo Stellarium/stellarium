@@ -21,30 +21,30 @@
    UI components, network commands, etc.
 */   
 
-#ifndef _COMMAND_INTERFACE_H_
-#define _COMMAND_INTERFACE_H_
+#ifndef _STEL_COMMAND_INTERFACE_H_
+#define _STEL_COMMAND_INTERFACE_H_
 
-#include <stdio.h>
-#include <string>
-#include <map>
+#include "command_interface.h"
+#include "stel_core.h"
 
 using namespace std;
 
-typedef std::map< std::string, std::string > stringHash_t;
-typedef stringHash_t::const_iterator stringHashIter_t;
+// Predeclaration of the stel_core class
+class stel_core;
 
-class CommandInterface
+
+
+class StelCommandInterface : CommandInterface
 {
 
  public:
-  CommandInterface();
-  virtual ~CommandInterface();
-  virtual int execute_command(string command) = 0;
+  StelCommandInterface(stel_core * core);
+  virtual ~StelCommandInterface();
+  virtual int execute_command(string command);
   
-  protected:
-  int parse_command(string command_line, string &command, stringHash_t &arguments);
-
+ private:
+  stel_core * stcore;
 };
 
 
-#endif // _COMMAND_INTERFACE_H
+#endif // _STEL_COMMAND_INTERFACE_H
