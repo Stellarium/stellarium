@@ -94,7 +94,10 @@ SkyGrid::~SkyGrid()
 
 void SkyGrid::draw(const Projector* prj) const
 {
-	glColor3fv(color);
+	if (!fader) return;
+	
+	Vec3f tcolor = color*fader.get_interstate();
+	glColor3fv(tcolor);
 	glDisable(GL_TEXTURE_2D);
 	// Normal transparency mode
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -113,16 +116,16 @@ void SkyGrid::draw(const Projector* prj) const
 			if ((prj->*proj_func)(alt_points[nm][0], pt1) &&
 				(prj->*proj_func)(alt_points[nm][1], pt2) )
 			{
-				glColor4f(color[0],color[1],color[2],0.f);
+				glColor4f(tcolor[0],tcolor[1],tcolor[2],0.f);
 
 				glBegin (GL_LINES);
 					glVertex2f(pt1[0],pt1[1]);
-					glColor3fv(color);
+					glColor3fv(tcolor);
 					glVertex2f(pt2[0],pt2[1]);
         		glEnd();
 			}
 
-			glColor3fv(color);
+			glColor3fv(tcolor);
 
 			for (unsigned int i=1;i<nb_alt_segment-1;++i)
 			{
@@ -201,10 +204,10 @@ void SkyGrid::draw(const Projector* prj) const
 			if ((prj->*proj_func)(alt_points[nm][nb_alt_segment-1], pt1) &&
 				(prj->*proj_func)(alt_points[nm][nb_alt_segment], pt2) )
 			{
-				glColor3fv(color);
+				glColor3fv(tcolor);
 				glBegin (GL_LINES);
 					glVertex2f(pt1[0],pt1[1]);
-					glColor4f(color[0],color[1],color[2],0.f);
+					glColor4f(tcolor[0],tcolor[1],tcolor[2],0.f);
 					glVertex2f(pt2[0],pt2[1]);
         		glEnd();
 			}
@@ -213,7 +216,7 @@ void SkyGrid::draw(const Projector* prj) const
 		else	// No transparency
 		{
 			glDisable(GL_BLEND);
-			glColor3fv(color);
+			glColor3fv(tcolor);
 			for (unsigned int i=0;i<nb_alt_segment;++i)
 			{
 				if ((prj->*proj_func)(alt_points[nm][i], pt1) &&
@@ -229,7 +232,7 @@ void SkyGrid::draw(const Projector* prj) const
 	}
 
 	// Draw parallels
-	glColor3fv(color);
+	glColor3fv(tcolor);
 	glDisable(GL_BLEND);
 	for (unsigned int np=0;np<nb_parallel;++np)
 	{
@@ -253,7 +256,7 @@ void SkyGrid::draw(const Projector* prj) const
 SkyLine::SkyLine(SKY_LINE_TYPE line_type, Vec3f line_color, double _radius, unsigned int _nb_segment) :
 	radius(_radius), nb_segment(_nb_segment)
 {
-        color = line_color;  
+	color = line_color;  
 	float inclinaison = 0.f;
 	switch (line_type)
 	{
@@ -284,10 +287,12 @@ SkyLine::~SkyLine()
 
 void SkyLine::draw(const Projector* prj) const
 {
-	static Vec3d pt1;
-	static Vec3d pt2;
+	if (!fader) return;
 
-	glColor3fv(color);
+	Vec3d pt1;
+	Vec3d pt2;
+
+	glColor3fv(color*fader.get_interstate());
 	glDisable(GL_BLEND);
 	glDisable(GL_TEXTURE_2D);
 
