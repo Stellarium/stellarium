@@ -41,6 +41,7 @@ stel_ui::stel_ui(stel_core * _core) :
 	bt_flag_ctr(NULL),
 	bt_flag_constellation_draw(NULL),
 	bt_flag_constellation_name(NULL),
+	bt_flag_constellation_art(NULL),
 	bt_flag_azimuth_grid(NULL),
 	bt_flag_equator_grid(NULL),
 	bt_flag_ground(NULL),
@@ -205,6 +206,10 @@ Component* stel_ui::createFlagButtons(void)
 	bt_flag_constellation_name->setOnPressCallback(callback<void>(this, &stel_ui::cb));
 	bt_flag_constellation_name->setOnMouseInOutCallback(callback<void>(this, &stel_ui::cbr));
 
+	bt_flag_constellation_art = new FlagButton(core->FlagConstellationName, NULL, "bt_constart");
+	bt_flag_constellation_art->setOnPressCallback(callback<void>(this, &stel_ui::cb));
+	bt_flag_constellation_art->setOnMouseInOutCallback(callback<void>(this, &stel_ui::cbr));	
+	
 	bt_flag_azimuth_grid = new FlagButton(core->FlagAzimutalGrid, NULL, "bt_grid");
 	bt_flag_azimuth_grid->setOnPressCallback(callback<void>(this, &stel_ui::cb));
 	bt_flag_azimuth_grid->setOnMouseInOutCallback(callback<void>(this, &stel_ui::cbr));
@@ -248,19 +253,20 @@ Component* stel_ui::createFlagButtons(void)
 	bt_flag_ctr = new FilledContainer();
 	bt_flag_ctr->addComponent(bt_flag_constellation_draw); 	bt_flag_constellation_draw->setPos(0,0);
 	bt_flag_ctr->addComponent(bt_flag_constellation_name);	bt_flag_constellation_name->setPos(25,0);
-	bt_flag_ctr->addComponent(bt_flag_azimuth_grid); 	bt_flag_azimuth_grid->setPos(50,0);
-	bt_flag_ctr->addComponent(bt_flag_equator_grid);	bt_flag_equator_grid->setPos(75,0);
-	bt_flag_ctr->addComponent(bt_flag_ground);			bt_flag_ground->setPos(100,0);
-	bt_flag_ctr->addComponent(bt_flag_cardinals);		bt_flag_cardinals->setPos(125,0);
-	bt_flag_ctr->addComponent(bt_flag_atmosphere);		bt_flag_atmosphere->setPos(150,0);
-	bt_flag_ctr->addComponent(bt_flag_nebula_name);		bt_flag_nebula_name->setPos(175,0);
-	bt_flag_ctr->addComponent(bt_flag_help);			bt_flag_help->setPos(200,0);
-	bt_flag_ctr->addComponent(bt_flag_equatorial_mode);	bt_flag_equatorial_mode->setPos(225,0);
-	bt_flag_ctr->addComponent(bt_flag_config);			bt_flag_config->setPos(250,0);
-	bt_flag_ctr->addComponent(bt_flag_quit);			bt_flag_quit->setPos(275,0);
+	bt_flag_ctr->addComponent(bt_flag_constellation_art);	bt_flag_constellation_art->setPos(50,0);
+	bt_flag_ctr->addComponent(bt_flag_azimuth_grid); 	bt_flag_azimuth_grid->setPos(75,0);
+	bt_flag_ctr->addComponent(bt_flag_equator_grid);	bt_flag_equator_grid->setPos(100,0);
+	bt_flag_ctr->addComponent(bt_flag_ground);			bt_flag_ground->setPos(125,0);
+	bt_flag_ctr->addComponent(bt_flag_cardinals);		bt_flag_cardinals->setPos(150,0);
+	bt_flag_ctr->addComponent(bt_flag_atmosphere);		bt_flag_atmosphere->setPos(175,0);
+	bt_flag_ctr->addComponent(bt_flag_nebula_name);		bt_flag_nebula_name->setPos(200,0);
+	bt_flag_ctr->addComponent(bt_flag_help);			bt_flag_help->setPos(225,0);
+	bt_flag_ctr->addComponent(bt_flag_equatorial_mode);	bt_flag_equatorial_mode->setPos(250,0);
+	bt_flag_ctr->addComponent(bt_flag_config);			bt_flag_config->setPos(275,0);
+	bt_flag_ctr->addComponent(bt_flag_quit);			bt_flag_quit->setPos(300,0);
 
 	bt_flag_ctr->setOnMouseInOutCallback(callback<void>(this, &stel_ui::bt_flag_ctrOnMouseInOut));
-	bt_flag_ctr->reshape(0, core->screen_H-25, 12*25 -1, 25);
+	bt_flag_ctr->reshape(0, core->screen_H-25, 13*25 -1, 25);
 
 	return bt_flag_ctr;
 
@@ -271,6 +277,7 @@ void stel_ui::cb(void)
 {
 	core->FlagConstellationDrawing 	= bt_flag_constellation_draw->getState();
 	core->FlagConstellationName 	= bt_flag_constellation_name->getState();
+	core->FlagConstellationArt 	= bt_flag_constellation_art->getState();
 	core->FlagAzimutalGrid 		= bt_flag_azimuth_grid->getState();
 	core->FlagEquatorialGrid 	= bt_flag_equator_grid->getState();
 	core->FlagGround	 		= bt_flag_ground->getState();
@@ -298,6 +305,8 @@ void stel_ui::cbr(void)
 		bt_flag_help_lbl->setLabel("Drawing of the Constellations [C]");
 	if (bt_flag_constellation_name->getIsMouseOver())
 		bt_flag_help_lbl->setLabel("Names of the Constellations [V]");
+	if (bt_flag_constellation_art->getIsMouseOver())
+		bt_flag_help_lbl->setLabel("Constellations Art [R]");
 	if (bt_flag_azimuth_grid->getIsMouseOver())
 		bt_flag_help_lbl->setLabel("Azimutal Grid [Z]");
 	if (bt_flag_equator_grid->getIsMouseOver())
@@ -771,6 +780,7 @@ void stel_ui::gui_update_widgets(void)
 
 	bt_flag_constellation_draw->setState(core->FlagConstellationDrawing);
 	bt_flag_constellation_name->setState(core->FlagConstellationName);
+	bt_flag_constellation_art->setState(core->FlagConstellationArt);
 	bt_flag_azimuth_grid->setState(core->FlagAzimutalGrid);
 	bt_flag_equator_grid->setState(core->FlagEquatorialGrid);
 	bt_flag_ground->setState(core->FlagGround);

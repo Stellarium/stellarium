@@ -358,7 +358,7 @@ void stel_ui::tui_cb_tui_effect_change_landscape(void)
 
 // Set a new sky culture
 void stel_ui::tui_cb_tui_general_change_sky_culture(void) {
-	core->asterisms->set_sky_culture(tui_general_sky_culture->getCurrent());
+	core->asterisms->set_sky_culture(tui_general_sky_culture->getCurrent(), core->DataDir + "spacefont.txt", core->screen_W/2-150, core->screen_H/2-20);
 
 	// as constellations have changed, clear out any selection and retest for match!
 	if (core->selected_object && core->selected_object->get_type()==STEL_OBJECT_STAR) {
