@@ -94,7 +94,12 @@ void Draw(int delta_time)
     // Set openGL drawings in equatorial coordinates
     navigation.switch_to_earth_equatorial();
 
-    DrawMilkyWay();                  // Draw the milky way --> init the buffers
+	if (!global.FlagMilkyWay)
+	{
+		glClear(GL_COLOR_BUFFER_BIT);
+		return;
+	}
+    else DrawMilkyWay();                  // Draw the milky way --> init the buffers
 
     if (global.FlagNebula && (!global.FlagAtmosphere || global.SkyBrightness<0.1))
 		messiers->Draw();            // Draw the Messiers Objects
@@ -106,9 +111,6 @@ void Draw(int delta_time)
 		HipVouteCeleste->Draw();    // Draw the stars
     }
 
-    Vec3d vv = UnProject(512,380);
-    printf("x=512, y=380, vv(%f,%f,%f)\n",vv[0],vv[1],vv[2]);
-    
 	if (global.FlagAtmosphere && global.SkyBrightness>0)
 	DrawAtmosphere2();	// Draw the atmosphere
 

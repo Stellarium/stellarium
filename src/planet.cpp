@@ -146,43 +146,13 @@ void planet::addSatellite(planet*p)
 void planet::draw(void)
 {
 	glPushMatrix();
+    glMultMatrixd(mat_local_to_parent); // Go in planet local coordinate
 
-    glMultMatrixd(mat_local_to_parent);
-
-    if (global.FlagPlanetsHintDrawing)
-    // Draw the name, and the circle
-    // Thanks to Nick Porcino for this addition
-    {   
-        double screenX, screenY, screenZ;
-        Project(0., 0., 0., screenX, screenY, screenZ);
-
-        if (screenZ < 1)
-        {
-            screenY = global.Y_Resolution - screenY;
-
-            setOrthographicProjection(global.X_Resolution, global.Y_Resolution);    // 2D coordinate
-            glEnable(GL_BLEND);
-            glDisable(GL_LIGHTING); 
-            glColor3f(0.5,0.5,0.7);
-            float tmp = 10.;//radius/navigation.get_fov();
-            planet_name_font->print((int)(screenX+tmp),(int)(screenY+tmp), name);
-
-            // Draw the circle
-			glDisable(GL_TEXTURE_2D);
-            glBegin(GL_LINE_STRIP);
-            for (float r = 0; r < 6.28; r += 0.2)
-            {   
-                glVertex3f(screenX + 8. * sin(r), screenY + 8. * cos(r), 0);
-            }
-            glEnd();
-            resetPerspectiveProjection();                           // Restore the other coordinate
-        }
-    }
-    
     //glEnable(GL_LIGHTING);
     glEnable(GL_TEXTURE_2D);
 	glEnable(GL_CULL_FACE);
 	glDisable(GL_BLEND);
+	glEnable(GL_LIGHTING);
 
 	glPushMatrix();
 
@@ -200,6 +170,37 @@ void planet::draw(void)
 
 	glPopMatrix();
 
+    // Draw the name, and the circle
+    // Thanks to Nick Porcino for this addition
+    if (global.FlagPlanetsHintDrawing)
+    {
+        double screenX, screenY, screenZ;
+        Project(0., 0., 0., screenX, screenY, screenZ);
+
+        if (screenZ < 1)
+        {
+            screenY = global.Y_Resolution - screenY;
+
+            setOrthographicProjection(global.X_Resolution, global.Y_Resolution);    // 2D coordinate
+            glEnable(GL_BLEND);
+            glDisable(GL_LIGHTING);
+			glEnable(GL_TEXTURE_2D);
+            glColor3f(0.5,0.5,0.7);
+            float tmp = 10.;//radius/navigation.get_fov();
+            planet_name_font->print((int)(screenX+tmp),(int)(screenY+tmp), name);
+
+            // Draw the circle
+			glDisable(GL_TEXTURE_2D);
+            glBegin(GL_LINE_STRIP);
+            for (float r = 0; r < 6.28; r += 0.2)
+            {
+                glVertex3f(screenX + 8. * sin(r), screenY + 8. * cos(r), 0);
+            }
+            glEnd();
+            resetPerspectiveProjection();                           // Restore the other coordinate
+        }
+    }
+
     // Draw the satellites
     list<planet*>::iterator iter = satellites.begin();
     while (iter != satellites.end())
@@ -210,7 +211,6 @@ void planet::draw(void)
 
     glPopMatrix();
 
-	glDisable(GL_LIGHTING);
     glDisable(GL_CULL_FACE);
 }
 
@@ -226,26 +226,6 @@ sun_planet::sun_planet(char * _name, int _flagHalo, double _radius, vec3_t _colo
 void sun_planet::compute_position(double date)
 {
     // The sun is fixed in the heliocentric coordinate
-	//glEnable(GL_LIGHTING);
-
-    float tmp[4] = {0,0,0,1};
-    //float tmp2[4] = {0.01,0.01,0.01,1};
-    float tmp3[4] = {1000,1000,1000,1};
-    float tmp4[4] = {1,1,1,1};
-    glLightfv(GL_LIGHT1,GL_AMBIENT,tmp);
-    glLightfv(GL_LIGHT1,GL_DIFFUSE,tmp3);
-    glLightfv(GL_LIGHT1,GL_SPECULAR,tmp);
-
-    glDisable(GL_LIGHT0);
-    //glEnable(GL_LIGHT1);
-
-    glMaterialfv(GL_FRONT_AND_BACK,GL_AMBIENT ,tmp);
-    glMaterialfv(GL_FRONT_AND_BACK,GL_DIFFUSE ,tmp4);
-    glMaterialfv(GL_FRONT_AND_BACK,GL_EMISSION ,tmp);
-    glMaterialfv(GL_FRONT_AND_BACK,GL_SHININESS ,tmp);
-    glMaterialfv(GL_FRONT_AND_BACK,GL_SPECULAR ,tmp);
-
-    glLightfv(GL_LIGHT1,GL_POSITION,Vec3f(0.,0.,0.));
 
     // Compute for the satellites
     list<planet*>::iterator iter = satellites.begin();
@@ -267,6 +247,89 @@ void sun_planet::compute_trans_matrix(double date)
         (*iter)->compute_trans_matrix(date);
         iter++;
     }
+}
+
+
+void sun_planet::draw()
+{
+	// We are supposed to be in heliocentric coordinate already so no matrix change
+
+    glEnable(GL_TEXTURE_2D);
+	glEnable(GL_CULL_FACE);
+	glDisable(GL_BLEND);
+
+	glColor3f(1.0f, 1.0f, 1.0f);
+	glBindTexture(GL_TEXTURE_2D, planetTexture->getID());
+	GLUquadricObj * p=gluNewQuadric();
+	gluQuadricTexture(p,GL_TRUE);
+	gluQuadricOrientation(p, GLU_OUTSIDE);
+	gluSphere(p,radius,80,80);
+	gluDeleteQuadric(p);
+
+	// Draw the name, and the circle
+    // Thanks to Nick Porcino for this addition
+    if (global.FlagPlanetsHintDrawing)
+    {
+        double screenX, screenY, screenZ;
+        Project(0., 0., 0., screenX, screenY, screenZ);
+
+        if (screenZ < 1)
+        {
+		    glEnable(GL_BLEND);
+            glDisable(GL_LIGHTING);
+			glEnable(GL_TEXTURE_2D);
+
+            screenY = global.Y_Resolution - screenY;
+
+            setOrthographicProjection(global.X_Resolution, global.Y_Resolution);    // 2D coordinate
+
+            glColor3f(0.5,0.5,0.7);
+            planet_name_font->print((int)(screenX+5.),(int)(screenY+5.), name);
+
+            // Draw the circle
+			glDisable(GL_TEXTURE_2D);
+            glBegin(GL_LINE_STRIP);
+            	for (float r = 0; r < 6.28; r += 0.2)
+            	{
+                	glVertex3f(screenX + 8. * sin(r), screenY + 8. * cos(r), 0);
+            	}
+            glEnd();
+            resetPerspectiveProjection();                           // Restore the other coordinate
+        }
+    }
+
+	// Set the lighting with the sun as light source
+    float tmp[4] = {0,0,0,1};
+	float tmp2[4] = {0.1,0.1,0.1,1};
+    float tmp3[4] = {100000,100000,100000,1};
+    float tmp4[4] = {1,1,1,1};
+    glLightfv(GL_LIGHT0,GL_AMBIENT,tmp2);
+    glLightfv(GL_LIGHT0,GL_DIFFUSE,tmp3);
+    glLightfv(GL_LIGHT0,GL_SPECULAR,tmp);
+
+    glMaterialfv(GL_FRONT_AND_BACK,GL_AMBIENT ,tmp4);
+    glMaterialfv(GL_FRONT_AND_BACK,GL_DIFFUSE ,tmp4);
+    glMaterialfv(GL_FRONT_AND_BACK,GL_EMISSION ,tmp);
+    glMaterialfv(GL_FRONT_AND_BACK,GL_SHININESS ,tmp);
+    glMaterialfv(GL_FRONT_AND_BACK,GL_SPECULAR ,tmp);
+
+    glLightfv(GL_LIGHT0,GL_POSITION,Vec3f(0.,0.,0.));
+
+	glEnable(GL_LIGHTING);
+
+
+    // Draw the satellites
+    list<planet*>::iterator iter = satellites.begin();
+    while (iter != satellites.end())
+    {
+        (*iter)->draw();
+        iter++;
+    }
+
+    glPopMatrix();
+
+	glDisable(GL_LIGHTING);
+    glDisable(GL_CULL_FACE);
 }
 
 	/*

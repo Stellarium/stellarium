@@ -164,7 +164,7 @@ stel_object * find_stel_object(int x, int y)
 	Vec3d v = UnProject((double)x,(double)y);
     glPopMatrix();
     
-	printf("x=%d, y=%d, v(%f,%f,%f)\n",x,y,v[0],v[1],v[2]);
+	//printf("x=%d, y=%d, v(%f,%f,%f)\n",x,y,v[0],v[1],v[2]);
 	return find_stel_object(v);
 }
 

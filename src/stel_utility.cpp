@@ -147,7 +147,6 @@ Vec3d UnProject(double x ,double y)
     glGetIntegerv(GL_VIEWPORT,V);
 
 	gluUnProject(x,(double)global.Y_Resolution-y,1.,M,P,V,objx,objy,objz);
-	printf("x=%f, y=%f, v(%f,%f,%f)\n",x,y,objx[0],objy[0],objz[0]);
 	return Vec3d(objx[0],objy[0],objz[0]);
 }
 
