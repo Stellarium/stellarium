@@ -34,8 +34,8 @@ stel_sdl::~stel_sdl()
 
 void stel_sdl::init(void)
 {
+    Uint32	Vflags;		// Our Video Flags
     Screen = NULL;
-    Keys = NULL;
 
 	// Init the SDL library, the VIDEO subsystem
     if(SDL_Init(SDL_INIT_VIDEO)<0)
@@ -54,14 +54,14 @@ void stel_sdl::init(void)
     Vflags = SDL_HWSURFACE|SDL_OPENGL;//|SDL_DOUBLEBUF;
 	SDL_GL_SetAttribute(SDL_GL_STENCIL_SIZE,1);
 	// If fullscreen, set the Flag
-    if (core->Fullscreen) Vflags|=SDL_FULLSCREEN;
+    if (core->get_Fullscreen()) Vflags|=SDL_FULLSCREEN;
 
 	// Create the SDL screen surface
-    Screen = SDL_SetVideoMode(core->screen_W, core->screen_H, core->bppMode, Vflags);
+    Screen = SDL_SetVideoMode(core->get_screen_W(), core->get_screen_H(), core->get_bppMode(), Vflags);
 	if(!Screen)
 	{
 		printf("sdl: Couldn't set %dx%d video mode: %s!",
-		core->screen_W, core->screen_H, SDL_GetError());
+		core->get_screen_W(), core->get_screen_H(), SDL_GetError());
 		exit(-1);
 	}
 
@@ -73,7 +73,7 @@ void stel_sdl::init(void)
 
 	// Set the window icon
 	char tmp[255];
-    strcpy(tmp,core->DataDir);
+    strcpy(tmp,core->get_DataDir());
     strcat(tmp,"icon.bmp");
 	SDL_WM_SetIcon(SDL_LoadBMP(tmp), NULL);
 
@@ -97,17 +97,16 @@ void TerminateApplication(void)
 void stel_sdl::start_main_loop(void)
 {
     bool AppVisible = true;			// At The Beginning, Our App Is Visible
-	bool AppLooping = true;			// Make Our Program Loop
 
 	// Start the main loop
-	while(AppLooping)
+	while(1)
 	{
 		if(SDL_PollEvent(&E))	// Fetch The First Event Of The Queue
 		{
 			switch(E.type)		// And Processing It
 			{
 				case SDL_QUIT:
-					AppLooping = false;
+					return;
 					break;
 
 				case SDL_VIDEORESIZE:
@@ -116,44 +115,40 @@ void stel_sdl::start_main_loop(void)
 					break;
 
 				case SDL_ACTIVEEVENT:
-					if(E.active.state & SDL_APPACTIVE)
+					if (E.active.state & SDL_APPACTIVE)
 					{
 						// Activity level changed (ie. iconified)
-						if (E.active.gain)
-							AppVisible = true; // Activity's been gained
-						else
-							AppVisible = false;
+						if (E.active.gain) AppVisible = true; // Activity's been gained
+						else AppVisible = false;
 					}
 					break;
 
 				case SDL_MOUSEMOTION:
-				  	core->ui->handle_move(E.motion.x,E.motion.y);
+				  	core->handle_move(E.motion.x,E.motion.y);
 					break;
 
 				case SDL_MOUSEBUTTONDOWN:
-					core->ui->handle_clic(E.button.x,E.button.y,E.button.button,E.button.state);
+					core->handle_clic(E.button.x,E.button.y,E.button.button,E.button.state);
 					break;
 
 				case SDL_MOUSEBUTTONUP:
-					core->ui->handle_clic(E.button.x,E.button.y,E.button.button,E.button.state);
+					core->handle_clic(E.button.x,E.button.y,E.button.button,E.button.state);
 					break;
 
 				case SDL_KEYDOWN:
 					// Send the event to the gui and stop if it has been intercepted
-					if (!core->ui->handle_keys(E.key.keysym.sym,S_GUI_PRESSED))
+					if (!core->handle_keys(E.key.keysym.sym,S_GUI_PRESSED))
 					{
-						Keys = SDL_GetKeyState(NULL);	// Take a snapshot of the keyboard
-						if (Keys[SDLK_F1]) SDL_WM_ToggleFullScreen(Screen); // Try fullscreen
-						if (Keys[SDLK_ESCAPE])
+						if (E.key.keysym.sym==SDLK_F1) SDL_WM_ToggleFullScreen(Screen); // Try fullscreen
+						if (E.key.keysym.sym==SDLK_ESCAPE)
 						{
 							TerminateApplication();
 						}
-						pressKey(Keys);
 					}
 					break;
 
 				case SDL_KEYUP:
-					releaseKey(E.key.keysym.sym);
+					core->handle_keys(E.key.keysym.sym,S_GUI_RELEASED);
 			}
 		}
 		else  // No events to poll
@@ -184,63 +179,3 @@ void stel_sdl::resize_GL(int w, int h)
 	core->set_screen_size(w, h);
 }
 
-
-// Handle movement keys
-void stel_sdl::pressKey(Uint8 *keys)
-{
-    // Direction and zoom deplacements
-    if(keys[SDLK_LEFT])
-	{
-		core->turn_left(1);
-	}
-    if(keys[SDLK_RIGHT])
-	{
-		core->turn_right(1);
-	}
-    if(keys[SDLK_UP])
-	{
-		if (SDL_GetModState() & KMOD_CTRL)
-		{
-			core->zoom_in(1);
-		}
-		else
-		{
-			core->turn_up(1);
-		}
-	}
-    if(keys[SDLK_DOWN])
-	{
-		if (SDL_GetModState() & KMOD_CTRL)
-		{
-			core->zoom_out(1);
-		}
-		else
-		{
-			core->turn_down(1);
-		}
-	}
-    if(keys[SDLK_PAGEUP]) core->zoom_in(1);
-    if(keys[SDLK_PAGEDOWN]) core->zoom_out(1);
-
-}
-
-// Stop mooving and zooming
-void stel_sdl::releaseKey(SDLKey key)
-{   
-    // When a deplacement key is released stop mooving
-    if (key==SDLK_LEFT) core->turn_left(0);
-	if (key==SDLK_RIGHT) core->turn_right(0);
-	if (SDL_GetModState() & KMOD_CTRL)
-	{
-		if (key==SDLK_UP) core->zoom_in(0);
-		if (key==SDLK_DOWN) core->zoom_out(0);
-	}
-	else
-	{
-		if (key==SDLK_UP) core->turn_up(0);
-		if (key==SDLK_DOWN) core->turn_down(0);
-	}
-
-    if (key==SDLK_PAGEUP) core->zoom_in(0);
-	if (key==SDLK_PAGEDOWN) core->zoom_out(0);
-}

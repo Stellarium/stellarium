@@ -38,17 +38,9 @@ private:
 	// Function to call when the window size changes
 	void resize_GL(int w, int h);
 
-	// Handle movement keys
-	void pressKey(Uint8 *keys);
-
-	// Stop mooving and zooming
-	void releaseKey(SDLKey key);
-
 	// SDL managment variables
 	SDL_Surface *Screen;// The Screen
     SDL_Event	E;		// And Event Used In The Polling Process
-    Uint8	*Keys;		// A Pointer To An Array That Will Contain The Keyboard Snapshot
-    Uint32	Vflags;		// Our Video Flags
     Uint32	TickCount;	// Used For The Tick Counter
     Uint32	LastCount;	// Used For The Tick Counter
 };
