@@ -177,7 +177,8 @@ private:
 	s_tui::Boolean_item* tui_stars_show;
 	s_tui::Decimal_item* tui_star_labelmaxmag;
 	s_tui::Decimal_item* tui_stars_twinkle;
-
+	s_tui::Decimal_item* tui_star_magscale;
+	
 	// 4. Effect
 	s_tui::MultiSet_item<string>* tui_effect_landscape;
 

@@ -80,6 +80,8 @@ public:
 	virtual double get_satellites_fov(const navigator * nav) const;
 	virtual float get_mag(const navigator * nav) const {return compute_magnitude(nav);}
 
+	void setLabelColor(Vec3f& v) {label_color = v;}
+
 	// Compute the position in the parent planet coordinate system
 	void compute_position(double date);
 
@@ -195,6 +197,7 @@ protected:
 	static float star_scale;
 	static bool gravity_label;
 
+	Vec3f label_color;
 };
 
 #endif // _PLANET_H_

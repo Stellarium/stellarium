@@ -181,6 +181,8 @@ private:
 	Vec3f ConstNamesColor;
 	Vec3f NebulaLabelColor;
 	Vec3f NebulaCircleColor;
+	Vec3f CardinalColor;
+	Vec3f PlanetNamesColor;
 
 	// Text UI
 	int FlagEnableTuiMenu;

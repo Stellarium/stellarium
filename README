@@ -3,7 +3,7 @@
                   #   #  ##  #   #   ### ##   #  # # ###
                  ##   #  ### ### ### # # # #  #  ### # #
 
-                   By Fabien Chéreau : stellarium (at) free.fr
+                By Fabien Chéreau : stellarium (at) free.fr
                     Info : http://stellarium.free.fr
 
 Stellarium comes with ABSOLUTELY NO WARRANTY.  See the COPYING file for details.
@@ -52,18 +52,19 @@ Press the H key for more help.
 --------------------------------------------------------------------------------
 From version 0.6.0 the most useful configuration options can be set from within
 the program.
-You can however change it by hand in the file located in config/config.txt and
-config/location.txt on Windows/MacOSX and are located in $HOME/.stellarium/
-on a unix system.
+You can however change it by hand in the file located in config/config.ini on
+Windows/MacOSX and in $HOME/.stellarium/ on a unix system.
 
 --------------------------------------------------------------------------------
 6. THANKS
 --------------------------------------------------------------------------------
-	Special thanks to Rob Spearman (Digitalis Education) for his help and
-		financial support(http://digitaliseducation.com).
 
-	Axel Mellinger who gave me the authorisation to use his impressive milky
-		way panorama.
+	Special thanks to Rob Spearman (Digitalis Education) for his help and
+	financial support. Have a look at http://digitaliseducation.com if you
+	want to buy a planetarium projector running stellarium!
+
+	Axel Mellinger who gave me the authorisation to use his impressive
+	    milky way panorama.
 	Jesse Jones for his callback library.
 	The celestia project team from which I borrowed many code parts.
 	The libnova team for their planet calculation algorithms.
@@ -74,16 +75,15 @@ on a unix system.
 		the great Hipparcos catalog.
     Brad Schaefer for his sky rendering algorithm.
     Sylvain Ferey for his optimisation of the grids drawing.
-    Ben Wyatt (ben@wyatt100.freeserve.co.uk) for the Glpng library.
+    Ben Wyatt (ben (at) wyatt100.freeserve.co.uk) for the Glpng library.
     Jean-François Tremblay for his porting on MacOSX.
 	Vincent Caron for his parser bugfix and Linux compatibility bugfixes.
 	Nick Porcino for his planet function.
     Tangui Morlier for his help on Linux System.
-	Bill Gray (projectpluto.com) and
-		Mark Huss (mark@mhuss.com) for all the astro libraries.
-	Nate Miller (nkmiller@calpoly.edu) for his excellent vector librarie.
-    Chris Laurel (claurel@shatters.net) who makes Celestia.
-	Yuuki Ninomiya (gm@debian.or.jp) for the parsecfg file.
+	Bill Gray (projectpluto.com) and Mark Huss (mark (at) mhuss.com) for all
+	    the astro libraries.
+    Chris Laurel (claurel (at) shatters.net) who makes Celestia.
+	Yuuki Ninomiya (gm (at) debian.or.jp) for the parsecfg file.
 
 	And... All the people who sent me mails and bug reports!
 
@@ -92,7 +92,7 @@ on a unix system.
 7. NOTE
 --------------------------------------------------------------------------------
     This program is free, but if you have nothing to do with your
-    money :) , just go there and do something usefull with it :
+    money, just go there and do something usefull with it :
     https://www.greenpeace.com/forms/gpicontr.html
 
 
@@ -128,10 +128,10 @@ on a unix system.
 
 2. Included source code
 	2.1 glpng PNG loader library for OpenGL v1.45 (10/07/00)
-		by Ben Wyatt ben@wyatt100.freeserve.co.uk
+		by Ben Wyatt ben (at) wyatt100.freeserve.co.uk
 	2.2 Iniparser library Copyright (c) 2000 by Nicolas Devillard.
 	2.3 The stellastro and stellplanet libraries are mainly subsets of the
-		libnova library (GPL) by Liam Girdwood <liam@nova-ioe.org>
+		libnova library (GPL) by Liam Girdwood (liam (at) nova-ioe.org)
 	2.4 The orbit.cpp/h and solve.h files are directly borrowed from
 		Celestia (Chris Laurel). (GPL)
 	2.5 Other pieces of code and ideas are from Celestia too.
@@ -149,7 +149,8 @@ on a unix system.
 		instrument aboard the Terra satellite.  Further information is available
 		from http://earthobservatory.nasa.gov/Newsroom/BlueMarble/
 	4.3 Mars texture map is from James Hastings-Trew's collection.
-	4.4 Moon texture map is Courtesy USGS Astrogeology Research Program, http://astrogeology.usgs.gov. (Public Domain)
+	4.4 Moon texture map is Courtesy USGS Astrogeology Research Program,
+		http://astrogeology.usgs.gov. (Public Domain)
   	4.5 All other planet maps from David Seal's site: http://maps.jpl.nasa.gov/
 	4.6 The snowy landscape textures are from the GPL game tuxracer.
 	4.7 The fullsky milky way panorama is created by Axel Mellinger, University
@@ -163,7 +164,7 @@ on a unix system.
 --------------------------------------------------------------------------------
 9. LICENSE
 --------------------------------------------------------------------------------
-   Copyright (C) 2003 Fabien Chéreau chereau (at) free.fr
+   Copyright (C) 2004 Fabien Chéreau chereau (at) free.fr
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
