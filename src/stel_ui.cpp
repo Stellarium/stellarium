@@ -110,6 +110,10 @@ void stel_ui::init(void)
 	bt_flag_help_lbl->setPos(3,core->screen_H-40);
 	bt_flag_help_lbl->setVisible(0);
 
+	bt_flag_time_control_lbl = new Label("ERROR...");
+	bt_flag_time_control_lbl->setPos(core->screen_W-180,core->screen_H-40);
+	bt_flag_time_control_lbl->setVisible(0);	
+	
 	// Info on selected object
 	info_select_ctr = new Container();
 	info_select_ctr->reshape(0,15,300,80);
@@ -121,7 +125,9 @@ void stel_ui::init(void)
 
 	desktop->addComponent(createTopBar());
 	desktop->addComponent(createFlagButtons());
+	desktop->addComponent(createTimeControlButtons());
 	desktop->addComponent(bt_flag_help_lbl);
+	desktop->addComponent(bt_flag_time_control_lbl);
 	desktop->addComponent(createLicenceWindow());
 	desktop->addComponent(createHelpWindow());
 	desktop->addComponent(createConfigWindow());
@@ -272,6 +278,71 @@ Component* stel_ui::createFlagButtons(void)
 
 }
 
+// Create the button panel in the lower right corner
+Component* stel_ui::createTimeControlButtons(void)
+{
+	bt_dec_time_speed = new LabeledButton("\2\2");
+	bt_dec_time_speed->setSize(25,25);
+	bt_dec_time_speed->setOnPressCallback(callback<void>(this, &stel_ui::bt_dec_time_speed_cb));
+	bt_dec_time_speed->setOnMouseInOutCallback(callback<void>(this, &stel_ui::tcbr));
+
+	bt_real_time_speed = new LabeledButton("\5");
+	bt_real_time_speed->setSize(25,25);
+	bt_real_time_speed->setOnPressCallback(callback<void>(this, &stel_ui::bt_real_time_speed_cb));
+	bt_real_time_speed->setOnMouseInOutCallback(callback<void>(this, &stel_ui::tcbr));
+
+	bt_inc_time_speed = new LabeledButton("\3\3");
+	bt_inc_time_speed->setSize(25,25);
+	bt_inc_time_speed->setOnPressCallback(callback<void>(this, &stel_ui::bt_inc_time_speed_cb));
+	bt_inc_time_speed->setOnMouseInOutCallback(callback<void>(this, &stel_ui::tcbr));	
+	
+	bt_time_now = new LabeledButton("N");
+	bt_time_now->setSize(25,25);
+	bt_time_now->setOnPressCallback(callback<void>(this, &stel_ui::bt_time_now_cb));
+	bt_time_now->setOnMouseInOutCallback(callback<void>(this, &stel_ui::tcbr));
+
+	bt_time_control_ctr = new FilledContainer();
+	bt_time_control_ctr->addComponent(bt_dec_time_speed);	bt_dec_time_speed->setPos(0,0);
+	bt_time_control_ctr->addComponent(bt_real_time_speed);	bt_real_time_speed->setPos(25,0);
+	bt_time_control_ctr->addComponent(bt_inc_time_speed);	bt_inc_time_speed->setPos(50,0);
+	bt_time_control_ctr->addComponent(bt_time_now);			bt_time_now->setPos(75,0);
+
+	bt_time_control_ctr->setOnMouseInOutCallback(callback<void>(this, &stel_ui::bt_time_control_ctrOnMouseInOut));
+	bt_time_control_ctr->reshape(core->screen_W-4*25-1, core->screen_H-25, 4*25, 25);
+
+	return bt_time_control_ctr;
+}
+
+void stel_ui::bt_dec_time_speed_cb(void)
+{
+	double s = core->navigation->get_time_speed();
+	if (s>JD_SECOND) s/=10.;
+	else if (s<=-JD_SECOND) s*=10.;
+	else if (s>-JD_SECOND && s<=0.) s=-JD_SECOND;
+	else if (s>0. && s<=JD_SECOND) s=0.;
+	core->navigation->set_time_speed(s);
+}
+
+void stel_ui::bt_inc_time_speed_cb(void)
+{
+	double s = core->navigation->get_time_speed();
+	if (s>=JD_SECOND) s*=10.;
+	else if (s<-JD_SECOND) s/=10.;
+	else if (s>=0. && s<JD_SECOND) s=JD_SECOND;
+	else if (s>=-JD_SECOND && s<0.) s=0.;
+	core->navigation->set_time_speed(s);
+}
+
+void stel_ui::bt_real_time_speed_cb(void)
+{
+	core->navigation->set_time_speed(JD_SECOND);
+}
+
+void stel_ui::bt_time_now_cb(void)
+{
+	core->navigation->set_JDay(get_julian_from_sys());
+}
+
 ////////////////////////////////////////////////////////////////////////////////
 void stel_ui::cb(void)
 {
@@ -297,6 +368,12 @@ void stel_ui::bt_flag_ctrOnMouseInOut(void)
 {
 	if (bt_flag_ctr->getIsMouseOver()) bt_flag_help_lbl->setVisible(1);
 	else bt_flag_help_lbl->setVisible(0);
+}
+
+void stel_ui::bt_time_control_ctrOnMouseInOut(void)
+{
+	if (bt_time_control_ctr->getIsMouseOver()) bt_flag_time_control_lbl->setVisible(1);
+	else bt_flag_time_control_lbl->setVisible(0);
 }
 
 void stel_ui::cbr(void)
@@ -329,7 +406,17 @@ void stel_ui::cbr(void)
 		bt_flag_help_lbl->setLabel("Quit [CTRL + Q]");
 }
 
-
+void stel_ui::tcbr(void)
+{
+	if (bt_dec_time_speed->getIsMouseOver())
+		bt_flag_time_control_lbl->setLabel("Increase Time Speed [L]");
+	if (bt_real_time_speed->getIsMouseOver())
+		bt_flag_time_control_lbl->setLabel("Real Time Speed [K]");
+	if (bt_inc_time_speed->getIsMouseOver())
+		bt_flag_time_control_lbl->setLabel("Decrease Time Speed [J]");
+	if (bt_time_now->getIsMouseOver())
+		bt_flag_time_control_lbl->setLabel("Return to Current Time");
+}
 
 // The window containing the info (licence)
 Component* stel_ui::createLicenceWindow(void)
