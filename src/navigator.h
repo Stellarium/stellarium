@@ -121,6 +121,7 @@ public:
 	void update_move(double deltaAz, double deltaAlt);
 
 	void set_viewing_mode(VIEWING_MODE_TYPE view_mode);
+	VIEWING_MODE_TYPE get_viewing_mode(void) const {return viewing_mode;}
 	void switch_viewing_mode(void);
 
 private:
