@@ -1,4 +1,4 @@
-/* 
+/*
  * Stellarium
  * Copyright (C) 2002 Fabien Chéreau
  * 
@@ -30,7 +30,7 @@ void moy(vec3_t * p, int a, int b, int c)
 Grid::Grid()
 {   
 	
-	NbPoints = 142;
+	NbPoints = 162;
 	Angle = PI/10;
 /*
 float tempTab[92][3] ={
