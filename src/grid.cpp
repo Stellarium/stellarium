@@ -701,7 +701,8 @@ Grid::Grid()
 
 Grid::~Grid()
 {
-    delete Points;
+    delete [] Points;
+	Points = NULL;
 }
 
 int Grid::GetNearest(Vec3f v)

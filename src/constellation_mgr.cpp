@@ -52,10 +52,11 @@ Constellation_mgr::~Constellation_mgr()
 	vector<Constellation *>::iterator iter;
     for(iter=asterisms.begin();iter!=asterisms.end();iter++)
     {
-      delete (*iter);
-      asterisms.erase(iter);
+      delete (*iter);     
+	  asterisms.erase(iter);
       iter--;  // important!
     }
+	
     if (asterFont) delete asterFont;
     asterFont = NULL;
 	if (Constellation::constellation_font) delete Constellation::constellation_font;

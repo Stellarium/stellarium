@@ -17,6 +17,8 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
+#include <iostream>
+
 #include "constellation.h"
 
 #define RADIUS_CONST 1.
@@ -27,18 +29,14 @@ float Constellation::max_art_intensity = 1.0;
 float Constellation::art_fade_duration = 2000.0;
 
 
-Constellation::Constellation() : name(NULL), inter(NULL), asterism(NULL), art_tex(NULL), art_on(0), art_intensity(0)
+Constellation::Constellation() : asterism(NULL), art_tex(NULL), art_on(0), art_intensity(0)
 {
 }
 
 Constellation::~Constellation()
 {   
-	if (asterism) delete asterism;
+	if (asterism) delete[] asterism;
     asterism = NULL;
-    if (name) delete name;
-    name = NULL;
-    if (inter) delete inter;
-    inter = NULL;
 	if (art_tex) delete art_tex;
 	art_tex = NULL;
 }
@@ -46,28 +44,28 @@ Constellation::~Constellation()
 int Constellation::read(FILE *  fic, Hip_Star_mgr * _VouteCeleste)
 // Read Constellation datas and grab cartesian positions of stars
 {   
-	char buff1[40];
-	char buff2[40];
+	char buff1[100];
+	char buff2[100];
     unsigned int HP;
 
 	if (fscanf(fic,"%s %s %s %u ",short_name,buff1,buff2,&nb_segments)!=4) return 0;
 
-	name=strdup(buff1);
-	inter=strdup(buff2);
+	name=buff1;
+	inter=buff2;
 
     asterism = new Hip_Star*[nb_segments*2];
     for (unsigned int i=0;i<nb_segments*2;++i)
     {
         if (fscanf(fic,"%u",&HP)!=1)
 		{
-			printf("ERROR while loading constellation data (reading %s)\n", inter);
+			printf("ERROR while loading constellation data (reading %s)\n", inter.c_str());
 			exit(-1);
 		}
 
         asterism[i]=_VouteCeleste->search(HP);
 		if (!asterism[i])
 		{
-			printf("Error in Constellation %s asterism : can't find star HP=%d\n",inter,HP);
+			printf("Error in Constellation %s asterism : can't find star HP=%d\n",inter.c_str(),HP);
 		}
     }
 

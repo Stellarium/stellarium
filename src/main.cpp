@@ -19,7 +19,11 @@
 
 #include <string>
 #include <iostream>
+#include <stdlib.h>
+
 #include "SDL.h"
+
+#include "mmgr.h"
 
 #include "stellarium.h"
 #include "stel_core.h"

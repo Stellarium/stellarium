@@ -30,7 +30,7 @@ s_texture * Nebula::tex_circle = NULL;
 s_font* Nebula::nebula_font = NULL;
 bool Nebula::gravity_label = false;
 
-Nebula::Nebula() : NGC_nb(0), name(NULL), neb_tex(NULL), tex_quad_vertex(NULL),
+Nebula::Nebula() : NGC_nb(0), neb_tex(NULL), tex_quad_vertex(NULL),
 		fontcolor(0.4,0.3,0.5), circlecolor(0.8,0.8,0.1)
 {
 	inc_lum = rand()/RAND_MAX*M_PI;
@@ -38,11 +38,9 @@ Nebula::Nebula() : NGC_nb(0), name(NULL), neb_tex(NULL), tex_quad_vertex(NULL),
 
 Nebula::~Nebula()
 {
-	if (name) delete name;
-	name = NULL;
-    if (neb_tex) delete neb_tex;
+    delete neb_tex;
 	neb_tex = NULL;
-	if (tex_quad_vertex) delete tex_quad_vertex;
+	delete [] tex_quad_vertex;
 	tex_quad_vertex = NULL;
 }
 
@@ -51,7 +49,7 @@ void Nebula::get_info_string(char * s, const navigator*) const
 	float tempDE, tempRA;
 	rect_to_sphe(&tempRA,&tempDE,XYZ);
 	// RA=Right ascention, DE=Declinaison, Mag=Magnitude
-	sprintf(s,_("Name : %s (NGC %u)\nRA : %s\nDE : %s\nMag : %.2f"), name, NGC_nb,
+	sprintf(s,_("Name : %s (NGC %u)\nRA : %s\nDE : %s\nMag : %.2f"), name.c_str(), NGC_nb,
 		print_angle_hms(tempRA*180./M_PI).c_str(), print_angle_dms_stel(tempDE*180./M_PI).c_str(), mag);
 }
 
@@ -60,11 +58,11 @@ void Nebula::get_short_info_string(char * s, const navigator*) const
 	if( mag == 99 )
 	{
 		// we don't know actual magnitude for some reason, so don't label
-		sprintf(s,"%s", name);
+		sprintf(s,"%s", name.c_str());
 	}
 	else
 	{
-		sprintf(s,_("%s: mag %.1f"), name, mag);
+		sprintf(s,_("%s: mag %.1f"), name.c_str(), mag);
 	}
 }
 
@@ -73,8 +71,8 @@ double Nebula::get_close_fov(const navigator*) const
 	return angular_size * 180./M_PI * 4;
 }
 
+// Read nebula data from file and compute x,y and z;
 int Nebula::read(FILE * catalogue)
-// Lis les infos de la n�uleuse dans le fichier et calcule x,y et z;
 {
 	int rahr;
     float ramin;
@@ -86,7 +84,6 @@ int Nebula::read(FILE * catalogue)
 	char tempName[255];
 	char tempCredit[255];
 
-
     if (fscanf(catalogue,"%u %s %d %f %d %f %f %f %f %s %s %s\n",
 		&NGC_nb, type, &rahr, &ramin,&dedeg,&demin,
 		&mag,&tex_angular_size,&tex_rotation, tempName, tex_name, tempCredit)!=12)
@@ -94,27 +91,19 @@ int Nebula::read(FILE * catalogue)
 		return 0;
 	}
 
-	name = strdup(tempName);
+	name = tempName;
     // Replace the "_" with " "
-    char * cc;
-    cc=strchr(name,'_');
-    while(cc!=NULL)
-    {
-		(*cc)=' ';
-        cc=strchr(name,'_');
-    }
+    for (string::size_type i=0;i<name.length();++i)
+	{
+		if (name[i]=='_') name[i]=' ';
+	}
 
-    char tc[255] = "Credit: ";
-    strcat(tc, tempCredit);
-    credit = strdup(tc);
-    cc=strchr(credit,'_');
-    while(cc!=NULL)
-    {
-		(*cc)=' ';
-        cc=strchr(credit,'_');
-    }
-
-
+    credit = string("Credit: ") + tempCredit;	
+    for (string::size_type i=0;i<credit.length();++i)
+	{
+		if (credit[i]=='_') credit[i]=' ';
+	}
+	
     // Calc the RA and DE from the datas
     float RaRad = hms_to_rad(rahr, (double)ramin);
     float DecRad = dms_to_rad(dedeg, (double)demin);
