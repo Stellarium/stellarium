@@ -176,7 +176,7 @@ void navigator::update_move(double deltaAz, double deltaAlt)
 	if( viewing_mode == VIEW_EQUATOR) rect_to_sphe(&azVision,&altVision,equ_vision);
 	else rect_to_sphe(&azVision,&altVision,local_vision);
 
-    // if we are mooving in the Azimuthal angle (left/right)
+    // if we are moving in the Azimuthal angle (left/right)
     if (deltaAz) azVision-=deltaAz;
     if (deltaAlt)
     {
@@ -221,8 +221,17 @@ void navigator::update_time(int delta_time)
 // The non optimized (more clear version is available on the CVS : before date 25/07/2003)
 void navigator::update_transform_matrices(Vec3d earth_ecliptic_pos)
 {
+  
+        // special cases to keep continuity in sky as reach poles  
+        // otherwise sky jumps in rotation when reach poles
+        // TODO: seems like actual problem is elsewhere
+        double lat = position->get_latitude();
+	if( lat > 89 )  lat = 89.5;
+	if( lat < -89 ) lat = -89.5;
+       
+
 	mat_local_to_earth_equ =Mat4d::zrotation((get_apparent_sidereal_time(JDay)+position->get_longitude())*M_PI/180.) *
-							Mat4d::yrotation((90.-position->get_latitude())*M_PI/180.);
+	  Mat4d::yrotation((90.-lat)*M_PI/180.);
 
 	mat_earth_equ_to_local = mat_local_to_earth_equ.transpose();
 
@@ -231,8 +240,8 @@ void navigator::update_transform_matrices(Vec3d earth_ecliptic_pos)
 
 	// These two next have to take into account the position of the observer on the earth
 	Mat4d tmp = Mat4d::xrotation(-23.438855*M_PI/180.) *
-				Mat4d::zrotation((position->get_longitude()+get_mean_sidereal_time(JDay))*M_PI/180.) *
-				Mat4d::yrotation((90.-position->get_latitude())*M_PI/180.);
+	  Mat4d::zrotation((position->get_longitude()+get_mean_sidereal_time(JDay))*M_PI/180.) *
+	  Mat4d::yrotation((90.-position->get_latitude())*M_PI/180.);
 
 	mat_local_to_helio = 	Mat4d::translation(earth_ecliptic_pos) *
 							tmp *
@@ -253,7 +262,7 @@ void navigator::update_model_view_mat(void)
 
   if( viewing_mode == VIEW_EQUATOR) {
     // view will use equatorial coordinates, so that north is always up
-    f = local_to_earth_equ(local_vision);
+    f = equ_vision;
   } else {
     // view will correct for horizon (always down)
     f = local_vision;

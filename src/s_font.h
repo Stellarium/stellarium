@@ -44,7 +44,8 @@ public:
     s_font(float size_i, const string& textureName, const string& dataFileName);
     virtual ~s_font();
     void print(float x, float y, const string& str, int upsidedown = 1) const;
-	void print_char(const char c) const;
+    void print_char(const char c) const;
+    void print_char_outlined(const char c) const;
     float getStrLen(const string&) const;
     float getAverageCharLen(void) const {return averageCharLen*ratio;}
     float getLineHeight(void) const {return lineHeight*ratio;}
