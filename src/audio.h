@@ -22,6 +22,8 @@
 #ifndef _AUDIO_H_
 #define _AUDIO_H_
 
+#include <config.h>
+
 #include <string>
 #include "SDL.h"
 
