@@ -547,7 +547,7 @@ int main(int argc, char **argv)
 
 			case SDL_MOUSEMOTION:
 				{
-				  //GuiHandleMove(E.motion.x,E.motion.y);
+				  	GuiHandleMove(E.motion.x,E.motion.y);
 					break;
 				}
 
