@@ -46,10 +46,32 @@ stel_atmosphere::~stel_atmosphere()
 	if (tab_sky) delete tab_sky;
 }
 
+void stel_atmosphere::show_atmosphere(void)
+{
+  atm_on = 1;
+}
+
+void stel_atmosphere::hide_atmosphere(void)
+{
+  atm_on = 0;
+}
+
+float stel_atmosphere::get_intensity(void)
+{
+  return atm_intensity;
+}
+
 void stel_atmosphere::compute_color(double JD, Vec3d sunPos, Vec3d moonPos, float moon_phase,
 	tone_reproductor * eye, Projector* prj,
 	float latitude, float altitude, float temperature, float relative_humidity)
 {
+
+        // no need to calculate if not visible
+        if( atm_intensity < .001) {
+	  eye->set_world_adaptation_luminance(3.75f);
+	  return;
+	}
+
 	//Vec3d obj;
 	skylight_struct2 b2;
 
@@ -99,7 +121,7 @@ void stel_atmosphere::compute_color(double JD, Vec3d sunPos, Vec3d moonPos, floa
 			if (point[2]<=0)
 			{
 				point[2] = -point[2];
-				// The sky bellow the ground is the symetric of the one above :
+				// The sky below the ground is the symetric of the one above :
 				// it looks nice and gives proper values for brightness estimation
 			}
 
@@ -121,9 +143,8 @@ void stel_atmosphere::compute_color(double JD, Vec3d sunPos, Vec3d moonPos, floa
 		}
 	}
 
-	// Update world adaptation luminance from the previous values
-	if (sum_lum/nb_lum<4.5f/3) eye->set_world_adaptation_luminance(4.5f);
-	else eye->set_world_adaptation_luminance(sum_lum/nb_lum * 3.5);
+	//	printf("luminance %f\t", 3.75f + 3.5*sum_lum/nb_lum*atm_intensity );
+	eye->set_world_adaptation_luminance(3.75f + 3.5*sum_lum/nb_lum*atm_intensity );
 	sum_lum = 0.f;
 	nb_lum = 0;
 }
@@ -133,6 +154,20 @@ void stel_atmosphere::compute_color(double JD, Vec3d sunPos, Vec3d moonPos, floa
 // Draw the atmosphere using the precalc values stored in tab_sky
 void stel_atmosphere::draw(Projector* prj)
 {
+
+
+  // update fade
+  if( !atm_on ) {
+    if( atm_intensity > FADE_INCREMENT ) {
+      atm_intensity -= FADE_INCREMENT;
+    } else {
+      atm_intensity = 0;
+      return;
+    }
+  }
+
+
+
 	glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_COLOR);
 
 	float stepX = (float)prj->viewW() / sky_resolution;
@@ -148,12 +183,25 @@ void stel_atmosphere::draw(Projector* prj)
 		glBegin(GL_TRIANGLE_STRIP);
 			for(int x2=0; x2<sky_resolution+1; ++x2)
 			{
-				glColor3f(tab_sky[x2][y2][0],tab_sky[x2][y2][1],tab_sky[x2][y2][2]);
+				glColor3f(atm_intensity*tab_sky[x2][y2][0],atm_intensity*tab_sky[x2][y2][1],
+					  atm_intensity*tab_sky[x2][y2][2]);
 				glVertex2i((int)(viewport_left+x2*stepX),(int)(view_bottom+y2*stepY));
-				glColor3f(tab_sky[x2][y2+1][0],tab_sky[x2][y2+1][1],tab_sky[x2][y2+1][2]);
+				glColor3f(atm_intensity*tab_sky[x2][y2+1][0],atm_intensity*tab_sky[x2][y2+1][1],
+					  atm_intensity*tab_sky[x2][y2+1][2]);
 				glVertex2i((int)(viewport_left+x2*stepX),(int)(view_bottom+(y2+1)*stepY));
 			}
 		glEnd();
 	}
 	prj->reset_perspective_projection();
+
+	// smoother initial fade in when increment after drawing
+	if( atm_on ) {
+	  if( atm_intensity < 1 ) {
+	    atm_intensity += FADE_INCREMENT;
+	  } else {
+	    atm_intensity = 1;
+	  }
+	}
+
+
 }
