@@ -68,6 +68,8 @@ void stel_sdl::init(void)
 	// Disable key repeat
     SDL_EnableKeyRepeat(0, 0);
 
+	SDL_EnableUNICODE(1);
+	
 	// Set the window caption
 	SDL_WM_SetCaption(APP_NAME, APP_NAME);
 

@@ -40,7 +40,7 @@ void drawIntro(void)
     printf("    | ## ### ### #   #   ### ###  #  # # # #|\n");
     printf("    | #   #  ##  #   #   ### ##   #  # # ###|\n");
     printf("    |##   #  ### ### ### # # # #  #  ### # #|\n");
-    printf("    |                     %s|\n",APP_NAME);
+    printf("    |                       %s|\n",APP_NAME);
     printf("    -----------------------------------------\n\n");
     printf("Copyright (C) 2004 Fabien Chereau\n\n");
     printf("Please check last version and send bug report & comments \n");
