@@ -60,9 +60,6 @@ private:
 	s_font * starFont;
 	string dataDir;
 	string skyLocale;
-
-
-
 };
 
 
