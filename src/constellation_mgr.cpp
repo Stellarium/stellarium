@@ -28,7 +28,7 @@
 Constellation_mgr::Constellation_mgr(string _data_dir, string _sky_culture, string _sky_locale, Hip_Star_mgr *_hip_stars, string _font_filename, int barx, int bary, 
 				     Vec3f _lines_color, Vec3f _names_color) :
   asterFont(NULL), lines_color(_lines_color), names_color(_names_color), hipStarMgr(_hip_stars), 
-  dataDir( _data_dir), skyCulture(_sky_culture)
+  dataDir( _data_dir), skyCulture(_sky_culture), selected(NULL)
 {
 
   // load font
@@ -45,6 +45,7 @@ Constellation_mgr::Constellation_mgr(string _data_dir, string _sky_culture, stri
   set_sky_locale(_sky_locale);
   skyLocale = _sky_locale;
 
+  art_switch = new linear_switchor();
 }
 
 
@@ -62,28 +63,8 @@ Constellation_mgr::~Constellation_mgr()
     asterFont = NULL;
 	if (Constellation::constellation_font) delete Constellation::constellation_font;
 	Constellation::constellation_font = NULL;
-}
-
-void Constellation_mgr::show_art(void)
-{
-  // unless just one selected... turn on all artwork
-
-  vector<Constellation *>::iterator iter;
-  for(iter=asterisms.begin();iter!=asterisms.end();iter++) {
-    (*iter)->show_art();
-  }
-
-}
-
-
-void Constellation_mgr::hide_art(void)
-{
-  // unless just one selected... turn on all artwork
-
-  vector<Constellation *>::iterator iter;
-  for(iter=asterisms.begin();iter!=asterisms.end();iter++) {
-    (*iter)->hide_art();
-  }
+	
+	delete art_switch;
 }
 
 int Constellation_mgr::set_sky_culture(string _sky_culture, const string& _font_fileName, int barx, int bary)
@@ -110,8 +91,6 @@ int Constellation_mgr::set_sky_culture(string _sky_culture, const string& _font_
 int Constellation_mgr::load(const string& fileName, const string& artfileName, Hip_Star_mgr * _VouteCeleste, const string& _font_fileName, int barx, int bary)
 {
   printf(_("Loading constellation data...\n"));
-
-  JustLoaded=1;
 
   FILE * fic = fopen(fileName.c_str(),"r");
   if (!fic) {
@@ -289,45 +268,47 @@ void Constellation_mgr::draw(Projector* prj) const
     glDisable(GL_BLEND);
     glColor3fv(lines_color);
     prj->set_orthographic_projection();	// set 2D coordinate
-    vector<Constellation *>::const_iterator iter;
-    for(iter=asterisms.begin();iter!=asterisms.end();++iter)
-    {
-      (*iter)->draw_optim(prj);
-    }
+	
+	if (selected)
+	{
+		selected->draw_optim(prj);
+	}
+	else
+	{
+		vector<Constellation *>::const_iterator iter;
+		for(iter=asterisms.begin();iter!=asterisms.end();++iter)
+		{
+		(*iter)->draw_optim(prj);
+		}
+	}
     prj->reset_perspective_projection();
 }
 
-// Draw one constellation of internationnal name abr
-void Constellation_mgr::draw(Projector* prj, char abr[4]) const
-{
-	vector<Constellation *>::const_iterator iter;
-    for(iter=asterisms.begin();iter!=asterisms.end();iter++)
-    {
-		if (!strcmp((*iter)->short_name,abr)) break;
-	}
-    (*iter)->draw(prj, lines_color);
-}
 
-void Constellation_mgr::draw_art(Projector* prj, navigator* nav, int delta_time)
+void Constellation_mgr::draw_art(Projector* prj, navigator* nav)
 {
 	glBlendFunc(GL_ONE, GL_ONE);
 	glEnable(GL_TEXTURE_2D);
 	glEnable(GL_BLEND);
 	glEnable(GL_CULL_FACE);
 
-	if(JustLoaded) {
-	  // so that newly loaded art will fade in, even if it took
-	  // longer than fade time to load the textures
-	  JustLoaded=0;
-	  delta_time = 1;
-	}
-
+	// for fade in
+	glColor3f(art_switch->get_interstate(),art_switch->get_interstate(),art_switch->get_interstate());
+	
 	prj->set_orthographic_projection();
-    vector<Constellation *>::const_iterator iter;
-    for(iter=asterisms.begin();iter!=asterisms.end();++iter)
-    {
-		(*iter)->draw_art_optim(prj, nav, delta_time);
-    }
+	
+	if (selected)
+	{
+		selected->draw_art_optim(prj, nav);
+	}
+	else
+	{
+		vector<Constellation *>::const_iterator iter;
+		for(iter=asterisms.begin();iter!=asterisms.end();++iter)
+		{
+			(*iter)->draw_art_optim(prj, nav);
+		}
+	}
 	prj->reset_perspective_projection();
 	glDisable(GL_CULL_FACE);
 }
@@ -340,26 +321,20 @@ void Constellation_mgr::draw_names(Projector* prj, bool _gravity_label)
     glEnable(GL_BLEND);
     glEnable(GL_TEXTURE_2D);
     prj->set_orthographic_projection();	// set 2D coordinate
-	vector<Constellation *>::iterator iter;
-    for(iter=asterisms.begin();iter!=asterisms.end();iter++)
-    {
-		// Check if in the field of view
-    	if ( prj->project_prec_earth_equ_check((*iter)->XYZname, (*iter)->XYname) )
-			(*iter)->draw_name(asterFont, prj);
-    }
-    prj->reset_perspective_projection();
-}
-
-void Constellation_mgr::draw_one_name(Projector* prj, Constellation* c, bool _gravity_label) const
-{
-	Constellation::gravity_label = _gravity_label;
-    glColor3fv(names_color);
-    glEnable(GL_BLEND);
-    glEnable(GL_TEXTURE_2D);
-    prj->set_orthographic_projection();	// set 2D coordinate
-	// Check if in the field of view
-    if ( prj->project_prec_earth_equ_check(c->XYZname, c->XYname) )
-	if (c) c->draw_name(asterFont, prj);
+	if (selected)
+	{
+		selected->draw_name(asterFont, prj);
+	}
+	else
+	{	
+		vector<Constellation *>::iterator iter;
+		for(iter=asterisms.begin();iter!=asterisms.end();iter++)
+		{
+			// Check if in the field of view
+			if ( prj->project_prec_earth_equ_check((*iter)->XYZname, (*iter)->XYname) )
+				(*iter)->draw_name(asterFont, prj);
+		}
+	}
     prj->reset_perspective_projection();
 }
 
@@ -432,22 +407,4 @@ int Constellation_mgr::set_sky_locale(const string& _sky_locale) {
   }
   fclose(cnFile);
   return 1;
-}
-
-void Constellation_mgr::set_art_fade_duration(float duration) 
-{
-  duration*=1000.;
-  if(duration>0){
-    Constellation::art_fade_duration = duration;
-  }
-
-}
-
-void Constellation_mgr::set_art_intensity(float intensity) {
-
-  if(intensity>1) intensity = 1;
-  if(intensity<0) intensity = 0;
-
-  Constellation::max_art_intensity = intensity;
-
 }

@@ -24,11 +24,12 @@
 
 #include <string>
 #include "SDL.h"
-#include "SDL_mixer.h"
+
+#ifdef HAVE_SDL_MIXER_H
+# include "SDL_mixer.h"
 
 class Audio
 {
-
  public:
   Audio(std::string filename, std::string name);
   virtual ~Audio();
@@ -41,8 +42,21 @@ class Audio
  private:
   Mix_Music *track;
   std::string track_name;
-
 };
-
+#else
+// SDL_mixer is not available - no audio
+class Audio
+{
+ public:
+  Audio(std::string filename, std::string name) {;}
+  virtual ~Audio() {;}
+  void play(bool loop) {;}
+  void pause() {;}
+  void resume() {;}
+  void stop() {;}
+  std::string get_name() { return "Compiled with no Audio!"; };
+ private:
+};
+#endif
 
 #endif // _AUDIO_H

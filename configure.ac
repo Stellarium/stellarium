@@ -57,11 +57,13 @@ AM_PATH_SDL($SDL_VERSION,
 )
 CFLAGS="$CFLAGS $SDL_CFLAGS"
 CXXFLAGS="$CXXFLAGS $SDL_CFLAGS"
-LIBS="$LIBS $SDL_LIBS -lSDL_mixer"
+LIBS="$LIBS $SDL_LIBS"
 ;;
 esac
 
-AC_CHECK_HEADERS(byteswap.h)
+AC_CHECK_LIB(SDL_mixer, Mix_OpenAudio,[AC_CHECK_HEADER(SDL_mixer.h),LIBS="$LIBS -lSDL_mixer",], AC_MSG_WARN(*** SDL_mixer library not found - audio features will be deactivated in Stellarium ***))
+
+AC_CHECK_HEADERS(byteswap.h SDL_mixer.h)
 
 dnl assign the package directory variable
 case "$host" in

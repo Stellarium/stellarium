@@ -133,17 +133,17 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
       std::istringstream istr(args["hp"]);
       istr >> hpnum;
       stcore->selected_object = stcore->hip_stars->search(hpnum);
-      stcore->selected_constellation=stcore->asterisms->is_star_in((Hip_Star*)stcore->selected_object);
+      stcore->asterisms->set_selected(stcore->asterisms->is_star_in((Hip_Star*)stcore->selected_object));
       stcore->selected_planet=NULL;
     } else if(args["planet"]!=""){
       stcore->selected_object = stcore->selected_planet = stcore->ssystem->search(args["planet"]);
-      stcore->selected_constellation=NULL;
+      stcore->asterisms->set_selected(NULL);
     } else if(args["nebula"]!=""){
       stcore->selected_object = stcore->nebulas->search(args["nebula"]);
       stcore->selected_planet=NULL;
-      stcore->selected_constellation=NULL;
+      stcore->asterisms->set_selected(NULL);
     } else if(args["constellation"]!=""){
-      stcore->selected_constellation = stcore->asterisms->find_from_short_name(args["constellation"]);
+      stcore->asterisms->set_selected(stcore->asterisms->find_from_short_name(args["constellation"]));
       stcore->selected_object = NULL;
       stcore->selected_planet=NULL;
     }
@@ -156,7 +156,7 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
   } else if (command == "deselect") {
     stcore->selected_object = NULL;
     stcore->selected_planet = NULL;
-    stcore->selected_constellation = NULL;
+    stcore->asterisms->set_selected(NULL);
 
   } else if(command == "autozoom") {
 
