@@ -57,6 +57,8 @@ public:
 	void init_tui(void);
 	void draw_tui(void);		// Display the tui
 	int handle_keys_tui(SDLKey key, s_tui::S_TUI_VALUE state);
+	// Update all the tui widgets with values taken from the core parameters
+	void tui_update_widgets(void);
 
 private:
 	stel_core * core;		// The main core can be access because stel_ui is a friend class
@@ -165,6 +167,7 @@ private:
 	s_tui::Boolean_item* tui_refpoints_azimutalgrid;
 
 	// 7. Effect
+	s_tui::MultiSet_item<string>* tui_effect_landscape;
 	s_tui::Boolean_item* tui_effect_atmosphere;
 
 	// 8. Administration
@@ -174,9 +177,14 @@ private:
 	s_tui::Action_item* tui_admin_updateme;
 
 	// Tui Callbacks
-	void tui_cb1(void);
-	void tui_cb_settimezone(void);
-	void tui_cb_actualtime(void);
+	void tui_cb1(void);						// Update all the core flags and params from the tui
+	void tui_cb_settimezone(void);			// Set time zone
+	void tui_cb_actualtime(void);			// Set sky time as current
+	void tui_cb_admin_load_default(void);	// Load default configuration
+	void tui_cb_admin_save_default(void);	// Save default configuration
+	void tui_cb_admin_set_locale(void);		// Set locale parameter (LANG)
+	void tui_cb_admin_updateme(void);		// Launch script for internet update
+
 };
 
 #endif  //_STEL_UI_H

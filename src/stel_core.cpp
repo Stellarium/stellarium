@@ -208,6 +208,7 @@ void stel_core::update(int delta_time)
 	if (sky_brightness<0) sky_brightness=0;
 
 	ui->update();
+	ui->tui_update_widgets();
 }
 
 // Execute all the drawing functions

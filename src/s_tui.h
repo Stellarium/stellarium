@@ -258,7 +258,7 @@ namespace s_tui
     {
     public:
 		ActionConfirm_item(const string& _label = "", const string& sp = "Enter/Escape",
-			const string& sc = "Are you sure? (Enter/Escape)") :
+			const string& sc = "Are you sure ? (Enter/Escape)") :
 				Action_item(_label, sp), isConfirming(false), string_confirm(sc) {;}
 		virtual bool onKey(SDLKey, S_TUI_VALUE);
 		virtual string getString(void);
@@ -300,7 +300,7 @@ namespace s_tui
 		}
 		void addItem(const T& newitem) {items.insert(newitem); if(current==items.end()) current = items.begin();}
 		const T& getCurrent(void) const {if(current==items.end()) return emptyT; else return *current;}
-		bool setCurrent(const T& i) {current = items.find(i);}
+		void setCurrent(const T& i) {current = items.find(i);}
     protected:
 		T emptyT;
 		multiset<T> items;
