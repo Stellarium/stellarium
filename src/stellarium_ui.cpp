@@ -395,7 +395,7 @@ void initUi(void)
     char tempName[255];
     strcpy(tempName,global.DataDir);
     strcat(tempName,"spacefont.txt");
-    spaceFont = new s_font(0.013*global.X_Resolution, "spacefont", tempName);
+    spaceFont = new s_font(13, "spacefont", tempName);
     if (!spaceFont)
     {
         printf("ERROR WHILE CREATING FONT\n");
@@ -403,9 +403,6 @@ void initUi(void)
     }
     
     /*** Colors ***/
-    //vec3_t clBlue(0.3,0.3,1.0);
-    //vec3_t clRed(1.0,0.3,0.3);
-    //vec3_t clGreen(0.3,1.0,0.3);
     vec3_t clWhite(1.,1.,1.);
     
     /*** Graphic Context ***/
@@ -425,7 +422,7 @@ void initUi(void)
 
 /**********************************************************************************/
 /*** Flag Buttons list ***/
-    int btSize=4*avgCharLen;
+    int btSize=24;
     int xpos=0;
     vec2_i pos(xpos,0);
     vec2_i btsz(btSize,btSize);
@@ -445,7 +442,7 @@ void initUi(void)
 
     /*** Button container ***/
     ContainerBtFlags = new FilledContainer();
-    ContainerBtFlags->reshape(0,global.Y_Resolution-btSize,btSize*11+1,btSize+1);
+    ContainerBtFlags->reshape(0,global.Y_Resolution-btSize,btSize*11,btSize);
     ContainerBtFlags->addComponent(BtConstellationsDraw);
     ContainerBtFlags->addComponent(BtConstellationsName);
     ContainerBtFlags->addComponent(BtAzimutalGrid);
@@ -500,7 +497,7 @@ F1/F2 : fullscreen window/small window\n\
     ,gc->getFont());
     HelpTextLabel->reshape(avgCharLen*2,lineHeight,45*avgCharLen,35*lineHeight);
 
-    HelpWin = new StdBtWin(global.X_Resolution/2-25*avgCharLen, global.Y_Resolution/2-30*lineHeight/2, 48*avgCharLen, 35*(lineHeight+1), "Help", Base);
+    HelpWin = new StdBtWin(global.X_Resolution/2-25*avgCharLen, global.Y_Resolution/2-30*lineHeight/2, 48*avgCharLen, 35*(lineHeight+1), "Help", Base, spaceFont);
     HelpWin->addComponent(HelpTextLabel);
     HelpWin->setVisible(global.FlagHelp);
     HelpWin->setHideCallback(HelpWinHideCallback);
@@ -532,7 +529,7 @@ Boston, MA  02111-1307, USA.\n"
     ,gc->getFont());
     InfoTextLabel->reshape(avgCharLen*3,lineHeight,62*avgCharLen,35*lineHeight);
     
-    InfoWin = new StdBtWin(global.X_Resolution/2-25*avgCharLen, global.Y_Resolution/2-30*lineHeight/2, 67*avgCharLen, 25*(lineHeight+1), "About Stellarium", Base);
+    InfoWin = new StdBtWin(global.X_Resolution/2-25*avgCharLen, global.Y_Resolution/2-30*lineHeight/2, 67*avgCharLen, 25*(lineHeight+1), "About Stellarium", Base, spaceFont);
     InfoWin->addComponent(InfoTextLabel);
     InfoWin->setVisible(global.FlagInfos);
     InfoWin->setHideCallback(InfoWinHideCallback);
@@ -758,7 +755,7 @@ Boston, MA  02111-1307, USA.\n"
     LocationConfigContainer->addComponent(SaveLocation);
 
     /*** Config window ***/
-    ConfigWin = new StdBtWin(40, 40, 63*avgCharLen, 22*(lineHeight+1), "Configuration", Base);
+    ConfigWin = new StdBtWin(40, 40, 63*avgCharLen, 22*(lineHeight+1), "Configuration", Base, spaceFont);
     ConfigWin->addComponent(StarConfigContainer);
     ConfigWin->addComponent(LandscapeConfigContainer);
     ConfigWin->addComponent(LocationConfigContainer);
@@ -767,8 +764,8 @@ Boston, MA  02111-1307, USA.\n"
 
 /**********************************************************************************/
 /*** Time control win ***/
-    TimeControlWin = new StdBtWin(gc->winW-140, gc->winH-lineHeight, 0, 0, "Time Control", Base);
-    TimeControlWin->setInSize(vec2_i(140,lineHeight+2),*gc);
+    TimeControlWin = new StdBtWin(gc->winW-140, gc->winH-lineHeight, 0, 0, "Time Control", Base, spaceFont);
+    TimeControlWin->setInSize(vec2_i(140,lineHeight+2));
     TimeControlWin->setHideCallback(TimeControlWinHideCallback);
 
     TimeControlContainer = new Container();
@@ -814,7 +811,7 @@ Boston, MA  02111-1307, USA.\n"
 /*** Base container ***/
     Base = new Container();
     // Seems to be 1,1 in linux
-    Base->reshape(1,1,global.X_Resolution,global.Y_Resolution);
+    Base->reshape(0,0,global.X_Resolution,global.Y_Resolution);
     Base->addComponent(ContainerBtFlags);
     Base->addComponent(btLegend);
     Base->addComponent(InfoSelectLabel);
@@ -823,7 +820,6 @@ Boston, MA  02111-1307, USA.\n"
     Base->addComponent(HelpWin);
     Base->addComponent(ConfigWin);
     Base->addComponent(TimeControlWin);
-    
 }
 
 
@@ -977,13 +973,17 @@ void updateInfoSelectString(void)
 
 /*******************************************************************/
 void renderUi()
-{   setOrthographicProjection(global.X_Resolution, global.Y_Resolution);    // 2D coordinate
+{   
+    setOrthographicProjection(global.X_Resolution, global.Y_Resolution);    // 2D coordinate
     glPushMatrix();
     glLoadIdentity();
 
     updateStandardWidgets();
 
     glEnable(GL_SCISSOR_TEST);
+    vec2_i sz = Base->getSize();
+    glScissor(gc->scissorPos[0], gc->winH - gc->scissorPos[1] - sz[1], sz[0], sz[1]);
+    
     Base->render(*gc);
     glDisable(GL_SCISSOR_TEST);
     glPopMatrix();
