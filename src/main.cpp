@@ -366,22 +366,19 @@ int main (int argc, char **argv)
         glutGameModeString(str);     // define resolution, color depth
         if (glutGameModeGet(GLUT_GAME_MODE_POSSIBLE))   // enter full screen
         {
-	    glutEnterGameMode();
+	    	glutEnterGameMode();
         }
         else                         // Error
         {   
-	    printf("\nWARNING : Unsuported screen mode, please edit the %sconfig.txt file with the best options for your computer.\n I try to run in Windowed mode...\n",global.ConfigDir);
-	    global.Fullscreen = 0;
-            
+	    	printf("\nWARNING : True fullscreen is unsuported.\n Try to run in Windowed mode...\n");
+	    	global.Fullscreen = 0;
+        	dumpConfig();
         }
     }
     if (!global.Fullscreen)          // Windowed mode
     {  
-	glutCreateWindow(APP_NAME);
+		glutCreateWindow(APP_NAME);
         glutFullScreen();            // Windowed fullscreen mode
-        //global.X_Resolution = glutGet(GLUT_SCREEN_WIDTH);
-        //global.Y_Resolution = glutGet(GLUT_SCREEN_HEIGHT);
-        //glutReshapeWindow(global.X_Resolution, global.Y_Resolution);
     }
 
     glutIgnoreKeyRepeat(1);
