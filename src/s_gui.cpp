@@ -490,15 +490,15 @@ void Textured_Button::render(GraphicsContext& gc)
 Label::Label(char * _label) : 
         Component(),
         label(NULL),
-        theFont(NULL), 
+        theFont(NULL),
         colour(vec3_t( -1, -1, -1))
 {
     setLabel(_label);
     passThru = true;
 }
 
-Label::Label(char * _label, s_font * _theFont) : 
-        Component(), 
+Label::Label(char * _label, s_font * _theFont) :
+        Component(),
         label(NULL),
         theFont(_theFont),
         colour(vec3_t( -1, -1, -1))

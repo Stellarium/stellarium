@@ -59,7 +59,8 @@ int Nebula::Read(FILE * catalogue)
     char * cc;
     cc=strchr(Name,'_');
     while(cc!=NULL)
-    {   (*cc)=' ';
+    {
+		(*cc)=' ';
         cc=strchr(Name,'_');
     }
     
@@ -71,22 +72,23 @@ int Nebula::Read(FILE * catalogue)
     sphe_to_rect(RaRad,DecRad,&XYZ);
     XYZ*=RAYON;
 
-    matTransfo=new float[16];   // Used to store the precalc transfos matrix used to draw the star
+    matTransfo=new float[16];   // Used to store the precalc transfos matrix
 
     glLoadIdentity();           // Init the current matrix
 
-    // Precalcul de la matrice de Positionnement/Rotation pour le dessin
+    // Precomputation of the rotation/translation matrix
     glTranslatef(XYZ[0],XYZ[1],XYZ[2]);
-    glRotatef(RaRad*180/M_PI,0,1,0);
-    glRotatef(DecRad*180/M_PI,-1,0,0);
-    glRotatef(Rotation,0,0,1);
+    glRotatef(RaRad*180./M_PI,0,0,1);
+    glRotatef(DecRad*180./M_PI,0,-1,0);
+    glRotatef(Rotation,1,0,0);
     glGetFloatv(GL_MODELVIEW_MATRIX , matTransfo);  // Store the matrix
 
     RayonPrecalc=RAYON*sin(Taille/2/60*M_PI/180);
     //printf("rayon : %f\n",RayonPrecalc);
 
     if (Messier>0)      //Load texture for Messiers
-    {   int temp = ReadTexture();
+    {
+		int temp = ReadTexture();
         return temp;
     }
     return 0;
@@ -105,21 +107,21 @@ void Nebula::Draw()
     glEnable(GL_TEXTURE_2D);
     glEnable(GL_BLEND);
     glPushMatrix();
-    glMultMatrixf(matTransfo);          // recuperation de la matrice calculé au chargement
+    glMultMatrixf(matTransfo);          // reload the matrix precomputed while loading
 
     float cmag=(1-Mag/12)*2;
     glColor3f(cmag,cmag,cmag);
     glBindTexture (GL_TEXTURE_2D, nebTexture->getID());
     
     glBegin(GL_TRIANGLE_STRIP);
-        glTexCoord2i(1,0);              //Bas Droite
-        glVertex3f(RayonPrecalc,-RayonPrecalc,0.0f);
-        glTexCoord2i(0,0);              //Bas Gauche
-        glVertex3f(-RayonPrecalc,-RayonPrecalc,0.0f);
-        glTexCoord2i(1,1);              //Haut Droit
-        glVertex3f(RayonPrecalc,RayonPrecalc,0.0f);
-        glTexCoord2i(0,1);              //Haut Gauche
-        glVertex3f(-RayonPrecalc,RayonPrecalc,0.0f);
+        glTexCoord2i(1,0);              // Bottom Right
+        glVertex3f(0.0f,-RayonPrecalc,-RayonPrecalc);
+        glTexCoord2i(0,0);              // Bottom Left
+        glVertex3f(0.0f, RayonPrecalc,-RayonPrecalc);
+        glTexCoord2i(1,1);              // Top Right
+        glVertex3f(0.0f,-RayonPrecalc, RayonPrecalc);
+        glTexCoord2i(0,1);              // Top Left
+        glVertex3f(0.0f, RayonPrecalc, RayonPrecalc);
     glEnd ();
 
     glPopMatrix();  
@@ -135,13 +137,13 @@ void Nebula::DrawCircle(void)
     glPushMatrix();
     glTranslatef(XY[0],global.Y_Resolution-XY[1],0);
     glBegin(GL_TRIANGLE_STRIP);
-        glTexCoord2i(1,0);              //Bas Droite
+        glTexCoord2i(1,0);              // Bottom Right
         glVertex3f(4,-4,0.0f);
-        glTexCoord2i(0,0);              //Bas Gauche
+        glTexCoord2i(0,0);              // Bottom Left
         glVertex3f(-4,-4,0.0f);
-        glTexCoord2i(1,1);              //Haut Droit
+        glTexCoord2i(1,1);              // Top Right
         glVertex3f(4,4,0.0f);
-        glTexCoord2i(0,1);              //Haut Gauche
+        glTexCoord2i(0,1);              // Top Left
         glVertex3f(-4,4,0.0f);
     glEnd ();
     glPopMatrix(); 

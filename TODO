@@ -1,12 +1,11 @@
 Stellarium TODO list :
 
 Known bugs :
-* Moon position is quite unaccurate.
 * Very big zooming makes objects "shaky" : arithmetic precision?
-* On unix, configuration files might conflict between versions.
 * When windows overlap, strange behaviour can appears.
 
 Important features :
+* Redo the atmosphere rendering properly
 * A way to enter exact time from within the program.
     - need the implementation of the widget "edit" in gui.
 * Selection of any object available in a list.
