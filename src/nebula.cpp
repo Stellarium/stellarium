@@ -37,6 +37,13 @@ Nebula::~Nebula()
     if (nebTexture) delete nebTexture;
 }
 
+void Nebula::get_info_string(char * s)
+{
+	float tempDE, tempRA;
+	rect_to_sphe(&tempRA,&tempDE,&XYZ);
+	sprintf(s,"Name : %s (NGC %u)\nRA : %s\nDE : %s\nMag : %.2f", Name, NGC, print_angle_hms(tempRA*180./M_PI), print_angle_dms_stel(tempDE*180./M_PI), Mag);
+}
+
 int Nebula::Read(FILE * catalogue)
 // Lis les infos de la nébuleuse dans le fichier et calcule x,y et z;
 {

@@ -31,13 +31,14 @@ friend class Nebula_mgr;
 public:
     Nebula();
     virtual ~Nebula();
+	void get_info_string(char *);
     int Read(FILE *);       // Read the Nebulae data in the stream
     void Draw();            // Draw the nebulae
     void DrawName();
     void DrawCircle();
     int ReadTexture();
 	unsigned char get_type(void) {return STEL_OBJECT_NEBULA;}
-	Vec3d get_equ_pos(void) {return XYZ;}
+	Vec3d get_earth_equ_pos(void) {return Vec3d(XYZ[0],XYZ[1],XYZ[2]);}
 private:
     static s_texture * texCircle;
     short posDash;
@@ -46,7 +47,7 @@ private:
     unsigned int NGC;       // NGC catalog number
     char Name[40];          // Nebulae Name
     float Mag;              // Apparent magnitude
-    Vec3d XYZ;             // Cartesian position
+    Vec3f XYZ;             // Cartesian position
     char Type[4];           // Nebulae type
     double XY[3];           // 2D Position
     double RaRad;            // Right Ascention in radians

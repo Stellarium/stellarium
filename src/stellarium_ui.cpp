@@ -531,7 +531,7 @@ Boston, MA  02111-1307, USA.\n"
 /**********************************************************************************/
 /*** InfoSelect TextLabel ***/
     InfoSelectLabel = new FilledTextLabel("Info",gc->getFont());
-    InfoSelectLabel->reshape(3,lineHeight+2,avgCharLen*50,7*lineHeight);
+    InfoSelectLabel->reshape(3,lineHeight+2,avgCharLen*50,6*lineHeight);
     InfoSelectLabel->setVisible(false);
 
 /**********************************************************************************/
@@ -892,7 +892,7 @@ void GuiHandleClic(Uint16 x, Uint16 y, Uint8 state, Uint8 button)
         {
 			if (selected_object)
             {
-				navigation.move_to(selected_object->get_equ_pos());
+				navigation.move_to(selected_object->get_earth_equ_pos());
             }
         }
         if (button==SDL_BUTTON_LEFT)
@@ -1017,7 +1017,7 @@ bool GuiHandleKeys(SDLKey key, int state)
 		}
         if(key==SDLK_SPACE)
         {	
-        	if (selected_object) navigation.move_to(selected_object->get_equ_pos());
+        	if (selected_object) navigation.move_to(selected_object->get_earth_equ_pos());
 		}
         if(key==SDLK_i)
         {	
