@@ -10,10 +10,7 @@
 #include <functional>
 #include <algorithm>
 #include <cmath>
-//#include <cassert>
-//#include <celmath/mathlib.h>
-//#include <celmath/solve.h>
-//#include "astro.h"
+
 #include "solve.h"
 #include "orbit.h"
 

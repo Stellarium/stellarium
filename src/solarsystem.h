@@ -24,6 +24,7 @@
 
 #include "stellarium.h"
 #include "planet.h"
+#include "orbit.h"
 
 class SolarSystem
 {
@@ -57,7 +58,8 @@ private:
 
 	s_font* planet_name_font;
 	void load(const char* planetfile);	// Load the bodies data from a file
-	vector<planet*> system_planets;	// Vector containing all the bodies of the system
+	vector<planet*> system_planets;		// Vector containing all the bodies of the system
+	vector<EllipticalOrbit*> ell_orbits;			// Pointers on created elliptical orbits
 };
 
 

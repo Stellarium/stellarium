@@ -30,12 +30,15 @@ SolarSystem::SolarSystem() : sun(NULL), moon(NULL), earth(NULL)
 
 SolarSystem::~SolarSystem()
 {
-    vector<planet*>::iterator iter = system_planets.begin();
-    while (iter != system_planets.end())
+    for(vector<planet*>::iterator iter = system_planets.begin(); iter != system_planets.end(); ++iter)
     {
         if (*iter) delete *iter;
 		*iter = NULL;
-        ++iter;
+    }
+    for(vector<EllipticalOrbit*>::iterator iter = ell_orbits.begin(); iter != ell_orbits.end(); ++iter)
+    {
+        if (*iter) delete *iter;
+		*iter = NULL;
     }
 	sun = NULL;
 	moon = NULL;
@@ -73,6 +76,29 @@ void SolarSystem::load(const char* planetfile)
 		const char* funcname = pd.get_str(secname, "coord_func");
 
 		pos_func_type posfunc = NULL;
+
+		if (!strcmp(funcname, "ell_orbit"))
+		{
+			// Read the orbital elements
+			double period = pd.get_double(secname, "orbit_Period");
+			double epoch = pd.get_double(secname, "orbit_Epoch");
+			double semi_major_axis = pd.get_double(secname, "orbit_SemiMajorAxis")/AU;
+			double eccentricity = pd.get_double(secname, "orbit_Eccentricity");
+			double inclination = pd.get_double(secname, "orbit_Inclination")*M_PI/180.;
+			double ascending_node = pd.get_double(secname, "orbit_AscendingNode")*M_PI/180.;
+			double long_of_pericenter = pd.get_double(secname, "orbit_LongOfPericenter")*M_PI/180.;
+			double mean_longitude = pd.get_double(secname, "orbit_MeanLongitude")*M_PI/180.;
+
+			double arg_of_pericenter = long_of_pericenter - ascending_node;
+			double anomaly_at_epoch = mean_longitude - (arg_of_pericenter + ascending_node);
+			double pericenter_distance = semi_major_axis * (1.0 - eccentricity);
+
+			// Create an elliptical orbit
+			EllipticalOrbit* orb = new EllipticalOrbit(pericenter_distance, eccentricity, inclination, ascending_node,
+				arg_of_pericenter, anomaly_at_epoch, period, epoch);
+			ell_orbits.push_back(orb);
+			posfunc = makeFunctor((p_pos_func_type)0, *orb, &EllipticalOrbit::positionAtTime);
+		}
 
 		if (!strcmp(funcname, "sun_special"))
 			posfunc = makeFunctor((p_pos_func_type)0,get_sun_helio_coords);
@@ -117,7 +143,7 @@ void SolarSystem::load(const char* planetfile)
 		// Create the planet and add it to the list
 		planet* p = new planet(tname, pd.get_boolean(secname, "halo"),
 			pd.get_boolean(secname, "lightning"), pd.get_double(secname, "radius")/AU,
-			str_to_vec3f(pd.get_str(secname, "color")),
+			str_to_vec3f(pd.get_str(secname, "color")), pd.get_double(secname, "albedo"),
 			pd.get_str(secname, "tex_map"), pd.get_str(secname, "tex_halo"), posfunc);
 
 		const char * str_parent = pd.get_str(secname, "parent");
