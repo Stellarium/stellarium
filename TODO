@@ -1,5 +1,8 @@
 Stellarium TODO list :
 
+Stop using the glpng library which is the cause of bugs and which is not very portable.
+Need to make stellarium own texture loader using for example SDL_image library.
+
 Important features :
 * A way to enter exact time from within the program.
     - need the implementation of the widget "edit" in gui.

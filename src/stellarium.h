@@ -46,6 +46,5 @@
 #define AU 149597870.691
 #define MY_MAX(a,b) (((a)>(b))?(a):(b))
 #define MY_MIN(a,b) (((a)<(b))?(a):(b))
-#define code_not_reached() check_assertion( 0, "supposedly unreachable code reached!" )
 
 #endif /*_STELLARIUM_H_*/
