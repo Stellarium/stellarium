@@ -191,6 +191,28 @@ void Hip_Star::draw(void)
     glEnd();
 }
 
+void Hip_Star::draw_point(void)
+{
+	static float cmag;
+	glDisable(GL_TEXTURE_2D);
+    // Compute the equivalent star luminance for a 5 arc min circle and convert it
+	// in function of the eye adaptation
+	cmag = eye->adapt_luminance(term1);
+	cmag = cmag/powf(proj->get_fov(),0.85f)*50.f;
+
+    // Calculation of the luminosity
+    // Random coef for star twinkling
+    cmag*=(1.-twinkle_amount*rand()/RAND_MAX);
+
+	// Global scaling
+	cmag*=star_mag_scale;
+
+    glColor3fv(RGB*(cmag/MaxColorValue));
+    glBegin(GL_POINTS);
+		glVertex2f(XY[0],XY[1]);
+    glEnd();
+}
+
 void Hip_Star::draw_name(const s_font* star_font)
 {   
     glColor3fv(RGB*(1./2.5));
