@@ -111,6 +111,8 @@ void Hip_Star_mgr::load(const string& font_fileName, const string& hipCatFile,
 
     StarArraySize = catalogSize;//120417;
 
+    printf("Star catalog: %d stars\n", StarArraySize);
+
     // Create the sequential array
     StarArray = new Hip_Star*[StarArraySize];
 	for (int i=0;i<StarArraySize;++i)
@@ -177,7 +179,12 @@ void Hip_Star_mgr::load(const string& font_fileName, const string& hipCatFile,
 
     fclose(hipFile);
 
-	starTexture = new s_texture("star16x16",TEX_LOAD_TYPE_PNG_SOLID);  // Load star texture
+    // sort stars by magnitude for faster rendering
+    for(int i=0;i < HipGrid.getNbPoints();i++) {
+      std::sort( starZones[i].begin(), starZones[i].end(), std::not2(Hip_Star_Mag_Comparer()));
+    }
+
+    starTexture = new s_texture("star16x16",TEX_LOAD_TYPE_PNG_SOLID);  // Load star texture
 
     starFont = new s_font(11.f,"spacefont", font_fileName); // load Font
     if (!starFont)
@@ -263,22 +270,23 @@ void Hip_Star_mgr::draw(float _star_scale, float _star_mag_scale, float _twinkle
 	static vector<Hip_Star *>::iterator end;
 	static vector<Hip_Star *>::iterator iter;
 	for(int i=0;i<nbZones;++i)
-	{
-		end = starZones[zoneList[i]].end();
-    	for(iter = starZones[zoneList[i]].begin(); iter!=end; ++iter)
-    	{
-			// If too small, skip and Compute the 2D position and check if in screen
-			if ((*iter)->Mag>maxMag || !prj->project_earth_equ_check((*iter)->XYZ, (*iter)->XY)) continue;
-			(*iter)->draw();
-			if ((*iter)->CommonName && name_ON && (*iter)->Mag<maxMagStarName)
-            {
-		       	(*iter)->draw_name(starFont);
-               	glBindTexture (GL_TEXTURE_2D, starTexture->getID());
-            }
-	    }
-	}
-
-    prj->reset_perspective_projection();
+	  {
+	    end = starZones[zoneList[i]].end();
+	    for(iter = starZones[zoneList[i]].begin(); iter!=end; ++iter)
+	      {
+		// If too small, skip and Compute the 2D position and check if in screen
+		if((*iter)->Mag>maxMag) break;
+		if(!prj->project_earth_equ_check((*iter)->XYZ, (*iter)->XY)) continue;
+		(*iter)->draw();
+		if ((*iter)->CommonName && name_ON && (*iter)->Mag<maxMagStarName)
+		  {
+		    (*iter)->draw_name(starFont);
+		    glBindTexture (GL_TEXTURE_2D, starTexture->getID());
+		  }
+	      }
+	  }
+	
+	prj->reset_perspective_projection();
 }
 
 // Draw all the stars
@@ -312,17 +320,18 @@ void Hip_Star_mgr::draw_point(float _star_scale, float _star_mag_scale, float _t
 	static vector<Hip_Star *>::iterator iter;
 	for(int i=0;i<nbZones;++i)
 	{
-		end = starZones[zoneList[i]].end();
-    	for(iter = starZones[zoneList[i]].begin(); iter!=end; ++iter)
-    	{
-			// If too small, skip and Compute the 2D position and check if in screen
-			if ((*iter)->Mag>maxMag || !prj->project_earth_equ_check((*iter)->XYZ, (*iter)->XY)) continue;
-			(*iter)->draw_point();
-			if ((*iter)->CommonName && name_ON && (*iter)->Mag<maxMagStarName)
-            {
-		       	(*iter)->draw_name(starFont);
-               	glBindTexture (GL_TEXTURE_2D, starTexture->getID());
-            }
+	  end = starZones[zoneList[i]].end();
+	  for(iter = starZones[zoneList[i]].begin(); iter!=end; ++iter)
+	    {
+	      // If too small, skip and Compute the 2D position and check if in screen
+	      if((*iter)->Mag>maxMag) break;
+	      if(!prj->project_earth_equ_check((*iter)->XYZ, (*iter)->XY)) continue;
+	      (*iter)->draw_point();
+	      if ((*iter)->CommonName && name_ON && (*iter)->Mag<maxMagStarName)
+		{
+		  (*iter)->draw_name(starFont);
+		  glBindTexture (GL_TEXTURE_2D, starTexture->getID());
+		}
 	    }
 	}
 
