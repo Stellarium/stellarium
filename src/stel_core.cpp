@@ -77,6 +77,7 @@ void stel_core::init(void)
 	observatory->load(ConfigDir + config_file, "init_location");
 
 	navigation = new navigator(observatory);
+	navigation->set_viewing_mode(ViewingMode);
 	if (StartupTimeMode=="preset" || StartupTimeMode=="Preset")
 		navigation->set_JDay(PresetSkyTime - observatory->get_GMT_shift(PresetSkyTime) * JD_HOUR);
 	else navigation->set_JDay(get_julian_from_sys());
@@ -89,8 +90,8 @@ void stel_core::init(void)
 	atmosphere = new stel_atmosphere();
 	tone_converter = new tone_reproductor();
 
-	equ_grid = new SkyGrid(EQUATORIAL, EquatorialColor);
-	azi_grid = new SkyGrid(ALTAZIMUTAL, AzimuthalColor);
+	equ_grid = new SkyGrid(EQUATORIAL, EquatorialColor, DataDir + "spacefont.txt", "spacefont");
+	azi_grid = new SkyGrid(ALTAZIMUTAL, AzimuthalColor, DataDir + "spacefont.txt", "spacefont");
 	equator_line = new SkyLine(EQUATOR, EquatorColor);
 	ecliptic_line = new SkyLine(ECLIPTIC, EclipticColor);
 
@@ -123,8 +124,7 @@ void stel_core::init(void)
     nebulas->read(DataDir + "spacefont.txt", DataDir + "messier.fab");
 
 	// Create and init the solar system
-	ssystem->init(DataDir + "spacefont.txt", DataDir + "ssystem.ini");
-	ssystem->set_planet_font_color(PlanetNamesColor);
+	ssystem->init(DataDir + "spacefont.txt", DataDir + "ssystem.ini", PlanetNamesColor );
 
 	landscape = Landscape::create_from_file(DataDir + "landscapes.ini", observatory->get_landscape_name());
 
@@ -488,6 +488,19 @@ void stel_core::load_config_from(const string& confFile)
 	auto_move_duration	= conf.get_double ("navigation","auto_move_duration",1.5);
 	FlagUTC_Time		= conf.get_boolean("navigation:flag_utc_time");
 
+	// Viewing Mode
+	tmpstr = conf.get_str("navigation:viewing_mode");
+	if (tmpstr=="equator") ViewingMode = VIEW_EQUATOR;
+	else
+	{
+		if (tmpstr=="horizon") ViewingMode = VIEW_HORIZON;
+		else
+		{
+			cout << "ERROR : Unknown viewing mode type : " << tmpstr << endl;
+			ViewingMode = VIEW_HORIZON;
+		}
+	}
+
 	// Landscape section
 	FlagGround			= conf.get_boolean("landscape:flag_ground");
 	FlagHorizon			= conf.get_boolean("landscape:flag_horizon");
@@ -602,6 +615,13 @@ void stel_core::save_config_to(const string& confFile)
 	conf.set_str	("navigation:init_view_pos", vec3f_to_str(InitViewPos));
 	conf.set_double ("navigation:auto_move_duration", auto_move_duration);
 	conf.set_boolean("navigation:flag_utc_time", FlagUTC_Time);
+	switch (ViewingMode)
+	{
+		case VIEW_HORIZON : tmpstr="horizon";	break;
+		case VIEW_EQUATOR : tmpstr="equator";		break;
+		default : tmpstr="horizon";
+	}
+	conf.set_str	("navigation:viewing_mode",tmpstr);
 
 	// Landscape section
 	conf.set_boolean("landscape:flag_ground", FlagGround);
@@ -896,8 +916,22 @@ stel_object * stel_core::clever_find(const Vec3d& v) const
 		projection->project_earth_equ((*iter)->get_earth_equ_pos(navigation), winpos);
 		float distance = sqrt((xpos-winpos[0])*(xpos-winpos[0]) + (ypos-winpos[1])*(ypos-winpos[1]));
 		float mag = (*iter)->get_mag(navigation);
-		if ((*iter)->get_type()==STEL_OBJECT_NEBULA) mag -= 9.f;
-		if ((*iter)->get_type()==STEL_OBJECT_PLANET) mag -= 8.f;
+		if ((*iter)->get_type()==STEL_OBJECT_NEBULA) {
+		  if( FlagNebulaName ) {
+		    // make very easy to select if labeled
+		    mag = -1;
+		  } else {
+		    mag -= 9.f;
+		  }
+		}
+		if ((*iter)->get_type()==STEL_OBJECT_PLANET) {
+		  if( FlagPlanetsHints ) {
+		    // easy to select, especially pluto
+		    mag -= 15.f;
+		  } else {
+		    mag -= 8.f;
+		  }
+		}
 		if (distance + mag < best_object_value)
 		{
 			best_object_value = distance + mag;
