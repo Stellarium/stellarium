@@ -1,11 +1,19 @@
-# Makefile.in generated automatically by automake 1.0 from Makefile.am
+# Makefile.in generated automatically by automake 1.5 from Makefile.am.
 
-# Copyright (C) 1994, 1995, 1996 Free Software Foundation, Inc.
+# Copyright 1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001
+# Free Software Foundation, Inc.
 # This Makefile.in is free software; the Free Software Foundation
-# gives unlimited permission to copy, distribute and modify it.
+# gives unlimited permission to copy and/or distribute it,
+# with or without modifications, as long as this notice is preserved.
 
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY, to the extent permitted by law; without
+# even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+# PARTICULAR PURPOSE.
 
-SHELL = /bin/sh
+@SET_MAKE@
+
+SHELL = @SHELL@
 
 srcdir = @srcdir@
 top_srcdir = @top_srcdir@
@@ -25,18 +33,42 @@ infodir = @infodir@
 mandir = @mandir@
 includedir = @includedir@
 oldincludedir = /usr/include
-
 pkgdatadir = $(datadir)/@PACKAGE@
 pkglibdir = $(libdir)/@PACKAGE@
 pkgincludedir = $(includedir)/@PACKAGE@
-
 top_builddir = ..
+
+ACLOCAL = @ACLOCAL@
+AUTOCONF = @AUTOCONF@
+AUTOMAKE = @AUTOMAKE@
+AUTOHEADER = @AUTOHEADER@
 
 INSTALL = @INSTALL@
 INSTALL_PROGRAM = @INSTALL_PROGRAM@
 INSTALL_DATA = @INSTALL_DATA@
 INSTALL_SCRIPT = @INSTALL_SCRIPT@
+INSTALL_HEADER = $(INSTALL_DATA)
 transform = @program_transform_name@
+NORMAL_INSTALL = :
+PRE_INSTALL = :
+POST_INSTALL = :
+NORMAL_UNINSTALL = :
+PRE_UNINSTALL = :
+POST_UNINSTALL = :
+AMTAR = @AMTAR@
+AWK = @AWK@
+CC = @CC@
+CXX = @CXX@
+DEPDIR = @DEPDIR@
+EXEEXT = @EXEEXT@
+INSTALL_STRIP_PROGRAM = @INSTALL_STRIP_PROGRAM@
+OBJEXT = @OBJEXT@
+PACKAGE = @PACKAGE@
+RANLIB = @RANLIB@
+VERSION = @VERSION@
+am__include = @am__include@
+am__quote = @am__quote@
+install_sh = @install_sh@
 
 EXTRA_DIST = stellarium.PRJ stellarium.rc
 
@@ -48,99 +80,153 @@ stellarium_LDADD = $(top_builddir)/src/glpng/libglpng.a $(top_builddir)/src/astr
 INCLUDES = -I$(top_srcdir)/src/glpng -I$(top_srcdir)/src/astrolib
 
 SUBDIRS = glpng astrolib
-mkinstalldirs = $(top_srcdir)/mkinstalldirs
+subdir = src
+mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
+CONFIG_CLEAN_FILES =
+bin_PROGRAMS = stellarium$(EXEEXT)
 PROGRAMS = $(bin_PROGRAMS)
 
+am_stellarium_OBJECTS = constellation_mgr.$(OBJEXT) nebula_mgr.$(OBJEXT) \
+	planet_mgr.$(OBJEXT) s_gui_window.$(OBJEXT) star.$(OBJEXT) \
+	main.$(OBJEXT) navigation.$(OBJEXT) parsecfg.$(OBJEXT) \
+	s_font.$(OBJEXT) s_texture.$(OBJEXT) star_mgr.$(OBJEXT) \
+	stellarium_ui.$(OBJEXT) draw.$(OBJEXT) constellation.$(OBJEXT) \
+	nebula.$(OBJEXT) planet.$(OBJEXT) s_gui.$(OBJEXT) \
+	s_utility.$(OBJEXT)
+stellarium_OBJECTS = $(am_stellarium_OBJECTS)
+stellarium_DEPENDENCIES = $(top_builddir)/src/glpng/libglpng.a \
+	$(top_builddir)/src/astrolib/libastrolib.a
+stellarium_LDFLAGS =
 
-CC = @CC@
-LEX = @LEX@
-YACC = @YACC@
-
-DEFS = @DEFS@ -I. -I$(srcdir) 
+DEFS = @DEFS@
+DEFAULT_INCLUDES =  -I. -I$(srcdir)
 CPPFLAGS = @CPPFLAGS@
-CFLAGS = @CFLAGS@
 LDFLAGS = @LDFLAGS@
 LIBS = @LIBS@
+depcomp = $(SHELL) $(top_srcdir)/depcomp
+@AMDEP_TRUE@DEP_FILES = $(DEPDIR)/constellation.Po \
+@AMDEP_TRUE@	$(DEPDIR)/constellation_mgr.Po $(DEPDIR)/draw.Po \
+@AMDEP_TRUE@	$(DEPDIR)/main.Po $(DEPDIR)/navigation.Po \
+@AMDEP_TRUE@	$(DEPDIR)/nebula.Po $(DEPDIR)/nebula_mgr.Po \
+@AMDEP_TRUE@	$(DEPDIR)/parsecfg.Po $(DEPDIR)/planet.Po \
+@AMDEP_TRUE@	$(DEPDIR)/planet_mgr.Po $(DEPDIR)/s_font.Po \
+@AMDEP_TRUE@	$(DEPDIR)/s_gui.Po $(DEPDIR)/s_gui_window.Po \
+@AMDEP_TRUE@	$(DEPDIR)/s_texture.Po $(DEPDIR)/s_utility.Po \
+@AMDEP_TRUE@	$(DEPDIR)/star.Po $(DEPDIR)/star_mgr.Po \
+@AMDEP_TRUE@	$(DEPDIR)/stellarium_ui.Po
+COMPILE = $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) \
+	$(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
+CCLD = $(CC)
+LINK = $(CCLD) $(AM_CFLAGS) $(CFLAGS) $(AM_LDFLAGS) $(LDFLAGS) -o $@
+CFLAGS = @CFLAGS@
+CXXCOMPILE = $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) \
+	$(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS)
+CXXLD = $(CXX)
+CXXLINK = $(CXXLD) $(AM_CXXFLAGS) $(CXXFLAGS) $(AM_LDFLAGS) $(LDFLAGS) \
+	-o $@
+CXXFLAGS = @CXXFLAGS@
+DIST_SOURCES = $(stellarium_SOURCES)
 
-COMPILE = $(CC) -c $(DEFS) $(INCLUDES) $(CPPFLAGS) $(CFLAGS)
-LINK = $(CC) $(LDFLAGS) -o $@
-stellarium_OBJECTS = constellation_mgr.cpp nebula_mgr.cpp planet_mgr.cpp \
-s_gui_window.cpp star.cpp VISLIMIT.CPP main.cpp navigation.cpp \
-parsecfg.o s_font.cpp s_texture.cpp star_mgr.cpp stellarium_ui.cpp \
-draw.cpp constellation.cpp nebula.cpp planet.cpp s_gui.cpp \
-s_utility.cpp
-EXTRA_stellarium_SOURCES =
+RECURSIVE_TARGETS = info-recursive dvi-recursive install-info-recursive \
+	uninstall-info-recursive all-recursive install-data-recursive \
+	install-exec-recursive installdirs-recursive install-recursive \
+	uninstall-recursive check-recursive installcheck-recursive
 DIST_COMMON = Makefile.am Makefile.in
-
-
-PACKAGE = @PACKAGE@
-VERSION = @VERSION@
-
-DISTFILES = $(DIST_COMMON) $(SOURCES) $(BUILT_SOURCES) $(HEADERS) \
-	$(TEXINFOS) $(INFOS) $(MANS) $(EXTRA_DIST) $(DATA)
-DEP_DISTFILES = $(DIST_COMMON) $(SOURCES) $(BUILT_SOURCES) $(HEADERS) \
-	$(TEXINFOS) $(INFO_DEPS) $(MANS) $(EXTRA_DIST) $(DATA)
-
-TAR = tar
-DEP_FILES = $(srcdir)/.deps/VISLIMIT.CPP \
-$(srcdir)/.deps/constellation.cpp $(srcdir)/.deps/constellation_mgr.cpp \
-$(srcdir)/.deps/draw.cpp $(srcdir)/.deps/main.cpp \
-$(srcdir)/.deps/navigation.cpp $(srcdir)/.deps/nebula.cpp \
-$(srcdir)/.deps/nebula_mgr.cpp $(srcdir)/.deps/parsecfg.P \
-$(srcdir)/.deps/planet.cpp $(srcdir)/.deps/planet_mgr.cpp \
-$(srcdir)/.deps/s_font.cpp $(srcdir)/.deps/s_gui.cpp \
-$(srcdir)/.deps/s_gui_window.cpp $(srcdir)/.deps/s_texture.cpp \
-$(srcdir)/.deps/s_utility.cpp $(srcdir)/.deps/star.cpp \
-$(srcdir)/.deps/star_mgr.cpp $(srcdir)/.deps/stellarium_ui.cpp
+DIST_SUBDIRS = $(SUBDIRS)
 SOURCES = $(stellarium_SOURCES)
-OBJECTS = $(stellarium_OBJECTS)
 
-default: all
+all: all-recursive
 
-
-$(srcdir)/Makefile.in: Makefile.am $(top_srcdir)/configure.in
-	cd $(top_srcdir) && automake $(subdir)/Makefile
-
-Makefile: $(top_builddir)/config.status Makefile.in
-	cd $(top_builddir) && CONFIG_FILES=$(subdir)/$@ CONFIG_HEADERS= ./config.status
-
-mostlyclean-binPROGRAMS:
-
-clean-binPROGRAMS:
-	rm -f $(bin_PROGRAMS)
-
-distclean-binPROGRAMS:
-
-maintainer-clean-binPROGRAMS:
-
+.SUFFIXES:
+.SUFFIXES: .c .cpp .o .obj
+$(srcdir)/Makefile.in:  Makefile.am  $(top_srcdir)/configure.in $(ACLOCAL_M4)
+	cd $(top_srcdir) && \
+	  $(AUTOMAKE) --gnu  src/Makefile
+Makefile:  $(srcdir)/Makefile.in  $(top_builddir)/config.status
+	cd $(top_builddir) && \
+	  CONFIG_HEADERS= CONFIG_LINKS= \
+	  CONFIG_FILES=$(subdir)/$@ $(SHELL) ./config.status
 install-binPROGRAMS: $(bin_PROGRAMS)
-	$(mkinstalldirs) $(bindir)
-	list="$(bin_PROGRAMS)"; for p in $$list; do \
-	  if test -f $$p; then \
-	    $(INSTALL_PROGRAM) $$p $(bindir)/`echo $$p|sed '$(transform)'`; \
+	@$(NORMAL_INSTALL)
+	$(mkinstalldirs) $(DESTDIR)$(bindir)
+	@list='$(bin_PROGRAMS)'; for p in $$list; do \
+	  p1=`echo $$p|sed 's/$(EXEEXT)$$//'`; \
+	  if test -f $$p \
+	  ; then \
+	    f=`echo $$p1|sed '$(transform);s/$$/$(EXEEXT)/'`; \
+	   echo " $(INSTALL_PROGRAM_ENV) $(INSTALL_PROGRAM) $$p $(DESTDIR)$(bindir)/$$f"; \
+	   $(INSTALL_PROGRAM_ENV) $(INSTALL_PROGRAM) $$p $(DESTDIR)$(bindir)/$$f; \
 	  else :; fi; \
 	done
 
 uninstall-binPROGRAMS:
-	list="$(bin_PROGRAMS)"; for p in $$list; do \
-	  rm -f $(bindir)/`echo $$p|sed '$(transform)'`; \
+	@$(NORMAL_UNINSTALL)
+	@list='$(bin_PROGRAMS)'; for p in $$list; do \
+	  f=`echo $$p|sed 's/$(EXEEXT)$$//;$(transform);s/$$/$(EXEEXT)/'`; \
+	  echo " rm -f $(DESTDIR)$(bindir)/$$f"; \
+	  rm -f $(DESTDIR)$(bindir)/$$f; \
 	done
 
-.c.o:
-	$(COMPILE) $<
+clean-binPROGRAMS:
+	-test -z "$(bin_PROGRAMS)" || rm -f $(bin_PROGRAMS)
+stellarium$(EXEEXT): $(stellarium_OBJECTS) $(stellarium_DEPENDENCIES) 
+	@rm -f stellarium$(EXEEXT)
+	$(CXXLINK) $(stellarium_LDFLAGS) $(stellarium_OBJECTS) $(stellarium_LDADD) $(LIBS)
 
 mostlyclean-compile:
-	rm -f *.o core
-
-clean-compile:
+	-rm -f *.$(OBJEXT) core *.core
 
 distclean-compile:
-	rm -f *.tab.c
+	-rm -f *.tab.c
 
-maintainer-clean-compile:
+@AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/constellation.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/constellation_mgr.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/draw.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/main.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/navigation.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/nebula.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/nebula_mgr.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/parsecfg.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/planet.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/planet_mgr.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/s_font.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/s_gui.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/s_gui_window.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/s_texture.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/s_utility.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/star.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/star_mgr.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/stellarium_ui.Po@am__quote@
 
-stellarium: $(stellarium_OBJECTS) $(stellarium_DEPENDENCIES)
-	$(LINK) $(stellarium_OBJECTS) $(stellarium_LDADD) $(LIBS)
+distclean-depend:
+	-rm -rf $(DEPDIR)
+
+.c.o:
+@AMDEP_TRUE@	source='$<' object='$@' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@	depfile='$(DEPDIR)/$*.Po' tmpdepfile='$(DEPDIR)/$*.TPo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@	$(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+	$(COMPILE) -c `test -f $< || echo '$(srcdir)/'`$<
+
+.c.obj:
+@AMDEP_TRUE@	source='$<' object='$@' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@	depfile='$(DEPDIR)/$*.Po' tmpdepfile='$(DEPDIR)/$*.TPo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@	$(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+	$(COMPILE) -c `cygpath -w $<`
+CCDEPMODE = @CCDEPMODE@
+
+.cpp.o:
+@AMDEP_TRUE@	source='$<' object='$@' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@	depfile='$(DEPDIR)/$*.Po' tmpdepfile='$(DEPDIR)/$*.TPo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+	$(CXXCOMPILE) -c -o $@ `test -f $< || echo '$(srcdir)/'`$<
+
+.cpp.obj:
+@AMDEP_TRUE@	source='$<' object='$@' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@	depfile='$(DEPDIR)/$*.Po' tmpdepfile='$(DEPDIR)/$*.TPo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@	$(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+	$(CXXCOMPILE) -c -o $@ `cygpath -w $<`
+CXXDEPMODE = @CXXDEPMODE@
+uninstall-info-am:
 
 # This directory's subdirectories are mostly independent; you can cd
 # into them and run `make' without going through this Makefile.
@@ -148,177 +234,211 @@ stellarium: $(stellarium_OBJECTS) $(stellarium_DEPENDENCIES)
 # (1) if the variable is set in `config.status', edit `config.status'
 #     (which will cause the Makefiles to be regenerated when you run `make');
 # (2) otherwise, pass the desired values on the `make' command line.
+$(RECURSIVE_TARGETS):
+	@set fnord $(MAKEFLAGS); amf=$$2; \
+	dot_seen=no; \
+	target=`echo $@ | sed s/-recursive//`; \
+	list='$(SUBDIRS)'; for subdir in $$list; do \
+	  echo "Making $$target in $$subdir"; \
+	  if test "$$subdir" = "."; then \
+	    dot_seen=yes; \
+	    local_target="$$target-am"; \
+	  else \
+	    local_target="$$target"; \
+	  fi; \
+	  (cd $$subdir && $(MAKE) $(AM_MAKEFLAGS) $$local_target) \
+	   || case "$$amf" in *=*) exit 1;; *k*) fail=yes;; *) exit 1;; esac; \
+	done; \
+	if test "$$dot_seen" = "no"; then \
+	  $(MAKE) $(AM_MAKEFLAGS) "$$target-am" || exit 1; \
+	fi; test -z "$$fail"
 
-@SET_MAKE@
-
-all-recursive install-data-recursive install-exec-recursive \
-installdirs-recursive install-recursive uninstall-recursive \
-check-recursive installcheck-recursive info-recursive dvi-recursive \
 mostlyclean-recursive clean-recursive distclean-recursive \
 maintainer-clean-recursive:
-	for subdir in $(SUBDIRS); do		\
-	  target=`echo $@ | sed s/-recursive//`; \
-	  echo making $$target in $$subdir;	\
-	  (cd $$subdir && $(MAKE) $$target)	\
-	   || case "$(MFLAGS)" in *k*) fail=yes;; *) exit 1;; esac; \
+	@set fnord $(MAKEFLAGS); amf=$$2; \
+	dot_seen=no; \
+	case "$@" in \
+	  distclean-* | maintainer-clean-*) list='$(DIST_SUBDIRS)' ;; \
+	  *) list='$(SUBDIRS)' ;; \
+	esac; \
+	rev=''; for subdir in $$list; do \
+	  if test "$$subdir" = "."; then :; else \
+	    rev="$$subdir $$rev"; \
+	  fi; \
+	done; \
+	rev="$$rev ."; \
+	target=`echo $@ | sed s/-recursive//`; \
+	for subdir in $$rev; do \
+	  echo "Making $$target in $$subdir"; \
+	  if test "$$subdir" = "."; then \
+	    local_target="$$target-am"; \
+	  else \
+	    local_target="$$target"; \
+	  fi; \
+	  (cd $$subdir && $(MAKE) $(AM_MAKEFLAGS) $$local_target) \
+	   || case "$$amf" in *=*) exit 1;; *k*) fail=yes;; *) exit 1;; esac; \
 	done && test -z "$$fail"
+tags-recursive:
+	list='$(SUBDIRS)'; for subdir in $$list; do \
+	  test "$$subdir" = . || (cd $$subdir && $(MAKE) $(AM_MAKEFLAGS) tags); \
+	done
 
 tags: TAGS
 
-tags-recursive:
-	list="$(SUBDIRS)"; for subdir in $$list; do \
-	  (cd $$subdir && $(MAKE) tags); \
-	done
+ID: $(HEADERS) $(SOURCES) $(LISP) $(TAGS_FILES)
+	list='$(SOURCES) $(HEADERS) $(TAGS_FILES)'; \
+	unique=`for i in $$list; do \
+	    if test -f "$$i"; then echo $$i; else echo $(srcdir)/$$i; fi; \
+	  done | \
+	  $(AWK) '    { files[$$0] = 1; } \
+	       END { for (i in files) print i; }'`; \
+	mkid -fID $$unique $(LISP)
 
-TAGS: tags-recursive $(HEADERS) $(SOURCES) $(CONFIG_HEADER) \
-		$(TAGS_DEPENDENCIES)
+TAGS: tags-recursive $(HEADERS) $(SOURCES)  $(TAGS_DEPENDENCIES) \
+		$(TAGS_FILES) $(LISP)
 	tags=; \
 	here=`pwd`; \
-	for subdir in $(SUBDIRS); do \
-	  test -f $$subdir/TAGS && { \
-	    tags="$$tags -i $$here/$$subdir/TAGS"; \
-	  } \
+	list='$(SUBDIRS)'; for subdir in $$list; do \
+	  if test "$$subdir" = .; then :; else \
+	    test -f $$subdir/TAGS && tags="$$tags -i $$here/$$subdir/TAGS"; \
+	  fi; \
 	done; \
-	test -z "$(ETAGS_ARGS)$(CONFIG_HEADER)$(SOURCES)$(HEADERS)$$tags" \
-	  || etags $(ETAGS_ARGS) $$tags $(CONFIG_HEADER) $(SOURCES) $(HEADERS)
+	list='$(SOURCES) $(HEADERS) $(TAGS_FILES)'; \
+	unique=`for i in $$list; do \
+	    if test -f "$$i"; then echo $$i; else echo $(srcdir)/$$i; fi; \
+	  done | \
+	  $(AWK) '    { files[$$0] = 1; } \
+	       END { for (i in files) print i; }'`; \
+	test -z "$(ETAGS_ARGS)$$unique$(LISP)$$tags" \
+	  || etags $(ETAGS_ARGS) $$tags  $$unique $(LISP)
 
-mostlyclean-tags:
-
-clean-tags:
+GTAGS:
+	here=`CDPATH=: && cd $(top_builddir) && pwd` \
+	  && cd $(top_srcdir) \
+	  && gtags -i $(GTAGS_ARGS) $$here
 
 distclean-tags:
-	rm -f TAGS ID
+	-rm -f TAGS ID GTAGS GRTAGS GSYMS GPATH
 
-maintainer-clean-tags:
+DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
 
-subdir = src
-distdir = $(top_builddir)/$(PACKAGE)-$(VERSION)/$(subdir)
-distdir: $(DEP_DISTFILES)
-	@for file in `cd $(srcdir) && echo $(DISTFILES)`; do \
-	  test -f $(distdir)/$$file \
-	  || ln $(srcdir)/$$file $(distdir)/$$file 2> /dev/null \
-	  || cp -p $(srcdir)/$$file $(distdir)/$$file; \
-	done
-	for subdir in $(SUBDIRS); do		\
-	  test -d $(distdir)/$$subdir		\
-	  || mkdir $(distdir)/$$subdir		\
-	  || exit 1;				\
-	  chmod 777 $(distdir)/$$subdir;	\
-	  (cd $$subdir && $(MAKE) distdir=../$(distdir)/$$subdir distdir) \
+top_distdir = ..
+distdir = $(top_distdir)/$(PACKAGE)-$(VERSION)
+
+distdir: $(DISTFILES)
+	@for file in $(DISTFILES); do \
+	  if test -f $$file; then d=.; else d=$(srcdir); fi; \
+	  dir=`echo "$$file" | sed -e 's,/[^/]*$$,,'`; \
+	  if test "$$dir" != "$$file" && test "$$dir" != "."; then \
+	    $(mkinstalldirs) "$(distdir)/$$dir"; \
+	  fi; \
+	  if test -d $$d/$$file; then \
+	    cp -pR $$d/$$file $(distdir) \
 	    || exit 1; \
+	  else \
+	    test -f $(distdir)/$$file \
+	    || cp -p $$d/$$file $(distdir)/$$file \
+	    || exit 1; \
+	  fi; \
 	done
+	for subdir in $(SUBDIRS); do \
+	  if test "$$subdir" = .; then :; else \
+	    test -d $(distdir)/$$subdir \
+	    || mkdir $(distdir)/$$subdir \
+	    || exit 1; \
+	    (cd $$subdir && \
+	      $(MAKE) $(AM_MAKEFLAGS) \
+	        top_distdir="$(top_distdir)" \
+	        distdir=../$(distdir)/$$subdir \
+	        distdir) \
+	      || exit 1; \
+	  fi; \
+	done
+check-am: all-am
+check: check-recursive
+all-am: Makefile $(PROGRAMS)
+installdirs: installdirs-recursive
+installdirs-am:
+	$(mkinstalldirs) $(DESTDIR)$(bindir)
 
-# This fragment is probably only useful for maintainers.  It relies on
-# GNU make and gcc.  It is only included in the generated Makefile.in
-# if `automake' is not passed the `--include-deps' flag.
+install: install-recursive
+install-exec: install-exec-recursive
+install-data: install-data-recursive
+uninstall: uninstall-recursive
 
-MKDEP = gcc -MM $(DEFS) $(INCLUDES) $(CPPFLAGS) $(CFLAGS)
+install-am: all-am
+	@$(MAKE) $(AM_MAKEFLAGS) install-exec-am install-data-am
 
--include $(srcdir)/.deps/.P
-$(srcdir)/.deps/.P: $(BUILT_SOURCES)
-	cd $(srcdir) && test -d .deps || mkdir .deps
-	echo > $@
+installcheck: installcheck-recursive
+install-strip:
+	$(MAKE) $(AM_MAKEFLAGS) INSTALL_PROGRAM="$(INSTALL_STRIP_PROGRAM)" \
+	  `test -z '$(STRIP)' || \
+	    echo "INSTALL_PROGRAM_ENV=STRIPPROG='$(STRIP)'"` install
+mostlyclean-generic:
 
--include $(DEP_FILES)
-$(DEP_FILES): $(srcdir)/.deps/.P
+clean-generic:
 
-$(srcdir)/.deps/%.P: $(srcdir)/%.c
-	@echo "mkdeps $< > $@"
-	@re=`echo 's,^$(srcdir)//*,,g;s, $(srcdir)//*, ,g' | sed 's,\.,\\\\.,g'`; \
-	  $(MKDEP) $< | sed "$$re" > $@-tmp
-	@if test -n "$o"; then			\
-	  sed 's/\.o:/$$o:/' $@-tmp > $@;	\
-	  rm $@-tmp;				\
-	else					\
-	  mv $@-tmp $@;				\
-	fi
+distclean-generic:
+	-rm -f Makefile $(CONFIG_CLEAN_FILES) stamp-h stamp-h[0-9]*
 
-# End of maintainer-only section
-info: info-recursive
+maintainer-clean-generic:
+	@echo "This command is intended for maintainers to use"
+	@echo "it deletes files that may require special tools to rebuild."
+clean: clean-recursive
+
+clean-am: clean-binPROGRAMS clean-generic mostlyclean-am
+
+distclean: distclean-recursive
+
+distclean-am: clean-am distclean-compile distclean-depend \
+	distclean-generic distclean-tags
 
 dvi: dvi-recursive
 
-check: all check-recursive
+dvi-am:
 
-installcheck: installcheck-recursive
+info: info-recursive
 
-all-am: $(PROGRAMS) Makefile
+info-am:
+
+install-data-am:
 
 install-exec-am: install-binPROGRAMS
 
-uninstall-am: uninstall-binPROGRAMS
+install-info: install-info-recursive
 
-install-exec: install-exec-recursive install-exec-am
+install-man:
 
-install-data: install-data-recursive
+installcheck-am:
 
-install: install-recursive install-exec-am
-	@:
+maintainer-clean: maintainer-clean-recursive
 
-uninstall: uninstall-recursive uninstall-am
+maintainer-clean-am: distclean-am maintainer-clean-generic
 
-all: all-recursive all-am
+mostlyclean: mostlyclean-recursive
 
-install-strip:
-	$(MAKE) INSTALL_PROGRAM='$(INSTALL_PROGRAM) -s' install
-installdirs: installdirs-recursive
-	$(mkinstalldirs)  $(bindir)
+mostlyclean-am: mostlyclean-compile mostlyclean-generic
 
+uninstall-am: uninstall-binPROGRAMS uninstall-info-am
 
-mostlyclean-generic:
-	test -z "$(MOSTLYCLEANFILES)" || rm -f $(MOSTLYCLEANFILES)
+uninstall-info: uninstall-info-recursive
 
-clean-generic:
-	test -z "$(CLEANFILES)" || rm -f $(CLEANFILES)
-
-distclean-generic:
-	rm -f Makefile $(DISTCLEANFILES)
-	rm -f config.cache config.log $(CONFIG_HEADER) stamp-h
-
-maintainer-clean-generic:
-	test -z "$(MAINTAINERCLEANFILES)" || rm -f $(MAINTAINERCLEANFILES)
-	test -z "$(BUILT_SOURCES)" || rm -f $(BUILT_SOURCES)
-mostlyclean-am:  mostlyclean-binPROGRAMS mostlyclean-compile \
-		mostlyclean-tags mostlyclean-generic
-
-clean-am:  clean-binPROGRAMS clean-compile clean-tags clean-generic \
-		mostlyclean-am 
-
-distclean-am:  distclean-binPROGRAMS distclean-compile distclean-tags \
-		distclean-generic clean-am 
-
-maintainer-clean-am:  maintainer-clean-binPROGRAMS \
-		maintainer-clean-compile maintainer-clean-tags \
-		maintainer-clean-generic distclean-am 
-
-mostlyclean:  mostlyclean-am mostlyclean-recursive
-
-clean:  clean-am clean-recursive
-
-distclean:  distclean-am distclean-recursive
-	rm -f config.status
-
-maintainer-clean:  maintainer-clean-am maintainer-clean-recursive
-	@echo "This command is intended for maintainers to use;"
-	@echo "it deletes files that may require special tools to rebuild."
-
-.PHONY: default mostlyclean-binPROGRAMS distclean-binPROGRAMS \
-clean-binPROGRAMS maintainer-clean-binPROGRAMS uninstall-binPROGRAMS \
-install-binPROGRAMS mostlyclean-compile distclean-compile clean-compile \
-maintainer-clean-compile install-data-recursive \
-uninstall-data-recursive install-exec-recursive \
-uninstall-exec-recursive installdirs-recursive uninstalldirs-recursive \
-all-recursive check-recursive installcheck-recursive info-recursive \
-dvi-recursive mostlyclean-recursive distclean-recursive clean-recursive \
-maintainer-clean-recursive tags tags-recursive mostlyclean-tags \
-distclean-tags clean-tags maintainer-clean-tags distdir info dvi check \
-installcheck all-am install-exec-am uninstall-am install-exec \
-install-data install uninstall all installdirs mostlyclean-generic \
-distclean-generic clean-generic maintainer-clean-generic clean \
-mostlyclean distclean maintainer-clean
-
-.SUFFIXES:
-.SUFFIXES: .c .o
+.PHONY: $(RECURSIVE_TARGETS) GTAGS all all-am check check-am clean \
+	clean-binPROGRAMS clean-generic clean-recursive distclean \
+	distclean-compile distclean-depend distclean-generic \
+	distclean-recursive distclean-tags distdir dvi dvi-am \
+	dvi-recursive info info-am info-recursive install install-am \
+	install-binPROGRAMS install-data install-data-am \
+	install-data-recursive install-exec install-exec-am \
+	install-exec-recursive install-info install-info-am \
+	install-info-recursive install-man install-recursive \
+	install-strip installcheck installcheck-am installdirs \
+	installdirs-am installdirs-recursive maintainer-clean \
+	maintainer-clean-generic maintainer-clean-recursive mostlyclean \
+	mostlyclean-compile mostlyclean-generic mostlyclean-recursive \
+	tags tags-recursive uninstall uninstall-am \
+	uninstall-binPROGRAMS uninstall-info-am \
+	uninstall-info-recursive uninstall-recursive
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.
