@@ -51,6 +51,7 @@ protected:
 	float radius;
 	string name;
 	float sky_brightness;
+	bool valid_landscape;   // was a landscape loaded properly?
 };
 
 typedef struct
