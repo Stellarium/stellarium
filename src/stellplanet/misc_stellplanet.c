@@ -23,12 +23,12 @@
 // Transform spheric coordinate in rectangular
 void sphe_to_rect(double lng, double lat, double r, double *x, double *y, double *z)
 {
-	double c = cos(lat);
-    *x = sin(lng) * c;
-    *y = sin(lat);
-    *z = cos(lng) * c;
-	c = r/sqrt((*x) * (*x) + (*y) * (*y) + (*z) * (*z));
-	(*x)*=c;
-	(*y)*=c;
-	(*z)*=c;
+	double cosLat = cos(lat);
+    (*x) = cos(lng) * cosLat;
+    (*y) = sin(lng) * cosLat;
+	(*z) = sin(lat);
+    cosLat = r/sqrt((*x) * (*x) + (*y) * (*y) + (*z) * (*z));
+	(*x)*=cosLat;
+	(*y)*=cosLat;
+	(*z)*=cosLat;
 }

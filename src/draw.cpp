@@ -251,7 +251,7 @@ void DrawMilkyWay(void)
     glDisable(GL_BLEND);
     glBindTexture(GL_TEXTURE_2D, texIds[2]->getID());
     glRotatef(206,1,0,0);
-    glRotatef(-16,0,1,0);
+    glRotatef(-16+90,0,1,0);
     glRotatef(-84,0,0,1);
     GLUquadricObj * MilkyWay=gluNewQuadric();
     gluQuadricTexture(MilkyWay,GL_TRUE);
@@ -273,11 +273,11 @@ void DrawMeridiens(void)
         coef/=RAND_MAX;
         glColor3f(0.12*coef+0.18,0.015*coef+0.2,0.015*coef+0.2);
         for(int i=0;i<12;i++)
-        {       glRotatef(360/24,0,1,0);
+        {       glRotatef(360./24.,0,0,1);
                 for(int j=0;j<49;++j){
                         glBegin(GL_LINES);
-                                glVertex3f(DmeriParal[j][0],DmeriParal[j][1], 0.0f);
-                                glVertex3f(DmeriParal[j+1][0],DmeriParal[j+1][1], 0.0f);
+                                glVertex3f(DmeriParal[j][0], 0.0f, DmeriParal[j][1]);
+                                glVertex3f(DmeriParal[j+1][0], 0.0f, DmeriParal[j+1][1]);
                         glEnd();
                 }
         }
@@ -296,11 +296,11 @@ void DrawMeridiensAzimut(void)
         float coef = 1;//(float)(1.0f * rand() / RAND_MAX);
         glColor3f(0.015*coef+0.2,0.12*coef+0.18,0.015*coef+0.2);
         for(int i=0;i<12;i++)
-        {       glRotatef(360/24,0,1,0);
+        {       glRotatef(360/24,0,0,1);
                 for(int j=0;j<49;++j){
                         glBegin(GL_LINES);
-                                glVertex3f(DmeriParal[j][0],DmeriParal[j][1], 0.0f);
-                                glVertex3f(DmeriParal[j+1][0],DmeriParal[j+1][1], 0.0f);
+                                glVertex3f(DmeriParal[j][0], 0.0f, DmeriParal[j][1]);
+                                glVertex3f(DmeriParal[j+1][0], 0.0f, DmeriParal[j+1][1]);
                         glEnd();
                 }
         }
@@ -320,8 +320,8 @@ void DrawParallels(void)
         for(int i=0;i<18;++i){
                 for(int j=0;j<50;++j){
                         glBegin(GL_LINES);
-                                glVertex3f(DmeriParalCos[i] [j] [0],sinTable[i],DmeriParalCos[i] [j] [1]);
-                                glVertex3f(DmeriParalCos[i][j+1][0],sinTable[i],DmeriParalCos[i][j+1][1]);
+                                glVertex3f(DmeriParalCos[i] [j] [0],DmeriParalCos[i] [j] [1],sinTable[i]);
+                                glVertex3f(DmeriParalCos[i][j+1][0],DmeriParalCos[i][j+1][1],sinTable[i]);
                         glEnd();
                 }
         }
@@ -340,8 +340,8 @@ void DrawParallelsAzimut(void)
         for(int i=0;i<18;++i){
                 for(int j=0;j<50;++j){
                         glBegin(GL_LINES);
-                                glVertex3f(DmeriParalCos[i] [j] [0],sinTable[i],DmeriParalCos[i] [j] [1]);
-                                glVertex3f(DmeriParalCos[i][j+1][0],sinTable[i],DmeriParalCos[i][j+1][1]);
+                                glVertex3f(DmeriParalCos[i] [j] [0],DmeriParalCos[i] [j] [1],sinTable[i]);
+                                glVertex3f(DmeriParalCos[i][j+1][0],DmeriParalCos[i][j+1][1],sinTable[i]);
                         glEnd();
                 }
         }
@@ -358,8 +358,8 @@ void DrawEquator(void)
         glColor3f(0.2*coef+0.3,0.025*coef+0.1,0.025*coef+0.1);
         for(int j=0;j<49;++j){
                 glBegin(GL_LINES);
-                        glVertex3f(DmeriParal [j] [0]*20.0f, 0, DmeriParal [j] [1]*20.0f);
-                        glVertex3f(DmeriParal[j+1][0]*20.0f, 0, DmeriParal[j+1][1]*20.0f);
+                        glVertex3f(DmeriParal [j] [0]*20.0f, DmeriParal [j] [1]*20.0f, 0.0f);
+                        glVertex3f(DmeriParal[j+1][0]*20.0f, DmeriParal[j+1][1]*20.0f, 0.0f);
                 glEnd();
         }
         glPopMatrix();
@@ -393,8 +393,7 @@ void DrawFog(void)
     glEnable(GL_TEXTURE_2D);
     glEnable(GL_BLEND);
     glBindTexture(GL_TEXTURE_2D, texIds[3]->getID());
-    glTranslatef(0,-0.7,0);
-    glRotatef(-90,1,0,0);
+    glTranslatef(0,0,-0.7);
     GLUquadricObj * Horizon=gluNewQuadric();
     gluQuadricTexture(Horizon,GL_TRUE);
     gluCylinder(Horizon,10,10,10,8,1);
@@ -416,7 +415,8 @@ void DrawPoint(float X,float Y,float Z)
 
 // Draw the mountains with a few pieces of a big texture
 void DrawDecor(int nb)
-{   glPushMatrix();
+{   
+    glPushMatrix();
     glColor3f(global.SkyBrightness, global.SkyBrightness, global.SkyBrightness);
     glEnable(GL_TEXTURE_2D);
     glEnable(GL_BLEND);
@@ -430,18 +430,18 @@ void DrawDecor(int nb)
             glBegin(GL_QUADS );
                 //Haut Gauche
                 glTexCoord2f((float)nDecoupe/4,1.0f);       
-                glVertex3f(10.0f,1.5f,-delta);
+                glVertex3f(10.0f,-delta,1.5f);
                 //Bas Gauche
                 glTexCoord2f((float)nDecoupe/4,0.0f);       
-                glVertex3f(10.0f,-0.4f,-delta);
+                glVertex3f(10.0f,-delta,-0.4f);
                 //Bas Droit
                 glTexCoord2f((float)nDecoupe/4+0.25,0.0f);
-                glVertex3f(10.0f,-0.4f,delta);
+                glVertex3f(10.0f,delta,-0.4f);
                 //Haut Droit
                 glTexCoord2f((float)nDecoupe/4+0.25,1.0f);
-                glVertex3f(10.0f,1.5f,delta);
+                glVertex3f(10.0f,delta,1.5f);
             glEnd ();
-            glRotatef(22.5/nb,0,-1,0);
+            glRotatef(22.5/nb,0,0,-1);
         }
     }
     glPopMatrix();
@@ -458,13 +458,13 @@ void DrawGround(void)
     glBindTexture(GL_TEXTURE_2D, texIds[1]->getID());
     glBegin (GL_QUADS);
         glTexCoord2f (0.0f,0.0f);
-        glVertex3f (-10.0f, -0.2f, -10.0f);
+        glVertex3f (-10.0f, -10.0f, -0.2f);
         glTexCoord2f (0.2f, 0.0f);
-        glVertex3f(-10.0f, -0.2f,  10.0f);
+        glVertex3f(-10.0f, 10.0f, -0.2f);
         glTexCoord2f (0.2f, 0.2f);
-        glVertex3f( 10.0f, -0.2f,  10.0f);
+        glVertex3f( 10.0f, 10.0f, -0.2f);
         glTexCoord2f (0.0f, 0.2f);
-        glVertex3f( 10.0f, -0.2f, -10.0f);
+        glVertex3f( 10.0f, -10.0f, -0.2f);
     glEnd ();
     glPopMatrix();
 }
