@@ -170,7 +170,8 @@ float Observator::get_GMT_shift_from_system(double JD, bool _local) const
 	struct tm *timeinfo;
 	time_t rawtime; time(&rawtime);
 	timeinfo = localtime(&rawtime);
-	return (float)timeinfo->tm_gmtoff/3600 + (timeinfo->tm_isdst!=0);
+	return (float)timeinfo->tm_gmtoff/3600;
+	// + (timeinfo->tm_isdst!=0);
 #else
 	// doesn't account for dst changes
 	// TODO come up with correct and portable solution 
