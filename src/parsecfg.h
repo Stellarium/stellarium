@@ -20,7 +20,7 @@
 /*                                                                        */
 /**************************************************************************/
 
-/* $Id: parsecfg.h 50 2002-10-16 10:49:44Z xalioth $ */
+/* $Id: parsecfg.h 52 2002-10-16 22:28:12Z xalioth $ */
 
 #ifndef PARSECFG_H_INCLUDED
 #define PARSECFG_H_INCLUDED
@@ -117,6 +117,11 @@ void cfgFree(cfgStruct cfg[], cfgFileType type, int numSections);
 }
 #endif
 
+#if defined(__MWERKS__) || defined(_MSC_VER)
+#	ifndef HAVE_STRICMP
+#		define HAVE_STRICMP
+#	endif
+#endif
 
 #ifndef HAVE_STRCASECMP 
 # ifdef HAVE_STRICMP 
