@@ -225,11 +225,11 @@ Component* stel_ui::createConfigWindow(void)
 	tab_time->addComponent(system_tz_cbx);
 	system_tz_cbx->setPos(50 ,y); y+=30;
 
-	tzselector = new Time_zone_item(core->DataDir + "zone.tab");
+	/*tzselector = new Time_zone_item(core->DataDir + "zone.tab");
 	tzselector->setOnPressCallback(callback<void>(this, &stel_ui::setTimeZone));
 	tzselector->setPos(x,y);
 	tab_time->addComponent(tzselector);
-
+*/
 
 	// Location options
 	FilledContainer* tab_location = new FilledContainer();
