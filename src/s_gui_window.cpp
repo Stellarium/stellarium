@@ -51,8 +51,8 @@ StdWin::StdWin(int posx, int posy, int sizex, int sizey, char * _title, Componen
 
 StdWin::~StdWin()
 {
-	if (winfont) delete winfont;
-	winfont=NULL;
+    //printf("Enter StdWin destructor %d\n",this);
+	//printf("Quit StdWin destructor %d\n",this);
 }
 
 void StdWin::StdWinClicCallback(enum guiValue button,enum guiValue state)

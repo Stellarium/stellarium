@@ -138,6 +138,7 @@ namespace gui
     {
     public:
         Button();
+        virtual ~Button();
         virtual void render(GraphicsContext&);
         virtual void setOnClicCallback(void (*_onClicCallback)(enum guiValue,Component *));
         virtual void setOnMouseOverCallback(void (*_onMouseOverCallback)(enum guiValue,Component *));
