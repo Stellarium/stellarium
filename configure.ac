@@ -151,5 +151,4 @@ AC_CHECK_FUNCS(round toupper strcasecmp strdup sinf cosf tanf asinf acosf atanf 
 
 AC_CONFIG_FILES([Makefile stellarium.spec src/Makefile src/iniparser/Makefile src/glpng/Makefile src/stellplanet/Makefile src/stellastro/Makefile config/Makefile data/Makefile doc/Makefile textures/Makefile textures/landscapes/Makefile textures/constellation-art/Makefile data/sky_cultures/Makefile  data/sky_cultures/polynesian/Makefile data/sky_cultures/western/Makefile po/Makefile.in intl/Makefile ])
 
-AC_CONFIG_COMMANDS([default],[[ echo timestamp > stamp-h ]],[[]])
 AC_OUTPUT
