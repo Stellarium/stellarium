@@ -77,8 +77,8 @@ void planet::compute_position(double date)
 // Compute the matrices which converts from the parent's ecliptic coordinates to local ecliptic and oposite
 void planet::compute_trans_matrix(double date)
 {
-	mat_parent_to_local =	Mat4d::yrotation(re.obliquity) /* Mat4d::zrotation(re.ascendingNode)*/ * Mat4d::translation(-ecliptic_pos);
-	mat_local_to_parent =   Mat4d::translation(ecliptic_pos) /* Mat4d::zrotation(-re.ascendingNode)*/ * Mat4d::yrotation(-re.obliquity);
+	mat_parent_to_local =	Mat4d::xrotation(re.obliquity) /* Mat4d::zrotation(re.ascendingNode)*/ * Mat4d::translation(-ecliptic_pos);
+	mat_local_to_parent =   Mat4d::translation(ecliptic_pos) /* Mat4d::zrotation(-re.ascendingNode)*/ * Mat4d::xrotation(-re.obliquity);
 
 
 	compute_geographic_rotation(date);
@@ -195,7 +195,7 @@ void planet::draw(void)
 	GLUquadricObj * p=gluNewQuadric();
 	gluQuadricTexture(p,GL_TRUE);
 	gluQuadricOrientation(p, GLU_OUTSIDE);
-	gluSphere(p,radius*1,40,40);
+	gluSphere(p,radius,40,40);
 	gluDeleteQuadric(p);
 
 	glPopMatrix();
