@@ -37,8 +37,8 @@ observator_pos::~observator_pos()
 void observator_pos::save(FILE * f)
 {
 	// Set the position values in config file format
-	char * tempLatitude=strdup(print_angle_dms_stel(latitude));
-	char * tempLongitude=strdup(print_angle_dms_stel(longitude));
+	char * tempLatitude=strdup(print_angle_dms(latitude));
+	char * tempLongitude=strdup(print_angle_dms(longitude));
 	fprintf(f,"%s %s %d %d %s\n",tempLongitude, tempLatitude, altitude, time_zone, name);
 	printf("SAVE location : %s %s %d %d %s\n",tempLongitude, tempLatitude, altitude, time_zone, name);
 	if (tempLatitude) delete tempLatitude;
@@ -302,6 +302,7 @@ void navigator::update_transform_matrices(void)
 	mat_local_to_earth_equ = LOC_to_GEI;
 	mat_earth_equ_to_local = GEI_to_LOC;
 
+	/* These two next have to take into account the position of the observer on the earth */
 	Mat4d GEI_to_HSE = 	Mat4d::translation(Earth->get_ecliptic_pos()) *
 	                    Mat4d::xrotation(get_mean_obliquity(JDay)*M_PI/180.); /*
 	                    Mat4d::translation(LOC_to_GEI * Vec3d(0.,0.,6378.1/UA+(double)position.altitude/UA*100));*/
@@ -377,7 +378,7 @@ Vec3d navigator::helio_to_earth_equ(Vec3d* v)
 	return mat_local_to_earth_equ*mat_helio_to_local*(*v);
 }
 
-// *****************  Move to the given equatorial coord  **********
+// Move to the given equatorial position
 void navigator::move_to(Vec3d _aim)
 {
 	move.aim=_aim;
