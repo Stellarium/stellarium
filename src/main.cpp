@@ -66,7 +66,7 @@ void drawIntro(void)
     printf("    |##   #  ### ### ### # # # #  #  ### # #|\n");
     printf("    |                     %s|\n",APP_NAME);
     printf("    -----------------------------------------\n\n");
-    printf("Copyright (C) 2002 Fabien Chereau chereau@free.fr\n\n");
+    printf("Copyright (C) 2002 Fabien Chereau\n\n");
     printf("Please send bug report & comments to stellarium@free.fr\n");
     printf("and check last version on http://stellarium.free.fr\n\n");
 };
@@ -552,6 +552,12 @@ int main(int argc, char **argv)
 				}
 
 			case SDL_MOUSEBUTTONDOWN:
+				{
+					GuiHandleClic(E.button.x,E.button.y,E.button.state,E.button.button);
+					break;
+				}
+				
+			case SDL_MOUSEBUTTONUP:
 				{
 					GuiHandleClic(E.button.x,E.button.y,E.button.state,E.button.button);
 					break;
