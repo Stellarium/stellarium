@@ -59,6 +59,15 @@ dnl CYGWIN
 	AC_CHECK_HEADER(GL/glu.h,,AC_MSG_ERROR(glu.h not found - please install GLU))
 ;;
 
+dnl MINGW32
+*-*-mingw32*)
+	AC_DEFINE_UNQUOTED(MINGW32,1, [If we are on mingw32 plateform.])
+	LIBS="$LIBS -lopengl32 -lglu32"
+	CXXFLAGS="$CXXFLAGS -I/mingw/include/SDL/"
+	AC_CHECK_HEADER(GL/gl.h,,AC_MSG_ERROR(gl.h not found - please install OpenGL))
+	AC_CHECK_HEADER(GL/glu.h,,AC_MSG_ERROR(glu.h not found - please install GLU))
+;;
+
 dnl OTHER SYSTEMS
 *)
 	AC_CHECK_HEADER(GL/gl.h,,AC_MSG_ERROR(gl.h not found - please install OpenGL- or Mesa-devel))
