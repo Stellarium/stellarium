@@ -17,13 +17,13 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-// I'm trying to comment the source but my english isn't perfect, so be tolerant 
-// and please correct all the mistakes you find. ;)
+// I'm trying to comment the source but my english isn't perfect, so be 
+//tolerant and please correct all the mistakes you find. ;)
 
 #if defined( MACOSX )
-#include <GLUT/glut.h>
+# include <GLUT/glut.h>
 #else
-#include <GL/glut.h>
+# include <GL/glut.h>
 #endif
 
 #include "stellarium.h"
@@ -39,12 +39,14 @@
 #include "parsecfg.h"
 #include "navigation.h"
 #include "s_gui.h"
+#include "hip_star_mgr.h"
 
 using namespace std;
 
 stellariumParams global;
-Star_mgr * VouteCeleste;              // Class to manage all the stars from HR catalog
-Constellation_mgr * ConstellCeleste;  // Class to manage the constellation boundary and name
+Star_mgr * VouteCeleste;              // Stars from HR catalog
+Hip_Star_mgr * HipVouteCeleste;       // Class to manage the Hipparcos catalog
+Constellation_mgr * ConstellCeleste;  // Constellation boundary and name
 Nebula_mgr * messiers;                // Class to manage the messier objects
 Planet_mgr * SolarSystem;             // Class to manage the planets
 s_texture * texIds[200];              // Common Textures
@@ -72,9 +74,10 @@ void glutDisplay(void)
 {  
     glMatrixMode(GL_PROJECTION); 
     glLoadIdentity();
-    gluPerspective(global.Fov, (double) global.X_Resolution / global.Y_Resolution, 0.1, 1000);
+    gluPerspective(global.Fov, (double)global.X_Resolution / 
+		   global.Y_Resolution, 0.1, 1000);
     glMatrixMode(GL_MODELVIEW);
-
+    
     // Update the position of observation and time etc...
     Update_time(*SolarSystem);
     Update_variables();
@@ -83,39 +86,57 @@ void glutDisplay(void)
     // far to nearest objects
 
     // ---- Equatorial Coordinates
-    Switch_to_equatorial();                         // Switch in Equatorial coordinates
-    DrawMilkyWay();                                 // Draw the milky way --> init the buffers
+    Switch_to_equatorial();          // Switch in Equatorial coordinates
+    DrawMilkyWay();                  // Draw the milky way --> init the buffers
 
-    if (global.FlagNebula && (!global.FlagAtmosphere || global.SkyBrightness<0.1)) messiers->Draw();                                // Draw the Messiers Objects
+    if (global.FlagNebula && (!global.FlagAtmosphere || 
+			      global.SkyBrightness<0.1)) 
+	messiers->Draw();            // Draw the Messiers Objects
     if (global.FlagConstellationDrawing)
-        ConstellCeleste->Draw();                    // Draw all the constellations
-    if ((!global.FlagAtmosphere && global.FlagStars) || (global.SkyBrightness<0.2 && global.FlagStars)) VouteCeleste->Draw();         // Draw the stars
+        ConstellCeleste->Draw();     // Draw all the constellations
+    if ((!global.FlagAtmosphere && global.FlagStars) || 
+        (global.SkyBrightness<0.2 && global.FlagStars)) 
+    {
+	HipVouteCeleste->Draw(); 
+	//VouteCeleste->Draw();      // Draw the stars
+    }
 
-    if (global.FlagPlanets || global.FlagPlanetsHintDrawing) SolarSystem->Draw();   // Draw the planets
-    if (global.FlagAtmosphere && global.SkyBrightness>0) DrawAtmosphere2();
+    if (global.FlagPlanets || global.FlagPlanetsHintDrawing) 
+	SolarSystem->Draw();         // Draw the planets
+    if (global.FlagAtmosphere && global.SkyBrightness>0) 
+	DrawAtmosphere2();
+
     SolarSystem->DrawMoonDaylight();
 
     if (global.FlagEquatorialGrid)
-    {   DrawMeridiens();                            // Draw the meridian lines
-        DrawParallels();                            // Draw the parallel lines
+    { 
+	DrawMeridiens();             // Draw the meridian lines
+        DrawParallels();             // Draw the parallel lines
     }
-    if (global.FlagEquator) DrawEquator();       // Draw the celestial equator line
-    if (global.FlagEcliptic) DrawEcliptic();     // Draw the ecliptic line
-    if (global.FlagConstellationName)               // Draw the names of the constellations
-        ConstellCeleste->DrawName(); 
-    if (global.FlagSelect)                          // Draw the star pointer
-        DrawPointer(global.SelectedObject.XYZ,global.SelectedObject.Size,global.SelectedObject.RGB,global.SelectedObject.type);
+    if (global.FlagEquator) 
+	DrawEquator();               // Draw the celestial equator line
+    if (global.FlagEcliptic) 
+	DrawEcliptic();              // Draw the ecliptic line
+    if (global.FlagConstellationName)
+        ConstellCeleste->DrawName(); // Draw the constellations's names
+    if (global.FlagSelect)           // Draw the star pointer
+        DrawPointer(global.SelectedObject.XYZ,
+		    global.SelectedObject.Size,
+		    global.SelectedObject.RGB,
+		    global.SelectedObject.type);
     
     // ---- AltAzimutal Coordinates
-    Switch_to_altazimutal();                        // Switch in AltAzimutal coordinates
+    Switch_to_altazimutal();         // Switch in AltAzimutal coordinates
     if (global.FlagAzimutalGrid)
-    {   DrawMeridiensAzimut();                      // Draw the "Altazimuthal meridian" lines
-        DrawParallelsAzimut();                      // Draw the "Altazimuthal parallel" lines
+    {
+	DrawMeridiensAzimut();       // Draw the "Altazimuthal meridian" lines
+        DrawParallelsAzimut();       // Draw the "Altazimuthal parallel" lines
     }
-    if (global.FlagAtmosphere)                      // Calc the atmosphere
+    if (global.FlagAtmosphere)       // Calc the atmosphere
     {   
         if (++timeAtmosphere>2 && global.SkyBrightness>0)
-        {   timeAtmosphere=0;
+        {
+	    timeAtmosphere=0;
             CalcAtmosphere();
         }
     }
@@ -128,7 +149,7 @@ void glutDisplay(void)
     // ---- 2D Displays
     renderUi();
 
-    glutSwapBuffers();                              // Swap the 2 buffers
+    glutSwapBuffers();               // Swap the 2 buffers
 }
 
 // ************************  On resize  *******************************
@@ -142,7 +163,8 @@ void glutResize(int w, int h)
     glViewport(0, 0, global.X_Resolution, global.Y_Resolution);
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    gluPerspective(global.Fov, (double) global.X_Resolution / global.Y_Resolution, 1, 10000);   // Update the ratio
+    gluPerspective(global.Fov, (double) global.X_Resolution / 
+		   global.Y_Resolution, 1, 10000);   // Update the ratio
     glutPostRedisplay();
     glMatrixMode(GL_MODELVIEW);
 }
@@ -158,7 +180,7 @@ void loadCommonTextures(void)
 {   
     printf("Loading common textures...\n");
     texIds[2] = new s_texture("voielactee256x256",TEX_LOAD_TYPE_PNG_SOLID);
-    texIds[3] = new s_texture("horizon3");
+    texIds[3] = new s_texture("fog");
     texIds[4] = new s_texture("ciel");  
     texIds[6] = new s_texture("n");
     texIds[7] = new s_texture("s");
@@ -182,18 +204,28 @@ void loadCommonTextures(void)
         texIds[1] = new s_texture("landscapes/sea5",TEX_LOAD_TYPE_PNG_SOLID);
         break;
     case 2 : 
-        texIds[31]= new s_texture("landscapes/mountain1",TEX_LOAD_TYPE_PNG_ALPHA);
-        texIds[32]= new s_texture("landscapes/mountain2",TEX_LOAD_TYPE_PNG_ALPHA);
-        texIds[33]= new s_texture("landscapes/mountain3",TEX_LOAD_TYPE_PNG_ALPHA);
-        texIds[34]= new s_texture("landscapes/mountain4",TEX_LOAD_TYPE_PNG_ALPHA);
-        texIds[1] = new s_texture("landscapes/mountain5",TEX_LOAD_TYPE_PNG_SOLID);
+        texIds[31]= new s_texture("landscapes/mountain1",
+				  TEX_LOAD_TYPE_PNG_ALPHA);
+        texIds[32]= new s_texture("landscapes/mountain2",
+				  TEX_LOAD_TYPE_PNG_ALPHA);
+        texIds[33]= new s_texture("landscapes/mountain3",
+				  TEX_LOAD_TYPE_PNG_ALPHA);
+        texIds[34]= new s_texture("landscapes/mountain4",
+				  TEX_LOAD_TYPE_PNG_ALPHA);
+        texIds[1] = new s_texture("landscapes/mountain5",
+				  TEX_LOAD_TYPE_PNG_SOLID);
         break;
     case 3 : 
-        texIds[31]= new s_texture("landscapes/snowy1",TEX_LOAD_TYPE_PNG_ALPHA);
-        texIds[32]= new s_texture("landscapes/snowy2",TEX_LOAD_TYPE_PNG_ALPHA);
-        texIds[33]= new s_texture("landscapes/snowy3",TEX_LOAD_TYPE_PNG_ALPHA);
-        texIds[34]= new s_texture("landscapes/snowy4",TEX_LOAD_TYPE_PNG_ALPHA);
-        texIds[1] = new s_texture("landscapes/snowy5",TEX_LOAD_TYPE_PNG_SOLID);
+        texIds[31]= new s_texture("landscapes/snowy1",
+				  TEX_LOAD_TYPE_PNG_ALPHA);
+        texIds[32]= new s_texture("landscapes/snowy2",
+				  TEX_LOAD_TYPE_PNG_ALPHA);
+        texIds[33]= new s_texture("landscapes/snowy3",
+				  TEX_LOAD_TYPE_PNG_ALPHA);
+        texIds[34]= new s_texture("landscapes/snowy4",
+				  TEX_LOAD_TYPE_PNG_ALPHA);
+        texIds[1] = new s_texture("landscapes/snowy5",
+				  TEX_LOAD_TYPE_PNG_SOLID);
         break;
     default : 
         printf("ERROR : Bad landscape number, change it in config.txt\n");
@@ -203,41 +235,65 @@ void loadCommonTextures(void)
     texIds[47]= new s_texture("saturneAnneaux128x128",TEX_LOAD_TYPE_PNG_ALPHA);
     texIds[48]= new s_texture("halo");
     texIds[50]= new s_texture("haloLune");
-    if (messiers->ReadTexture()==0) printf("Error while loading messier Texture\n");
+    if (messiers->ReadTexture()==0) 
+	printf("Error while loading messier Texture\n");
 }
 
 // ********************  Handle the special keys  **********************
 void pressKey(int key, int, int) 
 {   
+    // Direction and zoom deplacements
     switch (key) 
     {
-	// Direction and zoom deplacements
-    case GLUT_KEY_LEFT :        global.deltaAz = -1;    global.FlagTraking=false; break;
-    case GLUT_KEY_RIGHT :       global.deltaAz =  1;    global.FlagTraking=false; break;
-    case GLUT_KEY_UP :          global.deltaAlt =  1;   global.FlagTraking=false; break;
-    case GLUT_KEY_DOWN :        global.deltaAlt = -1;   global.FlagTraking=false; break;
-    case GLUT_KEY_PAGE_UP :     global.deltaFov= -1;    break;
-    case GLUT_KEY_PAGE_DOWN :   global.deltaFov=  1;    break;
-    case GLUT_KEY_F1 : glutFullScreen();    break;
-    case GLUT_KEY_F2 : glutReshapeWindow(640, 480); break;
+    case GLUT_KEY_LEFT :
+	global.deltaAz = -1;
+	global.FlagTraking=false; 
+	break;
+    case GLUT_KEY_RIGHT : 
+	global.deltaAz =  1;
+	global.FlagTraking=false;
+	break;
+    case GLUT_KEY_UP :
+	global.deltaAlt =  1;
+	global.FlagTraking=false;
+	break;
+    case GLUT_KEY_DOWN :
+	global.deltaAlt = -1;
+	global.FlagTraking=false;
+	break;
+    case GLUT_KEY_PAGE_UP :
+	global.deltaFov= -1;
+	break;
+    case GLUT_KEY_PAGE_DOWN :
+	global.deltaFov=  1;
+	break;
+    case GLUT_KEY_F1 : 
+	glutFullScreen();
+	break;
+    case GLUT_KEY_F2 :
+	glutReshapeWindow(640, 480);
+	break;
     }
 }
 
 // *******************  Stop mooving and zooming  **********************
 void releaseKey(int key, int, int)
 {   
+    // When a deplacement key is released stop mooving
     switch (key)
     {
-	// When a deplacement key is released stop mooving
     case GLUT_KEY_LEFT :
-    case GLUT_KEY_RIGHT :       global.deltaAz = 0;
+    case GLUT_KEY_RIGHT : 
+	global.deltaAz = 0;
 	break;
     case GLUT_KEY_UP : 
-    case GLUT_KEY_DOWN :        global.deltaAlt = 0;
+    case GLUT_KEY_DOWN :
+	global.deltaAlt = 0;
 	break;
     case GLUT_KEY_PAGE_UP :
-    case GLUT_KEY_PAGE_DOWN :   global.deltaFov = 0;
-                                    break;
+    case GLUT_KEY_PAGE_DOWN :
+	global.deltaFov = 0;
+	break;
     }
 }
 
@@ -302,8 +358,8 @@ void loadParams(void)
         {"FLAG_HORIZON",        CFG_BOOL,   &global.FlagHorizon},
         {"FLAG_FOG",            CFG_BOOL,   &global.FlagFog},
         {"FLAG_ATMOSPHERE",     CFG_BOOL,   &global.FlagAtmosphere},
-        {"FLAG_CONSTELLATION_DRAWING",  CFG_BOOL,   &global.FlagConstellationDrawing},
-        {"FLAG_CONSTELLATION_NAME",     CFG_BOOL,   &global.FlagConstellationName},
+        {"FLAG_CONSTELLATION_DRAWING",CFG_BOOL, &global.FlagConstellationDrawing},
+        {"FLAG_CONSTELLATION_NAME",   CFG_BOOL, &global.FlagConstellationName},
         {"FLAG_AZIMUTAL_GRID",  CFG_BOOL,   &global.FlagAzimutalGrid},
         {"FLAG_EQUATORIAL_GRID",CFG_BOOL,   &global.FlagEquatorialGrid},
         {"FLAG_EQUATOR",        CFG_BOOL,   &global.FlagEquator},
@@ -328,7 +384,8 @@ void loadParams(void)
     strcpy(tempName,global.ConfigDir);
     strcat(tempName,"config.txt");
     if (cfgParse(tempName, cfgini, CFG_SIMPLE) == -1)
-    {   printf("An error was detected in the config file\n");
+    {   
+	printf("An error was detected in the config file\n");
         return;
     }
 
@@ -345,7 +402,8 @@ void loadParams(void)
     strcpy(tempName,global.ConfigDir);
     strcat(tempName,"location.txt");
     if (cfgParse(tempName, cfgini2, CFG_SIMPLE) == -1)
-    {   printf("An error was detected in the location file\n");
+    {
+	printf("An error was detected in the location file\n");
         return;
     }
 
@@ -364,39 +422,45 @@ void loadParams(void)
 
     // If no date given -> default today
     if (tempDate!=NULL && (sscanf(tempDate,"%d/%d/%d\n",&m,&d,&y) != 3))
-    {   printf("ERROR, bad date format : please change config.txt\n\n");
+    {   
+	printf("ERROR, bad date format : please change config.txt\n\n");
         exit(1);
     }
     if (tempTime!=NULL && (sscanf(tempTime,"%d:%d:%d\n",&hour,&min,&sec) != 3))
-    {   printf("ERROR, bad time format : please change config.txt\n\n");
+    {   
+	printf("ERROR, bad time format : please change config.txt\n\n");
         exit(1);
     }
 
     if (m>12 || m<1 || d<1 || d>31)
-    {   printf("ERROR, bad month value : please change config.txt\n\n");
+    {   
+	printf("ERROR, bad month value : please change config.txt\n\n");
         exit(0);
     }
 
     if (hour>23 || hour<0 || min<0 || min>59 || sec<0 || sec>59)
-    {   printf("ERROR, bad time value : please change config.txt\n\n");
+    {   
+	printf("ERROR, bad time value : please change config.txt\n\n");
         exit(0);
     }
 
-    if (tempDate) delete tempDate;
+    if (tempDate) 
+	delete tempDate;
     if (tempTime) 
     {   
         hour-=global.TimeZone;
         delete tempTime;    
     }
-    // calc the julian date
-    global.JDay=DateOps::dmyToDay(d,m,y);   // store it in the global variable JDay
+    // calc the julian date and store it in the global variable JDay
+    global.JDay=DateOps::dmyToDay(d,m,y);
     global.JDay+=((double)hour*HEURE+((double)min+(double)sec/60)*MINUTE);
 
 
     // arrange the latitude/longitude to fit with astroOps conventions
     tempLatitude=90.-tempLatitude;
     tempLongitude=-tempLongitude;
-    if (tempLongitude<0) tempLongitude=360.+tempLongitude;
+    if (tempLongitude<0)
+	tempLongitude=360.+tempLongitude;
     // Set the change in the position
     global.ThePlace.setLongitude(tempLongitude);
     global.ThePlace.setLatitude(tempLatitude);
@@ -404,7 +468,8 @@ void loadParams(void)
 
 // ****************  Initialisation of glut and openGL  ****************
 void init() 
-{   glutKeyboardFunc(processNormalKeys);
+{   
+    glutKeyboardFunc(processNormalKeys);
     glutSpecialFunc(pressKey);
     glutSpecialUpFunc(releaseKey);
     glutDisplayFunc(glutDisplay);
@@ -451,7 +516,8 @@ int main (void)
         }
     }
     fclose(tempFile);
-    if (strcmp(dataRoot,CONFIG_DATA_DIR)) printf("------>Found data files in %s\n",dataRoot);
+    if (strcmp(dataRoot,CONFIG_DATA_DIR))
+	printf("------>Found data files in %s\n",dataRoot);
     strcpy(global.DataDir,dataRoot);
     strcpy(global.TextureDir,dataRoot);
     strcpy(global.ConfigDir,dataRoot);
@@ -460,29 +526,30 @@ int main (void)
     strcat(global.ConfigDir,"/config/");
     
     
-    drawIntro();                                            // Print the console logo
-    loadParams();                                           // Load the params from config.txt
+    drawIntro();                     // Print the console logo
+    loadParams();                    // Load the params from config.txt
     glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE);
 
-    if (global.Fullscreen)                                  // FullScreen Mode
+    if (global.Fullscreen)           // FullScreen Mode
     {
-	char str[20];                                       // Init screen size
-        sprintf(str,"%dx%d:%d",global.X_Resolution,global.Y_Resolution,global.bppMode);
-        glutGameModeString(str);                            // define resolution, color depth
-        if (glutGameModeGet(GLUT_GAME_MODE_POSSIBLE))       // enter full screen
+	char str[20];                // Init screen size
+        sprintf(str,"%dx%d:%d",global.X_Resolution,
+		global.Y_Resolution,global.bppMode);
+        glutGameModeString(str);     // define resolution, color depth
+        if (glutGameModeGet(GLUT_GAME_MODE_POSSIBLE))   // enter full screen
         {
 	    glutEnterGameMode();
         }
-        else                                                // Error
+        else                         // Error
         {   
 	    printf("\n\nERROR : Unsuported screen mode, change the config.txt file\n");
             exit(1);
         }
     }
-    else                                                    // Windowed mode
+    else                             // Windowed mode
     {  
-	    glutCreateWindow(APP_NAME);
-        glutFullScreen();                             // Windowed fullscreen mode
+	glutCreateWindow(APP_NAME);
+        glutFullScreen();            // Windowed fullscreen mode
         //global.X_Resolution = glutGet(GLUT_SCREEN_WIDTH);
         //global.Y_Resolution = glutGet(GLUT_SCREEN_HEIGHT);
         //glutReshapeWindow(global.X_Resolution, global.Y_Resolution);
@@ -491,12 +558,16 @@ int main (void)
     glutIgnoreKeyRepeat(1);
     glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_FASTEST);
     glDisable(GL_DEPTH_TEST);
-    glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);      // init the blending function parameters (read the doc to understand it ;) ...)
-
-    init();                                           // Set the callbacks
-
+    // init the blending function parameters
+    glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
+    
+    init();                          // Set the callbacks
+    
     VouteCeleste = new Star_mgr();
     if (!VouteCeleste) exit(1);
+
+    HipVouteCeleste = new Hip_Star_mgr();
+    if (!HipVouteCeleste) exit(1);
 
     ConstellCeleste = new Constellation_mgr();
     if (!ConstellCeleste) exit(1);
@@ -507,25 +578,29 @@ int main (void)
     SolarSystem = new Planet_mgr();
     if (!SolarSystem) exit(1);
 
-    loadCommonTextures();                             // Load the common used textures
+    loadCommonTextures();            // Load the common used textures
     SolarSystem->loadTextures();
     
     strcpy(tempName,global.DataDir);
     strcat(tempName,"catalog.fab");
-    VouteCeleste->Load(tempName);                     // Load stars
+    VouteCeleste->Load(tempName);    // Load stars
+   
+    strcpy(tempName,global.DataDir);
+    strcat(tempName,"hipparcos.dat"); 
+    HipVouteCeleste->Load(tempName); // Load hipparcos stars
     
     strcpy(tempName,global.DataDir);
     strcat(tempName,"constellationsmaj.fab");
     ConstellCeleste->Load(tempName,VouteCeleste);     // Load constellations      
     SolarSystem->Compute(global.JDay,global.ThePlace);// Compute planet data
-    InitMeriParal();                                  // Precalculation for the grids drawing
+    InitMeriParal();                 // Precalculation for the grids drawing
     InitAtmosphere();
     
     strcpy(tempName,global.DataDir);
     strcat(tempName,"messier.fab");
-    messiers->Read(tempName);                         // read the messiers object data
-    initUi();                                         // initialisation of the User Interface
+    messiers->Read(tempName);        // read the messiers object data
+    initUi();                        // initialisation of the User Interface
     global.XYZVision.Set(0,1,0);
-    glutMainLoop();                                   // Start drawing
+    glutMainLoop();                  // Start drawing
     return 0;
 }

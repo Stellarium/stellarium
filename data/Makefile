@@ -83,7 +83,7 @@ am__quote =
 install_sh = /home/Fabien/work/stellarium/install-sh
 
 pkgdatadir = $(datadir)/stellarium/data
-pkgdata_DATA = catalog.fab messier.fab spacefont.txt constellationsmaj.fab name.txt stellarium.ico
+pkgdata_DATA = hipparcos.dat catalog.fab messier.fab spacefont.txt constellationsmaj.fab name.txt stellarium.ico
 EXTRA_DIST = $(pkgdata_DATA)
 subdir = data
 mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs

@@ -86,7 +86,7 @@ install_sh = /home/Fabien/work/stellarium/install-sh
 EXTRA_DIST = stellarium.PRJ stellarium.rc
 
 bin_PROGRAMS = stellarium
-stellarium_SOURCES = constellation.h  nebula.h  planet.h s_gui.h  s_utility.h   vector.h constellation_mgr.cpp intl.h  nebula_mgr.cpp  planet_mgr.cpp  s_gui_window.cpp  star.cpp  stellarium.h vislimit.cpp  constellation_mgr.h main.cpp  nebula_mgr.h planet_mgr.h  s_gui_window.h star.h vislimit.h  navigation.cpp  parsecfg.c  s_font.cpp    s_texture.cpp star_mgr.cpp   stellarium_ui.cpp draw.cpp navigation.h parsecfg.h s_font.h  s_texture.h   star_mgr.h stellarium_ui.h constellation.cpp  draw.h nebula.cpp  planet.cpp s_gui.cpp  s_utility.cpp stella_types.h  utility.h
+stellarium_SOURCES = grid.h grid.cpp constellation.h  nebula.h  planet.h s_gui.h  s_utility.h   vector.h constellation_mgr.cpp intl.h  nebula_mgr.cpp  planet_mgr.cpp  s_gui_window.cpp  star.cpp hip_star.cpp stellarium.h vislimit.cpp  constellation_mgr.h main.cpp  nebula_mgr.h planet_mgr.h  s_gui_window.h star.h hip_star.h vislimit.h  navigation.cpp parsecfg.c s_font.cpp s_texture.cpp star_mgr.cpp hip_star_mgr.cpp stellarium_ui.cpp draw.cpp navigation.h parsecfg.h s_font.h  s_texture.h   star_mgr.h hip_star_mgr.h stellarium_ui.h constellation.cpp  draw.h nebula.cpp  planet.cpp s_gui.cpp  s_utility.cpp stella_types.h  utility.h
 
 stellarium_LDADD = $(top_builddir)/src/glpng/libglpng.a $(top_builddir)/src/astrolib/libastrolib.a
 
@@ -99,13 +99,15 @@ CONFIG_CLEAN_FILES =
 bin_PROGRAMS = stellarium$(EXEEXT)
 PROGRAMS = $(bin_PROGRAMS)
 
-am_stellarium_OBJECTS = constellation_mgr.$(OBJEXT) nebula_mgr.$(OBJEXT) \
-	planet_mgr.$(OBJEXT) s_gui_window.$(OBJEXT) star.$(OBJEXT) \
+am_stellarium_OBJECTS = grid.$(OBJEXT) constellation_mgr.$(OBJEXT) \
+	nebula_mgr.$(OBJEXT) planet_mgr.$(OBJEXT) \
+	s_gui_window.$(OBJEXT) star.$(OBJEXT) hip_star.$(OBJEXT) \
 	vislimit.$(OBJEXT) main.$(OBJEXT) navigation.$(OBJEXT) \
 	parsecfg.$(OBJEXT) s_font.$(OBJEXT) s_texture.$(OBJEXT) \
-	star_mgr.$(OBJEXT) stellarium_ui.$(OBJEXT) draw.$(OBJEXT) \
-	constellation.$(OBJEXT) nebula.$(OBJEXT) planet.$(OBJEXT) \
-	s_gui.$(OBJEXT) s_utility.$(OBJEXT)
+	star_mgr.$(OBJEXT) hip_star_mgr.$(OBJEXT) \
+	stellarium_ui.$(OBJEXT) draw.$(OBJEXT) constellation.$(OBJEXT) \
+	nebula.$(OBJEXT) planet.$(OBJEXT) s_gui.$(OBJEXT) \
+	s_utility.$(OBJEXT)
 stellarium_OBJECTS = $(am_stellarium_OBJECTS)
 stellarium_DEPENDENCIES = $(top_builddir)/src/glpng/libglpng.a \
 	$(top_builddir)/src/astrolib/libastrolib.a
@@ -119,25 +121,27 @@ LIBS =   -lopengl32 -lglu32 -lglut32 -lm
 depcomp = $(SHELL) $(top_srcdir)/depcomp
 DEP_FILES = $(DEPDIR)/constellation.Po \
 	$(DEPDIR)/constellation_mgr.Po $(DEPDIR)/draw.Po \
-	$(DEPDIR)/main.Po $(DEPDIR)/navigation.Po \
-	$(DEPDIR)/nebula.Po $(DEPDIR)/nebula_mgr.Po \
-	$(DEPDIR)/parsecfg.Po $(DEPDIR)/planet.Po \
-	$(DEPDIR)/planet_mgr.Po $(DEPDIR)/s_font.Po \
-	$(DEPDIR)/s_gui.Po $(DEPDIR)/s_gui_window.Po \
-	$(DEPDIR)/s_texture.Po $(DEPDIR)/s_utility.Po \
-	$(DEPDIR)/star.Po $(DEPDIR)/star_mgr.Po \
-	$(DEPDIR)/stellarium_ui.Po $(DEPDIR)/vislimit.Po
+	$(DEPDIR)/grid.Po $(DEPDIR)/hip_star.Po \
+	$(DEPDIR)/hip_star_mgr.Po $(DEPDIR)/main.Po \
+	$(DEPDIR)/navigation.Po $(DEPDIR)/nebula.Po \
+	$(DEPDIR)/nebula_mgr.Po $(DEPDIR)/parsecfg.Po \
+	$(DEPDIR)/planet.Po $(DEPDIR)/planet_mgr.Po \
+	$(DEPDIR)/s_font.Po $(DEPDIR)/s_gui.Po \
+	$(DEPDIR)/s_gui_window.Po $(DEPDIR)/s_texture.Po \
+	$(DEPDIR)/s_utility.Po $(DEPDIR)/star.Po \
+	$(DEPDIR)/star_mgr.Po $(DEPDIR)/stellarium_ui.Po \
+	$(DEPDIR)/vislimit.Po
 COMPILE = $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) \
 	$(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
 CCLD = $(CC)
 LINK = $(CCLD) $(AM_CFLAGS) $(CFLAGS) $(AM_LDFLAGS) $(LDFLAGS) -o $@
-CFLAGS = -Wall -O3 
+CFLAGS = -Wall -O3 -ffast-math -fexpensive-optimizations
 CXXCOMPILE = $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) \
 	$(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS)
 CXXLD = $(CXX)
 CXXLINK = $(CXXLD) $(AM_CXXFLAGS) $(CXXFLAGS) $(AM_LDFLAGS) $(LDFLAGS) \
 	-o $@
-CXXFLAGS = -O3
+CXXFLAGS = -O3 -ffast-math -fexpensive-optimizations
 DIST_SOURCES = $(stellarium_SOURCES)
 
 RECURSIVE_TARGETS = info-recursive dvi-recursive install-info-recursive \
@@ -193,6 +197,9 @@ distclean-compile:
 include $(DEPDIR)/constellation.Po
 include $(DEPDIR)/constellation_mgr.Po
 include $(DEPDIR)/draw.Po
+include $(DEPDIR)/grid.Po
+include $(DEPDIR)/hip_star.Po
+include $(DEPDIR)/hip_star_mgr.Po
 include $(DEPDIR)/main.Po
 include $(DEPDIR)/navigation.Po
 include $(DEPDIR)/nebula.Po

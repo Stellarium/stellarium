@@ -2475,8 +2475,8 @@ echo "$as_me:2474: result: $am_cv_CXX_dependencies_compiler_type" >&5
 echo "${ECHO_T}$am_cv_CXX_dependencies_compiler_type" >&6
 CXXDEPMODE=depmode=$am_cv_CXX_dependencies_compiler_type
 
-CFLAGS="-Wall -O3 "
-CXXFLAGS="-O3"
+CFLAGS="-Wall -O3 -ffast-math -fexpensive-optimizations"
+CXXFLAGS="-O3 -ffast-math -fexpensive-optimizations"
 
 ac_ext=c
 ac_cpp='$CPP $CPPFLAGS'
