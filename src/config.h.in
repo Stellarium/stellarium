@@ -1,90 +1,45 @@
-/* src/config.h.in.  Generated from configure.in by autoheader.  */
+/* src/config.h.in.  Generated automatically from configure.in by autoheader.  */
 
-/* "Set the directory where the datas (as textures or star catalogs) are
-   stored." */
-#undef CONFIG_DATA_DIR
+/* Define if your processor stores words with the most significant
+   byte first (like Motorola and SPARC, unlike Intel and VAX).  */
+#undef WORDS_BIGENDIAN
 
-/* "If we are on cygwin plateform." */
-#undef CYGWIN
+/* Define if the X Window System is missing or not being used.  */
+#undef X_DISPLAY_MISSING
 
-/* Define to 1 if you have the <inttypes.h> header file. */
-#undef HAVE_INTTYPES_H
-
-/* Define to 1 if you have the `GL' library (-lGL). */
-#undef HAVE_LIBGL
-
-/* Define to 1 if you have the `GLU' library (-lGLU). */
-#undef HAVE_LIBGLU
-
-/* Define to 1 if you have the `MesaGL' library (-lMesaGL). */
-#undef HAVE_LIBMESAGL
-
-/* Define to 1 if you have the `MesaGLU' library (-lMesaGLU). */
-#undef HAVE_LIBMESAGLU
-
-/* Define to 1 if you have the <memory.h> header file. */
-#undef HAVE_MEMORY_H
-
-/* Define to 1 if you have the <stdint.h> header file. */
-#undef HAVE_STDINT_H
-
-/* Define to 1 if you have the <stdlib.h> header file. */
-#undef HAVE_STDLIB_H
-
-/* Define to 1 if you have the `strcasecmp' function. */
+/* Define if you have the strcasecmp function.  */
 #undef HAVE_STRCASECMP
 
-/* Define to 1 if you have the `strdup' function. */
+/* Define if you have the strdup function.  */
 #undef HAVE_STRDUP
 
-/* Define to 1 if you have the <strings.h> header file. */
-#undef HAVE_STRINGS_H
-
-/* Define to 1 if you have the <string.h> header file. */
-#undef HAVE_STRING_H
-
-/* Define to 1 if you have the <sys/stat.h> header file. */
-#undef HAVE_SYS_STAT_H
-
-/* Define to 1 if you have the <sys/types.h> header file. */
-#undef HAVE_SYS_TYPES_H
-
-/* Define to 1 if you have the `toupper' function. */
+/* Define if you have the toupper function.  */
 #undef HAVE_TOUPPER
 
-/* Define to 1 if you have the <unistd.h> header file. */
-#undef HAVE_UNISTD_H
+/* Define if you have the GL library (-lGL).  */
+#undef HAVE_LIBGL
 
-/* "If we are on macosx plateform." */
-#undef MACOSX
+/* Define if you have the GLU library (-lGLU).  */
+#undef HAVE_LIBGLU
+
+/* Define if you have the MesaGL library (-lMesaGL).  */
+#undef HAVE_LIBMESAGL
+
+/* Define if you have the MesaGLU library (-lMesaGLU).  */
+#undef HAVE_LIBMESAGLU
 
 /* Name of package */
 #undef PACKAGE
 
-/* Define to the address where bug reports for this package should be sent. */
-#undef PACKAGE_BUGREPORT
-
-/* Define to the full name of this package. */
-#undef PACKAGE_NAME
-
-/* Define to the full name and version of this package. */
-#undef PACKAGE_STRING
-
-/* Define to the one symbol short name of this package. */
-#undef PACKAGE_TARNAME
-
-/* Define to the version of this package. */
-#undef PACKAGE_VERSION
-
-/* Define to 1 if you have the ANSI C header files. */
-#undef STDC_HEADERS
-
 /* Version number of package */
 #undef VERSION
 
-/* Define to 1 if your processor stores words with the most significant byte
-   first (like Motorola and SPARC, unlike Intel and VAX). */
-#undef WORDS_BIGENDIAN
+/* Set the directory where the datas (as textures or star catalogs) are stored. */
+#undef CONFIG_DATA_DIR
 
-/* Define to 1 if the X Window System is missing or not being used. */
-#undef X_DISPLAY_MISSING
+/* If we are on macosx plateform. */
+#undef MACOSX
+
+/* If we are on cygwin plateform. */
+#undef CYGWIN
+
