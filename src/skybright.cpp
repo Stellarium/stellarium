@@ -110,13 +110,16 @@ float skybright::get_luminance(float cos_dist_moon, float cos_dist_sun, float co
 	FS += 229086.77f * ( 1.06f + cos_dist_sun*cos_dist_sun );
 	b_daylight = 9.289663e-12 * (1.f - bKX) * (FS * C4 + 440000.f * (1.f - C4));
 
+	// 27/08/2003 : Decide increase moonlight for more halo effect...
+	b_moon *= 2.;
+
 	// Total sky brightness
 	b_daylight>b_twilight ? b_total = b_night + b_twilight + b_moon : b_total = b_night + b_daylight + b_moon;
 
 	if (b_total<0.f) return 0.f;
 
 	b_total *= 900900.9;	// In lambert
-	return b_total * M_PI * 1e-4 * 32393895;	// In cd/m^2 : the 32393895 is empirical term because the
+	return b_total * M_PI * 1e-4 * 3239389*2;//5;	// In cd/m^2 : the 32393895 is empirical term because the
 												// lambert -> cd/m^2 formula seems to be wrong...
 }
 /*

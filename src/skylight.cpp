@@ -173,8 +173,8 @@ void skylight::get_xyY_valuev(skylight_struct2 * p)
 		Ey * cos_dist_sun * cos_dist_sun);
 	p->color[2] = term_Y * (1.f + AY * expf(BY/cos_zenith_angle)) * (1.f + CY * expf(DY*dist_sun) +
 		EY * cos_dist_sun * cos_dist_sun);
-		
-	if (p->color[2] < 0 || p->color[2] < 0 || p->color[2] < 0)
+
+	if (p->color[2] < 0 || p->color[0] < 0 || p->color[1] < 0)
 	{
 		p->color[0] = 0.25;
 		p->color[1] = 0.25;

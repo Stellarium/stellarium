@@ -149,7 +149,10 @@ void Projector::update_auto_zoom(int delta_time)
 {
     if (flag_auto_zoom)
     {
-		set_fov(zoom_move.start + (zoom_move.aim - zoom_move.start) * zoom_move.coef);
+		// Use a smooth function
+		float smooth = 3.f;
+		double c = atanf(smooth * 2.*zoom_move.coef-smooth)/atanf(smooth)/2+0.5;
+		set_fov(zoom_move.start + (zoom_move.aim - zoom_move.start) * c);
         zoom_move.coef+=zoom_move.speed*delta_time;
         if (zoom_move.coef>=1.)
         {
