@@ -28,13 +28,13 @@ class Constellation_mgr
 public:
     Constellation_mgr();
     virtual ~Constellation_mgr();
-    int Read(FILE *, Hip_Star_mgr * _VouteCeleste);
     void Load(char * font_fileName, char * catName, Hip_Star_mgr * _VouteCeleste);
     void Draw();
     void Draw(char * Abr);
     void DrawName(draw_utility * du);
 private:
     vector<constellation*> Liste;
+	s_font * asterFont;
 };
 
 #endif // _CONSTELLATION_MGR_H_

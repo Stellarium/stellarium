@@ -24,7 +24,7 @@
 char s_texture::texDir[255] = "./";
 char s_texture::suffix[10] = "";
 
-s_texture::s_texture(char * _textureName) : loadType(PNG_BLEND3)
+s_texture::s_texture(const char * _textureName) : loadType(PNG_BLEND3), loadType2(GL_CLAMP)
 {
     if (!_textureName) exit(-1);
     texID=0;
@@ -32,10 +32,9 @@ s_texture::s_texture(char * _textureName) : loadType(PNG_BLEND3)
     load();
 }
 
-s_texture::s_texture(char * _textureName, int _loadType)
+s_texture::s_texture(const char * _textureName, int _loadType)
 {
     if (!_textureName) exit(-1);
-	loadType2=GL_CLAMP;
     switch (_loadType)
     {
         case TEX_LOAD_TYPE_PNG_ALPHA : loadType=PNG_ALPHA; break;
@@ -50,21 +49,32 @@ s_texture::s_texture(char * _textureName, int _loadType)
 }
 
 s_texture::~s_texture()
-{   
+{
+//printf("Unloading texture ID=%u %s\n",texID, textureName);
     unload();
     if (textureName) free(textureName);
 }
 
 int s_texture::load()
 {
-    char * fullName = (char*)malloc( sizeof(char) * ( strlen("./"/*texDir*/) + strlen(textureName) + strlen(".png"/*suffix*/) + 1 ) );
-    sprintf(fullName,"%s%s%s","./"/*texDir*/,textureName,".png"/*suffix*/);
+	// Create the full texture name
+    char * fullName = (char*)malloc( sizeof(char) * ( strlen(texDir) + strlen(textureName) + strlen(suffix) + 2) );
+    sprintf(fullName,"%s%s%s",texDir,textureName,suffix);
+
     FILE * tempFile = fopen(fullName,"r");
-    if (!tempFile) printf("WARNING : Can't load texture %s!\n",fullName);
+    if (!tempFile) printf("WARNING : Can't find texture file %s!\n",fullName);
+	fclose(tempFile);
+
     pngInfo info;
     pngSetStandardOrientation(1);
     texID = pngBind(fullName, PNG_BUILDMIPMAPS, loadType, &info, loadType2, GL_LINEAR, GL_LINEAR);
-    return (texID!=0);
+
+//printf("loaded texture ID=%u %s\n",texID, fullName);
+
+	if (fullName) free(fullName);
+	fullName=NULL;
+
+	return (texID!=0);
 }
 
 void s_texture::unload()

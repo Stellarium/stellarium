@@ -84,6 +84,18 @@ void stel_sdl::init(void)
 
 }
 
+// Terminate the application
+void TerminateApplication(void)
+{
+	static SDL_Event Q;						// Send a SDL_QUIT event
+	Q.type = SDL_QUIT;						// To the SDL event queue
+	if(SDL_PushEvent(&Q) == -1)				// Try to send the event
+	{
+		printf("SDL_QUIT event can't be pushed: %s\n", SDL_GetError() );
+		exit(-1);
+	}
+}
+
 void stel_sdl::start_main_loop(void)
 {
     bool AppVisible = true;			// At The Beginning, Our App Is Visible
@@ -134,7 +146,10 @@ void stel_sdl::start_main_loop(void)
 					//{
 						Keys = SDL_GetKeyState(NULL);	// Take a snapshot of the keyboard
 						if (Keys[SDLK_F1]) SDL_WM_ToggleFullScreen(Screen); // Try fullscreen
-						if (Keys[SDLK_ESCAPE]) exit(0);
+						if (Keys[SDLK_ESCAPE])
+						{
+							TerminateApplication();
+						}
 						pressKey(Keys);
 					//}
 					break;
@@ -153,25 +168,14 @@ void stel_sdl::start_main_loop(void)
 			}
 			else
 			{
+
 				TickCount = SDL_GetTicks();			// Get present ticks
 				core->update(TickCount-LastCount);	// And update the motions and data
-				core->draw(TickCount-LastCount);		// Do the drawings!
+				core->draw(TickCount-LastCount);	// Do the drawings!
 				LastCount = TickCount;				// Save the present tick probing
 				SDL_GL_SwapBuffers();				// And swap the buffers
 			}
 		}
-	}
-}
-
-// Terminate the application
-void TerminateApplication(void)
-{
-	static SDL_Event Q;						// Send a SDL_QUIT event
-	Q.type = SDL_QUIT;						// To the SDL event queue
-	if(SDL_PushEvent(&Q) == -1)				// Try to send the event
-	{
-		printf("SDL_QUIT event can't be pushed: %s\n", SDL_GetError() );
-		exit(-1);
 	}
 }
 

@@ -22,15 +22,13 @@
 
 #define RADIUS_CONST 8.
 
-extern s_font * constNameFont;
-
 constellation::constellation() : Name(NULL), Inter(NULL), Asterism(NULL)
 {
 }
 
 constellation::~constellation()
 {   
-	if (Asterism) delete [] Asterism;
+	if (Asterism) delete Asterism;
     Asterism = NULL;
     if (Name) delete Name;
     Name = NULL;
@@ -107,22 +105,8 @@ void constellation::DrawSeule()
     glPopMatrix();
 }
 
-// Chek if the constellation is in the field of view and calc the x,y position if true
-void constellation::ComputeName(draw_utility * du)
-{
-	double z_c;
-    du->project(Xnom, Ynom, Znom, x_c, y_c, z_c);
-    // Check if in the field of view
-    if ( z_c > 1 || x_c<0. || y_c<0. || x_c>du->screenW || y_c>du->screenH ) inFov = 0;
-	else inFov = 1;
-
-}
-
 // Draw the name
-void constellation::DrawName(void)
+void constellation::DrawName(s_font * constfont)
 {
-	if (inFov)
-    {   
-		constNameFont->print((int)x_c-40,(int)y_c, Inter/*Name*/); //"Inter" for internationnal name
-    }
+	constfont->print((int)XYnom[0]-40,(int)XYnom[1], Inter/*Name*/); //"Inter" for internationnal name
 }

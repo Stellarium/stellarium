@@ -25,7 +25,7 @@
 
 #define RADIUS_NEB 28.
 
-extern s_font * nebulaFont;
+s_texture * Nebula::texCircle = NULL;
 
 Nebula::Nebula()
 {   
@@ -35,11 +35,12 @@ Nebula::Nebula()
 }
 
 Nebula::~Nebula()
-{   if (matTransfo) delete matTransfo;
+{
+	if (matTransfo) delete matTransfo;
     if (nebTexture) delete nebTexture;
 }
 
-void Nebula::get_info_string(char * s)
+void Nebula::get_info_string(char * s) const
 {
 	float tempDE, tempRA;
 	rect_to_sphe(&tempRA,&tempDE,&XYZ);
@@ -55,7 +56,14 @@ int Nebula::Read(FILE * catalogue)
     int demin;
     matTransfo=new float[16];   // Used to store the precalc transfos matrix used to draw the star
 
-    if (fscanf(catalogue,"%u %u %s %s %d %f %d %d %f %f %f %s\n",&NGC,&Messier, Type, Constellation, &rahr, &ramin,&dedeg,&demin,&Mag,&Taille,&Rotation, Name)<12) return 0;//printf("Chargement de M%u %dh%fmin %ddeg%dmin Vmag=%f Taille=%f Rot:%f\n",Messier,rahr,ramin,dedeg,demin,Mag,Taille,Rotation);
+	char texName[255];
+
+    if (fscanf(catalogue,"%u %u %s %s %d %f %d %d %f %f %f %s %s\n",
+		&NGC,&Messier, Type, Constellation, &rahr, &ramin,&dedeg,&demin,
+		&Mag,&Taille,&Rotation, Name, texName)!=13)
+	{
+		return 0;
+	}
 
     // Replace the "_" with " "
     char * cc;
@@ -88,20 +96,8 @@ int Nebula::Read(FILE * catalogue)
     RayonPrecalc=RADIUS_NEB*sin(Taille/2/60*M_PI/180);
     //printf("rayon : %f\n",RayonPrecalc);
 
-    if (Messier>0)      //Load texture for Messiers
-    {
-		int temp = ReadTexture();
-        return temp;
-    }
-    return 0;
-}
+    nebTexture=new s_texture(texName);
 
-
-int Nebula::ReadTexture()
-{
-	char nomFic[128];
-    sprintf(nomFic,"m%d",Messier);
-    nebTexture=new s_texture(nomFic);
     return 1;
 }
 
@@ -152,10 +148,9 @@ void Nebula::DrawCircle(draw_utility * du)
     glPopMatrix(); 
 }
 
-void Nebula::DrawName(void)
+void Nebula::DrawName(s_font* nebulaFont)
 {   
     glColor3f(0.4,0.3,0.5);
 	nebulaFont->print(XY[0]+3,XY[1]+3, Name); //"Inter" for internationnal name
 }
 
-s_texture * Nebula::texCircle=NULL;

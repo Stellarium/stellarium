@@ -25,6 +25,9 @@ orbit.h	solve.h		orbit.cpp \
 skylight.h          skylight.cpp \
 tone_reproductor.h  tone_reproductor.cpp \
 init_parser.h       init_parser.cpp \
+s_gui.h				s_gui.cpp \
+stel_ui.h			stel_ui.cpp \
+callback.h \
 stellarium.h \
 vecmath.h bytes.h
 

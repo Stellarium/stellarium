@@ -23,7 +23,7 @@
 #include <stdlib.h>
 #include "s_font.h"
 
-s_font::s_font(float size_i, char * textureName, char * dataFileName) : s_fontTexture(NULL), size(size_i)
+s_font::s_font(float size_i, char * textureName, const char * dataFileName) : s_fontTexture(NULL), size(size_i)
 {
     if (!buildDisplayLists(dataFileName, textureName)) printf("ERROR WHILE CREATING FONT %s\n",textureName);
 }
@@ -35,7 +35,7 @@ s_font::~s_font()
     s_fontTexture=NULL;
 }
 
-int s_font::buildDisplayLists(char * dataFileName, char * textureName)
+int s_font::buildDisplayLists(const char * dataFileName, const char * textureName)
 {
     int posX;
     int posY;
@@ -80,7 +80,7 @@ int s_font::buildDisplayLists(char * dataFileName, char * textureName)
         averageCharLen+=sizeX;
         nbChar++;
 
-        glNewList(g_base+charNum,GL_COMPILE);                                       // Start Building A List
+        glNewList(g_base+charNum,GL_COMPILE);                               // Start Building A List
 	glTranslated(leftSpacing*ratio,0,0);                                    // Move To The Left Of The Character
 	glBegin(GL_QUADS );
 	    glTexCoord2f((float)posX/256,(float)(256-posY-sizeY)/256);
@@ -100,7 +100,7 @@ int s_font::buildDisplayLists(char * dataFileName, char * textureName)
     return 1;
 }
 
-void s_font::print(float x, float y, char * str)
+void s_font::print(float x, float y, const char * str) const
 { 
     if	(!s_fontTexture)
     {
@@ -109,9 +109,10 @@ void s_font::print(float x, float y, char * str)
     }
     glBindTexture(GL_TEXTURE_2D, s_fontTexture->getID());  // Select Our s_font Texture
     glPushMatrix();
-    glTranslatef(x,y,0);                                // Position The Text (0,0 - Top Left)
-    glListBase(g_base);                                 // Init the Display list base
-    glCallLists(strlen(str),GL_BYTE,str);               // Write The Text To The Screen
+    glTranslatef(x,y,0);								// Position The Text (0,0 - Top Left)
+	glScalef(1, -1, 1);									// invert the y axis, down is positive
+    glListBase(g_base);									// Init the Display list base
+    glCallLists(strlen(str),GL_BYTE,str);				// Write The Text To The Screen
     glPopMatrix();
 }
 
