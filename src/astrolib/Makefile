@@ -16,9 +16,9 @@
 
 SHELL = /bin/sh
 
-srcdir = /home/Fabien/work/stellarium/src/astrolib
-top_srcdir = /home/Fabien/work/stellarium
-VPATH = /home/Fabien/work/stellarium/src/astrolib
+srcdir = /home/Fabien/work2/stellarium/src/astrolib
+top_srcdir = /home/Fabien/work2/stellarium
+VPATH = /home/Fabien/work2/stellarium/src/astrolib
 prefix = /usr/local
 exec_prefix = ${prefix}
 
@@ -39,10 +39,10 @@ pkglibdir = $(libdir)/stellarium
 pkgincludedir = $(includedir)/stellarium
 top_builddir = ../..
 
-ACLOCAL = ${SHELL} /home/Fabien/work/stellarium/missing --run aclocal
-AUTOCONF = ${SHELL} /home/Fabien/work/stellarium/missing --run autoconf
-AUTOMAKE = ${SHELL} /home/Fabien/work/stellarium/missing --run automake
-AUTOHEADER = ${SHELL} /home/Fabien/work/stellarium/missing --run autoheader
+ACLOCAL = ${SHELL} /home/Fabien/work2/stellarium/missing --run aclocal
+AUTOCONF = ${SHELL} /home/Fabien/work2/stellarium/missing --run autoconf
+AUTOMAKE = ${SHELL} /home/Fabien/work2/stellarium/missing --run automake
+AUTOHEADER = ${SHELL} /home/Fabien/work2/stellarium/missing --run autoheader
 
 am__cd = CDPATH="$${ZSH_VERSION+.}$(PATH_SEPARATOR)" && cd
 INSTALL = /usr/bin/install -c
@@ -64,7 +64,7 @@ host_triplet = i686-pc-cygwin
 EXEEXT = .exe
 OBJEXT = o
 PATH_SEPARATOR = :
-AMTAR = ${SHELL} /home/Fabien/work/stellarium/missing --run tar
+AMTAR = ${SHELL} /home/Fabien/work2/stellarium/missing --run tar
 AWK = gawk
 CC = gcc
 CPP = gcc -E
@@ -81,7 +81,7 @@ X_LIBS =
 X_PRE_LIBS = 
 am__include = include
 am__quote = 
-install_sh = /home/Fabien/work/stellarium/install-sh
+install_sh = /home/Fabien/work2/stellarium/install-sh
 
 noinst_LIBRARIES = libastrolib.a
 
