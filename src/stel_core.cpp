@@ -180,6 +180,8 @@ void stel_core::init(void)
 	nebulas->read(DataDir + "spacefont.txt", DataDir + "messier.fab", screen_W/2-150, screen_H/2-20);
 	projection->reset_perspective_projection();
 	
+	selected_planet=NULL;	// Fix a bug on macosX! Thanks Fumio!
+		
 	// Compute the atmosphere color (if necessary)
 	// compute global sky brightness TODO : make this more "scientifically"
 	// Compute the sun position in local coordinate
@@ -194,7 +196,6 @@ void stel_core::init(void)
 	if( sky_brightness < 0 ) {
 	  sky_brightness = 0;
 	} else if (sky_brightness<0.1) sky_brightness=0.1;*/
-
 }
 
 void stel_core::quit(void)
@@ -602,6 +603,7 @@ void stel_core::load_config_from(const string& confFile)
 	InitViewPos 		= str_to_vec3f(conf.get_str("navigation:init_view_pos").c_str());
 	auto_move_duration	= conf.get_double ("navigation","auto_move_duration",1.5);
 	FlagUTC_Time		= conf.get_boolean("navigation:flag_utc_time");
+	MouseZoom			= conf.get_int("navigation","mouse_zoom",30);
 
 	// Viewing Mode
 	tmpstr = conf.get_str("navigation:viewing_mode");
@@ -747,6 +749,7 @@ void stel_core::save_config_to(const string& confFile)
 	conf.set_str	("navigation:init_view_pos", vec3f_to_str(InitViewPos));
 	conf.set_double ("navigation:auto_move_duration", auto_move_duration);
 	conf.set_boolean("navigation:flag_utc_time", FlagUTC_Time);
+	conf.set_int("navigation:mouse_zoom", MouseZoom);
 	switch (ViewingMode)
 	{
 		case VIEW_HORIZON : tmpstr="horizon";	break;
@@ -805,6 +808,21 @@ int stel_core::handle_clic(Uint16 x, Uint16 y, Uint8 state, Uint8 button)
 // Handle mouse move
 int stel_core::handle_move(int x, int y)
 {
+	// Turn if the mouse is at the edge of the screen.
+	if (x == 0)
+		turn_left(1);
+	else if (x == screen_W - 1)
+		turn_right(1);
+	else
+		turn_left(0);
+
+	if (y == 0)
+		turn_up(1);
+	else if (y == screen_H - 1)
+		turn_down(1);
+	else
+		turn_up(0);
+
 	return ui->handle_move(x, y);
 }
 
