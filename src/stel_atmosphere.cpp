@@ -45,7 +45,8 @@ stel_atmosphere::~stel_atmosphere()
 	if (tab_sky) delete tab_sky;
 }
 
-void stel_atmosphere::compute_color(Vec3d sunPos, Vec3d moonPos, float moon_phase, tone_reproductor * eye, draw_utility * du)
+void stel_atmosphere::compute_color(Vec3d sunPos, Vec3d moonPos, float moon_phase,
+	tone_reproductor * eye, draw_utility * du)
 {
 	static    GLdouble M[16];
 	static    GLdouble P[16];

@@ -50,12 +50,14 @@ class rotation_elements
     float precessionRate; // rate of precession of rotation axis in rads/day
 };
 
-// Class ued to manage rings for planets like saturn
+// Class to manage rings for planets like saturn
 class ring
 {
 public:
-	ring(float _radius, s_texture * _tex);
-	virtual void draw(navigator* nav);
+	ring(float _radius, const char* _texname);
+	virtual ~ring();
+	void draw(const navigator* nav);
+	double get_size(void) const {return radius;}
 private:
 	float radius;
 	s_texture * tex;
@@ -112,7 +114,9 @@ public:
 	const char* get_name(void) const {return name;}
 
 	// Return the radius of a circle containing the object on screen
-	virtual float get_on_screen_size(navigator * nav, draw_utility * du);
+	float get_on_screen_size(navigator * nav, draw_utility * du);
+
+	void set_rings(ring* r) {rings = r;}
 
 	static void set_font(s_font* f) {planet_name_font = f;}
 
@@ -143,6 +147,8 @@ protected:
 	float axis_rotation;			// Rotation angle of the planet on it's axis
     s_texture * tex_map;			// Planet map texture
 	s_texture * tex_halo;			// Little halo texture
+
+	ring* rings;					// Planet rings
 
 	double lastJD;
 	double deltaJD;
