@@ -285,7 +285,8 @@ void stel_core::draw(int delta_time)
     if (selected_object) selected_object->draw_pointer(delta_time, projection, navigation);
 
 	// Draw the planets
-	if (FlagPlanets) ssystem->draw(FlagPlanetsHints, projection, navigation, tone_converter, FlagGravityLabels, FlagPointStar);
+	if (FlagPlanets) ssystem->draw(FlagPlanetsHints, projection, navigation, tone_converter,
+		FlagGravityLabels, FlagPointStar);
 
 	// Set openGL drawings in local coordinates i.e. generally altazimuthal coordinates
 	navigation->switch_to_local();
@@ -607,7 +608,17 @@ int stel_core::handle_keys(SDLKey key, s_gui::S_GUI_VALUE state)
 	s_tui::S_TUI_VALUE tuiv;
 	if (state == s_gui::S_GUI_PRESSED) tuiv = s_tui::S_TUI_PRESSED;
 	else tuiv = s_tui::S_TUI_RELEASED;
-	if (FlagShowTui && ui->handle_keys_tui(key, tuiv)) return 1;
+	if (FlagShowTui)
+	{
+
+		if (ui->handle_keys_tui(key, tuiv)) return 1;
+		if (state==S_GUI_PRESSED && (key==SDLK_m || key==SDLK_ESCAPE))
+		{
+			FlagShowTui = false;
+			return 1;
+		}
+		return 1;
+	}
 
 	if (ui->handle_keys(key, state)) return 1;
 
