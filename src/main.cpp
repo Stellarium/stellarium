@@ -49,7 +49,7 @@ Nebula_mgr * messiers;                // Class to manage the messier objects
 Planet_mgr * SolarSystem;             // Class to manage the planets
 s_texture * texIds[200];              // Common Textures
 
-static timeAtmosphere=0;
+static int timeAtmosphere=0;
 
 void init();
 

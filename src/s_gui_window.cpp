@@ -20,19 +20,22 @@
 #include "s_gui_window.h"
 
 void ExtStdWinClicCallback(int x,int y,enum guiValue state,enum guiValue button,Component * me)
-{   ((StdWin*)me)->StdWinClicCallback(button, state);
+{   
+    ((StdWin*)me)->StdWinClicCallback(button, state);
     ((Container *)me)->handleMouseClic((int)(x-me->getPosition()[0]),(int)(y-me->getPosition()[1]),state,button);
 }
 
 void ExtStdWinMoveCallback(int x,int y,enum guiValue action,Component * me)
-{   ((StdWin*)me)->StdWinMoveCallback(x,y,action);
+{   
+    ((StdWin*)me)->StdWinMoveCallback(x,y,action);
     ((Container *)me)->handleMouseMove((int)(x-me->getPosition()[0]),(int)(y-me->getPosition()[1]));
 }
 
 StdWin::StdWin(float posx, float posy, float sizex, float sizey, char * _title, Component * parent)
  : Container(), mouseOn(false)
-{   setTitle(_title);
-    reshape(vec2_i(posx,posy),vec2_i(sizex,sizey));
+{
+    setTitle(_title);
+    reshape(vec2_i((int)posx,(int)posy),vec2_i((int)sizex, (int)sizey));
     setClicCallback(ExtStdWinClicCallback);
     setMoveCallback(ExtStdWinMoveCallback);
     theContainer = new Container();
@@ -41,8 +44,10 @@ StdWin::StdWin(float posx, float posy, float sizex, float sizey, char * _title, 
 
 
 void StdWin::StdWinClicCallback(enum guiValue button,enum guiValue state)
-{   if (state==GUI_DOWN)
-    {   mouseOn=true;
+{   
+    if (state==GUI_DOWN)
+    {
+	mouseOn=true;
         if (overBar) draging=true;
     }
     else
@@ -76,7 +81,7 @@ void StdWin::render(GraphicsContext& gc)
     vec2_i pos = getPosition();
     vec2_i sz = getSize();
     headerSize = gc.getFont()->getLineHeight()+2;
-    theContainer->reshape(vec2_i(0,headerSize), vec2_i(sz[0],sz[1]-headerSize));
+    theContainer->reshape(vec2_i(0,(int)headerSize), vec2_i(sz[0],sz[1]-(int)headerSize));
     glColor3f(gc.baseColor[0],gc.baseColor[1],gc.baseColor[2]);
     glEnable(GL_TEXTURE_2D);
     glEnable(GL_BLEND);
@@ -91,8 +96,8 @@ void StdWin::render(GraphicsContext& gc)
     glBegin(GL_QUADS );
         glTexCoord2f(0.0f,0.0f);    glVertex2i(pos[0],        pos[1]);    // Bas Gauche
         glTexCoord2f(1.0f,0.0f);    glVertex2i(pos[0] + sz[0], pos[1]);   // Bas Droite
-        glTexCoord2f(1.0f,1.0f);    glVertex2i(pos[0] + sz[0], pos[1] + headerSize); // Haut Droit
-        glTexCoord2f(0.0f,1.0f);    glVertex2i(pos[0],        pos[1] + headerSize);  // Haut Gauche
+        glTexCoord2f(1.0f,1.0f);    glVertex2i(pos[0] + sz[0], pos[1] + (int)headerSize); // Haut Droit
+        glTexCoord2f(0.0f,1.0f);    glVertex2i(pos[0],        pos[1] + (int)headerSize);  // Haut Gauche
     glEnd ();
     glDisable(GL_BLEND);
     glDisable(GL_TEXTURE_2D);
@@ -105,8 +110,8 @@ void StdWin::render(GraphicsContext& gc)
     glEnd();
 
     glBegin(GL_LINES);
-        glVertex2i(pos[0],        pos[1]+headerSize);
-        glVertex2i(pos[0] + sz[0], pos[1]+headerSize);
+        glVertex2i(pos[0],        pos[1]+(int)headerSize);
+        glVertex2i(pos[0] + sz[0], pos[1]+(int)headerSize);
     glEnd();
 
     glColor3f(gc.textColor[0],gc.textColor[1],gc.textColor[2]);
@@ -135,7 +140,7 @@ vec2_i StdWin::getInSize(GraphicsContext& gc)
 {   
     vec2_i sz = getSize();
     headerSize = gc.getFont()->getLineHeight()+2;
-    theContainer->reshape(vec2_i(0,headerSize), vec2_i(sz[0],sz[1]-headerSize));
+    theContainer->reshape(vec2_i(0,(int)headerSize), vec2_i(sz[0],sz[1]-(int)headerSize));
     return theContainer->getSize();
 }
 
@@ -143,7 +148,7 @@ void StdWin::setInSize(vec2_i newInSize, GraphicsContext& gc)
 {   
     vec2_i sz = getSize();
     headerSize = gc.getFont()->getLineHeight()+2;
-    reshape(getPosition(),vec2_i(0,headerSize)+newInSize);
+    reshape(getPosition(),vec2_i(0,(int)headerSize)+newInSize);
 }
 
 /**** StdBtWin ***/
@@ -171,8 +176,9 @@ void StdBtWin::render(GraphicsContext& gc)
 {
     vec2_i pos = getPosition();
     vec2_i sz = getSize();
-    vec2_i P(size[0]-gc.getFont()->getLineHeight(),2);
-    vec2_i V(gc.getFont()->getLineHeight()-4,gc.getFont()->getLineHeight()-4);
+    vec2_i P((int)(size[0]-gc.getFont()->getLineHeight()),2);
+    vec2_i V((int)gc.getFont()->getLineHeight()-4,(int)gc.getFont()->getLineHeight()-4);
     if(closeBt) closeBt->reshape(P,V);
     StdWin::render(gc);
 }
+
