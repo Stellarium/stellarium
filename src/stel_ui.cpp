@@ -711,7 +711,7 @@ int stel_ui::handle_keys(SDLKey key, S_GUI_VALUE state)
 	      }
 	  }
 
-	if(key==SDLK_9 || key==SDLK_COMMA) {
+	if(key==SDLK_9) {
 	  int zhr = core->meteors->get_ZHR();
 
 	  if(zhr <= 10 ) {
