@@ -22,6 +22,7 @@
 #define __VEC3T__
 
 #include <math.h>
+#include <stdio.h>
 
 #ifndef __VEC_T__
 #define __VEC_T_
@@ -287,9 +288,8 @@ struct vec3_t
    void RotateY(float amnt);
    void RotateZ(float amnt);
 
-//   friend ostream &operator<<(ostream &os, vec3_t &vec)
-//    {os << vec.v[0] << " " << vec.v[1] << " " << vec.v[2]; return os;}
-   
+	inline void Print(void) {printf("%f %f %f\n",v[0],v[1],v[2]);}
+
 protected:
    vec_t v[3];
 };

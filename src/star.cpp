@@ -124,9 +124,9 @@ void Star::Draw(void)
         rmag=1.2;
     }
 
-    if (rmag>4) 
+    if (rmag>6) 
     {   
-        rmag=4;
+        rmag=6;
     }
 
     // Calculation of the luminosity

@@ -17,7 +17,7 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-// class used to manage groups of Star
+// class used to manage groups of Stars
 
 #include "star_mgr.h"
 #include "s_texture.h"
