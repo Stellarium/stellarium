@@ -37,12 +37,15 @@ private:
 
 	// Function to call when the window size changes
 	void resize_GL(int w, int h);
+	static SDL_Cursor *create_cursor(const char *image[]);
 
 	// SDL managment variables
 	SDL_Surface *Screen;// The Screen
     SDL_Event	E;		// And Event Used In The Polling Process
     Uint32	TickCount;	// Used For The Tick Counter
     Uint32	LastCount;	// Used For The Tick Counter
+    SDL_Cursor *Cursor;
+
 };
 
 #endif // _STEL_SDL_H_
