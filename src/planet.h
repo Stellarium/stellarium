@@ -28,6 +28,10 @@
 #include "vecmath.h"
 #include "stel_object.h"
 
+// epoch J2000: 12 UT on 1 Jan 2000
+#define J2000 2451545.0
+
+
 #define NO_HALO 0
 #define WITH_HALO 1
 
@@ -56,6 +60,7 @@ public:
 	virtual double getGeographicRotation(double date);	// Return the y rotation to use from equatorial to geographic coordinates
     virtual void draw();
 	virtual void addSatellite(planet*);
+	virtual void set_rotation_elements(float,float,double,float,float,float);
 	virtual Vec3d get_ecliptic_pos();
 	virtual Vec3d get_heliocentric_ecliptic_pos();		// Return the heliocentric ecliptical position
 	unsigned char get_type(void) {return STEL_OBJECT_PLANET;}
@@ -64,11 +69,12 @@ protected:
     char * name;
 	int flagHalo;							// Set if a little "star like" halo will be drawn
 	rotation_elements re;					// Rotation param
-	double radius;							// Planet radius
+	double radius;							// Planet radius in UA
 	Vec3d ecliptic_pos; 					// Position in UA in the rectangular ecliptic coordinate system
 											// The reference of the coord is the parent planet
 	vec3_t color;
-	Mat4d trans_mat;						// Transfo matrix from local ecliptique to parent ecliptic
+	Mat4d mat_local_to_parent;		        // Transfo matrix from local ecliptique to parent ecliptic
+	Mat4d mat_parent_to_local;		        // Transfo matrix from parent ecliptique to local ecliptic
     s_texture * planetTexture;				// Planet map texture
 	s_texture * haloTexture;				// Little halo texture
 	void (*coord_func)(double JD, double *, double *, double *); // The function called for the calculation of the rect heliocentric position at time JD.

@@ -24,7 +24,8 @@
 #include "planet.h"
 
 extern planet * Sun;             	  // Sun, center of the solar system
-extern planet * Moon;             	  // Sun, center of the solar system
+extern planet * Moon;
+extern planet * Earth; 
 
 void InitSolarSystem(void); // Create and init the solar system
 

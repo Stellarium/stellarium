@@ -47,8 +47,6 @@ stellariumParams global;
 Hip_Star_mgr * HipVouteCeleste;       // Class to manage the Hipparcos catalog
 Constellation_mgr * ConstellCeleste;  // Constellation boundary and name
 Nebula_mgr * messiers;                // Class to manage the messier objects
-planet * Sun;             	  		  // Sun, center of the solar system
-planet * Moon;             	  		  // Moon, around earth
 s_texture * texIds[200];              // Common Textures
 
 /*ShootingStar * TheShooting = NULL;*/
@@ -115,6 +113,9 @@ void Draw(int delta_time)
     if (global.FlagEcliptic) DrawEcliptic(); 	// Draw the ecliptic line
     if (global.FlagConstellationName) ConstellCeleste->DrawName();	// Draw the constellations's names
     if (selected_object) selected_object->draw_pointer(delta_time);			// Draw the pointer
+
+	navigation.switch_to_heliocentric();
+	Sun->draw();
 
 	// Set openGL drawings in local coordinates i.e. generally altazimuthal coordinates
 	navigation.switch_to_local();
@@ -249,6 +250,7 @@ void Update(Uint32 delta_time)
     // Update the position of observation and time etc...
 	navigation.update_time(delta_time);
 	Sun->compute_position(navigation.get_JDay());
+	Sun->compute_trans_matrix(navigation.get_JDay());
 	navigation.update_transform_matrices();
 	navigation.update_vision_vector(delta_time);
 
