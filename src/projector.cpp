@@ -505,10 +505,8 @@ void Projector::print_gravity180(const s_font* font, float x, float y, const str
 	// If the text is too far away to be visible in the screen return
 	if (d>MY_MAX(vec_viewport[3], vec_viewport[2])*2) return;
 
-	//cout << dx << " " << dy << endl;
-
 	// When distance to center of screen is too small strange behaviours appear
-	if (d<50)
+/*	if (d<50)
 	{
 		theta = 0.f;
 		psi = 5;
@@ -524,15 +522,15 @@ void Projector::print_gravity180(const s_font* font, float x, float y, const str
 		reset_perspective_projection();
 		return;
 	}
-
+*/
 	theta = M_PI + atan2f(dx, dy);
 	psi = atan2f((float)font->getStrLen(str)/str.length(),d) * 180./M_PI;
 	if (psi>5) psi = 5;
 	set_orthographic_projection();
 	glTranslatef(x,y,0);
 	glRotatef(theta*180./M_PI,0,0,-1);
-	glTranslatef(sinf(xshift/d)*d,(1.f-cosf(xshift/d))*d + yshift,0);
-	glRotatef(xshift/d*180./M_PI,0,0,1);
+	//glTranslatef(sinf(xshift/d)*d,(1.f-cosf(xshift/d))*d + yshift,0);
+	//glRotatef(xshift/d*180./M_PI,0,0,1);
 	glScalef(1, -1, 1);
 	for (unsigned int i=0;i<str.length();++i)
 	{
