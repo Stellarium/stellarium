@@ -284,14 +284,14 @@ void Cardinals::draw(const Projector* prj) const
 // Draw the milky way : used too to 'clear' the buffer
 void DrawMilkyWay(tone_reproductor * eye, const Projector* prj, const navigator* nav)
 {
-	return;
 	// Scotopic color = 0.25, 0.25 in xyY mode. Milky way luminance ~= 0.001 cd/m^2
-	float c[3] = {1.25f, 1.25f, 1.01f};
+	float c[3] = {0.25f, 0.25f, 0.01f};
 	eye->xyY_to_RGB(c);
 	glColor3fv(c);
 
 	glPushMatrix();
 
+	glEnable(GL_CULL_FACE);
 	glEnable(GL_TEXTURE_2D);
 	glDisable(GL_BLEND);
 	glBindTexture(GL_TEXTURE_2D, texIds[2]->getID());
@@ -299,7 +299,9 @@ void DrawMilkyWay(tone_reproductor * eye, const Projector* prj, const navigator*
 	glRotatef(-16+90,0,1,0);
 	glRotatef(-84,0,0,1);
 
-	prj->sSphere(1.,40,40,nav->get_earth_equ_to_eye_mat(),1);
+	prj->sSphere(1.,40,40,nav->get_earth_equ_to_eye_mat());
+
+    glDisable(GL_CULL_FACE);
 
 	glPopMatrix();
 }
