@@ -161,6 +161,9 @@ private:
 	LabeledCheckBox* system_tz_cbx;
 	void setCurrentTimeFromConfig(void);
 
+	Time_zone_item* tzselector;
+	void setTimeZone(void);
+
 	void updateConfigVariables(void);
 	void updateConfigForm(void);
 

@@ -184,6 +184,7 @@ namespace s_gui
         virtual ~Container();
         virtual void addComponent(Component*);
         virtual void removeComponent(Component*);
+		virtual void removeAllComponents(void);
         virtual void draw(void);
 		virtual int onClic(int, int, S_GUI_VALUE, S_GUI_VALUE);
 		virtual int onMove(int, int);
@@ -499,6 +500,7 @@ namespace s_gui
 		const string getValue() const;
 		bool setValue(const string &);
 	private:
+		int elemsSize;
 		int itemSize;
 		vector<string> items;
 		vector<string>::iterator current;
@@ -510,9 +512,10 @@ namespace s_gui
     public:
 		Time_zone_item(const string& zonetab_file);
 		virtual void draw(void);
-		virtual int onClic(int, int, S_GUI_VALUE, S_GUI_VALUE);
 		string gettz(void); // should be const but gives a boring error...
 		void settz(const string& tz);
+		void onContinentClic(void);
+		void onCityClic(void);
     protected:
 		StringList continents_names;
 		map<string, StringList > continents;
