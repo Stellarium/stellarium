@@ -12,10 +12,10 @@ dnl Check for compilers.
 AC_PROG_CC
 AC_PROG_CXX
 
-CFLAGS=" -Wall -s -O3"
-CXXFLAGS=" -Wall -s -O3"
-dnl CFLAGS=" -Wall"
-dnl CXXFLAGS=" -Wall"
+dnl CFLAGS=" -Wall -s -O3"
+dnl CXXFLAGS=" -Wall -s -O3"
+CFLAGS=" -Wall"
+CXXFLAGS=" -Wall"
 dnl CFLAGS=" -Wall -pg -02"
 dnl CXXFLAGS=" -Wall -pg -02"
 

@@ -49,7 +49,8 @@ private:
 	static bool gravity_label;
 
 	s_texture* art_tex;
-	Vec3f art_vertex[4];
+
+	Vec3f art_vertex[16];
 
 };
 
