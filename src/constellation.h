@@ -38,11 +38,11 @@ public:
     int read(FILE *, Hip_Star_mgr * _VouteCeleste);
     void draw(Projector* prj, const Vec3f& lines_color) const;
     void draw_name(s_font * constfont, Projector* prj) const;
-    void draw_art(Projector* prj, int delta_time);
+    void draw_art(Projector* prj, navigator* nav, int delta_time);
     const Constellation* is_star_in(const Hip_Star *) const;
 private:
     void draw_optim(Projector* prj) const;
-    void draw_art_optim(Projector* prj, int delta_time);
+    void draw_art_optim(Projector* prj, navigator* nav, int delta_time);
     void set_common_name(char *_name) { inter = strdup(_name); }
     char * name;
     char short_name[4];
@@ -56,7 +56,7 @@ private:
 	s_texture* art_tex;
 	static s_font* constellation_font;		// Font used for load printing
 	
-	Vec3f art_vertex[9];
+	Vec3d art_vertex[9];
 	bool art_on;
 	float art_intensity;
 };
