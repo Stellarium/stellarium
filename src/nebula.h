@@ -32,7 +32,7 @@ friend class Nebula_mgr;
 public:
     Nebula();
     virtual ~Nebula();
-	void get_info_string(char *) const;
+	void get_info_string(char *, navigator * nav = NULL) const;
     int Read(FILE *);       // Read the Nebulae data in the stream
     void Draw();            // Draw the nebulae
     void DrawName(s_font* nebulaFont);

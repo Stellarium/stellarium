@@ -38,7 +38,7 @@ public:
     void Draw(draw_utility * du);		// Draw the star
     void DrawName(s_font * star_font);
 	vec3_t get_RGB(void) const {return RGB;}
-	void get_info_string(char * s) const;
+	void get_info_string(char * s, navigator * nav = NULL) const;
 	unsigned char get_type(void) const {return STEL_OBJECT_STAR;}
 	Vec3d get_earth_equ_pos(navigator* nav=NULL) const {return Vec3d(XYZ[0],XYZ[1],XYZ[2]);}
 
@@ -49,7 +49,7 @@ private:
     vec3_t RGB;             // 3 RGB colour values
     float rmag_t;           // Precalc of star size temporary
     float MaxColorValue;    // Precalc of the max color value
-    double XY[2];           // 2D Position
+    double XY[3];           // 2D Position + z homogeneous value
     char SpType;            // Spectral type
     char * CommonName;      // Common Name of the star
     char * Name;            // Scientific name
