@@ -27,6 +27,10 @@
 #include <list>
 #include "vecmath.h"
 #include "stel_object.h"
+#include "callback.h"
+
+// The callback type for the external position computation function
+typedef CBFunctor4<double, double*, double*, double*>* pos_func_type;
 
 // epoch J2000: 12 UT on 1 Jan 2000
 #define J2000 2451545.0
@@ -55,7 +59,8 @@ class rotation_elements
 class planet : public stel_object
 {
 public:
-	planet(char * _name, int _flagHalo, double _radius, vec3_t _color, s_texture * _planetTexture, s_texture * _haloTexture, void (*_coord_func)(double JD, double *, double *, double *));
+	planet(char * _name, int _flagHalo, double _radius, vec3_t _color, s_texture * _planetTexture,
+		s_texture * _haloTexture, pos_func_type _coord_func);
     virtual ~planet();
 	virtual void get_info_string(char * s, navigator * nav) const;// Return info string about the planet
 	virtual void compute_position(double date); 			// Compute the position from the mother planet
@@ -75,7 +80,7 @@ public:
 	virtual planet* search(Vec3d pos, double * angleClosest, navigator * nav);
 protected:
     char * name;
-	int flagHalo;							// Set if a little "star like" halo will be drawn
+	int flagHalo;							// Set wether a little "star like" halo will be drawn
 	rotation_elements re;					// Rotation param
 	double radius;							// Planet radius in UA
 	Vec3d ecliptic_pos; 					// Position in UA in the rectangular ecliptic coordinate system
@@ -86,8 +91,8 @@ protected:
 	float axis_rotation;					// Rotation angle of the planet on it's axis
     s_texture * planetTexture;				// Planet map texture
 	s_texture * haloTexture;				// Little halo texture
-	// The function called for the calculation of the equatorial rect heliocentric position at time JD.
-	void (*coord_func)(double JD, double *, double *, double *);
+	// The callback for the calculation of the equatorial rect heliocentric position at time JD.
+	pos_func_type coord_func;
 	planet * parent;						// Planet parent i.e. sun for earth
 	list<planet *> satellites;				// satellites of the planet
 };

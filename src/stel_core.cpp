@@ -133,11 +133,6 @@ void stel_core::init(void)
 	Sun->compute_trans_matrix(navigation->get_JDay());	// Matrix for sun and all the satellites (ie planets)
 	navigation->update_transform_matrices();			// Transform matrices between coordinates systems
 	navigation->set_local_vision(Vec3d(1.,0.,0.3));
-
-//tone_converter->set_world_adaptation_luminance(0.01);
-//	float C_5M = -2.5*logf(300.f*300.f*M_PI/4.f)/logf(10.f);
-//	float Luminance = exp(-0.4*log(10.)*(-1.4-C_5M)) * 0.00000254 / ((M_PI/180.f/3600.f) * (M_PI/180.f/3600.f));
-//	printf("lum=%f\n",tone_converter->adapt_luminance(Luminance));
 }
 
 
@@ -210,9 +205,8 @@ void stel_core::draw(int delta_time)
 	// convert.... TODO implicit convertion
 	Vec3d tempv = navigation->get_equ_vision();
 	Vec3f temp(tempv[0],tempv[1],tempv[2]);
-	if (FlagStars && (!FlagAtmosphere || sky_brightness<0.2))
-		hip_stars->Draw(StarScale, StarTwinkleAmount, FlagStarName, MaxMagStarName, temp, du);
-
+	if (FlagStars /*&& (!FlagAtmosphere || sky_brightness<0.2)*/)
+		hip_stars->Draw(StarScale, StarTwinkleAmount, FlagStarName, MaxMagStarName, temp, du, tone_converter);
 
 	// Draw the equatorial grid
 	// TODO : make a nice class for grid wit parameters like numbering and custom color/frequency
@@ -239,12 +233,15 @@ void stel_core::draw(int delta_time)
 	// Set openGL drawings in local coordinates i.e. generally altazimuthal coordinates
 	navigation->switch_to_local();
 
-
-//
 	// Compute the sun position in local coordinate
 	Vec3d temp2(0.,0.,0.);
 	Vec3d sunPos = navigation->helio_to_local(&temp2);
 	sunPos.normalize();
+
+	// Compute the moon position in local coordinate
+	temp2 = Moon->get_heliocentric_ecliptic_pos();
+	Vec3d moonPos = navigation->helio_to_local(&temp2);
+	moonPos.normalize();
 
 	// Init the depth buffer which is used by the planets drawing operations
 	glClear(GL_DEPTH_BUFFER_BIT);
@@ -253,9 +250,9 @@ void stel_core::draw(int delta_time)
 	if (FlagAtmosphere)
 	{
 		navigation->switch_to_local();
-		atmosphere->compute_color(FlagGround, sunPos, tone_converter, du);
+		atmosphere->compute_color(FlagGround, sunPos, moonPos, tone_converter, du);
 	}
-//
+
 	// Draw the atmosphere
 	if (FlagAtmosphere)	atmosphere->draw(du);
 
@@ -267,8 +264,6 @@ void stel_core::draw(int delta_time)
 		DrawMeridiensAzimut();		// Draw the "Altazimuthal meridian" lines
         DrawParallelsAzimut();		// Draw the "Altazimuthal parallel" lines
 	}
-
-
 
 	// Normal transparency mode
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -336,7 +331,7 @@ void stel_core::load_config(void)
 	navigation->set_flag_lock_equ_pos(conf->get_boolean("navigation:flag_lock_equ_pos"));
     // init the time parameters with current time and date
 	const ln_date * pDate = str_to_date(conf->get_str("navigation:date"),conf->get_str("navigation:time"));
-	printf("date\n");
+
 	if (pDate) navigation->set_JDay(get_julian_day(pDate));
 	else navigation->set_JDay(get_julian_from_sys());
 
