@@ -621,12 +621,12 @@ int stel_core::handle_keys(SDLKey key, s_gui::S_GUI_VALUE state)
 	else tuiv = s_tui::S_TUI_RELEASED;
 	if (FlagShowTuiMenu)
 	{
-		if (ui->handle_keys_tui(key, tuiv)) return 1;
 		if (state==S_GUI_PRESSED && key==SDLK_m)
 		{
 			FlagShowTuiMenu = false;
 			return 1;
 		}
+		if (ui->handle_keys_tui(key, tuiv)) return 1;
 		return 1;
 	}
 

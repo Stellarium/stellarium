@@ -642,7 +642,7 @@ int stel_ui::handle_keys(SDLKey key, S_GUI_VALUE state)
 			else if (s>0. && s<=JD_SECOND) s=0.;
         	core->navigation->set_time_speed(s);
 		}
-        if(key==SDLK_AT)
+        if(key==SDLK_6)
         {
 			core->FlagTimePause = !core->FlagTimePause;
 			if (core->FlagTimePause)
@@ -655,10 +655,15 @@ int stel_ui::handle_keys(SDLKey key, S_GUI_VALUE state)
 				core->navigation->set_time_speed(core->temp_time_velocity);
 			}
 		}
-        if(key==SDLK_HASH)
+        if(key==SDLK_7)
         {
         	core->navigation->set_time_speed(0);
 		}
+		if(key==SDLK_8)
+        {
+        	core->navigation->set_JDay(get_julian_from_sys());
+		}
+		
         if(key==SDLK_LEFTBRACKET)
         {
         	core->navigation->set_JDay(core->navigation->get_JDay()-7*JD_DAY);
@@ -667,10 +672,7 @@ int stel_ui::handle_keys(SDLKey key, S_GUI_VALUE state)
         {
         	core->navigation->set_JDay(core->navigation->get_JDay()+7*JD_DAY);
 		}
-		if(key==SDLK_EXCLAIM)
-        {
-        	core->navigation->set_JDay(get_julian_from_sys());
-		}
+
 		if(key==SDLK_SLASH)
         {
 			if (SDL_GetModState() & KMOD_CTRL)
