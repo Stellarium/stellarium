@@ -3,12 +3,14 @@
 WINDOWS USERS : ----------------------------------
 run setup.exe and follow the instructions.
 
-------------------------------------------------
 MACOSX USERS : ----------------------------------
 run stellarium.dmg
 
+LINUX USERS : ----------------------------------
+Look for the binary package matching your distribution.
+
 ------------------------------------------------
-COMPILATION on LINUX - POSIX - CYGWIN : ----------------
+COMPILATION on LINUX - POSIX - MINGW : ----------------
 To compile stellarium, you will need the openGL/GLU and SDL dev libraries installed.
 
 You need to compile the sources :
@@ -27,124 +29,12 @@ to fully install stellarium (so that it will be launchable from everywhere) type
 ~$ make install
 
 ------------------------------------------------
-COMPILATION on MACOSX with Xcode (By Fumio Yamamoto): ----------------
+COMPILATION on MACOSX with Xcode (By Da-Woon Jung): ----------------
+untar the file macosx-xcode.tar.gz
+~$ tar -xzf stellariumXXX.tar.gz
 
-# naming rules in this document
-- archive name is "stellarium-x.y.z.tar.gz" for main tree, and "stellarium-yymmdd.tar.gz" for CVS tree
-- directory name is "stellarium-x.y.z" for main tree, and "stellarium" for CVS tree
-- names of patches and patch-like files and paths written in them also follow two rules above
-
-# to get or update CVS archive
-#if you have already had cvs archive, do "tar xzf stellarium-yymmdd.tar.gz"
-cvs -d:pserver:anonymous@cvs.sourceforge.net:/cvsroot/stellarium login
-cvs -z3 -d:pserver:anonymous@cvs.sourceforge.net:/cvsroot/stellarium co stellarium
-perl -e '@d=(gmtime((stat("stellarium/CVS/Entries"))[9]))[3..5];system(sprintf "tar czf stellarium-%02d%02d%02d.tar.gz stellarium",$d[2]-100,$d[1]+1,$d[0]);'
-
-# to build stellarium in os x
-tar xzf stellarium-0.6.1.tar.gz
-
-tar xzf stellarium-0.6.1-xcode.tar.gz
-#tar xjf stellarium-0.6.1-xcode.tar.bz2 #only for smaller size (for Patches @ sf.net)
-#tar xjf stellarium-0.6.1-sdlfw.tar.bz2 #only for smaller size (for Patches @ sf.net)
-
-cd stellarium-0.6.1
-#./autogen.sh #only for CVS tree
-./configure #only for main tree
-rm -f `find . -name Makefile -o -name '*.in' -o -name '*.am'`
-rm -f `find . -name .DS_Store`
-xcodebuild -target Stellarium -buildstyle Deployment
-#if failed, readding src to "Other Sources" may work well
-cp -Rf Frameworks build/Stellarium.app/Contents/
-rm -rf build/Stellarium.build
-rm -f build/Stellarium.app/Contents/pbdevelopment.plist
-rm -f `find . -name .DS_Store`
-hdiutil create -ov -fs HFS+ -volname stellarium-0.6.1 -srcfolder build ../stellarium-0.6.1.dmg
-cd ..
-rm -rf stellarium-0.6.1
-
-# to update stellarium-0.6.1/Frameworks/SDL.framework
-tar xzf stellarium-0.6.1-xcode.tar.gz
-tar xzf SDL-1.2.7.tar.gz
-cd SDL-1.2.7
-tar xzf PBProjects.tar.gz
-cd PBProjects/SDL
-rm -f `find . -name .DS_Store`
-xcodebuild -target Framework -buildstyle Deployment
-rm -f build/SDL.framework/Versions/A/Resources/pbdevelopment.plist
-rm -rf ../../../stellarium-0.6.1/Frameworks/SDL.framework
-cp -Rf build/SDL.framework ../../../stellarium-0.6.1/Frameworks
-cd ../../..
-rm -f `find . -name .DS_Store`
-rm -f stellarium-0.6.1/Stellarium.xcode/*.{mode1,pbxuser}
-tar czf stellarium-0.6.1-xcode.tar.gz stellarium-0.6.1/English.lproj stellarium-0.6.1/Frameworks stellarium-0.6.1/SDLMain.h stellarium-0.6.1/SDLMain.m stellarium-0.6.1/Stellarium.xcode stellarium-0.6.1/icon.icns
-rm -rf stellarium-0.6.1
-rm -rf SDL-1.2.7
-
-# to generate stellarium-0.6.1/{SDLMain.h,SDLMain.m,Stellarium.xcode}
-tar xzf SDL-1.2.7.tar.gz
-cd SDL-1.2.7
-tar xzf PBProjects.tar.gz
-cd PBProjects/SDL
-rm -f `find . -name .DS_Store`
-xcodebuild -target Framework -buildstyle Deployment
-rm -f build/SDL.framework/Versions/A/Resources/pbdevelopment.plist
-mkdir -p /Library/Frameworks
-rm -rf /Library/Frameworks/SDL.framework
-cp -Rf build/SDL.framework /Library/Frameworks/
-cd "../Project Stationary"
-mkdir -p "/Library/Application Support/Apple/Developer Tools/Target Templates/SDL"
-rm -f "/Library/Application Support/Apple/Developer Tools/Target Templates/SDL/Application.trgttmpl"
-mv Application.trgttmpl "/Library/Application Support/Apple/Developer Tools/Target Templates/SDL"
-rm -rf "/Library/Application Support/Apple/Developer Tools/Project Templates/Application/SDL*Application"
-mv SDL*Application "/Library/Application Support/Apple/Developer Tools/Project Templates/Application"
-
- - open Xcode
- - make "New Project" named "Stellarium"
-    based on "SDL OpenGL Application"
- - make "Other Sources" empty
- - quit Xcode
-
-cd ../../..
-rm -rf SDL-1.2.7
-rm -rf /Library/Frameworks/SDL.framework
-rm -rf "/Library/Application Support/Apple/Developer Tools/Target Templates/SDL"
-rm -rf "/Library/Application Support/Apple/Developer Tools/Project Templates/Application/SDL"*"Application"
-
-# to configure stellarium-0.6.1/{SDLMain.h,SDLMain.m,Stellarium.xcode}
-tar xzf stellarium-0.6.1.tar.gz
-cd stellarium-0.6.1
-rm -f `find . -name '*.in' -o -name '*.am'`
-rm -f src/stellarium.rc src/iniparser/{AUTHORS,README}
-
- - add SDL.framework to "Other Frameworks"
- - add icon.icns, data, config, & textures to "Resources"
-  with configurations below
-   + "NOT" Copy items into destination group's folder (if needed)
-   + Reference Type: Default
-   + Text Encoding: Mac OS Roman
-   + Create Folder References for any added folders
- - add src to "Other Sources"
-  with configurations above with one exception
-   + Recursively create groups for any added folders
-
- - set "Other Mach-O Linker Flags" of "Linker Settings" to 
-    -framework SDL -lmx
- - add src/glpng, src/iniparser, src/stellastro, src/stellplanet
-    and Frameworks/SDL.framework/Headers to "Headers" of "Search Paths"
- - add Frameworks to "Frameworks" of "Search Paths"
-
-cd ..
-rm -rf stellarium-0.6.1
-
- - add src/config.h to src after configuring as stated at the top
-
-# to make stellarium-0.6.1/icon.icns
- - open "Icon Composer"
- - drop stellarium-0.6.1/data/icon.bmp to Huge (48x48) line
- - save it as icon.icns
-
-
-
+this should create the "macosx" directory
+Follow instructions in the macosx/Readme.rtf file.
 
 ------------------------------------------------
 STANDARD GNU INSTALLATION: ---------------------

@@ -417,7 +417,13 @@ void stel_ui::cbr(void)
 	if (bt_flag_config->getIsMouseOver())
 		bt_flag_help_lbl->setLabel("Configuration window");
 	if (bt_flag_quit->getIsMouseOver())
-		bt_flag_help_lbl->setLabel("Quit [CTRL + Q]");
+		bt_flag_help_lbl->setLabel(
+#ifndef MACOSX
+		"Quit [CTRL + Q]"
+#else
+		"Quit [CMD + Q]"
+#endif
+);
 }
 
 void stel_ui::tcbr(void)
@@ -498,8 +504,12 @@ H   : Help\n\
 T   : Object Tracking\n\
 S   : Stars\n\
 I   : About Stellarium\n\
-F1  : Toggle fullscreen if possible.\n\
-CTRL+Q : Quit\n"
+F1  : Toggle fullscreen if possible.\n"
+#ifndef MACOSX
+"CTRL+Q : Quit\n"
+#else
+"CMD+Q  : Quit\n"
+#endif
     ,courierFont);
 
 	help_txtlbl->adjustSize();
@@ -664,13 +674,18 @@ int stel_ui::handle_clic(Uint16 x, Uint16 y, Uint8 button, Uint8 state)
 /*******************************************************************************/
 int stel_ui::handle_keys(SDLKey key, S_GUI_VALUE state)
 {
-  desktop->onKey(key, state);
-
-  if (state==S_GUI_PRESSED)
-    {
-      if(key==SDLK_q)
+	desktop->onKey(key, state);
+	if (state==S_GUI_PRESSED)
+	{
+		if(key==SDLK_q)
     	{
-	  if (SDL_GetModState() & KMOD_CTRL) core->quit();
+			if (SDL_GetModState() &
+#ifndef MACOSX
+          KMOD_CTRL
+#else
+          KMOD_META
+#endif
+			) core->quit();
 	}
 
       // if script is running, only script control keys are accessible
