@@ -2,7 +2,7 @@ dnl Enable CYGWIN/MACOSX/POSIX support
 dnl Process this file with autoconf to produce a configure script.
 
 AC_INIT(src/main.cpp)
-AC_CONFIG_HEADERS(src/config.h)
+AM_CONFIG_HEADER(src/config.h)
 AM_INIT_AUTOMAKE(stellarium,0.5.1b)
 
 dnl Check system type
@@ -38,13 +38,13 @@ if test "$prefix" = "NONE" ; then
    prefix=$ac_default_prefix
 fi
 PKGDATADIR=`eval echo "${datadir}/$PACKAGE"`
-AC_DEFINE_UNQUOTED(CONFIG_DATA_DIR, "$PKGDATADIR", "Set the directory where the datas (as textures or star catalogs) are stored.")
+AC_DEFINE_UNQUOTED(CONFIG_DATA_DIR, "$PKGDATADIR", [Set the directory where the datas (as textures or star catalogs) are stored.])
 
 dnl For each host type, set the appropriate openGL libraries
 dnl MACOSX
-case "$host" in 
+case "$host" in
 *-*-darwin*)
-	AC_DEFINE_UNQUOTED(MACOSX,1,"If we are on macosx plateform.")
+	AC_DEFINE_UNQUOTED(MACOSX,1,[If we are on macosx plateform.])
 	LDFLAGS="$LDFLAGS -flat_namespace -undefined suppress -lz "
 	LIBS="$LIBS -framework OpenGL -lobjc "
 	AC_CHECK_HEADER(OpenGL/gl.h,,AC_MSG_ERROR(gl.h not found - please install OpenGL))
@@ -53,7 +53,7 @@ case "$host" in
 
 dnl CYGWIN
 *-*-cygwin*)
-	AC_DEFINE_UNQUOTED(CYGWIN,1, "If we are on cygwin plateform.")
+	AC_DEFINE_UNQUOTED(CYGWIN,1, [If we are on cygwin plateform.])
 	LIBS="$LIBS -lopengl32 -lglu32"
 	AC_CHECK_HEADER(GL/gl.h,,AC_MSG_ERROR(gl.h not found - please install OpenGL))
 	AC_CHECK_HEADER(GL/glu.h,,AC_MSG_ERROR(glu.h not found - please install GLU))
