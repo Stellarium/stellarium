@@ -19,15 +19,61 @@
 
 #include "navigator.h"
 #include "stellarium.h"
-#include "s_utility.h"
+#include "stel_utility.h"
 
-// *******  Calc the Zenith position for the location and Time  ********
-/*void ComputeZenith(void)
+
+void observator_pos::save(FILE * f)
 {
-	global.RaZenith = -get_apparent_sidereal_time(global.JDay) + global.ThePlace.lng;
-    global.RaZenith = range_degrees(global.RaZenith);
-    global.DeZenith = PI/2 - global.ThePlace.lat;
-}*/
+	// Set the position values in config file format
+	char * tempLatitude=get_humanr_location(latitude);
+	char * tempLongitude=get_humanr_location(longitude);
+	fprintf(f,"%s %s %d %d %s\n",tempLongitude, tempLatitude, altitude, time_zone, name);
+	if (tempLatitude) delete tempLatitude;
+	if (tempLongitude) delete tempLongitude;
+}
+
+void observator_pos::load(FILE * f)
+{
+	char * tempLatitude=NULL, * tempLongitude=NULL;
+	fscanf(f,"%s %s %d %d %s\n",tempLongitude, tempLatitude, &altitude, &time_zone, name);
+    // set the read latitude and longitude
+    longitude=get_dec_location(tempLongitude);
+    latitude=get_dec_location(tempLatitude);
+	if (tempLatitude) delete tempLatitude;
+	if (tempLongitude) delete tempLongitude;
+}
+
+// Load the position info in the file name given
+void navigator::load_position(char * fileName)
+{
+	FILE * f = NULL;
+	f=fopen(fileName,"rt");
+	if (!f)
+	{
+        printf("ERROR %s NOT FOUND\n",fileName);
+        exit(-1);
+	}
+
+	position.load(f);
+
+	fclose(f);
+}
+
+// Save the position info in the file name given
+void navigator::save_position(char * fileName)
+{
+	FILE * f = NULL;
+	f=fopen(fileName,"wt");
+	if (!f)
+	{
+        printf("ERROR %s NOT FOUND\n",fileName);
+        exit(-1);
+	}
+
+	position.save(f);
+
+	fclose(f);
+}
 
 // Init the viewing matrix, setting the field of view, the clipping planes, and screen size
 void navigator::init_project_matrix(int w, int h, double near, double far)

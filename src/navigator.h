@@ -20,6 +20,7 @@
 #ifndef _NAVIGATION_H_
 #define _NAVIGATION_H_
 
+#include "stellarium.h"
 #include "vecmath.h"
 
 typedef struct          // Struct used to store data on the auto mov
@@ -31,6 +32,19 @@ typedef struct          // Struct used to store data on the auto mov
 }auto_move;
 
 
+class observator_pos
+{
+public:
+	void save(FILE *);
+	void load(FILE *);
+	char * name;
+	unsigned int planet;// Planet number : 0 floating, 1 Mercure - 9 pluton
+    double longitude;	// Longitude in degree
+	double latitude;	// Latitude in degree
+	int time_zone;		// Time zone
+    int altitude;		// Altitude in meter
+};
+
 // Class which manages a navigation context
 // Manage date/time, viewing direction/fov, observer position, and coordinate changes
 
@@ -39,7 +53,6 @@ class navigator
 public:
 	// Create and initialise to default a navigation context
 	navigator();
-
     ~navigator();
 
 	// Init the viewing matrix, setting the field of view, the clipping planes, and screen size
@@ -69,11 +82,16 @@ public:
 	void zoom_in(int);
 	void zoom_out(int);
 
+	// Loads
+	void load_position(char *);		// Load the position info in the file name given
+	void save_position(char *);		// Save the position info in the file name given
 	// Sets and gets
 	void set_JDay(double JD) {JDay=JD;}
+	void set_time_speed(double ts) {time_speed=ts;}
 	double get_JDay(void) {return JDay;}
 	double get_fov(void) {return fov;}
 	Vec3d get_equ_vision(void) {return equ_vision;}
+	int get_time_zone(void) {return position.time_zone;}
 
 private:
 
@@ -100,6 +118,9 @@ private:
 	// Time variable
     double time_speed;			// Positive : forward, Negative : Backward, 1 = 1sec/sec
 	double JDay;        		// Curent time in Julian day
+
+	// Position variables
+	observator_pos position;
 };
 
 

@@ -1,4 +1,4 @@
-/* 
+/*
  * Stellarium
  * Copyright (C) 2002 Fabien Chéreau
  * 
@@ -21,6 +21,7 @@
 #include "s_texture.h"
 #include "stellarium.h"
 #include "s_font.h"
+#include "navigator.h"
 
 extern s_font * nebulaFont;
 
@@ -38,7 +39,8 @@ Nebula::~Nebula()
 
 int Nebula::Read(FILE * catalogue)
 // Lis les infos de la nébuleuse dans le fichier et calcule x,y et z;
-{   int rahr;
+{
+	int rahr;
     float ramin;
     int dedeg;
     int demin;
@@ -55,11 +57,11 @@ int Nebula::Read(FILE * catalogue)
     }
     
     // Calc the RA and DE from the datas
-    RaRad=RA_en_Rad(rahr,ramin);
-    DecRad=DE_en_Rad(dedeg,demin);
+    RaRad=hms_to_rad(rahr, (double)ramin);
+    DecRad=dms_to_rad(dedeg, (double)demin);
 
     // Calc the Cartesian coord with RA and DE
-    RADE_to_XYZ(RaRad,DecRad,XYZ);
+    sphe_to_rect(RaRad,DecRad,&XYZ);
     XYZ*=RAYON;
 
     matTransfo=new float[16];   // Used to store the precalc transfos matrix used to draw the star
@@ -117,9 +119,11 @@ void Nebula::Draw()
 }
 
 void Nebula::DrawCircle(void)
-{   if (global.Fov<sqrt(Taille)*2) return;
+{
+	if (navigation.get_fov()<sqrt(Taille)*2) return;
     incLum++;
-    glColor3f(sqrt(global.Fov)/10*(0.4+0.2*sin(incLum/10)),sqrt(global.Fov)/10*(0.4+0.2*sin(incLum/10)),0.1);
+    glColor3f(sqrt(navigation.get_fov())/10*(0.4+0.2*sin(incLum/10)),
+		 sqrt(navigation.get_fov())/10*(0.4+0.2*sin(incLum/10)),0.1);
     glBindTexture (GL_TEXTURE_2D, Nebula::texCircle->getID()); 
     glPushMatrix();
     glTranslatef(XY[0],global.Y_Resolution-XY[1],0);

@@ -18,7 +18,7 @@
  */
 
 #include "grid.h"
-#include "s_utility.h"
+#include "stel_utility.h"
 #include "draw.h"
 
 void moy(vec3_t * p, int a, int b, int c)

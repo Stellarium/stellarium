@@ -1,4 +1,4 @@
-/* 
+/*
  * Stellarium
  * Copyright (C) 2002 Fabien Chéreau
  * 
@@ -34,17 +34,6 @@ public:
     void Draw();            // Draw all the Nebulaes
     int ReadTexture();
     int Rechercher(vec3_t Pos);             // Search the Nebulae by position
-    // Return data about the selected star
-    void InfoSelect(vec3_t & XYZ_t, float & Ra,float & De,float & Mag,char * & Name,unsigned int & MessierNum,unsigned int & NGCNum, float & size) 
-    {   XYZ_t=(*Selectionnee).XYZ;
-        Ra=(*Selectionnee).RaRad;
-        De=(*Selectionnee).DecRad;
-        Mag=(*Selectionnee).Mag;
-        Name=(*Selectionnee).Name;
-        MessierNum=(*Selectionnee).Messier;
-        NGCNum=(*Selectionnee).NGC;
-        size=((*Selectionnee).Taille);
-    }
 private:
     vector<Nebula*> Liste;              // list of Nebulaes*
     Nebula * Selectionnee;              // Selected nebulae

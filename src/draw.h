@@ -21,7 +21,7 @@
 #define __AFFICHAGEH__
 
 #include "stellarium.h"
-#include "s_utility.h"
+#include "stel_utility.h"
 
 void InitMeriParal(void);
 void drawIntro(void);

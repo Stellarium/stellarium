@@ -19,18 +19,20 @@
 
 #include "planet.h"
 
-planet::Planet(char * _name, int _flagHalo, double _radius, vec3_t _color,
+planet::planet(char * _name, int _flagHalo, double _radius, vec3_t _color,
 				s_texture * _planetTexture, s_texture * _haloTexture,
-				void (*_coord_func)(double JD, struct ln_rect_posn * position) :
+				void (*_coord_func)(double JD, struct ln_helio_posn * position)) :
 					flagHalo(_flagHalo), radius(_radius), color(_color),
 					planetTexture(_planetTexture), haloTexture(_haloTexture),
 					coord_func(_coord_func), parent(NULL)
 {
-	planetRing=NULL;
-	planetBigHalo=NULL;
-	helioCoord=vec3_t(0.,0.,0.);
+	helio_coord=Vec3d(0.,0.,0.);
 	name=strdup(_name);
 }
+
+/*	planetRing=NULL;
+	planetBigHalo=NULL;
+*/
 
 planet::~planet()
 {
@@ -117,6 +119,7 @@ void planet::draw(void)
         glDisable(GL_CULL_FACE);
     }
 
+	/*
 // Draw the planet (with special cases for saturn rings, sun, moon, etc..)
 void Planet::Draw(vec3_t coordLight)
 {
@@ -277,6 +280,7 @@ void Planet::Draw(vec3_t coordLight)
 
     glPopMatrix();
 }
+*/
 
 void Planet::testDistance(vec3_t Pos,float &anglePlusProche, Planet * &plusProche)
 {   vec3_t PosPlanet;

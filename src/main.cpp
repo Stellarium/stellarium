@@ -32,17 +32,17 @@
 #include "s_gui.h"
 #include "hip_star_mgr.h"
 #include "shooting.h"
-#include "stelconfig.h"
+#include "stel_config.h"
 #include "solarsystem.h"
 #include "navigator.h"
-#include "selection.h"
+#include "stel_object.h"
 
 #include "SDL.h"
 
 using namespace std;
 
 navigator navigation;
-selection selected_object;
+stel_object * selected_object=NULL;
 stellariumParams global;
 Hip_Star_mgr * HipVouteCeleste;       // Class to manage the Hipparcos catalog
 Constellation_mgr * ConstellCeleste;  // Constellation boundary and name
@@ -77,7 +77,7 @@ void drawIntro(void)
 // ************************  Main display loop  ************************
 // Execute all the drawing function in the correct order from the
 // furthest to closest objects
-void Draw(void)
+void Draw(int delta_time)
 {
 	// Init openGL viewing with fov, screen size and clip planes
 	navigation.init_project_matrix(global.X_Resolution,global.Y_Resolution,1,10000);
@@ -121,7 +121,7 @@ void Draw(void)
     if (global.FlagEquator)	DrawEquator();   	// Draw the celestial equator line
     if (global.FlagEcliptic) DrawEcliptic(); 	// Draw the ecliptic line
     if (global.FlagConstellationName) ConstellCeleste->DrawName();	// Draw the constellations's names
-    if (global.FlagSelect) global.SelectedObject.draw_pointer();			// Draw the pointer
+    if (selected_object) selected_object->draw_pointer(delta_time);			// Draw the pointer
 
 	// Set openGL drawings in local coordinates i.e. generally altazimuthal coordinates
 	navigation.switch_to_local();
@@ -272,7 +272,7 @@ void Update(Uint32 delta_time)
     {
         global.SkyBrightness=0;
     }
-	if (global.FlagSelect) global.SelectedObject.update();
+	if (selected_object) selected_object->update();
 	return;
 }
 
@@ -614,12 +614,10 @@ int main(int argc, char **argv)
 			}
 			else
 			{
-				Uint32 temp;
 				TickCount = SDL_GetTicks();	// Get Present Ticks
-				temp=TickCount-LastCount;
 				Update(TickCount-LastCount);// And Update The Motions And Data
+				Draw(TickCount-LastCount);  // Do The Drawings!
 				LastCount = TickCount;		// Save The Present Tick Probing
-				Draw();						// Do The Drawings!
 				SDL_GL_SwapBuffers();		// And Swap The Buffers
 			}
 		}

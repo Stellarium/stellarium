@@ -1,4 +1,4 @@
-/* 
+/*
  * Stellarium
  * Copyright (C) 2002 Fabien Chéreau
  * 
@@ -21,10 +21,11 @@
 #define _HIP_STAR_H_
 
 #include "stellarium.h"
-#include "s_utility.h"
+#include "stel_utility.h"
 #include "s_font.h"
+#include "stel_object.h"
 
-class Hip_Star  
+class Hip_Star : public stel_object
 {
 friend class Hip_Star_mgr;
 friend class constellation;
@@ -33,8 +34,10 @@ public:
     Hip_Star();
     virtual ~Hip_Star();
     int Read(FILE * pFile); // Read the star data in the stream
-    void Draw();            // Draw the star
-    void DrawName();
+    void Draw(void);            // Draw the star
+    void DrawName(void);
+	vec3_t getRGB(void) {return RGB;}
+	unsigned char get_type(void) {return STEL_OBJECT_STAR;}
 private:
     unsigned int HP;        // Hipparcos number
     float Mag;              // Apparent magnitude

@@ -1,4 +1,4 @@
-/* 
+/*
  * Stellarium
  * Copyright (C) 2002 Fabien Chéreau
  * 
@@ -23,7 +23,7 @@
 #include "hip_star.h"
 #include "hip_star_mgr.h"
 #include "stellarium.h"
-#include "s_utility.h"
+#include "stel_utility.h"
 #include "s_font.h"
 
 class constellation  
