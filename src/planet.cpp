@@ -77,8 +77,8 @@ void planet::compute_position(double date)
 // Compute the matrices which converts from the parent's ecliptic coordinates to local ecliptic and oposite
 void planet::compute_trans_matrix(double date)
 {
-	mat_parent_to_local = 	Mat4d::xrotation(re.obliquity*M_PI/180.) * Mat4d::zrotation(re.ascendingNode*M_PI/180.) * Mat4d::translation(-ecliptic_pos);
-	mat_local_to_parent =   Mat4d::translation(ecliptic_pos) * Mat4d::zrotation(-re.ascendingNode*M_PI/180.) * Mat4d::xrotation(-re.obliquity*M_PI/180.);
+	mat_parent_to_local =	Mat4d::yrotation(re.obliquity) /* Mat4d::zrotation(re.ascendingNode)*/ * Mat4d::translation(-ecliptic_pos);
+	mat_local_to_parent =   Mat4d::translation(ecliptic_pos) /* Mat4d::zrotation(-re.ascendingNode)*/ * Mat4d::yrotation(-re.obliquity);
 
 
 	compute_geographic_rotation(date);
@@ -221,6 +221,7 @@ sun_planet::sun_planet(char * _name, int _flagHalo, double _radius, vec3_t _colo
 	mat_local_to_parent = Mat4d::identity();
 	name=strdup(_name);
 }
+
 
 void sun_planet::compute_position(double date)
 {

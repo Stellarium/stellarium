@@ -149,73 +149,24 @@ double get_julian_from_sys ()
 }
 
 
-/* Calculate date from system date.
+/* Calculate gmt date from system date.
  * param : date Pointer to store date. */
 void get_ln_date_from_sys (struct ln_date * date)
 {
-	time_t curtime;
-	struct tm * loctime;
-		
+	time_t rawtime;
+	struct tm * ptm;
+
 	/* get current time */
-	curtime = time (NULL);
+	time ( &rawtime );
 
-	/* convert to local time representation */
-	loctime = localtime(&curtime);
-    
+	/* convert to gmt time representation */
+    ptm = gmtime ( &rawtime );
+
 	/* fill in date struct */
-	date->seconds = loctime->tm_sec;
-	date->minutes = loctime->tm_min;
-	date->hours = loctime->tm_hour;
-	date->days = loctime->tm_mday;
-	date->months = loctime->tm_mon + 1;
-	date->years = loctime->tm_year + 1900;
-}
-
-
-
-/* Calculate julian day from time_t. */
-double get_julian_from_timet (time_t * in_time)
-{
-	struct tm * loctime;
-	struct ln_date date;
-
-	/* convert to local time representation */
-	loctime = localtime(in_time);
-    
-	/* fill in date struct */
-	date.seconds = loctime->tm_sec;
-	date.minutes = loctime->tm_min;
-	date.hours = loctime->tm_hour;
-	date.days = loctime->tm_mday;
-	date.months = loctime->tm_mon + 1;
-	date.years = loctime->tm_year + 1900;
-	
-	return get_julian_day(&date);
-
-}
-
-
-/* Calculate time_t from julian day */
-void get_timet_from_julian (double JD, time_t * in_time)
-{
-	struct tm loctime;
-	struct ln_date date;
-		
-	get_date (JD, &date);
-	
-	/* fill in date struct */
-	if (date.years < 1900)
-	{
-		*in_time = 0;
-		return;
-	}
-	loctime.tm_sec = date.seconds;
-	loctime.tm_min = date.minutes;
-	loctime.tm_hour = date.hours;
-	loctime.tm_mday =date.days;
-	loctime.tm_mon = date.months -1;
-	loctime.tm_year = date.years - 1900;
-	loctime.tm_isdst = 0;
-	
-	*in_time = mktime (&loctime);
+	date->seconds = ptm->tm_sec;
+	date->minutes = ptm->tm_min;
+	date->hours = ptm->tm_hour;
+	date->days = ptm->tm_mday;
+	date->months = ptm->tm_mon + 1;
+	date->years = ptm->tm_year + 1900;
 }
