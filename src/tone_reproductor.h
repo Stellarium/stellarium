@@ -36,13 +36,13 @@ public:
     tone_reproductor();
     virtual ~tone_reproductor();
 
-	// Set the eye adaptation luminance for the display and precompute what can be
+	// Set the eye adaptation luminance for the display (and precompute what can be)
 	// Usual luminance range is 1-100 cd/m^2 for a CRT screen
 	// default value = 50 cd/m^2
 	void set_display_adaptation_luminance(float display_adaptation_luminance);
 
-	// Set the eye adaptation luminance for the world and precompute what can be
-	// default value = 100000 cd/m^2
+	// Set the eye adaptation luminance for the world (and precompute what can be)
+	// default value = 40000 cd/m^2 for skylight
 	// Star Light      : 0.001  cd/m^2
 	// Moon Light      : 0.1    cd/m^2
 	// Indoor Lighting : 100    cd/m^2
@@ -53,6 +53,9 @@ public:
 	// This value is used to scale the RGB range
 	void set_max_display_luminance(float _MaxdL) {MaxdL = MaxdL;}
 
+	// Set the display gamma : default value = 2.3
+	void set_display_gamma(float _gamma) {gamma = _gamma;}
+
 	// Return adapted luminance from world to display
 	inline float adapt_luminance(float world_luminance);
 
@@ -60,10 +63,11 @@ public:
 	void xyY_to_RGB(float*);
 
 private:
-	float Lda;		// Display luminance adaptation
-	float Lwa;		// World   luminance adaptation
-	float MaxdL;	// Display maximum luminance
+	float Lda;		// Display luminance adaptation (in cd/m^2)
+	float Lwa;		// World   luminance adaptation (in cd/m^2)
+	float MaxdL;	// Display maximum luminance (in cd/m^2)
 	float gamma;	// Screen gamma value
+
 	// Precomputed variables
 	float alpha_da;
 	float beta_da;
