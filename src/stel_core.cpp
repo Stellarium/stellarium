@@ -293,9 +293,11 @@ void stel_core::draw(int delta_time)
 	glBlendFunc(GL_ONE, GL_ONE);
 
 	// Draw the milky way. If not activated, need at least to clear the color buffer
-	if (!FlagMilkyWay) glClear(GL_COLOR_BUFFER_BIT);
-	if (projection->get_fov()>135) glClear(GL_COLOR_BUFFER_BIT);
-	else milky_way->draw(tone_converter, projection, navigation);
+	if (FlagMilkyWay) {
+	  milky_way->draw(tone_converter, projection, navigation);
+	} else {
+	  glClear(GL_COLOR_BUFFER_BIT);
+	}
 
 	// Draw all the constellations
 	if (FlagConstellationDrawing)
