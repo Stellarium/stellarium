@@ -20,7 +20,11 @@
 
 #include <sstream>
 #include <cstdlib>
-#include <malloc.h>	// Only for cygwin
+
+#ifdef CYGWIN
+ #include <malloc.h>
+#endif
+
 #include "stel_utility.h"
 #include "stellarium.h"
 
