@@ -116,7 +116,7 @@ void stel_object::draw_pointer(int delta_time, const Projector* prj, const navig
 }
 
 
-void stel_object::get_info_string(char * s, navigator * nav) const
+void stel_object::get_info_string(char * s, const navigator * nav) const
 {
 	sprintf(s,"No info for this object...");
 }

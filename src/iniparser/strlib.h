@@ -4,7 +4,7 @@
   @file     strlib.h
   @author   N. Devillard
   @date     Jan 2001
-  @version  $Revision: 212 $
+  @version  $Revision: 247 $
   @brief    Various string handling routines to complement the C lib.
 
   This modules adds a few complementary string routines usually missing
@@ -13,10 +13,10 @@
 /*--------------------------------------------------------------------------*/
 
 /*
-	$Id: strlib.h 212 2003-06-22 11:37:45Z xalioth $
+	$Id: strlib.h 247 2003-08-02 22:58:01Z xalioth $
 	$Author: xalioth $
-	$Date: 2003-06-22 12:37:45 +0100 (Sun, 22 Jun 2003) $
-	$Revision: 212 $
+	$Date: 2003-08-02 23:58:01 +0100 (Sat, 02 Aug 2003) $
+	$Revision: 247 $
 */
 
 #ifndef _STRLIB_H_
@@ -45,7 +45,7 @@
   allocated, it will be modified at each function call (not re-entrant).
  */
 /*--------------------------------------------------------------------------*/
-char * strlwc(char * s);
+const char * strlwc(const char * s);
 
 /*-------------------------------------------------------------------------*/
 /**
@@ -59,7 +59,7 @@ char * strlwc(char * s);
   allocated, it will be modified at each function call (not re-entrant).
  */
 /*--------------------------------------------------------------------------*/
-char * strupc(char * s);
+const char * strupc(const char * s);
 
 /*-------------------------------------------------------------------------*/
 /**
@@ -87,7 +87,7 @@ char * strskp(char * s);
   (not re-entrant).
  */
 /*--------------------------------------------------------------------------*/
-char * strcrop(char * s);
+const char * strcrop(const char * s);
 
 /*-------------------------------------------------------------------------*/
 /**
@@ -103,6 +103,6 @@ char * strcrop(char * s);
   (not re-entrant).
  */
 /*--------------------------------------------------------------------------*/
-char * strstrip(char * s) ;
+const char * strstrip(const char * s) ;
 
 #endif

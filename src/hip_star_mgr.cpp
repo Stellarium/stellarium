@@ -90,7 +90,11 @@ void Hip_Star_mgr::load(char * font_fileName, char * hipCatFile, char * commonNa
     StarArraySize = catalogSize;//120417;
     // Create the sequential array
     StarArray = new Hip_Star*[StarArraySize];
-    
+	for (int i=0;i<StarArraySize;++i)
+	{
+		StarArray[i] = NULL;
+	}
+
 	// Read common names & names catalog
 	char ** commonNames = new char*[catalogSize];
 	char ** names = new char*[catalogSize];

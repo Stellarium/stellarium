@@ -38,7 +38,7 @@ planet::planet(const char * _name, int _flagHalo, int _flag_lighting, double _ra
 	ecliptic_pos=Vec3d(0.,0.,0.);
 	mat_local_to_parent = Mat4d::identity();
 	if (_name) name=strdup(_name);
-	tex_map = new s_texture(tex_map_name, TEX_LOAD_TYPE_PNG_SOLID);
+	tex_map = new s_texture(tex_map_name, TEX_LOAD_TYPE_PNG_SOLID_REPEAT);
 	if (flagHalo) tex_halo = new s_texture(tex_halo_name);
 }
 
