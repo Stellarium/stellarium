@@ -28,13 +28,12 @@ AC_PROG_RANLIB
 dnl Can't find later libGLU if -lm not set here!?!??!
 AC_CHECK_LIB(m,fabs,LIBS="$LIBS -lm",AC_MSG_RESULT(math library not found))
 
+AC_C_BIGENDIAN
+
 dnl Check for X11.
 AC_PATH_XTRA
 LIBS="$LIBS $X_LIBS"
 CFLAGS="$CFLAGS $X_CFLAGS"
-
-AC_C_BIGENDIAN
-AC_CHECK_HEADERS(byteswap.h)
 
 dnl assign the package directory variable
 if test "$prefix" = "NONE" ; then
@@ -51,6 +50,7 @@ case "$host" in
 	AC_DEFINE_UNQUOTED(MACOSX,1,[If we are on macosx plateform.])
 	LDFLAGS="$LDFLAGS -flat_namespace -undefined suppress -lz "
 	LIBS="$LIBS -framework OpenGL -lobjc "
+	AC_CHECK_HEADERS(byteswap.h)
 	AC_CHECK_HEADER(OpenGL/gl.h,,AC_MSG_ERROR(gl.h not found - please install OpenGL))
 	AC_CHECK_HEADER(OpenGL/glu.h,,AC_MSG_ERROR(glu.h not found - please install GLU))
 	AM_PATH_SDL
@@ -63,6 +63,7 @@ dnl CYGWIN
 *-*-cygwin*)
 	AC_DEFINE_UNQUOTED(CYGWIN,1, [If we are on cygwin plateform.])
 	LIBS="$LIBS -lopengl32 -lglu32"
+	AC_CHECK_HEADERS(byteswap.h)
 	AC_CHECK_HEADER(GL/gl.h,,AC_MSG_ERROR(gl.h not found - please install OpenGL))
 	AC_CHECK_HEADER(GL/glu.h,,AC_MSG_ERROR(glu.h not found - please install GLU))
 	dnl Check for SDL.
@@ -73,9 +74,10 @@ dnl CYGWIN
 ;;
 
 dnl MINGW32
-*-*-mingw32*)
+*-*-mingw32)
 	AC_DEFINE_UNQUOTED(MINGW32,1, [If we are on mingw32 plateform.])
 	LIBS="$LIBS -lopengl32 -lglu32"
+	AC_CHECK_HEADERS(byteswap.h)
 	AC_CHECK_HEADER(GL/gl.h,,AC_MSG_ERROR(gl.h not found - please install OpenGL))
 	AC_CHECK_HEADER(GL/glu.h,,AC_MSG_ERROR(glu.h not found - please install GLU))
 	dnl Check for SDL but can't use AM_PATH_DSDL on Mingw : it crashes..
@@ -83,7 +85,19 @@ dnl MINGW32
 	LIBS="$LIBS `sdl-config --libs`"
 	CFLAGS="$CFLAGS `sdl-config --cflags`"
 	CXXFLAGS="$CXXFLAGS `sdl-config --cflags` -I/mingw/include/SDL/"
+;;
 
+dnl Cross-compiling MINGW32
+i386-pc-mingw32msvc)
+	AC_DEFINE_UNQUOTED(MINGW32,1, [If we are on mingw32 plateform.])
+	AM_PATH_SDL
+	LIBS="$LIBS $SDL_LIBS"
+	CFLAGS="$CFLAGS $SDL_CFLAGS"
+	CXXFLAGS="$CXXFLAGS $SDL_CFLAGS"
+	LIBS="$LIBS -lopengl32 -lglu32"
+	AC_CHECK_HEADER(GL/gl.h,,AC_MSG_ERROR(gl.h not found - please install OpenGL))
+	AC_CHECK_HEADER(GL/glu.h,,AC_MSG_ERROR(glu.h not found - please install GLU))
+	echo $CXXFLAGS
 ;;
 
 dnl OTHER SYSTEMS

@@ -21,7 +21,7 @@
 #include <sstream>
 #include <cstdlib>
 
-#ifdef CYGWIN
+#if defined( CYGWIN )
  #include <malloc.h>
 #endif
 
@@ -150,7 +150,7 @@ double get_dec_angle(const string& str)
 	if (s == NULL || !*s)
 		return(-0.0);
 	count = strlen(s) + 1;
-	if ((ptr = (char *) alloca(count)) == NULL)
+	if ((ptr = (char *) malloc(count)) == NULL)
 		return (-0.0);
 	memcpy(ptr, s, count);
 	trim(ptr);
@@ -174,30 +174,42 @@ double get_dec_angle(const string& str)
 	if ((ptr = strtok(ptr,delim1)) != NULL)
 		dghh = atoi (ptr);
 	else
+	{
+		free(ptr);
 		return (-0.0);
+	}
 
 	if ((ptr = strtok(NULL,delim1)) != NULL) {
 		minutes = atoi (ptr);
 		if (minutes > 59)
-		    return (-0.0);
+		{
+			free(ptr);
+			return (-0.0);
+		}
 	}else
+	{
+		free(ptr);
 		return (-0.0);
+	}
 
 	if ((ptr = strtok(NULL,delim2)) != NULL) {
 		if ((dec = strchr(ptr,',')) != NULL)
 			*dec = '.';
 		seconds = strtod (ptr, NULL);
 		if (seconds > 59)
+		{
+			free(ptr);
 			return (-0.0);
+		}
 	}
 	
-	if ((ptr = strtok(NULL," \n\t")) != NULL) {
+	if ((ptr = strtok(NULL," \n\t")) != NULL)
+	{
 		skipwhite(&ptr);
-		if (*ptr == 'S' || *ptr == 'W' || *ptr == 's' || *ptr == 'W')
-			    negative = 1;
+		if (*ptr == 'S' || *ptr == 'W' || *ptr == 's' || *ptr == 'W') negative = 1;
 	}
-        pos = dghh + minutes /60.0 + seconds / 3600.0;
-
+	free(ptr);
+	pos = dghh + minutes /60.0 + seconds / 3600.0;
 	if (type == HOURS && pos > 24.0)
 		return (-0.0);
 	if (type == LAT && pos > 90.0)
