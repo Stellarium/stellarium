@@ -28,7 +28,7 @@ using namespace std;
 
 ScriptMgr::ScriptMgr(StelCommandInterface *command_interface) {
   commander = command_interface;
-  recording = 1;  // temp
+  recording = 0;
   playing = 0;
   record_elapsed_time = 0;
 }

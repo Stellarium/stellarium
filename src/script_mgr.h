@@ -46,6 +46,7 @@ class ScriptMgr
   void cancel_record_script();  // stop recording user interactions
   bool is_playing() { return playing; };     // is a script playing? 
   bool is_paused() { return play_paused; };     // is a script paused?
+  bool is_recording() { return recording; };    // is a script being recorded? 
   void update(int delta_time);  // execute commands in running script
 
  private:

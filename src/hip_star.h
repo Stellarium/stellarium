@@ -50,6 +50,7 @@ public:
 	virtual Vec3d get_prec_earth_equ_pos(void) const {return XYZ;}
 	virtual double get_best_fov(const navigator * nav = NULL) const {return (13.f - 2.f * Mag > 1.f) ? (13.f - Mag) : 1.f;}
 	virtual float get_mag(const navigator * nav = NULL) const {return Mag;}
+	virtual unsigned int get_hp_number() { return HP; };
 
 private:
     unsigned int HP;		// Hipparcos number

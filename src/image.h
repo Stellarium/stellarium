@@ -43,7 +43,8 @@ class Image
   s_texture * image_tex;
   string image_name;
   float image_x, image_y, image_scale, image_alpha, image_rotation;
-  
+  float image_ratio;
+
   bool flag_alpha, flag_scale, flag_rotation;
   float coef_alpha, coef_scale, coef_rotation;
   float mult_alpha, mult_scale, mult_rotation;
