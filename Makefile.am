@@ -1,2 +1,2 @@
-EXTRA_DIST = TODO README NEWS stellarium.PRJ
+EXTRA_DIST = TODO README stellarium.PRJ
 SUBDIRS = config data src textures
