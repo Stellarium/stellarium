@@ -66,9 +66,10 @@ Windows/MacOSX and in $HOME/.stellarium/ on a unix system.
 
 	Johan Meuris for his stuning drawings of the constellations.
 	
+	Fumio Yamamoto for his MacOSX packages, patches, support and documentation.
+	
 	++ Thanks to ++
 	
-	Fumio Yamamoto for his MacOSX package, patches and documentation.
 	Axel Mellinger who gave me the authorisation to use his impressive
 	    milky way panorama.
 	Jesse Jones for his callback library.
@@ -142,7 +143,8 @@ Windows/MacOSX and in $HOME/.stellarium/ on a unix system.
 	2.4 The orbit.cpp/h and solve.h files are directly borrowed from
 		Celestia (Chris Laurel). (GPL license)
 	2.5 Other pieces of code and ideas are from Celestia too (GPL license).
-
+    2.6 Callback library by Jess Jones, see section 10.4 for full license.
+	
 3. Data
 	3.1 The Hipparcos star catalog
 		From ESA (European Space Agency) and the Hipparcos mission.
@@ -305,3 +307,10 @@ Windows/MacOSX and in $HOME/.stellarium/ on a unix system.
 	Ownership of images and video by parties other than JPL and NASA is noted in 
 	the caption material with each image. 
 	---
+	
+4. License for the callback library by Jesse Jones :
+	(C) Copyright Jesse Jones 2000. Permission to copy, use, modify, sell
+	and distribute this software is granted provided this copyright
+	notice appears in all copies. This software is provided "as is" without
+	express or implied warranty, and with no claim as to its suitability for
+	any purpose.
