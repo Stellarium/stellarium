@@ -71,6 +71,7 @@ namespace gui
     friend class Container;
     public:
         Component();
+		virtual ~Component();
         vec2_i getPosition() const;
         vec2_i getSize() const;
         void reshape(vec2_i, vec2_i);
@@ -195,7 +196,7 @@ namespace gui
 	{
 	public:
 	    TextLabel(char * _label, s_font * _theFont);
-	    ~TextLabel();
+	    virtual ~TextLabel();
 	    const char * getLabel() const;
 	    void setLabel(char *);
 	    void setColour(vec3_t _colour);
@@ -209,7 +210,7 @@ namespace gui
 	{
 	public:
 	    FilledTextLabel(char * _label, s_font * _theFont);
-	    ~FilledTextLabel();
+	    //~FilledTextLabel();
 	    void render(GraphicsContext&);
 	private:
 	};
@@ -237,6 +238,14 @@ namespace gui
 	    void render(GraphicsContext&);
 	private:
 	    s_texture * imageTex;
+	};
+
+    class BorderPicture : public Picture
+	{
+	public:
+		BorderPicture(vec2_i _position, vec2_i _size, s_texture * _imageTex);
+		//virtual ~BorderPicture();
+	    void render(GraphicsContext&);
 	};
 
 };

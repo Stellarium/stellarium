@@ -78,6 +78,10 @@ Component::Component() :
 {
 }
 
+Component::~Component()
+{
+}
+
 vec2_i Component::getPosition() const
 {
     return position;
@@ -158,6 +162,7 @@ Container::~Container()
     {
         if (*iter)
         {
+			printf("Container destructor\n");
             delete (*iter);
         }
         iter++;
@@ -189,17 +194,6 @@ void Container::render(GraphicsContext& gc)
     vec2_i pos = getPosition();
     vec2_i sz = getSize();
 
-    /*
-    glColor3fv(gc.baseColor*2);
-    glDisable(GL_TEXTURE_2D);
-    glBegin(GL_LINE_LOOP);
-        glVertex2f(pos[0] +0.5, pos[1]+0.5);
-        glVertex2f(pos[0] + sz[0]-0.5, pos[1]+0.5);
-        glVertex2f(pos[0] + sz[0]-0.5, pos[1] + sz[1]-0.5);
-        glVertex2f(pos[0]+0.5, pos[1] + sz[1]-0.5);
-    glEnd();
-    */
-    
     vector<Component*>::iterator iter = components.begin();
     glPushMatrix();
 
@@ -453,6 +447,7 @@ Textured_Button::Textured_Button(
 
 Textured_Button::~Textured_Button()
 {
+	printf("Textured_Button destructor\n");
     if (texBt) delete texBt;
     texBt = NULL;
 }
@@ -605,10 +600,10 @@ FilledTextLabel::FilledTextLabel(char * _label, s_font * _theFont) : TextLabel(_
 {
 }
 
-FilledTextLabel::~FilledTextLabel()
+/*FilledTextLabel::~FilledTextLabel()
 {
-    if (label) delete label;
-}
+	~TextLabel();
+}*/
 
 void FilledTextLabel::render(GraphicsContext& gc)
 {
@@ -747,6 +742,7 @@ Picture::~Picture()
 {
     if (imageTex) delete imageTex;
     imageTex = NULL;
+	printf("coucou\n");
 }
 
 void Picture::render(GraphicsContext&)
@@ -764,3 +760,28 @@ void Picture::render(GraphicsContext&)
         glTexCoord2f(0.0f, 1.0f); glVertex2i(pos[0], pos[1]); // Haut Gauche
     glEnd ();
 }
+
+BorderPicture::BorderPicture(vec2_i _position, vec2_i _size, s_texture * _imageTex) : Picture(_position,_size,_imageTex)
+{}
+
+/*BorderPicture::~BorderPicture()
+{
+	Picture::~Picture();
+}*/
+
+void BorderPicture::render(GraphicsContext& gc)
+{
+	Picture::render(gc);
+
+    glColor3fv(gc.baseColor);
+    vec2_i pos = getPosition();
+    vec2_i sz = getSize();
+    glDisable(GL_TEXTURE_2D);
+    glBegin(GL_LINE_LOOP);
+        glVertex2f(pos[0]+0.5, pos[1]+0.5);
+        glVertex2f(pos[0] + sz[0]-0.5, pos[1]+0.5);
+        glVertex2f(pos[0] + sz[0]-0.5, pos[1] + sz[1]-0.5);
+        glVertex2f(pos[0]+0.5, pos[1] + sz[1]-0.5);
+    glEnd();
+}
+

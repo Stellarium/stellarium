@@ -1,4 +1,4 @@
-/* 
+/*
  * Stellarium
  * Copyright (C) 2002 Fabien Chéreau
  * 
@@ -30,6 +30,7 @@ class StdWin : public Container
 {
 public:
     StdWin(int posx, int posy, int sizex, int sizey, char * title, Component * parent, s_font * winfont_);
+	virtual ~StdWin();
     void StdWinClicCallback(enum guiValue button,enum guiValue state);
     void StdWinMoveCallback(int x, int y,enum guiValue action);
     void render(GraphicsContext& gc);
