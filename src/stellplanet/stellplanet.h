@@ -50,10 +50,26 @@ void get_sun_helio_coords(double JD, double * X, double * Y, double * Z) {*X=0.;
  * Michelle Chapront-Touze and Jean Chapront of the Bureau des Longitudes,
  * Paris. ELP 2000-82B theory
  * param JD Julian day, rect pos, precision */
-void get_lunar_geo_posn_prec(double JD, double * X, double * Y, double * Z, double prcision);
+void get_lunar_geo_posn_prec(double JD, double * X, double * Y, double * Z, double precision);
 
 /* Same with lowest precision by default */
 void get_lunar_geo_posn(double JD, double * X, double * Y, double * Z);
+
+void get_mercury_helio_coordsv(double JD, double* XYZ) {get_mercury_helio_coords(JD, &XYZ[0], &XYZ[1], &XYZ[2]);}
+void get_venus_helio_coordsv(double JD, double* XYZ) {get_venus_helio_coords(JD, &XYZ[0], &XYZ[1], &XYZ[2]);}
+void get_earth_helio_coordsv(double JD, double* XYZ) {get_earth_helio_coords(JD, &XYZ[0], &XYZ[1], &XYZ[2]);}
+void get_mars_helio_coordsv(double JD, double* XYZ) {get_mars_helio_coords(JD, &XYZ[0], &XYZ[1], &XYZ[2]);}
+void get_jupiter_helio_coordsv(double JD, double* XYZ) {get_jupiter_helio_coords(JD, &XYZ[0], &XYZ[1], &XYZ[2]);}
+void get_saturn_helio_coordsv(double JD, double* XYZ) {get_saturn_helio_coords(JD, &XYZ[0], &XYZ[1], &XYZ[2]);}
+void get_uranus_helio_coordsv(double JD, double* XYZ) {get_uranus_helio_coords(JD, &XYZ[0], &XYZ[1], &XYZ[2]);}
+void get_neptune_helio_coordsv(double JD, double* XYZ) {get_neptune_helio_coords(JD, &XYZ[0], &XYZ[1], &XYZ[2]);}
+void get_pluto_helio_coordsv(double JD, double* XYZ) {get_pluto_helio_coords(JD, &XYZ[0], &XYZ[1], &XYZ[2]);}
+
+void get_sun_helio_coordsv(double JD, double* XYZ) {XYZ[0]=0.; XYZ[1]=0.; XYZ[2]=0.;}
+
+void get_lunar_geo_posn_precv(double JD, double* XYZ, double precision)
+	{get_lunar_geo_posn_prec(JD, &XYZ[0], &XYZ[1], &XYZ[2], precision);}
+void get_lunar_geo_posnv(double JD, double* XYZ) {get_lunar_geo_posn(JD, &XYZ[0], &XYZ[1], &XYZ[2]);}
 
 #ifdef __cplusplus
 };

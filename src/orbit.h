@@ -12,6 +12,7 @@
 
 #include "vecmath.h"
 
+#include "callbacks.hpp"
 
 class OrbitSampleProc;
 
@@ -32,7 +33,9 @@ public:
                     double _epoch = 2451545.0);
 
     // Compute the orbit for a specified Julian date and return a "stellarium compliant" function
-	void positionAtTime(double JD, double * X, double * Y, double * Z);
+	void positionAtTime(double JD, double * X, double * Y, double * Z) const;
+	void positionAtTimev(double JD, double* v);
+
 	// Original one
 	Vec3d positionAtTime(double) const;
     double getPeriod() const;

@@ -319,7 +319,7 @@ int CallbackComponent::onClic(int x, int y, S_GUI_VALUE bt, S_GUI_VALUE state)
 	if (!visible) return 0;
 	if (state==S_GUI_PRESSED && bt==S_GUI_MOUSE_LEFT && isIn(x, y))
 	{
-		if (onPressCallback) onPressCallback();
+		if (!onPressCallback.empty()) onPressCallback();
 	}
 	return 0;
 }
@@ -329,7 +329,7 @@ int CallbackComponent::onMove(int x, int y)
 	if (!visible) return 0;
 	if (isIn(x, y))
 	{
-		if (onMouseInOutCallback && !is_mouse_over)
+		if (!onMouseInOutCallback.empty() && !is_mouse_over)
 		{
 			is_mouse_over = 1;
 			onMouseInOutCallback();
@@ -340,7 +340,7 @@ int CallbackComponent::onMove(int x, int y)
 	{
 		if (is_mouse_over)
 		{
-			if (onMouseInOutCallback && is_mouse_over)
+			if (!onMouseInOutCallback.empty() && is_mouse_over)
 			{
 				is_mouse_over = 0;
 				onMouseInOutCallback();
@@ -816,7 +816,7 @@ StdBtWin::StdBtWin(const char * _title, s_texture* _header_tex, s_font * _winfon
 {
 	hideBt = new Button();
 	hideBt->reshape(3,3,headerSize-6,headerSize-6);
-	hideBt->setOnPressCallback(makeFunctor((s_pcallback0)0,*this, &StdBtWin::onHideBt));
+	hideBt->setOnPressCallback(callback<void>(this, &StdBtWin::onHideBt));
 	Container::addComponent(hideBt);
 }
 
@@ -830,7 +830,7 @@ void StdBtWin::draw()
 void StdBtWin::onHideBt(void)
 {
 	visible=0;
-	if (onHideBtCallback) onHideBtCallback();
+	if (!onHideBtCallback.empty()) onHideBtCallback();
 }
 
 
@@ -1015,7 +1015,7 @@ int CursorBar::onMove(int x, int y)
 	if (cursor.getPosx()<0) cursor.setPos(0,cursor.getPosy());
 	if (cursor.getPosx()>size[0]-cursor.getSizex()) cursor.setPos(size[0]-cursor.getSizex(),cursor.getPosy());
 	barVal=(float)cursor.getPosx()/(size[0]-cursor.getSizex()) * (maxBar-minBar);
-	if (onChangeCallback) onChangeCallback();
+	if (!onChangeCallback.empty()) onChangeCallback();
 	oldPos.set(x,y);
 	return 0;
 }

@@ -2,7 +2,7 @@
      #   #  ##  #   #   ### ##   #  # # ###
     ##   #  ### ### ### # # # #  #  ### # #
 
-    By Fabien Chéreau : stellarium@free.fr
+    By Fabien Chéreau : chereau@free.fr
         Info : http://stellarium.free.fr
 
 Stellarium comes with ABSOLUTELY NO WARRANTY.  See the gpl.txt 
@@ -31,7 +31,7 @@ Use page up and page down keys to zoom in and out.
 Use left mouse button to select an object, right button to select
 no object and middle mouse button or SPACE to center on the 
 selected object.
-Zoomming on nebulaes or planets is very interesting....
+Zoomming on nebulas or planets is very interesting....
 Press the H key for more help.
 
 -----------------------------------------------------------------
@@ -43,7 +43,7 @@ config/location.txt on Windows/MacOSX and are located in $HOME/.stellarium/
 on a unix system.
 
 Speed configuration :
-If the FPS (number of Frame Per Second) is too low (<3), you probably have 
+If the FPS rate (number of Frame Per Second) is too low (<3), you probably have
 no 3D acceleration. Delete the file "config.txt" and rename the file 
 "config_no_3D_acceleration.txt" in "config.txt". It should be a bit faster,
 but with less options.
@@ -51,11 +51,14 @@ but with less options.
 ------------------------------------------------------------------
 INSTALLATION INSTUCTIONS
 ------------------------------------------------------------------
-    see the INSTALL file
+Please see the INSTALL file.
 
 ------------------------------------------------------------------
 THANKS
 ------------------------------------------------------------------
+	Jesse Jones for his callback library.
+	The celestia project team from which I borrowed many code parts.
+	The libnova team for their planet calculation algorithms.
 	All the SDL team for their remarquable work.
 	All the sourceforge team for hosting my project.
 	Cédric Delfosse for his precious help on debian port.
@@ -76,19 +79,63 @@ THANKS
 
 	And... All the people who sent me mails and bug reports!
 
+
 ------------------------------------------------------------------
 NOTE
 ------------------------------------------------------------------
-    This program is free, but if you have nothing to do with your 
+    This program is free, but if you have nothing to do with your
     money :) , just go there and make something usefull with it :
-
     https://www.greenpeace.com/forms/gpicontr.html
 
 
 ------------------------------------------------------------------
+FULL REFERENCES & CREDITS
+------------------------------------------------------------------
+Articles -----------------------------
+# The tone reproductor class :
+   The class mainly performs a fast implementation of the algorithm from the
+   paper [1], with more accurate values from [2]. The blue shift formula is taken
+   from [3] and combined with the Scotopic vision formula from [4].
+   [1] "Tone Reproduction for Realistic Images", Tumblin and Rushmeier,
+   IEEE Computer Graphics & Application, November 1993
+   [2] "Tone Reproduction and Physically Based Spectral Rendering",
+   Devlin, Chalmers, Wilkie and Purgathofer in EUROGRAPHICS 2002
+   [3] "Night Rendering", H. Wann Jensen, S. Premoze, P. Shirley,
+   W.B. Thompson, J.A. Ferwerda, M.M. Stark
+   [4] "A Visibility Matching Tone Reproduction Operator for High Dynamic
+   Range Scenes", G.W. Larson, H. Rushmeier, C. Piatko
+# The skylight class :
+   The class is a fast implementation of the algorithm from the article
+   "A Practical Analytic Model for Daylight" by A. J. Preetham, Peter Shirley and Brian Smits.
+# The skybright class :
+   The class is a fast reimplementation of the VISLIMIT.BAS basic source code
+   from Brad Schaefer's article on pages 57-60,  May 1998 _Sky & Telescope_,
+   "To the Visual Limits". The basic sources are available on the Sky and Telescope
+   web site.
+
+Included source code -----------------
+# glpng PNG loader library for OpenGL v1.45 (10/07/00)
+   by Ben Wyatt ben@wyatt100.freeserve.co.uk
+# Iniparser library Copyright (c) 2000 by Nicolas Devillard.
+# The stellastro and stellplanet libraries are mainly subsets of the
+  libnova library (GPL) by Liam Girdwood <liam@nova-ioe.org>
+# The orbit.cpp/h and solve.h files are directly borrowed from
+   Celestia (Chris Laurel). (GPL)
+# Other pieces of code and ideas are from Celestia too.
+
+Data ---------------------------------
+# The Hipparcos star catalog :
+  From ESA (European Space Agency) and the Hipparcos mission.
+  ref : ESA, 1997, The Hipparcos and Tycho Catalogues, ESA SP-1200
+# The solar system data mainly come from Celestia.
+
+Images -------------------------------
+# TODO and clarify
+
+------------------------------------------------------------------
 LICENSE
 ------------------------------------------------------------------
-   Copyright (C) 2002 Fabien Chéreau chereau@free.fr
+   Copyright (C) 2003 Fabien Chéreau chereau@free.fr
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License

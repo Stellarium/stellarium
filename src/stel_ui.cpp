@@ -198,48 +198,48 @@ void stel_ui::updateTopBar(void)
 Component* stel_ui::createFlagButtons(void)
 {
 	bt_flag_constellation_draw = new FlagButton(core->FlagConstellationDrawing, NULL, "Bouton1");
-	bt_flag_constellation_draw->setOnPressCallback(makeFunctor((s_pcallback0)0,*this, &stel_ui::cb));
-	bt_flag_constellation_draw->setOnMouseInOutCallback(makeFunctor((s_pcallback0)0,*this, &stel_ui::cbr));
+	bt_flag_constellation_draw->setOnPressCallback(callback<void>(this, &stel_ui::cb));
+	bt_flag_constellation_draw->setOnMouseInOutCallback(callback<void>(this, &stel_ui::cbr));
 
 	bt_flag_constellation_name = new FlagButton(core->FlagConstellationName, NULL, "Bouton2");
-	bt_flag_constellation_name->setOnPressCallback(makeFunctor((s_pcallback0)0,*this, &stel_ui::cb));
-	bt_flag_constellation_name->setOnMouseInOutCallback(makeFunctor((s_pcallback0)0,*this, &stel_ui::cbr));
+	bt_flag_constellation_name->setOnPressCallback(callback<void>(this, &stel_ui::cb));
+	bt_flag_constellation_name->setOnMouseInOutCallback(callback<void>(this, &stel_ui::cbr));
 
 	bt_flag_azimuth_grid = new FlagButton(core->FlagAzimutalGrid, NULL, "Bouton3");
-	bt_flag_azimuth_grid->setOnPressCallback(makeFunctor((s_pcallback0)0,*this, &stel_ui::cb));
-	bt_flag_azimuth_grid->setOnMouseInOutCallback(makeFunctor((s_pcallback0)0,*this, &stel_ui::cbr));
+	bt_flag_azimuth_grid->setOnPressCallback(callback<void>(this, &stel_ui::cb));
+	bt_flag_azimuth_grid->setOnMouseInOutCallback(callback<void>(this, &stel_ui::cbr));
 
 	bt_flag_equator_grid = new FlagButton(core->FlagEquatorialGrid, NULL, "Bouton3");
-	bt_flag_equator_grid->setOnPressCallback(makeFunctor((s_pcallback0)0,*this, &stel_ui::cb));
-	bt_flag_equator_grid->setOnMouseInOutCallback(makeFunctor((s_pcallback0)0,*this, &stel_ui::cbr));
+	bt_flag_equator_grid->setOnPressCallback(callback<void>(this, &stel_ui::cb));
+	bt_flag_equator_grid->setOnMouseInOutCallback(callback<void>(this, &stel_ui::cbr));
 
 	bt_flag_ground = new FlagButton(core->FlagGround, NULL, "Bouton4");
-	bt_flag_ground->setOnPressCallback(makeFunctor((s_pcallback0)0,*this, &stel_ui::cb));
-	bt_flag_ground->setOnMouseInOutCallback(makeFunctor((s_pcallback0)0,*this, &stel_ui::cbr));
+	bt_flag_ground->setOnPressCallback(callback<void>(this, &stel_ui::cb));
+	bt_flag_ground->setOnMouseInOutCallback(callback<void>(this, &stel_ui::cbr));
 
 	bt_flag_cardinals = new FlagButton(core->FlagCardinalPoints, NULL, "Bouton8");
-	bt_flag_cardinals->setOnPressCallback(makeFunctor((s_pcallback0)0,*this, &stel_ui::cb));
-	bt_flag_cardinals->setOnMouseInOutCallback(makeFunctor((s_pcallback0)0,*this, &stel_ui::cbr));
+	bt_flag_cardinals->setOnPressCallback(callback<void>(this, &stel_ui::cb));
+	bt_flag_cardinals->setOnMouseInOutCallback(callback<void>(this, &stel_ui::cbr));
 
 	bt_flag_atmosphere = new FlagButton(core->FlagAtmosphere, NULL, "Bouton9");
-	bt_flag_atmosphere->setOnPressCallback(makeFunctor((s_pcallback0)0,*this, &stel_ui::cb));
-	bt_flag_atmosphere->setOnMouseInOutCallback(makeFunctor((s_pcallback0)0,*this, &stel_ui::cbr));
+	bt_flag_atmosphere->setOnPressCallback(callback<void>(this, &stel_ui::cb));
+	bt_flag_atmosphere->setOnMouseInOutCallback(callback<void>(this, &stel_ui::cbr));
 
 	bt_flag_nebula_name = new FlagButton(core->FlagNebulaName, NULL, "Bouton15");
-	bt_flag_nebula_name->setOnPressCallback(makeFunctor((s_pcallback0)0,*this, &stel_ui::cb));
-	bt_flag_nebula_name->setOnMouseInOutCallback(makeFunctor((s_pcallback0)0,*this, &stel_ui::cbr));
+	bt_flag_nebula_name->setOnPressCallback(callback<void>(this, &stel_ui::cb));
+	bt_flag_nebula_name->setOnMouseInOutCallback(callback<void>(this, &stel_ui::cbr));
 
 	bt_flag_help = new FlagButton(core->FlagHelp, NULL, "Bouton11");
-	bt_flag_help->setOnPressCallback(makeFunctor((s_pcallback0)0,*this, &stel_ui::cb));
-	bt_flag_help->setOnMouseInOutCallback(makeFunctor((s_pcallback0)0,*this, &stel_ui::cbr));
+	bt_flag_help->setOnPressCallback(callback<void>(this, &stel_ui::cb));
+	bt_flag_help->setOnMouseInOutCallback(callback<void>(this, &stel_ui::cbr));
 
 	bt_flag_follow_earth = new FlagButton(core->navigation->get_flag_lock_equ_pos(), NULL, "Bouton13");
-	bt_flag_follow_earth->setOnPressCallback(makeFunctor((s_pcallback0)0,*this, &stel_ui::cb));
-	bt_flag_follow_earth->setOnMouseInOutCallback(makeFunctor((s_pcallback0)0,*this, &stel_ui::cbr));
+	bt_flag_follow_earth->setOnPressCallback(callback<void>(this, &stel_ui::cb));
+	bt_flag_follow_earth->setOnMouseInOutCallback(callback<void>(this, &stel_ui::cbr));
 
 	bt_flag_config = new FlagButton(core->FlagConfig, NULL, "Bouton16");
-	bt_flag_config->setOnPressCallback(makeFunctor((s_pcallback0)0,*this, &stel_ui::cb));
-	bt_flag_config->setOnMouseInOutCallback(makeFunctor((s_pcallback0)0,*this, &stel_ui::cbr));
+	bt_flag_config->setOnPressCallback(callback<void>(this, &stel_ui::cb));
+	bt_flag_config->setOnMouseInOutCallback(callback<void>(this, &stel_ui::cbr));
 
 	bt_flag_ctr = new FilledContainer();
 	bt_flag_ctr->addComponent(bt_flag_constellation_draw); 	bt_flag_constellation_draw->setPos(0,0);
@@ -254,7 +254,7 @@ Component* stel_ui::createFlagButtons(void)
 	bt_flag_ctr->addComponent(bt_flag_follow_earth);	bt_flag_follow_earth->setPos(288,0);
 	bt_flag_ctr->addComponent(bt_flag_config);			bt_flag_config->setPos(320,0);
 
-	bt_flag_ctr->setOnMouseInOutCallback(makeFunctor((s_pcallback0)0,*this, &stel_ui::bt_flag_ctrOnMouseInOut));
+	bt_flag_ctr->setOnMouseInOutCallback(callback<void>(this, &stel_ui::bt_flag_ctrOnMouseInOut));
 	bt_flag_ctr->reshape(0, core->screen_H-32, 11*32, 32);
 
 	return bt_flag_ctr;
@@ -386,7 +386,7 @@ F1  : Toggle fullscreen if possible.\n"
 	help_win->reshape(300,200,400,380);
 	help_win->addComponent(help_txtlbl);
     help_win->setVisible(core->FlagHelp);
-	help_win->setOnHideBtCallback(makeFunctor((s_pcallback0)0,*this, &stel_ui::help_win_hideBtCallback));
+	help_win->setOnHideBtCallback(callback<void>(this, &stel_ui::help_win_hideBtCallback));
 	return help_win;
 }
 
