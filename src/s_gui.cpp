@@ -438,6 +438,11 @@ Textured_Button::Textured_Button(
         activeColor(_activeColor), 
         passiveColor(_passiveColor)
 {
+	if (!texBt)
+	{
+		printf("ERROR NO TEXTURE FOR TEXTURED BUTTON\n");
+		exit(-1);
+	}
     position = _position;
     size = _size;
     setOnClicCallback(_onClicCallback);
@@ -726,4 +731,36 @@ void CursorBar::CursorBarMoveCallback(int x, enum guiValue action)
         if (barValue > maxBarValue) barValue = maxBarValue;
         if (oldBarValue != barValue && onValueChangeCallBack != NULL) onValueChangeCallBack(barValue, this);
     }
+}
+
+Picture::Picture(vec2_i _position, vec2_i _size, s_texture * _imageTex) : imageTex(_imageTex)
+{
+	if (!imageTex)
+	{
+		printf("ERROR NO TEXTURE FOR PICTURE WIDGET\n");
+		exit(-1);
+	}
+    reshape(_position, _size);
+}
+
+Picture::~Picture()
+{
+    if (imageTex) delete imageTex;
+    imageTex = NULL;
+}
+
+void Picture::render(GraphicsContext&)
+{
+    glColor3f(1.0,1.0,1.0);
+    vec2_i pos = getPosition();
+    vec2_i sz = getSize();
+    glEnable(GL_TEXTURE_2D);
+    glEnable(GL_BLEND);
+    glBindTexture(GL_TEXTURE_2D, imageTex->getID());
+    glBegin(GL_QUADS );
+        glTexCoord2f(0.0f, 0.0f); glVertex2i(pos[0], pos[1] + sz[1]); // Bas Gauche
+        glTexCoord2f(1.0f, 0.0f); glVertex2i(pos[0] + sz[0], pos[1] + sz[1]); // Bas Droite
+        glTexCoord2f(1.0f, 1.0f); glVertex2i(pos[0] + sz[0], pos[1]); // Haut Droit
+        glTexCoord2f(0.0f, 1.0f); glVertex2i(pos[0], pos[1]); // Haut Gauche
+    glEnd ();
 }

@@ -98,7 +98,7 @@ Label * LongitudeLabel = NULL;
 Label * AltitudeLabel = NULL;
 Label * TimeZoneLabel = NULL;
 Labeled_Button * SaveLocation = NULL;
-Textured_Button * EarthMap = NULL;
+Picture * EarthMap = NULL;
 
 StdBtWin * TimeControlWin = NULL;              // The window containing the time controls
 Container * TimeControlContainer = NULL;
@@ -703,7 +703,7 @@ Boston, MA  02111-1307, USA.\n"
     SaveLocation->reshape(120,240,100,20);
     SaveLocation->setOnClicCallback(SaveLocationOnClicCallback);
 
-    EarthMap = new Textured_Button(new s_texture("earthmap"),vec2_i(30,95),vec2_i(280,140),clWhite,clWhite/2,NULL,NULL,1,1);
+    EarthMap = new Picture(vec2_i(30,95),vec2_i(280,140),new s_texture("earthmap"));
 
     LocationConfigContainer->addComponent(LocationLabel);
     LocationConfigContainer->addComponent(LatitudeBar);
