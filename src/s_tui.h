@@ -313,8 +313,8 @@ namespace s_tui
 		virtual bool isEditable(void) const {return true;}
 		virtual bool onKey(SDLKey k, S_TUI_VALUE v)
 		{
-			if (current==items.end() || v==S_TUI_RELEASED) return false;
-			if (k==SDLK_RETURN)
+		  if (current==items.end() || v==S_TUI_RELEASED) return false;
+		        if (k==SDLK_RETURN)
 			{
 				if (!onTriggerCallback.empty()) onTriggerCallback();
 				return false;
@@ -328,7 +328,7 @@ namespace s_tui
 			}
 			if (k==SDLK_DOWN)
 			{
-				if (current!=--items.end()) ++current;
+			        if (current!= --items.end()) ++current;
 				else current = items.begin();
 				if (!onChangeCallback.empty()) onChangeCallback();
 				return true;
@@ -359,7 +359,15 @@ namespace s_tui
 		  }
 		}
 		const T& getCurrent(void) const {if(current==items.end()) return emptyT; else return *current;}
-		void setCurrent(const T& i) {current = items.find(i);}
+		void setCurrent(const T& i) {
+		  current = items.find(i);
+
+		  // if not found, set to first item!
+		  if(current==items.end()) {
+		    current = items.begin();
+		    if (!onChangeCallback.empty()) onChangeCallback();
+		  }
+		}
 		bool setValue(const T& i)
 		{
 			if (items.find(i) == items.end()) return false;

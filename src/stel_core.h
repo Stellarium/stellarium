@@ -49,6 +49,7 @@
 #include "sky_localizer.h"
 #include "script_mgr.h"
 #include "image_mgr.h"
+#include "setting_mgr.h"
 
 // Predeclaration of the StelCommandInterface class
 class StelCommandInterface;
@@ -133,6 +134,8 @@ public:
 	// Quit the application
 	void stel_core::quit(void);
 
+	void populate_setting_mgr(SettingMgr *smgr);  // TEMP until migrate to new config setup
+	void load_config_from_setting_mgr(SettingMgr *smgr);  // TEMP until migrate to new config setup
 	
 private:
 
@@ -156,6 +159,7 @@ private:
 	string config_file;
 
 	// Main elements of the program
+	SettingMgr * config;                    // Track all user configurations (when migration is done)
 	StelCommandInterface * commander;       // interface to perform all UI and scripting actions
 	ScriptMgr * scripts;                    // manage playing and recording scripts
 	navigator * navigation;			// Manage all navigation parameters, coordinate transformations etc..
