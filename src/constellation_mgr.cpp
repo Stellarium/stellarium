@@ -25,8 +25,7 @@
 #include "constellation_mgr.h"
 
 // constructor which loads all data from appropriate files
-Constellation_mgr::Constellation_mgr(string _data_dir, string _sky_culture, string _sky_locale, Hip_Star_mgr *_hip_stars, string _font_filename, int barx, int bary, 
-				     Vec3f _lines_color, Vec3f _names_color) :
+Constellation_mgr::Constellation_mgr(string _data_dir, string _sky_culture, string _sky_locale, Hip_Star_mgr *_hip_stars, string _font_filename, int barx, int bary, Vec3f _lines_color, Vec3f _names_color) :
   asterFont(NULL), lines_color(_lines_color), names_color(_names_color), hipStarMgr(_hip_stars), 
   dataDir( _data_dir), skyCulture(_sky_culture), selected(NULL)
 {
@@ -46,6 +45,8 @@ Constellation_mgr::Constellation_mgr(string _data_dir, string _sky_culture, stri
   skyLocale = _sky_locale;
 
   art_switch = new linear_switchor();
+  lines_switch = new linear_switchor();
+  names_switch = new linear_switchor();
 }
 
 
@@ -65,6 +66,8 @@ Constellation_mgr::~Constellation_mgr()
 	Constellation::constellation_font = NULL;
 	
 	delete art_switch;
+	delete lines_switch;
+	delete names_switch;
 }
 
 int Constellation_mgr::set_sky_culture(string _sky_culture, const string& _font_fileName, int barx, int bary)
@@ -266,7 +269,7 @@ void Constellation_mgr::draw(Projector* prj) const
 {
     glDisable(GL_TEXTURE_2D);
     glDisable(GL_BLEND);
-    glColor3fv(lines_color);
+    glColor3fv(lines_color*lines_switch->get_interstate());
     prj->set_orthographic_projection();	// set 2D coordinate
 	
 	if (selected)
@@ -317,7 +320,7 @@ void Constellation_mgr::draw_art(Projector* prj, navigator* nav)
 void Constellation_mgr::draw_names(Projector* prj, bool _gravity_label)
 {
 	Constellation::gravity_label = _gravity_label;
-    glColor3fv(names_color);
+    glColor3fv(names_color*names_switch->get_interstate());
     glEnable(GL_BLEND);
     glEnable(GL_TEXTURE_2D);
     prj->set_orthographic_projection();	// set 2D coordinate
