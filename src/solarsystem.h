@@ -64,12 +64,15 @@ public:
 	void end_trails(void);
 	void set_trail_color(const Vec3f _color);
 	void update_trails(const navigator* nav);
-
+	void set_object_scale(float scale);
 
 private:
 	planet* sun;
 	planet* moon;
 	planet* earth;
+
+	// solar system related settings
+	float object_scale;  // should be kept synchronized with star scale...
 
 	s_font* planet_name_font;
 	void load(const string& planetfile);// Load the bodies data from a file

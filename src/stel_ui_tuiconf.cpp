@@ -167,17 +167,21 @@ void stel_ui::init_tui(void)
 	tui_effect_landscape->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb_tui_effect_change_landscape));
 	tui_menu_effects->addComponent(tui_effect_landscape);
 
-	tui_effect_pointobj = new s_tui::Boolean_item(false, "5.2 Object Sizing Rule: ", "Point","Magnitude");
+	tui_effect_manual_zoom = new s_tui::Boolean_item(false, "5.2 Manual zoom: ", "Yes","No");
+	tui_effect_manual_zoom->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb1));
+	tui_menu_effects->addComponent(tui_effect_manual_zoom);
+
+	tui_effect_pointobj = new s_tui::Boolean_item(false, "5.3 Object Sizing Rule: ", "Point","Magnitude");
 	tui_effect_pointobj->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb1));
 	tui_menu_effects->addComponent(tui_effect_pointobj);
 
-	tui_effect_zoom_duration = new s_tui::Decimal_item(1, 10, 2, "5.3 Zoom duration: ");
+	tui_effect_object_scale = new s_tui::Decimal_item(0, 25, 1, "5.4 Object Size Multiplier: ");
+	tui_effect_object_scale->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb1));
+	tui_menu_effects->addComponent(tui_effect_object_scale);
+
+	tui_effect_zoom_duration = new s_tui::Decimal_item(1, 10, 2, "5.5 Zoom duration: ");
 	tui_effect_zoom_duration->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb1));
 	tui_menu_effects->addComponent(tui_effect_zoom_duration);
-
-	tui_effect_manual_zoom = new s_tui::Boolean_item(false, "5.4 Manual zoom: ", "Yes","No");
-	tui_effect_manual_zoom->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb1));
-	tui_menu_effects->addComponent(tui_effect_manual_zoom);
 
 
 	// 6. Scripts
@@ -250,6 +254,7 @@ int stel_ui::handle_keys_tui(SDLKey key, s_tui::S_TUI_VALUE state)
 void stel_ui::tui_cb1(void)
 {
 	// 1. Location
+
 	core->observatory->set_latitude(tui_location_latitude->getValue());
 	core->observatory->set_longitude(tui_location_longitude->getValue());
 	core->observatory->set_altitude(tui_location_altitude->getValue());
@@ -271,6 +276,11 @@ void stel_ui::tui_cb1(void)
 	core->FlagPointStar 		= tui_effect_pointobj->getValue();
 	core->auto_move_duration	= tui_effect_zoom_duration->getValue();
 	core->FlagManualZoom 		= tui_effect_manual_zoom->getValue();
+
+
+	std::ostringstream oss;
+	oss << "set star_scale " << tui_effect_object_scale->getValue();
+	core->commander->execute_command(oss.str());
 
 }
 
@@ -305,18 +315,19 @@ void stel_ui::tui_update_widgets(void)
 	tui_effect_pointobj->setValue(core->FlagPointStar);
 	tui_effect_zoom_duration->setValue(core->auto_move_duration);
 	tui_effect_manual_zoom->setValue(core->FlagManualZoom);
+	tui_effect_object_scale->setValue(core->StarScale);
 
 	// 6. Scripts
 	// each fresh time enter needs to reset to select message
 	if(core->SelectedScript=="") {
-	  tui_scripts_local->setCurrent(TUI_SCRIPT_MSG);
-
-	  if(core->ScriptRemoveableDiskMounted) {
-	    tui_scripts_removeable->setCurrent(TUI_SCRIPT_MSG);
-	  } else {
-	    // no directory mounted, so put up message
-	    tui_scripts_removeable->replaceItemList("Arrow down to load list.",0);
-	  }
+		tui_scripts_local->setCurrent(TUI_SCRIPT_MSG);
+		
+		if(core->ScriptRemoveableDiskMounted) {
+			tui_scripts_removeable->setCurrent(TUI_SCRIPT_MSG);
+		} else {
+			// no directory mounted, so put up message
+			tui_scripts_removeable->replaceItemList("Arrow down to load list.",0);
+		}
 	}
 
 	// 7. admin

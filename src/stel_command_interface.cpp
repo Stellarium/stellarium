@@ -95,8 +95,11 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
     else if(args["sky_culture"]!="") stcore->set_sky_culture(args["sky_culture"]);
     else if(args["sky_locale"]!="") stcore->set_sky_locale(args["sky_locale"]);
     else if(args["star_mag_scale"]!="") stcore->StarMagScale = str_to_double(args["star_mag_scale"]);
-    else if(args["star_scale"]!="") stcore->StarScale = str_to_double(args["star_scale"]);
-    else if(args["star_twinkle_amount"]!="") stcore->StarTwinkleAmount = str_to_double(args["star_twinkle_amount"]);
+    else if(args["star_scale"]!="") {
+		float scale = str_to_double(args["star_scale"]);
+		stcore->StarScale = scale;
+		stcore->ssystem->set_object_scale(scale);
+	} else if(args["star_twinkle_amount"]!="") stcore->StarTwinkleAmount = str_to_double(args["star_twinkle_amount"]);
     else if(args["time_zone"]!="") stcore->observatory->set_custom_tz_name(args["time_zone"]);
 
 
