@@ -79,7 +79,7 @@ void drawIntro(void)
 void Draw(int delta_time)
 {
 	// Init openGL viewing with fov, screen size and clip planes
-	navigation.init_project_matrix(global.X_Resolution,global.Y_Resolution,0.00000001,1000);
+	navigation.init_project_matrix(global.X_Resolution,global.Y_Resolution,0.0001,1000);
 
     if (global.FlagAtmosphere)       // Calc the atmosphere
     {
@@ -106,6 +106,9 @@ void Draw(int delta_time)
 		HipVouteCeleste->Draw();    // Draw the stars
     }
 
+    Vec3d vv = UnProject(512,380);
+    printf("x=512, y=380, vv(%f,%f,%f)\n",vv[0],vv[1],vv[2]);
+    
 	if (global.FlagAtmosphere && global.SkyBrightness>0)
 	DrawAtmosphere2();	// Draw the atmosphere
 
@@ -393,8 +396,8 @@ bool Initialize(void)	     // Any Application & User Initialization Code Goes He
 // ***************************  InitGL  ********************************
 bool InitGL(SDL_Surface *S)  // Any OpenGL Initialization Code Goes Here
 {
-    glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_FASTEST);
-    glDisable(GL_DEPTH_TEST);
+    //glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_FASTEST);
+    //glDisable(GL_DEPTH_TEST);
     // init the blending function parameters
     glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
     return true;     // Return TRUE (Initialization Successful)
@@ -453,7 +456,7 @@ int main(int argc, char **argv)
     atexit(SDL_Quit);
 
     // We Want A Hardware Surface
-    Vflags = SDL_HWSURFACE|SDL_OPENGL;
+    Vflags = SDL_HWSURFACE|SDL_OPENGL|SDL_DOUBLEBUF;
 
 	// If fullscreen, set the Flag
     if (global.Fullscreen) Vflags|=SDL_FULLSCREEN;

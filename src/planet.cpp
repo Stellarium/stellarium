@@ -117,7 +117,7 @@ void planet::compute_geographic_rotation(double date)
     double wholeRotations = floor(rotations);
     double remainder = rotations - wholeRotations;
 
-	axis_rotation = -remainder * 360. - re.offset;
+	axis_rotation = remainder * 360. + re.offset;
 }
 
 Vec3d planet::get_ecliptic_pos()
@@ -188,14 +188,14 @@ void planet::draw(void)
 
 	// Rotate and add an extra half rotation because of the convention in all
     // planet texture maps where zero deg long. is in the middle of the texture.
-	glRotatef(-axis_rotation - 180.,0.,0.,1.);
+	glRotatef(axis_rotation + 180.,0.,0.,1.);
 
 	glColor3f(1.0f, 1.0f, 1.0f);
 	glBindTexture(GL_TEXTURE_2D, planetTexture->getID());
 	GLUquadricObj * p=gluNewQuadric();
 	gluQuadricTexture(p,GL_TRUE);
 	gluQuadricOrientation(p, GLU_OUTSIDE);
-	gluSphere(p,radius,40,40);
+	gluSphere(p,radius,80,80);
 	gluDeleteQuadric(p);
 
 	glPopMatrix();

@@ -329,20 +329,14 @@ void navigator::update_transform_matrices(void)
 // Place openGL in earth equatorial coordinates
 void navigator::switch_to_earth_equatorial(void)
 {
-	glLoadIdentity();
-	gluLookAt(0., 0., 0.,          // Observer position
-              local_vision[0],local_vision[1],local_vision[2],   // direction of vision
-              0.,0.,1.);           // Vertical vector
+	switch_to_local();
 	glMultMatrixd(mat_earth_equ_to_local);
 }
 
 // Place openGL in heliocentric coordinates
 void navigator::switch_to_heliocentric(void)
 {
-	glLoadIdentity();
-	gluLookAt(0., 0., 0.0,          // Observer position
-              local_vision[0],local_vision[1],local_vision[2],   // direction of vision
-              0.,0.,1.);           // Vertical vector
+	switch_to_local();
 	glMultMatrixd(mat_helio_to_local);
 }
 
