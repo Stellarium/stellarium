@@ -162,6 +162,8 @@ void navigator::update_move(double deltaAz, double deltaAlt)
     if (deltaAlt)
     {
 		if (altVision+deltaAlt <= M_PI_2 && altVision+deltaAlt >= -M_PI_2) altVision+=deltaAlt;
+		if (altVision+deltaAlt > M_PI_2) altVision = M_PI_2;
+		if (altVision+deltaAlt < -M_PI_2) altVision = -M_PI_2;
     }
 
     // recalc all the position variables

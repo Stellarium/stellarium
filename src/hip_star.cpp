@@ -118,7 +118,7 @@ int Hip_Star::read(FILE * catalog)
     }
     
 
-    MaxColorValue = myMax(RGB[0],RGB[2]);
+    MaxColorValue = MY_MAX(RGB[0],RGB[2]);
 
 	// Precomputation of a term used later
 	term1 = expf(-0.92103f*(Mag + 12.12331f)) * 108064.73f;
