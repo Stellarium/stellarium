@@ -54,7 +54,7 @@ void stel_ui::draw_gravity_ui(void)
 		os << " fov " << setprecision(3) << core->projection->get_fov() << "  FPS " << core->fps;
 
 		glColor3f(0.1,0.9,0.1);
-		core->projection->print_gravity180(spaceFont, x-shift + 10, y-shift + 10, os.str());
+		core->projection->print_gravity180(spaceFont, x-shift + 15, y-shift + 15, os.str());
 	}
 
 	if (core->selected_object && core->FlagShowTuiShortInfo)
@@ -64,7 +64,7 @@ void stel_ui::draw_gravity_ui(void)
 		if (core->selected_object->get_type()==STEL_OBJECT_NEBULA) glColor3f(0.4f,0.5f,0.8f);
 		if (core->selected_object->get_type()==STEL_OBJECT_PLANET) glColor3f(1.0f,0.3f,0.3f);
 		if (core->selected_object->get_type()==STEL_OBJECT_STAR) glColor3fv(core->selected_object->get_RGB());
-		core->projection->print_gravity180(spaceFont, x+shift - 10, y+shift - 10, str);
+		core->projection->print_gravity180(spaceFont, x+shift - 15, y+shift - 15, str);
 	}
 }
 
@@ -121,7 +121,8 @@ void stel_ui::init_tui(void)
 	tui_time_displayformat = new s_tui::MultiSet_item<string>("2.6 Time Display Format: ");
 	tui_time_displayformat->addItem("24h");
 	tui_time_displayformat->addItem("12h");
-	tui_time_displayformat->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb1));
+	tui_time_displayformat->addItem("system_default");
+	tui_time_displayformat->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb_settimedisplayformat));
 	tui_menu_time->addComponent(tui_time_settmz);
 	tui_menu_time->addComponent(tui_time_skytime);
 	tui_menu_time->addComponent(tui_time_presetskytime);
@@ -228,7 +229,7 @@ void stel_ui::draw_tui(void)
 	if (tui_root)
 	{
 		glColor3f(0.1,0.9,0.1);
-		core->projection->print_gravity180(spaceFont, x+shift - 10, y-shift + 10,
+		core->projection->print_gravity180(spaceFont, x+shift - 15, y-shift + 15,
 			s_tui::stop_active + tui_root->getString());
 	}
 }
@@ -331,10 +332,18 @@ void stel_ui::tui_cb_settimezone(void)
 	//	TODO
 }
 
-// Launch script to set system time
+// Set time format mode
+void stel_ui::tui_cb_settimedisplayformat(void)
+{
+	core->observatory->set_time_format_str(tui_time_displayformat->getCurrent());
+}
+
+// Launch script to set system time to current sky time with the iso 8601 utc time as parameter
+// ie in format %Y-%m-%d %H:%M:%S
 void stel_ui::tui_cb_actualtime(void)
 {
-	//	TODO
+	system( ( core->DataDir + "script_set_system_time " +
+	core->observatory->get_ISO8601_time_UTC(core->navigation->get_JDay()) ).c_str() );
 }
 
 // 8. Administration actions functions
@@ -351,17 +360,16 @@ void stel_ui::tui_cb_admin_save_default(void)
 	core->save_config();
 }
 
-// Set locale parameter (LANG)
+// Call script to set locale parameter (LANG)
 void stel_ui::tui_cb_admin_set_locale(void)
 {
-	//	TODO
-	// Use localeconv() from clocal header
+	system( ( core->DataDir + "script_set_locale " + tui_admin_setlocal->getCurrent() ).c_str() );
 }
 
 // Launch script for internet update
 void stel_ui::tui_cb_admin_updateme(void)
 {
-	//	TODO
+	system( ( core->DataDir + "script_internet_update" ).c_str() );
 }
 
 // Set a new landscape skin
