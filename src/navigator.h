@@ -17,8 +17,8 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#ifndef _NAVIGATION_H_
-#define _NAVIGATION_H_
+#ifndef _NAVIGATOR_H_
+#define _NAVIGATOR_H_
 
 #include "stellarium.h"
 #include "vecmath.h"
@@ -153,4 +153,4 @@ private:
 extern navigator navigation; // Navigator instance used in stellarium
 
 
-#endif //_NAVIGATION_H_
+#endif //_NAVIGATOR_H_

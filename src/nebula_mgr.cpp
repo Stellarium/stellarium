@@ -23,6 +23,9 @@
 #include "stellarium.h"
 #include "s_texture.h"
 #include "s_font.h"
+#include "navigator.h"
+
+#define RADIUS_NEB 28.
 
 s_font * nebulaFont;
 
@@ -136,14 +139,14 @@ stel_object * Nebula_mgr::search(vec3_t Pos)
 	Pos.normalize();
     vector<Nebula *>::iterator iter;
     Nebula * plusProche=NULL;
-    float anglePlusProche=3.15;
+    float anglePlusProche=0.;
     for(iter=Liste.begin();iter!=Liste.end();iter++)
     {   if ((**iter).XYZ[0]*Pos[0]+(**iter).XYZ[1]*Pos[1]+(**iter).XYZ[2]*Pos[2]>anglePlusProche)
         {   anglePlusProche=(**iter).XYZ[0]*Pos[0]+(**iter).XYZ[1]*Pos[1]+(**iter).XYZ[2]*Pos[2];
             plusProche=(*iter);
         }
     }
-    if (anglePlusProche>499.9)
+    if (anglePlusProche>RADIUS_NEB*0.999)
     {
         return plusProche;
     }

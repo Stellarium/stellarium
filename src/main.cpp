@@ -79,7 +79,7 @@ void drawIntro(void)
 void Draw(int delta_time)
 {
 	// Init openGL viewing with fov, screen size and clip planes
-	navigation.init_project_matrix(global.X_Resolution,global.Y_Resolution,0.0001,1000);
+	navigation.init_project_matrix(global.X_Resolution,global.Y_Resolution,0.00001 ,40 );
 
     if (global.FlagAtmosphere)       // Calc the atmosphere
     {
