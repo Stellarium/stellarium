@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003 Fabien Chéreau
+ * Copyright (C) 2003 Fabien Chï¿½eau
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -26,7 +26,7 @@
 stel_core::stel_core() : screen_W(800), screen_H(600), bppMode(16), Fullscreen(0),
 	navigation(NULL), observatory(NULL), projection(NULL), selected_object(NULL), hip_stars(NULL), asterisms(NULL),
 	nebulas(NULL), atmosphere(NULL), tone_converter(NULL), selected_constellation(NULL), FlagShowTuiMenu(0),
-	frame(0), timefr(0), timeBase(0), deltaFov(0.), deltaAlt(0.), deltaAz(0.),
+	frame(0), timefr(0), timeBase(0), maxfps(10000.f), deltaFov(0.), deltaAlt(0.), deltaAz(0.),
 	move_speed(0.001), FlagTimePause(0)
 {
 	ProjectorType = PERSPECTIVE_PROJECTOR;
@@ -112,8 +112,11 @@ void stel_core::init(void)
 	skyloc = new Sky_localizer(DataDir);
 
 	// Load hipparcos stars & names
-	hip_stars = new Hip_Star_mgr(DataDir, SkyLocale, "spacefont.txt" );
-
+	hip_stars = new Hip_Star_mgr(
+		DataDir + "hipparcos.fab",
+		DataDir + "name.fab",
+		DataDir + "star_names." + SkyLocale + ".fab",
+		DataDir + "spacefont.txt" );
 
 	nebulas   = new Nebula_mgr(NebulaLabelColor, NebulaCircleColor);
 
@@ -290,7 +293,7 @@ void stel_core::draw(int delta_time)
 	atmosphere->compute_color(navigation->get_JDay(), delta_time, sunPos, moonPos,
 				  ssystem->get_moon()->get_phase(ssystem->get_earth()->get_heliocentric_ecliptic_pos()),
 				  tone_converter, projection, observatory->get_latitude(), observatory->get_altitude(),
-				  15.f, 40.f);	// Temperature = 15°c, relative humidity = 40%
+				  15.f, 40.f);	// Temperature = 15c, relative humidity = 40%
 
 
 	// Set openGL drawings in equatorial coordinates
@@ -445,36 +448,39 @@ void stel_core::load_config(void)
 	string version = conf.get_str("main:version");
 	if (version!=string(VERSION))
 	{
-		if (version=="0.6.0")
+		if (version>="0.6.0" && version != string(VERSION))
 		{
-			cout << "The current config file is from previous version (0.6.0)." << endl;
-			cout << "Previous options will be imported in the new config file." << endl;
+			printf(_("The current config file is from a previous version (>=0.6.0).\nPrevious options will be imported in the new config file.\n"));
+			
+			// Store temporarily the previous observator parameters
+			Observator tempobs;
+			tempobs.load(ConfigDir + config_file, "init_location");
+			
+			// Set the new landscape though
+			tempobs.set_landscape_name("Guereins");
+			
+			load_config_from(ConfigDir + config_file);			
+			// We just imported previous parameters (from >=0.6.0)
+			save_config_to(ConfigDir + config_file);
+			tempobs.save(ConfigDir + config_file, "init_location");
+
+			load_config_from(ConfigDir + config_file);
 		}
 		else
 		{
 			// The config file is too old to try an importation
-			cout << "The current config file is from a version too old (" <<
-				(version.empty() ? "<0.6.0" : version) << ")." << endl;
-			cout << "It will be replaced by the default config file." << endl;
+			printf(_("The current config file is from a version too old for parameters to be imported (%s).\nIt will be replaced by the default config file.\n"), version.empty() ? "<0.6.0" : version.c_str());
 			system( (string("cp -f ") + DataRoot + "/config/default_config.ini " + ConfigDir + config_file).c_str() );
+			
+			// Actually load the config file
+			load_config_from(ConfigDir + config_file);
+			return;
 		}
 	}
-
-	// Actually load the config file
+	
+	// Versions match, there was no pblms
 	load_config_from(ConfigDir + config_file);
-
-	if (version!=string(VERSION))
-	{
-		// Store temporarily the previous observator parameters
-		Observator tempobs;
-		tempobs.load(ConfigDir + config_file, "init_location");
-		
-		// Set the new landscape though
-		tempobs.set_landscape_name("Guereins");
-		// We just imported previous parameters (from 0.6.0)
-		save_config_to(ConfigDir + config_file);
-		tempobs.save(ConfigDir + config_file, "init_location");
-	}	
+	
 }
 
 void stel_core::save_config(void)
@@ -486,15 +492,15 @@ void stel_core::save_config(void)
 
 void stel_core::load_config_from(const string& confFile)
 {
-    cout << "Loading configuration file " << confFile << " ..." << endl;
+    cout << _("Loading configuration file ") << confFile << " ..." << endl;
 	init_parser conf;
 	conf.load(confFile);
 
 	// Main section (check for version mismatch)
 	string version = conf.get_str("main:version");
-	if (version!=string(VERSION) && version!="0.6.0")
+	if (version!=string(VERSION) && version<"0.6.0")
 	{
-		cout << "ERROR : The current config file is from a version too old (" <<
+		cout << _("ERROR : The current config file is from a different version (") <<
 			(version.empty() ? "<0.6.0" : version) << ")." << endl;
 		exit(-1);
 	}
@@ -506,7 +512,7 @@ void stel_core::load_config_from(const string& confFile)
 	bppMode				= conf.get_int    ("video:bbp_mode");
 	horizontalOffset	= conf.get_int    ("video:horizontal_offset");
 	verticalOffset		= conf.get_int    ("video:vertical_offset");
-
+	maxfps 				= conf.get_double ("video","maximum_fps",10000);
 
 	// Projector
 	string tmpstr = conf.get_str("projection:type");
@@ -539,8 +545,8 @@ void stel_core::load_config_from(const string& confFile)
 	DistortionFunction 	= conf.get_int("projection", "distortion_function", -1);
 
 	// localization section
-	set_sky_culture(conf.get_str("localization", "sky_culture", "western") );
-	set_sky_locale(conf.get_str("localization", "sky_locale", "eng"));
+	SkyCulture = conf.get_str("localization", "sky_culture", "western");
+	SkyLocale = conf.get_str("localization", "sky_locale", "eng");
 	// default sky is western, english (actually only planet names are english!)
 
 	// Star section
@@ -662,7 +668,8 @@ void stel_core::save_config_to(const string& confFile)
 	conf.set_int	("video:bbp_mode", bppMode);
 	conf.set_int    ("video:horizontal_offset", horizontalOffset);
 	conf.set_int    ("video:vertical_offset", verticalOffset);
-
+	conf.set_double ("video:maximum_fps", maxfps);
+	
 	// Projector
 	string tmpstr;
 	switch (ProjectorType)
@@ -786,7 +793,6 @@ void stel_core::save_config_to(const string& confFile)
 	conf.set_boolean("astro:flag_bright_nebulae", FlagBrightNebulae);
 
 	conf.save(confFile);
-
 }
 
 
@@ -1157,8 +1163,8 @@ void stel_core::auto_zoom_out(float move_duration)
 }
 
 // this really belongs elsewhere
-void stel_core::set_sky_culture(string _culture_dir){
-
+void stel_core::set_sky_culture(string _culture_dir)
+{
   if(SkyCulture == _culture_dir) return;
   SkyCulture = _culture_dir;
 
@@ -1170,9 +1176,11 @@ void stel_core::set_sky_culture(string _culture_dir){
   projection->reset_perspective_projection();
   
   // as constellations have changed, clear out any selection and retest for match!
-  if (selected_object && selected_object->get_type()==STEL_OBJECT_STAR) {
+  if (selected_object && selected_object->get_type()==STEL_OBJECT_STAR)
+  {
     selected_constellation=asterisms->is_star_in((Hip_Star*)selected_object);
-  } else {
+  } else
+  {
     selected_constellation=NULL;
   }
 
@@ -1180,13 +1188,13 @@ void stel_core::set_sky_culture(string _culture_dir){
 
 
 // this really belongs elsewhere
-void stel_core::set_sky_locale(string _locale){
-
+void stel_core::set_sky_locale(string _locale)
+{
   if(SkyLocale == _locale) return;
   SkyLocale = _locale;
 
   if( !hip_stars ) return; // objects not initialized yet
-  hip_stars->set_sky_locale(_locale);
+  hip_stars->load_common_names(DataDir + "star_names." + SkyLocale + ".fab");
   ssystem->set_sky_locale(_locale);
   asterisms->set_sky_locale(_locale);
 

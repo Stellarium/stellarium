@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003 Fabien Chéreau
+ * Copyright (C) 2003 Fabien Chï¿½eau
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -309,6 +309,12 @@ void stel_sdl::start_main_loop(void)
 			else
 			{
 
+				TickCount = SDL_GetTicks();			// Get present ticks
+				// This is used to constraint the maximum FPS rate
+				if (TickCount-LastCount < 1000.f/core->getMaxFPS())
+				{
+					SDL_Delay((unsigned int)(1000.f/core->getMaxFPS())-(TickCount-LastCount));
+				}
 				TickCount = SDL_GetTicks();			// Get present ticks
 				core->update(TickCount-LastCount);	// And update the motions and data
 				core->draw(TickCount-LastCount);	// Do the drawings!

@@ -1,6 +1,6 @@
 /*
  * Stellarium
- * Copyright (C) 2002 Fabien Chéreau
+ * Copyright (C) 2002 Fabien Chï¿½eau
  * 
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -43,9 +43,8 @@
 // Used for GNU gettext translations	
 #include "gettext.h"
 #define _(String) gettext (String)
-#define N_(String) String
+#define N_(String) gettext_noop(String)
 
-// needed for bug workarounds
-// #define NVIDIA TRUE
+#include <cassert>
 
 #endif /*_STELLARIUM_H_*/

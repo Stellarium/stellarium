@@ -8,12 +8,12 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium 0.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-12-18 14:25+0100\n"
+"POT-Creation-Date: 2004-12-26 18:59+0100\n"
 "PO-Revision-Date: 2004-12-18 02:43+0100\n"
 "Last-Translator:  <stellarium@free.fr>\n"
 "Language-Team: French <traduc@traduc.org>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=ISO-8859-1\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
@@ -24,27 +24,219 @@ msgid ""
 "on stellarium web page : http://stellarium.free.fr\n"
 "\n"
 msgstr ""
-"T�l�chargez la derniere version et envoyer vos rapports de bugssur la page "
-"web de stellarium : http://stellarium.free.fr\n"
+"Téléchargez la dernière version et envoyez vos rapports de \n"
+"bugs sur la page web de stellarium : http://stellarium.free.fr\n"
 "\n"
 
 #: src/main.cpp:54
 #, c-format
 msgid ""
 "Usage: %s [OPTION] ...\n"
-" -v, --version          output version information and exit\n"
-" -h, --help             display this help and exit\n"
+" -v, --version          Output version information and exit.\n"
+" -h, --help             Display this help and exit.\n"
 msgstr ""
 "Usage: %s [OPTION] ...\n"
-" -v, --version          affiche les informations de version et quitte\n"
-" -h, --help             affiche cette aide et quitte\n"
+" -v, --version          Affiche les informations de version et quitte.\n"
+" -h, --help             Affiche cette aide et quitte.\n"
 
 #: src/main.cpp:78
 #, c-format
 msgid "%s: Bad command line argument(s)\n"
-msgstr "%s: mauvais argument sur la ligne de commande(s)\n"
+msgstr "%s: Mauvais argument(s) sur la ligne de commande\n"
 
 #: src/main.cpp:79
 #, c-format
 msgid "Try `%s --help' for more information.\n"
 msgstr "Essayez `%s --help' pour plus d'information.\n"
+
+#. Failure....
+#: src/main.cpp:119
+#, c-format
+msgid ""
+"ERROR : I can't find the datas directories in :\n"
+"%s/ nor in ./ nor in ../\n"
+"You may fully install the software (type \"make install\" on POSIX systems)\n"
+"or launch the application from the stellarium package directory.\n"
+msgstr ""
+"ERREUR : Je ne peux pas trouver les réperoires de données (data) dans :\n"
+"%s/ ni dans ./ ni dans ../\n"
+"Vous pouvez installer complètement le programme (tapez \"make install\" sur "
+"un système POSIX)\n"
+"ou lancer l'application du répertoire où est installé stellarium.\n"
+
+#: src/main.cpp:162
+#, c-format
+msgid "> Found data files in %s : local version.\n"
+msgstr "> Trouvé les fichiers de donnée dans %s : version locale.\n"
+
+#: src/main.cpp:180
+#, c-format
+msgid "Will create config files in %s\n"
+msgstr "Va créer les fichiers de config dans %s\n"
+
+#. Maybe the directory is not created so try to create it
+#: src/main.cpp:188
+#, c-format
+msgid "Try to create directory %s\n"
+msgstr "Essai de créer le répertoire %s\n"
+
+#: src/main.cpp:197
+#, c-format
+msgid ""
+"Can't create the file %sconfig.ini\n"
+"If the directory %s is missing please create it by hand.\n"
+"If not, check that you have access to %s\n"
+msgstr ""
+"Ne peux pas créer le fichier %sconfig.ini\n"
+"Si le répertoire %s est manquant, créez le à la main SVP..\n"
+"Sinon, vérifiez que vous avez accès à %s\n"
+
+#. North
+#: src/draw.cpp:335
+msgid "N"
+msgstr "N"
+
+#. South
+#: src/draw.cpp:337
+msgid "S"
+msgstr "S"
+
+#. East
+#: src/draw.cpp:339
+msgid "E"
+msgstr "E"
+
+#. West
+#: src/draw.cpp:341
+msgid "W"
+msgstr "O"
+
+#. load new culture data
+#: src/constellation_mgr.cpp:104
+#, c-format
+msgid "Changing sky culture to %s\n"
+msgstr "Utilise les noms de la culture %s\n"
+
+#: src/constellation_mgr.cpp:117
+#, c-format
+msgid "Loading constellation data...\n"
+msgstr "Chargement des données constellations...\n"
+
+#. Draw loading bar
+#: src/constellation_mgr.cpp:198
+#, c-format
+msgid "Loading Constellation Art: %d/%d"
+msgstr "Chargement des Images Constellations : %d/%d"
+
+#. Hip = Hipparcos, RA=Right Ascention, DE=Declinaison, Mag=Magnitude
+#: src/hip_star.cpp:57
+#, c-format
+msgid ""
+"Name :%s%s%s\n"
+"Hip : %.4d\n"
+"RA : %s\n"
+"DE : %s\n"
+"Mag : %.2f"
+msgstr ""
+"Nom :%s%s%s\n"
+"Hip : %.4d\n"
+"AD : %s\n"
+"DE : %s\n"
+"Mag : %.2f"
+
+#: src/hip_star.cpp:68 src/hip_star.cpp:69 src/nebula.cpp:67
+#, c-format
+msgid "%s: mag %.1f"
+msgstr "%s: mag %.1f"
+
+#: src/hip_star_mgr.cpp:81
+#, c-format
+msgid "Loading Hipparcos star data...\n"
+msgstr "Chargement du catalogue d'étoiles Hipparcos...\n"
+
+#. 120417;
+#: src/hip_star_mgr.cpp:113
+#, c-format
+msgid "Star catalog: %d stars\n"
+msgstr "Catalogue d'étoile: %d étoiles\n"
+
+#. RA=Right ascention, DE=Declinaison, Mag=Magnitude
+#: src/nebula.cpp:54
+#, c-format
+msgid ""
+"Name : %s (NGC %u)\n"
+"RA : %s\n"
+"DE : %s\n"
+"Mag : %.2f"
+msgstr ""
+"Nom : %s (NGC %u)\n"
+"AD : %s\n"
+"DE : %s\n"
+"Mag : %.2f"
+
+#: src/nebula_mgr.cpp:54
+#, c-format
+msgid "Loading nebulas data...\n"
+msgstr "Chargement des données Nébuleuse...\n"
+
+#: src/nebula_mgr.cpp:70
+#, c-format
+msgid "Reading a total of %d nebulas\n"
+msgstr "Lecture de %d nebuleuses\n"
+
+#: src/nebula_mgr.cpp:101
+#, c-format
+msgid "Loading deep space objects: %d/%d"
+msgstr "Chargement des objets du ciel profond: %d/%d"
+
+#: src/observator.cpp:60
+#, c-format
+msgid "Loading location: \"%s\", "
+msgstr "Chargement du lieu : \"%s\", "
+
+#: src/observator.cpp:67
+#, c-format
+msgid "(landscape is: \"%s\")\n"
+msgstr "(le paysage est : \"%s\")\n"
+
+#: src/observator.cpp:97
+#, c-format
+msgid "Saving location %s to file %s\n"
+msgstr "Enregistre le lieu %s dans le fichier %s\n"
+
+#: src/planet.cpp:83
+#, c-format
+msgid ""
+"Name :%s%s\n"
+"RA : %s\n"
+"DE : %s\n"
+"Distance : %.8f UA\n"
+"Magnitude : %.2f"
+msgstr ""
+"Nom :%s%s\n"
+"AD : %s\n"
+"DE : %s\n"
+"Distance : %.8f UA\n"
+"Magnitude : %.2f"
+
+#: src/planet.cpp:94
+#, c-format
+msgid "%s%s: mag %.1f"
+msgstr "%s%s: mag %.1f"
+
+#. initialize sky locale list (hardcoded right here)
+#: src/sky_localizer.cpp:60
+msgid "English"
+msgstr "Anglais"
+
+#: src/sky_localizer.cpp:61
+msgid "Spanish"
+msgstr "Espagnol"
+
+#: src/sky_localizer.cpp:62
+msgid "French"
+msgstr "Français"
+
+#: src/sky_localizer.cpp:63
+msgid "Hawaiian"
+msgstr "Hawaien"

@@ -1,6 +1,6 @@
 /*
  * Stellarium
- * Copyright (C) 2002 Fabien Chéreau
+ * Copyright (C) 2002 Fabien Chï¿½eau
  * 
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -30,15 +30,18 @@ using namespace std ;
 class Hip_Star_mgr  
 {
 public:
-    Hip_Star_mgr(string _data_dir, string _sky_locale, string _font_filename);
+    Hip_Star_mgr(string _catalog_filename, string _names_filename,
+				 string _common_names_filename, string _font_filename);
     virtual ~Hip_Star_mgr();
-    int read(FILE *);
+	
+	void init(const string& font_fileName, const string& hipCatFile, const string& commonNameFile, const string& sciNameFile);
+	void load_common_names(const string& commonNameFile);
+	void load_sci_names(const string& sciNameFile);
     void draw(float star_scale, float star_mag_scale, float twinkle_amount, int name_ON, float maxMagStarName,
 		Vec3f equ_vision, tone_reproductor* _eye, Projector* prj, bool _gravity_label);	// Draw all the stars
     void draw_point(float star_scale, float star_mag_scale, float twinkle_amount, int name_ON, float maxMagStarName,
 		Vec3f equ_vision, tone_reproductor* _eye, Projector* prj, bool _gravity_label);	// Draw all the stars as points
     void save(void);                    	// Debug function
-    void set_sky_locale(string _sky_locale);
     Hip_Star * search(Vec3f Pos);  	// Search the star by position
 	Hip_Star * search(unsigned int);	// Search the star by HP number
 	// Return a stl vector containing the stars located inside the lim_fov circle around position v
@@ -47,10 +50,7 @@ public:
 private:
 
 	// Load all the stars from the files
-	void load(const string& font_fileName, const string& hipCatFile,
-		  const string& commonNameFile, const string& nameFile);
-
-	void load_common_names(const string& commonNameFile);
+	void load_data(const string& hipCatFile);
 
 	vector<Hip_Star*>* starZones;       // array of star vector with the grid id as array rank
 	Grid HipGrid;                       // Grid for opimisation
@@ -58,8 +58,6 @@ private:
 	int StarArraySize;      // Number of star in the array
 	s_texture * starTexture;
 	s_font * starFont;
-	string dataDir;
-	string skyLocale;
 };
 
 

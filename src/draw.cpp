@@ -1,6 +1,6 @@
 /*
  * Stellarium
- * Copyright (C) 2002 Fabien Chéreau
+ * Copyright (C) 2002 Fabien Chï¿½eau
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -328,14 +328,26 @@ void Cardinals::draw(const Projector* prj, double latitude, bool gravityON) cons
   // direction text
   string d[4];
 
-  d[0] = "N";
-  d[1] = "S";
-  d[2] = "E";
-  d[3] = "W";
+  // Improvement for gettext translation
+  static string sNorth, sSouth, sEast, sWest;
+  
+  // North
+  sNorth = _("N");
+  // South
+  sSouth = _("S");
+  // East
+  sEast = _("E");
+  // West
+  sWest = _("W");
+  
+  d[0] = sNorth;
+  d[1] = sSouth;
+  d[2] = sEast;
+  d[3] = sWest;
 
   // fun polar special cases
-  if(latitude ==  90.0 ) d[0] = d[1] = d[2] = d[3] = "S";
-  if(latitude == -90.0 ) d[0] = d[1] = d[2] = d[3] = "N";
+  if(latitude ==  90.0 ) d[0] = d[1] = d[2] = d[3] = sSouth;
+  if(latitude == -90.0 ) d[0] = d[1] = d[2] = d[3] = sNorth;
 
     glColor3fv(color);
 	glEnable(GL_BLEND);
@@ -348,7 +360,7 @@ void Cardinals::draw(const Projector* prj, double latitude, bool gravityON) cons
 
 	prj->set_orthographic_projection();
 
-	float shift = font->getStrLen("N")/2;
+	float shift = font->getStrLen(sNorth)/2;
 
 	if (gravityON)
 	{

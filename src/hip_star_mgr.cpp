@@ -1,6 +1,6 @@
 /*
  * Stellarium
- * Copyright (C) 2002 Fabien Chéreau
+ * Copyright (C) 2002 Fabien Chï¿½eau
  * 
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -18,7 +18,6 @@
  */
 
 // class used to manage groups of Stars
-// TODO : Can optimize by sorting the Hip_star* array in magnitude
 
 #include "hip_star_mgr.h"
 #include "s_texture.h"
@@ -30,18 +29,13 @@
 #define RADIUS_STAR 1.
 
 // construct and load all data
-Hip_Star_mgr::Hip_Star_mgr(string _data_dir, string _sky_locale, string _font_filename) :
+Hip_Star_mgr::Hip_Star_mgr(string _catalog_filename, string _names_filename,
+							string _common_names_filename, string _font_filename) :
   starZones(NULL), HipGrid(), StarArray(NULL), StarArraySize(0), starTexture(NULL), 
-  starFont(NULL), dataDir(_data_dir), skyLocale(_sky_locale) 
+  starFont(NULL)
 {
-
   starZones = new vector<Hip_Star*>[HipGrid.getNbPoints()];
-
-  load( dataDir + _font_filename, 
-	dataDir + "hipparcos.fab", 
-	dataDir + "star_names." + skyLocale + ".fab",
-	dataDir + "name.fab" );
-
+  init(_font_filename, _catalog_filename, _common_names_filename, _names_filename);
 }
 
 
@@ -64,43 +58,33 @@ Hip_Star_mgr::~Hip_Star_mgr()
   StarArray = NULL;
 }
 
-// change star common names to a different sky locale
-void Hip_Star_mgr::set_sky_locale(string _sky_locale) {
-
-  if(skyLocale == _sky_locale) return;
-
-  // assuming validated locale already
-  load_common_names( dataDir + "star_names." + _sky_locale + ".fab" );
-  skyLocale = _sky_locale;
-
+void Hip_Star_mgr::init(const string& font_fileName, const string& hipCatFile,
+	const string& commonNameFile, const string& sciNameFile)
+{
+	load_data(hipCatFile);
+    load_common_names(commonNameFile);
+	load_sci_names(sciNameFile);
+	
+	starTexture = new s_texture("star16x16",TEX_LOAD_TYPE_PNG_SOLID);  // Load star texture
+    starFont = new s_font(11.f,"spacefont", font_fileName); // load Font
+    if (!starFont)
+    {
+	    printf("Can't create starFont\n");
+        exit(-1);
+    }	
 }
 
 // Load from file ( create the stream and call the Read function )
-void Hip_Star_mgr::load(const string& font_fileName, const string& hipCatFile,
-	const string& commonNameFile, const string& nameFile)
+void Hip_Star_mgr::load_data(const string& hipCatFile)
 {
-    printf("Loading Hipparcos star data...\n");
-    FILE * hipFile, *cnFile, * nFile;
+    printf(_("Loading Hipparcos star data "));
+    FILE * hipFile;
     hipFile = NULL;
-    cnFile = NULL;
-    nFile = NULL;
 
     hipFile=fopen(hipCatFile.c_str(),"rb");
     if (!hipFile)
     {
         printf("ERROR %s NOT FOUND\n",hipCatFile.c_str());
-        exit(-1);
-    }
-    cnFile=fopen(commonNameFile.c_str(),"r");
-    if (!cnFile)
-    {   
-        printf("ERROR %s NOT FOUND\n",commonNameFile.c_str());
-        exit(-1);
-    }
-    nFile=fopen(nameFile.c_str(),"r");
-    if (!nFile)
-    {   
-        printf("ERROR %s NOT FOUND\n",nameFile.c_str());
         exit(-1);
     }
 
@@ -111,7 +95,7 @@ void Hip_Star_mgr::load(const string& font_fileName, const string& hipCatFile,
 
     StarArraySize = catalogSize;//120417;
 
-    printf("Star catalog: %d stars\n", StarArraySize);
+    printf(_("(%d stars)...\n"), StarArraySize);
 
     // Create the sequential array
     StarArray = new Hip_Star*[StarArraySize];
@@ -119,32 +103,6 @@ void Hip_Star_mgr::load(const string& font_fileName, const string& hipCatFile,
 	{
 		StarArray[i] = NULL;
 	}
-
-	// Read common names & names catalog
-	char ** commonNames = new char*[catalogSize];
-	char ** names = new char*[catalogSize];
-
-	for (unsigned int i=0; i<catalogSize; i++)
-	{
-		commonNames[i]=NULL;
-		names[i]=NULL;
-	}
-
-	int tmp;
-	char tmpName[20];
-
-	while(!feof(cnFile))
-	{
-		fscanf(cnFile,"%d|%s\n",&tmp,tmpName);
-		commonNames[tmp] = strdup(tmpName);
-	}
-	while(!feof(nFile))
-	{
-		fscanf(nFile,"%d|%s\n",&tmp,tmpName);
-		names[tmp] = strdup(tmpName);
-	}
-	fclose(cnFile);
-    fclose(nFile);
 
 	// Read binary file Hipparcos catalog  
     Hip_Star * e = NULL;
@@ -166,51 +124,29 @@ void Hip_Star_mgr::load(const string& font_fileName, const string& hipCatFile,
         	continue;
         }
 
-        // Set names if any
-        if(commonNames[e->HP]) e->CommonName=commonNames[e->HP];
-        if(names[e->HP]) e->Name=names[e->HP];
-
         starZones[HipGrid.GetNearest(e->XYZ)].push_back(e);
         StarArray[e->HP]=e;
     }
-
-	delete commonNames;
-	delete names;
-
     fclose(hipFile);
 
     // sort stars by magnitude for faster rendering
     for(int i=0;i < HipGrid.getNbPoints();i++) {
       std::sort( starZones[i].begin(), starZones[i].end(), std::not2(Hip_Star_Mag_Comparer()));
     }
-
-    starTexture = new s_texture("star16x16",TEX_LOAD_TYPE_PNG_SOLID);  // Load star texture
-
-    starFont = new s_font(11.f,"spacefont", font_fileName); // load Font
-    if (!starFont)
-    {
-	    printf("Can't create starFont\n");
-        exit(-1);
-    }
-
 }
 
 
 // Load common names from file 
 void Hip_Star_mgr::load_common_names(const string& commonNameFile)
 {
-  //    printf("Loading star common names data...\n");
-    FILE *cnFile;
-    cnFile = NULL;
-
-    // clear existing common names (would be faster if common names were in separate array
-    // since relatively few are named)
-    for (int i=0; i<StarArraySize; i++) {
-      if(StarArray[i] != NULL) {
-	StarArray[i]->CommonName = NULL;
-      }
+	// clear existing names (would be faster if they were in separate array
+	// since relatively few are named)
+    for (int i=0; i<StarArraySize; i++)
+	{
+		if (StarArray[i]) StarArray[i]->CommonName = "";
     }
-
+	
+	FILE *cnFile;
     cnFile=fopen(commonNameFile.c_str(),"r");
     if (!cnFile)
     {   
@@ -218,27 +154,67 @@ void Hip_Star_mgr::load_common_names(const string& commonNameFile)
         return;
     }
 
-
-    int tmp;
-    char tmpName[20];   // too small?
+	// Assign names to the matching stars, now support spaces in names
+    unsigned int tmp;
+    char line[256];
     Hip_Star *star;
+	fgets(line, 256, cnFile);
+	do
+	{
+		sscanf(line,"%u",&tmp);
+		star = search(tmp);
+		if (star)
+		{
+			char c=line[0];
+			int i=0;
+			while(c!='|' && i<256){c=line[i];++i;}
+			star->CommonName = &(line[i]);
+			star->CommonName[star->CommonName.size()-1] = '\0';
+		}
+	} while(fgets(line, 256, cnFile));
 
-    while(!feof(cnFile)) {
-      fscanf(cnFile,"%d|%s\n",&tmp,tmpName);
-
-      // update star common name
-      star = search(tmp);
-
-      if( star != NULL ) {
-	star->CommonName = strdup(tmpName);
-      }
-    }
     fclose(cnFile);
-    
-
 }
 
+// Load scientific names from file 
+void Hip_Star_mgr::load_sci_names(const string& sciNameFile)
+{
+	// clear existing names (would be faster if they were in separate arrays
+	// since relatively few are named)
+    for (int i=0; i<StarArraySize; i++)
+	{
+		if (StarArray[i]) StarArray[i]->SciName = "";
+    }
 
+	FILE *snFile;
+    snFile=fopen(sciNameFile.c_str(),"r");
+    if (!snFile)
+    {   
+        printf("WARNING %s NOT FOUND\n",sciNameFile.c_str());
+        return;
+    }
+
+	// Assign names to the matching stars, now support spaces in names
+    unsigned int tmp;
+    char line[256];
+    Hip_Star *star;
+	fgets(line, 256, snFile);
+	do
+	{
+		sscanf(line,"%u",&tmp);
+		star = search(tmp);
+		if (star)
+		{
+			char c=line[0];
+			int i=0;
+			while(c!='|' && i<256){c=line[i];++i;}
+			star->SciName = &(line[i]);
+			star->SciName[star->SciName.size()-1] = '\0';
+		}
+	} while(fgets(line, 256, snFile));
+
+    fclose(snFile);
+}
 
 // Draw all the stars
 void Hip_Star_mgr::draw(float _star_scale, float _star_mag_scale, float _twinkle_amount, int name_ON,
@@ -278,7 +254,7 @@ void Hip_Star_mgr::draw(float _star_scale, float _star_mag_scale, float _twinkle
 		if((*iter)->Mag>maxMag) break;
 		if(!prj->project_prec_earth_equ_check((*iter)->XYZ, (*iter)->XY)) continue;
 		(*iter)->draw();
-		if ((*iter)->CommonName && name_ON && (*iter)->Mag<maxMagStarName)
+		if ((*iter)->CommonName!="" && name_ON && (*iter)->Mag<maxMagStarName)
 		  {
 		    (*iter)->draw_name(starFont);
 		    glBindTexture (GL_TEXTURE_2D, starTexture->getID());
@@ -290,9 +266,7 @@ void Hip_Star_mgr::draw(float _star_scale, float _star_mag_scale, float _twinkle
 }
 
 // Draw all the stars
-void Hip_Star_mgr::draw_point(float _star_scale, float _star_mag_scale, float _twinkle_amount, int name_ON,
-						float maxMagStarName, Vec3f equ_vision,
-						tone_reproductor* _eye, Projector* prj, bool _gravity_label)
+void Hip_Star_mgr::draw_point(float _star_scale, float _star_mag_scale, float _twinkle_amount, int name_ON, float maxMagStarName, Vec3f equ_vision, tone_reproductor* _eye, Projector* prj, bool _gravity_label)
 {
 	Hip_Star::twinkle_amount = _twinkle_amount;
 	Hip_Star::star_scale = _star_scale;
@@ -327,7 +301,7 @@ void Hip_Star_mgr::draw_point(float _star_scale, float _star_mag_scale, float _t
 	      if((*iter)->Mag>maxMag) break;
 	      if(!prj->project_prec_earth_equ_check((*iter)->XYZ, (*iter)->XY)) continue;
 	      (*iter)->draw_point();
-	      if ((*iter)->CommonName && name_ON && (*iter)->Mag<maxMagStarName)
+	      if ((*iter)->CommonName!="" && name_ON && (*iter)->Mag<maxMagStarName)
 		{
 		  (*iter)->draw_name(starFont);
 		  glBindTexture (GL_TEXTURE_2D, starTexture->getID());

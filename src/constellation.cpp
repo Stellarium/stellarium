@@ -1,6 +1,6 @@
 /*
  * Stellarium
- * Copyright (C) 2002 Fabien Chéreau
+ * Copyright (C) 2002 Fabien Chï¿½eau
  * 
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -130,16 +130,14 @@ void Constellation::draw_optim(Projector* prj) const
 
     for(unsigned int i=0;i<nb_segments;++i)
     {
-
-      if(prj->project_prec_earth_equ_line_check(asterism[2*i]->XYZ,star1,asterism[2*i+1]->XYZ,star2) ) {
-	glBegin(GL_LINES);
-	glVertex2f(star1[0],star1[1]);
-	glVertex2f(star2[0],star2[1]);
-	glEnd();
-		
-      }
-    }
-
+		if(prj->project_prec_earth_equ_line_check(asterism[2*i]->XYZ,star1,asterism[2*i+1]->XYZ,star2) ) 
+		{
+			glBegin(GL_LINES);
+			glVertex2f(star1[0],star1[1]);
+			glVertex2f(star2[0],star2[1]);
+			glEnd();
+		}
+	}
 }
 
 

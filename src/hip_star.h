@@ -1,6 +1,6 @@
 /*
  * Stellarium
- * Copyright (C) 2002 Fabien Chéreau
+ * Copyright (C) 2002 Fabien Chï¿½eau
  * 
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -59,8 +59,8 @@ private:
     float MaxColorValue;	// Precalc of the max color value
     Vec3d XY;				// 2D Position + z homogeneous value
     char SpType;			// Spectral type
-    char * CommonName;		// Common Name of the star
-    char * Name;			// Scientific name
+    string CommonName;		// Common Name of the star
+    string SciName;			// Scientific name
 
 	float term1;			// Optimization term
 

@@ -19,6 +19,7 @@
 
 
 #include "sky_localizer.h"
+#include "stellarium.h"
 
 Sky_localizer::Sky_localizer(string _data_dir)
 {
@@ -56,10 +57,10 @@ Sky_localizer::Sky_localizer(string _data_dir)
 
 
   // initialize sky locale list (hardcoded right here)
-  locale_to_name["eng"] = "English";
-  locale_to_name["esl"] = "Spanish";
-  locale_to_name["fra"]  = "French";
-  locale_to_name["haw"]  = "Hawaiian";
+  locale_to_name["eng"] = _("English");
+  locale_to_name["esl"] = _("Spanish");
+  locale_to_name["fra"]  = _("French");
+  locale_to_name["haw"]  = _("Hawaiian");
 
   for ( stringHashIter_t iter = locale_to_name.begin(); iter != locale_to_name.end(); ++iter ) {
     name_to_locale[ iter->second ] = iter->first;

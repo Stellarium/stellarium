@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003 Fabien Chéreau
+ * Copyright (C) 2003 Fabien Chï¿½eau
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -84,7 +84,9 @@ public:
 	int get_Fullscreen(void) const {return Fullscreen;}
 
 	const string& get_DataDir(void) const {return DataDir;}
-
+	
+	const float getMaxFPS(void) const {return maxfps;}
+	
 	void set_landscape(const string& new_landscape_name);
 
 	// find and select the "nearest" object and retrieve his informations
@@ -150,8 +152,6 @@ private:
 
 	Constellation* selected_constellation;
 	planet* selected_planet;
-
-	float fps;
 
 	// Projector
 	PROJECTOR_TYPE ProjectorType;
@@ -265,7 +265,9 @@ private:
 	int FlagUTC_Time;					// if true display UTC time
 
 	int frame, timefr, timeBase;		// Used for fps counter
-
+	float fps;
+	float maxfps;
+	
 	double deltaFov,deltaAlt,deltaAz;	// View movement
 	double move_speed;					// Speed of movement
 	float auto_move_duration;			// Duration of movement for the auto move to a selected object
