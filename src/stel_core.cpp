@@ -329,7 +329,7 @@ void stel_core::draw(int delta_time)
 	landscape->draw(tone_converter, projection, navigation,	FlagFog, FlagHorizon && FlagGround, FlagGround);
 
 	// Daw the cardinal points
-    if (FlagCardinalPoints) cardinals_points->draw(projection);
+    if (FlagCardinalPoints) cardinals_points->draw(projection, FlagGravityLabels);
 
     // ---- 2D Displays
     ui->draw();

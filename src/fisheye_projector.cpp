@@ -63,22 +63,21 @@ void Fisheye_projector::update_openGL(void) const
 
 bool Fisheye_projector::project_custom(const Vec3d& v, Vec3d& win, const Mat4d& mat) const
 {
-	static Vec3d w;
 	static double z;
-	
-	w = v;
-	w.transfo4d(mat);
-	w.normalize();
-	w.transfo4d(mat_projection);
-	z = w[2];
-	double a = fabs(M_PI_2 - asin(w[2]));
-	w[2] = 0;
-	w.normalize();
-	win = center + w * a/M_PI * 360./fov * MY_MIN(vec_viewport[2],vec_viewport[3])/2;
+	static double a;
+
+	win = v;
+	win.transfo4d(mat);
+	win.normalize();
+	win.transfo4d(mat_projection);
+	z = win[2];
+	a = fabs(M_PI_2 - asin(win[2]));
+	win[2] = 0.;
+	win.normalize();
+	win = center + win * (a/M_PI * 360./fov * MY_MIN(vec_viewport[2],vec_viewport[3])/2);
 	win[2] = z;
 	if (a<0.95*M_PI) return true;
 	else return false;
-	//win[2] = (2.*zFar*zNear)/(zNear - zFar) + v[3] * (zFar + zNear)/(zNear - zFar);
 }
 
 
@@ -125,7 +124,7 @@ void Fisheye_projector::sVertex3(double x, double y, double z, const Mat4d& mat)
 	v.set(x,y,z);
 	project_custom(v, win, mat);
 	gluUnProject(win[0],win[1],0.5,mat,mat_projection2,vec_viewport,&v[0],&v[1],&v[2]);
-	glVertex3d(v[0],v[1],v[2]);
+	glVertex3dv(v);
 }
 
 void Fisheye_projector::sSphere(GLdouble radius, GLint slices, GLint stacks, const Mat4d& mat, int orient_inside) const

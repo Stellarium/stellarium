@@ -64,8 +64,8 @@ void Hip_Star::get_short_info_string(char * s, const navigator * nav) const
 	static char tempStr[20];
 	sprintf(tempStr,"HP %d",HP);
 
-	if (CommonName || Name) sprintf(s,"%s - Mag %.2f", CommonName==NULL ? Name : CommonName, Mag);
-	else sprintf(s,"%s - Mag %.2f", tempStr, Mag);
+	if (CommonName || Name) sprintf(s,"%s: mag %.1f", CommonName==NULL ? Name : CommonName, Mag);
+	else sprintf(s,"%s: mag %.1f", tempStr, Mag);
 }
 
 int Hip_Star::read(FILE * catalog)
