@@ -1086,10 +1086,10 @@ IntIncDecVert::IntIncDecVert(const s_font* _font, const s_texture* tex_up,
 		const s_texture* tex_down, int _min, int _max,
 		int _init_value, int _inc) : IntIncDec(_font, tex_up, tex_down, _min, _max, _init_value, _inc)
 {
-	label.setPos(0,0);
-	btmore->setPos(0,12);
-	btless->setPos(0,20);
-	setSize(20,40);
+	label.setPos(0,3);
+	btmore->setPos(_max/10 * 8 + 8, 0);
+	btless->setPos(_max/10 * 8 + 8, 8);
+	setSize(_max/10 * 8 + 16,40);
 }
 
 FloatIncDec::FloatIncDec(const s_font* _font, const s_texture* tex_up,
@@ -1143,17 +1143,18 @@ Time_item::Time_item(const s_font* _font, const s_texture* tex_up,
 	mn= new IntIncDecVert(getFont(), tex_up, tex_down, 0, 59, 35, 1);
 	s = new IntIncDecVert(getFont(), tex_up, tex_down, 0, 59, 23, 1);
 
-	y->setPos(0,0); y->setSize(55, 32);
-	m->setPos(60,0); m->setSize(30, 32);
+	m->setPos(60,30); m->setSize(30, 32);
 	d->setPos(95,0); d->setSize(30, 32);
 	h->setPos(135,0); h->setSize(30, 32);
 	mn->setPos(165,0);mn->setSize(30, 32);
 	s->setPos(195,0); s->setSize(30, 32);
 
-	Label* l1 = new Label("/");
-	l1->setPos(55,1);
-	Label* l2 = new Label("/");
-	l2->setPos(89,1);
+	Label* l1 = new Label("Year");
+	l1->setPos(0,1);
+	y->setPos(40,0); y->setSize(55, 32);
+
+	Label* l2 = new Label("Month");
+	l2->setPos(0,30);
 
 	Label* l3 = new Label(":");
 	l3->setPos(162,1);
