@@ -193,8 +193,10 @@ template<class T> class Matrix4
  public:
     Matrix4();
     Matrix4(const Matrix4<T>& m);
-	Matrix4(T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T);
-	Matrix4(const T*);
+    Matrix4(T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T);
+    Matrix4(const T*);
+    Matrix4(const Vector4<T>&, const Vector4<T>&,
+            const Vector4<T>&, const Vector4<T>&);
 
 	inline Matrix4& operator=(const Matrix4<T>&);
 	inline Matrix4& operator=(const T*);
@@ -214,7 +216,8 @@ template<class T> class Matrix4
     static Matrix4<T> identity();
     static Matrix4<T> translation(const Vector3<T>&);
 
-	static Matrix4<T> rotation(const Vector3<T>&);
+    //    static Matrix4<T> rotation(const Vector3<T>&);
+    static Matrix4<T> rotation(const Vector3<T>&, T);
     static Matrix4<T> xrotation(T);
     static Matrix4<T> yrotation(T);
     static Matrix4<T> zrotation(T);
@@ -715,6 +718,30 @@ template<class T> Matrix4<T>& Matrix4<T>::operator=(const Matrix4<T>& m)
 	return (*this);
 }
 
+template<class T> Matrix4<T>::Matrix4(const Vector4<T>& v0,
+                                      const Vector4<T>& v1,
+                                      const Vector4<T>& v2,
+                                      const Vector4<T>& v3)
+{
+    r[0] = v0.v[0];
+    r[1] = v0.v[1];
+    r[2] = v0.v[2];
+    r[3] = v0.v[3];
+    r[4] = v1.v[0];
+    r[5] = v1.v[1];
+    r[6] = v1.v[2];
+    r[7] = v1.v[3];
+    r[8] = v2.v[0];
+    r[9] = v2.v[1];
+    r[10] = v2.v[2];
+    r[11] = v2.v[3];
+    r[12] = v3.v[0];
+    r[13] = v3.v[1];
+    r[14] = v3.v[2];
+    r[15] = v3.v[3];
+}
+
+
 template<class T> Matrix4<T>::Matrix4(T a, T b, T c, T d, T e, T f, T g, T h, T i, T j, T k, T l, T m, T n, T o, T p)
 {
 	r[0]=a; r[1]=b; r[2]=c; r[3]=d; r[4]=e; r[5]=f; r[6]=g; r[7]=h;
@@ -758,6 +785,29 @@ template<class T> Matrix4<T> Matrix4<T>::translation(const Vector3<T>& a)
 						0, 0, 1, 0,
 						a.v[0], a.v[1], a.v[2], 1);
 }
+
+template<class T> Matrix4<T> Matrix4<T>::rotation(const Vector3<T>& axis,
+                                                  T angle)
+{
+    T c = (T) cos(angle);
+    T s = (T) sin(angle);
+    T t = 1 - c;
+
+    return Matrix4<T>(Vector4<T>(t * axis.v[0] * axis.v[0] + c,
+                                 t * axis.v[0] * axis.v[1] - s * axis.v[2],
+                                 t * axis.v[0] * axis.v[2] + s * axis.v[1],
+                                 0),
+                      Vector4<T>(t * axis.v[0] * axis.v[1] + s * axis.v[2],
+                                 t * axis.v[1] * axis.v[1] + c,
+                                 t * axis.v[1] * axis.v[2] - s * axis.v[0],
+                                 0),
+                      Vector4<T>(t * axis.v[0] * axis.v[2] - s * axis.v[1],
+                                 t * axis.v[1] * axis.v[2] + s * axis.v[0],
+                                 t * axis.v[2] * axis.v[2] + c,
+                                 0),
+                      Vector4<T>(0, 0, 0, 1));
+}
+
 /*
 template<class T> Matrix4<T> Matrix4<T>::rotation(const Vector3<T>& a)
 {

@@ -80,7 +80,9 @@ public:
 
 	// Get vision direction
 	const Vec3d& get_equ_vision(void) const {return equ_vision;}
+	const Vec3d& get_prec_equ_vision(void) const {return prec_equ_vision;}
 	const Vec3d& get_local_vision(void) const {return local_vision;}
+
 	void set_local_vision(const Vec3d& _pos);
 
 	// Return the observer heliocentric position
@@ -102,6 +104,9 @@ public:
 	// Transform vector from equatorial coordinate to local
 	Vec3d earth_equ_to_local(const Vec3d& v) const { return mat_earth_equ_to_local*v; }
 
+	Vec3d earth_equ_to_prec_earth_equ(const Vec3d& v) const { return mat_earth_equ_to_prec_earth_equ*v; }
+	Vec3d prec_earth_equ_to_earth_equ(const Vec3d& v) const { return mat_prec_earth_equ_to_earth_equ*v; }
+
 	// Transform vector from heliocentric coordinate to local
 	Vec3d helio_to_local(const Vec3d& v) const { return mat_helio_to_local*v; }
 
@@ -117,6 +122,7 @@ public:
 	const Mat4d& get_helio_to_eye_mat(void) const {return mat_helio_to_eye;}
 	const Mat4d& get_earth_equ_to_eye_mat(void) const {return mat_earth_equ_to_eye;}
 	const Mat4d& get_local_to_eye_mat(void) const {return mat_local_to_eye;}
+	const Mat4d& get_prec_earth_equ_to_eye_mat(void) const {return mat_prec_earth_equ_to_eye;}
 
 	void update_move(double deltaAz, double deltaAlt);
 
@@ -143,13 +149,16 @@ private:
 	Mat4d mat_local_to_earth_equ;	// Transform from Observator local coordinate to Earth Equatorial
 	Mat4d mat_earth_equ_to_local;	// Transform from Observator local coordinate to Earth Equatorial
 	Mat4d mat_helio_to_earth_equ;	// Transform from Heliocentric to earth equatorial coordinate
+	Mat4d mat_earth_equ_to_prec_earth_equ;
+	Mat4d mat_prec_earth_equ_to_earth_equ;
 
 	Mat4d mat_local_to_eye;			// Modelview matrix for observer local drawing
 	Mat4d mat_earth_equ_to_eye;		// Modelview matrix for geocentric equatorial drawing
+	Mat4d mat_prec_earth_equ_to_eye;	// precessed version
 	Mat4d mat_helio_to_eye;			// Modelview matrix for heliocentric equatorial drawing
 
 	// Vision variables
-    Vec3d local_vision, equ_vision;	// Viewing direction in local and equatorial coordinates
+	Vec3d local_vision, equ_vision, prec_equ_vision;	// Viewing direction in local and equatorial coordinates
 	int flag_traking;				// Define if the selected object is followed
 	int flag_lock_equ_pos;			// Define if the equatorial position is locked
 
@@ -166,6 +175,7 @@ private:
 	Observator* position;
 
 	VIEWING_MODE_TYPE viewing_mode;   // defines if view corrects for horizon, or uses equatorial coordinates
+	double precession;                // precession angle in radians since J2000.0  
 };
 
 #endif //_NAVIGATOR_H_
