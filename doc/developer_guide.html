@@ -7,8 +7,8 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
   Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
 <HTML>
 <HEAD>
-<TITLE>Stellarium Programming guide rev 0.1</TITLE>
-<META NAME="description" CONTENT="Stellarium Programming guide rev 0.1">
+<TITLE>Stellarium Developer guide v 0.2</TITLE>
+<META NAME="description" CONTENT="Stellarium Developer guide v 0.2">
 <META NAME="keywords" CONTENT="developer_guide">
 <META NAME="resource-type" CONTENT="document">
 <META NAME="distribution" CONTENT="global">
@@ -23,9 +23,9 @@ original version by:  Nikos Drakos, CBLU, University of Leeds
 <BODY >
 
 <P>
-<H1 ALIGN="CENTER"><B>Stellarium Programming guide</B> 
+<H1 ALIGN="CENTER"><B>Stellarium Developer guide</B> 
 <BR>
-rev 0.1</H1>
+v 0.2</H1>
 <DIV>
 
 <P ALIGN="CENTER"><STRONG>Fabien Ch&#233;reau</STRONG></P>
@@ -267,12 +267,309 @@ External libraries (directories in src/)</A>
 <DD>compute heliocentric positions of solar system planets.
 </DD>
 </DL>
+
+<P>
+
 <H1><A NAME="SECTION00050000000000000000">
+Stellarium data files format specification</A>
+</H1>
+
+<P>
+
+<UL>
+<LI>commonname.fab and name.fab
+
+<P>
+<DL>
+<DT><STRONG>desc :</STRONG></DT>
+<DD>Contains the commonly used stars names.
+</DD>
+<DT><STRONG>type :</STRONG></DT>
+<DD>ascii file, fields separated by <IMG
+ WIDTH="9" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
+ SRC="img1.png"
+ ALT="$\vert$"> (pipe), end of line is CR ('<IMG
+ WIDTH="13" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
+ SRC="img2.png"
+ ALT="$\backslash$">n')
+</DD>
+<DT><STRONG>line example :</STRONG></DT>
+<DD>62956<IMG
+ WIDTH="9" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
+ SRC="img1.png"
+ ALT="$\vert$">Alioth
+</DD>
+<DT><STRONG>line format :</STRONG></DT>
+<DD>HPnum<IMG
+ WIDTH="9" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
+ SRC="img1.png"
+ ALT="$\vert$">Star_Name
+	
+<UL>
+<LI>HPnum : (unsigned int) Hipparcos catalog star number
+</LI>
+<LI>Star_Name : (string) The name string without spaces. The '_' will be replaced by space in the program.
+	
+</LI>
+</UL>
+</DD>
+</DL>
+
+<P>
+</LI>
+<LI>constellationsart.fab
+
+<P>
+<DL>
+<DT><STRONG>desc :</STRONG></DT>
+<DD>Contains the constellation art info : i.e. for drawing of mythologic figures.
+</DD>
+<DT><STRONG>type :</STRONG></DT>
+<DD>ascii file, fields separated by SPACE, end of line is CR ('<IMG
+ WIDTH="13" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
+ SRC="img2.png"
+ ALT="$\backslash$">n')
+</DD>
+<DT><STRONG>line example :</STRONG></DT>
+<DD>Lep lepus_m 104 57 24305 90 29 24845 33 42 27288
+</DD>
+<DT><STRONG>line format :</STRONG></DT>
+<DD>ConstRef TextureFile x1 y1 HP1 x2 y2 HP2 x3 y3 HP3
+	
+<UL>
+<LI>ConstRef : Short international name abreviation in 3 characters, first char in Capital letter
+</LI>
+<LI>TextureFile : Texture file name without the extension (no space character). The texture file has to be in the stellarium texture directory.
+</LI>
+<LI>x1 y1 hp1 (respectively 2 and 3) : the x and y position of the matching star
+	  with hipparcos number hp1 (respectively 2 and 3) on the texture image. The
+	  values are in pixels with the (0,0) in the upper left corner.
+	
+</LI>
+</UL>
+</DD>
+<DT><STRONG>note :</STRONG></DT>
+<DD>the associated texture file must be in png format and have no alpha channel. The drawing background must be black.
+</DD>
+</DL>
+
+<P>
+</LI>
+<LI>constellationship.fab
+
+<P>
+<DL>
+<DT><STRONG>desc :</STRONG></DT>
+<DD>Contains the constellations lines shape.
+</DD>
+<DT><STRONG>type :</STRONG></DT>
+<DD>ascii file, fields separated by SPACE, end of line is CR ('<IMG
+ WIDTH="13" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
+ SRC="img2.png"
+ ALT="$\backslash$">n')
+</DD>
+<DT><STRONG>line example :</STRONG></DT>
+<DD>And ANDROMEDE ANDROMEDA 3  9640 5447 5447 4436 4436 3881
+</DD>
+<DT><STRONG>line format :</STRONG></DT>
+<DD>ConstRef ConstCommonName ConstInternationnalName NumberOfSegments seg11 seg12 seg21 seg22 etc...
+	
+<UL>
+<LI>ConstRef : Short international name abreviation in 3 characters, first char
+	  in Capital letter
+</LI>
+<LI>ConstCommonName : Commonly used name (currently in french!)
+</LI>
+<LI>ConstInternationnalName : The latin internationnal name.
+</LI>
+<LI>NumberOfSegments : the number of segments in the shape.
+</LI>
+<LI>segx1 segx2 : the hipparcos number of the stars 1 and 2 joined to form the xth segment.
+	
+</LI>
+</UL>
+</DD>
+</DL>
+
+<P>
+</LI>
+<LI>courierfont.txt and spacefont.txt
+
+<P>
+<DL>
+<DT><STRONG>desc :</STRONG></DT>
+<DD>contains the characters position on the font texture.
+</DD>
+<DT><STRONG>type :</STRONG></DT>
+<DD>ascii file, fields separated by SPACE, end of line is CR ('<IMG
+ WIDTH="13" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
+ SRC="img2.png"
+ ALT="$\backslash$">n')
+</DD>
+<DT><STRONG>first line format :</STRONG></DT>
+<DD>CourierFont LineSize 21
+	
+<UL>
+<LI>Font Name
+</LI>
+<LI>LineSize s : s is the maximum character height.
+	
+</LI>
+</UL>
+</DD>
+<DT><STRONG>other lines example :</STRONG></DT>
+<DD>065 02 2 14 21 0
+</DD>
+<DT><STRONG>other lines format :</STRONG></DT>
+<DD>ascii# x y w h s
+	
+<UL>
+<LI>ascii# : ascii number of the character
+</LI>
+<LI>x y : position of the upper left corner of the character in the font texture (in pixel).
+</LI>
+<LI>w h : width and height of the character on the texture
+</LI>
+<LI>s : space to add at the end of the char when displaying.
+	
+</LI>
+</UL>
+</DD>
+</DL>
+
+<P>
+</LI>
+<LI>messier.fab
+
+<P>
+<DL>
+<DT><STRONG>desc :</STRONG></DT>
+<DD>Contains the nebula list (not only messier)
+</DD>
+<DT><STRONG>type :</STRONG></DT>
+<DD>ascii file, fields separated by SPACE, end of line is CR ('<IMG
+ WIDTH="13" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
+ SRC="img2.png"
+ ALT="$\backslash$">n')
+</DD>
+<DT><STRONG>line example :</STRONG></DT>
+<DD>1952 RS 05 34.5 +22 +01 8.2 06.0 0 M1_-_Crab_Nebula m1
+</DD>
+<DT><STRONG>line format :</STRONG></DT>
+<DD>NGCnumber NebulaType hh min.mm deg min.mm mag size texRotation Name TexName
+	
+<UL>
+<LI>NGCnumber : NGC catalog number
+</LI>
+<LI>NebulaType : TODO and change..
+</LI>
+<LI>hh min.mm : Right ascention hour and minutes and tenth of minutes
+</LI>
+<LI>deg min.mm : Declinaison in degree min and tenth of minutes
+</LI>
+<LI>mag : magnitude
+</LI>
+<LI>size : angular size in arcminute
+</LI>
+<LI>Name : Nebula name with spaces replaced by '_'
+</LI>
+<LI>TexName : texture file name. png file without alpha chanel.
+	
+</LI>
+</UL>
+</DD>
+</DL>
+
+<P>
+</LI>
+<LI>name.txt
+<DL>
+<DT><STRONG>desc :</STRONG></DT>
+<DD>More info about stars, not used anymore.
+</DD>
+</DL>
+
+<P>
+</LI>
+<LI>ssystem.ini
+
+<P>
+<DL>
+<DT><STRONG>desc :</STRONG></DT>
+<DD>Solar system bodies informations.
+</DD>
+<DT><STRONG>type :</STRONG></DT>
+<DD>ini file. One section per body.
+</DD>
+<DT><STRONG>Section example :</STRONG></DT>
+<DD><PRE>
+[io]                    // Section name, has to be unique
+name = Io               // Body name
+parent = Jupiter        // Body parent
+radius = 1821.          // Radius in km
+halo = true             // Do we have to draw a small halo like a star?
+color = 1.,1.,1.        // Halo color
+tex_map = io            // Texture map file without extension (has to .png)
+tex_halo = star16x16    // Halo texture file
+lightning = true        // Compute shadow on it
+albedo = 0.61           // Body albedo (how it reflects light) range 0 to 1
+rot_rotation_offset = 220.8   // For texture alignment
+rot_obliquity = 0.0           // Planet Obliquity (rotation axe inclination
+                              // relative to the orbit plane)
+coord_func = ell_orbit        // Define the coordinate computation funcion :
+                              // can be a custom func or "ell_orbit"
+orbit_Epoch = 2443000.00038375// Ell_orbit calculation parameter
+orbit_Period = 1.769138       //       "    "
+orbit_SemiMajorAxis = 421600  //       "    "
+orbit_Eccentricity = 0.0041   //       "    "
+orbit_Inclination = 0.040     //       "    "
+orbit_AscendingNode = 312.981 //       "    "
+orbit_LongOfPericenter = 97.73//       "    "
+orbit_MeanLongitude = 106.724 //       "    "
+</PRE>
+</DD>
+</DL>
+
+<P>
+</LI>
+<LI>landscape.ini
+
+<P>
+<DL>
+<DT><STRONG>desc :</STRONG></DT>
+<DD>Landscape skins descriptions.
+</DD>
+<DT><STRONG>type :</STRONG></DT>
+<DD>ini file. One section per landscape.
+</DD>
+<DT><STRONG>note :</STRONG></DT>
+<DD>There can be 2 landscape types, the ones made from a fisheye picture and the ones made from many smaller textures. The fisheye textures must be centered on the zenith, north on the bottom.
+</DD>
+<DT><STRONG>Section example for a fisheye :</STRONG></DT>
+<DD><PRE>
+[palm]                              // Section name
+name = Palm                         // Landscape name
+type = fisheye                      // Type = fisheye
+maptex = landscapes/horizonalpha512 // Fisheye texture file name
+texturefov = 210                    // Field of View covered by the texture
+                                    // (180 = half dome, 360 = full sphere)
+author = Gérard_Dupontd             // Author name
+</PRE>
+</DD>
+</DL>
+
+<P>
+</LI>
+</UL>
+
+<P>
+
+<H1><A NAME="SECTION00060000000000000000">
 About this document ...</A>
 </H1>
- <STRONG><B>Stellarium Programming guide</B> 
+ <STRONG><B>Stellarium Developer guide</B> 
 <BR>
-rev 0.1</STRONG><P>
+v 0.2</STRONG><P>
 This document was generated using the
 <A HREF="http://www.latex2html.org/"><STRONG>LaTeX</STRONG>2<tt>HTML</tt></A> translator Version 2002-2-1 (1.70)
 <P>
@@ -287,11 +584,11 @@ Mathematics Department, Macquarie University, Sydney.
 The command line arguments were: <BR>
  <STRONG>latex2html</STRONG> <TT>-split 0 -nonavigation developer_guide.tex</TT>
 <P>
-The translation was initiated by fabien on 2003-11-28
+The translation was initiated by fabien on 2003-12-19
 <BR><HR>
 <ADDRESS>
 fabien
-2003-11-28
+2003-12-19
 </ADDRESS>
 </BODY>
 </HTML>
