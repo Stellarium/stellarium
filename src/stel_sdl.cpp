@@ -307,15 +307,26 @@ void stel_sdl::start_main_loop(void)
 							}
 							free(pixels);
 
+							string shotdir;
+#if defined(WIN32) || defined(CYGWIN) || defined(__MINGW32__)
+							if(getenv("USERPROFILE")!=NULL){
+								//for Win XP etc.
+								shotdir = string(getenv("USERPROFILE")) + "\\My Documents\\";
+							}else{
+								//for Win 98 etc.
+								shotdir = "C:\\My Documents\\";
+							}
+#else
+							shotdir = string(getenv("HOME")) + "/";
+#endif
+#ifdef MACOSX
+							shotdir += "/Desktop/";
+#endif
 							for(int j=0; j<=100; ++j)
 							{
 								snprintf(c,3,"%d",j);
 
-								string shotdir = "";
-#ifdef MACOSX
-								shotdir = "/Desktop";
-#endif
-								tempName = string(getenv("HOME")) + shotdir + "/stellarium" + c + ".bmp";
+							tempName = shotdir + "stellarium" + c + ".bmp";
 								fp = fopen(tempName.c_str(), "r");
 								if(fp == NULL)
 									break;
