@@ -39,6 +39,7 @@
 #   define HAVE_STRICMP
 #endif
 
+#include <config.h>
 
 #include <math.h>
 #include <stdlib.h>
