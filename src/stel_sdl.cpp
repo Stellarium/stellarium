@@ -173,11 +173,10 @@ void stel_sdl::start_main_loop(void)
 							for(int j=0; j<=100; ++j)
 							{
 								snprintf(c,3,"%d",j);
+
 								string shotdir = "";
 #ifdef MACOSX
 								shotdir = "/Desktop";
-#else
-								if (string(getenv("DESKTOP")) == "kde") shotdir = "/Desktop";
 #endif
 								tempName = string(getenv("HOME")) + shotdir + "/stellarium" + c + ".bmp";
 								fp = fopen(tempName.c_str(), "r");

@@ -590,11 +590,11 @@ int stel_ui::handle_keys(SDLKey key, S_GUI_VALUE state)
         	core->FlagHelp=!core->FlagHelp;
 			help_win->setVisible(core->FlagHelp);
 		}
-		if(key==SDLK_COMMA)
+		if(key==SDLK_COMMA || key==SDLK_4)
         {
         	core->FlagEclipticLine=!core->FlagEclipticLine;
 		}
-        if(key==SDLK_PERIOD)
+        if(key==SDLK_PERIOD || key==SDLK_5)
         {
         	core->FlagEquatorLine=!core->FlagEquatorLine;
 		}
