@@ -16,9 +16,9 @@
 
 SHELL = /bin/sh
 
-srcdir = .
-top_srcdir = ..
-
+srcdir = /home/Fabien/work/stellarium/config
+top_srcdir = /home/Fabien/work/stellarium
+VPATH = /home/Fabien/work/stellarium/config
 prefix = /usr/local
 exec_prefix = ${prefix}
 

@@ -5,13 +5,13 @@
 By Fabien Chéreau : stellarium@free.fr
 Info : http://stellarium.free.fr
 
-Stellarium comes with ABSOLUTELY NO WARRANTY.  See the gpl.txt file for
-details.
+Stellarium comes with ABSOLUTELY NO WARRANTY.  See the gpl.txt 
+file for details.
 
 -----------------------------------------------------------------
 REQUIREMENT
 -----------------------------------------------------------------
-Windows or linux/POSIX or CYGWIN environement
+Windows or linux/POSIX or CYGWIN or MACOSX environement
 A 3d openGL acceleration card and a good CPU.
 
 -----------------------------------------------------------------
@@ -29,8 +29,10 @@ Press the H key for more help.
 -----------------------------------------------------------------
 CONFIGURATION
 -----------------------------------------------------------------
-Use the files config/config.txt and config/location.txt to change the video settings and other 
-parameters.
+Use the configurations files to change the video settings and other 
+parameters. These files are located in config/config.txt and 
+config/location.txt on Windows/MacOSX and are located in $HOME/.stellarium/
+on a unix system.
 
 Speed configuration :
 If the FPS (number of Frame Per Second) is too low (<3), you probably have 
@@ -47,6 +49,8 @@ see the INSTALL file
 ------------------------------------------------------------------
 THANKS
 ------------------------------------------------------------------
+	The GEPI team from the Observatoire Astronomique de Paris for 
+	the great Hipparcos catalog.
     Brad Schaefer for his sky rendering algorithm.
     Sylvain Ferey for his optimisation of the grids drawing.
     Ben Wyatt (ben@wyatt100.freeserve.co.uk) for the great Glpng library.
@@ -60,15 +64,15 @@ THANKS
     Chris Laurel (claurel@shatters.net) who makes Celestia.
 	Yuuki Ninomiya (gm@debian.or.jp) for the parsecfg file.
 
+	And... All the people who sent me mails and bug reports!
+
 ------------------------------------------------------------------
 NOTE
 ------------------------------------------------------------------
 This program is free, but if you have nothing to do with your 
-money :) , just send it to :
+money :) , just go there and make something usefull with it :
 
-	Club Astronomie de l'INSA de Lyon
-	20, Av. Albert Einstein
-	69621 Villeurbanne, FRANCE
+https://www.greenpeace.com/forms/gpicontr.html
 
 
 ------------------------------------------------------------------
