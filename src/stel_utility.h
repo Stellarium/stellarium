@@ -27,34 +27,6 @@
 #include "vecmath.h"
 
 
-// Convenient class which groups commonly used variables and functions
-class draw_utility
-{
-public:
-	draw_utility();
-	virtual ~draw_utility();
-
-	double fov;
-	int screenW;
-	int screenH;
-	void set_params(double _fov, int _screenW, int _screenH);
-
-	// OpenGL projections and camera setting
-	void project(float objx_i,float objy_i,float objz_i,double & x ,double & y ,double & z);
-	Vec3d unproject(double x ,double y);
-
-	void set_orthographic_projection(void);
-	void reset_perspective_projection(void);
-
-private:
-	// Used to store openGL matrices and vectors
-	GLdouble M[16];
-    GLdouble P[16];
-    GLint V[4];
-};
-
-
-
 // Angles and coordinate conversions
 double hms_to_rad(unsigned int h, unsigned int m, double s);
 double dms_to_rad(int d, int m, double s);

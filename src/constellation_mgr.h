@@ -28,12 +28,13 @@ class Constellation_mgr
 public:
     Constellation_mgr();
     virtual ~Constellation_mgr();
-    void Load(char * font_fileName, char * catName, Hip_Star_mgr * _VouteCeleste);
-    void Draw();
-    void Draw(char * Abr);
-    void DrawName(draw_utility * du);
+    void load(char * font_fileName, char * catName, Hip_Star_mgr * _VouteCeleste);
+    void draw(draw_utility * du, navigator* nav);
+	// Draw one constellation of internationnal name Abr
+	void Constellation_mgr::draw(draw_utility * du, navigator* nav, char abr[4]);
+    void draw_names(draw_utility * du, navigator* nav);
 private:
-    vector<constellation*> Liste;
+    vector<Constellation*> asterisms;
 	s_font * asterFont;
 };
 

@@ -31,12 +31,12 @@ class Hip_Star_mgr
 public:
     Hip_Star_mgr();
     virtual ~Hip_Star_mgr();
-    int Read(FILE *);						// Used by Load
-    void Draw(float star_scale, float twinkle_amount, int name_ON, float maxMagStarName,
+    int read(FILE *);						// Used by Load
+    void draw(float star_scale, float twinkle_amount, int name_ON, float maxMagStarName,
 		Vec3f equ_vision, draw_utility * du, tone_reproductor* _eye, navigator* nav);	// Draw all the stars
-    void Save(void);                    	// Debug function
+    void save(void);                    	// Debug function
     // Load all the stars from the files
-    void Load(char * font_fileName, char * hipCatFile, char * commonNameFile, char * nameFile);
+    void load(char * font_fileName, char * hipCatFile, char * commonNameFile, char * nameFile);
     Hip_Star * search(vec3_t Pos);  	// Search the star by position
 	Hip_Star * search(unsigned int);	// Search the star by HP number
 private:

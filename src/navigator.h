@@ -134,7 +134,8 @@ public:
 	// This is a reimplementation of gluProject
 	bool project_earth_equ_to_screen(const Vec3d& v, Vec3d& win);
 	bool project_earth_equ_to_screen(const Vec3f& v, Vec3d& win);
-
+	// Same but return true if inside screen
+	bool project_earth_equ_to_screen_check(const Vec3f& v, Vec3d& win);
 private:
 	// Home made gluLookAt(0., 0., 0.,local_vision[0],local_vision[1],local_vision[2],0.,0.,1.);
 	// to keep a better precision to prevent a little bit the shaking bug..
@@ -170,6 +171,33 @@ private:
 
 	// Position variables
 	observator_pos position;
+};
+
+
+// Convenient class which groups commonly used variables and functions
+class draw_utility
+{
+public:
+	draw_utility();
+	virtual ~draw_utility();
+
+	double fov;
+	int screenW;
+	int screenH;
+	void set_params(double _fov, int _screenW, int _screenH);
+
+	// OpenGL projections and camera setting
+	void project(float objx_i,float objy_i,float objz_i,double & x ,double & y ,double & z);
+	Vec3d unproject(double x ,double y);
+
+	void set_orthographic_projection(void);
+	void reset_perspective_projection(void);
+
+private:
+	// Used to store openGL matrices and vectors
+	GLdouble M[16];
+    GLdouble P[16];
+    GLint V[4];
 };
 
 #endif //_NAVIGATOR_H_

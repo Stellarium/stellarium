@@ -117,6 +117,15 @@ void navigator::init_project_matrix(int w, int h, double zNear, double zFar)
 	glGetIntegerv(GL_VIEWPORT,vect_viewport);
 }
 
+bool navigator::project_earth_equ_to_screen_check(const Vec3f& v, Vec3d& win)
+{
+	return project_earth_equ_to_screen(v, win) &&
+	win[1]>vect_viewport[1] &&
+	win[1]<vect_viewport[3] &&
+	win[0]>vect_viewport[0] &&
+	win[0]<vect_viewport[2];
+}
+
 bool navigator::project_earth_equ_to_screen(const Vec3f& v, Vec3d& win)
 {
     gluProject(v[0],v[1],v[2],mat_earth_equ_to_screen,mat_projection,vect_viewport,&win[0],&win[1],&win[2]);
@@ -461,3 +470,68 @@ void navigator::move_to(Vec3d _aim)
     flag_auto_move = true;
 }
 
+
+
+draw_utility::draw_utility() : fov(0.), screenW(0), screenH(0)
+{
+}
+
+draw_utility::~draw_utility()
+{
+}
+
+void draw_utility::set_params(double _fov, int _screenW, int _screenH)
+{
+	fov=_fov;
+	screenW=_screenW;
+	screenH=_screenH;
+}
+
+// Calc the x,y coord on the screen with the X,Y and Z pos
+void draw_utility::project(float objx, float objy, float objz, double &x, double &y, double &z)
+{
+    glGetDoublev(GL_MODELVIEW_MATRIX,M);
+    glGetDoublev(GL_PROJECTION_MATRIX,P);
+    glGetIntegerv(GL_VIEWPORT,V);
+    gluProject(objx,objy,objz,M,P,V,&x,&y,&z);
+}
+
+// Convert x,y screen pos into 3D vector
+Vec3d draw_utility::unproject(double x ,double y)
+{
+    GLdouble objx[1];
+    GLdouble objy[1];
+    GLdouble objz[1];
+
+    glGetDoublev(GL_MODELVIEW_MATRIX,M);
+    glGetDoublev(GL_PROJECTION_MATRIX,P);
+    glGetIntegerv(GL_VIEWPORT,V);
+
+	gluUnProject(x,y,1.,M,P,V,objx,objy,objz);
+	return Vec3d(objx[0],objy[0],objz[0]);
+}
+
+// Set the drawing mode in 2D. Use reset_perspective_projection() to reset
+// previous projection mode
+void draw_utility::set_orthographic_projection(void)
+{
+	glMatrixMode(GL_PROJECTION);	// switch to projection mode
+    glPushMatrix();					// save previous matrix
+    glLoadIdentity();
+    gluOrtho2D(0, screenW, 0, screenH);	// set a 2D orthographic projection
+    //glScalef(1, -1, 1);			// invert the y axis, down is positive
+    //glTranslatef(0, -h, 0);		// move the origin from the bottom left corner to the upper left corner
+
+	glMatrixMode(GL_MODELVIEW);		// Init the modeling matrice
+    glPushMatrix();
+    glLoadIdentity();
+}
+
+// Reset the previous projection mode after a call to set_orthographic_projection()
+void draw_utility::reset_perspective_projection(void)
+{
+    glMatrixMode(GL_PROJECTION);
+    glPopMatrix();
+    glMatrixMode(GL_MODELVIEW);
+    glPopMatrix();
+}
