@@ -276,7 +276,7 @@ void Hip_Star_mgr::draw(float _star_scale, float _star_mag_scale, float _twinkle
 	      {
 		// If too small, skip and Compute the 2D position and check if in screen
 		if((*iter)->Mag>maxMag) break;
-		if(!prj->project_earth_equ_check((*iter)->XYZ, (*iter)->XY)) continue;
+		if(!prj->project_prec_earth_equ_check((*iter)->XYZ, (*iter)->XY)) continue;
 		(*iter)->draw();
 		if ((*iter)->CommonName && name_ON && (*iter)->Mag<maxMagStarName)
 		  {
@@ -325,7 +325,7 @@ void Hip_Star_mgr::draw_point(float _star_scale, float _star_mag_scale, float _t
 	    {
 	      // If too small, skip and Compute the 2D position and check if in screen
 	      if((*iter)->Mag>maxMag) break;
-	      if(!prj->project_earth_equ_check((*iter)->XYZ, (*iter)->XY)) continue;
+	      if(!prj->project_prec_earth_equ_check((*iter)->XYZ, (*iter)->XY)) continue;
 	      (*iter)->draw_point();
 	      if ((*iter)->CommonName && name_ON && (*iter)->Mag<maxMagStarName)
 		{
@@ -369,7 +369,7 @@ vector<stel_object*> Hip_Star_mgr::search_around(Vec3d v, double lim_fov)
 	vector<stel_object*> result;
     v.normalize();
 	double cos_lim_fov = cos(lim_fov * M_PI/180.);
-	static Vec3d equPos;
+	//	static Vec3d equPos;
 
 	for(int i=0; i<StarArraySize; i++)
     {

@@ -109,7 +109,7 @@ void Constellation::draw(Projector* prj, const Vec3f& lines_color) const
 
     for(unsigned int i=0;i<nb_segments;++i)
     {
-      if(prj->project_earth_equ_line_check(asterism[2*i]->XYZ,star1,asterism[2*i+1]->XYZ,star2) ) {
+      if(prj->project_prec_earth_equ_line_check(asterism[2*i]->XYZ,star1,asterism[2*i+1]->XYZ,star2) ) {
 	glBegin(GL_LINES);
 	glVertex2f(star1[0],star1[1]);
 	glVertex2f(star2[0],star2[1]);
@@ -131,7 +131,7 @@ void Constellation::draw_optim(Projector* prj) const
     for(unsigned int i=0;i<nb_segments;++i)
     {
 
-      if(prj->project_earth_equ_line_check(asterism[2*i]->XYZ,star1,asterism[2*i+1]->XYZ,star2) ) {
+      if(prj->project_prec_earth_equ_line_check(asterism[2*i]->XYZ,star1,asterism[2*i+1]->XYZ,star2) ) {
 	glBegin(GL_LINES);
 	glVertex2f(star1[0],star1[1]);
 	glVertex2f(star2[0],star2[1]);
@@ -177,15 +177,15 @@ void Constellation::draw_art_optim(Projector* prj, navigator* nav, int delta_tim
 		glColor3f(art_intensity,art_intensity,art_intensity);
 
 		// If one of the point is in the screen
-		b0 = prj->project_earth_equ_check(art_vertex[0],v0) || (nav->get_equ_vision().dot(art_vertex[0])>0.9);
-		b1 = prj->project_earth_equ_check(art_vertex[1],v1) || (nav->get_equ_vision().dot(art_vertex[1])>0.9);
-		b2 = prj->project_earth_equ_check(art_vertex[2],v2) || (nav->get_equ_vision().dot(art_vertex[2])>0.9);
-		b3 = prj->project_earth_equ_check(art_vertex[3],v3) || (nav->get_equ_vision().dot(art_vertex[3])>0.9);
-		b4 = prj->project_earth_equ_check(art_vertex[4],v4) || (nav->get_equ_vision().dot(art_vertex[4])>0.9);
-		b5 = prj->project_earth_equ_check(art_vertex[5],v5) || (nav->get_equ_vision().dot(art_vertex[5])>0.9);
-		b6 = prj->project_earth_equ_check(art_vertex[6],v6) || (nav->get_equ_vision().dot(art_vertex[6])>0.9);
-		b7 = prj->project_earth_equ_check(art_vertex[7],v7) || (nav->get_equ_vision().dot(art_vertex[7])>0.9);
-		b8 = prj->project_earth_equ_check(art_vertex[8],v8) || (nav->get_equ_vision().dot(art_vertex[8])>0.9);
+		b0 = prj->project_prec_earth_equ_check(art_vertex[0],v0) || (nav->get_prec_equ_vision().dot(art_vertex[0])>0.9);
+		b1 = prj->project_prec_earth_equ_check(art_vertex[1],v1) || (nav->get_prec_equ_vision().dot(art_vertex[1])>0.9);
+		b2 = prj->project_prec_earth_equ_check(art_vertex[2],v2) || (nav->get_prec_equ_vision().dot(art_vertex[2])>0.9);
+		b3 = prj->project_prec_earth_equ_check(art_vertex[3],v3) || (nav->get_prec_equ_vision().dot(art_vertex[3])>0.9);
+		b4 = prj->project_prec_earth_equ_check(art_vertex[4],v4) || (nav->get_prec_equ_vision().dot(art_vertex[4])>0.9);
+		b5 = prj->project_prec_earth_equ_check(art_vertex[5],v5) || (nav->get_prec_equ_vision().dot(art_vertex[5])>0.9);
+		b6 = prj->project_prec_earth_equ_check(art_vertex[6],v6) || (nav->get_prec_equ_vision().dot(art_vertex[6])>0.9);
+		b7 = prj->project_prec_earth_equ_check(art_vertex[7],v7) || (nav->get_prec_equ_vision().dot(art_vertex[7])>0.9);
+		b8 = prj->project_prec_earth_equ_check(art_vertex[8],v8) || (nav->get_prec_equ_vision().dot(art_vertex[8])>0.9);
 			
 		if (b0 || b1 || b2 || b3 || b4 || b5 || b6 || b7 || b8)
 		{
@@ -265,15 +265,15 @@ void Constellation::draw_art(Projector* prj, navigator* nav, int delta_time)
 		glColor3f(art_intensity,art_intensity,art_intensity);
 
 		// If one of the point is in the screen
-		b0 = prj->project_earth_equ_check(art_vertex[0],v0) || (nav->get_equ_vision().dot(art_vertex[0])>0.9);
-		b1 = prj->project_earth_equ_check(art_vertex[1],v1) || (nav->get_equ_vision().dot(art_vertex[1])>0.9);
-		b2 = prj->project_earth_equ_check(art_vertex[2],v2) || (nav->get_equ_vision().dot(art_vertex[2])>0.9);
-		b3 = prj->project_earth_equ_check(art_vertex[3],v3) || (nav->get_equ_vision().dot(art_vertex[3])>0.9);
-		b4 = prj->project_earth_equ_check(art_vertex[4],v4) || (nav->get_equ_vision().dot(art_vertex[4])>0.9);
-		b5 = prj->project_earth_equ_check(art_vertex[5],v5) || (nav->get_equ_vision().dot(art_vertex[5])>0.9);
-		b6 = prj->project_earth_equ_check(art_vertex[6],v6) || (nav->get_equ_vision().dot(art_vertex[6])>0.9);
-		b7 = prj->project_earth_equ_check(art_vertex[7],v7) || (nav->get_equ_vision().dot(art_vertex[7])>0.9);
-		b8 = prj->project_earth_equ_check(art_vertex[8],v8) || (nav->get_equ_vision().dot(art_vertex[8])>0.9);
+		b0 = prj->project_prec_earth_equ_check(art_vertex[0],v0) || (nav->get_prec_equ_vision().dot(art_vertex[0])>0.9);
+		b1 = prj->project_prec_earth_equ_check(art_vertex[1],v1) || (nav->get_prec_equ_vision().dot(art_vertex[1])>0.9);
+		b2 = prj->project_prec_earth_equ_check(art_vertex[2],v2) || (nav->get_prec_equ_vision().dot(art_vertex[2])>0.9);
+		b3 = prj->project_prec_earth_equ_check(art_vertex[3],v3) || (nav->get_prec_equ_vision().dot(art_vertex[3])>0.9);
+		b4 = prj->project_prec_earth_equ_check(art_vertex[4],v4) || (nav->get_prec_equ_vision().dot(art_vertex[4])>0.9);
+		b5 = prj->project_prec_earth_equ_check(art_vertex[5],v5) || (nav->get_prec_equ_vision().dot(art_vertex[5])>0.9);
+		b6 = prj->project_prec_earth_equ_check(art_vertex[6],v6) || (nav->get_prec_equ_vision().dot(art_vertex[6])>0.9);
+		b7 = prj->project_prec_earth_equ_check(art_vertex[7],v7) || (nav->get_prec_equ_vision().dot(art_vertex[7])>0.9);
+		b8 = prj->project_prec_earth_equ_check(art_vertex[8],v8) || (nav->get_prec_equ_vision().dot(art_vertex[8])>0.9);
 			
 		if (b0 || b1 || b2 || b3 || b4 || b5 || b6 || b7 || b8)
 		{
