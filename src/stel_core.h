@@ -289,6 +289,7 @@ private:
 	int FlagEnableZoomKeys;
 	int FlagManualZoom;
 	int FlagEnableMoveKeys;
+	int FlagEnableMoveMouse;  // allow mouse at edge of screen to move view
 	float InitFov;
 	double PresetSkyTime;
 	string StartupTimeMode;
