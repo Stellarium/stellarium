@@ -349,6 +349,15 @@ namespace s_tui
 				addItem(elem);
 			}
 		}
+		void replaceItemList(string s, int selection)
+		{
+		  items.clear();
+		  addItemList(s);
+		  current = items.begin();
+		  for(int j=0; j<selection;j++) {
+		    ++current;
+		  }
+		}
 		const T& getCurrent(void) const {if(current==items.end()) return emptyT; else return *current;}
 		void setCurrent(const T& i) {current = items.find(i);}
 		bool setValue(const T& i)

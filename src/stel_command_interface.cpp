@@ -75,7 +75,7 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 
     if(args["atmosphere_fade_duration"]!="") stcore->AtmosphereFadeDuration = str_to_double(args["atmosphere_fade_duration"]);
     else if(args["auto_move_duration"]!="") stcore->auto_move_duration = str_to_double(args["auto_move_duration"]);
-    else if(args["base_font_size"]!="") stcore->BaseFontSize = str_to_double(args["base_font_size"]);
+    //    else if(args["base_font_size"]!="") stcore->BaseFontSize = str_to_double(args["base_font_size"]);
     //	else if(args["bbp_mode"]!="") stcore->BbpMode = str_to_double(args["bbp_mode"]);
     else if(args["constellation_art_fade_duration"]!="") stcore->ConstellationArtFadeDuration = str_to_double(args["constellation_art_fade_duration"]);
     else if(args["constellation_art_intensity"]!="") stcore->ConstellationArtIntensity = str_to_double(args["constellation_art_intensity"]);
@@ -267,6 +267,11 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 	audio = NULL;
       }
       stcore->script_images->drop_all_images();
+
+      // unmount disk if was mounted to run script
+      // TODO unmount disk...
+      stcore->ScriptRemoveableDiskMounted = 0;
+
     }
 
     if(args["action"]=="play" && args["filename"]!="") {
