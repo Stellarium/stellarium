@@ -245,8 +245,8 @@ Component* stel_ui::createFlagButtons(void)
 	bt_flag_ctr->addComponent(bt_flag_ground);			bt_flag_ground->setPos(128,0);
 	bt_flag_ctr->addComponent(bt_flag_cardinals);		bt_flag_cardinals->setPos(160,0);
 	bt_flag_ctr->addComponent(bt_flag_atmosphere);		bt_flag_atmosphere->setPos(192,0);
-	bt_flag_ctr->addComponent(bt_flag_nebula_name);		bt_flag_constellation_draw->setPos(224,0);
-	bt_flag_ctr->addComponent(bt_flag_help);			bt_flag_nebula_name->setPos(256,0);
+	bt_flag_ctr->addComponent(bt_flag_nebula_name);		bt_flag_nebula_name->setPos(224,0);
+	bt_flag_ctr->addComponent(bt_flag_help);			bt_flag_help->setPos(256,0);
 	bt_flag_ctr->addComponent(bt_flag_follow_earth);	bt_flag_follow_earth->setPos(288,0);
 	bt_flag_ctr->addComponent(bt_flag_config);			bt_flag_config->setPos(320,0);
 
