@@ -72,6 +72,7 @@
 
 // The global structure
 extern stellariumParams global;
+extern stellariumParams globalInit;
 
 
 #define code_not_reached() \

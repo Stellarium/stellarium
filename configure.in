@@ -44,22 +44,20 @@ dnl MACOSX
 case "$host" in 
 *-*-darwin*)
 	AC_DEFINE_UNQUOTED(MACOSX,1)
-	LDFLAGS="-flat_namespace -undefined suppress"
+	LDFLAGS="$LDFLAGS -flat_namespace -undefined suppress "
 	LIBS="$LIBS -framework GLUT -framework OpenGL -lobjc "
 	AC_CHECK_HEADER(OpenGL/gl.h,,AC_MSG_ERROR(gl.h not found - please install OpenGL))
 	AC_CHECK_HEADER(OpenGL/glu.h,,AC_MSG_ERROR(glu.h not found - please install GLU))
 	AC_CHECK_HEADER(GLUT/glut.h,,AC_MSG_ERROR(glut.h not found - please install GLUT))
-	
-	AC_DEFINE_UNQUOTED(CONFIG_CFG_DIR, "$PKGDATADIR/config/")
 ;;
 
 dnl CYGWIN
 *-*-cygwin*)
+	AC_DEFINE_UNQUOTED(CYGWIN,1)
 	LIBS="$LIBS -lopengl32 -lglu32 -lglut32 "
 	AC_CHECK_HEADER(GL/gl.h,,AC_MSG_ERROR(gl.h not found - please install OpenGL))
 	AC_CHECK_HEADER(GL/glu.h,,AC_MSG_ERROR(glu.h not found - please install GLU))
 	AC_CHECK_HEADER(GL/glut.h,,AC_MSG_ERROR(glut.h not found - please install GLUT))
-	AC_DEFINE_UNQUOTED(CONFIG_CFG_DIR, "$HOME/.stellarium/")
 ;;
 
 dnl OTHER SYSTEMS
@@ -78,9 +76,12 @@ dnl OTHER SYSTEMS
     	AC_CHECK_LIB(MesaGLU,gluLookAt,,AC_MSG_ERROR(GLU not found - please install GLU or MesaGLU))
    	fi
 
-   	AC_CHECK_LIB(glut,glutMainLoop,,AC_MSG_ERROR(GLUT not found - please install GLUT))
-
-	AC_DEFINE_UNQUOTED(CONFIG_CFG_DIR, "$HOME/.stellarium/")
+   	AC_CHECK_LIB(glut,glutMainLoop)
+   	if test "$ac_cv_lib_GLUT_glutMainLoop" = no ; then
+   		dnl Sometime it can make the program work...
+   		LIBS="$LIBS -lXi -Xmu "
+    	AC_CHECK_LIB(glut,glutMainLoop,,AC_MSG_ERROR(GLUT not found - please install GLUT))
+   	fi
 ;;
 esac
 

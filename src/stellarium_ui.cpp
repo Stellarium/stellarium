@@ -27,7 +27,7 @@
 #include "nebula_mgr.h"
 #include "hip_star_mgr.h"
 #include "stellarium.h"
-#include "parsecfg.h"
+#include "stelconfig.h"
 
 using namespace gui;
 
@@ -377,18 +377,7 @@ void TimeZoneBarOnChangeValue(float value,Component *)
 
 void SaveLocationOnClicCallback(guiValue button,Component *)
 {  
-    double tempLatitude = LatitudeBar->getValue();
-    double tempLongitude = LongitudeBar->getValue();
-    cfgStruct cfgini2[] = 
-    {// parameter               type        address of variable
-        {"LATITUDE",            CFG_DOUBLE, &tempLatitude},
-        {"LONGITUDE",           CFG_DOUBLE, &tempLongitude},
-        {"ALTITUDE",            CFG_INT,    &global.Altitude},
-        {"TIME_ZONE",           CFG_INT,    &global.TimeZone},
-        {NULL, CFG_END, NULL}   /* no more parameters */
-    };
-
-    cfgDump("config/location.txt", cfgini2, CFG_SIMPLE, 0);
+	dumpLocation();
 }
 
 /**********************************************************************************/
@@ -1030,7 +1019,16 @@ void HandleClic(int x, int y, int state, int button)
             }
         }
         if (button==GLUT_LEFT_BUTTON)
-        {   // Left or middle clic -> selection of an object
+        {   
+        	// CTRL + clic = right clic for 1 button mouse
+        	if (glutGetModifiers() & GLUT_ACTIVE_CTRL)
+        	{   
+        		global.FlagSelect=false;
+            	global.FlagTraking = false;
+            	InfoSelectLabel->setVisible(false);
+            	return;
+        	}
+        	// Left or middle clic -> selection of an object
             findObject(x,y);
             // If an object has been found
             if (global.FlagSelect)

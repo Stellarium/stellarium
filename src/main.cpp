@@ -35,11 +35,11 @@
 #include "nebula_mgr.h"
 #include "s_texture.h"
 #include "stellarium_ui.h"
-#include "parsecfg.h"
 #include "navigation.h"
 #include "s_gui.h"
 #include "hip_star_mgr.h"
 #include "shooting.h"
+#include "stelconfig.h"
 
 using namespace std;
 
@@ -320,163 +320,6 @@ void Mouse(int button, int state, int x, int y)
     HandleClic(x,y,state,button);
 }
 
-// *******************  Read the conuration file  *************************
-void loadParams(void)
-{
-    global.SkyBrightness=0;
-    global.Fov=60.;
-    global.X_Resolution=800;
-    global.Y_Resolution=600;
-    global.RaZenith=0;
-    global.DeZenith=0;
-    global.AzVision=0;
-    global.deltaFov=0;
-    global.deltaAlt=0;
-    global.deltaAz=0;
-    global.Fps=40;
-    global.FlagSelect=false;
-    global.FlagRealMode=false;
-    global.FlagConfig = false;
-    global.StarTwinkleAmount = 2;
-    global.FlagTraking = false;
-    global.TimeDirection = 1;
-
-    double tempLatitude=0;
-    double tempLongitude=0;
-    global.Altitude = 100;
-    char * tempDate = NULL;
-    char * tempTime = NULL;
-
-    printf("Loading configuration file...\n");
-    // array of cfgStruct for reading on config file
-    cfgStruct cfgini[] = 
-    {// parameter               type        address of variable
-        {"STAR_TWINKLE_AMOUNT", CFG_FLOAT,  &global.StarTwinkleAmount},
-        {"STAR_SCALE",          CFG_FLOAT,  &global.StarScale},
-        {"X_RESOLUTION",        CFG_INT,    &global.X_Resolution},
-        {"Y_RESOLUTION",        CFG_INT,    &global.Y_Resolution},
-        {"FULLSCREEN",          CFG_BOOL,   &global.Fullscreen},
-        {"BBP_MODE",            CFG_INT,    &global.bppMode},
-        {"FLAG_FPS",            CFG_BOOL,   &global.FlagFps},       
-        {"FLAG_STARS",          CFG_BOOL,   &global.FlagStars},
-        {"FLAG_STAR_NAME",      CFG_BOOL,   &global.FlagStarName},
-        {"MAX_MAG_STAR_NAME",   CFG_FLOAT,  &global.MaxMagStarName},
-        {"FLAG_PLANETS",        CFG_BOOL,   &global.FlagPlanets},
-        {"FLAG_PLANETS_NAME",   CFG_BOOL,   &global.FlagPlanetsHintDrawing},
-        {"FLAG_NEBULA",         CFG_BOOL,   &global.FlagNebula},
-        {"FLAG_NEBULA_NAME",    CFG_BOOL,   &global.FlagNebulaName},
-        {"FLAG_GROUND",         CFG_BOOL,   &global.FlagGround},
-        {"FLAG_HORIZON",        CFG_BOOL,   &global.FlagHorizon},
-        {"FLAG_FOG",            CFG_BOOL,   &global.FlagFog},
-        {"FLAG_ATMOSPHERE",     CFG_BOOL,   &global.FlagAtmosphere},
-        {"FLAG_CONSTELLATION_DRAWING",CFG_BOOL, &global.FlagConstellationDrawing},
-        {"FLAG_CONSTELLATION_NAME",   CFG_BOOL, &global.FlagConstellationName},
-        {"FLAG_AZIMUTAL_GRID",  CFG_BOOL,   &global.FlagAzimutalGrid},
-        {"FLAG_EQUATORIAL_GRID",CFG_BOOL,   &global.FlagEquatorialGrid},
-        {"FLAG_EQUATOR",        CFG_BOOL,   &global.FlagEquator},
-        {"FLAG_ECLIPTIC",       CFG_BOOL,   &global.FlagEcliptic},
-        {"FLAG_CARDINAL_POINTS",CFG_BOOL,   &global.FlagCardinalPoints},
-        {"FLAG_REAL_TIME",      CFG_BOOL,   &global.FlagRealTime},
-        {"FLAG_ACCELERED_TIME", CFG_BOOL,   &global.FlagAcceleredTime},
-        {"FLAG_VERY_FAST_TIME", CFG_BOOL,   &global.FlagVeryFastTime},
-        {"FLAG_MENU",           CFG_BOOL,   &global.FlagMenu},
-        {"FLAG_HELP",           CFG_BOOL,   &global.FlagHelp},
-        {"FLAG_INFOS",          CFG_BOOL,   &global.FlagInfos},
-        {"FLAG_MILKY_WAY",      CFG_BOOL,   &global.FlagMilkyWay},
-        {"FLAG_FOLLOW_EARTH",   CFG_BOOL,   &global.FlagFollowEarth},
-        {"DATE",                CFG_STRING, &tempDate},
-        {"TIME",                CFG_STRING, &tempTime},
-        {"FLAG_UTC_TIME",       CFG_BOOL,   &global.FlagUTC_Time},
-        {"LANDSCAPE_NUMBER",    CFG_INT,    &global.LandscapeNumber}, 
-        {NULL, CFG_END, NULL}   /* no more parameters */
-    };
-    
-    char tempName[255];
-    strcpy(tempName,global.ConfigDir);
-    strcat(tempName,"config.txt");
-    if (cfgParse(tempName, cfgini, CFG_SIMPLE) == -1)
-    {   
-	printf("An error was detected in the config file\n");
-        return;
-    }
-    
-    cfgStoreValue(cfgini, "FLAG_HELP", "TRUE", CFG_SIMPLE, 0);
-
-    cfgStruct cfgini2[] = 
-    {// parameter               type        address of variable
-        {"LATITUDE",            CFG_DOUBLE, &tempLatitude},
-        {"LONGITUDE",           CFG_DOUBLE, &tempLongitude},
-        {"ALTITUDE",            CFG_INT,    &global.Altitude},
-        {"TIME_ZONE",           CFG_INT,    &global.TimeZone},
-        {NULL, CFG_END, NULL}   /* no more parameters */
-    };
-
-    strcpy(tempName,global.ConfigDir);
-    strcat(tempName,"location.txt");
-    if (cfgParse(tempName, cfgini2, CFG_SIMPLE) == -1)
-    {
-	printf("An error was detected in the location file\n");
-        return;
-    }
-
-    // init the time parameters with current time and date
-    int d,m,y,hour,min,sec;
-    time_t rawtime;
-    tm * ptm;
-    time ( &rawtime );
-    ptm = gmtime ( &rawtime );
-    y=ptm->tm_year+1900;
-    m=ptm->tm_mon+1;
-    d=ptm->tm_mday;
-    hour=ptm->tm_hour;
-    min=ptm->tm_min;
-    sec=ptm->tm_sec;
-
-    // If no date given -> default today
-    if (tempDate!=NULL && (sscanf(tempDate,"%d/%d/%d\n",&m,&d,&y) != 3))
-    {   
-	printf("ERROR, bad date format : please change config.txt\n\n");
-        exit(1);
-    }
-    if (tempTime!=NULL && (sscanf(tempTime,"%d:%d:%d\n",&hour,&min,&sec) != 3))
-    {   
-	printf("ERROR, bad time format : please change config.txt\n\n");
-        exit(1);
-    }
-
-    if (m>12 || m<1 || d<1 || d>31)
-    {   
-	printf("ERROR, bad month value : please change config.txt\n\n");
-        exit(0);
-    }
-
-    if (hour>23 || hour<0 || min<0 || min>59 || sec<0 || sec>59)
-    {   
-	printf("ERROR, bad time value : please change config.txt\n\n");
-        exit(0);
-    }
-
-    if (tempDate) 
-	delete tempDate;
-    if (tempTime) 
-    {   
-        hour-=global.TimeZone;
-        delete tempTime;    
-    }
-    // calc the julian date and store it in the global variable JDay
-    global.JDay=DateOps::dmyToDay(d,m,y);
-    global.JDay+=((double)hour*HEURE+((double)min+(double)sec/60)*MINUTE);
-
-
-    // arrange the latitude/longitude to fit with astroOps conventions
-    tempLatitude=90.-tempLatitude;
-    tempLongitude=-tempLongitude;
-    if (tempLongitude<0)
-	tempLongitude=360.+tempLongitude;
-    // Set the change in the position
-    global.ThePlace.setLongitude(tempLongitude);
-    global.ThePlace.setLatitude(tempLatitude);
-}
 
 // ****************  Initialisation of glut and openGL  ****************
 void init() 
@@ -495,60 +338,21 @@ void init()
 // ***************************  Main  **********************************
 int main (int argc, char **argv)
 {   
-    // Set the data directories : test the default installation dir
-    // and try to find the files somewhere else if not found there
-    char dataRoot[255];
-	char cfgRoot[255];
+    setDirectories();
+    
+    drawIntro();                     // Print the console logo
+    
     char tempName[255];
     char tempName2[255];
     char tempName3[255];
-    strcpy(tempName,CONFIG_DATA_DIR);
-    strcat(tempName,"/data/hipparcos.fab");
-    FILE * tempFile = fopen(tempName,"r");
-    strcpy(dataRoot,CONFIG_DATA_DIR);
-    if(!tempFile)
-    {    
-        tempFile = fopen("./data/hipparcos.fab","r");
-        strcpy(dataRoot,".");
-        if(!tempFile)
-        {	  	
-            strcpy(dataRoot,"..");
-            tempFile = fopen("../data/hipparcos.fab","r");
-            if(!tempFile)
-            {
-                strcpy(dataRoot,"$HOME");
-                tempFile = fopen("$HOME/.stellarium/data/hipparcos.fab","r");
-                if(!tempFile)
-                {
-                    // Failure....
-                    printf("ERROR : I can't find the datas directories in :\n");
-                    printf("%s/ nor in ./ nor in ../ nor $HOME/.stellarium/\n",CONFIG_DATA_DIR);
-                    printf("You may fully install the software (on POSIX systems)\n");
-                    printf("or go in the stellarium pakage directory.\n");
-                    exit(-1);
-                }
-            }
-        }
-    }
-    fclose(tempFile);
-
-
-    if (strcmp(dataRoot,CONFIG_DATA_DIR))
-	printf("------>Found data files in %s\n",dataRoot);
-    strcpy(global.DataDir,dataRoot);
-    strcpy(global.TextureDir,dataRoot);
-    strcat(global.DataDir,"/data/");
-    strcat(global.TextureDir,"/textures/");
-
-	// to change
-	strcpy(cfgRoot,dataRoot);
-	// end
-
-	strcpy(global.ConfigDir,cfgRoot);
-    strcat(global.ConfigDir,"/config/");
     
-    drawIntro();                     // Print the console logo
-    loadParams();                    // Load the params from config.txt
+    printf("Loading configuration file...\n");
+    strcpy(tempName,global.ConfigDir);
+    strcat(tempName,"config.txt");
+    strcpy(tempName2,global.ConfigDir);
+    strcat(tempName2,"location.txt");
+
+    loadConfig(tempName,tempName2);  // Load the params from config.txt
     
     glutInit(&argc, argv);
     
@@ -602,7 +406,7 @@ int main (int argc, char **argv)
 
     loadCommonTextures();            // Load the common used textures
     SolarSystem->loadTextures();
-
+    
     // Load hipparcos stars & names
     strcpy(tempName,global.DataDir);
     strcat(tempName,"hipparcos.fab");

@@ -268,25 +268,25 @@ configure:4575: checking for GL/glut.h
 configure:4585: gcc -E  conftest.c
 configure:4591: $? = 0
 configure:4610: result: yes
-configure:5082: checking for toupper
-configure:5119: gcc -o conftest.exe -Wall -O3 -ffast-math -fexpensive-optimizations     conftest.c  -lm  -lopengl32 -lglu32 -lglut32  >&5
-configure:5122: $? = 0
-configure:5125: test -s conftest.exe
-configure:5128: $? = 0
-configure:5138: result: yes
-configure:5082: checking for strcasecmp
-configure:5119: gcc -o conftest.exe -Wall -O3 -ffast-math -fexpensive-optimizations     conftest.c  -lm  -lopengl32 -lglu32 -lglut32  >&5
-configure:5122: $? = 0
-configure:5125: test -s conftest.exe
-configure:5128: $? = 0
-configure:5138: result: yes
-configure:5082: checking for strdup
-configure:5119: gcc -o conftest.exe -Wall -O3 -ffast-math -fexpensive-optimizations     conftest.c  -lm  -lopengl32 -lglu32 -lglut32  >&5
-configure:5122: $? = 0
-configure:5125: test -s conftest.exe
-configure:5128: $? = 0
-configure:5138: result: yes
-configure:5258: creating ./config.status
+configure:5136: checking for toupper
+configure:5173: gcc -o conftest.exe -Wall -O3 -ffast-math -fexpensive-optimizations     conftest.c  -lm  -lopengl32 -lglu32 -lglut32  >&5
+configure:5176: $? = 0
+configure:5179: test -s conftest.exe
+configure:5182: $? = 0
+configure:5192: result: yes
+configure:5136: checking for strcasecmp
+configure:5173: gcc -o conftest.exe -Wall -O3 -ffast-math -fexpensive-optimizations     conftest.c  -lm  -lopengl32 -lglu32 -lglut32  >&5
+configure:5176: $? = 0
+configure:5179: test -s conftest.exe
+configure:5182: $? = 0
+configure:5192: result: yes
+configure:5136: checking for strdup
+configure:5173: gcc -o conftest.exe -Wall -O3 -ffast-math -fexpensive-optimizations     conftest.c  -lm  -lopengl32 -lglu32 -lglut32  >&5
+configure:5176: $? = 0
+configure:5179: test -s conftest.exe
+configure:5182: $? = 0
+configure:5192: result: yes
+configure:5312: creating ./config.status
 
 ## ----------------- ##
 ## Cache variables.  ##
@@ -353,7 +353,7 @@ ac_cv_objext='o'
 #define VERSION "0.5.0b"
 #define X_DISPLAY_MISSING 1
 #define CONFIG_DATA_DIR "/usr/local/share/stellarium"
-#define CONFIG_CFG_DIR "/home/Fabien/.stellarium/"
+#define CYGWIN 1
 #define HAVE_TOUPPER 1
 #define HAVE_STRCASECMP 1
 #define HAVE_STRDUP 1
@@ -373,7 +373,7 @@ This file was extended by config.status 2.52, executed with
   > ./config.status Makefile
 on ZIGGY-STARDUST
 
-config.status:5745: creating Makefile
+config.status:5799: creating Makefile
 
 ## ----------------------- ##
 ## Running config.status.  ##
@@ -387,7 +387,7 @@ This file was extended by config.status 2.52, executed with
   > ./config.status config/Makefile
 on ZIGGY-STARDUST
 
-config.status:5745: creating config/Makefile
+config.status:5799: creating config/Makefile
 
 ## ----------------------- ##
 ## Running config.status.  ##
@@ -401,7 +401,7 @@ This file was extended by config.status 2.52, executed with
   > ./config.status data/Makefile
 on ZIGGY-STARDUST
 
-config.status:5745: creating data/Makefile
+config.status:5799: creating data/Makefile
 
 ## ----------------------- ##
 ## Running config.status.  ##
@@ -415,7 +415,7 @@ This file was extended by config.status 2.52, executed with
   > ./config.status src/Makefile
 on ZIGGY-STARDUST
 
-config.status:5745: creating src/Makefile
+config.status:5799: creating src/Makefile
 
 ## ----------------------- ##
 ## Running config.status.  ##
@@ -429,7 +429,7 @@ This file was extended by config.status 2.52, executed with
   > ./config.status src/glpng/Makefile
 on ZIGGY-STARDUST
 
-config.status:5745: creating src/glpng/Makefile
+config.status:5799: creating src/glpng/Makefile
 
 ## ----------------------- ##
 ## Running config.status.  ##
@@ -443,7 +443,7 @@ This file was extended by config.status 2.52, executed with
   > ./config.status src/astrolib/Makefile
 on ZIGGY-STARDUST
 
-config.status:5745: creating src/astrolib/Makefile
+config.status:5799: creating src/astrolib/Makefile
 
 ## ----------------------- ##
 ## Running config.status.  ##
@@ -457,7 +457,7 @@ This file was extended by config.status 2.52, executed with
   > ./config.status textures/Makefile
 on ZIGGY-STARDUST
 
-config.status:5745: creating textures/Makefile
+config.status:5799: creating textures/Makefile
 
 ## ----------------------- ##
 ## Running config.status.  ##
@@ -471,4 +471,46 @@ This file was extended by config.status 2.52, executed with
   > ./config.status textures/landscapes/Makefile
 on ZIGGY-STARDUST
 
-config.status:5745: creating textures/landscapes/Makefile
+config.status:5799: creating textures/landscapes/Makefile
+
+## ----------------------- ##
+## Running config.status.  ##
+## ----------------------- ##
+
+This file was extended by config.status 2.52, executed with
+  CONFIG_FILES    = 
+  CONFIG_HEADERS  = 
+  CONFIG_LINKS    = 
+  CONFIG_COMMANDS = 
+  > ./config.status config/Makefile
+on ZIGGY-STARDUST
+
+config.status:5799: creating config/Makefile
+
+## ----------------------- ##
+## Running config.status.  ##
+## ----------------------- ##
+
+This file was extended by config.status 2.52, executed with
+  CONFIG_FILES    = 
+  CONFIG_HEADERS  = 
+  CONFIG_LINKS    = 
+  CONFIG_COMMANDS = 
+  > ./config.status data/Makefile
+on ZIGGY-STARDUST
+
+config.status:5799: creating data/Makefile
+
+## ----------------------- ##
+## Running config.status.  ##
+## ----------------------- ##
+
+This file was extended by config.status 2.52, executed with
+  CONFIG_FILES    = 
+  CONFIG_HEADERS  = 
+  CONFIG_LINKS    = 
+  CONFIG_COMMANDS = 
+  > ./config.status config/Makefile
+on ZIGGY-STARDUST
+
+config.status:5799: creating config/Makefile
