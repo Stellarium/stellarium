@@ -211,7 +211,8 @@ void stel_core::update(int delta_time)
 	landscape->set_sky_brightness(sky_brightness);
 
 	ui->update();
-	if (FlagShowTui) ui->tui_update_widgets();
+
+	if (FlagShowGravityUi) ui->tui_update_widgets();
 }
 
 // Execute all the drawing functions
@@ -265,7 +266,6 @@ void stel_core::draw(int delta_time)
 	// Draw the hipparcos stars
 	Vec3d tempv = navigation->get_equ_vision();
 	Vec3f temp(tempv[0],tempv[1],tempv[2]);
-
 	if (FlagStars && (!FlagAtmosphere || sky_brightness<0.1))
 	{
 		if (FlagPointStar) hip_stars->draw_point(StarScale, StarMagScale,
@@ -328,9 +328,11 @@ void stel_core::draw(int delta_time)
 	projection->draw_viewport_shape();
 
     // Draw the Graphical ui and the Text ui
-    ui->draw();
-	if (FlagShowTui) ui->draw_tui();
-	ui->draw_gravity_ui();
+
+	ui->draw();
+
+	if (FlagShowGravityUi) ui->draw_gravity_ui();
+	if (FlagShowTuiMenu) ui->draw_tui();
 }
 
 void stel_core::set_landscape(const string& new_landscape_name)
@@ -444,7 +446,8 @@ void stel_core::load_config_from(const string& confFile)
 	GuiTextColor		= str_to_vec3f(conf.get_str("gui:gui_text_color").c_str());
 
 	// Text ui section
-	FlagShowTui = conf.get_boolean("tui:flag_show_tui");
+	FlagShowGravityUi = conf.get_boolean("tui:flag_show_gravity_ui");
+	FlagShowTuiMenu = conf.get_boolean("tui:flag_show_tui_menu");
 	FlagShowTuiDateTime = conf.get_boolean("tui:flag_show_tui_datetime");
 	FlagShowTuiShortInfo = conf.get_boolean("tui:flag_show_tui_short_obj_info");
 
@@ -545,6 +548,7 @@ void stel_core::save_config_to(const string& confFile)
 	conf.set_str	("gui:gui_text_color", vec3f_to_str(GuiTextColor));
 
 	// Text ui section
+	conf.set_boolean("tui:flag_show_gravity_ui", FlagShowGravityUi);
 	conf.set_boolean("tui:flag_show_tui", false);
 	conf.set_boolean("tui:flag_show_tui_datetime", FlagShowTuiDateTime);
 	conf.set_boolean("tui:flag_show_tui_short_obj_info", FlagShowTuiShortInfo);
@@ -612,13 +616,13 @@ int stel_core::handle_keys(SDLKey key, s_gui::S_GUI_VALUE state)
 	s_tui::S_TUI_VALUE tuiv;
 	if (state == s_gui::S_GUI_PRESSED) tuiv = s_tui::S_TUI_PRESSED;
 	else tuiv = s_tui::S_TUI_RELEASED;
-	if (FlagShowTui)
+	if (FlagShowTuiMenu)
 	{
 
 		if (ui->handle_keys_tui(key, tuiv)) return 1;
 		if (state==S_GUI_PRESSED && key==SDLK_m)
 		{
-			FlagShowTui = false;
+			FlagShowTuiMenu = false;
 			return 1;
 		}
 		return 1;
@@ -848,7 +852,8 @@ stel_object * stel_core::clever_find(const Vec3d& v) const
 		projection->project_earth_equ((*iter)->get_earth_equ_pos(navigation), winpos);
 		float distance = sqrt((xpos-winpos[0])*(xpos-winpos[0]) + (ypos-winpos[1])*(ypos-winpos[1]));
 		float mag = (*iter)->get_mag(navigation);
-		if ((*iter)->get_type()==STEL_OBJECT_NEBULA) mag -= 7.f;
+		if ((*iter)->get_type()==STEL_OBJECT_NEBULA) mag -= 9.f;
+		if ((*iter)->get_type()==STEL_OBJECT_PLANET) mag -= 8.f;
 		if (distance + mag < best_object_value)
 		{
 			best_object_value = distance + mag;

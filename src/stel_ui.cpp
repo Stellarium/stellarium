@@ -273,6 +273,7 @@ void stel_ui::cb(void)
 	help_win->setVisible(core->FlagHelp);
 	core->navigation->set_flag_lock_equ_pos(bt_flag_follow_earth->getState());
 	core->FlagConfig			= bt_flag_config->getState();
+	config_win->setVisible(core->FlagConfig);
 }
 
 void stel_ui::bt_flag_ctrOnMouseInOut(void)
@@ -615,7 +616,7 @@ int stel_ui::handle_keys(SDLKey key, S_GUI_VALUE state)
 		}
         if(key==SDLK_m)
         {
-        	core->FlagShowTui = true;
+        	core->FlagShowTuiMenu = true;
 		}
         if(key==SDLK_k)
         {

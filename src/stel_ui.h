@@ -115,7 +115,7 @@ private:
 	Component* createHelpWindow(void);
 	void help_win_hideBtCallback(void);
 
-	// The window containing the help info
+	// The window managing the configuration
 	StdBtWin* config_win;
 	Component* createConfigWindow(void);
 	void config_win_hideBtCallback(void);
