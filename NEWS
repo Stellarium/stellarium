@@ -1,3 +1,6 @@
+[12-june-2003]
+It's now 2 months I'm working on a new version of stellarium. A lot of big improvements are on construction : I totally reorganized old part of the sources in a good object oriented way. I use now new algorithms for planets positions calculation and astronomical operations. The precision is really improved and sun eclipses, mercury transit are now visible. Jupiter satellites are here (beta) and i created a new faster and better atmosphere algorithm. This next version will hopefully be released in a few weeks!!
+
 [11-april-2003]
 Stellarium v0.5.1 released : Use SDL instead of glut. Use a win32 installer. Fixed bugs and increase stability. Added a clickable map in the position configuration. Added the CTRL + Up/Down keys to control the zoom for macOSX users. I wait now for the linux packagers to make some rpms! 
 
