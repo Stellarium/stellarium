@@ -109,7 +109,6 @@ void navigator::update_vision_vector(int delta_time, stel_object* selected)
 			equ_vision=selected->get_earth_equ_pos(this);
 			// Recalc local vision vector
 			
-			// rms - work here on stopping horizon leveling rotation...
 			local_vision=earth_equ_to_local(equ_vision);
 			
 		}
@@ -218,18 +217,21 @@ void navigator::update_model_view_mat(void)
     f = local_vision;
   }
 
+
   f.normalize();
   Vec3d s(f[1],-f[0],0.);
-  Vec3d u(s^f);
-  s.normalize();
-  u.normalize();
+  
 
   if( viewing_mode == VIEW_EQUATOR) {
     // convert everything back to local coord
-    f = earth_equ_to_local( f );
+    f = local_vision;
+    f.normalize();
     s = earth_equ_to_local( s );
-    u = earth_equ_to_local( u );
   }
+
+  Vec3d u(s^f);
+  s.normalize();
+  u.normalize();
 
   mat_local_to_eye.set(s[0],u[0],-f[0],0.,
 		       s[1],u[1],-f[1],0.,
