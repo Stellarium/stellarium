@@ -119,7 +119,7 @@ int Hip_Star::Read(FILE * catalog)
 void Hip_Star::Draw(void)
 {
     // Check if in the field of view, if not return
-    if ( XY[0]<0 || XY[0]>global.X_Resolution || 
+    if ( XY[0]<0 || XY[0]>global.X_Resolution ||
          XY[1]<0 || XY[1]>global.Y_Resolution ) 
         return;
 
