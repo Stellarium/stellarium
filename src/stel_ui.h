@@ -138,7 +138,7 @@ private:
 	s_tui::Integer_item* tui_location_altitude;
 
 	// 2. Time & Date
-	s_tui::MultiSet_item<string>* tui_time_settmz;
+	s_tui::Time_zone_item* tui_time_settmz;
 	s_tui::Time_item* tui_time_skytime;
 	s_tui::Time_item* tui_time_presetskytime;
 	s_tui::MultiSet_item<string>* tui_time_startuptime;

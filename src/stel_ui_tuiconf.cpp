@@ -102,8 +102,9 @@ void stel_ui::init_tui(void)
 	tui_menu_location->addComponent(tui_location_altitude);
 
 	// 2. Time
-	tui_time_settmz = create_tree_from_time_zone_file(core->DataDir + "zone.tab");
-	tui_time_settmz->set_OnTriggerCallback(callback<void>(this, &stel_ui::tui_cb_settimezone));
+	tui_time_settmz = new s_tui::Time_zone_item(core->DataDir + "zone.tab", "2.1 Set Time Zone: ");
+	tui_time_settmz->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb_settimezone));
+	tui_time_settmz->settz(core->observatory->get_custom_tz_name());
 	tui_time_skytime = new s_tui::Time_item("2.2 Sky Time: ");
 	tui_time_skytime->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb1));
 	tui_time_presetskytime = new s_tui::Time_item("2.3 Preset Sky Time: ");
@@ -230,7 +231,7 @@ void stel_ui::tui_cb_settimezone(void)
 {
 	// Don't call the script anymore coz it's pointless
 	// system( ( core->DataDir + "script_set_time_zone " + tui_time_settmz->getCurrent() ).c_str() );
-	core->observatory->set_custom_tz_name(tui_time_settmz->getCurrent());
+	core->observatory->set_custom_tz_name(tui_time_settmz->gettz());
 }
 
 // Set time format mode
@@ -274,45 +275,3 @@ void stel_ui::tui_cb_tui_effect_change_landscape(void)
 	core->set_landscape(tui_effect_landscape->getCurrent());
 }
 
-// Parse a file of type /usr/share/zoneinfo/zone.tab
-s_tui::MultiSet_item<string>* stel_ui::create_tree_from_time_zone_file(const string& zonetab)
-{
-	s_tui::MultiSet_item<string>* retmult = new s_tui::MultiSet_item<string>("2.1 Set Time Zone: ");
-
-	ifstream is(zonetab.c_str());
-	char zoneline[256];
-
-	string unused, tzname;
-
-	while (is.getline(zoneline, 256))
-	{
-		if (zoneline[0]=='#') continue;
-		istringstream istr(zoneline);
-		istr >> unused >> unused >> tzname;
-		retmult->addItem(tzname);
-	}
-
-	is.close();
-
-	// If we use a custom timezone mode, set the widget to the current TZ
-	if (core->observatory->get_tz_format() == S_TZ_CUSTOM)
-	{
-		if(!retmult->setValue(core->observatory->get_custom_tz_name()))
-		{
-			cout << "Can't find timezone " << core->observatory->get_custom_tz_name() << " in the time zone list." << endl;
-		}
-		return retmult;
-	}
-
-	// If we use system default timezone mode, set the widget to system_default
-	if (core->observatory->get_tz_format() == S_TZ_SYSTEM_DEFAULT)
-	{
-		retmult->setValue("system_default");
-		cout << "Setting default system timezone." << endl;
-		return retmult;
-	}
-
-	// If we reach this point, a timezone mode is not handled coorectly
-	cout << "Unknown timezone mode." << endl;
-	return retmult;
-}

@@ -137,7 +137,6 @@ void Constellation_mgr::load(const string& font_fileName, const string& fileName
 		cons->art_vertex[1] = Vec3f(X*Vec3f(texSize,0,0));
 		cons->art_vertex[2] = Vec3f(X*Vec3f(texSize,texSize,0));
 		cons->art_vertex[3] = Vec3f(X*Vec3f(0,texSize,0));
-
     }
     fclose(fic);
 }
@@ -165,7 +164,7 @@ void Constellation_mgr::draw(Projector* prj, char abr[4]) const
     {
 		if (!strcmp((*iter)->short_name,abr)) break;
 	}
-    (*iter)->draw(prj);
+    (*iter)->draw(prj, lines_color);
 }
 
 void Constellation_mgr::draw_art(Projector* prj) const
@@ -206,7 +205,7 @@ void Constellation_mgr::draw_names(Projector* prj, bool _gravity_label)
 void Constellation_mgr::draw_one_name(Projector* prj, Constellation* c, bool _gravity_label) const
 {
 	Constellation::gravity_label = _gravity_label;
-    glColor3f(0.7,0.1,0.1);
+    glColor3fv(names_color);
     glEnable(GL_BLEND);
     glEnable(GL_TEXTURE_2D);
     prj->set_orthographic_projection();	// set 2D coordinate
