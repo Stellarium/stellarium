@@ -52,7 +52,7 @@ public:
 	planet* get_earth(void) {return earth;}
 
 	planet* get_moon(void) {return moon;}
-	
+
 private:
 	planet* sun;
 	planet* moon;
@@ -61,7 +61,7 @@ private:
 	s_font* planet_name_font;
 	void load(const char* planetfile);	// Load the bodies data from a file
 	vector<planet*> system_planets;		// Vector containing all the bodies of the system
-	vector<EllipticalOrbit*> ell_orbits;			// Pointers on created elliptical orbits
+	vector<EllipticalOrbit*> ell_orbits;// Pointers on created elliptical orbits
 
 	// And sort them from the furthest to the closest to the observer
 	struct bigger_distance : public binary_function<planet*, planet*, bool>

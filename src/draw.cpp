@@ -58,7 +58,7 @@ SkyGrid::SkyGrid(SKY_GRID_TYPE grid_type, unsigned int _nb_meridian, unsigned in
 		{
 			sphe_to_rect((float)i/(nb_azi_segment)*2.f*M_PI,
 				(float)(np+1)/(nb_parallel+1)*M_PI-M_PI_2, azi_points[np][i]);
-			alt_points[np][i] *= radius;
+			azi_points[np][i] *= radius;
 		}
 	}
 }

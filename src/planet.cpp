@@ -108,10 +108,9 @@ void planet::compute_position(double date)
 {
 	if (fabs(lastJD-date)>deltaJD)
 	{
-		coord_func(date, &(ecliptic_pos[0]), &(ecliptic_pos[1]), &(ecliptic_pos[2]));
+		coord_func(date, ecliptic_pos);
 		lastJD = date;
 	}
-
 }
 
 // Compute the transformation matrix from the local planet coordinate to the parent planet coordinate
@@ -253,19 +252,17 @@ void planet::draw(int hint_ON, Projector* prj, const navigator * nav, const tone
 			draw_hints(nav, prj);
         }
 
-		if (screen_sz>1)
+		if (rings)
 		{
-			if (rings)
-			{
-				double dist = get_earth_equ_pos(nav).length();
-				prj->set_clipping_planes(dist-rings->get_size(), dist+rings->get_size());
-				glEnable(GL_DEPTH_TEST);
-				draw_sphere(prj, mat);
-				rings->draw(prj, mat);
-				glDisable(GL_DEPTH_TEST);
-			}
-			else draw_sphere(prj, mat);
+			double dist = get_earth_equ_pos(nav).length();
+			prj->set_clipping_planes(dist-rings->get_size(), dist+rings->get_size());
+			glEnable(GL_DEPTH_TEST);
+			draw_sphere(prj, mat, screen_sz);
+			rings->draw(prj, mat);
+			glDisable(GL_DEPTH_TEST);
+			prj->set_clipping_planes(0.0005 ,40);  // TODO : this is bad code
 		}
+		else draw_sphere(prj, mat, screen_sz);
 
 		if (tex_halo) draw_halo(nav, prj, eye);
     }
@@ -306,8 +303,13 @@ void planet::draw_hints(const navigator* nav, const Projector* prj)
 	prj->reset_perspective_projection();		// Restore the other coordinate
 }
 
-void planet::draw_sphere(const Projector* prj, const Mat4d& mat)
+void planet::draw_sphere(const Projector* prj, const Mat4d& mat, float screen_sz)
 {
+	// Adapt the number of facets according with the size of the sphere for optimization
+	int nb_facet = (int)(screen_sz * 40/50);	// 40 facets for 1024 pixels diameter on screen
+	if (nb_facet<4) return;
+	if (nb_facet>40) nb_facet = 40;
+
     glEnable(GL_TEXTURE_2D);
 	glEnable(GL_CULL_FACE);
 	glDisable(GL_BLEND);
@@ -319,7 +321,7 @@ void planet::draw_sphere(const Projector* prj, const Mat4d& mat)
 
 	// Rotate and add an extra half rotation because of the convention in all
     // planet texture maps where zero deg long. is in the middle of the texture.
-	prj->sSphere(radius*sphere_scale,40,40, mat * Mat4d::zrotation(M_PI/180*(axis_rotation + 180.)));
+	prj->sSphere(radius*sphere_scale, nb_facet, nb_facet, mat * Mat4d::zrotation(M_PI/180*(axis_rotation + 180.)));
 
     glDisable(GL_CULL_FACE);
 	glDisable(GL_LIGHTING);

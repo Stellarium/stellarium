@@ -23,8 +23,6 @@
 #include "stellastro.h"
 #include "draw.h"
 
-//#include <functional>
-
 stel_core::stel_core() : screen_W(800), screen_H(600), bppMode(16), Fullscreen(0),
 	navigation(NULL), projection(NULL), selected_object(NULL), hip_stars(NULL), asterisms(NULL),
 	nebulas(NULL), atmosphere(NULL), tone_converter(NULL), selected_constellation(NULL), conf(NULL),
@@ -188,7 +186,6 @@ void stel_core::init(void)
 
 	glClear(GL_COLOR_BUFFER_BIT);
 
-	//unary_function f = mem_fun(navigator::update_model_view_mat);
 }
 
 
@@ -239,7 +236,7 @@ void stel_core::update(int delta_time)
 void stel_core::draw(int delta_time)
 {
 	// Init openGL viewing with fov, screen size and clip planes
-	projection->set_clipping_planes(0.001 ,40 );
+	projection->set_clipping_planes(0.0005 ,40);
 
 	// Give the updated standard projection matrices to the projector
 	projection->set_modelview_matrices(	navigation->get_earth_equ_to_eye_mat(),
