@@ -3,9 +3,6 @@
 ################################
 
 ######## Video settings ########
-# Fullscreen mode is faster than windowed mode but a few videos cards don't support it.
-# When fullscreen = false, stellarium runs in windowed mode, but it resize
-# the window to the size of your screen, so it looks like fullscreen mode but it isn't...
 # true=fullscreen mode, false=windowed mode
 
 FULLSCREEN = true
