@@ -51,8 +51,8 @@ int Hip_Star::Read(FILE * catalog)
     fread((char*)&DE,4,1,catalog);
     LE_TO_CPU_FLOAT(DE, DE);
     
-    RA/=12./PI;     // Convert from hours to rad
-    DE/=180./PI;    // Convert from deg to rad 
+    RA/=12./M_PI;     // Convert from hours to rad
+    DE/=180./M_PI;    // Convert from deg to rad 
 
     unsigned short int mag;
     fread((char*)&mag,2,1,catalog);

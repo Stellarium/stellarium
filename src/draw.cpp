@@ -50,14 +50,14 @@ brightness_data b;
 // precalculation of the grid points
 void InitMeriParal(void)
 {
-        float Pi_Over_24 = (float)(PI / 24.0f);
+        float Pi_Over_24 = (float)(M_PI / 24.0f);
         for (register int j = 0; j < 51; ++j){
                 DmeriParal[j][0] = (float)(20.0f * cos(j * Pi_Over_24));
                 DmeriParal[j][1] = (float)(20.0f * sin(j * Pi_Over_24));
         }
 
 
-        float Pi_Over_18 = (float)(PI / 18.0f);
+        float Pi_Over_18 = (float)(M_PI / 18.0f);
         for (register int k = 0; k < 18; ++k){
                 sinTable[k] = (float)(20.0f * sin((k - 9) * Pi_Over_18));
                 register float _cos = (float)(cos((k - 9) * Pi_Over_18));
@@ -81,18 +81,17 @@ void InitAtmosphere(void)
 
 // Draw the realistic atmosphere
 void CalcAtmosphere(void)
-{   
-    Vec3d sunPos = navigation.helio_to_local(&(Sun->get_heliocentric_ecliptic_pos()));
-    Vec3d lunaPos = navigation.helio_to_local(&(Moon->get_heliocentric_ecliptic_pos()));
-    sunPos.normalize();
-    lunaPos.normalize();
-    b.moon_elongation = PI;//acos(sunPos.Dot(lunaPos));
+{
+	Vec3d temp(0.,0.,0.);
+    Vec3d sunPos = navigation.helio_to_local(&temp);
 
-    Vec3d st = navigation.equ_to_local(&sunPos);
-    Vec3d mt = navigation.equ_to_local(&lunaPos);
+	double lat, lng;
+	rect_to_sphe(&lng, &lat, &sunPos);
 
-    b.zenith_ang_moon = PI/2-asin(st[1]);
-    b.zenith_ang_sun = PI/2-asin(mt[1]);
+    b.moon_elongation = 0;//acos(sunPos.Dot(lunaPos));
+
+    b.zenith_ang_moon = 0;
+    b.zenith_ang_sun = M_PI_2-lat;
 
     b.ht_above_sea_in_meters = navigation.get_altitude();
     b.latitude = navigation.get_latitude();
@@ -102,7 +101,7 @@ void CalcAtmosphere(void)
     b.year = d.years;
     b.month = d.months;
 
-    b.temperature_in_c = (PI/2-(float)fabs(b.latitude*100.)/100.)*20.+15.*cos(b.zenith_ang_sun)-0.01*b.ht_above_sea_in_meters;
+    b.temperature_in_c = (M_PI_2-(float)fabs(b.latitude*100.)/100.)*20.+15.*cos(b.zenith_ang_sun)-0.01*b.ht_above_sea_in_meters;
     //printf("%f\n",b.temperature_in_c);
     b.relative_humidity = 30.;
 
@@ -140,7 +139,7 @@ void CalcAtmosphere(void)
             gluUnProject(x*stepX,resY-y*stepY,1,M,P,V,objx,objy,objz);
             Vec3d point(*objx,*objy,*objz);
             point.normalize();
-            b.zenith_angle = PI/2-asin(point[1]);
+            b.zenith_angle = M_PI_2-asin(point[1]);
             b.dist_sun = acos(point.dot(sunPos));
             if (b.dist_sun<0) b.dist_sun=-b.dist_sun;
             compute_sky_brightness( &b);

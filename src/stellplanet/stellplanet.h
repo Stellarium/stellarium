@@ -38,6 +38,8 @@ void get_uranus_helio_coords(double JD, double * X, double * Y, double * Z);
 void get_neptune_helio_coords(double JD, double * X, double * Y, double * Z);
 void get_pluto_helio_coords(double JD, double * X, double * Y, double * Z);
 
+// Return 0 of course...
+void get_sun_helio_coords(double JD, double * X, double * Y, double * Z) {*X=0.; *Y=0.; *Y=0.;};
 /* Calculate the rectangular geocentric lunar coordinates to the inertial mean
  * ecliptic and equinox of J2000.
  * The geocentric coordinates returned are in units of UA.

@@ -70,12 +70,12 @@ int Nebula::Read(FILE * catalogue)
 
     // Precalcul de la matrice de Positionnement/Rotation pour le dessin
     glTranslatef(XYZ[0],XYZ[1],XYZ[2]);
-    glRotatef(RaRad*180/PI,0,1,0);
-    glRotatef(DecRad*180/PI,-1,0,0);
+    glRotatef(RaRad*180/M_PI,0,1,0);
+    glRotatef(DecRad*180/M_PI,-1,0,0);
     glRotatef(Rotation,0,0,1);
     glGetFloatv(GL_MODELVIEW_MATRIX , matTransfo);  // Store the matrix
 
-    RayonPrecalc=RAYON*sin(Taille/2/60*PI/180);
+    RayonPrecalc=RAYON*sin(Taille/2/60*M_PI/180);
     //printf("rayon : %f\n",RayonPrecalc);
 
     if (Messier>0)      //Load texture for Messiers

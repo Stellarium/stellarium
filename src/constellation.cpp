@@ -106,7 +106,7 @@ void constellation::DrawSeule()
 // Chek if the constellation is in the field of view and calc the x,y position if true
 void constellation::ComputeName()
 {   if (acos((navigation.get_equ_vision()[0]*Xnom+navigation.get_equ_vision()[1]*Ynom +
-		navigation.get_equ_vision()[2]*Znom)/RAYON)>((float)navigation.get_fov()+4)*PI*1.333333/360)
+		navigation.get_equ_vision()[2]*Znom)/RAYON)>((float)navigation.get_fov()+4)*M_PI*1.333333/360)
     {
 		inFov=false;
         return; // Si hors du champ

@@ -130,7 +130,7 @@ void Hip_Star_mgr::Load(char * hipCatFile, char * commonNameFile, char * nameFil
 
     fclose(hipFile);
 
-    hipStarTexture=new s_texture("etoile16x16Aigrettes");  // Load star texture
+    hipStarTexture=new s_texture("star16x16");  // Load star texture
     
     char tempName[255];
     strcpy(tempName,global.DataDir);
@@ -173,7 +173,7 @@ void Hip_Star_mgr::Draw(void)
 
 	// convert.... TODO implicit convertion
 	vec3_t temp(navigation.get_equ_vision()[0],navigation.get_equ_vision()[1],navigation.get_equ_vision()[2]);
-	nbZones = HipGrid.Intersect(temp, navigation.get_fov()*PI/180*1.4, zoneList);
+	nbZones = HipGrid.Intersect(temp, navigation.get_fov()*M_PI/180*1.4, zoneList);
 	
 	// Print all the stars of all the selected zones
 	for(int i=0;i<nbZones;i++)

@@ -256,7 +256,7 @@ void Update(Uint32 delta_time)
 
     // Update the position of observation and time etc...
 	navigation.update_time(delta_time);
-	Sun->computePosition(navigation.get_JDay());
+	Sun->compute_position(navigation.get_JDay());
 	navigation.update_transform_matrices();
 	navigation.update_vision_vector(delta_time);
 
@@ -352,9 +352,9 @@ bool Initialize(void)	     // Any Application & User Initialization Code Goes He
     AppStatus.Visible	    = true;	 // At The Beginning, Our App Is Visible
     AppStatus.MouseFocus    = true;	 // And Have Both Mouse
     AppStatus.KeyboardFocus = true;	 // And Input Focus
-  
+
     SDL_EnableKeyRepeat(0, 0); // Disable key repeat
-    
+
     HipVouteCeleste = new Hip_Star_mgr();
     if (!HipVouteCeleste) exit(-1);
 
@@ -384,8 +384,8 @@ bool Initialize(void)	     // Any Application & User Initialization Code Goes He
 
     strcpy(tempName,global.DataDir);
     strcat(tempName,"constellationship.fab");
-    ConstellCeleste->Load(tempName,HipVouteCeleste);     // Load constellations
-    Sun->computePosition(navigation.get_JDay());					 // Compute planet data
+    ConstellCeleste->Load(tempName,HipVouteCeleste);	// Load constellations
+    Sun->compute_position(navigation.get_JDay());		// Compute planet data
     InitMeriParal();                 	// Precalculation for the grids drawing
     InitAtmosphere();
 
@@ -459,7 +459,6 @@ int main(int argc, char **argv)
     // Make Sure That SDL_Quit Will Be Called In Case of exit()
     atexit(SDL_Quit);
 
-
     // We Want A Hardware Surface
     Vflags = SDL_HWSURFACE|SDL_OPENGL;
 
@@ -475,28 +474,28 @@ int main(int argc, char **argv)
 		exit(-1);
 	}
 
-
 	SDL_WM_SetCaption(APP_NAME, APP_NAME);	// Set The Window Caption
     strcpy(tempName,global.DataDir);
     strcat(tempName,"icon.bmp");
 	SDL_WM_SetIcon(SDL_LoadBMP(tempName), NULL);
 
+
 	if(!InitTimers(&LastCount))			// We Call The Timers Init Function
 	{
 		printf("Can't init the timers: %s\n", SDL_GetError() );
-		exit(1);
+		exit(-1);
 	}
 
 	if(!InitGL(Screen))					// CallThe OpenGL Init Function
 	{
 		printf("Can't init GL: %s\n", SDL_GetError() );
-		exit(1);
+		exit(-1);
 	}
 
 	if(!Initialize())					// Init The Application
 	{
 		printf("App init failed: %s\n", SDL_GetError() );
-		exit(1);
+		exit(-1);
 	}
 
 	isProgramLooping = true;			// Make Our Program Loop

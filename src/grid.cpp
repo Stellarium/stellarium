@@ -31,7 +31,7 @@ Grid::Grid()
 {   
 	
 	NbPoints = 162;
-	Angle = PI/10;
+	Angle = M_PI/10;
 /*
 float tempTab[92][3] ={
 {0.0000,0.0000,1.0000    },
