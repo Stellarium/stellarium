@@ -39,7 +39,7 @@ public:
     void draw(Projector* prj, char abr[4]) const;
     void draw_names(Projector* prj, bool gravity_label);
     void draw_one_name(Projector* prj, Constellation*, bool gravity_label) const;
-    void draw_art(Projector* prj, int delta_time) const;
+    void draw_art(Projector* prj, int delta_time);
     Constellation* is_star_in(const Hip_Star *) const;
     Constellation* find_from_short_name(const string& shortname) const;
     void set_sky_locale(const string& _sky_locale);
@@ -56,6 +56,7 @@ private:
     string dataDir;
     string skyCulture;
     string skyLocale;
+    bool JustLoaded;
 };
 
 #endif // _CONSTELLATION_MGR_H_

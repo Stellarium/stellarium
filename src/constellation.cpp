@@ -159,8 +159,8 @@ void Constellation::draw_art_optim(Projector* prj, int delta_time)
 		// update fade
 		if(art_on)
 		{
-			if(art_intensity + delta_intensity <= 0.5) {art_intensity += delta_intensity;} 
-			else {art_intensity = 0.5;}
+			if(art_intensity + delta_intensity <= MAX_ART_INTENSITY) {art_intensity += delta_intensity;} 
+			else {art_intensity = MAX_ART_INTENSITY;}
 		} 
 		else
 		{
@@ -212,8 +212,8 @@ void Constellation::draw_art(Projector* prj, int delta_time)
 		// update fade
 		if(art_on)
 		{
-			if(art_intensity + delta_intensity <= 0.5) {art_intensity += delta_intensity;} 
-			else {art_intensity = 0.5;}
+			if(art_intensity + delta_intensity <= MAX_ART_INTENSITY) {art_intensity += delta_intensity;} 
+			else {art_intensity = MAX_ART_INTENSITY;}
 		} 
 		else
 		{

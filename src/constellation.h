@@ -25,6 +25,8 @@
 #include "stel_utility.h"
 #include "s_font.h"
 
+#define MAX_ART_INTENSITY 1.0
+
 class Constellation
 {
     friend class Constellation_mgr;
