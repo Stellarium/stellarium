@@ -12,8 +12,8 @@ dnl Check for compilers.
 AC_PROG_CC
 AC_PROG_CXX
 
-CFLAGS=" -Wall -s -O3"
-CXXFLAGS=" -Wall -s -O3"
+CFLAGS=" -Wall"
+CXXFLAGS=" -Wall"
 
 dnl Checks for programs.
 AC_PROG_CPP

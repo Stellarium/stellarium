@@ -189,7 +189,6 @@ void setDirectories(void)
 
 		// First launch for that user : set default options by copying the default files
 		system( (string("cp ") + DATA_ROOT + "/config/default_config.txt " + CDIR + "config.txt").c_str() );
-		system( (string("cp ") + DATA_ROOT + "/config/default_location.txt " + CDIR + "location.txt").c_str() );
 	}
 #endif	// Unix system
 

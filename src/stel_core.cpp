@@ -121,7 +121,7 @@ void stel_core::init(void)
 	// Create and init the solar system
 	ssystem->init(DataDir + "spacefont.txt", DataDir + "ssystem.ini");
 
-	landscape = Landscape::create_from_file(DataDir + "landscapes.ini", landscape_name);
+	landscape = Landscape::create_from_file(DataDir + "landscapes.ini", observatory->get_landscape_name());
 
 	// Load the pointer textures
 	stel_object::init_textures();
@@ -207,6 +207,7 @@ void stel_core::update(int delta_time)
 	if (FlagAtmosphere) sky_brightness = sunPos[2];
 	else sky_brightness = 0.1;
 	if (sky_brightness<0) sky_brightness=0;
+	landscape->set_sky_brightness(sky_brightness);
 
 	ui->update();
 	if (FlagShowTui) ui->tui_update_widgets();
@@ -318,6 +319,8 @@ void stel_core::draw(int delta_time)
 	// Daw the cardinal points
     if (FlagCardinalPoints) cardinals_points->draw(projection, FlagGravityLabels);
 
+	projection->draw_viewport_shape();
+
     // Draw the Graphical ui and the Text ui
     ui->draw();
 	if (FlagShowTui) ui->draw_tui();
@@ -347,7 +350,6 @@ void stel_core::load_config(void)
 			(version.empty() ? "<0.6.0" : version) << ")." << endl;
 		cout << "It will be replaced by the default config file." << endl;
 		system( (string("cp -f ") + DataRoot + "/config/default_config.txt " + ConfigDir + config_file).c_str() );
-		system( (string("cp -f ") + DataRoot + "/config/default_location.txt " + ConfigDir + location_file).c_str() );
 	}
 
 	// Actually load the config file
@@ -442,7 +444,7 @@ void stel_core::load_config_from(const string& confFile)
 
 	// Navigation section
 	PresetSkyTime 		= conf.get_double ("navigation","preset_sky_time",2451545.);
-	StartupTimeMode = conf.get_str("navigation:startup_time_mode");	// Can be "now" or "preset"
+	StartupTimeMode 	= conf.get_str("navigation:startup_time_mode");	// Can be "now" or "preset"
 	FlagEnableZoomKeys	= conf.get_boolean("navigation:flag_enable_zoom_keys");
 	FlagEnableMoveKeys	= conf.get_boolean("navigation:flag_enable_move_keys");
 	initFov				= conf.get_double ("navigation","init_fov",60.);
@@ -451,7 +453,6 @@ void stel_core::load_config_from(const string& confFile)
 	FlagUTC_Time		= conf.get_boolean("navigation:flag_utc_time");
 
 	// Landscape section
-	landscape_name 		= conf.get_str("landscape:landscape_name");
 	FlagGround			= conf.get_boolean("landscape:flag_ground");
 	FlagHorizon			= conf.get_boolean("landscape:flag_horizon");
 	FlagFog				= conf.get_boolean("landscape:flag_fog");
@@ -501,7 +502,7 @@ void stel_core::save_config_to(const string& confFile)
 	switch (ProjectorType)
 	{
 		case PERSPECTIVE_PROJECTOR : tmpstr="perspective";	break;
-		case FISHEYE_PROJECTOR : tmpstr=="fisheye";		break;
+		case FISHEYE_PROJECTOR : tmpstr="fisheye";		break;
 		default : tmpstr="perspective";
 	}
 	conf.set_str	("projection:type",tmpstr);
@@ -509,8 +510,8 @@ void stel_core::save_config_to(const string& confFile)
 	switch (ViewportType)
 	{
 		case MAXIMIZED : tmpstr="maximized";	break;
-		case SQUARE : tmpstr=="square";	break;
-		case DISK : tmpstr=="disk";		break;
+		case SQUARE : tmpstr="square";	break;
+		case DISK : tmpstr="disk";		break;
 		default : tmpstr="maximized";
 	}
 	conf.set_str	("projection:viewport", tmpstr);
@@ -537,7 +538,7 @@ void stel_core::save_config_to(const string& confFile)
 	conf.set_str	("gui:gui_text_color", vec3f_to_str(GuiTextColor));
 
 	// Text ui section
-	conf.set_boolean("tui:flag_show_tui", FlagShowTui);
+	conf.set_boolean("tui:flag_show_tui", false);
 	conf.set_boolean("tui:flag_show_tui_datetime", FlagShowTuiDateTime);
 	conf.set_boolean("tui:flag_show_tui_short_obj_info", FlagShowTuiShortInfo);
 
@@ -552,7 +553,6 @@ void stel_core::save_config_to(const string& confFile)
 	conf.set_boolean("navigation:flag_utc_time", FlagUTC_Time);
 
 	// Landscape section
-	conf.set_str	("landscape:landscape_name", landscape_name);
 	conf.set_boolean("landscape:flag_ground", FlagGround);
 	conf.set_boolean("landscape:flag_horizon", FlagHorizon);
 	conf.set_boolean("landscape:flag_fog", FlagFog);

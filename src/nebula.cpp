@@ -173,7 +173,7 @@ float Nebula::get_on_screen_size(const navigator * nav, const Projector* prj)
 void Nebula::draw_name(const Projector* prj)
 {   
     glColor3f(0.4,0.3,0.5);
-	gravity_label ? prj->print_gravity(nebula_font, XY[0], XY[1], name, 3, 3) :
+	gravity_label ? prj->print_gravity180(nebula_font, XY[0], XY[1], name, 3, 3) :
 		nebula_font->print(XY[0]+3,XY[1]+3, name);
 }
 

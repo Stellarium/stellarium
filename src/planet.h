@@ -128,6 +128,9 @@ public:
 	void set_sphere_scale(float s) {sphere_scale = s;}
 	float get_sphere_scale(void) const {return sphere_scale;}
 
+	void set_big_halo(const string& halotexfile);
+	void set_halo_size(float s) {big_halo_size = s;}
+
 	static void set_font(s_font* f) {planet_name_font = f;}
 	static void set_star_scale(float s) {star_scale = s;}
 	static void set_gravity_label_flag(bool gl) {gravity_label = gl;}
@@ -144,6 +147,9 @@ protected:
 	// Draw the circle and name of the planet
 	void draw_hints(const navigator* nav, const Projector* prj);
 
+	// Draw the big halo (for sun or moon)
+	void draw_big_halo(const navigator* nav, const Projector* prj, const tone_reproductor* eye);
+
     string name;
 	int flagHalo;					// Set wether a little "star like" halo will be drawn
 	int flag_lighting;				// Set wether light computation has to be proceed
@@ -158,6 +164,9 @@ protected:
 	float axis_rotation;			// Rotation angle of the planet on it's axis
     s_texture * tex_map;			// Planet map texture
 	s_texture * tex_halo;			// Little halo texture
+	s_texture * tex_big_halo;		// Big halo texture
+
+	float big_halo_size;				// Halo size on screen
 
 	ring* rings;					// Planet rings
 
