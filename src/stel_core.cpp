@@ -59,6 +59,7 @@ stel_core::~stel_core()
 	if (scripts) delete scripts;
 	if (commander) delete commander;
 	if(script_images) delete script_images;
+	if(config) delete config;
 
 	stel_object::delete_textures(); // Load the pointer textures 
 }
@@ -84,6 +85,8 @@ void stel_core::init(void)
 	// Set textures directory and suffix
 	s_texture::set_texDir(TextureDir);
 	s_texture::set_suffix(".png");
+
+	config = new SettingMgr();
 
 	commander = new StelCommandInterface(this);
 	scripts = new ScriptMgr(commander);
@@ -214,6 +217,12 @@ void stel_core::init(void)
 
 	// could load a startup script
 	// scripts->play_script("./scripts/startup.sts");
+
+
+	// TEMP
+	//	populate_setting_mgr(config);
+	//config->print_values();
+
 
 
 }
@@ -1408,5 +1417,128 @@ int stel_core::set_flag(string name, string value, bool trusted) {
 
 
   return(1);  // everything worked 
+
+}
+
+
+// until migration is complete, temporary method to load up setting mgr with config
+// needed for easy reset of settings after script completes
+
+void stel_core::populate_setting_mgr(SettingMgr *smgr) {
+
+  smgr->set("version", VERSION);
+  smgr->set("fullscreen", Fullscreen);
+  smgr->set("screen_w", screen_W);
+  smgr->set("screen_h", screen_H);
+  smgr->set("bpp_mode", bppMode);
+  smgr->set("horizontal_offset", horizontalOffset);
+  smgr->set("vertical_offset", verticalOffset);
+  smgr->set("maxfps", maxfps);
+  smgr->set("projector_type", ProjectorType);
+  smgr->set("viewport", ViewportType);
+  smgr->set("distortion_function", DistortionFunction);
+  smgr->set("sky_culture", SkyCulture);
+  smgr->set("sky_locale", SkyLocale);
+  smgr->set("star_scale", StarScale);
+  smgr->set("star_mag_scale", StarMagScale);
+  smgr->set("star_twinkle_amount", StarTwinkleAmount);
+  smgr->set("max_mag_star_name", MaxMagStarName);
+  smgr->set("flag_star_twinkle", FlagStarTwinkle);
+  smgr->set("flag_point_star", FlagPointStar);
+  smgr->set("flag_show_fps", FlagShowFps);
+  smgr->set("flag_menu", FlagMenu);
+  smgr->set("flag_help", FlagHelp);
+  smgr->set("flag_infos", FlagInfos);
+  smgr->set("flag_show_top_bar", FlagShowTopBar);
+  smgr->set("flag_show_time", FlagShowTime);
+  smgr->set("flag_show_date", FlagShowDate);
+  smgr->set("flag_show_app_name", FlagShowAppName);
+  smgr->set("flag_show_fov", FlagShowFov);
+  smgr->set("flag_show_selected_object_info", FlagShowSelectedObjectInfo);
+  smgr->set("gui_base_color", GuiBaseColor);
+  smgr->set("gui_text_color", GuiTextColor);
+  smgr->set("base_font_size", BaseFontSize);
+  smgr->set("azimuthal_color", AzimuthalColor);
+  smgr->set("equatorial_color", EquatorialColor);
+  smgr->set("equator_color", EquatorColor);
+  smgr->set("ecliptic_color", EclipticColor);
+  smgr->set("const_lines_color", ConstLinesColor);
+  smgr->set("const_names_color", ConstNamesColor);
+  smgr->set("nebula_label_color", NebulaLabelColor);
+  smgr->set("nebula_circle_color", NebulaCircleColor);
+  smgr->set("cardinal_color", CardinalColor);
+  smgr->set("planet_names_color", PlanetNamesColor);
+  smgr->set("planet_orbits_color", PlanetOrbitsColor);
+  smgr->set("object_trails_color", ObjectTrailsColor);
+  smgr->set("flag_enable_tui_menu", FlagEnableTuiMenu);
+  smgr->set("flag_show_gravity_ui", FlagShowGravityUi);
+  smgr->set("flag_show_tui_date_time", FlagShowTuiDateTime);
+  smgr->set("flag_show_tui_short_obj_info", FlagShowTuiShortObjInfo);
+  smgr->set("preset_sky_time", PresetSkyTime);
+  smgr->set("startup_time_mode", StartupTimeMode);
+  smgr->set("flag_enable_zoom_keys", FlagEnableZoomKeys);
+  smgr->set("flag_manual_zoom", FlagManualZoom);
+  smgr->set("flag_enable_move_keys", FlagEnableMoveKeys);
+  smgr->set("flag_enable_move_mouse", FlagEnableMoveMouse);
+  smgr->set("init_fov", InitFov);
+  smgr->set("init_view_pos", InitViewPos);
+  smgr->set("auto_move_duration", auto_move_duration);
+  smgr->set("flag_utc_time", FlagUTC_Time);
+  smgr->set("mouse_zoom", MouseZoom);
+  smgr->set("viewing_mode", ViewingMode);
+  smgr->set("flag_ground", FlagGround);
+  smgr->set("flag_horizon", FlagHorizon);
+  smgr->set("flag_fog", FlagFog);
+  smgr->set("flag_atmosphere", FlagAtmosphere);
+  smgr->set("atmosphere_fade_duration", AtmosphereFadeDuration);
+  smgr->set("flag_constellation_drawing", FlagConstellationDrawing);
+  smgr->set("flag_constellation_name", FlagConstellationName);
+  smgr->set("flag_constellation_art", FlagConstellationArt);
+  smgr->set("flag_constellation_pick", FlagConstellationPick);
+  smgr->set("flag_azimutal_grid", FlagAzimutalGrid);
+  smgr->set("flag_equatorial_grid", FlagEquatorialGrid);
+  smgr->set("flag_equator_line", FlagEquatorLine);
+  smgr->set("flag_ecliptic_line", FlagEclipticLine);
+  smgr->set("flag_cardinal_points", FlagCardinalPoints);
+  smgr->set("flag_gravity_labels", FlagGravityLabels);
+  smgr->set("flag_init_moon_scaled", FlagInitMoonScaled);
+  smgr->set("moon_scale", MoonScale);
+  smgr->set("constellation_art_intensity", ConstellationArtIntensity);
+  smgr->set("constellation_art_fade_duration", ConstellationArtFadeDuration);
+  smgr->set("flag_stars", FlagStars);
+  smgr->set("flag_star_name", FlagStarName);
+  smgr->set("flag_planets", FlagPlanets);
+  smgr->set("flag_planets_hints", FlagPlanetsHints);
+  smgr->set("flag_planets_orbits", FlagPlanetsOrbits);
+  smgr->set("flag_object_trails", FlagObjectTrails);
+  smgr->set("flag_nebula", FlagNebula);
+  smgr->set("flag_nebula_name", FlagNebulaName);
+  smgr->set("max_mag_nebula_name", MaxMagNebulaName);
+  smgr->set("flag_milky_way", FlagMilkyWay);
+  smgr->set("flag_bright_nebulae", FlagBrightNebulae);
+
+}
+
+
+// set config variables from a setting manager's values
+
+void stel_core::load_config_from_setting_mgr(SettingMgr *smgr) {
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 }
