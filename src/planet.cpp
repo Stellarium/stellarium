@@ -229,7 +229,7 @@ void sun_planet::compute_position(double date)
 	//glEnable(GL_LIGHTING);
 
     float tmp[4] = {0,0,0,1};
-    float tmp2[4] = {0.01,0.01,0.01,1};
+    //float tmp2[4] = {0.01,0.01,0.01,1};
     float tmp3[4] = {1000,1000,1000,1};
     float tmp4[4] = {1,1,1,1};
     glLightfv(GL_LIGHT1,GL_AMBIENT,tmp);

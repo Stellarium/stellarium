@@ -81,6 +81,16 @@ void Draw(int delta_time)
 	// Init openGL viewing with fov, screen size and clip planes
 	navigation.init_project_matrix(global.X_Resolution,global.Y_Resolution,0.00000001,1000);
 
+    if (global.FlagAtmosphere)       // Calc the atmosphere
+    {
+    	// Draw atmosphere every second frame because it's slow....
+        if (++timeAtmosphere>1 && global.SkyBrightness>0)
+        {
+	    	timeAtmosphere=0;
+            CalcAtmosphere();
+        }
+    }
+
     // Set openGL drawings in equatorial coordinates
     navigation.switch_to_earth_equatorial();
 
@@ -96,8 +106,8 @@ void Draw(int delta_time)
 		HipVouteCeleste->Draw();    // Draw the stars
     }
 
-    if (global.FlagAtmosphere && global.SkyBrightness>0)
-		DrawAtmosphere2();	// Draw the atmosphere
+	if (global.FlagAtmosphere && global.SkyBrightness>0)
+	DrawAtmosphere2();	// Draw the atmosphere
 
     //Sun->DrawMoonDaylight();
 
@@ -122,15 +132,7 @@ void Draw(int delta_time)
 		DrawMeridiensAzimut();       // Draw the "Altazimuthal meridian" lines
         DrawParallelsAzimut();       // Draw the "Altazimuthal parallel" lines
     }
-    if (global.FlagAtmosphere)       // Calc the atmosphere
-    {
-    	// Draw atmosphere every second frame because it's slow....
-        if (++timeAtmosphere>1 && global.SkyBrightness>0)
-        {
-	    	timeAtmosphere=0;
-            CalcAtmosphere();
-        }
-    }
+
     if (global.FlagHorizon && global.FlagGround)
         DrawDecor(2);                               // Draw the mountains
     if (global.FlagGround) DrawGround();            // Draw the ground
@@ -252,19 +254,22 @@ void Update(Uint32 delta_time)
 	navigation.update_transform_matrices();
 	navigation.update_vision_vector(delta_time);
 
-
     // compute sky brightness
-    if (global.FlagAtmosphere)
-    {
-        Vec3d sunPos = Sun->get_ecliptic_pos();
+    /*if (global.FlagAtmosphere)
+    {*/
+        Vec3d temp(0.,0.,0.);
+    	Vec3d sunPos = navigation.helio_to_local(&temp);
         sunPos.normalize();
-        global.SkyBrightness=asin(sunPos[1])+0.1;
+        global.SkyBrightness=asin(sunPos[2])+0.1;
         if (global.SkyBrightness<0) global.SkyBrightness=0;
-    }
+    /*}
     else
     {
         global.SkyBrightness=0;
-    }
+    }*/
+
+
+
 	if (selected_object) selected_object->update();
 	return;
 }
