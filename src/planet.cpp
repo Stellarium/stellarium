@@ -125,11 +125,10 @@ void planet::compute_position(double date)
 	if (delta_orbitJD > 0 && fabs(last_orbitJD-date)>delta_orbitJD)
 	{
 
-
 	  // calculate orbit first (for line drawing)
 	  double date_increment = re.sidereal_period/ORBIT_SEGMENTS;
 	  double calc_date;
-	  int delta_points = 0.5 + (date - last_orbitJD)/date_increment;
+	  int delta_points = (int)(0.5 + (date - last_orbitJD)/date_increment);
 	  double new_date = last_orbitJD + delta_points*date_increment;
 
 	  //	  printf( "Updating orbit coordinates for %s (delta %f) (%d points)\n", name.c_str(), delta_orbitJD, delta_points);
@@ -648,8 +647,6 @@ void planet::draw_orbit(const navigator * nav, const Projector* prj) {
 
   glColor3f(1.0,0.5,0.8);
 	
-  //  if(name=="Pluto") printf("\nDrawing pluto orbit\n");
-
   int on=0;
   int d;
   for( int n=0; n<=ORBIT_SEGMENTS; n++) {
@@ -662,14 +659,9 @@ void planet::draw_orbit(const navigator * nav, const Projector* prj) {
 
     if(prj->project_helio(orbit[d],onscreen)) {
       if(!on) glBegin(GL_LINE_STRIP);
-
-      //      if(name=="Pluto") printf("vertex (%f, %f) [on:%d] d=%d\n", onscreen[0], onscreen[1], on,d);
-
-      glVertex3dv(onscreen);
+      glVertex3d(onscreen[0], onscreen[1], 0);
       on=1;
     } else if( on ) {
-
-      //      if(name=="Pluto") printf("Orbit off screen [%d]\n", d);
       glEnd();
       on=0;
     }
