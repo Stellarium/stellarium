@@ -54,6 +54,12 @@ public:
 	double get_fov(void) const {return fov;}
 	virtual void change_fov(double deltaFov);
 
+	// Update auto_zoom if activated
+	void update_auto_zoom(int delta_time);
+
+	// Zoom to the given field of view
+	void zoom_to(double aim_fov, float move_duration = 1.);
+
 	void set_screen_size(int w, int h);
 	void maximize_viewport(void) {set_viewport(0,0,screenW,screenH); viewport_type = MAXIMIZED;}
 	void set_square_viewport(void);
@@ -153,6 +159,16 @@ public:
 		float xshift = 0, float yshift = 0) const;
 
 protected:
+
+	// Struct used to store data for auto mov
+	typedef struct
+	{
+		double start;
+	    double aim;
+	    float speed;
+	    float coef;
+	}auto_zoom;
+
 	// Init the viewing matrix from the fov, the clipping planes and screen ratio
 	// The function is a reimplementation of gluPerspective
 	virtual void init_project_matrix(void);
@@ -184,6 +200,11 @@ protected:
 				1.0);
 		v.transfo4d(m);
 	}
+
+	// Automove
+	auto_zoom zoom_move;					// Current auto movement
+    int flag_auto_zoom;				// Define if autozoom is on or off
+
 };
 
 #endif // _PROJECTOR_H_
