@@ -631,11 +631,12 @@ void stel_core::load_config_from(const string& confFile)
 	FlagEnableZoomKeys	= conf.get_boolean("navigation:flag_enable_zoom_keys");
 	FlagManualZoom		= conf.get_boolean("navigation:flag_manual_zoom");
 	FlagEnableMoveKeys	= conf.get_boolean("navigation:flag_enable_move_keys");
-	InitFov				= conf.get_double ("navigation","init_fov",60.);
+	FlagEnableMoveMouse	= conf.get_boolean("navigation","flag_enable_move_mouse",1);
+	InitFov	                = conf.get_double ("navigation","init_fov",60.);
 	InitViewPos 		= str_to_vec3f(conf.get_str("navigation:init_view_pos").c_str());
 	auto_move_duration	= conf.get_double ("navigation","auto_move_duration",1.5);
 	FlagUTC_Time		= conf.get_boolean("navigation:flag_utc_time");
-	MouseZoom			= conf.get_int("navigation","mouse_zoom",30);
+	MouseZoom		= conf.get_int("navigation","mouse_zoom",30);
 
 	// Viewing Mode
 	tmpstr = conf.get_str("navigation:viewing_mode");
@@ -777,6 +778,7 @@ void stel_core::save_config_to(const string& confFile)
 	conf.set_boolean("navigation:flag_enable_zoom_keys", FlagEnableZoomKeys);
 	conf.set_boolean("navigation:flag_manual_zoom", FlagManualZoom);
 	conf.set_boolean("navigation:flag_enable_move_keys", FlagEnableMoveKeys);
+	conf.set_boolean("navigation:flag_enable_move_mouse", FlagEnableMoveMouse);
 	conf.set_double ("navigation:init_fov", InitFov);
 	conf.set_str	("navigation:init_view_pos", vec3f_to_str(InitViewPos));
 	conf.set_double ("navigation:auto_move_duration", auto_move_duration);
@@ -840,40 +842,44 @@ int stel_core::handle_clic(Uint16 x, Uint16 y, Uint8 state, Uint8 button)
 // Handle mouse move
 int stel_core::handle_move(int x, int y)
 {
-	// Turn if the mouse is at the edge of the screen.
-	if (x == 0)
-	{
-		turn_left(1);
-		is_mouse_moving_horiz = true;
-	}
-	else if (x == screen_W - 1)
-	{
-		turn_right(1);
-		is_mouse_moving_horiz = true;
-	}
-	else if (is_mouse_moving_horiz)
-	{
-		turn_left(0);
-		is_mouse_moving_horiz = false;
-	}
+  // Turn if the mouse is at the edge of the screen.
+  // unless config asks otherwise
+  if(FlagEnableMoveMouse) {
+    if (x == 0)
+      {
+	turn_left(1);
+	is_mouse_moving_horiz = true;
+      }
+    else if (x == screen_W - 1)
+      {
+	turn_right(1);
+	is_mouse_moving_horiz = true;
+      }
+    else if (is_mouse_moving_horiz)
+      {
+	turn_left(0);
+	is_mouse_moving_horiz = false;
+      }
 
-	if (y == 0)
-	{
-		turn_up(1);
-		is_mouse_moving_vert = true;
-	}
-	else if (y == screen_H - 1)
-	{	
-		turn_down(1);
-		is_mouse_moving_vert = true;
-	}
-	else if (is_mouse_moving_vert)
-	{
-		turn_up(0);
-		is_mouse_moving_vert = false;
-	}
+    if (y == 0)
+      {
+	turn_up(1);
+	is_mouse_moving_vert = true;
+      }
+    else if (y == screen_H - 1)
+      {	
+	turn_down(1);
+	is_mouse_moving_vert = true;
+      }
+    else if (is_mouse_moving_vert)
+      {
+	turn_up(0);
+	is_mouse_moving_vert = false;
+      }
+  }
 
-	return ui->handle_move(x, y);
+  return ui->handle_move(x, y);
+
 }
 
 // Handle key press and release
@@ -1308,6 +1314,7 @@ int stel_core::set_flag(string name, string value) {
     else if(name=="show_tui_short_obj_info") FlagShowTuiShortObjInfo = !FlagShowTuiShortObjInfo;
     else if(name=="enable_zoom_keys") FlagEnableZoomKeys = !FlagEnableZoomKeys;
     else if(name=="enable_move_keys") FlagEnableMoveKeys = !FlagEnableMoveKeys;
+    else if(name=="enable_move_mouse") FlagEnableMoveMouse = !FlagEnableMoveMouse;
     else if(name=="utc_time") FlagUTC_Time = !FlagUTC_Time;
     else if(name=="manual_zoom") FlagManualZoom = !FlagManualZoom;
     else if(name=="ground") FlagGround = !FlagGround;
