@@ -329,8 +329,15 @@ void stel_core::draw(int delta_time)
     if (selected_object) selected_object->draw_pointer(delta_time, projection, navigation);
 
 	// Draw the planets
-	if (FlagPlanets) ssystem->draw(FlagPlanetsHints, projection, navigation, tone_converter,
-		FlagGravityLabels, FlagPointStar, FlagPlanetsOrbits);
+	if (FlagPlanets) {
+	  if( FlagPlanetsOrbits && selected_planet ) {
+	    // draw orbit only for selected planet
+	    selected_planet->draw_orbit(navigation, projection);
+	  }
+	  ssystem->draw(FlagPlanetsHints, projection, navigation, tone_converter,
+			FlagGravityLabels, FlagPointStar, FlagPlanetsOrbits && selected_planet==NULL);
+
+	}
 
 	// Set openGL drawings in local coordinates i.e. generally altazimuthal coordinates
 	navigation->switch_to_local();
