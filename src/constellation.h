@@ -52,7 +52,8 @@ private:
 	static bool gravity_label;
 
 	s_texture* art_tex;
-
+	static s_font* constellation_font;		// Font used for load printing
+	
 	Vec3f art_vertex[16];
 	bool art_on;
 	float art_intensity;

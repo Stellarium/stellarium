@@ -27,10 +27,11 @@ class Constellation_mgr
 {
 public:
   //    Constellation_mgr(Vec3f lines_color = Vec3f(0.1, 0.15, 0.2), Vec3f lines_color = Vec3f(0.1,0.2,0.3));
-    Constellation_mgr(string _data_dir, string _sky_culture, string _sky_culture, Hip_Star_mgr *_hip_stars, 
-		      string _font_filename, Vec3f _lines_color, Vec3f _names_color);
+    Constellation_mgr(string _data_dir, string _sky_culture, string _sky_locale, 
+		Hip_Star_mgr *_hip_stars, string _font_filename, int barx, int bary, 
+		Vec3f _lines_color, Vec3f _names_color);
     virtual ~Constellation_mgr();
-    void set_sky_culture(string _sky_culture);
+    void set_sky_culture(string _sky_culture, const string& _font_fileName, int barx, int bary);
     void show_art(void);
     void hide_art(void);
     void draw(Projector* prj) const;
@@ -46,7 +47,7 @@ public:
 private:
 
     void load(const string& catName, const string& artCatName,
-		Hip_Star_mgr * _VouteCeleste);
+		Hip_Star_mgr * _VouteCeleste, const string& _font_fileName, int barx, int bary);
 
     vector<Constellation*> asterisms;
     s_font * asterFont;

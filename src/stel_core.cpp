@@ -128,10 +128,6 @@ void stel_core::init(void)
 	milky_way = new MilkyWay("milkyway");
 	meteors = new Meteor_mgr(projection, navigation, tone_converter, 10, 60);
 
-
-	// Load constellations
-	asterisms = new Constellation_mgr(DataDir, SkyCulture, SkyLocale, hip_stars, "spacefont.txt", ConstLinesColor, ConstNamesColor);
-
 	landscape = Landscape::create_from_file(DataDir + "landscapes.ini", observatory->get_landscape_name());
 
 	// Load the pointer textures
@@ -159,8 +155,12 @@ void stel_core::init(void)
 	navigation->update_model_view_mat();
 
 	// Load the nebulas data TODO : add NGC objects
-	glClear(GL_COLOR_BUFFER_BIT);
 	projection->set_orthographic_projection();
+	glClear(GL_COLOR_BUFFER_BIT);
+	
+	// Load constellations
+	asterisms = new Constellation_mgr(DataDir, SkyCulture, SkyLocale, hip_stars, "spacefont.txt", screen_W/2-150, screen_H/2-20, ConstLinesColor, ConstNamesColor);
+
 	nebulas->read(DataDir + "spacefont.txt", DataDir + "messier.fab", screen_W/2-150, screen_H/2-20);
 	projection->reset_perspective_projection();
 
@@ -887,7 +887,7 @@ void stel_core::update_move(int delta_time)
     if (deltaFov<0)
     {
 		deltaFov = -depl*5;
-		if (deltaFov<-20) deltaFov = -20;
+		if (deltaFov<-0.15*projection->get_fov()) deltaFov = -0.15*projection->get_fov();
     }
     else
     {

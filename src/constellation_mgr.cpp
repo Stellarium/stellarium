@@ -23,7 +23,7 @@
 #include "constellation_mgr.h"
 
 // constructor which loads all data from appropriate files
-Constellation_mgr::Constellation_mgr(string _data_dir, string _sky_culture, string _sky_locale, Hip_Star_mgr *_hip_stars, string _font_filename, 
+Constellation_mgr::Constellation_mgr(string _data_dir, string _sky_culture, string _sky_locale, Hip_Star_mgr *_hip_stars, string _font_filename, int barx, int bary, 
 				     Vec3f _lines_color, Vec3f _names_color) :
   asterFont(NULL), lines_color(_lines_color), names_color(_names_color), hipStarMgr(_hip_stars), 
   dataDir( _data_dir), skyCulture(_sky_culture)
@@ -38,7 +38,7 @@ Constellation_mgr::Constellation_mgr(string _data_dir, string _sky_culture, stri
     }
 
   load(dataDir + "sky_cultures/" + skyCulture + "/constellationship.fab",
-       dataDir + "sky_cultures/" + skyCulture + "/constellationsart.fab", hipStarMgr);
+       dataDir + "sky_cultures/" + skyCulture + "/constellationsart.fab", hipStarMgr, dataDir + _font_filename, barx, bary);
 
   // load translated labels
   set_sky_locale(_sky_locale);
@@ -58,6 +58,8 @@ Constellation_mgr::~Constellation_mgr()
     }
     if (asterFont) delete asterFont;
     asterFont = NULL;
+	if (Constellation::constellation_font) delete Constellation::constellation_font;
+	Constellation::constellation_font = NULL;
 }
 
 void Constellation_mgr::show_art(void)
@@ -82,7 +84,7 @@ void Constellation_mgr::hide_art(void)
   }
 }
 
-void Constellation_mgr::set_sky_culture(string _sky_culture)
+void Constellation_mgr::set_sky_culture(string _sky_culture, const string& _font_fileName, int barx, int bary)
 {
 
   if( _sky_culture == skyCulture ) return;  // no change
@@ -101,7 +103,8 @@ void Constellation_mgr::set_sky_culture(string _sky_culture)
   // load new culture data
   printf( "Changing sky culture to %s\n", skyCulture.c_str() );
   load(dataDir + "sky_cultures/" + skyCulture + "/constellationship.fab",
-       dataDir + "sky_cultures/" + skyCulture + "/constellationsart.fab", hipStarMgr);
+       dataDir + "sky_cultures/" + skyCulture + "/constellationsart.fab", 
+	   hipStarMgr, _font_fileName, barx, bary);
 
   // load translated labels
   set_sky_locale(skyLocale);
@@ -109,7 +112,7 @@ void Constellation_mgr::set_sky_culture(string _sky_culture)
 }
 
 // Load from file
-void Constellation_mgr::load(const string& fileName, const string& artfileName, Hip_Star_mgr * _VouteCeleste)
+void Constellation_mgr::load(const string& fileName, const string& artfileName, Hip_Star_mgr * _VouteCeleste, const string& _font_fileName, int barx, int bary)
 {
 	printf("Loading constellation data...\n");
 
@@ -136,6 +139,13 @@ void Constellation_mgr::load(const string& fileName, const string& artfileName, 
     }
     fclose(fic);
 
+    if (!Constellation::constellation_font) Constellation::constellation_font = new s_font(12.,"spacefont", _font_fileName); // load Font
+    if (!Constellation::constellation_font)
+    {
+	    printf("Can't create constellation font\n");
+        exit(1);
+    }	
+	
 	fic = fopen(artfileName.c_str(),"r");
     if (!fic)
     {
@@ -155,6 +165,19 @@ void Constellation_mgr::load(const string& fileName, const string& artfileName, 
 	char texfile[255];
 	unsigned int x1, y1, x2, y2, x3, y3, hp1, hp2, hp3;
 	int texSize;
+	char tmpstr[2000];
+	int total=0;	
+	
+	// determine total number to be loaded for percent complete display
+    while( fgets(tmpstr,2000,fic) ) {
+      total++;
+    }
+    rewind(fic);	
+	
+	int current=0;
+    glDisable(GL_BLEND);
+    glLineWidth(2);
+	
     while(!feof(fic))
     {
         if (fscanf(fic,"%s %s %u %u %u %u %u %u %u %u %u\n",shortname,texfile,&x1,&y1,&hp1,&x2,&y2,&hp2,
@@ -171,6 +194,38 @@ void Constellation_mgr::load(const string& fileName, const string& artfileName, 
 			exit(-1);
 		}
 
+		// Draw loading bar
+		glClear(GL_COLOR_BUFFER_BIT);
+		sprintf(tmpstr, "Loading constellations: %d/%d", current, total);
+		glColor3f(1,1,1);
+		glDisable(GL_TEXTURE_2D);
+		glBegin(GL_TRIANGLE_STRIP);
+			glTexCoord2i(1,0);              // Bottom Right
+			glVertex3f(barx+302,bary+22, 0.0f);
+			glTexCoord2i(0,0);              // Bottom Left
+			glVertex3f(barx-2,bary+22, 0.0f);
+			glTexCoord2i(1,1);              // Top Right
+			glVertex3f(barx+302, bary-2,0.0f);
+			glTexCoord2i(0,1);              // Top Left
+			glVertex3f(barx-2,bary-2,0.0f);
+		glEnd ();
+		glColor3f(0.0f,0.0f,1.0f);
+		glBegin(GL_TRIANGLE_STRIP);
+			glTexCoord2i(1,0);              // Bottom Right
+			glVertex3f(barx+300*current/total,bary+20, 0.0f);
+			glTexCoord2i(0,0);              // Bottom Left
+			glVertex3f(barx,bary+20, 0.0f);
+			glTexCoord2i(1,1);              // Top Right
+			glVertex3f(barx+300*current/total, bary,0.0f);
+			glTexCoord2i(0,1);              // Top Left
+			glVertex3f(barx,bary,0.0f);
+		glEnd ();
+		glColor3f(1,1,1);
+		glEnable(GL_TEXTURE_2D);
+		Constellation::constellation_font->print(barx-2,bary+35, tmpstr);
+		SDL_GL_SwapBuffers();				// And swap the buffers
+	
+		
 		cons = NULL;
 		cons = find_from_short_name(shortname);
 		if (!cons)
@@ -217,6 +272,9 @@ void Constellation_mgr::load(const string& fileName, const string& artfileName, 
 		cons->art_vertex[13] = Vec3f(X*Vec3f(texSize/2, texSize/2 + 0,0));
 		cons->art_vertex[14] = Vec3f(X*Vec3f(texSize/2, texSize/2 + texSize/2,0));
 		cons->art_vertex[15] = Vec3f(X*Vec3f(0, texSize/2 + texSize/2,0));
+	     
+		current++;
+		
     }
     fclose(fic);
 }
