@@ -1,4 +1,4 @@
-/* 
+/*
  * Stellarium
  * Copyright (C) 2002 Fabien Chéreau
  * 
@@ -21,7 +21,7 @@
 #define _SHOOTING_STAR_H_
 
 #include "stellarium.h"
-#include "s_utility.h"
+#include "stel_utility.h"
 #include "s_texture.h"
 
 class ShootingStar  

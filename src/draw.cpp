@@ -23,11 +23,8 @@
  */
 
 #include "draw.h"
-#include "MathOps.h"
 #include "stellarium.h"
-#include "navigation.h"
 #include "vislimit.h"
-#include "planet_mgr.h"
 
 extern s_texture * texIds[200];            // Common Textures
 float DmeriParal[51][2];                   // For grids drawing optimisation
@@ -399,7 +396,7 @@ void DrawFog(void)
     gluQuadricTexture(Horizon,GL_TRUE);
     gluCylinder(Horizon,10,10,10,8,1);
     gluDeleteQuadric(Horizon);
-    glPopMatrix();  
+    glPopMatrix();
 }
 
 // Draw a point... (used for tests)
@@ -413,86 +410,6 @@ void DrawPoint(float X,float Y,float Z)
         glEnd();
 }
 
-// Draw the pointer
-void DrawPointer(Vec3d obj, float size, vec3_t RGB, int ObjType)
-{   double x,y;
-    Project(obj[0],obj[1],obj[2],x,y);
-    setOrthographicProjection(global.X_Resolution, global.Y_Resolution);
-    glPushMatrix();
-    glLoadIdentity();
-    glColor3fv(RGB);
-    if (ObjType==0 )    // star
-    {   glBindTexture (GL_TEXTURE_2D, texIds[12]->getID());
-        glEnable(GL_TEXTURE_2D);
-        glEnable(GL_BLEND);
-        glTranslatef(x, global.Y_Resolution-y,0.0f);
-        glRotatef((float)global.Timefr/20,0,0,1);
-        glBegin(GL_QUADS );
-            glTexCoord2f(0.0f,0.0f);    glVertex3f(-13,-13,0);      //Bas Gauche
-            glTexCoord2f(1.0f,0.0f);    glVertex3f(13,-13,0);       //Bas Droite
-            glTexCoord2f(1.0f,1.0f);    glVertex3f(13,13,0);        //Haut Droit
-            glTexCoord2f(0.0f,1.0f);    glVertex3f(-13,13,0);       //Haut Gauche
-        glEnd ();
-    }
-    if (ObjType==1 || ObjType==2)   // nebula : 1 or planet : 2
-    {   if (ObjType==2)
-        {   glBindTexture(GL_TEXTURE_2D, texIds[26]->getID());
-            size*=2000./global.Fov;
-            if (size < 15) size=10;
-            size+=global.Fov/4;
-            size+=size*sin((float)global.Timefr/400)/200*global.Fov;
-        }
-        if (ObjType==1)
-        {   glBindTexture(GL_TEXTURE_2D, texIds[27]->getID());
-            size*=10/global.Fov;
-            if (size<15) size=15;
-            size+=size*sin((float)global.Timefr/400)/10;
-        }
-        
-        glEnable(GL_TEXTURE_2D);
-        glEnable(GL_BLEND);
-        glTranslatef(x, global.Y_Resolution-y,0.0f);
-        if (ObjType==2) glRotatef((float)global.Timefr/100,0,0,-1);
-
-        glTranslatef(-size/2, -size/2,0.0f);
-        glRotatef(90,0,0,1);
-        glBegin(GL_QUADS );
-            glTexCoord2f(0.0f,0.0f);    glVertex3f(-10,-10,0);      //Bas Gauche
-            glTexCoord2f(1.0f,0.0f);    glVertex3f(10,-10,0);       //Bas Droite
-            glTexCoord2f(1.0f,1.0f);    glVertex3f(10,10,0);        //Haut Droit
-            glTexCoord2f(0.0f,1.0f);    glVertex3f(-10,10,0);       //Haut Gauche
-        glEnd ();
-
-        glRotatef(-90,0,0,1);
-        glTranslatef(0,size,0.0f);
-        glBegin(GL_QUADS );
-            glTexCoord2f(0.0f,0.0f);    glVertex3f(-10,-10,0);      //Bas Gauche
-            glTexCoord2f(1.0f,0.0f);    glVertex3f(10,-10,0);       //Bas Droite
-            glTexCoord2f(1.0f,1.0f);    glVertex3f(10,10,0);        //Haut Droit
-            glTexCoord2f(0.0f,1.0f);    glVertex3f(-10,10,0);       //Haut Gauche
-        glEnd ();
-
-        glRotatef(-90,0,0,1);
-        glTranslatef(0, size,0.0f);
-        glBegin(GL_QUADS );
-            glTexCoord2f(0.0f,0.0f);    glVertex3f(-10,-10,0);      //Bas Gauche
-            glTexCoord2f(1.0f,0.0f);    glVertex3f(10,-10,0);       //Bas Droite
-            glTexCoord2f(1.0f,1.0f);    glVertex3f(10,10,0);        //Haut Droit
-            glTexCoord2f(0.0f,1.0f);    glVertex3f(-10,10,0);       //Haut Gauche
-        glEnd ();
-
-        glRotatef(-90,0,0,1);
-        glTranslatef(0,size,0);
-        glBegin(GL_QUADS );
-            glTexCoord2f(0.0f,0.0f);    glVertex3f(-10,-10,0);      //Bas Gauche
-            glTexCoord2f(1.0f,0.0f);    glVertex3f(10,-10,0);       //Bas Droite
-            glTexCoord2f(1.0f,1.0f);    glVertex3f(10,10,0);        //Haut Droit
-            glTexCoord2f(0.0f,1.0f);    glVertex3f(-10,10,0);       //Haut Gauche
-        glEnd ();
-    }
-    glPopMatrix();
-    resetPerspectiveProjection();
-}
 
 // Draw the mountains with a few pieces of a big texture
 void DrawDecor(int nb)
@@ -526,26 +443,12 @@ void DrawDecor(int nb)
     }
     glPopMatrix();
 }
-/*
-// Draw the sky
-void DrawAtmosphere(void)
-{   glPushMatrix(); 
-    glColor4f(0.6*global.SkyBrightness, 0.6*global.SkyBrightness, 1.0*global.SkyBrightness,2*global.SkyBrightness);
-    glEnable(GL_TEXTURE_2D);
-    glEnable(GL_BLEND);
-    glBindTexture(GL_TEXTURE_2D, texIds[4]->getID());
 
-    glRotatef(-90,1,0,0);
-    GLUquadricObj * Atmosphere=gluNewQuadric();
-    gluQuadricTexture(Atmosphere,GL_TRUE);
-    gluSphere(Atmosphere,10,20,20);
-    gluDeleteQuadric(Atmosphere);
-    glPopMatrix();
-}
-*/
+
 // Draw the ground
 void DrawGround(void)
-{   glPushMatrix();
+{
+	glPushMatrix();
     glColor3f(global.SkyBrightness, global.SkyBrightness, global.SkyBrightness);
     glEnable(GL_TEXTURE_2D);
     glDisable(GL_BLEND);

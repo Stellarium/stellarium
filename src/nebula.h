@@ -1,4 +1,4 @@
-/* 
+/*
  * Stellarium
  * Copyright (C) 2002 Fabien Chéreau
  * 
@@ -21,10 +21,11 @@
 #define _NEBULA_H_
 
 #include "stellarium.h"
-#include "s_utility.h"
+#include "stel_utility.h"
 #include "s_texture.h"
+#include "stel_object.h"
 
-class Nebula  
+class Nebula : public stel_object
 {
 friend class Nebula_mgr;
 public:
@@ -35,6 +36,8 @@ public:
     void DrawName();
     void DrawCircle();
     int ReadTexture();
+	unsigned char get_type(void) {return STEL_OBJECT_NEBULA;}
+	Vec3d get_equ_pos(void) {return XYZ;}
 private:
     static s_texture * texCircle;
     short posDash;
@@ -43,11 +46,11 @@ private:
     unsigned int NGC;       // NGC catalog number
     char Name[40];          // Nebulae Name
     float Mag;              // Apparent magnitude
-    vec3_t XYZ;             // Cartesian position
+    Vec3d XYZ;             // Cartesian position
     char Type[4];           // Nebulae type
     double XY[3];           // 2D Position
-    float RaRad;            // Right Ascention in radians
-    float DecRad;           // Declinaison in radians
+    double RaRad;            // Right Ascention in radians
+    double DecRad;           // Declinaison in radians
     float * matTransfo;     // Transformation matrix used to draw the nebulae
     float Rotation;         // Rotation pour la mettre dans le bon sens...
     float Taille;           // Taille en minute d'arc
