@@ -33,6 +33,7 @@ using namespace std;
 #include "nebula_mgr.h"
 #include "stel_atmosphere.h"
 #include "tone_reproductor.h"
+#include "s_gui.h"
 #include "stel_ui.h"
 #include "solarsystem.h"
 #include "stel_utility.h"
@@ -43,7 +44,6 @@ using namespace std;
 class stel_core
 {
 friend class stel_ui;
-friend class stel_sdl;
 public:
     stel_core();
     virtual ~stel_core();
@@ -63,18 +63,24 @@ public:
 	stel_object * find_stel_object(int x, int y);
 	stel_object * find_stel_object(Vec3d);
 
-	// Viewing direction function : 1 move, 0 stop.
-	void turn_right(int);
-	void turn_left(int);
-	void turn_up(int);
-	void turn_down(int);
-	void zoom_in(int);
-	void zoom_out(int);
-	
 	// Increment/decrement smoothly the vision field and position
 	void update_move(int delta_time);
 
 	void set_screen_size(int w, int h);
+
+	// Handle mouse clics
+	int handle_clic(Uint16 x, Uint16 y, Uint8 state, Uint8 button);
+	// Handle mouse move
+	int handle_move(int x, int y);
+	// Handle key press and release
+	int handle_keys(SDLKey key, S_GUI_VALUE state);
+
+	int get_screen_W(void) const {return screen_W;}
+	int get_screen_H(void) const {return screen_H;}
+	int get_bppMode(void) const {return bppMode;}
+	int get_Fullscreen(void) const {return Fullscreen;}
+
+	const char* get_DataDir(void) const {return DataDir;}
 
 private:
 
@@ -187,6 +193,14 @@ private:
 
 	int FlagTimePause;
 	double temp_time_velocity;			// Used to store time speed while in pause
+
+	// Viewing direction function : 1 move, 0 stop.
+	void turn_right(int);
+	void turn_left(int);
+	void turn_up(int);
+	void turn_down(int);
+	void zoom_in(int);
+	void zoom_out(int);
 };
 
 #endif // _STEL_CORE_H_

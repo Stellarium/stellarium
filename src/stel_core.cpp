@@ -23,6 +23,8 @@
 #include "stellastro.h"
 #include "draw.h"
 
+//#include <functional>
+
 stel_core::stel_core() : screen_W(800), screen_H(600), bppMode(16), Fullscreen(0),
 	navigation(NULL), projection(NULL), selected_object(NULL), hip_stars(NULL), asterisms(NULL),
 	nebulas(NULL), atmosphere(NULL), tone_converter(NULL), selected_constellation(NULL), conf(NULL),
@@ -185,6 +187,8 @@ void stel_core::init(void)
 	navigation->update_model_view_mat();
 
 	glClear(GL_COLOR_BUFFER_BIT);
+
+	//unary_function f = mem_fun(navigator::update_model_view_mat);
 }
 
 
@@ -487,6 +491,64 @@ stel_object * stel_core::find_stel_object(int x, int y)
 	return find_stel_object(v);
 }
 
+// Handle mouse clics
+int stel_core::handle_clic(Uint16 x, Uint16 y, Uint8 state, Uint8 button)
+{
+	return ui->handle_clic(x, y, state, button);
+}
+
+// Handle mouse move
+int stel_core::handle_move(int x, int y)
+{
+	return ui->handle_move(x, y);
+}
+
+// Handle key press and release
+int stel_core::handle_keys(SDLKey key, S_GUI_VALUE state)
+{
+	if (!ui->handle_keys(key, state))
+	{
+		if (state == S_GUI_PRESSED)
+		{
+    		// Direction and zoom deplacements
+    		if (key==SDLK_LEFT) turn_left(1);
+    		if (key==SDLK_RIGHT) turn_right(1);
+    		if (key==SDLK_UP)
+			{
+				if (SDL_GetModState() & KMOD_CTRL) zoom_in(1);
+				else turn_up(1);
+			}
+    		if (key==SDLK_DOWN)
+			{
+				if (SDL_GetModState() & KMOD_CTRL) zoom_out(1);
+				else turn_down(1);
+			}
+    		if (key==SDLK_PAGEUP) zoom_in(1);
+    		if (key==SDLK_PAGEDOWN) zoom_out(1);
+		}
+		else
+		{
+		    // When a deplacement key is released stop mooving
+    		if (key==SDLK_LEFT) turn_left(0);
+			if (key==SDLK_RIGHT) turn_right(0);
+			if (SDL_GetModState() & KMOD_CTRL)
+			{
+				if (key==SDLK_UP) zoom_in(0);
+				if (key==SDLK_DOWN) zoom_out(0);
+			}
+			else
+			{
+				if (key==SDLK_UP) turn_up(0);
+				if (key==SDLK_DOWN) turn_down(0);
+			}
+
+    		if (key==SDLK_PAGEUP) zoom_in(0);
+			if (key==SDLK_PAGEDOWN) zoom_out(0);
+		}
+		return 0;
+	}
+	return 1;
+}
 
 void stel_core::turn_right(int s)
 {
