@@ -56,7 +56,7 @@ planet::~planet()
 }
 
 // Return the information string "ready to print" :)
-void planet::get_info_string(char * s, navigator * nav) const
+void planet::get_info_string(char * s, const navigator * nav) const
 {
 	double tempDE, tempRA;
 	Vec3d equPos = get_earth_equ_pos(nav);
@@ -78,7 +78,7 @@ void planet::set_rotation_elements(float _period, float _offset, double _epoch, 
 
 
 // Return the planet position in rectangular earth equatorial coordinate
-Vec3d planet::get_earth_equ_pos(navigator * nav) const
+Vec3d planet::get_earth_equ_pos(const navigator * nav) const
 {
 	Vec3d v = get_heliocentric_ecliptic_pos();
 	return nav->helio_to_earth_pos_equ(v);		// this is earth equatorial but centered
@@ -200,13 +200,13 @@ void planet::add_satellite(planet*p)
 }
 
 // Return the radius of a circle containing the object on screen
-float planet::get_on_screen_size(navigator * nav, Projector* prj)
+float planet::get_on_screen_size(const navigator * nav, const Projector* prj)
 {
 	return atanf(radius*2.f/get_earth_equ_pos(nav).length())*180./M_PI/prj->get_fov()*prj->scrH();
 }
 
 // Draw the planet and all the related infos : name, circle etc..
-void planet::draw(int hint_ON, Projector* prj, navigator * nav)
+void planet::draw(int hint_ON, Projector* prj, const navigator * nav)
 {
 	Mat4d mat = mat_local_to_parent;
 	planet * p = parent;
@@ -260,7 +260,7 @@ void planet::draw(int hint_ON, Projector* prj, navigator * nav)
 	glPopMatrix();
 }
 
-void planet::draw_hints(navigator* nav, Projector* prj)
+void planet::draw_hints(const navigator* nav, const Projector* prj)
 {
 	prj->set_orthographic_projection();    // 2D coordinate
 
@@ -313,7 +313,7 @@ void planet::draw_sphere(void)
 	glDisable(GL_LIGHTING);
 }
 
-void planet::draw_halo(navigator* nav, Projector* prj)
+void planet::draw_halo(const navigator* nav, const Projector* prj)
 {
 	float rmag = 5;//lim*du->screenH*100;
 	if (rmag>0.5)

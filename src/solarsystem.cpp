@@ -221,7 +221,7 @@ void SolarSystem::compute_trans_matrices(double date)
 }
 
 // Draw all the elements of the solar system
-void SolarSystem::draw(int hint_ON, Projector * prj, navigator * nav)
+void SolarSystem::draw(int hint_ON, Projector * prj, const navigator * nav)
 {
 	// We are supposed to be in heliocentric coordinate
 
@@ -268,7 +268,7 @@ void SolarSystem::draw(int hint_ON, Projector * prj, navigator * nav)
 
 
 // Search if any planet is close to position given in earth equatorial position and return the distance
-planet* SolarSystem::search(Vec3d pos, navigator * nav)
+planet* SolarSystem::search(Vec3d pos, const navigator * nav)
 {
     pos.normalize();
     planet * closest = NULL;
@@ -297,20 +297,3 @@ planet* SolarSystem::search(Vec3d pos, navigator * nav)
     else return NULL;
 }
 
-/*
-// Rings
-ring * saturn_ring;
-
-// Elliptical orbits in testing
-EllipticalOrbit * io_orbit;
-void get_io_helio_coords(double JD, double * X, double * Y, double * Z)
-{
-	io_orbit->positionAtTime(JD, X, Y, Z);
-}
-EllipticalOrbit * ganymede_orbit;
-void get_ganymede_helio_coords(double JD, double * X, double * Y, double * Z)
-{
-	ganymede_orbit->positionAtTime(JD, X, Y, Z);
-}
-
-*/

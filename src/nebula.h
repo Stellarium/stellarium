@@ -32,15 +32,15 @@ friend class Nebula_mgr;
 public:
     Nebula();
     virtual ~Nebula();
-	void get_info_string(char *, navigator * nav = NULL) const;
+	void get_info_string(char *, const navigator * nav = NULL) const;
     int Read(FILE *);       // Read the Nebulae data in the stream
     void Draw();            // Draw the nebulae
-    void DrawName(s_font* nebulaFont);
-    void DrawCircle(Projector* prj);
+    void DrawName(const s_font* nebulaFont);
+    void DrawCircle(const Projector* prj);
 	unsigned char get_type(void) const {return STEL_OBJECT_NEBULA;}
-	Vec3d get_earth_equ_pos(navigator * nav = NULL) const {return Vec3d(XYZ[0],XYZ[1],XYZ[2]);}
+	Vec3d get_earth_equ_pos(const navigator * nav = NULL) const {return Vec3d(XYZ[0],XYZ[1],XYZ[2]);}
 	// Return the radius of a circle containing the object on screen
-	virtual float get_on_screen_size(navigator * nav, Projector* prj);
+	virtual float get_on_screen_size(const navigator * nav, const Projector* prj);
 private:
 	static s_texture * texCircle;
 	short posDash;
