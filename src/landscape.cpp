@@ -68,18 +68,20 @@ Landscape_old_style::Landscape_old_style(float _radius) : Landscape(_radius), si
 
 Landscape_old_style::~Landscape_old_style()
 {
-	if (side_texs)
-	{
+        if (side_texs) {
 		for (int i=0;i<nb_side_texs;++i)
 		{
 			if (side_texs[i]) delete side_texs[i];
 			side_texs[i] = NULL;
 		}
-		delete side_texs;
+		delete [] side_texs;
+		side_texs = NULL;
 	}
-	if (sides) delete sides;
+
+	if (sides) delete [] sides;
 	if (ground_tex) delete ground_tex;
 	if (fog_tex) delete fog_tex;
+
 }
 
 void Landscape_old_style::load(const string& landscape_file, const string& section_name)
