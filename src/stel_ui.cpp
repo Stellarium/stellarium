@@ -677,11 +677,20 @@ int stel_ui::handle_keys(SDLKey key, S_GUI_VALUE state)
         if(key==SDLK_7)
         {
         	core->navigation->set_time_speed(0);
-		}
-		if(key==SDLK_8)
-        {
-        	core->navigation->set_JDay(get_julian_from_sys());
-		}
+	}
+	if(key==SDLK_8)
+	  {
+	    // set time to default, either actual or preset time based on settings
+	    if (core->StartupTimeMode=="preset" || core->StartupTimeMode=="Preset")
+	      {
+		core->navigation->set_JDay(core->PresetSkyTime -
+					   core->observatory->get_GMT_shift(core->PresetSkyTime) * JD_HOUR);
+	      }
+	    else
+	      {
+		core->navigation->set_JDay(get_julian_from_sys());
+	      }
+	  }
 		
         if(key==SDLK_LEFTBRACKET)
         {
