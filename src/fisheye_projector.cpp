@@ -22,9 +22,10 @@
 #include "fisheye_projector.h"
 
 
-Fisheye_projector::Fisheye_projector(int _screenW, int _screenH, double _fov,
+Fisheye_projector::Fisheye_projector(int _screenW, int _screenH, double _fov, int _distortion_function,
 	double _min_fov, double _max_fov) : Projector(800, 600, 180.f, _min_fov, _max_fov)
 {
+
 	set_fov(_fov);
 	set_screen_size(_screenW,_screenH);
 	mat_projection.set(1., 0., 0., 0.,
