@@ -155,28 +155,28 @@ private:
 	string config_file;
 
 	// Main elements of the program
-	StelCommandInterface * commander;               // interface to perform all UI and scripting actions
-	ScriptMgr * scripts;                            // manage playing and recording scripts
-	navigator * navigation;				// Manage all navigation parameters, coordinate transformations etc..
-	Observator * observatory;			// Manage observer position and locales for its country
-	Projector * projection;				// Manage the projection mode and matrix
+	StelCommandInterface * commander;       // interface to perform all UI and scripting actions
+	ScriptMgr * scripts;                    // manage playing and recording scripts
+	navigator * navigation;			// Manage all navigation parameters, coordinate transformations etc..
+	Observator * observatory;		// Manage observer position and locales for its country
+	Projector * projection;			// Manage the projection mode and matrix
 	stel_object * selected_object;		// The selected object in stellarium
-	Hip_Star_mgr * hip_stars;			// Manage the hipparcos stars
+	Hip_Star_mgr * hip_stars;		// Manage the hipparcos stars
 	Constellation_mgr * asterisms;		// Manage constellations (boundaries, names etc..)
-	Nebula_mgr * nebulas;				// Manage the nebulas
-	SolarSystem* ssystem;				// Manage the solar system
+	Nebula_mgr * nebulas;			// Manage the nebulas
+	SolarSystem* ssystem;			// Manage the solar system
 	stel_atmosphere * atmosphere;		// Atmosphere
-	SkyGrid * equ_grid;					// Equatorial grid
-	SkyGrid * azi_grid;					// Azimutal grid
-	SkyLine * equator_line;				// Celestial Equator line
-	SkyLine * ecliptic_line;			// Eclptic line
+	SkyGrid * equ_grid;			// Equatorial grid
+	SkyGrid * azi_grid;			// Azimutal grid
+	SkyLine * equator_line;			// Celestial Equator line
+	SkyLine * ecliptic_line;		// Eclptic line
 	Cardinals * cardinals_points;		// Cardinals points
-	MilkyWay * milky_way;				// Our galaxy
+	MilkyWay * milky_way;			// Our galaxy
 	Meteor_mgr * meteors;
-	Landscape * landscape;				// The landscape ie the fog, the ground and "decor"
+	Landscape * landscape;			// The landscape ie the fog, the ground and "decor"
 	tone_reproductor * tone_converter;	// Tones conversion between stellarium world and display device
-	stel_ui * ui;						// The main User Interface
-	ImageMgr * images;                      // for script loaded image display
+	stel_ui * ui;				// The main User Interface
+	ImageMgr * script_images;               // for script loaded image display
 
 	Constellation* selected_constellation;
 	planet* selected_planet;

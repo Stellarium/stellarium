@@ -647,28 +647,54 @@ int stel_ui::handle_clic(Uint16 x, Uint16 y, Uint8 button, Uint8 state)
 /*******************************************************************************/
 int stel_ui::handle_keys(SDLKey key, S_GUI_VALUE state)
 {
-	desktop->onKey(key, state);
+  desktop->onKey(key, state);
 
-	if (state==S_GUI_PRESSED)
+  if (state==S_GUI_PRESSED)
     {
-    	if(key==SDLK_q)
+      if(key==SDLK_q)
     	{
-			if (SDL_GetModState() & KMOD_CTRL) core->quit();
-		}
-        if(key==SDLK_c) core->commander->execute_command( "flag constellation_drawing toggle");
-        if(key==SDLK_d) {
-	  if (SDL_GetModState() & KMOD_CTRL) {
-	    // temp - play test script
-	    core->commander->execute_command( "script action play filename ./scripts/startup.sts");
-	  } else core->commander->execute_command( "flag star_name toggle");
+	  if (SDL_GetModState() & KMOD_CTRL) core->quit();
 	}
 
-        if(key==SDLK_1)
+      // if script is running, only script control keys are accessible
+      // to pause/resume/cancel the script
+      // (otherwise script could get very confused by user interaction)
+      if(core->scripts->is_playing()) {
+
+	// here reusing time control keys to control the script playback
+	if(key==SDLK_6) {
+	  // pause/unpause script
+	  core->commander->execute_command( "script action pause");
+	}
+	if(key==SDLK_k) {
+	  core->commander->execute_command( "script action resume");
+	}
+	if(key==SDLK_7) core->commander->execute_command( "script action end");
+
+	return 0;
+      }
+
+      /*
+      if(key==SDLK_r && (SDL_GetModState() & KMOD_CTRL)) {
+	if(core->scripts->is_recording()) core->commander->execute_command( "script action cancelrecord");
+	else core->commander->execute_command( "script action record");
+      }
+      */
+
+      if(key==SDLK_c) core->commander->execute_command( "flag constellation_drawing toggle");
+      if(key==SDLK_d) {
+	if (SDL_GetModState() & KMOD_CTRL) {
+	  // temp - play demo script
+	  core->commander->execute_command( "script action play filename ./scripts/startup.sts");
+	} else core->commander->execute_command( "flag star_name toggle");
+      }
+
+      if(key==SDLK_1)
         {
-        	core->FlagConfig=!core->FlagConfig;
-			config_win->setVisible(core->FlagConfig);
-		}
-        if(key==SDLK_p)
+	  core->FlagConfig=!core->FlagConfig;
+	  config_win->setVisible(core->FlagConfig);
+	}
+      if(key==SDLK_p)
         {	
 	  if(!core->FlagPlanetsHints) {
 	    core->FlagPlanetsHints=1;
@@ -709,41 +735,30 @@ int stel_ui::handle_keys(SDLKey key, S_GUI_VALUE state)
 
         if(key==SDLK_t)
         {
-			core->navigation->set_flag_lock_equ_pos(!core->navigation->get_flag_lock_equ_pos());
-		}
-        if(key==SDLK_s && !(SDL_GetModState() & KMOD_CTRL))
-        {	
-	  core->commander->execute_command( "flag stars toggle");
+	  core->navigation->set_flag_lock_equ_pos(!core->navigation->get_flag_lock_equ_pos());
 	}
+        if(key==SDLK_s && !(SDL_GetModState() & KMOD_CTRL)) 	
+	  core->commander->execute_command( "flag stars toggle");
+	
         if(key==SDLK_SPACE)
         {	
-        	if (core->selected_object)
-			{
-				core->navigation->move_to(core->selected_object->get_earth_equ_pos(core->navigation),
+	  if (core->selected_object)
+	    {
+	      core->navigation->move_to(core->selected_object->get_earth_equ_pos(core->navigation),
 					core->auto_move_duration);
-				core->navigation->set_flag_traking(1);
-			}
-		}
+	      core->navigation->set_flag_traking(1);
+	    }
+	}
         if(key==SDLK_i)
         {
-        	core->FlagInfos=!core->FlagInfos;
-            licence_win->setVisible(core->FlagInfos);
-		}
-        if(key==SDLK_EQUALS)
-        {
-        	core->navigation->set_JDay(core->navigation->get_JDay()+JD_DAY);
-		}
-        if(key==SDLK_MINUS)
-        {
-        	core->navigation->set_JDay(core->navigation->get_JDay()-JD_DAY);
-		}
+	  core->FlagInfos=!core->FlagInfos;
+	  licence_win->setVisible(core->FlagInfos);
+	}
+        if(key==SDLK_EQUALS) core->commander->execute_command( "date relative 1");
+        if(key==SDLK_MINUS) core->commander->execute_command( "date relative -1");
         if(key==SDLK_m)
         {
         	if (core->FlagEnableTuiMenu) core->FlagShowTuiMenu = true;
-		}
-        if(key==SDLK_k)
-        {
-        	core->navigation->set_time_speed(JD_SECOND);
 		}
         if(key==SDLK_o)
         {
@@ -752,41 +767,11 @@ int stel_ui::handle_keys(SDLKey key, S_GUI_VALUE state)
 			else
 				core->ssystem->get_moon()->set_sphere_scale(1.f);
 		}
-        if(key==SDLK_l)
-        {
-			double s = core->navigation->get_time_speed();
-			if (s>=JD_SECOND) s*=10.;
-			else if (s<-JD_SECOND) s/=10.;
-			else if (s>=0. && s<JD_SECOND) s=JD_SECOND;
-			else if (s>=-JD_SECOND && s<0.) s=0.;
-        	core->navigation->set_time_speed(s);
-		}
-        if(key==SDLK_j)
-        {
-			double s = core->navigation->get_time_speed();
-			if (s>JD_SECOND) s/=10.;
-			else if (s<=-JD_SECOND) s*=10.;
-			else if (s>-JD_SECOND && s<=0.) s=-JD_SECOND;
-			else if (s>0. && s<=JD_SECOND) s=0.;
-        	core->navigation->set_time_speed(s);
-		}
-        if(key==SDLK_6)
-        {
-			core->FlagTimePause = !core->FlagTimePause;
-			if (core->FlagTimePause)
-			{
-				core->temp_time_velocity = core->navigation->get_time_speed();
-        		core->navigation->set_time_speed(0);
-			}
-			else
-			{
-				core->navigation->set_time_speed(core->temp_time_velocity);
-			}
-		}
-        if(key==SDLK_7)
-        {
-        	core->navigation->set_time_speed(0);
-	}
+        if(key==SDLK_k) core->commander->execute_command( "timerate rate 1");
+        if(key==SDLK_l) core->commander->execute_command( "timerate action increment");
+        if(key==SDLK_j) core->commander->execute_command( "timerate action decrement");
+        if(key==SDLK_6) core->commander->execute_command( "timerate action pause");
+        if(key==SDLK_7) core->commander->execute_command( "timerate rate 0");
 	if(key==SDLK_8)
 	  {
 	    // set time to default, either actual or preset time based on settings
@@ -815,36 +800,18 @@ int stel_ui::handle_keys(SDLKey key, S_GUI_VALUE state)
 	  }
 	}
 
-        if(key==SDLK_LEFTBRACKET)
-        {
-        	core->navigation->set_JDay(core->navigation->get_JDay()-7*JD_DAY);
-		}
-        if(key==SDLK_RIGHTBRACKET)
-        {
-        	core->navigation->set_JDay(core->navigation->get_JDay()+7*JD_DAY);
+        if(key==SDLK_LEFTBRACKET) core->commander->execute_command( "date relative -7");
+        if(key==SDLK_RIGHTBRACKET) core->commander->execute_command( "date relative 7");
+	if(key==SDLK_SLASH) {
+	  if (SDL_GetModState() & KMOD_CTRL)  core->commander->execute_command( "autozoom direction out");
+	  else core->commander->execute_command( "autozoom direction in");
 	}
-
-	if(key==SDLK_SLASH)
-	  {
-	    if (SDL_GetModState() & KMOD_CTRL)
-	      {
-		core->auto_zoom_out(core->auto_move_duration);
-	      }
-	    else core->auto_zoom_in(core->auto_move_duration);
-	  }
-	if(key==SDLK_BACKSLASH)
-	  {
-	    core->auto_zoom_out(core->auto_move_duration);
-	  }
-	if(key==SDLK_x)
-	  {
-	    core->FlagShowTuiDateTime = !core->FlagShowTuiDateTime;
-	    core->FlagShowTuiShortObjInfo = core->FlagShowTuiDateTime;
-	  }
-	if(key==SDLK_r)
-	  {
-	    core->FlagConstellationArt = !core->FlagConstellationArt;
-	  }
+	if(key==SDLK_BACKSLASH) core->commander->execute_command( "autozoom direction out");
+	if(key==SDLK_x) {
+	  core->commander->execute_command( "flag show_tui_datetime toggle");
+	  core->commander->execute_command( "flag show_tui_short_obj_info toggle");
+	}
+	if(key==SDLK_r) core->commander->execute_command( "flag constellation_art toggle");
 	if(key==SDLK_RETURN)
 	  {
 	    core->navigation->switch_viewing_mode();

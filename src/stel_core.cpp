@@ -56,7 +56,7 @@ stel_core::~stel_core()
 	if (ui) delete ui;
 	if (scripts) delete scripts;
 	if (commander) delete commander;
-	if(images) delete images;
+	if(script_images) delete script_images;
 
 	stel_object::delete_textures(); // Load the pointer textures 
 }
@@ -85,7 +85,7 @@ void stel_core::init(void)
 
 	commander = new StelCommandInterface(this);
 	scripts = new ScriptMgr(commander);
-	images = new ImageMgr();
+	script_images = new ImageMgr();
 
 	observatory = new Observator();
 	observatory->load(ConfigDir + config_file, "init_location");
@@ -284,7 +284,7 @@ void stel_core::update(int delta_time)
 
 	if (FlagShowGravityUi || FlagShowTuiMenu) ui->tui_update_widgets();
 
-	images->update(delta_time);
+	if(!scripts->is_paused()) script_images->update(delta_time);
 }
 
 // Execute all the drawing functions
@@ -444,11 +444,10 @@ void stel_core::draw(int delta_time)
 	// Daw the cardinal points
 	if (FlagCardinalPoints) cardinals_points->draw(projection, observatory->get_latitude(), FlagGravityLabels );
 
-	// TEMP TEST ONLY
+	// draw images loaded by a script
 	projection->set_orthographic_projection(); 
-	images->draw(screen_W,screen_H);
+	script_images->draw(screen_W,screen_H);
 	projection->reset_perspective_projection(); 
-
 
 	projection->draw_viewport_shape();
 

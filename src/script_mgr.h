@@ -37,21 +37,23 @@ class ScriptMgr
  public:
   ScriptMgr(StelCommandInterface * command_interface);
   ~ScriptMgr();
-  void  play_script(string script_file);
-  void  cancel_script();  // stop playing current script
+  void play_script(string script_file);
+  void cancel_script();  // stop playing current script
   void pause_script();
   void resume_script();  // start playing paused script
   void record_script(string script_filename);  // begin recording user interactions
   void record_command(string commandline);     // record a command (if recording)
   void cancel_record_script();  // stop recording user interactions
-
+  bool is_playing() { return playing; };     // is a script playing? 
+  bool is_paused() { return play_paused; };     // is a script paused?
   void update(int delta_time);  // execute commands in running script
 
  private:
   StelCommandInterface * commander;  // for executing script commands
   Script * script; // currently loaded script
-  int elapsed_time;  // ms since last script command executed
-  int wait_time;     // ms until next script command should be executed
+  unsigned long int elapsed_time;  // ms since last script command executed
+  unsigned long int wait_time;     // ms until next script command should be executed
+  unsigned long int record_elapsed_time;  // ms since last command recorded
   bool recording;  // is a script being recorded?
   bool playing;    // is a script playing?  (could be paused)
   bool play_paused;// is script playback paused?
