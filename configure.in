@@ -1,4 +1,4 @@
-dnl Modified for CYGWIN
+dnl Modified for CYGWIN support
 dnl Process this file with autoconf to produce a configure script.
 AC_INIT(src/main.cpp)
 AM_INIT_AUTOMAKE(stellarium,0.4.7)
@@ -7,8 +7,8 @@ dnl Check system type
 AC_CANONICAL_HOST
 
 dnl Check for compilers.
-AC_PROG_CC
-AC_PROG_CXX
+dnl AC_PROG_CC
+dnl AC_PROG_CXX
 
 CFLAGS="-Wall -O3 "
 CXXFLAGS="-O3"

@@ -10,35 +10,23 @@ configure:740: checking for working automake
 configure:753: checking for working autoheader
 configure:766: checking for working makeinfo
 configure:787: checking host system type
-configure:811: checking for gcc
-configure:924: checking whether the C compiler (gcc  ) works
-configure:940: gcc -o conftest    conftest.c  1>&5
-configure:966: checking whether the C compiler (gcc  ) is a cross-compiler
-configure:971: checking whether we are using GNU C
-configure:999: checking whether gcc accepts -g
-configure:1035: checking for c++
-configure:1067: checking whether the C++ compiler (c++  ) works
-configure:1083: c++ -o conftest    conftest.C  1>&5
-configure:1109: checking whether the C++ compiler (c++  ) is a cross-compiler
-configure:1114: checking whether we are using GNU C++
-configure:1142: checking whether c++ accepts -g
-configure:1178: checking how to run the C preprocessor
-configure:1258: checking how to run the C++ preprocessor
-configure:1312: checking for a BSD compatible install
-configure:1367: checking for ranlib
-configure:1400: checking for X
-configure:1714: checking for dnet_ntoa in -ldnet
-configure:1755: checking for dnet_ntoa in -ldnet_stub
-configure:1803: checking for gethostbyname
-configure:1901: checking for connect
-configure:1993: checking for remove
-configure:2085: checking for shmat
-configure:2186: checking for IceConnectionNumber in -lICE
-configure:2234: checking for GL/gl.h
-configure:2268: checking for GL/glu.h
-configure:2302: checking for GL/glut.h
-configure:2340: checking for glEnable in -lGL
-configure:2388: checking for gluPerspective in -lGLU
-configure:2442: checking for strdup
-configure:2442: checking for toupper
-configure:2495: checking for fabs in -lm
+configure:813: checking how to run the C preprocessor
+configure:893: checking how to run the C++ preprocessor
+configure:947: checking for a BSD compatible install
+configure:1002: checking for ranlib
+configure:1035: checking for X
+configure:1349: checking for dnet_ntoa in -ldnet
+configure:1390: checking for dnet_ntoa in -ldnet_stub
+configure:1438: checking for gethostbyname
+configure:1536: checking for connect
+configure:1628: checking for remove
+configure:1720: checking for shmat
+configure:1821: checking for IceConnectionNumber in -lICE
+configure:1869: checking for GL/gl.h
+configure:1903: checking for GL/glu.h
+configure:1937: checking for GL/glut.h
+configure:1975: checking for glEnable in -lGL
+configure:2023: checking for gluPerspective in -lGLU
+configure:2077: checking for strdup
+configure:2077: checking for toupper
+configure:2130: checking for fabs in -lm
