@@ -48,7 +48,7 @@ stel_ui::stel_ui(stel_core * _core) :
 	bt_flag_atmosphere(NULL),
 	bt_flag_nebula_name(NULL),
 	bt_flag_help(NULL),
-	bt_flag_follow_earth(NULL),
+	bt_flag_equatorial_mode(NULL),
 	bt_flag_config(NULL),
 	bt_flag_help_lbl(NULL),
 
@@ -233,9 +233,9 @@ Component* stel_ui::createFlagButtons(void)
 	bt_flag_help->setOnPressCallback(callback<void>(this, &stel_ui::cb));
 	bt_flag_help->setOnMouseInOutCallback(callback<void>(this, &stel_ui::cbr));
 
-	bt_flag_follow_earth = new FlagButton(core->navigation->get_flag_lock_equ_pos(), NULL, "bt_follow");
-	bt_flag_follow_earth->setOnPressCallback(callback<void>(this, &stel_ui::cb));
-	bt_flag_follow_earth->setOnMouseInOutCallback(callback<void>(this, &stel_ui::cbr));
+	bt_flag_equatorial_mode = new FlagButton(core->navigation->get_viewing_mode()==VIEW_EQUATOR, NULL, "bt_follow");
+	bt_flag_equatorial_mode->setOnPressCallback(callback<void>(this, &stel_ui::cb));
+	bt_flag_equatorial_mode->setOnMouseInOutCallback(callback<void>(this, &stel_ui::cbr));
 
 	bt_flag_config = new FlagButton(core->FlagConfig, NULL, "bt_config");
 	bt_flag_config->setOnPressCallback(callback<void>(this, &stel_ui::cb));
@@ -255,7 +255,7 @@ Component* stel_ui::createFlagButtons(void)
 	bt_flag_ctr->addComponent(bt_flag_atmosphere);		bt_flag_atmosphere->setPos(150,0);
 	bt_flag_ctr->addComponent(bt_flag_nebula_name);		bt_flag_nebula_name->setPos(175,0);
 	bt_flag_ctr->addComponent(bt_flag_help);			bt_flag_help->setPos(200,0);
-	bt_flag_ctr->addComponent(bt_flag_follow_earth);	bt_flag_follow_earth->setPos(225,0);
+	bt_flag_ctr->addComponent(bt_flag_equatorial_mode);	bt_flag_equatorial_mode->setPos(225,0);
 	bt_flag_ctr->addComponent(bt_flag_config);			bt_flag_config->setPos(250,0);
 	bt_flag_ctr->addComponent(bt_flag_quit);			bt_flag_quit->setPos(275,0);
 
@@ -280,7 +280,7 @@ void stel_ui::cb(void)
 	core->FlagNebulaName		= bt_flag_nebula_name->getState();
 	core->FlagHelp = bt_flag_help->getState();
 	help_win->setVisible(core->FlagHelp);
-	core->navigation->set_flag_lock_equ_pos(bt_flag_follow_earth->getState());
+	core->navigation->set_viewing_mode(bt_flag_equatorial_mode->getState() ? VIEW_EQUATOR : VIEW_HORIZON);
 	core->FlagConfig			= bt_flag_config->getState();
 	config_win->setVisible(core->FlagConfig);
 	if (!bt_flag_quit->getState()) core->quit();
@@ -312,8 +312,8 @@ void stel_ui::cbr(void)
 		bt_flag_help_lbl->setLabel("Nebulas [N]");
 	if (bt_flag_help->getIsMouseOver())
 		bt_flag_help_lbl->setLabel("Help [H]");
-	if (bt_flag_follow_earth->getIsMouseOver())
-		bt_flag_help_lbl->setLabel("Compensation of the Earth rotation [T]");
+	if (bt_flag_equatorial_mode->getIsMouseOver())
+		bt_flag_help_lbl->setLabel("Equatorial/Altazimutal Mount [ENTER]");
 	if (bt_flag_config->getIsMouseOver())
 		bt_flag_help_lbl->setLabel("Configuration window");
 	if (bt_flag_quit->getIsMouseOver())
@@ -370,6 +370,7 @@ Right Click      : Clear Pointer\n\
 CTRL+Left Click  : Clear Pointer\n\
 SPACE : Center On Selected Object\n\
 ENTER : Equatorial/Altazimutal mount\n\
+CTRL + S : Take a Screenshot\n\
 C   : Drawing of the Constellations\n\
 V   : Names of the Constellations\n\
 E   : Equatorial Grid\n\
@@ -386,8 +387,8 @@ H   : Help\n\
 T   : Object Tracking\n\
 S   : Stars\n\
 I   : About Stellarium\n\
-ESC : Quit\n\
-F1  : Toggle fullscreen if possible.\n"
+F1  : Toggle fullscreen if possible.\n\
+CTRL+Q : Quit\n"
     ,courierFont);
 
 	help_txtlbl->adjustSize();
@@ -754,7 +755,7 @@ void stel_ui::gui_update_widgets(void)
 	bt_flag_atmosphere->setState(core->FlagAtmosphere);
 	bt_flag_nebula_name->setState(core->FlagNebulaName);
 	bt_flag_help->setState(help_win->getVisible());
-	bt_flag_follow_earth->setState(core->navigation->get_flag_lock_equ_pos());
+	bt_flag_equatorial_mode->setState(core->navigation->get_viewing_mode()==VIEW_EQUATOR);
 	bt_flag_config->setState(config_win->getVisible());
 
 	if (config_win->getVisible()) updateConfigForm();

@@ -235,6 +235,18 @@ Component* stel_ui::createConfigWindow(void)
 	tab_time->addComponent(system_tz_lbl2);
 	system_tz_lbl2->setPos(70 ,y); y+=30;
 
+	Label* time_speed_lbl = new Label("\1 Time speed : ");
+	tab_time->addComponent(time_speed_lbl);
+	time_speed_lbl->setPos(x ,y); y+=20;
+
+	time_speed_lbl2 = new Label("\1 Current Time Speed is XX sec/sec.");
+	tab_time->addComponent(time_speed_lbl2);
+	time_speed_lbl2->setPos(50 ,y); y+=30;
+
+	TextLabel* ts_lbl = new TextLabel("Use key J and M to increase and decrease\n   time speed.\nUse key K to return to real time speed.");
+	tab_time->addComponent(ts_lbl);
+	ts_lbl->setPos(50 ,y); y+=30;
+
 	// Location options
 	FilledContainer* tab_location = new FilledContainer();
 	tab_location->setSize(config_tab_ctr->getSize());
@@ -275,7 +287,13 @@ Component* stel_ui::createConfigWindow(void)
 	FilledContainer* tab_video = new FilledContainer();
 	tab_video->setSize(config_tab_ctr->getSize());
 
-	x=5; y=5;
+	x=10; y=10;
+	Label * lblvideo1 = new Label("\1 Projection :");
+	lblvideo1->setPos(x, y);
+	tab_video->addComponent(lblvideo1);
+
+	x=50; y+=20;
+
 	fisheye_projection_cbx = new LabeledCheckBox(core->projection->get_type()==FISHEYE_PROJECTOR, "Fisheye Projection Mode");
 	fisheye_projection_cbx->setOnPressCallback(callback<void>(this, &stel_ui::updateVideoVariables));
 	tab_video->addComponent(fisheye_projection_cbx);
@@ -284,23 +302,45 @@ Component* stel_ui::createConfigWindow(void)
 	disk_viewport_cbx = new LabeledCheckBox(core->projection->get_viewport_type()==DISK, "Disk Viewport");
 	disk_viewport_cbx->setOnPressCallback(callback<void>(this, &stel_ui::updateVideoVariables));
 	tab_video->addComponent(disk_viewport_cbx);
-	disk_viewport_cbx->setPos(x,y); y+=25;
+	disk_viewport_cbx->setPos(x,y); y+=35;
+
+	Label * lblvideo2 = new Label("\1 Screen Resolution :");
+	lblvideo2->setPos(10, y);
+	tab_video->addComponent(lblvideo2); y+=20;
+
+	Label * lblvideo3 = new Label("Restart program for");
+	Label * lblvideo4 = new Label("change to apply.");
+	lblvideo3->setPos(200, y+25);
+	lblvideo4->setPos(200, y+40);
+	tab_video->addComponent(lblvideo3);
+	tab_video->addComponent(lblvideo4);
 
 	screen_size_sl = new StringList();
-	screen_size_sl->setOnPressCallback(callback<void>(this, &stel_ui::setVideoSize));
 	screen_size_sl->setPos(x,y);
 	screen_size_sl->addItem("640x480");
 	screen_size_sl->addItem("800x600");
 	screen_size_sl->addItem("1024x768");
 	screen_size_sl->addItem("1280x1024");
 	screen_size_sl->addItem("1600x1200");
+	screen_size_sl->adjustSize();
+	char vs[100];
+	sprintf(vs, "%dx%d", core->screen_W, core->screen_H);
+	screen_size_sl->setValue(vs);
 	tab_video->addComponent(screen_size_sl);
+
+	y+=100;
+
+	LabeledButton* video_save_bt = new LabeledButton("Save as default");
+	video_save_bt->setOnPressCallback(callback<void>(this, &stel_ui::setVideoOption));
+	tab_video->addComponent(video_save_bt);
+	video_save_bt->setPos(x + 50,y);
+	video_save_bt->setSize(170,25); y+=20;
 
 	config_tab_ctr->setTexture(flipBaseTex);
 	config_tab_ctr->addTab(tab_time, "Date & Time");
 	config_tab_ctr->addTab(tab_location, "Location");
-	config_tab_ctr->addTab(tab_render, "Rendering");
 	config_tab_ctr->addTab(tab_video, "Video");
+	config_tab_ctr->addTab(tab_render, "Rendering");
 	config_win->addComponent(config_tab_ctr);
 	config_win->setOnHideBtCallback(callback<void>(this, &stel_ui::config_win_hideBtCallback));
 	return config_win;
@@ -356,7 +396,7 @@ void stel_ui::saveObserverPosition(void)
 
 void stel_ui::saveRenderOptions(void)
 {
-	cout << "Saving rendering options" << endl;
+	cout << "Saving rendering options in file " << core->ConfigDir + core->config_file << endl;
 
 	init_parser conf;
 	conf.load(core->ConfigDir + core->config_file);
@@ -392,16 +432,38 @@ void stel_ui::setTimeZone(void)
 	core->observatory->set_custom_tz_name(tzselector->gettz());
 }
 
-void stel_ui::setVideoSize(void)
+void stel_ui::setVideoOption(void)
 {
-	cout << "Saving video size " << endl;
+	string s = screen_size_sl->getValue();
+	int i = s.find("x");
+	int w = atoi(s.substr(0,i).c_str());
+	int h = atoi(s.substr(i+1,s.size()).c_str());
 
-	//init_parser conf;
-	//conf.load(core->ConfigDir + core->config_file);
+	cout << "Saving video size " << w << "x" << h << " in file " << core->ConfigDir + core->config_file << endl;
 
-	//conf.set_int("video:screen_w", s);
+	init_parser conf;
+	conf.load(core->ConfigDir + core->config_file);
 
-	//conf.save(core->ConfigDir + core->config_file);
+	switch (core->projection->get_type())
+	{
+		case FISHEYE_PROJECTOR : conf.set_str("projection:type", "fisheye"); break;
+		case PERSPECTIVE_PROJECTOR :
+		default :
+			conf.set_str("projection:type", "perspective"); break;
+	}
+
+	switch (core->projection->get_viewport_type())
+	{
+		case SQUARE : conf.set_str("projection:viewport", "square"); break;
+		case DISK : conf.set_str("projection:viewport", "disk"); break;
+		case MAXIMIZED :
+		default :
+			conf.set_str("projection:viewport", "maximized"); break;
+	}
+
+	conf.set_int("video:screen_w", w);
+	conf.set_int("video:screen_h", h);
+	conf.save(core->ConfigDir + core->config_file);
 }
 
 void stel_ui::updateVideoVariables(void)
@@ -467,6 +529,13 @@ void stel_ui::updateConfigForm(void)
 	time_current->setJDay(core->navigation->get_JDay() + core->observatory->get_GMT_shift()*JD_HOUR);
 	system_tz_lbl2 = new Label("(" +
 		 core->observatory->get_time_zone_name_from_system(core->navigation->get_JDay()) + ")");
+
+	static char tempstr[100];
+	sprintf(tempstr, "%.1f", core->navigation->get_time_speed()/JD_SECOND);
+	time_speed_lbl2->setLabel("\1 Current Time Speed is x" + string(tempstr));
+
+	fisheye_projection_cbx->setState(core->projection->get_type()==FISHEYE_PROJECTOR);
+	disk_viewport_cbx->setState(core->projection->get_viewport_type()==DISK);
 }
 
 void stel_ui::config_win_hideBtCallback(void)

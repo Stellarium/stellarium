@@ -3,7 +3,7 @@ dnl Process this file with autoconf to produce a configure script.
 
 AC_INIT(src/main.cpp)
 AM_CONFIG_HEADER(src/config.h)
-AM_INIT_AUTOMAKE(stellarium,0.6.0d)
+AM_INIT_AUTOMAKE(stellarium,0.6.0rc1)
 
 dnl Check system type
 AC_CANONICAL_HOST
@@ -12,10 +12,10 @@ dnl Check for compilers.
 AC_PROG_CC
 AC_PROG_CXX
 
-dnl CFLAGS=" -Wall -s -O3"
-dnl CXXFLAGS=" -Wall -s -O3"
-CFLAGS=" -Wall"
-CXXFLAGS=" -Wall"
+CFLAGS=" -Wall -s -O3"
+CXXFLAGS=" -Wall -s -O3"
+dnl CFLAGS=" -Wall"
+dnl CXXFLAGS=" -Wall"
 dnl CFLAGS=" -Wall -pg -02"
 dnl CXXFLAGS=" -Wall -pg -02"
 
