@@ -326,7 +326,7 @@ void TimeControlBtOnClicCallback(guiValue button,Component * caller)
     }
     if(caller==TimeFF)
     {
-		navigation.set_time_speed(JD_DAY*20);
+		navigation.set_time_speed(JD_DAY);
     }
 }
 
