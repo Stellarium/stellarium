@@ -12,9 +12,9 @@ dnl Check for compilers.
 AC_PROG_CC
 AC_PROG_CXX
 
-CFLAGS="-s -Wall -O2 -ffast-math -fexpensive-optimizations `sdl-config --cflags`"
-CXXFLAGS="-s -Wall -O2 -ffast-math -fexpensive-optimizations `sdl-config --cflags`"
-LIBS="$LIBS `sdl-config --libs`"
+CFLAGS="-s -Wall -O2 -ffast-math -fexpensive-optimizations"
+CXXFLAGS="-s -Wall -O2 -ffast-math -fexpensive-optimizations"
+LIBS="$LIBS"
 
 dnl Checks for programs.
 AC_PROG_CPP
@@ -29,6 +29,12 @@ dnl Check for X11.
 AC_PATH_XTRA
 LIBS="$LIBS $X_LIBS"
 CFLAGS="$CFLAGS $X_CFLAGS"
+
+dnl Check for SDL.
+AM_PATH_SDL
+LIBS="$LIBS $SDL_LIBS"
+CFLAGS="$CFLAGS $SDL_CFLAGS"
+CXXFLAGS="$CXXFLAGS $SDL_CFLAGS"
 
 AC_C_BIGENDIAN
 AC_CHECK_HEADER(byteswap.h)
