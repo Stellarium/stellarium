@@ -47,31 +47,26 @@
 // gui Return Values:
 enum S_GUI_VALUE
 {
+	S_GUI_MOUSE_LEFT,
 	S_GUI_MOUSE_RIGHT,
-    S_GUI_MOUSE_LEFT,
     S_GUI_MOUSE_MIDDLE,
-    S_GUI_MOUSE_ENTER,
-    S_GUI_MOUSE_LEAVE,
-    S_GUI_RIGHT_CLIC,
-    S_GUI_LEFT_CLIC,
-    S_GUI_MIDDLE_CLIC,
-    S_GUI_NOTHING,
-    S_GUI_UP,
-    S_GUI_DOWN,
-	S_GUI_KEY_PRESS,
-	S_GUI_KEY_RELEASE
+	S_GUI_PRESSED,
+	S_GUI_RELEASED
 };
 
 namespace s_gui
 {
-	typedef CBFunctor4wRet<int,int,S_GUI_VALUE,S_GUI_VALUE,int> *t_clicCallback;
-	typedef CBFunctor2wRet<int,int,int> *t_moveCallback;
-	typedef CBFunctor2wRet<SDLKey,S_GUI_VALUE,int> *t_keyCallback;
+	typedef CBFunctor0 * s_pcallback0;
+	typedef CBFunctor0  s_callback0;
+
+	//typedef CBFunctor2wRet<int,int,int> *t_moveCallback;
+	//typedef CBFunctor2wRet<SDLKey,S_GUI_VALUE,int> *t_keyCallback;
 
 
 	typedef Vec4f s_color;
 	typedef Vec4i s_square;
 	typedef Vec2i s_vec2i;
+	typedef Vec4i s_vec4i;
 
 	class Scissor
 	{
@@ -91,18 +86,23 @@ namespace s_gui
     {
     public:
         Painter();
-		Painter(s_texture* _tex1, s_font* _font, const s_color& _baseColor, const s_color& _textColor);
-        s_texture* tex1;
-        s_font* font;
-		s_color baseColor;
-		s_color textColor;
+		Painter(const s_texture* _tex1, const s_font* _font, const s_color& _baseColor, const s_color& _textColor);
 		void drawSquareEdge(const s_vec2i& pos, const s_vec2i& sz) const;
 		void drawSquareEdge(const s_vec2i& pos, const s_vec2i& sz, const s_color& c) const;
 		void drawSquareFill(const s_vec2i& pos, const s_vec2i& sz) const;
 		void drawSquareFill(const s_vec2i& pos, const s_vec2i& sz, const s_color& c) const;
 		void drawSquareFill(const s_vec2i& pos, const s_vec2i& sz, const s_color& c, const s_texture * t) const;
 		void print(int x, int y, const char * str) const;
+		void setTexture(const s_texture* tex) {tex1 = tex;}
+		void setFont(const s_font* f) {font = f;}
+		void setTextColor(const s_color& c) {textColor = c;}
+		void setBaseColor(const s_color& c) {baseColor = c;}
+		const s_font* getFont(void) const {return font;}
     private:
+		const s_texture* tex1;
+		const s_font* font;
+		s_color baseColor;
+		s_color textColor;
     };
 
 
@@ -112,7 +112,7 @@ namespace s_gui
         Component(void);
 		virtual ~Component();
         virtual void draw(void) = 0;
-        virtual void reshape(s_vec2i _pos, s_vec2i _size);
+        virtual void reshape(const s_vec2i& _pos, const s_vec2i& _size);
         virtual void reshape(int x, int y, int w, int h);
         virtual int getPosx() const {return pos[0];}
 		virtual int getPosy() const {return pos[1];}
@@ -120,6 +120,8 @@ namespace s_gui
 		virtual int getSizey() const {return size[1];}
         virtual const s_vec2i getPos() const {return pos;}
         virtual const s_vec2i getSize() const {return size;}
+        virtual void setPos(const s_vec2i& _pos) {pos = _pos;}
+        virtual void setSize(const s_vec2i& _size) {size = _size;}
         virtual void setVisible(int _visible) {visible=_visible;}
         virtual int getVisible(void) const {return visible;}
         virtual void setActive(int _active) {active = _active;}
@@ -129,10 +131,14 @@ namespace s_gui
 		virtual int onClic(int, int, S_GUI_VALUE, S_GUI_VALUE) {return 0;}
 		virtual int onMove(int, int) {return 0;}
 		virtual int onKey(SDLKey, S_GUI_VALUE) {return 0;}
+		virtual void setTexture(const s_texture* tex) {painter.setTexture(tex);}
+		virtual void setFont(const s_font* f) {painter.setFont(f);}
+		virtual void setTextColor(const s_color& c) {painter.setTextColor(c);}
+		virtual void setBaseColor(const s_color& c) {painter.setBaseColor(c);}
 		static void setDefaultPainter(const Painter& p) {defaultPainter=p;}
-		static void initScissor(int winW, int winH) {scissor = Scissor(winW, winH);}
-		static void enableScissor(void) {scissor.activate();}
-		static void disableScissor(void) {scissor.desactivate();}
+		static void initScissor(int winW, int winH);
+		static void enableScissor(void) {scissor->activate();}
+		static void disableScissor(void) {scissor->desactivate();}
     protected:
         s_vec2i pos;
         s_vec2i size;
@@ -140,9 +146,9 @@ namespace s_gui
         int active;
         int focus;
 		Painter painter;
-		virtual int isIn(float x , float y);
+		virtual int isIn(int x, int y);
 		static Painter defaultPainter;
-		static Scissor scissor;
+		static Scissor* scissor;
     private:
     };
 
@@ -168,32 +174,67 @@ namespace s_gui
         virtual void draw(void);
     };
 
-	/*
-		t_clicCallback clicCallback;
-		t_moveCallback moveCallback;
-		t_keyCallback  keyCallback;
-        virtual void setClicCallback(s_clicCallback);
-        virtual void setMoveCallback(s_moveCallback);
-        virtual void setKeyCallback(s_keyCallback);
-	*/
 
-	/*
+    class FramedContainer : public Container
+    {
+    public:
+		FramedContainer();
+		virtual void addComponent(Component* c) {inside->addComponent(c);}
+        virtual void reshape(const s_vec2i& _pos, const s_vec2i& _size);
+        virtual void reshape(int x, int y, int w, int h);
+        virtual int getSizex() const {return inside->getSizex();}
+		virtual int getSizey() const {return inside->getSizey();}
+        virtual const s_vec2i getSize() const {return inside->getSize();}
+        virtual void setSize(const s_vec2i& _size);
+        virtual void draw(void);
+		virtual void setFrameSize(int left, int right, int top, int bottom);
+	protected:
+		Container* inside;
+		s_vec4i frameSize;
+    };
+
+
     class Button : public Component
     {
     public:
-        Button();
-        virtual ~Button();
-        virtual void render(GraphicsContext&);
-        virtual void setOnClicCallback(void (*_onClicCallback)(enum guiValue,Component *));
-        virtual void setOnMouseOverCallback(void (*_onMouseOverCallback)(enum guiValue,Component *));
-        virtual void ButtonClicCallback(enum guiValue button,enum guiValue state);
-        virtual void ButtonMoveCallback(enum guiValue action);
+		Button();
+        virtual void draw();
+        virtual void setOnPressCallback(const s_callback0& c) {onPressCallback = c;}
     protected:
-        int mouseOn;
-        void (*onClicCallback)(enum guiValue,Component *);
-        void (*onMouseOverCallback)(enum guiValue,Component *);
+		virtual int onClic(int, int, S_GUI_VALUE, S_GUI_VALUE);
+		s_callback0 onPressCallback;
     };
 
+    class FilledButton : public Button
+    {
+    public:
+        virtual void draw();
+    protected:
+    };
+
+
+    class Label : public Component
+    {
+    public:
+        Label(const char* _label  = NULL, const s_font* _font = NULL);
+        virtual ~Label();
+        virtual const char * getLabel() const {return label;}
+        virtual void setLabel(const char *);
+        virtual void draw();
+		virtual void adjustSize(void);
+    protected:
+        char * label;
+    };
+
+    class Labeled_Button : public FilledButton, Label
+    {
+    public:
+        Labeled_Button(const char * _label = NULL);
+        virtual void draw();
+    private:
+    };
+
+/*
     class Labeled_Button : public Button
     {
     public:

@@ -133,7 +133,7 @@ void Hip_Star_mgr::Load(char * font_fileName, char * hipCatFile, char * commonNa
 
 	starTexture = new s_texture("star16x16");  // Load star texture
 
-    starFont=new s_font(10.f,"spacefont", font_fileName); // load Font
+    starFont=new s_font(11.f,"spacefont", font_fileName); // load Font
     if (!starFont)
     {
 	    printf("Can't create starFont\n");
@@ -219,7 +219,6 @@ Hip_Star * Hip_Star_mgr::search(vec3_t Pos)
         	plusProche=(*iter).second;
     	}
     }
-	printf("%f\n",anglePlusProche);
     if (anglePlusProche>RADIUS_STAR*0.9999)
     {   
 	    return plusProche;
