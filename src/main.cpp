@@ -27,6 +27,10 @@
 #include "stel_core.h"
 #include "stel_sdl.h"
 
+#if defined(MACOSX) && defined(XCODE)
+#include "StelConfig.h"
+#endif
+
 using namespace std;
 
 string DDIR;	// Data Directory
@@ -89,6 +93,7 @@ void check_command_line(int argc, char **argv)
 // This enable to launch stellarium from the local directory without installing it
 void setDirectories(const char* executableName)
 {
+#if !defined(MACOSX) && !defined(XCODE)
 	// The variable CONFIG_DATA_DIR must have been set by the configure script
 	// Its value is the dataRoot directory, ie the one containing data/ and textures/
 
@@ -208,6 +213,20 @@ If not, check that you have access to %s\n"), CDIR.c_str(), CDIR.c_str(), CDIR.c
 	}
 #endif	// Unix system
 
+#else   // Mac OS X
+    const char *ddir = NULL;
+    const char *tdir = NULL;
+    const char *cdir = NULL;
+    const char *data_root = NULL;
+
+    if (!setDirectories(&ddir, &tdir, &cdir, &data_root))
+        exit(-1);
+
+    DDIR = ddir;
+    TDIR = tdir;
+    CDIR = cdir;
+    DATA_ROOT = data_root;
+#endif
 }
 
 
@@ -215,10 +234,12 @@ If not, check that you have access to %s\n"), CDIR.c_str(), CDIR.c_str(), CDIR.c
 // Main stellarium procedure
 int main(int argc, char **argv)
 {
+#ifndef MACOSX
 	setlocale (LC_CTYPE, "");
 	setlocale (LC_MESSAGES, "");
 	bindtextdomain (PACKAGE, LOCALEDIR);
 	textdomain (PACKAGE);
+#endif
 	
 	// Check the command line
 	check_command_line(argc, argv);
@@ -235,7 +256,11 @@ int main(int argc, char **argv)
 	core->set_directories(DDIR, TDIR, CDIR, DATA_ROOT);
 
 	// Give the config file parameters which has to be given "hard coded"
+#if !defined(MACOSX) && !defined(XCODE)
 	core->set_config_files("config.ini");
+#else
+    core->set_config_files(STELLARIUM_CONF_FILE);
+#endif
 
 	// Load the configuration options from the given file names
 	// This includes the video parameters

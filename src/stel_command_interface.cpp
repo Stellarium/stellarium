@@ -49,7 +49,8 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
   stringHash_t args;
   int status = 0;  // true if command was understood
   int recordable = 1;  // true if command should be recorded (if recording)
-
+  string resultCommandline;
+  
   wait = 0;  // default, no wait between commands
 
   status = parse_command(commandline, command, args);
@@ -66,7 +67,7 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
     if(args.begin()->second == "toggle") {
       std::ostringstream oss;
       oss << command << " " << args.begin()->first << " " << val;
-      commandline = oss.str();
+      resultCommandline = oss.str();
     }
 
   }  else if (command == "wait" && args["duration"]!="") {
@@ -191,7 +192,7 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
       stcore->navigation->set_time_speed(s);
 
       // for safest script replay, record as absolute amount
-      commandline = "timerate rate " + double_to_str(s/JD_SECOND);
+      resultCommandline = "timerate rate " + double_to_str(s/JD_SECOND);
 
     } else if(args["action"]=="decrement") {
       double s = stcore->navigation->get_time_speed();
@@ -202,7 +203,7 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
       stcore->navigation->set_time_speed(s);
 
       // for safest script replay, record as absolute amount
-      commandline = "timerate rate " + double_to_str(s/JD_SECOND);
+      resultCommandline = "timerate rate " + double_to_str(s/JD_SECOND);
     } else status=0;
     
   } else if(command == "date") {
@@ -332,7 +333,7 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
   if(status ) {
 
     // if recording commands, do that now
-    if(recordable) stcore->scripts->record_command(commandline);
+    if(recordable) stcore->scripts->record_command(resultCommandline);
 
     //    cout << commandline << endl;
 
