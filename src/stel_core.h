@@ -174,7 +174,8 @@ private:
 	Vec3f GuiTextColor;
 
 	// Text UI
-	int FlagShowTui;
+	int FlagShowGravityUi;
+	int FlagShowTuiMenu;
 	int FlagShowTuiDateTime;
 	int FlagShowTuiShortInfo;
 
