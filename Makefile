@@ -83,7 +83,7 @@ am__include = include
 am__quote = 
 install_sh = /home/Fabien/work/stellarium/install-sh
 
-EXTRA_DIST = TODO README NEWS
+EXTRA_DIST = TODO README NEWS stellarium.PRJ
 SUBDIRS = config data src textures
 subdir = .
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
