@@ -35,6 +35,7 @@ size_t my_strftime(char *s, size_t max, const char *fmt, const struct tm *tm)
 Observator::Observator() : longitude(0.), latitude(0.), altitude(0), GMT_shift(0), planet(3)
 {
 	name = "Anonymous_Location";
+	flag_move_to = 0;
 
 	// Set the time format global intern variables from the system locale
 	setlocale(LC_TIME, "");
@@ -338,3 +339,42 @@ string Observator::s_date_format_to_string(S_DATE_FORMAT df) const
 	cout << "ERROR : unrecognized date_display_format value : " << df << " system_default used." << endl;
 	return "system_default";
 }
+
+
+// move gradually to a new observation location
+void Observator::move_to(double lat, double lon, double alt, int duration) {
+  flag_move_to = 1;
+
+  start_lat = latitude;
+  end_lat = lat;
+
+  start_lon = longitude;
+  end_lon = lon;
+
+  start_alt = altitude;
+  end_alt = alt;
+
+  move_to_coef = 1.0f/duration;
+  move_to_mult = 0;
+
+  //  printf("coef = %f\n", move_to_coef);
+}
+
+// for moving observator position gradually
+// TODO need to work on direction of motion...
+void Observator::update(int delta_time) {
+  if(flag_move_to) {
+    move_to_mult += move_to_coef*delta_time;
+
+    if( move_to_mult >= 1) {
+      move_to_mult = 1;
+      flag_move_to = 0;
+    }
+
+    latitude = start_lat - move_to_mult*(start_lat-end_lat);
+    longitude = start_lon - move_to_mult*(start_lon-end_lon);
+    altitude = start_alt - move_to_mult*(start_alt-end_alt);
+
+  }
+}
+
