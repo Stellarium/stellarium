@@ -33,10 +33,11 @@ friend class constellation;
 public:
     Hip_Star();
     virtual ~Hip_Star();
-    int Read(FILE * pFile); // Read the star data in the stream
-    void Draw(void);            // Draw the star
+    int Read(FILE * pFile);	// Read the star data in the stream
+    void Draw(void);		// Draw the star
     void DrawName(void);
-	vec3_t getRGB(void) {return RGB;}
+	vec3_t get_RGB(void) {return RGB;}
+	void get_info_string(char * s);
 	unsigned char get_type(void) {return STEL_OBJECT_STAR;}
 	Vec3d get_equ_pos(void) {return Vec3d(XYZ[0],XYZ[1],XYZ[2]);}
 private:

@@ -21,6 +21,8 @@
 #include "bytes.h"
 #include "stellarium.h"
 #include "navigator.h"
+#include "stellastro.h"
+#include "stel_utility.h"
 
 extern unsigned int starTextureId;
 extern s_font * starFont;
@@ -41,6 +43,15 @@ Hip_Star::~Hip_Star()
 	if(CommonName) delete CommonName;
 }
 
+void Hip_Star::get_info_string(char * s)
+{
+	float tempDE, tempRA;
+	rect_to_sphe(&tempRA,&tempDE,&XYZ);
+	sprintf(s,"Name :%s %s\nHip : %.4d\nRA : %s\nDE : %s\nMag : %.2f",
+		CommonName==NULL ? "-" : CommonName,
+		Name==NULL ? "-" : Name, HP, print_angle_hms(tempRA*180./M_PI), print_angle_dms_stel(tempDE*180./M_PI), Mag);
+}
+
 int Hip_Star::Read(FILE * catalog)
 // Read datas in binary catalog and compute x,y,z;
 {  
@@ -51,8 +62,8 @@ int Hip_Star::Read(FILE * catalog)
     fread((char*)&DE,4,1,catalog);
     LE_TO_CPU_FLOAT(DE, DE);
     
-    RA/=12./M_PI;     // Convert from hours to rad
-    DE/=180./M_PI;    // Convert from deg to rad 
+    RA*=M_PI/12.;     // Convert from hours to rad
+    DE*=M_PI/180.;    // Convert from deg to rad
 
     unsigned short int mag;
     fread((char*)&mag,2,1,catalog);
@@ -119,8 +130,8 @@ int Hip_Star::Read(FILE * catalog)
 void Hip_Star::Draw(void)
 {
     // Check if in the field of view, if not return
-    if ( XY[0]<0 || XY[0]>global.X_Resolution ||
-         XY[1]<0 || XY[1]>global.Y_Resolution ) 
+    if ( XY[0]<0. || XY[1]<0. || XY[0]>global.X_Resolution ||
+			XY[1]>global.Y_Resolution )
         return;
 
     // Calculation of the demi-size of the star texture
@@ -137,17 +148,17 @@ void Hip_Star::Draw(void)
         rmag=1.2;
     }
 
-    if (rmag>6)
+    if (rmag>6.)
     {   
         rmag=6.;
     }
 
     // Random coef for star twinkling
-    coef=(float)rand()/RAND_MAX*global.StarTwinkleAmount/10;
+    coef=(float)rand()/RAND_MAX*global.StarTwinkleAmount/10.;
 
     // Calculation of the luminosity
     cmag*=(1.-coef);
-    rmag*=global.StarScale/3;
+    rmag*=global.StarScale/3.;
     glColor3fv(RGB*(cmag/MaxColorValue));
     glPushMatrix();
     glLoadIdentity();

@@ -32,6 +32,7 @@ char * tempTime = NULL;
 char * tempGuiBaseColor = NULL;
 char * tempGuiTextColor = NULL;
 double tempFov=60.;
+int tempFlagFollowEarth=1;
 
 // array of cfgStruct for reading on config file
 cfgStruct cfgini[] =
@@ -65,7 +66,7 @@ cfgStruct cfgini[] =
     {"FLAG_MILKY_WAY",      CFG_BOOL,   &global.FlagMilkyWay},
 
     {"FLAG_UTC_TIME",       CFG_BOOL,   &global.FlagUTC_Time},
-    {"FLAG_FOLLOW_EARTH",   CFG_BOOL,   &global.FlagFollowEarth},
+    {"FLAG_FOLLOW_EARTH",   CFG_BOOL,   &tempFlagFollowEarth},
     {"FLAG_MENU",           CFG_BOOL,   &global.FlagMenu},
     {"FLAG_HELP",           CFG_BOOL,   &global.FlagHelp},
     {"FLAG_INFOS",          CFG_BOOL,   &global.FlagInfos},
@@ -208,8 +209,6 @@ void loadConfig(char * configFile, char * locationFile)
     global.X_Resolution=800;
     global.Y_Resolution=600;
     global.Fps=60;
-    global.FlagSelect=false;
-    global.FlagRealMode=false;
     global.FlagConfig = false;
     global.StarTwinkleAmount = 2;
 
@@ -218,6 +217,8 @@ void loadConfig(char * configFile, char * locationFile)
 		printf("An error was detected in the config file\n");
         exit(-1);
     }
+
+	navigation.set_flag_lock_equ_pos(tempFlagFollowEarth);
 
     // init the time parameters with current time and date
 	ln_date date;
