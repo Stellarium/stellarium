@@ -110,7 +110,7 @@ void glutDisplay(void)
 		delete TheShooting;
 		TheShooting = new ShootingStar(global.Timefr);
 	}
-	TheShooting->Draw(global.Timefr);
+	//TheShooting->Draw(global.Timefr);
 
     if (global.FlagPlanets || global.FlagPlanetsHintDrawing) 
 	SolarSystem->Draw();         // Draw the planets
@@ -492,7 +492,7 @@ void init()
 }
 
 // ***************************  Main  **********************************
-int main (void)
+int main (int argc, char **argv)
 {   
     // Set the data directories : test the default installation dir
     // and try to find the files somewhere else if not found there
@@ -539,6 +539,9 @@ int main (void)
     
     drawIntro();                     // Print the console logo
     loadParams();                    // Load the params from config.txt
+    
+    glutInit(&argc, argv);
+    
     glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE);
 
     if (global.Fullscreen)           // FullScreen Mode

@@ -55,7 +55,7 @@ void Update_variables(void)
     }
     else 
     {   if (global.deltaAz>0)
-        {   global.deltaAz = depl*global.Fov/30;
+        {   global.deltaAz = (depl*global.Fov/30);
         }
     }
     if (global.deltaAlt<0) 

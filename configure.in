@@ -23,9 +23,21 @@ dnl Check for X11.
 AC_PATH_XTRA
 LIBS="$LIBS $X_LIBS"
 
+AC_C_BIGENDIAN
+
+AC_CHECK_HEADER(byteswap.h)
+
 dnl
 dnl GL and GLUT libs
 dnl
+if test $host = powerpc-apple-darwin5.5 ; then
+AC_DEFINE_UNQUOTED(MACOSX,1)
+LIBS="$LIBS -framework GLUT -framework OpenGL -lobjc -framework Carbon "
+AC_CHECK_HEADER(OpenGL/gl.h,,AC_MSG_ERROR(gl.h not found - please install OpenGL- or Mesa-devel))
+AC_CHECK_HEADER(OpenGL/glu.h,,AC_MSG_ERROR(glu.h not found - please install GLU- or MesaGLU-devel))
+AC_CHECK_HEADER(GLUT/glut.h,,AC_MSG_ERROR(glut.h not found - please install GLUT- or MesaGLUT-devel))
+else
+
 
 AC_CHECK_HEADER(GL/gl.h,,AC_MSG_ERROR(gl.h not found - please install OpenGL- or Mesa-devel))
 AC_CHECK_HEADER(GL/glu.h,,AC_MSG_ERROR(glu.h not found - please install GLU- or MesaGLU-devel))
@@ -48,6 +60,8 @@ dnl   fi
 dnl   AC_CHECK_LIB(glut,glutMainLoop,,AC_MSG_ERROR(GLUT not found - please install GLUT))
 
 LIBS="$LIBS -lGL -lGLU -lglut"
+fi
+
 fi
 
 dnl Checks for library functions.
