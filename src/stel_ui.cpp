@@ -422,28 +422,27 @@ void stel_ui::cbr(void)
 #else
 		bt_flag_help_lbl->setLabel(_("Quit [CMD + Q]"));
 #endif
-
 }
 
 void stel_ui::tcbr(void)
 {
 	if (bt_dec_time_speed->getIsMouseOver())
-		bt_flag_time_control_lbl->setLabel("Decrease Time Speed [J]");
+		bt_flag_time_control_lbl->setLabel(_("Decrease Time Speed [J]"));
 	if (bt_real_time_speed->getIsMouseOver())
-		bt_flag_time_control_lbl->setLabel("Real Time Speed [K]");
+		bt_flag_time_control_lbl->setLabel(_("Real Time Speed [K]"));
 	if (bt_inc_time_speed->getIsMouseOver())
-		bt_flag_time_control_lbl->setLabel("Increase Time Speed [L]");
+		bt_flag_time_control_lbl->setLabel(_("Increase Time Speed [L]"));
 	if (bt_time_now->getIsMouseOver())
-		bt_flag_time_control_lbl->setLabel("Return to Current Time");
+		bt_flag_time_control_lbl->setLabel(_("Return to Current Time"));
 }
 
 // The window containing the info (licence)
 Component* stel_ui::createLicenceWindow(void)
 {
 	licence_txtlbl = new TextLabel(
-"                 \1   " APP_NAME "  Mars 2004  \1\n\
+"                 \1   " APP_NAME "  April 2005  \1\n\
  \n\
-\1   Copyright (c) 2000-2004 Fabien Chereau\n\
+\1   Copyright (c) 2000-2005 Fabien Chereau\n\
  \n\
 \1   Please check last version and send bug report & comments\n\n\
 on stellarium web page : http://stellarium.free.fr\n\n\
