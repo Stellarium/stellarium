@@ -230,6 +230,7 @@ private:
 	// Navigation
 	string PositionFile;
 	int FlagEnableZoomKeys;
+	int FlagManualZoom;
 	int FlagEnableMoveKeys;
 	float InitFov;
 	double PresetSkyTime;
