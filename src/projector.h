@@ -50,6 +50,8 @@ public:
 	virtual PROJECTOR_TYPE get_type(void) const {return PERSPECTIVE_PROJECTOR;}
 	VIEWPORT_TYPE get_viewport_type(void) const {return viewport_type;}
 	void set_viewport_type(VIEWPORT_TYPE);
+	void set_viewport_offset(int _xoff, int _yoff);
+	void get_viewport_offset(int &_xoff, int &_yoff);
 
 	void set_fov(double f);
 	double get_fov(void) const {return fov;}
@@ -226,7 +228,9 @@ protected:
 
 	// Automove
 	auto_zoom zoom_move;					// Current auto movement
-    int flag_auto_zoom;				// Define if autozoom is on or off
+	int flag_auto_zoom;				// Define if autozoom is on or off
+	int hoffset, voffset;                           // for tweaking viewport centering
+
 
 };
 
