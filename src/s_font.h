@@ -49,11 +49,11 @@ class s_font
 public:
     s_font(float size_i, char * textureName, const char * dataFileName);
     virtual ~s_font();
-    void print(float x, float y, const char * str) const;
-    float getStrLen(const char * str);
-    float getAverageCharLen(void) {return averageCharLen*ratio;}
-    float getLineHeight(void) {return lineHeight*ratio;}
-    float getStrHeight(const char * str);
+    void print(float x, float y, const char * str, int upsidedown = 1) const;
+    float getStrLen(const char * str) const;
+    float getAverageCharLen(void) const {return averageCharLen*ratio;}
+    float getLineHeight(void) const {return lineHeight*ratio;}
+    float getStrHeight(const char * str) const;
     s_texture * s_fontTexture;
 private:
     int buildDisplayLists(const char * dataFileName, const char * textureName);

@@ -24,10 +24,9 @@
 char s_texture::texDir[255] = "./";
 char s_texture::suffix[10] = "";
 
-s_texture::s_texture(const char * _textureName) : loadType(PNG_BLEND3), loadType2(GL_CLAMP)
+s_texture::s_texture(const char * _textureName) : texID(0), loadType(PNG_BLEND3), loadType2(GL_CLAMP)
 {
     if (!_textureName) exit(-1);
-    texID=0;
     textureName=strdup(_textureName);
     load();
 }
@@ -58,7 +57,7 @@ s_texture::~s_texture()
 int s_texture::load()
 {
 	// Create the full texture name
-    char * fullName = (char*)malloc( sizeof(char) * ( strlen(texDir) + strlen(textureName) + strlen(suffix) + 2) );
+    char * fullName = (char*)malloc( sizeof(char) * ( strlen(texDir) + strlen(textureName) + strlen(suffix) + 1) );
     sprintf(fullName,"%s%s%s",texDir,textureName,suffix);
 
     FILE * tempFile = fopen(fullName,"r");
@@ -79,7 +78,7 @@ int s_texture::load()
 
 void s_texture::unload()
 {   
-    glDeleteTextures(1, (GLuint*)&texID);						// Delete The Texture
+    glDeleteTextures(1, &texID);						// Delete The Texture
 }
 
 int s_texture::reload()

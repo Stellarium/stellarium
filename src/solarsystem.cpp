@@ -155,3 +155,24 @@ void InitSolarSystem(char * font_fileName)
 	Sun->addSatellite(Neptune);
 	Sun->addSatellite(Pluto);
 }
+
+void ClearSolarSystem(void)
+{
+// Planet map textures
+if (sun_map) delete sun_map;
+if (mercury_map) delete mercury_map;
+if (venus_map) delete venus_map;
+if (earth_map) delete earth_map;
+if (moon_map) delete moon_map;
+if (mars_map) delete mars_map;
+if (jupiter_map) delete jupiter_map;
+if (ganymede_map) delete ganymede_map;
+if (io_map) delete io_map;
+if (saturn_map) delete saturn_map;
+if (saturn_ring_tex) delete saturn_ring_tex;
+if (uranus_map) delete uranus_map;
+if (neptune_map) delete neptune_map;
+if (pluto_map) delete pluto_map;
+if (small_halo) delete small_halo;
+if (sun_halo) delete sun_halo;
+}

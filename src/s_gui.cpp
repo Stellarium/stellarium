@@ -26,7 +26,7 @@
 using namespace std;
 using namespace s_gui;
 
-Scissor Component::scissor(640, 480);	// Default initialization
+Scissor* Component::scissor = NULL;			// Default initialization
 Painter Component::defaultPainter;
 
 ///////////////////////////////// Scissor //////////////////////////////////////
@@ -38,59 +38,79 @@ Scissor::Scissor(int _winW, int _winH) :
 	winW(_winW),
 	winH(_winH)
 {
-	s_square v(0, 0, winW, winH);
-	stack.push_back(v);
+	push(0, 0, winW, winH);
 }
 
 // Define a new GlScissor zone relative to the previous one and apply it so
 // that nothing can be drawn outside the limits
 void Scissor::push(int posx, int posy, int sizex, int sizey)
 {
-	s_square v = *stack.end();
-	s_square el(v[0] + posx, v[1] + posy, v[2], v[3]);
-
-	// Check and adjust in case of overlapping
-	if (posx + sizex > v[2])
+	if (stack.empty())
 	{
-		el[2] = v[2] - posx;
-		if (el[2] < 0) el[2] = 0;
+		s_square el(posx, posy, sizex, sizey);
+
+		// Apply the new values
+		glScissor(el[0], winH - el[1] - el[3], el[2], el[3]);
+		// Add the new value at the end of the stack
+		stack.push_front(el);
 	}
-	if (posy + sizey > v[3])
+	else
 	{
-		el[3] = v[3] - posy;
-		if (el[3] < 0) el[3] = 0;
+		s_square v = *stack.begin();
+		s_square el(v[0] + posx, v[1] + posy, sizex, sizey);
+
+		// Check and adjust in case of overlapping
+		if (posx + sizex > v[2])
+		{
+			el[2] = v[2] - posx;
+			if (el[2] < 0) el[2] = 0;
+		}
+		if (posy + sizey > v[3])
+		{
+			el[3] = v[3] - posy;
+			if (el[3] < 0) el[3] = 0;
+		}
+		// Apply the new values
+		glScissor(el[0], winH - el[1] - el[3], el[2], el[3]);
+		// Add the new value at the end of the stack
+		stack.push_front(el);
 	}
-
-	// Apply the new values
-	glScissor(el[0], winH - el[1] - el[3], el[2], el[3]);
-
-	// Add the new value at the end of the stack
-	stack.push_back(el);
 }
 
 // See above
 void Scissor::push(const s_vec2i& pos, const s_vec2i& size)
 {
-	s_square v = *stack.end();
-	s_square el(v[0] + pos[0], v[1] + pos[1], v[2], v[3]);
-
-	// Check and adjust in case of overlapping
-	if (pos[0] + size[0] > v[2])
+	if (stack.empty())
 	{
-		el[2] = v[2] - pos[0];
-		if (el[2] < 0) el[2] = 0;
+		s_square el(pos[0], pos[1], size[0], size[1]);
+		// Apply the new values
+		glScissor(el[0], winH - el[1] - el[3], el[2], el[3]);
+		// Add the new value at the end of the stack
+		stack.push_front(el);
 	}
-	if (pos[1] + size[1] > v[3])
+	else
 	{
-		el[3] = v[3] - pos[1];
-		if (el[3] < 0) el[3] = 0;
+		s_square v = *stack.begin();
+		s_square el(v[0] + pos[0], v[1] + pos[1], size[0], size[1]);
+
+		// Check and adjust in case of overlapping
+		if (pos[0] + size[0] > v[2])
+		{
+			el[2] = v[2] - pos[0];
+			if (el[2] < 0) el[2] = 0;
+		}
+		if (pos[1] + size[1] > v[3])
+		{
+			el[3] = v[3] - pos[1];
+			if (el[3] < 0) el[3] = 0;
+		}
+		// Apply the new values
+		glScissor(el[0], winH - el[1] - el[3], el[2], el[3]);
+
+		// Add the new value at the end of the stack
+		stack.push_front(el);
 	}
 
-	// Apply the new values
-	glScissor(el[0], winH - el[1] - el[3], el[2], el[3]);
-
-	// Add the new value at the end of the stack
-	stack.push_back(el);
 }
 
 // Remove the last element in the stack : ie comes back to the previous
@@ -98,11 +118,14 @@ void Scissor::push(const s_vec2i& pos, const s_vec2i& size)
 void Scissor::pop(void)
 {
 	// Remove the last value from the stack
-	stack.pop_back();
+	stack.pop_front();
 
-	// Apply the previous value
-	s_square v = *stack.end();
-	glScissor(v[0], winH - v[1] - v[3], v[2], v[3]);
+	if (!stack.empty())
+	{
+		// Apply the previous value
+		s_square v = *stack.begin();
+		glScissor(v[0], winH - v[1] - v[3], v[2], v[3]);
+	}
 }
 
 
@@ -117,11 +140,12 @@ Painter::Painter() :
 {
 }
 
-Painter::Painter(s_texture* _tex1, s_font* _font, const s_color& _baseColor, const s_color& _textColor) :
-	tex1(_tex1),
-	font(_font),
-	baseColor(_baseColor),
-	textColor(_textColor)
+Painter::Painter(const s_texture* _tex1, const s_font* _font,
+	const s_color& _baseColor, const s_color& _textColor) :
+		tex1(_tex1),
+		font(_font),
+		baseColor(_baseColor),
+		textColor(_textColor)
 {
 
 }
@@ -205,7 +229,7 @@ void Painter::print(int x, int y, const char * str) const
     glColor4fv(textColor);
     glEnable(GL_TEXTURE_2D);
     glEnable(GL_BLEND);
-	font->print(x, y, str);
+	font->print(x, y, str, 0);	// 0 for upside down mode
 }
 
 
@@ -227,7 +251,7 @@ Component::~Component()
 {
 }
 
-void Component::reshape(s_vec2i _pos, s_vec2i _size)
+void Component::reshape(const s_vec2i& _pos, const s_vec2i& _size)
 {
 	pos = _pos;
 	size = _size;
@@ -239,11 +263,16 @@ void Component::reshape(int x, int y, int w, int h)
 	size.set(w, h);
 }
 
-int Component::isIn(float x , float y)
+int Component::isIn(int x, int y)
 {
 	return (pos[0]<=x && (size[0]+pos[0])>=x && pos[1]<=y && (pos[1]+size[1])>=y);
 }
 
+void Component::initScissor(int winW, int winH)
+{
+	if (scissor) delete scissor;
+	scissor = new Scissor(winW, winH);
+}
 
 //////////////////////////////// Container /////////////////////////////////////
 // Manages hierarchical components : send signals ad actions  to childrens
@@ -279,7 +308,7 @@ void Container::draw(void)
     glPushMatrix();
     glTranslatef(pos[0], pos[1], 0.f);
 
-    Component::scissor.push(pos, size);
+    Component::scissor->push(pos, size);
 
 	while (iter != childs.end())
 	{
@@ -287,7 +316,8 @@ void Container::draw(void)
 		iter++;
 	}
 
-    Component::scissor.pop();
+    Component::scissor->pop();
+
     glPopMatrix();
 }
 
@@ -331,88 +361,132 @@ int Container::onKey(SDLKey k, S_GUI_VALUE s)
 
 void FilledContainer::draw(void)
 {
+    if (!visible) return;
 	painter.drawSquareFill(pos, size);
 	painter.drawSquareEdge(pos, size);
+
 	Container::draw();
 }
 
+
+//////////////////////////// FramedContainer ///////////////////////////////////
+// Container with a frame around it
+////////////////////////////////////////////////////////////////////////////////
+
+FramedContainer::FramedContainer() : Container(), frameSize(3,3,3,3)
+{
+	inside = new Container();
+	inside->reshape(frameSize[0], frameSize[3], 10, 10);
+	childs.push_front(inside);
+}
+
+void FramedContainer::draw(void)
+{
+    if (!visible) return;
+	painter.drawSquareEdge(pos, size);
+	painter.drawSquareEdge(inside->getPos()-s_vec2i(1,1) + pos, inside->getSize() + s_vec2i(2,2));
+
+	Container::draw();
+}
+
+void FramedContainer::reshape(const s_vec2i& _pos, const s_vec2i& _size)
+{
+	pos = _pos;
+	inside->setSize(_size);
+	size = _size + s_vec2i( frameSize[0] + frameSize[1], frameSize[2] + frameSize[3]);
+}
+
+void FramedContainer::reshape(int x, int y, int w, int h)
+{
+	pos = s_vec2i(x, y);
+	inside->setSize(s_vec2i(w,h));
+	size = s_vec2i(w, h) + s_vec2i( frameSize[0] + frameSize[1], frameSize[2] + frameSize[3]);
+}
+
+void FramedContainer::setSize(const s_vec2i& _size)
+{
+	inside->setSize(_size);
+	size = _size + s_vec2i( frameSize[0] + frameSize[1], frameSize[2] + frameSize[3]);
+}
+
+
+void FramedContainer::setFrameSize(int left, int right, int top, int bottom)
+{
+	// TODO
+}
+
+
+////////////////////////////////// Button //////////////////////////////////////
+// Simplest button with one press callback
+////////////////////////////////////////////////////////////////////////////////
+
+Button::Button() : Component()
+{
+	size.set(10,10);
+}
+
+int Button::onClic(int x, int y, S_GUI_VALUE bt, S_GUI_VALUE state)
+{
+	if (state==S_GUI_PRESSED && bt==S_GUI_MOUSE_LEFT && isIn(x, y))
+	{
+		if (onPressCallback) onPressCallback();
+		return 1;
+	}
+	return 0;
+}
+
+void Button::draw()
+{
+	if (!visible) return;
+	painter.drawSquareEdge(pos, size);
+}
+
+void FilledButton::draw()
+{
+	if (!visible) return;
+	painter.drawSquareFill(pos, size);
+	painter.drawSquareEdge(pos, size);
+}
+
+
+Label::Label(const char * _label, const s_font * _font) : label(NULL)
+{
+	setLabel(_label);
+	if (_font) painter.setFont(_font);
+}
+
+Label::~Label()
+{
+	if (label) free(label);
+	label = NULL;
+}
+
+void Label::setLabel(const char* _label)
+{
+    if (label) free(label);
+    label = NULL;
+    if (_label) label = strdup(_label);
+}
+
+void Label::draw()
+{
+	if (!visible) return;
+    glPushMatrix();
+    if (painter.getFont())
+    {
+		painter.print(pos[0], pos[1], label);
+    }
+    glPopMatrix();
+	painter.drawSquareEdge(pos, size);
+}
+
+void Label::adjustSize(void)
+{
+	size[0] = (int)ceilf(painter.getFont()->getStrLen(label));
+	size[1] = (int)ceilf(painter.getFont()->getLineHeight());
+}
+
 /*
-// Button
-
-void ExtButtonClicCallback(int x, int y, enum guiValue state, enum guiValue button, Component * me)
-{
-    ((Button*)me)->ButtonClicCallback(button, state);
-}
-
-void ExtButtonMoveCallback(int x, int y, enum guiValue action, Component * me)
-{
-    ((Button*)me)->ButtonMoveCallback(action);
-}
-
-Button::Button() :
-    Component(), 
-    mouseOn(false), 
-    onClicCallback(NULL), 
-    onMouseOverCallback(NULL)
-{
-    setClicCallback(ExtButtonClicCallback);
-    setMoveCallback(ExtButtonMoveCallback);
-}
-
-Button::~Button()
-{
-    //printf("Destructor Button.\n");
-}
-
-void Button::render(GraphicsContext& gc)
-{
-    if (mouseOn) glColor3fv(gc.baseColor / 2);
-    else glColor3fv(gc.baseColor*1.5);
-    if (mouseIn) glColor3fv(gc.baseColor*2);
-    glDisable(GL_TEXTURE_2D);
-    vec2_i pos = getPosition();
-    vec2_i sz = getSize();
-    glBegin(GL_LINE_LOOP);
-        glVertex2f(pos[0]+0.5, pos[1]+0.5);
-        glVertex2f(pos[0] + sz[0]-0.5, pos[1]+0.5);
-        glVertex2f(pos[0] + sz[0]-0.5, pos[1] + sz[1]-0.5);
-        glVertex2f(pos[0]+0.5, pos[1] + sz[1]-0.5);
-    glEnd();
-}
-
-void Button::setOnClicCallback(void (*_onClicCallback)(enum guiValue, Component *))
-{
-    onClicCallback = _onClicCallback;
-}
-
-void Button::setOnMouseOverCallback(void (*_onMouseOverCallback)(enum guiValue, Component *))
-{
-    onMouseOverCallback = _onMouseOverCallback;
-}
-
-void Button::ButtonClicCallback(enum guiValue button, enum guiValue state)
-{
-    if (state == GUI_DOWN) mouseOn = true;
-    else
-    {
-        if (mouseOn && onClicCallback != NULL) onClicCallback(button, this);
-        mouseOn = false;
-    }
-}
-
-void Button::ButtonMoveCallback(enum guiValue action)
-{
-    if (action == GUI_MOUSE_LEAVE || action == GUI_MOUSE_ENTER)
-    {
-        mouseOn = false;
-    }
-    if (onMouseOverCallback != NULL) onMouseOverCallback(action, this);
-}
-
-
-
-// Labeled_Button
-
 Labeled_Button::Labeled_Button(char * _label) : Button(), label(NULL)
 {
     if (_label)  setLabel(_label);
@@ -452,74 +526,6 @@ void Labeled_Button::render(GraphicsContext& gc)
     glPopMatrix();
 }
 
-// Textured_Button
-
-Textured_Button::Textured_Button(s_texture * _texBt) : 
-    Button(), 
-    texBt(_texBt), 
-    activeColor(1.0, 1.0, 1.0), 
-    passiveColor(0.5, 0.5, 0.5)
-{
-}
-
-
-
-Textured_Button::Textured_Button(
-    s_texture * _texBt,
-    vec2_i _position,
-    vec2_i _size,
-    vec3_t _activeColor,
-    vec3_t _passiveColor,
-    Callback1Base* _c1,
-    Callback1Base* _c2,
-    int _ID, int _active) :
-        Button(), 
-        texBt(_texBt),
-        activeColor(_activeColor), 
-        passiveColor(_passiveColor),
-		c1(_c1), c2(_c2)
-{
-	if (!texBt)
-	{
-		printf("ERROR NO TEXTURE FOR TEXTURED BUTTON\n");
-		exit(-1);
-	}
-    position = _position;
-    size = _size;
-    ID = _ID;
-    active = _active;
-}
-
-Textured_Button::~Textured_Button()
-{
-    if (texBt) delete texBt;
-    texBt = NULL;
-}
-
-void Textured_Button::render(GraphicsContext& gc)
-{
-    if (active)
-    {
-        glColor3fv(activeColor);
-    }
-    else
-    {
-        glColor3fv(gc.baseColor);
-        //glColor3fv(passiveColor);
-    }
-    vec2_i pos = getPosition();
-    vec2_i sz = getSize();
-    glEnable(GL_TEXTURE_2D);
-    glEnable(GL_BLEND);
-    glBindTexture(GL_TEXTURE_2D, texBt->getID());
-    glBegin(GL_QUADS );
-        glTexCoord2f(0.0f, 0.0f); glVertex2i(pos[0], pos[1] + sz[1]); // Bas Gauche
-        glTexCoord2f(1.0f, 0.0f); glVertex2i(pos[0] + sz[0], pos[1] + sz[1]); // Bas Droite
-        glTexCoord2f(1.0f, 1.0f); glVertex2i(pos[0] + sz[0], pos[1]); // Haut Droit
-        glTexCoord2f(0.0f, 1.0f); glVertex2i(pos[0], pos[1]); // Haut Gauche
-    glEnd ();
-    Button::render(gc);
-}
 
 // Label
 

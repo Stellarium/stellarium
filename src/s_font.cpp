@@ -48,31 +48,29 @@ int s_font::buildDisplayLists(const char * dataFileName, const char * textureNam
     s_fontTexture = new s_texture(textureName);
     if (!s_fontTexture)
     {
-	printf("ERROR WHILE CREATING FONT TEXTURE\n");
-	return 0;
+		printf("ERROR WHILE CREATING FONT TEXTURE\n");
+		return 0;
     }
 
-    FILE * pFile;
-    pFile = fopen(dataFileName,"r");
-    if (pFile==NULL)
+	FILE * pFile = fopen(dataFileName,"r");
+    if (!pFile)
     {
-	printf("ERROR WHILE LOADING %s\n",dataFileName);
+		printf("ERROR WHILE LOADING %s\n",dataFileName);
         return 0;
     }
     if (fscanf(pFile,"%s LineSize %d\n",name, &lineHeight)!=2)
     {
-	fclose(pFile);
+		fclose(pFile);
         return 0;
     }
    
     averageCharLen=0;
     ratio = size/lineHeight;
-    g_base = glGenLists(25);                           // Creating 256 Display Lists
+    g_base = glGenLists(128);                           // Creating 256 Display Lists
     glBindTexture(GL_TEXTURE_2D, s_fontTexture->getID());          // Select Our s_font Texture
 
     while(fscanf(pFile,"%d %d %d %d %d %d\n",&charNum,&posX,&posY,&sizeX,&sizeY,&leftSpacing)==6)
     {
-	//printf("%d %d %d %d %d %d\n",charNum,posX,posY,sizeX,sizeY,leftSpacing);
         theSize[charNum].sizeX=sizeX;
         theSize[charNum].sizeY=sizeY;
         theSize[charNum].leftSpacing=leftSpacing;
@@ -80,28 +78,31 @@ int s_font::buildDisplayLists(const char * dataFileName, const char * textureNam
         averageCharLen+=sizeX;
         nbChar++;
 
-        glNewList(g_base+charNum,GL_COMPILE);                               // Start Building A List
-	glTranslated(leftSpacing*ratio,0,0);                                    // Move To The Left Of The Character
-	glBegin(GL_QUADS );
-	    glTexCoord2f((float)posX/256,(float)(256-posY-sizeY)/256);
-	    glVertex3f(0,sizeY*ratio,0);                                        //Bas Gauche
-	    glTexCoord2f((float)(posX+sizeX)/256,(float)(256-posY-sizeY)/256);  
-	    glVertex3f(sizeX*ratio,sizeY*ratio,0);                              //Bas Droite
-	    glTexCoord2f((float)(posX+sizeX)/256,(float)(256-posY)/256);
-	    glVertex3f(sizeX*ratio,0,0);                                        //Haut Droit
-	    glTexCoord2f((float)posX/256,(float)(256-posY)/256);
-	    glVertex3f(0,0,0);                                                  //Haut Gauche
-	glEnd ();
-	glTranslated((sizeX+SPACING)*ratio,0,0);
-        glEndList();                                    // Done Building The Display List
+        glNewList(g_base+charNum,GL_COMPILE);				// Start Building A List
+			glTranslated(leftSpacing*ratio,0,0);			// Move To The Left Of The Character
+			glBegin(GL_QUADS );
+	    		glTexCoord2f((float)posX/256,(float)(256-posY-sizeY)/256);
+	    		glVertex3f(0,sizeY*ratio,0);										// Bottom Left
+	    		glTexCoord2f((float)(posX+sizeX)/256,(float)(256-posY-sizeY)/256);
+	    		glVertex3f(sizeX*ratio,sizeY*ratio,0);								// Bottom Right
+	    		glTexCoord2f((float)(posX+sizeX)/256,(float)(256-posY)/256);
+	    		glVertex3f(sizeX*ratio,0,0);										// Top Right
+	    		glTexCoord2f((float)posX/256,(float)(256-posY)/256);
+	    		glVertex3f(0,0,0);													// Top Left
+			glEnd ();
+			glTranslated((sizeX+SPACING)*ratio,0,0);
+        glEndList();										// Done Building The Display List
     }
+
     fclose(pFile);
-    averageCharLen/=nbChar;
-    return 1;
+    
+	averageCharLen/=nbChar;
+    
+	return 1;
 }
 
-void s_font::print(float x, float y, const char * str) const
-{ 
+void s_font::print(float x, float y, const char * str, int upsidedown) const
+{
     if	(!s_fontTexture)
     {
 		printf("ERROR, NO FONT TEXTURE\n");
@@ -110,28 +111,28 @@ void s_font::print(float x, float y, const char * str) const
     glBindTexture(GL_TEXTURE_2D, s_fontTexture->getID());  // Select Our s_font Texture
     glPushMatrix();
     glTranslatef(x,y,0);								// Position The Text (0,0 - Top Left)
-	glScalef(1, -1, 1);									// invert the y axis, down is positive
+	if (upsidedown) glScalef(1, -1, 1);									// invert the y axis, down is positive
     glListBase(g_base);									// Init the Display list base
     glCallLists(strlen(str),GL_BYTE,str);				// Write The Text To The Screen
     glPopMatrix();
 }
 
-float s_font::getStrLen(const char * str)
+float s_font::getStrLen(const char * str) const
 {
     float s=0;
     for (int i=0;i<(int)strlen(str);i++)
     { 
-	s+=theSize[str[i]].sizeX+theSize[str[i]].leftSpacing+theSize[str[i]].rightSpacing+SPACING;
+		s+=theSize[str[i]].sizeX+theSize[str[i]].leftSpacing+theSize[str[i]].rightSpacing+SPACING;
     }
     return s*ratio;
 }
 
-float s_font::getStrHeight(const char * str)
+float s_font::getStrHeight(const char * str) const
 {  
     float s=0;
     for (int i=0;i<(int)strlen(str);i++)
     {
-	if (s<theSize[str[i]].sizeY) s=theSize[str[i]].sizeY;
+		if (s<theSize[str[i]].sizeY) s=theSize[str[i]].sizeY;
     }
     return s*ratio;
 }

@@ -181,5 +181,5 @@ void Hip_Star::Draw(draw_utility * du)
 void Hip_Star::DrawName(s_font* star_font)
 {   
     glColor3fv(RGB*(1./2.5));
-	star_font->print(XY[0]+6,XY[1]+6, CommonName);
+	star_font->print(XY[0]+6,XY[1]-4, CommonName);
 }

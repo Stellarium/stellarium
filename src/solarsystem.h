@@ -28,6 +28,6 @@ extern planet * Moon;
 extern planet * Earth; 
 
 void InitSolarSystem(char * font_fileName); // Create and init the solar system
-
+void ClearSolarSystem(void);
 
 #endif // _PLANET_H_
