@@ -22,6 +22,7 @@
 #include <string>
 #include "stel_command_interface.h"
 #include "stel_core.h"
+#include "image.h"
 
 using namespace std;
 
@@ -139,6 +140,28 @@ int StelCommandInterface::execute_command(string commandline, int &wait) {
     } else {
       cout << "Insufficient arguments" << endl;
       status = 0;
+    }
+
+  } else if(command=="imageload") {
+    if(args["filename"]!="" && args["name"]!="") {
+      stcore->images->load_image(args["filename"], args["name"]);
+    } else {
+      cout << "Incomplete or incorrect arguments." << endl;
+    }
+
+  } else if(command=="imageprop") {
+    if(args["name"]!=""){
+      Image * img = stcore->images->get_image(args["name"]);
+
+      if(img != NULL ) {
+	if(args["alpha"]!="") img->set_alpha(str_to_double(args["alpha"]), 
+					     str_to_double(args["duration"]));
+	if(args["scale"]!="") img->set_scale(str_to_double(args["scale"]), 
+					     str_to_double(args["duration"]));
+	if(args["rotation"]!="") img->set_rotation(str_to_double(args["rotation"]), 
+					     str_to_double(args["duration"]));
+      }
+
     }
 
   } else {
