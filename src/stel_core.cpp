@@ -104,6 +104,9 @@ void stel_core::init(void)
 	projection->set_viewport_offset(horizontalOffset, verticalOffset);
 	projection->set_viewport_type(ViewportType);
 
+	// get ready for sky localization
+	skyloc = new Sky_localizer(DataDir);
+
 	// Load hipparcos stars & names
 	hip_stars = new Hip_Star_mgr(DataDir, SkyLocale, "spacefont.txt" );
 
@@ -499,8 +502,8 @@ void stel_core::load_config_from(const string& confFile)
 	}
 
 	// localization section
-	SkyCulture = conf.get_str("localization", "sky_culture", "western");
-	SkyLocale = conf.get_str("localization", "sky_locale", "eng");
+	set_sky_culture(conf.get_str("localization", "sky_culture", "western") );
+	set_sky_locale(conf.get_str("localization", "sky_locale", "eng"));
 	// default sky is western, english (actually only planet names are english!)
 
 	// Star section
@@ -1096,5 +1099,41 @@ void stel_core::auto_zoom_out(float move_duration)
 	navigation->move_to(InitViewPos, move_duration, true, -1);
 	navigation->set_flag_traking(false);
 	navigation->set_flag_lock_equ_pos(0);
+
+}
+
+// this really belongs elsewhere
+void stel_core::set_sky_culture(string _culture_dir){
+
+  if(SkyCulture == _culture_dir) return;
+  SkyCulture = _culture_dir;
+
+  if(!projection) return;  // objects not initialized yet, will be loaded in init
+
+  // percent complete bar only draws in 2d mode
+  projection->set_orthographic_projection();
+  asterisms->set_sky_culture(_culture_dir, DataDir + "spacefont.txt", screen_W/2-150, screen_H/2-20);
+  projection->reset_perspective_projection();
+  
+  // as constellations have changed, clear out any selection and retest for match!
+  if (selected_object && selected_object->get_type()==STEL_OBJECT_STAR) {
+    selected_constellation=asterisms->is_star_in((Hip_Star*)selected_object);
+  } else {
+    selected_constellation=NULL;
+  }
+
+}
+
+
+// this really belongs elsewhere
+void stel_core::set_sky_locale(string _locale){
+
+  if(SkyLocale == _locale) return;
+  SkyLocale = _locale;
+
+  if( !hip_stars ) return; // objects not initialized yet
+  hip_stars->set_sky_locale(_locale);
+  ssystem->set_sky_locale(_locale);
+  asterisms->set_sky_locale(_locale);
 
 }

@@ -44,6 +44,7 @@ using namespace std;
 #include "draw.h"
 #include "landscape.h"
 #include "meteor_mgr.h"
+#include "sky_localizer.h"
 
 class stel_core
 {
@@ -102,6 +103,9 @@ public:
 
 	// Quit the application
 	void stel_core::quit(void);
+
+	void set_sky_culture(string _culture_dir);
+	void set_sky_locale(string _locale);
 private:
 
 	void load_config_from(const string& confFile);
@@ -269,6 +273,7 @@ private:
 	void turn_down(int);
 	void zoom_in(int);
 	void zoom_out(int);
+	Sky_localizer *skyloc;  // for sky cultures and locales
 };
 
 #endif // _STEL_CORE_H_
