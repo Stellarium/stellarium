@@ -502,21 +502,22 @@ bool Decimal_item::onKey(SDLKey k, S_TUI_VALUE v)
 			value+=delta;
 			if (value>max) value = max;
 			if (value<min) value = min;
-			ostringstream os;
-			os << value;
-			strInput = os.str();
+			static char tempstr[16];
+			snprintf(tempstr, 15, "%.2f", value);
+			string os(tempstr);
+			strInput = os.c_str();
 			return true;
 		}
 		if (k==SDLK_DOWN)
 		{
-			istringstream is(strInput);
-			is >> value;
+			value = atof(strInput.c_str());
 			value-=delta;
 			if (value>max) value = max;
 			if (value<min) value = min;
-			ostringstream os;
-			os << value;
-			strInput = os.str();
+			static char tempstr[16];
+			snprintf(tempstr, 15, "%.2f", value);
+			string os(tempstr);
+			strInput = os.c_str();
 			return true;
 		}
 
@@ -543,8 +544,14 @@ bool Decimal_item::onKey(SDLKey k, S_TUI_VALUE v)
 string Decimal_item::getString(void)
 {
 	ostringstream os;
+
+	// Can't directly write value in os because there is a float precision limit bug..
+	static char tempstr[16];
+	snprintf(tempstr, 15, "%.2f", value);
+	string vstr(tempstr);
+
 	if (numInput) os << label << (active ? start_active : "") << strInput << (active ? stop_active : "");
-	else os << label << (active ? start_active : "") << value << (active ? stop_active : "");
+	else os << label << (active ? start_active : "") << vstr.c_str() << (active ? stop_active : "");
 	return os.str();
 }
 
