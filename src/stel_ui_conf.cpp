@@ -33,11 +33,15 @@ Component* stel_ui::createConfigWindow(void)
 
 	// The current drawing position
 	int x,y;
-	x=10; y=10;
+	x=70; y=15;
 
 	// Rendering options
 	FilledContainer* tab_render = new FilledContainer();
 	tab_render->setSize(config_tab_ctr->getSize());
+
+	s_texture* starp = new s_texture("halo");
+	Picture* pstar = new Picture(starp, x-50, y+5, 32, 32);
+	tab_render->addComponent(pstar);
 
 	stars_cbx = new LabeledCheckBox(core->FlagStars, "Stars");
 	stars_cbx->setOnPressCallback(callback<void>(this, &stel_ui::updateConfigVariables));
@@ -70,6 +74,10 @@ Component* stel_ui::createConfigWindow(void)
 
 	y+=30;
 
+	s_texture* constellp = new s_texture("bt_constellations");
+	Picture* pconstell = new Picture(constellp, x-50, y+5, 32, 32);
+	tab_render->addComponent(pconstell);
+
 	constellation_cbx = new LabeledCheckBox(core->FlagConstellationDrawing, "Constellations");
 	constellation_cbx->setOnPressCallback(callback<void>(this, &stel_ui::updateConfigVariables));
 	tab_render->addComponent(constellation_cbx);
@@ -83,7 +91,13 @@ Component* stel_ui::createConfigWindow(void)
 	sel_constellation_cbx = new LabeledCheckBox(core->FlagConstellationPick, "Selected Constellation Only");
 	sel_constellation_cbx->setOnPressCallback(callback<void>(this, &stel_ui::updateConfigVariables));
 	tab_render->addComponent(sel_constellation_cbx);
-	sel_constellation_cbx->setPos(x,y); y+=25;
+	sel_constellation_cbx->setPos(x,y);
+
+	y+=25;
+
+	s_texture* nebp = new s_texture("bt_nebula");
+	Picture* pneb = new Picture(nebp, x-50, y, 32, 32);
+	tab_render->addComponent(pneb);
 
 	nebulas_cbx = new LabeledCheckBox(core->FlagNebula, "Nebulas");
 	nebulas_cbx->setOnPressCallback(callback<void>(this, &stel_ui::updateConfigVariables));
@@ -100,7 +114,12 @@ Component* stel_ui::createConfigWindow(void)
 	max_mag_nebula_name->setOnPressCallback(callback<void>(this, &stel_ui::updateConfigVariables));
 	tab_render->addComponent(max_mag_nebula_name);
 	max_mag_nebula_name->setPos(x + 220,y);
+
 	y+=30;
+
+	s_texture* planp = new s_texture("bt_planet");
+	Picture* pplan = new Picture(planp, x-50, y, 32, 32);
+	tab_render->addComponent(pplan);
 
 	planets_cbx = new LabeledCheckBox(core->FlagPlanets, "Planets");
 	planets_cbx->setOnPressCallback(callback<void>(this, &stel_ui::updateConfigVariables));
@@ -117,8 +136,13 @@ Component* stel_ui::createConfigWindow(void)
 	planets_hints_cbx = new LabeledCheckBox(core->FlagPlanetsHints, "Planets Hints");
 	planets_hints_cbx->setOnPressCallback(callback<void>(this, &stel_ui::updateConfigVariables));
 	tab_render->addComponent(planets_hints_cbx);
-	planets_hints_cbx->setPos(x,y); y+=25;
+	planets_hints_cbx->setPos(x,y);
 
+	y+=25;
+
+	s_texture* gridp = new s_texture("bt_grid");
+	Picture* pgrid = new Picture(gridp, x-50, y, 32, 32);
+	tab_render->addComponent(pgrid);
 
 	equator_grid_cbx = new LabeledCheckBox(core->FlagEquatorialGrid, "Equatorial Grid");
 	equator_grid_cbx->setOnPressCallback(callback<void>(this, &stel_ui::updateConfigVariables));
@@ -138,7 +162,13 @@ Component* stel_ui::createConfigWindow(void)
 	ecliptic_cbx = new LabeledCheckBox(core->FlagEclipticLine, "Ecliptic Line");
 	ecliptic_cbx->setOnPressCallback(callback<void>(this, &stel_ui::updateConfigVariables));
 	tab_render->addComponent(ecliptic_cbx);
-	ecliptic_cbx->setPos(x + 150,y); y+=25;
+	ecliptic_cbx->setPos(x + 150,y);
+
+	y+=25;
+
+	s_texture* groundp = new s_texture("bt_ground");
+	Picture* pground = new Picture(groundp, x-50, y, 32, 32);
+	tab_render->addComponent(pground);
 
 	ground_cbx = new LabeledCheckBox(core->FlagGround, "Ground ");
 	ground_cbx->setOnPressCallback(callback<void>(this, &stel_ui::updateConfigVariables));
@@ -158,12 +188,12 @@ Component* stel_ui::createConfigWindow(void)
 	fog_cbx = new LabeledCheckBox(core->FlagFog, "Fog");
 	fog_cbx->setOnPressCallback(callback<void>(this, &stel_ui::updateConfigVariables));
 	tab_render->addComponent(fog_cbx);
-	fog_cbx->setPos(x + 150,y); y+=25;
+	fog_cbx->setPos(x + 150,y); y+=30;
 
 	LabeledButton* render_save_bt = new LabeledButton("Save as default");
 	render_save_bt->setOnPressCallback(callback<void>(this, &stel_ui::updateConfigVariables));
 	tab_render->addComponent(render_save_bt);
-	render_save_bt->setPos(x + 120,y); y+=15;
+	render_save_bt->setPos(x + 80,y); y+=20;
 
 /*	CursorBar* star_scale_cbar = new CursorBar(0,20,2);
 	star_scale_cbar->setOnChangeCallback(callback<void>(this, &stel_ui::updateConfigVariables));
@@ -188,18 +218,48 @@ Component* stel_ui::createConfigWindow(void)
 	// Location options
 	FilledContainer* tab_location = new FilledContainer();
 	tab_location->setSize(config_tab_ctr->getSize());
-	config_tab_ctr->setTexture(flipBaseTex);
-
 
 	x=5; y=5;
 	s_texture * earth = new s_texture("earthmap");
-	Picture* earth_map = new Picture(earth, x, y, tab_location->getSizex()-10, 250);
+	s_texture * pointertex = new s_texture("neb");
+	earth_map = new MapPicture(earth, pointertex, x, y, tab_location->getSizex()-10, 250);
+	earth_map->setOnPressCallback(callback<void>(this, &stel_ui::setObserverPositionFromMap));
 	tab_location->addComponent(earth_map);
-	y+=25;
+	y+=earth_map->getSizey() + 20;
 
+	Label * lbllong = new Label("Longitude : ");
+	lbllong->setPos(30, y+1);
+	Label * lbllat = new Label("Latitude : ");
+	lbllat->setPos(30, y+21);
+	tab_location->addComponent(lbllong);
+	tab_location->addComponent(lbllat);
+
+	long_incdec	= new FloatIncDec(courierFont, tex_up, tex_down, -180, 180, 0, 0.05);
+	long_incdec->setSizex(100);
+	long_incdec->setOnPressCallback(callback<void>(this, &stel_ui::setObserverPositionFromIncDec));
+	long_incdec->setPos(110,y);
+	lat_incdec	= new FloatIncDec(courierFont, tex_up, tex_down, -90, 90, 0, 0.05);
+	lat_incdec->setSizex(100);
+	lat_incdec->setOnPressCallback(callback<void>(this, &stel_ui::setObserverPositionFromIncDec));
+	lat_incdec->setPos(110,y+20);
+	tab_location->addComponent(long_incdec);
+	tab_location->addComponent(lat_incdec);
+
+	LabeledButton* location_save_bt = new LabeledButton("Save location");
+	location_save_bt->setOnPressCallback(callback<void>(this, &stel_ui::updateConfigVariables));
+	location_save_bt->setPos(200,y+5);
+	tab_location->addComponent(location_save_bt);
+
+	// Video Options
+	FilledContainer* tab_video = new FilledContainer();
+	tab_video->setSize(config_tab_ctr->getSize());
+
+
+	config_tab_ctr->setTexture(flipBaseTex);
 	config_tab_ctr->addTab(tab_time, "Date & Time");
 	config_tab_ctr->addTab(tab_location, "Location");
 	config_tab_ctr->addTab(tab_render, "Rendering");
+	config_tab_ctr->addTab(tab_video, "Video");
 	config_win->addComponent(config_tab_ctr);
 	config_win->setOnHideBtCallback(callback<void>(this, &stel_ui::config_win_hideBtCallback));
 	return config_win;
@@ -236,6 +296,18 @@ void stel_ui::setCurrentTimeFromConfig(void)
 	core->navigation->set_JDay(time_current->getJDay() - core->observatory->get_GMT_shift()*JD_HOUR);
 }
 
+void stel_ui::setObserverPositionFromMap(void)
+{
+	core->observatory->set_latitude(earth_map->getPointerLatitude());
+	core->observatory->set_longitude(earth_map->getPointerLongitude());
+}
+
+void stel_ui::setObserverPositionFromIncDec(void)
+{
+	core->observatory->set_latitude(lat_incdec->getValue());
+	core->observatory->set_longitude(long_incdec->getValue());
+}
+
 void stel_ui::updateConfigForm(void)
 {
 	stars_cbx->setState(core->FlagStars);
@@ -260,6 +332,11 @@ void stel_ui::updateConfigForm(void)
 	cardinal_cbx->setState(core->FlagCardinalPoints);
 	atmosphere_cbx->setState(core->FlagAtmosphere);
 	fog_cbx->setState(core->FlagFog);
+
+	earth_map->setPointerLongitude(core->observatory->get_longitude());
+	earth_map->setPointerLatitude(core->observatory->get_latitude());
+	long_incdec->setValue(core->observatory->get_longitude());
+	lat_incdec->setValue(core->observatory->get_latitude());
 
 	time_current->setJDay(core->navigation->get_JDay() + core->observatory->get_GMT_shift()*JD_HOUR);
 }

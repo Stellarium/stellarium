@@ -124,6 +124,7 @@ void stel_core::init(void)
 
 	// Create and init the solar system
 	ssystem->init(DataDir + "spacefont.txt", DataDir + "ssystem.ini");
+	ssystem->set_planet_font_color(PlanetNamesColor);
 
 	landscape = Landscape::create_from_file(DataDir + "landscapes.ini", observatory->get_landscape_name());
 

@@ -1272,11 +1272,13 @@ void Time_item::onTimeChange(void)
 	if (!onChangeTimeCallback.empty()) onChangeTimeCallback();
 }
 
-Picture::Picture(s_texture * _imageTex, int xpos, int ypos, int xsize, int ysize) : imageTex(_imageTex)
+Picture::Picture(s_texture * _imageTex, int xpos, int ypos, int xsize, int ysize) :
+	imageTex(_imageTex), imgcolor(s_color(1,1,1))
 {
 	setPos(xpos, ypos);
 	setSize(xsize, ysize);
 	setTexture(imageTex);
+	showedges = false;
 }
 
 Picture::~Picture()
@@ -1287,6 +1289,55 @@ Picture::~Picture()
 
 void Picture::draw(void)
 {
-	painter.drawSquareFill(pos, size, s_white);
-	painter.drawSquareEdge(pos, size);
+	painter.drawSquareFill(pos, size, imgcolor);
+	if (showedges) painter.drawSquareEdge(pos, size);
+}
+
+MapPicture::MapPicture(s_texture * _imageTex, s_texture * _pointerTex, int xpos, int ypos, int xsize, int ysize) :
+	Picture(_imageTex, xpos, ypos, xsize, ysize), pointer(NULL)
+{
+	pointer = new Picture(_pointerTex, 0, 0, 5, 5);
+	setShowEdge(true);
+	pointer->setImgColor(s_color(1,1,0));
+}
+
+MapPicture::~MapPicture()
+{
+	delete pointer;
+	pointer = NULL;
+}
+
+void MapPicture::draw(void)
+{
+	Picture::draw();
+	pointer->setPos(s_vec2i(crosspos[0]+pos[0]-pointer->getSizex()/2, crosspos[1]+pos[1]-pointer->getSizey()/2));
+	pointer->draw();
+}
+
+int MapPicture::onClic(int x, int y, S_GUI_VALUE button, S_GUI_VALUE state)
+{
+	if (!visible || state!=S_GUI_PRESSED || !isIn(x,y)) return 0;
+	crosspos.set(x - pos[0], y - pos[1]);
+	if (!onPressCallback.empty()) onPressCallback();
+	return 1;
+}
+
+float MapPicture::getPointerLongitude(void) const
+{
+	return (float)getPointerx()/size[0]*360.f-180.f;
+}
+
+float MapPicture::getPointerLatitude(void) const
+{
+	return (float)(1.f - (float)getPointery()/size[1])*180.f-90.f;
+}
+
+void MapPicture::setPointerLongitude(float l)
+{
+	setPointerx((int)((l+180.f)/360.f * size[0]));
+}
+
+void MapPicture::setPointerLatitude(float l)
+{
+	setPointery(size[1] - (int)((l+90.f)/180.f * size[1]));
 }

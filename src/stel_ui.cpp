@@ -755,9 +755,9 @@ void stel_ui::updateInfoSelectString(void)
     info_select_txtlbl->setLabel(objectInfo);
     if (core->FlagShowSelectedObjectInfos) info_select_ctr->setVisible(1);
 	if (core->selected_object->get_type()==STEL_OBJECT_NEBULA)
-		info_select_txtlbl->setTextColor(Vec3f(0.4f,0.5f,0.8f));
+		info_select_txtlbl->setTextColor(core->NebulaLabelColor);
 	if (core->selected_object->get_type()==STEL_OBJECT_PLANET)
-		info_select_txtlbl->setTextColor(Vec3f(1.0f,0.3f,0.3f));
+		info_select_txtlbl->setTextColor(core->PlanetNamesColor);
 	if (core->selected_object->get_type()==STEL_OBJECT_STAR)
 		info_select_txtlbl->setTextColor(core->selected_object->get_RGB());
 }
