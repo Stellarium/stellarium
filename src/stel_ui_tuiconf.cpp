@@ -131,7 +131,7 @@ void stel_ui::init_tui(void)
 	// sky culture goes here
 	tui_general_sky_culture = new s_tui::MultiSet_item<string>("3.1 Sky Culture: ");
 	// temporary - read from directory structure
-	tui_general_sky_culture->addItemList("greco-roman\npolynesian");
+	tui_general_sky_culture->addItemList("western\npolynesian");
 
 	tui_general_sky_culture->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb_tui_general_change_sky_culture));
 	tui_menu_general->addComponent(tui_general_sky_culture);
@@ -322,6 +322,16 @@ void stel_ui::tui_cb_tui_effect_change_landscape(void)
 // Set a new sky culture
 void stel_ui::tui_cb_tui_general_change_sky_culture(void) {
 	core->asterisms->set_sky_culture(tui_general_sky_culture->getCurrent());
+
+	// as constellations have changed, clear out any selection and retest for match!
+	if (core->selected_object && core->selected_object->get_type()==STEL_OBJECT_STAR) {
+	  core->selected_constellation=core->asterisms->is_star_in((Hip_Star*)core->selected_object);
+	} else {
+	  core->selected_constellation=NULL;
+	}
+
+	core->hip_stars->set_sky_culture(tui_general_sky_culture->getCurrent());
+	
 	core->SkyCulture = tui_general_sky_culture->getCurrent();  // assuming above worked...
 }
 

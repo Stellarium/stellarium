@@ -109,8 +109,15 @@ void stel_core::init(void)
 		default : projection->maximize_viewport(); break;
 	}
 	
-
+	/*
     hip_stars = new Hip_Star_mgr();
+    hip_stars->load(DataDir + "spacefont.txt", DataDir + "hipparcos.fab",
+		DataDir + "commonname.fab",	DataDir + "name.fab");
+	*/
+
+    // Load hipparcos stars & names
+    hip_stars = new Hip_Star_mgr(DataDir, SkyCulture, "spacefont.txt" );
+
 
     nebulas   = new Nebula_mgr(NebulaLabelColor, NebulaCircleColor);
 
@@ -133,9 +140,6 @@ void stel_core::init(void)
 	milky_way = new MilkyWay("milkyway");
 	meteors = new Meteor_mgr(projection, navigation, tone_converter, 10, 60);
 
-    // Load hipparcos stars & names
-    hip_stars->load(DataDir + "spacefont.txt", DataDir + "hipparcos.fab",
-		DataDir + "commonname.fab",	DataDir + "name.fab");
 
     // Load constellations
     asterisms = new Constellation_mgr(DataDir, SkyCulture, hip_stars, "spacefont.txt", ConstLinesColor, ConstNamesColor);
@@ -291,6 +295,7 @@ void stel_core::draw(int delta_time)
 	// Draw the constellations's names
 	if (FlagConstellationName)
 	{
+	        // TODO: cleaner if constellation mgr is one tracking selected constellation  
 		if (FlagConstellationPick && selected_constellation)
 			asterisms->draw_one_name(projection, selected_constellation, FlagGravityLabels);
 		else asterisms->draw_names(projection, FlagGravityLabels);

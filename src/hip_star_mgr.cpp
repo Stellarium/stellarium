@@ -29,11 +29,21 @@
 
 #define RADIUS_STAR 1.
 
-Hip_Star_mgr::Hip_Star_mgr() : starZones(NULL), HipGrid(), StarArray(NULL), StarArraySize(0),
-	starTexture(NULL), starFont(NULL)
+// construct and load all data
+Hip_Star_mgr::Hip_Star_mgr(string _data_dir, string _sky_culture, string _font_filename) :
+  starZones(NULL), HipGrid(), StarArray(NULL), StarArraySize(0), starTexture(NULL), 
+  starFont(NULL), dataDir(_data_dir), skyCulture(_sky_culture) 
 {
-	starZones = new vector<Hip_Star*>[HipGrid.getNbPoints()];
+
+  starZones = new vector<Hip_Star*>[HipGrid.getNbPoints()];
+
+  load( dataDir + _font_filename, 
+	dataDir + "hipparcos.fab", 
+	dataDir + "sky_cultures/" + skyCulture + "/commonname.fab",
+	dataDir + "name.fab" );
+
 }
+
 
 Hip_Star_mgr::~Hip_Star_mgr()
 {
@@ -54,15 +64,26 @@ Hip_Star_mgr::~Hip_Star_mgr()
 	StarArray = NULL;
 }
 
+// change star common names to a different sky culture
+void Hip_Star_mgr::set_sky_culture(string _sky_culture) {
+
+  if(skyCulture == _sky_culture) return;
+
+  // assuming validated culture already
+  load_common_names( dataDir + "sky_cultures/" + _sky_culture + "/commonname.fab" );
+  skyCulture = _sky_culture;
+
+}
+
 // Load from file ( create the stream and call the Read function )
 void Hip_Star_mgr::load(const string& font_fileName, const string& hipCatFile,
 	const string& commonNameFile, const string& nameFile)
 {
     printf("Loading Hipparcos star data...\n");
     FILE * hipFile, *cnFile, * nFile;
-	hipFile = NULL;
-	cnFile = NULL;
-	nFile = NULL;
+    hipFile = NULL;
+    cnFile = NULL;
+    nFile = NULL;
 
     hipFile=fopen(hipCatFile.c_str(),"rb");
     if (!hipFile)
@@ -166,6 +187,50 @@ void Hip_Star_mgr::load(const string& font_fileName, const string& hipCatFile,
     }
 
 }
+
+
+// Load common names from file 
+void Hip_Star_mgr::load_common_names(const string& commonNameFile)
+{
+    printf("Loading star common names data...\n");
+    FILE *cnFile;
+    cnFile = NULL;
+
+    cnFile=fopen(commonNameFile.c_str(),"r");
+    if (!cnFile)
+    {   
+        printf("ERROR %s NOT FOUND\n",commonNameFile.c_str());
+        exit(-1);
+    }
+
+
+    // clear existing common names (would be faster if common names were in separate array
+    // since relatively few are named)
+    for (int i=0; i<StarArraySize; i++) {
+      if(StarArray[i] != NULL) {
+	StarArray[i]->CommonName = NULL;
+      }
+    }
+    
+    int tmp;
+    char tmpName[20];   // too small?
+    Hip_Star *star;
+
+    while(!feof(cnFile)) {
+      fscanf(cnFile,"%d|%s\n",&tmp,tmpName);
+
+      // update star common name
+      star = search(tmp);
+
+      if( star != NULL ) {
+	star->CommonName = strdup(tmpName);
+      }
+    }
+    fclose(cnFile);
+    
+
+}
+
 
 
 // Draw all the stars

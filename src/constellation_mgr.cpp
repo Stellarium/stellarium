@@ -32,7 +32,8 @@ Constellation_mgr::Constellation_mgr(Vec3f _lines_color, Vec3f _names_color) :
 // constructor which loads all data from appropriate files
 Constellation_mgr::Constellation_mgr(string _data_dir, string _sky_culture, Hip_Star_mgr *_hip_stars, string _font_filename, 
 				     Vec3f _lines_color, Vec3f _names_color) :
-  asterFont(NULL), hipStarMgr(_hip_stars), dataDir( _data_dir), skyCulture(_sky_culture), lines_color(_lines_color), names_color(_names_color)
+  asterFont(NULL), lines_color(_lines_color), names_color(_names_color), hipStarMgr(_hip_stars), 
+  dataDir( _data_dir), skyCulture(_sky_culture)
 {
 
   // load font
@@ -45,7 +46,7 @@ Constellation_mgr::Constellation_mgr(string _data_dir, string _sky_culture, Hip_
 
   // check validity of main sky culture config file
   if( !validate_sky_culture(_sky_culture) ) {
-      skyCulture = "greco-roman";
+      skyCulture = "western";
   }
 
   load(dataDir + "sky_cultures/" + skyCulture + "/constellationship.fab",
@@ -73,7 +74,7 @@ void Constellation_mgr::set_sky_culture(string _sky_culture)
 
   // check validity of main sky culture config file
   if( !validate_sky_culture(_sky_culture) ) {
-      _sky_culture = "greco-roman";
+      _sky_culture = "western";
   }
 
   if( _sky_culture == skyCulture ) return;  // no change
@@ -102,8 +103,8 @@ bool Constellation_mgr::validate_sky_culture(string _sky_culture) {
   string filePath = dataDir + "sky_cultures/" + skyCulture + "/constellationship.fab";
   FILE * fic = fopen(filePath.c_str(),"r");
   if (!fic) {
-    printf("Could not locate constellation data for %s culture, defaulting to greco-roman.\n",skyCulture.c_str());
-    skyCulture = "greco-roman";
+    printf("Could not locate constellation data for %s culture, defaulting to western.\n",skyCulture.c_str());
+    skyCulture = "western";
     return(0);
   } else {
     fclose(fic);
