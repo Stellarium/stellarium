@@ -58,11 +58,11 @@ private:
     Vec3f RGB;				// 3 RGB colour values
     float MaxColorValue;	// Precalc of the max color value
     Vec3d XY;				// 2D Position + z homogeneous value
-    char SpType;			// Spectral type
-    string CommonName;		// Common Name of the star
-    string SciName;			// Scientific name
-
 	float term1;			// Optimization term
+
+    string CommonName;		// Common Name of the star
+    string SciName;			// Scientific name		
+    char SpType;			// Spectral type
 
 	static float twinkle_amount;
 	static float star_scale;

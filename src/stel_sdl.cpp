@@ -135,6 +135,10 @@ static const char *arrow[] = {
 	// Set the window icon
 	SDL_WM_SetIcon(SDL_LoadBMP((core->get_DataDir() + "icon.bmp").c_str()), NULL);
 
+	
+	glClear(GL_COLOR_BUFFER_BIT);
+	SDL_GL_SwapBuffers();
+	glClear(GL_COLOR_BUFFER_BIT);	
 }
 
 

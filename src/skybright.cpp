@@ -84,27 +84,23 @@ void skybright::set_sun_moon(float cos_dist_moon_zenith, float cos_dist_sun_zeni
 float skybright::get_luminance(float cos_dist_moon, float cos_dist_sun, float cos_dist_zenith)
 {
 
-        // catch rounding errors here or end up with white flashes in some cases
-        if(cos_dist_moon < -1 ) cos_dist_moon = -1;
-	if(cos_dist_moon > 1 ) cos_dist_moon = 1;
-	if(cos_dist_sun < -1 ) cos_dist_moon = -1;
-	if(cos_dist_sun > 1 ) cos_dist_sun = 1;
-	if(cos_dist_zenith < -1 ) cos_dist_zenith = -1;
-	if(cos_dist_zenith > 1 ) cos_dist_zenith = 1;
+    // catch rounding errors here or end up with white flashes in some cases
+    if(cos_dist_moon < -1.f ) cos_dist_moon = -1.f;
+	if(cos_dist_moon > 1.f ) cos_dist_moon = 1.f;
+	if(cos_dist_sun < -1.f ) cos_dist_moon = -1.f;
+	if(cos_dist_sun > 1.f ) cos_dist_sun = 1.f;
+	if(cos_dist_zenith < -1.f ) cos_dist_zenith = -1.f;
+	if(cos_dist_zenith > 1.f ) cos_dist_zenith = 1.f;
 	
-	static float dist_moon;
-	dist_moon = acosf(cos_dist_moon);
-	static float dist_sun;
-	dist_sun = acosf(cos_dist_sun);
+	float dist_moon = acosf(cos_dist_moon);
+	float dist_sun = acosf(cos_dist_sun);
 
 	// Air mass
-	static float X;
-	static float bKX;
-	X = 1.f / (cos_dist_zenith + 0.025f*expf(-11.f*cos_dist_zenith));
-	bKX = powf(10.f, -0.4f * K * X);
+	float X = 1.f / (cos_dist_zenith + 0.025f*expf(-11.f*cos_dist_zenith));
+	float bKX = powf(10.f, -0.4f * K * X);
 
 	// Dark night sky brightness
-	b_night = 0.4f+0.6f/sqrt(0.04f + 0.96f * cos_dist_zenith*cos_dist_zenith);
+	b_night = 0.4f+0.6f/sqrtf(0.04f + 0.96f * cos_dist_zenith*cos_dist_zenith);
 	b_night *= b_night_term * bKX;
 
 	// Moonlight brightness
@@ -127,11 +123,9 @@ float skybright::get_luminance(float cos_dist_moon, float cos_dist_sun, float co
 	// Total sky brightness
 	b_daylight>b_twilight ? b_total = b_night + b_twilight + b_moon : b_total = b_night + b_daylight + b_moon;
 
-	if (b_total<0.f) return 0.f;
-
-	b_total *= 900900.9;	// In lambert
-	return b_total * M_PI * 1e-4 * 3239389*2;//5;	// In cd/m^2 : the 32393895 is empirical term because the
-												// lambert -> cd/m^2 formula seems to be wrong...
+	return (b_total<0.f) ? 0.f : b_total * 900900.9f * M_PI * 1e-4 * 3239389*2; 
+	//5;	// In cd/m^2 : the 32393895 is empirical term because the
+	// lambert -> cd/m^2 formula seems to be wrong...
 }
 /*
 250 REM  Visual limiting magnitude

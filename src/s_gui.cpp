@@ -303,7 +303,7 @@ void Painter::drawLine(const s_vec2i& pos1, const s_vec2i& pos2, const s_color& 
 // Mother class for every s_gui object.
 ////////////////////////////////////////////////////////////////////////////////
 
-Component::Component(void) :
+Component::Component() :
 	pos(0, 0),
 	size(0, 0),
 	visible(1),
