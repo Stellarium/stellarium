@@ -427,3 +427,21 @@ void Constellation_mgr::set_sky_locale(const string& _sky_locale) {
  
 }
 
+
+void Constellation_mgr::set_art_fade_duration(float duration) {
+
+  duration*=1000.;
+  if(duration>0){
+    Constellation::art_fade_duration = duration;
+  }
+
+}
+
+void Constellation_mgr::set_art_intensity(float intensity) {
+
+  if(intensity>1) intensity = 1;
+  if(intensity<0) intensity = 0;
+
+  Constellation::max_art_intensity = intensity;
+
+}

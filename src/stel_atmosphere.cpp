@@ -35,6 +35,7 @@ stel_atmosphere::stel_atmosphere() : sky_resolution(48), tab_sky(NULL), atm_on(0
 	{
 		tab_sky[k] = new Vec3f[sky_resolution+1];
 	}
+	fade_duration = 3000.;
 }
 
 stel_atmosphere::~stel_atmosphere()
@@ -66,7 +67,7 @@ void stel_atmosphere::compute_color(double JD,  int delta_time, Vec3d sunPos, Ve
 	float latitude, float altitude, float temperature, float relative_humidity)
 {
 
-	float delta_intensity = delta_time/3000.f;
+	float delta_intensity = delta_time/fade_duration;
 	// update fade
 	if(!atm_on) {
 	  if( ai > delta_intensity ) {ai -= delta_intensity;} 
@@ -198,5 +199,13 @@ void stel_atmosphere::draw(Projector* prj, int delta_time)
 	  prj->reset_perspective_projection();
 	}
 
+
+}
+
+void stel_atmosphere::set_fade_duration(float duration) {
+
+  if(duration>0) {
+    fade_duration = duration*1000.;
+  }
 
 }

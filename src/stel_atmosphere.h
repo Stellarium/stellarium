@@ -45,6 +45,7 @@ public:
 	void hide_atmosphere(void);
 	float get_intensity(void);  // let's you know how far faded in or out the atm is (0-1)
 	void draw(Projector* prj, int delta_time);
+	void set_fade_duration(float duration);
 private:
 	skylight sky;
 	skybright skyb;
@@ -54,6 +55,7 @@ private:
 	bool atm_on;
 	float atm_intensity;
 	float ai;               // used to calculate atm_intensity via curve function
+	float fade_duration;    // length of time, in miliseconds, for fade in and out
 };
 
 #endif // _STEL_ATMOSTPHERE_H_
