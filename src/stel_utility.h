@@ -47,15 +47,15 @@ Vec3f str_to_vec3f(const string& s);
 string vec3f_to_str(const Vec3f& v);
 
 /* Obtains Latitude, Longitude, RA or Declination from a string. */
-double get_dec_angle(const char *s);
+double get_dec_angle(const string&);
 
 /* Obtains a human readable angle in the form: ddºmm'ss.ss" */
-const char * print_angle_dms(double location);
+string print_angle_dms(double location);
 
 /* Obtains a human readable angle in the form: dd\6mm'ss.ss" */
-const char * print_angle_dms_stel(double location);
+string print_angle_dms_stel(double location);
 
 /* Obtains a human readable angle in the form: hhhmmmss.sss" */
-const char * print_angle_hms(double location);
+string print_angle_hms(double location);
 
 #endif

@@ -148,31 +148,31 @@ void stel_ui::updateTopBar(void)
 	top_bar_ctr->setVisible(core->FlagShowTopBar);
 	if (!core->FlagShowTopBar) return;
 
-    char str[30];
-	ln_date d;
-
-	if (core->FlagUTC_Time) get_date(core->navigation->get_JDay(),&d);
-	else get_date(core->navigation->get_JDay()+core->navigation->get_time_zone()*JD_HOUR,&d);
+	double jd = core->navigation->get_JDay();
 
 	if (core->FlagShowDate)
 	{
-		sprintf(str,"%.2d/%.2d/%.4d",d.days,d.months,d.years);
-		top_bar_date_lbl->setLabel(str);
+		if (core->FlagUTC_Time)
+			top_bar_date_lbl->setLabel(core->observatory->get_printable_date_UTC(jd));
+		else
+			top_bar_date_lbl->setLabel(core->observatory->get_printable_date_local(jd));
 		top_bar_date_lbl->adjustSize();
 	}
 	top_bar_date_lbl->setVisible(core->FlagShowDate);
 
 	if (core->FlagShowTime)
 	{
-	    if (core->FlagUTC_Time) sprintf(str,"%.2d:%.2d:%.2d (UTC)",d.hours,d.minutes,(int)d.seconds);
-	    else sprintf(str,"%.2d:%.2d:%.2d",d.hours,d.minutes,(int)d.seconds);
-		top_bar_hour_lbl->setLabel(str);
+	    if (core->FlagUTC_Time)
+			top_bar_hour_lbl->setLabel(core->observatory->get_printable_time_UTC(jd) + " (UTC)");
+	    else
+			top_bar_hour_lbl->setLabel(core->observatory->get_printable_time_local(jd));
 		top_bar_hour_lbl->adjustSize();
 	}
 	top_bar_hour_lbl->setVisible(core->FlagShowTime);
 
 	top_bar_appName_lbl->setVisible(core->FlagShowAppName);
 
+	char str[30];
     if (core->FlagShowFov)
 	{
 		sprintf(str,"fov=%2.3f\6", core->projection->get_fov());

@@ -120,9 +120,9 @@ static void skipwhite(char **s)
 }
 
 
-double get_dec_angle(const char *s)
+double get_dec_angle(const string& str)
 {
-
+	const char* s = str.c_str();
 	char *ptr, *dec, *hh;
 	int negative = 0;
 	char delim1[] = " :.,;ºDdHhMm'\n\t";
@@ -209,7 +209,7 @@ double get_dec_angle(const char *s)
 *
 * Obtains a human readable location in the form: ddºmm'ss.ss"
 */
-const char * print_angle_dms(double location)
+string print_angle_dms(double location)
 {
     static char buf[16];
     double deg = 0.0;
@@ -224,7 +224,7 @@ const char * print_angle_dms(double location)
     return buf;
 }
 
-const char * print_angle_dms_stel(double location)
+string print_angle_dms_stel(double location)
 {
     static char buf[16];
     double deg = 0.0;
@@ -240,7 +240,7 @@ const char * print_angle_dms_stel(double location)
 }
 
 /* Obtains a human readable angle in the form: hhhmmmss.sss" */
-const char * print_angle_hms(double angle)
+string print_angle_hms(double angle)
 {
     static char buf[16];
     double hr = 0.0;

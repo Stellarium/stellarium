@@ -24,79 +24,22 @@
 #include "stellastro.h"
 #include "solarsystem.h"
 
-////////////////////////////////////////////////////////////////////////////////
-observator_pos::observator_pos() : planet(3), longitude(0.), latitude(0.), time_zone(0), altitude(0)
-{
-	name = "Anonymous_Location";
-}
-
-observator_pos::~observator_pos()
-{
-}
-
-void observator_pos::save(FILE * f)
-{
-	// Set the position values in config file format
-	string tempLatitude = print_angle_dms(latitude);
-	string tempLongitude = print_angle_dms(longitude);
-	fprintf(f,"%s %s %d %d %s\n",tempLongitude.c_str(), tempLatitude.c_str(), altitude, time_zone, name.c_str());
-	printf("SAVE location : %s %s %d %d %s\n",tempLongitude.c_str(), tempLatitude.c_str(), altitude, time_zone, name.c_str());
-}
-
-void observator_pos::load(FILE * f)
-{
-	char tempLatitude[20], tempLongitude[20], tempName[100];
-	tempName[0]=0;
-	fscanf(f,"%s %s %d %d %s\n",tempLongitude, tempLatitude, &altitude, &time_zone, tempName);
-	name = tempName;
-	printf("LOAD location : %s %s %d %d %s\n",tempLongitude, tempLatitude, altitude, time_zone, name.c_str());
-    // set the read latitude and longitude
-    longitude=get_dec_angle(tempLongitude);
-    latitude=get_dec_angle(tempLatitude);
-}
 
 ////////////////////////////////////////////////////////////////////////////////
-navigator::navigator() : flag_traking(0), flag_lock_equ_pos(0), flag_auto_move(0),
-						time_speed(JD_SECOND), JDay(0.)
+navigator::navigator(Observator* obs) : flag_traking(0), flag_lock_equ_pos(0), flag_auto_move(0),
+						time_speed(JD_SECOND), JDay(0.), position(obs)
 {
+	if (!position)
+	{
+		printf("ERROR : Can't create a Navigator without a valid Observator\n");
+		exit(-1);
+	}
 	local_vision=Vec3d(1.,0.,0.);
 	equ_vision=Vec3d(1.,0.,0.);
 }
 
 navigator::~navigator()
 {
-}
-
-////////////////////////////////////////////////////////////////////////////////
-// Load the position info in the file name given
-void navigator::load_position(const string& fileName)
-{
-	FILE * f = NULL;
-	f=fopen(fileName.c_str(),"rt");
-	if (!f)
-	{
-        printf("ERROR %s NOT FOUND\n",fileName.c_str());
-        exit(-1);
-	}
-	printf("Loading location file... (%s)\n",fileName.c_str());
-	position.load(f);
-
-	fclose(f);
-}
-
-////////////////////////////////////////////////////////////////////////////////
-// Save the position info in the file name given
-void navigator::save_position(const string& fileName)
-{
-	FILE * f = NULL;
-	f=fopen(fileName.c_str(),"wt");
-	if (!f)
-	{
-        printf("ERROR %s NOT FOUND\n",fileName.c_str());
-        exit(-1);
-	}
-	position.save(f);
-	fclose(f);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -206,8 +149,8 @@ void navigator::update_time(int delta_time)
 // The non optimized (more clear version is available on the CVS : before date 25/07/2003)
 void navigator::update_transform_matrices(Vec3d earth_ecliptic_pos)
 {
-	mat_local_to_earth_equ =Mat4d::zrotation((get_apparent_sidereal_time(JDay)+position.longitude)*M_PI/180.) *
-							Mat4d::yrotation((90.-position.latitude)*M_PI/180.);
+	mat_local_to_earth_equ =Mat4d::zrotation((get_apparent_sidereal_time(JDay)+position->get_longitude())*M_PI/180.) *
+							Mat4d::yrotation((90.-position->get_latitude())*M_PI/180.);
 
 	mat_earth_equ_to_local = mat_local_to_earth_equ.transpose();
 
@@ -216,14 +159,14 @@ void navigator::update_transform_matrices(Vec3d earth_ecliptic_pos)
 
 	// These two next have to take into account the position of the observer on the earth
 	Mat4d tmp = Mat4d::xrotation(-23.438855*M_PI/180.) *
-				Mat4d::zrotation((position.longitude+get_mean_sidereal_time(JDay))*M_PI/180.) *
-				Mat4d::yrotation((90.-position.latitude)*M_PI/180.);
+				Mat4d::zrotation((position->get_longitude()+get_mean_sidereal_time(JDay))*M_PI/180.) *
+				Mat4d::yrotation((90.-position->get_latitude())*M_PI/180.);
 
 	mat_local_to_helio = 	Mat4d::translation(earth_ecliptic_pos) *
 							tmp *
-							Mat4d::translation(Vec3d(0.,0., 6378.1/AU+(double)position.altitude/AU/1000));
+							Mat4d::translation(Vec3d(0.,0., 6378.1/AU+(double)position->get_altitude()/AU/1000));
 
-	mat_helio_to_local = 	Mat4d::translation(Vec3d(0.,0.,-6378.1/AU-(double)position.altitude/AU/1000)) *
+	mat_helio_to_local = 	Mat4d::translation(Vec3d(0.,0.,-6378.1/AU-(double)position->get_altitude()/AU/1000)) *
 							tmp.transpose() *
 							Mat4d::translation(-earth_ecliptic_pos);
 

@@ -27,6 +27,7 @@ using namespace std;
 #include <string>
 
 #include "navigator.h"
+#include "observator.h"
 #include "projector.h"
 #include "fisheye_projector.h"
 #include "stel_object.h"
@@ -116,6 +117,7 @@ private:
 
 	// Main elements of the program
 	navigator * navigation;				// Manage all navigation parameters, coordinate transformations etc..
+	Observator * observatory;			// Manage observer position and locales for its country
 	Projector * projection;				// Manage the projection mode and matrix
 	stel_object * selected_object;		// The selected object in stellarium
 	Hip_Star_mgr * hip_stars;			// Manage the hipparcos stars
@@ -209,8 +211,9 @@ private:
 	double PresetSkyTime;
 	string StartupTimeMode;
 	Vec3d InitViewPos;
-	int FlagUTC_Time;
-	string TimeDisplayFormat;
+
+	// Locale
+	int FlagUTC_Time;					// if true display UTC time
 
 	int frame, timefr, timeBase;		// Used for fps counter
 

@@ -24,7 +24,7 @@
 #include "draw.h"
 
 stel_core::stel_core() : screen_W(800), screen_H(600), bppMode(16), Fullscreen(0),
-	navigation(NULL), projection(NULL), selected_object(NULL), hip_stars(NULL), asterisms(NULL),
+	navigation(NULL), observatory(NULL), projection(NULL), selected_object(NULL), hip_stars(NULL), asterisms(NULL),
 	nebulas(NULL), atmosphere(NULL), tone_converter(NULL), selected_constellation(NULL),
 	frame(0), timefr(0), timeBase(0), deltaFov(0.), deltaAlt(0.), deltaAz(0.),
 	move_speed(0.001), FlagTimePause(0)
@@ -74,8 +74,10 @@ void stel_core::init(void)
 	s_texture::set_texDir(TextureDir);
 	s_texture::set_suffix(".png");
 
-	navigation = new navigator();
-	navigation->load_position(PositionFile.c_str());
+	observatory = new Observator();
+	observatory->load(ConfigDir + config_file, "init_location");
+
+	navigation = new navigator(observatory);
 	if (StartupTimeMode=="preset" || StartupTimeMode=="Preset") navigation->set_JDay(PresetSkyTime);
 	else navigation->set_JDay(get_julian_from_sys());
 	navigation->set_local_vision(InitViewPos);
@@ -303,7 +305,7 @@ void stel_core::draw(int delta_time)
 		//navigation->switch_to_local();
 		atmosphere->compute_color(navigation->get_JDay(), sunPos, moonPos,
 		 	ssystem->get_moon()->get_phase(ssystem->get_earth()->get_heliocentric_ecliptic_pos()),
-		 	tone_converter, projection, navigation->get_latitude(), navigation->get_altitude(),
+		 	tone_converter, projection, observatory->get_latitude(), observatory->get_altitude(),
 			15.f, 40.f);	// Temperature = 15°c, relative humidity = 40%
 	}
 
@@ -324,8 +326,6 @@ void stel_core::draw(int delta_time)
 
 void stel_core::load_config(void)
 {
-	PositionFile = ConfigDir + location_file;
-
 	init_parser conf;
 	conf.load(ConfigDir + config_file);
 
@@ -344,6 +344,8 @@ void stel_core::load_config(void)
 	// Actually load the config file
 	load_config_from(ConfigDir + config_file);
 
+	if (observatory) observatory->load(ConfigDir + config_file, "init_location");
+
 }
 
 void stel_core::save_config(void)
@@ -351,6 +353,8 @@ void stel_core::save_config(void)
 	// The config file is supposed to be valid and from the correct stellarium version.
 	// This is normally the case if the program is running.
 	save_config_to(ConfigDir + config_file);
+
+	if (observatory) observatory->save(ConfigDir + config_file, "init_location");
 }
 
 void stel_core::load_config_from(const string& confFile)
@@ -436,7 +440,6 @@ void stel_core::load_config_from(const string& confFile)
 	InitViewPos 		= str_to_vec3f(conf.get_str("navigation:init_view_pos").c_str());
 	auto_move_duration	= conf.get_double ("navigation","auto_move_duration",1.);
 	FlagUTC_Time		= conf.get_boolean("navigation:flag_utc_time");
-	TimeDisplayFormat	= conf.get_str("navigation:flag_time_display_format");
 
 	// Landscape section
 	landscape_name 		= conf.get_str("landscape:landscape_name");
@@ -538,7 +541,6 @@ void stel_core::save_config_to(const string& confFile)
 	conf.set_str	("navigation:init_view_pos", vec3f_to_str(InitViewPos));
 	conf.set_double ("navigation:auto_move_duration", auto_move_duration);
 	conf.set_boolean("navigation:flag_utc_time", FlagUTC_Time);
-	conf.set_str	("navigation:flag_time_display_format", TimeDisplayFormat);
 
 	// Landscape section
 	conf.set_str	("landscape:landscape_name", landscape_name);
@@ -572,6 +574,7 @@ void stel_core::save_config_to(const string& confFile)
 	conf.set_boolean("astro:flag_milky_way", FlagMilkyWay);
 
 	conf.save(confFile);
+
 }
 
 

@@ -50,7 +50,7 @@ void Nebula::get_info_string(char * s, const navigator*) const
 	float tempDE, tempRA;
 	rect_to_sphe(&tempRA,&tempDE,XYZ);
 	sprintf(s,"Name : %s (NGC %u)\nRA : %s\nDE : %s\nMag : %.2f", name, NGC_nb,
-		print_angle_hms(tempRA*180./M_PI), print_angle_dms_stel(tempDE*180./M_PI), mag);
+		print_angle_hms(tempRA*180./M_PI).c_str(), print_angle_dms_stel(tempDE*180./M_PI).c_str(), mag);
 }
 
 void Nebula::get_short_info_string(char * s, const navigator*) const
