@@ -28,7 +28,7 @@ done
 ac_given_srcdir=.
 ac_given_INSTALL="/usr/bin/install -c"
 
-trap 'rm -fr Makefile src/Makefile src/astrolib/Makefile src/glpng/Makefile config/Makefile data/Makefile textures/Makefile conftest*; exit 1' 1 2 15
+trap 'rm -fr Makefile src/Makefile src/astrolib/Makefile src/glpng/Makefile config/Makefile data/Makefile textures/Makefile textures/landscapes/Makefile conftest*; exit 1' 1 2 15
 
 # Protect against being on the right side of a sed subst in config.status.
 sed 's/%@/@@/; s/@%/@@/; s/%g$/@g/; /@g$/s/[\\&%]/\\&/g;
@@ -36,13 +36,13 @@ sed 's/%@/@@/; s/@%/@@/; s/%g$/@g/; /@g$/s/[\\&%]/\\&/g;
 /^[ 	]*VPATH[ 	]*=[^:]*$/d
 
 s%@SHELL@%/bin/sh%g
-s%@CFLAGS@%-g -O2 -Wall%g
+s%@CFLAGS@%-Wall -O3 %g
 s%@CPPFLAGS@%%g
-s%@CXXFLAGS@%-g -O2%g
+s%@CXXFLAGS@%-O3%g
 s%@FFLAGS@%%g
-s%@DEFS@% -DPACKAGE=\"stellarium\" -DVERSION=\"0.4.7\" -DHAVE_TOUPPER=1 %g
+s%@DEFS@% -DPACKAGE=\"stellarium\" -DVERSION=\"0.4.7\" -DCONFIG_DATA_DIR=\"/usr/local/share/stellarium\" %g
 s%@LDFLAGS@%%g
-s%@LIBS@% -lm -lGL -lGLU -lglut%g
+s%@LIBS@%  -L/usr/X11R6/lib -lGL -lGLU -lglut -lm%g
 s%@exec_prefix@%${prefix}%g
 s%@prefix@%/usr/local%g
 s%@program_transform_name@%s,x,x,%g
@@ -69,10 +69,20 @@ s%@AUTOMAKE@%automake%g
 s%@AUTOHEADER@%autoheader%g
 s%@MAKEINFO@%makeinfo%g
 s%@SET_MAKE@%%g
+s%@host@%i686-pc-linux-gnu%g
+s%@host_alias@%i686-pc-linux%g
+s%@host_cpu@%i686%g
+s%@host_vendor@%pc%g
+s%@host_os@%linux-gnu%g
 s%@CC@%gcc%g
 s%@CXX@%c++%g
+s%@CPP@%gcc -E%g
+s%@CXXCPP@%c++ -E%g
 s%@RANLIB@%ranlib%g
-s%@CPP@%cc -E%g
+s%@X_CFLAGS@% -I/usr/X11R6/include%g
+s%@X_PRE_LIBS@% -lSM -lICE%g
+s%@X_LIBS@% -L/usr/X11R6/lib%g
+s%@X_EXTRA_LIBS@%%g
 
 CEOF
 
@@ -108,7 +118,7 @@ if test -z "$ac_sed_cmds"; then
   ac_sed_cmds=cat
 fi
 
-CONFIG_FILES=${CONFIG_FILES-"Makefile src/Makefile src/astrolib/Makefile src/glpng/Makefile config/Makefile data/Makefile textures/Makefile"}
+CONFIG_FILES=${CONFIG_FILES-"Makefile src/Makefile src/astrolib/Makefile src/glpng/Makefile config/Makefile data/Makefile textures/Makefile textures/landscapes/Makefile"}
 for ac_file in .. $CONFIG_FILES; do if test "x$ac_file" != x..; then
   # Support "outfile[:infile[:infile...]]", defaulting infile="outfile.in".
   case "$ac_file" in

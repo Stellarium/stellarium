@@ -57,8 +57,12 @@ POST_INSTALL = :
 NORMAL_UNINSTALL = :
 PRE_UNINSTALL = :
 POST_UNINSTALL = :
+host_alias = i686-pc-linux
+host_triplet = i686-pc-linux-gnu
 CC = gcc
+CPP = gcc -E
 CXX = c++
+CXXCPP = c++ -E
 MAKEINFO = makeinfo
 PACKAGE = stellarium
 RANLIB = ranlib
@@ -77,10 +81,14 @@ CONFIG_CLEAN_FILES =
 LIBRARIES =  $(noinst_LIBRARIES)
 
 
-DEFS =  -DPACKAGE=\"stellarium\" -DVERSION=\"0.4.7\" -DHAVE_TOUPPER=1  -I. -I$(srcdir) 
+DEFS =  -DPACKAGE=\"stellarium\" -DVERSION=\"0.4.7\" -DCONFIG_DATA_DIR=\"/usr/local/share/stellarium\"  -I. -I$(srcdir) 
 CPPFLAGS = 
 LDFLAGS = 
-LIBS =  -lm -lGL -lGLU -lglut
+LIBS =   -L/usr/X11R6/lib -lGL -lGLU -lglut -lm
+X_CFLAGS =  -I/usr/X11R6/include
+X_LIBS =  -L/usr/X11R6/lib
+X_EXTRA_LIBS = 
+X_PRE_LIBS =  -lSM -lICE
 libastrolib_a_DEPENDENCIES =  AstroOps.o DateOpsIntl.o MathOps.o Pluto.o \
 VsopData.o DateOps.o Lunar.o PlanetData.o Vsop.o
 libastrolib_a_OBJECTS =  AstroOps.o DateOpsIntl.o MathOps.o Pluto.o \
