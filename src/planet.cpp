@@ -32,7 +32,7 @@ rotation_elements::rotation_elements() : period(1.), offset(0.), epoch(J2000),
 planet::planet(const char * _name, int _flagHalo, int _flag_lighting, double _radius, vec3_t _color,
 	float _albedo, const char* tex_map_name, const char* tex_halo_name, pos_func_type _coord_func) :
 		name(NULL), flagHalo(_flagHalo), flag_lighting(_flag_lighting), radius(_radius), color(_color),
-		albedo(_albedo), axis_rotation(0.),	tex_map(NULL), tex_halo(NULL), lastJD(J2000),
+		albedo(_albedo), axis_rotation(0.),	tex_map(NULL), tex_halo(NULL), rings(NULL), lastJD(J2000),
 		deltaJD(JD_SECOND), coord_func(_coord_func), parent(NULL)
 {
 	ecliptic_pos=Vec3d(0.,0.,0.);
@@ -51,6 +51,8 @@ planet::~planet()
 	tex_map = NULL;
 	if (tex_halo) delete tex_halo;
 	tex_halo = NULL;
+	if (rings) delete rings;
+	rings = NULL;
 }
 
 // Return the information string "ready to print" :)
@@ -231,7 +233,19 @@ void planet::draw(int hint_ON, draw_utility * du, navigator * nav)
 			draw_hints(nav, du);
         }
 
-		if (screen_sz>1) draw_sphere();
+		if (screen_sz>1)
+		{
+			if (rings)
+			{
+				double dist = get_earth_equ_pos(nav).length();
+				nav->init_project_matrix(du->screenW, du->screenH, dist-rings->get_size(), dist+rings->get_size());
+				glEnable(GL_DEPTH_TEST);
+				draw_sphere();
+				rings->draw(nav);
+				glDisable(GL_DEPTH_TEST);
+			}
+			else draw_sphere();
+		}
 
 		if (tex_halo) draw_halo(nav, du);
     }
@@ -337,19 +351,28 @@ void planet::draw_halo(navigator* nav, draw_utility * du)
 }
 
 
-ring::ring(float _radius, s_texture * _tex) : radius(_radius), tex(_tex)
+ring::ring(float _radius, const char* _texname) : radius(_radius), tex(NULL)
 {
+	tex = new s_texture(_texname,TEX_LOAD_TYPE_PNG_ALPHA);
 }
 
-void ring::draw(navigator* nav)
+ring::~ring()
 {
+	if (tex) delete tex;
+	tex = NULL;
+}
+
+void ring::draw(const navigator* nav)
+{
+	// Normal transparency mode
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	//glRotatef(axis_rotation + 180.,0.,0.,1.);
 	glColor3f(1.0f, 0.88f, 0.82f); // For saturn only..
     glEnable(GL_TEXTURE_2D);
 	glDisable(GL_CULL_FACE);
 	glEnable(GL_BLEND);
-	glDisable(GL_LIGHTING);
-	//glEnable(GL_DEPTH_TEST);
+	//glDisable(GL_LIGHTING);
+
     glBindTexture (GL_TEXTURE_2D, tex->getID());
 	float r=radius;
 	glBegin(GL_QUADS);
