@@ -162,6 +162,8 @@ void stel_core::init(void)
 	// Load the nebulas data TODO : add NGC objects
 	projection->set_orthographic_projection();
 	glClear(GL_COLOR_BUFFER_BIT);
+	SDL_GL_SwapBuffers();
+	glClear(GL_COLOR_BUFFER_BIT);
 	
 	// Load constellations
 	asterisms = new Constellation_mgr(DataDir, SkyCulture, SkyLocale, hip_stars, "spacefont.txt", screen_W/2-150, screen_H/2-20, ConstLinesColor, ConstNamesColor);
