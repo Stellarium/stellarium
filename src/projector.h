@@ -63,10 +63,7 @@ public:
 	bool project_earth_equ(const Vec3d& v, Vec3d& win) const
 		{return project_custom(v, win, mat_earth_equ_to_eye);}
 
-	bool project_earth_equ(const Vec3f& v, Vec3d& win) const
-		{return project_custom(v, win, mat_earth_equ_to_eye);}
-
-	bool project_earth_equ_check(const Vec3f& v, Vec3d& win) const
+	bool project_earth_equ_check(const Vec3d& v, Vec3d& win) const
 		{return project_custom_check(v, win, mat_earth_equ_to_eye);}
 
 	void unproject_earth_equ(double x, double y, Vec3d& v) const
@@ -74,10 +71,7 @@ public:
 
 
 	// Same function with input vector v in heliocentric coordinate
-	bool project_helio(const Vec3f& v, Vec3d& win) const
-		{return project_custom(v, win, mat_helio_to_eye);}
-
-	bool project_helio_check(const Vec3f& v, Vec3d& win) const
+	bool project_helio_check(const Vec3d& v, Vec3d& win) const
 		{return project_custom_check(v, win, mat_helio_to_eye);}
 
 	void unproject_helio(double x, double y, Vec3d& v) const
@@ -85,20 +79,16 @@ public:
 
 
 	// Same function with input vector v in local coordinate
-	bool project_local(const Vec3f& v, Vec3d& win) const
-		{return project_custom(v, win, mat_local_to_eye);}
-
 	bool project_local(const Vec3d& v, Vec3d& win) const
 		{return project_custom(v, win, mat_local_to_eye);}
 
-	bool project_local_check(const Vec3f& v, Vec3d& win) const
+	bool project_local_check(const Vec3d& v, Vec3d& win) const
 		{return project_custom_check(v, win, mat_local_to_eye);}
 
 	void unproject_local(double x, double y, Vec3d& v) const
 		{unproject(x, y, inv_mat_local_to_eye, v);}
 
 	// Same function but using a custom modelview matrix
-	virtual bool project_custom(const Vec3f& v, Vec3d& win, const Mat4d& mat) const;
 	virtual bool project_custom(const Vec3d& v, Vec3d& win, const Mat4d& mat) const;
 	virtual bool project_custom_check(const Vec3f& v, Vec3d& win, const Mat4d& mat) const
 		{return project_custom(v, win, mat) && check_in_viewport(win);}
@@ -118,7 +108,9 @@ public:
 	void reset_perspective_projection(void) const;
 
 	// Reimplementation of gluSphere : glu is overrided for non standard projection
-	virtual void sSphere(GLdouble radius, GLint slices, GLint stacks, const Mat4d& mat=NULL, int orient_inside = 0) const;
+	virtual void sSphere(GLdouble radius, GLint slices, GLint stacks,
+		const Mat4d& mat, int orient_inside = 0) const;
+
 	void update_openGL(void) const;
 protected:
 	// Init the viewing matrix from the fov, the clipping planes and screen ratio

@@ -95,10 +95,12 @@ template<class T> class Vector3
 public:
     inline Vector3();
     inline Vector3(const Vector3&);
+	template <class T2> inline Vector3(const Vector3<T2>&);
     inline Vector3(T, T, T);
 
 	inline Vector3& operator=(const Vector3&);
 	inline Vector3& operator=(const T*);
+	template <class T2> inline Vector3& operator=(const Vector3<T2>&);
     inline void set(T, T, T);
 
 	inline bool operator==(const Vector3<T>&) const;
@@ -379,6 +381,11 @@ template<class T> Vector3<T>::Vector3(const Vector3& a)
 	v[0]=a.v[0]; v[1]=a.v[1]; v[2]=a.v[2];
 }
 
+template<class T> template<class T2> Vector3<T>::Vector3(const Vector3<T2>& a)
+{
+	v[0]=a.v[0]; v[1]=a.v[1]; v[2]=a.v[2];
+}
+
 template<class T> Vector3<T>::Vector3(T x, T y, T z)
 {
 	v[0]=x; v[1]=y; v[2]=z;
@@ -390,6 +397,11 @@ template<class T> Vector3<T>& Vector3<T>::operator=(const Vector3& a)
     return *this;
 }
 
+template<class T> template <class T2> Vector3<T>& Vector3<T>::operator=(const Vector3<T2>& a)
+{
+	v[0]=a.v[0]; v[1]=a.v[1]; v[2]=a.v[2];
+    return *this;
+}
 
 template<class T> Vector3<T>& Vector3<T>::operator=(const T* a)
 {

@@ -117,13 +117,6 @@ void Projector::set_modelview_matrices(	const Mat4d& _mat_earth_equ_to_eye,
 }
 
 
-bool Projector::project_custom(const Vec3f& v, Vec3d& win, const Mat4d& mat) const
-{
-	static Vec3d w;
-	w[0] = v[0]; w[1] = v[1]; w[2] = v[2];
-	project_custom(w, win, mat);
-}
-
 bool Projector::project_custom(const Vec3d& v, Vec3d& win, const Mat4d& mat) const
 {
     gluProject(v[0],v[1],v[2],mat,mat_projection,vec_viewport,&win[0],&win[1],&win[2]);
@@ -189,9 +182,12 @@ void Projector::reset_perspective_projection(void) const
 // Reimplementation of gluSphere : glu is overrided for non standard projection
 void Projector::sSphere(GLdouble radius, GLint slices, GLint stacks, const Mat4d& mat, int orient_inside) const
 {
+	glPushMatrix();
+	glLoadMatrixd(mat);
 	GLUquadricObj * p = gluNewQuadric();
 	gluQuadricTexture(p,GL_TRUE);
 	if (orient_inside) gluQuadricOrientation(p, GLU_INSIDE);
 	gluSphere(p, radius, slices, stacks);
 	gluDeleteQuadric(p);
+	glPopMatrix();
 }

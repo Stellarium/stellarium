@@ -52,7 +52,7 @@ private:
 	Vec3f color;
 	Vec3f** alt_points;
 	Vec3f** azi_points;
-	bool (Projector::*proj_func)(const Vec3f&, Vec3d&) const;
+	bool (Projector::*proj_func)(const Vec3d&, Vec3d&) const;
 };
 
 
@@ -77,7 +77,7 @@ private:
 	unsigned int nb_segment;
 	Vec3f color;
 	Vec3f* points;
-	bool (Projector::*proj_func)(const Vec3f&, Vec3d&) const;
+	bool (Projector::*proj_func)(const Vec3d&, Vec3d&) const;
 };
 
 // Class which manages the cardinal points displaying

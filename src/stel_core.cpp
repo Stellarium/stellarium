@@ -83,7 +83,7 @@ void stel_core::init(void)
 	ssystem = new SolarSystem();
 	atmosphere = new stel_atmosphere();
 	tone_converter = new tone_reproductor();
-	projection = new Fisheye_projector(screen_W, screen_H, 60.);
+	projection = new Projector(screen_W, screen_H, 60.);
 	equ_grid = new SkyGrid(EQUATORIAL);
 	azi_grid = new SkyGrid(ALTAZIMUTAL);
 	equator_line = new SkyLine(EQUATOR);
