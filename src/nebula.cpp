@@ -83,10 +83,12 @@ int Nebula::read(FILE * catalogue)
 	float tex_rotation;
 	char tex_name[255];
 	char tempName[255];
+	char tempCredit[255];
 
-    if (fscanf(catalogue,"%u %s %d %f %d %f %f %f %f %s %s\n",
+
+    if (fscanf(catalogue,"%u %s %d %f %d %f %f %f %f %s %s %s\n",
 		&NGC_nb, type, &rahr, &ramin,&dedeg,&demin,
-		&mag,&tex_angular_size,&tex_rotation, tempName, tex_name)!=11)
+		&mag,&tex_angular_size,&tex_rotation, tempName, tex_name, tempCredit)!=12)
 	{
 		return 0;
 	}
@@ -100,6 +102,17 @@ int Nebula::read(FILE * catalogue)
 		(*cc)=' ';
         cc=strchr(name,'_');
     }
+
+    char tc[255] = "Credit: ";
+    strcat(tc, tempCredit);
+    credit = strdup(tc);
+    cc=strchr(credit,'_');
+    while(cc!=NULL)
+    {
+		(*cc)=' ';
+        cc=strchr(credit,'_');
+    }
+
 
     // Calc the RA and DE from the datas
     float RaRad = hms_to_rad(rahr, (double)ramin);
@@ -195,8 +208,15 @@ float Nebula::get_on_screen_size(const Projector* prj, const navigator * nav)
 void Nebula::draw_name(const Projector* prj)
 {
     glColor3fv(fontcolor);
-	float shift = 8.f + get_on_screen_size(prj)/2.f;
-	gravity_label ? prj->print_gravity180(nebula_font, XY[0]+shift, XY[1]+shift, name, 0, 0) :
-		nebula_font->print(XY[0]+shift, XY[1]+shift, name);
+    float size = get_on_screen_size(prj);
+    float shift = 8.f + size/2.f;
+    gravity_label ? prj->print_gravity180(nebula_font, XY[0]+shift, XY[1]+shift, name, 0, 0) :
+      nebula_font->print(XY[0]+shift, XY[1]+shift, name);
+
+    // draw image credit, if it fits easily
+    if( size > nebula_font->getStrLen(credit) ) {
+      gravity_label ? prj->print_gravity180(nebula_font, XY[0]-shift-40, XY[1]+-shift-40, credit, 0, 0) :
+	nebula_font->print(XY[0]-shift, XY[1]-shift-60, credit);
+    }
 }
 

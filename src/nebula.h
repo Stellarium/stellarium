@@ -84,6 +84,7 @@ private:
 	unsigned int NGC_nb;			// NGC catalog number
 
 	char* name;						// Nebula name
+	char* credit;						// Nebula image credit
 	float mag;						// Apparent magnitude
 	float angular_size;				// Angular size in radians
 	Vec3f XYZ;						// Cartesian equatorial position
