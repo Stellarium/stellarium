@@ -101,6 +101,7 @@ int Nebula_mgr::read(const string& font_fileName, const string& fileName, int ba
       glColor3f(1,1,1);
 
       glBindTexture (GL_TEXTURE_2D, bar->getID());
+	  glDisable(GL_TEXTURE_2D);
       glBegin(GL_TRIANGLE_STRIP);
         glTexCoord2i(1,0);              // Bottom Right
         glVertex3f(barx+302,bary+22, 0.0f);
@@ -127,6 +128,8 @@ int Nebula_mgr::read(const string& font_fileName, const string& fileName, int ba
       glEnd ();
 
       glColor3f(1,1,1);
+
+	  glEnable(GL_TEXTURE_2D);
       Nebula::nebula_font->print(barx-2,bary+35, tmpstr);
 
 
