@@ -143,6 +143,10 @@ void navigator::update_move(double deltaAz, double deltaAlt)
 void navigator::update_time(int delta_time)
 {
 	JDay+=time_speed*(double)delta_time/1000.;
+
+	// Fix time limits to -100000 to +100000 to prevent bugs
+	if (JDay>38245309.499988) JDay = 38245309.499988;
+	if (JDay<-34803211.500012) JDay = -34803211.500012;
 }
 
 ////////////////////////////////////////////////////////////////////////////////

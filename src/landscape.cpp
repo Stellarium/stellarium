@@ -54,6 +54,22 @@ Landscape* Landscape::create_from_file(const string& landscape_file, const strin
 
 	cout << "ERROR : can't understand landscape type for landscape section " << section_name << endl;
 	exit(-1);
+
+	return NULL;
+}
+
+string Landscape::get_file_content(const string& landscape_file)
+{
+	init_parser pd;	// The landscape data ini file parser
+	pd.load(landscape_file);
+
+	string result;
+
+	for (int i=0; i<pd.get_nsec();i++)
+	{
+		result += pd.get_secname(i) + '\n';
+	}
+	return result;
 }
 
 Landscape_old_style::Landscape_old_style(float _radius) : Landscape(_radius), side_texs(NULL), sides(NULL)
@@ -268,3 +284,4 @@ void Landscape_fisheye::draw(tone_reproductor * eye, const Projector* prj, const
 
     glDisable(GL_CULL_FACE);
 }
+

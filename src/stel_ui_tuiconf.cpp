@@ -188,7 +188,8 @@ void stel_ui::init_tui(void)
 
 	// 7. Effects
 	tui_effect_landscape = new s_tui::MultiSet_item<string>("7.1 Landscape: ");
-	tui_effect_landscape->addItem("TODO!");
+	tui_effect_landscape->addItemList(Landscape::get_file_content(core->DataDir + "landscapes.ini"));
+	tui_effect_landscape->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb_tui_effect_change_landscape));
 	tui_menu_effects->addComponent(tui_effect_landscape);
 	tui_effect_atmosphere = new s_tui::Boolean_item(false, "7.2 Atmopshere: ", "Yes","No");
 	tui_effect_atmosphere->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb1));
@@ -360,4 +361,10 @@ void stel_ui::tui_cb_admin_set_locale(void)
 void stel_ui::tui_cb_admin_updateme(void)
 {
 	//	TODO
+}
+
+// Set a new landscape skin
+void stel_ui::tui_cb_tui_effect_change_landscape(void)
+{
+	core->set_landscape(tui_effect_landscape->getCurrent());
 }

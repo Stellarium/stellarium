@@ -83,6 +83,8 @@ public:
 
 	const string& get_DataDir(void) const {return DataDir;}
 
+	void set_landscape(const string& new_landscape_name);
+
 	// find and select the "nearest" object and retrieve his informations
 	stel_object * find_stel_object(int x, int y) const;
 	stel_object * find_stel_object(const Vec3d& pos) const;

@@ -60,7 +60,7 @@ void Nebula::get_short_info_string(char * s, const navigator*) const
 
 double Nebula::get_best_fov(const navigator*) const
 {
-	return angular_size * 180./M_PI * 2;
+	return angular_size * 180./M_PI * 4;
 }
 
 int Nebula::read(FILE * catalogue)
