@@ -108,14 +108,11 @@ void stel_ui::init_tui(void)
 	tui_time_skytime->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb1));
 	tui_time_presetskytime = new s_tui::Time_item("2.3 Preset Sky Time: ");
 	tui_time_presetskytime->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb1));
-	tui_time_actual = new s_tui::Time_item("2.4 Set Actual Time: ");
-	tui_time_actual->setJDay(get_julian_from_sys() + core->observatory->get_GMT_shift(core->PresetSkyTime) * JD_HOUR);
-	tui_time_actual->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb_actualtime));
-	tui_time_startuptime = new s_tui::MultiSet_item<string>("2.5 Sky Time At Start-up: ");
+	tui_time_startuptime = new s_tui::MultiSet_item<string>("2.4 Sky Time At Start-up: ");
 	tui_time_startuptime->addItem("Actual");
 	tui_time_startuptime->addItem("Preset");
 	tui_time_startuptime->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb1));
-	tui_time_displayformat = new s_tui::MultiSet_item<string>("2.6 Time Display Format: ");
+	tui_time_displayformat = new s_tui::MultiSet_item<string>("2.5 Time Display Format: ");
 	tui_time_displayformat->addItem("24h");
 	tui_time_displayformat->addItem("12h");
 	tui_time_displayformat->addItem("system_default");
@@ -123,7 +120,6 @@ void stel_ui::init_tui(void)
 	tui_menu_time->addComponent(tui_time_settmz);
 	tui_menu_time->addComponent(tui_time_skytime);
 	tui_menu_time->addComponent(tui_time_presetskytime);
-	tui_menu_time->addComponent(tui_time_actual);
 	tui_menu_time->addComponent(tui_time_startuptime);
 	tui_menu_time->addComponent(tui_time_displayformat);
 
@@ -149,16 +145,16 @@ void stel_ui::init_tui(void)
 	tui_admin_loaddefault->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb_admin_load_default));
 	tui_admin_savedefault = new s_tui::ActionConfirm_item("5.2 Save Current Configuration as Default: ");
 	tui_admin_savedefault->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb_admin_save_default));
-	tui_admin_setlocal = new s_tui::MultiSet_item<string>("5.3 Set Locale: ");
+	/*tui_admin_setlocal = new s_tui::MultiSet_item<string>("5.3 Set Locale: ");
 	tui_admin_setlocal->addItem("fr_FR");
 	tui_admin_setlocal->addItem("en_EN");
 	tui_admin_setlocal->addItem("en_US");
-	tui_admin_setlocal->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb_admin_set_locale));
-	tui_admin_updateme = new s_tui::Action_item("5.4 Update me via Internet: ");
+	tui_admin_setlocal->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb_admin_set_locale));*/
+	tui_admin_updateme = new s_tui::Action_item("5.3 Update me via Internet: ");
 	tui_admin_updateme->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb_admin_updateme));
 	tui_menu_administration->addComponent(tui_admin_loaddefault);
 	tui_menu_administration->addComponent(tui_admin_savedefault);
-	tui_menu_administration->addComponent(tui_admin_setlocal);
+	//tui_menu_administration->addComponent(tui_admin_setlocal);
 	tui_menu_administration->addComponent(tui_admin_updateme);
 
 }
@@ -232,23 +228,15 @@ void stel_ui::tui_update_widgets(void)
 // so everything migth have to be re-done internaly :(
 void stel_ui::tui_cb_settimezone(void)
 {
-	system( ( core->DataDir + "script_set_time_zone " + tui_time_settmz->getCurrent() ).c_str() );
-	putenv(strdup((string("TZ=") + tui_time_settmz->getCurrent()).c_str()));
-	tzset();
+	// Don't call the script anymore coz it's pointless
+	// system( ( core->DataDir + "script_set_time_zone " + tui_time_settmz->getCurrent() ).c_str() );
+	core->observatory->set_custom_tz_name(tui_time_settmz->getCurrent());
 }
 
 // Set time format mode
 void stel_ui::tui_cb_settimedisplayformat(void)
 {
 	core->observatory->set_time_format_str(tui_time_displayformat->getCurrent());
-}
-
-// Launch script to set system time to current sky time with the iso 8601 utc time as parameter
-// ie in format %Y-%m-%d %H:%M:%S
-void stel_ui::tui_cb_actualtime(void)
-{
-	system( ( core->DataDir + "script_set_system_time " +
-		core->observatory->get_ISO8601_time_UTC(tui_time_actual->getJDay()) ).c_str() );
 }
 
 // 5. Administration actions functions
@@ -268,11 +256,11 @@ void stel_ui::tui_cb_admin_save_default(void)
 }
 
 // Call script to set locale parameter (LANG)
-void stel_ui::tui_cb_admin_set_locale(void)
+/*void stel_ui::tui_cb_admin_set_locale(void)
 {
 	system( ( core->DataDir + "script_set_locale " + tui_admin_setlocal->getCurrent() ).c_str() );
 	putenv(strdup((string("LANG=") + tui_admin_setlocal->getCurrent()).c_str()));
-}
+}*/
 
 // Launch script for internet update
 void stel_ui::tui_cb_admin_updateme(void)
@@ -306,26 +294,25 @@ s_tui::MultiSet_item<string>* stel_ui::create_tree_from_time_zone_file(const str
 
 	is.close();
 
-	// Try to detect which time zone is currently used by the system from the TZ environment variable
-	char * temp = getenv("TZ");
-	string currenttz;
-	if (temp!=NULL)
+	// If we use a custom timezone mode, set the widget to the current TZ
+	if (core->observatory->get_tz_format() == S_TZ_CUSTOM)
 	{
-		currenttz = temp;
-	}
-	if (currenttz.empty())
-	{
-		if (core->FlagShowTZWarning)
+		if(!retmult->setValue(core->observatory->get_custom_tz_name()))
 		{
-			cout << "The TZ environment variable wasn't set." << endl;
-			cout << "The default value in the set time zone menu will be incorrect. The system time zone will be used though.." << endl;
+			cout << "Can't find timezone " << core->observatory->get_custom_tz_name() << " in the time zone list." << endl;
 		}
 		return retmult;
 	}
 
-	if (!retmult->setValue(currenttz))
+	// If we use system default timezone mode, set the widget to system_default
+	if (core->observatory->get_tz_format() == S_TZ_SYSTEM_DEFAULT)
 	{
-		cout << "Can't find timezone " << currenttz << " in the time zone list" << endl;
+		retmult->setValue("system_default");
+		cout << "Setting default system timezone." << endl;
+		return retmult;
 	}
+
+	// If we reach this point, a timezone mode is not handled coorectly
+	cout << "Unknown timezone mode." << endl;
 	return retmult;
 }

@@ -224,8 +224,6 @@ private:
 
 	// Locale
 	int FlagUTC_Time;					// if true display UTC time
-	int FlagShowTZWarning;				// Display a warning at startup if TZ (Time Zone)
-										// environment variable is not set
 
 	int frame, timefr, timeBase;		// Used for fps counter
 

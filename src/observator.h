@@ -37,6 +37,7 @@ enum S_DATE_FORMAT
 enum S_TZ_FORMAT
 {
 	S_TZ_CUSTOM,
+	S_TZ_GMT_SHIFT,
 	S_TZ_SYSTEM_DEFAULT
 };
 
@@ -62,6 +63,12 @@ public:
 
 	void set_GMT_shift(int t) {GMT_shift=t;}
 	int get_GMT_shift(double JD = 0) const;
+
+	void set_custom_tz_name(const string& tzname);
+	string get_custom_tz_name(void) const {return custom_tz_name;}
+
+	S_TZ_FORMAT get_tz_format(void) const {return time_zone_mode;}
+
 	void set_latitude(double l) {latitude=l;}
 	double get_latitude(void) const {return latitude;}
 	void set_longitude(double l) {longitude=l;}
@@ -85,6 +92,7 @@ private:
 	S_TIME_FORMAT time_format;
 	S_DATE_FORMAT date_format;
 	S_TZ_FORMAT time_zone_mode;		// Can be the system default or a user defined value
+	string custom_tz_name;			// Something like "Europe/Paris"
 	int GMT_shift;					// Time shift between GMT time and local time in hour. (positive for Est of GMT)
 
 	unsigned int planet;	// Planet number : 0 floating, 1 Mercure - 9 pluton

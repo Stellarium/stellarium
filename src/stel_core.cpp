@@ -25,7 +25,7 @@
 
 stel_core::stel_core() : screen_W(800), screen_H(600), bppMode(16), Fullscreen(0),
 	navigation(NULL), observatory(NULL), projection(NULL), selected_object(NULL), hip_stars(NULL), asterisms(NULL),
-	nebulas(NULL), atmosphere(NULL), tone_converter(NULL), selected_constellation(NULL),
+	nebulas(NULL), atmosphere(NULL), tone_converter(NULL), selected_constellation(NULL), FlagShowTuiMenu(0),
 	frame(0), timefr(0), timeBase(0), deltaFov(0.), deltaAlt(0.), deltaAz(0.),
 	move_speed(0.001), FlagTimePause(0)
 {
@@ -447,7 +447,6 @@ void stel_core::load_config_from(const string& confFile)
 	// Text ui section
 	FlagEnableTuiMenu = conf.get_boolean("tui:flag_enable_tui_menu");
 	FlagShowGravityUi = conf.get_boolean("tui:flag_show_gravity_ui");
-	FlagShowTuiMenu = conf.get_boolean("tui:flag_show_tui_menu");
 	FlagShowTuiDateTime = conf.get_boolean("tui:flag_show_tui_datetime");
 	FlagShowTuiShortInfo = conf.get_boolean("tui:flag_show_tui_short_obj_info");
 
@@ -460,7 +459,6 @@ void stel_core::load_config_from(const string& confFile)
 	InitViewPos 		= str_to_vec3f(conf.get_str("navigation:init_view_pos").c_str());
 	auto_move_duration	= conf.get_double ("navigation","auto_move_duration",1.5);
 	FlagUTC_Time		= conf.get_boolean("navigation:flag_utc_time");
-	FlagShowTZWarning	= conf.get_boolean("navigation:flag_show_tz_warning");
 
 	// Landscape section
 	FlagGround			= conf.get_boolean("landscape:flag_ground");
@@ -551,7 +549,6 @@ void stel_core::save_config_to(const string& confFile)
 	// Text ui section
 	conf.set_boolean("tui:flag_enable_tui_menu", FlagEnableTuiMenu);
 	conf.set_boolean("tui:flag_show_gravity_ui", FlagShowGravityUi);
-	conf.set_boolean("tui:flag_show_tui", false);
 	conf.set_boolean("tui:flag_show_tui_datetime", FlagShowTuiDateTime);
 	conf.set_boolean("tui:flag_show_tui_short_obj_info", FlagShowTuiShortInfo);
 
@@ -564,7 +561,6 @@ void stel_core::save_config_to(const string& confFile)
 	conf.set_str	("navigation:init_view_pos", vec3f_to_str(InitViewPos));
 	conf.set_double ("navigation:auto_move_duration", auto_move_duration);
 	conf.set_boolean("navigation:flag_utc_time", FlagUTC_Time);
-	conf.set_boolean("navigation:flag_show_tz_warning", FlagShowTZWarning);
 
 	// Landscape section
 	conf.set_boolean("landscape:flag_ground", FlagGround);
