@@ -35,7 +35,8 @@ landscape.h			landscape.cpp \
 callbacks.hpp       callback_helpers.hpp \
 s_tui.h				s_tui.cpp \
 stellarium.h        fmath.h \
-vecmath.h bytes.h
+vecmath.h bytes.h \
+meteor.h meteor.cpp meteor_mgr.h meteor_mgr.cpp
 
 stellarium_LDADD = $(top_builddir)/src/glpng/libglpng.a \
 $(top_builddir)/src/stellplanet/libstellplanet.a \
