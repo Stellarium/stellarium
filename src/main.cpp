@@ -396,6 +396,20 @@ bool InitGL(SDL_Surface *S)  // Any OpenGL Initialization Code Goes Here
 // ***************************  Main  **********************************
 int main(int argc, char **argv)
 {   
+    
+    // Check command line arguments
+    if (argc==2 && !( strcmp(argv[1],"--version") && strcmp(argv[1],"-version") && strcmp(argv[1],"--v") && strcmp(argv[1],"-v")))
+    {
+        printf("%s\n",APP_NAME);
+        exit(0);
+    }
+    
+    if (argc>1)
+    {
+        printf("Bad arguments : possible options are -version or -v\n");
+        exit(0);
+    }
+    
     setDirectories();
     
     drawIntro();        // Print the console logo
