@@ -24,7 +24,7 @@ using namespace s_gui;
 
 Component* stel_ui::createConfigWindow(void)
 {
-	config_win = new StdBtWin("Configuration");
+	config_win = new StdBtWin(_("Configuration"));
 	config_win->reshape(300,200,400,350);
 	config_win->setVisible(core->FlagConfig);
 
@@ -43,12 +43,12 @@ Component* stel_ui::createConfigWindow(void)
 	Picture* pstar = new Picture(starp, x-50, y+5, 32, 32);
 	tab_render->addComponent(pstar);
 
-	stars_cbx = new LabeledCheckBox(core->FlagStars, "Stars");
+	stars_cbx = new LabeledCheckBox(core->FlagStars, _("Stars"));
 	stars_cbx->setOnPressCallback(callback<void>(this, &stel_ui::updateConfigVariables));
 	tab_render->addComponent(stars_cbx);
 	stars_cbx->setPos(x,y); y+=15;
 
-	star_names_cbx = new LabeledCheckBox(core->FlagStarName, "Star Names. Up to mag :");
+	star_names_cbx = new LabeledCheckBox(core->FlagStarName, _("Star Names. Up to mag :"));
 	star_names_cbx->setOnPressCallback(callback<void>(this, &stel_ui::updateConfigVariables));
 	tab_render->addComponent(star_names_cbx);
 	star_names_cbx->setPos(x,y);
@@ -61,7 +61,7 @@ Component* stel_ui::createConfigWindow(void)
 
 	y+=15;
 
-	star_twinkle_cbx = new LabeledCheckBox(core->FlagStarTwinkle, "Star Twinkle. Amount :");
+	star_twinkle_cbx = new LabeledCheckBox(core->FlagStarTwinkle, _("Star Twinkle. Amount :"));
 	star_twinkle_cbx->setOnPressCallback(callback<void>(this, &stel_ui::updateConfigVariables));
 	tab_render->addComponent(star_twinkle_cbx);
 	star_twinkle_cbx->setPos(x,y);
@@ -78,17 +78,17 @@ Component* stel_ui::createConfigWindow(void)
 	Picture* pconstell = new Picture(constellp, x-50, y+5, 32, 32);
 	tab_render->addComponent(pconstell);
 
-	constellation_cbx = new LabeledCheckBox(core->FlagConstellationDrawing, "Constellations");
+	constellation_cbx = new LabeledCheckBox(core->FlagConstellationDrawing, _("Constellations"));
 	constellation_cbx->setOnPressCallback(callback<void>(this, &stel_ui::updateConfigVariables));
 	tab_render->addComponent(constellation_cbx);
 	constellation_cbx->setPos(x,y); y+=15;
 
-	constellation_name_cbx = new LabeledCheckBox(core->FlagConstellationName, "Constellations Names");
+	constellation_name_cbx = new LabeledCheckBox(core->FlagConstellationName, _("Constellations Names"));
 	constellation_name_cbx->setOnPressCallback(callback<void>(this, &stel_ui::updateConfigVariables));
 	tab_render->addComponent(constellation_name_cbx);
 	constellation_name_cbx->setPos(x,y); y+=15;
 
-	sel_constellation_cbx = new LabeledCheckBox(core->FlagConstellationPick, "Selected Constellation Only");
+	sel_constellation_cbx = new LabeledCheckBox(core->FlagConstellationPick, _("Selected Constellation Only"));
 	sel_constellation_cbx->setOnPressCallback(callback<void>(this, &stel_ui::updateConfigVariables));
 	tab_render->addComponent(sel_constellation_cbx);
 	sel_constellation_cbx->setPos(x,y);
@@ -99,12 +99,12 @@ Component* stel_ui::createConfigWindow(void)
 	Picture* pneb = new Picture(nebp, x-50, y, 32, 32);
 	tab_render->addComponent(pneb);
 
-	nebulas_cbx = new LabeledCheckBox(core->FlagNebula, "Nebulas");
+	nebulas_cbx = new LabeledCheckBox(core->FlagNebula, _("Nebulas"));
 	nebulas_cbx->setOnPressCallback(callback<void>(this, &stel_ui::updateConfigVariables));
 	tab_render->addComponent(nebulas_cbx);
 	nebulas_cbx->setPos(x,y); y+=15;
 
-	nebulas_names_cbx = new LabeledCheckBox(core->FlagNebulaName, "Nebulas Names. Up to mag :");
+	nebulas_names_cbx = new LabeledCheckBox(core->FlagNebulaName, _("Nebulas Names. Up to mag :"));
 	nebulas_names_cbx->setOnPressCallback(callback<void>(this, &stel_ui::updateConfigVariables));
 	tab_render->addComponent(nebulas_names_cbx);
 	nebulas_names_cbx->setPos(x,y);
@@ -121,19 +121,19 @@ Component* stel_ui::createConfigWindow(void)
 	Picture* pplan = new Picture(planp, x-50, y, 32, 32);
 	tab_render->addComponent(pplan);
 
-	planets_cbx = new LabeledCheckBox(core->FlagPlanets, "Planets");
+	planets_cbx = new LabeledCheckBox(core->FlagPlanets, _("Planets"));
 	planets_cbx->setOnPressCallback(callback<void>(this, &stel_ui::updateConfigVariables));
 	tab_render->addComponent(planets_cbx);
 	planets_cbx->setPos(x,y);
 
-	moon_x4_cbx = new LabeledCheckBox(core->ssystem->get_moon()->get_sphere_scale()!=1.f, "Moon Scale");
+	moon_x4_cbx = new LabeledCheckBox(core->ssystem->get_moon()->get_sphere_scale()!=1.f, _("Moon Scale"));
 	moon_x4_cbx->setOnPressCallback(callback<void>(this, &stel_ui::updateConfigVariables));
 	tab_render->addComponent(moon_x4_cbx);
 	moon_x4_cbx->setPos(x + 150,y);
 
 	y+=15;
 
-	planets_hints_cbx = new LabeledCheckBox(core->FlagPlanetsHints, "Planets Hints");
+	planets_hints_cbx = new LabeledCheckBox(core->FlagPlanetsHints, _("Planets Hints"));
 	planets_hints_cbx->setOnPressCallback(callback<void>(this, &stel_ui::updateConfigVariables));
 	tab_render->addComponent(planets_hints_cbx);
 	planets_hints_cbx->setPos(x,y);
@@ -144,22 +144,22 @@ Component* stel_ui::createConfigWindow(void)
 	Picture* pgrid = new Picture(gridp, x-50, y, 32, 32);
 	tab_render->addComponent(pgrid);
 
-	equator_grid_cbx = new LabeledCheckBox(core->FlagEquatorialGrid, "Equatorial Grid");
+	equator_grid_cbx = new LabeledCheckBox(core->FlagEquatorialGrid, _("Equatorial Grid"));
 	equator_grid_cbx->setOnPressCallback(callback<void>(this, &stel_ui::updateConfigVariables));
 	tab_render->addComponent(equator_grid_cbx);
 	equator_grid_cbx->setPos(x,y); y+=15;
 
-	azimuth_grid_cbx = new LabeledCheckBox(core->FlagAzimutalGrid, "Azimuthal Grid");
+	azimuth_grid_cbx = new LabeledCheckBox(core->FlagAzimutalGrid, _("Azimuthal Grid"));
 	azimuth_grid_cbx->setOnPressCallback(callback<void>(this, &stel_ui::updateConfigVariables));
 	tab_render->addComponent(azimuth_grid_cbx);
 	azimuth_grid_cbx->setPos(x,y); y-=15;
 
-	equator_cbx = new LabeledCheckBox(core->FlagEquatorLine, "Equator Line");
+	equator_cbx = new LabeledCheckBox(core->FlagEquatorLine, _("Equator Line"));
 	equator_cbx->setOnPressCallback(callback<void>(this, &stel_ui::updateConfigVariables));
 	tab_render->addComponent(equator_cbx);
 	equator_cbx->setPos(x + 150,y); y+=15;
 
-	ecliptic_cbx = new LabeledCheckBox(core->FlagEclipticLine, "Ecliptic Line");
+	ecliptic_cbx = new LabeledCheckBox(core->FlagEclipticLine, _("Ecliptic Line"));
 	ecliptic_cbx->setOnPressCallback(callback<void>(this, &stel_ui::updateConfigVariables));
 	tab_render->addComponent(ecliptic_cbx);
 	ecliptic_cbx->setPos(x + 150,y);
@@ -170,27 +170,27 @@ Component* stel_ui::createConfigWindow(void)
 	Picture* pground = new Picture(groundp, x-50, y, 32, 32);
 	tab_render->addComponent(pground);
 
-	ground_cbx = new LabeledCheckBox(core->FlagGround, "Ground ");
+	ground_cbx = new LabeledCheckBox(core->FlagGround, _("Ground"));
 	ground_cbx->setOnPressCallback(callback<void>(this, &stel_ui::updateConfigVariables));
 	tab_render->addComponent(ground_cbx);
 	ground_cbx->setPos(x,y);
 
-	cardinal_cbx = new LabeledCheckBox(core->FlagCardinalPoints, "Cardinal Points");
+	cardinal_cbx = new LabeledCheckBox(core->FlagCardinalPoints, _("Cardinal Points"));
 	cardinal_cbx->setOnPressCallback(callback<void>(this, &stel_ui::updateConfigVariables));
 	tab_render->addComponent(cardinal_cbx);
 	cardinal_cbx->setPos(x + 150,y); y+=15;
 
-	atmosphere_cbx = new LabeledCheckBox(core->FlagAtmosphere, "Atmosphere");
+	atmosphere_cbx = new LabeledCheckBox(core->FlagAtmosphere, _("Atmosphere"));
 	atmosphere_cbx->setOnPressCallback(callback<void>(this, &stel_ui::updateConfigVariables));
 	tab_render->addComponent(atmosphere_cbx);
 	atmosphere_cbx->setPos(x,y);
 
-	fog_cbx = new LabeledCheckBox(core->FlagFog, "Fog");
+	fog_cbx = new LabeledCheckBox(core->FlagFog, _("Fog"));
 	fog_cbx->setOnPressCallback(callback<void>(this, &stel_ui::updateConfigVariables));
 	tab_render->addComponent(fog_cbx);
 	fog_cbx->setPos(x + 150,y); y+=22;
 
-	LabeledButton* render_save_bt = new LabeledButton("Save as default");
+	LabeledButton* render_save_bt = new LabeledButton(_("Save as default"));
 	render_save_bt->setOnPressCallback(callback<void>(this, &stel_ui::saveRenderOptions));
 	tab_render->addComponent(render_save_bt);
 	render_save_bt->setPos(x + 50,y);
@@ -202,7 +202,7 @@ Component* stel_ui::createConfigWindow(void)
 
 	x=10; y=10;
 
-	Label* tclbl = new Label("\1 Current Time :");
+	Label* tclbl = new Label(_("\1 Current Time :"));
 	tclbl->setPos(x,y); y+=20;
 	tab_time->addComponent(tclbl);
 
@@ -211,11 +211,11 @@ Component* stel_ui::createConfigWindow(void)
 	tab_time->addComponent(time_current);
 	time_current->setPos(50,y); y+=80;
 
-	Label* tzbl = new Label("\1 Time Zone :");
+	Label* tzbl = new Label(_("\1 Time Zone :"));
 	tzbl->setPos(x,y); y+=20;
 	tab_time->addComponent(tzbl);
 
-	Label* system_tz_lbl = new Label("\1 Using System Default Time Zone");
+	Label* system_tz_lbl = new Label(_("\1 Using System Default Time Zone"));
 	tab_time->addComponent(system_tz_lbl);
 	system_tz_lbl->setPos(50 ,y); y+=20;
 	string tmpl("(" + core->observatory->get_time_zone_name_from_system(core->navigation->get_JDay()) + ")");
@@ -226,7 +226,7 @@ Component* stel_ui::createConfigWindow(void)
 	
 	system_tz_lbl2->setPos(70 ,y); y+=30;
 
-	Label* time_speed_lbl = new Label("\1 Time speed : ");
+	Label* time_speed_lbl = new Label(_("\1 Time speed : "));
 	tab_time->addComponent(time_speed_lbl);
 	time_speed_lbl->setPos(x ,y); y+=20;
 
@@ -234,7 +234,7 @@ Component* stel_ui::createConfigWindow(void)
 	tab_time->addComponent(time_speed_lbl2);
 	time_speed_lbl2->setPos(50 ,y); y+=30;
 
-	TextLabel* ts_lbl = new TextLabel("Use key J and L to decrease and increase\n   time speed.\nUse key K to return to real time speed.");
+	TextLabel* ts_lbl = new TextLabel(_("Use key J and L to decrease and increase\n   time speed.\nUse key K to return to real time speed."));
 	tab_time->addComponent(ts_lbl);
 	ts_lbl->setPos(50 ,y); y+=30;
 
@@ -250,9 +250,9 @@ Component* stel_ui::createConfigWindow(void)
 	tab_location->addComponent(earth_map);
 	y+=earth_map->getSizey() + 20;
 
-	Label * lbllong = new Label("Longitude : ");
+	Label * lbllong = new Label(_("Longitude : "));
 	lbllong->setPos(30, y+1);
-	Label * lbllat = new Label("Latitude : ");
+	Label * lbllat = new Label(_("Latitude : "));
 	lbllat->setPos(30, y+21);
 	tab_location->addComponent(lbllong);
 	tab_location->addComponent(lbllat);
@@ -268,7 +268,7 @@ Component* stel_ui::createConfigWindow(void)
 	tab_location->addComponent(long_incdec);
 	tab_location->addComponent(lat_incdec);
 
-	LabeledButton* location_save_bt = new LabeledButton("Save location");
+	LabeledButton* location_save_bt = new LabeledButton(_("Save location"));
 	location_save_bt->setOnPressCallback(callback<void>(this, &stel_ui::saveObserverPosition));
 	location_save_bt->setPos(200,y+5);
 	location_save_bt->setSize(170,25);
@@ -279,28 +279,28 @@ Component* stel_ui::createConfigWindow(void)
 	tab_video->setSize(config_tab_ctr->getSize());
 
 	x=10; y=10;
-	Label * lblvideo1 = new Label("\1 Projection :");
+	Label * lblvideo1 = new Label(_("\1 Projection :"));
 	lblvideo1->setPos(x, y);
 	tab_video->addComponent(lblvideo1);
 
 	x=50; y+=20;
 
-	fisheye_projection_cbx = new LabeledCheckBox(core->projection->get_type()==FISHEYE_PROJECTOR, "Fisheye Projection Mode");
+	fisheye_projection_cbx = new LabeledCheckBox(core->projection->get_type()==FISHEYE_PROJECTOR, _("Fisheye Projection Mode"));
 	fisheye_projection_cbx->setOnPressCallback(callback<void>(this, &stel_ui::updateVideoVariables));
 	tab_video->addComponent(fisheye_projection_cbx);
 	fisheye_projection_cbx->setPos(x,y); y+=15;
 
-	disk_viewport_cbx = new LabeledCheckBox(core->projection->get_viewport_type()==DISK, "Disk Viewport");
+	disk_viewport_cbx = new LabeledCheckBox(core->projection->get_viewport_type()==DISK, _("Disk Viewport"));
 	disk_viewport_cbx->setOnPressCallback(callback<void>(this, &stel_ui::updateVideoVariables));
 	tab_video->addComponent(disk_viewport_cbx);
 	disk_viewport_cbx->setPos(x,y); y+=35;
 
-	Label * lblvideo2 = new Label("\1 Screen Resolution :");
+	Label * lblvideo2 = new Label(_("\1 Screen Resolution :"));
 	lblvideo2->setPos(10, y);
 	tab_video->addComponent(lblvideo2); y+=20;
 
-	Label * lblvideo3 = new Label("Restart program for");
-	Label * lblvideo4 = new Label("change to apply.");
+	Label * lblvideo3 = new Label(_("Restart program for"));
+	Label * lblvideo4 = new Label(_("change to apply."));
 	lblvideo3->setPos(200, y+25);
 	lblvideo4->setPos(200, y+40);
 	tab_video->addComponent(lblvideo3);
@@ -321,17 +321,17 @@ Component* stel_ui::createConfigWindow(void)
 
 	y+=100;
 
-	LabeledButton* video_save_bt = new LabeledButton("Save as default");
+	LabeledButton* video_save_bt = new LabeledButton(_("Save as default"));
 	video_save_bt->setOnPressCallback(callback<void>(this, &stel_ui::setVideoOption));
 	tab_video->addComponent(video_save_bt);
 	video_save_bt->setPos(x + 50,y);
 	video_save_bt->setSize(170,25); y+=20;
 
 	config_tab_ctr->setTexture(flipBaseTex);
-	config_tab_ctr->addTab(tab_time, "Date & Time");
-	config_tab_ctr->addTab(tab_location, "Location");
-	config_tab_ctr->addTab(tab_video, "Video");
-	config_tab_ctr->addTab(tab_render, "Rendering");
+	config_tab_ctr->addTab(tab_time, _("Date & Time"));
+	config_tab_ctr->addTab(tab_location, _("Location"));
+	config_tab_ctr->addTab(tab_video, _("Video"));
+	config_tab_ctr->addTab(tab_render, _("Rendering"));
 	config_win->addComponent(config_tab_ctr);
 	config_win->setOnHideBtCallback(callback<void>(this, &stel_ui::config_win_hideBtCallback));
 
@@ -389,7 +389,7 @@ void stel_ui::saveObserverPosition(void)
 
 void stel_ui::saveRenderOptions(void)
 {
-	cout << "Saving rendering options in file " << core->ConfigDir + core->config_file << endl;
+	cout << _("Saving rendering options in file ") << core->ConfigDir + core->config_file << endl;
 
 	init_parser conf;
 	conf.load(core->ConfigDir + core->config_file);
@@ -432,7 +432,7 @@ void stel_ui::setVideoOption(void)
 	int w = atoi(s.substr(0,i).c_str());
 	int h = atoi(s.substr(i+1,s.size()).c_str());
 
-	cout << "Saving video size " << w << "x" << h << " in file " << core->ConfigDir + core->config_file << endl;
+	cout << _("Saving video size ") << w << "x" << h << _(" in file ") << core->ConfigDir + core->config_file << endl;
 
 	init_parser conf;
 	conf.load(core->ConfigDir + core->config_file);
