@@ -328,16 +328,6 @@ bool InitTimers(Uint32 *C)   // This Is Used To Init All The Timers In Our Appli
 	return true;	     // Return TRUE (Initialization Successful)
 }
 
-bool CreateWindowGL (SDL_Surface *S, int W, int H, int B, Uint32 F)   // This Code Creates Our OpenGL Window
-{
-	if(!(S = SDL_SetVideoMode(W, H, B, F)))	  // We're Using SDL_SetVideoMode To Create The Window
-	{
-		return false;// If It Fails, We're Returning False
-	}
-	ResizeGL(global.X_Resolution, global.Y_Resolution);   // We're Calling Reshape As The Window Is Created
-	return true;	     // Return TRUE (Initialization Successful)
-}
-
 
 bool Initialize(void)	     // Any Application & User Initialization Code Goes Here
 {
@@ -449,13 +439,16 @@ int main(int argc, char **argv)
     
     // If So, We Always Need The Fullscreen Video Init Flag
     if (global.Fullscreen) Vflags|=SDL_FULLSCREEN; 
-    
-    // Create The Window
-    if(!CreateWindowGL(Screen, global.X_Resolution, global.Y_Resolution, global.bppMode, Vflags))
+
+
+    Screen = SDL_SetVideoMode(global.X_Resolution, global.Y_Resolution, global.bppMode, Vflags);
+	if(!Screen)
 	{
-		printf("Unable to open screen surface: %s\n", SDL_GetError() );		
-		exit(1);
+		printf("sdl: Couldn't set %dx%d video mode: %s!",
+		global.X_Resolution, global.Y_Resolution, SDL_GetError());
+		exit(-1);
 	}
+
 
 	SDL_WM_SetCaption(APP_NAME, APP_NAME);	// Set The Window Caption
     strcpy(tempName,global.DataDir);
