@@ -864,6 +864,7 @@ void stel_ui::gui_update_widgets(void)
 	if (!core->FlagShowSelectedObjectInfos || !core->selected_object) info_select_ctr->setVisible(0);
 	else if (core->selected_object) info_select_ctr->setVisible(1);
 	bt_flag_ctr->setVisible(core->FlagMenu);
+	bt_time_control_ctr->setVisible(core->FlagMenu);
 
 	bt_flag_constellation_draw->setState(core->FlagConstellationDrawing);
 	bt_flag_constellation_name->setState(core->FlagConstellationName);
