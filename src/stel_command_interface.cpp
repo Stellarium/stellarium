@@ -33,10 +33,20 @@ StelCommandInterface::StelCommandInterface(stel_core * core) {
 StelCommandInterface::~StelCommandInterface() {
 }
 
-int StelCommandInterface::execute_command(string commandline) {
+int StelCommandInterface::execute_command(string commandline ) {
+  int delay;
+  return execute_command(commandline, delay);
+  // delay is ignored, as not needed by the ui callers
+}
+
+// called by script executors
+int StelCommandInterface::execute_command(string commandline, int &wait) {
   string command;
   stringHash_t args;
   int status = 0;
+
+
+  wait = 0;  // default, no wait between commands
 
   status = parse_command(commandline, command, args);
 
@@ -46,6 +56,26 @@ int StelCommandInterface::execute_command(string commandline) {
 
     // TODO: loop if want to allow that syntax
     status = stcore->set_flag( args.begin()->first, args.begin()->second );
+
+  }  else if (command == "wait") {
+
+    float fdelay;
+    string sdelay;
+
+    if(args["ms"] != "") sdelay = args["ms"];
+    else if(args["sec"] != "") sdelay = args["sec"];
+
+    std::istringstream istr(sdelay);
+    istr >> fdelay;
+
+    if(args["sec"] != "") fdelay *= 1000;
+
+    fdelay += 0.5f;
+
+    if(fdelay >= 0) wait = (int)fdelay;
+
+    //    cout << "wait is: " << wait << endl; 
+
 
   } else if (command == "set") {
 

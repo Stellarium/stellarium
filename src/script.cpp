@@ -17,36 +17,51 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-/* This class handles parsing of a simple command syntax for scripting, 
-   UI components, network commands, etc.
-*/   
 
-#ifndef _STEL_COMMAND_INTERFACE_H_
-#define _STEL_COMMAND_INTERFACE_H_
-
-#include "command_interface.h"
-#include "stel_core.h"
-#include "script_mgr.h"
-
-using namespace std;
-
-// Predeclaration of the stel_core class
-class stel_core;
+#include "script.h"
 
 
+Script::Script() {
+  input_file = NULL;
+}
 
-class StelCommandInterface : CommandInterface
-{
+Script::~Script() {
+  if(input_file) delete input_file;  // closes automatically
+}
 
- public:
-  StelCommandInterface(stel_core * core);
-  virtual ~StelCommandInterface();
-  virtual int StelCommandInterface::execute_command(string commandline);
-  virtual int execute_command(string command, int &wait);
+int Script::load(string script_file) {
+  input_file = new ifstream(script_file.c_str());
+
+  if (! input_file->is_open()) {
+    cout << "Error opening script " << script_file << endl;
+    return 0;
+  }
   
- private:
-  stel_core * stcore;
-};
+  // check first line for validity...
+
+  return 1;
+}
+
+int Script::next_command(string &command) {
+
+  char buffer[1000];
+  
+  while (! input_file->eof() ) {
+    input_file->getline (buffer,999);
+    
+    if(input_file->eof()) return 0;
+
+    if( buffer[0] != '#' ) {
+
+      //      printf("Buffer is: %s\n", buffer);
 
 
-#endif // _STEL_COMMAND_INTERFACE_H
+      command = string(buffer);
+      return 1;
+    }
+  }
+
+  return 0;
+}
+
+

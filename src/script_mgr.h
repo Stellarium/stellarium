@@ -25,12 +25,11 @@
 #define _SCRIPT_MGR_H_
 
 #include "stel_command_interface.h"
-
-
-using namespace std;
+#include "script.h"
 
 // predeclaration
 class StelCommandInterface;
+class Script;
 
 class ScriptMgr
 {
@@ -50,6 +49,9 @@ class ScriptMgr
 
  private:
   StelCommandInterface * commander;  // for executing script commands
+  Script * script; // currently loaded script
+  int elapsed_time;  // ms since last script command executed
+  int wait_time;     // ms until next script command should be executed
   bool recording;  // is a script being recorded?
   bool playing;    // is a script playing?  (could be paused)
   bool play_paused;// is script playback paused?
