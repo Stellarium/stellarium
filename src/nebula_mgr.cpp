@@ -103,7 +103,7 @@ void Nebula_mgr::draw(int names_ON, Projector* prj, const navigator * nav, tone_
     	if (names_ON && (*iter)->mag <= max_mag_name)
     	{
 			(*iter)->draw_name(prj);
-			(*iter)->draw_circle(prj);
+			(*iter)->draw_circle(prj, nav);
     	}
 		prj->reset_perspective_projection();
 	}

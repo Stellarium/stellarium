@@ -32,7 +32,7 @@ bool Nebula::gravity_label = false;
 
 Nebula::Nebula() : NGC_nb(0), name(NULL), neb_tex(NULL), tex_quad_vertex(NULL)
 {
-	inc_lum = rand()*M_PI;
+	inc_lum = rand()/RAND_MAX*M_PI;
 }
 
 Nebula::~Nebula()
@@ -149,12 +149,12 @@ void Nebula::draw_tex(const Projector* prj, tone_reproductor* eye)
     glEnd();
 }
 
-void Nebula::draw_circle(const Projector* prj)
+void Nebula::draw_circle(const Projector* prj, const navigator * nav)
 {
-	if (prj->get_fov()<sqrt(angular_size)*2) return;
+	if (2.f/get_on_screen_size(prj, nav)<0.1) return;
     inc_lum++;
-    glColor3f(sqrt(prj->get_fov())/10*(0.4+0.2*sin(inc_lum/100)),
-		 sqrt(prj->get_fov())/10*(0.4+0.2*sin(inc_lum/100)),0.1);
+	float lum = MY_MIN(1,2.f/get_on_screen_size(prj, nav))*(0.8+0.2*sinf(inc_lum/10));
+    glColor3f(lum, lum, 0.1);
     glBindTexture (GL_TEXTURE_2D, Nebula::tex_circle->getID());
     glBegin(GL_TRIANGLE_STRIP);
         glTexCoord2i(1,0);              // Bottom Right
