@@ -45,12 +45,12 @@ Nebula_mgr::~Nebula_mgr()
 }
 
 // read from stream
-int Nebula_mgr::read(char * font_fileName, char * fileName)
+int Nebula_mgr::read(const string& font_fileName, const string& fileName)
 {
     printf("Loading nebulas data...\n");
 
 	FILE * fic;
-	fic = fopen(fileName,"r");
+	fic = fopen(fileName.c_str(),"r");
     if (!fic)
 	{
 		printf("ERROR : Can't open nebula catalog %s\n",fileName);

@@ -41,11 +41,11 @@
 #include <config.h>
 
 // TODO : remove the useless ones
-#include <math.h>
+#include <cmath>
 #include <stdlib.h>
 #include <stdio.h>
 
-#include <time.h>
+#include <ctime>
 #include <string.h>
 #include <ctype.h>
 

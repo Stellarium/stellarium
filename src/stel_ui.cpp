@@ -75,19 +75,14 @@ stel_ui::stel_ui(stel_core * _core) :
 void stel_ui::init(void)
 {
     // Load standard font
-    char tempName[255];
-    strcpy(tempName,core->DataDir);
-    strcat(tempName,"spacefont.txt");
-    spaceFont = new s_font(14, "spacefont", tempName);
+    spaceFont = new s_font(14, "spacefont", core->DataDir + "spacefont.txt");
     if (!spaceFont)
     {
         printf("ERROR WHILE CREATING FONT\n");
         exit(-1);
     }
 
-    strcpy(tempName,core->DataDir);
-    strcat(tempName,"courierfont.txt");
-	courierFont = new s_font(13, "courierfont", tempName);
+	courierFont = new s_font(13, "courierfont", core->DataDir + "courierfont.txt");
     if (!courierFont)
     {
         printf("ERROR WHILE CREATING FONT\n");

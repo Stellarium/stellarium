@@ -53,10 +53,10 @@ public:
 	void load_config(void);
 
 	// Set the main data, textures and configuration directories
-	void set_directories(const char * DDIR, const char * TDIR, const char * CDIR);
+	void set_directories(const string& DDIR, const string& TDIR, const string& CDIR, const string& DATA_ROOT);
 
 	// Set the 2 config files names.
-	void set_config_files(const char * _config_file, const char * _location_file);
+	void set_config_files(const string& _config_file, const string& _location_file);
 
 	void update(int delta_time);		// Update all the objects in function of the time
 	void draw(int delta_time);			// Execute all the drawing functions
@@ -82,7 +82,7 @@ public:
 	int get_bppMode(void) const {return bppMode;}
 	int get_Fullscreen(void) const {return Fullscreen;}
 
-	const char* get_DataDir(void) const {return DataDir;}
+	const string& get_DataDir(void) const {return DataDir;}
 
 private:
 
@@ -93,12 +93,13 @@ private:
 	int Fullscreen;
 
     //Files location
-	char TextureDir[255];
-	char ConfigDir[255];
-	char DataDir[255];
+	string TextureDir;
+	string ConfigDir;
+	string DataDir;
+	string DataRoot;
 
-	char config_file[255];
-	char location_file[255];
+	string config_file;
+	string location_file;
 
 	// Main elements of the program
 	navigator * navigation;				// Manage all navigation parameters, coordinate transformations etc..
@@ -137,7 +138,6 @@ private:
 
 	// Gui
 	int FlagShowTopBar;
-    int FlagUTC_Time;
     int FlagShowFps;
 	int FlagShowTime;
 	int FlagShowDate;
@@ -178,6 +178,8 @@ private:
     int FlagConstellationDrawing;
     int FlagConstellationName;
 	int FlagConstellationPick;
+	int FlagConstellationArt;		// Feature still TODO
+	string ConstellationCulture;
     int FlagAzimutalGrid;
     int FlagEquatorialGrid;
     int FlagEquatorLine;
@@ -193,8 +195,10 @@ private:
 	int FlagEnableMoveKeys;
 	float initFov;
 	double PresetSkyTime;
-	string InitDate;
+	string StartupTimeMode;
 	Vec3d InitViewPos;
+	int FlagUTC_Time;
+	string TimeDisplayFormat;
 
 	int frame, timefr, timeBase;		// Used for fps counter
 

@@ -72,10 +72,7 @@ void stel_sdl::init(void)
 	SDL_WM_SetCaption(APP_NAME, APP_NAME);
 
 	// Set the window icon
-	char tmp[255];
-    strcpy(tmp,core->get_DataDir());
-    strcat(tmp,"icon.bmp");
-	SDL_WM_SetIcon(SDL_LoadBMP(tmp), NULL);
+	SDL_WM_SetIcon(SDL_LoadBMP((core->get_DataDir() + "icon.bmp").c_str()), NULL);
 
 	// Hold the value of SDL_GetTicks at the program init (set 0 time)
 	LastCount = SDL_GetTicks();

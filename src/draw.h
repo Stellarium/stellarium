@@ -20,6 +20,7 @@
 #ifndef __DRAW_H__
 #define __DRAW_H__
 
+#include <string>
 #include "stellarium.h"
 #include "s_font.h"
 #include "projector.h"
@@ -84,7 +85,7 @@ private:
 class Cardinals
 {
 public:
-	Cardinals(const char* font_file, const char* tex_file, double size = 30., double _radius = 1.);
+	Cardinals(const string& font_file, const string& tex_file, double size = 30., double _radius = 1.);
     virtual ~Cardinals();
 	void draw(const Projector* prj, bool gravityON = false) const;
 	void set_color(const Vec3f& c) {color = c;}
@@ -98,7 +99,7 @@ private:
 class MilkyWay
 {
 public:
-	MilkyWay(const char* tex_file, double _radius = 1.);
+	MilkyWay(const string& tex_file, double _radius = 1.);
     virtual ~MilkyWay();
 	void draw(tone_reproductor * eye, const Projector* prj, const navigator* nav) const;
 private:

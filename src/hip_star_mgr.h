@@ -21,6 +21,7 @@
 #define _HIP_STAR_MGR_H_
 
 #include <vector>
+#include <string>
 #include "hip_star.h"
 #include "grid.h"
 
@@ -36,7 +37,8 @@ public:
 		Vec3f equ_vision, tone_reproductor* _eye, Projector* prj, bool _gravity_label);	// Draw all the stars
     void save(void);                    	// Debug function
     // Load all the stars from the files
-    void load(char * font_fileName, char * hipCatFile, char * commonNameFile, char * nameFile);
+    void load(const string& font_fileName, const string& hipCatFile,
+		const string& commonNameFile, const string& nameFile);
     Hip_Star * search(Vec3f Pos);  	// Search the star by position
 	Hip_Star * search(unsigned int);	// Search the star by HP number
 private:

@@ -80,7 +80,7 @@ void init_parser::save_to(const string& file_name) const
 string init_parser::get_str(const string& key) const
 {
 	if (iniparser_getstring(dico, key.c_str(), NULL)) return string(iniparser_getstring(dico, key.c_str(), NULL));
-	else cout << "WARNING : Can't find the configuration key " << key << " default empty string returned";
+	else cout << "WARNING : Can't find the configuration key " << key << " default empty string returned" << endl;
 	return string();
 }
 
