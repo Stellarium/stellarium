@@ -150,14 +150,8 @@ void Projector::set_clipping_planes(double znear, double zfar)
 
 void Projector::change_fov(double deltaFov)
 {
-    // if we are zooming in or out
-    if (deltaFov)
-    {
-		if (fov+deltaFov>min_fov && fov+deltaFov<max_fov)  fov+=deltaFov;
-		if (fov+deltaFov>max_fov) fov=max_fov;
-		if (fov+deltaFov<min_fov) fov=min_fov;
-		init_project_matrix();
-    }
+  // if we are zooming in or out
+  if (deltaFov) set_fov(fov+deltaFov);
 }
 
 // Init the viewing matrix, setting the field of view, the clipping planes, and screen ratio
