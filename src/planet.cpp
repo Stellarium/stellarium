@@ -78,6 +78,11 @@ void planet::get_short_info_string(char * s, const navigator * nav) const
 	sprintf(s,"%s%s: mag %.1f",name.c_str(), scale_str, compute_magnitude(nav->get_observer_helio_pos()));
 }
 
+double planet::get_best_fov(const navigator* nav) const
+{
+	return atanf(radius*sphere_scale*2.f/get_earth_equ_pos(nav).length())*180./M_PI * 4;
+}
+
 // Set the orbital elements
 void planet::set_rotation_elements(float _period, float _offset, double _epoch, float _obliquity, float _ascendingNode, float _precessionRate)
 {

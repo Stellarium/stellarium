@@ -24,6 +24,7 @@
 
 #include "stellarium.h"
 #include "stel_utility.h"
+#include "stellastro.h"
 #include "stel_atmosphere.h"
 
 stel_atmosphere::stel_atmosphere() : sky_resolution(64), tab_sky(NULL)
@@ -45,8 +46,9 @@ stel_atmosphere::~stel_atmosphere()
 	if (tab_sky) delete tab_sky;
 }
 
-void stel_atmosphere::compute_color(Vec3d sunPos, Vec3d moonPos, float moon_phase,
-	tone_reproductor * eye, Projector* prj)
+void stel_atmosphere::compute_color(double JD, Vec3d sunPos, Vec3d moonPos, float moon_phase,
+	tone_reproductor * eye, Projector* prj,
+	float latitude, float altitude, float temperature, float relative_humidity)
 {
 	//Vec3d obj;
 	skylight_struct2 b2;
@@ -64,9 +66,16 @@ void stel_atmosphere::compute_color(Vec3d sunPos, Vec3d moonPos, float moon_phas
 	moon_pos[1] = moonPos[1];
 	moon_pos[2] = moonPos[2];
 
-	sky.set_paramsv(sun_pos,5.f);
+	sky.set_paramsv(sun_pos, 5.f);
+
+	skyb.set_loc(latitude * M_PI/180., altitude, temperature, relative_humidity);
 	skyb.set_sun_moon(moon_pos[2], sun_pos[2]);
-	skyb.set_date(2003, 07, moon_phase);
+
+	// Calculate the date from the julian day.
+	ln_date date;
+	get_date(JD, &date);
+
+	skyb.set_date(date.years, date.months, moon_phase);
 
 	float stepX = (float)prj->viewW() / sky_resolution;
 	float stepY = (float)prj->viewH() / sky_resolution;
@@ -95,17 +104,15 @@ void stel_atmosphere::compute_color(Vec3d sunPos, Vec3d moonPos, float moon_phas
 			}
 
 			b2.pos[0] = point[0]; b2.pos[1] = point[1]; b2.pos[2] = point[2];
+
+			// Use the skylight model for the color
 			sky.get_xyY_valuev(&b2);
 
-			// Make a smooth transition between the skylight.cpp and the skybright.cpp 's models.
-			float s = (1000.f - b2.color[2])/1000.f;
-			if (s>0)
-			{
-				b2.color[2]*=1.f-s;
-				b2.color[2]+=s * skyb.get_luminance(moon_pos[0]*b2.pos[0]+moon_pos[1]*b2.pos[1]+
+			// Use the skybright.cpp 's models for brightness which gives better results.
+			b2.color[2] = skyb.get_luminance(moon_pos[0]*b2.pos[0]+moon_pos[1]*b2.pos[1]+
 					moon_pos[2]*b2.pos[2] - 0.00000001, sun_pos[0]*b2.pos[0]+sun_pos[1]*b2.pos[1]+
 					sun_pos[2]*b2.pos[2] - 0.00000001, b2.pos[2]);
-			}
+
 
 			sum_lum+=b2.color[2];
 			++nb_lum;
@@ -115,9 +122,8 @@ void stel_atmosphere::compute_color(Vec3d sunPos, Vec3d moonPos, float moon_phas
 	}
 
 	// Update world adaptation luminance from the previous values
-	if (sum_lum/nb_lum<1.5f) eye->set_world_adaptation_luminance(3.75f);
-	else eye->set_world_adaptation_luminance(sum_lum/nb_lum*2.5);
-
+	if (sum_lum/nb_lum<4.5f/3) eye->set_world_adaptation_luminance(4.5f);
+	else eye->set_world_adaptation_luminance(sum_lum/nb_lum * 3.);
 	sum_lum = 0.f;
 	nb_lum = 0;
 }
