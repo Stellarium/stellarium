@@ -114,6 +114,9 @@ void Constellation::draw_optim(Projector* prj) const
 	static Vec3d star1;
 	static Vec3d star2;
 
+	//	glDisable(GL_TEXTURE_2D);
+    //glDisable(GL_BLEND);
+
     for(unsigned int i=0;i<nb_segments;++i)
     {
 		if(prj->project_prec_earth_equ_line_check(asterism[2*i]->XYZ,star1,asterism[2*i+1]->XYZ,star2) ) 
