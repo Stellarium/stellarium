@@ -23,6 +23,7 @@
 #include <string>
 #include "s_texture.h"
 #include "vecmath.h"
+#include "fmath.h"
 #include "tone_reproductor.h"
 #include "projector.h"
 #include "navigator.h"
