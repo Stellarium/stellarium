@@ -1,54 +1,48 @@
 /*
- * Copyright (C) 2003 Fabien Chéreau
- *
+ * Stellarium
+ * This file Copyright (C) 2005 Robert Spearman
+ * 
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- *
+ * 
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- *
+ * 
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-// Class which manages SDL in stellarium
+// manage an audio track
 
-#ifndef _STEL_SDL_H_
-#define _STEL_SDL_H_
+#ifndef _AUDIO_H_
+#define _AUDIO_H_
 
+#include <string>
 #include "SDL.h"
 #include "SDL_mixer.h"
 
-#include "stellarium.h"
-#include "stel_core.h"
-
-class stel_sdl
+class Audio
 {
-public:
-    stel_sdl(stel_core * core);
-    virtual ~stel_sdl();
-	void init(void);
-	void start_main_loop(void);
 
-private:
-	stel_core * core;
+ public:
+  Audio(std::string filename, std::string name);
+  virtual ~Audio();
+  void play(bool loop);
+  void pause();
+  void resume();
+  void stop();
+  std::string get_name() { return track_name; };
 
-	// Function to call when the window size changes
-	void resize_GL(int w, int h);
-	static SDL_Cursor *create_cursor(const char *image[]);
-
-	// SDL managment variables
-	SDL_Surface *Screen;// The Screen
-    SDL_Event	E;		// And Event Used In The Polling Process
-    Uint32	TickCount;	// Used For The Tick Counter
-    Uint32	LastCount;	// Used For The Tick Counter
-    SDL_Cursor *Cursor;
+ private:
+  Mix_Music *track;
+  std::string track_name;
 
 };
 
-#endif // _STEL_SDL_H_
+
+#endif // _AUDIO_H
