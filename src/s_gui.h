@@ -40,6 +40,8 @@
 
 #include <list>
 #include <string>
+#include <vector>
+#include <map>
 
 #include "s_texture.h"
 #include "s_font.h"
@@ -96,6 +98,7 @@ namespace s_gui
 		void drawLine(const s_vec2i& pos1, const s_vec2i& pos2) const;
 		void drawLine(const s_vec2i& pos1, const s_vec2i& pos2, const s_color& c) const;
 		void print(int x, int y, const string& str) const;
+		void print(int x, int y, const string& str, const s_color& c) const;
 		void setTexture(const s_texture* tex) {tex1 = tex;}
 		void setFont(const s_font* f) {font = f;}
 		void setTextColor(const s_color& c) {textColor = c;}
@@ -186,6 +189,7 @@ namespace s_gui
         Container();
         virtual ~Container();
         virtual void addComponent(Component*);
+        virtual void removeComponent(Component*);
         virtual void draw(void);
 		virtual int onClic(int, int, S_GUI_VALUE, S_GUI_VALUE);
 		virtual int onMove(int, int);
@@ -490,6 +494,37 @@ namespace s_gui
 		Picture * pointer;
 		s_vec2i crosspos;
 	};
+
+    class StringList : public CallbackComponent
+	{
+	public:
+		StringList();
+		virtual void draw(void);
+		virtual int onClic(int, int, S_GUI_VALUE, S_GUI_VALUE);
+		void addItem(const string &);
+		const string getValue() const;
+		bool setValue(const string &);
+	private:
+		int itemSize;
+		vector<string> items;
+		vector<string>::iterator current;
+	};
+
+	// Widget used to set time zone. Initialized from a file of type /usr/share/zoneinfo/zone.tab
+    class Time_zone_item : public Container
+    {
+    public:
+		Time_zone_item(const string& zonetab_file);
+		virtual void draw(void);
+		virtual int onClic(int, int, S_GUI_VALUE, S_GUI_VALUE);
+		string gettz(void); // should be const but gives a boring error...
+		void settz(const string& tz);
+    protected:
+		StringList continents_names;
+		map<string, StringList > continents;
+		StringList* current_edit;
+		StringList* lb;
+    };
 
 };
 

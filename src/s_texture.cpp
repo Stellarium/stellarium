@@ -32,13 +32,16 @@ s_texture::s_texture(const string& _textureName) : textureName(_textureName), te
 }
 
 s_texture::s_texture(const string& _textureName, int _loadType) : textureName(_textureName),
-	texID(0), loadType(PNG_BLEND3), loadType2(GL_CLAMP)
+	texID(0), loadType(PNG_BLEND1), loadType2(GL_CLAMP)
 {
     switch (_loadType)
     {
         case TEX_LOAD_TYPE_PNG_ALPHA : loadType=PNG_ALPHA; break;
         case TEX_LOAD_TYPE_PNG_SOLID : loadType=PNG_SOLID; break;
-        case TEX_LOAD_TYPE_PNG_BLEND3: loadType=PNG_BLEND1; break;
+        case TEX_LOAD_TYPE_PNG_BLEND3: loadType=PNG_BLEND3; break;
+        case TEX_LOAD_TYPE_PNG_BLEND4: loadType=PNG_BLEND4; break;
+        case TEX_LOAD_TYPE_PNG_BLEND1: loadType=PNG_BLEND1; break;
+		case TEX_LOAD_TYPE_PNG_BLEND8: loadType=PNG_BLEND8; break;
         case TEX_LOAD_TYPE_PNG_REPEAT: loadType=PNG_BLEND1; loadType2=GL_REPEAT; break;
         case TEX_LOAD_TYPE_PNG_SOLID_REPEAT: loadType=PNG_SOLID; loadType2=GL_REPEAT; break;
         default : loadType=PNG_BLEND3;

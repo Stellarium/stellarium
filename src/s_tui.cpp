@@ -808,7 +808,7 @@ string Time_zone_item::gettz(void) // should be const but gives a boring error..
 	else return continents_names.getCurrent() + "/error" ;
 }
 
-void Time_zone_item::settz(string tz)
+void Time_zone_item::settz(const string& tz)
 {
 	int i = tz.find("/");
 	continents_names.setCurrent(tz.substr(0,i));

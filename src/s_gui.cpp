@@ -19,6 +19,7 @@
 
 #include <iostream>
 #include <sstream>
+#include <fstream>
 
 #include "s_gui.h"
 
@@ -264,6 +265,15 @@ void Painter::print(int x, int y, const string& str) const
 	font->print(x, y, str, 0);	// 0 for upside down mode
 }
 
+// Print the text with the default font and given text color
+void Painter::print(int x, int y, const string& str, const s_color& c) const
+{
+    glColor4fv(c);
+    glEnable(GL_TEXTURE_2D);
+    glEnable(GL_BLEND);
+	font->print(x, y, str, 0);	// 0 for upside down mode
+}
+
 void Painter::drawLine(const s_vec2i& pos1, const s_vec2i& pos2) const
 {
 	glColor4fv(baseColor);
@@ -394,6 +404,17 @@ Container::~Container()
 void Container::addComponent(Component* c)
 {
 	childs.push_front(c);
+}
+
+void Container::removeComponent(Component* c)
+{
+    list<Component*>::iterator iter = childs.begin();
+	while (iter != childs.end() || *iter != c)
+	{
+		++iter;
+	}
+	if (iter==childs.end()) return;
+	childs.erase(iter);
 }
 
 void Container::draw(void)
@@ -917,6 +938,7 @@ void TabContainer::addTab(Component* c, const string& name)
 
 void TabContainer::draw(void)
 {
+	if (!visible) return;
 	painter.drawSquareFill(pos, size, painter.getBaseColor()/3);
 	painter.drawLine(s_vec2i(pos[0]+getHeadersSize(), pos[1]+headerHeight-1),
 		s_vec2i(pos[0]+size[0], pos[1]+headerHeight-1));
@@ -1075,6 +1097,7 @@ IntIncDec::~IntIncDec()
 
 void IntIncDec::draw()
 {
+	if (!visible) return;
 	ostringstream os;
 	os << value;
 	label.setLabel(os.str());
@@ -1124,6 +1147,7 @@ FloatIncDec::~FloatIncDec()
 
 void FloatIncDec::draw()
 {
+	if (!visible) return;
 	ostringstream os;
 	os << value;
 	label.setLabel(os.str());
@@ -1289,6 +1313,7 @@ Picture::~Picture()
 
 void Picture::draw(void)
 {
+	if (!visible) return;
 	painter.drawSquareFill(pos, size, imgcolor);
 	if (showedges) painter.drawSquareEdge(pos, size);
 }
@@ -1309,6 +1334,7 @@ MapPicture::~MapPicture()
 
 void MapPicture::draw(void)
 {
+	if (!visible) return;
 	Picture::draw();
 	pointer->setPos(s_vec2i(crosspos[0]+pos[0]-pointer->getSizex()/2, crosspos[1]+pos[1]-pointer->getSizey()/2));
 	pointer->draw();
@@ -1341,3 +1367,139 @@ void MapPicture::setPointerLatitude(float l)
 {
 	setPointery(size[1] - (int)((l+90.f)/180.f * size[1]));
 }
+
+
+// ClicList
+StringList::StringList()
+{
+	current = items.end();
+	itemSize = (int)painter.getFont()->getLineHeight() + 1;
+	size[0] = 100;
+	size[1] = 0;
+}
+
+void StringList::draw(void)
+{
+	if (!visible) return;
+	painter.drawSquareEdge(pos, size);
+
+	int y = 0;
+	vector<string>::iterator iter;
+	for (iter=items.begin();iter!=items.end();++iter)
+	{
+		if (iter==current) painter.print(pos[0] + 3, pos[1] + y + 2, *iter, painter.getTextColor() * 2);
+		else painter.print(pos[0] + 2, pos[1] + y + 2,*iter);
+		painter.drawLine(s_vec2i(pos[0], pos[1]+y), s_vec2i(pos[0]+size[0], pos[1]+(int)y));
+		y += itemSize;
+	}
+}
+
+int StringList::onClic(int x, int y, S_GUI_VALUE button, S_GUI_VALUE state)
+{
+	if (!visible || state!=S_GUI_PRESSED || !isIn(x,y)) return 0;
+	int poss = (y-pos[1])/itemSize;
+	if (items.begin()+poss == items.end()) return 1;
+	current = items.begin()+poss;
+	if (!onPressCallback.empty()) onPressCallback();
+	return 1;
+}
+
+void StringList::addItem(const string& newitem)
+{
+	items.push_back(newitem);
+	if (current==items.end()) current = items.begin();
+	size[1] += itemSize;
+}
+
+const string StringList::getValue() const
+{
+	if (current==items.end()) return "";
+	else return *current;
+}
+
+bool StringList::setValue(const string & s)
+{
+	vector<string>::iterator iter;
+	for (iter=items.begin();iter!=items.end();++iter)
+	{
+		if (s==*iter)
+		{
+			current = iter;
+			return true;
+		}
+	}
+	return false;
+}
+
+// Time Zone Item :
+// Widget used to set time zone. Initialized from a file of type /usr/share/zoneinfo/zone.tab
+Time_zone_item::Time_zone_item(const string& zonetab_file)
+{
+	if (zonetab_file.empty())
+	{
+		cout << "Can't find file \"" << zonetab_file << "\"\n" ;
+		exit(0);
+	}
+
+	ifstream is(zonetab_file.c_str());
+
+	string unused, tzname;
+	char zoneline[256];
+	int i;
+
+	while (is.getline(zoneline, 256))
+	{
+		if (zoneline[0]=='#') continue;
+		istringstream istr(zoneline);
+		istr >> unused >> unused >> tzname;
+		i = tzname.find("/");
+		if (continents.find(tzname.substr(0,i))==continents.end())
+		{
+			continents.insert(pair<string, StringList >(tzname.substr(0,i),StringList()));
+			continents[tzname.substr(0,i)].addItem(tzname.substr(i+1,tzname.size()));
+			continents_names.addItem(tzname.substr(0,i));
+		}
+		else
+		{
+			continents[tzname.substr(0,i)].addItem(tzname.substr(i+1,tzname.size()));
+		}
+	}
+
+	is.close();
+	current_edit=&continents_names;
+	size[0] = continents_names.getSizex() * 2;
+	size[1] = continents_names.getSizey();
+
+	addComponent(&continents_names);
+}
+
+void Time_zone_item::draw(void)
+{
+	if (!visible) return;
+	painter.drawSquareEdge(pos, size);
+
+	Container::draw();
+}
+
+int Time_zone_item::onClic(int x, int y, S_GUI_VALUE button, S_GUI_VALUE state)
+{
+	// TODO
+	
+	//addComponent(&continents[continents_names.getValue()]);
+	return 0;
+}
+
+string Time_zone_item::gettz(void)
+{
+	if (continents.find(continents_names.getValue())!=continents.end())
+		return continents_names.getValue() + "/" + continents[continents_names.getValue()].getValue();
+	else return continents_names.getValue() + "/error" ;
+}
+
+void Time_zone_item::settz(const string& tz)
+{
+	int i = tz.find("/");
+	continents_names.setValue(tz.substr(0,i));
+	continents[continents_names.getValue()].setValue(tz.substr(i+1,tz.size()));
+}
+
