@@ -180,8 +180,8 @@ public:
 	//void print_gravity(const s_font* font, float x, float y, const string& str,
 	//	float xshift = 0, float yshift = 0) const;
 
-	void print_gravity180(const s_font* font, float x, float y, const string& str,
-		float xshift = 0, float yshift = 0) const;
+	void print_gravity180(const s_font* font, float x, float y, const string& str, 
+			      bool speed_optimize = 1, float xshift = 0, float yshift = 0) const;
 
 protected:
 

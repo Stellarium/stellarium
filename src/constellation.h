@@ -31,14 +31,16 @@ class Constellation
 public:
     Constellation();
     virtual ~Constellation();
+    void show_art(void);
+    void hide_art(void);
     int read(FILE *, Hip_Star_mgr * _VouteCeleste);
-	void draw(Projector* prj, const Vec3f& lines_color) const;
+    void draw(Projector* prj, const Vec3f& lines_color) const;
     void draw_name(s_font * constfont, Projector* prj) const;
-	void draw_art(Projector* prj) const;
-	const Constellation* is_star_in(const Hip_Star *) const;
+    void draw_art(Projector* prj);
+    const Constellation* is_star_in(const Hip_Star *) const;
 private:
     void draw_optim(Projector* prj) const;
-	void draw_art_optim(Projector* prj) const;
+	void draw_art_optim(Projector* prj);
     char * name;
     char short_name[4];
     char * inter;
@@ -51,7 +53,8 @@ private:
 	s_texture* art_tex;
 
 	Vec3f art_vertex[16];
-
+	bool art_on;
+	float art_intensity;
 };
 
 #endif // _CONSTELLATION_H_

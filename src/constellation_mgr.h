@@ -31,6 +31,8 @@ public:
 		      Vec3f _lines_color, Vec3f _names_color);
     virtual ~Constellation_mgr();
     void set_sky_culture(string _sky_culture);
+    void show_art(void);
+    void hide_art(void);
     void draw(Projector* prj) const;
 	// Draw one constellation of internationnal name Abr
 	void draw(Projector* prj, char abr[4]) const;
