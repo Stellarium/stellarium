@@ -497,7 +497,7 @@ F1  : Toggle fullscreen if possible.\n"
     ,gc->getFont());
     HelpTextLabel->reshape(avgCharLen*2,lineHeight,45*avgCharLen,35*lineHeight);
 
-    HelpWin = new StdBtWin(global.X_Resolution/2-25*avgCharLen, global.Y_Resolution/2-30*lineHeight/2, 48*avgCharLen, 35*(lineHeight+1), "Help", Base, spaceFont);
+    HelpWin = new StdBtWin(global.X_Resolution/2-25*avgCharLen, global.Y_Resolution/2-30*lineHeight/2, 48*avgCharLen, 32*(lineHeight+1), "Help", Base, spaceFont);
     HelpWin->addComponent(HelpTextLabel);
     HelpWin->setVisible(global.FlagHelp);
     HelpWin->setHideCallback(HelpWinHideCallback);
@@ -505,7 +505,7 @@ F1  : Toggle fullscreen if possible.\n"
 /**********************************************************************************/
 /*** Info TextLabel ***/
     InfoTextLabel = new TextLabel(
-"                 \1   " APP_NAME "  August 2002  \1\n\
+"                 \1   " APP_NAME "  April 2003  \1\n\
  \n\
 \1   Copyright (c) 2002 Fabien Chereau\n\
  \n\
