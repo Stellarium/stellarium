@@ -786,7 +786,7 @@ Boston, MA  02111-1307, USA.\n"
     TimeFF->reshape(vec2_i(btXSize*5+5,0),vec2_i(btXSize,btYSize));
     TimeFF->setOnClicCallback(TimeControlBtOnClicCallback);
 
-    TimeControlWin->reshape(vec2_i(gc->winW-1, gc->winH)-TimeControlWin->getSize(),TimeControlWin->getSize());
+    TimeControlWin->reshape(vec2_i(gc->winW-1-TimeControlWin->getSize()[0], gc->winH-TimeControlWin->getSize()[1]),TimeControlWin->getSize());
 
     TimeControlContainer->addComponent(TimeFRW);
     TimeControlContainer->addComponent(TimeRW);

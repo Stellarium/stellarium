@@ -15,14 +15,14 @@ dnl Checks for libraries.
 dnl Checks for header files.
 AC_HEADER_STDC
 AC_CHECK_HEADERS(limits.h malloc.h strings.h unistd.h)
+AC_CHECK_HEADERS(GL/gl.h GL/glu.h GL/glut.h)
 
 dnl Checks for typedefs, structures, and compiler characteristics.
-AC_C_CONST
 AC_C_INLINE
 AC_TYPE_SIZE_T
 AC_STRUCT_TM
 
 dnl Checks for library functions.
-AC_CHECK_FUNCS(strdup strerror strstr strtod strtol strtoul)
+AC_CHECK_FUNCS(strdup strerror strstr strtod strtol strtoul glGenTextures)
 
 AC_OUTPUT(Makefile src/Makefile src/astrolib/Makefile src/glpng/Makefile config/Makefile data/Makefile textures/Makefile)
