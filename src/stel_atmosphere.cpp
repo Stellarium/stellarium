@@ -160,7 +160,9 @@ void stel_atmosphere::compute_color(double JD,  int delta_time, Vec3d sunPos, Ve
 				// it looks nice and gives proper values for brightness estimation
 			}
 
-			b2.pos[0] = point[0]; b2.pos[1] = point[1]; b2.pos[2] = point[2];
+			b2.pos[0] = point[0];
+			b2.pos[1] = point[1];
+			b2.pos[2] = point[2];
 
 			// Use the skylight model for the color
 			sky.get_xyY_valuev(&b2);

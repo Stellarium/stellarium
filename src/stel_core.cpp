@@ -25,7 +25,7 @@
 
 stel_core::stel_core() : screen_W(800), screen_H(600), bppMode(16), Fullscreen(0),
 	navigation(NULL), observatory(NULL), projection(NULL), selected_object(NULL), hip_stars(NULL), asterisms(NULL),
-	nebulas(NULL), atmosphere(NULL), tone_converter(NULL), selected_constellation(NULL), FlagShowTuiMenu(0),
+	nebulas(NULL), atmosphere(NULL), tone_converter(NULL), selected_constellation(NULL), FlagHelp(false), FlagShowTuiMenu(0), 
 	frame(0), timefr(0), timeBase(0), maxfps(10000.f), deltaFov(0.), deltaAlt(0.), deltaAz(0.),
 	move_speed(0.001), FlagTimePause(0), is_mouse_moving_horiz(false), is_mouse_moving_vert(false)
 {
@@ -44,6 +44,7 @@ stel_core::~stel_core()
 	if (equator_line) delete equator_line;
 	if (ecliptic_line) delete ecliptic_line;
 	if (cardinals_points) delete cardinals_points;
+	delete landscape; landscape = NULL;
 	if (milky_way) delete milky_way;
 	if (atmosphere) delete atmosphere;
 	if (tone_converter) delete tone_converter;
@@ -69,10 +70,6 @@ void stel_core::set_config_files(const string& _config_file)
 
 void stel_core::init(void)
 {
-	glClear(GL_COLOR_BUFFER_BIT);
-	SDL_GL_SwapBuffers();
-	glClear(GL_COLOR_BUFFER_BIT);
-		
 	// Set textures directory and suffix
 	s_texture::set_texDir(TextureDir);
 	s_texture::set_suffix(".png");

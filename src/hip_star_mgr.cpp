@@ -239,21 +239,21 @@ void Hip_Star_mgr::draw(float _star_scale, float _star_mag_scale, float _twinkle
 	static vector<Hip_Star *>::iterator end;
 	static vector<Hip_Star *>::iterator iter;
 	for(int i=0;i<nbZones;++i)
-	  {
-	    end = starZones[zoneList[i]].end();
+	{
+		end = starZones[zoneList[i]].end();
 	    for(iter = starZones[zoneList[i]].begin(); iter!=end; ++iter)
-	      {
-		// If too small, skip and Compute the 2D position and check if in screen
-		if((*iter)->Mag>maxMag) break;
-		if(!prj->project_prec_earth_equ_check((*iter)->XYZ, (*iter)->XY)) continue;
-		(*iter)->draw();
-		if ((*iter)->CommonName!="" && name_ON && (*iter)->Mag<maxMagStarName)
-		  {
-		    (*iter)->draw_name(starFont);
-		    glBindTexture (GL_TEXTURE_2D, starTexture->getID());
-		  }
-	      }
-	  }
+		{
+			// If too small, skip and Compute the 2D position and check if in screen
+			if((*iter)->Mag>maxMag) break;
+			if(!prj->project_prec_earth_equ_check((*iter)->XYZ, (*iter)->XY)) continue;
+			(*iter)->draw();
+			if ((*iter)->CommonName!="" && name_ON && (*iter)->Mag<maxMagStarName)
+			{
+				(*iter)->draw_name(starFont);
+				glBindTexture (GL_TEXTURE_2D, starTexture->getID());
+			}
+		}
+	}
 	
 	prj->reset_perspective_projection();
 }

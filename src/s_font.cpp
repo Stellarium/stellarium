@@ -33,6 +33,7 @@ s_font::s_font(float size_i, const string& textureName, const string& dataFileNa
 s_font::~s_font()
 {
     glDeleteLists(g_base, 128);                          // Delete All 256 Display Lists
+	delete s_fontTexture; s_fontTexture = NULL;
 }
 
 int s_font::buildDisplayLists(const string& dataFileName, const string& textureName)

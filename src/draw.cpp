@@ -310,7 +310,7 @@ void SkyLine::draw(const Projector* prj) const
 
 
 Cardinals::Cardinals(const string& font_file, const string& tex_file, double size, double _radius) :
-	radius(radius), font(NULL)
+	radius(_radius), font(NULL)
 {
 	font = new s_font(size, tex_file, font_file);
 	if (!font)

@@ -505,9 +505,10 @@ void stel_ui::help_win_hideBtCallback(void)
 /**********************************************************************************/
 stel_ui::~stel_ui()
 {
-    if (desktop) delete desktop; 		desktop = NULL;
-    if (spaceFont) delete spaceFont; 	spaceFont = NULL;
-	if (baseTex) delete baseTex; 		baseTex = NULL;
+    delete desktop; 	desktop = NULL;
+    delete spaceFont; 	spaceFont = NULL;
+	delete baseTex; 	baseTex = NULL;
+	delete courierFont; courierFont = NULL;
 }
 
 /*******************************************************************/
