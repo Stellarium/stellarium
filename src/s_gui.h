@@ -47,19 +47,19 @@
 using namespace std;
 using namespace boost;
 
-// gui Return Values:
-enum S_GUI_VALUE
-{
-	S_GUI_MOUSE_LEFT,
-	S_GUI_MOUSE_RIGHT,
-    S_GUI_MOUSE_MIDDLE,
-	S_GUI_PRESSED,
-	S_GUI_RELEASED
-};
-
 namespace s_gui
 {
-	typedef Vec4f s_color;
+	// gui Return Values:
+	enum S_GUI_VALUE
+	{
+		S_GUI_MOUSE_LEFT,
+		S_GUI_MOUSE_RIGHT,
+    	S_GUI_MOUSE_MIDDLE,
+		S_GUI_PRESSED,
+		S_GUI_RELEASED
+	};
+
+ typedef Vec4f s_color;
 	typedef Vec4i s_square;
 	typedef Vec2i s_vec2i;
 	typedef Vec4i s_vec4i;
@@ -109,7 +109,7 @@ namespace s_gui
     class Component
     {
     public:
-        Component(void);
+        Component();
 		virtual ~Component();
         virtual void draw(void) = 0;
         virtual void reshape(const s_vec2i& _pos, const s_vec2i& _size);

@@ -89,10 +89,9 @@ void stel_atmosphere::compute_color(Vec3d sunPos, Vec3d moonPos, float moon_phas
 
 			if (point[2]<=0)
 			{
-				b2.color[0] = 0.25;
-				b2.color[1] = 0.25;
-				b2.color[2] = 0;
-				continue;
+				point[2] = -point[2];
+				// The sky bellow the ground is the symetric of the one above :
+				// it looks nice and gives proper values for brightness estimation
 			}
 
 			b2.pos[0] = point[0]; b2.pos[1] = point[1]; b2.pos[2] = point[2];

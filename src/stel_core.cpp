@@ -248,7 +248,7 @@ void stel_core::draw(int delta_time)
 
 	glBlendFunc(GL_ONE, GL_ONE);
 
-	glClear(GL_COLOR_BUFFER_BIT);
+	//glClear(GL_COLOR_BUFFER_BIT);
 	// Draw the milky way. If not activated, need at least to clear the color buffer
 	if (!FlagMilkyWay) glClear(GL_COLOR_BUFFER_BIT);
 	else milky_way->draw(tone_converter, projection, navigation);
@@ -412,6 +412,10 @@ void stel_core::load_config(void)
 	GuiBaseColor		= str_to_vec3f(conf->get_str("gui:gui_base_color"));
 	GuiTextColor		= str_to_vec3f(conf->get_str("gui:gui_text_color"));
 
+	// Text ui section
+	FlagShowTuiDateTime = conf->get_boolean("tui:flag_show_tui_datetime");
+	FlagShowTuiShortInfo = conf->get_boolean("tui:flag_show_tui_short_obj_info");
+
 	// Navigation section
 	navigation->set_flag_lock_equ_pos(conf->get_boolean("navigation:flag_lock_equ_pos"));
 
@@ -501,7 +505,7 @@ int stel_core::handle_move(int x, int y)
 }
 
 // Handle key press and release
-int stel_core::handle_keys(SDLKey key, S_GUI_VALUE state)
+int stel_core::handle_keys(SDLKey key, s_gui::S_GUI_VALUE state)
 {
 	if (!ui->handle_keys(key, state))
 	{

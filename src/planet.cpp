@@ -255,12 +255,14 @@ void planet::draw(int hint_ON, Projector* prj, const navigator * nav, const tone
 		if (rings)
 		{
 			double dist = get_earth_equ_pos(nav).length();
+			double n,f;
+			prj->get_clipping_planes(&n, &f);	// Copy clipping planes
 			prj->set_clipping_planes(dist-rings->get_size(), dist+rings->get_size());
 			glEnable(GL_DEPTH_TEST);
 			draw_sphere(prj, mat, screen_sz);
 			rings->draw(prj, mat);
 			glDisable(GL_DEPTH_TEST);
-			prj->set_clipping_planes(0.0005 ,40);  // TODO : this is bad code
+			prj->set_clipping_planes(n ,f);	// Release old clipping planes
 		}
 		else draw_sphere(prj, mat, screen_sz);
 
