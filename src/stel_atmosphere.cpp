@@ -61,11 +61,6 @@ void stel_atmosphere::compute_color(double JD, Vec3d sunPos, Vec3d moonPos, floa
 	else
 	{
 		atm_intensity = fader.get_interstate();
-		if( atm_intensity < .001) {
-			// not visible, so don't bother calculating
-			eye->set_world_adaptation_luminance(3.75f);
-			return;
-		}
 	}
 
 	
