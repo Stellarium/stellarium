@@ -133,10 +133,27 @@ void Constellation_mgr::load(const string& font_fileName, const string& fileName
 			x3, texSize-y3, 0.f, 1.f, x1, texSize-y1, texSize, 1.f);
 		Mat4f X = B * A.inverse();
 
-		cons->art_vertex[0] = Vec3f(X*Vec3f(0,0,0));
+		/*cons->art_vertex[0] = Vec3f(X*Vec3f(0,0,0));
 		cons->art_vertex[1] = Vec3f(X*Vec3f(texSize,0,0));
 		cons->art_vertex[2] = Vec3f(X*Vec3f(texSize,texSize,0));
-		cons->art_vertex[3] = Vec3f(X*Vec3f(0,texSize,0));
+		cons->art_vertex[3] = Vec3f(X*Vec3f(0,texSize,0));*/
+
+		cons->art_vertex[0] = Vec3f(X*Vec3f(0,0,0));
+		cons->art_vertex[1] = Vec3f(X*Vec3f(texSize/2,0,0));
+		cons->art_vertex[2] = Vec3f(X*Vec3f(texSize/2,texSize/2,0));
+		cons->art_vertex[3] = Vec3f(X*Vec3f(0,texSize/2,0));
+		cons->art_vertex[4] = Vec3f(X*Vec3f(texSize/2 + 0,0,0));
+		cons->art_vertex[5] = Vec3f(X*Vec3f(texSize/2 + texSize/2,0,0));
+		cons->art_vertex[6] = Vec3f(X*Vec3f(texSize/2 + texSize/2,texSize/2,0));
+		cons->art_vertex[7] = Vec3f(X*Vec3f(texSize/2 + 0,texSize/2,0));
+		cons->art_vertex[8] = Vec3f(X*Vec3f(texSize/2 + 0, texSize/2 + 0,0));
+		cons->art_vertex[9] = Vec3f(X*Vec3f(texSize/2 + texSize/2, texSize/2 + 0,0));
+		cons->art_vertex[10]= Vec3f(X*Vec3f(texSize/2 + texSize/2, texSize/2 + texSize/2,0));
+		cons->art_vertex[11]= Vec3f(X*Vec3f(texSize/2 + 0, texSize/2 + texSize/2,0));
+		cons->art_vertex[12] = Vec3f(X*Vec3f(0,texSize/2 + 0,0));
+		cons->art_vertex[13] = Vec3f(X*Vec3f(texSize/2, texSize/2 + 0,0));
+		cons->art_vertex[14] = Vec3f(X*Vec3f(texSize/2, texSize/2 + texSize/2,0));
+		cons->art_vertex[15] = Vec3f(X*Vec3f(0, texSize/2 + texSize/2,0));
     }
     fclose(fic);
 }
