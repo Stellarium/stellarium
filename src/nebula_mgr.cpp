@@ -78,6 +78,11 @@ int Nebula_mgr::read(const string& font_fileName, const string& fileName, int ba
 
     Nebula::tex_circle = new s_texture("neb");   // Load circle texture
 
+    if(total<1) {
+      fclose(fic);
+      return(0);
+    }
+
     int current=0;
 
     glDisable(GL_BLEND);
