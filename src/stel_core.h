@@ -143,6 +143,7 @@ private:
 	stel_ui * ui;						// The main User Interface
 
 	Constellation* selected_constellation;
+	planet* selected_planet;
 
 	float fps;
 
