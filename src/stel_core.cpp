@@ -1291,10 +1291,18 @@ void stel_core::set_sky_locale(string _locale)
 }
 
 // set a core flag
-int stel_core::set_flag(string name, string value) {
+// if caller is not trusted, some flags can't be changed 
+int stel_core::set_flag(string name, string value, bool trusted) {
 
   // value can be "on", "off", or "toggle"
   if(value == "toggle") {
+
+    if(trusted) {
+      if(name=="enable_zoom_keys") FlagEnableZoomKeys = !FlagEnableZoomKeys;
+      else if(name=="enable_move_keys") FlagEnableMoveKeys = !FlagEnableMoveKeys;
+      else if(name=="enable_move_mouse") FlagEnableMoveMouse = !FlagEnableMoveMouse;
+    }
+
 
     if(name=="star_twinkle") FlagStarTwinkle = !FlagStarTwinkle;
     else if(name=="point_star") FlagPointStar = !FlagPointStar;
@@ -1312,9 +1320,6 @@ int stel_core::set_flag(string name, string value) {
     else if(name=="show_gravity_ui") FlagShowGravityUi = !FlagShowGravityUi;
     else if(name=="show_tui_datetime") FlagShowTuiDateTime = !FlagShowTuiDateTime;
     else if(name=="show_tui_short_obj_info") FlagShowTuiShortObjInfo = !FlagShowTuiShortObjInfo;
-    else if(name=="enable_zoom_keys") FlagEnableZoomKeys = !FlagEnableZoomKeys;
-    else if(name=="enable_move_keys") FlagEnableMoveKeys = !FlagEnableMoveKeys;
-    else if(name=="enable_move_mouse") FlagEnableMoveMouse = !FlagEnableMoveMouse;
     else if(name=="utc_time") FlagUTC_Time = !FlagUTC_Time;
     else if(name=="manual_zoom") FlagManualZoom = !FlagManualZoom;
     else if(name=="ground") FlagGround = !FlagGround;
@@ -1348,6 +1353,12 @@ int stel_core::set_flag(string name, string value) {
 
     bool val = (value == "on");
 
+    if(trusted) {
+      if(name=="enable_zoom_keys") FlagEnableZoomKeys = val;
+      else if(name=="enable_move_keys") FlagEnableMoveKeys = val;
+      else if(name=="enable_move_mouse") FlagEnableMoveMouse = val;
+    }
+
     if(name=="star_twinkle") FlagStarTwinkle = val;
     else if(name=="point_star") FlagPointStar = val;
     else if(name=="menu") FlagMenu = val;
@@ -1364,8 +1375,6 @@ int stel_core::set_flag(string name, string value) {
     else if(name=="show_gravity_ui") FlagShowGravityUi = val;
     else if(name=="show_tui_datetime") FlagShowTuiDateTime = val;
     else if(name=="show_tui_short_obj_info") FlagShowTuiShortObjInfo = val;
-    else if(name=="enable_zoom_keys") FlagEnableZoomKeys = val;
-    else if(name=="enable_move_keys") FlagEnableMoveKeys = val;
     else if(name=="utc_time") FlagUTC_Time = val;
     else if(name=="manual_zoom") FlagManualZoom = val;
     else if(name=="ground") FlagGround = val;
@@ -1396,6 +1405,7 @@ int stel_core::set_flag(string name, string value) {
     else return(0);  // no matching flag found
 
   }
+
 
   return(1);  // everything worked 
 

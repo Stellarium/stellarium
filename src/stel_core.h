@@ -115,7 +115,7 @@ public:
 	// ---------------------------------------------------------------
 	
 	// IDEA: replace flags and settings with a hash of structs or classes...
-	int set_flag(string name, string value);  // set a core flag
+	int set_flag(string name, string value, bool trusted);  // set a core flag
 	// Set the value of the parameter TODO
 	void set_param(string& key, float value);
 	// Zoom to the given FOV
