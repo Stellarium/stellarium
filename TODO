@@ -1,11 +1,10 @@
 Stellarium TODO list :
 
-Please help me continuing this program
-
 Known bugs :
 * Moon position is quite unaccurate.
 * Very big zooming makes objects "shaky" : arithmetic precision?
 * On unix, configuration files might conflict between versions.
+* When windows overlap, strange behaviour can appears.
 
 Important features :
 * A way to enter exact time from within the program.
@@ -13,9 +12,16 @@ Important features :
 * Selection of any object available in a list.
     - need the implementation of the widget "list" in gui.
 
+Features :
+* More nebulas.
+* More landscapes skins.
+* Correct planets axe orientation in the ecliptic plane, in self-roation
+* Big planets satellites
+* Minor planets
+
 Other cool features :
 * A popup with the photo of the selected object
 * Shooting star and meteor shower
 * Northern Lights
-* Re-program the planet class using other libraries who give the axe of the planet in the ecliptique plane, the position in the rotation, extension with jupiter and saturn satellites, other planets, etc...
-* Using real 3D landscape of every region in the world with data taken from the site http://www.megginson.com/flightsim/fgfs-vmap0/
+* Artificial satellites
+* Using real 3D landscape with data taken from the site http://www.megginson.com/flightsim/fgfs-vmap0/
