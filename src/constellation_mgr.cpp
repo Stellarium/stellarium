@@ -84,7 +84,7 @@ void Constellation_mgr::Draw()
     vector<constellation *>::iterator iter;
     for(iter=Liste.begin();iter!=Liste.end();iter++)
     {
-		(**iter).Draw();
+		(*iter)->Draw();
     }
 }
 
@@ -93,8 +93,10 @@ void Constellation_mgr::Draw(char Abr[4])
 {
 	vector<constellation *>::iterator iter;
     for(iter=Liste.begin();iter!=Liste.end();iter++)
-    {if (!strcmp((**iter).Abreviation,Abr)) break;}
-    (**iter).DrawSeule();
+    {
+		if (!strcmp((*iter)->Abreviation,Abr)) break;
+	}
+    (*iter)->DrawSeule();
 }
 
 // Draw the names of all the constellations

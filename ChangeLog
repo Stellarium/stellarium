@@ -1,4 +1,4 @@
-0.5.3b [12/06/2003]
+0.6.0b [26/07/2003]
 Removed the previous patch to configure SDL because it caused some error on some systems.
 Changed the global coordinate system into the conventionnal astronomical one (ie with z axis toward top and x toward us)
 Stopped using the previous unreliable astro library with badly defined licence and use 2 libraries created from modified/simplified version of the LGPL library libnova. One called stellastro which manages the astronomical operations like time management etc. and another one called stellplanet which only computes the planetary positions.
@@ -7,16 +7,28 @@ Remade in a coherent way all the s_utility conversion functions (in double preci
 Created a new class "stel_object" to manage the selected object in a good object oriented way.
 Abandoned my previous vector class for a recreated version of the vecmath class (originally from celestia).
 Use double precision for every planet, orbit and navigation calculation.
-Centralized all the navigation/time variables and operations in a new class "navigator" instead of the old non-object old navigation module.
+Centralized all the navigation/time variables and operations in a new class "navigator" instead of the non-object old navigation module.
 The position of the observer on the earth is now taken into account in every calculation : the precision is dramaticaly improved, sun eclipses works etc...
 Changed the command line handling : changes submitted by Cedric Delfosse.
 Simplified 3D lighting operation for planets.
 Fixed many many bugs related with coordinate.
-Added an orbit calculation class borowed from celestia.
+Added an orbit calculation class borowed from the GPL soft celestia.
 Added experimentaly jupiter satellites.
 Improved object search and planets hints displaying.
 Created a new class to render daylight atmosphere, with a faster and better algorithm.
 Created a new class used to convert tone from high range luminance to CRT display luminance : the aim is to have an homogeneous luminance conversion to use with daylight sky as well as night sky and stars.
+Changed the configuration file parser. The new one is much more convenient. It is called iniparser and it's made by N.Devillard.
+Re-made the old ui widget classes in a better way using functor callbacks and painters.
+Re-thinked and made all the interface. stel_ui is now correct object oriented code.
+Added a tab widget.
+Created a new class to complete the daylight atmosphere model with the previously used model.
+Now display computed atmosphere moon halo and realistic night sky brightness.
+The stars appear in function of the sky luminance.
+Made a correct object oriented solarsystem class. The planets are read from a file.
+Added some planet satellites.
+Improved optimization using gprof.
+Finally fixed the planet shaking bug!
+Updated fog and decor displaying (faster and nicer)
 
 0.5.2 [29/04/2003]
 Changed the configuration file to $HOME/.stellarium/VERSION/ on unix system to prevent conflicts between versions.

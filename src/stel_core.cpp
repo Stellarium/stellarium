@@ -185,7 +185,8 @@ void stel_core::update(int delta_time)
 	Vec3d temp(0.,0.,0.);
 	Vec3d sunPos = navigation->helio_to_local(&temp);
 	sunPos.normalize();
-	sky_brightness = sunPos[2];
+	if (FlagAtmosphere) sky_brightness = sunPos[2];
+	else sky_brightness = 0.1;
 	if (sky_brightness<0) sky_brightness=0;
 
 	ui->update();
@@ -200,6 +201,7 @@ void stel_core::draw(int delta_time)
     // Set openGL drawings in equatorial coordinates
     navigation->switch_to_earth_equatorial();
 
+	//glDisable(GL_DEPTH_TEST);
 	glBlendFunc(GL_ONE, GL_ONE);
 
 	// Draw the milky way. If not activated, need at least to clear the color buffer
@@ -215,13 +217,14 @@ void stel_core::draw(int delta_time)
     if (FlagAsterismName) asterisms->DrawName(du);
 
 	// Draw the nebula if they are visible
-	if (FlagNebula && (!FlagAtmosphere || sky_brightness<0.1)) nebulas->Draw(FlagNebulaName, du);
+	if (FlagNebula && (!FlagAtmosphere || sky_brightness<0.1)) nebulas->Draw(FlagNebulaName, du, navigation);
 
 	// Draw the hipparcos stars
 	Vec3d tempv = navigation->get_equ_vision();
 	Vec3f temp(tempv[0],tempv[1],tempv[2]);
-	if (FlagStars /*&& (!FlagAtmosphere || sky_brightness<0.2)*/)
-		hip_stars->Draw(StarScale, StarTwinkleAmount, FlagStarName, MaxMagStarName, temp, du, tone_converter);
+	if (FlagStars)
+		hip_stars->Draw(StarScale, StarTwinkleAmount, FlagStarName,
+		MaxMagStarName, temp, du, tone_converter, navigation);
 
 	// Draw the equatorial grid
 	// TODO : make a nice class for grid wit parameters like numbering and custom color/frequency
@@ -383,7 +386,7 @@ void stel_core::load_base_textures(void)
 {
     printf("Loading common textures...\n");
     texIds[2] = new s_texture("voielactee256x256",TEX_LOAD_TYPE_PNG_SOLID);
-    texIds[3] = new s_texture("fog",TEX_LOAD_TYPE_PNG_REPEAT);
+    texIds[3] = new s_texture("fog",TEX_LOAD_TYPE_PNG_SOLID);
     texIds[6] = new s_texture("n");
     texIds[7] = new s_texture("s");
     texIds[8] = new s_texture("e");

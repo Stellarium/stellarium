@@ -79,7 +79,7 @@ int constellation::Read(FILE *  fic, Hip_Star_mgr * _VouteCeleste)
 // Draw the lines for the constellation using the coords of the stars (optimized for use with the class Constellation_mgr only)
 void constellation::Draw()
 {
-    for(unsigned int i=0;i<NbSegments;i++)
+    for(unsigned int i=0;i<NbSegments;++i)
     {
 		glBegin (GL_LINES);
 			glVertex3f((*Asterism[2*i]).XYZ[0],(*Asterism[2*i]).XYZ[1],(*Asterism[2*i]).XYZ[2]);

@@ -42,24 +42,24 @@ public:
 	// Return the radius of a circle containing the object on screen
 	virtual float get_on_screen_size(navigator * nav, draw_utility * du);
 private:
-    static s_texture * texCircle;
-    short posDash;
-    float incLum;
-    unsigned int Messier;   // Messier catalog number
-    unsigned int NGC;       // NGC catalog number
-    char Name[40];          // Nebulae Name
-    float Mag;              // Apparent magnitude
-    Vec3f XYZ;             // Cartesian position
-    char Type[4];           // Nebulae type
-    double XY[3];           // 2D Position
-    double RaRad;            // Right Ascention in radians
-    double DecRad;           // Declinaison in radians
-    float * matTransfo;     // Transformation matrix used to draw the nebulae
-    float Rotation;         // Rotation pour la mettre dans le bon sens...
-    float Taille;           // Taille en minute d'arc
-    char Constellation[5];  // Constellation
-    s_texture * nebTexture; // Texture
-    float RayonPrecalc;     // Taille Précalculée
+	static s_texture * texCircle;
+	short posDash;
+	float incLum;
+	unsigned int Messier;	// Messier catalog number
+	unsigned int NGC;		// NGC catalog number
+	char Name[40];          // Nebulae Name
+	float Mag;              // Apparent magnitude
+	Vec3f XYZ;             // Cartesian position
+	char Type[4];           // Nebulae type
+	Vec3d XY;           // 2D Position
+	double RaRad;            // Right Ascention in radians
+	double DecRad;           // Declinaison in radians
+	float * matTransfo;     // Transformation matrix used to draw the nebulae
+	float Rotation;         // Rotation pour la mettre dans le bon sens...
+	float Taille;           // Taille en minute d'arc
+	char Constellation[5];  // Constellation
+	s_texture * nebTexture; // Texture
+	float RayonPrecalc;     // Taille Précalculée
 
 };
 

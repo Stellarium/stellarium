@@ -129,6 +129,12 @@ public:
 	// the boring shaking bug..
 	Mat4d get_switch_to_heliocentric_mat(void);
 
+	// Return in vector "win" the projection on the screen of point v in earth equatorial coordinate
+	// according to the current modelview and projection matrices
+	// This is a reimplementation of gluProject
+	bool project_earth_equ_to_screen(const Vec3d& v, Vec3d& win);
+	bool project_earth_equ_to_screen(const Vec3f& v, Vec3d& win);
+
 private:
 	// Home made gluLookAt(0., 0., 0.,local_vision[0],local_vision[1],local_vision[2],0.,0.,1.);
 	// to keep a better precision to prevent a little bit the shaking bug..
@@ -143,6 +149,8 @@ private:
 	Mat4d mat_helio_to_earth_equ;	// Transform from Heliocentric to earth equatorial coordinate
 
 	Mat4d mat_projection;			// Projection matrix
+	Mat4d mat_earth_equ_to_screen;	// Transform from earth equatorial coordinate to normalized screen
+	GLint vect_viewport[4];
 
 	// Vision variables
 	double fov;							// Field of view

@@ -349,7 +349,7 @@ void ring::draw(navigator* nav)
 	glDisable(GL_CULL_FACE);
 	glEnable(GL_BLEND);
 	glDisable(GL_LIGHTING);
-	glEnable(GL_DEPTH_TEST);
+	//glEnable(GL_DEPTH_TEST);
     glBindTexture (GL_TEXTURE_2D, tex->getID());
 	float r=radius;
 	glBegin(GL_QUADS);
@@ -358,7 +358,7 @@ void ring::draw(navigator* nav)
 		glTexCoord2f(1,1); glVertex3d(-r, r, 0.);	// Top right
 		glTexCoord2f(0,1); glVertex3d(-r,-r, 0.);	// Top left
 	glEnd ();
-	glDisable(GL_DEPTH_TEST);
+	//glDisable(GL_DEPTH_TEST);
 }
 
 
