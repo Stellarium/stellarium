@@ -30,6 +30,14 @@ extern s_texture * texIds[200];            // Common Textures
 
 static int local_time=0;
 
+stel_object::stel_object()
+{
+}
+
+stel_object::~stel_object()
+{
+}
+
 // Draw a nice animated pointer around the object
 void stel_object::draw_pointer(int delta_time)
 {

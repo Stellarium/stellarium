@@ -65,7 +65,7 @@ void rad_to_hms(int * h, int * m, double * s, double r)
     *s = r*43200./PI-m*60.-h*3600.;
 }*/
 
-void sphe_to_rect(double lng, double lat, const Vec3d * v)
+void sphe_to_rect(double lng, double lat, Vec3d * v)
 {
 	const double cosLat = cos(lat);
     (*v)[0] = sin(lng) * cosLat;
@@ -83,15 +83,15 @@ void sphe_to_rect(double lng, double lat, double r, Vec3d *v)
 	(*v)*=r;
 }
 
-void sphe_to_rect(float lng, float lat, Vec3f &v)
+void sphe_to_rect(float lng, float lat, Vec3f * v)
 {
 	const double cosLat = cos(lat);
-    v[0] = sin(lng) * cosLat;
-    v[1] = sin(lat);
-    v[2] = cos(lng) * cosLat;
+    (*v)[0] = sin(lng) * cosLat;
+    (*v)[1] = sin(lat);
+    (*v)[2] = cos(lng) * cosLat;
 }
 
-void rect_to_sphe(double *lng, double *lat, Vec3d *v)
+void rect_to_sphe(double *lng, double *lat, const Vec3d *v)
 {
 	double xz_dist = sqrt((*v)[0]*(*v)[0]+(*v)[2]*(*v)[2]);
     *lat = atan2((*v)[1],xz_dist);

@@ -22,5 +22,5 @@
  // Create and init the solar system
 void InitSolarSystem(void)
 {
-	Sun=new sun_planet("Sun", NO_HALO, 696000./UA, vec3_t _color, s_texture * _planetTexture, s_texture * _haloTexture, s_texture * _bigHaloTexture, void (*_coord_func)(double JD, struct ln_rect_posn * position));
+	//Sun = new sun_planet("Sun", NO_HALO, 696000./UA, vec3_t(1.,1.,1.), s_texture * _planetTexture, s_texture * _haloTexture, s_texture * _bigHaloTexture, void (*_coord_func)(double JD, struct ln_helio_posn * position));
 }
