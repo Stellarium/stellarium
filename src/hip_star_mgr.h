@@ -30,7 +30,7 @@ using namespace std ;
 class Hip_Star_mgr  
 {
 public:
-    Hip_Star_mgr();
+    Hip_Star_mgr(string _data_dir, string _sky_culture, string _font_filename);
     virtual ~Hip_Star_mgr();
     int read(FILE *);
     void draw(float star_scale, float star_mag_scale, float twinkle_amount, int name_ON, float maxMagStarName,
@@ -38,20 +38,31 @@ public:
     void draw_point(float star_scale, float star_mag_scale, float twinkle_amount, int name_ON, float maxMagStarName,
 		Vec3f equ_vision, tone_reproductor* _eye, Projector* prj, bool _gravity_label);	// Draw all the stars as points
     void save(void);                    	// Debug function
-    // Load all the stars from the files
-    void load(const string& font_fileName, const string& hipCatFile,
-		const string& commonNameFile, const string& nameFile);
+    void set_sky_culture(string _sky_culture);
     Hip_Star * search(Vec3f Pos);  	// Search the star by position
 	Hip_Star * search(unsigned int);	// Search the star by HP number
 	// Return a stl vector containing the stars located inside the lim_fov circle around position v
 	vector<stel_object*> search_around(Vec3d v, double lim_fov);
+
 private:
+
+	// Load all the stars from the files
+	void load(const string& font_fileName, const string& hipCatFile,
+		  const string& commonNameFile, const string& nameFile);
+
+	void load_common_names(const string& commonNameFile);
+
 	vector<Hip_Star*>* starZones;       // array of star vector with the grid id as array rank
-    Grid HipGrid;                       // Grid for opimisation
-    Hip_Star ** StarArray;  // The simple array of the star for sequential research
-    int StarArraySize;      // Number of star in the array
+	Grid HipGrid;                       // Grid for opimisation
+	Hip_Star ** StarArray;  // The simple array of the star for sequential research
+	int StarArraySize;      // Number of star in the array
 	s_texture * starTexture;
 	s_font * starFont;
+	string dataDir;
+	string skyCulture;
+
+
+
 };
 
 
