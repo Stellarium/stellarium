@@ -163,6 +163,7 @@ void navigator::zoom_out(int s)
 
 void navigator::update_vision_vector(int delta_time)
 {
+#if 0
     if (flag_auto_move)
     {
 		equ_vision = move.aim*move.coef;
@@ -200,7 +201,8 @@ void navigator::update_vision_vector(int delta_time)
 			}
 		}
 	}
-
+#endif
+	equ_vision=local_to_earth_equ(&local_vision);
 	// Update now the deplacement
 	update_move(delta_time);
 
@@ -285,28 +287,38 @@ void navigator::update_transform_matrices(void)
 	// GEO = Geographic Coordinates
 	// HSE = Heliocentric Solar Ecliptic System
 
-	Mat4d GEI_to_GEO = Mat4d::zrotation(get_apparent_sidereal_time(JDay)*M_PI/180.);
+	// Tested : OK
+	Mat4d GEO_to_LOC = 	Mat4d::yrotation((-90.+position.latitude)*M_PI/180.) *
+						Mat4d::zrotation(-position.longitude*M_PI/180.);
+	Mat4d LOC_to_GEO = 	GEO_to_LOC.transpose();
+
+	// Not tested
+	Mat4d GEI_to_GEO = Mat4d::zrotation(-get_apparent_sidereal_time(JDay)*M_PI/180.);
 	Mat4d GEO_to_GEI = GEI_to_GEO.transpose();
 
-	Mat4d GEI_to_HSE = 	Mat4d::translation(Earth->get_ecliptic_pos()) *
-						Mat4d::xrotation(get_mean_obliquity(JDay)*M_PI/180.);
-	Mat4d HSE_to_GEI = 	Mat4d::xrotation(-get_mean_obliquity(JDay)*M_PI/180.) *
-						Mat4d::translation(-Earth->get_ecliptic_pos());
+	Mat4d GEI_to_HSE = 	Mat4d::xrotation(get_mean_obliquity(JDay)*M_PI/180.); *
+						Mat4d::translation(Earth->get_ecliptic_pos());
+	Mat4d HSE_to_GEI = 	Mat4d::translation(-Earth->get_ecliptic_pos()) *
+						Mat4d::xrotation(-get_mean_obliquity(JDay)*M_PI/180.);
 
-	Mat4d GEO_to_HSE = GEI_to_HSE * GEO_to_GEI;
-	Mat4d HSE_to_GEO = GEI_to_GEO * HSE_to_GEI;
+	Mat4d LOC_to_GEI = GEO_to_GEI * LOC_to_GEO;
+	Mat4d GEI_to_LOC = GEO_to_LOC * GEI_to_GEO;
+
+	Mat4d LOC_to_HSE = GEI_to_HSE * LOC_to_GEI;
+	Mat4d HSE_to_LOC = GEI_to_LOC * HSE_to_GEI;
+
+
 
 	mat_helio_to_earth_equ = HSE_to_GEI;
-	mat_helio_to_local = HSE_to_GEO;
-	mat_local_to_helio = GEO_to_HSE;
-	mat_local_to_earth_equ = GEO_to_GEI;
-	mat_earth_equ_to_local = GEI_to_GEO;
+	mat_helio_to_local = HSE_to_LOC;
+	mat_local_to_helio = LOC_to_HSE;
+	mat_local_to_earth_equ = LOC_to_GEI;
+	mat_earth_equ_to_local = GEI_to_LOC;
 
-	/*Vec3d v(0,0,1);
-	v=Mat4d::yrotation(M_PI_2)*v;
-	printf("v(%lf,%lf,%lf)\n",v[0],v[1],v[2]);*/
-
-
+	Vec3d v(	cos(position.latitude*M_PI/180.)*cos(position.longitude*M_PI/180.),
+				cos(position.latitude*M_PI/180.)*sin(position.longitude*M_PI/180.),
+				sin(position.latitude*M_PI/180.));
+	//printf("v(%lf,%lf,%lf)\n",v[0],v[1],v[2]);
 }
 
 
@@ -317,7 +329,7 @@ void navigator::switch_to_earth_equatorial(void)
 	gluLookAt(0., 0., 0.,          // Observer position
               local_vision[0],local_vision[1],local_vision[2],   // direction of vision
               0.,0.,1.);           // Vertical vector
-	glMultMatrixd(mat_local_to_earth_equ);
+	glMultMatrixd(mat_earth_equ_to_local);
 }
 
 // Place openGL in heliocentric coordinates
