@@ -101,8 +101,24 @@ private:
 	void cb(void);
 	void bt_flag_ctrOnMouseInOut(void);
 	void cbr(void);
+	
+	// Tile control buttons
+	FilledContainer * bt_time_control_ctr;
+	LabeledButton * bt_dec_time_speed;
+	LabeledButton * bt_real_time_speed;
+	LabeledButton * bt_inc_time_speed;
+	LabeledButton * bt_time_now;
+	Component* createTimeControlButtons(void);
+	void bt_time_control_ctrOnMouseInOut(void);
+	void bt_dec_time_speed_cb(void);
+	void bt_real_time_speed_cb(void);
+	void bt_inc_time_speed_cb(void);
+	void bt_time_now_cb(void);
+	void tcbr(void);
+		
 	// The dynamic information about the button under the mouse
 	Label * bt_flag_help_lbl;
+	Label * bt_flag_time_control_lbl;
 
 	// The TextLabel displaying the infos about the selected object
 	Container * info_select_ctr;
