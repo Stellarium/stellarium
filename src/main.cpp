@@ -422,7 +422,7 @@ int main(int argc, char **argv)
 {   
     setDirectories();
     
-    drawIntro();                     // Print the console logo
+    drawIntro();        // Print the console logo
     
     char tempName[255];
     char tempName2[255];
@@ -436,7 +436,7 @@ int main(int argc, char **argv)
     loadConfig(tempName,tempName2);  // Load the params from config.txt
     
 
-    SDL_Surface *Screen;	// The Screen
+    SDL_Surface *Screen;// The Screen
     SDL_Event	E;		// And Event Used In The Polling Process
     Uint8	*Keys;		// A Pointer To An Array That Will Contain The Keyboard Snapshot
     Uint32	Vflags;		// Our Video Flags
@@ -452,102 +452,107 @@ int main(int argc, char **argv)
 
     if(SDL_Init(SDL_INIT_VIDEO)<0)  // Init The SDL Library, The VIDEO Subsystem
     {
-         printf("Unable to open SDL: %s\n", SDL_GetError() );	// If SDL Can't Be Initialized
-         exit(1);					        // Get Out Of Here. Sorry.
+         printf("Unable to open SDL: %s\n", SDL_GetError() );
+         exit(1);
     }
 
-    // SDL's Been init, Now We're Making Sure Thet SDL_Quit Will Be Called In Case of exit()
+    // Make Sure That SDL_Quit Will Be Called In Case of exit()
     atexit(SDL_Quit);
     
-    if (global.Fullscreen) Vflags|=SDL_FULLSCREEN; // If So, We Always Need The Fullscreen Video Init Flag
+    // If So, We Always Need The Fullscreen Video Init Flag
+    if (global.Fullscreen) Vflags|=SDL_FULLSCREEN; 
     
-    // Our Video Flags Are Set, We're Creating The Window
+    // Create The Window
     if(!CreateWindowGL(Screen, global.X_Resolution, global.Y_Resolution, global.bppMode, Vflags))
-      {
-	printf("Unable to open screen surface: %s\n", SDL_GetError() );		
-	             // If Something's Gone Wrong, Report
-	exit(1);     // And Exit
-      }
+	{
+		printf("Unable to open screen surface: %s\n", SDL_GetError() );		
+		exit(1);
+	}
 
-	SDL_WM_SetCaption(APP_NAME, NULL);	      	// We're Setting The Window Caption
+	SDL_WM_SetCaption(APP_NAME, NULL);	// Set The Window Caption
 
 	if(!InitTimers(&LastCount))			// We Call The Timers Init Function
 	{
-		printf("Can't init the timers: %s\n", SDL_GetError() );	  // If It Can't Init, Report
-		exit(1);			       // And Exit
+		printf("Can't init the timers: %s\n", SDL_GetError() );
+		exit(1);
 	}
 
-	if(!InitGL(Screen))			       // We're Calling The OpenGL Init Function
+	if(!InitGL(Screen))					// CallThe OpenGL Init Function
 	{
-		printf("Can't init GL: %s\n", SDL_GetError() );	    // If Something's Gone Wrong, Report
-		exit(1);															// And Guess What? Exit
+		printf("Can't init GL: %s\n", SDL_GetError() );
+		exit(1);
 	}
 
-	if(!Initialize())														// Now We're Initting The Application
+	if(!Initialize())					// Init The Application
 	{
-		printf("App init failed: %s\n", SDL_GetError() );						// Blah Blah Blah, Blah
-		exit(1);															// And Blah
+		printf("App init failed: %s\n", SDL_GetError() );
+		exit(1);
 	}
 
-	isProgramLooping = true;												// Ok, Make Our Program Loop
+	isProgramLooping = true;			// Make Our Program Loop
 
-	while(isProgramLooping)													// And While It's looping
+	while(isProgramLooping)				// While It's looping
 	{
-		if(SDL_PollEvent(&E))												// We're Fetching The First Event Of The Queue
+		if(SDL_PollEvent(&E))			// Fetch The First Event Of The Queue
 		{
-			switch(E.type)													// And Processing It
+			switch(E.type)				// And Processing It
 			{	
-			case SDL_QUIT:													// It's a QUIT Event?
+			case SDL_QUIT:
 				{
-					isProgramLooping = false;								// If Yes, Make The Program Stop Looping
-					break;													// And Break
+					isProgramLooping = false;
+					break;
 				}
 
-			case SDL_VIDEORESIZE:											// It's a RESIZE Event?
+			case SDL_VIDEORESIZE:
 				{
-					ResizeGL(E.resize.w, E.resize.h);						// If Yes, Recalculate The OpenGL Scene Data For The New Window
-					break;													// And Break
+					// Recalculate The OpenGL Scene Data For The New Window
+					ResizeGL(E.resize.w, E.resize.h);
+					break;
 				}
 
-			case SDL_ACTIVEEVENT:											// It's an ACTIVE Event?
+			case SDL_ACTIVEEVENT:
 				{
-					if(E.active.state & SDL_APPACTIVE)						// Activity Level Changed? (IE: Iconified?)
+					if(E.active.state & SDL_APPACTIVE)
 					{
-						if(E.active.gain)									// Activity's Been Gained?
+						// Activity Level Changed (IE: Iconified)
+						if(E.active.gain)
 						{
-							AppStatus.Visible = true;						// If Yes, Set AppStatus.Visible
+							// Activity's Been Gained
+							AppStatus.Visible = true;
 						}
-						else												// Otherwhise
+						else
 						{
-							AppStatus.Visible = false;						// Reset AppStatus.Visible
+							AppStatus.Visible = false;
 						}
 					}
 					
-					if(E.active.state & SDL_APPMOUSEFOCUS)					// The Mouse Cursor Has Left/Entered The Window Space?
+					// The Mouse Cursor Has Left/Entered The Window Space?
+					if(E.active.state & SDL_APPMOUSEFOCUS)
 					{
-						if(E.active.gain)									// Entered?
+						if(E.active.gain)	// Entered
 						{
-							AppStatus.MouseFocus = true;						// Report It Setting AppStatus.MouseFocus
+							AppStatus.MouseFocus = true;
 						}
-						else												// Otherwhise
+						else
 						{
-							AppStatus.MouseFocus = false;					// The Cursor Has Left, Reset AppStatus.MouseFocus
+							AppStatus.MouseFocus = false;
 						}
 					}
 
-					if(E.active.state & SDL_APPINPUTFOCUS)					// The Window Has Gained/Lost Input Focus?
+					// The Window Has Gained/Lost Input Focus?
+					if(E.active.state & SDL_APPINPUTFOCUS)
 					{
-						if(E.active.gain)									// Gained?
+						if(E.active.gain)	// Gained
 						{
-							AppStatus.KeyboardFocus = true;					// Report It Where You Know (You Always Report, You're A Spy, Aren't You?!)
+							AppStatus.KeyboardFocus = true;
 						}
-						else												// Otherwhise
+						else
 						{
-							AppStatus.KeyboardFocus = false;				// Reset AppStatus.KeyboardFocus
+							AppStatus.KeyboardFocus = false;
 						}
 					}
 					
-					break;													// And Break
+					break;
 				}
 
 			case SDL_MOUSEMOTION:
@@ -562,37 +567,40 @@ int main(int argc, char **argv)
 					break;
 				}
 
-			case SDL_KEYDOWN:												// Someone Has Pressed A Key?
+			case SDL_KEYDOWN:	// Someone Has Pressed A Key?
 				{
 					// Send the event to the gui and stop if it has been intercepted
 					if (!GuiHandleKeys(E.key.keysym.sym,GUI_DOWN))
 					{	
-						Keys = SDL_GetKeyState(NULL);						    // Is It's So, Take A SnapShot Of The Keyboard For The Update() Func To Use
+						// Take A SnapShot Of The Keyboard
+						Keys = SDL_GetKeyState(NULL);
 						pressKey(Keys);
 					}
-					break;													// And Break;
+					break;
 				}
 
-			case SDL_KEYUP:												// Someone Has Pressed A Key?
+			case SDL_KEYUP:	   // Someone Has Released A Key?
 				{
 					releaseKey(E.key.keysym.sym); // Handle the info
 				}
 				
 			}
 		}
-		else																// No Events To Poll? (SDL_PollEvent()==0?)
+		else  // No Events To Poll? (SDL_PollEvent()==0?)
 		{
-			if(!AppStatus.Visible)											// If The Application Is Not Visible
+			// If The Application Is Not Visible
+			if(!AppStatus.Visible)
 			{
-				SDL_WaitEvent(NULL);										// Leave The CPU Alone, Don't Waste Time, Simply Wait For An Event
+				// Leave The CPU Alone, Don't Waste Time, Simply Wait For An Event
+				SDL_WaitEvent(NULL);
 			}
-			else															// Otherwhise
+			else
 			{
-				TickCount = SDL_GetTicks();									// Get Present Ticks
-				Update(TickCount-LastCount);							// And Update The Motions And Data
-				LastCount = TickCount;										// Save The Present Tick Probing
-				Draw();														// Do The Drawings!
-				SDL_GL_SwapBuffers();										// And Swap The Buffers (We're Double-Buffering, Remember?)
+				TickCount = SDL_GetTicks();	// Get Present Ticks
+				Update(TickCount-LastCount);// And Update The Motions And Data
+				LastCount = TickCount;		// Save The Present Tick Probing
+				Draw();						// Do The Drawings!
+				SDL_GL_SwapBuffers();		// And Swap The Buffers
 			}
 		}
 	}
