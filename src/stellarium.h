@@ -20,6 +20,7 @@
 #ifndef _STELLARIUM_H_
 #define _STELLARIUM_H_
 
+#include <config.h>
 
 #if defined( WIN32 ) || defined ( __MWERKS__ ) || defined( _MSC_VER )
 #  ifndef WIN32
@@ -37,8 +38,6 @@
 #endif
 
 #include "SDL.h"
-
-#include <config.h>
 
 #define APP_NAME "Stellarium v "VERSION
 
