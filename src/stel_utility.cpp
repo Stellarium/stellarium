@@ -68,17 +68,17 @@ void rad_to_hms(int * h, int * m, double * s, double r)
 void sphe_to_rect(double lng, double lat, Vec3d * v)
 {
 	const double cosLat = cos(lat);
-    (*v)[0] = sin(lng) * cosLat;
+    (*v)[0] = cos(lng) * cosLat;
     (*v)[1] = sin(lat);
-    (*v)[2] = cos(lng) * cosLat;
+	(*v)[2] = sin(lng) * cosLat;
 }
 
 void sphe_to_rect(double lng, double lat, double r, Vec3d *v)
 {
 	const double cosLat = cos(lat);
-    (*v)[0] = sin(lng) * cosLat;
+    (*v)[0] = cos(lng) * cosLat;
     (*v)[1] = sin(lat);
-    (*v)[2] = cos(lng) * cosLat;
+	(*v)[2] = sin(lng) * cosLat;
 	v->normalize();
 	(*v)*=r;
 }
@@ -86,17 +86,23 @@ void sphe_to_rect(double lng, double lat, double r, Vec3d *v)
 void sphe_to_rect(float lng, float lat, Vec3f * v)
 {
 	const double cosLat = cos(lat);
-    (*v)[0] = sin(lng) * cosLat;
+    (*v)[0] = cos(lng) * cosLat;
     (*v)[1] = sin(lat);
-    (*v)[2] = cos(lng) * cosLat;
+	(*v)[2] = sin(lng) * cosLat;
 }
 
 void rect_to_sphe(double *lng, double *lat, const Vec3d *v)
 {
-	double xz_dist = sqrt((*v)[0]*(*v)[0]+(*v)[2]*(*v)[2]);
-    *lat = atan2((*v)[1],xz_dist);
-    *lng = atan2((*v)[0],(*v)[2]);
-    *lng = range_radians(*lng);
+	double r = sqrt((*v)[0]*(*v)[0]+(*v)[1]*(*v)[1]+(*v)[2]*(*v)[2]);
+    *lat = asin((*v)[1]/r);
+    *lng = atan2((*v)[2],(*v)[0]);
+}
+
+void rect_to_sphe(float *lng, float *lat, const Vec3f *v)
+{
+	double r = sqrt((*v)[0]*(*v)[0]+(*v)[1]*(*v)[1]+(*v)[2]*(*v)[2]);
+    *lat = asin((*v)[1]/r);
+    *lng = atan2((*v)[2],(*v)[0]);
 }
 
 
@@ -163,9 +169,6 @@ Vec3d UnProject(double x ,double y)
 
 
 
-#if 0
-// BORROWED FROM libnova GPL library
-
 
 /* local types and macros */
 typedef int BOOL;
@@ -173,7 +176,14 @@ typedef int BOOL;
 #define FALSE 0
 #define iswhite(c)  ((c)== ' ' || (c)=='\t')
 
-// strips trailing whitespaces from buf.
+/*
+[]------------------------------------------------------------------------[]
+|  trim() & strip()                                                        |
+|                                                                          |
+|  strips trailing whitespaces from buf.                                   |
+|                                                                          |
+[]------------------------------------------------------------------------[]
+*/
 static char *trim(char *x)
 {
     char *y;
@@ -181,13 +191,20 @@ static char *trim(char *x)
     if(!x)
         return(x);
     y = x + strlen(x)-1;
-    while (y >= x && isspace(*y))
+    while (y >= x && iswhite(*y))
         *y-- = 0; /* skip white space */
     return x;
 }
 
 
-// salta espacios en blanco                                               |
+/*
+[]------------------------------------------------------------------------[]
+|                                                                          |
+|   skipwhite()                                                            |
+|   salta espacios en blanco                                               |
+|                                                                          |
+[]------------------------------------------------------------------------[]
+*/
 static void skipwhite(char **s)
 {
    while(iswhite(**s))
@@ -201,34 +218,34 @@ static void skipwhite(char **s)
 *
 * Obtains Latitude, Longitude, RA or Declination from a string.
 *
-*  If the last char is N/S doesn't accept more than 90 degrees.
-*  If it is E/W doesn't accept more than 180 degrees.
-*  If they are hours don't accept more than 24:00
+*  If the last char is N/S doesn't accept more than 90 degrees.            
+*  If it is E/W doesn't accept more than 180 degrees.                      
+*  If they are hours don't accept more than 24:00                          
+*                                                                          
+*  Any position can be expressed as follows:                               
+*  (please use a 8 bits charset if you want                                
+*  to view the degrees separator char '0xba')                              
 *
-*  Any position can be expressed as follows:
-*  (please use a 8 bits charset if you want
-*  to view the degrees separator char '0xba')
-*
-*  42.30.35,53
-*  90º0'0,01 W
-*  42º30'35.53 N
-*  42º30'35.53S
-*  42º30'N
-*  - 42.30.35.53
-*   42:30:35.53 S
-*  + 42.30.35.53
-*  +42º30 35,53
-*   23h36'45,0
-*
-*
-*  42:30:35.53 S = -42º30'35.53"
-*  + 42 30.35.53 S the same previous position, the plus (+) sign is
-*  considered like an error, the last 'S' has precedence over the sign
-*
-*  90º0'0,01 N ERROR: +- 90º0'00.00" latitude limit
+*  42.30.35,53                                                             
+*  90º0'0,01 W                                                             
+*  42º30'35.53 N                                                           
+*  42º30'35.53S                                                            
+*  42º30'N                                                                 
+*  - 42.30.35.53                                                           
+*   42:30:35.53 S                                                          
+*  + 42.30.35.53                                                           
+*  +42º30 35,53                                                            
+*   23h36'45,0                                                             
+*                                                                          
+*                                                                          
+*  42:30:35.53 S = -42º30'35.53"                                           
+*  + 42 30.35.53 S the same previous position, the plus (+) sign is        
+*  considered like an error, the last 'S' has precedence over the sign     
+*                                                                          
+*  90º0'0,01 N ERROR: +- 90º0'00.00" latitude limit                        
 *
 */
-double get_dec_location(char *s)
+double get_dec_angle(char *s)
 {
 
 	char *ptr, *dec, *hh;
@@ -251,20 +268,20 @@ double get_dec_location(char *s)
 	memcpy(ptr, s, count);
 	trim(ptr);
 	skipwhite(&ptr);
-
+        
         /* the last letter has precedence over the sign */
-	if (strpbrk(ptr,"SsWw") != NULL)
+	if (strpbrk(ptr,"SsWw") != NULL) 
 		negative = TRUE;
 
 	if (*ptr == '+' || *ptr == '-')
-		negative = (char) (*ptr++ == '-' ? TRUE : negative);
+		negative = (char) (*ptr++ == '-' ? TRUE : negative);	
 	skipwhite(&ptr);
 	if ((hh = strpbrk(ptr,"Hh")) != NULL && hh < ptr + 3)
             type = HOURS;
-        else
+        else 
             if (strpbrk(ptr,"SsNn") != NULL)
 		type = LAT;
-	    else
+	    else 
  	        type = DEGREES; /* unspecified, the caller must control it */
 
 	if ((ptr = strtok(ptr,delim1)) != NULL)
@@ -286,7 +303,7 @@ double get_dec_location(char *s)
 		if (seconds > 59)
 			return (-0.0);
 	}
-
+	
 	if ((ptr = strtok(NULL," \n\t")) != NULL) {
 		skipwhite(&ptr);
 		if (*ptr == 'S' || *ptr == 'W' || *ptr == 's' || *ptr == 'W')
@@ -310,13 +327,14 @@ double get_dec_location(char *s)
 }
 
 
+
 /*! \fn char * get_humanr_location(double location)
 * \param location Location angle in degress
 * \return Angle string
 *
 * Obtains a human readable location in the form: ddºmm'ss.ss"
 */
-char *get_humanr_location(double location)
+char * print_angle_dms(double location)
 {
     static char buf[16];
     double deg = 0.0;
@@ -324,71 +342,40 @@ char *get_humanr_location(double location)
     double sec = 0.0;
     *buf = 0;
     sec = 60.0 * (modf(location, &deg));
-    if (sec < 0.0)
+    if (sec <= 0.0)
         sec *= -1;
     sec = 60.0 * (modf(sec, &min));
-    sprintf(buf,"%+dº%d'%.2f\"",(int)deg, (int) min, sec);
+    sprintf(buf,"%+.2dº%.2d'%.2f\"",(int)deg, (int) min, sec);
     return buf;
 }
 
-/*! \fn void get_date (double JD, struct ln_date * date)
-* \param JD Julian day
-* \param date Pointer to new calendar date.
-*
-* Calculate the date from the Julian day
-*/
-void get_date (double JD, struct ln_date * date)
+char * print_angle_dms_stel(double location)
 {
-   int A,a,B,C,D,E;
-   double F,Z;
-
-   JD += 0.5;
-   Z = (int) JD;
-   F = JD - Z;
-
-   if (Z < 2299161)
-   {
-       A = Z;
-   }
-   else
-   {
-       a = (int) ((Z - 1867216.25) / 36524.25);
-       A = Z + 1 + a - (int)(a / 4);
-   }
-
-   B = A + 1524;
-   C = (int) ((B - 122.1) / 365.25);
-   D = (int) (365.25 * C);
-   E = (int) ((B - D) / 30.6001);
-
-   /* get the hms */
-   date->hours = F * 24;
-   F -= (double)date->hours / 24;
-   date->minutes = F * 1440;
-   F -= (double)date->minutes / 1440;
-   date->seconds = F * 86400;
-
-   /* get the day */
-   date->days = B - D - (int)(30.6001 * E);
-
-   /* get the month */
-   if (E < 14)
-   {
-       date->months = E - 1;
-   }
-   else
-   {
-       date->months = E - 13;
-   }
-
-   /* get the year */
-   if (date->months > 2)
-   {
-       date->years = C - 4716;
-   }
-   else
-   {
-       date->years = C - 4715;
-   }
+    static char buf[16];
+    double deg = 0.0;
+    double min = 0.0;
+    double sec = 0.0;
+    *buf = 0;
+    sec = 60.0 * (modf(location, &deg));
+    if (sec <= 0.0)
+        sec *= -1;
+    sec = 60.0 * (modf(sec, &min));
+    sprintf(buf,"%+.2d\6%.2d'%.2f\"",(int)deg, (int) min, sec);
+    return buf;
 }
-#endif
+
+/* Obtains a human readable angle in the form: hhhmmmss.sss" */
+char * print_angle_hms(double angle)
+{
+    static char buf[16];
+    double hr = 0.0;
+    double min = 0.0;
+    double sec = 0.0;
+    *buf = 0;
+	while (angle<0) angle+=360;
+	angle/=15.;
+    min = 60.0 * (modf(angle, &hr));
+    sec = 60.0 * (modf(min, &min));
+    sprintf(buf,"%.2dh%.2dm%.2fs",(int)hr, (int) min, sec);
+    return buf;
+}

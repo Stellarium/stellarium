@@ -59,8 +59,6 @@ typedef struct params{
 
     // Flags
     int FlagUTC_Time;
-    int FlagTraking;
-    int FlagFollowEarth;
     int FlagFps;
     int FlagStars;
 	int FlagStarName;
@@ -87,7 +85,6 @@ typedef struct params{
     int FlagMenu;
     int FlagHelp;
     int FlagInfos;
-    int FlagSelect;
     int FlagMilkyWay;
     int FlagConfig;
 } stellariumParams;

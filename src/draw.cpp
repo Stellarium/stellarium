@@ -74,7 +74,8 @@ void InitAtmosphere(void)
     vec3_t * linTabSky;
     tabSky = new vec3_t*[skyResolution+1];
     for (int k=0; k<skyResolution+1 ;k++)
-    {   linTabSky = new vec3_t[skyResolution+1];
+    {
+		linTabSky = new vec3_t[skyResolution+1];
         tabSky[k] = linTabSky;
     }
 }
