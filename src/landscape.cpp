@@ -22,6 +22,7 @@
 
 Landscape::Landscape(float _radius) : radius(_radius), sky_brightness(1.)
 {
+  valid_landscape = 0;
 }
 
 Landscape::~Landscape()
@@ -34,28 +35,17 @@ Landscape* Landscape::create_from_file(const string& landscape_file, const strin
 	pd.load(landscape_file);
 	string s;
 	s = pd.get_str(section_name, "type");
-	if (s.empty())
-	{
-		cout << "ERROR : can't find type for landscape section " << section_name << endl;
-		exit(-1);
-	}
 	if (s=="old_style")
 	{
 		Landscape_old_style* ldscp = new Landscape_old_style();
 		ldscp->load(landscape_file, section_name);
 		return ldscp;
-	}
-	if (s=="fisheye")
-	{
+	} else {   //	if (s=="fisheye")
 		Landscape_fisheye* ldscp = new Landscape_fisheye();
 		ldscp->load(landscape_file, section_name);
 		return ldscp;
 	}
 
-	cout << "ERROR : can't understand landscape type for landscape section " << section_name << endl;
-	exit(-1);
-
-	return NULL;
 }
 
 string Landscape::get_file_content(const string& landscape_file)
@@ -98,6 +88,13 @@ void Landscape_old_style::load(const string& landscape_file, const string& secti
 	pd.load(landscape_file);
 
 	name = pd.get_str(section_name, "name");
+	if(name == "" ) {
+	  printf("ERROR : No valid landscape definition found for %s.  No landscape in use.\n", section_name.c_str());
+	  valid_landscape = 0;
+	  return;
+	} else {
+	  valid_landscape = 1;
+	}
 
 	// Load sides textures
 	nb_side_texs = pd.get_int(section_name, "nbsidetex", 0);
@@ -161,6 +158,7 @@ void Landscape_old_style::load(const string& landscape_file, const string& secti
 void Landscape_old_style::draw(tone_reproductor * eye, const Projector* prj, const navigator* nav,
 		bool flag_fog, bool flag_decor, bool flag_ground)
 {
+        if(!valid_landscape) return;
 	if (flag_ground && draw_ground_first) draw_ground(eye, prj, nav);
 	if (flag_decor) draw_decor(eye, prj, nav);
 	if (flag_ground && !draw_ground_first) draw_ground(eye, prj, nav);
@@ -264,7 +262,18 @@ void Landscape_fisheye::load(const string& landscape_file, const string& section
 {
 	init_parser pd;	// The landscape data ini file parser
 	pd.load(landscape_file);
+
+	string type;
+	type = pd.get_str(section_name, "type");
 	name = pd.get_str(section_name, "name");
+	if(type != "fisheye" || name == "" ) {
+	  printf("ERROR : No valid landscape definition found for %s.  No landscape in use.\n", section_name.c_str());
+	  valid_landscape = 0;
+	  return;
+	} else {
+	  valid_landscape = 1;
+	}
+
 	map_tex = new s_texture(pd.get_str(section_name, "maptex"),TEX_LOAD_TYPE_PNG_ALPHA);
 	tex_fov = pd.get_double(section_name, "texturefov", 360) * M_PI/180.;
 }
@@ -272,6 +281,9 @@ void Landscape_fisheye::load(const string& landscape_file, const string& section
 void Landscape_fisheye::draw(tone_reproductor * eye, const Projector* prj, const navigator* nav,
 		bool flag_fog, bool flag_decor, bool flag_ground)
 {
+
+        if(!valid_landscape) return;
+
 	// Normal transparency mode
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
