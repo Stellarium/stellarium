@@ -47,8 +47,8 @@ public:
 		double _min_fov = 0.001, double _max_fov = 100);
 	virtual ~Projector();
 
-	virtual PROJECTOR_TYPE get_type(void) {return PERSPECTIVE_PROJECTOR;}
-	VIEWPORT_TYPE get_viewport_type(void) {return viewport_type;}
+	virtual PROJECTOR_TYPE get_type(void) const {return PERSPECTIVE_PROJECTOR;}
+	VIEWPORT_TYPE get_viewport_type(void) const {return viewport_type;}
 
 	void set_fov(double f);
 	double get_fov(void) const {return fov;}
@@ -65,6 +65,9 @@ public:
 	void set_square_viewport(void);
 	void set_disk_viewport(void);
 	virtual void set_viewport(int x, int y, int w, int h);
+
+	// Fill with black around the circle
+	void Projector::draw_viewport_shape(void);
 
 	int viewW(void) const {return vec_viewport[2];}
 	int viewH(void) const {return vec_viewport[3];}
@@ -137,7 +140,11 @@ public:
 	virtual void sSphere(GLdouble radius, GLint slices, GLint stacks,
 		const Mat4d& mat, int orient_inside = 0) const;
 
-	// Reimplementation of gluSphere : glu is overrided for non standard projection
+	// Draw a half sphere
+	virtual void sHalfSphere(GLdouble radius, GLint slices, GLint stacks,
+		const Mat4d& mat, int orient_inside = 0) const;
+
+	// Draw a fisheye texture in a sphere
 	virtual void sSphere_map(GLdouble radius, GLint slices, GLint stacks,
 		const Mat4d& mat, double texture_fov = 2.*M_PI, int orient_inside = 0) const;
 
@@ -152,8 +159,8 @@ public:
 
 	const Vec3d convert_pos(const Vec3d& v, const Mat4d& mat) const {return v;}
 
-	void print_gravity(const s_font* font, float x, float y, const string& str,
-		float xshift = 0, float yshift = 0) const;
+	//void print_gravity(const s_font* font, float x, float y, const string& str,
+	//	float xshift = 0, float yshift = 0) const;
 
 	void print_gravity180(const s_font* font, float x, float y, const string& str,
 		float xshift = 0, float yshift = 0) const;

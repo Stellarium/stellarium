@@ -168,7 +168,7 @@ void Landscape_old_style::draw_fog(tone_reproductor * eye, const Projector* prj,
 {
 	glBlendFunc(GL_ONE, GL_ONE);
 	glPushMatrix();
-	glColor3f(0.2f+0.2f*sky_brightness, 0.2f+0.2f*sky_brightness, 0.2f+0.2f*sky_brightness);
+	glColor3f(0.1f+0.1f*sky_brightness, 0.1f+0.1f*sky_brightness, 0.1f+0.1f*sky_brightness);
 	glEnable(GL_TEXTURE_2D);
 	glEnable(GL_BLEND);
 	glEnable(GL_CULL_FACE);
@@ -231,22 +231,37 @@ void Landscape_old_style::draw_decor(tone_reproductor * eye, const Projector* pr
 // Draw the ground
 void Landscape_old_style::draw_ground(tone_reproductor * eye, const Projector* prj, const navigator* nav) const
 {
-	glPushMatrix();
-	glColor3f(sky_brightness/2, sky_brightness/2, sky_brightness/2);
-	glEnable(GL_TEXTURE_2D);
-	glDisable(GL_BLEND);
-	glBindTexture(GL_TEXTURE_2D, ground_tex->getID());
-	glBegin (GL_QUADS);
-		glTexCoord2f (ground_tex_coord.tex_coords[0],ground_tex_coord.tex_coords[1]);
-		glVertex3f (-radius/2, -radius/2, -0.01f);
-		glTexCoord2f (ground_tex_coord.tex_coords[2], ground_tex_coord.tex_coords[1]);
-		glVertex3f(-radius/2, radius/2, -0.01f);
-		glTexCoord2f (ground_tex_coord.tex_coords[2], ground_tex_coord.tex_coords[3]);
-		glVertex3f( radius/2, radius/2, -0.01f);
-		glTexCoord2f (ground_tex_coord.tex_coords[0], ground_tex_coord.tex_coords[3]);
-		glVertex3f( radius/2, -radius/2, -0.01f);
-	glEnd ();
-	glPopMatrix();
+	if (prj->get_type()==FISHEYE_PROJECTOR)
+	{
+		// Need to draw a half sphere ground
+		glColor3f(sky_brightness/2, sky_brightness/2, sky_brightness/2);
+		glEnable(GL_CULL_FACE);
+		glEnable(GL_TEXTURE_2D);
+		glDisable(GL_BLEND);
+		glBindTexture(GL_TEXTURE_2D, ground_tex->getID());
+		prj->sHalfSphere(radius,30,10, nav->get_local_to_eye_mat(), 1);
+	    glDisable(GL_CULL_FACE);
+	}
+	else
+	{
+		// Just a horizontal quad for the ground is enought
+		glPushMatrix();
+		glColor3f(sky_brightness/2, sky_brightness/2, sky_brightness/2);
+		glEnable(GL_TEXTURE_2D);
+		glDisable(GL_BLEND);
+		glBindTexture(GL_TEXTURE_2D, ground_tex->getID());
+		glBegin(GL_QUADS);
+			glTexCoord2f (ground_tex_coord.tex_coords[0],ground_tex_coord.tex_coords[1]);
+			glVertex3f (-radius/2, -radius/2, -0.01f);
+			glTexCoord2f (ground_tex_coord.tex_coords[2], ground_tex_coord.tex_coords[1]);
+			glVertex3f(-radius/2, radius/2, -0.01f);
+			glTexCoord2f (ground_tex_coord.tex_coords[2], ground_tex_coord.tex_coords[3]);
+			glVertex3f( radius/2, radius/2, -0.01f);
+			glTexCoord2f (ground_tex_coord.tex_coords[0], ground_tex_coord.tex_coords[3]);
+			glVertex3f( radius/2, -radius/2, -0.01f);
+		glEnd ();
+		glPopMatrix();
+	}
 }
 
 Landscape_fisheye::Landscape_fisheye(float _radius) : Landscape(_radius), map_tex(NULL)

@@ -17,7 +17,8 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#include "stdio.h"
+#include <iostream>
+#include <cstdio>
 #include "projector.h"
 
 
@@ -53,8 +54,9 @@ void Projector::set_square_viewport(void)
 void Projector::set_disk_viewport(void)
 {
 	set_square_viewport();
-    glEnable(GL_STENCIL_TEST);
+
 	glClear(GL_STENCIL_BUFFER_BIT);
+	glEnable(GL_STENCIL_TEST);
  	glStencilFunc(GL_ALWAYS, 0x1, 0x1);
     glStencilOp(GL_ZERO, GL_REPLACE, GL_REPLACE);
 
@@ -62,13 +64,32 @@ void Projector::set_disk_viewport(void)
 	set_2Dfullscreen_projection();
 	glTranslatef(screenW/2,screenH/2,0.f);
 	GLUquadricObj * p = gluNewQuadric();
-	gluDisk(p, 0., MY_MIN(screenW,screenH)/2, 128, 1);
+	gluDisk(p, 0., MY_MIN(screenW,screenH)/2, 256, 1);
 	gluDeleteQuadric(p);
 	restore_from_2Dfullscreen_projection();
 
-	glStencilFunc(GL_EQUAL, 0x1, 0x1);
-
+	glStencilFunc(GL_NOTEQUAL, 0x1, 0x1);
+	glStencilOp(GL_KEEP, GL_KEEP, GL_KEEP);
+	glDisable(GL_STENCIL_TEST);
 	viewport_type = DISK;
+}
+
+// Fill with black around the circle
+void Projector::draw_viewport_shape(void)
+{
+	if (viewport_type != DISK) return;
+	glEnable(GL_STENCIL_TEST);
+	glDisable(GL_BLEND);
+	set_2Dfullscreen_projection();
+	glColor3f(0.f,0.f,0.f);
+	glBegin(GL_QUADS);
+		glVertex2i(vec_viewport[0], vec_viewport[1]);
+		glVertex2i(vec_viewport[0] + vec_viewport[2], vec_viewport[1]);
+		glVertex2i(vec_viewport[0] + vec_viewport[2], vec_viewport[1] + vec_viewport[3]);
+		glVertex2i(vec_viewport[0], vec_viewport[1] + vec_viewport[3]);
+	glEnd();
+	restore_from_2Dfullscreen_projection();
+	glDisable(GL_STENCIL_TEST);
 }
 
 void Projector::set_viewport(int x, int y, int w, int h)
@@ -248,6 +269,64 @@ void Projector::sSphere(GLdouble radius, GLint slices, GLint stacks, const Mat4d
 	glPopMatrix();
 }
 
+// Draw a half sphere
+void Projector::sHalfSphere(GLdouble radius, GLint slices, GLint stacks,
+	const Mat4d& mat, int orient_inside) const
+{
+	glPushMatrix();
+	glLoadMatrixd(mat);
+
+	GLfloat rho, drho, theta, dtheta;
+	GLfloat x, y, z;
+	GLfloat s, t, ds, dt;
+	GLint i, j, imin, imax;
+	GLfloat nsign;
+
+	if (orient_inside) nsign = -1.0;
+	else nsign = 1.0;
+
+	drho = M_PI / (GLfloat) stacks;
+	dtheta = 2.0 * M_PI / (GLfloat) slices;
+
+	// texturing: s goes from 0.0/0.25/0.5/0.75/1.0 at +y/+x/-y/-x/+y axis
+	// t goes from -1.0/+1.0 at z = -radius/+radius (linear along longitudes)
+	// cannot use triangle fan on texturing (s coord. at top/bottom tip varies)
+	ds = 1.0 / slices;
+	dt = 1.0 / stacks;
+	t = 1.0;			// because loop now runs from 0
+	imin = 0;
+	imax = stacks;
+
+	// draw intermediate stacks as quad strips
+	for (i = imin; i < imax/2; i++)
+	{
+		rho = i * drho;
+		glBegin(GL_QUAD_STRIP);
+		s = 0.0;
+		for (j = 0; j <= slices; j++)
+		{
+			theta = (j == slices) ? 0.0 : j * dtheta;
+			x = -sin(theta) * sin(rho);
+			y = cos(theta) * sin(rho);
+			z = nsign * cos(rho);
+			glNormal3f(x * nsign, y * nsign, z * nsign);
+			glTexCoord2f(s, t);
+			sVertex3(x * radius, y * radius, z * radius, mat);
+			x = -sin(theta) * sin(rho + drho);
+			y = cos(theta) * sin(rho + drho);
+			z = nsign * cos(rho + drho);
+			glNormal3f(x * nsign, y * nsign, z * nsign);
+			glTexCoord2f(s, t - dt);
+			s += ds;
+			sVertex3(x * radius, y * radius, z * radius, mat);
+		}
+		glEnd();
+		t -= dt;
+	}
+	glPopMatrix();
+}
+
+
 inline void sSphereMapTexCoord(double rho, double theta, double texture_fov)
 {
 	if (rho>texture_fov/2.)
@@ -375,14 +454,21 @@ void Projector::sCylinder(GLdouble radius, GLdouble height, GLint slices, GLint 
 	glLoadMatrixd(mat);
 	GLUquadricObj * p = gluNewQuadric();
 	gluQuadricTexture(p,GL_TRUE);
-	if (orient_inside) gluQuadricOrientation(p, GLU_INSIDE);
+	if (orient_inside)
+	{
+		glCullFace(GL_FRONT);
+	}
 	gluCylinder(p, radius, radius, height, slices, stacks);
 	gluDeleteQuadric(p);
 	glPopMatrix();
+	if (orient_inside)
+	{
+		glCullFace(GL_BACK);
+	}
 }
 
 
-void Projector::print_gravity(const s_font* font, float x, float y, const string& str, float xshift, float yshift) const
+/*void Projector::print_gravity(const s_font* font, float x, float y, const string& str, float xshift, float yshift) const
 {
 	static Vec3d top(0., 0., 1.);
 	static Vec3d v;
@@ -406,23 +492,25 @@ void Projector::print_gravity(const s_font* font, float x, float y, const string
 		glRotatef(psi,0,0,-1);
 	}
 	reset_perspective_projection();
-}
+}*/
 
 void Projector::print_gravity180(const s_font* font, float x, float y, const string& str,
 	float xshift, float yshift) const
 {
 	static float dx, dy, d;
 	dx = x-(vec_viewport[0] + vec_viewport[2]/2);
-	dy = y-(vec_viewport[1] + vec_viewport[3]/2);
+	dy = y-(vec_viewport[1] + vec_viewport[3]/2) - 0.1;
 	d = sqrt(dx*dx + dy*dy);
+	if (d>MY_MAX(vec_viewport[3], vec_viewport[2])*2) return;
+	//cout << dx << " " << dy << endl;
 	float theta = M_PI + atan2(dx, dy);
 	float psi = atan2((float)font->getStrLen(str)/str.length(),d) * 180./M_PI;
-	if (psi>20) psi = 20;
+	if (psi>10) psi = 10;
 	set_orthographic_projection();
 	glTranslatef(x,y,0);
 	glRotatef(theta*180./M_PI,0,0,-1);
 	glTranslatef(sinf(xshift/d)*d,(1.f-cosf(xshift/d))*d + yshift,0);
-	glRotatef(xshift/d*180./M_PI,0,0,1);
+	//glRotatef(xshift/d*180./M_PI,0,0,1);
 	glScalef(1, -1, 1);
 	for (unsigned int i=0;i<str.length();++i)
 	{

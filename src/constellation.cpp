@@ -129,7 +129,7 @@ void Constellation::draw_optim(Projector* prj) const
 // Draw the name
 void Constellation::draw_name(s_font * constfont, Projector* prj) const
 {
-	gravity_label ? prj->print_gravity(constfont, XYname[0], XYname[1], inter, -constfont->getStrLen(inter)/2) :
+	gravity_label ? prj->print_gravity180(constfont, XYname[0], XYname[1], inter, -constfont->getStrLen(inter)/2) :
 	constfont->print(XYname[0]-constfont->getStrLen(inter)/2, XYname[1], inter/*name*/);
 }
 

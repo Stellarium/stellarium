@@ -194,6 +194,13 @@ void SolarSystem::load(const string& planetfile)
 			p->set_rings(r);
 		}
 
+		string bighalotexfile = pd.get_str(secname, "tex_big_halo", "");
+		if (!bighalotexfile.empty())
+		{
+			p->set_big_halo(bighalotexfile);
+			p->set_halo_size(pd.get_double(secname, "big_halo_size", 50.f));
+		}
+
 		system_planets.push_back(p);
 	}
 

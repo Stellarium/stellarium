@@ -23,7 +23,7 @@
 
 init_parser::init_parser(void) : dico(NULL)
 {
-	dico = new dictionary();
+	dico = dictionary_new(0);
 }
 
 init_parser::~init_parser()
@@ -71,6 +71,7 @@ void init_parser::save(const string& file_name) const
 		cout << "ERROR : Can't open file " << file_name << endl;
 		exit(-1);
 	}
+	if (fp) fclose(fp);
 }
 
 string init_parser::get_str(const string& key) const
@@ -169,17 +170,18 @@ bool init_parser::get_boolean(const string& section, const string& key, bool def
 // -1 is returned and the entry is created. Else 0 is returned.
 int init_parser::set_str(const string& key, const string& val)
 {
+	make_section_from_key(key);
 	int return_val;
 	if (find_entry(key)) return_val = 0;
 	else return_val = -1;
 
 	dictionary_set(dico, key.c_str(), val.c_str());
-
 	return return_val;
 }
 
 int init_parser::set_int(const string& key, int val)
 {
+	make_section_from_key(key);
 	int return_val;
 	if (find_entry(key)) return_val = 0;
 	else return_val = -1;
@@ -191,6 +193,7 @@ int init_parser::set_int(const string& key, int val)
 
 int init_parser::set_double(const string& key, double val)
 {
+	make_section_from_key(key);
 	int return_val;
 	if (find_entry(key)) return_val = 0;
 	else return_val = -1;
@@ -202,7 +205,19 @@ int init_parser::set_double(const string& key, double val)
 
 int init_parser::set_boolean(const string& key, bool val)
 {
-	return set_int(key, val);
+	if (val) return set_str(key, "true");
+	else return set_str(key, "false");
+}
+
+// Check if the key is in the form section:key and if yes create the section in the dictionnary
+// if it doesn't exist.
+void init_parser::make_section_from_key(const string& key)
+{
+	int pos = key.find(':');
+	if (!pos) return;				// No ':' were found
+	string sec = key.substr(0,pos);
+	if (find_entry(sec)) return;	// The section is already present into the dictionnary
+	dictionary_set(dico, sec.c_str(), NULL);	// Add the section key
 }
 
 // Get number of sections

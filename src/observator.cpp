@@ -108,20 +108,22 @@ void Observator::load(const string& file, const string& section)
 
 void Observator::save(const string& file, const string& section)
 {
+	cout << "Saving location " << name << " to file " << file << endl;
+
 	init_parser conf;
 	conf.load(file);
 
 	conf.set_str(section + ":name", name);
 	conf.set_str(section + ":latitude", print_angle_dms(latitude));
-    conf.set_str(section + ":longitude", print_angle_hms(longitude));
+    conf.set_str(section + ":longitude", print_angle_dms(longitude));
 	conf.set_int(section + ":altitude", altitude);
 	conf.set_str(section + ":landscape_name", landscape_name);
 
-	if (time_zone_mode == S_TZ_CUSTOM) conf.set_str(section + "time_zone", "custom");
-	else conf.set_str(section + "time_zone", "system_default");
+	if (time_zone_mode == S_TZ_CUSTOM) conf.set_str(section + ":time_zone", "custom");
+	else conf.set_str(section + ":time_zone", "system_default");
 
-	conf.set_str(section + "time_display_format", "system_default");
-	conf.set_str(section + "date_display_format", "system_default");
+	conf.set_str(section + ":time_display_format", "system_default");
+	conf.set_str(section + ":date_display_format", "system_default");
 
 	conf.save(file);
 }

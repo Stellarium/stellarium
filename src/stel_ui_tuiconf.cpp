@@ -29,6 +29,7 @@ void stel_ui::draw_gravity_ui(void)
 {
 	// Normal transparency mode
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	glEnable(GL_BLEND);
 
 	int x = core->projection->view_left() + core->projection->viewW()/2;
 	int y = core->projection->view_bottom() + core->projection->viewH()/2;
@@ -219,7 +220,7 @@ void stel_ui::draw_tui(void)
 {
 	// Normal transparency mode
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
+	glEnable(GL_BLEND);
 	int x = core->projection->view_left() + core->projection->viewW()/2;
 	int y = core->projection->view_bottom() + core->projection->viewH()/2;
 	int shift = (int)(M_SQRT2 / 2 * MY_MIN(x,y));

@@ -187,7 +187,6 @@ private:
     int FlagHorizon;
     int FlagFog;
     int FlagAtmosphere;
-    string landscape_name;
 	float sky_brightness;
 
 	// Viewing

@@ -41,6 +41,7 @@ public:
     virtual ~Landscape();
 	virtual void load(const string& file_name, const string& section_name) = 0;
 	void set_parameters(const Vec3f& sun_pos);
+	void set_sky_brightness(float b) {sky_brightness = b;}
 	virtual void draw(tone_reproductor * eye, const Projector* prj, const navigator* nav,
 		bool flag_fog, bool flag_decor, bool flag_ground) = 0;
 	static Landscape* create_from_file(const string& landscape_file, const string& section_name);
