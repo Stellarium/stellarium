@@ -30,6 +30,10 @@ Fisheye_projector::Fisheye_projector(int _screenW, int _screenH, double _fov,
 							0., 1., 0., 0.,
 							0., 0., -1, 0.,
 							0., 0., 0., 1.);
+	mat_projection2.set(2., 0., 0., 0.,
+							0., 2., 0., 0.,
+							0., 0., -1, 0.,
+							0., 0., 0., 1.);
 }
 
 // For a fisheye, ratio is alway = 1
@@ -43,11 +47,6 @@ void Fisheye_projector::set_viewport(int x, int y, int w, int h)
 // The function is a reimplementation of glOrtho
 void Fisheye_projector::init_project_matrix(void)
 {
-	//double f = 1./tan(60.*M_PI/360.);
-	mat_projection2 = Mat4d(2., 0., 0., 0.,
-							0., 2., 0., 0.,
-							0., 0., -1, 0.,
-							0., 0., 0., 1.);
 	glMatrixMode(GL_PROJECTION);
 	glLoadMatrixd(mat_projection2);
     glMatrixMode(GL_MODELVIEW);
@@ -124,11 +123,8 @@ void Fisheye_projector::sVertex3(double x, double y, double z, const Mat4d& mat)
 	v.set(x,y,z);
 	project_custom(v, win, mat);
 
-	//printf("%f %f %f\n", win[0], win[1], win[2]);
 	// Can be optimized by avoiding matrix inversion if it's always the same
 	gluUnProject(win[0],win[1],win[2],mat,mat_projection2,vec_viewport,&v[0],&v[1],&v[2]);
-	//v.normalize();
-	//v*=win[2];
 	glVertex3dv(v);
 }
 
@@ -149,7 +145,7 @@ void Fisheye_projector::sSphere(GLdouble radius, GLint slices, GLint stacks, con
 	static Vec3d posCenterEye;
 	posCenterEye = mat * Vec3d(0.,0.,0.);
 
-	glGetBooleanv(GL_LIGHT0, &isLightOn);
+	glGetBooleanv(GL_LIGHTING, &isLightOn);
 
 	if (isLightOn)
 	{
