@@ -32,7 +32,7 @@ s_font::s_font(float size_i, const string& textureName, const string& dataFileNa
 
 s_font::~s_font()
 {
-    glDeleteLists(g_base, 128);                          // Delete All 256 Display Lists
+    glDeleteLists(g_base, 256);                          // Delete All 256 Display Lists
 	delete s_fontTexture; s_fontTexture = NULL;
 }
 
@@ -67,7 +67,7 @@ int s_font::buildDisplayLists(const string& dataFileName, const string& textureN
    
     averageCharLen=0;
     ratio = size/lineHeight;
-    g_base = glGenLists(128);                           // Creating 256 Display Lists
+    g_base = glGenLists(256);                           // Creating 256 Display Lists
     glBindTexture(GL_TEXTURE_2D, s_fontTexture->getID());          // Select Our s_font Texture
 
     while(fscanf(pFile,"%d %d %d %d %d %d\n",&charNum,&posX,&posY,&sizeX,&sizeY,&leftSpacing)==6)
@@ -78,6 +78,8 @@ int s_font::buildDisplayLists(const string& dataFileName, const string& textureN
         theSize[charNum].rightSpacing=0;
         averageCharLen+=sizeX;
         nbChar++;
+
+	//	cout << charNum << " " << posX << ":" << posY << endl;
 
 	// Special ascii code used to set text color
 	// was R,G,B, but changed to normal or hilighted since R G or B was hard to see - rms
@@ -96,27 +98,27 @@ int s_font::buildDisplayLists(const string& dataFileName, const string& textureN
 	    continue;
 	  }
 	
-        glNewList(g_base+charNum,GL_COMPILE);				// Start Building A List
-			glTranslated(leftSpacing*ratio,0,0);			// Move To The Left Of The Character
-			glBegin(GL_QUADS );
-	    		glTexCoord2f((float)posX/256,(float)(256-posY-sizeY)/256);
-	    		glVertex3f(0,sizeY*ratio,0);										// Bottom Left
-	    		glTexCoord2f((float)(posX+sizeX)/256,(float)(256-posY-sizeY)/256);
-	    		glVertex3f(sizeX*ratio,sizeY*ratio,0);								// Bottom Right
-	    		glTexCoord2f((float)(posX+sizeX)/256,(float)(256-posY)/256);
-	    		glVertex3f(sizeX*ratio,0,0);										// Top Right
-	    		glTexCoord2f((float)posX/256,(float)(256-posY)/256);
-	    		glVertex3f(0,0,0);													// Top Left
-			glEnd ();
-			glTranslated((sizeX+SPACING)*ratio,0,0);
-        glEndList();										// Done Building The Display List
+        glNewList(g_base+charNum,GL_COMPILE); {  // Start Building A List
+	  glTranslated(leftSpacing*ratio,0,0);	 // Move To The Left Of The Character
+	  glBegin(GL_QUADS );
+	  glTexCoord2f((float)posX/256,(float)(256-posY-sizeY)/256);
+	  glVertex3f(0,sizeY*ratio,0); //  Bottom Left
+	  glTexCoord2f((float)(posX+sizeX)/256,(float)(256-posY-sizeY)/256);
+	  glVertex3f(sizeX*ratio,sizeY*ratio,0);  // Bottom Right
+	  glTexCoord2f((float)(posX+sizeX)/256,(float)(256-posY)/256);
+	  glVertex3f(sizeX*ratio,0,0); // Top Right
+	  glTexCoord2f((float)posX/256,(float)(256-posY)/256);
+	  glVertex3f(0,0,0); // Top Left
+	  glEnd ();
+	  glTranslated((sizeX+SPACING)*ratio,0,0); }
+        glEndList();   // Done Building The Display List
     }
 
     fclose(pFile);
     
-	averageCharLen/=nbChar;
+    averageCharLen/=nbChar;
     
-	return 1;
+    return 1;
 }
 
 
@@ -124,14 +126,14 @@ void s_font::print(float x, float y, const string& str, int upsidedown) const
 {
     glBindTexture(GL_TEXTURE_2D, s_fontTexture->getID());  // Select Our s_font Texture
     glPushMatrix();
-    glTranslatef(x,y,0);								// Position The Text (0,0 - Top Left)
-	if (upsidedown) glScalef(1, -1, 1);					// invert the y axis, down is positive
-    glListBase(g_base);									// Init the Display list base
-    glCallLists(str.length(), GL_BYTE, str.c_str());	// Write The Text To The Screen
+    glTranslatef(x,y,0);  // Position The Text (0,0 - Top Left)
+	if (upsidedown) glScalef(1, -1, 1);  // invert the y axis, down is positive
+    glListBase(g_base);	 // Init the Display list base
+    glCallLists(str.length(), GL_UNSIGNED_BYTE, str.c_str());  // Write The Text To The Screen
     glPopMatrix();
 }
 
-void s_font::print_char(const char c) const
+void s_font::print_char(const unsigned char c) const
 {
   glBindTexture(GL_TEXTURE_2D, s_fontTexture->getID());  // Select Our s_font Texture
   glCallList(g_base+c);
@@ -139,7 +141,7 @@ void s_font::print_char(const char c) const
 
 // print with dark outline
 // this is somewhere between a hack and a kludge
-void s_font::print_char_outlined(const char c) const
+void s_font::print_char_outlined(const unsigned char c) const
 {
 
   GLfloat current_color[4];
