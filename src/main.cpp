@@ -67,7 +67,8 @@ void drawIntro(void)
     printf("    |                     %s|\n",APP_NAME);
     printf("    -----------------------------------------\n\n");
     printf("Copyright (C) 2002 Fabien Chereau chereau@free.fr\n\n");
-    printf("Please send bug report & comments to stellarium@free.fr\n\n");
+    printf("Please send bug report & comments to stellarium@free.fr\n");
+    printf("and check last version on http://stellarium.free.fr\n\n");
 };
 
 // ************************  Main display loop  ************************
@@ -144,7 +145,7 @@ void glutDisplay(void)
     if (global.FlagAtmosphere)       // Calc the atmosphere
     {   
     	// Draw atmosphere every second frame because it's slow....
-        if (++timeAtmosphere>2 && global.SkyBrightness>0)
+        if (++timeAtmosphere>1 && global.SkyBrightness>0)
         {
 	    timeAtmosphere=0;
             CalcAtmosphere();
@@ -190,7 +191,7 @@ void loadCommonTextures(void)
 {   
     printf("Loading common textures...\n");
     texIds[2] = new s_texture("voielactee256x256",TEX_LOAD_TYPE_PNG_SOLID);
-    texIds[3] = new s_texture("fog");
+    texIds[3] = new s_texture("fog",TEX_LOAD_TYPE_PNG_REPEAT);
     texIds[4] = new s_texture("ciel");  
     texIds[6] = new s_texture("n");
     texIds[7] = new s_texture("s");
@@ -621,6 +622,7 @@ int main (int argc, char **argv)
     messiers->Read(tempName);        // read the messiers object data
     initUi();                        // initialisation of the User Interface
     global.XYZVision.Set(0,1,0);
+    
     glutMainLoop();                  // Start drawing
     return 0;
 }

@@ -32,7 +32,7 @@ using namespace gui;
 GraphicsContext::GraphicsContext(int _winW, int _winH) :
         backGroundTexture(NULL),
         headerTexture(NULL),
-        baseColor(vec3_t(0.2, 0.3, 0.5)),
+        baseColor(vec3_t(0.1, 0.4, 0.6)),
         textColor(vec3_t(0.8, 0.9, 1.0)),
         scissorPos(vec2_t(0, 0)),
         winW(_winW),

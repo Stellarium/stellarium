@@ -23,7 +23,7 @@
 #define TEX_LOAD_TYPE_PNG_ALPHA 0
 #define TEX_LOAD_TYPE_PNG_SOLID 1
 #define TEX_LOAD_TYPE_PNG_BLEND3 2
-
+#define TEX_LOAD_TYPE_PNG_REPEAT 3
 class s_texture  
 {
 
@@ -39,6 +39,7 @@ private:
     char * textureName;
     unsigned int texID;
     int loadType;
+    int loadType2;
 };
 
 #endif // _S_TEXTURE_H_

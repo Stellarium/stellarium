@@ -465,7 +465,7 @@ SPACE or Middle Mouse Clic:\n\
 C   : Drawing of the Constellations\n\
 V   : Names of the Constellations\n\
 E   : Equatorial Grid\n\
-A   : Azimutal Grid\n\
+Z   : Azimutal Grid\n\
 N   : Nebulas\n\
 P   : Planet Finder\n\
 G   : Ground\n\
@@ -474,7 +474,7 @@ F   : Fog\n\
 2   : Accelered Time Mode\n\
 3   : Very Fast Time Mode\n\
 Q   : Cardinal Points\n\
-\1   : Atmosphere\n\
+A   : Atmosphere\n\
 H   : Help\n\
 4   : Ecliptic\n\
 5   : Equator\n\
@@ -1043,8 +1043,8 @@ void HandleNormalKey(unsigned char key, int state)
             case 'v' :  global.FlagConstellationName=!global.FlagConstellationName;
                         BtConstellationsName->setActive(global.FlagConstellationName);
                         break;
-            case 'A' :
-            case 'a' :  global.FlagAzimutalGrid=!global.FlagAzimutalGrid;
+            case 'Z' :
+            case 'z' :  global.FlagAzimutalGrid=!global.FlagAzimutalGrid;
                         BtAzimutalGrid->setActive(global.FlagAzimutalGrid);
                         break;
             case 'E' :
@@ -1079,8 +1079,8 @@ void HandleNormalKey(unsigned char key, int state)
             case 'q' :  global.FlagCardinalPoints=!global.FlagCardinalPoints;
                         BtCardinalPoints->setActive(global.FlagCardinalPoints);
                         break;
-            case '*' :
-            case 'µ' :  global.FlagAtmosphere=!global.FlagAtmosphere;
+            case 'A' :
+            case 'a' :  global.FlagAtmosphere=!global.FlagAtmosphere;
                         BtAtmosphere->setActive(global.FlagAtmosphere);
                         break;
             case 'R' :
