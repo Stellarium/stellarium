@@ -172,7 +172,7 @@ void navigator::update_vision_vector(int delta_time)
         move.coef+=move.speed*delta_time;
         if (move.coef>=1.)
         {
-			flag_auto_move=false;
+			flag_auto_move=0;
             equ_vision=move.aim;
         }
 		// Recalc local vision vector
@@ -281,23 +281,31 @@ void navigator::update_time(int delta_time)
 
 void navigator::update_transform_matrices(void)
 {
-	/*Vec3d v(1,0,0);
-	v=Mat4d::zrotation(M_PI_2)*Mat4d::xrotation(M_PI_2)*v;
+	// GEI = Geocentric Equatorial Inertial System : used for stars
+	// GEO = Geographic Coordinates
+	// HSE = Heliocentric Solar Ecliptic System
+
+	Mat4d GEI_to_GEO = Mat4d::zrotation(get_apparent_sidereal_time(JDay)*M_PI/180.);
+	Mat4d GEO_to_GEI = GEI_to_GEO.transpose();
+
+	Mat4d GEI_to_HSE = 	Mat4d::translation(Earth->get_ecliptic_pos()) *
+						Mat4d::xrotation(get_mean_obliquity(JDay)*M_PI/180.);
+	Mat4d HSE_to_GEI = 	Mat4d::xrotation(-get_mean_obliquity(JDay)*M_PI/180.) *
+						Mat4d::translation(-Earth->get_ecliptic_pos());
+
+	Mat4d GEO_to_HSE = GEI_to_HSE * GEO_to_GEI;
+	Mat4d HSE_to_GEO = GEI_to_GEO * HSE_to_GEI;
+
+	mat_helio_to_earth_equ = HSE_to_GEI;
+	mat_helio_to_local = HSE_to_GEO;
+	mat_local_to_helio = GEO_to_HSE;
+	mat_local_to_earth_equ = GEO_to_GEI;
+	mat_earth_equ_to_local = GEI_to_GEO;
+
+	/*Vec3d v(0,0,1);
+	v=Mat4d::yrotation(M_PI_2)*v;
 	printf("v(%lf,%lf,%lf)\n",v[0],v[1],v[2]);*/
-	/*
-   global.RaZenith = -AstroOps::greenwichSiderealTime(global.JDay) + global.ThePlace.longitude();
-    global.RaZenith =  AstroOps::normalizeRadians(global.RaZenith);
-    global.DeZenith =  Astro::PI_OVER_TWO - global.ThePlace.latitude();
-    glRotated(90.-global.DeZenith*180/PI,1,0,0);
-    glRotated(global.RaZenith*180/PI,0,1,0);*/
 
-	mat_helio_to_local=Mat4d::translation(Earth->get_ecliptic_pos());
-	mat_local_to_helio=Mat4d::translation(-Earth->get_ecliptic_pos());
-	/*mat_local_to_earth_equ=Mat4d::identity();
-	mat_earth_equ_to_local=Mat4d::identity();*/
-	mat_local_to_earth_equ= Mat4d::zrotation((-get_apparent_sidereal_time(JDay))*M_PI/180.); /* Mat4d::yrotation((90.-position.latitude)*M_PI/180.);*/
-
-	mat_earth_equ_to_local= /*Mat4d::yrotation((90.-position.latitude)*M_PI/180.) */ Mat4d::zrotation((get_apparent_sidereal_time(JDay))*M_PI/180.);
 
 }
 
@@ -305,26 +313,31 @@ void navigator::update_transform_matrices(void)
 // Place openGL in earth equatorial coordinates
 void navigator::switch_to_earth_equatorial(void)
 {
-	switch_to_local();
+	glLoadIdentity();
+	gluLookAt(0., 0., 0.,          // Observer position
+              local_vision[0],local_vision[1],local_vision[2],   // direction of vision
+              0.,0.,1.);           // Vertical vector
 	glMultMatrixd(mat_local_to_earth_equ);
 }
 
 // Place openGL in heliocentric coordinates
 void navigator::switch_to_heliocentric(void)
 {
-    switch_to_local();
+	glLoadIdentity();
+	gluLookAt(0., 0., 0.,          // Observer position
+              local_vision[0],local_vision[1],local_vision[2],   // direction of vision
+              0.,0.,1.);           // Vertical vector
 	glMultMatrixd(mat_local_to_helio);
 }
 
 // Place openGL in local viewer coordinates (Usually somewhere on earth viewing in a specific direction)
 void navigator::switch_to_local(void)
 {
-	// Temp altaz
 	glLoadIdentity();
-	//Set a transfo matrix with the vertical at the zenith
 	gluLookAt(0., 0., 0.,          // Observer position
               local_vision[0],local_vision[1],local_vision[2],   // direction of vision
               0.,0.,1.);           // Vertical vector
+
 }
 
 // Transform vector from local coordinate to equatorial

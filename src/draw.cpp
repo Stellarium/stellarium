@@ -265,9 +265,6 @@ void DrawMeridiens(void)
 {       glPushMatrix(); 
         glDisable(GL_TEXTURE_2D);
         glDisable(GL_BLEND);
-        //glEnable (GL_LINE_STIPPLE);
-        //glLineStipple (1, 0x0101);  /*  dotted  */
-        //glLineStipple (1, 0x1C47); 
         float coef;
         coef=rand();
         coef/=RAND_MAX;
@@ -281,7 +278,6 @@ void DrawMeridiens(void)
                         glEnd();
                 }
         }
-        //glDisable (GL_LINE_STIPPLE);
         glPopMatrix();
 }
 
@@ -291,9 +287,7 @@ void DrawMeridiensAzimut(void)
 {       glPushMatrix();
         glDisable(GL_TEXTURE_2D);
         glDisable(GL_BLEND);
-///     glEnable (GL_LINE_STIPPLE);
-///     glLineStipple (1, 0x00FF);  /*  dashed  */
-        float coef = 1;//(float)(1.0f * rand() / RAND_MAX);
+        float coef = 1;
         glColor3f(0.015*coef+0.2,0.12*coef+0.18,0.015*coef+0.2);
         for(int i=0;i<12;i++)
         {       glRotatef(360/24,0,0,1);
@@ -304,7 +298,6 @@ void DrawMeridiensAzimut(void)
                         glEnd();
                 }
         }
-///     glDisable (GL_LINE_STIPPLE);
         glPopMatrix();
 }
 
@@ -315,7 +308,7 @@ void DrawParallels(void)
         glDisable(GL_TEXTURE_2D);
         glDisable(GL_BLEND);
 
-        float coef = 1;//(float)(1.0f * rand() / RAND_MAX);
+        float coef = 1;
         glColor3f(0.2*coef+0.2,0.025*coef+0.2,0.025*coef+0.2);
         for(int i=0;i<18;++i){
                 for(int j=0;j<50;++j){

@@ -80,7 +80,7 @@ public:
 	Vec3d local_to_earth_equ(Vec3d*);	// Transform vector from local coordinate to equatorial
 	Vec3d earth_equ_to_local(Vec3d*);	// Transform vector from equatorial coordinate to local
 	Vec3d helio_to_local(Vec3d*);		// Transform vector from heliocentric coordinate to local
-	Vec3d helio_to_earth_equ(Vec3d*);	// Transform vector from heliocentric coordinate to local
+	Vec3d helio_to_earth_equ(Vec3d*);	// Transform vector from heliocentric coordinate to earth equatorial
 
 	// Viewing direction function : 1 move, 0 stop.
 	void move_to(Vec3d _aim);
@@ -122,6 +122,7 @@ private:
 	Mat4d mat_local_to_helio;		// Transform from Observator local coordinate to Heliocentric
 	Mat4d mat_local_to_earth_equ;	// Transform from Observator local coordinate to Earth Equatorial
 	Mat4d mat_earth_equ_to_local;	// Transform from Observator local coordinate to Earth Equatorial
+	Mat4d mat_helio_to_earth_equ;	// Transform from Heliocentric to earth equatorial coordinate
 
 	// Vision variables
 	double fov;							// Field of view

@@ -21,42 +21,61 @@
 #include <math.h>
 #include <stdio.h>
 #include <string.h>
-
-
 #include <stdlib.h>
-
+#include "stellastro.h"
 
 /* puts a large angle in the correct range 0 - 360 degrees */
-double range_degrees(double angle)
+double range_degrees(double d)
 {
-    double temp;
-
-    if (angle >= 0.0 && angle < 360.0)
-    	return(angle);
-
-	temp = (int)(angle / 360);
-
-	if ( angle < 0.0 )
-	   	temp --;
-
-    temp *= 360;
-
-    return (angle - temp);
+	d = fmod( d, 360.);
+	if(d<0.) d += 360.;
+	return d;
 }
 
 /* puts a large angle in the correct range 0 - 2PI radians */
-double range_radians (double angle)
+double range_radians (double r)
 {
-    double temp;
+	r = fmod( r, 2.*M_PI );
+	if (r<0.) r += 2.*M_PI;
+	return r;
+}
 
-    if (angle >= 0.0 && angle < (2.0 * M_PI))
-    	return(angle);
 
-	temp = (int)(angle / (M_PI * 2.0));
+/*----------------------------------------------------------------------------
+ * The obliquity formula (and all the magic numbers below) come from Meeus,
+ * Astro Algorithms.
+ *
+ * Input t is time in julian day.
+ * Valid range is the years -8000 to +12000 (t = -100 to 100).
+ *
+ * return value is mean obliquity (epsilon sub 0) in degrees.
+ */
 
-	if ( angle < 0.0 )
-		temp --;
-	temp *= (M_PI * 2.0);
+double get_mean_obliquity( double t )
+{
+	double u, u0;
+	static double t0 = 30000.;
+	static double rval = 0.;
+	static const double rvalStart = 23. * 3600. + 26. * 60. + 21.448;
+	static const int OBLIQ_COEFFS = 10;
+	static const double coeffs[ 10 ] = {
+         -468093.,  -155.,  199925.,  -5138.,  -24967.,
+         -3905.,    712.,   2787.,    579.,    245.};
+	int i;
+	t = ( t - J2000 ) / 36525.; // Convert time in centuries
 
-	return (angle - temp);
+	if( t0 != t )
+	{
+		t0 = t;
+    	u = u0 = t / 100.;     // u is in julian 10000's of years
+    	rval = rvalStart;
+		for( i=0; i<OBLIQ_COEFFS; i++ )
+      	{
+        	rval += u * coeffs[i] / 100.;
+        	u *= u0;
+		}
+      	// convert from seconds to degree
+      	rval /= 3600.;
+	}
+	return rval;
 }
