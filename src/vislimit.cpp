@@ -81,7 +81,7 @@ int set_brightness_params(brightness_data *b)
    kr_coeff = .1066 * exp( -b->ht_above_sea_in_meters / 8200.);
    ka_coeff = .1 * exp( -b->ht_above_sea_in_meters / 1500.);
    if( b->relative_humidity > 0.)
-      {
+   {
       double humidity_param;
 
       if( b->relative_humidity >= 100.)
@@ -89,7 +89,7 @@ int set_brightness_params(brightness_data *b)
       else
          humidity_param = 1. - .32 / log( b->relative_humidity / 100.);
       ka_coeff *= exp( 1.33 * log( humidity_param));
-      }
+   }
    if( b->latitude < 0.)
       ka_coeff *= 1. - sin( month_angle);
    else

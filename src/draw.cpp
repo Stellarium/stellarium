@@ -29,6 +29,7 @@
 #include "navigator.h"
 #include "solarsystem.h"
 #include "stellastro.h"
+#include "skylight.h"
 
 extern s_texture * texIds[200];            // Common Textures
 float DmeriParal[51][2];                   // For grids drawing optimisation
@@ -75,7 +76,7 @@ void InitAtmosphere(void)
 	}
 }
 
-// Draw the realistic atmosphere
+// Calc the atmosphere
 void CalcAtmosphere(void)
 {
 	static    GLdouble M[16]; 

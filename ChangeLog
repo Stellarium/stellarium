@@ -1,16 +1,22 @@
-0.5.3b [28/05/2003]
+0.5.3b [12/06/2003]
+Removed the previous patch to configure SDL because it caused some error on some systems.
 Changed the global coordinate system into the conventionnal astronomical one (ie with z axis toward top and x toward us)
-Stopped using the previous unreliable astro library with badly defined licence and use 2 libraries created from modified/simplified version of the LGPL library libnova. One called stellastro which manage the astronomical operations like time management etc... and another one called stellplanet which only compute the planetary positions.
+Stopped using the previous unreliable astro library with badly defined licence and use 2 libraries created from modified/simplified version of the LGPL library libnova. One called stellastro which manages the astronomical operations like time management etc. and another one called stellplanet which only computes the planetary positions.
 Removed the module/class planet_mgr and use a hierarchical unified planet class instead to manage all the solar system bodies with objective to add planet satellites, asteroids, comete and manage planet obliquity, and rotation of the textures.
 Remade in a coherent way all the s_utility conversion functions (in double precision).
 Created a new class "stel_object" to manage the selected object in a good object oriented way.
-Abandoned my previous vector class for a modified version of the vecmath class from celestia.
+Abandoned my previous vector class for a recreated version of the vecmath class (originally from celestia).
 Use double precision for every planet, orbit and navigation calculation.
 Centralized all the navigation/time variables and operations in a new class "navigator" instead of the old non-object old navigation module.
 The position of the observer on the earth is now taken into account in every calculation : the precision is dramaticaly improved, sun eclipses works etc...
 Changed the command line handling : changes submitted by Cedric Delfosse.
-Simplified light operation for planets.
-Fixed many many bugs.
+Simplified 3D lighting operation for planets.
+Fixed many many bugs related with coordinate.
+Added an orbit calculation class borowed from celestia.
+Added experimentaly jupiter satellites.
+Improved object search and planets hints displaying.
+Created a new class to render daylight atmosphere, with a faster and better algorithm.
+Created a new class used to convert tone from high range luminance to CRT display luminance : the aim is to have an homogeneous luminance conversion to use with daylight sky as well as night sky and stars.
 
 0.5.2 [29/04/2003]
 Changed the configuration file to $HOME/.stellarium/VERSION/ on unix system to prevent conflicts between versions.
