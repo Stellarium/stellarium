@@ -142,6 +142,7 @@ void stel_ui::init_tui(void)
 	// 4. Effects
 	tui_effect_landscape = new s_tui::MultiSet_item<string>("4.1 Landscape: ");
 	tui_effect_landscape->addItemList(Landscape::get_file_content(core->DataDir + "landscapes.ini"));
+
 	tui_effect_landscape->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb_tui_effect_change_landscape));
 	tui_menu_effects->addComponent(tui_effect_landscape);
 
@@ -227,6 +228,9 @@ void stel_ui::tui_update_widgets(void)
 	tui_star_labelmaxmag->setValue(core->MaxMagStarName);
 	tui_stars_twinkle->setValue(core->StarTwinkleAmount);
 	tui_star_magscale->setValue(core->StarMagScale);
+
+	// Landscape
+	tui_effect_landscape->setValue(core->observatory->get_landscape_name());
 }
 
 // Launch script to set time zone in the system locales
@@ -252,7 +256,9 @@ void stel_ui::tui_cb_settimedisplayformat(void)
 void stel_ui::tui_cb_admin_load_default(void)
 {
 	core->load_config();
-	core->observatory->load(core->ConfigDir + core->config_file, "init_location");
+
+	// believe this is redundant
+	//	core->observatory->load(core->ConfigDir + core->config_file, "init_location");
 	if (core->StartupTimeMode=="preset" || core->StartupTimeMode=="Preset")
 	{
 		core->navigation->set_JDay(core->PresetSkyTime -

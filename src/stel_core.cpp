@@ -352,11 +352,12 @@ void stel_core::draw(int delta_time)
 
 void stel_core::set_landscape(const string& new_landscape_name)
 {
-	if (new_landscape_name.empty() || new_landscape_name==observatory->get_landscape_name()) return;
-	if (landscape) delete landscape;
-	landscape = NULL;
-	landscape = Landscape::create_from_file(DataDir + "landscapes.ini", new_landscape_name);
-	observatory->set_landscape_name(new_landscape_name);
+    //	if (new_landscape_name.empty() || new_landscape_name==observatory->get_landscape_name()) return;
+    if (new_landscape_name.empty()) return;
+    if (landscape) delete landscape;
+    landscape = NULL;
+    landscape = Landscape::create_from_file(DataDir + "landscapes.ini", new_landscape_name);
+    observatory->set_landscape_name(new_landscape_name);
 }
 
 void stel_core::load_config(void)
@@ -378,7 +379,13 @@ void stel_core::load_config(void)
 	// Actually load the config file
 	load_config_from(ConfigDir + config_file);
 
-	if (observatory) observatory->load(ConfigDir + config_file, "init_location");
+	if (observatory) {
+	  observatory->load(ConfigDir + config_file, "init_location");
+
+	  // must explicitly load landscape
+	  set_landscape( observatory->get_landscape_name() );
+	}
+
 }
 
 void stel_core::save_config(void)
@@ -505,7 +512,9 @@ void stel_core::load_config_from(const string& confFile)
 	FlagGround			= conf.get_boolean("landscape:flag_ground");
 	FlagHorizon			= conf.get_boolean("landscape:flag_horizon");
 	FlagFog				= conf.get_boolean("landscape:flag_fog");
+
 	FlagAtmosphere		= conf.get_boolean("landscape:flag_atmosphere");
+	if (!FlagAtmosphere && tone_converter) tone_converter->set_world_adaptation_luminance(3.75f);
 
 	// Viewing section
 	FlagConstellationDrawing= conf.get_boolean("viewing:flag_constellation_drawing");
