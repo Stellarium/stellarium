@@ -12,11 +12,11 @@ FULLSCREEN = true
 # 1024x768, 1280x1024 and more
 # Width of the fullscreen
 
-X_RESOLUTION = 800
+X_RESOLUTION = 1024
 
 # Height of the fullscreen
 
-Y_RESOLUTION = 600
+Y_RESOLUTION = 768
 
 # Number of Bit Per Pixels : set the number of possible colors. Available values are 32 and 16.
 # (16 faster than 32 but reduce the number of colors)
@@ -51,18 +51,23 @@ FLAG_CARDINAL_POINTS = true         # Display the cardinal points if true.
 FLAG_MENU = true                    # Display menu bar if true.
 FLAG_HELP = false                   # Display help window if true.
 FLAG_INFOS = false                  # Display infos about stellarium if true.
-FLAG_MILKY_WAY = true               # Display the milky way, put it to false 
+FLAG_MILKY_WAY = true               # Display the milky way, put it to false
                                     # if your computer have no 3D hardware acceleration
 FLAG_UTC_TIME = false               # Display time in UTC format (Greenwich time) if true,
                                     # local time if false : set your Time Zone above in this file!
+GUI_BASE_COLOR = 0.6;0.4;0.1        # RGB Background color for every gui component.
+GUI_TEXT_COLOR = 0.1;0.9;0.8        # RGB Text color for every gui element.
+
 
 ######## Date and time ########
 # default date is today
 # modify and uncomment next line to choose another date
 #DATE = mm/dd/yyyy
 #DATE = 17/11/1982
+DATE = today
 
 # default time is now (UT time)
 # modify and uncomment next line to choose another time
 #TIME = hh:mm:ss
 #TIME = 06:20:00
+TIME = now

@@ -371,7 +371,7 @@ void LongitudeBarOnChangeValue(float value,Component *)
     global.ThePlace.setLongitude(value);
 }
 void AltitudeBarOnChangeValue(float value,Component *)
-{   
+{
     global.Altitude=(int)value;
     char tempValueStr[30];
     sprintf(tempValueStr,"\1 Altitude : %dm",global.Altitude);
@@ -414,17 +414,21 @@ void initUi(void)
         printf("ERROR WHILE CREATING FONT\n");
         exit(1);
     }
-    
+
     /*** Colors ***/
     vec3_t clWhite(1.,1.,1.);
-    
+
     /*** Graphic Context ***/
     gc = new GraphicsContext(global.X_Resolution,global.Y_Resolution);
     if (!gc)
     {
         printf("ERROR WHILE CREATING GRAPHIC CONTEXT\n");
-        exit(1);
+        exit(-1);
     }
+
+	gc->baseColor=global.GuiBaseColor;
+	gc->textColor=global.GuiTextColor;
+
     gc->setFont(spaceFont);
     gc->backGroundTexture=new s_texture("backmenu",TEX_LOAD_TYPE_PNG_ALPHA);
     gc->headerTexture=new s_texture("headermenu",TEX_LOAD_TYPE_PNG_ALPHA);
@@ -455,7 +459,7 @@ void initUi(void)
 
     /*** Button container ***/
     ContainerBtFlags = new FilledContainer();
-    ContainerBtFlags->reshape(0,global.Y_Resolution-btSize,btSize*11,btSize);
+    ContainerBtFlags->reshape(0,global.Y_Resolution-btSize/*-1*/,btSize*11,btSize/*+1*/);
     ContainerBtFlags->addComponent(BtConstellationsDraw);
     ContainerBtFlags->addComponent(BtConstellationsName);
     ContainerBtFlags->addComponent(BtAzimutalGrid);
