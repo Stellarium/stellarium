@@ -40,7 +40,7 @@ Constellation_mgr::~Constellation_mgr()
 }
 
 // Load from file
-void Constellation_mgr::load(const string& font_fileName, const string& fileName, Hip_Star_mgr * _VouteCeleste)
+void Constellation_mgr::load(const string& font_fileName, const string& fileName, const string& artfileName, Hip_Star_mgr * _VouteCeleste)
 {
 	printf("Loading constellation data...\n");
 
@@ -72,6 +72,45 @@ void Constellation_mgr::load(const string& font_fileName, const string& fileName
         }
     }
     fclose(fic);
+
+	fic = fopen(artfileName.c_str(),"r");
+    if (!fic)
+    {
+		printf("Can't open %s\n",artfileName.c_str());
+        exit(-1);
+    }
+
+	// Read the constellation art file with the following format :
+	// ShortName texture_file x1 y1 hp1 x2 y2 hp2
+	// Where :
+	// shortname is the international short name (i.e "Lep" for Lepus)
+	// texture_file is the graphic file of the art texture
+	// x1 y1 are the x and y texture coordinates in pixels of the star of hipparcos number hp1
+	// x2 y2 are the x and y texture coordinates in pixels of the star of hipparcos number hp2
+	// The coordinate are taken with (0,0) at the top left corner of the image file
+	char shortname[20];
+	char texfile[255];
+	unsigned int x1, y1, x2, y2, hp1, hp2;
+	int texSize;
+    while(!feof(fic))
+    {
+        if (fscanf(fic,"%s %s %u %u %u %u %u %u\n",shortname,texfile,&x1,&y1,&hp1,&x2,&y2,&hp2)!=8)
+		{
+			printf("ERROR while loading art for constellation %s\n", shortname);
+			exit(-1);
+		}
+
+    }
+    fclose(fic);
+
+	// TODO Solve a 12 variables system to get the transfo matrix from texture coord to
+	// 3d position...
+	s_texture * art_tex = new s_texture(texfile);
+	texSize = art_tex->getSize();
+	Vec3f pos_star1 = _VouteCeleste->search(hp1)->get_earth_equ_pos();
+	Vec3f pos_star2 = _VouteCeleste->search(hp2)->get_earth_equ_pos();
+
+
 }
 
 // Draw all the constellations in the vector

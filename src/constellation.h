@@ -45,6 +45,9 @@ private:
     unsigned int nb_segments;
     Hip_Star ** asterism;
 	static bool gravity_label;
+
+	s_texture* art_tex;
+
 };
 
 #endif // _CONSTELLATION_H_
