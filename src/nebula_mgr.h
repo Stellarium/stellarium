@@ -28,31 +28,31 @@ using namespace std;
 
 class Nebula_mgr  
 {
-public:
-    Nebula_mgr(Vec3f defaultfontcolor = Vec3f(0.4,0.3,0.5), Vec3f defaultcirclecolor = Vec3f(0.8,0.8,0.1));
-    virtual ~Nebula_mgr();
+ public:
+  Nebula_mgr(Vec3f defaultfontcolor = Vec3f(0.4,0.3,0.5), Vec3f defaultcirclecolor = Vec3f(0.8,0.8,0.1));
+  virtual ~Nebula_mgr();
 
-	// Read the Nebulas data from a file (and draw % complete bar at barx, bary on screen)
-    int read(const string& font_fileName, const string& fileName, int barx, int bary);
-
-	// Draw all the Nebulas
-	void draw(int hints_ON, Projector* prj, const navigator * nav, tone_reproductor* eye,
-		bool _gravity_label, float max_mag_name, bool bright_nebulae);
-
-	// Search the Nebulae by position
-	stel_object * search(Vec3f Pos);
-
-	// Return a stl vector containing the nebulas located inside the lim_fov circle around position v
-	vector<stel_object*> search_around(Vec3d v, double lim_fov);
-
-private:
-	void read_one();  // load next nebula from file
-	FILE * nebula_fic;
-	int total;   // total number of nebulas
-	int loaded;  // number loaded so far
-	vector<Nebula*> neb_array;	// The nebulas list
-	Vec3f defaultfontcolor;
-	Vec3f defaultcirclecolor;
+  // Read the Nebulas data from a file (and draw % complete bar at barx, bary on screen)
+  int read(const string& font_fileName, const string& fileName, int barx, int bary);
+  
+  // Draw all the Nebulas
+  void draw(int hints_ON, Projector* prj, const navigator * nav, tone_reproductor* eye,
+	    bool _gravity_label, float max_mag_name, bool bright_nebulae);
+  
+  stel_object * search(string name);  // search by name
+  stel_object * search(Vec3f Pos);    // Search the Nebulae by position
+  
+  // Return a stl vector containing the nebulas located inside the lim_fov circle around position v
+  vector<stel_object*> search_around(Vec3d v, double lim_fov);
+  
+ private:
+  void read_one();  // load next nebula from file
+  FILE * nebula_fic;
+  int total;   // total number of nebulas
+  int loaded;  // number loaded so far
+  vector<Nebula*> neb_array;	// The nebulas list
+  Vec3f defaultfontcolor;
+  Vec3f defaultcirclecolor;
 };
 
 #endif // _NEBULA_MGR_H_

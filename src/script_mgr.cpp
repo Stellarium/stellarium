@@ -98,6 +98,7 @@ void ScriptMgr::cancel_record_script() {
 	 
 
 // runs maximum of one command per update 
+// note that waits can drift by up to 1/fps seconds
 void ScriptMgr::update(int delta_time) {
   if(playing && !play_paused) {
 
@@ -106,6 +107,8 @@ void ScriptMgr::update(int delta_time) {
     if(elapsed_time >= wait_time) {
       // now time to run next command
 
+
+      //      cout << "dt " << delta_time << " et: " << elapsed_time << endl;
       elapsed_time -= wait_time;
       string comd;
       int wait;
