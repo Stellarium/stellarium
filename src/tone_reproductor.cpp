@@ -16,13 +16,6 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-// Class which converts tones in function of the eye adaptation to luminance.
-// The aim is to get on the screen something which is perceptualy accurate,
-// ie. to compress high dynamic range luminance to CRT display range.
-// Partial implementation of the algorithm from the paper :
-// "Tone Reproduction for Realistic Images", Tumblin and Rushmeier,
-// IEEE Computer Graphics & Application, November 1993
-
 #include <math.h>
 #include "tone_reproductor.h"
 

@@ -20,34 +20,13 @@
 #ifndef _STELLARIUM_H_
 #define _STELLARIUM_H_
 
-#if defined ( __MWERKS__ ) || defined( _MSC_VER )
-#   define NATIVE_WIN32_COMPILER 1
-#endif
 
-#if defined( WIN32 ) || \
-	defined ( NATIVE_WIN32_COMPILER )
+#if defined( WIN32 ) || defined ( __MWERKS__ ) || defined( _MSC_VER )
 #  ifndef WIN32
 #     define WIN32
 #  endif
 #  include <windows.h>
-#endif 
-
-#ifdef __MINGW32__
 #endif
-
-#if defined( NATIVE_WIN32_COMPILER )
-#   define HAVE_STRICMP
-#endif
-
-#include <config.h>
-
-#include <math.h>
-#include <stdlib.h>
-#include <stdio.h>
-
-#include <time.h>
-#include <string.h>
-#include <ctype.h> 
 
 #ifdef MACOSX
 # include <OpenGL/gl.h>
@@ -58,19 +37,22 @@
 #endif
 
 
-#include "stella_types.h"
+#include <config.h>
+
+// TODO : remove the useless ones
+#include <math.h>
+#include <stdlib.h>
+#include <stdio.h>
+
+#include <time.h>
+#include <string.h>
+#include <ctype.h>
+
 
 #define APP_NAME "Stellarium v "VERSION
 
 #define AU 149597870.691
 #define myMax(a,b) (((a)>(b))?(a):(b))
-
-// The global structure
-extern stellariumParams global;
-extern stellariumParams globalInit;
-
-#define code_not_reached() \
-    check_assertion( 0, "supposedly unreachable code reached!" )
-
+#define code_not_reached() check_assertion( 0, "supposedly unreachable code reached!" )
 
 #endif /*_STELLARIUM_H_*/
