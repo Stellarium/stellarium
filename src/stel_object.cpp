@@ -162,6 +162,7 @@ stel_object * find_stel_object(int x, int y)
     navigation.switch_to_earth_equatorial();
 	Vec3d v = UnProject(x,y);
 
+	printf("x=%d, y=%d, v(%lf,%lf,%lf)\n",x,y,v[0],v[1],v[2]);
 	return find_stel_object(v);
 }
 
