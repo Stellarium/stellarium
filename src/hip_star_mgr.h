@@ -33,7 +33,7 @@ public:
     virtual ~Hip_Star_mgr();
     int Read(FILE *);						// Used by Load
     void Draw(float star_scale, float twinkle_amount, int name_ON, float maxMagStarName,
-		Vec3f equ_vision, draw_utility * du, tone_reproductor* _eye);	// Draw all the stars
+		Vec3f equ_vision, draw_utility * du, tone_reproductor* _eye, navigator* nav);	// Draw all the stars
     void Save(void);                    	// Debug function
     // Load all the stars from the files
     void Load(char * font_fileName, char * hipCatFile, char * commonNameFile, char * nameFile);

@@ -34,9 +34,10 @@ int stel_object::local_time = 0;
 void stel_object::draw_pointer(int delta_time, draw_utility * du, navigator * nav)
 {
 	local_time+=delta_time;
-	double x,y,z;
 	Vec3d pos=get_earth_equ_pos(nav);
-	du->project(pos[0],pos[1],pos[2],x,y,z);
+	Vec3d screenpos;
+	// Compute 2D pos and return if outside screen
+	if (!nav->project_earth_equ_to_screen(pos, screenpos)) return;
     du->set_orthographic_projection();
 
 	if (get_type()==STEL_OBJECT_NEBULA) glColor3f(0.4f,0.5f,0.8f);
@@ -48,7 +49,7 @@ void stel_object::draw_pointer(int delta_time, draw_utility * du, navigator * na
 		glBindTexture (GL_TEXTURE_2D, pointer_star->getID());
         glEnable(GL_TEXTURE_2D);
         glEnable(GL_BLEND);
-        glTranslatef(x, y, 0.0f);
+        glTranslatef(screenpos[0], screenpos[1], 0.0f);
         glRotatef((float)local_time/20.,0.,0.,1.);
         glBegin(GL_QUADS );
             glTexCoord2f(0.0f,0.0f);    glVertex3f(-13.,-13.,0.);      //Bas Gauche
@@ -71,7 +72,7 @@ void stel_object::draw_pointer(int delta_time, draw_utility * du, navigator * na
 
         glEnable(GL_TEXTURE_2D);
         glEnable(GL_BLEND);
-        glTranslatef(x, y, 0.0f);
+        glTranslatef(screenpos[0], screenpos[1], 0.0f);
         if (get_type()==STEL_OBJECT_PLANET) glRotatef((float)local_time/100,0,0,-1);
 
         glTranslatef(-size/2, -size/2,0.0f);

@@ -268,16 +268,17 @@ void DrawEquator(void)
 
 // Draw the horizon fog
 void DrawFog(float sky_brightness)
-{   
+{
+	glBlendFunc(GL_ONE, GL_ONE);
 	glPushMatrix();
-	glColor4f(0.15f+0.4f*sky_brightness, 0.20f+0.4f*sky_brightness, 0.20f+0.4f*sky_brightness,0.5);
+	glColor3f(0.2f+0.2f*sky_brightness, 0.2f+0.2f*sky_brightness, 0.2f+0.2f*sky_brightness);
 	glEnable(GL_TEXTURE_2D);
 	glEnable(GL_BLEND);
 	glBindTexture(GL_TEXTURE_2D, texIds[3]->getID());
-	glTranslatef(0,0,-0.7);
+	glTranslatef(0,0,-0.8);
 	GLUquadricObj * Horizon=gluNewQuadric();
 	gluQuadricTexture(Horizon,GL_TRUE);
-	gluCylinder(Horizon,10,10,10,8,1);
+	gluCylinder(Horizon,10,10,2.5,16,1);
 	gluDeleteQuadric(Horizon);
 	glPopMatrix();
 }
@@ -311,8 +312,8 @@ void DrawDecor(int nb, float sky_brightness)
 		{   
 			glBegin(GL_QUADS );
 				//Haut Gauche
-				glTexCoord2f((float)nDecoupe/4,1.0f);       
-				glVertex3f(10.0f,delta,1.5f);
+				glTexCoord2f((float)nDecoupe/4,0.5f);
+				glVertex3f(10.0f,delta,0.5f);
 				//Bas Gauche
 				glTexCoord2f((float)nDecoupe/4,0.0f);
 				glVertex3f(10.0f,delta,-0.4f);
@@ -320,8 +321,8 @@ void DrawDecor(int nb, float sky_brightness)
 				glTexCoord2f((float)nDecoupe/4+0.25,0.0f);
 				glVertex3f(10.0f,-delta,-0.4f);
 				//Haut Droit
-				glTexCoord2f((float)nDecoupe/4+0.25,1.0f);
-				glVertex3f(10.0f,-delta,1.5f);
+				glTexCoord2f((float)nDecoupe/4+0.25,0.5f);
+				glVertex3f(10.0f,-delta,0.5f);
 			glEnd ();
 			glRotatef(22.5/nb,0,0,-1);
 		}
@@ -334,18 +335,18 @@ void DrawDecor(int nb, float sky_brightness)
 void DrawGround(float sky_brightness)
 {
 	glPushMatrix();
-	glColor3f(sky_brightness, sky_brightness, sky_brightness);
+	glColor3f(sky_brightness/2, sky_brightness/2, sky_brightness/2);
 	glEnable(GL_TEXTURE_2D);
 	glDisable(GL_BLEND);
 	glBindTexture(GL_TEXTURE_2D, texIds[1]->getID());
 	glBegin (GL_QUADS);
 		glTexCoord2f (0.0f,0.0f);
 		glVertex3f (-10.0f, -10.0f, -0.2f);
-		glTexCoord2f (0.2f, 0.0f);
+		glTexCoord2f (0.8f, 0.0f);
 		glVertex3f(-10.0f, 10.0f, -0.2f);
-		glTexCoord2f (0.2f, 0.2f);
+		glTexCoord2f (0.8f, 0.8f);
 		glVertex3f( 10.0f, 10.0f, -0.2f);
-		glTexCoord2f (0.0f, 0.2f);
+		glTexCoord2f (0.0f, 0.8f);
 		glVertex3f( 10.0f, -10.0f, -0.2f);
 	glEnd ();
 	glPopMatrix();

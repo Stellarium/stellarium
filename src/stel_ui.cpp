@@ -383,7 +383,10 @@ stel_ui::~stel_ui()
 /*******************************************************************/
 void stel_ui::draw(void)
 {
-    core->du->set_orthographic_projection();	// 2D coordinate
+	// Normal transparency mode
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+	core->du->set_orthographic_projection();	// 2D coordinate
 	Component::enableScissor();
 
     glScalef(1, -1, 1);						// invert the y axis, down is positive

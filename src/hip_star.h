@@ -45,11 +45,11 @@ public:
 private:
     unsigned int HP;        // Hipparcos number
     float Mag;              // Apparent magnitude
-    vec3_t XYZ;             // Cartesian position
-    vec3_t RGB;             // 3 RGB colour values
+    Vec3f XYZ;             // Cartesian position
+    Vec3f RGB;             // 3 RGB colour values
     float rmag_t;           // Precalc of star size temporary
     float MaxColorValue;    // Precalc of the max color value
-    double XY[3];           // 2D Position + z homogeneous value
+    Vec3d XY;           // 2D Position + z homogeneous value
     char SpType;            // Spectral type
     char * CommonName;      // Common Name of the star
     char * Name;            // Scientific name

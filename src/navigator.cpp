@@ -111,8 +111,56 @@ void navigator::init_project_matrix(int w, int h, double zNear, double zFar)
 							0., 0., (2.*zFar*zNear)/(zNear - zFar), 0.);
 	glLoadMatrixd(mat_projection);
     glMatrixMode(GL_MODELVIEW);
+
+	// Update the "projection on screen" matrices
+	mat_earth_equ_to_screen = /*mat_projection*/lookAt()*mat_earth_equ_to_local;
+	glGetIntegerv(GL_VIEWPORT,vect_viewport);
 }
 
+bool navigator::project_earth_equ_to_screen(const Vec3f& v, Vec3d& win)
+{
+    gluProject(v[0],v[1],v[2],mat_earth_equ_to_screen,mat_projection,vect_viewport,&win[0],&win[1],&win[2]);
+	return (win[2]<1.);
+//	static Vec4d u;
+//	u[0] = v[0];
+//	u[1] = v[1];
+//	u[2] = v[2];
+//	u[3] = 1.;
+
+	//u.normalize();
+	// Transform with projection and modelview matrices
+//	u = mat_earth_equ_to_screen*u;
+
+	// Convert in screen coordinate
+//	win[0] = (1. + u[0]) * w / 2.;
+//	win[1] = (1. + u[1]) * h / 2.;
+//	win[2] = (1. + u[2]) / 2.;
+}
+
+bool navigator::project_earth_equ_to_screen(const Vec3d& v, Vec3d& win)
+{
+    gluProject(v[0],v[1],v[2],mat_earth_equ_to_screen,mat_projection,vect_viewport,&win[0],&win[1],&win[2]);
+	return (win[2]<1.);
+	/*
+	static Vec4d u;
+	u[0] = v[0];
+	u[1] = v[1];
+	u[2] = v[2];
+	u[3] = 1.;
+
+	// Transform with projection and modelview matrices
+	u = mat_earth_equ_to_screen*u;
+	double u3r = 1./u[3];
+	u[0]*=u3r;
+	u[1]*=u3r;
+	u[2]*=u3r;
+
+	// Convert in screen coordinate
+	win[0] = (1. + u[0]) * vect_viewport[2] / 2.;
+	win[1] = (1. + u[1]) * vect_viewport[3] / 2.;
+	win[2] = (1. + u[2]) / 2.;
+	*/
+}
 
 void navigator::turn_right(int s)
 {
@@ -306,24 +354,18 @@ void navigator::update_transform_matrices(Vec3d earth_ecliptic_pos)
 						Mat4d::translation(-earth_ecliptic_pos);
 
 	Mat4d tmp = Mat4d::xrotation(-23.438855*M_PI/180.) *
-						Mat4d::zrotation((position.longitude+get_mean_sidereal_time(JDay))*M_PI/180.) *
-						Mat4d::yrotation((90.-position.latitude)*M_PI/180.);
+				Mat4d::zrotation((position.longitude+get_mean_sidereal_time(JDay))*M_PI/180.) *
+				Mat4d::yrotation((90.-position.latitude)*M_PI/180.);
 
 	mat_local_to_helio = 	Mat4d::translation(earth_ecliptic_pos) *
-	                    tmp *
-						Mat4d::translation(Vec3d(0.,0., 6378.1/AU+(double)position.altitude/AU/1000));
+							tmp *
+							Mat4d::translation(Vec3d(0.,0., 6378.1/AU+(double)position.altitude/AU/1000));
 
 	mat_helio_to_local = 	Mat4d::translation(Vec3d(0.,0.,-6378.1/AU-(double)position.altitude/AU/1000)) *
-						tmp.transpose() *
-						Mat4d::translation(-earth_ecliptic_pos);
+							tmp.transpose() *
+							Mat4d::translation(-earth_ecliptic_pos);
 }
 
-
-// Place openGL in earth equatorial coordinates
-void navigator::switch_to_earth_equatorial(void)
-{
-	glLoadMatrixd(lookAt()*mat_earth_equ_to_local);
-}
 
 // Home made gluLookAt(0., 0., 0.,local_vision[0],local_vision[1],local_vision[2],0.,0.,1.);
 // to keep a better precision to prevent the shaking bug..
@@ -340,6 +382,12 @@ Mat4d navigator::lookAt(void)
 				s[1],u[1],-f[1],0.,
 				s[2],u[2],-f[2],0.,
 				0.,0.,0.,1.);
+}
+
+// Place openGL in earth equatorial coordinates
+void navigator::switch_to_earth_equatorial(void)
+{
+	glLoadMatrixd(lookAt()*mat_earth_equ_to_local);
 }
 
 // Place openGL in heliocentric coordinates

@@ -3,7 +3,7 @@ dnl Process this file with autoconf to produce a configure script.
 
 AC_INIT(src/main.cpp)
 AM_CONFIG_HEADER(src/config.h)
-AM_INIT_AUTOMAKE(stellarium,0.5.3b)
+AM_INIT_AUTOMAKE(stellarium,0.6.0a)
 
 dnl Check system type
 AC_CANONICAL_HOST
@@ -12,8 +12,8 @@ dnl Check for compilers.
 AC_PROG_CC
 AC_PROG_CXX
 
-CFLAGS="-pg -g -Wall -O2 `sdl-config --cflags`"
-CXXFLAGS="-pg -g -Wall -O2 `sdl-config --cflags`"
+CFLAGS="-Wall -O2 `sdl-config --cflags`"
+CXXFLAGS="-Wall -O2 `sdl-config --cflags`"
 LIBS="$LIBS `sdl-config --libs`"
 
 dnl Checks for programs.
@@ -29,12 +29,6 @@ dnl Check for X11.
 AC_PATH_XTRA
 LIBS="$LIBS $X_LIBS"
 CFLAGS="$CFLAGS $X_CFLAGS"
-
-dnl Check for SDL.
-dnl AM_PATH_SDL
-dnl LIBS="$LIBS $SDL_LIBS"
-dnl CFLAGS="$CFLAGS $SDL_CFLAGS"
-dnl CXXFLAGS="$CXXFLAGS $SDL_CFLAGS"
 
 AC_C_BIGENDIAN
 AC_CHECK_HEADERS(byteswap.h)
