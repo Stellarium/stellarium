@@ -68,9 +68,13 @@ inline void skylight::compute_zenith_luminance(void)
 // Compute CIE x and y color components
 inline void skylight::compute_zenith_color(void)
 {
-	static float thetas2 = thetas * thetas;
-	static float thetas3 = thetas2 * thetas;
-	static float T2 = T * T;
+	static float thetas2;
+	static float thetas3;
+	static float T2;
+
+	thetas2 = thetas * thetas;
+	thetas3 = thetas2 * thetas;
+	T2 = T * T;
 
 	zenith_color_x = (0.00166f*thetas3 - 0.00375f*thetas2 + 0.00209f*thetas) * T2 +
 		(-0.02903f*thetas3 + 0.06377f*thetas2 - 0.03202f*thetas + 0.00394f) * T +

@@ -17,9 +17,6 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-// I'm trying to comment the source but my english isn't perfect, so be 
-//tolerant and please correct all the mistakes you find. ;)
-
 
 #include "stellarium.h"
 #include "draw.h"
@@ -37,6 +34,7 @@
 #include "navigator.h"
 #include "stel_object.h"
 #include "stel_atmosphere.h"
+#include "tone_reproductor.h"
 
 #include "SDL.h"
 
@@ -50,6 +48,7 @@ Constellation_mgr * ConstellCeleste;  // Constellation boundary and name
 Nebula_mgr * messiers;                // Class to manage the messier objects
 s_texture * texIds[200];              // Common Textures
 stel_atmosphere * sky;
+tone_reproductor * eye;
 
 /*ShootingStar * TheShooting = NULL;*/
 
@@ -90,7 +89,7 @@ void Draw(int delta_time)
         {
 	    	timeAtmosphere=0;
             //CalcAtmosphere();
-			sky->compute_color(&navigation);
+			sky->compute_color(&navigation, eye);
         }
     }
 
@@ -393,6 +392,7 @@ bool Initialize(void)	     // Any Application & User Initialization Code Goes He
     messiers->Read(tempName);        // read the messiers object data
 
 	sky=new stel_atmosphere();
+	eye=new tone_reproductor();
 
     initUi();                        // initialisation of the User Interface
     return true;		     // Return TRUE (Initialization Successful)
