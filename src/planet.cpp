@@ -125,13 +125,21 @@ Vec3d planet::get_earth_equ_pos(const navigator * nav) const
 // Actually call the provided function to compute the ecliptical position
 void planet::compute_position(double date)
 {
+
 	if (delta_orbitJD > 0 && fabs(last_orbitJD-date)>delta_orbitJD)
 	{
 
 	  // calculate orbit first (for line drawing)
 	  double date_increment = re.sidereal_period/ORBIT_SEGMENTS;
 	  double calc_date;
-	  int delta_points = (int)(0.5 + (date - last_orbitJD)/date_increment);
+	  //	  int delta_points = (int)(0.5 + (date - last_orbitJD)/date_increment);
+	  int delta_points;
+
+	  if( date > last_orbitJD ) {
+	    delta_points = (int)(0.5 + (date - last_orbitJD)/date_increment);
+	  } else {
+	    delta_points = (int)(-0.5 + (date - last_orbitJD)/date_increment);
+	  }
 	  double new_date = last_orbitJD + delta_points*date_increment;
 
 	  //	  printf( "Updating orbit coordinates for %s (delta %f) (%d points)\n", name.c_str(), delta_orbitJD, delta_points);
@@ -155,7 +163,7 @@ void planet::compute_position(double date)
 
 	    last_orbitJD = new_date;
 
-	  } else if( delta_points < 0 && ORBIT_SEGMENTS < delta_points ) {
+	  } else if( delta_points < 0 && abs(delta_points) < ORBIT_SEGMENTS ) {
 
 	    for( int d=ORBIT_SEGMENTS-1; d>=0; d-- ) {
 	      if(d + delta_points < 0 ) {
@@ -191,9 +199,6 @@ void planet::compute_position(double date)
 	  // calculate actual planet position
 	  coord_func(date, ecliptic_pos);
 
-	  // make orbit aproximating lines look better when zoom
-	  orbit[ORBIT_SEGMENTS/2] = get_heliocentric_ecliptic_pos();
-
 	  lastJD = date;
 
 	} else if (fabs(lastJD-date)>deltaJD) {
@@ -202,7 +207,7 @@ void planet::compute_position(double date)
 	  coord_func(date, ecliptic_pos);
 
 	  // make orbit aproximating lines look better when zoom
-	  orbit[ORBIT_SEGMENTS/2] = get_heliocentric_ecliptic_pos();
+	  //	  orbit[ORBIT_SEGMENTS/2] = get_heliocentric_ecliptic_pos();
 	  lastJD = date;
 	}
 }
@@ -660,14 +665,31 @@ void planet::draw_orbit(const navigator * nav, const Projector* prj) {
       d = n;
     }
 
-    if(prj->project_helio(orbit[d],onscreen)) {
-      if(!on) glBegin(GL_LINE_STRIP);
-      glVertex3d(onscreen[0], onscreen[1], 0);
-      on=1;
-    } else if( on ) {
-      glEnd();
-      on=0;
+    // special case - use current planet position as center vertex so that draws
+    // on it's orbit all the time (since segmented rather than smooth curve)
+    if( n == ORBIT_SEGMENTS/2 ) {
+
+      if(prj->project_helio(get_heliocentric_ecliptic_pos(), onscreen)) {
+	if(!on) glBegin(GL_LINE_STRIP);
+	glVertex3d(onscreen[0], onscreen[1], 0);
+	on=1;
+      } else if( on ) {
+	glEnd();
+	on=0;
+      }
+    } else {
+
+      if(prj->project_helio(orbit[d],onscreen)) {
+	if(!on) glBegin(GL_LINE_STRIP);
+	glVertex3d(onscreen[0], onscreen[1], 0);
+	on=1;
+      } else if( on ) {
+	glEnd();
+	on=0;
+      }
     }
+
+
     
   }
  
