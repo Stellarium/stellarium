@@ -75,14 +75,14 @@ stel_ui::stel_ui(stel_core * _core) :
 void stel_ui::init(void)
 {
     // Load standard font
-    spaceFont = new s_font(15, "spacefont", core->DataDir + "spacefont.txt");
+    spaceFont = new s_font(14.5, "spacefont", core->DataDir + "spacefont.txt");
     if (!spaceFont)
     {
         printf("ERROR WHILE CREATING FONT\n");
         exit(-1);
     }
 
-	courierFont = new s_font(13, "courierfont", core->DataDir + "courierfont.txt");
+	courierFont = new s_font(12.5, "courierfont", core->DataDir + "courierfont.txt");
     if (!courierFont)
     {
         printf("ERROR WHILE CREATING FONT\n");
@@ -90,8 +90,8 @@ void stel_ui::init(void)
     }
 
 	// Create standard texture
-	baseTex = new s_texture("backmenu");
-	flipBaseTex = new s_texture("backmenu_flip");
+	baseTex = new s_texture("backmenu", TEX_LOAD_TYPE_PNG_ALPHA);
+	flipBaseTex = new s_texture("backmenu_flip", TEX_LOAD_TYPE_PNG_ALPHA);
 
 	tex_up = new s_texture("up");
 	tex_down = new s_texture("down");
@@ -106,7 +106,7 @@ void stel_ui::init(void)
 	desktop->reshape(0,0,core->screen_W,core->screen_H);
 
 	bt_flag_help_lbl = new Label("ERROR...");
-	bt_flag_help_lbl->setPos(3,core->screen_H-50);
+	bt_flag_help_lbl->setPos(3,core->screen_H-40);
 	bt_flag_help_lbl->setVisible(0);
 
 	// Info on selected object
@@ -243,19 +243,19 @@ Component* stel_ui::createFlagButtons(void)
 
 	bt_flag_ctr = new FilledContainer();
 	bt_flag_ctr->addComponent(bt_flag_constellation_draw); 	bt_flag_constellation_draw->setPos(0,0);
-	bt_flag_ctr->addComponent(bt_flag_constellation_name);	bt_flag_constellation_name->setPos(32,0);
-	bt_flag_ctr->addComponent(bt_flag_azimuth_grid); 	bt_flag_azimuth_grid->setPos(64,0);
-	bt_flag_ctr->addComponent(bt_flag_equator_grid);	bt_flag_equator_grid->setPos(96,0);
-	bt_flag_ctr->addComponent(bt_flag_ground);			bt_flag_ground->setPos(128,0);
-	bt_flag_ctr->addComponent(bt_flag_cardinals);		bt_flag_cardinals->setPos(160,0);
-	bt_flag_ctr->addComponent(bt_flag_atmosphere);		bt_flag_atmosphere->setPos(192,0);
-	bt_flag_ctr->addComponent(bt_flag_nebula_name);		bt_flag_nebula_name->setPos(224,0);
-	bt_flag_ctr->addComponent(bt_flag_help);			bt_flag_help->setPos(256,0);
-	bt_flag_ctr->addComponent(bt_flag_follow_earth);	bt_flag_follow_earth->setPos(288,0);
-	bt_flag_ctr->addComponent(bt_flag_config);			bt_flag_config->setPos(320,0);
+	bt_flag_ctr->addComponent(bt_flag_constellation_name);	bt_flag_constellation_name->setPos(25,0);
+	bt_flag_ctr->addComponent(bt_flag_azimuth_grid); 	bt_flag_azimuth_grid->setPos(50,0);
+	bt_flag_ctr->addComponent(bt_flag_equator_grid);	bt_flag_equator_grid->setPos(75,0);
+	bt_flag_ctr->addComponent(bt_flag_ground);			bt_flag_ground->setPos(100,0);
+	bt_flag_ctr->addComponent(bt_flag_cardinals);		bt_flag_cardinals->setPos(125,0);
+	bt_flag_ctr->addComponent(bt_flag_atmosphere);		bt_flag_atmosphere->setPos(150,0);
+	bt_flag_ctr->addComponent(bt_flag_nebula_name);		bt_flag_nebula_name->setPos(175,0);
+	bt_flag_ctr->addComponent(bt_flag_help);			bt_flag_help->setPos(200,0);
+	bt_flag_ctr->addComponent(bt_flag_follow_earth);	bt_flag_follow_earth->setPos(225,0);
+	bt_flag_ctr->addComponent(bt_flag_config);			bt_flag_config->setPos(250,0);
 
 	bt_flag_ctr->setOnMouseInOutCallback(callback<void>(this, &stel_ui::bt_flag_ctrOnMouseInOut));
-	bt_flag_ctr->reshape(0, core->screen_H-32, 11*32, 32);
+	bt_flag_ctr->reshape(0, core->screen_H-25, 11*25 -1, 25);
 
 	return bt_flag_ctr;
 

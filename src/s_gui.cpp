@@ -562,7 +562,7 @@ FlagButton::FlagButton(int state, const s_texture* tex, const string& specificTe
 {
 	if (tex) setTexture(tex);
 	if (!specificTexName.empty()) specific_tex = new s_texture(specificTexName);
-	setSize(32,32);
+	setSize(24,24);
 }
 
 FlagButton::~FlagButton()

@@ -141,7 +141,6 @@ private:
 	s_tui::MultiSet_item<string>* tui_time_settmz;
 	s_tui::Time_item* tui_time_skytime;
 	s_tui::Time_item* tui_time_presetskytime;
-	s_tui::Time_item* tui_time_actual;
 	s_tui::MultiSet_item<string>* tui_time_startuptime;
 	s_tui::MultiSet_item<string>* tui_time_displayformat;
 
@@ -156,17 +155,16 @@ private:
 	// 5. Administration
 	s_tui::ActionConfirm_item* tui_admin_loaddefault;
 	s_tui::ActionConfirm_item* tui_admin_savedefault;
-	s_tui::MultiSet_item<string>* tui_admin_setlocal;
+	//s_tui::MultiSet_item<string>* tui_admin_setlocal;
 	s_tui::Action_item* tui_admin_updateme;
 
 	// Tui Callbacks
 	void tui_cb1(void);						// Update all the core flags and params from the tui
 	void tui_cb_settimezone(void);			// Set time zone
-	void tui_cb_actualtime(void);			// Set sky time as current
 	void tui_cb_settimedisplayformat(void);	// Set 12/24h format
 	void tui_cb_admin_load_default(void);	// Load default configuration
 	void tui_cb_admin_save_default(void);	// Save default configuration
-	void tui_cb_admin_set_locale(void);		// Set locale parameter (LANG)
+	/*void tui_cb_admin_set_locale(void);*/		// Set locale parameter (LANG)
 	void tui_cb_admin_updateme(void);		// Launch script for internet update
 	void tui_cb_tui_effect_change_landscape(void);	// Select a new landscape skin
 
