@@ -252,6 +252,10 @@ void stel_core::update(int delta_time)
 	if (selected_object) selected_object->update();
 
 	// Update faders
+	equ_grid->update(delta_time);
+	azi_grid->update(delta_time);
+	equator_line->update(delta_time);
+	ecliptic_line->update(delta_time);
 	asterisms->update(delta_time);
 	atmosphere->update(delta_time);
 	
@@ -344,14 +348,18 @@ void stel_core::draw(int delta_time)
 	}
 
 	// Draw the equatorial grid
-	if (FlagEquatorialGrid) equ_grid->draw(projection);
+	equ_grid->show(FlagEquatorialGrid);
+	equ_grid->draw(projection);
 	// Draw the altazimutal grid
-	if (FlagAzimutalGrid) azi_grid->draw(projection);
+	azi_grid->show(FlagAzimutalGrid);
+	azi_grid->draw(projection);
 
 	// Draw the celestial equator line
-	if (FlagEquatorLine) equator_line->draw(projection);
+	equator_line->show(FlagEquatorLine);
+	equator_line->draw(projection);
 	// Draw the ecliptic line
-	if (FlagEclipticLine) ecliptic_line->draw(projection);
+	ecliptic_line->show(FlagEclipticLine);
+	ecliptic_line->draw(projection);
 
 	// Draw the pointer on the currently selected object
 	if (selected_object) selected_object->draw_pointer(delta_time, projection, navigation);

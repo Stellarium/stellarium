@@ -26,6 +26,7 @@
 #include "projector.h"
 #include "navigator.h"
 #include "tone_reproductor.h"
+#include "fader.h"
 
 enum SKY_GRID_TYPE
 {
@@ -43,6 +44,9 @@ public:
     virtual ~SkyGrid();
 	void draw(const Projector* prj) const;
 	void set_color(const Vec3f& c) {color = c;}
+	void update(int delta_time) {fader.update(delta_time);}
+	void set_fade_duration(float duration) {fader.set_duration((int)(duration*1000.f));}
+	void show(bool b){fader = b;}
 private:
 	unsigned int nb_meridian;
 	unsigned int nb_parallel;
@@ -56,7 +60,7 @@ private:
 	bool (Projector::*proj_func)(const Vec3d&, Vec3d&) const;
 	s_font* font;
 	SKY_GRID_TYPE gtype;
-
+	linear_fader fader;
 };
 
 
@@ -76,12 +80,16 @@ public:
     virtual ~SkyLine();
 	void draw(const Projector* prj) const;
 	void set_color(const Vec3f& c) {color = c;}
+	void update(int delta_time) {fader.update(delta_time);}
+	void set_fade_duration(float duration) {fader.set_duration((int)(duration*1000.f));}
+	void show(bool b){fader = b;}
 private:
 	double radius;
 	unsigned int nb_segment;
 	Vec3f color;
 	Vec3f* points;
 	bool (Projector::*proj_func)(const Vec3d&, Vec3d&) const;
+	linear_fader fader;
 };
 
 // Class which manages the cardinal points displaying
