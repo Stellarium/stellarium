@@ -1,0 +1,110 @@
+0.4.7 [10/05/2002]
+Added the possibility to change the landscape skin.
+Added a new landscape : rocky mountains.
+Added location control in the Configuration Panel.
+Added a time control panel.
+Added landscape control in the Configuration Panel.
+Removed bugs in the windows widget.
+ADDED REALISTIC ATMOSPHERE RENDERING : it's very impressive!!! : Code borrowed on VISLIMIT.CPP by the author of "the guide", who adapted the method from Brad Schaefer's article and code on pages 57-60, May 1998 _Sky & Telescope_,  "To the Visual Limits".
+Fixed orientation of the moon, improved rendering and make it visible during the day.
+Changed the bottom button bar.
+Changed the landscape : the new one is the mountain borrowed from tuxracer and modified.
+Added an automatic ground and landscape brightness.
+
+0.4.6 [25/04/2002]
+Added a real configuration panel for stars with the new ui objects.
+Added the info window viewable with the "I" key.
+Improved the navigation system. You now can track an object : usefull to track a plent in accelered time mode.
+Use fopen fclose etc... in place of the c fstream function which are less portable.
+Completely changed the texture management : now use classes.
+The textures are now in png format : use the glpng library.
+Added the possibility to show the names of the stars.
+Added some gui elements in s_gui.h/.cpp
+Improved the memory management for objects labels (dynamic variables).
+Removed a lot of segmentations faults bugs....
+Added the visualisation of the star's name.
+
+0.4.5 [06/03/2002]
+Added uranus, neptune and pluto (from the code proposed by Nick Porcino).
+Added a function to find the planets easily (from the code proposed by Nick Porcino).
+Re-mapped the keys : the new mapping is more intuitive for english speaking people.
+Fixed minor bugs.
+
+0.4.4 [04/02/2002]
+Added a "Follow earth rotation" function to compensate the rotation of the earth.
+Added a goto function and a "center on selected object" function.
+Fixed the help window problems.
+Added a MilkyWay Flag. Disabling it improves performances in software rendering mode.
+Added a background under the selection infos.
+Added the windows mode support.
+
+0.4.3 [16/01/2002]
+Fixed a lot of minor bugs.
+Compiled the new version with gcc/g++ on win32 and linux.
+Reorganised the project files structure.
+
+0.4.2 [15/01/2002]
+Finished the full reorganisation : almost a weekend of work!
+The program looks like the version 0.3.9 but the sources are infinitely more readable and clear.
+Almost all the variable and file/class names are now in english.
+Created/renamed a lot of new modules (navigation, stellarium_ui, etc...)
+Added a GPL header on every sources files.
+Globaly cleaned the code source.
+Continued the gui.
+Handle the Keyboard on the top of Glut.
+Changed the drawing of the stars : 2D drawing is a lot faster and really only draw the one who are in the field of view. The program is 20% faster!!
+We now can't switch between resolution mode or fullscreen/windowed mode during the execution. This will prevent the program from crashs and hardware dependent bugs. Everything is statically configurable in config.txt. 
+Fixed hundred of minor bugs (and probably added others...).
+I now have written about 4300 lines of real code for this project!
+
+0.4.1 [13/01/2002]
+Started a full reorganisation of the modules.
+Continued the gui. Now use it for every interaction with the user.
+Handle the Mouse on the top of Glut : I'd like the program to be glut independent.
+The program use a file stellarium.h with a lot of macro, commons include ect...
+Encapsuled all the global variables in the struct "global" shared bye every module.
+This version has never worked.
+
+0.4.0.1 [07/01/2002]
+Added a real manager to use a config file. I have found an excellent library made by NINOMIYA <gm@debian.or.jp> called parsecfg.c. I included it with success (minor change for windows porting).
+Continued the gui : added classes like windows and label and a full implementation of callbacks.
+Started to change the structure of the program.
+
+0.4.0 [06/01/2002]
+Started to write my own Graphic User Interface starting from the embryon of the one made by Chris Laurel in "Celestia" because MUI (given with the glut package isn't beautiful enought...). This gui will be independent of stellarium and very re-usable.
+Did an attempt to use a tcl parser to manage a real config file but it was to heavy-> so i changed my mind and stop that... 
+
+0.3.9 [04/01/2002]
+Create my own font manager : faster and more beautiful than before (I used bitmap font before).
+Handle the change of resolution (reduce the menu, the font etc...)
+Added a texture module to manage textures.
+Added some messier objects.
+Added a horizontal line.
+Fixed minor bugs.
+Compile under linux, and windows with gcc.
+
+0.3.8 [03/01/2002]
+Added a config file with date, time and location parameters
+Add a button and a functionality to show where are the nebulaes with a dot.
+Added some messier nebulaes.
+
+0.3.7 [27/12/2001]
+One more day of work : 
+Added SUPER moving pointers for each type of object.
+Planets and moon now have shading who work correctly!! I had a lot of problems with that. But it's OK now...
+Improve planet drawing perfomance.
+Added some messier nebulaes.
+Fixed minor bugs and visuals.
+
+0.3.6 [26/12/2001] : 
+Add a class LesNebuleuses to manage Nebulaes and add some nebulaes -> very beautiful and realistic!
+We can now select with the mouse planets and nebulaes.
+Fixed a texture bug when changing resolution.
+Translate the help in english.
+Fixed minor bugs and visuals.
+
+0.3.4 [17/06/2001] : 
+Fixed the bug for the selection, improve global perfomance, and continue to comment the code.
+
+0.3.3 [Before] : 
+I succed to compile my program in linux and windows with the same sources files ! I decided to share my source code in GPL. My code was yet free but not very "readable" so i will try to comment it in english, and to make a version file (this file) etc... I now have to read docs to produce a "standard GNU code"...

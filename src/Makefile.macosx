@@ -1,0 +1,37 @@
+#
+#  Stellarium0.4.4 Makefile for gcc with Macosx
+#
+
+# Compiler
+CC=cc
+CC2=c++
+
+# Parameters given to the compiler
+CFLAGS=-O3 -fexpensive-optimizations -DMACOSX
+LDFLAGS=-x
+
+# Output filename ()
+OUTPUT="Stellarium"
+
+# Source files
+SRCS="navigation.cpp" "parsecfg.c" "constellation.cpp" "star.cpp" "s_gui.cpp" "s_gui_window.cpp" "constellation_mgr.cpp" "star_mgr.cpp" "nebula_mgr.cpp" "planet_mgr.cpp" "main.cpp" "nebula.cpp" "planet.cpp" "s_font.cpp" "stellarium_ui.cpp" "texture.cpp" "tga.cpp" "s_utility.cpp" "draw.cpp" "astroLib/DateOps.cpp" "astroLib/DateOpsIntl.cpp" "astroLib/Lunar.cpp" "astroLib/MathOps.cpp" "astroLib/PlanetData.cpp" "astroLib/Pluto.cpp" "astroLib/Vsop.cpp" "astroLib/VsopData.cpp" "astroLib/AstroOps.cpp" 
+
+# Output object files (*.o)
+OBJS="navigation.o" "parsecfg.o" "constellation.o" "star.o" "s_gui.o" "s_gui_window.o" "constellation_mgr.o" "star_mgr.o" "nebula_mgr.o" "planet_mgr.o" "main.o" "nebula.o" "planet.o" "s_font.o" "stellarium_ui.o" "texture.o" "tga.o" "s_utility.o" "draw.o" "DateOps.o" "DateOpsIntl.o" "Lunar.o" "MathOps.o" "PlanetData.o" "Pluto.o" "Vsop.o" "VsopData.o" "AstroOps.o" -framework OpenGL -framework GLUT -lobjc
+
+# Standard targets
+
+all:
+	$(CC) -c $(CFLAGS) $(SRCS)
+	$(CC2) -o $(OUTPUT) $(OBJS)
+	mv ./Stellarium ../.
+	echo "Please type cd.. then ./stellarium to execute the program"
+	
+test: all
+	../$(OUTPUT)
+
+clean:
+	rm *.o
+
+mrproper: clean
+
