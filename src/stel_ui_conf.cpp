@@ -213,7 +213,21 @@ Component* stel_ui::createConfigWindow(void)
 	time_current = new Time_item(courierFont, tex_up, tex_down);
 	time_current->setOnChangeTimeCallback(callback<void>(this, &stel_ui::setCurrentTimeFromConfig));
 	tab_time->addComponent(time_current);
-	time_current->setPos(50,y); y+=25;
+	time_current->setPos(50,y); y+=80;
+
+	Label* tzbl = new Label("\1 Time Zone :");
+	tzbl->setPos(x,y); y+=20;
+	tab_time->addComponent(tzbl);
+
+	system_tz_cbx = new LabeledCheckBox(core->observatory->get_tz_format()==S_TZ_SYSTEM_DEFAULT,
+		"Use System Default Time Zone");
+	system_tz_cbx->setOnPressCallback(callback<void>(this, &stel_ui::updateConfigVariables));
+	tab_time->addComponent(system_tz_cbx);
+	system_tz_cbx->setPos(50 ,y); y+=30;
+
+	Time_zone_item* tzselector = new Time_zone_item(core->DataDir + "zone.tab");
+	tzselector->setPos(x,y);
+	tab_time->addComponent(tzselector);
 
 	// Location options
 	FilledContainer* tab_location = new FilledContainer();
@@ -253,7 +267,6 @@ Component* stel_ui::createConfigWindow(void)
 	// Video Options
 	FilledContainer* tab_video = new FilledContainer();
 	tab_video->setSize(config_tab_ctr->getSize());
-
 
 	config_tab_ctr->setTexture(flipBaseTex);
 	config_tab_ctr->addTab(tab_time, "Date & Time");

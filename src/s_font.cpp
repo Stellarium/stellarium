@@ -44,7 +44,7 @@ int s_font::buildDisplayLists(const string& dataFileName, const string& textureN
     int charNum=0;
     int nbChar=0;
 
-    s_fontTexture = new s_texture(textureName);
+    s_fontTexture = new s_texture(textureName, TEX_LOAD_TYPE_PNG_BLEND3);
     if (!s_fontTexture)
     {
 		cout << "ERROR WHILE CREATING FONT TEXTURE " << textureName << endl;

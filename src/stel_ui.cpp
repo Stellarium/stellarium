@@ -110,7 +110,7 @@ void stel_ui::init(void)
 	bt_flag_help_lbl->setVisible(0);
 
 	// Info on selected object
-	info_select_ctr = new FilledContainer();
+	info_select_ctr = new Container();
 	info_select_ctr->reshape(0,15,300,80);
     info_select_txtlbl = new TextLabel("Info");
     info_select_txtlbl->reshape(5,5,290,78);
@@ -415,8 +415,10 @@ stel_ui::~stel_ui()
 /*******************************************************************/
 void stel_ui::draw(void)
 {
-	// Normal transparency mode
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	// Special cool text transparency mode
+	glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
+
+	glEnable(GL_BLEND);
 
 	core->projection->set_2Dfullscreen_projection();	// 2D coordinate
 	Component::enableScissor();
