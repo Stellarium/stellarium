@@ -116,7 +116,9 @@ Meteor::Meteor(Projector *proj, navigator* nav, tone_reproductor* eye, double v)
   // *** color varies somewhat based on velocity, plus atmosphere reddening
 
   // determine intensity
-  float Mag = (double)rand()/((double)RAND_MAX+1)*6.75f - 3;  // meteor visual magnitude
+  float Mag1 = (double)rand()/((double)RAND_MAX+1)*6.75f - 3;
+  float Mag2 = (double)rand()/((double)RAND_MAX+1)*6.75f - 3;
+  float Mag = (Mag1 + Mag2)/2.0f;
 
   mag = (5. + Mag) / 256.0;
   if (mag>250) mag = mag - 256;
