@@ -39,6 +39,7 @@ public:
     virtual ~stel_atmosphere();
 	void compute_color(int ground_ON, Vec3d sunPos, tone_reproductor * eye, draw_utility * du);
 	void draw(draw_utility * du);
+	const float * get_zenith_color(tone_reproductor * eye) const;
 private:
 	skylight sky;
 	int sky_resolution;

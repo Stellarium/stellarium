@@ -134,7 +134,6 @@ void stel_core::init(void)
 	navigation->update_transform_matrices();			// Transform matrices between coordinates systems
 	navigation->set_local_vision(Vec3d(1.,0.,0.3));
 
-
 //tone_converter->set_world_adaptation_luminance(0.01);
 //	float C_5M = -2.5*logf(300.f*300.f*M_PI/4.f)/logf(10.f);
 //	float Luminance = exp(-0.4*log(10.)*(-1.4-C_5M)) * 0.00000254 / ((M_PI/180.f/3600.f) * (M_PI/180.f/3600.f));
@@ -173,15 +172,9 @@ void stel_core::update(int delta_time)
 	Vec3d sunPos = navigation->helio_to_local(&temp);
 	sunPos.normalize();
 
-	// Compute the atmosphere color
-	if (FlagAtmosphere)
-	{
-		navigation->switch_to_local();
-		atmosphere->compute_color(FlagGround, sunPos, tone_converter, du);
-	}
 
 	// compute global sky brightness TODO : function to include in skylight.cpp correctly made
-	sky_brightness=asin(sunPos[2])+0.1;
+	sky_brightness=atmosphere->get_zenith_color(tone_converter)[2];
 	if (sky_brightness<0) sky_brightness=0;
 
 	ui->update();
@@ -221,10 +214,6 @@ void stel_core::draw(int delta_time)
 		hip_stars->Draw(StarScale, StarTwinkleAmount, FlagStarName, MaxMagStarName, temp, du);
 
 
-	// Draw the atmosphere
-	if (FlagAtmosphere)	atmosphere->draw(du);
-
-
 	// Draw the equatorial grid
 	// TODO : make a nice class for grid wit parameters like numbering and custom color/frequency
     if (FlagEquatorialGrid)
@@ -249,6 +238,27 @@ void stel_core::draw(int delta_time)
 
 	// Set openGL drawings in local coordinates i.e. generally altazimuthal coordinates
 	navigation->switch_to_local();
+
+
+//
+	// Compute the sun position in local coordinate
+	Vec3d temp2(0.,0.,0.);
+	Vec3d sunPos = navigation->helio_to_local(&temp2);
+	sunPos.normalize();
+
+	// Init the depth buffer which is used by the planets drawing operations
+	glClear(GL_DEPTH_BUFFER_BIT);
+
+	// Compute the atmosphere color
+	if (FlagAtmosphere)
+	{
+		navigation->switch_to_local();
+		atmosphere->compute_color(FlagGround, sunPos, tone_converter, du);
+	}
+//
+	// Draw the atmosphere
+	if (FlagAtmosphere)	atmosphere->draw(du);
+
 
 	// Draw the altazimutal grid
 	// TODO : make a nice class for grid wit parameters like numbering and custom color/frequency

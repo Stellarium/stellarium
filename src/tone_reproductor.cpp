@@ -16,6 +16,7 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
+#include <stdio.h>
 #include <math.h>
 #include "tone_reproductor.h"
 
@@ -63,11 +64,37 @@ void tone_reproductor::set_world_adaptation_luminance(float _Lwa)
 	term2 = powf(10.f, (beta_wa-beta_da)/alpha_da) / (M_PI*0.0001f);
 }
 
+
 // Convert from xyY color system to RGB according to the adaptation
 // The Y component is in cd/m^2
 void tone_reproductor::xyY_to_RGB(float* color)
 {
-	// Adapt the luminance value and scale it to fit in the RGB range
+	// 1. Hue conversion
+	float log10Y = log10f(color[2]);
+	// if log10Y>0.6, photopic vision only (with the cones, colors are seen)
+	// else scotopic vision if log10Y<-2 (with the rods, no colors, everything blue),
+	// else mesopic vision (with rods and cones, transition state)
+	if (log10Y<0.6)
+	{
+		// Compute s, ratio between scotopic and photopic vision
+		float s = 0.f;
+		if (log10Y > -2.f)
+		{
+			register float op = (log10Y + 2.f)/2.6f;
+			s = 3.f * op * op - 2 * op * op * op;
+		}
+
+		// Do the blue shift for scotopic vision simulation (night vision) [3]
+		// The "night blue" is x,y(0.25, 0.25)
+		color[0] = (1.f - s) * 0.25f + s * color[0];	// Add scotopic + photopic components
+		color[1] = (1.f - s) * 0.25f + s * color[1];	// Add scotopic + photopic components
+
+		// Take into account the scotopic luminance approximated by V [3] [4]
+		float V = color[2] * (1.33f * (1.f + color[1] / color[0] + color[0] * (1.f - color[0] - color[1])) - 1.68f);
+		color[2] = 0.4468f * (1.f - s) * V + s * color[2];
+	}
+
+	// 2. Adapt the luminance value and scale it to fit in the RGB range [2]
 	color[2] = powf(adapt_luminance(color[2]) / MaxdL,1.f/gamma);
 
 	// Convert from xyY to XZY
@@ -79,6 +106,5 @@ void tone_reproductor::xyY_to_RGB(float* color)
 	color[0] = 2.04148f  *X - 0.564977f*Y - 0.344713f *Z;
 	color[1] =-0.969258f *X + 1.87599f *Y + 0.0415557f*Z;
 	color[2] = 0.0134455f*X - 0.118373f*Y + 1.01527f  *Z;
-
 }
 

@@ -106,6 +106,17 @@ void navigator::init_project_matrix(int w, int h, double nearclip, double farcli
 {
 	glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
+
+    // calculate dimensions for screen based on aspect ratio to
+    // get a perfect sky circle (1000 is sky circle diameter)
+    //double halfscreen = 25. * (double)w / h;
+
+    //glOrtho(-1*halfscreen, halfscreen, -25, 25, 0.1, 50);
+
+	// Make North be up
+	//
+	//glRotatef(90,0,0,1);
+
 	gluPerspective(fov, (double)w/h, nearclip, farclip);
     glMatrixMode(GL_MODELVIEW);
 }

@@ -38,8 +38,8 @@ Hip_Star::Hip_Star() :
 
 Hip_Star::~Hip_Star()
 {   
-	if(Name) delete Name;
-	if(CommonName) delete CommonName;
+	if (Name) delete Name;
+	if (CommonName) delete CommonName;
 }
 
 void Hip_Star::get_info_string(char * s) const
