@@ -705,13 +705,10 @@ Grid::~Grid()
 	Points = NULL;
 }
 
-int Grid::GetNearest(Vec3f v)
+int Grid::GetNearest(Vec3f& v)
 {
-    static int bestI;
-    static float bestDot;
-
-	bestI = -1;
-	bestDot = -2.;
+	int bestI = -1;
+	float bestDot = -2.f;
 
 	v.normalize();
     for(int i=0;i<NbPoints;++i)
@@ -747,7 +744,7 @@ int Grid::Intersect(Vec3f pos, float fieldAngle, int * &result)
 		if(pos.dot(Points[i]) > max)
 		{
 			result[nbResult]=i;
-			nbResult++;
+			++nbResult;
 		}
 	}
 	return nbResult;

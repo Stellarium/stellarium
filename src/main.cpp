@@ -23,8 +23,6 @@
 
 #include "SDL.h"
 
-#include "mmgr.h"
-
 #include "stellarium.h"
 #include "stel_core.h"
 #include "stel_sdl.h"

@@ -28,7 +28,7 @@ class Grid
 public:
     Grid();
     virtual ~Grid();
-    int GetNearest(Vec3f);
+    int GetNearest(Vec3f&);
 	void Draw(void);
 	int Intersect(Vec3f pos, float fieldAngle, int * &result);
 	int getNbPoints(void) const {return NbPoints;}

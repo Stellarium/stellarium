@@ -43,9 +43,9 @@ public:
 	// This funtion has to be called once before any call to get_*_value()
     void set_params(float sun_zenith_angle, float turbidity);
 	// Compute the sky color at the given position in the xyY color system and store it in position.color
-	void get_xyY_value(skylight_struct * position);
+	inline void get_xyY_value(skylight_struct * position);
 	// Return the current zenith color
-	void get_zenith_color(float * v) const;
+	inline void get_zenith_color(float * v) const;
 
 	// Same functions but in vector mode : faster because prevents extra cosine calculations
 	// The position vectors MUST be normalized, and the vertical z component is the third one

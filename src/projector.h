@@ -99,57 +99,57 @@ public:
 	// according to the current modelview and projection matrices (reimplementation of gluProject)
 	// Return true if the z screen coordinate is < 1, ie if it isn't behind the observer
 	// except for the _check version which return true if the projected point is inside the screen
-	bool project_earth_equ(const Vec3d& v, Vec3d& win) const
+	inline bool project_earth_equ(const Vec3d& v, Vec3d& win) const
 		{return project_custom(v, win, mat_earth_equ_to_eye);}
 
-	bool project_earth_equ_check(const Vec3d& v, Vec3d& win) const
+	inline bool project_earth_equ_check(const Vec3d& v, Vec3d& win) const
 		{return project_custom_check(v, win, mat_earth_equ_to_eye);}
 
-	bool project_earth_equ_line_check(const Vec3d& v1, Vec3d& win1, const Vec3d& v2, Vec3d& win2) const
+	inline bool project_earth_equ_line_check(const Vec3d& v1, Vec3d& win1, const Vec3d& v2, Vec3d& win2) const
 		{return project_custom_line_check(v1, win1, v2, win2, mat_earth_equ_to_eye);}
 
-	void unproject_earth_equ(double x, double y, Vec3d& v) const
+	inline void unproject_earth_equ(double x, double y, Vec3d& v) const
 		{unproject(x, y, inv_mat_earth_equ_to_eye, v);}
 
 	// taking account of precession
-	bool project_prec_earth_equ(const Vec3d& v, Vec3d& win) const
+	inline bool project_prec_earth_equ(const Vec3d& v, Vec3d& win) const
 		{return project_custom(v, win, mat_prec_earth_equ_to_eye);}
 
-	bool project_prec_earth_equ_check(const Vec3d& v, Vec3d& win) const
+	inline bool project_prec_earth_equ_check(const Vec3d& v, Vec3d& win) const
 		{return project_custom_check(v, win, mat_prec_earth_equ_to_eye);}
 
-	bool project_prec_earth_equ_line_check(const Vec3d& v1, Vec3d& win1, const Vec3d& v2, Vec3d& win2) const
+	inline bool project_prec_earth_equ_line_check(const Vec3d& v1, Vec3d& win1, const Vec3d& v2, Vec3d& win2) const
 		{return project_custom_line_check(v1, win1, v2, win2, mat_prec_earth_equ_to_eye);}
 
 	// Same function with input vector v in heliocentric coordinate
-	bool project_helio_check(const Vec3d& v, Vec3d& win) const
+	inline bool project_helio_check(const Vec3d& v, Vec3d& win) const
 		{return project_custom_check(v, win, mat_helio_to_eye);}
 
-	bool project_helio(const Vec3d& v, Vec3d& win) const
+	inline bool project_helio(const Vec3d& v, Vec3d& win) const
 		{return project_custom(v, win, mat_helio_to_eye);}
 
-	bool project_helio_line_check(const Vec3d& v1, Vec3d& win1, const Vec3d& v2, Vec3d& win2) const
+	inline bool project_helio_line_check(const Vec3d& v1, Vec3d& win1, const Vec3d& v2, Vec3d& win2) const
 		{return project_custom_line_check(v1, win1, v2, win2, mat_helio_to_eye);}
 
-	void unproject_helio(double x, double y, Vec3d& v) const
+	inline void unproject_helio(double x, double y, Vec3d& v) const
 		{return unproject(x, y, inv_mat_helio_to_eye, v);}
 
 	// Same function with input vector v in local coordinate
-	bool project_local(const Vec3d& v, Vec3d& win) const
+	inline bool project_local(const Vec3d& v, Vec3d& win) const
 		{return project_custom(v, win, mat_local_to_eye);}
 
-	bool project_local_check(const Vec3d& v, Vec3d& win) const
+	inline bool project_local_check(const Vec3d& v, Vec3d& win) const
 		{return project_custom_check(v, win, mat_local_to_eye);}
 
-	void unproject_local(double x, double y, Vec3d& v) const
+	inline void unproject_local(double x, double y, Vec3d& v) const
 		{unproject(x, y, inv_mat_local_to_eye, v);}
 
 	// Same function but using a custom modelview matrix
 	virtual bool project_custom(const Vec3d& v, Vec3d& win, const Mat4d& mat) const;
-	virtual bool project_custom_check(const Vec3f& v, Vec3d& win, const Mat4d& mat) const
+	virtual inline bool project_custom_check(const Vec3f& v, Vec3d& win, const Mat4d& mat) const
 		{return (project_custom(v, win, mat) && check_in_viewport(win));}
 	// project two points and make sure both are in front of viewer and that at least one is on screen
-	virtual bool project_custom_line_check(const Vec3f& v1, Vec3d& win1, 
+	virtual inline bool project_custom_line_check(const Vec3f& v1, Vec3d& win1, 
 					       const Vec3f& v2, Vec3d& win2, const Mat4d& mat) const
 		{return project_custom(v1, win1, mat) && project_custom(v2, win2, mat) && 
 		   (check_in_viewport(win1) || check_in_viewport(win2));}
@@ -238,7 +238,7 @@ protected:
 
 	// transformation from screen 2D point x,y to object
 	// m is here the already inverted full tranfo matrix
-	virtual void unproject(double x, double y, const Mat4d& m, Vec3d& v) const
+	virtual inline void unproject(double x, double y, const Mat4d& m, Vec3d& v) const
 	{
 		v.set(	(x - vec_viewport[0]) * 2. / vec_viewport[2] - 1.0,
 				(y - vec_viewport[1]) * 2. / vec_viewport[3] - 1.0,
