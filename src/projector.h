@@ -64,32 +64,50 @@ public:
 	// according to the current modelview and projection matrices (reimplementation of gluProject)
 	// Return true if the z screen coordinate is < 1, ie if it isn't behind the observer
 	// except for the _check version which return true if the projected point is inside the screen
-	bool project_earth_equ(const Vec3d& v, Vec3d& win) const;
-	bool project_earth_equ(const Vec3f& v, Vec3d& win) const;
-	bool project_earth_equ_check(const Vec3f& v, Vec3d& win) const;
-	bool unproject_earth_equ(double x, double y, Vec3d& v) const;
+	bool project_earth_equ(const Vec3d& v, Vec3d& win) const
+		{return project_custom(v, win, mat_earth_equ_to_eye);}
+
+	bool project_earth_equ(const Vec3f& v, Vec3d& win) const
+		{return project_custom(v, win, mat_earth_equ_to_eye);}
+
+	bool project_earth_equ_check(const Vec3f& v, Vec3d& win) const
+		{return project_custom_check(v, win, mat_earth_equ_to_eye);}
+
+	void unproject_earth_equ(double x, double y, Vec3d& v) const
+		{unproject(x, y, inv_mat_earth_equ_to_eye, v);}
+
 
 	// Same function with input vector v in heliocentric coordinate
-	bool project_helio(const Vec3f& v, Vec3d& win) const;
-	bool project_helio_check(const Vec3f& v, Vec3d& win) const;
-	bool unproject_helio(double x, double y, Vec3d& v) const;
+	bool project_helio(const Vec3f& v, Vec3d& win) const
+		{return project_custom(v, win, mat_helio_to_eye);}
+
+	bool project_helio_check(const Vec3f& v, Vec3d& win) const
+		{return project_custom_check(v, win, mat_helio_to_eye);}
+
+	void unproject_helio(double x, double y, Vec3d& v) const
+		{return unproject(x, y, inv_mat_helio_to_eye, v);}
+
 
 	// Same function with input vector v in local coordinate
-	bool project_local(const Vec3f& v, Vec3d& win) const;
-	bool project_local(const Vec3d& v, Vec3d& win) const;
-	bool project_local_check(const Vec3f& v, Vec3d& win) const;
-	bool unproject_local(double x, double y, Vec3d& v) const;
+	bool project_local(const Vec3f& v, Vec3d& win) const
+		{return project_custom(v, win, mat_local_to_eye);}
+
+	bool project_local(const Vec3d& v, Vec3d& win) const
+		{return project_custom(v, win, mat_local_to_eye);}
+
+	bool project_local_check(const Vec3f& v, Vec3d& win) const
+		{return project_custom_check(v, win, mat_local_to_eye);}
+
+	void unproject_local(double x, double y, Vec3d& v) const
+		{unproject(x, y, inv_mat_local_to_eye, v);}
+
 
 	// Same function but using a custom modelview matrix
 	bool project_custom(const Vec3f& v, Vec3d& win, const Mat4d& mat) const;
 	bool project_custom(const Vec3d& v, Vec3d& win, const Mat4d& mat) const;
 	bool project_custom_check(const Vec3f& v, Vec3d& win, const Mat4d& mat) const;
-	bool unproject_custom(double x, double y, Vec3d& v, const Mat4d& mat) const;
+	void unproject_custom(double x, double y, Vec3d& v, const Mat4d& mat) const;
 
-	// Same function but using the currently openGL modelview matrix
-	// This function replaces the gluProject() function
-	bool project_current(const Vec3f& v, Vec3d& win);
-	bool unproject_current(double x ,double y, Vec3d& v);
 
 	// Set the drawing mode in 2D. Use reset_perspective_projection() to restore previous projection mode
 	void set_orthographic_projection(void) const;
@@ -102,10 +120,6 @@ private:
 	// The function is a reimplementation of gluPerspective
 	void init_project_matrix(void);
 
-	// transformation from screen 2D point x,y to object
-	// m is here the already inverted full tranfo matrix
-	bool unproject(double x, double y, const Mat4d m, Vec3d& out) const;
-
 	int screenW, screenH;
 	double fov;					// Field of view
 	float ratio;				// Screen ratio = screenW/screenH
@@ -116,10 +130,20 @@ private:
 	Mat4d mat_earth_equ_to_eye;	// Modelview Matrix for earth equatorial projection
 	Mat4d mat_helio_to_eye;		// Modelview Matrix for earth equatorial projection
 	Mat4d mat_local_to_eye;		// Modelview Matrix for earth equatorial projection
-	Mat4d inv_mat_local_to_eye; // Inverse of mat_projection*mat_local_to_eye
+	Mat4d inv_mat_earth_equ_to_eye;	// Inverse of mat_projection*mat_earth_equ_to_eye
+	Mat4d inv_mat_helio_to_eye;		// Inverse of mat_projection*mat_helio_to_eye
+	Mat4d inv_mat_local_to_eye;		// Inverse of mat_projection*mat_local_to_eye
 
-	// Used to store temporary openGL modelview matrices
-    GLdouble M[16];
+	// transformation from screen 2D point x,y to object
+	// m is here the already inverted full tranfo matrix
+	void unproject(double x, double y, const Mat4d& m, Vec3d& v) const
+	{
+		v.set(	(x - vec_viewport[0]) * 2. / vec_viewport[2] - 1.0,
+				(y - vec_viewport[1]) * 2. / vec_viewport[3] - 1.0,
+				1.0);
+		v.transfo4d(m);
+	}
+
 };
 
 

@@ -44,10 +44,10 @@ public:
     void compute_trans_matrices(double date);
 
 	// Draw all the elements of the solar system
-    void draw(int hint_ON, Projector * du, navigator * nav);
+    void draw(int hint_ON, Projector * du, const navigator * nav);
 
 	// Search if any planet is close to position given in earth equatorial position.
-	planet* search(Vec3d, navigator * nav);
+	planet* search(Vec3d, const navigator * nav);
 
 	planet* get_earth(void) {return earth;}
 

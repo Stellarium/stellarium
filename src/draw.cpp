@@ -17,16 +17,9 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-/* 18/03/2002
- * Thanks to Sylvain Ferey who sends me optimisation code for the 
- * drawing of the grids.
- */
-
 #include "draw.h"
 #include "s_texture.h"
 #include "stel_utility.h"
-#include "solarsystem.h"
-#include "stellastro.h"
 
 extern s_texture * texIds[200];            // Common Textures
 

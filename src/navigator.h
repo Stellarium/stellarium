@@ -73,22 +73,6 @@ public:
 	void update_transform_matrices(Vec3d earth_ecliptic_pos);
 	void update_vision_vector(int delta_time, stel_object* selected);
 
-	// Place openGL in earth equatorial coordinates
-	void switch_to_earth_equatorial(void);
-	// Place openGL in heliocentric ecliptical coordinates
-	void switch_to_heliocentric(void);
-	// Place openGL in local viewer coordinates (Usually somewhere on earth viewing in a specific direction)
-	void switch_to_local(void);
-
-	Vec3d local_to_earth_equ(const Vec3d&);	// Transform vector from local coordinate to equatorial
-	Vec3d earth_equ_to_local(const Vec3d&);	// Transform vector from equatorial coordinate to local
-	Vec3d helio_to_local(const Vec3d&);		// Transform vector from heliocentric coordinate to local
-	Vec3d helio_to_earth_equ(const Vec3d&);	// Transform vector from heliocentric coordinate to earth equatorial
-
-	// Transform vector from heliocentric coordinate to false equatorial : equatorial
-	// coordinate but centered on the observer position (usefull for objects close to earth)
-	Vec3d helio_to_earth_pos_equ(const Vec3d&);
-
 	// Home made gluLookAt(0., 0., 0.,local_vision[0],local_vision[1],local_vision[2],0.,0.,1.);
 	// to keep a better precision to prevent the shaking bug..
 	void update_local_to_eye(void);
@@ -126,6 +110,34 @@ public:
 
 	// Return the observer heliocentric position
 	Vec3d get_observer_helio_pos(void) const;
+
+
+	// Place openGL in earth equatorial coordinates
+	void switch_to_earth_equatorial(void) { glLoadMatrixd(mat_earth_equ_to_eye); }
+
+	// Place openGL in heliocentric ecliptical coordinates
+	void switch_to_heliocentric(void) { glLoadMatrixd(mat_helio_to_eye); }
+
+	// Place openGL in local viewer coordinates (Usually somewhere on earth viewing in a specific direction)
+	void switch_to_local(void) { glLoadMatrixd(mat_local_to_eye); }
+
+
+	// Transform vector from local coordinate to equatorial
+	Vec3d local_to_earth_equ(const Vec3d& v) const { return mat_local_to_earth_equ*v; }
+
+	// Transform vector from equatorial coordinate to local
+	Vec3d earth_equ_to_local(const Vec3d& v) const { return mat_earth_equ_to_local*v; }
+
+	// Transform vector from heliocentric coordinate to local
+	Vec3d helio_to_local(const Vec3d& v) const { return mat_helio_to_local*v; }
+
+	// Transform vector from heliocentric coordinate to earth equatorial
+	Vec3d helio_to_earth_equ(const Vec3d& v) const { return mat_helio_to_earth_equ*v; }
+
+	// Transform vector from heliocentric coordinate to false equatorial : equatorial
+	// coordinate but centered on the observer position (usefull for objects close to earth)
+	Vec3d helio_to_earth_pos_equ(const Vec3d& v) const { return mat_local_to_earth_equ*mat_helio_to_local*v; }
+
 
 	// Return the modelview matrix for some coordinate systems
 	const Mat4d& get_helio_to_eye_mat(void) const {return mat_helio_to_eye;}

@@ -24,6 +24,7 @@
 #include "stellastro.h"
 #include "solarsystem.h"
 
+////////////////////////////////////////////////////////////////////////////////
 observator_pos::observator_pos() : planet(3), longitude(0.), latitude(0.), time_zone(0), altitude(0)
 {
 	name = strdup("Anonymous_Location");
@@ -57,7 +58,7 @@ void observator_pos::load(FILE * f)
     latitude=get_dec_angle(tempLatitude);
 }
 
-
+////////////////////////////////////////////////////////////////////////////////
 navigator::navigator() : flag_traking(0), flag_lock_equ_pos(0), flag_auto_move(0),
 						time_speed(JD_SECOND), JDay(0.)
 {
@@ -69,6 +70,7 @@ navigator::~navigator()
 {
 }
 
+////////////////////////////////////////////////////////////////////////////////
 // Load the position info in the file name given
 void navigator::load_position(const char * fileName)
 {
@@ -85,6 +87,7 @@ void navigator::load_position(const char * fileName)
 	fclose(f);
 }
 
+////////////////////////////////////////////////////////////////////////////////
 // Save the position info in the file name given
 void navigator::save_position(const char * fileName)
 {
@@ -99,7 +102,7 @@ void navigator::save_position(const char * fileName)
 	fclose(f);
 }
 
-
+////////////////////////////////////////////////////////////////////////////////
 void navigator::update_vision_vector(int delta_time, stel_object* selected)
 {
     if (flag_auto_move)
@@ -141,14 +144,14 @@ void navigator::update_vision_vector(int delta_time, stel_object* selected)
 	}
 }
 
-
+////////////////////////////////////////////////////////////////////////////////
 void navigator::set_local_vision(const Vec3d& _pos)
 {
 	local_vision = _pos;
 	equ_vision=local_to_earth_equ(local_vision);
 }
 
-
+////////////////////////////////////////////////////////////////////////////////
 void navigator::update_move(double deltaAz, double deltaAlt)
 {
 	double azVision, altVision;
@@ -177,14 +180,14 @@ void navigator::update_move(double deltaAz, double deltaAlt)
 
 }
 
-// *********************************************************************
+////////////////////////////////////////////////////////////////////////////////
 // Increment time
 void navigator::update_time(int delta_time)
 {
 	JDay+=time_speed*(double)delta_time/1000.;
 }
 
-
+////////////////////////////////////////////////////////////////////////////////
 // The non optimized (more clear version is available on the CVS : before date 25/07/2003)
 void navigator::update_transform_matrices(Vec3d earth_ecliptic_pos)
 {
@@ -211,7 +214,7 @@ void navigator::update_transform_matrices(Vec3d earth_ecliptic_pos)
 
 }
 
-
+////////////////////////////////////////////////////////////////////////////////
 // Home made gluLookAt(0., 0., 0.,local_vision[0],local_vision[1],local_vision[2],0.,0.,1.);
 // to keep a better precision to prevent the shaking bug..
 void navigator::update_local_to_eye(void)
@@ -229,25 +232,7 @@ void navigator::update_local_to_eye(void)
 				0.,0.,0.,1.);
 }
 
-// Place openGL in earth equatorial coordinates
-void navigator::switch_to_earth_equatorial(void)
-{
-	glLoadMatrixd(mat_earth_equ_to_eye);
-}
-
-// Place openGL in heliocentric coordinates
-void navigator::switch_to_heliocentric(void)
-{
-	glLoadMatrixd(mat_helio_to_eye);
-}
-
-
-// Place openGL in local viewer coordinates (Usually somewhere on earth viewing in a specific direction)
-void navigator::switch_to_local(void)
-{
-	glLoadMatrixd(mat_local_to_eye);
-}
-
+////////////////////////////////////////////////////////////////////////////////
 // Return the observer heliocentric position
 Vec3d navigator::get_observer_helio_pos(void) const
 {
@@ -255,37 +240,7 @@ Vec3d navigator::get_observer_helio_pos(void) const
 	return mat_local_to_helio*v;
 }
 
-// Transform vector from local coordinate to equatorial
-Vec3d navigator::local_to_earth_equ(const Vec3d& v)
-{
-	return mat_local_to_earth_equ*v;
-}
-
-// Transform vector from equatorial coordinate to local
-Vec3d navigator::earth_equ_to_local(const Vec3d& v)
-{
-	return mat_earth_equ_to_local*v;
-}
-
-// Transform vector from heliocentric coordinate to local
-Vec3d navigator::helio_to_local(const Vec3d& v)
-{
-	return mat_helio_to_local*v;
-}
-
-// Transform vector from heliocentric coordinate to local
-Vec3d navigator::helio_to_earth_equ(const Vec3d& v)
-{
-	return mat_helio_to_earth_equ*v;
-}
-
-// Transform vector from heliocentric coordinate to false equatorial :
-// i.e. equatorial coordinate but centered on the observer position
-Vec3d navigator::helio_to_earth_pos_equ(const Vec3d& v)
-{
-	return mat_local_to_earth_equ*mat_helio_to_local*v;
-}
-
+////////////////////////////////////////////////////////////////////////////////
 // Move to the given equatorial position
 void navigator::move_to(const Vec3d& _aim)
 {

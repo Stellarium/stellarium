@@ -73,7 +73,7 @@ public:
     virtual ~planet();
 
 	// Return the information string "ready to print" :)
-	void get_info_string(char * s, navigator * nav) const;
+	void get_info_string(char * s, const navigator * nav) const;
 
 	// Compute the position in the parent planet coordinate system
 	void compute_position(double date);
@@ -85,10 +85,10 @@ public:
 	double get_phase(Vec3d obs_pos);
 
 	// Get the magnitude for an observer at pos obs_pos in the heliocentric coordinate (in AU)
-	float compute_magnitude(Vec3d obs_pos);
+	float compute_magnitude(const Vec3d obs_pos);
 
 	// Draw the planet, if hint_ON is != 0 draw a circle and the name as well
-    void draw(int hint_ON, Projector* prj, navigator * nav);
+    void draw(int hint_ON, Projector* prj, const navigator * nav);
 
 	// Add the given planet in the satellite list
 	void add_satellite(planet*);
@@ -113,12 +113,12 @@ public:
 	unsigned char get_type(void) const {return STEL_OBJECT_PLANET;}
 
 	// Return the planet position in rectangular earth equatorial coordinate
-	Vec3d get_earth_equ_pos(navigator * nav) const;
+	Vec3d get_earth_equ_pos(const navigator * nav) const;
 
 	const char* get_name(void) const {return name;}
 
 	// Return the radius of a circle containing the object on screen
-	float get_on_screen_size(navigator * nav, Projector* prj);
+	float get_on_screen_size(const navigator * nav, const Projector* prj);
 
 	void set_rings(ring* r) {rings = r;}
 
@@ -132,10 +132,10 @@ protected:
 	void draw_sphere(void);
 
 	// Draw the small star like 2D halo
-	void draw_halo(navigator* nav, Projector* prj);
+	void draw_halo(const navigator* nav, const Projector* prj);
 
 	// Draw the circle and name of the planet
-	void draw_hints(navigator* nav, Projector* prj);
+	void draw_hints(const navigator* nav, const Projector* prj);
 
     char * name;
 	int flagHalo;					// Set wether a little "star like" halo will be drawn

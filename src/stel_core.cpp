@@ -218,7 +218,7 @@ void stel_core::draw(int delta_time)
 	else DrawMilkyWay(tone_converter);
 
 	// Init the depth buffer which is used by the planets drawing operations
-	//glClear(GL_DEPTH_BUFFER_BIT);
+	glClear(GL_DEPTH_BUFFER_BIT);
 
 	// Draw all the constellations
 	if (FlagAsterismDrawing) asterisms->draw(projection);
@@ -250,6 +250,7 @@ void stel_core::draw(int delta_time)
 	// Draw the pointer on the currently selected object
     if (selected_object) selected_object->draw_pointer(delta_time, projection, navigation);
 
+	navigation->switch_to_heliocentric();
 	// Draw the planets
 	if (FlagPlanets) ssystem->draw(FlagPlanetsHints, projection, navigation);
 
