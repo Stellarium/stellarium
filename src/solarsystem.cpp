@@ -275,6 +275,8 @@ void SolarSystem::draw(int hint_ON, Projector * prj, const navigator * nav, cons
         if (*iter!=earth) (*iter)->draw(hint_ON, prj, nav, eye, flag_point);
         ++iter;
     }
+
+	glDisable(GL_LIGHT0);
 }
 
 

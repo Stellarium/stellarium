@@ -43,11 +43,11 @@ void Fisheye_projector::set_viewport(int x, int y, int w, int h)
 // The function is a reimplementation of glOrtho
 void Fisheye_projector::init_project_matrix(void)
 {
-	double f = 1./tan(60.*M_PI/360.);
-	mat_projection2 = Mat4d(f*ratio, 0., 0., 0.,
-							0., f, 0., 0.,
-							0., 0., (zFar + zNear)/(zNear - zFar), -1.,
-							0., 0., (2.*zFar*zNear)/(zNear - zFar), 0.);
+	//double f = 1./tan(60.*M_PI/360.);
+	mat_projection2 = Mat4d(2., 0., 0., 0.,
+							0., 2., 0., 0.,
+							0., 0., -1, 0.,
+							0., 0., 0., 1.);
 	glMatrixMode(GL_PROJECTION);
 	glLoadMatrixd(mat_projection2);
     glMatrixMode(GL_MODELVIEW);
@@ -68,7 +68,7 @@ bool Fisheye_projector::project_custom(const Vec3d& v, Vec3d& win, const Mat4d& 
 
 	win = v;
 	win.transfo4d(mat);
-	z = win[2];//.length();// * -2/(zFar-zNear) + (zFar+zNear)/(zFar-zNear);
+	z = (win.length() - zNear) / (zFar-zNear);
 	win.normalize();
 	win.transfo4d(mat_projection);
 	a = fabs(M_PI_2 - asin(win[2]));
@@ -126,7 +126,7 @@ void Fisheye_projector::sVertex3(double x, double y, double z, const Mat4d& mat)
 
 	//printf("%f %f %f\n", win[0], win[1], win[2]);
 	// Can be optimized by avoiding matrix inversion if it's always the same
-	gluUnProject(win[0],win[1],0.5,mat,mat_projection2,vec_viewport,&v[0],&v[1],&v[2]);
+	gluUnProject(win[0],win[1],win[2],mat,mat_projection2,vec_viewport,&v[0],&v[1],&v[2]);
 	//v.normalize();
 	//v*=win[2];
 	glVertex3dv(v);
@@ -136,6 +136,18 @@ void Fisheye_projector::sSphere(GLdouble radius, GLint slices, GLint stacks, con
 {
 	glPushMatrix();
 	glLoadMatrixd(mat);
+
+	static Vec4f lightPos4;
+	static Vec3f lightPos3;
+	static GLboolean isLightOn;
+	static Vec3f transNorm;
+	static float c;
+
+	glGetBooleanv(GL_LIGHT0, &isLightOn);
+	glGetLightfv(GL_LIGHT0, GL_POSITION, lightPos4);
+	lightPos3 = lightPos4;
+	lightPos3.normalize();
+	glDisable(GL_LIGHTING);
 
 	static GLfloat rho, drho, theta, dtheta;
 	static GLfloat x, y, z;
@@ -172,14 +184,28 @@ void Fisheye_projector::sSphere(GLdouble radius, GLint slices, GLint stacks, con
 			z = nsign * cos(rho);
 			glNormal3f(x * nsign, y * nsign, z * nsign);
 			glTexCoord2f(s, t);
+			if (isLightOn)
+			{
+				transNorm = mat*Vec3f(x * nsign, y * nsign, z * nsign);
+				transNorm.normalize();
+				c = MY_MAX(lightPos3.dot(transNorm),0);
+				glColor3f(c, c, c);
+			}
 			sVertex3(x * radius, y * radius, z * radius, mat);
 			x = -sin(theta) * sin(rho + drho);
 			y = cos(theta) * sin(rho + drho);
 			z = nsign * cos(rho + drho);
 			glNormal3f(x * nsign, y * nsign, z * nsign);
 			glTexCoord2f(s, t - dt);
-			s += ds;
+			if (isLightOn)
+			{
+				transNorm = mat*Vec3f(x * nsign, y * nsign, z * nsign);
+				transNorm.normalize();
+				c = MY_MAX(lightPos3.dot(transNorm),0);
+				glColor3f(c, c, c);
+			}
 			sVertex3(x * radius, y * radius, z * radius, mat);
+			s += ds;
 		}
 		glEnd();
 		t -= dt;
