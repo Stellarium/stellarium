@@ -1,0 +1,297 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2002-2-1 (1.70)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Stellarium Programming guide rev 0.1</TITLE>
+<META NAME="description" CONTENT="Stellarium Programming guide rev 0.1">
+<META NAME="keywords" CONTENT="developer_guide">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META NAME="Generator" CONTENT="LaTeX2HTML v2002-2-1">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="developer_guide.css">
+
+</HEAD>
+
+<BODY >
+
+<P>
+<H1 ALIGN="CENTER"><B>Stellarium Programming guide</B> 
+<BR>
+rev 0.1</H1>
+<DIV>
+
+<P ALIGN="CENTER"><STRONG>Fabien Ch&#233;reau</STRONG></P>
+</DIV>
+
+<P>
+
+<H3>Abstract:</H3>
+<DIV>
+This document is aimed at giving a global vision on the organization of the program source code.
+</DIV>
+<P>
+
+<P>
+
+<H1><A NAME="SECTION00010000000000000000">
+Introduction</A>
+</H1>
+Stellarium is almost totally designed in an object oriented way. Its source code is thus quite easy to understand and is well subdivided.
+The interface with the OS is done using the SDL library which has proven to be powerfull, truly multiplateform and fast.
+Project managment is done using sourceforge.net services for cvs hosting, bug tracking, forums etc.. Globally, everything usefull for the project is available at the main project page <A NAME="tex2html1"
+  HREF="http://sourceforge.net/projects/stellarium/">http://sourceforge.net/projects/stellarium/</A>.
+
+<P>
+
+<H1><A NAME="SECTION00020000000000000000">
+I want to contribute in developing stellarium. How to start?</A>
+</H1>
+First of all, as stellarium is mainly programmed in C++ you will need some knowledge in object oriented programming.
+You will then need to use the GNU development tools and utilities that are required for working on free projects.
+
+<P>
+Stellarium source code is stored on sourceforge.net server using cvs (concurent version system). This enable everybody to download the last changes in the sources. The cvs version of stellarium is usually on development and might not work at all.
+
+<P>
+Here are the first steps to start working on the sourcecode : (see detailed instructions from <A NAME="tex2html2"
+  HREF="http://sourceforge.net/cvs/?group_id=48857">sourceforge cvs page</A>)
+In the stellarium cvs repository, there is only one module called "stellarium"
+containing all the project files. So, to get the files as anonymous developer, just type (as explained) :
+
+<P>
+<TT>cvs -d:pserver:anonymous@cvs.sourceforge.net:/cvsroot/stellarium login</TT>
+
+<P>
+and type <TT>enter</TT> when a password is required.
+
+<P>
+<TT>cvs -z3 -d:pserver:anonymous@cvs.sourceforge.net:/cvsroot/stellarium co stellarium</TT>
+
+<P>
+(co = checkout)
+And normally all the project files should be downloaded in a new <TT>stellarium/</TT> directory.
+In this directory you will find the script <TT>autogen.sh</TT> that you need to execute in
+order to run the automake/autoconf things.
+After that you can launch the <TT>./configure</TT> script which will analyze your system.
+If everything goes fine, the command <TT>make</TT> should then compile all the sourcecode.
+
+<P>
+You can now try to launch the local version by typing <TT>./src/stellarium</TT>
+
+<P>
+Here you are!
+
+<P>
+You can now have a look at the <TT>src/</TT> directory where you will find the source files described below.
+Edit whatever you want in it and when your new great feature is done you will need to share it with the community of stellarium developers.
+
+<P>
+At this point, an official developer just have to type <TT>cvs commit</TT> to update the repository version. But as you are not an official developer (yet!) you will need to create a patch file which will contain all the changes you did on the source code.
+
+<P>
+<TT>cd directory-you-want-to-diff</TT>
+
+<P>
+<TT>cvs -z3 diff -u &gt; mypatch.diff</TT>
+
+<P>
+You can now submit mypatch.diff on the sourceforge stellarium page in the <A NAME="tex2html3"
+  HREF="http://sourceforge.net/tracker/?group_id=48857&amp;atid=454375">patches section</A>
+with a clear comment on what is the patch doing.
+
+<P>
+The project administrator will then have a look at it and decide whether the patch is accepted or rejected for integration into stellarium.
+
+<P>
+
+<H1><A NAME="SECTION00030000000000000000">
+Main files description</A>
+</H1>
+All the files starting with a s_ are "theoricaly" independent of the main program. They manage textures, font and user interface and could be re-used for any other openGL application.
+
+<P>
+<DL>
+<DT><STRONG>stel_sdl.h/cpp :</STRONG></DT>
+<DD>Class handling sdl functions. It contains the main loop intercepting all the system events and send them to the core.
+	
+</DD>
+<DT><STRONG>stel_core.h/cpp :</STRONG></DT>
+<DD>Main stellarium class. It manages all the main components of the program and stores all the attributes of the program.
+The 3 main functions of the program are methods of his class. They are :
+	<DL>
+<DT><STRONG>init() :</STRONG></DT>
+<DD>Initialize the core of the program : creates all the main objects and initialize them.
+		
+</DD>
+<DT><STRONG>update() :</STRONG></DT>
+<DD>Update all the objects : time, viewing, planet positions, moves, user interface etc..
+		
+</DD>
+<DT><STRONG>draw() :</STRONG></DT>
+<DD>Draw everything on the openGL buffer.
+	
+</DD>
+</DL>
+update() and draw() are called in the main loop at each iteration.
+The stel_core class manages all the configuration file reading and saving.
+
+<P>
+</DD>
+<DT><STRONG>navigator.h/cpp :</STRONG></DT>
+<DD>Manage all the astronomical navigational functions. Used for frames conversions.
+
+<P>
+</DD>
+<DT><STRONG>observator.h/cpp :</STRONG></DT>
+<DD>Manage all the information relative to an observator (position, locales etc..)
+
+<P>
+</DD>
+<DT><STRONG>projector.h/cpp and fisheye_projector.h/cpp :</STRONG></DT>
+<DD>One of the class i'm proud of :). Manage various kind of projections : perspective, fisheye.
+
+<P>
+</DD>
+<DT><STRONG>init_parser.h/cpp :</STRONG></DT>
+<DD>Wrapper c++ class for the c library initparser.
+
+<P>
+</DD>
+<DT><STRONG>stel_object.h/cpp :</STRONG></DT>
+<DD>Abstract mother class for all astronomical objects stars, planets and nebula.
+
+<P>
+</DD>
+<DT><STRONG>hip_star.h/cpp and hip_star_mgr.h/cpp :</STRONG></DT>
+<DD>Manage stars from the hipparcos catalog and stars collections respectively.
+
+<P>
+</DD>
+<DT><STRONG>grid.h/cpp :</STRONG></DT>
+<DD>Used for optimization with grid structure while displaying the hipparcos star catalog.
+
+<P>
+</DD>
+<DT><STRONG>planet.h/cpp and solarsystem.h/cpp :</STRONG></DT>
+<DD>Manage any body which has a defined position inside the solar system.
+
+<P>
+</DD>
+<DT><STRONG>nebula.h/cpp and nebula_mgr.h/cpp :</STRONG></DT>
+<DD>Manage nebula and nebula collection repectively.
+
+<P>
+</DD>
+<DT><STRONG>constellation.h/cpp and constellation_mgr.h/cpp :</STRONG></DT>
+<DD>Manage constellations and collection of constellations respectively.
+
+<P>
+</DD>
+<DT><STRONG>landscape.h/cpp :</STRONG></DT>
+<DD>Manage landscapes.
+
+<P>
+</DD>
+<DT><STRONG>stel_atmosphere.h/cpp :</STRONG></DT>
+<DD>Manage atmosphere rendering. Uses the classes sky_bright and sky_light to compute sky color and brightness and display it.
+
+<P>
+</DD>
+<DT><STRONG>tone_reproductor.h/cpp :</STRONG></DT>
+<DD>The class which simulate the eye adaptation to luminance.
+
+<P>
+</DD>
+<DT><STRONG>draw.h/cpp :</STRONG></DT>
+<DD>Groups some classes used to draw various objects of the program : milky way, grids, astronomical lines, cardinal points.
+
+<P>
+</DD>
+<DT><STRONG>stel_ui.h/cpp :</STRONG></DT>
+<DD>manage the user interface for stellarium using s_gui/s_tui widgets.
+
+<P>
+</DD>
+<DT><STRONG>s_gui.h/cpp :</STRONG></DT>
+<DD>All the Graphical User Interface (gui) classes. Used in the desktop version only.
+
+<P>
+</DD>
+<DT><STRONG>s_tui.h/cpp :</STRONG></DT>
+<DD>All the Text User Interface (tui) classes. Used in planetarium version only.
+
+<P>
+</DD>
+<DT><STRONG>s_font.h/cpp :</STRONG></DT>
+<DD>Manage fonts. The font in stellarium are not bitmap but taken from a real grey level texture.
+
+<P>
+</DD>
+<DT><STRONG>s_texture.h/cpp :</STRONG></DT>
+<DD>Class which manages textures. Currently uses glpng library to handle png files.
+
+<P>
+</DD>
+<DT><STRONG>callback.h/cpp :</STRONG></DT>
+<DD>Handfull class made by the boost library team used to handle callbacks. It's used for the widgets.
+</DD>
+</DL>
+
+<P>
+
+<H1><A NAME="SECTION00040000000000000000">
+External libraries (directories in src/)</A>
+</H1>
+<DL>
+<DT><STRONG>glpng :</STRONG></DT>
+<DD>create openGL textures from .png files. Written in C and used thru the s_texture class.
+	
+</DD>
+<DT><STRONG>iniparser :</STRONG></DT>
+<DD>config files parsing. Used thru the wrapper class init_parser.
+	
+</DD>
+<DT><STRONG>stellastro :</STRONG></DT>
+<DD>miscelaneous astronomical functions.
+	
+</DD>
+<DT><STRONG>stellplanet :</STRONG></DT>
+<DD>compute heliocentric positions of solar system planets.
+</DD>
+</DL>
+<H1><A NAME="SECTION00050000000000000000">
+About this document ...</A>
+</H1>
+ <STRONG><B>Stellarium Programming guide</B> 
+<BR>
+rev 0.1</STRONG><P>
+This document was generated using the
+<A HREF="http://www.latex2html.org/"><STRONG>LaTeX</STRONG>2<tt>HTML</tt></A> translator Version 2002-2-1 (1.70)
+<P>
+Copyright &#169; 1993, 1994, 1995, 1996,
+<A HREF="http://cbl.leeds.ac.uk/nikos/personal.html">Nikos Drakos</A>, 
+Computer Based Learning Unit, University of Leeds.
+<BR>
+Copyright &#169; 1997, 1998, 1999,
+<A HREF="http://www.maths.mq.edu.au/~ross/">Ross Moore</A>, 
+Mathematics Department, Macquarie University, Sydney.
+<P>
+The command line arguments were: <BR>
+ <STRONG>latex2html</STRONG> <TT>-split 0 -nonavigation developer_guide.tex</TT>
+<P>
+The translation was initiated by fabien on 2003-11-28
+<BR><HR>
+<ADDRESS>
+fabien
+2003-11-28
+</ADDRESS>
+</BODY>
+</HTML>
