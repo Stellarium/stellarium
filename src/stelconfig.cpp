@@ -131,7 +131,7 @@ void setDirectories(void)
 	// if not, try to create it.
     strcpy(tempName,homeDir);
     strcat(tempName,"/.stellarium/config.txt");
-	if (tempFile = fopen(tempName,"r"))
+	if ((tempFile = fopen(tempName,"r")))
 	{
 		strcpy(global.ConfigDir,homeDir);
 		strcat(global.ConfigDir,"/.stellarium/");
@@ -140,7 +140,7 @@ void setDirectories(void)
 	else
 	{
 		printf("Will create config files in %s/.stellarium/\n",homeDir);
-		if (tempFile = fopen(tempName,"w"))
+		if ((tempFile = fopen(tempName,"w")))
 		{
 			strcpy(global.ConfigDir,homeDir);
 			strcat(global.ConfigDir,"/.stellarium/");
@@ -155,7 +155,7 @@ void setDirectories(void)
 			strcat(tempName2,"/.stellarium/");
 			system(tempName2);
 			
-			if (tempFile = fopen(tempName,"w"))
+			if ((tempFile = fopen(tempName,"w")))
 			{
 				strcpy(global.ConfigDir,homeDir);
 				strcat(global.ConfigDir,"/.stellarium/");
