@@ -4,4 +4,6 @@ libglpng_a_SOURCES = adler32.c infcodes.c inftrees.c pngconf.h pngrio.c zlib.h c
 
 libglpng_a_LIBADD = adler32.o infcodes.o inftrees.o pngrio.o crc32.o pngerror.o pngrtran.o zutil.o glpng.o inffast.o infutil.o pngget.o pngrutil.o pngmem.o pngset.o infblock.o png.o pngpread.o pngtrans.o inflate.o pngread.o
 
+CFLAGS = -O3 -Wall
 CXXFLAGS = -O3
+
