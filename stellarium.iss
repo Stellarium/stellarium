@@ -18,7 +18,7 @@ Source: "README"; DestDir: "{app}"; Flags: isreadme; DestName: "README.txt"
 Source: "TODO"; DestDir: "{app}"; DestName: "TODO.txt"
 Source: "GPL"; DestDir: "{app}"; DestName: "GPL.txt"
 Source: "AUTHORS"; DestDir: "{app}"; DestName: "AUTHORS.txt"
-Source: "ChangeLog"; DestDir: "{app}"; DestName: "ChangeLog.txt"
+Source: "ChangeLog"; DestDir: "{app}";
 Source: "SDL.dll"; DestDir: "{app}";
 Source: "cygwin1.dll"; DestDir: "{app}";
 Source: "data\*"; DestDir: "{app}\data"
