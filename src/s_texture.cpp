@@ -58,7 +58,11 @@ int s_texture::load()
     string fullName = texDir + textureName + suffix;
 
     FILE * tempFile = fopen(fullName.c_str(),"r");
-    if (!tempFile) cout << "WARNING : Can't find texture file " << fullName << "!" << endl;
+    if (!tempFile)
+	{
+		cout << "WARNING : Can't find texture file " << fullName << "!" << endl;
+		return 0;
+	}
 	fclose(tempFile);
 
     pngInfo info;
