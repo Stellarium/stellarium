@@ -37,6 +37,7 @@ public:
     virtual ~Hip_Star();
     int read(FILE * pFile);	// Read the star data in the stream
     void draw(void);		// Draw the star
+	void draw_point(void);	// Draw the star as a point
     void draw_name(const s_font * star_font);
 	virtual Vec3f get_RGB(void) const {return RGB;}
 	virtual void get_info_string(char * s, const navigator * nav = NULL) const;

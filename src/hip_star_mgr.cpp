@@ -158,7 +158,7 @@ void Hip_Star_mgr::load(const string& font_fileName, const string& hipCatFile,
 	    printf("Can't create starFont\n");
         exit(-1);
     }
-    
+
 }
 
 
@@ -198,7 +198,7 @@ void Hip_Star_mgr::draw(float _star_scale, float _star_mag_scale, float _twinkle
     	{
 			// If too small, skip and Compute the 2D position and check if in screen
 			if ((*iter)->Mag>maxMag || !prj->project_earth_equ_check((*iter)->XYZ, (*iter)->XY)) continue;
-			(*iter)->draw();
+			(*iter)->draw_point();
 			if (name_ON && (*iter)->CommonName && (*iter)->Mag<maxMagStarName)
             {
 		       	(*iter)->draw_name(starFont);
