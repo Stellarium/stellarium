@@ -173,7 +173,7 @@ void Hip_Star_mgr::Draw(void)
 	// convert.... TODO implicit convertion
 	Vec3d tempv = navigation.get_equ_vision();
 	vec3_t temp(tempv[0],tempv[1],tempv[2]);
-	//vec3_t temp(1,0,0);
+
 	nbZones = HipGrid.Intersect(temp, navigation.get_fov()*M_PI/180.*1.4, zoneList);
 
 	//printf("nbzones = %d\n",nbZones );
@@ -183,8 +183,11 @@ void Hip_Star_mgr::Draw(void)
 	{
     	p = Liste.equal_range(zoneList[i]);
     	for(multimap<int,Hip_Star *>::iterator iter = p.first; iter != p.second; iter++)
-    	{   
+    	{
+			// If too small, skip
 			if ((*iter).second->Mag>6+60./navigation.get_fov()) continue;
+
+			// Compute the 2D position
 	    	gluProject( ((*iter).second)->XYZ[0],((*iter).second)->XYZ[1],
 		        ((*iter).second)->XYZ[2],M,P,V,&(((*iter).second)->XY[0]),
 	        	&(((*iter).second)->XY[1]),&z);

@@ -251,8 +251,8 @@ void Update(Uint32 delta_time)
 
     // Update the position of observation and time etc...
 	navigation.update_time(delta_time);
-	Sun->compute_position(navigation.get_JDay());
-	Sun->compute_trans_matrix(navigation.get_JDay());
+	Sun->compute_position(navigation.get_JDay());    // Position of sun and all the satellites (ie planets)
+	Sun->compute_trans_matrix(navigation.get_JDay());// Matrix for sun and all the satellites (ie planets)
 	navigation.update_transform_matrices();
 	navigation.update_vision_vector(delta_time);
 
