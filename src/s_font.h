@@ -47,17 +47,17 @@ typedef struct
 class s_font
 {
 public:
-    s_font(float size_i, const char * textureName, const char * dataFileName);
+    s_font(float size_i, const string& textureName, const string& dataFileName);
     virtual ~s_font();
-    void print(float x, float y, const char * str, int upsidedown = 1) const;
+    void print(float x, float y, const string& str, int upsidedown = 1) const;
 	void print_char(const char c) const;
-    float getStrLen(const char * str) const;
+    float getStrLen(const string&) const;
     float getAverageCharLen(void) const {return averageCharLen*ratio;}
     float getLineHeight(void) const {return lineHeight*ratio;}
-    float getStrHeight(const char * str) const;
+    float getStrHeight(const string&) const;
     s_texture * s_fontTexture;
 protected:
-    int buildDisplayLists(const char * dataFileName, const char * textureName);
+    int buildDisplayLists(const string& dataFileName, const string& textureName);
     GLuint g_base;
     s_fontGlyphInfo theSize[256];
     float size;

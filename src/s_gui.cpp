@@ -1,8 +1,6 @@
 /*
 * Stellarium
 * Copyright (C) 2002 Fabien Chéreau
-* Inspired by the gui.h by Chris Laurel <claurel@shatters.net>
-* in his Open Source Software Celestia
 *
 * This program is free software; you can redistribute it and/or
 * modify it under the terms of the GNU General Public License
@@ -19,7 +17,8 @@
 * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 
-//#include <stdio.h>
+#include <iostream>
+#include <sstream>
 
 #include "s_gui.h"
 
@@ -238,7 +237,7 @@ void Painter::drawCross(const s_vec2i& pos, const s_vec2i& sz) const
 }
 
 // Print the text with the default font and default text color
-void Painter::print(int x, int y, const char * str) const
+void Painter::print(int x, int y, const string& str) const
 {
     glColor4fv(textColor);
     glEnable(GL_TEXTURE_2D);
@@ -514,7 +513,7 @@ int CheckBox::onClic(int x, int y, S_GUI_VALUE bt, S_GUI_VALUE state)
 }
 
 
-LabeledCheckBox::LabeledCheckBox(int state, const char* label) : Container(), checkbx(NULL), lbl(NULL)
+LabeledCheckBox::LabeledCheckBox(int state, const string& label) : Container(), checkbx(NULL), lbl(NULL)
 {
 	checkbx = new CheckBox(state);
 	addComponent(checkbx);
@@ -525,10 +524,10 @@ LabeledCheckBox::LabeledCheckBox(int state, const char* label) : Container(), ch
 		checkbx->getSizey()>lbl->getSizey() ? checkbx->getSizey() : lbl->getSizey());
 }
 
-FlagButton::FlagButton(int state, const s_texture* tex, const char* specificTexName) : CheckBox(state)
+FlagButton::FlagButton(int state, const s_texture* tex, const string& specificTexName) : CheckBox(state)
 {
 	if (tex) setTexture(tex);
-	if (specificTexName) specific_tex = new s_texture(specificTexName);
+	if (!specificTexName.empty()) specific_tex = new s_texture(specificTexName);
 	setSize(32,32);
 }
 
@@ -558,7 +557,7 @@ void FlagButton::draw()
 // Text label
 ////////////////////////////////////////////////////////////////////////////////
 
-Label::Label(const char * _label, const s_font * _font) : label(NULL)
+Label::Label(const string& _label, const s_font * _font)
 {
 	setLabel(_label);
 	if (_font) painter.setFont(_font);
@@ -567,15 +566,11 @@ Label::Label(const char * _label, const s_font * _font) : label(NULL)
 
 Label::~Label()
 {
-	if (label) free(label);
-	label = NULL;
 }
 
-void Label::setLabel(const char* _label)
+void Label::setLabel(const string& _label)
 {
-    if (label) free(label);
-    label = NULL;
-    if (_label) label = strdup(_label);
+    label = _label;
 }
 
 void Label::draw()
@@ -601,16 +596,13 @@ void Label::adjustSize(void)
 // Button with text on it
 ////////////////////////////////////////////////////////////////////////////////
 
-LabeledButton::LabeledButton(const char * _label, const s_font* font) : Button(), label(NULL)
+LabeledButton::LabeledButton(const string& _label, const s_font* font) : Button(), label(_label, font)
 {
-	label = new Label(_label, font);
-	setSize(label->getSize()+s_vec2i(4,2));
+	setSize(label.getSize()+s_vec2i(4,2));
 }
 
 LabeledButton::~LabeledButton()
 {
-	if (label) delete label;
-	label = NULL;
 }
 
 void LabeledButton::draw(void)
@@ -620,8 +612,8 @@ void LabeledButton::draw(void)
     glPushMatrix();
     glTranslatef(pos[0], pos[1], 0.f);
     Component::scissor->push(pos, size);
-	label->setPos((size-label->getSize())/2);
-	label->draw();
+	label.setPos((size-label.getSize())/2);
+	label.draw();
     Component::scissor->pop();
 	glPopMatrix();
 }
@@ -631,7 +623,7 @@ void LabeledButton::draw(void)
 // A text bloc
 ////////////////////////////////////////////////////////////////////////////////
 
-TextLabel::TextLabel(const char * _label, const s_font* _font) : Container(), label(NULL)
+TextLabel::TextLabel(const string& _label, const s_font* _font) : Container()
 {
 	if (_font) painter.setFont(_font);
 	setLabel(_label);
@@ -640,32 +632,28 @@ TextLabel::TextLabel(const char * _label, const s_font* _font) : Container(), la
 
 TextLabel::~TextLabel()
 {
-    if (label) delete label;
-	label=NULL;
 }
 
-void TextLabel::setLabel(const char * _label)
+void TextLabel::setLabel(const string& _label)
 {
-    if (label) free(label);
-    label = NULL;
-    if (_label) label = strdup(_label);
-
+    label = _label;
     childs.clear();
 
     Label * tempLabel;
-    char * pch;
+    string pch;
+
     int i = 0;
 	int lineHeight = (int)painter.getFont()->getLineHeight()+1;
-    pch = strtok (label, "\n");
-    while (pch != NULL)
+
+	istringstream is(label);
+    while (getline(is, pch))
     {
         tempLabel = new Label(pch);
 		tempLabel->setPainter(painter);
         tempLabel->setPos(0,i*lineHeight);
 		tempLabel->adjustSize();
         addComponent(tempLabel);
-        pch = strtok (NULL, "\n");
-        i++;
+        ++i;
     }
 }
 
@@ -838,7 +826,7 @@ void StdBtWin::onHideBt(void)
 // Everything to handle tabs
 ////////////////////////////////////////////////////////////////////////////////
 
-TabHeader::TabHeader(Component* c, const char* _label, const s_font* _font) :
+TabHeader::TabHeader(Component* c, const string& _label, const s_font* _font) :
 	LabeledButton(_label, _font), assoc(c)
 {
 }
@@ -858,8 +846,8 @@ void TabHeader::draw(void)
     glPushMatrix();
     glTranslatef(pos[0], pos[1], 0.f);
     Component::scissor->push(pos, size);
-	label->setPos((size-label->getSize())/2 + s_vec2i(1,0));
-	label->draw();
+	label.setPos((size-label.getSize())/2 + s_vec2i(1,0));
+	label.draw();
     Component::scissor->pop();
 	glPopMatrix();
 }
@@ -877,7 +865,7 @@ TabContainer::TabContainer(const s_font* _font) : Container(), headerHeight(20)
 
 }
 
-void TabContainer::addTab(Component* c, const char* name)
+void TabContainer::addTab(Component* c, const string& name)
 {
 	Container* tempInside = new Container();
 	tempInside->reshape(pos[0], pos[1]+headerHeight, size[0], size[1]-headerHeight);
@@ -996,7 +984,6 @@ int CursorBar::onClic(int x, int y, S_GUI_VALUE bt, S_GUI_VALUE state)
 	if (visible && isIn(x,y) && state==S_GUI_PRESSED)
 	{
 		if (cursor.isIn(x-pos[0],y-pos[1])) dragging = 1;
-		//oldPos = cursor.getPos();
 		return 1;
 	}
 	return 0;

@@ -26,8 +26,9 @@
 # include <config.h>
 #endif
 
-#include "SDL.h" // Just for the key codes, i'm lasy to redefine them
-		 // This is TODO to make the s_ library independent
+// SDL is used only for the key codes, i'm lasy to redefine them
+// This is TODO to make the s_ library independent
+#include "SDL.h"
 
 #include <list>
 #include <string>
@@ -50,9 +51,14 @@ namespace s_tui
 		S_TUI_RELEASED
 	};
 
-	static const string start_active("\127");
-	static const string stop_active("\126");
+	// Caracters '\22' and '\21' correspond to the "change to color" blue and green special
+	// stelarium ascii code, thus inserting them in a string will result in color change for the
+	// next char until another color is set
+	static const string start_active("\22");
+	static const string stop_active("\21");
 
+	// Base class. Note that the method bool isEditable(void) has to be overrided by returning true
+	// for all the non passives components.
     class Component
     {
     public:
@@ -68,6 +74,7 @@ namespace s_tui
 		bool active;
     };
 
+	// Store a callback on a function taking no parameters
     class CallbackComponent : public Component
     {
     public:
@@ -76,6 +83,7 @@ namespace s_tui
 		callback<void> onChangeCallback;
 	};
 
+	// Manage lists of components
     class Container : public CallbackComponent
     {
     public:
@@ -87,6 +95,7 @@ namespace s_tui
         list<Component*> childs;
     };
 
+	// Component which manages 2 states
 	class Bistate : public CallbackComponent
     {
     public:
@@ -100,6 +109,19 @@ namespace s_tui
 		bool state;
     };
 
+	// Component which manages integer value
+	class Integer : public CallbackComponent
+    {
+    public:
+		Integer(int init_value = 0) : CallbackComponent(), value(init_value) {;}
+		virtual string getString(void);
+		int getValue(void) const {return value;}
+		void setValue(int v) {value = v;}
+    protected:
+		int value;
+    };
+
+	// Boolean item widget. The callback function is called when the state is changed
 	class Boolean_item : public Bistate
     {
     public:
@@ -113,17 +135,7 @@ namespace s_tui
 		string label;
     };
 
-	class Integer : public CallbackComponent
-    {
-    public:
-		Integer(int init_value = 0) : CallbackComponent(), value(init_value) {;}
-		virtual string getString(void);
-		int getValue(void) const {return value;}
-		void setValue(int v) {value = v;}
-    protected:
-		int value;
-    };
-
+	// Component which manages decimal (double) value
 	class Decimal : public CallbackComponent
     {
     public:
@@ -135,6 +147,7 @@ namespace s_tui
 		double value;
     };
 
+	// Integer item widget. The callback function is called when the value is changed
 	class Integer_item : public Integer
     {
     public:
@@ -148,6 +161,7 @@ namespace s_tui
 		string label;
     };
 
+	// Decimal item widget. The callback function is called when the value is changed
 	class Decimal_item : public Decimal
     {
     public:
@@ -161,16 +175,19 @@ namespace s_tui
 		string label;
     };
 
-    class Label : public Component
+	// Passive widget which only display text
+    class Label_item : public Component
     {
     public:
-        Label(const string& _label) : Component(), label(_label) {;}
+        Label_item(const string& _label) : Component(), label(_label) {;}
 		virtual string getString(void) {return label;}
 		void setLabel(const string& s) {label=s;}
     protected:
         string label;
     };
 
+	// Manage list of components with one of them activated. Can navigate thru the components list
+	// with the arrow keys
     class Branch : public Container
     {
     public:
@@ -182,6 +199,8 @@ namespace s_tui
         list<Component*>::iterator current;
     };
 
+	// Base widget used for tree construction. Can navigate thru the components list with the arrow keys.
+	// Activate the currently edited widget.
     class MenuBranch : public Branch
     {
     public:
@@ -194,6 +213,7 @@ namespace s_tui
 		bool isEditing;
     };
 
+	// Widget used to set time and date. The internal format is the julian day notation
     class Time_item : public CallbackComponent
     {
     public:
@@ -212,6 +232,34 @@ namespace s_tui
 		string label;
 		int ymdhms[5];
 		double second;
+    };
+
+	// Widget which simply launch the callback when the user press enter
+	class Action_item : public CallbackComponent
+    {
+    public:
+		Action_item(const string& _label = "", const string& sp = "Enter/Escape") :
+			CallbackComponent(), label(_label), string_prompt(sp) {;}
+		virtual bool onKey(SDLKey, S_TUI_VALUE);
+		virtual string getString(void);
+		virtual bool isEditable(void) const {return true;}
+    protected:
+		string label;
+		string string_prompt;
+    };
+
+	// Same as before but ask for a confirmation
+	class ActionConfirm_item : public Action_item
+    {
+    public:
+		ActionConfirm_item(const string& _label = "", const string& sp = "Enter/Escape",
+			const string& sc = "Are you sure? (Enter/Escape)") :
+				Action_item(_label, sp), isConfirming(false), string_confirm(sc) {;}
+		virtual bool onKey(SDLKey, S_TUI_VALUE);
+		virtual string getString(void);
+    protected:
+		bool isConfirming;
+		string string_confirm;
     };
 
 }; // namespace s_tui

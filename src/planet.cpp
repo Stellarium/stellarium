@@ -252,12 +252,13 @@ void planet::draw(int hint_ON, Projector* prj, const navigator * nav, const tone
 			draw_hints(nav, prj);
         }
 
-		if (rings)
+		if (rings && screen_sz>1)
 		{
 			double dist = get_earth_equ_pos(nav).length();
 			double n,f;
 			prj->get_clipping_planes(&n, &f);	// Copy clipping planes
 			prj->set_clipping_planes(dist-rings->get_size(), dist+rings->get_size());
+			glClear(GL_DEPTH_BUFFER_BIT);
 			glEnable(GL_DEPTH_TEST);
 			draw_sphere(prj, mat, screen_sz);
 			rings->draw(prj, mat);
