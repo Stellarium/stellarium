@@ -241,6 +241,10 @@ Component* stel_ui::createFlagButtons(void)
 	bt_flag_config->setOnPressCallback(callback<void>(this, &stel_ui::cb));
 	bt_flag_config->setOnMouseInOutCallback(callback<void>(this, &stel_ui::cbr));
 
+	bt_flag_quit = new FlagButton(true, NULL, "bt_quit");
+	bt_flag_quit->setOnPressCallback(callback<void>(this, &stel_ui::cb));
+	bt_flag_quit->setOnMouseInOutCallback(callback<void>(this, &stel_ui::cbr));
+
 	bt_flag_ctr = new FilledContainer();
 	bt_flag_ctr->addComponent(bt_flag_constellation_draw); 	bt_flag_constellation_draw->setPos(0,0);
 	bt_flag_ctr->addComponent(bt_flag_constellation_name);	bt_flag_constellation_name->setPos(25,0);
@@ -253,9 +257,10 @@ Component* stel_ui::createFlagButtons(void)
 	bt_flag_ctr->addComponent(bt_flag_help);			bt_flag_help->setPos(200,0);
 	bt_flag_ctr->addComponent(bt_flag_follow_earth);	bt_flag_follow_earth->setPos(225,0);
 	bt_flag_ctr->addComponent(bt_flag_config);			bt_flag_config->setPos(250,0);
+	bt_flag_ctr->addComponent(bt_flag_quit);			bt_flag_quit->setPos(275,0);
 
 	bt_flag_ctr->setOnMouseInOutCallback(callback<void>(this, &stel_ui::bt_flag_ctrOnMouseInOut));
-	bt_flag_ctr->reshape(0, core->screen_H-25, 11*25 -1, 25);
+	bt_flag_ctr->reshape(0, core->screen_H-25, 12*25 -1, 25);
 
 	return bt_flag_ctr;
 
@@ -278,6 +283,7 @@ void stel_ui::cb(void)
 	core->navigation->set_flag_lock_equ_pos(bt_flag_follow_earth->getState());
 	core->FlagConfig			= bt_flag_config->getState();
 	config_win->setVisible(core->FlagConfig);
+	if (!bt_flag_quit->getState()) core->quit();
 }
 
 void stel_ui::bt_flag_ctrOnMouseInOut(void)
@@ -310,6 +316,8 @@ void stel_ui::cbr(void)
 		bt_flag_help_lbl->setLabel("Compensation of the Earth rotation [T]");
 	if (bt_flag_config->getIsMouseOver())
 		bt_flag_help_lbl->setLabel("Configuration window");
+	if (bt_flag_quit->getIsMouseOver())
+		bt_flag_help_lbl->setLabel("Quit [CTRL + Q]");
 }
 
 
@@ -318,7 +326,7 @@ void stel_ui::cbr(void)
 Component* stel_ui::createLicenceWindow(void)
 {
 	licence_txtlbl = new TextLabel(
-"                 \1   " APP_NAME "  July 2003  \1\n\
+"                 \1   " APP_NAME "  Mars 2004  \1\n\
  \n\
 \1   Copyright (c) 2000-2004 Fabien Chereau\n\
  \n\
@@ -521,7 +529,7 @@ int stel_ui::handle_keys(SDLKey key, S_GUI_VALUE state)
     {
     	if(key==SDLK_q)
     	{
-			if (SDL_GetModState() & KMOD_CTRL) return 0;	// Will quit properly from stel_sdl
+			if (SDL_GetModState() & KMOD_CTRL) core->quit();
 		}
         if(key==SDLK_c)
         {

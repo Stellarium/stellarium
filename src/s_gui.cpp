@@ -580,7 +580,7 @@ void FlagButton::draw()
 	}
 	else
 	{
-		if (specific_tex) painter.drawSquareFill(pos, size, painter.getBaseColor()*0.5, specific_tex);
+		if (specific_tex) painter.drawSquareFill(pos, size, painter.getBaseColor()*0.7, specific_tex);
 		else painter.drawSquareFill(pos, size);
 	}
 	Button::draw();

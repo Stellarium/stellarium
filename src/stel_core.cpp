@@ -168,6 +168,16 @@ void stel_core::init(void)
 
 }
 
+void stel_core::quit(void)
+{
+	static SDL_Event Q;						// Send a SDL_QUIT event
+	Q.type = SDL_QUIT;						// To the SDL event queue
+	if(SDL_PushEvent(&Q) == -1)				// Try to send the event
+	{
+		printf("SDL_QUIT event can't be pushed: %s\n", SDL_GetError() );
+		exit(-1);
+	}
+}
 
 // Update all the objects in function of the time
 void stel_core::update(int delta_time)
