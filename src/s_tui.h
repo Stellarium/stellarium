@@ -31,6 +31,7 @@
 
 #include <list>
 #include <string>
+#include <iostream>
 
 #include "vecmath.h"
 #include "callbacks.hpp"
@@ -57,6 +58,7 @@ namespace s_tui
 		virtual string getString(void) const {return string();}
 		// Return true if key signal intercepted, false if not
 		virtual bool onKey(SDLKey, S_TUI_VALUE) {return false;}
+		virtual bool isEditable(void) const {return false;}
     protected:
     };
 
@@ -79,10 +81,10 @@ namespace s_tui
         list<Component*> childs;
     };
 
-    class Bistate : public CallbackComponent
+	class Bistate : public CallbackComponent
     {
     public:
-		Bistate(bool state = false) {;}
+		Bistate(bool init_state = false) : state(init_state) {;}
 		virtual string getString(void) const {return state ? string_activated : string_disabled;}
 		bool getState(void) const {return state;}
 		void setState(bool s) {state = s;}
@@ -92,16 +94,62 @@ namespace s_tui
 		bool state;
     };
 
+	class Boolean_item : public Bistate
+    {
+    public:
+		Boolean_item(bool init_state = false, const string& _label = string(),
+			const string& _string_activated = string("ON"),
+			const string& string_disabled  = string("OFF"));
+		virtual bool onKey(SDLKey, S_TUI_VALUE);
+		virtual string getString(void) const {return label + (state ? string_activated : string_disabled);}
+		virtual bool isEditable(void) const {return true;}
+    protected:
+		string label;
+    };
+
+	class Decimal : public CallbackComponent
+    {
+    public:
+		Decimal(double init_value = 0) : value(init_value) {;}
+		virtual string getString(void) const {return string();}
+		double getValue(void) const {return value;}
+		void setValue(double v) {value = v;}
+    protected:
+		double value;
+    };
+
     class Label : public Component
     {
     public:
-        Label(const string& _label = NULL) : label(_label) {;}
+        Label(const string& _label) : label(_label) {;}
 		virtual string getString(void) const {return label;}
 		void setLabel(const string& s) {label=s;}
     protected:
         string label;
     };
 
+    class Branch : public Container
+    {
+    public:
+		Branch();
+		virtual string getString(void) const;
+		virtual bool onKey(SDLKey, S_TUI_VALUE);
+        virtual void addComponent(Component*);
+    protected:
+        list<Component*>::iterator current;
+    };
+
+    class MenuBranch : public Branch
+    {
+    public:
+		MenuBranch(const string& s);
+		virtual bool onKey(SDLKey, S_TUI_VALUE);
+		virtual string getString(void) const;
+    protected:
+		string label;
+		bool isNavigating;
+		bool isEditing;
+    };
 
 }; // namespace s_tui
 

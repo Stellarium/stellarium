@@ -27,6 +27,7 @@
 #include "stellarium.h"
 #include "stel_core.h"
 #include "s_gui.h"
+#include "s_tui.h"
 
 // Predeclaration of the stel_core class
 class stel_core;
@@ -51,6 +52,11 @@ public:
 	int handle_move(int x, int y);
 	// Handle key press and release
 	int handle_keys(SDLKey key, S_GUI_VALUE state);
+
+	// Text UI
+	void init_tui(void);
+	void draw_tui(void);		// Display the tui
+	int handle_keys_tui(SDLKey key, s_tui::S_TUI_VALUE state);
 
 private:
 	stel_core * core;		// The main core can be access because stel_ui is a friend class
@@ -116,6 +122,9 @@ private:
 
 	void updateConfigVariables(void);
 	void updateConfigForm(void);
+
+	// Text UI components
+	s_tui::Branch* tui_root;
 };
 
 #endif  //_STEL_UI_H

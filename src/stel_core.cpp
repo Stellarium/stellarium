@@ -156,6 +156,8 @@ void stel_core::init(void)
 	ui = new stel_ui(this);
     ui->init();
 
+	ui->init_tui();
+
 	if (FlagAtmosphere) tone_converter->set_world_adaptation_luminance(40000.f);
 	else tone_converter->set_world_adaptation_luminance(3.75f);
 
@@ -334,7 +336,7 @@ void stel_core::draw(int delta_time)
 
     // ---- 2D Displays
     ui->draw();
-
+	ui->draw_tui();
 	ui->draw_gravity_ui();
 }
 
@@ -507,48 +509,49 @@ int stel_core::handle_move(int x, int y)
 // Handle key press and release
 int stel_core::handle_keys(SDLKey key, s_gui::S_GUI_VALUE state)
 {
-	if (!ui->handle_keys(key, state))
+	if (ui->handle_keys(key, state)) return 1;
+	s_tui::S_TUI_VALUE tuiv;
+	if (state == s_gui::S_GUI_PRESSED) tuiv = s_tui::S_TUI_PRESSED;
+	else tuiv = s_tui::S_TUI_RELEASED;
+	if (ui->handle_keys_tui(key, tuiv)) return 1;
+
+	if (state == S_GUI_PRESSED)
 	{
-		if (state == S_GUI_PRESSED)
+   		// Direction and zoom deplacements
+   		if (key==SDLK_LEFT) turn_left(1);
+   		if (key==SDLK_RIGHT) turn_right(1);
+   		if (key==SDLK_UP)
 		{
-    		// Direction and zoom deplacements
-    		if (key==SDLK_LEFT) turn_left(1);
-    		if (key==SDLK_RIGHT) turn_right(1);
-    		if (key==SDLK_UP)
-			{
-				if (SDL_GetModState() & KMOD_CTRL) zoom_in(1);
-				else turn_up(1);
-			}
-    		if (key==SDLK_DOWN)
-			{
-				if (SDL_GetModState() & KMOD_CTRL) zoom_out(1);
-				else turn_down(1);
-			}
-    		if (key==SDLK_PAGEUP) zoom_in(1);
-    		if (key==SDLK_PAGEDOWN) zoom_out(1);
+			if (SDL_GetModState() & KMOD_CTRL) zoom_in(1);
+			else turn_up(1);
+		}
+   		if (key==SDLK_DOWN)
+		{
+			if (SDL_GetModState() & KMOD_CTRL) zoom_out(1);
+			else turn_down(1);
+		}
+   		if (key==SDLK_PAGEUP) zoom_in(1);
+   		if (key==SDLK_PAGEDOWN) zoom_out(1);
+	}
+	else
+	{
+	    // When a deplacement key is released stop mooving
+   		if (key==SDLK_LEFT) turn_left(0);
+		if (key==SDLK_RIGHT) turn_right(0);
+		if (SDL_GetModState() & KMOD_CTRL)
+		{
+			if (key==SDLK_UP) zoom_in(0);
+			if (key==SDLK_DOWN) zoom_out(0);
 		}
 		else
 		{
-		    // When a deplacement key is released stop mooving
-    		if (key==SDLK_LEFT) turn_left(0);
-			if (key==SDLK_RIGHT) turn_right(0);
-			if (SDL_GetModState() & KMOD_CTRL)
-			{
-				if (key==SDLK_UP) zoom_in(0);
-				if (key==SDLK_DOWN) zoom_out(0);
-			}
-			else
-			{
-				if (key==SDLK_UP) turn_up(0);
-				if (key==SDLK_DOWN) turn_down(0);
-			}
-
-    		if (key==SDLK_PAGEUP) zoom_in(0);
-			if (key==SDLK_PAGEDOWN) zoom_out(0);
+			if (key==SDLK_UP) turn_up(0);
+			if (key==SDLK_DOWN) turn_down(0);
 		}
-		return 0;
+		if (key==SDLK_PAGEUP) zoom_in(0);
+		if (key==SDLK_PAGEDOWN) zoom_out(0);
 	}
-	return 1;
+	return 0;
 }
 
 void stel_core::turn_right(int s)
