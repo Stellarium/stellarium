@@ -297,6 +297,15 @@ void SolarSystem::draw(int hint_ON, Projector * prj, const navigator * nav, cons
 	glDisable(GL_LIGHT0);
 }
 
+planet* SolarSystem::search(string planet_name) {
+
+  vector<planet*>::iterator iter = system_planets.begin();
+  while (iter != system_planets.end()) {
+    if( (*iter)->get_name() == planet_name ) return (*iter);
+    ++iter;
+  }
+  return NULL;
+}
 
 // Search if any planet is close to position given in earth equatorial position and return the distance
 planet* SolarSystem::search(Vec3d pos, const navigator * nav, const Projector * prj)
@@ -425,3 +434,4 @@ void SolarSystem::set_trail_color(const Vec3f _color) {
   }
 
 }
+
