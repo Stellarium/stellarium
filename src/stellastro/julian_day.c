@@ -19,45 +19,35 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 
 #include "stellastro.h"
 #include <time.h>
+#include <math.h>
 
 /* Calculate the julian day from a calendar day.
  * Valid for positive and negative years but not for negative JD.
  * Formula 7.1 on pg 61 */
+ // Code originally from libnova which appeared to be totally wrong... New code from celestia
 double get_julian_day (const ln_date * cdate)
 {
-    double days;
-    int a,b;
 	ln_date date;
 	date = *cdate;
 
-    /* check for month = January or February */
-    if (date.months < 3 )
+    int y = date.years, m = date.months;
+    if (date.months <= 2)
     {
-        date.years--;
-	    date.months += 12;
-	}
-	
-	a = date.years / 100;
-	
-	/* check for Julian or Gregorian calendar (starts Oct 4th 1582) */
-	if (date.years > 1582 || (date.years == 1582 && (date.months > 10 || (date.months == 10 && date.days >= 4))))
-	{
-	    /* Gregorian calendar */    
-	    b = 2 - a + (a / 4);
-	}
-	else
-	{
-	    /* Julian calendar */
-	    b = 0;
-	}
-	
-	/* add a fraction of hours, minutes and secs to days*/
-	days = date.days + (double)(date.hours / 24.0) + (double)(date.minutes / 1440.0) +
-		(double)(date.seconds /  86400.0);
+        y = date.years - 1;
+        m = date.months + 12;
+    }
 
-	/* now get the JD */
-	return (int)(365.25 * (date.years + 4716)) +
-	    (int)(30.6001 * (date.months + 1)) + days + b - 1524.5;
+    // Correct for the lost days in Oct 1582 when the Gregorian calendar
+    // replaced the Julian calendar.
+    int B = -2;
+    if (date.years > 1582 || (date.years == 1582 && (date.months > 10 || (date.months == 10 && date.days >= 15))))
+    {
+        B = y / 400 - y / 100;
+    }
+
+    return (floor(365.25 * y) +
+            floor(30.6001 * (m + 1)) + B + 1720996.5 +
+            date.days + date.hours / 24.0 + date.minutes / 1440.0 + date.seconds / 86400.0);
 }
 
 
@@ -74,59 +64,40 @@ unsigned int get_day_of_week (const ln_date *date)
 
 /* Calculate the date from the Julian day
  * params : JD Julian day, date Pointer to new calendar date. */
-void get_date (double JD, ln_date * date)
+ // Code originally from libnova which appeared to be totally wrong... New code from celestia
+void get_date (double jd, ln_date * date)
 {
-   int A,a,B,C,D,E;
-   double F,Z;
-   
-   JD += 0.5;
-   Z = (int) JD;
-   F = JD - Z;
-   
-   if (Z < 2299161)
-   {
-       A = Z;
-   }
-   else
-   {
-       a = (int) ((Z - 1867216.25) / 36524.25);
-       A = Z + 1 + a - (int)(a / 4);
-   }
-   
-   B = A + 1524;
-   C = (int) ((B - 122.1) / 365.25);
-   D = (int) (365.25 * C);
-   E = (int) ((B - D) / 30.6001);
-   
-   /* get the hms */
-   date->hours = F * 24;
-   F -= (double)date->hours / 24;
-   date->minutes = F * 1440;
-   F -= (double)date->minutes / 1440;
-   date->seconds = F * 86400;
-   
-   /* get the day */
-   date->days = B - D - (int)(30.6001 * E);
-   
-   /* get the month */
-   if (E < 14)
-   {
-       date->months = E - 1;
-   }
-   else
-   {
-       date->months = E - 13;
-   }
-   
-   /* get the year */
-   if (date->months > 2)
-   {
-       date->years = C - 4716;
-   }
-   else
-   {
-       date->years = C - 4715;
-   }    
+    int a = (int) (jd + 0.5);
+    double c;
+    if (a < 2299161)
+    {
+        c = a + 1524;
+    }
+    else
+    {
+        double b = (int) ((a - 1867216.25) / 36524.25);
+        c = a + b - (int) (b / 4) + 1525;
+    }
+
+    int d = (int) ((c - 122.1) / 365.25);
+    int e = (int) (365.25 * d);
+    int f = (int) ((c - e) / 30.6001);
+
+    double dday = c - e - (int) (30.6001 * f) + ((jd + 0.5) - (int) (jd + 0.5));
+
+    /* This following used to be 14.0, but gcc was computing it incorrectly, so
+       it was changed to 14 */
+    date->months = f - 1 - 12 * (int) (f / 14);
+    date->years = d - 4715 - (int) ((7.0 + date->months) / 10.0);
+    date->days = (int) dday;
+
+    double dhour = (dday - date->days) * 24;
+    date->hours = (int) dhour;
+
+    double dminute = (dhour - date->hours) * 60;
+    date->minutes = (int) dminute;
+
+    date->seconds = (dminute - date->minutes) * 60;
 }	
 
 
