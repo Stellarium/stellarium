@@ -83,28 +83,8 @@ int Constellation::read(FILE *  fic, Hip_Star_mgr * _VouteCeleste)
     return 1;
 }
 
-// Draw the lines for the Constellation using the coords of the stars
-// (optimized for use thru the class Constellation_mgr only)
-void Constellation::draw(Projector* prj)
-{
-	static Vec3d star1;
-	static Vec3d star2;
-
-    for(unsigned int i=0;i<nb_segments;++i)
-    {
-		if (prj->project_earth_equ(asterism[2*i]->XYZ,star1) &&
-			prj->project_earth_equ(asterism[2*i+1]->XYZ,star2))
-		{
-			glBegin(GL_LINES);
-				glVertex2f(star1[0],star1[1]);
-				glVertex2f(star2[0],star2[1]);
-        	glEnd();
-		}
-    }
-}
-
-// Same thing but for only one separate Constellation (can be used without the class Constellation_mgr )
-void Constellation::draw_alone(Projector* prj) const
+// Draw the Constellation lines
+void Constellation::draw(Projector* prj) const
 {
 	glDisable(GL_TEXTURE_2D);
     glDisable(GL_BLEND);
@@ -129,11 +109,81 @@ void Constellation::draw_alone(Projector* prj) const
     prj->reset_perspective_projection();
 }
 
+// Draw the lines for the Constellation using the coords of the stars
+// (optimized for use thru the class Constellation_mgr only)
+void Constellation::draw_optim(Projector* prj) const
+{
+	static Vec3d star1;
+	static Vec3d star2;
+
+    for(unsigned int i=0;i<nb_segments;++i)
+    {
+		if (prj->project_earth_equ(asterism[2*i]->XYZ,star1) &&
+			prj->project_earth_equ(asterism[2*i+1]->XYZ,star2))
+		{
+			glBegin(GL_LINES);
+				glVertex2f(star1[0],star1[1]);
+				glVertex2f(star2[0],star2[1]);
+        	glEnd();
+		}
+    }
+
+}
+
+
 // Draw the name
 void Constellation::draw_name(s_font * constfont, Projector* prj) const
 {
 	gravity_label ? prj->print_gravity(constfont, XYname[0], XYname[1], inter, -constfont->getStrLen(inter)/2) :
 	constfont->print(XYname[0]-constfont->getStrLen(inter)/2, XYname[1], inter/*name*/);
+}
+
+// Draw the art texture, optimized function to be called thru a constellation manager only
+void Constellation::draw_art_optim(Projector* prj) const
+{
+	if (art_tex)
+	{
+		static Vec3d v;
+    	glBindTexture(GL_TEXTURE_2D, art_tex->getID());
+    	glBegin(GL_QUADS);
+	        glTexCoord2i(0,0);
+			prj->project_earth_equ(art_vertex[0],v); glVertex3dv(v);
+        	glTexCoord2i(1,0);
+			prj->project_earth_equ(art_vertex[1],v); glVertex3dv(v);
+        	glTexCoord2i(1,1);
+			prj->project_earth_equ(art_vertex[2],v); glVertex3dv(v);
+        	glTexCoord2i(0,1);
+			prj->project_earth_equ(art_vertex[3],v); glVertex3dv(v);
+    	glEnd();
+	}
+}
+
+// Draw the art texture
+void Constellation::draw_art(Projector* prj) const
+{
+	if (art_tex)
+	{
+		static Vec3d v;
+
+		glBlendFunc(GL_ONE, GL_ONE);
+		glEnable(GL_TEXTURE_2D);
+    	glEnable(GL_BLEND);
+
+    	glColor3f(1,1,1);
+    	glBindTexture(GL_TEXTURE_2D, art_tex->getID());
+    	glBegin(GL_QUADS);
+	        glTexCoord2i(0,0);
+			prj->project_earth_equ(art_vertex[0],v); glVertex3dv(v);
+        	glTexCoord2i(1,0);
+			prj->project_earth_equ(art_vertex[1],v); glVertex3dv(v);
+        	glTexCoord2i(1,1);
+			prj->project_earth_equ(art_vertex[2],v); glVertex3dv(v);
+        	glTexCoord2i(0,1);
+			prj->project_earth_equ(art_vertex[3],v); glVertex3dv(v);
+    	glEnd();
+		glDisable(GL_BLEND);
+		glDisable(GL_TEXTURE_2D);
+	}
 }
 
 const Constellation* Constellation::is_star_in(const Hip_Star * s) const

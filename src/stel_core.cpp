@@ -231,8 +231,16 @@ void stel_core::draw(int delta_time)
 	if (FlagConstellationDrawing)
 	{
 		if (FlagConstellationPick && selected_constellation)
-			selected_constellation->draw_alone(projection);
+			selected_constellation->draw(projection);
 		else asterisms->draw(projection);
+	}
+
+	// Draw the constellations art
+	if (FlagConstellationArt)
+	{
+		if (FlagConstellationPick && selected_constellation)
+			selected_constellation->draw_art(projection);
+		else asterisms->draw_art(projection);
 	}
 
 	// Draw the constellations's names
