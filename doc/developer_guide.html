@@ -285,25 +285,14 @@ Stellarium data files format specification</A>
 <DD>Contains the commonly used stars names.
 </DD>
 <DT><STRONG>type :</STRONG></DT>
-<DD>ascii file, fields separated by <IMG
- WIDTH="9" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
- SRC="img1.png"
- ALT="$\vert$"> (pipe), end of line is CR ('<IMG
- WIDTH="13" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
- SRC="img2.png"
- ALT="$\backslash$">n')
+<DD>ascii file, fields separated by <code>|</code> (pipe), end of line is CR ('<code>\</code>n')
 </DD>
 <DT><STRONG>line example :</STRONG></DT>
-<DD>62956<IMG
- WIDTH="9" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
- SRC="img1.png"
- ALT="$\vert$">Alioth
+<DD><PRE>62956|Alioth
+</PRE>
 </DD>
 <DT><STRONG>line format :</STRONG></DT>
-<DD>HPnum<IMG
- WIDTH="9" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
- SRC="img1.png"
- ALT="$\vert$">Star_Name
+<DD>HPnum<code>|</code>Star_Name
 	
 <UL>
 <LI>HPnum : (unsigned int) Hipparcos catalog star number
@@ -325,13 +314,11 @@ Stellarium data files format specification</A>
 <DD>Contains the constellation art info : i.e. for drawing of mythologic figures.
 </DD>
 <DT><STRONG>type :</STRONG></DT>
-<DD>ascii file, fields separated by SPACE, end of line is CR ('<IMG
- WIDTH="13" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
- SRC="img2.png"
- ALT="$\backslash$">n')
+<DD>ascii file, fields separated by SPACE, end of line is CR ('<code>\</code>n')
 </DD>
 <DT><STRONG>line example :</STRONG></DT>
-<DD>Lep lepus_m 104 57 24305 90 29 24845 33 42 27288
+<DD><PRE>Lep lepus_m 104 57 24305 90 29 24845 33 42 27288
+</PRE>
 </DD>
 <DT><STRONG>line format :</STRONG></DT>
 <DD>ConstRef TextureFile x1 y1 HP1 x2 y2 HP2 x3 y3 HP3
@@ -363,13 +350,11 @@ Stellarium data files format specification</A>
 <DD>Contains the constellations lines shape.
 </DD>
 <DT><STRONG>type :</STRONG></DT>
-<DD>ascii file, fields separated by SPACE, end of line is CR ('<IMG
- WIDTH="13" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
- SRC="img2.png"
- ALT="$\backslash$">n')
+<DD>ascii file, fields separated by SPACE, end of line is CR ('<code>\</code>n')
 </DD>
 <DT><STRONG>line example :</STRONG></DT>
-<DD>And ANDROMEDE ANDROMEDA 3  9640 5447 5447 4436 4436 3881
+<DD><PRE>And ANDROMEDE ANDROMEDA 3  9640 5447 5447 4436 4436 3881
+</PRE>
 </DD>
 <DT><STRONG>line format :</STRONG></DT>
 <DD>ConstRef ConstCommonName ConstInternationnalName NumberOfSegments seg11 seg12 seg21 seg22 etc...
@@ -401,13 +386,11 @@ Stellarium data files format specification</A>
 <DD>contains the characters position on the font texture.
 </DD>
 <DT><STRONG>type :</STRONG></DT>
-<DD>ascii file, fields separated by SPACE, end of line is CR ('<IMG
- WIDTH="13" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
- SRC="img2.png"
- ALT="$\backslash$">n')
+<DD>ascii file, fields separated by SPACE, end of line is CR ('<code>\</code>n')
 </DD>
-<DT><STRONG>first line format :</STRONG></DT>
-<DD>CourierFont LineSize 21
+<DT><STRONG>first line example :</STRONG></DT>
+<DD><PRE>CourierFont LineSize 21
+</PRE>
 	
 <UL>
 <LI>Font Name
@@ -418,7 +401,8 @@ Stellarium data files format specification</A>
 </UL>
 </DD>
 <DT><STRONG>other lines example :</STRONG></DT>
-<DD>065 02 2 14 21 0
+<DD><PRE>065 02 2 14 21 0
+</PRE>
 </DD>
 <DT><STRONG>other lines format :</STRONG></DT>
 <DD>ascii# x y w h s
@@ -447,13 +431,11 @@ Stellarium data files format specification</A>
 <DD>Contains the nebula list (not only messier)
 </DD>
 <DT><STRONG>type :</STRONG></DT>
-<DD>ascii file, fields separated by SPACE, end of line is CR ('<IMG
- WIDTH="13" HEIGHT="35" ALIGN="MIDDLE" BORDER="0"
- SRC="img2.png"
- ALT="$\backslash$">n')
+<DD>ascii file, fields separated by SPACE, end of line is CR ('<code>\</code>n')
 </DD>
 <DT><STRONG>line example :</STRONG></DT>
-<DD>1952 RS 05 34.5 +22 +01 8.2 06.0 0 M1_-_Crab_Nebula m1
+<DD><PRE>1952 RS 05 34.5 +22 +01 8.2 06.0 0 M1_-_Crab_Nebula m1
+</PRE>
 </DD>
 <DT><STRONG>line format :</STRONG></DT>
 <DD>NGCnumber NebulaType hh min.mm deg min.mm mag size texRotation Name TexName
@@ -471,7 +453,7 @@ Stellarium data files format specification</A>
 </LI>
 <LI>size : angular size in arcminute
 </LI>
-<LI>Name : Nebula name with spaces replaced by '_'
+<LI>Name : Nebula name with '_' replaced by spaces.
 </LI>
 <LI>TexName : texture file name. png file without alpha chanel.
 	
