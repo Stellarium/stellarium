@@ -1,8 +1,7 @@
 # Generated automatically from Makefile.in by configure.
-# Makefile.in generated automatically by automake 1.5 from Makefile.am.
+# Makefile.in generated automatically by automake 1.4 from Makefile.am
 
-# Copyright 1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001
-# Free Software Foundation, Inc.
+# Copyright (C) 1994, 1995-8, 1999 Free Software Foundation, Inc.
 # This Makefile.in is free software; the Free Software Foundation
 # gives unlimited permission to copy and/or distribute it,
 # with or without modifications, as long as this notice is preserved.
@@ -11,7 +10,6 @@
 # but WITHOUT ANY WARRANTY, to the extent permitted by law; without
 # even the implied warranty of MERCHANTABILITY or FITNESS FOR A
 # PARTICULAR PURPOSE.
-
 
 
 SHELL = /bin/sh
@@ -33,9 +31,13 @@ infodir = ${prefix}/info
 mandir = ${prefix}/man
 includedir = ${prefix}/include
 oldincludedir = /usr/include
+
+DESTDIR =
+
 pkgdatadir = $(datadir)/stellarium
 pkglibdir = $(libdir)/stellarium
 pkgincludedir = $(includedir)/stellarium
+
 top_builddir = ../..
 
 ACLOCAL = aclocal
@@ -44,260 +46,281 @@ AUTOMAKE = automake
 AUTOHEADER = autoheader
 
 INSTALL = /usr/bin/install -c
-INSTALL_PROGRAM = ${INSTALL}
+INSTALL_PROGRAM = ${INSTALL} $(AM_INSTALL_PROGRAM_FLAGS)
 INSTALL_DATA = ${INSTALL} -m 644
 INSTALL_SCRIPT = ${INSTALL_PROGRAM}
-INSTALL_HEADER = $(INSTALL_DATA)
 transform = s,x,x,
+
 NORMAL_INSTALL = :
 PRE_INSTALL = :
 POST_INSTALL = :
 NORMAL_UNINSTALL = :
 PRE_UNINSTALL = :
 POST_UNINSTALL = :
-AMTAR = tar
 AWK = mawk
 CC = gcc
 CXX = c++
-DEPDIR = .deps
-EXEEXT = 
-INSTALL_STRIP_PROGRAM = ${SHELL} $(install_sh) -c -s
-OBJEXT = o
+LN_S = ln -s
+MAKEINFO = makeinfo
 PACKAGE = stellarium
 RANLIB = ranlib
 VERSION = 0.4.7
-am__include = include
-am__quote = 
-install_sh = /obs/depagne/fabien/work/stellarium/install-sh
 
 noinst_LIBRARIES = libastrolib.a
 
 libastrolib_a_SOURCES = AstroOps.cpp DateOpsIntl.cpp MathOps.cpp Pluto.cpp Vsop.h AstroOps.h Lunar.cpp MathOps.h Pluto.h VsopData.cpp DateOps.cpp Lunar.h PlanetData.cpp PlutoTerms.h VsopData.h DateOps.h LunarTerms.h PlanetData.h Vsop.cpp
 
 libastrolib_a_LIBADD = AstroOps.o DateOpsIntl.o MathOps.o Pluto.o VsopData.o DateOps.o Lunar.o PlanetData.o Vsop.o
-subdir = src/astrolib
 mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
-CONFIG_CLEAN_FILES =
-LIBRARIES = $(noinst_LIBRARIES)
+CONFIG_CLEAN_FILES = 
+LIBRARIES =  $(noinst_LIBRARIES)
 
-libastrolib_a_AR = $(AR) cru
-libastrolib_a_DEPENDENCIES = AstroOps.o DateOpsIntl.o MathOps.o Pluto.o \
-	VsopData.o DateOps.o Lunar.o PlanetData.o Vsop.o
-am_libastrolib_a_OBJECTS = AstroOps.$(OBJEXT) DateOpsIntl.$(OBJEXT) \
-	MathOps.$(OBJEXT) Pluto.$(OBJEXT) Lunar.$(OBJEXT) \
-	VsopData.$(OBJEXT) DateOps.$(OBJEXT) PlanetData.$(OBJEXT) \
-	Vsop.$(OBJEXT)
-libastrolib_a_OBJECTS = $(am_libastrolib_a_OBJECTS)
 
-DEFS =  -DPACKAGE=\"stellarium\" -DVERSION=\"0.4.7\" -DHAVE_LIMITS_H=1 -DHAVE_MALLOC_H=1 -DHAVE_STRINGS_H=1 -DHAVE_UNISTD_H=1 -Dconst= -Dinline= -DTM_IN_SYS_TIME=1 
-DEFAULT_INCLUDES =  -I. -I$(srcdir)
+DEFS =  -DPACKAGE=\"stellarium\" -DVERSION=\"0.4.7\" -DHAVE_LIMITS_H=1 -DHAVE_MALLOC_H=1 -DHAVE_STRINGS_H=1 -DHAVE_UNISTD_H=1 -Dconst= -Dinline= -DTM_IN_SYS_TIME=1  -I. -I$(srcdir) 
 CPPFLAGS = 
 LDFLAGS = 
 LIBS = 
-depcomp = $(SHELL) $(top_srcdir)/depcomp
-DEP_FILES = $(DEPDIR)/AstroOps.Po $(DEPDIR)/DateOps.Po \
-	$(DEPDIR)/DateOpsIntl.Po $(DEPDIR)/Lunar.Po \
-	$(DEPDIR)/MathOps.Po $(DEPDIR)/PlanetData.Po \
-	$(DEPDIR)/Pluto.Po $(DEPDIR)/Vsop.Po \
-	$(DEPDIR)/VsopData.Po
-CXXCOMPILE = $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) \
-	$(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS)
-CXXLD = $(CXX)
-CXXLINK = $(CXXLD) $(AM_CXXFLAGS) $(CXXFLAGS) $(AM_LDFLAGS) $(LDFLAGS) \
-	-o $@
-CXXFLAGS = -g -O2
-CFLAGS = -g -O2
-COMPILE = $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) \
-	$(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
-CCLD = $(CC)
-LINK = $(CCLD) $(AM_CFLAGS) $(CFLAGS) $(AM_LDFLAGS) $(LDFLAGS) -o $@
-DIST_SOURCES = $(libastrolib_a_SOURCES)
-DIST_COMMON = Makefile.am Makefile.in
-SOURCES = $(libastrolib_a_SOURCES)
-
-all: all-am
-
-.SUFFIXES:
-.SUFFIXES: .cpp .o .obj
-$(srcdir)/Makefile.in:  Makefile.am  $(top_srcdir)/configure.in $(ACLOCAL_M4)
-	cd $(top_srcdir) && \
-	  $(AUTOMAKE) --gnu  src/astrolib/Makefile
-Makefile:  $(srcdir)/Makefile.in  $(top_builddir)/config.status
-	cd $(top_builddir) && \
-	  CONFIG_HEADERS= CONFIG_LINKS= \
-	  CONFIG_FILES=$(subdir)/$@ $(SHELL) ./config.status
-
+libastrolib_a_DEPENDENCIES =  AstroOps.o DateOpsIntl.o MathOps.o Pluto.o \
+VsopData.o DateOps.o Lunar.o PlanetData.o Vsop.o
+libastrolib_a_OBJECTS =  AstroOps.o DateOpsIntl.o MathOps.o Pluto.o \
+Lunar.o VsopData.o DateOps.o PlanetData.o Vsop.o
 AR = ar
+CXXFLAGS = -g -O2
+CXXCOMPILE = $(CXX) $(DEFS) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS)
+CXXLD = $(CXX)
+CXXLINK = $(CXXLD) $(AM_CXXFLAGS) $(CXXFLAGS) $(LDFLAGS) -o $@
+CFLAGS = -g -O2
+COMPILE = $(CC) $(DEFS) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
+CCLD = $(CC)
+LINK = $(CCLD) $(AM_CFLAGS) $(CFLAGS) $(LDFLAGS) -o $@
+DIST_COMMON =  Makefile.am Makefile.in
+
+
+DISTFILES = $(DIST_COMMON) $(SOURCES) $(HEADERS) $(TEXINFOS) $(EXTRA_DIST)
+
+TAR = gtar
+GZIP_ENV = --best
+DEP_FILES =  .deps/AstroOps.P .deps/DateOps.P .deps/DateOpsIntl.P \
+.deps/Lunar.P .deps/MathOps.P .deps/PlanetData.P .deps/Pluto.P \
+.deps/Vsop.P .deps/VsopData.P
+SOURCES = $(libastrolib_a_SOURCES)
+OBJECTS = $(libastrolib_a_OBJECTS)
+
+all: all-redirect
+.SUFFIXES:
+.SUFFIXES: .S .c .cpp .o .s
+$(srcdir)/Makefile.in: Makefile.am $(top_srcdir)/configure.in $(ACLOCAL_M4) 
+	cd $(top_srcdir) && $(AUTOMAKE) --gnu src/astrolib/Makefile
+
+Makefile: $(srcdir)/Makefile.in  $(top_builddir)/config.status $(BUILT_SOURCES)
+	cd $(top_builddir) \
+	  && CONFIG_FILES=$(subdir)/$@ CONFIG_HEADERS= $(SHELL) ./config.status
+
+
+mostlyclean-noinstLIBRARIES:
 
 clean-noinstLIBRARIES:
 	-test -z "$(noinst_LIBRARIES)" || rm -f $(noinst_LIBRARIES)
-libastrolib.a: $(libastrolib_a_OBJECTS) $(libastrolib_a_DEPENDENCIES) 
-	-rm -f libastrolib.a
-	$(libastrolib_a_AR) libastrolib.a $(libastrolib_a_OBJECTS) $(libastrolib_a_LIBADD)
-	$(RANLIB) libastrolib.a
+
+distclean-noinstLIBRARIES:
+
+maintainer-clean-noinstLIBRARIES:
+
+.s.o:
+	$(COMPILE) -c $<
+
+.S.o:
+	$(COMPILE) -c $<
 
 mostlyclean-compile:
-	-rm -f *.$(OBJEXT) core *.core
+	-rm -f *.o core *.core
+
+clean-compile:
 
 distclean-compile:
 	-rm -f *.tab.c
 
-include $(DEPDIR)/AstroOps.Po
-include $(DEPDIR)/DateOps.Po
-include $(DEPDIR)/DateOpsIntl.Po
-include $(DEPDIR)/Lunar.Po
-include $(DEPDIR)/MathOps.Po
-include $(DEPDIR)/PlanetData.Po
-include $(DEPDIR)/Pluto.Po
-include $(DEPDIR)/Vsop.Po
-include $(DEPDIR)/VsopData.Po
+maintainer-clean-compile:
 
-distclean-depend:
-	-rm -rf $(DEPDIR)
-
+libastrolib.a: $(libastrolib_a_OBJECTS) $(libastrolib_a_DEPENDENCIES)
+	-rm -f libastrolib.a
+	$(AR) cru libastrolib.a $(libastrolib_a_OBJECTS) $(libastrolib_a_LIBADD)
+	$(RANLIB) libastrolib.a
 .cpp.o:
-	source='$<' object='$@' libtool=no \
-	depfile='$(DEPDIR)/$*.Po' tmpdepfile='$(DEPDIR)/$*.TPo' \
-	$(CXXDEPMODE) $(depcomp) \
-	$(CXXCOMPILE) -c -o $@ `test -f $< || echo '$(srcdir)/'`$<
-
-.cpp.obj:
-	source='$<' object='$@' libtool=no \
-	depfile='$(DEPDIR)/$*.Po' tmpdepfile='$(DEPDIR)/$*.TPo' \
-	$(CXXDEPMODE) $(depcomp) \
-	$(CXXCOMPILE) -c -o $@ `cygpath -w $<`
-CXXDEPMODE = depmode=gcc
-uninstall-info-am:
+	$(CXXCOMPILE) -c $<
 
 tags: TAGS
 
-ID: $(HEADERS) $(SOURCES) $(LISP) $(TAGS_FILES)
-	list='$(SOURCES) $(HEADERS) $(TAGS_FILES)'; \
-	unique=`for i in $$list; do \
-	    if test -f "$$i"; then echo $$i; else echo $(srcdir)/$$i; fi; \
-	  done | \
-	  $(AWK) '    { files[$$0] = 1; } \
+ID: $(HEADERS) $(SOURCES) $(LISP)
+	list='$(SOURCES) $(HEADERS)'; \
+	unique=`for i in $$list; do echo $$i; done | \
+	  awk '    { files[$$0] = 1; } \
 	       END { for (i in files) print i; }'`; \
-	mkid -fID $$unique $(LISP)
+	here=`pwd` && cd $(srcdir) \
+	  && mkid -f$$here/ID $$unique $(LISP)
 
-TAGS:  $(HEADERS) $(SOURCES)  $(TAGS_DEPENDENCIES) \
-		$(TAGS_FILES) $(LISP)
+TAGS:  $(HEADERS) $(SOURCES)  $(TAGS_DEPENDENCIES) $(LISP)
 	tags=; \
 	here=`pwd`; \
-	list='$(SOURCES) $(HEADERS) $(TAGS_FILES)'; \
-	unique=`for i in $$list; do \
-	    if test -f "$$i"; then echo $$i; else echo $(srcdir)/$$i; fi; \
-	  done | \
-	  $(AWK) '    { files[$$0] = 1; } \
+	list='$(SOURCES) $(HEADERS)'; \
+	unique=`for i in $$list; do echo $$i; done | \
+	  awk '    { files[$$0] = 1; } \
 	       END { for (i in files) print i; }'`; \
 	test -z "$(ETAGS_ARGS)$$unique$(LISP)$$tags" \
-	  || etags $(ETAGS_ARGS) $$tags  $$unique $(LISP)
+	  || (cd $(srcdir) && etags $(ETAGS_ARGS) $$tags  $$unique $(LISP) -o $$here/TAGS)
 
-GTAGS:
-	here=`CDPATH=: && cd $(top_builddir) && pwd` \
-	  && cd $(top_srcdir) \
-	  && gtags -i $(GTAGS_ARGS) $$here
+mostlyclean-tags:
+
+clean-tags:
 
 distclean-tags:
-	-rm -f TAGS ID GTAGS GRTAGS GSYMS GPATH
+	-rm -f TAGS ID
 
-DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
+maintainer-clean-tags:
 
-top_distdir = ../..
-distdir = $(top_distdir)/$(PACKAGE)-$(VERSION)
+distdir = $(top_builddir)/$(PACKAGE)-$(VERSION)/$(subdir)
+
+subdir = src/astrolib
 
 distdir: $(DISTFILES)
+	here=`cd $(top_builddir) && pwd`; \
+	top_distdir=`cd $(top_distdir) && pwd`; \
+	distdir=`cd $(distdir) && pwd`; \
+	cd $(top_srcdir) \
+	  && $(AUTOMAKE) --include-deps --build-dir=$$here --srcdir-name=$(top_srcdir) --output-dir=$$top_distdir --gnu src/astrolib/Makefile
 	@for file in $(DISTFILES); do \
-	  if test -f $$file; then d=.; else d=$(srcdir); fi; \
-	  dir=`echo "$$file" | sed -e 's,/[^/]*$$,,'`; \
-	  if test "$$dir" != "$$file" && test "$$dir" != "."; then \
-	    $(mkinstalldirs) "$(distdir)/$$dir"; \
-	  fi; \
+	  d=$(srcdir); \
 	  if test -d $$d/$$file; then \
-	    cp -pR $$d/$$file $(distdir) \
-	    || exit 1; \
+	    cp -pr $$d/$$file $(distdir)/$$file; \
 	  else \
 	    test -f $(distdir)/$$file \
-	    || cp -p $$d/$$file $(distdir)/$$file \
-	    || exit 1; \
+	    || ln $$d/$$file $(distdir)/$$file 2> /dev/null \
+	    || cp -p $$d/$$file $(distdir)/$$file || :; \
 	  fi; \
 	done
+
+DEPS_MAGIC := $(shell mkdir .deps > /dev/null 2>&1 || :)
+
+-include $(DEP_FILES)
+
+mostlyclean-depend:
+
+clean-depend:
+
+distclean-depend:
+	-rm -rf .deps
+
+maintainer-clean-depend:
+
+%.o: %.c
+	@echo '$(COMPILE) -c $<'; \
+	$(COMPILE) -Wp,-MD,.deps/$(*F).pp -c $<
+	@-cp .deps/$(*F).pp .deps/$(*F).P; \
+	tr ' ' '\012' < .deps/$(*F).pp \
+	  | sed -e 's/^\\$$//' -e '/^$$/ d' -e '/:$$/ d' -e 's/$$/ :/' \
+	    >> .deps/$(*F).P; \
+	rm .deps/$(*F).pp
+
+%.lo: %.c
+	@echo '$(LTCOMPILE) -c $<'; \
+	$(LTCOMPILE) -Wp,-MD,.deps/$(*F).pp -c $<
+	@-sed -e 's/^\([^:]*\)\.o[ 	]*:/\1.lo \1.o :/' \
+	  < .deps/$(*F).pp > .deps/$(*F).P; \
+	tr ' ' '\012' < .deps/$(*F).pp \
+	  | sed -e 's/^\\$$//' -e '/^$$/ d' -e '/:$$/ d' -e 's/$$/ :/' \
+	    >> .deps/$(*F).P; \
+	rm -f .deps/$(*F).pp
+
+%.o: %.cpp
+	@echo '$(CXXCOMPILE) -c $<'; \
+	$(CXXCOMPILE) -Wp,-MD,.deps/$(*F).pp -c $<
+	@-cp .deps/$(*F).pp .deps/$(*F).P; \
+	tr ' ' '\012' < .deps/$(*F).pp \
+	  | sed -e 's/^\\$$//' -e '/^$$/ d' -e '/:$$/ d' -e 's/$$/ :/' \
+	    >> .deps/$(*F).P; \
+	rm .deps/$(*F).pp
+
+%.lo: %.cpp
+	@echo '$(LTCXXCOMPILE) -c $<'; \
+	$(LTCXXCOMPILE) -Wp,-MD,.deps/$(*F).pp -c $<
+	@-sed -e 's/^\([^:]*\)\.o[ 	]*:/\1.lo \1.o :/' \
+	  < .deps/$(*F).pp > .deps/$(*F).P; \
+	tr ' ' '\012' < .deps/$(*F).pp \
+	  | sed -e 's/^\\$$//' -e '/^$$/ d' -e '/:$$/ d' -e 's/$$/ :/' \
+	    >> .deps/$(*F).P; \
+	rm -f .deps/$(*F).pp
+info-am:
+info: info-am
+dvi-am:
+dvi: dvi-am
 check-am: all-am
 check: check-am
-all-am: Makefile $(LIBRARIES)
-
-installdirs:
-
-install: install-am
+installcheck-am:
+installcheck: installcheck-am
+install-exec-am:
 install-exec: install-exec-am
+
+install-data-am:
 install-data: install-data-am
-uninstall: uninstall-am
 
 install-am: all-am
 	@$(MAKE) $(AM_MAKEFLAGS) install-exec-am install-data-am
-
-installcheck: installcheck-am
+install: install-am
+uninstall-am:
+uninstall: uninstall-am
+all-am: Makefile $(LIBRARIES)
+all-redirect: all-am
 install-strip:
-	$(MAKE) $(AM_MAKEFLAGS) INSTALL_PROGRAM="$(INSTALL_STRIP_PROGRAM)" \
-	  `test -z '$(STRIP)' || \
-	    echo "INSTALL_PROGRAM_ENV=STRIPPROG='$(STRIP)'"` install
+	$(MAKE) $(AM_MAKEFLAGS) AM_INSTALL_PROGRAM_FLAGS=-s install
+installdirs:
+
+
 mostlyclean-generic:
 
 clean-generic:
 
 distclean-generic:
-	-rm -f Makefile $(CONFIG_CLEAN_FILES) stamp-h stamp-h[0-9]*
+	-rm -f Makefile $(CONFIG_CLEAN_FILES)
+	-rm -f config.cache config.log stamp-h stamp-h[0-9]*
 
 maintainer-clean-generic:
-	@echo "This command is intended for maintainers to use"
-	@echo "it deletes files that may require special tools to rebuild."
-clean: clean-am
-
-clean-am: clean-generic clean-noinstLIBRARIES mostlyclean-am
-
-distclean: distclean-am
-
-distclean-am: clean-am distclean-compile distclean-depend \
-	distclean-generic distclean-tags
-
-dvi: dvi-am
-
-dvi-am:
-
-info: info-am
-
-info-am:
-
-install-data-am:
-
-install-exec-am:
-
-install-info: install-info-am
-
-install-man:
-
-installcheck-am:
-
-maintainer-clean: maintainer-clean-am
-
-maintainer-clean-am: distclean-am maintainer-clean-generic
+mostlyclean-am:  mostlyclean-noinstLIBRARIES mostlyclean-compile \
+		mostlyclean-tags mostlyclean-depend mostlyclean-generic
 
 mostlyclean: mostlyclean-am
 
-mostlyclean-am: mostlyclean-compile mostlyclean-generic
+clean-am:  clean-noinstLIBRARIES clean-compile clean-tags clean-depend \
+		clean-generic mostlyclean-am
 
-uninstall-am: uninstall-info-am
+clean: clean-am
 
-.PHONY: GTAGS all all-am check check-am clean clean-generic \
-	clean-noinstLIBRARIES distclean distclean-compile \
-	distclean-depend distclean-generic distclean-tags distdir dvi \
-	dvi-am info info-am install install-am install-data \
-	install-data-am install-exec install-exec-am install-info \
-	install-info-am install-man install-strip installcheck \
-	installcheck-am installdirs maintainer-clean \
-	maintainer-clean-generic mostlyclean mostlyclean-compile \
-	mostlyclean-generic tags uninstall uninstall-am \
-	uninstall-info-am
+distclean-am:  distclean-noinstLIBRARIES distclean-compile \
+		distclean-tags distclean-depend distclean-generic \
+		clean-am
+
+distclean: distclean-am
+
+maintainer-clean-am:  maintainer-clean-noinstLIBRARIES \
+		maintainer-clean-compile maintainer-clean-tags \
+		maintainer-clean-depend maintainer-clean-generic \
+		distclean-am
+	@echo "This command is intended for maintainers to use;"
+	@echo "it deletes files that may require special tools to rebuild."
+
+maintainer-clean: maintainer-clean-am
+
+.PHONY: mostlyclean-noinstLIBRARIES distclean-noinstLIBRARIES \
+clean-noinstLIBRARIES maintainer-clean-noinstLIBRARIES \
+mostlyclean-compile distclean-compile clean-compile \
+maintainer-clean-compile tags mostlyclean-tags distclean-tags \
+clean-tags maintainer-clean-tags distdir mostlyclean-depend \
+distclean-depend clean-depend maintainer-clean-depend info-am info \
+dvi-am dvi check check-am installcheck-am installcheck install-exec-am \
+install-exec install-data-am install-data install-am install \
+uninstall-am uninstall all-redirect all-am all installdirs \
+mostlyclean-generic distclean-generic clean-generic \
+maintainer-clean-generic clean mostlyclean distclean maintainer-clean
+
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.

@@ -20,7 +20,7 @@
 #ifndef _STAR_MGR_H_
 #define _STAR_MGR_H_
 
-#include <vector.h>
+#include <vector>
 #include "star.h"
 
 using namespace std ;
