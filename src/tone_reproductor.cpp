@@ -28,7 +28,7 @@
 #include <stdio.h>
 
 // Set some values to prevent bugs in case of bad use
-tone_reproductor::tone_reproductor() : Lda(40.f), Lwa(10000.f), MaxdL(120.f)
+tone_reproductor::tone_reproductor() : Lda(50.f), Lwa(40000.f), MaxdL(100.f), gamma(2.3f)
 {
 	set_display_adaptation_luminance(Lda);
 	set_world_adaptation_luminance(Lwa);
@@ -42,44 +42,47 @@ tone_reproductor::~tone_reproductor()
 // Usual luminance range is 1-100 cd/m^2 for a CRT screen
 void tone_reproductor::set_display_adaptation_luminance(float _Lda)
 {
+	static float log10Lda;
 	Lda = _Lda;
 
 	// Update alpha_da and beta_da values
-	register float log10Lda = log10f(Lda);
-	alpha_da = 0.4f * log10Lda + 2.92f;
-	beta_da = -0.4f * log10Lda*log10Lda - 2.58f * log10Lda + 2.02f;
+	log10Lda = log10f(Lda);
+	alpha_da = 0.4f * log10Lda + 1.519f;
+	beta_da = -0.4f * log10Lda*log10Lda + 0.218f * log10Lda + 6.1642f;
 
 	// Update terms
 	alpha_wa_over_alpha_da = alpha_wa/alpha_da;
-	term2 = powf(10.f, (beta_wa-beta_da)/alpha_da);
+	term2 = powf(10.f, (beta_wa-beta_da)/alpha_da) / (M_PI*0.0001f);
 }
 
 // Set the eye adaptation luminance for the world and precompute what can be
 void tone_reproductor::set_world_adaptation_luminance(float _Lwa)
 {
+	static float log10Lwa;
 	Lwa = _Lwa;
 
 	// Update alpha_da and beta_da values
-	register float log10Lwa = log10f(Lwa);
-	alpha_wa = 0.4f * log10Lwa + 2.92f;
-	beta_wa = -0.4f * log10Lwa*log10Lwa - 2.58f * log10Lwa + 2.02f;
+	log10Lwa = log10f(Lwa);
+	alpha_wa = 0.4f * log10Lwa + 1.519f;
+	beta_wa = -0.4f * log10Lwa*log10Lwa + 0.218f * log10Lwa + 6.1642f;
 
 	// Update terms
 	alpha_wa_over_alpha_da = alpha_wa/alpha_da;
-	term2 = powf(10.f, (beta_wa-beta_da)/alpha_da);
+	term2 = powf(10.f, (beta_wa-beta_da)/alpha_da) / (M_PI*0.0001f);
 }
 
 // Return adapted luminance from world to display
 inline float tone_reproductor::adapt_luminance(float L)
 {
-	return powf(L,alpha_wa_over_alpha_da) * term2;
+	return powf(L*M_PI*0.0001f,alpha_wa_over_alpha_da) * term2;
 }
 
 // Convert from xyY color system to RGB according to the adaptation
+// The Y component is in cd/m^2
 void tone_reproductor::xyY_to_RGB(float* color)
 {
 	// Adapt the luminance value and scale it to fit in the RGB range
-	color[2] = adapt_luminance(color[2]) / MaxdL;
+	color[2] = powf(adapt_luminance(color[2]) / MaxdL,1.f/gamma);
 
 	// Convert from xyY to XZY
 	register float X = color[0] * color[2] / color[1];
