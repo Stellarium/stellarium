@@ -32,7 +32,7 @@ public:
     Constellation();
     virtual ~Constellation();
     int read(FILE *, Hip_Star_mgr * _VouteCeleste);
-	void draw(Projector* prj) const;
+	void draw(Projector* prj, const Vec3f& lines_color) const;
     void draw_name(s_font * constfont, Projector* prj) const;
 	void draw_art(Projector* prj) const;
 	const Constellation* is_star_in(const Hip_Star *) const;

@@ -32,6 +32,7 @@
 
 #include <set>
 #include <list>
+#include <map>
 #include <string>
 #include <iostream>
 #include <sstream>
@@ -262,6 +263,7 @@ namespace s_tui
 		Integer_item *y, *m, *d, *h, *mn, *s;
     };
 
+
 	// Widget which simply launch the callback when the user press enter
 	class Action_item : public CallbackComponent
     {
@@ -297,6 +299,10 @@ namespace s_tui
     {
     public:
 		MultiSet_item(const string& _label = string()) : CallbackComponent(), label(_label) {current = items.end();}
+		MultiSet_item(const MultiSet_item& m) : CallbackComponent(), label(m.label)
+		{
+			setCurrent(m.getCurrent());
+		}
 		virtual string getString(void)
 		{
 			if (current==items.end()) return label;
@@ -328,7 +334,7 @@ namespace s_tui
 				return true;
 			}
 			if (k==SDLK_LEFT || k==SDLK_ESCAPE) return false;
-			else return true;
+			return false;
 		}
 		void addItem(const T& newitem) {items.insert(newitem); if(current==items.end()) current = items.begin();}
 		void addItemList(string s)
@@ -357,6 +363,23 @@ namespace s_tui
 		callback<void> onTriggerCallback;
     };
 
+
+	// Widget used to set time zone. Initialized from a file of type /usr/share/zoneinfo/zone.tab
+    class Time_zone_item : public CallbackComponent
+    {
+    public:
+		Time_zone_item(const string& zonetab_file, const string& _label = string());
+		virtual bool onKey(SDLKey, S_TUI_VALUE);
+		virtual string getString(void);
+		virtual bool isEditable(void) const {return true;}
+		string gettz(void); // should be const but gives a boring error...
+		void settz(string tz);
+    protected:
+		MultiSet_item<string> continents_names;
+		map<string, MultiSet_item<string> > continents;
+		string label;
+		MultiSet_item<string>* current_edit; // 0 : editing continents, 1 : editing cities
+    };
 
 }; // namespace s_tui
 

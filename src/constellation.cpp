@@ -79,11 +79,13 @@ int Constellation::read(FILE *  fic, Hip_Star_mgr * _VouteCeleste)
 }
 
 // Draw the Constellation lines
-void Constellation::draw(Projector* prj) const
+void Constellation::draw(Projector* prj, const Vec3f& lines_color) const
 {
 	glDisable(GL_TEXTURE_2D);
     glDisable(GL_BLEND);
-    glColor3f(0.2,0.2,0.2);
+
+	glColor3fv(lines_color);
+
     prj->set_orthographic_projection();	// set 2D coordinate
 
 	static Vec3d star1;
