@@ -249,7 +249,7 @@ void navigator::update_move(int delta_time)
     // if we are zooming in or out
     if (deltaFov)
     {
-		if (fov+deltaFov>0.0005 && fov+deltaFov<100)  fov+=deltaFov;
+		if (fov+deltaFov>0.005 && fov+deltaFov<100)  fov+=deltaFov;
     }
 
 	double azVision, altVision;
@@ -294,8 +294,6 @@ void navigator::update_transform_matrices(void)
 	Mat4d GEO_to_LOC = 	Mat4d::yrotation((-90.+position.latitude)*M_PI/180.) *
 						Mat4d::zrotation(-position.longitude*M_PI/180.);
 	Mat4d LOC_to_GEO = 	GEO_to_LOC.transpose();
-
-	//printf("%lf\n",JDay);
 
 	Mat4d GEI_to_GEO = Mat4d::zrotation(-get_apparent_sidereal_time(JDay)*M_PI/180.);
 	Mat4d GEO_to_GEI = GEI_to_GEO.transpose();

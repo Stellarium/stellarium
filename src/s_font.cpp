@@ -107,8 +107,8 @@ void s_font::print(float x, float y, char * str)
 { 
     if	(!s_fontTexture)
     {
-	printf("ERROR, NO FONT TEXTURE\n");
-	exit(1);
+		printf("ERROR, NO FONT TEXTURE\n");
+		exit(-1);
     }
     glBindTexture(GL_TEXTURE_2D, s_fontTexture->getID());  // Select Our s_font Texture
     glPushMatrix();

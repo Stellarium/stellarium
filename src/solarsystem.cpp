@@ -31,6 +31,8 @@ static s_texture * earth_map;
 static s_texture * moon_map;
 static s_texture * mars_map;
 static s_texture * jupiter_map;
+static s_texture * ganymede_map;
+static s_texture * io_map;
 static s_texture * saturn_map;
 static s_texture * saturn_ring_tex; // Saturn rings
 static s_texture * uranus_map;
@@ -49,6 +51,8 @@ planet * Mars;
 planet * Earth;
 planet * Moon;		// Moon, around earth
 planet * Jupiter;
+planet * Ganymede;
+planet * Io;
 planet * Saturn;
 planet * Uranus;
 planet * Neptune;
@@ -57,15 +61,16 @@ planet * Pluto;
 // Rings
 ring * saturn_ring;
 
-EllipticalOrbit * jupiter_orbit;
-// In testing
-void get_jupiter_orbit_helio_coords(double JD, double * X, double * Y, double * Z)
+// Elliptical orbits in testing
+EllipticalOrbit * io_orbit;
+void get_io_helio_coords(double JD, double * X, double * Y, double * Z)
 {
-//	get_jupiter_helio_coords(JD, X, Y, Z);
-//	printf("1 : %lf %lf %lf\n",*X,*Y,*Z);
-
-//	jupiter_orbit->positionAtTime(JD, X, Y, Z);
-//	printf("2 : %lf %lf %lf\n",*X,*Y,*Z);
+	io_orbit->positionAtTime(JD, X, Y, Z);
+}
+EllipticalOrbit * ganymede_orbit;
+void get_ganymede_helio_coords(double JD, double * X, double * Y, double * Z)
+{
+	ganymede_orbit->positionAtTime(JD, X, Y, Z);
 }
 
  // Create and init the solar system
@@ -81,8 +86,20 @@ void InitSolarSystem(void)
         exit(-1);
     }
 
-	jupiter_orbit = new EllipticalOrbit(5.2034 * (1.0 - 0.0484),
-		0.0484, 1.3053*M_PI/180., 100.556*M_PI/180., (14.7539 - 100.556)*M_PI/180., -14.7539*M_PI/180., 11.8622, J2000);
+
+/*	Epoch 2443000.00038375
+	Period         1.769138
+	SemiMajorAxis  421600
+	Eccentricity   0.0041
+	Inclination    0.040
+	AscendingNode    312.981
+	LongOfPericenter  97.735
+	MeanLongitude    106.724*/
+
+	ganymede_orbit = new EllipticalOrbit(1070000/AU * (1.0 - 0.0015),
+		0.0015, 0.195*M_PI/180., 119.841*M_PI/180., (188.831 - 119.841)*M_PI/180., -188.831*M_PI/180., 7.154553, 2443000.00038375);
+	io_orbit = new EllipticalOrbit(421600/AU * (1.0 - 0.0041),
+		0.0041, 0.040*M_PI/180., 312.981*M_PI/180., (97.735 - 312.981)*M_PI/180., -97.735*M_PI/180., 1.769138, 2443000.00038375);
 
 
     sun_map = new s_texture("sun",TEX_LOAD_TYPE_PNG_SOLID);
@@ -91,6 +108,8 @@ void InitSolarSystem(void)
     mercury_map = new s_texture("mercury",TEX_LOAD_TYPE_PNG_SOLID);
     venus_map = new s_texture("venus",TEX_LOAD_TYPE_PNG_SOLID);
     jupiter_map = new s_texture("jupiter",TEX_LOAD_TYPE_PNG_SOLID);
+    ganymede_map = new s_texture("ganymede",TEX_LOAD_TYPE_PNG_SOLID);
+    io_map = new s_texture("io",TEX_LOAD_TYPE_PNG_SOLID);
     mars_map = new s_texture("mars",TEX_LOAD_TYPE_PNG_SOLID);
     saturn_map = new s_texture("saturn",TEX_LOAD_TYPE_PNG_SOLID);
     uranus_map = new s_texture("uranus",TEX_LOAD_TYPE_PNG_SOLID);
@@ -110,6 +129,8 @@ void InitSolarSystem(void)
 	Venus = new planet("Venus", NO_HALO, 6052./AU, vec3_t(1.,1.,1.), venus_map, NULL, get_venus_helio_coords);
 	Mars = new planet("Mars", NO_HALO, 3394./AU, vec3_t(1.,1.,1.), mars_map, NULL, get_mars_helio_coords);
 	Jupiter = new planet("Jupiter", NO_HALO, 71398./AU, vec3_t(1.,1.,1.), jupiter_map, NULL, get_jupiter_helio_coords);
+	Ganymede = new planet("Ganymede", NO_HALO, 2634./AU, vec3_t(1.,1.,1.), ganymede_map, NULL, get_ganymede_helio_coords);
+	Io = new planet("Io", NO_HALO, 2634./AU, vec3_t(1.,1.,1.), io_map, NULL, get_io_helio_coords);
 	Saturn = new ring_planet("Saturn", NO_HALO, 60330./AU, vec3_t(1.,1.,1.), saturn_map, NULL, get_saturn_helio_coords, saturn_ring);
 	Uranus = new planet("Uranus", NO_HALO, 26200./AU, vec3_t(1.,1.,1.), uranus_map, NULL, get_uranus_helio_coords);
 	Neptune = new planet("Neptune", NO_HALO, 25225./AU, vec3_t(1.,1.,1.), neptune_map, NULL, get_neptune_helio_coords);
@@ -122,7 +143,10 @@ void InitSolarSystem(void)
 	Moon->set_rotation_elements((27.321661*24)/24., 38, J2000, 23.45*M_PI/180., 0., 0);
     Mars->set_rotation_elements(24.622962/24., 136.005, J2000, -26.72*M_PI/180., 82.91*M_PI/180., 0);
     Jupiter->set_rotation_elements(9.927953/24., 16, J2000, -2.222461*M_PI/180., -22.203*M_PI/180., 0);
-    Saturn->set_rotation_elements(10.65622/24., 358.922, J2000, -2.222461*M_PI/180., 169.530*M_PI/180., 0);
+    Ganymede->set_rotation_elements(7.154553/24., 262.1, J2000, -0.1*M_PI/180., 161.6*M_PI/180., 0);
+    Io->set_rotation_elements(1.769138/24., 220.8, J2000, 0., 0., 0);
+
+	Saturn->set_rotation_elements(10.65622/24., 358.922, J2000, -2.222461*M_PI/180., 169.530*M_PI/180., 0);
     Uranus->set_rotation_elements(17.24/24., 331.18, J2000, -97.81*M_PI/180., 167.76*M_PI/180., 0);
     Neptune->set_rotation_elements(16.11/24., 228.65, J2000, -28.03*M_PI/180., 49.235*M_PI/180., 0);
     Pluto->set_rotation_elements(248.54/24., 320.75, J2000, -115.60*M_PI/180., 228.34*M_PI/180., 0);
@@ -134,6 +158,8 @@ void InitSolarSystem(void)
 	Earth->addSatellite(Moon);
 	Sun->addSatellite(Mars);
 	Sun->addSatellite(Jupiter);
+	Jupiter->addSatellite(Io);
+	Jupiter->addSatellite(Ganymede);
 	Sun->addSatellite(Saturn);
 	Sun->addSatellite(Uranus);
 	Sun->addSatellite(Neptune);
