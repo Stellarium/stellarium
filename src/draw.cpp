@@ -255,7 +255,7 @@ void DrawMilkyWay(void)
     glRotatef(-84,0,0,1);
     GLUquadricObj * MilkyWay=gluNewQuadric();
     gluQuadricTexture(MilkyWay,GL_TRUE);
-    gluSphere(MilkyWay,1000,15,15);
+    gluSphere(MilkyWay,500,15,15);
     gluDeleteQuadric(MilkyWay);
     glPopMatrix();
 }

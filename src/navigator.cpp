@@ -22,6 +22,7 @@
 #include "stel_utility.h"
 #include "stel_object.h"
 #include "stellastro.h"
+#include "solarsystem.h"
 
 observator_pos::observator_pos() : planet(3), longitude(0.), latitude(0.), time_zone(0), altitude(0)
 {
@@ -173,7 +174,7 @@ void navigator::update_transform_matrices(void)
     glRotated(global.RaZenith*180/PI,0,1,0);*/
 
 	mat_helio_to_local=Mat4d::identity();
-	mat_local_to_helio=Mat4d::identity();
+	mat_local_to_helio=Mat4d::translation(Earth->get_ecliptic_pos());
 mat_local_to_earth_equ=Mat4d::identity();
 mat_earth_equ_to_local=Mat4d::identity();
 	/*mat_local_to_earth_equ=Mat4d::xrotation((position.latitude-90.)*M_PI/180.) *
@@ -312,7 +313,8 @@ void navigator::switch_to_earth_equatorial(void)
 // Place openGL in heliocentric coordinates
 void navigator::switch_to_heliocentric(void)
 {
-	switch_to_earth_equatorial();
+    switch_to_local();
+	glMultMatrixd(mat_local_to_helio);
 }
 
 // Place openGL in local viewer coordinates (Usually somewhere on earth viewing in a specific direction)

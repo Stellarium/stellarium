@@ -20,6 +20,9 @@
 
 #include "planet.h"
 #include "navigator.h"
+#include "s_font.h"
+
+s_font * planet_name_font;
 
 rotation_elements::rotation_elements() : period(1.), offset(0.), epoch(J2000), obliquity(0.), ascendingNode(0.), precessionRate(0.)
 {
@@ -91,6 +94,7 @@ void planet::compute_trans_matrix(double date)
     }
 }
 
+
 // Compute the z rotation to use from equatorial to geographic coordinates
 void planet::compute_geographic_rotation(double date)
 {
@@ -132,13 +136,45 @@ void planet::addSatellite(planet*p)
 
 void planet::draw(void)
 {
-    glEnable(GL_TEXTURE_2D);
-	glEnable(GL_CULL_FACE);
-	glDisable(GL_BLEND);
-
 	glPushMatrix();
 
     glMultMatrixd(mat_parent_to_local);
+
+    if (global.FlagPlanetsHintDrawing)
+    // Draw the name, and the circle
+    // Thanks to Nick Porcino for this addition
+    {   
+        double screenX, screenY, screenZ;
+        Project(0., 0., 0., screenX, screenY, screenZ);
+
+        if (screenZ < 1)
+        {
+            screenY = global.Y_Resolution - screenY;
+
+            setOrthographicProjection(global.X_Resolution, global.Y_Resolution);    // 2D coordinate
+ 
+            glColor3f(0.5,0.5,0.7);
+            float tmp = 0;//radius/navigation.get_fov();
+            planet_name_font->print((int)(screenX-tmp),(int)(screenY-tmp), name);
+
+            // Draw the circle
+            glDisable(GL_TEXTURE_2D);
+            glDisable(GL_BLEND);
+            glDisable(GL_LIGHTING);
+            glBegin(GL_LINE_STRIP);
+            for (float r = 0; r < 6.28; r += 0.2)
+            {   
+                glVertex3f(screenX + 8. * sin(r), screenY + 8. * cos(r), 0);
+            }
+            glEnd();
+            resetPerspectiveProjection();                           // Restore the other coordinate
+        }
+    }
+    
+    glEnable(GL_LIGHTING);
+    glEnable(GL_TEXTURE_2D);
+	glEnable(GL_CULL_FACE);
+	glDisable(GL_BLEND);
 
 	glPushMatrix();
 
@@ -183,16 +219,17 @@ void sun_planet::compute_position(double date)
 
     float tmp[4] = {0,0,0,1};
     float tmp2[4] = {0.01,0.01,0.01,1};
-    float tmp3[4] = {1,1,1,1};
-    glLightfv(GL_LIGHT1,GL_AMBIENT,tmp3);
+    float tmp3[4] = {1000,1000,1000,1};
+    float tmp4[4] = {1,1,1,1};
+    glLightfv(GL_LIGHT1,GL_AMBIENT,tmp);
     glLightfv(GL_LIGHT1,GL_DIFFUSE,tmp3);
     glLightfv(GL_LIGHT1,GL_SPECULAR,tmp);
 
     glDisable(GL_LIGHT0);
     glEnable(GL_LIGHT1);
 
-    glMaterialfv(GL_FRONT_AND_BACK,GL_AMBIENT ,tmp2);
-    glMaterialfv(GL_FRONT_AND_BACK,GL_DIFFUSE ,tmp3);
+    glMaterialfv(GL_FRONT_AND_BACK,GL_AMBIENT ,tmp);
+    glMaterialfv(GL_FRONT_AND_BACK,GL_DIFFUSE ,tmp4);
     glMaterialfv(GL_FRONT_AND_BACK,GL_EMISSION ,tmp);
     glMaterialfv(GL_FRONT_AND_BACK,GL_SHININESS ,tmp);
     glMaterialfv(GL_FRONT_AND_BACK,GL_SPECULAR ,tmp);
@@ -283,43 +320,7 @@ void Planet::Draw(vec3_t coordLight)
         glPopMatrix();  
     }
 
-    if (global.FlagPlanetsHintDrawing)
-    // Draw the name, and the circle
-    // Thanks to Nick Porcino for this addition
-    {   
-        double screenX, screenY, screenZ;
-        Project(0, 0, 0, screenX, screenY, screenZ);
 
-        if (screenZ < 1)
-        {
-            screenY = global.Y_Resolution - screenY;
-
-            setOrthographicProjection(global.X_Resolution, global.Y_Resolution);    // 2D coordinate
-            glPushMatrix();
-            glLoadIdentity();
-            
-            glColor3f(1,0.5,0.5);
-            float tmp = 50000*atan(Rayon/Distance_to_obs)/global.Fov;
-            planetNameFont->print((int)(screenX - 55-tmp),(int)(screenY-tmp), Name);
-
-            // Draw the circle
-            glDisable(GL_TEXTURE_2D);
-            glDisable(GL_BLEND);
-            glBegin(GL_LINE_STRIP);
-                float offX, offY;
-                for (float r = 0; r < 6.28; r += 0.2)
-                {   
-                    offX = 8. * sin(r);
-                    offY = 8. * cos(r);
-                    glVertex3f(screenX + offX, screenY + offY, 0);
-                }
-            glEnd();
-
-            glPopMatrix();
-            glEnable(GL_TEXTURE_2D);
-            resetPerspectiveProjection();                           // Restore the other coordinate
-        }
-    }
 
     glRotatef(90,1,0,0);
 
