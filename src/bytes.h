@@ -10,6 +10,10 @@
 #ifndef _BYTES_H_
 #define _BYTES_H_
 
+#ifdef HAVE_CONFIG_H
+# include "config.h"
+#endif
+
 /* Use the system byteswap.h definitions if we have them */
 #ifdef HAVE_BYTESWAP_H
 #include <byteswap.h>

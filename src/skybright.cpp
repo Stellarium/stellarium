@@ -18,6 +18,8 @@
 
 #include <stdio.h>
 #include <math.h>
+#include "fmath.h"
+
 #include "skybright.h"
 
 skybright::skybright() : SN(1.f)
