@@ -162,7 +162,6 @@ Container::~Container()
     {
         if (*iter)
         {
-			printf("Container destructor\n");
             delete (*iter);
         }
         iter++;
@@ -378,6 +377,7 @@ Labeled_Button::Labeled_Button(char * _label) : Button(), label(NULL)
 Labeled_Button::~Labeled_Button()
 {
     if (label) free(label);
+	label = NULL;
 }
 
 const char * Labeled_Button::getLabel() const
@@ -447,7 +447,6 @@ Textured_Button::Textured_Button(
 
 Textured_Button::~Textured_Button()
 {
-	printf("Textured_Button destructor\n");
     if (texBt) delete texBt;
     texBt = NULL;
 }
@@ -502,6 +501,7 @@ Label::Label(char * _label, s_font * _theFont) :
 Label::~Label()
 {
     if (label) delete label;
+	label=NULL;
 }
 
 const char * Label::getLabel() const
@@ -538,8 +538,7 @@ void Label::render(GraphicsContext& gc)
 }
 
 /**** TextLabel ****/
-
-TextLabel::TextLabel(char * _label, s_font * _theFont) : 
+TextLabel::TextLabel(char * _label, s_font * _theFont) :
     Container(),
     label(NULL),
     theFont(_theFont),
@@ -553,6 +552,7 @@ TextLabel::TextLabel(char * _label, s_font * _theFont) :
 TextLabel::~TextLabel()
 {
     if (label) delete label;
+	label=NULL;
 }
 
 const char * TextLabel::getLabel() const
@@ -595,15 +595,10 @@ void TextLabel::setColour(vec3_t _colour)
 }
 
 /**** FilledTextLabel ****/
-
 FilledTextLabel::FilledTextLabel(char * _label, s_font * _theFont) : TextLabel(_label, _theFont)
 {
 }
 
-/*FilledTextLabel::~FilledTextLabel()
-{
-	~TextLabel();
-}*/
 
 void FilledTextLabel::render(GraphicsContext& gc)
 {
@@ -634,7 +629,6 @@ void FilledTextLabel::render(GraphicsContext& gc)
 
 
 /**** Cursor Bar ****/
-
 void ExtCursorBarClicCallback(int x, int y, enum guiValue state, enum guiValue button, Component * me)
 {
     ((CursorBar*)me)->CursorBarClicCallback(x, button, state);
@@ -671,20 +665,20 @@ void CursorBar::render(GraphicsContext& gc)
     vec2_i pos = getPosition();
     vec2_i sz = getSize();
     glBegin(GL_LINE_LOOP);
-    glVertex2i(pos[0] + 3 , pos[1] + sz[1] / 2 - 1);
-    glVertex2i(pos[0] + sz[0] - 3 , pos[1] + sz[1] / 2 - 1);
-    glVertex2i(pos[0] + sz[0] - 3 , pos[1] + sz[1] / 2 + 1);
-    glVertex2i(pos[0] + 3 , pos[1] + sz[1] / 2 + 1);
-    glVertex2i(pos[0] + 3 , pos[1] + sz[1] / 2 - 1);
+    	glVertex2i(pos[0] + 3 , pos[1] + sz[1] / 2 - 1);
+    	glVertex2i(pos[0] + sz[0] - 3 , pos[1] + sz[1] / 2 - 1);
+    	glVertex2i(pos[0] + sz[0] - 3 , pos[1] + sz[1] / 2 + 1);
+    	glVertex2i(pos[0] + 3 , pos[1] + sz[1] / 2 + 1);
+    	glVertex2i(pos[0] + 3 , pos[1] + sz[1] / 2 - 1);
     glEnd();
     float xpos = pos[0] + 3 + (sz[0] - 6) * ((float)(barValue - minBarValue) / (float)(maxBarValue - minBarValue));
     glColor3fv(gc.baseColor*2);
     glBegin(GL_LINE_LOOP);
-    glVertex2f(xpos - 2 , sz[1] / 2 + pos[1] - 5);
-    glVertex2f(xpos + 2 , sz[1] / 2 + pos[1] - 5);
-    glVertex2f(xpos + 2 , sz[1] / 2 + pos[1] + 5);
-    glVertex2f(xpos - 2 , sz[1] / 2 + pos[1] + 5);
-    glVertex2f(xpos - 2 , sz[1] / 2 + pos[1] - 5);
+    	glVertex2f(xpos - 2 , sz[1] / 2 + pos[1] - 5);
+    	glVertex2f(xpos + 2 , sz[1] / 2 + pos[1] - 5);
+    	glVertex2f(xpos + 2 , sz[1] / 2 + pos[1] + 5);
+    	glVertex2f(xpos - 2 , sz[1] / 2 + pos[1] + 5);
+    	glVertex2f(xpos - 2 , sz[1] / 2 + pos[1] - 5);
     glEnd();
 }
 
@@ -728,6 +722,13 @@ void CursorBar::CursorBarMoveCallback(int x, enum guiValue action)
     }
 }
 
+void CursorBar::setValue(float _barValue)
+{
+	if (_barValue==barValue) return;
+	barValue=_barValue;
+	onValueChangeCallBack(barValue, this);
+}
+
 Picture::Picture(vec2_i _position, vec2_i _size, s_texture * _imageTex) : imageTex(_imageTex)
 {
 	if (!imageTex)
@@ -742,7 +743,6 @@ Picture::~Picture()
 {
     if (imageTex) delete imageTex;
     imageTex = NULL;
-	printf("coucou\n");
 }
 
 void Picture::render(GraphicsContext&)
@@ -764,10 +764,6 @@ void Picture::render(GraphicsContext&)
 BorderPicture::BorderPicture(vec2_i _position, vec2_i _size, s_texture * _imageTex) : Picture(_position,_size,_imageTex)
 {}
 
-/*BorderPicture::~BorderPicture()
-{
-	Picture::~Picture();
-}*/
 
 void BorderPicture::render(GraphicsContext& gc)
 {
@@ -785,3 +781,59 @@ void BorderPicture::render(GraphicsContext& gc)
     glEnd();
 }
 
+/**** ClickablePicture ****/
+
+void ExtClickablePictureClicCallback(int x, int y, enum guiValue state, enum guiValue button, Component * me)
+{
+    ((ClickablePicture*)me)->ClickablePictureClicCallback(x,y,button, state);
+}
+
+/*void ExtClickablePictureMoveCallback(int x, int y, enum guiValue action, Component * me)
+{
+    ((ClickablePicture*)me)->ClickablePictureMoveCallback(action);
+}*/
+
+ClickablePicture::ClickablePicture(vec2_i _position, vec2_i _size, s_texture * _imageTex, void (*_onValueChangeCallBack)(vec2_t _pointerPosition, Component *)) : BorderPicture(_position, _size, _imageTex)
+{
+	setClicCallback(ExtClickablePictureClicCallback);
+	onValueChangeCallBack=_onValueChangeCallBack;
+	pointerPosition=vec2_t(0.0,0.0);
+}
+
+void ClickablePicture::render(GraphicsContext& gc)
+{
+	BorderPicture::render(gc);
+
+	vec2_i pos = getPosition();
+	glTranslatef(pos[0]+0.5, pos[1]+0.5, 0);
+	// Draw the pointer
+	glColor3f(1.0,1.0,1.0);
+    glDisable(GL_TEXTURE_2D);
+	glBegin(GL_LINES);
+		glVertex2f(pointerPosition[0]+1,pointerPosition[1]);
+		glVertex2f(pointerPosition[0]+4,pointerPosition[1]);
+		glVertex2f(pointerPosition[0]-1,pointerPosition[1]);
+		glVertex2f(pointerPosition[0]-4,pointerPosition[1]);
+		glVertex2f(pointerPosition[0],pointerPosition[1]+1);
+		glVertex2f(pointerPosition[0],pointerPosition[1]+4);
+		glVertex2f(pointerPosition[0],pointerPosition[1]-1);
+		glVertex2f(pointerPosition[0],pointerPosition[1]-4);
+    glEnd();
+	glTranslatef(-pos[0]-0.5, -pos[1]-0.5, 0);
+}
+
+void ClickablePicture::setPointerPosition(vec2_t _pointerPosition)
+{
+	pointerPosition=_pointerPosition;
+}
+
+void ClickablePicture::ClickablePictureClicCallback(int x, int y, enum guiValue button, enum guiValue state)
+{
+    if (state == GUI_DOWN)
+    {
+		vec2_i pos = getPosition();
+		pointerPosition[0]=x-pos[0];
+		pointerPosition[1]=y-pos[1];
+        if (onValueChangeCallBack != NULL) onValueChangeCallBack(pointerPosition, this);
+    }
+}

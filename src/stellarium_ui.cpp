@@ -98,7 +98,7 @@ Label * LongitudeLabel = NULL;
 Label * AltitudeLabel = NULL;
 Label * TimeZoneLabel = NULL;
 Labeled_Button * SaveLocation = NULL;
-Picture * EarthMap = NULL;
+ClickablePicture * EarthMap = NULL;
 
 StdBtWin * TimeControlWin = NULL;              // The window containing the time controls
 Container * TimeControlContainer = NULL;
@@ -346,7 +346,8 @@ void TimeControlBtOnClicCallback(guiValue button,Component * caller)
 /**********************************************************************************/
 
 void LatitudeBarOnChangeValue(float value,Component *)
-{   
+{
+	EarthMap->setPointerPosition(vec2_t(EarthMap->getPointerPosition()[0],(-value+90.)/180.*EarthMap->getSize()[1]));
     value=90.-value;
     global.ThePlace.setLatitude(value);
     char tempValueStr[30];
@@ -364,6 +365,7 @@ void LongitudeBarOnChangeValue(float value,Component *)
     else 
         sprintf(tempValueStr,"\1 Longitude : %.2f E",value);
     LongitudeLabel->setLabel(tempValueStr);
+	EarthMap->setPointerPosition(vec2_t((value+180.)/360.*EarthMap->getSize()[0],EarthMap->getPointerPosition()[1]));
     value=-value;
     if (value<0) value=360.+value;
     global.ThePlace.setLongitude(value);
@@ -386,6 +388,15 @@ void TimeZoneBarOnChangeValue(float value,Component *)
 void SaveLocationOnClicCallback(guiValue button,Component *)
 {  
 	dumpLocation();
+}
+
+void EarthMapOnChangeValue(vec2_t posPoint,Component *)
+{
+	vec2_i sz = EarthMap->getSize();
+	float longi = 360.0*posPoint[0]/sz[0]-180;
+	float lat = 180.0*posPoint[1]/sz[1]-90;
+	LongitudeBar->setValue(longi);
+	LatitudeBar->setValue(-lat);
 }
 
 /**********************************************************************************/
@@ -675,8 +686,9 @@ Boston, MA  02111-1307, USA.\n"
     else
         sprintf(tempValueStr,"\1 Latitude : %.2f S",global.ThePlace.latitude()*180./PI-90);
     LatitudeLabel->setLabel(tempValueStr);
-    LatitudeBar = new CursorBar(vec2_i(15,35), vec2_i(150,10),-90.,90.,-(global.ThePlace.latitude()*180/PI-90),LatitudeBarOnChangeValue);
-    
+    LatitudeBar = new CursorBar(vec2_i(15,35), vec2_i(150,10),-90.,90.,
+		-(global.ThePlace.latitude()*180/PI-90),LatitudeBarOnChangeValue);
+
     LongitudeLabel = new Label("Longitude : ");
     LongitudeLabel->reshape(15,60,20,15);
     float temp = (2*PI-global.ThePlace.longitude())*180/PI;
@@ -685,7 +697,8 @@ Boston, MA  02111-1307, USA.\n"
     else 
         sprintf(tempValueStr,"\1 Longitude : %.2f E",temp);
     LongitudeLabel->setLabel(tempValueStr);
-    LongitudeBar = new CursorBar(vec2_i(15,75), vec2_i(150,10),-180,180,(2*PI-global.ThePlace.longitude())*180/PI,LongitudeBarOnChangeValue);
+    LongitudeBar = new CursorBar(vec2_i(15,75), vec2_i(150,10),-180,180,
+		(2*PI-global.ThePlace.longitude())*180/PI,LongitudeBarOnChangeValue);
 
     AltitudeLabel = new Label("Altitude : ");
     AltitudeLabel->reshape(170,20,20,15);
@@ -703,7 +716,9 @@ Boston, MA  02111-1307, USA.\n"
     SaveLocation->reshape(120,240,100,20);
     SaveLocation->setOnClicCallback(SaveLocationOnClicCallback);
 
-    EarthMap = new BorderPicture(vec2_i(30,95),vec2_i(280,140),new s_texture("earthmap"));
+    EarthMap = new ClickablePicture(vec2_i(30,95),vec2_i(280,140),new s_texture("earthmap"),EarthMapOnChangeValue);
+	EarthMap->setPointerPosition(vec2_t((LongitudeBar->getValue()+180.)/360.*EarthMap->getSize()[0],
+		(-LatitudeBar->getValue()+90.)/180.*EarthMap->getSize()[1]));
 
     LocationConfigContainer->addComponent(LocationLabel);
     LocationConfigContainer->addComponent(LatitudeBar);
@@ -773,7 +788,6 @@ Boston, MA  02111-1307, USA.\n"
 /**********************************************************************************/
 /*** Base container ***/
     Base = new Container();
-    // Seems to be 1,1 in linux
     Base->reshape(0,0,global.X_Resolution,global.Y_Resolution);
     Base->addComponent(ContainerBtFlags);
     Base->addComponent(btLegend);
@@ -953,15 +967,7 @@ void renderUi()
     Base->render(*gc);
     glDisable(GL_SCISSOR_TEST);
     glPopMatrix();
-    resetPerspectiveProjection();                                           // Restore the other coordinate
-}
-
-/*******************************************************************/
-void updateUi() // To finish
-{
-	Base->reshape(0,0,global.X_Resolution,global.Y_Resolution);
-	ContainerBtFlags->reshape(vec2_i(0,global.Y_Resolution-ContainerBtFlags->getSize()[1]),
-		ContainerBtFlags->getSize());
+    resetPerspectiveProjection();             // Restore the other coordinate
 }
 
 /*******************************************************************************/
@@ -1028,7 +1034,8 @@ void GuiHandleClic(Uint16 x, Uint16 y, Uint8 state, Uint8 button)
 
 /*******************************************************************************/
 bool GuiHandleKeys(SDLKey key, int state)
-{   if (state==GUI_DOWN)
+{
+	if (state==GUI_DOWN)
     {   
     	if(key==SDLK_ESCAPE)
     	{ 	
