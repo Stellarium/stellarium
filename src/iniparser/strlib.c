@@ -4,7 +4,7 @@
   @file		strlib.c
   @author	N. Devillard
   @date		Jan 2001
-  @version	$Revision: 212 $
+  @version	$Revision: 247 $
   @brief	Various string handling routines to complement the C lib.
 
   This modules adds a few complementary string routines usually missing
@@ -13,10 +13,10 @@
 /*--------------------------------------------------------------------------*/
 
 /*
-	$Id: strlib.c 212 2003-06-22 11:37:45Z xalioth $
+	$Id: strlib.c 247 2003-08-02 22:58:01Z xalioth $
 	$Author: xalioth $
-	$Date: 2003-06-22 12:37:45 +0100 (Sun, 22 Jun 2003) $
-	$Revision: 212 $
+	$Date: 2003-08-02 23:58:01 +0100 (Sat, 02 Aug 2003) $
+	$Revision: 247 $
 */
 
 /*---------------------------------------------------------------------------
@@ -51,7 +51,7 @@
  */
 /*--------------------------------------------------------------------------*/
 
-char * strlwc(char * s)
+const char * strlwc(const char * s)
 {
     static char l[ASCIILINESZ+1];
     int i ;
@@ -82,7 +82,7 @@ char * strlwc(char * s)
  */
 /*--------------------------------------------------------------------------*/
 
-char * strupc(char * s)
+const char * strupc(const char * s)
 {
     static char l[ASCIILINESZ+1];
     int i ;
@@ -136,7 +136,7 @@ char * strskp(char * s)
  */
 /*--------------------------------------------------------------------------*/
 
-char * strcrop(char * s)
+const char * strcrop(const char * s)
 {
     static char l[ASCIILINESZ+1];
 	char * last ;
@@ -170,7 +170,7 @@ char * strcrop(char * s)
   (not re-entrant).
  */
 /*--------------------------------------------------------------------------*/
-char * strstrip(char * s)
+const char * strstrip(const char * s)
 {
     static char l[ASCIILINESZ+1];
 	char * last ;

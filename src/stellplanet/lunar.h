@@ -23,28 +23,28 @@ Copyright (C) 2002 Liam Girdwood <liam@nova-ioe.org>
 /* used for elp1 - 3 */
 struct main_problem
 {
-	int ilu[4];
-	double A;
-	double B[6];
+	signed char ilu[4];
+	float A;
+	float B[6];
 };
 
 /* used for elp 4 - 9 */
 struct earth_pert
 {
-	int iz;
-	int ilu[4];
-	double O;
-	double A;
-	double P;
+	signed char iz;
+	signed char ilu[4];
+	float O;
+	float A;
+	float P;
 }; 
 
 /* used for elp 10 - 21 */
 struct planet_pert
 {
-	int ipla[11];
-	double theta;
-	double O;
-	double P;
+	signed char ipla[11];
+	float theta;
+	float O;
+	float P;
 };
 
 typedef struct earth_pert tidal_effects;

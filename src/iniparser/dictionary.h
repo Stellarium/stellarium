@@ -4,7 +4,7 @@
    @file    dictionary.h
    @author  N. Devillard
    @date    Aug 2000
-   @version $Revision: 236 $
+   @version $Revision: 247 $
    @brief   Implements a dictionary for string variables.
 
    This module implements a simple dictionary object, i.e. a list
@@ -14,10 +14,10 @@
 /*--------------------------------------------------------------------------*/
 
 /*
-	$Id: dictionary.h 236 2003-07-25 14:16:53Z xalioth $
+	$Id: dictionary.h 247 2003-08-02 22:58:01Z xalioth $
 	$Author: xalioth $
-	$Date: 2003-07-25 15:16:53 +0100 (Fri, 25 Jul 2003) $
-	$Revision: 236 $
+	$Date: 2003-08-02 23:58:01 +0100 (Sat, 02 Aug 2003) $
+	$Revision: 247 $
 */
 
 #ifndef _DICTIONARY_H_
@@ -72,7 +72,7 @@ typedef struct _dictionary_ {
   by comparing the key itself in last resort.
  */
 /*--------------------------------------------------------------------------*/
-unsigned dictionary_hash(char * key);
+unsigned dictionary_hash(const char * key);
 
 /*-------------------------------------------------------------------------*/
 /**
@@ -127,7 +127,7 @@ const char * dictionary_get(const dictionary * d, const char * key, const char *
   and returns the first char of the found string.
  */
 /*--------------------------------------------------------------------------*/
-char dictionary_getchar(dictionary * d, char * key, char def) ;
+char dictionary_getchar(dictionary * d, const char * key, char def) ;
 
 /*-------------------------------------------------------------------------*/
 /**
@@ -142,7 +142,7 @@ char dictionary_getchar(dictionary * d, char * key, char def) ;
   in the dictionary, the default is returned.
  */
 /*--------------------------------------------------------------------------*/
-int dictionary_getint(dictionary * d, char * key, int def);
+int dictionary_getint(dictionary * d, const char * key, int def);
 
 /*-------------------------------------------------------------------------*/
 /**
@@ -157,7 +157,7 @@ int dictionary_getint(dictionary * d, char * key, int def);
   in the dictionary, the default is returned.
  */
 /*--------------------------------------------------------------------------*/
-double dictionary_getdouble(dictionary * d, char * key, double def);
+double dictionary_getdouble(dictionary * d, const char * key, double def);
 
 /*-------------------------------------------------------------------------*/
 /**
@@ -196,7 +196,7 @@ void dictionary_set(dictionary * vd, const char * key, const char * val);
   key cannot be found.
  */
 /*--------------------------------------------------------------------------*/
-void dictionary_unset(dictionary * d, char * key);
+void dictionary_unset(dictionary * d, const char * key);
 
 
 /*-------------------------------------------------------------------------*/
@@ -211,7 +211,7 @@ void dictionary_unset(dictionary * d, char * key);
   converted to a string using %d.
  */
 /*--------------------------------------------------------------------------*/
-void dictionary_setint(dictionary * d, char * key, int val);
+void dictionary_setint(dictionary * d, const char * key, int val);
 
 /*-------------------------------------------------------------------------*/
 /**
@@ -225,7 +225,7 @@ void dictionary_setint(dictionary * d, char * key, int val);
   converted to a string using %g.
  */
 /*--------------------------------------------------------------------------*/
-void dictionary_setdouble(dictionary * d, char * key, double val);
+void dictionary_setdouble(dictionary * d, const char * key, double val);
 
 /*-------------------------------------------------------------------------*/
 /**
