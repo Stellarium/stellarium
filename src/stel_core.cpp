@@ -574,7 +574,7 @@ void stel_core::load_config_from(const string& confFile)
 	FlagShowDate		= conf.get_boolean("gui:flag_show_date");
 	FlagShowAppName		= conf.get_boolean("gui:flag_show_appname");
 	FlagShowFov			= conf.get_boolean("gui:flag_show_fov");
-	FlagShowSelectedObjectInfos = conf.get_boolean("gui:flag_show_selected_object_info");
+	FlagShowSelectedObjectInfo = conf.get_boolean("gui:flag_show_selected_object_info");
 	GuiBaseColor		= str_to_vec3f(conf.get_str("gui:gui_base_color").c_str());
 	GuiTextColor		= str_to_vec3f(conf.get_str("gui:gui_text_color").c_str());
 	BaseFontSize		= conf.get_double ("gui","base_font_size",15);
@@ -597,7 +597,7 @@ void stel_core::load_config_from(const string& confFile)
 	FlagEnableTuiMenu = conf.get_boolean("tui:flag_enable_tui_menu");
 	FlagShowGravityUi = conf.get_boolean("tui:flag_show_gravity_ui");
 	FlagShowTuiDateTime = conf.get_boolean("tui:flag_show_tui_datetime");
-	FlagShowTuiShortInfo = conf.get_boolean("tui:flag_show_tui_short_obj_info");
+	FlagShowTuiShortObjInfo = conf.get_boolean("tui:flag_show_tui_short_obj_info");
 
 	// Navigation section
 	PresetSkyTime 		= conf.get_double ("navigation","preset_sky_time",2451545.);
@@ -720,7 +720,7 @@ void stel_core::save_config_to(const string& confFile)
 	conf.set_boolean("gui:flag_show_date", FlagShowDate);
 	conf.set_boolean("gui:flag_show_appname", FlagShowAppName);
 	conf.set_boolean("gui:flag_show_fov", FlagShowFov);
-	conf.set_boolean("gui:flag_show_selected_object_info", FlagShowSelectedObjectInfos);
+	conf.set_boolean("gui:flag_show_selected_object_info", FlagShowSelectedObjectInfo);
 	conf.set_str	("gui:gui_base_color", vec3f_to_str(GuiBaseColor));
 	conf.set_str	("gui:gui_text_color", vec3f_to_str(GuiTextColor));
 	conf.set_double ("gui:base_font_size", BaseFontSize);
@@ -743,7 +743,7 @@ void stel_core::save_config_to(const string& confFile)
 	conf.set_boolean("tui:flag_enable_tui_menu", FlagEnableTuiMenu);
 	conf.set_boolean("tui:flag_show_gravity_ui", FlagShowGravityUi);
 	conf.set_boolean("tui:flag_show_tui_datetime", FlagShowTuiDateTime);
-	conf.set_boolean("tui:flag_show_tui_short_obj_info", FlagShowTuiShortInfo);
+	conf.set_boolean("tui:flag_show_tui_short_obj_info", FlagShowTuiShortObjInfo);
 
 	// Navigation section
 	conf.set_double ("navigation:preset_sky_time", PresetSkyTime);
@@ -1248,20 +1248,100 @@ int stel_core::set_flag(string name, string value) {
   // value can be "on", "off", or "toggle"
   if(value == "toggle") {
 
-    if(name=="constellation_drawing") FlagConstellationDrawing = !FlagConstellationDrawing;
+    if(name=="star_twinkle") FlagStarTwinkle = !FlagStarTwinkle;
+    else if(name=="point_star") FlagPointStar = !FlagPointStar;
+    else if(name=="menu") FlagMenu = !FlagMenu;
+    else if(name=="help") FlagHelp = !FlagHelp;
+    else if(name=="infos") FlagInfos = !FlagInfos;
+    else if(name=="show_topbar") FlagShowTopBar = !FlagShowTopBar;
+    else if(name=="show_time") FlagShowTime = !FlagShowTime;
+    else if(name=="show_date") FlagShowDate = !FlagShowDate;
+    else if(name=="show_appname") FlagShowAppName = !FlagShowAppName;
+    else if(name=="show_selected_object_info") FlagShowSelectedObjectInfo = !FlagShowSelectedObjectInfo;
+    else if(name=="show_fps") FlagShowFps = !FlagShowFps;
+    else if(name=="show_fov") FlagShowFov = !FlagShowFov;
+    else if(name=="enable_tui_menu") FlagEnableTuiMenu = !FlagEnableTuiMenu;
+    else if(name=="show_gravity_ui") FlagShowGravityUi = !FlagShowGravityUi;
+    else if(name=="show_tui_datetime") FlagShowTuiDateTime = !FlagShowTuiDateTime;
+    else if(name=="show_tui_short_obj_info") FlagShowTuiShortObjInfo = !FlagShowTuiShortObjInfo;
+    else if(name=="enable_zoom_keys") FlagEnableZoomKeys = !FlagEnableZoomKeys;
+    else if(name=="enable_move_keys") FlagEnableMoveKeys = !FlagEnableMoveKeys;
+    else if(name=="utc_time") FlagUTC_Time = !FlagUTC_Time;
+    else if(name=="manual_zoom") FlagManualZoom = !FlagManualZoom;
+    else if(name=="ground") FlagGround = !FlagGround;
+    else if(name=="horizon") FlagHorizon = !FlagHorizon;
+    else if(name=="fog") FlagFog = !FlagFog;
+    else if(name=="atmosphere") FlagAtmosphere = !FlagAtmosphere;
+    else if(name=="constellation_drawing") FlagConstellationDrawing = !FlagConstellationDrawing;
+    else if(name=="constellation_name") FlagConstellationName = !FlagConstellationName;
+    else if(name=="constellation_art") FlagConstellationArt = !FlagConstellationArt;
+    else if(name=="constellation_pick") FlagConstellationPick = !FlagConstellationPick;
+    else if(name=="azimutal_grid") FlagAzimutalGrid = !FlagAzimutalGrid;
+    else if(name=="equatorial_grid") FlagEquatorialGrid = !FlagEquatorialGrid;
+    else if(name=="equator_line") FlagEquatorLine = !FlagEquatorLine;
+    else if(name=="ecliptic_line") FlagEclipticLine = !FlagEclipticLine;
+    else if(name=="cardinal_points") FlagCardinalPoints = !FlagCardinalPoints;
+    else if(name=="gravity_labels") FlagGravityLabels = !FlagGravityLabels;
+    else if(name=="init_moon_scaled") FlagInitMoonScaled = !FlagInitMoonScaled;
     else if(name=="stars") FlagStars = !FlagStars;
     else if(name=="star_name") FlagStarName = !FlagStarName;
     else if(name=="planets") FlagPlanets = !FlagPlanets;
+    else if(name=="planets_hints") FlagPlanetsHints = !FlagPlanetsHints;
+    else if(name=="planets_orbits") FlagPlanetsOrbits = !FlagPlanetsOrbits;
+    else if(name=="nebula") FlagNebula = !FlagNebula;
+    else if(name=="nebula_name") FlagNebulaName = !FlagNebulaName;
+    else if(name=="milky_way") FlagMilkyWay = !FlagMilkyWay;
+    else if(name=="bright_nebulae") FlagBrightNebulae = !FlagBrightNebulae;
     else return(0);  // no matching flag found
 
   } else {
 
     bool val = (value == "on");
 
-    if(name=="constellation_drawing") FlagConstellationDrawing = val;
+    if(name=="star_twinkle") FlagStarTwinkle = val;
+    else if(name=="point_star") FlagPointStar = val;
+    else if(name=="menu") FlagMenu = val;
+    else if(name=="help") FlagHelp = val;
+    else if(name=="infos") FlagInfos = val;
+    else if(name=="show_topbar") FlagShowTopBar = val;
+    else if(name=="show_time") FlagShowTime = val;
+    else if(name=="show_date") FlagShowDate = val;
+    else if(name=="show_appname") FlagShowAppName = val;
+    else if(name=="show_selected_object_info") FlagShowSelectedObjectInfo = val;
+    else if(name=="show_fps") FlagShowFps = val;
+    else if(name=="show_fov") FlagShowFov = val;
+    else if(name=="enable_tui_menu") FlagEnableTuiMenu = val;
+    else if(name=="show_gravity_ui") FlagShowGravityUi = val;
+    else if(name=="show_tui_datetime") FlagShowTuiDateTime = val;
+    else if(name=="show_tui_short_obj_info") FlagShowTuiShortObjInfo = val;
+    else if(name=="enable_zoom_keys") FlagEnableZoomKeys = val;
+    else if(name=="enable_move_keys") FlagEnableMoveKeys = val;
+    else if(name=="utc_time") FlagUTC_Time = val;
+    else if(name=="manual_zoom") FlagManualZoom = val;
+    else if(name=="ground") FlagGround = val;
+    else if(name=="horizon") FlagHorizon = val;
+    else if(name=="fog") FlagFog = val;
+    else if(name=="atmosphere") FlagAtmosphere = val;
+    else if(name=="constellation_drawing") FlagConstellationDrawing = val;
+    else if(name=="constellation_name") FlagConstellationName = val;
+    else if(name=="constellation_art") FlagConstellationArt = val;
+    else if(name=="constellation_pick") FlagConstellationPick = val;
+    else if(name=="azimutal_grid") FlagAzimutalGrid = val;
+    else if(name=="equatorial_grid") FlagEquatorialGrid = val;
+    else if(name=="equator_line") FlagEquatorLine = val;
+    else if(name=="ecliptic_line") FlagEclipticLine = val;
+    else if(name=="cardinal_points") FlagCardinalPoints = val;
+    else if(name=="gravity_labels") FlagGravityLabels = val;
+    else if(name=="init_moon_scaled") FlagInitMoonScaled = val;
     else if(name=="stars") FlagStars = val;
     else if(name=="star_name") FlagStarName = val;
     else if(name=="planets") FlagPlanets = val;
+    else if(name=="planets_hints") FlagPlanetsHints = val;
+    else if(name=="planets_orbits") FlagPlanetsOrbits = val;
+    else if(name=="nebula") FlagNebula = val;
+    else if(name=="nebula_name") FlagNebulaName = val;
+    else if(name=="milky_way") FlagMilkyWay = val;
+    else if(name=="bright_nebulae") FlagBrightNebulae = val;
     else return(0);  // no matching flag found
 
   }

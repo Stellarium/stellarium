@@ -866,7 +866,7 @@ int stel_ui::handle_keys(SDLKey key, S_GUI_VALUE state)
 		if(key==SDLK_x)
         {
 			core->FlagShowTuiDateTime = !core->FlagShowTuiDateTime;
-			core->FlagShowTuiShortInfo = core->FlagShowTuiDateTime;
+			core->FlagShowTuiShortObjInfo = core->FlagShowTuiDateTime;
 		}
 		if(key==SDLK_r)
         {
@@ -887,7 +887,7 @@ void stel_ui::gui_update_widgets(void)
 	updateTopBar();
 
 	// To prevent a minor bug
-	if (!core->FlagShowSelectedObjectInfos || !core->selected_object) info_select_ctr->setVisible(0);
+	if (!core->FlagShowSelectedObjectInfo || !core->selected_object) info_select_ctr->setVisible(0);
 	else if (core->selected_object) info_select_ctr->setVisible(1);
 	bt_flag_ctr->setVisible(core->FlagMenu);
 	bt_time_control_ctr->setVisible(core->FlagMenu);
@@ -916,7 +916,7 @@ void stel_ui::updateInfoSelectString(void)
     objectInfo[0]='\0';
 	core->selected_object->get_info_string(objectInfo, core->navigation);
     info_select_txtlbl->setLabel(objectInfo);
-    if (core->FlagShowSelectedObjectInfos) info_select_ctr->setVisible(1);
+    if (core->FlagShowSelectedObjectInfo) info_select_ctr->setVisible(1);
 	if (core->selected_object->get_type()==STEL_OBJECT_NEBULA)
 		info_select_txtlbl->setTextColor(core->NebulaLabelColor);
 	if (core->selected_object->get_type()==STEL_OBJECT_PLANET)

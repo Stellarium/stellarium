@@ -209,7 +209,7 @@ private:
     int FlagHelp;
     int FlagInfos;
     int FlagConfig;
-	int FlagShowSelectedObjectInfos;
+	int FlagShowSelectedObjectInfo;
 	Vec3f GuiBaseColor;
 	Vec3f GuiTextColor;
 	float BaseFontSize;
@@ -233,7 +233,7 @@ private:
 	int FlagShowGravityUi;
 	int FlagShowTuiMenu;
 	int FlagShowTuiDateTime;
-	int FlagShowTuiShortInfo;
+	int FlagShowTuiShortObjInfo;
 
 	// Astro
     int FlagStars;
