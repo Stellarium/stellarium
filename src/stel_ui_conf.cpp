@@ -225,9 +225,11 @@ Component* stel_ui::createConfigWindow(void)
 	tab_time->addComponent(system_tz_cbx);
 	system_tz_cbx->setPos(50 ,y); y+=30;
 
-	Time_zone_item* tzselector = new Time_zone_item(core->DataDir + "zone.tab");
+	tzselector = new Time_zone_item(core->DataDir + "zone.tab");
+	tzselector->setOnPressCallback(callback<void>(this, &stel_ui::setTimeZone));
 	tzselector->setPos(x,y);
 	tab_time->addComponent(tzselector);
+
 
 	// Location options
 	FilledContainer* tab_location = new FilledContainer();
@@ -267,6 +269,9 @@ Component* stel_ui::createConfigWindow(void)
 	// Video Options
 	FilledContainer* tab_video = new FilledContainer();
 	tab_video->setSize(config_tab_ctr->getSize());
+
+	x=5; y=5;
+
 
 	config_tab_ctr->setTexture(flipBaseTex);
 	config_tab_ctr->addTab(tab_time, "Date & Time");
@@ -319,6 +324,11 @@ void stel_ui::setObserverPositionFromIncDec(void)
 {
 	core->observatory->set_latitude(lat_incdec->getValue());
 	core->observatory->set_longitude(long_incdec->getValue());
+}
+
+void stel_ui::setTimeZone(void)
+{
+	core->observatory->set_custom_tz_name(tzselector->gettz());
 }
 
 void stel_ui::updateConfigForm(void)

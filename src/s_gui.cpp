@@ -417,6 +417,11 @@ void Container::removeComponent(Component* c)
 	childs.erase(iter);
 }
 
+void Container::removeAllComponents(void)
+{
+	childs.clear();
+}
+
 void Container::draw(void)
 {
     if (!visible) return;
@@ -1372,10 +1377,11 @@ void MapPicture::setPointerLatitude(float l)
 // ClicList
 StringList::StringList()
 {
+	elemsSize = 0;
 	current = items.end();
 	itemSize = (int)painter.getFont()->getLineHeight() + 1;
 	size[0] = 100;
-	size[1] = 0;
+	size[1] = 100;
 }
 
 void StringList::draw(void)
@@ -1383,14 +1389,26 @@ void StringList::draw(void)
 	if (!visible) return;
 	painter.drawSquareEdge(pos, size);
 
+	vector<string>::iterator iter = items.begin();
+
 	int y = 0;
-	vector<string>::iterator iter;
-	for (iter=items.begin();iter!=items.end();++iter)
+	int x = pos[0];
+
+	while(iter!=items.end())
 	{
-		if (iter==current) painter.print(pos[0] + 3, pos[1] + y + 2, *iter, painter.getTextColor() * 2);
-		else painter.print(pos[0] + 2, pos[1] + y + 2,*iter);
-		painter.drawLine(s_vec2i(pos[0], pos[1]+y), s_vec2i(pos[0]+size[0], pos[1]+(int)y));
+		if (iter==current) painter.print(x + 3, pos[1] + y + 2, *iter, painter.getTextColor() * 2);
+		else painter.print(x + 2, pos[1] + y + 2,*iter);
+		painter.drawLine(s_vec2i(x, pos[1]+y), s_vec2i(x+size[0], pos[1]+(int)y));
 		y += itemSize;
+		if (elemsSize > size[1] && y + 2*itemSize > size[1])
+		{
+			painter.drawLine(s_vec2i(x, pos[1]+y), s_vec2i(x+size[0], pos[1]+(int)y));
+			painter.drawLine(s_vec2i(x+5, pos[1]+y+5), s_vec2i(x-5+size[0], pos[1]+(int)y+5));
+			painter.drawLine(s_vec2i(x+5, pos[1]+y+5), s_vec2i(x+size[0]/2, pos[1]+size[1]-5));
+			painter.drawLine(s_vec2i(x+size[0]/2, pos[1]+size[1]-5), s_vec2i(x-5+size[0], pos[1]+(int)y+5));
+			return;
+		}
+		++iter;
 	}
 }
 
@@ -1407,8 +1425,8 @@ int StringList::onClic(int x, int y, S_GUI_VALUE button, S_GUI_VALUE state)
 void StringList::addItem(const string& newitem)
 {
 	items.push_back(newitem);
-	if (current==items.end()) current = items.begin();
-	size[1] += itemSize;
+	current = items.begin();
+	elemsSize+=itemSize;
 }
 
 const string StringList::getValue() const
@@ -1443,6 +1461,8 @@ Time_zone_item::Time_zone_item(const string& zonetab_file)
 
 	ifstream is(zonetab_file.c_str());
 
+	continents_names.setSize(100,150);
+
 	string unused, tzname;
 	char zoneline[256];
 	int i;
@@ -1457,6 +1477,9 @@ Time_zone_item::Time_zone_item(const string& zonetab_file)
 		{
 			continents.insert(pair<string, StringList >(tzname.substr(0,i),StringList()));
 			continents[tzname.substr(0,i)].addItem(tzname.substr(i+1,tzname.size()));
+			continents[tzname.substr(0,i)].setPos(105, 0);
+			continents[tzname.substr(0,i)].setSize(150, 150);
+			continents[tzname.substr(0,i)].setOnPressCallback(callback<void>(this, &Time_zone_item::onCityClic));
 			continents_names.addItem(tzname.substr(0,i));
 		}
 		else
@@ -1466,27 +1489,22 @@ Time_zone_item::Time_zone_item(const string& zonetab_file)
 	}
 
 	is.close();
-	current_edit=&continents_names;
-	size[0] = continents_names.getSizex() * 2;
+
+
+	size[0] = continents_names.getSizex() * 4;
 	size[1] = continents_names.getSizey();
 
+	continents_names.setOnPressCallback(callback<void>(this, &Time_zone_item::onContinentClic));
+
 	addComponent(&continents_names);
+	addComponent(&continents[continents_names.getValue()]);
 }
 
 void Time_zone_item::draw(void)
 {
 	if (!visible) return;
-	painter.drawSquareEdge(pos, size);
-
+	//painter.drawSquareEdge(pos, size);
 	Container::draw();
-}
-
-int Time_zone_item::onClic(int x, int y, S_GUI_VALUE button, S_GUI_VALUE state)
-{
-	// TODO
-	
-	//addComponent(&continents[continents_names.getValue()]);
-	return 0;
 }
 
 string Time_zone_item::gettz(void)
@@ -1503,3 +1521,15 @@ void Time_zone_item::settz(const string& tz)
 	continents[continents_names.getValue()].setValue(tz.substr(i+1,tz.size()));
 }
 
+void Time_zone_item::onContinentClic(void)
+{
+	removeAllComponents();
+	addComponent(&continents_names);
+	addComponent(&continents[continents_names.getValue()]);
+	if (!onPressCallback.empty()) onPressCallback();
+}
+
+void Time_zone_item::onCityClic(void)
+{
+	if (!onPressCallback.empty()) onPressCallback();
+}
