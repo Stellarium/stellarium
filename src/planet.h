@@ -57,7 +57,7 @@ public:
     virtual ~planet();
 	virtual void compute_position(double date); 		// Compute the position from the mother planet
     virtual void compute_trans_matrix(double date);		// Compute the transformation matrix from the mother planet
-	virtual double getGeographicRotation(double date);	// Return the y rotation to use from equatorial to geographic coordinates
+	virtual void compute_geographic_rotation(double date);	// Compute the z rotation to use from equatorial to geographic coordinates
     virtual void draw();
 	virtual void addSatellite(planet*);
 	virtual void set_rotation_elements(float,float,double,float,float,float);
@@ -75,6 +75,7 @@ protected:
 	vec3_t color;
 	Mat4d mat_local_to_parent;		        // Transfo matrix from local ecliptique to parent ecliptic
 	Mat4d mat_parent_to_local;		        // Transfo matrix from parent ecliptique to local ecliptic
+	float axis_rotation;					// Rotation angle of the planet on it's axis
     s_texture * planetTexture;				// Planet map texture
 	s_texture * haloTexture;				// Little halo texture
 	void (*coord_func)(double JD, double *, double *, double *); // The function called for the calculation of the rect heliocentric position at time JD.
