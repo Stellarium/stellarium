@@ -896,8 +896,7 @@ int stel_core::handle_keys(SDLKey key, s_gui::S_GUI_VALUE state)
 		  FlagShowTuiMenu = false;
 
 		  // If selected a script in tui, run that now
-		  // TODO: pass directory separately
-		  if(SelectedScript!="") commander->execute_command("script action play filename " + SelectedScriptDirectory + SelectedScript);
+		  if(SelectedScript!="") commander->execute_command("script action play filename " + SelectedScriptDirectory + SelectedScript + " path " + SelectedScriptDirectory);
 		  else {
 		    // TODO unmount disk...
 		    ScriptRemoveableDiskMounted = 0;
@@ -1299,55 +1298,55 @@ int stel_core::set_flag(string name, string value, bool &newval, bool trusted) {
   if(value == "toggle") {
 
     if(trusted) {
-      if(name=="enable_zoom_keys") newval = FlagEnableZoomKeys = !FlagEnableZoomKeys;
-      else if(name=="enable_move_keys") newval = FlagEnableMoveKeys = !FlagEnableMoveKeys;
-      else if(name=="enable_move_mouse") newval = FlagEnableMoveMouse = !FlagEnableMoveMouse;
+      if(name=="enable_zoom_keys") newval = (FlagEnableZoomKeys = !FlagEnableZoomKeys);
+      else if(name=="enable_move_keys") newval = (FlagEnableMoveKeys = !FlagEnableMoveKeys);
+      else if(name=="enable_move_mouse") newval = (FlagEnableMoveMouse = !FlagEnableMoveMouse);
     }
 
 
-    if(name=="star_twinkle") newval = FlagStarTwinkle = !FlagStarTwinkle;
-    else if(name=="point_star") newval = FlagPointStar = !FlagPointStar;
-    else if(name=="menu") newval = FlagMenu = !FlagMenu;
-    else if(name=="help") newval = FlagHelp = !FlagHelp;
-    else if(name=="infos") newval = FlagInfos = !FlagInfos;
-    else if(name=="show_topbar") newval = FlagShowTopBar = !FlagShowTopBar;
-    else if(name=="show_time") newval = FlagShowTime = !FlagShowTime;
-    else if(name=="show_date") newval = FlagShowDate = !FlagShowDate;
-    else if(name=="show_appname") newval = FlagShowAppName = !FlagShowAppName;
-    else if(name=="show_selected_object_info") newval = FlagShowSelectedObjectInfo = !FlagShowSelectedObjectInfo;
-    else if(name=="show_fps") newval = FlagShowFps = !FlagShowFps;
-    else if(name=="show_fov") newval = FlagShowFov = !FlagShowFov;
-    else if(name=="enable_tui_menu") newval = FlagEnableTuiMenu = !FlagEnableTuiMenu;
-    else if(name=="show_gravity_ui") newval = FlagShowGravityUi = !FlagShowGravityUi;
-    else if(name=="show_tui_datetime") newval = FlagShowTuiDateTime = !FlagShowTuiDateTime;
-    else if(name=="show_tui_short_obj_info") newval = FlagShowTuiShortObjInfo = !FlagShowTuiShortObjInfo;
-    else if(name=="utc_time") newval = FlagUTC_Time = !FlagUTC_Time;
-    else if(name=="manual_zoom") newval = FlagManualZoom = !FlagManualZoom;
-    else if(name=="ground") newval = FlagGround = !FlagGround;
-    else if(name=="horizon") newval = FlagHorizon = !FlagHorizon;
-    else if(name=="fog") newval = FlagFog = !FlagFog;
-    else if(name=="atmosphere") newval = FlagAtmosphere = !FlagAtmosphere;
-    else if(name=="constellation_drawing") newval = FlagConstellationDrawing = !FlagConstellationDrawing;
-    else if(name=="constellation_name") newval = FlagConstellationName = !FlagConstellationName;
-    else if(name=="constellation_art") newval = FlagConstellationArt = !FlagConstellationArt;
-    else if(name=="constellation_pick") newval = FlagConstellationPick = !FlagConstellationPick;
-    else if(name=="azimutal_grid") newval = FlagAzimutalGrid = !FlagAzimutalGrid;
-    else if(name=="equatorial_grid") newval = FlagEquatorialGrid = !FlagEquatorialGrid;
-    else if(name=="equator_line") newval = FlagEquatorLine = !FlagEquatorLine;
-    else if(name=="ecliptic_line") newval = FlagEclipticLine = !FlagEclipticLine;
-    else if(name=="cardinal_points") newval = FlagCardinalPoints = !FlagCardinalPoints;
-    else if(name=="gravity_labels") newval = FlagGravityLabels = !FlagGravityLabels;
-    else if(name=="init_moon_scaled") newval = FlagInitMoonScaled = !FlagInitMoonScaled;
-    else if(name=="stars") newval = FlagStars = !FlagStars;
-    else if(name=="star_name") newval = FlagStarName = !FlagStarName;
-    else if(name=="planets") newval = FlagPlanets = !FlagPlanets;
-    else if(name=="planets_hints") newval = FlagPlanetsHints = !FlagPlanetsHints;
-    else if(name=="planets_orbits") newval = FlagPlanetsOrbits = !FlagPlanetsOrbits;
-    else if(name=="nebula") newval = FlagNebula = !FlagNebula;
-    else if(name=="nebula_name") newval = FlagNebulaName = !FlagNebulaName;
-    else if(name=="milky_way") newval = FlagMilkyWay = !FlagMilkyWay;
-    else if(name=="bright_nebulae") newval = FlagBrightNebulae = !FlagBrightNebulae;
-    else if(name=="object_trails") newval = FlagObjectTrails = !FlagObjectTrails;
+    if(name=="star_twinkle") newval = (FlagStarTwinkle = !FlagStarTwinkle);
+    else if(name=="point_star") newval = (FlagPointStar = !FlagPointStar);
+    else if(name=="menu") newval = (FlagMenu = !FlagMenu);
+    else if(name=="help") newval = (FlagHelp = !FlagHelp);
+    else if(name=="infos") newval = (FlagInfos = !FlagInfos);
+    else if(name=="show_topbar") newval = (FlagShowTopBar = !FlagShowTopBar);
+    else if(name=="show_time") newval = (FlagShowTime = !FlagShowTime);
+    else if(name=="show_date") newval = (FlagShowDate = !FlagShowDate);
+    else if(name=="show_appname") newval = (FlagShowAppName = !FlagShowAppName);
+    else if(name=="show_selected_object_info") newval = (FlagShowSelectedObjectInfo = !FlagShowSelectedObjectInfo);
+    else if(name=="show_fps") newval = (FlagShowFps = !FlagShowFps);
+    else if(name=="show_fov") newval = (FlagShowFov = !FlagShowFov);
+    else if(name=="enable_tui_menu") newval = (FlagEnableTuiMenu = !FlagEnableTuiMenu);
+    else if(name=="show_gravity_ui") newval = (FlagShowGravityUi = !FlagShowGravityUi);
+    else if(name=="show_tui_datetime") newval = (FlagShowTuiDateTime = !FlagShowTuiDateTime);
+    else if(name=="show_tui_short_obj_info") newval = (FlagShowTuiShortObjInfo = !FlagShowTuiShortObjInfo);
+    else if(name=="utc_time") newval = (FlagUTC_Time = !FlagUTC_Time);
+    else if(name=="manual_zoom") newval = (FlagManualZoom = !FlagManualZoom);
+    else if(name=="ground") newval = (FlagGround = !FlagGround);
+    else if(name=="horizon") newval = (FlagHorizon = !FlagHorizon);
+    else if(name=="fog") newval = (FlagFog = !FlagFog);
+    else if(name=="atmosphere") newval = (FlagAtmosphere = !FlagAtmosphere);
+    else if(name=="constellation_drawing") newval = (FlagConstellationDrawing = !FlagConstellationDrawing);
+    else if(name=="constellation_name") newval = (FlagConstellationName = !FlagConstellationName);
+    else if(name=="constellation_art") newval = (FlagConstellationArt = !FlagConstellationArt);
+    else if(name=="constellation_pick") newval = (FlagConstellationPick = !FlagConstellationPick);
+    else if(name=="azimutal_grid") newval = (FlagAzimutalGrid = !FlagAzimutalGrid);
+    else if(name=="equatorial_grid") newval = (FlagEquatorialGrid = !FlagEquatorialGrid);
+    else if(name=="equator_line") newval = (FlagEquatorLine = !FlagEquatorLine);
+    else if(name=="ecliptic_line") newval = (FlagEclipticLine = !FlagEclipticLine);
+    else if(name=="cardinal_points") newval = (FlagCardinalPoints = !FlagCardinalPoints);
+    else if(name=="gravity_labels") newval = (FlagGravityLabels = !FlagGravityLabels);
+    else if(name=="init_moon_scaled") newval = (FlagInitMoonScaled = !FlagInitMoonScaled);
+    else if(name=="stars") newval = (FlagStars = !FlagStars);
+    else if(name=="star_name") newval = (FlagStarName = !FlagStarName);
+    else if(name=="planets") newval = (FlagPlanets = !FlagPlanets);
+    else if(name=="planets_hints") newval = (FlagPlanetsHints = !FlagPlanetsHints);
+    else if(name=="planets_orbits") newval = (FlagPlanetsOrbits = !FlagPlanetsOrbits);
+    else if(name=="nebula") newval = (FlagNebula = !FlagNebula);
+    else if(name=="nebula_name") newval = (FlagNebulaName = !FlagNebulaName);
+    else if(name=="milky_way") newval = (FlagMilkyWay = !FlagMilkyWay);
+    else if(name=="bright_nebulae") newval = (FlagBrightNebulae = !FlagBrightNebulae);
+    else if(name=="object_trails") newval = (FlagObjectTrails = !FlagObjectTrails);
     else return(0);  // no matching flag found
 
   } else {

@@ -23,21 +23,23 @@
 
 Script::Script() {
   input_file = NULL;
+  path = "";
 }
 
 Script::~Script() {
   if(input_file) delete input_file;  // closes automatically
 }
 
-int Script::load(string script_file) {
+int Script::load(string script_file, string script_path) {
   input_file = new ifstream(script_file.c_str());
 
   if (! input_file->is_open()) {
     cout << "Error opening script " << script_file << endl;
     return 0;
   }
-  
-  // check first line for validity...
+  path = script_path;
+
+  // TODO check first line of file for script identifier... ?
 
   return 1;
 }
