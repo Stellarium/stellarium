@@ -21,14 +21,14 @@
 #include "planet.h"
 #include "navigator.h"
 
-rotation_elements::rotation_elements() : period(0.), offset(0.), epoch(J2000), obliquity(0.), ascendingNode(0.), precessionRate(0.)
+rotation_elements::rotation_elements() : period(1.), offset(0.), epoch(J2000), obliquity(0.), ascendingNode(0.), precessionRate(0.)
 {
 }
 
 planet::planet(char * _name, int _flagHalo, double _radius, vec3_t _color,
 				s_texture * _planetTexture, s_texture * _haloTexture,
 				void (*_coord_func)(double JD, double *, double *, double *)) :
-					flagHalo(_flagHalo), radius(_radius), color(_color),
+					flagHalo(_flagHalo), radius(_radius), color(_color), axis_rotation(0.),
 					planetTexture(_planetTexture), haloTexture(_haloTexture),
 					coord_func(_coord_func), parent(NULL)
 {
@@ -46,6 +46,7 @@ planet::~planet()
 void planet::set_rotation_elements(float _period, float _offset, double _epoch, float _obliquity, float _ascendingNode, float _precessionRate)
 {
     re.period = _period;
+	re.offset = _offset;
     re.epoch = _epoch;
     re.obliquity = _obliquity;
     re.ascendingNode = _ascendingNode;
@@ -61,7 +62,6 @@ Vec3d planet::get_equ_pos(void)
 void planet::compute_position(double date)
 {
 	coord_func(date, &(ecliptic_pos[0]), &(ecliptic_pos[1]), &(ecliptic_pos[2]));
-	printf("%lf %lf %lf\n",ecliptic_pos[0],ecliptic_pos[1],ecliptic_pos[2]);
     // Compute for the satellites
     list<planet*>::iterator iter = satellites.begin();
     while (iter != satellites.end())
@@ -79,10 +79,9 @@ void planet::compute_trans_matrix(double date)
 	mat_parent_to_local = Mat4d::translation(ecliptic_pos) * 
 	                        Mat4d::yrotation(-tempAscendingNode) * 
 	                        Mat4d::xrotation(-re.obliquity);
-        		
-    
-    //printf("trans compute for : %s : %lf\n", name, mat_parent_to_local[0][0]);   
-    
+
+	compute_geographic_rotation(date);
+
     // Compute for the satellites
     list<planet*>::iterator iter = satellites.begin();
     while (iter != satellites.end())
@@ -92,8 +91,8 @@ void planet::compute_trans_matrix(double date)
     }
 }
 
-// Return the y rotation to use from equatorial to geographic coordinates
-double planet::getGeographicRotation(double date)
+// Compute the z rotation to use from equatorial to geographic coordinates
+void planet::compute_geographic_rotation(double date)
 {
     double t = date - re.epoch;
     double rotations = t / (double) re.period;
@@ -105,7 +104,7 @@ double planet::getGeographicRotation(double date)
     // the texture.
     remainder += 0.5;
 
-	return -remainder * 360. - re.offset;
+	axis_rotation = -remainder * 360. - re.offset;
 }
 
 Vec3d planet::get_ecliptic_pos()
@@ -135,20 +134,25 @@ void planet::draw(void)
 {
     glEnable(GL_TEXTURE_2D);
 	glEnable(GL_CULL_FACE);
-	glDisable(GL_LIGHTING);
 	glDisable(GL_BLEND);
 
 	glPushMatrix();
 
     glMultMatrixd(mat_parent_to_local);
 
-	glColor3f(1.0f, 1.0f, 1.0f); //*SkyBrightness
+	glPushMatrix();
+
+	glRotatef(axis_rotation,0.,0.,1.);
+
+	glColor3f(1.0f, 1.0f, 1.0f);
 	glBindTexture(GL_TEXTURE_2D, planetTexture->getID());
 	GLUquadricObj * p=gluNewQuadric();
 	gluQuadricTexture(p,GL_TRUE);
 	gluQuadricOrientation(p, GLU_OUTSIDE);
-	gluSphere(p,radius*100,40,40);
+	gluSphere(p,radius*10,40,40);
 	gluDeleteQuadric(p);
+
+	glPopMatrix();
 
     // Draw the satellites
     list<planet*>::iterator iter = satellites.begin();
@@ -175,6 +179,25 @@ sun_planet::sun_planet(char * _name, int _flagHalo, double _radius, vec3_t _colo
 void sun_planet::compute_position(double date)
 {
     // The sun is fixed in the heliocentric coordinate
+	glEnable(GL_LIGHTING);
+
+    float tmp[4] = {0,0,0,1};
+    float tmp2[4] = {0.01,0.01,0.01,1};
+    float tmp3[4] = {1,1,1,1};
+    glLightfv(GL_LIGHT1,GL_AMBIENT,tmp3);
+    glLightfv(GL_LIGHT1,GL_DIFFUSE,tmp3);
+    glLightfv(GL_LIGHT1,GL_SPECULAR,tmp);
+
+    glDisable(GL_LIGHT0);
+    glEnable(GL_LIGHT1);
+
+    glMaterialfv(GL_FRONT_AND_BACK,GL_AMBIENT ,tmp2);
+    glMaterialfv(GL_FRONT_AND_BACK,GL_DIFFUSE ,tmp3);
+    glMaterialfv(GL_FRONT_AND_BACK,GL_EMISSION ,tmp);
+    glMaterialfv(GL_FRONT_AND_BACK,GL_SHININESS ,tmp);
+    glMaterialfv(GL_FRONT_AND_BACK,GL_SPECULAR ,tmp);
+
+    glLightfv(GL_LIGHT1,GL_POSITION,Vec3f(0.,0.,0.));
 
     // Compute for the satellites
     list<planet*>::iterator iter = satellites.begin();
@@ -183,6 +206,7 @@ void sun_planet::compute_position(double date)
         (*iter)->compute_position(date);
         iter++;
     }
+	glDisable(GL_LIGHTING);
 }
 
 	/*

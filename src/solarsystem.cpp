@@ -52,7 +52,9 @@ void InitSolarSystem(void)
 	Earth = new planet("Earth", NO_HALO, 6378.1/UA, vec3_t(1.,1.,1.), earth_map, NULL, get_earth_helio_coords);
 	Mercury = new planet("Mercury", NO_HALO, 2439.7/UA, vec3_t(1.,1.,1.), mercury_map, NULL, get_mercury_helio_coords);
 
-    Earth->set_rotation_elements(23.9345/24., 0, J2000, 23.45*M_PI/180., -11.2606423*M_PI/180., 0);
+    Mercury->set_rotation_elements(1407.509405/24., 291.20, J2000, -7.01*M_PI/180., 48.33167*M_PI/180., 0);
+    Earth->set_rotation_elements(23.9344694/24., 280.5, J2000, 23.45*M_PI/180., -11.2606423*M_PI/180., 0);
+	Moon->set_rotation_elements((27.321661*24)/24., 38, J2000, 23.45*M_PI/180., 0., 0);
 
 	Sun->addSatellite(Earth);
 	Sun->addSatellite(Mercury);
