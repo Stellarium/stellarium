@@ -109,7 +109,6 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 	stcore->temp_time_velocity = stcore->navigation->get_time_speed();
 	stcore->navigation->set_time_speed(0);
       } else {
-	cout << "Unpausing time\n";
 	stcore->navigation->set_time_speed(stcore->temp_time_velocity);
       }
 
@@ -225,11 +224,9 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
     if(args["action"]=="pause" && !stcore->scripts->is_paused()) {
       audio->pause();
       stcore->scripts->pause_script();
-      execute_command("timerate action pause");
     } else if (args["action"]=="pause" || args["action"]=="resume") {
       stcore->scripts->resume_script();
       audio->resume();
-      execute_command("timerate action resume");
     }
 
   } else {
