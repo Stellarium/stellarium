@@ -53,7 +53,7 @@ public:
 	static void set_suffix(char * _suffix) {strncpy(s_texture::suffix, _suffix, sizeof(suffix));}
 private:
     char * textureName;
-    unsigned int texID;
+    GLuint texID;
     int loadType;
     int loadType2;
 	static char texDir[255];

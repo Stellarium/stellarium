@@ -65,13 +65,33 @@ void stel_ui::init(void)
 
 	desktop->reshape(0,0,core->screen_W,core->screen_H);
 
-	containerTest = new FilledContainer();
-	containerTest->reshape(100,100,100,100);
+	containerTest = new FramedContainer();
+	containerTest->reshape(100,100,100,200);
+
+	containerTest2 = new FramedContainer();
+	containerTest2->reshape(50,50,100,200);
+	containerTest->addComponent(containerTest2);
+
+	testTex = new s_texture("mars");
+	btTest = new FilledButton();
+	btTest->setTexture(testTex);
+	btTest->setOnPressCallback(makeFunctor((s_pcallback0)0,*this,&stel_ui::btTestOnPress));
+
+	desktop->addComponent(btTest);
+
+	testLabel = new Label("Bonjour m'sieur!");
+	desktop->addComponent(testLabel);
+	testLabel->reshape(250,250,100,200);
+	testLabel->adjustSize();
 
 	desktop->addComponent(containerTest);
 
 }
 
+void stel_ui::btTestOnPress(void)
+{
+	printf("coucou!\n");
+}
 
 /**********************************************************************************/
 stel_ui::~stel_ui()
@@ -89,6 +109,10 @@ void stel_ui::draw(void)
 {
     core->du->set_orthographic_projection();	// 2D coordinate
 	Component::enableScissor();
+
+    glScalef(1, -1, 1);						// invert the y axis, down is positive
+    glTranslatef(0, -core->screen_H, 0);	// move the origin from the bottom left corner to the upper left corner
+
 
 	desktop->draw();
 
@@ -113,10 +137,10 @@ int stel_ui::handle_clic(Uint16 x, Uint16 y, Uint8 state, Uint8 button)
         case SDL_BUTTON_MIDDLE : bt=S_GUI_MOUSE_MIDDLE; break;
         default : bt=S_GUI_MOUSE_LEFT;
     }
-    if (state==SDL_RELEASED) st=S_GUI_UP; else st=S_GUI_DOWN;
+    if (state==SDL_RELEASED) st=S_GUI_RELEASED; else st=S_GUI_PRESSED;
 
     // Send the mouse event to the User Interface
-    if (desktop->onClic((int)x, (int)y, st, bt))
+    if (desktop->onClic((int)x, (int)y, bt, st))
     {   // If a "unthru" widget was at the clic position
         return 1;
     }

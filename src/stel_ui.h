@@ -57,7 +57,12 @@ private:
 
 	Container * desktop;	// The container which contains everything (=the desktop)
 
-	FilledContainer * containerTest;
+	FramedContainer * containerTest;
+	FramedContainer * containerTest2;
+	s_texture* testTex;
+	Label* testLabel;
+	FilledButton * btTest;
+	void btTestOnPress(void);
 };
 
 #endif  //_STEL_UI_H

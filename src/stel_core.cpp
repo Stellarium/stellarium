@@ -24,8 +24,10 @@
 
 extern s_texture * texIds[200];            // Common Textures TODO : Remove that
 
-stel_core::stel_core() : screen_W(800), screen_H(600), bppMode(16), Fullscreen(0), initialized(0), navigation(NULL), selected_object(NULL), hip_stars(NULL), asterisms(NULL),
-nebulas(NULL), atmosphere(NULL), tone_converter(NULL), du(NULL), conf(NULL), frame(0), timefr(0), timeBase(0)
+stel_core::stel_core() : screen_W(800), screen_H(600), bppMode(16), Fullscreen(0),
+	navigation(NULL), selected_object(NULL), hip_stars(NULL), asterisms(NULL),
+	nebulas(NULL), atmosphere(NULL), tone_converter(NULL), du(NULL), conf(NULL),
+	frame(0), timefr(0), timeBase(0)
 {
 	TextureDir[0] = 0;
     ConfigDir[0] = 0;
@@ -37,14 +39,15 @@ nebulas(NULL), atmosphere(NULL), tone_converter(NULL), du(NULL), conf(NULL), fra
 stel_core::~stel_core()
 {
 	if (navigation) delete navigation;
-	if (selected_object) delete selected_object;
 	if (asterisms) delete asterisms;
 	if (hip_stars) delete hip_stars;
 	if (nebulas) delete nebulas;
 	if (atmosphere) delete atmosphere;
 	if (tone_converter) delete tone_converter;
-	printf("Core destructor\n");
-	//if (ui) delete ui;
+
+	ClearSolarSystem();
+
+	if (ui) delete ui;
 }
 
 // Set the main data, textures and configuration directories
@@ -61,6 +64,75 @@ void stel_core::set_config_files(const char * _config_file, const char * _locati
 	strncpy(config_file, _config_file, strlen(_config_file) +1);
 	strncpy(location_file, _location_file, strlen(_location_file) +1);
 }
+
+
+
+void stel_core::init(void)
+{
+	// Set textures directory and suffix
+	s_texture::set_texDir(TextureDir);
+	s_texture::set_suffix(".png");
+
+    hip_stars = new Hip_Star_mgr();
+    asterisms = new Constellation_mgr();
+    nebulas   = new Nebula_mgr();
+	// Create atmosphere renderer
+	atmosphere=new stel_atmosphere();
+	// Create tone reproductor
+	tone_converter=new tone_reproductor();
+	du = new draw_utility();
+
+	// Temporary strings for file names
+    char tempName[255];
+    char tempName2[255];
+    char tempName3[255];
+    char tempName4[255];
+
+    // Load hipparcos stars & names
+    strcpy(tempName,DataDir);
+    strcat(tempName,"hipparcos.fab");
+    strcpy(tempName2,DataDir);
+    strcat(tempName2,"commonname.fab");
+    strcpy(tempName3,DataDir);
+    strcat(tempName3,"name.fab");
+    strcpy(tempName4,DataDir);
+    strcat(tempName4,"spacefont.txt");
+    hip_stars->Load(tempName4, tempName,tempName2,tempName3);
+
+	// Load constellations
+    strcpy(tempName,DataDir);
+    strcat(tempName,"constellationship.fab");
+    strcpy(tempName2,DataDir);
+    strcat(tempName2,"spacefont.txt");
+    asterisms->Load(tempName2,tempName,hip_stars);
+
+	// Load the nebulas data TODO : add NGC objects
+    strcpy(tempName,DataDir);
+    strcat(tempName,"messier.fab");
+    strcpy(tempName2,DataDir);
+    strcat(tempName2,"spacefont.txt");
+    nebulas->Read(tempName2, tempName);
+
+	// Create and init the solar system TODO : use a class
+    strcpy(tempName,DataDir);
+    strcat(tempName,"spacefont.txt");
+	InitSolarSystem(tempName);
+
+	// Load the common used textures TODO : will be removed
+    load_base_textures();
+
+	// Precalculation for the grids drawing TODO will be in a class
+    InitMeriParal();
+
+	// initialisation of the User Interface
+	ui = new stel_ui(this);
+    ui->init();
+
+	// Compute planets data
+    Sun->compute_position(navigation->get_JDay());
+
+}
+
 
 // Update all the objects in function of the time
 void stel_core::update(int delta_time)
@@ -189,76 +261,6 @@ void stel_core::draw(int delta_time)
     // ---- 2D Displays
     ui->draw();
 }
-
-
-
-
-void stel_core::init(void)
-{
-	// Set textures directory and suffix
-	s_texture::set_texDir(TextureDir);
-	s_texture::set_suffix(".png");
-
-    hip_stars = new Hip_Star_mgr();
-    asterisms = new Constellation_mgr();
-    nebulas   = new Nebula_mgr();
-	// Create atmosphere renderer
-	atmosphere=new stel_atmosphere();
-	// Create tone reproductor
-	tone_converter=new tone_reproductor();
-	du = new draw_utility();
-
-	// Temporary strings for file names
-    char tempName[255];
-    char tempName2[255];
-    char tempName3[255];
-    char tempName4[255];
-
-    // Load hipparcos stars & names
-    strcpy(tempName,DataDir);
-    strcat(tempName,"hipparcos.fab");
-    strcpy(tempName2,DataDir);
-    strcat(tempName2,"commonname.fab");
-    strcpy(tempName3,DataDir);
-    strcat(tempName3,"name.fab");
-    strcpy(tempName4,DataDir);
-    strcat(tempName4,"spacefont.txt");
-    hip_stars->Load(tempName4, tempName,tempName2,tempName3);
-
-	// Load constellations
-    strcpy(tempName,DataDir);
-    strcat(tempName,"constellationship.fab");
-    strcpy(tempName2,DataDir);
-    strcat(tempName2,"spacefont.txt");
-    asterisms->Load(tempName2,tempName,hip_stars);
-
-	// Load the nebulas data TODO : add NGC objects
-    strcpy(tempName,DataDir);
-    strcat(tempName,"messier.fab");
-    strcpy(tempName2,DataDir);
-    strcat(tempName2,"spacefont.txt");
-    nebulas->Read(tempName2, tempName);
-
-	// Create and init the solar system TODO : use a class
-    strcpy(tempName,DataDir);
-    strcat(tempName,"spacefont.txt");
-	InitSolarSystem(tempName);
-
-	// Load the common used textures TODO : will be removed
-    load_base_textures();
-
-	// Precalculation for the grids drawing TODO will be in a class
-    InitMeriParal();
-
-	// initialisation of the User Interface
-	ui = new stel_ui(this);
-    ui->init();
-
-	// Compute planets data
-    Sun->compute_position(navigation->get_JDay());
-
-}
-
 
 void stel_core::load_config(void)
 {
