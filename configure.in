@@ -12,8 +12,8 @@ dnl Check for compilers.
 AC_PROG_CC
 AC_PROG_CXX
 
-CFLAGS="-g -Wall -O2 -ffast-math -fexpensive-optimizations"
-CXXFLAGS="-g -Wall -O2 -ffast-math -fexpensive-optimizations"
+CFLAGS="-g -Wall -O2"
+CXXFLAGS="-g -Wall -O2"
 
 dnl Checks for programs.
 AC_PROG_CPP
@@ -35,10 +35,8 @@ LIBS="$LIBS $SDL_LIBS"
 CFLAGS="$CFLAGS $SDL_CFLAGS"
 CXXFLAGS="$CXXFLAGS $SDL_CFLAGS"
 
-dnl AC_CHECK_LIB(nova,get_dec_location,LIBS="$LIBS -lnova",AC_MSG_RESULT(nova library not found))
-
 AC_C_BIGENDIAN
-AC_CHECK_HEADER(byteswap.h)
+AC_CHECK_HEADERS(byteswap.h)
 
 dnl assign the package directory variable
 if test "$prefix" = "NONE" ; then

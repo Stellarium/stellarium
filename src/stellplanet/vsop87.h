@@ -29,5 +29,6 @@ struct vsop
 };
 
 double calc_series (const struct vsop * data, int terms, double t);
+void vsop87_to_fk5 (double *L, double *B, double JD);
 
 #endif
