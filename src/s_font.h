@@ -64,6 +64,7 @@ private:
     float averageCharLen;
     float ratio;
     char name[20];
+	const static int SPACING = 1;
 };
 
 #endif  //_S_FONT_H
