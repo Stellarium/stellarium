@@ -121,7 +121,7 @@ void setDirectories(void)
     strcat(global.TextureDir,"/textures/");
 
 
-#if defined(WIN32) || /*defined(CYGWIN) ||*/ defined(__MINGW32__)
+#if defined(WIN32) || defined(CYGWIN) || defined(__MINGW32__)
 	strcpy(global.ConfigDir,dataRoot);
 	strcat(global.ConfigDir,"/config/");
 #else
