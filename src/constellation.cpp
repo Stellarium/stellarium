@@ -18,7 +18,7 @@
  */
 
 #include "constellation.h"
-#include "navigator.h"
+#include "projector.h"
 
 #define RADIUS_CONST 8.
 
@@ -72,15 +72,15 @@ int Constellation::read(FILE *  fic, Hip_Star_mgr * _VouteCeleste)
 
 // Draw the lines for the Constellation using the coords of the stars
 // (optimized for use thru the class Constellation_mgr only)
-void Constellation::draw(navigator* nav)
+void Constellation::draw(Projector* prj)
 {
 	static Vec3d star1;
 	static Vec3d star2;
 
     for(unsigned int i=0;i<nb_segments;++i)
     {
-		if (nav->project_earth_equ_to_screen(asterism[2*i]->XYZ,star1) &&
-			nav->project_earth_equ_to_screen(asterism[2*i+1]->XYZ,star2))
+		if (prj->project_earth_equ(asterism[2*i]->XYZ,star1) &&
+			prj->project_earth_equ(asterism[2*i+1]->XYZ,star2))
 		{
 			glBegin (GL_LINES);
 				glVertex2f(star1[0],star1[1]);
@@ -91,20 +91,20 @@ void Constellation::draw(navigator* nav)
 }
 
 // Same thing but for only one separate Constellation (can be used without the class Constellation_mgr )
-void Constellation::draw_alone(draw_utility * du, navigator* nav)
+void Constellation::draw_alone(Projector* prj)
 {
 	glDisable(GL_TEXTURE_2D);
     glDisable(GL_BLEND);
     glColor3f(0.2,0.2,0.2);
-    du->set_orthographic_projection();	// set 2D coordinate
+    prj->set_orthographic_projection();	// set 2D coordinate
 
 	static Vec3d star1;
 	static Vec3d star2;
 
     for(unsigned int i=0;i<nb_segments;++i)
     {
-		if (nav->project_earth_equ_to_screen(asterism[2*i]->XYZ,star1) &&
-			nav->project_earth_equ_to_screen(asterism[2*i+1]->XYZ,star2))
+		if (prj->project_earth_equ(asterism[2*i]->XYZ,star1) &&
+			prj->project_earth_equ(asterism[2*i+1]->XYZ,star2))
 		{
 			glBegin (GL_LINES);
 				glVertex2f(star1[0],star1[1]);
@@ -113,7 +113,7 @@ void Constellation::draw_alone(draw_utility * du, navigator* nav)
 		}
     }
 
-    du->reset_perspective_projection();
+    prj->reset_perspective_projection();
 }
 
 // Draw the name

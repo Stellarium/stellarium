@@ -22,6 +22,7 @@
 #include "stellarium.h"
 #include "s_font.h"
 #include "navigator.h"
+#include "stel_utility.h"
 
 #define RADIUS_NEB 28.
 
@@ -126,12 +127,12 @@ void Nebula::Draw()
     glPopMatrix();  
 }
 
-void Nebula::DrawCircle(draw_utility * du)
+void Nebula::DrawCircle(Projector* prj)
 {
-	if (du->fov<sqrt(Taille)*2) return;
+	if (prj->get_fov()<sqrt(Taille)*2) return;
     incLum++;
-    glColor3f(sqrt(du->fov)/10*(0.4+0.2*sin(incLum/10)),
-		 sqrt(du->fov)/10*(0.4+0.2*sin(incLum/10)),0.1);
+    glColor3f(sqrt(prj->get_fov())/10*(0.4+0.2*sin(incLum/10)),
+		 sqrt(prj->get_fov())/10*(0.4+0.2*sin(incLum/10)),0.1);
     glBindTexture (GL_TEXTURE_2D, Nebula::texCircle->getID()); 
     glPushMatrix();
     glTranslatef(XY[0], XY[1],0);
@@ -149,9 +150,9 @@ void Nebula::DrawCircle(draw_utility * du)
 }
 
 // Return the radius of a circle containing the object on screen
-float Nebula::get_on_screen_size(navigator * nav, draw_utility * du)
+float Nebula::get_on_screen_size(navigator * nav, Projector* prj)
 {
-	return Taille/60./du->fov*du->screenH;
+	return Taille/60./prj->get_fov()*prj->scrH();
 }
 
 void Nebula::DrawName(s_font* nebulaFont)

@@ -25,6 +25,7 @@
 #include "s_font.h"
 #include "stel_object.h"
 #include "tone_reproductor.h"
+#include "projector.h"
 
 class Hip_Star : public stel_object
 {
@@ -35,7 +36,7 @@ public:
     Hip_Star();
     virtual ~Hip_Star();
     int read(FILE * pFile);	// Read the star data in the stream
-    void draw(draw_utility * du);		// Draw the star
+    void draw(void);		// Draw the star
     void draw_name(s_font * star_font);
 	vec3_t get_RGB(void) const {return RGB;}
 	void get_info_string(char * s, navigator * nav = NULL) const;
@@ -60,6 +61,7 @@ private:
 	static float twinkle_amount;
 	static float star_scale;
 	static tone_reproductor* eye;
+	static Projector* proj;
 };
 
 

@@ -17,12 +17,16 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
+using namespace std;
+
+#include <algorithm>
 #include "solarsystem.h"
 #include "s_texture.h"
 #include "stellplanet.h"
 #include "orbit.h"
 #include "stellarium.h"
 #include "init_parser.h"
+
 
 SolarSystem::SolarSystem() : sun(NULL), moon(NULL), earth(NULL)
 {
@@ -217,7 +221,7 @@ void SolarSystem::compute_trans_matrices(double date)
 }
 
 // Draw all the elements of the solar system
-void SolarSystem::draw(int hint_ON, draw_utility * du, navigator * nav)
+void SolarSystem::draw(int hint_ON, Projector * prj, navigator * nav)
 {
 	// We are supposed to be in heliocentric coordinate
 
@@ -241,12 +245,24 @@ void SolarSystem::draw(int hint_ON, draw_utility * du, navigator * nav)
     glLightfv(GL_LIGHT0,GL_POSITION,zero4);
 	glEnable(GL_LIGHT0);
 
-    // Draw the elements
+	// Compute each planet distance to the observer
+	Vec3d obs_helio_pos = nav->get_observer_helio_pos();
     vector<planet*>::iterator iter = system_planets.begin();
     while (iter != system_planets.end())
     {
-        if (*iter!=earth) (*iter)->draw(hint_ON, du, nav);
-        iter++;
+        (*iter)->compute_distance(obs_helio_pos);
+        ++iter;
+    }
+
+	// And sort them from the furthest to the closest
+	sort(system_planets.begin(),system_planets.end(),bigger_distance());
+
+    // Draw the elements
+	iter = system_planets.begin();
+    while (iter != system_planets.end())
+    {
+        if (*iter!=earth) (*iter)->draw(hint_ON, prj, nav);
+        ++iter;
     }
 }
 

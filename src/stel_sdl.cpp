@@ -180,19 +180,9 @@ void stel_sdl::start_main_loop(void)
 
 void stel_sdl::resize_GL(int w, int h)
 {
-    if (!h || !w || (w==core->screen_W && h==core->screen_H)) return;
-    core->screen_W = w;
-    core->screen_H = h;
-
-	// TODO : check is that is usefull (maybe just to change a few variables)
-	//delete core->ui;
-	//core->ui = new stel_ui(core);
-
-	// TODO : might be useless
-	glViewport(0, 0, core->screen_W, core->screen_H);
-	core->navigation->init_project_matrix(core->screen_W, core->screen_H,1,10000);
+    if (!h || !w) return;
+	core->set_screen_size(w, h);
 }
-
 
 
 // Handle movement keys
@@ -201,36 +191,36 @@ void stel_sdl::pressKey(Uint8 *keys)
     // Direction and zoom deplacements
     if(keys[SDLK_LEFT])
 	{
-		core->navigation->turn_left(1);
+		core->turn_left(1);
 	}
     if(keys[SDLK_RIGHT])
 	{
-		core->navigation->turn_right(1);
+		core->turn_right(1);
 	}
     if(keys[SDLK_UP])
 	{
 		if (SDL_GetModState() & KMOD_CTRL)
 		{
-			core->navigation->zoom_in(1);
+			core->zoom_in(1);
 		}
 		else
 		{
-			core->navigation->turn_up(1);
+			core->turn_up(1);
 		}
 	}
     if(keys[SDLK_DOWN])
 	{
 		if (SDL_GetModState() & KMOD_CTRL)
 		{
-			core->navigation->zoom_out(1);
+			core->zoom_out(1);
 		}
 		else
 		{
-			core->navigation->turn_down(1);
+			core->turn_down(1);
 		}
 	}
-    if(keys[SDLK_PAGEUP]) core->navigation->zoom_in(1);
-    if(keys[SDLK_PAGEDOWN]) core->navigation->zoom_out(1);
+    if(keys[SDLK_PAGEUP]) core->zoom_in(1);
+    if(keys[SDLK_PAGEDOWN]) core->zoom_out(1);
 
 }
 
@@ -238,19 +228,19 @@ void stel_sdl::pressKey(Uint8 *keys)
 void stel_sdl::releaseKey(SDLKey key)
 {   
     // When a deplacement key is released stop mooving
-    if (key==SDLK_LEFT) core->navigation->turn_left(0);
-	if (key==SDLK_RIGHT) core->navigation->turn_right(0);
+    if (key==SDLK_LEFT) core->turn_left(0);
+	if (key==SDLK_RIGHT) core->turn_right(0);
 	if (SDL_GetModState() & KMOD_CTRL)
 	{
-		if (key==SDLK_UP) core->navigation->zoom_in(0);
-		if (key==SDLK_DOWN) core->navigation->zoom_out(0);
+		if (key==SDLK_UP) core->zoom_in(0);
+		if (key==SDLK_DOWN) core->zoom_out(0);
 	}
 	else
 	{
-		if (key==SDLK_UP) core->navigation->turn_up(0);
-		if (key==SDLK_DOWN) core->navigation->turn_down(0);
+		if (key==SDLK_UP) core->turn_up(0);
+		if (key==SDLK_DOWN) core->turn_down(0);
 	}
 
-    if (key==SDLK_PAGEUP) core->navigation->zoom_in(0);
-	if (key==SDLK_PAGEDOWN) core->navigation->zoom_out(0);
+    if (key==SDLK_PAGEUP) core->zoom_in(0);
+	if (key==SDLK_PAGEDOWN) core->zoom_out(0);
 }

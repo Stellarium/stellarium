@@ -33,7 +33,7 @@ public:
 	SkyGrid(unsigned int _nb_meridian = 24, unsigned int _nb_parallel = 17, double _radius = 1.,
 			unsigned int _nb_alt_segment = 18, unsigned int _nb_azi_segment = 50);
     virtual ~SkyGrid();
-	void draw(draw_utility * du, navigator* nav) const;
+	void draw(Projector* prj) const;
 private:
 	unsigned int nb_meridian;
 	unsigned int nb_parallel;
@@ -49,7 +49,7 @@ private:
 
 void DrawPoint(float X,float Y,float Z);
 
-void DrawCardinaux(draw_utility * du);
+void DrawCardinaux(Projector * prj);
 void DrawMilkyWay(tone_reproductor * eye);
 //void DrawEquator(void);
 //void DrawEcliptic(void);

@@ -58,8 +58,8 @@ void observator_pos::load(FILE * f)
 }
 
 
-navigator::navigator() : fov(60.), deltaFov(0.), deltaAlt(0.), deltaAz(0.), move_speed(0.001),
-	flag_traking(0), flag_lock_equ_pos(0), flag_auto_move(0), time_speed(JD_SECOND), JDay(0.)
+navigator::navigator() : flag_traking(0), flag_lock_equ_pos(0), flag_auto_move(0),
+						time_speed(JD_SECOND), JDay(0.)
 {
 	local_vision=Vec3d(1.,0.,0.);
 	equ_vision=Vec3d(1.,0.,0.);
@@ -70,7 +70,7 @@ navigator::~navigator()
 }
 
 // Load the position info in the file name given
-void navigator::load_position(char * fileName)
+void navigator::load_position(const char * fileName)
 {
 	FILE * f = NULL;
 	f=fopen(fileName,"rt");
@@ -86,7 +86,7 @@ void navigator::load_position(char * fileName)
 }
 
 // Save the position info in the file name given
-void navigator::save_position(char * fileName)
+void navigator::save_position(const char * fileName)
 {
 	FILE * f = NULL;
 	f=fopen(fileName,"wt");
@@ -97,128 +97,6 @@ void navigator::save_position(char * fileName)
 	}
 	position.save(f);
 	fclose(f);
-}
-
-// Init the viewing matrix, setting the field of view, the clipping planes, and screen ratio
-// The function is a reimplementation of gluPerspective
-void navigator::init_project_matrix(int w, int h, double zNear, double zFar)
-{
-	glMatrixMode(GL_PROJECTION);
-	double f = 1./tan(fov*M_PI/360.);
-	mat_projection = Mat4d(	f*h/w, 0., 0., 0.,
-							0., f, 0., 0.,
-							0., 0., (zFar + zNear)/(zNear - zFar), -1.,
-							0., 0., (2.*zFar*zNear)/(zNear - zFar), 0.);
-	glLoadMatrixd(mat_projection);
-    glMatrixMode(GL_MODELVIEW);
-
-	// Update the "projection on screen" matrices
-	mat_earth_equ_to_screen = /*mat_projection*/lookAt()*mat_earth_equ_to_local;
-	glGetIntegerv(GL_VIEWPORT,vect_viewport);
-}
-
-bool navigator::project_earth_equ_to_screen_check(const Vec3f& v, Vec3d& win)
-{
-	return project_earth_equ_to_screen(v, win) &&
-	win[1]>vect_viewport[1] &&
-	win[1]<vect_viewport[3] &&
-	win[0]>vect_viewport[0] &&
-	win[0]<vect_viewport[2];
-}
-
-bool navigator::project_earth_equ_to_screen(const Vec3f& v, Vec3d& win)
-{
-    gluProject(v[0],v[1],v[2],mat_earth_equ_to_screen,mat_projection,vect_viewport,&win[0],&win[1],&win[2]);
-	return (win[2]<1.);
-//	static Vec4d u;
-//	u[0] = v[0];
-//	u[1] = v[1];
-//	u[2] = v[2];
-//	u[3] = 1.;
-
-	//u.normalize();
-	// Transform with projection and modelview matrices
-//	u = mat_earth_equ_to_screen*u;
-
-	// Convert in screen coordinate
-//	win[0] = (1. + u[0]) * w / 2.;
-//	win[1] = (1. + u[1]) * h / 2.;
-//	win[2] = (1. + u[2]) / 2.;
-}
-
-bool navigator::project_earth_equ_to_screen(const Vec3d& v, Vec3d& win)
-{
-    gluProject(v[0],v[1],v[2],mat_earth_equ_to_screen,mat_projection,vect_viewport,&win[0],&win[1],&win[2]);
-	return (win[2]<1.);
-	/*
-	static Vec4d u;
-	u[0] = v[0];
-	u[1] = v[1];
-	u[2] = v[2];
-	u[3] = 1.;
-
-	// Transform with projection and modelview matrices
-	u = mat_earth_equ_to_screen*u;
-	double u3r = 1./u[3];
-	u[0]*=u3r;
-	u[1]*=u3r;
-	u[2]*=u3r;
-
-	// Convert in screen coordinate
-	win[0] = (1. + u[0]) * vect_viewport[2] / 2.;
-	win[1] = (1. + u[1]) * vect_viewport[3] / 2.;
-	win[2] = (1. + u[2]) / 2.;
-	*/
-}
-
-void navigator::turn_right(int s)
-{
-	if (s)
-	{
-		deltaAz = 1;
-		flag_traking = 0;
-	}
-	else deltaAz = 0;
-}
-
-void navigator::turn_left(int s)
-{
-	if (s)
-	{
-		deltaAz = -1;
-		flag_traking = 0;
-	}
-	else deltaAz = 0;
-}
-
-void navigator::turn_up(int s)
-{
-	if (s)
-	{
-		deltaAlt = 1;
-		flag_traking = 0;
-	}
-	else deltaAlt = 0;
-}
-
-void navigator::turn_down(int s)
-{
-	if (s)
-	{
-		deltaAlt = -1;
-		flag_traking = 0;
-	}
-	else deltaAlt = 0;
-}
-
-void navigator::zoom_in(int s)
-{
-	deltaFov = -1*(s!=0);
-}
-
-void navigator::zoom_out(int s)
-{
-	deltaFov = (s!=0);
 }
 
 
@@ -261,10 +139,6 @@ void navigator::update_vision_vector(int delta_time, stel_object* selected)
 			}
 		}
 	}
-
-	// Update now the deplacement
-	update_move(delta_time);
-
 }
 
 
@@ -274,53 +148,9 @@ void navigator::set_local_vision(Vec3d _pos)
 	equ_vision=local_to_earth_equ(&local_vision);
 }
 
-// Increment/decrement smoothly the vision field and position
-void navigator::update_move(int delta_time)
+
+void navigator::update_move(double deltaAz, double deltaAlt)
 {
-	// the more it is zoomed, the more the mooving speed is low (in angle)
-    double depl=move_speed*delta_time*fov;
-    if (deltaAz<0)
-    {
-		deltaAz = -depl/30;
-    }
-    else
-    {
-		if (deltaAz>0)
-        {
-			deltaAz = (depl/30);
-        }
-    }
-    if (deltaAlt<0)
-    {
-		deltaAlt = -depl/30;
-    }
-    else
-    {
-		if (deltaAlt>0)
-        {
-			deltaAlt = depl/30;
-        }
-    }
-    if (deltaFov<0)
-    {
-		deltaFov = -depl*5;
-    }
-    else
-    {
-		if (deltaFov>0)
-        {
-			deltaFov = depl*5;
-        }
-    }
-
-    // if we are zooming in or out
-    if (deltaFov)
-    {
-		if (fov+deltaFov>0.001 && fov+deltaFov<100.)  fov+=deltaFov;
-		if (fov+deltaFov>100) fov=100.;
-		if (fov+deltaFov<0.001) fov=0.001;
-    }
-
 	double azVision, altVision;
 	rect_to_sphe(&azVision,&altVision,&local_vision);
 
@@ -332,13 +162,18 @@ void navigator::update_move(int delta_time)
     }
 
     // recalc all the position variables
-	if (deltaFov || deltaAz || deltaAlt)
+	if (deltaAz || deltaAlt)
 	{
     	sphe_to_rect(azVision, altVision, &local_vision);
 
     	// Calc the equatorial coordinate of the direction of vision wich was in Altazimuthal coordinate
     	equ_vision=local_to_earth_equ(&local_vision);
 	}
+
+	// Update the final modelview matrices
+	update_local_to_eye();
+	mat_earth_equ_to_eye = mat_local_to_eye*mat_earth_equ_to_local;
+	mat_helio_to_eye = mat_local_to_eye*mat_helio_to_local;
 
 }
 
@@ -353,15 +188,15 @@ void navigator::update_time(int delta_time)
 // The non optimized (more clear version is available on the CVS : before date 25/07/2003)
 void navigator::update_transform_matrices(Vec3d earth_ecliptic_pos)
 {
-	mat_local_to_earth_equ = 	Mat4d::zrotation((get_apparent_sidereal_time(JDay)+position.longitude)*M_PI/180.) *
-						Mat4d::yrotation((90.-position.latitude)*M_PI/180.);
+	mat_local_to_earth_equ =Mat4d::zrotation((get_apparent_sidereal_time(JDay)+position.longitude)*M_PI/180.) *
+							Mat4d::yrotation((90.-position.latitude)*M_PI/180.);
 
 	mat_earth_equ_to_local = mat_local_to_earth_equ.transpose();
 
-	// These two next have to take into account the position of the observer on the earth
-	mat_helio_to_earth_equ =  Mat4d::xrotation(get_mean_obliquity(JDay)*M_PI/180.) *
-						Mat4d::translation(-earth_ecliptic_pos);
+	mat_helio_to_earth_equ =Mat4d::xrotation(get_mean_obliquity(JDay)*M_PI/180.) *
+							Mat4d::translation(-earth_ecliptic_pos);
 
+	// These two next have to take into account the position of the observer on the earth
 	Mat4d tmp = Mat4d::xrotation(-23.438855*M_PI/180.) *
 				Mat4d::zrotation((position.longitude+get_mean_sidereal_time(JDay))*M_PI/180.) *
 				Mat4d::yrotation((90.-position.latitude)*M_PI/180.);
@@ -373,12 +208,13 @@ void navigator::update_transform_matrices(Vec3d earth_ecliptic_pos)
 	mat_helio_to_local = 	Mat4d::translation(Vec3d(0.,0.,-6378.1/AU-(double)position.altitude/AU/1000)) *
 							tmp.transpose() *
 							Mat4d::translation(-earth_ecliptic_pos);
+
 }
 
 
 // Home made gluLookAt(0., 0., 0.,local_vision[0],local_vision[1],local_vision[2],0.,0.,1.);
 // to keep a better precision to prevent the shaking bug..
-Mat4d navigator::lookAt(void)
+void navigator::update_local_to_eye(void)
 {
 	Vec3d f(local_vision);
 	f.normalize();
@@ -387,7 +223,7 @@ Mat4d navigator::lookAt(void)
 	s.normalize();
 	u.normalize();
 
-	return Mat4d(s[0],u[0],-f[0],0.,
+	return mat_local_to_eye.set(s[0],u[0],-f[0],0.,
 				s[1],u[1],-f[1],0.,
 				s[2],u[2],-f[2],0.,
 				0.,0.,0.,1.);
@@ -396,27 +232,20 @@ Mat4d navigator::lookAt(void)
 // Place openGL in earth equatorial coordinates
 void navigator::switch_to_earth_equatorial(void)
 {
-	glLoadMatrixd(lookAt()*mat_earth_equ_to_local);
+	glLoadMatrixd(mat_earth_equ_to_eye);
 }
 
 // Place openGL in heliocentric coordinates
 void navigator::switch_to_heliocentric(void)
 {
-	glLoadMatrixd(lookAt()*mat_helio_to_local);
+	glLoadMatrixd(mat_helio_to_eye);
 }
 
-// Return the matrix which place openGL in heliocentric coordinates
-// Function used to overide standard openGL transformation while planet drawing to prevent
-// the boring shaking bug..
-Mat4d navigator::get_switch_to_heliocentric_mat(void)
-{
-	return lookAt()*mat_helio_to_local;
-}
 
 // Place openGL in local viewer coordinates (Usually somewhere on earth viewing in a specific direction)
 void navigator::switch_to_local(void)
 {
-	glLoadMatrixd(lookAt());
+	glLoadMatrixd(mat_local_to_eye);
 }
 
 // Return the observer heliocentric position
@@ -450,8 +279,8 @@ Vec3d navigator::helio_to_earth_equ(Vec3d* v)
 	return mat_helio_to_earth_equ*(*v);
 }
 
-// Transform vector from heliocentric coordinate to false equatorial : equatorial
-// coordinate but centered on the observer position
+// Transform vector from heliocentric coordinate to false equatorial :
+// i.e. equatorial coordinate but centered on the observer position
 Vec3d navigator::helio_to_earth_pos_equ(Vec3d* v)
 {
 	return mat_local_to_earth_equ*mat_helio_to_local*(*v);
@@ -468,70 +297,4 @@ void navigator::move_to(Vec3d _aim)
     move.speed=0.001;
     move.coef=0.;
     flag_auto_move = true;
-}
-
-
-
-draw_utility::draw_utility() : fov(0.), screenW(0), screenH(0)
-{
-}
-
-draw_utility::~draw_utility()
-{
-}
-
-void draw_utility::set_params(double _fov, int _screenW, int _screenH)
-{
-	fov=_fov;
-	screenW=_screenW;
-	screenH=_screenH;
-}
-
-// Calc the x,y coord on the screen with the X,Y and Z pos
-void draw_utility::project(float objx, float objy, float objz, double &x, double &y, double &z)
-{
-    glGetDoublev(GL_MODELVIEW_MATRIX,M);
-    glGetDoublev(GL_PROJECTION_MATRIX,P);
-    glGetIntegerv(GL_VIEWPORT,V);
-    gluProject(objx,objy,objz,M,P,V,&x,&y,&z);
-}
-
-// Convert x,y screen pos into 3D vector
-Vec3d draw_utility::unproject(double x ,double y)
-{
-    GLdouble objx[1];
-    GLdouble objy[1];
-    GLdouble objz[1];
-
-    glGetDoublev(GL_MODELVIEW_MATRIX,M);
-    glGetDoublev(GL_PROJECTION_MATRIX,P);
-    glGetIntegerv(GL_VIEWPORT,V);
-
-	gluUnProject(x,y,1.,M,P,V,objx,objy,objz);
-	return Vec3d(objx[0],objy[0],objz[0]);
-}
-
-// Set the drawing mode in 2D. Use reset_perspective_projection() to reset
-// previous projection mode
-void draw_utility::set_orthographic_projection(void)
-{
-	glMatrixMode(GL_PROJECTION);	// switch to projection mode
-    glPushMatrix();					// save previous matrix
-    glLoadIdentity();
-    gluOrtho2D(0, screenW, 0, screenH);	// set a 2D orthographic projection
-    //glScalef(1, -1, 1);			// invert the y axis, down is positive
-    //glTranslatef(0, -h, 0);		// move the origin from the bottom left corner to the upper left corner
-
-	glMatrixMode(GL_MODELVIEW);		// Init the modeling matrice
-    glPushMatrix();
-    glLoadIdentity();
-}
-
-// Reset the previous projection mode after a call to set_orthographic_projection()
-void draw_utility::reset_perspective_projection(void)
-{
-    glMatrixMode(GL_PROJECTION);
-    glPopMatrix();
-    glMatrixMode(GL_MODELVIEW);
-    glPopMatrix();
 }

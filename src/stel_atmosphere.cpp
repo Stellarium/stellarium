@@ -46,15 +46,9 @@ stel_atmosphere::~stel_atmosphere()
 }
 
 void stel_atmosphere::compute_color(Vec3d sunPos, Vec3d moonPos, float moon_phase,
-	tone_reproductor * eye, draw_utility * du)
+	tone_reproductor * eye, Projector* prj)
 {
-	static    GLdouble M[16];
-	static    GLdouble P[16];
-	static    GLdouble objx[1];
-	static    GLdouble objy[1];
-	static    GLdouble objz[1];
-	static    GLint V[4];
-
+	Vec3d obj;
 	skylight_struct2 b2;
 
 	sunPos.normalize();
@@ -71,23 +65,17 @@ void stel_atmosphere::compute_color(Vec3d sunPos, Vec3d moonPos, float moon_phas
 	moon_pos[2] = moonPos[2];
 
 	sky.set_paramsv(sun_pos,5.f);
-
 	skyb.set_sun_moon(moon_pos[2], sun_pos[2]);
 	skyb.set_date(2003, 07, moon_phase);
 
-	// Convert x,y screen pos in 3D vector
-	glGetDoublev(GL_MODELVIEW_MATRIX,M);
-	glGetDoublev(GL_PROJECTION_MATRIX,P);
-	glGetIntegerv(GL_VIEWPORT,V);
+	float stepX = (float)prj->scrW() / sky_resolution;
+	float stepY = (float)prj->scrH() / sky_resolution;
 
-	float stepX = (float)du->screenW / sky_resolution;
-	float stepY = (float)du->screenH / sky_resolution;
-
-	Vec3f point;
+	Vec3d point(1., 0., 0.);
 
 	// Find which row is the first one not bellow the ground
-	gluProject(1.,0.,0.,M,P,V,objx,objy,objz);
-	double yHoriz = *objy;
+	prj->project_local(point,obj);
+	double yHoriz = obj[1];
 	startY = (int)floor(yHoriz/stepY);
 
 	// The sky is totally covered by the ground
@@ -119,8 +107,7 @@ void stel_atmosphere::compute_color(Vec3d sunPos, Vec3d moonPos, float moon_phas
 		// Set the values of the first line bellow the ground
 		for (int x=0; x<=sky_resolution; x++)
 		{
-			gluUnProject(x*stepX,yHoriz+1,1,M,P,V,objx,objy,objz);
-			point.set(*objx,*objy,*objz);
+			prj->unproject_local(x*stepX,yHoriz+1.,point);
 			point.normalize();
 			b2.pos[0] = point[0]; b2.pos[1] = point[1]; b2.pos[2] = point[2];
 			sky.get_xyY_valuev(&b2);
@@ -152,8 +139,7 @@ void stel_atmosphere::compute_color(Vec3d sunPos, Vec3d moonPos, float moon_phas
 	{
 		for(int y=startY+1; y<=sky_resolution; y++)
 		{
-			gluUnProject(x*stepX,y*stepY,1,M,P,V,objx,objy,objz);
-			point.set(*objx,*objy,*objz);
+			prj->unproject_local((double)x*stepX,(double)y*stepY,point);
 			point.normalize();
 			b2.pos[0] = point[0]; b2.pos[1] = point[1]; b2.pos[2] = point[2];
 			sky.get_xyY_valuev(&b2);
@@ -184,16 +170,17 @@ void stel_atmosphere::compute_color(Vec3d sunPos, Vec3d moonPos, float moon_phas
 
 
 // Draw the atmosphere using the precalc values stored in tab_sky
-void stel_atmosphere::draw(draw_utility * du)
+void stel_atmosphere::draw(Projector* prj)
 {
 	int startYtemp = startY;
 	if (startYtemp>sky_resolution) return;
 	if (startYtemp<1) startYtemp = 1;
-	float stepX = (float)du->screenW / sky_resolution;
-	float stepY = (float)du->screenH / sky_resolution;
+	float stepX = (float)prj->scrW() / sky_resolution;
+	float stepY = (float)prj->scrH() / sky_resolution;
+
 	glDisable(GL_TEXTURE_2D);
 	glEnable(GL_BLEND);
-	du->set_orthographic_projection();	// set 2D coordinate
+	prj->set_orthographic_projection();	// set 2D coordinate
 	for (int y2=startYtemp-1; y2<sky_resolution; y2++)
 	{
 		glBegin(GL_TRIANGLE_STRIP);
@@ -206,5 +193,5 @@ void stel_atmosphere::draw(draw_utility * du)
 			}
 		glEnd();
 	}
-	du->reset_perspective_projection();
+	prj->reset_perspective_projection();
 }
