@@ -53,7 +53,7 @@ public:
 	void update_model_view_mat(void);
 
 	// Move to the given position in equatorial or local coordinate depending on _local_pos value
-	void move_to(const Vec3d& _aim, float move_duration = 1., bool _local_pos = false);
+	void move_to(const Vec3d& _aim, float move_duration = 1., bool _local_pos = false, int zooming = 0);
 
 	// Loads
 	void load_position(const string&);		// Load the position info in the file name given
@@ -145,6 +145,7 @@ private:
 	// Automove
 	auto_move move;					// Current auto movement
     int flag_auto_move;				// Define if automove is on or off
+	int zooming_mode;				// 0 : undefined, 1 zooming, -1 unzooming
 
 	// Time variable
     double time_speed;				// Positive : forward, Negative : Backward, 1 = 1sec/sec

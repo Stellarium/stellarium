@@ -168,6 +168,31 @@ void Projector::set_modelview_matrices(	const Mat4d& _mat_earth_equ_to_eye,
 // Update auto_zoom if activated
 void Projector::update_auto_zoom(int delta_time)
 {
+	if (flag_auto_zoom)
+	{
+		// Use a smooth function
+		double c;
+
+		if( zoom_move.start > zoom_move.aim )
+		{
+			// slow down as approach final view
+			c = 1 - (1-zoom_move.coef)*(1-zoom_move.coef)*(1-zoom_move.coef);
+		}
+		else
+		{
+			// speed up as leave zoom target
+			c = (zoom_move.coef)*(zoom_move.coef)*(zoom_move.coef);
+		}
+
+		set_fov(zoom_move.start + (zoom_move.aim - zoom_move.start) * c);
+		zoom_move.coef+=zoom_move.speed*delta_time;
+		if (zoom_move.coef>=1.)
+		{
+			flag_auto_zoom = 0;
+			set_fov(zoom_move.aim);
+		}
+	}
+	/*
     if (flag_auto_zoom)
     {
 		// Use a smooth function
@@ -180,7 +205,7 @@ void Projector::update_auto_zoom(int delta_time)
 			flag_auto_zoom = 0;
             set_fov(zoom_move.aim);
         }
-    }
+    }*/
 }
 
 // Zoom to the given field of view
