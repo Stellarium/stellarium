@@ -3,15 +3,13 @@
 ################################
 
 ######## Video settings ########
-# Fullscreen mode is faster than windowed mode but a few videos cards don't support it.
-# When fullscreen = false, stellarium runs in windowed mode, but it resize
-# the window to the size of your screen, so it looks like fullscreen mode but it isn't...
+# Fullscreen mode is more comfortable than windowed mode but a few videos cards don't support it.
 # true=fullscreen mode, false=windowed mode
 
 FULLSCREEN = true
 
 # Available resolution (for fullscreen mode) are : 400x300, 640x480, 800x600,
-# 1024x768, 1280x1024 and maybe more but my screen can't reach it so I never tried it...
+# 1024x768, 1280x1024 and more
 # Width of the fullscreen
 
 X_RESOLUTION = 1024
@@ -20,7 +18,6 @@ X_RESOLUTION = 1024
 
 Y_RESOLUTION = 768
 
-#
 # Number of Bit Per Pixels : set the number of possible colors. Available values are 32 and 16.
 # (16 faster than 32 but reduce the number of colors)
 
