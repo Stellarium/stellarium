@@ -1,0 +1,278 @@
+/*
+ * Stellarium
+ * Copyright (C) 2003 Fabien Chéreau
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ */
+
+#include "landscape.h"
+#include "init_parser.h"
+
+Landscape::Landscape(float _radius) : radius(_radius), name(NULL), sky_brightness(1.)
+{
+}
+
+Landscape::~Landscape()
+{
+	if (name) delete name;
+	name = NULL;
+}
+
+Landscape* Landscape::create_from_file(const char* landscape_file, const char* section_name)
+{
+	init_parser pd(landscape_file);	// The landscape data ini file parser
+	pd.load();
+	const char* s;
+	s = pd.get_str(section_name, "type");
+	if (s==NULL)
+	{
+		printf("ERROR : can't find type for landscape section %s\n",section_name);
+		exit(-1);
+	}
+	if (!strcmp(s, "old_style"))
+	{
+		Landscape_old_style* ldscp = new Landscape_old_style();
+		ldscp->load(landscape_file, section_name);
+		return ldscp;
+	}
+	if (!strcmp(s, "fisheye"))
+	{
+		Landscape_fisheye* ldscp = new Landscape_fisheye();
+		ldscp->load(landscape_file, section_name);
+		return ldscp;
+	}
+
+	printf("ERROR : can't understand landscape type for landscape section %s\n",section_name);
+	exit(-1);
+}
+
+Landscape_old_style::Landscape_old_style(float _radius) : Landscape(_radius), side_texs(NULL), sides(NULL)
+{
+}
+
+Landscape_old_style::~Landscape_old_style()
+{
+	if (name) delete name;
+	name = NULL;
+	if (side_texs)
+	{
+		for (int i=0;i<nb_side_texs;++i)
+		{
+			if (side_texs[i]) delete side_texs[i];
+			side_texs[i] = NULL;
+		}
+		delete side_texs;
+	}
+	if (sides) delete sides;
+	if (ground_tex) delete ground_tex;
+	if (fog_tex) delete fog_tex;
+}
+
+void Landscape_old_style::load(const char* landscape_file, const char* section_name)
+{
+	init_parser pd(landscape_file);	// The landscape data ini file parser
+	pd.load();
+	if (name) free(name);
+	name = NULL;
+	name = strdup(pd.get_str(section_name, "name"));
+
+	// Load sides textures
+	nb_side_texs = pd.get_int(section_name, "nbsidetex", 0);
+	side_texs = new s_texture*[nb_side_texs];
+	char tmp[255];
+	for (int i=0;i<nb_side_texs;++i)
+	{
+		sprintf(tmp,"tex%d",i);
+		side_texs[i] = new s_texture(pd.get_str(section_name, tmp),TEX_LOAD_TYPE_PNG_ALPHA);
+	}
+
+	// Init sides parameters
+	nb_side = pd.get_int(section_name, "nbside", 0);
+	sides = new landscape_tex_coord[nb_side];
+	const char* s;
+	int texnum;
+	float a,b,c,d;
+	for (int i=0;i<nb_side;++i)
+	{
+		sprintf(tmp,"side%d",i);
+		s = pd.get_str(section_name, tmp);
+		sscanf(s,"tex%d:%f:%f:%f:%f",&texnum,&a,&b,&c,&d);
+		sides[i].tex = side_texs[texnum];
+		sides[i].tex_coords[0] = a;
+		sides[i].tex_coords[1] = b;
+		sides[i].tex_coords[2] = c;
+		sides[i].tex_coords[3] = d;
+		//printf("%f %f %f %f\n",a,b,c,d);
+	}
+
+	nb_decor_repeat = pd.get_int(section_name, "nb_decor_repeat", 1);
+
+	ground_tex = new s_texture(pd.get_str(section_name, "groundtex"),TEX_LOAD_TYPE_PNG_SOLID);
+	s = pd.get_str(section_name, "ground");
+	sscanf(s,"groundtex:%f:%f:%f:%f",&a,&b,&c,&d);
+	ground_tex_coord.tex = ground_tex;
+	ground_tex_coord.tex_coords[0] = a;
+	ground_tex_coord.tex_coords[1] = b;
+	ground_tex_coord.tex_coords[2] = c;
+	ground_tex_coord.tex_coords[3] = d;
+
+	fog_tex = new s_texture(pd.get_str(section_name, "fogtex"),TEX_LOAD_TYPE_PNG_SOLID_REPEAT);
+	s = pd.get_str(section_name, "fog");
+	sscanf(s,"fogtex:%f:%f:%f:%f",&a,&b,&c,&d);
+	fog_tex_coord.tex = fog_tex;
+	fog_tex_coord.tex_coords[0] = a;
+	fog_tex_coord.tex_coords[1] = b;
+	fog_tex_coord.tex_coords[2] = c;
+	fog_tex_coord.tex_coords[3] = d;
+
+	fog_alt_angle = pd.get_double(section_name, "fog_alt_angle", 10.);
+	fog_angle_shift = pd.get_double(section_name, "fog_angle_shift", -10.);
+	decor_alt_angle = pd.get_double(section_name, "decor_alt_angle", 10.);
+	decor_angle_shift = pd.get_double(section_name, "decor_angle_shift", -10.);
+}
+
+void Landscape_old_style::draw(tone_reproductor * eye, const Projector* prj, const navigator* nav,
+		bool flag_fog, bool flag_decor, bool flag_ground)
+{
+	if (flag_ground) draw_ground(eye, prj, nav);
+	if (flag_decor) draw_decor(eye, prj, nav);
+	if (flag_fog) draw_fog(eye, prj, nav);
+}
+
+
+// Draw the horizon fog
+void Landscape_old_style::draw_fog(tone_reproductor * eye, const Projector* prj, const navigator* nav) const
+{
+	glBlendFunc(GL_ONE, GL_ONE);
+	glPushMatrix();
+	glColor3f(0.2f+0.2f*sky_brightness, 0.2f+0.2f*sky_brightness, 0.2f+0.2f*sky_brightness);
+	glEnable(GL_TEXTURE_2D);
+	glEnable(GL_BLEND);
+	glEnable(GL_CULL_FACE);
+	glBindTexture(GL_TEXTURE_2D, fog_tex->getID());
+	prj->sCylinder(radius, radius*sinf(fog_alt_angle*M_PI/180.), 32, 1, nav->get_local_to_eye_mat() *
+		Mat4d::translation(Vec3d(0.,0.,radius*sinf(fog_angle_shift*M_PI/180.))), 1);
+	glDisable(GL_CULL_FACE);
+	glPopMatrix();
+}
+
+// Draw the mountains with a few pieces of texture
+void Landscape_old_style::draw_decor(tone_reproductor * eye, const Projector* prj, const navigator* nav) const
+{
+	Mat4d mat = nav->get_local_to_eye_mat() * Mat4d::translation(Vec3d(0.,0.,radius*sinf(decor_angle_shift*M_PI/180.)));
+
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	glEnable(GL_TEXTURE_2D);
+	glEnable(GL_BLEND);
+	glEnable(GL_CULL_FACE);
+	glColor3f(sky_brightness, sky_brightness, sky_brightness);
+	glPushMatrix();
+	glLoadMatrixd(mat);
+
+	int subdiv = 32/(nb_decor_repeat*nb_side);
+	if (subdiv<=0) subdiv = 1;
+	float da = (2.*M_PI)/(nb_side*subdiv*nb_decor_repeat);
+	float dz = radius * sinf(decor_alt_angle*M_PI/180.f);
+	float z = 0;
+	float x,y;
+	float a;
+
+	for (int n=0;n<nb_decor_repeat;++n)
+	{
+		a = 2.f*M_PI*n/nb_decor_repeat;
+		for (int i=0;i<nb_side;++i)
+		{
+			glBindTexture(GL_TEXTURE_2D, sides[i].tex->getID());
+			glBegin(GL_QUAD_STRIP);
+			for (int j=0;j<=subdiv;++j)
+			{
+				x = radius * sinf(a + da * j + da * subdiv * i);
+				y = radius * cosf(a + da * j + da * subdiv * i);
+				glNormal3f(-x, -y, 0);
+				glTexCoord2f(sides[i].tex_coords[0] + (float)j/subdiv * (sides[i].tex_coords[2]-sides[i].tex_coords[0]),
+					sides[j].tex_coords[3]);
+				prj->sVertex3(x, y, z + dz * (sides[i].tex_coords[3]-sides[i].tex_coords[1]), mat);
+				glTexCoord2f(sides[i].tex_coords[0] + (float)j/subdiv * (sides[i].tex_coords[2]-sides[i].tex_coords[0]),
+					sides[j].tex_coords[1]);
+				prj->sVertex3(x, y, z , mat);
+			}
+			glEnd();
+		}
+	}
+
+	glDisable(GL_CULL_FACE);
+	glPopMatrix();
+}
+
+
+// Draw the ground
+void Landscape_old_style::draw_ground(tone_reproductor * eye, const Projector* prj, const navigator* nav) const
+{
+	glPushMatrix();
+	glColor3f(sky_brightness/2, sky_brightness/2, sky_brightness/2);
+	glEnable(GL_TEXTURE_2D);
+	glDisable(GL_BLEND);
+	glBindTexture(GL_TEXTURE_2D, ground_tex->getID());
+	glBegin (GL_QUADS);
+		glTexCoord2f (ground_tex_coord.tex_coords[0],ground_tex_coord.tex_coords[1]);
+		glVertex3f (-radius/2, -radius/2, -0.01f);
+		glTexCoord2f (ground_tex_coord.tex_coords[2], ground_tex_coord.tex_coords[1]);
+		glVertex3f(-radius/2, radius/2, -0.01f);
+		glTexCoord2f (ground_tex_coord.tex_coords[2], ground_tex_coord.tex_coords[3]);
+		glVertex3f( radius/2, radius/2, -0.01f);
+		glTexCoord2f (ground_tex_coord.tex_coords[0], ground_tex_coord.tex_coords[3]);
+		glVertex3f( radius/2, -radius/2, -0.01f);
+	glEnd ();
+	glPopMatrix();
+}
+
+Landscape_fisheye::Landscape_fisheye(float _radius) : Landscape(_radius), map_tex(NULL)
+{
+}
+
+Landscape_fisheye::~Landscape_fisheye()
+{
+	if (map_tex) delete map_tex;
+	map_tex = NULL;
+}
+
+void Landscape_fisheye::load(const char* landscape_file, const char* section_name)
+{
+	init_parser pd(landscape_file);	// The landscape data ini file parser
+	pd.load();
+	if (name) free(name);
+	name = NULL;
+	name = strdup(pd.get_str(section_name, "name"));
+	map_tex = new s_texture(pd.get_str(section_name, "maptex"),TEX_LOAD_TYPE_PNG_ALPHA);
+	tex_fov = pd.get_double(section_name, "texturefov", 360) * M_PI/180.;
+}
+
+void Landscape_fisheye::draw(tone_reproductor * eye, const Projector* prj, const navigator* nav,
+		bool flag_fog, bool flag_decor, bool flag_ground)
+{
+	// Normal transparency mode
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+	glColor3f(sky_brightness, sky_brightness, sky_brightness);
+
+	glEnable(GL_CULL_FACE);
+	glEnable(GL_TEXTURE_2D);
+	glEnable(GL_BLEND);
+	glBindTexture(GL_TEXTURE_2D, map_tex->getID());
+	if (flag_ground) prj->sSphere_map(radius,40,40, nav->get_local_to_eye_mat(), tex_fov, 1);
+
+    glDisable(GL_CULL_FACE);
+
+}
