@@ -55,6 +55,7 @@ void Projector::set_disk_viewport(void)
 {
 	set_square_viewport();
 
+	glClear(GL_COLOR_BUFFER_BIT);
 	glClear(GL_STENCIL_BUFFER_BIT);
 	glEnable(GL_STENCIL_TEST);
  	glStencilFunc(GL_ALWAYS, 0x1, 0x1);
