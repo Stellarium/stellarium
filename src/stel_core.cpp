@@ -111,7 +111,7 @@ void stel_core::init(void)
 		DataDir + "commonname.fab",	DataDir + "name.fab");
 
 	// Load constellations
-    asterisms->load(DataDir + "spacefont.txt", DataDir + "constellationship.fab", hip_stars);
+    asterisms->load(DataDir + "spacefont.txt", DataDir + "constellationship.fab", DataDir + "constellationsart.fab", hip_stars);
 
 	// Load the nebulas data TODO : add NGC objects
     nebulas->read(DataDir + "spacefont.txt", DataDir + "messier.fab");

@@ -24,7 +24,7 @@
 
 bool Constellation::gravity_label = false;
 
-Constellation::Constellation() : name(NULL), inter(NULL), asterism(NULL)
+Constellation::Constellation() : name(NULL), inter(NULL), asterism(NULL), art_tex(NULL)
 {
 }
 
@@ -36,6 +36,8 @@ Constellation::~Constellation()
     name = NULL;
     if (inter) delete inter;
     inter = NULL;
+	if (art_tex) delete art_tex;
+	art_tex = NULL;
 }
 
 int Constellation::read(FILE *  fic, Hip_Star_mgr * _VouteCeleste)
@@ -53,7 +55,12 @@ int Constellation::read(FILE *  fic, Hip_Star_mgr * _VouteCeleste)
     asterism = new Hip_Star*[nb_segments*2];
     for (unsigned int i=0;i<nb_segments*2;++i)
     {
-        if (fscanf(fic,"%u",&HP)!=1) printf("ERROR while loading constellation data\n");
+        if (fscanf(fic,"%u",&HP)!=1)
+		{
+			printf("ERROR while loading constellation data\n");
+			exit(-1);
+		}
+
         asterism[i]=_VouteCeleste->search(HP);
 		if (!asterism[i])
 		{
@@ -61,7 +68,11 @@ int Constellation::read(FILE *  fic, Hip_Star_mgr * _VouteCeleste)
 		}
     }
 
-	if (fscanf(fic,"\n")) printf("ERROR while loading constellation data\n");
+	if (fscanf(fic,"\n"))
+	{
+		printf("ERROR while loading constellation data\n");
+		exit(-1);
+	}
 
     for(unsigned int ii=0;ii<nb_segments*2;++ii)
     {
