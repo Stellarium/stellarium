@@ -94,7 +94,8 @@ void stel_atmosphere::compute_color(double JD,  int delta_time, Vec3d sunPos, Ve
 	moonPos.normalize();
 
 	// Patch from Ivan in Ukraine - TODO: double check realism
-	double Sdiam=0.01; //Kind of the diameter of the Sun
+	// TODO: Brightness falloff is not linear
+	double Sdiam=0.0075; //Kind of the diameter of the Sun (need to refine)
 	double SLx;
 	double SLy;
 	double SL;
@@ -102,6 +103,9 @@ void stel_atmosphere::compute_color(double JD,  int delta_time, Vec3d sunPos, Ve
 	SLx=sunPos[1]-moonPos[1]; // x dist. between Sun & Moon
 	SLy=sunPos[2]-moonPos[2]; // y dist. between
 	SL=sqrt(SLx*SLx+SLy*SLy); // Just distance
+
+	//	printf("%f %f %f\n", SLx, SLy, SL);
+
 	if (SL>=Sdiam) {kSL=1;} else {
 	  kSL=(SL/Sdiam)*(SL/Sdiam); // some coefficient proportional to Sun covering
 	  kSL = 0.004 + kSL*0.996;   // under about .004 more stars visible than should be
