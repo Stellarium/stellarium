@@ -148,6 +148,12 @@ void Nebula::DrawCircle(draw_utility * du)
     glPopMatrix(); 
 }
 
+// Return the radius of a circle containing the object on screen
+float Nebula::get_on_screen_size(navigator * nav, draw_utility * du)
+{
+	return Taille/60./du->fov*du->screenH;
+}
+
 void Nebula::DrawName(s_font* nebulaFont)
 {   
     glColor3f(0.4,0.3,0.5);

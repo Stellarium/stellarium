@@ -22,10 +22,11 @@
 #include "navigator.h"
 #include "stel_utility.h"
 #include "s_texture.h"
+#include "planet.h"
 
-
-extern s_texture * texIds[200];            // Common Textures
-
+s_texture * stel_object::pointer_star = NULL;
+s_texture * stel_object::pointer_planet = NULL;
+s_texture * stel_object::pointer_nebula = NULL;
 
 int stel_object::local_time = 0;
 
@@ -44,7 +45,7 @@ void stel_object::draw_pointer(int delta_time, draw_utility * du, navigator * na
     if (get_type()==STEL_OBJECT_STAR)
     {
 		glColor3fv(get_RGB());
-		glBindTexture (GL_TEXTURE_2D, texIds[12]->getID());
+		glBindTexture (GL_TEXTURE_2D, pointer_star->getID());
         glEnable(GL_TEXTURE_2D);
         glEnable(GL_BLEND);
         glTranslatef(x, y, 0.0f);
@@ -57,24 +58,16 @@ void stel_object::draw_pointer(int delta_time, draw_utility * du, navigator * na
         glEnd ();
     }
 
-	double size=2000./du->fov;
+	float size = get_on_screen_size(nav, du);
+	size+=20.f;
+	size+=10.f*sin(0.002f * local_time);
 
     if (get_type()==STEL_OBJECT_NEBULA || get_type()==STEL_OBJECT_PLANET)
     {
 		if (get_type()==STEL_OBJECT_PLANET)
-        {
-			glBindTexture(GL_TEXTURE_2D, texIds[26]->getID());
-            if (size < 15) size=10;
-            size+=du->fov/4;
-            size+=size*sin((float)local_time/400)/200*du->fov;
-        }
+			glBindTexture(GL_TEXTURE_2D, pointer_planet->getID());
         if (get_type()==STEL_OBJECT_NEBULA)
-        {
-			glBindTexture(GL_TEXTURE_2D, texIds[27]->getID());
-            size*=10/du->fov;
-            if (size<15) size=15;
-            size+=size*sin((float)local_time/400)/10;
-        }
+			glBindTexture(GL_TEXTURE_2D, pointer_nebula->getID());
 
         glEnable(GL_TEXTURE_2D);
         glEnable(GL_BLEND);
@@ -125,4 +118,11 @@ void stel_object::draw_pointer(int delta_time, draw_utility * du, navigator * na
 void stel_object::get_info_string(char * s, navigator * nav) const
 {
 	sprintf(s,"No info for this object...");
+}
+
+void stel_object::init_textures(void)
+{
+	pointer_star = new s_texture("pointeur2");
+	pointer_planet = new s_texture("pointeur4");
+	pointer_nebula = new s_texture("pointeur5");
 }

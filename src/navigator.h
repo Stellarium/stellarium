@@ -122,6 +122,8 @@ public:
 	void set_altitude(int a) {position.altitude=a;}
 	int get_altitude(void) const {return position.altitude;}
 
+	Vec3d get_observer_helio_pos(void);	// Return the observer heliocentric position
+
 private:
 
 	void update_move(int deltaTime);

@@ -82,6 +82,9 @@ public:
 	// Get the phase angle for an observer at pos obs_pos in the heliocentric coordinate (in AU)
 	double get_phase(Vec3d obs_pos);
 
+	// Get the magnitude for an observer at pos obs_pos in the heliocentric coordinate (in AU)
+	float compute_magnitude(Vec3d obs_pos);
+
 	// Draw the planet, if hint_ON is != 0 draw a circle and the name as well
     void draw(int hint_ON, draw_utility * du, navigator * nav);
 
@@ -108,6 +111,9 @@ public:
 
 	const char* get_name(void) const {return name;}
 
+	// Return the radius of a circle containing the object on screen
+	virtual float get_on_screen_size(navigator * nav, draw_utility * du);
+
 	static void set_font(s_font* f) {planet_name_font = f;}
 
 protected:
@@ -118,10 +124,10 @@ protected:
 	void draw_sphere(void);
 
 	// Draw the small star like 2D halo
-	void draw_halo(draw_utility * du);
+	void draw_halo(navigator* nav, draw_utility * du);
 
 	// Draw the circle and name of the planet
-	void draw_hints(Vec3d earthEquPos, draw_utility * du);
+	void draw_hints(navigator* nav, draw_utility * du);
 
     char * name;
 	int flagHalo;					// Set wether a little "star like" halo will be drawn

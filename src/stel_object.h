@@ -23,6 +23,7 @@
 #include "vecmath.h"
 #include "stel_utility.h"
 #include "navigator.h"
+#include "s_texture.h"
 
 #define STEL_OBJECT_STAR 1
 #define STEL_OBJECT_PLANET 2
@@ -40,8 +41,15 @@ public:
 	virtual unsigned char get_type(void) const =0;
 	virtual Vec3d get_earth_equ_pos(navigator * nav) const =0;
 	virtual vec3_t get_RGB(void) const {return vec3_t(0.,0.,0.);}
+	static void init_textures(void);
+protected:
+	virtual float get_on_screen_size(navigator * nav, draw_utility * du) {return -1.;}
 private:
 	static int local_time;
+	static s_texture * pointer_star;
+	static s_texture * pointer_planet;
+	static s_texture * pointer_nebula;
+
 };
 
 #endif // _STEL_OBJECT_H_
