@@ -311,8 +311,18 @@ void stel_ui::tui_cb_admin_load_default(void)
 {
 	core->load_config();
 
-	// believe this is redundant
-	//	core->observatory->load(core->ConfigDir + core->config_file, "init_location");
+	// believe this is redundant : yes but this must be here and not in stel_core.cpp
+	if(core->asterisms)
+	{
+		core->asterisms->set_art_intensity(core->ConstellationArtIntensity);
+		core->asterisms->set_art_fade_duration(core->ConstellationArtFadeDuration);
+	}
+	if (!core->FlagAtmosphere && core->tone_converter)
+		core->tone_converter->set_world_adaptation_luminance(3.75f);
+	if (core->atmosphere) core->atmosphere->set_fade_duration(core->AtmosphereFadeDuration);
+	core->observatory->load(core->ConfigDir + core->config_file, "init_location");
+	core->set_landscape(core->observatory->get_landscape_name());
+	
 	if (core->StartupTimeMode=="preset" || core->StartupTimeMode=="Preset")
 	{
 		core->navigation->set_JDay(core->PresetSkyTime -
@@ -329,6 +339,7 @@ void stel_ui::tui_cb_admin_load_default(void)
 void stel_ui::tui_cb_admin_save_default(void)
 {
 	core->save_config();
+	core->observatory->save(core->ConfigDir + core->config_file, "init_location");
 	system( ( core->DataDir + "script_save_config " ).c_str() );
 }
 

@@ -431,23 +431,36 @@ void stel_core::load_config(void)
 	string version = conf.get_str("main:version");
 	if (version!=string(VERSION))
 	{
-		// The config file is too old to try an importation
-		cout << "The current config file is from a version too old (" <<
-			(version.empty() ? "<0.6.0" : version) << ")." << endl;
-		cout << "It will be replaced by the default config file." << endl;
-		system( (string("cp -f ") + DataRoot + "/config/default_config.ini " + ConfigDir + config_file).c_str() );
+		if (version=="0.6.0")
+		{
+			cout << "The current config file is from previous version (0.6.0)." << endl;
+			cout << "Previous options will be imported in the new config file." << endl;
+		}
+		else
+		{
+			// The config file is too old to try an importation
+			cout << "The current config file is from a version too old (" <<
+				(version.empty() ? "<0.6.0" : version) << ")." << endl;
+			cout << "It will be replaced by the default config file." << endl;
+			system( (string("cp -f ") + DataRoot + "/config/default_config.ini " + ConfigDir + config_file).c_str() );
+		}
 	}
 
 	// Actually load the config file
 	load_config_from(ConfigDir + config_file);
 
-	if (observatory) {
-	  observatory->load(ConfigDir + config_file, "init_location");
-
-	  // must explicitly load landscape
-	  set_landscape( observatory->get_landscape_name() );
-	}
-
+	if (version!=string(VERSION))
+	{
+		// Store temporarily the previous observator parameters
+		Observator tempobs;
+		tempobs.load(ConfigDir + config_file, "init_location");
+		
+		// Set the new landscape though
+		tempobs.set_landscape_name("Guereins");
+		// We just imported previous parameters (from 0.6.0)
+		save_config_to(ConfigDir + config_file);
+		tempobs.save(ConfigDir + config_file, "init_location");
+	}	
 }
 
 void stel_core::save_config(void)
@@ -455,8 +468,6 @@ void stel_core::save_config(void)
 	// The config file is supposed to be valid and from the correct stellarium version.
 	// This is normally the case if the program is running.
 	save_config_to(ConfigDir + config_file);
-
-	if (observatory) observatory->save(ConfigDir + config_file, "init_location");
 }
 
 void stel_core::load_config_from(const string& confFile)
@@ -467,7 +478,7 @@ void stel_core::load_config_from(const string& confFile)
 
 	// Main section (check for version mismatch)
 	string version = conf.get_str("main:version");
-	if (version!=string(VERSION))
+	if (version!=string(VERSION) && version!="0.6.0")
 	{
 		cout << "ERROR : The current config file is from a version too old (" <<
 			(version.empty() ? "<0.6.0" : version) << ")." << endl;
@@ -476,11 +487,11 @@ void stel_core::load_config_from(const string& confFile)
 
 	// Video Section
 	Fullscreen			= conf.get_boolean("video:fullscreen");
-	screen_W			= conf.get_int	   ("video:screen_w");
-	screen_H			= conf.get_int	   ("video:screen_h");
+	screen_W			= conf.get_int	  ("video:screen_w");
+	screen_H			= conf.get_int	  ("video:screen_h");
 	bppMode				= conf.get_int    ("video:bbp_mode");
-	horizontalOffset                = conf.get_int    ("video:horizontal_offset");
-	verticalOffset                  = conf.get_int    ("video:vertical_offset");
+	horizontalOffset	= conf.get_int    ("video:horizontal_offset");
+	verticalOffset		= conf.get_int    ("video:vertical_offset");
 
 
 	// Projector
@@ -536,7 +547,8 @@ void stel_core::load_config_from(const string& confFile)
 	FlagShowSelectedObjectInfos = conf.get_boolean("gui:flag_show_selected_object_info");
 	GuiBaseColor		= str_to_vec3f(conf.get_str("gui:gui_base_color").c_str());
 	GuiTextColor		= str_to_vec3f(conf.get_str("gui:gui_text_color").c_str());
-
+	BaseFontSize		= conf.get_double ("gui","base_font_size",15);
+	
 	// Colors
 	AzimuthalColor		= str_to_vec3f(conf.get_str("color:azimuthal_color").c_str());
 	EquatorialColor		= str_to_vec3f(conf.get_str("color:equatorial_color").c_str());
@@ -560,7 +572,7 @@ void stel_core::load_config_from(const string& confFile)
 	PresetSkyTime 		= conf.get_double ("navigation","preset_sky_time",2451545.);
 	StartupTimeMode 	= conf.get_str("navigation:startup_time_mode");	// Can be "now" or "preset"
 	FlagEnableZoomKeys	= conf.get_boolean("navigation:flag_enable_zoom_keys");
-	FlagManualZoom	        = conf.get_boolean("navigation:flag_manual_zoom");
+	FlagManualZoom		= conf.get_boolean("navigation:flag_manual_zoom");
 	FlagEnableMoveKeys	= conf.get_boolean("navigation:flag_enable_move_keys");
 	InitFov				= conf.get_double ("navigation","init_fov",60.);
 	InitViewPos 		= str_to_vec3f(conf.get_str("navigation:init_view_pos").c_str());
@@ -584,11 +596,8 @@ void stel_core::load_config_from(const string& confFile)
 	FlagGround			= conf.get_boolean("landscape:flag_ground");
 	FlagHorizon			= conf.get_boolean("landscape:flag_horizon");
 	FlagFog				= conf.get_boolean("landscape:flag_fog");
-
 	FlagAtmosphere		= conf.get_boolean("landscape:flag_atmosphere");
-	if (!FlagAtmosphere && tone_converter) tone_converter->set_world_adaptation_luminance(3.75f);
-        AtmosphereFadeDuration          = conf.get_double("landscape","atmosphere_fade_duration",4.);
-	if(atmosphere) atmosphere->set_fade_duration(AtmosphereFadeDuration);
+	AtmosphereFadeDuration  = conf.get_double("landscape","atmosphere_fade_duration",1.5);
 
 	// Viewing section
 	FlagConstellationDrawing= conf.get_boolean("viewing:flag_constellation_drawing");
@@ -602,15 +611,10 @@ void stel_core::load_config_from(const string& confFile)
 	FlagCardinalPoints		= conf.get_boolean("viewing:flag_cardinal_points");
 	FlagGravityLabels		= conf.get_boolean("viewing:flag_gravity_labels");
 	FlagInitMoonScaled		= conf.get_boolean("viewing:flag_init_moon_scaled");
-	moon_scale			= conf.get_double ("viewing","moon_scale",5.);
-	ConstellationArtIntensity       = conf.get_double("viewing","constellation_art_intensity", 1.);
+	moon_scale				= conf.get_double ("viewing","moon_scale",5.);
+	ConstellationArtIntensity       = conf.get_double("viewing","constellation_art_intensity", 0.5);
 	ConstellationArtFadeDuration    = conf.get_double("viewing","constellation_art_fade_duration",2.);
-
-	if(asterisms){
-	  asterisms->set_art_intensity(ConstellationArtIntensity);
-	  asterisms->set_art_fade_duration(ConstellationArtFadeDuration);
-	}
-
+	
 	// Astro section
 	FlagStars				= conf.get_boolean("astro:flag_stars");
 	FlagStarName			= conf.get_boolean("astro:flag_star_name");
@@ -685,7 +689,8 @@ void stel_core::save_config_to(const string& confFile)
 	conf.set_boolean("gui:flag_show_selected_object_info", FlagShowSelectedObjectInfos);
 	conf.set_str	("gui:gui_base_color", vec3f_to_str(GuiBaseColor));
 	conf.set_str	("gui:gui_text_color", vec3f_to_str(GuiTextColor));
-
+	conf.set_double ("gui:base_font_size", BaseFontSize);
+	
 	// Colors
 	conf.set_str    ("color:azimuthal_color", vec3f_to_str(AzimuthalColor));
 	conf.set_str    ("color:equatorial_color", vec3f_to_str(EquatorialColor));
