@@ -20,6 +20,8 @@
 
 #include <iostream>
 #include <string>
+#include <dirent.h>
+#include <stdio.h>
 #include "script_mgr.h"
 
 
@@ -143,4 +145,33 @@ void ScriptMgr::update(int delta_time) {
 
 }  
 
+// get a list of script files from directory
+string ScriptMgr::get_script_list(string directory) {
 
+  // TODO: This is POSIX specific
+
+  struct dirent *entryp;
+  DIR *dp;
+  string result="";
+  string tmp;
+
+  if ((dp = opendir(directory.c_str())) == NULL) {
+    cout << "Error reading script directory " << directory << endl;
+    return "";
+  }
+
+  // TODO: sort the directory
+  while ((entryp = readdir(dp)) != NULL) {
+    tmp = entryp->d_name;
+
+    if(tmp.length()>4 && tmp.find(".sts", tmp.length()-4)!=string::npos ) {
+      result += tmp + "\n";
+      cout << entryp->d_name << endl;
+    }
+  }
+  closedir(dp);
+
+  cout << "Result = " << result;
+  return result;
+
+}

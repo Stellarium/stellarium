@@ -48,8 +48,10 @@ class ScriptMgr
   bool is_paused() { return play_paused; };     // is a script paused?
   bool is_recording() { return recording; };    // is a script being recorded? 
   void update(int delta_time);  // execute commands in running script
+  string get_script_list(string directory);  // get list of scripts in a directory
 
  private:
+
   StelCommandInterface * commander;  // for executing script commands
   Script * script; // currently loaded script
   unsigned long int elapsed_time;  // ms since last script command executed
