@@ -393,36 +393,37 @@ void stel_ui::bt_time_control_ctrOnMouseInOut(void)
 void stel_ui::cbr(void)
 {
 	if (bt_flag_constellation_draw->getIsMouseOver())
-		bt_flag_help_lbl->setLabel("Drawing of the Constellations [C]");
+		bt_flag_help_lbl->setLabel(_("Drawing of the Constellations [C]"));
 	if (bt_flag_constellation_name->getIsMouseOver())
-		bt_flag_help_lbl->setLabel("Names of the Constellations [V]");
+		bt_flag_help_lbl->setLabel(_("Names of the Constellations [V]"));
 	if (bt_flag_constellation_art->getIsMouseOver())
-		bt_flag_help_lbl->setLabel("Constellations Art [R]");
+		bt_flag_help_lbl->setLabel(_("Constellations Art [R]"));
 	if (bt_flag_azimuth_grid->getIsMouseOver())
-		bt_flag_help_lbl->setLabel("Azimuthal Grid [Z]");
+		bt_flag_help_lbl->setLabel(_("Azimuthal Grid [Z]"));
 	if (bt_flag_equator_grid->getIsMouseOver())
-		bt_flag_help_lbl->setLabel("Equatorial Grid [E]");
+		bt_flag_help_lbl->setLabel(_("Equatorial Grid [E]"));
 	if (bt_flag_ground->getIsMouseOver())
-		bt_flag_help_lbl->setLabel("Ground [G]");
+		bt_flag_help_lbl->setLabel(_("Ground [G]"));
 	if (bt_flag_cardinals->getIsMouseOver())
-		bt_flag_help_lbl->setLabel("Cardinal Points [Q]");
+		bt_flag_help_lbl->setLabel(_("Cardinal Points [Q]"));
 	if (bt_flag_atmosphere->getIsMouseOver())
-		bt_flag_help_lbl->setLabel("Atmosphere [A]");
+		bt_flag_help_lbl->setLabel(_("Atmosphere [A]"));
 	if (bt_flag_nebula_name->getIsMouseOver())
-		bt_flag_help_lbl->setLabel("Nebulas [N]");
+		bt_flag_help_lbl->setLabel(_("Nebulas [N]"));
 	if (bt_flag_help->getIsMouseOver())
-		bt_flag_help_lbl->setLabel("Help [H]");
+		bt_flag_help_lbl->setLabel(_("Help [H]"));
 	if (bt_flag_equatorial_mode->getIsMouseOver())
-		bt_flag_help_lbl->setLabel("Equatorial/Altazimuthal Mount [ENTER]");
+		bt_flag_help_lbl->setLabel(_("Equatorial/Altazimuthal Mount [ENTER]"));
 	if (bt_flag_config->getIsMouseOver())
-		bt_flag_help_lbl->setLabel("Configuration window");
+		bt_flag_help_lbl->setLabel(_("Configuration window"));
 	if (bt_flag_quit->getIsMouseOver())
-		bt_flag_help_lbl->setLabel(
+		bt_flag_help_lbl->setLabel(_(
 #ifndef MACOSX
 		"Quit [CTRL + Q]"
 #else
 		"Quit [CMD + Q]"
 #endif
+)
 );
 }
 
@@ -478,7 +479,7 @@ Boston, MA  02111-1307, USA.\n");
 Component* stel_ui::createHelpWindow(void)
 {
 	help_txtlbl = new TextLabel(
-"4 Directions     : Deplacement RA/DE\n\
+_("4 Directions     : Deplacement RA/DE\n\
 Page Up/Down     : Zoom\n\
 CTRL+Up/Down     : Zoom\n\
 Left Click       : Select Star\n\
@@ -510,7 +511,7 @@ F1  : Toggle fullscreen if possible.\n"
 #else
 "CMD+Q  : Quit\n"
 #endif
-    ,courierFont);
+    ),courierFont);
 
 	help_txtlbl->adjustSize();
 	help_txtlbl->setPos(10,10);
