@@ -776,7 +776,7 @@ stel_object * stel_core::find_stel_object(const Vec3d& v) const
 {
 	stel_object * sobj = NULL;
 
-	if (FlagPlanets) sobj = ssystem->search(v, navigation);
+	if (FlagPlanets) sobj = ssystem->search(v, navigation, projection);
 	if (sobj) return sobj;
 
 	Vec3f u=Vec3f(v[0],v[1],v[2]);
@@ -819,7 +819,7 @@ void stel_core::toggle_selected_object_gozoom(float move_duration)
 	if (!FlagIsGoZoomOnObject && selected_object)
 	{
 		FlagIsGoZoomOnObject = 1;
-		previous_equ_pos = navigation->get_equ_vision();
+		previous_equ_pos = navigation->get_local_vision();
 		previous_fov = projection->get_fov();
 		previous_tracking = navigation->get_flag_traking();
 		goto_stel_object(selected_object, move_duration);
@@ -831,7 +831,7 @@ void stel_core::toggle_selected_object_gozoom(float move_duration)
 		if (FlagIsGoZoomOnObject)
 		{
 			FlagIsGoZoomOnObject = 0;
-			navigation->move_to(previous_equ_pos, move_duration);
+			navigation->move_to(previous_equ_pos, move_duration, true);
 			projection->zoom_to(previous_fov, move_duration);
 			navigation->set_flag_traking(previous_tracking);
 		}

@@ -52,8 +52,8 @@ public:
 	// Update the modelview matrices
 	void update_model_view_mat(void);
 
-	// Move to the given position in equatorial coordinate
-	void move_to(const Vec3d& _aim, float move_duration = 1.);
+	// Move to the given position in equatorial or local coordinate depending on _local_pos value
+	void move_to(const Vec3d& _aim, float move_duration = 1., bool _local_pos = false);
 
 	// Loads
 	void load_position(const string&);		// Load the position info in the file name given
@@ -122,6 +122,7 @@ private:
 	    Vec3d aim;
 	    float speed;
 	    float coef;
+		bool local_pos;				// Define if the position are in equatorial or altazimutal
 	}auto_move;
 
 

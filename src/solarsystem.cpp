@@ -281,7 +281,7 @@ void SolarSystem::draw(int hint_ON, Projector * prj, const navigator * nav, cons
 
 
 // Search if any planet is close to position given in earth equatorial position and return the distance
-planet* SolarSystem::search(Vec3d pos, const navigator * nav)
+planet* SolarSystem::search(Vec3d pos, const navigator * nav, const Projector * prj)
 {
     pos.normalize();
     planet * closest = NULL;
@@ -296,8 +296,8 @@ planet* SolarSystem::search(Vec3d pos, const navigator * nav)
     	double cos_ang_dist = equPos[0]*pos[0] + equPos[1]*pos[1] + equPos[2]*pos[2];
 		if (cos_ang_dist>cos_angle_closest)
 		{
-			closest = *iter;
-			cos_angle_closest = cos_ang_dist;
+				closest = *iter;
+				cos_angle_closest = cos_ang_dist;
 		}
 
         iter++;
