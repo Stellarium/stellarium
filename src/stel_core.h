@@ -175,6 +175,14 @@ private:
 	Vec3f GuiBaseColor;
 	Vec3f GuiTextColor;
 
+	Vec3f AzimuthalColor;
+	Vec3f EquatorialColor;
+	Vec3f EquatorColor;
+	Vec3f EclipticColor;
+
+	Vec3f ConstLinesColor;
+	Vec3f ConstNamesColor;
+
 	// Text UI
 	int FlagEnableTuiMenu;
 	int FlagShowGravityUi;

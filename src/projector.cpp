@@ -379,7 +379,7 @@ void Projector::sSphere_map(GLdouble radius, GLint slices, GLint stacks, const M
 	{
 		for (i = imin; i < imax; ++i)
 		{
-			rho = i * drho;
+			rho = drho * i;
 			sinrho = sinf(rho);
 			cosrho = cosf(rho);
 			sinrho_plus_drho = sinf(rho + drho);
@@ -388,7 +388,7 @@ void Projector::sSphere_map(GLdouble radius, GLint slices, GLint stacks, const M
 			glBegin(GL_QUAD_STRIP);
 			for (j = 0; j <= slices; ++j)
 			{
-				theta = (j == slices) ? 0.0 : j * dtheta;
+				theta = (j == slices) ? 0.0 : dtheta * j;
 				sintheta = sinf(theta);
 				costheta = cosf(theta);
 
@@ -413,7 +413,7 @@ void Projector::sSphere_map(GLdouble radius, GLint slices, GLint stacks, const M
 	{
 		for (i = imin; i < imax; ++i)
 		{
-			rho = i * drho;
+			rho = drho * i;
 			sinrho = sinf(rho);
 			cosrho = cosf(rho);
 			sinrho_plus_drho = sinf(rho + drho);
@@ -422,7 +422,7 @@ void Projector::sSphere_map(GLdouble radius, GLint slices, GLint stacks, const M
 			glBegin(GL_QUAD_STRIP);
 			for (j = 0; j <= slices; ++j)
 			{
-				theta = (j == slices) ? 0.0 : j * dtheta;
+				theta = (j == slices) ? 0.0 : dtheta * j;
 				sintheta = sinf(theta);
 				costheta = cosf(theta);
 

@@ -38,7 +38,7 @@ class SkyGrid
 {
 public:
 	// Create and precompute positions of a SkyGrid
-	SkyGrid(SKY_GRID_TYPE grid_type = EQUATORIAL, unsigned int _nb_meridian = 24, unsigned int _nb_parallel = 17,
+	SkyGrid(SKY_GRID_TYPE grid_type = EQUATORIAL, Vec3f grid_color = Vec3f(0.2, 0.2, 0.2), unsigned int _nb_meridian = 24, unsigned int _nb_parallel = 17,
 	 double _radius = 1., unsigned int _nb_alt_segment = 18, unsigned int _nb_azi_segment = 50);
     virtual ~SkyGrid();
 	void draw(const Projector* prj) const;
@@ -69,7 +69,7 @@ class SkyLine
 {
 public:
 	// Create and precompute positions of a SkyGrid
-	SkyLine(SKY_LINE_TYPE line_type = EQUATOR, double _radius = 1., unsigned int _nb_segment = 48);
+	SkyLine(SKY_LINE_TYPE line_type = EQUATOR, Vec3f line_color = Vec3f(0.2,0.2,0.6), double _radius = 1., unsigned int _nb_segment = 48);
     virtual ~SkyLine();
 	void draw(const Projector* prj) const;
 	void set_color(const Vec3f& c) {color = c;}
