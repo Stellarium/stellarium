@@ -51,7 +51,7 @@ void planet::get_info_string(char * s)
 	double tempDE, tempRA;
 	Vec3d equPos = get_earth_equ_pos();
 	rect_to_sphe(&tempRA,&tempDE,&equPos);
-	sprintf(s,"Name :%s\nRA : %s\nDE : %s\n Distance : %.2f UA",
+	sprintf(s,"Name :%s\nRA : %s\nDE : %s\n Distance : %.8f UA",
 	name, print_angle_hms(tempRA*180./M_PI), print_angle_dms_stel(tempDE*180./M_PI), equPos.length());
 }
 
@@ -78,6 +78,7 @@ Vec3d planet::get_earth_equ_pos(void)
 void planet::compute_position(double date)
 {
 	coord_func(date, &(ecliptic_pos[0]), &(ecliptic_pos[1]), &(ecliptic_pos[2]));
+	ecliptic_pos=ecliptic_pos;
 	//printf("%s : %.30lf %.30lf %.30lf\n",name,ecliptic_pos[0],ecliptic_pos[1],ecliptic_pos[2]);
     // Compute for the satellites
     list<planet*>::iterator iter = satellites.begin();
@@ -174,16 +175,52 @@ void planet::draw(void)
 		screenX<(global.X_Resolution+lim*global.X_Resolution) &&
 		screenY>(-lim*global.Y_Resolution) && screenY<(global.Y_Resolution+lim*global.Y_Resolution))
 	{
-    	// Draw the name, and the circle
+		if (haloTexture)
+		{
+			float rmag = lim*global.Y_Resolution*100;
+			if (rmag>0.5)
+			{
+				float cmag=1.;
+				if (rmag<1.2)
+				{
+					cmag=pow(rmag,2)/1.44;
+					rmag=1.2;
+				}
+				else
+				{
+					if (rmag>8.)
+					{
+						rmag=8.;
+					}
+				}
+
+				setOrthographicProjection(global.X_Resolution, global.Y_Resolution);    // 2D coordinate
+				glBindTexture(GL_TEXTURE_2D, haloTexture->getID());
+            	glEnable(GL_BLEND);
+            	glDisable(GL_LIGHTING);
+				glEnable(GL_TEXTURE_2D);
+            	glColor3f(cmag,cmag,cmag);
+				glTranslatef(screenX,screenY,0.);
+				glBegin(GL_QUADS);
+					glTexCoord2i(0,0);	glVertex3f(-rmag, rmag,0.f);	// Bottom Left
+					glTexCoord2i(1,0);	glVertex3f( rmag, rmag,0.f);	// Bottom Right
+					glTexCoord2i(1,1);	glVertex3f( rmag,-rmag,0.f);	// Top Right
+					glTexCoord2i(0,1);	glVertex3f(-rmag,-rmag,0.f);	// Top Left
+				glEnd();
+				resetPerspectiveProjection();                           // Restore the other coordinate
+			}
+		}
+
+		// Draw the name, and the circle
     	// Thanks to Nick Porcino for this addition
-    	if (global.FlagPlanetsHintDrawing)
+    	if (global.FlagPlanetsHintDrawing && atan(get_ecliptic_pos().length()/equPos.length())/navigation.get_fov()>0.0005)
     	{
             setOrthographicProjection(global.X_Resolution, global.Y_Resolution);    // 2D coordinate
             glEnable(GL_BLEND);
             glDisable(GL_LIGHTING);
 			glEnable(GL_TEXTURE_2D);
             glColor3f(0.5,0.5,0.7);
-            float tmp = 8.f + angl*800.*60./navigation.get_fov();//radius/navigation.get_fov();
+            float tmp = 8.f + angl*global.Y_Resolution*60./navigation.get_fov(); // Shift for name printing
             planet_name_font->print(screenX+tmp,screenY+tmp, name);
 
             // Draw the circle
@@ -428,13 +465,16 @@ void ring::draw()
 	glDisable(GL_CULL_FACE);
 	glEnable(GL_BLEND);
 	glDisable(GL_LIGHTING);
+	glEnable(GL_DEPTH_TEST);
     glBindTexture (GL_TEXTURE_2D, tex->getID());
+	float r=radius;
 	glBegin(GL_QUADS);
-		glTexCoord2f(0,0); glVertex3d( radius,-radius, 0.);	// Bottom left
-		glTexCoord2f(1,0); glVertex3d( radius, radius, 0.);	// Bottom right
-		glTexCoord2f(1,1); glVertex3d(-radius, radius, 0.);	// Top right
-		glTexCoord2f(0,1); glVertex3d(-radius,-radius, 0.);	// Top left
+		glTexCoord2f(0,0); glVertex3d( r,-r, 0.);	// Bottom left
+		glTexCoord2f(1,0); glVertex3d( r, r, 0.);	// Bottom right
+		glTexCoord2f(1,1); glVertex3d(-r, r, 0.);	// Top right
+		glTexCoord2f(0,1); glVertex3d(-r,-r, 0.);	// Top left
 	glEnd ();
+	glDisable(GL_DEPTH_TEST);
 
 }
 

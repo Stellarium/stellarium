@@ -23,6 +23,8 @@
 #include "s_font.h"
 #include "navigator.h"
 
+#define RADIUS_NEB 28.
+
 extern s_font * nebulaFont;
 
 Nebula::Nebula()
@@ -70,7 +72,7 @@ int Nebula::Read(FILE * catalogue)
 
     // Calc the Cartesian coord with RA and DE
     sphe_to_rect(RaRad,DecRad,&XYZ);
-    XYZ*=RAYON;
+    XYZ*=RADIUS_NEB;
 
     matTransfo=new float[16];   // Used to store the precalc transfos matrix
 
@@ -83,7 +85,7 @@ int Nebula::Read(FILE * catalogue)
     glRotatef(Rotation,1,0,0);
     glGetFloatv(GL_MODELVIEW_MATRIX , matTransfo);  // Store the matrix
 
-    RayonPrecalc=RAYON*sin(Taille/2/60*M_PI/180);
+    RayonPrecalc=RADIUS_NEB*sin(Taille/2/60*M_PI/180);
     //printf("rayon : %f\n",RayonPrecalc);
 
     if (Messier>0)      //Load texture for Messiers

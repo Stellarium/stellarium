@@ -64,7 +64,6 @@
 
 #define AU 149597870.691
 #define myMax(a,b) (((a)>(b))?(a):(b))
-#define RAYON 500
 
 // The global structure
 extern stellariumParams global;

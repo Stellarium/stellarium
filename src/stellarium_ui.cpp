@@ -817,7 +817,7 @@ void updateStandardWidgets(void)
     HourLabel->setLabel(str);
     sprintf(str,"FPS : %4.2f",global.Fps);
     FPSLabel->setLabel(str);
-    sprintf(str,"fov=%.3f", navigation.get_fov());
+    sprintf(str,"fov=%.3f\6", navigation.get_fov());
     FOVLabel->setLabel(str);
 }
 
