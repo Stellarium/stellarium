@@ -30,5 +30,6 @@ void renderUi();
 void GuiHandleClic(Uint16 x, Uint16 y, Uint8 state, Uint8 button);
 void GuiHandleMove(int x, int y);
 bool GuiHandleKeys(Uint8 key, int state);
+void GuiHandleMove(Uint16 x, Uint16 y);
 
 #endif  //_STELLARIUM_UI_H
