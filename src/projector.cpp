@@ -87,6 +87,7 @@ void Projector::set_disk_viewport(void)
 	glStencilOp(GL_KEEP, GL_KEEP, GL_KEEP);
 	glDisable(GL_STENCIL_TEST);
 	viewport_type = DISK;
+	glClear(GL_COLOR_BUFFER_BIT);
 }
 
 void Projector::set_viewport_type(VIEWPORT_TYPE t)
