@@ -29,6 +29,11 @@ typedef struct {
 	float color[3];			// 3 component color, can be RGB or CIE color system
 	} skylight_struct;
 
+typedef struct {
+	float pos[3];			// Vector to the position (vertical = pos[2])
+	float color[3];			// 3 component color, can be RGB or CIE color system
+	} skylight_struct2;
+
 class skylight
 {
 public:
@@ -39,12 +44,14 @@ public:
     void set_params(float sun_zenith_angle, float turbidity);
 	// Compute the sky color at the given position in the xyY color system and store it in position.color
 	void get_xyY_value(skylight_struct * position);
+	// Return the current zenith color
+	void get_zenith_color(float * v) const;
 
-	// TODO : Same functions but in vector mode : faster because prevents cosine calculations
+	// Same functions but in vector mode : faster because prevents extra cosine calculations
 	// The position vectors MUST be normalized, and the vertical z component is the third one
-	// void set_params(float * sun_pos, float turbidity);
-	// void get_xyY_value(float * position, float * color);
-	// void get_RGB_value(float * position, float * color);
+	void set_paramsv(const float * sun_pos, float turbidity);
+	void get_xyY_valuev(skylight_struct2 * position);
+
 private:
 	float thetas;			// angular distance between the zenith and the sun in radian
 	float T;				// Turbidity : i.e. sky "clarity"
@@ -69,6 +76,8 @@ private:
 	float term_x;				// Precomputed term for x calculation
 	float term_y;				// Precomputed term for y calculation
 	float term_Y;				// Precomputed term for luminance calculation
+
+	float sun_pos[3];
 
 	// Compute CIE Y (luminance) for zenith in cd/m^2
 	inline void compute_zenith_luminance(void);

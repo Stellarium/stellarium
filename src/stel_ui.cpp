@@ -530,8 +530,16 @@ int stel_ui::handle_keys(SDLKey key, S_GUI_VALUE state)
         	core->FlagEcliptic=!core->FlagEcliptic;
 		}
         if(key==SDLK_5)
-        {	
+        {
         	core->FlagEquator=!core->FlagEquator;
+		}
+        if(key==SDLK_2)
+        {
+        	core->navigation->set_time_speed(JD_HOUR/10);
+		}
+        if(key==SDLK_1)
+        {
+        	core->navigation->set_time_speed(JD_HOUR);
 		}
         if(key==SDLK_t)
         {

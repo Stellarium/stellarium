@@ -23,6 +23,7 @@ s_texture.h         s_texture.cpp \
 s_font.h            s_font.cpp \
 orbit.h	solve.h		orbit.cpp \
 skylight.h          skylight.cpp \
+skybright.h			skybright.cpp \
 tone_reproductor.h  tone_reproductor.cpp \
 init_parser.h       init_parser.cpp \
 s_gui.h				s_gui.cpp \
