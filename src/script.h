@@ -35,11 +35,13 @@ class Script
  public:
   Script();
   ~Script();
-  int load(string script_file);         // open a script file
+  int load(string script_file, string script_path);         // open a script file
   int next_command(string &command);    // retreive next command to execute
+  string get_path() { return path; };
 
  private:
   ifstream * input_file;
+  string path;
 
 };
 

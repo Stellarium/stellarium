@@ -37,7 +37,7 @@ class ScriptMgr
  public:
   ScriptMgr(StelCommandInterface * command_interface);
   ~ScriptMgr();
-  void play_script(string script_file);
+  void play_script(string script_file, string script_path);
   void cancel_script();  // stop playing current script
   void pause_script();
   void resume_script();  // start playing paused script
@@ -49,6 +49,7 @@ class ScriptMgr
   bool is_recording() { return recording; };    // is a script being recorded? 
   void update(int delta_time);  // execute commands in running script
   string get_script_list(string directory);  // get list of scripts in a directory
+  string get_script_path();
 
  private:
 
