@@ -37,14 +37,26 @@ extern "C" {
 	#endif
 #endif
 
-/* XXX This is from Win32's <windef.h> */
+/* Start modif */
+/* Fabien chereau 11/08/2002 */
 #ifndef APIENTRY
+# if defined(__CYGWIN__) || defined(__MINGW32__)
+#  define APIENTRY __attribute__ ((__stdcall__))
+# else /* define APIENTRY to null string if we aren't on Cygwin or Mingw */
+#  define APIENTRY
+# endif
+# define GL_APIENTRY_DEFINED
+#endif
+
+/* XXX This is from Win32's <windef.h> */
+/*#ifndef APIENTRY
 	#if (_MSC_VER >= 800) || defined(_STDCALL_SUPPORTED)
 		#define APIENTRY    __stdcall
 	#else
 		#define APIENTRY
 	#endif
-#endif
+#endif*/
+/* end modif */
 
 /* Mipmapping parameters */
 #define PNG_NOMIPMAPS      0 /* No mipmapping                        */
