@@ -11,14 +11,12 @@ Command format basics:<br>
   <li>The command format consists of a command name followed by an
 optional list of arguments in the form of name/value pairs. <br>
   </li>
-  <li>Whitespace
-is used as a delimiter. <br>
+  <li>Whitespace is used as a delimiter. <br>
   </li>
-  <li>Argument values requiring included whitespace
-can be enclosed in double quotes ("This is a value with spaces."). <br>
+  <li>Argument values requiring included whitespace can be enclosed in
+double quotes ("This is a value with spaces."). <br>
   </li>
-  <li>Commands and argument names
-are case insensitive. <br>
+  <li>Commands and argument names are case insensitive. <br>
   </li>
   <li>Argument pairs can be arranged in any order.<br>
   </li>
@@ -65,7 +63,7 @@ of seconds desired). </p>
       </td>
       <td style="vertical-align: top;">AUDIO_FILENAME<br>
       </td>
-      <td style="vertical-align: top;"><br>
+      <td style="vertical-align: top;">Must be 22050 Hz currently.<br>
       </td>
     </tr>
     <tr>
@@ -90,15 +88,23 @@ out<br>
       </td>
     </tr>
     <tr>
-      <td colspan="1" rowspan="2">date<br>
+      <td colspan="1" rowspan="3">date<br>
       <br>
       </td>
-      <td>absolute<br>
+      <td>local<br>
       </td>
       <td>[-]YYYY-MM-DDThh:mm:ss<br>
       </td>
-      <td>Set time to a specified date and time.&nbsp; 'T' is literal.<br>
+      <td>Set time to a specified date and time using current
+timezone.&nbsp; 'T' is literal.<br>
       </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">utc<br>
+      </td>
+      <td style="vertical-align: top;">[-]YYYY-MM-DDThh:mm:ss</td>
+      <td style="vertical-align: top;">Set time to a specified date and
+time in UTC time.&nbsp; 'T' is literal.</td>
     </tr>
     <tr>
       <td>relative<br>
@@ -168,7 +174,9 @@ stars<br>
 utc_time<br>
       </td>
       <td>on<br>
+1<br>
 off<br>
+0<br>
 toggle </td>
       <td>Set rendering flags. One argument name per command allowed
 currently. </td>
@@ -196,8 +204,8 @@ drop<br>
       <td style="vertical-align: top;">IMAGE_NAME<br>
       </td>
       <td style="vertical-align: top;">Used to refer to the image in
-later calls to manipulate the image. Images must be in PNG format
-with dimensions that are powers of 2 (128, 256, etc.) </td>
+later calls to manipulate the image. Images must be in PNG format with
+dimensions that are powers of 2 (128, 256, etc.) </td>
     </tr>
     <tr>
       <td style="vertical-align: top;">alpha<br>
