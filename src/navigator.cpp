@@ -286,38 +286,35 @@ void navigator::update_transform_matrices(void)
 	// GEI = Geocentric Equatorial Inertial System : used for stars
 	// GEO = Geographic Coordinates
 	// HSE = Heliocentric Solar Ecliptic System
+	// LOC = Geographic coordinate + aware of the observator position
 
-	// Tested : OK
+	// Tested : OK for earth
 	Mat4d GEO_to_LOC = 	Mat4d::yrotation((-90.+position.latitude)*M_PI/180.) *
 						Mat4d::zrotation(-position.longitude*M_PI/180.);
 	Mat4d LOC_to_GEO = 	GEO_to_LOC.transpose();
 
-	// Not tested
 	Mat4d GEI_to_GEO = Mat4d::zrotation(-get_apparent_sidereal_time(JDay)*M_PI/180.);
 	Mat4d GEO_to_GEI = GEI_to_GEO.transpose();
 
+	Mat4d LOC_to_GEI = GEO_to_GEI * LOC_to_GEO;
+	Mat4d GEI_to_LOC = GEO_to_LOC * GEI_to_GEO;
+
+	mat_local_to_earth_equ = LOC_to_GEI;
+	mat_earth_equ_to_local = GEI_to_LOC;
+
+	// Not tested
 	Mat4d GEI_to_HSE = 	Mat4d::xrotation(get_mean_obliquity(JDay)*M_PI/180.); *
 						Mat4d::translation(Earth->get_ecliptic_pos());
 	Mat4d HSE_to_GEI = 	Mat4d::translation(-Earth->get_ecliptic_pos()) *
 						Mat4d::xrotation(-get_mean_obliquity(JDay)*M_PI/180.);
 
-	Mat4d LOC_to_GEI = GEO_to_GEI * LOC_to_GEO;
-	Mat4d GEI_to_LOC = GEO_to_LOC * GEI_to_GEO;
-
 	Mat4d LOC_to_HSE = GEI_to_HSE * LOC_to_GEI;
 	Mat4d HSE_to_LOC = GEI_to_LOC * HSE_to_GEI;
-
-
 
 	mat_helio_to_earth_equ = HSE_to_GEI;
 	mat_helio_to_local = HSE_to_LOC;
 	mat_local_to_helio = LOC_to_HSE;
-	mat_local_to_earth_equ = LOC_to_GEI;
-	mat_earth_equ_to_local = GEI_to_LOC;
 
-	Vec3d v(	cos(position.latitude*M_PI/180.)*cos(position.longitude*M_PI/180.),
-				cos(position.latitude*M_PI/180.)*sin(position.longitude*M_PI/180.),
-				sin(position.latitude*M_PI/180.));
 	//printf("v(%lf,%lf,%lf)\n",v[0],v[1],v[2]);
 }
 
