@@ -190,7 +190,6 @@ void Planet_mgr::DrawMoonDaylight()
     float tmp[4] = {0,0,0,1};
     float tmp2[4] = {0.01,0.01,0.01,1};
     float tmp3[4] = {1,1,1,1};
-    float tmp4[4] = {0.5,0.5,0.5,1};
     glLightfv(GL_LIGHT1,GL_AMBIENT,tmp3); 
     glLightfv(GL_LIGHT1,GL_DIFFUSE,tmp3);
     glLightfv(GL_LIGHT1,GL_SPECULAR,tmp);
@@ -217,7 +216,6 @@ void Planet_mgr::Draw()
     float tmp[4] = {0,0,0,1};
     float tmp2[4] = {0.01,0.01,0.01,1};
     float tmp3[4] = {1,1,1,1};
-    float tmp4[4] = {0.5,0.5,0.5,1};
     glLightfv(GL_LIGHT1,GL_AMBIENT,tmp3); 
     glLightfv(GL_LIGHT1,GL_DIFFUSE,tmp3);
     glLightfv(GL_LIGHT1,GL_SPECULAR,tmp);

@@ -41,7 +41,7 @@ double Vsop::calcLoc(
     t /= 10.;          // convert to julian millenia
     double tPower = 1.0;
 
-    const VsopTerms* pT;
+    const VsopTerms* pT=0;
     switch ( planet ) {
       case MERCURY: pT = &(MercuryTerms[ltype*6]); break;
       case VENUS:   pT = &(VenusTerms[ltype*6]);   break;

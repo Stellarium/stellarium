@@ -17,6 +17,7 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
+
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -25,7 +26,7 @@
 
 #define SPACING 1
 
-s_font::s_font(float size_i, char * textureName, char * dataFileName) : size(size_i), s_fontTexture(NULL)
+s_font::s_font(float size_i, char * textureName, char * dataFileName) : s_fontTexture(NULL), size(size_i)
 {
     if (!buildDisplayLists(dataFileName, textureName)) printf("ERROR WHILE CREATING FONT %s\n",textureName);
 }

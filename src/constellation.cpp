@@ -48,7 +48,7 @@ int constellation::Read(FILE *  fic, Hip_Star_mgr * _VouteCeleste)
 	Inter=strdup(buff2);
 
     Asterism = new Hip_Star*[NbSegments*2];
-    for (int i=0;i<NbSegments*2;i++)
+    for (unsigned int i=0;i<NbSegments*2;i++)
     {
         fscanf(fic,"%u",&HP);
         Asterism[i]=_VouteCeleste->Rechercher(HP);
@@ -63,7 +63,7 @@ int constellation::Read(FILE *  fic, Hip_Star_mgr * _VouteCeleste)
     Xnom=0;
     Ynom=0;
     Znom=0;
-    for(int ii=0;ii<NbSegments*2;ii++)
+    for(unsigned int ii=0;ii<NbSegments*2;ii++)
     {   Xnom+=(*Asterism[ii]).XYZ[0];
         Ynom+=(*Asterism[ii]).XYZ[1];
         Znom+=(*Asterism[ii]).XYZ[2];
@@ -78,7 +78,7 @@ int constellation::Read(FILE *  fic, Hip_Star_mgr * _VouteCeleste)
 // Draw the lines for the constellation using the coords of the stars (optimized for use with the class Constellation_mgr only)
 void constellation::Draw()
 {   glPushMatrix();
-    for(int i=0;i<NbSegments;i++)
+    for(unsigned int i=0;i<NbSegments;i++)
     {   glBegin (GL_LINES);
                 glVertex3f((*Asterism[2*i]).XYZ[0],(*Asterism[2*i]).XYZ[1],(*Asterism[2*i]).XYZ[2]);
                 glVertex3f((*Asterism[2*i+1]).XYZ[0],(*Asterism[2*i+1]).XYZ[1],(*Asterism[2*i+1]).XYZ[2]);
@@ -93,7 +93,7 @@ void constellation::DrawSeule()
     glDisable(GL_BLEND);
     glColor3f(0.2,0.2,0.2);
     glPushMatrix();
-    for(int i=0;i<NbSegments;i++)
+    for(unsigned int i=0;i<NbSegments;i++)
     {   glBegin (GL_LINES);
                 glVertex3f((*Asterism[2*i]).XYZ[0],(*Asterism[2*i]).XYZ[1],(*Asterism[2*i]).XYZ[2]);
                 glVertex3f((*Asterism[2*i+1]).XYZ[0],(*Asterism[2*i+1]).XYZ[1],(*Asterism[2*i+1]).XYZ[2]);

@@ -146,7 +146,6 @@ vec2_i StdWin::getInSize(GraphicsContext& gc)
 
 void StdWin::setInSize(vec2_i newInSize, GraphicsContext& gc)
 {   
-    vec2_i sz = getSize();
     headerSize = gc.getFont()->getLineHeight()+2;
     reshape(getPosition(),vec2_i(0,(int)headerSize)+newInSize);
 }
@@ -160,7 +159,7 @@ void closeBtOnClicCallback(guiValue button,Component * me)
 StdBtWin::StdBtWin(float posx, float posy, 
                     float sizex, float sizey,
                     char * title, Component * parent)
-                    : StdWin(posx,posy,sizex,sizey,title,parent), onHideCallback(NULL), closeBt(NULL)
+                    : StdWin(posx,posy,sizex,sizey,title,parent), closeBt(NULL), onHideCallback(NULL)
 {
     closeBt = new Button();
     closeBt->setOnClicCallback(closeBtOnClicCallback);
@@ -174,8 +173,6 @@ void StdBtWin::Hide(void)
 
 void StdBtWin::render(GraphicsContext& gc)
 {
-    vec2_i pos = getPosition();
-    vec2_i sz = getSize();
     vec2_i P((int)(size[0]-gc.getFont()->getLineHeight()),2);
     vec2_i V((int)gc.getFont()->getLineHeight()-4,(int)gc.getFont()->getLineHeight()-4);
     if(closeBt) closeBt->reshape(P,V);
