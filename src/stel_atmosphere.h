@@ -46,6 +46,7 @@ public:
 	void update(int delta_time) {fader.update(delta_time);}
 	void set_fade_duration(float duration) {fader.set_duration((int)(duration*1000.f));}
 	void show(bool b){fader = b;}
+	float get_intensity(void) {return atm_intensity; }  // tells you actual atm intensity due to eclipses + fader
 	float get_fade_intensity(void) {return fader.get_interstate();}  // let's you know how far faded in or out the atm is (0-1)
 	float get_world_adaptation_luminance(void) const {return world_adaptation_luminance;}
 private:

@@ -166,7 +166,7 @@ void stel_core::init(void)
 
 	ui->init_tui();
 
-	tone_converter->set_world_adaptation_luminance(3.75f + atmosphere->get_fade_intensity()*40000.f);
+	tone_converter->set_world_adaptation_luminance(3.75f + atmosphere->get_intensity()*40000.f);
 
 	// Set the default moon scaling
 	if (FlagInitMoonScaled) ssystem->get_moon()->set_sphere_scale(MoonScale);
@@ -262,12 +262,11 @@ void stel_core::update(int delta_time)
 	// Compute the sun position in local coordinate
 	Vec3d temp(0.,0.,0.);
 	Vec3d sunPos = navigation->helio_to_local(temp);
-	sunPos.normalize();
+
 
 	// Compute the moon position in local coordinate
 	temp = ssystem->get_moon()->get_heliocentric_ecliptic_pos();
 	Vec3d moonPos = navigation->helio_to_local(temp);
-	moonPos.normalize();
 
 	// Compute the atmosphere color and intensity 
 	atmosphere->compute_color(navigation->get_JDay(), sunPos, moonPos,
@@ -275,9 +274,11 @@ void stel_core::update(int delta_time)
 				  tone_converter, projection, observatory->get_latitude(), observatory->get_altitude(),
 				  15.f, 40.f);	// Temperature = 15c, relative humidity = 40%
 	tone_converter->set_world_adaptation_luminance(atmosphere->get_world_adaptation_luminance());
-	
+
+	sunPos.normalize();	
+	moonPos.normalize();
 	// compute global sky brightness TODO : make this more "scientifically"
-	sky_brightness = sunPos[2] * atmosphere->get_fade_intensity();
+	sky_brightness = sunPos[2] * atmosphere->get_intensity();
 	if( sky_brightness < 0 )
 	{
 		sky_brightness = 0;
