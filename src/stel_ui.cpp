@@ -1,6 +1,6 @@
 /*
  * Stellarium
- * Copyright (C) 2002 Fabien Chéreau
+ * Copyright (C) 2002 Fabien Chï¿½eau
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -540,15 +540,27 @@ int stel_ui::handle_move(int x, int y)
 /*******************************************************************************/
 int stel_ui::handle_clic(Uint16 x, Uint16 y, Uint8 button, Uint8 state)
 {   // Convert the name from GLU to my GUI
-    enum S_GUI_VALUE bt;
     enum S_GUI_VALUE st;
+    enum S_GUI_VALUE bt;
+    
+		if (state==SDL_RELEASED) st=S_GUI_RELEASED; else st=S_GUI_PRESSED;
+		
     switch (button)
     {   case SDL_BUTTON_RIGHT : bt=S_GUI_MOUSE_RIGHT; break;
         case SDL_BUTTON_LEFT : bt=S_GUI_MOUSE_LEFT; break;
         case SDL_BUTTON_MIDDLE : bt=S_GUI_MOUSE_MIDDLE; break;
+				case SDL_BUTTON_WHEELUP : 
+					core->zoom_in( st == S_GUI_PRESSED );
+					core->update_move( core->get_mouse_zoom());
+					return 1;
+					break;
+        case SDL_BUTTON_WHEELDOWN : 
+					core->zoom_out( st == S_GUI_PRESSED );
+					core->update_move( core->get_mouse_zoom());
+					return 1;
+					break;
         default : bt=S_GUI_MOUSE_LEFT;
     }
-    if (state==SDL_RELEASED) st=S_GUI_RELEASED; else st=S_GUI_PRESSED;
 
     // Send the mouse event to the User Interface
     if (desktop->onClic((int)x, (int)y, bt, st))
@@ -568,10 +580,11 @@ int stel_ui::handle_clic(Uint16 x, Uint16 y, Uint8 button, Uint8 state)
         if (button==SDL_BUTTON_MIDDLE)
         {
 			if (core->selected_object)
-            {
+			{
 				core->navigation->move_to(core->selected_object->get_earth_equ_pos(core->navigation),
 					core->auto_move_duration);
-            }
+				core->navigation->set_flag_traking(1);
+			}
         }
         if (button==SDL_BUTTON_LEFT)
         {   
