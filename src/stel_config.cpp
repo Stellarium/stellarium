@@ -21,6 +21,7 @@
 #include "parsecfg.h"
 #include "stellarium.h"
 #include "navigator.h"
+#include "stellastro.h"
 
 char * tempLatitude=NULL;
 char * tempLongitude=NULL;

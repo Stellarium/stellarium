@@ -28,7 +28,7 @@
 #include "s_texture.h"
 #include "navigator.h"
 #include "solarsystem.h"
-#include "libnova.h"
+#include "stellastro.h"
 
 extern s_texture * texIds[200];            // Common Textures
 float DmeriParal[51][2];                   // For grids drawing optimisation

@@ -21,6 +21,7 @@
 #include "stellarium.h"
 #include "stel_utility.h"
 #include "stel_object.h"
+#include "stellastro.h"
 
 void observator_pos::save(FILE * f)
 {

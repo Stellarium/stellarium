@@ -20,7 +20,6 @@
 #ifndef _PLANET_H_
 #define _PLANET_H_
 
-#include "libnova.h"
 #include "stellarium.h"
 #include "stel_utility.h"
 #include "s_font.h"
@@ -50,7 +49,7 @@ class rotation_elements
 class planet : public stel_object
 {
 public:
-	planet(char * _name, int _flagHalo, double _radius, vec3_t _color, s_texture * _planetTexture, s_texture * _haloTexture, void (*_coord_func)(double JD, struct ln_helio_posn * position));
+	planet(char * _name, int _flagHalo, double _radius, vec3_t _color, s_texture * _planetTexture, s_texture * _haloTexture, void (*_coord_func)(double JD, double *, double *, double *));
     virtual ~planet();
 	virtual void computePosition(double date); // Compute the position from the mother planet
     virtual void compute_trans_matrix(double date);	// Compute the transformation matrix from the mother planet
@@ -71,7 +70,7 @@ protected:
 	Mat4d trans_mat;						// Transfo matrix from local ecliptique to parent ecliptic
     s_texture * planetTexture;				// Planet map texture
 	s_texture * haloTexture;				// Little halo texture
-	void (*coord_func)(double JD, struct ln_helio_posn * position); // The function called for the calculation of the rect heliocentric position at time JD.
+	void (*coord_func)(double JD, double *, double *, double *); // The function called for the calculation of the rect heliocentric position at time JD.
 	planet * parent;
 	list<planet *> satellites;				// satellites of the planet
 };
@@ -86,7 +85,7 @@ public:
 class ring_planet : public planet
 {
 public:
-	ring_planet(char * _name, int _flagHalo, double _radius, vec3_t _color, s_texture * _planetTexture, s_texture * _haloTexture, void (*_coord_func)(double JD, struct ln_helio_posn * position), ring * _planetRing);
+	ring_planet(char * _name, int _flagHalo, double _radius, vec3_t _color, s_texture * _planetTexture, s_texture * _haloTexture, void (*_coord_func)(double JD, double *, double *, double *), ring * _planetRing);
 	virtual void setRing(ring*);
 protected:
 	ring * planetRing;						// Ring for ie saturn/uranus
@@ -95,7 +94,7 @@ protected:
 class sun_planet : public planet
 {
 public:
-	sun_planet(char * _name, int _flagHalo, double _radius, vec3_t _color, s_texture * _planetTexture, s_texture * _haloTexture, s_texture * _bigHaloTexture, void (*_coord_func)(double JD, struct ln_helio_posn * position));
+	sun_planet(char * _name, int _flagHalo, double _radius, vec3_t _color, s_texture * _planetTexture, s_texture * _haloTexture, s_texture * _bigHaloTexture, void (*_coord_func)(double JD, double *, double *, double *));
     virtual void computeCoords(double date);
     virtual void draw();
 protected:
