@@ -34,7 +34,7 @@
 # define asinf(x) (float)(asin(x))
 #endif
 #ifndef HAVE_ATAN2F
-# define atan2f(x) (float)(atan2(x))
+# define atan2f(x, y) (float)(atan2((x),(y)))
 #endif
 #ifndef HAVE_ATANF
 # define atanf(x) (float)(atan(x))
