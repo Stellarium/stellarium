@@ -108,7 +108,7 @@ am_libglpng_a_OBJECTS = adler32.$(OBJEXT) infcodes.$(OBJEXT) \
 	pngread.$(OBJEXT)
 libglpng_a_OBJECTS = $(am_libglpng_a_OBJECTS)
 
-DEFS = -DPACKAGE=\"stellarium\" -DVERSION=\"0.4.9\" -DX_DISPLAY_MISSING=1 -DHAVE_TOUPPER=1 -DHAVE_STRCASECMP=1 -DHAVE_STRDUP=1 -DCONFIG_DATA_DIR=\"/usr/local/share/stellarium\" 
+DEFS = -DPACKAGE=\"stellarium\" -DVERSION=\"0.4.9\" -DX_DISPLAY_MISSING=1 -DCONFIG_DATA_DIR=\"/usr/local/share/stellarium\" -DCONFIG_CFG_DIR=\"/home/Fabien/.stellarium/\" -DHAVE_TOUPPER=1 -DHAVE_STRCASECMP=1 -DHAVE_STRDUP=1 
 DEFAULT_INCLUDES =  -I. -I$(srcdir)
 CPPFLAGS = 
 LDFLAGS = 
@@ -129,7 +129,7 @@ COMPILE = $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) \
 	$(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
 CCLD = $(CC)
 LINK = $(CCLD) $(AM_CFLAGS) $(CFLAGS) $(AM_LDFLAGS) $(LDFLAGS) -o $@
-CFLAGS = -Wall -O2 -ffast-math -fexpensive-optimizations  
+CFLAGS = -Wall -O3 -ffast-math -fexpensive-optimizations  
 DIST_SOURCES = $(libglpng_a_SOURCES)
 DIST_COMMON = Makefile.am Makefile.in
 SOURCES = $(libglpng_a_SOURCES)
