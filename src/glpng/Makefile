@@ -69,12 +69,14 @@ noinst_LIBRARIES = libglpng.a
 libglpng_a_SOURCES = adler32.c infcodes.c inftrees.c pngconf.h pngrio.c zlib.h crc32.c infcodes.h inftrees.h pngerror.c pngrtran.c zutil.c glpng.c inffast.c   infutil.c pngget.c pngrutil.c zutil.h glpng.h inffast.h infutil.h pngmem.c    pngset.c infblock.c inffixed.h png.c pngpread.c pngtrans.c infblock.h inflate.c   png.h pngread.c zconf.h
 
 libglpng_a_LIBADD = adler32.o infcodes.o inftrees.o pngrio.o crc32.o pngerror.o pngrtran.o zutil.o glpng.o inffast.o infutil.o pngget.o pngrutil.o pngmem.o pngset.o infblock.o png.o pngpread.o pngtrans.o inflate.o pngread.o
+
+CXXFLAGS = -O3
 mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
 CONFIG_CLEAN_FILES = 
 LIBRARIES =  $(noinst_LIBRARIES)
 
 
-DEFS =  -DPACKAGE=\"stellarium\" -DVERSION=\"0.4.7\" -DHAVE_GL=1 -DHAVE_GLU=1 -DHAVE_GLUT=1  -I. -I$(srcdir) 
+DEFS =  -DPACKAGE=\"stellarium\" -DVERSION=\"0.4.7\"  -I. -I$(srcdir) 
 CPPFLAGS = 
 LDFLAGS =  -lm
 LIBS =  -lGL -lGLU -lglut

@@ -64,7 +64,7 @@ PACKAGE = stellarium
 RANLIB = ranlib
 VERSION = 0.4.7
 
-EXTRA_DIST = TODO.txt README.txt VERSION.txt
+EXTRA_DIST = TODO README NEWS
 SUBDIRS = config data src textures
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
