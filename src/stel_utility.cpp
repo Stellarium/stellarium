@@ -37,7 +37,7 @@ double hms_to_rad(unsigned int h, unsigned int m, double s)
 double dms_to_rad(int d, int m, double s)
 {
 	double t = (double)M_PI/180.*d+(double)M_PI/10800.*m+s*M_PI/648000.;
-	return fabs(t)*d/abs(d);
+	return t;
 }
 
 double hms_to_rad(unsigned int h, double m)
@@ -48,7 +48,7 @@ double hms_to_rad(unsigned int h, double m)
 double dms_to_rad(int d, double m)
 {
 	double t = (double)M_PI/180.*d+(double)M_PI/10800.*m;
-	return fabs(t)*d/abs(d);
+	return t;
 }
 
 
