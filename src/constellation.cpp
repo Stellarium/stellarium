@@ -23,6 +23,9 @@
 
 bool Constellation::gravity_label = false;
 s_font* Constellation::constellation_font = NULL;
+float Constellation::max_art_intensity = 1.0;
+float Constellation::art_fade_duration = 2000.0;
+
 
 Constellation::Constellation() : name(NULL), inter(NULL), asterism(NULL), art_tex(NULL), art_on(0), art_intensity(0)
 {
@@ -153,13 +156,13 @@ void Constellation::draw_art_optim(Projector* prj, navigator* nav, int delta_tim
 	if (art_tex)
 	{
 		// 2 second fade
-		float delta_intensity = delta_time/2000.f;
+		float delta_intensity = delta_time/art_fade_duration;
 
 		// update fade
 		if(art_on)
 		{
-			if(art_intensity + delta_intensity <= MAX_ART_INTENSITY) {art_intensity += delta_intensity;} 
-			else {art_intensity = MAX_ART_INTENSITY;}
+			if(art_intensity + delta_intensity <= max_art_intensity) {art_intensity += delta_intensity;} 
+			else {art_intensity = max_art_intensity;}
 		} 
 		else
 		{
@@ -239,8 +242,8 @@ void Constellation::draw_art(Projector* prj, navigator* nav, int delta_time)
 		// update fade
 		if(art_on)
 		{
-			if(art_intensity + delta_intensity <= MAX_ART_INTENSITY) {art_intensity += delta_intensity;} 
-			else {art_intensity = MAX_ART_INTENSITY;}
+			if(art_intensity + delta_intensity <= max_art_intensity) {art_intensity += delta_intensity;} 
+			else {art_intensity = max_art_intensity;}
 		} 
 		else
 		{

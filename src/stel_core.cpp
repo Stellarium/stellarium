@@ -117,6 +117,8 @@ void stel_core::init(void)
 	ssystem = new SolarSystem(DataDir, SkyLocale, "spacefont.txt", PlanetNamesColor, PlanetOrbitsColor );
 
 	atmosphere = new stel_atmosphere();
+	atmosphere->set_fade_duration(AtmosphereFadeDuration);
+
 	tone_converter = new tone_reproductor();
 
 	equ_grid = new SkyGrid(EQUATORIAL, EquatorialColor, DataDir + "spacefont.txt", "spacefont");
@@ -163,6 +165,9 @@ void stel_core::init(void)
 	
 	// Load constellations
 	asterisms = new Constellation_mgr(DataDir, SkyCulture, SkyLocale, hip_stars, "spacefont.txt", screen_W/2-150, screen_H/2-20, ConstLinesColor, ConstNamesColor);
+	asterisms->set_art_intensity(ConstellationArtIntensity);
+	asterisms->set_art_fade_duration(ConstellationArtFadeDuration);
+	
 
 	nebulas->read(DataDir + "spacefont.txt", DataDir + "messier.fab", screen_W/2-150, screen_H/2-20);
 	projection->reset_perspective_projection();
@@ -582,6 +587,8 @@ void stel_core::load_config_from(const string& confFile)
 
 	FlagAtmosphere		= conf.get_boolean("landscape:flag_atmosphere");
 	if (!FlagAtmosphere && tone_converter) tone_converter->set_world_adaptation_luminance(3.75f);
+        AtmosphereFadeDuration          = conf.get_double("landscape","atmosphere_fade_duration",4.);
+	if(atmosphere) atmosphere->set_fade_duration(AtmosphereFadeDuration);
 
 	// Viewing section
 	FlagConstellationDrawing= conf.get_boolean("viewing:flag_constellation_drawing");
@@ -595,7 +602,14 @@ void stel_core::load_config_from(const string& confFile)
 	FlagCardinalPoints		= conf.get_boolean("viewing:flag_cardinal_points");
 	FlagGravityLabels		= conf.get_boolean("viewing:flag_gravity_labels");
 	FlagInitMoonScaled		= conf.get_boolean("viewing:flag_init_moon_scaled");
-	moon_scale				= conf.get_double ("viewing","moon_scale",4.);
+	moon_scale			= conf.get_double ("viewing","moon_scale",5.);
+	ConstellationArtIntensity       = conf.get_double("viewing","constellation_art_intensity", 1.);
+	ConstellationArtFadeDuration    = conf.get_double("viewing","constellation_art_fade_duration",2.);
+
+	if(asterisms){
+	  asterisms->set_art_intensity(ConstellationArtIntensity);
+	  asterisms->set_art_fade_duration(ConstellationArtFadeDuration);
+	}
 
 	// Astro section
 	FlagStars				= conf.get_boolean("astro:flag_stars");
@@ -714,6 +728,7 @@ void stel_core::save_config_to(const string& confFile)
 	conf.set_boolean("landscape:flag_horizon", FlagHorizon);
 	conf.set_boolean("landscape:flag_fog", FlagFog);
 	conf.set_boolean("landscape:flag_atmosphere", FlagAtmosphere);
+	conf.set_double ("viewing:atmosphere_fade_duration", AtmosphereFadeDuration);
 
 	// Viewing section
 	conf.set_boolean("viewing:flag_constellation_drawing", FlagConstellationDrawing);
@@ -728,6 +743,9 @@ void stel_core::save_config_to(const string& confFile)
 	conf.set_boolean("viewing:flag_gravity_labels", FlagGravityLabels);
 	conf.set_boolean("viewing:flag_init_moon_scaled", FlagInitMoonScaled);
 	conf.set_double ("viewing:moon_scale", moon_scale);
+	conf.set_double ("viewing:constellation_art_intensity", ConstellationArtIntensity);
+	conf.set_double ("viewing:constellation_art_fade_duration", ConstellationArtFadeDuration);
+
 
 	// Astro section
 	conf.set_boolean("astro:flag_stars", FlagStars);

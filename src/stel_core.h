@@ -228,6 +228,7 @@ private:
     int FlagFog;
     int FlagAtmosphere;
 	float sky_brightness;
+	float AtmosphereFadeDuration;
 
 	// Viewing
     int FlagConstellationDrawing;
@@ -242,6 +243,8 @@ private:
 	int FlagGravityLabels;
 	float moon_scale;
 	int FlagInitMoonScaled;
+	float ConstellationArtIntensity;
+	float ConstellationArtFadeDuration;
 
 	// Navigation
 	string PositionFile;
