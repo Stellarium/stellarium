@@ -152,9 +152,9 @@ Class which manages textures. Currently uses glpng library to handle png files.
 
 \begin{description}
 \item[desc :] Contains the commonly used stars names.
-\item[type :] ascii file, fields separated by $|$ (pipe), end of line is CR ('$\backslash$n')
-\item[line example :] 62956$|$Alioth
-\item[line format :] HPnum$|$Star\_Name
+\item[type :] ascii file, fields separated by \verb1|1 (pipe), end of line is CR ('\verb1\1n')
+\item[line example :] \begin{verbatim}62956|Alioth\end{verbatim}
+\item[line format :] HPnum\verb1|1Star\_Name
 	\begin{itemize}
 	\item HPnum : (unsigned int) Hipparcos catalog star number
 	\item Star\_Name : (string) The name string without spaces. The '\_' will be replaced by space in the program.
@@ -165,8 +165,8 @@ Class which manages textures. Currently uses glpng library to handle png files.
 
 \begin{description}
 \item[desc :] Contains the constellation art info : i.e. for drawing of mythologic figures.
-\item[type :] ascii file, fields separated by SPACE, end of line is CR ('$\backslash$n')
-\item[line example :] Lep lepus\_m 104 57 24305 90 29 24845 33 42 27288
+\item[type :] ascii file, fields separated by SPACE, end of line is CR ('\verb1\1n')
+\item[line example :] \begin{verbatim}Lep lepus_m 104 57 24305 90 29 24845 33 42 27288\end{verbatim}
 \item[line format :] ConstRef TextureFile x1 y1 HP1 x2 y2 HP2 x3 y3 HP3
 	\begin{itemize}
 	\item ConstRef : Short international name abreviation in 3 characters, first char in Capital letter
@@ -183,8 +183,8 @@ Class which manages textures. Currently uses glpng library to handle png files.
 
 \begin{description}
 \item[desc :] Contains the constellations lines shape.
-\item[type :] ascii file, fields separated by SPACE, end of line is CR ('$\backslash$n')
-\item[line example :] And ANDROMEDE ANDROMEDA 3  9640 5447 5447 4436 4436 3881
+\item[type :] ascii file, fields separated by SPACE, end of line is CR ('\verb1\1n')
+\item[line example :] \begin{verbatim}And ANDROMEDE ANDROMEDA 3  9640 5447 5447 4436 4436 3881\end{verbatim}
 \item[line format :] ConstRef ConstCommonName ConstInternationnalName NumberOfSegments seg11 seg12 seg21 seg22 etc...
 	\begin{itemize}
 	\item ConstRef : Short international name abreviation in 3 characters, first char
@@ -201,13 +201,13 @@ Class which manages textures. Currently uses glpng library to handle png files.
 
 \begin{description}
 \item[desc :] contains the characters position on the font texture.
-\item[type :] ascii file, fields separated by SPACE, end of line is CR ('$\backslash$n')
-\item[first line format :] CourierFont LineSize 21
+\item[type :] ascii file, fields separated by SPACE, end of line is CR ('\verb1\1n')
+\item[first line example :] \begin{verbatim}CourierFont LineSize 21\end{verbatim}
 	\begin{itemize}
 	\item Font Name
 	\item LineSize s : s is the maximum character height.
 	\end{itemize}
-\item[other lines example :] 065 02 2 14 21 0
+\item[other lines example :] \begin{verbatim}065 02 2 14 21 0\end{verbatim}
 \item[other lines format :] ascii\# x y w h s
 	\begin{itemize}
 	\item ascii\# : ascii number of the character
@@ -221,8 +221,8 @@ Class which manages textures. Currently uses glpng library to handle png files.
 
 \begin{description}
 \item[desc :] Contains the nebula list (not only messier)
-\item[type :] ascii file, fields separated by SPACE, end of line is CR ('$\backslash$n')
-\item[line example :] 1952 RS 05 34.5 +22 +01 8.2 06.0 0 M1\_-\_Crab\_Nebula m1
+\item[type :] ascii file, fields separated by SPACE, end of line is CR ('\verb1\1n')
+\item[line example :] \begin{verbatim}1952 RS 05 34.5 +22 +01 8.2 06.0 0 M1_-_Crab_Nebula m1\end{verbatim}
 \item[line format :] NGCnumber NebulaType hh min.mm deg min.mm mag size texRotation Name TexName
 	\begin{itemize}
 	\item NGCnumber : NGC catalog number
@@ -231,7 +231,7 @@ Class which manages textures. Currently uses glpng library to handle png files.
 	\item deg min.mm : Declinaison in degree min and tenth of minutes
 	\item mag : magnitude
 	\item size : angular size in arcminute
-	\item Name : Nebula name with spaces replaced by '\_'
+	\item Name : Nebula name with '\_' replaced by spaces.
 	\item TexName : texture file name. png file without alpha chanel.
 	\end{itemize}
 \end{description}
