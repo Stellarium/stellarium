@@ -35,39 +35,6 @@
 
 using namespace gui;
 
-s_font * spaceFont = NULL;                     // The font used in the GraphicContext (=Skin)
-GraphicsContext * gc = NULL;                   // The graphic context used to give the widget their drawing style
-Container * Base = NULL;                       // The container who contains everything (=the desktop)
-Label * btLegend = NULL;                       // The dynamic information about the button menu
-
-FilledContainer * ContainerBtFlags = NULL;                  // Flags button List
-Textured_Button * BtConstellationsDraw = NULL;
-Textured_Button * BtConstellationsName = NULL;
-Textured_Button * BtAzimutalGrid = NULL;
-Textured_Button * BtEquatorialGrid = NULL;
-Textured_Button * BtGround = NULL;
-Textured_Button * BtCardinalPoints = NULL;
-Textured_Button * BtAtmosphere = NULL;
-Textured_Button * BtNebula = NULL;
-Textured_Button * BtHelp = NULL;
-Textured_Button * BtFollowEarth = NULL;
-Textured_Button * BtConfig = NULL;
-//Textured_Button * BtReal = NULL;
-
-FilledTextLabel * InfoSelectLabel = NULL;      // The TextLabel displaying the infos about the selected object
-
-FilledContainer * TopWindowsInfos = NULL;      // The top bar containing the infos
-Label * DateLabel = NULL;
-Label * HourLabel = NULL;
-Label * FPSLabel = NULL;
-Label * AppNameLabel = NULL;
-Label * FOVLabel = NULL;
-
-StdBtWin * HelpWin = NULL;                     // The window containing the help info
-TextLabel * HelpTextLabel = NULL;              // The TextLabel containing the help infos
-
-StdBtWin * InfoWin = NULL;                     // The window containing the info
-TextLabel * InfoTextLabel = NULL;              // The TextLabel containing the infos
 
 StdBtWin * ConfigWin = NULL;                   // The window containing the configuration options
 
@@ -102,15 +69,7 @@ Label * TimeZoneLabel = NULL;
 Labeled_Button * SaveLocation = NULL;
 ClickablePicture * EarthMap = NULL;
 
-StdBtWin * TimeControlWin = NULL;              // The window containing the time controls
-Container * TimeControlContainer = NULL;
-Labeled_Button * TimeRW = NULL;
-Labeled_Button * TimeFRW = NULL;
-Labeled_Button * TimeF = NULL;
-Labeled_Button * TimeNow = NULL;
-Labeled_Button * TimeFF = NULL;
-Labeled_Button * TimeReal = NULL;
-Labeled_Button * TimePause = NULL;
+
 
 /**********************************************************************************/
 /*                                   CALLBACKS                                    */
@@ -194,7 +153,6 @@ void BtFlagsOnMouseOverCallBack(guiValue event,Component * bt)
         case 11 :btLegend->setLabel("Atmosphere [A]"); return;
         case 12 :btLegend->setLabel("Nebulas [N]"); return;
         case 13 :btLegend->setLabel("Help [H]"); return;
-//        case 14 :btLegend->setLabel("Real Mode"); return;
         case 15 :btLegend->setLabel("Compensation of the Earth rotation"); return;
         case 16 :btLegend->setLabel("Configuration window"); return;
     }

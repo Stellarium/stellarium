@@ -26,13 +26,5 @@
 // Set the data directories
 void setDirectories(void);
 
-// Read the configuration file
-void loadConfig(char * configFile, char * locationFile);
-
-// Dump the configuration file
-void dumpConfig(void);
-
-// Dump the location file
-void dumpLocation(void);
 
 #endif //_STEL_CONFIG_H_

@@ -19,14 +19,35 @@
 // Main class for stellarium
 // Manage all the objects to be used in the program
 
+#include "stel_core.h"
 
-stel_core::stel_core() : navigation(NULL), selected_object(NULL), hip_stars(NULL), asterisms(NULL),
-messiers(NULL), atmosphere(NULL), tone_converter(NULL)
+// Set the default global options
+core_globals::core_globals() : screen_W(800), screen_H(600), bppMode(16), Fullscreen(0)
+{
+	TextureDir[0] = 0;
+    ConfigDir[0] = 0;
+    DataDir[0] = 0;
+}
+
+core_globals::~core_globals()
+{
+}
+
+stel_core::stel_core() : initialized(0), navigation(NULL), selected_object(NULL), hip_stars(NULL), asterisms(NULL),
+nebulas(NULL), atmosphere(NULL), tone_converter(NULL)
 {
 }
 
 stel_core::~stel_core()
 {
+	if (navigation) delete navigation;
+	if (selected_object) delete selected_object;
+	if (hip_stars) delete hip_stars;
+	if (asterisms) delete asterisms;
+	if (nebulas) delete nebulas;
+	if (atmosphere) delete atmosphere;
+	if (tone_converter) delete tone_converter;
+	if (ui) delete ui;
 }
 
 
@@ -38,27 +59,27 @@ void stel_core::update(int delta_time)
     timefr+=delta_time;
     if (timefr-timeBase > 1000)
     {
-		fps=frame*1000.0/(timefr-timeBase);	// Calc the PFS rate
+		fps=frame*1000.0/(timefr-timeBase);				// Calc the FPS rate
         frame = 0;
         timeBase+=1000;
     }
 
     // Update the position of observation and time etc...
 	navigation->update_time(delta_time);
-	Sun->compute_position(navigation.get_JDay());		// Position of sun and all the satellites (ie planets)
-	Sun->compute_trans_matrix(navigation.get_JDay());	// Matrix for sun and all the satellites (ie planets)
+	Sun->compute_position(navigation->get_JDay());		// Position of sun and all the satellites (ie planets)
+	Sun->compute_trans_matrix(navigation->get_JDay());	// Matrix for sun and all the satellites (ie planets)
 	navigation->update_transform_matrices();			// Transform matrices between coordinates systems
 	navigation->update_vision_vector(delta_time);		// Direction of vision
 
 	// Compute the atmosphere color
-	if (FlagAtmosphere) atmosphere->compute_color(navigation, eye);
+	if (FlagAtmosphere) atmosphere->compute_color(navigation, tone_converter);
 
 	// Update info about selected object
 	if (selected_object) selected_object->update();
 
     // compute global sky brightness TODO : function to include in skylight.cpp correctly made
 	Vec3d temp(0.,0.,0.);
-	Vec3d sunPos = navigation.helio_to_local(&temp);
+	Vec3d sunPos = navigation->helio_to_local(&temp);
 	sunPos.normalize();
 	sky_brightness=asin(sunPos[2])+0.1;
 	if (sky_brightness<0) sky_brightness=0;
@@ -68,10 +89,10 @@ void stel_core::update(int delta_time)
 void stel_core::draw(int delta_time)
 {
 	// Init openGL viewing with fov, screen size and clip planes
-	navigation->init_project_matrix(X_Resolution,Y_Resolution,0.00001 ,40 );
+	navigation->init_project_matrix(global.screen_W,global.screen_H,0.00001 ,40 );
 
     // Set openGL drawings in equatorial coordinates
-    navigation.switch_to_earth_equatorial();
+    navigation->switch_to_earth_equatorial();
 
 	// Draw the milky way. If not activated, need at least to clear the color buffer
 	if (!FlagMilkyWay) glClear(GL_COLOR_BUFFER_BIT);
@@ -81,13 +102,13 @@ void stel_core::draw(int delta_time)
 	glClear(GL_DEPTH_BUFFER_BIT);
 
 	// Draw the nebula if they are visible
-	if (FlagNebula && (!FlagAtmosphere || SkyBrightness<0.1)) messiers->Draw();
+	if (FlagNebula && (!FlagAtmosphere || sky_brightness<0.1)) nebulas->Draw();
 
 	// Draw all the constellations
 	if (FlagConstellationDrawing) ConstellCeleste->Draw();
 
 	// Draw the hipparcos stars
-	if (FlagStars && (!FlagAtmosphere || SkyBrightness<0.2) HipVouteCeleste->Draw();
+	if (FlagStars && (!FlagAtmosphere || sky_brightness<0.2)) hip_stars->Draw();
 
 	// Draw the atmosphere
 	if (FlagAtmosphere)	atmosphere->draw();
@@ -118,7 +139,7 @@ void stel_core::draw(int delta_time)
 	if (FlagPlanets) Sun->draw();
 
 	// Set openGL drawings in local coordinates i.e. generally altazimuthal coordinates
-	navigation.switch_to_local();
+	navigation->switch_to_local();
 
 	// Draw the altazimutal grid
 	// TODO : make a nice class for grid wit parameters like numbering and custom color/frequency
@@ -142,7 +163,7 @@ void stel_core::draw(int delta_time)
     if (FlagCardinalPoints) DrawCardinaux();
 
     // ---- 2D Displays
-    renderUi();
+    ui->draw();
 }
 
 
@@ -150,11 +171,72 @@ void stel_core::draw(int delta_time)
 
 void stel_core::init(void)
 {
+    hip_stars = new Hip_Star_mgr();
+    asterisms = new Constellation_mgr();
+    nebulas   = new Nebula_mgr();
 
+	// Temporary strings for file names
+    char tempName[255];
+    char tempName2[255];
+    char tempName3[255];
+
+    // Load hipparcos stars & names
+    strcpy(tempName,global.DataDir);
+    strcat(tempName,"hipparcos.fab");
+    strcpy(tempName2,global.DataDir);
+    strcat(tempName2,"commonname.fab");
+    strcpy(tempName3,global.DataDir);
+    strcat(tempName3,"name.fab");
+    hip_stars->Load(tempName,tempName2,tempName3);
+
+	// Load constellations
+    strcpy(tempName,global.DataDir);
+    strcat(tempName,"constellationship.fab");
+    asterisms->Load(tempName,HipVouteCeleste);
+
+	// Load the nebulas data TODO : add NGC objects
+    strcpy(tempName,global.DataDir);
+    strcat(tempName,"messier.fab");
+    nebulas->Read(tempName);
+
+	// Create and init the solar system TODO : use a class
+	InitSolarSystem();
+
+	// Load the common used textures TODO : will be removed
+    load_base_textures();
+
+	// Compute planets data
+    Sun->compute_position(navigation->get_JDay());
+
+	// Precalculation for the grids drawing TODO will be in a class
+    InitMeriParal();
+
+	// Create atmosphere renderer
+	atmosphere=new stel_atmosphere();
+
+	// Create tone reproductor
+	tone_converter=new tone_reproductor();
+
+	// initialisation of the User Interface
+    ui->init();
 }
 
-	void set_config_files(char * config_file, char * location_file);
-	void load_config();
+
+void stel_core::load_config()
+{
+    char tempName[255];
+    char tempName2[255];
+
+    strcpy(tempName,global.ConfigDir);
+    strcat(tempName,"config.txt");
+    strcpy(tempName2,global.ConfigDir);
+    strcat(tempName2,"location.txt");
+
+    printf("Loading configuration file... (%s)\n",tempName);
+
+    loadConfig(tempName,tempName2);  // Load the params from config.txt
+
+}
 
 
 // Load the textures "for non object oriented stuff" TODO : remove that
@@ -215,3 +297,6 @@ void stel_core::load_base_textures(void)
     if (messiers->ReadTexture()==0)
 	printf("Error while loading messier Texture\n");
 }
+
+
+

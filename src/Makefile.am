@@ -3,7 +3,8 @@ EXTRA_DIST = stellarium.rc
 bin_PROGRAMS = stellarium
 stellarium_SOURCES = \
 main.cpp \
-stel_config.h       stel_config.cpp \
+stel_sdl.h          stel_sdl.cpp \
+stel_core.h          stel_core.cpp \
 stel_utility.h      stel_utility.cpp \
 stel_object.h       stel_object.cpp \
 stel_atmosphere.h   stel_atmosphere.cpp \
@@ -17,7 +18,7 @@ planet.h            planet.cpp \
 solarsystem.h       solarsystem.cpp \
 hip_star.h          hip_star.cpp \
 hip_star_mgr.h      hip_star_mgr.cpp \
-stellarium_ui.h     stellarium_ui.cpp \
+stel_ui.h           stel_ui.cpp  stel_ui_conf.cpp\
 navigator.h         navigator.cpp \
 vislimit.h          vislimit.cpp \
 draw.h              draw.cpp \
