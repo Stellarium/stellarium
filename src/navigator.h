@@ -32,15 +32,6 @@
 
 class stel_object;
 
-typedef struct          // Struct used to store data on the auto mov
-{
-	Vec3d start;
-    Vec3d aim;
-    float speed;
-    float coef;
-}auto_move;
-
-
 class observator_pos
 {
 public:
@@ -76,6 +67,7 @@ public:
 	// Update the modelview matrices
 	void update_model_view_mat(void);
 
+	// Move to the given position in equatorial coordinate
 	void move_to(const Vec3d& _aim, float move_duration = 1.);
 
 	// Loads
@@ -148,6 +140,15 @@ public:
 
 private:
 
+	// Struct used to store data for auto mov
+	typedef struct
+	{
+		Vec3d start;
+	    Vec3d aim;
+	    float speed;
+	    float coef;
+	}auto_move;
+
 	// Matrices used for every coordinate transfo
 	Mat4d mat_helio_to_local;		// Transform from Heliocentric to Observator local coordinate
 	Mat4d mat_local_to_helio;		// Transform from Observator local coordinate to Heliocentric
@@ -160,17 +161,17 @@ private:
 	Mat4d mat_helio_to_eye;			// Modelview matrix for heliocentric equatorial drawing
 
 	// Vision variables
-    Vec3d local_vision, equ_vision;		// Viewing direction in local and equatorial coordinates
-	int flag_traking;					// Define if the selected object is followed
-	int flag_lock_equ_pos;				// Define if the equatorial position is locked
+    Vec3d local_vision, equ_vision;	// Viewing direction in local and equatorial coordinates
+	int flag_traking;				// Define if the selected object is followed
+	int flag_lock_equ_pos;			// Define if the equatorial position is locked
 
 	// Automove
-	auto_move move;				// Current auto movement
-    int flag_auto_move;			// Define if automove is on or off
+	auto_move move;					// Current auto movement
+    int flag_auto_move;				// Define if automove is on or off
 
 	// Time variable
-    double time_speed;			// Positive : forward, Negative : Backward, 1 = 1sec/sec
-	double JDay;        		// Curent time in Julian day
+    double time_speed;				// Positive : forward, Negative : Backward, 1 = 1sec/sec
+	double JDay;        			// Curent time in Julian day
 
 	// Position variables
 	observator_pos position;

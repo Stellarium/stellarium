@@ -45,7 +45,7 @@ Nebula::~Nebula()
 	tex_quad_vertex = NULL;
 }
 
-void Nebula::get_info_string(char * s, const navigator * nav) const
+void Nebula::get_info_string(char * s, const navigator*) const
 {
 	float tempDE, tempRA;
 	rect_to_sphe(&tempRA,&tempDE,XYZ);
@@ -53,9 +53,14 @@ void Nebula::get_info_string(char * s, const navigator * nav) const
 		print_angle_hms(tempRA*180./M_PI), print_angle_dms_stel(tempDE*180./M_PI), mag);
 }
 
-void Nebula::get_short_info_string(char * s, const navigator * nav) const
+void Nebula::get_short_info_string(char * s, const navigator*) const
 {
 	sprintf(s,"%s: mag %.1f", name, mag);
+}
+
+double Nebula::get_best_fov(const navigator*) const
+{
+	return angular_size * 180./M_PI * 2;
 }
 
 int Nebula::read(FILE * catalogue)
