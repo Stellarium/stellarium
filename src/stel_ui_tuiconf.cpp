@@ -95,7 +95,7 @@ void stel_ui::init_tui(void)
 	tui_location_latitude->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb1));
 	tui_location_longitude = new s_tui::Decimal_item(-180., 180., 0., "1.2 Longitude: ");
 	tui_location_longitude->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb1));
-	tui_location_altitude = new s_tui::Integer_item(-500, 10000, 0, "1.3 Altitude: ");
+	tui_location_altitude = new s_tui::Integer_item(-500, 10000, 0, "1.3 Altitude (m): ");
 	tui_location_altitude->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb1));
 	tui_menu_location->addComponent(tui_location_latitude);
 	tui_menu_location->addComponent(tui_location_longitude);
@@ -218,6 +218,7 @@ void stel_ui::tui_update_widgets(void)
 	tui_time_skytime->setJDay(core->navigation->get_JDay());
 	tui_time_presetskytime->setJDay(core->PresetSkyTime);
 	tui_time_startuptime->setCurrent(core->StartupTimeMode);
+	tui_time_displayformat->setCurrent(core->observatory->get_time_format_str());
 
 	// 3. Stars
 	tui_stars_show->setValue(core->FlagStars);
