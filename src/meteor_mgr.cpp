@@ -61,8 +61,9 @@ void Meteor_mgr::update(Projector *proj, navigator* nav, tone_reproductor* eye, 
   }
 
   // only makes sense given lifetimes of meteors to draw when time_speed is realtime
-  // integer speed multiplier would be nicer
-  if(nav->get_time_speed() > 1.1 ){
+  // otherwise high overhead of large numbers of meteors
+  double tspeed = nav->get_time_speed() *86400;  // sky seconds per actual second
+  if(tspeed <= 0 || fabs(tspeed) > 1 ) {
     // don't start any more meteors
     return;
   }
