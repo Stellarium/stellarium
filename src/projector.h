@@ -86,8 +86,8 @@ public:
 
 	// Return true if the 2D pos is inside the viewport
 	bool check_in_viewport(const Vec3d& pos) const
-	{	return 	pos[1]>vec_viewport[1] && pos[1]<vec_viewport[1] + vec_viewport[3] &&
-				pos[0]>vec_viewport[0] && pos[0]<vec_viewport[0] + vec_viewport[2];}
+	{	return 	(pos[1]>vec_viewport[1] && pos[1]<(vec_viewport[1] + vec_viewport[3]) &&
+				pos[0]>vec_viewport[0] && pos[0]<(vec_viewport[0] + vec_viewport[2]));}
 
 	// Set the standard modelview matrices used for projection
 	void set_modelview_matrices(const Mat4d& _mat_earth_equ_to_eye,
@@ -133,7 +133,7 @@ public:
 	// Same function but using a custom modelview matrix
 	virtual bool project_custom(const Vec3d& v, Vec3d& win, const Mat4d& mat) const;
 	virtual bool project_custom_check(const Vec3f& v, Vec3d& win, const Mat4d& mat) const
-		{return project_custom(v, win, mat) && check_in_viewport(win);}
+		{return (project_custom(v, win, mat) && check_in_viewport(win));}
 	// project two points and make sure both are in front of viewer and that at least one is on screen
 	virtual bool project_custom_line_check(const Vec3f& v1, Vec3d& win1, 
 					       const Vec3f& v2, Vec3d& win2, const Mat4d& mat) const
