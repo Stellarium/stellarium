@@ -43,6 +43,7 @@ using namespace std;
 #include "init_parser.h"
 #include "draw.h"
 #include "landscape.h"
+#include "meteor_mgr.h"
 
 class stel_core
 {
@@ -136,6 +137,7 @@ private:
 	SkyLine * ecliptic_line;			// Eclptic line
 	Cardinals * cardinals_points;		// Cardinals points
 	MilkyWay * milky_way;				// Our galaxy
+	Meteor_mgr * meteors;
 	Landscape * landscape;				// The landscape ie the fog, the ground and "decor"
 	tone_reproductor * tone_converter;	// Tones conversion between stellarium world and display device
 	stel_ui * ui;						// The main User Interface

@@ -131,6 +131,7 @@ void stel_core::init(void)
 	cardinals_points->set_color(CardinalColor);
 
 	milky_way = new MilkyWay("milkyway");
+	meteors = new Meteor_mgr(projection, navigation, tone_converter, 10, 60);
 
     // Load hipparcos stars & names
     hip_stars->load(DataDir + "spacefont.txt", DataDir + "hipparcos.fab",
@@ -343,6 +344,16 @@ void stel_core::draw(int delta_time)
 	temp2 = ssystem->get_moon()->get_heliocentric_ecliptic_pos();
 	Vec3d moonPos = navigation->helio_to_local(temp2);
 	moonPos.normalize();
+
+	// Draw meteors
+	meteors->update(delta_time);
+
+	if(!FlagAtmosphere || sky_brightness<0.01) {
+	  projection->set_orthographic_projection(); 
+	  meteors->draw();
+	  projection->reset_perspective_projection(); 
+	}
+
 
 	// Compute the atmosphere color
 	if (FlagAtmosphere)
