@@ -23,18 +23,18 @@
 #include "stellastro.h"
 #include "draw.h"
 
-extern s_texture * texIds[200];            // Common Textures TODO : Remove that
-
 stel_core::stel_core() : screen_W(800), screen_H(600), bppMode(16), Fullscreen(0),
 	navigation(NULL), projection(NULL), selected_object(NULL), hip_stars(NULL), asterisms(NULL),
 	nebulas(NULL), atmosphere(NULL), tone_converter(NULL), selected_constellation(NULL), conf(NULL),
-	frame(0), timefr(0), timeBase(0), deltaFov(0.), deltaAlt(0.), deltaAz(0.), move_speed(0.001), FlagTimePause(0)
+	frame(0), timefr(0), timeBase(0), deltaFov(0.), deltaAlt(0.), deltaAz(0.),
+	move_speed(0.001), FlagTimePause(0)
 {
 	TextureDir[0] = 0;
     ConfigDir[0] = 0;
     DataDir[0] = 0;
-
+	landscape_name[0] = 0;
 	navigation = new navigator();
+	projector_type = PERSPECTIVE_PROJECTOR;
 }
 
 stel_core::~stel_core()
@@ -49,6 +49,7 @@ stel_core::~stel_core()
 	if (equator_line) delete equator_line;
 	if (ecliptic_line) delete ecliptic_line;
 	if (cardinals_points) delete cardinals_points;
+	if (milky_way) delete milky_way;
 	if (atmosphere) delete atmosphere;
 	if (tone_converter) delete tone_converter;
 	if (ssystem) delete ssystem;
@@ -83,11 +84,22 @@ void stel_core::init(void)
 	ssystem = new SolarSystem();
 	atmosphere = new stel_atmosphere();
 	tone_converter = new tone_reproductor();
-	projection = new Fisheye_projector(screen_W, screen_H, initFov);
 	equ_grid = new SkyGrid(EQUATORIAL);
 	azi_grid = new SkyGrid(ALTAZIMUTAL);
 	equator_line = new SkyLine(EQUATOR);
 	ecliptic_line = new SkyLine(ECLIPTIC);
+	switch (projector_type)
+	{
+	case PERSPECTIVE_PROJECTOR :
+		projection = new Projector(screen_W, screen_H, initFov);
+		break;
+	case FISHEYE_PROJECTOR :
+		projection = new Fisheye_projector(screen_W, screen_H, initFov);
+		break;
+	default :
+		projection = new Projector(screen_W, screen_H, initFov);
+		break;
+	}
 
 	// Temporary strings for file names
     char tempName[255];
@@ -98,6 +110,8 @@ void stel_core::init(void)
     strcpy(tempName,DataDir);
     strcat(tempName,"spacefont.txt");
 	cardinals_points = new Cardinals(tempName, "spacefont");
+
+	milky_way = new MilkyWay("voielactee256x256");
 
     // Load hipparcos stars & names
     strcpy(tempName,DataDir);
@@ -124,15 +138,16 @@ void stel_core::init(void)
     strcat(tempName2,"spacefont.txt");
     nebulas->read(tempName2, tempName);
 
-	// Create and init the solar system TODO : use a class
+	// Create and init the solar system
     strcpy(tempName,DataDir);
     strcat(tempName,"spacefont.txt");
     strcpy(tempName2,DataDir);
     strcat(tempName2,"ssystem.ini");
 	ssystem->init(tempName, tempName2);
 
-	// Load the common used textures TODO : will be removed
-    load_base_textures();
+    strcpy(tempName2,DataDir);
+    strcat(tempName2,"landscapes.ini");
+	landscape = Landscape::create_from_file(tempName2, "palm");
 
 	// Load the pointer textures
 	stel_object::init_textures();
@@ -147,9 +162,14 @@ void stel_core::init(void)
 	// Make the viewport as big as possible
 	projection->set_screen_size(screen_W, screen_H);
 	projection->set_fov(initFov);
-	projection->maximize_viewport();
 
-	//projection->set_disk_viewport();
+	switch (viewport_type)
+	{
+		case MAXIMIZED : projection->maximize_viewport(); break;
+		case SQUARE : projection->set_square_viewport(); break;
+		case DISK : projection->set_disk_viewport(); break;
+		default : projection->maximize_viewport(); break;
+	}
 
 	// Compute planets data and init viewing position
 	// Position of sun and all the satellites (ie planets)
@@ -159,7 +179,6 @@ void stel_core::init(void)
 
 	// Compute transform matrices between coordinates systems
 	navigation->update_transform_matrices((ssystem->get_earth())->get_ecliptic_pos());
-	navigation->set_local_vision(Vec3d(1.,0.,0.3));
 	navigation->update_model_view_mat();
 
 	glClear(GL_COLOR_BUFFER_BIT);
@@ -214,6 +233,8 @@ void stel_core::draw(int delta_time)
 {
 	// Init openGL viewing with fov, screen size and clip planes
 	projection->set_clipping_planes(0.001 ,40 );
+
+	// Give the updated standard projection matrices to the projector
 	projection->set_modelview_matrices(	navigation->get_earth_equ_to_eye_mat(),
 										navigation->get_helio_to_eye_mat(),
 										navigation->get_local_to_eye_mat());
@@ -221,13 +242,12 @@ void stel_core::draw(int delta_time)
     // Set openGL drawings in equatorial coordinates
     navigation->switch_to_earth_equatorial();
 
-	//glDisable(GL_DEPTH_TEST);
 	glBlendFunc(GL_ONE, GL_ONE);
 
 	glClear(GL_COLOR_BUFFER_BIT);
 	// Draw the milky way. If not activated, need at least to clear the color buffer
 	if (!FlagMilkyWay) glClear(GL_COLOR_BUFFER_BIT);
-	else DrawMilkyWay(tone_converter, projection, navigation);
+	else milky_way->draw(tone_converter, projection, navigation);
 
 	// Init the depth buffer which is used by the planets drawing operations
 	glClear(GL_DEPTH_BUFFER_BIT);
@@ -244,20 +264,21 @@ void stel_core::draw(int delta_time)
 	if (FlagConstellationName)
 	{
 		if (FlagConstellationPick && selected_constellation)
-			asterisms->draw_one_name(projection, selected_constellation);
-		else asterisms->draw_names(projection);
+			asterisms->draw_one_name(projection, selected_constellation, FlagGravityLabels);
+		else asterisms->draw_names(projection, FlagGravityLabels);
 	}
 
 	// Draw the nebula if they are visible
-	if (FlagNebula && (!FlagAtmosphere || sky_brightness<0.1)) nebulas->draw(FlagNebulaName, projection);
+	if (FlagNebula && (!FlagAtmosphere || sky_brightness<0.1))
+		nebulas->draw(FlagNebulaName, projection, FlagGravityLabels);
 
 	// Draw the hipparcos stars
 	Vec3d tempv = navigation->get_equ_vision();
 	Vec3f temp(tempv[0],tempv[1],tempv[2]);
 	if (FlagStars && (!FlagAtmosphere || sky_brightness<0.1))
 	{
-		hip_stars->draw(StarScale, StarTwinkleAmount, FlagStarName,
-		MaxMagStarName, temp, tone_converter, projection);
+		hip_stars->draw(StarScale, StarMagScale, FlagStarTwinkle ? StarTwinkleAmount : 0.f, FlagStarName,
+		MaxMagStarName, temp, tone_converter, projection, FlagGravityLabels);
 	}
 
 	// Draw the equatorial grid
@@ -274,7 +295,7 @@ void stel_core::draw(int delta_time)
     if (selected_object) selected_object->draw_pointer(delta_time, projection, navigation);
 
 	// Draw the planets
-	if (FlagPlanets) ssystem->draw(FlagPlanetsHints, projection, navigation);
+	if (FlagPlanets) ssystem->draw(FlagPlanetsHints, projection, navigation, tone_converter, FlagGravityLabels);
 
 	// Set openGL drawings in local coordinates i.e. generally altazimuthal coordinates
 	navigation->switch_to_local();
@@ -292,28 +313,17 @@ void stel_core::draw(int delta_time)
 	// Compute the atmosphere color
 	if (FlagAtmosphere)
 	{
-		navigation->switch_to_local();
+		//navigation->switch_to_local();
 		atmosphere->compute_color(sunPos, moonPos,
 		 	ssystem->get_moon()->get_phase(ssystem->get_earth()->get_heliocentric_ecliptic_pos()),
 		 	tone_converter, projection);
 	}
 
-	glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_COLOR);
 	// Draw the atmosphere
 	if (FlagAtmosphere)	atmosphere->draw(projection);
 
-	// Normal transparency mode
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
-	// Draw the mountains
-	// TODO custom decor type
-    if (FlagHorizon && FlagGround) DrawDecor(2, sky_brightness);
-
-	// Draw the ground
-    if (FlagGround) DrawGround(sky_brightness);
-
-	// Draw the fog
-    if (FlagFog) DrawFog(sky_brightness);
+	// Draw the landscape
+	landscape->draw(tone_converter, projection, navigation,	FlagFog, FlagHorizon && FlagGround, FlagGround);
 
 	// Daw the cardinal points
     if (FlagCardinalPoints) cardinals_points->draw(projection);
@@ -350,10 +360,36 @@ void stel_core::load_config(void)
 	screen_H			= conf->get_int	   ("video:screen_h");
 	bppMode				= conf->get_int    ("video:bbp_mode");
 
+	// Projector
+	const char* tmpstr;
+	tmpstr = conf->get_str("projection:type");
+	if (!tmpstr || !strcmp(tmpstr,"perspective")) projector_type = PERSPECTIVE_PROJECTOR;
+	else
+	if (!strcmp(tmpstr,"fisheye")) projector_type = FISHEYE_PROJECTOR;
+	else
+	{
+		printf("ERROR : Unknown projector type : %s\n",tmpstr);
+		exit(-1);
+	}
+
+	tmpstr = conf->get_str("projection:viewport");
+	if (!tmpstr || !strcmp(tmpstr,"maximized")) viewport_type = MAXIMIZED;
+	else
+	if (!strcmp(tmpstr,"square")) viewport_type = SQUARE;
+	else
+	if (!strcmp(tmpstr,"disk")) viewport_type = DISK;
+	else
+	{
+		printf("ERROR : Unknown viewport type : %s\n",tmpstr);
+		exit(-1);
+	}
+
 	// Star section
 	StarScale			= conf->get_double ("stars:star_scale");
+	StarMagScale		= conf->get_double ("stars:star_mag_scale");
 	StarTwinkleAmount	= conf->get_double ("stars:star_twinkle_amount");
 	MaxMagStarName		= conf->get_double ("stars:max_mag_star_name");
+	FlagStarTwinkle		= conf->get_boolean("stars:flag_star_twinkle");
 
 	// Ui section
 	FlagShowFps			= conf->get_boolean("gui:flag_show_fps");
@@ -372,6 +408,7 @@ void stel_core::load_config(void)
 
 	// Navigation section
 	navigation->set_flag_lock_equ_pos(conf->get_boolean("navigation:flag_lock_equ_pos"));
+
     // init the time parameters with current time and date
 	const ln_date * pDate = str_to_date(conf->get_str("navigation:date"),conf->get_str("navigation:time"));
 
@@ -381,9 +418,11 @@ void stel_core::load_config(void)
 	FlagEnableZoomKeys	= conf->get_boolean("navigation:flag_enable_zoom_keys");
 	FlagEnableMoveKeys	= conf->get_boolean("navigation:flag_enable_move_keys");
 	initFov				= conf->get_double ("navigation","init_fov",60.);
+	navigation->set_local_vision(str_to_vec3f(conf->get_str("navigation:init_view_pos")));
+	auto_move_duration	= conf->get_double ("navigation","auto_move_duration",1.);
 
 	// Landscape section
-	landscape_number	= conf->get_int    ("landscape:landscape_number");
+	if (conf->get_str("landscape:landscape_name")) strcpy(landscape_name,conf->get_str("landscape:landscape_name"));
 	FlagGround			= conf->get_boolean("landscape:flag_ground");
 	FlagHorizon			= conf->get_boolean("landscape:flag_horizon");
 	FlagFog				= conf->get_boolean("landscape:flag_fog");
@@ -398,6 +437,7 @@ void stel_core::load_config(void)
 	FlagEquatorLine			= conf->get_boolean("viewing:flag_equator_line");
 	FlagEclipticLine		= conf->get_boolean("viewing:flag_ecliptic_line");
 	FlagCardinalPoints		= conf->get_boolean("viewing:flag_cardinal_points");
+	FlagGravityLabels		= conf->get_boolean("viewing:flag_gravity_labels");
 
 	// Astro section
 	FlagStars				= conf->get_boolean("astro:flag_stars");
@@ -410,44 +450,6 @@ void stel_core::load_config(void)
 
 	//conf->save();
 }
-
-
-// Load the textures "for non object oriented stuff" TODO : remove that
-void stel_core::load_base_textures(void)
-{
-    printf("Loading common textures...\n");
-    texIds[3] = new s_texture("fog",TEX_LOAD_TYPE_PNG_SOLID_REPEAT);
-    texIds[2] = new s_texture("voielactee256x256",TEX_LOAD_TYPE_PNG_SOLID_REPEAT);
-
-    switch (landscape_number)
-    {
-    case 1 :
-        texIds[31]= new s_texture("landscapes/sea1",TEX_LOAD_TYPE_PNG_ALPHA);
-        texIds[32]= new s_texture("landscapes/sea2",TEX_LOAD_TYPE_PNG_ALPHA);
-        texIds[33]= new s_texture("landscapes/sea3",TEX_LOAD_TYPE_PNG_ALPHA);
-        texIds[34]= new s_texture("landscapes/sea4",TEX_LOAD_TYPE_PNG_ALPHA);
-        texIds[1] = new s_texture("landscapes/sea5",TEX_LOAD_TYPE_PNG_SOLID);
-        break;
-    case 2 :
-        texIds[31]= new s_texture("landscapes/mountain1",TEX_LOAD_TYPE_PNG_ALPHA);
-        texIds[32]= new s_texture("landscapes/mountain2",TEX_LOAD_TYPE_PNG_ALPHA);
-        texIds[33]= new s_texture("landscapes/mountain3",TEX_LOAD_TYPE_PNG_ALPHA);
-        texIds[34]= new s_texture("landscapes/mountain4",TEX_LOAD_TYPE_PNG_ALPHA);
-        texIds[1] = new s_texture("landscapes/mountain5",TEX_LOAD_TYPE_PNG_SOLID);
-        break;
-    case 3 :
-        texIds[31]= new s_texture("landscapes/snowy1",TEX_LOAD_TYPE_PNG_ALPHA);
-        texIds[32]= new s_texture("landscapes/snowy2",TEX_LOAD_TYPE_PNG_ALPHA);
-        texIds[33]= new s_texture("landscapes/snowy3",TEX_LOAD_TYPE_PNG_ALPHA);
-        texIds[34]= new s_texture("landscapes/snowy4",TEX_LOAD_TYPE_PNG_ALPHA);
-        texIds[1] = new s_texture("landscapes/snowy5",TEX_LOAD_TYPE_PNG_SOLID);
-        break;
-    default :
-        printf("ERROR : Bad landscape number, change it in config.txt\n");
-        exit(-1);
-    }
-}
-
 
 
 // find and select the "nearest" object from earth equatorial position

@@ -67,7 +67,7 @@ private:
 	float air_mass_moon;	// Air mass for the Moon
 	float air_mass_sun;		// Air mass for the Sun
 
-	float b_total;			// Total brightness
+	double b_total;			// Total brightness
 	float b_night;			// Dark night brightness
 	float b_twilight;		// Twilight brightness
 	float b_daylight;		// Daylight sky brightness

@@ -29,8 +29,10 @@
 // Init Static variables
 float Hip_Star::twinkle_amount = 10.f;
 float Hip_Star::star_scale = 10.f;
+float Hip_Star::star_mag_scale = 10.f;
 tone_reproductor* Hip_Star::eye = NULL;
 Projector* Hip_Star::proj = NULL;
+bool Hip_Star::gravity_label = false;
 
 Hip_Star::Hip_Star() : 
 	CommonName(NULL),
@@ -151,8 +153,8 @@ void Hip_Star::draw(void)
     // And we compensate the difference of brighteness with cmag
     if (rmag<1.2f)
     {
-        if (rmag<0.3f) return;
         cmag=rmag*rmag/1.44f;
+		if (rmag/star_scale<0.1f || cmag<0.1/star_mag_scale) return;
         rmag=1.2f;
     }
 	else
@@ -165,9 +167,11 @@ void Hip_Star::draw(void)
 
     // Calculation of the luminosity
     // Random coef for star twinkling
-    cmag*=(1.-rand()/RAND_MAX*twinkle_amount);
+    cmag*=(1.-twinkle_amount*rand()/RAND_MAX);
+
 	// Global scaling
 	rmag*=star_scale;
+	cmag*=star_mag_scale;
 
     glColor3fv(RGB*(cmag/MaxColorValue));
     glBegin(GL_QUADS );
@@ -181,5 +185,6 @@ void Hip_Star::draw(void)
 void Hip_Star::draw_name(const s_font* star_font)
 {   
     glColor3fv(RGB*(1./2.5));
+	gravity_label ? proj->print_gravity(star_font, XY[0],XY[1], CommonName, 6, -4) :
 	star_font->print(XY[0]+6,XY[1]-4, CommonName);
 }

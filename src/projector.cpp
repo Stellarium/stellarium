@@ -26,6 +26,7 @@ Projector::Projector(int _screenW, int _screenH, double _fov, double _min_fov, d
 {
 	set_fov(_fov);
 	set_screen_size(_screenW,_screenH);
+	viewport_type = UNKNOWN;
 }
 
 Projector::~Projector()
@@ -46,6 +47,7 @@ void Projector::set_square_viewport(void)
 	glDisable(GL_STENCIL_TEST);
 	int mind = MY_MIN(screenW,screenH);
 	set_viewport((screenW-mind)/2, (screenH-mind)/2, mind, mind);
+	viewport_type = SQUARE;
 }
 
 void Projector::set_disk_viewport(void)
@@ -65,6 +67,8 @@ void Projector::set_disk_viewport(void)
 	restore_from_2Dfullscreen_projection();
 
 	glStencilFunc(GL_EQUAL, 0x1, 0x1);
+
+	viewport_type = DISK;
 }
 
 void Projector::set_viewport(int x, int y, int w, int h)
@@ -214,4 +218,121 @@ void Projector::sSphere(GLdouble radius, GLint slices, GLint stacks, const Mat4d
 	gluSphere(p, radius, slices, stacks);
 	gluDeleteQuadric(p);
 	glPopMatrix();
+}
+
+inline void sSphereMapTexCoord(double rho, double theta, double texture_fov)
+{
+	if (rho>texture_fov/2.)
+	{
+		rho=texture_fov/2.;
+	}
+	glTexCoord2f(0.5f + rho/texture_fov * cosf(theta), 0.5f + rho/texture_fov * sinf(theta));
+}
+
+void Projector::sSphere_map(GLdouble radius, GLint slices, GLint stacks, const Mat4d& mat, double texture_fov, int orient_inside) const
+{
+	glPushMatrix();
+	glLoadMatrixd(mat);
+
+	GLfloat rho, drho, theta, dtheta;
+	GLfloat x, y, z;
+	GLint i, j, imin, imax;
+	GLfloat nsign;
+
+	if (orient_inside) nsign = -1.0;
+	else nsign = 1.0;
+
+	drho = M_PI / (GLfloat) stacks;
+	dtheta = 2.0 * M_PI / (GLfloat) slices;
+
+	// texturing: s goes from 0.0/0.25/0.5/0.75/1.0 at +y/+x/-y/-x/+y axis
+	// t goes from -1.0/+1.0 at z = -radius/+radius (linear along longitudes)
+	// cannot use triangle fan on texturing (s coord. at top/bottom tip varies)
+	imin = 0;
+	imax = stacks;
+
+	// draw intermediate stacks as quad strips
+	for (i = imin; i < imax; i++)
+	{
+		rho = i * drho;
+		glBegin(GL_QUAD_STRIP);
+		for (j = 0; j <= slices; j++)
+		{
+			if (nsign==1)
+			{
+			theta = (j == slices) ? 0.0 : j * dtheta;
+			x = -sin(theta) * sin(rho);
+			y = cos(theta) * sin(rho);
+			z = cos(rho);
+			glNormal3f(x * nsign, y * nsign, z * nsign);
+			sSphereMapTexCoord(rho, theta, texture_fov);
+			sVertex3(x * radius, y * radius, z * radius, mat);
+			x = -sin(theta) * sin(rho + drho);
+			y = cos(theta) * sin(rho + drho);
+			z = cos(rho + drho);
+			glNormal3f(x * nsign, y * nsign, z * nsign);
+			sSphereMapTexCoord(rho + drho, theta, texture_fov);
+			sVertex3(x * radius, y * radius, z * radius, mat);
+			}
+			else
+			{
+			theta = (j == slices) ? 0.0 : j * dtheta;
+			x = -sin(theta) * sin(rho + drho);
+			y = cos(theta) * sin(rho + drho);
+			z = cos(rho + drho);
+			glNormal3f(x * nsign, y * nsign, z * nsign);
+			sSphereMapTexCoord(rho + drho, theta, texture_fov);
+			sVertex3(x * radius, y * radius, z * radius, mat);
+			x = -sin(theta) * sin(rho);
+			y = cos(theta) * sin(rho);
+			z = cos(rho);
+			glNormal3f(x * nsign, y * nsign, z * nsign);
+			sSphereMapTexCoord(rho, theta, texture_fov);
+			sVertex3(x * radius, y * radius, z * radius, mat);
+			}
+		}
+		glEnd();
+	}
+	glPopMatrix();
+}
+
+
+// Reimplementation of gluCylinder : glu is overrided for non standard projection
+void Projector::sCylinder(GLdouble radius, GLdouble height, GLint slices, GLint stacks, const Mat4d& mat, int orient_inside) const
+{
+	glPushMatrix();
+	glLoadMatrixd(mat);
+	GLUquadricObj * p = gluNewQuadric();
+	gluQuadricTexture(p,GL_TRUE);
+	if (orient_inside) gluQuadricOrientation(p, GLU_INSIDE);
+	gluCylinder(p, radius, radius, height, slices, stacks);
+	gluDeleteQuadric(p);
+	glPopMatrix();
+}
+
+
+void Projector::print_gravity(const s_font* font, float x, float y, const char * str, float xshift, float yshift) const
+{
+	static Vec3d top(0., 0., 1.);
+	static Vec3d v;
+	static float dx, dy, d;
+	project_local(top, v);
+	dx = x-v[0];
+	dy = y-v[1];
+	d = sqrt(dx*dx + dy*dy);
+	float theta = M_PI + atan2(dx, dy);
+	float psi = atan2((float)font->getStrLen(str)/strlen(str),d) * 180./M_PI;
+	if (psi>20) psi = 20;
+	set_orthographic_projection();
+	glTranslatef(x,y,0);
+	glRotatef(theta*180./M_PI,0,0,-1);
+	glTranslatef(sinf(xshift/d)*d,(1.f-cosf(xshift/d))*d + yshift,0);
+	glRotatef(xshift/d*180./M_PI,0,0,1);
+	glScalef(1, -1, 1);
+	for (unsigned int i=0;i<strlen(str);++i)
+	{
+		font->print_char(str[i]);
+		glRotatef(psi,0,0,-1);
+	}
+	reset_perspective_projection();
 }

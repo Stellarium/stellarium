@@ -23,6 +23,8 @@
 #include "s_font.h"
 
 s_font* planet::planet_name_font = NULL;
+float planet::star_scale = 1.f;
+bool planet::gravity_label = false;
 
 rotation_elements::rotation_elements() : period(1.), offset(0.), epoch(J2000),
 		obliquity(0.), ascendingNode(0.), precessionRate(0.)
@@ -61,8 +63,9 @@ void planet::get_info_string(char * s, const navigator * nav) const
 	double tempDE, tempRA;
 	Vec3d equPos = get_earth_equ_pos(nav);
 	rect_to_sphe(&tempRA,&tempDE,equPos);
-	sprintf(s,"Name :%s\nRA : %s\nDE : %s\n Distance : %.8f UA",
-	name, print_angle_hms(tempRA*180./M_PI), print_angle_dms_stel(tempDE*180./M_PI), equPos.length());
+	sprintf(s,"Name :%s\nRA : %s\nDE : %s\nDistance : %.8f UA\nMagnitude : %.2f",
+	name, print_angle_hms(tempRA*180./M_PI), print_angle_dms_stel(tempDE*180./M_PI), equPos.length(),
+	compute_magnitude(nav->get_observer_helio_pos()));
 }
 
 // Set the orbital elements
@@ -163,32 +166,27 @@ double planet::compute_distance(const Vec3d& obs_helio_pos)
 }
 
 // Get the phase angle for an observer at pos obs_pos in the heliocentric coordinate (dist in AU)
-double planet::get_phase(Vec3d obs_pos)
-{
-	/* get distances */
-	double R = obs_pos.length();
-	Vec3d heliopos = get_heliocentric_ecliptic_pos();
-	double r = heliopos.length();
-	double delta = (obs_pos-heliopos).length();
-
-	/* calc phase */
-	return acos((r * r + delta * delta - R * R) / (2. * r * delta));
-}
-
-// TODO this doesn't work...
-float planet::compute_magnitude(Vec3d obs_pos)
+double planet::get_phase(Vec3d obs_pos) const
 {
 	Vec3d heliopos = get_heliocentric_ecliptic_pos();
-	double p = heliopos.length();
-
-	double R = M_PI * radius * radius / p;
-
+	double R = heliopos.length();
+	double p = (obs_pos - heliopos).length();
 	double s = obs_pos.length();
 	double cos_chi = (p*p + R*R - s*s)/(2.f*p*R);
-	//printf("cos_chi %f\n",cos_chi);
-	float chi = acosf(cos_chi);
-	float phase = (1.f - chi/M_PI) * cos_chi + sinf(chi) / M_PI;
-	float F = 0.666666667f * albedo * phase * radius*s/(R*p) * radius*s/(R*p);
+
+	return (1.f - acosf(cos_chi)/M_PI) * cos_chi + sqrt(1.f - cos_chi*cos_chi) / M_PI;
+}
+
+float planet::compute_magnitude(Vec3d obs_pos) const
+{
+	Vec3d heliopos = get_heliocentric_ecliptic_pos();
+	double R = heliopos.length();
+	double p = (obs_pos - heliopos).length();
+	double s = obs_pos.length();
+	double cos_chi = (p*p + R*R - s*s)/(2.f*p*R);
+
+	float phase = (1.f - acosf(cos_chi)/M_PI) * cos_chi + sqrt(1.f - cos_chi*cos_chi) / M_PI;
+	float F = 0.666666667f * albedo * (radius*s/(R*p)) * (radius*s/(R*p)) * phase;
 	return -26.73f - 2.5f * log10f(F);
 }
 
@@ -206,7 +204,7 @@ float planet::get_on_screen_size(const navigator * nav, const Projector* prj)
 }
 
 // Draw the planet and all the related infos : name, circle etc..
-void planet::draw(int hint_ON, Projector* prj, const navigator * nav)
+void planet::draw(int hint_ON, Projector* prj, const navigator * nav, const tone_reproductor* eye)
 {
 	Mat4d mat = mat_local_to_parent;
 	planet * p = parent;
@@ -225,9 +223,11 @@ void planet::draw(int hint_ON, Projector* prj, const navigator * nav)
 
 	// Compute the 2D position and check if in the screen
 	float screen_sz = get_on_screen_size(nav, prj);
+	float viewport_left = prj->view_left();
+	float viewport_bottom = prj->view_bottom();
 	if (prj->project_custom(Vec3f(0,0,0), screenPos, mat) &&
-		screenPos[1]>-screen_sz && screenPos[1]<prj->viewH()+screen_sz &&
-		screenPos[0]>-screen_sz && screenPos[0]<prj->viewW()+screen_sz)
+		screenPos[1]>viewport_bottom - screen_sz && screenPos[1]<viewport_bottom + prj->viewH()+screen_sz &&
+		screenPos[0]>viewport_left - screen_sz && screenPos[0]<viewport_left + prj->viewW() + screen_sz)
 	{
 		// Draw the name, and the circle if it's not too close from the body it's turning around
 		// this prevents name overlaping (ie for jupiter satellites)
@@ -254,7 +254,7 @@ void planet::draw(int hint_ON, Projector* prj, const navigator * nav)
 			else draw_sphere(prj, mat);
 		}
 
-		if (tex_halo) draw_halo(nav, prj);
+		if (tex_halo) draw_halo(nav, prj, eye);
     }
 
 	glPopMatrix();
@@ -269,7 +269,8 @@ void planet::draw_hints(const navigator* nav, const Projector* prj)
 	glEnable(GL_TEXTURE_2D);
 
 	float tmp = 10.f + get_on_screen_size(nav, prj)/2.f; // Shift for name printing
-	planet_name_font->print(screenPos[0]+tmp,screenPos[1]+tmp, name);
+	gravity_label ? prj->print_gravity(planet_name_font, screenPos[0],screenPos[1], name, tmp, tmp) :
+		planet_name_font->print(screenPos[0]+tmp,screenPos[1]+tmp, name);
 
 	// hint disapears smoothly on close view
 	tmp -= 10.f;
@@ -308,48 +309,57 @@ void planet::draw_sphere(const Projector* prj, const Mat4d& mat)
 	glDisable(GL_LIGHTING);
 }
 
-void planet::draw_halo(const navigator* nav, const Projector* prj)
+void planet::draw_halo(const navigator* nav, const Projector* prj, const tone_reproductor* eye)
 {
-	float rmag = 5;//lim*du->screenH*100;
-	if (rmag>0.5)
-	{
-		float cmag=1.;
-		if (rmag<1.2)
-		{
-			cmag=pow(rmag,2)/1.44;
-			rmag=1.2;
-		}
-		else
-		{
-			if (rmag>8.)
-			{
-				rmag=8.;
-			}
-		}
+	static float cmag;
+	static float rmag;
 
-		glBlendFunc(GL_ONE, GL_ONE);
+	rmag = eye->adapt_luminance(expf(-0.92103f*(compute_magnitude(nav->get_observer_helio_pos()) +
+		12.12331f)) * 108064.73f);
+	rmag = rmag/powf(prj->get_fov(),0.85f)*50.f;
 
-		float screen_r = get_on_screen_size(nav, prj);
-		cmag *= rmag/screen_r;
-		if (rmag<screen_r) rmag = screen_r;
+    cmag = 1.f;
 
-		prj->set_orthographic_projection();    	// 2D coordinate
-
-		glBindTexture(GL_TEXTURE_2D, tex_halo->getID());
-		glEnable(GL_BLEND);
-		glDisable(GL_LIGHTING);
-		glEnable(GL_TEXTURE_2D);
-		glColor3f(color[0]*cmag, color[1]*cmag, color[2]*cmag);
-		glTranslatef(screenPos[0], screenPos[1], 0.f);
-		glBegin(GL_QUADS);
-			glTexCoord2i(0,0);	glVertex3f(-rmag, rmag,0.f);	// Bottom Left
-			glTexCoord2i(1,0);	glVertex3f( rmag, rmag,0.f);	// Bottom Right
-			glTexCoord2i(1,1);	glVertex3f( rmag,-rmag,0.f);	// Top Right
-			glTexCoord2i(0,1);	glVertex3f(-rmag,-rmag,0.f);	// Top Left
-		glEnd();
-
-		prj->reset_perspective_projection();		// Restore the other coordinate
+    // if size of star is too small (blink) we put its size to 1.2 --> no more blink
+    // And we compensate the difference of brighteness with cmag
+    if (rmag<1.2f)
+    {
+        if (rmag<0.3f) return;
+        cmag=rmag*rmag/1.44f;
+        rmag=1.2f;
+    }
+	else
+    {
+		if (rmag>5.f)
+    	{
+        	rmag=5.f;
+    	}
 	}
+
+	// Global scaling
+	rmag*=planet::star_scale;
+
+	glBlendFunc(GL_ONE, GL_ONE);
+	float screen_r = get_on_screen_size(nav, prj);
+	cmag *= rmag/screen_r;
+	if (rmag<screen_r) rmag = screen_r;
+
+	prj->set_orthographic_projection();    	// 2D coordinate
+
+	glBindTexture(GL_TEXTURE_2D, tex_halo->getID());
+	glEnable(GL_BLEND);
+	glDisable(GL_LIGHTING);
+	glEnable(GL_TEXTURE_2D);
+	glColor3f(color[0]*cmag, color[1]*cmag, color[2]*cmag);
+	glTranslatef(screenPos[0], screenPos[1], 0.f);
+	glBegin(GL_QUADS);
+		glTexCoord2i(0,0);	glVertex3f(-rmag, rmag,0.f);	// Bottom Left
+		glTexCoord2i(1,0);	glVertex3f( rmag, rmag,0.f);	// Bottom Right
+		glTexCoord2i(1,1);	glVertex3f( rmag,-rmag,0.f);	// Top Right
+		glTexCoord2i(0,1);	glVertex3f(-rmag,-rmag,0.f);	// Top Left
+	glEnd();
+
+	prj->reset_perspective_projection();		// Restore the other coordinate
 }
 
 

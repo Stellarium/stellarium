@@ -161,14 +161,16 @@ void Hip_Star_mgr::load(char * font_fileName, char * hipCatFile, char * commonNa
 
 
 // Draw all the stars
-void Hip_Star_mgr::draw(float _star_scale, float _twinkle_amount, int name_ON,
+void Hip_Star_mgr::draw(float _star_scale, float _star_mag_scale, float _twinkle_amount, int name_ON,
 						float maxMagStarName, Vec3f equ_vision,
-						tone_reproductor* _eye, Projector* prj)
+						tone_reproductor* _eye, Projector* prj, bool _gravity_label)
 {
 	Hip_Star::twinkle_amount = _twinkle_amount;
 	Hip_Star::star_scale = _star_scale;
+	Hip_Star::star_mag_scale = _star_mag_scale;
 	Hip_Star::eye = _eye;
 	Hip_Star::proj = prj;
+	Hip_Star::gravity_label = _gravity_label;
 
 	glEnable(GL_TEXTURE_2D);
     glEnable(GL_BLEND);
