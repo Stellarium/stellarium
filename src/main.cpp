@@ -25,26 +25,29 @@
 #include "draw.h"
 #include "constellation.h"
 #include "constellation_mgr.h"
-#include "planet_mgr.h"
 #include "nebula.h"
 #include "nebula_mgr.h"
 #include "s_texture.h"
 #include "stellarium_ui.h"
-#include "navigation.h"
 #include "s_gui.h"
 #include "hip_star_mgr.h"
 #include "shooting.h"
 #include "stelconfig.h"
+#include "solarsystem.h"
+#include "navigator.h"
+#include "selection.h"
 
 #include "SDL.h"
 
 using namespace std;
 
+navigator navigation;
+selection selected_object;
 stellariumParams global;
 Hip_Star_mgr * HipVouteCeleste;       // Class to manage the Hipparcos catalog
 Constellation_mgr * ConstellCeleste;  // Constellation boundary and name
 Nebula_mgr * messiers;                // Class to manage the messier objects
-Planet_mgr * SolarSystem;             // Class to manage the planets
+planet * Sun;             	  		  // Sun, center of the solar system
 s_texture * texIds[200];              // Common Textures
 
 /*ShootingStar * TheShooting = NULL;*/
@@ -72,31 +75,26 @@ void drawIntro(void)
 };
 
 // ************************  Main display loop  ************************
+// Execute all the drawing function in the correct order from the
+// furthest to closest objects
 void Draw(void)
 {
-    glMatrixMode(GL_PROJECTION);
-    glLoadIdentity();
-    gluPerspective(global.Fov, (double)global.X_Resolution /
-		   global.Y_Resolution, 0.1, 1000);
-    glMatrixMode(GL_MODELVIEW);
+	// Init openGL viewing with fov, screen size and clip planes
+	navigation.init_project_matrix(global.X_Resolution,global.Y_Resolution,1,10000);
 
+    // Set openGL drawings in equatorial coordinates
+    navigation.switch_to_equatorial();
 
-    // Execute all the drawing function in the correct order from the more
-    // far to nearest objects
-
-    // ---- Equatorial Coordinates
-    Switch_to_equatorial();          // Switch in Equatorial coordinates
     DrawMilkyWay();                  // Draw the milky way --> init the buffers
 
-    if (global.FlagNebula && (!global.FlagAtmosphere ||
-			      global.SkyBrightness<0.1))
-	messiers->Draw();            // Draw the Messiers Objects
+    if (global.FlagNebula && (!global.FlagAtmosphere || global.SkyBrightness<0.1))
+		messiers->Draw();            // Draw the Messiers Objects
     if (global.FlagConstellationDrawing)
         ConstellCeleste->Draw();     // Draw all the constellations
     if ((!global.FlagAtmosphere && global.FlagStars) ||
         (global.SkyBrightness<0.2 && global.FlagStars))
     {
-	HipVouteCeleste->Draw();    // Draw the stars
+		HipVouteCeleste->Draw();    // Draw the stars
     }
 
 /*
@@ -109,34 +107,27 @@ void Draw(void)
 	TheShooting->Draw();
 */
     if (global.FlagPlanets || global.FlagPlanetsHintDrawing)
-	SolarSystem->Draw();         // Draw the planets
+		Sun->draw();		// Draw the planets
     if (global.FlagAtmosphere && global.SkyBrightness>0)
-	DrawAtmosphere2();
+		DrawAtmosphere2();	// Draw the atmosphere
 
-    SolarSystem->DrawMoonDaylight();
+    //Sun->DrawMoonDaylight();
 
     if (global.FlagEquatorialGrid)
     {
-	DrawMeridiens();             // Draw the meridian lines
-        DrawParallels();             // Draw the parallel lines
+		DrawMeridiens();             			// Draw the meridian lines
+        DrawParallels();             			// Draw the parallel lines
     }
-    if (global.FlagEquator)
-	DrawEquator();               // Draw the celestial equator line
-    if (global.FlagEcliptic)
-	DrawEcliptic();              // Draw the ecliptic line
-    if (global.FlagConstellationName)
-        ConstellCeleste->DrawName(); // Draw the constellations's names
-    if (global.FlagSelect)           // Draw the star pointer
-        DrawPointer(global.SelectedObject.XYZ,
-		    global.SelectedObject.Size,
-		    global.SelectedObject.RGB,
-		    global.SelectedObject.type);
+    if (global.FlagEquator)	DrawEquator();   	// Draw the celestial equator line
+    if (global.FlagEcliptic) DrawEcliptic(); 	// Draw the ecliptic line
+    if (global.FlagConstellationName) ConstellCeleste->DrawName();	// Draw the constellations's names
+    if (global.FlagSelect) global.SelectedObject.draw_pointer();			// Draw the pointer
 
-    // ---- AltAzimutal Coordinates
-    Switch_to_altazimutal();         // Switch in AltAzimutal coordinates
+	// Set openGL drawings in local coordinates i.e. generally altazimuthal coordinates
+	navigation.switch_to_local();
     if (global.FlagAzimutalGrid)
     {
-	DrawMeridiensAzimut();       // Draw the "Altazimuthal meridian" lines
+		DrawMeridiensAzimut();       // Draw the "Altazimuthal meridian" lines
         DrawParallelsAzimut();       // Draw the "Altazimuthal parallel" lines
     }
     if (global.FlagAtmosphere)       // Calc the atmosphere
@@ -144,7 +135,7 @@ void Draw(void)
     	// Draw atmosphere every second frame because it's slow....
         if (++timeAtmosphere>1 && global.SkyBrightness>0)
         {
-	    timeAtmosphere=0;
+	    	timeAtmosphere=0;
             CalcAtmosphere();
         }
     }
@@ -168,11 +159,7 @@ void ResizeGL(int w, int h)
 	clearUi();
 	initUi();
     glViewport(0, 0, global.X_Resolution, global.Y_Resolution);
-    glMatrixMode(GL_PROJECTION);
-    glLoadIdentity();
-    gluPerspective(global.Fov, (double) global.X_Resolution /
-		   global.Y_Resolution, 1, 10000);   // Update the ratio
-    glMatrixMode(GL_MODELVIEW);
+	navigation.init_project_matrix(global.X_Resolution,global.Y_Resolution,1,10000);
 }
 
 
@@ -254,36 +241,63 @@ void TerminateApplication(void)				// Terminate The Application
 }
 
 // *******************  Handle time  **************************
-void Update(Uint32 Milliseconds)
+void Update(Uint32 delta_time)
 {
+	static int frame, timefr, timeBase;
+	frame++;
+    timefr+=delta_time;
+    if (timefr-timeBase > 1000)
+    {
+		global.Fps=frame*1000.0/(timefr-timeBase);     // Calc the PFS rate
+        frame = 0;
+        timeBase+=1000;
+    }
+
     // Update the position of observation and time etc...
-    Update_time(Milliseconds, *SolarSystem);
-    Update_variables();
+	navigation.update_time(delta_time);
+	Sun->computePosition(navigation.get_JDay());
+	navigation.update_transform_matrices();
+	navigation.update_vision_vector(delta_time);
+
+
+    // compute sky brightness
+    if (global.FlagAtmosphere)
+    {
+        Vec3d sunPos = Sun->getHelioPos();
+        sunPos.normalize();
+        global.SkyBrightness=asin(sunPos[1])+0.1;
+        if (global.SkyBrightness<0) global.SkyBrightness=0;
+    }
+    else
+    {
+        global.SkyBrightness=0;
+    }
+	if (global.FlagSelect) global.SelectedObject.update();
 	return;
 }
 
 // ********************  Handle keys  **********************
-void pressKey(Uint8 *keys) 
-{   	
+void pressKey(Uint8 *keys)
+{
     // Direction and zoom deplacements
     if(keys[SDLK_LEFT])
 	{
-		global.deltaAz = -1;
-		global.FlagTraking=false; 
+		navigation.turn_left(1);
+		global.FlagTraking=false;
 	}
     if(keys[SDLK_RIGHT])
 	{
-		global.deltaAz =  1;
+		navigation.turn_right(1);
 		global.FlagTraking=false;
 	}
     if(keys[SDLK_UP])
 	{
 		if (SDL_GetModState() & KMOD_CTRL)
 		{
-			global.deltaFov= -1;
+			navigation.zoom_in(1);
 		}
 		else
-		{	global.deltaAlt =  1;
+		{	navigation.turn_up(1);
 			global.FlagTraking=false;
 		}
 	}
@@ -291,16 +305,16 @@ void pressKey(Uint8 *keys)
 	{
 		if (SDL_GetModState() & KMOD_CTRL)
 		{
-			global.deltaFov= 1;
+			navigation.zoom_out(1);
 		}
 		else
 		{
-			global.deltaAlt = -1;
+			navigation.turn_down(1);
 			global.FlagTraking=false;
 		}
 	}
-    if(keys[SDLK_PAGEUP]) global.deltaFov= -1;
-    if(keys[SDLK_PAGEDOWN]) global.deltaFov=  1;
+    if(keys[SDLK_PAGEUP]) navigation.zoom_in(1);
+    if(keys[SDLK_PAGEDOWN]) navigation.zoom_out(1);
 
 }
 
@@ -308,19 +322,21 @@ void pressKey(Uint8 *keys)
 void releaseKey(SDLKey key)
 {   
     // When a deplacement key is released stop mooving
-    if (key==SDLK_LEFT || key==SDLK_RIGHT) global.deltaAz = 0;
-    if (key==SDLK_UP || key==SDLK_DOWN)
-    {
-		if (SDL_GetModState() & KMOD_CTRL)
-		{
-			global.deltaFov = 0;
-		}
-		else
-		{
-			global.deltaAlt = 0;
-		}
+    if (key==SDLK_LEFT) navigation.turn_left(0);
+	if (key==SDLK_RIGHT) navigation.turn_right(0);
+	if (SDL_GetModState() & KMOD_CTRL)
+	{
+		if (key==SDLK_UP) navigation.zoom_in(0);
+		if (key==SDLK_DOWN) navigation.zoom_out(0);
 	}
-    if (key==SDLK_PAGEUP || key==SDLK_PAGEDOWN)	global.deltaFov = 0;
+	else
+	{
+		if (key==SDLK_UP) navigation.turn_up(0);
+		if (key==SDLK_DOWN) navigation.turn_down(0);
+	}
+
+    if (key==SDLK_PAGEUP)  navigation.zoom_in(0);
+	if (key==SDLK_PAGEDOWN) navigation.zoom_out(0);
 }
 
 bool InitTimers(Uint32 *C)   // This Is Used To Init All The Timers In Our Application
@@ -339,19 +355,18 @@ bool Initialize(void)	     // Any Application & User Initialization Code Goes He
     SDL_EnableKeyRepeat(0, 0); // Disable key repeat
     
     HipVouteCeleste = new Hip_Star_mgr();
-    if (!HipVouteCeleste) exit(1);
+    if (!HipVouteCeleste) exit(-1);
 
     ConstellCeleste = new Constellation_mgr();
-    if (!ConstellCeleste) exit(1);
+    if (!ConstellCeleste) exit(-1);
 
     messiers = new Nebula_mgr();
-    if (!messiers) exit(1);
+    if (!messiers) exit(-1);
 
-    SolarSystem = new Planet_mgr();
-    if (!SolarSystem) exit(1);
+	InitSolarSystem(); // Create and init the solar system
+    if (!Sun) exit(-1);
 
     loadCommonTextures();            // Load the common used textures
-    SolarSystem->loadTextures();
 
     char tempName[255];
     char tempName2[255];
@@ -369,15 +384,14 @@ bool Initialize(void)	     // Any Application & User Initialization Code Goes He
     strcpy(tempName,global.DataDir);
     strcat(tempName,"constellationship.fab");
     ConstellCeleste->Load(tempName,HipVouteCeleste);     // Load constellations
-    SolarSystem->Compute(global.JDay,global.ThePlace);// Compute planet data
-    InitMeriParal();                 // Precalculation for the grids drawing
+    Sun->computePosition(navigation.get_JDay());					 // Compute planet data
+    InitMeriParal();                 	// Precalculation for the grids drawing
     InitAtmosphere();
 
     strcpy(tempName,global.DataDir);
     strcat(tempName,"messier.fab");
     messiers->Read(tempName);        // read the messiers object data
     initUi();                        // initialisation of the User Interface
-    global.XYZVision.Set(0,1,-0.4);
     return true;		     // Return TRUE (Initialization Successful)
 }
 
@@ -600,7 +614,9 @@ int main(int argc, char **argv)
 			}
 			else
 			{
+				Uint32 temp;
 				TickCount = SDL_GetTicks();	// Get Present Ticks
+				temp=TickCount-LastCount;
 				Update(TickCount-LastCount);// And Update The Motions And Data
 				LastCount = TickCount;		// Save The Present Tick Probing
 				Draw();						// Do The Drawings!

@@ -18,120 +18,108 @@
  */
 
 #include "planet.h"
-extern s_texture * texIds[200];            // Common Textures
 
-Planet::Planet(PlanetNb LeNum) : num(LeNum), planetTexture(NULL)
-{  
-}
-
-Planet::~Planet()
+planet::Planet(char * _name, int _flagHalo, double _radius, vec3_t _color,
+				s_texture * _planetTexture, s_texture * _haloTexture,
+				void (*_coord_func)(double JD, struct ln_rect_posn * position) :
+					flagHalo(_flagHalo), radius(_radius), color(_color),
+					planetTexture(_planetTexture), haloTexture(_haloTexture),
+					coord_func(_coord_func), parent(NULL)
 {
+	planetRing=NULL;
+	planetBigHalo=NULL;
+	helioCoord=vec3_t(0.,0.,0.);
+	name=strdup(_name);
 }
 
-// Use the calc() function made by mark huss
-void Planet::Compute(double date, ObsInfo lieu,vec3_t helioPosObs)
-{   PlanetData thePlanet;
-    thePlanet.calc(num, date, lieu);
-    HelioCoord[0]=(float)thePlanet.equatorialLoc(1);
-    HelioCoord[1]=(float)thePlanet.equatorialLoc(2);
-    HelioCoord[2]=(float)thePlanet.equatorialLoc(0);
-    HelioCoord.Normalize();
-    RayonOrbite=(float)thePlanet.radius();
-    HelioCoord*=RayonOrbite;
-
-    if (num==10)                                    //Luna was computed in GeoCoord...
-    {   HelioCoord/=UA;
-        GeoCoord=HelioCoord;                        //Assuming we are on earth
-        HelioCoord=GeoCoord+helioPosObs;
-    }
-    else
-    {   GeoCoord=HelioCoord-helioPosObs;            // Seen from obs
-    }
-
-    Distance_to_obs=GeoCoord.Length();
-
-    XYZ_to_RADE(RaRad,DecRad,GeoCoord);
-
-    switch (num)
-    {   case 0 : Name="Sun";        break;
-        case 1 : Name="Mercury";    break;
-        case 2 : Name="Venus";      break;
-        case 3 : Name="Earth";      break;
-        case 4 : Name="Mars";       break;
-        case 5 : Name="Jupiter";    break;
-        case 6 : Name="Saturn";     break;
-        case 7 : Name="Uranus";     break;
-        case 8 : Name="Neptune";    break;
-        case 9 : Name="Pluto";      break;
-        case 10: Name="Luna";       break;
-        default : Name="NotAPlanet";break;
-    }
-//   printf("%s : RA=%f DE=%f Dist=%f\n",Name,RaRad*12/PI,DecRad*180/PI,GeoCoord.Length());
-}
-
-// Function used for the drawing of the name and circle
-#include "s_font.h"
-extern s_font * planetNameFont;
-
-
-void Planet::DrawSpecialDaylight(vec3_t coordLight)
+planet::~planet()
 {
-    if ((int)(acos((global.XYZVision[0]*GeoCoord[0]+global.XYZVision[1]*GeoCoord[1]+global.XYZVision[2]*GeoCoord[2])/Distance_to_obs)*180/PI)%360>global.Fov/2*(global.X_Resolution/global.Y_Resolution)*1.4) return;
+	if (name) free name;
+	name=NULL;
+	if (planetRing) delete planetRing;
+	planetRing=NULL;
+	if (planetBigHalo) delete planetBigHalo;
+	planetBigHalo=NULL;
+}
 
-    glPushMatrix();
-    glEnable(GL_TEXTURE_2D);
 
-    vec3_t normGeoCoord=GeoCoord;
-    normGeoCoord.Normalize();
-    glTranslatef(normGeoCoord[0]*DIST_PLANET,normGeoCoord[1]*DIST_PLANET,normGeoCoord[2]*DIST_PLANET);
+void planet::computePosition(double date)
+{
+	ln_rect_posn tempPos;
+	coord_func(date, &tempPos);
+	helioPos = vec3_t(tempPos->X, tempPos->Y, tempPos->Z);
+}
 
+// Get a matrix which converts from local to the parent's coordinates
+Mat4d planet::computeMatrix(double date)
+{
+    double tempAscendingNode = re.ascendingNode + re.precessionRate * (when - astro::J2000);
 
-    //Light
-    vec3_t posSun = coordLight-GeoCoord;
-    posSun.Normalize();
+	transMat = 	Mat4d::xrotation(-re.obliquity) *
+				Mat4d::yrotation(-tempAscendingNode) *
+        		Mat4d::translation(helioCoord);
 
-    float posLight[4] = {10000*posSun[0],10000*posSun[1],10000*posSun[2]};
-    glLightfv(GL_LIGHT1,GL_POSITION,posLight);
+    if (parent != NULL && system->getPrimaryBody() != NULL)
+        frame = frame * system->getPrimaryBody()->getLocalToHeliocentric(when);
+}
 
-    glRotatef(90,1,0,0);
+// Return the y rotation to use from Equatorial to geographic coordinates
+double getGeographicRotation(double when)
+{
+    double t = when - re.epoch;
+    double rotations = t / (double) re.period;
+    double wholeRotations = floor(rotations);
+    double remainder = rotations - wholeRotations;
 
-    if (asin(Rayon*2/Distance_to_obs)*180./PI>3*global.Fov/global.Y_Resolution)     //Draw the sphere if big enough
-    {   glEnable(GL_CULL_FACE);
-    
-        if (num!=0) glEnable(GL_LIGHTING);
-        glPushMatrix();
+    // Add an extra half rotation because of the convention in all
+    // planet texture maps where zero deg long. is in the middle of
+    // the texture.
+    remainder += 0.5;
+
+	return -remainder * 360. - re.offset;
+}
+
+vec3_t planet::getHelioPos()
+{
+	return helioPos;
+}
+
+void planet::addSatellite(planet*p)
+{
+	satellites.push_back(p);
+	p->parent=this;
+}
+
+void planet::draw(void)
+{
+	glEnable(GL_CULL_FACE);
+	glEnable(GL_LIGHTING);
+	glPushMatrix();
             if (num==10)
             {   glPushMatrix();
                 glRotatef(RaRad*180./PI-60,0,0,-1);
             }
             glRotatef(-60,0,0,1);
-            glColor3f(0.8f, 0.8f, 0.8f);
-            glBlendFunc(GL_ONE, GL_ONE);            // init the blending function parameters (read the doc to understand it ;) ...)
-
-            glEnable(GL_BLEND);
+            glColor3f(1.0f, 1.0f, 1.0f); //*SkyBrightness
+            glDisable(GL_BLEND);
             glBindTexture(GL_TEXTURE_2D, planetTexture->getID());
-        
+
             GLUquadricObj * ThePlanet=gluNewQuadric();
             gluQuadricTexture(ThePlanet,GL_TRUE);
             gluQuadricOrientation(ThePlanet, GLU_OUTSIDE);
             gluSphere(ThePlanet,Rayon*DIST_PLANET/Distance_to_obs,40,40);
             gluDeleteQuadric(ThePlanet);
-        
-            glDisable(GL_LIGHTING); 
-            if (num==10)
+           if (num==10)
             {   glPopMatrix();
             }
+            glDisable(GL_LIGHTING);
         glPopMatrix();
         glDisable(GL_CULL_FACE);
     }
-    glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
-    glPopMatrix();
-}
 
 // Draw the planet (with special cases for saturn rings, sun, moon, etc..)
 void Planet::Draw(vec3_t coordLight)
-{   if ((int)(acos((global.XYZVision[0]*GeoCoord[0]+global.XYZVision[1]*GeoCoord[1]+global.XYZVision[2]*GeoCoord[2])/Distance_to_obs)*180/PI)%360>global.Fov/2*(global.X_Resolution/global.Y_Resolution)*1.4) return;
-
+{
     glPushMatrix();
     glEnable(GL_TEXTURE_2D);
 
@@ -265,31 +253,7 @@ void Planet::Draw(vec3_t coordLight)
     }
 
     if (asin(Rayon*2/Distance_to_obs)*180./PI>3*global.Fov/global.Y_Resolution)     //Draw the sphere if big enough
-    {   glEnable(GL_CULL_FACE);
-    
-        if (num!=0) glEnable(GL_LIGHTING);
-        glPushMatrix();
-            if (num==10)
-            {   glPushMatrix();
-                glRotatef(RaRad*180./PI-60,0,0,-1);
-            }
-            glRotatef(-60,0,0,1);
-            glColor3f(1.0f, 1.0f, 1.0f); //*SkyBrightness
-            glDisable(GL_BLEND);
-            glBindTexture(GL_TEXTURE_2D, planetTexture->getID());
-        
-            GLUquadricObj * ThePlanet=gluNewQuadric();
-            gluQuadricTexture(ThePlanet,GL_TRUE);
-            gluQuadricOrientation(ThePlanet, GLU_OUTSIDE);
-            gluSphere(ThePlanet,Rayon*DIST_PLANET/Distance_to_obs,40,40);
-            gluDeleteQuadric(ThePlanet);
-           if (num==10)
-            {   glPopMatrix();
-            }
-            glDisable(GL_LIGHTING); 
-        glPopMatrix();
-        glDisable(GL_CULL_FACE);
-    }
+
 
     if (num==6)                                 // Draw saturn rings 2/2
     {   double rAn=2.5*Rayon*DIST_PLANET/Distance_to_obs;

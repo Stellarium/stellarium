@@ -39,7 +39,7 @@
 
 #include <vector>
 #include "s_font.h"
-#include "vector.h"
+#include "vecmath.h"
 #include "s_texture.h"
 
 // gui Return Values:

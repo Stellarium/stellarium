@@ -24,7 +24,7 @@
 void moy(vec3_t * p, int a, int b, int c)
 {
 	p[c] = p[a] + p[b];
-	p[c].Normalize();
+	p[c].normalize();
 }
 
 Grid::Grid()
@@ -850,13 +850,13 @@ int Grid::GetNearest(vec3_t v)
     float bestDot = -2.;
 
 	vec3_t v2(v);
-	v2.Normalize();
+	v2.normalize();
     for(int i=0;i<NbPoints;i++)
     {
-        if (v2.Dot(Points[i])>bestDot)
+        if (v2.dot(Points[i])>bestDot)
         {
             bestI = i;
-            bestDot = v2.Dot(Points[i]);
+            bestDot = v2.dot(Points[i]);
         }
     }
     return bestI;
@@ -875,13 +875,13 @@ int Grid::Intersect(vec3_t pos, float fieldAngle, int * &result)
 {
 	if (result==NULL) result = new int[NbPoints];
 
-	pos.Normalize();
+	pos.normalize();
 	float max = cos(fieldAngle/2+Angle/2);
 
 	int nbResult=0;
 	for(int i=0;i<NbPoints;i++)
 	{
-		if(pos.Dot(Points[i]) > max)
+		if(pos.dot(Points[i]) > max)
 		{
 			result[nbResult]=i;
 			nbResult++;

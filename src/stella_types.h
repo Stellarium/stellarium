@@ -20,40 +20,17 @@
 #ifndef _STELLA_TYPE_H_
 #define _STELLA_TYPE_H_
 
-#include "vector.h"
-#include "AstroOps.h"
+#include "vecmath.h"
+#include "libnova.h"
+#include "selection.h"
 
 typedef struct			// We Use A Struct To Hold Application Runtime Data
 {
 	bool Visible;		// Is The Application Visible? Or Iconified?
 	bool MouseFocus;	// Is The Mouse Cursor In The Application Field?
 	bool KeyboardFocus;	// Is The Input Focus On Our Application?
-}
-	S_AppStatus;
+}S_AppStatus;
 
-typedef struct          // Struct used to store data on the selected star
-{   vec3_t XYZ;
-    float Mag;
-    char * Name;
-    unsigned int HR;
-    unsigned int MessierNum;
-    unsigned int NGCNum;
-    float Size;
-    float RA,DE;
-    int RAh,RAm;
-    double Distance;
-    float RAs;
-    vec3_t RGB;
-    char * CommonName;
-    char type;
-}selected_object;
-
-typedef struct          // Struct used to store data on the auto mov
-{   vec3_t start;
-    vec3_t aim;
-    float speed;
-    float coef;
-}AutoMove;
 
 typedef struct params{
     //Files location
@@ -61,20 +38,10 @@ typedef struct params{
     char ConfigDir[255];
     char DataDir[255];
 
-    // Navigation
-    double RaZenith,DeZenith;
-    double AzVision,AltVision;
-    double RaVision, DeVision;
-    double deltaFov,deltaAlt,deltaAz;
-    double Fov;
-    vec3_t XYZVisionAltAz,XYZVision;
-    selected_object SelectedObject;
-    AutoMove Move;
-    double TimeDirection;
+    selection SelectedObject;
 
     // Position
-    ObsInfo ThePlace;   //(Longitude,Latitude, -2);
-    double JDay;        // Julian day
+    ln_lnlat_posn ThePlace;   // Longitude,Latitude
     int TimeZone;
     int Altitude;       // Altitude in meter
     int LandscapeNumber; // number of the landscape
@@ -105,7 +72,6 @@ typedef struct params{
     int FlagUTC_Time;
     int FlagTraking;
     int FlagFollowEarth;
-    int FlagAutoMove;
     int FlagFps;
     int FlagStars;
 	int FlagStarName;

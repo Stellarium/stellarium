@@ -1,4 +1,4 @@
-/* 
+/*
  * Stellarium
  * Copyright (C) 2002 Fabien Chéreau
  * 
@@ -24,6 +24,7 @@
 #include "grid.h"
 #include "bytes.h"
 #include "stellarium.h"
+#include "navigator.h"
 
 s_texture * hipStarTexture;
 s_font * starFont;
@@ -31,7 +32,6 @@ s_font * starFont;
 Hip_Star_mgr::Hip_Star_mgr() : HipGrid()
 {	
     hipStarTexture=NULL;
-    Selectionnee=NULL;
     StarArray = NULL;
 }
 
@@ -170,7 +170,10 @@ void Hip_Star_mgr::Draw(void)
 	// Find the star zones which are in the screen
 	int nbZones=0;
 	static int * zoneList;  // WARNING this is almost a memory leak...
-	nbZones = HipGrid.Intersect(global.XYZVision, global.Fov*PI/180*1.4, zoneList);
+
+	// convert.... TODO implicit convertion
+	vec3_t temp(navigation.get_equ_vision()[0],navigation.get_equ_vision()[1],navigation.get_equ_vision()[2]);
+	nbZones = HipGrid.Intersect(temp, navigation.get_fov()*PI/180*1.4, zoneList);
 	
 	// Print all the stars of all the selected zones
 	for(int i=0;i<nbZones;i++)
@@ -178,7 +181,7 @@ void Hip_Star_mgr::Draw(void)
     	p = Liste.equal_range(zoneList[i]);
     	for(multimap<int,Hip_Star *>::iterator iter = p.first; iter != p.second; iter++)
     	{   
-			if ((*iter).second->Mag>6+60./global.Fov) continue;
+			if ((*iter).second->Mag>6+60./navigation.get_fov()) continue;
 	    	gluProject( ((*iter).second)->XYZ[0],((*iter).second)->XYZ[1],
 		        ((*iter).second)->XYZ[2],M,P,V,&(((*iter).second)->XY[0]),
 	        	&(((*iter).second)->XY[1]),&z);
@@ -199,28 +202,30 @@ void Hip_Star_mgr::Draw(void)
 }
 
 // Look for a star by XYZ coords
-int Hip_Star_mgr::Rechercher(vec3_t Pos)
+Hip_Star * Hip_Star_mgr::Rechercher(vec3_t Pos)
 {   
-    Pos.Normalize();
+    Pos.normalize();
     Hip_Star * plusProche=NULL;
     float anglePlusProche=3.15;
     
     multimap<int,Hip_Star *>::iterator iter;
     for(iter=Liste.begin();iter!=Liste.end();iter++)
     {
-	if (((*iter).second)->XYZ[0]*Pos[0]+((*iter).second)->XYZ[1]*Pos[1]+((*iter).second)->XYZ[2]*Pos[2]>anglePlusProche)
-        {   
-			anglePlusProche=((*iter).second)->XYZ[0]*Pos[0]+((*iter).second)->XYZ[1]*Pos[1]+((*iter).second)->XYZ[2]*Pos[2];
-            plusProche=(*iter).second;
-        }
+		if 	(((*iter).second)->XYZ[0]*Pos[0] + ((*iter).second)->XYZ[1]*Pos[1] +
+			((*iter).second)->XYZ[2]*Pos[2]>anglePlusProche)
+    	{
+			anglePlusProche = ((*iter).second)->XYZ[0]*Pos[0] +
+				((*iter).second)->XYZ[1]*Pos[1]+((*iter).second)->XYZ[2]*Pos[2];
+        	plusProche=(*iter).second;
+    	}
     }
     if (anglePlusProche>498)
     {   
-	    Selectionnee=plusProche;
-        return 0;
+	    return plusProche;
     }
-    else return 1;
+    else return NULL;
 }
+
 void Hip_Star_mgr::Save(void)
 {
 	FILE * fic = fopen("cat.fab","wb");
