@@ -25,7 +25,6 @@
 
 #include <math.h>
 #include "tone_reproductor.h"
-#include <stdio.h>
 
 // Set some values to prevent bugs in case of bad use
 tone_reproductor::tone_reproductor() : Lda(50.f), Lwa(40000.f), MaxdL(100.f), gamma(2.3f)
@@ -94,6 +93,5 @@ void tone_reproductor::xyY_to_RGB(float* color)
 	color[1] =-0.969258f *X + 1.87599f *Y + 0.0415557f*Z;
 	color[2] = 0.0134455f*X - 0.118373f*Y + 1.01527f  *Z;
 
-	//printf("%f %f %f\n",color[0],color[1],color[2]);
 }
 
