@@ -181,6 +181,10 @@ void stel_core::init(void)
     char tempName3[255];
     char tempName4[255];
 
+	// Set textures directory and suffix
+	s_texture::set_texDir(TextureDir);
+	s_texture::set_suffix(".png");
+
     // Load hipparcos stars & names
     strcpy(tempName,DataDir);
     strcat(tempName,"hipparcos.fab");
@@ -303,7 +307,7 @@ void stel_core::load_base_textures(void)
         exit(1);
     }
 
-    if (messiers->ReadTexture()==0)
+    if (nebulas->ReadTexture()==0)
 	printf("Error while loading messier Texture\n");
 }
 

@@ -39,6 +39,4 @@ private:
     Nebula * Selectionnee;              // Selected nebulae
 };
 
-extern Nebula_mgr * messiers;             // Class to manage the messier objects
-
 #endif // _NEBULA_MGR_H_

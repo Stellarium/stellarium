@@ -1,4 +1,4 @@
-/* 
+/*
  * Stellarium
  * Copyright (C) 2002 Fabien Chéreau
  * 
@@ -17,20 +17,20 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#include "stellarium.h"
 #include "s_texture.h"
 #include "glpng.h"
 
 s_texture::s_texture(char * _textureName) : loadType(PNG_BLEND3)
-{   
+{
+    if (!_textureName) exit(-1);
     texID=0;
     textureName=strdup(_textureName);
-    if (!textureName) exit(1);
     load();
 }
 
 s_texture::s_texture(char * _textureName, int _loadType)
-{   
+{
+    if (!_textureName) exit(-1);
 	loadType2=GL_CLAMP;
     switch (_loadType)
     {
@@ -42,7 +42,6 @@ s_texture::s_texture(char * _textureName, int _loadType)
     }
     texID=0;
     textureName=strdup(_textureName);
-    if (!textureName) exit(1);
     load();
 }
 
@@ -54,8 +53,8 @@ s_texture::~s_texture()
 
 int s_texture::load()
 {
-    char * fullName = (char*)malloc(sizeof(char)*(strlen("/textures")+strlen(global.TextureDir))+sizeof(char)*strlen(textureName)+6);
-    sprintf(fullName,"%s%s.png",global.TextureDir,textureName);
+    char * fullName = (char*)malloc( sizeof(char) * ( strlen(texDir) + strlen(textureName) + strlen(suffix) + 1 ) );
+    sprintf(fullName,"%s%s%s",texDir,textureName,suffix);
     FILE * tempFile = fopen(fullName,"r");
     if (!tempFile) printf("WARNING : Can't load texture %s!\n",fullName);
     pngInfo info;
