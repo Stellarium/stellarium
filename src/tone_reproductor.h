@@ -63,6 +63,7 @@ private:
 	float Lda;		// Display luminance adaptation
 	float Lwa;		// World   luminance adaptation
 	float MaxdL;	// Display maximum luminance
+	float gamma;	// Screen gamma value
 	// Precomputed variables
 	float alpha_da;
 	float beta_da;
