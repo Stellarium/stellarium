@@ -456,6 +456,17 @@ int stel_ui::handle_clic(Uint16 x, Uint16 y, Uint8 button, Uint8 state)
             {
 				updateInfoSelectString();
 				core->navigation->set_flag_traking(0);
+				if (core->FlagConstellationPick && (core->FlagAsterismDrawing || core->FlagAsterismName))
+				{
+					if (core->selected_object->get_type()==STEL_OBJECT_STAR)
+					{
+						core->selected_constellation=core->asterisms->is_star_in((Hip_Star*)core->selected_object);
+					}
+					else
+					{
+						core->selected_constellation=NULL;
+					}
+				}
             }
         }
     }
@@ -467,9 +478,9 @@ int stel_ui::handle_keys(SDLKey key, S_GUI_VALUE state)
 {
 	desktop->onKey(key, state);
 	if (state==S_GUI_PRESSED)
-    {   
+    {
     	if(key==SDLK_ESCAPE)
-    	{ 	
+    	{
 			return 0;	// Will quit properly from stel_sdl
 		}
         if(key==SDLK_c)

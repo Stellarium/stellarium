@@ -91,7 +91,7 @@ void Constellation::draw(Projector* prj)
 }
 
 // Same thing but for only one separate Constellation (can be used without the class Constellation_mgr )
-void Constellation::draw_alone(Projector* prj)
+void Constellation::draw_alone(Projector* prj) const
 {
 	glDisable(GL_TEXTURE_2D);
     glDisable(GL_BLEND);
@@ -117,7 +117,16 @@ void Constellation::draw_alone(Projector* prj)
 }
 
 // Draw the name
-void Constellation::draw_name(s_font * constfont)
+void Constellation::draw_name(s_font * constfont) const
 {
 	constfont->print((int)XYname[0]-40,(int)XYname[1], inter/*name*/); //"inter" for internationnal name
+}
+
+const Constellation* Constellation::is_star_in(const Hip_Star * s) const
+{
+    for(unsigned int i=0;i<nb_segments*2;++i)
+    {
+		if (asterism[i]==s) return this;
+    }
+	return NULL;
 }
