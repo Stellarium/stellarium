@@ -23,9 +23,9 @@ s_texture.h         s_texture.cpp \
 s_font.h            s_font.cpp \
 s_gui.h             s_gui.cpp \
 s_gui_window.h      s_gui_window.cpp \
-parsecfg.h intl.h   parsecfg.c \
+parsecfg.h          parsecfg.c \
 stellarium.h stella_types.h \
-vecmath.h bytes.h utility.h
+vecmath.h bytes.h
 
 stellarium_LDADD = $(top_builddir)/src/glpng/libglpng.a
 
