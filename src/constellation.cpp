@@ -52,7 +52,7 @@ int constellation::Read(FILE *  fic, Hip_Star_mgr * _VouteCeleste)
     for (unsigned int i=0;i<NbSegments*2;i++)
     {
         fscanf(fic,"%u",&HP);
-        Asterism[i]=_VouteCeleste->Rechercher(HP);
+        Asterism[i]=_VouteCeleste->search(HP);
 		if (!Asterism[i])
 		{
 			printf("Error in constellation %s asterism : can't find star HP=%d\n",Inter,HP);

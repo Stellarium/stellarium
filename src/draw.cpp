@@ -25,6 +25,10 @@
 #include "draw.h"
 #include "stellarium.h"
 #include "vislimit.h"
+#include "s_texture.h"
+#include "navigator.h"
+#include "solarsystem.h"
+#include "libnova.h"
 
 extern s_texture * texIds[200];            // Common Textures
 float DmeriParal[51][2];                   // For grids drawing optimisation
@@ -78,32 +82,31 @@ void InitAtmosphere(void)
 // Draw the realistic atmosphere
 void CalcAtmosphere(void)
 {   
-    vec3_t sunPos = SolarSystem->GetPos(0);
-    vec3_t lunaPos = SolarSystem->GetPos(10);
-    sunPos.Normalize();
-    lunaPos.Normalize();
+    Vec3d sunPos = navigation.helio_to_local(&(Sun->get_heliocentric_ecliptic_pos()));
+    Vec3d lunaPos = navigation.helio_to_local(&(Moon->get_heliocentric_ecliptic_pos()));
+    sunPos.normalize();
+    lunaPos.normalize();
     b.moon_elongation = PI;//acos(sunPos.Dot(lunaPos));
 
-    Equ_to_altAz(sunPos, global.RaZenith, global.DeZenith);
-    Equ_to_altAz(lunaPos, global.RaZenith, global.DeZenith);
+    Vec3d st = navigation.equ_to_local(&sunPos);
+    Vec3d mt = navigation.equ_to_local(&lunaPos);
 
-    b.zenith_ang_moon = PI/2-asin(lunaPos[1]);
-    b.zenith_ang_sun = PI/2-asin(sunPos[1]);
+    b.zenith_ang_moon = PI/2-asin(st[1]);
+    b.zenith_ang_sun = PI/2-asin(mt[1]);
 
-    b.ht_above_sea_in_meters = global.Altitude;
-    b.latitude = global.ThePlace.latitude();
+    b.ht_above_sea_in_meters = navigation.get_altitude();
+    b.latitude = navigation.get_latitude();
 
-    int d,m;
-    long y;
-    DateOps::dayToDmy((long)global.JDay,d,m,y);
-    b.year = y;
-    b.month = m;
+	ln_date d;
+	get_date(navigation.get_JDay(),&d);
+    b.year = d.years;
+    b.month = d.months;
 
     b.temperature_in_c = (PI/2-(float)fabs(b.latitude*100.)/100.)*20.+15.*cos(b.zenith_ang_sun)-0.01*b.ht_above_sea_in_meters;
     //printf("%f\n",b.temperature_in_c);
     b.relative_humidity = 30.;
 
-    Switch_to_altazimutal();
+    navigation.switch_to_local();
 
     b.mask = 14;                //31 for all 5 bands
     set_brightness_params( &b);
@@ -135,13 +138,13 @@ void CalcAtmosphere(void)
         for(int y=0; y<limY; y++)
         {   
             gluUnProject(x*stepX,resY-y*stepY,1,M,P,V,objx,objy,objz);
-            vec3_t point((float)*objx,(float)*objy,(float)*objz);
-            point.Normalize();
+            Vec3d point(*objx,*objy,*objz);
+            point.normalize();
             b.zenith_angle = PI/2-asin(point[1]);
-            b.dist_sun = acos(point.Dot(sunPos));
+            b.dist_sun = acos(point.dot(sunPos));
             if (b.dist_sun<0) b.dist_sun=-b.dist_sun;
             compute_sky_brightness( &b);
-            tabSky[x][y].Set(sqrt(b.brightness[3]),sqrt(b.brightness[2]*1.5),sqrt(b.brightness[1])*1.2);
+            tabSky[x][y].set(sqrt(b.brightness[3]),sqrt(b.brightness[2]*1.5),sqrt(b.brightness[1])*1.2);
             tabSky[x][y]*=330;
         }
     }
@@ -175,7 +178,7 @@ void DrawAtmosphere2(void)
 
 // Draw the cardinals points : N S E O and Z (Zenith) N (Nadir)
 void DrawCardinaux(void)
-{   float rayon=global.Fov/60;
+{   float rayon=navigation.get_fov()/60;
     glPushMatrix();
     glColor3f(0.8f, 0.1f, 0.1f);
     glEnable(GL_TEXTURE_2D);
@@ -365,7 +368,7 @@ void DrawEquator(void)
 
 // Draw the ecliptic line
 void DrawEcliptic(void)
-{       glPushMatrix();
+{       /*glPushMatrix();
         glDisable(GL_TEXTURE_2D);
         glDisable(GL_BLEND);
         float coef = (float)(1.0f * rand() / RAND_MAX);
@@ -379,7 +382,7 @@ void DrawEcliptic(void)
                         glVertex3f(DmeriParal[j+1][0]*20.0f, 0, DmeriParal[j+1][1]*20.0f);
                 glEnd();
         }
-        glPopMatrix();
+        glPopMatrix();*/
 }
 
 

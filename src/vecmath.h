@@ -36,7 +36,9 @@ public:
 	operator T*(void) {return &x;} // Warning unstable
 
     inline Vector3 operator*(T);
+	inline Vector3 operator/(T);
     inline T dot(const Vector3<T>&);
+    void set(T a,T b,T c) {x=a; y=b; z=c;}
 	inline Vector3& operator=(T*);
 
     inline T length() const;
@@ -79,7 +81,8 @@ public:
     inline Vector2(T, T);
     inline T& operator[](int) const;
     inline Vector2 operator+(const Vector2<T>&);
-
+    inline Vector2& operator+=(const Vector2<T>&);
+    inline Vector2& operator-=(const Vector2<T>&);
     T x, y;
 };
 
@@ -272,6 +275,11 @@ template<class T> Vector3<T> operator*(T s)
     return Vector3<T>(s * v.x, s * v.y, s * v.z);
 }
 
+template<class T> Vector3<T> Vector3<T>::operator/(T s)
+{
+    T is = (T)1 / s;
+    return Vector3<T>(is * x, is * y, is * z);
+}
 
 // dot product
 template<class T> T operator*(const Vector3<T>& a, const Vector3<T>& b)
@@ -279,7 +287,7 @@ template<class T> T operator*(const Vector3<T>& a, const Vector3<T>& b)
     return a.x * b.x + a.y * b.y + a.z * b.z;
 }
 
-template<class T> T operator*(const Vector3<T>& b)
+template<class T> T Vector3<T>::dot(const Vector3<T>& b)
 {
     return x * b.x + y * b.y + z * b.z;
 }
@@ -300,12 +308,6 @@ template<class T> bool operator==(const Vector3<T>& a, const Vector3<T>& b)
 template<class T> bool operator!=(const Vector3<T>& a, const Vector3<T>& b)
 {
     return a.x != b.x || a.y != b.y || a.z != b.z;
-}
-
-template<class T> Vector3<T> operator/(const Vector3<T>& v, T s)
-{
-    T is = 1 / s;
-    return Vector3<T>(is * v.x, is * v.y, is * v.z);
 }
 
 template<class T> T dot(const Vector3<T>& a, const Vector3<T>& b)
@@ -475,6 +477,17 @@ template<class T> T operator+(const Vector2<T>& b)
     return Vector2<T>(x+b.x, y+b.y);
 }
 
+template<class T> Vector2<T>& Vector2<T>::operator+=(const Vector2<T>& a)
+{
+    x += a.x; y += a.y;
+    return *this;
+}
+
+template<class T> Vector2<T>& Vector2<T>::operator-=(const Vector2<T>& a)
+{
+    x -= a.x; y -= a.y;
+    return *this;
+}
 //**** Point2 constructors
 
 template<class T> Point2<T>::Point2() : x(0), y(0)

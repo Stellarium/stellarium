@@ -22,6 +22,9 @@
 #include "navigator.h"
 #include "stel_utility.h"
 #include "s_texture.h"
+#include "solarsystem.h"
+#include "nebula_mgr.h"
+#include "hip_star_mgr.h"
 
 extern s_texture * texIds[200];            // Common Textures
 
@@ -121,6 +124,39 @@ void stel_object::draw_pointer(int delta_time)
     resetPerspectiveProjection();
 
 }
+
+/*****************************************************************************/
+// find and select the "nearest" object from earth equatorial position
+stel_object * find_stel_object(Vec3d v)
+{
+	stel_object * sobj = NULL;
+
+	//if (global.FlagPlanets)
+	//	sobj = Sun->search(v);
+
+	if (sobj) return sobj;
+
+	Vec3f u=Vec3f(v[0],v[1],v[2]);
+
+	sobj = messiers->search(u);
+	if (sobj) return sobj;
+
+	if (global.FlagStars)
+		sobj = HipVouteCeleste->search(u);
+
+	return sobj;
+}
+
+/*****************************************************************************/
+// find and select the "nearest" object from screen position
+stel_object * find_stel_object(int x, int y)
+{
+    navigation.switch_to_earth_equatorial();
+	Vec3d v = UnProject(x,y);
+
+	return find_stel_object(v);
+}
+
 
 /*
 char * stel_object::get_info_string(void)
