@@ -62,7 +62,7 @@ void stel_ui::draw_gravity_ui(void)
 		core->projection->print_gravity180(spaceFont, x-shift + 30, y-shift + 38, os.str(), 0);
 	}
 
-	if (core->selected_object && core->FlagShowTuiShortInfo)
+	if (core->selected_object && core->FlagShowTuiShortObjInfo)
 	{
 	    static char str[255];	// TODO use c++ string for get_short_info_string() func
 		core->selected_object->get_short_info_string(str, core->navigation);
