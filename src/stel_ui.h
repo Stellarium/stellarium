@@ -142,35 +142,15 @@ private:
 	s_tui::MultiSet_item<string>* tui_time_startuptime;
 	s_tui::MultiSet_item<string>* tui_time_displayformat;
 
-	// 3. Constellation
-	s_tui::MultiSet_item<string>* tui_constellation_culture;
-	s_tui::Boolean_item* tui_constellation_lines;
-	s_tui::Boolean_item* tui_constellation_art;
-
-	// 4. Stars
+	// 3. Stars
 	s_tui::Boolean_item* tui_stars_show;
 	s_tui::Decimal_item* tui_star_labelmaxmag;
 	s_tui::Boolean_item* tui_stars_twinkle;
 
-	// 5. Labels
-	s_tui::Boolean_item* tui_label_stars;
-	s_tui::Boolean_item* tui_label_constellations;
-	s_tui::Boolean_item* tui_label_nebulas;
-	s_tui::Boolean_item* tui_label_planets;
-	s_tui::Boolean_item* tui_label_timeinfo;
-
-	// 6. Reference points
-	s_tui::Boolean_item* tui_refpoints_cardinalpoints;
-	s_tui::Boolean_item* tui_refpoints_ecliptic;
-	s_tui::Boolean_item* tui_refpoints_equator;
-	s_tui::Boolean_item* tui_refpoints_equatorialgrid;
-	s_tui::Boolean_item* tui_refpoints_azimutalgrid;
-
-	// 7. Effect
+	// 4. Effect
 	s_tui::MultiSet_item<string>* tui_effect_landscape;
-	s_tui::Boolean_item* tui_effect_atmosphere;
 
-	// 8. Administration
+	// 5. Administration
 	s_tui::ActionConfirm_item* tui_admin_loaddefault;
 	s_tui::ActionConfirm_item* tui_admin_savedefault;
 	s_tui::MultiSet_item<string>* tui_admin_setlocal;
