@@ -23,7 +23,37 @@
 // Utilities
 
 #include <math.h>
+#include "stellarium.h"
 #include "vecmath.h"
+
+
+// Convenient class which groups commonly used variables and functions
+class draw_utility
+{
+public:
+	draw_utility();
+	virtual ~draw_utility();
+
+	double fov;
+	int screenW;
+	int screenH;
+	void set_params(double _fov, int _screenW, int _screenH);
+
+	// OpenGL projections and camera setting
+	void project(float objx_i,float objy_i,float objz_i,double & x ,double & y ,double & z);
+	Vec3d unproject(double x ,double y);
+
+	void set_orthographic_projection(void);
+	void reset_perspective_projection(void);
+
+private:
+	// Used to store openGL matrices and vectors
+	GLdouble M[16];
+    GLdouble P[16];
+    GLint V[4];
+};
+
+
 
 // Angles and coordinate conversions
 double hms_to_rad(unsigned int h, unsigned int m, double s);
@@ -38,16 +68,6 @@ void sphe_to_rect(double lng, double lat, double r, Vec3d *v);
 void sphe_to_rect(float lng, float lat, Vec3f *v);
 void rect_to_sphe(double *lng, double *lat, const Vec3d * v);
 void rect_to_sphe(float *lng, float *lat, const Vec3f * v);
-
-// OpenGL projections and camera setting
-void Project(float objx_i,float objy_i,float objz_i,double & x ,double & y);
-void Project(float objx_i,float objy_i,float objz_i,double & x ,double & y ,double & z);
-Vec3d UnProject(double x ,double y);
-
-void setOrthographicProjection(int w, int h);
-void resetPerspectiveProjection();
-
-
 
 /* Obtains Latitude, Longitude, RA or Declination from a string. */
 double get_dec_angle(char *s);

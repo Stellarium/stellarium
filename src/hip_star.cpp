@@ -131,16 +131,15 @@ int Hip_Star::Read(FILE * catalog)
 }
 
 
-void Hip_Star::Draw(void)
+void Hip_Star::Draw(draw_utility * du)
 {
     // Check if in the field of view, if not return
-    if ( XY[0]<0. || XY[1]<0. || XY[0]>global.X_Resolution ||
-			XY[1]>global.Y_Resolution )
-        return;
+    if ( XY[0]<0. || XY[1]<0. || XY[0]>du->screenW || XY[1]>du->screenH )
+		return;
 
     // Second part of the calculation of the demi-size of the star texture
 	// Empirical formula which looks good...
-    rmag = rmag_t/pow(navigation.get_fov(),0.85);
+    rmag = rmag_t/pow(du->fov,0.85);
 
     cmag = 1.;
     
@@ -161,19 +160,19 @@ void Hip_Star::Draw(void)
 	}
 
     // Random coef for star twinkling
-    coef=(float)rand()/RAND_MAX*global.StarTwinkleAmount/10.;
+    coef=rand()/RAND_MAX*twinkle_amount;
 
     // Calculation of the luminosity
     cmag*=(1.-coef);
-    rmag*=global.StarScale/3.;
+    rmag*=star_scale;
     glColor3fv(RGB*(cmag/MaxColorValue));
     glPushMatrix();
-    glTranslatef(XY[0],global.Y_Resolution-XY[1],0);
+    glTranslatef(XY[0],XY[1],0);
     glBegin(GL_QUADS );
-        glTexCoord2i(0,0);    glVertex3f(-rmag,-rmag,0.f);      //Bas Gauche
-        glTexCoord2i(1,0);    glVertex3f(rmag,-rmag,0.f);       //Bas Droite
-        glTexCoord2i(1,1);    glVertex3f(rmag,rmag,0.f);        //Haut Droit
-        glTexCoord2i(0,1);    glVertex3f(-rmag,rmag,0.f);       //Haut Gauche
+        glTexCoord2i(0,0);    glVertex2f(-rmag,-rmag);	// Bottom left
+        glTexCoord2i(1,0);    glVertex2f( rmag,-rmag);	// Bottom right
+        glTexCoord2i(1,1);    glVertex2f( rmag, rmag);	// Top right
+        glTexCoord2i(0,1);    glVertex2f(-rmag, rmag);	// Top left
     glEnd ();
     glPopMatrix();
 }
@@ -181,5 +180,5 @@ void Hip_Star::Draw(void)
 void Hip_Star::DrawName(void)
 {   
     glColor3fv(RGB*(1./2.5));
-	starFont->print(XY[0]+6,global.Y_Resolution-XY[1]+6, CommonName);
+	starFont->print(XY[0]+6,XY[1]+6, CommonName);
 }

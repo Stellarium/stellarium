@@ -35,8 +35,8 @@ public:
     int Read(FILE *, Hip_Star_mgr * _VouteCeleste);
     void Draw();
     void DrawSeule();
-    void DrawName();
-    void ComputeName();
+    void DrawName(void);
+    void ComputeName(draw_utility * du);
 private:
     char * Name;
     char Abreviation[4];

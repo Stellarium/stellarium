@@ -148,6 +148,9 @@ private:
 	Label * TimeZoneLabel;
 	Labeled_Button * SaveLocation;
 	ClickablePicture * EarthMap;
+
+	// CALLBACKS
+	void BtFlagsOnClicCallBack(guiValue button,Component * bt);
 };
 
 #endif  //_STEL_UI_H

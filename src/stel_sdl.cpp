@@ -54,14 +54,14 @@ void stel_sdl::init(void)
     Vflags = SDL_HWSURFACE|SDL_OPENGL;//|SDL_DOUBLEBUF;
 
 	// If fullscreen, set the Flag
-    if (core->global.Fullscreen) Vflags|=SDL_FULLSCREEN;
+    if (core->Fullscreen) Vflags|=SDL_FULLSCREEN;
 
 	// Create the SDL screen surface
-    Screen = SDL_SetVideoMode(core->global.screen_W, core->global.screen_H, core->global.bppMode, Vflags);
+    Screen = SDL_SetVideoMode(core->screen_W, core->screen_H, core->bppMode, Vflags);
 	if(!Screen)
 	{
 		printf("sdl: Couldn't set %dx%d video mode: %s!",
-		core->global.screen_W, core->global.screen_H, SDL_GetError());
+		core->screen_W, core->screen_H, SDL_GetError());
 		exit(-1);
 	}
 
@@ -73,7 +73,7 @@ void stel_sdl::init(void)
 
 	// Set the window icon
 	char tmp[255];
-    strcpy(tmp,core->global.DataDir);
+    strcpy(tmp,core->DataDir);
     strcat(tmp,"icon.bmp");
 	SDL_WM_SetIcon(SDL_LoadBMP(tmp), NULL);
 
@@ -177,17 +177,17 @@ void TerminateApplication(void)
 
 void stel_sdl::resize_GL(int w, int h)
 {
-    if (!h || !w || (w==core->global.screen_W && h==core->global.screen_H)) return;
-    core->global.screen_W = w;
-    core->global.screen_H = h;
+    if (!h || !w || (w==core->screen_W && h==core->screen_H)) return;
+    core->screen_W = w;
+    core->screen_H = h;
 
 	// TODO : check is that is usefull (maybe just to change a few variables)
 	delete core->ui;
 	core->ui = new stel_ui(core);
 
 	// TODO : might be useless
-	glViewport(0, 0, core->global.screen_W, core->global.screen_H);
-	core->navigation->init_project_matrix(core->global.screen_W, core->global.screen_H,1,10000);
+	glViewport(0, 0, core->screen_W, core->screen_H);
+	core->navigation->init_project_matrix(core->screen_W, core->screen_H,1,10000);
 }
 
 

@@ -21,6 +21,72 @@
 #include "stel_utility.h"
 #include "stellarium.h"
 
+
+draw_utility::draw_utility() : fov(0.), screenW(0), screenH(0)
+{
+}
+
+draw_utility::~draw_utility()
+{
+}
+
+void draw_utility::set_params(double _fov, int _screenW, int _screenH)
+{
+	fov=_fov;
+	screenW=_screenW;
+	screenH=_screenH;
+}
+
+// Calc the x,y coord on the screen with the X,Y and Z pos
+void draw_utility::project(float objx, float objy, float objz, double &x, double &y, double &z)
+{
+    glGetDoublev(GL_MODELVIEW_MATRIX,M);
+    glGetDoublev(GL_PROJECTION_MATRIX,P);
+    glGetIntegerv(GL_VIEWPORT,V);
+    gluProject(objx,objy,objz,M,P,V,&x,&y,&z);
+}
+
+// Convert x,y screen pos into 3D vector
+Vec3d draw_utility::unproject(double x ,double y)
+{
+    GLdouble objx[1];
+    GLdouble objy[1];
+    GLdouble objz[1];
+
+    glGetDoublev(GL_MODELVIEW_MATRIX,M);
+    glGetDoublev(GL_PROJECTION_MATRIX,P);
+    glGetIntegerv(GL_VIEWPORT,V);
+
+	gluUnProject(x,y,1.,M,P,V,objx,objy,objz);
+	return Vec3d(objx[0],objy[0],objz[0]);
+}
+
+// Set the drawing mode in 2D. Use reset_perspective_projection() to reset
+// previous projection mode
+void draw_utility::set_orthographic_projection(void)
+{
+	glMatrixMode(GL_PROJECTION);	// switch to projection mode
+    glPushMatrix();					// save previous matrix
+    glLoadIdentity();
+    gluOrtho2D(0, screenW, 0, screenH);	// set a 2D orthographic projection
+    //glScalef(1, -1, 1);			// invert the y axis, down is positive
+    //glTranslatef(0, -h, 0);		// move the origin from the bottom left corner to the upper left corner
+
+	glMatrixMode(GL_MODELVIEW);		// Init the modeling matrice
+    glPushMatrix();
+    glLoadIdentity();
+}
+
+// Reset the previous projection mode after a call to set_orthographic_projection()
+void draw_utility::reset_perspective_projection(void)
+{
+    glMatrixMode(GL_PROJECTION);
+    glPopMatrix();
+    glMatrixMode(GL_MODELVIEW);
+    glPopMatrix();
+}
+
+
 double hms_to_rad(unsigned int h, unsigned int m, double s)
 {
 	return (double)M_PI/24.*h*2.+(double)M_PI/12.*m/60.+s*M_PI/43200.;
@@ -75,76 +141,6 @@ void rect_to_sphe(float *lng, float *lat, const Vec3f *v)
     *lat = asin((*v)[2]/r);
     *lng = atan2((*v)[1],(*v)[0]);
 }
-
-
-// Calc the x,y coord on the screen with the X,Y and Z pos
-void Project(float objx,float objy,float objz,double & x ,double & y)
-{
-	double z;
-    GLdouble M[16];
-    GLdouble P[16];
-    GLint V[4];
-    glGetDoublev(GL_MODELVIEW_MATRIX,M);
-    glGetDoublev(GL_PROJECTION_MATRIX,P);
-    glGetIntegerv(GL_VIEWPORT,V);
-    gluProject(objx,objy,objz,M,P,V,&x,&y,&z);
-}
-
-// Calc the x,y coord on the screen with the X,Y and Z pos
-void Project(float objx,float objy,float objz,double & x ,double & y, double & z)
-{
-    GLdouble M[16];
-    GLdouble P[16];
-    GLint V[4];
-    glGetDoublev(GL_MODELVIEW_MATRIX,M);
-    glGetDoublev(GL_PROJECTION_MATRIX,P);
-    glGetIntegerv(GL_VIEWPORT,V);
-    gluProject(objx,objy,objz,M,P,V,&x,&y,&z);
-}
-
-
-// For text printing
-void setOrthographicProjection(int w, int h)
-{
-	glMatrixMode(GL_PROJECTION);    // switch to projection mode
-    glPushMatrix();                 // save previous matrix which contains the settings for the perspective projection
-    glLoadIdentity();               // reset matrix
-    gluOrtho2D(0, w, 0, h);         // set a 2D orthographic projection
-    glScalef(1, -1, 1);             // invert the y axis, down is positive
-    glTranslatef(0, -h, 0);         // mover the origin from the bottom left corner to the upper left corner
-    glMatrixMode(GL_MODELVIEW);
-    glPushMatrix(); 
-    glLoadIdentity();
-}
-
-void resetPerspectiveProjection() 
-{   
-    glMatrixMode(GL_PROJECTION);    // set the current matrix to GL_PROJECTION
-    glPopMatrix();                  // restore previous settings
-    glMatrixMode(GL_MODELVIEW);     // get back to GL_MODELVIEW matrix
-    glPopMatrix(); 
-}
-
-
-// Convert x,y screen pos in 3D vector
-Vec3d UnProject(double x ,double y)
-{
-	GLdouble M[16];
-    GLdouble P[16];
-    GLdouble objx[1];
-    GLdouble objy[1];
-    GLdouble objz[1];
-    GLint V[4];
-
-    glGetDoublev(GL_MODELVIEW_MATRIX,M);
-    glGetDoublev(GL_PROJECTION_MATRIX,P);
-    glGetIntegerv(GL_VIEWPORT,V);
-
-	gluUnProject(x,(double)global.Y_Resolution-y,1.,M,P,V,objx,objy,objz);
-	return Vec3d(objx[0],objy[0],objz[0]);
-}
-
-
 
 
 /* local types and macros */
@@ -211,7 +207,7 @@ static void skipwhite(char **s)
 *  - 42.30.35.53                                                           
 *   42:30:35.53 S                                                          
 *  + 42.30.35.53                                                           
-*  +42º30 35,53                                                            
+*  +42º30 35,53
 *   23h36'45,0                                                             
 *                                                                          
 *                                                                          

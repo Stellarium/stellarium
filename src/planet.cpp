@@ -161,26 +161,25 @@ void planet::addSatellite(planet*p)
 }
 
 // Draw the planet and all the related infos : name, circle etc..
-void planet::draw(void)
+void planet::draw(int hint_ON, draw_utility * du)
 {
 	glPushMatrix();
     glMultMatrixd(mat_local_to_parent); // Go in planet local coordinate
 
 	double screenX, screenY, screenZ;
-	Project(0., 0., 0., screenX, screenY, screenZ);
-	screenY = global.Y_Resolution - screenY;
+	du->project(0., 0., 0., screenX, screenY, screenZ);
 
 	// Check if in the screen
 	Vec3d equPos = get_earth_equ_pos();
 	float angl = radius/equPos.length();
 	float lim = atan(angl)*180./M_PI/navigation.get_fov();
-	if (screenZ < 1 && screenX>(-lim*global.X_Resolution) &&
-		screenX<(global.X_Resolution+lim*global.X_Resolution) &&
-		screenY>(-lim*global.Y_Resolution) && screenY<(global.Y_Resolution+lim*global.Y_Resolution))
+	if (screenZ < 1 && screenX>(-lim*du->screenW) &&
+		screenX<((1.f+lim)*du->screenW) &&
+		screenY>(-lim*du->screenH) && screenY<((1.f+lim)*du->screenH))
 	{
 		if (haloTexture)
 		{
-			float rmag = lim*global.Y_Resolution*100;
+			float rmag = lim*du->screenH*100;
 			if (rmag>0.5)
 			{
 				float cmag=1.;
@@ -197,7 +196,7 @@ void planet::draw(void)
 					}
 				}
 
-				setOrthographicProjection(global.X_Resolution, global.Y_Resolution);    // 2D coordinate
+				du->set_orthographic_projection();    // 2D coordinate
 				glBindTexture(GL_TEXTURE_2D, haloTexture->getID());
             	glEnable(GL_BLEND);
             	glDisable(GL_LIGHTING);
@@ -210,21 +209,20 @@ void planet::draw(void)
 					glTexCoord2i(1,1);	glVertex3f( rmag,-rmag,0.f);	// Top Right
 					glTexCoord2i(0,1);	glVertex3f(-rmag,-rmag,0.f);	// Top Left
 				glEnd();
-				resetPerspectiveProjection();                           // Restore the other coordinate
+				du->reset_perspective_projection();		// Restore the other coordinate
 			}
 		}
 
-		// Draw the name, and the circle if it's not too close from the body it turning around
-		// ti prevent name overlaping (ie for jupiter satellites)
-    	if (global.FlagPlanetsHintDrawing &&
-			atan(get_ecliptic_pos().length()/equPos.length())/navigation.get_fov()>0.0005)
+		// Draw the name, and the circle if it's not too close from the body it's turning around
+		// this prevents name overlaping (ie for jupiter satellites)
+    	if (hint_ON && atan(get_ecliptic_pos().length()/equPos.length())/du->fov>0.0005)
     	{
-            setOrthographicProjection(global.X_Resolution, global.Y_Resolution);    // 2D coordinate
+            du->set_orthographic_projection();    // 2D coordinate
             glEnable(GL_BLEND);
             glDisable(GL_LIGHTING);
 			glEnable(GL_TEXTURE_2D);
             glColor3f(0.5,0.5,0.7);
-            float tmp = 8.f + angl*global.Y_Resolution*60./navigation.get_fov(); // Shift for name printing
+            float tmp = 8.f + angl*du->screenH*60./du->fov; // Shift for name printing
             planet_name_font->print(screenX+tmp,screenY+tmp, name);
 
             // Draw the 2D small circle : disapears smoothly on close view
@@ -238,7 +236,7 @@ void planet::draw(void)
                 glVertex3f(screenX + 8. * sin(r), screenY + 8. * cos(r), 0.0f);
             }
             glEnd();
-            resetPerspectiveProjection();                           // Restore the other coordinate
+            du->reset_perspective_projection();		// Restore the other coordinate
         }
 
     	glEnable(GL_TEXTURE_2D);
@@ -268,7 +266,7 @@ void planet::draw(void)
     list<planet*>::iterator iter = satellites.begin();
     while (iter != satellites.end())
     {
-        (*iter)->draw();
+        (*iter)->draw(hint_ON, du);
         iter++;
     }
 
@@ -356,7 +354,7 @@ void sun_planet::compute_trans_matrix(double date)
     }
 }
 
-void sun_planet::draw()
+void sun_planet::draw(int hint_ON, draw_utility * du)
 {
 	// We are supposed to be in heliocentric coordinate already so no matrix change
 	//glEnable(GL_DEPTH_TEST);
@@ -377,17 +375,16 @@ void sun_planet::draw()
 
 	// Draw the name, and the circle
     // Thanks to Nick Porcino for this addition
-    if (global.FlagPlanetsHintDrawing)
+    if (hint_ON)
     {
         double screenX, screenY, screenZ;
-        Project(0., 0., 0., screenX, screenY, screenZ);
+        du->project(0., 0., 0., screenX, screenY, screenZ);
 
         if (screenZ < 1)
         {
 		    glEnable(GL_BLEND);
-            screenY = global.Y_Resolution - screenY;
 
-            setOrthographicProjection(global.X_Resolution, global.Y_Resolution);    // 2D coordinate
+            du->set_orthographic_projection();		// 2D coordinate
 
             glColor3f(0.5,0.5,0.7);
             planet_name_font->print(screenX+5.,screenY+5., name);
@@ -400,7 +397,7 @@ void sun_planet::draw()
                 	glVertex3f(screenX + 8. * sin(r), screenY + 8. * cos(r), 0);
             	}
             glEnd();
-            resetPerspectiveProjection();                           // Restore the other coordinate
+            du->reset_perspective_projection();		// Restore the other coordinate
         }
     }
 
@@ -430,7 +427,7 @@ void sun_planet::draw()
     list<planet*>::iterator iter = satellites.begin();
     while (iter != satellites.end())
     {
-        (*iter)->draw();
+        (*iter)->draw(hint_ON, du);
         iter++;
     }
 
@@ -445,9 +442,9 @@ ring_planet::ring_planet(char * _name, int _flagHalo, double _radius, vec3_t _co
 {
 }
 
-void ring_planet::draw()
+void ring_planet::draw(int hint_ON, draw_utility * du)
 {
-	planet::draw();
+	planet::draw(hint_ON, du);
 
 	glPushMatrix();
     glMultMatrixd(mat_local_to_parent); // Go in planet local coordinate

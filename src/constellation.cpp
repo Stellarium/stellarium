@@ -98,7 +98,8 @@ void constellation::DrawSeule()
     glColor3f(0.2,0.2,0.2);
     glPushMatrix();
     for(unsigned int i=0;i<NbSegments;i++)
-    {   glBegin (GL_LINES);
+    {
+		glBegin (GL_LINES);
                 glVertex3f((*Asterism[2*i]).XYZ[0],(*Asterism[2*i]).XYZ[1],(*Asterism[2*i]).XYZ[2]);
                 glVertex3f((*Asterism[2*i+1]).XYZ[0],(*Asterism[2*i+1]).XYZ[1],(*Asterism[2*i+1]).XYZ[2]);
         glEnd ();
@@ -107,24 +108,21 @@ void constellation::DrawSeule()
 }
 
 // Chek if the constellation is in the field of view and calc the x,y position if true
-void constellation::ComputeName()
+void constellation::ComputeName(draw_utility * du)
 {
-	if (acos((navigation.get_equ_vision()[0]*Xnom+navigation.get_equ_vision()[1]*Ynom +
-		navigation.get_equ_vision()[2]*Znom)/RADIUS_CONST)>((float)navigation.get_fov()+4)*M_PI*1.333333/360)
-    {
-		inFov=false;
-        return; // Si hors du champ
-    }
-    inFov=true;
-    Project(Xnom,Ynom,Znom,x_c ,y_c);
-    return;
+	double z_c;
+    du->project(Xnom, Ynom, Znom, x_c, y_c, z_c);
+    // Check if in the field of view
+    if ( z_c > 1 || x_c<0. || y_c<0. || x_c>du->screenW || y_c>du->screenH ) inFov = 0;
+	else inFov = 1;
+
 }
 
 // Draw the name
-void constellation::DrawName()
-{   
+void constellation::DrawName(void)
+{
 	if (inFov)
     {   
-		constNameFont->print((int)x_c-40,(int)(global.Y_Resolution-y_c), Inter/*Name*/); //"Inter" for internationnal name
+		constNameFont->print((int)x_c-40,(int)y_c, Inter/*Name*/); //"Inter" for internationnal name
     }
 }

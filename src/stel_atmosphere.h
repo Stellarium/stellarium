@@ -37,8 +37,8 @@ class stel_atmosphere
 public:
     stel_atmosphere();
     virtual ~stel_atmosphere();
-	void compute_color(navigator *, tone_reproductor *);
-	void draw();
+	void compute_color(int ground_ON, Vec3d sunPos, tone_reproductor * eye, draw_utility * du);
+	void draw(draw_utility * du);
 private:
 	skylight sky;
 	int sky_resolution;

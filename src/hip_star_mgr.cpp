@@ -54,7 +54,7 @@ Hip_Star_mgr::~Hip_Star_mgr()
 }
 
 // Load from file ( create the stream and call the Read function )
-void Hip_Star_mgr::Load(char * hipCatFile, char * commonNameFile, char * nameFile)
+void Hip_Star_mgr::Load(char * font_fileName, char * hipCatFile, char * commonNameFile, char * nameFile)
 {   
     printf("Loading Hipparcos star data...\n");
     FILE * hipFile, *cnFile, * nFile;
@@ -133,11 +133,8 @@ void Hip_Star_mgr::Load(char * hipCatFile, char * commonNameFile, char * nameFil
     fclose(hipFile);
 
     hipStarTexture=new s_texture("star16x16");  // Load star texture
-    
-    char tempName[255];
-    strcpy(tempName,global.DataDir);
-    strcat(tempName,"spacefont.txt");
-    starFont=new s_font(0.012*global.X_Resolution,"spacefont", tempName); // load Font
+
+    starFont=new s_font(10.f,"spacefont", font_fileName); // load Font
     if (!starFont)
     {
 	    printf("Can't create starFont\n");
@@ -148,9 +145,12 @@ void Hip_Star_mgr::Load(char * hipCatFile, char * commonNameFile, char * nameFil
 
 
 // Draw all the stars
-void Hip_Star_mgr::Draw(void)
-{   	
-    glEnable(GL_TEXTURE_2D);
+void Hip_Star_mgr::Draw(float star_scale, float twinkle_amount, int name_ON, int maxMagStarName, draw_utility * du)
+{
+	Hip_Star::twinkle_amount = twinkle_amount;
+	Hip_Star::star_scale = star_scale;
+
+	glEnable(GL_TEXTURE_2D);
     glEnable(GL_BLEND);
     glBindTexture (GL_TEXTURE_2D, hipStarTexture->getID());
 
@@ -162,9 +162,7 @@ void Hip_Star_mgr::Draw(void)
     glGetDoublev(GL_PROJECTION_MATRIX,P);
     glGetIntegerv(GL_VIEWPORT,V);
 
-    setOrthographicProjection(global.X_Resolution, global.Y_Resolution);
-    glPushMatrix();
-    glLoadIdentity();
+    du->set_orthographic_projection();	// set 2D coordinate
 
     pair<multimap<int,Hip_Star *>::iterator, multimap<int,Hip_Star *>::iterator> p;
 
@@ -176,7 +174,7 @@ void Hip_Star_mgr::Draw(void)
 	Vec3d tempv = navigation.get_equ_vision();
 	vec3_t temp(tempv[0],tempv[1],tempv[2]);
 
-	nbZones = HipGrid.Intersect(temp, navigation.get_fov()*M_PI/180.*1.4, zoneList);
+	nbZones = HipGrid.Intersect(temp, du->fov*M_PI/180.*1.4, zoneList);
 
 	//printf("nbzones = %d\n",nbZones );
 
@@ -187,7 +185,7 @@ void Hip_Star_mgr::Draw(void)
     	for(multimap<int,Hip_Star *>::iterator iter = p.first; iter != p.second; iter++)
     	{
 			// If too small, skip
-			if ((*iter).second->Mag>6+60./navigation.get_fov()) continue;
+			if ((*iter).second->Mag>6+60./du->fov) continue;
 
 			// Compute the 2D position
 	    	gluProject( ((*iter).second)->XYZ[0],((*iter).second)->XYZ[1],
@@ -195,9 +193,9 @@ void Hip_Star_mgr::Draw(void)
 	        	&(((*iter).second)->XY[1]),&z);
         	if (z<1) 
         	{
-		        ((*iter).second)->Draw();
-		        if (((*iter).second)->CommonName && global.FlagStarName &&
-					 ((*iter).second)->Mag<global.MaxMagStarName)
+		        ((*iter).second)->Draw(du);
+		        if (((*iter).second)->CommonName && name_ON &&
+					 ((*iter).second)->Mag<maxMagStarName)
             	{   
 		        	((*iter).second)->DrawName();
                 	glBindTexture (GL_TEXTURE_2D, hipStarTexture->getID());
@@ -206,8 +204,7 @@ void Hip_Star_mgr::Draw(void)
 	    }
 	}
 
-    glPopMatrix();
-    resetPerspectiveProjection();
+    du->reset_perspective_projection();
 }
 
 // Look for a star by XYZ coords

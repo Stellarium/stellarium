@@ -34,7 +34,7 @@ public:
     Hip_Star();
     virtual ~Hip_Star();
     int Read(FILE * pFile);	// Read the star data in the stream
-    void Draw(void);		// Draw the star
+    void Draw(draw_utility * du);		// Draw the star
     void DrawName(void);
 	vec3_t get_RGB(void) {return RGB;}
 	void get_info_string(char * s);
@@ -55,6 +55,9 @@ private:
     unsigned short int typep; //temp
     unsigned short int magp;  //temp
     float r,d;
+
+	static float twinkle_amount;
+	static float star_scale;
 };
 
 #endif // _STAR_H_

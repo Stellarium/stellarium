@@ -24,20 +24,6 @@
 
 using namespace std;
 
-/*#include "draw.h"
-#include "constellation.h"
-
-#include "nebula.h"
-
-#include "s_texture.h"
-#include "stellarium_ui.h"
-#include "s_gui.h"
-
-#include "shooting.h"
-#include "stel_config.h"
-#include "solarsystem.h"
-*/
-
 #include "navigator.h"
 #include "stel_object.h"
 #include "hip_star_mgr.h"
@@ -46,27 +32,8 @@ using namespace std;
 #include "stel_atmosphere.h"
 #include "tone_reproductor.h"
 #include "stel_ui.h"
-
 #include "solarsystem.h"
-
-// Globals
-class core_globals {
-public:
-	// Set the default global options
-	core_globals();
-
-	virtual ~core_globals();
-
-	int screen_W;
-	int screen_H;
-	int bppMode;
-	int Fullscreen;
-
-    //Files location
-    char TextureDir[255];
-    char ConfigDir[255];
-    char DataDir[255];
-};
+#include "stel_utility.h"
 
 
 class stel_core
@@ -88,8 +55,11 @@ public:
 	void update(int delta_time);		// Update all the objects in function of the time
 	void draw(int delta_time);			// Execute all the drawing functions
 
-	core_globals global;				// Public variables
+	// find and select the "nearest" object and retrieve his informations
+	stel_object * find_stel_object(int x, int y);
+	stel_object * find_stel_object(Vec3d);
 
+	//double get_fov() {return navigation->get_fov();}
 private:
 	// Read the configuration file
 	void loadConfig(char * configFile, char * locationFile);
@@ -98,8 +68,20 @@ private:
 	// Dump the location file
 	void dumpLocation(void);
 
+	// Big options
+	int screen_W;
+	int screen_H;
+	int bppMode;
+	int Fullscreen;
+
+    //Files location
+    char TextureDir[255];
+    char ConfigDir[255];
+    char DataDir[255];
+
 	int initialized;					// If the core has been initialized or not
 
+	// Main elements of the program
 	navigator * navigation;				// Manage all navigation parameters, coordinate transformations etc..
 	stel_object * selected_object;		// The selected object in stellarium
 	Hip_Star_mgr * hip_stars;			// Manage the hipparcos stars
@@ -108,6 +90,8 @@ private:
 	stel_atmosphere * atmosphere;		// Atmosphere
 	tone_reproductor * tone_converter;	// Tones conversion between stellarium world and display device
 	stel_ui * ui;						// The main User Interface
+	draw_utility * du;					// A usefull small class used to pass parameters and handy functions
+										// to various drawing functions
 
     int LandscapeNumber;				// landscape "skin" number
 
@@ -118,6 +102,10 @@ private:
 	vec3_t GuiBaseColor;
 	vec3_t GuiTextColor;
 
+	int MaxMagStarName;
+	float StarScale;
+	float StarTwinkleAmount;
+
     // Flags
     int FlagUTC_Time;
     int FlagFps;
@@ -127,7 +115,7 @@ private:
     int FlagPlanetsHintDrawing;
     int FlagNebula;
     int FlagNebulaName;
-    int FlagNebulaCircle;
+    int FlagNebulaCircle; // TODO is this useless?
     int FlagGround;
     int FlagHorizon;
     int FlagFog;

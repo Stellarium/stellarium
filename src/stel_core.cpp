@@ -21,21 +21,12 @@
 
 #include "stel_core.h"
 
-// Set the default global options
-core_globals::core_globals() : screen_W(800), screen_H(600), bppMode(16), Fullscreen(0)
+stel_core::stel_core() : screen_W(800), screen_H(600), bppMode(16), Fullscreen(0), initialized(0), navigation(NULL), selected_object(NULL), hip_stars(NULL), asterisms(NULL),
+nebulas(NULL), atmosphere(NULL), tone_converter(NULL)
 {
 	TextureDir[0] = 0;
     ConfigDir[0] = 0;
     DataDir[0] = 0;
-}
-
-core_globals::~core_globals()
-{
-}
-
-stel_core::stel_core() : initialized(0), navigation(NULL), selected_object(NULL), hip_stars(NULL), asterisms(NULL),
-nebulas(NULL), atmosphere(NULL), tone_converter(NULL)
-{
 }
 
 stel_core::~stel_core()
@@ -71,16 +62,25 @@ void stel_core::update(int delta_time)
 	navigation->update_transform_matrices();			// Transform matrices between coordinates systems
 	navigation->update_vision_vector(delta_time);		// Direction of vision
 
-	// Compute the atmosphere color
-	if (FlagAtmosphere) atmosphere->compute_color(navigation, tone_converter);
+	// Set the common variables used by the draw functions
+	du->set_params(navigation->get_fov(), screen_W, screen_H);
 
 	// Update info about selected object
 	if (selected_object) selected_object->update();
 
-    // compute global sky brightness TODO : function to include in skylight.cpp correctly made
+	// Compute the sun position in local coordinate
 	Vec3d temp(0.,0.,0.);
 	Vec3d sunPos = navigation->helio_to_local(&temp);
 	sunPos.normalize();
+
+	// Compute the atmosphere color
+	if (FlagAtmosphere)
+	{
+		navigation->switch_to_local();
+		atmosphere->compute_color(FlagGround, sunPos, tone_converter, du);
+	}
+
+	// compute global sky brightness TODO : function to include in skylight.cpp correctly made
 	sky_brightness=asin(sunPos[2])+0.1;
 	if (sky_brightness<0) sky_brightness=0;
 }
@@ -89,7 +89,7 @@ void stel_core::update(int delta_time)
 void stel_core::draw(int delta_time)
 {
 	// Init openGL viewing with fov, screen size and clip planes
-	navigation->init_project_matrix(global.screen_W,global.screen_H,0.00001 ,40 );
+	navigation->init_project_matrix(screen_W,screen_H,0.00001 ,40 );
 
     // Set openGL drawings in equatorial coordinates
     navigation->switch_to_earth_equatorial();
@@ -102,16 +102,16 @@ void stel_core::draw(int delta_time)
 	glClear(GL_DEPTH_BUFFER_BIT);
 
 	// Draw the nebula if they are visible
-	if (FlagNebula && (!FlagAtmosphere || sky_brightness<0.1)) nebulas->Draw();
+	if (FlagNebula && (!FlagAtmosphere || sky_brightness<0.1)) nebulas->Draw(FlagNebulaName, du);
 
 	// Draw all the constellations
-	if (FlagConstellationDrawing) ConstellCeleste->Draw();
+	if (FlagConstellationDrawing) asterisms->Draw();
 
 	// Draw the hipparcos stars
-	if (FlagStars && (!FlagAtmosphere || sky_brightness<0.2)) hip_stars->Draw();
+	if (FlagStars && (!FlagAtmosphere || sky_brightness<0.2)) hip_stars->Draw(StarScale, StarTwinkleAmount, FlagStarName, MaxMagStarName, du);
 
 	// Draw the atmosphere
-	if (FlagAtmosphere)	atmosphere->draw();
+	if (FlagAtmosphere)	atmosphere->draw(du);
 
 	// Draw the equatorial grid
 	// TODO : make a nice class for grid wit parameters like numbering and custom color/frequency
@@ -126,17 +126,17 @@ void stel_core::draw(int delta_time)
     if (FlagEcliptic) DrawEcliptic();	// Draw the ecliptic line
 
 	// Draw the constellations's names
-    if (FlagConstellationName) asterisms->DrawName();
+    if (FlagConstellationName) asterisms->DrawName(du);
 
 	// Draw the pointer on the currently selected object
-    if (selected_object) selected_object->draw_pointer(delta_time);
+    if (selected_object) selected_object->draw_pointer(delta_time, du);
 
 	// Set openGL drawings in heliocentric coordinates
 	navigation->switch_to_heliocentric();
 
 	// Draw the planets
 	// TODO : manage FlagPlanetsHintDrawing
-	if (FlagPlanets) Sun->draw();
+	if (FlagPlanets) Sun->draw(FlagPlanetsHintDrawing, du);
 
 	// Set openGL drawings in local coordinates i.e. generally altazimuthal coordinates
 	navigation->switch_to_local();
@@ -179,28 +179,37 @@ void stel_core::init(void)
     char tempName[255];
     char tempName2[255];
     char tempName3[255];
+    char tempName4[255];
 
     // Load hipparcos stars & names
-    strcpy(tempName,global.DataDir);
+    strcpy(tempName,DataDir);
     strcat(tempName,"hipparcos.fab");
-    strcpy(tempName2,global.DataDir);
+    strcpy(tempName2,DataDir);
     strcat(tempName2,"commonname.fab");
-    strcpy(tempName3,global.DataDir);
+    strcpy(tempName3,DataDir);
     strcat(tempName3,"name.fab");
-    hip_stars->Load(tempName,tempName2,tempName3);
+    strcpy(tempName4,DataDir);
+    strcat(tempName4,"spacefont.txt");
+    hip_stars->Load(tempName4, tempName,tempName2,tempName3);
 
 	// Load constellations
-    strcpy(tempName,global.DataDir);
+    strcpy(tempName,DataDir);
     strcat(tempName,"constellationship.fab");
-    asterisms->Load(tempName,HipVouteCeleste);
+    strcpy(tempName2,DataDir);
+    strcat(tempName2,"spacefont.txt");
+    asterisms->Load(tempName2,tempName,hip_stars);
 
 	// Load the nebulas data TODO : add NGC objects
-    strcpy(tempName,global.DataDir);
+    strcpy(tempName,DataDir);
     strcat(tempName,"messier.fab");
-    nebulas->Read(tempName);
+    strcpy(tempName2,DataDir);
+    strcat(tempName2,"spacefont.txt");
+    nebulas->Read(tempName2, tempName);
 
 	// Create and init the solar system TODO : use a class
-	InitSolarSystem();
+    strcpy(tempName,DataDir);
+    strcat(tempName,"spacefont.txt");
+	InitSolarSystem(tempName);
 
 	// Load the common used textures TODO : will be removed
     load_base_textures();
@@ -227,9 +236,9 @@ void stel_core::load_config()
     char tempName[255];
     char tempName2[255];
 
-    strcpy(tempName,global.ConfigDir);
+    strcpy(tempName,ConfigDir);
     strcat(tempName,"config.txt");
-    strcpy(tempName2,global.ConfigDir);
+    strcpy(tempName2,ConfigDir);
     strcat(tempName2,"location.txt");
 
     printf("Loading configuration file... (%s)\n",tempName);
@@ -300,3 +309,32 @@ void stel_core::load_base_textures(void)
 
 
 
+// find and select the "nearest" object from earth equatorial position
+stel_object * stel_core::find_stel_object(Vec3d v)
+{
+	stel_object * sobj = NULL;
+
+	if (FlagPlanets) sobj = Sun->search(v);
+	if (sobj) return sobj;
+
+	Vec3f u=Vec3f(v[0],v[1],v[2]);
+
+	sobj = nebulas->search(u);
+	if (sobj) return sobj;
+
+	if (FlagStars) sobj = hip_stars->search(u);
+
+	return sobj;
+}
+
+
+// find and select the "nearest" object from screen position
+stel_object * stel_core::find_stel_object(int x, int y)
+{
+    glPushMatrix();
+    navigation->switch_to_earth_equatorial();
+	Vec3d v = du->unproject((double)x,(double)y);
+    glPopMatrix();
+
+	return find_stel_object(v);
+}

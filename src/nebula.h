@@ -35,7 +35,7 @@ public:
     int Read(FILE *);       // Read the Nebulae data in the stream
     void Draw();            // Draw the nebulae
     void DrawName();
-    void DrawCircle();
+    void DrawCircle(draw_utility * du);
     int ReadTexture();
 	unsigned char get_type(void) {return STEL_OBJECT_NEBULA;}
 	Vec3d get_earth_equ_pos(void) {return Vec3d(XYZ[0],XYZ[1],XYZ[2]);}
