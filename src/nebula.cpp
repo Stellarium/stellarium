@@ -56,7 +56,15 @@ void Nebula::get_info_string(char * s, const navigator*) const
 
 void Nebula::get_short_info_string(char * s, const navigator*) const
 {
-	sprintf(s,"%s: mag %.1f", name, mag);
+	if( mag == 99 )
+	{
+		// we don't know actual magnitude for some reason, so don't label
+		sprintf(s,"%s", name, mag);
+	}
+	else
+	{
+		sprintf(s,"%s: mag %.1f", name, mag);
+	}
 }
 
 double Nebula::get_close_fov(const navigator*) const

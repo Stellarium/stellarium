@@ -56,6 +56,9 @@ public:
 	planet* get_earth(void) {return earth;}
 	planet* get_moon(void) {return moon;}
 
+	// Set the font color
+	void set_planet_font_color(const Vec3f& c);
+
 private:
 	planet* sun;
 	planet* moon;

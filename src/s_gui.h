@@ -123,6 +123,10 @@ namespace s_gui
 		virtual int getPosy() const {return pos[1];}
         virtual int getSizex() const {return size[0];}
 		virtual int getSizey() const {return size[1];}
+        virtual void setSizex(int v) {size[0] = v;}
+		virtual void setSizey(int v) {size[1] = v;}
+        virtual void setPosx(int v) {pos[0] = v;}
+		virtual void setPosy(int v) {pos[1] = v;}
         virtual const s_vec2i getPos() const {return pos;}
         virtual const s_vec2i getSize() const {return size;}
         virtual void setPos(const s_vec2i& _pos) {pos = _pos;}
@@ -452,38 +456,41 @@ namespace s_gui
 	};
 
 
-    class Picture : public Component
+    class Picture : public CallbackComponent
 	{
 	public:
 	    Picture(s_texture * _imageTex, int xpos = 0, int ypos = 0, int xsize = 32, int ysize = 32);
 		~Picture();
-	    virtual void draw(void);
+		virtual void draw(void);
+		void setShowEdge(bool v) {showedges = v;}
+		void setImgColor(const s_color &c) {imgcolor = c;}
 	private:
 	    s_texture * imageTex;
+		bool showedges;
+		s_color imgcolor;
 	};
 
-	/*
-    class BorderPicture : public Picture
+    class MapPicture : public Picture
 	{
 	public:
-		BorderPicture(vec2_i _position, vec2_i _size, s_texture * _imageTex);
-	    virtual void render(GraphicsContext&);
-	};
-
-	// Class used for the earth map position picker
-    class ClickablePicture : public BorderPicture
-	{
-	public:
-		ClickablePicture(vec2_i _position, vec2_i _size, s_texture * _imageTex, void(*_onValueChangeCallBack)(vec2_t _pointerPosition, Component *));
-		virtual void setPointerPosition(vec2_t _pointerPosition);
-		virtual vec2_t getPointerPosition(void) {return pointerPosition;}
-	    virtual void render(GraphicsContext&);
-		virtual void ClickablePictureClicCallback(int x, int y, enum guiValue button, enum guiValue state);
+	    MapPicture(s_texture * _imageTex, s_texture * _pointerTex, int xpos = 0,
+			int ypos = 0, int xsize = 32, int ysize = 32);
+		~MapPicture();
+		virtual void draw(void);
+		virtual int onClic(int, int, S_GUI_VALUE, S_GUI_VALUE);
+		int getPointerx(void) const {return crosspos[0];}
+		int getPointery(void) const {return crosspos[1];}
+		void setPointerx(int v) { crosspos[0]=v; }
+		void setPointery(int v) { crosspos[1]=v; }
+		float getPointerLongitude(void) const;
+		float getPointerLatitude(void) const;
+		void setPointerLongitude(float);
+		void setPointerLatitude(float);
 	private:
-		void (*onValueChangeCallBack)(vec2_t, Component *);
-		vec2_t pointerPosition;
+		Picture * pointer;
+		s_vec2i crosspos;
 	};
-*/
+
 };
 
 #endif // _GUI_H_

@@ -331,3 +331,14 @@ vector<stel_object*> SolarSystem::search_around(Vec3d v, double lim_fov, const n
     }
 	return result;
 }
+
+// Set the font color
+void SolarSystem::set_planet_font_color(const Vec3f& c)
+{
+    vector<planet*>::iterator iter = system_planets.begin();
+    while (iter != system_planets.end())
+    {
+        (*iter)->setLabelColor(c);
+        iter++;
+    }
+}
