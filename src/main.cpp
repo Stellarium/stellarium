@@ -399,6 +399,8 @@ void loadParams(void)
 	printf("An error was detected in the config file\n");
         return;
     }
+    
+    cfgStoreValue(cfgini, "FLAG_HELP", "TRUE", CFG_SIMPLE, 0);
 
     cfgStruct cfgini2[] = 
     {// parameter               type        address of variable

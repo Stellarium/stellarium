@@ -93,6 +93,14 @@ void Component::reshape(vec2_i _position, vec2_i _size)
     size = _size;
 }
 
+void Component::reshape(int x, int y, int w, int h)
+{
+	position[0]=x;
+	position[1]=y;
+	size[0]=w;
+	size[1]=h;
+}
+
 Component* Component::getParent() const
 {
     return parent;

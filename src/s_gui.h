@@ -71,6 +71,7 @@ namespace gui
         vec2_i getPosition() const;
         vec2_i getSize() const;
         void reshape(vec2_i, vec2_i);
+        void reshape(int x, int y, int w, int h);
         Component* getParent() const;
         virtual void render(GraphicsContext&) = 0;
         void setClicCallback(void (*_clicCallback)(int,int,enum guiValue,enum guiValue,Component *));
