@@ -420,9 +420,9 @@ void MilkyWay::draw(tone_reproductor * eye, const Projector* prj, const navigato
 
 	prj->sSphere(radius,20,20,
 		     nav->get_earth_equ_to_eye_mat()*
-		     Mat4d::xrotation(M_PI/180*30)*
-		     Mat4d::yrotation(M_PI/180*121)*
-		     Mat4d::zrotation(M_PI/180*358), 1);
+		     Mat4d::xrotation(M_PI/180*23)*
+		     Mat4d::yrotation(M_PI/180*120)*
+		     Mat4d::zrotation(M_PI/180*7), 1);
 
 	glDisable(GL_CULL_FACE);
 }
