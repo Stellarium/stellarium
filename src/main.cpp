@@ -40,24 +40,16 @@
 
 using namespace std;
 
-navigator navigation;
-stel_object * selected_object=NULL;
-stellariumParams global;
-Hip_Star_mgr * HipVouteCeleste;       // Class to manage the Hipparcos catalog
-Constellation_mgr * ConstellCeleste;  // Constellation boundary and name
-Nebula_mgr * messiers;                // Class to manage the messier objects
-s_texture * texIds[200];              // Common Textures
-stel_atmosphere * sky;
-tone_reproductor * eye;
-
-/*ShootingStar * TheShooting = NULL;*/
+struct AppStatus		// We Use A Struct To Hold Application Runtime Data
+{
+	bool Visible;		// Is The Application Visible? Or Iconified?
+	bool MouseFocus;	// Is The Mouse Cursor In The Application Field?
+	bool KeyboardFocus;	// Is The Input Focus On Our Application?
+};
 
 // Globals
 bool isProgramLooping;	// Wether the Program Must Go On In The Main Loop
-S_AppStatus AppStatus;	// Holds The Runtime Data Of The Application
 
-
-static int timeAtmosphere=0;
 
 // ***************  Print a beautiful console logo !! ******************
 void drawIntro(void)
@@ -74,83 +66,6 @@ void drawIntro(void)
     printf("on stellarium web page : http://stellarium.free.fr\n\n");
 };
 
-// ************************  Main display loop  ************************
-// Execute all the drawing function in the correct order from the
-// furthest to closest objects
-void Draw(int delta_time)
-{
-	// Init openGL viewing with fov, screen size and clip planes
-	navigation.init_project_matrix(global.X_Resolution,global.Y_Resolution,0.00001 ,40 );
-
-    if (global.FlagAtmosphere)       // Calc the atmosphere
-    {
-    	// Draw atmosphere every second frame because it's slow....
-        if (++timeAtmosphere>0)// && global.SkyBrightness>0)
-        {
-	    	timeAtmosphere=0;
-            //CalcAtmosphere();
-			sky->compute_color(&navigation, eye);
-        }
-    }
-
-    // Set openGL drawings in equatorial coordinates
-    navigation.switch_to_earth_equatorial();
-
-	if (!global.FlagMilkyWay)
-	{
-		glClear(GL_COLOR_BUFFER_BIT);
-	}
-    else DrawMilkyWay();                  // Draw the milky way --> init the buffers
-	glClear(GL_DEPTH_BUFFER_BIT);
-
-    if (global.FlagNebula && (!global.FlagAtmosphere || global.SkyBrightness<0.1))
-		messiers->Draw();            // Draw the Messiers Objects
-    if (global.FlagConstellationDrawing)
-        ConstellCeleste->Draw();     // Draw all the constellations
-    if ((!global.FlagAtmosphere && global.FlagStars) ||
-        (global.SkyBrightness<0.2 && global.FlagStars))
-    {
-		HipVouteCeleste->Draw();    // Draw the stars
-    }
-
-	if (global.FlagAtmosphere)// && global.SkyBrightness>0)
-	//DrawAtmosphere2();	// Draw the atmosphere
-	sky->draw();
-
-    //Sun->DrawMoonDaylight();
-
-    if (global.FlagEquatorialGrid)
-    {
-		DrawMeridiens();             			// Draw the meridian lines
-        DrawParallels();             			// Draw the parallel lines
-    }
-    if (global.FlagEquator)	DrawEquator();   	// Draw the celestial equator line
-    if (global.FlagEcliptic) DrawEcliptic(); 	// Draw the ecliptic line
-    if (global.FlagConstellationName) ConstellCeleste->DrawName();	// Draw the constellations's names
-    if (selected_object) selected_object->draw_pointer(delta_time);			// Draw the pointer
-
-	navigation.switch_to_heliocentric();
-	if (global.FlagPlanets || global.FlagPlanetsHintDrawing) Sun->draw();
-
-	// Set openGL drawings in local coordinates i.e. generally altazimuthal coordinates
-	navigation.switch_to_local();
-
-    if (global.FlagAzimutalGrid)
-    {
-		DrawMeridiensAzimut();       // Draw the "Altazimuthal meridian" lines
-        DrawParallelsAzimut();       // Draw the "Altazimuthal parallel" lines
-    }
-
-    if (global.FlagHorizon && global.FlagGround)
-        DrawDecor(2);                               // Draw the mountains
-    if (global.FlagGround) DrawGround();            // Draw the ground
-    if (global.FlagFog) DrawFog();                  // Draw the fog
-    if (global.FlagCardinalPoints) DrawCardinaux(); // Daw the cardinal points
-
-    // ---- 2D Displays
-    renderUi();
-
-}
 
 // ************************  On resize  *******************************
 void ResizeGL(int w, int h)
@@ -162,68 +77,6 @@ void ResizeGL(int w, int h)
 	initUi();
     glViewport(0, 0, global.X_Resolution, global.Y_Resolution);
 	navigation.init_project_matrix(global.X_Resolution,global.Y_Resolution,1,10000);
-}
-
-
-// ************************  Initialisation  ******************************
-void loadCommonTextures(void)
-{
-    printf("Loading common textures...\n");
-    texIds[2] = new s_texture("voielactee256x256",TEX_LOAD_TYPE_PNG_SOLID);
-    texIds[3] = new s_texture("fog",TEX_LOAD_TYPE_PNG_REPEAT);
-    texIds[4] = new s_texture("ciel");
-    texIds[6] = new s_texture("n");
-    texIds[7] = new s_texture("s");
-    texIds[8] = new s_texture("e");
-    texIds[9] = new s_texture("w");
-    texIds[10]= new s_texture("zenith");
-    texIds[11]= new s_texture("nadir");
-    texIds[12]= new s_texture("pointeur2");
-    texIds[25]= new s_texture("etoile32x32");
-    texIds[26]= new s_texture("pointeur4");
-    texIds[27]= new s_texture("pointeur5");
-    //texIds[30]= new s_texture("spacefont");
-
-    switch (global.LandscapeNumber)
-    {
-    case 1 :
-        texIds[31]= new s_texture("landscapes/sea1",TEX_LOAD_TYPE_PNG_ALPHA);
-        texIds[32]= new s_texture("landscapes/sea2",TEX_LOAD_TYPE_PNG_ALPHA);
-        texIds[33]= new s_texture("landscapes/sea3",TEX_LOAD_TYPE_PNG_ALPHA);
-        texIds[34]= new s_texture("landscapes/sea4",TEX_LOAD_TYPE_PNG_ALPHA);
-        texIds[1] = new s_texture("landscapes/sea5",TEX_LOAD_TYPE_PNG_SOLID);
-        break;
-    case 2 :
-        texIds[31]= new s_texture("landscapes/mountain1",
-				  TEX_LOAD_TYPE_PNG_ALPHA);
-        texIds[32]= new s_texture("landscapes/mountain2",
-				  TEX_LOAD_TYPE_PNG_ALPHA);
-        texIds[33]= new s_texture("landscapes/mountain3",
-				  TEX_LOAD_TYPE_PNG_ALPHA);
-        texIds[34]= new s_texture("landscapes/mountain4",
-				  TEX_LOAD_TYPE_PNG_ALPHA);
-        texIds[1] = new s_texture("landscapes/mountain5",
-				  TEX_LOAD_TYPE_PNG_SOLID);
-        break;
-    case 3 :
-        texIds[31]= new s_texture("landscapes/snowy1",
-				  TEX_LOAD_TYPE_PNG_ALPHA);
-        texIds[32]= new s_texture("landscapes/snowy2",
-				  TEX_LOAD_TYPE_PNG_ALPHA);
-        texIds[33]= new s_texture("landscapes/snowy3",
-				  TEX_LOAD_TYPE_PNG_ALPHA);
-        texIds[34]= new s_texture("landscapes/snowy4",
-				  TEX_LOAD_TYPE_PNG_ALPHA);
-        texIds[1] = new s_texture("landscapes/snowy5",
-				  TEX_LOAD_TYPE_PNG_SOLID);
-        break;
-    default :
-        printf("ERROR : Bad landscape number, change it in config.txt\n");
-        exit(1);
-    }
-
-    if (messiers->ReadTexture()==0)
-	printf("Error while loading messier Texture\n");
 }
 
 
@@ -239,45 +92,6 @@ void TerminateApplication(void)				// Terminate The Application
 	return;
 }
 
-// *******************  Handle time  **************************
-void Update(Uint32 delta_time)
-{
-	static int frame, timefr, timeBase;
-	frame++;
-    timefr+=delta_time;
-    if (timefr-timeBase > 1000)
-    {
-		global.Fps=frame*1000.0/(timefr-timeBase);     // Calc the PFS rate
-        frame = 0;
-        timeBase+=1000;
-    }
-
-    // Update the position of observation and time etc...
-	navigation.update_time(delta_time);
-	Sun->compute_position(navigation.get_JDay());    // Position of sun and all the satellites (ie planets)
-	Sun->compute_trans_matrix(navigation.get_JDay());// Matrix for sun and all the satellites (ie planets)
-	navigation.update_transform_matrices();
-	navigation.update_vision_vector(delta_time);
-
-    // compute sky brightness
-    /*if (global.FlagAtmosphere)
-    {*/
-        Vec3d temp(0.,0.,0.);
-    	Vec3d sunPos = navigation.helio_to_local(&temp);
-        sunPos.normalize();
-        global.SkyBrightness=asin(sunPos[2])+0.1;
-        if (global.SkyBrightness<0) global.SkyBrightness=0;
-    /*}
-    else
-    {
-        global.SkyBrightness=0;
-    }*/
-
-
-
-	if (selected_object) selected_object->update();
-	return;
-}
 
 // ********************  Handle keys  **********************
 void pressKey(Uint8 *keys)
@@ -403,7 +217,6 @@ bool Initialize(void)	     // Any Application & User Initialization Code Goes He
 bool InitGL(SDL_Surface *S)  // Any OpenGL Initialization Code Goes Here
 {
     //glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_FASTEST);
-    //glDisable(GL_DEPTH_TEST);
     // init the blending function parameters
     glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
     return true;     // Return TRUE (Initialization Successful)

@@ -36,4 +36,4 @@ stellarium_LDADD = $(top_builddir)/src/glpng/libglpng.a $(top_builddir)/src/stel
 
 INCLUDES = -I$(top_srcdir)/src/glpng -I$(top_srcdir)/src/stellplanet -I$(top_srcdir)/src/stellastro
 
-SUBDIRS = glpng stellplanet stellastro
+SUBDIRS = glpng stellplanet stellastro iniparser
