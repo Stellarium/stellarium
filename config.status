@@ -41,8 +41,8 @@ s%@CPPFLAGS@%%g
 s%@CXXFLAGS@%-g -O2%g
 s%@FFLAGS@%%g
 s%@DEFS@% -DPACKAGE=\"stellarium\" -DVERSION=\"0.4.7\" -DHAVE_TOUPPER=1 %g
-s%@LDFLAGS@% -lm%g
-s%@LIBS@% -lGL -lGLU -lglut%g
+s%@LDFLAGS@%%g
+s%@LIBS@% -lm -lGL -lGLU -lglut%g
 s%@exec_prefix@%${prefix}%g
 s%@prefix@%/usr/local%g
 s%@program_transform_name@%s,x,x,%g

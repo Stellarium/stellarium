@@ -79,8 +79,8 @@ LIBRARIES =  $(noinst_LIBRARIES)
 
 DEFS =  -DPACKAGE=\"stellarium\" -DVERSION=\"0.4.7\" -DHAVE_TOUPPER=1  -I. -I$(srcdir) 
 CPPFLAGS = 
-LDFLAGS =  -lm
-LIBS =  -lGL -lGLU -lglut
+LDFLAGS = 
+LIBS =  -lm -lGL -lGLU -lglut
 libglpng_a_DEPENDENCIES =  adler32.o infcodes.o inftrees.o pngrio.o \
 crc32.o pngerror.o pngrtran.o zutil.o glpng.o inffast.o infutil.o \
 pngget.o pngrutil.o pngmem.o pngset.o infblock.o png.o pngpread.o \
