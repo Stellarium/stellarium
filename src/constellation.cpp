@@ -24,7 +24,7 @@
 
 bool Constellation::gravity_label = false;
 
-Constellation::Constellation() : name(NULL), inter(NULL), asterism(NULL), art_tex(NULL)
+Constellation::Constellation() : name(NULL), inter(NULL), asterism(NULL), art_tex(NULL), art_on(0), art_intensity(0)
 {
 }
 

@@ -37,11 +37,6 @@ Constellation_mgr::Constellation_mgr(string _data_dir, string _sky_culture, stri
       exit(-1);
     }
 
-  // check validity of main sky culture config file
-  if( !validate_sky_culture(_sky_culture) ) {
-      skyCulture = "western";
-  }
-
   load(dataDir + "sky_cultures/" + skyCulture + "/constellationship.fab",
        dataDir + "sky_cultures/" + skyCulture + "/constellationsart.fab", hipStarMgr);
 
@@ -90,11 +85,6 @@ void Constellation_mgr::hide_art(void)
 void Constellation_mgr::set_sky_culture(string _sky_culture)
 {
 
-  // check validity of main sky culture config file
-  if( !validate_sky_culture(_sky_culture) ) {
-      _sky_culture = "western";
-  }
-
   if( _sky_culture == skyCulture ) return;  // no change
 
   skyCulture = _sky_culture;
@@ -115,22 +105,6 @@ void Constellation_mgr::set_sky_culture(string _sky_culture)
 
   // load translated labels
   set_sky_locale(skyLocale);
-
-}
-
-// test that sky culture seems valid (has config file)
-bool Constellation_mgr::validate_sky_culture(string _sky_culture) {
-
-  string filePath = dataDir + "sky_cultures/" + skyCulture + "/constellationship.fab";
-  FILE * fic = fopen(filePath.c_str(),"r");
-  if (!fic) {
-    printf("Could not locate constellation data for %s culture, defaulting to western.\n",skyCulture.c_str());
-    skyCulture = "western";
-    return(0);
-  } else {
-    fclose(fic);
-    return(1);
-  }
 
 }
 
