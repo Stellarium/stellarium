@@ -49,7 +49,6 @@
 #include "sky_localizer.h"
 #include "script_mgr.h"
 #include "image_mgr.h"
-#include "setting_mgr.h"
 
 // Predeclaration of the StelCommandInterface class
 class StelCommandInterface;

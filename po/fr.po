@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium 0.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-12-26 18:59+0100\n"
+"POT-Creation-Date: 2005-03-24 00:37+0100\n"
 "PO-Revision-Date: 2004-12-18 02:43+0100\n"
 "Last-Translator:  <stellarium@free.fr>\n"
 "Language-Team: French <traduc@traduc.org>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: src/main.cpp:46
+#: src/main.cpp:52
 #, c-format
 msgid ""
 "Please check last version and send bug report & comments \n"
@@ -28,7 +28,7 @@ msgstr ""
 "bugs sur la page web de stellarium : http://stellarium.free.fr\n"
 "\n"
 
-#: src/main.cpp:54
+#: src/main.cpp:60
 #, c-format
 msgid ""
 "Usage: %s [OPTION] ...\n"
@@ -39,18 +39,18 @@ msgstr ""
 " -v, --version          Affiche les informations de version et quitte.\n"
 " -h, --help             Affiche cette aide et quitte.\n"
 
-#: src/main.cpp:78
+#: src/main.cpp:84
 #, c-format
 msgid "%s: Bad command line argument(s)\n"
 msgstr "%s: Mauvais argument(s) sur la ligne de commande\n"
 
-#: src/main.cpp:79
+#: src/main.cpp:85
 #, c-format
 msgid "Try `%s --help' for more information.\n"
 msgstr "Essayez `%s --help' pour plus d'information.\n"
 
 #. Failure....
-#: src/main.cpp:119
+#: src/main.cpp:126
 #, c-format
 msgid ""
 "ERROR : I can't find the datas directories in :\n"
@@ -64,23 +64,23 @@ msgstr ""
 "un système POSIX)\n"
 "ou lancer l'application du répertoire où est installé stellarium.\n"
 
-#: src/main.cpp:162
+#: src/main.cpp:169
 #, c-format
 msgid "> Found data files in %s : local version.\n"
 msgstr "> Trouvé les fichiers de donnée dans %s : version locale.\n"
 
-#: src/main.cpp:180
+#: src/main.cpp:187
 #, c-format
 msgid "Will create config files in %s\n"
 msgstr "Va créer les fichiers de config dans %s\n"
 
 #. Maybe the directory is not created so try to create it
-#: src/main.cpp:188
+#: src/main.cpp:195
 #, c-format
 msgid "Try to create directory %s\n"
 msgstr "Essai de créer le répertoire %s\n"
 
-#: src/main.cpp:197
+#: src/main.cpp:204
 #, c-format
 msgid ""
 "Can't create the file %sconfig.ini\n"
@@ -92,44 +92,45 @@ msgstr ""
 "Sinon, vérifiez que vous avez accès à %s\n"
 
 #. North
-#: src/draw.cpp:335
+#: src/draw.cpp:343
 msgid "N"
 msgstr "N"
 
 #. South
-#: src/draw.cpp:337
+#: src/draw.cpp:345
 msgid "S"
 msgstr "S"
 
 #. East
-#: src/draw.cpp:339
+#: src/draw.cpp:347
 msgid "E"
 msgstr "E"
 
 #. West
-#: src/draw.cpp:341
+#: src/draw.cpp:349
 msgid "W"
 msgstr "O"
 
+#. no change
 #. load new culture data
-#: src/constellation_mgr.cpp:104
+#: src/constellation_mgr.cpp:71
 #, c-format
 msgid "Changing sky culture to %s\n"
 msgstr "Utilise les noms de la culture %s\n"
 
-#: src/constellation_mgr.cpp:117
+#: src/constellation_mgr.cpp:88
 #, c-format
 msgid "Loading constellation data...\n"
 msgstr "Chargement des données constellations...\n"
 
 #. Draw loading bar
-#: src/constellation_mgr.cpp:198
+#: src/constellation_mgr.cpp:172
 #, c-format
 msgid "Loading Constellation Art: %d/%d"
 msgstr "Chargement des Images Constellations : %d/%d"
 
 #. Hip = Hipparcos, RA=Right Ascention, DE=Declinaison, Mag=Magnitude
-#: src/hip_star.cpp:57
+#: src/hip_star.cpp:53
 #, c-format
 msgid ""
 "Name :%s%s%s\n"
@@ -144,24 +145,24 @@ msgstr ""
 "DE : %s\n"
 "Mag : %.2f"
 
-#: src/hip_star.cpp:68 src/hip_star.cpp:69 src/nebula.cpp:67
+#: src/hip_star.cpp:64 src/hip_star.cpp:65 src/nebula.cpp:65
 #, c-format
 msgid "%s: mag %.1f"
 msgstr "%s: mag %.1f"
 
-#: src/hip_star_mgr.cpp:81
-#, c-format
-msgid "Loading Hipparcos star data...\n"
+#: src/hip_star_mgr.cpp:76
+#, fuzzy, c-format
+msgid "Loading Hipparcos star data "
 msgstr "Chargement du catalogue d'étoiles Hipparcos...\n"
 
 #. 120417;
-#: src/hip_star_mgr.cpp:113
+#: src/hip_star_mgr.cpp:94
 #, c-format
-msgid "Star catalog: %d stars\n"
-msgstr "Catalogue d'étoile: %d étoiles\n"
+msgid "(%d stars)...\n"
+msgstr ""
 
 #. RA=Right ascention, DE=Declinaison, Mag=Magnitude
-#: src/nebula.cpp:54
+#: src/nebula.cpp:52
 #, c-format
 msgid ""
 "Name : %s (NGC %u)\n"
@@ -179,32 +180,32 @@ msgstr ""
 msgid "Loading nebulas data...\n"
 msgstr "Chargement des données Nébuleuse...\n"
 
-#: src/nebula_mgr.cpp:70
-#, c-format
-msgid "Reading a total of %d nebulas\n"
-msgstr "Lecture de %d nebuleuses\n"
-
-#: src/nebula_mgr.cpp:101
-#, c-format
-msgid "Loading deep space objects: %d/%d"
+#: src/nebula_mgr.cpp:68
+#, fuzzy, c-format
+msgid "%d deep space objects will be loaded\n"
 msgstr "Chargement des objets du ciel profond: %d/%d"
 
-#: src/observator.cpp:60
+#: src/nebula_mgr.cpp:104
+#, c-format
+msgid "Done loading DSOs\n"
+msgstr ""
+
+#: src/observator.cpp:61
 #, c-format
 msgid "Loading location: \"%s\", "
 msgstr "Chargement du lieu : \"%s\", "
 
-#: src/observator.cpp:67
+#: src/observator.cpp:68
 #, c-format
 msgid "(landscape is: \"%s\")\n"
 msgstr "(le paysage est : \"%s\")\n"
 
-#: src/observator.cpp:97
+#: src/observator.cpp:98
 #, c-format
 msgid "Saving location %s to file %s\n"
 msgstr "Enregistre le lieu %s dans le fichier %s\n"
 
-#: src/planet.cpp:83
+#: src/planet.cpp:85
 #, c-format
 msgid ""
 "Name :%s%s\n"
@@ -219,7 +220,7 @@ msgstr ""
 "Distance : %.8f UA\n"
 "Magnitude : %.2f"
 
-#: src/planet.cpp:94
+#: src/planet.cpp:96
 #, c-format
 msgid "%s%s: mag %.1f"
 msgstr "%s%s: mag %.1f"
@@ -240,3 +241,9 @@ msgstr "Français"
 #: src/sky_localizer.cpp:63
 msgid "Hawaiian"
 msgstr "Hawaien"
+
+#~ msgid "Star catalog: %d stars\n"
+#~ msgstr "Catalogue d'étoile: %d étoiles\n"
+
+#~ msgid "Reading a total of %d nebulas\n"
+#~ msgstr "Lecture de %d nebuleuses\n"
