@@ -149,12 +149,14 @@ private:
 	LabeledCheckBox* cardinal_cbx;
 	LabeledCheckBox* atmosphere_cbx;
 	LabeledCheckBox* fog_cbx;
+	void saveRenderOptions(void);
 
 	// Location options
 	MapPicture* earth_map;
 	FloatIncDec* lat_incdec, * long_incdec;
 	void setObserverPositionFromMap(void);
 	void setObserverPositionFromIncDec(void);
+	void saveObserverPosition(void);
 
 	// Date & Time options
 	Time_item* time_current;

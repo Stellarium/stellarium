@@ -364,11 +364,12 @@ Component* stel_ui::createHelpWindow(void)
 	help_txtlbl = new TextLabel(
 "4 Directions     : Deplacement RA/DE\n\
 Page Up/Down     : Zoom\n\
-CTRL + Up/Down   : Zoom\n\
-Left Clic        : Select Star\n\
-Right Clic       : Clear Pointer\n\
-CTRL + Left Clic : Clear Pointer\n\
-SPACE or Middle Clic : Center On Selected Object\n\
+CTRL+Up/Down     : Zoom\n\
+Left Click       : Select Star\n\
+Right Click      : Clear Pointer\n\
+CTRL+Left Click  : Clear Pointer\n\
+SPACE : Center On Selected Object\n\
+ENTER : Equatorial/Altazimutal mount\n\
 C   : Drawing of the Constellations\n\
 V   : Names of the Constellations\n\
 E   : Equatorial Grid\n\

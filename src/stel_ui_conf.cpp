@@ -188,12 +188,13 @@ Component* stel_ui::createConfigWindow(void)
 	fog_cbx = new LabeledCheckBox(core->FlagFog, "Fog");
 	fog_cbx->setOnPressCallback(callback<void>(this, &stel_ui::updateConfigVariables));
 	tab_render->addComponent(fog_cbx);
-	fog_cbx->setPos(x + 150,y); y+=30;
+	fog_cbx->setPos(x + 150,y); y+=22;
 
 	LabeledButton* render_save_bt = new LabeledButton("Save as default");
-	render_save_bt->setOnPressCallback(callback<void>(this, &stel_ui::updateConfigVariables));
+	render_save_bt->setOnPressCallback(callback<void>(this, &stel_ui::saveRenderOptions));
 	tab_render->addComponent(render_save_bt);
-	render_save_bt->setPos(x + 80,y); y+=20;
+	render_save_bt->setPos(x + 50,y);
+	render_save_bt->setSize(170,25); y+=20;
 
 /*	CursorBar* star_scale_cbar = new CursorBar(0,20,2);
 	star_scale_cbar->setOnChangeCallback(callback<void>(this, &stel_ui::updateConfigVariables));
@@ -262,8 +263,9 @@ Component* stel_ui::createConfigWindow(void)
 	tab_location->addComponent(lat_incdec);
 
 	LabeledButton* location_save_bt = new LabeledButton("Save location");
-	location_save_bt->setOnPressCallback(callback<void>(this, &stel_ui::updateConfigVariables));
+	location_save_bt->setOnPressCallback(callback<void>(this, &stel_ui::saveObserverPosition));
 	location_save_bt->setPos(200,y+5);
+	location_save_bt->setSize(170,25);
 	tab_location->addComponent(location_save_bt);
 
 	// Video Options
@@ -324,6 +326,44 @@ void stel_ui::setObserverPositionFromIncDec(void)
 {
 	core->observatory->set_latitude(lat_incdec->getValue());
 	core->observatory->set_longitude(long_incdec->getValue());
+}
+
+void stel_ui::saveObserverPosition(void)
+{
+	core->observatory->save(core->ConfigDir + core->config_file, "init_location");
+}
+
+void stel_ui::saveRenderOptions(void)
+{
+	cout << "Saving rendering options" << endl;
+
+	init_parser conf;
+	conf.load(core->ConfigDir + core->config_file);
+
+	conf.set_boolean("astro:flag_stars", core->FlagStars);
+	conf.set_boolean("astro:flag_star_name", core->FlagStarName);
+	conf.set_double("stars:max_mag_star_name", core->MaxMagStarName);
+	conf.set_boolean("stars:flag_star_twinkle", core->FlagStarTwinkle);
+	conf.set_double("stars:star_twinkle_amount", core->StarTwinkleAmount);
+	conf.set_boolean("viewing:flag_constellation_drawing", core->FlagConstellationDrawing);
+	conf.set_boolean("viewing:flag_constellation_name", core->FlagConstellationName);
+	conf.set_boolean("viewing:flag_constellation_pick", core->FlagConstellationPick);
+	conf.set_boolean("astro:flag_nebula", core->FlagNebula);
+	conf.set_boolean("astro:flag_nebula_name", core->FlagNebulaName);
+	conf.set_double("astro:max_mag_nebula_name", core->MaxMagNebulaName);
+	conf.set_boolean("astro:flag_planets", core->FlagPlanets);
+	conf.set_boolean("astro:flag_planets_hints", core->FlagPlanetsHints);
+	conf.set_double("viewing:moon_scale", core->ssystem->get_moon()->get_sphere_scale());
+	conf.set_boolean("viewing:flag_equatorial_grid", core->FlagEquatorialGrid);
+	conf.set_boolean("viewing:flag_azimutal_grid", core->FlagAzimutalGrid);
+	conf.set_boolean("viewing:flag_equator_line", core->FlagEquatorLine);
+	conf.set_boolean("viewing:flag_azimutal_line", core->FlagEclipticLine);
+	conf.set_boolean("landscape:flag_ground", core->FlagGround);
+	conf.set_boolean("viewing:flag_cardinal_points", core->FlagCardinalPoints);
+	conf.set_boolean("landscape:flag_atmosphere", core->FlagAtmosphere);
+	conf.set_boolean("landscape:flag_fog", core->FlagFog);
+
+	conf.save(core->ConfigDir + core->config_file);
 }
 
 void stel_ui::setTimeZone(void)
