@@ -1,4 +1,6 @@
 0.5.2b [13/04/2003]
+Changed the configuration file to $HOME/.stellarium/VERSION/ on unix system to prevent conflicts between versions.
+Correctly configure SDL in configure.in (patch by Kipp Canon)
 Fixed some configuration files bugs.
 Added the gui color parameters in the configuration file.
 Catch the --version command line argument.
