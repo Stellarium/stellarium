@@ -39,6 +39,13 @@ typedef boost::callback<void, double, double*> pos_func_type;
 
 using namespace std;
 
+struct TrailPoint {
+  Vec3d point;
+  double date;
+};
+
+
+
 // Class used to store orbital elements
 class rotation_elements
 {
@@ -98,7 +105,8 @@ public:
 	float compute_magnitude(const navigator * nav) const;
 
 	// Draw the planet, if hint_ON is != 0 draw a circle and the name as well
-	void draw(int hint_ON, Projector* prj, const navigator* nav, const tone_reproductor* eye, int flag_point, int flag_orbits);
+	void draw(int hint_ON, Projector* prj, const navigator* nav, const tone_reproductor* eye, 
+		  int flag_point, int flag_orbits, int flag_trails);
 
 	// Add the given planet in the satellite list
 	void add_satellite(planet*);
@@ -146,7 +154,13 @@ public:
 	static void set_orbit_color(const Vec3f& oc) {orbit_color = oc;}
 
         // draw orbital path of planet
-	void planet::draw_orbit(const navigator * nav, const Projector* prj);
+	void draw_orbit(const navigator * nav, const Projector* prj);
+
+	void update_trail(const navigator* nav);
+	void draw_trail(const navigator * nav, const Projector* prj);
+	void set_trail_color(const Vec3f _color);
+	void start_trail(void);
+	void end_trail(void);
 
 protected:
 	// Return the radius of a circle containing the object on screen
@@ -213,6 +227,15 @@ protected:
 	static bool gravity_label;
 	static Vec3f label_color;
 	static Vec3f orbit_color;
+	Vec3f trail_color;
+
+	list<TrailPoint>trail;
+	bool trail_on;  // accumulate trail data if true
+	double DeltaTrail;
+	int MaxTrail;
+	double last_trailJD;
+
+
 };
 
 #endif // _PLANET_H_

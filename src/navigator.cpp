@@ -251,11 +251,8 @@ void navigator::update_transform_matrices(Vec3d earth_ecliptic_pos)
 	Mat4d tmp = Mat4d::xrotation(-23.438855*M_PI/180.) *
 	
 	 Mat4d::zrotation((position->get_longitude()+get_mean_sidereal_time(JDay))*M_PI/180.) *
-	 Mat4d::yrotation((90.-position->get_latitude())*M_PI/180.);
+	 Mat4d::yrotation((90.-lat)*M_PI/180.);
 	 
-	  //Mat4d::yrotation((90.-lat)*M_PI/180.) *
-	  //Mat4d::zrotation((position->get_longitude()+get_mean_sidereal_time(JDay))*M_PI/180.);
-
 
 	mat_local_to_helio = 	Mat4d::translation(earth_ecliptic_pos) *
 							tmp *

@@ -203,6 +203,7 @@ private:
 	Vec3f CardinalColor;
 	Vec3f PlanetNamesColor;
 	Vec3f PlanetOrbitsColor;
+	Vec3f ObjectTrailsColor;
 
 	// Text UI
 	int FlagEnableTuiMenu;
@@ -216,6 +217,7 @@ private:
     int FlagPlanets;
     int FlagPlanetsHints;
     int FlagPlanetsOrbits;
+    int FlagObjectTrails;
     int FlagNebula;
     int FlagNebulaName;
     float MaxMagNebulaName;
