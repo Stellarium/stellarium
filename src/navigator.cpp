@@ -1,6 +1,6 @@
 /*
  * Stellarium
- * Copyright (C) 2002 Fabien Chéreau
+ * Copyright (C) 2003 Fabien Chéreau
  * 
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,6 +22,16 @@
 #include "stel_utility.h"
 #include "stel_object.h"
 #include "stellastro.h"
+
+observator_pos::observator_pos() : planet(3), longitude(0.), latitude(0.), time_zone(0), altitude(0)
+{
+	name = strdup("Anonymous_Location");
+}
+
+observator_pos::~observator_pos()
+{
+	if (name) delete name;
+}
 
 void observator_pos::save(FILE * f)
 {
@@ -313,27 +323,25 @@ void navigator::switch_to_local(void)
 // Transform vector from local coordinate to equatorial
 Vec3d navigator::local_to_earth_equ(Vec3d * v)
 {
-	return v->transfo4d(mat_local_to_earth_equ);
+	return mat_local_to_earth_equ*(*v);
 }
 
 // Transform vector from equatorial coordinate to local
 Vec3d navigator::earth_equ_to_local(Vec3d * v)
 {
-	return v->transfo4d(mat_earth_equ_to_local);
+	return mat_earth_equ_to_local*(*v);
 }
 
 // Transform vector from heliocentric coordinate to local
 Vec3d navigator::helio_to_local(Vec3d* v)
 {
-	return v->transfo4d(mat_helio_to_local);
+	return mat_helio_to_local*(*v);
 }
 
 // Transform vector from heliocentric coordinate to local
 Vec3d navigator::helio_to_earth_equ(Vec3d* v)
 {
-	Vec3d u;
-	u=v->transfo4d(mat_helio_to_local);
-	return u.transfo4d(mat_local_to_earth_equ);
+	return mat_local_to_earth_equ*mat_helio_to_local*(*v);
 }
 
 // *****************  Move to the given equatorial coord  **********
