@@ -1,6 +1,6 @@
 /*
  * Stellarium
- * Copyright (C) 2002 Fabien Chï¿½eau
+ * Copyright (C) 2002 Fabien Chï¿?eau
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -505,9 +505,9 @@ I   : About Stellarium\n\
 F1  : Toggle fullscreen if possible.\n")) + string(
 
 #ifndef MACOSX
-_("CMD+Q : Quit\n")
-#else
 _("CTRL+Q : Quit\n")
+#else
+_("CMD+Q : Quit\n")
 #endif
 
 ),courierFont);
