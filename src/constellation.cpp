@@ -57,7 +57,7 @@ int Constellation::read(FILE *  fic, Hip_Star_mgr * _VouteCeleste)
     {
         if (fscanf(fic,"%u",&HP)!=1)
 		{
-			printf("ERROR while loading constellation data\n");
+			printf("ERROR while loading constellation data (reading %s)\n", inter);
 			exit(-1);
 		}
 

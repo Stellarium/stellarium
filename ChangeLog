@@ -1,4 +1,4 @@
-0.6.0b [26/07/2003]
+0.6.0b [23/10/2003]
 Removed the previous patch to configure SDL because it caused some error on some systems.
 Changed the global coordinate system into the conventionnal astronomical one (ie with z axis toward top and x toward us)
 Stopped using the previous unreliable astro library with badly defined licence and use 2 libraries created from modified/simplified version of the LGPL library libnova. One called stellastro which manages the astronomical operations like time management etc. and another one called stellplanet which only computes the planetary positions.
@@ -39,6 +39,7 @@ Replaced most of the char* with c++ strings to prevent bugs.
 Added a full text user interface.
 Improved configuration managment.
 Added a class "observator" for observer managment : i.e. observer's position and locales managment for timezone and time formating.
+Improved the mouse selection of objects. The new algorithm is more intelligent.
 
 0.5.2 [29/04/2003]
 Changed the configuration file to $HOME/.stellarium/VERSION/ on unix system to prevent conflicts between versions.

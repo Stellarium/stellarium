@@ -43,6 +43,8 @@ public:
 		const string& commonNameFile, const string& nameFile);
     Hip_Star * search(Vec3f Pos);  	// Search the star by position
 	Hip_Star * search(unsigned int);	// Search the star by HP number
+	// Return a stl vector containing the stars located inside the lim_fov circle around position v
+	vector<stel_object*> search_around(Vec3d v, double lim_fov);
 private:
 	vector<Hip_Star*>* starZones;       // array of star vector with the grid id as array rank
     Grid HipGrid;                       // Grid for opimisation

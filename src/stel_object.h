@@ -43,10 +43,11 @@ public:
 	virtual void get_info_string(char * s, const navigator * nav) const;
 	virtual void get_short_info_string(char * s, const navigator * nav) const;
 
-	virtual STEL_OBJECT_TYPE get_type(void) const =0;
-	virtual Vec3d get_earth_equ_pos(const navigator * nav) const =0;
+	virtual STEL_OBJECT_TYPE get_type(void) const = 0;
+	virtual Vec3d get_earth_equ_pos(const navigator * nav) const = 0;
 	virtual Vec3f get_RGB(void) const {return Vec3f(0.,0.,0.);}
 	virtual double get_best_fov(const navigator * nav) const {return 10.;}
+	virtual float get_mag(const navigator * nav) const = 0;
 
 	static void init_textures(void);
 protected:

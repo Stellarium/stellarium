@@ -77,7 +77,8 @@ public:
 	void get_info_string(char * s, const navigator * nav) const;
 	void get_short_info_string(char * s, const navigator * nav) const;
 	virtual double get_best_fov(const navigator * nav = NULL) const;
-	
+	virtual float get_mag(const navigator * nav) const {return compute_magnitude(nav);}
+
 	// Compute the position in the parent planet coordinate system
 	void compute_position(double date);
 
@@ -89,6 +90,7 @@ public:
 
 	// Get the magnitude for an observer at pos obs_pos in the heliocentric coordinate (in AU)
 	float compute_magnitude(const Vec3d obs_pos) const;
+	float compute_magnitude(const navigator * nav) const;
 
 	// Draw the planet, if hint_ON is != 0 draw a circle and the name as well
     void draw(int hint_ON, Projector* prj, const navigator* nav, const tone_reproductor* eye, int flag_point);

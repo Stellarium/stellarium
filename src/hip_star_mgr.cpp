@@ -283,6 +283,24 @@ Hip_Star * Hip_Star_mgr::search(Vec3f Pos)
     else return NULL;
 }
 
+// Return a stl vector containing the nebulas located inside the lim_fov circle around position v
+vector<stel_object*> Hip_Star_mgr::search_around(Vec3d v, double lim_fov)
+{
+	vector<stel_object*> result;
+    v.normalize();
+	double cos_lim_fov = cos(lim_fov * M_PI/180.);
+	static Vec3d equPos;
+
+	for(int i=0; i<StarArraySize; i++)
+    {
+		if (!StarArray[i]) continue;
+		if (StarArray[i]->XYZ[0]*v[0] + StarArray[i]->XYZ[1]*v[1] + StarArray[i]->XYZ[2]*v[2]>=cos_lim_fov)
+    	{
+			result.push_back(StarArray[i]);
+    	}
+    }
+	return result;
+}
 
 // Search the star by HP number
 Hip_Star * Hip_Star_mgr::search(unsigned int _HP)

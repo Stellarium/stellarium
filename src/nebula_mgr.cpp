@@ -131,3 +131,24 @@ stel_object * Nebula_mgr::search(Vec3f Pos)
     else return NULL;
 }
 
+// Return a stl vector containing the nebulas located inside the lim_fov circle around position v
+vector<stel_object*> Nebula_mgr::search_around(Vec3d v, double lim_fov)
+{
+	vector<stel_object*> result;
+    v.normalize();
+	double cos_lim_fov = cos(lim_fov * M_PI/180.);
+	static Vec3d equPos;
+
+    vector<Nebula*>::iterator iter = neb_array.begin();
+    while (iter != neb_array.end())
+    {
+        equPos = (*iter)->XYZ;
+		equPos.normalize();
+		if (equPos[0]*v[0] + equPos[1]*v[1] + equPos[2]*v[2]>=cos_lim_fov)
+		{
+			result.push_back(*iter);
+		}
+        iter++;
+    }
+	return result;
+}
