@@ -182,7 +182,7 @@ void navigator::update_vision_vector(int delta_time)
 	{
     	if (flag_traking && selected_object) // Equatorial vision vector locked on selected object
 		{
-			equ_vision=selected_object->get_equ_pos();
+			equ_vision=selected_object->get_earth_equ_pos();
 			// Recalc local vision vector
 			local_vision=earth_equ_to_local(&equ_vision);
 		}
@@ -372,6 +372,13 @@ Vec3d navigator::helio_to_local(Vec3d* v)
 Vec3d navigator::helio_to_earth_equ(Vec3d* v)
 {
 	return mat_helio_to_earth_equ*(*v);
+}
+
+// Transform vector from heliocentric coordinate to false equatorial : equatorial
+// coordinate but centered on the observer position
+Vec3d navigator::helio_to_earth_pos_equ(Vec3d* v)
+{
+	return mat_local_to_earth_equ*mat_helio_to_local*(*v);
 }
 
 // Move to the given equatorial position

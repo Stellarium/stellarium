@@ -46,6 +46,15 @@ planet::~planet()
 	name=NULL;
 }
 
+void planet::get_info_string(char * s)
+{
+	double tempDE, tempRA;
+	Vec3d equPos = get_earth_equ_pos();
+	rect_to_sphe(&tempRA,&tempDE,&equPos);
+	sprintf(s,"Name :%s\nRA : %s\nDE : %s\n Distance : %.2f UA",
+	name, print_angle_hms(tempRA*180./M_PI), print_angle_dms_stel(tempDE*180./M_PI), equPos.length());
+}
+
 void planet::set_rotation_elements(float _period, float _offset, double _epoch, float _obliquity, float _ascendingNode, float _precessionRate)
 {
     re.period = _period;
@@ -56,10 +65,14 @@ void planet::set_rotation_elements(float _period, float _offset, double _epoch, 
     re.precessionRate = _precessionRate;
 }
 
-Vec3d planet::get_equ_pos(void)
+
+// Return the rect earth equatorial position
+Vec3d planet::get_earth_equ_pos(void)
 {
 	Vec3d v = get_heliocentric_ecliptic_pos();
-	return navigation.helio_to_earth_equ(&v);
+	return navigation.helio_to_earth_pos_equ(&v); 	// this is earth equatorial but centered
+													//on observer position (latitude, longitude)
+	//return navigation.helio_to_earth_equ(&v); this is the real equatorial
 }
 
 void planet::compute_position(double date)
@@ -128,8 +141,8 @@ Vec3d planet::get_ecliptic_pos()
 Vec3d planet::get_heliocentric_ecliptic_pos()
 {
 	Vec3d pos = ecliptic_pos;
-	planet * p = this;
-	while (p->parent!=NULL)
+	planet * p = parent;
+	while (p!=NULL)
 	{
 		pos.transfo4d(p->mat_local_to_parent);
 		p=p->parent;
@@ -167,6 +180,7 @@ void planet::draw(void)
 	gluQuadricOrientation(p, GLU_OUTSIDE);
 	gluSphere(p,radius,80,80);
 	gluDeleteQuadric(p);
+
 
 	glPopMatrix();
 
@@ -214,6 +228,50 @@ void planet::draw(void)
     glDisable(GL_CULL_FACE);
 }
 
+// Search if any planet is close to position given in earth equatorial position and return the distance
+planet* planet::search(Vec3d pos, double * angleClosest)
+{
+    pos.normalize();
+    planet * closest = NULL;
+	planet * p = NULL;
+
+	Vec3d equPos = get_earth_equ_pos();
+	equPos.normalize();
+    double angleClos = equPos[0]*pos[0] + equPos[1]*pos[1] + equPos[2]*pos[2];
+
+	closest = this;
+	if (angleClos>*angleClosest)
+	{
+		*angleClosest = angleClos;
+	}
+
+    // Compute for the satellites
+    list<planet*>::iterator iter = satellites.begin();
+    while (iter != satellites.end())
+    {
+        p = (*iter)->search(pos,&angleClos);
+		if (angleClos>*angleClosest)
+		{
+			closest = p;
+			*angleClosest = angleClos;
+		}
+        iter++;
+    }
+    if (*angleClosest>0.999)
+    {
+	    return closest;
+    }
+    else return NULL;
+}
+
+// Search if any planet is close to position given in earth equatorial position.
+planet* planet::search(Vec3d pos)
+{
+	double temp = 0.;
+	return search(pos,&temp);
+}
+
+
 sun_planet::sun_planet(char * _name, int _flagHalo, double _radius, vec3_t _color,
 				s_texture * _planetTexture, s_texture * _haloTexture, s_texture * _bigHaloTexture) : planet(_name,_flagHalo,_radius,_color,_planetTexture,_haloTexture,NULL)
 {
@@ -247,11 +305,6 @@ void sun_planet::compute_trans_matrix(double date)
         (*iter)->compute_trans_matrix(date);
         iter++;
     }
-}
-
-virtual Vec3d search(Vec3d)	// Search if any planet is close to position given in earth equatorial position.
-{
-	
 }
 
 void sun_planet::draw()
@@ -305,7 +358,7 @@ void sun_planet::draw()
 	// Set the lighting with the sun as light source
     float tmp[4] = {0,0,0,1};
 	float tmp2[4] = {0.1,0.1,0.1,1};
-    float tmp3[4] = {100000,100000,100000,1};
+    float tmp3[4] = {100000000,100000000,100000000,1};
     float tmp4[4] = {1,1,1,1};
     glLightfv(GL_LIGHT0,GL_AMBIENT,tmp2);
     glLightfv(GL_LIGHT0,GL_DIFFUSE,tmp3);

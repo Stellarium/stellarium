@@ -43,11 +43,9 @@ void stel_object::draw_pointer(int delta_time)
 {
 	local_time+=delta_time;
 	double x,y;
-	Vec3d pos=get_equ_pos();
+	Vec3d pos=get_earth_equ_pos();
 	Project(pos[0],pos[1],pos[2],x,y);
     setOrthographicProjection(global.X_Resolution, global.Y_Resolution);
-    glPushMatrix();
-    glLoadIdentity();
 
 	if (get_type()==STEL_OBJECT_NEBULA) glColor3f(0.4f,0.5f,0.8f);
 	if (get_type()==STEL_OBJECT_PLANET) glColor3f(1.0f,0.3f,0.3f);
@@ -128,7 +126,7 @@ void stel_object::draw_pointer(int delta_time)
             glTexCoord2f(0.0f,1.0f);    glVertex3f(-10,10,0);       //Haut Gauche
         glEnd ();
     }
-    glPopMatrix();
+
     resetPerspectiveProjection();
 
 }
@@ -139,9 +137,7 @@ stel_object * stel_object::find_stel_object(Vec3d v)
 {
 	stel_object * sobj = NULL;
 
-	//if (global.FlagPlanets)
-	//	sobj = Sun->search(v);
-
+	if (global.FlagPlanets) sobj = Sun->search(v);
 	if (sobj) return sobj;
 
 	Vec3f u=Vec3f(v[0],v[1],v[2]);
@@ -149,8 +145,7 @@ stel_object * stel_object::find_stel_object(Vec3d v)
 	sobj = messiers->search(u);
 	if (sobj) return sobj;
 
-	if (global.FlagStars)
-		sobj = HipVouteCeleste->search(u);
+	if (global.FlagStars) sobj = HipVouteCeleste->search(u);
 
 	return sobj;
 }
@@ -172,37 +167,3 @@ void stel_object::get_info_string(char * s)
 {
 	sprintf(s,"No info for this object...");
 }
-
-/*
-char * stel_object::get_info_string(char * s)
-{
-	if (type==0)  //Star
-    {
-		glColor3f(0.4f,0.7f,0.3f);
-        sprintf(objectInfo,"Info : %s\nName :%s\nHip : %.4d\nRA  : %.2dh %.2dm %.2fs\nDE  : %.2fdeg\nMag : %.2f",
-            global.SelectedObject.CommonName==NULL ? "-" : global.SelectedObject.CommonName,
-            global.SelectedObject.Name==NULL ? "-" : global.SelectedObject.Name,
-            global.SelectedObject.HR,
-            global.SelectedObject.RAh,global.SelectedObject.RAm,global.SelectedObject.RAs,
-            global.SelectedObject.DE*180/PI,
-            global.SelectedObject.Mag);
-    }
-    if (type==1)  //Nebulae
-    {   glColor3f(0.4f,0.5f,0.8f);
-        sprintf(objectInfo,"Name: %s\nNGC : %d\nRA  : %.2dh %.2dm %.2fs\nDE  : %.2fdeg\nMag : %.2f",
-            global.SelectedObject.Name,
-            global.SelectedObject.NGCNum,
-            global.SelectedObject.RAh,global.SelectedObject.RAm,global.SelectedObject.RAs,
-            global.SelectedObject.DE*180/PI,
-            global.SelectedObject.Mag);
-    }
-    if (type==2)  //Planet
-    {   glColor3f(1.0f,0.3f,0.3f);
-        sprintf(objectInfo,"Name: %s\nRA  : %.2dh %.2dm %.2fs\nDE  : %.2fdeg\nDistance : %.4f AU",
-            global.SelectedObject.Name,
-            global.SelectedObject.RAh,global.SelectedObject.RAm,global.SelectedObject.RAs,
-            global.SelectedObject.DE*180/PI,
-            global.SelectedObject.Distance);
-    }
-}
-*/
