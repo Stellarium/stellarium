@@ -20,7 +20,7 @@
 /*                                                                        */
 /**************************************************************************/
 
-/* $Id: parsecfg.c 2 2002-07-12 17:35:08Z xalioth $ */
+/* $Id: parsecfg.c 49 2002-10-13 22:08:48Z xalioth $ */
 
 #ifdef HAVE_CONFIG_H
 #  include "config.h"
@@ -125,14 +125,14 @@ int cfgParse(const char *file, cfgStruct cfg[], cfgFileType type)
 #endif
 			if ((error_code = parse_simple(file, fp, ptr, cfg, &line)) != CFG_NO_ERROR) {
 				fclose(fp);
-				cfgFatal(error_code, file, line, line_buf);
+				cfgFatal((cfgErrorCode)error_code, file, line, line_buf);
 				return (-1);
 			}
 			break;
 		case CFG_INI:
 			if ((error_code = parse_ini(file, fp, ptr, cfg, &line, &max_cfg)) != CFG_NO_ERROR) {
 				fclose(fp);
-				cfgFatal(error_code, file, line, line_buf);
+				cfgFatal((cfgErrorCode)error_code, file, line, line_buf);
 				return (-1);
 			}
 			break;
@@ -290,12 +290,12 @@ int cfgAllocForNewSection(cfgStruct cfg[], const char *name)
 
 	result = alloc_for_new_section(cfg, &section);
 	if (result != CFG_NO_ERROR) {
-		cfgFatalFunc(result, "unknown", 0, "");
+		cfgFatalFunc((cfgErrorCode)result, "unknown", 0, "");
 		return (-1);
 	}
 	parsecfg_maximum_section = section + 1;
 
-	parsecfg_section_name = realloc(parsecfg_section_name, sizeof(char *) * parsecfg_maximum_section);
+	parsecfg_section_name = (char **) realloc(parsecfg_section_name, sizeof(char *) * parsecfg_maximum_section);
 	parsecfg_section_name[parsecfg_maximum_section - 1] = strdup(name);
 	return (parsecfg_maximum_section);
 }
@@ -317,7 +317,7 @@ int cfgStoreValue(cfgStruct cfg[], const char *parameter, const char *value, cfg
 
 	result = store_value(cfg, parameter, value, type, section);
 	if (result != CFG_NO_ERROR) {
-		cfgFatalFunc(result, "unknown", 0, "");
+		cfgFatalFunc((cfgErrorCode)result, "unknown", 0, "");
 		return (-1);
 	}
 	return (0);
@@ -558,7 +558,7 @@ static char *parse_word(char *ptr, char **word, cfgKeywordValue word_type)
 		}
 		len++;
 	}
-	if ((*word = malloc(len + 1)) == NULL) {
+	if ((*word = (char *)malloc(len + 1)) == NULL) {
 		cfgFatalFunc(CFG_MEM_ALLOC_FAIL, "unknown", 0, "");
 		return (NULL);
 	}
@@ -643,7 +643,7 @@ static int store_value(cfgStruct cfg[], const char *parameter, const char *value
 				return (CFG_BOOL_ERROR);
 
 			case CFG_STRING:
-				if ((strptr = malloc(strlen(value) + 1)) == NULL) {
+				if ((strptr = (char *)malloc(strlen(value) + 1)) == NULL) {
 					return (CFG_MEM_ALLOC_FAIL);
 				}
 				strcpy(strptr, value);
@@ -724,11 +724,11 @@ static int store_value(cfgStruct cfg[], const char *parameter, const char *value
 					while (listptr->next != NULL) {
 						listptr = listptr->next;
 					}
-					if ((listptr = listptr->next = malloc(sizeof(cfgList))) == NULL) {
+					if ((listptr = (cfgList *)listptr->next = malloc(sizeof(cfgList))) == NULL) {
 						return (CFG_MEM_ALLOC_FAIL);
 					}
 				} else {
-					if ((listptr = malloc(sizeof(cfgList))) == NULL) {
+					if ((listptr = (cfgList *)malloc(sizeof(cfgList))) == NULL) {
 						return (CFG_MEM_ALLOC_FAIL);
 					}
 					if (type == CFG_INI) {
@@ -737,7 +737,7 @@ static int store_value(cfgStruct cfg[], const char *parameter, const char *value
 						*(cfgList **) (cfg[num].value) = listptr;
 					}
 				}
-				if ((strptr = malloc(strlen(value) + 1)) == NULL) {
+				if ((strptr = (char *)malloc(strlen(value) + 1)) == NULL) {
 					return (CFG_MEM_ALLOC_FAIL);
 				}
 				strcpy(strptr, value);
@@ -821,10 +821,10 @@ static int parse_values_between_braces(const char *file, FILE *fp, const char *p
 		}
 		if ((error_code = store_value(cfg, parameter, value, type, section)) != CFG_NO_ERROR) {
 			if (error_code == CFG_WRONG_PARAMETER) {
-				cfgFatal(error_code, file, parameter_line, parameter_buf);
+				cfgFatal((cfgErrorCode)error_code, file, parameter_line, parameter_buf);
 				return (CFG_JUST_RETURN_WITHOUT_MSG);
 			}
-			cfgFatal(error_code, file, *line, line_buf);
+			cfgFatal((cfgErrorCode)error_code, file, *line, line_buf);
 			return (CFG_JUST_RETURN_WITHOUT_MSG);
 		}
 		free(line_buf);
@@ -861,7 +861,7 @@ static int parse_ini(const char *file, FILE *fp, char *ptr, cfgStruct cfg[], int
 		}
 		ptr = rm_first_spaces(ptr + 1);
 
-		parsecfg_section_name = realloc(parsecfg_section_name, sizeof(char *) * (*section + 1));
+		parsecfg_section_name = (char **)realloc(parsecfg_section_name, sizeof(char *) * (*section + 1));
 
 		if ((ptr = parse_word(ptr, &parsecfg_section_name[*section], CFG_SECTION)) == NULL) {
 			return (CFG_SYNTAX_ERROR);
@@ -933,7 +933,7 @@ static int alloc_for_new_section(cfgStruct cfg[], int *section)
 			if ((ptr = realloc(*(int **) (cfg[num].value), sizeof(int) * (*section + 1))) == NULL) {
 				return (CFG_MEM_ALLOC_FAIL);
 			}
-			*(int **) (cfg[num].value) = ptr;
+			*(int **) (cfg[num].value) = *(int **)ptr;
 			if (cfg[num].type == CFG_BOOL) {
 				*(*((int **) (cfg[num].value)) + *section) = -1;
 			} else {
@@ -949,7 +949,7 @@ static int alloc_for_new_section(cfgStruct cfg[], int *section)
 			if ((ptr = realloc(*(long **) (cfg[num].value), sizeof(long) * (*section + 1))) == NULL) {
 				return (CFG_MEM_ALLOC_FAIL);
 			}
-			*(long **) (cfg[num].value) = ptr;
+			*(long **) (cfg[num].value) = *(long **)ptr;
 			*(*((long **) (cfg[num].value)) + *section) = 0;
 			break;
 
@@ -960,7 +960,7 @@ static int alloc_for_new_section(cfgStruct cfg[], int *section)
 			if ((ptr = realloc(*(char ***) (cfg[num].value), sizeof(char *) * (*section + 1))) == NULL) {
 				return (CFG_MEM_ALLOC_FAIL);
 			}
-			*(char ***) (cfg[num].value) = ptr;
+			*(char ***) (cfg[num].value) = *(char ***)ptr;
 			*(*(char ***) (cfg[num].value) + *section) = NULL;
 			break;
 
@@ -971,7 +971,7 @@ static int alloc_for_new_section(cfgStruct cfg[], int *section)
 			if ((ptr = realloc(*(cfgList ***) (cfg[num].value), sizeof(cfgList *) * (*section + 1))) == NULL) {
 				return (CFG_MEM_ALLOC_FAIL);
 			}
-			*(cfgList ***) (cfg[num].value) = ptr;
+			*(cfgList ***) (cfg[num].value) = *(cfgList ***)ptr;
 			*(*(cfgList ***) (cfg[num].value) + *section) = NULL;
 			break;
 
@@ -982,7 +982,7 @@ static int alloc_for_new_section(cfgStruct cfg[], int *section)
 			if ((ptr = realloc(*(float **) (cfg[num].value), sizeof(float) * (*section + 1))) == NULL) {
 				return (CFG_MEM_ALLOC_FAIL);
 			}
-			*(float **) (cfg[num].value) = ptr;
+			*(float **) (cfg[num].value) = *(float **) ptr;
 			*(*((float **) (cfg[num].value)) + *section) = 0;
 			break;
 
@@ -993,7 +993,7 @@ static int alloc_for_new_section(cfgStruct cfg[], int *section)
 			if ((ptr = realloc(*(double **) (cfg[num].value), sizeof(double) * (*section + 1))) == NULL) {
 				return (CFG_MEM_ALLOC_FAIL);
 			}
-			*(double **) (cfg[num].value) = ptr;
+			*(double **) (cfg[num].value) = *(double **) ptr;
 			*(*((double **) (cfg[num].value)) + *section) = 0;
 			break;
 
@@ -1082,7 +1082,7 @@ static char *dynamic_fgets(FILE *fp)
 	char temp[128];
 	int i;
 
-	ptr = malloc(1);
+	ptr = (char*)malloc(1);
 	if (ptr == NULL) {
 		cfgFatalFunc(CFG_MEM_ALLOC_FAIL, "unknown", 0, "");
 		return (NULL);
@@ -1096,7 +1096,7 @@ static char *dynamic_fgets(FILE *fp)
 			}
 			return (ptr);
 		}
-		ptr = realloc(ptr, 127 * (i + 1) + 1);
+		ptr = (char*)realloc(ptr, 127 * (i + 1) + 1);
 		if (ptr == NULL) {
 			cfgFatalFunc(CFG_MEM_ALLOC_FAIL, "unknown", 0, "");
 			return (NULL);
@@ -1401,7 +1401,7 @@ static int fetch_value(const char *file, int *line, char *line_buf, FILE *fp, in
 				return (-1);
 			}
 			if ((error_code = store_value(fetch_cfg, fetch_cfg[0].parameterName, read_value, CFG_SIMPLE, 0)) != CFG_NO_ERROR) {
-				cfgFatal(error_code, file, *line, line_buf);
+				cfgFatal((cfgErrorCode)error_code, file, *line, line_buf);
 				free(line_buf);
 				free(read_parameter);
 				free(read_value);
