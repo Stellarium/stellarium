@@ -84,8 +84,8 @@ PROGRAMS =  $(bin_PROGRAMS)
 
 DEFS =  -DPACKAGE=\"stellarium\" -DVERSION=\"0.4.7\" -DHAVE_TOUPPER=1  -I. -I$(srcdir) 
 CPPFLAGS = 
-LDFLAGS =  -lm
-LIBS =  -lGL -lGLU -lglut
+LDFLAGS = 
+LIBS =  -lm -lGL -lGLU -lglut
 stellarium_OBJECTS =  constellation_mgr.o nebula_mgr.o planet_mgr.o \
 s_gui_window.o star.o vislimit.o main.o navigation.o parsecfg.o \
 s_font.o s_texture.o star_mgr.o stellarium_ui.o draw.o constellation.o \
