@@ -20,13 +20,26 @@
 #ifndef _S_TEXTURE_H_
 #define _S_TEXTURE_H_
 
+#ifdef HAVE_CONFIG_H
+# include "config.h"
+#endif
+
+#ifdef MACOSX
+# include <OpenGL/gl.h>
+# include <OpenGL/glu.h>
+#else
+# include <GL/gl.h>
+# include <GL/glu.h>
+#endif
+
 #define TEX_LOAD_TYPE_PNG_ALPHA 0
 #define TEX_LOAD_TYPE_PNG_SOLID 1
 #define TEX_LOAD_TYPE_PNG_BLEND3 2
 #define TEX_LOAD_TYPE_PNG_REPEAT 3
 
+#include "string.h"
 
-class s_texture  
+class s_texture
 {
 public:
     s_texture(char * _textureName);
@@ -35,7 +48,7 @@ public:
     int load();
     void unload();
     int reload();
-    int getID(void) const {return texID;}
+    unsigned int getID(void) const {return texID;}
 	static void set_texDir(char * _texDir) {strncpy(s_texture::texDir, _texDir, sizeof(texDir));}
 	static void set_suffix(char * _suffix) {strncpy(s_texture::suffix, _suffix, sizeof(suffix));}
 private:
@@ -47,7 +60,5 @@ private:
 	static char suffix[10];
 };
 
-char s_texture::texDir[255] = "./";
-char s_texture::suffix[10] = "";
 
 #endif // _S_TEXTURE_H_

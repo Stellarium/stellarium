@@ -31,14 +31,14 @@ using namespace std;
 #include "nebula_mgr.h"
 #include "stel_atmosphere.h"
 #include "tone_reproductor.h"
-#include "stel_ui.h"
+//#include "stel_ui.h"
 #include "solarsystem.h"
 #include "stel_utility.h"
-
+#include "init_parser.h"
 
 class stel_core
 {
-friend class stel_ui;
+//friend class stel_ui;
 friend class stel_sdl;
 public:
     stel_core();
@@ -50,7 +50,7 @@ public:
 	void set_directories(char * DDIR, char * TDIR, char * CDIR);
 
 	// Set the 2 config files names.
-	void set_config_files(char * config_file, char * location_file);
+	void set_config_files(char * _config_file, char * _location_file);
 
 	void update(int delta_time);		// Update all the objects in function of the time
 	void draw(int delta_time);			// Execute all the drawing functions
@@ -61,12 +61,6 @@ public:
 
 	//double get_fov() {return navigation->get_fov();}
 private:
-	// Read the configuration file
-	void loadConfig(char * configFile, char * locationFile);
-	// Dump the configuration file
-	void dumpConfig(void);
-	// Dump the location file
-	void dumpLocation(void);
 
 	// Big options
 	int screen_W;
@@ -75,9 +69,12 @@ private:
 	int Fullscreen;
 
     //Files location
-    char TextureDir[255];
-    char ConfigDir[255];
-    char DataDir[255];
+	char TextureDir[255];
+	char ConfigDir[255];
+	char DataDir[255];
+
+	char config_file[255];
+	char location_file[255];
 
 	int initialized;					// If the core has been initialized or not
 
@@ -89,9 +86,11 @@ private:
 	Nebula_mgr * nebulas;				// Manage the nebulas
 	stel_atmosphere * atmosphere;		// Atmosphere
 	tone_reproductor * tone_converter;	// Tones conversion between stellarium world and display device
-	stel_ui * ui;						// The main User Interface
+	//stel_ui * ui;						// The main User Interface
 	draw_utility * du;					// A usefull small class used to pass parameters and handy functions
 										// to various drawing functions
+
+	init_parser * conf;					// The class which manage config retrieves and dumps
 
     int LandscapeNumber;				// landscape "skin" number
 
@@ -102,13 +101,13 @@ private:
 	vec3_t GuiBaseColor;
 	vec3_t GuiTextColor;
 
-	int MaxMagStarName;
+	float MaxMagStarName;
 	float StarScale;
 	float StarTwinkleAmount;
 
     // Flags
     int FlagUTC_Time;
-    int FlagFps;
+    int FlagShowFps;
     int FlagStars;
 	int FlagStarName;
     int FlagPlanets;
@@ -139,7 +138,6 @@ private:
 
 	// Load the textures "for non object oriented stuff" TODO : remove that
 	void load_base_textures(void);
-	s_texture * texIds[200];			// Common Textures TODO : remove that!
 
 };
 

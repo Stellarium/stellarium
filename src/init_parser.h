@@ -44,7 +44,6 @@ public:
 	// Get a string from the key. The returned char pointer is pointing
 	// to a string allocated in the dictionary, do not free or modify it.
 	const char * get_str(char * key);
-	
 	int get_int(char * key);		// Get a integer from the key.
 	double get_double(char * key);	// Get a double from the key.
 	int get_boolean(char * key);	// Get a boolean (int) from the key.
@@ -52,7 +51,7 @@ public:
 private:
 	void free_dico(void);	// Unalloc memory
 	dictionary * dico;		// The dictionnary containing the parsed data
-	file char[255];			// The config file name.
+	char file[255];			// The config file name.
 };
 
 #endif // _INIT_PARSER_H_

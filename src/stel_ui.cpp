@@ -20,7 +20,7 @@
 // Class which handles a stellarium User Interface
 
 #include "stel_ui.h"
-
+#include "stellastro.h"
 
 /**********************************************************************************/
 /*                                   CALLBACKS                                    */
@@ -88,7 +88,7 @@ void stel_ui::BtFlagsOnClicCallBack(guiValue button,Component * bt)
 
 /*******************************************************************************/
 
-void BtFlagsOnMouseOverCallBack(guiValue event,Component * bt)
+void stel_ui::BtFlagsOnMouseOverCallBack(guiValue event,Component * bt)
 {   if (event==GUI_MOUSE_LEAVE) btLegend->setVisible(false);
     else btLegend->setVisible(true);
     switch (bt->getID())
@@ -112,7 +112,7 @@ void BtFlagsOnMouseOverCallBack(guiValue event,Component * bt)
 
 /*******************************************************************************/
 
-void HelpWinHideCallback(void)
+void stel_ui::HelpWinHideCallback(void)
 {   core->FlagHelp=false;
     HelpWin->setVisible(false);
     BtHelp->setActive(false);
@@ -120,21 +120,21 @@ void HelpWinHideCallback(void)
 
 /*******************************************************************************/
 
-void InfoWinHideCallback(void)
+void stel_ui::InfoWinHideCallback(void)
 {   core->FlagInfos=false;
     InfoWin->setVisible(false);
 }
 
 /*******************************************************************************/
 
-void TimeControlWinHideCallback(void) 
+void stel_ui::TimeControlWinHideCallback(void)
 {    TimeControlWin->setVisible(false);
 }
 
 /*******************************************************************************/
 
-void TimeControlBtOnClicCallback(guiValue button,Component * caller)
-{   
+void stel_ui::TimeControlBtOnClicCallback(guiValue button,Component * caller)
+{
 	if(caller==TimeNow)
     {	
 		navigation.set_JDay(get_julian_from_sys());
@@ -278,7 +278,7 @@ stel_ui::stel_ui(stel_core * _core)
 	ClickablePicture * EarthMap = NULL;
 	*/
 
-stel_ui::init()
+void stel_ui::init(void)
 {
     /*** fonts ***/
     char tempName[255];
@@ -321,17 +321,61 @@ stel_ui::init()
     vec2_i btsz(btSize,btSize);
     vec2_i step(btSize,0);
 
-    BtConstellationsDraw = new Textured_Button(new s_texture("Bouton1"),pos,btsz,clWhite,clWhite/2,BtFlagsOnClicCallBack,BtFlagsOnMouseOverCallBack,1,core->FlagConstellationDrawing);
-    BtConstellationsName = new Textured_Button(new s_texture("Bouton2"),pos+=step,btsz,clWhite,clWhite/2,BtFlagsOnClicCallBack,BtFlagsOnMouseOverCallBack,2,core->FlagConstellationName);
-    BtAzimutalGrid = new Textured_Button(new s_texture("Bouton3"),pos+=step,btsz,clWhite,clWhite/2,BtFlagsOnClicCallBack,BtFlagsOnMouseOverCallBack,3,core->FlagAzimutalGrid);
-    BtEquatorialGrid = new Textured_Button(new s_texture("Bouton3"),pos+=step,btsz,clWhite,clWhite/2,BtFlagsOnClicCallBack,BtFlagsOnMouseOverCallBack,4,core->FlagEquatorialGrid);
-    BtNebula = new Textured_Button(new s_texture("Bouton15"),pos+=step,btsz,clWhite,clWhite/2,BtFlagsOnClicCallBack,BtFlagsOnMouseOverCallBack,12,core->FlagNebulaName);
-    BtGround = new Textured_Button(new s_texture("Bouton4"),pos+=step,btsz,clWhite,clWhite/2,BtFlagsOnClicCallBack,BtFlagsOnMouseOverCallBack,5,core->FlagGround);
-    BtCardinalPoints = new Textured_Button(new s_texture("Bouton8"),pos+=step,btsz,clWhite,clWhite/2,BtFlagsOnClicCallBack,BtFlagsOnMouseOverCallBack,10,core->FlagCardinalPoints);
-    BtAtmosphere = new Textured_Button(new s_texture("Bouton9"),pos+=step,btsz,clWhite,clWhite/2,BtFlagsOnClicCallBack,BtFlagsOnMouseOverCallBack,11,core->FlagAtmosphere);
-    BtHelp = new Textured_Button(new s_texture("Bouton11"),pos+=step,btsz,clWhite,clWhite/2,BtFlagsOnClicCallBack,BtFlagsOnMouseOverCallBack,13,core->FlagHelp);
-    BtFollowEarth = new Textured_Button(new s_texture("Bouton13"),pos+=step,btsz,clWhite,clWhite/2,BtFlagsOnClicCallBack,BtFlagsOnMouseOverCallBack,15,navigation.get_flag_lock_equ_pos());
-    BtConfig = new Textured_Button(new s_texture("Bouton16"),pos+=step,btsz,clWhite,clWhite/2,BtFlagsOnClicCallBack,BtFlagsOnMouseOverCallBack,16,core->FlagConfig);
+    BtConstellationsDraw = new Textured_Button(new s_texture("Bouton1"),pos,btsz,clWhite,clWhite/2,
+		&(Callback1<stel_ui>(*this, &stel_ui::BtFlagsOnMouseOverCallBack)),
+		//make_callback1(*this, &stel_ui::BtFlagsOnClicCallBack)),
+		&(make_callback1(*this, &stel_ui::BtFlagsOnMouseOverCallBack)),
+		1,core->FlagConstellationDrawing);
+
+    BtConstellationsName = new Textured_Button(new s_texture("Bouton2"),pos+=step,btsz,clWhite,clWhite/2,
+		&(make_callback1(*this, &stel_ui::BtFlagsOnClicCallBack)),
+		&(make_callback1(*this, &stel_ui::BtFlagsOnMouseOverCallBack)),
+		2,core->FlagConstellationName);
+
+    BtAzimutalGrid = new Textured_Button(new s_texture("Bouton3"),pos+=step,btsz,clWhite,clWhite/2,
+		&(make_callback1(*this, &stel_ui::BtFlagsOnClicCallBack)),
+		&(make_callback1(*this, &stel_ui::BtFlagsOnMouseOverCallBack)),
+		3,core->FlagAzimutalGrid);
+
+    BtEquatorialGrid = new Textured_Button(new s_texture("Bouton3"),pos+=step,btsz,clWhite,clWhite/2,
+		&(make_callback1(*this, &stel_ui::BtFlagsOnClicCallBack)),
+		&(make_callback1(*this, &stel_ui::BtFlagsOnMouseOverCallBack)),
+		4,core->FlagEquatorialGrid);
+
+    BtNebula = new Textured_Button(new s_texture("Bouton15"),pos+=step,btsz,clWhite,clWhite/2,
+		&(make_callback1(*this, &stel_ui::BtFlagsOnClicCallBack)),
+		&(make_callback1(*this, &stel_ui::BtFlagsOnMouseOverCallBack)),
+		12,core->FlagNebulaName);
+
+    BtGround = new Textured_Button(new s_texture("Bouton4"),pos+=step,btsz,clWhite,clWhite/2,
+		&(make_callback1(*this, &stel_ui::BtFlagsOnClicCallBack)),
+		&(make_callback1(*this, &stel_ui::BtFlagsOnMouseOverCallBack)),
+		5,core->FlagGround);
+
+    BtCardinalPoints = new Textured_Button(new s_texture("Bouton8"),pos+=step,btsz,clWhite,clWhite/2,
+		&(make_callback1(*this, &stel_ui::BtFlagsOnClicCallBack)),
+		&(make_callback1(*this, &stel_ui::BtFlagsOnMouseOverCallBack)),
+		10,core->FlagCardinalPoints);
+
+    BtAtmosphere = new Textured_Button(new s_texture("Bouton9"),pos+=step,btsz,clWhite,clWhite/2,
+		&(make_callback1(*this, &stel_ui::BtFlagsOnClicCallBack)),
+		&(make_callback1(*this, &stel_ui::BtFlagsOnMouseOverCallBack)),
+		11,core->FlagAtmosphere);
+
+    BtHelp = new Textured_Button(new s_texture("Bouton11"),pos+=step,btsz,clWhite,clWhite/2,
+		&(make_callback1(*this, &stel_ui::BtFlagsOnClicCallBack)),
+		&(make_callback1(*this, &stel_ui::BtFlagsOnMouseOverCallBack)),
+		13,core->FlagHelp);
+
+    BtFollowEarth = new Textured_Button(new s_texture("Bouton13"),pos+=step,btsz,clWhite,clWhite/2,
+		&(make_callback1(*this, &stel_ui::BtFlagsOnClicCallBack)),
+		&(make_callback1(*this, &stel_ui::BtFlagsOnMouseOverCallBack)),
+		15,navigation.get_flag_lock_equ_pos());
+
+    BtConfig = new Textured_Button(new s_texture("Bouton16"),pos+=step,btsz,clWhite,clWhite/2,
+		&(make_callback1(*this, &stel_ui::BtFlagsOnClicCallBack)),
+		&(make_callback1(*this, &stel_ui::BtFlagsOnMouseOverCallBack)),
+		16,core->FlagConfig);
 
     /*** Button container ***/
     ContainerBtFlags = new FilledContainer();
@@ -390,7 +434,7 @@ F1  : Toggle fullscreen if possible.\n"
     HelpWin = new StdBtWin(core->screen_W/2-25*avgCharLen, core->screen_H/2-30*lineHeight/2, 48*avgCharLen, 32*(lineHeight+1), "Help", Base, spaceFont);
     HelpWin->addComponent(HelpTextLabel);
     HelpWin->setVisible(core->FlagHelp);
-    HelpWin->setHideCallback(HelpWinHideCallback);
+    //HelpWin->setHideCallback(HelpWinHideCallback);
 
 
 /*** Info TextLabel ***/
@@ -422,7 +466,7 @@ Boston, MA  02111-1307, USA.\n"
     InfoWin = new StdBtWin(core->screen_W/2-25*avgCharLen, core->screen_H/2-30*lineHeight/2, 67*avgCharLen, 25*(lineHeight+1), "About Stellarium", Base, spaceFont);
     InfoWin->addComponent(InfoTextLabel);
     InfoWin->setVisible(core->FlagInfos);
-    InfoWin->setHideCallback(InfoWinHideCallback);
+    //InfoWin->setHideCallback(InfoWinHideCallback);
 
 /*** InfoSelect TextLabel ***/
     InfoSelectLabel = new FilledTextLabel("Info",gc->getFont());
@@ -459,7 +503,7 @@ Boston, MA  02111-1307, USA.\n"
 /*** Time control win ***/
     TimeControlWin = new StdBtWin(gc->winW-140, gc->winH-lineHeight, 140, 200, "Time Control", Base, spaceFont);
     TimeControlWin->setInSize(vec2_i(140,lineHeight));
-    TimeControlWin->setHideCallback(TimeControlWinHideCallback);
+    //TimeControlWin->setHideCallback(TimeControlWinHideCallback);
 
     TimeControlContainer = new Container();
     int btXSize = 19;
@@ -467,25 +511,25 @@ Boston, MA  02111-1307, USA.\n"
     TimeControlContainer->reshape(0,0,140,btYSize);
     TimeFRW = new Labeled_Button("\2\2");
     TimeFRW->reshape(0,0,btXSize,btYSize);
-    TimeFRW->setOnClicCallback(TimeControlBtOnClicCallback);
+    //TimeFRW->setOnClicCallback(TimeControlBtOnClicCallback);
     TimeRW = new Labeled_Button("\2");
     TimeRW->reshape(btXSize+1,0,btXSize,btYSize);
-    TimeRW->setOnClicCallback(TimeControlBtOnClicCallback);
+    //TimeRW->setOnClicCallback(TimeControlBtOnClicCallback);
     TimePause = new Labeled_Button("\4");
     TimePause->reshape(btXSize*2+2,0,btXSize,btYSize);
-    TimePause->setOnClicCallback(TimeControlBtOnClicCallback);
+    //TimePause->setOnClicCallback(TimeControlBtOnClicCallback);
     TimeReal = new Labeled_Button("\5");
     TimeReal->reshape(btXSize*3+3,0,btXSize,btYSize);
-    TimeReal->setOnClicCallback(TimeControlBtOnClicCallback);
+    //TimeReal->setOnClicCallback(TimeControlBtOnClicCallback);
     TimeF = new Labeled_Button("\3");
     TimeF->reshape(btXSize*4+4,0,btXSize,btYSize);
-    TimeF->setOnClicCallback(TimeControlBtOnClicCallback);
+    //TimeF->setOnClicCallback(TimeControlBtOnClicCallback);
     TimeFF = new Labeled_Button("\3\3");
     TimeFF->reshape(btXSize*5+5,0,btXSize,btYSize);
-    TimeFF->setOnClicCallback(TimeControlBtOnClicCallback);
+    //TimeFF->setOnClicCallback(TimeControlBtOnClicCallback);
     TimeNow = new Labeled_Button("N");
     TimeNow->reshape(btXSize*6+6,0,btXSize,btYSize);
-    TimeNow->setOnClicCallback(TimeControlBtOnClicCallback);
+    //TimeNow->setOnClicCallback(TimeControlBtOnClicCallback);
 
     TimeControlWin->reshape(vec2_i(gc->winW-1-TimeControlWin->getSize()[0], gc->winH-TimeControlWin->getSize()[1]),TimeControlWin->getSize());
 
@@ -513,7 +557,7 @@ Boston, MA  02111-1307, USA.\n"
     Base->addComponent(ConfigWin);
     Base->addComponent(TimeControlWin);
 
-	init_config_window();
+	//init_config_window();
 }
 
 
@@ -529,9 +573,9 @@ stel_ui::~stel_ui()
 }
 
 /*******************************************************************/
-void stel_ui::render(void)
+void stel_ui::draw(void)
 {
-    setOrthographicProjection(core->screen_W, core->screen_H);    // 2D coordinate
+    core->du->set_orthographic_projection();	// 2D coordinate
 
     updateStandardWidgets();
 
@@ -544,7 +588,7 @@ void stel_ui::render(void)
     Base->render(*gc);
     glDisable(GL_SCISSOR_TEST);
 
-    resetPerspectiveProjection();             // Restore the other coordinate
+    core->du->reset_perspective_projection();	// Restore the other coordinate
 }
 
 /*******************************************************************************/
@@ -577,15 +621,15 @@ void stel_ui::handle_clic(Uint16 x, Uint16 y, Uint8 state, Uint8 button)
         // Deselect the selected object
         if (button==SDL_BUTTON_RIGHT)
         {
-			selected_object=NULL;
+			core->selected_object=NULL;
             InfoSelectLabel->setVisible(false);
             return;
         }
         if (button==SDL_BUTTON_MIDDLE)
         {
-			if (selected_object)
+			if (core->selected_object)
             {
-				navigation.move_to(selected_object->get_earth_equ_pos());
+				navigation.move_to(core->selected_object->get_earth_equ_pos());
             }
         }
         if (button==SDL_BUTTON_LEFT)
@@ -593,30 +637,30 @@ void stel_ui::handle_clic(Uint16 x, Uint16 y, Uint8 state, Uint8 button)
         	// CTRL + left clic = right clic for 1 button mouse
 			if (SDL_GetModState() & KMOD_CTRL)
 			{
-				selected_object=NULL;
+				core->selected_object=NULL;
             	InfoSelectLabel->setVisible(false);
             	return;
         	}
         	// Left or middle clic -> selection of an object
-            selected_object=stel_object::find_stel_object((int)x,(int)y);
+            core->selected_object=core->find_stel_object((int)x,(int)y);
             // If an object has been found
-            if (selected_object)
+            if (core->selected_object)
             {
 				updateInfoSelectString();
-				navigation.set_flag_traking(0);
+				core->navigation->set_flag_traking(0);
             }
         }
     }
 }
 
 /*******************************************************************************/
-bool GuiHandleKeys(SDLKey key, int state)
+bool stel_ui::handle_keys(SDLKey key, int state)
 {
 	if (state==GUI_DOWN)
     {   
     	if(key==SDLK_ESCAPE)
     	{ 	
-    		clearUi();
+    		//clearUi();  TODO : Find something for the end..
             exit(0); 
 		}
         if(key==SDLK_c)
@@ -710,10 +754,10 @@ bool GuiHandleKeys(SDLKey key, int state)
 		}
         if(key==SDLK_SPACE)
         {	
-        	if (selected_object)
+        	if (core->selected_object)
 			{
-				navigation.move_to(selected_object->get_earth_equ_pos());
-				navigation.set_flag_traking(1);
+				core->navigation->move_to(core->selected_object->get_earth_equ_pos());
+				core->navigation->set_flag_traking(1);
 			}
 		}
         if(key==SDLK_i)
@@ -729,7 +773,7 @@ bool GuiHandleKeys(SDLKey key, int state)
 
 
 /*******************************************************************************/
-void updateStandardWidgets(void)
+void stel_ui::updateStandardWidgets(void)
 {   // Update the date and time
     char str[30];
 	ln_date d;
@@ -753,23 +797,23 @@ void updateStandardWidgets(void)
     {   sprintf(str,"%.2d:%.2d:%.2d",d.hours,d.minutes,(int)d.seconds);
     }
     HourLabel->setLabel(str);
-    sprintf(str,"FPS : %4.2f",core->Fps);
+    sprintf(str,"FPS : %4.2f",core->fps);
     FPSLabel->setLabel(str);
-    sprintf(str,"fov=%.3f\6", navigation.get_fov());
+    sprintf(str,"fov=%.3f\6", core->navigation->get_fov());
     FOVLabel->setLabel(str);
 }
 
 
 /**********************************************************************/
 // Update the infos about the selected object in the TextLabel widget
-void updateInfoSelectString(void)
+void stel_ui::updateInfoSelectString(void)
 {
 	char objectInfo[300];
     objectInfo[0]=0;
-	selected_object->get_info_string(objectInfo);
+	core->selected_object->get_info_string(objectInfo);
     InfoSelectLabel->setLabel(objectInfo);
     InfoSelectLabel->setVisible(true);
-	if (selected_object->get_type()==STEL_OBJECT_NEBULA) InfoSelectLabel->setColour(Vec3f(0.4f,0.5f,0.8f));
-	if (selected_object->get_type()==STEL_OBJECT_PLANET) InfoSelectLabel->setColour(Vec3f(1.0f,0.3f,0.3f));
-	if (selected_object->get_type()==STEL_OBJECT_STAR)   InfoSelectLabel->setColour(selected_object->get_RGB());
+	if (core->selected_object->get_type()==STEL_OBJECT_NEBULA) InfoSelectLabel->setColour(Vec3f(0.4f,0.5f,0.8f));
+	if (core->selected_object->get_type()==STEL_OBJECT_PLANET) InfoSelectLabel->setColour(Vec3f(1.0f,0.3f,0.3f));
+	if (core->selected_object->get_type()==STEL_OBJECT_STAR)   InfoSelectLabel->setColour(core->selected_object->get_RGB());
 }

@@ -57,11 +57,11 @@ class planet : public stel_object
 public:
 	planet(char * _name, int _flagHalo, double _radius, vec3_t _color, s_texture * _planetTexture, s_texture * _haloTexture, void (*_coord_func)(double JD, double *, double *, double *));
     virtual ~planet();
-	void planet::get_info_string(char * s);				// Return info string about the planet
-	virtual void compute_position(double date); 		// Compute the position from the mother planet
+	virtual void get_info_string(char * s, navigator * nav);// Return info string about the planet
+	virtual void compute_position(double date); 			// Compute the position from the mother planet
     virtual void compute_trans_matrix(double date);		// Compute the transformation matrix from the mother planet
 	virtual void compute_geographic_rotation(double date);	// Compute the z rotation to use from equatorial to geographic coordinates
-    virtual void draw(int hint_ON, draw_utility * du);
+    virtual void draw(int hint_ON, draw_utility * du, navigator * nav);
 	virtual void addSatellite(planet*);
 	virtual void set_rotation_elements(float _period, float _offset, double _epoch, float _obliquity, float _ascendingNode, float _precessionRate);
 	virtual Vec3d get_ecliptic_pos();
@@ -69,10 +69,10 @@ public:
 	// Get a matrix which convert from heliocentric ecliptic coordinate to local geographic coordinate
 	virtual Mat4d get_helio_to_geo_matrix();
 	unsigned char get_type(void) {return STEL_OBJECT_PLANET;}
-	virtual Vec3d get_earth_equ_pos(void);				// Return the rect earth equatorial position
-	virtual planet * search(Vec3d);	// Search if any planet is close to position given in earth equatorial position.
+	virtual Vec3d get_earth_equ_pos(navigator * nav);			// Return the rect earth equatorial position
+	virtual planet * search(Vec3d, navigator * nav);	// Search if any planet is close to position given in earth equatorial position.
 	// Search if any planet is close to position given in earth equatorial position and return the distance
-	virtual planet* planet::search(Vec3d pos, double * angleClosest);
+	virtual planet* search(Vec3d pos, double * angleClosest, navigator * nav);
 protected:
     char * name;
 	int flagHalo;							// Set if a little "star like" halo will be drawn
@@ -86,8 +86,9 @@ protected:
 	float axis_rotation;					// Rotation angle of the planet on it's axis
     s_texture * planetTexture;				// Planet map texture
 	s_texture * haloTexture;				// Little halo texture
-	void (*coord_func)(double JD, double *, double *, double *); // The function called for the calculation of the equatorial rect heliocentric position at time JD.
-	planet * parent;
+	// The function called for the calculation of the equatorial rect heliocentric position at time JD.
+	void (*coord_func)(double JD, double *, double *, double *);
+	planet * parent;						// Planet parent i.e. sun for earth
 	list<planet *> satellites;				// satellites of the planet
 };
 
@@ -96,7 +97,7 @@ class ring
 {
 public:
 	ring(float _radius, s_texture * _tex);
-	virtual void draw();
+	virtual void draw(navigator* nav);
 private:
 	float radius;
 	s_texture * tex;
@@ -106,7 +107,7 @@ class ring_planet : public planet
 {
 public:
 	ring_planet(char * _name, int _flagHalo, double _radius, vec3_t _color, s_texture * _planetTexture, s_texture * _haloTexture, void (*_coord_func)(double JD, double *, double *, double *), ring * _planet_ring);
-	virtual void draw(int hint_ON, draw_utility * du);
+	virtual void draw(int hint_ON, draw_utility * du, navigator* nav);
 protected:
 	ring * planet_ring;						// Ring for ie saturn/uranus
 };
@@ -119,7 +120,7 @@ public:
 	sun_planet(char * _name, int _flagHalo, double _radius, vec3_t _color, s_texture * _planetTexture, s_texture * _haloTexture, s_texture * _bigHaloTexture);
 	virtual void compute_position(double date);
 	virtual void compute_trans_matrix(double date);
-	virtual void draw(int hint_ON, draw_utility * du);
+	virtual void draw(int hint_ON, draw_utility * du, navigator* nav);
 protected:
 	s_texture * bigHaloTexture;				// Big halo texture
 };

@@ -28,24 +28,20 @@ void drawIntro(void);
 void DrawPoint(float X,float Y,float Z);
 void DrawPointer(Vec3d,float,vec3_t,int);
 
-void DrawCardinaux(void);
-void DrawMilkyWay(void);
+void DrawCardinaux(draw_utility * du);
+void DrawMilkyWay(float sky_brightness);
 void DrawMeridiens(void);
 void DrawMeridiensAzimut(void);
 void DrawParallelsAzimut(void);
 void DrawParallels(void);
 void DrawEquator(void);
 void DrawEcliptic(void);
-void DrawFog(void);
-void DrawDecor(int);
+void DrawFog(float sky_brightness);
+void DrawDecor(int, float sky_brightness);
 //void DrawAtmosphere(void);
-void DrawGround(void);
+void DrawGround(float sky_brightness);
 void DrawMenu(void);
 void DrawInfo(void);
-
-void DrawAtmosphere2(void);
-void InitAtmosphere(void);
-void CalcAtmosphere(void);
 
 void Oriente(void);
 

@@ -18,7 +18,11 @@
  */
 
 #include "s_texture.h"
+#include "stdlib.h"
 #include "glpng.h"
+
+char s_texture::texDir[255] = "./";
+char s_texture::suffix[10] = "";
 
 s_texture::s_texture(char * _textureName) : loadType(PNG_BLEND3)
 {
@@ -53,8 +57,8 @@ s_texture::~s_texture()
 
 int s_texture::load()
 {
-    char * fullName = (char*)malloc( sizeof(char) * ( strlen(texDir) + strlen(textureName) + strlen(suffix) + 1 ) );
-    sprintf(fullName,"%s%s%s",texDir,textureName,suffix);
+    char * fullName = (char*)malloc( sizeof(char) * ( strlen("./"/*texDir*/) + strlen(textureName) + strlen(".png"/*suffix*/) + 1 ) );
+    sprintf(fullName,"%s%s%s","./"/*texDir*/,textureName,".png"/*suffix*/);
     FILE * tempFile = fopen(fullName,"r");
     if (!tempFile) printf("WARNING : Can't load texture %s!\n",fullName);
     pngInfo info;

@@ -69,6 +69,9 @@ void sphe_to_rect(float lng, float lat, Vec3f *v);
 void rect_to_sphe(double *lng, double *lat, const Vec3d * v);
 void rect_to_sphe(float *lng, float *lat, const Vec3f * v);
 
+// Obtains a Vec3f from a string
+Vec3f str_to_vec3f(const char * s);
+
 /* Obtains Latitude, Longitude, RA or Declination from a string. */
 double get_dec_angle(char *s);
 

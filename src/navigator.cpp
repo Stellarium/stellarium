@@ -48,6 +48,7 @@ void observator_pos::save(FILE * f)
 void observator_pos::load(FILE * f)
 {
 	char tempLatitude[20], tempLongitude[20], tempName[100];
+	tempName[0]=0;
 	fscanf(f,"%s %s %d %d %s\n",tempLongitude, tempLatitude, &altitude, &time_zone, tempName);
 	name=strdup(tempName);
 	printf("LOAD location : %s %s %d %d %s\n",tempLongitude, tempLatitude, altitude, time_zone, name);
@@ -161,7 +162,7 @@ void navigator::zoom_out(int s)
 }
 
 
-void navigator::update_vision_vector(int delta_time)
+void navigator::update_vision_vector(int delta_time, stel_object* selected)
 {
     if (flag_auto_move)
     {
@@ -180,9 +181,9 @@ void navigator::update_vision_vector(int delta_time)
     }
 	else
 	{
-    	if (flag_traking && selected_object) // Equatorial vision vector locked on selected object
+    	if (flag_traking && selected) // Equatorial vision vector locked on selected object
 		{
-			equ_vision=selected_object->get_earth_equ_pos();
+			equ_vision=selected->get_earth_equ_pos();
 			// Recalc local vision vector
 			local_vision=earth_equ_to_local(&equ_vision);
 		}

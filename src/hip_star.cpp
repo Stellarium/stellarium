@@ -26,6 +26,9 @@
 
 #define RADIUS_STAR 25.
 
+float Hip_Star::twinkle_amount = 10.f;
+float Hip_Star::star_scale = 10.f;
+
 extern unsigned int starTextureId;
 extern s_font * starFont;
 
