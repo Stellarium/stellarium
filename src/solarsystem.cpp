@@ -69,7 +69,7 @@ void InitSolarSystem(void)
 	
     Venus->set_rotation_elements(5832.479839/24., 137.45, J2000, -178.78*M_PI/180., 76.681*M_PI/180., 0);
     Mercury->set_rotation_elements(1407.509405/24., 291.20, J2000, -7.01*M_PI/180., 48.33167*M_PI/180., 0);
-    Earth->set_rotation_elements(23.9344694/24., 280.5, J2000, 23.45*M_PI/180., -11.2606423*M_PI/180., 0);
+    Earth->set_rotation_elements(23.9344694/24., 280.5, J2000, 23.438855*M_PI/180., -11.2606423*M_PI/180., 0);
 	Moon->set_rotation_elements((27.321661*24)/24., 38, J2000, 23.45*M_PI/180., 0., 0);
 
 	Sun->addSatellite(Mercury);
