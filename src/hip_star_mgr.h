@@ -43,6 +43,10 @@ private:
     Grid HipGrid;                           // Grid for opimisation
     Hip_Star ** StarArray;  // The simple array of the star for sequential research
     int StarArraySize;      // Number of star in the array
+
+	float MaxMagStarName;
+    float StarTwinkleAmount;
+    float StarScale;
 };
 
 
