@@ -145,17 +145,18 @@ void stel_ui::init_tui(void)
 	// 4. Stars
 	tui_stars_show = new s_tui::Boolean_item(false, "4.1 Show: ", "Yes","No");
 	tui_stars_show->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb1));
-	tui_star_labelmaxmag = new s_tui::Decimal_item(-1.5, 10., 2, "4.2 Maximum Magnitude to Label: ");
-	tui_star_labelmaxmag->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb1));
-	tui_stars_twinkle = new s_tui::Decimal_item(0., 1., 0.3, "4.3 Twinkling: ", 0.1);
-	tui_stars_twinkle->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb1));
-	tui_star_magscale = new s_tui::Decimal_item(1,30, 1, "4.4 Star Magnitude Multiplier: ");
+	tui_star_magscale = new s_tui::Decimal_item(1,30, 1, "4.2 Star Magnitude Multiplier: ");
 	tui_star_magscale->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb1));
+	tui_star_labelmaxmag = new s_tui::Decimal_item(-1.5, 10., 2, "4.3 Maximum Magnitude to Label: ");
+	tui_star_labelmaxmag->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb1));
+	tui_stars_twinkle = new s_tui::Decimal_item(0., 1., 0.3, "4.4 Twinkling: ", 0.1);
+	tui_stars_twinkle->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb1));
 
 	tui_menu_stars->addComponent(tui_stars_show);
+	tui_menu_stars->addComponent(tui_star_magscale);
 	tui_menu_stars->addComponent(tui_star_labelmaxmag);
 	tui_menu_stars->addComponent(tui_stars_twinkle);
-	tui_menu_stars->addComponent(tui_star_magscale);
+
 
 	// 5. Effects
 	tui_effect_landscape = new s_tui::MultiSet_item<string>("5.1 Landscape: ");
@@ -163,11 +164,15 @@ void stel_ui::init_tui(void)
 	tui_effect_landscape->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb_tui_effect_change_landscape));
 	tui_menu_effects->addComponent(tui_effect_landscape);
 
-	tui_effect_zoom_duration = new s_tui::Decimal_item(1, 10, 2, "5.2 Zoom duration: ");
+	tui_effect_pointobj = new s_tui::Boolean_item(false, "5.2 Object Sizing Rule: ", "Point","Magnitude");
+	tui_effect_pointobj->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb1));
+	tui_menu_effects->addComponent(tui_effect_pointobj);
+
+	tui_effect_zoom_duration = new s_tui::Decimal_item(1, 10, 2, "5.3 Zoom duration: ");
 	tui_effect_zoom_duration->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb1));
 	tui_menu_effects->addComponent(tui_effect_zoom_duration);
 
-	tui_effect_manual_zoom = new s_tui::Boolean_item(false, "5.3 Manual zoom: ", "Yes","No");
+	tui_effect_manual_zoom = new s_tui::Boolean_item(false, "5.4 Manual zoom: ", "Yes","No");
 	tui_effect_manual_zoom->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb1));
 	tui_menu_effects->addComponent(tui_effect_manual_zoom);
 
@@ -244,6 +249,7 @@ void stel_ui::tui_cb1(void)
 	core->StarMagScale			= tui_star_magscale->getValue();
 
 	// 5. effects
+	core->FlagPointStar 		= tui_effect_pointobj->getValue();
 	core->auto_move_duration	= tui_effect_zoom_duration->getValue();
 	core->FlagManualZoom 		= tui_effect_manual_zoom->getValue();
 
@@ -277,6 +283,7 @@ void stel_ui::tui_update_widgets(void)
 
 	// 5. effects
 	tui_effect_landscape->setValue(core->observatory->get_landscape_name());
+	tui_effect_pointobj->setValue(core->FlagPointStar);
 	tui_effect_zoom_duration->setValue(core->auto_move_duration);
 	tui_effect_manual_zoom->setValue(core->FlagManualZoom);
 
