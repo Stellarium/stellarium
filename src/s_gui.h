@@ -22,6 +22,18 @@
 #ifndef _GUI_H_
 #define _GUI_H_
 
+#ifdef HAVE_CONFIG_H
+# include <config.h>
+#endif
+
+#ifdef MACOSX
+# include <OpenGL/gl.h>
+# include <OpenGL/glu.h>
+#else
+# include <GL/gl.h>
+# include <GL/glu.h>
+#endif
+
 #include "SDL.h" // Just for the key codes, i'm lasy to redefine them
 		 // This is to do to make the s_ library independent
 
