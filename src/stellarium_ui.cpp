@@ -423,13 +423,8 @@ void initUi(void)
     BtEquatorialGrid = new Textured_Button(new s_texture("Bouton3"),pos+=step,btsz,clWhite,clWhite/2,BtFlagsOnClicCallBack,BtFlagsOnMouseOverCallBack,4,global.FlagEquatorialGrid);
     BtNebula = new Textured_Button(new s_texture("Bouton15"),pos+=step,btsz,clWhite,clWhite/2,BtFlagsOnClicCallBack,BtFlagsOnMouseOverCallBack,12,global.FlagNebulaName);
     BtGround = new Textured_Button(new s_texture("Bouton4"),pos+=step,btsz,clWhite,clWhite/2,BtFlagsOnClicCallBack,BtFlagsOnMouseOverCallBack,5,global.FlagGround);
-    //BtFog = new Textured_Button(new s_texture("Bouton7"),pos+=step,btsz,clWhite,clWhite/2,BtFlagsOnClicCallBack,BtFlagsOnMouseOverCallBack,6,global.FlagFog);
-    /*BtRealTime = new Textured_Button(new s_texture("Bouton5"),pos+=step,btsz,clWhite,clWhite/2,BtFlagsOnClicCallBack,BtFlagsOnMouseOverCallBack,7,global.FlagRealTime);
-    BtAcceleredTime = new Textured_Button(new s_texture("Bouton6"),pos+=step,btsz,clWhite,clWhite/2,BtFlagsOnClicCallBack,BtFlagsOnMouseOverCallBack,8,global.FlagAcceleredTime);
-    BtVeryFastTime = new Textured_Button(new s_texture("Bouton6"),pos+=step,btsz,clWhite,clWhite/2,BtFlagsOnClicCallBack,BtFlagsOnMouseOverCallBack,9,global.FlagVeryFastTime);
-  */BtCardinalPoints = new Textured_Button(new s_texture("Bouton8"),pos+=step,btsz,clWhite,clWhite/2,BtFlagsOnClicCallBack,BtFlagsOnMouseOverCallBack,10,global.FlagCardinalPoints);
+    BtCardinalPoints = new Textured_Button(new s_texture("Bouton8"),pos+=step,btsz,clWhite,clWhite/2,BtFlagsOnClicCallBack,BtFlagsOnMouseOverCallBack,10,global.FlagCardinalPoints);
     BtAtmosphere = new Textured_Button(new s_texture("Bouton9"),pos+=step,btsz,clWhite,clWhite/2,BtFlagsOnClicCallBack,BtFlagsOnMouseOverCallBack,11,global.FlagAtmosphere);
-    //BtRealMode = new Textured_Button(new s_texture("Bouton14"),pos+=step,btsz,clWhite,clWhite/2,BtFlagsOnClicCallBack,BtFlagsOnMouseOverCallBack,14,global.FlagRealMode);
     BtHelp = new Textured_Button(new s_texture("Bouton11"),pos+=step,btsz,clWhite,clWhite/2,BtFlagsOnClicCallBack,BtFlagsOnMouseOverCallBack,13,global.FlagHelp);
     BtFollowEarth = new Textured_Button(new s_texture("Bouton13"),pos+=step,btsz,clWhite,clWhite/2,BtFlagsOnClicCallBack,BtFlagsOnMouseOverCallBack,15,global.FlagFollowEarth);
     BtConfig = new Textured_Button(new s_texture("Bouton16"),pos+=step,btsz,clWhite,clWhite/2,BtFlagsOnClicCallBack,BtFlagsOnMouseOverCallBack,16,global.FlagConfig);
@@ -442,15 +437,10 @@ void initUi(void)
     ContainerBtFlags->addComponent(BtAzimutalGrid);
     ContainerBtFlags->addComponent(BtEquatorialGrid);
     ContainerBtFlags->addComponent(BtGround);
-//    ContainerBtFlags->addComponent(BtFog);
-    /*ContainerBtFlags->addComponent(BtRealTime);
-    ContainerBtFlags->addComponent(BtAcceleredTime);
-    ContainerBtFlags->addComponent(BtVeryFastTime);*/
     ContainerBtFlags->addComponent(BtCardinalPoints);
     ContainerBtFlags->addComponent(BtAtmosphere);
     ContainerBtFlags->addComponent(BtNebula);
     ContainerBtFlags->addComponent(BtHelp);
-    //ContainerBtFlags->addComponent(BtRealMode);
     ContainerBtFlags->addComponent(BtFollowEarth);
     ContainerBtFlags->addComponent(BtConfig);
 
@@ -842,8 +832,8 @@ void updateStandardWidgets(void)
         reste=global.JDay-DateOps::dmyToDay(jour,mois,annee);
     }
     else
-    {   DateOps::dayToDmy((long int)((float)global.JDay+(float)global.TimeZone*HEURE),jour,mois,annee);
-        reste=global.JDay+(float)global.TimeZone*HEURE-DateOps::dmyToDay(jour,mois,annee);
+    {   DateOps::dayToDmy((double)(global.JDay+global.TimeZone*HEURE),jour,mois,annee);
+        reste=global.JDay+global.TimeZone*HEURE-(float)DateOps::dmyToDay(jour,mois,annee);
     }
     double heure=reste*24;
     double minute=(double)(heure-(int)heure)*60;

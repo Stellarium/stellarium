@@ -87,9 +87,10 @@ void glutDisplay(void)
     DrawMilkyWay();                                 // Draw the milky way --> init the buffers
 
     if (global.FlagNebula && (!global.FlagAtmosphere || global.SkyBrightness<0.1)) messiers->Draw();                                // Draw the Messiers Objects
-    if (!global.FlagAtmosphere || (global.SkyBrightness<0.2 && global.FlagStars)) VouteCeleste->Draw();         // Draw the stars
     if (global.FlagConstellationDrawing)
         ConstellCeleste->Draw();                    // Draw all the constellations
+    if ((!global.FlagAtmosphere && global.FlagStars) || (global.SkyBrightness<0.2 && global.FlagStars)) VouteCeleste->Draw();         // Draw the stars
+
     if (global.FlagPlanets || global.FlagPlanetsHintDrawing) SolarSystem->Draw();   // Draw the planets
     if (global.FlagAtmosphere && global.SkyBrightness>0) DrawAtmosphere2();
     SolarSystem->DrawMoonDaylight();
@@ -323,7 +324,7 @@ void loadParams(void)
         {NULL, CFG_END, NULL}   /* no more parameters */
     };
     
-    if (cfgParse("config/config.txt", cfgini, CFG_SIMPLE) == -1)
+    if (cfgParse(CONFIG_DATA_DIR"/config/config.txt", cfgini, CFG_SIMPLE) == -1)
     {   printf("An error was detected in the config file\n");
         return;
     }
@@ -338,7 +339,7 @@ void loadParams(void)
         {NULL, CFG_END, NULL}   /* no more parameters */
     };
 
-    if (cfgParse("config/location.txt", cfgini2, CFG_SIMPLE) == -1)
+    if (cfgParse(CONFIG_DATA_DIR"/config/location.txt", cfgini2, CFG_SIMPLE) == -1)
     {   printf("An error was detected in the location file\n");
         return;
     }
@@ -461,12 +462,12 @@ int main (void)
 
     loadCommonTextures();                                   // Load the common used textures
     SolarSystem->loadTextures(); 
-    VouteCeleste->Load(DATA_DIR"/catalog.fab");              // Load stars
-    ConstellCeleste->Load(DATA_DIR"/constellationsmaj.fab",VouteCeleste);   // Load constellations      
+    VouteCeleste->Load(CONFIG_DATA_DIR"/data/catalog.fab");              // Load stars
+    ConstellCeleste->Load(CONFIG_DATA_DIR"/data/constellationsmaj.fab",VouteCeleste);   // Load constellations      
     SolarSystem->Compute(global.JDay,global.ThePlace);       // Compute planet data
     InitMeriParal();                                        // Precalculation for the grids drawing
     InitAtmosphere();
-    messiers->Read(DATA_DIR"/messier.fab");                  // read the messiers object data
+    messiers->Read(CONFIG_DATA_DIR"/data/messier.fab");                  // read the messiers object data
     initUi();                                               // initialisation of the User Interface
     global.XYZVision.Set(0,1,0);
     glutMainLoop();                                         // Start drawing
