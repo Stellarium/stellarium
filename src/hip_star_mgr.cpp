@@ -65,7 +65,7 @@ void Hip_Star_mgr::Load(char * hipCatFile, char * commonNameFile, char * nameFil
     cnFile=fopen(commonNameFile,"r");
     if (!cnFile)
     {   
-        printf("ERROR %s NOT FOUND\n",cnFile);
+        printf("ERROR %s NOT FOUND\n",commonNameFile);
         return;
     }
     nFile=fopen(nameFile,"r");
@@ -106,7 +106,7 @@ void Hip_Star_mgr::Load(char * hipCatFile, char * commonNameFile, char * nameFil
 
 	// Read binary file Hipparcos catalog  
     Hip_Star * e = NULL;
-    for(int i=0;i<catalogSize;i++)
+    for(unsigned int i=0;i<catalogSize;i++)
     {
 	    e = new Hip_Star;
 	    e->HP=(unsigned int)i;
@@ -202,7 +202,7 @@ void Hip_Star_mgr::Draw(void)
 int Hip_Star_mgr::Rechercher(vec3_t Pos)
 {   
     Pos.Normalize();
-    Hip_Star * plusProche;
+    Hip_Star * plusProche=NULL;
     float anglePlusProche=3.15;
     
     multimap<int,Hip_Star *>::iterator iter;
@@ -224,7 +224,6 @@ int Hip_Star_mgr::Rechercher(vec3_t Pos)
 void Hip_Star_mgr::Save(void)
 {
 	FILE * fic = fopen("cat.fab","wb");
-	unsigned int StarArraySizeu = StarArraySize;
     fwrite((char*)&StarArraySize,4,1,fic);	
 	
     for(int i=0;i<StarArraySize;i++)

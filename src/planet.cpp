@@ -20,7 +20,7 @@
 #include "planet.h"
 extern s_texture * texIds[200];            // Common Textures
 
-Planet::Planet(PlanetNb LeNum) : planetTexture(NULL), num(LeNum)
+Planet::Planet(PlanetNb LeNum) : num(LeNum), planetTexture(NULL)
 {  
 }
 

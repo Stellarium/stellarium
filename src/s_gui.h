@@ -129,25 +129,25 @@ namespace gui
     {
     public:
         Button();
-        void render(GraphicsContext&);
+        virtual void render(GraphicsContext&);
         void setOnClicCallback(void (*_onClicCallback)(enum guiValue,Component *));
         void setOnMouseOverCallback(void (*_onMouseOverCallback)(enum guiValue,Component *));
         void ButtonClicCallback(enum guiValue button,enum guiValue state);
         void ButtonMoveCallback(enum guiValue action);
     protected:
+        int mouseOn;
         void (*onClicCallback)(enum guiValue,Component *);
         void (*onMouseOverCallback)(enum guiValue,Component *);
-        int mouseOn;
     };
 
     class Labeled_Button : public Button
     {
     public:
         Labeled_Button(char * _label);
-        ~Labeled_Button();
+        virtual ~Labeled_Button();
         const char * getLabel() const;
         void setLabel(char *);
-        void render(GraphicsContext& gc);
+        virtual void render(GraphicsContext& gc);
     private:
         char * label;
     };
@@ -157,8 +157,8 @@ namespace gui
     public:
         Textured_Button(s_texture * _texBt);
         Textured_Button(s_texture * _texBt, vec2_i _position, vec2_i _size ,vec3_t _activeColor, vec3_t _passiveColor, void (*_onClicCallback)(enum guiValue,Component *),void (*_onMouseOverCallback)(enum guiValue,Component *), int _ID, int _active);
-        ~Textured_Button();
-        void render(GraphicsContext& gc);
+        virtual ~Textured_Button();
+        virtual void render(GraphicsContext& gc);
     private:
         s_texture * texBt;
         vec3_t activeColor;
@@ -170,7 +170,7 @@ namespace gui
     public:
         Label(char * _label);
         Label(char * _label, s_font * _theFont);
-        ~Label();
+        virtual ~Label();
         const char * getLabel() const;
         void setLabel(char *);
         void render(GraphicsContext&);

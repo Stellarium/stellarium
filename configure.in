@@ -11,7 +11,7 @@ AC_PROG_CC
 AC_PROG_CXX
 
 CFLAGS="-Wall -O3 -ffast-math -fexpensive-optimizations"
-CXXFLAGS="-O3 -ffast-math -fexpensive-optimizations"
+CXXFLAGS="-Wall -O3 -ffast-math -fexpensive-optimizations"
 
 dnl Checks for programs.
 AC_PROG_CPP
