@@ -25,18 +25,19 @@
 #include <math.h>
 #include "vecmath.h"
 
+// Angles and coordinate conversions
 double hms_to_rad(unsigned int h, unsigned int m, double s);
-double dms_to_rad(int sign, int d, int m, double s);
-void rad_to_hms(unsigned int *h, unsigned int *m, double *s, double r);
+double dms_to_rad(int d, int m, double s);
+
+double hms_to_rad(unsigned int h, double m);
+double dms_to_rad(int d, double m);
+
+//void rad_to_hms(unsigned int *h, unsigned int *m, double *s, double r);
 void sphe_to_rect(double lng, double lat, Vec3d *v);
 void sphe_to_rect(float lng, float lat, Vec3f *v);
 void rect_to_sphe(double *lng, double *lat, const Vec3d * v);
 
-void Equ_to_altAz(vec3_t &leVect, float raZen, float deZen);
-void AltAz_to_equ(vec3_t &leVect, float raZen, float deZen);
-void Equ_to_altAz(Vec3d &leVect, double raZen, double deZen);
-void AltAz_to_equ(Vec3d &leVect, double raZen, double deZen);
-
+// OpenGL projections and camera setting
 void Project(float objx_i,float objy_i,float objz_i,double & x ,double & y);
 void Project(float objx_i,float objy_i,float objz_i,double & x ,double & y ,double & z);
 

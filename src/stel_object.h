@@ -17,53 +17,29 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#ifndef _SELECTION_H_
-#define _SELECTION_H_
+#ifndef _STEL_OBJECT_H_
+#define _STEL_OBJECT_H_
 
-typedef struct
-{
-    char * Name;
-    double Distance;
-}planet_info;
+#include "vecmath.h"
 
-typedef struct
-{
-    char * Name;
-    unsigned int HR;
-	unsigned int Hiparcos;
-    char * CommonName;
-    vec3_t RGB;
-}star_info;
+#define STEL_OBJECT_STAR 1
+#define STEL_OBJECT_PLANET 2
+#define STEL_OBJECT_NEBULA 3
 
-typedef struct
-{
-    char * Name;
-    unsigned int MessierNum;
-    unsigned int NGCNum;
-    float Size;
-}nebula_info;
-
-class selection
+class stel_object
 {
 public:
-	selection();
-    ~selection();
-	void update(void);
-	void draw_pointer(void);
-	char * get_info_string(void);
-	char get_type(void);
-	Vec3d get_equ_pos(void) {return equ_pos;}
+	stel_object();
+    virtual ~stel_object();
+	virtual void update(void) {return;}
+	virtual void draw_pointer(int delta_time);
+	virtual char * get_info_string(char * s) {s[0]=0; return s;}
+	virtual unsigned char get_type(void)=0;
+	virtual Vec3d get_equ_pos(void)=0;
+	virtual vec3_t get_RGB(void) {return vec3_t(0.,0.,0.);}
 private:
-	unsigned int enabled;
-    char type;
-	nebula_info nebula;
-	star_info star;
-	planet_info planet;
-    float mag;
-	Vec3d equ_pos;
-	char * info_string;
 };
 
-extern selection selected_object; // Selection instance used in stellarium
+extern stel_object * selected_object; // Selection instance used in stellarium
 
-#endif // _SELECTION_H_
+#endif // _STEL_OBJECT_H_
