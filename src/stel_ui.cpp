@@ -21,6 +21,7 @@
 
 #include "stel_ui.h"
 #include "stellastro.h"
+#include <iostream>
 
 ////////////////////////////////////////////////////////////////////////////////
 //								CLASS FUNCTIONS
@@ -498,6 +499,7 @@ int stel_ui::handle_clic(Uint16 x, Uint16 y, Uint8 button, Uint8 state)
 int stel_ui::handle_keys(SDLKey key, S_GUI_VALUE state)
 {
 	desktop->onKey(key, state);
+
 	if (state==S_GUI_PRESSED)
     {
     	if(key==SDLK_ESCAPE)
@@ -734,5 +736,40 @@ void stel_ui::draw_gravity_ui(void)
 		if (core->selected_object->get_type()==STEL_OBJECT_STAR) glColor3fv(core->selected_object->get_RGB());
 		core->projection->print_gravity180(spaceFont, x+shift - 10, y+shift - 10, str);
 	}
+}
 
+// Init the text user interface
+void stel_ui::init_tui(void)
+{
+	tui_root = new s_tui::Branch();
+	tui_root->addComponent(new s_tui::Label("Coucou1"));
+	tui_root->addComponent(new s_tui::Label("Coucou2"));
+	s_tui::MenuBranch* menu1 = new s_tui::MenuBranch("Menu1: ");
+	tui_root->addComponent(menu1);
+	menu1->addComponent(new s_tui::Label("Menu Item 1"));
+	menu1->addComponent(new s_tui::Label("Menu Item 2"));
+	menu1->addComponent(new s_tui::Boolean_item(true, "Fabien est cool? "));
+	menu1->addComponent(new s_tui::Decimal(12.));
+}
+
+// Display the tui
+void stel_ui::draw_tui(void)
+{
+	// Normal transparency mode
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+	int x = core->projection->view_left() + core->projection->viewW()/2;
+	int y = core->projection->view_bottom() + core->projection->viewH()/2;
+	int shift = (int)(M_SQRT2 / 2 * MY_MIN(x,y));
+
+	if (tui_root)
+	{
+		glColor3f(0.1,0.1,0.9);
+		core->projection->print_gravity180(spaceFont, x+shift - 10, y-shift + 10, tui_root->getString().c_str());
+	}
+}
+
+int stel_ui::handle_keys_tui(SDLKey key, s_tui::S_TUI_VALUE state)
+{
+	return tui_root->onKey(key, state);
 }
