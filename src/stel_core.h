@@ -151,6 +151,7 @@ private:
 	float StarMagScale;
 	float StarTwinkleAmount;
 	int FlagStarTwinkle;
+	int FlagPointStar;
 
 	// Gui
 	int FlagShowTopBar;

@@ -267,7 +267,7 @@ void stel_core::draw(int delta_time)
 
 	if (FlagStars && (!FlagAtmosphere || sky_brightness<0.1))
 	{
-		hip_stars->draw(StarScale, StarMagScale, FlagStarTwinkle ? StarTwinkleAmount : 0.f, FlagStarName,
+		hip_stars->draw_point(StarScale, StarMagScale, FlagStarTwinkle ? StarTwinkleAmount : 0.f, FlagStarName,
 		MaxMagStarName, temp, tone_converter, projection, FlagGravityLabels);
 	}
 
@@ -285,7 +285,7 @@ void stel_core::draw(int delta_time)
     if (selected_object) selected_object->draw_pointer(delta_time, projection, navigation);
 
 	// Draw the planets
-	if (FlagPlanets) ssystem->draw(FlagPlanetsHints, projection, navigation, tone_converter, FlagGravityLabels);
+	if (FlagPlanets) ssystem->draw(FlagPlanetsHints, projection, navigation, tone_converter, FlagGravityLabels, FlagPointStar);
 
 	// Set openGL drawings in local coordinates i.e. generally altazimuthal coordinates
 	navigation->switch_to_local();
@@ -422,6 +422,7 @@ void stel_core::load_config_from(const string& confFile)
 	StarTwinkleAmount	= conf.get_double ("stars:star_twinkle_amount");
 	MaxMagStarName		= conf.get_double ("stars:max_mag_star_name");
 	FlagStarTwinkle		= conf.get_boolean("stars:flag_star_twinkle");
+	FlagPointStar		= conf.get_boolean("stars:flag_point_star");
 
 	// Ui section
 	FlagShowFps			= conf.get_boolean("gui:flag_show_fps");
@@ -522,6 +523,7 @@ void stel_core::save_config_to(const string& confFile)
 	conf.set_double ("stars:star_twinkle_amount", StarTwinkleAmount);
 	conf.set_double ("stars:max_mag_star_name", MaxMagStarName);
 	conf.set_boolean("stars:flag_star_twinkle", FlagStarTwinkle);
+	conf.set_boolean("stars:flag_point_star", FlagPointStar);
 
 	// Ui section
 	conf.set_boolean("gui:flag_show_fps" ,FlagShowFps);

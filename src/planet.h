@@ -91,7 +91,7 @@ public:
 	float compute_magnitude(const Vec3d obs_pos) const;
 
 	// Draw the planet, if hint_ON is != 0 draw a circle and the name as well
-    void draw(int hint_ON, Projector* prj, const navigator* nav, const tone_reproductor* eye);
+    void draw(int hint_ON, Projector* prj, const navigator* nav, const tone_reproductor* eye, int flag_point);
 
 	// Add the given planet in the satellite list
 	void add_satellite(planet*);
@@ -141,8 +141,11 @@ protected:
 	// Draw the 3D sphere
 	void draw_sphere(const Projector* prj, const Mat4d& mat, float screen_sz);
 
-	// Draw the small star like 2D halo
+	// Draw the small star-like 2D halo
 	void draw_halo(const navigator* nav, const Projector* prj, const tone_reproductor* eye);
+
+	// Draw the small star-like point
+	void draw_point_halo(const navigator* nav, const Projector* prj, const tone_reproductor* eye);
 
 	// Draw the circle and name of the planet
 	void draw_hints(const navigator* nav, const Projector* prj);
