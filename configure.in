@@ -12,9 +12,8 @@ dnl Check for compilers.
 AC_PROG_CC
 AC_PROG_CXX
 
-CFLAGS=" -Wall `sdl-config --cflags`"
-CXXFLAGS=" -Wall `sdl-config --cflags`"
-LIBS="$LIBS `sdl-config --libs`"
+CFLAGS=" -Wall -s -O3"
+CXXFLAGS=" -Wall -s -O3"
 
 dnl Checks for programs.
 AC_PROG_CPP
@@ -40,6 +39,7 @@ fi
 PKGDATADIR=`eval echo "${datadir}/$PACKAGE"`
 AC_DEFINE_UNQUOTED(CONFIG_DATA_DIR, "$PKGDATADIR", [Set the directory where the datas (as textures or star catalogs) are stored.])
 
+
 dnl For each host type, set the appropriate openGL libraries
 dnl MACOSX
 case "$host" in
@@ -49,6 +49,10 @@ case "$host" in
 	LIBS="$LIBS -framework OpenGL -lobjc "
 	AC_CHECK_HEADER(OpenGL/gl.h,,AC_MSG_ERROR(gl.h not found - please install OpenGL))
 	AC_CHECK_HEADER(OpenGL/glu.h,,AC_MSG_ERROR(glu.h not found - please install GLU))
+	AM_PATH_SDL
+	LIBS="$LIBS $SDL_LIBS"
+	CFLAGS="$CFLAGS $SDL_CFLAGS"
+	CXXFLAGS="$CXXFLAGS $SDL_CFLAGS"
 ;;
 
 dnl CYGWIN
@@ -57,6 +61,11 @@ dnl CYGWIN
 	LIBS="$LIBS -lopengl32 -lglu32"
 	AC_CHECK_HEADER(GL/gl.h,,AC_MSG_ERROR(gl.h not found - please install OpenGL))
 	AC_CHECK_HEADER(GL/glu.h,,AC_MSG_ERROR(glu.h not found - please install GLU))
+	dnl Check for SDL.
+	AM_PATH_SDL
+	LIBS="$LIBS $SDL_LIBS"
+	CFLAGS="$CFLAGS $SDL_CFLAGS"
+	CXXFLAGS="$CXXFLAGS $SDL_CFLAGS"
 ;;
 
 dnl MINGW32
@@ -65,6 +74,12 @@ dnl MINGW32
 	LIBS="$LIBS -lopengl32 -lglu32"
 	AC_CHECK_HEADER(GL/gl.h,,AC_MSG_ERROR(gl.h not found - please install OpenGL))
 	AC_CHECK_HEADER(GL/glu.h,,AC_MSG_ERROR(glu.h not found - please install GLU))
+	dnl Check for SDL but can't use AM_PATH_DSDL on Mingw : it crashes..
+	dnl So directly call the utility and add an include directory by hand..
+	LIBS="$LIBS `sdl-config --libs`"
+	CFLAGS="$CFLAGS `sdl-config --cflags`"
+	CXXFLAGS="$CXXFLAGS `sdl-config --cflags` -I/mingw/include/SDL/"
+
 ;;
 
 dnl OTHER SYSTEMS
@@ -82,6 +97,11 @@ dnl OTHER SYSTEMS
     	AC_CHECK_LIB(MesaGLU,gluLookAt,,AC_MSG_ERROR(GLU not found - please install GLU or MesaGLU))
    	fi
 
+	dnl Check for SDL.
+	AM_PATH_SDL
+	LIBS="$LIBS $SDL_LIBS"
+	CFLAGS="$CFLAGS $SDL_CFLAGS"
+	CXXFLAGS="$CXXFLAGS $SDL_CFLAGS"
 ;;
 esac
 

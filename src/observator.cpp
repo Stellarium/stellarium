@@ -68,7 +68,6 @@ void Observator::load(const string& file, const string& section)
 	if (tzmodestr == "system_default")
 	{
 		time_zone_mode = S_TZ_SYSTEM_DEFAULT;
-		time_zone_name = get_time_zone_name_from_system();
 	}
 	else
 	{
@@ -134,11 +133,17 @@ int Observator::get_GMT_shift(double JD) const
 }
 
 // Return the time zone name taken from system locale
-string Observator::get_time_zone_name_from_system(void) const
+string Observator::get_time_zone_name_from_system(double JD) const
 {
-	extern char *tzname[2];	// already set by tzset() standard C function
-	if (tzname[1]) return tzname[1];
-	else return tzname[0];
+	// The timezone name depends on the day because of the summer time
+	time_t rawtime = get_time_t_from_julian(JD);
+
+	struct tm * timeinfo;
+	timeinfo = localtime(&rawtime);
+	static char timez[255];
+	timez[0] = 0;
+	my_strftime(timez, 254, "%z", timeinfo);
+	return timez;
 }
 
 
@@ -154,7 +159,7 @@ int Observator::get_GMT_shift_from_system(double JD) const
 	timeinfo = localtime(&rawtime);
 	char heure[20];
 	heure[0] = 0;
-	my_strftime(heure, 19, "%z", timeinfo);
+	my_strftime(heure, 19, "%Z", timeinfo);
 	heure[3] = '\0';
 	return atoi(heure);
 }

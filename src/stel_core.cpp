@@ -324,6 +324,15 @@ void stel_core::draw(int delta_time)
 	ui->draw_gravity_ui();
 }
 
+void stel_core::set_landscape(const string& new_landscape_name)
+{
+	if (new_landscape_name.empty() || new_landscape_name==observatory->get_landscape_name()) return;
+	if (landscape) delete landscape;
+	landscape = NULL;
+	landscape = Landscape::create_from_file(DataDir + "landscapes.ini", new_landscape_name);
+	observatory->set_landscape_name(new_landscape_name);
+}
+
 void stel_core::load_config(void)
 {
 	init_parser conf;

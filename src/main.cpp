@@ -131,6 +131,16 @@ void setDirectories(void)
 	// config/ directory of the dataRoot directory
 #if defined(WIN32) || defined(CYGWIN) || defined(__MINGW32__) || defined(MACOSX)
 	CDIR = DATA_ROOT + "/config/";
+
+	if ((tempFile = fopen((CDIR + "config.txt").c_str(),"r")))
+	{
+		fclose(tempFile);
+	}
+	else
+	{
+		// First launch for that user : set default options by copying the default files
+		system( (string("cp ") + CDIR + "default_config.txt " + CDIR + "config.txt").c_str() );
+	}
 #else
 
 	// Just an indication if we are on unix/linux that we use local data files
