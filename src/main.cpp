@@ -89,7 +89,7 @@ void setDirectories(const char* executableName)
 	// The variable CONFIG_DATA_DIR must have been set by the configure script
 	// Its value is the dataRoot directory, ie the one containing data/ and textures/
 
-#if !defined(MACOSX) && !defined(XCODE)
+#if !defined(MACOSX) || ( defined(MACOSX) && !defined(XCODE) )
 	// Check the presence of a file in possible data directories and set the
 	// dataRoot string if the directory was found.
     FILE * tempFile = NULL;
