@@ -609,6 +609,7 @@ int stel_ui::handle_clic(Uint16 x, Uint16 y, Uint8 button, Uint8 state)
 	  if (SDL_GetModState() & KMOD_CTRL)
 	    {
 	      core->commander->execute_command("select");
+		  return 1;
 	    }
 
         	// Left clic -> selection of an object
