@@ -6,6 +6,7 @@ main.cpp \
 stel_config.h       stel_config.cpp \
 stel_utility.h      stel_utility.cpp \
 stel_object.h       stel_object.cpp \
+stel_atmosphere.h   stel_atmosphere.cpp \
 shooting.h          shooting.cpp \
 grid.h              grid.cpp \
 constellation.h     constellation.cpp \
@@ -25,6 +26,8 @@ s_font.h            s_font.cpp \
 s_gui.h             s_gui.cpp \
 s_gui_window.h      s_gui_window.cpp \
 orbit.h	solve.h		orbit.cpp \
+skylight.h          skylight.cpp \
+tone_reproductor.h  tone_reproductor.cpp \
 parsecfg.h          parsecfg.c \
 stellarium.h stella_types.h \
 vecmath.h bytes.h

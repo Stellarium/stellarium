@@ -36,6 +36,7 @@
 #include "solarsystem.h"
 #include "navigator.h"
 #include "stel_object.h"
+#include "stel_atmosphere.h"
 
 #include "SDL.h"
 
@@ -48,6 +49,7 @@ Hip_Star_mgr * HipVouteCeleste;       // Class to manage the Hipparcos catalog
 Constellation_mgr * ConstellCeleste;  // Constellation boundary and name
 Nebula_mgr * messiers;                // Class to manage the messier objects
 s_texture * texIds[200];              // Common Textures
+stel_atmosphere * sky;
 
 /*ShootingStar * TheShooting = NULL;*/
 
@@ -84,10 +86,11 @@ void Draw(int delta_time)
     if (global.FlagAtmosphere)       // Calc the atmosphere
     {
     	// Draw atmosphere every second frame because it's slow....
-        if (++timeAtmosphere>1 && global.SkyBrightness>0)
+        if (++timeAtmosphere>0)// && global.SkyBrightness>0)
         {
 	    	timeAtmosphere=0;
-            CalcAtmosphere();
+            //CalcAtmosphere();
+			sky->compute_color(&navigation);
         }
     }
 
@@ -111,8 +114,9 @@ void Draw(int delta_time)
 		HipVouteCeleste->Draw();    // Draw the stars
     }
 
-	if (global.FlagAtmosphere && global.SkyBrightness>0)
-	DrawAtmosphere2();	// Draw the atmosphere
+	if (global.FlagAtmosphere)// && global.SkyBrightness>0)
+	//DrawAtmosphere2();	// Draw the atmosphere
+	sky->draw();
 
     //Sun->DrawMoonDaylight();
 
@@ -387,6 +391,9 @@ bool Initialize(void)	     // Any Application & User Initialization Code Goes He
     strcpy(tempName,global.DataDir);
     strcat(tempName,"messier.fab");
     messiers->Read(tempName);        // read the messiers object data
+
+	sky=new stel_atmosphere();
+
     initUi();                        // initialisation of the User Interface
     return true;		     // Return TRUE (Initialization Successful)
 }

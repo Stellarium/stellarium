@@ -46,6 +46,7 @@ planet::~planet()
 	name=NULL;
 }
 
+// Return the information string "ready to print" :)
 void planet::get_info_string(char * s)
 {
 	double tempDE, tempRA;
@@ -75,6 +76,7 @@ Vec3d planet::get_earth_equ_pos(void)
 	//return navigation.helio_to_earth_equ(&v); this is the real equatorial
 }
 
+// Call the provided function to compute the ecliptical position
 void planet::compute_position(double date)
 {
 	coord_func(date, &(ecliptic_pos[0]), &(ecliptic_pos[1]), &(ecliptic_pos[2]));
@@ -158,6 +160,7 @@ void planet::addSatellite(planet*p)
 	p->parent=this;
 }
 
+// Draw the planet and all the related infos : name, circle etc..
 void planet::draw(void)
 {
 	glPushMatrix();
@@ -211,9 +214,10 @@ void planet::draw(void)
 			}
 		}
 
-		// Draw the name, and the circle
-    	// Thanks to Nick Porcino for this addition
-    	if (global.FlagPlanetsHintDrawing && atan(get_ecliptic_pos().length()/equPos.length())/navigation.get_fov()>0.0005)
+		// Draw the name, and the circle if it's not too close from the body it turning around
+		// ti prevent name overlaping (ie for jupiter satellites)
+    	if (global.FlagPlanetsHintDrawing &&
+			atan(get_ecliptic_pos().length()/equPos.length())/navigation.get_fov()>0.0005)
     	{
             setOrthographicProjection(global.X_Resolution, global.Y_Resolution);    // 2D coordinate
             glEnable(GL_BLEND);
@@ -223,7 +227,7 @@ void planet::draw(void)
             float tmp = 8.f + angl*global.Y_Resolution*60./navigation.get_fov(); // Shift for name printing
             planet_name_font->print(screenX+tmp,screenY+tmp, name);
 
-            // Draw the circle
+            // Draw the 2D small circle : disapears smoothly on close view
 			tmp-=8.;
 			if (tmp<1) tmp=1.;
 			glColor4f(0.5/tmp,0.5/tmp,0.7/tmp,1/tmp);
@@ -249,7 +253,7 @@ void planet::draw(void)
     	// planet texture maps where zero deg long. is in the middle of the texture.
 		glRotatef(axis_rotation + 180.,0.,0.,1.);
 
-		glEnable(GL_DEPTH_TEST);
+		glEnable(GL_DEPTH_TEST); // Enable this for eclipse correct vision
 		glBindTexture(GL_TEXTURE_2D, planetTexture->getID());
 		GLUquadricObj * p=gluNewQuadric();
 		gluQuadricTexture(p,GL_TRUE);
