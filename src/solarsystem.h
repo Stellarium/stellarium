@@ -20,14 +20,45 @@
 #ifndef _SOLARSYSTEM_H_
 #define _SOLARSYSTEM_H_
 
+#include <vector>
+
 #include "stellarium.h"
 #include "planet.h"
 
-extern planet * Sun;             	  // Sun, center of the solar system
-extern planet * Moon;
-extern planet * Earth; 
+class SolarSystem
+{
+public:
+	SolarSystem();
 
-void InitSolarSystem(char * font_fileName); // Create and init the solar system
-void ClearSolarSystem(void);
+    virtual ~SolarSystem();
 
-#endif // _PLANET_H_
+	// Init and load the solar system data from the file "planetfile".
+	void init(const char * font_fileName, const char* planetfile);
+
+	// Compute the position for every elements of the solar system.
+	void compute_positions(double date);
+
+	// Compute the transformation matrix for every elements of the solar system.
+    void compute_trans_matrices(double date);
+
+	// Draw all the elements of the solar system
+    void draw(int hint_ON, draw_utility * du, navigator * nav);
+
+	// Search if any planet is close to position given in earth equatorial position.
+	planet* search(Vec3d, navigator * nav);
+
+	planet* get_earth(void) {return earth;}
+
+	Vec3d get_moon_heliocentric_ecliptic_pos(void) {return moon->get_heliocentric_ecliptic_pos();}
+private:
+	planet* sun;
+	planet* moon;
+	planet* earth;
+
+	s_font* planet_name_font;
+	void load(const char* planetfile);	// Load the bodies data from a file
+	vector<planet*> system_planets;	// Vector containing all the bodies of the system
+};
+
+
+#endif // _SOLARSYSTEM_H_

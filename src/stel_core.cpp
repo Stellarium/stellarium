@@ -21,6 +21,7 @@
 
 #include "stel_core.h"
 #include "stellastro.h"
+#include "draw.h"
 
 extern s_texture * texIds[200];            // Common Textures TODO : Remove that
 
@@ -44,9 +45,7 @@ stel_core::~stel_core()
 	if (nebulas) delete nebulas;
 	if (atmosphere) delete atmosphere;
 	if (tone_converter) delete tone_converter;
-
-	ClearSolarSystem();
-
+	if (ssystem) delete ssystem;
 	if (ui) delete ui;
 }
 
@@ -76,6 +75,7 @@ void stel_core::init(void)
     hip_stars = new Hip_Star_mgr();
     asterisms = new Constellation_mgr();
     nebulas   = new Nebula_mgr();
+	ssystem = new SolarSystem();
 	// Create atmosphere renderer
 	atmosphere=new stel_atmosphere();
 	// Create tone reproductor
@@ -116,7 +116,9 @@ void stel_core::init(void)
 	// Create and init the solar system TODO : use a class
     strcpy(tempName,DataDir);
     strcat(tempName,"spacefont.txt");
-	InitSolarSystem(tempName);
+    strcpy(tempName2,DataDir);
+    strcat(tempName2,"ssystem.ini");
+	ssystem->init(tempName, tempName2);
 
 	// Load the common used textures TODO : will be removed
     load_base_textures();
@@ -129,9 +131,14 @@ void stel_core::init(void)
     ui->init();
 
 	// Compute planets data and init viewing position
-	Sun->compute_position(navigation->get_JDay());		// Position of sun and all the satellites (ie planets)
-	Sun->compute_trans_matrix(navigation->get_JDay());	// Matrix for sun and all the satellites (ie planets)
-	navigation->update_transform_matrices();			// Transform matrices between coordinates systems
+
+	// Position of sun and all the satellites (ie planets)
+	ssystem->compute_positions(navigation->get_JDay());
+	// Matrix for sun and all the satellites (ie planets)
+	ssystem->compute_trans_matrices(navigation->get_JDay());
+
+	// Compute transform matrices between coordinates systems
+	navigation->update_transform_matrices((ssystem->get_earth())->get_ecliptic_pos());
 	navigation->set_local_vision(Vec3d(1.,0.,0.3));
 }
 
@@ -151,9 +158,9 @@ void stel_core::update(int delta_time)
     // Update the position of observation and time etc...
 	navigation->update_time(delta_time);
 
-	Sun->compute_position(navigation->get_JDay());		// Position of sun and all the satellites (ie planets)
-	Sun->compute_trans_matrix(navigation->get_JDay());	// Matrix for sun and all the satellites (ie planets)
-	navigation->update_transform_matrices();			// Transform matrices between coordinates systems
+	ssystem->compute_positions(navigation->get_JDay());		// Position of sun and all the satellites (ie planets)
+	ssystem->compute_trans_matrices(navigation->get_JDay());	// Matrix for sun and all the satellites (ie planets)
+	navigation->update_transform_matrices((ssystem->get_earth())->get_ecliptic_pos());	// Transform matrices between coordinates systems
  	navigation->update_vision_vector(delta_time, selected_object);		// Direction of vision
 
 	// Set the common variables used by the draw functions
@@ -228,7 +235,7 @@ void stel_core::draw(int delta_time)
 
 	// Draw the planets
 	// TODO : manage FlagPlanetsHintDrawing
-	if (FlagPlanets) Sun->draw(FlagPlanetsHints, du, navigation);
+	if (FlagPlanets) ssystem->draw(FlagPlanetsHints, du, navigation);
 
 	// Set openGL drawings in local coordinates i.e. generally altazimuthal coordinates
 	navigation->switch_to_local();
@@ -239,7 +246,7 @@ void stel_core::draw(int delta_time)
 	sunPos.normalize();
 
 	// Compute the moon position in local coordinate
-	temp2 = Moon->get_heliocentric_ecliptic_pos();
+	temp2 = ssystem->get_moon_heliocentric_ecliptic_pos();
 	Vec3d moonPos = navigation->helio_to_local(&temp2);
 	moonPos.normalize();
 
@@ -429,10 +436,8 @@ stel_object * stel_core::find_stel_object(Vec3d v)
 {
 	stel_object * sobj = NULL;
 
-	if (FlagPlanets) sobj = Sun->search(v, navigation);
+	if (FlagPlanets) sobj = ssystem->search(v, navigation);
 	if (sobj) return sobj;
-
-
 
 	Vec3f u=Vec3f(v[0],v[1],v[2]);
 

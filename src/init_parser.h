@@ -29,25 +29,36 @@ class init_parser
 public:
 	// Create the parser object from the given file
 	// You need to call load() before using the get() functions
-    init_parser(char * file);
+    init_parser(const char * file);
     virtual ~init_parser();
 
 	// Load the config file (the parsing operation)
 	void load(void);
 
 	// Save the current config state in the original file
-	void save(void);
+	void save(void) const;
 
 	// Save the current config state in the given file
-	void save_to(char * file_name);
+	void save_to(const char * file_name) const;
 
-	// Get a string from the key. The returned char pointer is pointing
-	// to a string allocated in the dictionary, do not free or modify it.
-	const char * get_str(char * key);
-	int get_int(char * key);		// Get a integer from the key.
-	double get_double(char * key);	// Get a double from the key.
-	int get_boolean(char * key);	// Get a boolean (int) from the key.
+	// Get a string from the key.
+	const char * get_str(const char * key) const;
+	const char * get_str(const char * section, const char * key) const;
 
+	// Get a integer from the key.
+	int get_int(const char * key) const;
+	int get_int(const char * section, const char * key) const;
+
+	// Get a double from the key.
+	double get_double(const char * key) const;
+	double get_double(const char * section, const char * key) const;
+
+	// Get a boolean (int) from the key.
+	int get_boolean(const char * key) const;
+	int get_boolean(const char * section, const char * key) const;
+
+	int get_nsec(void) const;					// Get number of sections.
+	const char * get_secname(int n) const;		// Get name for section n.
 private:
 	void free_dico(void);	// Unalloc memory
 	dictionary * dico;		// The dictionnary containing the parsed data

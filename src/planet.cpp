@@ -22,20 +22,23 @@
 #include "navigator.h"
 #include "s_font.h"
 
-s_font * planet_name_font;
+s_font* planet::planet_name_font = NULL;
 
-rotation_elements::rotation_elements() : period(1.), offset(0.), epoch(J2000), obliquity(0.), ascendingNode(0.), precessionRate(0.)
+rotation_elements::rotation_elements() : period(1.), offset(0.), epoch(J2000),
+		obliquity(0.), ascendingNode(0.), precessionRate(0.)
 {
 }
 
-planet::planet(char * _name, int _flagHalo, double _radius, vec3_t _color,
-				s_texture * _planetTexture, s_texture * _haloTexture, pos_func_type _coord_func) :
-					name(NULL), flagHalo(_flagHalo), radius(_radius), color(_color), axis_rotation(0.),
-					planetTexture(_planetTexture), haloTexture(_haloTexture),
-					coord_func(_coord_func), parent(NULL)
+planet::planet(const char * _name, int _flagHalo, double _radius, vec3_t _color,
+	const char* tex_map_name, const char* tex_halo_name, pos_func_type _coord_func) :
+		name(NULL), flagHalo(_flagHalo), radius(_radius), color(_color), axis_rotation(0.),
+		tex_map(NULL), tex_halo(NULL), coord_func(_coord_func), parent(NULL)
 {
 	ecliptic_pos=Vec3d(0.,0.,0.);
+	mat_local_to_parent = Mat4d::identity();
 	if (_name) name=strdup(_name);
+	tex_map = new s_texture(tex_map_name, TEX_LOAD_TYPE_PNG_SOLID);
+	if (flagHalo) tex_halo = new s_texture(tex_halo_name);
 }
 
 
@@ -55,6 +58,7 @@ void planet::get_info_string(char * s, navigator * nav) const
 	name, print_angle_hms(tempRA*180./M_PI), print_angle_dms_stel(tempDE*180./M_PI), equPos.length());
 }
 
+// Set the orbital elements
 void planet::set_rotation_elements(float _period, float _offset, double _epoch, float _obliquity, float _ascendingNode, float _precessionRate)
 {
     re.period = _period;
@@ -66,7 +70,7 @@ void planet::set_rotation_elements(float _period, float _offset, double _epoch, 
 }
 
 
-// Return the rect earth equatorial position
+// Return the planet position in rectangular earth equatorial coordinate
 Vec3d planet::get_earth_equ_pos(navigator * nav) const
 {
 	Vec3d v = get_heliocentric_ecliptic_pos();
@@ -75,47 +79,30 @@ Vec3d planet::get_earth_equ_pos(navigator * nav) const
 	//return navigation.helio_to_earth_equ(&v); this is the real equatorial
 }
 
-// Call the provided function to compute the ecliptical position
+// Compute the position in the parent planet coordinate system
+// Actually call the provided function to compute the ecliptical position
 void planet::compute_position(double date)
 {
 	coord_func(date, &(ecliptic_pos[0]), &(ecliptic_pos[1]), &(ecliptic_pos[2]));
-	ecliptic_pos=ecliptic_pos;
-
-	// Compute for the satellites
-    list<planet*>::iterator iter = satellites.begin();
-    while (iter != satellites.end())
-    {
-        (*iter)->compute_position(date);
-        iter++;
-    }
 }
 
-// Compute the matrices which converts from the parent's ecliptic coordinates to local ecliptic and oposite
+// Compute the transformation matrix from the local planet coordinate to the parent planet coordinate
 void planet::compute_trans_matrix(double date)
 {
-	mat_parent_to_local =	Mat4d::xrotation(re.obliquity) /* Mat4d::zrotation(re.ascendingNode)*/ * Mat4d::translation(-ecliptic_pos);
-	mat_local_to_parent =   Mat4d::translation(ecliptic_pos) /* Mat4d::zrotation(-re.ascendingNode)*/ * Mat4d::xrotation(-re.obliquity);
-
+	mat_local_to_parent = Mat4d::translation(ecliptic_pos) // * Mat4d::zrotation(-re.ascendingNode)
+		* Mat4d::xrotation(-re.obliquity);
 
 	compute_geographic_rotation(date);
-
-    // Compute for the satellites
-    list<planet*>::iterator iter = satellites.begin();
-    while (iter != satellites.end())
-    {
-        (*iter)->compute_trans_matrix(date);
-        iter++;
-    }
 }
 
 
-
-// Get a matrix which convert from local geographic coordinate to heliocentric ecliptic coordinate
+// Get a matrix which converts from heliocentric ecliptic coordinate to local geographic coordinate
 Mat4d planet::get_helio_to_geo_matrix()
 {
 	Mat4d mat = mat_local_to_parent;
-
 	mat = mat * Mat4d::zrotation(axis_rotation*M_PI/180.);
+
+	// Iterate thru parents
 	planet * p = this;
 	while (p->parent!=NULL)
 	{
@@ -136,11 +123,13 @@ void planet::compute_geographic_rotation(double date)
 	axis_rotation = remainder * 360. + re.offset;
 }
 
+// Get the planet position in the parent planet ecliptic coordinate
 Vec3d planet::get_ecliptic_pos() const
 {
 	return ecliptic_pos;
 }
 
+// Return the heliocentric ecliptical position
 Vec3d planet::get_heliocentric_ecliptic_pos() const
 {
 	Vec3d pos = ecliptic_pos;
@@ -153,7 +142,8 @@ Vec3d planet::get_heliocentric_ecliptic_pos() const
 	return pos;
 }
 
-void planet::addSatellite(planet*p)
+// Add the given planet in the satellite list
+void planet::add_satellite(planet*p)
 {
 	satellites.push_back(p);
 	p->parent=this;
@@ -165,77 +155,24 @@ void planet::draw(int hint_ON, draw_utility * du, navigator * nav)
 	glPushMatrix();
     glMultMatrixd(mat_local_to_parent); // Go in planet local coordinate
 
-	double screenX, screenY, screenZ;
-	du->project(0., 0., 0., screenX, screenY, screenZ);
+	// Compute the 2D position
+	du->project(0., 0., 0., screenPos[0], screenPos[1], screenPos[2]);
 
 	// Check if in the screen
-	Vec3d equPos = get_earth_equ_pos(nav);
-	float angl = radius/equPos.length();
-	float lim = atan(angl)*180./M_PI/du->fov;
-	if (screenZ < 1 && screenX>(-lim*du->screenW) &&
-		screenX<((1.f+lim)*du->screenW) &&
-		screenY>(-lim*du->screenH) && screenY<((1.f+lim)*du->screenH))
+	Vec3d earthEquPos = get_earth_equ_pos(nav);
+	float lim = atan(radius/earthEquPos.length())*180./M_PI/du->fov;
+	if (screenPos[2] < 1 &&
+		screenPos[0]>-lim*du->screenW && screenPos[0]<(1.f+lim)*du->screenW &&
+		screenPos[1]>-lim*du->screenH && screenPos[1]<(1.f+lim)*du->screenH)
 	{
-		if (haloTexture)
-		{
-			float rmag = lim*du->screenH*100;
-			if (rmag>0.5)
-			{
-				float cmag=1.;
-				if (rmag<1.2)
-				{
-					cmag=pow(rmag,2)/1.44;
-					rmag=1.2;
-				}
-				else
-				{
-					if (rmag>8.)
-					{
-						rmag=8.;
-					}
-				}
 
-				du->set_orthographic_projection();    // 2D coordinate
-				glBindTexture(GL_TEXTURE_2D, haloTexture->getID());
-            	glEnable(GL_BLEND);
-            	glDisable(GL_LIGHTING);
-				glEnable(GL_TEXTURE_2D);
-            	glColor3f(cmag,cmag,cmag);
-				glTranslatef(screenX,screenY,0.);
-				glBegin(GL_QUADS);
-					glTexCoord2i(0,0);	glVertex3f(-rmag, rmag,0.f);	// Bottom Left
-					glTexCoord2i(1,0);	glVertex3f( rmag, rmag,0.f);	// Bottom Right
-					glTexCoord2i(1,1);	glVertex3f( rmag,-rmag,0.f);	// Top Right
-					glTexCoord2i(0,1);	glVertex3f(-rmag,-rmag,0.f);	// Top Left
-				glEnd();
-				du->reset_perspective_projection();		// Restore the other coordinate
-			}
-		}
+		if (tex_halo) draw_halo(du);
 
 		// Draw the name, and the circle if it's not too close from the body it's turning around
 		// this prevents name overlaping (ie for jupiter satellites)
-    	if (hint_ON && atan(get_ecliptic_pos().length()/equPos.length())/du->fov>0.0005)
+    	if (hint_ON && atan(get_ecliptic_pos().length()/earthEquPos.length())/du->fov>0.0005)
     	{
-            du->set_orthographic_projection();    // 2D coordinate
-            glEnable(GL_BLEND);
-            glDisable(GL_LIGHTING);
-			glEnable(GL_TEXTURE_2D);
-            glColor3f(0.5,0.5,0.7);
-            float tmp = 8.f + angl*du->screenH*60./du->fov; // Shift for name printing
-            planet_name_font->print(screenX+tmp,screenY+tmp, name);
-
-            // Draw the 2D small circle : disapears smoothly on close view
-			tmp-=8.;
-			if (tmp<1) tmp=1.;
-			glColor4f(0.5/tmp,0.5/tmp,0.7/tmp,1/tmp);
-			glDisable(GL_TEXTURE_2D);
-            glBegin(GL_LINE_STRIP);
-            for (float r = 0; r < 6.28; r += 0.2)
-            {
-                glVertex3f(screenX + 8. * sin(r), screenY + 8. * cos(r), 0.0f);
-            }
-            glEnd();
-            du->reset_perspective_projection();		// Restore the other coordinate
+			draw_hints(earthEquPos, du);
         }
 
     	glEnable(GL_TEXTURE_2D);
@@ -251,7 +188,7 @@ void planet::draw(int hint_ON, draw_utility * du, navigator * nav)
 		glRotatef(axis_rotation + 180.,0.,0.,1.);
 
 		glEnable(GL_DEPTH_TEST); // Enable this for eclipse correct vision
-		glBindTexture(GL_TEXTURE_2D, planetTexture->getID());
+		glBindTexture(GL_TEXTURE_2D, tex_map->getID());
 		GLUquadricObj * p=gluNewQuadric();
 		gluQuadricTexture(p,GL_TRUE);
 		gluSphere(p,radius,60,60);
@@ -274,183 +211,79 @@ void planet::draw(int hint_ON, draw_utility * du, navigator * nav)
     glDisable(GL_CULL_FACE);
 }
 
-// Search if any planet is close to position given in earth equatorial position and return the distance
-planet* planet::search(Vec3d pos, double * angleClosest, navigator * nav)
+void planet::draw_hints(Vec3d earthEquPos, draw_utility * du)
 {
-    pos.normalize();
-    planet * closest = NULL;
-	planet * p = NULL;
+	du->set_orthographic_projection();    // 2D coordinate
 
-	Vec3d equPos = get_earth_equ_pos(nav);
-	equPos.normalize();
-    double angleClos = equPos[0]*pos[0] + equPos[1]*pos[1] + equPos[2]*pos[2];
-
-	closest = this;
-	if (angleClos>*angleClosest)
-	{
-		*angleClosest = angleClos;
-	}
-    // Compute for the satellites
-    list<planet*>::iterator iter = satellites.begin();
-    while (iter != satellites.end())
-    {
-        p = (*iter)->search(pos,&angleClos,nav);
-		if (angleClos>*angleClosest)
-		{
-			closest = p;
-			*angleClosest = angleClos;
-		}
-        iter++;
-    }
-    if (*angleClosest>0.999)
-    {
-	    return closest;
-    }
-    else return NULL;
-}
-
-// Search if any planet is close to position given in earth equatorial position.
-planet* planet::search(Vec3d pos, navigator * nav)
-{
-	double temp = 0.;
-	return search(pos,&temp, nav);
-}
-
-
-sun_planet::sun_planet(char * _name, int _flagHalo, double _radius, vec3_t _color,
-				s_texture * _planetTexture, s_texture * _haloTexture, s_texture * _bigHaloTexture) : planet(_name,_flagHalo,_radius,_color,_planetTexture,_haloTexture,NULL)
-{
-	ecliptic_pos=Vec3d(0.,0.,0.);
-	mat_local_to_parent = Mat4d::identity();
-	name=strdup(_name);
-}
-
-
-void sun_planet::compute_position(double date)
-{
-    // The sun is fixed in the heliocentric coordinate
-
-    // Compute for the satellites
-    list<planet*>::iterator iter = satellites.begin();
-    while (iter != satellites.end())
-    {
-        (*iter)->compute_position(date);
-        iter++;
-    }
-}
-
-// Get a matrix which converts from the parent's ecliptic coordinates to local ecliptic
-void sun_planet::compute_trans_matrix(double date)
-{
-    // Compute for the satellites
-    list<planet*>::iterator iter = satellites.begin();
-    while (iter != satellites.end())
-    {
-        (*iter)->compute_trans_matrix(date);
-        iter++;
-    }
-}
-
-void sun_planet::draw(int hint_ON, draw_utility * du, navigator* nav)
-{
-	// We are supposed to be in heliocentric coordinate already so no matrix change
-	//glEnable(GL_DEPTH_TEST);
-
-    glEnable(GL_TEXTURE_2D);
-	glEnable(GL_CULL_FACE);
-	glDisable(GL_BLEND);
+	glEnable(GL_BLEND);
 	glDisable(GL_LIGHTING);
+	glEnable(GL_TEXTURE_2D);
+	glColor3f(0.5,0.5,0.7);
+	float tmp = 8.f + radius/earthEquPos.length()*du->screenH*60./du->fov; // Shift for name printing
+	planet_name_font->print(screenPos[0]+tmp,screenPos[1]+tmp, name);
 
-	glEnable(GL_DEPTH_TEST);
-	glColor3f(1.0f, 1.0f, 1.0f);
-	glBindTexture(GL_TEXTURE_2D, planetTexture->getID());
-	GLUquadricObj * p=gluNewQuadric();
+	// Draw the 2D small circle : disapears smoothly on close view
+	tmp-=8.;
+	if (tmp<1) tmp=1.;
+	glColor4f(0.5/tmp,0.5/tmp,0.7/tmp,1/tmp);
+	glDisable(GL_TEXTURE_2D);
+	glBegin(GL_LINE_STRIP);
+	for (float r = 0; r < 6.28; r += 0.2)
+	{
+		glVertex3f(screenPos[0] + 8. * sin(r), screenPos[1] + 8. * cos(r), 0.0f);
+	}
+	glEnd();
+
+	du->reset_perspective_projection();		// Restore the other coordinate
+}
+
+void planet::draw_sphere(void)
+{
+	glColor3fv(color);
+	glBindTexture(GL_TEXTURE_2D, tex_map->getID());
+	GLUquadricObj * p = gluNewQuadric();
 	gluQuadricTexture(p,GL_TRUE);
 	gluSphere(p,radius,40,40);
 	gluDeleteQuadric(p);
-	glDisable(GL_DEPTH_TEST);
-
-	// Draw the name, and the circle
-    // Thanks to Nick Porcino for this addition
-    if (hint_ON)
-    {
-        double screenX, screenY, screenZ;
-        du->project(0., 0., 0., screenX, screenY, screenZ);
-
-        if (screenZ < 1)
-        {
-		    glEnable(GL_BLEND);
-
-            du->set_orthographic_projection();		// 2D coordinate
-
-            glColor3f(0.5,0.5,0.7);
-            planet_name_font->print(screenX+5.,screenY+5., name);
-
-            // Draw the circle
-			glDisable(GL_TEXTURE_2D);
-            glBegin(GL_LINE_STRIP);
-            	for (float r = 0; r < 6.28; r += 0.2)
-            	{
-                	glVertex3f(screenX + 8. * sin(r), screenY + 8. * cos(r), 0);
-            	}
-            glEnd();
-            du->reset_perspective_projection();		// Restore the other coordinate
-        }
-    }
-
-	// Set the lighting with the sun as light source
-    float tmp[4] = {0,0,0,0};
-	float tmp2[4] = {0.05,0.05,0.05,0.05};
-    float tmp3[4] = {2,2,2,2};
-    float tmp4[4] = {1,1,1,1};
-    glLightfv(GL_LIGHT0,GL_AMBIENT,tmp2);
-    glLightfv(GL_LIGHT0,GL_DIFFUSE,tmp3);
-    glLightfv(GL_LIGHT0,GL_SPECULAR,tmp);
-
-    glMaterialfv(GL_FRONT,GL_AMBIENT ,tmp2);
-    glMaterialfv(GL_FRONT,GL_DIFFUSE ,tmp4);
-    glMaterialfv(GL_FRONT,GL_EMISSION ,tmp);
-    glMaterialfv(GL_FRONT,GL_SHININESS ,tmp);
-    glMaterialfv(GL_FRONT,GL_SPECULAR ,tmp);
-
-	float zero4[4] = {0.,0.,0.,1.};
-    glLightfv(GL_LIGHT0,GL_POSITION,zero4);
-
-	glEnable(GL_LIGHTING);
-	glEnable(GL_LIGHT0);
-
-
-    // Draw the satellites
-    list<planet*>::iterator iter = satellites.begin();
-    while (iter != satellites.end())
-    {
-        (*iter)->draw(hint_ON, du, nav);
-        iter++;
-    }
-
-	glDisable(GL_LIGHTING);
-    glDisable(GL_CULL_FACE);
-	//glDisable(GL_DEPTH_TEST);
 }
 
-
-
-ring_planet::ring_planet(char * _name, int _flagHalo, double _radius, vec3_t _color, s_texture * _planetTexture, s_texture * _haloTexture, void (*_coord_func)(double JD, double *, double *, double *), ring * _planet_ring) : planet(_name, _flagHalo, _radius, _color, _planetTexture, _haloTexture, _coord_func), planet_ring(_planet_ring)
+void planet::draw_halo(draw_utility * du)
 {
+	float rmag = 10;//lim*du->screenH*100;
+	if (rmag>0.5)
+	{
+		float cmag=1.;
+		if (rmag<1.2)
+		{
+			cmag=pow(rmag,2)/1.44;
+			rmag=1.2;
+		}
+		else
+		{
+			if (rmag>8.)
+			{
+				rmag=8.;
+			}
+		}
+
+		du->set_orthographic_projection();    	// 2D coordinate
+		glBindTexture(GL_TEXTURE_2D, tex_halo->getID());
+		glEnable(GL_BLEND);
+			glDisable(GL_LIGHTING);
+			glEnable(GL_TEXTURE_2D);
+			glColor3f(cmag,cmag,cmag);
+			glTranslatef(screenPos[0],screenPos[1],0.);
+			glBegin(GL_QUADS);
+				glTexCoord2i(0,0);	glVertex3f(-rmag, rmag,0.f);	// Bottom Left
+				glTexCoord2i(1,0);	glVertex3f( rmag, rmag,0.f);	// Bottom Right
+				glTexCoord2i(1,1);	glVertex3f( rmag,-rmag,0.f);	// Top Right
+				glTexCoord2i(0,1);	glVertex3f(-rmag,-rmag,0.f);	// Top Left
+			glEnd();
+
+		du->reset_perspective_projection();		// Restore the other coordinate
+	}
 }
 
-void ring_planet::draw(int hint_ON, draw_utility * du, navigator* nav)
-{
-	planet::draw(hint_ON, du, nav);
-
-	glPushMatrix();
-    glMultMatrixd(mat_local_to_parent); // Go in planet local coordinate
-	glPushMatrix();
-	glRotatef(axis_rotation + 180.,0.,0.,1.);
-	planet_ring->draw(nav);
-	glPopMatrix();
-	glPopMatrix();
-}
 
 ring::ring(float _radius, s_texture * _tex) : radius(_radius), tex(_tex)
 {
@@ -458,6 +291,7 @@ ring::ring(float _radius, s_texture * _tex) : radius(_radius), tex(_tex)
 
 void ring::draw(navigator* nav)
 {
+	//glRotatef(axis_rotation + 180.,0.,0.,1.);
 	glColor3f(1.0f, 0.88f, 0.82f); // For saturn only..
     glEnable(GL_TEXTURE_2D);
 	glDisable(GL_CULL_FACE);
@@ -473,8 +307,8 @@ void ring::draw(navigator* nav)
 		glTexCoord2f(0,1); glVertex3d(-r,-r, 0.);	// Top left
 	glEnd ();
 	glDisable(GL_DEPTH_TEST);
-
 }
+
 
 	/*
     float rmag;

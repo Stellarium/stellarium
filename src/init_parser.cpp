@@ -21,7 +21,7 @@
 
 #include "init_parser.h"
 
-init_parser::init_parser(char * _file) : dico(NULL)
+init_parser::init_parser(const char * _file) : dico(NULL)
 {
 	// Check file presence
 	FILE * fp = NULL;
@@ -55,12 +55,12 @@ void init_parser::load(void)
 	}
 }
 
-void init_parser::save(void)
+void init_parser::save(void) const
 {
 	save_to(file);
 }
 
-void init_parser::save_to(char * file_name)
+void init_parser::save_to(const char * file_name) const
 {
 	// Check file presence
 	FILE * fp = NULL;
@@ -76,14 +76,26 @@ void init_parser::save_to(char * file_name)
 	}
 }
 
-const char * init_parser::get_str(char * key)
+
+const char * init_parser::get_str(const char * key) const
 {
 	if (iniparser_getstring(dico, key, NULL)) return iniparser_getstring(dico, key, NULL);
 	else printf("WARNING : Can't find the configuration key %s, default NULL value returned\n", key);
 	return NULL;
 }
 
-int init_parser::get_int(char * key)
+const char * init_parser::get_str(const char * section, const char * key) const
+{
+	char tmp[strlen(section) + strlen(key) + 2];
+	strcpy(tmp,section);
+	strcat(tmp,":");
+	strcat(tmp,key);
+
+	return get_str(tmp);
+}
+
+
+int init_parser::get_int(const char * key) const
 {
 	int i = iniparser_getint(dico, key, -11111);
 	// To be sure :) (bugfree)
@@ -98,7 +110,18 @@ int init_parser::get_int(char * key)
 	return i;
 }
 
-double init_parser::get_double(char * key)
+int init_parser::get_int(const char * section, const char * key) const
+{
+	char tmp[strlen(section) + strlen(key) + 2];
+	strcpy(tmp,section);
+	strcat(tmp,":");
+	strcat(tmp,key);
+
+	return get_int(tmp);
+}
+
+
+double init_parser::get_double(const char * key) const
 {
 	double d = iniparser_getdouble(dico, key, -11111.111111356);
 	// To be sure :) (bugfree)
@@ -113,7 +136,17 @@ double init_parser::get_double(char * key)
 	return d;
 }
 
-int init_parser::get_boolean(char * key)
+double init_parser::get_double(const char * section, const char * key) const
+{
+	char tmp[strlen(section) + strlen(key) + 2];
+	strcpy(tmp,section);
+	strcat(tmp,":");
+	strcat(tmp,key);
+
+	return get_double(tmp);
+}
+
+int init_parser::get_boolean(const char * key) const
 {
 	int b = iniparser_getboolean(dico, key, -10);
 	// To be sure :) (bugfree)
@@ -128,6 +161,27 @@ int init_parser::get_boolean(char * key)
 	return b;
 }
 
+int init_parser::get_boolean(const char * section, const char * key) const
+{
+	char tmp[strlen(section) + strlen(key) + 2];
+	strcpy(tmp,section);
+	strcat(tmp,":");
+	strcat(tmp,key);
+
+	return get_boolean(tmp);
+}
+
+// Get number of sections
+int init_parser::get_nsec(void) const
+{
+	return iniparser_getnsec(dico);
+}
+
+// Get name for section n.
+const char * init_parser::get_secname(int n) const
+{
+	return iniparser_getsecname(dico, n);
+}
 
 void init_parser::free_dico(void)
 {
