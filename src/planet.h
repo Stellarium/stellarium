@@ -162,6 +162,10 @@ public:
 	void start_trail(void);
 	void end_trail(void);
 
+	// create a stencil of the planet (currently just the moon) in stencil buffer
+	void create_stencil(const navigator* nav, const Projector *prj);
+
+
 protected:
 	// Return the radius of a circle containing the object on screen
 	float get_on_screen_size(const Projector* prj, const navigator * nav);
@@ -183,6 +187,7 @@ protected:
 
 	// Draw the big halo (for sun or moon)
 	void draw_big_halo(const navigator* nav, const Projector* prj, const tone_reproductor* eye);
+
 
 	string name; // used in code, solarsystem ini file (english)
 	string common_name; // in sky locale language
