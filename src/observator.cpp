@@ -103,7 +103,6 @@ void Observator::save(const string& file, const string& section)
 	conf.set_str(section + ":latitude", print_angle_dms(latitude));
     conf.set_str(section + ":longitude", print_angle_dms(longitude));
 
-    cout << "Longitude: " << longitude << " and after " << print_angle_dms(longitude) << "\n";
 	conf.set_int(section + ":altitude", altitude);
 	conf.set_str(section + ":landscape_name", landscape_name);
 
