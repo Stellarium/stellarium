@@ -25,15 +25,16 @@
 	#include <windows.h>
 #endif
 
-#include "glpng.h"
 #include <GL/gl.h>
+#include "glpng.h"
 #include <stdlib.h>
 #include <math.h>
 #include "png.h"
 
 /* Used to decide if GL/gl.h supports the paletted extension */
 #ifdef GL_COLOR_INDEX1_EXT
-#define SUPPORTS_PALETTE_EXT
+/* Commented by Fabien Chereau 11/08/2002 */
+/*#define SUPPORTS_PALETTE_EXT*/
 #endif
 
 static unsigned char DefaultAlphaCallback(unsigned char red, unsigned char green, unsigned char blue) {

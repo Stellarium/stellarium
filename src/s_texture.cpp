@@ -52,8 +52,8 @@ s_texture::~s_texture()
 
 int s_texture::load()
 {
-    char * fullName = (char*)malloc(sizeof(char)*strlen(TEXTURE_DIR)+sizeof(char)*strlen(textureName)+6);
-    sprintf(fullName,"%s/%s.png",TEXTURE_DIR,textureName);
+    char * fullName = (char*)malloc(sizeof(char)*strlen(CONFIG_DATA_DIR"/textures")+sizeof(char)*strlen(textureName)+6);
+    sprintf(fullName,"%s/%s.png",CONFIG_DATA_DIR"/textures",textureName);
     //printf("Loading %s\n",fullName);
     pngInfo info;
     pngSetStandardOrientation(1);

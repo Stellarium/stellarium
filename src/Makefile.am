@@ -8,6 +8,3 @@ stellarium_LDADD = $(top_builddir)/src/glpng/libglpng.a $(top_builddir)/src/astr
 INCLUDES = -I$(top_srcdir)/src/glpng -I$(top_srcdir)/src/astrolib
 
 SUBDIRS = glpng astrolib
-
-CFLAGS = -O3
-CXXFLAGS = -O3
