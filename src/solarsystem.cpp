@@ -131,6 +131,18 @@ void SolarSystem::load(const string& planetfile)
 		if (funcname=="jupiter_special")
 			posfunc = pos_func_type(get_jupiter_helio_coordsv);
 
+		if (funcname=="europa_special")
+			posfunc = pos_func_type(get_europa_parent_coordsv);
+
+		if (funcname=="calisto_special")
+			posfunc = pos_func_type(get_callisto_parent_coordsv);
+
+		if (funcname=="io_special")
+			posfunc = pos_func_type(get_io_parent_coordsv);
+
+		if (funcname=="ganymede_special")
+			posfunc = pos_func_type(get_ganymede_parent_coordsv);
+
 		if (funcname=="saturn_special")
 			posfunc = pos_func_type(get_saturn_helio_coordsv);
 
