@@ -398,6 +398,12 @@ void Projector::print_gravity180(const s_font* font, float x, float y, const cha
 	glScalef(1, -1, 1);
 	for (unsigned int i=0;i<strlen(str);++i)
 	{
+		// Special not so nice trick for color insertion in strings
+		if (str[i]=='\125' || str[i]=='\126' || str[i]=='\127')
+		{
+			glColor3f(str[i]=='\125' ? 0.9f : 0.1f, str[i]=='\126' ? 0.9f : 0.1f, str[i]=='\127' ? 0.9f : 0.1f);
+			continue;
+		}
 		font->print_char(str[i]);
 		glRotatef(psi,0,0,-1);
 	}
