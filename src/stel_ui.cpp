@@ -550,8 +550,15 @@ int stel_ui::handle_keys(SDLKey key, S_GUI_VALUE state)
 		}
         if(key==SDLK_p)
         {	
-        	core->FlagPlanetsHints=!core->FlagPlanetsHints;
-		}
+	  if(!core->FlagPlanetsHints) {
+	    core->FlagPlanetsHints=1;
+	  } else if( !core->FlagPlanetsOrbits) {
+	    core->FlagPlanetsOrbits = 1;
+	  } else {
+	    core->FlagPlanetsOrbits = 0;
+	    core->FlagPlanetsHints = 0;
+	  }
+	}
         if(key==SDLK_v)
         {
         	core->FlagConstellationName=!core->FlagConstellationName;

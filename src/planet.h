@@ -35,6 +35,7 @@ typedef boost::callback<void, double, double*> pos_func_type;
 
 // epoch J2000: 12 UT on 1 Jan 2000
 #define J2000 2451545.0
+#define ORBIT_SEGMENTS 100
 
 using namespace std;
 
@@ -43,12 +44,13 @@ class rotation_elements
 {
  public:
     rotation_elements();
-    float period;        // sidereal rotation period
+    float period;        // rotation period
     float offset;        // rotation at epoch
     double epoch;
     float obliquity;     // tilt of rotation axis w.r.t. ecliptic
     float ascendingNode; // long. of ascending node of equator on the ecliptic
     float precessionRate; // rate of precession of rotation axis in rads/day
+    double sidereal_period; // sidereal period (planet year in earth days)
 };
 
 // Class to manage rings for planets like saturn
@@ -96,14 +98,14 @@ public:
 	float compute_magnitude(const navigator * nav) const;
 
 	// Draw the planet, if hint_ON is != 0 draw a circle and the name as well
-    void draw(int hint_ON, Projector* prj, const navigator* nav, const tone_reproductor* eye, int flag_point);
+    void draw(int hint_ON, Projector* prj, const navigator* nav, const tone_reproductor* eye, int flag_point, int flag_orbits);
 
 	// Add the given planet in the satellite list
 	void add_satellite(planet*);
 
 	// Set the orbital elements
 	void set_rotation_elements(float _period, float _offset, double _epoch,
-		float _obliquity, float _ascendingNode, float _precessionRate);
+		float _obliquity, float _ascendingNode, float _precessionRate, double _sidereal_period);
 
 	// Get the planet position in the parent planet ecliptic coordinate
 	Vec3d get_ecliptic_pos() const;
@@ -162,11 +164,15 @@ protected:
 	// Draw the big halo (for sun or moon)
 	void draw_big_halo(const navigator* nav, const Projector* prj, const tone_reproductor* eye);
 
+        // draw orbital path of planet
+	void planet::draw_orbit(const navigator * nav, const Projector* prj);
+
     string name;
 	int flagHalo;					// Set wether a little "star like" halo will be drawn
 	int flag_lighting;				// Set wether light computation has to be proceed
 	rotation_elements re;			// Rotation param
 	double radius;					// Planet radius in UA
+	Vec3d orbit[ORBIT_SEGMENTS];                        // store heliocentric coordinates for drawing the orbit
 	Vec3d ecliptic_pos; 			// Position in UA in the rectangular ecliptic coordinate system
 									// centered on the parent planet
 	Vec3d screenPos;				// Used to store temporarily the 2D position on screen
@@ -188,7 +194,9 @@ protected:
 	float sphere_scale;				// Artificial scaling for better viewing
 
 	double lastJD;
+	double last_orbitJD;
 	double deltaJD;
+	double delta_orbitJD;
 
 	// The callback for the calculation of the equatorial rect heliocentric position at time JD.
 	pos_func_type coord_func;
