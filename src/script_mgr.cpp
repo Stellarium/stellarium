@@ -132,7 +132,7 @@ void ScriptMgr::update(int delta_time) {
       string comd;
       unsigned long int wait;
       if(script->next_command(comd)) {
-	commander->execute_command(comd, wait);
+	commander->execute_command(comd, wait, 0);  // untrusted commands
 	wait_time = wait; 
 
       } else {

@@ -43,7 +43,7 @@ class StelCommandInterface : CommandInterface
   StelCommandInterface(stel_core * core);
   virtual ~StelCommandInterface();
   virtual int StelCommandInterface::execute_command(string commandline);
-  virtual int execute_command(string command, unsigned long int &wait);
+  virtual int execute_command(string command, unsigned long int &wait, bool trusted);
   
  private:
   stel_core * stcore;

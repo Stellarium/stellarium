@@ -37,12 +37,14 @@ StelCommandInterface::~StelCommandInterface() {
 
 int StelCommandInterface::execute_command(string commandline ) {
   unsigned long int delay;
-  return execute_command(commandline, delay);
+  return execute_command(commandline, delay, 1);  // Assumed to be trusted!
   // delay is ignored, as not needed by the ui callers
 }
 
 // called by script executors
-int StelCommandInterface::execute_command(string commandline, unsigned long int &wait) {
+// certain key settings can't be modified by scripts unless
+// they are "trusted" - TODO details TBD when needed
+int StelCommandInterface::execute_command(string commandline, unsigned long int &wait, bool trusted) {
   string command;
   stringHash_t args;
   int status = 0;  // true if command was understood
@@ -57,7 +59,7 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
   if(command == "flag") {
 
     // TODO: loop if want to allow that syntax
-    status = stcore->set_flag( args.begin()->first, args.begin()->second );
+    status = stcore->set_flag( args.begin()->first, args.begin()->second, trusted);
 
   }  else if (command == "wait" && args["duration"]!="") {
 
@@ -65,23 +67,15 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
     if(fdelay > 0) wait = (int)(fdelay*1000);
 
   } else if (command == "set") {
-    // set core globals
-    // TODO: some of these should not be accessible to scripts, so commented out for now
+    // set core variables
+
     // TODO: some bounds/error checking here
 
     if(args["atmosphere_fade_duration"]!="") stcore->AtmosphereFadeDuration = str_to_double(args["atmosphere_fade_duration"]);
     else if(args["auto_move_duration"]!="") stcore->auto_move_duration = str_to_double(args["auto_move_duration"]);
-    //    else if(args["base_font_size"]!="") stcore->BaseFontSize = str_to_double(args["base_font_size"]);
-    //	else if(args["bbp_mode"]!="") stcore->BbpMode = str_to_double(args["bbp_mode"]);
     else if(args["constellation_art_fade_duration"]!="") stcore->ConstellationArtFadeDuration = str_to_double(args["constellation_art_fade_duration"]);
     else if(args["constellation_art_intensity"]!="") stcore->ConstellationArtIntensity = str_to_double(args["constellation_art_intensity"]);
-    //    else if(args["date_display_format"]!="") stcore->DateDisplayFormat = args["date_display_format"];
-    //	else if(args["fullscreen"]!="") stcore->Fullscreen = args["fullscreen"];
-    //	else if(args["horizontal_offset"]!="") stcore->HorizontalOffset = str_to_double(args["horizontal_offset"]);
-    //	else if(args["init_fov"]!="") stcore->InitFov = str_to_double(args["init_fov"]);
-
     else if(args["landscape_name"]!="") stcore->set_landscape(args["landscape_name"]);
-
     else if(args["max_mag_nebula_name"]!="") stcore->MaxMagNebulaName = str_to_double(args["max_mag_nebula_name"]);
     else if(args["max_mag_star_name"]!="") stcore->MaxMagStarName = str_to_double(args["max_mag_star_name"]);
     else if(args["moon_scale"]!="") {
@@ -89,27 +83,37 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
       if(stcore->MoonScale<0) stcore->MoonScale=1;  // negative numbers reverse drawing!
       stcore->ssystem->get_moon()->set_sphere_scale(stcore->MoonScale);
     }
+    else if(args["sky_culture"]!="") stcore->set_sky_culture(args["sky_culture"]);
+    else if(args["sky_locale"]!="") stcore->set_sky_locale(args["sky_locale"]);
+    else if(args["star_mag_scale"]!="") stcore->StarMagScale = str_to_double(args["star_mag_scale"]);
+    else if(args["star_scale"]!="") stcore->StarScale = str_to_double(args["star_scale"]);
+    else if(args["star_twinkle_amount"]!="") stcore->StarTwinkleAmount = str_to_double(args["star_twinkle_amount"]);
+    else if(args["time_zone"]!="") stcore->observatory->set_custom_tz_name(args["time_zone"]);
+
+
+    else status = 0;
+
+
+    if(trusted) {
+
+    //    else if(args["base_font_size"]!="") stcore->BaseFontSize = str_to_double(args["base_font_size"]);
+    //	else if(args["bbp_mode"]!="") stcore->BbpMode = str_to_double(args["bbp_mode"]);
+    //    else if(args["date_display_format"]!="") stcore->DateDisplayFormat = args["date_display_format"];
+    //	else if(args["fullscreen"]!="") stcore->Fullscreen = args["fullscreen"];
+    //	else if(args["horizontal_offset"]!="") stcore->HorizontalOffset = str_to_double(args["horizontal_offset"]);
+    //	else if(args["init_fov"]!="") stcore->InitFov = str_to_double(args["init_fov"]);
     //	else if(args["preset_sky_time"]!="") stcore->PresetSkyTime = str_to_double(args["preset_sky_time"]);
     //	else if(args["screen_h"]!="") stcore->ScreenH = str_to_double(args["screen_h"]);
     //	else if(args["screen_w"]!="") stcore->ScreenW = str_to_double(args["screen_w"]);
-
-    else if(args["sky_culture"]!="") stcore->set_sky_culture(args["sky_culture"]);
-    else if(args["sky_locale"]!="") stcore->set_sky_locale(args["sky_locale"]);
-
-    else if(args["star_mag_scale"]!="") stcore->StarMagScale = str_to_double(args["star_mag_scale"]);
-    else if(args["star_scale"]!="") stcore->StarScale = str_to_double(args["star_scale"]);
     //    else if(args["startup_time_mode"]!="") stcore->StartupTimeMode = args["startup_time_mode"];
-    else if(args["star_twinkle_amount"]!="") stcore->StarTwinkleAmount = str_to_double(args["star_twinkle_amount"]);
     // else if(args["time_display_format"]!="") stcore->TimeDisplayFormat = args["time_display_format"];
+      //else if(args["type"]!="") stcore->Type = args["type"];
+      //else if(args["version"]!="") stcore->Version = str_to_double(args["version"]);
+      //      else if(args["vertical_offset"]!="") stcore->VerticalOffset = str_to_double(args["vertical_offset"]);
+      //else if(args["viewing_mode"]!="") stcore->ViewingMode = args["viewing_mode"];
+      //else if(args["viewport"]!="") stcore->Viewport = args["viewport"];
 
-    else if(args["time_zone"]!="") stcore->observatory->set_custom_tz_name(args["time_zone"]);
-
-    //  else if(args["type"]!="") stcore->Type = args["type"];
-    //	else if(args["version"]!="") stcore->Version = str_to_double(args["version"]);
-    //  else if(args["vertical_offset"]!="") stcore->VerticalOffset = str_to_double(args["vertical_offset"]);
-    //  else if(args["viewing_mode"]!="") stcore->ViewingMode = args["viewing_mode"];
-    //  else if(args["viewport"]!="") stcore->Viewport = args["viewport"];
-    else status = 0;
+    }
 
   } else if (command == "select") {
 
