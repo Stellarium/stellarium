@@ -1,5 +1,5 @@
 Name: stellarium
-Version: 0.6.1
+Version: 0.7.0
 Release: 1
 Summary: Astronomical Sky Simulator
 Copyright: GPL

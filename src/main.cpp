@@ -43,16 +43,17 @@ void drawIntro(void)
     printf("    |                       %s|\n",APP_NAME);
     printf("    -----------------------------------------\n\n");
     printf("Copyright (C) 2004 Fabien Chereau\n\n");
-    printf("Please check last version and send bug report & comments \n");
-    printf("on stellarium web page : http://stellarium.free.fr\n\n");
+    printf(_("Please check last version and send bug report & comments \n\
+on stellarium web page : http://stellarium.free.fr\n\n"));
 };
 
 
 // Display stellarium usage in the console
 void usage(char **argv)
 {
-	printf("Usage: %s [OPTION] ...\n -v, --version          output version information and exit\n -h, --help             display this help and exit\n", argv[0]);
+	printf(_("Usage: %s [OPTION] ...\n -v, --version          output version information and exit\n -h, --help             display this help and exit\n"), argv[0]);
 }
+
 
 
 // Check command line arguments
@@ -74,8 +75,8 @@ void check_command_line(int argc, char **argv)
 
     if (argc > 1)
     {
-        printf("%s: Bad command line argument(s)\n", argv[0]);
-        printf("Try `%s --help' for more information.\n", argv[0]);
+        printf(_("%s: Bad command line argument(s)\n"), argv[0]);
+        printf(_("Try `%s --help' for more information.\n"), argv[0]);
         exit(1);
     }
 }
@@ -212,6 +213,11 @@ void setDirectories(const char* executableName)
 // Main stellarium procedure
 int main(int argc, char **argv)
 {
+	setlocale (LC_CTYPE, "");
+	setlocale (LC_MESSAGES, "");
+	bindtextdomain (PACKAGE, LOCALEDIR);
+	textdomain (PACKAGE);
+	
 	// Check the command line
 	check_command_line(argc, argv);
 

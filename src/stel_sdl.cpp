@@ -39,7 +39,7 @@ void stel_sdl::init(void)
     Screen = NULL;
 
 	// Init the SDL library, the VIDEO subsystem
-    if(SDL_Init(SDL_INIT_VIDEO)<0)
+    if(SDL_Init(SDL_INIT_VIDEO | SDL_INIT_NOPARACHUTE)<0)
     {
          printf("Unable to open SDL: %s\n", SDL_GetError() );
          exit(-1);
