@@ -29,9 +29,12 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 double get_julian_day (const ln_date * cdate)
 {
 	ln_date date;
+	int y, m, B;
+
 	date = *cdate;
 
-    int y = date.years, m = date.months;
+    y = date.years;
+	m = date.months;
     if (date.months <= 2)
     {
         y = date.years - 1;
@@ -40,7 +43,7 @@ double get_julian_day (const ln_date * cdate)
 
     // Correct for the lost days in Oct 1582 when the Gregorian calendar
     // replaced the Julian calendar.
-    int B = -2;
+    B = -2;
     if (date.years > 1582 || (date.years == 1582 && (date.months > 10 || (date.months == 10 && date.days >= 15))))
     {
         B = y / 400 - y / 100;
@@ -81,23 +84,27 @@ void get_tm_from_julian(double JD, struct tm * tm_time)
  // Code originally from libnova which appeared to be totally wrong... New code from celestia
 void get_date(double jd, ln_date * date)
 {
-    int a = (int) (jd + 0.5);
-    double c;
+    int a, d, e, f;
+	double c, b;
+	double dday, dhour, dminute;
+
+	a = (int) (jd + 0.5);
+
     if (a < 2299161)
     {
         c = a + 1524;
     }
     else
     {
-        double b = (int) ((a - 1867216.25) / 36524.25);
+        b = (int) ((a - 1867216.25) / 36524.25);
         c = a + b - (int) (b / 4) + 1525;
     }
 
-    int d = (int) ((c - 122.1) / 365.25);
-    int e = (int) (365.25 * d);
-    int f = (int) ((c - e) / 30.6001);
+    d = (int) ((c - 122.1) / 365.25);
+    e = (int) (365.25 * d);
+    f = (int) ((c - e) / 30.6001);
 
-    double dday = c - e - (int) (30.6001 * f) + ((jd + 0.5) - (int) (jd + 0.5));
+    dday = c - e - (int) (30.6001 * f) + ((jd + 0.5) - (int) (jd + 0.5));
 
     /* This following used to be 14.0, but gcc was computing it incorrectly, so
        it was changed to 14 */
@@ -105,10 +112,10 @@ void get_date(double jd, ln_date * date)
     date->years = d - 4715 - (int) ((7.0 + date->months) / 10.0);
     date->days = (int) dday;
 
-    double dhour = (dday - date->days) * 24;
+    dhour = (dday - date->days) * 24;
     date->hours = (int) dhour;
 
-    double dminute = (dhour - date->hours) * 60;
+    dminute = (dhour - date->hours) * 60;
     date->minutes = (int) dminute;
 
     date->seconds = (dminute - date->minutes) * 60;
