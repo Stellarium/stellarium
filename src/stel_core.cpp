@@ -54,6 +54,7 @@ stel_core::~stel_core()
 	if (tone_converter) delete tone_converter;
 	if (ssystem) delete ssystem;
 	if (ui) delete ui;
+	if (scripts) delete scripts;
 	if (commander) delete commander;
 	
 	stel_object::delete_textures(); // Load the pointer textures 
@@ -82,6 +83,7 @@ void stel_core::init(void)
 	s_texture::set_suffix(".png");
 
 	commander = new StelCommandInterface(this);
+	scripts = new ScriptMgr(commander);
 
 	observatory = new Observator();
 	observatory->load(ConfigDir + config_file, "init_location");
