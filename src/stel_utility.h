@@ -22,7 +22,6 @@
 
 #include <string>
 #include <cmath>
-#include "stellarium.h"
 #include "vecmath.h"
 
 using namespace std;
@@ -57,5 +56,8 @@ string print_angle_dms_stel(double location);
 
 /* Obtains a human readable angle in the form: hhhmmmss.sss" */
 string print_angle_hms(double location);
+
+// Provide the luminance in cd/m^2 from the magnitude and the surface in arcmin^2
+float mag_to_luminance(float mag, float surface);
 
 #endif
