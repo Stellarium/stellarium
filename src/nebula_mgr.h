@@ -33,7 +33,7 @@ public:
     virtual ~Nebula_mgr();
 
 	// Read the Nebulas data from a file
-    int read(char * font_fileName, char * fileName);
+    int read(const string& font_fileName, const string& fileName);
 
 	// Draw all the Nebulas
 	void draw(int hints_ON, Projector* prj, bool _gravity_label);

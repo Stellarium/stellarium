@@ -56,18 +56,19 @@ stel_core::~stel_core()
 }
 
 // Set the main data, textures and configuration directories
-void stel_core::set_directories(const char * DDIR, const char * TDIR, const char * CDIR)
+void stel_core::set_directories(const string& DDIR, const string& TDIR, const string& CDIR, const string& DATA_ROOT)
 {
-	strncpy(TextureDir, TDIR, sizeof(TextureDir));
-	strncpy(ConfigDir, CDIR, sizeof(ConfigDir));
-	strncpy(DataDir, DDIR, sizeof(DataDir));
+	TextureDir = TDIR;
+	ConfigDir = CDIR;
+	DataDir = DDIR;
+	DataRoot = DATA_ROOT;
 }
 
 // Set the 2 config files names.
-void stel_core::set_config_files(const char * _config_file, const char * _location_file)
+void stel_core::set_config_files(const string& _config_file, const string& _location_file)
 {
-	strncpy(config_file, _config_file, strlen(_config_file) +1);
-	strncpy(location_file, _location_file, strlen(_location_file) +1);
+	config_file = _config_file;
+	location_file = _location_file;
 }
 
 
@@ -79,7 +80,7 @@ void stel_core::init(void)
 
 	navigation = new navigator();
 	navigation->load_position(PositionFile.c_str());
-	if (InitDate=="preset") navigation->set_JDay(PresetSkyTime);
+	if (StartupTimeMode=="preset" || StartupTimeMode=="Preset") navigation->set_JDay(PresetSkyTime);
 	else navigation->set_JDay(get_julian_from_sys());
 	navigation->set_local_vision(InitViewPos);
 
@@ -106,53 +107,23 @@ void stel_core::init(void)
 		break;
 	}
 
-	// Temporary strings for file names
-    char tempName[255];
-    char tempName2[255];
-    char tempName3[255];
-    char tempName4[255];
-
-    strcpy(tempName,DataDir);
-    strcat(tempName,"spacefont.txt");
-	cardinals_points = new Cardinals(tempName, "spacefont");
-
+	cardinals_points = new Cardinals(DataDir + "spacefont.txt", "spacefont");
 	milky_way = new MilkyWay("voielactee256x256");
 
     // Load hipparcos stars & names
-    strcpy(tempName,DataDir);
-    strcat(tempName,"hipparcos.fab");
-    strcpy(tempName2,DataDir);
-    strcat(tempName2,"commonname.fab");
-    strcpy(tempName3,DataDir);
-    strcat(tempName3,"name.fab");
-    strcpy(tempName4,DataDir);
-    strcat(tempName4,"spacefont.txt");
-    hip_stars->load(tempName4, tempName,tempName2,tempName3);
+    hip_stars->load(DataDir + "spacefont.txt", DataDir + "hipparcos.fab",
+		DataDir + "commonname.fab",	DataDir + "name.fab");
 
 	// Load constellations
-    strcpy(tempName,DataDir);
-    strcat(tempName,"constellationship.fab");
-    strcpy(tempName2,DataDir);
-    strcat(tempName2,"spacefont.txt");
-    asterisms->load(tempName2,tempName,hip_stars);
+    asterisms->load(DataDir + "spacefont.txt", DataDir + "constellationship.fab", hip_stars);
 
 	// Load the nebulas data TODO : add NGC objects
-    strcpy(tempName,DataDir);
-    strcat(tempName,"messier.fab");
-    strcpy(tempName2,DataDir);
-    strcat(tempName2,"spacefont.txt");
-    nebulas->read(tempName2, tempName);
+    nebulas->read(DataDir + "spacefont.txt", DataDir + "messier.fab");
 
 	// Create and init the solar system
-    strcpy(tempName,DataDir);
-    strcat(tempName,"spacefont.txt");
-    strcpy(tempName2,DataDir);
-    strcat(tempName2,"ssystem.ini");
-	ssystem->init(tempName, tempName2);
+	ssystem->init(DataDir + "spacefont.txt", DataDir + "ssystem.ini");
 
-    strcpy(tempName2,DataDir);
-    strcat(tempName2,"landscapes.ini");
-	landscape = Landscape::create_from_file(tempName2, landscape_name);
+	landscape = Landscape::create_from_file(DataDir + "landscapes.ini", landscape_name);
 
 	// Load the pointer textures
 	stel_object::init_textures();
@@ -347,16 +318,33 @@ void stel_core::draw(int delta_time)
 
 void stel_core::load_config(void)
 {
-	PositionFile = string(ConfigDir) + location_file;
+	PositionFile = ConfigDir + location_file;
 
-    cout << "Loading configuration file... " << string(ConfigDir) + config_file << endl;
+    cout << "Loading configuration file... " << ConfigDir + config_file << endl;
 
 	if (conf) delete (conf);
-	conf = new init_parser(string(ConfigDir) + config_file);
+	conf = new init_parser(ConfigDir + config_file);
 	conf->load();
 
 	// Main section
 	string version 		= conf->get_str("main:version");
+	if (version!=string(VERSION))
+	{
+		// The config file is too old to try an importation
+		delete conf;
+		conf = NULL;
+		cout << "The current config file is from a version too old (" <<
+			(version.empty() ? "<0.6.0" : version) << ")." << endl;
+		cout << "It will be replaced by the default config file." << endl;
+		system( (string("cp -f ") + DataRoot + "/config/default_config.txt " + ConfigDir + config_file).c_str() );
+		system( (string("cp -f ") + DataRoot + "/config/default_location.txt " + ConfigDir + location_file).c_str() );
+
+		// Reload the new one
+		conf = new init_parser(ConfigDir + config_file);
+		conf->load();
+	}
+
+
 
 	// Video Section
 	Fullscreen			= conf->get_boolean("video:fullscreen");
@@ -400,7 +388,6 @@ void stel_core::load_config(void)
 	FlagHelp			= conf->get_boolean("gui:flag_help");
 	FlagInfos			= conf->get_boolean("gui:flag_infos");
 	FlagShowTopBar		= conf->get_boolean("gui:flag_show_topbar");
-	FlagUTC_Time		= conf->get_boolean("gui:flag_utc_time");
 	FlagShowTime		= conf->get_boolean("gui:flag_show_time");
 	FlagShowDate		= conf->get_boolean("gui:flag_show_date");
 	FlagShowAppName		= conf->get_boolean("gui:flag_show_appname");
@@ -416,15 +403,14 @@ void stel_core::load_config(void)
 
 	// Navigation section
 	PresetSkyTime 		= conf->get_double ("navigation","preset_sky_time",2451545.);
-
-	// Can be "now" or "preset"
-	InitDate = conf->get_str("navigation:init_date");
-
+	StartupTimeMode = conf->get_str("navigation:startup_time_mode");	// Can be "now" or "preset"
 	FlagEnableZoomKeys	= conf->get_boolean("navigation:flag_enable_zoom_keys");
 	FlagEnableMoveKeys	= conf->get_boolean("navigation:flag_enable_move_keys");
 	initFov				= conf->get_double ("navigation","init_fov",60.);
 	InitViewPos 		= str_to_vec3f(conf->get_str("navigation:init_view_pos").c_str());
 	auto_move_duration	= conf->get_double ("navigation","auto_move_duration",1.);
+	FlagUTC_Time		= conf->get_boolean("navigation:flag_utc_time");
+	TimeDisplayFormat	= conf->get_str("navigation:flag_time_display_format");
 
 	// Landscape section
 	landscape_name 		= conf->get_str("landscape:landscape_name");
@@ -436,6 +422,7 @@ void stel_core::load_config(void)
 	// Viewing section
 	FlagConstellationDrawing= conf->get_boolean("viewing:flag_constellation_drawing");
 	FlagConstellationName	= conf->get_boolean("viewing:flag_constellation_name");
+	FlagConstellationArt	= conf->get_boolean("viewing:flag_constellation_art");
 	FlagConstellationPick	= conf->get_boolean("viewing:flag_constellation_pick");
 	FlagAzimutalGrid		= conf->get_boolean("viewing:flag_azimutal_grid");
 	FlagEquatorialGrid		= conf->get_boolean("viewing:flag_equatorial_grid");
@@ -445,6 +432,7 @@ void stel_core::load_config(void)
 	FlagGravityLabels		= conf->get_boolean("viewing:flag_gravity_labels");
 	FlagInitMoonScaled		= conf->get_boolean("viewing:flag_init_moon_scaled");
 	moon_scale				= conf->get_double ("viewing","moon_scale",4.);
+	ConstellationCulture	= conf->get_str("viewing:constellation_culture");
 
 	// Astro section
 	FlagStars				= conf->get_boolean("astro:flag_stars");

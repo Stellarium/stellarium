@@ -226,7 +226,7 @@ void SkyLine::draw(const Projector* prj) const
 }
 
 
-Cardinals::Cardinals(const char* font_file, const char* tex_file, double size, double _radius) :
+Cardinals::Cardinals(const string& font_file, const string& tex_file, double size, double _radius) :
 	radius(radius), font(NULL)
 {
 	font = new s_font(size, tex_file, font_file);
@@ -302,7 +302,7 @@ void Cardinals::draw(const Projector* prj, bool gravityON) const
 
 
 // Class which manages the displaying of the Milky Way
-MilkyWay::MilkyWay(const char* tex_file, double _radius) : radius(_radius)
+MilkyWay::MilkyWay(const string& tex_file, double _radius) : radius(_radius)
 {
 	tex = new s_texture(tex_file,TEX_LOAD_TYPE_PNG_SOLID_REPEAT);
 

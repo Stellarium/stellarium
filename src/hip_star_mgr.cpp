@@ -55,34 +55,39 @@ Hip_Star_mgr::~Hip_Star_mgr()
 }
 
 // Load from file ( create the stream and call the Read function )
-void Hip_Star_mgr::load(char * font_fileName, char * hipCatFile, char * commonNameFile, char * nameFile)
+void Hip_Star_mgr::load(const string& font_fileName, const string& hipCatFile,
+	const string& commonNameFile, const string& nameFile)
 {
     printf("Loading Hipparcos star data...\n");
     FILE * hipFile, *cnFile, * nFile;
-    hipFile=fopen(hipCatFile,"rb");
+	hipFile = NULL;
+	cnFile = NULL;
+	nFile = NULL;
+
+    hipFile=fopen(hipCatFile.c_str(),"rb");
     if (!hipFile)
     {
-        printf("ERROR %s NOT FOUND\n",hipCatFile);
-        return;
+        printf("ERROR %s NOT FOUND\n",hipCatFile.c_str());
+        exit(-1);
     }
-    cnFile=fopen(commonNameFile,"r");
+    cnFile=fopen(commonNameFile.c_str(),"r");
     if (!cnFile)
     {   
-        printf("ERROR %s NOT FOUND\n",commonNameFile);
-        return;
+        printf("ERROR %s NOT FOUND\n",commonNameFile.c_str());
+        exit(-1);
     }
-    nFile=fopen(nameFile,"r");
+    nFile=fopen(nameFile.c_str(),"r");
     if (!nFile)
     {   
-        printf("ERROR %s NOT FOUND\n",nameFile);
-        return;
+        printf("ERROR %s NOT FOUND\n",nameFile.c_str());
+        exit(-1);
     }
-    
+
 	// Read number of stars in the Hipparcos catalog
     unsigned int catalogSize=0;
     fread((char*)&catalogSize,4,1,hipFile);
-    LE_TO_CPU_INT32(catalogSize,catalogSize);  
-    
+    LE_TO_CPU_INT32(catalogSize,catalogSize);
+
     StarArraySize = catalogSize;//120417;
 
     // Create the sequential array
@@ -95,10 +100,10 @@ void Hip_Star_mgr::load(char * font_fileName, char * hipCatFile, char * commonNa
 	// Read common names & names catalog
 	char ** commonNames = new char*[catalogSize];
 	char ** names = new char*[catalogSize];
-	
+
 	int tmp;
 	char tmpName[20];
-	
+
 	while(!feof(cnFile))
 	{
 		fscanf(cnFile,"%d|%s\n",&tmp,tmpName);
