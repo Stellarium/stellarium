@@ -21,12 +21,16 @@
 
 #include "stel_core.h"
 
+extern s_texture * texIds[200];            // Common Textures
+
 stel_core::stel_core() : screen_W(800), screen_H(600), bppMode(16), Fullscreen(0), initialized(0), navigation(NULL), selected_object(NULL), hip_stars(NULL), asterisms(NULL),
 nebulas(NULL), atmosphere(NULL), tone_converter(NULL)
 {
 	TextureDir[0] = 0;
     ConfigDir[0] = 0;
     DataDir[0] = 0;
+
+	navigation = new navigator();
 }
 
 stel_core::~stel_core()
@@ -38,9 +42,23 @@ stel_core::~stel_core()
 	if (nebulas) delete nebulas;
 	if (atmosphere) delete atmosphere;
 	if (tone_converter) delete tone_converter;
-	if (ui) delete ui;
+	//if (ui) delete ui;
 }
 
+// Set the main data, textures and configuration directories
+void stel_core::set_directories(char * DDIR, char * TDIR, char * CDIR)
+{
+	strncpy(TextureDir, TDIR, sizeof(TextureDir));
+	strncpy(ConfigDir, CDIR, sizeof(ConfigDir));
+	strncpy(DataDir, DDIR, sizeof(DataDir));
+}
+
+// Set the 2 config files names.
+void stel_core::set_config_files(char * _config_file, char * _location_file)
+{
+	strncpy(config_file, _config_file, strlen(_config_file) +1);
+	strncpy(location_file, _location_file, strlen(_location_file) +1);
+}
 
 // Update all the objects in function of the time
 void stel_core::update(int delta_time)
@@ -60,7 +78,7 @@ void stel_core::update(int delta_time)
 	Sun->compute_position(navigation->get_JDay());		// Position of sun and all the satellites (ie planets)
 	Sun->compute_trans_matrix(navigation->get_JDay());	// Matrix for sun and all the satellites (ie planets)
 	navigation->update_transform_matrices();			// Transform matrices between coordinates systems
-	navigation->update_vision_vector(delta_time);		// Direction of vision
+ 	navigation->update_vision_vector(delta_time, selected_object);		// Direction of vision
 
 	// Set the common variables used by the draw functions
 	du->set_params(navigation->get_fov(), screen_W, screen_H);
@@ -96,7 +114,7 @@ void stel_core::draw(int delta_time)
 
 	// Draw the milky way. If not activated, need at least to clear the color buffer
 	if (!FlagMilkyWay) glClear(GL_COLOR_BUFFER_BIT);
-	else DrawMilkyWay();
+	else DrawMilkyWay(sky_brightness);
 
 	// Init the depth buffer which is used by the planets drawing operations
 	glClear(GL_DEPTH_BUFFER_BIT);
@@ -108,7 +126,10 @@ void stel_core::draw(int delta_time)
 	if (FlagConstellationDrawing) asterisms->Draw();
 
 	// Draw the hipparcos stars
-	if (FlagStars && (!FlagAtmosphere || sky_brightness<0.2)) hip_stars->Draw(StarScale, StarTwinkleAmount, FlagStarName, MaxMagStarName, du);
+	// convert.... TODO implicit convertion
+	Vec3d tempv = navigation->get_equ_vision();
+	Vec3f temp(tempv[0],tempv[1],tempv[2]);
+	if (FlagStars && (!FlagAtmosphere || sky_brightness<0.2)) hip_stars->Draw(StarScale, StarTwinkleAmount, FlagStarName, MaxMagStarName, temp, du);
 
 	// Draw the atmosphere
 	if (FlagAtmosphere)	atmosphere->draw(du);
@@ -136,7 +157,7 @@ void stel_core::draw(int delta_time)
 
 	// Draw the planets
 	// TODO : manage FlagPlanetsHintDrawing
-	if (FlagPlanets) Sun->draw(FlagPlanetsHintDrawing, du);
+	if (FlagPlanets) Sun->draw(FlagPlanetsHintDrawing, du, navigation);
 
 	// Set openGL drawings in local coordinates i.e. generally altazimuthal coordinates
 	navigation->switch_to_local();
@@ -151,19 +172,19 @@ void stel_core::draw(int delta_time)
 
 	// Draw the mountains
 	// TODO custom decor type
-    if (FlagHorizon && FlagGround) DrawDecor(2);
+    if (FlagHorizon && FlagGround) DrawDecor(2, sky_brightness);
 
 	// Draw the ground
-    if (FlagGround) DrawGround();
+    if (FlagGround) DrawGround(sky_brightness);
 
 	// Draw the fog
-    if (FlagFog) DrawFog();
+    if (FlagFog) DrawFog(sky_brightness);
 
 	// Daw the cardinal points
-    if (FlagCardinalPoints) DrawCardinaux();
+    if (FlagCardinalPoints) DrawCardinaux(du);
 
     // ---- 2D Displays
-    ui->draw();
+    //ui->draw();
 }
 
 
@@ -171,6 +192,7 @@ void stel_core::draw(int delta_time)
 
 void stel_core::init(void)
 {
+
     hip_stars = new Hip_Star_mgr();
     asterisms = new Constellation_mgr();
     nebulas   = new Nebula_mgr();
@@ -182,8 +204,8 @@ void stel_core::init(void)
     char tempName4[255];
 
 	// Set textures directory and suffix
-	s_texture::set_texDir(TextureDir);
-	s_texture::set_suffix(".png");
+	//s_texture::set_texDir(TextureDir);
+	//s_texture::set_suffix(".png");
 
     // Load hipparcos stars & names
     strcpy(tempName,DataDir);
@@ -231,23 +253,65 @@ void stel_core::init(void)
 	tone_converter=new tone_reproductor();
 
 	// initialisation of the User Interface
-    ui->init();
+    //ui->init();
 }
 
 
-void stel_core::load_config()
+void stel_core::load_config(void)
 {
     char tempName[255];
     char tempName2[255];
 
     strcpy(tempName,ConfigDir);
-    strcat(tempName,"config.txt");
+    strcat(tempName,config_file);
     strcpy(tempName2,ConfigDir);
-    strcat(tempName2,"location.txt");
+    strcat(tempName2,location_file);
+
+	navigation->load_position(tempName2);
 
     printf("Loading configuration file... (%s)\n",tempName);
+	conf = new init_parser(tempName);
+	conf->load();
 
-    loadConfig(tempName,tempName2);  // Load the params from config.txt
+	// Main section
+	char * version = NULL;
+	if (conf->get_str("main:version")) version = strdup(conf->get_str("main:version"));
+
+	// Video Section
+	Fullscreen			= conf->get_boolean("video:fullscreen");
+	screen_W			= conf->get_int	   ("video:screen_w");
+	screen_H			= conf->get_int	   ("video:screen_h");
+	bppMode				= conf->get_int    ("video:bbp_mode");
+
+	// Star section
+	StarScale			= conf->get_double ("stars:star_scale");
+	StarTwinkleAmount	= conf->get_double ("stars:star_twinkle_amount");
+	MaxMagStarName		= conf->get_double ("stars:max_mag_star_name");
+
+	// Ui section
+	FlagShowFps			= conf->get_boolean("gui:flag_show_fps");
+	FlagMenu			= conf->get_boolean("gui:flag_menu");
+	FlagHelp			= conf->get_boolean("gui:flag_help");
+	FlagInfos			= conf->get_boolean("gui:flag_infos");
+	FlagUTC_Time		= conf->get_boolean("gui:flag_utc_time");
+	GuiBaseColor		= str_to_vec3f(conf->get_str("gui:gui_base_color"));
+	GuiTextColor		= str_to_vec3f(conf->get_str("gui:gui_text_color"));
+
+	// Navigation section
+	navigation->set_flag_lock_equ_pos(conf->get_boolean("navigation:flag_lock_equ_pos"));
+
+    // init the time parameters with current time and date
+	ln_date * pDate = str_to_date(conf->get_str("navigation:date"),conf->get_str("navigation:time"));
+	if (ln_date) navigation->set_JDay(get_julian_day(pDate));
+	else navigation->set_JDay(get_julian_from_sys());
+
+	FlagStars			= conf->get_boolean("stars:flag_stars");
+	FlagStarName		= conf->get_boolean("stars:flag_star_name");
+
+
+
+	//conf->save();
+
 
 }
 
@@ -318,7 +382,7 @@ stel_object * stel_core::find_stel_object(Vec3d v)
 {
 	stel_object * sobj = NULL;
 
-	if (FlagPlanets) sobj = Sun->search(v);
+	if (FlagPlanets) sobj = Sun->search(v, navigation);
 	if (sobj) return sobj;
 
 	Vec3f u=Vec3f(v[0],v[1],v[2]);

@@ -4,16 +4,16 @@
    @file    iniparser.h
    @author  N. Devillard
    @date    Mar 2000
-   @version $Revision: 212 $
+   @version $Revision: 220 $
    @brief   Parser for ini files.
 */
 /*--------------------------------------------------------------------------*/
 
 /*
-	$Id: iniparser.h 212 2003-06-22 11:37:45Z xalioth $
+	$Id: iniparser.h 220 2003-06-29 22:02:08Z xalioth $
 	$Author: xalioth $
-	$Date: 2003-06-22 12:37:45 +0100 (Sun, 22 Jun 2003) $
-	$Revision: 212 $
+	$Date: 2003-06-29 23:02:08 +0100 (Sun, 29 Jun 2003) $
+	$Revision: 220 $
 */
 
 #ifndef _INIPARSER_H_
@@ -22,6 +22,10 @@
 /*---------------------------------------------------------------------------
    								Includes
  ---------------------------------------------------------------------------*/
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -272,5 +276,9 @@ dictionary * iniparser_load(char * ininame);
  */
 /*--------------------------------------------------------------------------*/
 void iniparser_freedict(dictionary * d);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

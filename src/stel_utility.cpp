@@ -143,20 +143,25 @@ void rect_to_sphe(float *lng, float *lat, const Vec3f *v)
 }
 
 
-/* local types and macros */
-typedef int BOOL;
-#define TRUE 1
-#define FALSE 0
-#define iswhite(c)  ((c)== ' ' || (c)=='\t')
+// Obtains a Vec3f from a string with the form x,y,z
+Vec3f str_to_vec3f(const char * s)
+{
+	float x, y, z;
+	if (s==NULL || (sscanf(s,"%f,%f,%f",&x, &y, &z)!=3)) return Vec3f(0.f,0.f,0.f);
+	return Vec3f(x,y,z);
+}
 
-/*
-[]------------------------------------------------------------------------[]
-|  trim() & strip()                                                        |
-|                                                                          |
-|  strips trailing whitespaces from buf.                                   |
-|                                                                          |
-[]------------------------------------------------------------------------[]
-*/
+
+// Obtains a Vec3f from a string with the form x,y,z
+Vec3f str_to_vec3f(const char * s)
+{
+	float x, y, z;
+	if (s==NULL || (sscanf(s,"%f,%f,%f",&x, &y, &z)!=3)) return Vec3f(0.f,0.f,0.f);
+	return Vec3f(x,y,z);
+}
+
+// strips trailing whitespaces from buf.
+#define iswhite(c)  ((c)== ' ' || (c)=='\t')
 static char *trim(char *x)
 {
     char *y;
@@ -170,14 +175,8 @@ static char *trim(char *x)
 }
 
 
-/*
-[]------------------------------------------------------------------------[]
-|                                                                          |
-|   skipwhite()                                                            |
-|   salta espacios en blanco                                               |
-|                                                                          |
-[]------------------------------------------------------------------------[]
-*/
+
+// salta espacios en blanco
 static void skipwhite(char **s)
 {
    while(iswhite(**s))
@@ -222,7 +221,7 @@ double get_dec_angle(char *s)
 {
 
 	char *ptr, *dec, *hh;
-	BOOL negative = FALSE;
+	int negative = 0;
 	char delim1[] = " :.,;ºDdHhMm'\n\t";
 	char delim2[] = " NSEWnsew\"\n\t";
 	int dghh = 0, minutes = 0;
@@ -244,10 +243,10 @@ double get_dec_angle(char *s)
         
         /* the last letter has precedence over the sign */
 	if (strpbrk(ptr,"SsWw") != NULL) 
-		negative = TRUE;
+		negative = 1;
 
 	if (*ptr == '+' || *ptr == '-')
-		negative = (char) (*ptr++ == '-' ? TRUE : negative);	
+		negative = (char) (*ptr++ == '-' ? 1 : negative);
 	skipwhite(&ptr);
 	if ((hh = strpbrk(ptr,"Hh")) != NULL && hh < ptr + 3)
             type = HOURS;
@@ -280,7 +279,7 @@ double get_dec_angle(char *s)
 	if ((ptr = strtok(NULL," \n\t")) != NULL) {
 		skipwhite(&ptr);
 		if (*ptr == 'S' || *ptr == 'W' || *ptr == 's' || *ptr == 'W')
-			    negative = TRUE;
+			    negative = 1;
 	}
         pos = dghh + minutes /60.0 + seconds / 3600.0;
 

@@ -607,10 +607,10 @@ template<class T> Matrix4<T> Matrix4<T>::operator-(const Matrix4<T>& a) const
 }
 
 
-template<class T> void Matrix4<T>::print(void) const
-{
+//template<class T> void Matrix4<T>::print(void) const
+//{
 	//printf("[%.2lf %.2lf %.2lf %.2lf]\n[%.2lf %.2lf %.2lf %.2lf]\n[%.2lf %.2lf %.2lf %.2lf]\n[%.2lf %.2lf %.2lf %.2lf]\n",
-	r[0],r[4],r[8],r[12],r[1],r[5],r[9],r[13],r[2],r[6],r[10],r[14],r[3],r[7],r[11],r[15]);
-}
+	//r[0],r[4],r[8],r[12],r[1],r[5],r[9],r[13],r[2],r[6],r[10],r[14],r[3],r[7],r[11],r[15]);
+//}
 
 #endif // _VECMATH_H_

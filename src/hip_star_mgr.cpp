@@ -145,10 +145,11 @@ void Hip_Star_mgr::Load(char * font_fileName, char * hipCatFile, char * commonNa
 
 
 // Draw all the stars
-void Hip_Star_mgr::Draw(float star_scale, float twinkle_amount, int name_ON, int maxMagStarName, draw_utility * du)
+void Hip_Star_mgr::Draw(float _star_scale, float _twinkle_amount, int name_ON,
+						float maxMagStarName, Vec3f equ_vision, draw_utility * du)
 {
-	Hip_Star::twinkle_amount = twinkle_amount;
-	Hip_Star::star_scale = star_scale;
+	Hip_Star::twinkle_amount = _twinkle_amount;
+	Hip_Star::star_scale = _star_scale;
 
 	glEnable(GL_TEXTURE_2D);
     glEnable(GL_BLEND);
@@ -170,11 +171,7 @@ void Hip_Star_mgr::Draw(float star_scale, float twinkle_amount, int name_ON, int
 	int nbZones=0;
 	static int * zoneList;  // WARNING this is almost a memory leak...
 
-	// convert.... TODO implicit convertion
-	Vec3d tempv = navigation.get_equ_vision();
-	vec3_t temp(tempv[0],tempv[1],tempv[2]);
-
-	nbZones = HipGrid.Intersect(temp, du->fov*M_PI/180.*1.4, zoneList);
+	nbZones = HipGrid.Intersect(equ_vision, du->fov*M_PI/180.*1.4, zoneList);
 
 	//printf("nbzones = %d\n",nbZones );
 
@@ -188,15 +185,13 @@ void Hip_Star_mgr::Draw(float star_scale, float twinkle_amount, int name_ON, int
 			if ((*iter).second->Mag>6+60./du->fov) continue;
 
 			// Compute the 2D position
-	    	gluProject( ((*iter).second)->XYZ[0],((*iter).second)->XYZ[1],
-		        ((*iter).second)->XYZ[2],M,P,V,&(((*iter).second)->XY[0]),
-	        	&(((*iter).second)->XY[1]),&z);
-        	if (z<1) 
+	    	gluProject( ((*iter).second)->XYZ[0],((*iter).second)->XYZ[1], ((*iter).second)->XYZ[2],
+				M,P,V,&(((*iter).second)->XY[0]), &(((*iter).second)->XY[1]),&z);
+        	if (z<1)
         	{
 		        ((*iter).second)->Draw(du);
-		        if (((*iter).second)->CommonName && name_ON &&
-					 ((*iter).second)->Mag<maxMagStarName)
-            	{   
+		        if (((*iter).second)->CommonName && name_ON && ((*iter).second)->Mag<maxMagStarName)
+            	{
 		        	((*iter).second)->DrawName();
                 	glBindTexture (GL_TEXTURE_2D, hipStarTexture->getID());
             	}

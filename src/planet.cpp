@@ -47,10 +47,10 @@ planet::~planet()
 }
 
 // Return the information string "ready to print" :)
-void planet::get_info_string(char * s)
+void planet::get_info_string(char * s, navigator * nav)
 {
 	double tempDE, tempRA;
-	Vec3d equPos = get_earth_equ_pos();
+	Vec3d equPos = get_earth_equ_pos(nav);
 	rect_to_sphe(&tempRA,&tempDE,&equPos);
 	sprintf(s,"Name :%s\nRA : %s\nDE : %s\n Distance : %.8f UA",
 	name, print_angle_hms(tempRA*180./M_PI), print_angle_dms_stel(tempDE*180./M_PI), equPos.length());
@@ -68,11 +68,11 @@ void planet::set_rotation_elements(float _period, float _offset, double _epoch, 
 
 
 // Return the rect earth equatorial position
-Vec3d planet::get_earth_equ_pos(void)
+Vec3d planet::get_earth_equ_pos(navigator * nav)
 {
 	Vec3d v = get_heliocentric_ecliptic_pos();
-	return navigation.helio_to_earth_pos_equ(&v); 	// this is earth equatorial but centered
-													//on observer position (latitude, longitude)
+	return nav->helio_to_earth_pos_equ(&v); 	// this is earth equatorial but centered
+												// on observer position (latitude, longitude)
 	//return navigation.helio_to_earth_equ(&v); this is the real equatorial
 }
 
@@ -161,7 +161,7 @@ void planet::addSatellite(planet*p)
 }
 
 // Draw the planet and all the related infos : name, circle etc..
-void planet::draw(int hint_ON, draw_utility * du)
+void planet::draw(int hint_ON, draw_utility * du, navigator * nav)
 {
 	glPushMatrix();
     glMultMatrixd(mat_local_to_parent); // Go in planet local coordinate
@@ -170,9 +170,9 @@ void planet::draw(int hint_ON, draw_utility * du)
 	du->project(0., 0., 0., screenX, screenY, screenZ);
 
 	// Check if in the screen
-	Vec3d equPos = get_earth_equ_pos();
+	Vec3d equPos = get_earth_equ_pos(nav);
 	float angl = radius/equPos.length();
-	float lim = atan(angl)*180./M_PI/navigation.get_fov();
+	float lim = atan(angl)*180./M_PI/du->fov;
 	if (screenZ < 1 && screenX>(-lim*du->screenW) &&
 		screenX<((1.f+lim)*du->screenW) &&
 		screenY>(-lim*du->screenH) && screenY<((1.f+lim)*du->screenH))
@@ -266,7 +266,7 @@ void planet::draw(int hint_ON, draw_utility * du)
     list<planet*>::iterator iter = satellites.begin();
     while (iter != satellites.end())
     {
-        (*iter)->draw(hint_ON, du);
+        (*iter)->draw(hint_ON, du, nav);
         iter++;
     }
 
@@ -276,13 +276,13 @@ void planet::draw(int hint_ON, draw_utility * du)
 }
 
 // Search if any planet is close to position given in earth equatorial position and return the distance
-planet* planet::search(Vec3d pos, double * angleClosest)
+planet* planet::search(Vec3d pos, double * angleClosest, navigator * nav)
 {
     pos.normalize();
     planet * closest = NULL;
 	planet * p = NULL;
 
-	Vec3d equPos = get_earth_equ_pos();
+	Vec3d equPos = get_earth_equ_pos(nav);
 	equPos.normalize();
     double angleClos = equPos[0]*pos[0] + equPos[1]*pos[1] + equPos[2]*pos[2];
 
@@ -296,7 +296,7 @@ planet* planet::search(Vec3d pos, double * angleClosest)
     list<planet*>::iterator iter = satellites.begin();
     while (iter != satellites.end())
     {
-        p = (*iter)->search(pos,&angleClos);
+        p = (*iter)->search(pos,&angleClos,nav);
 		if (angleClos>*angleClosest)
 		{
 			closest = p;
@@ -312,10 +312,10 @@ planet* planet::search(Vec3d pos, double * angleClosest)
 }
 
 // Search if any planet is close to position given in earth equatorial position.
-planet* planet::search(Vec3d pos)
+planet* planet::search(Vec3d pos, navigator * nav)
 {
 	double temp = 0.;
-	return search(pos,&temp);
+	return search(pos,&temp, nav);
 }
 
 
@@ -354,7 +354,7 @@ void sun_planet::compute_trans_matrix(double date)
     }
 }
 
-void sun_planet::draw(int hint_ON, draw_utility * du)
+void sun_planet::draw(int hint_ON, draw_utility * du, navigator* nav)
 {
 	// We are supposed to be in heliocentric coordinate already so no matrix change
 	//glEnable(GL_DEPTH_TEST);
@@ -427,7 +427,7 @@ void sun_planet::draw(int hint_ON, draw_utility * du)
     list<planet*>::iterator iter = satellites.begin();
     while (iter != satellites.end())
     {
-        (*iter)->draw(hint_ON, du);
+        (*iter)->draw(hint_ON, du, nav);
         iter++;
     }
 
@@ -442,15 +442,15 @@ ring_planet::ring_planet(char * _name, int _flagHalo, double _radius, vec3_t _co
 {
 }
 
-void ring_planet::draw(int hint_ON, draw_utility * du)
+void ring_planet::draw(int hint_ON, draw_utility * du, navigator* nav)
 {
-	planet::draw(hint_ON, du);
+	planet::draw(hint_ON, du, nav);
 
 	glPushMatrix();
     glMultMatrixd(mat_local_to_parent); // Go in planet local coordinate
 	glPushMatrix();
 	glRotatef(axis_rotation + 180.,0.,0.,1.);
-	planet_ring->draw();
+	planet_ring->draw(nav);
 	glPopMatrix();
 	glPopMatrix();
 }
@@ -459,7 +459,7 @@ ring::ring(float _radius, s_texture * _tex) : radius(_radius), tex(_tex)
 {
 }
 
-void ring::draw()
+void ring::draw(navigator* nav)
 {
 	glColor3f(1.0f, 0.88f, 0.82f); // For saturn only..
     glEnable(GL_TEXTURE_2D);

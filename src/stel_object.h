@@ -22,10 +22,13 @@
 
 #include "vecmath.h"
 #include "stel_utility.h"
+#include "navigator.h"
 
 #define STEL_OBJECT_STAR 1
 #define STEL_OBJECT_PLANET 2
 #define STEL_OBJECT_NEBULA 3
+
+class navigator;
 
 class stel_object
 {
@@ -37,7 +40,7 @@ public:
 
 	virtual void get_info_string(char * s);
 	virtual unsigned char get_type(void)=0;
-	virtual Vec3d get_earth_equ_pos(void)=0;
+	virtual Vec3d get_earth_equ_pos(navigator * nav = NULL)=0;
 	virtual vec3_t get_RGB(void) {return vec3_t(0.,0.,0.);}
 private:
 };

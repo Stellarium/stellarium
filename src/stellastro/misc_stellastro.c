@@ -79,3 +79,49 @@ double get_mean_obliquity( double t )
 	}
 	return rval;
 }
+
+
+// Obtains a ln_date from 2 strings s1 and s2 for date and time
+// with the form dd/mm/yyyy for s1 and hh:mm:ss.s for s2.
+// Returns NULL if s1 or s2 is not valid.
+// Uses the current date if s1 is "today" and current time if s2 is "now"
+const struct ln_date * str_to_date(const char * s1, const char * s2)
+{
+	static struct ln_date date;
+	if (s1==NULL || s2==NULL) return NULL;
+    if (!strcmp(s1,"today"))
+	{
+		struct ln_date tempDate;
+		get_ln_date_from_sys(&tempDate);
+		date.days = tempDate.days;
+		date.months = tempDate.months;
+		date.years = tempDate.years;
+	}
+	else
+	{
+		if (sscanf(s1,"%d:%d:%d",&(date.days),&(date.months),&(date.years))!=3)
+			return NULL;
+	}
+
+    if (!strcmp(s2,"now"))
+	{
+		struct ln_date tempDate2;
+		get_ln_date_from_sys(&tempDate2);
+		date.hours = tempDate2.hours;
+		date.minutes = tempDate2.minutes;
+		date.seconds = tempDate2.seconds;
+	}
+	else
+	{
+		if (sscanf(s2,"%d:%d:%lf\n",&(date.hours),&(date.minutes),&(date.seconds)) != 3)
+			return NULL;
+	}
+
+    if ( date.months>12 || date.months<1 || date.days<1 || date.days>31 ||
+			date.hours>23 || date.hours<0 || date.minutes<0 || date.minutes>59 ||
+			 date.seconds<0 || date.seconds>=60 )
+    {
+        return NULL;
+    }
+	return &date;
+}

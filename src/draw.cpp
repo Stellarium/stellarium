@@ -23,23 +23,16 @@
  */
 
 #include "draw.h"
-#include "stellarium.h"
-#include "vislimit.h"
 #include "s_texture.h"
 #include "navigator.h"
 #include "solarsystem.h"
 #include "stellastro.h"
-#include "skylight.h"
 
 extern s_texture * texIds[200];            // Common Textures
 float DmeriParal[51][2];                   // For grids drawing optimisation
 
 float DmeriParalCos[18][51][2];
 float sinTable[18];
-
-static int skyResolution = 64;
-static vec3_t ** tabSky;                           // For Atmosphere calculation
-
 
 // precalculation of the grid points
 void InitMeriParal(void)
@@ -65,126 +58,10 @@ void InitMeriParal(void)
 }
 
 
-void InitAtmosphere(void)
-{
-	vec3_t * linTabSky;
-	tabSky = new vec3_t*[skyResolution+1];
-	for (int k=0; k<skyResolution+1 ;k++)
-	{
-		linTabSky = new vec3_t[skyResolution+1];
-		tabSky[k] = linTabSky;
-	}
-}
 
-// Calc the atmosphere
-void CalcAtmosphere(void)
-{
-	static    GLdouble M[16]; 
-	static    GLdouble P[16];
-	static    GLdouble objx[1];
-	static    GLdouble objy[1];
-	static    GLdouble objz[1];
-	static    GLint V[4];
-	brightness_data b;
-
-	Vec3d temp(0.,0.,0.);
-	Vec3d sunPos = navigation.helio_to_local(&temp);
-	sunPos.normalize();
-
-	double lat, lng;
-	rect_to_sphe(&lng, &lat, &sunPos);
-
-	b.moon_elongation = 0;//acos(sunPos.Dot(lunaPos));
-
-	b.zenith_ang_moon = 0;
-	b.zenith_ang_sun = M_PI_2-lat;
-
-	b.ht_above_sea_in_meters = navigation.get_altitude();
-	b.latitude = navigation.get_latitude()*M_PI/180.;
-
-	ln_date d;
-	get_date(navigation.get_JDay(),&d);
-	b.year = d.years;
-	b.month = d.months;
-
-	b.temperature_in_c = 20;
-	b.relative_humidity = 80.;
-
-	b.mask = 14;                //31 for all 5 bands
-	set_brightness_params(&b);
-
-	// Convert x,y screen pos in 3D vector
-	glPushMatrix();
-	navigation.switch_to_local();
-	glGetDoublev(GL_MODELVIEW_MATRIX,M);
-	glGetDoublev(GL_PROJECTION_MATRIX,P);
-	glGetIntegerv(GL_VIEWPORT,V);
-	glPopMatrix();
-	int resX = global.X_Resolution;
-	float stepX = (float)resX / skyResolution;
-	int resY = global.Y_Resolution;
-	float stepY = (float)resY / skyResolution;
-	int limY;
-
-	// Don't calc if under the ground
-	if (global.FlagGround)
-	{
-		gluProject(1,0,0,M,P,V,objx,objy,objz);
-		limY = (int)(skyResolution-(float)(*objy)/stepY+3.);
-		if (!(limY<skyResolution+1)) limY = skyResolution+1;
-	}
-	else
-	{
-		limY = skyResolution+1;
-	}
-
-	for (int x=0; x<skyResolution+1; x++)
-	{
-		for(int y=0; y<limY; y++)
-		{
-			gluUnProject(x*stepX,resY-y*stepY,1,M,P,V,objx,objy,objz);
-			Vec3d point(*objx,*objy,*objz);
-			point.normalize();
-			b.zenith_angle = M_PI_2-asin(point[2]);
-			b.dist_sun = acos(point.dot(sunPos));
-			if (b.dist_sun<0) b.dist_sun=-b.dist_sun;
-			compute_sky_brightness( &b);
-				
-			tabSky[x][y].set(sqrt(b.brightness[3]),sqrt(b.brightness[2]*1.5),sqrt(b.brightness[1])*1.2);
-			tabSky[x][y]*=330;
-		}
-	}
-}
-
-// Actually draw the atmosphere using the precalc values stored in tabSky
-void DrawAtmosphere2(void)
-{
-	// to include : optimisation with the ground
-	float stepX = (float)global.X_Resolution / skyResolution;
-	float stepY = (float)global.Y_Resolution / skyResolution;
-	glDisable(GL_TEXTURE_2D);
-	glEnable(GL_BLEND);
-	setOrthographicProjection(global.X_Resolution, global.Y_Resolution);    // 2D coordinate
-	glPushMatrix();
-	glLoadIdentity();
-	for (int y2=0; y2<skyResolution-1+1; y2++)
-	{
-		glBegin(GL_TRIANGLE_STRIP);
-			for(int x2=0; x2<skyResolution+1; x2++)
-			{
-				glColor4f(tabSky[x2][y2][0],tabSky[x2][y2][1],tabSky[x2][y2][2],tabSky[x2][y2][1]*4);
-				glVertex2i((int)(x2*stepX),(int)(y2*stepY));
-				glColor4f(tabSky[x2][y2+1][0],tabSky[x2][y2+1][1],tabSky[x2][y2+1][2],tabSky[x2][y2+1][1]*4);
-				glVertex2i((int)(x2*stepX),(int)((y2+1)*stepY));
-			}
-		glEnd();
-	}
-	glPopMatrix();
-	resetPerspectiveProjection();
-}
 
 // Draw the cardinals points : N S E W (and Z (Zenith) N (Nadir))
-void DrawCardinaux(void)
+void DrawCardinaux(draw_utility * du)
 {   
 	GLdouble M[16];
 	GLdouble P[16];
@@ -199,12 +76,7 @@ void DrawCardinaux(void)
 	gluProject( 0.0f, 1.0f, 0.0f,M,P,V,&x[2],&y[2],&z[2]); // East
 	gluProject( 0.0f,-1.0f, 0.0f,M,P,V,&x[3],&y[3],&z[3]); // West
 
-	setOrthographicProjection(global.X_Resolution, global.Y_Resolution);
-
-	y[0]=global.Y_Resolution-y[0];
-	y[1]=global.Y_Resolution-y[1];
-	y[2]=global.Y_Resolution-y[2];
-	y[3]=global.Y_Resolution-y[3];
+	du->set_orthographic_projection();
 
 	glColor3f(0.8f, 0.1f, 0.1f);
 	glEnable(GL_TEXTURE_2D);
@@ -256,14 +128,14 @@ void DrawCardinaux(void)
 		glEnd ();
 	}
 	
-	resetPerspectiveProjection();
+	du->reset_perspective_projection();
 }
 
 // Draw the milky way : used too to 'clear' the buffer
-void DrawMilkyWay(void)
+void DrawMilkyWay(float sky_brightness)
 {   
 	glPushMatrix();
-	glColor3f(0.12f-2*global.SkyBrightness, 0.12f-2*global.SkyBrightness, 0.16f-2*global.SkyBrightness);
+	glColor3f(0.12f-2*sky_brightness, 0.12f-2*sky_brightness, 0.16f-2*sky_brightness);
 	glEnable(GL_TEXTURE_2D);
 	glDisable(GL_BLEND);
 	glBindTexture(GL_TEXTURE_2D, texIds[2]->getID());
@@ -411,10 +283,10 @@ void DrawEcliptic(void)
 
 
 // Draw the horizon fog
-void DrawFog(void)
+void DrawFog(float sky_brightness)
 {   
 	glPushMatrix();
-	glColor4f(0.15f+0.2f*global.SkyBrightness, 0.20f+0.2f*global.SkyBrightness, 0.20f+0.2f*global.SkyBrightness,0.0);
+	glColor4f(0.15f+0.2f*sky_brightness, 0.20f+0.2f*sky_brightness, 0.20f+0.2f*sky_brightness,0.0);
 	glEnable(GL_TEXTURE_2D);
 	glEnable(GL_BLEND);
 	glBindTexture(GL_TEXTURE_2D, texIds[3]->getID());
@@ -440,10 +312,10 @@ void DrawPoint(float X,float Y,float Z)
 
 
 // Draw the mountains with a few pieces of a big texture
-void DrawDecor(int nb)
+void DrawDecor(int nb, float sky_brightness)
 {   
 	glPushMatrix();
-	glColor3f(global.SkyBrightness, global.SkyBrightness, global.SkyBrightness);
+	glColor3f(sky_brightness, sky_brightness, sky_brightness);
 	glEnable(GL_TEXTURE_2D);
 	glEnable(GL_BLEND);
 
@@ -475,10 +347,10 @@ void DrawDecor(int nb)
 
 
 // Draw the ground
-void DrawGround(void)
+void DrawGround(float sky_brightness)
 {
 	glPushMatrix();
-	glColor3f(global.SkyBrightness, global.SkyBrightness, global.SkyBrightness);
+	glColor3f(sky_brightness, sky_brightness, sky_brightness);
 	glEnable(GL_TEXTURE_2D);
 	glDisable(GL_BLEND);
 	glBindTexture(GL_TEXTURE_2D, texIds[1]->getID());
