@@ -26,28 +26,16 @@
 
 using namespace gui;
 
-class StdWin : public Container
+class StdWin : public FramedContainer
 {
 public:
-    StdWin(int posx, int posy, int sizex, int sizey, char * title, Component * parent, s_font * winfont_);
+    StdWin(const char * title = NULL, s_texture* header_tex = NULL, s_font * winfont_ = NULL);
 	virtual ~StdWin();
-    virtual void StdWinClicCallback(enum guiValue button,enum guiValue state);
-    virtual void StdWinMoveCallback(int x, int y,enum guiValue action);
-    virtual void render(GraphicsContext& gc);
+    virtual void draw();
     virtual const char * getTitle() const;
-    virtual void setTitle(char * _title);
-    virtual void addComponent(Component * c) {theContainer->addComponent(c);}
-    virtual vec2_i getInSize();
-    virtual void setInSize(vec2_i);
+    virtual void setTitle(const char * _title);
 protected:
-    int headerSize;
-    Container * theContainer;
-private:
-    bool mouseOn;
-    vec2_i lastXY;
-    char title[128];
-    bool overBar;
-    s_font * winfont;
+    char* title;
 };
 
 class StdBtWin : public StdWin

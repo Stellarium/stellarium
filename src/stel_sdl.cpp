@@ -137,7 +137,7 @@ void stel_sdl::start_main_loop(void)
 					break;
 
 				case SDL_MOUSEBUTTONUP:
-					//core->ui->handle_clic(E.button.x,E.button.y,E.button.state,E.button.button);
+					core->ui->handle_clic(E.button.x,E.button.y,E.button.button,E.button.state);
 					break;
 
 				case SDL_KEYDOWN:
