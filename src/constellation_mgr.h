@@ -39,8 +39,10 @@ public:
     int  set_sky_locale(const string& _sky_locale);
 	void set_art_fade_duration(float duration) {art_switch->set_duration((int)(duration*1000.f));}
 	void set_art_intensity(float _max) {art_switch->set_max_value(_max);}
-	void update(int delta_time) {art_switch->update(delta_time);}
+	void update(int delta_time) {art_switch->update(delta_time); lines_switch->update(delta_time); names_switch->update(delta_time);}
 	void show_art(bool b){*art_switch = b;}
+	void show_lines(bool b){*lines_switch = b;}
+	void show_names(bool b){*names_switch = b;}
 	void set_selected(Constellation* c) {selected=c;}
 private:
     int load(const string& catName, const string& artCatName,
@@ -54,6 +56,8 @@ private:
     string skyCulture;
     string skyLocale;
 	linear_switchor* art_switch;
+	linear_switchor* lines_switch;
+	linear_switchor* names_switch;
 	Constellation* selected;
 };
 

@@ -340,27 +340,12 @@ void stel_core::draw(int delta_time)
 	}
 
 	// Draw all the constellations
-	if (FlagConstellationDrawing)
-	{
-		asterisms->draw(projection);
-	}
-
-	// Draw constellation art
-	if (FlagConstellationArt)
-	{
-	    asterisms->show_art(true);
-	} 
-	else 
-	{
-	  	asterisms->show_art(false);
-	}
+	asterisms->show_lines(FlagConstellationDrawing);
+	asterisms->show_art(FlagConstellationArt);
+	asterisms->show_names(FlagConstellationName);
+	asterisms->draw(projection);
 	asterisms->draw_art(projection, navigation);
-
-	// Draw the constellations's names
-	if (FlagConstellationName)
-	{
-		asterisms->draw_names(projection, FlagGravityLabels);
-	}
+	asterisms->draw_names(projection, FlagGravityLabels);
 
 	// Draw the nebula if they are visible
 	if (FlagNebula && sky_brightness<0.11)
