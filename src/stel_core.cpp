@@ -94,7 +94,7 @@ void stel_core::init(void)
 		projection = new Projector(screen_W, screen_H, InitFov);
 		break;
 	case FISHEYE_PROJECTOR :
-		projection = new Fisheye_projector(screen_W, screen_H, InitFov);
+		projection = new Fisheye_projector(screen_W, screen_H, InitFov, DistortionFunction);
 		break;
 	default :
 		projection = new Projector(screen_W, screen_H, InitFov);
@@ -535,6 +535,9 @@ void stel_core::load_config_from(const string& confFile)
 		}
 	}
 
+	// -1 is default fisheye linear distortion
+	DistortionFunction 	= conf.get_int("projection", "distortion_function", -1);
+
 	// localization section
 	set_sky_culture(conf.get_str("localization", "sky_culture", "western") );
 	set_sky_locale(conf.get_str("localization", "sky_locale", "eng"));
@@ -657,6 +660,8 @@ void stel_core::save_config_to(const string& confFile)
 	conf.set_int	("video:screen_w", screen_W);
 	conf.set_int	("video:screen_h", screen_H);
 	conf.set_int	("video:bbp_mode", bppMode);
+	conf.set_int    ("video:horizontal_offset", horizontalOffset);
+	conf.set_int    ("video:vertical_offset", verticalOffset);
 
 	// Projector
 	string tmpstr;
@@ -676,9 +681,7 @@ void stel_core::save_config_to(const string& confFile)
 		default : tmpstr="maximized";
 	}
 	conf.set_str	("projection:viewport", tmpstr);
-	conf.set_int    ("video:horizontal_offset", horizontalOffset);
-	conf.set_int    ("video:vertical_offset", verticalOffset);
-
+	conf.set_int    ("projection:distortion_function", DistortionFunction);
 
 	// localization section
 	conf.set_str    ("localization:sky_culture", SkyCulture);
