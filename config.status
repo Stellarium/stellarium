@@ -2,7 +2,7 @@
 # Generated automatically by configure.
 # Run this file to recreate the current configuration.
 # This directory was configured as follows,
-# on host mac-etudiant:
+# on host ifaedi.insa-lyon.fr:
 #
 # ./configure 
 #
@@ -69,11 +69,13 @@ s%@AUTOMAKE@%automake%g
 s%@AUTOHEADER@%autoheader%g
 s%@MAKEINFO@%makeinfo%g
 s%@SET_MAKE@%%g
-s%@host@%powerpc-pc-linux-gnuoldld%g
-s%@host_alias@%ppc-pc-linux-gnuoldld%g
-s%@host_cpu@%powerpc%g
+s%@host@%i686-pc-linux-gnu%g
+s%@host_alias@%i686-pc-linux%g
+s%@host_cpu@%i686%g
 s%@host_vendor@%pc%g
-s%@host_os@%linux-gnuoldld%g
+s%@host_os@%linux-gnu%g
+s%@CC@%gcc%g
+s%@CXX@%c++%g
 s%@CPP@%gcc -E%g
 s%@CXXCPP@%c++ -E%g
 s%@RANLIB@%ranlib%g
