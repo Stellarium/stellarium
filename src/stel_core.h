@@ -69,8 +69,6 @@ public:
 	// Increment/decrement smoothly the vision field and position
 	void update_move(int delta_time);
 
-	void set_screen_size(int w, int h);
-
 	// Handle mouse clics
 	int handle_clic(Uint16 x, Uint16 y, Uint8 state, Uint8 button);
 	// Handle mouse move
@@ -97,19 +95,32 @@ public:
 	stel_object * clever_find(const Vec3d& pos) const;
 	stel_object * clever_find(int x, int y) const;
 
-	// Go and zoom temporary to the selected object.
-	void auto_zoom_in(float move_duration = 1.f);
-
-	// Unzoom to the old position is reverted by calling the function again
-	void auto_zoom_out(float move_duration = 1.f);
-
 	int get_mouse_zoom(void) const {return MouseZoom;}
 
+
+	// ---------------------------------------------------------------
+	// Interfaces for external controls (gui, tui or script facility)
+	// Only the function listed here should be called by them
+	// ---------------------------------------------------------------
+	
+	// Set the value of the parameter TODO
+	void set_param(string& key, float value);
+	// Zoom to the given FOV
+	void zoom_to(double aim_fov, float move_duration = 1.) {projection->zoom_to(aim_fov, move_duration);}
+	// Go and zoom temporary to the selected object.
+	void auto_zoom_in(float move_duration = 1.f);
+	// Unzoom to the previous position
+	void auto_zoom_out(float move_duration = 1.f);
+	// Set the sky culture
+	void set_sky_culture(string _culture_dir);
+	// Set the locale type
+	void set_sky_locale(string _locale);	
+	// Set the screen size
+	void set_screen_size(int w, int h);	
 	// Quit the application
 	void stel_core::quit(void);
 
-	void set_sky_culture(string _culture_dir);
-	void set_sky_locale(string _locale);
+	
 private:
 
 	void load_config_from(const string& confFile);
