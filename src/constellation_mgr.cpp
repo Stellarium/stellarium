@@ -31,11 +31,10 @@ Constellation_mgr::Constellation_mgr(string _data_dir, string _sky_culture, stri
 
   // load font
   asterFont = new s_font(12.,"spacefont", dataDir + _font_filename);
-  if (!asterFont)
-    {
-      printf("Can't create asterFont\n");
-      exit(-1);
-    }
+  if (!asterFont) {
+    printf("Can't create asterFont\n");
+    exit(-1);
+  }
 
   load(dataDir + "sky_cultures/" + skyCulture + "/constellationship.fab",
        dataDir + "sky_cultures/" + skyCulture + "/constellationsart.fab", hipStarMgr, dataDir + _font_filename, barx, bary);
@@ -85,74 +84,72 @@ void Constellation_mgr::hide_art(void)
   }
 }
 
-void Constellation_mgr::set_sky_culture(string _sky_culture, const string& _font_fileName, int barx, int bary)
+int Constellation_mgr::set_sky_culture(string _sky_culture, const string& _font_fileName, int barx, int bary)
 {
 
-  if( _sky_culture == skyCulture ) return;  // no change
-
-  skyCulture = _sky_culture;
-
-  // remove old data
-  vector<Constellation *>::iterator iter;
-  for(iter=asterisms.begin();iter!=asterisms.end();++iter)
-    {
-      delete (*iter);
-      asterisms.erase(iter);
-      iter--;  // important!
-    }
+  if( _sky_culture == skyCulture ) return 1;  // no change
 
   // load new culture data
-  printf(_("Changing sky culture to %s\n"), skyCulture.c_str() );
-  load(dataDir + "sky_cultures/" + skyCulture + "/constellationship.fab",
-       dataDir + "sky_cultures/" + skyCulture + "/constellationsart.fab", 
-	   hipStarMgr, _font_fileName, barx, bary);
+  printf(_("Changing sky culture to %s\n"), _sky_culture.c_str() );
+  if( load(dataDir + "sky_cultures/" + _sky_culture + "/constellationship.fab",
+       dataDir + "sky_cultures/" + _sky_culture + "/constellationsart.fab", 
+	   hipStarMgr, _font_fileName, barx, bary) ) {
 
-  // load translated labels
-  set_sky_locale(skyLocale);
-
+    skyCulture = _sky_culture;
+    
+    // load translated labels
+    set_sky_locale(skyLocale);
+    return 1; 
+  }
+  return 0;
 }
 
 // Load from file
-void Constellation_mgr::load(const string& fileName, const string& artfileName, Hip_Star_mgr * _VouteCeleste, const string& _font_fileName, int barx, int bary)
+int Constellation_mgr::load(const string& fileName, const string& artfileName, Hip_Star_mgr * _VouteCeleste, const string& _font_fileName, int barx, int bary)
 {
-	printf(_("Loading constellation data...\n"));
+  printf(_("Loading constellation data...\n"));
 
-	JustLoaded=1;
+  JustLoaded=1;
 
-	FILE * fic = fopen(fileName.c_str(),"r");
-    if (!fic)
-    {
-		printf("Can't open %s\n",fileName.c_str());
-        exit(-1);
-    }
+  FILE * fic = fopen(fileName.c_str(),"r");
+  if (!fic) {
+    printf("Can't open %s\n",fileName.c_str());
+    return 0;
+  }
 
-    Constellation * cons = NULL;
-    while(!feof(fic))
-    {
-        cons = new Constellation;
-        if (cons && cons->read(fic, _VouteCeleste))
-        {
+  // delete existing data, if any
+  vector<Constellation *>::iterator iter;
+  for(iter=asterisms.begin();iter!=asterisms.end();++iter) {
+    delete (*iter);
+    asterisms.erase(iter);
+    iter--;  // important!
+  }
+
+  Constellation * cons = NULL;
+  while(!feof(fic)) {
+    cons = new Constellation;
+    if (cons && cons->read(fic, _VouteCeleste))
+      {
             asterisms.push_back(cons);
-        }
-        else
-        {
-        	if (cons) delete cons;
-        }
-    }
-    fclose(fic);
-
-    if (!Constellation::constellation_font) Constellation::constellation_font = new s_font(12.,"spacefont", _font_fileName); // load Font
-    if (!Constellation::constellation_font)
+      }
+    else
+      {
+	if (cons) delete cons;
+      }
+  }
+  fclose(fic);
+  
+  if (!Constellation::constellation_font) Constellation::constellation_font = new s_font(12.,"spacefont", _font_fileName); // load Font
+  if (!Constellation::constellation_font)
     {
-	    printf("Can't create constellation font\n");
-        exit(1);
+      printf("Can't create constellation font\n");
     }	
-	
-	fic = fopen(artfileName.c_str(),"r");
-    if (!fic)
+  
+  fic = fopen(artfileName.c_str(),"r");
+  if (!fic)
     {
-		printf("Can't open %s\n",artfileName.c_str());
-        exit(-1);
+      printf("Can't open %s\n",artfileName.c_str());
+      return 1;  // no art, but still loaded constellation data
     }
 
 	// Read the constellation art file with the following format :
@@ -188,11 +185,11 @@ void Constellation_mgr::load(const string& fileName, const string& artfileName, 
 			{
 				// Empty constellation file
 				fclose(fic);
-				return;
+				return 1;  // no art is OK
 			}
 
 			printf("ERROR while loading art for constellation %s\n", shortname);
-			exit(-1);
+			
 		}
 
 		// Draw loading bar
@@ -245,40 +242,42 @@ void Constellation_mgr::load(const string& fileName, const string& artfileName, 
 		if (!cons)
 		{
 			printf("ERROR : Can't find constellation called : %s\n",shortname);
-			exit(-1);
+		} else {
+
+		  cons->art_tex = new s_texture(texfile);
+		  texSize = cons->art_tex->getSize();
+
+		  Vec3f s1 = _VouteCeleste->search(hp1)->get_prec_earth_equ_pos();
+		  Vec3f s2 = _VouteCeleste->search(hp2)->get_prec_earth_equ_pos();
+		  Vec3f s3 = _VouteCeleste->search(hp3)->get_prec_earth_equ_pos();
+
+		  // To transform from texture coordinate to 2d coordinate we need to find X with XA = B
+		  // A formed of 4 points in texture coordinate, B formed with 4 points in 3d coordinate
+		  // We need 3 stars and the 4th point is deduced from the other to get an normal base
+		  // X = B inv(A)
+		  Vec3f s4 = s1 + (s2-s1)^(s3-s1);
+		  Mat4f B(s1[0], s1[1], s1[2], 1, s2[0], s2[1], s2[2], 1, s3[0], s3[1], s3[2], 1, s4[0], s4[1], s4[2], 1);
+		  Mat4f A(x1, texSize-y1, 0.f, 1.f, x2, texSize-y2, 0.f, 1.f,
+			  x3, texSize-y3, 0.f, 1.f, x1, texSize-y1, texSize, 1.f);
+		  Mat4f X = B * A.inverse();
+		  
+		  cons->art_vertex[0] = Vec3f(X*Vec3f(0,0,0));
+		  cons->art_vertex[1] = Vec3f(X*Vec3f(texSize/2,0,0));
+		  cons->art_vertex[2] = Vec3f(X*Vec3f(texSize/2,texSize/2,0));
+		  cons->art_vertex[3] = Vec3f(X*Vec3f(0,texSize/2,0));
+		  cons->art_vertex[4] = Vec3f(X*Vec3f(texSize/2 + texSize/2,0,0));
+		  cons->art_vertex[5] = Vec3f(X*Vec3f(texSize/2 + texSize/2,texSize/2,0));
+		  cons->art_vertex[6] = Vec3f(X*Vec3f(texSize/2 + texSize/2, texSize/2 + texSize/2,0));
+		  cons->art_vertex[7] = Vec3f(X*Vec3f(texSize/2 + 0, texSize/2 + texSize/2,0));
+		  cons->art_vertex[8] = Vec3f(X*Vec3f(0, texSize/2 + texSize/2,0));
+		  
+		  current++;
 		}
-
-		cons->art_tex = new s_texture(texfile);
-		texSize = cons->art_tex->getSize();
-
-		Vec3f s1 = _VouteCeleste->search(hp1)->get_prec_earth_equ_pos();
-		Vec3f s2 = _VouteCeleste->search(hp2)->get_prec_earth_equ_pos();
-		Vec3f s3 = _VouteCeleste->search(hp3)->get_prec_earth_equ_pos();
-
-		// To transform from texture coordinate to 2d coordinate we need to find X with XA = B
-		// A formed of 4 points in texture coordinate, B formed with 4 points in 3d coordinate
-		// We need 3 stars and the 4th point is deduced from the other to get an normal base
-		// X = B inv(A)
-		Vec3f s4 = s1 + (s2-s1)^(s3-s1);
-		Mat4f B(s1[0], s1[1], s1[2], 1, s2[0], s2[1], s2[2], 1, s3[0], s3[1], s3[2], 1, s4[0], s4[1], s4[2], 1);
-		Mat4f A(x1, texSize-y1, 0.f, 1.f, x2, texSize-y2, 0.f, 1.f,
-			x3, texSize-y3, 0.f, 1.f, x1, texSize-y1, texSize, 1.f);
-		Mat4f X = B * A.inverse();
-
-		cons->art_vertex[0] = Vec3f(X*Vec3f(0,0,0));
-		cons->art_vertex[1] = Vec3f(X*Vec3f(texSize/2,0,0));
-		cons->art_vertex[2] = Vec3f(X*Vec3f(texSize/2,texSize/2,0));
-		cons->art_vertex[3] = Vec3f(X*Vec3f(0,texSize/2,0));
-		cons->art_vertex[4] = Vec3f(X*Vec3f(texSize/2 + texSize/2,0,0));
-		cons->art_vertex[5] = Vec3f(X*Vec3f(texSize/2 + texSize/2,texSize/2,0));
-		cons->art_vertex[6] = Vec3f(X*Vec3f(texSize/2 + texSize/2, texSize/2 + texSize/2,0));
-		cons->art_vertex[7] = Vec3f(X*Vec3f(texSize/2 + 0, texSize/2 + texSize/2,0));
-		cons->art_vertex[8] = Vec3f(X*Vec3f(0, texSize/2 + texSize/2,0));
-	     
-		current++;
 		
     }
     fclose(fic);
+
+    return 1;
 }
 
 // Draw all the constellations in the vector
@@ -386,15 +385,16 @@ Constellation* Constellation_mgr::find_from_short_name(const string& shortname) 
 
 
 // update constellation names for a new locale
-void Constellation_mgr::set_sky_locale(const string& _sky_locale) {
+int Constellation_mgr::set_sky_locale(const string& _sky_locale) {
+
+  skyLocale = _sky_locale;
+
 
   vector<Constellation *>::const_iterator iter;
 
   char short_name[4];
   char cname[20];
   Constellation* aster;
-
-  skyLocale = _sky_locale;
 
   // clear previous names
   for(iter=asterisms.begin();iter!=asterisms.end();++iter) {
@@ -409,7 +409,7 @@ void Constellation_mgr::set_sky_locale(const string& _sky_locale) {
   cnFile=fopen(filename.c_str(),"r");
   if (!cnFile) {
     printf("WARNING %s NOT FOUND\n",filename.c_str());
-    return;
+    return 0;
   }
 
   // find matching constellation and update name
@@ -425,7 +425,7 @@ void Constellation_mgr::set_sky_locale(const string& _sky_locale) {
 
   }
   fclose(cnFile);
- 
+  return 1;
 }
 
 void Constellation_mgr::set_art_fade_duration(float duration) 

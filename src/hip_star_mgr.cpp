@@ -131,21 +131,21 @@ void Hip_Star_mgr::load_data(const string& hipCatFile)
 
 
 // Load common names from file 
-void Hip_Star_mgr::load_common_names(const string& commonNameFile)
+int Hip_Star_mgr::load_common_names(const string& commonNameFile)
 {
 	// clear existing names (would be faster if they were in separate array
 	// since relatively few are named)
     for (int i=0; i<StarArraySize; ++i)
-	{
-		StarArray[i].CommonName = "";
-    }
+      {
+	StarArray[i].CommonName = "";
+      }
 	
-	FILE *cnFile;
+    FILE *cnFile;
     cnFile=fopen(commonNameFile.c_str(),"r");
     if (!cnFile)
     {   
         printf("WARNING %s NOT FOUND\n",commonNameFile.c_str());
-        return;
+        return 0;
     }
 
 	// Assign names to the matching stars, now support spaces in names
@@ -170,6 +170,7 @@ void Hip_Star_mgr::load_common_names(const string& commonNameFile)
 	} while(fgets(line, 256, cnFile));
 
     fclose(cnFile);
+    return 1;
 }
 
 // Load scientific names from file 

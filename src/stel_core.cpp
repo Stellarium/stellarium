@@ -166,7 +166,7 @@ void stel_core::init(void)
 	tone_converter->set_world_adaptation_luminance(3.75f + atmosphere->get_intensity()*40000.f);
 
 	// Set the default moon scaling
-	if (FlagInitMoonScaled) ssystem->get_moon()->set_sphere_scale(moon_scale);
+	if (FlagInitMoonScaled) ssystem->get_moon()->set_sphere_scale(MoonScale);
 
 	// Compute planets data and init viewing position
 	// Position of sun and all the satellites (ie planets)
@@ -446,7 +446,7 @@ void stel_core::draw(int delta_time)
 
 	// draw images loaded by a script
 	projection->set_orthographic_projection(); 
-	script_images->draw(screen_W,screen_H);
+	script_images->draw(screen_W, screen_H, projection->viewW(), projection->viewH());  
 	projection->reset_perspective_projection(); 
 
 	projection->draw_viewport_shape();
@@ -667,7 +667,7 @@ void stel_core::load_config_from(const string& confFile)
 	FlagCardinalPoints		= conf.get_boolean("viewing:flag_cardinal_points");
 	FlagGravityLabels		= conf.get_boolean("viewing:flag_gravity_labels");
 	FlagInitMoonScaled		= conf.get_boolean("viewing:flag_init_moon_scaled");
-	moon_scale				= conf.get_double ("viewing","moon_scale",5.);
+	MoonScale				= conf.get_double ("viewing","moon_scale",5.);
 	ConstellationArtIntensity       = conf.get_double("viewing","constellation_art_intensity", 0.5);
 	ConstellationArtFadeDuration    = conf.get_double("viewing","constellation_art_fade_duration",2.);
 	
@@ -807,7 +807,7 @@ void stel_core::save_config_to(const string& confFile)
 	conf.set_boolean("viewing:flag_cardinal_points", FlagCardinalPoints);
 	conf.set_boolean("viewing:flag_gravity_labels", FlagGravityLabels);
 	conf.set_boolean("viewing:flag_init_moon_scaled", FlagInitMoonScaled);
-	conf.set_double ("viewing:moon_scale", moon_scale);
+	conf.set_double ("viewing:moon_scale", MoonScale);
 	conf.set_double ("viewing:constellation_art_intensity", ConstellationArtIntensity);
 	conf.set_double ("viewing:constellation_art_fade_duration", ConstellationArtFadeDuration);
 
@@ -1229,26 +1229,30 @@ void stel_core::auto_zoom_out(float move_duration)
 }
 
 // this really belongs elsewhere
-void stel_core::set_sky_culture(string _culture_dir)
+int stel_core::set_sky_culture(string _culture_dir)
 {
-  if(SkyCulture == _culture_dir) return;
-  SkyCulture = _culture_dir;
+  if(SkyCulture == _culture_dir) return 1;
 
-  if(!projection) return;  // objects not initialized yet, will be loaded in init
+  if(!projection) return 0;  // objects not initialized yet, will be loaded in init
 
   // percent complete bar only draws in 2d mode
   projection->set_orthographic_projection();
-  asterisms->set_sky_culture(_culture_dir, DataDir + "spacefont.txt", screen_W/2-150, screen_H/2-20);
-  projection->reset_perspective_projection();
-  
-  // as constellations have changed, clear out any selection and retest for match!
-  if (selected_object && selected_object->get_type()==STEL_OBJECT_STAR)
-  {
-    selected_constellation=asterisms->is_star_in((Hip_Star*)selected_object);
-  } else
-  {
-    selected_constellation=NULL;
+  if( asterisms->set_sky_culture(_culture_dir, DataDir + "spacefont.txt", screen_W/2-150, screen_H/2-20) ) {
+
+    SkyCulture = _culture_dir;
+
+    // as constellations have changed, clear out any selection and retest for match!
+    if (selected_object && selected_object->get_type()==STEL_OBJECT_STAR) {
+      selected_constellation=asterisms->is_star_in((Hip_Star*)selected_object);
+    } else {
+      selected_constellation=NULL;
+    }
+
+    projection->reset_perspective_projection();
+    return 1;
   }
+  projection->reset_perspective_projection();
+  return 0;
 
 }
 
@@ -1256,11 +1260,12 @@ void stel_core::set_sky_culture(string _culture_dir)
 // this really belongs elsewhere
 void stel_core::set_sky_locale(string _locale)
 {
-  if(SkyLocale == _locale) return;
-  SkyLocale = _locale;
+  //  if(SkyLocale == _locale) return;  (not valid as culture can change and must reload)
 
   if( !hip_stars ) return; // objects not initialized yet
-  hip_stars->load_common_names(DataDir + "star_names." + SkyLocale + ".fab");
+
+  SkyLocale = _locale;
+  hip_stars->load_common_names(DataDir + "star_names." + _locale + ".fab");
   ssystem->set_sky_locale(_locale);
   asterisms->set_sky_locale(_locale);
 
