@@ -34,10 +34,10 @@
 
 using namespace std;
 
-class RotationElements
+class rotation_elements
 {
  public:
-    RotationElements();
+    rotation_elements();
 
     float period;        // sidereal rotation period
     float offset;        // rotation at epoch
@@ -63,7 +63,7 @@ public:
 protected:
     char * name;
 	int flagHalo;							// Set if a little "star like" halo will be drawn
-	RotationElements re;					// Rotation param
+	rotation_elements re;					// Rotation param
 	double radius;							// Planet radius
 	Vec3d ecliptic_pos; 					// Position in UA in the rectangular ecliptic coordinate system
 											// The reference of the coord is the parent planet

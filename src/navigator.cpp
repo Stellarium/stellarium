@@ -43,6 +43,14 @@ void observator_pos::load(FILE * f)
 	if (tempLongitude) delete tempLongitude;
 }
 
+navigator::navigator()
+{
+}
+
+navigator::~navigator()
+{
+}
+
 // Load the position info in the file name given
 void navigator::load_position(char * fileName)
 {

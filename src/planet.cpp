@@ -21,7 +21,11 @@
 #include "planet.h"
 
 // epoch J2000: 12 UT on 1 Jan 2000
-static double J2000 = 2451545.0;
+#define J2000 2451545.0
+
+rotation_elements::rotation_elements() : period(0.), offset(0.), epoch(J2000), obliquity(0.), ascendingNode(0.), precessionRate(0.)
+{
+}
 
 planet::planet(char * _name, int _flagHalo, double _radius, vec3_t _color,
 				s_texture * _planetTexture, s_texture * _haloTexture,

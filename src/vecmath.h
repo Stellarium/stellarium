@@ -265,14 +265,10 @@ template<class T> Vector3<T> operator*(T s, const Vector3<T>& v)
     return Vector3<T>(s * v.x, s * v.y, s * v.z);
 }
 
-template<class T> Vector3<T> operator*(const Vector3<T>& v, T s)
-{
-    return Vector3<T>(s * v.x, s * v.y, s * v.z);
-}
 
-template<class T> Vector3<T> operator*(T s)
+template<class T> Vector3<T> Vector3<T>::operator*(T s)
 {
-    return Vector3<T>(s * v.x, s * v.y, s * v.z);
+    return Vector3<T>(s * x, s * y, s * z);
 }
 
 template<class T> Vector3<T> Vector3<T>::operator/(T s)
@@ -281,11 +277,6 @@ template<class T> Vector3<T> Vector3<T>::operator/(T s)
     return Vector3<T>(is * x, is * y, is * z);
 }
 
-// dot product
-template<class T> T operator*(const Vector3<T>& a, const Vector3<T>& b)
-{
-    return a.x * b.x + a.y * b.y + a.z * b.z;
-}
 
 template<class T> T Vector3<T>::dot(const Vector3<T>& b)
 {
@@ -462,6 +453,13 @@ template<class T> Vector2<T>::Vector2(T _x, T _y) : x(_x), y(_y)
 
 
 //**** Vector2 operators
+template<class T> T& Vector2<T>::operator[](int n) const
+{
+    // Not portable--I'll write a new version when I try to compile on a
+    // platform where it bombs.
+    return ((T*) this)[n];
+}
+
 template<class T> bool operator==(const Vector2<T>& a, const Vector2<T>& b)
 {
     return a.x == b.x && a.y == b.y;
@@ -472,7 +470,7 @@ template<class T> bool operator!=(const Vector2<T>& a, const Vector2<T>& b)
     return a.x != b.x || a.y != b.y;
 }
 
-template<class T> T operator+(const Vector2<T>& b)
+template<class T> Vector2<T> Vector2<T>::operator+(const Vector2<T>& b)
 {
     return Vector2<T>(x+b.x, y+b.y);
 }
@@ -978,11 +976,11 @@ template<class T> Vector3<T> operator*(const Matrix4<T>& m, const Vector3<T>& v)
 }
 
 // transform a 3 element column vector by a 4x4 matrix in homogeneous coordinate
-template<class T> Vector3<T> transfo4d(const Matrix4<T>& m)
+template<class T> Vector3<T> Vector3<T>::transfo4d(const Matrix4<T>& m) const
 {
     return Vector3<T>(m.r[0].x * x + m.r[0].y * y + m.r[0].z * z + m.r[0].w,
-		      m.r[1].x * v.x + m.r[1].y * v.y + m.r[1].z * v.z + m.r[1].w,
-		      m.r[2].x * v.x + m.r[2].y * v.y + m.r[2].z * v.z + m.r[2].w);
+		      m.r[1].x * x + m.r[1].y * y + m.r[1].z * z + m.r[1].w,
+		      m.r[2].x * x + m.r[2].y * y + m.r[2].z * z + m.r[2].w);
 }
 
 // multiply row vector by a 4x4 matrix

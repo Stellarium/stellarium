@@ -14,7 +14,6 @@ AC_PROG_CXX
 
 CFLAGS="-s -Wall -O2 -ffast-math -fexpensive-optimizations"
 CXXFLAGS="-s -Wall -O2 -ffast-math -fexpensive-optimizations"
-LIBS="$LIBS"
 
 dnl Checks for programs.
 AC_PROG_CPP
@@ -35,6 +34,8 @@ AM_PATH_SDL
 LIBS="$LIBS $SDL_LIBS"
 CFLAGS="$CFLAGS $SDL_CFLAGS"
 CXXFLAGS="$CXXFLAGS $SDL_CFLAGS"
+
+AC_CHECK_LIB(nova,get_dec_location,LIBS="$LIBS -lnova",AC_MSG_RESULT(nova library not found))
 
 AC_C_BIGENDIAN
 AC_CHECK_HEADER(byteswap.h)
