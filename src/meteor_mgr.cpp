@@ -99,7 +99,7 @@ void Meteor_mgr::update(int delta_time) {
 
     // start new meteor based on ZHR time probability
     double prob = (double)rand()/((double)RAND_MAX+1);
-    if( ZHR > 0 && prob > 0 && prob < ((double)ZHR*zhr_to_wsr*(double)delta_time/1000.0f/(double)mpf) ) {
+    if( ZHR > 0 && prob < ((double)ZHR*zhr_to_wsr*(double)delta_time/1000.0f/(double)mpf) ) {
       Meteor *m = new Meteor(projection, navigation, eye, max_velocity);
       active.push_back(m);
       mlaunch++;
