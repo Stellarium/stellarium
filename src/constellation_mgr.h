@@ -34,11 +34,11 @@ public:
     void show_art(void);
     void hide_art(void);
     void draw(Projector* prj) const;
-	// Draw one constellation of internationnal name Abr
-	void draw(Projector* prj, char abr[4]) const;
+    // Draw one constellation of internationnal name Abr
+    void draw(Projector* prj, char abr[4]) const;
     void draw_names(Projector* prj, bool gravity_label);
     void draw_one_name(Projector* prj, Constellation*, bool gravity_label) const;
-    void draw_art(Projector* prj) const;
+    void draw_art(Projector* prj, int delta_time) const;
     Constellation* is_star_in(const Hip_Star *) const;
     Constellation* find_from_short_name(const string& shortname) const;
     // test that sky culture seems valid 
