@@ -708,22 +708,25 @@ void stel_ui::draw_gravity_ui(void)
     static char str[255];
 	ln_date d;
 
-	if (core->FlagUTC_Time) get_date(core->navigation->get_JDay(),&d);
-	else get_date(core->navigation->get_JDay()+core->navigation->get_time_zone()*JD_HOUR,&d);
-
-	if (core->FlagUTC_Time) sprintf(str,
-	"%.2d/%.2d/%.4d %.2d:%.2d:%.2d (UTC)",d.days,d.months,d.years,d.hours,d.minutes,(int)d.seconds);
-	else sprintf(str,"%.2d/%.2d/%.4d %.2d:%.2d:%.2d FPS:%4.2f",
-		d.days,d.months,d.years,d.hours,d.minutes,(int)d.seconds, core->fps);
-
 	int x = core->projection->view_left() + core->projection->viewW()/2;
 	int y = core->projection->view_bottom() + core->projection->viewH()/2;
 	int shift = (int)(M_SQRT2 / 2 * MY_MIN(x,y));
 
-	glColor3f(0.1,0.9,0.1);
-	core->projection->print_gravity180(spaceFont, x-shift + 10, y-shift + 10, str);
+	if (core->FlagShowTuiDateTime)
+	{
+		if (core->FlagUTC_Time) get_date(core->navigation->get_JDay(),&d);
+		else get_date(core->navigation->get_JDay()+core->navigation->get_time_zone()*JD_HOUR,&d);
 
-	if (core->selected_object)
+		if (core->FlagUTC_Time) sprintf(str,
+		"%.2d/%.2d/%.4d %.2d:%.2d:%.2d (UTC)",d.days,d.months,d.years,d.hours,d.minutes,(int)d.seconds);
+		else sprintf(str,"%.2d/%.2d/%.4d %.2d:%.2d:%.2d FPS:%4.2f",
+			d.days,d.months,d.years,d.hours,d.minutes,(int)d.seconds, core->fps);
+
+		glColor3f(0.1,0.9,0.1);
+		core->projection->print_gravity180(spaceFont, x-shift + 10, y-shift + 10, str);
+	}
+
+	if (core->selected_object && core->FlagShowTuiShortInfo)
 	{
 		core->selected_object->get_short_info_string(str, core->navigation);
 		if (core->selected_object->get_type()==STEL_OBJECT_NEBULA) glColor3f(0.4f,0.5f,0.8f);

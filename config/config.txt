@@ -9,8 +9,8 @@ screen_h                       = 768
 bbp_mode                       = 32
 
 [projection]
-type = fisheye
-viewport = disk
+type = projection
+viewport = square
 
 [stars]
 star_scale                     = 1
@@ -33,6 +33,10 @@ flag_utc_time                  = false
 flag_show_selected_object_info = false
 gui_base_color                 = 0.3,0.4,0.7
 gui_text_color                 = 0.7,0.8,0.9
+
+[tui]
+flag_show_tui_datetime			= true
+flag_show_tui_short_obj_info	= true
 
 [navigation]
 flag_lock_equ_pos              = false
