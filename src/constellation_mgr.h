@@ -28,8 +28,8 @@ class Constellation_mgr
 public:
     Constellation_mgr();
     virtual ~Constellation_mgr();
-    int Read(FILE *, Star_mgr * _VouteCeleste);
-    void Load(char *, Star_mgr * _VouteCeleste);
+    int Read(FILE *, Hip_Star_mgr * _VouteCeleste);
+    void Load(char *, Hip_Star_mgr * _VouteCeleste);
     void Draw();
     void Draw(char * Abr);
     void DrawName();

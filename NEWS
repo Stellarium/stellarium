@@ -1,9 +1,15 @@
-0.4.8 [14/08/2002]
-Improved automake/autoconf portability
-Full installation with make intall now supported
-Compile and works perfectly on CYGWIN
-Fixed the negative time display bug (with time zones)
+0.4.9 [21/08/2002]
+Use the Hipparcos catalog : there are now 120 000 stars (10 000 before).
+Added a grid class for spherical star data optimisation. 
+Modified star names files and constellation files structures.
+MACOSX version now compile and execute with the autoconf script.
 
+0.4.8 [14/08/2002]
+Improved automake/autoconf portability.
+Full installation with make intall now supported.
+Compile and works perfectly on CYGWIN.
+Fixed the (famous ;) ) negative time display bug (with time zones).
+Started to work on Hipparcos catalog.
 
 0.4.7 [17/07/2002]
 Autoconf/automake now works! Linux version available.
@@ -60,7 +66,7 @@ Added a GPL header on every sources files.
 Globaly cleaned the code source.
 Continued the gui.
 Handle the Keyboard on the top of Glut.
-Changed the drawing of the stars : 2D drawing is a lot faster and really only draw the one who are in the field of view. The program is 20% faster!!
+Changed the drawing of the stars : 2D drawing is a lot faster and really only draw those which are in the field of view. The program is 20% faster!!
 We now can't switch between resolution mode or fullscreen/windowed mode during the execution. This will prevent the program from crashs and hardware dependent bugs. Everything is statically configurable in config.txt. 
 Fixed hundred of minor bugs (and probably added others...).
 I now have written about 4300 lines of real code for this project!
@@ -74,7 +80,7 @@ Encapsuled all the global variables in the struct "global" shared bye every modu
 This version has never worked.
 
 0.4.0.1 [07/01/2002]
-Added a real manager to use a config file. I have found an excellent library made by NINOMIYA <gm@debian.or.jp> called parsecfg.c. I included it with success (minor change for windows porting).
+Added a real manager to use a config file. I have found an excellent library made by NINOMIYA <gm@debian.or.jp> called parsecfg.c. I included it with success (minor changes for windows porting).
 Continued the gui : added classes like windows and label and a full implementation of callbacks.
 Started to change the structure of the program.
 
@@ -92,14 +98,14 @@ Fixed minor bugs.
 Compile under linux, and windows with gcc.
 
 0.3.8 [03/01/2002]
-Added a config file with date, time and location parameters
+Added a config file with date, time and location parameters.
 Add a button and a functionality to show where are the nebulaes with a dot.
 Added some messier nebulaes.
 
 0.3.7 [27/12/2001]
 One more day of work : 
 Added SUPER moving pointers for each type of object.
-Planets and moon now have shading who work correctly!! I had a lot of problems with that. But it's OK now...
+Planets and moon now have shading which works correctly!! I had a lot of problems with that. But it's OK now...
 Improve planet drawing perfomance.
 Added some messier nebulaes.
 Fixed minor bugs and visuals.
@@ -115,4 +121,6 @@ Fixed minor bugs and visuals.
 Fixed the bug for the selection, improve global perfomance, and continue to comment the code.
 
 0.3.3 [Before] : 
-I succed to compile my program in linux and windows with the same sources files ! I decided to share my source code in GPL. My code was yet free but not very "readable" so i will try to comment it in english, and to make a version file (this file) etc... I now have to read docs to produce a "standard GNU code"...
+I succed to compile my program in linux and windows with the same sources files ! 
+I decided to share my source code in GPL. 
+My code was yet free but not very "readable" so i will try to comment it in english, and to make a version file (this file) etc... I now have to read docs to produce a "standard GNU code"...

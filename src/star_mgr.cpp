@@ -173,7 +173,7 @@ void Star_mgr::Draw(void)
             if (global.FlagStarName && (**iter).haveShortCommonName && (**iter).Mag<global.MaxMagStarName) 
             {   
 		        (**iter).DrawName();
-                glBindTexture (GL_TEXTURE_2D, /*Star::*/starTexture->getID());
+                glBindTexture (GL_TEXTURE_2D, starTexture->getID());
             }
         }
     }

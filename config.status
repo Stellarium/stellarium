@@ -277,13 +277,13 @@ s,@ECHO_C@,,;t t
 s,@ECHO_N@,-n,;t t
 s,@ECHO_T@,,;t t
 s,@PATH_SEPARATOR@,:,;t t
-s,@DEFS@,-DPACKAGE=\"stellarium\" -DVERSION=\"0.4.8\" -DX_DISPLAY_MISSING=1 -DHAVE_TOUPPER=1 -DHAVE_STRCASECMP=1 -DCONFIG_DATA_DIR=\"/usr/local/share/stellarium\" ,;t t
+s,@DEFS@,-DPACKAGE=\"stellarium\" -DVERSION=\"0.4.9\" -DX_DISPLAY_MISSING=1 -DHAVE_TOUPPER=1 -DHAVE_STRCASECMP=1 -DCONFIG_DATA_DIR=\"/usr/local/share/stellarium\" ,;t t
 s,@LIBS@,  -lopengl32 -lglu32 -lglut32 -lm,;t t
 s,@INSTALL_PROGRAM@,${INSTALL},;t t
 s,@INSTALL_SCRIPT@,${INSTALL},;t t
 s,@INSTALL_DATA@,${INSTALL} -m 644,;t t
 s,@PACKAGE@,stellarium,;t t
-s,@VERSION@,0.4.8,;t t
+s,@VERSION@,0.4.9,;t t
 s,@ACLOCAL@,${SHELL} /home/Fabien/work/stellarium/missing --run aclocal,;t t
 s,@AUTOCONF@,${SHELL} /home/Fabien/work/stellarium/missing --run autoconf,;t t
 s,@AUTOMAKE@,${SHELL} /home/Fabien/work/stellarium/missing --run automake,;t t
