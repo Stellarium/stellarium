@@ -66,6 +66,7 @@ namespace s_tui
 		Component() : active(false) {;}
 		virtual ~Component() {;}
 		virtual string getString(void) {return string();}
+		virtual string getCleanString(void);
 		// Return true if key signal intercepted, false if not
 		virtual bool onKey(SDLKey, S_TUI_VALUE) {return false;}
 		virtual bool isEditable(void) const {return false;}
@@ -200,6 +201,7 @@ namespace s_tui
 		virtual string getString(void);
 		virtual bool onKey(SDLKey, S_TUI_VALUE);
         virtual void addComponent(Component*);
+		virtual Component* getCurrent(void) const {if (current==childs.end()) return NULL; else return *current;}
     protected:
         list<Component*>::iterator current;
     };
@@ -212,9 +214,25 @@ namespace s_tui
 		MenuBranch(const string& s);
 		virtual bool onKey(SDLKey, S_TUI_VALUE);
 		virtual string getString(void);
+		virtual bool isEditable(void) const {return true;}
+		string getLabel(void) const {return label;}
     protected:
 		string label;
 		bool isNavigating;
+		bool isEditing;
+    };
+
+	// Widget quite like Menu Branch but always navigating, and always display the label
+    class MenuBranch_item : public Branch
+    {
+    public:
+		MenuBranch_item(const string& s);
+		virtual bool onKey(SDLKey, S_TUI_VALUE);
+		virtual string getString(void);
+		virtual bool isEditable(void) const {return true;}
+		string getLabel(void) const {return label;}
+    protected:
+		string label;
 		bool isEditing;
     };
 
@@ -298,7 +316,8 @@ namespace s_tui
 				if (!onChangeCallback.empty()) onChangeCallback();
 				return true;
 			}
-			return false;
+			if (k==SDLK_LEFT || k==SDLK_ESCAPE) return false;
+			else return true;
 		}
 		void addItem(const T& newitem) {items.insert(newitem); if(current==items.end()) current = items.begin();}
 		void addItemList(string s)
@@ -312,12 +331,53 @@ namespace s_tui
 		}
 		const T& getCurrent(void) const {if(current==items.end()) return emptyT; else return *current;}
 		void setCurrent(const T& i) {current = items.find(i);}
+		string getLabel(void) const {return label;}
     protected:
 		T emptyT;
 		multiset<T> items;
 		typename multiset<T>::iterator current;
 		string label;
     };
+
+	// Same as MultiSet_item, but with two states
+	template <class T>
+	class MultiSet_item_active : public MultiSet_item<T>
+    {
+	public:
+		MultiSet_item_active(const string& _label = string()) : MultiSet_item<T>(_label), isEditing(false) {;}
+		virtual bool onKey(SDLKey k, S_TUI_VALUE v)
+		{
+			if (!isEditing)
+			{
+				if (k==SDLK_RIGHT || k==SDLK_RETURN)
+				{
+					isEditing = true;
+					return true;
+				}
+				else
+				{
+					return false;
+				}
+			}
+			if (isEditing && !MultiSet_item<T>::onKey(k, v) && (k==SDLK_LEFT || k==SDLK_ESCAPE))
+			{
+				isEditing = false;
+				return false;
+			}
+			return false;
+		}
+
+		virtual string getString(void)
+		{
+			if (current==items.end()) return label;
+			ostringstream os;
+			os<< ((active && !isEditing) ? start_active : "") << label << ((active && !isEditing) ? stop_active : "") <<
+				((active && isEditing) ? start_active : "") << *current << ((active && isEditing) ? stop_active : "");
+			return os.str();
+		}
+	private:
+		bool isEditing;
+	};
 
 }; // namespace s_tui
 

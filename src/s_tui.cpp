@@ -24,6 +24,16 @@
 using namespace std;
 using namespace s_tui;
 
+// Same function as getString but cleaned of every color informations
+string Component::getCleanString(void)
+{
+	string result, s(getString());
+	for (unsigned int i=0;i<s.length();++i)
+	{
+		if (s[i]!=start_active[0] && s[i]!=stop_active[0]) result.push_back(s[i]);
+	}
+	return result;
+}
 
 Container::~Container()
 {
@@ -173,6 +183,60 @@ string MenuBranch::getString(void)
 	if (isEditing) (*Branch::current)->setActive(true);
 	string s(Branch::getString());
 	if (isEditing) (*Branch::current)->setActive(false);
+	return s;
+}
+
+
+
+MenuBranch_item::MenuBranch_item(const string& s) : Branch(), label(s), isEditing(false)
+{
+}
+
+bool MenuBranch_item::onKey(SDLKey k, S_TUI_VALUE v)
+{
+	if (isEditing)
+	{
+		if ((*Branch::current)->onKey(k, v)) return true;
+		if (v==S_TUI_PRESSED && (k==SDLK_LEFT || k==SDLK_ESCAPE || k==SDLK_RETURN))
+		{
+			isEditing = false;
+			return true;
+		}
+		return true;
+	}
+	else
+	{
+		if (v==S_TUI_PRESSED && k==SDLK_UP)
+		{
+			if (Branch::current!=Branch::childs.begin()) --Branch::current;
+			if (!onChangeCallback.empty()) onChangeCallback();
+			return true;
+		}
+		if (v==S_TUI_PRESSED && k==SDLK_DOWN)
+		{
+			if (Branch::current!=--Branch::childs.end()) ++Branch::current;
+			if (!onChangeCallback.empty()) onChangeCallback();
+			return true;
+		}
+		if (v==S_TUI_PRESSED && (k==SDLK_RIGHT || k==SDLK_RETURN))
+		{
+			if ((*Branch::current)->isEditable()) isEditing = true;
+			return true;
+		}
+		if (v==S_TUI_PRESSED && (k==SDLK_LEFT || k==SDLK_ESCAPE))
+		{
+			return false;
+		}
+		return false;
+	}
+	return false;
+}
+
+string MenuBranch_item::getString(void)
+{
+	if (active) (*Branch::current)->setActive(true);
+	string s(label + Branch::getString());
+	if (active) (*Branch::current)->setActive(false);
 	return s;
 }
 
