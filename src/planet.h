@@ -56,7 +56,7 @@ class ring
 public:
 	ring(float _radius, const char* _texname);
 	virtual ~ring();
-	void draw(void);
+	void draw(const Projector* prj, const Mat4d& mat);
 	double get_size(void) const {return radius;}
 private:
 	float radius;

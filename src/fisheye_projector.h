@@ -32,25 +32,25 @@ public:
 		double _min_fov = 0.001, double _max_fov = 300.);
 	virtual ~Fisheye_projector();
 
-	virtual void change_fov(double deltaFov);
-
 	virtual void maximize_viewport(void);
-	virtual void set_viewport(int x, int y, int w, int h);
 
 	// Same function but using a custom modelview matrix
 	virtual bool project_custom(const Vec3d& v, Vec3d& win, const Mat4d& mat) const;
 	virtual void unproject_custom(double x, double y, Vec3d& v, const Mat4d& mat) const;
 
 	// Reimplementation of gluSphere : glu is overrided for non standard projection
-	void Fisheye_projector::sSphere(GLdouble radius, GLint slices, GLint stacks,
+	void sSphere(GLdouble radius, GLint slices, GLint stacks,
 		const Mat4d& mat, int orient_inside = 0) const;
+
+	void update_openGL(void) const;
+
+	// Override glVertex3f and glVertex3d
+	void sVertex3(float x, float y, float z, const Mat4d& mat) const;
+	void sVertex3(double x, double y, double z, const Mat4d& mat) const;
 
 protected:
 
 	Vec3d center;
-
-	// Override glVertex3f
-	void sVertex3f(double x, double y, double z, const Mat4d& mat) const;
 
 	// Init the viewing matrix from the fov, the clipping planes and screen ratio
 	// The function is a reimplementation of gluPerspective
@@ -59,6 +59,8 @@ protected:
 	// transformation from screen 2D point x,y to object
 	// m is here the already inverted full tranfo matrix
 	virtual void unproject(double x, double y, const Mat4d& m, Vec3d& v) const;
+
+	Mat4d mat_projection2;		// orthographic projection matrix used for 3d vertex conversion
 };
 
 

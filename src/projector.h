@@ -111,6 +111,12 @@ public:
 	virtual void sSphere(GLdouble radius, GLint slices, GLint stacks,
 		const Mat4d& mat, int orient_inside = 0) const;
 
+	void sVertex3(float x, float y, float z, const Mat4d& mat) const
+	{glVertex3f(x,y,z);}
+
+	void sVertex3(double x, double y, double z, const Mat4d& mat) const
+	{glVertex3d(x,y,z);}
+
 	void update_openGL(void) const;
 protected:
 	// Init the viewing matrix from the fov, the clipping planes and screen ratio

@@ -110,7 +110,7 @@ private:
 	tone_reproductor * tone_converter;	// Tones conversion between stellarium world and display device
 	stel_ui * ui;						// The main User Interface
 
-	const Constellation* selected_constellation;
+	Constellation* selected_constellation;
 
 	init_parser * conf;					// The class which manage config retrieves and dumps
 

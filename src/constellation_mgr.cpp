@@ -117,17 +117,19 @@ void Constellation_mgr::draw_names(Projector* prj)
     prj->reset_perspective_projection();
 }
 
-void Constellation_mgr::draw_one_name(Projector* prj, const Constellation* c) const
+void Constellation_mgr::draw_one_name(Projector* prj, Constellation* c) const
 {
     glColor3f(0.7,0.1,0.1);
     glEnable(GL_BLEND);
     glEnable(GL_TEXTURE_2D);
     prj->set_orthographic_projection();	// set 2D coordinate
+	// Check if in the field of view
+    if ( prj->project_earth_equ_check(c->XYZname, c->XYname) )
 	if (c) c->draw_name(asterFont);
     prj->reset_perspective_projection();
 }
 
-const Constellation* Constellation_mgr::is_star_in(const Hip_Star * s) const
+Constellation* Constellation_mgr::is_star_in(const Hip_Star * s) const
 {
 	vector<Constellation *>::const_iterator iter;
     for(iter=asterisms.begin();iter!=asterisms.end();++iter)
