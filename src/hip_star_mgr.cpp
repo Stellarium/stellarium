@@ -207,7 +207,7 @@ void Hip_Star_mgr::load_common_names(const string& commonNameFile)
     cnFile=fopen(commonNameFile.c_str(),"r");
     if (!cnFile)
     {   
-        printf("ERROR %s NOT FOUND\n",commonNameFile.c_str());
+        printf("WARNING %s NOT FOUND\n",commonNameFile.c_str());
         return;
     }
 

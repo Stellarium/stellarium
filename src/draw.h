@@ -90,7 +90,7 @@ class Cardinals
 public:
 	Cardinals(const string& font_file, const string& tex_file, double size = 30., double _radius = 1.);
     virtual ~Cardinals();
-	void draw(const Projector* prj, bool gravityON = false) const;
+	void draw(const Projector* prj, double latitude, bool gravityON = false) const;
 	void set_color(const Vec3f& c) {color = c;}
 private:
 	double radius;

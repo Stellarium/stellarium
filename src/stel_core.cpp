@@ -310,15 +310,15 @@ void stel_core::draw(int delta_time)
 	// Draw the equatorial grid
 	if (FlagEquatorialGrid) equ_grid->draw(projection);
 	// Draw the altazimutal grid
-    if (FlagAzimutalGrid) azi_grid->draw(projection);
+	if (FlagAzimutalGrid) azi_grid->draw(projection);
 
 	// Draw the celestial equator line
-    if (FlagEquatorLine) equator_line->draw(projection);
+	if (FlagEquatorLine) equator_line->draw(projection);
 	// Draw the ecliptic line
-    if (FlagEclipticLine) ecliptic_line->draw(projection);
+	if (FlagEclipticLine) ecliptic_line->draw(projection);
 
 	// Draw the pointer on the currently selected object
-    if (selected_object) selected_object->draw_pointer(delta_time, projection, navigation);
+	if (selected_object) selected_object->draw_pointer(delta_time, projection, navigation);
 
 	// Draw the planets
 	if (FlagPlanets) {
@@ -375,12 +375,11 @@ void stel_core::draw(int delta_time)
 	landscape->draw(tone_converter, projection, navigation,	FlagFog, FlagHorizon && FlagGround, FlagGround);
 
 	// Daw the cardinal points
-    if (FlagCardinalPoints) cardinals_points->draw(projection, FlagGravityLabels);
+	if (FlagCardinalPoints) cardinals_points->draw(projection, observatory->get_latitude(), FlagGravityLabels );
 
 	projection->draw_viewport_shape();
 
-    // Draw the Graphical ui and the Text ui
-
+	// Draw the Graphical ui and the Text ui
 	ui->draw();
 
 	if (FlagShowGravityUi) ui->draw_gravity_ui();

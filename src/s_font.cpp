@@ -24,6 +24,7 @@
 #include <stdio.h>
 #include "s_font.h"
 
+
 s_font::s_font(float size_i, const string& textureName, const string& dataFileName) : size(size_i)
 {
     if (!buildDisplayLists(dataFileName, textureName)) cout << "ERROR WHILE CREATING FONT " << textureName << endl;
@@ -117,6 +118,7 @@ int s_font::buildDisplayLists(const string& dataFileName, const string& textureN
 	return 1;
 }
 
+
 void s_font::print(float x, float y, const string& str, int upsidedown) const
 {
     glBindTexture(GL_TEXTURE_2D, s_fontTexture->getID());  // Select Our s_font Texture
@@ -130,8 +132,45 @@ void s_font::print(float x, float y, const string& str, int upsidedown) const
 
 void s_font::print_char(const char c) const
 {
-	glBindTexture(GL_TEXTURE_2D, s_fontTexture->getID());  // Select Our s_font Texture
-	glCallList(g_base+c);
+  glBindTexture(GL_TEXTURE_2D, s_fontTexture->getID());  // Select Our s_font Texture
+  glCallList(g_base+c);
+}
+
+// print with dark outline
+// this is somewhere between a hack and a kludge
+void s_font::print_char_outlined(const char c) const
+{
+
+  GLfloat current_color[4];
+  glGetFloatv(GL_CURRENT_COLOR, current_color);	 
+ 	 	 
+  glBindTexture(GL_TEXTURE_2D, s_fontTexture->getID());  // Select Our s_font Texture
+
+  glColor3f(0.2,0.2,0.2);
+
+  glPushMatrix();
+  glTranslatef(1,1,0);		
+  glCallList(g_base+c);	
+  glPopMatrix();
+
+  glPushMatrix();
+  glTranslatef(-1,-1,0);		
+  glCallList(g_base+c);	
+  glPopMatrix();
+
+  glPushMatrix();
+  glTranslatef(1,-1,0);		
+  glCallList(g_base+c);	
+  glPopMatrix();
+
+  glPushMatrix();
+  glTranslatef(-1,1,0);		
+  glCallList(g_base+c);	
+  glPopMatrix();
+
+  glColor3f(current_color[0],current_color[1],current_color[2]);
+  glCallList(g_base+c);
+
 }
 
 float s_font::getStrLen(const string& str) const

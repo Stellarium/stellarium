@@ -404,7 +404,7 @@ void planet::draw_hints(const navigator* nav, const Projector* prj)
 	float tmp = 10.f + get_on_screen_size(prj, nav)/sphere_scale/2.f; // Shift for common_name printing
 
 	glColor4f(label_color[0], label_color[1], label_color[2],1.f);
-	gravity_label ? prj->print_gravity180(planet_name_font, screenPos[0],screenPos[1], scale_str, tmp, tmp) :
+	gravity_label ? prj->print_gravity180(planet_name_font, screenPos[0],screenPos[1], scale_str, 1, tmp, tmp) :
 		planet_name_font->print(screenPos[0]+tmp,screenPos[1]+tmp, scale_str);
 
 	// hint disapears smoothly on close view
