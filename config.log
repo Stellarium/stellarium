@@ -30,5 +30,6 @@ configure:1392: checking for GL/glut.h
 configure:1426: checking for glEnable in -lGL
 configure:1467: checking for gluPerspective in -lGLU
 configure:1508: checking for glutMainLoop in -lglut
-configure:1550: checking for ANSI C header files
-configure:1657: checking for strdup
+configure:1552: checking for strdup
+configure:1552: checking for toupper
+configure:1580: gcc -o conftest -g -O2   -lm conftest.c  -lGL -lGLU -lglut 1>&5

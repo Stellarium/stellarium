@@ -20,11 +20,8 @@ AC_CHECK_LIB(GL,glEnable,LIBS="$LIBS -lGL",AC_MSG_ERROR(GL not found - please in
 AC_CHECK_LIB(GLU,gluPerspective,LIBS="$LIBS -lGLU",AC_MSG_ERROR(GLU not found - please install GLU or MesaGLU))
 AC_CHECK_LIB(glut,glutMainLoop,LIBS="$LIBS -lglut",AC_MSG_ERROR(GLUT not found - please install GLUT or MesaGLUT))
 
-dnl Checks for header files.
-AC_HEADER_STDC
-
 dnl Checks for library functions.
-AC_CHECK_FUNCS(strdup, toupper)
+AC_CHECK_FUNCS(strdup toupper)
 
 CFLAGS="$CFLAGS -Wall"
 
