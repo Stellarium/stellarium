@@ -163,7 +163,7 @@ public:
 	void end_trail(void);
 
 	// create a stencil of the planet (currently just the moon) in stencil buffer
-	void create_stencil(const navigator* nav, const Projector *prj);
+	int create_stencil(const navigator* nav, const Projector *prj);
 
 
 protected:

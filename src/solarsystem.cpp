@@ -33,7 +33,7 @@ using namespace std;
 
 SolarSystem::SolarSystem(const string& _data_dir, const string& _sky_locale, const string& _font_filename, 
 			 Vec3f label_color, Vec3f orbit_color) : 
-  sun(NULL), moon(NULL), earth(NULL)
+  sun(NULL), moon(NULL), earth(NULL), tex_earth_shadow(NULL)
 {
   dataDir = _data_dir;
   planet_name_font = new s_font(13,"spacefont", dataDir + _font_filename);
@@ -67,8 +67,7 @@ SolarSystem::~SolarSystem()
 	earth = NULL;
 
 	if (planet_name_font) delete planet_name_font;
-	if(tex_earth_penumbra) delete tex_earth_penumbra;
-	if(tex_earth_umbra) delete tex_earth_umbra;
+	if(tex_earth_shadow) delete tex_earth_shadow;
 }
 
 
@@ -225,8 +224,7 @@ void SolarSystem::load(const string& planetfile)
 	}
 
 	// special case: load earth shadow texture
-	tex_earth_penumbra = new s_texture("earth-penumbra", TEX_LOAD_TYPE_PNG_ALPHA);
-	tex_earth_umbra = new s_texture("earth-umbra", TEX_LOAD_TYPE_PNG_ALPHA);
+	tex_earth_shadow = new s_texture("earth-shadow", TEX_LOAD_TYPE_PNG_ALPHA);
 
 }
 
@@ -481,14 +479,12 @@ void SolarSystem::draw_earth_shadow(const navigator * nav, Projector * prj) {
 
     // modify shadow location for scaled moon
     Vec3d mdist = shadow - mh;
-    if(mdist.length() > r_penumbra + 2000/AU) {
+    if(mdist.length() > r_penumbra + 2000/AU ||
+       !get_moon()->create_stencil(nav, prj)) {
       // not visible so don't bother drawing
       return;
     }
 
-    // get moon stencil created
-    get_moon()->create_stencil(nav, prj);
-   
     shadow = mh + mdist*mscale;
 
     r_penumbra *= mscale;
@@ -506,9 +502,11 @@ void SolarSystem::draw_earth_shadow(const navigator * nav, Projector * prj) {
     top = shadow[2] + r_umbra*mscale*1.02;
     bottom = shadow[2] - r_umbra*mscale*1.02;
 
+    
     prj->set_orthographic_projection();    // 2D coordinate
 
     Vec3d screenPos, screenRad;
+    
     
     prj->project_helio(shadow, screenPos);
     prj->project_helio(left, screenRad);
@@ -521,22 +519,37 @@ void SolarSystem::draw_earth_shadow(const navigator * nav, Projector * prj) {
     prj->project_helio(uleft, screenURad);
     float urad = sqrt(pow(screenURad[0]-x,2) + pow(screenURad[1]-y,2));
 
+    
+    // shadow radial texture
+    glBindTexture(GL_TEXTURE_2D, tex_earth_shadow->getID());
 
-    // penumbra
-    glBindTexture(GL_TEXTURE_2D, tex_earth_penumbra->getID());
-
+    // umbra first
     glBegin(GL_TRIANGLE_STRIP);
     float r;
-    for (int i=0; i<=48; i++) {
-      r = i*2*M_PI/48.;
+    for (int i=0; i<=100; i++) {
+      r = i*2*M_PI/100.;
+
+      glTexCoord2f(0,0);
+      glVertex3f(x, y, 0.0f);
+
+      glTexCoord2f(0.6,0);  // position in texture of umbra edge
+      glVertex3f(x + urad * sin(r), y + urad * cos(r), 0.0f);
+    }
+    glEnd();
+
+    // now penumbra
+    glBegin(GL_TRIANGLE_STRIP);
+    for (int i=0; i<=100; i++) {
+      r = i*2*M_PI/100.;
+
+      glTexCoord2f(0.6,0);  // position in texture of umbra edge
+      glVertex3f(x + urad * sin(r), y + urad * cos(r), 0.0f);
 
       glTexCoord2f(1,0);
       glVertex3f(x + rad * sin(r), y + rad * cos(r), 0.0f);
-      glTexCoord2f(0,0);
-      glVertex3f(x + .98*urad * sin(r), y + .98*urad * cos(r), 0.0f);
-      // .98 is to overlap with umbra texture
     }
     glEnd();
+
 
     /*
       Show rings for debug
@@ -563,37 +576,8 @@ void SolarSystem::draw_earth_shadow(const navigator * nav, Projector * prj) {
     glColor4f(1,1,1,1);
     glEnable(GL_TEXTURE_2D);
     glEnable(GL_BLEND);
-    
-*/
-
-    // draw umbra
-    glBindTexture(GL_TEXTURE_2D, tex_earth_umbra->getID());
-
-    /*
-    glBegin(GL_TRIANGLE_STRIP); {
-      glTexCoord2i(1,0);              // Bottom Right
-      prj->sVertex3(right[0], right[1], bottom, mat);
-      glTexCoord2i(0,0);              // Bottom Left
-      prj->sVertex3(uleft[0], uleft[1],bottom, mat);
-      glTexCoord2i(1,1);              // Top Right
-      prj->sVertex3(right[0], right[1],top, mat);
-      glTexCoord2i(0,1);              // Top Left
-      prj->sVertex3(uleft[0], uleft[1],top, mat); }
-    glEnd(); 
     */
-
-    glBegin(GL_TRIANGLE_STRIP);
-    for (int i=0; i<=100; i++) {
-      r = i*2*M_PI/100.;
-
-      glTexCoord2f(0,0);
-      glVertex3f(x,y,0);
-      glTexCoord2f(1,0);              // Bottom Left
-      glVertex3f(x + urad * sin(r), y + urad * cos(r), 0.0f);
-    }
-    glEnd();
-
-
+    
     prj->reset_perspective_projection();		// Restore the other coordinate
     glDisable(GL_STENCIL_TEST);
 
