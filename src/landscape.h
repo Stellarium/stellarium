@@ -87,6 +87,7 @@ private:
 	float decor_angle_rotatez;
 	float ground_angle_shift;
 	float ground_angle_rotatez;
+	int draw_ground_first;
 };
 
 class Landscape_fisheye : public Landscape

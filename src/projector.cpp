@@ -380,6 +380,46 @@ void Projector::sHalfSphere(GLdouble radius, GLint slices, GLint stacks,
 	glPopMatrix();
 }
 
+// Draw a disk with a special texturing mode having texture center at disk center
+void Projector::sDisk(GLdouble radius, GLint slices, GLint stacks,
+	const Mat4d& mat, int orient_inside) const
+{
+	glPushMatrix();
+	glLoadMatrixd(mat);
+
+	GLfloat r, dr, theta, dtheta;
+	GLfloat x, y;
+	GLint j;
+	GLfloat nsign;
+
+	if (orient_inside) nsign = -1.0;
+	else nsign = 1.0;
+
+	dr = radius / (GLfloat) stacks;
+	dtheta = 2.0 * M_PI / (GLfloat) slices;
+
+	// draw intermediate stacks as quad strips
+	for (r = 0; r < radius; r+=dr)
+	{
+		glBegin(GL_TRIANGLE_STRIP);
+		for (j = 0; j <= slices; j++)
+		{
+			theta = (j == slices) ? 0.0 : j * dtheta;
+			x = r*cos(theta);
+			y = r*sin(theta);
+			glNormal3f(0, 0, nsign);
+			glTexCoord2f(0.5+x/2/radius, 0.5+y/2/radius);
+			sVertex3(x, y, 0, mat);
+			x = (r+dr)*cos(theta);
+			y = (r+dr)*sin(theta);
+			glNormal3f(0, 0, nsign);
+			glTexCoord2f(0.5+x/2/radius, 0.5+y/2/radius);
+			sVertex3(x, y, 0, mat);
+		}
+		glEnd();
+	}
+	glPopMatrix();
+}
 
 inline void sSphereMapTexCoord(double rho, double theta, double texture_fov)
 {

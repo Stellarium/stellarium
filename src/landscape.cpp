@@ -155,13 +155,15 @@ void Landscape_old_style::load(const string& landscape_file, const string& secti
 	decor_angle_rotatez = pd.get_double(section_name, "decor_angle_rotatez", 0.);
 	ground_angle_shift = pd.get_double(section_name, "ground_angle_shift", 0.);
 	ground_angle_rotatez = pd.get_double(section_name, "ground_angle_rotatez", 0.);
+	draw_ground_first = pd.get_int(section_name, "draw_ground_first", 0);
 }
 
 void Landscape_old_style::draw(tone_reproductor * eye, const Projector* prj, const navigator* nav,
 		bool flag_fog, bool flag_decor, bool flag_ground)
 {
-	if (flag_ground) draw_ground(eye, prj, nav);
+	if (flag_ground && draw_ground_first) draw_ground(eye, prj, nav);
 	if (flag_decor) draw_decor(eye, prj, nav);
+	if (flag_ground && !draw_ground_first) draw_ground(eye, prj, nav);
 	if (flag_fog) draw_fog(eye, prj, nav);
 }
 
@@ -236,46 +238,16 @@ void Landscape_old_style::draw_decor(tone_reproductor * eye, const Projector* pr
 // Draw the ground
 void Landscape_old_style::draw_ground(tone_reproductor * eye, const Projector* prj, const navigator* nav) const
 {
-	if (prj->get_type()==FISHEYE_PROJECTOR)
-	{
-		// Need to draw a half sphere ground
-		glColor3f(sky_brightness, sky_brightness, sky_brightness);
-		glEnable(GL_CULL_FACE);
-		glEnable(GL_TEXTURE_2D);
-		glDisable(GL_BLEND);
-		glBindTexture(GL_TEXTURE_2D, ground_tex->getID());
-		prj->sHalfSphere(radius,30,10, nav->get_local_to_eye_mat(), 1);
-	    glDisable(GL_CULL_FACE);
-	}
-	else
-	{
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-		glEnable(GL_TEXTURE_2D);
-		Mat4d mat = nav->get_local_to_eye_mat() * Mat4d::zrotation(ground_angle_rotatez*M_PI/180.f);
-		
-		glColor3f(sky_brightness, sky_brightness, sky_brightness);
-		glPushMatrix();
-		glLoadMatrixd(mat);
-
-		float z = radius*sinf(ground_angle_shift*M_PI/180.);
-	
-		glDisable(GL_BLEND);
-		glBindTexture(GL_TEXTURE_2D, ground_tex->getID());
-		glBegin(GL_TRIANGLE_STRIP);
-			glTexCoord2f (ground_tex_coord.tex_coords[0],ground_tex_coord.tex_coords[1]);
-			prj->sVertex3(-radius, -radius, z, mat);
-			glTexCoord2f (ground_tex_coord.tex_coords[2], ground_tex_coord.tex_coords[1]);
-			prj->sVertex3(-radius, radius, z, mat);
-			glTexCoord2f (ground_tex_coord.tex_coords[2], ground_tex_coord.tex_coords[3]);
-			prj->sVertex3(radius, radius, z, mat);
-			glTexCoord2f (ground_tex_coord.tex_coords[0], ground_tex_coord.tex_coords[3]);
-			prj->sVertex3(radius, -radius, z, mat);
-			glTexCoord2f (ground_tex_coord.tex_coords[0],ground_tex_coord.tex_coords[1]);
-			prj->sVertex3(-radius, -radius, z, mat);
-		glEnd ();		
-	
-		glPopMatrix();
-	}
+	Mat4d mat = nav->get_local_to_eye_mat() * Mat4d::zrotation(ground_angle_rotatez*M_PI/180.f) * Mat4d::translation(Vec3d(0,0,radius*sinf(ground_angle_shift*M_PI/180.)));
+	glColor3f(sky_brightness, sky_brightness, sky_brightness);
+	glEnable(GL_CULL_FACE);
+	glEnable(GL_TEXTURE_2D);
+	glDisable(GL_BLEND);
+	glBindTexture(GL_TEXTURE_2D, ground_tex->getID());
+	int subdiv = 32/(nb_decor_repeat*nb_side);
+	if (subdiv<=0) subdiv = 1;
+	prj->sDisk(radius,nb_side*subdiv*nb_decor_repeat,5, mat, 1);
+	glDisable(GL_CULL_FACE);
 }
 
 Landscape_fisheye::Landscape_fisheye(float _radius) : Landscape(_radius), map_tex(NULL)
