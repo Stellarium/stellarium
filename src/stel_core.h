@@ -151,7 +151,10 @@ private:
 	VIEWPORT_TYPE ViewportType;
 
 	// Stars
+	int FlagStarName;
+	int FlagStarSciName;
 	float MaxMagStarName;
+	float MaxMagStarSciName;
 	float StarScale;
 	float StarMagScale;
 	float StarTwinkleAmount;
@@ -181,7 +184,6 @@ private:
 
 	// Astro
     int FlagStars;
-	int FlagStarName;
     int FlagPlanets;
     int FlagPlanetsHints;
     int FlagNebula;
