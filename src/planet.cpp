@@ -47,9 +47,11 @@ planet::planet(const string& _name, int _flagHalo, int _flag_lighting, double _r
 	// temp
 	common_name = _name;
 
-	// 15 day trails
-	DeltaTrail = 0.125;
-	MaxTrail = 120;
+	// 60 day trails
+	DeltaTrail = 1;  
+	// small increment like 0.125 would allow observation of latitude related wobble of moon
+	// if decide to show moon trail
+       	MaxTrail = 60;
 	last_trailJD = 0; // for now
 	trail_color = Vec3f(1,.7,.7);
 	trail_on = 0;
@@ -788,7 +790,7 @@ void planet::update_trail(const navigator* nav) {
   } 
     
   // Note that when jump by a week or day at a time, loose detail on trails
-  // particularly for moon
+  // particularly for moon (if decide to show moon trail)
 
   // add only one point at a time, using current position only
   if(dt) {
@@ -834,8 +836,8 @@ void planet::start_trail(void) {
 
   //  printf("trail for %s: %f\n", name.c_str(), re.sidereal_period);
 
-  // only interested in trails for planets and Earth's moon
-  if(re.sidereal_period > 0 || name == "Moon") trail_on = 1;
+  // only interested in trails for planets
+  if(re.sidereal_period > 0) trail_on = 1;
 }
 
 // stop accumulating trail data
