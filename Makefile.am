@@ -1,2 +1,2 @@
-EXTRA_DIST = TODO.txt README.txt VERSION.txt
+EXTRA_DIST = TODO README NEWS
 SUBDIRS = config data src textures

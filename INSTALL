@@ -1,3 +1,37 @@
+------ INSTALLATION INSTRUCTIONS ------
+
+WINDOWS USERS : 
+unzip stellarium.zip then just execute stellarium.exe!
+
+LINUX :
+untar the tar.gz archive
+~$ tar -xzf stellariumXXX.tar.gs
+~$ cd stellarium
+
+then type 
+~$ ./configure
+~$ make
+
+then to launch the program type
+~$ ./src/stellarium
+
+or install with
+
+~$ make install
+
+Rq : Some systems need to include the library Xmu (-lXmu)
+
+-----------------------------------------------------------------------------
+
+Bellow are standards installtion instructions.
+
+
+
+
+
+
+
+
 Basic Installation
 ==================
 
@@ -180,3 +214,4 @@ operates.
      script, and exit.
 
 `configure' also accepts some other, not widely useful, options.
+

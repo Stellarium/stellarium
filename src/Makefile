@@ -74,12 +74,14 @@ stellarium_LDADD = $(top_builddir)/src/glpng/libglpng.a $(top_builddir)/src/astr
 INCLUDES = -I$(top_srcdir)/src/glpng -I$(top_srcdir)/src/astrolib
 
 SUBDIRS = glpng astrolib
+
+CXXFLAGS = -O3
 mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
 CONFIG_CLEAN_FILES = 
 PROGRAMS =  $(bin_PROGRAMS)
 
 
-DEFS =  -DPACKAGE=\"stellarium\" -DVERSION=\"0.4.7\" -DHAVE_GL=1 -DHAVE_GLU=1 -DHAVE_GLUT=1  -I. -I$(srcdir) 
+DEFS =  -DPACKAGE=\"stellarium\" -DVERSION=\"0.4.7\"  -I. -I$(srcdir) 
 CPPFLAGS = 
 LDFLAGS =  -lm
 LIBS =  -lGL -lGLU -lglut
@@ -90,7 +92,6 @@ nebula.o planet.o s_gui.o s_utility.o
 stellarium_DEPENDENCIES =  $(top_builddir)/src/glpng/libglpng.a \
 $(top_builddir)/src/astrolib/libastrolib.a
 stellarium_LDFLAGS = 
-CXXFLAGS = -g -O2
 CXXCOMPILE = $(CXX) $(DEFS) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS)
 CXXLD = $(CXX)
 CXXLINK = $(CXXLD) $(AM_CXXFLAGS) $(CXXFLAGS) $(LDFLAGS) -o $@

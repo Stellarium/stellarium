@@ -69,12 +69,14 @@ noinst_LIBRARIES = libastrolib.a
 libastrolib_a_SOURCES = AstroOps.cpp DateOpsIntl.cpp MathOps.cpp Pluto.cpp Vsop.h AstroOps.h Lunar.cpp MathOps.h Pluto.h VsopData.cpp DateOps.cpp Lunar.h PlanetData.cpp PlutoTerms.h VsopData.h DateOps.h LunarTerms.h PlanetData.h Vsop.cpp
 
 libastrolib_a_LIBADD = AstroOps.o DateOpsIntl.o MathOps.o Pluto.o VsopData.o DateOps.o Lunar.o PlanetData.o Vsop.o
+
+CXXFLAGS = -O3
 mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
 CONFIG_CLEAN_FILES = 
 LIBRARIES =  $(noinst_LIBRARIES)
 
 
-DEFS =  -DPACKAGE=\"stellarium\" -DVERSION=\"0.4.7\" -DHAVE_GL=1 -DHAVE_GLU=1 -DHAVE_GLUT=1  -I. -I$(srcdir) 
+DEFS =  -DPACKAGE=\"stellarium\" -DVERSION=\"0.4.7\"  -I. -I$(srcdir) 
 CPPFLAGS = 
 LDFLAGS =  -lm
 LIBS =  -lGL -lGLU -lglut
@@ -83,7 +85,6 @@ VsopData.o DateOps.o Lunar.o PlanetData.o Vsop.o
 libastrolib_a_OBJECTS =  AstroOps.o DateOpsIntl.o MathOps.o Pluto.o \
 Lunar.o VsopData.o DateOps.o PlanetData.o Vsop.o
 AR = ar
-CXXFLAGS = -g -O2
 CXXCOMPILE = $(CXX) $(DEFS) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS)
 CXXLD = $(CXX)
 CXXLINK = $(CXXLD) $(AM_CXXFLAGS) $(CXXFLAGS) $(LDFLAGS) -o $@

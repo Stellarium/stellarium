@@ -102,7 +102,7 @@ void CalcAtmosphere(void)
     b.year = y;
     b.month = m;
 
-    b.temperature_in_c = (PI/2-(float)abs(b.latitude*100)/100)*20+15*cos(b.zenith_ang_sun)-0.01*b.ht_above_sea_in_meters;
+    b.temperature_in_c = (PI/2-(float)fabs(b.latitude*100.)/100.)*20.+15.*cos(b.zenith_ang_sun)-0.01*b.ht_above_sea_in_meters;
     //printf("%f\n",b.temperature_in_c);
     b.relative_humidity = 30.;
 
@@ -125,7 +125,7 @@ void CalcAtmosphere(void)
     if (global.FlagGround)
     {
         gluProject(1,0,0,M,P,V,objx,objy,objz);
-        limY = skyResolution-(float)(*objy)/stepY+3;
+        limY = (int)(skyResolution-(float)(*objy)/stepY+3.);
         if (!(limY<skyResolution+1)) limY = skyResolution+1;
     }
     else
@@ -171,9 +171,9 @@ void DrawAtmosphere2(void)
             for(int x2=0; x2<skyResolution+1; x2++)
             {
                 glColor4f(tabSky[x2][y2][0],tabSky[x2][y2][1],tabSky[x2][y2][2],tabSky[x2][y2][1]*4);
-                glVertex2i(x2*stepX,y2*stepY);
+                glVertex2i((int)(x2*stepX),(int)(y2*stepY));
                 glColor4f(tabSky[x2][y2+1][0],tabSky[x2][y2+1][1],tabSky[x2][y2+1][2],tabSky[x2][y2+1][1]*4);
-                glVertex2i(x2*stepX,(y2+1)*stepY);
+                glVertex2i((int)(x2*stepX),(int)((y2+1)*stepY));
             }
         glEnd();
     }
