@@ -52,6 +52,7 @@ class SettingMgr
   Vec3d get_vector(std::string name) { return config_vector[name]; };
   bool is_true(std::string name) { return config_double[name]!=0; };
   void print_values();
+  void create_commands(std::string &out);
   // int read_config
   // int write_config
 

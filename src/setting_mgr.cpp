@@ -68,6 +68,20 @@ void SettingMgr::print_values() {
 
 }
 
+
+// return as runnable commands for use with scripts
+void SettingMgr::create_commands(std::string &out) {
+  
+
+  // TODO: more precision on doubles as strings
+
+  std::ostringstream oss;
+  for ( stringHashIter_t iter = config_string.begin(); iter != config_string.end(); ++iter ) {
+    oss << "set " << iter->first << " " << iter->second << std::endl;
+  }
+  out += oss.str();
+}
+
 // int read_config
 // int write_config
 
