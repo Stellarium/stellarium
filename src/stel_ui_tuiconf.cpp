@@ -19,12 +19,12 @@
 
 // Class which handles a stellarium User Interface in Text mode
 
-#include "stel_ui.h"
-#include "stellastro.h"
 #include <iostream>
 #include <fstream>
 #include <iomanip>
 #include <map>
+#include "stel_ui.h"
+#include "stellastro.h"
 
 // Draw simple gravity text ui.
 void stel_ui::draw_gravity_ui(void)
@@ -106,7 +106,7 @@ void stel_ui::init_tui(void)
 	tui_menu_location->addComponent(tui_location_altitude);
 
 	// 2. Time
-	tui_time_settmz = create_tree_from_time_zone_file("/usr/share/zoneinfo/zone.tab");
+	tui_time_settmz = create_tree_from_time_zone_file(core->DataDir + "zone.tab");
 	tui_time_settmz->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb_settimezone));
 	tui_time_skytime = new s_tui::Time_item("2.2 Sky Time: ");
 	tui_time_skytime->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb1));
@@ -327,10 +327,13 @@ void stel_ui::tui_update_widgets(void)
 }
 
 // Launch script to set time zone in the system locales
+// TODO : this works only if the system manages the TZ environment
+// variables of the form "Europe/Paris". This is not the case on windows
+// so everything migth have to be re-done internaly :(
 void stel_ui::tui_cb_settimezone(void)
 {
 	system( ( core->DataDir + "script_set_time_zone " + tui_time_settmz->getCurrent()->getCleanString() ).c_str() );
-	setenv("TZ", tui_time_settmz->getCurrent()->getCleanString().c_str(),1);
+	putenv(strdup((string("TZ=") + tui_time_settmz->getCurrent()->getCleanString()).c_str()));
 	tzset();
 }
 
@@ -366,6 +369,7 @@ void stel_ui::tui_cb_admin_save_default(void)
 void stel_ui::tui_cb_admin_set_locale(void)
 {
 	system( ( core->DataDir + "script_set_locale " + tui_admin_setlocal->getCurrent() ).c_str() );
+	putenv(strdup((string("LANG=") + tui_admin_setlocal->getCurrent()).c_str()));
 }
 
 // Launch script for internet update
@@ -412,7 +416,6 @@ s_tui::MenuBranch_item* stel_ui::create_tree_from_time_zone_file(const string& z
 		for (set<string>::const_iterator it2 = it->second.begin();it2!=it->second.end();++it2)
 		{
 			continentset->addItem(*it2);
-			//cout << (*it).first << " " << *it2 << endl;
 		}
 		retbranch->addComponent(continentset);
 	}
