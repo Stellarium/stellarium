@@ -1,0 +1,210 @@
+#!/bin/sh
+#
+# setup-gettext - Provides compatibility with versions of gettext
+#                 from the 0.10.x, 0.11.x, and 0.12.x series.
+#
+# Copyright (C) 2002 Christian Hammond.
+#
+# This program is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License as
+# published by the Free Software Foundation; either version 2 of
+# the License, or (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public
+# License along with this program; if not, write to the Free
+# Software Foundation, Inc., 59 Temple Place, Suite 330, Boston,
+# MA  02111-1307  USA
+#
+
+VERSION=0.1.6
+
+VERBOSE=0
+
+parse_gettext_version() {
+	GETTEXT_VERSION=`$GETTEXT_TOOL --version | sed -n 's/^.*\([0-9]\+\)\.\([0-9]\+\)\.\([0-9]\+\).*$/\1.\2.\3/p'`
+	GETTEXT_MAJOR_VERSION=`echo $GETTEXT_VERSION | sed -n 's/^\([0-9]\+\).*/\1/p'`
+	GETTEXT_MINOR_VERSION=`echo $GETTEXT_VERSION | sed -n 's/^[0-9]\+\.\([0-9]\+\).*/\1/p'`
+	GETTEXT_MICRO_VERSION=`echo $GETTEXT_VERSION | sed -n 's/^[0-9]\+\.[0-9]\+\.\([0-9]\+\).*/\1/p'`
+}
+
+find_gettext() {
+	GETTEXT_TOOL=autopoint
+
+	(autopoint --version) < /dev/null > /dev/null 2>&1 || {
+		GETTEXT_TOOL=gettextize
+
+		(gettextize --version) < /dev/null > /dev/null 2>&1 || {
+			GETTEXT_TOOL=
+		}
+	}
+}
+
+install() {
+	[ -f configure.in ] && {
+		cp configure.in .tmp-configure.in
+		sed -e 's/^AM_GNU_GETTEXT\(.*\)$/AM_GNU_GETTEXT\1\
+AM_GNU_GETTEXT_VERSION(0.10.40)/' < .tmp-configure.in > configure.in
+		rm .tmp-configure.in
+	}
+
+	[ -f configure.ac ] && {
+		cp configure.ac .tmp-configure.ac
+		sed -e 's/^AM_GNU_GETTEXT\(.*\)$/AM_GNU_GETTEXT\1\
+AM_GNU_GETTEXT_VERSION(0.10.40)/' < .tmp-configure.ac > configure.ac
+		rm .tmp-configure.ac
+	}
+
+	[ -f autogen.sh ] && {
+		cp autogen.sh .tmp-autogen.sh
+		sed -e 's/\(gettextize\|autopoint\) --version/.\/setup-gettext --gettext-tool/1' -e 's/^\(echo.*|[\t ]*\)\?\(gettextize\|autopoint\) -.*$/.\/setup-gettext/1' < .tmp-autogen.sh > autogen.sh
+		rm .tmp-autogen.sh
+	}
+
+	echo 'dnl Added by setup-gettext. Do not remove this' >> acinclude.m4
+	echo 'dnl unless you know what you are doing.' >> acinclude.m4
+	echo 'AC_DEFUN([AM_GNU_GETTEXT_VERSION], [])' >> acinclude.m4
+}
+
+backup_m4() {
+	[ -d m4 ] && mv m4 m4~
+}
+
+restore_m4() {
+	[ -d m4~ ] && {
+		rm -rf m4
+		mv m4~ m4
+	}
+}
+
+restore_files() {
+	[ -f configure.in~ ] && mv -f configure.in~ configure.in
+	[ -f configure.ac~ ] && mv -f configure.ac~ configure.ac
+	[ -f Makefile.am~ ]  && mv -f Makefile.am~  Makefile.am
+}
+
+abort() {
+	restore_files
+	restore_m4
+
+	exit 1
+}
+
+# Main code
+
+find_gettext
+
+# See if a version of gettext and its tools are installed.
+if test x$GETTEXT_TOOL = x; then
+	echo
+	echo "You do not have a version of gettext installed."
+	echo "Please download one from your local package repository or"
+	echo "from ftp://ftp.gnu.org/pub/gnu/gettext/"
+	echo
+	exit 1
+fi
+
+parse_gettext_version
+
+NUMVAR=$#
+
+if test $NUMVAR -gt 0; then
+	if test $NUMVAR -gt 1; then
+		echo "Only one option at a time!"
+		exit 1
+
+	elif test $1 = "--gettext-tool"; then
+		echo $GETTEXT_TOOL
+		exit 0
+
+	elif test $1 = "--help"; then
+		echo "setup-gettext v$VERSION"
+		echo "Usage:"
+		echo "   --gettext-tool           Returns gettextize or autopoint, depending"
+		echo "                            on the version of gettext installed."
+		echo "   --gettext-version        Returns the version of gettext installed."
+		echo "   --gettext-major-version  Returns the major version of gettext installed."
+		echo "   --gettext-minor-version  Returns the minor version of gettext installed."
+		echo "   --gettext-micro-version  Returns the micro version of gettext installed."
+		echo "   --help                   Displays this help screen."
+		echo
+		exit 0
+
+	elif test $1 = "--version"; then
+		echo $VERSION
+		exit 0
+
+	elif test $1 = "--gettext-version"; then
+		echo $GETTEXT_VERSION
+		exit 0
+
+	elif test $1 = "--gettext-major-version"; then
+		echo $GETTEXT_MAJOR_VERSION
+		exit 0
+
+	elif test $1 = "--gettext-minor-version"; then
+		echo $GETTEXT_MINOR_VERSION
+		exit 0
+
+	elif test $1 = "--gettext-micro-version"; then
+		echo $GETTEXT_MICRO_VERSION
+		exit 0
+
+	elif test $1 = "--install"; then
+		install
+		echo "setup-gettext installed."
+		exit 0
+
+	elif test $1 = "--happy-url"; then
+		echo http://gaim.sf.net/forkgettext.jpg
+		exit 0
+
+	elif test $1 = "--verbose"; then
+		VERBOSE=1
+
+	else
+		echo "Invalid option '$1'"
+		exit 1
+	fi
+fi
+
+# Okay, run the main stuff
+if test "$GETTEXT_TOOL" = "autopoint"; then
+	backup_m4
+	[ $VERBOSE -eq 1 ] && echo "  autopoint --force"
+	echo n | autopoint --force || abort
+	restore_m4
+
+	if test $GETTEXT_MINOR_VERSION -ge 12; then
+		cp po/Makefile.in.in po/.tmp-Makefile.in.in
+		sed -e 's#echo "\$(top_builddir)/\$(MKINSTALLDIRS)" ;; esac#echo "\$(MKINSTALLDIRS)" ;; esac#1' < po/.tmp-Makefile.in.in > po/Makefile.in.in
+		rm po/.tmp-Makefile.in.in
+	fi
+else
+	if test $GETTEXT_MINOR_VERSION -eq 11; then
+		backup_m4
+
+		# Gettext is pure evil. It DEMANDS that we press Return no matter
+		# what. This gets rid of their happy "feature" of doom.
+		[ $VERBOSE -eq 1 ] && \
+			echo "  gettextize --copy --force --intl --no-changelog"
+
+		sed 's:read .*< /dev/tty::' `which gettextize` > .temp-gettextize
+		chmod +x .temp-gettextize
+		echo n | ./.temp-gettextize --copy --force --intl --no-changelog || abort
+		rm .temp-gettextize
+
+		restore_files
+		restore_m4
+
+		[ -f po/Makevars.template ] && mv po/Makevars.template po/Makevars
+	else
+		[ $VERBOSE -eq 1 ] && echo "  gettextize --copy --force"
+		echo n | gettextize --copy --force || exit;
+	fi
+fi
+

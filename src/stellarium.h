@@ -40,6 +40,11 @@
 #define MY_MAX(a,b) (((a)>(b))?(a):(b))
 #define MY_MIN(a,b) (((a)<(b))?(a):(b))
 
+// Used for GNU gettext translations	
+#include "gettext.h"
+#define _(String) gettext (String)
+#define N_(String) String
+
 // needed for bug workarounds
 // #define NVIDIA TRUE
 
