@@ -373,12 +373,12 @@ namespace s_tui
 		virtual string getString(void);
 		virtual bool isEditable(void) const {return true;}
 		string gettz(void); // should be const but gives a boring error...
-		void settz(string tz);
+		void settz(const string& tz);
     protected:
 		MultiSet_item<string> continents_names;
 		map<string, MultiSet_item<string> > continents;
 		string label;
-		MultiSet_item<string>* current_edit; // 0 : editing continents, 1 : editing cities
+		MultiSet_item<string>* current_edit;
     };
 
 }; // namespace s_tui

@@ -104,7 +104,7 @@ private:
 	Label * bt_flag_help_lbl;
 
 	// The TextLabel displaying the infos about the selected object
-	FilledContainer * info_select_ctr;
+	Container * info_select_ctr;
 	TextLabel * info_select_txtlbl;
 	void updateInfoSelectString(void);
 
@@ -158,6 +158,7 @@ private:
 
 	// Date & Time options
 	Time_item* time_current;
+	LabeledCheckBox* system_tz_cbx;
 	void setCurrentTimeFromConfig(void);
 
 	void updateConfigVariables(void);
