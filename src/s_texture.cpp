@@ -63,7 +63,7 @@ int s_texture::load()
 
     pngInfo info;
     pngSetStandardOrientation(1);
-    texID = pngBind(fullName.c_str(), PNG_NOMIPMAPS, loadType, &info, loadType2, GL_LINEAR, GL_LINEAR);
+    texID = pngBind(fullName.c_str(), PNG_BUILDMIPMAPS, loadType, &info, loadType2, GL_LINEAR, GL_LINEAR);
 
 	return (texID!=0);
 }
@@ -74,7 +74,7 @@ void s_texture::unload()
 }
 
 int s_texture::reload()
-{	
+{
     unload();
     return load();
 }
@@ -95,7 +95,7 @@ float s_texture::get_average_luminance(void) const
 	GLint w, h;
 	glGetTexLevelParameteriv(GL_TEXTURE_2D, 0, GL_TEXTURE_WIDTH, &w);
 	glGetTexLevelParameteriv(GL_TEXTURE_2D, 0, GL_TEXTURE_HEIGHT, &h);
-	GLfloat* p = (GLfloat*)malloc(w*h*sizeof(GLfloat));
+	GLfloat* p = (GLfloat*)calloc(w*h, sizeof(GLfloat));
 	glGetTexImage(GL_TEXTURE_2D, 0, GL_LUMINANCE, GL_FLOAT, p);
 	float sum = 0.;
 	for (int i=0;i<w*h;++i)

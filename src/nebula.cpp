@@ -58,7 +58,7 @@ void Nebula::get_short_info_string(char * s, const navigator*) const
 	sprintf(s,"%s: mag %.1f", name, mag);
 }
 
-double Nebula::get_best_fov(const navigator*) const
+double Nebula::get_close_fov(const navigator*) const
 {
 	return angular_size * 180./M_PI * 4;
 }
@@ -106,7 +106,7 @@ int Nebula::read(FILE * catalogue)
     neb_tex = new s_texture(tex_name);
 
 	//tex_angular_size*tex_angular_size*3600/4*M_PI
-	luminance = mag_to_luminance(mag, -12.123)/neb_tex->get_average_luminance();
+	luminance = mag_to_luminance(mag, 50) /	neb_tex->get_average_luminance() / 100;
 
 	float tex_size = RADIUS_NEB * sin(tex_angular_size/2/60*M_PI/180);
 
@@ -132,7 +132,8 @@ void Nebula::draw_tex(const Projector* prj, tone_reproductor* eye)
 
     float cmag=eye->adapt_luminance(luminance);
     glColor3f(cmag,cmag,cmag);
-    glBindTexture(GL_TEXTURE_2D, neb_tex->getID());
+
+	glBindTexture(GL_TEXTURE_2D, neb_tex->getID());
 
 	static Vec3d v;
 

@@ -63,7 +63,7 @@ public:
 	virtual void get_short_info_string(char *, const navigator * nav = NULL) const;
 	virtual STEL_OBJECT_TYPE get_type(void) const {return STEL_OBJECT_NEBULA;}
 	virtual Vec3d get_earth_equ_pos(const navigator * nav = NULL) const {return Vec3d(XYZ[0],XYZ[1],XYZ[2]);}
-	virtual double get_best_fov(const navigator * nav = NULL) const;
+	virtual double get_close_fov(const navigator * nav = NULL) const;
 	virtual float get_mag(const navigator * nav = NULL) const {return mag;}
 
 	// Read the Nebula data from a file
