@@ -147,7 +147,7 @@ void stel_core::init(void)
 
     strcpy(tempName2,DataDir);
     strcat(tempName2,"landscapes.ini");
-	landscape = Landscape::create_from_file(tempName2, "palm");
+	landscape = Landscape::create_from_file(tempName2, landscape_name);
 
 	// Load the pointer textures
 	stel_object::init_textures();
@@ -170,6 +170,9 @@ void stel_core::init(void)
 		case DISK : projection->set_disk_viewport(); break;
 		default : projection->maximize_viewport(); break;
 	}
+
+	// Set the default moon scaling
+	if (FlagInitMoonScaled) ssystem->get_moon()->set_sphere_scale(moon_scale);
 
 	// Compute planets data and init viewing position
 	// Position of sun and all the satellites (ie planets)
@@ -438,6 +441,8 @@ void stel_core::load_config(void)
 	FlagEclipticLine		= conf->get_boolean("viewing:flag_ecliptic_line");
 	FlagCardinalPoints		= conf->get_boolean("viewing:flag_cardinal_points");
 	FlagGravityLabels		= conf->get_boolean("viewing:flag_gravity_labels");
+	FlagInitMoonScaled		= conf->get_boolean("viewing:flag_init_moon_scaled");
+	moon_scale				= conf->get_double ("viewing","moon_scale",4.);
 
 	// Astro section
 	FlagStars				= conf->get_boolean("astro:flag_stars");
