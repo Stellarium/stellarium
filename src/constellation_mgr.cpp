@@ -23,7 +23,6 @@
 #include "constellation_mgr.h"
 
 
-
 Constellation_mgr::Constellation_mgr() : asterFont(NULL)
 {
 }
@@ -83,7 +82,7 @@ void Constellation_mgr::draw(Projector* prj)
     glColor3f(0.2,0.2,0.2);
 	prj->set_orthographic_projection();	// set 2D coordinate
     vector<Constellation *>::iterator iter;
-    for(iter=asterisms.begin();iter!=asterisms.end();iter++)
+    for(iter=asterisms.begin();iter!=asterisms.end();++iter)
     {
 		(*iter)->draw(prj);
     }

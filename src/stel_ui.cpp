@@ -543,7 +543,7 @@ int stel_ui::handle_keys(SDLKey key, S_GUI_VALUE state)
 		}
         if(key==SDLK_5)
         {
-        	core->navigation->set_time_speed(0);
+        	core->FlagEquator = !core->FlagEquator;
 		}
         if(key==SDLK_4)
         {

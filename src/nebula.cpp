@@ -24,7 +24,7 @@
 #include "navigator.h"
 #include "stel_utility.h"
 
-#define RADIUS_NEB 28.
+#define RADIUS_NEB 1.
 
 s_texture * Nebula::texCircle = NULL;
 
@@ -44,7 +44,7 @@ Nebula::~Nebula()
 void Nebula::get_info_string(char * s, navigator * nav) const
 {
 	float tempDE, tempRA;
-	rect_to_sphe(&tempRA,&tempDE,&XYZ);
+	rect_to_sphe(&tempRA,&tempDE,XYZ);
 	sprintf(s,"Name : %s (NGC %u)\nRA : %s\nDE : %s\nMag : %.2f", Name, NGC, print_angle_hms(tempRA*180./M_PI), print_angle_dms_stel(tempDE*180./M_PI), Mag);
 }
 
@@ -80,7 +80,7 @@ int Nebula::Read(FILE * catalogue)
     DecRad=dms_to_rad(dedeg, (double)demin);
 
     // Calc the Cartesian coord with RA and DE
-    sphe_to_rect(RaRad,DecRad,&XYZ);
+    sphe_to_rect(RaRad,DecRad,XYZ);
     XYZ*=RADIUS_NEB;
 
     matTransfo=new float[16];   // Used to store the precalc transfos matrix

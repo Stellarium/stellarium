@@ -103,6 +103,9 @@ private:
 	stel_atmosphere * atmosphere;		// Atmosphere
 	SkyGrid * equ_grid;					// Equatorial grid
 	SkyGrid * azi_grid;					// Azimutal grid
+	SkyLine * equator_line;				// Celestial Equator line
+	SkyLine * ecliptic_line;			// Eclptic line
+	Cardinals * cardinals_points;		// Cardinals points
 	tone_reproductor * tone_converter;	// Tones conversion between stellarium world and display device
 	stel_ui * ui;						// The main User Interface
 
@@ -114,8 +117,8 @@ private:
     float sky_brightness;
 
 	// GUI
-	vec3_t GuiBaseColor;
-	vec3_t GuiTextColor;
+	Vec3f GuiBaseColor;
+	Vec3f GuiTextColor;
 
 	float MaxMagStarName;
 	float StarScale;

@@ -23,7 +23,7 @@
 #include <stdlib.h>
 #include "s_font.h"
 
-s_font::s_font(float size_i, char * textureName, const char * dataFileName) : s_fontTexture(NULL), size(size_i)
+s_font::s_font(float size_i, const char * textureName, const char * dataFileName) : s_fontTexture(NULL), size(size_i)
 {
     if (!buildDisplayLists(dataFileName, textureName)) printf("ERROR WHILE CREATING FONT %s\n",textureName);
 }

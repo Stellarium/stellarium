@@ -25,12 +25,14 @@
 #include "navigator.h"
 #include "s_texture.h"
 
-#define STEL_OBJECT_STAR 1
-#define STEL_OBJECT_PLANET 2
-#define STEL_OBJECT_NEBULA 3
+enum STEL_OBJECT_TYPE
+{
+	STEL_OBJECT_STAR,
+	STEL_OBJECT_PLANET,
+	STEL_OBJECT_NEBULA
+};
 
 class navigator;
-//class projector;
 
 class stel_object
 {
@@ -41,7 +43,7 @@ public:
 	virtual void get_info_string(char * s, navigator * nav) const;
 	virtual unsigned char get_type(void) const =0;
 	virtual Vec3d get_earth_equ_pos(navigator * nav) const =0;
-	virtual vec3_t get_RGB(void) const {return vec3_t(0.,0.,0.);}
+	virtual Vec3f get_RGB(void) const {return Vec3f(0.,0.,0.);}
 	static void init_textures(void);
 protected:
 	virtual float get_on_screen_size(navigator * nav, Projector* prj) {return -1.;}

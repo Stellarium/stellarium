@@ -115,7 +115,7 @@ void navigator::update_vision_vector(int delta_time, stel_object* selected)
             equ_vision=move.aim;
         }
 		// Recalc local vision vector
-		local_vision=earth_equ_to_local(&equ_vision);
+		local_vision=earth_equ_to_local(equ_vision);
     }
 	else
 	{
@@ -123,36 +123,36 @@ void navigator::update_vision_vector(int delta_time, stel_object* selected)
 		{
 			equ_vision=selected->get_earth_equ_pos(this);
 			// Recalc local vision vector
-			local_vision=earth_equ_to_local(&equ_vision);
+			local_vision=earth_equ_to_local(equ_vision);
 		}
 		else
 		{
 			if (flag_lock_equ_pos) // Equatorial vision vector locked
 			{
 				// Recalc local vision vector
-				local_vision=earth_equ_to_local(&equ_vision);
+				local_vision=earth_equ_to_local(equ_vision);
 			}
 			else // Local vision vector locked
 			{
 				// Recalc equatorial vision vector
-				equ_vision=local_to_earth_equ(&local_vision);
+				equ_vision=local_to_earth_equ(local_vision);
 			}
 		}
 	}
 }
 
 
-void navigator::set_local_vision(Vec3d _pos)
+void navigator::set_local_vision(const Vec3d& _pos)
 {
 	local_vision = _pos;
-	equ_vision=local_to_earth_equ(&local_vision);
+	equ_vision=local_to_earth_equ(local_vision);
 }
 
 
 void navigator::update_move(double deltaAz, double deltaAlt)
 {
 	double azVision, altVision;
-	rect_to_sphe(&azVision,&altVision,&local_vision);
+	rect_to_sphe(&azVision,&altVision,local_vision);
 
     // if we are mooving in the Azimuthal angle (left/right)
     if (deltaAz) azVision-=deltaAz;
@@ -164,10 +164,10 @@ void navigator::update_move(double deltaAz, double deltaAlt)
     // recalc all the position variables
 	if (deltaAz || deltaAlt)
 	{
-    	sphe_to_rect(azVision, altVision, &local_vision);
+    	sphe_to_rect(azVision, altVision, local_vision);
 
     	// Calc the equatorial coordinate of the direction of vision wich was in Altazimuthal coordinate
-    	equ_vision=local_to_earth_equ(&local_vision);
+    	equ_vision=local_to_earth_equ(local_vision);
 	}
 
 	// Update the final modelview matrices
@@ -223,7 +223,7 @@ void navigator::update_local_to_eye(void)
 	s.normalize();
 	u.normalize();
 
-	return mat_local_to_eye.set(s[0],u[0],-f[0],0.,
+	mat_local_to_eye.set(s[0],u[0],-f[0],0.,
 				s[1],u[1],-f[1],0.,
 				s[2],u[2],-f[2],0.,
 				0.,0.,0.,1.);
@@ -249,45 +249,45 @@ void navigator::switch_to_local(void)
 }
 
 // Return the observer heliocentric position
-Vec3d navigator::get_observer_helio_pos(void)
+Vec3d navigator::get_observer_helio_pos(void) const
 {
 	Vec3d v(0.,0.,0.);
 	return mat_local_to_helio*v;
 }
 
 // Transform vector from local coordinate to equatorial
-Vec3d navigator::local_to_earth_equ(Vec3d * v)
+Vec3d navigator::local_to_earth_equ(const Vec3d& v)
 {
-	return mat_local_to_earth_equ*(*v);
+	return mat_local_to_earth_equ*v;
 }
 
 // Transform vector from equatorial coordinate to local
-Vec3d navigator::earth_equ_to_local(Vec3d * v)
+Vec3d navigator::earth_equ_to_local(const Vec3d& v)
 {
-	return mat_earth_equ_to_local*(*v);
+	return mat_earth_equ_to_local*v;
 }
 
 // Transform vector from heliocentric coordinate to local
-Vec3d navigator::helio_to_local(Vec3d* v)
+Vec3d navigator::helio_to_local(const Vec3d& v)
 {
-	return mat_helio_to_local*(*v);
+	return mat_helio_to_local*v;
 }
 
 // Transform vector from heliocentric coordinate to local
-Vec3d navigator::helio_to_earth_equ(Vec3d* v)
+Vec3d navigator::helio_to_earth_equ(const Vec3d& v)
 {
-	return mat_helio_to_earth_equ*(*v);
+	return mat_helio_to_earth_equ*v;
 }
 
 // Transform vector from heliocentric coordinate to false equatorial :
 // i.e. equatorial coordinate but centered on the observer position
-Vec3d navigator::helio_to_earth_pos_equ(Vec3d* v)
+Vec3d navigator::helio_to_earth_pos_equ(const Vec3d& v)
 {
-	return mat_local_to_earth_equ*mat_helio_to_local*(*v);
+	return mat_local_to_earth_equ*mat_helio_to_local*v;
 }
 
 // Move to the given equatorial position
-void navigator::move_to(Vec3d _aim)
+void navigator::move_to(const Vec3d& _aim)
 {
 	move.aim=_aim;
     move.aim.normalize();

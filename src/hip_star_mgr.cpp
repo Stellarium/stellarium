@@ -27,7 +27,7 @@
 #include "stellarium.h"
 #include "navigator.h"
 
-#define RADIUS_STAR 25.
+#define RADIUS_STAR 1.
 
 Hip_Star_mgr::Hip_Star_mgr() : starZones(NULL), HipGrid(), StarArray(NULL), starTexture(NULL), starFont(NULL)
 {
@@ -204,7 +204,7 @@ void Hip_Star_mgr::draw(float _star_scale, float _twinkle_amount, int name_ON,
 }
 
 // Look for a star by XYZ coords
-Hip_Star * Hip_Star_mgr::search(vec3_t Pos)
+Hip_Star * Hip_Star_mgr::search(Vec3f Pos)
 {
     Pos.normalize();
     Hip_Star * nearest=NULL;

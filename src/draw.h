@@ -21,9 +21,9 @@
 #define __DRAW_H__
 
 #include "stellarium.h"
-#include "stel_utility.h"
+#include "s_font.h"
+#include "projector.h"
 #include "tone_reproductor.h"
-#include "navigator.h"
 
 enum SKY_GRID_TYPE
 {
@@ -39,7 +39,8 @@ public:
 	SkyGrid(SKY_GRID_TYPE grid_type = EQUATORIAL, unsigned int _nb_meridian = 24, unsigned int _nb_parallel = 17,
 	 double _radius = 1., unsigned int _nb_alt_segment = 18, unsigned int _nb_azi_segment = 50);
     virtual ~SkyGrid();
-	void draw(Projector* prj) const;
+	void draw(const Projector* prj) const;
+	void set_color(const Vec3f& c) {color = c;}
 private:
 	unsigned int nb_meridian;
 	unsigned int nb_parallel;
@@ -50,7 +51,7 @@ private:
 	Vec3f color;
 	Vec3f** alt_points;
 	Vec3f** azi_points;
-	bool (Projector::*proj_func)(const Vec3f&, Vec3d&);
+	bool (Projector::*proj_func)(const Vec3f&, Vec3d&) const;
 };
 
 
@@ -68,25 +69,36 @@ public:
 	// Create and precompute positions of a SkyGrid
 	SkyLine(SKY_LINE_TYPE line_type = EQUATOR, double _radius = 1., unsigned int _nb_segment = 24);
     virtual ~SkyLine();
-	void draw(Projector* prj) const;
+	void draw(const Projector* prj) const;
+	void set_color(const Vec3f& c) {color = c;}
 private:
 	double radius;
 	unsigned int nb_segment;
 	Vec3f color;
 	Vec3f* points;
-	bool (Projector::*proj_func)(const Vec3f&, Vec3d&);
+	bool (Projector::*proj_func)(const Vec3f&, Vec3d&) const;
+};
+
+// Class which manages the cardinal points displaying
+class Cardinals
+{
+public:
+	Cardinals(const char* font_file, const char* tex_file, double size = 30., double _radius = 1.);
+    virtual ~Cardinals();
+	void draw(const Projector* prj) const;
+	void set_color(const Vec3f& c) {color = c;}
+private:
+	double radius;
+	Vec3f color;
+	s_font* font;
 };
 
 
-void DrawPoint(float X,float Y,float Z);
-
-void DrawCardinaux(Projector * prj);
 void DrawMilkyWay(tone_reproductor * eye);
-//void DrawEquator(void);
-//void DrawEcliptic(void);
 void DrawFog(float sky_brightness);
 void DrawDecor(int, float sky_brightness);
 void DrawGround(float sky_brightness);
+void DrawPoint(float X,float Y,float Z);
 
 
 #endif // __DRAW_H__

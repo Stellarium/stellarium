@@ -28,14 +28,14 @@ class Grid
 public:
     Grid();
     virtual ~Grid();
-    int GetNearest(vec3_t);
+    int GetNearest(Vec3f);
 	void Draw(void);
-	int Intersect(vec3_t pos, float fieldAngle, int * &result);
+	int Intersect(Vec3f pos, float fieldAngle, int * &result);
 	int getNbPoints(void) const {return NbPoints;}
 private:
     float Angle;     // Radius of each zone (in radians)
     int NbPoints;    // Number of zones
-    vec3_t * Points; // The zones positions
+    Vec3f * Points; // The zones positions
 };
 
 #endif // _GRID_H_
