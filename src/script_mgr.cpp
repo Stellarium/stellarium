@@ -38,7 +38,8 @@ ScriptMgr::ScriptMgr(StelCommandInterface *command_interface) {
 ScriptMgr::~ScriptMgr() {
 }
 
-void ScriptMgr::play_script(string script_file) {
+// path is used for loading script assets 
+void ScriptMgr::play_script(string script_file, string script_path) {
   // load script...
 
   if(playing){
@@ -47,7 +48,7 @@ void ScriptMgr::play_script(string script_file) {
   }
 
   script = new Script();
-  if( script->load(script_file) ) {
+  if( script->load(script_file, script_path) ) {
     playing = 1;
     play_paused = 0;
     elapsed_time = wait_time = 0;
@@ -174,4 +175,9 @@ string ScriptMgr::get_script_list(string directory) {
   cout << "Result = " << result;
   return result;
 
+}
+
+string ScriptMgr::get_script_path() { 
+  if(script) return script->get_path(); 
+  return ""; 
 }

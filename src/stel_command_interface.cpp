@@ -255,29 +255,39 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
     } else if(args["action"]=="drop") {
       stcore->script_images->drop_image(args["name"]);
     } else {
-      if(args["action"]=="load" && args["filename"]!="")
-	stcore->script_images->load_image(args["filename"], args["name"]);
+      if(args["action"]=="load" && args["filename"]!="") {
+	if(stcore->scripts->is_playing()) 
+	  stcore->script_images->load_image(stcore->scripts->get_script_path() + args["filename"], args["name"]);
+	else stcore->script_images->load_image(stcore->DataRoot + "/" + args["filename"], args["name"]);
       
-      Image * img = stcore->script_images->get_image(args["name"]);
+	Image * img = stcore->script_images->get_image(args["name"]);
       
-      if(img != NULL) {
-	if(args["alpha"]!="") img->set_alpha(str_to_double(args["alpha"]), 
-					     str_to_double(args["duration"]));
-	if(args["scale"]!="") img->set_scale(str_to_double(args["scale"]), 
-					     str_to_double(args["duration"]));
-	if(args["rotation"]!="") img->set_rotation(str_to_double(args["rotation"]), 
-						   str_to_double(args["duration"]));
-	if(args["xpos"]!="" && args["ypos"]!="") 
-	  img->set_location(str_to_double(args["xpos"]), 
-			    str_to_double(args["ypos"]), 
-			    str_to_double(args["duration"]));
+	if(img != NULL) {
+	  if(args["alpha"]!="") img->set_alpha(str_to_double(args["alpha"]), 
+					       str_to_double(args["duration"]));
+	  if(args["scale"]!="") img->set_scale(str_to_double(args["scale"]), 
+					       str_to_double(args["duration"]));
+	  if(args["rotation"]!="") img->set_rotation(str_to_double(args["rotation"]), 
+						     str_to_double(args["duration"]));
+	  if(args["xpos"]!="" && args["ypos"]!="") 
+	    img->set_location(str_to_double(args["xpos"]), 
+			      str_to_double(args["ypos"]), 
+			      str_to_double(args["duration"]));
+	}
       }
     }
-
   } else if(command=="audio" && args["action"]=="play" && args["filename"]!="") {
     // only one track at a time allowed
     if(audio) delete audio;
-    audio = new Audio(args["filename"], "default track");
+
+    // if from script, local to that path
+    string path;
+    if(stcore->scripts->is_playing()) path = stcore->scripts->get_script_path();
+    else path = stcore->DataRoot + "/";
+
+    cout << "audio path = " << path << endl;
+
+    audio = new Audio(path + args["filename"], "default track");
     audio->play(args["loop"]=="on");
 
   } else if(command=="script") {
@@ -296,7 +306,7 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
       stcore->ScriptRemoveableDiskMounted = 0;
 
     } else if(args["action"]=="play" && args["filename"]!="") {
-      stcore->scripts->play_script(args["filename"]);
+      stcore->scripts->play_script(args["filename"], args["path"]);
     } else if(args["action"]=="record") {  // TEMP
       //    if(args["action"]=="record" && args["filename"]!="") {
       stcore->scripts->record_script(args["filename"]);
@@ -314,19 +324,19 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
     } else status =0;
 
   } else {
-    cout << "Unrecognized command: " << command << endl;
-    return 0;
+    cout << "Unrecognized or malformed command: " << command << endl;
+    status = 0;
   }
 
 
-  if(status && recordable) {
+  if(status ) {
 
     // if recording commands, do that now
-    stcore->scripts->record_command(commandline);
+    if(recordable) stcore->scripts->record_command(commandline);
 
     //    cout << commandline << endl;
 
-  } else if(recordable) {
+  } else {
     cout << "Could not execute: " << commandline << endl;
   }
 

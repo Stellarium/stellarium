@@ -33,7 +33,7 @@ Audio::~Audio() {
 }
 
 void Audio::play(bool loop) {
-  std::cout << "now playing music\n";
+  std::cout << "now playing audio\n";
   if(loop) Mix_PlayMusic(track, -1);
   else Mix_PlayMusic(track, 0);
 }
