@@ -26,15 +26,9 @@
 
 #define RADIUS_STAR 25.
 
+// Init Static variables
 float Hip_Star::twinkle_amount = 10.f;
 float Hip_Star::star_scale = 10.f;
-
-extern unsigned int starTextureId;
-extern s_font * starFont;
-
-static float coef;
-static float cmag;
-static float rmag;
 
 Hip_Star::Hip_Star() : 
 	CommonName(NULL),
@@ -48,7 +42,7 @@ Hip_Star::~Hip_Star()
 	if(CommonName) delete CommonName;
 }
 
-void Hip_Star::get_info_string(char * s)
+void Hip_Star::get_info_string(char * s) const
 {
 	float tempDE, tempRA;
 	rect_to_sphe(&tempRA,&tempDE,&XYZ);
@@ -73,7 +67,7 @@ int Hip_Star::Read(FILE * catalog)
     unsigned short int mag;
     fread((char*)&mag,2,1,catalog);
     LE_TO_CPU_INT16(mag, mag);
-    
+
     Mag = (5. + mag) / 256.0;
     if (Mag>250) Mag = Mag - 256;
 
@@ -140,6 +134,10 @@ void Hip_Star::Draw(draw_utility * du)
     if ( XY[0]<0. || XY[1]<0. || XY[0]>du->screenW || XY[1]>du->screenH )
 		return;
 
+	static float coef;
+	static float cmag;
+	static float rmag;
+
     // Second part of the calculation of the demi-size of the star texture
 	// Empirical formula which looks good...
     rmag = rmag_t/pow(du->fov,0.85);
@@ -180,8 +178,8 @@ void Hip_Star::Draw(draw_utility * du)
     glPopMatrix();
 }
 
-void Hip_Star::DrawName(void)
+void Hip_Star::DrawName(s_font* star_font)
 {   
     glColor3fv(RGB*(1./2.5));
-	starFont->print(XY[0]+6,XY[1]+6, CommonName);
+	star_font->print(XY[0]+6,XY[1]+6, CommonName);
 }

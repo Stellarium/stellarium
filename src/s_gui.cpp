@@ -19,62 +19,207 @@
 * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 
+//#include <stdio.h>
+
 #include "s_gui.h"
 
-#include <stdio.h>
-
 using namespace std;
-using namespace gui;
+using namespace s_gui;
+
+Scissor Component::scissor(640, 480);	// Default initialization
+Painter Component::defaultPainter;
+
+///////////////////////////////// Scissor //////////////////////////////////////
+// Manages the use of the OpenGL Scissor test to prevent drawings outside the
+// components borders. Use a stack like for openGL matrices.
+////////////////////////////////////////////////////////////////////////////////
+
+Scissor::Scissor(int _winW, int _winH) :
+	winW(_winW),
+	winH(_winH)
+{
+	s_square v(0, 0, winW, winH);
+	stack.push_back(v);
+}
+
+// Define a new GlScissor zone relative to the previous one and apply it so
+// that nothing can be drawn outside the limits
+void Scissor::push(int posx, int posy, int sizex, int sizey)
+{
+	s_square v = *stack.end();
+	s_square el(v[0] + posx, v[1] + posy, v[2], v[3]);
+
+	// Check and adjust in case of overlapping
+	if (posx + sizex > v[2])
+	{
+		el[2] = v[2] - posx;
+		if (el[2] < 0) el[2] = 0;
+	}
+	if (posy + sizey > v[3])
+	{
+		el[3] = v[3] - posy;
+		if (el[3] < 0) el[3] = 0;
+	}
+
+	// Apply the new values
+	glScissor(el[0], winH - el[1] - el[3], el[2], el[3]);
+
+	// Add the new value at the end of the stack
+	stack.push_back(el);
+}
+
+// See above
+void Scissor::push(const s_vec2i& pos, const s_vec2i& size)
+{
+	s_square v = *stack.end();
+	s_square el(v[0] + pos[0], v[1] + pos[1], v[2], v[3]);
+
+	// Check and adjust in case of overlapping
+	if (pos[0] + size[0] > v[2])
+	{
+		el[2] = v[2] - pos[0];
+		if (el[2] < 0) el[2] = 0;
+	}
+	if (pos[1] + size[1] > v[3])
+	{
+		el[3] = v[3] - pos[1];
+		if (el[3] < 0) el[3] = 0;
+	}
+
+	// Apply the new values
+	glScissor(el[0], winH - el[1] - el[3], el[2], el[3]);
+
+	// Add the new value at the end of the stack
+	stack.push_back(el);
+}
+
+// Remove the last element in the stack : ie comes back to the previous
+// GlScissor borders.
+void Scissor::pop(void)
+{
+	// Remove the last value from the stack
+	stack.pop_back();
+
+	// Apply the previous value
+	s_square v = *stack.end();
+	glScissor(v[0], winH - v[1] - v[3], v[2], v[3]);
+}
 
 
-/**** GraphicsContext ****/
+//////////////////////////////// Painter ///////////////////////////////////////
+// Class used to manage all the drawings for a component. Stores informations
+// like colors or used textures. Performs the primitives drawing.
+////////////////////////////////////////////////////////////////////////////////
 
-GraphicsContext::GraphicsContext(int _winW, int _winH) :
-        backGroundTexture(NULL),
-        headerTexture(NULL),
-        baseColor(vec3_t(0.6, 0.4, 0.1)),
-        textColor(vec3_t(0.1, 0.9, 0.8)),
-        scissorPos(vec2_i(0, 0)),
-        winW(_winW),
-        winH(_winH),
-        font(NULL)
+Painter::Painter() :
+	tex1(NULL),
+	font(NULL)
 {
 }
 
-GraphicsContext::~GraphicsContext()
+Painter::Painter(s_texture* _tex1, s_font* _font, const s_color& _baseColor, const s_color& _textColor) :
+	tex1(_tex1),
+	font(_font),
+	baseColor(_baseColor),
+	textColor(_textColor)
 {
-    if (backGroundTexture) delete backGroundTexture;
-    backGroundTexture = NULL;
-    if (headerTexture) delete headerTexture;
-    headerTexture = NULL;
+
 }
 
-s_font* GraphicsContext::getFont() const
+// Draw the edges of the defined square with the default base color
+void Painter::drawSquareEdge(const s_vec2i& pos, const s_vec2i& sz) const
 {
-    return font;
+	glColor4fv(baseColor);
+    glEnable(GL_BLEND);
+    glDisable(GL_TEXTURE_2D);
+    glBegin(GL_LINE_LOOP);
+        glVertex2f(pos[0] + 0.5		   , pos[1] + 0.5        );
+        glVertex2f(pos[0] + sz[0] - 0.5, pos[1] + 0.5        );
+        glVertex2f(pos[0] + sz[0] - 0.5, pos[1] + sz[1] - 0.5);
+        glVertex2f(pos[0] + 0.5		   , pos[1] + sz[1] - 0.5);
+    glEnd();
 }
 
-void GraphicsContext::setFont(s_font* _font)
+// Draw the edges of the defined square with the given color
+void Painter::drawSquareEdge(const s_vec2i& pos, const s_vec2i& sz, const s_color& c) const
 {
-    font = _font;
+    glColor4fv(c);
+    glEnable(GL_BLEND);
+    glDisable(GL_TEXTURE_2D);
+    glBegin(GL_LINE_LOOP);
+        glVertex2f(pos[0] + 0.5		   , pos[1] + 0.5        );
+        glVertex2f(pos[0] + sz[0] - 0.5, pos[1] + 0.5        );
+        glVertex2f(pos[0] + sz[0] - 0.5, pos[1] + sz[1] - 0.5);
+        glVertex2f(pos[0] + 0.5		   , pos[1] + sz[1] - 0.5);
+    glEnd();
+}
+
+// Fill the defined square with the default texture and default base color
+void Painter::drawSquareFill(const s_vec2i& pos, const s_vec2i& sz) const
+{
+    glColor4fv(baseColor);
+    glEnable(GL_TEXTURE_2D);
+    glEnable(GL_BLEND);
+    glBindTexture(GL_TEXTURE_2D, tex1->getID());
+    glBegin(GL_QUADS );
+        glTexCoord2s(0, 0); glVertex2i(pos[0]        , pos[1] + sz[1]);	// Bottom Left
+        glTexCoord2s(1, 0); glVertex2i(pos[0] + sz[0], pos[1] + sz[1]);	// Bottom Right
+        glTexCoord2s(1, 1); glVertex2i(pos[0] + sz[0], pos[1]        );	// Top Right
+        glTexCoord2s(0, 1); glVertex2i(pos[0]        , pos[1]        );	// Top Left
+    glEnd ();
+}
+
+// Fill the defined square with the default texture and given color
+void Painter::drawSquareFill(const s_vec2i& pos, const s_vec2i& sz, const s_color& c) const
+{
+    glColor4fv(c);
+    glEnable(GL_TEXTURE_2D);
+    glEnable(GL_BLEND);
+    glBindTexture(GL_TEXTURE_2D, tex1->getID());
+    glBegin(GL_QUADS );
+        glTexCoord2s(0, 0); glVertex2i(pos[0]        , pos[1] + sz[1]);	// Bottom Left
+        glTexCoord2s(1, 0); glVertex2i(pos[0] + sz[0], pos[1] + sz[1]);	// Bottom Right
+        glTexCoord2s(1, 1); glVertex2i(pos[0] + sz[0], pos[1]        );	// Top Right
+        glTexCoord2s(0, 1); glVertex2i(pos[0]        , pos[1]        );	// Top Left
+    glEnd ();
+}
+
+// Fill the defined square with the given texture and given color
+void Painter::drawSquareFill(const s_vec2i& pos, const s_vec2i& sz, const s_color& c, const s_texture * t) const
+{
+    glColor4fv(c);
+    glEnable(GL_TEXTURE_2D);
+    glEnable(GL_BLEND);
+    glBindTexture(GL_TEXTURE_2D, t->getID());
+    glBegin(GL_QUADS );
+        glTexCoord2s(0, 0); glVertex2i(pos[0]        , pos[1] + sz[1]);	// Bottom Left
+        glTexCoord2s(1, 0); glVertex2i(pos[0] + sz[0], pos[1] + sz[1]);	// Bottom Right
+        glTexCoord2s(1, 1); glVertex2i(pos[0] + sz[0], pos[1]        );	// Top Right
+        glTexCoord2s(0, 1); glVertex2i(pos[0]        , pos[1]        );	// Top Left
+    glEnd ();
+}
+
+// Print the text with the default font and default text color
+void Painter::print(int x, int y, const char * str) const
+{
+    glColor4fv(textColor);
+    glEnable(GL_TEXTURE_2D);
+    glEnable(GL_BLEND);
+	font->print(x, y, str);
 }
 
 
-/**** Component ****/
+//////////////////////////////// Component /////////////////////////////////////
+// Mother class for every s_gui object.
+////////////////////////////////////////////////////////////////////////////////
 
-Component::Component() :
-        draging(false),
-        passThru(false),
-        ID( -1),
-        visible(true),
-        position(0, 0),
-        size(0, 0),
-        parent(NULL),
-        clicCallback(NULL),
-        moveCallback(NULL),
-        mouseIn(false),
-        active(true),
-        focus(false)
+Component::Component(void) :
+	pos(0, 0),
+	size(0, 0),
+	visible(1),
+	active(1),
+	focus(0),
+	painter(defaultPainter)
 {
 }
 
@@ -82,84 +227,36 @@ Component::~Component()
 {
 }
 
-vec2_i Component::getPosition() const
+void Component::reshape(s_vec2i _pos, s_vec2i _size)
 {
-    return position;
-}
-
-vec2_i Component::getSize() const
-{
-    return size;
-}
-
-void Component::reshape(vec2_i _position, vec2_i _size)
-{
-    position = _position;
-    size = _size;
+	pos = _pos;
+	size = _size;
 }
 
 void Component::reshape(int x, int y, int w, int h)
 {
-	position[0]=x;
-	position[1]=y;
-	size[0]=w;
-	size[1]=h;
+	pos.set(x, y);
+	size.set(w, h);
 }
 
-Component* Component::getParent() const
+int Component::isIn(float x , float y)
 {
-    return parent;
+	return (pos[0]<=x && (size[0]+pos[0])>=x && pos[1]<=y && (pos[1]+size[1])>=y);
 }
 
-void Component::setParent(Component* c)
-{
-    parent = c;
-}
 
-void Component::setClicCallback(void (*_clicCallback)(int, int, enum guiValue, enum guiValue, Component *))
-{
-    clicCallback = _clicCallback;
-}
-
-void Component::setMoveCallback(void (*_moveCallback)(int, int, enum guiValue, Component *))
-{
-    moveCallback = _moveCallback;
-}
-
-void Component::setKeyCallback(int (*_keyCallback)(SDLKey key, int state, Component *))
-{
-    keyCallback = _keyCallback;
-}
-
-/**** Container ****/
-
-void containerClicCallBack(int x, int y, enum guiValue state, enum guiValue button, Component * caller)
-{
-    ((Container *)caller)->handleMouseClic((int)(x - caller->getPosition()[0]), (int)(y - caller->getPosition()[1]), state, button);
-}
-
-void containerMoveCallBack(int x, int y, enum guiValue, Component * caller)
-{
-    ((Container *)caller)->handleMouseMove((int)(x - caller->getPosition()[0]), (int)(y - caller->getPosition()[1]));
-}
-
-int containerKeyCallBack(SDLKey key, int state, Component * caller)
-{
-    return ((Container *)caller)->handleKey(key, state);
-}
+//////////////////////////////// Container /////////////////////////////////////
+// Manages hierarchical components : send signals ad actions  to childrens
+////////////////////////////////////////////////////////////////////////////////
 
 Container::Container() : Component()
 {
-    setClicCallback(containerClicCallBack);
-    setMoveCallback(containerMoveCallBack);
-    setKeyCallback(containerKeyCallBack);
 }
 
 Container::~Container()
 {
-    //printf("Enter Container destructor %d\n",this);
-    vector<Component*>::iterator iter = components.begin();
-    while (iter != components.end())
+    list<Component*>::iterator iter = childs.begin();
+    while (iter != childs.end())
     {
         if (*iter)
         {
@@ -168,141 +265,79 @@ Container::~Container()
         }
         iter++;
     }
-    //printf("Quit Container destructor %d\n",this);
-}
-
-int Container::getComponentCount() const
-{
-    return components.size();
-}
-
-Component* Container::getComponent(int n) const
-{
-    if (n >= 0 && (unsigned int)n < components.size())
-        return components[n];
-    else
-        return NULL;
 }
 
 void Container::addComponent(Component* c)
-{   components.insert(components.end(), c);
-    c->setParent(this);
+{
+	childs.push_front(c);
 }
 
-void Container::render(GraphicsContext& gc)
+void Container::draw(void)
 {
-    if (!visible) return ;
-    
-    vec2_i pos = getPosition();
-    vec2_i sz = getSize();
-
-    vector<Component*>::iterator iter = components.begin();
+    if (!visible) return;
+    list<Component*>::iterator iter = childs.begin();
     glPushMatrix();
+    glTranslatef(pos[0], pos[1], 0.f);
 
-    glTranslatef(pos[0], pos[1], 0);
-    gc.scissorPos += pos;
-    while (iter != components.end())
-    {
-        if ((*iter)->visible)
-        {
-            glScissor(gc.scissorPos[0], gc.winH - gc.scissorPos[1] - sz[1], sz[0], sz[1]);
-            (*iter)->render(gc);
-        }
-        iter++;
-    }
-    gc.scissorPos -= pos;
+    Component::scissor.push(pos, size);
+
+	while (iter != childs.end())
+	{
+		(*iter)->draw();
+		iter++;
+	}
+
+    Component::scissor.pop();
     glPopMatrix();
 }
 
-int Container::handleMouseClic(int x, int y, enum guiValue state, enum guiValue button)
+int Container::onClic(int x, int y, S_GUI_VALUE button, S_GUI_VALUE state)
 {
-    vector<Component*>::iterator iter = components.begin();
-    while (iter != components.end())
-    {
-        if ((*iter)->visible && (*iter)->clicCallback != NULL && ((*iter)->draging || (*iter)->isIn(x, y)))
-        {
-            (*iter)->clicCallback(x, y, state, button, (*iter));
-            if (!(*iter)->passThru) return 1;
-        }
+	list<Component*>::iterator iter = childs.begin();
+	while (iter != childs.end())
+	{
+		if ((*iter)->onClic(x - pos[0], y - pos[1], button, state)) return 1;	// The signal has been intercepted
         iter++;
     }
     return 0;
 }
 
-void Container::handleMouseMove(int x, int y)
+int Container::onMove(int x, int y)
 {
-    vector<Component*>::iterator iter = components.begin();
-    while (iter != components.end())
-    {
-        if ((*iter)->visible && (*iter)->moveCallback != NULL)
-        {
-            if ((*iter)->draging || (*iter)->isIn(x, y))
-            {
-                if (!(*iter)->mouseIn)
-                {
-                    (*iter)->moveCallback(x, y, GUI_MOUSE_ENTER, (*iter));
-                    (*iter)->mouseIn = true;
-                }
-                else
-                {
-                    (*iter)->moveCallback(x, y, GUI_NOTHING, (*iter));
-                }
-            }
-            else
-            {
-                if ((*iter)->mouseIn) (*iter)->moveCallback(x, y, GUI_MOUSE_LEAVE, (*iter));
-                (*iter)->mouseIn = false;
-            }
-        }
-        iter++;
-    }
-}
-
-int Container::handleKey(SDLKey key,int state)
-{
-    vector<Component*>::iterator iter = components.begin();
-    while (iter != components.end())
-    {
-        if ((*iter)->focus && (*iter)->visible && (*iter)->keyCallback != NULL)
-        {
-            return (*iter)->keyCallback(key, state, (*iter));
-        }
+	list<Component*>::iterator iter = childs.begin();
+	while (iter != childs.end())
+	{
+		if ((*iter)->onMove(x - pos[0], y - pos[1])) return 1;	// The signal has been intercepted
         iter++;
     }
     return 0;
 }
 
-/*** FilledContainer ***/
-
-void FilledContainer::render(GraphicsContext& gc)
+int Container::onKey(SDLKey k, S_GUI_VALUE s)
 {
-    glColor3fv(gc.baseColor);
-    vec2_i pos = getPosition();
-    vec2_i sz = getSize();
-    glEnable(GL_TEXTURE_2D);
-    glEnable(GL_BLEND);
-    glBindTexture(GL_TEXTURE_2D, gc.backGroundTexture->getID());
-    glBegin(GL_QUADS );
-        glTexCoord2f(0.0f, 0.0f); glVertex2f(pos[0]+0.5, pos[1] + sz[1]-0.5); // Bas Gauche
-        glTexCoord2f(1.0f, 0.0f); glVertex2f(pos[0] + sz[0]-0.5, pos[1] + sz[1]-0.5); // Bas Droite
-        glTexCoord2f(1.0f, 1.0f); glVertex2f(pos[0] + sz[0]-0.5, pos[1]+0.5); // Haut Droit
-        glTexCoord2f(0.0f, 1.0f); glVertex2f(pos[0]+0.5, pos[1]+0.5); // Haut Gauche
-    glEnd ();
- 
-    glColor3fv(gc.baseColor*0.7);
-    glDisable(GL_TEXTURE_2D);
-    glBegin(GL_LINE_LOOP);
-        glVertex2f(pos[0] +0.5, pos[1]+0.5);
-        glVertex2f(pos[0] + sz[0]-0.5, pos[1]+0.5);
-        glVertex2f(pos[0] + sz[0]-0.5, pos[1] + sz[1]-0.5);
-        glVertex2f(pos[0]+0.5, pos[1] + sz[1]-0.5);
-    glEnd();
- 
-    Container::render(gc);
+	list<Component*>::iterator iter = childs.begin();
+	while (iter != childs.end())
+	{
+		if ((*iter)->onKey(k, s)) return 1;	// The signal has been intercepted
+        iter++;
+    }
+    return 0;
 }
 
+//////////////////////////// FilledContainer ///////////////////////////////////
+// Container filled with a texture and with an edge
+////////////////////////////////////////////////////////////////////////////////
 
-/**** Button ****/
+
+void FilledContainer::draw(void)
+{
+	painter.drawSquareFill(pos, size);
+	painter.drawSquareEdge(pos, size);
+	Container::draw();
+}
+
+/*
+// Button
 
 void ExtButtonClicCallback(int x, int y, enum guiValue state, enum guiValue button, Component * me)
 {
@@ -376,7 +411,7 @@ void Button::ButtonMoveCallback(enum guiValue action)
 
 
 
-/**** Labeled_Button ****/
+// Labeled_Button
 
 Labeled_Button::Labeled_Button(char * _label) : Button(), label(NULL)
 {
@@ -417,7 +452,7 @@ void Labeled_Button::render(GraphicsContext& gc)
     glPopMatrix();
 }
 
-/**** Textured_Button ****/
+// Textured_Button
 
 Textured_Button::Textured_Button(s_texture * _texBt) : 
     Button(), 
@@ -486,7 +521,7 @@ void Textured_Button::render(GraphicsContext& gc)
     Button::render(gc);
 }
 
-/**** Label ****/
+// Label
 
 Label::Label(char * _label) : 
         Component(),
@@ -547,7 +582,7 @@ void Label::render(GraphicsContext& gc)
     glPopMatrix();
 }
 
-/**** TextLabel ****/
+// TextLabel
 TextLabel::TextLabel(char * _label, s_font * _theFont) :
     Container(),
     label(NULL),
@@ -604,7 +639,7 @@ void TextLabel::setColour(vec3_t _colour)
     }
 }
 
-/**** FilledTextLabel ****/
+// FilledTextLabel
 FilledTextLabel::FilledTextLabel(char * _label, s_font * _theFont) : TextLabel(_label, _theFont)
 {
 }
@@ -638,7 +673,7 @@ void FilledTextLabel::render(GraphicsContext& gc)
 }
 
 
-/**** Cursor Bar ****/
+// Cursor Bar
 void ExtCursorBarClicCallback(int x, int y, enum guiValue state, enum guiValue button, Component * me)
 {
     ((CursorBar*)me)->CursorBarClicCallback(x, button, state);
@@ -791,17 +826,13 @@ void BorderPicture::render(GraphicsContext& gc)
     glEnd();
 }
 
-/**** ClickablePicture ****/
+// ClickablePicture
 
 void ExtClickablePictureClicCallback(int x, int y, enum guiValue state, enum guiValue button, Component * me)
 {
     ((ClickablePicture*)me)->ClickablePictureClicCallback(x,y,button, state);
 }
 
-/*void ExtClickablePictureMoveCallback(int x, int y, enum guiValue action, Component * me)
-{
-    ((ClickablePicture*)me)->ClickablePictureMoveCallback(action);
-}*/
 
 ClickablePicture::ClickablePicture(vec2_i _position, vec2_i _size, s_texture * _imageTex, void (*_onValueChangeCallBack)(vec2_t _pointerPosition, Component *)) : BorderPicture(_position, _size, _imageTex)
 {
@@ -847,3 +878,5 @@ void ClickablePicture::ClickablePictureClicCallback(int x, int y, enum guiValue 
         if (onValueChangeCallBack != NULL) onValueChangeCallBack(pointerPosition, this);
     }
 }
+
+*/

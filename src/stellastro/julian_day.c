@@ -23,7 +23,7 @@ Copyright (C) 2000 Liam Girdwood <liam@nova-ioe.org>
 /* Calculate the julian day from a calendar day.
  * Valid for positive and negative years but not for negative JD.
  * Formula 7.1 on pg 61 */
-double get_julian_day (struct ln_date * date)
+double get_julian_day (const ln_date * date)
 {
     double days;
     int a,b;
@@ -60,7 +60,7 @@ double get_julian_day (struct ln_date * date)
 
 /* Calculate the day of the week.
  * Returns 0 = Sunday .. 6 = Saturday */
-unsigned int get_day_of_week (struct ln_date *date)
+unsigned int get_day_of_week (const ln_date *date)
 {
     unsigned int day;
     double JD;
@@ -78,7 +78,7 @@ unsigned int get_day_of_week (struct ln_date *date)
 
 /* Calculate the date from the Julian day
  * params : JD Julian day, date Pointer to new calendar date. */
-void get_date (double JD, struct ln_date * date)
+void get_date (double JD, ln_date * date)
 {
    int A,a,B,C,D,E;
    double F,Z;
@@ -138,7 +138,7 @@ void get_date (double JD, struct ln_date * date)
 double get_julian_from_sys ()
 {
 	double JD;
-	struct ln_date date;
+	ln_date date;
 	
 	/* get sys date */
 	get_ln_date_from_sys (&date);
@@ -151,7 +151,7 @@ double get_julian_from_sys ()
 
 /* Calculate gmt date from system date.
  * param : date Pointer to store date. */
-void get_ln_date_from_sys (struct ln_date * date)
+void get_ln_date_from_sys (ln_date * date)
 {
 	time_t rawtime;
 	struct tm * ptm;

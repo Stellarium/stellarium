@@ -44,6 +44,8 @@ private:
     Grid HipGrid;                           // Grid for opimisation
     Hip_Star ** StarArray;  // The simple array of the star for sequential research
     int StarArraySize;      // Number of star in the array
+	s_texture * starTexture;
+	s_font * starFont;
 };
 
 

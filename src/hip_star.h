@@ -35,11 +35,11 @@ public:
     virtual ~Hip_Star();
     int Read(FILE * pFile);	// Read the star data in the stream
     void Draw(draw_utility * du);		// Draw the star
-    void DrawName(void);
-	vec3_t get_RGB(void) {return RGB;}
-	void get_info_string(char * s);
-	unsigned char get_type(void) {return STEL_OBJECT_STAR;}
-	Vec3d get_earth_equ_pos(navigator* nav=NULL) {return Vec3d(XYZ[0],XYZ[1],XYZ[2]);}
+    void DrawName(s_font * star_font);
+	vec3_t get_RGB(void) const {return RGB;}
+	void get_info_string(char * s) const;
+	unsigned char get_type(void) const {return STEL_OBJECT_STAR;}
+	Vec3d get_earth_equ_pos(navigator* nav=NULL) const {return Vec3d(XYZ[0],XYZ[1],XYZ[2]);}
 
 private:
     unsigned int HP;        // Hipparcos number

@@ -152,8 +152,4 @@ private:
 	observator_pos position;
 };
 
-
-extern navigator navigation; // Navigator instance used in stellarium
-
-
 #endif //_NAVIGATOR_H_

@@ -85,13 +85,13 @@ double get_mean_obliquity( double t )
 // with the form dd/mm/yyyy for s1 and hh:mm:ss.s for s2.
 // Returns NULL if s1 or s2 is not valid.
 // Uses the current date if s1 is "today" and current time if s2 is "now"
-const struct ln_date * str_to_date(const char * s1, const char * s2)
+const ln_date * str_to_date(const char * s1, const char * s2)
 {
-	static struct ln_date date;
+	static ln_date date;
 	if (s1==NULL || s2==NULL) return NULL;
     if (!strcmp(s1,"today"))
 	{
-		struct ln_date tempDate;
+		ln_date tempDate;
 		get_ln_date_from_sys(&tempDate);
 		date.days = tempDate.days;
 		date.months = tempDate.months;
@@ -105,7 +105,7 @@ const struct ln_date * str_to_date(const char * s1, const char * s2)
 
     if (!strcmp(s2,"now"))
 	{
-		struct ln_date tempDate2;
+		ln_date tempDate2;
 		get_ln_date_from_sys(&tempDate2);
 		date.hours = tempDate2.hours;
 		date.minutes = tempDate2.minutes;

@@ -47,7 +47,7 @@ planet::~planet()
 }
 
 // Return the information string "ready to print" :)
-void planet::get_info_string(char * s, navigator * nav)
+void planet::get_info_string(char * s, navigator * nav) const
 {
 	double tempDE, tempRA;
 	Vec3d equPos = get_earth_equ_pos(nav);
@@ -68,7 +68,7 @@ void planet::set_rotation_elements(float _period, float _offset, double _epoch, 
 
 
 // Return the rect earth equatorial position
-Vec3d planet::get_earth_equ_pos(navigator * nav)
+Vec3d planet::get_earth_equ_pos(navigator * nav) const
 {
 	Vec3d v = get_heliocentric_ecliptic_pos();
 	return nav->helio_to_earth_pos_equ(&v); 	// this is earth equatorial but centered
@@ -137,12 +137,12 @@ void planet::compute_geographic_rotation(double date)
 	axis_rotation = remainder * 360. + re.offset;
 }
 
-Vec3d planet::get_ecliptic_pos()
+Vec3d planet::get_ecliptic_pos() const
 {
 	return ecliptic_pos;
 }
 
-Vec3d planet::get_heliocentric_ecliptic_pos()
+Vec3d planet::get_heliocentric_ecliptic_pos() const
 {
 	Vec3d pos = ecliptic_pos;
 	planet * p = parent;

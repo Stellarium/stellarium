@@ -31,14 +31,15 @@ using namespace std;
 #include "nebula_mgr.h"
 #include "stel_atmosphere.h"
 #include "tone_reproductor.h"
-//#include "stel_ui.h"
+#include "stel_ui.h"
 #include "solarsystem.h"
 #include "stel_utility.h"
 #include "init_parser.h"
 
+
 class stel_core
 {
-//friend class stel_ui;
+friend class stel_ui;
 friend class stel_sdl;
 public:
     stel_core();
@@ -47,10 +48,10 @@ public:
 	void load_config(void);
 
 	// Set the main data, textures and configuration directories
-	void set_directories(char * DDIR, char * TDIR, char * CDIR);
+	void set_directories(const char * DDIR, const char * TDIR, const char * CDIR);
 
 	// Set the 2 config files names.
-	void set_config_files(char * _config_file, char * _location_file);
+	void set_config_files(const char * _config_file, const char * _location_file);
 
 	void update(int delta_time);		// Update all the objects in function of the time
 	void draw(int delta_time);			// Execute all the drawing functions
@@ -86,13 +87,13 @@ private:
 	Nebula_mgr * nebulas;				// Manage the nebulas
 	stel_atmosphere * atmosphere;		// Atmosphere
 	tone_reproductor * tone_converter;	// Tones conversion between stellarium world and display device
-	//stel_ui * ui;						// The main User Interface
+	stel_ui * ui;						// The main User Interface
 	draw_utility * du;					// A usefull small class used to pass parameters and handy functions
 										// to various drawing functions
 
 	init_parser * conf;					// The class which manage config retrieves and dumps
 
-    int LandscapeNumber;				// landscape "skin" number
+    int landscape_number;				// landscape "skin" number
 
 	float fps;
     float sky_brightness;
@@ -135,6 +136,8 @@ private:
     int FlagInfos;
     int FlagMilkyWay;
     int FlagConfig;
+
+	int frame, timefr, timeBase;	// Used for fps counter
 
 	// Load the textures "for non object oriented stuff" TODO : remove that
 	void load_base_textures(void);

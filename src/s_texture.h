@@ -37,13 +37,13 @@
 #define TEX_LOAD_TYPE_PNG_BLEND3 2
 #define TEX_LOAD_TYPE_PNG_REPEAT 3
 
-#include "string.h"
+#include <string.h>
 
 class s_texture
 {
 public:
-    s_texture(char * _textureName);
-    s_texture(char * _textureName, int _loadType);
+    s_texture(const char * _textureName);
+    s_texture(const char * _textureName, int _loadType);
     virtual ~s_texture();
     int load();
     void unload();

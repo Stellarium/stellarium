@@ -20,6 +20,10 @@
  * 3. This notice must not be removed or altered from any source distribution.
  */
 
+#ifdef HAVE_CONFIG_H
+# include "config.h"
+#endif
+
 #ifdef _WIN32 /* Stupid Windows needs to include windows.h before gl.h */
 	#undef FAR
 	#include <windows.h>
@@ -30,6 +34,7 @@
 #else
 # include <GL/gl.h>
 #endif
+
 #include "glpng.h"
 #include <stdlib.h>
 #include <math.h>
@@ -679,7 +684,7 @@ unsigned int APIENTRY pngBind(const char *filename, int mipmap, int trans, pngIn
 
 unsigned int APIENTRY pngBindF(FILE *file, int mipmap, int trans, pngInfo *info, int wrapst, int minfilter, int magfilter) {
 	unsigned int id = SetParams(wrapst, magfilter, minfilter);
-
+	//printf("coucou %d\n", file);
 	if (id != 0 && pngLoadF(file, mipmap, trans, info))
 		return id;
 	return 0;
