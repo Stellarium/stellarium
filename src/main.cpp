@@ -20,11 +20,6 @@
 // I'm trying to comment the source but my english isn't perfect, so be 
 //tolerant and please correct all the mistakes you find. ;)
 
-#if defined( MACOSX )
-# include <GLUT/glut.h>
-#else
-# include <GL/glut.h>
-#endif
 
 #include "stellarium.h"
 #include "draw.h"
@@ -41,6 +36,8 @@
 #include "shooting.h"
 #include "stelconfig.h"
 
+#include <SDL.h>
+
 using namespace std;
 
 stellariumParams global;
@@ -52,9 +49,12 @@ s_texture * texIds[200];              // Common Textures
 
 /*ShootingStar * TheShooting = NULL;*/
 
-static int timeAtmosphere=0;
+// Globals
+bool isProgramLooping;														// We're Using This One To Know If The Program Must Go On In The Main Loop
+S_AppStatus AppStatus;														// The Struct That Holds The Runtime Data Of The Application
 
-void init();
+
+static int timeAtmosphere=0;
 
 // ***************  Print a beautiful console logo !! ******************
 void drawIntro(void)
@@ -72,7 +72,7 @@ void drawIntro(void)
 };
 
 // ************************  Main display loop  ************************
-void glutDisplay(void)
+void Draw(void)
 {  
     glMatrixMode(GL_PROJECTION); 
     glLoadIdentity();
@@ -80,9 +80,6 @@ void glutDisplay(void)
 		   global.Y_Resolution, 0.1, 1000);
     glMatrixMode(GL_MODELVIEW);
     
-    // Update the position of observation and time etc...
-    Update_time(*SolarSystem);
-    Update_variables();
 
     // Execute all the drawing function in the correct order from the more 
     // far to nearest objects
@@ -160,11 +157,10 @@ void glutDisplay(void)
     // ---- 2D Displays
     renderUi();
 
-    glutSwapBuffers();               // Swap the 2 buffers
 }
 
 // ************************  On resize  *******************************
-void glutResize(int w, int h)
+void ResizeGL(int w, int h)
 {   
     if (!h) return;
     global.X_Resolution = w;
@@ -176,15 +172,9 @@ void glutResize(int w, int h)
     glLoadIdentity();
     gluPerspective(global.Fov, (double) global.X_Resolution / 
 		   global.Y_Resolution, 1, 10000);   // Update the ratio
-    glutPostRedisplay();
     glMatrixMode(GL_MODELVIEW);
 }
 
-// *******************  Handle the flags keys  **************************
-void processNormalKeys(unsigned char key, int x, int y) 
-{
-    HandleNormalKey(key,GUI_DOWN);
-}
 
 // ************************  Initialisation  ******************************
 void loadCommonTextures(void)
@@ -250,69 +240,83 @@ void loadCommonTextures(void)
 	printf("Error while loading messier Texture\n");
 }
 
-// ********************  Handle the special keys  **********************
-void pressKey(int key, int, int) 
-{   
+void TerminateApplication(void)												// Terminate The Application
+{
+	static SDL_Event Q;														// We're Sending A SDL_QUIT Event
+	Q.type = SDL_QUIT;														// To The SDL Event Queue
+	if(SDL_PushEvent(&Q) == -1)												// Try Send The Event
+	{
+		printf("SDL_QUIT event can't be pushed: %s\n", SDL_GetError() );		// And Eventually Report Errors
+		exit(1);															// And Exit
+	}
+	return;																	// We're Always Making Our Funtions Return
+}
+
+// *******************  Handle time  **************************
+void Update(Uint32 Milliseconds)
+{
+    // Update the position of observation and time etc...
+    Update_time(Milliseconds, *SolarSystem);
+    Update_variables();
+	return;
+}
+
+// ********************  Handle keys  **********************
+void pressKey(Uint8 *keys) 
+{   	
     // Direction and zoom deplacements
-    switch (key) 
-    {
-    case GLUT_KEY_LEFT :
-	global.deltaAz = -1;
-	global.FlagTraking=false; 
-	break;
-    case GLUT_KEY_RIGHT : 
-	global.deltaAz =  1;
-	global.FlagTraking=false;
-	break;
-    case GLUT_KEY_UP :
-	if (glutGetModifiers() & GLUT_ACTIVE_CTRL)
+    if(keys[SDLK_LEFT])
 	{
-		global.deltaFov= -1;
+		global.deltaAz = -1;
+		global.FlagTraking=false; 
 	}
-	else
-	{	global.deltaAlt =  1;
+    if(keys[SDLK_RIGHT])
+	{
+		global.deltaAz =  1;
 		global.FlagTraking=false;
 	}
-	break;
-    case GLUT_KEY_DOWN :
-	if (glutGetModifiers() & GLUT_ACTIVE_CTRL)
+    if(keys[SDLK_UP])
 	{
-		global.deltaFov= 1;
+		if (SDL_GetModState() & KMOD_CTRL)
+		{
+			global.deltaFov= -1;
+		}
+		else
+		{	global.deltaAlt =  1;
+			global.FlagTraking=false;
+		}
 	}
-	else
+    if(keys[SDLK_DOWN])
 	{
-		global.deltaAlt = -1;
-		global.FlagTraking=false;
+		if (SDL_GetModState() & KMOD_CTRL)
+		{
+			global.deltaFov= 1;
+		}
+		else
+		{
+			global.deltaAlt = -1;
+			global.FlagTraking=false;
+		}
 	}
-	break;
-    case GLUT_KEY_PAGE_UP :
-	global.deltaFov= -1;
-	break;
-    case GLUT_KEY_PAGE_DOWN :
-	global.deltaFov=  1;
-	break;
-    case GLUT_KEY_F1 : 
-	glutFullScreen();
-	break;
-    case GLUT_KEY_F2 :
-	glutReshapeWindow(640, 480);
-	break;
-    }
+    if(keys[SDLK_PAGEUP]) global.deltaFov= -1;
+    if(keys[SDLK_PAGEDOWN]) global.deltaFov=  1;
+
 }
 
 // *******************  Stop mooving and zooming  **********************
-void releaseKey(int key, int, int)
+void releaseKey(Uint8 key)
 {   
     // When a deplacement key is released stop mooving
     switch (key)
     {
-    case GLUT_KEY_LEFT :
-    case GLUT_KEY_RIGHT : 
+    case SDLK_LEFT :
+    case SDLK_RIGHT : 
 	global.deltaAz = 0;
 	break;
-    case GLUT_KEY_UP : 
-    case GLUT_KEY_DOWN :
-    if (glutGetModifiers() & GLUT_ACTIVE_CTRL)
+    case SDLK_UP : 
+    case SDLK_DOWN :
+    
+	if (SDL_GetModState() & KMOD_CTRL)
 	{
 		global.deltaFov = 0;
 	}
@@ -321,93 +325,37 @@ void releaseKey(int key, int, int)
 		global.deltaAlt = 0;
 	}
 	break;
-    case GLUT_KEY_PAGE_UP :
-    case GLUT_KEY_PAGE_DOWN :
+    case SDLK_PAGEUP :
+    case SDLK_PAGEDOWN :
 	global.deltaFov = 0;
 	break;
     }
 }
 
-// ***************  Handle the mouse deplacement  *********************
-void MoveMouse(int x, int y)
+bool InitTimers(Uint32 *C)   // This Is Used To Init All The Timers In Our Application
 {
-    HandleMove(x,y);
+	*C = SDL_GetTicks(); // Hold The Value Of SDL_GetTicks At The Program Init
+	return true;	     // Return TRUE (Initialization Successful)
 }
 
-// *******************  Handle the mouse clic  *************************
-void Mouse(int button, int state, int x, int y)
+bool CreateWindowGL (SDL_Surface *S, int W, int H, int B, Uint32 F)   // This Code Creates Our OpenGL Window
 {
-    HandleClic(x,y,state,button);
+	if(!(S = SDL_SetVideoMode(W, H, B, F)))	  // We're Using SDL_SetVideoMode To Create The Window
+	{
+		return false;// If It Fails, We're Returning False
+	}
+	ResizeGL(global.X_Resolution, global.Y_Resolution);   // We're Calling Reshape As The Window Is Created
+	return true;	     // Return TRUE (Initialization Successful)
 }
 
 
-// ****************  Initialisation of glut and openGL  ****************
-void init() 
-{   
-    glutKeyboardFunc(processNormalKeys);
-    glutSpecialFunc(pressKey);
-    glutSpecialUpFunc(releaseKey);
-    glutDisplayFunc(glutDisplay);
-    glutIdleFunc(glutDisplay);
-    glutReshapeFunc(glutResize);
-    glutMouseFunc(Mouse);
-    glutMotionFunc(MoveMouse);
-    glutPassiveMotionFunc(MoveMouse);
-}
-
-// ***************************  Main  **********************************
-int main (int argc, char **argv)
-{   
-    setDirectories();
-    
-    drawIntro();                     // Print the console logo
-    
-    char tempName[255];
-    char tempName2[255];
-    char tempName3[255];
-    
-    printf("Loading configuration file...\n");
-    strcpy(tempName,global.ConfigDir);
-    strcat(tempName,"config.txt");
-    strcpy(tempName2,global.ConfigDir);
-    strcat(tempName2,"location.txt");
-
-    loadConfig(tempName,tempName2);  // Load the params from config.txt
-    
-    glutInit(&argc, argv);
-    
-    glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE);
-
-    if (global.Fullscreen)           // FullScreen Mode
-    {
-	char str[20];                // Init screen size
-        sprintf(str,"%dx%d:%d",global.X_Resolution,
-		global.Y_Resolution,global.bppMode);
-        glutGameModeString(str);     // define resolution, color depth
-        if (glutGameModeGet(GLUT_GAME_MODE_POSSIBLE))   // enter full screen
-        {
-	    	glutEnterGameMode();
-        }
-        else                         // Error
-        {   
-	    	printf("\nWARNING : True fullscreen is unsuported.\n Try to run in Windowed mode...\n");
-	    	global.Fullscreen = 0;
-        	dumpConfig();
-        }
-    }
-    if (!global.Fullscreen)          // Windowed mode
-    {  
-		glutCreateWindow(APP_NAME);
-        glutFullScreen();            // Windowed fullscreen mode
-    }
-
-    glutIgnoreKeyRepeat(1);
-    glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_FASTEST);
-    glDisable(GL_DEPTH_TEST);
-    // init the blending function parameters
-    glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
-    
-    init();                          // Set the callbacks
+bool Initialize(void)	     // Any Application & User Initialization Code Goes Here
+{
+    AppStatus.Visible	    = true;	 // At The Beginning, Our App Is Visible
+    AppStatus.MouseFocus    = true;	 // And Have Both Mouse
+    AppStatus.KeyboardFocus = true;	 // And Input Focus
+  
+    SDL_EnableKeyRepeat(0, 0); // Disable key repeat
     
     HipVouteCeleste = new Hip_Star_mgr();
     if (!HipVouteCeleste) exit(1);
@@ -423,6 +371,10 @@ int main (int argc, char **argv)
 
     loadCommonTextures();            // Load the common used textures
     SolarSystem->loadTextures();
+    
+    char tempName[255];
+    char tempName2[255];
+    char tempName3[255];
     
     // Load hipparcos stars & names
     strcpy(tempName,global.DataDir);
@@ -445,7 +397,209 @@ int main (int argc, char **argv)
     messiers->Read(tempName);        // read the messiers object data
     initUi();                        // initialisation of the User Interface
     global.XYZVision.Set(0,1,0);
+    return true;		     // Return TRUE (Initialization Successful)
+}
+
+// ***************************  Deinitialize  **********************************
+void Deinitialize(void)		     // Any User Deinitialization Goes Here
+{
+	return;		       	     // We Have Nothing To Deinit Now
+}
+
+// ***************************  InitGL  ********************************
+bool InitGL(SDL_Surface *S)  // Any OpenGL Initialization Code Goes Here
+{
+    glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_FASTEST);
+    glDisable(GL_DEPTH_TEST);
+    // init the blending function parameters
+    glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
+    return true;     // Return TRUE (Initialization Successful)
+}
+
+
+// ***************************  Main  **********************************
+int main(int argc, char **argv)
+{   
+    setDirectories();
     
-    glutMainLoop();                  // Start drawing
-    return 0;
+    drawIntro();                     // Print the console logo
+    
+    char tempName[255];
+    char tempName2[255];
+    
+    printf("Loading configuration file...\n");
+    strcpy(tempName,global.ConfigDir);
+    strcat(tempName,"config.txt");
+    strcpy(tempName2,global.ConfigDir);
+    strcat(tempName2,"location.txt");
+
+    loadConfig(tempName,tempName2);  // Load the params from config.txt
+    
+
+    SDL_Surface *Screen;	// The Screen
+    SDL_Event	E;		// And Event Used In The Polling Process
+    Uint8	*Keys;		// A Pointer To An Array That Will Contain The Keyboard Snapshot
+    Uint32	Vflags;		// Our Video Flags
+    Uint32	TickCount;	// Used For The Tick Counter
+    Uint32	LastCount;	// Used For The Tick Counter
+    Screen = NULL;
+    Keys = NULL;
+	
+    // We Want A Hardware Surface, Double Buffering Feature And Special OpenGLBlit Mode
+    // So We Can Even Blit 2D Graphics In our OpenGL Scene
+    Vflags = SDL_HWSURFACE|SDL_DOUBLEBUF|SDL_OPENGLBLIT;
+    
+
+    if(SDL_Init(SDL_INIT_VIDEO)<0)  // Init The SDL Library, The VIDEO Subsystem
+    {
+         printf("Unable to open SDL: %s\n", SDL_GetError() );	// If SDL Can't Be Initialized
+         exit(1);					        // Get Out Of Here. Sorry.
+    }
+
+    // SDL's Been init, Now We're Making Sure Thet SDL_Quit Will Be Called In Case of exit()
+    atexit(SDL_Quit);
+    
+    if (global.Fullscreen) Vflags|=SDL_FULLSCREEN; // If So, We Always Need The Fullscreen Video Init Flag
+    
+    // Our Video Flags Are Set, We're Creating The Window
+    if(!CreateWindowGL(Screen, global.X_Resolution, global.Y_Resolution, global.bppMode, Vflags))
+      {
+	printf("Unable to open screen surface: %s\n", SDL_GetError() );		
+	             // If Something's Gone Wrong, Report
+	exit(1);     // And Exit
+      }
+
+	SDL_WM_SetCaption(APP_NAME, NULL);	      	// We're Setting The Window Caption
+
+	if(!InitTimers(&LastCount))			// We Call The Timers Init Function
+	{
+		printf("Can't init the timers: %s\n", SDL_GetError() );	  // If It Can't Init, Report
+		exit(1);			       // And Exit
+	}
+
+	if(!InitGL(Screen))			       // We're Calling The OpenGL Init Function
+	{
+		printf("Can't init GL: %s\n", SDL_GetError() );	    // If Something's Gone Wrong, Report
+		exit(1);															// And Guess What? Exit
+	}
+
+	if(!Initialize())														// Now We're Initting The Application
+	{
+		printf("App init failed: %s\n", SDL_GetError() );						// Blah Blah Blah, Blah
+		exit(1);															// And Blah
+	}
+
+	isProgramLooping = true;												// Ok, Make Our Program Loop
+
+	while(isProgramLooping)													// And While It's looping
+	{
+		if(SDL_PollEvent(&E))												// We're Fetching The First Event Of The Queue
+		{
+			switch(E.type)													// And Processing It
+			{	
+			case SDL_QUIT:													// It's a QUIT Event?
+				{
+					isProgramLooping = false;								// If Yes, Make The Program Stop Looping
+					break;													// And Break
+				}
+
+			case SDL_VIDEORESIZE:											// It's a RESIZE Event?
+				{
+					ResizeGL(E.resize.w, E.resize.h);						// If Yes, Recalculate The OpenGL Scene Data For The New Window
+					break;													// And Break
+				}
+
+			case SDL_ACTIVEEVENT:											// It's an ACTIVE Event?
+				{
+					if(E.active.state & SDL_APPACTIVE)						// Activity Level Changed? (IE: Iconified?)
+					{
+						if(E.active.gain)									// Activity's Been Gained?
+						{
+							AppStatus.Visible = true;						// If Yes, Set AppStatus.Visible
+						}
+						else												// Otherwhise
+						{
+							AppStatus.Visible = false;						// Reset AppStatus.Visible
+						}
+					}
+					
+					if(E.active.state & SDL_APPMOUSEFOCUS)					// The Mouse Cursor Has Left/Entered The Window Space?
+					{
+						if(E.active.gain)									// Entered?
+						{
+							AppStatus.MouseFocus = true;						// Report It Setting AppStatus.MouseFocus
+						}
+						else												// Otherwhise
+						{
+							AppStatus.MouseFocus = false;					// The Cursor Has Left, Reset AppStatus.MouseFocus
+						}
+					}
+
+					if(E.active.state & SDL_APPINPUTFOCUS)					// The Window Has Gained/Lost Input Focus?
+					{
+						if(E.active.gain)									// Gained?
+						{
+							AppStatus.KeyboardFocus = true;					// Report It Where You Know (You Always Report, You're A Spy, Aren't You?!)
+						}
+						else												// Otherwhise
+						{
+							AppStatus.KeyboardFocus = false;				// Reset AppStatus.KeyboardFocus
+						}
+					}
+					
+					break;													// And Break
+				}
+
+			case SDL_MOUSEMOTION:
+				{
+				  //GuiHandleMove(E.motion.x,E.motion.y);
+					break;
+				}
+
+			case SDL_MOUSEBUTTONDOWN:
+				{
+					GuiHandleClic(E.button.x,E.button.y,E.button.state,E.button.button);
+					break;
+				}
+
+			case SDL_KEYDOWN:												// Someone Has Pressed A Key?
+				{
+					// Send the event to the gui and stop if it has been intercepted
+					if (!GuiHandleKeys(E.key.keysym.sym,GUI_DOWN))
+					{	
+						Keys = SDL_GetKeyState(NULL);						    // Is It's So, Take A SnapShot Of The Keyboard For The Update() Func To Use
+						pressKey(Keys);
+					}
+					break;													// And Break;
+				}
+
+			case SDL_KEYUP:												// Someone Has Pressed A Key?
+				{
+					releaseKey(E.key.keysym.sym); // Handle the info
+				}
+				
+			}
+		}
+		else																// No Events To Poll? (SDL_PollEvent()==0?)
+		{
+			if(!AppStatus.Visible)											// If The Application Is Not Visible
+			{
+				SDL_WaitEvent(NULL);										// Leave The CPU Alone, Don't Waste Time, Simply Wait For An Event
+			}
+			else															// Otherwhise
+			{
+				TickCount = SDL_GetTicks();									// Get Present Ticks
+				Update(TickCount-LastCount);							// And Update The Motions And Data
+				LastCount = TickCount;										// Save The Present Tick Probing
+				Draw();														// Do The Drawings!
+				SDL_GL_SwapBuffers();										// And Swap The Buffers (We're Double-Buffering, Remember?)
+			}
+		}
+	}
+
+	Deinitialize();
+	exit(0);
+
+	return 0;
+	
 }
