@@ -39335,6 +39335,7 @@ void get_lunar_geo_posn_prec(double JD, double * X, double * Y, double * Z, doub
 	double x,y,z;
 	double pw,qw, pwqw, pw2, qw2, ra;
 
+	double rotc, rots, obl;
 
 	/* is precision too low ? */
 	if (precision > 0.01)
@@ -39428,9 +39429,9 @@ void get_lunar_geo_posn_prec(double JD, double * X, double * Y, double * Z, doub
 	c /= AU;
 
     /* Convert in rectangular geocentric equatorial coordinate */
-    double obl=pget_mean_obliquity(JD)*M_PI/180.;
-    double rotc = cos(obl);
-    double rots = sin(obl);
+    obl = pget_mean_obliquity(JD)*M_PI/180.;
+    rotc = cos(obl);
+    rots = sin(obl);
 
     *X = a;
     *Y = rotc * b - rots * c;
