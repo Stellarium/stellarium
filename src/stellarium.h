@@ -40,10 +40,16 @@
 #define MY_MAX(a,b) (((a)>(b))?(a):(b))
 #define MY_MIN(a,b) (((a)<(b))?(a):(b))
 
-// Used for GNU gettext translations	
+// Used for GNU gettext translations
+#ifndef MACOSX
 #include "gettext.h"
 #define _(String) gettext (String)
 #define N_(String) gettext_noop(String)
+#else
+# include "POSupport.h"
+# define _(String) localizedUTF8String(String)
+# define N_(String) (String)
+#endif
 
 #include <cassert>
 
