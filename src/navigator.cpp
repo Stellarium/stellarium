@@ -48,8 +48,17 @@ void navigator::update_vision_vector(int delta_time, stel_object* selected)
     if (flag_auto_move)
     {
 		double ra_aim, de_aim, ra_start, de_start, ra_now, de_now;
-		rect_to_sphe(&ra_aim, &de_aim, earth_equ_to_local(move.aim));
-		rect_to_sphe(&ra_start, &de_start, earth_equ_to_local(move.start));
+
+		if (move.local_pos)
+		{
+			rect_to_sphe(&ra_aim, &de_aim, move.aim);
+			rect_to_sphe(&ra_start, &de_start, move.start);
+		}
+		else
+		{
+			rect_to_sphe(&ra_aim, &de_aim, earth_equ_to_local(move.aim));
+			rect_to_sphe(&ra_start, &de_start, earth_equ_to_local(move.start));
+		}
 
 		// Trick to choose the good moving direction and never travel on a distance > PI
 		float delta = ra_start;
@@ -74,8 +83,16 @@ void navigator::update_vision_vector(int delta_time, stel_object* selected)
         if (move.coef>=1.)
         {
 			flag_auto_move=0;
-            equ_vision=move.aim;
-			local_vision=earth_equ_to_local(equ_vision);
+            if (move.local_pos)
+			{
+				local_vision=move.aim;
+				equ_vision=local_to_earth_equ(equ_vision);
+			}
+			else
+			{
+				equ_vision=move.aim;
+				local_vision=earth_equ_to_local(equ_vision);
+			}
         }
     }
 	else
@@ -206,14 +223,22 @@ Vec3d navigator::get_observer_helio_pos(void) const
 
 ////////////////////////////////////////////////////////////////////////////////
 // Move to the given equatorial position
-void navigator::move_to(const Vec3d& _aim, float move_duration)
+void navigator::move_to(const Vec3d& _aim, float move_duration, bool _local_pos)
 {
 	move.aim=_aim;
     move.aim.normalize();
     move.aim*=2.;
-    move.start=equ_vision;
+	if (_local_pos)
+	{
+		move.start=local_vision;
+	}
+	else
+	{
+		move.start=equ_vision;
+	}
     move.start.normalize();
     move.speed=1.f/(move_duration*1000);
     move.coef=0.;
+	move.local_pos = _local_pos;
     flag_auto_move = true;
 }
