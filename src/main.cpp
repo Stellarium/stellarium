@@ -98,8 +98,7 @@ void glutDisplay(void)
     if ((!global.FlagAtmosphere && global.FlagStars) || 
         (global.SkyBrightness<0.2 && global.FlagStars)) 
     {
-	HipVouteCeleste->Draw(); 
-	//VouteCeleste->Draw();      // Draw the stars
+	HipVouteCeleste->Draw();    // Draw the stars  
     }
 
 /*
@@ -144,6 +143,7 @@ void glutDisplay(void)
     }
     if (global.FlagAtmosphere)       // Calc the atmosphere
     {   
+    	// Draw atmosphere every second frame because it's slow....
         if (++timeAtmosphere>2 && global.SkyBrightness>0)
         {
 	    timeAtmosphere=0;
@@ -399,7 +399,6 @@ void loadParams(void)
         return;
     }
 
-
     cfgStruct cfgini2[] = 
     {// parameter               type        address of variable
         {"LATITUDE",            CFG_DOUBLE, &tempLatitude},
@@ -496,11 +495,12 @@ int main (int argc, char **argv)
     // Set the data directories : test the default installation dir
     // and try to find the files somewhere else if not found there
     char dataRoot[255];
+	char cfgRoot[255];
     char tempName[255];
     char tempName2[255];
     char tempName3[255];
     strcpy(tempName,CONFIG_DATA_DIR);
-    strcat(tempName,"/data/hipparcos.dat");
+    strcat(tempName,"/data/hipparcos.fab");
     FILE * tempFile = fopen(tempName,"r");
     strcpy(dataRoot,CONFIG_DATA_DIR);
     if(!tempFile)
@@ -510,11 +510,11 @@ int main (int argc, char **argv)
         if(!tempFile)
         {	  	
             strcpy(dataRoot,"..");
-            tempFile = fopen("../data/hipparcos.dat","r");
+            tempFile = fopen("../data/hipparcos.fab","r");
             if(!tempFile)
             {
                 strcpy(dataRoot,"$HOME");
-                tempFile = fopen("$HOME/.stellarium/data/hipparcos.dat","r");
+                tempFile = fopen("$HOME/.stellarium/data/hipparcos.fab","r");
                 if(!tempFile)
                 {
                     // Failure....
@@ -528,15 +528,21 @@ int main (int argc, char **argv)
         }
     }
     fclose(tempFile);
+
+
     if (strcmp(dataRoot,CONFIG_DATA_DIR))
 	printf("------>Found data files in %s\n",dataRoot);
     strcpy(global.DataDir,dataRoot);
     strcpy(global.TextureDir,dataRoot);
-    strcpy(global.ConfigDir,dataRoot);
     strcat(global.DataDir,"/data/");
     strcat(global.TextureDir,"/textures/");
+
+	// to change
+	strcpy(cfgRoot,dataRoot);
+	// end
+
+	strcpy(global.ConfigDir,cfgRoot);
     strcat(global.ConfigDir,"/config/");
-    
     
     drawIntro();                     // Print the console logo
     loadParams();                    // Load the params from config.txt
