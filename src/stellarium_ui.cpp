@@ -1021,7 +1021,11 @@ bool GuiHandleKeys(SDLKey key, int state)
 		}
         if(key==SDLK_SPACE)
         {	
-        	if (selected_object) navigation.move_to(selected_object->get_earth_equ_pos());
+        	if (selected_object)
+			{
+				navigation.move_to(selected_object->get_earth_equ_pos());
+				navigation.set_flag_traking(1);
+			}
 		}
         if(key==SDLK_i)
         {	

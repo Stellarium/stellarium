@@ -161,7 +161,6 @@ void planet::draw(void)
 	glPushMatrix();
     glMultMatrixd(mat_local_to_parent); // Go in planet local coordinate
 
-    //glEnable(GL_LIGHTING);
     glEnable(GL_TEXTURE_2D);
 	glEnable(GL_CULL_FACE);
 	glDisable(GL_BLEND);
@@ -173,12 +172,11 @@ void planet::draw(void)
     // planet texture maps where zero deg long. is in the middle of the texture.
 	glRotatef(axis_rotation + 180.,0.,0.,1.);
 
-	glColor3f(1.0f, 1.0f, 1.0f);
+	//glColor3f(1.0f, 1.0f, 1.0f);
 	glBindTexture(GL_TEXTURE_2D, planetTexture->getID());
 	GLUquadricObj * p=gluNewQuadric();
 	gluQuadricTexture(p,GL_TRUE);
-	gluQuadricOrientation(p, GLU_OUTSIDE);
-	gluSphere(p,radius,80,80);
+	gluSphere(p,radius,60,60);
 	gluDeleteQuadric(p);
 
 
@@ -314,13 +312,13 @@ void sun_planet::draw()
     glEnable(GL_TEXTURE_2D);
 	glEnable(GL_CULL_FACE);
 	glDisable(GL_BLEND);
+	glDisable(GL_LIGHTING);
 
 	glColor3f(1.0f, 1.0f, 1.0f);
 	glBindTexture(GL_TEXTURE_2D, planetTexture->getID());
 	GLUquadricObj * p=gluNewQuadric();
 	gluQuadricTexture(p,GL_TRUE);
-	gluQuadricOrientation(p, GLU_OUTSIDE);
-	gluSphere(p,radius,80,80);
+	gluSphere(p,radius,40,40);
 	gluDeleteQuadric(p);
 
 	// Draw the name, and the circle
@@ -333,9 +331,6 @@ void sun_planet::draw()
         if (screenZ < 1)
         {
 		    glEnable(GL_BLEND);
-            glDisable(GL_LIGHTING);
-			glEnable(GL_TEXTURE_2D);
-
             screenY = global.Y_Resolution - screenY;
 
             setOrthographicProjection(global.X_Resolution, global.Y_Resolution);    // 2D coordinate
@@ -356,23 +351,25 @@ void sun_planet::draw()
     }
 
 	// Set the lighting with the sun as light source
-    float tmp[4] = {0,0,0,1};
-	float tmp2[4] = {0.1,0.1,0.1,1};
-    float tmp3[4] = {100000000,100000000,100000000,1};
+    float tmp[4] = {0,0,0,0};
+	float tmp2[4] = {0.1,0.1,0.1,0.1};
+    float tmp3[4] = {2,2,2,2};
     float tmp4[4] = {1,1,1,1};
     glLightfv(GL_LIGHT0,GL_AMBIENT,tmp2);
     glLightfv(GL_LIGHT0,GL_DIFFUSE,tmp3);
     glLightfv(GL_LIGHT0,GL_SPECULAR,tmp);
 
-    glMaterialfv(GL_FRONT_AND_BACK,GL_AMBIENT ,tmp4);
-    glMaterialfv(GL_FRONT_AND_BACK,GL_DIFFUSE ,tmp4);
-    glMaterialfv(GL_FRONT_AND_BACK,GL_EMISSION ,tmp);
-    glMaterialfv(GL_FRONT_AND_BACK,GL_SHININESS ,tmp);
-    glMaterialfv(GL_FRONT_AND_BACK,GL_SPECULAR ,tmp);
+    glMaterialfv(GL_FRONT,GL_AMBIENT ,tmp2);
+    glMaterialfv(GL_FRONT,GL_DIFFUSE ,tmp4);
+    glMaterialfv(GL_FRONT,GL_EMISSION ,tmp);
+    glMaterialfv(GL_FRONT,GL_SHININESS ,tmp);
+    glMaterialfv(GL_FRONT,GL_SPECULAR ,tmp);
 
-    glLightfv(GL_LIGHT0,GL_POSITION,Vec3f(0.,0.,0.));
+	float zero4[4] = {0.,0.,0.,1.};
+    glLightfv(GL_LIGHT0,GL_POSITION,zero4);
 
 	glEnable(GL_LIGHTING);
+	glEnable(GL_LIGHT0);
 
 
     // Draw the satellites
@@ -382,8 +379,6 @@ void sun_planet::draw()
         (*iter)->draw();
         iter++;
     }
-
-    glPopMatrix();
 
 	glDisable(GL_LIGHTING);
     glDisable(GL_CULL_FACE);
