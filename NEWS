@@ -1,3 +1,10 @@
+0.4.8 [14/08/2002]
+Improved automake/autoconf portability
+Full installation with make intall now supported
+Compile and works perfectly on CYGWIN
+Fixed the negative time display bug (with time zones)
+
+
 0.4.7 [17/07/2002]
 Autoconf/automake now works! Linux version available.
 Added the possibility to change the landscape skin.
@@ -18,7 +25,7 @@ Added the info window viewable with the "I" key.
 Improved the navigation system. You now can track an object : usefull to track a plent in accelered time mode.
 Use fopen fclose etc... in place of the c fstream function which are less portable.
 Completely changed the texture management : now use classes.
-The textures are now in png format : use the glpng library.
+The textures are now in png format : use the (included) glpng library.
 Added the possibility to show the names of the stars.
 Added some gui elements in s_gui.h/.cpp
 Improved the memory management for objects labels (dynamic variables).

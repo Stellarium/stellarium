@@ -102,7 +102,11 @@ Planet_mgr::Planet_mgr()
 
 void Planet_mgr::loadTextures()
 {
-    planetNameFont = new s_font(0.014*global.X_Resolution,"spacefont", DATA_DIR "/spacefont.txt"); // load Font
+    
+    char tempName[255];
+    strcpy(tempName,global.DataDir);
+    strcat(tempName,"spacefont.txt");
+    planetNameFont = new s_font(0.014*global.X_Resolution,"spacefont", tempName); // load Font
     if (!planetNameFont)
     {
 	printf("Can't create planetNameFont\n");

@@ -39,7 +39,11 @@ Constellation_mgr::~Constellation_mgr()
 
 // Load from file
 void Constellation_mgr::Load(char * fileName, Star_mgr * _VouteCeleste)
-{   constNameFont = new s_font(0.013*global.X_Resolution,"spacefont", DATA_DIR "/spacefont.txt"); // load Font
+{   
+    char tempName[255];
+    strcpy(tempName,global.DataDir);
+    strcat(tempName,"spacefont.txt");
+    constNameFont = new s_font(0.013*global.X_Resolution,"spacefont", tempName); // load Font
     if (!constNameFont)
     {   printf("Can't create constNameFont\n");
         exit(1);

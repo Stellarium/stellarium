@@ -324,7 +324,10 @@ void loadParams(void)
         {NULL, CFG_END, NULL}   /* no more parameters */
     };
     
-    if (cfgParse(CONFIG_DATA_DIR"/config/config.txt", cfgini, CFG_SIMPLE) == -1)
+    char tempName[255];
+    strcpy(tempName,global.ConfigDir);
+    strcat(tempName,"config.txt");
+    if (cfgParse(tempName, cfgini, CFG_SIMPLE) == -1)
     {   printf("An error was detected in the config file\n");
         return;
     }
@@ -339,7 +342,9 @@ void loadParams(void)
         {NULL, CFG_END, NULL}   /* no more parameters */
     };
 
-    if (cfgParse(CONFIG_DATA_DIR"/config/location.txt", cfgini2, CFG_SIMPLE) == -1)
+    strcpy(tempName,global.ConfigDir);
+    strcat(tempName,"location.txt");
+    if (cfgParse(tempName, cfgini2, CFG_SIMPLE) == -1)
     {   printf("An error was detected in the location file\n");
         return;
     }
@@ -413,6 +418,48 @@ void init()
 // ***************************  Main  **********************************
 int main (void)
 {   
+    // Set the data directories : test the default installation dir
+    // and try to find the files somewhere else if not found there
+    char dataRoot[255];
+    char tempName[255];
+    strcpy(tempName,CONFIG_DATA_DIR);
+    strcat(tempName,"/data/catalog.fab");
+    FILE * tempFile = fopen(tempName,"r");
+    strcpy(dataRoot,CONFIG_DATA_DIR);
+    if(!tempFile)
+    {
+        tempFile = fopen("./data/catalog.fab","r");
+        strcpy(dataRoot,".");
+        if(!tempFile)
+        {
+            strcpy(dataRoot,"..");
+            tempFile = fopen("../data/catalog.fab","r");
+            if(!tempFile)
+            {
+                strcpy(dataRoot,"$HOME");
+                tempFile = fopen("$HOME/.stellarium/data/catalog.fab","r");
+                if(!tempFile)
+                {
+                    // Failure....
+                    printf("ERROR : I can't find the datas directories in :\n");
+                    printf("%s/ nor in ./ nor in ../ nor $HOME/.stellarium/\n",CONFIG_DATA_DIR);
+                    printf("You may fully install the software (on POSIX systems)\n");
+                    printf("or go in the stellarium pakage directory.\n");
+                    exit(-1);
+                }
+            }
+        }
+    }
+    fclose(tempFile);
+    if (strcmp(dataRoot,CONFIG_DATA_DIR)) printf("------>Found data files in %s\n",dataRoot);
+    strcpy(global.DataDir,dataRoot);
+    strcpy(global.TextureDir,dataRoot);
+    strcpy(global.ConfigDir,dataRoot);
+    strcat(global.DataDir,"/data/");
+    strcat(global.TextureDir,"/textures/");
+    strcat(global.ConfigDir,"/config/");
+    
+    
     drawIntro();                                            // Print the console logo
     loadParams();                                           // Load the params from config.txt
     glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE);
@@ -435,7 +482,7 @@ int main (void)
     else                                                    // Windowed mode
     {  
 	    glutCreateWindow(APP_NAME);
-        glutFullScreen();                                   // Windowed fullscreen mode
+        glutFullScreen();                             // Windowed fullscreen mode
         //global.X_Resolution = glutGet(GLUT_SCREEN_WIDTH);
         //global.Y_Resolution = glutGet(GLUT_SCREEN_HEIGHT);
         //glutReshapeWindow(global.X_Resolution, global.Y_Resolution);
@@ -444,9 +491,9 @@ int main (void)
     glutIgnoreKeyRepeat(1);
     glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_FASTEST);
     glDisable(GL_DEPTH_TEST);
-    glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);            // init the blending function parameters (read the doc to understand it ;) ...)
+    glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);      // init the blending function parameters (read the doc to understand it ;) ...)
 
-    init();                                                 // Set the callbacks
+    init();                                           // Set the callbacks
 
     VouteCeleste = new Star_mgr();
     if (!VouteCeleste) exit(1);
@@ -460,16 +507,25 @@ int main (void)
     SolarSystem = new Planet_mgr();
     if (!SolarSystem) exit(1);
 
-    loadCommonTextures();                                   // Load the common used textures
-    SolarSystem->loadTextures(); 
-    VouteCeleste->Load(CONFIG_DATA_DIR"/data/catalog.fab");              // Load stars
-    ConstellCeleste->Load(CONFIG_DATA_DIR"/data/constellationsmaj.fab",VouteCeleste);   // Load constellations      
-    SolarSystem->Compute(global.JDay,global.ThePlace);       // Compute planet data
-    InitMeriParal();                                        // Precalculation for the grids drawing
+    loadCommonTextures();                             // Load the common used textures
+    SolarSystem->loadTextures();
+    
+    strcpy(tempName,global.DataDir);
+    strcat(tempName,"catalog.fab");
+    VouteCeleste->Load(tempName);                     // Load stars
+    
+    strcpy(tempName,global.DataDir);
+    strcat(tempName,"constellationsmaj.fab");
+    ConstellCeleste->Load(tempName,VouteCeleste);     // Load constellations      
+    SolarSystem->Compute(global.JDay,global.ThePlace);// Compute planet data
+    InitMeriParal();                                  // Precalculation for the grids drawing
     InitAtmosphere();
-    messiers->Read(CONFIG_DATA_DIR"/data/messier.fab");                  // read the messiers object data
-    initUi();                                               // initialisation of the User Interface
+    
+    strcpy(tempName,global.DataDir);
+    strcat(tempName,"messier.fab");
+    messiers->Read(tempName);                         // read the messiers object data
+    initUi();                                         // initialisation of the User Interface
     global.XYZVision.Set(0,1,0);
-    glutMainLoop();                                         // Start drawing
+    glutMainLoop();                                   // Start drawing
     return 0;
 }
