@@ -22,7 +22,9 @@
 #include "stel_ui.h"
 #include "stellastro.h"
 #include <iostream>
+#include <fstream>
 #include <iomanip>
+#include <map>
 
 // Draw simple gravity text ui.
 void stel_ui::draw_gravity_ui(void)
@@ -104,10 +106,8 @@ void stel_ui::init_tui(void)
 	tui_menu_location->addComponent(tui_location_altitude);
 
 	// 2. Time
-	tui_time_settmz = new s_tui::MultiSet_item<string>("2.1 Set Time Zone: ");
+	tui_time_settmz = create_tree_from_time_zone_file("/usr/share/zoneinfo/zone.tab");
 	tui_time_settmz->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb_settimezone));
-	tui_time_settmz->addItem("Paris");
-	tui_time_settmz->addItem("New York");
 	tui_time_skytime = new s_tui::Time_item("2.2 Sky Time: ");
 	tui_time_skytime->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb1));
 	tui_time_presetskytime = new s_tui::Time_item("2.3 Preset Sky Time: ");
@@ -329,7 +329,9 @@ void stel_ui::tui_update_widgets(void)
 // Launch script to set time zone in the system locales
 void stel_ui::tui_cb_settimezone(void)
 {
-	//	TODO
+	system( ( core->DataDir + "script_set_time_zone " + tui_time_settmz->getCurrent()->getCleanString() ).c_str() );
+	setenv("TZ", tui_time_settmz->getCurrent()->getCleanString().c_str(),1);
+	tzset();
 }
 
 // Set time format mode
@@ -376,4 +378,45 @@ void stel_ui::tui_cb_admin_updateme(void)
 void stel_ui::tui_cb_tui_effect_change_landscape(void)
 {
 	core->set_landscape(tui_effect_landscape->getCurrent());
+}
+
+// Parse a file of type /usr/share/zoneinfo/zone.tab
+s_tui::MenuBranch_item* stel_ui::create_tree_from_time_zone_file(const string& zonetab)
+{
+	s_tui::MenuBranch_item* retbranch = new s_tui::MenuBranch_item("2.1 Set Time Zone: ");
+
+	ifstream is(zonetab.c_str());
+	char zoneline[256];
+
+	string unused, tzname;
+	map<string, set<string> > geozone;
+
+	while (is.getline(zoneline, 256))
+	{
+		if (zoneline[0]=='#') continue;
+		istringstream istr(zoneline);
+		istr >> unused >> unused >> tzname;
+
+		int pos = tzname.find('/');
+		string continent = tzname.substr(0,pos);
+		string place = tzname.substr(pos+1,tzname.length());
+		geozone[continent].insert(place);
+	}
+
+	for(map<string, set<string> >::const_iterator it=geozone.begin();it!=geozone.end();++it)
+	{
+		s_tui::MultiSet_item_active<string>* continentset =
+			new s_tui::MultiSet_item_active<string>(it->first + "/");
+		continentset->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb_settimezone));
+
+		for (set<string>::const_iterator it2 = it->second.begin();it2!=it->second.end();++it2)
+		{
+			continentset->addItem(*it2);
+			//cout << (*it).first << " " << *it2 << endl;
+		}
+		retbranch->addComponent(continentset);
+	}
+
+	is.close();
+	return retbranch;
 }
