@@ -63,7 +63,7 @@ int s_texture::load()
 
     pngInfo info;
     pngSetStandardOrientation(1);
-    texID = pngBind(fullName.c_str(), PNG_BUILDMIPMAPS, loadType, &info, loadType2, GL_LINEAR, GL_LINEAR);
+    texID = pngBind(fullName.c_str(), PNG_NOMIPMAPS, loadType, &info, loadType2, GL_LINEAR, GL_LINEAR);
 
 	return (texID!=0);
 }

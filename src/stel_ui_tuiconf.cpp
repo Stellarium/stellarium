@@ -108,7 +108,8 @@ void stel_ui::init_tui(void)
 	tui_time_skytime->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb1));
 	tui_time_presetskytime = new s_tui::Time_item("2.3 Preset Sky Time: ");
 	tui_time_presetskytime->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb1));
-	tui_time_actual = new s_tui::Action_item("2.4 Set Time to actual: ", "No");
+	tui_time_actual = new s_tui::Time_item("2.4 Set Actual Time: ");
+	tui_time_actual->setJDay(get_julian_from_sys() + core->observatory->get_GMT_shift(core->PresetSkyTime) * JD_HOUR);
 	tui_time_actual->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb_actualtime));
 	tui_time_startuptime = new s_tui::MultiSet_item<string>("2.5 Sky Time At Start-up: ");
 	tui_time_startuptime->addItem("Actual");
@@ -247,7 +248,7 @@ void stel_ui::tui_cb_settimedisplayformat(void)
 void stel_ui::tui_cb_actualtime(void)
 {
 	system( ( core->DataDir + "script_set_system_time " +
-	core->observatory->get_ISO8601_time_UTC(core->navigation->get_JDay()) ).c_str() );
+		core->observatory->get_ISO8601_time_UTC(tui_time_actual->getJDay()) ).c_str() );
 }
 
 // 5. Administration actions functions
@@ -320,5 +321,32 @@ s_tui::MenuBranch_item* stel_ui::create_tree_from_time_zone_file(const string& z
 	}
 
 	is.close();
+
+	// Try to detect which time zone is currently used by the system from the TZ environment variable
+	char * temp = getenv("TZ");
+	string currenttz;
+	if (temp!=NULL)
+	{
+		currenttz = temp;
+	}
+	if (currenttz.empty())
+	{
+		cout << "The TZ environment variable wasn't set." << endl;
+		cout << "The default value in the set time zone menu will be incorrect. The system time zone will be used though.." << endl;
+		return retbranch;
+	}
+
+	int pos = currenttz.find('/');
+	string continent = currenttz.substr(0,pos);
+	string place = currenttz.substr(pos+1,currenttz.length());
+	if (!retbranch->setValue_Specialslash(continent))
+	{
+		cout << "Can't find continent " << continent << " in the continent list" << endl;
+	}
+	s_tui::MultiSet_item_active<string>* tempcomp = (s_tui::MultiSet_item_active<string>*)retbranch->getCurrent();
+	if (!tempcomp->setValue(place))
+	{
+		cout << "Can't find city " << place << " in the city list of " << continent << endl;
+	}
 	return retbranch;
 }

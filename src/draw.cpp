@@ -309,7 +309,7 @@ MilkyWay::MilkyWay(const string& tex_file, double _radius) : radius(_radius)
 	tex = new s_texture(tex_file,TEX_LOAD_TYPE_PNG_SOLID_REPEAT);
 
 	// Scotopic color = 0.25, 0.25 in xyY mode. Global stars luminance ~= 0.001 cd/m^2
-	color = Vec3f(0.25f, 0.25f, 0.001f/tex->get_average_luminance());
+	color = Vec3f(0.25f, 0.25f, 0.05f/tex->get_average_luminance());
 }
 
 MilkyWay::~MilkyWay()
@@ -332,9 +332,9 @@ void MilkyWay::draw(tone_reproductor * eye, const Projector* prj, const navigato
 
 	prj->sSphere(radius,20,20,
 		nav->get_earth_equ_to_eye_mat()*
-		Mat4d::xrotation(M_PI/180*35)*
+		Mat4d::xrotation(M_PI/180*31)*
 		Mat4d::yrotation(M_PI/180*125)*
-		Mat4d::zrotation(M_PI/180*380), 1);
+		Mat4d::zrotation(M_PI/180*391), 1);
 
     glDisable(GL_CULL_FACE);
 }

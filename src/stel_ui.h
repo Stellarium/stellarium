@@ -138,7 +138,7 @@ private:
 	s_tui::MenuBranch_item* tui_time_settmz;
 	s_tui::Time_item* tui_time_skytime;
 	s_tui::Time_item* tui_time_presetskytime;
-	s_tui::Action_item* tui_time_actual;
+	s_tui::Time_item* tui_time_actual;
 	s_tui::MultiSet_item<string>* tui_time_startuptime;
 	s_tui::MultiSet_item<string>* tui_time_displayformat;
 
