@@ -1,4 +1,7 @@
 /*
+Copyright (C) 2000 Liam Girdwood <liam@nova-ioe.org>
+Copyright (C) 2003 Fabien Chéreau
+
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU Library General Public License as published by
 the Free Software Foundation; either version 2 of the License, or
@@ -11,10 +14,7 @@ GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
-Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA. 
-
-Copyright (C) 2000 Liam Girdwood <liam@nova-ioe.org>
-
+Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 */
 
 #include "stellastro.h"
@@ -23,22 +23,24 @@ Copyright (C) 2000 Liam Girdwood <liam@nova-ioe.org>
 /* Calculate the julian day from a calendar day.
  * Valid for positive and negative years but not for negative JD.
  * Formula 7.1 on pg 61 */
-double get_julian_day (const ln_date * date)
+double get_julian_day (const ln_date * cdate)
 {
     double days;
     int a,b;
-    
+	ln_date date;
+	date = *cdate;
+
     /* check for month = January or February */
-    if (date->months < 3 )
+    if (date.months < 3 )
     {
-        date->years--;
-	    date->months += 12;
+        date.years--;
+	    date.months += 12;
 	}
 	
-	a = date->years / 100;
+	a = date.years / 100;
 	
 	/* check for Julian or Gregorian calendar (starts Oct 4th 1582) */
-	if (date->years > 1582 || (date->years == 1582 && (date->months > 10 || (date->months == 10 && date->days >= 4))))
+	if (date.years > 1582 || (date.years == 1582 && (date.months > 10 || (date.months == 10 && date.days >= 4))))
 	{
 	    /* Gregorian calendar */    
 	    b = 2 - a + (a / 4);
@@ -50,11 +52,12 @@ double get_julian_day (const ln_date * date)
 	}
 	
 	/* add a fraction of hours, minutes and secs to days*/
-	days = date->days + (double)(date->hours / 24.0) + (double)(date->minutes / 1440.0) + (double)(date->seconds /  86400.0);
+	days = date.days + (double)(date.hours / 24.0) + (double)(date.minutes / 1440.0) +
+		(double)(date.seconds /  86400.0);
 
 	/* now get the JD */
-	return (int)(365.25 * (date->years + 4716)) +
-	    (int)(30.6001 * (date->months + 1)) + days + b - 1524.5;
+	return (int)(365.25 * (date.years + 4716)) +
+	    (int)(30.6001 * (date.months + 1)) + days + b - 1524.5;
 }
 
 
@@ -62,18 +65,11 @@ double get_julian_day (const ln_date * date)
  * Returns 0 = Sunday .. 6 = Saturday */
 unsigned int get_day_of_week (const ln_date *date)
 {
-    unsigned int day;
     double JD;
-    
     /* get julian day */
-    JD = get_julian_day (date);
-    
-    JD += 1.5;
-    
-    day = (int)JD % 7; 
-    
-    return (day);
-}	
+    JD = get_julian_day(date) + 1.5;
+    return (int)JD % 7;
+}
 
 
 /* Calculate the date from the Julian day
@@ -135,23 +131,18 @@ void get_date (double JD, ln_date * date)
 
 
 /* Calculate julian day from system time. */
-double get_julian_from_sys ()
+double get_julian_from_sys(void)
 {
-	double JD;
 	ln_date date;
-	
 	/* get sys date */
-	get_ln_date_from_sys (&date);
-	
-	JD = get_julian_day (&date);
-	
-	return (JD);
+	get_ln_date_from_sys(&date);
+	return get_julian_day(&date);
 }
 
 
 /* Calculate gmt date from system date.
  * param : date Pointer to store date. */
-void get_ln_date_from_sys (ln_date * date)
+void get_ln_date_from_sys(ln_date * date)
 {
 	time_t rawtime;
 	struct tm * ptm;

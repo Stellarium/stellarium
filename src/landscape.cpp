@@ -271,7 +271,7 @@ void Landscape_fisheye::draw(tone_reproductor * eye, const Projector* prj, const
 	glEnable(GL_TEXTURE_2D);
 	glEnable(GL_BLEND);
 	glBindTexture(GL_TEXTURE_2D, map_tex->getID());
-	if (flag_ground) prj->sSphere_map(radius,40,40, nav->get_local_to_eye_mat(), tex_fov, 1);
+	if (flag_ground) prj->sSphere_map(radius,40,20, nav->get_local_to_eye_mat(), tex_fov, 1);
 
     glDisable(GL_CULL_FACE);
 

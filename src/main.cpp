@@ -28,8 +28,6 @@ char DDIR[255];	// Data Directory
 char TDIR[255];	// Textures Directory
 char CDIR[255];	// Config Directory
 
-s_texture * texIds[200];			// Common Textures TODO : remove that!
-
 // Print a beautiful console logo !!
 void drawIntro(void)
 {
@@ -238,7 +236,7 @@ int main(int argc, char **argv)
 	core->set_config_files("config.txt", "location.txt");
 
 	// Load the configuration options from the given file names
-	// This include the video parameters
+	// This includes the video parameters
 	core->load_config();
 
 	// Create a stellarium sdl manager
