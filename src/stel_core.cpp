@@ -33,7 +33,6 @@ stel_core::stel_core() : screen_W(800), screen_H(600), bppMode(16), Fullscreen(0
     ConfigDir[0] = 0;
     DataDir[0] = 0;
 	landscape_name[0] = 0;
-	navigation = new navigator();
 	projector_type = PERSPECTIVE_PROJECTOR;
 }
 
@@ -77,6 +76,12 @@ void stel_core::init(void)
 	// Set textures directory and suffix
 	s_texture::set_texDir(TextureDir);
 	s_texture::set_suffix(".png");
+
+	navigation = new navigator();
+	navigation->load_position(PositionFile.c_str());
+	if (InitDate=="preset") navigation->set_JDay(PresetSkyTime);
+	else navigation->set_JDay(get_julian_from_sys());
+	navigation->set_local_vision(InitViewPos);
 
     hip_stars = new Hip_Star_mgr();
     asterisms = new Constellation_mgr();
@@ -277,6 +282,7 @@ void stel_core::draw(int delta_time)
 	// Draw the hipparcos stars
 	Vec3d tempv = navigation->get_equ_vision();
 	Vec3f temp(tempv[0],tempv[1],tempv[2]);
+
 	if (FlagStars && (!FlagAtmosphere || sky_brightness<0.1))
 	{
 		hip_stars->draw(StarScale, StarMagScale, FlagStarTwinkle ? StarTwinkleAmount : 0.f, FlagStarName,
@@ -331,32 +337,26 @@ void stel_core::draw(int delta_time)
     if (FlagCardinalPoints) cardinals_points->draw(projection, FlagGravityLabels);
 
     // ---- 2D Displays
+
     ui->draw();
-	ui->draw_tui();
+
+	if (FlagShowTui) ui->draw_tui();
+
 	ui->draw_gravity_ui();
 }
 
 void stel_core::load_config(void)
 {
-    char tempName[255];
-    char tempName2[255];
+	PositionFile = string(ConfigDir) + location_file;
 
-    strcpy(tempName,ConfigDir);
-    strcat(tempName,config_file);
-    strcpy(tempName2,ConfigDir);
-    strcat(tempName2,location_file);
-
-	navigation->load_position(tempName2);
-
-    printf("Loading configuration file... (%s)\n",tempName);
+    cout << "Loading configuration file... " << string(ConfigDir) + config_file << endl;
 
 	if (conf) delete (conf);
-	conf = new init_parser(tempName);
+	conf = new init_parser(string(ConfigDir) + config_file);
 	conf->load();
 
 	// Main section
-	char * version = NULL;
-	if (conf->get_str("main:version")) version = strdup(conf->get_str("main:version"));
+	string version 		= conf->get_str("main:version");
 
 	// Video Section
 	Fullscreen			= conf->get_boolean("video:fullscreen");
@@ -365,26 +365,25 @@ void stel_core::load_config(void)
 	bppMode				= conf->get_int    ("video:bbp_mode");
 
 	// Projector
-	const char* tmpstr;
-	tmpstr = conf->get_str("projection:type");
-	if (!tmpstr || !strcmp(tmpstr,"perspective")) projector_type = PERSPECTIVE_PROJECTOR;
+	string tmpstr = conf->get_str("projection:type");
+	if (tmpstr=="perspective") projector_type = PERSPECTIVE_PROJECTOR;
 	else
-	if (!strcmp(tmpstr,"fisheye")) projector_type = FISHEYE_PROJECTOR;
+	if (tmpstr=="fisheye") projector_type = FISHEYE_PROJECTOR;
 	else
 	{
-		printf("ERROR : Unknown projector type : %s\n",tmpstr);
+		cout << "ERROR : Unknown projector type : " << tmpstr << endl;
 		exit(-1);
 	}
 
 	tmpstr = conf->get_str("projection:viewport");
-	if (!tmpstr || !strcmp(tmpstr,"maximized")) viewport_type = MAXIMIZED;
+	if (tmpstr=="maximized") viewport_type = MAXIMIZED;
 	else
-	if (!strcmp(tmpstr,"square")) viewport_type = SQUARE;
+	if (tmpstr=="square") viewport_type = SQUARE;
 	else
-	if (!strcmp(tmpstr,"disk")) viewport_type = DISK;
+	if (tmpstr=="disk") viewport_type = DISK;
 	else
 	{
-		printf("ERROR : Unknown viewport type : %s\n",tmpstr);
+		cout << "ERROR : Unknown viewport type : " << tmpstr << endl;
 		exit(-1);
 	}
 
@@ -407,30 +406,28 @@ void stel_core::load_config(void)
 	FlagShowAppName		= conf->get_boolean("gui:flag_show_appname");
 	FlagShowFov			= conf->get_boolean("gui:flag_show_fov");
 	FlagShowSelectedObjectInfos = conf->get_boolean("gui:flag_show_selected_object_info");
-	GuiBaseColor		= str_to_vec3f(conf->get_str("gui:gui_base_color"));
-	GuiTextColor		= str_to_vec3f(conf->get_str("gui:gui_text_color"));
+	GuiBaseColor		= str_to_vec3f(conf->get_str("gui:gui_base_color").c_str());
+	GuiTextColor		= str_to_vec3f(conf->get_str("gui:gui_text_color").c_str());
 
 	// Text ui section
+	FlagShowTui = conf->get_boolean("tui:flag_show_tui");
 	FlagShowTuiDateTime = conf->get_boolean("tui:flag_show_tui_datetime");
 	FlagShowTuiShortInfo = conf->get_boolean("tui:flag_show_tui_short_obj_info");
 
 	// Navigation section
-	navigation->set_flag_lock_equ_pos(conf->get_boolean("navigation:flag_lock_equ_pos"));
+	PresetSkyTime 		= conf->get_double ("navigation","preset_sky_time",2451545.);
 
-    // init the time parameters with current time and date
-	const ln_date * pDate = str_to_date(conf->get_str("navigation:date"),conf->get_str("navigation:time"));
-
-	if (pDate) navigation->set_JDay(get_julian_day(pDate));
-	else navigation->set_JDay(get_julian_from_sys());
+	// Can be "now" or "preset"
+	InitDate = conf->get_str("navigation:init_date");
 
 	FlagEnableZoomKeys	= conf->get_boolean("navigation:flag_enable_zoom_keys");
 	FlagEnableMoveKeys	= conf->get_boolean("navigation:flag_enable_move_keys");
 	initFov				= conf->get_double ("navigation","init_fov",60.);
-	navigation->set_local_vision(str_to_vec3f(conf->get_str("navigation:init_view_pos")));
+	InitViewPos 		= str_to_vec3f(conf->get_str("navigation:init_view_pos").c_str());
 	auto_move_duration	= conf->get_double ("navigation","auto_move_duration",1.);
 
 	// Landscape section
-	if (conf->get_str("landscape:landscape_name")) strcpy(landscape_name,conf->get_str("landscape:landscape_name"));
+	landscape_name 		= conf->get_str("landscape:landscape_name");
 	FlagGround			= conf->get_boolean("landscape:flag_ground");
 	FlagHorizon			= conf->get_boolean("landscape:flag_horizon");
 	FlagFog				= conf->get_boolean("landscape:flag_fog");
@@ -505,11 +502,12 @@ int stel_core::handle_move(int x, int y)
 // Handle key press and release
 int stel_core::handle_keys(SDLKey key, s_gui::S_GUI_VALUE state)
 {
-	if (ui->handle_keys(key, state)) return 1;
 	s_tui::S_TUI_VALUE tuiv;
 	if (state == s_gui::S_GUI_PRESSED) tuiv = s_tui::S_TUI_PRESSED;
 	else tuiv = s_tui::S_TUI_RELEASED;
-	if (ui->handle_keys_tui(key, tuiv)) return 1;
+	if (FlagShowTui && ui->handle_keys_tui(key, tuiv)) return 1;
+
+	if (ui->handle_keys(key, state)) return 1;
 
 	if (state == S_GUI_PRESSED)
 	{

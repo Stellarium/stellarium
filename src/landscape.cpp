@@ -20,41 +20,39 @@
 #include "landscape.h"
 #include "init_parser.h"
 
-Landscape::Landscape(float _radius) : radius(_radius), name(NULL), sky_brightness(1.)
+Landscape::Landscape(float _radius) : radius(_radius), sky_brightness(1.)
 {
 }
 
 Landscape::~Landscape()
 {
-	if (name) delete name;
-	name = NULL;
 }
 
-Landscape* Landscape::create_from_file(const char* landscape_file, const char* section_name)
+Landscape* Landscape::create_from_file(const string& landscape_file, const string& section_name)
 {
 	init_parser pd(landscape_file);	// The landscape data ini file parser
 	pd.load();
-	const char* s;
+	string s;
 	s = pd.get_str(section_name, "type");
-	if (s==NULL)
+	if (s.empty())
 	{
-		printf("ERROR : can't find type for landscape section %s\n",section_name);
+		cout << "ERROR : can't find type for landscape section " << section_name << endl;
 		exit(-1);
 	}
-	if (!strcmp(s, "old_style"))
+	if (s=="old_style")
 	{
 		Landscape_old_style* ldscp = new Landscape_old_style();
 		ldscp->load(landscape_file, section_name);
 		return ldscp;
 	}
-	if (!strcmp(s, "fisheye"))
+	if (s=="fisheye")
 	{
 		Landscape_fisheye* ldscp = new Landscape_fisheye();
 		ldscp->load(landscape_file, section_name);
 		return ldscp;
 	}
 
-	printf("ERROR : can't understand landscape type for landscape section %s\n",section_name);
+	cout << "ERROR : can't understand landscape type for landscape section " << section_name << endl;
 	exit(-1);
 }
 
@@ -64,8 +62,6 @@ Landscape_old_style::Landscape_old_style(float _radius) : Landscape(_radius), si
 
 Landscape_old_style::~Landscape_old_style()
 {
-	if (name) delete name;
-	name = NULL;
 	if (side_texs)
 	{
 		for (int i=0;i<nb_side_texs;++i)
@@ -80,13 +76,12 @@ Landscape_old_style::~Landscape_old_style()
 	if (fog_tex) delete fog_tex;
 }
 
-void Landscape_old_style::load(const char* landscape_file, const char* section_name)
+void Landscape_old_style::load(const string& landscape_file, const string& section_name)
 {
 	init_parser pd(landscape_file);	// The landscape data ini file parser
 	pd.load();
-	if (name) free(name);
-	name = NULL;
-	name = strdup(pd.get_str(section_name, "name"));
+
+	name = pd.get_str(section_name, "name");
 
 	// Load sides textures
 	nb_side_texs = pd.get_int(section_name, "nbsidetex", 0);
@@ -101,14 +96,14 @@ void Landscape_old_style::load(const char* landscape_file, const char* section_n
 	// Init sides parameters
 	nb_side = pd.get_int(section_name, "nbside", 0);
 	sides = new landscape_tex_coord[nb_side];
-	const char* s;
+	string s;
 	int texnum;
 	float a,b,c,d;
 	for (int i=0;i<nb_side;++i)
 	{
 		sprintf(tmp,"side%d",i);
 		s = pd.get_str(section_name, tmp);
-		sscanf(s,"tex%d:%f:%f:%f:%f",&texnum,&a,&b,&c,&d);
+		sscanf(s.c_str(),"tex%d:%f:%f:%f:%f",&texnum,&a,&b,&c,&d);
 		sides[i].tex = side_texs[texnum];
 		sides[i].tex_coords[0] = a;
 		sides[i].tex_coords[1] = b;
@@ -121,7 +116,7 @@ void Landscape_old_style::load(const char* landscape_file, const char* section_n
 
 	ground_tex = new s_texture(pd.get_str(section_name, "groundtex"),TEX_LOAD_TYPE_PNG_SOLID);
 	s = pd.get_str(section_name, "ground");
-	sscanf(s,"groundtex:%f:%f:%f:%f",&a,&b,&c,&d);
+	sscanf(s.c_str(),"groundtex:%f:%f:%f:%f",&a,&b,&c,&d);
 	ground_tex_coord.tex = ground_tex;
 	ground_tex_coord.tex_coords[0] = a;
 	ground_tex_coord.tex_coords[1] = b;
@@ -130,7 +125,7 @@ void Landscape_old_style::load(const char* landscape_file, const char* section_n
 
 	fog_tex = new s_texture(pd.get_str(section_name, "fogtex"),TEX_LOAD_TYPE_PNG_SOLID_REPEAT);
 	s = pd.get_str(section_name, "fog");
-	sscanf(s,"fogtex:%f:%f:%f:%f",&a,&b,&c,&d);
+	sscanf(s.c_str(),"fogtex:%f:%f:%f:%f",&a,&b,&c,&d);
 	fog_tex_coord.tex = fog_tex;
 	fog_tex_coord.tex_coords[0] = a;
 	fog_tex_coord.tex_coords[1] = b;
@@ -248,13 +243,11 @@ Landscape_fisheye::~Landscape_fisheye()
 	map_tex = NULL;
 }
 
-void Landscape_fisheye::load(const char* landscape_file, const char* section_name)
+void Landscape_fisheye::load(const string& landscape_file, const string& section_name)
 {
 	init_parser pd(landscape_file);	// The landscape data ini file parser
 	pd.load();
-	if (name) free(name);
-	name = NULL;
-	name = strdup(pd.get_str(section_name, "name"));
+	name = pd.get_str(section_name, "name");
 	map_tex = new s_texture(pd.get_str(section_name, "maptex"),TEX_LOAD_TYPE_PNG_ALPHA);
 	tex_fov = pd.get_double(section_name, "texturefov", 360) * M_PI/180.;
 }

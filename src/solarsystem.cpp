@@ -20,6 +20,7 @@
 using namespace std;
 
 #include <algorithm>
+#include <iostream>
 #include "solarsystem.h"
 #include "s_texture.h"
 #include "stellplanet.h"
@@ -53,7 +54,7 @@ SolarSystem::~SolarSystem()
 
 
 // Init and load the solar system data
-void SolarSystem::init(const char* font_fileName, const char* planetfile)
+void SolarSystem::init(const string& font_fileName, const string& planetfile)
 {
     planet_name_font = new s_font(13,"spacefont", font_fileName);
     if (!planet_name_font)
@@ -66,7 +67,7 @@ void SolarSystem::init(const char* font_fileName, const char* planetfile)
 }
 
 // Init and load the solar system data
-void SolarSystem::load(const char* planetfile)
+void SolarSystem::load(const string& planetfile)
 {
 	printf("Loading Solar System data...\n");
 	init_parser pd(planetfile);	// The planet data ini file parser
@@ -75,14 +76,14 @@ void SolarSystem::load(const char* planetfile)
 	int nbSections = pd.get_nsec();
 	for (int i = 0;i<nbSections;++i)
 	{
-		const char* secname = pd.get_secname(i);
-		const char * tname = pd.get_str(secname, "name");
-		const char* funcname = pd.get_str(secname, "coord_func");
+		string secname = pd.get_secname(i);
+		string tname = pd.get_str(secname, "name");
+		string funcname = pd.get_str(secname, "coord_func");
 
 		pos_func_type posfunc;
 		EllipticalOrbit* orb = NULL;
 
-		if (!strcmp(funcname, "ell_orbit"))
+		if (funcname=="ell_orbit")
 		{
 			// Read the orbital elements
 			double period = pd.get_double(secname, "orbit_Period");
@@ -106,62 +107,62 @@ void SolarSystem::load(const char* planetfile)
 			posfunc = pos_func_type(orb, &EllipticalOrbit::positionAtTimev);
 		}
 
-		if (!strcmp(funcname, "sun_special"))
+		if (funcname=="sun_special")
 			posfunc = pos_func_type(get_sun_helio_coordsv);
 
-		if (!strcmp(funcname, "mercury_special"))
+		if (funcname=="mercury_special")
 			posfunc = pos_func_type(get_mercury_helio_coordsv);
 
-		if (!strcmp(funcname, "venus_special"))
+		if (funcname=="venus_special")
 			posfunc = pos_func_type(get_venus_helio_coordsv);
 
-		if (!strcmp(funcname, "earth_special"))
+		if (funcname=="earth_special")
 			posfunc = pos_func_type(get_earth_helio_coordsv);
 
-		if (!strcmp(funcname, "lunar_special"))
+		if (funcname=="lunar_special")
 			posfunc = pos_func_type(get_lunar_geo_posnv);
 
-		if (!strcmp(funcname, "mars_special"))
+		if (funcname=="mars_special")
 			posfunc = pos_func_type(get_mars_helio_coordsv);
 
-		if (!strcmp(funcname, "jupiter_special"))
+		if (funcname=="jupiter_special")
 			posfunc = pos_func_type(get_jupiter_helio_coordsv);
 
-		if (!strcmp(funcname, "saturn_special"))
+		if (funcname=="saturn_special")
 			posfunc = pos_func_type(get_saturn_helio_coordsv);
 
-		if (!strcmp(funcname, "uranus_special"))
+		if (funcname=="uranus_special")
 			posfunc = pos_func_type(get_uranus_helio_coordsv);
 
-		if (!strcmp(funcname, "neptune_special"))
+		if (funcname=="neptune_special")
 			posfunc = pos_func_type(get_neptune_helio_coordsv);
 
-		if (!strcmp(funcname, "pluto_special"))
+		if (funcname=="pluto_special")
 			posfunc = pos_func_type(get_pluto_helio_coordsv);
 
 
 		if (posfunc.empty())
 		{
-			printf("ERROR : can't find posfunc %s for %s\n",funcname,tname);
+			cout << "ERROR : can't find posfunc %s for " << funcname << tname << endl;
 			exit(-1);
 		}
 
 		// Create the planet and add it to the list
 		planet* p = new planet(tname, pd.get_boolean(secname, "halo"),
 			pd.get_boolean(secname, "lightning"), pd.get_double(secname, "radius")/AU,
-			str_to_vec3f(pd.get_str(secname, "color")), pd.get_double(secname, "albedo"),
+			str_to_vec3f(pd.get_str(secname, "color").c_str()), pd.get_double(secname, "albedo"),
 			pd.get_str(secname, "tex_map"), pd.get_str(secname, "tex_halo"), posfunc);
 
-		const char * str_parent = pd.get_str(secname, "parent");
+		string str_parent = pd.get_str(secname, "parent");
 
-		if (strcmp(str_parent, "none"))
+		if (str_parent!="none")
 		{
 			// Look in the other planets the one named with str_parent
 			bool have_parent = false;
     		vector<planet*>::iterator iter = system_planets.begin();
     		while (iter != system_planets.end())
     		{
-        		if (!strcmp((*iter)->get_name(),str_parent))
+        		if ((*iter)->get_name()==str_parent)
 				{
 					(*iter)->add_satellite(p);
 					have_parent = true;
@@ -170,14 +171,14 @@ void SolarSystem::load(const char* planetfile)
     		}
 			if (!have_parent)
 			{
-				printf("ERROR : can't find parent for %s\n",tname);
+				cout << "ERROR : can't find parent for " << tname << endl;
 				exit(-1);
 			}
 		}
 
-		if (!strcmp(tname, "Earth")) earth = p;
-		if (!strcmp(tname, "Sun")) sun = p;
-		if (!strcmp(tname, "Moon")) moon = p;
+		if (tname=="Earth") earth = p;
+		if (tname=="Sun") sun = p;
+		if (tname=="Moon") moon = p;
 
 		p->set_rotation_elements(
 			pd.get_double(secname, "rot_periode", pd.get_double(secname, "orbit_Period", 24.))/24.,

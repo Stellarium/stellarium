@@ -354,7 +354,7 @@ void Projector::sCylinder(GLdouble radius, GLdouble height, GLint slices, GLint 
 }
 
 
-void Projector::print_gravity(const s_font* font, float x, float y, const char * str, float xshift, float yshift) const
+void Projector::print_gravity(const s_font* font, float x, float y, const string& str, float xshift, float yshift) const
 {
 	static Vec3d top(0., 0., 1.);
 	static Vec3d v;
@@ -364,7 +364,7 @@ void Projector::print_gravity(const s_font* font, float x, float y, const char *
 	dy = y-v[1];
 	d = sqrt(dx*dx + dy*dy);
 	float theta = M_PI + atan2(dx, dy);
-	float psi = atan2((float)font->getStrLen(str)/strlen(str),d) * 180./M_PI;
+	float psi = atan2((float)font->getStrLen(str)/str.length(),d) * 180./M_PI;
 	if (psi>20) psi = 20;
 	set_orthographic_projection();
 	glTranslatef(x,y,0);
@@ -372,7 +372,7 @@ void Projector::print_gravity(const s_font* font, float x, float y, const char *
 	glTranslatef(sinf(xshift/d)*d,(1.f-cosf(xshift/d))*d + yshift,0);
 	glRotatef(xshift/d*180./M_PI,0,0,1);
 	glScalef(1, -1, 1);
-	for (unsigned int i=0;i<strlen(str);++i)
+	for (unsigned int i=0;i<str.length();++i)
 	{
 		font->print_char(str[i]);
 		glRotatef(psi,0,0,-1);
@@ -380,7 +380,7 @@ void Projector::print_gravity(const s_font* font, float x, float y, const char *
 	reset_perspective_projection();
 }
 
-void Projector::print_gravity180(const s_font* font, float x, float y, const char * str,
+void Projector::print_gravity180(const s_font* font, float x, float y, const string& str,
 	float xshift, float yshift) const
 {
 	static float dx, dy, d;
@@ -388,7 +388,7 @@ void Projector::print_gravity180(const s_font* font, float x, float y, const cha
 	dy = y-(vec_viewport[1] + vec_viewport[3]/2);
 	d = sqrt(dx*dx + dy*dy);
 	float theta = M_PI + atan2(dx, dy);
-	float psi = atan2((float)font->getStrLen(str)/strlen(str),d) * 180./M_PI;
+	float psi = atan2((float)font->getStrLen(str)/str.length(),d) * 180./M_PI;
 	if (psi>20) psi = 20;
 	set_orthographic_projection();
 	glTranslatef(x,y,0);
@@ -396,7 +396,7 @@ void Projector::print_gravity180(const s_font* font, float x, float y, const cha
 	glTranslatef(sinf(xshift/d)*d,(1.f-cosf(xshift/d))*d + yshift,0);
 	glRotatef(xshift/d*180./M_PI,0,0,1);
 	glScalef(1, -1, 1);
-	for (unsigned int i=0;i<strlen(str);++i)
+	for (unsigned int i=0;i<str.length();++i)
 	{
 		font->print_char(str[i]);
 		glRotatef(psi,0,0,-1);

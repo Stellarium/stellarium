@@ -29,14 +29,10 @@
 
 #define RADIUS_STAR 1.
 
-Hip_Star_mgr::Hip_Star_mgr() : starZones(NULL), HipGrid(), StarArray(NULL), starTexture(NULL), starFont(NULL)
+Hip_Star_mgr::Hip_Star_mgr() : starZones(NULL), HipGrid(), StarArray(NULL), StarArraySize(0),
+	starTexture(NULL), starFont(NULL)
 {
 	starZones = new vector<Hip_Star*>[HipGrid.getNbPoints()];
-
-	for (int i=0;i<StarArraySize;i++)
-	{
-		StarArray[i]=NULL;
-	}
 }
 
 Hip_Star_mgr::~Hip_Star_mgr()
@@ -60,7 +56,7 @@ Hip_Star_mgr::~Hip_Star_mgr()
 
 // Load from file ( create the stream and call the Read function )
 void Hip_Star_mgr::load(char * font_fileName, char * hipCatFile, char * commonNameFile, char * nameFile)
-{   
+{
     printf("Loading Hipparcos star data...\n");
     FILE * hipFile, *cnFile, * nFile;
     hipFile=fopen(hipCatFile,"rb");
@@ -88,6 +84,7 @@ void Hip_Star_mgr::load(char * font_fileName, char * hipCatFile, char * commonNa
     LE_TO_CPU_INT32(catalogSize,catalogSize);  
     
     StarArraySize = catalogSize;//120417;
+
     // Create the sequential array
     StarArray = new Hip_Star*[StarArraySize];
 	for (int i=0;i<StarArraySize;++i)
@@ -196,7 +193,6 @@ void Hip_Star_mgr::draw(float _star_scale, float _star_mag_scale, float _twinkle
     	{
 			// If too small, skip and Compute the 2D position and check if in screen
 			if ((*iter)->Mag>maxMag || !prj->project_earth_equ_check((*iter)->XYZ, (*iter)->XY)) continue;
-
 			(*iter)->draw();
 			if (name_ON && (*iter)->CommonName && (*iter)->Mag<maxMagStarName)
             {
