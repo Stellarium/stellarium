@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium 0.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-03-24 00:37+0100\n"
+"POT-Creation-Date: 2005-03-25 23:57+0100\n"
 "PO-Revision-Date: 2004-12-22 00:25+0100\n"
 "Last-Translator:  <fazylova_genia@mail.ru>\n"
 "Language-Team: Russian <ru@li.org>\n"
@@ -80,22 +80,22 @@ msgid ""
 msgstr ""
 
 #. North
-#: src/draw.cpp:343
+#: src/draw.cpp:348
 msgid "N"
 msgstr ""
 
 #. South
-#: src/draw.cpp:345
+#: src/draw.cpp:350
 msgid "S"
 msgstr ""
 
 #. East
-#: src/draw.cpp:347
+#: src/draw.cpp:352
 msgid "E"
 msgstr ""
 
 #. West
-#: src/draw.cpp:349
+#: src/draw.cpp:354
 msgid "W"
 msgstr ""
 
@@ -184,17 +184,17 @@ msgstr ""
 msgid "Saving location %s to file %s\n"
 msgstr ""
 
-#: src/planet.cpp:85
+#: src/planet.cpp:84
 #, c-format
 msgid ""
 "Name :%s%s\n"
 "RA : %s\n"
 "DE : %s\n"
-"Distance : %.8f UA\n"
+"Distance : %.8f AU\n"
 "Magnitude : %.2f"
 msgstr ""
 
-#: src/planet.cpp:96
+#: src/planet.cpp:95
 #, c-format
 msgid "%s%s: mag %.1f"
 msgstr ""
@@ -214,4 +214,89 @@ msgstr ""
 
 #: src/sky_localizer.cpp:63
 msgid "Hawaiian"
+msgstr ""
+
+#: src/stel_ui.cpp:396
+msgid "Drawing of the Constellations [C]"
+msgstr ""
+
+#: src/stel_ui.cpp:398
+msgid "Names of the Constellations [V]"
+msgstr ""
+
+#: src/stel_ui.cpp:400
+msgid "Constellations Art [R]"
+msgstr ""
+
+#: src/stel_ui.cpp:402
+msgid "Azimuthal Grid [Z]"
+msgstr ""
+
+#: src/stel_ui.cpp:404
+msgid "Equatorial Grid [E]"
+msgstr ""
+
+#: src/stel_ui.cpp:406
+msgid "Ground [G]"
+msgstr ""
+
+#: src/stel_ui.cpp:408
+msgid "Cardinal Points [Q]"
+msgstr ""
+
+#: src/stel_ui.cpp:410
+msgid "Atmosphere [A]"
+msgstr ""
+
+#: src/stel_ui.cpp:412
+msgid "Nebulas [N]"
+msgstr ""
+
+#: src/stel_ui.cpp:414
+msgid "Help [H]"
+msgstr ""
+
+#: src/stel_ui.cpp:416
+msgid "Equatorial/Altazimuthal Mount [ENTER]"
+msgstr ""
+
+#: src/stel_ui.cpp:418
+msgid "Configuration window"
+msgstr ""
+
+#: src/stel_ui.cpp:422
+msgid "Quit [CTRL + Q]Quit [CMD + Q]"
+msgstr ""
+
+#: src/stel_ui.cpp:482
+msgid ""
+"4 Directions     : Deplacement RA/DE\n"
+"Page Up/Down     : Zoom\n"
+"CTRL+Up/Down     : Zoom\n"
+"Left Click       : Select Star\n"
+"Right Click      : Clear Pointer\n"
+"CTRL+Left Click  : Clear Pointer\n"
+"SPACE : Center On Selected Object\n"
+"ENTER : Equatorial/Altazimuthal mount\n"
+"CTRL + S : Take a Screenshot\n"
+"C   : Drawing of the Constellations\n"
+"V   : Names of the Constellations\n"
+"R   : Constellation Art\n"
+"E   : Equatorial Grid\n"
+"Z   : Azimuthal Grid\n"
+"N   : Nebulas\n"
+"P   : Planet Finder\n"
+"G   : Ground\n"
+"F   : Fog\n"
+"Q   : Cardinal Points\n"
+"A   : Atmosphere\n"
+"H   : Help\n"
+"4   : Ecliptic Line\n"
+"5   : Equator Line\n"
+"T   : Object Tracking\n"
+"S   : Stars\n"
+"I   : About Stellarium\n"
+"F1  : Toggle fullscreen if possible.\n"
+"CTRL+Q : Quit\n"
+"CMD+Q  : Quit\n"
 msgstr ""

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium 0.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-03-24 00:37+0100\n"
+"POT-Creation-Date: 2005-03-25 23:57+0100\n"
 "PO-Revision-Date: 2004-12-18 02:43+0100\n"
 "Last-Translator:  <stellarium@free.fr>\n"
 "Language-Team: French <traduc@traduc.org>\n"
@@ -92,22 +92,22 @@ msgstr ""
 "Sinon, vérifiez que vous avez accès à %s\n"
 
 #. North
-#: src/draw.cpp:343
+#: src/draw.cpp:348
 msgid "N"
 msgstr "N"
 
 #. South
-#: src/draw.cpp:345
+#: src/draw.cpp:350
 msgid "S"
 msgstr "S"
 
 #. East
-#: src/draw.cpp:347
+#: src/draw.cpp:352
 msgid "E"
 msgstr "E"
 
 #. West
-#: src/draw.cpp:349
+#: src/draw.cpp:354
 msgid "W"
 msgstr "O"
 
@@ -205,13 +205,13 @@ msgstr "(le paysage est : \"%s\")\n"
 msgid "Saving location %s to file %s\n"
 msgstr "Enregistre le lieu %s dans le fichier %s\n"
 
-#: src/planet.cpp:85
-#, c-format
+#: src/planet.cpp:84
+#, fuzzy, c-format
 msgid ""
 "Name :%s%s\n"
 "RA : %s\n"
 "DE : %s\n"
-"Distance : %.8f UA\n"
+"Distance : %.8f AU\n"
 "Magnitude : %.2f"
 msgstr ""
 "Nom :%s%s\n"
@@ -220,7 +220,7 @@ msgstr ""
 "Distance : %.8f UA\n"
 "Magnitude : %.2f"
 
-#: src/planet.cpp:96
+#: src/planet.cpp:95
 #, c-format
 msgid "%s%s: mag %.1f"
 msgstr "%s%s: mag %.1f"
@@ -241,6 +241,92 @@ msgstr "Français"
 #: src/sky_localizer.cpp:63
 msgid "Hawaiian"
 msgstr "Hawaien"
+
+#: src/stel_ui.cpp:396
+msgid "Drawing of the Constellations [C]"
+msgstr "Dessin des constellations [C]"
+
+#: src/stel_ui.cpp:398
+msgid "Names of the Constellations [V]"
+msgstr "Noms des constellations [V]"
+
+#: src/stel_ui.cpp:400
+#, fuzzy
+msgid "Constellations Art [R]"
+msgstr "Images des Constellations [R]"
+
+#: src/stel_ui.cpp:402
+msgid "Azimuthal Grid [Z]"
+msgstr "Grille Azimutale [Z]"
+
+#: src/stel_ui.cpp:404
+msgid "Equatorial Grid [E]"
+msgstr "Grille Equatoriale [E]"
+
+#: src/stel_ui.cpp:406
+msgid "Ground [G]"
+msgstr "Sol [G]"
+
+#: src/stel_ui.cpp:408
+msgid "Cardinal Points [Q]"
+msgstr "Points Cardinaux [Q]"
+
+#: src/stel_ui.cpp:410
+msgid "Atmosphere [A]"
+msgstr "Atmosphère [A]"
+
+#: src/stel_ui.cpp:412
+msgid "Nebulas [N]"
+msgstr "Nébuleuses [N]"
+
+#: src/stel_ui.cpp:414
+msgid "Help [H]"
+msgstr "Aide [H]"
+
+#: src/stel_ui.cpp:416
+msgid "Equatorial/Altazimuthal Mount [ENTER]"
+msgstr "Monture Equatorial/Altazimutale [ENTER]"
+
+#: src/stel_ui.cpp:418
+msgid "Configuration window"
+msgstr "Fenêtre de configuration"
+
+#: src/stel_ui.cpp:422
+msgid "Quit [CTRL + Q]"
+msgstr "Quitte [CTRL + Q]"
+
+#: src/stel_ui.cpp:482
+msgid ""
+"4 Directions     : Deplacement RA/DE\n"
+"Page Up/Down     : Zoom\n"
+"CTRL+Up/Down     : Zoom\n"
+"Left Click       : Select Star\n"
+"Right Click      : Clear Pointer\n"
+"CTRL+Left Click  : Clear Pointer\n"
+"SPACE : Center On Selected Object\n"
+"ENTER : Equatorial/Altazimuthal mount\n"
+"CTRL + S : Take a Screenshot\n"
+"C   : Drawing of the Constellations\n"
+"V   : Names of the Constellations\n"
+"R   : Constellation Art\n"
+"E   : Equatorial Grid\n"
+"Z   : Azimuthal Grid\n"
+"N   : Nebulas\n"
+"P   : Planet Finder\n"
+"G   : Ground\n"
+"F   : Fog\n"
+"Q   : Cardinal Points\n"
+"A   : Atmosphere\n"
+"H   : Help\n"
+"4   : Ecliptic Line\n"
+"5   : Equator Line\n"
+"T   : Object Tracking\n"
+"S   : Stars\n"
+"I   : About Stellarium\n"
+"F1  : Toggle fullscreen if possible.\n"
+"CTRL+Q : Quit\n"
+"CMD+Q  : Quit\n"
+msgstr ""
 
 #~ msgid "Star catalog: %d stars\n"
 #~ msgstr "Catalogue d'étoile: %d étoiles\n"
