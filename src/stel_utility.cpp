@@ -135,7 +135,7 @@ static void skipwhite(char **s)
 double get_dec_angle(const string& str)
 {
 	const char* s = str.c_str();
-	char *ptr, *dec, *hh;
+	char *mptr, *ptr, *dec, *hh;
 	int negative = 0;
 	char delim1[] = " :.,;ºDdHhMm'\n\t";
 	char delim2[] = " NSEWnsew\"\n\t";
@@ -150,8 +150,9 @@ double get_dec_angle(const string& str)
 	if (s == NULL || !*s)
 		return(-0.0);
 	count = strlen(s) + 1;
-	if ((ptr = (char *) malloc(count)) == NULL)
+	if ((mptr = (char *) malloc(count)) == NULL)
 		return (-0.0);
+	ptr = mptr;
 	memcpy(ptr, s, count);
 	trim(ptr);
 	skipwhite(&ptr);
@@ -175,7 +176,7 @@ double get_dec_angle(const string& str)
 		dghh = atoi (ptr);
 	else
 	{
-		free(ptr);
+		free(mptr);
 		return (-0.0);
 	}
 
@@ -183,12 +184,12 @@ double get_dec_angle(const string& str)
 		minutes = atoi (ptr);
 		if (minutes > 59)
 		{
-			free(ptr);
+			free(mptr);
 			return (-0.0);
 		}
 	}else
 	{
-		free(ptr);
+		free(mptr);
 		return (-0.0);
 	}
 
@@ -198,17 +199,19 @@ double get_dec_angle(const string& str)
 		seconds = strtod (ptr, NULL);
 		if (seconds > 59)
 		{
-			free(ptr);
+			free(mptr);
 			return (-0.0);
 		}
-	}
+	} 
 	
 	if ((ptr = strtok(NULL," \n\t")) != NULL)
 	{
 		skipwhite(&ptr);
 		if (*ptr == 'S' || *ptr == 'W' || *ptr == 's' || *ptr == 'W') negative = 1;
 	}
-	free(ptr);
+
+	free(mptr);
+
 	pos = dghh + minutes /60.0 + seconds / 3600.0;
 	if (type == HOURS && pos > 24.0)
 		return (-0.0);
