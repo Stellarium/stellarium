@@ -1,4 +1,4 @@
-/* 
+/*
  * Stellarium
  * Copyright (C) 2002 Fabien Chéreau
  * 
@@ -77,7 +77,7 @@ typedef struct params{
     double JDay;        // Julian day
     int TimeZone;
     int Altitude;       // Altitude in meter
-    int LandscapeNumber; // number of the landscape 
+    int LandscapeNumber; // number of the landscape
 
     // technical params
     int X_Resolution;
@@ -96,6 +96,10 @@ typedef struct params{
     float MaxMagStarName;
     float StarTwinkleAmount;
     float StarScale;
+
+	// GUI
+	vec3_t GuiBaseColor;
+	vec3_t GuiTextColor;
 
     // Flags
     int FlagUTC_Time;

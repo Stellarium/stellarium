@@ -56,13 +56,19 @@ FLAG_MILKY_WAY = true               # Display the milky way, put it to false
 FLAG_UTC_TIME = false               # Display time in UTC format (Greenwich time) if true,
                                     # local time if false : set your Time Zone above in this file!
 
+GUI_BASE_COLOR = 0.6;0.4;0.1        # RGB Background color for every gui component.
+GUI_TEXT_COLOR = 0.1;0.9;0.8        # RGB Text color for every gui element.
+
+
 ######## Date and time ########
 # default date is today
 # modify and uncomment next line to choose another date
 #DATE = mm/dd/yyyy
-#DATE = 11/10/1986
+#DATE = 17/11/1982
+DATE = today
 
 # default time is now (UT time)
 # modify and uncomment next line to choose another time
 #TIME = hh:mm:ss
 #TIME = 06:20:00
+TIME = now

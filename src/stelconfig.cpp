@@ -1,22 +1,22 @@
-/* 
+/*
  * Stellarium
  * Copyright (C) 2002 Fabien Chéreau
- * 
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
- 
+
 #include "stelconfig.h"
 #include "DateOps.h"
 #include "parsecfg.h"
@@ -25,18 +25,21 @@ double tempLatitude=0;
 double tempLongitude=0;
 char * tempDate = NULL;
 char * tempTime = NULL;
-    
+char * tempGuiBaseColor = NULL;
+char * tempGuiTextColor = NULL;
+
+
 // array of cfgStruct for reading on config file
-cfgStruct cfgini[] = 
+cfgStruct cfgini[] =
 {// parameter               type        address of variable
 	{"FULLSCREEN",          CFG_BOOL,   &global.Fullscreen},
 	{"X_RESOLUTION",        CFG_INT,    &global.X_Resolution},
     {"Y_RESOLUTION",        CFG_INT,    &global.Y_Resolution},
     {"BBP_MODE",            CFG_INT,    &global.bppMode},
-        
+
     {"STAR_SCALE",          CFG_FLOAT,  &global.StarScale},
     {"STAR_TWINKLE_AMOUNT", CFG_FLOAT,  &global.StarTwinkleAmount},
-    {"FLAG_FPS",            CFG_BOOL,   &global.FlagFps},       
+    {"FLAG_FPS",            CFG_BOOL,   &global.FlagFps},
     {"FLAG_STARS",          CFG_BOOL,   &global.FlagStars},
     {"FLAG_STAR_NAME",      CFG_BOOL,   &global.FlagStarName},
     {"MAX_MAG_STAR_NAME",   CFG_FLOAT,  &global.MaxMagStarName},
@@ -56,7 +59,7 @@ cfgStruct cfgini[] =
     {"FLAG_ECLIPTIC",       CFG_BOOL,   &global.FlagEcliptic},
     {"FLAG_CARDINAL_POINTS",CFG_BOOL,   &global.FlagCardinalPoints},
     {"FLAG_MILKY_WAY",      CFG_BOOL,   &global.FlagMilkyWay},
-    
+
     {"FLAG_UTC_TIME",       CFG_BOOL,   &global.FlagUTC_Time},
     {"FLAG_FOLLOW_EARTH",   CFG_BOOL,   &global.FlagFollowEarth},
     {"FLAG_MENU",           CFG_BOOL,   &global.FlagMenu},
@@ -65,10 +68,14 @@ cfgStruct cfgini[] =
 
     {"DATE",                CFG_STRING, &tempDate},
     {"TIME",                CFG_STRING, &tempTime},
-    {NULL, CFG_END, NULL}   /* no more parameters */
+
+	{"GUI_BASE_COLOR",      CFG_STRING, &tempGuiBaseColor},
+	{"GUI_TEXT_COLOR",      CFG_STRING, &tempGuiTextColor},
+
+	{NULL, CFG_END, NULL}   /* no more parameters */
 };
 
-cfgStruct cfgini2[] = 
+cfgStruct cfgini2[] =
 {// parameter               type        address of variable
 	{"LATITUDE",            CFG_DOUBLE, &tempLatitude},
 	{"LONGITUDE",           CFG_DOUBLE, &tempLongitude},
@@ -96,7 +103,7 @@ void setDirectories(void)
         tempFile = fopen("./data/hipparcos.fab","r");
         strcpy(dataRoot,".");
         if(!tempFile)
-        {	  	
+        {
             strcpy(dataRoot,"..");
             tempFile = fopen("../data/hipparcos.fab","r");
             if(!tempFile)
@@ -234,38 +241,68 @@ void loadConfig(char * configFile, char * locationFile)
     if (tempDate!=NULL && strcmp(tempDate,"today"))
     {
     	if (tempDate!=NULL && (sscanf(tempDate,"%d/%d/%d\n",&m,&d,&y) != 3))
-    	{   
+    	{
 			printf("ERROR, bad date format : please change config.txt\n\n");
-        	exit(1);
+        	exit(-1);
         }
     }
 	if (tempTime!=NULL && strcmp(tempTime,"now"))
 	{
     	if (tempTime!=NULL && (sscanf(tempTime,"%d:%d:%d\n",&hour,&min,&sec) != 3))
-    	{   
+    	{
 			printf("ERROR, bad time format : please change config.txt\n\n");
-        	exit(1);
+        	exit(-1);
         }
     }
 
+
+	float r,g,b;
+	if (tempGuiBaseColor!=NULL)
+	{
+    	if (sscanf(tempGuiBaseColor,"%f;%f;%f\n",&r,&g,&b) != 3)
+    	{
+			printf("ERROR, bad gui base color format : please change config.txt\n\n");
+        	exit(-1);
+        }
+		global.GuiBaseColor=vec3_t(r,g,b);
+    }
+
+	if (tempGuiTextColor!=NULL)
+	{
+    	if (sscanf(tempGuiTextColor,"%f;%f;%f\n",&r,&g,&b) != 3)
+    	{
+			printf("ERROR, bad gui text color format : please change config.txt\n\n");
+        	exit(-1);
+        }
+		global.GuiTextColor=vec3_t(r,g,b);
+    }
+
     if (m>12 || m<1 || d<1 || d>31)
-    {   
-	printf("ERROR, bad month value : please change config.txt\n\n");
-        exit(0);
+    {
+		printf("ERROR, bad month value : please change config.txt\n\n");
+        exit(-1);
     }
 
     if (hour>23 || hour<0 || min<0 || min>59 || sec<0 || sec>59)
-    {   
-	printf("ERROR, bad time value : please change config.txt\n\n");
+    {
+		printf("ERROR, bad time value : please change config.txt\n\n");
         exit(0);
     }
 
-    if (tempDate) 
-	delete tempDate;
-    if (tempTime) 
-    {   
+	if (tempGuiBaseColor) delete tempGuiBaseColor;
+	tempGuiBaseColor=NULL;
+
+	if (tempGuiTextColor) delete tempGuiTextColor;
+	tempGuiTextColor=NULL;
+
+    if (tempDate) delete tempDate;
+	tempDate=NULL;
+
+    if (tempTime)
+    {
         hour-=global.TimeZone;
-        delete tempTime;    
+        delete tempTime;
+		tempTime=NULL;
     }
     // calc the julian date and store it in the global variable JDay
     global.JDay=DateOps::dmyToDay(d,m,y);
@@ -288,14 +325,36 @@ void dumpConfig(void)
 	char tempName[255];
     strcpy(tempName,global.ConfigDir);
     strcat(tempName,"config.txt");
+
+	// Init the strings to copy in the config file
+	tempDate = strdup("today");
+	tempTime = strdup("now");
+	tempGuiBaseColor = new char[255];
+	tempGuiTextColor = new char[255];
+	sprintf(tempGuiBaseColor,"%.2f;%.2f;%.2f",global.GuiBaseColor[0],global.GuiBaseColor[1],global.GuiBaseColor[2]);
+	sprintf(tempGuiTextColor,"%.2f;%.2f;%.2f",global.GuiTextColor[0],global.GuiTextColor[1],global.GuiTextColor[2]);
+
+	// Dump the config
     if (cfgDump(tempName, cfgini, CFG_SIMPLE, 0) == -1)
-    {   
+    {
 		printf("An error occured while saving configuration file.\n");
-        return;
+        exit(-1);
     }
+
+	// Free the strings
+	if (tempGuiBaseColor) delete tempGuiBaseColor;
+	tempGuiBaseColor=NULL;
+	if (tempGuiTextColor) delete tempGuiTextColor;
+	tempGuiTextColor=NULL;
+    if (tempDate) delete tempDate;
+	tempDate=NULL;
+	if (tempTime) delete tempTime;
+	tempTime=NULL;
+
+	// Add a little help to say where the explanation is.
     FILE * f=fopen(tempName,"a+t");
-    if (!f) 
-    {   
+    if (!f)
+    {
         printf("ERROR : can't open the configuration file : %s",tempName);
         return;
     }
@@ -305,23 +364,28 @@ void dumpConfig(void)
 
 void dumpLocation(void)
 {
+	// Set the position values in config file format
 	tempLatitude = global.ThePlace.degLatitude();
 	tempLatitude = 90.-tempLatitude;
     tempLongitude = global.ThePlace.degLongitude();
     if (tempLongitude>180) tempLongitude-=360;
 	tempLongitude=-tempLongitude;
-	
+
 	char tempName[255];
     strcpy(tempName,global.ConfigDir);
     strcat(tempName,"location.txt");
+
+	// Dump the location
     if (cfgDump(tempName, cfgini2, CFG_SIMPLE, 0) == -1)
-    {   
+    {
 		printf("An error occured while saving location file.\n");
         return;
     }
+
+	// Add info about the help.
     FILE * f=fopen(tempName,"a+t");
-    if (!f) 
-    {   
+    if (!f)
+    {
         printf("ERROR : can't open the location file : %s",tempName);
         return;
     }
