@@ -187,7 +187,9 @@ void SolarSystem::load(const string& planetfile)
 			pd.get_double(secname, "rot_epoch", J2000),
 			pd.get_double(secname, "rot_obliquity",0.)*M_PI/180.,
 			pd.get_double(secname, "rot_equator_ascending_node",0.)*M_PI/180.,
-			pd.get_double(secname, "rot_precession_rate",0.) );
+			pd.get_double(secname, "rot_precession_rate",0.),
+			pd.get_double(secname, "sidereal_period",0.) );
+		
 
 		if (pd.get_boolean(secname, "rings", 0))
 		{
@@ -233,7 +235,7 @@ void SolarSystem::compute_trans_matrices(double date)
 
 // Draw all the elements of the solar system
 // We are supposed to be in heliocentric coordinate
-void SolarSystem::draw(int hint_ON, Projector * prj, const navigator * nav, const tone_reproductor* eye, bool _gravity_label, int flag_point)
+void SolarSystem::draw(int hint_ON, Projector * prj, const navigator * nav, const tone_reproductor* eye, bool _gravity_label, int flag_point, int flag_orbits)
 {
 	planet::set_gravity_label_flag(_gravity_label);
 
@@ -273,7 +275,7 @@ void SolarSystem::draw(int hint_ON, Projector * prj, const navigator * nav, cons
 	iter = system_planets.begin();
     while (iter != system_planets.end())
     {
-        if (*iter!=earth) (*iter)->draw(hint_ON, prj, nav, eye, flag_point);
+        if (*iter!=earth) (*iter)->draw(hint_ON, prj, nav, eye, flag_point, flag_orbits);
         ++iter;
     }
 

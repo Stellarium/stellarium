@@ -42,6 +42,7 @@ planet::planet(const string& _name, int _flagHalo, int _flag_lighting, double _r
 	mat_local_to_parent = Mat4d::identity();
 	tex_map = new s_texture(tex_map_name, TEX_LOAD_TYPE_PNG_SOLID_REPEAT);
 	if (flagHalo) tex_halo = new s_texture(tex_halo_name);
+
 }
 
 
@@ -94,7 +95,7 @@ double planet::get_satellites_fov(const navigator * nav) const
 }
 
 // Set the orbital elements
-void planet::set_rotation_elements(float _period, float _offset, double _epoch, float _obliquity, float _ascendingNode, float _precessionRate)
+void planet::set_rotation_elements(float _period, float _offset, double _epoch, float _obliquity, float _ascendingNode, float _precessionRate, double _sidereal_period )
 {
     re.period = _period;
 	re.offset = _offset;
@@ -102,6 +103,9 @@ void planet::set_rotation_elements(float _period, float _offset, double _epoch, 
     re.obliquity = _obliquity;
     re.ascendingNode = _ascendingNode;
     re.precessionRate = _precessionRate;
+    re.sidereal_period = _sidereal_period;  // used for drawing orbit lines
+
+    delta_orbitJD = re.sidereal_period/ORBIT_SEGMENTS;
 }
 
 
@@ -118,10 +122,29 @@ Vec3d planet::get_earth_equ_pos(const navigator * nav) const
 // Actually call the provided function to compute the ecliptical position
 void planet::compute_position(double date)
 {
-	if (fabs(lastJD-date)>deltaJD)
+	if (delta_orbitJD > 0 && fabs(last_orbitJD-date)>delta_orbitJD)
 	{
-		coord_func(date, ecliptic_pos);
-		lastJD = date;
+
+	  // @@@ would be more efficient to not recalc all positions unless first time
+	  // calculate orbit first (for line drawing)
+	  double date_increment = re.sidereal_period/ORBIT_SEGMENTS;
+	  double calc_date;
+	  for( int d=0; d<ORBIT_SEGMENTS; d++ ) {
+	    calc_date = date + (d-ORBIT_SEGMENTS/2)*date_increment;
+	    compute_trans_matrix(calc_date);
+	    coord_func(calc_date, ecliptic_pos);
+	    orbit[d] = get_heliocentric_ecliptic_pos();
+	  } 
+
+	  // calculate actual planet position
+	  coord_func(date, ecliptic_pos);
+	  lastJD = last_orbitJD = date;
+
+	} else if (fabs(lastJD-date)>deltaJD) {
+	  
+	  // calculate actual planet position
+	  coord_func(date, ecliptic_pos);
+	  lastJD = date;
 	}
 }
 
@@ -240,8 +263,9 @@ float planet::get_on_screen_size(const Projector* prj, const navigator * nav)
 }
 
 // Draw the planet and all the related infos : name, circle etc..
-void planet::draw(int hint_ON, Projector* prj, const navigator * nav, const tone_reproductor* eye, int flag_point)
+void planet::draw(int hint_ON, Projector* prj, const navigator * nav, const tone_reproductor* eye, int flag_point, int flag_orbits)
 {
+
 	Mat4d mat = mat_local_to_parent;
 	planet * p = parent;
 	while (p!=NULL && p->parent!=NULL)
@@ -265,6 +289,12 @@ void planet::draw(int hint_ON, Projector* prj, const navigator * nav, const tone
 		// this prevents name overlaping (ie for jupiter satellites)
 		float ang_dist = 300.f*atan(get_ecliptic_pos().length()/get_earth_equ_pos(nav).length())/prj->get_fov();
 		if (ang_dist==0.f) ang_dist = 1.f; // if ang_dist == 0, the planet is sun..
+
+		if( flag_orbits ) {
+		  // by putting here, only draw orbit if planet if visible for clarity
+		  draw_orbit(nav, prj);
+		}
+
      	if (hint_ON && ang_dist>0.25)
     	{
 			if (ang_dist>1.f) ang_dist = 1.f;
@@ -301,6 +331,7 @@ void planet::draw(int hint_ON, Projector* prj, const navigator * nav, const tone
 
 void planet::draw_hints(const navigator* nav, const Projector* prj)
 {
+
 	prj->set_orthographic_projection();    // 2D coordinate
 
 	glEnable(GL_BLEND);
@@ -507,6 +538,8 @@ void planet::draw_big_halo(const navigator* nav, const Projector* prj, const ton
 	prj->reset_perspective_projection();		// Restore the other coordinate
 }
 
+
+
 ring::ring(float _radius, const string& _texname) : radius(_radius), tex(NULL)
 {
 	tex = new s_texture(_texname,TEX_LOAD_TYPE_PNG_ALPHA);
@@ -539,4 +572,52 @@ void ring::draw(const Projector* prj, const Mat4d& mat)
 		glTexCoord2f(0,1); prj->sVertex3(-r,r, 0., mat);	// Top left
 	glEnd ();
 	glPopMatrix();
+}
+
+
+
+// draw orbital path of planet
+void planet::draw_orbit(const navigator * nav, const Projector* prj) {
+
+  if(!re.sidereal_period) return;
+
+  prj->set_orthographic_projection();    // 2D coordinate
+
+  glEnable(GL_BLEND);
+  glDisable(GL_LIGHTING);
+  glDisable(GL_TEXTURE_2D);
+
+
+  glColor3f(1.0,0.5,0.8);
+	
+  int on=0;
+  Vec3d onscreen;
+  int d;
+  for( int n=0; n<=ORBIT_SEGMENTS; n++) {
+	  
+    if( n==ORBIT_SEGMENTS ) {
+      d = 0;  // connect loop
+    } else {
+      d = n;
+    }
+    //	  glVertex3dv(nav->helio_to_local( orbit[d]));
+    //	  glVertex3dv(orbit[d]);
+    if(prj->project_helio(orbit[d],onscreen)) {
+      if(!on) glBegin(GL_LINE_STRIP);
+      glVertex3dv(onscreen);
+      on=1;
+    } else if( on ) {
+      glEnd();
+      on=0;
+    }
+    
+  }
+  
+  if(on) glEnd(); 
+
+  prj->reset_perspective_projection();		// Restore the other coordinate
+  
+  glDisable(GL_BLEND);
+  glEnable(GL_LIGHTING);
+  glEnable(GL_TEXTURE_2D);
 }
