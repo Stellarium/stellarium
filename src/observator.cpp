@@ -32,7 +32,6 @@ size_t my_strftime(char *s, size_t max, const char *fmt, const struct tm *tm)
 	return strftime(s, max, fmt, tm);
 }
 
-////////////////////////////////////////////////////////////////////////////////
 Observator::Observator() : longitude(0.), latitude(0.), altitude(0), GMT_shift(0), planet(3)
 {
 	name = "Anonymous_Location";
@@ -136,7 +135,7 @@ void Observator::set_custom_tz_name(const string& tzname)
 	}
 }
 
-int Observator::get_GMT_shift(double JD) const
+float Observator::get_GMT_shift(double JD) const
 {
 	if (time_zone_mode == S_TZ_GMT_SHIFT) return GMT_shift;
 	else return get_GMT_shift_from_system(JD);
@@ -162,17 +161,19 @@ string Observator::get_time_zone_name_from_system(double JD) const
 // taking the parameters from system. This takes into account the daylight saving
 // time if there is. (positive for Est of GMT)
 // TODO : %z in strftime only works on GNU compiler
-int Observator::get_GMT_shift_from_system(double JD) const
+float Observator::get_GMT_shift_from_system(double JD) const
 {
 	time_t rawtime = get_time_t_from_julian(JD);
 
 	struct tm * timeinfo;
 	timeinfo = localtime(&rawtime);
 	static char heure[20];
-	heure[0] = 0;
+	heure[0] = '\0';
 	my_strftime(heure, 19, "%z", timeinfo);
+	heure[5] = '\0';
+	float min = 1.f/60.f * atoi(&heure[3]);
 	heure[3] = '\0';
-	return atoi(heure);
+	return min + atoi(heure);
 }
 
 // Return the time in ISO 8601 format that is : %Y-%m-%d %H:%M:%S

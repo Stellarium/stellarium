@@ -5,8 +5,6 @@ Need to make stellarium own texture loader using for example SDL_image library.
 
 Important features :
 * Use jpg format instead of png.
-* A way to enter exact time from within the program.
-    - need the implementation of the widget "edit" in gui.
 * Selection of any object available in a list.
     - need the implementation of the widget "list" in gui.
 * Reduce the program size by reducing the stellplanet library size, especially the moon coefficents file.

@@ -1,4 +1,4 @@
-0.6.0c [12/01/2004]
+0.6.0d [14/02/2004]
 Removed the previous patch to configure SDL because it caused some error on some systems.
 Changed the global coordinate system into the conventionnal astronomical one (ie with z axis toward top and x toward us)
 Stopped using the previous unreliable astro library with badly defined licence and use 2 libraries created from modified/simplified version of the LGPL library libnova. One called stellastro which manages the astronomical operations like time management etc. and another one called stellplanet which only computes the planetary positions.
@@ -42,7 +42,10 @@ Added a class "observator" for observer managment : i.e. observer's position and
 Improved the mouse selection of objects. The new algorithm is more intelligent.
 Updated all the nebulas textures with clearly copyrighted pictures (See credits in README). This will fix the debian Bug#198495.
 Re-made the graphical interface using tabs widgets etc..
-Colors for lines and grid are now a parameter in the config file.
+Colors for lines and grid an other misc things are now a parameter in the config file.
+Added a screen shot function (big thanks to cmdtab for his code).
+Added handling of non-integer time zones (Thanks to Cool Andrew for his warning).
+
 
 0.5.2 [29/04/2003]
 Changed the configuration file to $HOME/.stellarium/VERSION/ on unix system to prevent conflicts between versions.

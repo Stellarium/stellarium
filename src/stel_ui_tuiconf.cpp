@@ -131,9 +131,13 @@ void stel_ui::init_tui(void)
 	tui_star_labelmaxmag->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb1));
 	tui_stars_twinkle = new s_tui::Decimal_item(0., 1., 0.3, "3.3 Twinkling: ", 0.1);
 	tui_stars_twinkle->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb1));
+	tui_star_magscale = new s_tui::Decimal_item(1,30, 1, "3.4 Star Magnitude Multiplier: ");
+	tui_star_magscale->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb1));
+
 	tui_menu_stars->addComponent(tui_stars_show);
 	tui_menu_stars->addComponent(tui_star_labelmaxmag);
 	tui_menu_stars->addComponent(tui_stars_twinkle);
+	tui_menu_stars->addComponent(tui_star_magscale);
 
 	// 4. Effects
 	tui_effect_landscape = new s_tui::MultiSet_item<string>("4.1 Landscape: ");
@@ -192,7 +196,7 @@ void stel_ui::tui_cb1(void)
 	core->observatory->set_altitude(tui_location_altitude->getValue());
 
 	// 2. Date & Time
-	core->navigation->set_JDay(tui_time_skytime->getJDay());
+	core->navigation->set_JDay(tui_time_skytime->getJDay() - core->observatory->get_GMT_shift()*JD_HOUR);
 	core->PresetSkyTime 		= tui_time_presetskytime->getJDay();
 	core->StartupTimeMode 		= tui_time_startuptime->getCurrent();
 
@@ -200,7 +204,7 @@ void stel_ui::tui_cb1(void)
 	core->FlagStars 			= tui_stars_show->getValue();
 	core->MaxMagStarName 		= tui_star_labelmaxmag->getValue();
 	core->StarTwinkleAmount		= tui_stars_twinkle->getValue();
-
+	core->StarMagScale			= tui_star_magscale->getValue();
 }
 
 // Update all the tui widgets with values taken from the core parameters
@@ -212,7 +216,7 @@ void stel_ui::tui_update_widgets(void)
 	tui_location_altitude->setValue(core->observatory->get_altitude());
 
 	// 2. Date & Time
-	tui_time_skytime->setJDay(core->navigation->get_JDay());
+	tui_time_skytime->setJDay(core->navigation->get_JDay() + core->observatory->get_GMT_shift()*JD_HOUR);
 	tui_time_presetskytime->setJDay(core->PresetSkyTime);
 	tui_time_startuptime->setCurrent(core->StartupTimeMode);
 	tui_time_displayformat->setCurrent(core->observatory->get_time_format_str());
@@ -221,6 +225,7 @@ void stel_ui::tui_update_widgets(void)
 	tui_stars_show->setValue(core->FlagStars);
 	tui_star_labelmaxmag->setValue(core->MaxMagStarName);
 	tui_stars_twinkle->setValue(core->StarTwinkleAmount);
+	tui_star_magscale->setValue(core->StarMagScale);
 }
 
 // Launch script to set time zone in the system locales
@@ -246,6 +251,16 @@ void stel_ui::tui_cb_settimedisplayformat(void)
 void stel_ui::tui_cb_admin_load_default(void)
 {
 	core->load_config();
+	core->observatory->load(core->ConfigDir + core->config_file, "init_location");
+	if (core->StartupTimeMode=="preset" || core->StartupTimeMode=="Preset")
+	{
+		core->navigation->set_JDay(core->PresetSkyTime -
+			core->observatory->get_GMT_shift(core->PresetSkyTime) * JD_HOUR);
+	}
+	else
+	{
+		core->navigation->set_JDay(get_julian_from_sys());
+	}
 	system( ( core->DataDir + "script_load_config " ).c_str() );
 }
 

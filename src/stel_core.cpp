@@ -108,6 +108,8 @@ void stel_core::init(void)
 	}
 
 	cardinals_points = new Cardinals(DataDir + "spacefont.txt", "spacefont");
+	cardinals_points->set_color(CardinalColor);
+
 	milky_way = new MilkyWay("milkyway");
 
     // Load hipparcos stars & names
@@ -456,6 +458,8 @@ void stel_core::load_config_from(const string& confFile)
 	ConstNamesColor		= str_to_vec3f(conf.get_str("color:const_names_color").c_str());
 	NebulaLabelColor	= str_to_vec3f(conf.get_str("color:nebula_label_color").c_str());
 	NebulaCircleColor	= str_to_vec3f(conf.get_str("color:nebula_circle_color").c_str());
+	CardinalColor 		= str_to_vec3f(conf.get_str("color:cardinal_color").c_str());
+	PlanetNamesColor	= str_to_vec3f(conf.get_str("color:planet_names_color").c_str());
 
 	// Text ui section
 	FlagEnableTuiMenu = conf.get_boolean("tui:flag_enable_tui_menu");
@@ -569,6 +573,8 @@ void stel_core::save_config_to(const string& confFile)
 	conf.set_str    ("color:const_names_color", vec3f_to_str(ConstNamesColor));
 	conf.set_str	("color:nebula_label_color", vec3f_to_str(NebulaLabelColor));
 	conf.set_str	("color:nebula_circle_color", vec3f_to_str(NebulaCircleColor));
+	conf.set_str    ("color:cardinal_color", vec3f_to_str(CardinalColor));
+	conf.set_str    ("color:planet_names_color", vec3f_to_str(PlanetNamesColor));
 
 	// Text ui section
 	conf.set_boolean("tui:flag_enable_tui_menu", FlagEnableTuiMenu);
@@ -912,8 +918,9 @@ void stel_core::auto_zoom_in(float move_duration)
 	float satfov = selected_object->get_satellites_fov(navigation);
 	float closefov = selected_object->get_close_fov(navigation);
 
-	if (satfov>0. && projection->get_fov()>satfov) projection->zoom_to(satfov, move_duration);
+	if (satfov>0. && projection->get_fov()*0.9>satfov) projection->zoom_to(satfov, move_duration);
 	else if (projection->get_fov()>closefov) projection->zoom_to(closefov, move_duration);
+
 }
 
 // Unzoom and go to the init position

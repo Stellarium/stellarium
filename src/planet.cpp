@@ -34,8 +34,9 @@ rotation_elements::rotation_elements() : period(1.), offset(0.), epoch(J2000),
 planet::planet(const string& _name, int _flagHalo, int _flag_lighting, double _radius, Vec3f _color,
 	float _albedo, const string& tex_map_name, const string& tex_halo_name, pos_func_type _coord_func) :
 		name(_name), flagHalo(_flagHalo), flag_lighting(_flag_lighting), radius(_radius), color(_color),
-		albedo(_albedo), axis_rotation(0.),	tex_map(NULL), tex_halo(NULL), tex_big_halo(NULL), rings(NULL), sphere_scale(1.f),
-		lastJD(J2000), deltaJD(JD_SECOND), coord_func(_coord_func), parent(NULL)
+		albedo(_albedo), axis_rotation(0.),	tex_map(NULL), tex_halo(NULL), tex_big_halo(NULL), rings(NULL),
+		sphere_scale(1.f), lastJD(J2000), deltaJD(JD_SECOND), coord_func(_coord_func), parent(NULL),
+		label_color(0.5f,0.5f,0.7f)
 {
 	ecliptic_pos=Vec3d(0.,0.,0.);
 	mat_local_to_parent = Mat4d::identity();
@@ -311,13 +312,15 @@ void planet::draw_hints(const navigator* nav, const Projector* prj)
 	if (sphere_scale == 1.f) sprintf(scale_str,"%s", name.c_str());
 	else sprintf(scale_str,"%s (x%.1f)", name.c_str(), sphere_scale);
 	float tmp = 10.f + get_on_screen_size(prj, nav)/sphere_scale/2.f; // Shift for name printing
+
+	glColor4f(label_color[0], label_color[1], label_color[2],1.f);
 	gravity_label ? prj->print_gravity180(planet_name_font, screenPos[0],screenPos[1], scale_str, tmp, tmp) :
 		planet_name_font->print(screenPos[0]+tmp,screenPos[1]+tmp, scale_str);
 
 	// hint disapears smoothly on close view
 	tmp -= 10.f;
 	if (tmp<1) tmp=1;
- 	glColor4f(0.5f/tmp,0.5f/tmp,0.7f/tmp,1.f/tmp);
+ 	glColor4f(label_color[0]/tmp, label_color[1]/tmp, label_color[2]/tmp,1.f/tmp);
 
 	// Draw the 2D small circle
 	glDisable(GL_TEXTURE_2D);
