@@ -79,9 +79,11 @@ void planet::compute_trans_matrix(double date)
 {
     double tempAscendingNode = re.ascendingNode + re.precessionRate * (date - J2000);
 
-	mat_parent_to_local = 	Mat4d::translation(ecliptic_pos) * Mat4d::xrotation(re.obliquity*M_PI/180.);
+	mat_parent_to_local = 	Mat4d::xrotation((90.-re.obliquity)*M_PI/180.) * Mat4d::translation(-ecliptic_pos);
 							//Mat4d::zrotation(tempAscendingNode*M_PI/180.) *
-							
+	mat_local_to_parent =   Mat4d::translation(ecliptic_pos) * Mat4d::zrotation(tempAscendingNode*M_PI/180.) * Mat4d::xrotation((re.obliquity-90.)*M_PI/180.);
+
+
 
 	compute_geographic_rotation(date);
 
@@ -99,13 +101,13 @@ void planet::compute_trans_matrix(double date)
 // Get a matrix which convert from local geographic coordinate to heliocentric ecliptic coordinate
 Mat4d planet::get_helio_to_geo_matrix()
 {
-	Mat4d mat = mat_parent_to_local;
+	Mat4d mat = mat_local_to_parent;
 
 	mat = mat * Mat4d::zrotation(axis_rotation*M_PI/180.);
 	planet * p = this;
 	while (p->parent!=NULL)
 	{
-		mat = p->parent->mat_parent_to_local * mat;
+		mat = p->parent->mat_local_to_parent * mat;
 		p=p->parent;
 	}
 	return mat;
@@ -133,7 +135,7 @@ Vec3d planet::get_heliocentric_ecliptic_pos()
 	planet * p = this;
 	while (p->parent!=NULL)
 	{
-		pos.transfo4d(p->mat_parent_to_local);
+		pos.transfo4d(p->mat_local_to_parent);
 		p=p->parent;
 	}
 	return pos;
@@ -149,7 +151,7 @@ void planet::draw(void)
 {
 	glPushMatrix();
 
-    glMultMatrixd(mat_parent_to_local);
+    glMultMatrixd(mat_local_to_parent);
 
     if (global.FlagPlanetsHintDrawing)
     // Draw the name, and the circle
@@ -220,7 +222,7 @@ sun_planet::sun_planet(char * _name, int _flagHalo, double _radius, vec3_t _colo
 				s_texture * _planetTexture, s_texture * _haloTexture, s_texture * _bigHaloTexture) : planet(_name,_flagHalo,_radius,_color,_planetTexture,_haloTexture,NULL)
 {
 	ecliptic_pos=Vec3d(0.,0.,0.);
-	mat_parent_to_local = Mat4d::identity();
+	mat_local_to_parent = Mat4d::identity();
 	name=strdup(_name);
 }
 

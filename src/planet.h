@@ -62,7 +62,7 @@ public:
 	virtual void compute_geographic_rotation(double date);	// Compute the z rotation to use from equatorial to geographic coordinates
     virtual void draw();
 	virtual void addSatellite(planet*);
-	virtual void set_rotation_elements(float,float,double,float,float,float);
+	virtual void set_rotation_elements(float _period, float _offset, double _epoch, float _obliquity, float _ascendingNode, float _precessionRate);
 	virtual Vec3d get_ecliptic_pos();
 	virtual Vec3d get_heliocentric_ecliptic_pos();		// Return the heliocentric ecliptical position
 	// Get a matrix which convert from heliocentric ecliptic coordinate to local geographic coordinate
