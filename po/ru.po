@@ -1,0 +1,216 @@
+# Russian translations for stellarium package.
+# Copyright (C) 2004 Free Software Foundation, Inc.
+# This file is distributed under the same license as the stellarium package.
+#  <fazylova_genia@mail.ru>, 2004.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: stellarium 0.7.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2004-12-26 18:59+0100\n"
+"PO-Revision-Date: 2004-12-22 00:25+0100\n"
+"Last-Translator:  <fazylova_genia@mail.ru>\n"
+"Language-Team: Russian <ru@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
+"10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+#: src/main.cpp:46
+#, c-format
+msgid ""
+"Please check last version and send bug report & comments \n"
+"on stellarium web page : http://stellarium.free.fr\n"
+"\n"
+msgstr ""
+
+#: src/main.cpp:54
+#, fuzzy, c-format
+msgid ""
+"Usage: %s [OPTION] ...\n"
+" -v, --version          Output version information and exit.\n"
+" -h, --help             Display this help and exit.\n"
+msgstr ""
+" -v, --version          output version information and exit\n"
+" -h, --help             display this help and exit\n"
+
+#: src/main.cpp:78
+#, c-format
+msgid "%s: Bad command line argument(s)\n"
+msgstr "%s: \n"
+
+#: src/main.cpp:79
+#, c-format
+msgid "Try `%s --help' for more information.\n"
+msgstr "попытaйтесь `%s --help' чтобы получить больше информации.\n"
+
+#. Failure....
+#: src/main.cpp:119
+#, c-format
+msgid ""
+"ERROR : I can't find the datas directories in :\n"
+"%s/ nor in ./ nor in ../\n"
+"You may fully install the software (type \"make install\" on POSIX systems)\n"
+"or launch the application from the stellarium package directory.\n"
+msgstr ""
+
+#: src/main.cpp:162
+#, c-format
+msgid "> Found data files in %s : local version.\n"
+msgstr ""
+
+#: src/main.cpp:180
+#, c-format
+msgid "Will create config files in %s\n"
+msgstr ""
+
+#. Maybe the directory is not created so try to create it
+#: src/main.cpp:188
+#, c-format
+msgid "Try to create directory %s\n"
+msgstr ""
+
+#: src/main.cpp:197
+#, c-format
+msgid ""
+"Can't create the file %sconfig.ini\n"
+"If the directory %s is missing please create it by hand.\n"
+"If not, check that you have access to %s\n"
+msgstr ""
+
+#. North
+#: src/draw.cpp:335
+msgid "N"
+msgstr ""
+
+#. South
+#: src/draw.cpp:337
+msgid "S"
+msgstr ""
+
+#. East
+#: src/draw.cpp:339
+msgid "E"
+msgstr ""
+
+#. West
+#: src/draw.cpp:341
+msgid "W"
+msgstr ""
+
+#. load new culture data
+#: src/constellation_mgr.cpp:104
+#, c-format
+msgid "Changing sky culture to %s\n"
+msgstr ""
+
+#: src/constellation_mgr.cpp:117
+#, c-format
+msgid "Loading constellation data...\n"
+msgstr ""
+
+#. Draw loading bar
+#: src/constellation_mgr.cpp:198
+#, c-format
+msgid "Loading Constellation Art: %d/%d"
+msgstr ""
+
+#. Hip = Hipparcos, RA=Right Ascention, DE=Declinaison, Mag=Magnitude
+#: src/hip_star.cpp:57
+#, c-format
+msgid ""
+"Name :%s%s%s\n"
+"Hip : %.4d\n"
+"RA : %s\n"
+"DE : %s\n"
+"Mag : %.2f"
+msgstr ""
+
+#: src/hip_star.cpp:68 src/hip_star.cpp:69 src/nebula.cpp:67
+#, c-format
+msgid "%s: mag %.1f"
+msgstr ""
+
+#: src/hip_star_mgr.cpp:81
+#, c-format
+msgid "Loading Hipparcos star data...\n"
+msgstr ""
+
+#. 120417;
+#: src/hip_star_mgr.cpp:113
+#, c-format
+msgid "Star catalog: %d stars\n"
+msgstr ""
+
+#. RA=Right ascention, DE=Declinaison, Mag=Magnitude
+#: src/nebula.cpp:54
+#, c-format
+msgid ""
+"Name : %s (NGC %u)\n"
+"RA : %s\n"
+"DE : %s\n"
+"Mag : %.2f"
+msgstr ""
+
+#: src/nebula_mgr.cpp:54
+#, c-format
+msgid "Loading nebulas data...\n"
+msgstr ""
+
+#: src/nebula_mgr.cpp:70
+#, c-format
+msgid "Reading a total of %d nebulas\n"
+msgstr ""
+
+#: src/nebula_mgr.cpp:101
+#, c-format
+msgid "Loading deep space objects: %d/%d"
+msgstr ""
+
+#: src/observator.cpp:60
+#, c-format
+msgid "Loading location: \"%s\", "
+msgstr ""
+
+#: src/observator.cpp:67
+#, c-format
+msgid "(landscape is: \"%s\")\n"
+msgstr ""
+
+#: src/observator.cpp:97
+#, c-format
+msgid "Saving location %s to file %s\n"
+msgstr ""
+
+#: src/planet.cpp:83
+#, c-format
+msgid ""
+"Name :%s%s\n"
+"RA : %s\n"
+"DE : %s\n"
+"Distance : %.8f UA\n"
+"Magnitude : %.2f"
+msgstr ""
+
+#: src/planet.cpp:94
+#, c-format
+msgid "%s%s: mag %.1f"
+msgstr ""
+
+#. initialize sky locale list (hardcoded right here)
+#: src/sky_localizer.cpp:60
+msgid "English"
+msgstr ""
+
+#: src/sky_localizer.cpp:61
+msgid "Spanish"
+msgstr ""
+
+#: src/sky_localizer.cpp:62
+msgid "French"
+msgstr ""
+
+#: src/sky_localizer.cpp:63
+msgid "Hawaiian"
+msgstr ""
