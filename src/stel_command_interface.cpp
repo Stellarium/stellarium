@@ -164,6 +164,26 @@ int StelCommandInterface::execute_command(string commandline, int &wait) {
 
     }
 
+  } else if(command=="script") {
+
+    if(args["action"]=="end") {
+      // stop script and unload any loaded images
+      stcore->scripts->cancel_script();
+      stcore->images->drop_all_images();
+    }
+
+    if(args["action"]=="play" && args["filename"]!="") {
+      stcore->scripts->play_script(args["filename"]);
+    }
+
+    if(args["action"]=="pause") {
+      stcore->scripts->pause_script();
+    }
+
+    if(args["action"]=="resume") {
+      stcore->scripts->resume_script();
+    }
+
   } else {
     cout << "Unrecognized command: " << commandline << endl;
     return 0;

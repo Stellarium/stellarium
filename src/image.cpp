@@ -25,12 +25,15 @@
 Image::Image( string filename, string name) {
   flag_alpha = flag_scale = 0;
   image_alpha = 0;  // begin not visible
+  image_rotation = 0;
   image_x = image_y = .5; // centered is default
   image_scale = 1; // full size
   image_name = name;
 
   // load image using alpha channel in image, otherwise no transparency
-  // other than through set_alpha method
+  // other than through set_alpha method -- could allow alpha load option from command 
+
+  // TODO - needs to take path outside texture dir
   image_tex = new s_texture(filename, TEX_LOAD_TYPE_PNG_ALPHA);  // what if it doesn't load?
 }
 

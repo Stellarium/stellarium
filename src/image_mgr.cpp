@@ -32,6 +32,15 @@ ImageMgr::~ImageMgr() {
 }
 
 int ImageMgr::load_image(string filename, string name) {
+
+  // if name already exists, replace with new image (hash would have been easier...)
+  for(vector<Image*>::iterator iter = active_images.begin(); iter != active_images.end(); ++iter) {
+    if((*iter)->get_name()==name) {
+      delete (*iter);
+      active_images.erase(iter);
+    }
+  }
+
   Image *img = new Image(filename, name);
   active_images.push_back(img);
   return 1;
