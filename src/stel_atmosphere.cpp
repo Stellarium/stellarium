@@ -27,7 +27,7 @@
 #include "stellastro.h"
 #include "stel_atmosphere.h"
 
-stel_atmosphere::stel_atmosphere() : sky_resolution(48), tab_sky(NULL), world_adaptation_luminance(0.f)
+stel_atmosphere::stel_atmosphere() : sky_resolution(48), tab_sky(NULL), world_adaptation_luminance(0.f), atm_intensity(0)
 {
 	// Create the vector array used to store the sky color on the full field of view
 	tab_sky = new Vec3f*[sky_resolution+1];
@@ -54,6 +54,7 @@ void stel_atmosphere::compute_color(double JD, Vec3d sunPos, Vec3d moonPos, floa
 	// no need to calculate if not visible
 	if(!fader)
 	{
+		atm_intensity = 0;
 		world_adaptation_luminance = 3.75f;
 		return;
 	}

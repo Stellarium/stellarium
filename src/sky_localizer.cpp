@@ -61,6 +61,8 @@ Sky_localizer::Sky_localizer(string _data_dir)
   locale_to_name["esl"] = _("Spanish");
   locale_to_name["fra"]  = _("French");
   locale_to_name["haw"]  = _("Hawaiian");
+  locale_to_name["dut"]  = _("Dutch");
+  locale_to_name["por"]  = _("Portuguese");
 
   for ( stringHashIter_t iter = locale_to_name.begin(); iter != locale_to_name.end(); ++iter ) {
     name_to_locale[ iter->second ] = iter->first;

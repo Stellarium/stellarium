@@ -542,6 +542,8 @@ void stel_core::load_config_from(const string& confFile)
 
 	// Star section
 	StarScale			= conf.get_double ("stars:star_scale");
+	if(ssystem) ssystem->set_object_scale(StarScale);  // if reload config
+
 	StarMagScale		= conf.get_double ("stars:star_mag_scale");
 	StarTwinkleAmount	= conf.get_double ("stars:star_twinkle_amount");
 	MaxMagStarName		= conf.get_double ("stars:max_mag_star_name");
