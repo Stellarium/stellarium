@@ -49,10 +49,12 @@ public:
 
 	virtual PROJECTOR_TYPE get_type(void) const {return PERSPECTIVE_PROJECTOR;}
 	VIEWPORT_TYPE get_viewport_type(void) const {return viewport_type;}
+	void set_viewport_type(VIEWPORT_TYPE);
 
 	void set_fov(double f);
 	double get_fov(void) const {return fov;}
 	virtual void change_fov(double deltaFov);
+	void set_minmaxfov(double min, double max) {min_fov = min; max_fov = max; set_fov(fov);}
 
 	// Update auto_zoom if activated
 	void update_auto_zoom(int delta_time);
@@ -61,6 +63,8 @@ public:
 	void zoom_to(double aim_fov, float move_duration = 1.);
 
 	void set_screen_size(int w, int h);
+	int get_screenW(void) const {return screenW;}
+	int get_screenH(void) const {return screenH;}
 	void maximize_viewport(void) {set_viewport(0,0,screenW,screenH); viewport_type = MAXIMIZED;}
 	void set_square_viewport(void);
 	void set_disk_viewport(void);

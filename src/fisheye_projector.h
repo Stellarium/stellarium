@@ -31,6 +31,8 @@ public:
 	Fisheye_projector(int _screenW = 800, int _screenH = 600, double _fov = 175.,
 		double _min_fov = 0.001, double _max_fov = 300.);
 
+	Fisheye_projector(const Projector&);
+
 	virtual PROJECTOR_TYPE get_type(void) const {return FISHEYE_PROJECTOR;}
 
 	virtual void set_viewport(int x, int y, int w, int h);
