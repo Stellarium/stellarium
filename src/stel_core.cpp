@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003 Fabien Ch�eau
+ * Copyright (C) 2003 Fabien Chereau
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -60,7 +60,7 @@ stel_core::~stel_core()
 	if (commander) delete commander;
 	if(script_images) delete script_images;
 
-	stel_object::delete_textures(); // Load the pointer textures 
+	stel_object::delete_textures(); // Unload the pointer textures 
 }
 
 // Set the main data, textures and configuration directories
@@ -130,7 +130,7 @@ void stel_core::init(void)
 		DataDir + "star_names." + SkyLocale + ".fab",
 		DataDir + "spacefont.txt" );
 
-	nebulas   = new Nebula_mgr(NebulaLabelColor, NebulaCircleColor);
+	nebulas = new Nebula_mgr(NebulaLabelColor, NebulaCircleColor);
 
 	// Create and init the solar system
 	ssystem = new SolarSystem(DataDir, SkyLocale, "spacefont.txt", PlanetNamesColor, PlanetOrbitsColor );
@@ -213,7 +213,7 @@ void stel_core::quit(void)
 // Update all the objects in function of the time
 void stel_core::update(int delta_time)
 {
-	frame++;
+	++frame;
     timefr+=delta_time;
     if (timefr-timeBase > 1000)
     {
