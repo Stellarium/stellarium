@@ -269,8 +269,9 @@ void stel_core::draw(int delta_time)
 
 	// Give the updated standard projection matrices to the projector
 	projection->set_modelview_matrices(	navigation->get_earth_equ_to_eye_mat(),
-										navigation->get_helio_to_eye_mat(),
-										navigation->get_local_to_eye_mat());
+						navigation->get_helio_to_eye_mat(),
+						navigation->get_local_to_eye_mat(),
+						navigation->get_prec_earth_equ_to_eye_mat());
 
 	// Set openGL drawings in local coordinates i.e. generally altazimuthal coordinates
 	navigation->switch_to_local();
@@ -341,7 +342,7 @@ void stel_core::draw(int delta_time)
 			FlagGravityLabels, MaxMagNebulaName, FlagBrightNebulae);
 
 	// Draw the hipparcos stars
-	Vec3d tempv = navigation->get_equ_vision();
+	Vec3d tempv = navigation->get_prec_equ_vision();
 	Vec3f temp(tempv[0],tempv[1],tempv[2]);
 
 	// printf("sky: %f\tatm_int: %f\n", sky_brightness, atmosphere->get_intensity());
@@ -978,7 +979,9 @@ stel_object * stel_core::find_stel_object(const Vec3d& v) const
 	if (FlagPlanets) sobj = ssystem->search(v, navigation, projection);
 	if (sobj) return sobj;
 
-	Vec3f u=Vec3f(v[0],v[1],v[2]);
+	Vec3f u = navigation->earth_equ_to_prec_earth_equ(v);
+
+	//	Vec3f u=Vec3f(v[0],v[1],v[2]);
 
 	sobj = nebulas->search(u);
 	if (sobj) return sobj;
@@ -1020,17 +1023,20 @@ stel_object * stel_core::clever_find(const Vec3d& v) const
 		candidates.insert(candidates.begin(), temp.begin(), temp.end());
 	}
 
+	// nebulas and stars used precessed equ coords
+	Vec3d p = navigation->earth_equ_to_prec_earth_equ(v);
+
 	// The nebulas inside the range
 	if (FlagNebula)
 	{
-		temp = nebulas->search_around(v, fov_around);
+		temp = nebulas->search_around(p, fov_around);
 		candidates.insert(candidates.begin(), temp.begin(), temp.end());
 	}
 
 	// And the stars inside the range
 	if (FlagStars)
 	{
-		temp = hip_stars->search_around(v, fov_around);
+		temp = hip_stars->search_around(p, fov_around);
 		candidates.insert(candidates.begin(), temp.begin(), temp.end());
 	}
 
@@ -1040,7 +1046,8 @@ stel_object * stel_core::clever_find(const Vec3d& v) const
 	vector<stel_object*>::iterator iter = candidates.begin();
     while (iter != candidates.end())
     {
-		projection->project_earth_equ((*iter)->get_earth_equ_pos(navigation), winpos);
+                projection->project_earth_equ((*iter)->get_earth_equ_pos(navigation), winpos);
+
 		float distance = sqrt((xpos-winpos[0])*(xpos-winpos[0]) + (ypos-winpos[1])*(ypos-winpos[1]));
 		float mag = (*iter)->get_mag(navigation);
 		if ((*iter)->get_type()==STEL_OBJECT_NEBULA) {

@@ -250,9 +250,9 @@ void Constellation_mgr::load(const string& fileName, const string& artfileName, 
 		cons->art_tex = new s_texture(texfile);
 		texSize = cons->art_tex->getSize();
 
-		Vec3f s1 = _VouteCeleste->search(hp1)->get_earth_equ_pos();
-		Vec3f s2 = _VouteCeleste->search(hp2)->get_earth_equ_pos();
-		Vec3f s3 = _VouteCeleste->search(hp3)->get_earth_equ_pos();
+		Vec3f s1 = _VouteCeleste->search(hp1)->get_prec_earth_equ_pos();
+		Vec3f s2 = _VouteCeleste->search(hp2)->get_prec_earth_equ_pos();
+		Vec3f s3 = _VouteCeleste->search(hp3)->get_prec_earth_equ_pos();
 
 		// To transform from texture coordinate to 2d coordinate we need to find X with XA = B
 		// A formed of 4 points in texture coordinate, B formed with 4 points in 3d coordinate
@@ -342,7 +342,7 @@ void Constellation_mgr::draw_names(Projector* prj, bool _gravity_label)
     for(iter=asterisms.begin();iter!=asterisms.end();iter++)
     {
 		// Check if in the field of view
-    	if ( prj->project_earth_equ_check((*iter)->XYZname, (*iter)->XYname) )
+    	if ( prj->project_prec_earth_equ_check((*iter)->XYZname, (*iter)->XYname) )
 			(*iter)->draw_name(asterFont, prj);
     }
     prj->reset_perspective_projection();
@@ -356,7 +356,7 @@ void Constellation_mgr::draw_one_name(Projector* prj, Constellation* c, bool _gr
     glEnable(GL_TEXTURE_2D);
     prj->set_orthographic_projection();	// set 2D coordinate
 	// Check if in the field of view
-    if ( prj->project_earth_equ_check(c->XYZname, c->XYname) )
+    if ( prj->project_prec_earth_equ_check(c->XYZname, c->XYname) )
 	if (c) c->draw_name(asterFont, prj);
     prj->reset_perspective_projection();
 }

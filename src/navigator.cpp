@@ -36,7 +36,11 @@ navigator::navigator(Observator* obs) : flag_traking(0), flag_lock_equ_pos(0), f
 	}
 	local_vision=Vec3d(1.,0.,0.);
 	equ_vision=Vec3d(1.,0.,0.);
+	prec_equ_vision=Vec3d(1.,0.,0.);  // not correct yet...
 	viewing_mode = VIEW_HORIZON;  // default
+
+	precession = 0;
+
 }
 
 navigator::~navigator()
@@ -46,123 +50,127 @@ navigator::~navigator()
 ////////////////////////////////////////////////////////////////////////////////
 void navigator::update_vision_vector(int delta_time, stel_object* selected)
 {
-    if (flag_auto_move)
+  if (flag_auto_move)
     {
-		double ra_aim, de_aim, ra_start, de_start, ra_now, de_now;
+      double ra_aim, de_aim, ra_start, de_start, ra_now, de_now;
 
-		if( zooming_mode == 1 ) {
-                  // if zooming in, object may be moving so be sure to zoom to latest position
-                  move.aim=selected->get_earth_equ_pos(this);
-                  move.aim.normalize();
-                  move.aim*=2.;
-		}
+      if( zooming_mode == 1 ) {
+	// if zooming in, object may be moving so be sure to zoom to latest position
+	move.aim=selected->get_earth_equ_pos(this);
+	move.aim.normalize();
+	move.aim*=2.;
+      }
 
-		// Use a smooth function
-		float smooth = 4.f;
-		double c;
+      // Use a smooth function
+      float smooth = 4.f;
+      double c;
 
-		if (zooming_mode == 1) {
-		  if( move.coef > .9 ) {
-		    c = 1;
-		  } else {
-		    c = 1 - pow(1.-1.11*(move.coef),3);
-		  }
-		}
-		else if(zooming_mode == -1) {
-		  if( move.coef < 0.1 ) { 
-		    // keep in view at first as zoom out
-		    c = 0;
-
-		    /* could track as moves too, but would need to know if start was actually
-		       a zoomed in view on the object or an extraneous zoom out command
-		    if(move.local_pos) {
-		      move.start=earth_equ_to_local(selected->get_earth_equ_pos(this));
-		    } else {
-		      move.start=selected->get_earth_equ_pos(this);
-		    }
-		    move.start.normalize();
-		    */
-
-		  }else {
-		    c =  pow(1.11*(move.coef-.1),3);		  
-		  }
-		}
-		else c = atanf(smooth * 2.*move.coef-smooth)/atanf(smooth)/2+0.5;
-
-
-		if (move.local_pos)
-		{
-			rect_to_sphe(&ra_aim, &de_aim, move.aim);
-			rect_to_sphe(&ra_start, &de_start, move.start);
-		}
-		else
-		{
-			rect_to_sphe(&ra_aim, &de_aim, earth_equ_to_local(move.aim));
-			rect_to_sphe(&ra_start, &de_start, earth_equ_to_local(move.start));
-		}
-
-		/*  Was causing changes in direction while zooming, and seems unneccessary
-
-		// Trick to choose the good moving direction and never travel on a distance > PI
-		float delta = ra_start;
-		ra_start -= delta;		// ra_start = 0
-		ra_aim -= delta;
-
-		if (ra_aim > M_PI) ra_aim = -2.*M_PI + ra_aim;
-		if (ra_aim < -M_PI) ra_aim = 2.*M_PI + ra_aim;
-
-		ra_now = ra_aim*c + ra_start*(1. - c);
-		de_now = de_aim*c + de_start*(1. - c);
-
-		ra_now += delta;
-		*/
-
-		de_now = de_aim*c + de_start*(1. - c);
-		ra_now = ra_aim*c + ra_start*(1. - c);
-
-		sphe_to_rect(ra_now, de_now, local_vision);
-		equ_vision = local_to_earth_equ(local_vision);
-
-        move.coef+=move.speed*delta_time;
-        if (move.coef>=1.)
-        {
-			flag_auto_move=0;
-            if (move.local_pos)
-			{
-				local_vision=move.aim;
-				equ_vision=local_to_earth_equ(local_vision);
-			}
-			else
-			{
-				equ_vision=move.aim;
-				local_vision=earth_equ_to_local(equ_vision);
-			}
-        }
-    }
-	else
-	{
-    	if (flag_traking && selected) // Equatorial vision vector locked on selected object
-		{
-			equ_vision=selected->get_earth_equ_pos(this);
-			// Recalc local vision vector
-			
-			local_vision=earth_equ_to_local(equ_vision);
-			
-		}
-		else
-		{
-			if (flag_lock_equ_pos) // Equatorial vision vector locked
-			{
-				// Recalc local vision vector
-				local_vision=earth_equ_to_local(equ_vision);
-			}
-			else // Local vision vector locked
-			{
-				// Recalc equatorial vision vector
-				equ_vision=local_to_earth_equ(local_vision);
-			}
-		}
+      if (zooming_mode == 1) {
+	if( move.coef > .9 ) {
+	  c = 1;
+	} else {
+	  c = 1 - pow(1.-1.11*(move.coef),3);
 	}
+      }
+      else if(zooming_mode == -1) {
+	if( move.coef < 0.1 ) { 
+	  // keep in view at first as zoom out
+	  c = 0;
+
+	  /* could track as moves too, but would need to know if start was actually
+	     a zoomed in view on the object or an extraneous zoom out command
+	     if(move.local_pos) {
+	     move.start=earth_equ_to_local(selected->get_earth_equ_pos(this));
+	     } else {
+	     move.start=selected->get_earth_equ_pos(this);
+	     }
+	     move.start.normalize();
+	  */
+
+	}else {
+	  c =  pow(1.11*(move.coef-.1),3);		  
+	}
+      }
+      else c = atanf(smooth * 2.*move.coef-smooth)/atanf(smooth)/2+0.5;
+
+
+      if (move.local_pos)
+	{
+	  rect_to_sphe(&ra_aim, &de_aim, move.aim);
+	  rect_to_sphe(&ra_start, &de_start, move.start);
+	}
+      else
+	{
+	  rect_to_sphe(&ra_aim, &de_aim, earth_equ_to_local(move.aim));
+	  rect_to_sphe(&ra_start, &de_start, earth_equ_to_local(move.start));
+	}
+
+      /*  Was causing changes in direction while zooming, and seems unneccessary
+
+      // Trick to choose the good moving direction and never travel on a distance > PI
+      float delta = ra_start;
+      ra_start -= delta;		// ra_start = 0
+      ra_aim -= delta;
+
+      if (ra_aim > M_PI) ra_aim = -2.*M_PI + ra_aim;
+      if (ra_aim < -M_PI) ra_aim = 2.*M_PI + ra_aim;
+
+      ra_now = ra_aim*c + ra_start*(1. - c);
+      de_now = de_aim*c + de_start*(1. - c);
+
+      ra_now += delta;
+      */
+
+      de_now = de_aim*c + de_start*(1. - c);
+      ra_now = ra_aim*c + ra_start*(1. - c);
+
+      sphe_to_rect(ra_now, de_now, local_vision);
+      equ_vision = local_to_earth_equ(local_vision);
+
+      move.coef+=move.speed*delta_time;
+      if (move.coef>=1.)
+	{
+	  flag_auto_move=0;
+	  if (move.local_pos)
+	    {
+	      local_vision=move.aim;
+	      equ_vision=local_to_earth_equ(local_vision);
+	    }
+	  else
+	    {
+	      equ_vision=move.aim;
+	      local_vision=earth_equ_to_local(equ_vision);
+	    }
+	}
+    }
+  else
+    {
+      if (flag_traking && selected) // Equatorial vision vector locked on selected object
+	{
+	  equ_vision=selected->get_earth_equ_pos(this);
+	  // Recalc local vision vector
+			
+	  local_vision=earth_equ_to_local(equ_vision);
+			
+	}
+      else
+	{
+	  if (flag_lock_equ_pos) // Equatorial vision vector locked
+	    {
+	      // Recalc local vision vector
+	      local_vision=earth_equ_to_local(equ_vision);
+	    }
+	  else // Local vision vector locked
+	    {
+	      // Recalc equatorial vision vector
+	      equ_vision=local_to_earth_equ(local_vision);
+	    }
+	}
+    }
+    
+  prec_equ_vision = mat_earth_equ_to_prec_earth_equ*equ_vision;
+
+    
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -170,6 +178,7 @@ void navigator::set_local_vision(const Vec3d& _pos)
 {
 	local_vision = _pos;
 	equ_vision=local_to_earth_equ(local_vision);
+	prec_equ_vision = mat_earth_equ_to_prec_earth_equ*equ_vision;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -201,7 +210,8 @@ void navigator::update_move(double deltaAz, double deltaAlt)
 		{
 			sphe_to_rect(azVision, altVision, local_vision);
 			// Calc the equatorial coordinate of the direction of vision wich was in Altazimuthal coordinate
-    		equ_vision=local_to_earth_equ(local_vision);
+			equ_vision=local_to_earth_equ(local_vision);
+			prec_equ_vision = mat_earth_equ_to_prec_earth_equ*equ_vision;
 		}
 	}
 
@@ -219,6 +229,12 @@ void navigator::update_time(int delta_time)
 	// Fix time limits to -100000 to +100000 to prevent bugs
 	if (JDay>38245309.499988) JDay = 38245309.499988;
 	if (JDay<-34803211.500012) JDay = -34803211.500012;
+
+	// precession since epoch
+	// using annual rate of 50.27 arcseconds
+	precession = 0.000243716*(JDay-J2000)/365.25;
+
+	//precession += 0.01;  // for quick testing
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -234,25 +250,33 @@ void navigator::update_transform_matrices(Vec3d earth_ecliptic_pos)
 	if( lat > 89 )  lat = 89.5;
 	if( lat < -89 ) lat = -89.5;
 
+	// axis of precession
+	Vec3d axis = Vec3d(0,-0.3977702,0.9174851);
 
-	mat_local_to_earth_equ =Mat4d::zrotation((get_apparent_sidereal_time(JDay)+position->get_longitude())*M_PI/180.) *
+	mat_local_to_earth_equ = 
+	  Mat4d::zrotation((get_apparent_sidereal_time(JDay)+position->get_longitude())*M_PI/180.) *
 	  Mat4d::yrotation((90.-lat)*M_PI/180.);
 
 	mat_earth_equ_to_local = mat_local_to_earth_equ.transpose();
 
-	mat_helio_to_earth_equ =Mat4d::xrotation(get_mean_obliquity(JDay)*M_PI/180.) *
-							Mat4d::translation(-earth_ecliptic_pos);
 
-					
-										
-									
-							
-	// These two next have to take into account the position of the observer on the earth
-	Mat4d tmp = Mat4d::xrotation(-23.438855*M_PI/180.) *
+	// for precession
+	mat_earth_equ_to_prec_earth_equ = Mat4d::rotation(axis, precession);
+	mat_prec_earth_equ_to_earth_equ = mat_earth_equ_to_prec_earth_equ.transpose();
+
+	mat_helio_to_earth_equ = 	  
+	  Mat4d::rotation( axis, -precession) *
+	  Mat4d::xrotation(23.438855*M_PI/180.) *
+	  Mat4d::translation(-earth_ecliptic_pos);
 	
-	 Mat4d::zrotation((position->get_longitude()+get_mean_sidereal_time(JDay))*M_PI/180.) *
-	 Mat4d::yrotation((90.-lat)*M_PI/180.);
-	 
+
+	// These two next have to take into account the position of the observer on the earth
+	Mat4d tmp = 	  
+	  Mat4d::xrotation(-23.438855*M_PI/180.) *
+	  Mat4d::rotation( axis, precession) *
+	  Mat4d::zrotation((position->get_longitude()+get_mean_sidereal_time(JDay))*M_PI/180.) *
+	  Mat4d::yrotation((90.-lat)*M_PI/180.);
+
 
 	mat_local_to_helio = 	Mat4d::translation(earth_ecliptic_pos) *
 							tmp *
@@ -302,7 +326,7 @@ void navigator::update_model_view_mat(void)
 
   mat_earth_equ_to_eye = mat_local_to_eye*mat_earth_equ_to_local;
   mat_helio_to_eye = mat_local_to_eye*mat_helio_to_local;
-
+  mat_prec_earth_equ_to_eye = mat_local_to_eye*mat_earth_equ_to_local*mat_prec_earth_equ_to_earth_equ;
 }
 
 ////////////////////////////////////////////////////////////////////////////////

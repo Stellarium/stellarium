@@ -91,8 +91,9 @@ public:
 
 	// Set the standard modelview matrices used for projection
 	void set_modelview_matrices(const Mat4d& _mat_earth_equ_to_eye,
-								const Mat4d& _mat_helio_to_eye,
-								const Mat4d& _mat_local_to_eye);
+				    const Mat4d& _mat_helio_to_eye,
+				    const Mat4d& _mat_local_to_eye,
+				    const Mat4d& _mat_prec_earth_equ_to_eye);
 
 	// Return in vector "win" the projection on the screen of point v in earth equatorial coordinate
 	// according to the current modelview and projection matrices (reimplementation of gluProject)
@@ -110,12 +111,25 @@ public:
 	void unproject_earth_equ(double x, double y, Vec3d& v) const
 		{unproject(x, y, inv_mat_earth_equ_to_eye, v);}
 
+	// taking account of precession
+	bool project_prec_earth_equ(const Vec3d& v, Vec3d& win) const
+		{return project_custom(v, win, mat_prec_earth_equ_to_eye);}
+
+	bool project_prec_earth_equ_check(const Vec3d& v, Vec3d& win) const
+		{return project_custom_check(v, win, mat_prec_earth_equ_to_eye);}
+
+	bool project_prec_earth_equ_line_check(const Vec3d& v1, Vec3d& win1, const Vec3d& v2, Vec3d& win2) const
+		{return project_custom_line_check(v1, win1, v2, win2, mat_prec_earth_equ_to_eye);}
+
 	// Same function with input vector v in heliocentric coordinate
 	bool project_helio_check(const Vec3d& v, Vec3d& win) const
 		{return project_custom_check(v, win, mat_helio_to_eye);}
 
 	bool project_helio(const Vec3d& v, Vec3d& win) const
 		{return project_custom(v, win, mat_helio_to_eye);}
+
+	bool project_helio_line_check(const Vec3d& v1, Vec3d& win1, const Vec3d& v2, Vec3d& win2) const
+		{return project_custom_line_check(v1, win1, v2, win2, mat_helio_to_eye);}
 
 	void unproject_helio(double x, double y, Vec3d& v) const
 		{return unproject(x, y, inv_mat_helio_to_eye, v);}
@@ -215,6 +229,7 @@ protected:
 	Mat4d mat_projection;		// Projection matrix
 
 	Mat4d mat_earth_equ_to_eye;		// Modelview Matrix for earth equatorial projection
+	Mat4d mat_prec_earth_equ_to_eye;        // for precessed equ coords
 	Mat4d mat_helio_to_eye;			// Modelview Matrix for earth equatorial projection
 	Mat4d mat_local_to_eye;			// Modelview Matrix for earth equatorial projection
 	Mat4d inv_mat_earth_equ_to_eye;	// Inverse of mat_projection*mat_earth_equ_to_eye
