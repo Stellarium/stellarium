@@ -61,7 +61,7 @@ void Observator::load(const string& file, const string& section)
 
 	name = conf.get_str(section, "name");
 
-	cout << "Loading location " << name << " from file " << file << endl;
+	cout << "Loading location " << name << endl;
 
 	latitude  = get_dec_angle(conf.get_str(section, "latitude"));
     longitude = get_dec_angle(conf.get_str(section, "longitude"));

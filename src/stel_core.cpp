@@ -209,9 +209,9 @@ void stel_core::update(int delta_time)
 	if (sky_brightness<0) sky_brightness=0;
 	landscape->set_sky_brightness(sky_brightness);
 
-	ui->update();
+	ui->gui_update_widgets();
 
-	if (FlagShowGravityUi) ui->tui_update_widgets();
+	if (FlagShowGravityUi || FlagShowTuiMenu) ui->tui_update_widgets();
 }
 
 // Execute all the drawing functions
@@ -260,7 +260,7 @@ void stel_core::draw(int delta_time)
 
 	// Draw the nebula if they are visible
 	if (FlagNebula && (!FlagAtmosphere || sky_brightness<0.1))
-		nebulas->draw(FlagNebulaName, projection, tone_converter, FlagGravityLabels);
+		nebulas->draw(FlagNebulaName, projection, navigation, tone_converter, FlagGravityLabels, MaxMagNebulaName);
 
 	// Draw the hipparcos stars
 	Vec3d tempv = navigation->get_equ_vision();
@@ -445,6 +445,7 @@ void stel_core::load_config_from(const string& confFile)
 	GuiTextColor		= str_to_vec3f(conf.get_str("gui:gui_text_color").c_str());
 
 	// Text ui section
+	FlagEnableTuiMenu = conf.get_boolean("tui:flag_enable_tui_menu");
 	FlagShowGravityUi = conf.get_boolean("tui:flag_show_gravity_ui");
 	FlagShowTuiMenu = conf.get_boolean("tui:flag_show_tui_menu");
 	FlagShowTuiDateTime = conf.get_boolean("tui:flag_show_tui_datetime");
@@ -459,6 +460,7 @@ void stel_core::load_config_from(const string& confFile)
 	InitViewPos 		= str_to_vec3f(conf.get_str("navigation:init_view_pos").c_str());
 	auto_move_duration	= conf.get_double ("navigation","auto_move_duration",1.5);
 	FlagUTC_Time		= conf.get_boolean("navigation:flag_utc_time");
+	FlagShowTZWarning	= conf.get_boolean("navigation:flag_show_tz_warning");
 
 	// Landscape section
 	FlagGround			= conf.get_boolean("landscape:flag_ground");
@@ -487,6 +489,7 @@ void stel_core::load_config_from(const string& confFile)
 	FlagPlanetsHints		= conf.get_boolean("astro:flag_planets_hints");
 	FlagNebula				= conf.get_boolean("astro:flag_nebula");
 	FlagNebulaName			= conf.get_boolean("astro:flag_nebula_name");
+	MaxMagNebulaName		= conf.get_double("astro:max_mag_nebula_name");
 	FlagMilkyWay			= conf.get_boolean("astro:flag_milky_way");
 }
 
@@ -546,6 +549,7 @@ void stel_core::save_config_to(const string& confFile)
 	conf.set_str	("gui:gui_text_color", vec3f_to_str(GuiTextColor));
 
 	// Text ui section
+	conf.set_boolean("tui:flag_enable_tui_menu", FlagEnableTuiMenu);
 	conf.set_boolean("tui:flag_show_gravity_ui", FlagShowGravityUi);
 	conf.set_boolean("tui:flag_show_tui", false);
 	conf.set_boolean("tui:flag_show_tui_datetime", FlagShowTuiDateTime);
@@ -560,6 +564,7 @@ void stel_core::save_config_to(const string& confFile)
 	conf.set_str	("navigation:init_view_pos", vec3f_to_str(InitViewPos));
 	conf.set_double ("navigation:auto_move_duration", auto_move_duration);
 	conf.set_boolean("navigation:flag_utc_time", FlagUTC_Time);
+	conf.set_boolean("navigation:flag_show_tz_warning", FlagShowTZWarning);
 
 	// Landscape section
 	conf.set_boolean("landscape:flag_ground", FlagGround);
@@ -588,6 +593,7 @@ void stel_core::save_config_to(const string& confFile)
 	conf.set_boolean("astro:flag_planets_hints", FlagPlanetsHints);
 	conf.set_boolean("astro:flag_nebula", FlagNebula);
 	conf.set_boolean("astro:flag_nebula_name", FlagNebulaName);
+	conf.set_double("astro:max_mag_nebula_name", MaxMagNebulaName);
 	conf.set_boolean("astro:flag_milky_way", FlagMilkyWay);
 
 	conf.save(confFile);
@@ -615,7 +621,6 @@ int stel_core::handle_keys(SDLKey key, s_gui::S_GUI_VALUE state)
 	else tuiv = s_tui::S_TUI_RELEASED;
 	if (FlagShowTuiMenu)
 	{
-
 		if (ui->handle_keys_tui(key, tuiv)) return 1;
 		if (state==S_GUI_PRESSED && key==SDLK_m)
 		{
@@ -672,6 +677,7 @@ void stel_core::turn_right(int s)
 	{
 		deltaAz = 1;
 		navigation->set_flag_traking(0);
+		navigation->set_flag_lock_equ_pos(0);
 	}
 	else deltaAz = 0;
 }
@@ -682,6 +688,7 @@ void stel_core::turn_left(int s)
 	{
 		deltaAz = -1;
 		navigation->set_flag_traking(0);
+		navigation->set_flag_lock_equ_pos(0);
 	}
 	else deltaAz = 0;
 }
@@ -692,6 +699,7 @@ void stel_core::turn_up(int s)
 	{
 		deltaAlt = 1;
 		navigation->set_flag_traking(0);
+		navigation->set_flag_lock_equ_pos(0);
 	}
 	else deltaAlt = 0;
 }
@@ -702,6 +710,7 @@ void stel_core::turn_down(int s)
 	{
 		deltaAlt = -1;
 		navigation->set_flag_traking(0);
+		navigation->set_flag_lock_equ_pos(0);
 	}
 	else deltaAlt = 0;
 }
@@ -882,8 +891,11 @@ void stel_core::auto_zoom_in(float move_duration)
 {
 	if (!selected_object) return;
 
-	navigation->set_flag_traking(true);
-	goto_stel_object(selected_object, move_duration);
+	if (!navigation->get_flag_traking())
+	{
+		navigation->set_flag_traking(true);
+		goto_stel_object(selected_object, move_duration);
+	}
 	float satfov = selected_object->get_satellites_fov(navigation);
 	float closefov = selected_object->get_close_fov(navigation);
 
@@ -899,19 +911,33 @@ void stel_core::auto_zoom_out(float move_duration)
 		projection->zoom_to(InitFov, move_duration);
 		navigation->move_to(InitViewPos, move_duration, true);
 		navigation->set_flag_traking(false);
+		navigation->set_flag_lock_equ_pos(0);
 		return;
 	}
 
+	// If the selected object has satellites, unzoom to satellites view
 	float satfov = selected_object->get_satellites_fov(navigation);
-
 	if (projection->get_fov()<=satfov*0.9 && satfov>0.)
 	{
 		projection->zoom_to(satfov, move_duration);
 		return;
 	}
 
+	// If the selected object is part of a planet subsystem (other than sun),
+	// unzoom to subsystem view
+	if (selected_object->get_type() == STEL_OBJECT_PLANET && selected_object!=ssystem->get_sun() && ((planet*)selected_object)->get_parent()!=ssystem->get_sun())
+	{
+		float satfov = ((planet*)selected_object)->get_parent()->get_satellites_fov(navigation);
+		if (projection->get_fov()<=satfov*0.9 && satfov>0.)
+		{
+			projection->zoom_to(satfov, move_duration);
+			return;
+		}
+	}
+
 	projection->zoom_to(InitFov, move_duration);
 	navigation->move_to(InitViewPos, move_duration, true);
 	navigation->set_flag_traking(false);
+	navigation->set_flag_lock_equ_pos(0);
 
 }

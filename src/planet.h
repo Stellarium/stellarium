@@ -128,6 +128,8 @@ public:
 	void set_sphere_scale(float s) {sphere_scale = s;}
 	float get_sphere_scale(void) const {return sphere_scale;}
 
+	planet* get_parent(void) {return parent;}
+
 	void set_big_halo(const string& halotexfile);
 	void set_halo_size(float s) {big_halo_size = s;}
 

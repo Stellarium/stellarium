@@ -828,7 +828,8 @@ void GuiHandleClic(Uint16 x, Uint16 y, Uint8 state, Uint8 button)
     enum guiValue bt;
     enum guiValue st;
     switch (button)
-    {   case SDL_BUTTON_RIGHT : bt=GUI_MOUSE_RIGHT; break;
+    {
+		case SDL_BUTTON_RIGHT : bt=GUI_MOUSE_RIGHT; break;
         case SDL_BUTTON_LEFT : bt=GUI_MOUSE_LEFT; break;
         case SDL_BUTTON_MIDDLE : bt=GUI_MOUSE_MIDDLE; break;
         default : bt=GUI_MOUSE_LEFT;
@@ -842,7 +843,8 @@ void GuiHandleClic(Uint16 x, Uint16 y, Uint8 state, Uint8 button)
     }
     else
     // Manage the event for the main window
-    {   if (state==SDL_RELEASED) return;
+    {
+		if (state==SDL_RELEASED) return;
         // Deselect the selected object
         if (button==SDL_BUTTON_RIGHT)
         {

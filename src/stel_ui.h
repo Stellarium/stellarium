@@ -42,7 +42,7 @@ public:
     virtual ~stel_ui();		// Delete the ui
 	void init(void);		// Initialize the ui.
 	void draw(void);		// Display the ui
-	void update(void);		// Update changing values
+	void gui_update_widgets(void);		// Update changing values
 
 	void draw_gravity_ui(void);	// Draw simple gravity text ui.
 
@@ -66,7 +66,8 @@ private:
 	s_font * spaceFont;		// The standard font
 	s_font * courierFont;	// The standard fixed size font
 	s_texture * baseTex;	// The standard fill texture
-
+	s_texture * tex_up;		// Up arrow texture
+	s_texture * tex_down;	// Down arrow texture
 	Container * desktop;	// The container which contains everything
 
 	// The top bar containing the main infos (date, time, fps etc...)
@@ -136,7 +137,7 @@ private:
 
 	// 2. Time & Date
 	s_tui::MultiSet_item<string>* tui_time_settmz;
-	s_tui::Time_item2* tui_time_skytime;
+	s_tui::Time_item* tui_time_skytime;
 	s_tui::Time_item* tui_time_presetskytime;
 	s_tui::Time_item* tui_time_actual;
 	s_tui::MultiSet_item<string>* tui_time_startuptime;
@@ -145,7 +146,7 @@ private:
 	// 3. Stars
 	s_tui::Boolean_item* tui_stars_show;
 	s_tui::Decimal_item* tui_star_labelmaxmag;
-	s_tui::Boolean_item* tui_stars_twinkle;
+	s_tui::Decimal_item* tui_stars_twinkle;
 
 	// 4. Effect
 	s_tui::MultiSet_item<string>* tui_effect_landscape;

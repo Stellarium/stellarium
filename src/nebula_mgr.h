@@ -36,7 +36,8 @@ public:
     int read(const string& font_fileName, const string& fileName);
 
 	// Draw all the Nebulas
-	void draw(int hints_ON, Projector* prj, tone_reproductor* eye, bool _gravity_label);
+	void draw(int hints_ON, Projector* prj, const navigator * nav, tone_reproductor* eye,
+		bool _gravity_label, float max_mag_name);
 
 	// Search the Nebulae by position
 	stel_object * search(Vec3f Pos);

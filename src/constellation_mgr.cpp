@@ -27,7 +27,6 @@ Constellation_mgr::Constellation_mgr() : asterFont(NULL)
 {
 }
 
-// Destructor
 Constellation_mgr::~Constellation_mgr()
 {
 	vector<Constellation *>::iterator iter;
@@ -97,6 +96,13 @@ void Constellation_mgr::load(const string& font_fileName, const string& fileName
         if (fscanf(fic,"%s %s %u %u %u %u %u %u %u %u %u\n",shortname,texfile,&x1,&y1,&hp1,&x2,&y2,&hp2,
 			&x3,&y3,&hp3)!=11)
 		{
+			if (feof(fic))
+			{
+				// Empty constellation file
+				fclose(fic);
+				return;
+			}
+
 			printf("ERROR while loading art for constellation %s\n", shortname);
 			exit(-1);
 		}
@@ -140,7 +146,7 @@ void Constellation_mgr::draw(Projector* prj) const
 {
 	glDisable(GL_TEXTURE_2D);
     glDisable(GL_BLEND);
-    glColor3f(0.2,0.2,0.2);
+    glColor3f(0.1,0.15,0.2);
 	prj->set_orthographic_projection();	// set 2D coordinate
     vector<Constellation *>::const_iterator iter;
     for(iter=asterisms.begin();iter!=asterisms.end();++iter)

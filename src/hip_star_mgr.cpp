@@ -199,7 +199,7 @@ void Hip_Star_mgr::draw(float _star_scale, float _star_mag_scale, float _twinkle
 			// If too small, skip and Compute the 2D position and check if in screen
 			if ((*iter)->Mag>maxMag || !prj->project_earth_equ_check((*iter)->XYZ, (*iter)->XY)) continue;
 			(*iter)->draw();
-			if (name_ON && (*iter)->CommonName && (*iter)->Mag<maxMagStarName)
+			if ((*iter)->CommonName && name_ON && (*iter)->Mag<maxMagStarName)
             {
 		       	(*iter)->draw_name(starFont);
                	glBindTexture (GL_TEXTURE_2D, starTexture->getID());
@@ -247,7 +247,7 @@ void Hip_Star_mgr::draw_point(float _star_scale, float _star_mag_scale, float _t
 			// If too small, skip and Compute the 2D position and check if in screen
 			if ((*iter)->Mag>maxMag || !prj->project_earth_equ_check((*iter)->XYZ, (*iter)->XY)) continue;
 			(*iter)->draw_point();
-			if (name_ON && (*iter)->CommonName && (*iter)->Mag<maxMagStarName)
+			if ((*iter)->CommonName && name_ON && (*iter)->Mag<maxMagStarName)
             {
 		       	(*iter)->draw_name(starFont);
                	glBindTexture (GL_TEXTURE_2D, starTexture->getID());
