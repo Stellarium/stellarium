@@ -59,7 +59,7 @@ void stel_object::draw_pointer(int delta_time, const Projector* prj, const navig
         glEnd ();
     }
 
-	float size = get_on_screen_size(nav, prj);
+	float size = get_on_screen_size(prj, nav);
 	size+=20.f;
 	size+=10.f*sin(0.002f * local_time);
 

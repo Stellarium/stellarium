@@ -485,6 +485,10 @@ int stel_ui::handle_clic(Uint16 x, Uint16 y, Uint8 button, Uint8 state)
 					core->selected_constellation=NULL;
 				}
             }
+			else
+			{
+				core->selected_constellation=NULL;
+			}
         }
     }
 	return 0;
@@ -676,6 +680,10 @@ int stel_ui::handle_keys(SDLKey key, S_GUI_VALUE state)
         {
 			core->FlagShowTuiDateTime = !core->FlagShowTuiDateTime;
 			core->FlagShowTuiShortInfo = core->FlagShowTuiDateTime;
+		}
+		if(key==SDLK_r)
+        {
+			core->FlagConstellationArt = !core->FlagConstellationArt;
 		}
 		if(key==SDLK_4)
         {

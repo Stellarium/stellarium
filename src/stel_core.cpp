@@ -27,7 +27,7 @@ stel_core::stel_core() : screen_W(800), screen_H(600), bppMode(16), Fullscreen(0
 	navigation(NULL), observatory(NULL), projection(NULL), selected_object(NULL), hip_stars(NULL), asterisms(NULL),
 	nebulas(NULL), atmosphere(NULL), tone_converter(NULL), selected_constellation(NULL),
 	frame(0), timefr(0), timeBase(0), deltaFov(0.), deltaAlt(0.), deltaAz(0.),
-	move_speed(0.001), FlagTimePause(0)
+	move_speed(0.001), FlagTimePause(0), FlagIsGoZoomOnObject(0)
 {
 	ProjectorType = PERSPECTIVE_PROJECTOR;
 }
@@ -274,7 +274,7 @@ void stel_core::draw(int delta_time)
 	// Draw the equatorial grid
 	if (FlagEquatorialGrid) equ_grid->draw(projection);
 	// Draw the altazimutal grid
-    if (FlagAzimutalGrid) azi_grid->draw(projection);	
+    if (FlagAzimutalGrid) azi_grid->draw(projection);
 
 	// Draw the celestial equator line
     if (FlagEquatorLine) equator_line->draw(projection);
@@ -451,7 +451,7 @@ void stel_core::load_config_from(const string& confFile)
 	FlagEnableMoveKeys	= conf.get_boolean("navigation:flag_enable_move_keys");
 	initFov				= conf.get_double ("navigation","init_fov",60.);
 	InitViewPos 		= str_to_vec3f(conf.get_str("navigation:init_view_pos").c_str());
-	auto_move_duration	= conf.get_double ("navigation","auto_move_duration",1.);
+	auto_move_duration	= conf.get_double ("navigation","auto_move_duration",1.5);
 	FlagUTC_Time		= conf.get_boolean("navigation:flag_utc_time");
 
 	// Landscape section
@@ -612,7 +612,7 @@ int stel_core::handle_keys(SDLKey key, s_gui::S_GUI_VALUE state)
 	{
 
 		if (ui->handle_keys_tui(key, tuiv)) return 1;
-		if (state==S_GUI_PRESSED && (key==SDLK_m || key==SDLK_ESCAPE))
+		if (state==S_GUI_PRESSED && key==SDLK_m)
 		{
 			FlagShowTui = false;
 			return 1;

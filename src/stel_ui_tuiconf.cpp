@@ -112,7 +112,7 @@ void stel_ui::init_tui(void)
 	tui_time_skytime->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb1));
 	tui_time_presetskytime = new s_tui::Time_item("2.3 Preset Sky Time: ");
 	tui_time_presetskytime->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb1));
-	tui_time_actual = new s_tui::Action_item("2.4 Set Time to actual: ");
+	tui_time_actual = new s_tui::Action_item("2.4 Set Time to actual: ", "No");
 	tui_time_actual->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb_actualtime));
 	tui_time_startuptime = new s_tui::MultiSet_item<string>("2.5 Sky Time At Start-up: ");
 	tui_time_startuptime->addItem("Actual");
