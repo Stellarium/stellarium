@@ -12,8 +12,8 @@ dnl Check for compilers.
 AC_PROG_CC
 AC_PROG_CXX
 
-CFLAGS="-Wall -O2 -ffast-math -fexpensive-optimizations `sdl-config --cflags`"
-CXXFLAGS="-Wall -O2 -ffast-math -fexpensive-optimizations `sdl-config --cflags`"
+CFLAGS="-s -Wall -O2 -ffast-math -fexpensive-optimizations `sdl-config --cflags`"
+CXXFLAGS="-s -Wall -O2 -ffast-math -fexpensive-optimizations `sdl-config --cflags`"
 LIBS="$LIBS `sdl-config --libs`"
 
 dnl Checks for programs.
