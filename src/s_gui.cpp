@@ -340,6 +340,11 @@ void Component::initScissor(int winW, int winH)
 	scissor = new Scissor(winW, winH);
 }
 
+void Component::deleteScissor(void)
+{
+	if (scissor) delete scissor;
+	scissor = NULL;
+}
 
 CallbackComponent::CallbackComponent() : Component(), is_mouse_over(0)
 {

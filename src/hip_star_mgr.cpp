@@ -228,9 +228,8 @@ void Hip_Star_mgr::draw(float _star_scale, float _star_mag_scale, float _twinkle
 
 	// Find the star zones which are in the screen
 	int nbZones=0;
-	static int * zoneList;  // WARNING this is almost a memory leak...
-
-	nbZones = HipGrid.Intersect(equ_vision, prj->get_fov()*M_PI/180.f*1.2f, zoneList);
+	nbZones = HipGrid.Intersect(equ_vision, prj->get_fov()*M_PI/180.f*1.2f);
+	static int * zoneList = HipGrid.getResult();
 	float maxMag = 5.5f+60.f/prj->get_fov();
 
     prj->set_orthographic_projection();	// set 2D coordinate
@@ -275,9 +274,8 @@ void Hip_Star_mgr::draw_point(float _star_scale, float _star_mag_scale, float _t
 
 	// Find the star zones which are in the screen
 	int nbZones=0;
-	static int * zoneList;  // WARNING this is almost a memory leak...
-
-	nbZones = HipGrid.Intersect(equ_vision, prj->get_fov()*M_PI/180.f*1.2f, zoneList);
+	nbZones = HipGrid.Intersect(equ_vision, prj->get_fov()*M_PI/180.f*1.2f);
+	int * zoneList = HipGrid.getResult();
 	float maxMag = 5.5f+60.f/prj->get_fov();
 
     prj->set_orthographic_projection();	// set 2D coordinate
