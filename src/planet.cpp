@@ -17,7 +17,11 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
+
 #include "planet.h"
+
+// epoch J2000: 12 UT on 1 Jan 2000
+static double J2000 = 2451545.0;
 
 planet::planet(char * _name, int _flagHalo, double _radius, vec3_t _color,
 				s_texture * _planetTexture, s_texture * _haloTexture,
@@ -26,49 +30,38 @@ planet::planet(char * _name, int _flagHalo, double _radius, vec3_t _color,
 					planetTexture(_planetTexture), haloTexture(_haloTexture),
 					coord_func(_coord_func), parent(NULL)
 {
-	helio_coord=Vec3d(0.,0.,0.);
+	ecliptic_pos=Vec3d(0.,0.,0.);
 	name=strdup(_name);
 }
 
-/*	planetRing=NULL;
-	planetBigHalo=NULL;
-*/
 
 planet::~planet()
 {
-	if (name) free name;
+	if (name) free(name);
 	name=NULL;
-	if (planetRing) delete planetRing;
-	planetRing=NULL;
-	if (planetBigHalo) delete planetBigHalo;
-	planetBigHalo=NULL;
 }
-
 
 void planet::computePosition(double date)
 {
-	ln_rect_posn tempPos;
-	coord_func(date, &tempPos);
-	helioPos = vec3_t(tempPos->X, tempPos->Y, tempPos->Z);
+	ln_helio_posn helPos;
+	coord_func(date, &helPos);
+	sphe_to_rect(helPos.L, helPos.B, helPos.R, &ecliptic_pos);
 }
 
-// Get a matrix which converts from local to the parent's coordinates
-Mat4d planet::computeMatrix(double date)
+// Get a matrix which converts from local ecliptic to the parent's ecliptic coordinates
+void planet::compute_trans_matrix(double date)
 {
-    double tempAscendingNode = re.ascendingNode + re.precessionRate * (when - astro::J2000);
+    double tempAscendingNode = re.ascendingNode + re.precessionRate * (date - J2000);
 
-	transMat = 	Mat4d::xrotation(-re.obliquity) *
+	trans_mat = Mat4d::xrotation(-re.obliquity) *
 				Mat4d::yrotation(-tempAscendingNode) *
-        		Mat4d::translation(helioCoord);
-
-    if (parent != NULL && system->getPrimaryBody() != NULL)
-        frame = frame * system->getPrimaryBody()->getLocalToHeliocentric(when);
+        		Mat4d::translation(ecliptic_pos);
 }
 
-// Return the y rotation to use from Equatorial to geographic coordinates
-double getGeographicRotation(double when)
+// Return the y rotation to use from equatorial to geographic coordinates
+double planet::getGeographicRotation(double date)
 {
-    double t = when - re.epoch;
+    double t = date - re.epoch;
     double rotations = t / (double) re.period;
     double wholeRotations = floor(rotations);
     double remainder = rotations - wholeRotations;
@@ -81,9 +74,21 @@ double getGeographicRotation(double when)
 	return -remainder * 360. - re.offset;
 }
 
-vec3_t planet::getHelioPos()
+Vec3d planet::get_ecliptic_pos()
 {
-	return helioPos;
+	return ecliptic_pos;
+}
+
+Vec3d planet::get_heliocentric_ecliptic_pos()
+{
+	Vec3d pos = ecliptic_pos;
+	planet * p = this;
+	while (p->parent!=NULL)
+	{
+		pos.transfo4d(p->trans_mat);
+		p=p->parent;
+	}
+	return pos;
 }
 
 void planet::addSatellite(planet*p)
@@ -96,28 +101,23 @@ void planet::draw(void)
 {
 	glEnable(GL_CULL_FACE);
 	glEnable(GL_LIGHTING);
-	glPushMatrix();
-            if (num==10)
-            {   glPushMatrix();
-                glRotatef(RaRad*180./PI-60,0,0,-1);
-            }
-            glRotatef(-60,0,0,1);
-            glColor3f(1.0f, 1.0f, 1.0f); //*SkyBrightness
-            glDisable(GL_BLEND);
-            glBindTexture(GL_TEXTURE_2D, planetTexture->getID());
+	glDisable(GL_BLEND);
 
-            GLUquadricObj * ThePlanet=gluNewQuadric();
-            gluQuadricTexture(ThePlanet,GL_TRUE);
-            gluQuadricOrientation(ThePlanet, GLU_OUTSIDE);
-            gluSphere(ThePlanet,Rayon*DIST_PLANET/Distance_to_obs,40,40);
-            gluDeleteQuadric(ThePlanet);
-           if (num==10)
-            {   glPopMatrix();
-            }
-            glDisable(GL_LIGHTING);
-        glPopMatrix();
-        glDisable(GL_CULL_FACE);
-    }
+	glPushMatrix();
+
+	glColor3f(1.0f, 1.0f, 1.0f); //*SkyBrightness
+	glBindTexture(GL_TEXTURE_2D, planetTexture->getID());
+	GLUquadricObj * p=gluNewQuadric();
+	gluQuadricTexture(p,GL_TRUE);
+	gluQuadricOrientation(p, GLU_OUTSIDE);
+	gluSphere(p,radius,40,40);
+	gluDeleteQuadric(p);
+
+    glPopMatrix();
+
+	glDisable(GL_LIGHTING);
+    glDisable(GL_CULL_FACE);
+}
 
 	/*
 // Draw the planet (with special cases for saturn rings, sun, moon, etc..)
@@ -260,7 +260,7 @@ void Planet::Draw(vec3_t coordLight)
 
     if (num==6)                                 // Draw saturn rings 2/2
     {   double rAn=2.5*Rayon*DIST_PLANET/Distance_to_obs;
-        glColor3f(1.0f, 1.0f, 1.0f); //*SkyBrightness
+        glColor3f(1.0f, 1.0f, 1.0f); //SkyBrightness
         glBindTexture (GL_TEXTURE_2D, texIds[47]->getID());
         glEnable(GL_BLEND);
         glPushMatrix();
@@ -282,12 +282,3 @@ void Planet::Draw(vec3_t coordLight)
 }
 */
 
-void Planet::testDistance(vec3_t Pos,float &anglePlusProche, Planet * &plusProche)
-{   vec3_t PosPlanet;
-    RADE_to_XYZ(RaRad,DecRad, PosPlanet);
-    PosPlanet.Normalize();
-    if (PosPlanet[0]*Pos[0]+PosPlanet[1]*Pos[1]+PosPlanet[2]*Pos[2]>anglePlusProche)
-        {   anglePlusProche=PosPlanet[0]*Pos[0]+PosPlanet[1]*Pos[1]+PosPlanet[2]*Pos[2];
-            plusProche=this;
-        }
-}

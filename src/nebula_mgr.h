@@ -33,7 +33,7 @@ public:
     int Read(char * fileName);  
     void Draw();            // Draw all the Nebulaes
     int ReadTexture();
-    int Rechercher(vec3_t Pos);             // Search the Nebulae by position
+    stel_object * search(vec3_t Pos);             // Search the Nebulae by position
 private:
     vector<Nebula*> Liste;              // list of Nebulaes*
     Nebula * Selectionnee;              // Selected nebulae

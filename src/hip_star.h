@@ -38,6 +38,7 @@ public:
     void DrawName(void);
 	vec3_t getRGB(void) {return RGB;}
 	unsigned char get_type(void) {return STEL_OBJECT_STAR;}
+	Vec3d get_equ_pos(void) {return Vec3d(XYZ[0],XYZ[1],XYZ[2]);}
 private:
     unsigned int HP;        // Hipparcos number
     float Mag;              // Apparent magnitude

@@ -48,6 +48,7 @@ Hip_Star_mgr * HipVouteCeleste;       // Class to manage the Hipparcos catalog
 Constellation_mgr * ConstellCeleste;  // Constellation boundary and name
 Nebula_mgr * messiers;                // Class to manage the messier objects
 planet * Sun;             	  		  // Sun, center of the solar system
+planet * Moon;             	  		  // Moon, around earth
 s_texture * texIds[200];              // Common Textures
 
 /*ShootingStar * TheShooting = NULL;*/
@@ -83,7 +84,7 @@ void Draw(int delta_time)
 	navigation.init_project_matrix(global.X_Resolution,global.Y_Resolution,1,10000);
 
     // Set openGL drawings in equatorial coordinates
-    navigation.switch_to_equatorial();
+    navigation.switch_to_earth_equatorial();
 
     DrawMilkyWay();                  // Draw the milky way --> init the buffers
 
@@ -263,7 +264,7 @@ void Update(Uint32 delta_time)
     // compute sky brightness
     if (global.FlagAtmosphere)
     {
-        Vec3d sunPos = Sun->getHelioPos();
+        Vec3d sunPos = Sun->get_ecliptic_pos();
         sunPos.normalize();
         global.SkyBrightness=asin(sunPos[1])+0.1;
         if (global.SkyBrightness<0) global.SkyBrightness=0;

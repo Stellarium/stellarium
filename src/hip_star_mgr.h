@@ -36,8 +36,8 @@ public:
     void Save(void);                    	// Debug function
     // Load all the stars from the files
     void Load(char * hipCatFile, char * commonNameFile, char * nameFile);         
-    Hip_Star * Rechercher(vec3_t Pos);  	// Search the star by position
-	Hip_Star * Rechercher(unsigned int);	// Search the star by HP number
+    Hip_Star * search(vec3_t Pos);  	// Search the star by position
+	Hip_Star * search(unsigned int);	// Search the star by HP number
 private:
     multimap<int, Hip_Star*> Liste;         // map of star* with the grid id as key
     Grid HipGrid;                           // Grid for opimisation

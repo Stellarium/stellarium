@@ -20,7 +20,7 @@
 #include "navigator.h"
 #include "stellarium.h"
 #include "stel_utility.h"
-
+#include "stel_object.h"
 
 void observator_pos::save(FILE * f)
 {
@@ -148,7 +148,7 @@ void navigator::update_vision_vector(int delta_time)
 	{
     	if (FlagTraking) // Equatorial vision vector locked on selected object
 		{
-			equ_vision=selected_object.get_equ_pos();
+			equ_vision=selected_object->get_equ_pos();
 			// Recalc local vision vector
 			local_vision=equ_to_local(&equ_vision);
 		}
@@ -264,7 +264,7 @@ void navigator::update_time(int delta_time)
 
 
 // Place openGL in earth equatorial coordinates
-void navigator::switch_to_equatorial(void)
+void navigator::switch_to_earth_equatorial(void)
 {
 	switch_to_local();
     // Make the 2 rotations to transform the Altazimuthal system to Equatorial system

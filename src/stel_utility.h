@@ -34,15 +34,60 @@ double dms_to_rad(int d, double m);
 
 //void rad_to_hms(unsigned int *h, unsigned int *m, double *s, double r);
 void sphe_to_rect(double lng, double lat, Vec3d *v);
+void sphe_to_rect(double lng, double lat, double r, Vec3d *v);
 void sphe_to_rect(float lng, float lat, Vec3f *v);
 void rect_to_sphe(double *lng, double *lat, const Vec3d * v);
 
 // OpenGL projections and camera setting
 void Project(float objx_i,float objy_i,float objz_i,double & x ,double & y);
 void Project(float objx_i,float objy_i,float objz_i,double & x ,double & y ,double & z);
+Vec3d UnProject(double x ,double y);
 
 void setOrthographicProjection(int w, int h);
 void resetPerspectiveProjection();
 //void renderBitmapString(float x, float y, void *font,char *string);
+
+// CODE BORROWED FROM LIBNOVA
+
+#if 0
+
+/*!
+** Date
+* \struct ln_date
+* \brief Human readable Date and time used by libnova
+*
+* This is the Human readable (easy printf) date format used
+* by libnova.
+*/
+
+struct ln_date
+{
+    int years; 		/*!< Years. All values are valid */
+    int months;		/*!< Months. Valid values : 1 (January) - 12 (December) */
+    int days; 		/*!< Days. Valid values 1 - 28,29,30,31 Depends on month.*/
+    int hours; 		/*!< Hours. Valid values 0 - 23. */
+    int minutes; 	/*!< Minutes. Valid values 0 - 59. */
+    double seconds;	/*!< Seconds. Valid values 0 - 59.99999.... */
+};
+
+/*! \fn void get_date (double JD, struct ln_date * date)
+* \ingroup calendar
+* \brief Calculate the date from the julian day.
+*/
+void get_date (double JD, struct ln_date * date);
+
+/*! \fn double get_dec_location(char * s)
+* \ingroup misc
+* \brief Obtains Latitude, Longitude, RA or Declination from a string.
+*/
+double get_dec_location(char *s);
+
+/*! \fn char * get_humanr_location(double location)
+*  \ingroup misc
+*  \brief Obtains a human readable location in the form: ddºmm'ss.ss"
+*/
+char *get_humanr_location(double location);
+
+#endif
 
 #endif

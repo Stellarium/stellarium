@@ -32,6 +32,7 @@
 #define NO_HALO 0
 #define WITH_HALO 1
 
+using namespace std;
 
 class RotationElements
 {
@@ -46,27 +47,28 @@ class RotationElements
     float precessionRate; // rate of precession of rotation axis in rads/day
 };
 
-//class planet;
-
 class planet : public stel_object
 {
 public:
 	planet(char * _name, int _flagHalo, double _radius, vec3_t _color, s_texture * _planetTexture, s_texture * _haloTexture, void (*_coord_func)(double JD, struct ln_helio_posn * position));
     virtual ~planet();
 	virtual void computePosition(double date); // Compute the position from the mother planet
-    virtual Mat4d computeMatrix(double date);  // Compute the transformation matrix from the mother planet
+    virtual void compute_trans_matrix(double date);	// Compute the transformation matrix from the mother planet
+	virtual double getGeographicRotation(double date);	// Return the y rotation to use from equatorial to geographic coordinates
     virtual void draw();
 	virtual void addSatellite(planet*);
-	virtual Vec3d getHelioPos();
+	virtual Vec3d get_ecliptic_pos();
+	virtual Vec3d get_heliocentric_ecliptic_pos();
 	unsigned char get_type(void) {return STEL_OBJECT_PLANET;}
 protected:
     char * name;
 	int flagHalo;							// Set if a little "star like" halo will be drawn
 	RotationElements re;					// Rotation param
 	double radius;							// Planet radius
-	Vec3d ecliptic_coord; 					// Coords in UA in the rectangular ecliptic coordinate system
+	Vec3d ecliptic_pos; 					// Position in UA in the rectangular ecliptic coordinate system
 											// The reference of the coord is the parent planet
 	vec3_t color;
+	Mat4d trans_mat;						// Transfo matrix from local ecliptique to parent ecliptic
     s_texture * planetTexture;				// Planet map texture
 	s_texture * haloTexture;				// Little halo texture
 	void (*coord_func)(double JD, struct ln_helio_posn * position); // The function called for the calculation of the rect heliocentric position at time JD.
@@ -84,7 +86,7 @@ public:
 class ring_planet : public planet
 {
 public:
-	ring_planet(char * _name, int _flagHalo, double _radius, vec3_t _color, s_texture * _planetTexture, s_texture * _haloTexture, void (*_coord_func)(double JD, struct ln_rect_posn * position), ring * _planetRing);
+	ring_planet(char * _name, int _flagHalo, double _radius, vec3_t _color, s_texture * _planetTexture, s_texture * _haloTexture, void (*_coord_func)(double JD, struct ln_helio_posn * position), ring * _planetRing);
 	virtual void setRing(ring*);
 protected:
 	ring * planetRing;						// Ring for ie saturn/uranus
@@ -93,7 +95,7 @@ protected:
 class sun_planet : public planet
 {
 public:
-	sun_planet(char * _name, int _flagHalo, double _radius, vec3_t _color, s_texture * _planetTexture, s_texture * _haloTexture, s_texture * _bigHaloTexture, void (*_coord_func)(double JD, struct ln_rect_posn * position));
+	sun_planet(char * _name, int _flagHalo, double _radius, vec3_t _color, s_texture * _planetTexture, s_texture * _haloTexture, s_texture * _bigHaloTexture, void (*_coord_func)(double JD, struct ln_helio_posn * position));
     virtual void computeCoords(double date);
     virtual void draw();
 protected:

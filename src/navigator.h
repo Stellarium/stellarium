@@ -63,8 +63,8 @@ public:
 	void update_vision_vector(int delta_time);
 
 	// Place openGL in earth equatorial coordinates
-	void switch_to_equatorial(void);
-	// Place openGL in heliocentric coordinates
+	void switch_to_earth_equatorial(void);
+	// Place openGL in heliocentric ecliptical coordinates
 	void switch_to_heliocentric(void);
 	// Place openGL in local viewer coordinates (Usually somewhere on earth viewing in a specific direction)
 	void switch_to_local(void);
@@ -85,13 +85,21 @@ public:
 	// Loads
 	void load_position(char *);		// Load the position info in the file name given
 	void save_position(char *);		// Save the position info in the file name given
+
 	// Sets and gets
 	void set_JDay(double JD) {JDay=JD;}
 	void set_time_speed(double ts) {time_speed=ts;}
 	double get_JDay(void) {return JDay;}
 	double get_fov(void) {return fov;}
 	Vec3d get_equ_vision(void) {return equ_vision;}
+	void set_time_zone(int t) {position.time_zone=t;}
 	int get_time_zone(void) {return position.time_zone;}
+	void set_latitude(double l) {position.latitude=l;}
+	double get_latitude(void) {return position.latitude;}
+	void set_longitude(double l) {position.longitude=l;}
+	double get_longitude(void) {return position.longitude;}
+	void set_altitude(int a) {position.altitude=a;}
+	int get_altitude(void) {return position.altitude;}
 
 private:
 
