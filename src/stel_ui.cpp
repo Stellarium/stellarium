@@ -385,7 +385,7 @@ void stel_ui::cbr(void)
 	if (bt_flag_constellation_art->getIsMouseOver())
 		bt_flag_help_lbl->setLabel("Constellations Art [R]");
 	if (bt_flag_azimuth_grid->getIsMouseOver())
-		bt_flag_help_lbl->setLabel("Azimutal Grid [Z]");
+		bt_flag_help_lbl->setLabel("Azimuthal Grid [Z]");
 	if (bt_flag_equator_grid->getIsMouseOver())
 		bt_flag_help_lbl->setLabel("Equatorial Grid [E]");
 	if (bt_flag_ground->getIsMouseOver())
@@ -399,7 +399,7 @@ void stel_ui::cbr(void)
 	if (bt_flag_help->getIsMouseOver())
 		bt_flag_help_lbl->setLabel("Help [H]");
 	if (bt_flag_equatorial_mode->getIsMouseOver())
-		bt_flag_help_lbl->setLabel("Equatorial/Altazimutal Mount [ENTER]");
+		bt_flag_help_lbl->setLabel("Equatorial/Altazimuthal Mount [ENTER]");
 	if (bt_flag_config->getIsMouseOver())
 		bt_flag_help_lbl->setLabel("Configuration window");
 	if (bt_flag_quit->getIsMouseOver())
@@ -469,8 +469,9 @@ ENTER : Equatorial/Altazimutal mount\n\
 CTRL + S : Take a Screenshot\n\
 C   : Drawing of the Constellations\n\
 V   : Names of the Constellations\n\
+R   : Constellation Art\n\
 E   : Equatorial Grid\n\
-Z   : Azimutal Grid\n\
+Z   : Azimuthal Grid\n\
 N   : Nebulas\n\
 P   : Planet Finder\n\
 G   : Ground\n\
@@ -848,10 +849,6 @@ int stel_ui::handle_keys(SDLKey key, S_GUI_VALUE state)
 			core->FlagShowTuiShortInfo = core->FlagShowTuiDateTime;
 		}
 		if(key==SDLK_r)
-        {
-			core->FlagConstellationArt = !core->FlagConstellationArt;
-		}
-		if(key==SDLK_4)
         {
 			core->FlagConstellationArt = !core->FlagConstellationArt;
 		}
