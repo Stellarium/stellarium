@@ -22,16 +22,14 @@
 #include <stdio.h>
 #include <string.h>
 
-#include <malloc.h>
+
 #include <stdlib.h>
-#include <stdarg.h>
-#include <unistd.h>
+
+
 /* puts a large angle in the correct range 0 - 360 degrees */
 double range_degrees(double angle)
 {
     double temp;
-    double range;
-
 
     if (angle >= 0.0 && angle < 360.0)
     	return(angle);
@@ -42,15 +40,14 @@ double range_degrees(double angle)
 	   	temp --;
 
     temp *= 360;
-	range = angle - temp;
-    return (range);
+
+    return (angle - temp);
 }
 
 /* puts a large angle in the correct range 0 - 2PI radians */
 double range_radians (double angle)
 {
     double temp;
-    double range;
 
     if (angle >= 0.0 && angle < (2.0 * M_PI))
     	return(angle);
@@ -60,9 +57,8 @@ double range_radians (double angle)
 	if ( angle < 0.0 )
 		temp --;
 	temp *= (M_PI * 2.0);
-	range = angle - temp;
 
-	return (range);
+	return (angle - temp);
 }
 
 /* local types and macros */
