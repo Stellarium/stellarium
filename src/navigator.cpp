@@ -249,7 +249,7 @@ void navigator::update_move(int delta_time)
     // if we are zooming in or out
     if (deltaFov)
     {
-		if (fov+deltaFov>0.005 && fov+deltaFov<100)  fov+=deltaFov;
+		if (fov+deltaFov>0.0005 && fov+deltaFov<100)  fov+=deltaFov;
     }
 
 	double azVision, altVision;

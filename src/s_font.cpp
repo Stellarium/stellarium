@@ -1,4 +1,4 @@
-/* 
+/*
  * Stellarium
  * Copyright (C) 2002 Fabien Chéreau
  * 
@@ -112,7 +112,7 @@ void s_font::print(float x, float y, char * str)
     }
     glBindTexture(GL_TEXTURE_2D, s_fontTexture->getID());  // Select Our s_font Texture
     glPushMatrix();
-    glTranslated(x,y,0);                                // Position The Text (0,0 - Top Left)
+    glTranslatef(x,y,0);                                // Position The Text (0,0 - Top Left)
     glListBase(g_base);                                 // Init the Display list base
     glCallLists(strlen(str),GL_BYTE,str);               // Write The Text To The Screen
     glPopMatrix();

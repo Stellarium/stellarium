@@ -95,18 +95,23 @@ protected:
 class ring
 {
 public:
-	s_texture tex;
-	float size;
+	ring(float _radius, s_texture * _tex);
+	virtual void draw();
+private:
+	float radius;
+	s_texture * tex;
 };
 
 class ring_planet : public planet
 {
 public:
-	ring_planet(char * _name, int _flagHalo, double _radius, vec3_t _color, s_texture * _planetTexture, s_texture * _haloTexture, void (*_coord_func)(double JD, double *, double *, double *), ring * _planetRing);
-	virtual void setRing(ring*);
+	ring_planet(char * _name, int _flagHalo, double _radius, vec3_t _color, s_texture * _planetTexture, s_texture * _haloTexture, void (*_coord_func)(double JD, double *, double *, double *), ring * _planet_ring);
+	virtual void draw();
 protected:
-	ring * planetRing;						// Ring for ie saturn/uranus
+	ring * planet_ring;						// Ring for ie saturn/uranus
 };
+
+
 
 class sun_planet : public planet
 {

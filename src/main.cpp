@@ -69,8 +69,8 @@ void drawIntro(void)
     printf("    |                     %s|\n",APP_NAME);
     printf("    -----------------------------------------\n\n");
     printf("Copyright (C) 2003 Fabien Chereau\n\n");
-    printf("Please send bug report & comments to stellarium@free.fr\n");
-    printf("and check last version on http://stellarium.free.fr\n\n");
+    printf("Please check last version and send bug report & comments \n");
+    printf("on stellarium web page : http://stellarium.free.fr\n\n");
 };
 
 // ************************  Main display loop  ************************
@@ -99,6 +99,7 @@ void Draw(int delta_time)
 		glClear(GL_COLOR_BUFFER_BIT);
 	}
     else DrawMilkyWay();                  // Draw the milky way --> init the buffers
+	glClear(GL_DEPTH_BUFFER_BIT);
 
     if (global.FlagNebula && (!global.FlagAtmosphere || global.SkyBrightness<0.1))
 		messiers->Draw();            // Draw the Messiers Objects
@@ -178,7 +179,7 @@ void loadCommonTextures(void)
     texIds[25]= new s_texture("etoile32x32");
     texIds[26]= new s_texture("pointeur4");
     texIds[27]= new s_texture("pointeur5");
-    texIds[30]= new s_texture("spacefont");
+    //texIds[30]= new s_texture("spacefont");
 
     switch (global.LandscapeNumber)
     {
@@ -218,9 +219,6 @@ void loadCommonTextures(void)
         exit(1);
     }
 
-    texIds[47]= new s_texture("saturneAnneaux128x128",TEX_LOAD_TYPE_PNG_ALPHA);
-    texIds[48]= new s_texture("halo");
-    texIds[50]= new s_texture("haloLune");
     if (messiers->ReadTexture()==0)
 	printf("Error while loading messier Texture\n");
 }
@@ -470,8 +468,10 @@ int main(int argc, char **argv)
     // Make Sure That SDL_Quit Will Be Called In Case of exit()
     atexit(SDL_Quit);
 
+	SDL_GL_SetAttribute( SDL_GL_DEPTH_SIZE, 24);
+
     // We Want A Hardware Surface
-    Vflags = SDL_HWSURFACE|SDL_OPENGL|SDL_DOUBLEBUF;
+    Vflags = SDL_HWSURFACE|SDL_OPENGL;//|SDL_DOUBLEBUF;
 
 	// If fullscreen, set the Flag
     if (global.Fullscreen) Vflags|=SDL_FULLSCREEN;
