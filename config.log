@@ -33,174 +33,176 @@ PATH = /usr/local/bin:/usr/bin:/bin:/cygdrive/c/WINDOWS/system32:/cygdrive/c/WIN
 ## Core tests.  ##
 ## ------------ ##
 
-configure:948: PATH=".;."; conftest.sh
+configure:949: PATH=".;."; conftest.sh
 conftest.sh: not found
-configure:951: $? = 127
-configure:997: checking for a BSD compatible install
-configure:1046: result: /usr/bin/install -c
-configure:1057: checking whether build environment is sane
-configure:1100: result: yes
-configure:1132: checking for mawk
-configure:1158: result: no
-configure:1132: checking for gawk
-configure:1147: found /usr/bin/gawk
-configure:1155: result: gawk
-configure:1165: checking whether make sets ${MAKE}
-configure:1185: result: yes
-configure:1269: checking build system type
-configure:1287: result: i686-pc-cygwin
-configure:1294: checking host system type
-configure:1308: result: i686-pc-cygwin
-configure:1358: checking for gcc
-configure:1373: found /usr/bin/gcc
-configure:1381: result: gcc
-configure:1609: checking for C compiler version
-configure:1612: gcc --version </dev/null >&5
+configure:952: $? = 127
+configure:998: checking for a BSD compatible install
+configure:1047: result: /usr/bin/install -c
+configure:1058: checking whether build environment is sane
+configure:1101: result: yes
+configure:1133: checking for mawk
+configure:1159: result: no
+configure:1133: checking for gawk
+configure:1148: found /usr/bin/gawk
+configure:1156: result: gawk
+configure:1166: checking whether make sets ${MAKE}
+configure:1186: result: yes
+configure:1270: checking build system type
+configure:1288: result: i686-pc-cygwin
+configure:1295: checking host system type
+configure:1309: result: i686-pc-cygwin
+configure:1316: checking target system type
+configure:1330: result: i686-pc-cygwin
+configure:1387: checking for gcc
+configure:1402: found /usr/bin/gcc
+configure:1410: result: gcc
+configure:1638: checking for C compiler version
+configure:1641: gcc --version </dev/null >&5
 2.95.3-5
-configure:1615: $? = 0
-configure:1617: gcc -v </dev/null >&5
+configure:1644: $? = 0
+configure:1646: gcc -v </dev/null >&5
 Reading specs from /usr/lib/gcc-lib/i686-pc-cygwin/2.95.3-5/specs
 gcc version 2.95.3-5 (cygwin special)
-configure:1620: $? = 0
-configure:1622: gcc -V </dev/null >&5
+configure:1649: $? = 0
+configure:1651: gcc -V </dev/null >&5
 gcc: argument to `-V' is missing
-configure:1625: $? = 1
-configure:1645: checking for C compiler default output
-configure:1648: gcc    conftest.c  >&5
-configure:1651: $? = 0
-configure:1680: result: a.exe
-configure:1685: checking whether the C compiler works
-configure:1691: ./a.exe
-configure:1694: $? = 0
-configure:1709: result: yes
-configure:1716: checking whether we are cross compiling
-configure:1718: result: no
-configure:1721: checking for executable suffix
-configure:1723: gcc -o conftest.exe    conftest.c  >&5
-configure:1726: $? = 0
-configure:1748: result: .exe
-configure:1754: checking for object suffix
-configure:1772: gcc -c   conftest.c >&5
-configure:1775: $? = 0
-configure:1794: result: o
-configure:1798: checking whether we are using the GNU C compiler
-configure:1819: gcc -c   conftest.c >&5
-configure:1822: $? = 0
-configure:1825: test -s conftest.o
-configure:1828: $? = 0
-configure:1840: result: yes
-configure:1846: checking whether gcc accepts -g
-configure:1864: gcc -c -g  conftest.c >&5
-configure:1867: $? = 0
-configure:1870: test -s conftest.o
-configure:1873: $? = 0
-configure:1883: result: yes
-configure:1910: gcc -c -g -O2  conftest.c >&5
+configure:1654: $? = 1
+configure:1674: checking for C compiler default output
+configure:1677: gcc    conftest.c  >&5
+configure:1680: $? = 0
+configure:1709: result: a.exe
+configure:1714: checking whether the C compiler works
+configure:1720: ./a.exe
+configure:1723: $? = 0
+configure:1738: result: yes
+configure:1745: checking whether we are cross compiling
+configure:1747: result: no
+configure:1750: checking for executable suffix
+configure:1752: gcc -o conftest.exe    conftest.c  >&5
+configure:1755: $? = 0
+configure:1777: result: .exe
+configure:1783: checking for object suffix
+configure:1801: gcc -c   conftest.c >&5
+configure:1804: $? = 0
+configure:1823: result: o
+configure:1827: checking whether we are using the GNU C compiler
+configure:1848: gcc -c   conftest.c >&5
+configure:1851: $? = 0
+configure:1854: test -s conftest.o
+configure:1857: $? = 0
+configure:1869: result: yes
+configure:1875: checking whether gcc accepts -g
+configure:1893: gcc -c -g  conftest.c >&5
+configure:1896: $? = 0
+configure:1899: test -s conftest.o
+configure:1902: $? = 0
+configure:1912: result: yes
+configure:1939: gcc -c -g -O2  conftest.c >&5
 conftest.c:2: parse error before `me'
-configure:1913: $? = 1
+configure:1942: $? = 1
 configure: failed program was:
 #ifndef __cplusplus
   choke me
 #endif
-configure:2018: checking for style of include used by make
-configure:2045: result: GNU
-configure:2051: checking dependency style of gcc
-configure:2113: result: gcc
-configure:2166: checking for g++
-configure:2181: found /usr/bin/g++
-configure:2189: result: g++
-configure:2204: checking for C++ compiler version
-configure:2207: g++ --version </dev/null >&5
+configure:2047: checking for style of include used by make
+configure:2074: result: GNU
+configure:2080: checking dependency style of gcc
+configure:2142: result: gcc
+configure:2195: checking for g++
+configure:2210: found /usr/bin/g++
+configure:2218: result: g++
+configure:2233: checking for C++ compiler version
+configure:2236: g++ --version </dev/null >&5
 2.95.3-5
-configure:2210: $? = 0
-configure:2212: g++ -v </dev/null >&5
+configure:2239: $? = 0
+configure:2241: g++ -v </dev/null >&5
 Reading specs from /usr/lib/gcc-lib/i686-pc-cygwin/2.95.3-5/specs
 gcc version 2.95.3-5 (cygwin special)
-configure:2215: $? = 0
-configure:2217: g++ -V </dev/null >&5
+configure:2244: $? = 0
+configure:2246: g++ -V </dev/null >&5
 g++: argument to `-V' missing
 
-configure:2220: $? = 1
-configure:2223: checking whether we are using the GNU C++ compiler
-configure:2244: g++ -c   conftest.cc >&5
-configure:2247: $? = 0
-configure:2250: test -s conftest.o
-configure:2253: $? = 0
-configure:2265: result: yes
-configure:2271: checking whether g++ accepts -g
-configure:2289: g++ -c -g  conftest.cc >&5
-configure:2292: $? = 0
-configure:2295: test -s conftest.o
-configure:2298: $? = 0
-configure:2308: result: yes
-configure:2348: g++ -c -g -O2  conftest.cc >&5
-configure:2351: $? = 0
-configure:2354: test -s conftest.o
-configure:2357: $? = 0
-configure:2379: g++ -c -g -O2  conftest.cc >&5
-configure:2382: $? = 0
-configure:2385: test -s conftest.o
-configure:2388: $? = 0
-configure:2412: checking dependency style of g++
-configure:2474: result: gcc
-configure:2486: checking how to run the C preprocessor
-configure:2512: gcc -E  conftest.c
-configure:2518: $? = 0
-configure:2545: gcc -E  conftest.c
-configure:2542: ac_nonexistent.h: No such file or directory
-configure:2551: $? = 1
+configure:2249: $? = 1
+configure:2252: checking whether we are using the GNU C++ compiler
+configure:2273: g++ -c   conftest.cc >&5
+configure:2276: $? = 0
+configure:2279: test -s conftest.o
+configure:2282: $? = 0
+configure:2294: result: yes
+configure:2300: checking whether g++ accepts -g
+configure:2318: g++ -c -g  conftest.cc >&5
+configure:2321: $? = 0
+configure:2324: test -s conftest.o
+configure:2327: $? = 0
+configure:2337: result: yes
+configure:2377: g++ -c -g -O2  conftest.cc >&5
+configure:2380: $? = 0
+configure:2383: test -s conftest.o
+configure:2386: $? = 0
+configure:2408: g++ -c -g -O2  conftest.cc >&5
+configure:2411: $? = 0
+configure:2414: test -s conftest.o
+configure:2417: $? = 0
+configure:2441: checking dependency style of g++
+configure:2503: result: gcc
+configure:2515: checking how to run the C preprocessor
+configure:2541: gcc -E  conftest.c
+configure:2547: $? = 0
+configure:2574: gcc -E  conftest.c
+configure:2571: ac_nonexistent.h: No such file or directory
+configure:2580: $? = 1
 configure: failed program was:
-#line 2541 "configure"
+#line 2570 "configure"
 #include "confdefs.h"
 #include <ac_nonexistent.h>
-configure:2588: result: gcc -E
-configure:2603: gcc -E  conftest.c
-configure:2609: $? = 0
-configure:2636: gcc -E  conftest.c
-configure:2633: ac_nonexistent.h: No such file or directory
-configure:2642: $? = 1
+configure:2617: result: gcc -E
+configure:2632: gcc -E  conftest.c
+configure:2638: $? = 0
+configure:2665: gcc -E  conftest.c
+configure:2662: ac_nonexistent.h: No such file or directory
+configure:2671: $? = 1
 configure: failed program was:
-#line 2632 "configure"
+#line 2661 "configure"
 #include "confdefs.h"
 #include <ac_nonexistent.h>
-configure:2686: checking how to run the C++ preprocessor
-configure:2708: g++ -E  conftest.cc
-configure:2714: $? = 0
-configure:2741: g++ -E  conftest.cc
-configure:2738: ac_nonexistent.h: No such file or directory
-configure:2747: $? = 1
+configure:2715: checking how to run the C++ preprocessor
+configure:2737: g++ -E  conftest.cc
+configure:2743: $? = 0
+configure:2770: g++ -E  conftest.cc
+configure:2767: ac_nonexistent.h: No such file or directory
+configure:2776: $? = 1
 configure: failed program was:
-#line 2737 "configure"
+#line 2766 "configure"
 #include "confdefs.h"
 #include <ac_nonexistent.h>
-configure:2784: result: g++ -E
-configure:2799: g++ -E  conftest.cc
-configure:2805: $? = 0
-configure:2832: g++ -E  conftest.cc
-configure:2829: ac_nonexistent.h: No such file or directory
-configure:2838: $? = 1
+configure:2813: result: g++ -E
+configure:2828: g++ -E  conftest.cc
+configure:2834: $? = 0
+configure:2861: g++ -E  conftest.cc
+configure:2858: ac_nonexistent.h: No such file or directory
+configure:2867: $? = 1
 configure: failed program was:
-#line 2828 "configure"
+#line 2857 "configure"
 #include "confdefs.h"
 #include <ac_nonexistent.h>
-configure:2889: checking for a BSD compatible install
-configure:2938: result: /usr/bin/install -c
-configure:2987: checking for ranlib
-configure:3002: found /usr/bin/ranlib
-configure:3011: result: ranlib
-configure:3023: checking for X
-configure:3124: gcc -E  conftest.c
-configure:3121: X11/Intrinsic.h: No such file or directory
-configure:3130: $? = 1
+configure:2918: checking for a BSD compatible install
+configure:2967: result: /usr/bin/install -c
+configure:3016: checking for ranlib
+configure:3031: found /usr/bin/ranlib
+configure:3040: result: ranlib
+configure:3052: checking for X
+configure:3153: gcc -E  conftest.c
+configure:3150: X11/Intrinsic.h: No such file or directory
+configure:3159: $? = 1
 configure: failed program was:
-#line 3120 "configure"
+#line 3149 "configure"
 #include "confdefs.h"
 #include <X11/Intrinsic.h>
-configure:3175: gcc -o conftest.exe -Wall -O3 -ffast-math -fexpensive-optimizations   conftest.c -lXt  >&5
-configure:3164: X11/Intrinsic.h: No such file or directory
-configure:3178: $? = 1
+configure:3204: gcc -o conftest.exe -Wall -O3 -ffast-math -fexpensive-optimizations   conftest.c -lXt  >&5
+configure:3193: X11/Intrinsic.h: No such file or directory
+configure:3207: $? = 1
 configure: failed program was:
-#line 3163 "configure"
+#line 3192 "configure"
 #include "confdefs.h"
 #include <X11/Intrinsic.h>
 int
@@ -210,21 +212,21 @@ XtMalloc (0)
   ;
   return 0;
 }
-configure:3222: result: no
-configure:4099: checking whether byte ordering is bigendian
-configure:4124: gcc -c -Wall -O3 -ffast-math -fexpensive-optimizations  conftest.c >&5
-configure:4127: $? = 0
-configure:4130: test -s conftest.o
-configure:4133: $? = 0
-configure:4154: gcc -c -Wall -O3 -ffast-math -fexpensive-optimizations  conftest.c >&5
+configure:3251: result: no
+configure:4128: checking whether byte ordering is bigendian
+configure:4153: gcc -c -Wall -O3 -ffast-math -fexpensive-optimizations  conftest.c >&5
+configure:4156: $? = 0
+configure:4159: test -s conftest.o
+configure:4162: $? = 0
+configure:4183: gcc -c -Wall -O3 -ffast-math -fexpensive-optimizations  conftest.c >&5
 configure: In function `main':
-configure:4145: `not' undeclared (first use in this function)
-configure:4145: (Each undeclared identifier is reported only once
-configure:4145: for each function it appears in.)
-configure:4145: parse error before `big'
-configure:4157: $? = 1
+configure:4174: `not' undeclared (first use in this function)
+configure:4174: (Each undeclared identifier is reported only once
+configure:4174: for each function it appears in.)
+configure:4174: parse error before `big'
+configure:4186: $? = 1
 configure: failed program was:
-#line 4137 "configure"
+#line 4166 "configure"
 #include "confdefs.h"
 #include <sys/types.h>
 #include <sys/param.h>
@@ -239,48 +241,54 @@ main ()
   ;
   return 0;
 }
-configure:4221: result: no
-configure:4231: checking for byteswap.h
-configure:4241: gcc -E  conftest.c
-configure:4238: byteswap.h: No such file or directory
-configure:4247: $? = 1
+configure:4250: result: no
+configure:4260: checking for byteswap.h
+configure:4270: gcc -E  conftest.c
+configure:4267: byteswap.h: No such file or directory
+configure:4276: $? = 1
 configure: failed program was:
-#line 4237 "configure"
+#line 4266 "configure"
 #include "confdefs.h"
 #include <byteswap.h>
-configure:4266: result: no
-configure:4412: checking for GL/gl.h
-configure:4422: gcc -E  conftest.c
-configure:4428: $? = 0
-configure:4447: result: yes
-configure:4457: checking for GL/glu.h
-configure:4467: gcc -E  conftest.c
-configure:4473: $? = 0
-configure:4492: result: yes
-configure:4502: checking for GL/glut.h
-configure:4512: gcc -E  conftest.c
-configure:4518: $? = 0
-configure:4537: result: yes
-configure:4675: checking for toupper
-configure:4712: gcc -o conftest.exe -Wall -O3 -ffast-math -fexpensive-optimizations   conftest.c   -lopengl32 -lglu32 -lglut32 >&5
-configure:4715: $? = 0
-configure:4718: test -s conftest.exe
-configure:4721: $? = 0
-configure:4731: result: yes
-configure:4675: checking for strcasecmp
-configure:4712: gcc -o conftest.exe -Wall -O3 -ffast-math -fexpensive-optimizations   conftest.c   -lopengl32 -lglu32 -lglut32 >&5
-configure:4715: $? = 0
-configure:4718: test -s conftest.exe
-configure:4721: $? = 0
-configure:4731: result: yes
-configure:4741: checking for fabs in -lm
-configure:4768: gcc -o conftest.exe -Wall -O3 -ffast-math -fexpensive-optimizations   conftest.c -lm    -lopengl32 -lglu32 -lglut32 >&5
-configure:4757: warning: conflicting types for built-in function `fabs'
-configure:4771: $? = 0
-configure:4774: test -s conftest.exe
-configure:4777: $? = 0
-configure:4788: result: yes
-configure:4915: creating ./config.status
+configure:4295: result: no
+configure:4444: checking for GL/gl.h
+configure:4454: gcc -E  conftest.c
+configure:4460: $? = 0
+configure:4479: result: yes
+configure:4489: checking for GL/glu.h
+configure:4499: gcc -E  conftest.c
+configure:4505: $? = 0
+configure:4524: result: yes
+configure:4534: checking for GL/glut.h
+configure:4544: gcc -E  conftest.c
+configure:4550: $? = 0
+configure:4569: result: yes
+configure:5033: checking for toupper
+configure:5070: gcc -o conftest.exe -Wall -O3 -ffast-math -fexpensive-optimizations   conftest.c   -lopengl32 -lglu32 -lglut32 >&5
+configure:5073: $? = 0
+configure:5076: test -s conftest.exe
+configure:5079: $? = 0
+configure:5089: result: yes
+configure:5033: checking for strcasecmp
+configure:5070: gcc -o conftest.exe -Wall -O3 -ffast-math -fexpensive-optimizations   conftest.c   -lopengl32 -lglu32 -lglut32 >&5
+configure:5073: $? = 0
+configure:5076: test -s conftest.exe
+configure:5079: $? = 0
+configure:5089: result: yes
+configure:5033: checking for strdup
+configure:5070: gcc -o conftest.exe -Wall -O3 -ffast-math -fexpensive-optimizations   conftest.c   -lopengl32 -lglu32 -lglut32 >&5
+configure:5073: $? = 0
+configure:5076: test -s conftest.exe
+configure:5079: $? = 0
+configure:5089: result: yes
+configure:5099: checking for fabs in -lm
+configure:5126: gcc -o conftest.exe -Wall -O3 -ffast-math -fexpensive-optimizations   conftest.c -lm    -lopengl32 -lglu32 -lglut32 >&5
+configure:5115: warning: conflicting types for built-in function `fabs'
+configure:5129: $? = 0
+configure:5132: test -s conftest.exe
+configure:5135: $? = 0
+configure:5146: result: yes
+configure:5273: creating ./config.status
 
 ## ----------------- ##
 ## Cache variables.  ##
@@ -321,6 +329,7 @@ ac_cv_prog_ac_ct_CXX='g++'
 ac_cv_build_alias='i686-pc-cygwin'
 ac_cv_env_CPPFLAGS_value=''
 ac_cv_prog_ac_ct_RANLIB='ranlib'
+ac_cv_target_alias='i686-pc-cygwin'
 ac_cv_env_CXXFLAGS_set=''
 ac_cv_env_CXX_value=''
 ac_cv_host='i686-pc-cygwin'
@@ -333,9 +342,11 @@ ac_cv_build='i686-pc-cygwin'
 ac_cv_prog_AWK='gawk'
 ac_cv_env_build_alias_value=''
 ac_cv_prog_ac_ct_CC='gcc'
+ac_cv_target='i686-pc-cygwin'
 ac_cv_env_target_alias_value=''
 ac_cv_env_CC_value=''
 ac_cv_env_CPP_set=''
+ac_cv_func_strdup='yes'
 ac_cv_objext='o'
 
 ## ------------ ##
@@ -347,6 +358,7 @@ ac_cv_objext='o'
 #define X_DISPLAY_MISSING 1
 #define HAVE_TOUPPER 1
 #define HAVE_STRCASECMP 1
+#define HAVE_STRDUP 1
 #define CONFIG_DATA_DIR "/usr/local/share/stellarium"
 
 
@@ -364,7 +376,7 @@ This file was extended by config.status 2.52, executed with
   > ./config.status Makefile
 on PORFAB
 
-config.status:5402: creating Makefile
+config.status:5764: creating Makefile
 
 ## ----------------------- ##
 ## Running config.status.  ##
@@ -378,7 +390,7 @@ This file was extended by config.status 2.52, executed with
   > ./config.status config/Makefile
 on PORFAB
 
-config.status:5402: creating config/Makefile
+config.status:5764: creating config/Makefile
 
 ## ----------------------- ##
 ## Running config.status.  ##
@@ -392,7 +404,7 @@ This file was extended by config.status 2.52, executed with
   > ./config.status data/Makefile
 on PORFAB
 
-config.status:5402: creating data/Makefile
+config.status:5764: creating data/Makefile
 
 ## ----------------------- ##
 ## Running config.status.  ##
@@ -406,7 +418,7 @@ This file was extended by config.status 2.52, executed with
   > ./config.status src/Makefile
 on PORFAB
 
-config.status:5402: creating src/Makefile
+config.status:5764: creating src/Makefile
 
 ## ----------------------- ##
 ## Running config.status.  ##
@@ -420,7 +432,7 @@ This file was extended by config.status 2.52, executed with
   > ./config.status src/glpng/Makefile
 on PORFAB
 
-config.status:5402: creating src/glpng/Makefile
+config.status:5764: creating src/glpng/Makefile
 
 ## ----------------------- ##
 ## Running config.status.  ##
@@ -434,7 +446,7 @@ This file was extended by config.status 2.52, executed with
   > ./config.status src/astrolib/Makefile
 on PORFAB
 
-config.status:5402: creating src/astrolib/Makefile
+config.status:5764: creating src/astrolib/Makefile
 
 ## ----------------------- ##
 ## Running config.status.  ##
@@ -448,7 +460,7 @@ This file was extended by config.status 2.52, executed with
   > ./config.status textures/Makefile
 on PORFAB
 
-config.status:5402: creating textures/Makefile
+config.status:5764: creating textures/Makefile
 
 ## ----------------------- ##
 ## Running config.status.  ##
@@ -462,4 +474,4 @@ This file was extended by config.status 2.52, executed with
   > ./config.status textures/landscapes/Makefile
 on PORFAB
 
-config.status:5402: creating textures/landscapes/Makefile
+config.status:5764: creating textures/landscapes/Makefile

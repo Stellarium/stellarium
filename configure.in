@@ -4,7 +4,7 @@ AC_INIT(src/main.cpp)
 AM_INIT_AUTOMAKE(stellarium,0.4.9)
 
 dnl Check system type
-AC_CANONICAL_HOST
+AC_CANONICAL_SYSTEM
 
 dnl Check for compilers.
 AC_PROG_CC
@@ -24,48 +24,49 @@ AC_PATH_XTRA
 LIBS="$LIBS $X_LIBS"
 
 AC_C_BIGENDIAN
-
 AC_CHECK_HEADER(byteswap.h)
 
-dnl
 dnl GL and GLUT libs
-dnl
-if test $host = powerpc-apple-darwin5.5 ; then
-AC_DEFINE_UNQUOTED(MACOSX,1)
-LIBS="$LIBS -framework GLUT -framework OpenGL -lobjc -framework Carbon "
-AC_CHECK_HEADER(OpenGL/gl.h,,AC_MSG_ERROR(gl.h not found - please install OpenGL- or Mesa-devel))
-AC_CHECK_HEADER(OpenGL/glu.h,,AC_MSG_ERROR(glu.h not found - please install GLU- or MesaGLU-devel))
-AC_CHECK_HEADER(GLUT/glut.h,,AC_MSG_ERROR(glut.h not found - please install GLUT- or MesaGLUT-devel))
-else
 
+case "$host" in 
+*-*-darwin*)
+	AC_DEFINE_UNQUOTED(MACOSX,1)
+	LIBS="$LIBS -framework GLUT -framework OpenGL -lobjc"
+	AC_CHECK_HEADER(OpenGL/gl.h,,AC_MSG_ERROR(gl.h not found - please install OpenGL))
+	AC_CHECK_HEADER(OpenGL/glu.h,,AC_MSG_ERROR(glu.h not found - please install GLU))
+	AC_CHECK_HEADER(GLUT/glut.h,,AC_MSG_ERROR(glut.h not found - please install GLUT))
+;;
 
-AC_CHECK_HEADER(GL/gl.h,,AC_MSG_ERROR(gl.h not found - please install OpenGL- or Mesa-devel))
-AC_CHECK_HEADER(GL/glu.h,,AC_MSG_ERROR(glu.h not found - please install GLU- or MesaGLU-devel))
-AC_CHECK_HEADER(GL/glut.h,,AC_MSG_ERROR(glut.h not found - please install GLUT- or MesaGLUT-devel))
+*-*-cygwin*)
+	LIBS="$LIBS -lopengl32 -lglu32 -lglut32"
+	AC_CHECK_HEADER(GL/gl.h,,AC_MSG_ERROR(gl.h not found - please install OpenGL))
+	AC_CHECK_HEADER(GL/glu.h,,AC_MSG_ERROR(glu.h not found - please install GLU))
+	AC_CHECK_HEADER(GL/glut.h,,AC_MSG_ERROR(glut.h not found - please install GLUT))
+;;
 
+*)
+	AC_CHECK_HEADER(GL/gl.h,,AC_MSG_ERROR(gl.h not found - please install OpenGL- or Mesa-devel))
+	AC_CHECK_HEADER(GL/glu.h,,AC_MSG_ERROR(glu.h not found - please install GLU- or MesaGLU-devel))
+	AC_CHECK_HEADER(GL/glut.h,,AC_MSG_ERROR(glut.h not found - please install GLUT- or MesaGLUT-devel))
 
-if test $host = i686-pc-cygwin ; then 
-   LIBS="$LIBS -lopengl32 -lglu32 -lglut32"
-else
-   AC_CHECK_LIB(GL,glEnable)
-dnl   if test "$ac_cv_lib_GL_glEnable" = no ; then
-dnl      AC_CHECK_LIB(MesaGL,glEnable,,AC_MSG_ERROR(GL not found - please install GL or MesaGL))
-dnl   fi
+	AC_CHECK_LIB(GL,glEnable)
+   	if test "$ac_cv_lib_GL_glEnable" = no ; then
+    	AC_CHECK_LIB(MesaGL,glEnable,,AC_MSG_ERROR(GL not found - please install GL or MesaGL))
+   	fi
 
-   AC_CHECK_LIB(GLU,gluPerspective)
-dnl   if test "$ac_cv_lib_GLU_gluPerspective" = no ; then
-dnl      AC_CHECK_LIB(MesaGLU,gluPerspective,,AC_MSG_ERROR(GLU not found - please install GLU or MesaGLU))
-dnl   fi
+   	AC_CHECK_LIB(GLU,gluPerspective)
+   	if test "$ac_cv_lib_GLU_gluPerspective" = no ; then
+    	AC_CHECK_LIB(MesaGLU,gluPerspective,,AC_MSG_ERROR(GLU not found - please install GLU or MesaGLU))
+   	fi
 
-dnl   AC_CHECK_LIB(glut,glutMainLoop,,AC_MSG_ERROR(GLUT not found - please install GLUT))
+   	AC_CHECK_LIB(glut,glutMainLoop,,AC_MSG_ERROR(GLUT not found - please install GLUT))
 
-LIBS="$LIBS -lGL -lGLU -lglut"
-fi
-
-fi
+dnl LIBS="$LIBS -lGL -lGLU -lglut"
+;;
+esac
 
 dnl Checks for library functions.
-AC_CHECK_FUNCS(toupper strcasecmp)
+AC_CHECK_FUNCS(toupper strcasecmp strdup)
 AC_CHECK_LIB(m,fabs,LIBS="$LIBS -lm",AC_MSG_RESULT(math library not found))
 
 dnl assign the package directory variable
