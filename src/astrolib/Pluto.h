@@ -15,7 +15,7 @@
 #define N_COEFFS 36
 
 struct PlutoCoeffs {
-   char j, s, p, dummyToMaintainAlignment;
+   signed char j, s, p, dummyToMaintainAlignment;
    short lon_a, lon_b, lat_a, lat_b, rad_a, rad_b;
 };
 
