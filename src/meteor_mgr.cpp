@@ -82,7 +82,13 @@ void Meteor_mgr::update(int delta_time) {
     active.push_back(m);
   }
   */
-  
+
+
+  // if stellarium has been suspended, don't create huge number of meteors to
+  // make up for lost time!
+  if( delta_time > 500 ) {
+    delta_time = 500;
+  }
 
   // determine average meteors per frame needing to be created
   int mpf = (int)((double)ZHR*zhr_to_wsr*(double)delta_time/1000.0f + 0.5);
