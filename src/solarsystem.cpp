@@ -21,6 +21,7 @@ using namespace std;
 
 #include <algorithm>
 #include <iostream>
+#include <string>
 #include "solarsystem.h"
 #include "s_texture.h"
 #include "stellplanet.h"
@@ -54,18 +55,20 @@ SolarSystem::~SolarSystem()
 
 
 // Init and load the solar system data
-void SolarSystem::init(const string& font_fileName, const string& planetfile, Vec3f label_color, Vec3f orbit_color)
+void SolarSystem::init(const string& _data_dir, const string& _sky_locale, const string& _font_filename, Vec3f label_color, Vec3f orbit_color)
 {
-    planet_name_font = new s_font(13,"spacefont", font_fileName);
-    if (!planet_name_font)
+  dataDir = _data_dir;
+  planet_name_font = new s_font(13,"spacefont", dataDir + _font_filename);
+  if (!planet_name_font)
     {
-	    printf("Can't create planet_name_font\n");
-        exit(-1);
+      printf("Can't create planet_name_font\n");
+      exit(-1);
     }
-	planet::set_font(planet_name_font);
-	planet::set_label_color(label_color);
-	planet::set_orbit_color(orbit_color);
-	load(planetfile);
+  planet::set_font(planet_name_font);
+  planet::set_label_color(label_color);
+  planet::set_orbit_color(orbit_color);
+  load(dataDir + "ssystem.ini");
+  set_sky_locale(_sky_locale);
 }
 
 // Init and load the solar system data
@@ -334,4 +337,49 @@ vector<stel_object*> SolarSystem::search_around(Vec3d v, double lim_fov, const n
         iter++;
     }
 	return result;
+}
+
+
+// update planet names for a new locale
+void SolarSystem::set_sky_locale(string _sky_locale) {
+
+  vector<planet*>::iterator iter;      
+
+  char planet[40];
+  char cname[40];
+
+  // read in translated common names from file
+  FILE *cnFile;
+  cnFile = NULL;
+
+  // clear previous names
+  for( iter = system_planets.begin(); iter < system_planets.end(); iter++ ) {
+    (*iter)->set_common_name("");
+  }
+
+  string filename = dataDir + "planet_names." + _sky_locale + ".fab";
+  cnFile=fopen(filename.c_str(),"r");
+  if (!cnFile) {
+    printf("ERROR %s NOT FOUND\n",filename.c_str());
+    return;
+  }
+
+  // find matching planet and update name
+  while(!feof(cnFile)) {
+    fscanf(cnFile,"%s\t%s\n",planet,cname);
+
+
+    for( iter = system_planets.begin(); iter < system_planets.end(); iter++ ) {
+      //      printf("file: %s\tplanet: %s\n", planet, (*iter)->get_name().c_str() );
+      if ( !strcmp( (*iter)->get_name().c_str(), planet) ) {
+	// match
+	//printf("Match!\n\n");
+	(*iter)->set_common_name(string(cname));
+	break;
+      }
+    }
+		
+  }
+  fclose(cnFile);
+ 
 }

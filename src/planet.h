@@ -88,7 +88,7 @@ public:
 	void compute_position(double date);
 
 	// Compute the transformation matrix from the local planet coordinate to the parent planet coordinate
-    void compute_trans_matrix(double date);
+	void compute_trans_matrix(double date);
 
 	// Get the phase angle for an observer at pos obs_pos in the heliocentric coordinate (in AU)
 	double get_phase(Vec3d obs_pos) const;
@@ -98,7 +98,7 @@ public:
 	float compute_magnitude(const navigator * nav) const;
 
 	// Draw the planet, if hint_ON is != 0 draw a circle and the name as well
-    void draw(int hint_ON, Projector* prj, const navigator* nav, const tone_reproductor* eye, int flag_point, int flag_orbits);
+	void draw(int hint_ON, Projector* prj, const navigator* nav, const tone_reproductor* eye, int flag_point, int flag_orbits);
 
 	// Add the given planet in the satellite list
 	void add_satellite(planet*);
@@ -126,6 +126,8 @@ public:
 	Vec3d get_earth_equ_pos(const navigator * nav) const;
 
 	string get_name(void) const {return name;}
+	string get_common_name(void) const {return common_name;}
+	void set_common_name(string cn) {common_name = cn;}
 
 	void set_rings(ring* r) {rings = r;}
 
@@ -145,8 +147,6 @@ public:
 
         // draw orbital path of planet
 	void planet::draw_orbit(const navigator * nav, const Projector* prj);
-
-
 
 protected:
 	// Return the radius of a circle containing the object on screen
@@ -170,7 +170,8 @@ protected:
 	// Draw the big halo (for sun or moon)
 	void draw_big_halo(const navigator* nav, const Projector* prj, const tone_reproductor* eye);
 
-    string name;
+	string name; // used in code, solarsystem ini file (english)
+	string common_name; // in sky locale language
 	int flagHalo;					// Set wether a little "star like" halo will be drawn
 	int flag_lighting;				// Set wether light computation has to be proceed
 	rotation_elements re;			// Rotation param
