@@ -1,4 +1,4 @@
-/* 
+/*
  * Stellarium
  * Copyright (C) 2002 Fabien Chéreau
  * 
@@ -39,12 +39,9 @@ Constellation_mgr::~Constellation_mgr()
 }
 
 // Load from file
-void Constellation_mgr::Load(char * fileName, Hip_Star_mgr * _VouteCeleste)
-{   
-    char tempName[255];
-    strcpy(tempName,global.DataDir);
-    strcat(tempName,"spacefont.txt");
-    constNameFont = new s_font(0.013*global.X_Resolution,"spacefont", tempName); // load Font
+void Constellation_mgr::Load(char * font_fileName, char * fileName, Hip_Star_mgr * _VouteCeleste)
+{
+    constNameFont = new s_font(12.,"spacefont", font_fileName); // load Font
     if (!constNameFont)
     {   printf("Can't create constNameFont\n");
         exit(1);
@@ -97,25 +94,22 @@ void Constellation_mgr::Draw(char Abr[4])
 }
 
 // Draw the names of all the constellations
-void Constellation_mgr::DrawName()
+void Constellation_mgr::DrawName(draw_utility * du)
 {
     vector<constellation *>::iterator iter;
     for(iter=Liste.begin();iter!=Liste.end();iter++)
-    {   (**iter).ComputeName();
+    {   (**iter).ComputeName(du);
     }
 
     float coef;
     coef=rand();
     coef/=RAND_MAX;
     glColor3f(0.020*coef+0.7,0.020*coef+0.1,0.03*coef+0.1);
-    setOrthographicProjection(global.X_Resolution, global.Y_Resolution);
-    glPushMatrix();
-    glLoadIdentity();
+    du->set_orthographic_projection();
     glEnable(GL_BLEND);
     glEnable(GL_TEXTURE_2D);
     for(iter=Liste.begin();iter!=Liste.end();iter++)
     {   (**iter).DrawName();
     }
-    glPopMatrix();
-    resetPerspectiveProjection();
+    du->reset_perspective_projection();
 }

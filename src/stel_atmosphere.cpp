@@ -40,37 +40,33 @@ stel_atmosphere::~stel_atmosphere()
 {
 }
 
-void stel_atmosphere::compute_color(navigator * nav, tone_reproductor * eye)
+void stel_atmosphere::compute_color(int ground_ON, Vec3d sunPos, tone_reproductor * eye, draw_utility * du)
 {
-	static    GLdouble M[16]; 
+	static    GLdouble M[16];
 	static    GLdouble P[16];
 	static    GLdouble objx[1];
 	static    GLdouble objy[1];
 	static    GLdouble objz[1];
 	static    GLint V[4];
+
 	skylight_struct b;
 
-	Vec3d temp(0.,0.,0.);
-	Vec3d sunPos = nav->helio_to_local(&temp);
 	sunPos.normalize();
 
 	sky.set_params(M_PI_2-asinf(sunPos[2]),5.f);
 
 	// Convert x,y screen pos in 3D vector
-	glPushMatrix();
-	nav->switch_to_local();
 	glGetDoublev(GL_MODELVIEW_MATRIX,M);
 	glGetDoublev(GL_PROJECTION_MATRIX,P);
 	glGetIntegerv(GL_VIEWPORT,V);
-	glPopMatrix();
-	int resX = global.X_Resolution;
-	float stepX = (float)resX / sky_resolution;
-	int resY = global.Y_Resolution;
-	float stepY = (float)resY / sky_resolution;
+
+	float stepX = (float)du->screenW / sky_resolution;
+	float stepY = (float)du->screenH / sky_resolution;
+
 	int limY;
 
 	// Don't calc if under the ground
-	if (global.FlagGround)
+	if (ground_ON)
 	{
 		gluProject(1,0,0,M,P,V,objx,objy,objz);
 		limY = (int)(sky_resolution-(float)(*objy)/stepY+3.);
@@ -86,7 +82,7 @@ void stel_atmosphere::compute_color(navigator * nav, tone_reproductor * eye)
 	{
 		for(int y=0; y<limY; y++)
 		{
-			gluUnProject(x*stepX,resY-y*stepY,1,M,P,V,objx,objy,objz);
+			gluUnProject(x*stepX,y*stepY,1,M,P,V,objx,objy,objz);
 			point.set(*objx,*objy,*objz);
 			point.normalize();
 			b.zenith_angle = M_PI_2-asinf(point[2]);
@@ -102,16 +98,14 @@ void stel_atmosphere::compute_color(navigator * nav, tone_reproductor * eye)
 
 
 // Draw the atmosphere using the precalc values stored in tab_sky
-void stel_atmosphere::draw(void)
+void stel_atmosphere::draw(draw_utility * du)
 {
 	// TODO : optimisation not to draw behind the ground
-	float stepX = (float)global.X_Resolution / sky_resolution;
-	float stepY = (float)global.Y_Resolution / sky_resolution;
+	float stepX = (float)du->screenW / sky_resolution;
+	float stepY = (float)du->screenH / sky_resolution;
 	glDisable(GL_TEXTURE_2D);
 	glDisable(GL_BLEND);
-	setOrthographicProjection(global.X_Resolution, global.Y_Resolution);    // 2D coordinate
-	glPushMatrix();
-	glLoadIdentity();
+	du->set_orthographic_projection();	// set 2D coordinate
 	for (int y2=0; y2<sky_resolution-1+1; y2++)
 	{
 		glBegin(GL_TRIANGLE_STRIP);
@@ -124,6 +118,5 @@ void stel_atmosphere::draw(void)
 			}
 		glEnd();
 	}
-	glPopMatrix();
-	resetPerspectiveProjection();
+	du->reset_perspective_projection();
 }

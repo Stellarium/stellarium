@@ -98,7 +98,8 @@ int Nebula::Read(FILE * catalogue)
 
 
 int Nebula::ReadTexture()
-{   char nomFic[128];
+{
+	char nomFic[128];
     sprintf(nomFic,"m%d",Messier);
     nebTexture=new s_texture(nomFic);
     return 1;
@@ -129,7 +130,7 @@ void Nebula::Draw()
     glPopMatrix();  
 }
 
-void Nebula::DrawCircle(void)
+void Nebula::DrawCircle(draw_utility * du)
 {
 	if (navigation.get_fov()<sqrt(Taille)*2) return;
     incLum++;
@@ -137,7 +138,7 @@ void Nebula::DrawCircle(void)
 		 sqrt(navigation.get_fov())/10*(0.4+0.2*sin(incLum/10)),0.1);
     glBindTexture (GL_TEXTURE_2D, Nebula::texCircle->getID()); 
     glPushMatrix();
-    glTranslatef(XY[0],global.Y_Resolution-XY[1],0);
+    glTranslatef(XY[0], XY[1],0);
     glBegin(GL_TRIANGLE_STRIP);
         glTexCoord2i(1,0);              // Bottom Right
         glVertex3f(4,-4,0.0f);
@@ -154,7 +155,7 @@ void Nebula::DrawCircle(void)
 void Nebula::DrawName(void)
 {   
     glColor3f(0.4,0.3,0.5);
-	nebulaFont->print(XY[0]+3,global.Y_Resolution-XY[1]+3, Name); //"Inter" for internationnal name
+	nebulaFont->print(XY[0]+3,XY[1]+3, Name); //"Inter" for internationnal name
 }
 
 s_texture * Nebula::texCircle=NULL;

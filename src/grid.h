@@ -21,6 +21,7 @@
 #define _GRID_H_
 
 #include "stellarium.h"
+#include "vecmath.h"
 
 class Grid  
 {

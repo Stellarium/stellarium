@@ -1,4 +1,4 @@
-/* 
+/*
  * Stellarium
  * Copyright (C) 2002 Fabien Chéreau
  * 
@@ -29,16 +29,12 @@ public:
     Constellation_mgr();
     virtual ~Constellation_mgr();
     int Read(FILE *, Hip_Star_mgr * _VouteCeleste);
-    void Load(char *, Hip_Star_mgr * _VouteCeleste);
+    void Load(char * font_fileName, char * catName, Hip_Star_mgr * _VouteCeleste);
     void Draw();
     void Draw(char * Abr);
-    void DrawName();
+    void DrawName(draw_utility * du);
 private:
     vector<constellation*> Liste;
 };
-
-
-extern Constellation_mgr * ConstellCeleste;   // Class to manage the constellation boundary and name
-
 
 #endif // _CONSTELLATION_MGR_H_
