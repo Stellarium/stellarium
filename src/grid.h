@@ -30,12 +30,14 @@ public:
     virtual ~Grid();
     int GetNearest(Vec3f&);
 	void Draw(void);
-	int Intersect(Vec3f pos, float fieldAngle, int * &result);
+	int Intersect(Vec3f pos, float fieldAngle);
+	int * getResult(void) const {return result;}
 	int getNbPoints(void) const {return NbPoints;}
 private:
     float Angle;     // Radius of each zone (in radians)
     int NbPoints;    // Number of zones
     Vec3f * Points; // The zones positions
+	int * result;
 };
 
 #endif // _GRID_H_

@@ -27,7 +27,7 @@ void moy(Vec3f * p, int a, int b, int c)
 	p[c].normalize();
 }
 
-Grid::Grid()
+Grid::Grid() : result(NULL)
 {
 
 	NbPoints = 492;
@@ -697,12 +697,15 @@ Grid::Grid()
 	{
 		Points[i]=tempTab[i];
 	}
+	
+	result = new int[NbPoints];
 }
 
 Grid::~Grid()
 {
     delete [] Points;
 	Points = NULL;
+	delete [] result; result=NULL;
 }
 
 int Grid::GetNearest(Vec3f& v)
@@ -731,10 +734,8 @@ void Grid::Draw(void)
 }
 
 // Return an array with the number of the zones in the field of view
-int Grid::Intersect(Vec3f pos, float fieldAngle, int * &result)
+int Grid::Intersect(Vec3f pos, float fieldAngle)
 {
-	if (result==NULL) result = new int[NbPoints];
-
 	pos.normalize();
 	float max = cosf(fieldAngle/2.f + Angle);
 

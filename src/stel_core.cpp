@@ -54,6 +54,8 @@ stel_core::~stel_core()
 	if (tone_converter) delete tone_converter;
 	if (ssystem) delete ssystem;
 	if (ui) delete ui;
+	
+	stel_object::delete_textures(); // Load the pointer textures 
 }
 
 // Set the main data, textures and configuration directories
