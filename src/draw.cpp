@@ -141,15 +141,10 @@ void CalcAtmosphere(void)
             vec3_t point((float)*objx,(float)*objy,(float)*objz);
             point.Normalize();
             b.zenith_angle = PI/2-asin(point[1]);
-            /*b.dist_moon = acos(point.Dot(lunaPos));
-            if (b.dist_moon<=0.001) 
-                b.dist_moon=0.001;*/
             b.dist_sun = acos(point.Dot(sunPos));
             if (b.dist_sun<0) b.dist_sun=-b.dist_sun;
-            //DrawPoint(point[0]*100,point[1]*100,point[2]*100);
             compute_sky_brightness( &b);
-            tabSky[x][y].Set(sqrt(b.brightness[3]*1.2),sqrt(b.brightness[2]),sqrt(b.brightness[1]*1.2));
-            //tabSky[x][y]*=190000000;
+            tabSky[x][y].Set(sqrt(b.brightness[3]),sqrt(b.brightness[2]*1.5),sqrt(b.brightness[1])*1.2);
             tabSky[x][y]*=330;
         }
     }

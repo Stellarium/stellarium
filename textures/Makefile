@@ -16,9 +16,9 @@
 
 SHELL = /bin/sh
 
-srcdir = .
-top_srcdir = ..
-
+srcdir = /home/Fabien/work/stellarium/textures
+top_srcdir = /home/Fabien/work/stellarium
+VPATH = /home/Fabien/work/stellarium/textures
 prefix = /usr/local
 exec_prefix = ${prefix}
 
