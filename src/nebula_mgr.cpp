@@ -147,6 +147,19 @@ void Nebula_mgr::draw(int names_ON, Projector* prj, const navigator * nav, tone_
 
 }
 
+// search by name
+stel_object * Nebula_mgr::search(string name)
+{
+    vector<Nebula *>::iterator iter;
+
+    for(iter=neb_array.begin();iter!=neb_array.end();iter++) {
+      if ((*iter)->name == name) return (*iter);
+    }
+
+    return NULL;
+}
+
+
 // Look for a nebulae by XYZ coords
 stel_object * Nebula_mgr::search(Vec3f Pos)
 {

@@ -48,5 +48,8 @@ class StelCommandInterface : CommandInterface
   stel_core * stcore;
 };
 
+// TODO: move elsewhere
+int string_to_jday(string date, double &jd);
+int string_to_days(string date, double &jd);
 
 #endif // _STEL_COMMAND_INTERFACE_H
