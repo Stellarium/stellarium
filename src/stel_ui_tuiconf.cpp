@@ -236,8 +236,10 @@ void stel_ui::tui_update_widgets(void)
 	tui_stars_twinkle->setValue(core->StarTwinkleAmount);
 	tui_star_magscale->setValue(core->StarMagScale);
 
-	// Landscape
+	// 4. effects
 	tui_effect_landscape->setValue(core->observatory->get_landscape_name());
+	tui_effect_manual_zoom->setValue(core->FlagManualZoom);
+
 }
 
 // Launch script to set time zone in the system locales
