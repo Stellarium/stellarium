@@ -54,7 +54,7 @@ SolarSystem::~SolarSystem()
 
 
 // Init and load the solar system data
-void SolarSystem::init(const string& font_fileName, const string& planetfile, Vec3f label_color)
+void SolarSystem::init(const string& font_fileName, const string& planetfile, Vec3f label_color, Vec3f orbit_color)
 {
     planet_name_font = new s_font(13,"spacefont", font_fileName);
     if (!planet_name_font)
@@ -64,6 +64,7 @@ void SolarSystem::init(const string& font_fileName, const string& planetfile, Ve
     }
 	planet::set_font(planet_name_font);
 	planet::set_label_color(label_color);
+	planet::set_orbit_color(orbit_color);
 	load(planetfile);
 }
 

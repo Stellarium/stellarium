@@ -112,6 +112,8 @@ private:
 	int screen_H;
 	int bppMode;
 	int Fullscreen;
+	int verticalOffset;
+	int horizontalOffset;
 
     //Files location
 	string TextureDir;
