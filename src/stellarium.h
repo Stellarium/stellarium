@@ -22,11 +22,12 @@
 
 #include <config.h>
 
-#if defined( WIN32 ) || defined ( __MWERKS__ ) || defined( _MSC_VER )
+#if defined( WIN32 ) || defined ( __MWERKS__ ) || defined( _MSC_VER ) || defined( MINGW32 )
 #  ifndef WIN32
 #     define WIN32
 #  endif
 #  include <windows.h>
+
 #endif
 
 #ifdef MACOSX

@@ -59,7 +59,7 @@ void Nebula::get_short_info_string(char * s, const navigator*) const
 	if( mag == 99 )
 	{
 		// we don't know actual magnitude for some reason, so don't label
-		sprintf(s,"%s", name, mag);
+		sprintf(s,"%s", name);
 	}
 	else
 	{
