@@ -24,8 +24,13 @@ Meteor_mgr::Meteor_mgr(int zhr, int maxv )
   ZHR = zhr;
   max_velocity = maxv;
 
-  // calculate factor for whole earth visible meteor rate per second since know visible area ZHR is for
-  zhr_to_wsr = 28.44f/3600.f;
+  // calculate factor for meteor creation rate per second since visible area ZHR is for
+  // estimated visible radius of 458km 
+  // (calculated for average meteor magnitude of +2.5 and limiting magnitude of 5)
+
+  //  zhr_to_wsr = 1.0f/3600.f;
+  zhr_to_wsr = 1.6667f/3600.f;   
+  // this is a correction factor to adjust for the model as programmed to match observed rates
 }
 
 Meteor_mgr::~Meteor_mgr() {
