@@ -173,6 +173,15 @@ Component* stel_ui::createConfigWindow(void)
 	// Location options
 	FilledContainer* tab_location = new FilledContainer();
 	tab_location->setSize(config_tab_ctr->getSize());
+	config_tab_ctr->setTexture(flipBaseTex);
+
+
+	x=5; y=5;
+	s_texture * earth = new s_texture("earthmap");
+	Picture* earth_map = new Picture(earth, x, y, tab_location->getSizex()-10, 250);
+	//time_current->setOnPressCallback(callback<void>(this, &stel_ui::updateConfigVariables));
+	tab_location->addComponent(earth_map);
+	y+=25;
 
 	config_tab_ctr->addTab(tab_time, "Date & Time");
 	config_tab_ctr->addTab(tab_location, "Location");
@@ -199,6 +208,7 @@ void stel_ui::config_win_hideBtCallback(void)
 	config_win->setVisible(false);
 	bt_flag_config->setState(0);
 }
+
 
 /*
 void ChangeStarDrawNameBarOnChangeValue(float value,Component *)

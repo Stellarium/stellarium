@@ -66,6 +66,8 @@ namespace s_gui
 	typedef Vec2i s_vec2i;
 	typedef Vec4i s_vec4i;
 
+	static const s_color s_white = s_color(1,1,1);
+
 	class Scissor
 	{
 	public:
@@ -445,17 +447,18 @@ namespace s_gui
 		s_vec2i oldPos;
 	};
 
-/*
+
     class Picture : public Component
 	{
 	public:
-	    Picture(vec2_i _position, vec2_i _size, s_texture * _imageTex);
-		virtual ~Picture();
-	    virtual void render(GraphicsContext&);
+	    Picture(s_texture * _imageTex, int xpos = 0, int ypos = 0, int xsize = 32, int ysize = 32);
+		~Picture();
+	    virtual void draw(void);
 	private:
 	    s_texture * imageTex;
 	};
 
+	/*
     class BorderPicture : public Picture
 	{
 	public:
