@@ -19,6 +19,7 @@
 
 // Class which manages a Text User Interface "widgets"
 
+#include <fstream>
 #include <cmath>
 #include "s_tui.h"
 
@@ -717,6 +718,102 @@ void Time_item::compute_JD(void)
             floor(30.6001 * (m + 1)) + B + 1720996.5 +
             ymdhms[2] + ymdhms[3] / 24.0 + ymdhms[4] / 1440.0 + second / 86400.0);
 }
+
+
+// Widget used to set time zone. Initialized from a file of type /usr/share/zoneinfo/zone.tab
+Time_zone_item::Time_zone_item(const string& zonetab_file, const string& _label) : label(_label)
+{
+	if (zonetab_file.empty())
+	{
+		cout << "Can't find file \"" << zonetab_file << "\"\n" ;
+		exit(0);
+	}
+
+	ifstream is(zonetab_file.c_str());
+
+	string unused, tzname;
+	char zoneline[256];
+	int i;
+
+	while (is.getline(zoneline, 256))
+	{
+		if (zoneline[0]=='#') continue;
+		istringstream istr(zoneline);
+		istr >> unused >> unused >> tzname;
+		i = tzname.find("/");
+		if (continents.find(tzname.substr(0,i))==continents.end())
+		{
+			continents.insert(pair<string, MultiSet_item<string> >(tzname.substr(0,i),MultiSet_item<string>()));
+			continents[tzname.substr(0,i)].addItem(tzname.substr(i+1,tzname.size()));
+			continents_names.addItem(tzname.substr(0,i));
+		}
+		else
+		{
+			continents[tzname.substr(0,i)].addItem(tzname.substr(i+1,tzname.size()));
+		}
+	}
+
+	is.close();
+	current_edit=&continents_names;
+}
+
+bool Time_zone_item::onKey(SDLKey k, S_TUI_VALUE v)
+{
+	if (v==S_TUI_RELEASED) return false;
+
+	if (current_edit->onKey(k,v))
+	{
+		if (!onChangeCallback.empty()) onChangeCallback();
+		return true;
+	}
+	else
+	{
+		if (k==SDLK_ESCAPE)
+		{
+			return false;
+		}
+
+		if (k==SDLK_RIGHT)
+		{
+			if (current_edit==&continents_names) current_edit = &continents[continents_names.getCurrent()];
+			else current_edit=&continents_names;
+			return true;
+		}
+		if (k==SDLK_LEFT)
+		{
+			if (current_edit==&continents_names) return false;
+			else current_edit = &continents_names;
+			return true;
+		}
+	}
+
+	return false;
+}
+
+string Time_zone_item::getString(void)
+{
+	string s1[2], s2[2];
+	if (current_edit==&continents_names && active){s1[0] = start_active; s2[0] = stop_active;}
+	if (current_edit!=&continents_names && active){s1[1] = start_active; s2[1] = stop_active;}
+
+	return label + s1[0] + continents_names.getCurrent() + s2[0] + "/" + s1[1] +
+		continents[continents_names.getCurrent()].getCurrent() + s2[1];
+}
+
+string Time_zone_item::gettz(void) // should be const but gives a boring error...
+{
+	if (continents.find(continents_names.getCurrent())!=continents.end())
+		return continents_names.getCurrent() + "/" + continents[continents_names.getCurrent()].getCurrent();
+	else return continents_names.getCurrent() + "/error" ;
+}
+
+void Time_zone_item::settz(string tz)
+{
+	int i = tz.find("/");
+	continents_names.setCurrent(tz.substr(0,i));
+	continents[continents_names.getCurrent()].setCurrent(tz.substr(i+1,tz.size()));
+}
+
 
 string Action_item::getString(void)
 {

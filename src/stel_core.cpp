@@ -240,7 +240,7 @@ void stel_core::draw(int delta_time)
 	if (FlagConstellationDrawing)
 	{
 		if (FlagConstellationPick && selected_constellation)
-			selected_constellation->draw(projection);
+			selected_constellation->draw(projection, ConstLinesColor);
 		else asterisms->draw(projection);
 	}
 
