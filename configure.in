@@ -3,9 +3,11 @@ AC_INIT(src/constellation.h)
 AM_INIT_AUTOMAKE(stellarium,0.4.7)
 
 dnl Checks for programs.
-
+AC_PROG_AWK
 AC_PROG_CC
 AC_PROG_CXX
+AC_PROG_INSTALL
+AC_PROG_LN_S
 AC_PROG_RANLIB
 
 dnl Checks for libraries.
