@@ -43,7 +43,7 @@ class StelCommandInterface : CommandInterface
   StelCommandInterface(stel_core * core);
   virtual ~StelCommandInterface();
   virtual int StelCommandInterface::execute_command(string commandline);
-  virtual int execute_command(string command, int &wait);
+  virtual int execute_command(string command, unsigned long int &wait);
   
  private:
   stel_core * stcore;
@@ -55,5 +55,6 @@ int string_to_jday(string date, double &jd);
 
 double str_to_double(string str);
 int str_to_int(string str);
+string double_to_str(double dbl);
 
 #endif // _STEL_COMMAND_INTERFACE_H

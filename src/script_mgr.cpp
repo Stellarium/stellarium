@@ -30,7 +30,7 @@ ScriptMgr::ScriptMgr(StelCommandInterface *command_interface) {
   commander = command_interface;
   recording = 1;  // temp
   playing = 0;
-
+  record_elapsed_time = 0;
 }
 
 ScriptMgr::~ScriptMgr() {
@@ -74,10 +74,13 @@ void ScriptMgr::cancel_script() {
 
 void ScriptMgr::pause_script() {
   play_paused = 1;
+  // need to pause time as well
+  commander->execute_command("timerate action pause");
 }
 
 void ScriptMgr::resume_script() { 
   play_paused = 0;
+  commander->execute_command("timerate action resume");
 }
 
 void ScriptMgr::record_script(string script_filename) {
@@ -85,12 +88,18 @@ void ScriptMgr::record_script(string script_filename) {
   // open file...
 
   recording = 1;
+  record_elapsed_time = 0;
 }
 
 void ScriptMgr::record_command(string commandline) {
 
   if(recording) {
     // write to file...
+
+    if(record_elapsed_time) {
+      cout << "wait duration " << record_elapsed_time/1000.f << endl;
+      record_elapsed_time = 0;
+    }
     // temp:
     cout << commandline << endl;
   }
@@ -105,6 +114,9 @@ void ScriptMgr::cancel_record_script() {
 // runs maximum of one command per update 
 // note that waits can drift by up to 1/fps seconds
 void ScriptMgr::update(int delta_time) {
+
+  if(recording) record_elapsed_time += delta_time;
+
   if(playing && !play_paused) {
 
     elapsed_time += delta_time;  // time elapsed since last command (should have been) executed
@@ -116,7 +128,7 @@ void ScriptMgr::update(int delta_time) {
       //      cout << "dt " << delta_time << " et: " << elapsed_time << endl;
       elapsed_time -= wait_time;
       string comd;
-      int wait;
+      unsigned long int wait;
       if(script->next_command(comd)) {
 	commander->execute_command(comd, wait);
 	wait_time = wait; 
