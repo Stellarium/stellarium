@@ -192,7 +192,7 @@ void Hip_Star_mgr::load(const string& font_fileName, const string& hipCatFile,
 // Load common names from file 
 void Hip_Star_mgr::load_common_names(const string& commonNameFile)
 {
-    printf("Loading star common names data...\n");
+  //    printf("Loading star common names data...\n");
     FILE *cnFile;
     cnFile = NULL;
 
