@@ -170,7 +170,10 @@ private:
 
 	double deltaFov,deltaAlt,deltaAz;	// View movement
 	double move_speed;					// Speed of movement
-	
+
+	int FlagTimePause;
+	double temp_time_velocity;			// Used to store time speed while in pause
+
 	// Load the textures "for non object oriented stuff" TODO : remove that
 	void load_base_textures(void);
 

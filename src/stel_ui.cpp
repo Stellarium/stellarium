@@ -513,7 +513,7 @@ int stel_ui::handle_keys(SDLKey key, S_GUI_VALUE state)
         {
         	core->FlagStarName=!core->FlagStarName;
 		}
-        if(key==SDLK_k)
+        if(key==SDLK_1)
         {
         	core->FlagConfig=!core->FlagConfig;
 			bt_flag_config->setState(core->FlagConfig);
@@ -585,10 +585,7 @@ int stel_ui::handle_keys(SDLKey key, S_GUI_VALUE state)
         {
         	core->navigation->set_time_speed(1);
 		}
-        if(key==SDLK_3)
-        {
-        	core->navigation->set_time_speed(JD_SECOND);
-		}
+
         if(key==SDLK_2)
         {
         	core->navigation->set_time_speed(JD_HOUR/10);
@@ -615,9 +612,68 @@ int stel_ui::handle_keys(SDLKey key, S_GUI_VALUE state)
 			}
 		}
         if(key==SDLK_i)
-        {	
-        	core->FlagInfos=!core->FlagInfos; 
+        {
+        	core->FlagInfos=!core->FlagInfos;
             licence_win->setVisible(core->FlagInfos);
+		}
+        if(key==SDLK_EQUALS)
+        {
+        	core->navigation->set_JDay(core->navigation->get_JDay()+JD_DAY);
+		}
+        if(key==SDLK_MINUS)
+        {
+        	core->navigation->set_JDay(core->navigation->get_JDay()-JD_DAY);
+		}
+        if(key==SDLK_k)
+        {
+        	core->navigation->set_time_speed(JD_SECOND);
+		}
+        if(key==SDLK_l)
+        {
+			double s = core->navigation->get_time_speed();
+			if (s>=JD_SECOND) s*=10.;
+			else if (s<-JD_SECOND) s/=10.;
+			else if (s>=0. && s<JD_SECOND) s=JD_SECOND;
+			else if (s>=-JD_SECOND && s<0.) s=0.;
+        	core->navigation->set_time_speed(s);
+		}
+        if(key==SDLK_j)
+        {
+			double s = core->navigation->get_time_speed();
+			if (s>JD_SECOND) s/=10.;
+			else if (s<=-JD_SECOND) s*=10.;
+			else if (s>-JD_SECOND && s<=0.) s=-JD_SECOND;
+			else if (s>0. && s<=JD_SECOND) s=0.;
+        	core->navigation->set_time_speed(s);
+		}
+        if(key==SDLK_AT)
+        {
+			core->FlagTimePause = !core->FlagTimePause;
+			if (core->FlagTimePause)
+			{
+				core->temp_time_velocity = core->navigation->get_time_speed();
+        		core->navigation->set_time_speed(0);
+			}
+			else
+			{
+				core->navigation->set_time_speed(core->temp_time_velocity);
+			}
+		}
+        if(key==SDLK_HASH)
+        {
+        	core->navigation->set_time_speed(0);
+		}
+        if(key==SDLK_LEFTBRACKET)
+        {
+        	core->navigation->set_JDay(core->navigation->get_JDay()-7*JD_DAY);
+		}
+        if(key==SDLK_RIGHTBRACKET)
+        {
+        	core->navigation->set_JDay(core->navigation->get_JDay()+7*JD_DAY);
+		}
+		if(key==SDLK_EXCLAIM)
+        {
+        	core->navigation->set_JDay(get_julian_from_sys());
 		}
     }
     return 0;
