@@ -13,6 +13,7 @@ constellation_mgr.h constellation_mgr.cpp \
 nebula.h            nebula.cpp \
 nebula_mgr.h        nebula_mgr.cpp \
 planet.h            planet.cpp \
+solarsystem.h       solarsystem.cpp \
 hip_star.h          hip_star.cpp \
 hip_star_mgr.h      hip_star_mgr.cpp \
 stellarium_ui.h     stellarium_ui.cpp \
