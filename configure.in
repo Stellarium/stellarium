@@ -12,8 +12,9 @@ dnl Check for compilers.
 AC_PROG_CC
 AC_PROG_CXX
 
-CFLAGS="-g -Wall -O2"
-CXXFLAGS="-g -Wall -O2"
+CFLAGS="-g -Wall -O2 `sdl-config --cflags`"
+CXXFLAGS="-g -Wall -O2 `sdl-config --cflags`"
+LIBS="$LIBS `sdl-config --libs`"
 
 dnl Checks for programs.
 AC_PROG_CPP
@@ -30,10 +31,10 @@ LIBS="$LIBS $X_LIBS"
 CFLAGS="$CFLAGS $X_CFLAGS"
 
 dnl Check for SDL.
-AM_PATH_SDL
-LIBS="$LIBS $SDL_LIBS"
-CFLAGS="$CFLAGS $SDL_CFLAGS"
-CXXFLAGS="$CXXFLAGS $SDL_CFLAGS"
+dnl AM_PATH_SDL
+dnl LIBS="$LIBS $SDL_LIBS"
+dnl CFLAGS="$CFLAGS $SDL_CFLAGS"
+dnl CXXFLAGS="$CXXFLAGS $SDL_CFLAGS"
 
 AC_C_BIGENDIAN
 AC_CHECK_HEADERS(byteswap.h)
