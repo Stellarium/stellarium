@@ -45,7 +45,7 @@ stel_atmosphere::~stel_atmosphere()
 	if (tab_sky) delete tab_sky;
 }
 
-void stel_atmosphere::compute_color(int ground_ON, Vec3d sunPos, Vec3d moonPos, tone_reproductor * eye, draw_utility * du)
+void stel_atmosphere::compute_color(int ground_ON, Vec3d sunPos, Vec3d moonPos, float moon_phase, tone_reproductor * eye, draw_utility * du)
 {
 	static    GLdouble M[16];
 	static    GLdouble P[16];
@@ -72,7 +72,7 @@ void stel_atmosphere::compute_color(int ground_ON, Vec3d sunPos, Vec3d moonPos, 
 	sky.set_paramsv(sun_pos,5.f);
 
 	skyb.set_sun_moon(moon_pos[2], sun_pos[2]);
-	skyb.set_date(2003, 07, M_PI_2);
+	skyb.set_date(2003, 07, moon_phase);
 
 	// Convert x,y screen pos in 3D vector
 	glGetDoublev(GL_MODELVIEW_MATRIX,M);
@@ -143,7 +143,7 @@ void stel_atmosphere::compute_color(int ground_ON, Vec3d sunPos, Vec3d moonPos, 
 	}
 
 	// Variables used to compute the average sky luminance
-	float sum_lum = 0.f;
+	double sum_lum = 0.;
 	unsigned int nb_lum = 0;
 	// Compute the sky color for every point above the ground
 	for (int x=0; x<=sky_resolution; x++)
@@ -162,11 +162,11 @@ void stel_atmosphere::compute_color(int ground_ON, Vec3d sunPos, Vec3d moonPos, 
 			{
 				b2.color[2]*=1.f-s;
 				b2.color[2]+=s * skyb.get_luminance(moon_pos[0]*b2.pos[0]+moon_pos[1]*b2.pos[1]+
-					moon_pos[2]*b2.pos[2], sun_pos[0]*b2.pos[0]+sun_pos[1]*b2.pos[1]+
-					sun_pos[2]*b2.pos[2], b2.pos[2]);
+					moon_pos[2]*b2.pos[2] - 0.00000001, sun_pos[0]*b2.pos[0]+sun_pos[1]*b2.pos[1]+
+					sun_pos[2]*b2.pos[2] - 0.00000001, b2.pos[2]);
 			}
 			sum_lum+=b2.color[2];
-			nb_lum++;
+			++nb_lum;
 			eye->xyY_to_RGB(b2.color);
 			tab_sky[x][y].set(b2.color[0],b2.color[1],b2.color[2]);
 		}

@@ -96,7 +96,7 @@ float skybright::get_luminance(float cos_dist_moon, float cos_dist_sun, float co
 	b_night *= b_night_term * bKX;
 
 	// Moonlight brightness
-	float FM = 18886.28 / (dist_moon*dist_moon + 0.001f) + powf(10.f, 6.15f - dist_moon * 1.43239f);
+	float FM = 18886.28 / (dist_moon*dist_moon + 0.0007f) + powf(10.f, 6.15f - (dist_moon+0.001) * 1.43239f);
 	FM += 229086.77f * ( 1.06f + cos_dist_moon*cos_dist_moon );
 	b_moon = b_moon_term1 * (1.f - bKX) * (FM * C3 + 440000.f * (1.f - C3));
 
@@ -105,7 +105,7 @@ float skybright::get_luminance(float cos_dist_moon, float cos_dist_sun, float co
 		(1.7453293f / dist_sun) * (1.f-bKX);
 
 	// Daylight brightness
-	float FS = 18886.28f / (dist_sun*dist_sun + 0.0007f) + powf(10.f, 6.15f - dist_sun* 1.43239f);
+	float FS = 18886.28f / (dist_sun*dist_sun + 0.0007f) + powf(10.f, 6.15f - (dist_sun+0.001)* 1.43239f);
 	FS += 229086.77f * ( 1.06f + cos_dist_sun*cos_dist_sun );
 	b_daylight = 9.289663e-12 * (1.f - bKX) * (FS * C4 + 440000.f * (1.f - C4));
 
