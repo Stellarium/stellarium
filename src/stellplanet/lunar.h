@@ -14,6 +14,7 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA. 
 
 Copyright (C) 2002 Liam Girdwood <liam@nova-ioe.org>
+Copyright (C) 2003 Fabien Chéreau
 
 */
 
@@ -25,7 +26,7 @@ struct main_problem
 {
 	signed char ilu[4];
 	float A;
-	float B[6];
+	float B[5];
 };
 
 /* used for elp 4 - 9 */
