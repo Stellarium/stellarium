@@ -28,6 +28,7 @@
 #define EARTH_RADIUS 6369.f
 #define HIGH_ALTITUDE 115.f
 #define LOW_ALTITUDE 70.f
+#define VISIBLE_RADIUS 457.8f
 
 class Meteor
 {
@@ -36,11 +37,12 @@ class Meteor
   Meteor( Projector *proj, navigator *nav, tone_reproductor* eye, double v);
   virtual ~Meteor();
   bool update(int delta_time);  // update position
-  bool draw(Projector *proj, navigator* nav);		// Draw the star
+  bool draw(Projector *proj, navigator* nav);		// Draw the meteor
   bool is_alive(void);          // see if burned out yet
 
  private:
   Mat4d mmat; // tranformation matrix to align radiant with earth direction of travel
+  Vec3d obs;  // observer position in meteor coord. system
   Vec3d position;  // equatorial coordinate position
   Vec3d pos_internal;  // middle of train
   Vec3d pos_train;  // end of train
@@ -51,6 +53,12 @@ class Meteor
   bool alive;      // is it still visible?
   float mag;	   // Apparent magnitude at head, 0-1
   float max_mag;  // 0-1
+  float abs_mag;  // absolute magnitude
+  float vis_mag;  // visual magnitude at observer
+  double xydistance; // distance in XY plane (orthogonal to meteor path) from observer to meteor
+  double init_dist;  // initial distance from observer
+  double min_dist;  // nearest point to observer along path
+  double dist_multiplier;  // scale magnitude due to changes in distance 
 };
 
 

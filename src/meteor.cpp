@@ -20,49 +20,25 @@
 // This is an ad hoc meteor model
 // Could use a simple ablation physics model in the future
 
+/*
+NOTE: Here the radiant is always along the ecliptic at the apex of the Earth's way.
+In reality, individual meteor streams have varying velocity vectors and therefore radiants
+which are generally not at the apex of the Earth's way, such as the Perseids shower.
+*/
+
+// Improved realism and efficiency 2004-12
+
 #include "meteor.h"
 #include "stdlib.h"
 
 Meteor::Meteor(Projector *proj, navigator* nav, tone_reproductor* eye, double v)
 {
   //  velocity = 11+(double)rand()/((double)RAND_MAX+1)*v;  // abs range 11-72 km/s
-  //TEMP
   velocity=v;
 
-  mag = max_mag = 1;
+  max_mag = 1;
 
-  // select random trajectory (here radiant is on z axis, z=0 at center of earth)
-  // using polar coordinates
-  double d = (double)rand()/((double)RAND_MAX+1)*(EARTH_RADIUS+HIGH_ALTITUDE);
-  double angle = (double)rand()/((double)RAND_MAX+1)*2*M_PI;
-
-  pos_internal[0] = pos_train[0] = position[0] = d*cos(angle);
-  pos_internal[1] = pos_train[1] = position[1] = d*sin(angle);
-
-  // determine life of meteor (h on z axis)
-  start_h = sqrt( pow(EARTH_RADIUS+HIGH_ALTITUDE,2) - d*d);
-
-  if( d > EARTH_RADIUS+LOW_ALTITUDE ) {
-    end_h = -start_h;
-  } else {
-    end_h = sqrt( pow(EARTH_RADIUS+LOW_ALTITUDE,2) - d*d);
-  }
-
-  /* experiment
-  // limit lifetime to 0.5-3.0 sec
-  double tmp_h = start_h - velocity * (0.5 + (double)rand()/((double)RAND_MAX+1) * 2.5);
-  if( tmp_h > end_h ) {
-    end_h = tmp_h;
-  }
-  */
-
-  pos_train[2] = position[2] = start_h ;
-
-  //  printf("New meteor: %f %f s:%f e:%f v:%f\n", position[0], position[1], start_h, end_h, velocity);
-
-  alive = 1;
-
-  // determine meteor model view matrix (want z in dir of travel of earth)
+  // determine meteor model view matrix (want z in dir of travel of earth, z=0 at center of earth)
   // meteor life is so short, no need to recalculate
   double equ_rotation; // rotation needed to align with path of earth
   Vec3d sun_dir = nav->helio_to_earth_equ( Vec3d(0,0,0) );
@@ -75,18 +51,73 @@ Meteor::Meteor(Projector *proj, navigator* nav, tone_reproductor* eye, double v)
 
   equ_rotation -= M_PI_2;
 
-
-  train=0;
-
   mmat = Mat4d::xrotation(23.45f*M_PI/180.f) * Mat4d::zrotation(equ_rotation) * Mat4d::yrotation(M_PI_2);
 
 
+  // select random trajectory using polar coordinates in XY plane, centered on observer
+  xydistance = (double)rand()/((double)RAND_MAX+1)*(VISIBLE_RADIUS);
+  double angle = (double)rand()/((double)RAND_MAX+1)*2*M_PI;
+
+  // find observer position in meteor coordinate system
+  obs = nav->local_to_earth_equ(Vec3d(0,0,EARTH_RADIUS));
+  obs.transfo4d(mmat.transpose());
+
+  // set meteor start x,y
+  pos_internal[0] = pos_train[0] = position[0] = xydistance*cos(angle) +obs[0];
+  pos_internal[1] = pos_train[1] = position[1] = xydistance*sin(angle) +obs[1];
+
+  // determine life of meteor (start and end z value based on atmosphere burn altitudes)
+
+  // D is distance from center of earth
+  double D = sqrt( position[0]*position[0] + position[1]*position[1] );
+
+  if( D > EARTH_RADIUS+HIGH_ALTITUDE ) {
+    // won't be visible
+    alive = 0;
+    return;
+  }
+
+  start_h = sqrt( pow(EARTH_RADIUS+HIGH_ALTITUDE,2) - D*D);
+
+  // determine end of burn point, and nearest point to observer for distance mag calculation
+  // mag should be max at nearest point still burning
+  if( D > EARTH_RADIUS+LOW_ALTITUDE ) {
+    end_h = -start_h;  // earth grazing
+    min_dist = xydistance;
+  } else {
+    end_h = sqrt( pow(EARTH_RADIUS+LOW_ALTITUDE,2) - D*D);
+    min_dist = sqrt( xydistance*xydistance + pow( end_h - obs[2], 2) );
+  }
+
+  if(min_dist > VISIBLE_RADIUS ) {
+    // on average, not visible (although if were zoomed ...)
+    alive = 0;
+    return;
+  }
+    
+  /* experiment
+  // limit lifetime to 0.5-3.0 sec
+  double tmp_h = start_h - velocity * (0.5 + (double)rand()/((double)RAND_MAX+1) * 2.5);
+  if( tmp_h > end_h ) {
+    end_h = tmp_h;
+  }
+  */
+
+  pos_train[2] = position[2] = start_h;
+
+  //  printf("New meteor: %f %f s:%f e:%f v:%f\n", position[0], position[1], start_h, end_h, velocity);
+
+  alive = 1;
+  train=0;
+
   // Determine drawing color given magnitude and eye 
   // (won't be visible during daylight)
-  Vec3d RGB = Vec3d(1,1,1);  // *** color varies somewhat depending on velocity
-  //float MaxColorValue = MY_MAX(RGB[0],RGB[2]);
 
+  // *** color varies somewhat based on velocity, plus atmosphere reddening
+
+  // determine intensity
   float Mag = (double)rand()/((double)RAND_MAX+1)*6.75f - 3;  // meteor visual magnitude
+
   mag = (5. + Mag) / 256.0;
   if (mag>250) mag = mag - 256;
 
@@ -104,14 +135,15 @@ Meteor::Meteor(Projector *proj, navigator* nav, tone_reproductor* eye, double v)
   // And we compensate the difference of brighteness with cmag
   if (rmag<1.2f) {
     cmag=rmag*rmag/1.44f;
-    //if (rmag/star_scale<0.1f || cmag<0.1/star_mag_scale) return;
-    //    if (rmag<0.1f || cmag<0.1) alive=0;  // not visible...
   }
 
-  // Global scaling
-  //  cmag*=star_mag_scale;
+  mag = cmag;  // assumes white
 
-  mag = cmag;  // assumes gray only
+  // most visible meteors are under about 180km distant
+  // scale max mag down if outside this range 
+  float scale = 1;
+  if(min_dist!=0) scale = 180*180/(min_dist*min_dist);
+  if( scale < 1 ) mag *= scale;
 
 }
 
@@ -127,15 +159,15 @@ bool Meteor::update(int delta_time)
 
   if( position[2] < end_h ) {
     // burning has stopped so magnitude fades out
-    // here assume linear fade out
+    // assume linear fade out
 
     mag -= max_mag * (double)delta_time/500.0f;
     if( mag < 0 ) alive=0;  // no longer visible
+
   }
 
-  // would need time direction multiplier to allow reverse time replay
+  // *** would need time direction multiplier to allow reverse time replay
   position[2] = position[2] - velocity/1000.0f*(double)delta_time;
-
 
   // train doesn't extend beyond start of burn
   if( position[2] + velocity*0.5f > start_h ) {
@@ -146,6 +178,13 @@ bool Meteor::update(int delta_time)
 
   //printf("meteor position: %f delta_t %d\n", position[2], delta_time);
 
+  // determine visual magnitude based on distance to observer
+  double dist = sqrt( xydistance*xydistance + pow( position[2]-obs[2], 2) );
+
+  if( dist == 0 ) dist = .01;  // just to be cautious (meteor hits observer!)
+
+  dist_multiplier = min_dist*min_dist / (dist*dist);
+
   return(alive);
 }
 
@@ -154,7 +193,7 @@ bool Meteor::update(int delta_time)
 bool Meteor::draw(Projector *proj, navigator* nav)
 {
 
-  if(!alive) return(alive);
+  if(!alive) return(0);
 
   Vec3d start, end;
 
@@ -185,6 +224,8 @@ bool Meteor::draw(Projector *proj, navigator* nav)
   if( train ) {
     // connect this point with last drawn point
 
+    double tmag = mag*dist_multiplier;
+
     // compute an intermediate point so can curve slightly along projection distortions
     Vec3d intpos;
     Vec3d posi = pos_internal; 
@@ -198,9 +239,9 @@ bool Meteor::draw(Projector *proj, navigator* nav)
     glBegin(GL_LINE_STRIP);
     glColor3f(0,0,0);
     glVertex3f(end[0],end[1],0);
-    glColor3f(mag/2,mag/2,mag/2);
+    glColor3f(tmag/2,tmag/2,tmag/2);
     glVertex3f(intpos[0],intpos[1],0);
-    glColor3f(mag,mag,mag);
+    glColor3f(tmag,tmag,tmag);
     glVertex3f(start[0],start[1],0);
     glEnd();
   } else {
