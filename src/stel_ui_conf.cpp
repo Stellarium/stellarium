@@ -49,11 +49,19 @@ Component* stel_ui::createConfigWindow(void)
 	tab_render->addComponent(star_names_cbx);
 	star_names_cbx->setPos(x,y); y+=15;
 
+	LabeledCheckBox* star_sci_names_cbx = new LabeledCheckBox(core->FlagStarSciName, "Star Sci Names");
+	star_sci_names_cbx->setOnPressCallback(callback<void>(this, &stel_ui::updateConfigVariables));
+	tab_render->addComponent(star_sci_names_cbx);
+	star_sci_names_cbx->setPos(x,y); y+=15;
+
 	LabeledCheckBox* star_twinkle_cbx = new LabeledCheckBox(core->FlagStarTwinkle, "Star Twinkle");
 	star_twinkle_cbx->setOnPressCallback(callback<void>(this, &stel_ui::updateConfigVariables));
 	tab_render->addComponent(star_twinkle_cbx);
 	star_twinkle_cbx->setPos(x,y); y+=30;
 
+	DecimalIncDec* max_mag_star_name = new DecimalIncDec(-2,10,0.5,core->MaxMagStarName);
+	tab_render->addComponent(max_mag_star_name);
+	max_mag_star_name->setPos(x,y); y+=30;
 
 	LabeledCheckBox* constellation_cbx = new LabeledCheckBox(core->FlagConstellationDrawing, "Constellations");
 	constellation_cbx->setOnPressCallback(callback<void>(this, &stel_ui::updateConfigVariables));

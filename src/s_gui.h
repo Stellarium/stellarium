@@ -61,7 +61,7 @@ namespace s_gui
 		S_GUI_RELEASED
 	};
 
- typedef Vec4f s_color;
+	typedef Vec4f s_color;
 	typedef Vec4i s_square;
 	typedef Vec2i s_vec2i;
 	typedef Vec4i s_vec4i;
@@ -271,6 +271,22 @@ namespace s_gui
 		virtual void setTextColor(const s_color& c);
 	protected:
         string label;
+	};
+
+	class DecimalIncDec : public Container
+	{
+	public:
+	    DecimalIncDec(float min, float max, float inc, float init_value, const s_font* _font = NULL);
+	    virtual ~DecimalIncDec();
+		virtual void draw();
+        virtual const float getValue() const {return value;}
+	protected:
+		void inc_value() {value+=inc; if(value>max) value=max;}
+		void dec_value() {value-=inc; if(value<min) value=min;}
+        float value, min, max, inc;
+		LabeledButton* btmore;
+		LabeledButton* btless;
+		Label label;
 	};
 
 	class LabeledCheckBox : public Container

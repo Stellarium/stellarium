@@ -1007,6 +1007,42 @@ int CursorBar::onMove(int x, int y)
 }
 
 
+
+DecimalIncDec::DecimalIncDec(float _min, float _max, float _inc, float _init_value, const s_font* _font) :
+	Container(), value(_init_value), min(_min), max(_max), inc(_inc), btmore(NULL), btless(NULL)
+{
+	if (_font) painter.setFont(_font);
+	btless = new LabeledButton("-", painter.getFont());
+	btless->setSize(10,10);
+	btless->setOnPressCallback(callback<void>(this, &DecimalIncDec::dec_value));
+	label.setPos(btless->getSizex(),0);
+	label.setSize(30,10);
+	btmore = new LabeledButton("+", painter.getFont());
+	btmore->setSize(10,10);
+	btmore->setOnPressCallback(callback<void>(this, &DecimalIncDec::inc_value));
+	btmore->setPos(label.getPosx() + label.getSizex(),0);
+	addComponent(btmore);
+	addComponent(btless);
+	addComponent(&label);
+	setSize(100,50);
+}
+
+DecimalIncDec::~DecimalIncDec()
+{
+	if (btmore) delete btmore;
+	if (btless) delete btless;
+}
+
+void DecimalIncDec::draw()
+{
+	static char str[255];
+	snprintf(str, 255, "% .2f",value);
+	label.setLabel(str);
+	btmore->setPos(label.getPosx() + label.getSizex(),0);
+
+	Container::draw();
+}
+
 /*
 void ExtCursorBarClicCallback(int x, int y, enum guiValue state, enum guiValue button, Component * me)
 {
