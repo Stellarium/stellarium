@@ -12,10 +12,10 @@ dnl Check for compilers.
 AC_PROG_CC
 AC_PROG_CXX
 
-dnl CFLAGS=" -Wall -s -O3 -ffast-math -fomit-frame-pointer"
-dnl CXXFLAGS=" -Wall -s -O3 -ffast-math -fomit-frame-pointer"
-CFLAGS=" -Wall"
-CXXFLAGS=" -Wall"
+CFLAGS=" -Wall -s -O3 -ffast-math -fomit-frame-pointer"
+CXXFLAGS=" -Wall -s -O3 -ffast-math -fomit-frame-pointer"
+dnl CFLAGS=" -Wall"
+dnl CXXFLAGS=" -Wall"
 
 dnl Checks for programs.
 AC_PROG_CPP
