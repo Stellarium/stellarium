@@ -182,7 +182,7 @@ private:
     int FlagConstellationDrawing;
     int FlagConstellationName;
 	int FlagConstellationPick;
-	int FlagConstellationArt;		// Feature still TODO
+	int FlagConstellationArt;
 	string ConstellationCulture;
     int FlagAzimutalGrid;
     int FlagEquatorialGrid;
