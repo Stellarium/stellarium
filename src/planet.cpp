@@ -238,10 +238,6 @@ void planet::draw(int hint_ON, Projector* prj, const navigator * nav, const tone
 	// This removed totally the planet shaking bug!!!
 	mat = nav->get_helio_to_eye_mat() * mat;
 
-	glPushMatrix();
-
-	//glLoadMatrixd(mat);
-
 	// Compute the 2D position and check if in the screen
 	float screen_sz = get_on_screen_size(nav, prj);
 	float viewport_left = prj->view_left();
@@ -266,7 +262,7 @@ void planet::draw(int hint_ON, Projector* prj, const navigator * nav, const tone
 			double dist = get_earth_equ_pos(nav).length();
 			double n,f;
 			prj->get_clipping_planes(&n, &f);	// Copy clipping planes
-			prj->set_clipping_planes(dist-rings->get_size(), dist+rings->get_size());
+			prj->set_clipping_planes(dist-rings->get_size()*2, dist+rings->get_size()*2);
 			glClear(GL_DEPTH_BUFFER_BIT);
 			glEnable(GL_DEPTH_TEST);
 			draw_sphere(prj, mat, screen_sz);
@@ -288,7 +284,6 @@ void planet::draw(int hint_ON, Projector* prj, const navigator * nav, const tone
 		if (tex_big_halo) draw_big_halo(nav, prj, eye);
     }
 
-	glPopMatrix();
 }
 
 void planet::draw_hints(const navigator* nav, const Projector* prj)
@@ -512,10 +507,10 @@ void ring::draw(const Projector* prj, const Mat4d& mat)
     glBindTexture (GL_TEXTURE_2D, tex->getID());
 	double r=radius;
 	glBegin(GL_QUADS);
-		glTexCoord2f(0,0); prj->sVertex3( r,-r, 0., mat);	// Bottom left
-		glTexCoord2f(1,0); prj->sVertex3( r, r, 0., mat);	// Bottom right
-		glTexCoord2f(1,1); prj->sVertex3(-r, r, 0., mat);	// Top right
-		glTexCoord2f(0,1); prj->sVertex3(-r,-r, 0., mat);	// Top left
+		glTexCoord2f(0,0); prj->sVertex3( -r,-r, 0., mat);	// Bottom left
+		glTexCoord2f(1,0); prj->sVertex3( r, -r, 0., mat);	// Bottom right
+		glTexCoord2f(1,1); prj->sVertex3(r, r, 0., mat);	// Top right
+		glTexCoord2f(0,1); prj->sVertex3(-r,r, 0., mat);	// Top left
 	glEnd ();
 	glPopMatrix();
 }
