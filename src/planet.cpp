@@ -37,7 +37,8 @@ planet::planet(const string& _name, int _flagHalo, int _flag_lighting, double _r
 	float _albedo, const string& tex_map_name, const string& tex_halo_name, pos_func_type _coord_func) :
 		name(_name), flagHalo(_flagHalo), flag_lighting(_flag_lighting), radius(_radius), color(_color),
 		albedo(_albedo), axis_rotation(0.),	tex_map(NULL), tex_halo(NULL), tex_big_halo(NULL), rings(NULL),
-		sphere_scale(1.f), lastJD(J2000), last_orbitJD(0), deltaJD(JD_SECOND), coord_func(_coord_func), parent(NULL)
+		sphere_scale(1.f), lastJD(J2000), last_orbitJD(0), deltaJD(JD_SECOND), orbit_cached(0),
+		coord_func(_coord_func), parent(NULL)
 {
 	ecliptic_pos=Vec3d(0.,0.,0.);
 	mat_local_to_parent = Mat4d::identity();
@@ -126,7 +127,7 @@ Vec3d planet::get_earth_equ_pos(const navigator * nav) const
 void planet::compute_position(double date)
 {
 
-	if (delta_orbitJD > 0 && fabs(last_orbitJD-date)>delta_orbitJD)
+	if (delta_orbitJD > 0 && (fabs(last_orbitJD-date)>delta_orbitJD || !orbit_cached))
 	{
 
 	  // calculate orbit first (for line drawing)
@@ -145,7 +146,7 @@ void planet::compute_position(double date)
 	  //	  printf( "Updating orbit coordinates for %s (delta %f) (%d points)\n", name.c_str(), delta_orbitJD, delta_points);
 
 
-	  if( delta_points > 0 && delta_points < ORBIT_SEGMENTS ) {
+	  if( delta_points > 0 && delta_points < ORBIT_SEGMENTS && orbit_cached) {
 
 	    for( int d=0; d<ORBIT_SEGMENTS; d++ ) {
 	      if(d + delta_points >= ORBIT_SEGMENTS ) {
@@ -163,13 +164,12 @@ void planet::compute_position(double date)
 
 	    last_orbitJD = new_date;
 
-	  } else if( delta_points < 0 && abs(delta_points) < ORBIT_SEGMENTS ) {
+	  } else if( delta_points < 0 && abs(delta_points) < ORBIT_SEGMENTS  && orbit_cached) {
 
 	    for( int d=ORBIT_SEGMENTS-1; d>=0; d-- ) {
 	      if(d + delta_points < 0 ) {
 		// calculate new points
 		calc_date = new_date + (d-ORBIT_SEGMENTS/2)*date_increment;  
-		// date increments between points will not be completely constant though
 
 		compute_trans_matrix(calc_date);
 		coord_func(calc_date, ecliptic_pos);
@@ -181,7 +181,7 @@ void planet::compute_position(double date)
 
 	    last_orbitJD = new_date;
 
-	  } else if( delta_points ) {
+	  } else if( delta_points || !orbit_cached) {
 
 	    // update all points (less efficient)
 
@@ -193,6 +193,7 @@ void planet::compute_position(double date)
 	    } 
 
 	    last_orbitJD = date;
+	    orbit_cached = 1;
 	  }
 
 
@@ -205,9 +206,6 @@ void planet::compute_position(double date)
 	  
 	  // calculate actual planet position
 	  coord_func(date, ecliptic_pos);
-
-	  // make orbit aproximating lines look better when zoom
-	  //	  orbit[ORBIT_SEGMENTS/2] = get_heliocentric_ecliptic_pos();
 	  lastJD = date;
 	}
 }
