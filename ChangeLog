@@ -1,4 +1,7 @@
-0.5.1b [06/04/2003]
+0.5.1 [11/04/2003]
+Added an win32 installer script to use with inno setup.
+Succeed compilation on MSYS with MinGW32.
+Fixed the seg fault when quiting.
 Fixed the fantom planets bug.
 Implemented the ClickablePicture ui component to set the position easily by clicking the world map.
 Found and eliminate the boring memory leak i knew since months.
