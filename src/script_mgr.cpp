@@ -17,9 +17,6 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-/* This class handles parsing of a simple command syntax for scripting, 
-   UI components, network commands, etc.
-*/   
 
 #include <iostream>
 #include <string>
@@ -42,12 +39,28 @@ ScriptMgr::~ScriptMgr() {
 void ScriptMgr::play_script(string script_file) {
   // load script...
 
-  playing = 1;
-  play_paused = 0;
+  script = new Script();
+  if( script->load(script_file) ) {
+    playing = 1;
+    play_paused = 0;
+    elapsed_time = wait_time = 0;
+
+    /*    // temp
+    string comd;
+    while(script->next_command(comd)) {
+      cout << "Command: " << comd << endl;
+    }
+    */
+
+  } else {
+    delete script;
+  }
 }
 
 void ScriptMgr::cancel_script() {
   // delete script object...
+  delete script;
+  script = NULL;
 
   playing = 0;
   play_paused = 0;
@@ -80,13 +93,32 @@ void ScriptMgr::record_command(string commandline) {
 
 void ScriptMgr::cancel_record_script() {
   // close file...
-
   recording = 0;
 }
 	 
 
+// runs maximum of one command per update 
 void ScriptMgr::update(int delta_time) {
- 
+  if(playing && !play_paused) {
+
+    elapsed_time += delta_time;  // time elapsed since last command (should have been) executed
+
+    if(elapsed_time >= wait_time) {
+      // now time to run next command
+
+      elapsed_time -= wait_time;
+      string comd;
+      int wait;
+      if(script->next_command(comd)) {
+	commander->execute_command(comd, wait);
+	wait_time = wait; 
+
+      } else {
+	// script done
+	playing = 0;
+      }
+    }
+  }
 
 }  
 

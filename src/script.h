@@ -17,36 +17,31 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-/* This class handles parsing of a simple command syntax for scripting, 
-   UI components, network commands, etc.
-*/   
-
-#ifndef _STEL_COMMAND_INTERFACE_H_
-#define _STEL_COMMAND_INTERFACE_H_
-
-#include "command_interface.h"
-#include "stel_core.h"
-#include "script_mgr.h"
-
-using namespace std;
-
-// Predeclaration of the stel_core class
-class stel_core;
+// This class handles loading and playing a script of recorded commands
 
 
+#ifndef _SCRIPT_H_
+#define _SCRIPT_H_
 
-class StelCommandInterface : CommandInterface
+#include <iostream>
+#include <fstream>
+#include <string>
+#include "stel_command_interface.h"
+
+
+class Script
 {
 
  public:
-  StelCommandInterface(stel_core * core);
-  virtual ~StelCommandInterface();
-  virtual int StelCommandInterface::execute_command(string commandline);
-  virtual int execute_command(string command, int &wait);
-  
+  Script();
+  ~Script();
+  int load(string script_file);         // open a script file
+  int next_command(string &command);    // retreive next command to execute
+
  private:
-  stel_core * stcore;
+  ifstream * input_file;
+
 };
 
 
-#endif // _STEL_COMMAND_INTERFACE_H
+#endif // _SCRIPT_H
