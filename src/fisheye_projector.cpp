@@ -143,11 +143,24 @@ void Fisheye_projector::sSphere(GLdouble radius, GLint slices, GLint stacks, con
 	static Vec3f transNorm;
 	static float c;
 
+	static Vec4f ambientLight;
+	static Vec4f diffuseLight;
+
+	static Vec3d posCenterEye;
+	posCenterEye = mat * Vec3d(0.,0.,0.);
+
 	glGetBooleanv(GL_LIGHT0, &isLightOn);
-	glGetLightfv(GL_LIGHT0, GL_POSITION, lightPos4);
-	lightPos3 = lightPos4;
-	lightPos3.normalize();
-	glDisable(GL_LIGHTING);
+
+	if (isLightOn)
+	{
+		glGetLightfv(GL_LIGHT0, GL_POSITION, lightPos4);
+		lightPos3 = lightPos4;
+		lightPos3-=posCenterEye;
+		lightPos3.normalize();
+		glGetLightfv(GL_LIGHT0, GL_AMBIENT, ambientLight);
+		glGetLightfv(GL_LIGHT0, GL_DIFFUSE, diffuseLight);
+		glDisable(GL_LIGHTING);
+	}
 
 	static GLfloat rho, drho, theta, dtheta;
 	static GLfloat x, y, z;
@@ -182,27 +195,33 @@ void Fisheye_projector::sSphere(GLdouble radius, GLint slices, GLint stacks, con
 			x = -sin(theta) * sin(rho);
 			y = cos(theta) * sin(rho);
 			z = nsign * cos(rho);
-			glNormal3f(x * nsign, y * nsign, z * nsign);
+			//glNormal3f(x * nsign, y * nsign, z * nsign);
 			glTexCoord2f(s, t);
 			if (isLightOn)
 			{
-				transNorm = mat*Vec3f(x * nsign, y * nsign, z * nsign);
+				transNorm = mat*Vec3d(x * nsign, y * nsign, z * nsign) - posCenterEye;
 				transNorm.normalize();
-				c = MY_MAX(lightPos3.dot(transNorm),0);
-				glColor3f(c, c, c);
+				c = lightPos3.dot(transNorm);
+				if (c<0) c=0;
+				glColor3f(c*diffuseLight[0] + ambientLight[0],
+					c*diffuseLight[1] + ambientLight[1],
+					c*diffuseLight[2] + ambientLight[2]);
 			}
 			sVertex3(x * radius, y * radius, z * radius, mat);
 			x = -sin(theta) * sin(rho + drho);
 			y = cos(theta) * sin(rho + drho);
 			z = nsign * cos(rho + drho);
-			glNormal3f(x * nsign, y * nsign, z * nsign);
+			//glNormal3f(x * nsign, y * nsign, z * nsign);
 			glTexCoord2f(s, t - dt);
 			if (isLightOn)
 			{
-				transNorm = mat*Vec3f(x * nsign, y * nsign, z * nsign);
+				transNorm = mat*Vec3d(x * nsign, y * nsign, z * nsign) - posCenterEye;
 				transNorm.normalize();
-				c = MY_MAX(lightPos3.dot(transNorm),0);
-				glColor3f(c, c, c);
+				c = lightPos3.dot(transNorm);
+				if (c<0) c=0;
+				glColor3f(c*diffuseLight[0] + ambientLight[0],
+					c*diffuseLight[1] + ambientLight[1],
+					c*diffuseLight[2] + ambientLight[2]);
 			}
 			sVertex3(x * radius, y * radius, z * radius, mat);
 			s += ds;
@@ -211,6 +230,7 @@ void Fisheye_projector::sSphere(GLdouble radius, GLint slices, GLint stacks, con
 		t -= dt;
 	}
 	glPopMatrix();
+	if (isLightOn) glEnable(GL_LIGHTING);
 }
 
 // Reimplementation of gluCylinder : glu is overrided for non standard projection

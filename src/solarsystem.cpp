@@ -239,7 +239,7 @@ void SolarSystem::draw(int hint_ON, Projector * prj, const navigator * nav, cons
 	// Set the light parameters taking sun as the light source
     float tmp[4] = {0,0,0,0};
 	float tmp2[4] = {0.05,0.05,0.05,0.05};
-    float tmp3[4] = {2,2,2,2};
+    float tmp3[4] = {1,1,1,1};
     float tmp4[4] = {1,1,1,1};
     glLightfv(GL_LIGHT0,GL_AMBIENT,tmp2);
     glLightfv(GL_LIGHT0,GL_DIFFUSE,tmp3);
