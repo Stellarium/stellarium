@@ -26,138 +26,142 @@
 
 #define RADIUS_NEB 1.
 
-s_texture * Nebula::texCircle = NULL;
+s_texture * Nebula::tex_circle = NULL;
+s_font* Nebula::nebula_font = NULL;
 
-Nebula::Nebula()
-{   
-	incLum = rand()%100;
-	nebTexture = NULL;
-	matTransfo = NULL;
+Nebula::Nebula() : NGC_nb(0), name(NULL), neb_tex(NULL), tex_quad_vertex(NULL)
+{
+	inc_lum = rand()*M_PI;
 }
 
 Nebula::~Nebula()
 {
-	if (matTransfo) delete matTransfo;
-    if (nebTexture) delete nebTexture;
+	if (name) delete name;
+	name = NULL;
+    if (neb_tex) delete neb_tex;
+	neb_tex = NULL;
+	if (tex_quad_vertex) delete tex_quad_vertex;
+	tex_quad_vertex = NULL;
 }
 
 void Nebula::get_info_string(char * s, const navigator * nav) const
 {
 	float tempDE, tempRA;
 	rect_to_sphe(&tempRA,&tempDE,XYZ);
-	sprintf(s,"Name : %s (NGC %u)\nRA : %s\nDE : %s\nMag : %.2f", Name, NGC, print_angle_hms(tempRA*180./M_PI), print_angle_dms_stel(tempDE*180./M_PI), Mag);
+	sprintf(s,"Name : %s (NGC %u)\nRA : %s\nDE : %s\nMag : %.2f", name, NGC_nb,
+		print_angle_hms(tempRA*180./M_PI), print_angle_dms_stel(tempDE*180./M_PI), mag);
 }
 
-int Nebula::Read(FILE * catalogue)
+int Nebula::read(FILE * catalogue)
 // Lis les infos de la nébuleuse dans le fichier et calcule x,y et z;
 {
 	int rahr;
     float ramin;
     int dedeg;
     int demin;
-    matTransfo=new float[16];   // Used to store the precalc transfos matrix used to draw the star
+	float tex_angular_size;
+	float tex_rotation;
+	char tex_name[255];
+	char tempName[255];
 
-	char texName[255];
-
-    if (fscanf(catalogue,"%u %u %s %s %d %f %d %d %f %f %f %s %s\n",
-		&NGC,&Messier, Type, Constellation, &rahr, &ramin,&dedeg,&demin,
-		&Mag,&Taille,&Rotation, Name, texName)!=13)
+    if (fscanf(catalogue,"%u %s %d %f %d %d %f %f %f %s %s\n",
+		&NGC_nb, type, &rahr, &ramin,&dedeg,&demin,
+		&mag,&tex_angular_size,&tex_rotation, tempName, tex_name)!=11)
 	{
 		return 0;
 	}
 
+	name = strdup(tempName);
     // Replace the "_" with " "
     char * cc;
-    cc=strchr(Name,'_');
+    cc=strchr(name,'_');
     while(cc!=NULL)
     {
 		(*cc)=' ';
-        cc=strchr(Name,'_');
+        cc=strchr(name,'_');
     }
-    
+
     // Calc the RA and DE from the datas
-    RaRad=hms_to_rad(rahr, (double)ramin);
-    DecRad=dms_to_rad(dedeg, (double)demin);
+    float RaRad = hms_to_rad(rahr, (double)ramin);
+    float DecRad = dms_to_rad(dedeg, (double)demin);
 
     // Calc the Cartesian coord with RA and DE
     sphe_to_rect(RaRad,DecRad,XYZ);
     XYZ*=RADIUS_NEB;
 
-    matTransfo=new float[16];   // Used to store the precalc transfos matrix
+	// Calc the angular size in radian : TODO this should be independant of tex_angular_size
+	angular_size = tex_angular_size/2/60*M_PI/180;
 
-    glLoadIdentity();           // Init the current matrix
+    neb_tex = new s_texture(tex_name);
+
+	float tex_size = RADIUS_NEB * sin(tex_angular_size/2/60*M_PI/180);
 
     // Precomputation of the rotation/translation matrix
-    glTranslatef(XYZ[0],XYZ[1],XYZ[2]);
-    glRotatef(RaRad*180./M_PI,0,0,1);
-    glRotatef(DecRad*180./M_PI,0,-1,0);
-    glRotatef(Rotation,1,0,0);
-    glGetFloatv(GL_MODELVIEW_MATRIX , matTransfo);  // Store the matrix
+	Mat4f mat_precomp = Mat4f::translation(XYZ) *
+						Mat4f::zrotation(RaRad) *
+						Mat4f::yrotation(-DecRad) *
+						Mat4f::xrotation(tex_rotation*M_PI/180.);
 
-    RayonPrecalc=RADIUS_NEB*sin(Taille/2/60*M_PI/180);
-    //printf("rayon : %f\n",RayonPrecalc);
-
-    nebTexture=new s_texture(texName);
+	tex_quad_vertex = new Vec3f[4];
+	tex_quad_vertex[0] = mat_precomp * Vec3f(0.,-tex_size,-tex_size); // Bottom Right
+	tex_quad_vertex[1] = mat_precomp * Vec3f(0., tex_size,-tex_size); // Bottom Right
+	tex_quad_vertex[2] = mat_precomp * Vec3f(0.,-tex_size, tex_size); // Bottom Right
+	tex_quad_vertex[3] = mat_precomp * Vec3f(0., tex_size, tex_size); // Bottom Right
 
     return 1;
 }
 
-void Nebula::Draw()
+void Nebula::draw_tex(const Projector* prj)
 {
     glEnable(GL_TEXTURE_2D);
     glEnable(GL_BLEND);
-    glPushMatrix();
-    glMultMatrixf(matTransfo);          // reload the matrix precomputed while loading
 
-    float cmag=(1-Mag/12)*2;
+    float cmag=(1.-mag/12)*2;
     glColor3f(cmag,cmag,cmag);
-    glBindTexture (GL_TEXTURE_2D, nebTexture->getID());
-    
+    glBindTexture(GL_TEXTURE_2D, neb_tex->getID());
+
+	static Vec3d v;
+
     glBegin(GL_TRIANGLE_STRIP);
         glTexCoord2i(1,0);              // Bottom Right
-        glVertex3f(0.0f,-RayonPrecalc,-RayonPrecalc);
+		prj->project_earth_equ(tex_quad_vertex[0],v); glVertex3dv(v);
         glTexCoord2i(0,0);              // Bottom Left
-        glVertex3f(0.0f, RayonPrecalc,-RayonPrecalc);
+		prj->project_earth_equ(tex_quad_vertex[1],v); glVertex3dv(v);
         glTexCoord2i(1,1);              // Top Right
-        glVertex3f(0.0f,-RayonPrecalc, RayonPrecalc);
+		prj->project_earth_equ(tex_quad_vertex[2],v); glVertex3dv(v);
         glTexCoord2i(0,1);              // Top Left
-        glVertex3f(0.0f, RayonPrecalc, RayonPrecalc);
-    glEnd ();
-
-    glPopMatrix();  
+		prj->project_earth_equ(tex_quad_vertex[3],v); glVertex3dv(v);
+    glEnd();
 }
 
-void Nebula::DrawCircle(const Projector* prj)
+void Nebula::draw_circle(const Projector* prj)
 {
-	if (prj->get_fov()<sqrt(Taille)*2) return;
-    incLum++;
-    glColor3f(sqrt(prj->get_fov())/10*(0.4+0.2*sin(incLum/10)),
-		 sqrt(prj->get_fov())/10*(0.4+0.2*sin(incLum/10)),0.1);
-    glBindTexture (GL_TEXTURE_2D, Nebula::texCircle->getID()); 
-    glPushMatrix();
-    glTranslatef(XY[0], XY[1],0);
+	if (prj->get_fov()<sqrt(angular_size)*2) return;
+    inc_lum++;
+    glColor3f(sqrt(prj->get_fov())/10*(0.4+0.2*sin(inc_lum/100)),
+		 sqrt(prj->get_fov())/10*(0.4+0.2*sin(inc_lum/100)),0.1);
+    glBindTexture (GL_TEXTURE_2D, Nebula::tex_circle->getID());
     glBegin(GL_TRIANGLE_STRIP);
         glTexCoord2i(1,0);              // Bottom Right
-        glVertex3f(4,-4,0.0f);
+        glVertex3f(XY[0] + 4, XY[1] - 4, 0.0f);
         glTexCoord2i(0,0);              // Bottom Left
-        glVertex3f(-4,-4,0.0f);
+        glVertex3f(XY[0] - 4, XY[1] - 4, 0.0f);
         glTexCoord2i(1,1);              // Top Right
-        glVertex3f(4,4,0.0f);
+        glVertex3f(XY[0] + 4, XY[1] + 4,0.0f);
         glTexCoord2i(0,1);              // Top Left
-        glVertex3f(-4,4,0.0f);
+        glVertex3f(XY[0] - 4, XY[1] + 4,0.0f);
     glEnd ();
-    glPopMatrix(); 
 }
 
 // Return the radius of a circle containing the object on screen
 float Nebula::get_on_screen_size(const navigator * nav, const Projector* prj)
 {
-	return Taille/60./prj->get_fov()*prj->viewH();
+	return angular_size/60./prj->get_fov()*prj->viewH();
 }
 
-void Nebula::DrawName(const s_font* nebulaFont)
+void Nebula::draw_name(const Projector* prj)
 {   
     glColor3f(0.4,0.3,0.5);
-	nebulaFont->print(XY[0]+3,XY[1]+3, Name); //"Inter" for internationnal name
+	nebula_font->print(XY[0]+3,XY[1]+3, name);
 }
 

@@ -32,15 +32,11 @@ Fisheye_projector::Fisheye_projector(int _screenW, int _screenH, double _fov,
 							0., 0., 0., 1.);
 }
 
-Fisheye_projector::~Fisheye_projector()
-{
-}
-
 // For a fisheye, ratio is alway = 1
-void Fisheye_projector::maximize_viewport()
+void Fisheye_projector::set_viewport(int x, int y, int w, int h)
 {
-	Projector::maximize_viewport();
-	center.set((vec_viewport[2]-vec_viewport[0])/2,(vec_viewport[3]-vec_viewport[1])/2,0);
+	Projector::set_viewport(x, y, w, h);
+	center.set(vec_viewport[0]+vec_viewport[2]/2,vec_viewport[1]+vec_viewport[3]/2,0);
 }
 
 // Init the viewing matrix, setting the field of view, the clipping planes, and screen ratio
@@ -81,6 +77,7 @@ bool Fisheye_projector::project_custom(const Vec3d& v, Vec3d& win, const Mat4d& 
 	win[2] = z;
 	if (a<0.95*M_PI) return true;
 	else return false;
+	//win[2] = (2.*zFar*zNear)/(zNear - zFar) + v[3] * (zFar + zNear)/(zNear - zFar);
 }
 
 

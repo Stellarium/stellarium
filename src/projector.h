@@ -32,13 +32,14 @@ public:
 		double _min_fov = 0.001, double _max_fov = 100);
 	virtual ~Projector();
 
-	void set_fov(double f) {fov = f; init_project_matrix();}
+	void set_fov(double f);
 	double get_fov(void) const {return fov;}
 	virtual void change_fov(double deltaFov);
 
 	void set_screen_size(int w, int h);
-	virtual void maximize_viewport(void);
-
+	void maximize_viewport(void) {set_viewport(0,0,screenW,screenH);}
+	void set_square_viewport(void);
+	void set_disk_viewport(void);
 	virtual void set_viewport(int x, int y, int w, int h);
 
 	int viewW(void) const {return vec_viewport[2];}

@@ -371,8 +371,8 @@ F   : Fog\n\
 Q   : Cardinal Points\n\
 A   : Atmosphere\n\
 H   : Help\n\
-4   : Ecliptic\n\
-5   : Equator\n\
+4   : Ecliptic Line\n\
+5   : Equator Line\n\
 T   : Object Tracking\n\
 S   : Stars\n\
 I   : About Stellarium\n\
@@ -569,31 +569,15 @@ int stel_ui::handle_keys(SDLKey key, S_GUI_VALUE state)
             bt_flag_help->setState(core->FlagHelp);
 			help_win->setVisible(core->FlagHelp);
 		}
-        if(key==SDLK_6)
+        if(key==SDLK_4)
         {	
         	core->FlagEclipticLine=!core->FlagEclipticLine;
 		}
-        if(key==SDLK_7)
+        if(key==SDLK_5)
         {
         	core->FlagEquatorLine=!core->FlagEquatorLine;
 		}
-        if(key==SDLK_5)
-        {
-        	core->FlagEquatorLine = !core->FlagEquatorLine;
-		}
-        if(key==SDLK_4)
-        {
-        	core->navigation->set_time_speed(1);
-		}
 
-        if(key==SDLK_2)
-        {
-        	core->navigation->set_time_speed(JD_HOUR/10);
-		}
-        if(key==SDLK_1)
-        {
-        	core->navigation->set_time_speed(JD_HOUR);
-		}
         if(key==SDLK_t)
         {
 			core->navigation->set_flag_lock_equ_pos(!core->navigation->get_flag_lock_equ_pos());
