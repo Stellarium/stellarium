@@ -268,8 +268,12 @@ void stel_core::draw(int delta_time)
 
 	if (FlagStars && (!FlagAtmosphere || sky_brightness<0.1))
 	{
-		hip_stars->draw_point(StarScale, StarMagScale, FlagStarTwinkle ? StarTwinkleAmount : 0.f, FlagStarName,
-		MaxMagStarName, temp, tone_converter, projection, FlagGravityLabels);
+		if (FlagPointStar) hip_stars->draw_point(StarScale, StarMagScale,
+			FlagStarTwinkle ? StarTwinkleAmount : 0.f, FlagStarName,
+			MaxMagStarName, temp, tone_converter, projection, FlagGravityLabels);
+		else hip_stars->draw(StarScale, StarMagScale,
+			FlagStarTwinkle ? StarTwinkleAmount : 0.f, FlagStarName,
+			MaxMagStarName, temp, tone_converter, projection, FlagGravityLabels);
 	}
 
 	// Draw the equatorial grid

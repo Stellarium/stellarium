@@ -68,31 +68,32 @@ void Hip_Star::get_short_info_string(char * s, const navigator * nav) const
 	else sprintf(s,"%s: mag %.1f", tempStr, Mag);
 }
 
-int Hip_Star::read(FILE * catalog)
 // Read datas in binary catalog and compute x,y,z;
-{  
-    float RA=0, DE=0;
-    fread((char*)&RA,4,1,catalog);
-    LE_TO_CPU_FLOAT(RA, RA);
-    
-    fread((char*)&DE,4,1,catalog);
-    LE_TO_CPU_FLOAT(DE, DE);
-    
+// The aliasing bug on some architecture has been fixed by Rainer Canavan on 26/11/2003
+int Hip_Star::read(FILE * catalog)
+{
+	float RA=0, DE=0, xDE, xRA;
+	fread(&xRA,4,1,catalog);
+	LE_TO_CPU_FLOAT(RA, xRA);
+
+	fread(&xDE,4,1,catalog);
+	LE_TO_CPU_FLOAT(DE, xDE);
+     
     RA*=M_PI/12.;     // Convert from hours to rad
     DE*=M_PI/180.;    // Convert from deg to rad
 
-    unsigned short int mag;
-    fread((char*)&mag,2,1,catalog);
-    LE_TO_CPU_INT16(mag, mag);
+	unsigned short int mag, xmag;
+	fread(&xmag,2,1,catalog);
+	LE_TO_CPU_INT16(mag, xmag);
 
-    Mag = (5. + mag) / 256.0;
-    if (Mag>250) Mag = Mag - 256;
+	Mag = (5. + mag) / 256.0;
+	if (Mag>250) Mag = Mag - 256;
 
-    unsigned short int type;
-    fread((char*)&type,2,1,catalog);
-	LE_TO_CPU_INT16(type, type);
+	unsigned short int type, xtype;
+	fread(&xtype,2,1,catalog);
+	LE_TO_CPU_INT16(type, xtype);
 
-    // Calc the Cartesian coord with RA and DE
+	// Calc the Cartesian coord with RA and DE
     sphe_to_rect(RA,DE,XYZ);
 
     XYZ*=RADIUS_STAR;
@@ -116,7 +117,7 @@ int Hip_Star::read(FILE * catalog)
     }
 
     switch (SpType)             // Color depending on the spectral type
-    {    
+    {
         case 'O':   RGB[0]=0.8f;  RGB[1]=1.0f; RGB[2]=1.3f;  break;
         case 'B':   RGB[0]=0.9f;  RGB[1]=1.0f; RGB[2]=1.2f;  break;
         case 'A':   RGB[0]=0.95f; RGB[1]=1.0f; RGB[2]=1.15f; break;
