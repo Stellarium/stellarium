@@ -23,9 +23,10 @@
 // "Tone Reproduction for Realistic Images", Tumblin and Rushmeier,
 // IEEE Computer Graphics & Application, November 1993
 
-// Important : you must call set_display_adaptation_luminance()
+// Important : you may call set_display_adaptation_luminance()
 // and set_world_adaptation_luminance() before any call to xyY_to_RGB()
-// or adapt_luminance
+// or adapt_luminance otherwise the default values will be used. (they are
+// appropriate for a daylight sky luminance)
 
 #ifndef _TONE_REPRODUCTOR_H_
 #define _TONE_REPRODUCTOR_H_
