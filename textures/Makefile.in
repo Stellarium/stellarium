@@ -69,6 +69,7 @@ VERSION = @VERSION@
 pkgdatadir = $(datadir)/@PACKAGE@/textures
 pkgdata_DATA = $(wildcard *.png)
 EXTRA_DIST = $(pkgdata_DATA)
+SUBDIR = landscapes
 mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
 CONFIG_CLEAN_FILES = 
 DATA =  $(pkgdata_DATA)

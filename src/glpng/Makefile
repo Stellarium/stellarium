@@ -69,13 +69,8 @@ RANLIB = ranlib
 VERSION = 0.4.7
 
 noinst_LIBRARIES = libglpng.a
-
 libglpng_a_SOURCES = adler32.c infcodes.c inftrees.c pngconf.h pngrio.c zlib.h crc32.c infcodes.h inftrees.h pngerror.c pngrtran.c zutil.c glpng.c inffast.c   infutil.c pngget.c pngrutil.c zutil.h glpng.h inffast.h infutil.h pngmem.c    pngset.c infblock.c inffixed.h png.c pngpread.c pngtrans.c infblock.h inflate.c   png.h pngread.c zconf.h
-
 libglpng_a_LIBADD = adler32.o infcodes.o inftrees.o pngrio.o crc32.o pngerror.o pngrtran.o zutil.o glpng.o inffast.o infutil.o pngget.o pngrutil.o pngmem.o pngset.o infblock.o png.o pngpread.o pngtrans.o inflate.o pngread.o
-
-CFLAGS = -O3 -Wall
-CXXFLAGS = -O3
 mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
 CONFIG_CLEAN_FILES = 
 LIBRARIES =  $(noinst_LIBRARIES)
@@ -98,6 +93,7 @@ pngerror.o pngrtran.o zutil.o glpng.o inffast.o infutil.o pngget.o \
 pngrutil.o pngmem.o pngset.o infblock.o png.o pngpread.o pngtrans.o \
 inflate.o pngread.o
 AR = ar
+CFLAGS = -Wall -O3 
 COMPILE = $(CC) $(DEFS) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
 CCLD = $(CC)
 LINK = $(CCLD) $(AM_CFLAGS) $(CFLAGS) $(LDFLAGS) -o $@
@@ -310,6 +306,8 @@ install-exec install-data-am install-data install-am install \
 uninstall-am uninstall all-redirect all-am all installdirs \
 mostlyclean-generic distclean-generic clean-generic \
 maintainer-clean-generic clean mostlyclean distclean maintainer-clean
+
+
 
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.

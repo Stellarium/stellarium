@@ -7,8 +7,8 @@ dnl Check system type
 AC_CANONICAL_HOST
 
 dnl Check for compilers.
-dnl AC_PROG_CC
-dnl AC_PROG_CXX
+AC_PROG_CC
+AC_PROG_CXX
 
 CFLAGS="-Wall -O3 "
 CXXFLAGS="-O3"
