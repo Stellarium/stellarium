@@ -128,9 +128,17 @@ void stel_core::init(void)
 	ui = new stel_ui(this);
     ui->init();
 
-	// Compute planets data
-    Sun->compute_position(navigation->get_JDay());
+	// Compute planets data and init viewing position
+	Sun->compute_position(navigation->get_JDay());		// Position of sun and all the satellites (ie planets)
+	Sun->compute_trans_matrix(navigation->get_JDay());	// Matrix for sun and all the satellites (ie planets)
+	navigation->update_transform_matrices();			// Transform matrices between coordinates systems
+	navigation->set_local_vision(Vec3d(1.,0.,0.3));
 
+
+//tone_converter->set_world_adaptation_luminance(0.01);
+//	float C_5M = -2.5*logf(300.f*300.f*M_PI/4.f)/logf(10.f);
+//	float Luminance = exp(-0.4*log(10.)*(-1.4-C_5M)) * 0.00000254 / ((M_PI/180.f/3600.f) * (M_PI/180.f/3600.f));
+//	printf("lum=%f\n",tone_converter->adapt_luminance(Luminance));
 }
 
 
@@ -195,6 +203,11 @@ void stel_core::draw(int delta_time)
 	// Init the depth buffer which is used by the planets drawing operations
 	glClear(GL_DEPTH_BUFFER_BIT);
 
+	// Draw all the constellations
+	if (FlagAsterismDrawing) asterisms->Draw();
+	// Draw the constellations's names
+    if (FlagAsterismName) asterisms->DrawName(du);
+
 	// Draw the nebula if they are visible
 	if (FlagNebula && (!FlagAtmosphere || sky_brightness<0.1)) nebulas->Draw(FlagNebulaName, du);
 
@@ -205,11 +218,9 @@ void stel_core::draw(int delta_time)
 	if (FlagStars && (!FlagAtmosphere || sky_brightness<0.2))
 		hip_stars->Draw(StarScale, StarTwinkleAmount, FlagStarName, MaxMagStarName, temp, du);
 
+
 	// Draw the atmosphere
 	if (FlagAtmosphere)	atmosphere->draw(du);
-
-	// Draw all the constellations
-	if (FlagAsterismDrawing) asterisms->Draw();
 
 
 	// Draw the equatorial grid
@@ -223,9 +234,6 @@ void stel_core::draw(int delta_time)
 	// TODO : make a nice class for lines management
     if (FlagEquator) DrawEquator();		// Draw the celestial equator line
     if (FlagEcliptic) DrawEcliptic();	// Draw the ecliptic line
-
-	// Draw the constellations's names
-    if (FlagAsterismName) asterisms->DrawName(du);
 
 	// Draw the pointer on the currently selected object
     if (selected_object) selected_object->draw_pointer(delta_time, du);

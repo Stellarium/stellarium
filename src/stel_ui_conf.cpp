@@ -19,11 +19,31 @@
 
 #include "stel_ui.h"
 
-using namespace gui;
+using namespace s_gui;
 
 
-/*******************************************************************************/
+Component* stel_ui::createConfigWindow(void)
+{
+	config_win = new StdBtWin("Configuration");
+	config_win->reshape(300,200,400,350);
+	config_win->setVisible(core->FlagConfig);
 
+	config_tab_ctr = new TabContainer();
+	config_tab_ctr->setSize(config_win->getSize());
+
+	Label* test = new Label("Bonjour!");
+	Label* test2 = new Label("Bonjour2!");
+	test2->setPos(50,50);
+
+	config_tab_ctr->addTab(test, "Vision");
+	config_tab_ctr->addTab(test2, "Time & Date");
+
+	config_win->addComponent(config_tab_ctr);
+
+	return config_win;
+}
+
+/*
 void ConfigWinHideCallback(void) 
 {
 	global.FlagConfig=false;
@@ -31,7 +51,6 @@ void ConfigWinHideCallback(void)
 	BtConfig->setActive(false);
 }
 
-/*******************************************************************************/
 
 void ChangeStarDrawNameBarOnChangeValue(float value,Component *)
 {
@@ -41,7 +60,6 @@ void ChangeStarDrawNameBarOnChangeValue(float value,Component *)
 	StarNameMagLabel->setLabel(tempValueStr);
 }
 
-/*******************************************************************************/
 
 void ChangeStarTwinkleBarOnChangeValue(float value,Component *)
 {
@@ -51,7 +69,6 @@ void ChangeStarTwinkleBarOnChangeValue(float value,Component *)
     StarTwinkleLabel->setLabel(tempValueStr);
 }
 
-/*******************************************************************************/
 
 void ChangeStarScaleBarOnChangeValue(float value,Component *)
 {
@@ -61,7 +78,6 @@ void ChangeStarScaleBarOnChangeValue(float value,Component *)
     StarScaleLabel->setLabel(tempValueStr);
 }
 
-/*******************************************************************************/
 
 void ToggleStarNameOnClicCallback(guiValue button,Component *)
 {
@@ -77,8 +93,6 @@ void ToggleStarNameOnClicCallback(guiValue button,Component *)
 		global.FlagStarName=true;
 	}
 }
-
-/*******************************************************************************/
 
 void ToggleGroundOnClicCallback(guiValue button,Component *)
 {   
@@ -103,7 +117,6 @@ void ToggleMilkyWayOnClicCallback(guiValue button,Component *)
 }
 
 
-/**********************************************************************************/
 
 void LatitudeBarOnChangeValue(float value, Component *)
 {
@@ -151,12 +164,11 @@ void EarthMapOnChangeValue(vec2_t posPoint,Component *)
 	LatitudeBar->setValue(lat);
 }
 
-/**********************************************************************************/
-/*** ConfigWindow ***/
+
 void init_config_window(void)
 {
 
-    /*** Star Config container ***/
+    // Star Config container
     StarConfigContainer = new FilledContainer();
     if (!StarConfigContainer)
     {
@@ -206,7 +218,7 @@ void init_config_window(void)
     StarConfigContainer->addComponent(StarScaleLabel);
     StarConfigContainer->addComponent(ChangeStarScaleBar);
  
-    /*** Landcape config container ***/
+    // Landcape config container
     LandscapeConfigContainer = new FilledContainer();
     if (!LandscapeConfigContainer)
     {
@@ -242,7 +254,7 @@ void init_config_window(void)
     LandscapeConfigContainer->addComponent(ToggleMilkyWay);
 
 
-    /*** Location config container ***/
+    // Location config container
     LocationConfigContainer = new FilledContainer();
     if (!LocationConfigContainer)
     {
@@ -301,11 +313,13 @@ void init_config_window(void)
     LocationConfigContainer->addComponent(SaveLocation);
     LocationConfigContainer->addComponent(EarthMap);
 
-    /*** Config window ***/
+    // Config window
     ConfigWin = new StdBtWin(40, 40, 532, 287, "Configuration", Base, spaceFont);
     ConfigWin->addComponent(StarConfigContainer);
     ConfigWin->addComponent(LandscapeConfigContainer);
     ConfigWin->addComponent(LocationConfigContainer);
     ConfigWin->setHideCallback(ConfigWinHideCallback);
     ConfigWin->setVisible(global.FlagConfig);
+
 }
+*/

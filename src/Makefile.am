@@ -27,6 +27,7 @@ tone_reproductor.h  tone_reproductor.cpp \
 init_parser.h       init_parser.cpp \
 s_gui.h				s_gui.cpp \
 stel_ui.h			stel_ui.cpp \
+stel_ui_conf.cpp \
 callback.h \
 stellarium.h \
 vecmath.h bytes.h
