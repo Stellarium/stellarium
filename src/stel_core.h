@@ -85,6 +85,7 @@ private:
 	Hip_Star_mgr * hip_stars;			// Manage the hipparcos stars
 	Constellation_mgr * asterisms;		// Manage constellations (boundaries, names etc..)
 	Nebula_mgr * nebulas;				// Manage the nebulas
+	SolarSystem* ssystem;				// Manage the solar system 
 	stel_atmosphere * atmosphere;		// Atmosphere
 	tone_reproductor * tone_converter;	// Tones conversion between stellarium world and display device
 	stel_ui * ui;						// The main User Interface

@@ -4,16 +4,16 @@
    @file    iniparser.h
    @author  N. Devillard
    @date    Mar 2000
-   @version $Revision: 220 $
+   @version $Revision: 232 $
    @brief   Parser for ini files.
 */
 /*--------------------------------------------------------------------------*/
 
 /*
-	$Id: iniparser.h 220 2003-06-29 22:02:08Z xalioth $
+	$Id: iniparser.h 232 2003-07-22 22:44:45Z xalioth $
 	$Author: xalioth $
-	$Date: 2003-06-29 23:02:08 +0100 (Sun, 29 Jun 2003) $
-	$Revision: 220 $
+	$Date: 2003-07-22 23:44:45 +0100 (Tue, 22 Jul 2003) $
+	$Revision: 232 $
 */
 
 #ifndef _INIPARSER_H_
@@ -139,7 +139,7 @@ char * iniparser_getstr(dictionary * d, char * key);
   the dictionary, do not free or modify it.
  */
 /*--------------------------------------------------------------------------*/
-char * iniparser_getstring(dictionary * d, char * key, char * def);
+char * iniparser_getstring(dictionary * d, const char * key, char * def);
 
 /*-------------------------------------------------------------------------*/
 /**
@@ -154,7 +154,7 @@ char * iniparser_getstring(dictionary * d, char * key, char * def);
   the notfound value is returned.
  */
 /*--------------------------------------------------------------------------*/
-int iniparser_getint(dictionary * d, char * key, int notfound);
+int iniparser_getint(dictionary * d, const char * key, int notfound);
 
 /*-------------------------------------------------------------------------*/
 /**
@@ -169,7 +169,7 @@ int iniparser_getint(dictionary * d, char * key, int notfound);
   the notfound value is returned.
  */
 /*--------------------------------------------------------------------------*/
-double iniparser_getdouble(dictionary * d, char * key, double notfound);
+double iniparser_getdouble(dictionary * d, const char * key, double notfound);
 
 /*-------------------------------------------------------------------------*/
 /**
@@ -203,7 +203,7 @@ double iniparser_getdouble(dictionary * d, char * key, double notfound);
   necessarily have to be 0 or 1.
  */
 /*--------------------------------------------------------------------------*/
-int iniparser_getboolean(dictionary * d, char * key, int notfound);
+int iniparser_getboolean(dictionary * d, const char * key, int notfound);
 
 
 /*-------------------------------------------------------------------------*/
@@ -220,7 +220,7 @@ int iniparser_getboolean(dictionary * d, char * key, int notfound);
  */
 /*--------------------------------------------------------------------------*/
 
-int iniparser_setstr(dictionary * ini, char * entry, char * val);
+int iniparser_setstr(dictionary * ini, const char * entry, const char * val);
 
 /*-------------------------------------------------------------------------*/
 /**
@@ -232,7 +232,7 @@ int iniparser_setstr(dictionary * ini, char * entry, char * val);
   If the given entry can be found, it is deleted from the dictionary.
  */
 /*--------------------------------------------------------------------------*/
-void iniparser_unset(dictionary * ini, char * entry);
+void iniparser_unset(dictionary * ini, const char * entry);
 
 /*-------------------------------------------------------------------------*/
 /**
@@ -246,7 +246,7 @@ void iniparser_unset(dictionary * ini, char * entry);
   of querying for the presence of sections in a dictionary.
  */
 /*--------------------------------------------------------------------------*/
-int iniparser_find_entry(dictionary * ini, char * entry) ;
+int iniparser_find_entry(dictionary * ini, const char * entry) ;
 
 /*-------------------------------------------------------------------------*/
 /**
@@ -262,7 +262,7 @@ int iniparser_find_entry(dictionary * ini, char * entry) ;
   The returned dictionary must be freed using iniparser_freedict().
  */
 /*--------------------------------------------------------------------------*/
-dictionary * iniparser_load(char * ininame);
+dictionary * iniparser_load(const char * ininame);
 
 /*-------------------------------------------------------------------------*/
 /**

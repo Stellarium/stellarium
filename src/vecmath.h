@@ -45,7 +45,7 @@ typedef Vector4<int>	Vec4i;
 
 typedef Matrix4<float>	Mat4f;
 typedef Matrix4<double>	Mat4d;
-
+typedef Matrix4<long double>	Mat4ld;
 
 
 template<class T> class Vector2

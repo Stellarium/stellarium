@@ -70,7 +70,7 @@ public:
 	void init_project_matrix(int w, int h, double near, double far);
 
 	void update_time(int delta_time);
-	void update_transform_matrices(void);
+	void update_transform_matrices(Vec3d earth_ecliptic_pos);
 	void update_vision_vector(int delta_time, stel_object* selected);
 
 	// Place openGL in earth equatorial coordinates

@@ -299,7 +299,7 @@ void navigator::update_time(int delta_time)
 }
 
 
-void navigator::update_transform_matrices(void)
+void navigator::update_transform_matrices(Vec3d earth_ecliptic_pos)
 {
 	// GEI = Geocentric Equatorial Inertial System : used for stars
 	// GEO = Geographic Coordinates
@@ -325,11 +325,11 @@ void navigator::update_transform_matrices(void)
 	mat_earth_equ_to_local = GEI_to_LOC;
 
 	/* These two next have to take into account the position of the observer on the earth */
-	Mat4d GEI_to_HSE = 	Mat4d::translation(Earth->get_ecliptic_pos()) *
+	Mat4d GEI_to_HSE = 	Mat4d::translation(earth_ecliptic_pos) *
 	                    Mat4d::xrotation(-get_mean_obliquity(JDay)*M_PI/180.);
 
 	Mat4d HSE_to_GEI =  Mat4d::xrotation(get_mean_obliquity(JDay)*M_PI/180.) *
-						Mat4d::translation(-Earth->get_ecliptic_pos());
+						Mat4d::translation(-earth_ecliptic_pos);
 
 
 	Mat4d POS_to_HSE = GEI_to_HSE * LOC_to_GEI * POS_to_LOC;
