@@ -30,8 +30,23 @@ using namespace std;
 #include "init_parser.h"
 
 
-SolarSystem::SolarSystem() : sun(NULL), moon(NULL), earth(NULL)
+SolarSystem::SolarSystem(const string& _data_dir, const string& _sky_locale, const string& _font_filename, 
+			 Vec3f label_color, Vec3f orbit_color) : 
+  sun(NULL), moon(NULL), earth(NULL)
 {
+  dataDir = _data_dir;
+  planet_name_font = new s_font(13,"spacefont", dataDir + _font_filename);
+  if (!planet_name_font)
+    {
+      printf("Can't create planet_name_font\n");
+      exit(-1);
+    }
+  planet::set_font(planet_name_font);
+  planet::set_label_color(label_color);
+  planet::set_orbit_color(orbit_color);
+  load(dataDir + "ssystem.ini");
+  set_sky_locale(_sky_locale);
+
 }
 
 SolarSystem::~SolarSystem()
@@ -53,23 +68,6 @@ SolarSystem::~SolarSystem()
 	if (planet_name_font) delete planet_name_font;
 }
 
-
-// Init and load the solar system data
-void SolarSystem::init(const string& _data_dir, const string& _sky_locale, const string& _font_filename, Vec3f label_color, Vec3f orbit_color)
-{
-  dataDir = _data_dir;
-  planet_name_font = new s_font(13,"spacefont", dataDir + _font_filename);
-  if (!planet_name_font)
-    {
-      printf("Can't create planet_name_font\n");
-      exit(-1);
-    }
-  planet::set_font(planet_name_font);
-  planet::set_label_color(label_color);
-  planet::set_orbit_color(orbit_color);
-  load(dataDir + "ssystem.ini");
-  set_sky_locale(_sky_locale);
-}
 
 // Init and load the solar system data
 void SolarSystem::load(const string& planetfile)

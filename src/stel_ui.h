@@ -198,7 +198,6 @@ private:
 	// 3. General
 	s_tui::MultiSet_item<string>* tui_general_sky_culture;
 	s_tui::MultiSet_item<string>* tui_general_sky_locale;
-	s_tui::Boolean_item* tui_general_manual_zoom;
 
 	// 4. Stars
 	s_tui::Boolean_item* tui_stars_show;
@@ -208,6 +207,8 @@ private:
 	
 	// 5. Effects
 	s_tui::MultiSet_item<string>* tui_effect_landscape;
+	s_tui::Decimal_item* tui_effect_zoom_duration;
+	s_tui::Boolean_item* tui_effect_manual_zoom;
 
 	// 6. Administration
 	s_tui::ActionConfirm_item* tui_admin_loaddefault;
