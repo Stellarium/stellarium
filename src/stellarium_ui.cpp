@@ -703,7 +703,7 @@ Boston, MA  02111-1307, USA.\n"
     SaveLocation->reshape(120,240,100,20);
     SaveLocation->setOnClicCallback(SaveLocationOnClicCallback);
 
-    EarthMap = new Picture(vec2_i(30,95),vec2_i(280,140),new s_texture("earthmap"));
+    EarthMap = new BorderPicture(vec2_i(30,95),vec2_i(280,140),new s_texture("earthmap"));
 
     LocationConfigContainer->addComponent(LocationLabel);
     LocationConfigContainer->addComponent(LatitudeBar);
@@ -790,10 +790,11 @@ Boston, MA  02111-1307, USA.\n"
 /*                                    CLEAR UI                                    */
 /**********************************************************************************/
 void clearUi(void)
-{   if (gc) delete gc;
-    gc = NULL;
+{
     if (Base) delete Base;
     Base = NULL;
+    if (gc) delete gc;
+    gc = NULL;
     if (spaceFont) delete spaceFont;
     spaceFont = NULL;
 }
