@@ -409,11 +409,11 @@ void stel_ui::cbr(void)
 void stel_ui::tcbr(void)
 {
 	if (bt_dec_time_speed->getIsMouseOver())
-		bt_flag_time_control_lbl->setLabel("Increase Time Speed [L]");
+		bt_flag_time_control_lbl->setLabel("Decrease Time Speed [J]");
 	if (bt_real_time_speed->getIsMouseOver())
 		bt_flag_time_control_lbl->setLabel("Real Time Speed [K]");
 	if (bt_inc_time_speed->getIsMouseOver())
-		bt_flag_time_control_lbl->setLabel("Decrease Time Speed [J]");
+		bt_flag_time_control_lbl->setLabel("Increase Time Speed [L]");
 	if (bt_time_now->getIsMouseOver())
 		bt_flag_time_control_lbl->setLabel("Return to Current Time");
 }
