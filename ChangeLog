@@ -1,4 +1,7 @@
-0.5.1b [02/02/2003]
+0.5.1b [18/03/2003]
+Added a config.h.in file to set the compilation macros. The compilation output is now more readable.
+Removed all the bugs that the glut->SDL change created.
+Totally stopped the use of the glut library! Use the good SDL library instead. Increase the compatibility with every plateforms especially full screen mode in unix.
 Added the CTRL + Up/Down keys to control the zoom.
 Removed a lot of warnings which occured during the compilation on some plateforms.
 
