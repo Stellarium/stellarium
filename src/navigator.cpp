@@ -26,26 +26,27 @@
 void observator_pos::save(FILE * f)
 {
 	// Set the position values in config file format
-	char * tempLatitude=get_humanr_location(latitude);
-	char * tempLongitude=get_humanr_location(longitude);
+	char * tempLatitude=strdup(get_humanr_location(latitude));
+	char * tempLongitude=strdup(get_humanr_location(longitude));
 	fprintf(f,"%s %s %d %d %s\n",tempLongitude, tempLatitude, altitude, time_zone, name);
+	printf("SAVE location : %s %s %d %d %s\n",tempLongitude, tempLatitude, altitude, time_zone, name);
 	if (tempLatitude) delete tempLatitude;
 	if (tempLongitude) delete tempLongitude;
 }
 
 void observator_pos::load(FILE * f)
 {
-	char * tempLatitude=NULL, * tempLongitude=NULL;
-	fscanf(f,"%s %s %d %d %s\n",tempLongitude, tempLatitude, &altitude, &time_zone, name);
+	char tempLatitude[20], tempLongitude[20], tempName[100];
+	fscanf(f,"%s %s %d %d %s\n",tempLongitude, tempLatitude, &altitude, &time_zone, tempName);
+	name=strdup(tempName);
+	printf("LOAD location : %s %s %d %d %s\n",tempLongitude, tempLatitude, altitude, time_zone, name);
     // set the read latitude and longitude
     longitude=get_dec_location(tempLongitude);
     latitude=get_dec_location(tempLatitude);
-	if (tempLatitude) delete tempLatitude;
-	if (tempLongitude) delete tempLongitude;
 }
 
 
-navigator::navigator() : fov(60.), deltaFov(0.), deltaAlt(0.), deltaAz(0.),
+navigator::navigator() : fov(60.), deltaFov(0.), deltaAlt(0.), deltaAz(0.), move_speed(0.001),
 	FlagTraking(0), FlagLockEquPos(1), FlagAutoMove(0), time_speed(JD_SECOND), JDay(0.)
 {
 	local_vision=Vec3d(1.,0.,0.);
@@ -66,7 +67,7 @@ void navigator::load_position(char * fileName)
         printf("ERROR %s NOT FOUND\n",fileName);
         exit(-1);
 	}
-
+	printf("Loading location file... (%s)\n",fileName);
 	position.load(f);
 
 	fclose(f);
@@ -100,7 +101,14 @@ void navigator::init_project_matrix(int w, int h, double near, double far)
 
 void navigator::turn_right(int s)
 {
-	deltaAz = (s!=0);
+	if (s)
+	{
+		deltaAz = 1;
+		FlagTraking = 0;
+		FlagLockEquPos = 0;
+	}
+	else deltaAz = 0;
+
 }
 
 void navigator::turn_left(int s)
@@ -288,6 +296,7 @@ void navigator::switch_to_earth_equatorial(void)
 // Place openGL in heliocentric coordinates
 void navigator::switch_to_heliocentric(void)
 {
+	switch_to_earth_equatorial();
 }
 
 // Place openGL in local viewer coordinates (Usually somewhere on earth viewing in a specific direction)

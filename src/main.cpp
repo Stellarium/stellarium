@@ -98,15 +98,7 @@ void Draw(int delta_time)
 		HipVouteCeleste->Draw();    // Draw the stars
     }
 
-/*
-	if (!TheShooting) TheShooting = new ShootingStar();
-	if (TheShooting->IsDead())
-	{
-		delete TheShooting;
-		TheShooting = new ShootingStar();
-	}
-	TheShooting->Draw();
-*/
+
     if (global.FlagPlanets || global.FlagPlanetsHintDrawing)
 		Sun->draw();		// Draw the planets
     if (global.FlagAtmosphere && global.SkyBrightness>0)
@@ -284,12 +276,10 @@ void pressKey(Uint8 *keys)
     if(keys[SDLK_LEFT])
 	{
 		navigation.turn_left(1);
-		global.FlagTraking=false;
 	}
     if(keys[SDLK_RIGHT])
 	{
 		navigation.turn_right(1);
-		global.FlagTraking=false;
 	}
     if(keys[SDLK_UP])
 	{
@@ -299,7 +289,6 @@ void pressKey(Uint8 *keys)
 		}
 		else
 		{	navigation.turn_up(1);
-			global.FlagTraking=false;
 		}
 	}
     if(keys[SDLK_DOWN])
@@ -311,7 +300,6 @@ void pressKey(Uint8 *keys)
 		else
 		{
 			navigation.turn_down(1);
-			global.FlagTraking=false;
 		}
 	}
     if(keys[SDLK_PAGEUP]) navigation.zoom_in(1);

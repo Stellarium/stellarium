@@ -117,7 +117,7 @@ static void Resize(int components, const png_bytep d1, int w1, int h1, png_bytep
 		}
 	}
 }
-
+/*
 static int ExtSupported(const char *x) {
 	static const GLubyte *ext = NULL;
 	const char *c;
@@ -134,7 +134,7 @@ static int ExtSupported(const char *x) {
 
 	return 0;
 }
-
+*/
 #define GET(o) ((int)*(data + (o)))
 
 static int HalfSize(GLint components, GLint width, GLint height, const unsigned char *data, unsigned char *d, int filter) {

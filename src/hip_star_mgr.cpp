@@ -153,7 +153,6 @@ void Hip_Star_mgr::Draw(void)
     glBindTexture (GL_TEXTURE_2D, hipStarTexture->getID());
 
     double z;
-    glColor3f(0.5, 1.0, 0.5);
     GLdouble M[16];
     GLdouble P[16];
     GLint V[4];
@@ -172,9 +171,13 @@ void Hip_Star_mgr::Draw(void)
 	static int * zoneList;  // WARNING this is almost a memory leak...
 
 	// convert.... TODO implicit convertion
-	vec3_t temp(navigation.get_equ_vision()[0],navigation.get_equ_vision()[1],navigation.get_equ_vision()[2]);
-	nbZones = HipGrid.Intersect(temp, navigation.get_fov()*M_PI/180*1.4, zoneList);
-	
+	vec3_t temp((float)(navigation.get_equ_vision()[0]), (float)(navigation.get_equ_vision()[1]),
+		(float)(navigation.get_equ_vision()[2]));
+	//vec3_t temp(1,0,0);
+	nbZones = HipGrid.Intersect(temp, navigation.get_fov()*M_PI/180.*1.4, zoneList);
+
+	//printf("nbzones = %d\n",nbZones );
+
 	// Print all the stars of all the selected zones
 	for(int i=0;i<nbZones;i++)
 	{
@@ -188,7 +191,8 @@ void Hip_Star_mgr::Draw(void)
         	if (z<1) 
         	{
 		        ((*iter).second)->Draw();
-		        if (global.FlagStarName && ((*iter).second)->CommonName && ((*iter).second)->Mag<global.MaxMagStarName) 
+		        if (((*iter).second)->CommonName && global.FlagStarName &&
+					 ((*iter).second)->Mag<global.MaxMagStarName)
             	{   
 		        	((*iter).second)->DrawName();
                 	glBindTexture (GL_TEXTURE_2D, hipStarTexture->getID());

@@ -40,6 +40,12 @@ struct ln_date
     double seconds;	/*!< Seconds. Valid values 0 - 59.99999.... */
 };
 
+/* puts a large angle in the correct range 0 - 360 degrees */
+double range_degrees(double angle);
+
+/* puts a large angle in the correct range 0 - 2PI radians */
+double range_radians (double angle);
+
 /* Calculate the julian day from date.*/
 double get_julian_day (struct ln_date * date);
 
