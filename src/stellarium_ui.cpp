@@ -1,4 +1,4 @@
-/* 
+/*
  * Stellarium
  * Copyright (C) 2002 Fabien Chéreau
  * 
@@ -445,7 +445,7 @@ void initUi(void)
 
     /*** Button container ***/
     ContainerBtFlags = new FilledContainer();
-    ContainerBtFlags->reshape(vec2_i(0,global.Y_Resolution-btSize),   vec2_i(btSize*11+1,btSize+1));
+    ContainerBtFlags->reshape(0,global.Y_Resolution-btSize,btSize*11+1,btSize+1);
     ContainerBtFlags->addComponent(BtConstellationsDraw);
     ContainerBtFlags->addComponent(BtConstellationsName);
     ContainerBtFlags->addComponent(BtAzimutalGrid);
@@ -461,7 +461,7 @@ void initUi(void)
 /**********************************************************************************/
 /*** button legend label ***/
     btLegend = new Label("ERROR, this shouldn't be seen...");
-    btLegend->reshape(vec2_i(3,global.Y_Resolution-btSize-lineHeight-5),vec2_i(100,17));
+    btLegend->reshape(3,global.Y_Resolution-btSize-lineHeight-5,100,17);
     btLegend->setVisible(false);
 
 /**********************************************************************************/
@@ -498,7 +498,7 @@ ESC : Quit\n\
 F1/F2 : fullscreen window/small window\n\
 (in windowed mode only)\n"
     ,gc->getFont());
-    HelpTextLabel->reshape(vec2_i(avgCharLen*2,lineHeight),vec2_i(45*avgCharLen,35*lineHeight));
+    HelpTextLabel->reshape(avgCharLen*2,lineHeight,45*avgCharLen,35*lineHeight);
 
     HelpWin = new StdBtWin(global.X_Resolution/2-25*avgCharLen, global.Y_Resolution/2-30*lineHeight/2, 48*avgCharLen, 35*(lineHeight+1), "Help", Base);
     HelpWin->addComponent(HelpTextLabel);
@@ -530,7 +530,7 @@ License along with this program; if not, write to the\n\
 Free Software Foundation, Inc., 59 Temple Place - Suite 330\n\
 Boston, MA  02111-1307, USA.\n"
     ,gc->getFont());
-    InfoTextLabel->reshape(vec2_i(avgCharLen*3,lineHeight),vec2_i(62*avgCharLen,35*lineHeight));
+    InfoTextLabel->reshape(avgCharLen*3,lineHeight,62*avgCharLen,35*lineHeight);
     
     InfoWin = new StdBtWin(global.X_Resolution/2-25*avgCharLen, global.Y_Resolution/2-30*lineHeight/2, 67*avgCharLen, 25*(lineHeight+1), "About Stellarium", Base);
     InfoWin->addComponent(InfoTextLabel);
@@ -540,30 +540,30 @@ Boston, MA  02111-1307, USA.\n"
 /**********************************************************************************/
 /*** InfoSelect TextLabel ***/
     InfoSelectLabel = new FilledTextLabel("Info",gc->getFont());
-    InfoSelectLabel->reshape(vec2_i(3,lineHeight+2),vec2_i(avgCharLen*50,7*lineHeight));
+    InfoSelectLabel->reshape(3,lineHeight+2,avgCharLen*50,7*lineHeight);
     InfoSelectLabel->setVisible(false);
 
 /**********************************************************************************/
 /*** TopWindowsInfos Container ***/
     /*** Date Label ***/
     DateLabel = new Label("-");
-    DateLabel->reshape(vec2_i(3,2), vec2_i(10*avgCharLen,lineHeight));
+    DateLabel->reshape(3,2,10*avgCharLen,lineHeight);
     /*** Hour Label ***/
     HourLabel = new Label("-");
-    HourLabel->reshape(vec2_i(12*avgCharLen+15,2), vec2_i(6*avgCharLen,lineHeight));
+    HourLabel->reshape(12*avgCharLen+15,2,6*avgCharLen,lineHeight);
     /*** FPS Label ***/
     FPSLabel = new Label("-");
-    FPSLabel->reshape(vec2_i(global.X_Resolution-13*avgCharLen,2), vec2_i(10*avgCharLen,lineHeight));
+    FPSLabel->reshape(global.X_Resolution-13*avgCharLen,2,10*avgCharLen,lineHeight);
     if (!global.FlagFps) FPSLabel->setVisible(false);
     /*** FOV Label ***/
     FOVLabel = new Label("-");
-    FOVLabel->reshape(vec2_i(global.X_Resolution-26*avgCharLen,2), vec2_i(10*avgCharLen,lineHeight));
+    FOVLabel->reshape(global.X_Resolution-26*avgCharLen,2,10*avgCharLen,lineHeight);
     /*** AppName Label ***/
     AppNameLabel = new Label(APP_NAME);
-    AppNameLabel->reshape(vec2_i((int)(global.X_Resolution/2-gc->getFont()->getStrLen(APP_NAME)/2),2), vec2_i((int)(gc->getFont()->getStrLen(APP_NAME)),lineHeight));
+    AppNameLabel->reshape((int)(global.X_Resolution/2-gc->getFont()->getStrLen(APP_NAME)/2),2, (int)(gc->getFont()->getStrLen(APP_NAME)),lineHeight);
     /*** TopWindowsInfos Container ***/    
     TopWindowsInfos = new FilledContainer();
-    TopWindowsInfos->reshape(vec2_i(0,0), vec2_i(global.X_Resolution,lineHeight+2));
+    TopWindowsInfos->reshape(0,0,global.X_Resolution,lineHeight+2);
     TopWindowsInfos->addComponent(DateLabel);
     TopWindowsInfos->addComponent(HourLabel);
     TopWindowsInfos->addComponent(FPSLabel);
@@ -579,25 +579,25 @@ Boston, MA  02111-1307, USA.\n"
         printf("ERROR WHILE CREATING UI CONTAINER\n");
         exit(1);
     }
-    StarConfigContainer->reshape(vec2_i(avgCharLen,3),   vec2_i(30*avgCharLen, 11*(lineHeight+1)));
-    
+    StarConfigContainer->reshape(avgCharLen,3,30*avgCharLen, 11*(lineHeight+1));
+
     int yt=3;
     
     StarLabel = new Label("STARS :");
-    StarLabel->reshape(vec2_i(3,yt), vec2_i(10*avgCharLen,lineHeight));
+    StarLabel->reshape(3,yt,10*avgCharLen,lineHeight);
     yt+=(int)(1.6*lineHeight);
     
     StarNameLabel = new Label("\1 Names :");
-    StarNameLabel->reshape(vec2_i(15,yt), vec2_i(8*avgCharLen,lineHeight));
+    StarNameLabel->reshape(15,yt,8*avgCharLen,lineHeight);
     if (global.FlagStarName) ToggleStarName = new Labeled_Button("Hide");
     else ToggleStarName = new Labeled_Button("Show");
-    ToggleStarName->reshape(vec2_i(13*avgCharLen,yt-3),vec2_i(avgCharLen*8,lineHeight+4));
+    ToggleStarName->reshape(13*avgCharLen,yt-3,avgCharLen*8,lineHeight+4);
     ToggleStarName->setOnClicCallback(ToggleStarNameOnClicCallback);
     
     yt+=(int)(1.6*lineHeight);
 
     StarNameMagLabel = new Label("Show if Magnitude < --");
-    StarNameMagLabel->reshape(vec2_i(15,yt), vec2_i(6*avgCharLen,lineHeight));
+    StarNameMagLabel->reshape(15,yt,6*avgCharLen,lineHeight);
     char tempValueStr[30];
     sprintf(tempValueStr,"\1 Show if Magnitude < %.1f",global.MaxMagStarName);
     StarNameMagLabel->setLabel(tempValueStr);
@@ -610,7 +610,7 @@ Boston, MA  02111-1307, USA.\n"
     char tempValue2Str[30];
     sprintf(tempValue2Str,"\1 Twinkle Amount : %.1f",global.StarTwinkleAmount);
     StarTwinkleLabel->setLabel(tempValue2Str);
-    StarTwinkleLabel->reshape(vec2_i(15,yt), vec2_i(18*avgCharLen,lineHeight));
+    StarTwinkleLabel->reshape(15,yt,18*avgCharLen,lineHeight);
     yt+=(int)(1.3*lineHeight);
     ChangeStarTwinkleBar = new CursorBar(vec2_i(2*avgCharLen,yt), vec2_i(25*avgCharLen,10),0.,10.,global.StarTwinkleAmount,ChangeStarTwinkleBarOnChangeValue);
 
@@ -620,7 +620,7 @@ Boston, MA  02111-1307, USA.\n"
     char tempValue3Str[30];
     sprintf(tempValue3Str,"\1 Scale : %.1f",global.StarScale);
     StarScaleLabel->setLabel(tempValue3Str);
-    StarScaleLabel->reshape(vec2_i(15,yt), vec2_i(18*avgCharLen,lineHeight));
+    StarScaleLabel->reshape(15,yt, 18*avgCharLen,lineHeight);
     yt+=(int)(1.3*lineHeight);
     ChangeStarScaleBar = new CursorBar(vec2_i(2*avgCharLen,yt), vec2_i(25*avgCharLen,10),0.,10.,global.StarScale,ChangeStarScaleBarOnChangeValue);
 
@@ -643,17 +643,17 @@ Boston, MA  02111-1307, USA.\n"
         printf("ERROR WHILE CREATING UI CONTAINER\n");
         exit(1);
     }
-    LandscapeConfigContainer->reshape(vec2_i(avgCharLen,yt), vec2_i(30*avgCharLen, 8*(lineHeight+1)));
+    LandscapeConfigContainer->reshape(avgCharLen,yt,30*avgCharLen, 8*(lineHeight+1));
 
     yt=3;
 
     LandscapeLabel = new Label("LANDSCAPE :");
-    LandscapeLabel->reshape(vec2_i(3,yt), vec2_i(10*avgCharLen,lineHeight));
+    LandscapeLabel->reshape(3,yt,10*avgCharLen,lineHeight);
 
     yt+=(int)(1.8*lineHeight);
     
     ToggleGround = new Labeled_Button("Ground");
-    ToggleGround->reshape(vec2_i(4*avgCharLen,yt-3),vec2_i(avgCharLen*22,lineHeight+4));
+    ToggleGround->reshape(4*avgCharLen,yt-3,avgCharLen*22,lineHeight+4);
     ToggleGround->setOnClicCallback(ToggleGroundOnClicCallback);
 
     yt+=(int)(1.6*lineHeight);   
