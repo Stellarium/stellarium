@@ -161,29 +161,6 @@ void navigator::zoom_out(int s)
 }
 
 
-void navigator::update_transform_matrices(void)
-{
-	/*Vec3d v(1,0,0);
-	v=Mat4d::zrotation(M_PI_2)*Mat4d::xrotation(M_PI_2)*v;
-	printf("v(%lf,%lf,%lf)\n",v[0],v[1],v[2]);*/
-	/*
-   global.RaZenith = -AstroOps::greenwichSiderealTime(global.JDay) + global.ThePlace.longitude();
-    global.RaZenith =  AstroOps::normalizeRadians(global.RaZenith);
-    global.DeZenith =  Astro::PI_OVER_TWO - global.ThePlace.latitude();
-    glRotated(90.-global.DeZenith*180/PI,1,0,0);
-    glRotated(global.RaZenith*180/PI,0,1,0);*/
-
-	mat_helio_to_local=Mat4d::identity();
-	mat_local_to_helio=Mat4d::translation(Earth->get_ecliptic_pos());
-mat_local_to_earth_equ=Mat4d::identity();
-mat_earth_equ_to_local=Mat4d::identity();
-	/*mat_local_to_earth_equ=Mat4d::xrotation((position.latitude-90.)*M_PI/180.) *
-		Mat4d::yrotation((-get_apparent_sidereal_time(JDay) + position.longitude)*M_PI/180.);
-
-	mat_earth_equ_to_local=	Mat4d::yrotation((get_apparent_sidereal_time(JDay) - position.longitude)*M_PI/180.) *
-		Mat4d::xrotation((90.-position.latitude)*M_PI/180.);*/
-}
-
 void navigator::update_vision_vector(int delta_time)
 {
     if (flag_auto_move)
@@ -301,6 +278,28 @@ void navigator::update_time(int delta_time)
 	JDay+=time_speed*(double)delta_time/1000.;
 }
 
+
+void navigator::update_transform_matrices(void)
+{
+	/*Vec3d v(1,0,0);
+	v=Mat4d::zrotation(M_PI_2)*Mat4d::xrotation(M_PI_2)*v;
+	printf("v(%lf,%lf,%lf)\n",v[0],v[1],v[2]);*/
+	/*
+   global.RaZenith = -AstroOps::greenwichSiderealTime(global.JDay) + global.ThePlace.longitude();
+    global.RaZenith =  AstroOps::normalizeRadians(global.RaZenith);
+    global.DeZenith =  Astro::PI_OVER_TWO - global.ThePlace.latitude();
+    glRotated(90.-global.DeZenith*180/PI,1,0,0);
+    glRotated(global.RaZenith*180/PI,0,1,0);*/
+
+	mat_helio_to_local=Mat4d::translation(Earth->get_ecliptic_pos());
+	mat_local_to_helio=Mat4d::translation(-Earth->get_ecliptic_pos());
+	/*mat_local_to_earth_equ=Mat4d::identity();
+	mat_earth_equ_to_local=Mat4d::identity();*/
+	mat_local_to_earth_equ= Mat4d::zrotation((-get_apparent_sidereal_time(JDay))*M_PI/180.); /* Mat4d::yrotation((90.-position.latitude)*M_PI/180.);*/
+
+	mat_earth_equ_to_local= /*Mat4d::yrotation((90.-position.latitude)*M_PI/180.) */ Mat4d::zrotation((get_apparent_sidereal_time(JDay))*M_PI/180.);
+
+}
 
 
 // Place openGL in earth equatorial coordinates

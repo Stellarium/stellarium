@@ -218,7 +218,7 @@ void loadConfig(char * configFile, char * locationFile)
         exit(-1);
     }
 
-	navigation.set_flag_lock_equ_pos(tempFlagFollowEarth);
+	//navigation.set_flag_lock_equ_pos(tempFlagFollowEarth);
 
     // init the time parameters with current time and date
 	ln_date date;

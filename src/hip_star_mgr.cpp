@@ -171,8 +171,8 @@ void Hip_Star_mgr::Draw(void)
 	static int * zoneList;  // WARNING this is almost a memory leak...
 
 	// convert.... TODO implicit convertion
-	vec3_t temp((float)(navigation.get_equ_vision()[0]), (float)(navigation.get_equ_vision()[1]),
-		(float)(navigation.get_equ_vision()[2]));
+	Vec3d tempv = navigation.get_equ_vision();
+	vec3_t temp(tempv[0],tempv[1],tempv[2]);
 	//vec3_t temp(1,0,0);
 	nbZones = HipGrid.Intersect(temp, navigation.get_fov()*M_PI/180.*1.4, zoneList);
 
