@@ -860,7 +860,11 @@ void stel_ui::gui_update_widgets(void)
 
 	// To prevent a minor bug
 	if (!core->FlagShowSelectedObjectInfo || !core->selected_object) info_select_ctr->setVisible(0);
-	else if (core->selected_object) info_select_ctr->setVisible(1);
+	else if (core->selected_object) {
+		info_select_ctr->setVisible(1);
+		if(core->FlagShowSelectedObjectInfo) updateInfoSelectString();
+	}
+
 	bt_flag_ctr->setVisible(core->FlagMenu);
 	bt_time_control_ctr->setVisible(core->FlagMenu);
 
