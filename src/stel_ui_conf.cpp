@@ -420,7 +420,7 @@ void stel_ui::saveRenderOptions(void)
 	conf.set_boolean("viewing:flag_equatorial_grid", core->FlagEquatorialGrid);
 	conf.set_boolean("viewing:flag_azimutal_grid", core->FlagAzimutalGrid);
 	conf.set_boolean("viewing:flag_equator_line", core->FlagEquatorLine);
-	conf.set_boolean("viewing:flag_azimutal_line", core->FlagEclipticLine);
+	conf.set_boolean("viewing:flag_ecliptic_line", core->FlagEclipticLine);
 	conf.set_boolean("landscape:flag_ground", core->FlagGround);
 	conf.set_boolean("viewing:flag_cardinal_points", core->FlagCardinalPoints);
 	conf.set_boolean("landscape:flag_atmosphere", core->FlagAtmosphere);
