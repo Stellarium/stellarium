@@ -42,18 +42,24 @@ public:
 	Projector(int _screenW = 800, int _screenH = 600, double _fov = 60.);
 	virtual ~Projector();
 
-	void set_fov(double f) {fov = f;}
+	void set_fov(double f) {fov = f; init_project_matrix();}
 	double get_fov(void) const {return fov;}
-	void change_fov(double deltaFov);
+	virtual void change_fov(double deltaFov);
 
 	void set_screen_size(int w, int h);
-	int scrW(void) const {return vec_viewport[2];}
-	int scrH(void) const {return vec_viewport[3];}
+	virtual void maximize_viewport(void);
+
+	virtual void set_viewport(int x, int y, int w, int h);
+
+	int viewW(void) const {return vec_viewport[2];}
+	int viewH(void) const {return vec_viewport[3];}
 
 	void set_clipping_planes(double znear, double zfar);
 
 	// Return true if the 2D pos is inside the viewport
-	inline bool check_in_screen(const Vec3d& pos) const;
+	bool check_in_viewport(const Vec3d& pos) const
+	{	return 	pos[1]>vec_viewport[1] && pos[1]<vec_viewport[3] &&
+				pos[0]>vec_viewport[0] && pos[0]<vec_viewport[2];}
 
 	// Set the standard modelview matrices used for projection
 	void set_modelview_matrices(const Mat4d& _mat_earth_equ_to_eye,
@@ -103,22 +109,27 @@ public:
 
 
 	// Same function but using a custom modelview matrix
-	bool project_custom(const Vec3f& v, Vec3d& win, const Mat4d& mat) const;
-	bool project_custom(const Vec3d& v, Vec3d& win, const Mat4d& mat) const;
-	bool project_custom_check(const Vec3f& v, Vec3d& win, const Mat4d& mat) const;
-	void unproject_custom(double x, double y, Vec3d& v, const Mat4d& mat) const;
+	virtual bool project_custom(const Vec3f& v, Vec3d& win, const Mat4d& mat) const;
+	virtual bool project_custom(const Vec3d& v, Vec3d& win, const Mat4d& mat) const;
+	virtual bool project_custom_check(const Vec3f& v, Vec3d& win, const Mat4d& mat) const;
+	virtual void unproject_custom(double x, double y, Vec3d& v, const Mat4d& mat) const;
 
+	// Set the drawing mode in 2D for drawing in the full screen
+	// Use restore_from_2Dfullscreen_projection() to restore previous projection mode
+	void set_2Dfullscreen_projection(void) const;
+	void restore_from_2Dfullscreen_projection(void) const;
 
-	// Set the drawing mode in 2D. Use reset_perspective_projection() to restore previous projection mode
+	// Set the drawing mode in 2D for drawing inside the viewport only.
+	// Use reset_perspective_projection() to restore previous projection mode
 	void set_orthographic_projection(void) const;
 
 	// Restore the previous projection mode after a call to set_orthographic_projection()
 	void reset_perspective_projection(void) const;
 
-private:
+protected:
 	// Init the viewing matrix from the fov, the clipping planes and screen ratio
 	// The function is a reimplementation of gluPerspective
-	void init_project_matrix(void);
+	virtual void init_project_matrix(void);
 
 	int screenW, screenH;
 	double fov;					// Field of view
@@ -136,7 +147,7 @@ private:
 
 	// transformation from screen 2D point x,y to object
 	// m is here the already inverted full tranfo matrix
-	void unproject(double x, double y, const Mat4d& m, Vec3d& v) const
+	virtual void unproject(double x, double y, const Mat4d& m, Vec3d& v) const
 	{
 		v.set(	(x - vec_viewport[0]) * 2. / vec_viewport[2] - 1.0,
 				(y - vec_viewport[1]) * 2. / vec_viewport[3] - 1.0,

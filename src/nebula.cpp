@@ -152,7 +152,7 @@ void Nebula::DrawCircle(const Projector* prj)
 // Return the radius of a circle containing the object on screen
 float Nebula::get_on_screen_size(const navigator * nav, const Projector* prj)
 {
-	return Taille/60./prj->get_fov()*prj->scrH();
+	return Taille/60./prj->get_fov()*prj->viewH();
 }
 
 void Nebula::DrawName(const s_font* nebulaFont)

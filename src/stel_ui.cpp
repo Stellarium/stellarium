@@ -386,7 +386,7 @@ void stel_ui::draw(void)
 	// Normal transparency mode
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-	core->projection->set_orthographic_projection();	// 2D coordinate
+	core->projection->set_2Dfullscreen_projection();	// 2D coordinate
 	Component::enableScissor();
 
     glScalef(1, -1, 1);						// invert the y axis, down is positive
@@ -395,7 +395,7 @@ void stel_ui::draw(void)
 	desktop->draw();
 
 	Component::disableScissor();
-    core->projection->reset_perspective_projection();	// Restore the other coordinate
+    core->projection->restore_from_2Dfullscreen_projection();	// Restore the other coordinate
 }
 
 /*******************************************************************************/
