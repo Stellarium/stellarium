@@ -36,13 +36,13 @@ StelCommandInterface::~StelCommandInterface() {
 }
 
 int StelCommandInterface::execute_command(string commandline ) {
-  int delay;
+  unsigned long int delay;
   return execute_command(commandline, delay);
   // delay is ignored, as not needed by the ui callers
 }
 
 // called by script executors
-int StelCommandInterface::execute_command(string commandline, int &wait) {
+int StelCommandInterface::execute_command(string commandline, unsigned long int &wait) {
   string command;
   stringHash_t args;
   int status = 0;
@@ -59,14 +59,13 @@ int StelCommandInterface::execute_command(string commandline, int &wait) {
     // TODO: loop if want to allow that syntax
     status = stcore->set_flag( args.begin()->first, args.begin()->second );
 
-  }  else if (command == "wait") {
+  }  else if (command == "wait" && args["duration"]!="") {
 
     float fdelay;
 
-    if(args["ms"] != "") fdelay = str_to_double(args["ms"]);
-    else if(args["sec"] != "") fdelay = 1000*str_to_double(args["sec"]);
+    fdelay = str_to_double(args["duration"]);
 
-    if(fdelay >= 0) wait = (int)fdelay;
+    if(fdelay > 0) wait = (int)(fdelay*1000);
 
     //    cout << "wait is: " << wait << endl; 
 
@@ -101,12 +100,47 @@ int StelCommandInterface::execute_command(string commandline, int &wait) {
 
   } else if(command == "timerate") {   // NOTE: accuracy issue related to frame rate
 
-    float rate;
-    std::istringstream istr(args["rate"]);
-    istr >> rate;
+    if(args["rate"]!="") {
+      stcore->navigation->set_time_speed(str_to_double(args["rate"])*JD_SECOND);
 
-    stcore->navigation->set_time_speed(rate*JD_SECOND);
-  
+    } else if(args["action"]=="pause") {
+      stcore->FlagTimePause = !stcore->FlagTimePause;
+      if(stcore->FlagTimePause) {
+	stcore->temp_time_velocity = stcore->navigation->get_time_speed();
+	stcore->navigation->set_time_speed(0);
+      } else {
+	cout << "Unpausing time\n";
+	stcore->navigation->set_time_speed(stcore->temp_time_velocity);
+      }
+
+    } else if(args["action"]=="resume") {
+      stcore->FlagTimePause = 0;
+      stcore->navigation->set_time_speed(stcore->temp_time_velocity);
+
+    }else if(args["action"]=="increment") {
+      // speed up time rate
+      double s = stcore->navigation->get_time_speed();
+      if (s>=JD_SECOND) s*=10.;
+      else if (s<-JD_SECOND) s/=10.;
+      else if (s>=0. && s<JD_SECOND) s=JD_SECOND;
+      else if (s>=-JD_SECOND && s<0.) s=0.;
+      stcore->navigation->set_time_speed(s);
+
+      // for safest script replay, record as absolute amount
+      commandline = "timerate rate " + double_to_str(s/JD_SECOND);
+
+    }else if(args["action"]=="decrement") {
+      double s = stcore->navigation->get_time_speed();
+      if (s>JD_SECOND) s/=10.;
+      else if (s<=-JD_SECOND) s*=10.;
+      else if (s>-JD_SECOND && s<=0.) s=-JD_SECOND;
+      else if (s>0. && s<=JD_SECOND) s=0.;
+      stcore->navigation->set_time_speed(s);
+
+      // for safest script replay, record as absolute amount
+      commandline = "timerate rate " + double_to_str(s/JD_SECOND);
+    }
+    
   } else if(command == "date") {
 
     // ISO 8601-like format [+/-]YYYY-MM-DDThh:mm:ss (no timzone offset, T is literal)
@@ -145,14 +179,14 @@ int StelCommandInterface::execute_command(string commandline, int &wait) {
 
   } else if(command=="imageload") {
     if(args["filename"]!="" && args["name"]!="") {
-      stcore->images->load_image(args["filename"], args["name"]);
+      stcore->script_images->load_image(args["filename"], args["name"]);
     } else {
       cout << "Incomplete or incorrect arguments." << endl;
     }
 
   } else if(command=="imageprop") {
     if(args["name"]!=""){
-      Image * img = stcore->images->get_image(args["name"]);
+      Image * img = stcore->script_images->get_image(args["name"]);
 
       if(img != NULL ) {
 	if(args["alpha"]!="") img->set_alpha(str_to_double(args["alpha"]), 
@@ -165,44 +199,37 @@ int StelCommandInterface::execute_command(string commandline, int &wait) {
 
     }
 
-  } else if(command=="audio") {
-    if(args["action"]!="") {
-      if(args["action"]=="load" && args["filename"]!="") {
-	if(audio) delete audio;
-	audio = new Audio(args["filename"], args["name"]);
-      }
-      if(args["action"]=="play") {
-	audio->play(args["loop"]=="on");
-      }
-    } else {
-      cout << "Incomplete or incorrect arguments." << endl;
-    }
-
-
-
+  } else if(command=="audio" && args["action"]=="play" && args["filename"]!="") {
+    // only one track at a time allowed
+    if(audio) delete audio;
+    audio = new Audio(args["filename"], "default track");
+    audio->play(args["loop"]=="on");
 
   } else if(command=="script") {
 
     if(args["action"]=="end") {
-      // stop script and unload any loaded images
+      // stop script, audio, and unload any loaded images
       stcore->scripts->cancel_script();
       if(audio) {
 	delete audio;
 	audio = NULL;
       }
-      stcore->images->drop_all_images();
+      stcore->script_images->drop_all_images();
     }
 
     if(args["action"]=="play" && args["filename"]!="") {
       stcore->scripts->play_script(args["filename"]);
     }
 
-    if(args["action"]=="pause") {
+    // n.b. action=pause TOGGLES pause
+    if(args["action"]=="pause" && !stcore->scripts->is_paused()) {
+      audio->pause();
       stcore->scripts->pause_script();
-    }
-
-    if(args["action"]=="resume") {
+      execute_command("timerate action pause");
+    } else if (args["action"]=="pause" || args["action"]=="resume") {
       stcore->scripts->resume_script();
+      audio->resume();
+      execute_command("timerate action resume");
     }
 
   } else {
@@ -288,3 +315,10 @@ int str_to_int(string str) {
   return integer;
 }
 
+string double_to_str(double dbl) {
+
+  std::ostringstream oss;
+  oss << dbl;
+  return oss.str();
+
+}
