@@ -1052,101 +1052,112 @@ void GuiHandleClic(Uint16 x, Uint16 y, Uint8 state, Uint8 button)
 }
 
 /*******************************************************************************/
-bool GuiHandleKeys(Uint8 key, int state)
+bool GuiHandleKeys(SDLKey key, int state)
 {   if (state==GUI_DOWN)
     {   
-    	
-    	switch(key)
-        {   
-        	case 27 :   clearUi();
-                        exit(0); 
-                        break;
-            case 'C' :
-            case 'c' :  global.FlagConstellationDrawing=!global.FlagConstellationDrawing;
-                        BtConstellationsDraw->setActive(global.FlagConstellationDrawing);
-                        break;
-
-            case 'P' :
-            case 'p' :  global.FlagPlanetsHintDrawing=!global.FlagPlanetsHintDrawing;
-                        break;
-            
-            case 'V' :
-            case 'v' :  global.FlagConstellationName=!global.FlagConstellationName;
-                        BtConstellationsName->setActive(global.FlagConstellationName);
-                        break;
-            case 'Z' :
-            case 'z' :  global.FlagAzimutalGrid=!global.FlagAzimutalGrid;
-                        BtAzimutalGrid->setActive(global.FlagAzimutalGrid);
-                        break;
-            case 'E' :
-            case 'e' :  global.FlagEquatorialGrid=!global.FlagEquatorialGrid;
-                        BtEquatorialGrid->setActive(global.FlagEquatorialGrid);
-                        break;
-            case 'N' :
-            case 'n' :  global.FlagNebulaName=!global.FlagNebulaName;
-                        BtNebula->setActive(global.FlagNebulaName);
-                        break;
-            case 'G' :
-            case 'g' :  global.FlagGround=!global.FlagGround;
-                        BtGround->setActive(global.FlagGround);
-                        break;
-            case 'F' :
-            case 'f' :  global.FlagFog=!global.FlagFog;
-                        //BtFog->setActive(global.FlagFog);
-                        break;
-            case '1' :
-            case '&' :  global.FlagRealTime=!global.FlagRealTime;
-                        //BtRealTime->setActive(global.FlagRealTime);
-                        break;
-            case '2' :
-            case '~' :  global.FlagAcceleredTime=!global.FlagAcceleredTime;
-                        //BtAcceleredTime->setActive(global.FlagAcceleredTime);
-                        break;
-            case '3' :
-            case '\"' : global.FlagVeryFastTime=!global.FlagVeryFastTime;
-                        //BtVeryFastTime->setActive(global.FlagVeryFastTime);
-                        break;
-            case 'Q' :
-            case 'q' :  global.FlagCardinalPoints=!global.FlagCardinalPoints;
-                        BtCardinalPoints->setActive(global.FlagCardinalPoints);
-                        break;
-            case 'A' :
-            case 'a' :  global.FlagAtmosphere=!global.FlagAtmosphere;
-                        BtAtmosphere->setActive(global.FlagAtmosphere);
-                        break;
-            case 'R' :
-            case 'r' :  global.FlagRealMode=!global.FlagRealMode;
-                        TopWindowsInfos->setVisible(!global.FlagRealMode);
-                        ContainerBtFlags->setVisible(!global.FlagRealMode);
-                        break;
-            case 'H' :
-            case 'h' :  global.FlagHelp=!global.FlagHelp;
-                        BtHelp->setActive(global.FlagHelp);
-                        HelpWin->setVisible(global.FlagHelp);
-                        if (global.FlagHelp && global.FlagInfos) global.FlagInfos=false;
-                        break;
-            case '4' :
-            case '\'' : global.FlagEcliptic=!global.FlagEcliptic;
-                        break;
-            case '5' :
-            case '(' :  global.FlagEquator=!global.FlagEquator;
-                        break;
-            case 'T' :
-            case 't' :  global.FlagFollowEarth=!global.FlagFollowEarth;
-                        BtFollowEarth->setActive(global.FlagFollowEarth);
-                        break;
-            case 'S' :
-            case 's' :  global.FlagStars=!global.FlagStars;
-                        break;
-
-            case ' ' :  if (global.FlagSelect) Move_To(global.SelectedObject.XYZ);
-                        break;
-
-            case 'I' :
-            case 'i' : global.FlagInfos=!global.FlagInfos; 
-                       InfoWin->setVisible(global.FlagInfos);
-                        break;
-        }
+    	if(key==SDLK_ESCAPE)
+    	{ 	
+    		clearUi();
+            exit(0); 
+		}
+        if(key==SDLK_c)
+        {	
+        	global.FlagConstellationDrawing=!global.FlagConstellationDrawing;
+		}
+        if(key==SDLK_p)
+        {	
+        	global.FlagPlanetsHintDrawing=!global.FlagPlanetsHintDrawing;
+		}
+        if(key==SDLK_v)
+        {	
+        	global.FlagConstellationName=!global.FlagConstellationName;
+            BtConstellationsName->setActive(global.FlagConstellationName);
+		}
+        if(key==SDLK_z)
+        {	
+        	global.FlagAzimutalGrid=!global.FlagAzimutalGrid;
+            BtAzimutalGrid->setActive(global.FlagAzimutalGrid);
+		}
+        if(key==SDLK_e)
+        {	
+        	global.FlagEquatorialGrid=!global.FlagEquatorialGrid;
+            BtEquatorialGrid->setActive(global.FlagEquatorialGrid);
+		}
+        if(key==SDLK_n)
+        {	
+        	global.FlagNebulaName=!global.FlagNebulaName;
+            BtNebula->setActive(global.FlagNebulaName);
+		}
+        if(key==SDLK_g)
+        {	
+        	global.FlagGround=!global.FlagGround;
+            BtGround->setActive(global.FlagGround);
+		}
+        if(key==SDLK_f)
+        {	
+        	global.FlagFog=!global.FlagFog;
+		}
+        if(key==SDLK_1)
+        {	
+        	global.FlagRealTime=!global.FlagRealTime;
+		}
+        if(key==SDLK_2)
+        {	
+        	global.FlagAcceleredTime=!global.FlagAcceleredTime;
+		}
+        if(key==SDLK_3)
+        {	
+        	global.FlagVeryFastTime=!global.FlagVeryFastTime;
+		}
+        if(key==SDLK_q)
+        {	
+        	global.FlagCardinalPoints=!global.FlagCardinalPoints;
+            BtCardinalPoints->setActive(global.FlagCardinalPoints);
+		}
+        if(key==SDLK_a)
+        {	
+        	global.FlagAtmosphere=!global.FlagAtmosphere;
+            BtAtmosphere->setActive(global.FlagAtmosphere);
+		}
+        if(key==SDLK_r)
+        {	
+        	global.FlagRealMode=!global.FlagRealMode;
+            TopWindowsInfos->setVisible(!global.FlagRealMode);
+            ContainerBtFlags->setVisible(!global.FlagRealMode);
+		}
+        if(key==SDLK_h)
+        {	
+        	global.FlagHelp=!global.FlagHelp;
+            BtHelp->setActive(global.FlagHelp);
+            HelpWin->setVisible(global.FlagHelp);
+            if (global.FlagHelp && global.FlagInfos) global.FlagInfos=false;
+		}
+        if(key==SDLK_4)
+        {	
+        	global.FlagEcliptic=!global.FlagEcliptic;
+		}
+        if(key==SDLK_5)
+        {	
+        	global.FlagEquator=!global.FlagEquator;
+		}
+        if(key==SDLK_t)
+        {	
+        	global.FlagFollowEarth=!global.FlagFollowEarth;
+            BtFollowEarth->setActive(global.FlagFollowEarth);
+		}
+        if(key==SDLK_s)
+        {	
+        	global.FlagStars=!global.FlagStars;
+		}
+        if(key==SDLK_SPACE)
+        {	
+        	if (global.FlagSelect) Move_To(global.SelectedObject.XYZ);
+		}
+        if(key==SDLK_i)
+        {	
+        	global.FlagInfos=!global.FlagInfos; 
+            InfoWin->setVisible(global.FlagInfos);
+		}
     }
     return false;
 }
