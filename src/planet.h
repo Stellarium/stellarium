@@ -143,6 +143,10 @@ protected:
 	float axis_rotation;			// Rotation angle of the planet on it's axis
     s_texture * tex_map;			// Planet map texture
 	s_texture * tex_halo;			// Little halo texture
+
+	double lastJD;
+	double deltaJD;
+
 	// The callback for the calculation of the equatorial rect heliocentric position at time JD.
 	pos_func_type coord_func;
 	planet * parent;				// Planet parent i.e. sun for earth

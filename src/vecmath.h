@@ -500,7 +500,7 @@ template<class T> T Vector3<T>::lengthSquared() const
 
 template<class T> void Vector3<T>::normalize()
 {
-    register T s = (T) 1 / sqrt(v[0] * v[0] + v[1] * v[1] + v[2] * v[2]);
+    register T s = (T) (1. / sqrt(v[0] * v[0] + v[1] * v[1] + v[2] * v[2]));
     v[0] *= s;
     v[1] *= s;
     v[2] *= s;
@@ -645,7 +645,7 @@ template<class T> T Vector4<T>::lengthSquared() const
 
 template<class T> void Vector4<T>::normalize()
 {
-    T s = (T) 1 / sqrt(v[0] * v[0] + v[1] * v[1] + v[2] * v[2] + v[3] * v[3]);
+    T s = (T) (1. / sqrt(v[0] * v[0] + v[1] * v[1] + v[2] * v[2] + v[3] * v[3]));
     v[0] *= s;
     v[1] *= s;
     v[2] *= s;
@@ -822,7 +822,54 @@ template<class T> Matrix4<T> Matrix4<T>::operator-(const Matrix4<T>& a) const
 						r[12]-a.r[12], r[13]-a.r[13], r[14]-a.r[14], r[15]-a.r[15] );
 }
 
+// Compute inverse using Gauss-Jordan elimination; caller is responsible
+// for ensuring that the matrix isn't singular.
+/*template<class T> Matrix4<T> Matrix4<T>::inverse() const
+{
+    Matrix4<T> a(*this);
+    Matrix4<T> b(Matrix4<T>::identity());
+    int i, j;
+    int p;
 
+    for (j = 0; j < 4; j++)
+    {
+        p = j;
+        for (i = j + 1; i < 4; i++)
+        {
+            if (fabs(a[i][j]) > fabs(a[p][j]))
+                p = i;
+        }
+
+        // Swap rows p and j
+        Vector4<T> t;
+		t[0] = a[p][0]; t[1] = a[p][1]; t[2] = a[p][2]; t[3] = a[p][3];
+        a[p][0] = a[j][0]; a[p][1] = a[j][1]; a[p][2] = a[j][2]; a[p][3] = a[j][3];
+        a[j][0] = t[0]; a[j][1] = t[1]; a[j][2] = t[2]; a[j][3] = t[3];
+
+        t[0] = b[p][0]; t[1] = b[p][1]; t[2] = b[p][2]; t[3] = b[p][3];
+        b[p][0] = b[j][0]; b[p][1] = b[j][1]; b[p][2] = b[j][2]; b[p][3] = b[j][3];
+        b[j][0] = t[0]; b[j][1] = t[1]; b[j][2] = t[2]; b[j][3] = t[3];
+
+        T s = a[j][j];  // if s == 0, the matrix is singular
+        a[j][0] *= (1.0f / s); a[j][1] *= (1.0f / s); a[j][2] *= (1.0f / s); a[j][3] *= (1.0f / s);
+        b[j][0] *= (1.0f / s); b[j][1] *= (1.0f / s); b[j][2] *= (1.0f / s); b[j][3] *= (1.0f / s);
+
+        // Eliminate off-diagonal elements
+        for (i = 0; i < 4; i++)
+        {
+            if (i != j)
+            {
+                b[i][0] -= a[i][j] * b[j][0]; b[i][1] -= a[i][j] * b[j][1];
+				b[i][2] -= a[i][j] * b[j][2]; b[i][3] -= a[i][j] * b[j][3];
+                a[i][0] -= a[i][j] * a[j][0]; a[i][1] -= a[i][j] * a[j][1];
+				a[i][2] -= a[i][j] * a[j][2]; a[i][3] -= a[i][j] * a[j][3];
+            }
+        }
+    }
+
+    return b;
+}
+*/
 //template<class T> void Matrix4<T>::print(void) const
 //{
 	//printf("[%.2lf %.2lf %.2lf %.2lf]\n[%.2lf %.2lf %.2lf %.2lf]\n[%.2lf %.2lf %.2lf %.2lf]\n[%.2lf %.2lf %.2lf %.2lf]\n",

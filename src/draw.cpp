@@ -266,27 +266,6 @@ void DrawEquator(void)
 	glPopMatrix();
 }
 
-
-// Draw the ecliptic line
-void DrawEcliptic(void)
-{       /*glPushMatrix();
-		glDisable(GL_TEXTURE_2D);
-		glDisable(GL_BLEND);
-		float coef = (float)(1.0f * rand() / RAND_MAX);
-		glColor3f(0.025*coef+0.2,0.025*coef+0.2,0.025*coef+0.0);
-		const double centuries = Astro::toMillenia(global.JDay);
-		const double obliquity = AstroOps::meanObliquity(centuries);
-		glRotatef(obliquity*180/PI,0,0,1);
-		for(int j=0;j<49;++j){
-				glBegin(GL_LINES);
-						glVertex3f(DmeriParal [j] [0]*20.0f, 0, DmeriParal [j] [1]*20.0f);
-						glVertex3f(DmeriParal[j+1][0]*20.0f, 0, DmeriParal[j+1][1]*20.0f);
-				glEnd();
-		}
-		glPopMatrix();*/
-}
-
-
 // Draw the horizon fog
 void DrawFog(float sky_brightness)
 {   

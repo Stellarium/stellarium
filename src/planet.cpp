@@ -32,7 +32,8 @@ rotation_elements::rotation_elements() : period(1.), offset(0.), epoch(J2000),
 planet::planet(const char * _name, int _flagHalo, int _flag_lighting, double _radius, vec3_t _color,
 	float _albedo, const char* tex_map_name, const char* tex_halo_name, pos_func_type _coord_func) :
 		name(NULL), flagHalo(_flagHalo), flag_lighting(_flag_lighting), radius(_radius), color(_color),
-		albedo(_albedo), axis_rotation(0.),	tex_map(NULL), tex_halo(NULL), coord_func(_coord_func), parent(NULL)
+		albedo(_albedo), axis_rotation(0.),	tex_map(NULL), tex_halo(NULL), lastJD(J2000),
+		deltaJD(JD_SECOND), coord_func(_coord_func), parent(NULL)
 {
 	ecliptic_pos=Vec3d(0.,0.,0.);
 	mat_local_to_parent = Mat4d::identity();
@@ -87,7 +88,12 @@ Vec3d planet::get_earth_equ_pos(navigator * nav) const
 // Actually call the provided function to compute the ecliptical position
 void planet::compute_position(double date)
 {
-	coord_func(date, &(ecliptic_pos[0]), &(ecliptic_pos[1]), &(ecliptic_pos[2]));
+	if (fabs(lastJD-date)>deltaJD)
+	{
+		coord_func(date, &(ecliptic_pos[0]), &(ecliptic_pos[1]), &(ecliptic_pos[2]));
+		lastJD = date;
+	}
+
 }
 
 // Compute the transformation matrix from the local planet coordinate to the parent planet coordinate
@@ -107,10 +113,10 @@ Mat4d planet::get_helio_to_geo_matrix()
 	mat = mat * Mat4d::zrotation(axis_rotation*M_PI/180.);
 
 	// Iterate thru parents
-	planet * p = this;
-	while (p->parent!=NULL)
+	planet * p = parent;
+	while (p!=NULL && p->parent!=NULL)
 	{
-		mat = p->parent->mat_local_to_parent * mat;
+		mat = p->mat_local_to_parent * mat;
 		p=p->parent;
 	}
 	return mat;
@@ -125,6 +131,7 @@ void planet::compute_geographic_rotation(double date)
     double remainder = rotations - wholeRotations;
 
 	axis_rotation = remainder * 360. + re.offset;
+
 }
 
 // Get the planet position in the parent planet ecliptic coordinate
@@ -194,14 +201,15 @@ void planet::draw(int hint_ON, draw_utility * du, navigator * nav)
 {
 	Mat4d mat = mat_local_to_parent;
 	planet * p = parent;
-	while (p!=NULL)
+	while (p!=NULL && p->parent!=NULL)
 	{
 		mat = p->mat_local_to_parent * mat;
 		p = p->parent;
 	}
 
 	glPushMatrix();
-    glMultMatrixd(mat); // Go in planet local coordinate
+	// Removed totally the planet shaking bug!!!
+	glLoadMatrixd(nav->get_switch_to_heliocentric_mat()*mat);
 
 	// Compute the 2D position
 	du->project(0., 0., 0., screenPos[0], screenPos[1], screenPos[2]);
@@ -216,7 +224,7 @@ void planet::draw(int hint_ON, draw_utility * du, navigator * nav)
 		// this prevents name overlaping (ie for jupiter satellites)
 		float ang_dist = 300.f*atan(get_ecliptic_pos().length()/get_earth_equ_pos(nav).length())/du->fov;
 		if (ang_dist==0.f) ang_dist = 1.f; // if ang_dist == 0, the planet is sun..
-     	if (hint_ON && ang_dist>0.15)
+     	if (hint_ON && ang_dist>0.25)
     	{
 			if (ang_dist>1.f) ang_dist = 1.f;
 			glColor4f(0.5f*ang_dist,0.5f*ang_dist,0.7f*ang_dist,1.f*ang_dist);
@@ -303,10 +311,10 @@ void planet::draw_halo(navigator* nav, draw_utility * du)
 			}
 		}
 
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		glBlendFunc(GL_ONE, GL_ONE);
 
 		float screen_r = get_on_screen_size(nav, du);
-		float transparency = rmag/screen_r;
+		cmag *= rmag/screen_r;
 		if (rmag<screen_r) rmag = screen_r;
 
 		du->set_orthographic_projection();    	// 2D coordinate
@@ -315,7 +323,7 @@ void planet::draw_halo(navigator* nav, draw_utility * du)
 		glEnable(GL_BLEND);
 		glDisable(GL_LIGHTING);
 		glEnable(GL_TEXTURE_2D);
-		glColor4f(color[0]*cmag, color[1]*cmag, color[2]*cmag, transparency);
+		glColor3f(color[0]*cmag, color[1]*cmag, color[2]*cmag);
 		glTranslatef(screenPos[0], screenPos[1], 0.f);
 		glBegin(GL_QUADS);
 			glTexCoord2i(0,0);	glVertex3f(-rmag, rmag,0.f);	// Bottom Left

@@ -64,7 +64,7 @@ class navigator
 public:
 	// Create and initialise to default a navigation context
 	navigator();
-    ~navigator();
+    virtual ~navigator();
 
 	// Init the viewing matrix, setting the field of view, the clipping planes, and screen size
 	void init_project_matrix(int w, int h, double near, double far);
@@ -124,8 +124,15 @@ public:
 
 	Vec3d get_observer_helio_pos(void);	// Return the observer heliocentric position
 
-private:
+	// Return the matrix which place openGL in heliocentric coordinates
+	// Function used to overide standard openGL transformation while planet drawing to prevent
+	// the boring shaking bug..
+	Mat4d get_switch_to_heliocentric_mat(void);
 
+private:
+	// Home made gluLookAt(0., 0., 0.,local_vision[0],local_vision[1],local_vision[2],0.,0.,1.);
+	// to keep a better precision to prevent a little bit the shaking bug..
+	Mat4d lookAt(void);
 	void update_move(int deltaTime);
 
 	// Matrices used for every coordinate transfo
@@ -134,6 +141,8 @@ private:
 	Mat4d mat_local_to_earth_equ;	// Transform from Observator local coordinate to Earth Equatorial
 	Mat4d mat_earth_equ_to_local;	// Transform from Observator local coordinate to Earth Equatorial
 	Mat4d mat_helio_to_earth_equ;	// Transform from Heliocentric to earth equatorial coordinate
+
+	Mat4d mat_projection;			// Projection matrix
 
 	// Vision variables
 	double fov;							// Field of view

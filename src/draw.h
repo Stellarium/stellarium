@@ -17,17 +17,32 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#ifndef __AFFICHAGEH__
-#define __AFFICHAGEH__
+#ifndef __DRAW_H__
+#define __DRAW_H__
 
 #include "stellarium.h"
 #include "stel_utility.h"
 #include "tone_reproductor.h"
 
+// Class which manages a grid to display in the sky
+class SkyGrid
+{
+public:
+	// Create and precompute positions of a SkyGrid
+	SkyGrid(unsigned int _nb_meridian = 24, unsigned int _nb_parallel = 17,
+			unsigned int _nb_alt_segment = 18, unsigned int nb_azi_segment = 36);
+    virtual ~SkyGrid();
+	void draw(draw_utility * du) const;
+private:
+	unsigned int nb_meridian;
+	unsigned int nb_parallel;
+	unsigned int nb_alt_segment;
+	unsigned int nb_azi_segment;
+	Vec3f ** points;
+};
+
 void InitMeriParal(void);
-void drawIntro(void);
 void DrawPoint(float X,float Y,float Z);
-void DrawPointer(Vec3d,float,vec3_t,int);
 
 void DrawCardinaux(draw_utility * du);
 void DrawMilkyWay(tone_reproductor * eye);
@@ -39,13 +54,7 @@ void DrawEquator(void);
 void DrawEcliptic(void);
 void DrawFog(float sky_brightness);
 void DrawDecor(int, float sky_brightness);
-//void DrawAtmosphere(void);
 void DrawGround(float sky_brightness);
-void DrawMenu(void);
-void DrawInfo(void);
 
-void Oriente(void);
 
-void DrawHelp(void);
-
-#endif
+#endif // __DRAW_H__
