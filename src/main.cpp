@@ -404,24 +404,38 @@ bool InitGL(SDL_Surface *S)  // Any OpenGL Initialization Code Goes Here
     return true;     // Return TRUE (Initialization Successful)
 }
 
+// ***************************  Usage  *********************************
+void usage(char **argv)
+{
+	printf("Usage: %s [OPTION] ...\n -v, --version          output version information and exit\n -h, --help             display this help and exit\n", argv[0]);
+}
+
 
 // ***************************  Main  **********************************
 int main(int argc, char **argv)
-{   
-    
+{
     // Check command line arguments
-    if (argc==2 && !( strcmp(argv[1],"--version") && strcmp(argv[1],"-version") && strcmp(argv[1],"--v") && strcmp(argv[1],"-v")))
+    if (argc == 2)
     {
-        printf("%s\n",APP_NAME);
-        exit(0);
+        if (!(strcmp(argv[1],"--version") && strcmp(argv[1],"-v")))
+        {
+            printf("%s\n", APP_NAME);
+            exit(0);
+        }
+        if (!(strcmp(argv[1],"--help") && strcmp(argv[1],"-h")))
+        {
+            usage(argv);
+            exit(0);
+        }
     }
-    
-    if (argc>1)
+
+    if (argc > 1)
     {
-        printf("Bad arguments : possible options are -version or -v\n");
-        exit(0);
+        printf("%s: Bad command line argument(s)\n", argv[0]);
+        printf("Try `%s --help' for more information.\n", argv[0]);
+        exit(1);
     }
-    
+
     setDirectories();
     
     drawIntro();        // Print the console logo
