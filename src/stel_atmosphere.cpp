@@ -26,7 +26,7 @@
 #include "stel_utility.h"
 #include "stel_atmosphere.h"
 
-stel_atmosphere::stel_atmosphere() : sky_resolution(64), tab_sky(NULL)
+stel_atmosphere::stel_atmosphere() : sky_resolution(32), tab_sky(NULL)
 {
 	// Create the vector array used to store the sky color on the full field of view
 	tab_sky = new (Vec3f*)[sky_resolution+1];
@@ -63,24 +63,61 @@ void stel_atmosphere::compute_color(int ground_ON, Vec3d sunPos, tone_reproducto
 	float stepX = (float)du->screenW / sky_resolution;
 	float stepY = (float)du->screenH / sky_resolution;
 
-	int limY;
+	Vec3d point;
 
-	// Don't calc if under the ground
-	if (ground_ON)
+	// Find which row is the first one not bellow the ground
+	gluProject(1.,0.,0.,M,P,V,objx,objy,objz);
+	double yHoriz = *objy;
+	startY = (int)floor(yHoriz/stepY);
+
+	// The sky is totally covered by the ground
+	if (startY>sky_resolution)
 	{
-		gluProject(1,0,0,M,P,V,objx,objy,objz);
-		limY = (int)(sky_resolution-(float)(*objy)/stepY+3.);
-		if (!(limY<sky_resolution+1)) limY = sky_resolution+1;
+		for (int x=0; x<=sky_resolution; x++)
+		{
+			for(int y=0; y<=sky_resolution; y++)
+			{
+				tab_sky[x][y].set(0.f,0.f,-10.f);
+			}
+		}
+		return;
+	}
+
+	// If the horizon limit is visible on the screen
+	if (startY>=0)
+	{
+		// Init the values bellow the ground
+		for (int x=0; x<=sky_resolution; x++)
+		{
+			for(int y=0; y<startY; y++)
+			{
+				tab_sky[x][y].set(0.f,0.f,-10.f);
+			}
+		}
+
+		// Set the values of the first line bellow the ground
+		for (int x=0; x<=sky_resolution; x++)
+		{
+			gluUnProject(x*stepX,yHoriz,1,M,P,V,objx,objy,objz);
+			point.set(*objx,*objy,*objz);
+			point.normalize();
+			b.zenith_angle = M_PI_2-0.1;
+			b.dist_sun = acosf(point.dot(sunPos));
+			if (b.dist_sun<0) b.dist_sun=-b.dist_sun;
+			sky.get_xyY_value(&b);
+			eye->xyY_to_RGB(b.color);
+			tab_sky[x][startY].set(b.color[0],b.color[1],b.color[2]);
+		}
 	}
 	else
 	{
-		limY = sky_resolution+1;
+		startY=-1;
 	}
 
-	Vec3d point;
-	for (int x=0; x<sky_resolution+1; x++)
+	// Compute the sky color for every point above the ground
+	for (int x=0; x<=sky_resolution; x++)
 	{
-		for(int y=0; y<limY; y++)
+		for(int y=startY+1; y<=sky_resolution; y++)
 		{
 			gluUnProject(x*stepX,y*stepY,1,M,P,V,objx,objy,objz);
 			point.set(*objx,*objy,*objz);
@@ -100,14 +137,17 @@ void stel_atmosphere::compute_color(int ground_ON, Vec3d sunPos, tone_reproducto
 // Draw the atmosphere using the precalc values stored in tab_sky
 void stel_atmosphere::draw(draw_utility * du)
 {
-	// TODO : optimisation not to draw behind the ground
+	int startYtemp = startY;
+	if (startYtemp>sky_resolution) return;
+	if (startYtemp-1<0) startYtemp = 1;
 	float stepX = (float)du->screenW / sky_resolution;
 	float stepY = (float)du->screenH / sky_resolution;
 	glDisable(GL_TEXTURE_2D);
 	glDisable(GL_BLEND);
 	du->set_orthographic_projection();	// set 2D coordinate
-	for (int y2=0; y2<sky_resolution-1+1; y2++)
+	for (int y2=startYtemp-1; y2<sky_resolution; y2++)
 	{
+		if (tab_sky[0][y2+1][2]==-10.f) continue;	// Don't draw if value == -10 i.e. under ground
 		glBegin(GL_TRIANGLE_STRIP);
 			for(int x2=0; x2<sky_resolution+1; x2++)
 			{

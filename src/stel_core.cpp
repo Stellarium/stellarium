@@ -175,6 +175,8 @@ void stel_core::update(int delta_time)
 	// compute global sky brightness TODO : function to include in skylight.cpp correctly made
 	sky_brightness=asin(sunPos[2])+0.1;
 	if (sky_brightness<0) sky_brightness=0;
+
+	ui->update();
 }
 
 // Execute all the drawing functions
@@ -197,7 +199,7 @@ void stel_core::draw(int delta_time)
 	if (FlagNebula && (!FlagAtmosphere || sky_brightness<0.1)) nebulas->Draw(FlagNebulaName, du);
 
 	// Draw all the constellations
-	if (FlagConstellationDrawing) asterisms->Draw();
+	if (FlagAsterismDrawing) asterisms->Draw();
 
 	// Draw the hipparcos stars
 	// convert.... TODO implicit convertion
@@ -222,7 +224,7 @@ void stel_core::draw(int delta_time)
     if (FlagEcliptic) DrawEcliptic();	// Draw the ecliptic line
 
 	// Draw the constellations's names
-    if (FlagConstellationName) asterisms->DrawName(du);
+    if (FlagAsterismName) asterisms->DrawName(du);
 
 	// Draw the pointer on the currently selected object
     if (selected_object) selected_object->draw_pointer(delta_time, du);
@@ -319,8 +321,8 @@ void stel_core::load_config(void)
 	FlagAtmosphere		= conf->get_boolean("landscape:flag_atmosphere");
 
 	// Viewing section
-	FlagConstellationDrawing= conf->get_boolean("viewing:flag_constellation_drawing");
-	FlagConstellationName	= conf->get_boolean("viewing:flag_constellation_name");
+	FlagAsterismDrawing		= conf->get_boolean("viewing:flag_constellation_drawing");
+	FlagAsterismName		= conf->get_boolean("viewing:flag_constellation_name");
 	FlagAzimutalGrid		= conf->get_boolean("viewing:flag_azimutal_grid");
 	FlagEquatorialGrid		= conf->get_boolean("viewing:flag_equatorial_grid");
 	FlagEquator				= conf->get_boolean("viewing:flag_equator");
@@ -407,6 +409,8 @@ stel_object * stel_core::find_stel_object(Vec3d v)
 
 	if (FlagPlanets) sobj = Sun->search(v, navigation);
 	if (sobj) return sobj;
+
+
 
 	Vec3f u=Vec3f(v[0],v[1],v[2]);
 

@@ -57,7 +57,7 @@ enum S_GUI_VALUE
 namespace s_gui
 {
 	typedef CBFunctor0 * s_pcallback0;
-	typedef CBFunctor0  s_callback0;
+	typedef CBFunctor0 s_callback0;
 
 	//typedef CBFunctor2wRet<int,int,int> *t_moveCallback;
 	//typedef CBFunctor2wRet<SDLKey,S_GUI_VALUE,int> *t_keyCallback;
@@ -92,11 +92,13 @@ namespace s_gui
 		void drawSquareFill(const s_vec2i& pos, const s_vec2i& sz) const;
 		void drawSquareFill(const s_vec2i& pos, const s_vec2i& sz, const s_color& c) const;
 		void drawSquareFill(const s_vec2i& pos, const s_vec2i& sz, const s_color& c, const s_texture * t) const;
+		void drawCross(const s_vec2i& pos, const s_vec2i& sz) const;
 		void print(int x, int y, const char * str) const;
 		void setTexture(const s_texture* tex) {tex1 = tex;}
 		void setFont(const s_font* f) {font = f;}
 		void setTextColor(const s_color& c) {textColor = c;}
 		void setBaseColor(const s_color& c) {baseColor = c;}
+		const s_color& getBaseColor(void) const {return baseColor;}
 		const s_font* getFont(void) const {return font;}
     private:
 		const s_texture* tex1;
@@ -122,6 +124,8 @@ namespace s_gui
         virtual const s_vec2i getSize() const {return size;}
         virtual void setPos(const s_vec2i& _pos) {pos = _pos;}
         virtual void setSize(const s_vec2i& _size) {size = _size;}
+        virtual void setPos(int x, int y) {pos[0] = x; pos[1]=y;}
+        virtual void setSize(int w, int h) {size[0] = w; size[1]=h;}
         virtual void setVisible(int _visible) {visible=_visible;}
         virtual int getVisible(void) const {return visible;}
         virtual void setActive(int _active) {active = _active;}
@@ -152,8 +156,22 @@ namespace s_gui
     private:
     };
 
+    class CallbackComponent : public Component
+    {
+    public:
+		CallbackComponent();
+		virtual void setOnMouseInOutCallback(const s_callback0& c) {onMouseInOutCallback = c;}
+        virtual void setOnPressCallback(const s_callback0& c) {onPressCallback = c;}
+		virtual int getIsMouseOver(void) {return is_mouse_over;}
+		virtual int onMove(int, int);
+		virtual int onClic(int, int, S_GUI_VALUE, S_GUI_VALUE);
+    protected:
+		s_callback0 onPressCallback;
+		s_callback0 onMouseInOutCallback;
+		int is_mouse_over;
+	};
 
-    class Container : public Component
+    class Container : public CallbackComponent
     {
     public:
         Container();
@@ -186,6 +204,7 @@ namespace s_gui
 		virtual int getSizey() const {return inside->getSizey();}
         virtual const s_vec2i getSize() const {return inside->getSize();}
         virtual void setSize(const s_vec2i& _size);
+        virtual void setSize(int w, int h);
         virtual void draw(void);
 		virtual void setFrameSize(int left, int right, int top, int bottom);
 	protected:
@@ -194,15 +213,12 @@ namespace s_gui
     };
 
 
-    class Button : public Component
+    class Button : public CallbackComponent
     {
     public:
 		Button();
         virtual void draw();
-        virtual void setOnPressCallback(const s_callback0& c) {onPressCallback = c;}
     protected:
-		virtual int onClic(int, int, S_GUI_VALUE, S_GUI_VALUE);
-		s_callback0 onPressCallback;
     };
 
     class FilledButton : public Button
@@ -212,6 +228,26 @@ namespace s_gui
     protected:
     };
 
+	class CheckBox : public Button
+    {
+    public:
+		CheckBox(int state = 0);
+        virtual void draw();
+		virtual int getState(void) const {return isChecked;}
+		virtual int onClic(int, int, S_GUI_VALUE, S_GUI_VALUE);
+    protected:
+		int isChecked;
+    };
+
+	class FlagButton : public CheckBox
+    {
+    public:
+		FlagButton(int state = 0, const s_texture* tex = NULL, const char* specificTexName = NULL);
+        virtual ~FlagButton();
+		virtual void draw();
+    protected:
+		s_texture* specific_tex;
+    };
 
     class Label : public Component
     {

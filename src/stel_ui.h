@@ -41,6 +41,7 @@ public:
     virtual ~stel_ui();		// Delete the ui
 	void init(void);		// Initialize the ui.
 	void draw(void);		// Display the ui
+	void update(void);		// Update changing values
 
 	// Handle mouse clics
 	int handle_clic(Uint16 x, Uint16 y, Uint8 state, Uint8 button);
@@ -55,14 +56,40 @@ private:
 	s_font * spaceFont;		// The standard font
 	s_texture * baseTex;	// The standard fill texture
 
-	Container * desktop;	// The container which contains everything (=the desktop)
+	Container * desktop;	// The container which contains everything
 
-	FramedContainer * containerTest;
-	FramedContainer * containerTest2;
-	s_texture* testTex;
-	Label* testLabel;
-	FilledButton * btTest;
-	void btTestOnPress(void);
+	// The top bar containing the main infos (date, time, fps etc...)
+	FilledContainer * top_bar_ctr;
+	Label * top_bar_date_lbl;
+	Label * top_bar_hour_lbl;
+	Label * top_bar_fps_lbl;
+	Label * top_bar_appName_lbl;
+	Label * top_bar_fov_lbl;
+	Component* createTopBar(void);
+	void updateTopBar(void);
+
+	// Flags buttons (the buttons in the bottom left corner)
+	FilledContainer * bt_flag_ctr;		// The container for the button
+	FlagButton * bt_flag_asterism_draw;
+	FlagButton * bt_flag_asterism_name;
+	FlagButton * bt_flag_azimuth_grid;
+	FlagButton * bt_flag_equator_grid;
+	FlagButton * bt_flag_ground;
+	FlagButton * bt_flag_cardinals;
+	FlagButton * bt_flag_atmosphere;
+	FlagButton * bt_flag_nebula_name;
+	FlagButton * bt_flag_help;
+	FlagButton * bt_flag_follow_earth;
+	FlagButton * bt_flag_config;
+	Label * bt_flag_help_lbl;	// The dynamic information about the button under the mouse
+	Component* createFlagButtons(void);
+	void cb1(void);	void cb2(void);	void cb3(void);	void cb4(void);
+	void cb5(void);	void cb6(void);	void cb7(void);	void cb8(void);
+	void cb9(void);	void cb10(void);void cb11(void);
+	void bt_flag_ctrOnMouseInOut(void);
+	void cbr1(void);	void cbr2(void);	void cbr3(void);	void cbr4(void);
+	void cbr5(void);	void cbr6(void);	void cbr7(void);	void cbr8(void);
+	void cbr9(void);	void cbr10(void);void cbr11(void);
 };
 
 #endif  //_STEL_UI_H

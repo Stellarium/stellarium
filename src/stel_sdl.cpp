@@ -129,11 +129,11 @@ void stel_sdl::start_main_loop(void)
 					break;
 
 				case SDL_MOUSEMOTION:
-				  	//core->ui->handle_move(E.motion.x,E.motion.y);
+				  	core->ui->handle_move(E.motion.x,E.motion.y);
 					break;
 
 				case SDL_MOUSEBUTTONDOWN:
-					core->ui->handle_clic(E.button.x,E.button.y,E.button.state,E.button.button);
+					core->ui->handle_clic(E.button.x,E.button.y,E.button.button,E.button.state);
 					break;
 
 				case SDL_MOUSEBUTTONUP:
@@ -142,8 +142,8 @@ void stel_sdl::start_main_loop(void)
 
 				case SDL_KEYDOWN:
 					// Send the event to the gui and stop if it has been intercepted
-					//if (!core->ui->handle_keys(E.key.keysym.sym,GUI_DOWN))
-					//{
+					if (!core->ui->handle_keys(E.key.keysym.sym,S_GUI_PRESSED))
+					{
 						Keys = SDL_GetKeyState(NULL);	// Take a snapshot of the keyboard
 						if (Keys[SDLK_F1]) SDL_WM_ToggleFullScreen(Screen); // Try fullscreen
 						if (Keys[SDLK_ESCAPE])
@@ -151,7 +151,7 @@ void stel_sdl::start_main_loop(void)
 							TerminateApplication();
 						}
 						pressKey(Keys);
-					//}
+					}
 					break;
 
 				case SDL_KEYUP:
