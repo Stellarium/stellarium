@@ -41,8 +41,6 @@ public:
     void draw_art(Projector* prj, int delta_time) const;
     Constellation* is_star_in(const Hip_Star *) const;
     Constellation* find_from_short_name(const string& shortname) const;
-    // test that sky culture seems valid 
-    bool validate_sky_culture(string _sky_culture);
     void set_sky_locale(const string& _sky_locale);
 
 private:
