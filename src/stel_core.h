@@ -120,8 +120,8 @@ private:
     int FlagHorizon;
     int FlagFog;
     int FlagAtmosphere;
-    int FlagConstellationDrawing;
-    int FlagConstellationName;
+    int FlagAsterismDrawing;
+    int FlagAsterismName;
     int FlagAzimutalGrid;
     int FlagEquatorialGrid;
     int FlagEquator;

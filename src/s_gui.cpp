@@ -223,6 +223,20 @@ void Painter::drawSquareFill(const s_vec2i& pos, const s_vec2i& sz, const s_colo
     glEnd ();
 }
 
+// Draw a cross with the default base color
+void Painter::drawCross(const s_vec2i& pos, const s_vec2i& sz) const
+{
+	glColor4fv(baseColor);
+    glEnable(GL_BLEND);
+    glDisable(GL_TEXTURE_2D);
+    glBegin(GL_LINES);
+        glVertex2f(pos[0] + 0.5		   , pos[1] + 0.5        );
+        glVertex2f(pos[0] + sz[0] - 0.5, pos[1] + sz[1] - 0.5);
+        glVertex2f(pos[0] + sz[0] - 0.5, pos[1] + 0.5        );
+        glVertex2f(pos[0] + 0.5		   , pos[1] + sz[1] - 0.5);
+    glEnd();
+}
+
 // Print the text with the default font and default text color
 void Painter::print(int x, int y, const char * str) const
 {
@@ -274,11 +288,52 @@ void Component::initScissor(int winW, int winH)
 	scissor = new Scissor(winW, winH);
 }
 
+
+CallbackComponent::CallbackComponent() : Component(), is_mouse_over(0)
+{
+}
+
+int CallbackComponent::onClic(int x, int y, S_GUI_VALUE bt, S_GUI_VALUE state)
+{
+	if (state==S_GUI_PRESSED && bt==S_GUI_MOUSE_LEFT && isIn(x, y))
+	{
+		if (onPressCallback) onPressCallback();
+		return 1;
+	}
+	return 0;
+}
+
+int CallbackComponent::onMove(int x, int y)
+{
+	if (isIn(x, y))
+	{
+		if (onMouseInOutCallback && !is_mouse_over)
+		{
+			is_mouse_over = 1;
+			onMouseInOutCallback();
+		}
+		is_mouse_over = 1;
+	}
+	else
+	{
+		if (is_mouse_over)
+		{
+			if (onMouseInOutCallback && is_mouse_over)
+			{
+				is_mouse_over = 0;
+				onMouseInOutCallback();
+			}
+		}
+		is_mouse_over = 0;
+	}
+	return 0;
+}
+
 //////////////////////////////// Container /////////////////////////////////////
 // Manages hierarchical components : send signals ad actions  to childrens
 ////////////////////////////////////////////////////////////////////////////////
 
-Container::Container() : Component()
+Container::Container() : CallbackComponent()
 {
 }
 
@@ -329,6 +384,7 @@ int Container::onClic(int x, int y, S_GUI_VALUE button, S_GUI_VALUE state)
 		if ((*iter)->onClic(x - pos[0], y - pos[1], button, state)) return 1;	// The signal has been intercepted
         iter++;
     }
+	CallbackComponent::onClic(x, y, button, state);
     return 0;
 }
 
@@ -340,6 +396,7 @@ int Container::onMove(int x, int y)
 		if ((*iter)->onMove(x - pos[0], y - pos[1])) return 1;	// The signal has been intercepted
         iter++;
     }
+	CallbackComponent::onMove(x, y);
     return 0;
 }
 
@@ -409,6 +466,11 @@ void FramedContainer::setSize(const s_vec2i& _size)
 	size = _size + s_vec2i( frameSize[0] + frameSize[1], frameSize[2] + frameSize[3]);
 }
 
+void FramedContainer::setSize(int w, int h)
+{
+	inside->setSize(s_vec2i(w,h));
+	size = s_vec2i(w, h) + s_vec2i( frameSize[0] + frameSize[1], frameSize[2] + frameSize[3]);
+}
 
 void FramedContainer::setFrameSize(int left, int right, int top, int bottom)
 {
@@ -420,39 +482,81 @@ void FramedContainer::setFrameSize(int left, int right, int top, int bottom)
 // Simplest button with one press callback
 ////////////////////////////////////////////////////////////////////////////////
 
-Button::Button() : Component()
+Button::Button() : CallbackComponent()
 {
 	size.set(10,10);
-}
-
-int Button::onClic(int x, int y, S_GUI_VALUE bt, S_GUI_VALUE state)
-{
-	if (state==S_GUI_PRESSED && bt==S_GUI_MOUSE_LEFT && isIn(x, y))
-	{
-		if (onPressCallback) onPressCallback();
-		return 1;
-	}
-	return 0;
 }
 
 void Button::draw()
 {
 	if (!visible) return;
-	painter.drawSquareEdge(pos, size);
+	painter.drawSquareEdge(pos, size, painter.getBaseColor() * (1.f + 0.4 * is_mouse_over));
 }
 
 void FilledButton::draw()
 {
 	if (!visible) return;
 	painter.drawSquareFill(pos, size);
-	painter.drawSquareEdge(pos, size);
+	Button::draw();
 }
 
+CheckBox::CheckBox(int state) : Button(), isChecked(state)
+{
+}
+
+void CheckBox::draw()
+{
+	if (!visible) return;
+	if (isChecked) painter.drawCross(pos, size);
+	Button::draw();
+}
+
+int CheckBox::onClic(int x, int y, S_GUI_VALUE bt, S_GUI_VALUE state)
+{
+	if (state==S_GUI_PRESSED && bt==S_GUI_MOUSE_LEFT && isIn(x, y))
+	{
+		if (isChecked) isChecked = 0;
+		else isChecked = 1;
+	}
+	CallbackComponent::onClic(x,y,bt,state);
+	return 0;
+}
+
+
+
+FlagButton::FlagButton(int state, const s_texture* tex, const char* specificTexName) : CheckBox(state)
+{
+	if (tex) setTexture(tex);
+	if (specificTexName) specific_tex = new s_texture(specificTexName);
+	setSize(32,32);
+}
+
+FlagButton::~FlagButton()
+{
+	if (specific_tex) delete specific_tex;
+}
+
+void FlagButton::draw()
+{
+	if (!visible) return;
+	if (isChecked)
+	{
+		if (specific_tex) painter.drawSquareFill(pos, size, painter.getBaseColor()*2, specific_tex);
+		else painter.drawSquareFill(pos, size, painter.getBaseColor()*1.5);
+	}
+	else
+	{
+		if (specific_tex) painter.drawSquareFill(pos, size, painter.getBaseColor()*0.5, specific_tex);
+		else painter.drawSquareFill(pos, size);
+	}
+	Button::draw();
+}
 
 Label::Label(const char * _label, const s_font * _font) : label(NULL)
 {
 	setLabel(_label);
 	if (_font) painter.setFont(_font);
+	adjustSize();
 }
 
 Label::~Label()
@@ -477,7 +581,7 @@ void Label::draw()
 		painter.print(pos[0], pos[1], label);
     }
     glPopMatrix();
-	painter.drawSquareEdge(pos, size);
+	//painter.drawSquareEdge(pos, size);
 }
 
 void Label::adjustSize(void)
@@ -486,198 +590,11 @@ void Label::adjustSize(void)
 	size[1] = (int)ceilf(painter.getFont()->getLineHeight());
 }
 
+
+
+
+
 /*
-Labeled_Button::Labeled_Button(char * _label) : Button(), label(NULL)
-{
-    if (_label)  setLabel(_label);
-}
-
-Labeled_Button::~Labeled_Button()
-{
-    if (label) free(label);
-	label = NULL;
-}
-
-const char * Labeled_Button::getLabel() const
-{
-    return label;
-}
-
-void Labeled_Button::setLabel(char * _label)
-{
-    if (label) free(label);
-    label = NULL;
-    label = strdup(_label);
-}
-
-void Labeled_Button::render(GraphicsContext& gc)
-{
-    Button::render(gc);
-    vec2_i pos = getPosition();
-    vec2_i sz = getSize();
-    if (mouseOn) glColor3fv(gc.textColor / 2);
-    else glColor3fv(gc.textColor);
-    glEnable(GL_TEXTURE_2D);
-    glPushMatrix();
-    glTranslatef((int)(pos[0] + (sz[0] - gc.getFont()->getStrLen(label)) / 2),
-                 (int)(pos[1] + (sz[1] - gc.getFont()->getLineHeight()) / 2),
-                 0);
-    gc.getFont()->print(0, 0, label);
-    glPopMatrix();
-}
-
-
-// Label
-
-Label::Label(char * _label) : 
-        Component(),
-        label(NULL),
-        theFont(NULL),
-        colour(vec3_t( -1, -1, -1))
-{
-    setLabel(_label);
-    passThru = true;
-}
-
-Label::Label(char * _label, s_font * _theFont) :
-        Component(),
-        label(NULL),
-        theFont(_theFont),
-        colour(vec3_t( -1, -1, -1))
-{
-    setLabel(_label);
-    passThru = true;
-}
-
-Label::~Label()
-{
-    if (label) delete label;
-	label=NULL;
-}
-
-const char * Label::getLabel() const
-{
-    return label;
-}
-
-void Label::setLabel(char * _label)
-{
-    if (label) delete label;
-    label = strdup(_label);
-}
-
-void Label::render(GraphicsContext& gc)
-{
-    glEnable(GL_TEXTURE_2D);
-    if (colour[0] < 0) glColor3fv(gc.textColor);
-    else
-        glColor3fv(colour);
-    vec2_i pos = getPosition();
-    vec2_i sz = getSize();
-    glPushMatrix();
-    if (theFont == NULL)
-    {
-        glTranslatef(pos[0], pos[1] + (sz[1] - gc.getFont()->getLineHeight()) / 2, 0);
-        gc.getFont()->print(0, 0, label);
-    }
-    else
-    {
-        glTranslatef(pos[0], pos[1] + (sz[1] - theFont->getLineHeight()) / 2, 0);
-        theFont->print(0, 0, label);
-    }
-    glPopMatrix();
-}
-
-// TextLabel
-TextLabel::TextLabel(char * _label, s_font * _theFont) :
-    Container(),
-    label(NULL),
-    theFont(_theFont),
-    colour(vec3_t( -1, -1, -1))
-{
-    passThru = true;
-    if (theFont == NULL) return ;
-    setLabel(_label);
-}
-
-TextLabel::~TextLabel()
-{
-    if (label) delete label;
-	label=NULL;
-}
-
-const char * TextLabel::getLabel() const
-{
-    return label;
-}
-
-void TextLabel::setLabel(char * _label)
-{
-    if (label) delete label;
-    if (_label == NULL) return ;
-    label = strdup(_label);
-    components.clear();
-    Label * tempLabel;
-    char * pch;
-    int i = 0;
-    pch = strtok (label, "\n");
-    while (pch != NULL)
-    {
-        tempLabel = new Label(pch, theFont);
-        tempLabel->reshape(vec2_i(3,(int)( i*(theFont->getLineHeight() + 1) + 3)), vec2_i((int)theFont->getStrLen(pch), (int)theFont->getLineHeight()));
-        tempLabel->setColour(colour);
-        addComponent(tempLabel);
-        pch = strtok (NULL, "\n");
-        i++;
-    }
-}
-
-void TextLabel::setColour(vec3_t _colour)
-{
-    colour = _colour;
-    vector<Component*>::iterator iter = components.begin();
-    while (iter != components.end())
-    {
-        {
-            ((Label*)(*iter))->setColour(_colour);
-        }
-        iter++;
-    }
-}
-
-// FilledTextLabel
-FilledTextLabel::FilledTextLabel(char * _label, s_font * _theFont) : TextLabel(_label, _theFont)
-{
-}
-
-
-void FilledTextLabel::render(GraphicsContext& gc)
-{
-    glColor3fv(gc.baseColor);
-    vec2_i pos = getPosition();
-    vec2_i sz = getSize();
-
-    glEnable(GL_TEXTURE_2D);
-    glEnable(GL_BLEND);
-    glBindTexture(GL_TEXTURE_2D, gc.backGroundTexture->getID());
-    glBegin(GL_QUADS );
-        glTexCoord2f(0.0f, 0.0f); glVertex2i(pos[0], pos[1] + sz[1]); // Bas Gauche
-        glTexCoord2f(1.0f, 0.0f); glVertex2i(pos[0] + sz[0], pos[1] + sz[1]); // Bas Droite
-        glTexCoord2f(1.0f, 1.0f); glVertex2i(pos[0] + sz[0], pos[1]); // Haut Droit
-        glTexCoord2f(0.0f, 1.0f); glVertex2i(pos[0], pos[1]); // Haut Gauche
-    glEnd ();
-
-    glDisable(GL_TEXTURE_2D);
-    glBegin(GL_LINE_LOOP);
-        glVertex2f(pos[0]+0.5, pos[1]+0.5);
-        glVertex2f(pos[0] + sz[0]-0.5, pos[1]+0.5);
-        glVertex2f(pos[0] + sz[0]-0.5, pos[1] + sz[1]-0.5);
-        glVertex2f(pos[0]+0.5, pos[1] + sz[1]-0.5);
-    glEnd();
-
-    TextLabel::render(gc);
-}
-
 
 // Cursor Bar
 void ExtCursorBarClicCallback(int x, int y, enum guiValue state, enum guiValue button, Component * me)

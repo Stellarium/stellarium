@@ -50,14 +50,13 @@ void InitMeriParal(void)
 	{
 		sinTable[k] = (float)(27.0f * sin((k - 9) * Pi_Over_18));
 		register float _cos = (float)(cos((k - 9) * Pi_Over_18));
-		for (int j = 0; j < 51; ++j){
+		for (int j = 0; j < 51; ++j)
+		{
 			DmeriParalCos[k][j][0] = DmeriParal[j][0] * _cos;
 			DmeriParalCos[k][j][1] = DmeriParal[j][1] * _cos;
 		}
 	}
 }
-
-
 
 
 // Draw the cardinals points : N S E W (and Z (Zenith) N (Nadir))
@@ -88,10 +87,10 @@ void DrawCardinaux(draw_utility * du)
 	{
 		glBindTexture(GL_TEXTURE_2D,texIds[6]->getID());     //North
 		glBegin(GL_QUADS );
-			glTexCoord2f(0.0f,0.0f);    glVertex2f(x[0]-r,y[0]+r);  // Bottom Left
-			glTexCoord2f(1.0f,0.0f);    glVertex2f(x[0]+r,y[0]+r);  // Bottom Right
-			glTexCoord2f(1.0f,1.0f);    glVertex2f(x[0]+r,y[0]-r);  // Top Right
-			glTexCoord2f(0.0f,1.0f);    glVertex2f(x[0]-r,y[0]-r);  // Top Left
+			glTexCoord2f(0.0f,0.0f);    glVertex2f(x[0]-r,y[0]-r);  // Bottom Left
+			glTexCoord2f(1.0f,0.0f);    glVertex2f(x[0]+r,y[0]-r);  // Bottom Right
+			glTexCoord2f(1.0f,1.0f);    glVertex2f(x[0]+r,y[0]+r);  // Top Right
+			glTexCoord2f(0.0f,1.0f);    glVertex2f(x[0]-r,y[0]+r);  // Top Left
 		glEnd ();
 	}
 
@@ -99,10 +98,10 @@ void DrawCardinaux(draw_utility * du)
 	{
 		glBindTexture(GL_TEXTURE_2D, texIds[7]->getID());    //South
 		glBegin(GL_QUADS );
-			glTexCoord2f(0.0f,0.0f);    glVertex2f(x[1]-r,y[1]+r);  // Bottom Left
-			glTexCoord2f(1.0f,0.0f);    glVertex2f(x[1]+r,y[1]+r);  // Bottom Right
-			glTexCoord2f(1.0f,1.0f);    glVertex2f(x[1]+r,y[1]-r);  // Top Right
-			glTexCoord2f(0.0f,1.0f);    glVertex2f(x[1]-r,y[1]-r);  // Top Left
+			glTexCoord2f(0.0f,0.0f);    glVertex2f(x[1]-r,y[1]-r);  // Bottom Left
+			glTexCoord2f(1.0f,0.0f);    glVertex2f(x[1]+r,y[1]-r);  // Bottom Right
+			glTexCoord2f(1.0f,1.0f);    glVertex2f(x[1]+r,y[1]+r);  // Top Right
+			glTexCoord2f(0.0f,1.0f);    glVertex2f(x[1]-r,y[1]+r);  // Top Left
 		glEnd ();
 	}
 
@@ -110,10 +109,10 @@ void DrawCardinaux(draw_utility * du)
 	{
 		glBindTexture(GL_TEXTURE_2D, texIds[8]->getID());    //East
 		glBegin(GL_QUADS );
-			glTexCoord2f(0.0f,0.0f);    glVertex2f(x[2]-r,y[2]+r);  // Bottom Left
-			glTexCoord2f(1.0f,0.0f);    glVertex2f(x[2]+r,y[2]+r);  // Bottom Right
-			glTexCoord2f(1.0f,1.0f);    glVertex2f(x[2]+r,y[2]-r);  // Top Right
-			glTexCoord2f(0.0f,1.0f);    glVertex2f(x[2]-r,y[2]-r);  // Top Left
+			glTexCoord2f(0.0f,0.0f);    glVertex2f(x[2]-r,y[2]-r);  // Bottom Left
+			glTexCoord2f(1.0f,0.0f);    glVertex2f(x[2]+r,y[2]-r);  // Bottom Right
+			glTexCoord2f(1.0f,1.0f);    glVertex2f(x[2]+r,y[2]+r);  // Top Right
+			glTexCoord2f(0.0f,1.0f);    glVertex2f(x[2]-r,y[2]+r);  // Top Left
 		glEnd ();
 	}
 
@@ -121,10 +120,10 @@ void DrawCardinaux(draw_utility * du)
 	{
 		glBindTexture(GL_TEXTURE_2D, texIds[9]->getID());    //West
 		glBegin(GL_QUADS );
-			glTexCoord2f(0.0f,0.0f);    glVertex2f(x[3]-r,y[3]+r);  // Bottom Left
-			glTexCoord2f(1.0f,0.0f);    glVertex2f(x[3]+r,y[3]+r);  // Bottom Right
-			glTexCoord2f(1.0f,1.0f);    glVertex2f(x[3]+r,y[3]-r);  // Top Right
-			glTexCoord2f(0.0f,1.0f);    glVertex2f(x[3]-r,y[3]-r);  // Top Left
+			glTexCoord2f(0.0f,0.0f);    glVertex2f(x[3]-r,y[3]-r);  // Bottom Left
+			glTexCoord2f(1.0f,0.0f);    glVertex2f(x[3]+r,y[3]-r);  // Bottom Right
+			glTexCoord2f(1.0f,1.0f);    glVertex2f(x[3]+r,y[3]+r);  // Top Right
+			glTexCoord2f(0.0f,1.0f);    glVertex2f(x[3]-r,y[3]+r);  // Top Left
 		glEnd ();
 	}
 	
