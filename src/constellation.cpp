@@ -180,7 +180,8 @@ void Constellation::draw_art(Projector* prj) const
 		glEnable(GL_TEXTURE_2D);
     	glEnable(GL_BLEND);
 		glEnable(GL_CULL_FACE);
-    	glColor3f(1,1,1);
+		// for fade in
+		//    	glColor3f(1,1,1);
     	glBindTexture(GL_TEXTURE_2D, art_tex->getID());
 
 		prj->set_orthographic_projection();
