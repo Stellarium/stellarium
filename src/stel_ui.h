@@ -125,8 +125,37 @@ private:
 
 	TabContainer * config_tab_ctr;
 
+	// Rendering options
+	LabeledCheckBox* stars_cbx;
+	LabeledCheckBox* star_names_cbx;
+	FloatIncDec* max_mag_star_name;
+	LabeledCheckBox* star_twinkle_cbx;
+	FloatIncDec* star_twinkle_amount;
+	LabeledCheckBox* constellation_cbx;
+	LabeledCheckBox* constellation_name_cbx;
+	LabeledCheckBox* sel_constellation_cbx;
+	LabeledCheckBox* nebulas_cbx;
+	LabeledCheckBox* nebulas_names_cbx;
+	FloatIncDec* max_mag_nebula_name;
+	LabeledCheckBox* planets_cbx;
+	LabeledCheckBox* planets_hints_cbx;
+	LabeledCheckBox* moon_x4_cbx;
+	LabeledCheckBox* equator_grid_cbx;
+	LabeledCheckBox* azimuth_grid_cbx;
+	LabeledCheckBox* equator_cbx;
+	LabeledCheckBox* ecliptic_cbx;
+	LabeledCheckBox* ground_cbx;
+	LabeledCheckBox* cardinal_cbx;
+	LabeledCheckBox* atmosphere_cbx;
+	LabeledCheckBox* fog_cbx;
+
+
+	// Date & Time options
+	Time_item* time_current;
+
 	void updateConfigVariables(void);
 	void updateConfigForm(void);
+	void setCurrentTimeFromConfig(void);
 
 	////////////////////////////////////////////////////////////////////////////
 	// Text UI components

@@ -141,6 +141,61 @@ void stel_sdl::start_main_loop(void)
 						{
 							TerminateApplication();
 						}
+
+						if (E.key.keysym.sym==SDLK_s && (SDL_GetModState() & KMOD_CTRL) &&
+							(Screen->flags & SDL_OPENGL))
+                        {
+							string tempName;
+							char c[3];
+							FILE *fp;
+
+							SDL_Surface * temp = SDL_CreateRGBSurface(SDL_SWSURFACE, Screen->w, Screen->h, 24,
+#if SDL_BYTEORDER == SDL_LIL_ENDIAN
+	0x000000FF, 0x0000FF00, 0x00FF0000, 0
+#else
+	0x00FF0000, 0x0000FF00, 0x000000FF, 0
+#endif
+								);
+							if (temp == NULL) exit(-1);
+
+							unsigned char * pixels = (unsigned char *) malloc(3 * Screen->w * Screen->h);
+							if (pixels == NULL)
+							{
+								SDL_FreeSurface(temp);
+								exit(-1);
+							}
+
+							glReadPixels(0, 0, Screen->w, Screen->h, GL_RGB, GL_UNSIGNED_BYTE, pixels);
+
+							for (int i=0; i<Screen->h; i++)
+							{
+								memcpy(((char *) temp->pixels) + temp->pitch * i,
+										pixels + 3*Screen->w * (Screen->h-i-1), Screen->w*3);
+							}
+							free(pixels);
+
+							for(int j=0; j<=100; ++j)
+							{
+								snprintf(c,3,"%d",j);
+								string shotdir = "";
+#ifdef MACOSX
+								shotdir = "/Desktop";
+#else
+								if (string(getenv("DESKTOP")) == "kde") shotdir = "/Desktop";
+#endif
+								tempName = string(getenv("HOME")) + shotdir + "/stellarium" + c + ".bmp";
+								fp = fopen(tempName.c_str(), "r");
+								if(fp == NULL)
+									break;
+								else
+									fclose(fp);
+							}
+
+							SDL_SaveBMP(temp, tempName.c_str());
+							SDL_FreeSurface(temp);
+							cout << "Saved screenshot to file : " << tempName << endl;
+						}
+
 					}
 					// Rescue escape in case of lock : CTRL + ESC forces brutal quit
 					if (E.key.keysym.sym==SDLK_ESCAPE && (SDL_GetModState() & KMOD_CTRL)) TerminateApplication();

@@ -179,6 +179,8 @@ private:
 
 	Vec3f ConstLinesColor;
 	Vec3f ConstNamesColor;
+	Vec3f NebulaLabelColor;
+	Vec3f NebulaCircleColor;
 
 	// Text UI
 	int FlagEnableTuiMenu;
@@ -196,7 +198,8 @@ private:
 	float MaxMagNebulaName;
     int FlagNebulaCircle;
     int FlagMilkyWay;
-
+	int FlagBrightNebulae;
+	
 	// Landscape
     int FlagGround;
     int FlagHorizon;

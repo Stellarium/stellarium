@@ -321,7 +321,7 @@ namespace s_gui
 	    virtual ~FloatIncDec();
 		virtual void draw();
         virtual const float getValue() const {return value;}
-		virtual void setValue(int v) {value=v; if(value>max) value=max; if(value<min) value=min;}
+		virtual void setValue(float v) {value=v; if(value>max) value=max; if(value<min) value=min;}
 	protected:
 		void inc_value() {value+=inc; if(value>max) value=max; if (!onPressCallback.empty()) onPressCallback();}
 		void dec_value() {value-=inc; if(value<min) value=min; if (!onPressCallback.empty()) onPressCallback();}
@@ -339,8 +339,12 @@ namespace s_gui
 			const s_texture* tex_down = NULL, double _JD = 2451545.0);
 		double getJDay(void) const;
 		void setJDay(double jd);
+		virtual void draw();
+		void onTimeChange(void);
+		virtual void setOnChangeTimeCallback(callback<void> c) {onChangeTimeCallback = c;}
     protected:
-		IntIncDecVert* d, *m, *y, *h, *mn, *s;
+		IntIncDec* d, *m, *y, *h, *mn, *s;
+		callback<void> onChangeTimeCallback;
     };
 
 	class LabeledCheckBox : public Container

@@ -1136,32 +1136,40 @@ Time_item::Time_item(const s_font* _font, const s_texture* tex_up,
 						d(NULL), m(NULL), y(NULL), h(NULL), mn(NULL), s(NULL)
 {
 	if (_font) setFont(_font);
-	y = new IntIncDecVert(getFont(), tex_up, tex_down, -9999, 99999, 1930, 1);
-	m = new IntIncDecVert(getFont(), tex_up, tex_down, 1, 12, 12, 1);
-	d = new IntIncDecVert(getFont(), tex_up, tex_down, 1, 31, 11, 1);
-	h = new IntIncDecVert(getFont(), tex_up, tex_down, 0, 23, 16, 1);
-	mn= new IntIncDecVert(getFont(), tex_up, tex_down, 0, 59, 35, 1);
-	s = new IntIncDecVert(getFont(), tex_up, tex_down, 0, 59, 23, 1);
 
-	m->setPos(60,30); m->setSize(30, 32);
-	d->setPos(95,0); d->setSize(30, 32);
-	h->setPos(135,0); h->setSize(30, 32);
-	mn->setPos(165,0);mn->setSize(30, 32);
-	s->setPos(195,0); s->setSize(30, 32);
+	y = new IntIncDec(getFont(), tex_up, tex_down, -9999, 99999, 1930, 1);
+	m = new IntIncDec(getFont(), tex_up, tex_down, 1, 12, 12, 1);
+	d = new IntIncDec(getFont(), tex_up, tex_down, 1, 31, 11, 1);
+	h = new IntIncDec(getFont(), tex_up, tex_down, 0, 23, 16, 1);
+	mn= new IntIncDec(getFont(), tex_up, tex_down, 0, 59, 35, 1);
+	s = new IntIncDec(getFont(), tex_up, tex_down, 0, 59, 23, 1);
 
-	Label* l1 = new Label("Year");
-	l1->setPos(0,1);
-	y->setPos(40,0); y->setSize(55, 32);
+	y->setOnPressCallback(callback<void>(this, &Time_item::onTimeChange));
+	m->setOnPressCallback(callback<void>(this, &Time_item::onTimeChange));
+	d->setOnPressCallback(callback<void>(this, &Time_item::onTimeChange));
+	h->setOnPressCallback(callback<void>(this, &Time_item::onTimeChange));
+	mn->setOnPressCallback(callback<void>(this, &Time_item::onTimeChange));
+	s->setOnPressCallback(callback<void>(this, &Time_item::onTimeChange));
 
-	Label* l2 = new Label("Month");
-	l2->setPos(0,30);
+	Label* l1 = new Label("Year"); l1->setPos(5,5);
+	y->setPos(50,5); y->setSize(50, 32);
 
-	Label* l3 = new Label(":");
-	l3->setPos(162,1);
-	Label* l4 = new Label(":");
-	l4->setPos(192,1);
+	Label* l2 = new Label("Month"); l2->setPos(5,25);
+	m->setPos(50,25); m->setSize(50, 32);
 
-	setSize(220, 140);
+	Label* l3 = new Label("Day"); l3->setPos(5,45);
+	d->setPos(50,45); d->setSize(50, 32);
+
+	Label* l4 = new Label("Hour"); l4->setPos(130,5);
+	h->setPos(190,5); h->setSize(50, 32);
+
+	Label* l5 = new Label("Minutes"); l5->setPos(130,25);
+	mn->setPos(190,25);mn->setSize(50, 32);
+
+	Label* l6 = new Label("Seconds"); l6->setPos(130,45);
+	s->setPos(190,45); s->setSize(50, 32);
+
+	setSize(230, 65);
 
 	addComponent(y);
 	addComponent(m);
@@ -1174,6 +1182,8 @@ Time_item::Time_item(const s_font* _font, const s_texture* tex_up,
 	addComponent(l2);
 	addComponent(l3);
 	addComponent(l4);
+	addComponent(l5);
+	addComponent(l6);
 
 	setJDay(_JD);
 }
@@ -1247,6 +1257,19 @@ void Time_item::setJDay(double JD)
 	h->setValue(ih);
 	mn->setValue(imn);
 	s->setValue(S_ROUND(is));
+}
+
+void Time_item::draw()
+{
+    if (!visible) return;
+	painter.drawSquareEdge(pos, size);
+	painter.drawSquareFill(pos, size);
+	Container::draw();
+}
+
+void Time_item::onTimeChange(void)
+{
+	if (!onChangeTimeCallback.empty()) onChangeTimeCallback();
 }
 
 Picture::Picture(s_texture * _imageTex, int xpos, int ypos, int xsize, int ysize) : imageTex(_imageTex)
