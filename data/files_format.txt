@@ -1,0 +1,107 @@
+Note about the files formats :
+
+1. commonname.fab and name.fab
+desc : Contains the commonly used stars names.
+type : ascii file, fields separated by | (pipe), end of line is CR ('\n')
+line example : 62956|Alioth
+line format  : HPnum|Star_Name
+	- HPnum : (unsigned int) Hipparcos catalog star number
+	- Star_Name : (string) The name string without spaces. The '_' will be
+	  replaced by space in the program.
+
+2. constellationsart.fab
+desc : Contains the constellation art info : i.e. for drawing of mythologic
+       figures.
+type : ascii file, fields separated by SPACE, end of line is CR ('\n')
+line example : Lep lepus_m 104 57 24305 90 29 24845 33 42 27288
+line format  : ConstRef TextureFile x1 y1 HP1 x2 y2 HP2 x3 y3 HP3
+	- ConstRef : Short international name abreviation in 3 characters, first char
+	  in Capital letter
+	- TextureFile : Texture file name without the extension (no space character). The texture file has to be in
+	  the stellarium texture directory.
+	- x1 y1 hp1 (respectively 2 and 3) : the x and y position of the matching star
+	  with hipparcos number hp1 (respectively 2 and 3) on the texture image. The
+	  values are in pixels with the (0,0) in the upper left corner.
+Note : the associated texture file must be in png format and have no alpha channel. The drawing background must be black.
+
+3. constellationship.fab
+desc : Contains the constellations lines shape.
+type : ascii file, fields separated by SPACE, end of line is CR ('\n')
+line example : And ANDROMEDE ANDROMEDA 3  9640 5447 5447 4436 4436 3881
+line format : ConstRef ConstCommonName ConstInternationnalName NumberOfSegments seg11 seg12 seg21 seg22 etc...
+	- ConstRef : Short international name abreviation in 3 characters, first char
+	  in Capital letter
+	- ConstCommonName : Commonly used name (currently in french!)
+	- ConstInternationnalName : The latin internationnal name.
+	- NumberOfSegments : the number of segments in the shape.
+	- segx1 segx2 : the hipparcos number of the stars 1 and 2 joined to form the xth segment.
+
+4. courierfont.txt and spacefont.txt
+desc : contains the characters position on the font texture.
+type : ascii file, fields separated by SPACE, end of line is CR ('\n')
+first line format : CourierFont LineSize 21
+	- Font Name
+	- LineSize s : s is the maximum character height.
+other lines example : 065 02 2 14 21 0
+other lines format : ascii# x y w h s
+	- ascii# : ascii number of the character
+	- x y : position of the upper left corner of the character in the font texture (in pixel).
+	- w h : width and height of the character on the texture
+	- s : space to add at the end of the char when displaying.
+
+5. messier.fab
+desc : Contains the nebula list (not only messier)
+type : ascii file, fields separated by SPACE, end of line is CR ('\n')
+line example : 1952 RS 05 34.5 +22 +01 8.2 06.0 0 M1_-_Crab_Nebula m1
+lines format : NGCnumber NebulaType hh min.mm deg min.mm mag size texRotation Name TexName
+	- NGCnumber : NGC catalog number
+	- NebulaType : TODO and change..
+	- hh min.mm : Right ascention hour and minutes and tenth of minutes
+	- deg min.mm : Declinaison in degree min and tenth of minutes
+	- mag : magnitude
+	- size : angular size in arcminute
+	- Name : Nebula name with spaces replaced by '_'
+	- TexName : texture file name. png file without alpha chanel.
+
+6. name.txt
+desc : More info about stars, not used anymore.
+
+7. ssystem.ini
+desc : Solar system bodies informations.
+type : ini file. One section per body.
+Section example :
+[io]							// Section name, has to be unique
+name = Io						// Body name
+parent = Jupiter				// Body parent
+radius = 1821.					// Radius in km
+halo = true						// Do we have to draw a small halo like a star?
+color = 1.,1.,1.				// Halo color
+tex_map = io					// Texture map file without extension (has to .png)
+tex_halo = star16x16			// Halo texture file
+lightning = true				// Compute shadow on it
+albedo = 0.61					// Body albedo (how it reflects light) range 0 to 1
+rot_rotation_offset = 220.8		// For texture alignment
+rot_obliquity = 0.0				// Planet Obliquity (rotation axe inclination relatie to the orbit plane)
+coord_func = ell_orbit			// Define the coordinate computation funcion : can be a custom func or "ell_orbit"
+orbit_Epoch = 2443000.00038375	// Ell_orbit calculation parameter
+orbit_Period = 1.769138			// 			"		"
+orbit_SemiMajorAxis = 421600	// 			"		"
+orbit_Eccentricity = 0.0041		// 			"		"
+orbit_Inclination = 0.040		// 			"		"
+orbit_AscendingNode = 312.981	// 			"		"
+orbit_LongOfPericenter = 97.735	// 			"		"
+orbit_MeanLongitude = 106.724	// 			"		"
+
+8. landscape.ini
+desc : Landscape skins descriptions.
+type : ini file. One section per landscape.
+Note : There can be 2 landscape types, the ones made from a fisheye picture
+	   and the ones made from many smaller textures.
+The fisheye textures must be centered on the zenith, north on the bottom.
+Section example for a fisheye :
+[palm]								// Section name
+name = Palm							// Landscape name
+type = fisheye						// Type = fisheye
+maptex = landscapes/horizonalpha512	// Fisheye texture file name
+texturefov = 210					// Field of View covered by the texture (180 = half dome, 360 = full sphere)
+author = Gérard_Dupontd				// Author name
