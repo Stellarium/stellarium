@@ -18,6 +18,10 @@
 
 #include "stel_sdl.h"
 
+#ifdef HAVE_SDL_MIXER_H
+#include "SDL_mixer.h"
+#endif
+
 stel_sdl::stel_sdl(stel_core * _core)
 {
 	if (!_core)
@@ -38,6 +42,7 @@ void stel_sdl::init(void)
     Uint32	Vflags;		// Our Video Flags
     Screen = NULL;
 
+#ifdef HAVE_SDL_MIXER_H
     // audio parameters
     int audio_rate = 22050;
     Uint16 audio_format = AUDIO_S16SYS; /* 16-bit stereo */
@@ -45,21 +50,34 @@ void stel_sdl::init(void)
     int audio_buffers = 4096;
 
     // Init the SDL library, the VIDEO subsystem    
-    if(SDL_Init(SDL_INIT_VIDEO |  SDL_INIT_AUDIO | SDL_INIT_NOPARACHUTE)<0) {
-      // couldn't init audio, so try without
-      printf("Unable to open SDL with audio: %s\n", SDL_GetError() );
+    if(SDL_Init(SDL_INIT_VIDEO |  SDL_INIT_AUDIO | SDL_INIT_NOPARACHUTE)<0)
+	{
+		// couldn't init audio, so try without
+		printf("Unable to open SDL with audio: %s\n", SDL_GetError() );
 
-      if(SDL_Init(SDL_INIT_VIDEO | SDL_INIT_NOPARACHUTE)<0) {
-	printf("Unable to open SDL: %s\n", SDL_GetError() );
-	exit(-1);
-      }
-    } else {
-      // initialized with audio enabled
-      // TODO: only initi audio if config option allows and script needs
-      if(Mix_OpenAudio(audio_rate, audio_format, audio_channels, audio_buffers)) {
-	printf("Unable to open audio!\n");
-      }
-    }
+		if(SDL_Init(SDL_INIT_VIDEO | SDL_INIT_NOPARACHUTE)<0)
+		{
+			printf("Unable to open SDL: %s\n", SDL_GetError() );
+			exit(-1);
+		}
+    } 
+	else
+	{
+		// initialized with audio enabled
+		// TODO: only initi audio if config option allows and script needs
+		if(Mix_OpenAudio(audio_rate, audio_format, audio_channels, audio_buffers))
+		{
+			printf("Unable to open audio!\n");
+		}
+	}
+#else
+	// SDL_mixer is not available - no audio
+	if(SDL_Init(SDL_INIT_VIDEO | SDL_INIT_NOPARACHUTE)<0)
+	{
+		printf("Unable to open SDL: %s\n", SDL_GetError() );
+		exit(-1);
+	}
+#endif
 
     // Make sure that SDL_Quit will be called in case of exit()
     atexit(SDL_Quit);

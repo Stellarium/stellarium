@@ -63,7 +63,7 @@ float stel_atmosphere::get_intensity(void)
   return atm_intensity;
 }
 
-void stel_atmosphere::compute_color(double JD,  int delta_time, Vec3d sunPos, Vec3d moonPos, float moon_phase,
+void stel_atmosphere::compute_color(double JD, int delta_time, Vec3d sunPos, Vec3d moonPos, float moon_phase,
 	tone_reproductor * eye, Projector* prj,
 	float latitude, float altitude, float temperature, float relative_humidity)
 {

@@ -26,28 +26,23 @@
 class Constellation_mgr  
 {
 public:
-  //    Constellation_mgr(Vec3f lines_color = Vec3f(0.1, 0.15, 0.2), Vec3f lines_color = Vec3f(0.1,0.2,0.3));
     Constellation_mgr(string _data_dir, string _sky_culture, string _sky_locale, 
 		Hip_Star_mgr *_hip_stars, string _font_filename, int barx, int bary, 
 		Vec3f _lines_color, Vec3f _names_color);
     virtual ~Constellation_mgr();
     int set_sky_culture(string _sky_culture, const string& _font_fileName, int barx, int bary);
-    void show_art(void);
-    void hide_art(void);
     void draw(Projector* prj) const;
-    // Draw one constellation of internationnal name Abr
-    void draw(Projector* prj, char abr[4]) const;
     void draw_names(Projector* prj, bool gravity_label);
-    void draw_one_name(Projector* prj, Constellation*, bool gravity_label) const;
-    void draw_art(Projector* prj, navigator* nav, int delta_time);
+    void draw_art(Projector* prj, navigator* nav);
     Constellation* is_star_in(const Hip_Star *) const;
     Constellation* find_from_short_name(const string& shortname) const;
     int  set_sky_locale(const string& _sky_locale);
-    void set_art_fade_duration(float duration);
-    void set_art_intensity(float intensity);
-
+	void set_art_fade_duration(float duration) {art_switch->set_duration((int)(duration*1000.f));}
+	void set_art_intensity(float _max) {art_switch->set_max_value(_max);}
+	void update(int delta_time) {art_switch->update(delta_time);}
+	void show_art(bool b){*art_switch = b;}
+	void set_selected(Constellation* c) {selected=c;}
 private:
-
     int load(const string& catName, const string& artCatName,
 		Hip_Star_mgr * _VouteCeleste, const string& _font_fileName, int barx, int bary);
 
@@ -58,7 +53,8 @@ private:
     string dataDir;
     string skyCulture;
     string skyLocale;
-    bool JustLoaded;
+	linear_switchor* art_switch;
+	Constellation* selected;
 };
 
 #endif // _CONSTELLATION_MGR_H_

@@ -24,24 +24,22 @@
 #include "stellarium.h"
 #include "stel_utility.h"
 #include "s_font.h"
-
+#include "switchor.h"
 
 class Constellation
 {
     friend class Constellation_mgr;
 public:
     Constellation();
-    virtual ~Constellation();
-    void show_art(void);
-    void hide_art(void);
+    ~Constellation();
     int read(FILE *, Hip_Star_mgr * _VouteCeleste);
     void draw(Projector* prj, const Vec3f& lines_color) const;
     void draw_name(s_font * constfont, Projector* prj) const;
-    void draw_art(Projector* prj, navigator* nav, int delta_time);
+    void draw_art(Projector* prj, navigator* nav);
     const Constellation* is_star_in(const Hip_Star *) const;
 private:
     void draw_optim(Projector* prj) const;
-    void draw_art_optim(Projector* prj, navigator* nav, int delta_time);
+    void draw_art_optim(Projector* prj, navigator* nav);
     void set_common_name(string _name) { inter = _name; }
     string name;
     char short_name[4];
@@ -56,10 +54,6 @@ private:
 	static s_font* constellation_font;		// Font used for load printing
 	
 	Vec3d art_vertex[9];
-	bool art_on;
-	float art_intensity;
-	static float max_art_intensity;
-	static float art_fade_duration;
 };
 
 #endif // _CONSTELLATION_H_
