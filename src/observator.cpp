@@ -159,24 +159,32 @@ string Observator::get_time_zone_name_from_system(double JD) const
 }
 
 
-
 // Return the number of hours to add to gmt time to get the local time in day JD
 // taking the parameters from system. This takes into account the daylight saving
 // time if there is. (positive for Est of GMT)
 // TODO : %z in strftime only works on GNU compiler
+// Fixed 31-05-2004 Now use the extern variables set by tzset()
 float Observator::get_GMT_shift_from_system(double JD) const
 {
-	time_t rawtime = get_time_t_from_julian(JD);
+	return -(float)timezone/3600 + (daylight!=0);
+
+	
+/*	time_t rawtime = get_time_t_from_julian(JD);
 
 	struct tm * timeinfo;
 	timeinfo = localtime(&rawtime);
 	static char heure[20];
 	heure[0] = '\0';
 	my_strftime(heure, 19, "%z", timeinfo);
+	cout << heure << endl;
+
+	cout << timezone << endl;
+	
 	heure[5] = '\0';
 	float min = 1.f/60.f * atoi(&heure[3]);
 	heure[3] = '\0';
 	return min + atoi(heure);
+	*/
 }
 
 // Return the time in ISO 8601 format that is : %Y-%m-%d %H:%M:%S
