@@ -1,4 +1,4 @@
-/* 
+/*
  * Stellarium
  * Copyright (C) 2002 Fabien Chéreau
  * 
@@ -21,6 +21,10 @@
 
 #ifndef _S_FONT_H
 #define _S_FONT_H
+
+#ifdef HAVE_CONFIG_H
+# include <config.h>
+#endif
 
 #ifdef MACOSX
 # include <OpenGL/gl.h>
