@@ -1,6 +1,6 @@
 /*
  * Stellarium
- * Copyright (C) 2002 Fabien Chï¿½eau
+ * Copyright (C) 2002 Fabien Chéreau
  * 
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -49,114 +49,70 @@ Nebula_mgr::~Nebula_mgr()
 int Nebula_mgr::read(const string& font_fileName, const string& fileName, int barx, int bary)
 {
   char tmpstr[255];
-  int total=0;
+  loaded=total=0;
 
   printf(_("Loading nebulas data...\n"));
 
-	FILE * fic;
-	fic = fopen(fileName.c_str(),"r");
-    if (!fic)
-	{
-		printf("ERROR : Can't open nebula catalog %s\n",fileName.c_str());
-		exit(-1);
-	}
+  nebula_fic = fopen(fileName.c_str(),"r");
+  if (!nebula_fic) {
+    printf("ERROR : Can't open nebula catalog %s\n",fileName.c_str());
+    return -1;
+  }
 
-    // determine total number to be loaded for percent complete display
-    while( fgets(tmpstr,255,fic) ) {
-      total++;
-    }
-    rewind(fic);
+  // determine total number to be loaded for percent complete display
+  while( fgets(tmpstr,255,nebula_fic) ) {
+    total++;
+  }
+  rewind(nebula_fic);
+  
+  printf(_("%d deep space objects will be loaded\n"), total);
 
-    printf(_("Reading a total of %d nebulas\n"), total);
-
-    if (!Nebula::nebula_font) Nebula::nebula_font = new s_font(12.,"spacefont", font_fileName); // load Font
-    if (!Nebula::nebula_font)
+  if (!Nebula::nebula_font) Nebula::nebula_font = new s_font(12.,"spacefont", font_fileName); // load Font
+  if (!Nebula::nebula_font)
     {
-	    printf("Can't create nebulaFont\n");
-        exit(1);
+      printf("Can't create nebulaFont\n");
+      return(1);
     }
+  
+  Nebula::tex_circle = new s_texture("neb");   // Load circle texture
+  
+  if(total<1) {
+    fclose(nebula_fic);
+    return(0);
+  }
 
-    Nebula::tex_circle = new s_texture("neb");   // Load circle texture
+  read_one();
 
-    if(total<1) {
-      fclose(fic);
-      return(0);
-    }
-
-    int current=0;
-
-    glDisable(GL_BLEND);
-    glLineWidth(2);
+  return 0;
+}
 
 
-    Nebula * e = NULL;
-    for(;;)
+void Nebula_mgr::read_one() {
+
+  if(loaded > total ) return;
+  if( total < 1 ) return;
+
+  Nebula * e = NULL;
+
+  e = new Nebula;
+  int temp = e->read(nebula_fic);
+  if (temp==0) // eof
     {
+      if (e) delete e;
+      e = NULL;
+      fclose(nebula_fic);
+      printf(_("Done loading DSOs\n"));
+    } else {
 
-      // *** TESTING ONLY!
-      //      if(current/total > .70 ) {
-      //	sleep(1);
-      //}
-      glClear(GL_COLOR_BUFFER_BIT);
-      sprintf(tmpstr, _("Loading deep space objects: %d/%d"), current, total);
-
-      glColor3f(1,1,1);
-
-	  glDisable(GL_TEXTURE_2D);
-      glBegin(GL_TRIANGLE_STRIP);
-        glTexCoord2i(1,0);              // Bottom Right
-        glVertex3f(barx+302,bary+22, 0.0f);
-        glTexCoord2i(0,0);              // Bottom Left
-        glVertex3f(barx-2,bary+22, 0.0f);
-        glTexCoord2i(1,1);              // Top Right
-        glVertex3f(barx+302, bary-2,0.0f);
-        glTexCoord2i(0,1);              // Top Left
-        glVertex3f(barx-2,bary-2,0.0f);
-      glEnd ();
-
-      glColor3f(0.0f,0.0f,1.0f);
-
-      glBegin(GL_TRIANGLE_STRIP);
-        glTexCoord2i(1,0);              // Bottom Right
-        glVertex3f(barx+300*current/total,bary+20, 0.0f);
-        glTexCoord2i(0,0);              // Bottom Left
-        glVertex3f(barx,bary+20, 0.0f);
-        glTexCoord2i(1,1);              // Top Right
-        glVertex3f(barx+300*current/total, bary,0.0f);
-        glTexCoord2i(0,1);              // Top Left
-        glVertex3f(barx,bary,0.0f);
-      glEnd ();
-
-      glColor3f(1,1,1);
-
-	  glEnable(GL_TEXTURE_2D);
-      Nebula::nebula_font->print(barx-2,bary+35, tmpstr);
-
-
-
-      SDL_GL_SwapBuffers();				// And swap the buffers
-
-      e = new Nebula;
-      int temp = e->read(fic);
-      if (temp==0) // eof
-        {
-	  if (e) delete e;
-	  e = NULL;
-	  break;
-        }
       e->setFontColor(defaultfontcolor);
       e->setCircleColor(defaultcirclecolor);
       if (temp==1 || temp==2) neb_array.push_back(e);
-
-      current++;
-
     }
-    fclose(fic);
-    glDisable(GL_TEXTURE_2D);
-    glLineWidth(1);
 
-    return 0;
+  loaded++;
+      
 }
+
 
 // Draw all the Nebulaes
 void Nebula_mgr::draw(int names_ON, Projector* prj, const navigator * nav, tone_reproductor* eye, bool _gravity_label, float max_mag_name, bool bright_nebulae)
@@ -185,6 +141,10 @@ void Nebula_mgr::draw(int names_ON, Projector* prj, const navigator * nav, tone_
     	}
       prj->reset_perspective_projection();
     }
+
+    // load nebulas one per frame until all loaded
+    read_one();
+
 }
 
 // Look for a nebulae by XYZ coords
