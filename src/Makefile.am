@@ -24,6 +24,7 @@ s_texture.h         s_texture.cpp \
 s_font.h            s_font.cpp \
 s_gui.h             s_gui.cpp \
 s_gui_window.h      s_gui_window.cpp \
+orbit.h	solve.h		orbit.cpp \
 parsecfg.h          parsecfg.c \
 stellarium.h stella_types.h \
 vecmath.h bytes.h

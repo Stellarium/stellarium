@@ -288,8 +288,8 @@ void navigator::update_transform_matrices(void)
 	// POS = LOC but at the real position on the planet (ie including radius translation)
 
 	// Tested : OK for earth
-	Mat4d POS_to_LOC =	Mat4d::translation(Vec3d(0.,0., 6378.1/UA+(double)position.altitude/UA/1000));
-	Mat4d LOC_to_POS =	Mat4d::translation(Vec3d(0.,0.,-6378.1/UA-(double)position.altitude/UA/1000));
+	Mat4d POS_to_LOC =	Mat4d::translation(Vec3d(0.,0., 6378.1/AU+(double)position.altitude/AU/1000));
+	Mat4d LOC_to_POS =	Mat4d::translation(Vec3d(0.,0.,-6378.1/AU-(double)position.altitude/AU/1000));
 
 	Mat4d GEO_to_LOC = 	Mat4d::yrotation((-90.+position.latitude)*M_PI/180.) *
 						Mat4d::zrotation(-position.longitude*M_PI/180.);

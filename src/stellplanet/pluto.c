@@ -256,7 +256,7 @@ void get_pluto_helio_coords (double JD, double * X, double * Y, double * Z)
 	/* calc L, B, R */
 	L = PI/180. * (238.958116 + 144.96 * t + sum_longitude * 0.000001);
 	B = PI/180. * (-3.908239 + sum_latitude * 0.000001);
-	R = PI/180. * (40.7241346 + sum_radius * 0.0000001);
+	R = (40.7241346 + sum_radius * 0.0000001);
 
 	/* convert to rectangular coord */
 	sphe_to_rect(L, B, R, X, Y, Z);
