@@ -97,11 +97,13 @@ bool Branch::onKey(SDLKey k, S_TUI_VALUE v)
 			if (k==SDLK_UP)
 			{
 				if (current!=childs.begin()) --current;
+				else current=--childs.end();
 				return true;
 			}
 			if (k==SDLK_DOWN)
 			{
 				if (current!=--childs.end()) ++current;
+				else current=childs.begin();
 				return true;
 			}
 			return false;

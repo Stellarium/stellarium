@@ -163,6 +163,7 @@ void Constellation::draw_art(Projector* prj) const
 		glBlendFunc(GL_ONE, GL_ONE);
 		glEnable(GL_TEXTURE_2D);
     	glEnable(GL_BLEND);
+		glEnable(GL_CULL_FACE);
 
     	glColor3f(1,1,1);
     	glBindTexture(GL_TEXTURE_2D, art_tex->getID());
@@ -176,6 +177,8 @@ void Constellation::draw_art(Projector* prj) const
         	glTexCoord2i(0,1);
 			prj->project_earth_equ(art_vertex[3],v); glVertex3dv(v);
     	glEnd();
+
+		glDisable(GL_CULL_FACE);
 		glDisable(GL_BLEND);
 		glDisable(GL_TEXTURE_2D);
 	}

@@ -54,6 +54,12 @@ public:
 	string get_printable_time_UTC(double JD) const;
 	string get_printable_time_local(double JD) const;
 
+	// Return the time in ISO 8601 format that is : %Y-%m-%d %H:%M:%S
+	string get_ISO8601_time_UTC(double JD) const;
+
+	// Return the time zone name taken from system locale
+	string get_time_zone_name_from_system(double JD) const;
+
 	void set_GMT_shift(int t) {GMT_shift=t;}
 	int get_GMT_shift(double JD = 0) const;
 	void set_latitude(double l) {latitude=l;}
@@ -64,6 +70,11 @@ public:
 	int get_altitude(void) const {return altitude;}
 	void set_landscape_name(string s) {landscape_name = s;}
 	string get_landscape_name(void) const {return landscape_name;}
+
+	string get_time_format_str(void) const {return s_time_format_to_string(time_format);}
+	void set_time_format_str(const string& tf) {time_format=string_to_s_time_format(tf);}
+	string get_date_format_str(void) const {return s_date_format_to_string(date_format);}
+	void set_date_format_str(const string& df) {date_format=string_to_s_date_format(df);}
 
 private:
 	string name;			// Position name
@@ -78,13 +89,18 @@ private:
 
 	unsigned int planet;	// Planet number : 0 floating, 1 Mercure - 9 pluton
 
-	// Return the time zone name taken from system locale
-	string get_time_zone_name_from_system(double JD) const;
-
 	// Return the number of hours to add to gmt time to get the local time at tim JD
 	// taking the parameters from system. This takes into account the daylight saving
 	// time if there is. (positive for Est of GMT)
 	int get_GMT_shift_from_system(double JD) const;
+
+	// Convert the time format enum to its associated string and reverse
+	S_TIME_FORMAT string_to_s_time_format(const string&) const;
+	string s_time_format_to_string(S_TIME_FORMAT) const;
+
+	// Convert the date format enum to its associated string and reverse
+	S_DATE_FORMAT Observator::string_to_s_date_format(const string& df) const;
+	string Observator::s_date_format_to_string(S_DATE_FORMAT df) const;
 };
 
 

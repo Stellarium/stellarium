@@ -497,25 +497,47 @@ void Projector::sCylinder(GLdouble radius, GLdouble height, GLint slices, GLint 
 void Projector::print_gravity180(const s_font* font, float x, float y, const string& str,
 	float xshift, float yshift) const
 {
-	static float dx, dy, d;
+	static float dx, dy, d, theta, psi;
 	dx = x-(vec_viewport[0] + vec_viewport[2]/2);
-	dy = y-(vec_viewport[1] + vec_viewport[3]/2) - 0.1;
+	dy = y-(vec_viewport[1] + vec_viewport[3]/2);
 	d = sqrt(dx*dx + dy*dy);
+
+	// If the text is too far away to be visible in the screen return
 	if (d>MY_MAX(vec_viewport[3], vec_viewport[2])*2) return;
+
 	//cout << dx << " " << dy << endl;
-	float theta = M_PI + atan2(dx, dy);
-	float psi = atan2((float)font->getStrLen(str)/str.length(),d) * 180./M_PI;
-	if (psi>10) psi = 10;
+
+	// When distance to center of screen is too small strange behaviours appear
+	if (d<50)
+	{
+		theta = 0.f;
+		psi = 5;
+		set_orthographic_projection();
+		glTranslatef(x,y,0);
+		glTranslatef(xshift,yshift,0);
+		glScalef(1, -1, 1);
+		for (unsigned int i=0;i<str.length();++i)
+		{
+			font->print_char(str[i]);
+			if (str[i]!=16 && str[i]!=17 &&str[i]!=18) glRotatef(psi,0,0,-1);
+		}
+		reset_perspective_projection();
+		return;
+	}
+
+	theta = M_PI + atan2f(dx, dy);
+	psi = atan2f((float)font->getStrLen(str)/str.length(),d) * 180./M_PI;
+	if (psi>5) psi = 5;
 	set_orthographic_projection();
 	glTranslatef(x,y,0);
 	glRotatef(theta*180./M_PI,0,0,-1);
 	glTranslatef(sinf(xshift/d)*d,(1.f-cosf(xshift/d))*d + yshift,0);
-	//glRotatef(xshift/d*180./M_PI,0,0,1);
+	glRotatef(xshift/d*180./M_PI,0,0,1);
 	glScalef(1, -1, 1);
 	for (unsigned int i=0;i<str.length();++i)
 	{
 		font->print_char(str[i]);
-		glRotatef(psi,0,0,-1);
+		if (str[i]!=16 && str[i]!=17 &&str[i]!=18) glRotatef(psi,0,0,-1);
 	}
 	reset_perspective_projection();
 }

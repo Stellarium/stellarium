@@ -20,6 +20,8 @@
 // C++ warper for the iniparser free library from N.Devillard
 
 #include "init_parser.h"
+#include <sstream>
+#include <iomanip>
 
 init_parser::init_parser(void) : dico(NULL)
 {
@@ -198,7 +200,9 @@ int init_parser::set_double(const string& key, double val)
 	if (find_entry(key)) return_val = 0;
 	else return_val = -1;
 
-	dictionary_setdouble(dico, key.c_str(), val);
+	ostringstream os;
+	os << setprecision(16) << val;
+	dictionary_set(dico, key.c_str(), os.str().c_str());
 
 	return return_val;
 }

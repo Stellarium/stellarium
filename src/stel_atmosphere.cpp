@@ -17,17 +17,17 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-/*
-	Class which compute and display the daylight sky color using openGL
-	the sky is computed with the skylight class.
-*/
+//	Class which compute and display the daylight sky color using openGL
+//	the sky is computed with the skylight class.
+
+// TODO : Adaptative resolution for optimization
 
 #include "stellarium.h"
 #include "stel_utility.h"
 #include "stellastro.h"
 #include "stel_atmosphere.h"
 
-stel_atmosphere::stel_atmosphere() : sky_resolution(64), tab_sky(NULL)
+stel_atmosphere::stel_atmosphere() : sky_resolution(48), tab_sky(NULL)
 {
 	// Create the vector array used to store the sky color on the full field of view
 	tab_sky = new (Vec3f*)[sky_resolution+1];
