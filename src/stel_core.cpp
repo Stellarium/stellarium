@@ -83,17 +83,6 @@ void stel_core::init(void)
 	else navigation->set_JDay(get_julian_from_sys());
 	navigation->set_local_vision(InitViewPos);
 
-    hip_stars = new Hip_Star_mgr();
-    asterisms = new Constellation_mgr(ConstLinesColor, ConstNamesColor);
-    nebulas   = new Nebula_mgr(NebulaLabelColor, NebulaCircleColor);
-	ssystem = new SolarSystem();
-	atmosphere = new stel_atmosphere();
-	tone_converter = new tone_reproductor();
-
-	equ_grid = new SkyGrid(EQUATORIAL, EquatorialColor, DataDir + "spacefont.txt", "spacefont");
-	azi_grid = new SkyGrid(ALTAZIMUTAL, AzimuthalColor, DataDir + "spacefont.txt", "spacefont");
-	equator_line = new SkyLine(EQUATOR, EquatorColor);
-	ecliptic_line = new SkyLine(ECLIPTIC, EclipticColor);
 
 	switch (ProjectorType)
 	{
@@ -108,6 +97,36 @@ void stel_core::init(void)
 		break;
 	}
 
+	// Make the viewport as big as possible
+	projection->set_screen_size(screen_W, screen_H);
+	projection->set_fov(InitFov);
+
+	switch (ViewportType)
+	{
+		case MAXIMIZED : projection->maximize_viewport(); break;
+		case SQUARE : projection->set_square_viewport(); break;
+		case DISK : projection->set_disk_viewport(); break;
+		default : projection->maximize_viewport(); break;
+	}
+	
+
+    hip_stars = new Hip_Star_mgr();
+    asterisms = new Constellation_mgr(ConstLinesColor, ConstNamesColor);
+    nebulas   = new Nebula_mgr(NebulaLabelColor, NebulaCircleColor);
+
+
+
+
+	ssystem = new SolarSystem();
+	atmosphere = new stel_atmosphere();
+	tone_converter = new tone_reproductor();
+
+	equ_grid = new SkyGrid(EQUATORIAL, EquatorialColor, DataDir + "spacefont.txt", "spacefont");
+	azi_grid = new SkyGrid(ALTAZIMUTAL, AzimuthalColor, DataDir + "spacefont.txt", "spacefont");
+	equator_line = new SkyLine(EQUATOR, EquatorColor);
+	ecliptic_line = new SkyLine(ECLIPTIC, EclipticColor);
+
+
 	cardinals_points = new Cardinals(DataDir + "spacefont.txt", "spacefont");
 	cardinals_points->set_color(CardinalColor);
 
@@ -120,8 +139,7 @@ void stel_core::init(void)
 	// Load constellations
     asterisms->load(DataDir + "spacefont.txt", DataDir + "constellationship.fab", DataDir + "constellationsart.fab", hip_stars);
 
-	// Load the nebulas data TODO : add NGC objects
-    nebulas->read(DataDir + "spacefont.txt", DataDir + "messier.fab");
+
 
 	// Create and init the solar system
 	ssystem->init(DataDir + "spacefont.txt", DataDir + "ssystem.ini", PlanetNamesColor );
@@ -133,24 +151,12 @@ void stel_core::init(void)
 
 	// initialisation of the User Interface
 	ui = new stel_ui(this);
-    ui->init();
+	ui->init();
 
 	ui->init_tui();
 
 	if (FlagAtmosphere) tone_converter->set_world_adaptation_luminance(40000.f);
 	else tone_converter->set_world_adaptation_luminance(3.75f);
-
-	// Make the viewport as big as possible
-	projection->set_screen_size(screen_W, screen_H);
-	projection->set_fov(InitFov);
-
-	switch (ViewportType)
-	{
-		case MAXIMIZED : projection->maximize_viewport(); break;
-		case SQUARE : projection->set_square_viewport(); break;
-		case DISK : projection->set_disk_viewport(); break;
-		default : projection->maximize_viewport(); break;
-	}
 
 	// Set the default moon scaling
 	if (FlagInitMoonScaled) ssystem->get_moon()->set_sphere_scale(moon_scale);
@@ -165,7 +171,12 @@ void stel_core::init(void)
 	navigation->update_transform_matrices((ssystem->get_earth())->get_ecliptic_pos());
 	navigation->update_model_view_mat();
 
+	// Load the nebulas data TODO : add NGC objects
 	glClear(GL_COLOR_BUFFER_BIT);
+	projection->set_orthographic_projection();
+	nebulas->read(DataDir + "spacefont.txt", DataDir + "messier.fab", screen_W/2-150, screen_H/2-20);
+	projection->reset_perspective_projection();
+
 
 }
 
@@ -360,6 +371,7 @@ void stel_core::draw(int delta_time)
 
 	if (FlagShowGravityUi) ui->draw_gravity_ui();
 	if (FlagShowTuiMenu) ui->draw_tui();
+
 }
 
 void stel_core::set_landscape(const string& new_landscape_name)
