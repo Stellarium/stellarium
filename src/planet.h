@@ -69,6 +69,7 @@ public:
 	virtual Mat4d get_helio_to_geo_matrix();
 	unsigned char get_type(void) {return STEL_OBJECT_PLANET;}
 	virtual Vec3d get_equ_pos(void);
+	virtual Vec3d search(Vec3d);	// Search if any planet is close to position given in earth equatorial position.
 protected:
     char * name;
 	int flagHalo;							// Set if a little "star like" halo will be drawn

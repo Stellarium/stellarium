@@ -905,7 +905,7 @@ void GuiHandleClic(Uint16 x, Uint16 y, Uint8 state, Uint8 button)
             	return;
         	}
         	// Left or middle clic -> selection of an object
-            selected_object=find_stel_object((int)x,(int)y);
+            selected_object=stel_object::find_stel_object((int)x,(int)y);
             // If an object has been found
             if (selected_object)
             {

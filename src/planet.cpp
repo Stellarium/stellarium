@@ -249,6 +249,10 @@ void sun_planet::compute_trans_matrix(double date)
     }
 }
 
+virtual Vec3d search(Vec3d)	// Search if any planet is close to position given in earth equatorial position.
+{
+	
+}
 
 void sun_planet::draw()
 {
