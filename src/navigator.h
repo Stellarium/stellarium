@@ -22,12 +22,15 @@
 
 #include "stellarium.h"
 #include "vecmath.h"
+#include "stel_object.h"
 
 // Conversion in standar Julian time format
 #define JD_SECOND 0.000011574074074074074074
 #define JD_MINUTE 0.00069444444444444444444
 #define JD_HOUR   0.041666666666666666666
 #define JD_DAY    1.
+
+class stel_object;
 
 typedef struct          // Struct used to store data on the auto mov
 {
@@ -68,7 +71,7 @@ public:
 
 	void update_time(int delta_time);
 	void update_transform_matrices(void);
-	void update_vision_vector(int delta_time);
+	void update_vision_vector(int delta_time, stel_object* selected);
 
 	// Place openGL in earth equatorial coordinates
 	void switch_to_earth_equatorial(void);
@@ -104,19 +107,19 @@ public:
 	void set_time_speed(double ts) {time_speed=ts;}
 	void set_flag_traking(int v) {flag_traking=v;}
 	void set_flag_lock_equ_pos(int v) {flag_lock_equ_pos=v;}
-	int get_flag_lock_equ_pos() {return flag_lock_equ_pos;}
-	double get_JDay(void) {return JDay;}
-	double get_fov(void) {return fov;}
-	Vec3d get_equ_vision(void) {return equ_vision;}
-	Vec3d get_local_vision(void) {return local_vision;}
+	int get_flag_lock_equ_pos() const {return flag_lock_equ_pos;}
+	double get_JDay(void) const {return JDay;}
+	double get_fov(void) const {return fov;}
+	Vec3d get_equ_vision(void) const {return equ_vision;}
+	Vec3d get_local_vision(void) const {return local_vision;}
 	void set_time_zone(int t) {position.time_zone=t;}
-	int get_time_zone(void) {return position.time_zone;}
+	int get_time_zone(void) const {return position.time_zone;}
 	void set_latitude(double l) {position.latitude=l;}
-	double get_latitude(void) {return position.latitude;}
+	double get_latitude(void) const {return position.latitude;}
 	void set_longitude(double l) {position.longitude=l;}
-	double get_longitude(void) {return position.longitude;}
+	double get_longitude(void) const {return position.longitude;}
 	void set_altitude(int a) {position.altitude=a;}
-	int get_altitude(void) {return position.altitude;}
+	int get_altitude(void) const {return position.altitude;}
 
 private:
 

@@ -61,6 +61,8 @@ private:
 	GraphicsContext * gc;	// The graphic context used to give the widget their drawing style
 	Container * Base;		// The container which contains everything (=the desktop)
 
+	void updateStandardWidgets(void);
+	void updateInfoSelectString(void);
 
 	// Flags buttons (the buttons in the bottom left corner)
 	FilledContainer * ContainerBtFlags;		// The containers for the button
@@ -151,6 +153,12 @@ private:
 
 	// CALLBACKS
 	void BtFlagsOnClicCallBack(guiValue button,Component * bt);
+	void BtFlagsOnMouseOverCallBack(guiValue event,Component * bt);
+	void HelpWinHideCallback(void);
+	void InfoWinHideCallback(void);
+	void TimeControlWinHideCallback(void);
+	void TimeControlBtOnClicCallback(guiValue button,Component * caller);
+
 };
 
 #endif  //_STEL_UI_H

@@ -59,6 +59,42 @@ enum guiValue
 
 namespace gui
 {
+
+	class Component;
+
+	// Callback class for clic action
+	class Callback1Base
+	{
+	public:
+		virtual void operator()(enum guiValue, Component*) const {};
+		virtual ~Callback1Base() = 0;
+	};
+
+	Callback1Base::~Callback1Base() {}
+
+	template<typename T>
+	class Callback1 : public Callback1Base
+	{
+	public:
+		typedef void (T::*F)(enum guiValue, Component*);
+
+		Callback1( T& t, F f ) : t_(&t), f_(f) {}
+		void operator()(enum guiValue m, Component* caller) const { (t_->*f_)(m, caller); }
+	private:
+		T* t_;
+		F  f_;
+	};
+
+	template<typename T>
+	Callback1<T> make_callback1( T& t, void (T::*f) (enum guiValue, Component*) )
+	{
+		return Callback1<T>( t, f );
+	}
+
+
+
+
+
     class GraphicsContext
     {
     public:
@@ -177,11 +213,13 @@ namespace gui
     class Textured_Button : public Button
     {
     public:
-        Textured_Button(s_texture * _texBt);
-        Textured_Button(s_texture * _texBt, vec2_i _position, vec2_i _size ,vec3_t _activeColor, vec3_t _passiveColor, void (*_onClicCallback)(enum guiValue,Component *),void (*_onMouseOverCallback)(enum guiValue,Component *), int _ID, int _active);
+        Textured_Button(s_texture* _texBt);
+        Textured_Button(s_texture* _texBt, vec2_i _position, vec2_i _size ,vec3_t _activeColor, vec3_t _passiveColor, Callback1Base* _c1, Callback1Base* _c2, int _ID, int _active);
         virtual ~Textured_Button();
         virtual void render(GraphicsContext& gc);
     private:
+		Callback1Base * c1;
+		Callback1Base * c2;
         s_texture * texBt;
         vec3_t activeColor;
         vec3_t passiveColor;

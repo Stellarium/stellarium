@@ -427,19 +427,22 @@ Textured_Button::Textured_Button(s_texture * _texBt) :
 {
 }
 
+
+
 Textured_Button::Textured_Button(
     s_texture * _texBt,
     vec2_i _position,
     vec2_i _size,
     vec3_t _activeColor,
     vec3_t _passiveColor,
-    void (*_onClicCallback)(enum guiValue, Component *),
-    void (*_onMouseOverCallback)(enum guiValue, Component *),
-    int _ID, int _active) : 
+    Callback1Base* _c1,
+    Callback1Base* _c2,
+    int _ID, int _active) :
         Button(), 
         texBt(_texBt),
         activeColor(_activeColor), 
-        passiveColor(_passiveColor)
+        passiveColor(_passiveColor),
+		c1(_c1), c2(_c2)
 {
 	if (!texBt)
 	{
@@ -448,8 +451,6 @@ Textured_Button::Textured_Button(
 	}
     position = _position;
     size = _size;
-    setOnClicCallback(_onClicCallback);
-    setOnMouseOverCallback(_onMouseOverCallback);
     ID = _ID;
     active = _active;
 }

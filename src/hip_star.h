@@ -39,7 +39,8 @@ public:
 	vec3_t get_RGB(void) {return RGB;}
 	void get_info_string(char * s);
 	unsigned char get_type(void) {return STEL_OBJECT_STAR;}
-	Vec3d get_earth_equ_pos(void) {return Vec3d(XYZ[0],XYZ[1],XYZ[2]);}
+	Vec3d get_earth_equ_pos(navigator* nav=NULL) {return Vec3d(XYZ[0],XYZ[1],XYZ[2]);}
+
 private:
     unsigned int HP;        // Hipparcos number
     float Mag;              // Apparent magnitude
@@ -59,5 +60,6 @@ private:
 	static float twinkle_amount;
 	static float star_scale;
 };
+
 
 #endif // _STAR_H_

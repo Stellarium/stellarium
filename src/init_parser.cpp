@@ -21,8 +21,7 @@
 
 #include "init_parser.h"
 
-
-init_parser::init_parser(char * _file) : file(NULL), dico(NULL)
+init_parser::init_parser(char * _file) : dico(NULL)
 {
 	// Check file presence
 	FILE * fp = NULL;
@@ -34,7 +33,7 @@ init_parser::init_parser(char * _file) : file(NULL), dico(NULL)
 	}
 	else
 	{
-		printf(stderr, "ERROR : Can't find config file %s\n",_file);
+		printf("ERROR : Can't find config file %s\n",_file);
 		exit(-1);
 	}
 }
@@ -51,7 +50,7 @@ void init_parser::load(void)
 	dico = iniparser_load(file);
 	if (!dico)
 	{
-		printf(stderr, "ERROR : Couldn't read config file %s\n",file);
+		printf("ERROR : Couldn't read config file %s\n",file);
 		exit(-1);
 	}
 }
@@ -68,30 +67,32 @@ void init_parser::save_to(char * file_name)
 	fp = fopen(file_name,"wt");
 	if (fp)
 	{
-		iniparser_dump(dico, fp);
+		iniparser_dump_ini(dico, fp);
 	}
 	else
 	{
-		printf(stderr, "ERROR : Can't open file %s\n",_file);
+		printf("ERROR : Can't open file %s\n",file_name);
 		exit(-1);
 	}
 }
 
 const char * init_parser::get_str(char * key)
 {
-	return iniparser_getstring(dico, key, NULL);
+	if (iniparser_getstring(dico, key, NULL)) return iniparser_getstring(dico, key, NULL);
+	else printf("WARNING : Can't find the configuration key %s, default NULL value returned\n", key);
+	return NULL;
 }
 
 int init_parser::get_int(char * key)
 {
-	int i = getint(dico, key, -11111);
+	int i = iniparser_getint(dico, key, -11111);
 	// To be sure :) (bugfree)
 	if (i==-11111)
 	{
-		i = getint(dico, key, 0);
+		i = iniparser_getint(dico, key, 0);
 		if (i==0)
 		{
-			printf("WARNING : Can't find the configuration key %s, default 0 value returned\n");
+			printf("WARNING : Can't find the configuration key %s, default 0 value returned\n", key);
 		}
 	}
 	return i;
@@ -103,10 +104,10 @@ double init_parser::get_double(char * key)
 	// To be sure :) (bugfree)
 	if (d==-11111.111111356)
 	{
-		d = getint(dico, key, 0.);
+		d = iniparser_getdouble(dico, key, 0.);
 		if (d==0.)
 		{
-			printf("WARNING : Can't find the configuration key %s, default 0 value returned\n");
+			printf("WARNING : Can't find the configuration key %s, default 0 value returned\n", key);
 		}
 	}
 	return d;
@@ -118,10 +119,10 @@ int init_parser::get_boolean(char * key)
 	// To be sure :) (bugfree)
 	if (b==-10)
 	{
-		b = getint(dico, key, 10);
-		if (b==10)
+		b = iniparser_getboolean(dico, key, 0);
+		if (b==0)
 		{
-			printf("WARNING : Can't find the configuration key %s, default 0 value returned\n");
+			printf("WARNING : Can't find the configuration key %s, default 0 value returned\n", key);
 		}
 	}
 	return b;

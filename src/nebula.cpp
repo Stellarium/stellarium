@@ -132,10 +132,10 @@ void Nebula::Draw()
 
 void Nebula::DrawCircle(draw_utility * du)
 {
-	if (navigation.get_fov()<sqrt(Taille)*2) return;
+	if (du->fov<sqrt(Taille)*2) return;
     incLum++;
-    glColor3f(sqrt(navigation.get_fov())/10*(0.4+0.2*sin(incLum/10)),
-		 sqrt(navigation.get_fov())/10*(0.4+0.2*sin(incLum/10)),0.1);
+    glColor3f(sqrt(du->fov)/10*(0.4+0.2*sin(incLum/10)),
+		 sqrt(du->fov)/10*(0.4+0.2*sin(incLum/10)),0.1);
     glBindTexture (GL_TEXTURE_2D, Nebula::texCircle->getID()); 
     glPushMatrix();
     glTranslatef(XY[0], XY[1],0);

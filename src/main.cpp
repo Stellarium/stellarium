@@ -28,6 +28,7 @@ char DDIR[255];	// Data Directory
 char TDIR[255];	// Textures Directory
 char CDIR[255];	// Config Directory
 
+s_texture * texIds[200];			// Common Textures TODO : remove that!
 
 // Print a beautiful console logo !!
 void drawIntro(void)
