@@ -257,8 +257,6 @@ void planet::draw(int hint_ON, Projector* prj, const navigator * nav, const tone
 			draw_hints(nav, prj);
         }
 
-		if (tex_big_halo) draw_big_halo(nav, prj, eye);
-
 		if (rings && screen_sz>1)
 		{
 			double dist = get_earth_equ_pos(nav).length();
@@ -282,9 +280,8 @@ void planet::draw(int hint_ON, Projector* prj, const navigator * nav, const tone
 		{
 			if (tex_halo) draw_halo(nav, prj, eye);
 		}
-
+		if (tex_big_halo) draw_big_halo(nav, prj, eye);
     }
-
 }
 
 void planet::draw_hints(const navigator* nav, const Projector* prj)
@@ -332,8 +329,11 @@ void planet::draw_sphere(const Projector* prj, const Mat4d& mat, float screen_sz
 	glDisable(GL_BLEND);
 
 	if (flag_lighting) glEnable(GL_LIGHTING);
-	else glDisable(GL_LIGHTING);
-	glColor3fv(color);
+	else
+	{
+		glDisable(GL_LIGHTING);
+		glColor3fv(color);
+	}
 	glBindTexture(GL_TEXTURE_2D, tex_map->getID());
 
 	// Rotate and add an extra half rotation because of the convention in all
@@ -462,7 +462,11 @@ void planet::draw_big_halo(const navigator* nav, const Projector* prj, const ton
 	float cmag = rmag/screen_r;
 	if (cmag>1.f) cmag = 1.f;
 
-	if (rmag<screen_r) rmag = screen_r;
+	if (rmag<screen_r*2)
+	{
+		cmag*=rmag/(screen_r*2);
+		rmag = screen_r*2;
+	}
 
 	prj->set_orthographic_projection();    	// 2D coordinate
 
