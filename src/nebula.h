@@ -21,7 +21,7 @@
 #define _NEBULA_H_
 
 #include "stellarium.h"
-#include "stel_utility.h"
+#include "projector.h"
 #include "s_texture.h"
 #include "stel_object.h"
 #include "s_font.h"
@@ -36,11 +36,11 @@ public:
     int Read(FILE *);       // Read the Nebulae data in the stream
     void Draw();            // Draw the nebulae
     void DrawName(s_font* nebulaFont);
-    void DrawCircle(draw_utility * du);
+    void DrawCircle(Projector* prj);
 	unsigned char get_type(void) const {return STEL_OBJECT_NEBULA;}
 	Vec3d get_earth_equ_pos(navigator * nav = NULL) const {return Vec3d(XYZ[0],XYZ[1],XYZ[2]);}
 	// Return the radius of a circle containing the object on screen
-	virtual float get_on_screen_size(navigator * nav, draw_utility * du);
+	virtual float get_on_screen_size(navigator * nav, Projector* prj);
 private:
 	static s_texture * texCircle;
 	short posDash;

@@ -35,7 +35,8 @@ Nebula_mgr::~Nebula_mgr()
 {
 	vector<Nebula *>::iterator iter;
     for(iter=Liste.begin();iter!=Liste.end();iter++)
-    {   delete (*iter);
+    {
+		delete (*iter);
     }
     if (Nebula::texCircle) delete Nebula::texCircle;
 	if (nebulaFont) delete nebulaFont;
@@ -82,7 +83,7 @@ int Nebula_mgr::Read(char * font_fileName, char * fileName)
 }
 
 // Draw all the Nebulaes
-void Nebula_mgr::Draw(int names_ON, draw_utility * du, navigator* nav)
+void Nebula_mgr::Draw(int names_ON, Projector* prj)
 {
 	glEnable(GL_TEXTURE_2D);
     glEnable(GL_BLEND);
@@ -91,26 +92,17 @@ void Nebula_mgr::Draw(int names_ON, draw_utility * du, navigator* nav)
     for(iter=Liste.begin();iter!=Liste.end();iter++)
     {   
         // project in 2D to check if the nebula is in screen
-		if ( nav->project_earth_equ_to_screen((*iter)->XYZ,(*iter)->XY) &&
-			(*iter)->XY[0]>0 && (*iter)->XY[0]<du->screenW &&
-			(*iter)->XY[1]>0 && (*iter)->XY[1]<du->screenH )
-	        (*iter)->Draw();
-    }
-    if (names_ON)
-    {
-        du->set_orthographic_projection();
-        for(iter=Liste.begin();iter!=Liste.end();iter++)
-        { 
-            // Draw the name
-	        if ((**iter).XY[2]<1 && (**iter).XY[0]>0 && (**iter).XY[0]<du->screenW &&
-				(**iter).XY[1]>0 && (**iter).XY[1]<du->screenH)
-            {
-                (**iter).DrawName(nebulaFont);
-                (**iter).DrawCircle(du);
-            }
-        }
-        du->reset_perspective_projection();
-    }
+		if ( !prj->project_earth_equ_check((*iter)->XYZ,(*iter)->XY) ) continue;
+		(*iter)->Draw();
+
+    	if (names_ON)
+    	{
+			prj->set_orthographic_projection();
+			(*iter)->DrawName(nebulaFont);
+			(*iter)->DrawCircle(prj);
+			prj->reset_perspective_projection();
+    	}
+	}
 }
 
 // Look for a nebulae by XYZ coords
@@ -122,9 +114,9 @@ stel_object * Nebula_mgr::search(vec3_t Pos)
     float anglePlusProche=0.;
     for(iter=Liste.begin();iter!=Liste.end();iter++)
     {
-		if ((**iter).XYZ[0]*Pos[0]+(**iter).XYZ[1]*Pos[1]+(**iter).XYZ[2]*Pos[2]>anglePlusProche)
+		if ((*iter)->XYZ[0]*Pos[0]+(*iter)->XYZ[1]*Pos[1]+(*iter)->XYZ[2]*Pos[2]>anglePlusProche)
         {
-			anglePlusProche=(**iter).XYZ[0]*Pos[0]+(**iter).XYZ[1]*Pos[1]+(**iter).XYZ[2]*Pos[2];
+			anglePlusProche=(*iter)->XYZ[0]*Pos[0]+(*iter)->XYZ[1]*Pos[1]+(*iter)->XYZ[2]*Pos[2];
             plusProche=(*iter);
         }
     }

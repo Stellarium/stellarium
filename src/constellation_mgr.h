@@ -29,10 +29,10 @@ public:
     Constellation_mgr();
     virtual ~Constellation_mgr();
     void load(char * font_fileName, char * catName, Hip_Star_mgr * _VouteCeleste);
-    void draw(draw_utility * du, navigator* nav);
+    void draw(Projector* prj);
 	// Draw one constellation of internationnal name Abr
-	void Constellation_mgr::draw(draw_utility * du, navigator* nav, char abr[4]);
-    void draw_names(draw_utility * du, navigator* nav);
+	void Constellation_mgr::draw(Projector* prj, char abr[4]);
+    void draw_names(Projector* prj);
 private:
     vector<Constellation*> asterisms;
 	s_font * asterFont;

@@ -26,9 +26,9 @@
 extern s_texture * texIds[200];            // Common Textures TODO : Remove that
 
 stel_core::stel_core() : screen_W(800), screen_H(600), bppMode(16), Fullscreen(0),
-	navigation(NULL), selected_object(NULL), hip_stars(NULL), asterisms(NULL),
-	nebulas(NULL), atmosphere(NULL), tone_converter(NULL), du(NULL), conf(NULL),
-	frame(0), timefr(0), timeBase(0)
+	navigation(NULL), projection(NULL), selected_object(NULL), hip_stars(NULL), asterisms(NULL),
+	nebulas(NULL), atmosphere(NULL), tone_converter(NULL), conf(NULL),
+	frame(0), timefr(0), timeBase(0), deltaFov(0.), deltaAlt(0.), deltaAz(0.), move_speed(0.001)
 {
 	TextureDir[0] = 0;
     ConfigDir[0] = 0;
@@ -40,6 +40,7 @@ stel_core::stel_core() : screen_W(800), screen_H(600), bppMode(16), Fullscreen(0
 stel_core::~stel_core()
 {
 	if (navigation) delete navigation;
+	if (projection) delete projection;
 	if (asterisms) delete asterisms;
 	if (hip_stars) delete hip_stars;
 	if (nebulas) delete nebulas;
@@ -65,7 +66,6 @@ void stel_core::set_config_files(const char * _config_file, const char * _locati
 }
 
 
-
 void stel_core::init(void)
 {
 	// Set textures directory and suffix
@@ -80,7 +80,7 @@ void stel_core::init(void)
 	atmosphere=new stel_atmosphere();
 	// Create tone reproductor
 	tone_converter=new tone_reproductor();
-	du = new draw_utility();
+	projection = new Projector(screen_W, screen_H, 60.);
 	equ_grid = new SkyGrid();
 	azi_grid = new SkyGrid();
 
@@ -168,13 +168,13 @@ void stel_core::update(int delta_time)
 	// Matrix for sun and all the satellites (ie planets)
 	ssystem->compute_trans_matrices(navigation->get_JDay());
 
+
 	// Transform matrices between coordinates systems
 	navigation->update_transform_matrices((ssystem->get_earth())->get_ecliptic_pos());
 	// Direction of vision
 	navigation->update_vision_vector(delta_time, selected_object);
-
-	// Set the common variables used by the draw functions
-	du->set_params(navigation->get_fov(), screen_W, screen_H);
+	// Move the view direction and/or fov
+	update_move(delta_time);
 
 	// Update info about selected object
 	if (selected_object) selected_object->update();
@@ -195,7 +195,10 @@ void stel_core::update(int delta_time)
 void stel_core::draw(int delta_time)
 {
 	// Init openGL viewing with fov, screen size and clip planes
-	navigation->init_project_matrix(screen_W,screen_H,0.001 ,40 );
+	projection->set_clipping_planes(0.001 ,40 );
+	projection->set_modelview_matrices(	navigation->get_earth_equ_to_eye_mat(),
+										navigation->get_helio_to_eye_mat(),
+										navigation->get_local_to_eye_mat());
 
     // Set openGL drawings in equatorial coordinates
     navigation->switch_to_earth_equatorial();
@@ -211,22 +214,24 @@ void stel_core::draw(int delta_time)
 	//glClear(GL_DEPTH_BUFFER_BIT);
 
 	// Draw all the constellations
-	if (FlagAsterismDrawing) asterisms->draw(du, navigation);
+	if (FlagAsterismDrawing) asterisms->draw(projection);
 	// Draw the constellations's names
-    if (FlagAsterismName) asterisms->draw_names(du, navigation);
+    if (FlagAsterismName) asterisms->draw_names(projection);
 
 	// Draw the nebula if they are visible
-	if (FlagNebula && (!FlagAtmosphere || sky_brightness<0.1)) nebulas->Draw(FlagNebulaName, du, navigation);
+	if (FlagNebula && (!FlagAtmosphere || sky_brightness<0.1)) nebulas->Draw(FlagNebulaName, projection);
 
 	// Draw the hipparcos stars
 	Vec3d tempv = navigation->get_equ_vision();
 	Vec3f temp(tempv[0],tempv[1],tempv[2]);
-	if (FlagStars)
+	if (FlagStars && (!FlagAtmosphere || sky_brightness<0.1))
+	{
 		hip_stars->draw(StarScale, StarTwinkleAmount, FlagStarName,
-		MaxMagStarName, temp, du, tone_converter, navigation);
+		MaxMagStarName, temp, tone_converter, projection);
+	}
 
 	// Draw the equatorial grid
-	if (FlagEquatorialGrid) equ_grid->draw(du, navigation);
+	if (FlagEquatorialGrid) equ_grid->draw(projection);
 
 
 	// TODO : make a nice class for lines management
@@ -234,13 +239,13 @@ void stel_core::draw(int delta_time)
     //if (FlagEcliptic) DrawEcliptic();	// Draw the ecliptic line
 
 	// Draw the pointer on the currently selected object
-    if (selected_object) selected_object->draw_pointer(delta_time, du, navigation);
+    if (selected_object) selected_object->draw_pointer(delta_time, projection, navigation);
 
 	// Set openGL drawings in heliocentric coordinates
 	navigation->switch_to_heliocentric();
 
 	// Draw the planets
-	if (FlagPlanets) ssystem->draw(FlagPlanetsHints, du, navigation);
+	if (FlagPlanets) ssystem->draw(FlagPlanetsHints, projection, navigation);
 
 	// Set openGL drawings in local coordinates i.e. generally altazimuthal coordinates
 	navigation->switch_to_local();
@@ -261,16 +266,16 @@ void stel_core::draw(int delta_time)
 		navigation->switch_to_local();
 		atmosphere->compute_color(sunPos, moonPos,
 		 	ssystem->get_moon()->get_phase(ssystem->get_earth()->get_heliocentric_ecliptic_pos()),
-		 	tone_converter, du);
+		 	tone_converter, projection);
 	}
 
 	glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_COLOR);
 	// Draw the atmosphere
-	if (FlagAtmosphere)	atmosphere->draw(du);
+	if (FlagAtmosphere)	atmosphere->draw(projection);
 
 
 	// Draw the altazimutal grid
-    if (FlagAzimutalGrid) azi_grid->draw(du, navigation);
+    if (FlagAzimutalGrid) azi_grid->draw(projection);
 
 	// Normal transparency mode
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -286,7 +291,7 @@ void stel_core::draw(int delta_time)
     if (FlagFog) DrawFog(sky_brightness);
 
 	// Daw the cardinal points
-    if (FlagCardinalPoints) DrawCardinaux(du);
+    if (FlagCardinalPoints) DrawCardinaux(projection);
 
     // ---- 2D Displays
     ui->draw();
@@ -439,10 +444,113 @@ stel_object * stel_core::find_stel_object(Vec3d v)
 // find and select the "nearest" object from screen position
 stel_object * stel_core::find_stel_object(int x, int y)
 {
-    glPushMatrix();
-    navigation->switch_to_earth_equatorial();
-	Vec3d v = du->unproject((double)x,(double)y);
-    glPopMatrix();
+	Vec3d v;
+	projection->unproject_earth_equ(x,y,v);
 
 	return find_stel_object(v);
+}
+
+
+void stel_core::turn_right(int s)
+{
+	if (s)
+	{
+		deltaAz = 1;
+		navigation->set_flag_traking(0);
+	}
+	else deltaAz = 0;
+}
+
+void stel_core::turn_left(int s)
+{
+	if (s)
+	{
+		deltaAz = -1;
+		navigation->set_flag_traking(0);
+	}
+	else deltaAz = 0;
+}
+
+void stel_core::turn_up(int s)
+{
+	if (s)
+	{
+		deltaAlt = 1;
+		navigation->set_flag_traking(0);
+	}
+	else deltaAlt = 0;
+}
+
+void stel_core::turn_down(int s)
+{
+	if (s)
+	{
+		deltaAlt = -1;
+		navigation->set_flag_traking(0);
+	}
+	else deltaAlt = 0;
+}
+
+void stel_core::zoom_in(int s)
+{
+	deltaFov = -1*(s!=0);
+}
+
+void stel_core::zoom_out(int s)
+{
+	deltaFov = (s!=0);
+}
+
+
+// Increment/decrement smoothly the vision field and position
+void stel_core::update_move(int delta_time)
+{
+	// the more it is zoomed, the more the mooving speed is low (in angle)
+    double depl=move_speed*delta_time*projection->get_fov();
+    if (deltaAz<0)
+    {
+		deltaAz = -depl/30;
+    }
+    else
+    {
+		if (deltaAz>0)
+        {
+			deltaAz = (depl/30);
+        }
+    }
+    if (deltaAlt<0)
+    {
+		deltaAlt = -depl/30;
+    }
+    else
+    {
+		if (deltaAlt>0)
+        {
+			deltaAlt = depl/30;
+        }
+    }
+
+    if (deltaFov<0)
+    {
+		deltaFov = -depl*5;
+    }
+    else
+    {
+		if (deltaFov>0)
+        {
+			deltaFov = depl*5;
+        }
+    }
+
+	projection->change_fov(deltaFov);
+	navigation->update_move(deltaAz, deltaAlt);
+}
+
+void stel_core::set_screen_size(int w, int h)
+{
+	if (w==screen_W && h==screen_H) return;
+    screen_W = w;
+    screen_H = h;
+
+	projection->set_screen_size(screen_W, screen_H);
 }

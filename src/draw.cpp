@@ -72,7 +72,7 @@ SkyGrid::~SkyGrid()
 	delete alt_points;
 }
 
-void SkyGrid::draw(draw_utility * du, navigator* nav) const
+void SkyGrid::draw(Projector* prj) const
 {
 	glColor3fv(color);
 	glDisable(GL_TEXTURE_2D);
@@ -84,15 +84,15 @@ void SkyGrid::draw(draw_utility * du, navigator* nav) const
 	static Vec3d pt1;
 	static Vec3d pt2;
 
-	du->set_orthographic_projection();	// set 2D coordinate
+	prj->set_orthographic_projection();	// set 2D coordinate
 
 	// Draw meridians
 	for (unsigned int nm=0;nm<nb_meridian;++nm)
 	{
 		if (transparent_top)	// Transparency for the first and last points
 		{
-			if (nav->project_earth_equ_to_screen(alt_points[nm][0], pt1) &&
-				nav->project_earth_equ_to_screen(alt_points[nm][1], pt2) )
+			if (prj->project_earth_equ(alt_points[nm][0], pt1) &&
+				prj->project_earth_equ(alt_points[nm][1], pt2) )
 			{
 				glBegin (GL_LINES);
 					glColor4f(color[0],color[1],color[2],0.f);
@@ -105,8 +105,8 @@ void SkyGrid::draw(draw_utility * du, navigator* nav) const
 			glColor3fv(color);
 			for (unsigned int i=1;i<nb_alt_segment-1;++i)
 			{
-				if (nav->project_earth_equ_to_screen(alt_points[nm][i], pt1) &&
-					nav->project_earth_equ_to_screen(alt_points[nm][i+1], pt2) )
+				if (prj->project_earth_equ(alt_points[nm][i], pt1) &&
+					prj->project_earth_equ(alt_points[nm][i+1], pt2) )
 				{
 					glBegin(GL_LINES);
 						glVertex2f(pt1[0],pt1[1]);
@@ -115,8 +115,8 @@ void SkyGrid::draw(draw_utility * du, navigator* nav) const
 				}
 			}
 
-			if (nav->project_earth_equ_to_screen(alt_points[nm][nb_alt_segment-1], pt1) &&
-				nav->project_earth_equ_to_screen(alt_points[nm][nb_alt_segment], pt2) )
+			if (prj->project_earth_equ(alt_points[nm][nb_alt_segment-1], pt1) &&
+				prj->project_earth_equ(alt_points[nm][nb_alt_segment], pt2) )
 			{
 				glBegin (GL_LINES);
 					glColor3fv(color);
@@ -132,8 +132,8 @@ void SkyGrid::draw(draw_utility * du, navigator* nav) const
 			glColor3fv(color);
 			for (unsigned int i=0;i<nb_alt_segment;++i)
 			{
-				if (nav->project_earth_equ_to_screen(alt_points[nm][i], pt1) &&
-					nav->project_earth_equ_to_screen(alt_points[nm][i+1], pt2) )
+				if (prj->project_earth_equ(alt_points[nm][i], pt1) &&
+					prj->project_earth_equ(alt_points[nm][i+1], pt2) )
 				{
 					glBegin (GL_LINES);
 						glVertex2f(pt1[0],pt1[1]);
@@ -150,8 +150,8 @@ void SkyGrid::draw(draw_utility * du, navigator* nav) const
 	{
 		for (unsigned int i=0;i<nb_azi_segment;++i)
 		{
-			if (nav->project_earth_equ_to_screen(azi_points[np][i], pt1) &&
-				nav->project_earth_equ_to_screen(azi_points[np][i+1], pt2) )
+			if (prj->project_earth_equ(azi_points[np][i], pt1) &&
+				prj->project_earth_equ(azi_points[np][i+1], pt2) )
 			{
 				glBegin (GL_LINES);
 					glVertex2f(pt1[0],pt1[1]);
@@ -161,14 +161,14 @@ void SkyGrid::draw(draw_utility * du, navigator* nav) const
 		}
 	}
 
-	du->reset_perspective_projection();
+	prj->reset_perspective_projection();
 }
 
 
 // Draw the cardinals points : N S E W (and Z (Zenith) N (Nadir))
-void DrawCardinaux(draw_utility * du)
+void DrawCardinaux(Projector * prj)
 {   
-	GLdouble M[16];
+/*	GLdouble M[16];
 	GLdouble P[16];
 	GLint V[4];
 	glGetDoublev(GL_MODELVIEW_MATRIX,M);
@@ -233,7 +233,7 @@ void DrawCardinaux(draw_utility * du)
 		glEnd ();
 	}
 	
-	du->reset_perspective_projection();
+	du->reset_perspective_projection();*/
 }
 
 // Draw the milky way : used too to 'clear' the buffer

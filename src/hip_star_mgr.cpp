@@ -158,12 +158,13 @@ void Hip_Star_mgr::load(char * font_fileName, char * hipCatFile, char * commonNa
 
 // Draw all the stars
 void Hip_Star_mgr::draw(float _star_scale, float _twinkle_amount, int name_ON,
-						float maxMagStarName, Vec3f equ_vision, draw_utility * du,
-						tone_reproductor* _eye, navigator* nav)
+						float maxMagStarName, Vec3f equ_vision,
+						tone_reproductor* _eye, Projector* prj)
 {
 	Hip_Star::twinkle_amount = _twinkle_amount;
 	Hip_Star::star_scale = _star_scale;
 	Hip_Star::eye = _eye;
+	Hip_Star::proj = prj;
 
 	glEnable(GL_TEXTURE_2D);
     glEnable(GL_BLEND);
@@ -174,10 +175,10 @@ void Hip_Star_mgr::draw(float _star_scale, float _twinkle_amount, int name_ON,
 	int nbZones=0;
 	static int * zoneList;  // WARNING this is almost a memory leak...
 
-	nbZones = HipGrid.Intersect(equ_vision, du->fov*M_PI/180.f*1.2f, zoneList);
-	float maxMag = 5.5f+60.f/du->fov;
+	nbZones = HipGrid.Intersect(equ_vision, prj->get_fov()*M_PI/180.f*1.2f, zoneList);
+	float maxMag = 5.5f+60.f/prj->get_fov();
 
-    du->set_orthographic_projection();	// set 2D coordinate
+    prj->set_orthographic_projection();	// set 2D coordinate
 
 	// Print all the stars of all the selected zones
 	static vector<Hip_Star *>::iterator end;
@@ -187,23 +188,19 @@ void Hip_Star_mgr::draw(float _star_scale, float _twinkle_amount, int name_ON,
 		end = starZones[zoneList[i]].end();
     	for(iter = starZones[zoneList[i]].begin(); iter!=end; ++iter)
     	{
-			// If too small, skip
-			if ((*iter)->Mag>maxMag) continue;
+			// If too small, skip and Compute the 2D position and check if in screen
+			if ((*iter)->Mag>maxMag || !prj->project_earth_equ_check((*iter)->XYZ, (*iter)->XY)) continue;
 
-			// Compute the 2D position and check if in screen
-        	if (nav->project_earth_equ_to_screen_check((*iter)->XYZ, (*iter)->XY))
-        	{
-		        (*iter)->draw(du);
-		        if (name_ON && (*iter)->CommonName && (*iter)->Mag<maxMagStarName)
-            	{
-		        	(*iter)->draw_name(starFont);
-                	glBindTexture (GL_TEXTURE_2D, starTexture->getID());
-            	}
-        	}
+			(*iter)->draw();
+			if (name_ON && (*iter)->CommonName && (*iter)->Mag<maxMagStarName)
+            {
+		       	(*iter)->draw_name(starFont);
+               	glBindTexture (GL_TEXTURE_2D, starTexture->getID());
+            }
 	    }
 	}
 
-    du->reset_perspective_projection();
+    prj->reset_perspective_projection();
 }
 
 // Look for a star by XYZ coords

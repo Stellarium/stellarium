@@ -25,6 +25,7 @@
 using namespace std;
 
 #include "navigator.h"
+#include "projector.h"
 #include "stel_object.h"
 #include "hip_star_mgr.h"
 #include "constellation_mgr.h"
@@ -60,7 +61,19 @@ public:
 	stel_object * find_stel_object(int x, int y);
 	stel_object * find_stel_object(Vec3d);
 
-	//double get_fov() {return navigation->get_fov();}
+	// Viewing direction function : 1 move, 0 stop.
+	void turn_right(int);
+	void turn_left(int);
+	void turn_up(int);
+	void turn_down(int);
+	void zoom_in(int);
+	void zoom_out(int);
+	
+	// Increment/decrement smoothly the vision field and position
+	void update_move(int delta_time);
+
+	void set_screen_size(int w, int h);
+
 private:
 
 	// Big options
@@ -81,6 +94,7 @@ private:
 
 	// Main elements of the program
 	navigator * navigation;				// Manage all navigation parameters, coordinate transformations etc..
+	Projector * projection;				// Manage the projection mode and matrix
 	stel_object * selected_object;		// The selected object in stellarium
 	Hip_Star_mgr * hip_stars;			// Manage the hipparcos stars
 	Constellation_mgr * asterisms;		// Manage constellations (boundaries, names etc..)
@@ -91,8 +105,6 @@ private:
 	SkyGrid * azi_grid;					// Azimutal grid
 	tone_reproductor * tone_converter;	// Tones conversion between stellarium world and display device
 	stel_ui * ui;						// The main User Interface
-	draw_utility * du;					// A usefull small class used to pass parameters and handy functions
-										// to various drawing functions
 
 	init_parser * conf;					// The class which manage config retrieves and dumps
 
@@ -142,8 +154,11 @@ private:
     int FlagMilkyWay;
     int FlagConfig;
 
-	int frame, timefr, timeBase;	// Used for fps counter
+	int frame, timefr, timeBase;		// Used for fps counter
 
+	double deltaFov,deltaAlt,deltaAz;	// View movement
+	double move_speed;					// Speed of movement
+	
 	// Load the textures "for non object oriented stuff" TODO : remove that
 	void load_base_textures(void);
 

@@ -76,47 +76,47 @@ void Constellation_mgr::load(char * font_fileName, char * fileName, Hip_Star_mgr
 }
 
 // Draw all the constellations in the vector
-void Constellation_mgr::draw(draw_utility * du, navigator* nav)
+void Constellation_mgr::draw(Projector* prj)
 {
 	glDisable(GL_TEXTURE_2D);
     glDisable(GL_BLEND);
     glColor3f(0.2,0.2,0.2);
-	du->set_orthographic_projection();	// set 2D coordinate
+	prj->set_orthographic_projection();	// set 2D coordinate
     vector<Constellation *>::iterator iter;
     for(iter=asterisms.begin();iter!=asterisms.end();iter++)
     {
-		(*iter)->draw(nav);
+		(*iter)->draw(prj);
     }
-	du->reset_perspective_projection();
+	prj->reset_perspective_projection();
 }
 
 // Draw one constellation of internationnal name abr
-void Constellation_mgr::draw(draw_utility * du, navigator* nav, char abr[4])
+void Constellation_mgr::draw(Projector* prj, char abr[4])
 {
 	vector<Constellation *>::iterator iter;
     for(iter=asterisms.begin();iter!=asterisms.end();iter++)
     {
 		if (!strcmp((*iter)->short_name,abr)) break;
 	}
-    (*iter)->draw_alone(du, nav);
+    (*iter)->draw_alone(prj);
 }
 
 // Draw the names of all the constellations
-void Constellation_mgr::draw_names(draw_utility * du, navigator* nav)
+void Constellation_mgr::draw_names(Projector* prj)
 {
     glColor3f(0.7,0.1,0.1);
     glEnable(GL_BLEND);
     glEnable(GL_TEXTURE_2D);
 
-    du->set_orthographic_projection();	// set 2D coordinate
+    prj->set_orthographic_projection();	// set 2D coordinate
 
 	vector<Constellation *>::iterator iter;
     for(iter=asterisms.begin();iter!=asterisms.end();iter++)
     {
 		// Check if in the field of view
-    	if ( nav->project_earth_equ_to_screen_check((*iter)->XYZname, (*iter)->XYname) )
+    	if ( prj->project_earth_equ_check((*iter)->XYZname, (*iter)->XYname) )
 			(*iter)->draw_name(asterFont);
     }
 
-    du->reset_perspective_projection();
+    prj->reset_perspective_projection();
 }

@@ -30,6 +30,7 @@
 float Hip_Star::twinkle_amount = 10.f;
 float Hip_Star::star_scale = 10.f;
 tone_reproductor* Hip_Star::eye = NULL;
+Projector* Hip_Star::proj = NULL;
 
 Hip_Star::Hip_Star() : 
 	CommonName(NULL),
@@ -131,7 +132,7 @@ int Hip_Star::read(FILE * catalog)
 }
 
 
-void Hip_Star::draw(draw_utility * du)
+void Hip_Star::draw(void)
 {
 	static float cmag;
 	static float rmag;
@@ -139,7 +140,7 @@ void Hip_Star::draw(draw_utility * du)
     // Compute the equivalent star luminance for a 5 arc min circle and convert it
 	// in function of the eye adaptation
 	rmag = eye->adapt_luminance(term1);
-	rmag = rmag/powf(du->fov,0.85f)*50.f;
+	rmag = rmag/powf(proj->get_fov(),0.85f)*50.f;
 
     cmag = 1.f;
 
@@ -166,15 +167,12 @@ void Hip_Star::draw(draw_utility * du)
 	rmag*=star_scale;
 
     glColor3fv(RGB*(cmag/MaxColorValue));
-    glPushMatrix();
-    glTranslatef(XY[0],XY[1],0);
     glBegin(GL_QUADS );
-        glTexCoord2i(0,0);    glVertex2f(-rmag,-rmag);	// Bottom left
-        glTexCoord2i(1,0);    glVertex2f( rmag,-rmag);	// Bottom right
-        glTexCoord2i(1,1);    glVertex2f( rmag, rmag);	// Top right
-        glTexCoord2i(0,1);    glVertex2f(-rmag, rmag);	// Top left
+        glTexCoord2i(0,0);    glVertex2f(XY[0]-rmag,XY[1]-rmag);	// Bottom left
+        glTexCoord2i(1,0);    glVertex2f(XY[0]+rmag,XY[1]-rmag);	// Bottom right
+        glTexCoord2i(1,1);    glVertex2f(XY[0]+rmag,XY[1]+rmag);	// Top right
+        glTexCoord2i(0,1);    glVertex2f(XY[0]-rmag,XY[1]+rmag);	// Top left
     glEnd();
-    glPopMatrix();
 }
 
 void Hip_Star::draw_name(s_font* star_font)

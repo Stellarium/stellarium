@@ -166,7 +166,7 @@ void stel_ui::updateTopBar(void)
 
     sprintf(str,"FPS:%4.2f",core->fps);
     top_bar_fps_lbl->setLabel(str); 	top_bar_fps_lbl->adjustSize();
-    sprintf(str,"fov=%2.3f\6", core->navigation->get_fov());
+    sprintf(str,"fov=%2.3f\6", core->projection->get_fov());
 	top_bar_fov_lbl->setLabel(str);		top_bar_fov_lbl->adjustSize();
 }
 
@@ -386,7 +386,7 @@ void stel_ui::draw(void)
 	// Normal transparency mode
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-	core->du->set_orthographic_projection();	// 2D coordinate
+	core->projection->set_orthographic_projection();	// 2D coordinate
 	Component::enableScissor();
 
     glScalef(1, -1, 1);						// invert the y axis, down is positive
@@ -395,7 +395,7 @@ void stel_ui::draw(void)
 	desktop->draw();
 
 	Component::disableScissor();
-    core->du->reset_perspective_projection();	// Restore the other coordinate
+    core->projection->reset_perspective_projection();	// Restore the other coordinate
 }
 
 /*******************************************************************************/
