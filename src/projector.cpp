@@ -405,7 +405,12 @@ void Projector::sSphere_map(GLdouble radius, GLint slices, GLint stacks, const M
 	// t goes from -1.0/+1.0 at z = -radius/+radius (linear along longitudes)
 	// cannot use triangle fan on texturing (s coord. at top/bottom tip varies)
 	imin = 0;
+
+#ifdef NVIDIA
+	imax = stacks/1.8;
+#else
 	imax = stacks;
+#endif
 
 	static float sinrho;
 	static float cosrho;
