@@ -106,9 +106,7 @@ void Constellation_mgr::draw_names(Projector* prj)
     glColor3f(0.7,0.1,0.1);
     glEnable(GL_BLEND);
     glEnable(GL_TEXTURE_2D);
-
     prj->set_orthographic_projection();	// set 2D coordinate
-
 	vector<Constellation *>::iterator iter;
     for(iter=asterisms.begin();iter!=asterisms.end();iter++)
     {
@@ -116,6 +114,26 @@ void Constellation_mgr::draw_names(Projector* prj)
     	if ( prj->project_earth_equ_check((*iter)->XYZname, (*iter)->XYname) )
 			(*iter)->draw_name(asterFont);
     }
-
     prj->reset_perspective_projection();
+}
+
+void Constellation_mgr::draw_one_name(Projector* prj, const Constellation* c) const
+{
+    glColor3f(0.7,0.1,0.1);
+    glEnable(GL_BLEND);
+    glEnable(GL_TEXTURE_2D);
+    prj->set_orthographic_projection();	// set 2D coordinate
+	if (c) c->draw_name(asterFont);
+    prj->reset_perspective_projection();
+}
+
+const Constellation* Constellation_mgr::is_star_in(const Hip_Star * s) const
+{
+	vector<Constellation *>::const_iterator iter;
+    for(iter=asterisms.begin();iter!=asterisms.end();++iter)
+    {
+		// Check if the star is in one of the constellation
+    	if ((*iter)->is_star_in(s)) return (*iter);
+    }
+	return NULL;
 }

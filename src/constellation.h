@@ -33,8 +33,9 @@ public:
     virtual ~Constellation();
     int read(FILE *, Hip_Star_mgr * _VouteCeleste);
     void draw(Projector* prj);
-    void draw_alone(Projector* prj);
-    void draw_name(s_font * constfont);
+    void draw_alone(Projector* prj) const;
+    void draw_name(s_font * constfont) const;
+	const Constellation* is_star_in(const Hip_Star *) const;
 private:
     char * name;
     char short_name[4];

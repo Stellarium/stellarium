@@ -31,8 +31,10 @@ public:
     void load(char * font_fileName, char * catName, Hip_Star_mgr * _VouteCeleste);
     void draw(Projector* prj);
 	// Draw one constellation of internationnal name Abr
-	void Constellation_mgr::draw(Projector* prj, char abr[4]);
+	void draw(Projector* prj, char abr[4]);
     void draw_names(Projector* prj);
+	void draw_one_name(Projector* prj, const Constellation*) const;
+	const Constellation* is_star_in(const Hip_Star *) const;
 private:
     vector<Constellation*> asterisms;
 	s_font * asterFont;
