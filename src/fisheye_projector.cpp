@@ -89,13 +89,23 @@ void Fisheye_projector::unproject_custom(double x ,double y, Vec3d& v, const Mat
 void Fisheye_projector::unproject(double x, double y, const Mat4d& m, Vec3d& v) const
 {
 	double d = MY_MIN(vec_viewport[2],vec_viewport[3])/2;
+	static double length;
 	v[0] = x - center[0];
 	v[1] = y - center[1];
 	v[2] = 0;
-	double angle_center = v.length()/d * fov/2*M_PI/180;
+	length = v.length();
+
+	double angle_center = length/d * fov/2*M_PI/180;
 	double r = sin(angle_center);
-	v.normalize();
-	v*=r;
+	if (length!=0)
+	{
+		v.normalize();
+		v*=r;
+	}
+	else
+	{
+		v.set(0.,0.,0.);
+	}
 
 	v[2] = sqrt(1.-(v[0]*v[0]+v[1]*v[1]));
 	if (angle_center>M_PI_2) v[2] = -v[2];
@@ -103,23 +113,6 @@ void Fisheye_projector::unproject(double x, double y, const Mat4d& m, Vec3d& v) 
 	v.transfo4d(m);
 }
 
-// Override glVertex3f
-// Here is the main trick for texturing in fisheye mode : The trick is to compute the
-// new coordinate in orthographic projection which will simulate the fisheye projection.
-void Fisheye_projector::sVertex3(float x, float y, float z, const Mat4d& mat) const
-{
-	static Vec3d win;
-	static Vec3d v;
-	v.set(x,y,z);
-	//double l=(mat*v).length();
-	project_custom(v, win, mat);
-	//printf("%f %f %f\n",win[0],win[1],win[2]);
-	gluUnProject(win[0],win[1],0.5,mat,mat_projection2,vec_viewport,&v[0],&v[1],&v[2]);
-	//printf("%f %f %f\n",v[0],v[1],v[2]);
-	//v.normalize();
-	//v*=l;
-	glVertex3f(v[0],v[1],v[2]);
-}
 
 // Override glVertex3f
 // Here is the main trick for texturing in fisheye mode : The trick is to compute the
@@ -129,13 +122,8 @@ void Fisheye_projector::sVertex3(double x, double y, double z, const Mat4d& mat)
 	static Vec3d win;
 	static Vec3d v;
 	v.set(x,y,z);
-	//double l=(mat*v).length();
 	project_custom(v, win, mat);
-	//printf("%f %f %f\n",win[0],win[1],win[2]);
-	gluUnProject(win[0],win[1],0.1,mat,mat_projection2,vec_viewport,&v[0],&v[1],&v[2]);
-	//printf("%f %f %f\n",v[0],v[1],v[2]);
-	//v.normalize();
-	//v*=2;
+	gluUnProject(win[0],win[1],0.5,mat,mat_projection2,vec_viewport,&v[0],&v[1],&v[2]);
 	glVertex3d(v[0],v[1],v[2]);
 }
 
@@ -191,5 +179,61 @@ void Fisheye_projector::sSphere(GLdouble radius, GLint slices, GLint stacks, con
 		glEnd();
 		t -= dt;
 	}
+	glPopMatrix();
+}
+
+// Reimplementation of gluCylinder : glu is overrided for non standard projection
+void Fisheye_projector::sCylinder(GLdouble radius, GLdouble height, GLint slices, GLint stacks,
+const Mat4d& mat, int orient_inside) const
+{
+	glPushMatrix();
+	glLoadMatrixd(mat);
+
+	GLdouble da, r, dz;
+	GLfloat z, nsign;
+	GLint i, j;
+
+	if (orient_inside) nsign = -1.0;
+	else nsign = 1.0;
+
+	da = 2.0 * M_PI / slices;
+	dz = height / stacks;
+
+	GLfloat ds = 1.0 / slices;
+	GLfloat dt = 1.0 / stacks;
+	GLfloat t = 0.0;
+	z = 0.0;
+	r = radius;
+	for (j = 0; j < stacks; j++)
+	{
+	GLfloat s = 0.0;
+	glBegin(GL_QUAD_STRIP);
+	for (i = 0; i <= slices; i++)
+	{
+		GLfloat x, y;
+		if (i == slices)
+		{
+			x = sin(0.0);
+			y = cos(0.0);
+		}
+		else
+		{
+			x = sin(i * da);
+			y = cos(i * da);
+		}
+		glNormal3f(x * nsign, y * nsign, 0);
+		glTexCoord2f(s, t);
+		sVertex3(x * r, y * r, z + dz, mat);
+		glNormal3f(x * nsign, y * nsign, 0);
+		glTexCoord2f(s, t + dt);
+		sVertex3(x * r, y * r, z, mat);
+		s += ds;
+	}			/* for slices */
+	glEnd();
+	t += dt;
+	z += dz;
+	}				/* for stacks */
+
+
 	glPopMatrix();
 }

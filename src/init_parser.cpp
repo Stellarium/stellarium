@@ -219,6 +219,12 @@ const char * init_parser::get_secname(int n) const
 	return iniparser_getsecname(dico, n);
 }
 
+// Return 1 if the entry exists, 0 otherwise
+int init_parser::find_entry(const char * entry) const
+{
+	return iniparser_find_entry(dico, entry);
+}
+
 void init_parser::free_dico(void)
 {
 	iniparser_freedict(dico);

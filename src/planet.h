@@ -20,10 +20,11 @@
 #ifndef _PLANET_H_
 #define _PLANET_H_
 
+#include <list>
 #include "stellarium.h"
 #include "stel_utility.h"
 #include "s_font.h"
-#include <list>
+#include "tone_reproductor.h"
 #include "vecmath.h"
 #include "stel_object.h"
 #include "callback.h"
@@ -82,13 +83,13 @@ public:
     void compute_trans_matrix(double date);
 
 	// Get the phase angle for an observer at pos obs_pos in the heliocentric coordinate (in AU)
-	double get_phase(Vec3d obs_pos);
+	double get_phase(Vec3d obs_pos) const;
 
 	// Get the magnitude for an observer at pos obs_pos in the heliocentric coordinate (in AU)
-	float compute_magnitude(const Vec3d obs_pos);
+	float compute_magnitude(const Vec3d obs_pos) const;
 
 	// Draw the planet, if hint_ON is != 0 draw a circle and the name as well
-    void draw(int hint_ON, Projector* prj, const navigator * nav);
+    void draw(int hint_ON, Projector* prj, const navigator* nav, const tone_reproductor* eye);
 
 	// Add the given planet in the satellite list
 	void add_satellite(planet*);
@@ -105,7 +106,7 @@ public:
 
 	// Compute the distance to the given position in heliocentric coordinate (in AU)
 	double compute_distance(const Vec3d& obs_helio_pos);
-	double get_distance(void) {return distance;}
+	double get_distance(void) const {return distance;}
 
 	// Get a matrix which converts from heliocentric ecliptic coordinate to local geographic coordinate
 	Mat4d get_helio_to_geo_matrix();
@@ -123,7 +124,8 @@ public:
 	void set_rings(ring* r) {rings = r;}
 
 	static void set_font(s_font* f) {planet_name_font = f;}
-
+	static void set_star_scale(float s) {star_scale = s;}
+	static void set_gravity_label_flag(bool gl) {gravity_label = gl;}
 protected:
 	// Compute the z rotation to use from equatorial to geographic coordinates
 	void compute_geographic_rotation(double date);
@@ -132,7 +134,7 @@ protected:
 	void draw_sphere(const Projector* prj, const Mat4d& mat);
 
 	// Draw the small star like 2D halo
-	void draw_halo(const navigator* nav, const Projector* prj);
+	void draw_halo(const navigator* nav, const Projector* prj, const tone_reproductor* eye);
 
 	// Draw the circle and name of the planet
 	void draw_hints(const navigator* nav, const Projector* prj);
@@ -166,6 +168,8 @@ protected:
 	list<planet *> satellites;		// satellites of the planet
 
 	static s_font* planet_name_font;// Font for names
+	static float star_scale;
+	static bool gravity_label;
 };
 
 #endif // _PLANET_H_

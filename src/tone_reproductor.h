@@ -75,7 +75,7 @@ public:
 	void set_display_gamma(float _gamma) {gamma = _gamma;}
 
 	// Return adapted luminance from world to display
-	float adapt_luminance(float world_luminance)
+	float adapt_luminance(float world_luminance) const
 	{
 		return powf(world_luminance*M_PI*0.0001f,alpha_wa_over_alpha_da) * term2;
 	}

@@ -113,7 +113,7 @@ float skybright::get_luminance(float cos_dist_moon, float cos_dist_sun, float co
 	// Total sky brightness
 	b_daylight>b_twilight ? b_total = b_night + b_twilight + b_moon : b_total = b_night + b_daylight + b_moon;
 
-	if (b_total<0.f) return 0.f; 
+	if (b_total<0.f) return 0.f;
 
 	b_total *= 900900.9;	// In lambert
 	return b_total * M_PI * 1e-4 * 32393895;	// In cd/m^2 : the 32393895 is empirical term because the

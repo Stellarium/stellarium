@@ -4,16 +4,16 @@
    @file    iniparser.c
    @author  N. Devillard
    @date    Mar 2000
-   @version $Revision: 247 $
+   @version $Revision: 260 $
    @brief   Parser for ini files.
 */
 /*--------------------------------------------------------------------------*/
 
 /*
-    $Id: iniparser.c 247 2003-08-02 22:58:01Z xalioth $
+    $Id: iniparser.c 260 2003-08-18 18:41:31Z xalioth $
     $Author: xalioth $
-    $Date: 2003-08-02 23:58:01 +0100 (Sat, 02 Aug 2003) $
-    $Revision: 247 $
+    $Date: 2003-08-18 19:41:31 +0100 (Mon, 18 Aug 2003) $
+    $Revision: 260 $
 */
 
 /*---------------------------------------------------------------------------
@@ -253,7 +253,7 @@ const char * iniparser_getstr(const dictionary * d, const char * key)
 /*--------------------------------------------------------------------------*/
 const char * iniparser_getstring(const dictionary * d, const char * key, const char * def)
 {
-    char * lc_key ;
+    const char * lc_key ;
     const char * sval ;
 
     if (d==NULL || key==NULL)

@@ -1,6 +1,6 @@
 
 [main]
-version                        = 0.5.3b
+version                        = 0.6.0a
 
 [video]
 fullscreen                     = true
@@ -8,27 +8,44 @@ screen_w                       = 1024
 screen_h                       = 768
 bbp_mode                       = 32
 
+[projection]
+type = fisheye
+viewport = disk
+
 [stars]
-star_scale                     = 3.8
-star_twinkle_amount            = 1.5
+star_scale                     = 1.4
+star_mag_scale					= 1.
+star_twinkle_amount            = 0.2
 max_mag_star_name              = 1.5
+flag_star_twinkle              = true
 
 [gui]
+flag_show_topbar               = true
+flag_show_date                 = true
+flag_show_time                 = true
+flag_show_fov                  = true
+flag_show_appname              = true
 flag_show_fps                  = true
 flag_menu                      = true
 flag_help                      = false
 flag_infos                     = false
 flag_utc_time                  = false
-gui_base_color                 = 0.6
-gui_text_color                 = 0.1
+flag_show_selected_object_info = true
+gui_base_color                 = 0.3,0.4,0.7
+gui_text_color                 = 0.7,0.8,0.9
 
 [navigation]
-flag_follow_earth              = true
-date                           = 08/11/1999
-time                           = 11:15:00
+flag_lock_equ_pos              = false
+date                           = today
+time                           = now
+flag_enable_zoom_keys          = true
+flag_enable_move_keys          = true
+init_fov                       = 180
+init_view_pos                  = 0.0001,0.,1.
+auto_move_duration					= 1.
 
 [landscape]
-landscape_number               = 2
+landscape_name                 = sea
 flag_ground                    = true
 flag_horizon                   = true
 flag_fog                       = true
@@ -37,17 +54,20 @@ flag_atmosphere                = false
 [viewing]
 flag_constellation_drawing     = false
 flag_constellation_name        = false
+flag_constellation_pick        = true
 flag_azimutal_grid             = false
 flag_equatorial_grid           = false
-flag_equator                   = false
-flag_ecliptic                  = false
+flag_equator_line              = false
+flag_ecliptic_line             = false
 flag_cardinal_points           = true
+flag_gravity_labels            = true
 
 [astro]
 flag_stars                     = true
 flag_star_name                 = true
 flag_planets                   = true
-flag_planets_name              = true
+flag_planets_hints             = true
 flag_nebula                    = true
 flag_nebula_name               = false
 flag_milky_way                 = true
+

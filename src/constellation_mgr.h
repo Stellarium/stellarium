@@ -32,8 +32,8 @@ public:
     void draw(Projector* prj);
 	// Draw one constellation of internationnal name Abr
 	void draw(Projector* prj, char abr[4]);
-    void draw_names(Projector* prj);
-	void draw_one_name(Projector* prj, Constellation*) const;
+    void draw_names(Projector* prj, bool gravity_label);
+	void draw_one_name(Projector* prj, Constellation*, bool gravity_label) const;
 	Constellation* is_star_in(const Hip_Star *) const;
 private:
     vector<Constellation*> asterisms;

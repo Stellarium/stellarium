@@ -30,7 +30,9 @@ class Fisheye_projector : public Projector
 public:
 	Fisheye_projector(int _screenW = 800, int _screenH = 600, double _fov = 175.,
 		double _min_fov = 0.001, double _max_fov = 300.);
-		
+
+	virtual PROJECTOR_TYPE get_type(void) {return FISHEYE_PROJECTOR;}
+
 	virtual void set_viewport(int x, int y, int w, int h);
 
 	// Same function but using a custom modelview matrix
@@ -41,10 +43,13 @@ public:
 	void sSphere(GLdouble radius, GLint slices, GLint stacks,
 		const Mat4d& mat, int orient_inside = 0) const;
 
+	// Reimplementation of gluCylinder : glu is overrided for non standard projection
+	virtual void sCylinder(GLdouble radius, GLdouble height, GLint slices, GLint stacks,
+		const Mat4d& mat, int orient_inside = 0) const;
+
 	void update_openGL(void) const;
 
 	// Override glVertex3f and glVertex3d
-	void sVertex3(float x, float y, float z, const Mat4d& mat) const;
 	void sVertex3(double x, double y, double z, const Mat4d& mat) const;
 
 	const Vec3d convert_pos(const Vec3d& v, const Mat4d& mat) const;

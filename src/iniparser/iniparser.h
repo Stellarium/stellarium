@@ -4,16 +4,16 @@
    @file    iniparser.h
    @author  N. Devillard
    @date    Mar 2000
-   @version $Revision: 236 $
+   @version $Revision: 260 $
    @brief   Parser for ini files.
 */
 /*--------------------------------------------------------------------------*/
 
 /*
-	$Id: iniparser.h 236 2003-07-25 14:16:53Z xalioth $
+	$Id: iniparser.h 260 2003-08-18 18:41:31Z xalioth $
 	$Author: xalioth $
-	$Date: 2003-07-25 15:16:53 +0100 (Fri, 25 Jul 2003) $
-	$Revision: 236 $
+	$Date: 2003-08-18 19:41:31 +0100 (Mon, 18 Aug 2003) $
+	$Revision: 260 $
 */
 
 #ifndef _INIPARSER_H_
@@ -246,7 +246,7 @@ void iniparser_unset(dictionary * ini, const char * entry);
   of querying for the presence of sections in a dictionary.
  */
 /*--------------------------------------------------------------------------*/
-int iniparser_find_entry(dictionary * ini, const char * entry) ;
+int iniparser_find_entry(dictionary * ini, const char * entry);
 
 /*-------------------------------------------------------------------------*/
 /**

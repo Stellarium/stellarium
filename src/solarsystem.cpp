@@ -221,9 +221,10 @@ void SolarSystem::compute_trans_matrices(double date)
 }
 
 // Draw all the elements of the solar system
-void SolarSystem::draw(int hint_ON, Projector * prj, const navigator * nav)
+// We are supposed to be in heliocentric coordinate
+void SolarSystem::draw(int hint_ON, Projector * prj, const navigator * nav, const tone_reproductor* eye, bool _gravity_label)
 {
-	// We are supposed to be in heliocentric coordinate
+	planet::set_gravity_label_flag(_gravity_label);
 
 	// Set the light parameters taking sun as the light source
     float tmp[4] = {0,0,0,0};
@@ -261,7 +262,7 @@ void SolarSystem::draw(int hint_ON, Projector * prj, const navigator * nav)
 	iter = system_planets.begin();
     while (iter != system_planets.end())
     {
-        if (*iter!=earth) (*iter)->draw(hint_ON, prj, nav);
+        if (*iter!=earth) (*iter)->draw(hint_ON, prj, nav, eye);
         ++iter;
     }
 }

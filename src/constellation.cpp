@@ -22,6 +22,8 @@
 
 #define RADIUS_CONST 1.
 
+bool Constellation::gravity_label = false;
+
 Constellation::Constellation() : name(NULL), inter(NULL), asterism(NULL)
 {
 }
@@ -117,9 +119,10 @@ void Constellation::draw_alone(Projector* prj) const
 }
 
 // Draw the name
-void Constellation::draw_name(s_font * constfont) const
+void Constellation::draw_name(s_font * constfont, Projector* prj) const
 {
-	constfont->print((int)XYname[0]-40,(int)XYname[1], inter/*name*/); //"inter" for internationnal name
+	gravity_label ? prj->print_gravity(constfont, XYname[0], XYname[1], inter, -constfont->getStrLen(inter)/2) :
+	constfont->print(XYname[0]-constfont->getStrLen(inter)/2, XYname[1], inter/*name*/);
 }
 
 const Constellation* Constellation::is_star_in(const Hip_Star * s) const

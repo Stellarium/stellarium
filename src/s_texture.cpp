@@ -87,3 +87,21 @@ int s_texture::reload()
     unload();
     return load();
 }
+
+// Return the average texture luminance : 0 is black, 1 is white
+float s_texture::get_average_luminance(void) const
+{
+	glBindTexture(GL_TEXTURE_2D, texID);
+	GLint w, h;
+	glGetTexLevelParameteriv(GL_TEXTURE_2D, 0, GL_TEXTURE_WIDTH, &w);
+	glGetTexLevelParameteriv(GL_TEXTURE_2D, 0, GL_TEXTURE_WIDTH, &h);
+	GLfloat* p = (GLfloat*)malloc(w*h*sizeof(GLfloat));
+	glGetTexImage(GL_TEXTURE_2D, 0, GL_LUMINANCE, GL_FLOAT, p);
+	float sum = 0.;
+	for (int i=0;i<w*h;++i)
+	{
+		sum += p[i];
+	}
+	free(p);
+	return sum/(w*h);
+}

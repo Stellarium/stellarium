@@ -55,13 +55,13 @@ private:
     char * Name;			// Scientific name
 
 	float term1;			// Optimization term
-    //unsigned short int typep; //temp
-    //unsigned short int magp;  //temp
 
 	static float twinkle_amount;
 	static float star_scale;
+	static float star_mag_scale;
 	static tone_reproductor* eye;
 	static Projector* proj;
+	static bool gravity_label;
 };
 
 

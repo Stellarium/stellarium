@@ -162,8 +162,8 @@ void navigator::update_move(double deltaAz, double deltaAlt)
     if (deltaAlt)
     {
 		if (altVision+deltaAlt <= M_PI_2 && altVision+deltaAlt >= -M_PI_2) altVision+=deltaAlt;
-		if (altVision+deltaAlt > M_PI_2) altVision = M_PI_2;
-		if (altVision+deltaAlt < -M_PI_2) altVision = -M_PI_2;
+		if (altVision+deltaAlt > M_PI_2) altVision = M_PI_2 - 0.000001;		// Prevent bug
+		if (altVision+deltaAlt < -M_PI_2) altVision = -M_PI_2 + 0.000001;	// Prevent bug
     }
 
     // recalc all the position variables
@@ -244,14 +244,14 @@ Vec3d navigator::get_observer_helio_pos(void) const
 
 ////////////////////////////////////////////////////////////////////////////////
 // Move to the given equatorial position
-void navigator::move_to(const Vec3d& _aim)
+void navigator::move_to(const Vec3d& _aim, float move_duration)
 {
 	move.aim=_aim;
     move.aim.normalize();
     move.aim*=2.;
     move.start=equ_vision;
     move.start.normalize();
-    move.speed=0.001;
+    move.speed=1.f/(move_duration*1000);
     move.coef=0.;
     flag_auto_move = true;
 }

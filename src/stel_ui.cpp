@@ -569,8 +569,8 @@ int stel_ui::handle_keys(SDLKey key, S_GUI_VALUE state)
             bt_flag_help->setState(core->FlagHelp);
 			help_win->setVisible(core->FlagHelp);
 		}
-        if(key==SDLK_4)
-        {	
+		if(key==SDLK_4)
+        {
         	core->FlagEclipticLine=!core->FlagEclipticLine;
 		}
         if(key==SDLK_5)
@@ -591,7 +591,8 @@ int stel_ui::handle_keys(SDLKey key, S_GUI_VALUE state)
         {	
         	if (core->selected_object)
 			{
-				core->navigation->move_to(core->selected_object->get_earth_equ_pos(core->navigation));
+				core->navigation->move_to(core->selected_object->get_earth_equ_pos(core->navigation),
+					core->auto_move_duration);
 				core->navigation->set_flag_traking(1);
 			}
 		}

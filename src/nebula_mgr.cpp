@@ -85,8 +85,10 @@ int Nebula_mgr::read(char * font_fileName, char * fileName)
 }
 
 // Draw all the Nebulaes
-void Nebula_mgr::draw(int names_ON, Projector* prj)
+void Nebula_mgr::draw(int names_ON, Projector* prj, bool _gravity_label)
 {
+	Nebula::gravity_label = _gravity_label;
+
 	glEnable(GL_TEXTURE_2D);
     glEnable(GL_BLEND);
 

@@ -94,11 +94,19 @@ private:
 	s_font* font;
 };
 
+// Class which manages the displaying of the Milky Way
+class MilkyWay
+{
+public:
+	MilkyWay(const char* tex_file, double _radius = 1.);
+    virtual ~MilkyWay();
+	void draw(tone_reproductor * eye, const Projector* prj, const navigator* nav) const;
+private:
+	double radius;
+	s_texture* tex;
+	Vec3f color;
+};
 
-void DrawMilkyWay(tone_reproductor * eye, const Projector* prj, const navigator* nav);
-void DrawFog(float sky_brightness);
-void DrawDecor(int, float sky_brightness);
-void DrawGround(float sky_brightness);
 void DrawPoint(float X,float Y,float Z);
 
 

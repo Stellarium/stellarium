@@ -50,6 +50,8 @@ public:
     void unload();
     int reload();
     unsigned int getID(void) const {return texID;}
+	// Return the average texture luminance : 0 is black, 1 is white
+	float get_average_luminance(void) const;
 	static void set_texDir(char * _texDir) {strncpy(s_texture::texDir, _texDir, sizeof(texDir));}
 	static void set_suffix(char * _suffix) {strncpy(s_texture::suffix, _suffix, sizeof(suffix));}
 private:

@@ -31,6 +31,10 @@ Finally fixed the planet shaking bug!
 Updated fog and decor displaying (faster and nicer)
 Added a projector class which will handle different projection mode (fisheye, ortho etc..)
 Made a fisheye projection mode which override gl/glu functions so that 3D drawing occures in fisheye projection mode.
+Added gravity font.
+Added many options in the configuration files.
+Made a class for landscapes managment. Handle fisheye projection and panoramic fisheye pictures projection. The andscapes are loaded from a file so that it's easy to add custom landscapes.
+Stellarium is now fully object oriented.
 
 0.5.2 [29/04/2003]
 Changed the configuration file to $HOME/.stellarium/VERSION/ on unix system to prevent conflicts between versions.

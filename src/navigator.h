@@ -76,7 +76,7 @@ public:
 	// Update the modelview matrices
 	void update_model_view_mat(void);
 
-	void move_to(const Vec3d& _aim);
+	void move_to(const Vec3d& _aim, float move_duration = 1.);
 
 	// Loads
 	void load_position(const char *);		// Load the position info in the file name given
