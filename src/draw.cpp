@@ -176,73 +176,87 @@ void DrawAtmosphere2(void)
     resetPerspectiveProjection();
 }
 
-// Draw the cardinals points : N S E O and Z (Zenith) N (Nadir)
+// Draw the cardinals points : N S E W (and Z (Zenith) N (Nadir))
 void DrawCardinaux(void)
-{   float rayon=navigation.get_fov()/60;
-    glPushMatrix();
+{   
+    GLdouble M[16];
+    GLdouble P[16];
+    GLint V[4];
+    glGetDoublev(GL_MODELVIEW_MATRIX,M);
+    glGetDoublev(GL_PROJECTION_MATRIX,P);
+    glGetIntegerv(GL_VIEWPORT,V);
+
+    double x[4],y[4],z[4];
+    gluProject(-1.0f, 0.0f, 0.0f,M,P,V,&x[0],&y[0],&z[0]); // North
+    gluProject( 1.0f, 0.0f, 0.0f,M,P,V,&x[1],&y[1],&z[1]); // South
+    gluProject( 0.0f, 1.0f, 0.0f,M,P,V,&x[2],&y[2],&z[2]); // East
+    gluProject( 0.0f,-1.0f, 0.0f,M,P,V,&x[3],&y[3],&z[3]); // West
+
+    setOrthographicProjection(global.X_Resolution, global.Y_Resolution);
+
+    y[0]=global.Y_Resolution-y[0];
+    y[1]=global.Y_Resolution-y[1];
+    y[2]=global.Y_Resolution-y[2];
+    y[3]=global.Y_Resolution-y[3];
+
     glColor3f(0.8f, 0.1f, 0.1f);
     glEnable(GL_TEXTURE_2D);
     glEnable(GL_BLEND);
-    glBindTexture(GL_TEXTURE_2D,texIds[6]->getID());     //North
-    glTranslatef(0.0f,0.0f,30.0f);
-    glBegin(GL_QUADS );
-        glTexCoord2f(0.0f,0.0f);    glVertex3f( rayon,-rayon,0.0f);   // Bottom Left
-        glTexCoord2f(1.0f,0.0f);    glVertex3f(-rayon,-rayon,0.0f);   // Bottom Right
-        glTexCoord2f(1.0f,1.0f);    glVertex3f(-rayon, rayon,0.0f);   // Top Right
-        glTexCoord2f(0.0f,1.0f);    glVertex3f( rayon, rayon,0.0f);   // Top Left
-    glEnd ();
 
-    glBindTexture(GL_TEXTURE_2D, texIds[7]->getID());    //South
-    glTranslatef(0.0f,0.0f,-60.0f);
-    glBegin(GL_QUADS );
-        glTexCoord2f(0.0f,0.0f);    glVertex3f(-rayon,-rayon,0.0f);   // Bottom Left
-        glTexCoord2f(1.0f,0.0f);    glVertex3f( rayon,-rayon,0.0f);   // Bottom Right
-        glTexCoord2f(1.0f,1.0f);    glVertex3f( rayon, rayon,0.0f);   // Top Right
-        glTexCoord2f(0.0f,1.0f);    glVertex3f(-rayon, rayon,0.0f);   // Top Left
-    glEnd ();
+    int r=24;
+    
+    if (z[0]<1)
+    {
+        glBindTexture(GL_TEXTURE_2D,texIds[6]->getID());     //North
+        glBegin(GL_QUADS );
+            glTexCoord2f(0.0f,0.0f);    glVertex2f(x[0]-r,y[0]+r);  // Bottom Left
+            glTexCoord2f(1.0f,0.0f);    glVertex2f(x[0]+r,y[0]+r);  // Bottom Right
+            glTexCoord2f(1.0f,1.0f);    glVertex2f(x[0]+r,y[0]-r);  // Top Right
+            glTexCoord2f(0.0f,1.0f);    glVertex2f(x[0]-r,y[0]-r);  // Top Left
+        glEnd ();
+    }
 
-    glBindTexture(GL_TEXTURE_2D, texIds[9]->getID());    //Ouest
-    glTranslatef(30.0f,0.0f,30.0f);
-    glBegin(GL_QUADS );
-        glTexCoord2f(0.0f,0.0f);    glVertex3f(0.0f,-rayon,-rayon);   // Bottom Left
-        glTexCoord2f(1.0f,0.0f);    glVertex3f(0.0f,-rayon, rayon);   // Bottom Right
-        glTexCoord2f(1.0f,1.0f);    glVertex3f(0.0f, rayon, rayon);   // Top Right
-        glTexCoord2f(0.0f,1.0f);    glVertex3f(0.0f, rayon,-rayon);   // Top Left
-    glEnd ();
+    if (z[1]<1)
+    {
+        glBindTexture(GL_TEXTURE_2D, texIds[7]->getID());    //South
+        glBegin(GL_QUADS );
+            glTexCoord2f(0.0f,0.0f);    glVertex2f(x[1]-r,y[1]+r);  // Bottom Left
+            glTexCoord2f(1.0f,0.0f);    glVertex2f(x[1]+r,y[1]+r);  // Bottom Right
+            glTexCoord2f(1.0f,1.0f);    glVertex2f(x[1]+r,y[1]-r);  // Top Right
+            glTexCoord2f(0.0f,1.0f);    glVertex2f(x[1]-r,y[1]-r);  // Top Left
+        glEnd ();
+    }
 
-    glBindTexture(GL_TEXTURE_2D, texIds[8]->getID());    //Est
-    glTranslatef(-60.0f,0.0f,0.0f);
-    glBegin(GL_QUADS );
-        glTexCoord2f(0.0f,0.0f);    glVertex3f(0.0f,-rayon, rayon);   // Bottom Left
-        glTexCoord2f(1.0f,0.0f);    glVertex3f(0.0f,-rayon,-rayon);   // Bottom Right
-        glTexCoord2f(1.0f,1.0f);    glVertex3f(0.0f, rayon,-rayon);   // Top Right
-        glTexCoord2f(0.0f,1.0f);    glVertex3f(0.0f, rayon, rayon);   // Top Left
-    glEnd ();
+    if (z[2]<1)
+    {
+        glBindTexture(GL_TEXTURE_2D, texIds[8]->getID());    //East
+        glBegin(GL_QUADS );
+            glTexCoord2f(0.0f,0.0f);    glVertex2f(x[2]-r,y[2]+r);  // Bottom Left
+            glTexCoord2f(1.0f,0.0f);    glVertex2f(x[2]+r,y[2]+r);  // Bottom Right
+            glTexCoord2f(1.0f,1.0f);    glVertex2f(x[2]+r,y[2]-r);  // Top Right
+            glTexCoord2f(0.0f,1.0f);    glVertex2f(x[2]-r,y[2]-r);  // Top Left
+        glEnd ();
+    }
 
-    glBindTexture(GL_TEXTURE_2D, texIds[10]->getID());   //Zenith
-    glTranslatef(30.0f,30.0f,0.0f);
-    glBegin(GL_QUADS );
-        glTexCoord2f(0.0f,0.0f);    glVertex3f( rayon, 0.0f,-rayon);  // Bottom Left
-        glTexCoord2f(1.0f,0.0f);    glVertex3f( rayon, 0.0f, rayon);  // Bottom Right
-        glTexCoord2f(1.0f,1.0f);    glVertex3f(-rayon, 0.0f, rayon);  // Top Right
-        glTexCoord2f(0.0f,1.0f);    glVertex3f(-rayon, 0.0f,-rayon);  // Top Left
-    glEnd ();
-
-    glBindTexture(GL_TEXTURE_2D, texIds[11]->getID());   //Nadir
-    glTranslatef(0.0f,-60.0f,0.0f);
-    glBegin(GL_QUADS );
-        glTexCoord2f(0.0f,0.0f);    glVertex3f( rayon, 0.0f,-rayon);  // Bottom Left
-        glTexCoord2f(1.0f,0.0f);    glVertex3f( rayon, 0.0f, rayon);  // Bottom Right
-        glTexCoord2f(1.0f,1.0f);    glVertex3f(-rayon, 0.0f, rayon);  // Top Right
-        glTexCoord2f(0.0f,1.0f);    glVertex3f(-rayon, 0.0f,-rayon);  // Top Left
-    glEnd ();
-    glPopMatrix();
+    if (z[3]<1)
+    {
+        glBindTexture(GL_TEXTURE_2D, texIds[9]->getID());    //West
+        glBegin(GL_QUADS );
+            glTexCoord2f(0.0f,0.0f);    glVertex2f(x[3]-r,y[3]+r);  // Bottom Left
+            glTexCoord2f(1.0f,0.0f);    glVertex2f(x[3]+r,y[3]+r);  // Bottom Right
+            glTexCoord2f(1.0f,1.0f);    glVertex2f(x[3]+r,y[3]-r);  // Top Right
+            glTexCoord2f(0.0f,1.0f);    glVertex2f(x[3]-r,y[3]-r);  // Top Left
+        glEnd ();
+    }
+    
+    resetPerspectiveProjection();
 }
 
 // Draw the milky way : used too to 'clear' the buffer
 void DrawMilkyWay(void)
 {   if (!global.FlagMilkyWay)
-    {   glClear(GL_COLOR_BUFFER_BIT);
+    {   
+        glClear(GL_COLOR_BUFFER_BIT);
         return;
     }
     glPushMatrix();

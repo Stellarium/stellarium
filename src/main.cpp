@@ -96,11 +96,6 @@ void Draw(int delta_time)
 		HipVouteCeleste->Draw();    // Draw the stars
     }
 
-	glColor3f(1,1,1);
-	Vec3d temp(1,0,0);
-	temp=navigation.local_to_earth_equ(&temp);
-	DrawPoint(temp[0],temp[1],temp[2]);
-
     if (global.FlagAtmosphere && global.SkyBrightness>0)
 		DrawAtmosphere2();	// Draw the atmosphere
 
@@ -121,9 +116,6 @@ void Draw(int delta_time)
 
 	// Set openGL drawings in local coordinates i.e. generally altazimuthal coordinates
 	navigation.switch_to_local();
-
-	temp=navigation.get_local_vision();
-	DrawPoint(temp[0],temp[1],temp[2]);
 
     if (global.FlagAzimutalGrid)
     {
