@@ -58,7 +58,7 @@ void stel_ui::draw_gravity_ui(void)
 		if (core->FlagShowFps) os << "  FPS " << core->fps;
 
 		glColor3f(0.1,0.9,0.1);
-		core->projection->print_gravity180(spaceFont, x-shift + 15, y-shift + 19, os.str());
+		core->projection->print_gravity180(spaceFont, x-shift + 30, y-shift + 38, os.str());
 	}
 
 	if (core->selected_object && core->FlagShowTuiShortInfo)
@@ -68,7 +68,7 @@ void stel_ui::draw_gravity_ui(void)
 		if (core->selected_object->get_type()==STEL_OBJECT_NEBULA) glColor3f(0.4f,0.5f,0.8f);
 		if (core->selected_object->get_type()==STEL_OBJECT_PLANET) glColor3f(1.0f,0.3f,0.3f);
 		if (core->selected_object->get_type()==STEL_OBJECT_STAR) glColor3fv(core->selected_object->get_RGB());
-		core->projection->print_gravity180(spaceFont, x+shift - 15, y+shift - 19, str);
+		core->projection->print_gravity180(spaceFont, x+shift - 30, y+shift - 38, str);
 	}
 }
 
@@ -173,7 +173,7 @@ void stel_ui::draw_tui(void)
 	if (tui_root)
 	{
 		glColor3f(0.1,0.9,0.1);
-		core->projection->print_gravity180(spaceFont, x+shift - 15, y-shift + 15,
+		core->projection->print_gravity180(spaceFont, x+shift - 30, y-shift + 30,
 			s_tui::stop_active + tui_root->getString());
 	}
 }

@@ -30,7 +30,8 @@ s_texture * Nebula::tex_circle = NULL;
 s_font* Nebula::nebula_font = NULL;
 bool Nebula::gravity_label = false;
 
-Nebula::Nebula() : NGC_nb(0), name(NULL), neb_tex(NULL), tex_quad_vertex(NULL)
+Nebula::Nebula() : NGC_nb(0), name(NULL), neb_tex(NULL), tex_quad_vertex(NULL),
+		fontcolor(0.4,0.3,0.5), circlecolor(0.8,0.8,0.1)
 {
 	inc_lum = rand()/RAND_MAX*M_PI;
 }
@@ -125,13 +126,22 @@ int Nebula::read(FILE * catalogue)
     return 1;
 }
 
-void Nebula::draw_tex(const Projector* prj, tone_reproductor* eye)
+void Nebula::draw_tex(const Projector* prj, tone_reproductor* eye, bool bright_nebulae)
 {
     glEnable(GL_TEXTURE_2D);
     glEnable(GL_BLEND);
 
-    float cmag=eye->adapt_luminance(luminance);
-    glColor3f(cmag,cmag,cmag);
+	// if start zooming in, turn up brightness to full for DSO images
+	// gradual change might be better
+	if(bright_nebulae)
+	{
+		glColor3f(1.0,1.0,1.0);
+	}
+	else
+	{
+		float cmag=eye->adapt_luminance(luminance);
+		glColor3f(cmag,cmag,cmag);
+	}
 
 	glBindTexture(GL_TEXTURE_2D, neb_tex->getID());
 
@@ -154,7 +164,7 @@ void Nebula::draw_circle(const Projector* prj, const navigator * nav)
 	if (2.f/get_on_screen_size(prj, nav)<0.1) return;
     inc_lum++;
 	float lum = MY_MIN(1,2.f/get_on_screen_size(prj, nav))*(0.8+0.2*sinf(inc_lum/10));
-    glColor3f(lum, lum, 0.1);
+    glColor3fv(circlecolor*lum);
     glBindTexture (GL_TEXTURE_2D, Nebula::tex_circle->getID());
     glBegin(GL_TRIANGLE_STRIP);
         glTexCoord2i(1,0);              // Bottom Right
@@ -175,8 +185,8 @@ float Nebula::get_on_screen_size(const Projector* prj, const navigator * nav)
 }
 
 void Nebula::draw_name(const Projector* prj)
-{   
-    glColor3f(0.4,0.3,0.5);
+{
+    glColor3fv(fontcolor);
 	float shift = 8.f + get_on_screen_size(prj)/2.f;
 	gravity_label ? prj->print_gravity180(nebula_font, XY[0]+shift, XY[1]+shift, name, 0, 0) :
 		nebula_font->print(XY[0]+shift, XY[1]+shift, name);

@@ -84,7 +84,7 @@ void stel_core::init(void)
 
     hip_stars = new Hip_Star_mgr();
     asterisms = new Constellation_mgr(ConstLinesColor, ConstNamesColor);
-    nebulas   = new Nebula_mgr();
+    nebulas   = new Nebula_mgr(NebulaLabelColor, NebulaCircleColor);
 	ssystem = new SolarSystem();
 	atmosphere = new stel_atmosphere();
 	tone_converter = new tone_reproductor();
@@ -262,7 +262,8 @@ void stel_core::draw(int delta_time)
 
 	// Draw the nebula if they are visible
 	if (FlagNebula && (!FlagAtmosphere || sky_brightness<0.1))
-		nebulas->draw(FlagNebulaName, projection, navigation, tone_converter, FlagGravityLabels, MaxMagNebulaName);
+		nebulas->draw(FlagNebulaName, projection, navigation, tone_converter,
+			FlagGravityLabels, MaxMagNebulaName, FlagBrightNebulae);
 
 	// Draw the hipparcos stars
 	Vec3d tempv = navigation->get_equ_vision();
@@ -453,6 +454,8 @@ void stel_core::load_config_from(const string& confFile)
 	EclipticColor		= str_to_vec3f(conf.get_str("color:ecliptic_color").c_str());
 	ConstLinesColor		= str_to_vec3f(conf.get_str("color:const_lines_color").c_str());
 	ConstNamesColor		= str_to_vec3f(conf.get_str("color:const_names_color").c_str());
+	NebulaLabelColor	= str_to_vec3f(conf.get_str("color:nebula_label_color").c_str());
+	NebulaCircleColor	= str_to_vec3f(conf.get_str("color:nebula_circle_color").c_str());
 
 	// Text ui section
 	FlagEnableTuiMenu = conf.get_boolean("tui:flag_enable_tui_menu");
@@ -499,6 +502,7 @@ void stel_core::load_config_from(const string& confFile)
 	FlagNebulaName			= conf.get_boolean("astro:flag_nebula_name");
 	MaxMagNebulaName		= conf.get_double("astro:max_mag_nebula_name");
 	FlagMilkyWay			= conf.get_boolean("astro:flag_milky_way");
+	FlagBrightNebulae		= conf.get_boolean("astro:flag_bright_nebulae");
 }
 
 void stel_core::save_config_to(const string& confFile)
@@ -563,6 +567,8 @@ void stel_core::save_config_to(const string& confFile)
 	conf.set_str    ("color:ecliptic_color", vec3f_to_str(EclipticColor));
 	conf.set_str    ("color:const_lines_color", vec3f_to_str(ConstLinesColor));
 	conf.set_str    ("color:const_names_color", vec3f_to_str(ConstNamesColor));
+	conf.set_str	("color:nebula_label_color", vec3f_to_str(NebulaLabelColor));
+	conf.set_str	("color:nebula_circle_color", vec3f_to_str(NebulaCircleColor));
 
 	// Text ui section
 	conf.set_boolean("tui:flag_enable_tui_menu", FlagEnableTuiMenu);
@@ -609,6 +615,7 @@ void stel_core::save_config_to(const string& confFile)
 	conf.set_boolean("astro:flag_nebula_name", FlagNebulaName);
 	conf.set_double("astro:max_mag_nebula_name", MaxMagNebulaName);
 	conf.set_boolean("astro:flag_milky_way", FlagMilkyWay);
+	conf.set_boolean("astro:flag_bright_nebulae", FlagBrightNebulae);
 
 	conf.save(confFile);
 

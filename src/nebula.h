@@ -66,10 +66,13 @@ public:
 	virtual double get_close_fov(const navigator * nav = NULL) const;
 	virtual float get_mag(const navigator * nav = NULL) const {return mag;}
 
+	void setFontColor(Vec3f& v) {fontcolor = v;}
+	void setCircleColor(Vec3f& v) {circlecolor = v;}
+
 	// Read the Nebula data from a file
     int read(FILE *);
 
-	void draw_tex(const Projector* prj, tone_reproductor* eye);
+	void draw_tex(const Projector* prj, tone_reproductor* eye, bool bright_nebulae);
     void draw_name(const Projector* prj);
     void draw_circle(const Projector* prj, const navigator * nav);
 
@@ -96,6 +99,9 @@ private:
 	static s_texture * tex_circle;	// The symbolic circle texture
 	static s_font* nebula_font;		// Font used for names printing
 	static bool gravity_label;
+
+	Vec3f fontcolor;
+	Vec3f circlecolor;
 };
 
 #endif // _NEBULA_H_
