@@ -30,11 +30,11 @@ extern s_texture * texIds[200];            // Common Textures
 int stel_object::local_time = 0;
 
 // Draw a nice animated pointer around the object
-void stel_object::draw_pointer(int delta_time, draw_utility * du)
+void stel_object::draw_pointer(int delta_time, draw_utility * du, navigator * nav)
 {
 	local_time+=delta_time;
 	double x,y,z;
-	Vec3d pos=get_earth_equ_pos();
+	Vec3d pos=get_earth_equ_pos(nav);
 	du->project(pos[0],pos[1],pos[2],x,y,z);
     du->set_orthographic_projection();
 
@@ -122,7 +122,7 @@ void stel_object::draw_pointer(int delta_time, draw_utility * du)
 }
 
 
-void stel_object::get_info_string(char * s) const
+void stel_object::get_info_string(char * s, navigator * nav) const
 {
 	sprintf(s,"No info for this object...");
 }

@@ -29,9 +29,9 @@ rotation_elements::rotation_elements() : period(1.), offset(0.), epoch(J2000),
 {
 }
 
-planet::planet(const char * _name, int _flagHalo, double _radius, vec3_t _color,
+planet::planet(const char * _name, int _flagHalo, int _flag_lighting, double _radius, vec3_t _color,
 	const char* tex_map_name, const char* tex_halo_name, pos_func_type _coord_func) :
-		name(NULL), flagHalo(_flagHalo), radius(_radius), color(_color), axis_rotation(0.),
+		name(NULL), flagHalo(_flagHalo), flag_lighting(_flag_lighting), radius(_radius), color(_color), axis_rotation(0.),
 		tex_map(NULL), tex_halo(NULL), coord_func(_coord_func), parent(NULL)
 {
 	ecliptic_pos=Vec3d(0.,0.,0.);
@@ -76,7 +76,7 @@ Vec3d planet::get_earth_equ_pos(navigator * nav) const
 	Vec3d v = get_heliocentric_ecliptic_pos();
 	return nav->helio_to_earth_pos_equ(&v); 	// this is earth equatorial but centered
 												// on observer's position (latitude, longitude)
-	//return navigation.helio_to_earth_equ(&v); this is the real equatorial
+	//return navigation.helio_to_earth_equ(&v); this is the real equatorial centered on earth center
 }
 
 // Compute the position in the parent planet coordinate system
@@ -152,8 +152,16 @@ void planet::add_satellite(planet*p)
 // Draw the planet and all the related infos : name, circle etc..
 void planet::draw(int hint_ON, draw_utility * du, navigator * nav)
 {
+	Mat4d mat = mat_local_to_parent;
+	planet * p = parent;
+	while (p!=NULL)
+	{
+		mat = p->mat_local_to_parent * mat;
+		p = p->parent;
+	}
+
 	glPushMatrix();
-    glMultMatrixd(mat_local_to_parent); // Go in planet local coordinate
+    glMultMatrixd(mat); // Go in planet local coordinate
 
 	// Compute the 2D position
 	du->project(0., 0., 0., screenPos[0], screenPos[1], screenPos[2]);
@@ -175,35 +183,12 @@ void planet::draw(int hint_ON, draw_utility * du, navigator * nav)
 			draw_hints(earthEquPos, du);
         }
 
-    	glEnable(GL_TEXTURE_2D);
-		glEnable(GL_CULL_FACE);
-		glDisable(GL_BLEND);
-		glEnable(GL_LIGHTING);
-
-
 		glPushMatrix();
-
 		// Rotate and add an extra half rotation because of the convention in all
     	// planet texture maps where zero deg long. is in the middle of the texture.
 		glRotatef(axis_rotation + 180.,0.,0.,1.);
-
-		glEnable(GL_DEPTH_TEST); // Enable this for eclipse correct vision
-		glBindTexture(GL_TEXTURE_2D, tex_map->getID());
-		GLUquadricObj * p=gluNewQuadric();
-		gluQuadricTexture(p,GL_TRUE);
-		gluSphere(p,radius,60,60);
-		gluDeleteQuadric(p);
-		glDisable(GL_DEPTH_TEST);
-
+		draw_sphere();
 		glPopMatrix();
-    }
-
-    // Draw the satellites
-    list<planet*>::iterator iter = satellites.begin();
-    while (iter != satellites.end())
-    {
-        (*iter)->draw(hint_ON, du, nav);
-        iter++;
     }
 
     glPopMatrix();
@@ -239,6 +224,12 @@ void planet::draw_hints(Vec3d earthEquPos, draw_utility * du)
 
 void planet::draw_sphere(void)
 {
+    glEnable(GL_TEXTURE_2D);
+	glEnable(GL_CULL_FACE);
+	glDisable(GL_BLEND);
+
+	if (flag_lighting) glEnable(GL_LIGHTING);
+	else glDisable(GL_LIGHTING);
 	glColor3fv(color);
 	glBindTexture(GL_TEXTURE_2D, tex_map->getID());
 	GLUquadricObj * p = gluNewQuadric();

@@ -130,8 +130,10 @@ void stel_core::init(void)
 	ui = new stel_ui(this);
     ui->init();
 
-	// Compute planets data and init viewing position
+	if (FlagAtmosphere) tone_converter->set_world_adaptation_luminance(40000.f);
+	else tone_converter->set_world_adaptation_luminance(3.75f);
 
+	// Compute planets data and init viewing position
 	// Position of sun and all the satellites (ie planets)
 	ssystem->compute_positions(navigation->get_JDay());
 	// Matrix for sun and all the satellites (ie planets)
@@ -140,6 +142,7 @@ void stel_core::init(void)
 	// Compute transform matrices between coordinates systems
 	navigation->update_transform_matrices((ssystem->get_earth())->get_ecliptic_pos());
 	navigation->set_local_vision(Vec3d(1.,0.,0.3));
+
 }
 
 
@@ -158,10 +161,15 @@ void stel_core::update(int delta_time)
     // Update the position of observation and time etc...
 	navigation->update_time(delta_time);
 
-	ssystem->compute_positions(navigation->get_JDay());		// Position of sun and all the satellites (ie planets)
-	ssystem->compute_trans_matrices(navigation->get_JDay());	// Matrix for sun and all the satellites (ie planets)
-	navigation->update_transform_matrices((ssystem->get_earth())->get_ecliptic_pos());	// Transform matrices between coordinates systems
- 	navigation->update_vision_vector(delta_time, selected_object);		// Direction of vision
+	// Position of sun and all the satellites (ie planets)
+	ssystem->compute_positions(navigation->get_JDay());
+	// Matrix for sun and all the satellites (ie planets)
+	ssystem->compute_trans_matrices(navigation->get_JDay());
+
+	// Transform matrices between coordinates systems
+	navigation->update_transform_matrices((ssystem->get_earth())->get_ecliptic_pos());
+	// Direction of vision
+	navigation->update_vision_vector(delta_time, selected_object);
 
 	// Set the common variables used by the draw functions
 	du->set_params(navigation->get_fov(), screen_W, screen_H);
@@ -186,7 +194,7 @@ void stel_core::update(int delta_time)
 void stel_core::draw(int delta_time)
 {
 	// Init openGL viewing with fov, screen size and clip planes
-	navigation->init_project_matrix(screen_W,screen_H,0.00001 ,40 );
+	navigation->init_project_matrix(screen_W,screen_H,0.0001 ,40 );
 
     // Set openGL drawings in equatorial coordinates
     navigation->switch_to_earth_equatorial();
@@ -228,7 +236,7 @@ void stel_core::draw(int delta_time)
     if (FlagEcliptic) DrawEcliptic();	// Draw the ecliptic line
 
 	// Draw the pointer on the currently selected object
-    if (selected_object) selected_object->draw_pointer(delta_time, du);
+    if (selected_object) selected_object->draw_pointer(delta_time, du, navigation);
 
 	// Set openGL drawings in heliocentric coordinates
 	navigation->switch_to_heliocentric();
@@ -426,7 +434,6 @@ void stel_core::load_base_textures(void)
         printf("ERROR : Bad landscape number, change it in config.txt\n");
         exit(-1);
     }
-
 }
 
 

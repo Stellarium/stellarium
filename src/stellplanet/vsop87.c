@@ -25,16 +25,16 @@ Modified 2003 Fabien Chéreau
 
 double calc_series (const struct vsop * data, int terms, double t)
 {
-	double value = 0;
-	int i;
-	
-	for (i=0; i<terms; i++)
+	static double value;
+	static int i;
+	value = 0.;
+
+	for (i=0; i<terms; ++i)
 	{
 		value += data->A * cos(data->B + data->C * t);
-		data++;
+		++data;
 	}
-	
-	return (value);
+	return value;
 }
 
 
@@ -45,15 +45,18 @@ double calc_series (const struct vsop * data, int terms, double t)
 // param JD Julian day
 void vsop87_to_fk5 (double *L, double *B, double JD)
 {
-	double LL, T, delta_L, delta_B;
-	
+	static double LL, cosLL, sinLL, T, delta_L, delta_B;
+
+	cosLL = cos(LL);
+	sinLL = sin(LL);
+
 	/* get julian centuries from 2000 */
 	T = (JD - 2451545.0)/ 36525.0;
 	
 	LL = *L - 0.02438225 * T - 0.00000541052 * T * T;
 
-	delta_L = (-0.09033 / 3600.0) + (0.03916 / 3600.0) * (cos (LL) + sin (LL)) * tan (*B);
-	delta_B = (0.03916 / 3600.0) * (cos(LL) - sin(LL));
+	delta_L = (-0.09033 / 3600.0) + (0.03916 / 3600.0) * (cosLL + sinLL) * tan(*B);
+	delta_B = (0.03916 / 3600.0) * (cosLL - sinLL);
 	
 	*L += delta_L;
 	*B += delta_B;

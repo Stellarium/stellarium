@@ -70,7 +70,7 @@ stel_ui::stel_ui(stel_core * _core) :
 	core = _core;
 }
 
-
+////////////////////////////////////////////////////////////////////////////////
 void stel_ui::init(void)
 {
     // Load standard font
@@ -127,7 +127,7 @@ void stel_ui::init(void)
 
 }
 
-
+////////////////////////////////////////////////////////////////////////////////
 Component* stel_ui::createTopBar(void)
 {
     top_bar_date_lbl = new Label("-", courierFont);	top_bar_date_lbl->setPos(2,2);
@@ -147,6 +147,7 @@ Component* stel_ui::createTopBar(void)
 	return top_bar_ctr;
 }
 
+////////////////////////////////////////////////////////////////////////////////
 void stel_ui::updateTopBar(void)
 {
     char str[30];
@@ -173,48 +174,48 @@ void stel_ui::updateTopBar(void)
 Component* stel_ui::createFlagButtons(void)
 {
 	bt_flag_asterism_draw = new FlagButton(core->FlagAsterismDrawing, NULL, "Bouton1");
-	bt_flag_asterism_draw->setOnPressCallback(makeFunctor((s_pcallback0)0,*this, &stel_ui::cb1));
-	bt_flag_asterism_draw->setOnMouseInOutCallback(makeFunctor((s_pcallback0)0,*this, &stel_ui::cbr1));
+	bt_flag_asterism_draw->setOnPressCallback(makeFunctor((s_pcallback0)0,*this, &stel_ui::cb));
+	bt_flag_asterism_draw->setOnMouseInOutCallback(makeFunctor((s_pcallback0)0,*this, &stel_ui::cbr));
 
 	bt_flag_asterism_name = new FlagButton(core->FlagAsterismName, NULL, "Bouton2");
-	bt_flag_asterism_name->setOnPressCallback(makeFunctor((s_pcallback0)0,*this, &stel_ui::cb2));
-	bt_flag_asterism_name->setOnMouseInOutCallback(makeFunctor((s_pcallback0)0,*this, &stel_ui::cbr2));
+	bt_flag_asterism_name->setOnPressCallback(makeFunctor((s_pcallback0)0,*this, &stel_ui::cb));
+	bt_flag_asterism_name->setOnMouseInOutCallback(makeFunctor((s_pcallback0)0,*this, &stel_ui::cbr));
 
 	bt_flag_azimuth_grid = new FlagButton(core->FlagAzimutalGrid, NULL, "Bouton3");
-	bt_flag_azimuth_grid->setOnPressCallback(makeFunctor((s_pcallback0)0,*this, &stel_ui::cb3));
-	bt_flag_azimuth_grid->setOnMouseInOutCallback(makeFunctor((s_pcallback0)0,*this, &stel_ui::cbr3));
+	bt_flag_azimuth_grid->setOnPressCallback(makeFunctor((s_pcallback0)0,*this, &stel_ui::cb));
+	bt_flag_azimuth_grid->setOnMouseInOutCallback(makeFunctor((s_pcallback0)0,*this, &stel_ui::cbr));
 
 	bt_flag_equator_grid = new FlagButton(core->FlagEquatorialGrid, NULL, "Bouton3");
-	bt_flag_equator_grid->setOnPressCallback(makeFunctor((s_pcallback0)0,*this, &stel_ui::cb4));
-	bt_flag_equator_grid->setOnMouseInOutCallback(makeFunctor((s_pcallback0)0,*this, &stel_ui::cbr4));
+	bt_flag_equator_grid->setOnPressCallback(makeFunctor((s_pcallback0)0,*this, &stel_ui::cb));
+	bt_flag_equator_grid->setOnMouseInOutCallback(makeFunctor((s_pcallback0)0,*this, &stel_ui::cbr));
 
 	bt_flag_ground = new FlagButton(core->FlagGround, NULL, "Bouton4");
-	bt_flag_ground->setOnPressCallback(makeFunctor((s_pcallback0)0,*this, &stel_ui::cb5));
-	bt_flag_ground->setOnMouseInOutCallback(makeFunctor((s_pcallback0)0,*this, &stel_ui::cbr5));
+	bt_flag_ground->setOnPressCallback(makeFunctor((s_pcallback0)0,*this, &stel_ui::cb));
+	bt_flag_ground->setOnMouseInOutCallback(makeFunctor((s_pcallback0)0,*this, &stel_ui::cbr));
 
 	bt_flag_cardinals = new FlagButton(core->FlagCardinalPoints, NULL, "Bouton8");
-	bt_flag_cardinals->setOnPressCallback(makeFunctor((s_pcallback0)0,*this, &stel_ui::cb6));
-	bt_flag_cardinals->setOnMouseInOutCallback(makeFunctor((s_pcallback0)0,*this, &stel_ui::cbr6));
+	bt_flag_cardinals->setOnPressCallback(makeFunctor((s_pcallback0)0,*this, &stel_ui::cb));
+	bt_flag_cardinals->setOnMouseInOutCallback(makeFunctor((s_pcallback0)0,*this, &stel_ui::cbr));
 
 	bt_flag_atmosphere = new FlagButton(core->FlagAtmosphere, NULL, "Bouton9");
-	bt_flag_atmosphere->setOnPressCallback(makeFunctor((s_pcallback0)0,*this, &stel_ui::cb7));
-	bt_flag_atmosphere->setOnMouseInOutCallback(makeFunctor((s_pcallback0)0,*this, &stel_ui::cbr7));
+	bt_flag_atmosphere->setOnPressCallback(makeFunctor((s_pcallback0)0,*this, &stel_ui::cb));
+	bt_flag_atmosphere->setOnMouseInOutCallback(makeFunctor((s_pcallback0)0,*this, &stel_ui::cbr));
 
 	bt_flag_nebula_name = new FlagButton(core->FlagNebulaName, NULL, "Bouton15");
-	bt_flag_nebula_name->setOnPressCallback(makeFunctor((s_pcallback0)0,*this, &stel_ui::cb8));
-	bt_flag_nebula_name->setOnMouseInOutCallback(makeFunctor((s_pcallback0)0,*this, &stel_ui::cbr8));
+	bt_flag_nebula_name->setOnPressCallback(makeFunctor((s_pcallback0)0,*this, &stel_ui::cb));
+	bt_flag_nebula_name->setOnMouseInOutCallback(makeFunctor((s_pcallback0)0,*this, &stel_ui::cbr));
 
 	bt_flag_help = new FlagButton(core->FlagHelp, NULL, "Bouton11");
-	bt_flag_help->setOnPressCallback(makeFunctor((s_pcallback0)0,*this, &stel_ui::cb9));
-	bt_flag_help->setOnMouseInOutCallback(makeFunctor((s_pcallback0)0,*this, &stel_ui::cbr9));
+	bt_flag_help->setOnPressCallback(makeFunctor((s_pcallback0)0,*this, &stel_ui::cb));
+	bt_flag_help->setOnMouseInOutCallback(makeFunctor((s_pcallback0)0,*this, &stel_ui::cbr));
 
 	bt_flag_follow_earth = new FlagButton(core->navigation->get_flag_lock_equ_pos(), NULL, "Bouton13");
-	bt_flag_follow_earth->setOnPressCallback(makeFunctor((s_pcallback0)0,*this, &stel_ui::cb10));
-	bt_flag_follow_earth->setOnMouseInOutCallback(makeFunctor((s_pcallback0)0,*this, &stel_ui::cbr10));
+	bt_flag_follow_earth->setOnPressCallback(makeFunctor((s_pcallback0)0,*this, &stel_ui::cb));
+	bt_flag_follow_earth->setOnMouseInOutCallback(makeFunctor((s_pcallback0)0,*this, &stel_ui::cbr));
 
 	bt_flag_config = new FlagButton(core->FlagConfig, NULL, "Bouton16");
-	bt_flag_config->setOnPressCallback(makeFunctor((s_pcallback0)0,*this, &stel_ui::cb11));
-	bt_flag_config->setOnMouseInOutCallback(makeFunctor((s_pcallback0)0,*this, &stel_ui::cbr11));
+	bt_flag_config->setOnPressCallback(makeFunctor((s_pcallback0)0,*this, &stel_ui::cb));
+	bt_flag_config->setOnMouseInOutCallback(makeFunctor((s_pcallback0)0,*this, &stel_ui::cbr));
 
 	bt_flag_ctr = new FilledContainer();
 	bt_flag_ctr->addComponent(bt_flag_asterism_draw); 	bt_flag_asterism_draw->setPos(0,0);
@@ -236,21 +237,23 @@ Component* stel_ui::createFlagButtons(void)
 
 }
 
-void stel_ui::cb1(void){core->FlagAsterismDrawing 	= bt_flag_asterism_draw->getState();}
-void stel_ui::cb2(void){core->FlagAsterismName 		= bt_flag_asterism_name->getState();}
-void stel_ui::cb3(void){core->FlagAzimutalGrid 		= bt_flag_azimuth_grid->getState();}
-void stel_ui::cb4(void){core->FlagEquatorialGrid 	= bt_flag_equator_grid->getState();}
-void stel_ui::cb5(void){core->FlagGround	 		= bt_flag_ground->getState();}
-void stel_ui::cb6(void){core->FlagCardinalPoints	= bt_flag_cardinals->getState();}
-void stel_ui::cb7(void){core->FlagAtmosphere 		= bt_flag_atmosphere->getState();}
-void stel_ui::cb8(void){core->FlagNebulaName		= bt_flag_nebula_name->getState();}
-void stel_ui::cb9(void)
+////////////////////////////////////////////////////////////////////////////////
+void stel_ui::cb(void)
 {
+	core->FlagAsterismDrawing 	= bt_flag_asterism_draw->getState();
+	core->FlagAsterismName 		= bt_flag_asterism_name->getState();
+	core->FlagAzimutalGrid 		= bt_flag_azimuth_grid->getState();
+	core->FlagEquatorialGrid 	= bt_flag_equator_grid->getState();
+	core->FlagGround	 		= bt_flag_ground->getState();
+	core->FlagCardinalPoints	= bt_flag_cardinals->getState();
+	core->FlagAtmosphere 		= bt_flag_atmosphere->getState();
+	if (!core->FlagAtmosphere) core->tone_converter->set_world_adaptation_luminance(3.75f);
+	core->FlagNebulaName		= bt_flag_nebula_name->getState();
 	core->FlagHelp = bt_flag_help->getState();
 	help_win->setVisible(core->FlagHelp);
+	core->navigation->set_flag_lock_equ_pos(bt_flag_follow_earth->getState());
+	core->FlagConfig			= bt_flag_config->getState();
 }
-void stel_ui::cb10(void){core->navigation->set_flag_lock_equ_pos(bt_flag_follow_earth->getState());}
-void stel_ui::cb11(void){core->FlagConfig			= bt_flag_config->getState();}
 
 void stel_ui::bt_flag_ctrOnMouseInOut(void)
 {
@@ -258,28 +261,31 @@ void stel_ui::bt_flag_ctrOnMouseInOut(void)
 	else bt_flag_help_lbl->setVisible(0);
 }
 
-void stel_ui::cbr1(void) {if (bt_flag_asterism_draw->getIsMouseOver())
-bt_flag_help_lbl->setLabel("Drawing of the Constellations [C]");}
-void stel_ui::cbr2(void) {if (bt_flag_asterism_name->getIsMouseOver())
-bt_flag_help_lbl->setLabel("Names of the Constellations [V]");}
-void stel_ui::cbr3(void) {if (bt_flag_azimuth_grid->getIsMouseOver())
-bt_flag_help_lbl->setLabel("Azimutal Grid [Z]");}
-void stel_ui::cbr4(void) {if (bt_flag_equator_grid->getIsMouseOver())
-bt_flag_help_lbl->setLabel("Equatorial Grid [E]");}
-void stel_ui::cbr5(void) {if (bt_flag_ground->getIsMouseOver())
-bt_flag_help_lbl->setLabel("Ground [G]");}
-void stel_ui::cbr6(void) {if (bt_flag_cardinals->getIsMouseOver())
-bt_flag_help_lbl->setLabel("Cardinal Points [Q]");}
-void stel_ui::cbr7(void) {if (bt_flag_atmosphere->getIsMouseOver())
-bt_flag_help_lbl->setLabel("Atmosphere [A]");}
-void stel_ui::cbr8(void) {if (bt_flag_nebula_name->getIsMouseOver())
-bt_flag_help_lbl->setLabel("Nebulas [N]");}
-void stel_ui::cbr9(void) {if (bt_flag_help->getIsMouseOver())
-bt_flag_help_lbl->setLabel("Help [H]");}
-void stel_ui::cbr10(void) {if (bt_flag_follow_earth->getIsMouseOver())
-bt_flag_help_lbl->setLabel("Compensation of the Earth rotation [T]");}
-void stel_ui::cbr11(void) {if (bt_flag_config->getIsMouseOver())
-bt_flag_help_lbl->setLabel("Configuration window");}
+void stel_ui::cbr(void)
+{
+	if (bt_flag_asterism_draw->getIsMouseOver())
+		bt_flag_help_lbl->setLabel("Drawing of the Constellations [C]");
+	if (bt_flag_asterism_name->getIsMouseOver())
+		bt_flag_help_lbl->setLabel("Names of the Constellations [V]");
+	if (bt_flag_azimuth_grid->getIsMouseOver())
+		bt_flag_help_lbl->setLabel("Azimutal Grid [Z]");
+	if (bt_flag_equator_grid->getIsMouseOver())
+		bt_flag_help_lbl->setLabel("Equatorial Grid [E]");
+	if (bt_flag_ground->getIsMouseOver())
+		bt_flag_help_lbl->setLabel("Ground [G]");
+	if (bt_flag_cardinals->getIsMouseOver())
+		bt_flag_help_lbl->setLabel("Cardinal Points [Q]");
+	if (bt_flag_atmosphere->getIsMouseOver())
+		bt_flag_help_lbl->setLabel("Atmosphere [A]");
+	if (bt_flag_nebula_name->getIsMouseOver())
+		bt_flag_help_lbl->setLabel("Nebulas [N]");
+	if (bt_flag_help->getIsMouseOver())
+		bt_flag_help_lbl->setLabel("Help [H]");
+	if (bt_flag_follow_earth->getIsMouseOver())
+		bt_flag_help_lbl->setLabel("Compensation of the Earth rotation [T]");
+	if (bt_flag_config->getIsMouseOver())
+		bt_flag_help_lbl->setLabel("Configuration window");
+}
 
 
 
@@ -372,7 +378,6 @@ stel_ui::~stel_ui()
     if (desktop) delete desktop; 		desktop = NULL;
     if (spaceFont) delete spaceFont; 	spaceFont = NULL;
 	if (baseTex) delete baseTex; 		baseTex = NULL;
-
 }
 
 /*******************************************************************/
@@ -383,7 +388,6 @@ void stel_ui::draw(void)
 
     glScalef(1, -1, 1);						// invert the y axis, down is positive
     glTranslatef(0, -core->screen_H, 0);	// move the origin from the bottom left corner to the upper left corner
-
 
 	desktop->draw();
 
@@ -430,7 +434,7 @@ int stel_ui::handle_clic(Uint16 x, Uint16 y, Uint8 button, Uint8 state)
         {
 			if (core->selected_object)
             {
-				core->navigation->move_to(core->selected_object->get_earth_equ_pos());
+				core->navigation->move_to(core->selected_object->get_earth_equ_pos(core->navigation));
             }
         }
         if (button==SDL_BUTTON_LEFT)
@@ -563,7 +567,7 @@ int stel_ui::handle_keys(SDLKey key, S_GUI_VALUE state)
         {	
         	if (core->selected_object)
 			{
-				core->navigation->move_to(core->selected_object->get_earth_equ_pos());
+				core->navigation->move_to(core->selected_object->get_earth_equ_pos(core->navigation));
 				core->navigation->set_flag_traking(1);
 			}
 		}
@@ -584,13 +588,12 @@ void stel_ui::update(void)
 }
 
 
-
 // Update the infos about the selected object in the TextLabel widget
 void stel_ui::updateInfoSelectString(void)
 {
 	char objectInfo[300];
-    objectInfo[0]=0;
-	core->selected_object->get_info_string(objectInfo);
+    objectInfo[0]='\0';
+	core->selected_object->get_info_string(objectInfo, core->navigation);
     info_select_txtlbl->setLabel(objectInfo);
     info_select_ctr->setVisible(1);
 	if (core->selected_object->get_type()==STEL_OBJECT_NEBULA)

@@ -107,16 +107,6 @@ void navigator::init_project_matrix(int w, int h, double nearclip, double farcli
 	glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
 
-    // calculate dimensions for screen based on aspect ratio to
-    // get a perfect sky circle (1000 is sky circle diameter)
-    //double halfscreen = 25. * (double)w / h;
-
-    //glOrtho(-1*halfscreen, halfscreen, -25, 25, 0.1, 50);
-
-	// Make North be up
-	//
-	//glRotatef(90,0,0,1);
-
 	gluPerspective(fov, (double)w/h, nearclip, farclip);
     glMatrixMode(GL_MODELVIEW);
 }
@@ -194,7 +184,7 @@ void navigator::update_vision_vector(int delta_time, stel_object* selected)
 	{
     	if (flag_traking && selected) // Equatorial vision vector locked on selected object
 		{
-			equ_vision=selected->get_earth_equ_pos();
+			equ_vision=selected->get_earth_equ_pos(this);
 			// Recalc local vision vector
 			local_vision=earth_equ_to_local(&equ_vision);
 		}
@@ -324,7 +314,7 @@ void navigator::update_transform_matrices(Vec3d earth_ecliptic_pos)
 	mat_local_to_earth_equ = LOC_to_GEI;
 	mat_earth_equ_to_local = GEI_to_LOC;
 
-	/* These two next have to take into account the position of the observer on the earth */
+	// These two next have to take into account the position of the observer on the earth
 	Mat4d GEI_to_HSE = 	Mat4d::translation(earth_ecliptic_pos) *
 	                    Mat4d::xrotation(-get_mean_obliquity(JDay)*M_PI/180.);
 

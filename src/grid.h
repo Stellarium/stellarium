@@ -31,6 +31,7 @@ public:
     int GetNearest(vec3_t);
 	void Draw(void);
 	int Intersect(vec3_t pos, float fieldAngle, int * &result);
+	int getNbPoints(void) const {return NbPoints;}
 private:
     float Angle;     // Radius of each zone (in radians)
     int NbPoints;    // Number of zones

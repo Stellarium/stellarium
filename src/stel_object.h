@@ -34,11 +34,11 @@ class stel_object
 {
 public:
 	virtual void update(void) {return;}
-	virtual void draw_pointer(int delta_time, draw_utility * du);
+	void draw_pointer(int delta_time, draw_utility * du, navigator * nav);
 
-	virtual void get_info_string(char * s) const;
+	virtual void get_info_string(char * s, navigator * nav) const;
 	virtual unsigned char get_type(void) const =0;
-	virtual Vec3d get_earth_equ_pos(navigator * nav = NULL) const =0;
+	virtual Vec3d get_earth_equ_pos(navigator * nav) const =0;
 	virtual vec3_t get_RGB(void) const {return vec3_t(0.,0.,0.);}
 private:
 	static int local_time;

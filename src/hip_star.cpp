@@ -43,7 +43,7 @@ Hip_Star::~Hip_Star()
 	if (CommonName) delete CommonName;
 }
 
-void Hip_Star::get_info_string(char * s) const
+void Hip_Star::get_info_string(char * s, navigator * nav) const
 {
 	float tempDE, tempRA;
 	rect_to_sphe(&tempRA,&tempDE,&XYZ);
@@ -133,8 +133,7 @@ int Hip_Star::Read(FILE * catalog)
 void Hip_Star::Draw(draw_utility * du)
 {
     // Check if in the field of view, if not return
-    if ( XY[0]<0. || XY[1]<0. || XY[0]>du->screenW || XY[1]>du->screenH )
-		return;
+    if ( XY[1]>du->screenH || XY[1]<0. || XY[0]<0. || XY[0]>du->screenW ) return;
 
 	static float coef;
 	static float cmag;
