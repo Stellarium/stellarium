@@ -813,7 +813,7 @@ Boston, MA  02111-1307, USA.\n"
 /**********************************************************************************/
 /*** Base container ***/
     Base = new Container();
-    Base->reshape(vec2_i(0,0),vec2_i(global.X_Resolution,global.Y_Resolution));
+    Base->reshape(vec2_i(1,1),vec2_i(global.X_Resolution,global.Y_Resolution));
     Base->addComponent(ContainerBtFlags);
     Base->addComponent(btLegend);
     Base->addComponent(InfoSelectLabel);
