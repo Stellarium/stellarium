@@ -1,3 +1,12 @@
+0.5.0b [20/10/2002]
+Improved the grid class for optimisation.
+Removed the stars drawing bug when zooming.
+Fixed the fog texture bug (black vertical line) which occured on some plateform.
+Added a "current time" button to the time control panel.
+Created a new module stelconfig.h/cpp to manage the configuration files and multiplateform options.
+Added the CTRL + clic = right clic (usefull for MacOSX users).
+Fixed a configure.in problem for MACOSX portability.
+
 0.4.9 [17/10/2002]
 Fixed the binary file bug under win32 (just forget a "b" in the file open mode....)
 Use the Hipparcos catalog : there are now 120 000 stars (10 000 before).

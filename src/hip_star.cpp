@@ -121,9 +121,6 @@ void Hip_Star::Draw(void)
          XY[1]<0 || XY[1]>global.Y_Resolution ) 
         return;
 
-    // Random coef for star twinkling
-    coef=(float)rand()/RAND_MAX*global.StarTwinkleAmount/10;
-
     // Calculation of the demi-size of the star texture
     rmag = rmag_t/pow(global.Fov,0.85);
 
@@ -138,10 +135,13 @@ void Hip_Star::Draw(void)
         rmag=1.2;
     }
 
-    if (rmag>6) 
+    if (rmag>6)
     {   
         rmag=6.;
     }
+
+    // Random coef for star twinkling
+    coef=(float)rand()/RAND_MAX*global.StarTwinkleAmount/10;
 
     // Calculation of the luminosity
     cmag*=(1.-coef);

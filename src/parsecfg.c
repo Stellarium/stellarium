@@ -20,11 +20,7 @@
 /*                                                                        */
 /**************************************************************************/
 
-/* $Id: parsecfg.c 50 2002-10-16 10:49:44Z xalioth $ */
-
-#ifdef HAVE_CONFIG_H
-#  include "config.h"
-#endif
+/* $Id: parsecfg.c 56 2002-10-21 00:22:38Z xalioth $ */
 
 #include <stdio.h>
 #include <stdlib.h>

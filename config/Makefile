@@ -83,7 +83,7 @@ am__quote =
 install_sh = /home/Fabien/work/stellarium/install-sh
 
 pkgdatadir = $(datadir)/stellarium/config
-pkgdata_DATA = config_no_3D_acceleration.txt  config.txt  location_examples.txt  location.txt
+pkgdata_DATA = config.txt location.txt config_no_3D_acceleration.txt default_config.txt default_location.txt location_examples.txt
 EXTRA_DIST = $(pkgdata_DATA)
 subdir = config
 mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
