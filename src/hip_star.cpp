@@ -155,7 +155,7 @@ void Hip_Star::draw(void)
     // Compute the equivalent star luminance for a 5 arc min circle and convert it
 	// in function of the eye adaptation
 	rmag = eye->adapt_luminance(term1);
-	rmag = rmag/powf(proj->get_fov(),0.85f)*50.f;
+	rmag = rmag/powf(proj->get_fov(),0.85f)*70.f;
 
     cmag = 1.f;
 
