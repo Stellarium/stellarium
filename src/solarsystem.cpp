@@ -310,3 +310,24 @@ planet* SolarSystem::search(Vec3d pos, const navigator * nav, const Projector * 
     else return NULL;
 }
 
+// Return a stl vector containing the planets located inside the lim_fov circle around position v
+vector<stel_object*> SolarSystem::search_around(Vec3d v, double lim_fov, const navigator * nav, const Projector * prj)
+{
+	vector<stel_object*> result;
+    v.normalize();
+	double cos_lim_fov = cos(lim_fov * M_PI/180.);
+	static Vec3d equPos;
+
+    vector<planet*>::iterator iter = system_planets.begin();
+    while (iter != system_planets.end())
+    {
+        equPos = (*iter)->get_earth_equ_pos(nav);
+		equPos.normalize();
+		if (equPos[0]*v[0] + equPos[1]*v[1] + equPos[2]*v[2]>=cos_lim_fov)
+		{
+			result.push_back(*iter);
+		}
+        iter++;
+    }
+	return result;
+}

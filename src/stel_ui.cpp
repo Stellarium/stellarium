@@ -470,7 +470,9 @@ int stel_ui::handle_clic(Uint16 x, Uint16 y, Uint8 button, Uint8 state)
             	return 1;
         	}
         	// Left or middle clic -> selection of an object
-            core->selected_object=core->find_stel_object((int)x, core->screen_H-(int)y);
+			core->selected_object = core->clever_find((int)x, core->screen_H-(int)y);
+            //core->selected_object = core->find_stel_object((int)x, core->screen_H-(int)y);
+
             // If an object has been found
             if (core->selected_object)
             {

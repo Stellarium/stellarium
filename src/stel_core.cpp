@@ -795,8 +795,72 @@ stel_object * stel_core::find_stel_object(int x, int y) const
 {
 	Vec3d v;
 	projection->unproject_earth_equ(x,y,v);
-
 	return find_stel_object(v);
+}
+
+// Find and select in a "clever" way an object
+stel_object * stel_core::clever_find(const Vec3d& v) const
+{
+	stel_object * sobj = NULL;
+	vector<stel_object*> candidates;
+	vector<stel_object*> temp;
+	Vec3d winpos;
+
+	// Field of view for a 30 pixel diameter circle on screen
+	float fov_around = projection->get_fov()/MY_MIN(projection->viewW(), projection->viewH()) * 30.f;
+
+	float xpos, ypos;
+	projection->project_earth_equ(v, winpos);
+	xpos = winpos[0];
+	ypos = winpos[1];
+
+	// Collect the planets inside the range
+	if (FlagPlanets)
+	{
+		temp = ssystem->search_around(v, fov_around, navigation, projection);
+		candidates.insert(candidates.begin(), temp.begin(), temp.end());
+	}
+
+	// The nebulas inside the range
+	if (FlagNebula)
+	{
+		temp = nebulas->search_around(v, fov_around);
+		candidates.insert(candidates.begin(), temp.begin(), temp.end());
+	}
+
+	// And the stars inside the range
+	if (FlagStars)
+	{
+		temp = hip_stars->search_around(v, fov_around);
+		candidates.insert(candidates.begin(), temp.begin(), temp.end());
+	}
+
+	// Now select the object minimizing the function y = distance(in pixel) + magnitude
+	float best_object_value;
+	best_object_value = 100000.f;
+	vector<stel_object*>::iterator iter = candidates.begin();
+    while (iter != candidates.end())
+    {
+		projection->project_earth_equ((*iter)->get_earth_equ_pos(navigation), winpos);
+		float distance = sqrt((xpos-winpos[0])*(xpos-winpos[0]) + (ypos-winpos[1])*(ypos-winpos[1]));
+		float mag = (*iter)->get_mag(navigation);
+		if ((*iter)->get_type()==STEL_OBJECT_NEBULA) mag -= 7.f;
+		if (distance + mag < best_object_value)
+		{
+			best_object_value = distance + mag;
+			sobj = *iter;
+		}
+        iter++;
+    }
+
+	return sobj;
+}
+
+stel_object * stel_core::clever_find(int x, int y) const
+{
+	Vec3d v;
+	projection->unproject_earth_equ(x,y,v);
+	return clever_find(v);
 }
 
 // Goto the given object

@@ -197,6 +197,8 @@ float planet::compute_magnitude(Vec3d obs_pos) const
 {
 	Vec3d heliopos = get_heliocentric_ecliptic_pos();
 	double R = heliopos.length();
+	// Fix bug for sun
+	if (R<0.0000000000000001) return -26.73f;
 	double p = (obs_pos - heliopos).length();
 	double s = obs_pos.length();
 	double cos_chi = (p*p + R*R - s*s)/(2.f*p*R);
@@ -204,6 +206,11 @@ float planet::compute_magnitude(Vec3d obs_pos) const
 	float phase = (1.f - acosf(cos_chi)/M_PI) * cos_chi + sqrt(1.f - cos_chi*cos_chi) / M_PI;
 	float F = 0.666666667f * albedo * (radius*s/(R*p)) * (radius*s/(R*p)) * phase;
 	return -26.73f - 2.5f * log10f(F);
+}
+
+float planet::compute_magnitude(const navigator * nav) const
+{
+	return compute_magnitude(nav->get_observer_helio_pos());
 }
 
 // Add the given planet in the satellite list

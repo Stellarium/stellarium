@@ -41,6 +41,9 @@ public:
 	// Search the Nebulae by position
 	stel_object * search(Vec3f Pos);
 
+	// Return a stl vector containing the nebulas located inside the lim_fov circle around position v
+	vector<stel_object*> search_around(Vec3d v, double lim_fov);
+
 private:
     vector<Nebula*> neb_array;	// The nebulas list
 };
