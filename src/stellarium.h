@@ -36,6 +36,7 @@
 # include <GL/glu.h>
 #endif
 
+#include "SDL.h"
 
 #include <config.h>
 

@@ -19,39 +19,19 @@
 
 
 #include "stellarium.h"
-#include "draw.h"
-#include "constellation.h"
-#include "constellation_mgr.h"
-#include "nebula.h"
-#include "nebula_mgr.h"
-#include "s_texture.h"
-#include "stellarium_ui.h"
-#include "s_gui.h"
-#include "hip_star_mgr.h"
-#include "shooting.h"
-#include "stel_config.h"
-#include "solarsystem.h"
-#include "navigator.h"
-#include "stel_object.h"
-#include "stel_atmosphere.h"
-#include "tone_reproductor.h"
-
-#include "SDL.h"
+#include "stel_core.h"
+#include "stel_sdl.h"
 
 using namespace std;
 
-struct AppStatus		// We Use A Struct To Hold Application Runtime Data
-{
-	bool Visible;		// Is The Application Visible? Or Iconified?
-	bool MouseFocus;	// Is The Mouse Cursor In The Application Field?
-	bool KeyboardFocus;	// Is The Input Focus On Our Application?
-};
+char DDIR[255];	// Data Directory
+char TDIR[255];	// Textures Directory
+char CDIR[255];	// Config Directory
 
-// Globals
-bool isProgramLooping;	// Wether the Program Must Go On In The Main Loop
+// Predeclare the function at the end of the file
+void setDirectories(void);
 
-
-// ***************  Print a beautiful console logo !! ******************
+// Print a beautiful console logo !!
 void drawIntro(void)
 {
     printf("\n");
@@ -67,172 +47,16 @@ void drawIntro(void)
 };
 
 
-// ************************  On resize  *******************************
-void ResizeGL(int w, int h)
-{
-    if (!h || (w==global.X_Resolution && h==global.Y_Resolution)) return;
-    global.X_Resolution = w;
-    global.Y_Resolution = h;
-	clearUi();
-	initUi();
-    glViewport(0, 0, global.X_Resolution, global.Y_Resolution);
-	navigation.init_project_matrix(global.X_Resolution,global.Y_Resolution,1,10000);
-}
-
-
-void TerminateApplication(void)				// Terminate The Application
-{
-	static SDL_Event Q;						// We're Sending A SDL_QUIT Event
-	Q.type = SDL_QUIT;						// To The SDL Event Queue
-	if(SDL_PushEvent(&Q) == -1)				// Try Send The Event
-	{
-		printf("SDL_QUIT event can't be pushed: %s\n", SDL_GetError() );
-		exit(1);
-	}
-	return;
-}
-
-
-// ********************  Handle keys  **********************
-void pressKey(Uint8 *keys)
-{
-    // Direction and zoom deplacements
-    if(keys[SDLK_LEFT])
-	{
-		navigation.turn_left(1);
-	}
-    if(keys[SDLK_RIGHT])
-	{
-		navigation.turn_right(1);
-	}
-    if(keys[SDLK_UP])
-	{
-		if (SDL_GetModState() & KMOD_CTRL)
-		{
-			navigation.zoom_in(1);
-		}
-		else
-		{	navigation.turn_up(1);
-		}
-	}
-    if(keys[SDLK_DOWN])
-	{
-		if (SDL_GetModState() & KMOD_CTRL)
-		{
-			navigation.zoom_out(1);
-		}
-		else
-		{
-			navigation.turn_down(1);
-		}
-	}
-    if(keys[SDLK_PAGEUP]) navigation.zoom_in(1);
-    if(keys[SDLK_PAGEDOWN]) navigation.zoom_out(1);
-
-}
-
-// *******************  Stop mooving and zooming  **********************
-void releaseKey(SDLKey key)
-{   
-    // When a deplacement key is released stop mooving
-    if (key==SDLK_LEFT) navigation.turn_left(0);
-	if (key==SDLK_RIGHT) navigation.turn_right(0);
-	if (SDL_GetModState() & KMOD_CTRL)
-	{
-		if (key==SDLK_UP) navigation.zoom_in(0);
-		if (key==SDLK_DOWN) navigation.zoom_out(0);
-	}
-	else
-	{
-		if (key==SDLK_UP) navigation.turn_up(0);
-		if (key==SDLK_DOWN) navigation.turn_down(0);
-	}
-
-    if (key==SDLK_PAGEUP)  navigation.zoom_in(0);
-	if (key==SDLK_PAGEDOWN) navigation.zoom_out(0);
-}
-
-bool InitTimers(Uint32 *C)   // This Is Used To Init All The Timers In Our Application
-{
-	*C = SDL_GetTicks(); // Hold The Value Of SDL_GetTicks At The Program Init
-	return true;	     // Return TRUE (Initialization Successful)
-}
-
-
-bool Initialize(void)	     // Any Application & User Initialization Code Goes Here
-{
-    AppStatus.Visible	    = true;	 // At The Beginning, Our App Is Visible
-    AppStatus.MouseFocus    = true;	 // And Have Both Mouse
-    AppStatus.KeyboardFocus = true;	 // And Input Focus
-
-    SDL_EnableKeyRepeat(0, 0); // Disable key repeat
-
-    HipVouteCeleste = new Hip_Star_mgr();
-    if (!HipVouteCeleste) exit(-1);
-
-    ConstellCeleste = new Constellation_mgr();
-    if (!ConstellCeleste) exit(-1);
-
-    messiers = new Nebula_mgr();
-    if (!messiers) exit(-1);
-
-	InitSolarSystem(); // Create and init the solar system
-    if (!Sun) exit(-1);
-
-    loadCommonTextures();            // Load the common used textures
-
-    char tempName[255];
-    char tempName2[255];
-    char tempName3[255];
-
-    // Load hipparcos stars & names
-    strcpy(tempName,global.DataDir);
-    strcat(tempName,"hipparcos.fab");
-    strcpy(tempName2,global.DataDir);
-    strcat(tempName2,"commonname.fab");
-    strcpy(tempName3,global.DataDir);
-    strcat(tempName3,"name.fab");
-    HipVouteCeleste->Load(tempName,tempName2,tempName3);
-
-    strcpy(tempName,global.DataDir);
-    strcat(tempName,"constellationship.fab");
-    ConstellCeleste->Load(tempName,HipVouteCeleste);	// Load constellations
-    Sun->compute_position(navigation.get_JDay());		// Compute planet data
-    InitMeriParal();                 	// Precalculation for the grids drawing
-    InitAtmosphere();
-
-    strcpy(tempName,global.DataDir);
-    strcat(tempName,"messier.fab");
-    messiers->Read(tempName);        // read the messiers object data
-
-	sky=new stel_atmosphere();
-	eye=new tone_reproductor();
-
-    initUi();                        // initialisation of the User Interface
-    return true;		     // Return TRUE (Initialization Successful)
-}
-
-
-// ***************************  InitGL  ********************************
-bool InitGL(SDL_Surface *S)  // Any OpenGL Initialization Code Goes Here
-{
-    //glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_FASTEST);
-    // init the blending function parameters
-    glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
-    return true;     // Return TRUE (Initialization Successful)
-}
-
-// ***************************  Usage  *********************************
+// Display stellarium usage in the console
 void usage(char **argv)
 {
 	printf("Usage: %s [OPTION] ...\n -v, --version          output version information and exit\n -h, --help             display this help and exit\n", argv[0]);
 }
 
 
-// ***************************  Main  **********************************
-int main(int argc, char **argv)
+// Check command line arguments
+void check_command_line(int argc, char **argv)
 {
-    // Check command line arguments
     if (argc == 2)
     {
         if (!(strcmp(argv[1],"--version") && strcmp(argv[1],"-v")))
@@ -253,209 +77,180 @@ int main(int argc, char **argv)
         printf("Try `%s --help' for more information.\n", argv[0]);
         exit(1);
     }
+}
 
-    setDirectories();
-    
-    drawIntro();        // Print the console logo
-    
-    char tempName[255];
-    char tempName2[255];
-    
-    strcpy(tempName,global.ConfigDir);
-    strcat(tempName,"config.txt");
-    strcpy(tempName2,global.ConfigDir);
-    strcat(tempName2,"location.txt");
 
-    printf("Loading configuration file... (%s)\n",tempName);
+// Set the data, textures, and config directories in core.global : test the default
+// installation dir and try to find the files somewhere else if not found there
+// This enable to launch stellarium from the local directory without installing it
+void setDirectories(void)
+{
+	char dataRoot[255];
+    char tmp[255];
 
-    loadConfig(tempName,tempName2);  // Load the params from config.txt
+	// The variable CONFIG_DATA_DIR must have been set by the configure script
+	// Its value is the dataRoot directory, ie the one containing data/ and textures/
 
-    SDL_Surface *Screen;// The Screen
-    SDL_Event	E;		// And Event Used In The Polling Process
-    Uint8	*Keys;		// A Pointer To An Array That Will Contain The Keyboard Snapshot
-    Uint32	Vflags;		// Our Video Flags
-    Uint32	TickCount;	// Used For The Tick Counter
-    Uint32	LastCount;	// Used For The Tick Counter
-    Screen = NULL;
-    Keys = NULL;
+	// Check the presence of a typical file in various directories
+    strcpy(tmp, CONFIG_DATA_DIR);
+    strcat(tmp,"/data/hipparcos.fab");
+    FILE * tempFile = fopen(tmp,"r");
 
-    if(SDL_Init(SDL_INIT_VIDEO)<0)  // Init The SDL Library, The VIDEO Subsystem
-    {
-         printf("Unable to open SDL: %s\n", SDL_GetError() );
-         exit(1);
+	// This algo try set the dataRoot string
+    strcpy(dataRoot,CONFIG_DATA_DIR);
+    if(!tempFile)
+    {    
+        tempFile = fopen("./data/hipparcos.fab","r");
+        strcpy(dataRoot,".");
+        if(!tempFile)
+        {
+            strcpy(dataRoot,"..");
+            tempFile = fopen("../data/hipparcos.fab","r");
+            if(!tempFile)
+            {
+            	// Failure....
+            	printf("ERROR : I can't find the datas directories in :\n");
+            	printf("%s/ nor in ./ nor in ../\n",CONFIG_DATA_DIR);
+                printf("You may fully install the software (on POSIX systems)\n");
+                printf("or go in the stellarium package directory.\n");
+                exit(-1);
+            }
+        }
     }
+    fclose(tempFile);
 
-    // Make Sure That SDL_Quit Will Be Called In Case of exit()
-    atexit(SDL_Quit);
+	// We now have a valid dataRoot directory, we can then set the data and textures dir
+    strcpy(DDIR,dataRoot);
+    strcpy(TDIR,dataRoot);
+    strcat(DDIR,"/data/");
+    strcat(TDIR,"/textures/");
 
-	SDL_GL_SetAttribute( SDL_GL_DEPTH_SIZE, 24);
+	// If the system is non unix (windows) or if it's macosx the config file is in the
+	// config/ directory of the dataRoot directory
+#if defined(WIN32) || defined(CYGWIN) || defined(__MINGW32__) || defined(MACOSX)
+	strcpy(CDIR,dataRoot);
+	strcat(CDIR,"/config/");
+#else
 
-    // We Want A Hardware Surface
-    Vflags = SDL_HWSURFACE|SDL_OPENGL;//|SDL_DOUBLEBUF;
+	// Just an indication if we are on unix/linux that we use local data files
+	if (strcmp(dataRoot,CONFIG_DATA_DIR))
+		printf(">Found data files in %s : local version.\n",dataRoot);
 
-	// If fullscreen, set the Flag
-    if (global.Fullscreen) Vflags|=SDL_FULLSCREEN;
+	// The problem is more complexe in the case of a unix/linux system
+	// The config files are in the HOME/.stellarium/ directory and this directory
+	// has to be created if it doesn't exist
 
-	// Create the SDL Screen surface
-    Screen = SDL_SetVideoMode(global.X_Resolution, global.Y_Resolution, global.bppMode, Vflags);
-	if(!Screen)
+	// Get the user home directory
+	char * homeDir = getenv("HOME");
+
+	char tmp2[255];
+
+	// If unix system, check if the file $HOME/.stellarium/version/config.txt exists,
+	// if not, try to create it.
+    strcpy(tmp,homeDir);
+    strcat(tmp,"/.stellarium/");
+	strcat(tmp,VERSION);
+	strcat(tmp,"/config.txt");
+	if ((tempFile = fopen(tmp,"r")))
 	{
-		printf("sdl: Couldn't set %dx%d video mode: %s!",
-		global.X_Resolution, global.Y_Resolution, SDL_GetError());
-		exit(-1);
+		strcpy(CDIR,homeDir);
+		strcat(CDIR,"/.stellarium/");
+		strcat(CDIR,VERSION);
+		strcat(CDIR,"/");
+		fclose(tempFile);
 	}
-
-	SDL_WM_SetCaption(APP_NAME, APP_NAME);	// Set The Window Caption
-    strcpy(tempName,global.DataDir);
-    strcat(tempName,"icon.bmp");
-	SDL_WM_SetIcon(SDL_LoadBMP(tempName), NULL);
-
-
-	if(!InitTimers(&LastCount))			// We Call The Timers Init Function
+	else
 	{
-		printf("Can't init the timers: %s\n", SDL_GetError() );
-		exit(-1);
-	}
-
-	if(!InitGL(Screen))					// CallThe OpenGL Init Function
-	{
-		printf("Can't init GL: %s\n", SDL_GetError() );
-		exit(-1);
-	}
-
-	if(!Initialize())					// Init The Application
-	{
-		printf("App init failed: %s\n", SDL_GetError() );
-		exit(-1);
-	}
-
-	isProgramLooping = true;			// Make Our Program Loop
-
-	while(isProgramLooping)				// While It's looping
-	{
-		if(SDL_PollEvent(&E))			// Fetch The First Event Of The Queue
+		printf("Will create config files in %s/.stellarium/%s/\n",homeDir,VERSION);
+		if ((tempFile = fopen(tmp,"w")))
 		{
-			switch(E.type)				// And Processing It
-			{	
-			case SDL_QUIT:
-				{
-					isProgramLooping = false;
-					break;
-				}
-
-			case SDL_VIDEORESIZE:
-				{
-					// Recalculate The OpenGL Scene Data For The New Window
-					ResizeGL(E.resize.w, E.resize.h);
-					break;
-				}
-
-			case SDL_ACTIVEEVENT:
-				{
-					if(E.active.state & SDL_APPACTIVE)
-					{
-						// Activity Level Changed (IE: Iconified)
-						if(E.active.gain)
-						{
-							// Activity's Been Gained
-							AppStatus.Visible = true;
-						}
-						else
-						{
-							AppStatus.Visible = false;
-						}
-					}
-					
-					// The Mouse Cursor Has Left/Entered The Window Space?
-					if(E.active.state & SDL_APPMOUSEFOCUS)
-					{
-						if(E.active.gain)	// Entered
-						{
-							AppStatus.MouseFocus = true;
-						}
-						else
-						{
-							AppStatus.MouseFocus = false;
-						}
-					}
-
-					// The Window Has Gained/Lost Input Focus?
-					if(E.active.state & SDL_APPINPUTFOCUS)
-					{
-						if(E.active.gain)	// Gained
-						{
-							AppStatus.KeyboardFocus = true;
-						}
-						else
-						{
-							AppStatus.KeyboardFocus = false;
-						}
-					}
-					
-					break;
-				}
-
-			case SDL_MOUSEMOTION:
-				{
-				  	GuiHandleMove(E.motion.x,E.motion.y);
-					break;
-				}
-
-			case SDL_MOUSEBUTTONDOWN:
-				{
-					GuiHandleClic(E.button.x,E.button.y,E.button.state,E.button.button);
-					break;
-				}
-				
-			case SDL_MOUSEBUTTONUP:
-				{
-					GuiHandleClic(E.button.x,E.button.y,E.button.state,E.button.button);
-					break;
-				}
-
-			case SDL_KEYDOWN:	// Someone Has Pressed A Key?
-				{
-					// Send the event to the gui and stop if it has been intercepted
-					if (!GuiHandleKeys(E.key.keysym.sym,GUI_DOWN))
-					{
-						// Take A SnapShot Of The Keyboard
-						Keys = SDL_GetKeyState(NULL);
-						if (Keys[SDLK_F1])
-							SDL_WM_ToggleFullScreen(Screen); // Try fullscreen
-						else
-							pressKey(Keys);
-					}
-					break;
-				}
-
-			case SDL_KEYUP:	   // Someone Has Released A Key?
-				{
-					releaseKey(E.key.keysym.sym); // Handle the info
-				}
-				
-			}
+			strcpy(CDIR,homeDir);
+			strcat(CDIR,"/.stellarium/");
+			strcat(CDIR,VERSION);
+			strcat(CDIR,"/");
+			fclose(tempFile);
 		}
-		else  // No Events To Poll? (SDL_PollEvent()==0?)
+		else
 		{
-			// If The Application Is Not Visible
-			if(!AppStatus.Visible)
+			// Try to create the directory
+			printf("Try to create directory %s/.stellarium/%s/\n",homeDir,VERSION);
+			strcpy(tmp2,"mkdir ");
+			strcat(tmp2,homeDir);
+			strcat(tmp2,"/.stellarium");
+			system(tmp2);
+			strcat(tmp2,"/");
+			strcat(tmp2,VERSION);
+			strcat(tmp2,"/");
+			system(tmp2);
+			
+			if ((tempFile = fopen(tmp,"w")))
 			{
-				// Leave The CPU Alone, Don't Waste Time, Simply Wait For An Event
-				SDL_WaitEvent(NULL);
+				strcpy(CDIR,homeDir);
+				strcat(CDIR,"/.stellarium/");
+				strcat(CDIR,VERSION);
+				strcat(CDIR,"/");
+				fclose(tempFile);
 			}
 			else
 			{
-				TickCount = SDL_GetTicks();	// Get Present Ticks
-				Update(TickCount-LastCount);// And Update The Motions And Data
-				Draw(TickCount-LastCount);  // Do The Drawings!
-				LastCount = TickCount;		// Save The Present Tick Probing
-				SDL_GL_SwapBuffers();		// And Swap The Buffers
+				printf("Can't create the file %s\n",tmp);
+				printf("If the directory %s/.stellarium/%s/ is missing please create it.\n",homeDir,VERSION);
+				printf("If not check that you have access to %s/.stellarium/%s/\n",homeDir,VERSION);
+				exit(-1);
 			}
 		}
+
+		// First launch for that user : set default options by copying the default files
+    	strcpy(tmp,dataRoot);
+    	strcat(tmp,"/config/default_config.txt");
+    	strcpy(tmp2,dataRoot);
+    	strcat(tmp2,"/config/default_location.txt");
+
+		char cmd[512];
+		snprintf(cmd, sizeof(cmd), "cp %s %sconfig.txt",tmp,CDIR);
+		system(cmd);
+		snprintf(cmd, sizeof(cmd), "cp %s %slocation.txt",tmp2,CDIR);
+		system(cmd);
 	}
-
-	exit(0);
-
-	return 0;
+#endif
 
 }
+
+
+
+// Main stellarium procedure
+int main(int argc, char **argv)
+{
+	// Check the command line
+	check_command_line(argc, argv);
+
+	// Print the console logo..
+    drawIntro();
+
+	// Find what are the main Data, Textures and Config directories
+    setDirectories();
+
+	// Create the core of stellarium, it has to be initialized
+	stel_core core;
+
+	core.set_directories(DDIR, TDIR, CDIR);
+
+	// Give the config file parameters which has to be given "hard coded"
+	core.set_config_files("config.txt", "location.txt");
+
+	// Load the configuration options from the given file names
+	// This include the video parameters
+	core.load_config();
+
+	// Create a stellarium sdl manager
+	stel_sdl sdl_mgr(&core);
+
+	// Initialize video device and other sdl parameters
+	sdl_mgr.init();
+
+	// Start the main loop
+	sdl_mgr.start_main_loop();
+
+	return 0;
+}
+
