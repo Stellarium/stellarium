@@ -94,10 +94,10 @@ void Constellation::draw(Projector* prj) const
 		if (prj->project_earth_equ(asterism[2*i]->XYZ,star1) &&
 			prj->project_earth_equ(asterism[2*i+1]->XYZ,star2))
 		{
-			glBegin (GL_LINES);
+			glBegin(GL_LINES);
 				glVertex2f(star1[0],star1[1]);
 				glVertex2f(star2[0],star2[1]);
-        	glEnd ();
+        	glEnd();
 		}
     }
 

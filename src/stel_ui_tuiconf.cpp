@@ -30,6 +30,7 @@
 void stel_ui::draw_gravity_ui(void)
 {
 	// Normal transparency mode
+	glEnable(GL_TEXTURE_2D);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glEnable(GL_BLEND);
 
@@ -53,7 +54,8 @@ void stel_ui::draw_gravity_ui(void)
 			core->observatory->get_printable_time_local(jd);
 		}
 
-		os << " fov " << setprecision(3) << core->projection->get_fov() << "  FPS " << core->fps;
+		if (core->FlagShowFov) os << " fov " << setprecision(3) << core->projection->get_fov();
+		if (core->FlagShowFps) os << "  FPS " << core->fps;
 
 		glColor3f(0.1,0.9,0.1);
 		core->projection->print_gravity180(spaceFont, x-shift + 15, y-shift + 15, os.str());

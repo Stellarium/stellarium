@@ -78,7 +78,8 @@ void stel_core::init(void)
 	observatory->load(ConfigDir + config_file, "init_location");
 
 	navigation = new navigator(observatory);
-	if (StartupTimeMode=="preset" || StartupTimeMode=="Preset") navigation->set_JDay(PresetSkyTime);
+	if (StartupTimeMode=="preset" || StartupTimeMode=="Preset")
+		navigation->set_JDay(PresetSkyTime - observatory->get_GMT_shift(PresetSkyTime) * JD_HOUR);
 	else navigation->set_JDay(get_julian_from_sys());
 	navigation->set_local_vision(InitViewPos);
 
