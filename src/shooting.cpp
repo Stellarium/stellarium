@@ -20,8 +20,8 @@
 #include "shooting.h"
 
 ShootingStar::ShootingStar() : 
-	Dead(0),
-	coef(0)
+	coef(0),
+	Dead(0)
 {	
 	ShootTexture = new s_texture("etoile32x32");
 	XYZ0.Set(000.,500,0);

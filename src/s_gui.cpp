@@ -159,7 +159,7 @@ int Container::getComponentCount() const
 
 Component* Container::getComponent(int n) const
 {
-    if (n >= 0 && n < components.size())
+    if (n >= 0 && (unsigned int)n < components.size())
         return components[n];
     else
         return NULL;

@@ -401,9 +401,9 @@ void initUi(void)
     }
     
     /*** Colors ***/
-    vec3_t clBlue(0.3,0.3,1.0);
-    vec3_t clRed(1.0,0.3,0.3);
-    vec3_t clGreen(0.3,1.0,0.3);
+    //vec3_t clBlue(0.3,0.3,1.0);
+    //vec3_t clRed(1.0,0.3,0.3);
+    //vec3_t clGreen(0.3,1.0,0.3);
     vec3_t clWhite(1.,1.,1.);
     
     /*** Graphic Context ***/
@@ -542,7 +542,7 @@ Boston, MA  02111-1307, USA.\n"
     InfoSelectLabel->setVisible(false);
 
 /**********************************************************************************/
-/*** TopWindowsInfos Container
+/*** TopWindowsInfos Container ***/
     /*** Date Label ***/
     DateLabel = new Label("-");
     DateLabel->reshape(vec2_i(3,2), vec2_i(10*avgCharLen,lineHeight));
@@ -825,7 +825,7 @@ Boston, MA  02111-1307, USA.\n"
 
 
 /**********************************************************************************/
-/*                                    CLEAR UI                                    /*
+/*                                    CLEAR UI                                    */
 /**********************************************************************************/
 void clearUi(void)
 {   if (gc) delete gc;
@@ -852,8 +852,8 @@ void updateStandardWidgets(void)
     }
     else
     {   
-	DateOps::dayToDmy((double)(global.JDay+global.TimeZone*HEURE),jour,
-			  mois,annee);
+	DateOps::dayToDmy((long int)(global.JDay+global.TimeZone*HEURE),jour,
+			mois,annee);
         reste=global.JDay+global.TimeZone*HEURE - 
 	    (float)DateOps::dmyToDay(jour,mois,annee);
     }
@@ -1001,6 +1001,7 @@ void HandleClic(int x, int y, int state, int button)
     {   case GLUT_RIGHT_BUTTON : bt=GUI_MOUSE_RIGHT; break;
         case GLUT_LEFT_BUTTON : bt=GUI_MOUSE_LEFT; break;
         case GLUT_MIDDLE_BUTTON : bt=GUI_MOUSE_MIDDLE; break;
+        default : bt=GUI_MOUSE_LEFT;
     }
     if (state==GLUT_UP) st=GUI_UP; else st=GUI_DOWN;
 

@@ -134,7 +134,7 @@ void Nebula_mgr::Draw()
 int Nebula_mgr::Rechercher(vec3_t Pos)
 {   Pos.Normalize();
     vector<Nebula *>::iterator iter;
-    Nebula * plusProche;
+    Nebula * plusProche=NULL;
     float anglePlusProche=3.15;
     for(iter=Liste.begin();iter!=Liste.end();iter++)
     {   if ((**iter).XYZ[0]*Pos[0]+(**iter).XYZ[1]*Pos[1]+(**iter).XYZ[2]*Pos[2]>anglePlusProche)

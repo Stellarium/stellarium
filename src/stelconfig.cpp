@@ -83,12 +83,9 @@ cfgStruct cfgini2[] =
 // and try to find the files somewhere else if not found there
 void setDirectories(void)
 {
+	
 	char dataRoot[255];
-	char cfgRoot[255];
     char tempName[255];
-    char tempName2[255];
-    char tempName3[255];
-    char * homeDir = getenv("HOME");
     
     strcpy(tempName,CONFIG_DATA_DIR);
     strcat(tempName,"/data/hipparcos.fab");
@@ -125,6 +122,8 @@ void setDirectories(void)
 	strcpy(global.ConfigDir,dataRoot);
 	strcat(global.ConfigDir,"/config/");
 #else
+    char * homeDir = getenv("HOME");
+    char tempName2[255];
     if (strcmp(dataRoot,CONFIG_DATA_DIR))
 		printf(">Found data files in %s : local version.\n",dataRoot);
 
