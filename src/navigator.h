@@ -73,9 +73,8 @@ public:
 	void update_transform_matrices(Vec3d earth_ecliptic_pos);
 	void update_vision_vector(int delta_time, stel_object* selected);
 
-	// Home made gluLookAt(0., 0., 0.,local_vision[0],local_vision[1],local_vision[2],0.,0.,1.);
-	// to keep a better precision to prevent the shaking bug..
-	void update_local_to_eye(void);
+	// Update the modelview matrices
+	void update_model_view_mat(void);
 
 	void move_to(const Vec3d& _aim);
 

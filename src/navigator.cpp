@@ -176,9 +176,7 @@ void navigator::update_move(double deltaAz, double deltaAlt)
 	}
 
 	// Update the final modelview matrices
-	update_local_to_eye();
-	mat_earth_equ_to_eye = mat_local_to_eye*mat_earth_equ_to_local;
-	mat_helio_to_eye = mat_local_to_eye*mat_helio_to_local;
+	update_model_view_mat();
 
 }
 
@@ -217,9 +215,8 @@ void navigator::update_transform_matrices(Vec3d earth_ecliptic_pos)
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-// Home made gluLookAt(0., 0., 0.,local_vision[0],local_vision[1],local_vision[2],0.,0.,1.);
-// to keep a better precision to prevent the shaking bug..
-void navigator::update_local_to_eye(void)
+// Update the modelview matrices
+void navigator::update_model_view_mat(void)
 {
 	Vec3d f(local_vision);
 	f.normalize();
@@ -232,6 +229,9 @@ void navigator::update_local_to_eye(void)
 				s[1],u[1],-f[1],0.,
 				s[2],u[2],-f[2],0.,
 				0.,0.,0.,1.);
+				
+	mat_earth_equ_to_eye = mat_local_to_eye*mat_earth_equ_to_local;
+	mat_helio_to_eye = mat_local_to_eye*mat_helio_to_local;
 }
 
 ////////////////////////////////////////////////////////////////////////////////

@@ -30,9 +30,8 @@ class Fisheye_projector : public Projector
 public:
 	Fisheye_projector(int _screenW = 800, int _screenH = 600, double _fov = 175.,
 		double _min_fov = 0.001, double _max_fov = 300.);
-	virtual ~Fisheye_projector();
-
-	virtual void maximize_viewport(void);
+		
+	virtual void set_viewport(int x, int y, int w, int h);
 
 	// Same function but using a custom modelview matrix
 	virtual bool project_custom(const Vec3d& v, Vec3d& win, const Mat4d& mat) const;
