@@ -3,12 +3,14 @@ Added planet trails - hit "4" or "," once for ecliptic, again for trails (advanc
 Added precession of the equinoxes
 More realistic and efficient meteor showers
 Added and set-up gettext facilities.
-Added rudimentary scripting features
+Added rudimentary scripting features - see doc/commands.html
+Atmosphere now darkens during solar eclipses
 Added lunar eclipse simulation
 Added a fader class, lines and objects fade in/out easily now.
 Added MacosX Xcode project file from Da-Woon Joung.
 Added patches from Fumio Yamamoto for various fixes.
 Removed all the libpng/zlib .c files from the glgpng directory, use host system libpng instead.
+Fixed various typos and other bugs
 
 0.6.2 [2004-11-18]
 Fixed time display bug (1 hour ahead of actual sky time during standard time if your timezone has daylight savings).  
