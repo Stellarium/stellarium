@@ -52,11 +52,43 @@ void navigator::update_vision_vector(int delta_time, stel_object* selected)
 
 		if( zooming_mode == 1 ) {
                   // if zooming in, object may be moving so be sure to zoom to latest position
-                  equ_vision=selected->get_earth_equ_pos(this);
-                  move.aim=equ_vision;
+                  move.aim=selected->get_earth_equ_pos(this);
                   move.aim.normalize();
                   move.aim*=2.;
 		}
+
+		// Use a smooth function
+		float smooth = 4.f;
+		double c;
+
+		if (zooming_mode == 1) {
+		  if( move.coef > .9 ) {
+		    c = 1;
+		  } else {
+		    c = 1 - pow(1.-1.11*(move.coef),3);
+		  }
+		}
+		else if(zooming_mode == -1) {
+		  if( move.coef < 0.1 ) { 
+		    // keep in view at first as zoom out
+		    c = 0;
+
+		    /* could track as moves too, but would need to know if start was actually
+		       a zoomed in view on the object or an extraneous zoom out command
+		    if(move.local_pos) {
+		      move.start=earth_equ_to_local(selected->get_earth_equ_pos(this));
+		    } else {
+		      move.start=selected->get_earth_equ_pos(this);
+		    }
+		    move.start.normalize();
+		    */
+
+		  }else {
+		    c =  pow(1.11*(move.coef-.1),3);		  
+		  }
+		}
+		else c = atanf(smooth * 2.*move.coef-smooth)/atanf(smooth)/2+0.5;
+
 
 		if (move.local_pos)
 		{
@@ -78,13 +110,6 @@ void navigator::update_vision_vector(int delta_time, stel_object* selected)
 		if (ra_aim < -M_PI) ra_aim = 2.*M_PI + ra_aim;
 
 
-		// Use a smooth function
-		float smooth = 4.f;
-		double c;
-
-		if (zooming_mode == 1) c = 1. - (1.-move.coef) * (1.-move.coef) * (1.-move.coef);
-		else if (zooming_mode == -1) c =  pow(move.coef,3);
-		else c = atanf(smooth * 2.*move.coef-smooth)/atanf(smooth)/2+0.5;
 
 		ra_now = ra_aim*c + ra_start*(1. - c);
 		de_now = de_aim*c + de_start*(1. - c);
