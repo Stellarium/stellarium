@@ -24,7 +24,6 @@
 #include "stellarium.h"
 #include "stel_utility.h"
 #include "s_font.h"
-#include "switchor.h"
 
 class Constellation
 {

@@ -30,7 +30,6 @@
 #include "navigator.h"
 #include "tone_reproductor.h"
 #include "skybright.h"
-#include "switchor.h"
 
 using namespace std;
 
