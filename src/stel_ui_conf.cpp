@@ -243,7 +243,7 @@ Component* stel_ui::createConfigWindow(void)
 	tab_time->addComponent(time_speed_lbl2);
 	time_speed_lbl2->setPos(50 ,y); y+=30;
 
-	TextLabel* ts_lbl = new TextLabel("Use key J and M to increase and decrease\n   time speed.\nUse key K to return to real time speed.");
+	TextLabel* ts_lbl = new TextLabel("Use key J and L to decrease and increase\n   time speed.\nUse key K to return to real time speed.");
 	tab_time->addComponent(ts_lbl);
 	ts_lbl->setPos(50 ,y); y+=30;
 
@@ -526,7 +526,7 @@ void stel_ui::updateConfigForm(void)
 	long_incdec->setValue(core->observatory->get_longitude());
 	lat_incdec->setValue(core->observatory->get_latitude());
 
-	time_current->setJDay(core->navigation->get_JDay() + core->observatory->get_GMT_shift()*JD_HOUR);
+	time_current->setJDay(core->navigation->get_JDay() + core->observatory->get_GMT_shift(core->navigation->get_JDay())*JD_HOUR);
 	system_tz_lbl2 = new Label("(" +
 		 core->observatory->get_time_zone_name_from_system(core->navigation->get_JDay()) + ")");
 
