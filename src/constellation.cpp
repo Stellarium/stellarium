@@ -23,6 +23,7 @@
 #define RADIUS_CONST 1.
 
 bool Constellation::gravity_label = false;
+s_font* Constellation::constellation_font = NULL;
 
 Constellation::Constellation() : name(NULL), inter(NULL), asterism(NULL), art_tex(NULL), art_on(0), art_intensity(0)
 {
@@ -150,22 +151,18 @@ void Constellation::draw_name(s_font * constfont, Projector* prj) const
 // Draw the art texture, optimized function to be called thru a constellation manager only
 void Constellation::draw_art_optim(Projector* prj, int delta_time) 
 {
-
-
 	if (art_tex)
 	{
-
-	  
 	  // 3 second fade
 	  float delta_intensity = delta_time/2000.f;
 
 	  
 	  // update fade
 	  if( art_on ) {
-	    if( art_intensity + delta_intensity <= 1) {
+	    if( art_intensity + delta_intensity <= 0.5) {
 	      art_intensity += delta_intensity;
 	    } else {
-	      art_intensity = 1;
+	      art_intensity = 0.5;
 	    }
 	  } else if( art_intensity > delta_intensity ) {
 	    art_intensity -= delta_intensity;
@@ -220,10 +217,10 @@ void Constellation::draw_art(Projector* prj, int delta_time)
 	  
 	  // update fade
 	  if( art_on ) {
-	    if( art_intensity + delta_intensity <= 1) {
+	    if( art_intensity + delta_intensity <= 0.5) {
 	      art_intensity += delta_intensity;
 	    } else {
-	      art_intensity = 1;
+	      art_intensity = 0.5;
 	    }
 	  } else if( art_intensity > delta_intensity ) {
 	    art_intensity -= delta_intensity;

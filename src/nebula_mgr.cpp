@@ -69,7 +69,7 @@ int Nebula_mgr::read(const string& font_fileName, const string& fileName, int ba
 
     printf("Reading a total of %d nebulas\n", total);
 
-    Nebula::nebula_font = new s_font(12.,"spacefont", font_fileName); // load Font
+    if (!Nebula::nebula_font) Nebula::nebula_font = new s_font(12.,"spacefont", font_fileName); // load Font
     if (!Nebula::nebula_font)
     {
 	    printf("Can't create nebulaFont\n");
