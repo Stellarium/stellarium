@@ -51,7 +51,7 @@ void navigator::update_vision_vector(int delta_time, stel_object* selected)
 		rect_to_sphe(&ra_aim, &de_aim, earth_equ_to_local(move.aim));
 		rect_to_sphe(&ra_start, &de_start, earth_equ_to_local(move.start));
 
-		// Trick to choose the good moving direction and never make a distance > PI
+		// Trick to choose the good moving direction and never travel on a distance > PI
 		float delta = ra_start;
 		ra_start -= delta;		// ra_start = 0
 		ra_aim -= delta;
@@ -60,7 +60,7 @@ void navigator::update_vision_vector(int delta_time, stel_object* selected)
 		if (ra_aim < -M_PI) ra_aim = 2.*M_PI + ra_aim;
 
 		// Use a smooth function
-		float smooth = 5.f;
+		float smooth = 4.f;
 		double c = atanf(smooth * 2.*move.coef-smooth)/atanf(smooth)/2+0.5;
 		ra_now = ra_aim*c + ra_start*(1. - c);
 		de_now = de_aim*c + de_start*(1. - c);

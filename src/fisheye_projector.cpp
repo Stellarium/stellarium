@@ -123,6 +123,7 @@ void Fisheye_projector::sVertex3(double x, double y, double z, const Mat4d& mat)
 	static Vec3d v;
 	v.set(x,y,z);
 	project_custom(v, win, mat);
+	// Can be optimized by avoiding matrix inversion if it's always the same
 	gluUnProject(win[0],win[1],0.5,mat,mat_projection2,vec_viewport,&v[0],&v[1],&v[2]);
 	glVertex3dv(v);
 }
@@ -132,11 +133,11 @@ void Fisheye_projector::sSphere(GLdouble radius, GLint slices, GLint stacks, con
 	glPushMatrix();
 	glLoadMatrixd(mat);
 
-	GLfloat rho, drho, theta, dtheta;
-	GLfloat x, y, z;
-	GLfloat s, t, ds, dt;
-	GLint i, j, imin, imax;
-	GLfloat nsign;
+	static GLfloat rho, drho, theta, dtheta;
+	static GLfloat x, y, z;
+	static GLfloat s, t, ds, dt;
+	static GLint i, j, imin, imax;
+	static GLfloat nsign;
 
 	if (orient_inside) nsign = -1.0;
 	else nsign = 1.0;
@@ -189,9 +190,9 @@ const Mat4d& mat, int orient_inside) const
 	glPushMatrix();
 	glLoadMatrixd(mat);
 
-	GLdouble da, r, dz;
-	GLfloat z, nsign;
-	GLint i, j;
+	static GLdouble da, r, dz;
+	static GLfloat z, nsign;
+	static GLint i, j;
 
 	nsign = 1.0;
 	if (orient_inside) glCullFace(GL_FRONT);
@@ -215,13 +216,13 @@ const Mat4d& mat, int orient_inside) const
 		GLfloat x, y;
 		if (i == slices)
 		{
-			x = sin(0.0);
-			y = cos(0.0);
+			x = sinf(0.0);
+			y = cosf(0.0);
 		}
 		else
 		{
-			x = sin(i * da);
-			y = cos(i * da);
+			x = sinf(i * da);
+			y = cosf(i * da);
 		}
 		glNormal3f(x * nsign, y * nsign, 0);
 		glTexCoord2f(s, t);

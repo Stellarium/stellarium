@@ -180,6 +180,7 @@ private:
 	void tui_cb1(void);						// Update all the core flags and params from the tui
 	void tui_cb_settimezone(void);			// Set time zone
 	void tui_cb_actualtime(void);			// Set sky time as current
+	void tui_cb_settimedisplayformat(void);	// Set 12/24h format
 	void tui_cb_admin_load_default(void);	// Load default configuration
 	void tui_cb_admin_save_default(void);	// Save default configuration
 	void tui_cb_admin_set_locale(void);		// Set locale parameter (LANG)

@@ -164,6 +164,7 @@ void Constellation_mgr::draw_art(Projector* prj) const
 	glBlendFunc(GL_ONE, GL_ONE);
 	glEnable(GL_TEXTURE_2D);
     glEnable(GL_BLEND);
+	glEnable(GL_CULL_FACE);
     glColor3f(1,1,1);
 	prj->set_orthographic_projection();
     vector<Constellation *>::const_iterator iter;
@@ -172,6 +173,7 @@ void Constellation_mgr::draw_art(Projector* prj) const
 		(*iter)->draw_art(prj);
     }
 	prj->reset_perspective_projection();
+	glDisable(GL_CULL_FACE);
 }
 
 // Draw the names of all the constellations
