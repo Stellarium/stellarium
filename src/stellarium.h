@@ -32,6 +32,9 @@
 #  include <windows.h>
 #endif 
 
+#ifdef __MINGW32__
+#endif
+
 #if defined( NATIVE_WIN32_COMPILER )
 #   define HAVE_STRICMP
 #endif

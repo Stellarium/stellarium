@@ -39,10 +39,10 @@ pkglibdir = $(libdir)/stellarium
 pkgincludedir = $(includedir)/stellarium
 top_builddir = .
 
-ACLOCAL = aclocal
-AUTOCONF = autoconf
-AUTOMAKE = automake
-AUTOHEADER = autoheader
+ACLOCAL = ${SHELL} /home/Fabien/work/stellarium/missing --run aclocal
+AUTOCONF = ${SHELL} /home/Fabien/work/stellarium/missing --run autoconf
+AUTOMAKE = ${SHELL} /home/Fabien/work/stellarium/missing --run automake
+AUTOHEADER = ${SHELL} /home/Fabien/work/stellarium/missing --run autoheader
 
 am__cd = CDPATH="$${ZSH_VERSION+.}$(PATH_SEPARATOR)" && cd
 INSTALL = /usr/bin/install -c
@@ -64,7 +64,7 @@ host_triplet = i686-pc-cygwin
 EXEEXT = .exe
 OBJEXT = o
 PATH_SEPARATOR = :
-AMTAR = tar
+AMTAR = ${SHELL} /home/Fabien/work/stellarium/missing --run tar
 AWK = gawk
 CC = gcc
 CPP = gcc -E

@@ -56,7 +56,7 @@ void Hip_Star_mgr::Load(char * hipCatFile, char * commonNameFile, char * nameFil
 {   
     printf("Loading Hipparcos star data...\n");
     FILE * hipFile, *cnFile, * nFile;
-    hipFile=fopen(hipCatFile,"r");
+    hipFile=fopen(hipCatFile,"rb");
     if (!hipFile)
     {   
         printf("ERROR %s NOT FOUND\n",hipCatFile);
@@ -80,13 +80,13 @@ void Hip_Star_mgr::Load(char * hipCatFile, char * commonNameFile, char * nameFil
     fread((char*)&catalogSize,4,1,hipFile);
     LE_TO_CPU_INT32(catalogSize,catalogSize);  
     
-    StarArraySize = 120417;
+    StarArraySize = catalogSize;//120417;
     // Create the sequential array
     StarArray = new Hip_Star*[StarArraySize];
     
 	// Read common names & names catalog
-	char ** commonNames = new char*[120000];
-	char ** names = new char*[120000];
+	char ** commonNames = new char*[catalogSize];
+	char ** names = new char*[catalogSize];
 	
 	int tmp;
 	char tmpName[20];
@@ -101,6 +101,8 @@ void Hip_Star_mgr::Load(char * hipCatFile, char * commonNameFile, char * nameFil
 		fscanf(nFile,"%d|%s\n",&tmp,tmpName);
 		names[tmp] = strdup(tmpName);
 	}
+	fclose(cnFile);
+    fclose(nFile);
 
 	// Read binary file Hipparcos catalog  
     Hip_Star * e = NULL;
@@ -108,11 +110,17 @@ void Hip_Star_mgr::Load(char * hipCatFile, char * commonNameFile, char * nameFil
     {
 	    e = new Hip_Star;
 	    e->HP=(unsigned int)i;
-        if (!e->Read(hipFile)) {delete e; continue;}
- 
+        if (!e->Read(hipFile)) 
+        {
+        	delete e;
+        	e=NULL;
+        	continue;
+        }
+ 		
         // Set names if any
         if(commonNames[e->HP]) e->CommonName=commonNames[e->HP];
         if(names[e->HP]) e->Name=names[e->HP];
+        
         Liste.insert(pair<int, Hip_Star*>(HipGrid.GetNearest(e->XYZ), e));
         StarArray[e->HP]=e;
     }
@@ -121,9 +129,7 @@ void Hip_Star_mgr::Load(char * hipCatFile, char * commonNameFile, char * nameFil
 	delete names;
 
     fclose(hipFile);
-    fclose(cnFile);
-    fclose(nFile);
-    
+
     hipStarTexture=new s_texture("etoile16x16Aigrettes");  // Load star texture
     
     char tempName[255];
