@@ -220,17 +220,20 @@ Component* stel_ui::createConfigWindow(void)
 	tzbl->setPos(x,y); y+=20;
 	tab_time->addComponent(tzbl);
 
-	system_tz_cbx = new LabeledCheckBox(core->observatory->get_tz_format()==S_TZ_SYSTEM_DEFAULT,
-		"Use System Default Time Zone");
+	/*system_tz_cbx = new LabeledCheckBox(core->observatory->get_tz_format()==S_TZ_SYSTEM_DEFAULT,
+		"Using System Default Time Zone");
 	system_tz_cbx->setOnPressCallback(callback<void>(this, &stel_ui::updateConfigVariables));
 	tab_time->addComponent(system_tz_cbx);
-	system_tz_cbx->setPos(50 ,y); y+=30;
+	system_tz_cbx->setPos(50 ,y); y+=30;*/
 
-	/*tzselector = new Time_zone_item(core->DataDir + "zone.tab");
-	tzselector->setOnPressCallback(callback<void>(this, &stel_ui::setTimeZone));
-	tzselector->setPos(x,y);
-	tab_time->addComponent(tzselector);
-*/
+	Label* system_tz_lbl = new Label("\1 Using System Default Time Zone");
+	tab_time->addComponent(system_tz_lbl);
+	system_tz_lbl->setPos(50 ,y); y+=20;
+
+	system_tz_lbl2 = new Label("(" +
+		 core->observatory->get_time_zone_name_from_system(core->navigation->get_JDay()) + ")");
+	tab_time->addComponent(system_tz_lbl2);
+	system_tz_lbl2->setPos(70 ,y); y+=30;
 
 	// Location options
 	FilledContainer* tab_location = new FilledContainer();
@@ -273,7 +276,25 @@ Component* stel_ui::createConfigWindow(void)
 	tab_video->setSize(config_tab_ctr->getSize());
 
 	x=5; y=5;
+	fisheye_projection_cbx = new LabeledCheckBox(core->projection->get_type()==FISHEYE_PROJECTOR, "Fisheye Projection Mode");
+	fisheye_projection_cbx->setOnPressCallback(callback<void>(this, &stel_ui::updateVideoVariables));
+	tab_video->addComponent(fisheye_projection_cbx);
+	fisheye_projection_cbx->setPos(x,y); y+=15;
 
+	disk_viewport_cbx = new LabeledCheckBox(core->projection->get_viewport_type()==DISK, "Disk Viewport");
+	disk_viewport_cbx->setOnPressCallback(callback<void>(this, &stel_ui::updateVideoVariables));
+	tab_video->addComponent(disk_viewport_cbx);
+	disk_viewport_cbx->setPos(x,y); y+=25;
+
+	screen_size_sl = new StringList();
+	screen_size_sl->setOnPressCallback(callback<void>(this, &stel_ui::setVideoSize));
+	screen_size_sl->setPos(x,y);
+	screen_size_sl->addItem("640x480");
+	screen_size_sl->addItem("800x600");
+	screen_size_sl->addItem("1024x768");
+	screen_size_sl->addItem("1280x1024");
+	screen_size_sl->addItem("1600x1200");
+	tab_video->addComponent(screen_size_sl);
 
 	config_tab_ctr->setTexture(flipBaseTex);
 	config_tab_ctr->addTab(tab_time, "Date & Time");
@@ -371,6 +392,48 @@ void stel_ui::setTimeZone(void)
 	core->observatory->set_custom_tz_name(tzselector->gettz());
 }
 
+void stel_ui::setVideoSize(void)
+{
+	cout << "Saving video size " << endl;
+
+	//init_parser conf;
+	//conf.load(core->ConfigDir + core->config_file);
+
+	//conf.set_int("video:screen_w", s);
+
+	//conf.save(core->ConfigDir + core->config_file);
+}
+
+void stel_ui::updateVideoVariables(void)
+{
+	if (fisheye_projection_cbx->getState() && core->projection->get_type()!=FISHEYE_PROJECTOR)
+	{
+		// Switch to fisheye projection
+		Fisheye_projector* p = new Fisheye_projector(*(core->projection));
+		delete core->projection;
+		core->projection = p;
+	}
+	if (!fisheye_projection_cbx->getState() && core->projection->get_type()==FISHEYE_PROJECTOR)
+	{
+		// Switch to perspective projection
+		Projector* p = new Projector(*(core->projection));
+		delete core->projection;
+		core->projection = p;
+		core->projection->set_minmaxfov(0.001, 100.);
+	}
+
+
+	if (disk_viewport_cbx->getState() && core->projection->get_viewport_type()!=DISK)
+	{
+		core->projection->set_disk_viewport();
+	}
+	if (!disk_viewport_cbx->getState() && core->projection->get_viewport_type()==DISK)
+	{
+		core->projection->maximize_viewport();
+	}
+
+}
+
 void stel_ui::updateConfigForm(void)
 {
 	stars_cbx->setState(core->FlagStars);
@@ -402,6 +465,8 @@ void stel_ui::updateConfigForm(void)
 	lat_incdec->setValue(core->observatory->get_latitude());
 
 	time_current->setJDay(core->navigation->get_JDay() + core->observatory->get_GMT_shift()*JD_HOUR);
+	system_tz_lbl2 = new Label("(" +
+		 core->observatory->get_time_zone_name_from_system(core->navigation->get_JDay()) + ")");
 }
 
 void stel_ui::config_win_hideBtCallback(void)
