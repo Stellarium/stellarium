@@ -575,7 +575,7 @@ void stel_core::load_config_from(const string& confFile)
 	CardinalColor 		= str_to_vec3f(conf.get_str("color:cardinal_color").c_str());
 	PlanetNamesColor	= str_to_vec3f(conf.get_str("color:planet_names_color").c_str());
 	PlanetOrbitsColor	= str_to_vec3f(conf.get_str("color", "planet_orbits_color", ".6,1,1").c_str());
-	ObjectTrailsColor	= str_to_vec3f(conf.get_str("color", "object_trails_color", "1,0,1").c_str());
+	ObjectTrailsColor	= str_to_vec3f(conf.get_str("color", "object_trails_color", "1,0.7,0").c_str());
 
 	// Text ui section
 	FlagEnableTuiMenu = conf.get_boolean("tui:flag_enable_tui_menu");

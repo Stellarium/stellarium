@@ -105,11 +105,11 @@ void stel_ui::init_tui(void)
 	tui_menu_location->addComponent(tui_location_altitude);
 
 	// 2. Time
-	tui_time_settmz = new s_tui::Time_zone_item(core->DataDir + "zone.tab", "2.1 Set Time Zone: ");
+	tui_time_skytime = new s_tui::Time_item("2.1 Sky Time: ");
+	tui_time_skytime->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb1));
+	tui_time_settmz = new s_tui::Time_zone_item(core->DataDir + "zone.tab", "2.2 Set Time Zone: ");
 	tui_time_settmz->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb_settimezone));
 	tui_time_settmz->settz(core->observatory->get_custom_tz_name());
-	tui_time_skytime = new s_tui::Time_item("2.2 Sky Time: ");
-	tui_time_skytime->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb1));
 	tui_time_presetskytime = new s_tui::Time_item("2.3 Preset Sky Time: ");
 	tui_time_presetskytime->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb1));
 	tui_time_startuptime = new s_tui::MultiSet_item<string>("2.4 Sky Time At Start-up: ");
@@ -121,8 +121,9 @@ void stel_ui::init_tui(void)
 	tui_time_displayformat->addItem("12h");
 	tui_time_displayformat->addItem("system_default");
 	tui_time_displayformat->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb_settimedisplayformat));
-	tui_menu_time->addComponent(tui_time_settmz);
+
 	tui_menu_time->addComponent(tui_time_skytime);
+	tui_menu_time->addComponent(tui_time_settmz);
 	tui_menu_time->addComponent(tui_time_presetskytime);
 	tui_menu_time->addComponent(tui_time_startuptime);
 	tui_menu_time->addComponent(tui_time_displayformat);
@@ -238,7 +239,9 @@ void stel_ui::tui_cb1(void)
 	core->observatory->set_altitude(tui_location_altitude->getValue());
 
 	// 2. Date & Time
-	core->navigation->set_JDay(tui_time_skytime->getJDay() - core->observatory->get_GMT_shift()*JD_HOUR);
+	double skyJDay = tui_time_skytime->getJDay();
+	core->navigation->set_JDay(skyJDay -   
+				   core->observatory->get_GMT_shift(skyJDay,1)*JD_HOUR);
 	core->PresetSkyTime 		= tui_time_presetskytime->getJDay();
 	core->StartupTimeMode 		= tui_time_startuptime->getCurrent();
 
@@ -265,7 +268,8 @@ void stel_ui::tui_update_widgets(void)
 	tui_location_altitude->setValue(core->observatory->get_altitude());
 
 	// 2. Date & Time
-	tui_time_skytime->setJDay(core->navigation->get_JDay() + core->observatory->get_GMT_shift()*JD_HOUR);
+	tui_time_skytime->setJDay(core->navigation->get_JDay() + 
+				  core->observatory->get_GMT_shift(core->navigation->get_JDay())*JD_HOUR);
 	tui_time_settmz->settz(core->observatory->get_custom_tz_name());
 	tui_time_presetskytime->setJDay(core->PresetSkyTime);
 	tui_time_startuptime->setCurrent(core->StartupTimeMode);
