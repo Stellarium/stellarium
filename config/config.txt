@@ -39,7 +39,7 @@ FLAG_NEBULA_NAME = false            # Draw the names of the nebulas and yellow c
 FLAG_GROUND = true                  # Draw the ground if true.
 FLAG_HORIZON = true                 # Draw the horizon (ie the mountains) if true.
 FLAG_FOG = true                     # Draw fog near the horizon if true.
-FLAG_ATMOSPHERE = true              # Draw atmosphere (ie blue sky daytime) if true.
+FLAG_ATMOSPHERE = false             # Draw atmosphere (ie blue sky daytime) if true.
 FLAG_CONSTELLATION_DRAWING = false  # Draw the constellations lines if true.
 FLAG_CONSTELLATION_NAME = false     # Print the name of the constellations if true.
 FLAG_AZIMUTAL_GRID = false          # Display the azimutal grid if true.
@@ -64,7 +64,7 @@ GUI_TEXT_COLOR = 0.1;0.9;0.8        # RGB Text color for every gui element.
 # default date is today
 # modify and uncomment next line to choose another date
 #DATE = mm/dd/yyyy
-#DATE = 17/11/1982
+#DATE = 08/11/1999
 DATE = today
 
 # default time is now (UT time)

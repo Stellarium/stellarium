@@ -58,7 +58,6 @@ void sphe_to_rect(double lng, double lat, double r, Vec3d *v)
     (*v)[0] = cos(lng) * cosLat;
     (*v)[1] = sin(lng) * cosLat;
 	(*v)[2] = sin(lat);
-	v->normalize();
 	(*v)*=r;
 }
 

@@ -79,8 +79,9 @@ void planet::compute_trans_matrix(double date)
 {
     double tempAscendingNode = re.ascendingNode + re.precessionRate * (date - J2000);
 
-	mat_parent_to_local = 	Mat4d::translation(ecliptic_pos) *  
-							Mat4d::zrotation(tempAscendingNode*M_PI/180.) * Mat4d::xrotation(re.obliquity*M_PI/180.);
+	mat_parent_to_local = 	Mat4d::translation(ecliptic_pos) * Mat4d::xrotation(re.obliquity*M_PI/180.);
+							//Mat4d::zrotation(tempAscendingNode*M_PI/180.) *
+							
 
 	compute_geographic_rotation(date);
 
