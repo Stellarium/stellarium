@@ -34,37 +34,7 @@
 
 #define APP_NAME "Stellarium "VERSION
 
-#ifndef HAVE_ACOSF
-# define acosf(x) (float)(acos(x))
-#endif
-#ifndef HAVE_ASINF
-# define asinf(x) (float)(asin(x))
-#endif
-#ifndef HAVE_ATAN2F
-# define atan2f(x) (float)(atan2(x))
-#endif
-#ifndef HAVE_ATANF
-# define atanf(x) (float)(atan(x))
-#endif
-#ifndef HAVE_COSF
-# define cosf(x) (float)(cos(x))
-#endif
-#ifndef HAVE_EXPF
-# define expf(x) (float)(exp(x))
-#endif
-#ifndef HAVE_LOG10F
-# define log10f(x) (float)(log10(x))
-#endif
-#ifndef HAVE_LOGF
-# define logf(x) (float)(log(x))
-#endif
-#ifndef HAVE_SINF
-# define sinf(x) (float)(sin(x))
-#endif
-#ifndef HAVE_SQRTF
-# define sqrtf(x) (float)(sqrt(x))
-#endif
-
+#include "fmath.h"
 
 #define AU 149597870.691
 #define MY_MAX(a,b) (((a)>(b))?(a):(b))

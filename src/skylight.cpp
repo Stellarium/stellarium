@@ -21,10 +21,11 @@
 // "A Practical Analytic Model for Daylight" by A. J. Preetham, Peter Shirley and Brian Smits.
 
 #include <math.h>
-#include "skylight.h"
-
 #include <stdio.h>
 #include <stdlib.h>
+
+#include "fmath.h"
+#include "skylight.h"
 
 skylight::skylight() : thetas(0.f), T(0.f)
 {
