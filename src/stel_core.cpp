@@ -44,6 +44,8 @@ stel_core::~stel_core()
 	if (asterisms) delete asterisms;
 	if (hip_stars) delete hip_stars;
 	if (nebulas) delete nebulas;
+	if (equ_grid) delete equ_grid;
+	if (azi_grid) delete azi_grid;
 	if (atmosphere) delete atmosphere;
 	if (tone_converter) delete tone_converter;
 	if (ssystem) delete ssystem;
@@ -76,13 +78,11 @@ void stel_core::init(void)
     asterisms = new Constellation_mgr();
     nebulas   = new Nebula_mgr();
 	ssystem = new SolarSystem();
-	// Create atmosphere renderer
-	atmosphere=new stel_atmosphere();
-	// Create tone reproductor
-	tone_converter=new tone_reproductor();
+	atmosphere = new stel_atmosphere();
+	tone_converter = new tone_reproductor();
 	projection = new Projector(screen_W, screen_H, 60.);
-	equ_grid = new SkyGrid();
-	azi_grid = new SkyGrid();
+	equ_grid = new SkyGrid(EQUATORIAL);
+	azi_grid = new SkyGrid(ALTAZIMUTAL);
 
 	// Temporary strings for file names
     char tempName[255];
