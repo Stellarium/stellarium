@@ -298,8 +298,8 @@ void navigator::update_transform_matrices(Vec3d earth_ecliptic_pos)
 	// POS = LOC but at the real position on the planet (ie including radius translation)
 
 	// Tested : OK for earth
-	Mat4d POS_to_LOC =	Mat4d::translation(Vec3d(0.,0., 6378.1/AU+(double)position.altitude/AU/1000));
-	Mat4d LOC_to_POS =	Mat4d::translation(Vec3d(0.,0.,-6378.1/AU-(double)position.altitude/AU/1000));
+	Mat4d POS_to_LOC =	Mat4d::translation(Vec3d(0.,0., 6378.1/AU+(double)position.altitude/AU));
+	Mat4d LOC_to_POS =	Mat4d::translation(Vec3d(0.,0.,-6378.1/AU-(double)position.altitude/AU));
 
 	Mat4d GEO_to_LOC = 	Mat4d::yrotation((-90.+position.latitude)*M_PI/180.) *
 						Mat4d::zrotation(-position.longitude*M_PI/180.);
@@ -328,7 +328,6 @@ void navigator::update_transform_matrices(Vec3d earth_ecliptic_pos)
 	mat_helio_to_earth_equ = HSE_to_GEI;
 	mat_helio_to_local = HSE_to_POS;
 	mat_local_to_helio = POS_to_HSE;
-
 	//printf("v(%lf,%lf,%lf)\n",v[0],v[1],v[2]);
 }
 
@@ -355,6 +354,13 @@ void navigator::switch_to_local(void)
               local_vision[0],local_vision[1],local_vision[2],   // direction of vision
               0.,0.,1.);           // Vertical vector
 
+}
+
+// Return the observer heliocentric position
+Vec3d navigator::get_observer_helio_pos(void)
+{
+	Vec3d v(0.,0.,0.);
+	return mat_local_to_helio*v;
 }
 
 // Transform vector from local coordinate to equatorial

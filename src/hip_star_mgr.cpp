@@ -174,7 +174,7 @@ void Hip_Star_mgr::Draw(float _star_scale, float _twinkle_amount, int name_ON,
 	int nbZones=0;
 	static int * zoneList;  // WARNING this is almost a memory leak...
 
-	nbZones = HipGrid.Intersect(equ_vision, du->fov*M_PI/180.f*1.12f, zoneList);
+	nbZones = HipGrid.Intersect(equ_vision, du->fov*M_PI/180.f*1.2f, zoneList);
 
 	//printf("nbzones = %d\n",nbZones );
 

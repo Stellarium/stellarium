@@ -177,39 +177,6 @@ static void skipwhite(char **s)
 }
 
 
-/*! \fn double get_dec_location(char * s)
-* \param s Location string
-* \return angle in degrees
-*
-* Obtains Latitude, Longitude, RA or Declination from a string.
-*
-*  If the last char is N/S doesn't accept more than 90 degrees.            
-*  If it is E/W doesn't accept more than 180 degrees.                      
-*  If they are hours don't accept more than 24:00                          
-*                                                                          
-*  Any position can be expressed as follows:                               
-*  (please use a 8 bits charset if you want                                
-*  to view the degrees separator char '0xba')                              
-*
-*  42.30.35,53                                                             
-*  90º0'0,01 W                                                             
-*  42º30'35.53 N                                                           
-*  42º30'35.53S                                                            
-*  42º30'N                                                                 
-*  - 42.30.35.53                                                           
-*   42:30:35.53 S                                                          
-*  + 42.30.35.53                                                           
-*  +42º30 35,53
-*   23h36'45,0                                                             
-*                                                                          
-*                                                                          
-*  42:30:35.53 S = -42º30'35.53"                                           
-*  + 42 30.35.53 S the same previous position, the plus (+) sign is        
-*  considered like an error, the last 'S' has precedence over the sign     
-*                                                                          
-*  90º0'0,01 N ERROR: +- 90º0'00.00" latitude limit                        
-*
-*/
 double get_dec_angle(char *s)
 {
 

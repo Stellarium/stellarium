@@ -22,6 +22,7 @@
 
 #include "stellarium.h"
 #include "stel_utility.h"
+#include "tone_reproductor.h"
 
 void InitMeriParal(void);
 void drawIntro(void);
@@ -29,7 +30,7 @@ void DrawPoint(float X,float Y,float Z);
 void DrawPointer(Vec3d,float,vec3_t,int);
 
 void DrawCardinaux(draw_utility * du);
-void DrawMilkyWay(float sky_brightness);
+void DrawMilkyWay(tone_reproductor * eye);
 void DrawMeridiens(void);
 void DrawMeridiensAzimut(void);
 void DrawParallelsAzimut(void);

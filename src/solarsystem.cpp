@@ -213,12 +213,7 @@ void SolarSystem::compute_trans_matrices(double date)
 // Draw all the elements of the solar system
 void SolarSystem::draw(int hint_ON, draw_utility * du, navigator * nav)
 {
-	// We are supposed to be in heliocentric coordinate already so no matrix change
-
-    glEnable(GL_TEXTURE_2D);
-	glEnable(GL_CULL_FACE);
-	glDisable(GL_BLEND);
-	glDisable(GL_LIGHTING);
+	// We are supposed to be in heliocentric coordinate
 
 	// Set the light parameters taking sun as the light source
     float tmp[4] = {0,0,0,0};
@@ -238,19 +233,15 @@ void SolarSystem::draw(int hint_ON, draw_utility * du, navigator * nav)
 	// Light pos in zero (sun)
 	float zero4[4] = {0.,0.,0.,1.};
     glLightfv(GL_LIGHT0,GL_POSITION,zero4);
-
 	glEnable(GL_LIGHT0);
 
     // Draw the elements
     vector<planet*>::iterator iter = system_planets.begin();
     while (iter != system_planets.end())
     {
-        if (*iter!=earth) (*iter)->draw(hint_ON, du, nav);
+        /*if (*iter!=earth)*/ (*iter)->draw(hint_ON, du, nav);
         iter++;
     }
-
-	glDisable(GL_LIGHTING);
-    glDisable(GL_CULL_FACE);
 }
 
 

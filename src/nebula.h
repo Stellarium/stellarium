@@ -39,6 +39,8 @@ public:
     void DrawCircle(draw_utility * du);
 	unsigned char get_type(void) const {return STEL_OBJECT_NEBULA;}
 	Vec3d get_earth_equ_pos(navigator * nav = NULL) const {return Vec3d(XYZ[0],XYZ[1],XYZ[2]);}
+	// Return the radius of a circle containing the object on screen
+	virtual float get_on_screen_size(navigator * nav, draw_utility * du);
 private:
     static s_texture * texCircle;
     short posDash;

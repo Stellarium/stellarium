@@ -131,10 +131,15 @@ void DrawCardinaux(draw_utility * du)
 }
 
 // Draw the milky way : used too to 'clear' the buffer
-void DrawMilkyWay(float sky_brightness)
-{   
+void DrawMilkyWay(tone_reproductor * eye)
+{
+	// Scotopic color = 0.25, 0.25 in xyY mode. Milky way luminance ~= 0.001 cd/m^2
+	float c[3] = {0.25f, 0.25f, 0.01f};
+	eye->xyY_to_RGB(c);
+	glColor3fv(c);
+
 	glPushMatrix();
-	glColor3f(0.12f-2*sky_brightness, 0.12f-2*sky_brightness, 0.16f-2*sky_brightness);
+
 	glEnable(GL_TEXTURE_2D);
 	glDisable(GL_BLEND);
 	glBindTexture(GL_TEXTURE_2D, texIds[2]->getID());
@@ -145,6 +150,7 @@ void DrawMilkyWay(float sky_brightness)
 	gluQuadricTexture(MilkyWay,GL_TRUE);
 	gluSphere(MilkyWay,29.,15,15);
 	gluDeleteQuadric(MilkyWay);
+
 	glPopMatrix();
 }
 

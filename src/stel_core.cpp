@@ -123,6 +123,9 @@ void stel_core::init(void)
 	// Load the common used textures TODO : will be removed
     load_base_textures();
 
+	// Load the pointer textures
+	stel_object::init_textures();
+
 	// Precalculation for the grids drawing TODO will be in a class
     InitMeriParal();
 
@@ -194,16 +197,16 @@ void stel_core::update(int delta_time)
 void stel_core::draw(int delta_time)
 {
 	// Init openGL viewing with fov, screen size and clip planes
-	navigation->init_project_matrix(screen_W,screen_H,0.0001 ,40 );
+	navigation->init_project_matrix(screen_W,screen_H,0.00000001 ,40 );
 
     // Set openGL drawings in equatorial coordinates
     navigation->switch_to_earth_equatorial();
 
-	glBlendFunc(GL_ONE, GL_ONE);//_MINUS_SRC_ALPHA);
+	glBlendFunc(GL_ONE, GL_ONE);
 
 	// Draw the milky way. If not activated, need at least to clear the color buffer
 	if (!FlagMilkyWay) glClear(GL_COLOR_BUFFER_BIT);
-	else DrawMilkyWay(sky_brightness);
+	else DrawMilkyWay(tone_converter);
 
 	// Init the depth buffer which is used by the planets drawing operations
 	glClear(GL_DEPTH_BUFFER_BIT);
@@ -217,7 +220,6 @@ void stel_core::draw(int delta_time)
 	if (FlagNebula && (!FlagAtmosphere || sky_brightness<0.1)) nebulas->Draw(FlagNebulaName, du);
 
 	// Draw the hipparcos stars
-	// convert.... TODO implicit convertion
 	Vec3d tempv = navigation->get_equ_vision();
 	Vec3f temp(tempv[0],tempv[1],tempv[2]);
 	if (FlagStars /*&& (!FlagAtmosphere || sky_brightness<0.2)*/)
@@ -242,7 +244,6 @@ void stel_core::draw(int delta_time)
 	navigation->switch_to_heliocentric();
 
 	// Draw the planets
-	// TODO : manage FlagPlanetsHintDrawing
 	if (FlagPlanets) ssystem->draw(FlagPlanetsHints, du, navigation);
 
 	// Set openGL drawings in local coordinates i.e. generally altazimuthal coordinates
@@ -258,9 +259,6 @@ void stel_core::draw(int delta_time)
 	Vec3d moonPos = navigation->helio_to_local(&temp2);
 	moonPos.normalize();
 
-	// Init the depth buffer which is used by the planets drawing operations
-	glClear(GL_DEPTH_BUFFER_BIT);
-
 	// Compute the atmosphere color
 	if (FlagAtmosphere)
 	{
@@ -270,6 +268,7 @@ void stel_core::draw(int delta_time)
 		 	tone_converter, du);
 	}
 
+	glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_COLOR);
 	// Draw the atmosphere
 	if (FlagAtmosphere)	atmosphere->draw(du);
 
@@ -393,10 +392,7 @@ void stel_core::load_base_textures(void)
     texIds[9] = new s_texture("w");
     texIds[10]= new s_texture("zenith");
 
-    texIds[12]= new s_texture("pointeur2");
     texIds[25]= new s_texture("etoile32x32",TEX_LOAD_TYPE_PNG_SOLID);
-    texIds[26]= new s_texture("pointeur4");
-    texIds[27]= new s_texture("pointeur5");
     texIds[11]= new s_texture("nadir");
 
     switch (landscape_number)
@@ -409,28 +405,18 @@ void stel_core::load_base_textures(void)
         texIds[1] = new s_texture("landscapes/sea5",TEX_LOAD_TYPE_PNG_SOLID);
         break;
     case 2 :
-        texIds[31]= new s_texture("landscapes/mountain1",
-				  TEX_LOAD_TYPE_PNG_ALPHA);
-        texIds[32]= new s_texture("landscapes/mountain2",
-				  TEX_LOAD_TYPE_PNG_ALPHA);
-        texIds[33]= new s_texture("landscapes/mountain3",
-				  TEX_LOAD_TYPE_PNG_ALPHA);
-        texIds[34]= new s_texture("landscapes/mountain4",
-				  TEX_LOAD_TYPE_PNG_ALPHA);
-        texIds[1] = new s_texture("landscapes/mountain5",
-				  TEX_LOAD_TYPE_PNG_SOLID);
+        texIds[31]= new s_texture("landscapes/mountain1",TEX_LOAD_TYPE_PNG_ALPHA);
+        texIds[32]= new s_texture("landscapes/mountain2",TEX_LOAD_TYPE_PNG_ALPHA);
+        texIds[33]= new s_texture("landscapes/mountain3",TEX_LOAD_TYPE_PNG_ALPHA);
+        texIds[34]= new s_texture("landscapes/mountain4",TEX_LOAD_TYPE_PNG_ALPHA);
+        texIds[1] = new s_texture("landscapes/mountain5",TEX_LOAD_TYPE_PNG_SOLID);
         break;
     case 3 :
-        texIds[31]= new s_texture("landscapes/snowy1",
-				  TEX_LOAD_TYPE_PNG_ALPHA);
-        texIds[32]= new s_texture("landscapes/snowy2",
-				  TEX_LOAD_TYPE_PNG_ALPHA);
-        texIds[33]= new s_texture("landscapes/snowy3",
-				  TEX_LOAD_TYPE_PNG_ALPHA);
-        texIds[34]= new s_texture("landscapes/snowy4",
-				  TEX_LOAD_TYPE_PNG_ALPHA);
-        texIds[1] = new s_texture("landscapes/snowy5",
-				  TEX_LOAD_TYPE_PNG_SOLID);
+        texIds[31]= new s_texture("landscapes/snowy1",TEX_LOAD_TYPE_PNG_ALPHA);
+        texIds[32]= new s_texture("landscapes/snowy2",TEX_LOAD_TYPE_PNG_ALPHA);
+        texIds[33]= new s_texture("landscapes/snowy3",TEX_LOAD_TYPE_PNG_ALPHA);
+        texIds[34]= new s_texture("landscapes/snowy4",TEX_LOAD_TYPE_PNG_ALPHA);
+        texIds[1] = new s_texture("landscapes/snowy5",TEX_LOAD_TYPE_PNG_SOLID);
         break;
     default :
         printf("ERROR : Bad landscape number, change it in config.txt\n");

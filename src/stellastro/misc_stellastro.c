@@ -99,7 +99,7 @@ const ln_date * str_to_date(const char * s1, const char * s2)
 	}
 	else
 	{
-		if (sscanf(s1,"%d:%d:%d",&(date.days),&(date.months),&(date.years))!=3)
+		if (sscanf(s1,"%d/%d/%d",&(date.days),&(date.months),&(date.years))!=3)
 			return NULL;
 	}
 

@@ -159,11 +159,34 @@ double planet::get_phase(Vec3d obs_pos)
 	return acos((r * r + delta * delta - R * R) / (2. * r * delta));
 }
 
+// TODO this doesn't work...
+float planet::compute_magnitude(Vec3d obs_pos)
+{
+	Vec3d heliopos = get_heliocentric_ecliptic_pos();
+	double p = heliopos.length();
+
+	double R = M_PI * radius * radius / p;
+
+	double s = obs_pos.length();
+	double cos_chi = (p*p + R*R - s*s)/(2.f*p*R);
+	//printf("cos_chi %f\n",cos_chi);
+	float chi = acosf(cos_chi);
+	float phase = (1.f - chi/M_PI) * cos_chi + sinf(chi) / M_PI;
+	float F = 0.666666667f * albedo * phase * radius*s/(R*p) * radius*s/(R*p);
+	return -26.73f - 2.5f * log10f(F);
+}
+
 // Add the given planet in the satellite list
 void planet::add_satellite(planet*p)
 {
 	satellites.push_back(p);
 	p->parent=this;
+}
+
+// Return the radius of a circle containing the object on screen
+float planet::get_on_screen_size(navigator * nav, draw_utility * du)
+{
+	return atanf(radius*2.f/get_earth_equ_pos(nav).length())*180./M_PI/du->fov*du->screenH;
 }
 
 // Draw the planet and all the related infos : name, circle etc..
@@ -184,40 +207,31 @@ void planet::draw(int hint_ON, draw_utility * du, navigator * nav)
 	du->project(0., 0., 0., screenPos[0], screenPos[1], screenPos[2]);
 
 	// Check if in the screen
-	Vec3d earthEquPos = get_earth_equ_pos(nav);
-	float lim = atanf(radius/earthEquPos.length())*180./M_PI/du->fov;
+	float screen_sz = get_on_screen_size(nav, du);
 	if (screenPos[2] < 1 &&
-		screenPos[0]>-lim*du->screenW && screenPos[0]<(1.f+lim)*du->screenW &&
-		screenPos[1]>-lim*du->screenH && screenPos[1]<(1.f+lim)*du->screenH)
+		screenPos[1]>-screen_sz && screenPos[1]<du->screenH+screen_sz &&
+		screenPos[0]>-screen_sz && screenPos[0]<du->screenW+screen_sz)
 	{
-
-		if (tex_halo) draw_halo(du);
-
 		// Draw the name, and the circle if it's not too close from the body it's turning around
 		// this prevents name overlaping (ie for jupiter satellites)
-		float ang_dist = atan(get_ecliptic_pos().length()/earthEquPos.length())/du->fov;
-     	if (hint_ON && ang_dist>0.0005)
+		float ang_dist = 300.f*atan(get_ecliptic_pos().length()/get_earth_equ_pos(nav).length())/du->fov;
+		if (ang_dist==0.f) ang_dist = 1.f; // if ang_dist == 0, the planet is sun..
+     	if (hint_ON && ang_dist>0.15)
     	{
-			ang_dist*=300.f;
 			if (ang_dist>1.f) ang_dist = 1.f;
 			glColor4f(0.5f*ang_dist,0.5f*ang_dist,0.7f*ang_dist,1.f*ang_dist);
-			draw_hints(earthEquPos, du);
+			draw_hints(nav, du);
         }
 
-		glPushMatrix();
-		// Rotate and add an extra half rotation because of the convention in all
-    	// planet texture maps where zero deg long. is in the middle of the texture.
-		glRotatef(axis_rotation + 180.,0.,0.,1.);
-		draw_sphere();
-		glPopMatrix();
+		if (screen_sz>1) draw_sphere();
+
+		if (tex_halo) draw_halo(nav, du);
     }
 
-    glPopMatrix();
-
-    glDisable(GL_CULL_FACE);
+	glPopMatrix();
 }
 
-void planet::draw_hints(Vec3d earthEquPos, draw_utility * du)
+void planet::draw_hints(navigator* nav, draw_utility * du)
 {
 	du->set_orthographic_projection();    // 2D coordinate
 
@@ -225,20 +239,21 @@ void planet::draw_hints(Vec3d earthEquPos, draw_utility * du)
 	glDisable(GL_LIGHTING);
 	glEnable(GL_TEXTURE_2D);
 
-	float tmp = 8.f + radius/earthEquPos.length()*du->screenH*60./du->fov; // Shift for name printing
+	float tmp = 10.f + get_on_screen_size(nav, du)/2.f; // Shift for name printing
 	planet_name_font->print(screenPos[0]+tmp,screenPos[1]+tmp, name);
+
+	// hint disapears smoothly on close view
+	tmp -= 10.f;
+	if (tmp<1) tmp=1;
+ 	glColor4f(0.5f/tmp,0.5f/tmp,0.7f/tmp,1.f/tmp);
 
 	// Draw the 2D small circle
 	glDisable(GL_TEXTURE_2D);
 	glBegin(GL_LINE_STRIP);
-	// hint disapears smoothly on close view
-	tmp -= 8.f;
-	if (tmp<1) tmp=1;
- 	glColor4f(0.5f/tmp,0.5f/tmp,0.7f/tmp,1.f/tmp);
-	for (float r = 0; r < 6.28; r += 0.2)
-	{
-		glVertex3f(screenPos[0] + 8. * sin(r), screenPos[1] + 8. * cos(r), 0.0f);
-	}
+		for (float r=0.f; r<2.f*M_PI; r+=M_PI/5.f)
+		{
+			glVertex3f(screenPos[0] + 8. * sin(r), screenPos[1] + 8. * cos(r), 0.0f);
+		}
 	glEnd();
 
 	du->reset_perspective_projection();		// Restore the other coordinate
@@ -250,6 +265,11 @@ void planet::draw_sphere(void)
 	glEnable(GL_CULL_FACE);
 	glDisable(GL_BLEND);
 
+	glPushMatrix();
+	// Rotate and add an extra half rotation because of the convention in all
+    // planet texture maps where zero deg long. is in the middle of the texture.
+	glRotatef(axis_rotation + 180.,0.,0.,1.);
+
 	if (flag_lighting) glEnable(GL_LIGHTING);
 	else glDisable(GL_LIGHTING);
 	glColor3fv(color);
@@ -258,9 +278,13 @@ void planet::draw_sphere(void)
 	gluQuadricTexture(p,GL_TRUE);
 	gluSphere(p,radius,40,40);
 	gluDeleteQuadric(p);
+
+	glPopMatrix();
+    glDisable(GL_CULL_FACE);
+	glDisable(GL_LIGHTING);
 }
 
-void planet::draw_halo(draw_utility * du)
+void planet::draw_halo(navigator* nav, draw_utility * du)
 {
 	float rmag = 5;//lim*du->screenH*100;
 	if (rmag>0.5)
@@ -279,19 +303,26 @@ void planet::draw_halo(draw_utility * du)
 			}
 		}
 
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+		float screen_r = get_on_screen_size(nav, du);
+		float transparency = rmag/screen_r;
+		if (rmag<screen_r) rmag = screen_r;
+
 		du->set_orthographic_projection();    	// 2D coordinate
+
 		glBindTexture(GL_TEXTURE_2D, tex_halo->getID());
 		glEnable(GL_BLEND);
-			glDisable(GL_LIGHTING);
-			glEnable(GL_TEXTURE_2D);
-			glColor3f(cmag,cmag,cmag);
-			glTranslatef(screenPos[0],screenPos[1],0.);
-			glBegin(GL_QUADS);
-				glTexCoord2i(0,0);	glVertex3f(-rmag, rmag,0.f);	// Bottom Left
-				glTexCoord2i(1,0);	glVertex3f( rmag, rmag,0.f);	// Bottom Right
-				glTexCoord2i(1,1);	glVertex3f( rmag,-rmag,0.f);	// Top Right
-				glTexCoord2i(0,1);	glVertex3f(-rmag,-rmag,0.f);	// Top Left
-			glEnd();
+		glDisable(GL_LIGHTING);
+		glEnable(GL_TEXTURE_2D);
+		glColor4f(color[0]*cmag, color[1]*cmag, color[2]*cmag, transparency);
+		glTranslatef(screenPos[0], screenPos[1], 0.f);
+		glBegin(GL_QUADS);
+			glTexCoord2i(0,0);	glVertex3f(-rmag, rmag,0.f);	// Bottom Left
+			glTexCoord2i(1,0);	glVertex3f( rmag, rmag,0.f);	// Bottom Right
+			glTexCoord2i(1,1);	glVertex3f( rmag,-rmag,0.f);	// Top Right
+			glTexCoord2i(0,1);	glVertex3f(-rmag,-rmag,0.f);	// Top Left
+		glEnd();
 
 		du->reset_perspective_projection();		// Restore the other coordinate
 	}
