@@ -27,7 +27,7 @@
 #include "stellastro.h"
 #include "stel_atmosphere.h"
 
-stel_atmosphere::stel_atmosphere() : sky_resolution(48), tab_sky(NULL)
+stel_atmosphere::stel_atmosphere() : sky_resolution(48), tab_sky(NULL), atm_on(0), atm_intensity(0)
 {
 	// Create the vector array used to store the sky color on the full field of view
 	tab_sky = new (Vec3f*)[sky_resolution+1];

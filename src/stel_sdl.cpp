@@ -126,9 +126,6 @@ static const char *arrow[] = {
 	// Set the window icon
 	SDL_WM_SetIcon(SDL_LoadBMP((core->get_DataDir() + "icon.bmp").c_str()), NULL);
 
-	// Hold the value of SDL_GetTicks at the program init (set 0 time)
-	LastCount = SDL_GetTicks();
-
 }
 
 
@@ -183,6 +180,9 @@ void TerminateApplication(void)
 void stel_sdl::start_main_loop(void)
 {
     bool AppVisible = true;			// At The Beginning, Our App Is Visible
+
+    // Hold the value of SDL_GetTicks at start of main loop (set 0 time)
+    LastCount = SDL_GetTicks();
 
 	// Start the main loop
 	while(1)
