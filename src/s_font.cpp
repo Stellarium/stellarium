@@ -112,6 +112,12 @@ void s_font::print(float x, float y, const char * str, int upsidedown) const
     glPopMatrix();
 }
 
+void s_font::print_char(const char c) const
+{
+	glBindTexture(GL_TEXTURE_2D, s_fontTexture->getID());  // Select Our s_font Texture
+	glCallList(g_base+c);
+}
+
 float s_font::getStrLen(const char * str) const
 {
 	if (!str) return 0;
@@ -132,3 +138,4 @@ float s_font::getStrHeight(const char * str) const
     }
     return s*ratio;
 }
+

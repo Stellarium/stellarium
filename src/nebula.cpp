@@ -28,6 +28,7 @@
 
 s_texture * Nebula::tex_circle = NULL;
 s_font* Nebula::nebula_font = NULL;
+bool Nebula::gravity_label = false;
 
 Nebula::Nebula() : NGC_nb(0), name(NULL), neb_tex(NULL), tex_quad_vertex(NULL)
 {
@@ -162,6 +163,7 @@ float Nebula::get_on_screen_size(const navigator * nav, const Projector* prj)
 void Nebula::draw_name(const Projector* prj)
 {   
     glColor3f(0.4,0.3,0.5);
-	nebula_font->print(XY[0]+3,XY[1]+3, name);
+	gravity_label ? prj->print_gravity(nebula_font, XY[0], XY[1], name, 3, 3) :
+		nebula_font->print(XY[0]+3,XY[1]+3, name);
 }
 

@@ -63,6 +63,8 @@ public:
 
 	int get_nsec(void) const;					// Get number of sections.
 	const char * get_secname(int n) const;		// Get name for section n.
+	int find_entry(const char * entry) const;	// Return 1 if the entry exists, 0 otherwise
+	
 private:
 	void free_dico(void);	// Unalloc memory
 	dictionary * dico;		// The dictionnary containing the parsed data

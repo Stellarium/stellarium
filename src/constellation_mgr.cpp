@@ -101,8 +101,9 @@ void Constellation_mgr::draw(Projector* prj, char abr[4])
 }
 
 // Draw the names of all the constellations
-void Constellation_mgr::draw_names(Projector* prj)
+void Constellation_mgr::draw_names(Projector* prj, bool _gravity_label)
 {
+	Constellation::gravity_label = _gravity_label;
     glColor3f(0.7,0.1,0.1);
     glEnable(GL_BLEND);
     glEnable(GL_TEXTURE_2D);
@@ -112,20 +113,21 @@ void Constellation_mgr::draw_names(Projector* prj)
     {
 		// Check if in the field of view
     	if ( prj->project_earth_equ_check((*iter)->XYZname, (*iter)->XYname) )
-			(*iter)->draw_name(asterFont);
+			(*iter)->draw_name(asterFont, prj);
     }
     prj->reset_perspective_projection();
 }
 
-void Constellation_mgr::draw_one_name(Projector* prj, Constellation* c) const
+void Constellation_mgr::draw_one_name(Projector* prj, Constellation* c, bool _gravity_label) const
 {
+	Constellation::gravity_label = _gravity_label;
     glColor3f(0.7,0.1,0.1);
     glEnable(GL_BLEND);
     glEnable(GL_TEXTURE_2D);
     prj->set_orthographic_projection();	// set 2D coordinate
 	// Check if in the field of view
     if ( prj->project_earth_equ_check(c->XYZname, c->XYname) )
-	if (c) c->draw_name(asterFont);
+	if (c) c->draw_name(asterFont, prj);
     prj->reset_perspective_projection();
 }
 

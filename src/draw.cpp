@@ -1,7 +1,7 @@
 /*
  * Stellarium
  * Copyright (C) 2002 Fabien Chéreau
- * 
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
@@ -11,7 +11,7 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
@@ -21,7 +21,6 @@
 #include "s_texture.h"
 #include "stel_utility.h"
 
-extern s_texture * texIds[200];            // Common Textures
 
 SkyGrid::SkyGrid(SKY_GRID_TYPE grid_type, unsigned int _nb_meridian, unsigned int _nb_parallel, double _radius,
 	unsigned int _nb_alt_segment, unsigned int _nb_azi_segment) :
@@ -281,46 +280,42 @@ void Cardinals::draw(const Projector* prj) const
 }
 
 
-// Draw the milky way : used too to 'clear' the buffer
-void DrawMilkyWay(tone_reproductor * eye, const Projector* prj, const navigator* nav)
+// Class which manages the displaying of the Milky Way
+MilkyWay::MilkyWay(const char* tex_file, double _radius) : radius(_radius)
 {
-	// Scotopic color = 0.25, 0.25 in xyY mode. Milky way luminance ~= 0.001 cd/m^2
-	float c[3] = {0.25f, 0.25f, 0.01f};
+	tex = new s_texture(tex_file,TEX_LOAD_TYPE_PNG_SOLID_REPEAT);
+
+	// Scotopic color = 0.25, 0.25 in xyY mode. Global stars luminance ~= 0.001 cd/m^2
+	color = Vec3f(0.25f, 0.25f, 0.001f/tex->get_average_luminance());
+}
+
+MilkyWay::~MilkyWay()
+{
+	if (tex) delete tex;
+	tex = NULL;
+}
+
+void MilkyWay::draw(tone_reproductor * eye, const Projector* prj, const navigator* nav) const
+{
+	static Vec3f c;
+	c = color;
 	eye->xyY_to_RGB(c);
 	glColor3fv(c);
 
 	glEnable(GL_CULL_FACE);
 	glEnable(GL_TEXTURE_2D);
 	glDisable(GL_BLEND);
-	glBindTexture(GL_TEXTURE_2D, texIds[2]->getID());
+	glBindTexture(GL_TEXTURE_2D, tex->getID());
 
-	prj->sSphere(1.,40,40,
-	nav->get_earth_equ_to_eye_mat()*
-	Mat4d::xrotation(M_PI/180*206)*
-	Mat4d::yrotation(M_PI/180*74)*
-	Mat4d::zrotation(M_PI/180*-84),1);
+	prj->sSphere(radius,40,40,
+		nav->get_earth_equ_to_eye_mat()*
+		Mat4d::xrotation(M_PI/180*35)*
+		Mat4d::yrotation(M_PI/180*125)*
+		Mat4d::zrotation(M_PI/180*380), 1);
 
     glDisable(GL_CULL_FACE);
-
 }
 
-
-// Draw the horizon fog
-void DrawFog(float sky_brightness)
-{
-	glBlendFunc(GL_ONE, GL_ONE);
-	glPushMatrix();
-	glColor3f(0.2f+0.2f*sky_brightness, 0.2f+0.2f*sky_brightness, 0.2f+0.2f*sky_brightness);
-	glEnable(GL_TEXTURE_2D);
-	glEnable(GL_BLEND);
-	glBindTexture(GL_TEXTURE_2D, texIds[3]->getID());
-	glTranslatef(0,0,-0.8);
-	GLUquadricObj * Horizon=gluNewQuadric();
-	gluQuadricTexture(Horizon,GL_TRUE);
-	gluCylinder(Horizon,10,10,2.5,16,1);
-	gluDeleteQuadric(Horizon);
-	glPopMatrix();
-}
 
 // Draw a point... (used for tests)
 void DrawPoint(float X,float Y,float Z)
@@ -333,61 +328,3 @@ void DrawPoint(float X,float Y,float Z)
 		glVertex3f(X,Y,Z);
 	glEnd();
 }
-
-
-// Draw the mountains with a few pieces of a big texture
-void DrawDecor(int nb, float sky_brightness)
-{   
-	glPushMatrix();
-	glColor3f(sky_brightness, sky_brightness, sky_brightness);
-	glEnable(GL_TEXTURE_2D);
-	glEnable(GL_BLEND);
-
-	float delta=1.98915/nb; // almost egal to sin((float)(PI/8))/cos((float)(PI/8))*10/2;
-	for (int ntex=0;ntex<4*nb;ntex++)
-	{   
-		glBindTexture(GL_TEXTURE_2D, texIds[31+ntex%4]->getID());
-		for (int nDecoupe=0;nDecoupe<4;nDecoupe++)
-		{
-			glBegin(GL_QUADS );
-				//Haut Gauche
-				glTexCoord2f((float)nDecoupe/4,0.5f);
-				glVertex3f(10.0f,delta,0.5f);
-				//Bas Gauche
-				glTexCoord2f((float)nDecoupe/4,0.0f);
-				glVertex3f(10.0f,delta,-0.4f);
-				//Bas Droit
-				glTexCoord2f((float)nDecoupe/4+0.25,0.0f);
-				glVertex3f(10.0f,-delta,-0.4f);
-				//Haut Droit
-				glTexCoord2f((float)nDecoupe/4+0.25,0.5f);
-				glVertex3f(10.0f,-delta,0.5f);
-			glEnd ();
-			glRotatef(22.5/nb,0,0,-1);
-		}
-	}
-	glPopMatrix();
-}
-
-
-// Draw the ground
-void DrawGround(float sky_brightness)
-{
-	glPushMatrix();
-	glColor3f(sky_brightness/2, sky_brightness/2, sky_brightness/2);
-	glEnable(GL_TEXTURE_2D);
-	glDisable(GL_BLEND);
-	glBindTexture(GL_TEXTURE_2D, texIds[1]->getID());
-	glBegin (GL_QUADS);
-		glTexCoord2f (0.0f,0.0f);
-		glVertex3f (-10.0f, -10.0f, -0.2f);
-		glTexCoord2f (0.8f, 0.0f);
-		glVertex3f(-10.0f, 10.0f, -0.2f);
-		glTexCoord2f (0.8f, 0.8f);
-		glVertex3f( 10.0f, 10.0f, -0.2f);
-		glTexCoord2f (0.0f, 0.8f);
-		glVertex3f( 10.0f, -10.0f, -0.2f);
-	glEnd ();
-	glPopMatrix();
-}
-

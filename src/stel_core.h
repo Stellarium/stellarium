@@ -38,6 +38,7 @@ using namespace std;
 #include "stel_utility.h"
 #include "init_parser.h"
 #include "draw.h"
+#include "landscape.h"
 
 class stel_core
 {
@@ -91,8 +92,6 @@ private:
 	char config_file[255];
 	char location_file[255];
 
-	int initialized;					// If the core has been initialized or not
-
 	// Main elements of the program
 	navigator * navigation;				// Manage all navigation parameters, coordinate transformations etc..
 	Projector * projection;				// Manage the projection mode and matrix
@@ -107,18 +106,24 @@ private:
 	SkyLine * equator_line;				// Celestial Equator line
 	SkyLine * ecliptic_line;			// Eclptic line
 	Cardinals * cardinals_points;		// Cardinals points
+	MilkyWay * milky_way;				// Our galaxy
+	Landscape * landscape;				// The landscape ie the fog, the ground and "decor"
 	tone_reproductor * tone_converter;	// Tones conversion between stellarium world and display device
 	stel_ui * ui;						// The main User Interface
 
 	Constellation* selected_constellation;
 
 	init_parser * conf;					// The class which manage config retrieves and dumps
-
 	float fps;
+
+	// Projector
+	PROJECTOR_TYPE projector_type;
+	VIEWPORT_TYPE viewport_type;
 
 	// Stars
 	float MaxMagStarName;
 	float StarScale;
+	float StarMagScale;
 	float StarTwinkleAmount;
 	int FlagStarTwinkle;
 
@@ -153,7 +158,7 @@ private:
     int FlagHorizon;
     int FlagFog;
     int FlagAtmosphere;
-    int landscape_number;		// landscape "skin" number
+    char landscape_name[255];
 	float sky_brightness;
 
 	// Viewing
@@ -165,6 +170,7 @@ private:
     int FlagEquatorLine;
     int FlagEclipticLine;
     int FlagCardinalPoints;
+	int FlagGravityLabels;
 
 	// Navigation
 	int FlagEnableZoomKeys;
@@ -175,13 +181,10 @@ private:
 
 	double deltaFov,deltaAlt,deltaAz;	// View movement
 	double move_speed;					// Speed of movement
+	float auto_move_duration;			// Duration of movement for the auto move to a selected object
 
 	int FlagTimePause;
 	double temp_time_velocity;			// Used to store time speed while in pause
-
-	// Load the textures "for non object oriented stuff" TODO : remove that
-	void load_base_textures(void);
-
 };
 
 #endif // _STEL_CORE_H_

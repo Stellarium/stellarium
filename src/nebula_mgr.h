@@ -36,7 +36,7 @@ public:
     int read(char * font_fileName, char * fileName);
 
 	// Draw all the Nebulas
-	void draw(int hints_ON, Projector* prj);
+	void draw(int hints_ON, Projector* prj, bool _gravity_label);
 
 	// Search the Nebulae by position
 	stel_object * search(Vec3f Pos);
