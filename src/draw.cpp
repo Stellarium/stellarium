@@ -261,11 +261,6 @@ void DrawCardinaux(void)
 // Draw the milky way : used too to 'clear' the buffer
 void DrawMilkyWay(void)
 {   
-	if (!global.FlagMilkyWay)
-	{   
-		glClear(GL_COLOR_BUFFER_BIT);
-		return;
-	}
 	glPushMatrix();
 	glColor3f(0.12f-2*global.SkyBrightness, 0.12f-2*global.SkyBrightness, 0.16f-2*global.SkyBrightness);
 	glEnable(GL_TEXTURE_2D);
@@ -460,16 +455,16 @@ void DrawDecor(int nb)
 			glBegin(GL_QUADS );
 				//Haut Gauche
 				glTexCoord2f((float)nDecoupe/4,1.0f);       
-				glVertex3f(10.0f,-delta,1.5f);
+				glVertex3f(10.0f,delta,1.5f);
 				//Bas Gauche
-				glTexCoord2f((float)nDecoupe/4,0.0f);       
-				glVertex3f(10.0f,-delta,-0.4f);
+				glTexCoord2f((float)nDecoupe/4,0.0f);
+				glVertex3f(10.0f,delta,-0.4f);
 				//Bas Droit
 				glTexCoord2f((float)nDecoupe/4+0.25,0.0f);
-				glVertex3f(10.0f,delta,-0.4f);
+				glVertex3f(10.0f,-delta,-0.4f);
 				//Haut Droit
 				glTexCoord2f((float)nDecoupe/4+0.25,1.0f);
-				glVertex3f(10.0f,delta,1.5f);
+				glVertex3f(10.0f,-delta,1.5f);
 			glEnd ();
 			glRotatef(22.5/nb,0,0,-1);
 		}
