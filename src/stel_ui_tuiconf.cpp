@@ -36,7 +36,7 @@ void stel_ui::draw_gravity_ui(void)
 
 	int x = core->projection->view_left() + core->projection->viewW()/2;
 	int y = core->projection->view_bottom() + core->projection->viewH()/2;
-	int shift = (int)(M_SQRT2 / 2 * MY_MIN(x,y));
+	int shift = (int)(M_SQRT2 / 2 * MY_MIN(core->projection->viewW()/2, core->projection->viewH()/2));
 
 	if (core->FlagShowTuiDateTime)
 	{
@@ -182,6 +182,15 @@ void stel_ui::init_tui(void)
 	//tui_menu_administration->addComponent(tui_admin_setlocal);
 	tui_menu_administration->addComponent(tui_admin_updateme);
 
+	tui_admin_voffset = new s_tui::Integer_item(-10,10,0, "6.4 N-S Centering Offset: ");
+	tui_admin_voffset->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb_tui_admin_change_viewport));
+	tui_menu_administration->addComponent(tui_admin_voffset);
+
+	tui_admin_hoffset = new s_tui::Integer_item(-10,10,0, "6.5 E-W Centering Offset: ");
+	tui_admin_hoffset->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb_tui_admin_change_viewport));
+	tui_menu_administration->addComponent(tui_admin_hoffset);
+
+
 }
 
 // Display the tui
@@ -192,12 +201,12 @@ void stel_ui::draw_tui(void)
 	glEnable(GL_BLEND);
 	int x = core->projection->view_left() + core->projection->viewW()/2;
 	int y = core->projection->view_bottom() + core->projection->viewH()/2;
-	int shift = (int)(M_SQRT2 / 2 * MY_MIN(x,y));
+	int shift = (int)(M_SQRT2 / 2 * MY_MIN(core->projection->viewW()/2, core->projection->viewH()/2));
 
 	if (tui_root)
 	{
 		glColor3f(0.1,0.9,0.1);
-		core->projection->print_gravity180(spaceFont, x+shift - 30, y-shift + 30,
+		core->projection->print_gravity180(spaceFont, x+shift - 30, y-shift + 38,
 			s_tui::stop_active + tui_root->getString());
 	}
 }
@@ -258,6 +267,11 @@ void stel_ui::tui_update_widgets(void)
 
 	// 5. effects
 	tui_effect_landscape->setValue(core->observatory->get_landscape_name());
+
+	// 6. admin
+	tui_admin_voffset->setValue(core->verticalOffset);
+	tui_admin_hoffset->setValue(core->horizontalOffset);
+
 
 }
 
@@ -335,3 +349,15 @@ void stel_ui::tui_cb_tui_general_change_sky_culture(void) {
 	core->SkyCulture = tui_general_sky_culture->getCurrent();  // assuming above worked...
 }
 
+// callback for viewport centering
+void stel_ui::tui_cb_tui_admin_change_viewport(void)
+{
+
+  core->verticalOffset            = tui_admin_voffset->getValue();
+  core->horizontalOffset          = tui_admin_hoffset->getValue();
+
+
+  core->projection->set_viewport_offset( core->horizontalOffset, core->verticalOffset);
+  core->projection->set_viewport_type( core->ViewportType );
+
+}

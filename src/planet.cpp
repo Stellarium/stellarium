@@ -26,6 +26,7 @@ s_font* planet::planet_name_font = NULL;
 float planet::star_scale = 1.f;
 bool planet::gravity_label = false;
 Vec3f planet::label_color = Vec3f(.4,.4,.8);
+Vec3f planet::orbit_color = Vec3f(1,.6,1);
 
 rotation_elements::rotation_elements() : period(1.), offset(0.), epoch(J2000),
 		obliquity(0.), ascendingNode(0.), precessionRate(0.)
@@ -645,7 +646,7 @@ void planet::draw_orbit(const navigator * nav, const Projector* prj) {
   glDisable(GL_LIGHTING);
   glDisable(GL_TEXTURE_2D);
 
-  glColor3f(1.0,0.5,0.8);
+  glColor3fv(orbit_color);
 	
   int on=0;
   int d;

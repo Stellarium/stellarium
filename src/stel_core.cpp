@@ -101,19 +101,8 @@ void stel_core::init(void)
 	projection->set_screen_size(screen_W, screen_H);
 	projection->set_fov(InitFov);
 
-	switch (ViewportType)
-	{
-		case MAXIMIZED : projection->maximize_viewport(); break;
-		case SQUARE : projection->set_square_viewport(); break;
-		case DISK : projection->set_disk_viewport(); break;
-		default : projection->maximize_viewport(); break;
-	}
-	
-	/*
-    hip_stars = new Hip_Star_mgr();
-    hip_stars->load(DataDir + "spacefont.txt", DataDir + "hipparcos.fab",
-		DataDir + "commonname.fab",	DataDir + "name.fab");
-	*/
+	projection->set_viewport_offset(horizontalOffset, verticalOffset);
+	projection->set_viewport_type(ViewportType);
 
     // Load hipparcos stars & names
     hip_stars = new Hip_Star_mgr(DataDir, SkyCulture, "spacefont.txt" );
@@ -146,7 +135,7 @@ void stel_core::init(void)
 
 
 	// Create and init the solar system
-	ssystem->init(DataDir + "spacefont.txt", DataDir + "ssystem.ini", PlanetNamesColor );
+	ssystem->init(DataDir + "spacefont.txt", DataDir + "ssystem.ini", PlanetNamesColor, PlanetOrbitsColor );
 
 	landscape = Landscape::create_from_file(DataDir + "landscapes.ini", observatory->get_landscape_name());
 
@@ -463,6 +452,9 @@ void stel_core::load_config_from(const string& confFile)
 	screen_W			= conf.get_int	   ("video:screen_w");
 	screen_H			= conf.get_int	   ("video:screen_h");
 	bppMode				= conf.get_int    ("video:bbp_mode");
+	horizontalOffset                = conf.get_int    ("video:horizontal_offset");
+	verticalOffset                  = conf.get_int    ("video:vertical_offset");
+
 
 	// Projector
 	string tmpstr = conf.get_str("projection:type");
@@ -492,7 +484,8 @@ void stel_core::load_config_from(const string& confFile)
 	}
 
 	// localization section
-	SkyCulture = conf.get_str("localization:sky_culture");
+	SkyCulture = conf.get_str("localization", "sky_culture", "western");
+	// default sky culture is western
 
 	// Star section
 	StarScale			= conf.get_double ("stars:star_scale");
@@ -527,6 +520,7 @@ void stel_core::load_config_from(const string& confFile)
 	NebulaCircleColor	= str_to_vec3f(conf.get_str("color:nebula_circle_color").c_str());
 	CardinalColor 		= str_to_vec3f(conf.get_str("color:cardinal_color").c_str());
 	PlanetNamesColor	= str_to_vec3f(conf.get_str("color:planet_names_color").c_str());
+	PlanetOrbitsColor	= str_to_vec3f(conf.get_str("color", "planet_orbits_color", ".6,1,1").c_str());
 
 	// Text ui section
 	FlagEnableTuiMenu = conf.get_boolean("tui:flag_enable_tui_menu");
@@ -625,6 +619,9 @@ void stel_core::save_config_to(const string& confFile)
 		default : tmpstr="maximized";
 	}
 	conf.set_str	("projection:viewport", tmpstr);
+	conf.set_int    ("video:horizontal_offset", horizontalOffset);
+	conf.set_int    ("video:vertical_offset", verticalOffset);
+
 
 	// localization section
 	conf.set_str    ("localization:sky_culture", SkyCulture);
@@ -662,6 +659,7 @@ void stel_core::save_config_to(const string& confFile)
 	conf.set_str	("color:nebula_circle_color", vec3f_to_str(NebulaCircleColor));
 	conf.set_str    ("color:cardinal_color", vec3f_to_str(CardinalColor));
 	conf.set_str    ("color:planet_names_color", vec3f_to_str(PlanetNamesColor));
+	conf.set_str    ("color:planet_orbits_color", vec3f_to_str(PlanetOrbitsColor));
 
 	// Text ui section
 	conf.set_boolean("tui:flag_enable_tui_menu", FlagEnableTuiMenu);

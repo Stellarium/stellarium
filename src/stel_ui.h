@@ -213,6 +213,8 @@ private:
 	s_tui::ActionConfirm_item* tui_admin_savedefault;
 	//s_tui::MultiSet_item<string>* tui_admin_setlocal;
 	s_tui::Action_item* tui_admin_updateme;
+	s_tui::Integer_item* tui_admin_voffset;
+	s_tui::Integer_item* tui_admin_hoffset;
 
 	// Tui Callbacks
 	void tui_cb1(void);						// Update all the core flags and params from the tui
@@ -224,6 +226,7 @@ private:
 	void tui_cb_admin_updateme(void);		// Launch script for internet update
 	void tui_cb_tui_effect_change_landscape(void);	// Select a new landscape skin
 	void tui_cb_tui_general_change_sky_culture(void);  // select new sky culture
+	void tui_cb_tui_admin_change_viewport(void);    // Set viewport offset
 
 	// Parse a file of type /usr/share/zoneinfo/zone.tab
 	s_tui::MultiSet_item<string>* stel_ui::create_tree_from_time_zone_file(const string& zonetab);

@@ -225,7 +225,7 @@ void Hip_Star::draw_point(void)
 
 void Hip_Star::draw_name(const s_font* star_font)
 {   
-    glColor3fv(RGB*(1./2.5));
+    glColor3fv(RGB*0.75);
 	gravity_label ? proj->print_gravity180(star_font, XY[0],XY[1], CommonName, 6, -4) :
 	star_font->print(XY[0]+6,XY[1]-4, CommonName);
 }

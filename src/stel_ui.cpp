@@ -75,7 +75,7 @@ stel_ui::stel_ui(stel_core * _core) :
 void stel_ui::init(void)
 {
     // Load standard font
-    spaceFont = new s_font(14.5, "spacefont", core->DataDir + "spacefont.txt");
+    spaceFont = new s_font(18, "spacefont", core->DataDir + "spacefont.txt");
     if (!spaceFont)
     {
         printf("ERROR WHILE CREATING FONT\n");
