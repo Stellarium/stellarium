@@ -303,7 +303,7 @@ void planet::draw_hints(const navigator* nav, const Projector* prj)
 	static char scale_str[100];
 	if (sphere_scale == 1.f) sprintf(scale_str,"%s", name.c_str());
 	else sprintf(scale_str,"%s (x%.1f)", name.c_str(), sphere_scale);
-	float tmp = 10.f + get_on_screen_size(nav, prj)/2.f; // Shift for name printing
+	float tmp = 10.f + get_on_screen_size(nav, prj)/sphere_scale/2.f; // Shift for name printing
 	gravity_label ? prj->print_gravity180(planet_name_font, screenPos[0],screenPos[1], scale_str, tmp, tmp) :
 		planet_name_font->print(screenPos[0]+tmp,screenPos[1]+tmp, scale_str);
 

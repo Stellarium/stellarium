@@ -75,7 +75,7 @@ bool Fisheye_projector::project_custom(const Vec3d& v, Vec3d& win, const Mat4d& 
 	win.normalize();
 	win = center + win * (a/M_PI * 360./fov * MY_MIN(vec_viewport[2],vec_viewport[3])/2);
 	win[2] = z;
-	if (a<0.95*M_PI) return true;
+	if (a<0.9*M_PI) return true;
 	else return false;
 }
 
