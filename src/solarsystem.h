@@ -47,7 +47,7 @@ public:
     void draw(int hint_ON, Projector * du, const navigator * nav, const tone_reproductor* eye, bool _gravity_label, int flag_point);
 
 	// Search if any planet is close to position given in earth equatorial position.
-	planet* search(Vec3d, const navigator * nav);
+	planet* search(Vec3d, const navigator * nav, const Projector * prj);
 
 	planet* get_earth(void) {return earth;}
 
