@@ -21,8 +21,9 @@
 #define _NAVIGATOR_H_
 
 #include "stellarium.h"
-#include "vecmath.h"
 #include "stel_object.h"
+#include "observator.h"
+#include "vecmath.h"
 
 // Conversion in standar Julian time format
 #define JD_SECOND 0.000011574074074074074074
@@ -32,29 +33,13 @@
 
 class stel_object;
 
-class observator_pos
-{
-public:
-	observator_pos();
-	~observator_pos();
-	void save(FILE *);
-	void load(FILE *);
-	string name;
-	unsigned int planet;// Planet number : 0 floating, 1 Mercure - 9 pluton
-    double longitude;	// Longitude in degree
-	double latitude;	// Latitude in degree
-	int time_zone;		// Time zone
-    int altitude;		// Altitude in meter
-};
-
 // Class which manages a navigation context
 // Manage date/time, viewing direction/fov, observer position, and coordinate changes
-
 class navigator
 {
 public:
 	// Create and initialise to default a navigation context
-	navigator();
+	navigator(Observator* obs);
     virtual ~navigator();
 
 	// Init the viewing matrix, setting the field of view, the clipping planes, and screen size
@@ -91,19 +76,8 @@ public:
 	const Vec3d& get_local_vision(void) const {return local_vision;}
 	void set_local_vision(const Vec3d& _pos);
 
-	// Observer position
-	void set_time_zone(int t) {position.time_zone=t;}
-	int get_time_zone(void) const {return position.time_zone;}
-	void set_latitude(double l) {position.latitude=l;}
-	double get_latitude(void) const {return position.latitude;}
-	void set_longitude(double l) {position.longitude=l;}
-	double get_longitude(void) const {return position.longitude;}
-	void set_altitude(int a) {position.altitude=a;}
-	int get_altitude(void) const {return position.altitude;}
-
 	// Return the observer heliocentric position
 	Vec3d get_observer_helio_pos(void) const;
-
 
 	// Place openGL in earth equatorial coordinates
 	void switch_to_earth_equatorial(void) const { glLoadMatrixd(mat_earth_equ_to_eye); }
@@ -176,7 +150,7 @@ private:
 	double JDay;        			// Curent time in Julian day
 
 	// Position variables
-	observator_pos position;
+	Observator* position;
 };
 
 #endif //_NAVIGATOR_H_

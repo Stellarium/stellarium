@@ -29,6 +29,7 @@ init_parser.h       init_parser.cpp \
 s_gui.h				s_gui.cpp \
 stel_ui.h			stel_ui.cpp  stel_ui_conf.cpp stel_ui_tuiconf.cpp \
 projector.h			projector.cpp \
+observator.h		observator.cpp \
 fisheye_projector.h fisheye_projector.cpp \
 landscape.h			landscape.cpp \
 callbacks.hpp       callback_helpers.hpp \

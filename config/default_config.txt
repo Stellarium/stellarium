@@ -10,12 +10,12 @@ bbp_mode                       = 32
 
 [projection]
 type                           = fisheye
-viewport                       = square
+viewport                       = disk
 
 [stars]
-star_scale                     = 1
-star_mag_scale                 = 5.
-star_twinkle_amount            = 0.5
+star_scale                     = 1.2
+star_mag_scale                 = 2.5
+star_twinkle_amount            = 0.3
 max_mag_star_name              = 1.5
 flag_star_twinkle              = true
 
@@ -29,28 +29,27 @@ flag_show_fps                  = true
 flag_menu                      = false
 flag_help                      = false
 flag_infos                     = false
-flag_show_selected_object_info = false
+flag_show_selected_object_info = true
 gui_base_color                 = 0.3,0.4,0.7
 gui_text_color                 = 0.7,0.8,0.9
 
 [tui]
-flag_show_tui					= false
+flag_show_tui                  = false
 flag_show_tui_datetime         = true
 flag_show_tui_short_obj_info   = true
 
 [navigation]
-startup_time_mode               = actual
+startup_time_mode              = actual
 flag_enable_zoom_keys          = true
 flag_enable_move_keys          = true
 init_fov                       = 180
 init_view_pos                  = 0.0001,0.,1.
 auto_move_duration             = 1.
-preset_sky_time					= 2451545.
+preset_sky_time                = 2451545.
 flag_utc_time                  = false
-flag_time_display_format		= 24h
 
 [landscape]
-landscape_name                 = palm
+landscape_name                 = sea
 flag_ground                    = true
 flag_horizon                   = true
 flag_fog                       = true
@@ -59,7 +58,7 @@ flag_atmosphere                = false
 [viewing]
 flag_constellation_drawing     = false
 flag_constellation_name        = false
-flag_constellation_art        = false
+flag_constellation_art         = false
 flag_constellation_pick        = true
 flag_azimutal_grid             = false
 flag_equatorial_grid           = false
@@ -69,7 +68,7 @@ flag_cardinal_points           = true
 flag_gravity_labels            = true
 flag_init_moon_scaled          = true
 moon_scale                     = 4.
-constellation_culture        = Occidental
+constellation_culture          = Occidental
 
 [astro]
 flag_stars                     = true
@@ -80,3 +79,12 @@ flag_nebula                    = true
 flag_nebula_name               = false
 flag_milky_way                 = true
 
+[init_location]
+name	= Guereins
+latitude	= +46º15'0.00"
+longitude = +05º00'-0.00"
+altitude = 83
+landscape_name = sea
+time_zone = system_default
+time_display_format       = system_default
+date_display_format       = system_default

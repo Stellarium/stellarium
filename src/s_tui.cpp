@@ -155,7 +155,7 @@ bool MenuBranch::onKey(SDLKey k, S_TUI_VALUE v)
 	}
 	else
 	{
-		if (k==SDLK_RIGHT && v==S_TUI_PRESSED)
+		if (v==S_TUI_PRESSED && (k==SDLK_RIGHT || k==SDLK_RETURN))
 		{
 			isNavigating = true;
 			return true;

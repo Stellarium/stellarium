@@ -135,7 +135,7 @@ private:
 	s_tui::Integer_item* tui_location_altitude;
 
 	// 2. Time & Date
-	s_tui::Action_item* tui_time_settmz;
+	s_tui::MultiSet_item<string>* tui_time_settmz;
 	s_tui::Time_item* tui_time_skytime;
 	s_tui::Time_item* tui_time_presetskytime;
 	s_tui::Action_item* tui_time_actual;
@@ -173,7 +173,7 @@ private:
 	// 8. Administration
 	s_tui::ActionConfirm_item* tui_admin_loaddefault;
 	s_tui::ActionConfirm_item* tui_admin_savedefault;
-	s_tui::Action_item* tui_admin_setlocal;
+	s_tui::MultiSet_item<string>* tui_admin_setlocal;
 	s_tui::Action_item* tui_admin_updateme;
 
 	// Tui Callbacks
