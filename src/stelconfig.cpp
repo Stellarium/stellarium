@@ -293,6 +293,14 @@ void dumpConfig(void)
 		printf("An error occured while saving configuration file.\n");
         return;
     }
+    FILE * f=fopen(tempName,"a+t");
+    if (!f) 
+    {   
+        printf("ERROR : can't open the configuration file : %s",tempName);
+        return;
+    }
+    fprintf(f,"#\n# See the file default_config.txt for options description.\n#");
+    fclose(f);
 }
 
 void dumpLocation(void)
@@ -311,4 +319,12 @@ void dumpLocation(void)
 		printf("An error occured while saving location file.\n");
         return;
     }
+    FILE * f=fopen(tempName,"a+t");
+    if (!f) 
+    {   
+        printf("ERROR : can't open the location file : %s",tempName);
+        return;
+    }
+    fprintf(f,"#\n# See the file location_examples.txt for options description.\n# Go on this website to findout what your location is : http://www.heavens-above.com/countries.asp\n#");
+    fclose(f);
 }
