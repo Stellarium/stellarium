@@ -185,14 +185,10 @@ void Landscape_old_style::draw_fog(tone_reproductor * eye, const Projector* prj,
 // Draw the mountains with a few pieces of texture
 void Landscape_old_style::draw_decor(tone_reproductor * eye, const Projector* prj, const navigator* nav) const
 {
-	Mat4d mat = nav->get_local_to_eye_mat() * Mat4d::zrotation(ground_angle_rotatez*M_PI/180.f);
-
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glEnable(GL_TEXTURE_2D);
 
 	glColor3f(sky_brightness, sky_brightness, sky_brightness);
-	glPushMatrix();
-	glLoadMatrixd(mat);
 
 	int subdiv = 32/(nb_decor_repeat*nb_side);
 	if (subdiv<=0) subdiv = 1;
@@ -202,23 +198,7 @@ void Landscape_old_style::draw_decor(tone_reproductor * eye, const Projector* pr
 	float x,y;
 	float a;
 
-	glDisable(GL_BLEND);
-	glBindTexture(GL_TEXTURE_2D, ground_tex->getID());
-	glBegin(GL_TRIANGLE_STRIP);
-		glTexCoord2f (ground_tex_coord.tex_coords[0],ground_tex_coord.tex_coords[1]);
-		prj->sVertex3(-radius, -radius, z, mat);
-		glTexCoord2f (ground_tex_coord.tex_coords[2], ground_tex_coord.tex_coords[1]);
-		prj->sVertex3(-radius, radius, z, mat);
-		glTexCoord2f (ground_tex_coord.tex_coords[2], ground_tex_coord.tex_coords[3]);
-		prj->sVertex3(radius, radius, z, mat);
-		glTexCoord2f (ground_tex_coord.tex_coords[0], ground_tex_coord.tex_coords[3]);
-		prj->sVertex3(radius, -radius, z, mat);
-		glTexCoord2f (ground_tex_coord.tex_coords[0],ground_tex_coord.tex_coords[1]);
-		prj->sVertex3(-radius, -radius, z, mat);
-	glEnd ();		
-
-	glPopMatrix();
-	mat = nav->get_local_to_eye_mat() * Mat4d::zrotation(decor_angle_rotatez*M_PI/180.f);
+	Mat4d mat = nav->get_local_to_eye_mat() * Mat4d::zrotation(decor_angle_rotatez*M_PI/180.f);
 	glPushMatrix();
 	glLoadMatrixd(mat);
 	
@@ -269,23 +249,31 @@ void Landscape_old_style::draw_ground(tone_reproductor * eye, const Projector* p
 	}
 	else
 	{
-		// Just a horizontal quad for the ground is enought
-		float z=radius*sinf(decor_angle_shift*M_PI/180.);
-		glPushMatrix();
-		glColor3f(sky_brightness, sky_brightness, sky_brightness);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		glEnable(GL_TEXTURE_2D);
+		Mat4d mat = nav->get_local_to_eye_mat() * Mat4d::zrotation(ground_angle_rotatez*M_PI/180.f);
+		
+		glColor3f(sky_brightness, sky_brightness, sky_brightness);
+		glPushMatrix();
+		glLoadMatrixd(mat);
+
+		float z = radius*sinf(ground_angle_shift*M_PI/180.);
+	
 		glDisable(GL_BLEND);
 		glBindTexture(GL_TEXTURE_2D, ground_tex->getID());
-		glBegin(GL_QUADS);
+		glBegin(GL_TRIANGLE_STRIP);
 			glTexCoord2f (ground_tex_coord.tex_coords[0],ground_tex_coord.tex_coords[1]);
-			glVertex3f (-radius/2, -radius/2, 0);
+			prj->sVertex3(-radius, -radius, z, mat);
 			glTexCoord2f (ground_tex_coord.tex_coords[2], ground_tex_coord.tex_coords[1]);
-			glVertex3f(-radius/2, radius/2, 0);
+			prj->sVertex3(-radius, radius, z, mat);
 			glTexCoord2f (ground_tex_coord.tex_coords[2], ground_tex_coord.tex_coords[3]);
-			glVertex3f( radius/2, radius/2, 0);
+			prj->sVertex3(radius, radius, z, mat);
 			glTexCoord2f (ground_tex_coord.tex_coords[0], ground_tex_coord.tex_coords[3]);
-			glVertex3f( radius/2, -radius/2, 0);
-		glEnd ();
+			prj->sVertex3(radius, -radius, z, mat);
+			glTexCoord2f (ground_tex_coord.tex_coords[0],ground_tex_coord.tex_coords[1]);
+			prj->sVertex3(-radius, -radius, z, mat);
+		glEnd ();		
+	
 		glPopMatrix();
 	}
 }
