@@ -32,8 +32,8 @@ public:
     Nebula_mgr(Vec3f defaultfontcolor = Vec3f(0.4,0.3,0.5), Vec3f defaultcirclecolor = Vec3f(0.8,0.8,0.1));
     virtual ~Nebula_mgr();
 
-	// Read the Nebulas data from a file
-    int read(const string& font_fileName, const string& fileName);
+	// Read the Nebulas data from a file (and draw % complete bar at barx, bary on screen)
+    int read(const string& font_fileName, const string& fileName, int barx, int bary);
 
 	// Draw all the Nebulas
 	void draw(int hints_ON, Projector* prj, const navigator * nav, tone_reproductor* eye,
