@@ -47,6 +47,7 @@ public:
 	void sVertex3(float x, float y, float z, const Mat4d& mat) const;
 	void sVertex3(double x, double y, double z, const Mat4d& mat) const;
 
+	const Vec3d convert_pos(const Vec3d& v, const Mat4d& mat) const;
 protected:
 
 	Vec3d center;
@@ -58,6 +59,7 @@ protected:
 	// transformation from screen 2D point x,y to object
 	// m is here the already inverted full tranfo matrix
 	virtual void unproject(double x, double y, const Mat4d& m, Vec3d& v) const;
+	void unproject(const Vec3d& u, const Mat4d& m, Vec3d& v) const;
 
 	Mat4d mat_projection2;		// orthographic projection matrix used for 3d vertex conversion
 };

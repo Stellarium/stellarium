@@ -301,6 +301,7 @@ void planet::draw_sphere(const Projector* prj, const Mat4d& mat)
 
 	// Rotate and add an extra half rotation because of the convention in all
     // planet texture maps where zero deg long. is in the middle of the texture.
+	//printf("%s\n", name);
 	prj->sSphere(radius,40,40, mat * Mat4d::zrotation(M_PI/180*(axis_rotation + 180.)));
 
     glDisable(GL_CULL_FACE);

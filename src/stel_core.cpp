@@ -83,7 +83,7 @@ void stel_core::init(void)
 	ssystem = new SolarSystem();
 	atmosphere = new stel_atmosphere();
 	tone_converter = new tone_reproductor();
-	projection = new Projector(screen_W, screen_H, initFov);
+	projection = new Fisheye_projector(screen_W, screen_H, initFov);
 	equ_grid = new SkyGrid(EQUATORIAL);
 	azi_grid = new SkyGrid(ALTAZIMUTAL);
 	equator_line = new SkyLine(EQUATOR);
@@ -273,7 +273,6 @@ void stel_core::draw(int delta_time)
 	// Draw the pointer on the currently selected object
     if (selected_object) selected_object->draw_pointer(delta_time, projection, navigation);
 
-	navigation->switch_to_heliocentric();
 	// Draw the planets
 	if (FlagPlanets) ssystem->draw(FlagPlanetsHints, projection, navigation);
 

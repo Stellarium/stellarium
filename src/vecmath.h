@@ -148,6 +148,7 @@ public:
     inline Vector4(T, T, T, T);
 
 	inline Vector4& operator=(const Vector4<T>&);
+	inline Vector4& operator=(const Vector3<T>&);
 	inline Vector4& operator=(const T*);
     inline void set(T, T, T, T);
 
@@ -562,6 +563,12 @@ template<class T> Vector4<T>::Vector4(T x, T y, T z, T a = 1)
 template<class T> Vector4<T>& Vector4<T>::operator=(const Vector4<T>& a)
 {
 	v[0]=a.v[0]; v[1]=a.v[1]; v[2]=a.v[2]; v[3]=a.v[3];
+    return *this;
+}
+
+template<class T> Vector4<T>& Vector4<T>::operator=(const Vector3<T>& a)
+{
+	v[0]=a.v[0]; v[1]=a.v[1]; v[2]=a.v[2]; v[3]=1;
     return *this;
 }
 
