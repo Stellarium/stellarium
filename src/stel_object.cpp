@@ -121,6 +121,11 @@ void stel_object::get_info_string(char * s, const navigator * nav) const
 	sprintf(s,"No info for this object...");
 }
 
+void stel_object::get_short_info_string(char * s, const navigator * nav) const
+{
+	sprintf(s,"No info");
+}
+
 void stel_object::init_textures(void)
 {
 	pointer_star = new s_texture("pointeur2");
