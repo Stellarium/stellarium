@@ -157,7 +157,7 @@ void Constellation::draw_art_optim(Projector* prj, int delta_time)
 
 	  
 	  // 3 second fade
-	  float delta_intensity = delta_time/3000.f;
+	  float delta_intensity = delta_time/2000.f;
 
 	  
 	  // update fade
@@ -215,7 +215,7 @@ void Constellation::draw_art(Projector* prj, int delta_time)
 	{
 
 	  // 3 second fade
-	  float delta_intensity = delta_time/3000.f;
+	  float delta_intensity = delta_time/2000.f;
 
 	  
 	  // update fade

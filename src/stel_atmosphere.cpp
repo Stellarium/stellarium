@@ -156,7 +156,7 @@ void stel_atmosphere::draw(Projector* prj, int delta_time)
 {
 
   // 5 second fade
-  float delta_intensity = delta_time/5000.f;
+  float delta_intensity = delta_time/2000.f;
 
   // update fade
   if( !atm_on ) {
