@@ -152,14 +152,16 @@ void stel_atmosphere::compute_color(double JD, Vec3d sunPos, Vec3d moonPos, floa
 
 
 // Draw the atmosphere using the precalc values stored in tab_sky
-void stel_atmosphere::draw(Projector* prj)
+void stel_atmosphere::draw(Projector* prj, int delta_time)
 {
 
+  // 5 second fade
+  float delta_intensity = delta_time/5000.f;
 
   // update fade
   if( !atm_on ) {
-    if( atm_intensity > FADE_INCREMENT ) {
-      atm_intensity -= FADE_INCREMENT;
+    if( atm_intensity > delta_intensity ) {
+      atm_intensity -= delta_intensity;
     } else {
       atm_intensity = 0;
       return;
@@ -196,8 +198,8 @@ void stel_atmosphere::draw(Projector* prj)
 
 	// smoother initial fade in when increment after drawing
 	if( atm_on ) {
-	  if( atm_intensity < 1 ) {
-	    atm_intensity += FADE_INCREMENT;
+	  if( atm_intensity + delta_intensity <= 1 ) {
+	    atm_intensity += delta_intensity;
 	  } else {
 	    atm_intensity = 1;
 	  }
