@@ -4,21 +4,43 @@
 </head>
 <body bgcolor="white">
 This document outlines commands supported by Stellarium for UI or
-script use.
-<p>The command format consists of a command name followed by an
-optional list of arguments in the form of name/value pairs. Whitespace
-is used as a delimiter. Argument values requiring included whitespace
-can be enclosed in double quotes ("This is a value with spaces.").
-Commands and argument names
-are case insensitive. Argument pairs can be arranged in any order.
-</p>
+script use.<br>
+<br>
+Command format basics:<br>
+<ul>
+  <li>The command format consists of a command name followed by an
+optional list of arguments in the form of name/value pairs. <br>
+  </li>
+  <li>Whitespace
+is used as a delimiter. <br>
+  </li>
+  <li>Argument values requiring included whitespace
+can be enclosed in double quotes ("This is a value with spaces."). <br>
+  </li>
+  <li>Commands and argument names
+are case insensitive. <br>
+  </li>
+  <li>Argument pairs can be arranged in any order.<br>
+  </li>
+</ul>
 <p>COMMAND ARGUMENT_NAME1 ARGUMENT_VALUE1 ARGUMENT_NAME2
-ARGUMENT_VALUE2 ...
+ARGUMENT_VALUE2 ...<br>
 </p>
+<p>Example commands:<br>
+</p>
+<ul>
+  <li>select planet Jupiter</li>
+  <li>flag atmosphere on</li>
+  <li>date absolute 1999-08-11T12:00:00</li>
+  <li>wait duration 2.31</li>
+  <li>moveto lat 45.7 lon -122 duration 5<br>
+  </li>
+</ul>
+<p></p>
 <p>Below is a complete list of valid commands, along with their
 supported argument names and values. Lowercase values are literal,
-uppercase values are explanatory (i.e. replace FILENAME with the file
-name you want). </p>
+uppercase values are explanatory (i.e. replace SECONDS with the number
+of seconds desired). </p>
 <p>
 <table border="1">
   <tbody>
@@ -28,11 +50,79 @@ name you want). </p>
       <td><b>Argument Values</b></td>
       <td><b>Notes</b></td>
     </tr>
+    <tr>
+      <td colspan="1" rowspan="3" style="vertical-align: top;">audio<br>
+      </td>
+      <td style="vertical-align: top;">action<br>
+      </td>
+      <td style="vertical-align: top;">play<br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">filename<br>
+      </td>
+      <td style="vertical-align: top;">AUDIO_FILENAME<br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">loop<br>
+      </td>
+      <td style="vertical-align: top;">on<br>
+off<br>
+      </td>
+      <td style="vertical-align: top;">Used with action=play. Default
+is off<br>
+      </td>
+    </tr>
+    <tr>
+      <td>autozoom<br>
+      </td>
+      <td>direction<br>
+      </td>
+      <td>in<br>
+out<br>
+      </td>
+      <td> <br>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="1" rowspan="2">date<br>
+      <br>
+      </td>
+      <td>absolute<br>
+      </td>
+      <td>[-]YYYY-MM-DDThh:mm:ss<br>
+      </td>
+      <td>Set time to a specified date and time.&nbsp; 'T' is literal.<br>
+      </td>
+    </tr>
+    <tr>
+      <td>relative<br>
+      </td>
+      <td>DAYS<br>
+      </td>
+      <td>Change date and time by DAYS (can be fractional).<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">deselect<br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;">Deselects current object
+selection, including any constellation selection.&nbsp; See select
+command.<br>
+      </td>
+    </tr>
     <tr valign="top">
       <td>flag</td>
-      <td>
-
-atmosphere<br>
+      <td>atmosphere<br>
 azimutal_grid<br>
 bright_nebulae<br>
 cardinal_points<br>
@@ -83,65 +173,63 @@ toggle </td>
       <td>Set rendering flags. One argument name per command allowed
 currently. </td>
     </tr>
-
-
-<tr valign="top">
-      <td >set</td>
-      <td>
-atmosphere_fade_duration<br>
-auto_move_duration<br>
-base_font_size <br>
-constellation_art_fade_duration<br>
-constellation_art_intensity<br>
-landscape_name<br>
-max_mag_nebula_name<br>
-max_mag_star_name<br>
-moon_scale<br>
-sky_culture<br>
-sky_locale<br>
-star_mag_scale<br>
-star_scale<br>
-star_twinkle_amount<br>
-time_zone<br>
-
-</td>
-<td>&nbsp;</td>
-<td>&nbsp;</td>
-</tr>
-
-    <tr valign="top">
-      <td rowspan="3">select </td>
-      <td>hp</td>
-      <td>HP_NUMBER</td>
-      <td rowspan="3">&nbsp;</td>
-    </tr>
     <tr>
-      <td>planet</td>
-      <td>PLANET_NAME</td>
-    </tr>
-    <tr>
-      <td>nebula</td>
-      <td>NEBULA_NAME</td>
-    </tr>
-    <tr>
-      <td>autozoom<br>
+      <td rowspan="7" style="vertical-align: top;">image<br>
+      <br>
       </td>
-      <td>direction<br>
+      <td>action</td>
+      <td>load<br>
+drop<br>
       </td>
-      <td>in<br>
-out<br>
-      </td>
-      <td> <br>
+      <td>Drop images when no longer needed to improve performance.<br>
       </td>
     </tr>
     <tr>
-      <td>timerate<br>
+      <td style="vertical-align: top;">filename</td>
+      <td style="vertical-align: top;">IMAGE_FILENAME</td>
+      <td style="vertical-align: top;">path is relative to script<br>
       </td>
-      <td>rate<br>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">name<br>
       </td>
-      <td>SECONDS_PER_SECOND<br>
+      <td style="vertical-align: top;">IMAGE_NAME<br>
       </td>
-      <td> <br>
+      <td style="vertical-align: top;">Used to refer to the image in
+later calls to manipulate the image. Images must be in PNG format
+with dimensions that are powers of 2 (128, 256, etc.) </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">alpha<br>
+      </td>
+      <td style="vertical-align: top;">ALPHA<br>
+      </td>
+      <td style="vertical-align: top;">0 is transparent (default), 1 is
+opaque.&nbsp; ALPHA can be fractional.<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">scale<br>
+      </td>
+      <td style="vertical-align: top;">SCALE<br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">rotation<br>
+      </td>
+      <td style="vertical-align: top;">DEGREES<br>
+      </td>
+      <td style="vertical-align: top;">Rotation is clockwise.<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">duration<br>
+      </td>
+      <td style="vertical-align: top;">SECONDS<br>
+      </td>
+      <td style="vertical-align: top;"><br>
       </td>
     </tr>
     <tr>
@@ -180,139 +268,166 @@ out<br>
       </td>
     </tr>
     <tr>
-      <td colspan="1" rowspan="2">date<br>
-      <br>
+      <td colspan="1" rowspan="2"
+ style="vertical-align: top; background-color: rgb(204, 204, 204);">script<br>
       </td>
-      <td>absolute<br>
+      <td
+ style="vertical-align: top; background-color: rgb(204, 204, 204);">action<br>
       </td>
-      <td>[-]YYYY-MM-DDThh:mm:ss<br>
+      <td
+ style="vertical-align: top; background-color: rgb(204, 204, 204);">play<br>
+end<br>
+pause<br>
+resume<br>
       </td>
-      <td>Set time to a specified date and time.&nbsp; 'T' is literal.<br>
+      <td
+ style="vertical-align: top; background-color: rgb(204, 204, 204);">Note
+that pause toggles playback.<br>
       </td>
     </tr>
     <tr>
-      <td>relative<br>
+      <td
+ style="vertical-align: top; background-color: rgb(204, 204, 204);">filename<br>
       </td>
-      <td>DAYS<br>
+      <td
+ style="vertical-align: top; background-color: rgb(204, 204, 204);">SCRIPT_FILENAME<br>
       </td>
-      <td>Change date and time by DAYS (can be fractional).<br>
+      <td
+ style="vertical-align: top; background-color: rgb(204, 204, 204);"><br>
       </td>
     </tr>
     <tr>
-      <td colspan="1" rowspan="3" style="vertical-align: top;">audio<br>
-      </td>
-      <td style="vertical-align: top;">action<br>
-      </td>
-      <td style="vertical-align: top;">play<br>
+      <td colspan="1" rowspan="5" style="vertical-align: top;">select </td>
+      <td style="vertical-align: top;"><br>
       </td>
       <td style="vertical-align: top;"><br>
       </td>
-    </tr>
-    <tr>
-      <td style="vertical-align: top;">filename<br>
-      </td>
-      <td style="vertical-align: top;">AUDIO_FILENAME<br>
-      </td>
-      <td style="vertical-align: top;"><br>
+      <td style="vertical-align: top;">If no arguments are supplied,
+deselects current object.&nbsp; (Leaves constellation selection
+alone.)&nbsp; See deselect command.<br>
       </td>
     </tr>
-    <tr>
-      <td style="vertical-align: top;">loop<br>
-      </td>
-      <td style="vertical-align: top;">on<br>
-off<br>
-      </td>
-      <td style="vertical-align: top;">Used with action=play. Default
-is off<br>
-      </td>
+    <tr valign="top">
+      <td>hp</td>
+      <td>HP_NUMBER</td>
+      <td rowspan="1">&nbsp;</td>
     </tr>
     <tr>
-      <td colspan="1" rowspan="2">imageload<br>
+      <td style="vertical-align: top;">planet<br>
       </td>
-      <td>filename<br>
+      <td style="vertical-align: top;">PLANET_NAME<br>
       </td>
-      <td>IMAGE_FILENAME<br>
-      </td>
-      <td><br>
+      <td style="vertical-align: top;">Name as defined in ssystem.ini<br>
       </td>
     </tr>
     <tr>
-      <td style="vertical-align: top;">name<br>
+      <td style="vertical-align: top;">nebula<br>
       </td>
-      <td style="vertical-align: top;">IMAGE_NAME<br>
-      </td>
-      <td style="vertical-align: top;"><br>
-      </td>
-    </tr>
-    <tr>
-      <td colspan="1" rowspan="5" style="vertical-align: top;">imageprop<br>
-      </td>
-      <td style="vertical-align: top;">name<br>
-      </td>
-      <td style="vertical-align: top;">IMAGE_NAME<br>
-      </td>
-      <td style="vertical-align: top;">Images must be in PNG format
-with dimensions that are powers of 2 (128, 256, etc.)<br>
+      <td style="vertical-align: top;">NEBULA_NAME</td>
+      <td style="vertical-align: top;">Name as defined in messier.fab<br>
       </td>
     </tr>
     <tr>
-      <td style="vertical-align: top;">alpha<br>
+      <td style="vertical-align: top;">constellation<br>
       </td>
-      <td style="vertical-align: top;">ALPHA<br>
+      <td style="vertical-align: top;">CONSTELLATION_SHORT_NAME<br>
       </td>
-      <td style="vertical-align: top;">0 is transparent (default), 1 is
-opaque.&nbsp; ALPHA can be fractional.<br>
-      </td>
-    </tr>
-    <tr>
-      <td style="vertical-align: top;">scale<br>
-      </td>
-      <td style="vertical-align: top;">SCALE<br>
-      </td>
-      <td style="vertical-align: top;"><br>
+      <td style="vertical-align: top;">3 letter abbreviation from
+constellationship.fab, case insensitive.<br>
       </td>
     </tr>
     <tr>
-      <td style="vertical-align: top;">rotation<br>
+      <td colspan="1" rowspan="14" style="vertical-align: top;">set<br>
       </td>
-      <td style="vertical-align: top;">DEGREES<br>
-      </td>
-      <td style="vertical-align: top;"><br>
-      </td>
-    </tr>
-    <tr>
-      <td style="vertical-align: top;">duration<br>
-      </td>
+      <td style="vertical-align: top;">atmosphere_fade_duration</td>
       <td style="vertical-align: top;">SECONDS<br>
       </td>
       <td style="vertical-align: top;"><br>
       </td>
     </tr>
     <tr>
-      <td colspan="1" rowspan="2" style="vertical-align: top;">script<br>
+      <td style="vertical-align: top;">auto_move_duration</td>
+      <td style="vertical-align: top;">SECONDS<br>
       </td>
-      <td style="vertical-align: top;">action<br>
+      <td style="vertical-align: top;">used for autozoom<br>
       </td>
-      <td style="vertical-align: top;">play<br>
-end<br>
-pause<br>
-resume<br>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">constellation_art_fade_duration</td>
+      <td style="vertical-align: top;">SECONDS<br>
       </td>
       <td style="vertical-align: top;"><br>
       </td>
     </tr>
     <tr>
-      <td style="vertical-align: top;">filename<br>
+      <td style="vertical-align: top;">constellation_art_intensity</td>
+      <td style="vertical-align: top;"><br>
       </td>
-      <td style="vertical-align: top;">SCRIPT_FILENAME<br>
+      <td style="vertical-align: top;">0-1<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">landscape_name<br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;">from landscapes.ini<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">max_mag_nebula_name<br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;">only label nebulas brighter than
+this<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">max_mag_star_name<br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;">only label stars brighter than
+this<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">moon_scale<br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;">1 is real size<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">sky_culture<br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;">Directory name from
+skycultures.fab<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">sky_locale<br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;">3 letter code.&nbsp; eng, fra,
+etc.<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">star_mag_scale<br>
+      </td>
+      <td style="vertical-align: top;"><br>
       </td>
       <td style="vertical-align: top;"><br>
       </td>
     </tr>
     <tr>
-      <td style="vertical-align: top;"><br>
-      </td>
-      <td style="vertical-align: top;"><br>
+      <td style="vertical-align: top;">star_scale<br>
       </td>
       <td style="vertical-align: top;"><br>
       </td>
@@ -320,13 +435,29 @@ resume<br>
       </td>
     </tr>
     <tr>
-      <td style="vertical-align: top;"><br>
+      <td style="vertical-align: top;">star_twinkle_amount<br>
       </td>
       <td style="vertical-align: top;"><br>
       </td>
-      <td style="vertical-align: top;"><br>
+      <td style="vertical-align: top;">0 is no twinkling<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">time_zone<br>
       </td>
       <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;">System dependent<br>
+      </td>
+    </tr>
+    <tr>
+      <td>timerate<br>
+      </td>
+      <td>rate<br>
+      </td>
+      <td>SECONDS_PER_SECOND<br>
+      </td>
+      <td> Set simulation time rate.<br>
       </td>
     </tr>
     <tr>

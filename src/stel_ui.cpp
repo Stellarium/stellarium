@@ -578,12 +578,12 @@ int stel_ui::handle_clic(Uint16 x, Uint16 y, Uint8 button, Uint8 state)
     else
     // Manage the event for the main window
     {
-		if (state==SDL_RELEASED) return 1;
+      if (state==SDL_RELEASED) return 1;
         // Deselect the selected object
         if (button==SDL_BUTTON_RIGHT)
         {
-			core->selected_object=NULL;
-            return 1;
+	  core->commander->execute_command("select");
+	  return 1;
         }
         if (button==SDL_BUTTON_MIDDLE)
         {
@@ -596,11 +596,11 @@ int stel_ui::handle_clic(Uint16 x, Uint16 y, Uint8 button, Uint8 state)
         }
         if (button==SDL_BUTTON_LEFT)
         {   
-        	// CTRL + left clic = right clic for 1 button mouse
-			if (SDL_GetModState() & KMOD_CTRL)
-			{
-				core->selected_object=NULL;
-        	}
+	  // CTRL + left clic = right clic for 1 button mouse
+	  if (SDL_GetModState() & KMOD_CTRL)
+	    {
+	      core->commander->execute_command("select");
+	    }
 
         	// Left clic -> selection of an object
 			stel_object* tempselect= core->clever_find((int)x, core->screen_H-(int)y);
@@ -608,7 +608,7 @@ int stel_ui::handle_clic(Uint16 x, Uint16 y, Uint8 button, Uint8 state)
 			// Unselect on second clic on the same object
 			if (core->selected_object!=NULL && core->selected_object==tempselect)
 			{
-				core->selected_object = NULL;
+			  core->commander->execute_command("select");
 			}
 			else
 			{
@@ -639,9 +639,7 @@ int stel_ui::handle_clic(Uint16 x, Uint16 y, Uint8 button, Uint8 state)
 		core->selected_planet=(planet*)core->selected_object;
 
 		// potentially record this action
-		std::ostringstream oss;
-		oss << ((planet *)core->selected_object)->get_name();
-		core->scripts->record_command("select planet " + oss.str());
+		core->scripts->record_command("select planet " + ((planet *)core->selected_object)->get_name());
 
 	      } else {
 		core->selected_planet=NULL;
@@ -650,9 +648,7 @@ int stel_ui::handle_clic(Uint16 x, Uint16 y, Uint8 button, Uint8 state)
 	      if (core->selected_object->get_type()==STEL_OBJECT_NEBULA) {
 
 		// potentially record this action
-		std::ostringstream oss;
-		oss << ((Nebula *)core->selected_object)->get_name();
-		core->scripts->record_command("select nebula " + oss.str());
+		core->scripts->record_command("select nebula " + ((Nebula *)core->selected_object)->get_name());
 
 	      }
 

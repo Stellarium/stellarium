@@ -50,6 +50,9 @@ int Constellation::read(FILE *  fic, Hip_Star_mgr * _VouteCeleste)
 
 	if (fscanf(fic,"%s %s %s %u ",short_name,buff1,buff2,&nb_segments)!=4) return 0;
 
+	// make short_name uppercase for case insensitive searches
+	for(int a=0; a<3; a++) short_name[a] = ::toupper(short_name[a]);
+
 	name=buff1;
 	inter=buff2;
 

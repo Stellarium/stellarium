@@ -40,7 +40,7 @@ void stel_sdl::init(void)
 
     // audio parameters
     int audio_rate = 22050;
-    Uint16 audio_format = AUDIO_S16; /* 16-bit stereo */
+    Uint16 audio_format = AUDIO_S16SYS; /* 16-bit stereo */
     int audio_channels = 2;
     int audio_buffers = 4096;
 

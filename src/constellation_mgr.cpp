@@ -18,6 +18,8 @@
  */
 
 
+#include <iostream>
+
 // Class used to manage group of constellation
 #include "constellation.h"
 #include "constellation_mgr.h"
@@ -374,11 +376,15 @@ Constellation* Constellation_mgr::is_star_in(const Hip_Star * s) const
 
 Constellation* Constellation_mgr::find_from_short_name(const string& shortname) const
 {
+  // search in uppercase only
+  string tname = shortname;
+  transform(tname.begin(), tname.end(), tname.begin(), ::toupper);
+     
 	vector<Constellation *>::const_iterator iter;
     for(iter=asterisms.begin();iter!=asterisms.end();++iter)
     {
 		// Check if the star is in one of the constellation
-    	if (string((*iter)->short_name)==shortname) return (*iter);
+    	if (string((*iter)->short_name)==tname) return (*iter);
     }
 	return NULL;
 }
