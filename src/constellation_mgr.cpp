@@ -190,7 +190,10 @@ void Constellation_mgr::draw_art(Projector* prj) const
 	glEnable(GL_TEXTURE_2D);
     glEnable(GL_BLEND);
 	glEnable(GL_CULL_FACE);
-    glColor3f(1,1,1);
+
+	// for fading in art
+	//    glColor3f(1,1,1);
+
 	prj->set_orthographic_projection();
     vector<Constellation *>::const_iterator iter;
     for(iter=asterisms.begin();iter!=asterisms.end();++iter)
