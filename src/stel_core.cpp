@@ -330,7 +330,7 @@ void stel_core::draw(int delta_time)
 
 	// Draw the planets
 	if (FlagPlanets) ssystem->draw(FlagPlanetsHints, projection, navigation, tone_converter,
-		FlagGravityLabels, FlagPointStar);
+		FlagGravityLabels, FlagPointStar, FlagPlanetsOrbits);
 
 	// Set openGL drawings in local coordinates i.e. generally altazimuthal coordinates
 	navigation->switch_to_local();

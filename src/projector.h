@@ -108,6 +108,9 @@ public:
 	bool project_helio_check(const Vec3d& v, Vec3d& win) const
 		{return project_custom_check(v, win, mat_helio_to_eye);}
 
+	bool project_helio(const Vec3d& v, Vec3d& win) const
+		{return project_custom(v, win, mat_helio_to_eye);}
+
 	void unproject_helio(double x, double y, Vec3d& v) const
 		{return unproject(x, y, inv_mat_helio_to_eye, v);}
 
