@@ -518,6 +518,7 @@ int stel_ui::handle_keys(SDLKey key, S_GUI_VALUE state)
         {	
         	core->FlagAtmosphere=!core->FlagAtmosphere;
             bt_flag_atmosphere->setState(core->FlagAtmosphere);
+			if (!core->FlagAtmosphere) core->tone_converter->set_world_adaptation_luminance(3.75f);
 		}
         if(key==SDLK_h)
         {	
@@ -525,13 +526,21 @@ int stel_ui::handle_keys(SDLKey key, S_GUI_VALUE state)
             bt_flag_help->setState(core->FlagHelp);
 			help_win->setVisible(core->FlagHelp);
 		}
-        if(key==SDLK_4)
+        if(key==SDLK_6)
         {	
         	core->FlagEcliptic=!core->FlagEcliptic;
 		}
-        if(key==SDLK_5)
+        if(key==SDLK_7)
         {
         	core->FlagEquator=!core->FlagEquator;
+		}
+        if(key==SDLK_4)
+        {
+        	core->navigation->set_time_speed(1);
+		}
+        if(key==SDLK_3)
+        {
+        	core->navigation->set_time_speed(JD_SECOND);
 		}
         if(key==SDLK_2)
         {

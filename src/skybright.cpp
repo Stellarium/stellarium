@@ -16,24 +16,27 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
+#include <stdio.h>
 #include <math.h>
 #include "skybright.h"
 
 skybright::skybright() : SN(1.f)
 {
-	set_date(2003, 8, 0.f);
-	set_loc(45.f, 1000., 25.f, 40.f);
+	set_date(2003, 8, 0);
+	set_loc(M_PI_4, 1000., 25.f, 40.f);
 	set_sun_moon(0.5, 0.5);
 }
 
 // month : 1=Jan, 12=Dec
+// moon_phase in radian 0=Full Moon, PI/2=First Quadrant/Last Quadran, PI=No Moon
 void skybright::set_date(int year, int month, float moon_phase)
 {
-	mag_moon = -12.73f + 0.026f * fabs(moon_phase) + 0.04310727f * pow(moon_phase, 4.f);
+	mag_moon = -12.73f + 1.4896903f * fabs(moon_phase) + 0.04310727f * pow(moon_phase, 4.f);
+
 	RA = (month - 3.f) * 0.52359878f;
 
 	// Term for dark sky brightness computation
-	b_night_term = 1.0e-13 + 0.3e-13 * cosf(0.57118182f * (year-1992.f));
+	b_night_term = 1.0e-13 + 0.3e-13 * cosf(0.56636f * (year-1992.f));
 }
 
 
@@ -43,9 +46,9 @@ void skybright::set_loc(float latitude, float altitude, float temperature, float
 
 	// extinction Coefficient for V band
 	float KR = 0.1066f * expf(-altitude/8200.f);
-	float KA = 0.1f * expf(-altitude/1500.f) * powf(1 - 0.32f/logf(relative_humidity/100.f) ,1.33f) *
+	float KA = 0.1f * expf(-altitude/1500.f) * powf(1.f - 0.32f/logf(relative_humidity/100.f) ,1.33f) *
 		(1.f + 0.33f * sign_latitude * sinf(RA));
-	float KO = 0.031f * ( 3.f + 0.4f * (latitude * cosf(RA) - cosf(3*latitude)) )/3.f;
+	float KO = 0.031f * ( 3.f + 0.4f * (latitude * cosf(RA) - cosf(3.f*latitude)) )/3.f;
 	float KW = 0.031f * 0.94f * (relative_humidity/100.f) * expf(temperature/15.f) * expf(-altitude/8200.f);
 	K = KR + KA + KO + KW;
 }
@@ -62,13 +65,11 @@ void skybright::set_sun_moon(float cos_dist_moon_zenith, float cos_dist_sun_zeni
 	if (cos_dist_sun_zenith<0) air_mass_sun = 40;
 	else air_mass_sun = 1.f / (cos_dist_sun_zenith+0.025f*expf(-11.f*cos_dist_sun_zenith));
 
-	// moon magnitude
-	if (cos_dist_moon_zenith>0) b_moon_term1 = 0.f;
-
-	C3 = powf(10.f, -0.4f*K*air_mass_moon);	// Term for moon brightness computation
 	b_moon_term1 = powf(10.f, -0.4 * (mag_moon + 54.32f));
 
-	b_twilight_term = 105.62035f - 360.f * (M_PI_2-acosf(cos_dist_sun_zenith));
+	C3 = powf(10.f, -0.4f*K*air_mass_moon);	// Term for moon brightness computation
+
+	b_twilight_term = -6.724f + 22.918312f * (M_PI_2-acosf(cos_dist_sun_zenith));
 
 	C4 = powf(10.f, -0.4f*K*air_mass_sun);	// Term for sky brightness computation
 }
@@ -86,34 +87,39 @@ float skybright::get_luminance(float cos_dist_moon, float cos_dist_sun, float co
 	dist_sun = acosf(cos_dist_sun);
 
 	// Air mass
-	float X = 1.f / (cos_dist_zenith+0.025f*expf(-11.f*cos_dist_zenith));
+	float X = 1.f / (cos_dist_zenith + 0.025f*expf(-11.f*cos_dist_zenith));
 	float bKX = powf(10.f, -0.4f * K * X);
 
+
 	// Dark night sky brightness
-	b_night = 0.4f+0.6f/sqrt(0.04f - 0.96f * cos_dist_zenith*cos_dist_zenith);
+	b_night = 0.4f+0.6f/sqrt(0.04f + 0.96f * cos_dist_zenith*cos_dist_zenith);
 	b_night *= b_night_term * bKX;
 
 	// Moonlight brightness
-	float FM = 2.035339e11 * dist_moon*dist_moon + powf(10.f, 6.15f - dist_moon * 1.43239f);
+	float FM = 18886.28 / (dist_moon*dist_moon + 0.001f) + powf(10.f, 6.15f - dist_moon * 1.43239f);
 	FM += 229086.77f * ( 1.06f + cos_dist_moon*cos_dist_moon );
 	b_moon = b_moon_term1 * (1.f - bKX) * (FM * C3 + 440000.f * (1.f - C3));
 
 	//Twilight brightness
-	b_twilight = powf(10.f, -M_2_PI * (b_twilight_term - dist_sun/K)) * (1.7453293f / dist_sun) * (1.f-bKX);
+	b_twilight = powf(10.f, b_twilight_term + 0.063661977f * acosf(cos_dist_zenith)/K) *
+		(1.7453293f / dist_sun) * (1.f-bKX);
 
 	// Daylight brightness
-	float FS = 2.035339e11 * dist_sun*dist_sun + powf(10.f, 6.15f - dist_sun* 1.43239f);
+	float FS = 18886.28f / (dist_sun*dist_sun + 0.0007f) + powf(10.f, 6.15f - dist_sun* 1.43239f);
 	FS += 229086.77f * ( 1.06f + cos_dist_sun*cos_dist_sun );
-	b_daylight = 9.289663e-12 * (1.f - bKX) * FS * C4 + 440000.f * (1.f - C4);
+	b_daylight = 9.289663e-12 * (1.f - bKX) * (FS * C4 + 440000.f * (1.f - C4));
 
 	// Total sky brightness
 	if (b_daylight>b_twilight) b_total = b_night + b_twilight + b_moon;
 	else b_total = b_night + b_daylight + b_moon;
 
-	b_total /= 1.11e-15; //in nanolamberts
-	return b_total * M_PI*1e-13;	// In cd/m^2
+	b_total *= 900900.9;	// In lambert
+	return b_total * M_PI * 1e-4 * 32393895;	// In cd/m^2 : the 32393895 is empirical term because the
+												// lambert -> cd/m^2 formula seems to be wrong...
 }
-
+/*
+250 REM  Visual limiting magnitude
+260 BL=B(3)/1.11E-15 : REM in nanolamberts*/
 
 	// Airmass for each component
 	//cos_dist_zenith = cosf(dist_zenith);

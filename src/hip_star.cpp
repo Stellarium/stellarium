@@ -29,6 +29,7 @@
 // Init Static variables
 float Hip_Star::twinkle_amount = 10.f;
 float Hip_Star::star_scale = 10.f;
+tone_reproductor* Hip_Star::eye = NULL;
 
 Hip_Star::Hip_Star() : 
 	CommonName(NULL),
@@ -139,25 +140,26 @@ void Hip_Star::Draw(draw_utility * du)
 	static float cmag;
 	static float rmag;
 
-    // Second part of the calculation of the demi-size of the star texture
-	// Empirical formula which looks good...
-    rmag = rmag_t/pow(du->fov,0.85);
+    // Compute the equivalent star luminance for a 5 arc min circle and convert it
+	// in function of the eye adaptation
+	rmag = eye->adapt_luminance(expf(-0.92103f*(Mag + 12.12331f)) * 108064.73f);
+	rmag = rmag/powf(du->fov,0.85f)*50.f;
 
-    cmag = 1.;
-    
+    cmag = 1.f;
+
     // if size of star is too small (blink) we put its size to 1.2 --> no more blink
     // And we compensate the difference of brighteness with cmag
-    if (rmag<1.2)
+    if (rmag<1.2f)
     {
-        if (rmag<0.5) return;
-        cmag=pow(rmag,2)/1.44;
-        rmag=1.2;
+        if (rmag<0.3f) return;
+        cmag=powf(rmag,2.f)/1.44f;
+        rmag=1.2f;
     }
 	else
     {
-		if (rmag>6.)
+		if (rmag>5.f)
     	{
-        	rmag=6.;
+        	rmag=5.f;
     	}
 	}
 

@@ -34,15 +34,22 @@
 
 Hip_Star_mgr::Hip_Star_mgr() : HipGrid(), StarArray(NULL), starTexture(NULL), starFont(NULL)
 {
+	 starZones = new vector<Hip_Star*>[162];
+	for (int i=0;i<StarArraySize;i++)
+	{
+		StarArray[i]=NULL;
+	}
 }
 
 Hip_Star_mgr::~Hip_Star_mgr()
 {
-    multimap<int, Hip_Star *>::iterator iter;
-    for(iter=Liste.begin();iter!=Liste.end();iter++)
-    {
-        delete (*iter).second;
-    }
+	delete starZones;
+
+	for (int i=0;i<StarArraySize;i++)
+	{
+		if (StarArray[i]) delete StarArray[i];
+		StarArray[i]=NULL;
+	}
     if (starTexture) delete starTexture;
     starTexture=NULL;
 	exit(-1);
@@ -121,8 +128,8 @@ void Hip_Star_mgr::Load(char * font_fileName, char * hipCatFile, char * commonNa
         // Set names if any
         if(commonNames[e->HP]) e->CommonName=commonNames[e->HP];
         if(names[e->HP]) e->Name=names[e->HP];
-        
-        Liste.insert(pair<int, Hip_Star*>(HipGrid.GetNearest(e->XYZ), e));
+
+        starZones[HipGrid.GetNearest(e->XYZ)].push_back(e);
         StarArray[e->HP]=e;
     }
 
@@ -145,10 +152,11 @@ void Hip_Star_mgr::Load(char * font_fileName, char * hipCatFile, char * commonNa
 
 // Draw all the stars
 void Hip_Star_mgr::Draw(float _star_scale, float _twinkle_amount, int name_ON,
-						float maxMagStarName, Vec3f equ_vision, draw_utility * du)
+						float maxMagStarName, Vec3f equ_vision, draw_utility * du, tone_reproductor* _eye)
 {
 	Hip_Star::twinkle_amount = _twinkle_amount;
 	Hip_Star::star_scale = _star_scale;
+	Hip_Star::eye = _eye;
 
 	glEnable(GL_TEXTURE_2D);
     glEnable(GL_BLEND);
@@ -164,8 +172,6 @@ void Hip_Star_mgr::Draw(float _star_scale, float _twinkle_amount, int name_ON,
 
     du->set_orthographic_projection();	// set 2D coordinate
 
-    pair<multimap<int,Hip_Star *>::iterator, multimap<int,Hip_Star *>::iterator> p;
-
 	// Find the star zones which are in the screen
 	int nbZones=0;
 	static int * zoneList;  // WARNING this is almost a memory leak...
@@ -177,21 +183,20 @@ void Hip_Star_mgr::Draw(float _star_scale, float _twinkle_amount, int name_ON,
 	// Print all the stars of all the selected zones
 	for(int i=0;i<nbZones;i++)
 	{
-    	p = Liste.equal_range(zoneList[i]);
-    	for(multimap<int,Hip_Star *>::iterator iter = p.first; iter != p.second; iter++)
+    	for(vector<Hip_Star *>::iterator iter = starZones[zoneList[i]].begin(); iter!=starZones[zoneList[i]].end(); iter++)
     	{
 			// If too small, skip
-			if ((*iter).second->Mag>6+60./du->fov) continue;
+			if ((*iter)->Mag>6+60./du->fov) continue;
 
 			// Compute the 2D position
-	    	gluProject( ((*iter).second)->XYZ[0],((*iter).second)->XYZ[1], ((*iter).second)->XYZ[2],
-				M,P,V,&(((*iter).second)->XY[0]), &(((*iter).second)->XY[1]),&z);
+	    	gluProject( (*iter)->XYZ[0], (*iter)->XYZ[1], (*iter)->XYZ[2],
+				M,P,V,&((*iter)->XY[0]), &((*iter)->XY[1]),&z);
         	if (z<1)
         	{
-		        ((*iter).second)->Draw(du);
-		        if (((*iter).second)->CommonName && name_ON && ((*iter).second)->Mag<maxMagStarName)
+		        (*iter)->Draw(du);
+		        if ((*iter)->CommonName && name_ON && (*iter)->Mag<maxMagStarName)
             	{
-		        	((*iter).second)->DrawName(starFont);
+		        	(*iter)->DrawName(starFont);
                 	glBindTexture (GL_TEXTURE_2D, starTexture->getID());
             	}
         	}
@@ -205,23 +210,23 @@ void Hip_Star_mgr::Draw(float _star_scale, float _twinkle_amount, int name_ON,
 Hip_Star * Hip_Star_mgr::search(vec3_t Pos)
 {   
     Pos.normalize();
-    Hip_Star * plusProche=NULL;
-    float anglePlusProche=0.;
-    
-    multimap<int,Hip_Star *>::iterator iter;
-    for(iter=Liste.begin();iter!=Liste.end();iter++)
+    Hip_Star * nearest=NULL;
+    float angleNearest=0.;
+
+    for(int i=0; i<StarArraySize; i++)
     {
-		if 	(((*iter).second)->XYZ[0]*Pos[0] + ((*iter).second)->XYZ[1]*Pos[1] +
-			((*iter).second)->XYZ[2]*Pos[2]>anglePlusProche)
+		if (!StarArray[i]) continue;
+		if 	(StarArray[i]->XYZ[0]*Pos[0] + StarArray[i]->XYZ[1]*Pos[1] +
+			StarArray[i]->XYZ[2]*Pos[2]>angleNearest)
     	{
-			anglePlusProche = ((*iter).second)->XYZ[0]*Pos[0] +
-				((*iter).second)->XYZ[1]*Pos[1]+((*iter).second)->XYZ[2]*Pos[2];
-        	plusProche=(*iter).second;
+			angleNearest = StarArray[i]->XYZ[0]*Pos[0] +
+				StarArray[i]->XYZ[1]*Pos[1] + StarArray[i]->XYZ[2]*Pos[2];
+        	nearest=StarArray[i];
     	}
     }
-    if (anglePlusProche>RADIUS_STAR*0.9999)
+    if (angleNearest>RADIUS_STAR*0.9999)
     {   
-	    return plusProche;
+	    return nearest;
     }
     else return NULL;
 }

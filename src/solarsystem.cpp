@@ -130,7 +130,7 @@ void InitSolarSystem(char * font_fileName)
     Mercury->set_rotation_elements(1407.509405/24., 291.20, J2000, -7.01*M_PI/180., 48.33167*M_PI/180., 0);
     Venus->set_rotation_elements(5832.479839/24., 137.45, J2000, -178.78*M_PI/180., 76.681*M_PI/180., 0);
     Earth->set_rotation_elements(23.9344694/24., 280.5, J2000, 23.438855*M_PI/180., -11.2606423*M_PI/180., 0);
-	Moon->set_rotation_elements((27.321661*24)/24., 38, J2000, 23.45*M_PI/180., 0., 0);
+	Moon->set_rotation_elements((27.321661*24)/24., 300, J2000, 23.45*M_PI/180., 0., 0);
     Mars->set_rotation_elements(24.622962/24., 136.005, J2000, -26.72*M_PI/180., 82.91*M_PI/180., 0);
     Jupiter->set_rotation_elements(9.927953/24., 16, J2000, -2.222461*M_PI/180., -22.203*M_PI/180., 0);
     Ganymede->set_rotation_elements(7.154553/24., 262.1, J2000, -0.1*M_PI/180., 161.6*M_PI/180., 0);
@@ -142,18 +142,18 @@ void InitSolarSystem(char * font_fileName)
     Pluto->set_rotation_elements(248.54/24., 320.75, J2000, -115.60*M_PI/180., 228.34*M_PI/180., 0);
 
 
-	Sun->addSatellite(Mercury);
-	Sun->addSatellite(Venus);
+	//Sun->addSatellite(Mercury);
+	//Sun->addSatellite(Venus);
 	Sun->addSatellite(Earth);
 	Earth->addSatellite(Moon);
-	Sun->addSatellite(Mars);
+	Sun->addSatellite(Mars);/*
 	Sun->addSatellite(Jupiter);
 	Jupiter->addSatellite(Io);
 	Jupiter->addSatellite(Ganymede);
 	Sun->addSatellite(Saturn);
 	Sun->addSatellite(Uranus);
 	Sun->addSatellite(Neptune);
-	Sun->addSatellite(Pluto);
+	Sun->addSatellite(Pluto);*/
 }
 
 void ClearSolarSystem(void)
