@@ -40,7 +40,7 @@ Constellation_mgr::~Constellation_mgr()
 }
 
 // Load from file
-void Constellation_mgr::load(char * font_fileName, char * fileName, Hip_Star_mgr * _VouteCeleste)
+void Constellation_mgr::load(const string& font_fileName, const string& fileName, Hip_Star_mgr * _VouteCeleste)
 {
 	printf("Loading constellation data...\n");
 
@@ -51,10 +51,10 @@ void Constellation_mgr::load(char * font_fileName, char * fileName, Hip_Star_mgr
         exit(-1);
     }
 
-	FILE * fic = fopen(fileName,"r");
+	FILE * fic = fopen(fileName.c_str(),"r");
     if (!fic)
     {
-		printf("Can't open %s\n",fileName);
+		printf("Can't open %s\n",fileName.c_str());
         exit(-1);
     }
 

@@ -137,10 +137,11 @@ private:
 	s_tui::Time_item* tui_time_skytime;
 	s_tui::Time_item* tui_time_presetskytime;
 	s_tui::Action_item* tui_time_actual;
-	s_tui::Boolean_item* tui_time_startuptime;
-	s_tui::Boolean_item* tui_time_displayformat;
+	s_tui::MultiSet_item<string>* tui_time_startuptime;
+	s_tui::MultiSet_item<string>* tui_time_displayformat;
 
 	// 3. Constellation
+	s_tui::MultiSet_item<string>* tui_constellation_culture;
 	s_tui::Boolean_item* tui_constellation_lines;
 	s_tui::Boolean_item* tui_constellation_art;
 
@@ -174,6 +175,8 @@ private:
 
 	// Tui Callbacks
 	void tui_cb1(void);
+	void tui_cb_settimezone(void);
+	void tui_cb_actualtime(void);
 };
 
 #endif  //_STEL_UI_H

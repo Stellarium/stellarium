@@ -28,7 +28,7 @@ class Constellation_mgr
 public:
     Constellation_mgr();
     virtual ~Constellation_mgr();
-    void load(char * font_fileName, char * catName, Hip_Star_mgr * _VouteCeleste);
+    void load(const string& font_fileName, const string& catName, Hip_Star_mgr * _VouteCeleste);
     void draw(Projector* prj);
 	// Draw one constellation of internationnal name Abr
 	void draw(Projector* prj, char abr[4]);

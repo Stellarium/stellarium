@@ -17,16 +17,18 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-
+#include <string>
+#include <iostream>
 #include "stellarium.h"
 #include "stel_core.h"
 #include "stel_sdl.h"
 
 using namespace std;
 
-char DDIR[255];	// Data Directory
-char TDIR[255];	// Textures Directory
-char CDIR[255];	// Config Directory
+string DDIR;	// Data Directory
+string TDIR;	// Textures Directory
+string CDIR;	// Config Directory
+string DATA_ROOT;	// Data Root Directory
 
 // Print a beautiful console logo !!
 void drawIntro(void)
@@ -82,134 +84,104 @@ void check_command_line(int argc, char **argv)
 // This enable to launch stellarium from the local directory without installing it
 void setDirectories(void)
 {
-	char dataRoot[255];
-    char tmp[255];
-
 	// The variable CONFIG_DATA_DIR must have been set by the configure script
 	// Its value is the dataRoot directory, ie the one containing data/ and textures/
 
-	// Check the presence of a typical file in various directories
-    strcpy(tmp, CONFIG_DATA_DIR);
-    strcat(tmp,"/data/hipparcos.fab");
-    FILE * tempFile = fopen(tmp,"r");
-
-	// This algo try set the dataRoot string
-    strcpy(dataRoot,CONFIG_DATA_DIR);
-    if(!tempFile)
-    {    
-        tempFile = fopen("./data/hipparcos.fab","r");
-        strcpy(dataRoot,".");
-        if(!tempFile)
-        {
-            strcpy(dataRoot,"..");
-            tempFile = fopen("../data/hipparcos.fab","r");
-            if(!tempFile)
-            {
+	// Check the presence of a file in possible data directories and set the
+	// dataRoot string if the directory was found.
+    FILE * tempFile = NULL;
+	tempFile = fopen((string(CONFIG_DATA_DIR) + "/data/hipparcos.fab").c_str(),"r");
+	if (tempFile)
+	{
+		DATA_ROOT = string(CONFIG_DATA_DIR);
+	}
+	else
+	{
+		tempFile = fopen("./data/hipparcos.fab","r");
+		if (tempFile)
+		{
+			DATA_ROOT = ".";
+		}
+		else
+		{
+			tempFile = fopen("../data/hipparcos.fab","r");
+			if (tempFile)
+			{
+				DATA_ROOT = "..";
+			}
+			else
+			{
             	// Failure....
             	printf("ERROR : I can't find the datas directories in :\n");
             	printf("%s/ nor in ./ nor in ../\n",CONFIG_DATA_DIR);
                 printf("You may fully install the software (on POSIX systems)\n");
-                printf("or go in the stellarium package directory.\n");
+                printf("or launch the application from the stellarium package directory.\n");
                 exit(-1);
-            }
-        }
-    }
+			}
+		}
+	}
     fclose(tempFile);
+	tempFile = NULL;
 
 	// We now have a valid dataRoot directory, we can then set the data and textures dir
-    strcpy(DDIR,dataRoot);
-    strcpy(TDIR,dataRoot);
-    strcat(DDIR,"/data/");
-    strcat(TDIR,"/textures/");
+	DDIR = DATA_ROOT + "/data/";
+	TDIR = DATA_ROOT + "/textures/";
 
 	// If the system is non unix (windows) or if it's macosx the config file is in the
 	// config/ directory of the dataRoot directory
 #if defined(WIN32) || defined(CYGWIN) || defined(__MINGW32__) || defined(MACOSX)
-	strcpy(CDIR,dataRoot);
-	strcat(CDIR,"/config/");
+	CDIR = DATA_ROOT + "/config/";
 #else
 
 	// Just an indication if we are on unix/linux that we use local data files
-	if (strcmp(dataRoot,CONFIG_DATA_DIR))
-		printf(">Found data files in %s : local version.\n",dataRoot);
+	if (DATA_ROOT != string(CONFIG_DATA_DIR))
+		cout << ">Found data files in " << DATA_ROOT << " : local version." << endl;
 
 	// The problem is more complexe in the case of a unix/linux system
 	// The config files are in the HOME/.stellarium/ directory and this directory
 	// has to be created if it doesn't exist
 
 	// Get the user home directory
-	char * homeDir = getenv("HOME");
+	string homeDir = getenv("HOME");
+	CDIR = homeDir + "/.stellarium/";
 
-	char tmp2[255];
-
-	// If unix system, check if the file $HOME/.stellarium/version/config.txt exists,
+	// If unix system, check if the file $HOME/.stellarium/config.txt exists,
 	// if not, try to create it.
-    strcpy(tmp,homeDir);
-    strcat(tmp,"/.stellarium/");
-	strcat(tmp,VERSION);
-	strcat(tmp,"/config.txt");
-	if ((tempFile = fopen(tmp,"r")))
+	if ((tempFile = fopen((CDIR + "config.txt").c_str(),"r")))
 	{
-		strcpy(CDIR,homeDir);
-		strcat(CDIR,"/.stellarium/");
-		strcat(CDIR,VERSION);
-		strcat(CDIR,"/");
 		fclose(tempFile);
 	}
 	else
 	{
-		printf("Will create config files in %s/.stellarium/%s/\n",homeDir,VERSION);
-		if ((tempFile = fopen(tmp,"w")))
+		cout << "Will create config files in " << CDIR << endl;
+		if ((tempFile = fopen((CDIR + "config.txt").c_str(),"w")))
 		{
-			strcpy(CDIR,homeDir);
-			strcat(CDIR,"/.stellarium/");
-			strcat(CDIR,VERSION);
-			strcat(CDIR,"/");
 			fclose(tempFile);
 		}
 		else
 		{
-			// Try to create the directory
-			printf("Try to create directory %s/.stellarium/%s/\n",homeDir,VERSION);
-			strcpy(tmp2,"mkdir ");
-			strcat(tmp2,homeDir);
-			strcat(tmp2,"/.stellarium");
-			system(tmp2);
-			strcat(tmp2,"/");
-			strcat(tmp2,VERSION);
-			strcat(tmp2,"/");
-			system(tmp2);
-			
-			if ((tempFile = fopen(tmp,"w")))
+			// Maybe the directory is not created so try to create it
+			cout << "Try to create directory " << CDIR << endl;
+			system(string("mkdir " + CDIR).c_str());
+
+			if ((tempFile = fopen((CDIR + "config.txt").c_str(),"w")))
 			{
-				strcpy(CDIR,homeDir);
-				strcat(CDIR,"/.stellarium/");
-				strcat(CDIR,VERSION);
-				strcat(CDIR,"/");
 				fclose(tempFile);
 			}
 			else
 			{
-				printf("Can't create the file %s\n",tmp);
-				printf("If the directory %s/.stellarium/%s/ is missing please create it.\n",homeDir,VERSION);
-				printf("If not check that you have access to %s/.stellarium/%s/\n",homeDir,VERSION);
+				cout << "Can't create the file " << CDIR << "config.txt" << endl;
+				cout << "If the directory " << CDIR << " is missing please create it by hand." << endl;
+				cout << "If not check that you have access to " << CDIR << endl;
 				exit(-1);
 			}
 		}
 
 		// First launch for that user : set default options by copying the default files
-    	strcpy(tmp,dataRoot);
-    	strcat(tmp,"/config/default_config.txt");
-    	strcpy(tmp2,dataRoot);
-    	strcat(tmp2,"/config/default_location.txt");
-
-		char cmd[512];
-		snprintf(cmd, sizeof(cmd), "cp %s %sconfig.txt",tmp,CDIR);
-		system(cmd);
-		snprintf(cmd, sizeof(cmd), "cp %s %slocation.txt",tmp2,CDIR);
-		system(cmd);
+		system( (string("cp ") + DATA_ROOT + "/config/default_config.txt " + CDIR + "config.txt").c_str() );
+		system( (string("cp ") + DATA_ROOT + "/config/default_location.txt " + CDIR + "location.txt").c_str() );
 	}
-#endif
+#endif	// Unix system
 
 }
 
@@ -230,7 +202,7 @@ int main(int argc, char **argv)
 	// Create the core of stellarium, it has to be initialized
 	stel_core* core = new stel_core();
 
-	core->set_directories(DDIR, TDIR, CDIR);
+	core->set_directories(DDIR, TDIR, CDIR, DATA_ROOT);
 
 	// Give the config file parameters which has to be given "hard coded"
 	core->set_config_files("config.txt", "location.txt");
@@ -247,7 +219,7 @@ int main(int argc, char **argv)
 
 	core->init();
 
-	// Start the main loop
+	// Start the main loop until the end of the execution
 	sdl_mgr.start_main_loop();
 
 	// Clean memory

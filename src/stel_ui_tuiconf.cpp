@@ -98,14 +98,20 @@ void stel_ui::init_tui(void)
 
 	// 2. Time
 	tui_time_settmz = new s_tui::Action_item("2.1 Set Time Zone: ");
+	tui_time_settmz->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb_settimezone));
 	tui_time_skytime = new s_tui::Time_item("2.2 Sky Time: ");
 	tui_time_skytime->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb1));
 	tui_time_presetskytime = new s_tui::Time_item("2.3 Preset Sky Time: ");
 	tui_time_presetskytime->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb1));
 	tui_time_actual = new s_tui::Action_item("2.4 Set Time to actual: ");
-	tui_time_startuptime = new s_tui::Boolean_item(false, "2.5 Sky Time At Start-up: ", "Actual","Preset");
+	tui_time_actual->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb_actualtime));
+	tui_time_startuptime = new s_tui::MultiSet_item<string>("2.5 Sky Time At Start-up: ");
+	tui_time_startuptime->addItem("Actual");
+	tui_time_startuptime->addItem("Preset");
 	tui_time_startuptime->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb1));
-	tui_time_displayformat = new s_tui::Boolean_item(false, "2.6 Time Display Format: ", "12h","24h");
+	tui_time_displayformat = new s_tui::MultiSet_item<string>("2.6 Time Display Format: ");
+	tui_time_displayformat->addItem("24h");
+	tui_time_displayformat->addItem("12h");
 	tui_time_displayformat->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb1));
 	tui_menu_time->addComponent(tui_time_settmz);
 	tui_menu_time->addComponent(tui_time_skytime);
@@ -115,25 +121,40 @@ void stel_ui::init_tui(void)
 	tui_menu_time->addComponent(tui_time_displayformat);
 
 	// 3. Constellations
+	tui_constellation_culture = new s_tui::MultiSet_item<string>("3.1 Culture: ");
+	tui_constellation_culture->addItem("Occidental");
+	tui_constellation_culture->addItem("Old Greek");
+	tui_constellation_culture->addItem("Chinese");
 	tui_constellation_lines = new s_tui::Boolean_item(false, "3.2 Lines: ", "Yes","No");
+	tui_constellation_lines->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb1));
 	tui_constellation_art = new s_tui::Boolean_item(false, "3.3 Art: ", "Yes","No");
+	tui_constellation_art->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb1));
+	tui_menu_constellation->addComponent(tui_constellation_culture);
 	tui_menu_constellation->addComponent(tui_constellation_lines);
 	tui_menu_constellation->addComponent(tui_constellation_art);
 
 	// 4. Stars
 	tui_stars_show = new s_tui::Boolean_item(false, "4.1 Show: ", "Yes","No");
+	tui_stars_show->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb1));
 	tui_star_labelmaxmag = new s_tui::Decimal_item(-1.5, 10., 2, "4.2 Maximum Magnitude to Label: ");
+	tui_star_labelmaxmag->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb1));
 	tui_stars_twinkle = new s_tui::Boolean_item(false, "4.3 Twinkle: ", "Yes","No");
+	tui_stars_twinkle->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb1));
 	tui_menu_stars->addComponent(tui_stars_show);
 	tui_menu_stars->addComponent(tui_star_labelmaxmag);
 	tui_menu_stars->addComponent(tui_stars_twinkle);
 
 	// 5. Labels
 	tui_label_stars = new s_tui::Boolean_item(false, "5.1 Stars: ", "Yes","No");
+	tui_label_stars->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb1));
 	tui_label_constellations = new s_tui::Boolean_item(false, "5.2 Constellations: ", "Yes","No");
+	tui_label_constellations->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb1));
 	tui_label_nebulas = new s_tui::Boolean_item(false, "5.3 Nebulas: ", "Yes","No");
+	tui_label_nebulas->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb1));
 	tui_label_planets = new s_tui::Boolean_item(false, "5.4 Planets: ", "Yes","No");
+	tui_label_planets->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb1));
 	tui_label_timeinfo = new s_tui::Boolean_item(false, "5.5 Time & Object Info: ", "Yes","No");
+	tui_label_timeinfo->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb1));
 	tui_menu_labels->addComponent(tui_label_stars);
 	tui_menu_labels->addComponent(tui_label_constellations);
 	tui_menu_labels->addComponent(tui_label_nebulas);
@@ -142,10 +163,15 @@ void stel_ui::init_tui(void)
 
 	// 6. Reference Points
 	tui_refpoints_cardinalpoints = new s_tui::Boolean_item(false, "6.1 Cardinal Points: ", "Yes","No");
+	tui_refpoints_cardinalpoints->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb1));
 	tui_refpoints_ecliptic = new s_tui::Boolean_item(false, "6.2 Ecliptic: ", "Yes","No");
+	tui_refpoints_ecliptic->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb1));
 	tui_refpoints_equator = new s_tui::Boolean_item(false, "6.3 Equator: ", "Yes","No");
+	tui_refpoints_equator->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb1));
 	tui_refpoints_equatorialgrid = new s_tui::Boolean_item(false, "6.4 Equatorial Grid: ", "Yes","No");
+	tui_refpoints_equatorialgrid->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb1));
 	tui_refpoints_azimutalgrid = new s_tui::Boolean_item(false, "6.5 Azimutal Grid: ", "Yes","No");
+	tui_refpoints_azimutalgrid->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb1));
 	tui_menu_refpoints->addComponent(tui_refpoints_cardinalpoints);
 	tui_menu_refpoints->addComponent(tui_refpoints_ecliptic);
 	tui_menu_refpoints->addComponent(tui_refpoints_equator);
@@ -154,6 +180,7 @@ void stel_ui::init_tui(void)
 
 	// 7. Effects
 	tui_effect_atmosphere = new s_tui::Boolean_item(false, "7.2 Atmopshere: ", "Yes","No");
+	tui_effect_atmosphere->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb1));
 	tui_menu_effects->addComponent(tui_effect_atmosphere);
 
 	// 8. Administration
@@ -190,11 +217,92 @@ int stel_ui::handle_keys_tui(SDLKey key, s_tui::S_TUI_VALUE state)
 	return tui_root->onKey(key, state);
 }
 
+// Update all the core parameters with values taken from the tui widgets
 void stel_ui::tui_cb1(void)
 {
+	// 1. Location
 	core->navigation->set_latitude(tui_location_latitude->getValue());
 	core->navigation->set_longitude(tui_location_longitude->getValue());
 	core->navigation->set_altitude(tui_location_altitude->getValue());
-	core->navigation->set_JDay(tui_time_skytime->getJDay());
 
+	// 2. Date & Time
+	core->navigation->set_JDay(tui_time_skytime->getJDay());
+	core->PresetSkyTime 		= tui_time_presetskytime->getJDay();
+	core->StartupTimeMode 		= tui_time_startuptime->getCurrent();
+	core->TimeDisplayFormat 	= tui_time_displayformat->getCurrent();
+
+	// 3. Constellation
+	core->ConstellationCulture 	= tui_constellation_culture->getCurrent();
+	core->FlagConstellationDrawing 	= tui_constellation_lines->getValue();
+	core->FlagConstellationArt 	= tui_constellation_art->getValue();
+
+	// 4. Stars
+	core->FlagStars 			= tui_stars_show->getValue();
+	core->MaxMagStarName 		= tui_star_labelmaxmag->getValue();
+	core->FlagStarTwinkle 		= tui_stars_twinkle->getValue();
+
+	// 5. Labels
+	core->FlagStarName 			= tui_label_stars->getValue();
+	core->FlagConstellationName = tui_label_constellations->getValue();
+	core->FlagNebulaName 		= tui_label_nebulas->getValue();
+	core->FlagNebulaCircle 		= tui_label_nebulas->getValue();
+	core->FlagPlanetsHints		= tui_label_planets->getValue();
+	core->FlagShowTuiDateTime	= tui_label_timeinfo->getValue();
+	core->FlagShowTuiShortInfo	= tui_label_timeinfo->getValue();
+
+	// 6. Reference points
+	core->FlagCardinalPoints	= tui_refpoints_cardinalpoints->getValue();
+	core->FlagEclipticLine		= tui_refpoints_ecliptic->getValue();
+	core->FlagEquatorLine		= tui_refpoints_equator->getValue();
+	core->FlagEquatorialGrid	= tui_refpoints_equatorialgrid->getValue();
+	core->FlagAzimutalGrid		= tui_refpoints_azimutalgrid->getValue();
+
+	// 7. Effect
+	core->FlagAtmosphere		= tui_effect_atmosphere->getValue();
+
+}
+
+
+// Set time zone function. TODO this is not very correct it seems
+void stel_ui::tui_cb_settimezone(void)
+{
+	tzset();	// Set the internal variables from the system
+	extern long timezone;
+	core->navigation->set_time_zone((int)-timezone/3600);
+	//cout << timezone/3600 << endl;
+
+	/*extern char *tzname[2];
+	extern int daylight;*/
+}
+
+// Set actual time function
+void stel_ui::tui_cb_actualtime(void)
+{
+	core->navigation->set_JDay(get_julian_from_sys());
+}
+
+// 8. Administration actions functions
+
+// Load default configuration
+void stel_ui::tui_cb_admin_load_default(void)
+{
+	//	TODO
+}
+
+// Load default configuration
+void stel_ui::tui_cb_admin_save_default(void)
+{
+	//	TODO
+}
+
+// Set locale parameter (LANG)
+void stel_ui::tui_cb_admin_set_locale(void)
+{
+	//	TODO
+}
+
+// Launch script for internet update
+void stel_ui::tui_cb_admin_updateme(void)
+{
+	//	TODO
 }

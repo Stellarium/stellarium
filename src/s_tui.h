@@ -30,6 +30,7 @@
 // This is TODO to make the s_ library independent
 #include "SDL.h"
 
+#include <set>
 #include <list>
 #include <string>
 #include <iostream>
@@ -101,8 +102,8 @@ namespace s_tui
     public:
 		Bistate(bool init_state = false) : CallbackComponent(), state(init_state) {;}
 		virtual string getString(void) {return state ? string_activated : string_disabled;}
-		bool getState(void) const {return state;}
-		void setState(bool s) {state = s;}
+		bool getValue(void) const {return state;}
+		void setValue(bool s) {state = s;}
     protected:
 		string string_activated;
 		string string_disabled;
@@ -264,6 +265,47 @@ namespace s_tui
     protected:
 		bool isConfirming;
 		string string_confirm;
+    };
+
+	// List item widget. The callback function is called when the selected item changes
+	template <class T>
+	class MultiSet_item : public CallbackComponent
+    {
+    public:
+		MultiSet_item(const string& _label = string()) : CallbackComponent(), label(_label) {current = items.end();}
+		virtual string getString(void)
+		{
+			if (current==items.end()) return label;
+			ostringstream os;
+			os << label << (active ? start_active : "") << *current << (active ? stop_active : "");
+			return os.str();
+		}
+		virtual bool isEditable(void) const {return true;}
+		virtual bool onKey(SDLKey k, S_TUI_VALUE v)
+		{
+			if (current==items.end() || v==S_TUI_RELEASED) return false;
+			if (k==SDLK_UP)
+			{
+				if (current!=items.begin()) --current;
+				else current = --items.end();
+				return true;
+			}
+			if (k==SDLK_DOWN)
+			{
+				if (current!=--items.end()) ++current;
+				else current = items.begin();
+				return true;
+			}
+			return false;
+		}
+		void addItem(const T& newitem) {items.insert(newitem); if(current==items.end()) current = items.begin();}
+		const T& getCurrent(void) const {if(current==items.end()) return emptyT; else return *current;}
+		bool setCurrent(const T& i) {current = items.find(i);}
+    protected:
+		T emptyT;
+		multiset<T> items;
+		typename multiset<T>::iterator current;
+		string label;
     };
 
 }; // namespace s_tui
