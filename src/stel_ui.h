@@ -61,13 +61,15 @@ public:
 	void tui_update_widgets(void);
 
 private:
-	stel_core * core;		// The main core can be access because stel_ui is a friend class
+	stel_core * core;		// The main core can be accessed because stel_ui is a friend class
 
 	s_font * spaceFont;		// The standard font
 	s_font * courierFont;	// The standard fixed size font
 	s_texture * baseTex;	// The standard fill texture
+	s_texture * flipBaseTex;	// The standard fill texture
 	s_texture * tex_up;		// Up arrow texture
 	s_texture * tex_down;	// Down arrow texture
+
 	Container * desktop;	// The container which contains everything
 
 	// The top bar containing the main infos (date, time, fps etc...)

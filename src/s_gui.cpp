@@ -917,7 +917,7 @@ void TabContainer::addTab(Component* c, const string& name)
 
 void TabContainer::draw(void)
 {
-	painter.drawSquareFill(pos, size);
+	painter.drawSquareFill(pos, size, painter.getBaseColor()/3);
 	painter.drawLine(s_vec2i(pos[0]+getHeadersSize(), pos[1]+headerHeight-1),
 		s_vec2i(pos[0]+size[0], pos[1]+headerHeight-1));
 	Container::draw();
@@ -1248,3 +1248,21 @@ void Time_item::setJDay(double JD)
 	s->setValue(S_ROUND(is));
 }
 
+Picture::Picture(s_texture * _imageTex, int xpos, int ypos, int xsize, int ysize) : imageTex(_imageTex)
+{
+	setPos(xpos, ypos);
+	setSize(xsize, ysize);
+	setTexture(imageTex);
+}
+
+Picture::~Picture()
+{
+	if (imageTex) delete imageTex;
+	imageTex = NULL;
+}
+
+void Picture::draw(void)
+{
+	painter.drawSquareFill(pos, size, s_white);
+	painter.drawSquareEdge(pos, size);
+}
