@@ -33,7 +33,7 @@ s_font::s_font(float size_i, const string& textureName, const string& dataFileNa
 s_font::~s_font()
 {
     glDeleteLists(g_base, 256);                          // Delete All 256 Display Lists
-	delete s_fontTexture; s_fontTexture = NULL;
+    delete s_fontTexture; s_fontTexture = NULL;
 }
 
 int s_font::buildDisplayLists(const string& dataFileName, const string& textureName)
@@ -68,6 +68,28 @@ int s_font::buildDisplayLists(const string& dataFileName, const string& textureN
     averageCharLen=0;
     ratio = size/lineHeight;
     g_base = glGenLists(256);                           // Creating 256 Display Lists
+
+    // initialize character size data and set up unrecognized character glyph
+    for(int i=0; i<256; i++) {
+      theSize[i].sizeX=size;
+      theSize[i].sizeY=size;
+      theSize[i].leftSpacing=0;
+      theSize[i].rightSpacing=0;
+
+      // default to a block to signify an unrecognized character
+      glNewList(g_base+i,GL_COMPILE); {  // Start Building A List
+	  glDisable(GL_TEXTURE_2D);
+	  glBegin(GL_QUADS );
+	  glVertex3f(0,size,0); //  Bottom Left
+	  glVertex3f(size,size,0);  // Bottom Right
+	  glVertex3f(size,0,0); // Top Right
+	  glVertex3f(0,0,0); // Top Left
+	  glEnd ();
+	  glEnable(GL_TEXTURE_2D);
+	  glTranslated(size+SPACING*ratio,0,0); }
+      glEndList();   // Done Building The Display List
+    }
+
     glBindTexture(GL_TEXTURE_2D, s_fontTexture->getID());          // Select Our s_font Texture
 
     while(fscanf(pFile,"%d %d %d %d %d %d\n",&charNum,&posX,&posY,&sizeX,&sizeY,&leftSpacing)==6)
