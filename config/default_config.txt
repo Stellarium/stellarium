@@ -13,24 +13,24 @@ type = fisheye
 viewport = disk
 
 [stars]
-star_scale                     = 1.4
-star_mag_scale					= 1.
+star_scale                     = 1
+star_mag_scale					= 5.
 star_twinkle_amount            = 0.2
 max_mag_star_name              = 1.5
 flag_star_twinkle              = true
 
 [gui]
-flag_show_topbar               = true
+flag_show_topbar               = false
 flag_show_date                 = true
 flag_show_time                 = true
 flag_show_fov                  = true
 flag_show_appname              = true
 flag_show_fps                  = true
-flag_menu                      = true
+flag_menu                      = false
 flag_help                      = false
 flag_infos                     = false
 flag_utc_time                  = false
-flag_show_selected_object_info = true
+flag_show_selected_object_info = false
 gui_base_color                 = 0.3,0.4,0.7
 gui_text_color                 = 0.7,0.8,0.9
 
@@ -45,7 +45,7 @@ init_view_pos                  = 0.0001,0.,1.
 auto_move_duration					= 1.
 
 [landscape]
-landscape_name                 = sea
+landscape_name                 = palm
 flag_ground                    = true
 flag_horizon                   = true
 flag_fog                       = true
@@ -61,6 +61,8 @@ flag_equator_line              = false
 flag_ecliptic_line             = false
 flag_cardinal_points           = true
 flag_gravity_labels            = true
+flag_init_moon_scaled			= true
+moon_scale					= 4.
 
 [astro]
 flag_stars                     = true
