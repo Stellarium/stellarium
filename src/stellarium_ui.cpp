@@ -98,6 +98,7 @@ Label * LongitudeLabel = NULL;
 Label * AltitudeLabel = NULL;
 Label * TimeZoneLabel = NULL;
 Labeled_Button * SaveLocation = NULL;
+Textured_Button * EarthMap = NULL;
 
 StdBtWin * TimeControlWin = NULL;              // The window containing the time controls
 Container * TimeControlContainer = NULL;
@@ -258,11 +259,11 @@ void ChangeStarScaleBarOnChangeValue(float value,Component *)
 void ToggleStarNameOnClicCallback(guiValue button,Component *)
 {   if (global.FlagStarName)
     {   if (ToggleStarName)
-            ToggleStarName->setLabel("Show");
+            ToggleStarName->setLabel("OFF");
         global.FlagStarName=false;
     }
     else
-    {   if (ToggleStarName) ToggleStarName->setLabel("Hide");
+    {   if (ToggleStarName) ToggleStarName->setLabel("ON");
         global.FlagStarName=true;
     }
 }
@@ -576,50 +577,38 @@ Boston, MA  02111-1307, USA.\n"
         printf("ERROR WHILE CREATING UI CONTAINER\n");
         exit(1);
     }
-    StarConfigContainer->reshape(avgCharLen,3,30*avgCharLen, 11*(lineHeight+1));
+    StarConfigContainer->reshape(4,3,180,150);
 
-    int yt=3;
-    
     StarLabel = new Label("STARS :");
-    StarLabel->reshape(3,yt,10*avgCharLen,lineHeight);
-    yt+=(int)(1.6*lineHeight);
-    
-    StarNameLabel = new Label("\1 Names :");
-    StarNameLabel->reshape(15,yt,8*avgCharLen,lineHeight);
-    if (global.FlagStarName) ToggleStarName = new Labeled_Button("Hide");
-    else ToggleStarName = new Labeled_Button("Show");
-    ToggleStarName->reshape(13*avgCharLen,yt-3,avgCharLen*8,lineHeight+4);
-    ToggleStarName->setOnClicCallback(ToggleStarNameOnClicCallback);
-    
-    yt+=(int)(1.6*lineHeight);
+    StarLabel->reshape(3,3,15,15);
 
+    StarNameLabel = new Label("\1 Names :");
+    StarNameLabel->reshape(15,20,20,15);
+    if (global.FlagStarName) ToggleStarName = new Labeled_Button("ON");
+    else ToggleStarName = new Labeled_Button("OFF");
+    ToggleStarName->reshape(80,18,50,18);
+    ToggleStarName->setOnClicCallback(ToggleStarNameOnClicCallback);
+ 
     StarNameMagLabel = new Label("Show if Magnitude < --");
-    StarNameMagLabel->reshape(15,yt,6*avgCharLen,lineHeight);
+    StarNameMagLabel->reshape(15,45,20,15);
     char tempValueStr[30];
     sprintf(tempValueStr,"\1 Show if Magnitude < %.1f",global.MaxMagStarName);
     StarNameMagLabel->setLabel(tempValueStr);
-    yt+=(int)(1.3*lineHeight);
-    ChangeStarDrawNameBar = new CursorBar(vec2_i(2*avgCharLen,yt), vec2_i(25*avgCharLen,10), -1.5,7.,global.MaxMagStarName,ChangeStarDrawNameBarOnChangeValue);
+    ChangeStarDrawNameBar = new CursorBar(vec2_i(15,60), vec2_i(150,10), -1.5,7.,global.MaxMagStarName,ChangeStarDrawNameBarOnChangeValue);
     
-    yt+=(int)(1.6*lineHeight);
-
     StarTwinkleLabel = new Label("\1 Twinkle Amount : --");
     char tempValue2Str[30];
     sprintf(tempValue2Str,"\1 Twinkle Amount : %.1f",global.StarTwinkleAmount);
     StarTwinkleLabel->setLabel(tempValue2Str);
-    StarTwinkleLabel->reshape(15,yt,18*avgCharLen,lineHeight);
-    yt+=(int)(1.3*lineHeight);
-    ChangeStarTwinkleBar = new CursorBar(vec2_i(2*avgCharLen,yt), vec2_i(25*avgCharLen,10),0.,10.,global.StarTwinkleAmount,ChangeStarTwinkleBarOnChangeValue);
-
-    yt+=(int)(1.6*lineHeight);
+    StarTwinkleLabel->reshape(15,80,50,15);
+    ChangeStarTwinkleBar = new CursorBar(vec2_i(15,95), vec2_i(150,10),0.,10.,global.StarTwinkleAmount,ChangeStarTwinkleBarOnChangeValue);
 
     StarScaleLabel = new Label("\1 Scale : --");
     char tempValue3Str[30];
     sprintf(tempValue3Str,"\1 Scale : %.1f",global.StarScale);
     StarScaleLabel->setLabel(tempValue3Str);
-    StarScaleLabel->reshape(15,yt, 18*avgCharLen,lineHeight);
-    yt+=(int)(1.3*lineHeight);
-    ChangeStarScaleBar = new CursorBar(vec2_i(2*avgCharLen,yt), vec2_i(25*avgCharLen,10),0.,10.,global.StarScale,ChangeStarScaleBarOnChangeValue);
+    StarScaleLabel->reshape(15,115,50,15);
+    ChangeStarScaleBar = new CursorBar(vec2_i(15,130), vec2_i(150,10),0.,10.,global.StarScale,ChangeStarScaleBarOnChangeValue);
 
     StarConfigContainer->addComponent(ChangeStarDrawNameBar);
     StarConfigContainer->addComponent(ToggleStarName);
@@ -630,9 +619,7 @@ Boston, MA  02111-1307, USA.\n"
     StarConfigContainer->addComponent(ChangeStarTwinkleBar);
     StarConfigContainer->addComponent(StarScaleLabel);
     StarConfigContainer->addComponent(ChangeStarScaleBar);
-
-    yt+=(int)(2.8*lineHeight);
-
+ 
     /*** Landcape config container ***/
     LandscapeConfigContainer = new FilledContainer();
     if (!LandscapeConfigContainer)
@@ -640,35 +627,26 @@ Boston, MA  02111-1307, USA.\n"
         printf("ERROR WHILE CREATING UI CONTAINER\n");
         exit(1);
     }
-    LandscapeConfigContainer->reshape(avgCharLen,yt,30*avgCharLen, 8*(lineHeight+1));
-
-    yt=3;
+    LandscapeConfigContainer->reshape(4,157,180,110);
 
     LandscapeLabel = new Label("LANDSCAPE :");
-    LandscapeLabel->reshape(3,yt,10*avgCharLen,lineHeight);
+    LandscapeLabel->reshape(3,3,50,15);
 
-    yt+=(int)(1.8*lineHeight);
-    
     ToggleGround = new Labeled_Button("Ground");
-    ToggleGround->reshape(4*avgCharLen,yt-3,avgCharLen*22,lineHeight+4);
+    ToggleGround->reshape(25,23,130,18);
     ToggleGround->setOnClicCallback(ToggleGroundOnClicCallback);
 
-    yt+=(int)(1.6*lineHeight);   
-
     ToggleFog = new Labeled_Button("Fog");
-    ToggleFog->reshape(vec2_i(4*avgCharLen,yt-3),vec2_i(avgCharLen*22,lineHeight+4));
+    ToggleFog->reshape(25,43,130,18);
     ToggleFog->setOnClicCallback(ToggleFogOnClicCallback);
 
-    yt+=(int)(1.6*lineHeight);   
 
     ToggleAtmosphere = new Labeled_Button("Atmosphere");
-    ToggleAtmosphere->reshape(vec2_i(4*avgCharLen,yt-3),vec2_i(avgCharLen*22,lineHeight+4));
+    ToggleAtmosphere->reshape(25,63,130,18);
     ToggleAtmosphere->setOnClicCallback(ToggleAtmosphereOnClicCallback);
 
-    yt+=(int)(1.6*lineHeight);   
-
     ToggleMilkyWay = new Labeled_Button("MilkyWay");
-    ToggleMilkyWay->reshape(vec2_i(4*avgCharLen,yt-3),vec2_i(avgCharLen*22,lineHeight+4));
+    ToggleMilkyWay->reshape(25,83,130,18);
     ToggleMilkyWay->setOnClicCallback(ToggleMilkyWayOnClicCallback);
 
     LandscapeConfigContainer->addComponent(LandscapeLabel);
@@ -679,69 +657,53 @@ Boston, MA  02111-1307, USA.\n"
 
 
     /*** Location config container ***/
-
     LocationConfigContainer = new FilledContainer();
     if (!LocationConfigContainer)
     {
         printf("ERROR WHILE CREATING UI CONTAINER\n");
         exit(1);
     }
-    LocationConfigContainer->reshape(vec2_i(avgCharLen*32,3), vec2_i(30*avgCharLen, 14*(lineHeight+1)));
-
-    yt=3;
+    LocationConfigContainer->reshape(187,3,340,264);
 
     LocationLabel = new Label("LOCATION :");
-    LocationLabel->reshape(vec2_i(3,yt), vec2_i(10*avgCharLen,lineHeight));
-    yt+=(int)(1.6*lineHeight); 
+    LocationLabel->reshape(3,3,15,15);
 
     LatitudeLabel = new Label("Latitude : ");
-    LatitudeLabel->reshape(vec2_i(15,yt), vec2_i(12*avgCharLen,lineHeight));
+    LatitudeLabel->reshape(15,20,20,15);
     if (global.ThePlace.latitude()-PI/2<0)
         sprintf(tempValueStr,"\1 Latitude : %.2f N",-(global.ThePlace.latitude()*180./PI-90));
     else
         sprintf(tempValueStr,"\1 Latitude : %.2f S",global.ThePlace.latitude()*180./PI-90);
     LatitudeLabel->setLabel(tempValueStr);
-    yt+=(int)(1.3*lineHeight);
-    LatitudeBar = new CursorBar(vec2_i(2*avgCharLen,yt), vec2_i(25*avgCharLen,10),-90.,90.,-(global.ThePlace.latitude()*180/PI-90),LatitudeBarOnChangeValue);
-    
-    yt+=(int)(1.6*lineHeight); 
+    LatitudeBar = new CursorBar(vec2_i(15,35), vec2_i(150,10),-90.,90.,-(global.ThePlace.latitude()*180/PI-90),LatitudeBarOnChangeValue);
     
     LongitudeLabel = new Label("Longitude : ");
-    LongitudeLabel->reshape(vec2_i(15,yt), vec2_i(12*avgCharLen,lineHeight));
+    LongitudeLabel->reshape(15,60,20,15);
     float temp = (2*PI-global.ThePlace.longitude())*180/PI;
     if (temp < 0)
         sprintf(tempValueStr,"\1 Longitude : %.2f W",-temp);
     else 
         sprintf(tempValueStr,"\1 Longitude : %.2f E",temp);
     LongitudeLabel->setLabel(tempValueStr);
-    yt+=(int)(1.3*lineHeight);
-    LongitudeBar = new CursorBar(vec2_i(2*avgCharLen,yt), vec2_i(25*avgCharLen,10),-180,180,(2*PI-global.ThePlace.longitude())*180/PI,LongitudeBarOnChangeValue);
-    
-    yt+=(int)(1.6*lineHeight); 
+    LongitudeBar = new CursorBar(vec2_i(15,75), vec2_i(150,10),-180,180,(2*PI-global.ThePlace.longitude())*180/PI,LongitudeBarOnChangeValue);
 
     AltitudeLabel = new Label("Altitude : ");
-    AltitudeLabel->reshape(vec2_i(15,yt), vec2_i(12*avgCharLen,lineHeight));
+    AltitudeLabel->reshape(170,20,20,15);
     sprintf(tempValueStr,"\1 Altitude : %dm",global.Altitude);
     AltitudeLabel->setLabel(tempValueStr);
-    yt+=(int)(1.3*lineHeight);
-    AltitudeBar = new CursorBar(vec2_i(2*avgCharLen,yt), vec2_i(25*avgCharLen,10),-500.,10000.,global.Altitude,AltitudeBarOnChangeValue);
-    
-    yt+=(int)(1.6*lineHeight); 
+    AltitudeBar = new CursorBar(vec2_i(170,35), vec2_i(150,10),-500.,10000.,global.Altitude,AltitudeBarOnChangeValue);
 
     TimeZoneLabel = new Label("TimeZone : ");
-    TimeZoneLabel->reshape(15,yt, 12*avgCharLen,lineHeight);
+    TimeZoneLabel->reshape(170,60,20,15);
     sprintf(tempValueStr,"\1 TimeZone : %d",global.TimeZone);
     TimeZoneLabel->setLabel(tempValueStr);
-    yt+=(int)(1.3*lineHeight);
-    TimeZoneBar = new CursorBar(vec2_i(2*avgCharLen,yt), vec2_i(25*avgCharLen,10),-12.,13.,global.TimeZone,TimeZoneBarOnChangeValue);
+    TimeZoneBar = new CursorBar(vec2_i(170,75), vec2_i(150,10),-12.,13.,global.TimeZone,TimeZoneBarOnChangeValue);
     
-    yt+=(int)(1.6*lineHeight); 
-
     SaveLocation = new Labeled_Button("Save location");
-    SaveLocation->reshape(vec2_i(4*avgCharLen,yt-3),vec2_i(avgCharLen*22,lineHeight+4));
+    SaveLocation->reshape(100,230,100,20);
     SaveLocation->setOnClicCallback(SaveLocationOnClicCallback);
 
-    yt+=(int)(1.6*lineHeight); 
+    EarthMap = new Textured_Button(new s_texture("earthmap"),vec2_i(7,90),vec2_i(320,160),clWhite,clWhite/2,NULL,NULL,1,1);
 
     LocationConfigContainer->addComponent(LocationLabel);
     LocationConfigContainer->addComponent(LatitudeBar);
@@ -753,9 +715,10 @@ Boston, MA  02111-1307, USA.\n"
     LocationConfigContainer->addComponent(AltitudeLabel);
     LocationConfigContainer->addComponent(TimeZoneLabel);
     LocationConfigContainer->addComponent(SaveLocation);
+    LocationConfigContainer->addComponent(EarthMap);
 
     /*** Config window ***/
-    ConfigWin = new StdBtWin(40, 40, 63*avgCharLen, 22*(lineHeight+1), "Configuration", Base, spaceFont);
+    ConfigWin = new StdBtWin(40, 40, 532, 287, "Configuration", Base, spaceFont);
     ConfigWin->addComponent(StarConfigContainer);
     ConfigWin->addComponent(LandscapeConfigContainer);
     ConfigWin->addComponent(LocationConfigContainer);
