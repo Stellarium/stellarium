@@ -50,7 +50,6 @@ int Nebula_mgr::read(const string& font_fileName, const string& fileName, int ba
 {
   char tmpstr[255];
   int total=0;
-  s_texture *bar;
 
   printf("Loading nebulas data...\n");
 
@@ -78,11 +77,9 @@ int Nebula_mgr::read(const string& font_fileName, const string& fileName, int ba
     }
 
     Nebula::tex_circle = new s_texture("neb");   // Load circle texture
-    bar = new s_texture("bar"); // complete bar texture
 
     int current=0;
-    glEnable(GL_TEXTURE_2D);
-    //    glDisable(GL_LIGHTING);
+
     glDisable(GL_BLEND);
     glLineWidth(2);
 
@@ -100,7 +97,6 @@ int Nebula_mgr::read(const string& font_fileName, const string& fileName, int ba
 
       glColor3f(1,1,1);
 
-      glBindTexture (GL_TEXTURE_2D, bar->getID());
 	  glDisable(GL_TEXTURE_2D);
       glBegin(GL_TRIANGLE_STRIP);
         glTexCoord2i(1,0);              // Bottom Right
@@ -115,7 +111,6 @@ int Nebula_mgr::read(const string& font_fileName, const string& fileName, int ba
 
       glColor3f(0.0f,0.0f,1.0f);
 
-      glBindTexture (GL_TEXTURE_2D, bar->getID());
       glBegin(GL_TRIANGLE_STRIP);
         glTexCoord2i(1,0);              // Bottom Right
         glVertex3f(barx+300*current/total,bary+20, 0.0f);
@@ -154,8 +149,6 @@ int Nebula_mgr::read(const string& font_fileName, const string& fileName, int ba
     fclose(fic);
     glDisable(GL_TEXTURE_2D);
     glLineWidth(1);
-
-	delete bar;
 
     return 0;
 }
