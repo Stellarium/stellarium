@@ -67,12 +67,12 @@ void stel_atmosphere::compute_color(double JD, Vec3d sunPos, Vec3d moonPos, floa
 	//Vec3d obj;
 	skylight_struct2 b2;
 
+	// these are for radii
 	double sun_angular_size = atan(696000./AU/sunPos.length());
 	double moon_angular_size = atan(1738./AU/moonPos.length());
 
 	double touch_angle = sun_angular_size + moon_angular_size;
 	double dark_angle = moon_angular_size - sun_angular_size;
-	if(dark_angle < 0) dark_angle=0; // annular eclipse
 
 	sunPos.normalize();
 	moonPos.normalize();
@@ -82,15 +82,24 @@ void stel_atmosphere::compute_color(double JD, Vec3d sunPos, Vec3d moonPos, floa
 
 	//	printf("touch at %f\tnow at %f (%f)\n", touch_angle, separation_angle, separation_angle/touch_angle);
 
-	// TODO: bright stars are supposed to be visible, now they are not drawing anymore...
+	// bright stars should be visible at total eclipse
+	// TODO: correct for atmospheric diffusion
+	// TODO: use better coverage function (non-linear)
+	// because of above issues, this algorithm darkens more quickly than reality
 	if( separation_angle < touch_angle) {
-		// TODO: account for brighter annular eclipses
-		if(separation_angle < dark_angle) atm_intensity = 0.004;
-		else atm_intensity *= .004 + .996*(separation_angle-dark_angle)/touch_angle;
+		float min;
+		if(dark_angle < 0) {
+			// annular eclipse
+			float asun = sun_angular_size*sun_angular_size;
+			min = (asun - moon_angular_size*moon_angular_size)/asun;  // minimum proportion of sun uncovered
+			dark_angle *= -1;
+		} else min = 0.004;  // so bright stars show up at total eclipse
+
+		if(separation_angle < dark_angle) atm_intensity = min;
+		else atm_intensity *= min + (1.-min)*(separation_angle-dark_angle)/(touch_angle-dark_angle);
+
+		//		printf("atm int %f (min %f)\n", atm_intensity, min);		
 	}
-
-	//	printf("atm int %f\t", atm_intensity);
-
 
 	float sun_pos[3];
 	sun_pos[0] = sunPos[0];
