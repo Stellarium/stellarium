@@ -1,4 +1,4 @@
-/* 
+/*
  * Stellarium
  * Copyright (C) 2002 Fabien Chéreau
  * Inspired by the s_gui.h by Chris Laurel <claurel@shatters.net>
@@ -21,6 +21,9 @@
 
 #ifndef _GUI_H_
 #define _GUI_H_
+
+#include <SDL.h> // Just for the key codes, i'm lasy to redefine them
+		 // This is to do to make the s_ library independent
 
 #include <vector>
 #include "s_font.h"
@@ -76,11 +79,14 @@ namespace gui
         virtual void render(GraphicsContext&) = 0;
         void setClicCallback(void (*_clicCallback)(int,int,enum guiValue,enum guiValue,Component *));
         void setMoveCallback(void (*_moveCallback)(int,int,enum guiValue,Component *));
+        void setKeyCallback(int (*_keyCallback)(SDLKey key,int state,Component *));
         void setParent(Component*);
         void setVisible(int _visible) {visible=_visible;}
         int getVisible(void) {return visible;}
         void setActive(int _active) {active = _active;}
         int getActive(void) {return active;}
+        void setFocus(int _focus);
+        int getFocus(void) {return focus;}
         int draging;
         void setID(int _ID) {ID=_ID;}
         int getID(void) {return ID;}
@@ -98,9 +104,10 @@ namespace gui
         Component* parent;
         void (*clicCallback)(int,int,enum guiValue,enum guiValue,Component *);
         void (*moveCallback)(int,int,enum guiValue,Component *);
-        void (*keyCallback)(int,enum guiValue,Component *);
+        int (*keyCallback)(SDLKey key,int state,Component *);
         int mouseIn;
         int active;
+        int focus;
     };
 
 
@@ -115,6 +122,7 @@ namespace gui
         void render(GraphicsContext&);
         int handleMouseClic(int x, int y, enum guiValue, enum guiValue);
         void handleMouseMove(int x, int y);
+        int handleKey(SDLKey key,int state);
     protected:
         std::vector<Component*> components;
     };
