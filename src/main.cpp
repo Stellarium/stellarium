@@ -50,8 +50,8 @@ s_texture * texIds[200];              // Common Textures
 /*ShootingStar * TheShooting = NULL;*/
 
 // Globals
-bool isProgramLooping;														// We're Using This One To Know If The Program Must Go On In The Main Loop
-S_AppStatus AppStatus;														// The Struct That Holds The Runtime Data Of The Application
+bool isProgramLooping;	// Wether the Program Must Go On In The Main Loop
+S_AppStatus AppStatus;	// Holds The Runtime Data Of The Application
 
 
 static int timeAtmosphere=0;
@@ -73,30 +73,30 @@ void drawIntro(void)
 
 // ************************  Main display loop  ************************
 void Draw(void)
-{  
-    glMatrixMode(GL_PROJECTION); 
+{
+    glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    gluPerspective(global.Fov, (double)global.X_Resolution / 
+    gluPerspective(global.Fov, (double)global.X_Resolution /
 		   global.Y_Resolution, 0.1, 1000);
     glMatrixMode(GL_MODELVIEW);
-    
 
-    // Execute all the drawing function in the correct order from the more 
+
+    // Execute all the drawing function in the correct order from the more
     // far to nearest objects
 
     // ---- Equatorial Coordinates
     Switch_to_equatorial();          // Switch in Equatorial coordinates
     DrawMilkyWay();                  // Draw the milky way --> init the buffers
 
-    if (global.FlagNebula && (!global.FlagAtmosphere || 
-			      global.SkyBrightness<0.1)) 
+    if (global.FlagNebula && (!global.FlagAtmosphere ||
+			      global.SkyBrightness<0.1))
 	messiers->Draw();            // Draw the Messiers Objects
     if (global.FlagConstellationDrawing)
         ConstellCeleste->Draw();     // Draw all the constellations
-    if ((!global.FlagAtmosphere && global.FlagStars) || 
-        (global.SkyBrightness<0.2 && global.FlagStars)) 
+    if ((!global.FlagAtmosphere && global.FlagStars) ||
+        (global.SkyBrightness<0.2 && global.FlagStars))
     {
-	HipVouteCeleste->Draw();    // Draw the stars  
+	HipVouteCeleste->Draw();    // Draw the stars
     }
 
 /*
@@ -108,21 +108,21 @@ void Draw(void)
 	}
 	TheShooting->Draw();
 */
-    if (global.FlagPlanets || global.FlagPlanetsHintDrawing) 
+    if (global.FlagPlanets || global.FlagPlanetsHintDrawing)
 	SolarSystem->Draw();         // Draw the planets
-    if (global.FlagAtmosphere && global.SkyBrightness>0) 
+    if (global.FlagAtmosphere && global.SkyBrightness>0)
 	DrawAtmosphere2();
 
     SolarSystem->DrawMoonDaylight();
 
     if (global.FlagEquatorialGrid)
-    { 
+    {
 	DrawMeridiens();             // Draw the meridian lines
         DrawParallels();             // Draw the parallel lines
     }
-    if (global.FlagEquator) 
+    if (global.FlagEquator)
 	DrawEquator();               // Draw the celestial equator line
-    if (global.FlagEcliptic) 
+    if (global.FlagEcliptic)
 	DrawEcliptic();              // Draw the ecliptic line
     if (global.FlagConstellationName)
         ConstellCeleste->DrawName(); // Draw the constellations's names
@@ -131,7 +131,7 @@ void Draw(void)
 		    global.SelectedObject.Size,
 		    global.SelectedObject.RGB,
 		    global.SelectedObject.type);
-    
+
     // ---- AltAzimutal Coordinates
     Switch_to_altazimutal();         // Switch in AltAzimutal coordinates
     if (global.FlagAzimutalGrid)
@@ -140,7 +140,7 @@ void Draw(void)
         DrawParallelsAzimut();       // Draw the "Altazimuthal parallel" lines
     }
     if (global.FlagAtmosphere)       // Calc the atmosphere
-    {   
+    {
     	// Draw atmosphere every second frame because it's slow....
         if (++timeAtmosphere>1 && global.SkyBrightness>0)
         {
@@ -148,7 +148,7 @@ void Draw(void)
             CalcAtmosphere();
         }
     }
-    if (global.FlagHorizon && global.FlagGround)    
+    if (global.FlagHorizon && global.FlagGround)
         DrawDecor(2);                               // Draw the mountains
     if (global.FlagGround) DrawGround();            // Draw the ground
     if (global.FlagFog) DrawFog();                  // Draw the fog
@@ -161,7 +161,7 @@ void Draw(void)
 
 // ************************  On resize  *******************************
 void ResizeGL(int w, int h)
-{   
+{
     if (!h || (w==global.X_Resolution && h==global.Y_Resolution)) return;
     global.X_Resolution = w;
     global.Y_Resolution = h;
@@ -170,7 +170,7 @@ void ResizeGL(int w, int h)
     glViewport(0, 0, global.X_Resolution, global.Y_Resolution);
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    gluPerspective(global.Fov, (double) global.X_Resolution / 
+    gluPerspective(global.Fov, (double) global.X_Resolution /
 		   global.Y_Resolution, 1, 10000);   // Update the ratio
     glMatrixMode(GL_MODELVIEW);
 }
@@ -178,11 +178,11 @@ void ResizeGL(int w, int h)
 
 // ************************  Initialisation  ******************************
 void loadCommonTextures(void)
-{   
+{
     printf("Loading common textures...\n");
     texIds[2] = new s_texture("voielactee256x256",TEX_LOAD_TYPE_PNG_SOLID);
     texIds[3] = new s_texture("fog",TEX_LOAD_TYPE_PNG_REPEAT);
-    texIds[4] = new s_texture("ciel");  
+    texIds[4] = new s_texture("ciel");
     texIds[6] = new s_texture("n");
     texIds[7] = new s_texture("s");
     texIds[8] = new s_texture("e");
@@ -197,14 +197,14 @@ void loadCommonTextures(void)
 
     switch (global.LandscapeNumber)
     {
-    case 1 : 
+    case 1 :
         texIds[31]= new s_texture("landscapes/sea1",TEX_LOAD_TYPE_PNG_ALPHA);
         texIds[32]= new s_texture("landscapes/sea2",TEX_LOAD_TYPE_PNG_ALPHA);
         texIds[33]= new s_texture("landscapes/sea3",TEX_LOAD_TYPE_PNG_ALPHA);
         texIds[34]= new s_texture("landscapes/sea4",TEX_LOAD_TYPE_PNG_ALPHA);
         texIds[1] = new s_texture("landscapes/sea5",TEX_LOAD_TYPE_PNG_SOLID);
         break;
-    case 2 : 
+    case 2 :
         texIds[31]= new s_texture("landscapes/mountain1",
 				  TEX_LOAD_TYPE_PNG_ALPHA);
         texIds[32]= new s_texture("landscapes/mountain2",
@@ -216,7 +216,7 @@ void loadCommonTextures(void)
         texIds[1] = new s_texture("landscapes/mountain5",
 				  TEX_LOAD_TYPE_PNG_SOLID);
         break;
-    case 3 : 
+    case 3 :
         texIds[31]= new s_texture("landscapes/snowy1",
 				  TEX_LOAD_TYPE_PNG_ALPHA);
         texIds[32]= new s_texture("landscapes/snowy2",
@@ -228,7 +228,7 @@ void loadCommonTextures(void)
         texIds[1] = new s_texture("landscapes/snowy5",
 				  TEX_LOAD_TYPE_PNG_SOLID);
         break;
-    default : 
+    default :
         printf("ERROR : Bad landscape number, change it in config.txt\n");
         exit(1);
     }
@@ -236,20 +236,21 @@ void loadCommonTextures(void)
     texIds[47]= new s_texture("saturneAnneaux128x128",TEX_LOAD_TYPE_PNG_ALPHA);
     texIds[48]= new s_texture("halo");
     texIds[50]= new s_texture("haloLune");
-    if (messiers->ReadTexture()==0) 
+    if (messiers->ReadTexture()==0)
 	printf("Error while loading messier Texture\n");
 }
 
-void TerminateApplication(void)												// Terminate The Application
+
+void TerminateApplication(void)				// Terminate The Application
 {
-	static SDL_Event Q;														// We're Sending A SDL_QUIT Event
-	Q.type = SDL_QUIT;														// To The SDL Event Queue
-	if(SDL_PushEvent(&Q) == -1)												// Try Send The Event
+	static SDL_Event Q;						// We're Sending A SDL_QUIT Event
+	Q.type = SDL_QUIT;						// To The SDL Event Queue
+	if(SDL_PushEvent(&Q) == -1)				// Try Send The Event
 	{
-		printf("SDL_QUIT event can't be pushed: %s\n", SDL_GetError() );		// And Eventually Report Errors
-		exit(1);															// And Exit
+		printf("SDL_QUIT event can't be pushed: %s\n", SDL_GetError() );
+		exit(1);
 	}
-	return;																	// We're Always Making Our Funtions Return
+	return;
 }
 
 // *******************  Handle time  **************************
@@ -351,27 +352,27 @@ bool Initialize(void)	     // Any Application & User Initialization Code Goes He
 
     loadCommonTextures();            // Load the common used textures
     SolarSystem->loadTextures();
-    
+
     char tempName[255];
     char tempName2[255];
     char tempName3[255];
-    
+
     // Load hipparcos stars & names
     strcpy(tempName,global.DataDir);
     strcat(tempName,"hipparcos.fab");
     strcpy(tempName2,global.DataDir);
-    strcat(tempName2,"commonname.fab"); 
+    strcat(tempName2,"commonname.fab");
     strcpy(tempName3,global.DataDir);
-    strcat(tempName3,"name.fab"); 
+    strcat(tempName3,"name.fab");
     HipVouteCeleste->Load(tempName,tempName2,tempName3);
-    
+
     strcpy(tempName,global.DataDir);
     strcat(tempName,"constellationship.fab");
-    ConstellCeleste->Load(tempName,HipVouteCeleste);     // Load constellations      
+    ConstellCeleste->Load(tempName,HipVouteCeleste);     // Load constellations
     SolarSystem->Compute(global.JDay,global.ThePlace);// Compute planet data
     InitMeriParal();                 // Precalculation for the grids drawing
     InitAtmosphere();
-    
+
     strcpy(tempName,global.DataDir);
     strcat(tempName,"messier.fab");
     messiers->Read(tempName);        // read the messiers object data
@@ -380,11 +381,6 @@ bool Initialize(void)	     // Any Application & User Initialization Code Goes He
     return true;		     // Return TRUE (Initialization Successful)
 }
 
-// ***************************  Deinitialize  **********************************
-void Deinitialize(void)		     // Any User Deinitialization Goes Here
-{
-	return;		       	     // We Have Nothing To Deinit Now
-}
 
 // ***************************  InitGL  ********************************
 bool InitGL(SDL_Surface *S)  // Any OpenGL Initialization Code Goes Here
@@ -424,9 +420,6 @@ int main(int argc, char **argv)
     Uint32	LastCount;	// Used For The Tick Counter
     Screen = NULL;
     Keys = NULL;
-	
-    // We Want A Hardware Surface
-    Vflags = SDL_HWSURFACE|SDL_OPENGL;
 
     if(SDL_Init(SDL_INIT_VIDEO)<0)  // Init The SDL Library, The VIDEO Subsystem
     {
@@ -436,11 +429,15 @@ int main(int argc, char **argv)
 
     // Make Sure That SDL_Quit Will Be Called In Case of exit()
     atexit(SDL_Quit);
-    
-    // If So, We Always Need The Fullscreen Video Init Flag
-    if (global.Fullscreen) Vflags|=SDL_FULLSCREEN; 
 
 
+    // We Want A Hardware Surface
+    Vflags = SDL_HWSURFACE|SDL_OPENGL;
+
+	// If fullscreen, set the Flag
+    if (global.Fullscreen) Vflags|=SDL_FULLSCREEN;
+
+	// Create the SDL Screen surface
     Screen = SDL_SetVideoMode(global.X_Resolution, global.Y_Resolution, global.bppMode, Vflags);
 	if(!Screen)
 	{
@@ -598,9 +595,8 @@ int main(int argc, char **argv)
 		}
 	}
 
-	Deinitialize();
 	exit(0);
 
 	return 0;
-	
+
 }
