@@ -98,6 +98,9 @@ public:
 	// Sets and gets
 	void set_JDay(double JD) {JDay=JD;}
 	void set_time_speed(double ts) {time_speed=ts;}
+	void set_flag_traking(int v) {flag_traking=v;}
+	void set_flag_lock_equ_pos(int v) {flag_lock_equ_pos=v;}
+	int get_flag_lock_equ_pos() {return flag_lock_equ_pos;}
 	double get_JDay(void) {return JDay;}
 	double get_fov(void) {return fov;}
 	Vec3d get_equ_vision(void) {return equ_vision;}
@@ -125,12 +128,12 @@ private:
     Vec3d local_vision, equ_vision;		// Viewing direction in local and equatorial coordinates
     double deltaFov,deltaAlt,deltaAz;	// View movement
 	double move_speed;					// Speed of movement
-	int FlagTraking;					// Define if the selected object is followed
-	int FlagLockEquPos;					// Define if the equatorial position is locked
+	int flag_traking;					// Define if the selected object is followed
+	int flag_lock_equ_pos;				// Define if the equatorial position is locked
 
 	// Automove
 	auto_move move;				// Current auto movement
-    int FlagAutoMove;			// Define if automove is on or off
+    int flag_auto_move;			// Define if automove is on or off
 
 	// Time variable
     double time_speed;			// Positive : forward, Negative : Backward, 1 = 1sec/sec

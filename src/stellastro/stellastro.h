@@ -68,14 +68,6 @@ double get_julian_from_timet (time_t * time);
 void get_timet_from_julian (double JD, time_t * time);
 
 
-/* Obtains Latitude, Longitude, RA or Declination from a string. */
-double get_dec_location(char *s);
-
-
-/* Obtains a human readable location in the form: ddºmm'ss.ss" */
-char *get_humanr_location(double location);
-
-
 /* Calculate mean sidereal time from date. */
 double get_mean_sidereal_time (double JD);
 

@@ -474,6 +474,10 @@ template<class T> T* Matrix4<T>::operator[](int n)
     return &(r[n*4]);
 }
 
+template<class T> Matrix4<T>::operator T*()
+{
+	return r;
+}
 
 template<class T> Matrix4<T> Matrix4<T>::identity()
 {
@@ -499,8 +503,8 @@ template<class T> Matrix4<T> Matrix4<T>::xrotation(T angle)
     T s = (T) sin(angle);
 
     return Matrix4<T>(1, 0, 0, 0,
-                      0, c,-s, 0,
-                      0, s, c, 0,
+                      0, c, s, 0,
+                      0,-s, c, 0,
                       0, 0, 0, 1 );
 }
 
@@ -510,9 +514,9 @@ template<class T> Matrix4<T> Matrix4<T>::yrotation(T angle)
     T c = (T) cos(angle);
     T s = (T) sin(angle);
 
-    return Matrix4<T>( c, 0, s, 0,
+    return Matrix4<T>( c, 0,-s, 0,
                        0, 1, 0, 0,
-                      -s, 0, c, 0,
+                       s, 0, c, 0,
                        0, 0, 0, 1 );
 }
 
@@ -522,8 +526,8 @@ template<class T> Matrix4<T> Matrix4<T>::zrotation(T angle)
     T c = (T) cos(angle);
     T s = (T) sin(angle);
 
-    return Matrix4<T>(c,-s, 0, 0,
-                      s, c, 0, 0,
+    return Matrix4<T>(c, s, 0, 0,
+                     -s, c, 0, 0,
                       0, 0, 1, 0,
                       0, 0, 0, 1 );
 }

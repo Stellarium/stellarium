@@ -36,8 +36,8 @@ observator_pos::~observator_pos()
 void observator_pos::save(FILE * f)
 {
 	// Set the position values in config file format
-	char * tempLatitude=strdup(get_humanr_location(latitude));
-	char * tempLongitude=strdup(get_humanr_location(longitude));
+	char * tempLatitude=strdup(print_angle_dms_stel(latitude));
+	char * tempLongitude=strdup(print_angle_dms_stel(longitude));
 	fprintf(f,"%s %s %d %d %s\n",tempLongitude, tempLatitude, altitude, time_zone, name);
 	printf("SAVE location : %s %s %d %d %s\n",tempLongitude, tempLatitude, altitude, time_zone, name);
 	if (tempLatitude) delete tempLatitude;
@@ -51,13 +51,13 @@ void observator_pos::load(FILE * f)
 	name=strdup(tempName);
 	printf("LOAD location : %s %s %d %d %s\n",tempLongitude, tempLatitude, altitude, time_zone, name);
     // set the read latitude and longitude
-    longitude=get_dec_location(tempLongitude);
-    latitude=get_dec_location(tempLatitude);
+    longitude=get_dec_angle(tempLongitude);
+    latitude=get_dec_angle(tempLatitude);
 }
 
 
 navigator::navigator() : fov(60.), deltaFov(0.), deltaAlt(0.), deltaAz(0.), move_speed(0.001),
-	FlagTraking(0), FlagLockEquPos(1), FlagAutoMove(0), time_speed(JD_SECOND), JDay(0.)
+	flag_traking(0), flag_lock_equ_pos(0), flag_auto_move(0), time_speed(JD_SECOND), JDay(0.)
 {
 	local_vision=Vec3d(1.,0.,0.);
 	equ_vision=Vec3d(1.,0.,0.);
@@ -114,26 +114,39 @@ void navigator::turn_right(int s)
 	if (s)
 	{
 		deltaAz = 1;
-		FlagTraking = 0;
-		FlagLockEquPos = 0;
+		flag_traking = 0;
 	}
 	else deltaAz = 0;
-
 }
 
 void navigator::turn_left(int s)
 {
-	deltaAz = -1*(s!=0);
+	if (s)
+	{
+		deltaAz = -1;
+		flag_traking = 0;
+	}
+	else deltaAz = 0;
 }
 
 void navigator::turn_up(int s)
 {
-	deltaAlt = (s!=0);
+	if (s)
+	{
+		deltaAlt = 1;
+		flag_traking = 0;
+	}
+	else deltaAlt = 0;
 }
 
 void navigator::turn_down(int s)
 {
-	deltaAlt = -1*(s!=0);
+	if (s)
+	{
+		deltaAlt = -1;
+		flag_traking = 0;
+	}
+	else deltaAlt = 0;
 }
 
 void navigator::zoom_in(int s)
@@ -149,16 +162,24 @@ void navigator::zoom_out(int s)
 
 void navigator::update_transform_matrices(void)
 {
+	/*Vec3d v(1,0,0);
+	v=Mat4d::zrotation(M_PI_2)*Mat4d::xrotation(M_PI_2)*v;
+	printf("v(%lf,%lf,%lf)\n",v[0],v[1],v[2]);*/
+printf("%c\n",'°');
 	mat_helio_to_local=Mat4d::identity();
 	mat_local_to_helio=Mat4d::identity();
-	mat_local_to_earth_equ=Mat4d::identity();
-	mat_earth_equ_to_local=Mat4d::identity();
+mat_local_to_earth_equ=Mat4d::identity();
+mat_earth_equ_to_local=Mat4d::identity();
+	/*mat_local_to_earth_equ=Mat4d::zrotation((-position.latitude)*M_PI/180.); *
+		Mat4d::yrotation((-get_apparent_sidereal_time(JDay) - position.longitude)*M_PI/180.);
+
+	mat_earth_equ_to_local=	Mat4d::yrotation((get_apparent_sidereal_time(JDay) + position.longitude)*M_PI/180.) *
+		Mat4d::zrotation((position.latitude)*M_PI/180.);*/
 }
 
 void navigator::update_vision_vector(int delta_time)
 {
-
-    if (FlagAutoMove)
+    if (flag_auto_move)
     {
 		equ_vision = move.aim*move.coef;
         Vec3d temp = move.start*(1.0-move.coef);
@@ -167,7 +188,7 @@ void navigator::update_vision_vector(int delta_time)
         move.coef+=move.speed*delta_time;
         if (move.coef>=1.)
         {
-			FlagAutoMove=false;
+			flag_auto_move=false;
             equ_vision=move.aim;
         }
 		// Recalc local vision vector
@@ -175,7 +196,7 @@ void navigator::update_vision_vector(int delta_time)
     }
 	else
 	{
-    	if (FlagTraking) // Equatorial vision vector locked on selected object
+    	if (flag_traking && selected_object) // Equatorial vision vector locked on selected object
 		{
 			equ_vision=selected_object->get_equ_pos();
 			// Recalc local vision vector
@@ -183,7 +204,7 @@ void navigator::update_vision_vector(int delta_time)
 		}
 		else
 		{
-			if (FlagLockEquPos) // Equatorial vision vector locked
+			if (flag_lock_equ_pos) // Equatorial vision vector locked
 			{
 				// Recalc local vision vector
 				local_vision=earth_equ_to_local(&equ_vision);
@@ -251,7 +272,7 @@ void navigator::update_move(int delta_time)
 	rect_to_sphe(&azVision,&altVision,&local_vision);
 
     // if we are mooving in the Azimuthal angle (left/right)
-    if (deltaAz) azVision-=deltaAz;
+    if (deltaAz) azVision+=deltaAz;
     if (deltaAlt)
     {
 		if (altVision+deltaAlt <= M_PI_2 && altVision+deltaAlt >= -M_PI_2) altVision+=deltaAlt;
@@ -270,24 +291,7 @@ void navigator::update_move(int delta_time)
 // Increment time
 void navigator::update_time(int delta_time)
 {
-
-    /*if (global.FlagRealTime)                                // real time animation
-    {
-		global.JDay+=global.TimeDirection*SECONDE*(float)DeltaTemps/1000.0;
-    }
-    if (global.FlagAcceleredTime)                           // accelered time animation
-    {
-		global.JDay+=global.TimeDirection*MINUTE;
-        _Sun.computePosition(global.JDay);
-    }
-    if (global.FlagVeryFastTime)                            // very fast time animation
-    {
-		global.JDay+=global.TimeDirection*MINUTE*60*24;
-        _Sun.computePosition(global.JDay);
-    }*/
-
 	JDay+=time_speed*(double)delta_time/1000.;
-
 }
 
 
@@ -296,9 +300,7 @@ void navigator::update_time(int delta_time)
 void navigator::switch_to_earth_equatorial(void)
 {
 	switch_to_local();
-    // Make the 2 rotations to transform the Altazimuthal system to Equatorial system
-    /*glRotated(90.-global.DeZenith*180./PI,1,0,0);
-    glRotated(global.RaZenith*180./PI,0,1,0);*/
+	glMultMatrixd(mat_local_to_earth_equ);
 }
 
 // Place openGL in heliocentric coordinates
@@ -347,12 +349,11 @@ void navigator::move_to(Vec3d _aim)
 {
 	move.aim=_aim;
     move.aim.normalize();
-    move.aim*=2;
+    move.aim*=2.;
     move.start=equ_vision;
     move.start.normalize();
-    move.speed=0.5;
-    move.coef=0;
-    FlagAutoMove = true;
-    FlagTraking = true;
+    move.speed=0.001;
+    move.coef=0.;
+    flag_auto_move = true;
 }
 

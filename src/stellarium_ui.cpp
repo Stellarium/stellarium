@@ -162,8 +162,8 @@ void BtFlagsOnClicCallBack(guiValue button,Component * bt)
 //                    bt->setActive(global.FlagRealMode);
 //                    Base->setVisible(!global.FlagRealMode);
 //                    break;
-        case 15 :   global.FlagFollowEarth=!global.FlagFollowEarth;
-                    bt->setActive(global.FlagFollowEarth);
+        case 15 :   navigation.set_flag_lock_equ_pos(!navigation.get_flag_lock_equ_pos());
+                    bt->setActive(navigation.get_flag_lock_equ_pos());
                     break;
         case 16 :   global.FlagConfig=!global.FlagConfig;
                     ConfigWin->setVisible(global.FlagConfig);
@@ -310,7 +310,7 @@ void TimeControlBtOnClicCallback(guiValue button,Component * caller)
     }
     if(caller==TimeRW)
     {
-		navigation.set_time_speed(-JD_MINUTE);
+		navigation.set_time_speed(-JD_MINUTE*10.);
     }
     if(caller==TimePause)
     {
@@ -322,7 +322,7 @@ void TimeControlBtOnClicCallback(guiValue button,Component * caller)
     }
     if(caller==TimeF)
     {
-		navigation.set_time_speed(JD_MINUTE);
+		navigation.set_time_speed(JD_MINUTE*10.);
     }
     if(caller==TimeFF)
     {
@@ -332,11 +332,11 @@ void TimeControlBtOnClicCallback(guiValue button,Component * caller)
 
 /**********************************************************************************/
 
-void LatitudeBarOnChangeValue(float value,Component *)
+void LatitudeBarOnChangeValue(float value, Component *)
 {
     navigation.set_latitude(value);
     char tempValueStr[30];
-    sprintf(tempValueStr,"\1 Latitude : %s",get_humanr_location(navigation.get_latitude()));
+    sprintf(tempValueStr,"\1 Latitude : %s",print_angle_dms_stel(navigation.get_latitude()));
     LatitudeLabel->setLabel(tempValueStr);
 	EarthMap->setPointerPosition(vec2_t(EarthMap->getPointerPosition()[0],(value+90.)/180.*EarthMap->getSize()[1]));
 }
@@ -344,7 +344,7 @@ void LongitudeBarOnChangeValue(float value,Component *)
 {
     navigation.set_longitude(value);
     char tempValueStr[30];
-	sprintf(tempValueStr,"\1 Longitude : %s",get_humanr_location(navigation.get_longitude()));
+	sprintf(tempValueStr,"\1 Longitude : %s",print_angle_dms_stel(navigation.get_longitude()));
     LongitudeLabel->setLabel(tempValueStr);
 	EarthMap->setPointerPosition(vec2_t((value+180.)/360.*EarthMap->getSize()[0],EarthMap->getPointerPosition()[1]));
 }
@@ -432,7 +432,7 @@ void initUi(void)
     BtCardinalPoints = new Textured_Button(new s_texture("Bouton8"),pos+=step,btsz,clWhite,clWhite/2,BtFlagsOnClicCallBack,BtFlagsOnMouseOverCallBack,10,global.FlagCardinalPoints);
     BtAtmosphere = new Textured_Button(new s_texture("Bouton9"),pos+=step,btsz,clWhite,clWhite/2,BtFlagsOnClicCallBack,BtFlagsOnMouseOverCallBack,11,global.FlagAtmosphere);
     BtHelp = new Textured_Button(new s_texture("Bouton11"),pos+=step,btsz,clWhite,clWhite/2,BtFlagsOnClicCallBack,BtFlagsOnMouseOverCallBack,13,global.FlagHelp);
-    BtFollowEarth = new Textured_Button(new s_texture("Bouton13"),pos+=step,btsz,clWhite,clWhite/2,BtFlagsOnClicCallBack,BtFlagsOnMouseOverCallBack,15,global.FlagFollowEarth);
+    BtFollowEarth = new Textured_Button(new s_texture("Bouton13"),pos+=step,btsz,clWhite,clWhite/2,BtFlagsOnClicCallBack,BtFlagsOnMouseOverCallBack,15,navigation.get_flag_lock_equ_pos());
     BtConfig = new Textured_Button(new s_texture("Bouton16"),pos+=step,btsz,clWhite,clWhite/2,BtFlagsOnClicCallBack,BtFlagsOnMouseOverCallBack,16,global.FlagConfig);
 
     /*** Button container ***/
@@ -663,7 +663,7 @@ Boston, MA  02111-1307, USA.\n"
 
     LatitudeLabel = new Label("Latitude : ");
     LatitudeLabel->reshape(15,20,20,15);
-	sprintf(tempValueStr,"\1 Latitude : %s",get_humanr_location(navigation.get_latitude()));
+	sprintf(tempValueStr,"\1 Latitude : %s",print_angle_dms_stel(navigation.get_latitude()));
     LatitudeLabel->setLabel(tempValueStr);
 
     LatitudeBar = new CursorBar(vec2_i(15,35), vec2_i(150,10),-90.,90.,
@@ -671,7 +671,7 @@ Boston, MA  02111-1307, USA.\n"
 
     LongitudeLabel = new Label("Longitude : ");
     LongitudeLabel->reshape(15,60,20,15);
-	sprintf(tempValueStr,"\1 Longitude : %s",get_humanr_location(navigation.get_longitude()));
+	sprintf(tempValueStr,"\1 Longitude : %s",print_angle_dms_stel(navigation.get_longitude()));
     LongitudeLabel->setLabel(tempValueStr);
     LongitudeBar = new CursorBar(vec2_i(15,75), vec2_i(150,10),-180,180,
 		navigation.get_longitude(),LongitudeBarOnChangeValue);
@@ -883,14 +883,14 @@ void GuiHandleClic(Uint16 x, Uint16 y, Uint8 state, Uint8 button)
     {   if (state==SDL_RELEASED) return;
         // Deselect the selected object
         if (button==SDL_BUTTON_RIGHT)
-        {   global.FlagSelect=false;
-            global.FlagTraking = false;
+        {
+			selected_object=NULL;
             InfoSelectLabel->setVisible(false);
             return;
         }
         if (button==SDL_BUTTON_MIDDLE)
         {
-			if (global.FlagSelect)
+			if (selected_object)
             {
 				navigation.move_to(selected_object->get_equ_pos());
             }
@@ -900,19 +900,17 @@ void GuiHandleClic(Uint16 x, Uint16 y, Uint8 state, Uint8 button)
         	// CTRL + clic = right clic for 1 button mouse
 			if (SDL_GetModState() & KMOD_CTRL)
 			{
-        		global.FlagSelect=false;
-            	global.FlagTraking = false;
+				selected_object=NULL;
             	InfoSelectLabel->setVisible(false);
             	return;
         	}
         	// Left or middle clic -> selection of an object
             selected_object=find_stel_object((int)x,(int)y);
             // If an object has been found
-            if (global.FlagSelect)
-            {   updateInfoSelectString();
-                if (global.FlagTraking)
-                {   global.FlagTraking = false;
-                }
+            if (selected_object)
+            {
+				updateInfoSelectString();
+				navigation.set_flag_traking(0);
             }
         }
     }
@@ -1009,9 +1007,9 @@ bool GuiHandleKeys(SDLKey key, int state)
         	global.FlagEquator=!global.FlagEquator;
 		}
         if(key==SDLK_t)
-        {	
-        	global.FlagFollowEarth=!global.FlagFollowEarth;
-            BtFollowEarth->setActive(global.FlagFollowEarth);
+        {
+			navigation.set_flag_lock_equ_pos(!navigation.get_flag_lock_equ_pos());
+            BtFollowEarth->setActive(navigation.get_flag_lock_equ_pos());
 		}
         if(key==SDLK_s)
         {	
@@ -1019,7 +1017,7 @@ bool GuiHandleKeys(SDLKey key, int state)
 		}
         if(key==SDLK_SPACE)
         {	
-        	if (global.FlagSelect) navigation.move_to(selected_object->get_equ_pos());
+        	if (selected_object) navigation.move_to(selected_object->get_equ_pos());
 		}
         if(key==SDLK_i)
         {	

@@ -165,9 +165,13 @@ stel_object * find_stel_object(int x, int y)
 	return find_stel_object(v);
 }
 
+void stel_object::get_info_string(char * s)
+{
+	sprintf(s,"No info for this object...");
+}
 
 /*
-char * stel_object::get_info_string(void)
+char * stel_object::get_info_string(char * s)
 {
 	if (type==0)  //Star
     {
