@@ -52,9 +52,10 @@ s_texture::~s_texture()
 
 int s_texture::load()
 {
-    char * fullName = (char*)malloc(sizeof(char)*strlen(CONFIG_DATA_DIR"/textures")+sizeof(char)*strlen(textureName)+6);
-    sprintf(fullName,"%s/%s.png",CONFIG_DATA_DIR"/textures",textureName);
-    //printf("Loading %s\n",fullName);
+    char * fullName = (char*)malloc(sizeof(char)*(strlen("/textures")+strlen(global.TextureDir))+sizeof(char)*strlen(textureName)+6);
+    sprintf(fullName,"%s/%s.png",global.TextureDir,textureName);
+    FILE * tempFile = fopen(fullName,"r");
+    if (!tempFile) printf("WARNING : Can't load texture %s!\n");
     pngInfo info;
     pngSetStandardOrientation(1);
     texID = pngBind(fullName, PNG_NOMIPMAP, loadType, &info, GL_CLAMP, GL_LINEAR, GL_LINEAR);

@@ -66,7 +66,10 @@ int Nebula_mgr::Read(char * fileName)
 	}
 	fclose(fic);
 
-    nebulaFont=new s_font(0.013*global.X_Resolution,"spacefont", DATA_DIR "/spacefont.txt"); // load Font
+    char tempName[255];
+    strcpy(tempName,global.DataDir);
+    strcat(tempName,"spacefont.txt");
+    nebulaFont=new s_font(0.013*global.X_Resolution,"spacefont", tempName); // load Font
     if (!nebulaFont)
     {
 	    printf("Can't create nebulaFont\n");

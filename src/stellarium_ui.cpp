@@ -381,7 +381,10 @@ void SaveLocationOnClicCallback(guiValue button,Component *)
 void initUi(void)
 {   
     /*** fonts ***/
-    spaceFont = new s_font(0.013*global.X_Resolution, "spacefont", DATA_DIR "/spacefont.txt");
+    char tempName[255];
+    strcpy(tempName,global.DataDir);
+    strcat(tempName,"spacefont.txt");
+    spaceFont = new s_font(0.013*global.X_Resolution, "spacefont", tempName);
     if (!spaceFont)
     {
         printf("ERROR WHILE CREATING FONT\n");

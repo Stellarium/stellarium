@@ -48,6 +48,11 @@ typedef struct          // Struct used to store data on the auto mov
 }AutoMove;
 
 typedef struct params{
+    //Files location
+    char TextureDir[255];
+    char ConfigDir[255];
+    char DataDir[255];
+
     // Navigation
     double RaZenith,DeZenith;
     double AzVision,AltVision;

@@ -25,7 +25,9 @@
 #else
 // Assume UNIX compatible by default 
 #   define COMPILER_IS_UNIX_COMPATIBLE 1
-#   define HAVE_STRCASECMP 
+# ifndef HAVE_STRCASECMP
+#   define HAVE_STRCASECMP
+# endif
 #endif
 
 #if defined( WIN32 ) || defined( __CYGWIN__ ) || \
@@ -48,21 +50,20 @@
 #include <string.h>
 #include <ctype.h> 
 
-#if defined( MACOSX )
-#include <OpenGL/gl.h>
-#include <OpenGL/glu.h>
+#ifdef MACOSX
+# include <OpenGL/gl.h>
+# include <OpenGL/glu.h>
 #else
-#include <GL/gl.h>
-#include <GL/glu.h>
+# include <GL/gl.h>
+# include <GL/glu.h>
 #endif
 
 
 #include "stella_types.h"
 #include "s_texture.h"
 
-#define APP_NAME "Stellarium v 0.4.7"
-#define DATA_DIR "data"
-#define TEXTURE_DIR "textures"
+#define APP_NAME "Stellarium v "VERSION
+
 // Conversion in standar Julian time format
 #define SECONDE 0.00001157407407407407407407407407407407407407407
 #define MINUTE 0.00069444444444444444444444444444444444444444444
@@ -72,25 +73,12 @@
 #define myMax(a,b) (((a)>(b))?(a):(b)) 
 #define RAYON 500
 
+// The global structure
 extern stellariumParams global;
 
-
-#if 0
-
-#ifdef STELLARIUM_NO_ASSERT
-#define check_assertion( condition, desc )  /* noop */
-#else
-#define check_assertion( condition, desc ) \
-    if ( condition ) {} else { \
-        fprintf( stderr, "!!! " PROG_NAME " unexpected error [%s:%d]: %s\n", \
-         __FILE__, __LINE__, desc ); \
-        abort(); \
-    }
-#endif
 
 #define code_not_reached() \
     check_assertion( 0, "supposedly unreachable code reached!" )
 
-#endif
 
 #endif /*_STELLARIUM_H_*/
