@@ -285,7 +285,7 @@ void DrawEcliptic(void)
 void DrawFog(float sky_brightness)
 {   
 	glPushMatrix();
-	glColor4f(0.15f+0.2f*sky_brightness, 0.20f+0.2f*sky_brightness, 0.20f+0.2f*sky_brightness,0.0);
+	glColor4f(0.15f+0.2f*sky_brightness, 0.20f+0.2f*sky_brightness, 0.20f+0.2f*sky_brightness,0.5);
 	glEnable(GL_TEXTURE_2D);
 	glEnable(GL_BLEND);
 	glBindTexture(GL_TEXTURE_2D, texIds[3]->getID());

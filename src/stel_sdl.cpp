@@ -48,7 +48,7 @@ void stel_sdl::init(void)
     atexit(SDL_Quit);
 
 	// Might not work TODO check how to handle that
-	SDL_GL_SetAttribute( SDL_GL_DEPTH_SIZE, 24);
+	//SDL_GL_SetAttribute( SDL_GL_DEPTH_SIZE, 24);
 
     // We want a hardware surface
     Vflags = SDL_HWSURFACE|SDL_OPENGL;//|SDL_DOUBLEBUF;
@@ -79,8 +79,6 @@ void stel_sdl::init(void)
 
 	// Hold the value of SDL_GetTicks at the program init (set 0 time)
 	LastCount = SDL_GetTicks();
-
-	glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
 
 }
 

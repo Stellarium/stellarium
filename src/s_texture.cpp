@@ -24,7 +24,7 @@
 char s_texture::texDir[255] = "./";
 char s_texture::suffix[10] = "";
 
-s_texture::s_texture(const char * _textureName) : texID(0), loadType(PNG_BLEND3), loadType2(GL_CLAMP)
+s_texture::s_texture(const char * _textureName) : texID(0), loadType(PNG_BLEND1), loadType2(GL_CLAMP)
 {
     if (!_textureName) exit(-1);
     textureName=strdup(_textureName);
@@ -39,7 +39,7 @@ s_texture::s_texture(const char * _textureName, int _loadType) : texID(0), loadT
         case TEX_LOAD_TYPE_PNG_ALPHA : loadType=PNG_ALPHA; break;
         case TEX_LOAD_TYPE_PNG_SOLID : loadType=PNG_SOLID; break;
         case TEX_LOAD_TYPE_PNG_BLEND3: loadType=PNG_BLEND1; break;
-        case TEX_LOAD_TYPE_PNG_REPEAT: loadType=PNG_BLEND3; loadType2=GL_REPEAT; break;
+        case TEX_LOAD_TYPE_PNG_REPEAT: loadType=PNG_BLEND1; loadType2=GL_REPEAT; break;
         default : loadType=PNG_BLEND3;
     }
     texID=0;

@@ -97,8 +97,7 @@ void stel_ui::init(void)
 	baseTex = new s_texture("backmenu");
 
 	// Set default Painter
-	Painter p(baseTex, spaceFont, s_color(core->GuiBaseColor[0],core->GuiBaseColor[1],
-		core->GuiBaseColor[2],0.1), core->GuiTextColor);
+	Painter p(baseTex, spaceFont, core->GuiBaseColor, core->GuiTextColor);
 	Component::setDefaultPainter(p);
 
 	Component::initScissor(core->screen_W, core->screen_H);
@@ -112,7 +111,7 @@ void stel_ui::init(void)
 
 	// Info on selected object
 	info_select_ctr = new FilledContainer();
-	info_select_ctr->reshape(0,13,300,80);
+	info_select_ctr->reshape(0,15,300,80);
     info_select_txtlbl = new TextLabel("Info");
     info_select_txtlbl->reshape(5,5,290,78);
     info_select_ctr->setVisible(0);
@@ -479,7 +478,7 @@ int stel_ui::handle_keys(SDLKey key, S_GUI_VALUE state)
 		}
         if(key==SDLK_p)
         {	
-        	core->FlagPlanetsHintDrawing=!core->FlagPlanetsHintDrawing;
+        	core->FlagPlanetsHints=!core->FlagPlanetsHints;
 		}
         if(key==SDLK_v)
         {
