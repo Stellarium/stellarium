@@ -269,6 +269,7 @@ void ToggleStarNameOnClicCallback(guiValue button,Component *)
 void ToggleGroundOnClicCallback(guiValue button,Component *)
 {   
     global.FlagGround=!global.FlagGround;
+    BtGround->setActive(global.FlagGround);
 }
 
 void ToggleFogOnClicCallback(guiValue button,Component *)
@@ -277,11 +278,14 @@ void ToggleFogOnClicCallback(guiValue button,Component *)
 }
 
 void ToggleAtmosphereOnClicCallback(guiValue button,Component *)
-{   global.FlagAtmosphere=!global.FlagAtmosphere;
+{   
+	global.FlagAtmosphere=!global.FlagAtmosphere;
+    BtAtmosphere->setActive(global.FlagAtmosphere);
 }
 
 void ToggleMilkyWayOnClicCallback(guiValue button,Component *)
-{   global.FlagMilkyWay=!global.FlagMilkyWay;
+{   
+	global.FlagMilkyWay=!global.FlagMilkyWay;
 }
 
 /*******************************************************************************/
@@ -463,8 +467,10 @@ void initUi(void)
     HelpTextLabel = new TextLabel(
         "4 Directions : Deplacement RA/DE\n\
 Page Up/Down : Zoom\n\
+CTRL + Up/Down : Zoom\n\
 Left Mouse Clic : Select Star\n\
 Right Mouse Clic  : Clear Pointer\n\
+CTRL + Left Mouse Clic  : Clear Pointer\n\
 SPACE or Middle Mouse Clic:\n\
      Center On Selected Object\n\
 C   : Drawing of the Constellations\n\
@@ -685,7 +691,7 @@ Boston, MA  02111-1307, USA.\n"
 
     yt=3;
 
-    LocationLabel = new Label("L0CATION :");
+    LocationLabel = new Label("LOCATION :");
     LocationLabel->reshape(vec2_i(3,yt), vec2_i(10*avgCharLen,lineHeight));
     yt+=(int)(1.6*lineHeight); 
 
@@ -776,18 +782,18 @@ Boston, MA  02111-1307, USA.\n"
     TimePause = new Labeled_Button("\4");
     TimePause->reshape(btXSize*2+2,0,btXSize,btYSize);
     TimePause->setOnClicCallback(TimeControlBtOnClicCallback);
-    TimeNow = new Labeled_Button("N");
-    TimeNow->reshape(btXSize*3+3,0,btXSize,btYSize);
-    TimeNow->setOnClicCallback(TimeControlBtOnClicCallback);
     TimeReal = new Labeled_Button("\5");
-    TimeReal->reshape(btXSize*4+4,0,btXSize,btYSize);
+    TimeReal->reshape(btXSize*3+3,0,btXSize,btYSize);
     TimeReal->setOnClicCallback(TimeControlBtOnClicCallback);
     TimeF = new Labeled_Button("\3");
-    TimeF->reshape(btXSize*5+5,0,btXSize,btYSize);
+    TimeF->reshape(btXSize*4+4,0,btXSize,btYSize);
     TimeF->setOnClicCallback(TimeControlBtOnClicCallback);
     TimeFF = new Labeled_Button("\3\3");
-    TimeFF->reshape(btXSize*6+6,0,btXSize,btYSize);
+    TimeFF->reshape(btXSize*5+5,0,btXSize,btYSize);
     TimeFF->setOnClicCallback(TimeControlBtOnClicCallback);
+    TimeNow = new Labeled_Button("N");
+    TimeNow->reshape(btXSize*6+6,0,btXSize,btYSize);
+    TimeNow->setOnClicCallback(TimeControlBtOnClicCallback);
 
     TimeControlWin->reshape(vec2_i(gc->winW-1-TimeControlWin->getSize()[0], gc->winH-TimeControlWin->getSize()[1]),TimeControlWin->getSize());
 
@@ -937,8 +943,8 @@ void updateInfoSelectString(void)
     if (global.SelectedObject.type==0)  //Star
     {   glColor3f(0.4f,0.7f,0.3f);
         sprintf(objectInfo,"Info : %s\nName :%s\nHip : %.4d\nRA  : %.2dh %.2dm %.2fs\nDE  : %.2fdeg\nMag : %.2f",
-            global.SelectedObject.CommonName,
-            global.SelectedObject.Name,
+            global.SelectedObject.CommonName==NULL ? "-" : global.SelectedObject.CommonName,
+            global.SelectedObject.Name==NULL ? "-" : global.SelectedObject.Name,
             global.SelectedObject.HR,
             global.SelectedObject.RAh,global.SelectedObject.RAm,global.SelectedObject.RAs,
             global.SelectedObject.DE*180/PI,
@@ -1124,13 +1130,6 @@ void HandleNormalKey(unsigned char key, int state)
                         break;
             case 'S' :
             case 's' :  global.FlagStars=!global.FlagStars;
-                        break;
-
-            case '+' :  global.SkyBrightness+=0.1;
-                        if (global.SkyBrightness>1) global.SkyBrightness=1;
-                        break;
-            case '-' : global.SkyBrightness-=0.1;
-                        if (global.SkyBrightness<0) global.SkyBrightness=0;
                         break;
 
             case ' ' :  if (global.FlagSelect) Move_To(global.SelectedObject.XYZ);

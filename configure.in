@@ -1,7 +1,7 @@
 dnl Enable CYGWIN/MACOSX/POSIX support
 dnl Process this file with autoconf to produce a configure script.
 AC_INIT(src/main.cpp)
-AM_INIT_AUTOMAKE(stellarium,0.5.0)
+AM_INIT_AUTOMAKE(stellarium,0.5.1b)
 
 dnl Check system type
 AC_CANONICAL_HOST
