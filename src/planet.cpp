@@ -199,7 +199,7 @@ void planet::draw(void)
 			glEnable(GL_TEXTURE_2D);
             glColor3f(0.5,0.5,0.7);
             float tmp = 10.;//radius/navigation.get_fov();
-            planet_name_font->print((int)(screenX+tmp),(int)(screenY+tmp), name);
+            planet_name_font->print(screenX+tmp,screenY+tmp, name);
 
             // Draw the circle
 			glDisable(GL_TEXTURE_2D);
@@ -308,6 +308,7 @@ void sun_planet::compute_trans_matrix(double date)
 void sun_planet::draw()
 {
 	// We are supposed to be in heliocentric coordinate already so no matrix change
+	glEnable(GL_DEPTH_TEST);
 
     glEnable(GL_TEXTURE_2D);
 	glEnable(GL_CULL_FACE);
@@ -336,7 +337,7 @@ void sun_planet::draw()
             setOrthographicProjection(global.X_Resolution, global.Y_Resolution);    // 2D coordinate
 
             glColor3f(0.5,0.5,0.7);
-            planet_name_font->print((int)(screenX+5.),(int)(screenY+5.), name);
+            planet_name_font->print(screenX+5.,screenY+5., name);
 
             // Draw the circle
 			glDisable(GL_TEXTURE_2D);
@@ -382,27 +383,50 @@ void sun_planet::draw()
 
 	glDisable(GL_LIGHTING);
     glDisable(GL_CULL_FACE);
+	glDisable(GL_DEPTH_TEST);
+}
+
+
+
+ring_planet::ring_planet(char * _name, int _flagHalo, double _radius, vec3_t _color, s_texture * _planetTexture, s_texture * _haloTexture, void (*_coord_func)(double JD, double *, double *, double *), ring * _planet_ring) : planet(_name, _flagHalo, _radius, _color, _planetTexture, _haloTexture, _coord_func), planet_ring(_planet_ring)
+{
+}
+
+void ring_planet::draw()
+{
+	planet::draw();
+
+	glPushMatrix();
+    glMultMatrixd(mat_local_to_parent); // Go in planet local coordinate
+	glPushMatrix();
+	glRotatef(axis_rotation + 180.,0.,0.,1.);
+	planet_ring->draw();
+	glPopMatrix();
+	glPopMatrix();
+}
+
+ring::ring(float _radius, s_texture * _tex) : radius(_radius), tex(_tex)
+{
+}
+
+void ring::draw()
+{
+	glColor3f(1.0f, 0.88f, 0.82f); // For saturn only..
+    glEnable(GL_TEXTURE_2D);
+	glDisable(GL_CULL_FACE);
+	glEnable(GL_BLEND);
+	glDisable(GL_LIGHTING);
+    glBindTexture (GL_TEXTURE_2D, tex->getID());
+	glBegin(GL_QUADS);
+		glTexCoord2f(0,0); glVertex3d( radius,-radius, 0.);	// Bottom left
+		glTexCoord2f(1,0); glVertex3d( radius, radius, 0.);	// Bottom right
+		glTexCoord2f(1,1); glVertex3d(-radius, radius, 0.);	// Top right
+		glTexCoord2f(0,1); glVertex3d(-radius,-radius, 0.);	// Top left
+	glEnd ();
+
 }
 
 	/*
-// Draw the planet (with special cases for saturn rings, sun, moon, etc..)
-void Planet::Draw(vec3_t coordLight)
-{
-    glPushMatrix();
-    glEnable(GL_TEXTURE_2D);
-
-    vec3_t normGeoCoord=GeoCoord;
-    normGeoCoord.Normalize();
-    glTranslatef(normGeoCoord[0]*DIST_PLANET,normGeoCoord[1]*DIST_PLANET,normGeoCoord[2]*DIST_PLANET);
-
-
-    //Light
-    vec3_t posSun = coordLight-GeoCoord;
-    posSun.Normalize();
-
-    float posLight[4] = {10000*posSun[0],10000*posSun[1],10000*posSun[2]};
-    glLightfv(GL_LIGHT1,GL_POSITION,posLight);
-
     float rmag;
     if (num==0)                                                                     // Sun
     {   glBindTexture (GL_TEXTURE_2D, texIds[48]->getID());
