@@ -991,7 +991,8 @@ void renderUi()
 
 /*******************************************************************************/
 void GuiHandleMove(Uint16 x, Uint16 y)
-{   Base->handleMouseMove((int)x, (int)y);
+{   
+	Base->handleMouseMove((int)x, (int)y);
 }
 
 /*******************************************************************************/
