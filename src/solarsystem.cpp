@@ -44,7 +44,7 @@ void InitSolarSystem(void)
     char tempName[255];
     strcpy(tempName,global.DataDir);
     strcat(tempName,"spacefont.txt");
-    planet_name_font = new s_font(0.014*global.X_Resolution,"spacefont", tempName);
+    planet_name_font = new s_font(13,"spacefont", tempName);
     if (!planet_name_font)
     {
 	    printf("Can't create planet_name_font\n");

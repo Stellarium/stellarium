@@ -96,9 +96,10 @@ void Draw(int delta_time)
 		HipVouteCeleste->Draw();    // Draw the stars
     }
 
+	glColor3f(1,1,1);
+	Vec3d temp=navigation.get_equ_vision();
+	DrawPoint(temp[0],temp[1],temp[2]);
 
-    if (global.FlagPlanets || global.FlagPlanetsHintDrawing)
-		Sun->draw();		// Draw the planets
     if (global.FlagAtmosphere && global.SkyBrightness>0)
 		DrawAtmosphere2();	// Draw the atmosphere
 
@@ -115,7 +116,7 @@ void Draw(int delta_time)
     if (selected_object) selected_object->draw_pointer(delta_time);			// Draw the pointer
 
 	navigation.switch_to_heliocentric();
-	Sun->draw();
+	if (global.FlagPlanets || global.FlagPlanetsHintDrawing) Sun->draw();
 
 	// Set openGL drawings in local coordinates i.e. generally altazimuthal coordinates
 	navigation.switch_to_local();
