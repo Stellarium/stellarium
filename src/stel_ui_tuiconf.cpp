@@ -22,10 +22,10 @@
 #include <iostream>
 #include <fstream>
 #include <iomanip>
-#include <map>
 #include <string>
 #include "stel_ui.h"
 #include "stellastro.h"
+#include "sky_localizer.h"
 
 // Draw simple gravity text ui.
 void stel_ui::draw_gravity_ui(void)
@@ -131,15 +131,12 @@ void stel_ui::init_tui(void)
 
 	// sky culture goes here
 	tui_general_sky_culture = new s_tui::MultiSet_item<string>("3.1 Sky Culture: ");
-	// temporary - get list from sky localization object
-	tui_general_sky_culture->addItemList("western\npolynesian");
+	tui_general_sky_culture->addItemList(core->skyloc->get_sky_culture_list());  // human readable names
 	tui_general_sky_culture->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb_tui_general_change_sky_culture));
 	tui_menu_general->addComponent(tui_general_sky_culture);
 
 	tui_general_sky_locale = new s_tui::MultiSet_item<string>("3.2 Sky Language: ");
-	// temporary - get list from sky localization object
-	//	tui_general_sky_locale->addItemList("eng\nesl\nfra\nhaw");
-	tui_general_sky_locale->addItemList("English\nSpanish\nFrench\nHawaiian");
+	tui_general_sky_locale->addItemList(core->skyloc->get_sky_locale_list());  // human readable names
 
 	tui_general_sky_locale->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb_tui_general_change_sky_locale));
 	tui_menu_general->addComponent(tui_general_sky_locale);
@@ -269,16 +266,8 @@ void stel_ui::tui_update_widgets(void)
 	tui_time_displayformat->setCurrent(core->observatory->get_time_format_str());
 
 	// 3. general
-	tui_general_sky_culture->setValue(core->SkyCulture);
-
-	// this should be defined elsewhere
-	typedef std::map< std::string, std::string > stringHash_t;
-	stringHash_t locale_name;
-	locale_name["eng"] = "English";
-	locale_name["esl"] = "Spanish";
-	locale_name["fra"]  = "French";
-	locale_name["haw"]  = "Hawaiian";
-	tui_general_sky_locale->setValue(locale_name[core->SkyLocale]);
+	tui_general_sky_culture->setValue(core->skyloc->convert_directory_to_sky_culture(core->SkyCulture));
+	tui_general_sky_locale->setValue(core->skyloc->convert_locale_to_name(core->SkyLocale));  // human readable names
 
 	// 4. Stars
 	tui_stars_show->setValue(core->FlagStars);
@@ -359,38 +348,15 @@ void stel_ui::tui_cb_tui_effect_change_landscape(void)
 // Set a new sky culture
 void stel_ui::tui_cb_tui_general_change_sky_culture(void) {
 
-        // percent complete bar only draws in 2d mode
-        core->projection->set_orthographic_projection();
-	core->asterisms->set_sky_culture(tui_general_sky_culture->getCurrent(), core->DataDir + "spacefont.txt", core->screen_W/2-150, core->screen_H/2-20);
-	core->projection->reset_perspective_projection();
+  core->set_sky_culture(core->skyloc->convert_sky_culture_to_directory(tui_general_sky_culture->getCurrent()));
 
-	// as constellations have changed, clear out any selection and retest for match!
-	if (core->selected_object && core->selected_object->get_type()==STEL_OBJECT_STAR) {
-	  core->selected_constellation=core->asterisms->is_star_in((Hip_Star*)core->selected_object);
-	} else {
-	  core->selected_constellation=NULL;
-	}
-
-	core->SkyCulture = tui_general_sky_culture->getCurrent();  // assuming above worked...
 }
 
 // Set a new sky locale
 void stel_ui::tui_cb_tui_general_change_sky_locale(void) {
 
-  typedef std::map< std::string, std::string > stringHash_t;
-  stringHash_t locale_name;
-  locale_name["English"] = "eng";
-  locale_name["Spanish"] = "esl";
-  locale_name["French"]  = "fra";
-  locale_name["Hawaiian"]  = "haw";
-
-  string locale = locale_name[tui_general_sky_locale->getCurrent()];
-
-  core->hip_stars->set_sky_locale(locale);
-  core->ssystem->set_sky_locale(locale);
-  core->asterisms->set_sky_locale(locale);
-
-  core->SkyLocale = locale;
+  string locale = core->skyloc->convert_name_to_locale(tui_general_sky_locale->getCurrent());
+  core->set_sky_locale(locale);
 }
 
 
