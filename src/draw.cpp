@@ -43,7 +43,7 @@ static    GLdouble objx[1];
 static    GLdouble objy[1];
 static    GLdouble objz[1];
 static    GLint V[4];
-BRIGHTNESS_DATA b;
+brightness_data b;
 
 
 // precalculation of the grid points
