@@ -42,7 +42,8 @@ public:
 private:
 	skylight sky;
 	int sky_resolution;
-	Vec3f ** tab_sky;                           // For Atmosphere calculation
+	Vec3f ** tab_sky;	// For Atmosphere calculation
+	int startY;			// intern variable used to store the Horizon Y screen value
 };
 
 #endif // _STEL_ATMOSTPHERE_H_

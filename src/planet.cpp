@@ -291,7 +291,6 @@ planet* planet::search(Vec3d pos, double * angleClosest, navigator * nav)
 	{
 		*angleClosest = angleClos;
 	}
-
     // Compute for the satellites
     list<planet*>::iterator iter = satellites.begin();
     while (iter != satellites.end())
