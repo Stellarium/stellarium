@@ -758,7 +758,7 @@ template<class T> Matrix4<T> Matrix4<T>::translation(const Vector3<T>& a)
 						0, 0, 1, 0,
 						a.v[0], a.v[1], a.v[2], 1);
 }
-
+/*
 template<class T> Matrix4<T> Matrix4<T>::rotation(const Vector3<T>& a)
 {
     T c = (T) cos(angle);
@@ -769,7 +769,7 @@ template<class T> Matrix4<T> Matrix4<T>::rotation(const Vector3<T>& a)
 						a.v[0]*a.v[2]*d+a.v[1]*s, a.v[1]*a.v[2]*d-a.v[0]*s, a.v[2]*a.v[2]*d+c, 0,
 						0,0,0,1	);
 }
-
+*/
 template<class T> Matrix4<T> Matrix4<T>::xrotation(T angle)
 {
     T c = (T) cos(angle);

@@ -204,7 +204,7 @@ struct Selector<false> {
 template<bool Condition, class Then, class Else>
 struct IF {
    typedef typename Selector<Condition>::RET select;
-   typedef typename select::Result<Then,Else>::RET RET;
+   typedef typename boost::details::Selector<Condition>::RET::template Result<Then,Else>::RET RET;
 };
 
 

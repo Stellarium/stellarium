@@ -36,6 +36,17 @@ LIBS="$LIBS $X_LIBS"
 CFLAGS="$CFLAGS $X_CFLAGS"
 
 dnl Check for SDL
+case "$host" in
+*-*-darwin*)
+SDL_VERSION=1.2.0
+AM_PATH_SDL($SDL_VERSION,
+           	:,
+           	AC_MSG_ERROR([*** SDL version $SDL_VERSION not found!])
+)
+;;
+
+dnl Other systems
+*)
 SDL_VERSION=1.2.0
 AM_PATH_SDL($SDL_VERSION,
            	:,
@@ -44,16 +55,24 @@ AM_PATH_SDL($SDL_VERSION,
 CFLAGS="$CFLAGS $SDL_CFLAGS"
 CXXFLAGS="$CXXFLAGS $SDL_CFLAGS"
 LIBS="$LIBS $SDL_LIBS"
-
+;;
+esac
 
 AC_CHECK_HEADERS(byteswap.h)
 
-
 dnl assign the package directory variable
+case "$host" in
+*-*-darwin*)
+PKGDATADIR="Stellarium.app/Contents/Resources"
+;;
+*)
 if test "$prefix" = "NONE" ; then
    prefix=$ac_default_prefix
 fi
 PKGDATADIR=`eval echo "${datadir}/$PACKAGE"`
+;;
+esac
+
 AC_DEFINE_UNQUOTED(CONFIG_DATA_DIR, "$PKGDATADIR", [Set the directory where the datas (as textures or star catalogs) are stored.])
 
 
