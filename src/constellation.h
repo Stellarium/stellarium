@@ -25,7 +25,6 @@
 #include "stel_utility.h"
 #include "s_font.h"
 
-#define MAX_ART_INTENSITY 1.0
 
 class Constellation
 {
@@ -59,6 +58,8 @@ private:
 	Vec3d art_vertex[9];
 	bool art_on;
 	float art_intensity;
+	static float max_art_intensity;
+	static float art_fade_duration;
 };
 
 #endif // _CONSTELLATION_H_

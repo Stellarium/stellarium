@@ -43,6 +43,8 @@ public:
     Constellation* is_star_in(const Hip_Star *) const;
     Constellation* find_from_short_name(const string& shortname) const;
     void set_sky_locale(const string& _sky_locale);
+    void set_art_fade_duration(float duration);
+    void set_art_intensity(float intensity);
 
 private:
 
