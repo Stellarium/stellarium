@@ -496,6 +496,7 @@ int stel_ui::handle_clic(Uint16 x, Uint16 y, Uint8 button, Uint8 state)
 	return 0;
 }
 
+
 /*******************************************************************************/
 int stel_ui::handle_keys(SDLKey key, S_GUI_VALUE state)
 {
