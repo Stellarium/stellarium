@@ -732,11 +732,11 @@ Boston, MA  02111-1307, USA.\n"
     yt+=(int)(1.6*lineHeight); 
 
     TimeZoneLabel = new Label("TimeZone : ");
-    TimeZoneLabel->reshape(vec2_i(15,yt), vec2_i(12*avgCharLen,lineHeight));
+    TimeZoneLabel->reshape(15,yt, 12*avgCharLen,lineHeight);
     sprintf(tempValueStr,"\1 TimeZone : %d",global.TimeZone);
     TimeZoneLabel->setLabel(tempValueStr);
     yt+=(int)(1.3*lineHeight);
-    TimeZoneBar = new CursorBar(vec2_i(2*avgCharLen,yt), vec2_i(25*avgCharLen,10),-12.,12.,global.TimeZone,TimeZoneBarOnChangeValue);
+    TimeZoneBar = new CursorBar(vec2_i(2*avgCharLen,yt), vec2_i(25*avgCharLen,10),-12.,13.,global.TimeZone,TimeZoneBarOnChangeValue);
     
     yt+=(int)(1.6*lineHeight); 
 
