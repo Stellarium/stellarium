@@ -20,16 +20,16 @@ max_mag_star_name              = 1.5
 flag_star_twinkle              = true
 
 [gui]
-flag_show_topbar               = false
-flag_show_date                 = true
-flag_show_time                 = true
-flag_show_fov                  = true
-flag_show_appname              = true
 flag_show_fps                  = true
 flag_menu                      = false
 flag_help                      = false
 flag_infos                     = false
-flag_show_selected_object_info = true
+flag_show_topbar               = false
+flag_show_time                 = true
+flag_show_date                 = true
+flag_show_appname              = true
+flag_show_fov                  = true
+flag_show_selected_object_info = false
 gui_base_color                 = 0.3,0.4,0.7
 gui_text_color                 = 0.7,0.8,0.9
 
@@ -39,17 +39,16 @@ flag_show_tui_datetime         = true
 flag_show_tui_short_obj_info   = true
 
 [navigation]
+preset_sky_time                = 2.45154e+06
 startup_time_mode              = actual
 flag_enable_zoom_keys          = true
 flag_enable_move_keys          = true
 init_fov                       = 180
-init_view_pos                  = 0.0001,0.,1.
-auto_move_duration             = 1.
-preset_sky_time                = 2451545.
+init_view_pos                  = 1e-04,0,1
+auto_move_duration             = 1
 flag_utc_time                  = false
 
 [landscape]
-landscape_name                 = sea
 flag_ground                    = true
 flag_horizon                   = true
 flag_fog                       = true
@@ -67,7 +66,7 @@ flag_ecliptic_line             = false
 flag_cardinal_points           = true
 flag_gravity_labels            = true
 flag_init_moon_scaled          = true
-moon_scale                     = 4.
+moon_scale                     = 4
 constellation_culture          = Occidental
 
 [astro]
@@ -80,11 +79,12 @@ flag_nebula_name               = false
 flag_milky_way                 = true
 
 [init_location]
-name	= Guereins
-latitude	= +46º15'0.00"
-longitude = +05º00'-0.00"
-altitude = 83
-landscape_name = sea
-time_zone = system_default
-time_display_format       = system_default
-date_display_format       = system_default
+name                           = Guereins
+latitude                       = +46º15'0.00"
+longitude                      = +05º00'-0.00"
+altitude                       = 83
+landscape_name                 = sea
+time_zone                      = system_default
+time_display_format            = system_default
+date_display_format            = system_default
+

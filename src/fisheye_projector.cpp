@@ -193,8 +193,10 @@ const Mat4d& mat, int orient_inside) const
 	GLfloat z, nsign;
 	GLint i, j;
 
-	if (orient_inside) nsign = -1.0;
-	else nsign = 1.0;
+	nsign = 1.0;
+	if (orient_inside) glCullFace(GL_FRONT);
+	//nsign = -1.0;
+	//else nsign = 1.0;
 
 	da = 2.0 * M_PI / slices;
 	dz = height / stacks;
@@ -223,10 +225,10 @@ const Mat4d& mat, int orient_inside) const
 		}
 		glNormal3f(x * nsign, y * nsign, 0);
 		glTexCoord2f(s, t);
-		sVertex3(x * r, y * r, z + dz, mat);
+		sVertex3(x * r, y * r, z, mat);
 		glNormal3f(x * nsign, y * nsign, 0);
 		glTexCoord2f(s, t + dt);
-		sVertex3(x * r, y * r, z, mat);
+		sVertex3(x * r, y * r, z + dz, mat);
 		s += ds;
 	}			/* for slices */
 	glEnd();
@@ -234,6 +236,6 @@ const Mat4d& mat, int orient_inside) const
 	z += dz;
 	}				/* for stacks */
 
-
 	glPopMatrix();
+	if (orient_inside) glCullFace(GL_BACK);
 }

@@ -110,8 +110,8 @@ void stel_atmosphere::compute_color(double JD, Vec3d sunPos, Vec3d moonPos, floa
 
 			// Use the skybright.cpp 's models for brightness which gives better results.
 			b2.color[2] = skyb.get_luminance(moon_pos[0]*b2.pos[0]+moon_pos[1]*b2.pos[1]+
-					moon_pos[2]*b2.pos[2] - 0.00000001, sun_pos[0]*b2.pos[0]+sun_pos[1]*b2.pos[1]+
-					sun_pos[2]*b2.pos[2] - 0.00000001, b2.pos[2]);
+					moon_pos[2]*b2.pos[2] - 0.0000001, sun_pos[0]*b2.pos[0]+sun_pos[1]*b2.pos[1]+
+					sun_pos[2]*b2.pos[2] - 0.0000001, b2.pos[2]);
 
 
 			sum_lum+=b2.color[2];
@@ -134,7 +134,7 @@ void stel_atmosphere::compute_color(double JD, Vec3d sunPos, Vec3d moonPos, floa
 void stel_atmosphere::draw(Projector* prj)
 {
 	glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_COLOR);
-	
+
 	float stepX = (float)prj->viewW() / sky_resolution;
 	float stepY = (float)prj->viewH() / sky_resolution;
 	float viewport_left = (float)prj->view_left();
@@ -143,10 +143,10 @@ void stel_atmosphere::draw(Projector* prj)
 	glDisable(GL_TEXTURE_2D);
 	glEnable(GL_BLEND);
 	prj->set_orthographic_projection();	// set 2D coordinate
-	for (int y2=0; y2<sky_resolution; y2++)
+	for (int y2=0; y2<sky_resolution; ++y2)
 	{
 		glBegin(GL_TRIANGLE_STRIP);
-			for(int x2=0; x2<sky_resolution+1; x2++)
+			for(int x2=0; x2<sky_resolution+1; ++x2)
 			{
 				glColor3f(tab_sky[x2][y2][0],tab_sky[x2][y2][1],tab_sky[x2][y2][2]);
 				glVertex2i((int)(viewport_left+x2*stepX),(int)(view_bottom+y2*stepY));

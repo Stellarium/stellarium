@@ -16,7 +16,7 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-// Class which parse an init file
+// Class which parses an init file
 // C++ warper for the iniparser free library from N.Devillard
 
 #ifndef _INIT_PARSER_H_
@@ -74,6 +74,10 @@ public:
 	int find_entry(const string& entry) const;	// Return 1 if the entry exists, 0 otherwise
 
 private:
+	// Check if the key is in the form section:key and if yes create the section in the dictionnary
+	// if it doesn't exist.
+	void make_section_from_key(const string& key);
+
 	void free_dico(void);	// Unalloc memory
 	dictionary * dico;		// The dictionnary containing the parsed data
 };

@@ -34,7 +34,7 @@ rotation_elements::rotation_elements() : period(1.), offset(0.), epoch(J2000),
 planet::planet(const string& _name, int _flagHalo, int _flag_lighting, double _radius, Vec3f _color,
 	float _albedo, const string& tex_map_name, const string& tex_halo_name, pos_func_type _coord_func) :
 		name(_name), flagHalo(_flagHalo), flag_lighting(_flag_lighting), radius(_radius), color(_color),
-		albedo(_albedo), axis_rotation(0.),	tex_map(NULL), tex_halo(NULL), rings(NULL), sphere_scale(1.f),
+		albedo(_albedo), axis_rotation(0.),	tex_map(NULL), tex_halo(NULL), tex_big_halo(NULL), rings(NULL), sphere_scale(1.f),
 		lastJD(J2000), deltaJD(JD_SECOND), coord_func(_coord_func), parent(NULL)
 {
 	ecliptic_pos=Vec3d(0.,0.,0.);
@@ -52,6 +52,8 @@ planet::~planet()
 	tex_halo = NULL;
 	if (rings) delete rings;
 	rings = NULL;
+	if (tex_big_halo) delete tex_big_halo;
+	tex_big_halo = NULL;
 }
 
 // Return the information string "ready to print" :)
@@ -211,6 +213,11 @@ void planet::add_satellite(planet*p)
 	p->parent=this;
 }
 
+void planet::set_big_halo(const string& halotexfile)
+{
+	tex_big_halo = new s_texture(halotexfile, TEX_LOAD_TYPE_PNG_SOLID);
+}
+
 // Return the radius of a circle containing the object on screen
 float planet::get_on_screen_size(const navigator * nav, const Projector* prj)
 {
@@ -270,6 +277,7 @@ void planet::draw(int hint_ON, Projector* prj, const navigator * nav, const tone
 		else draw_sphere(prj, mat, screen_sz);
 
 		if (tex_halo) draw_halo(nav, prj, eye);
+		if (tex_big_halo) draw_big_halo(nav, prj, eye);
     }
 
 	glPopMatrix();
@@ -288,7 +296,7 @@ void planet::draw_hints(const navigator* nav, const Projector* prj)
 	if (sphere_scale == 1.f) sprintf(scale_str,"%s", name.c_str());
 	else sprintf(scale_str,"%s (x%.1f)", name.c_str(), sphere_scale);
 	float tmp = 10.f + get_on_screen_size(nav, prj)/2.f; // Shift for name printing
-	gravity_label ? prj->print_gravity(planet_name_font, screenPos[0],screenPos[1], scale_str, tmp, tmp) :
+	gravity_label ? prj->print_gravity180(planet_name_font, screenPos[0],screenPos[1], scale_str, tmp, tmp) :
 		planet_name_font->print(screenPos[0]+tmp,screenPos[1]+tmp, scale_str);
 
 	// hint disapears smoothly on close view
@@ -312,7 +320,7 @@ void planet::draw_sphere(const Projector* prj, const Mat4d& mat, float screen_sz
 {
 	// Adapt the number of facets according with the size of the sphere for optimization
 	int nb_facet = (int)(screen_sz * 40/50);	// 40 facets for 1024 pixels diameter on screen
-	if (nb_facet<4) return;
+	if (nb_facet<10) nb_facet = 10;
 	if (nb_facet>40) nb_facet = 40;
 
     glEnable(GL_TEXTURE_2D);
@@ -388,6 +396,35 @@ void planet::draw_halo(const navigator* nav, const Projector* prj, const tone_re
 	prj->reset_perspective_projection();		// Restore the other coordinate
 }
 
+void planet::draw_big_halo(const navigator* nav, const Projector* prj, const tone_reproductor* eye)
+{
+	glBlendFunc(GL_ONE, GL_ONE);
+	float screen_r = get_on_screen_size(nav, prj);
+
+	float rmag = big_halo_size/2;
+
+	float cmag = rmag/screen_r;
+	if (cmag>1.f) cmag = 1.f;
+
+	if (rmag<screen_r) rmag = screen_r;
+
+	prj->set_orthographic_projection();    	// 2D coordinate
+
+	glBindTexture(GL_TEXTURE_2D, tex_big_halo->getID());
+	glEnable(GL_BLEND);
+	glDisable(GL_LIGHTING);
+	glEnable(GL_TEXTURE_2D);
+	glColor3f(color[0]*cmag, color[1]*cmag, color[2]*cmag);
+	glTranslatef(screenPos[0], screenPos[1], 0.f);
+	glBegin(GL_QUADS);
+		glTexCoord2i(0,0);	glVertex3f(-rmag, rmag,0.f);	// Bottom Left
+		glTexCoord2i(1,0);	glVertex3f( rmag, rmag,0.f);	// Bottom Right
+		glTexCoord2i(1,1);	glVertex3f( rmag,-rmag,0.f);	// Top Right
+		glTexCoord2i(0,1);	glVertex3f(-rmag,-rmag,0.f);	// Top Left
+	glEnd();
+
+	prj->reset_perspective_projection();		// Restore the other coordinate
+}
 
 ring::ring(float _radius, const string& _texname) : radius(_radius), tex(NULL)
 {
