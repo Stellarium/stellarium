@@ -73,7 +73,8 @@ Component::Component() :
         clicCallback(NULL),
         moveCallback(NULL),
         mouseIn(false),
-        active(true)
+        active(true),
+        focus(false),
 {
 }
 
@@ -121,6 +122,11 @@ void Component::setMoveCallback(void (*_moveCallback)(int, int, enum guiValue, C
     moveCallback = _moveCallback;
 }
 
+void Component::setKeyCallback(int (*_keyCallback)(SDLKey key, int state, Component *))
+{
+    keyCallback = _keyCallback;
+}
+
 /**** Container ****/
 
 void containerClicCallBack(int x, int y, enum guiValue state, enum guiValue button, Component * caller)
@@ -133,10 +139,16 @@ void containerMoveCallBack(int x, int y, enum guiValue, Component * caller)
     ((Container *)caller)->handleMouseMove((int)(x - caller->getPosition()[0]), (int)(y - caller->getPosition()[1]));
 }
 
+int containerKeyCallBack(SDLKey key, int state, Component * caller)
+{
+    return ((Container *)caller)->handleKey(key, state);
+}
+
 Container::Container() : Component()
 {
     setClicCallback(containerClicCallBack);
     setMoveCallback(containerMoveCallBack);
+    setKeyCallback(containerKeyCallBack);
 }
 
 Container::~Container()
@@ -234,6 +246,20 @@ void Container::handleMouseMove(int x, int y)
         }
         iter++;
     }
+}
+
+int Container::handleKey(SDLKey key,int state)
+{
+    vector<Component*>::iterator iter = components.begin();
+    while (iter != components.end())
+    {
+        if ((*iter)->focus && (*iter)->visible && (*iter)->keyCallback != NULL)
+        {
+            return (*iter)->keyCallback(key, state, (*iter));
+        }
+        iter++;
+    }
+    return 0;
 }
 
 /*** FilledContainer ***/
