@@ -55,7 +55,7 @@ void stel_ui::draw_gravity_ui(void)
 			core->observatory->get_printable_time_local(jd);
 		}
 
-		if (core->FlagShowFov) os << " fov " << setprecision(3) << core->projection->get_fov();
+		if (core->FlagShowFov) os << " fov " << setprecision(3) << core->projection->get_visible_fov();
 		if (core->FlagShowFps) os << "  FPS " << core->fps;
 
 		glColor3f(0.5,1,0.5);

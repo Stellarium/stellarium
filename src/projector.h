@@ -53,8 +53,9 @@ public:
 	void set_viewport_offset(int _xoff, int _yoff);
 	void get_viewport_offset(int &_xoff, int &_yoff);
 
-	void set_fov(double f);
+	virtual void set_fov(double f);
 	double get_fov(void) const {return fov;}
+	virtual double get_visible_fov(void) const {return fov;}
 	virtual void change_fov(double deltaFov);
 	void set_minmaxfov(double min, double max) {min_fov = min; max_fov = max; set_fov(fov);}
 
