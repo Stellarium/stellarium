@@ -12,8 +12,8 @@ dnl Check for compilers.
 AC_PROG_CC
 AC_PROG_CXX
 
-CFLAGS="-g -Wall -O2 `sdl-config --cflags`"
-CXXFLAGS="-g -Wall -O2 `sdl-config --cflags`"
+CFLAGS="-pg -g -Wall -O2 `sdl-config --cflags`"
+CXXFLAGS="-pg -g -Wall -O2 `sdl-config --cflags`"
 LIBS="$LIBS `sdl-config --libs`"
 
 dnl Checks for programs.
