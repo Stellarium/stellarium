@@ -32,6 +32,7 @@ static s_texture * moon_map;
 static s_texture * mars_map;
 static s_texture * jupiter_map;
 static s_texture * saturn_map;
+static s_texture * saturn_ring_tex; // Saturn rings
 static s_texture * uranus_map;
 static s_texture * neptune_map;
 static s_texture * pluto_map;
@@ -52,6 +53,9 @@ planet * Saturn;
 planet * Uranus;
 planet * Neptune;
 planet * Pluto;
+
+// Rings
+ring * saturn_ring;
 
 EllipticalOrbit * jupiter_orbit;
 // In testing
@@ -96,6 +100,9 @@ void InitSolarSystem(void)
 	small_halo = new s_texture("star16x16");
 	sun_halo = new s_texture("halo");
 
+	saturn_ring_tex = new s_texture("saturn_rings");
+	saturn_ring = new ring(140000./AU,saturn_ring_tex);
+
 	Sun = new sun_planet("Sun", NO_HALO, 696000./AU, vec3_t(1.,1.,0.8), sun_map, NULL, sun_halo);
 	Moon = new planet("Moon", NO_HALO, 1738./AU, vec3_t(1.,1.,1.), moon_map, NULL, get_lunar_geo_posn);
 	Earth = new planet("Earth", NO_HALO, 6378.1/AU, vec3_t(1.,1.,1.), earth_map, NULL, get_earth_helio_coords);
@@ -103,7 +110,7 @@ void InitSolarSystem(void)
 	Venus = new planet("Venus", NO_HALO, 6052./AU, vec3_t(1.,1.,1.), venus_map, NULL, get_venus_helio_coords);
 	Mars = new planet("Mars", NO_HALO, 3394./AU, vec3_t(1.,1.,1.), mars_map, NULL, get_mars_helio_coords);
 	Jupiter = new planet("Jupiter", NO_HALO, 71398./AU, vec3_t(1.,1.,1.), jupiter_map, NULL, get_jupiter_helio_coords);
-	Saturn = new planet("Saturn", NO_HALO, 60330./AU, vec3_t(1.,1.,1.), saturn_map, NULL, get_saturn_helio_coords);
+	Saturn = new ring_planet("Saturn", NO_HALO, 60330./AU, vec3_t(1.,1.,1.), saturn_map, NULL, get_saturn_helio_coords, saturn_ring);
 	Uranus = new planet("Uranus", NO_HALO, 26200./AU, vec3_t(1.,1.,1.), uranus_map, NULL, get_uranus_helio_coords);
 	Neptune = new planet("Neptune", NO_HALO, 25225./AU, vec3_t(1.,1.,1.), neptune_map, NULL, get_neptune_helio_coords);
 	Pluto = new planet("Pluto", NO_HALO, 1137./AU, vec3_t(1.,1.,1.), pluto_map, NULL, get_pluto_helio_coords);
