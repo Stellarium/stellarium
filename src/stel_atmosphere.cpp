@@ -185,7 +185,7 @@ void stel_atmosphere::draw(Projector* prj, int delta_time)
 	  prj->set_orthographic_projection();	// set 2D coordinate
 	  for (int y2=0; y2<sky_resolution; ++y2)
 	    {
-	      glBegin(GL_TRIANGLE_STRIP);
+	      glBegin(GL_QUAD_STRIP);
 	      for(int x2=0; x2<sky_resolution+1; ++x2)
 		{
 		  glColor3f(atm_intensity*tab_sky[x2][y2][0],atm_intensity*tab_sky[x2][y2][1],
