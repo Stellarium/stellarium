@@ -56,7 +56,7 @@ private:
 	s_texture* art_tex;
 	static s_font* constellation_font;		// Font used for load printing
 	
-	Vec3f art_vertex[16];
+	Vec3f art_vertex[9];
 	bool art_on;
 	float art_intensity;
 };
