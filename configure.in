@@ -109,6 +109,6 @@ dnl OTHER SYSTEMS
 esac
 
 dnl Checks for library functions.
-AC_CHECK_FUNCS(toupper strcasecmp strdup stricmp)
+AC_CHECK_FUNCS(round toupper strcasecmp strdup stricmp)
 
 AC_OUTPUT(Makefile stellarium.spec src/Makefile src/iniparser/Makefile src/glpng/Makefile src/stellplanet/Makefile src/stellastro/Makefile config/Makefile data/Makefile textures/Makefile textures/landscapes/Makefile)

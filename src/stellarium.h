@@ -40,7 +40,6 @@
 
 #include <config.h>
 
-
 #define APP_NAME "Stellarium v "VERSION
 
 #define AU 149597870.691

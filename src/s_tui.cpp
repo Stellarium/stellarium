@@ -19,7 +19,28 @@
 
 // Class which manages a Text User Interface "widgets"
 
+#include <cmath>
 #include "s_tui.h"
+
+// A float to nearest int conversion routine for the systems which
+// are not C99 conformant
+inline int S_ROUND(float value)
+{
+	static double i_part;
+
+	if (value >= 0)
+	{
+		if (modf((double) value, &i_part) >= 0.5)
+			i_part += 1;
+	}
+	else
+	{
+		if (modf((double) value, &i_part) <= -0.5)
+			i_part -= 1;
+	}
+
+	return ((int) i_part);
+}
 
 using namespace std;
 using namespace s_tui;
@@ -630,7 +651,7 @@ string Time_item::getString(void)
 
 	os 	<< label << s1[0] << ymdhms[0] << s2[0] << "/" << s1[1] << ymdhms[1] << s2[1] << "/"
 		<< s1[2] << ymdhms[2] << s2[2] << " " << s1[3] << ymdhms[3] << s2[3] << ":"
-		<< s1[4] << ymdhms[4] << s2[4] << ":"<< s1[5] << (int)round(second) << s2[5];
+		<< s1[4] << ymdhms[4] << s2[4] << ":"<< s1[5] << S_ROUND(second) << s2[5];
 	return os.str();
 }
 

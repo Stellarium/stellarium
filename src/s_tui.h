@@ -205,7 +205,7 @@ namespace s_tui
 		virtual bool setValue(const string&);
 		virtual bool setValue_Specialslash(const string&);
     protected:
-        list<Component*>::iterator current;
+        list<Component*>::const_iterator current;
     };
 
 	// Base widget used for tree construction. Can navigate thru the components list with the arrow keys.
