@@ -31,8 +31,8 @@ Constellation_mgr::Constellation_mgr() : asterFont(NULL)
 // Destructor
 Constellation_mgr::~Constellation_mgr()
 {
-	vector<constellation *>::iterator iter;
-    for(iter=Liste.begin();iter!=Liste.end();iter++)
+	vector<Constellation *>::iterator iter;
+    for(iter=asterisms.begin();iter!=asterisms.end();iter++)
     {
 		delete (*iter);
     }
@@ -41,7 +41,7 @@ Constellation_mgr::~Constellation_mgr()
 }
 
 // Load from file
-void Constellation_mgr::Load(char * font_fileName, char * fileName, Hip_Star_mgr * _VouteCeleste)
+void Constellation_mgr::load(char * font_fileName, char * fileName, Hip_Star_mgr * _VouteCeleste)
 {
 	printf("Loading constellation data...\n");
 
@@ -59,13 +59,13 @@ void Constellation_mgr::Load(char * font_fileName, char * fileName, Hip_Star_mgr
         exit(-1);
     }
 
-    constellation * cons = NULL;
+    Constellation * cons = NULL;
     while(!feof(fic))
     {
-        cons = new constellation;
-        if (cons && cons->Read(fic, _VouteCeleste))
+        cons = new Constellation;
+        if (cons && cons->read(fic, _VouteCeleste))
         {
-            Liste.push_back(cons);
+            asterisms.push_back(cons);
         }
         else
         {
@@ -76,58 +76,46 @@ void Constellation_mgr::Load(char * font_fileName, char * fileName, Hip_Star_mgr
 }
 
 // Draw all the constellations in the vector
-void Constellation_mgr::Draw()
+void Constellation_mgr::draw(draw_utility * du, navigator* nav)
 {
 	glDisable(GL_TEXTURE_2D);
     glDisable(GL_BLEND);
     glColor3f(0.2,0.2,0.2);
-    vector<constellation *>::iterator iter;
-    for(iter=Liste.begin();iter!=Liste.end();iter++)
+	du->set_orthographic_projection();	// set 2D coordinate
+    vector<Constellation *>::iterator iter;
+    for(iter=asterisms.begin();iter!=asterisms.end();iter++)
     {
-		(*iter)->Draw();
+		(*iter)->draw(nav);
     }
+	du->reset_perspective_projection();
 }
 
-// Draw one constellation of internationnal name Abr
-void Constellation_mgr::Draw(char Abr[4])
+// Draw one constellation of internationnal name abr
+void Constellation_mgr::draw(draw_utility * du, navigator* nav, char abr[4])
 {
-	vector<constellation *>::iterator iter;
-    for(iter=Liste.begin();iter!=Liste.end();iter++)
+	vector<Constellation *>::iterator iter;
+    for(iter=asterisms.begin();iter!=asterisms.end();iter++)
     {
-		if (!strcmp((*iter)->Abreviation,Abr)) break;
+		if (!strcmp((*iter)->short_name,abr)) break;
 	}
-    (*iter)->DrawSeule();
+    (*iter)->draw_alone(du, nav);
 }
 
 // Draw the names of all the constellations
-void Constellation_mgr::DrawName(draw_utility * du)
+void Constellation_mgr::draw_names(draw_utility * du, navigator* nav)
 {
-    float coef;
-    coef=rand();
-    coef/=RAND_MAX;
-    glColor3f(0.020*coef+0.7,0.020*coef+0.1,0.03*coef+0.1);
-    //du->set_orthographic_projection();
+    glColor3f(0.7,0.1,0.1);
     glEnable(GL_BLEND);
     glEnable(GL_TEXTURE_2D);
-	vector<constellation *>::iterator iter;
-
-    double z;
-    GLdouble M[16];
-    GLdouble P[16];
-    GLint V[4];
-    glGetDoublev(GL_MODELVIEW_MATRIX,M);
-    glGetDoublev(GL_PROJECTION_MATRIX,P);
-    glGetIntegerv(GL_VIEWPORT,V);
 
     du->set_orthographic_projection();	// set 2D coordinate
 
-    for(iter=Liste.begin();iter!=Liste.end();iter++)
+	vector<Constellation *>::iterator iter;
+    for(iter=asterisms.begin();iter!=asterisms.end();iter++)
     {
-		gluProject( (**iter).Xnom, (**iter).Ynom, (**iter).Znom, M,P,V, &(**iter).XYnom[0], &(**iter).XYnom[1], &z);
 		// Check if in the field of view
-    	if ( z > 1 || (**iter).XYnom[0]<0. || (**iter).XYnom[1]<0. ||
-			(**iter).XYnom[0]>du->screenW || (**iter).XYnom[1]>du->screenH ) continue;
-		(**iter).DrawName(asterFont);
+    	if ( nav->project_earth_equ_to_screen_check((*iter)->XYZname, (*iter)->XYname) )
+			(*iter)->draw_name(asterFont);
     }
 
     du->reset_perspective_projection();

@@ -29,34 +29,33 @@
 class Hip_Star : public stel_object
 {
 friend class Hip_Star_mgr;
-friend class constellation;
+friend class Constellation;
 
 public:
     Hip_Star();
     virtual ~Hip_Star();
-    int Read(FILE * pFile);	// Read the star data in the stream
-    void Draw(draw_utility * du);		// Draw the star
-    void DrawName(s_font * star_font);
+    int read(FILE * pFile);	// Read the star data in the stream
+    void draw(draw_utility * du);		// Draw the star
+    void draw_name(s_font * star_font);
 	vec3_t get_RGB(void) const {return RGB;}
 	void get_info_string(char * s, navigator * nav = NULL) const;
 	unsigned char get_type(void) const {return STEL_OBJECT_STAR;}
 	Vec3d get_earth_equ_pos(navigator* nav=NULL) const {return Vec3d(XYZ[0],XYZ[1],XYZ[2]);}
 
 private:
-    unsigned int HP;        // Hipparcos number
-    float Mag;              // Apparent magnitude
-    Vec3f XYZ;             // Cartesian position
-    Vec3f RGB;             // 3 RGB colour values
-    float rmag_t;           // Precalc of star size temporary
-    float MaxColorValue;    // Precalc of the max color value
-    Vec3d XY;           // 2D Position + z homogeneous value
-    char SpType;            // Spectral type
-    char * CommonName;      // Common Name of the star
-    char * Name;            // Scientific name
-    
-    unsigned short int typep; //temp
-    unsigned short int magp;  //temp
-    float r,d;
+    unsigned int HP;		// Hipparcos number
+    float Mag;				// Apparent magnitude
+    Vec3f XYZ;				// Cartesian position
+    Vec3f RGB;				// 3 RGB colour values
+    float MaxColorValue;	// Precalc of the max color value
+    Vec3d XY;				// 2D Position + z homogeneous value
+    char SpType;			// Spectral type
+    char * CommonName;		// Common Name of the star
+    char * Name;			// Scientific name
+
+	float term1;			// Optimization term
+    //unsigned short int typep; //temp
+    //unsigned short int magp;  //temp
 
 	static float twinkle_amount;
 	static float star_scale;

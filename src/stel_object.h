@@ -30,6 +30,7 @@
 #define STEL_OBJECT_NEBULA 3
 
 class navigator;
+class draw_utility;
 
 class stel_object
 {

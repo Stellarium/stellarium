@@ -11,7 +11,7 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
@@ -22,91 +22,102 @@
 
 #define RADIUS_CONST 8.
 
-constellation::constellation() : Name(NULL), Inter(NULL), Asterism(NULL)
+Constellation::Constellation() : name(NULL), inter(NULL), asterism(NULL)
 {
 }
 
-constellation::~constellation()
+Constellation::~Constellation()
 {   
-	if (Asterism) delete Asterism;
-    Asterism = NULL;
-    if (Name) delete Name;
-    Name = NULL;
-    if (Inter) delete Inter;
-    Inter = NULL;
+	if (asterism) delete asterism;
+    asterism = NULL;
+    if (name) delete name;
+    name = NULL;
+    if (inter) delete inter;
+    inter = NULL;
 }
 
-int constellation::Read(FILE *  fic, Hip_Star_mgr * _VouteCeleste)
-// Read constellation datas and grab cartesian positions of stars
+int Constellation::read(FILE *  fic, Hip_Star_mgr * _VouteCeleste)
+// Read Constellation datas and grab cartesian positions of stars
 {   
 	char buff1[40];
 	char buff2[40];
     unsigned int HP;
 
-	fscanf(fic,"%s %s %s %u ",Abreviation,buff1,buff2,&NbSegments);
+	fscanf(fic,"%s %s %s %u ",short_name,buff1,buff2,&nb_segments);
 
-	Name=strdup(buff1);
-	Inter=strdup(buff2);
+	name=strdup(buff1);
+	inter=strdup(buff2);
 
-    Asterism = new Hip_Star*[NbSegments*2];
-    for (unsigned int i=0;i<NbSegments*2;i++)
+    asterism = new Hip_Star*[nb_segments*2];
+    for (unsigned int i=0;i<nb_segments*2;i++)
     {
         fscanf(fic,"%u",&HP);
-        Asterism[i]=_VouteCeleste->search(HP);
-		if (!Asterism[i])
+        asterism[i]=_VouteCeleste->search(HP);
+		if (!asterism[i])
 		{
-			printf("Error in constellation %s asterism : can't find star HP=%d\n",Inter,HP);
+			printf("Error in Constellation %s asterism : can't find star HP=%d\n",inter,HP);
 		}
     }
 
 	fscanf(fic,"\n");
 
-    Xnom=0;
-    Ynom=0;
-    Znom=0;
-    for(unsigned int ii=0;ii<NbSegments*2;ii++)
-    {   Xnom+=(*Asterism[ii]).XYZ[0];
-        Ynom+=(*Asterism[ii]).XYZ[1];
-        Znom+=(*Asterism[ii]).XYZ[2];
+    for(unsigned int ii=0;ii<nb_segments*2;ii++)
+    {
+		XYZname+=(*asterism[ii]).XYZ;
     }
-    Xnom/=NbSegments*2;
-    Ynom/=NbSegments*2;
-    Znom/=NbSegments*2;
-    
+    XYZname*=1./(nb_segments*2);
+
     return 1;
 }
 
-// Draw the lines for the constellation using the coords of the stars (optimized for use with the class Constellation_mgr only)
-void constellation::Draw()
+// Draw the lines for the Constellation using the coords of the stars
+// (optimized for use thru the class Constellation_mgr only)
+void Constellation::draw(navigator* nav)
 {
-    for(unsigned int i=0;i<NbSegments;++i)
+	static Vec3d star1;
+	static Vec3d star2;
+
+    for(unsigned int i=0;i<nb_segments;++i)
     {
-		glBegin (GL_LINES);
-			glVertex3f((*Asterism[2*i]).XYZ[0],(*Asterism[2*i]).XYZ[1],(*Asterism[2*i]).XYZ[2]);
-			glVertex3f((*Asterism[2*i+1]).XYZ[0],(*Asterism[2*i+1]).XYZ[1],(*Asterism[2*i+1]).XYZ[2]);
-        glEnd ();
+		if (nav->project_earth_equ_to_screen(asterism[2*i]->XYZ,star1) &&
+			nav->project_earth_equ_to_screen(asterism[2*i+1]->XYZ,star2))
+		{
+			glBegin (GL_LINES);
+				glVertex2f(star1[0],star1[1]);
+				glVertex2f(star2[0],star2[1]);
+        	glEnd();
+		}
     }
 }
 
-// Same thing but for only one separate constellation (can be used without the class Constellation_mgr )
-void constellation::DrawSeule()
+// Same thing but for only one separate Constellation (can be used without the class Constellation_mgr )
+void Constellation::draw_alone(draw_utility * du, navigator* nav)
 {
 	glDisable(GL_TEXTURE_2D);
     glDisable(GL_BLEND);
     glColor3f(0.2,0.2,0.2);
-    glPushMatrix();
-    for(unsigned int i=0;i<NbSegments;i++)
+    du->set_orthographic_projection();	// set 2D coordinate
+
+	static Vec3d star1;
+	static Vec3d star2;
+
+    for(unsigned int i=0;i<nb_segments;++i)
     {
-		glBegin (GL_LINES);
-                glVertex3f((*Asterism[2*i]).XYZ[0],(*Asterism[2*i]).XYZ[1],(*Asterism[2*i]).XYZ[2]);
-                glVertex3f((*Asterism[2*i+1]).XYZ[0],(*Asterism[2*i+1]).XYZ[1],(*Asterism[2*i+1]).XYZ[2]);
-        glEnd ();
+		if (nav->project_earth_equ_to_screen(asterism[2*i]->XYZ,star1) &&
+			nav->project_earth_equ_to_screen(asterism[2*i+1]->XYZ,star2))
+		{
+			glBegin (GL_LINES);
+				glVertex2f(star1[0],star1[1]);
+				glVertex2f(star2[0],star2[1]);
+        	glEnd ();
+		}
     }
-    glPopMatrix();
+
+    du->reset_perspective_projection();
 }
 
 // Draw the name
-void constellation::DrawName(s_font * constfont)
+void Constellation::draw_name(s_font * constfont)
 {
-	constfont->print((int)XYnom[0]-40,(int)XYnom[1], Inter/*Name*/); //"Inter" for internationnal name
+	constfont->print((int)XYname[0]-40,(int)XYname[1], inter/*name*/); //"inter" for internationnal name
 }

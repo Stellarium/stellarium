@@ -53,7 +53,7 @@ void Hip_Star::get_info_string(char * s, navigator * nav) const
 			print_angle_dms_stel(tempDE*180./M_PI), Mag);
 }
 
-int Hip_Star::Read(FILE * catalog)
+int Hip_Star::read(FILE * catalog)
 // Read datas in binary catalog and compute x,y,z;
 {  
     float RA=0, DE=0;
@@ -116,32 +116,29 @@ int Hip_Star::Read(FILE * catalog)
         default :   RGB[0]=1.0f;  RGB[1]=1.0f; RGB[2]=1.0f;
     }
     
-    // First part of the calculation of the demi-size of the star texture
-	// Empirical formula which looks good...
-    float L=pow(100,-Mag/4.1);
-    MaxColorValue=myMax(RGB[0],RGB[2]);
-    rmag_t = sqrt(L/(pow(L,0.46666)+7.079))*sqrt(MaxColorValue)*1200.;
-	
-	if (mag==0 && type==0) 
+
+    MaxColorValue = myMax(RGB[0],RGB[2]);
+
+	// Precomputation of a term used later
+	term1 = expf(-0.92103f*(Mag + 12.12331f)) * 108064.73f;
+
+	if (mag==0 && type==0)
 	{
 		return 0;
 	}
     return 1;
+
 }
 
 
-void Hip_Star::Draw(draw_utility * du)
+void Hip_Star::draw(draw_utility * du)
 {
-    // Check if in the field of view, if not return
-    if ( XY[1]>du->screenH || XY[1]<0. || XY[0]<0. || XY[0]>du->screenW ) return;
-
-	static float coef;
 	static float cmag;
 	static float rmag;
 
     // Compute the equivalent star luminance for a 5 arc min circle and convert it
 	// in function of the eye adaptation
-	rmag = eye->adapt_luminance(expf(-0.92103f*(Mag + 12.12331f)) * 108064.73f);
+	rmag = eye->adapt_luminance(term1);
 	rmag = rmag/powf(du->fov,0.85f)*50.f;
 
     cmag = 1.f;
@@ -151,7 +148,7 @@ void Hip_Star::Draw(draw_utility * du)
     if (rmag<1.2f)
     {
         if (rmag<0.3f) return;
-        cmag=powf(rmag,2.f)/1.44f;
+        cmag=rmag*rmag/1.44f;
         rmag=1.2f;
     }
 	else
@@ -162,12 +159,12 @@ void Hip_Star::Draw(draw_utility * du)
     	}
 	}
 
-    // Random coef for star twinkling
-    coef=rand()/RAND_MAX*twinkle_amount;
-
     // Calculation of the luminosity
-    cmag*=(1.-coef);
-    rmag*=star_scale;
+    // Random coef for star twinkling
+    cmag*=(1.-rand()/RAND_MAX*twinkle_amount);
+	// Global scaling
+	rmag*=star_scale;
+
     glColor3fv(RGB*(cmag/MaxColorValue));
     glPushMatrix();
     glTranslatef(XY[0],XY[1],0);
@@ -176,11 +173,11 @@ void Hip_Star::Draw(draw_utility * du)
         glTexCoord2i(1,0);    glVertex2f( rmag,-rmag);	// Bottom right
         glTexCoord2i(1,1);    glVertex2f( rmag, rmag);	// Top right
         glTexCoord2i(0,1);    glVertex2f(-rmag, rmag);	// Top left
-    glEnd ();
+    glEnd();
     glPopMatrix();
 }
 
-void Hip_Star::DrawName(s_font* star_font)
+void Hip_Star::draw_name(s_font* star_font)
 {   
     glColor3fv(RGB*(1./2.5));
 	star_font->print(XY[0]+6,XY[1]-4, CommonName);

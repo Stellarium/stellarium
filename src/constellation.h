@@ -25,24 +25,24 @@
 #include "stel_utility.h"
 #include "s_font.h"
 
-class constellation  
+class Constellation
 {
     friend class Constellation_mgr;
 public:
-    constellation();
-    virtual ~constellation();
-    int Read(FILE *, Hip_Star_mgr * _VouteCeleste);
-    void Draw();
-    void DrawSeule();
-    void DrawName(s_font * constfont);
+    Constellation();
+    virtual ~Constellation();
+    int read(FILE *, Hip_Star_mgr * _VouteCeleste);
+    void draw(navigator* nav);
+    void draw_alone(draw_utility * du, navigator* nav);
+    void draw_name(s_font * constfont);
 private:
-    char * Name;
-    char Abreviation[4];
-    char * Inter;
-    float Xnom,Ynom,Znom;
-	double XYnom[2];
-    unsigned int NbSegments;
-    Hip_Star ** Asterism;
+    char * name;
+    char short_name[4];
+    char * inter;
+    Vec3f XYZname;
+	Vec3d XYname;
+    unsigned int nb_segments;
+    Hip_Star ** asterism;
 };
 
 #endif // _CONSTELLATION_H_
