@@ -221,7 +221,7 @@ void stel_core::draw(int delta_time)
 	//glDisable(GL_DEPTH_TEST);
 	glBlendFunc(GL_ONE, GL_ONE);
 
-	//glClear(GL_COLOR_BUFFER_BIT);
+	glClear(GL_COLOR_BUFFER_BIT);
 	// Draw the milky way. If not activated, need at least to clear the color buffer
 	if (!FlagMilkyWay) glClear(GL_COLOR_BUFFER_BIT);
 	else DrawMilkyWay(tone_converter, projection, navigation);

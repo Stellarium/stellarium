@@ -248,7 +248,7 @@ void planet::draw(int hint_ON, Projector* prj, const navigator * nav)
 				prj->set_clipping_planes(dist-rings->get_size(), dist+rings->get_size());
 				glEnable(GL_DEPTH_TEST);
 				draw_sphere(prj, mat);
-				rings->draw();
+				rings->draw(prj, mat);
 				glDisable(GL_DEPTH_TEST);
 			}
 			else draw_sphere(prj, mat);
@@ -301,7 +301,7 @@ void planet::draw_sphere(const Projector* prj, const Mat4d& mat)
 
 	// Rotate and add an extra half rotation because of the convention in all
     // planet texture maps where zero deg long. is in the middle of the texture.
-	prj->sSphere(radius*10,40,40, mat * Mat4d::zrotation(M_PI/180*(axis_rotation + 180.)));
+	prj->sSphere(radius,40,40, mat * Mat4d::zrotation(M_PI/180*(axis_rotation + 180.)));
 
     glDisable(GL_CULL_FACE);
 	glDisable(GL_LIGHTING);
@@ -363,8 +363,10 @@ ring::~ring()
 	tex = NULL;
 }
 
-void ring::draw(void)
+void ring::draw(const Projector* prj, const Mat4d& mat)
 {
+	glPushMatrix();
+	glLoadMatrixd(mat);
 	// Normal transparency mode
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	//glRotatef(axis_rotation + 180.,0.,0.,1.);
@@ -372,14 +374,14 @@ void ring::draw(void)
     glEnable(GL_TEXTURE_2D);
 	glDisable(GL_CULL_FACE);
 	glEnable(GL_BLEND);
-	//glDisable(GL_LIGHTING);
 
     glBindTexture (GL_TEXTURE_2D, tex->getID());
-	float r=radius;
+	double r=radius;
 	glBegin(GL_QUADS);
-		glTexCoord2f(0,0); glVertex3d( r,-r, 0.);	// Bottom left
-		glTexCoord2f(1,0); glVertex3d( r, r, 0.);	// Bottom right
-		glTexCoord2f(1,1); glVertex3d(-r, r, 0.);	// Top right
-		glTexCoord2f(0,1); glVertex3d(-r,-r, 0.);	// Top left
+		glTexCoord2f(0,0); prj->sVertex3( r,-r, 0., mat);	// Bottom left
+		glTexCoord2f(1,0); prj->sVertex3( r, r, 0., mat);	// Bottom right
+		glTexCoord2f(1,1); prj->sVertex3(-r, r, 0., mat);	// Top right
+		glTexCoord2f(0,1); prj->sVertex3(-r,-r, 0., mat);	// Top left
 	glEnd ();
+	glPopMatrix();
 }
