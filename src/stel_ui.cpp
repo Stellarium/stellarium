@@ -497,9 +497,9 @@ int stel_ui::handle_keys(SDLKey key, S_GUI_VALUE state)
 
 	if (state==S_GUI_PRESSED)
     {
-    	if(key==SDLK_ESCAPE)
+    	if(key==SDLK_q)
     	{
-			return 0;	// Will quit properly from stel_sdl
+			if (SDL_GetModState() & KMOD_CTRL) return 0;	// Will quit properly from stel_sdl
 		}
         if(key==SDLK_c)
         {
@@ -566,11 +566,11 @@ int stel_ui::handle_keys(SDLKey key, S_GUI_VALUE state)
             bt_flag_help->setState(core->FlagHelp);
 			help_win->setVisible(core->FlagHelp);
 		}
-		if(key==SDLK_4)
+		if(key==SDLK_COMMA)
         {
         	core->FlagEclipticLine=!core->FlagEclipticLine;
 		}
-        if(key==SDLK_5)
+        if(key==SDLK_PERIOD)
         {
         	core->FlagEquatorLine=!core->FlagEquatorLine;
 		}
@@ -668,9 +668,18 @@ int stel_ui::handle_keys(SDLKey key, S_GUI_VALUE state)
         {
         	core->navigation->set_JDay(get_julian_from_sys());
 		}
-		if(key==SDLK_SLASH)
+		if(key==SDLK_SLASH || key==SDLK_BACKSLASH)
         {
 			core->toggle_selected_object_gozoom();
+		}
+		if(key==SDLK_x)
+        {
+			core->FlagShowTuiDateTime = !core->FlagShowTuiDateTime;
+			core->FlagShowTuiShortInfo = core->FlagShowTuiDateTime;
+		}
+		if(key==SDLK_4)
+        {
+			core->FlagConstellationArt = !core->FlagConstellationArt;
 		}
 
     }
