@@ -27,7 +27,7 @@
 
 #define RADIUS_NEB 1.
 
-Nebula_mgr::Nebula_mgr()
+Nebula_mgr::Nebula_mgr(Vec3f cfont, Vec3f ccircle) : defaultfontcolor(cfont), defaultcirclecolor(ccircle)
 {
 }
 
@@ -68,6 +68,8 @@ int Nebula_mgr::read(const string& font_fileName, const string& fileName)
 			e = NULL;
             break;
         }
+		e->setFontColor(defaultfontcolor);
+		e->setCircleColor(defaultcirclecolor);
         if (temp==1 || temp==2) neb_array.push_back(e);
 	}
 	fclose(fic);
@@ -85,7 +87,7 @@ int Nebula_mgr::read(const string& font_fileName, const string& fileName)
 }
 
 // Draw all the Nebulaes
-void Nebula_mgr::draw(int names_ON, Projector* prj, const navigator * nav, tone_reproductor* eye, bool _gravity_label, float max_mag_name)
+void Nebula_mgr::draw(int names_ON, Projector* prj, const navigator * nav, tone_reproductor* eye, bool _gravity_label, float max_mag_name, bool bright_nebulae)
 {
 	Nebula::gravity_label = _gravity_label;
 
@@ -99,7 +101,7 @@ void Nebula_mgr::draw(int names_ON, Projector* prj, const navigator * nav, tone_
 		if ( !prj->project_earth_equ_check((*iter)->XYZ,(*iter)->XY) ) continue;
 
 		prj->set_orthographic_projection();
-		if ((*iter)->get_on_screen_size(prj, nav)>5) (*iter)->draw_tex(prj, eye);
+		if ((*iter)->get_on_screen_size(prj, nav)>5) (*iter)->draw_tex(prj, eye, bright_nebulae);
     	if (names_ON && (*iter)->mag <= max_mag_name)
     	{
 			(*iter)->draw_name(prj);

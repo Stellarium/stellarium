@@ -29,7 +29,7 @@ using namespace std;
 class Nebula_mgr  
 {
 public:
-    Nebula_mgr();
+    Nebula_mgr(Vec3f defaultfontcolor = Vec3f(0.4,0.3,0.5), Vec3f defaultcirclecolor = Vec3f(0.8,0.8,0.1));
     virtual ~Nebula_mgr();
 
 	// Read the Nebulas data from a file
@@ -37,7 +37,7 @@ public:
 
 	// Draw all the Nebulas
 	void draw(int hints_ON, Projector* prj, const navigator * nav, tone_reproductor* eye,
-		bool _gravity_label, float max_mag_name);
+		bool _gravity_label, float max_mag_name, bool bright_nebulae);
 
 	// Search the Nebulae by position
 	stel_object * search(Vec3f Pos);
@@ -47,6 +47,8 @@ public:
 
 private:
     vector<Nebula*> neb_array;	// The nebulas list
+	Vec3f defaultfontcolor;
+	Vec3f defaultcirclecolor;
 };
 
 #endif // _NEBULA_MGR_H_

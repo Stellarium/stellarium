@@ -454,14 +454,14 @@ int stel_ui::handle_clic(Uint16 x, Uint16 y, Uint8 button, Uint8 state)
         if (button==SDL_BUTTON_RIGHT)
         {
 			core->selected_object=NULL;
-			info_select_ctr->setVisible(0);
             return 1;
         }
         if (button==SDL_BUTTON_MIDDLE)
         {
 			if (core->selected_object)
             {
-				core->navigation->move_to(core->selected_object->get_earth_equ_pos(core->navigation), core->auto_move_duration);
+				core->navigation->move_to(core->selected_object->get_earth_equ_pos(core->navigation),
+					core->auto_move_duration);
             }
         }
         if (button==SDL_BUTTON_LEFT)
@@ -470,13 +470,20 @@ int stel_ui::handle_clic(Uint16 x, Uint16 y, Uint8 button, Uint8 state)
 			if (SDL_GetModState() & KMOD_CTRL)
 			{
 				core->selected_object=NULL;
-            	info_select_ctr->setVisible(0);
-            	return 1;
         	}
 
-        	// Left or middle clic -> selection of an object
-			core->selected_object = core->clever_find((int)x, core->screen_H-(int)y);
-            //core->selected_object = core->find_stel_object((int)x, core->screen_H-(int)y);
+        	// Left clic -> selection of an object
+			stel_object* tempselect= core->clever_find((int)x, core->screen_H-(int)y);
+
+			// Unselect on second clic on the same object
+			if (core->selected_object!=NULL && core->selected_object==tempselect)
+			{
+				core->selected_object = NULL;
+			}
+			else
+			{
+				core->selected_object = core->clever_find((int)x, core->screen_H-(int)y);
+            }
 
             // If an object has been found
             if (core->selected_object)
@@ -584,7 +591,7 @@ int stel_ui::handle_keys(SDLKey key, S_GUI_VALUE state)
         {
 			core->navigation->set_flag_lock_equ_pos(!core->navigation->get_flag_lock_equ_pos());
 		}
-        if(key==SDLK_s)
+        if(key==SDLK_s && !(SDL_GetModState() & KMOD_CTRL))
         {	
         	core->FlagStars=!core->FlagStars;
 		}
@@ -709,8 +716,9 @@ int stel_ui::handle_keys(SDLKey key, S_GUI_VALUE state)
 void stel_ui::gui_update_widgets(void)
 {
 	updateTopBar();
+
 	// To prevent a minor bug
-	if (!core->FlagShowSelectedObjectInfos) info_select_ctr->setVisible(0);
+	if (!core->FlagShowSelectedObjectInfos || !core->selected_object) info_select_ctr->setVisible(0);
 	else if (core->selected_object) info_select_ctr->setVisible(1);
 	bt_flag_ctr->setVisible(core->FlagMenu);
 
@@ -725,6 +733,8 @@ void stel_ui::gui_update_widgets(void)
 	bt_flag_help->setState(help_win->getVisible());
 	bt_flag_follow_earth->setState(core->navigation->get_flag_lock_equ_pos());
 	bt_flag_config->setState(config_win->getVisible());
+
+	if (config_win->getVisible()) updateConfigForm();
 }
 
 
