@@ -48,6 +48,8 @@
 #ifndef _TONE_REPRODUCTOR_H_
 #define _TONE_REPRODUCTOR_H_
 
+#include "fmath.h"
+
 class tone_reproductor
 {
 public:
