@@ -68,8 +68,8 @@ void stel_atmosphere::compute_color(Vec3d sunPos, Vec3d moonPos, float moon_phas
 	skyb.set_sun_moon(moon_pos[2], sun_pos[2]);
 	skyb.set_date(2003, 07, moon_phase);
 
-	float stepX = (float)prj->scrW() / sky_resolution;
-	float stepY = (float)prj->scrH() / sky_resolution;
+	float stepX = (float)prj->viewW() / sky_resolution;
+	float stepY = (float)prj->viewH() / sky_resolution;
 
 	Vec3d point(1., 0., 0.);
 
@@ -175,8 +175,8 @@ void stel_atmosphere::draw(Projector* prj)
 	int startYtemp = startY;
 	if (startYtemp>sky_resolution) return;
 	if (startYtemp<1) startYtemp = 1;
-	float stepX = (float)prj->scrW() / sky_resolution;
-	float stepY = (float)prj->scrH() / sky_resolution;
+	float stepX = (float)prj->viewW() / sky_resolution;
+	float stepY = (float)prj->viewH() / sky_resolution;
 
 	glDisable(GL_TEXTURE_2D);
 	glEnable(GL_BLEND);

@@ -21,7 +21,7 @@
 #include "projector.h"
 
 
-Projector::Projector(int _screenW, int _screenH, double _fov) : ratio(0.75f), zNear(0.1), zFar(10000)
+Projector::Projector(int _screenW, int _screenH, double _fov) : zNear(0.1), zFar(10000)
 {
 	change_fov(_fov);
 	set_screen_size(_screenW,_screenH);
@@ -31,15 +31,32 @@ Projector::~Projector()
 {
 }
 
+void Projector::maximize_viewport(void)
+{
+	vec_viewport[0] = 0;
+	vec_viewport[1] = 0;
+	vec_viewport[2] = screenW;
+	vec_viewport[3] = screenH;
+	glViewport(0, 0, screenW, screenH);
+	ratio = (float)screenH/screenW;
+	init_project_matrix();
+}
+
+void Projector::set_viewport(int x, int y, int w, int h)
+{
+	vec_viewport[0] = x;
+	vec_viewport[1] = y;
+	vec_viewport[2] = w;
+	vec_viewport[3] = h;
+	glViewport(x, y, w, h);
+	ratio = (float)h/w;
+	init_project_matrix();
+}
+
 void Projector::set_screen_size(int w, int h)
 {
 	screenW = w;
 	screenH = h;
-	vec_viewport[2] = w;
-	vec_viewport[3] = h;
-	glViewport(0, 0, w, h);
-	ratio = (float)h/w;
-	init_project_matrix();
 }
 
 void Projector::set_clipping_planes(double znear, double zfar)
@@ -76,12 +93,6 @@ void Projector::init_project_matrix(void)
     glMatrixMode(GL_MODELVIEW);
 }
 
-bool Projector::check_in_screen(const Vec3d& pos) const
-{
-	return 	pos[1]>vec_viewport[1] && pos[1]<vec_viewport[3] &&
-			pos[0]>vec_viewport[0] && pos[0]<vec_viewport[2];
-}
-
 
 // Set the standard modelview matrices used for projection
 void Projector::set_modelview_matrices(	const Mat4d& _mat_earth_equ_to_eye,
@@ -111,13 +122,38 @@ bool Projector::project_custom(const Vec3d& v, Vec3d& win, const Mat4d& mat) con
 bool Projector::project_custom_check(const Vec3f& v, Vec3d& win, const Mat4d& mat) const
 {
     gluProject(v[0],v[1],v[2],mat,mat_projection,vec_viewport,&win[0],&win[1],&win[2]);
-	return (win[2]<1. && check_in_screen(win));
+	return (win[2]<1. && check_in_viewport(win));
 }
 void Projector::unproject_custom(double x ,double y, Vec3d& v, const Mat4d& mat) const
 {
 	gluUnProject(x,y,1.,mat,mat_projection,vec_viewport,&v[0],&v[1],&v[2]);
 }
 
+// Set the drawing mode in 2D for drawing in the full screen
+// Use reset_perspective_projection() to restore previous projection mode
+void Projector::set_2Dfullscreen_projection(void) const
+{
+	glViewport(0, 0, screenW, screenH);
+	glMatrixMode(GL_PROJECTION);		// projection matrix mode
+    glPushMatrix();						// store previous matrix
+    glLoadIdentity();
+    gluOrtho2D(	0, screenW,
+				0, screenH);			// set a 2D orthographic projection
+	glMatrixMode(GL_MODELVIEW);			// modelview matrix mode
+
+    glPushMatrix();
+    glLoadIdentity();
+}
+
+// Reset the previous projection mode after a call to set_orthographic_projection()
+void Projector::restore_from_2Dfullscreen_projection(void) const
+{
+    glMatrixMode(GL_PROJECTION);		// Restore previous matrix
+    glPopMatrix();
+    glMatrixMode(GL_MODELVIEW);
+	glViewport(vec_viewport[0], vec_viewport[1], vec_viewport[2], vec_viewport[3]);
+    glPopMatrix();
+}
 
 // Set the drawing mode in 2D. Use reset_perspective_projection() to reset
 // previous projection mode
@@ -126,7 +162,8 @@ void Projector::set_orthographic_projection(void) const
 	glMatrixMode(GL_PROJECTION);		// projection matrix mode
     glPushMatrix();						// store previous matrix
     glLoadIdentity();
-    gluOrtho2D(0, screenW, 0, screenH);	// set a 2D orthographic projection
+    gluOrtho2D(	vec_viewport[0], vec_viewport[0] + vec_viewport[2],
+				vec_viewport[1], vec_viewport[1] + vec_viewport[3]);	// set a 2D orthographic projection
 	glMatrixMode(GL_MODELVIEW);			// modelview matrix mode
 
     glPushMatrix();

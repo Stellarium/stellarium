@@ -202,7 +202,7 @@ void planet::add_satellite(planet*p)
 // Return the radius of a circle containing the object on screen
 float planet::get_on_screen_size(const navigator * nav, const Projector* prj)
 {
-	return atanf(radius*2.f/get_earth_equ_pos(nav).length())*180./M_PI/prj->get_fov()*prj->scrH();
+	return atanf(radius*2.f/get_earth_equ_pos(nav).length())*180./M_PI/prj->get_fov()*prj->viewH();
 }
 
 // Draw the planet and all the related infos : name, circle etc..
@@ -226,8 +226,8 @@ void planet::draw(int hint_ON, Projector* prj, const navigator * nav)
 	// Compute the 2D position and check if in the screen
 	float screen_sz = get_on_screen_size(nav, prj);
 	if (prj->project_custom(Vec3f(0,0,0), screenPos, mat) &&
-		screenPos[1]>-screen_sz && screenPos[1]<prj->scrH()+screen_sz &&
-		screenPos[0]>-screen_sz && screenPos[0]<prj->scrW()+screen_sz)
+		screenPos[1]>-screen_sz && screenPos[1]<prj->viewH()+screen_sz &&
+		screenPos[0]>-screen_sz && screenPos[0]<prj->viewW()+screen_sz)
 	{
 		// Draw the name, and the circle if it's not too close from the body it's turning around
 		// this prevents name overlaping (ie for jupiter satellites)

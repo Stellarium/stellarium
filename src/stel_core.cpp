@@ -83,7 +83,7 @@ void stel_core::init(void)
 	ssystem = new SolarSystem();
 	atmosphere = new stel_atmosphere();
 	tone_converter = new tone_reproductor();
-	projection = new Projector(screen_W, screen_H, 60.);
+	projection = new Fisheye_projector(screen_W, screen_H, 60.);
 	equ_grid = new SkyGrid(EQUATORIAL);
 	azi_grid = new SkyGrid(ALTAZIMUTAL);
 	equator_line = new SkyLine(EQUATOR);
@@ -142,6 +142,12 @@ void stel_core::init(void)
 
 	if (FlagAtmosphere) tone_converter->set_world_adaptation_luminance(40000.f);
 	else tone_converter->set_world_adaptation_luminance(3.75f);
+
+	// Make the viewport as big as possible
+	projection->set_screen_size(screen_W, screen_H);
+	projection->set_fov(60.);
+	projection->maximize_viewport();
+	//projection->set_viewport(10,10,550,550);
 
 	// Compute planets data and init viewing position
 	// Position of sun and all the satellites (ie planets)
@@ -218,7 +224,7 @@ void stel_core::draw(int delta_time)
 	else DrawMilkyWay(tone_converter);
 
 	// Init the depth buffer which is used by the planets drawing operations
-	//glClear(GL_DEPTH_BUFFER_BIT);
+	glClear(GL_DEPTH_BUFFER_BIT);
 
 	// Draw all the constellations
 	if (FlagAsterismDrawing) asterisms->draw(projection);

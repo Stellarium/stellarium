@@ -26,6 +26,7 @@ using namespace std;
 
 #include "navigator.h"
 #include "projector.h"
+#include "fisheye_projector.h"
 #include "stel_object.h"
 #include "hip_star_mgr.h"
 #include "constellation_mgr.h"
@@ -94,7 +95,7 @@ private:
 
 	// Main elements of the program
 	navigator * navigation;				// Manage all navigation parameters, coordinate transformations etc..
-	Projector * projection;				// Manage the projection mode and matrix
+	Fisheye_projector * projection;				// Manage the projection mode and matrix
 	stel_object * selected_object;		// The selected object in stellarium
 	Hip_Star_mgr * hip_stars;			// Manage the hipparcos stars
 	Constellation_mgr * asterisms;		// Manage constellations (boundaries, names etc..)
