@@ -116,7 +116,7 @@ public:
 	// ---------------------------------------------------------------
 	
 	// IDEA: replace flags and settings with a hash of structs or classes...
-	int set_flag(string name, string value, bool trusted);  // set a core flag
+	int set_flag(string name, string value, bool &nweval, bool trusted);  // set a core flag
 	// Set the value of the parameter TODO
 	void set_param(string& key, float value);
 	// Zoom to the given FOV
@@ -134,8 +134,8 @@ public:
 	// Quit the application
 	void stel_core::quit(void);
 
-	void populate_setting_mgr(SettingMgr *smgr);  // TEMP until migrate to new config setup
-	void load_config_from_setting_mgr(SettingMgr *smgr);  // TEMP until migrate to new config setup
+	//	void populate_setting_mgr(SettingMgr *smgr);  // TEMP until migrate to new config setup
+	//      void load_config_from_setting_mgr(SettingMgr *smgr);  // TEMP until migrate to new config setup
 	
 private:
 
@@ -159,7 +159,6 @@ private:
 	string config_file;
 
 	// Main elements of the program
-	SettingMgr * config;                    // Track all user configurations (when migration is done)
 	StelCommandInterface * commander;       // interface to perform all UI and scripting actions
 	ScriptMgr * scripts;                    // manage playing and recording scripts
 	navigator * navigation;			// Manage all navigation parameters, coordinate transformations etc..

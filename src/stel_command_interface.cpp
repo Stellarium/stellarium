@@ -59,7 +59,15 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
   if(command == "flag") {
 
     // TODO: loop if want to allow that syntax
-    status = stcore->set_flag( args.begin()->first, args.begin()->second, trusted);
+    bool val;
+    status = stcore->set_flag( args.begin()->first, args.begin()->second, val, trusted);
+
+    // rewrite command for recording so that actual state is known (rather than "toggle")
+    if(args.begin()->second == "toggle") {
+      std::ostringstream oss;
+      oss << command << " " << args.begin()->first << " " << val;
+      commandline = oss.str();
+    }
 
   }  else if (command == "wait" && args["duration"]!="") {
 
