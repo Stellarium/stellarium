@@ -50,6 +50,14 @@ void navigator::update_vision_vector(int delta_time, stel_object* selected)
     {
 		double ra_aim, de_aim, ra_start, de_start, ra_now, de_now;
 
+		if( zooming_mode == 1 ) {
+                  // if zooming in, object may be moving so be sure to zoom to latest position
+                  equ_vision=selected->get_earth_equ_pos(this);
+                  move.aim=equ_vision;
+                  move.aim.normalize();
+                  move.aim*=2.;
+		}
+
 		if (move.local_pos)
 		{
 			rect_to_sphe(&ra_aim, &de_aim, move.aim);
@@ -75,7 +83,7 @@ void navigator::update_vision_vector(int delta_time, stel_object* selected)
 		double c;
 
 		if (zooming_mode == 1) c = 1. - (1.-move.coef) * (1.-move.coef) * (1.-move.coef);
-		else if (zooming_mode == -1) c = move.coef * move.coef * move.coef;
+		else if (zooming_mode == -1) c =  pow(move.coef,3);
 		else c = atanf(smooth * 2.*move.coef-smooth)/atanf(smooth)/2+0.5;
 
 		ra_now = ra_aim*c + ra_start*(1. - c);
