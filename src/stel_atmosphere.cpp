@@ -65,7 +65,6 @@ void stel_atmosphere::compute_color(double JD, Vec3d sunPos, Vec3d moonPos, floa
 	tone_reproductor * eye, Projector* prj,
 	float latitude, float altitude, float temperature, float relative_humidity)
 {
-
 	// no need to calculate if not visible
     if( atm_intensity < .001)
 	{
