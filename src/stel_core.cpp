@@ -242,7 +242,8 @@ void stel_core::update(int delta_time)
     scripts->update(delta_time);
 
     // Update the position of observation and time etc...
-	navigation->update_time(delta_time);
+    observatory->update(delta_time);
+    navigation->update_time(delta_time);
 
 	// Position of sun and all the satellites (ie planets)
 	ssystem->compute_positions(navigation->get_JDay());

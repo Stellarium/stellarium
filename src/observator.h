@@ -84,6 +84,9 @@ public:
 	string get_date_format_str(void) const {return s_date_format_to_string(date_format);}
 	void set_date_format_str(const string& df) {date_format=string_to_s_date_format(df);}
 
+	void move_to(double lat, double lon, double alt, int duration);  // duration in ms
+	void update(int delta_time);  // for moving observing position 
+
 private:
 	string name;			// Position name
 	double longitude;		// Longitude in degree
@@ -110,6 +113,14 @@ private:
 	// Convert the date format enum to its associated string and reverse
 	S_DATE_FORMAT Observator::string_to_s_date_format(const string& df) const;
 	string Observator::s_date_format_to_string(S_DATE_FORMAT df) const;
+
+	// for changing position
+	bool flag_move_to;
+	double start_lat, end_lat;
+	double start_lon, end_lon;
+	double start_alt, end_alt;
+	float move_to_coef, move_to_mult;
+
 };
 
 

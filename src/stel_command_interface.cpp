@@ -60,49 +60,45 @@ int StelCommandInterface::execute_command(string commandline, int &wait) {
   }  else if (command == "wait") {
 
     float fdelay;
-    string sdelay;
 
-    if(args["ms"] != "") sdelay = args["ms"];
-    else if(args["sec"] != "") sdelay = args["sec"];
-
-    std::istringstream istr(sdelay);
-    istr >> fdelay;
-
-    if(args["sec"] != "") fdelay *= 1000;
-
-    fdelay += 0.5f;
+    if(args["ms"] != "") fdelay = str_to_double(args["ms"]);
+    else if(args["sec"] != "") fdelay = 1000*str_to_double(args["sec"]);
 
     if(fdelay >= 0) wait = (int)fdelay;
 
     //    cout << "wait is: " << wait << endl; 
 
   } else if (command == "select") {
+
+    // default is to deselect
+    stcore->selected_object=NULL;
+    stcore->selected_planet=NULL;
+    stcore->selected_constellation=NULL;
+
     if(args["hp"]!=""){
       unsigned int hpnum;
       std::istringstream istr(args["hp"]);
       istr >> hpnum;
       stcore->selected_object = stcore->hip_stars->search(hpnum);
+      stcore->selected_constellation=stcore->asterisms->is_star_in((Hip_Star*)stcore->selected_object);
     } else if(args["planet"]!=""){
-      stcore->selected_object = stcore->ssystem->search(args["planet"]);
+      stcore->selected_object = stcore->selected_planet = stcore->ssystem->search(args["planet"]);
     } else if(args["dso"]!=""){
       stcore->selected_object = stcore->nebulas->search(args["dso"]);
-    } else {
-      // default is to deselect
-      stcore->selected_object = NULL;
     }
 
     if (stcore->selected_object) {
-      stcore->navigation->move_to(stcore->selected_object->get_earth_equ_pos(stcore->navigation),
-					stcore->auto_move_duration);
-      stcore->navigation->set_flag_traking(1);
+      if (stcore->navigation->get_flag_traking()) stcore->navigation->set_flag_lock_equ_pos(1);
+      stcore->navigation->set_flag_traking(0);
     }
 
-
   } else if(command == "autozoom") {
+
     if(args["direction"]=="out") stcore->auto_zoom_out(stcore->auto_move_duration);
     else stcore->auto_zoom_in(stcore->auto_move_duration);
 
   } else if(command == "timerate") {   // NOTE: accuracy issue related to frame rate
+
     float rate;
     std::istringstream istr(args["rate"]);
     istr >> rate;
@@ -120,19 +116,30 @@ int StelCommandInterface::execute_command(string commandline, int &wait) {
 	cout << "Error parsing date." << endl;
 	status = 0;
       }
-    } else if(args["relative"]!="") {
-      double days;
-      if(string_to_days( args["relative"], days ) ) {
-	stcore->navigation->set_JDay(stcore->navigation->get_JDay() + days );
-      } else {
-	cout << "Error parsing date." << endl;
-	status = 0;
-      } 
-
+    } else if(args["relative"]!="") {  // value is a float number of days
+      double days = str_to_double(args["relative"]);
+      stcore->navigation->set_JDay(stcore->navigation->get_JDay() + days );
     }
     
-  } else if (command == "set") {
+  } else if (command == "moveto") {
 
+    if(args["lat"]!="" || args["lon"]!="" || args["alt"]!="") {
+
+      double lat = stcore->observatory->get_latitude();
+      double lon = stcore->observatory->get_longitude();
+      double alt = stcore->observatory->get_altitude();
+      int delay;
+
+      if(args["lat"]!="") lat = str_to_double(args["lat"]);
+      if(args["lon"]!="") lon = str_to_double(args["lon"]);
+      if(args["alt"]!="") alt = str_to_double(args["alt"]);
+      delay = str_to_int(args["duration"]);
+
+      stcore->observatory->move_to(lat,lon,alt,delay);
+    } else {
+      cout << "Insufficient arguments" << endl;
+      status = 0;
+    }
 
   } else {
     cout << "Unrecognized command: " << commandline << endl;
@@ -201,33 +208,19 @@ int string_to_jday(string date, double &jd) {
 }
 
 
-// converts iso 8601 type string to days (for relative date changes)
-// TODO: move to better location for reuse
-int string_to_days(string date, double &jd) {
-
-  float sign = 1;
-  char tmp;
-  float year, month, day, hour, minute, second;
-  std::istringstream dstr( date );
+double str_to_double(string str) {
+  double dbl;
+  std::istringstream dstr( str );
     
-  dstr >> year >> tmp >> month >> tmp >> day >> tmp >> hour >> tmp >> minute >> tmp >> second;
-    
-  //  cout << year << " " << month << " " << day << " " << hour << " " << minute << " " << second << endl;
- 
-  // bounds checking (0 is allowed for all, few upper limits)
-  if( year > 100000 || year < -100000 || 
-	month < 0 || day < 0 || hour < 0 || second < 0 ) return 0;
-
-  if(year < 0) {
-    sign = -1;
-    year *= -1;
-  }
-
-  jd = sign * (year*365.25 + month*30.6001 + day 
-    + hour*24.0 + minute * 1440.0 + second * 86400.0);
-
-  //  cout << "relative days: " << jd << endl;
-
-  return 1;
-
+  dstr >> dbl;
+  return dbl;
 }
+
+int str_to_int(string str) {
+  int integer;
+  std::istringstream istr( str );
+    
+  istr >> integer;
+  return integer;
+}
+

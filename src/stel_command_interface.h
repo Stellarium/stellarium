@@ -50,6 +50,8 @@ class StelCommandInterface : CommandInterface
 
 // TODO: move elsewhere
 int string_to_jday(string date, double &jd);
-int string_to_days(string date, double &jd);
+
+double str_to_double(string str);
+int str_to_int(string str);
 
 #endif // _STEL_COMMAND_INTERFACE_H
