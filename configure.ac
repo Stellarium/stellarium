@@ -1,12 +1,15 @@
-dnl Enable CYGWIN/MACOSX/POSIX support
 dnl Process this file with autoconf to produce a configure script.
 
-AC_INIT(stellarium,0.7.0)
-AM_CONFIG_HEADER(src/config.h)
-AM_INIT_AUTOMAKE()
+AC_INIT(stellarium,0.7.0, stellarium@free.fr)
+AC_CONFIG_SRCDIR([src/main.cpp])
 
-dnl Check system type
-AC_CANONICAL_HOST
+AC_PREREQ(2.52)
+
+AM_INIT_AUTOMAKE
+AM_CONFIG_HEADER(src/config.h)
+
+AM_GNU_GETTEXT_VERSION(0.10.40)
+AM_GNU_GETTEXT
 
 dnl Check for compilers.
 AC_PROG_CC
@@ -20,9 +23,9 @@ dnl CFLAGS=" -Wall -pg"
 dnl CXXFLAGS=" -Wall -pg"
 
 dnl Checks for programs.
-AC_PROG_CPP
-AC_PROG_CXXCPP
-AC_PROG_INSTALL
+AC_PROG_CC
+AC_ISC_POSIX
+AC_PROG_CXX
 AC_PROG_RANLIB
 
 dnl Can't find later libGLU if -lm not set here!?!??!
@@ -75,6 +78,8 @@ esac
 
 AC_DEFINE_UNQUOTED(CONFIG_DATA_DIR, "$PKGDATADIR", [Set the directory where the datas (as textures or star catalogs) are stored.])
 
+localedir=`eval echo "${datadir}/locale"`
+AC_DEFINE_UNQUOTED(LOCALEDIR, "$localedir", [Set the directory where the locales (translations) are stored.])
 
 dnl For each host type, set the appropriate options
 dnl MACOSX
@@ -123,7 +128,28 @@ dnl OTHER SYSTEMS
 ;;
 esac
 
-dnl Checks for library functions.
-AC_CHECK_FUNCS(round toupper strcasecmp strdup sinf cosf tanf asinf acosf atanf expf logf log10f atan2f sqrtf powf)
+dnl AC_CACHE_CHECK(
+dnl 	[whether libglgooey is available],
+dnl 	[my_cv_glgooey_avail],
+dnl 	[my_ac_save_libs=$LIBS
+dnl 	LIBS="-lglgooey $LIBS"
+dnl 	AC_LANG_PUSH(C++)
+dnl 	AC_TRY_LINK(
+dnl 	[#include <glgooey/WindowManager.h>],
+dnl 	[Gooey::WindowManager();],
+dnl 	[my_cv_glgooey_avail=true],
+dnl 	[AC_MSG_ERROR(GLGOOEY not found - please install glgooey)])
+dnl 	AC_LANG_POP
+dnl 	LIBS=$my_ac_save_libs
+dnl ])
 
-AC_OUTPUT(Makefile stellarium.spec src/Makefile src/iniparser/Makefile src/glpng/Makefile src/stellplanet/Makefile src/stellastro/Makefile config/Makefile data/Makefile doc/Makefile textures/Makefile textures/landscapes/Makefile textures/constellation-art/Makefile data/sky_cultures/Makefile  data/sky_cultures/polynesian/Makefile data/sky_cultures/western/Makefile)
+LIBS="$LIBS -lglgooey"
+
+dnl Checks for library functions.
+AC_CHECK_FUNCS(round toupper strcasecmp strdup sinf cosf tanf asinf acosf atanf expf logf log10f atan2f sqrtf powf modf putenv setlocale tzset)
+
+
+AC_CONFIG_FILES([Makefile stellarium.spec src/Makefile src/iniparser/Makefile src/glpng/Makefile src/stellplanet/Makefile src/stellastro/Makefile config/Makefile data/Makefile doc/Makefile textures/Makefile textures/landscapes/Makefile textures/constellation-art/Makefile data/sky_cultures/Makefile  data/sky_cultures/polynesian/Makefile data/sky_cultures/western/Makefile po/Makefile.in intl/Makefile ])
+
+AC_CONFIG_COMMANDS([default],[[ echo timestamp > stamp-h ]],[[]])
+AC_OUTPUT
