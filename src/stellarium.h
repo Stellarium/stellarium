@@ -42,12 +42,12 @@
 
 // TODO : remove the useless ones
 #include <cmath>
-#include <stdlib.h>
-#include <stdio.h>
+#include <cstdlib>
+#include <cstdio>
 
 #include <ctime>
-#include <string.h>
-#include <ctype.h>
+#include <cstring>
+#include <cctype>
 
 
 #define APP_NAME "Stellarium v "VERSION

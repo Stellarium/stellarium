@@ -1,21 +1,15 @@
 Stellarium TODO list :
 
-Known bugs :
-* Very big zooming makes objects "shaky" : arithmetic precision?
-* When windows overlap, strange behaviour can appears.
-
 Important features :
-* Redo the atmosphere rendering properly
 * A way to enter exact time from within the program.
     - need the implementation of the widget "edit" in gui.
 * Selection of any object available in a list.
     - need the implementation of the widget "list" in gui.
+* Reduce the program size by reducing the stellplanet library size, especially the moon coefficents file.
 
 Features :
 * More nebulas.
 * More landscapes skins.
-* Correct planets axe orientation in the ecliptic plane, in self-roation
-* Big planets satellites
 * Minor planets
 
 Other cool features :

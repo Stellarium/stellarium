@@ -49,8 +49,10 @@ friend class stel_ui;
 public:
     stel_core();
     virtual ~stel_core();
+	
 	void init(void);
 	void load_config(void);
+	void save_config(void);
 
 	// Set the main data, textures and configuration directories
 	void set_directories(const string& DDIR, const string& TDIR, const string& CDIR, const string& DATA_ROOT);
@@ -85,6 +87,9 @@ public:
 	const string& get_DataDir(void) const {return DataDir;}
 
 private:
+
+	void load_config_from(const string& confFile);
+	void save_config_to(const string& confFile);
 
 	// Big options
 	int screen_W;
@@ -122,12 +127,11 @@ private:
 
 	Constellation* selected_constellation;
 
-	init_parser * conf;					// The class which manage config retrieves and dumps
 	float fps;
 
 	// Projector
-	PROJECTOR_TYPE projector_type;
-	VIEWPORT_TYPE viewport_type;
+	PROJECTOR_TYPE ProjectorType;
+	VIEWPORT_TYPE ViewportType;
 
 	// Stars
 	float MaxMagStarName;

@@ -19,7 +19,6 @@
 
 // Class which manages a Text User Interface "widgets"
 
-#include <iomanip>
 #include "s_tui.h"
 
 using namespace std;

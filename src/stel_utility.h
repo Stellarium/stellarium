@@ -20,12 +20,12 @@
 #ifndef _S_UTILITY_H_
 #define _S_UTILITY_H_
 
-// Utilities
-
-#include <math.h>
+#include <string>
+#include <cmath>
 #include "stellarium.h"
 #include "vecmath.h"
 
+using namespace std;
 
 // Angles and coordinate conversions
 double hms_to_rad(unsigned int h, unsigned int m, double s);
@@ -42,7 +42,9 @@ void rect_to_sphe(double *lng, double *lat, const Vec3d& v);
 void rect_to_sphe(float *lng, float *lat, const Vec3f& v);
 
 // Obtains a Vec3f from a string
-Vec3f str_to_vec3f(const char * s);
+Vec3f str_to_vec3f(const string& s);
+// Obtains a string from a Vec3f with the form x,y,z
+string vec3f_to_str(const Vec3f& v);
 
 /* Obtains Latitude, Longitude, RA or Declination from a string. */
 double get_dec_angle(const char *s);

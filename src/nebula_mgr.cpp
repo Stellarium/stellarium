@@ -53,7 +53,7 @@ int Nebula_mgr::read(const string& font_fileName, const string& fileName)
 	fic = fopen(fileName.c_str(),"r");
     if (!fic)
 	{
-		printf("ERROR : Can't open nebula catalog %s\n",fileName);
+		printf("ERROR : Can't open nebula catalog %s\n",fileName.c_str());
 		exit(-1);
 	}
 
