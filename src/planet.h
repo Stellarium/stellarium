@@ -22,11 +22,12 @@
 
 #include "libnova.h"
 #include "stellarium.h"
-#include "s_utility.h"
+#include "stel_utility.h"
 #include "s_font.h"
 #include "draw.h"
 #include <list>
 #include "vecmath.h"
+#include "stel_object.h"
 
 #define NO_HALO 0
 #define WITH_HALO 1
@@ -45,28 +46,32 @@ class RotationElements
     float precessionRate; // rate of precession of rotation axis in rads/day
 };
 
-class planet
+//class planet;
+
+class planet : public stel_object
 {
 public:
-	planet(char * _name, int _flagHalo, double _radius, vec3_t _color, s_texture * _planetTexture, s_texture * _haloTexture, void (*_coord_func)(double JD, struct ln_rect_posn * position));
+	planet(char * _name, int _flagHalo, double _radius, vec3_t _color, s_texture * _planetTexture, s_texture * _haloTexture, void (*_coord_func)(double JD, struct ln_helio_posn * position));
     virtual ~planet();
 	virtual void computePosition(double date); // Compute the position from the mother planet
     virtual Mat4d computeMatrix(double date);  // Compute the transformation matrix from the mother planet
     virtual void draw();
 	virtual void addSatellite(planet*);
 	virtual Vec3d getHelioPos();
+	unsigned char get_type(void) {return STEL_OBJECT_PLANET;}
 protected:
-	planet * parent;
     char * name;
 	int flagHalo;							// Set if a little "star like" halo will be drawn
 	RotationElements re;					// Rotation param
 	double radius;							// Planet radius
-	Vec3d helioPos; 						// Coords in UA
+	Vec3d ecliptic_coord; 					// Coords in UA in the rectangular ecliptic coordinate system
+											// The reference of the coord is the parent planet
 	vec3_t color;
     s_texture * planetTexture;				// Planet map texture
 	s_texture * haloTexture;				// Little halo texture
 	void (*coord_func)(double JD, struct ln_helio_posn * position); // The function called for the calculation of the rect heliocentric position at time JD.
-	list<planet*> satellites;				// satellites of the planet
+	planet * parent;
+	list<planet *> satellites;				// satellites of the planet
 };
 
 class ring

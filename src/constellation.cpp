@@ -1,4 +1,4 @@
-/* 
+/*
  * Stellarium
  * Copyright (C) 2002 Fabien Chéreau
  * 
@@ -18,6 +18,7 @@
  */
 
 #include "constellation.h"
+#include "navigator.h"
 
 extern s_font * constNameFont;
 
@@ -104,8 +105,10 @@ void constellation::DrawSeule()
 
 // Chek if the constellation is in the field of view and calc the x,y position if true
 void constellation::ComputeName()
-{   if (acos((global.XYZVision[0]*Xnom+global.XYZVision[1]*Ynom+global.XYZVision[2]*Znom)/RAYON)>((float)global.Fov+4)*PI*1.333333/360)
-    {   inFov=false;
+{   if (acos((navigation.get_equ_vision()[0]*Xnom+navigation.get_equ_vision()[1]*Ynom +
+		navigation.get_equ_vision()[2]*Znom)/RAYON)>((float)navigation.get_fov()+4)*PI*1.333333/360)
+    {
+		inFov=false;
         return; // Si hors du champ
     }
     inFov=true;

@@ -298,48 +298,33 @@ void TimeControlBtOnClicCallback(guiValue button,Component * caller)
 {   
 	if(caller==TimeNow)
     {	
-    	// init the time parameters with current time and date
-    	int d,m,y,hour,min,sec;
-    	time_t rawtime;
-    	tm * ptm;
-    	time ( &rawtime );
-    	ptm = gmtime ( &rawtime );
-    	y=ptm->tm_year+1900;
-    	m=ptm->tm_mon+1;
-    	d=ptm->tm_mday;
-    	hour=ptm->tm_hour;
-    	min=ptm->tm_min;
-    	sec=ptm->tm_sec;
-    	
-    	global.JDay=DateOps::dmyToDay(d,m,y);
-    	global.JDay+=((double)hour*HEURE+((double)min+(double)sec/60)*MINUTE);
+		navigation.set_JDay(get_julian_from_sys());
     	return;
 	}
-	global.FlagVeryFastTime = false;
-    global.FlagAcceleredTime = false;
-    global.FlagRealTime = false;
+
     if(caller==TimeFRW)
-    {   global.TimeDirection=-1;
-        global.FlagVeryFastTime=true;
+    {
+        navigation.set_time_speed(-JD_DAY);
     }
     if(caller==TimeRW)
-    {   global.TimeDirection=-1;
-        global.FlagAcceleredTime=true;
+    {
+		navigation.set_time_speed(-JD_MINUTE);
     }
     if(caller==TimePause)
-    {   global.TimeDirection= 1;
+    {
+		navigation.set_time_speed(0.);
 	}
     if(caller==TimeReal)
-    {   global.TimeDirection= 1;
-        global.FlagRealTime=true;
+    {
+		navigation.set_time_speed(JD_SECOND);
     }
     if(caller==TimeF)
-    {   global.TimeDirection= 1;
-        global.FlagAcceleredTime=true;
+    {
+		navigation.set_time_speed(JD_MINUTE);
     }
     if(caller==TimeFF)
-    {   global.TimeDirection= 1;
-        global.FlagVeryFastTime=true;
+    {
+		navigation.set_time_speed(JD_DAY);
     }
 }
 

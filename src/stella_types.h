@@ -22,7 +22,6 @@
 
 #include "vecmath.h"
 #include "libnova.h"
-#include "selection.h"
 
 typedef struct			// We Use A Struct To Hold Application Runtime Data
 {
@@ -38,13 +37,7 @@ typedef struct params{
     char ConfigDir[255];
     char DataDir[255];
 
-    selection SelectedObject;
-
-    // Position
-    ln_lnlat_posn ThePlace;   // Longitude,Latitude
-    int TimeZone;
-    int Altitude;       // Altitude in meter
-    int LandscapeNumber; // number of the landscape
+    int LandscapeNumber;		// number of the landscape
 
     // technical params
     int X_Resolution;
@@ -54,9 +47,6 @@ typedef struct params{
 
     //FPS Calc and time measurement
     float Fps;
-    int Frame;
-    int Timefr;
-    int Timebase;
 
     // Drawing
     float SkyBrightness;
