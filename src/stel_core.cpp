@@ -106,7 +106,7 @@ void stel_core::init(void)
 	}
 
 	cardinals_points = new Cardinals(DataDir + "spacefont.txt", "spacefont");
-	milky_way = new MilkyWay("voielactee256x256");
+	milky_way = new MilkyWay("milkyway");
 
     // Load hipparcos stars & names
     hip_stars->load(DataDir + "spacefont.txt", DataDir + "hipparcos.fab",
