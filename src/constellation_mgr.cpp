@@ -44,9 +44,9 @@ Constellation_mgr::Constellation_mgr(string _data_dir, string _sky_culture, stri
   set_sky_locale(_sky_locale);
   skyLocale = _sky_locale;
 
-  art_switch = new linear_switchor();
-  lines_switch = new linear_switchor();
-  names_switch = new linear_switchor();
+  art_switch = new linear_fader();
+  lines_switch = new linear_fader();
+  names_switch = new linear_fader();
 }
 
 
