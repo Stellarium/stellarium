@@ -265,12 +265,25 @@ void pressKey(int key, int, int)
 	global.FlagTraking=false;
 	break;
     case GLUT_KEY_UP :
-	global.deltaAlt =  1;
-	global.FlagTraking=false;
+	if (glutGetModifiers() & GLUT_ACTIVE_CTRL)
+	{
+		global.deltaFov= -1;
+	}
+	else
+	{	global.deltaAlt =  1;
+		global.FlagTraking=false;
+	}
 	break;
     case GLUT_KEY_DOWN :
-	global.deltaAlt = -1;
-	global.FlagTraking=false;
+	if (glutGetModifiers() & GLUT_ACTIVE_CTRL)
+	{
+		global.deltaFov= 1;
+	}
+	else
+	{
+		global.deltaAlt = -1;
+		global.FlagTraking=false;
+	}
 	break;
     case GLUT_KEY_PAGE_UP :
 	global.deltaFov= -1;
@@ -299,7 +312,14 @@ void releaseKey(int key, int, int)
 	break;
     case GLUT_KEY_UP : 
     case GLUT_KEY_DOWN :
-	global.deltaAlt = 0;
+    if (glutGetModifiers() & GLUT_ACTIVE_CTRL)
+	{
+		global.deltaFov = 0;
+	}
+	else
+	{
+		global.deltaAlt = 0;
+	}
 	break;
     case GLUT_KEY_PAGE_UP :
     case GLUT_KEY_PAGE_DOWN :
