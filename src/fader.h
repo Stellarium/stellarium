@@ -37,7 +37,8 @@ public:
 	virtual float get_interstate_percentage(void) const = 0;
 	// Switchors can be used just as bools
 	virtual fader& operator=(bool s) = 0;
-	virtual operator bool() = 0;
+	bool operator==(bool s) const {return state==s;}
+	operator bool() const {return state;}
 	virtual void set_duration(int _duration) {;}
 	void set_min_value(float _min) {min_value = _min;}
 	void set_max_value(float _max) {max_value = _max;}
@@ -59,7 +60,6 @@ public:
 	float get_interstate_percentage(void) const {return state ? 100.f : 0.f;}
 	// Switchors can be used just as bools
 	fader& operator=(bool s) {state=s; return *this;}
-	operator bool() {return state;}
 protected:
 };
 
@@ -121,8 +121,6 @@ public:
 		}
 		return *this;
 	}
-	
-	operator bool() {return state;}
 	
 	void set_duration(int _duration) {duration = _duration;}
 	void set_min_value(float _min) {min_value = _min;}
