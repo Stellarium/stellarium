@@ -152,6 +152,8 @@ int Nebula_mgr::read(const string& font_fileName, const string& fileName, int ba
     glDisable(GL_TEXTURE_2D);
     glLineWidth(1);
 
+	delete bar;
+
     return 0;
 }
 
