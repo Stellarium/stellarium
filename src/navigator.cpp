@@ -149,12 +149,10 @@ void navigator::zoom_out(int s)
 
 void navigator::update_transform_matrices(void)
 {
-/* HERE UPDATE THIS
-	Mat4d mat_helio_to_local;		// Transform from Heliocentric to Observator local coordinate
-	Mat4d mat_local_to_helio;		// Transform from Observator local coordinate to Heliocentric
-	Mat4d mat_local_to_equ;			// Transform from Observator local coordinate to Earth Equatorial
-	Mat4d mat_equ_to_local;			// Transform from Observator local coordinate to Earth Equatorial
-*/
+	mat_helio_to_local=Mat4d::identity();
+	mat_local_to_helio=Mat4d::identity();
+	mat_local_to_earth_equ=Mat4d::identity();
+	mat_earth_equ_to_local=Mat4d::identity();
 }
 
 void navigator::update_vision_vector(int delta_time)
