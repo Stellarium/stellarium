@@ -26,6 +26,10 @@ Fisheye_projector::Fisheye_projector(int _screenW, int _screenH, double _fov,
 {
 	change_fov(_fov);
 	set_screen_size(_screenW,_screenH);
+	mat_projection.set(1., 0., 0., 0.,
+							0., 1., 0., 0.,
+							0., 0., -1, 0.,
+							0., 0., 0., 1.);
 }
 
 Fisheye_projector::~Fisheye_projector()
@@ -35,43 +39,30 @@ Fisheye_projector::~Fisheye_projector()
 // For a fisheye, ratio is alway = 1
 void Fisheye_projector::maximize_viewport()
 {
-	vec_viewport[0] = 0;
-	vec_viewport[1] = 0;
-	vec_viewport[2] = screenW;
-	vec_viewport[3] = screenH;
-	glViewport(0, 0, screenW, screenH);
+	Projector::maximize_viewport();
 	center.set((vec_viewport[2]-vec_viewport[0])/2,(vec_viewport[3]-vec_viewport[1])/2,0);
-	init_project_matrix();
-}
-
-void Fisheye_projector::set_viewport(int x, int y, int w, int h)
-{
-	vec_viewport[0] = x;
-	vec_viewport[1] = y;
-	vec_viewport[2] = w;
-	vec_viewport[3] = h;
-	glViewport(x, y, w, h);
-	center.set(x+w/2,y+h/2,0);
-}
-
-void Fisheye_projector::change_fov(double deltaFov)
-{
-	Projector::change_fov(deltaFov);
 }
 
 // Init the viewing matrix, setting the field of view, the clipping planes, and screen ratio
 // The function is a reimplementation of glOrtho
 void Fisheye_projector::init_project_matrix(void)
 {
-	// Simplest orthographic projection
-	mat_projection = Mat4d(	1., 0., 0., 0.,
-							0., 1., 0., 0.,
-							0., 0., -1, 0.,
-							0., 0., 0., 1.);
-
+	double f = 1./tan(60.*M_PI/360.);
+	mat_projection2 = Mat4d(f*ratio, 0., 0., 0.,
+							0., f, 0., 0.,
+							0., 0., (zFar + zNear)/(zNear - zFar), -1.,
+							0., 0., (2.*zFar*zNear)/(zNear - zFar), 0.);
 	glMatrixMode(GL_PROJECTION);
-	glLoadMatrixd(mat_projection);
+	glLoadMatrixd(mat_projection2);
     glMatrixMode(GL_MODELVIEW);
+}
+
+void Fisheye_projector::update_openGL(void) const
+{
+	glMatrixMode(GL_PROJECTION);
+	glLoadMatrixd(mat_projection2);
+    glMatrixMode(GL_MODELVIEW);
+	glViewport(vec_viewport[0], vec_viewport[1], vec_viewport[2], vec_viewport[3]);
 }
 
 bool Fisheye_projector::project_custom(const Vec3d& v, Vec3d& win, const Mat4d& mat) const
@@ -118,13 +109,37 @@ void Fisheye_projector::unproject(double x, double y, const Mat4d& m, Vec3d& v) 
 // Override glVertex3f
 // Here is the main trick for texturing in fisheye mode : The trick is to compute the
 // new coordinate in orthographic projection which will simulate the fisheye projection.
-void Fisheye_projector::sVertex3f(double x, double y, double z, const Mat4d& mat) const
+void Fisheye_projector::sVertex3(float x, float y, float z, const Mat4d& mat) const
 {
 	static Vec3d win;
 	static Vec3d v;
-	project_custom(Vec3d(x,y,z), win, mat);
-	gluUnProject(win[0],win[1],win[2],mat,mat_projection,vec_viewport,&v[0],&v[1],&v[2]);
+	v.set(x,y,z);
+	//double l=(mat*v).length();
+	project_custom(v, win, mat);
+	//printf("%f %f %f\n",win[0],win[1],win[2]);
+	gluUnProject(win[0],win[1],0.5,mat,mat_projection2,vec_viewport,&v[0],&v[1],&v[2]);
+	//printf("%f %f %f\n",v[0],v[1],v[2]);
+	//v.normalize();
+	//v*=l;
 	glVertex3f(v[0],v[1],v[2]);
+}
+
+// Override glVertex3f
+// Here is the main trick for texturing in fisheye mode : The trick is to compute the
+// new coordinate in orthographic projection which will simulate the fisheye projection.
+void Fisheye_projector::sVertex3(double x, double y, double z, const Mat4d& mat) const
+{
+	static Vec3d win;
+	static Vec3d v;
+	v.set(x,y,z);
+	//double l=(mat*v).length();
+	project_custom(v, win, mat);
+	//printf("%f %f %f\n",win[0],win[1],win[2]);
+	gluUnProject(win[0],win[1],0.1,mat,mat_projection2,vec_viewport,&v[0],&v[1],&v[2]);
+	//printf("%f %f %f\n",v[0],v[1],v[2]);
+	//v.normalize();
+	//v*=2;
+	glVertex3d(v[0],v[1],v[2]);
 }
 
 void Fisheye_projector::sSphere(GLdouble radius, GLint slices, GLint stacks, const Mat4d& mat, int orient_inside) const
@@ -167,14 +182,14 @@ void Fisheye_projector::sSphere(GLdouble radius, GLint slices, GLint stacks, con
 			z = nsign * cos(rho);
 			glNormal3f(x * nsign, y * nsign, z * nsign);
 			glTexCoord2f(s, t);
-			sVertex3f(x * radius, y * radius, z * radius, mat);
+			sVertex3(x * radius, y * radius, z * radius, mat);
 			x = -sin(theta) * sin(rho + drho);
 			y = cos(theta) * sin(rho + drho);
 			z = nsign * cos(rho + drho);
 			glNormal3f(x * nsign, y * nsign, z * nsign);
 			glTexCoord2f(s, t - dt);
 			s += ds;
-			sVertex3f(x * radius, y * radius, z * radius, mat);
+			sVertex3(x * radius, y * radius, z * radius, mat);
 		}
 		glEnd();
 		t -= dt;

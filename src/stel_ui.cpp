@@ -456,16 +456,13 @@ int stel_ui::handle_clic(Uint16 x, Uint16 y, Uint8 button, Uint8 state)
             {
 				updateInfoSelectString();
 				core->navigation->set_flag_traking(0);
-				if (core->FlagConstellationPick && (core->FlagAsterismDrawing || core->FlagAsterismName))
+				if (core->selected_object->get_type()==STEL_OBJECT_STAR)
 				{
-					if (core->selected_object->get_type()==STEL_OBJECT_STAR)
-					{
-						core->selected_constellation=core->asterisms->is_star_in((Hip_Star*)core->selected_object);
-					}
-					else
-					{
-						core->selected_constellation=NULL;
-					}
+					core->selected_constellation=core->asterisms->is_star_in((Hip_Star*)core->selected_object);
+				}
+				else
+				{
+					core->selected_constellation=NULL;
 				}
             }
         }
