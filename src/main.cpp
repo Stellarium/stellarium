@@ -132,14 +132,14 @@ void setDirectories(void)
 #if defined(WIN32) || defined(CYGWIN) || defined(__MINGW32__) || defined(MACOSX)
 	CDIR = DATA_ROOT + "/config/";
 
-	if ((tempFile = fopen((CDIR + "config.txt").c_str(),"r")))
+	if ((tempFile = fopen((CDIR + "config.ini").c_str(),"r")))
 	{
 		fclose(tempFile);
 	}
 	else
 	{
 		// First launch for that user : set default options by copying the default files
-		system( (string("cp ") + CDIR + "default_config.txt " + CDIR + "config.txt").c_str() );
+		system( (string("cp ") + CDIR + "default_config.ini " + CDIR + "config.ini").c_str() );
 	}
 #else
 
@@ -155,16 +155,16 @@ void setDirectories(void)
 	string homeDir = getenv("HOME");
 	CDIR = homeDir + "/.stellarium/";
 
-	// If unix system, check if the file $HOME/.stellarium/config.txt exists,
+	// If unix system, check if the file $HOME/.stellarium/config.ini exists,
 	// if not, try to create it.
-	if ((tempFile = fopen((CDIR + "config.txt").c_str(),"r")))
+	if ((tempFile = fopen((CDIR + "config.ini").c_str(),"r")))
 	{
 		fclose(tempFile);
 	}
 	else
 	{
 		cout << "Will create config files in " << CDIR << endl;
-		if ((tempFile = fopen((CDIR + "config.txt").c_str(),"w")))
+		if ((tempFile = fopen((CDIR + "config.ini").c_str(),"w")))
 		{
 			fclose(tempFile);
 		}
@@ -174,13 +174,13 @@ void setDirectories(void)
 			cout << "Try to create directory " << CDIR << endl;
 			system(string("mkdir " + CDIR).c_str());
 
-			if ((tempFile = fopen((CDIR + "config.txt").c_str(),"w")))
+			if ((tempFile = fopen((CDIR + "config.ini").c_str(),"w")))
 			{
 				fclose(tempFile);
 			}
 			else
 			{
-				cout << "Can't create the file " << CDIR << "config.txt" << endl;
+				cout << "Can't create the file " << CDIR << "config.ini" << endl;
 				cout << "If the directory " << CDIR << " is missing please create it by hand." << endl;
 				cout << "If not check that you have access to " << CDIR << endl;
 				exit(-1);
@@ -188,7 +188,7 @@ void setDirectories(void)
 		}
 
 		// First launch for that user : set default options by copying the default files
-		system( (string("cp ") + DATA_ROOT + "/config/default_config.txt " + CDIR + "config.txt").c_str() );
+		system( (string("cp ") + DATA_ROOT + "/config/default_config.ini " + CDIR + "config.ini").c_str() );
 	}
 #endif	// Unix system
 
@@ -214,7 +214,7 @@ int main(int argc, char **argv)
 	core->set_directories(DDIR, TDIR, CDIR, DATA_ROOT);
 
 	// Give the config file parameters which has to be given "hard coded"
-	core->set_config_files("config.txt", "location.txt");
+	core->set_config_files("config.ini");
 
 	// Load the configuration options from the given file names
 	// This includes the video parameters

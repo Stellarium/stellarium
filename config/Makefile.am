@@ -1,3 +1,3 @@
 pkgdatadir = $(datadir)/@PACKAGE@/config
-pkgdata_DATA = config_no_3D_acceleration.txt default_config.txt
+pkgdata_DATA = default_config.ini default_config_dome.ini
 EXTRA_DIST = $(pkgdata_DATA)
