@@ -69,13 +69,13 @@ int Nebula::read(FILE * catalogue)
 	int rahr;
     float ramin;
     int dedeg;
-    int demin;
+    float demin;
 	float tex_angular_size;
 	float tex_rotation;
 	char tex_name[255];
 	char tempName[255];
 
-    if (fscanf(catalogue,"%u %s %d %f %d %d %f %f %f %s %s\n",
+    if (fscanf(catalogue,"%u %s %d %f %d %f %f %f %f %s %s\n",
 		&NGC_nb, type, &rahr, &ramin,&dedeg,&demin,
 		&mag,&tex_angular_size,&tex_rotation, tempName, tex_name)!=11)
 	{
@@ -106,7 +106,7 @@ int Nebula::read(FILE * catalogue)
     neb_tex = new s_texture(tex_name);
 
 	//tex_angular_size*tex_angular_size*3600/4*M_PI
-	luminance = mag_to_luminance(mag, 50) /	neb_tex->get_average_luminance() / 100;
+	luminance = mag_to_luminance(mag, tex_angular_size*tex_angular_size*3600) /	neb_tex->get_average_luminance() * 50;
 
 	float tex_size = RADIUS_NEB * sin(tex_angular_size/2/60*M_PI/180);
 
@@ -177,7 +177,7 @@ float Nebula::get_on_screen_size(const Projector* prj, const navigator * nav)
 void Nebula::draw_name(const Projector* prj)
 {   
     glColor3f(0.4,0.3,0.5);
-	float shift = 15.f + get_on_screen_size(prj)/2.f;
+	float shift = 8.f + get_on_screen_size(prj)/2.f;
 	gravity_label ? prj->print_gravity180(nebula_font, XY[0]+shift, XY[1]+shift, name, 0, 0) :
 		nebula_font->print(XY[0]+shift, XY[1]+shift, name);
 }

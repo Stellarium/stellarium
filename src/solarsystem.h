@@ -52,8 +52,8 @@ public:
 	// Return a stl vector containing the planets located inside the lim_fov circle around position v
 	vector<stel_object*> search_around(Vec3d v, double lim_fov, const navigator * nav, const Projector * prj);
 
+	planet* get_sun(void) {return sun;}
 	planet* get_earth(void) {return earth;}
-
 	planet* get_moon(void) {return moon;}
 
 private:

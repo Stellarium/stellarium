@@ -123,7 +123,7 @@ void stel_atmosphere::compute_color(double JD, Vec3d sunPos, Vec3d moonPos, floa
 
 	// Update world adaptation luminance from the previous values
 	if (sum_lum/nb_lum<4.5f/3) eye->set_world_adaptation_luminance(4.5f);
-	else eye->set_world_adaptation_luminance(sum_lum/nb_lum * 3.);
+	else eye->set_world_adaptation_luminance(sum_lum/nb_lum * 3.5);
 	sum_lum = 0.f;
 	nb_lum = 0;
 }

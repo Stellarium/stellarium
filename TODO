@@ -4,6 +4,7 @@ Stop using the glpng library which is the cause of bugs and which is not very po
 Need to make stellarium own texture loader using for example SDL_image library.
 
 Important features :
+* Use jpg format instead of png.
 * A way to enter exact time from within the program.
     - need the implementation of the widget "edit" in gui.
 * Selection of any object available in a list.
@@ -16,8 +17,7 @@ Features :
 * Minor planets
 
 Other cool features :
-* A popup with the photo of the selected object
+* Artificial satellites
 * Shooting star and meteor shower
 * Northern Lights
-* Artificial satellites
 * Using real 3D landscape with data taken from the site http://www.megginson.com/flightsim/fgfs-vmap0/
