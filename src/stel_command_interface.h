@@ -27,6 +27,7 @@
 #include "command_interface.h"
 #include "stel_core.h"
 #include "script_mgr.h"
+#include "audio.h"
 
 using namespace std;
 
@@ -46,6 +47,7 @@ class StelCommandInterface : CommandInterface
   
  private:
   stel_core * stcore;
+  Audio * audio;  // for audio track from script
 };
 
 // TODO: move elsewhere

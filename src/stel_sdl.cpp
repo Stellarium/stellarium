@@ -38,11 +38,27 @@ void stel_sdl::init(void)
     Uint32	Vflags;		// Our Video Flags
     Screen = NULL;
 
-	// Init the SDL library, the VIDEO subsystem
-    if(SDL_Init(SDL_INIT_VIDEO | SDL_INIT_NOPARACHUTE)<0)
-    {
-         printf("Unable to open SDL: %s\n", SDL_GetError() );
-         exit(-1);
+    // audio parameters
+    int audio_rate = 22050;
+    Uint16 audio_format = AUDIO_S16; /* 16-bit stereo */
+    int audio_channels = 2;
+    int audio_buffers = 4096;
+
+    // Init the SDL library, the VIDEO subsystem    
+    if(SDL_Init(SDL_INIT_VIDEO |  SDL_INIT_AUDIO | SDL_INIT_NOPARACHUTE)<0) {
+      // couldn't init audio, so try without
+      printf("Unable to open SDL with audio: %s\n", SDL_GetError() );
+
+      if(SDL_Init(SDL_INIT_VIDEO | SDL_INIT_NOPARACHUTE)<0) {
+	printf("Unable to open SDL: %s\n", SDL_GetError() );
+	exit(-1);
+      }
+    } else {
+      // initialized with audio enabled
+      // TODO: only initi audio if config option allows and script needs
+      if(Mix_OpenAudio(audio_rate, audio_format, audio_channels, audio_buffers)) {
+	printf("Unable to open audio!\n");
+      }
     }
 
     // Make sure that SDL_Quit will be called in case of exit()

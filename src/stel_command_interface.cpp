@@ -29,6 +29,7 @@ using namespace std;
 
 StelCommandInterface::StelCommandInterface(stel_core * core) {
   stcore = core;
+  audio = NULL;
 }
 
 StelCommandInterface::~StelCommandInterface() {
@@ -164,11 +165,31 @@ int StelCommandInterface::execute_command(string commandline, int &wait) {
 
     }
 
+  } else if(command=="audio") {
+    if(args["action"]!="") {
+      if(args["action"]=="load" && args["filename"]!="") {
+	if(audio) delete audio;
+	audio = new Audio(args["filename"], args["name"]);
+      }
+      if(args["action"]=="play") {
+	audio->play(args["loop"]=="on");
+      }
+    } else {
+      cout << "Incomplete or incorrect arguments." << endl;
+    }
+
+
+
+
   } else if(command=="script") {
 
     if(args["action"]=="end") {
       // stop script and unload any loaded images
       stcore->scripts->cancel_script();
+      if(audio) {
+	delete audio;
+	audio = NULL;
+      }
       stcore->images->drop_all_images();
     }
 
