@@ -57,7 +57,7 @@ void stel_ui::draw_gravity_ui(void)
 		if (core->FlagShowFov) os << " fov " << setprecision(3) << core->projection->get_fov();
 		if (core->FlagShowFps) os << "  FPS " << core->fps;
 
-		glColor3f(0.1,0.9,0.1);
+		glColor3f(0.5,1,0.5);
 		core->projection->print_gravity180(spaceFont, x-shift + 30, y-shift + 38, os.str());
 	}
 
@@ -205,9 +205,10 @@ void stel_ui::draw_tui(void)
 
 	if (tui_root)
 	{
-		glColor3f(0.1,0.9,0.1);
+		glColor3f(0.5,1,0.5);
 		core->projection->print_gravity180(spaceFont, x+shift - 30, y-shift + 38,
-			s_tui::stop_active + tui_root->getString());
+						   s_tui::stop_active + tui_root->getString(), 0);
+
 	}
 }
 

@@ -78,6 +78,19 @@ int Constellation::read(FILE *  fic, Hip_Star_mgr * _VouteCeleste)
     return 1;
 }
 
+// fade on art
+void Constellation::show_art(void)
+{
+  art_on = 1;
+}
+
+// fade off art
+void Constellation::hide_art(void)
+{
+  art_on = 0;
+}
+
+
 // Draw the Constellation lines
 void Constellation::draw(Projector* prj, const Vec3f& lines_color) const
 {
@@ -135,12 +148,30 @@ void Constellation::draw_name(s_font * constfont, Projector* prj) const
 }
 
 // Draw the art texture, optimized function to be called thru a constellation manager only
-void Constellation::draw_art_optim(Projector* prj) const
+void Constellation::draw_art_optim(Projector* prj) 
 {
+
+
 	if (art_tex)
 	{
+
+	  // update fade
+	  if( art_on ) {
+	    if( art_intensity < 1 ) {
+	      art_intensity += .05f;
+	    }
+	  } else if( art_intensity > 0 ) {
+	    art_intensity -= .05f;
+	  } else {
+	    return;
+	  }
+
 		static Vec3d v;
-    	glBindTexture(GL_TEXTURE_2D, art_tex->getID());
+
+		// for fade in
+		glColor3f(art_intensity,art_intensity,art_intensity);
+
+		glBindTexture(GL_TEXTURE_2D, art_tex->getID());
 		glBegin(GL_QUADS);
 			if (prj->project_earth_equ(art_vertex[0],v)) {glTexCoord2f(0,0); glVertex2f(v[0],v[1]);}
 			if (prj->project_earth_equ(art_vertex[1],v)) {glTexCoord2f(0.5,0); glVertex2f(v[0],v[1]);}
@@ -169,19 +200,31 @@ void Constellation::draw_art_optim(Projector* prj) const
 }
 
 // Draw the art texture
-void Constellation::draw_art(Projector* prj) const
+void Constellation::draw_art(Projector* prj) 
 {
+
 	if (art_tex)
 	{
+
+	  // update fade
+	  if( art_on ) {
+	    if( art_intensity < 1 ) {
+	      art_intensity += .05f;
+	    }
+	  } else if( art_intensity > 0 ) {
+	    art_intensity -= .05f;
+	  } else {
+	    return;
+	  }
 		static Vec3d v;
 
 		glBlendFunc(GL_ONE, GL_ONE);
 		glEnable(GL_TEXTURE_2D);
-    	glEnable(GL_BLEND);
+		glEnable(GL_BLEND);
 		glEnable(GL_CULL_FACE);
 		// for fade in
-		//    	glColor3f(1,1,1);
-    	glBindTexture(GL_TEXTURE_2D, art_tex->getID());
+		glColor3f(art_intensity,art_intensity,art_intensity);
+		glBindTexture(GL_TEXTURE_2D, art_tex->getID());
 
 		prj->set_orthographic_projection();
 
