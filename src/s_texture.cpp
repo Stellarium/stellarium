@@ -31,7 +31,7 @@ s_texture::s_texture(const char * _textureName) : texID(0), loadType(PNG_BLEND3)
     load();
 }
 
-s_texture::s_texture(const char * _textureName, int _loadType)
+s_texture::s_texture(const char * _textureName, int _loadType) : texID(0), loadType(PNG_BLEND3), loadType2(GL_CLAMP)
 {
     if (!_textureName) exit(-1);
     switch (_loadType)
