@@ -34,7 +34,7 @@ GraphicsContext::GraphicsContext(int _winW, int _winH) :
         headerTexture(NULL),
         baseColor(vec3_t(0.1, 0.4, 0.6)),
         textColor(vec3_t(0.8, 0.9, 1.0)),
-        scissorPos(vec2_t(0, 0)),
+        scissorPos(vec2_i(0, 0)),
         winW(_winW),
         winH(_winH),
         font(NULL)
@@ -185,17 +185,29 @@ void Container::addComponent(Component* c)
 void Container::render(GraphicsContext& gc)
 {
     if (!visible) return ;
-    vector<Component*>::iterator iter = components.begin();
-    glPushMatrix();
+    
     vec2_i pos = getPosition();
     vec2_i sz = getSize();
+    
+    glColor3fv(gc.baseColor*2);
+    glDisable(GL_TEXTURE_2D);
+    glBegin(GL_LINE_LOOP);
+        glVertex2f(pos[0] +0.5, pos[1]+0.5);
+        glVertex2f(pos[0] + sz[0]-0.5, pos[1]+0.5);
+        glVertex2f(pos[0] + sz[0]-0.5, pos[1] + sz[1]-0.5);
+        glVertex2f(pos[0]+0.5, pos[1] + sz[1]-0.5);
+    glEnd();
+    
+    vector<Component*>::iterator iter = components.begin();
+    glPushMatrix();
+
     glTranslatef(pos[0], pos[1], 0);
     gc.scissorPos += pos;
     while (iter != components.end())
     {
         if ((*iter)->visible)
         {
-            glScissor((int)gc.scissorPos[0], (int)(gc.winH - gc.scissorPos[1] - sz[1]+1), (int)sz[0]+1, (int)sz[1]);
+            glScissor(gc.scissorPos[0], gc.winH - gc.scissorPos[1] - sz[1], sz[0], sz[1]);
             (*iter)->render(gc);
         }
         iter++;
@@ -278,6 +290,7 @@ void FilledContainer::render(GraphicsContext& gc)
         glTexCoord2f(1.0f, 1.0f); glVertex2i(pos[0] + sz[0], pos[1]); // Haut Droit
         glTexCoord2f(0.0f, 1.0f); glVertex2i(pos[0], pos[1]); // Haut Gauche
     glEnd ();
+ 
     Container::render(gc);
 }
 

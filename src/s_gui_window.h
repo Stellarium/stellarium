@@ -29,34 +29,36 @@ using namespace gui;
 class StdWin : public Container
 {
 public:
-    StdWin(float posx, float posy, float sizex, float sizey, char * title, Component * parent);
+    StdWin(int posx, int posy, int sizex, int sizey, char * title, Component * parent, s_font * winfont_);
     void StdWinClicCallback(enum guiValue button,enum guiValue state);
     void StdWinMoveCallback(int x, int y,enum guiValue action);
     void render(GraphicsContext& gc);
     const char * getTitle() const;
     void setTitle(char * _title);
     void addComponent(Component * c) {theContainer->addComponent(c);}
-    vec2_i getInSize(GraphicsContext& gc);
-    void setInSize(vec2_i, GraphicsContext& gc);
+    vec2_i getInSize();
+    void setInSize(vec2_i);
 protected:
-    float headerSize;
+    int headerSize;
     Container * theContainer;
 private:
     bool mouseOn;
     vec2_i lastXY;
     char title[128];
     bool overBar;
+    s_font * winfont;
 };
 
 class StdBtWin : public StdWin
 {
 public:
-    StdBtWin(float posx, float posy, float sizex, float sizey, char * title, Component * parent);
+    StdBtWin(int posx, int posy, int sizex, int sizey, char * title, Component * parent, s_font * winfont_);
     void Hide(void);
     void setHideCallback(void (*_onHideCallback)(void))
-    {   onHideCallback=_onHideCallback;
+    {   
+        onHideCallback=_onHideCallback;
     }
-    void StdBtWin::render(GraphicsContext& gc);
+    void StdBtWin::setInSize(vec2_i newInSize);
 protected:
     Button * closeBt;
 private:
