@@ -573,12 +573,12 @@ Time_item::Time_item(const string& _label, double _JD) :
 
 Time_item::~Time_item()
 {
-	if (y) delete y;
-	if (m) delete y;
-	if (d) delete y;
-	if (h) delete y;
-	if (mn) delete y;
-	if (s) delete y;
+	delete y;
+	delete m;
+	delete d;
+	delete h;
+	delete mn;
+	delete s;
 }
 
 bool Time_item::onKey(SDLKey k, S_TUI_VALUE v)
