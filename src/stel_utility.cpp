@@ -47,38 +47,31 @@ double dms_to_rad(int d, double m)
 void sphe_to_rect(double lng, double lat, Vec3d * v)
 {
 	const double cosLat = cos(lat);
-    (*v)[0] = cos(lng) * cosLat;
-    (*v)[1] = sin(lng) * cosLat;
-	(*v)[2] = sin(lat);
+    v->set(cos(lng) * cosLat, sin(lng) * cosLat, sin(lat));
 }
 
 void sphe_to_rect(double lng, double lat, double r, Vec3d *v)
 {
 	const double cosLat = cos(lat);
-    (*v)[0] = cos(lng) * cosLat;
-    (*v)[1] = sin(lng) * cosLat;
-	(*v)[2] = sin(lat);
-	(*v)*=r;
+    v->set(cos(lng) * cosLat * r, sin(lng) * cosLat * r, sin(lat) * r);
 }
 
 void sphe_to_rect(float lng, float lat, Vec3f * v)
 {
 	const double cosLat = cos(lat);
-    (*v)[0] = cos(lng) * cosLat;
-    (*v)[1] = sin(lng) * cosLat;
-	(*v)[2] = sin(lat);
+    v->set(cos(lng) * cosLat, sin(lng) * cosLat, sin(lat));
 }
 
 void rect_to_sphe(double *lng, double *lat, const Vec3d *v)
 {
-	double r = sqrt((*v)[0]*(*v)[0]+(*v)[1]*(*v)[1]+(*v)[2]*(*v)[2]);
+	double r = v->length();
     *lat = asin((*v)[2]/r);
     *lng = atan2((*v)[1],(*v)[0]);
 }
 
 void rect_to_sphe(float *lng, float *lat, const Vec3f *v)
 {
-	double r = sqrt((*v)[0]*(*v)[0]+(*v)[1]*(*v)[1]+(*v)[2]*(*v)[2]);
+	double r = v->length();
     *lat = asin((*v)[2]/r);
     *lng = atan2((*v)[1],(*v)[0]);
 }
@@ -112,7 +105,8 @@ void Project(float objx,float objy,float objz,double & x ,double & y, double & z
 
 // For text printing
 void setOrthographicProjection(int w, int h)
-{   glMatrixMode(GL_PROJECTION);    // switch to projection mode
+{
+	glMatrixMode(GL_PROJECTION);    // switch to projection mode
     glPushMatrix();                 // save previous matrix which contains the settings for the perspective projection
     glLoadIdentity();               // reset matrix
     gluOrtho2D(0, w, 0, h);         // set a 2D orthographic projection

@@ -7307,4 +7307,19 @@ void get_mercury_helio_coords(double JD, double * X, double * Y, double * Z)
 	sphe_to_rect(L, B, R, X, Y, Z);
 }
 
+/*
+void get_mercury_interpolated_helio_coords(double JD, double * X, double * Y, double * Z)
+{
+	double xx;
+	double yy;
+	double zz;
+	double i;
 
+	*X=0.; *Y=0.; *Z=0.;
+	for (i=-2;i<3;i++)
+	{
+		get_mercury_helio_coords(JD+(double)i*0.000011574074074074074074, &xx, &yy, &zz);
+		*X+=xx; *Y+=yy; *Z+=zz;
+	}
+	*X/=5.; *Y/=5.; *Z/=5.;
+}*/

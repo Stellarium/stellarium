@@ -148,11 +148,13 @@ void Hip_Star::Draw(void)
         cmag=pow(rmag,2)/1.44;
         rmag=1.2;
     }
-
-    if (rmag>6.)
-    {   
-        rmag=6.;
-    }
+	else
+    {
+		if (rmag>6.)
+    	{
+        	rmag=6.;
+    	}
+	}
 
     // Random coef for star twinkling
     coef=(float)rand()/RAND_MAX*global.StarTwinkleAmount/10.;
@@ -162,7 +164,6 @@ void Hip_Star::Draw(void)
     rmag*=global.StarScale/3.;
     glColor3fv(RGB*(cmag/MaxColorValue));
     glPushMatrix();
-    glLoadIdentity();
     glTranslatef(XY[0],global.Y_Resolution-XY[1],0);
     glBegin(GL_QUADS );
         glTexCoord2i(0,0);    glVertex3f(-rmag,-rmag,0.f);      //Bas Gauche

@@ -78,6 +78,7 @@ Vec3d planet::get_earth_equ_pos(void)
 void planet::compute_position(double date)
 {
 	coord_func(date, &(ecliptic_pos[0]), &(ecliptic_pos[1]), &(ecliptic_pos[2]));
+	//printf("%s : %.30lf %.30lf %.30lf\n",name,ecliptic_pos[0],ecliptic_pos[1],ecliptic_pos[2]);
     // Compute for the satellites
     list<planet*>::iterator iter = satellites.begin();
     while (iter != satellites.end())
@@ -161,56 +162,65 @@ void planet::draw(void)
 	glPushMatrix();
     glMultMatrixd(mat_local_to_parent); // Go in planet local coordinate
 
-    glEnable(GL_TEXTURE_2D);
-	glEnable(GL_CULL_FACE);
-	glDisable(GL_BLEND);
-	glEnable(GL_LIGHTING);
+	double screenX, screenY, screenZ;
+	Project(0., 0., 0., screenX, screenY, screenZ);
+	screenY = global.Y_Resolution - screenY;
 
-	glPushMatrix();
-
-	// Rotate and add an extra half rotation because of the convention in all
-    // planet texture maps where zero deg long. is in the middle of the texture.
-	glRotatef(axis_rotation + 180.,0.,0.,1.);
-
-	//glColor3f(1.0f, 1.0f, 1.0f);
-	glBindTexture(GL_TEXTURE_2D, planetTexture->getID());
-	GLUquadricObj * p=gluNewQuadric();
-	gluQuadricTexture(p,GL_TRUE);
-	gluSphere(p,radius,60,60);
-	gluDeleteQuadric(p);
-
-
-	glPopMatrix();
-
-    // Draw the name, and the circle
-    // Thanks to Nick Porcino for this addition
-    if (global.FlagPlanetsHintDrawing)
-    {
-        double screenX, screenY, screenZ;
-        Project(0., 0., 0., screenX, screenY, screenZ);
-
-        if (screenZ < 1)
-        {
-            screenY = global.Y_Resolution - screenY;
-
+	// Check if in the screen
+	Vec3d equPos = get_earth_equ_pos();
+	float angl = radius/equPos.length();
+	float lim = atan(angl)*180./M_PI/navigation.get_fov();
+	if (screenZ < 1 && screenX>(-lim*global.X_Resolution) &&
+		screenX<(global.X_Resolution+lim*global.X_Resolution) &&
+		screenY>(-lim*global.Y_Resolution) && screenY<(global.Y_Resolution+lim*global.Y_Resolution))
+	{
+    	// Draw the name, and the circle
+    	// Thanks to Nick Porcino for this addition
+    	if (global.FlagPlanetsHintDrawing)
+    	{
             setOrthographicProjection(global.X_Resolution, global.Y_Resolution);    // 2D coordinate
             glEnable(GL_BLEND);
             glDisable(GL_LIGHTING);
 			glEnable(GL_TEXTURE_2D);
             glColor3f(0.5,0.5,0.7);
-            float tmp = 10.;//radius/navigation.get_fov();
+            float tmp = 8.f + angl*800.*60./navigation.get_fov();//radius/navigation.get_fov();
             planet_name_font->print(screenX+tmp,screenY+tmp, name);
 
             // Draw the circle
+			tmp-=8.;
+			if (tmp<1) tmp=1.;
+			glColor4f(0.5/tmp,0.5/tmp,0.7/tmp,1/tmp);
 			glDisable(GL_TEXTURE_2D);
             glBegin(GL_LINE_STRIP);
             for (float r = 0; r < 6.28; r += 0.2)
             {
-                glVertex3f(screenX + 8. * sin(r), screenY + 8. * cos(r), 0);
+                glVertex3f(screenX + 8. * sin(r), screenY + 8. * cos(r), 0.0f);
             }
             glEnd();
             resetPerspectiveProjection();                           // Restore the other coordinate
         }
+
+    	glEnable(GL_TEXTURE_2D);
+		glEnable(GL_CULL_FACE);
+		glDisable(GL_BLEND);
+		glEnable(GL_LIGHTING);
+
+
+		glPushMatrix();
+
+		// Rotate and add an extra half rotation because of the convention in all
+    	// planet texture maps where zero deg long. is in the middle of the texture.
+		glRotatef(axis_rotation + 180.,0.,0.,1.);
+
+		glEnable(GL_DEPTH_TEST);
+		glBindTexture(GL_TEXTURE_2D, planetTexture->getID());
+		GLUquadricObj * p=gluNewQuadric();
+		gluQuadricTexture(p,GL_TRUE);
+		gluSphere(p,radius,60,60);
+		gluDeleteQuadric(p);
+		glDisable(GL_DEPTH_TEST);
+
+		glPopMatrix();
     }
 
     // Draw the satellites
@@ -308,19 +318,21 @@ void sun_planet::compute_trans_matrix(double date)
 void sun_planet::draw()
 {
 	// We are supposed to be in heliocentric coordinate already so no matrix change
-	glEnable(GL_DEPTH_TEST);
+	//glEnable(GL_DEPTH_TEST);
 
     glEnable(GL_TEXTURE_2D);
 	glEnable(GL_CULL_FACE);
 	glDisable(GL_BLEND);
 	glDisable(GL_LIGHTING);
 
+	glEnable(GL_DEPTH_TEST);
 	glColor3f(1.0f, 1.0f, 1.0f);
 	glBindTexture(GL_TEXTURE_2D, planetTexture->getID());
 	GLUquadricObj * p=gluNewQuadric();
 	gluQuadricTexture(p,GL_TRUE);
 	gluSphere(p,radius,40,40);
 	gluDeleteQuadric(p);
+	glDisable(GL_DEPTH_TEST);
 
 	// Draw the name, and the circle
     // Thanks to Nick Porcino for this addition
@@ -383,7 +395,7 @@ void sun_planet::draw()
 
 	glDisable(GL_LIGHTING);
     glDisable(GL_CULL_FACE);
-	glDisable(GL_DEPTH_TEST);
+	//glDisable(GL_DEPTH_TEST);
 }
 
 
