@@ -47,7 +47,13 @@ stel_ui::stel_ui(stel_core * _core) :
 	bt_flag_help(NULL),
 	bt_flag_follow_earth(NULL),
 	bt_flag_config(NULL),
-	bt_flag_help_lbl(NULL)
+	bt_flag_help_lbl(NULL),
+
+	info_select_ctr(NULL),
+	info_select_txtlbl(NULL),
+
+	licence_win(NULL),
+	licence_txtlbl(NULL)
 {
 	if (!_core)
 	{
@@ -87,10 +93,19 @@ void stel_ui::init(void)
 	bt_flag_help_lbl->setPos(3,core->screen_H-50);
 	bt_flag_help_lbl->setVisible(0);
 
+	// Info on selected object
+	info_select_ctr = new FilledContainer();
+	info_select_ctr->reshape(0,13,300,80);
+    info_select_txtlbl = new TextLabel("Info");
+    info_select_txtlbl->reshape(5,5,290,78);
+    info_select_ctr->setVisible(0);
+	info_select_ctr->addComponent(info_select_txtlbl);
+	desktop->addComponent(info_select_ctr);
+
 	desktop->addComponent(createTopBar());
 	desktop->addComponent(createFlagButtons());
 	desktop->addComponent(bt_flag_help_lbl);
-
+	desktop->addComponent(createLicenceWindow());
 }
 
 
@@ -140,36 +155,47 @@ Component* stel_ui::createFlagButtons(void)
 {
 	bt_flag_asterism_draw = new FlagButton(core->FlagAsterismDrawing, NULL, "Bouton1");
 	bt_flag_asterism_draw->setOnPressCallback(makeFunctor((s_pcallback0)0,*this, &stel_ui::cb1));
+	bt_flag_asterism_draw->setOnMouseInOutCallback(makeFunctor((s_pcallback0)0,*this, &stel_ui::cbr1));
 
 	bt_flag_asterism_name = new FlagButton(core->FlagAsterismName, NULL, "Bouton2");
 	bt_flag_asterism_name->setOnPressCallback(makeFunctor((s_pcallback0)0,*this, &stel_ui::cb2));
+	bt_flag_asterism_name->setOnMouseInOutCallback(makeFunctor((s_pcallback0)0,*this, &stel_ui::cbr2));
 
 	bt_flag_azimuth_grid = new FlagButton(core->FlagAzimutalGrid, NULL, "Bouton3");
 	bt_flag_azimuth_grid->setOnPressCallback(makeFunctor((s_pcallback0)0,*this, &stel_ui::cb3));
+	bt_flag_azimuth_grid->setOnMouseInOutCallback(makeFunctor((s_pcallback0)0,*this, &stel_ui::cbr3));
 
 	bt_flag_equator_grid = new FlagButton(core->FlagEquatorialGrid, NULL, "Bouton3");
 	bt_flag_equator_grid->setOnPressCallback(makeFunctor((s_pcallback0)0,*this, &stel_ui::cb4));
+	bt_flag_equator_grid->setOnMouseInOutCallback(makeFunctor((s_pcallback0)0,*this, &stel_ui::cbr4));
 
 	bt_flag_ground = new FlagButton(core->FlagGround, NULL, "Bouton4");
 	bt_flag_ground->setOnPressCallback(makeFunctor((s_pcallback0)0,*this, &stel_ui::cb5));
+	bt_flag_ground->setOnMouseInOutCallback(makeFunctor((s_pcallback0)0,*this, &stel_ui::cbr5));
 
 	bt_flag_cardinals = new FlagButton(core->FlagCardinalPoints, NULL, "Bouton8");
 	bt_flag_cardinals->setOnPressCallback(makeFunctor((s_pcallback0)0,*this, &stel_ui::cb6));
+	bt_flag_cardinals->setOnMouseInOutCallback(makeFunctor((s_pcallback0)0,*this, &stel_ui::cbr6));
 
 	bt_flag_atmosphere = new FlagButton(core->FlagAtmosphere, NULL, "Bouton9");
 	bt_flag_atmosphere->setOnPressCallback(makeFunctor((s_pcallback0)0,*this, &stel_ui::cb7));
+	bt_flag_atmosphere->setOnMouseInOutCallback(makeFunctor((s_pcallback0)0,*this, &stel_ui::cbr7));
 
 	bt_flag_nebula_name = new FlagButton(core->FlagNebulaName, NULL, "Bouton15");
 	bt_flag_nebula_name->setOnPressCallback(makeFunctor((s_pcallback0)0,*this, &stel_ui::cb8));
+	bt_flag_nebula_name->setOnMouseInOutCallback(makeFunctor((s_pcallback0)0,*this, &stel_ui::cbr8));
 
 	bt_flag_help = new FlagButton(core->FlagHelp, NULL, "Bouton11");
 	bt_flag_help->setOnPressCallback(makeFunctor((s_pcallback0)0,*this, &stel_ui::cb9));
+	bt_flag_help->setOnMouseInOutCallback(makeFunctor((s_pcallback0)0,*this, &stel_ui::cbr9));
 
 	bt_flag_follow_earth = new FlagButton(core->navigation->get_flag_lock_equ_pos(), NULL, "Bouton13");
 	bt_flag_follow_earth->setOnPressCallback(makeFunctor((s_pcallback0)0,*this, &stel_ui::cb10));
+	bt_flag_follow_earth->setOnMouseInOutCallback(makeFunctor((s_pcallback0)0,*this, &stel_ui::cbr10));
 
 	bt_flag_config = new FlagButton(core->FlagConfig, NULL, "Bouton16");
 	bt_flag_config->setOnPressCallback(makeFunctor((s_pcallback0)0,*this, &stel_ui::cb11));
+	bt_flag_config->setOnMouseInOutCallback(makeFunctor((s_pcallback0)0,*this, &stel_ui::cbr11));
 
 	bt_flag_ctr = new FilledContainer();
 	bt_flag_ctr->addComponent(bt_flag_asterism_draw); 	bt_flag_asterism_draw->setPos(0,0);
@@ -232,6 +258,43 @@ bt_flag_help_lbl->setLabel("Compensation of the Earth rotation");}
 void stel_ui::cbr11(void) {if (bt_flag_config->getIsMouseOver())
 bt_flag_help_lbl->setLabel("Configuration window");}
 
+
+
+// The window containing the info (licence)
+Component* stel_ui::createLicenceWindow(void)
+{
+	licence_txtlbl = new TextLabel(
+"                 \1   " APP_NAME "  July 2003  \1\n\
+ \n\
+\1   Copyright (c) 2000-2003 Fabien Chereau\n\
+ \n\
+\1   Please check last version and send bug report & comments\n\n\
+on stellarium web page : http://stellarium.free.fr\n\n\
+ \n\
+\1   This program is free software; you can redistribute it and/or\n\
+modify it under the terms of the GNU General Public License\n\
+as published by the Free Software Foundation; either version 2\n\
+of the License, or (at your option) any later version.\n\
+ \n\
+This program is distributed in the hope that it will be useful, but\n\
+WITHOUT ANY WARRANTY; without even the implied\n\
+warranty ofMERCHANTABILITY or FITNESS FOR A\n\
+PARTICULAR PURPOSE.  See the GNU General Public\n\
+License for more details.\n\
+ \n\
+You should have received a copy of the GNU General Public\n\
+License along with this program; if not, write to the\n\
+Free Software Foundation, Inc., 59 Temple Place - Suite 330\n\
+Boston, MA  02111-1307, USA.\n");
+	licence_txtlbl->adjustSize();
+	licence_txtlbl->setPos(10,10);
+	licence_win = new StdBtWin("Infos");
+	licence_win->reshape(300,200,400,350);
+	licence_win->addComponent(licence_txtlbl);
+
+	return licence_win;
+}
+
 /**********************************************************************************/
 stel_ui::~stel_ui()
 {
@@ -289,6 +352,7 @@ int stel_ui::handle_clic(Uint16 x, Uint16 y, Uint8 button, Uint8 state)
         if (button==SDL_BUTTON_RIGHT)
         {
 			core->selected_object=NULL;
+			info_select_ctr->setVisible(0);
             return 1;
         }
         if (button==SDL_BUTTON_MIDDLE)
@@ -304,7 +368,7 @@ int stel_ui::handle_clic(Uint16 x, Uint16 y, Uint8 button, Uint8 state)
 			if (SDL_GetModState() & KMOD_CTRL)
 			{
 				core->selected_object=NULL;
-            	//InfoSelectLabel->setVisible(false);
+            	info_select_ctr->setVisible(0);
             	return 1;
         	}
         	// Left or middle clic -> selection of an object
@@ -312,7 +376,7 @@ int stel_ui::handle_clic(Uint16 x, Uint16 y, Uint8 button, Uint8 state)
             // If an object has been found
             if (core->selected_object)
             {
-				//updateInfoSelectString();
+				updateInfoSelectString();
 				core->navigation->set_flag_traking(0);
             }
         }
@@ -412,7 +476,7 @@ int stel_ui::handle_keys(SDLKey key, S_GUI_VALUE state)
         if(key==SDLK_i)
         {	
         	core->FlagInfos=!core->FlagInfos; 
-            //InfoWin->setVisible(core->FlagInfos);
+            licence_win->setVisible(core->FlagInfos);
 		}
     }
     return 0;
@@ -426,16 +490,19 @@ void stel_ui::update(void)
 }
 
 
-/**********************************************************************/
+
 // Update the infos about the selected object in the TextLabel widget
-/*void stel_ui::updateInfoSelectString(void)
+void stel_ui::updateInfoSelectString(void)
 {
 	char objectInfo[300];
     objectInfo[0]=0;
 	core->selected_object->get_info_string(objectInfo);
-    InfoSelectLabel->setLabel(objectInfo);
-    InfoSelectLabel->setVisible(true);
-	if (core->selected_object->get_type()==STEL_OBJECT_NEBULA) InfoSelectLabel->setColour(Vec3f(0.4f,0.5f,0.8f));
-	if (core->selected_object->get_type()==STEL_OBJECT_PLANET) InfoSelectLabel->setColour(Vec3f(1.0f,0.3f,0.3f));
-	if (core->selected_object->get_type()==STEL_OBJECT_STAR)   InfoSelectLabel->setColour(core->selected_object->get_RGB());
-}*/
+    info_select_txtlbl->setLabel(objectInfo);
+    info_select_ctr->setVisible(1);
+	if (core->selected_object->get_type()==STEL_OBJECT_NEBULA)
+		info_select_txtlbl->setTextColor(Vec3f(0.4f,0.5f,0.8f));
+	if (core->selected_object->get_type()==STEL_OBJECT_PLANET)
+		info_select_txtlbl->setTextColor(Vec3f(1.0f,0.3f,0.3f));
+	if (core->selected_object->get_type()==STEL_OBJECT_STAR)
+		info_select_txtlbl->setTextColor(core->selected_object->get_RGB());
+}

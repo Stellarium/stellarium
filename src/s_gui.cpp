@@ -295,16 +295,17 @@ CallbackComponent::CallbackComponent() : Component(), is_mouse_over(0)
 
 int CallbackComponent::onClic(int x, int y, S_GUI_VALUE bt, S_GUI_VALUE state)
 {
+	if (!visible) return 0;
 	if (state==S_GUI_PRESSED && bt==S_GUI_MOUSE_LEFT && isIn(x, y))
 	{
 		if (onPressCallback) onPressCallback();
-		return 1;
 	}
 	return 0;
 }
 
 int CallbackComponent::onMove(int x, int y)
 {
+	if (!visible) return 0;
 	if (isIn(x, y))
 	{
 		if (onMouseInOutCallback && !is_mouse_over)
@@ -378,30 +379,31 @@ void Container::draw(void)
 
 int Container::onClic(int x, int y, S_GUI_VALUE button, S_GUI_VALUE state)
 {
+	if (!visible) return 0;
 	list<Component*>::iterator iter = childs.begin();
 	while (iter != childs.end())
 	{
 		if ((*iter)->onClic(x - pos[0], y - pos[1], button, state)) return 1;	// The signal has been intercepted
         iter++;
     }
-	CallbackComponent::onClic(x, y, button, state);
-    return 0;
+	return CallbackComponent::onClic(x, y, button, state);
 }
 
 int Container::onMove(int x, int y)
 {
+	if (!visible) return 0;
 	list<Component*>::iterator iter = childs.begin();
 	while (iter != childs.end())
 	{
 		if ((*iter)->onMove(x - pos[0], y - pos[1])) return 1;	// The signal has been intercepted
         iter++;
     }
-	CallbackComponent::onMove(x, y);
-    return 0;
+	return CallbackComponent::onMove(x, y);
 }
 
 int Container::onKey(SDLKey k, S_GUI_VALUE s)
 {
+	if (!visible) return 0;
 	list<Component*>::iterator iter = childs.begin();
 	while (iter != childs.end())
 	{
@@ -426,58 +428,6 @@ void FilledContainer::draw(void)
 }
 
 
-//////////////////////////// FramedContainer ///////////////////////////////////
-// Container with a frame around it
-////////////////////////////////////////////////////////////////////////////////
-
-FramedContainer::FramedContainer() : Container(), frameSize(3,3,3,3)
-{
-	inside = new Container();
-	inside->reshape(frameSize[0], frameSize[3], 10, 10);
-	childs.push_front(inside);
-}
-
-void FramedContainer::draw(void)
-{
-    if (!visible) return;
-	painter.drawSquareEdge(pos, size);
-	painter.drawSquareEdge(inside->getPos()-s_vec2i(1,1) + pos, inside->getSize() + s_vec2i(2,2));
-
-	Container::draw();
-}
-
-void FramedContainer::reshape(const s_vec2i& _pos, const s_vec2i& _size)
-{
-	pos = _pos;
-	inside->setSize(_size);
-	size = _size + s_vec2i( frameSize[0] + frameSize[1], frameSize[2] + frameSize[3]);
-}
-
-void FramedContainer::reshape(int x, int y, int w, int h)
-{
-	pos = s_vec2i(x, y);
-	inside->setSize(s_vec2i(w,h));
-	size = s_vec2i(w, h) + s_vec2i( frameSize[0] + frameSize[1], frameSize[2] + frameSize[3]);
-}
-
-void FramedContainer::setSize(const s_vec2i& _size)
-{
-	inside->setSize(_size);
-	size = _size + s_vec2i( frameSize[0] + frameSize[1], frameSize[2] + frameSize[3]);
-}
-
-void FramedContainer::setSize(int w, int h)
-{
-	inside->setSize(s_vec2i(w,h));
-	size = s_vec2i(w, h) + s_vec2i( frameSize[0] + frameSize[1], frameSize[2] + frameSize[3]);
-}
-
-void FramedContainer::setFrameSize(int left, int right, int top, int bottom)
-{
-	// TODO
-}
-
-
 ////////////////////////////////// Button //////////////////////////////////////
 // Simplest button with one press callback
 ////////////////////////////////////////////////////////////////////////////////
@@ -491,6 +441,14 @@ void Button::draw()
 {
 	if (!visible) return;
 	painter.drawSquareEdge(pos, size, painter.getBaseColor() * (1.f + 0.4 * is_mouse_over));
+}
+
+int Button::onClic(int x, int y, S_GUI_VALUE bt, S_GUI_VALUE state)
+{
+	if (!visible) return 0;
+	CallbackComponent::onClic(x,y,bt,state);
+	if (state==S_GUI_PRESSED && bt==S_GUI_MOUSE_LEFT && isIn(x, y))	return 1;
+	return 0;
 }
 
 void FilledButton::draw()
@@ -513,13 +471,13 @@ void CheckBox::draw()
 
 int CheckBox::onClic(int x, int y, S_GUI_VALUE bt, S_GUI_VALUE state)
 {
+	if (!visible) return 0;
 	if (state==S_GUI_PRESSED && bt==S_GUI_MOUSE_LEFT && isIn(x, y))
 	{
 		if (isChecked) isChecked = 0;
 		else isChecked = 1;
 	}
-	CallbackComponent::onClic(x,y,bt,state);
-	return 0;
+	return Button::onClic(x,y,bt,state);
 }
 
 
@@ -591,8 +549,200 @@ void Label::adjustSize(void)
 }
 
 
+TextLabel::TextLabel(const char * _label, const s_font* _font) : Container(), label(NULL)
+{
+	if (_font) painter.setFont(_font);
+	setLabel(_label);
+	adjustSize();
+}
+
+TextLabel::~TextLabel()
+{
+    if (label) delete label;
+	label=NULL;
+}
+
+void TextLabel::setLabel(const char * _label)
+{
+    if (label) free(label);
+    label = NULL;
+    if (_label) label = strdup(_label);
+
+    childs.clear();
+
+    Label * tempLabel;
+    char * pch;
+    int i = 0;
+	int lineHeight = (int)painter.getFont()->getLineHeight()+1;
+    pch = strtok (label, "\n");
+    while (pch != NULL)
+    {
+        tempLabel = new Label(pch);
+		tempLabel->adjustSize();
+		tempLabel->setPainter(painter);
+        tempLabel->setPos(0,i*lineHeight);
+        addComponent(tempLabel);
+        pch = strtok (NULL, "\n");
+        i++;
+    }
+}
+
+void TextLabel::adjustSize(void)
+{
+	int maxY = 0;
+	list<Component*>::iterator iter = childs.begin();
+	while (iter != childs.end())
+	{
+		if ((*iter)->getSizex()>maxY) maxY = (*iter)->getSizex();
+        iter++;
+    }
+	setSize(maxY,childs.size()*((int)painter.getFont()->getLineHeight()+1));
+}
+
+void TextLabel::setTextColor(const s_color& c)
+{
+	list<Component*>::iterator iter = childs.begin();
+	while (iter != childs.end())
+	{
+		(*iter)->setTextColor(c);
+        iter++;
+    }
+}
 
 
+//////////////////////////// FramedContainer ///////////////////////////////////
+// Container with a frame around it
+////////////////////////////////////////////////////////////////////////////////
+
+FramedContainer::FramedContainer() : Container(), frameSize(3,3,3,3)
+{
+	inside = new Container();
+	inside->reshape(frameSize[0], frameSize[3], 10, 10);
+	childs.push_front(inside);
+}
+
+void FramedContainer::draw(void)
+{
+    if (!visible) return;
+	painter.drawSquareEdge(pos, size);
+	painter.drawSquareEdge(inside->getPos()-s_vec2i(1,1) + pos, inside->getSize() + s_vec2i(2,2));
+
+	Container::draw();
+}
+
+void FramedContainer::reshape(const s_vec2i& _pos, const s_vec2i& _size)
+{
+	pos = _pos;
+	inside->setSize(_size);
+	size = _size + s_vec2i( frameSize[0] + frameSize[1], frameSize[2] + frameSize[3]);
+}
+
+void FramedContainer::reshape(int x, int y, int w, int h)
+{
+	pos = s_vec2i(x, y);
+	inside->setSize(s_vec2i(w,h));
+	size = s_vec2i(w, h) + s_vec2i( frameSize[0] + frameSize[1], frameSize[2] + frameSize[3]);
+}
+
+void FramedContainer::setSize(const s_vec2i& _size)
+{
+	inside->setSize(_size);
+	size = _size + s_vec2i( frameSize[0] + frameSize[1], frameSize[2] + frameSize[3]);
+}
+
+void FramedContainer::setSize(int w, int h)
+{
+	inside->setSize(s_vec2i(w,h));
+	size = s_vec2i(w, h) + s_vec2i( frameSize[0] + frameSize[1], frameSize[2] + frameSize[3]);
+}
+
+void FramedContainer::setFrameSize(int left, int right, int bottom, int top)
+{
+	frameSize[0] = left;
+	frameSize[1] = right;
+	frameSize[2] = bottom;
+	frameSize[3] = top;
+	inside->setPos(left, top);
+	size = inside->getSize() + s_vec2i( frameSize[0] + frameSize[1], frameSize[2] + frameSize[3]);
+}
+
+
+////////////////////////////////// StdWin //////////////////////////////////////
+// Standard window widget
+////////////////////////////////////////////////////////////////////////////////
+
+StdWin::StdWin(const char * _title, s_texture* _header_tex, s_font * _winfont, int headerSize) :
+	FramedContainer(), titleLabel(NULL), header_tex(NULL), dragging(0)
+{
+	if (_header_tex) header_tex = _header_tex;
+	if (_winfont) painter.setFont(_winfont);
+	setFrameSize(1,1,1,headerSize);
+	titleLabel = new Label();
+	setTitle(_title);
+	Container::addComponent(titleLabel);
+}
+
+void StdWin::setTitle(const char * _title)
+{
+	titleLabel->setLabel(_title);
+	titleLabel->adjustSize();
+}
+
+void StdWin::draw()
+{
+	if (!visible) return;
+	titleLabel->setPos((size[0] - titleLabel->getSizex())/2, (frameSize[3]-titleLabel->getSizey())/2 + 1);
+	painter.drawSquareFill(pos, s_vec2i(size[0], frameSize[3]));
+	FramedContainer::draw();
+}
+
+int StdWin::onClic(int x, int y, S_GUI_VALUE bt, S_GUI_VALUE state)
+{
+	if (!visible) return 0;
+	if (FramedContainer::onClic(x, y, bt, state)) return 1;
+	if (state==S_GUI_RELEASED && bt==S_GUI_MOUSE_LEFT)
+	{
+		dragging = 0;
+	}
+	if (isIn(x, y))
+	{
+		if (state==S_GUI_PRESSED && bt==S_GUI_MOUSE_LEFT)
+		{
+			dragging = 1;
+			oldpos.set(x,y);
+		}
+		return 1;
+	}
+	return 0;
+}
+
+int StdWin::onMove(int x, int y)
+{
+	if (!visible) return 0;
+	if (FramedContainer::onMove(x, y)) return 1;
+	if (dragging)
+	{
+		pos+=(s_vec2i(x,y)-oldpos);
+		oldpos.set(x,y);
+	}
+	return 0;
+}
+
+StdBtWin::StdBtWin(const char * _title, s_texture* _header_tex, s_font * _winfont, int headerSize) :
+	StdWin(_title, _header_tex, _winfont, headerSize), closeBt(NULL)
+{
+	closeBt = new Button();
+	closeBt->reshape(3,3,headerSize-6,headerSize-6);
+	closeBt->setOnPressCallback(makeFunctor((s_pcallback0)0,*this, &StdBtWin::onCloseBt));
+	Container::addComponent(closeBt);
+}
+
+void StdBtWin::draw()
+{
+	if (!visible) return;
+	closeBt->setPos(size[0] - closeBt->getSizex() - 3, 3);
+	StdWin::draw();
+}
 
 /*
 

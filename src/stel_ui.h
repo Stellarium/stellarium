@@ -81,7 +81,6 @@ private:
 	FlagButton * bt_flag_help;
 	FlagButton * bt_flag_follow_earth;
 	FlagButton * bt_flag_config;
-	Label * bt_flag_help_lbl;	// The dynamic information about the button under the mouse
 	Component* createFlagButtons(void);
 	void cb1(void);	void cb2(void);	void cb3(void);	void cb4(void);
 	void cb5(void);	void cb6(void);	void cb7(void);	void cb8(void);
@@ -90,6 +89,19 @@ private:
 	void cbr1(void);	void cbr2(void);	void cbr3(void);	void cbr4(void);
 	void cbr5(void);	void cbr6(void);	void cbr7(void);	void cbr8(void);
 	void cbr9(void);	void cbr10(void);void cbr11(void);
+	// The dynamic information about the button under the mouse
+	Label * bt_flag_help_lbl;
+
+	// The TextLabel displaying the infos about the selected object
+	FilledContainer * info_select_ctr;
+	TextLabel * info_select_txtlbl;
+	void updateInfoSelectString(void);
+
+	// The window containing the info (licence)
+	StdBtWin * licence_win;
+	TextLabel * licence_txtlbl;
+	Component* createLicenceWindow(void);
+
 };
 
 #endif  //_STEL_UI_H

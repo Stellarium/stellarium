@@ -119,6 +119,7 @@ void s_font::print(float x, float y, const char * str, int upsidedown) const
 
 float s_font::getStrLen(const char * str) const
 {
+	if (!str) return 0;
     float s=0;
     for (int i=0;i<(int)strlen(str);i++)
     { 

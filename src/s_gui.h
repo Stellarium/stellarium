@@ -139,6 +139,7 @@ namespace s_gui
 		virtual void setFont(const s_font* f) {painter.setFont(f);}
 		virtual void setTextColor(const s_color& c) {painter.setTextColor(c);}
 		virtual void setBaseColor(const s_color& c) {painter.setBaseColor(c);}
+		virtual void setPainter(const Painter& p) {painter = p;}
 		static void setDefaultPainter(const Painter& p) {defaultPainter=p;}
 		static void initScissor(int winW, int winH);
 		static void enableScissor(void) {scissor->activate();}
@@ -193,31 +194,12 @@ namespace s_gui
     };
 
 
-    class FramedContainer : public Container
-    {
-    public:
-		FramedContainer();
-		virtual void addComponent(Component* c) {inside->addComponent(c);}
-        virtual void reshape(const s_vec2i& _pos, const s_vec2i& _size);
-        virtual void reshape(int x, int y, int w, int h);
-        virtual int getSizex() const {return inside->getSizex();}
-		virtual int getSizey() const {return inside->getSizey();}
-        virtual const s_vec2i getSize() const {return inside->getSize();}
-        virtual void setSize(const s_vec2i& _size);
-        virtual void setSize(int w, int h);
-        virtual void draw(void);
-		virtual void setFrameSize(int left, int right, int top, int bottom);
-	protected:
-		Container* inside;
-		s_vec4i frameSize;
-    };
-
-
     class Button : public CallbackComponent
     {
     public:
 		Button();
         virtual void draw();
+		int onClic(int x, int y, S_GUI_VALUE bt, S_GUI_VALUE state);
     protected:
     };
 
@@ -252,7 +234,7 @@ namespace s_gui
     class Label : public Component
     {
     public:
-        Label(const char* _label  = NULL, const s_font* _font = NULL);
+        Label(const char* _label = NULL, const s_font* _font = NULL);
         virtual ~Label();
         virtual const char * getLabel() const {return label;}
         virtual void setLabel(const char *);
@@ -262,7 +244,7 @@ namespace s_gui
         char * label;
     };
 
-    class Labeled_Button : public FilledButton, Label
+    class Labeled_Button : public FilledButton
     {
     public:
         Labeled_Button(const char * _label = NULL);
@@ -270,73 +252,69 @@ namespace s_gui
     private:
     };
 
-/*
-    class Labeled_Button : public Button
-    {
-    public:
-        Labeled_Button(char * _label);
-        virtual ~Labeled_Button();
-        virtual const char * getLabel() const;
-        virtual void setLabel(char *);
-        virtual void render(GraphicsContext& gc);
-    private:
-        char * label;
-    };
-
-    class Textured_Button : public Button
-    {
-    public:
-        Textured_Button(s_texture* _texBt);
-        Textured_Button(s_texture* _texBt, vec2_i _position, vec2_i _size ,vec3_t _activeColor, vec3_t _passiveColor, Callback1Base* _c1, Callback1Base* _c2, int _ID, int _active);
-        virtual ~Textured_Button();
-        virtual void render(GraphicsContext& gc);
-    private:
-		Callback1Base * c1;
-		Callback1Base * c2;
-        s_texture * texBt;
-        vec3_t activeColor;
-        vec3_t passiveColor;
-    };
-
-    class Label : public Component
-    {
-    public:
-        Label(char * _label);
-        Label(char * _label, s_font * _theFont);
-        virtual ~Label();
-        virtual const char * getLabel() const;
-        virtual void setLabel(char *);
-        virtual void render(GraphicsContext&);
-        virtual void setColour(vec3_t _colour) {colour=_colour;}
-    private:
-        char * label;
-        s_font * theFont;
-        vec3_t colour;
-    };
 
     class TextLabel : public Container
 	{
 	public:
-	    TextLabel(char * _label, s_font * _theFont);
+	    TextLabel(const char * _label = NULL, const s_font* _font = NULL);
 	    virtual ~TextLabel();
-	    virtual const char * getLabel() const;
-	    virtual void setLabel(char *);
-	    virtual void setColour(vec3_t _colour);
+        virtual const char * getLabel() const {return label;}
+        virtual void setLabel(const char *);
+		virtual void adjustSize(void);
+		virtual void setTextColor(const s_color& c);
 	protected:
-	    char * label;
-	    s_font * theFont;
-	    vec3_t colour;
-	};
-    
-    class FilledTextLabel : public TextLabel
-	{
-	public:
-	    FilledTextLabel(char * _label, s_font * _theFont);
-	    //~FilledTextLabel();
-	    virtual void render(GraphicsContext&);
-	private:
+        char * label;
 	};
 
+
+    class FramedContainer : public Container
+    {
+    public:
+		FramedContainer();
+		virtual void addComponent(Component* c) {inside->addComponent(c);}
+        virtual void reshape(const s_vec2i& _pos, const s_vec2i& _size);
+        virtual void reshape(int x, int y, int w, int h);
+        virtual int getSizex() const {return inside->getSizex();}
+		virtual int getSizey() const {return inside->getSizey();}
+        virtual const s_vec2i getSize() const {return inside->getSize();}
+        virtual void setSize(const s_vec2i& _size);
+        virtual void setSize(int w, int h);
+        virtual void draw(void);
+		virtual void setFrameSize(int left, int right, int top, int bottom);
+	protected:
+		Container* inside;
+		s_vec4i frameSize;
+    };
+
+	class StdWin : public FramedContainer
+	{
+	public:
+	    StdWin(const char * _title = NULL, s_texture* _header_tex = NULL,
+			s_font * _winfont = NULL, int headerSize = 18);
+	   	virtual void draw();
+	    virtual const char * getTitle() const {return titleLabel->getLabel();}
+	    virtual void setTitle(const char * _title);
+		virtual int onClic(int, int, S_GUI_VALUE, S_GUI_VALUE);
+		virtual int onMove(int, int);
+	protected:
+	    Label* titleLabel;
+		s_texture* header_tex;
+		int dragging;
+		s_vec2i oldpos;
+	};
+
+	class StdBtWin : public StdWin
+	{
+	public:
+	    StdBtWin(const char * _title = NULL, s_texture* _header_tex = NULL,
+			s_font * _winfont = NULL, int headerSize = 18);
+		virtual void StdBtWin::draw();
+	protected:
+		void onCloseBt(void) {visible=0;}
+		Button * closeBt;
+	};
+
+	/*
     class CursorBar : public Component
 	{
 	public:
