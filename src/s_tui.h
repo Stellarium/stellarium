@@ -336,7 +336,10 @@ namespace s_tui
 			if (k==SDLK_LEFT || k==SDLK_ESCAPE) return false;
 			return false;
 		}
-		void addItem(const T& newitem) {items.insert(newitem); if(current==items.end()) current = items.begin();}
+		void addItem(const T& newitem) {
+		  items.insert(newitem); 
+		  if(current==items.end()) current = items.begin();
+		}
 		void addItemList(string s)
 		{
 			istringstream is(s);
