@@ -62,7 +62,8 @@ stel_ui::stel_ui(stel_core * _core) :
 	help_win(NULL),
 	help_txtlbl(NULL),
 
-	config_win(NULL)
+	config_win(NULL),
+	tui_root(NULL)
 {
 	if (!_core)
 	{
@@ -70,6 +71,20 @@ stel_ui::stel_ui(stel_core * _core) :
 		exit(-1);
 	}
 	core = _core;
+}
+
+/**********************************************************************************/
+stel_ui::~stel_ui()
+{
+    delete desktop; 	desktop = NULL;
+    delete spaceFont; 	spaceFont = NULL;
+	delete baseTex; 	baseTex = NULL;
+	delete flipBaseTex; flipBaseTex = NULL;
+	delete courierFont; courierFont = NULL;
+	delete tex_up; tex_up = NULL;
+	delete tex_down; tex_down = NULL;
+	if (tui_root) delete tui_root; tui_root=NULL;
+	delete info_select_txtlbl; info_select_txtlbl = NULL;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -502,14 +517,6 @@ void stel_ui::help_win_hideBtCallback(void)
 	help_win->setVisible(0);
 }
 
-/**********************************************************************************/
-stel_ui::~stel_ui()
-{
-    delete desktop; 	desktop = NULL;
-    delete spaceFont; 	spaceFont = NULL;
-	delete baseTex; 	baseTex = NULL;
-	delete courierFont; courierFont = NULL;
-}
 
 /*******************************************************************/
 void stel_ui::draw(void)
