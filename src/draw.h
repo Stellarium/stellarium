@@ -38,7 +38,7 @@ class SkyGrid
 {
 public:
 	// Create and precompute positions of a SkyGrid
-	SkyGrid(SKY_GRID_TYPE grid_type = EQUATORIAL, Vec3f grid_color = Vec3f(0.2, 0.2, 0.2), unsigned int _nb_meridian = 24, unsigned int _nb_parallel = 17,
+	SkyGrid(SKY_GRID_TYPE grid_type = EQUATORIAL, Vec3f grid_color = Vec3f(0.2, 0.2, 0.2), const string& font_file ="", const string& tex_file ="", unsigned int _nb_meridian = 24, unsigned int _nb_parallel = 17,
 	 double _radius = 1., unsigned int _nb_alt_segment = 18, unsigned int _nb_azi_segment = 50);
     virtual ~SkyGrid();
 	void draw(const Projector* prj) const;
@@ -54,6 +54,9 @@ private:
 	Vec3f** alt_points;
 	Vec3f** azi_points;
 	bool (Projector::*proj_func)(const Vec3d&, Vec3d&) const;
+	s_font* font;
+	SKY_GRID_TYPE gtype;
+
 };
 
 

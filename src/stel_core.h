@@ -233,6 +233,7 @@ private:
 	double PresetSkyTime;
 	string StartupTimeMode;
 	Vec3d InitViewPos;
+	VIEWING_MODE_TYPE ViewingMode;
 
 	// Locale
 	int FlagUTC_Time;					// if true display UTC time
@@ -245,6 +246,7 @@ private:
 
 	int FlagTimePause;
 	double temp_time_velocity;			// Used to store time speed while in pause
+
 
 	// Viewing direction function : 1 move, 0 stop.
 	void turn_right(int);

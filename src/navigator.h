@@ -31,6 +31,13 @@
 #define JD_HOUR   0.041666666666666666666
 #define JD_DAY    1.
 
+
+enum VIEWING_MODE_TYPE
+{
+  VIEW_HORIZON,
+  VIEW_EQUATOR
+};
+
 class stel_object;
 
 // Class which manages a navigation context
@@ -113,6 +120,8 @@ public:
 
 	void update_move(double deltaAz, double deltaAlt);
 
+	void set_viewing_mode(VIEWING_MODE_TYPE view_mode);
+
 private:
 
 	// Struct used to store data for auto mov
@@ -153,6 +162,8 @@ private:
 
 	// Position variables
 	Observator* position;
+
+	int viewing_mode;   // defines if view corrects for horizon, or uses equatorial coordinates
 };
 
 #endif //_NAVIGATOR_H_

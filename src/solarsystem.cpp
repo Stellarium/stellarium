@@ -54,7 +54,7 @@ SolarSystem::~SolarSystem()
 
 
 // Init and load the solar system data
-void SolarSystem::init(const string& font_fileName, const string& planetfile)
+void SolarSystem::init(const string& font_fileName, const string& planetfile, Vec3f label_color)
 {
     planet_name_font = new s_font(13,"spacefont", font_fileName);
     if (!planet_name_font)
@@ -63,6 +63,7 @@ void SolarSystem::init(const string& font_fileName, const string& planetfile)
         exit(-1);
     }
 	planet::set_font(planet_name_font);
+	planet::set_label_color(label_color);
 	load(planetfile);
 }
 
@@ -330,15 +331,4 @@ vector<stel_object*> SolarSystem::search_around(Vec3d v, double lim_fov, const n
         iter++;
     }
 	return result;
-}
-
-// Set the font color
-void SolarSystem::set_planet_font_color(const Vec3f& c)
-{
-    vector<planet*>::iterator iter = system_planets.begin();
-    while (iter != system_planets.end())
-    {
-        (*iter)->setLabelColor(c);
-        iter++;
-    }
 }
