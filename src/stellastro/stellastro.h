@@ -33,7 +33,7 @@ extern "C" {
 // General Calendar Functions
 
 // Human readable (easy printf) date format
-struct ln_date
+typedef struct
 {
     int years; 		/*!< Years. All values are valid */
     int months;		/*!< Months. Valid values : 1 (January) - 12 (December) */
@@ -41,29 +41,29 @@ struct ln_date
     int hours; 		/*!< Hours. Valid values 0 - 23. */
     int minutes; 	/*!< Minutes. Valid values 0 - 59. */
     double seconds;	/*!< Seconds. Valid values 0 - 59.99999.... */
-};
+}ln_date;
 
 
 /* Calculate the julian day from date.*/
-double get_julian_day(struct ln_date * date);
+double get_julian_day(const ln_date * date);
 
 /* Calculate the date from the julian day. */
-void get_date(double JD, struct ln_date * date);
+void get_date(double JD, ln_date * date);
 
 /* Calculate day of the week. 0 = Sunday .. 6 = Saturday */
-unsigned int get_day_of_week (struct ln_date *date);
+unsigned int get_day_of_week (const ln_date *date);
 	
 /* Calculate julian day from system time. */
 double get_julian_from_sys();
 
 /* Calculate gmt date from system date */
-void get_ln_date_from_sys(struct ln_date * date);
+void get_ln_date_from_sys(ln_date * date);
 
 // Obtains a ln_date from 2 strings s1 and s2 for date and time
 // with the form dd/mm/yyyy for s1 and hh:mm:ss.s for s2.
 // Returns NULL if s1 or s2 is not valid.
 // Uses the current date if s1 is "today" and current time if s2 is "now"
-const struct ln_date * str_to_date(const char * s1, const char * s2);
+const ln_date * str_to_date(const char * s1, const char * s2);
 
 /* puts a large angle in the correct range 0 - 360 degrees */
 double range_degrees (double angle);

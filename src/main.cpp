@@ -230,25 +230,30 @@ int main(int argc, char **argv)
     setDirectories();
 
 	// Create the core of stellarium, it has to be initialized
-	stel_core core;
+	stel_core* core = new stel_core();
 
-	core.set_directories(DDIR, TDIR, CDIR);
+	core->set_directories(DDIR, TDIR, CDIR);
 
 	// Give the config file parameters which has to be given "hard coded"
-	core.set_config_files("config.txt", "location.txt");
+	core->set_config_files("config.txt", "location.txt");
 
 	// Load the configuration options from the given file names
 	// This include the video parameters
-	core.load_config();
+	core->load_config();
 
 	// Create a stellarium sdl manager
-	stel_sdl sdl_mgr(&core);
+	stel_sdl sdl_mgr(core);
 
 	// Initialize video device and other sdl parameters
 	sdl_mgr.init();
 
+	core->init();
+
 	// Start the main loop
 	sdl_mgr.start_main_loop();
+
+	// Clean memory
+	delete core;
 
 	return 0;
 }

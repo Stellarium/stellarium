@@ -57,19 +57,19 @@ class planet : public stel_object
 public:
 	planet(char * _name, int _flagHalo, double _radius, vec3_t _color, s_texture * _planetTexture, s_texture * _haloTexture, void (*_coord_func)(double JD, double *, double *, double *));
     virtual ~planet();
-	virtual void get_info_string(char * s, navigator * nav);// Return info string about the planet
+	virtual void get_info_string(char * s, navigator * nav) const;// Return info string about the planet
 	virtual void compute_position(double date); 			// Compute the position from the mother planet
     virtual void compute_trans_matrix(double date);		// Compute the transformation matrix from the mother planet
 	virtual void compute_geographic_rotation(double date);	// Compute the z rotation to use from equatorial to geographic coordinates
     virtual void draw(int hint_ON, draw_utility * du, navigator * nav);
 	virtual void addSatellite(planet*);
 	virtual void set_rotation_elements(float _period, float _offset, double _epoch, float _obliquity, float _ascendingNode, float _precessionRate);
-	virtual Vec3d get_ecliptic_pos();
-	virtual Vec3d get_heliocentric_ecliptic_pos();		// Return the heliocentric ecliptical position
+	virtual Vec3d get_ecliptic_pos() const;
+	virtual Vec3d get_heliocentric_ecliptic_pos() const;		// Return the heliocentric ecliptical position
 	// Get a matrix which convert from heliocentric ecliptic coordinate to local geographic coordinate
 	virtual Mat4d get_helio_to_geo_matrix();
-	unsigned char get_type(void) {return STEL_OBJECT_PLANET;}
-	virtual Vec3d get_earth_equ_pos(navigator * nav);			// Return the rect earth equatorial position
+	unsigned char get_type(void) const {return STEL_OBJECT_PLANET;}
+	virtual Vec3d get_earth_equ_pos(navigator * nav) const;			// Return the rect earth equatorial position
 	virtual planet * search(Vec3d, navigator * nav);	// Search if any planet is close to position given in earth equatorial position.
 	// Search if any planet is close to position given in earth equatorial position and return the distance
 	virtual planet* search(Vec3d pos, double * angleClosest, navigator * nav);

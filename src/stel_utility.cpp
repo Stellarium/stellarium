@@ -152,13 +152,6 @@ Vec3f str_to_vec3f(const char * s)
 }
 
 
-// Obtains a Vec3f from a string with the form x,y,z
-Vec3f str_to_vec3f(const char * s)
-{
-	float x, y, z;
-	if (s==NULL || (sscanf(s,"%f,%f,%f",&x, &y, &z)!=3)) return Vec3f(0.f,0.f,0.f);
-	return Vec3f(x,y,z);
-}
 
 // strips trailing whitespaces from buf.
 #define iswhite(c)  ((c)== ' ' || (c)=='\t')

@@ -84,19 +84,12 @@ void InitSolarSystem(char * font_fileName)
     }
 
 
-/*	Epoch 2443000.00038375
-	Period         1.769138
-	SemiMajorAxis  421600
-	Eccentricity   0.0041
-	Inclination    0.040
-	AscendingNode    312.981
-	LongOfPericenter  97.735
-	MeanLongitude    106.724*/
-
 	ganymede_orbit = new EllipticalOrbit(1070000/AU * (1.0 - 0.0015),
-		0.0015, 0.195*M_PI/180., 119.841*M_PI/180., (188.831 - 119.841)*M_PI/180., -188.831*M_PI/180., 7.154553, 2443000.00038375);
+		0.0015, 0.195*M_PI/180., 119.841*M_PI/180., (188.831 - 119.841)*M_PI/180.,
+		-188.831*M_PI/180., 7.154553, 2443000.00038375);
 	io_orbit = new EllipticalOrbit(421600/AU * (1.0 - 0.0041),
-		0.0041, 0.040*M_PI/180., 312.981*M_PI/180., (97.735 - 312.981)*M_PI/180., -97.735*M_PI/180., 1.769138, 2443000.00038375);
+		0.0041, 0.040*M_PI/180., 312.981*M_PI/180., (97.735 - 312.981)*M_PI/180.,
+		-97.735*M_PI/180., 1.769138, 2443000.00038375);
 
 
     sun_map = new s_texture("sun",TEX_LOAD_TYPE_PNG_SOLID);
@@ -121,7 +114,7 @@ void InitSolarSystem(char * font_fileName)
 
 	Sun = new sun_planet("Sun", NO_HALO, 696000./AU, vec3_t(1.,1.,0.8), sun_map, NULL, sun_halo);
 	Moon = new planet("Moon", NO_HALO, 1738./AU, vec3_t(1.,1.,1.), moon_map, NULL, get_lunar_geo_posn);
-	Earth = new planet("Earth", NO_HALO, 6378.1/AU, vec3_t(1.,1.,1.), earth_map, small_halo, get_earth_helio_coords);
+	Earth = new planet("Earth", NO_HALO, 6378.1/AU, vec3_t(1.,1.,1.), earth_map,small_halo, get_earth_helio_coords);
 	Mercury = new planet("Mercury", NO_HALO, 2439.7/AU, vec3_t(1.,1.,1.), mercury_map, small_halo, get_mercury_helio_coords);
 	Venus = new planet("Venus", NO_HALO, 6052./AU, vec3_t(1.,1.,1.), venus_map, small_halo, get_venus_helio_coords);
 	Mars = new planet("Mars", NO_HALO, 3394./AU, vec3_t(1.,1.,1.), mars_map, small_halo, get_mars_helio_coords);

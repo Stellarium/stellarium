@@ -27,19 +27,18 @@
 
 #define RADIUS_NEB 28.
 
-s_font * nebulaFont;
-
-Nebula_mgr::Nebula_mgr()
+Nebula_mgr::Nebula_mgr() : nebulaFont(NULL)
 {
-	Selectionnee = NULL;
 }
 
 Nebula_mgr::~Nebula_mgr()
-{   vector<Nebula *>::iterator iter;
+{
+	vector<Nebula *>::iterator iter;
     for(iter=Liste.begin();iter!=Liste.end();iter++)
     {   delete (*iter);
     }
-    delete Nebula::texCircle;
+    if (Nebula::texCircle) delete Nebula::texCircle;
+	if (nebulaFont) delete nebulaFont;
 }
 
 // read from stream
@@ -70,7 +69,9 @@ int Nebula_mgr::Read(char * font_fileName, char * fileName)
 	}
 	fclose(fic);
 
-    nebulaFont=new s_font(12.,"spacefont", font_fileName); // load Font
+	Nebula::texCircle = new s_texture("neb");   // Load circle texture
+
+    nebulaFont = new s_font(12.,"spacefont", font_fileName); // load Font
     if (!nebulaFont)
     {
 	    printf("Can't create nebulaFont\n");
@@ -80,21 +81,10 @@ int Nebula_mgr::Read(char * font_fileName, char * fileName)
 	return 0;
 }
 
-int Nebula_mgr::ReadTexture()
-{   
-	Nebula::texCircle=new s_texture("neb");   // Load circle texture
-	if (!Nebula::texCircle) exit(1);
-    vector<Nebula *>::iterator iter;
-    for(iter=Liste.begin();iter!=Liste.end();iter++)
-    {   
-		if ((*iter)->ReadTexture()==0) return 0;
-    }
-    return 1;
-}
-
 // Draw all the Nebulaes
 void Nebula_mgr::Draw(int names_ON, draw_utility * du)
-{   glEnable(GL_TEXTURE_2D);
+{
+	glEnable(GL_TEXTURE_2D);
     glEnable(GL_BLEND);
     
     GLdouble M[16];
@@ -123,7 +113,7 @@ void Nebula_mgr::Draw(int names_ON, draw_utility * du)
 	        if ((**iter).XY[2]<1 && (**iter).XY[0]>0 && (**iter).XY[0]<du->screenW &&
 				(**iter).XY[1]>0 && (**iter).XY[1]<du->screenH)
             {
-                (**iter).DrawName();
+                (**iter).DrawName(nebulaFont);
                 (**iter).DrawCircle(du);
             }
         }
@@ -139,8 +129,10 @@ stel_object * Nebula_mgr::search(vec3_t Pos)
     Nebula * plusProche=NULL;
     float anglePlusProche=0.;
     for(iter=Liste.begin();iter!=Liste.end();iter++)
-    {   if ((**iter).XYZ[0]*Pos[0]+(**iter).XYZ[1]*Pos[1]+(**iter).XYZ[2]*Pos[2]>anglePlusProche)
-        {   anglePlusProche=(**iter).XYZ[0]*Pos[0]+(**iter).XYZ[1]*Pos[1]+(**iter).XYZ[2]*Pos[2];
+    {
+		if ((**iter).XYZ[0]*Pos[0]+(**iter).XYZ[1]*Pos[1]+(**iter).XYZ[2]*Pos[2]>anglePlusProche)
+        {
+			anglePlusProche=(**iter).XYZ[0]*Pos[0]+(**iter).XYZ[1]*Pos[1]+(**iter).XYZ[2]*Pos[2];
             plusProche=(*iter);
         }
     }

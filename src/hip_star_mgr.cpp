@@ -18,6 +18,10 @@
  */
 
 // class used to manage groups of Stars
+// TODO : Can optimize a lot the star drawing by using a home made container
+// with a Hip_star* array statically malloced for each grid number
+// and a Hip_star*[] array indexed with the grid number
+// The Hip_star* array can maybe be sorted in magnitude or optimization
 
 #include "hip_star_mgr.h"
 #include "s_texture.h"
@@ -28,13 +32,8 @@
 
 #define RADIUS_STAR 25.
 
-s_texture * hipStarTexture;
-s_font * starFont;
-
-Hip_Star_mgr::Hip_Star_mgr() : HipGrid()
-{	
-    hipStarTexture=NULL;
-    StarArray = NULL;
+Hip_Star_mgr::Hip_Star_mgr() : HipGrid(), StarArray(NULL), starTexture(NULL), starFont(NULL)
+{
 }
 
 Hip_Star_mgr::~Hip_Star_mgr()
@@ -45,12 +44,12 @@ Hip_Star_mgr::~Hip_Star_mgr()
         delete (*iter).second ;
     }
 
-    if (hipStarTexture) delete hipStarTexture;
-    hipStarTexture=NULL;
+    if (starTexture) delete starTexture;
+    starTexture=NULL;
     if (starFont) delete starFont;
     starFont=NULL;
-    
     if (StarArray) delete StarArray;
+	StarArray = NULL;
 }
 
 // Load from file ( create the stream and call the Read function )
@@ -132,13 +131,13 @@ void Hip_Star_mgr::Load(char * font_fileName, char * hipCatFile, char * commonNa
 
     fclose(hipFile);
 
-    hipStarTexture=new s_texture("star16x16");  // Load star texture
+	starTexture = new s_texture("star16x16");  // Load star texture
 
     starFont=new s_font(10.f,"spacefont", font_fileName); // load Font
     if (!starFont)
     {
 	    printf("Can't create starFont\n");
-        exit(1);
+        exit(-1);
     }
     
 }
@@ -153,7 +152,7 @@ void Hip_Star_mgr::Draw(float _star_scale, float _twinkle_amount, int name_ON,
 
 	glEnable(GL_TEXTURE_2D);
     glEnable(GL_BLEND);
-    glBindTexture (GL_TEXTURE_2D, hipStarTexture->getID());
+    glBindTexture (GL_TEXTURE_2D, starTexture->getID());
 
     double z;
     GLdouble M[16];
@@ -192,8 +191,8 @@ void Hip_Star_mgr::Draw(float _star_scale, float _twinkle_amount, int name_ON,
 		        ((*iter).second)->Draw(du);
 		        if (((*iter).second)->CommonName && name_ON && ((*iter).second)->Mag<maxMagStarName)
             	{
-		        	((*iter).second)->DrawName();
-                	glBindTexture (GL_TEXTURE_2D, hipStarTexture->getID());
+		        	((*iter).second)->DrawName(starFont);
+                	glBindTexture (GL_TEXTURE_2D, starTexture->getID());
             	}
         	}
 	    }

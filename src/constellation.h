@@ -20,7 +20,6 @@
 #ifndef _CONSTELLATION_H_
 #define _CONSTELLATION_H_
 
-#include "hip_star.h"
 #include "hip_star_mgr.h"
 #include "stellarium.h"
 #include "stel_utility.h"
@@ -35,16 +34,14 @@ public:
     int Read(FILE *, Hip_Star_mgr * _VouteCeleste);
     void Draw();
     void DrawSeule();
-    void DrawName(void);
-    void ComputeName(draw_utility * du);
+    void DrawName(s_font * constfont);
 private:
     char * Name;
     char Abreviation[4];
     char * Inter;
     float Xnom,Ynom,Znom;
-    double x_c,y_c;
+	double XYnom[2];
     unsigned int NbSegments;
-    bool inFov;
     Hip_Star ** Asterism;
 };
 

@@ -20,11 +20,12 @@
 // Manage all the objects to be used in the program
 
 #include "stel_core.h"
+#include "stellastro.h"
 
-extern s_texture * texIds[200];            // Common Textures
+extern s_texture * texIds[200];            // Common Textures TODO : Remove that
 
 stel_core::stel_core() : screen_W(800), screen_H(600), bppMode(16), Fullscreen(0), initialized(0), navigation(NULL), selected_object(NULL), hip_stars(NULL), asterisms(NULL),
-nebulas(NULL), atmosphere(NULL), tone_converter(NULL)
+nebulas(NULL), atmosphere(NULL), tone_converter(NULL), du(NULL), conf(NULL), frame(0), timefr(0), timeBase(0)
 {
 	TextureDir[0] = 0;
     ConfigDir[0] = 0;
@@ -37,16 +38,17 @@ stel_core::~stel_core()
 {
 	if (navigation) delete navigation;
 	if (selected_object) delete selected_object;
-	if (hip_stars) delete hip_stars;
 	if (asterisms) delete asterisms;
+	if (hip_stars) delete hip_stars;
 	if (nebulas) delete nebulas;
 	if (atmosphere) delete atmosphere;
 	if (tone_converter) delete tone_converter;
+	printf("Core destructor\n");
 	//if (ui) delete ui;
 }
 
 // Set the main data, textures and configuration directories
-void stel_core::set_directories(char * DDIR, char * TDIR, char * CDIR)
+void stel_core::set_directories(const char * DDIR, const char * TDIR, const char * CDIR)
 {
 	strncpy(TextureDir, TDIR, sizeof(TextureDir));
 	strncpy(ConfigDir, CDIR, sizeof(ConfigDir));
@@ -54,7 +56,7 @@ void stel_core::set_directories(char * DDIR, char * TDIR, char * CDIR)
 }
 
 // Set the 2 config files names.
-void stel_core::set_config_files(char * _config_file, char * _location_file)
+void stel_core::set_config_files(const char * _config_file, const char * _location_file)
 {
 	strncpy(config_file, _config_file, strlen(_config_file) +1);
 	strncpy(location_file, _location_file, strlen(_location_file) +1);
@@ -63,7 +65,6 @@ void stel_core::set_config_files(char * _config_file, char * _location_file)
 // Update all the objects in function of the time
 void stel_core::update(int delta_time)
 {
-	static int frame, timefr, timeBase;
 	frame++;
     timefr+=delta_time;
     if (timefr-timeBase > 1000)
@@ -75,6 +76,7 @@ void stel_core::update(int delta_time)
 
     // Update the position of observation and time etc...
 	navigation->update_time(delta_time);
+
 	Sun->compute_position(navigation->get_JDay());		// Position of sun and all the satellites (ie planets)
 	Sun->compute_trans_matrix(navigation->get_JDay());	// Matrix for sun and all the satellites (ie planets)
 	navigation->update_transform_matrices();			// Transform matrices between coordinates systems
@@ -129,7 +131,8 @@ void stel_core::draw(int delta_time)
 	// convert.... TODO implicit convertion
 	Vec3d tempv = navigation->get_equ_vision();
 	Vec3f temp(tempv[0],tempv[1],tempv[2]);
-	if (FlagStars && (!FlagAtmosphere || sky_brightness<0.2)) hip_stars->Draw(StarScale, StarTwinkleAmount, FlagStarName, MaxMagStarName, temp, du);
+	if (FlagStars && (!FlagAtmosphere || sky_brightness<0.2))
+		hip_stars->Draw(StarScale, StarTwinkleAmount, FlagStarName, MaxMagStarName, temp, du);
 
 	// Draw the atmosphere
 	if (FlagAtmosphere)	atmosphere->draw(du);
@@ -184,7 +187,7 @@ void stel_core::draw(int delta_time)
     if (FlagCardinalPoints) DrawCardinaux(du);
 
     // ---- 2D Displays
-    //ui->draw();
+    ui->draw();
 }
 
 
@@ -192,20 +195,24 @@ void stel_core::draw(int delta_time)
 
 void stel_core::init(void)
 {
+	// Set textures directory and suffix
+	s_texture::set_texDir(TextureDir);
+	s_texture::set_suffix(".png");
 
     hip_stars = new Hip_Star_mgr();
     asterisms = new Constellation_mgr();
     nebulas   = new Nebula_mgr();
+	// Create atmosphere renderer
+	atmosphere=new stel_atmosphere();
+	// Create tone reproductor
+	tone_converter=new tone_reproductor();
+	du = new draw_utility();
 
 	// Temporary strings for file names
     char tempName[255];
     char tempName2[255];
     char tempName3[255];
     char tempName4[255];
-
-	// Set textures directory and suffix
-	//s_texture::set_texDir(TextureDir);
-	//s_texture::set_suffix(".png");
 
     // Load hipparcos stars & names
     strcpy(tempName,DataDir);
@@ -240,20 +247,16 @@ void stel_core::init(void)
 	// Load the common used textures TODO : will be removed
     load_base_textures();
 
-	// Compute planets data
-    Sun->compute_position(navigation->get_JDay());
-
 	// Precalculation for the grids drawing TODO will be in a class
     InitMeriParal();
 
-	// Create atmosphere renderer
-	atmosphere=new stel_atmosphere();
-
-	// Create tone reproductor
-	tone_converter=new tone_reproductor();
-
 	// initialisation of the User Interface
-    //ui->init();
+	ui = new stel_ui(this);
+    ui->init();
+
+	// Compute planets data
+    Sun->compute_position(navigation->get_JDay());
+
 }
 
 
@@ -270,6 +273,8 @@ void stel_core::load_config(void)
 	navigation->load_position(tempName2);
 
     printf("Loading configuration file... (%s)\n",tempName);
+
+	if (conf) delete (conf);
 	conf = new init_parser(tempName);
 	conf->load();
 
@@ -299,20 +304,37 @@ void stel_core::load_config(void)
 
 	// Navigation section
 	navigation->set_flag_lock_equ_pos(conf->get_boolean("navigation:flag_lock_equ_pos"));
-
     // init the time parameters with current time and date
-	ln_date * pDate = str_to_date(conf->get_str("navigation:date"),conf->get_str("navigation:time"));
-	if (ln_date) navigation->set_JDay(get_julian_day(pDate));
+	const ln_date * pDate = str_to_date(conf->get_str("navigation:date"),conf->get_str("navigation:time"));
+	if (pDate) navigation->set_JDay(get_julian_day(pDate));
 	else navigation->set_JDay(get_julian_from_sys());
 
-	FlagStars			= conf->get_boolean("stars:flag_stars");
-	FlagStarName		= conf->get_boolean("stars:flag_star_name");
+	// Landscape section
+	landscape_number	= conf->get_int    ("landscape:landscape_number");
+	FlagGround			= conf->get_boolean("landscape:flag_ground");
+	FlagHorizon			= conf->get_boolean("landscape:flag_horizon");
+	FlagFog				= conf->get_boolean("landscape:flag_fog");
+	FlagAtmosphere		= conf->get_boolean("landscape:flag_atmosphere");
 
+	// Viewing section
+	FlagConstellationDrawing= conf->get_boolean("viewing:flag_constellation_drawing");
+	FlagConstellationName	= conf->get_boolean("viewing:flag_constellation_name");
+	FlagAzimutalGrid		= conf->get_boolean("viewing:flag_azimutal_grid");
+	FlagEquatorialGrid		= conf->get_boolean("viewing:flag_equatorial_grid");
+	FlagEquator				= conf->get_boolean("viewing:flag_equator");
+	FlagEcliptic			= conf->get_boolean("viewing:flag_ecliptic");
+	FlagCardinalPoints		= conf->get_boolean("viewing:flag_cardinal_points");
 
+	// Astro section
+	FlagStars				= conf->get_boolean("astro:flag_stars");
+	FlagStarName			= conf->get_boolean("astro:flag_star_name");
+	FlagPlanets				= conf->get_boolean("astro:flag_planets");
+	FlagPlanetsHintDrawing	= conf->get_boolean("astro:flag_planets_hints");
+	FlagNebula				= conf->get_boolean("astro:flag_nebula");
+	FlagNebulaName			= conf->get_boolean("astro:flag_nebula_name");
+	FlagMilkyWay			= conf->get_boolean("astro:flag_milky_way");
 
 	//conf->save();
-
-
 }
 
 
@@ -327,13 +349,14 @@ void stel_core::load_base_textures(void)
     texIds[8] = new s_texture("e");
     texIds[9] = new s_texture("w");
     texIds[10]= new s_texture("zenith");
-    texIds[11]= new s_texture("nadir");
+
     texIds[12]= new s_texture("pointeur2");
     texIds[25]= new s_texture("etoile32x32");
     texIds[26]= new s_texture("pointeur4");
     texIds[27]= new s_texture("pointeur5");
+    texIds[11]= new s_texture("nadir");
 
-    switch (LandscapeNumber)
+    switch (landscape_number)
     {
     case 1 :
         texIds[31]= new s_texture("landscapes/sea1",TEX_LOAD_TYPE_PNG_ALPHA);
@@ -368,11 +391,9 @@ void stel_core::load_base_textures(void)
         break;
     default :
         printf("ERROR : Bad landscape number, change it in config.txt\n");
-        exit(1);
+        exit(-1);
     }
 
-    if (nebulas->ReadTexture()==0)
-	printf("Error while loading messier Texture\n");
 }
 
 
