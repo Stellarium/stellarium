@@ -12,12 +12,12 @@ dnl Check for compilers.
 AC_PROG_CC
 AC_PROG_CXX
 
-dnl CFLAGS=" -Wall -s -O3 -ffast-math"
-dnl CXXFLAGS=" -Wall -s -O3 -ffast-math"
-CFLAGS=" -g -Wall"
-CXXFLAGS=" -g -Wall"
-dnl CFLAGS=" -Wall -pg -02"
-dnl CXXFLAGS=" -Wall -pg -02"
+dnl CFLAGS=" -Wall -s -O3"
+dnl CXXFLAGS=" -Wall -s -O3"
+dnl CFLAGS=" -g -Wall"
+dnl CXXFLAGS=" -g -Wall"
+CFLAGS=" -Wall -pg"
+CXXFLAGS=" -Wall -pg"
 
 dnl Checks for programs.
 AC_PROG_CPP
@@ -126,4 +126,4 @@ esac
 dnl Checks for library functions.
 AC_CHECK_FUNCS(round toupper strcasecmp strdup sinf cosf tanf asinf acosf atanf expf logf log10f atan2f sqrtf powf)
 
-AC_OUTPUT(Makefile stellarium.spec src/Makefile src/iniparser/Makefile src/glpng/Makefile src/stellplanet/Makefile src/stellastro/Makefile config/Makefile data/Makefile doc/Makefile textures/Makefile textures/landscapes/Makefile textures/constellation-art/Makefile data/sky_cultures/Makefile data/sky_cultures/greco-roman/Makefile data/sky_cultures/polynesian/Makefile data/sky_cultures/western/Makefile)
+AC_OUTPUT(Makefile stellarium.spec src/Makefile src/iniparser/Makefile src/glpng/Makefile src/stellplanet/Makefile src/stellastro/Makefile config/Makefile data/Makefile doc/Makefile textures/Makefile textures/landscapes/Makefile textures/constellation-art/Makefile data/sky_cultures/Makefile  data/sky_cultures/polynesian/Makefile data/sky_cultures/western/Makefile)
