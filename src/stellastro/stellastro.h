@@ -17,15 +17,18 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 */
 
-#ifndef LN_LIBNOVA_H
-#define LN_LIBNOVA_H
+#ifndef _STELLASTRO_H
+#define _STELLASTRO_H
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-#include <time.h>	
-	
+#include <time.h>
+
+#ifndef J2000
+# define J2000 2451545.0
+#endif
 
 // General Calendar Functions
 
@@ -40,11 +43,6 @@ struct ln_date
     double seconds;	/*!< Seconds. Valid values 0 - 59.99999.... */
 };
 
-/* puts a large angle in the correct range 0 - 360 degrees */
-double range_degrees(double angle);
-
-/* puts a large angle in the correct range 0 - 2PI radians */
-double range_radians (double angle);
 
 /* Calculate the julian day from date.*/
 double get_julian_day (struct ln_date * date);
@@ -68,16 +66,23 @@ double get_julian_from_timet (time_t * time);
 void get_timet_from_julian (double JD, time_t * time);
 
 
+/* puts a large angle in the correct range 0 - 360 degrees */
+double range_degrees (double angle);
+
+/* puts a large angle in the correct range 0 - 2PI radians */
+double range_radians (double angle);
+
+
 /* Calculate mean sidereal time from date. */
 double get_mean_sidereal_time (double JD);
-
 
 /* Calculate apparent sidereal time from date.*/
 double get_apparent_sidereal_time (double JD);
 
-
-double range_radians(double angle);
-
+/* Input t is time in julian days.
+ * Valid range is the years -8000 to +12000 (t = -100 to 100).
+ * return mean obliquity (epsilon sub 0) in degrees.*/
+double get_mean_obliquity( double t );
 
 /* Calculate Earth globe centre distance. */
 void get_earth_centre_dist (float height, double latitude, double * p_sin_o, double * p_cos_o);
@@ -92,4 +97,4 @@ double get_refraction_adj (double altitude, double atm_pres, double temp);
 #endif
 
 
-#endif
+#endif /* _STELLASTRO_H */

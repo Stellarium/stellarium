@@ -74,14 +74,14 @@ void planet::compute_position(double date)
     }
 }
 
-// Get a matrix which converts from local ecliptic to the parent's ecliptic coordinates
+// Get a matrix which converts from the parent's ecliptic coordinates to local ecliptic
 void planet::compute_trans_matrix(double date)
-{   
+{
     double tempAscendingNode = re.ascendingNode + re.precessionRate * (date - J2000);
 
-	mat_parent_to_local = Mat4d::translation(ecliptic_pos) * 
-	                        Mat4d::yrotation(-tempAscendingNode) * 
-	                        Mat4d::xrotation(-re.obliquity);
+	mat_parent_to_local = 	Mat4d::translation(ecliptic_pos) *
+							Mat4d::zrotation(-tempAscendingNode*M_PI/180.) *
+							Mat4d::xrotation(re.obliquity*M_PI/180.);
 
 	compute_geographic_rotation(date);
 
@@ -95,6 +95,22 @@ void planet::compute_trans_matrix(double date)
 }
 
 
+
+// Get a matrix which convert from local geographic coordinate to heliocentric ecliptic coordinate
+Mat4d planet::get_helio_to_geo_matrix()
+{
+	Mat4d mat = mat_parent_to_local;
+
+	mat = mat * Mat4d::zrotation(axis_rotation*M_PI/180.);
+	planet * p = this;
+	while (p->parent!=NULL)
+	{
+		mat = p->parent->mat_parent_to_local * mat;
+		p=p->parent;
+	}
+	return mat;
+}
+
 // Compute the z rotation to use from equatorial to geographic coordinates
 void planet::compute_geographic_rotation(double date)
 {
@@ -102,11 +118,6 @@ void planet::compute_geographic_rotation(double date)
     double rotations = t / (double) re.period;
     double wholeRotations = floor(rotations);
     double remainder = rotations - wholeRotations;
-
-    // Add an extra half rotation because of the convention in all
-    // planet texture maps where zero deg long. is in the middle of
-    // the texture.
-    remainder += 0.5;
 
 	axis_rotation = -remainder * 360. - re.offset;
 }
@@ -177,7 +188,9 @@ void planet::draw(void)
 
 	glPushMatrix();
 
-	glRotatef(axis_rotation,0.,0.,1.);
+	// Rotate and add an extra half rotation because of the convention in all
+    // planet texture maps where zero deg long. is in the middle of the texture.
+	glRotatef(axis_rotation - 180.,0.,0.,1.);
 
 	glColor3f(1.0f, 1.0f, 1.0f);
 	glBindTexture(GL_TEXTURE_2D, planetTexture->getID());
@@ -207,7 +220,7 @@ sun_planet::sun_planet(char * _name, int _flagHalo, double _radius, vec3_t _colo
 				s_texture * _planetTexture, s_texture * _haloTexture, s_texture * _bigHaloTexture) : planet(_name,_flagHalo,_radius,_color,_planetTexture,_haloTexture,NULL)
 {
 	ecliptic_pos=Vec3d(0.,0.,0.);
-	mat_local_to_parent = Mat4d::identity();
+	mat_parent_to_local = Mat4d::identity();
 	name=strdup(_name);
 }
 
@@ -243,6 +256,18 @@ void sun_planet::compute_position(double date)
         iter++;
     }
 	glDisable(GL_LIGHTING);
+}
+
+// Get a matrix which converts from the parent's ecliptic coordinates to local ecliptic
+void sun_planet::compute_trans_matrix(double date)
+{
+    // Compute for the satellites
+    list<planet*>::iterator iter = satellites.begin();
+    while (iter != satellites.end())
+    {
+        (*iter)->compute_trans_matrix(date);
+        iter++;
+    }
 }
 
 	/*

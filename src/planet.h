@@ -65,6 +65,8 @@ public:
 	virtual void set_rotation_elements(float,float,double,float,float,float);
 	virtual Vec3d get_ecliptic_pos();
 	virtual Vec3d get_heliocentric_ecliptic_pos();		// Return the heliocentric ecliptical position
+	// Get a matrix which convert from heliocentric ecliptic coordinate to local geographic coordinate
+	virtual Mat4d get_helio_to_geo_matrix();
 	unsigned char get_type(void) {return STEL_OBJECT_PLANET;}
 	virtual Vec3d get_equ_pos(void);
 protected:
@@ -107,6 +109,7 @@ class sun_planet : public planet
 public:
 	sun_planet(char * _name, int _flagHalo, double _radius, vec3_t _color, s_texture * _planetTexture, s_texture * _haloTexture, s_texture * _bigHaloTexture);
 	virtual void compute_position(double date);
+	virtual void compute_trans_matrix(double date);
 protected:
 	s_texture * bigHaloTexture;				// Big halo texture
 };
