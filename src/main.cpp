@@ -22,7 +22,6 @@
 #include <stdlib.h>
 
 #include "SDL.h"
-#include "SDL_mixer.h"
 
 #include "stellarium.h"
 #include "stel_core.h"

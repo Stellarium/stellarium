@@ -25,11 +25,8 @@
 
 bool Constellation::gravity_label = false;
 s_font* Constellation::constellation_font = NULL;
-float Constellation::max_art_intensity = 1.0;
-float Constellation::art_fade_duration = 2000.0;
 
-
-Constellation::Constellation() : asterism(NULL), art_tex(NULL), art_on(0), art_intensity(0)
+Constellation::Constellation() : asterism(NULL), art_tex(NULL)
 {
 }
 
@@ -80,18 +77,6 @@ int Constellation::read(FILE *  fic, Hip_Star_mgr * _VouteCeleste)
     XYZname*=1./(nb_segments*2);
 
     return 1;
-}
-
-// fade on art
-void Constellation::show_art(void)
-{
-  art_on = 1;
-}
-
-// fade off art
-void Constellation::hide_art(void)
-{
-  art_on = 0;
 }
 
 
@@ -150,30 +135,12 @@ void Constellation::draw_name(s_font * constfont, Projector* prj) const
 }
 
 // Draw the art texture, optimized function to be called thru a constellation manager only
-void Constellation::draw_art_optim(Projector* prj, navigator* nav, int delta_time) 
+void Constellation::draw_art_optim(Projector* prj, navigator* nav) 
 {
 	if (art_tex)
 	{
-		// 2 second fade
-		float delta_intensity = delta_time/art_fade_duration;
-
-		// update fade
-		if(art_on)
-		{
-			if(art_intensity + delta_intensity <= max_art_intensity) {art_intensity += delta_intensity;} 
-			else {art_intensity = max_art_intensity;}
-		} 
-		else
-		{
-			if(art_intensity > delta_intensity) {art_intensity -= delta_intensity;} 
-			else {art_intensity = 0; return;}
-		}
-
-		static Vec3d v0, v1, v2, v3, v4, v5, v6, v7, v8;
-		static bool b0, b1, b2, b3, b4, b5, b6, b7, b8; 
-		
-		// for fade in
-		glColor3f(art_intensity,art_intensity,art_intensity);
+		Vec3d v0, v1, v2, v3, v4, v5, v6, v7, v8;
+		bool b0, b1, b2, b3, b4, b5, b6, b7, b8; 
 
 		// If one of the point is in the screen
 		b0 = prj->project_prec_earth_equ_check(art_vertex[0],v0) || (nav->get_prec_equ_vision().dot(art_vertex[0])>0.9);
@@ -231,25 +198,10 @@ void Constellation::draw_art_optim(Projector* prj, navigator* nav, int delta_tim
 }
 
 // Draw the art texture
-void Constellation::draw_art(Projector* prj, navigator* nav, int delta_time) 
+void Constellation::draw_art(Projector* prj, navigator* nav) 
 {
 	if (art_tex)
 	{
-		// 2 second fade
-		float delta_intensity = delta_time/2000.f;
-
-		// update fade
-		if(art_on)
-		{
-			if(art_intensity + delta_intensity <= max_art_intensity) {art_intensity += delta_intensity;} 
-			else {art_intensity = max_art_intensity;}
-		} 
-		else
-		{
-			if(art_intensity > delta_intensity) {art_intensity -= delta_intensity;} 
-			else {art_intensity = 0; return;}
-		}
-
 		glBlendFunc(GL_ONE, GL_ONE);
 		glEnable(GL_TEXTURE_2D);
 		glEnable(GL_BLEND);
@@ -257,12 +209,9 @@ void Constellation::draw_art(Projector* prj, navigator* nav, int delta_time)
 
 		prj->set_orthographic_projection();
 
-		static Vec3d v0, v1, v2, v3, v4, v5, v6, v7, v8;
-		static bool b0, b1, b2, b3, b4, b5, b6, b7, b8; 
+		Vec3d v0, v1, v2, v3, v4, v5, v6, v7, v8;
+		bool b0, b1, b2, b3, b4, b5, b6, b7, b8; 
 		
-		// for fade in
-		glColor3f(art_intensity,art_intensity,art_intensity);
-
 		// If one of the point is in the screen
 		b0 = prj->project_prec_earth_equ_check(art_vertex[0],v0) || (nav->get_prec_equ_vision().dot(art_vertex[0])>0.9);
 		b1 = prj->project_prec_earth_equ_check(art_vertex[1],v1) || (nav->get_prec_equ_vision().dot(art_vertex[1])>0.9);

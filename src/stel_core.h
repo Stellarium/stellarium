@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003 Fabien Ch�eau
+ * Copyright (C) 2003 Fabien Chereau
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -96,8 +96,6 @@ public:
 	const string& get_DataDir(void) const {return DataDir;}
 	
 	const float getMaxFPS(void) const {return maxfps;}
-	
-	void set_landscape(const string& new_landscape_name);
 
 	// find and select the "nearest" object and retrieve his informations
 	stel_object * find_stel_object(int x, int y) const;
@@ -130,10 +128,21 @@ public:
 	// Set the locale type
 	void set_sky_locale(string _locale);	
 	// Set the screen size
-	void set_screen_size(int w, int h);	
+	void set_screen_size(int w, int h);
+	// Set the landscape
+	void set_landscape(const string& new_landscape_name);
+	// Set/Get time speed in JDay/sec
+	void set_time_speed(double ts) {navigation->set_time_speed(ts);}
+	double get_time_speed(void) const {return navigation->get_time_speed();}
+	// Set/Get JDay
+	void set_JDay(double JD) {navigation->set_JDay(JD);}
+	double get_JDay(void) const {return navigation->get_JDay();}
 	// Quit the application
-	void stel_core::quit(void);
+	void quit(void);
 
+	// Activate/deactivate constellation art
+	void constellation_show_art(bool b) {asterisms->show_art(b);}
+	
 	//	void populate_setting_mgr(SettingMgr *smgr);  // TEMP until migrate to new config setup
 	//      void load_config_from_setting_mgr(SettingMgr *smgr);  // TEMP until migrate to new config setup
 	
@@ -182,7 +191,6 @@ private:
 	stel_ui * ui;				// The main User Interface
 	ImageMgr * script_images;               // for script loaded image display
 
-	Constellation* selected_constellation;
 	planet* selected_planet;
 
 	// Projector

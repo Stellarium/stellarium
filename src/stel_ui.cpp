@@ -330,32 +330,32 @@ Component* stel_ui::createTimeControlButtons(void)
 
 void stel_ui::bt_dec_time_speed_cb(void)
 {
-	double s = core->navigation->get_time_speed();
+	double s = core->get_time_speed();
 	if (s>JD_SECOND) s/=10.;
 	else if (s<=-JD_SECOND) s*=10.;
 	else if (s>-JD_SECOND && s<=0.) s=-JD_SECOND;
 	else if (s>0. && s<=JD_SECOND) s=0.;
-	core->navigation->set_time_speed(s);
+	core->set_time_speed(s);
 }
 
 void stel_ui::bt_inc_time_speed_cb(void)
 {
-	double s = core->navigation->get_time_speed();
+	double s = core->get_time_speed();
 	if (s>=JD_SECOND) s*=10.;
 	else if (s<-JD_SECOND) s/=10.;
 	else if (s>=0. && s<JD_SECOND) s=JD_SECOND;
 	else if (s>=-JD_SECOND && s<0.) s=0.;
-	core->navigation->set_time_speed(s);
+	core->set_time_speed(s);
 }
 
 void stel_ui::bt_real_time_speed_cb(void)
 {
-	core->navigation->set_time_speed(JD_SECOND);
+	core->set_time_speed(JD_SECOND);
 }
 
 void stel_ui::bt_time_now_cb(void)
 {
-	core->navigation->set_JDay(get_julian_from_sys());
+	core->set_JDay(get_julian_from_sys());
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -369,7 +369,6 @@ void stel_ui::cb(void)
 	core->FlagGround	 		= bt_flag_ground->getState();
 	core->FlagCardinalPoints	= bt_flag_cardinals->getState();
 	core->FlagAtmosphere 		= bt_flag_atmosphere->getState();
-	if (!core->FlagAtmosphere) core->tone_converter->set_world_adaptation_luminance(3.75f);
 	core->FlagNebulaName		= bt_flag_nebula_name->getState();
 	core->FlagHelp = bt_flag_help->getState();
 	help_win->setVisible(core->FlagHelp);
@@ -624,7 +623,7 @@ int stel_ui::handle_clic(Uint16 x, Uint16 y, Uint8 button, Uint8 state)
 	      core->navigation->set_flag_traking(0);
 	      
 	      if (core->selected_object->get_type()==STEL_OBJECT_STAR) {
-		core->selected_constellation=core->asterisms->is_star_in((Hip_Star*)core->selected_object);
+		core->asterisms->set_selected(core->asterisms->is_star_in((Hip_Star*)core->selected_object));
 
 		// potentially record this action
 		std::ostringstream oss;
@@ -632,7 +631,7 @@ int stel_ui::handle_clic(Uint16 x, Uint16 y, Uint8 button, Uint8 state)
 		core->scripts->record_command("select hp " + oss.str());
 
 	      } else {
-		core->selected_constellation=NULL;
+		core->asterisms->set_selected(NULL);
 	      }
 
 	      if (core->selected_object->get_type()==STEL_OBJECT_PLANET) {
@@ -653,7 +652,7 @@ int stel_ui::handle_clic(Uint16 x, Uint16 y, Uint8 button, Uint8 state)
 	      }
 
             } else {
-	      core->selected_constellation=NULL;
+	      core->asterisms->set_selected(NULL);
 	      core->selected_planet=NULL;
 	    }
 	}

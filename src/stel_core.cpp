@@ -25,7 +25,7 @@
 
 stel_core::stel_core() : screen_W(800), screen_H(600), bppMode(16), Fullscreen(0),
 	navigation(NULL), observatory(NULL), projection(NULL), selected_object(NULL), hip_stars(NULL), asterisms(NULL),
-	nebulas(NULL), atmosphere(NULL), tone_converter(NULL), selected_constellation(NULL), FlagHelp(false), FlagInfos(false),
+	nebulas(NULL), atmosphere(NULL), tone_converter(NULL), FlagHelp(false), FlagInfos(false),
 	FlagConfig(false), FlagShowTuiMenu(0), 
 	frame(0), timefr(0), timeBase(0), maxfps(10000.f), deltaFov(0.), deltaAlt(0.), deltaAz(0.),
 	move_speed(0.001), FlagTimePause(0), is_mouse_moving_horiz(false), is_mouse_moving_vert(false)
@@ -271,6 +271,9 @@ void stel_core::update(int delta_time)
 	// Update info about selected object
 	if (selected_object) selected_object->update();
 
+	// Update constellation switchers
+	asterisms->update(delta_time);
+	
 	// compute global sky brightness TODO : make this more "scientifically"
 	// Compute the sun position in local coordinate
 	Vec3d temp(0.,0.,0.);
@@ -322,7 +325,7 @@ void stel_core::draw(int delta_time)
 				  ssystem->get_moon()->get_phase(ssystem->get_earth()->get_heliocentric_ecliptic_pos()),
 				  tone_converter, projection, observatory->get_latitude(), observatory->get_altitude(),
 				  15.f, 40.f);	// Temperature = 15c, relative humidity = 40%
-
+	if (!FlagAtmosphere) tone_converter->set_world_adaptation_luminance(3.75f);
 
 	// Set openGL drawings in equatorial coordinates
 	navigation->switch_to_earth_equatorial();
@@ -339,32 +342,24 @@ void stel_core::draw(int delta_time)
 	// Draw all the constellations
 	if (FlagConstellationDrawing)
 	{
-		if (FlagConstellationPick && selected_constellation)
-			selected_constellation->draw(projection, ConstLinesColor);
-		else asterisms->draw(projection);
+		asterisms->draw(projection);
 	}
 
 	// Draw constellation art
 	if (FlagConstellationArt)
 	{
-	  if (FlagConstellationPick && selected_constellation) {
-	    asterisms->hide_art();
-	    selected_constellation->show_art();
-	  } else {
-	    asterisms->show_art();
-	  }
-	} else {
-	  asterisms->hide_art();
+	    asterisms->show_art(true);
+	} 
+	else 
+	{
+	  	asterisms->show_art(false);
 	}
-	asterisms->draw_art(projection, navigation, delta_time);
+	asterisms->draw_art(projection, navigation);
 
 	// Draw the constellations's names
 	if (FlagConstellationName)
 	{
-	        // TODO: cleaner if constellation mgr is one tracking selected constellation  
-		if (FlagConstellationPick && selected_constellation)
-			asterisms->draw_one_name(projection, selected_constellation, FlagGravityLabels);
-		else asterisms->draw_names(projection, FlagGravityLabels);
+		asterisms->draw_names(projection, FlagGravityLabels);
 	}
 
 	// Draw the nebula if they are visible
@@ -1261,10 +1256,13 @@ int stel_core::set_sky_culture(string _culture_dir)
     SkyCulture = _culture_dir;
 
     // as constellations have changed, clear out any selection and retest for match!
-    if (selected_object && selected_object->get_type()==STEL_OBJECT_STAR) {
-      selected_constellation=asterisms->is_star_in((Hip_Star*)selected_object);
-    } else {
-      selected_constellation=NULL;
+    if (selected_object && selected_object->get_type()==STEL_OBJECT_STAR)
+	{
+      asterisms->set_selected(asterisms->is_star_in((Hip_Star*)selected_object));
+    }
+	else
+	{
+      asterisms->set_selected(NULL);
     }
 
     projection->reset_perspective_projection();

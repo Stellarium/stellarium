@@ -22,6 +22,7 @@
 #include <iostream>
 #include "audio.h"
 
+#ifdef HAVE_SDL_MIXER_H
 Audio::Audio(std::string filename, std::string name) {
   track = Mix_LoadMUS(filename.c_str());
   track_name = name;
@@ -49,4 +50,6 @@ void Audio::resume() {
 void Audio::stop() {
   Mix_HaltMusic();
 }
-
+#else
+// SDL_mixer is not available - no audio
+#endif

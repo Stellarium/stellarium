@@ -63,6 +63,7 @@ int ImageMgr::drop_all_images() {
     delete *iter;
   }
   active_images.clear();
+  return 0;
 }
 
 Image * ImageMgr::get_image(string name) {
