@@ -53,10 +53,11 @@ void Projector::set_square_viewport(void)
 
 void Projector::set_disk_viewport(void)
 {
-	set_square_viewport();
-
+	set_square_viewport();		
+	
 	glClear(GL_COLOR_BUFFER_BIT);
-	glClear(GL_STENCIL_BUFFER_BIT);
+	glClear(GL_STENCIL_BUFFER_BIT);	
+	
 	glEnable(GL_STENCIL_TEST);
  	glStencilFunc(GL_ALWAYS, 0x1, 0x1);
     glStencilOp(GL_ZERO, GL_REPLACE, GL_REPLACE);
@@ -98,10 +99,10 @@ void Projector::draw_viewport_shape(void)
 	set_2Dfullscreen_projection();
 	glColor3f(0.f,0.f,0.f);
 	glBegin(GL_QUADS);
-		glVertex2i(vec_viewport[0], vec_viewport[1]);
-		glVertex2i(vec_viewport[0] + vec_viewport[2], vec_viewport[1]);
-		glVertex2i(vec_viewport[0] + vec_viewport[2], vec_viewport[1] + vec_viewport[3]);
-		glVertex2i(vec_viewport[0], vec_viewport[1] + vec_viewport[3]);
+		glVertex2i(0, 0);
+		glVertex2i(screenW, 0);
+		glVertex2i(screenW, screenH);
+		glVertex2i(0, screenH);
 	glEnd();
 	restore_from_2Dfullscreen_projection();
 	glDisable(GL_STENCIL_TEST);
