@@ -50,6 +50,7 @@ Textured_Button * BtNebula = NULL;
 Textured_Button * BtHelp = NULL;
 Textured_Button * BtFollowEarth = NULL;
 Textured_Button * BtConfig = NULL;
+//Textured_Button * BtReal = NULL;
 
 FilledTextLabel * InfoSelectLabel = NULL;      // The TextLabel displaying the infos about the selected object
 
@@ -154,10 +155,10 @@ void BtFlagsOnClicCallBack(guiValue button,Component * bt)
                     HelpWin->setVisible(global.FlagHelp);
                     bt->setActive(global.FlagHelp);
                     return;
-        case 14 :   global.FlagRealMode=!global.FlagRealMode;
-                    bt->setActive(global.FlagRealMode);
-                    Base->setVisible(!global.FlagRealMode);
-                    break;
+//        case 14 :   global.FlagRealMode=!global.FlagRealMode;
+//                    bt->setActive(global.FlagRealMode);
+//                    Base->setVisible(!global.FlagRealMode);
+//                    break;
         case 15 :   global.FlagFollowEarth=!global.FlagFollowEarth;
                     bt->setActive(global.FlagFollowEarth);
                     break;
@@ -177,20 +178,20 @@ void BtFlagsOnMouseOverCallBack(guiValue event,Component * bt)
 {   if (event==GUI_MOUSE_LEAVE) btLegend->setVisible(false);
     else btLegend->setVisible(true);
     switch (bt->getID())
-    {   case 1 : btLegend->setLabel("Drawing of the Constellations"); return;
-        case 2 : btLegend->setLabel("Names of the Constellations"); return;
+    {   case 1 : btLegend->setLabel("Drawing of the Constellations [C]"); return;
+        case 2 : btLegend->setLabel("Names of the Constellations [V]"); return;
         case 3 : btLegend->setLabel("Azimutal Grid"); return;
         case 4 : btLegend->setLabel("Equatorial Grid"); return;
-        case 5 : btLegend->setLabel("Ground"); return;
-        case 6 : btLegend->setLabel("Fog"); return;
-        case 7 : btLegend->setLabel("Real Time Mode"); return;
-        case 8 : btLegend->setLabel("Accelered Time Mode"); return;
-        case 9 : btLegend->setLabel("Very Fast Time Mode"); return;
-        case 10 :btLegend->setLabel("Cardinal Points"); return;
-        case 11 :btLegend->setLabel("Atmosphere (+ and - to control the brightness)"); return;
-        case 12 :btLegend->setLabel("Nebulas"); return;
-        case 13 :btLegend->setLabel("Help"); return;
-        case 14 :btLegend->setLabel("Real Mode"); return;
+        case 5 : btLegend->setLabel("Ground [G]"); return;
+        case 6 : btLegend->setLabel("Fog [F]"); return;
+        case 7 : btLegend->setLabel("Real Time Mode [1]"); return;
+        case 8 : btLegend->setLabel("Accelered Time Mode [2]"); return;
+        case 9 : btLegend->setLabel("Very Fast Time Mode [3]"); return;
+        case 10 :btLegend->setLabel("Cardinal Points [Q]"); return;
+        case 11 :btLegend->setLabel("Atmosphere [A]"); return;
+        case 12 :btLegend->setLabel("Nebulas [N]"); return;
+        case 13 :btLegend->setLabel("Help [H]"); return;
+//        case 14 :btLegend->setLabel("Real Mode"); return;
         case 15 :btLegend->setLabel("Compensation of the Earth rotation"); return;
         case 16 :btLegend->setLabel("Configuration window"); return;
     }
