@@ -21,22 +21,6 @@
 #include "stel_utility.h"
 #include "stellarium.h"
 
-/* puts a large angle in the correct range 0 - 2PI radians */
-double range_radians (double angle)
-{
-    double temp;
-
-    if (angle >= 0.0 && angle < (2.0 * M_PI))
-    	return(angle);
-
-	temp = (int)(angle / (M_PI * 2.0));
-
-	if ( angle < 0.0 )
-		temp --;
-	temp *= (M_PI * 2.0);
-	return angle - temp;
-}
-
 double hms_to_rad(unsigned int h, unsigned int m, double s)
 {
 	return (double)M_PI/24.*h*2.+(double)M_PI/12.*m/60.+s*M_PI/43200.;
@@ -58,13 +42,7 @@ double dms_to_rad(int d, double m)
 	double t = (double)M_PI/180.*d+(double)M_PI/10800.*m;
 	return fabs(t)*d/abs(d);
 }
-/*
-void rad_to_hms(int * h, int * m, double * s, double r)
-{
-	*h = (unsigned int)(r*12./PI);
-    *m = (unsigned int)(r*720./PI-h*60.);
-    *s = r*43200./PI-m*60.-h*3600.;
-}*/
+
 
 void sphe_to_rect(double lng, double lat, Vec3d * v)
 {

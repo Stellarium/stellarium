@@ -79,9 +79,8 @@ void planet::compute_trans_matrix(double date)
 {
     double tempAscendingNode = re.ascendingNode + re.precessionRate * (date - J2000);
 
-	mat_parent_to_local = 	Mat4d::translation(ecliptic_pos) *
-							Mat4d::zrotation(-tempAscendingNode*M_PI/180.) *
-							Mat4d::xrotation(re.obliquity*M_PI/180.);
+	mat_parent_to_local = 	Mat4d::translation(ecliptic_pos) *  
+							Mat4d::zrotation(tempAscendingNode*M_PI/180.) * Mat4d::xrotation(re.obliquity*M_PI/180.);
 
 	compute_geographic_rotation(date);
 
@@ -181,7 +180,7 @@ void planet::draw(void)
         }
     }
     
-    glEnable(GL_LIGHTING);
+    //glEnable(GL_LIGHTING);
     glEnable(GL_TEXTURE_2D);
 	glEnable(GL_CULL_FACE);
 	glDisable(GL_BLEND);
@@ -190,14 +189,14 @@ void planet::draw(void)
 
 	// Rotate and add an extra half rotation because of the convention in all
     // planet texture maps where zero deg long. is in the middle of the texture.
-	glRotatef(axis_rotation - 180.,0.,0.,1.);
+	glRotatef(-axis_rotation - 180.,0.,0.,1.);
 
 	glColor3f(1.0f, 1.0f, 1.0f);
 	glBindTexture(GL_TEXTURE_2D, planetTexture->getID());
 	GLUquadricObj * p=gluNewQuadric();
 	gluQuadricTexture(p,GL_TRUE);
 	gluQuadricOrientation(p, GLU_OUTSIDE);
-	gluSphere(p,radius*10,40,40);
+	gluSphere(p,radius*1,40,40);
 	gluDeleteQuadric(p);
 
 	glPopMatrix();
@@ -227,7 +226,7 @@ sun_planet::sun_planet(char * _name, int _flagHalo, double _radius, vec3_t _colo
 void sun_planet::compute_position(double date)
 {
     // The sun is fixed in the heliocentric coordinate
-	glEnable(GL_LIGHTING);
+	//glEnable(GL_LIGHTING);
 
     float tmp[4] = {0,0,0,1};
     float tmp2[4] = {0.01,0.01,0.01,1};
@@ -238,7 +237,7 @@ void sun_planet::compute_position(double date)
     glLightfv(GL_LIGHT1,GL_SPECULAR,tmp);
 
     glDisable(GL_LIGHT0);
-    glEnable(GL_LIGHT1);
+    //glEnable(GL_LIGHT1);
 
     glMaterialfv(GL_FRONT_AND_BACK,GL_AMBIENT ,tmp);
     glMaterialfv(GL_FRONT_AND_BACK,GL_DIFFUSE ,tmp4);
