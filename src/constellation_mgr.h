@@ -26,7 +26,7 @@
 class Constellation_mgr  
 {
 public:
-    Constellation_mgr();
+    Constellation_mgr(Vec3f lines_color = Vec3f(0.1, 0.15, 0.2), Vec3f lines_color = Vec3f(0.1,0.2,0.3));
     virtual ~Constellation_mgr();
     void load(const string& font_fileName, const string& catName, const string& artCatName,
 		Hip_Star_mgr * _VouteCeleste);
@@ -41,6 +41,7 @@ public:
 private:
     vector<Constellation*> asterisms;
 	s_font * asterFont;
+	Vec3f lines_color, names_color;
 };
 
 #endif // _CONSTELLATION_MGR_H_

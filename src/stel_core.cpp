@@ -83,15 +83,17 @@ void stel_core::init(void)
 	navigation->set_local_vision(InitViewPos);
 
     hip_stars = new Hip_Star_mgr();
-    asterisms = new Constellation_mgr();
+    asterisms = new Constellation_mgr(ConstLinesColor, ConstNamesColor);
     nebulas   = new Nebula_mgr();
 	ssystem = new SolarSystem();
 	atmosphere = new stel_atmosphere();
 	tone_converter = new tone_reproductor();
-	equ_grid = new SkyGrid(EQUATORIAL);
-	azi_grid = new SkyGrid(ALTAZIMUTAL);
-	equator_line = new SkyLine(EQUATOR);
-	ecliptic_line = new SkyLine(ECLIPTIC);
+
+	equ_grid = new SkyGrid(EQUATORIAL, EquatorialColor);
+	azi_grid = new SkyGrid(ALTAZIMUTAL, AzimuthalColor);
+	equator_line = new SkyLine(EQUATOR, EquatorColor);
+	ecliptic_line = new SkyLine(ECLIPTIC, EclipticColor);
+
 	switch (ProjectorType)
 	{
 	case PERSPECTIVE_PROJECTOR :
@@ -444,6 +446,14 @@ void stel_core::load_config_from(const string& confFile)
 	GuiBaseColor		= str_to_vec3f(conf.get_str("gui:gui_base_color").c_str());
 	GuiTextColor		= str_to_vec3f(conf.get_str("gui:gui_text_color").c_str());
 
+	// Colors
+	AzimuthalColor		= str_to_vec3f(conf.get_str("color:azimuthal_color").c_str());
+	EquatorialColor		= str_to_vec3f(conf.get_str("color:equatorial_color").c_str());
+	EquatorColor		= str_to_vec3f(conf.get_str("color:equator_color").c_str());
+	EclipticColor		= str_to_vec3f(conf.get_str("color:ecliptic_color").c_str());
+	ConstLinesColor		= str_to_vec3f(conf.get_str("color:const_lines_color").c_str());
+	ConstNamesColor		= str_to_vec3f(conf.get_str("color:const_names_color").c_str());
+
 	// Text ui section
 	FlagEnableTuiMenu = conf.get_boolean("tui:flag_enable_tui_menu");
 	FlagShowGravityUi = conf.get_boolean("tui:flag_show_gravity_ui");
@@ -545,6 +555,14 @@ void stel_core::save_config_to(const string& confFile)
 	conf.set_boolean("gui:flag_show_selected_object_info", FlagShowSelectedObjectInfos);
 	conf.set_str	("gui:gui_base_color", vec3f_to_str(GuiBaseColor));
 	conf.set_str	("gui:gui_text_color", vec3f_to_str(GuiTextColor));
+
+	// Colors
+	conf.set_str    ("color:azimuthal_color", vec3f_to_str(AzimuthalColor));
+	conf.set_str    ("color:equatorial_color", vec3f_to_str(EquatorialColor));
+	conf.set_str    ("color:equator_color", vec3f_to_str(EquatorColor));
+	conf.set_str    ("color:ecliptic_color", vec3f_to_str(EclipticColor));
+	conf.set_str    ("color:const_lines_color", vec3f_to_str(ConstLinesColor));
+	conf.set_str    ("color:const_names_color", vec3f_to_str(ConstNamesColor));
 
 	// Text ui section
 	conf.set_boolean("tui:flag_enable_tui_menu", FlagEnableTuiMenu);
