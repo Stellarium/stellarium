@@ -1,6 +1,6 @@
 /*
  * Stellarium
- * Copyright (C) 2002 Fabien Chéreau
+ * Copyright (C) 2002 Fabien Chï¿½eau
  * 
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -101,7 +101,7 @@ void Constellation_mgr::set_sky_culture(string _sky_culture, const string& _font
     }
 
   // load new culture data
-  printf( "Changing sky culture to %s\n", skyCulture.c_str() );
+  printf(_("Changing sky culture to %s\n"), skyCulture.c_str() );
   load(dataDir + "sky_cultures/" + skyCulture + "/constellationship.fab",
        dataDir + "sky_cultures/" + skyCulture + "/constellationsart.fab", 
 	   hipStarMgr, _font_fileName, barx, bary);
@@ -114,7 +114,7 @@ void Constellation_mgr::set_sky_culture(string _sky_culture, const string& _font
 // Load from file
 void Constellation_mgr::load(const string& fileName, const string& artfileName, Hip_Star_mgr * _VouteCeleste, const string& _font_fileName, int barx, int bary)
 {
-	printf("Loading constellation data...\n");
+	printf(_("Loading constellation data...\n"));
 
 	JustLoaded=1;
 
@@ -195,7 +195,7 @@ void Constellation_mgr::load(const string& fileName, const string& artfileName, 
 		}
 
 		// Draw loading bar
-		sprintf(tmpstr, "Loading Constellation Art: %d/%d", current, total);
+		sprintf(tmpstr, _("Loading Constellation Art: %d/%d"), current, total);
 
 		glDisable(GL_TEXTURE_2D);
 		
@@ -427,9 +427,8 @@ void Constellation_mgr::set_sky_locale(const string& _sky_locale) {
  
 }
 
-
-void Constellation_mgr::set_art_fade_duration(float duration) {
-
+void Constellation_mgr::set_art_fade_duration(float duration) 
+{
   duration*=1000.;
   if(duration>0){
     Constellation::art_fade_duration = duration;

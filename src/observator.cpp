@@ -1,6 +1,6 @@
 /*
  * Stellarium
- * Copyright (C) 2003 Fabien Chéreau
+ * Copyright (C) 2003 Fabien Chï¿½eau
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -57,14 +57,14 @@ void Observator::load(const string& file, const string& section)
 
 	name = conf.get_str(section, "name");
 
-	cout << "Loading location " << name << endl;
+	printf(_("Loading location: \"%s\", "), name.c_str());
 
 	latitude  = get_dec_angle(conf.get_str(section, "latitude"));
 	longitude = get_dec_angle(conf.get_str(section, "longitude"));
 	altitude = conf.get_int(section, "altitude");
 	landscape_name = conf.get_str(section, "landscape_name", "sea");
 
-	cout << "Landscape is " << landscape_name << " \n";
+	printf(_("(landscape is: \"%s\")\n"), landscape_name.c_str());
 
 	string tzstr = conf.get_str(section, "time_zone");
 	if (tzstr == "system_default")
@@ -94,7 +94,7 @@ void Observator::load(const string& file, const string& section)
 
 void Observator::save(const string& file, const string& section)
 {
-	cout << "Saving location " << name << " to file " << file << endl;
+	printf(_("Saving location %s to file %s\n"),name.c_str(), file.c_str());
 
 	init_parser conf;
 	conf.load(file);
@@ -105,7 +105,7 @@ void Observator::save(const string& file, const string& section)
 
 	conf.set_int(section + ":altitude", altitude);
 	conf.set_str(section + ":landscape_name", landscape_name);
-
+	
 	if (time_zone_mode == S_TZ_CUSTOM)
 	{
 		conf.set_str(section + ":time_zone", custom_tz_name);

@@ -1,6 +1,6 @@
 /*
  * Stellarium
- * Copyright (C) 2002 Fabien Chéreau
+ * Copyright (C) 2002 Fabien Chï¿½eau
  * 
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -51,7 +51,7 @@ on stellarium web page : http://stellarium.free.fr\n\n"));
 // Display stellarium usage in the console
 void usage(char **argv)
 {
-	printf(_("Usage: %s [OPTION] ...\n -v, --version          output version information and exit\n -h, --help             display this help and exit\n"), argv[0]);
+	printf(_("Usage: %s [OPTION] ...\n -v, --version          Output version information and exit.\n -h, --help             Display this help and exit.\n"), argv[0]);
 }
 
 
@@ -116,10 +116,10 @@ void setDirectories(const char* executableName)
 			else
 			{
             	// Failure....
-            	printf("ERROR : I can't find the datas directories in :\n");
-            	printf("%s/ nor in ./ nor in ../\n",CONFIG_DATA_DIR);
-                printf("You may fully install the software (typ \"make install\" on POSIX systems)\n");
-                printf("or launch the application from the stellarium package directory.\n");
+            	printf(_("ERROR : I can't find the datas directories in :\n\
+%s/ nor in ./ nor in ../\n\
+You may fully install the software (type \"make install\" on POSIX systems)\n\
+or launch the application from the stellarium package directory.\n"),CONFIG_DATA_DIR);
                 exit(-1);
 			}
 		}
@@ -159,7 +159,7 @@ void setDirectories(const char* executableName)
 
 	// Just an indication if we are on unix/linux that we use local data files
 	if (DATA_ROOT != string(CONFIG_DATA_DIR))
-		cout << ">Found data files in " << DATA_ROOT << " : local version." << endl;
+		printf(_("> Found data files in %s : local version.\n"), DATA_ROOT.c_str());
 
 	// The problem is more complexe in the case of a unix/linux system
 	// The config files are in the HOME/.stellarium/ directory and this directory
@@ -177,7 +177,7 @@ void setDirectories(const char* executableName)
 	}
 	else
 	{
-		cout << "Will create config files in " << CDIR << endl;
+		printf(_("Will create config files in %s\n"), CDIR.c_str());
 		if ((tempFile = fopen((CDIR + "config.ini").c_str(),"w")))
 		{
 			fclose(tempFile);
@@ -185,7 +185,7 @@ void setDirectories(const char* executableName)
 		else
 		{
 			// Maybe the directory is not created so try to create it
-			cout << "Try to create directory " << CDIR << endl;
+			printf(_("Try to create directory %s\n"),CDIR.c_str());
 			system(string("mkdir " + CDIR).c_str());
 
 			if ((tempFile = fopen((CDIR + "config.ini").c_str(),"w")))
@@ -194,9 +194,9 @@ void setDirectories(const char* executableName)
 			}
 			else
 			{
-				cout << "Can't create the file " << CDIR << "config.ini" << endl;
-				cout << "If the directory " << CDIR << " is missing please create it by hand." << endl;
-				cout << "If not check that you have access to " << CDIR << endl;
+				printf(_("Can't create the file %sconfig.ini\n\
+If the directory %s is missing please create it by hand.\n\
+If not, check that you have access to %s\n"), CDIR.c_str(), CDIR.c_str(), CDIR.c_str());
 				exit(-1);
 			}
 		}

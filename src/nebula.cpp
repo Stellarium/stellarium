@@ -1,6 +1,6 @@
 /*
  * Stellarium
- * Copyright (C) 2002 Fabien Chéreau
+ * Copyright (C) 2002 Fabien Chï¿½eau
  * 
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -50,7 +50,8 @@ void Nebula::get_info_string(char * s, const navigator*) const
 {
 	float tempDE, tempRA;
 	rect_to_sphe(&tempRA,&tempDE,XYZ);
-	sprintf(s,"Name : %s (NGC %u)\nRA : %s\nDE : %s\nMag : %.2f", name, NGC_nb,
+	// RA=Right ascention, DE=Declinaison, Mag=Magnitude
+	sprintf(s,_("Name : %s (NGC %u)\nRA : %s\nDE : %s\nMag : %.2f"), name, NGC_nb,
 		print_angle_hms(tempRA*180./M_PI).c_str(), print_angle_dms_stel(tempDE*180./M_PI).c_str(), mag);
 }
 
@@ -63,7 +64,7 @@ void Nebula::get_short_info_string(char * s, const navigator*) const
 	}
 	else
 	{
-		sprintf(s,"%s: mag %.1f", name, mag);
+		sprintf(s,_("%s: mag %.1f"), name, mag);
 	}
 }
 
@@ -73,7 +74,7 @@ double Nebula::get_close_fov(const navigator*) const
 }
 
 int Nebula::read(FILE * catalogue)
-// Lis les infos de la nébuleuse dans le fichier et calcule x,y et z;
+// Lis les infos de la nï¿½uleuse dans le fichier et calcule x,y et z;
 {
 	int rahr;
     float ramin;
