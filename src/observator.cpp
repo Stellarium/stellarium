@@ -64,6 +64,8 @@ void Observator::load(const string& file, const string& section)
 	altitude = conf.get_int(section, "altitude");
 	landscape_name = conf.get_str(section, "landscape_name", "sea");
 
+	cout << "Landscape is " << landscape_name << " \n";
+
 	string tzstr = conf.get_str(section, "time_zone");
 	if (tzstr == "system_default")
 	{
