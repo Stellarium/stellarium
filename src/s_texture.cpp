@@ -35,7 +35,7 @@ s_texture::s_texture(char * _textureName, int _loadType)
     {
         case TEX_LOAD_TYPE_PNG_ALPHA : loadType=PNG_ALPHA; break;
         case TEX_LOAD_TYPE_PNG_SOLID : loadType=PNG_SOLID; break;
-        case TEX_LOAD_TYPE_PNG_BLEND3 : loadType=PNG_BLEND3; break;
+        case TEX_LOAD_TYPE_PNG_BLEND3: loadType=PNG_BLEND3; break;
         default : loadType=PNG_BLEND3;
     }
     texID=0;

@@ -129,7 +129,7 @@ COMPILE = $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) \
 	$(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
 CCLD = $(CC)
 LINK = $(CCLD) $(AM_CFLAGS) $(CFLAGS) $(AM_LDFLAGS) $(LDFLAGS) -o $@
-CFLAGS = -Wall -O3 
+CFLAGS = -Wall -O3 -ffast-math -fexpensive-optimizations
 DIST_SOURCES = $(libglpng_a_SOURCES)
 DIST_COMMON = Makefile.am Makefile.in
 SOURCES = $(libglpng_a_SOURCES)

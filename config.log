@@ -196,7 +196,7 @@ configure: failed program was:
 #line 3120 "configure"
 #include "confdefs.h"
 #include <X11/Intrinsic.h>
-configure:3175: gcc -o conftest.exe -Wall -O3    conftest.c -lXt  >&5
+configure:3175: gcc -o conftest.exe -Wall -O3 -ffast-math -fexpensive-optimizations   conftest.c -lXt  >&5
 configure:3164: X11/Intrinsic.h: No such file or directory
 configure:3178: $? = 1
 configure: failed program was:
@@ -224,19 +224,19 @@ configure:4199: gcc -E  conftest.c
 configure:4205: $? = 0
 configure:4224: result: yes
 configure:4360: checking for toupper
-configure:4397: gcc -o conftest.exe -Wall -O3    conftest.c   -lopengl32 -lglu32 -lglut32 >&5
+configure:4397: gcc -o conftest.exe -Wall -O3 -ffast-math -fexpensive-optimizations   conftest.c   -lopengl32 -lglu32 -lglut32 >&5
 configure:4400: $? = 0
 configure:4403: test -s conftest.exe
 configure:4406: $? = 0
 configure:4416: result: yes
 configure:4360: checking for strcasecmp
-configure:4397: gcc -o conftest.exe -Wall -O3    conftest.c   -lopengl32 -lglu32 -lglut32 >&5
+configure:4397: gcc -o conftest.exe -Wall -O3 -ffast-math -fexpensive-optimizations   conftest.c   -lopengl32 -lglu32 -lglut32 >&5
 configure:4400: $? = 0
 configure:4403: test -s conftest.exe
 configure:4406: $? = 0
 configure:4416: result: yes
 configure:4426: checking for fabs in -lm
-configure:4453: gcc -o conftest.exe -Wall -O3    conftest.c -lm    -lopengl32 -lglu32 -lglut32 >&5
+configure:4453: gcc -o conftest.exe -Wall -O3 -ffast-math -fexpensive-optimizations   conftest.c -lm    -lopengl32 -lglu32 -lglut32 >&5
 configure:4442: warning: conflicting types for built-in function `fabs'
 configure:4456: $? = 0
 configure:4459: test -s conftest.exe
@@ -423,3 +423,17 @@ This file was extended by config.status 2.52, executed with
 on HP-FABIEN
 
 config.status:5087: creating textures/landscapes/Makefile
+
+## ----------------------- ##
+## Running config.status.  ##
+## ----------------------- ##
+
+This file was extended by config.status 2.52, executed with
+  CONFIG_FILES    = 
+  CONFIG_HEADERS  = 
+  CONFIG_LINKS    = 
+  CONFIG_COMMANDS = 
+  > ./config.status data/Makefile
+on HP-FABIEN
+
+config.status:5087: creating data/Makefile

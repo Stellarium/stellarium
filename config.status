@@ -307,7 +307,7 @@ s,@host_cpu@,i686,;t t
 s,@host_vendor@,pc,;t t
 s,@host_os@,cygwin,;t t
 s,@CC@,gcc,;t t
-s,@CFLAGS@,-Wall -O3 ,;t t
+s,@CFLAGS@,-Wall -O3 -ffast-math -fexpensive-optimizations,;t t
 s,@LDFLAGS@,,;t t
 s,@CPPFLAGS@,,;t t
 s,@ac_ct_CC@,gcc,;t t
@@ -317,7 +317,7 @@ s,@am__include@,include,;t t
 s,@am__quote@,,;t t
 s,@CCDEPMODE@,depmode=gcc,;t t
 s,@CXX@,g++,;t t
-s,@CXXFLAGS@,-O3,;t t
+s,@CXXFLAGS@,-O3 -ffast-math -fexpensive-optimizations,;t t
 s,@ac_ct_CXX@,g++,;t t
 s,@CXXDEPMODE@,depmode=gcc,;t t
 s,@CPP@,gcc -E,;t t
