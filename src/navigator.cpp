@@ -176,11 +176,11 @@ void navigator::update_transform_matrices(void)
 	mat_local_to_helio=Mat4d::identity();
 mat_local_to_earth_equ=Mat4d::identity();
 mat_earth_equ_to_local=Mat4d::identity();
-	mat_local_to_earth_equ=Mat4d::xrotation((position.latitude-90.)*M_PI/180.) *
+	/*mat_local_to_earth_equ=Mat4d::xrotation((position.latitude-90.)*M_PI/180.) *
 		Mat4d::yrotation((-get_apparent_sidereal_time(JDay) + position.longitude)*M_PI/180.);
 
 	mat_earth_equ_to_local=	Mat4d::yrotation((get_apparent_sidereal_time(JDay) - position.longitude)*M_PI/180.) *
-		Mat4d::xrotation((90.-position.latitude)*M_PI/180.);
+		Mat4d::xrotation((90.-position.latitude)*M_PI/180.);*/
 }
 
 void navigator::update_vision_vector(int delta_time)
@@ -278,7 +278,7 @@ void navigator::update_move(int delta_time)
 	rect_to_sphe(&azVision,&altVision,&local_vision);
 
     // if we are mooving in the Azimuthal angle (left/right)
-    if (deltaAz) azVision+=deltaAz;
+    if (deltaAz) azVision-=deltaAz;
     if (deltaAlt)
     {
 		if (altVision+deltaAlt <= M_PI_2 && altVision+deltaAlt >= -M_PI_2) altVision+=deltaAlt;
@@ -323,7 +323,7 @@ void navigator::switch_to_local(void)
 	//Set a transfo matrix with the vertical at the zenith
 	gluLookAt(0., 0., 0.,          // Observer position
               local_vision[0],local_vision[1],local_vision[2],   // direction of vision
-              0.,1.,0.);           // Vertical vector
+              0.,0.,1.);           // Vertical vector
 }
 
 // Transform vector from local coordinate to equatorial

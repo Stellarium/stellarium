@@ -17,6 +17,7 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
+#include "malloc.h"
 #include "stel_utility.h"
 #include "stellarium.h"
 
@@ -69,16 +70,16 @@ void sphe_to_rect(double lng, double lat, Vec3d * v)
 {
 	const double cosLat = cos(lat);
     (*v)[0] = cos(lng) * cosLat;
-    (*v)[1] = sin(lat);
-	(*v)[2] = sin(lng) * cosLat;
+    (*v)[1] = sin(lng) * cosLat;
+	(*v)[2] = sin(lat);
 }
 
 void sphe_to_rect(double lng, double lat, double r, Vec3d *v)
 {
 	const double cosLat = cos(lat);
     (*v)[0] = cos(lng) * cosLat;
-    (*v)[1] = sin(lat);
-	(*v)[2] = sin(lng) * cosLat;
+    (*v)[1] = sin(lng) * cosLat;
+	(*v)[2] = sin(lat);
 	v->normalize();
 	(*v)*=r;
 }
@@ -87,22 +88,22 @@ void sphe_to_rect(float lng, float lat, Vec3f * v)
 {
 	const double cosLat = cos(lat);
     (*v)[0] = cos(lng) * cosLat;
-    (*v)[1] = sin(lat);
-	(*v)[2] = sin(lng) * cosLat;
+    (*v)[1] = sin(lng) * cosLat;
+	(*v)[2] = sin(lat);
 }
 
 void rect_to_sphe(double *lng, double *lat, const Vec3d *v)
 {
 	double r = sqrt((*v)[0]*(*v)[0]+(*v)[1]*(*v)[1]+(*v)[2]*(*v)[2]);
-    *lat = asin((*v)[1]/r);
-    *lng = atan2((*v)[2],(*v)[0]);
+    *lat = asin((*v)[2]/r);
+    *lng = atan2((*v)[1],(*v)[0]);
 }
 
 void rect_to_sphe(float *lng, float *lat, const Vec3f *v)
 {
 	double r = sqrt((*v)[0]*(*v)[0]+(*v)[1]*(*v)[1]+(*v)[2]*(*v)[2]);
-    *lat = asin((*v)[1]/r);
-    *lng = atan2((*v)[2],(*v)[0]);
+    *lat = asin((*v)[2]/r);
+    *lng = atan2((*v)[1],(*v)[0]);
 }
 
 

@@ -23,26 +23,38 @@
 
 // Planet map textures
 static s_texture * sun_map;
-//static s_texture * mercury_map;
-//static s_texture * venus_map;
-//static s_texture * earth_map;
+static s_texture * mercury_map;
+static s_texture * earth_map;
 static s_texture * moon_map;
 
 // Planet small halo texture
 static s_texture * small_halo;
 static s_texture * sun_halo;
 
+planet * Sun;             	  		  // Sun, center of the solar system
+planet * Moon;             	  		  // Moon, around earth
+planet * Earth;
+planet * Mercury;
+
  // Create and init the solar system
 void InitSolarSystem(void)
 {
     sun_map = new s_texture("sun",TEX_LOAD_TYPE_PNG_SOLID);
-    // mercury_map = new s_texture("mercury",TEX_LOAD_TYPE_PNG_SOLID);
-    // venus_map = new s_texture("venus",TEX_LOAD_TYPE_PNG_SOLID);
+    earth_map = new s_texture("earthmap",TEX_LOAD_TYPE_PNG_SOLID);
     moon_map = new s_texture("lune",TEX_LOAD_TYPE_PNG_SOLID);
-
+    mercury_map = new s_texture("mercury",TEX_LOAD_TYPE_PNG_SOLID);
+    
 	small_halo = new s_texture("star16x16");
 	sun_halo = new s_texture("halo");
 
 	Sun = new sun_planet("Sun", NO_HALO, 696000./UA, vec3_t(1.,1.,0.8), sun_map, NULL, sun_halo);
 	Moon = new planet("Moon", NO_HALO, 1738./UA, vec3_t(1.,1.,1.), moon_map, NULL, get_lunar_geo_posn);
+	Earth = new planet("Earth", NO_HALO, 6378.1/UA, vec3_t(1.,1.,1.), earth_map, NULL, get_earth_helio_coords);
+	Mercury = new planet("Mercury", NO_HALO, 2439.7/UA, vec3_t(1.,1.,1.), mercury_map, NULL, get_mercury_helio_coords);
+
+    Earth->set_rotation_elements(23.9345/24., 0, J2000, 23.45*M_PI/180., -11.2606423*M_PI/180., 0);
+
+	Sun->addSatellite(Earth);
+	Sun->addSatellite(Mercury);
+	Earth->addSatellite(Moon);
 }

@@ -21,9 +21,6 @@
 #include "planet.h"
 #include "navigator.h"
 
-// epoch J2000: 12 UT on 1 Jan 2000
-#define J2000 2451545.0
-
 rotation_elements::rotation_elements() : period(0.), offset(0.), epoch(J2000), obliquity(0.), ascendingNode(0.), precessionRate(0.)
 {
 }
@@ -46,6 +43,15 @@ planet::~planet()
 	name=NULL;
 }
 
+void planet::set_rotation_elements(float _period, float _offset, double _epoch, float _obliquity, float _ascendingNode, float _precessionRate)
+{
+    re.period = _period;
+    re.epoch = _epoch;
+    re.obliquity = _obliquity;
+    re.ascendingNode = _ascendingNode;
+    re.precessionRate = _precessionRate;
+}
+
 Vec3d planet::get_equ_pos(void)
 {
 	Vec3d v = get_heliocentric_ecliptic_pos();
@@ -55,16 +61,35 @@ Vec3d planet::get_equ_pos(void)
 void planet::compute_position(double date)
 {
 	coord_func(date, &(ecliptic_pos[0]), &(ecliptic_pos[1]), &(ecliptic_pos[2]));
+	printf("%lf %lf %lf\n",ecliptic_pos[0],ecliptic_pos[1],ecliptic_pos[2]);
+    // Compute for the satellites
+    list<planet*>::iterator iter = satellites.begin();
+    while (iter != satellites.end())
+    {
+        (*iter)->compute_position(date);
+        iter++;
+    }
 }
 
 // Get a matrix which converts from local ecliptic to the parent's ecliptic coordinates
 void planet::compute_trans_matrix(double date)
-{
+{   
     double tempAscendingNode = re.ascendingNode + re.precessionRate * (date - J2000);
 
-	trans_mat = Mat4d::xrotation(-re.obliquity) *
-				Mat4d::yrotation(-tempAscendingNode) *
-        		Mat4d::translation(ecliptic_pos);
+	mat_parent_to_local = Mat4d::translation(ecliptic_pos) * 
+	                        Mat4d::yrotation(-tempAscendingNode) * 
+	                        Mat4d::xrotation(-re.obliquity);
+        		
+    
+    //printf("trans compute for : %s : %lf\n", name, mat_parent_to_local[0][0]);   
+    
+    // Compute for the satellites
+    list<planet*>::iterator iter = satellites.begin();
+    while (iter != satellites.end())
+    {
+        (*iter)->compute_trans_matrix(date);
+        iter++;
+    }
 }
 
 // Return the y rotation to use from equatorial to geographic coordinates
@@ -94,7 +119,7 @@ Vec3d planet::get_heliocentric_ecliptic_pos()
 	planet * p = this;
 	while (p->parent!=NULL)
 	{
-		pos.transfo4d(p->trans_mat);
+		pos.transfo4d(p->mat_parent_to_local);
 		p=p->parent;
 	}
 	return pos;
@@ -108,19 +133,30 @@ void planet::addSatellite(planet*p)
 
 void planet::draw(void)
 {
+    glEnable(GL_TEXTURE_2D);
 	glEnable(GL_CULL_FACE);
-	glEnable(GL_LIGHTING);
+	glDisable(GL_LIGHTING);
 	glDisable(GL_BLEND);
 
 	glPushMatrix();
+
+    glMultMatrixd(mat_parent_to_local);
 
 	glColor3f(1.0f, 1.0f, 1.0f); //*SkyBrightness
 	glBindTexture(GL_TEXTURE_2D, planetTexture->getID());
 	GLUquadricObj * p=gluNewQuadric();
 	gluQuadricTexture(p,GL_TRUE);
 	gluQuadricOrientation(p, GLU_OUTSIDE);
-	gluSphere(p,radius,40,40);
+	gluSphere(p,radius*100,40,40);
 	gluDeleteQuadric(p);
+
+    // Draw the satellites
+    list<planet*>::iterator iter = satellites.begin();
+    while (iter != satellites.end())
+    {
+        (*iter)->draw();
+        iter++;
+    }
 
     glPopMatrix();
 
@@ -132,12 +168,21 @@ sun_planet::sun_planet(char * _name, int _flagHalo, double _radius, vec3_t _colo
 				s_texture * _planetTexture, s_texture * _haloTexture, s_texture * _bigHaloTexture) : planet(_name,_flagHalo,_radius,_color,_planetTexture,_haloTexture,NULL)
 {
 	ecliptic_pos=Vec3d(0.,0.,0.);
+	mat_local_to_parent = Mat4d::identity();
 	name=strdup(_name);
 }
 
 void sun_planet::compute_position(double date)
 {
-	return; // The sun is fixed in the heliocentric coordinate
+    // The sun is fixed in the heliocentric coordinate
+
+    // Compute for the satellites
+    list<planet*>::iterator iter = satellites.begin();
+    while (iter != satellites.end())
+    {
+        (*iter)->compute_position(date);
+        iter++;
+    }
 }
 
 	/*
