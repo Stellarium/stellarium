@@ -230,7 +230,7 @@ void stel_core::draw(int delta_time)
 	glClear(GL_DEPTH_BUFFER_BIT);
 
 	// Draw all the constellations
-	if (FlagAsterismDrawing)
+	if (FlagConstellationDrawing)
 	{
 		if (FlagConstellationPick && selected_constellation)
 			selected_constellation->draw_alone(projection);
@@ -238,7 +238,7 @@ void stel_core::draw(int delta_time)
 	}
 
 	// Draw the constellations's names
-	if (FlagAsterismName)
+	if (FlagConstellationName)
 	{
 		if (FlagConstellationPick && selected_constellation)
 			asterisms->draw_one_name(projection, selected_constellation);
@@ -258,9 +258,9 @@ void stel_core::draw(int delta_time)
 	}
 
 	// Draw the celestial equator line
-    if (FlagEquator) equator_line->draw(projection);
+    if (FlagEquatorLine) equator_line->draw(projection);
 	// Draw the ecliptic line
-    if (FlagEcliptic) ecliptic_line->draw(projection);
+    if (FlagEclipticLine) ecliptic_line->draw(projection);
 
 	// Draw the equatorial grid
 	if (FlagEquatorialGrid) equ_grid->draw(projection);
@@ -358,7 +358,13 @@ void stel_core::load_config(void)
 	FlagMenu			= conf->get_boolean("gui:flag_menu");
 	FlagHelp			= conf->get_boolean("gui:flag_help");
 	FlagInfos			= conf->get_boolean("gui:flag_infos");
+	FlagShowTopBar		= conf->get_boolean("gui:flag_show_topbar");
 	FlagUTC_Time		= conf->get_boolean("gui:flag_utc_time");
+	FlagShowTime		= conf->get_boolean("gui:flag_show_time");
+	FlagShowDate		= conf->get_boolean("gui:flag_show_date");
+	FlagShowAppName		= conf->get_boolean("gui:flag_show_appname");
+	FlagShowFov			= conf->get_boolean("gui:flag_show_fov");
+	FlagShowSelectedObjectInfos = conf->get_boolean("gui:flag_show_selected_object_info");
 	GuiBaseColor		= str_to_vec3f(conf->get_str("gui:gui_base_color"));
 	GuiTextColor		= str_to_vec3f(conf->get_str("gui:gui_text_color"));
 
@@ -378,13 +384,13 @@ void stel_core::load_config(void)
 	FlagAtmosphere		= conf->get_boolean("landscape:flag_atmosphere");
 
 	// Viewing section
-	FlagAsterismDrawing		= conf->get_boolean("viewing:flag_constellation_drawing");
-	FlagAsterismName		= conf->get_boolean("viewing:flag_constellation_name");
+	FlagConstellationDrawing= conf->get_boolean("viewing:flag_constellation_drawing");
+	FlagConstellationName	= conf->get_boolean("viewing:flag_constellation_name");
 	FlagConstellationPick	= conf->get_boolean("viewing:flag_constellation_pick");
 	FlagAzimutalGrid		= conf->get_boolean("viewing:flag_azimutal_grid");
 	FlagEquatorialGrid		= conf->get_boolean("viewing:flag_equatorial_grid");
-	FlagEquator				= conf->get_boolean("viewing:flag_equator");
-	FlagEcliptic			= conf->get_boolean("viewing:flag_ecliptic");
+	FlagEquatorLine			= conf->get_boolean("viewing:flag_equator_line");
+	FlagEclipticLine		= conf->get_boolean("viewing:flag_ecliptic_line");
 	FlagCardinalPoints		= conf->get_boolean("viewing:flag_cardinal_points");
 
 	// Astro section

@@ -71,8 +71,8 @@ private:
 
 	// Flags buttons (the buttons in the bottom left corner)
 	FilledContainer * bt_flag_ctr;		// The container for the button
-	FlagButton * bt_flag_asterism_draw;
-	FlagButton * bt_flag_asterism_name;
+	FlagButton * bt_flag_constellation_draw;
+	FlagButton * bt_flag_constellation_name;
 	FlagButton * bt_flag_azimuth_grid;
 	FlagButton * bt_flag_equator_grid;
 	FlagButton * bt_flag_ground;
