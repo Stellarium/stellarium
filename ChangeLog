@@ -1,4 +1,6 @@
-0.5.1b [18/03/2003]
+0.5.1b [02/04/2003]
+Fixed some gui bugs.
+Fixed the timezone +13 bug.
 Added a config.h.in file to set the compilation macros. The compilation output is now more readable.
 Removed all the bugs that the glut->SDL change created.
 Totally stopped the use of the glut library! Use the good SDL library instead. Increase the compatibility with every plateforms especially full screen mode in unix.
