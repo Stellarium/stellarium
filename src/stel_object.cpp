@@ -132,3 +132,10 @@ void stel_object::init_textures(void)
 	pointer_planet = new s_texture("pointeur4");
 	pointer_nebula = new s_texture("pointeur5");
 }
+
+void stel_object::delete_textures(void)
+{
+	delete pointer_star; pointer_star = NULL;
+	delete pointer_planet; pointer_planet = NULL;
+	delete pointer_nebula; pointer_nebula = NULL;
+}

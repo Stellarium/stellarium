@@ -84,7 +84,7 @@ stel_ui::~stel_ui()
 	delete tex_up; tex_up = NULL;
 	delete tex_down; tex_down = NULL;
 	if (tui_root) delete tui_root; tui_root=NULL;
-	delete info_select_txtlbl; info_select_txtlbl = NULL;
+	Component::deleteScissor();
 }
 
 ////////////////////////////////////////////////////////////////////////////////

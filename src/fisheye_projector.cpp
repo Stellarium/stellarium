@@ -22,18 +22,14 @@
 #include "fisheye_projector.h"
 
 
-Fisheye_projector::Fisheye_projector(int _screenW, int _screenH, double _fov, int _distortion_function,
-	double _min_fov, double _max_fov) : Projector(800, 600, 180.f, _min_fov, _max_fov)
+Fisheye_projector::Fisheye_projector(int _screenW, int _screenH, double _fov,
+	double _min_fov, double _max_fov) : Projector(_screenW, _screenH, _fov, _min_fov, _max_fov)
 {
 
 	set_fov(_fov);
 	set_screen_size(_screenW,_screenH);
 	mat_projection.set(1., 0., 0., 0.,
 							0., 1., 0., 0.,
-							0., 0., -1, 0.,
-							0., 0., 0., 1.);
-	mat_projection2.set(2., 0., 0., 0.,
-							0., 2., 0., 0.,
 							0., 0., -1, 0.,
 							0., 0., 0., 1.);
 }
@@ -44,10 +40,6 @@ Fisheye_projector::Fisheye_projector(const Projector& p) : Projector(800, 600, 1
 	set_screen_size(p.get_screenW(),p.get_screenH());
 	mat_projection.set(1., 0., 0., 0.,
 							0., 1., 0., 0.,
-							0., 0., -1, 0.,
-							0., 0., 0., 1.);
-	mat_projection2.set(2., 0., 0., 0.,
-							0., 2., 0., 0.,
 							0., 0., -1, 0.,
 							0., 0., 0., 1.);
 	set_viewport_type(p.get_viewport_type());
@@ -65,35 +57,34 @@ void Fisheye_projector::set_viewport(int x, int y, int w, int h)
 void Fisheye_projector::init_project_matrix(void)
 {
 	glMatrixMode(GL_PROJECTION);
-	glLoadMatrixd(mat_projection2);
+	glLoadMatrixd(mat_projection);
     glMatrixMode(GL_MODELVIEW);
 }
 
 void Fisheye_projector::update_openGL(void) const
 {
 	glMatrixMode(GL_PROJECTION);
-	glLoadMatrixd(mat_projection2);
+	glLoadMatrixd(mat_projection);
     glMatrixMode(GL_MODELVIEW);
 	glViewport(vec_viewport[0], vec_viewport[1], vec_viewport[2], vec_viewport[3]);
 }
 
 bool Fisheye_projector::project_custom(const Vec3d& v, Vec3d& win, const Mat4d& mat) const
 {
-	static double z;
-	static double a;
+	double z;
+	double a;
 
 	win = v;
 	win.transfo4d(mat);
 	z = (win.length() - zNear) / (zFar-zNear);
 	win.normalize();
-	win.transfo4d(mat_projection);
-	a = fabs(M_PI_2 - asin(win[2]));
+	//win.transfo4d(mat_projection);
+	a = fabs(M_PI_2 + asin(win[2]));
 	win[2] = 0.;
 	win.normalize();
-	win = center + win * (a/M_PI * 360./fov * MY_MIN(vec_viewport[2],vec_viewport[3])/2);
+	win = center + win * (a/fov * 180./M_PI * MY_MIN(vec_viewport[2],vec_viewport[3]));
 	win[2] = z;
-	if (a<0.9*M_PI) return true;
-	else return false;
+	return (a<0.9*M_PI) ? true : false;
 }
 
 
@@ -135,13 +126,12 @@ void Fisheye_projector::unproject(double x, double y, const Mat4d& m, Vec3d& v) 
 // new coordinate in orthographic projection which will simulate the fisheye projection.
 void Fisheye_projector::sVertex3(double x, double y, double z, const Mat4d& mat) const
 {
-	static Vec3d win;
-	static Vec3d v;
-	v.set(x,y,z);
+	Vec3d win;
+	Vec3d v(x,y,z);
 	project_custom(v, win, mat);
 
 	// Can be optimized by avoiding matrix inversion if it's always the same
-	gluUnProject(win[0],win[1],win[2],mat,mat_projection2,vec_viewport,&v[0],&v[1],&v[2]);
+	gluUnProject(win[0],win[1],win[2],mat,mat_projection,vec_viewport,&v[0],&v[1],&v[2]);
 	glVertex3dv(v);
 }
 

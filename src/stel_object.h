@@ -51,6 +51,7 @@ public:
 	virtual float get_mag(const navigator * nav) const = 0;
 
 	static void init_textures(void);
+	static void delete_textures(void);
 protected:
 	virtual float get_on_screen_size(const Projector* prj, const navigator * nav = NULL) {return 0;}
 private:

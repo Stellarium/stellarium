@@ -149,6 +149,7 @@ namespace s_gui
 		virtual int isIn(int x, int y);
 		static void setDefaultPainter(const Painter& p) {defaultPainter=p;}
 		static void initScissor(int winW, int winH);
+		static void deleteScissor(void);
 		static void enableScissor(void) {scissor->activate();}
 		static void disableScissor(void) {scissor->desactivate();}
     protected:

@@ -28,7 +28,7 @@
 class Fisheye_projector : public Projector
 {
 public:
-        Fisheye_projector(int _screenW = 800, int _screenH = 600, double _fov = 175., int _distortion_function = -1,
+        Fisheye_projector(int _screenW = 800, int _screenH = 600, double _fov = 175., 
 		    double _min_fov = 0.001, double _max_fov = 300.);
 
                     // distortion_function can be used to select between different projection distortions
@@ -71,7 +71,6 @@ protected:
 	virtual void unproject(double x, double y, const Mat4d& m, Vec3d& v) const;
 	void unproject(const Vec3d& u, const Mat4d& m, Vec3d& v) const;
 
-	Mat4d mat_projection2;		// orthographic projection matrix used for 3d vertex conversion
 };
 
 
