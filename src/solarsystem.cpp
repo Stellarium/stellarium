@@ -241,8 +241,8 @@ void SolarSystem::draw(int hint_ON, Projector * prj, const navigator * nav)
     glMaterialfv(GL_FRONT,GL_SPECULAR ,tmp);
 
 	// Light pos in zero (sun)
-	float zero4[4] = {0.,0.,0.,1.};
-    glLightfv(GL_LIGHT0,GL_POSITION,zero4);
+	nav->switch_to_heliocentric();
+    glLightfv(GL_LIGHT0,GL_POSITION,Vec4f(0.f,0.f,0.f,1.f));
 	glEnable(GL_LIGHT0);
 
 	// Compute each planet distance to the observer
