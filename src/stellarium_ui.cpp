@@ -17,6 +17,8 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
+#include <SDL.h>
+
 #include "stellarium_ui.h"
 #include "s_font.h"
 #include "s_gui.h"
@@ -988,55 +990,55 @@ void renderUi()
 }
 
 /*******************************************************************************/
-void HandleMove(int x, int y)
-{   Base->handleMouseMove(x, y);
+void GuiHandleMove(Uint16 x, Uint16 y)
+{   Base->handleMouseMove((int)x, (int)y);
 }
 
 /*******************************************************************************/
-void HandleClic(int x, int y, int state, int button)
+void GuiHandleClic(Uint16 x, Uint16 y, Uint8 state, Uint8 button)
 {   // Convert the name from GLU to my GUI
     enum guiValue bt;
     enum guiValue st;
     switch (button)
-    {   case GLUT_RIGHT_BUTTON : bt=GUI_MOUSE_RIGHT; break;
-        case GLUT_LEFT_BUTTON : bt=GUI_MOUSE_LEFT; break;
-        case GLUT_MIDDLE_BUTTON : bt=GUI_MOUSE_MIDDLE; break;
+    {   case SDL_BUTTON_RIGHT : bt=GUI_MOUSE_RIGHT; break;
+        case SDL_BUTTON_LEFT : bt=GUI_MOUSE_LEFT; break;
+        case SDL_BUTTON_MIDDLE : bt=GUI_MOUSE_MIDDLE; break;
         default : bt=GUI_MOUSE_LEFT;
     }
-    if (state==GLUT_UP) st=GUI_UP; else st=GUI_DOWN;
+    if (state==SDL_RELEASED) st=GUI_UP; else st=GUI_DOWN;
 
     // Send the mouse event to the User Interface
-    if (Base->handleMouseClic(x, y, st, bt))
+    if (Base->handleMouseClic((int)x, (int)y, st, bt))
     {   // If a "unthru" widget was at the clic position 
         return; 
     }
     else
     // Manage the event for the main window
-    {   if (state==GLUT_UP) return;
+    {   if (state==SDL_RELEASED) return;
         // Deselect the selected object
-        if (button==GLUT_RIGHT_BUTTON)
+        if (button==SDL_BUTTON_RIGHT)
         {   global.FlagSelect=false;
             global.FlagTraking = false;
             InfoSelectLabel->setVisible(false);
             return;
         }
-        if (button==GLUT_MIDDLE_BUTTON)
+        if (button==SDL_BUTTON_MIDDLE)
         {   if (global.FlagSelect)
             {   Move_To(global.SelectedObject.XYZ);
             }
         }
-        if (button==GLUT_LEFT_BUTTON)
+        if (button==SDL_BUTTON_LEFT)
         {   
         	// CTRL + clic = right clic for 1 button mouse
-        	if (glutGetModifiers() & GLUT_ACTIVE_CTRL)
-        	{   
+			if (SDL_GetModState() & KMOD_CTRL)
+			{
         		global.FlagSelect=false;
             	global.FlagTraking = false;
             	InfoSelectLabel->setVisible(false);
             	return;
         	}
         	// Left or middle clic -> selection of an object
-            findObject(x,y);
+            findObject((int)x,(int)y);
             // If an object has been found
             if (global.FlagSelect)
             {   updateInfoSelectString();
@@ -1049,10 +1051,13 @@ void HandleClic(int x, int y, int state, int button)
 }
 
 /*******************************************************************************/
-void HandleNormalKey(unsigned char key, int state)
+bool GuiHandleKeys(Uint8 key, int state)
 {   if (state==GUI_DOWN)
-    {   switch(key)
-        {   case 27 :   clearUi();
+    {   
+    	
+    	switch(key)
+        {   
+        	case 27 :   clearUi();
                         exit(0); 
                         break;
             case 'C' :
@@ -1142,4 +1147,5 @@ void HandleNormalKey(unsigned char key, int state)
                         break;
         }
     }
+    return false;
 }

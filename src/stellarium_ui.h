@@ -22,11 +22,13 @@
 #ifndef _STELLARIUM_UI_H
 #define _STELLARIUM_UI_H
 
+#include <SDL.h>
+
 void initUi(void);
 void clearUi(void);
 void renderUi();
-void HandleClic(int x, int y, int state, int button);
-void HandleMove(int x, int y);
-void HandleNormalKey(unsigned char key, int state);
+void GuiHandleClic(Uint16 x, Uint16 y, Uint8 state, Uint8 button);
+void GuiHandleMove(int x, int y);
+bool GuiHandleKeys(Uint8 key, int state);
 
 #endif  //_STELLARIUM_UI_H

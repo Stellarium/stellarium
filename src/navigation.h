@@ -25,7 +25,7 @@
 // *******  Calc the Zenith position for the location and Time  ********
 void ComputeZenith(void);
 void Update_variables(void);
-void Update_time(Planet_mgr &_SolarSystem);
+void Update_time(int DeltaTemps, Planet_mgr &_SolarSystem);
 void Switch_to_altazimutal(void);
 void Switch_to_equatorial(void);
 void Move_To(vec3_t _aim);

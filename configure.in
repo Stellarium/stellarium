@@ -1,5 +1,6 @@
 dnl Enable CYGWIN/MACOSX/POSIX support
 dnl Process this file with autoconf to produce a configure script.
+
 AC_INIT(src/main.cpp)
 AM_INIT_AUTOMAKE(stellarium,0.5.1b)
 
@@ -10,8 +11,11 @@ dnl Check for compilers.
 AC_PROG_CC
 AC_PROG_CXX
 
-CFLAGS="-Wall -O3 -ffast-math -fexpensive-optimizations"
-CXXFLAGS="-Wall -O3 -ffast-math -fexpensive-optimizations"
+AM_PATH_SDL
+
+CFLAGS="-Wall -O2 -ffast-math -fexpensive-optimizations $SDL_CFLAGS"
+CXXFLAGS="-Wall -O2 -ffast-math -fexpensive-optimizations $SDL_CFLAGS"
+LIBS="$LIBS $SDL_LIBS"
 
 dnl Checks for programs.
 AC_PROG_CPP
@@ -25,7 +29,7 @@ AC_CHECK_LIB(m,fabs,LIBS="$LIBS -lm",AC_MSG_RESULT(math library not found))
 dnl Check for X11.
 AC_PATH_XTRA
 LIBS="$LIBS $X_LIBS"
-CFLAGS="$CFLAGS $X_CFLAGS "
+CFLAGS="$CFLAGS $X_CFLAGS"
 
 AC_C_BIGENDIAN
 AC_CHECK_HEADER(byteswap.h)
@@ -37,34 +41,29 @@ fi
 PKGDATADIR=`eval echo "${datadir}/$PACKAGE"`
 AC_DEFINE_UNQUOTED(CONFIG_DATA_DIR, "$PKGDATADIR")
 
-
 dnl For each host type, set the appropriate openGL libraries
-
 dnl MACOSX
 case "$host" in 
 *-*-darwin*)
 	AC_DEFINE_UNQUOTED(MACOSX,1)
 	LDFLAGS="$LDFLAGS -flat_namespace -undefined suppress -lz "
-	LIBS="$LIBS -framework GLUT -framework OpenGL -lobjc "
+	LIBS="$LIBS -framework OpenGL -lobjc "
 	AC_CHECK_HEADER(OpenGL/gl.h,,AC_MSG_ERROR(gl.h not found - please install OpenGL))
 	AC_CHECK_HEADER(OpenGL/glu.h,,AC_MSG_ERROR(glu.h not found - please install GLU))
-	AC_CHECK_HEADER(GLUT/glut.h,,AC_MSG_ERROR(glut.h not found - please install GLUT))
 ;;
 
 dnl CYGWIN
 *-*-cygwin*)
 	AC_DEFINE_UNQUOTED(CYGWIN,1)
-	LIBS="$LIBS -lopengl32 -lglu32 -lglut32 "
+	LIBS="$LIBS -lopengl32 -lglu32"
 	AC_CHECK_HEADER(GL/gl.h,,AC_MSG_ERROR(gl.h not found - please install OpenGL))
 	AC_CHECK_HEADER(GL/glu.h,,AC_MSG_ERROR(glu.h not found - please install GLU))
-	AC_CHECK_HEADER(GL/glut.h,,AC_MSG_ERROR(glut.h not found - please install GLUT))
 ;;
 
 dnl OTHER SYSTEMS
 *)
 	AC_CHECK_HEADER(GL/gl.h,,AC_MSG_ERROR(gl.h not found - please install OpenGL- or Mesa-devel))
 	AC_CHECK_HEADER(GL/glu.h,,AC_MSG_ERROR(glu.h not found - please install GLU- or MesaGLU-devel))
-	AC_CHECK_HEADER(GL/glut.h,,AC_MSG_ERROR(glut.h not found - please install GLUT- or MesaGLUT-devel))
 
 	AC_CHECK_LIB(GL,glEnable)
    	if test "$ac_cv_lib_GL_glEnable" = no ; then
@@ -76,12 +75,6 @@ dnl OTHER SYSTEMS
     	AC_CHECK_LIB(MesaGLU,gluLookAt,,AC_MSG_ERROR(GLU not found - please install GLU or MesaGLU))
    	fi
 
-   	AC_CHECK_LIB(glut,glutMainLoop)
-   	if test "$ac_cv_lib_GLUT_glutMainLoop" = no ; then
-   		dnl Sometime it can make the program work...
-   		LIBS="$LIBS -lXi -Xmu "
-    	AC_CHECK_LIB(glut,glutMainLoop,,AC_MSG_ERROR(GLUT not found - please install GLUT))
-   	fi
 ;;
 esac
 

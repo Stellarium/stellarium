@@ -22,12 +22,7 @@
 #ifndef _S_FONT_H
 #define _S_FONT_H
 
-#if defined( MACOSX )
-#include <GLUT/glut.h>
-#else
-#include <GL/glut.h>
-#endif
-
+#include "GL/gl.h"
 #include "s_texture.h"
 
 typedef struct
