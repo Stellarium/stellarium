@@ -43,6 +43,7 @@ public:
 	virtual void get_short_info_string(char * s, const navigator * nav = NULL) const;
 	virtual STEL_OBJECT_TYPE get_type(void) const {return STEL_OBJECT_STAR;}
 	virtual Vec3d get_earth_equ_pos(const navigator* nav=NULL) const {return Vec3d(XYZ[0],XYZ[1],XYZ[2]);}
+	virtual double get_best_fov(const navigator * nav = NULL) const {return (13.f - 2.f * Mag > 1.f) ? (13.f - Mag) : 1.f;}
 
 private:
     unsigned int HP;		// Hipparcos number

@@ -673,6 +673,11 @@ int stel_ui::handle_keys(SDLKey key, S_GUI_VALUE state)
         {
         	core->navigation->set_JDay(get_julian_from_sys());
 		}
+		if(key==SDLK_SLASH)
+        {
+			core->toggle_selected_object_gozoom();
+		}
+
     }
     return 0;
 }

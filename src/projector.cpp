@@ -22,7 +22,7 @@
 
 
 Projector::Projector(int _screenW, int _screenH, double _fov, double _min_fov, double _max_fov) :
-	min_fov(_min_fov), max_fov(_max_fov), zNear(0.1), zFar(10000)
+	min_fov(_min_fov), max_fov(_max_fov), zNear(0.1), zFar(10000), flag_auto_zoom(0)
 {
 	set_fov(_fov);
 	set_screen_size(_screenW,_screenH);
@@ -142,6 +142,31 @@ void Projector::set_modelview_matrices(	const Mat4d& _mat_earth_equ_to_eye,
 	inv_mat_earth_equ_to_eye = (mat_projection*mat_earth_equ_to_eye).inverse();
 	inv_mat_helio_to_eye = (mat_projection*mat_helio_to_eye).inverse();
 	inv_mat_local_to_eye = (mat_projection*mat_local_to_eye).inverse();
+}
+
+// Update auto_zoom if activated
+void Projector::update_auto_zoom(int delta_time)
+{
+    if (flag_auto_zoom)
+    {
+		set_fov(zoom_move.start + (zoom_move.aim - zoom_move.start) * zoom_move.coef);
+        zoom_move.coef+=zoom_move.speed*delta_time;
+        if (zoom_move.coef>=1.)
+        {
+			flag_auto_zoom = 0;
+            set_fov(zoom_move.aim);
+        }
+    }
+}
+
+// Zoom to the given field of view
+void Projector::zoom_to(double aim_fov, float move_duration)
+{
+	zoom_move.aim=aim_fov;
+    zoom_move.start=fov;
+    zoom_move.speed=1.f/(move_duration*1000);
+    zoom_move.coef=0.;
+    flag_auto_zoom = true;
 }
 
 

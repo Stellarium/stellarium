@@ -188,6 +188,9 @@ void stel_core::update(int delta_time)
 	navigation->update_transform_matrices((ssystem->get_earth())->get_ecliptic_pos());
 	// Direction of vision
 	navigation->update_vision_vector(delta_time, selected_object);
+	// Field of view
+	projection->update_auto_zoom(delta_time);
+
 	// Move the view direction and/or fov
 	update_move(delta_time);
 
@@ -571,34 +574,6 @@ void stel_core::save_config_to(const string& confFile)
 }
 
 
-// find and select the "nearest" object from earth equatorial position
-stel_object * stel_core::find_stel_object(Vec3d v)
-{
-	stel_object * sobj = NULL;
-
-	if (FlagPlanets) sobj = ssystem->search(v, navigation);
-	if (sobj) return sobj;
-
-	Vec3f u=Vec3f(v[0],v[1],v[2]);
-
-	sobj = nebulas->search(u);
-	if (sobj) return sobj;
-
-	if (FlagStars) sobj = hip_stars->search(u);
-
-	return sobj;
-}
-
-
-// find and select the "nearest" object from screen position
-stel_object * stel_core::find_stel_object(int x, int y)
-{
-	Vec3d v;
-	projection->unproject_earth_equ(x,y,v);
-
-	return find_stel_object(v);
-}
-
 // Handle mouse clics
 int stel_core::handle_clic(Uint16 x, Uint16 y, Uint8 state, Uint8 button)
 {
@@ -768,4 +743,68 @@ void stel_core::set_screen_size(int w, int h)
     screen_H = h;
 
 	projection->set_screen_size(screen_W, screen_H);
+}
+
+// find and select the "nearest" object from earth equatorial position
+stel_object * stel_core::find_stel_object(const Vec3d& v) const
+{
+	stel_object * sobj = NULL;
+
+	if (FlagPlanets) sobj = ssystem->search(v, navigation);
+	if (sobj) return sobj;
+
+	Vec3f u=Vec3f(v[0],v[1],v[2]);
+
+	sobj = nebulas->search(u);
+	if (sobj) return sobj;
+
+	if (FlagStars) sobj = hip_stars->search(u);
+
+	return sobj;
+}
+
+
+// find and select the "nearest" object from screen position
+stel_object * stel_core::find_stel_object(int x, int y) const
+{
+	Vec3d v;
+	projection->unproject_earth_equ(x,y,v);
+
+	return find_stel_object(v);
+}
+
+// Goto the given object
+void stel_core::goto_stel_object(const stel_object* obj, float move_duration) const
+{
+	if (!obj) return;
+	navigation->move_to(obj->get_earth_equ_pos(navigation), move_duration);
+}
+
+// Zoom to the given object
+void stel_core::zoomto_stel_object(const stel_object* obj, float move_duration) const
+{
+	if (!obj) return;
+	projection->zoom_to(obj->get_best_fov(navigation), move_duration);
+}
+
+// Go and zoom temporary to the selected object. Old position is reverted by calling the function again
+void stel_core::toggle_selected_object_gozoom(float move_duration)
+{
+	if (!FlagIsGoZoomOnObject && selected_object)
+	{
+		FlagIsGoZoomOnObject = 1;
+		previous_equ_pos = navigation->get_equ_vision();
+		previous_fov = projection->get_fov();
+		goto_stel_object(selected_object, move_duration);
+		zoomto_stel_object(selected_object, move_duration);
+	}
+	else
+	{
+		if (FlagIsGoZoomOnObject)
+		{
+			FlagIsGoZoomOnObject = 0;
+			navigation->move_to(previous_equ_pos, move_duration);
+			projection->zoom_to(previous_fov, move_duration);
+		}
+	}
 }
