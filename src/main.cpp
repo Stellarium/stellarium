@@ -40,6 +40,7 @@
 #include "navigation.h"
 #include "s_gui.h"
 #include "hip_star_mgr.h"
+#include "shooting.h"
 
 using namespace std;
 
@@ -50,6 +51,8 @@ Constellation_mgr * ConstellCeleste;  // Constellation boundary and name
 Nebula_mgr * messiers;                // Class to manage the messier objects
 Planet_mgr * SolarSystem;             // Class to manage the planets
 s_texture * texIds[200];              // Common Textures
+
+ShootingStar * TheShooting = NULL;
 
 static int timeAtmosphere=0;
 
@@ -100,6 +103,14 @@ void glutDisplay(void)
 	HipVouteCeleste->Draw(); 
 	//VouteCeleste->Draw();      // Draw the stars
     }
+
+	if (!TheShooting) TheShooting = new ShootingStar(global.Timefr);
+	if (TheShooting->IsDead())
+	{
+		delete TheShooting;
+		TheShooting = new ShootingStar(global.Timefr);
+	}
+	TheShooting->Draw(global.Timefr);
 
     if (global.FlagPlanets || global.FlagPlanetsHintDrawing) 
 	SolarSystem->Draw();         // Draw the planets
