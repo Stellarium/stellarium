@@ -306,7 +306,7 @@ void Constellation_mgr::draw(Projector* prj, char abr[4]) const
     (*iter)->draw(prj, lines_color);
 }
 
-void Constellation_mgr::draw_art(Projector* prj, int delta_time)
+void Constellation_mgr::draw_art(Projector* prj, navigator* nav, int delta_time)
 {
 	glBlendFunc(GL_ONE, GL_ONE);
 	glEnable(GL_TEXTURE_2D);
@@ -324,7 +324,7 @@ void Constellation_mgr::draw_art(Projector* prj, int delta_time)
     vector<Constellation *>::const_iterator iter;
     for(iter=asterisms.begin();iter!=asterisms.end();++iter)
     {
-		(*iter)->draw_art_optim(prj, delta_time);
+		(*iter)->draw_art_optim(prj, nav, delta_time);
     }
 	prj->reset_perspective_projection();
 	glDisable(GL_CULL_FACE);

@@ -308,7 +308,7 @@ void stel_core::draw(int delta_time)
 	} else {
 	  asterisms->hide_art();
 	}
-	asterisms->draw_art(projection, delta_time);
+	asterisms->draw_art(projection, navigation, delta_time);
 
 	// Draw the constellations's names
 	if (FlagConstellationName)
