@@ -216,7 +216,7 @@ void planet::compute_trans_matrix(double date)
 
 	compute_geographic_rotation(date);
 
-	//	mat_local_to_parent = Mat4d::translation(ecliptic_pos) // * Mat4d::zrotation(-re.ascendingNode)
+	//mat_local_to_parent = Mat4d::translation(ecliptic_pos) // * Mat4d::zrotation(-re.ascendingNode)
 	//	* Mat4d::xrotation(-re.obliquity);
 
 	// re.ascendingNode is needed for correct Galilean moon positions viewed from Earth, for example
