@@ -30,9 +30,9 @@ rotation_elements::rotation_elements() : period(1.), offset(0.), epoch(J2000),
 }
 
 planet::planet(const char * _name, int _flagHalo, int _flag_lighting, double _radius, vec3_t _color,
-	const char* tex_map_name, const char* tex_halo_name, pos_func_type _coord_func) :
-		name(NULL), flagHalo(_flagHalo), flag_lighting(_flag_lighting), radius(_radius), color(_color), axis_rotation(0.),
-		tex_map(NULL), tex_halo(NULL), coord_func(_coord_func), parent(NULL)
+	float _albedo, const char* tex_map_name, const char* tex_halo_name, pos_func_type _coord_func) :
+		name(NULL), flagHalo(_flagHalo), flag_lighting(_flag_lighting), radius(_radius), color(_color),
+		albedo(_albedo), axis_rotation(0.),	tex_map(NULL), tex_halo(NULL), coord_func(_coord_func), parent(NULL)
 {
 	ecliptic_pos=Vec3d(0.,0.,0.);
 	mat_local_to_parent = Mat4d::identity();
@@ -46,6 +46,10 @@ planet::~planet()
 {
 	if (name) free(name);
 	name=NULL;
+	if (tex_map) delete tex_map;
+	tex_map = NULL;
+	if (tex_halo) delete tex_halo;
+	tex_halo = NULL;
 }
 
 // Return the information string "ready to print" :)
@@ -168,7 +172,7 @@ void planet::draw(int hint_ON, draw_utility * du, navigator * nav)
 
 	// Check if in the screen
 	Vec3d earthEquPos = get_earth_equ_pos(nav);
-	float lim = atan(radius/earthEquPos.length())*180./M_PI/du->fov;
+	float lim = atanf(radius/earthEquPos.length())*180./M_PI/du->fov;
 	if (screenPos[2] < 1 &&
 		screenPos[0]>-lim*du->screenW && screenPos[0]<(1.f+lim)*du->screenW &&
 		screenPos[1]>-lim*du->screenH && screenPos[1]<(1.f+lim)*du->screenH)

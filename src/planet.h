@@ -66,7 +66,7 @@ class planet : public stel_object
 {
 public:
 	planet(const char * _name, int _flagHalo, int _flag_lighting, double _radius, vec3_t _color,
-	const char* tex_map_name, const char* tex_halo_name, pos_func_type _coord_func);
+	float _albedo, const char* tex_map_name, const char* tex_halo_name, pos_func_type _coord_func);
 
     virtual ~planet();
 
@@ -129,6 +129,7 @@ protected:
 									// centered on the parent planet
 	Vec3d screenPos;				// Used to store temporarily the 2D position on screen
 	Vec3f color;
+	float albedo;					// Planet albedo
 	Mat4d mat_local_to_parent;		// Transfo matrix from local ecliptique to parent ecliptic
 	float axis_rotation;			// Rotation angle of the planet on it's axis
     s_texture * tex_map;			// Planet map texture
