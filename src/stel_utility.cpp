@@ -242,14 +242,14 @@ string print_angle_dms(double location)
     double deg = 0.0;
     double min = 0.0;
     double sec = 0.0;
-
+                                                                                                                      
     *buf = 0;
-
+                                                                                                                      
     sec = 60.0 * (modf(location, &deg));
     if (sec <= 0.0)
         sec *= -1;
     sec = 60.0 * (modf(sec, &min));
-
+                                                                                                                      
     // this solves some rounding errors
     // try 122d 18m 0s for example --> was coming out 122 17 60
     // which error handling turns into 0.0!
@@ -261,12 +261,12 @@ string print_angle_dms(double location)
     if( min > 59 ) {
       min = 0.0;
       if( deg >= 0 ) {
-	deg++;
+        deg++;
       } else {
-	deg--;
+        deg--;
       }
     }
-
+ 
     sprintf(buf,"%+.2dº%.2d'%.2f\"",(int)deg, (int) min, sec);
     return buf;
 }
@@ -277,12 +277,16 @@ string print_angle_dms_stel(double location)
     double deg = 0.0;
     double min = 0.0;
     double sec = 0.0;
-    *buf = 0;
+	char sign = '+';
+
+	if(location<0) {
+		location *= -1;
+		sign = '-';
+	}
+
     sec = 60.0 * (modf(location, &deg));
-    if (sec <= 0.0)
-        sec *= -1;
     sec = 60.0 * (modf(sec, &min));
-    sprintf(buf,"%+.2d\6%.2d'%.2f\"",(int)deg, (int) min, sec);
+    sprintf(buf,"%c%.2d\6%.2d'%.2f\"", sign, (int)deg, (int) min, sec);
     return buf;
 }
 
