@@ -51,8 +51,6 @@ case "$host" in
 	LDFLAGS="$LDFLAGS -flat_namespace -undefined suppress -lz "
 	LIBS="$LIBS -framework OpenGL -lobjc "
 	AC_CHECK_HEADERS(byteswap.h)
-	AC_CHECK_HEADER(OpenGL/gl.h,,AC_MSG_ERROR(gl.h not found - please install OpenGL))
-	AC_CHECK_HEADER(OpenGL/glu.h,,AC_MSG_ERROR(glu.h not found - please install GLU))
 	AM_PATH_SDL
 	LIBS="$LIBS $SDL_LIBS"
 	CFLAGS="$CFLAGS $SDL_CFLAGS"
@@ -64,8 +62,6 @@ dnl CYGWIN
 	AC_DEFINE_UNQUOTED(CYGWIN,1, [If we are on cygwin plateform.])
 	LIBS="$LIBS -lopengl32 -lglu32"
 	AC_CHECK_HEADERS(byteswap.h)
-	AC_CHECK_HEADER(GL/gl.h,,AC_MSG_ERROR(gl.h not found - please install OpenGL))
-	AC_CHECK_HEADER(GL/glu.h,,AC_MSG_ERROR(glu.h not found - please install GLU))
 	dnl Check for SDL.
 	AM_PATH_SDL
 	LIBS="$LIBS $SDL_LIBS"
@@ -95,8 +91,6 @@ i386-pc-mingw32msvc)
 	CFLAGS="$CFLAGS $SDL_CFLAGS"
 	CXXFLAGS="$CXXFLAGS $SDL_CFLAGS"
 	LIBS="$LIBS -lopengl32 -lglu32"
-	AC_CHECK_HEADER(GL/gl.h,,AC_MSG_ERROR(gl.h not found - please install OpenGL))
-	AC_CHECK_HEADER(GL/glu.h,,AC_MSG_ERROR(glu.h not found - please install GLU))
 	echo $CXXFLAGS
 ;;
 
@@ -107,9 +101,6 @@ dnl OTHER SYSTEMS
 	LIBS="$LIBS $SDL_LIBS"
 	CFLAGS="$CFLAGS $SDL_CFLAGS"
 	CXXFLAGS="$CXXFLAGS $SDL_CFLAGS"
-
-	AC_CHECK_HEADER(GL/gl.h,,AC_MSG_ERROR(gl.h not found - please install OpenGL- or Mesa-devel))
-	AC_CHECK_HEADER(GL/glu.h,,AC_MSG_ERROR(glu.h not found - please install GLU- or MesaGLU-devel))
 
 	AC_CHECK_LIB(GL,glEnable)
    	if test "$ac_cv_lib_GL_glEnable" = no ; then

@@ -24,15 +24,9 @@
 # include "config.h"
 #endif
 
-#ifdef MACOSX
-# include <OpenGL/gl.h>
-# include <OpenGL/glu.h>
-#else
-# include <GL/gl.h>
-# include <GL/glu.h>
-#endif
-
 #include <string>
+
+#include "SDL_opengl.h"
 
 using namespace std;
 
