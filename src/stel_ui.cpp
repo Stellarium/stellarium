@@ -655,14 +655,9 @@ int stel_ui::handle_keys(SDLKey key, S_GUI_VALUE state)
     	{
 			if (SDL_GetModState() & KMOD_CTRL) core->quit();
 		}
-        if(key==SDLK_c)
-        {
-	  core->commander->execute_command( "flag constellation_drawing toggle");
-	}
-        if(key==SDLK_d)
-        {
-	  core->commander->execute_command( "flag star_name toggle");
-	}
+        if(key==SDLK_c) core->commander->execute_command( "flag constellation_drawing toggle");
+        if(key==SDLK_d) core->commander->execute_command( "flag star_name toggle");
+
         if(key==SDLK_1)
         {
         	core->FlagConfig=!core->FlagConfig;
@@ -679,60 +674,33 @@ int stel_ui::handle_keys(SDLKey key, S_GUI_VALUE state)
 	    core->FlagPlanetsHints = 0;
 	  }
 	}
-        if(key==SDLK_v)
-        {
-        	core->FlagConstellationName=!core->FlagConstellationName;
-		}
-        if(key==SDLK_z)
-        {	
-        	core->FlagAzimutalGrid=!core->FlagAzimutalGrid;
-		}
-        if(key==SDLK_e)
-        {	
-        	core->FlagEquatorialGrid=!core->FlagEquatorialGrid;
-		}
-        if(key==SDLK_n)
-        {	
-        	core->FlagNebulaName=!core->FlagNebulaName;
-		}
-        if(key==SDLK_g)
-        {	
-        	core->FlagGround=!core->FlagGround;
-		}
-        if(key==SDLK_f)
-        {	
-        	core->FlagFog=!core->FlagFog;
-		}
-        if(key==SDLK_q)
-        {	
-        	core->FlagCardinalPoints=!core->FlagCardinalPoints;
-		}
-        if(key==SDLK_a)
-        {	
-        	core->FlagAtmosphere=!core->FlagAtmosphere;
-	}
+        if(key==SDLK_v) core->commander->execute_command( "flag constellation_name toggle");
+        if(key==SDLK_z) core->commander->execute_command( "flag azimutal_grid toggle");
+        if(key==SDLK_e) core->commander->execute_command( "flag equatorial_grid toggle");
+        if(key==SDLK_n) core->commander->execute_command( "flag nebula_name toggle");
+        if(key==SDLK_g) core->commander->execute_command( "flag ground toggle");
+        if(key==SDLK_f) core->commander->execute_command( "flag fog toggle");
+        if(key==SDLK_q) core->commander->execute_command( "flag cardinal_points toggle");
+        if(key==SDLK_a) core->commander->execute_command( "flag atmosphere toggle");
+
         if(key==SDLK_h)
         {	
         	core->FlagHelp=!core->FlagHelp;
 			help_win->setVisible(core->FlagHelp);
 		}
-	if(key==SDLK_COMMA || key==SDLK_4)
-        {
+	if(key==SDLK_COMMA || key==SDLK_4) {
 	  if(!core->FlagEclipticLine) {
-	    core->FlagEclipticLine=1;
+	    core->commander->execute_command( "flag ecliptic_line on");
 	  } else if( !core->FlagObjectTrails) {
-	    core->FlagObjectTrails = 1;
+	    core->commander->execute_command( "flag object_trails on");
 	    core->ssystem->start_trails();
 	  } else {
-	    core->FlagObjectTrails = 0;
+	    core->commander->execute_command( "flag object_trails off");
 	    core->ssystem->end_trails();
-	    core->FlagEclipticLine = 0;
+	    core->commander->execute_command( "flag ecliptic_line off");
 	  }
 	}
-        if(key==SDLK_PERIOD || key==SDLK_5)
-        {
-        	core->FlagEquatorLine=!core->FlagEquatorLine;
-		}
+        if(key==SDLK_PERIOD || key==SDLK_5) core->commander->execute_command( "flag equator_line toggle"); 
 
         if(key==SDLK_t)
         {
@@ -849,33 +817,33 @@ int stel_ui::handle_keys(SDLKey key, S_GUI_VALUE state)
         if(key==SDLK_RIGHTBRACKET)
         {
         	core->navigation->set_JDay(core->navigation->get_JDay()+7*JD_DAY);
-		}
+	}
 
-		if(key==SDLK_SLASH)
-        {
-			if (SDL_GetModState() & KMOD_CTRL)
-			{
-				core->auto_zoom_out(core->auto_move_duration);
-			}
-			else core->auto_zoom_in(core->auto_move_duration);
-		}
-		if(key==SDLK_BACKSLASH)
-		{
-			core->auto_zoom_out(core->auto_move_duration);
-		}
-		if(key==SDLK_x)
-        {
-			core->FlagShowTuiDateTime = !core->FlagShowTuiDateTime;
-			core->FlagShowTuiShortObjInfo = core->FlagShowTuiDateTime;
-		}
-		if(key==SDLK_r)
-        {
-			core->FlagConstellationArt = !core->FlagConstellationArt;
-		}
-		if(key==SDLK_RETURN)
-        {
-			core->navigation->switch_viewing_mode();
-		}
+	if(key==SDLK_SLASH)
+	  {
+	    if (SDL_GetModState() & KMOD_CTRL)
+	      {
+		core->auto_zoom_out(core->auto_move_duration);
+	      }
+	    else core->auto_zoom_in(core->auto_move_duration);
+	  }
+	if(key==SDLK_BACKSLASH)
+	  {
+	    core->auto_zoom_out(core->auto_move_duration);
+	  }
+	if(key==SDLK_x)
+	  {
+	    core->FlagShowTuiDateTime = !core->FlagShowTuiDateTime;
+	    core->FlagShowTuiShortObjInfo = core->FlagShowTuiDateTime;
+	  }
+	if(key==SDLK_r)
+	  {
+	    core->FlagConstellationArt = !core->FlagConstellationArt;
+	  }
+	if(key==SDLK_RETURN)
+	  {
+	    core->navigation->switch_viewing_mode();
+	  }
     }
     return 0;
 }

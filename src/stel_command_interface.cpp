@@ -59,6 +59,8 @@ int StelCommandInterface::execute_command(string commandline) {
     cout << commandline << endl;
 
 
+  } else {
+    cout << "Could not execute: " << commandline << endl;
   }
 
   return(status);

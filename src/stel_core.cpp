@@ -1292,6 +1292,7 @@ int stel_core::set_flag(string name, string value) {
     else if(name=="nebula_name") FlagNebulaName = !FlagNebulaName;
     else if(name=="milky_way") FlagMilkyWay = !FlagMilkyWay;
     else if(name=="bright_nebulae") FlagBrightNebulae = !FlagBrightNebulae;
+    else if(name=="object_trails") FlagObjectTrails = !FlagObjectTrails;
     else return(0);  // no matching flag found
 
   } else {
@@ -1342,6 +1343,7 @@ int stel_core::set_flag(string name, string value) {
     else if(name=="nebula_name") FlagNebulaName = val;
     else if(name=="milky_way") FlagMilkyWay = val;
     else if(name=="bright_nebulae") FlagBrightNebulae = val;
+    else if(name=="object_trails") FlagObjectTrails = val;
     else return(0);  // no matching flag found
 
   }
