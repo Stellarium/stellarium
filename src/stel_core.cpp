@@ -166,7 +166,7 @@ void stel_core::init(void)
 
 	ui->init_tui();
 
-	tone_converter->set_world_adaptation_luminance(3.75f + atmosphere->get_intensity()*40000.f);
+	tone_converter->set_world_adaptation_luminance(3.75f + atmosphere->get_fade_intensity()*40000.f);
 
 	// Set the default moon scaling
 	if (FlagInitMoonScaled) ssystem->get_moon()->set_sphere_scale(MoonScale);
@@ -195,28 +195,8 @@ void stel_core::init(void)
 	
 	selected_planet=NULL;	// Fix a bug on macosX! Thanks Fumio!
 		
-	// Compute the atmosphere color (if necessary)
-	// compute global sky brightness TODO : make this more "scientifically"
-	// Compute the sun position in local coordinate
-	/*Vec3d temp(0.,0.,0.);
-	Vec3d sunPos = navigation->helio_to_local(temp);
-	sunPos.normalize();
-	atmosphere->compute_color(navigation->get_JDay(), sunPos, sunPos,
-				  ssystem->get_moon()->get_phase(ssystem->get_earth()->get_heliocentric_ecliptic_pos()),
-				  tone_converter, projection, observatory->get_latitude(), observatory->get_altitude(),
-				  15.f, 40.f);
-	sky_brightness = sunPos[2] * atmosphere->get_intensity();
-	if( sky_brightness < 0 ) {
-	  sky_brightness = 0;
-	} else if (sky_brightness<0.1) sky_brightness=0.1;*/
-
-
-
-
 	// could load a startup script
 	commander->execute_command("script action play filename ./scripts/startup.sts");
-
-
 }
 
 void stel_core::quit(void)
@@ -268,22 +248,37 @@ void stel_core::update(int delta_time)
 	// Move the view direction and/or fov
 	update_move(delta_time);
 
-
 	// Update info about selected object
 	if (selected_object) selected_object->update();
 
-	// Update constellation switchers
+	// Update faders
 	asterisms->update(delta_time);
+	atmosphere->update(delta_time);
 	
-	// compute global sky brightness TODO : make this more "scientifically"
 	// Compute the sun position in local coordinate
 	Vec3d temp(0.,0.,0.);
 	Vec3d sunPos = navigation->helio_to_local(temp);
 	sunPos.normalize();
-	sky_brightness = sunPos[2] * atmosphere->get_intensity();
-	if( sky_brightness < 0 ) {
-	  sky_brightness = 0;
-	} else if (sky_brightness<0.1) sky_brightness=0.1;
+
+	// Compute the moon position in local coordinate
+	temp = ssystem->get_moon()->get_heliocentric_ecliptic_pos();
+	Vec3d moonPos = navigation->helio_to_local(temp);
+	moonPos.normalize();
+
+	// Compute the atmosphere color and intensity 
+	atmosphere->compute_color(navigation->get_JDay(), sunPos, moonPos,
+				  ssystem->get_moon()->get_phase(ssystem->get_earth()->get_heliocentric_ecliptic_pos()),
+				  tone_converter, projection, observatory->get_latitude(), observatory->get_altitude(),
+				  15.f, 40.f);	// Temperature = 15c, relative humidity = 40%
+	tone_converter->set_world_adaptation_luminance(atmosphere->get_world_adaptation_luminance());
+	
+	// compute global sky brightness TODO : make this more "scientifically"
+	sky_brightness = sunPos[2] * atmosphere->get_fade_intensity();
+	if( sky_brightness < 0 )
+	{
+		sky_brightness = 0;
+	}
+	else if (sky_brightness<0.1) sky_brightness=0.1;
 
 	landscape->set_sky_brightness(sky_brightness);
 
@@ -297,8 +292,6 @@ void stel_core::update(int delta_time)
 // Execute all the drawing functions
 void stel_core::draw(int delta_time)
 {
-
-
 	// Init openGL viewing with fov, screen size and clip planes
 	projection->set_clipping_planes(0.0005 ,50);
 
@@ -308,35 +301,18 @@ void stel_core::draw(int delta_time)
 						navigation->get_local_to_eye_mat(),
 						navigation->get_prec_earth_equ_to_eye_mat());
 
-	// Set openGL drawings in local coordinates i.e. generally altazimuthal coordinates
-	navigation->switch_to_local();
-
-	// Compute the sun position in local coordinate
-	Vec3d temp2(0.,0.,0.);
-	Vec3d sunPos = navigation->helio_to_local(temp2);
-	sunPos.normalize();
-
-	// Compute the moon position in local coordinate
-	temp2 = ssystem->get_moon()->get_heliocentric_ecliptic_pos();
-	Vec3d moonPos = navigation->helio_to_local(temp2);
-	moonPos.normalize();
-
-	// Compute the atmosphere color and intensity 
-	atmosphere->compute_color(navigation->get_JDay(), delta_time, sunPos, moonPos,
-				  ssystem->get_moon()->get_phase(ssystem->get_earth()->get_heliocentric_ecliptic_pos()),
-				  tone_converter, projection, observatory->get_latitude(), observatory->get_altitude(),
-				  15.f, 40.f);	// Temperature = 15c, relative humidity = 40%
-	if (!FlagAtmosphere) tone_converter->set_world_adaptation_luminance(3.75f);
-
 	// Set openGL drawings in equatorial coordinates
 	navigation->switch_to_earth_equatorial();
 
 	glBlendFunc(GL_ONE, GL_ONE);
 
 	// Draw the milky way. If not activated, need at least to clear the color buffer
-	if (FlagMilkyWay) {
-	  milky_way->draw(tone_converter, projection, navigation);
-	} else {
+	if (FlagMilkyWay)
+	{
+		milky_way->draw(tone_converter, projection, navigation);
+	}
+	else
+	{
 	  glClear(GL_COLOR_BUFFER_BIT);
 	}
 
@@ -357,7 +333,6 @@ void stel_core::draw(int delta_time)
 	Vec3d tempv = navigation->get_prec_equ_vision();
 	Vec3f temp(tempv[0],tempv[1],tempv[2]);
 
-	// printf("sky: %f\tatm_int: %f\n", sky_brightness, atmosphere->get_intensity());
 	if (FlagStars && sky_brightness<=0.11)
 	{
 		if (FlagPointStar) hip_stars->draw_point(StarScale, StarMagScale,
@@ -410,17 +385,9 @@ void stel_core::draw(int delta_time)
 	  projection->reset_perspective_projection(); 
 	}
 
-	
-
-	if (FlagAtmosphere) {
-	  atmosphere->show_atmosphere();
-	} else {
-	  atmosphere->hide_atmosphere();
-	}
-
 	// Draw the atmosphere
+	atmosphere->show(FlagAtmosphere);
 	atmosphere->draw(projection, delta_time);
-
 
 	// Draw the landscape
 	landscape->draw(tone_converter, projection, navigation,	FlagFog, FlagHorizon && FlagGround, FlagGround);

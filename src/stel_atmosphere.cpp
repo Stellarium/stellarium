@@ -27,7 +27,7 @@
 #include "stellastro.h"
 #include "stel_atmosphere.h"
 
-stel_atmosphere::stel_atmosphere() : sky_resolution(48), tab_sky(NULL), atm_on(0), atm_intensity(0)
+stel_atmosphere::stel_atmosphere() : sky_resolution(48), tab_sky(NULL), world_adaptation_luminance(0.f)
 {
 	// Create the vector array used to store the sky color on the full field of view
 	tab_sky = new Vec3f*[sky_resolution+1];
@@ -35,8 +35,7 @@ stel_atmosphere::stel_atmosphere() : sky_resolution(48), tab_sky(NULL), atm_on(0
 	{
 		tab_sky[k] = new Vec3f[sky_resolution+1];
 	}
-	fade_duration = 3000.;
-	ai = 0;
+	set_fade_duration(3.f);
 }
 
 stel_atmosphere::~stel_atmosphere()
@@ -48,45 +47,21 @@ stel_atmosphere::~stel_atmosphere()
 	if (tab_sky) delete [] tab_sky;
 }
 
-void stel_atmosphere::show_atmosphere(void)
-{
-  atm_on = 1;
-}
-
-void stel_atmosphere::hide_atmosphere(void)
-{
-  atm_on = 0;
-}
-
-float stel_atmosphere::get_intensity(void)
-{
-  return atm_intensity;
-}
-
-void stel_atmosphere::compute_color(double JD, int delta_time, Vec3d sunPos, Vec3d moonPos, float moon_phase,
+void stel_atmosphere::compute_color(double JD, Vec3d sunPos, Vec3d moonPos, float moon_phase,
 	tone_reproductor * eye, Projector* prj,
 	float latitude, float altitude, float temperature, float relative_humidity)
 {
-
-	float delta_intensity = delta_time/fade_duration;
-	// update fade
-	if(!atm_on) {
-	  if( ai > delta_intensity ) {ai -= delta_intensity;} 
-	  else {ai = 0;}
-	} else {
-	  if( ai + delta_intensity <= 1 ) {ai += delta_intensity;} 
-	  else {ai = 1;}
-	}
-
-	atm_intensity = ai*ai;
-
 	// no need to calculate if not visible
-	if( atm_intensity < .001)
+	if(!fader)
 	{
-		eye->set_world_adaptation_luminance(3.75f);
+		world_adaptation_luminance = 3.75f;
 		return;
 	}
-
+	else
+	{
+		atm_intensity = fader.get_interstate();
+	}
+	
 	//Vec3d obj;
 	skylight_struct2 b2;
 
@@ -180,8 +155,7 @@ void stel_atmosphere::compute_color(double JD, int delta_time, Vec3d sunPos, Vec
 		}
 	}
 
-	//	printf("luminance %f\t", 3.75f + 3.5*sum_lum/nb_lum*atm_intensity );
-	eye->set_world_adaptation_luminance(3.75f + 3.5*sum_lum/nb_lum*atm_intensity );
+	world_adaptation_luminance = 3.75f + 3.5*sum_lum/nb_lum*atm_intensity;
 	sum_lum = 0.f;
 	nb_lum = 0;
 }
@@ -191,8 +165,8 @@ void stel_atmosphere::compute_color(double JD, int delta_time, Vec3d sunPos, Vec
 // Draw the atmosphere using the precalc values stored in tab_sky
 void stel_atmosphere::draw(Projector* prj, int delta_time)
 {
-
-	if(atm_intensity > 0 ) {
+	if(fader)
+	{
 
 	  // printf("Atm int: %f\n", atm_intensity);
 	  glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_COLOR);
@@ -221,14 +195,4 @@ void stel_atmosphere::draw(Projector* prj, int delta_time)
 	    }
 	  prj->reset_perspective_projection();
 	}
-
-
-}
-
-void stel_atmosphere::set_fade_duration(float duration) {
-
-  if(duration>0) {
-    fade_duration = duration*1000.;
-  }
-
 }
