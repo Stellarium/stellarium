@@ -1,4 +1,4 @@
-/* 
+/*
  * Stellarium
  * Copyright (C) 2002 Fabien Chéreau
  * 
@@ -437,7 +437,7 @@ int main(int argc, char **argv)
 	
     // We Want A Hardware Surface, Double Buffering Feature And Special OpenGLBlit Mode
     // So We Can Even Blit 2D Graphics In our OpenGL Scene
-    Vflags = SDL_HWSURFACE|SDL_DOUBLEBUF|SDL_OPENGLBLIT;
+    Vflags = SDL_HWSURFACE|/*SDL_DOUBLEBUF|*/SDL_OPENGLBLIT;
     
 
     if(SDL_Init(SDL_INIT_VIDEO)<0)  // Init The SDL Library, The VIDEO Subsystem
