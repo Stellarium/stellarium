@@ -658,7 +658,7 @@ void Label::adjustSize(void)
 
 LabeledButton::LabeledButton(const string& _label, const s_font* font) : Button(), label(_label, font)
 {
-	setSize(label.getSize()+s_vec2i(4,2));
+	Component::setSize(label.getSize()+s_vec2i(4,2));
 }
 
 LabeledButton::~LabeledButton()
