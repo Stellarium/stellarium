@@ -84,6 +84,12 @@ dnl MINGW32
 
 dnl OTHER SYSTEMS
 *)
+	dnl Check for SDL.
+	AM_PATH_SDL
+	LIBS="$LIBS $SDL_LIBS"
+	CFLAGS="$CFLAGS $SDL_CFLAGS"
+	CXXFLAGS="$CXXFLAGS $SDL_CFLAGS"
+
 	AC_CHECK_HEADER(GL/gl.h,,AC_MSG_ERROR(gl.h not found - please install OpenGL- or Mesa-devel))
 	AC_CHECK_HEADER(GL/glu.h,,AC_MSG_ERROR(glu.h not found - please install GLU- or MesaGLU-devel))
 
@@ -97,11 +103,6 @@ dnl OTHER SYSTEMS
     	AC_CHECK_LIB(MesaGLU,gluLookAt,,AC_MSG_ERROR(GLU not found - please install GLU or MesaGLU))
    	fi
 
-	dnl Check for SDL.
-	AM_PATH_SDL
-	LIBS="$LIBS $SDL_LIBS"
-	CFLAGS="$CFLAGS $SDL_CFLAGS"
-	CXXFLAGS="$CXXFLAGS $SDL_CFLAGS"
 ;;
 esac
 
