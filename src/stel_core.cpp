@@ -28,7 +28,7 @@ extern s_texture * texIds[200];            // Common Textures TODO : Remove that
 stel_core::stel_core() : screen_W(800), screen_H(600), bppMode(16), Fullscreen(0),
 	navigation(NULL), projection(NULL), selected_object(NULL), hip_stars(NULL), asterisms(NULL),
 	nebulas(NULL), atmosphere(NULL), tone_converter(NULL), selected_constellation(NULL), conf(NULL),
-	frame(0), timefr(0), timeBase(0), deltaFov(0.), deltaAlt(0.), deltaAz(0.), move_speed(0.001)
+	frame(0), timefr(0), timeBase(0), deltaFov(0.), deltaAlt(0.), deltaAz(0.), move_speed(0.001), FlagTimePause(0)
 {
 	TextureDir[0] = 0;
     ConfigDir[0] = 0;

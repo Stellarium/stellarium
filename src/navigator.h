@@ -87,7 +87,8 @@ public:
 	void set_JDay(double JD) {JDay=JD;}
 	double get_JDay(void) const {return JDay;}
 	void set_time_speed(double ts) {time_speed=ts;}
-
+	double get_time_speed(void) const {return time_speed;}
+	
 	// Flags controls
 	void set_flag_traking(int v) {flag_traking=v;}
 	void set_flag_lock_equ_pos(int v) {flag_lock_equ_pos=v;}
