@@ -37,15 +37,15 @@ Hip_Star_mgr::Hip_Star_mgr() : HipGrid(), StarArray(NULL), starTexture(NULL), st
 }
 
 Hip_Star_mgr::~Hip_Star_mgr()
-{   
+{
     multimap<int, Hip_Star *>::iterator iter;
     for(iter=Liste.begin();iter!=Liste.end();iter++)
-    {   
-        delete (*iter).second ;
+    {
+        delete (*iter).second;
     }
-
     if (starTexture) delete starTexture;
     starTexture=NULL;
+	exit(-1);
     if (starFont) delete starFont;
     starFont=NULL;
     if (StarArray) delete StarArray;
@@ -133,7 +133,7 @@ void Hip_Star_mgr::Load(char * font_fileName, char * hipCatFile, char * commonNa
 
 	starTexture = new s_texture("star16x16",TEX_LOAD_TYPE_PNG_SOLID);  // Load star texture
 
-    starFont=new s_font(11.f,"spacefont", font_fileName); // load Font
+    starFont = new s_font(11.f,"spacefont", font_fileName); // load Font
     if (!starFont)
     {
 	    printf("Can't create starFont\n");

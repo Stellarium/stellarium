@@ -359,7 +359,7 @@ template<class T> T Vector2<T>::lengthSquared() const
 
 template<class T> void Vector2<T>::normalize()
 {
-    T s = 1 / (T) sqrt(v[0] * v[0] + v[1] * v[1]);
+    T s = (T) 1 / sqrt(v[0] * v[0] + v[1] * v[1]);
     v[0] *= s;
     v[1] *= s;
 }
@@ -502,7 +502,7 @@ template<class T> T Vector3<T>::lengthSquared() const
 
 template<class T> void Vector3<T>::normalize()
 {
-    T s = 1 / (T) sqrt(v[0] * v[0] + v[1] * v[1] + v[2] * v[2]);
+    register T s = (T) 1 / sqrt(v[0] * v[0] + v[1] * v[1] + v[2] * v[2]);
     v[0] *= s;
     v[1] *= s;
     v[2] *= s;
@@ -647,7 +647,7 @@ template<class T> T Vector4<T>::lengthSquared() const
 
 template<class T> void Vector4<T>::normalize()
 {
-    T s = 1 / (T) sqrt(v[0] * v[0] + v[1] * v[1] + v[2] * v[2] + v[3] * v[3]);
+    T s = (T) 1 / sqrt(v[0] * v[0] + v[1] * v[1] + v[2] * v[2] + v[3] * v[3]);
     v[0] *= s;
     v[1] *= s;
     v[2] *= s;

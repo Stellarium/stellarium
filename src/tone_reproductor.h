@@ -19,17 +19,31 @@
 // Class which converts tones in function of the eye adaptation to luminance.
 // The aim is to get on the screen something which is perceptualy accurate,
 // ie. to compress high dynamic range luminance to CRT display range.
-// Partial implementation of the algorithm from the paper :
-// "Tone Reproduction for Realistic Images", Tumblin and Rushmeier,
-// IEEE Computer Graphics & Application, November 1993
-// More accurate values found in the paper :
-// "Tone Reproduction and Physically Based Spectral Rendering", bye
-// Devlin, Chalmers, Wilkie and Purgathofer in EUROGRAPHICS 2002
+// The class perform mainly a fast implementation of the algorithm from the
+// paper [1], with more accurate values from [2]. The blue shift formula is taken
+// from [3] and combined with the Scotopic vision formula from [4].
 
 // Important : you may call set_display_adaptation_luminance()
 // and set_world_adaptation_luminance() before any call to xyY_to_RGB()
 // or adapt_luminance otherwise the default values will be used. (they are
 // appropriate for a daylight sky luminance)
+
+// REFERENCES :
+// Thanks to all the authors of the following papers i used for providing
+// their work freely online.
+//
+// [1] "Tone Reproduction for Realistic Images", Tumblin and Rushmeier,
+// IEEE Computer Graphics & Application, November 1993
+//
+// [2] "Tone Reproduction and Physically Based Spectral Rendering",
+// Devlin, Chalmers, Wilkie and Purgathofer in EUROGRAPHICS 2002
+//
+// [3] "Night Rendering", H. Wann Jensen, S. Premoze, P. Shirley,
+// W.B. Thompson, J.A. Ferwerda, M.M. Stark
+//
+// [4] "A Visibility Matching Tone Reproduction Operator for High Dynamic
+// Range Scenes", G.W. Larson, H. Rushmeier, C. Piatko
+
 
 #ifndef _TONE_REPRODUCTOR_H_
 #define _TONE_REPRODUCTOR_H_

@@ -38,6 +38,11 @@ stel_atmosphere::stel_atmosphere() : sky_resolution(32), tab_sky(NULL)
 
 stel_atmosphere::~stel_atmosphere()
 {
+	for (int k=0; k<sky_resolution+1 ;k++)
+	{
+		if (tab_sky[k]) delete tab_sky[k];
+	}
+	if (tab_sky) delete tab_sky;
 }
 
 void stel_atmosphere::compute_color(int ground_ON, Vec3d sunPos, tone_reproductor * eye, draw_utility * du)
@@ -49,11 +54,18 @@ void stel_atmosphere::compute_color(int ground_ON, Vec3d sunPos, tone_reproducto
 	static    GLdouble objz[1];
 	static    GLint V[4];
 
-	skylight_struct b;
+	//skylight_struct b;
+	skylight_struct2 b2;
 
 	sunPos.normalize();
 
-	sky.set_params(M_PI_2-asinf(sunPos[2]),5.f);
+	//sky.set_params(M_PI_2-asinf(sunPos[2]),5.f);
+	float sun_pos[3];
+	sun_pos[0] = sunPos[0];
+	sun_pos[1] = sunPos[1];
+	sun_pos[2] = sunPos[2];
+
+	sky.set_paramsv(sun_pos,5.f);
 
 	// Convert x,y screen pos in 3D vector
 	glGetDoublev(GL_MODELVIEW_MATRIX,M);
@@ -63,7 +75,7 @@ void stel_atmosphere::compute_color(int ground_ON, Vec3d sunPos, tone_reproducto
 	float stepX = (float)du->screenW / sky_resolution;
 	float stepY = (float)du->screenH / sky_resolution;
 
-	Vec3d point;
+	Vec3f point;
 
 	// Find which row is the first one not bellow the ground
 	gluProject(1.,0.,0.,M,P,V,objx,objy,objz);
@@ -100,13 +112,12 @@ void stel_atmosphere::compute_color(int ground_ON, Vec3d sunPos, tone_reproducto
 		{
 			gluUnProject(x*stepX,yHoriz,1,M,P,V,objx,objy,objz);
 			point.set(*objx,*objy,*objz);
+					//printf("1 %d %f %f\n",startY ,point[1] ,point[2] );
 			point.normalize();
-			b.zenith_angle = M_PI_2-0.1;
-			b.dist_sun = acosf(point.dot(sunPos));
-			if (b.dist_sun<0) b.dist_sun=-b.dist_sun;
-			sky.get_xyY_value(&b);
-			eye->xyY_to_RGB(b.color);
-			tab_sky[x][startY].set(b.color[0],b.color[1],b.color[2]);
+			b2.pos[0] = point[0]; b2.pos[1] = point[1]; b2.pos[2] = point[2];
+			sky.get_xyY_valuev(&b2);
+			eye->xyY_to_RGB(b2.color);
+			tab_sky[x][startY].set(b2.color[0],b2.color[1],b2.color[2]);
 		}
 	}
 	else
@@ -114,6 +125,9 @@ void stel_atmosphere::compute_color(int ground_ON, Vec3d sunPos, tone_reproducto
 		startY=-1;
 	}
 
+	// Variables used to compute the average sky luminance
+	float sum_lum = 0.f;
+	unsigned int nb_lum = 0;
 	// Compute the sky color for every point above the ground
 	for (int x=0; x<=sky_resolution; x++)
 	{
@@ -122,14 +136,21 @@ void stel_atmosphere::compute_color(int ground_ON, Vec3d sunPos, tone_reproducto
 			gluUnProject(x*stepX,y*stepY,1,M,P,V,objx,objy,objz);
 			point.set(*objx,*objy,*objz);
 			point.normalize();
-			b.zenith_angle = M_PI_2-asinf(point[2]);
-			b.dist_sun = acosf(point.dot(sunPos));
-			if (b.dist_sun<0) b.dist_sun=-b.dist_sun;
-			sky.get_xyY_value(&b);
-			eye->xyY_to_RGB(b.color);
-			tab_sky[x][y].set(b.color[0],b.color[1],b.color[2]);
+			b2.pos[0] = point[0]; b2.pos[1] = point[1]; b2.pos[2] = point[2];
+			sky.get_xyY_valuev(&b2);
+			sum_lum+=b2.color[2];
+			nb_lum++;
+			eye->xyY_to_RGB(b2.color);
+			tab_sky[x][y].set(b2.color[0],b2.color[1],b2.color[2]);
 		}
 	}
+
+	// Update world adaptation luminance from the previous values
+	//printf("average %f\n",sum_lum/nb_lum);
+	if ((sum_lum/nb_lum)<1000.f) eye->set_world_adaptation_luminance(1000.f);
+	else eye->set_world_adaptation_luminance(sum_lum/nb_lum*2);
+	sum_lum = 0.f;
+	nb_lum = 0;
 }
 
 
@@ -139,14 +160,15 @@ void stel_atmosphere::draw(draw_utility * du)
 {
 	int startYtemp = startY;
 	if (startYtemp>sky_resolution) return;
-	if (startYtemp-1<0) startYtemp = 1;
+	if (startYtemp<1) startYtemp = 1;
 	float stepX = (float)du->screenW / sky_resolution;
 	float stepY = (float)du->screenH / sky_resolution;
 	glDisable(GL_TEXTURE_2D);
-	glDisable(GL_BLEND);
+	glEnable(GL_BLEND);
 	du->set_orthographic_projection();	// set 2D coordinate
 	for (int y2=startYtemp-1; y2<sky_resolution; y2++)
 	{
+		//printf("tabsby2 %f\n", tab_sky[0][y2+1][2]);
 		if (tab_sky[0][y2+1][2]==-10.f) continue;	// Don't draw if value == -10 i.e. under ground
 		glBegin(GL_TRIANGLE_STRIP);
 			for(int x2=0; x2<sky_resolution+1; x2++)
@@ -159,4 +181,14 @@ void stel_atmosphere::draw(draw_utility * du)
 		glEnd();
 	}
 	du->reset_perspective_projection();
+}
+
+
+// return the atmosphere zenith luminance
+const float * stel_atmosphere::get_zenith_color(tone_reproductor * eye) const
+{
+	static float v[3];
+	sky.get_zenith_color(v);
+	eye->xyY_to_RGB(v);
+	return v;
 }

@@ -25,11 +25,11 @@
 
 #include <stdio.h>
 
-static float adapt_sum;
-static float adapt_nb;
-
 skylight::skylight() : thetas(0.f), T(0.f)
 {
+//	sun_pos[0] = 1.f;
+//	sun_pos[1] = 0.f;
+//	sun_pos[2] = 0.f;
 }
 
 skylight::~skylight()
@@ -55,6 +55,30 @@ void skylight::set_params(float _sun_zenith_angle, float _turbidity)
 	term_y = zenith_color_y   / ((1.f + Ay * expf(By)) * (1.f + Cy * expf(Dy*thetas) + Ey * cos_thetas * cos_thetas));
 	term_Y = zenith_luminance / ((1.f + AY * expf(BY)) * (1.f + CY * expf(DY*thetas) + EY * cos_thetas * cos_thetas));
 
+}
+
+void skylight::set_paramsv(const float * _sun_pos, float _turbidity)
+{
+	// Store sun position
+	sun_pos[0] = _sun_pos[0];
+	sun_pos[1] = _sun_pos[1];
+	sun_pos[2] = _sun_pos[2];
+
+	// Set the two main variables
+	thetas = M_PI_2 - asinf(sun_pos[2]);
+	T = _turbidity;
+
+	// Precomputation of the distribution coefficients and zenith luminances/color
+	compute_zenith_luminance();
+	compute_zenith_color();
+	compute_luminance_distribution_coefs();
+	compute_color_distribution_coefs();
+
+	// Precompute everything possible to increase the get_CIE_value() function speed
+	register float cos_thetas = sun_pos[2];
+	term_x = zenith_color_x   / ((1.f + Ax * expf(Bx)) * (1.f + Cx * expf(Dx*thetas) + Ex * cos_thetas * cos_thetas));
+	term_y = zenith_color_y   / ((1.f + Ay * expf(By)) * (1.f + Cy * expf(Dy*thetas) + Ey * cos_thetas * cos_thetas));
+	term_Y = zenith_luminance / ((1.f + AY * expf(BY)) * (1.f + CY * expf(DY*thetas) + EY * cos_thetas * cos_thetas));
 }
 
 // Compute CIE luminance for zenith in cd/m^2
@@ -112,7 +136,7 @@ inline void skylight::compute_color_distribution_coefs(void)
 	Ey =-0.0109f*T + 0.0529f;
 }
 
-// Compute the sky color at the given position in the CIE color system and store it in position.color
+// Compute the sky color at the given position in the CIE color system and store it in p.color
 // p.color[0] is CIE x color component
 // p.color[1] is CIE y color component
 // p.color[2] is CIE Y color component (luminance)
@@ -128,3 +152,27 @@ void skylight::get_xyY_value(skylight_struct * p)
 		EY * cos_dist_sun * cos_dist_sun);
 }
 
+// Compute the sky color at the given position in the CIE color system and store it in p.color
+// p.color[0] is CIE x color component
+// p.color[1] is CIE y color component
+// p.color[2] is CIE Y color component (luminance)
+void skylight::get_xyY_valuev(skylight_struct2 * p)
+{
+	register float cos_dist_sun = sun_pos[0]*(p->pos[0]) + sun_pos[1]*(p->pos[1]) + sun_pos[2]*(p->pos[2]);
+	register float cos_zenith_angle = p->pos[2];
+	register float dist_sun = acosf(cos_dist_sun);
+	p->color[0] = term_x * (1.f + Ax * expf(Bx/cos_zenith_angle)) * (1.f + Cx * expf(Dx*dist_sun) +
+		Ex * cos_dist_sun * cos_dist_sun);
+	p->color[1] = term_y * (1.f + Ay * expf(By/cos_zenith_angle)) * (1.f + Cy * expf(Dy*dist_sun) +
+		Ey * cos_dist_sun * cos_dist_sun);
+	p->color[2] = term_Y * (1.f + AY * expf(BY/cos_zenith_angle)) * (1.f + CY * expf(DY*dist_sun) +
+		EY * cos_dist_sun * cos_dist_sun);
+}
+
+// Return the current zenith color in xyY color system
+void skylight::get_zenith_color(float * v) const
+{
+	v[0] = zenith_color_x;
+	v[1] = zenith_color_y;
+	v[2] = zenith_luminance;
+}
