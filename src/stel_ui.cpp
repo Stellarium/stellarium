@@ -784,15 +784,7 @@ int stel_ui::handle_keys(SDLKey key, S_GUI_VALUE state)
 
         if(key==SDLK_m && core->FlagEnableTuiMenu) core->FlagShowTuiMenu = true;  // not recorded
 
-        if(key==SDLK_o) {
-	  if (core->ssystem->get_moon()->get_sphere_scale()==1.f) {
-	    std::ostringstream oss;
-	    oss << core->MoonScale;
-	    core->commander->execute_command( "set moon_scale " + oss.str());
-	  } else {
-	    core->commander->execute_command( "set moon_scale 1");
-	  }
-	}
+        if(key==SDLK_o) core->commander->execute_command( "flag init_moon_scaled toggle");
         if(key==SDLK_k) core->commander->execute_command( "timerate rate 1");
         if(key==SDLK_l) core->commander->execute_command( "timerate action increment");
         if(key==SDLK_j) core->commander->execute_command( "timerate action decrement");
