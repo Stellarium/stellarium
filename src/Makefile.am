@@ -28,8 +28,8 @@ parsecfg.h          parsecfg.c \
 stellarium.h stella_types.h \
 vecmath.h bytes.h
 
-stellarium_LDADD = $(top_builddir)/src/glpng/libglpng.a
+stellarium_LDADD = $(top_builddir)/src/glpng/libglpng.a $(top_builddir)/src/stellplanet/libstellplanet.a $(top_builddir)/src/stellastro/libstellastro.a
 
-INCLUDES = -I$(top_srcdir)/src/glpng
+INCLUDES = -I$(top_srcdir)/src/glpng -I$(top_srcdir)/src/stellplanet -I$(top_srcdir)/src/stellastro
 
-SUBDIRS = glpng
+SUBDIRS = glpng stellplanet stellastro

@@ -21,7 +21,6 @@
 #define _STELLA_TYPE_H_
 
 #include "vecmath.h"
-#include "libnova.h"
 
 typedef struct			// We Use A Struct To Hold Application Runtime Data
 {

@@ -20,7 +20,6 @@
 #ifndef _SOLARSYSTEM_H_
 #define _SOLARSYSTEM_H_
 
-#include "libnova.h"
 #include "stellarium.h"
 #include "planet.h"
 
