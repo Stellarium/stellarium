@@ -285,6 +285,10 @@ private:
 	void turn_down(int);
 	void zoom_in(int);
 	void zoom_out(int);
+	// Flags for mouse movements
+	bool is_mouse_moving_horiz;
+	bool is_mouse_moving_vert;
+	
 	Sky_localizer *skyloc;  // for sky cultures and locales
 };
 

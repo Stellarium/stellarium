@@ -27,7 +27,7 @@ stel_core::stel_core() : screen_W(800), screen_H(600), bppMode(16), Fullscreen(0
 	navigation(NULL), observatory(NULL), projection(NULL), selected_object(NULL), hip_stars(NULL), asterisms(NULL),
 	nebulas(NULL), atmosphere(NULL), tone_converter(NULL), selected_constellation(NULL), FlagShowTuiMenu(0),
 	frame(0), timefr(0), timeBase(0), maxfps(10000.f), deltaFov(0.), deltaAlt(0.), deltaAz(0.),
-	move_speed(0.001), FlagTimePause(0)
+	move_speed(0.001), FlagTimePause(0), is_mouse_moving_horiz(false), is_mouse_moving_vert(false)
 {
 	ProjectorType = PERSPECTIVE_PROJECTOR;
 }
@@ -810,18 +810,36 @@ int stel_core::handle_move(int x, int y)
 {
 	// Turn if the mouse is at the edge of the screen.
 	if (x == 0)
+	{
 		turn_left(1);
+		is_mouse_moving_horiz = true;
+	}
 	else if (x == screen_W - 1)
+	{
 		turn_right(1);
-	else
+		is_mouse_moving_horiz = true;
+	}
+	else if (is_mouse_moving_horiz)
+	{
 		turn_left(0);
+		is_mouse_moving_horiz = false;
+	}
 
 	if (y == 0)
+	{
 		turn_up(1);
+		is_mouse_moving_vert = true;
+	}
 	else if (y == screen_H - 1)
+	{	
 		turn_down(1);
-	else
+		is_mouse_moving_vert = true;
+	}
+	else if (is_mouse_moving_vert)
+	{
 		turn_up(0);
+		is_mouse_moving_vert = false;
+	}
 
 	return ui->handle_move(x, y);
 }
