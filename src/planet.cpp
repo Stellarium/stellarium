@@ -78,7 +78,7 @@ void planet::get_short_info_string(char * s, const navigator * nav) const
 	static char scale_str[100];
 	if (sphere_scale == 1.f) scale_str[0] = '\0';
 	else sprintf(scale_str," (x%.1f)", sphere_scale);
-	sprintf(s,"%s%s - Mag %.2f",name, scale_str, compute_magnitude(nav->get_observer_helio_pos()));
+	sprintf(s,"%s%s: mag %.1f",name, scale_str, compute_magnitude(nav->get_observer_helio_pos()));
 }
 
 // Set the orbital elements
