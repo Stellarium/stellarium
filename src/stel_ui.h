@@ -224,6 +224,7 @@ private:
 	
 	// 5. Effects
 	s_tui::MultiSet_item<string>* tui_effect_landscape;
+	s_tui::Boolean_item* tui_effect_pointobj;
 	s_tui::Decimal_item* tui_effect_zoom_duration;
 	s_tui::Boolean_item* tui_effect_manual_zoom;
 
