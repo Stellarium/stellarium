@@ -35,6 +35,15 @@ Image::Image( string filename, string name) {
 
   // TODO - needs to take path outside texture dir
   image_tex = new s_texture(filename, TEX_LOAD_TYPE_PNG_ALPHA);  // what if it doesn't load?
+
+  int img_w, img_h;
+  image_tex->getDimensions(img_w, img_h);
+
+  cout << "script image: " << img_w << " " << img_h << endl;
+
+  if(img_h == 0) image_ratio = -1;  // no image loaded
+  else image_ratio = (float)img_w/img_h;
+  
 }
 
 Image::~Image() {
@@ -81,6 +90,8 @@ void Image::set_rotation(float rotation, float duration) {
 
 bool Image::update(int delta_time) {
 
+  if(image_ratio < 0) return 0;
+
   if(flag_alpha) {
     mult_alpha += coef_alpha*delta_time;
 
@@ -114,12 +125,14 @@ bool Image::update(int delta_time) {
     image_rotation = start_rotation + mult_rotation*(end_rotation-start_rotation);
   }
 
+  return 1;
 
 }
 
-void
- Image::draw(int screenw, int screenh) {
+void Image::draw(int screenw, int screenh) {
 
+  if(image_ratio < 0) return;
+  
   glPushMatrix();
 
   glEnable(GL_TEXTURE_2D);
@@ -131,8 +144,22 @@ void
 
   float cx = screenw/2.f;
   float cy = screenh/2.f;
-  float w = image_scale*cx;
-  float h = image_scale*cy;
+
+  // keep image dimensions to original proportions
+  float prj_ratio = (float)screenw/screenh;
+
+  float xbase, ybase;
+  if(image_ratio > prj_ratio) {
+    xbase = cx;
+    ybase = xbase/image_ratio;
+  } else {
+    ybase = cy;
+    xbase = ybase*image_ratio;
+  }
+
+  float w = image_scale*xbase;
+  float h = image_scale*ybase;
+
 
   glTranslatef(cx,cy,0);  // rotate around center of image...
   glRotatef(image_rotation,0,0,1);

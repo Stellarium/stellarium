@@ -23,6 +23,7 @@
 #include "stellastro.h"
 #include <iostream>
 
+
 ////////////////////////////////////////////////////////////////////////////////
 //								CLASS FUNCTIONS
 ////////////////////////////////////////////////////////////////////////////////
@@ -621,17 +622,38 @@ int stel_ui::handle_clic(Uint16 x, Uint16 y, Uint8 button, Uint8 state)
 	      // If an object was selected keep the earth following
 	      if (core->navigation->get_flag_traking()) core->navigation->set_flag_lock_equ_pos(1);
 	      core->navigation->set_flag_traking(0);
-
+	      
 	      if (core->selected_object->get_type()==STEL_OBJECT_STAR) {
 		core->selected_constellation=core->asterisms->is_star_in((Hip_Star*)core->selected_object);
+
+		// potentially record this action
+		std::ostringstream oss;
+		oss << ((Hip_Star *)core->selected_object)->get_hp_number();
+		core->scripts->record_command("select hp " + oss.str());
+
 	      } else {
 		core->selected_constellation=NULL;
 	      }
 
 	      if (core->selected_object->get_type()==STEL_OBJECT_PLANET) {
 		core->selected_planet=(planet*)core->selected_object;
+
+		// potentially record this action
+		std::ostringstream oss;
+		oss << ((planet *)core->selected_object)->get_name();
+		core->scripts->record_command("select planet " + oss.str());
+
 	      } else {
 		core->selected_planet=NULL;
+	      }
+
+	      if (core->selected_object->get_type()==STEL_OBJECT_NEBULA) {
+
+		// potentially record this action
+		std::ostringstream oss;
+		oss << ((Nebula *)core->selected_object)->get_name();
+		core->scripts->record_command("select nebula " + oss.str());
+
 	      }
 
             } else {
@@ -668,19 +690,26 @@ int stel_ui::handle_keys(SDLKey key, S_GUI_VALUE state)
 	} else if(key==SDLK_k) {
 	  core->commander->execute_command( "script action resume");
 	} else if(key==SDLK_7 || 
-		  (key==SDLK_c && (SDL_GetModState() & KMOD_CTRL)))
+		  (key==SDLK_c && (SDL_GetModState() & KMOD_CTRL))) {
+	  // TODO: should double check with user here...
 	  core->commander->execute_command( "script action end");
+	}
 	else cout << "Playing a script.  Press ctrl-C (or 7) to stop." << endl;
 
 	return 0;
       }
 
-      /*
-      if(key==SDLK_r && (SDL_GetModState() & KMOD_CTRL)) {
-	if(core->scripts->is_recording()) core->commander->execute_command( "script action cancelrecord");
-	else core->commander->execute_command( "script action record");
+
+      if(key==SDLK_r) {
+	if(SDL_GetModState() & KMOD_CTRL) {
+	  if(core->scripts->is_recording()) core->commander->execute_command( "script action cancelrecord");
+	  else core->commander->execute_command( "script action record");  
+	  // TODO - need filename
+	} else {
+	  if(key==SDLK_r) core->commander->execute_command( "flag constellation_art toggle");
+	}
       }
-      */
+
 
       if(key==SDLK_c) core->commander->execute_command( "flag constellation_drawing toggle");
       if(key==SDLK_d) {
@@ -695,15 +724,14 @@ int stel_ui::handle_keys(SDLKey key, S_GUI_VALUE state)
 	  core->FlagConfig=!core->FlagConfig;
 	  config_win->setVisible(core->FlagConfig);
 	}
-      if(key==SDLK_p)
-        {	
+      if(key==SDLK_p) {
 	  if(!core->FlagPlanetsHints) {
-	    core->FlagPlanetsHints=1;
+	    core->commander->execute_command("flag planets_hints on");
 	  } else if( !core->FlagPlanetsOrbits) {
-	    core->FlagPlanetsOrbits = 1;
+	    core->commander->execute_command("flag planets_orbits on");
 	  } else {
-	    core->FlagPlanetsOrbits = 0;
-	    core->FlagPlanetsHints = 0;
+	    core->commander->execute_command("flag planets_orbits off");
+	    core->commander->execute_command("flag planets_hints off");
 	  }
 	}
         if(key==SDLK_v) core->commander->execute_command( "flag constellation_name toggle");
@@ -812,7 +840,6 @@ int stel_ui::handle_keys(SDLKey key, S_GUI_VALUE state)
 	  core->commander->execute_command( "flag show_tui_datetime toggle");
 	  core->commander->execute_command( "flag show_tui_short_obj_info toggle");
 	}
-	if(key==SDLK_r) core->commander->execute_command( "flag constellation_art toggle");
 	if(key==SDLK_RETURN)
 	  {
 	    core->navigation->switch_viewing_mode();
