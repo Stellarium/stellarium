@@ -36,13 +36,13 @@ sed 's/%@/@@/; s/@%/@@/; s/%g$/@g/; /@g$/s/[\\&%]/\\&/g;
 /^[ 	]*VPATH[ 	]*=[^:]*$/d
 
 s%@SHELL@%/bin/sh%g
-s%@CFLAGS@%-g -O2%g
+s%@CFLAGS@%-g -O2 -Wall%g
 s%@CPPFLAGS@%%g
 s%@CXXFLAGS@%-g -O2%g
 s%@FFLAGS@%%g
-s%@DEFS@% -DPACKAGE=\"stellarium\" -DVERSION=\"0.4.7\" -DHAVE_LIMITS_H=1 -DHAVE_MALLOC_H=1 -DHAVE_STRINGS_H=1 -DHAVE_UNISTD_H=1 -DHAVE_GL_GL_H=1 -DHAVE_GL_GLU_H=1 -DHAVE_GL_GLUT_H=1 -Dinline= -DTM_IN_SYS_TIME=1 %g
-s%@LDFLAGS@%%g
-s%@LIBS@%%g
+s%@DEFS@% -DPACKAGE=\"stellarium\" -DVERSION=\"0.4.7\" -DHAVE_GL=1 -DHAVE_GLU=1 -DHAVE_GLUT=1 %g
+s%@LDFLAGS@% -lm%g
+s%@LIBS@% -lGL -lGLU -lglut%g
 s%@exec_prefix@%${prefix}%g
 s%@prefix@%/usr/local%g
 s%@program_transform_name@%s,x,x,%g
