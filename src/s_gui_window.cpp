@@ -148,7 +148,7 @@ vec2_i StdWin::getInSize()
 
 void StdWin::setInSize(vec2_i newInSize)
 {   
-    reshape(getPosition(),vec2_i(0,headerSize)+newInSize);
+    reshape(getPosition(),(vec2_i(0,headerSize)+newInSize));
 }
 
 /**** StdBtWin ***/

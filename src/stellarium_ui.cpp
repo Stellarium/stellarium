@@ -764,14 +764,14 @@ Boston, MA  02111-1307, USA.\n"
 
 /**********************************************************************************/
 /*** Time control win ***/
-    TimeControlWin = new StdBtWin(gc->winW-140, gc->winH-lineHeight, 0, 0, "Time Control", Base, spaceFont);
-    TimeControlWin->setInSize(vec2_i(140,lineHeight+2));
+    TimeControlWin = new StdBtWin(gc->winW-140, gc->winH-lineHeight, 140, 200, "Time Control", Base, spaceFont);
+    TimeControlWin->setInSize(vec2_i(140,lineHeight));
     TimeControlWin->setHideCallback(TimeControlWinHideCallback);
 
     TimeControlContainer = new Container();
     int btXSize = 19;
     int btYSize = lineHeight;
-    TimeControlContainer->reshape(1,1,140,btYSize+2);
+    TimeControlContainer->reshape(0,0,140,btYSize);
     TimeFRW = new Labeled_Button("\2\2");
     TimeFRW->reshape(0,0,btXSize,btYSize);
     TimeFRW->setOnClicCallback(TimeControlBtOnClicCallback);
