@@ -1,0 +1,334 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+</head>
+<body bgcolor="white">
+This document outlines commands supported by Stellarium for UI or
+script use.
+<p>The command format consists of a command name followed by an
+optional list of arguments in the form of name/value pairs. Whitespace
+is used as a delimiter. Argument values requiring included whitespace
+can be enclosed in double quotes ("This is a value with spaces.").
+Commands and argument names
+are case insensitive. Argument pairs can be arranged in any order.
+</p>
+<p>COMMAND ARGUMENT_NAME1 ARGUMENT_VALUE1 ARGUMENT_NAME2
+ARGUMENT_VALUE2 ...
+</p>
+<p>Below is a complete list of valid commands, along with their
+supported argument names and values. Lowercase values are literal,
+uppercase values are explanatory (i.e. replace FILENAME with the file
+name you want). </p>
+<p>
+<table border="1">
+  <tbody>
+    <tr>
+      <td><b>Command</b></td>
+      <td><b>Argument Names</b></td>
+      <td><b>Argument Values</b></td>
+      <td><b>Notes</b></td>
+    </tr>
+    <tr valign="top">
+      <td>flag</td>
+      <td>
+star_twinkle<br>
+point_star<br>
+menu<br>
+help<br>
+infos<br>
+show_topbar<br>
+show_time<br>
+show_date<br>
+show_appname<br>
+show_selected_object_info<br>
+show_fps<br>
+show_fov<br>
+enable_tui_menu<br>
+show_gravity_ui<br>
+show_tui_datetime<br>
+show_tui_short_obj_info<br>
+enable_zoom_keys<br>
+enable_move_keys<br>
+utc_time<br>
+manual_zoom<br>
+ground<br>
+horizon<br>
+fog<br>
+atmosphere<br>
+constellation_drawing<br>
+constellation_name<br>
+constellation_art<br>
+constellation_pick<br>
+azimutal_grid<br>
+equatorial_grid<br>
+equator_line<br>
+ecliptic_line<br>
+cardinal_points<br>
+gravity_labels<br>
+init_moon_scaled<br>
+stars<br>
+star_name<br>
+planets<br>
+planets_hints<br>
+planets_orbits<br>
+nebula<br>
+nebula_name<br>
+milky_way<br>
+bright_nebulae<br>
+      </td>
+      <td>
+on<br>
+off<br>
+toggle
+      </td>
+      <td>
+Set rendering flags. One argument name per command allowed currently.
+      </td>
+    </tr>
+    <tr valign="top">
+      <td rowspan="3">
+select
+      </td>
+      <td>hp</td>
+      <td>HP_NUMBER</td>
+      <td rowspan="3">&nbsp;</td>
+    </tr>
+    <tr>
+      <td>planet</td>
+      <td>PLANET_NAME</td>
+    </tr>
+    <tr>
+      <td>nebula</td>
+      <td>NEBULA_NAME</td>
+    </tr>
+    <tr>
+      <td>
+autozoom<br>
+      </td>
+      <td>direction<br>
+      </td>
+      <td>in<br>
+out<br>
+      </td>
+      <td>
+      <br>
+      </td>
+    </tr>
+    <tr>
+      <td>
+timerate<br>
+      </td>
+      <td>rate<br>
+      </td>
+      <td>SECONDS_PER_SECOND<br>
+      </td>
+      <td>
+      <br>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="1" rowspan="4" style="vertical-align: top;">moveto<br>
+      <br>
+      </td>
+      <td style="vertical-align: top;">lat<br>
+      </td>
+      <td style="vertical-align: top;">LATITUDE<br>
+      </td>
+      <td style="vertical-align: top;">South is negative<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">lon<br>
+      </td>
+      <td style="vertical-align: top;">LONGITUDE<br>
+      </td>
+      <td style="vertical-align: top;">West is negative<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">alt<br>
+      </td>
+      <td style="vertical-align: top;">ALTITUDE<br>
+      </td>
+      <td style="vertical-align: top;">In meters<br>
+      </td>
+    </tr>
+    <tr>
+      <td>
+duration<br>
+      </td>
+      <td>SECONDS<br>
+      </td>
+      <td>
+How long to effect this change.<br>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="1" rowspan="2">
+date<br>
+      <br>
+      </td>
+      <td>
+absolute<br>
+      </td>
+      <td>
+[-]YYYY-MM-DDThh:mm:ss<br>
+      </td>
+      <td>
+Set time to a specified date and time.&nbsp; 'T' is literal.<br>
+      </td>
+    </tr>
+    <tr>
+      <td>
+relative<br>
+      </td>
+      <td>DAYS<br>
+      </td>
+      <td>Change date and time by DAYS (can be fractional).<br>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="1" rowspan="3" style="vertical-align: top;">audio<br>
+      </td>
+      <td style="vertical-align: top;">action<br>
+      </td>
+      <td style="vertical-align: top;">play<br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">filename<br>
+      </td>
+      <td style="vertical-align: top;">AUDIO_FILENAME<br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">loop<br>
+      </td>
+      <td style="vertical-align: top;">on<br>
+off<br>
+      </td>
+      <td style="vertical-align: top;">Used with action=play. Default
+is off<br>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="1" rowspan="2">imageload<br>
+      </td>
+      <td>filename<br>
+      </td>
+      <td>IMAGE_FILENAME<br>
+      </td>
+      <td><br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">name<br>
+      </td>
+      <td style="vertical-align: top;">IMAGE_NAME<br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="1" rowspan="5" style="vertical-align: top;">imageprop<br>
+      </td>
+      <td style="vertical-align: top;">name<br>
+      </td>
+      <td style="vertical-align: top;">IMAGE_NAME<br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">alpha<br>
+      </td>
+      <td style="vertical-align: top;">ALPHA<br>
+      </td>
+      <td style="vertical-align: top;">0 is transparent (default), 1 is
+opaque.&nbsp; ALPHA can be fractional.<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">scale<br>
+      </td>
+      <td style="vertical-align: top;">SCALE<br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">rotation<br>
+      </td>
+      <td style="vertical-align: top;">DEGREES<br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">duration<br>
+      </td>
+      <td style="vertical-align: top;">SECONDS<br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="1" rowspan="2" style="vertical-align: top;">script<br>
+      </td>
+      <td style="vertical-align: top;">action<br>
+      </td>
+      <td style="vertical-align: top;">play<br>
+end<br>
+pause<br>
+resume<br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">filename<br>
+      </td>
+      <td style="vertical-align: top;">SCRIPT_FILENAME<br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+    </tr>
+    <tr>
+      <td>wait<br>
+      </td>
+      <td>duration<br>
+      </td>
+      <td>SECONDS<br>
+      </td>
+      <td>Only useful in scripts.&nbsp; SECONDS can be fractional.<br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</p>
+</body>
+</html>

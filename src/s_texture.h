@@ -49,11 +49,13 @@ public:
     void unload();
     int reload();
     unsigned int getID(void) const {return texID;}
-	// Return the average texture luminance : 0 is black, 1 is white
-	float get_average_luminance(void) const;
-	int getSize(void) const;
-	static void set_texDir(const string& _texDir) {s_texture::texDir = _texDir;}
-	static void set_suffix(const string& _suffix) {s_texture::suffix = _suffix;}
+    // Return the average texture luminance : 0 is black, 1 is white
+    float get_average_luminance(void) const;
+    int getSize(void) const;
+    void getDimensions(int &width, int &height) const;
+    static void set_texDir(const string& _texDir) {s_texture::texDir = _texDir;}
+    static void set_suffix(const string& _suffix) {s_texture::suffix = _suffix;}
+
 private:
     string textureName;
     GLuint texID;

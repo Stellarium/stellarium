@@ -75,6 +75,7 @@ public:
 	void draw_tex(const Projector* prj, tone_reproductor* eye, bool bright_nebulae);
     void draw_name(const Projector* prj);
     void draw_circle(const Projector* prj, const navigator * nav);
+    string get_name() { return name; };
 
 protected:
 	// Return the radius of a circle containing the object on screen

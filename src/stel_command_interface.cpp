@@ -84,8 +84,8 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
       stcore->selected_constellation=stcore->asterisms->is_star_in((Hip_Star*)stcore->selected_object);
     } else if(args["planet"]!=""){
       stcore->selected_object = stcore->selected_planet = stcore->ssystem->search(args["planet"]);
-    } else if(args["dso"]!=""){
-      stcore->selected_object = stcore->nebulas->search(args["dso"]);
+    } else if(args["nebula"]!=""){
+      stcore->selected_object = stcore->nebulas->search(args["nebula"]);
     }
 
     if (stcore->selected_object) {
@@ -227,6 +227,17 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
     } else if (args["action"]=="pause" || args["action"]=="resume") {
       stcore->scripts->resume_script();
       audio->resume();
+    }
+
+    if(args["action"]=="record") {  // TEMP
+    //    if(args["action"]=="record" && args["filename"]!="") {
+      stcore->scripts->record_script(args["filename"]);
+      commandline = "";  // don't record this command!
+    }
+
+    if(args["action"]=="cancelrecord") {
+      stcore->scripts->cancel_record_script();
+      commandline = "";  // don't record this command!
     }
 
   } else {

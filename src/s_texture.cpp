@@ -119,3 +119,17 @@ float s_texture::get_average_luminance(void) const
 #endif
 
 }
+
+
+void s_texture::getDimensions(int &width, int &height) const
+{
+  glBindTexture(GL_TEXTURE_2D, texID);
+
+  GLint w, h;
+  glGetTexLevelParameteriv(GL_TEXTURE_2D, 0, GL_TEXTURE_WIDTH, &w);
+  glGetTexLevelParameteriv(GL_TEXTURE_2D, 0, GL_TEXTURE_HEIGHT, &h);
+
+  width = w;
+  height = h;
+
+}
