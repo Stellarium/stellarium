@@ -1,37 +1,44 @@
 This file contains any messages produced by compilers while
 running configure, to aid debugging if configure makes a mistake.
 
-configure:556: checking for a BSD compatible install
-configure:609: checking whether build environment is sane
-configure:666: checking whether make sets ${MAKE}
-configure:712: checking for working aclocal
-configure:725: checking for working autoconf
-configure:738: checking for working automake
-configure:751: checking for working autoheader
-configure:764: checking for working makeinfo
-configure:781: checking for gcc
-configure:894: checking whether the C compiler (gcc  ) works
-configure:910: gcc -o conftest    conftest.c  1>&5
-configure:936: checking whether the C compiler (gcc  ) is a cross-compiler
-configure:941: checking whether we are using GNU C
-configure:969: checking whether gcc accepts -g
-configure:1005: checking for c++
-configure:1037: checking whether the C++ compiler (c++  ) works
-configure:1053: c++ -o conftest    conftest.C  1>&5
-configure:1079: checking whether the C++ compiler (c++  ) is a cross-compiler
-configure:1084: checking whether we are using GNU C++
-configure:1112: checking whether c++ accepts -g
-configure:1156: checking for a BSD compatible install
-configure:1211: checking for ranlib
-configure:1241: checking how to run the C preprocessor
-configure:1322: checking for GL/gl.h
-configure:1356: checking for GL/glu.h
-configure:1390: checking for GL/glut.h
-configure:1424: checking for fabs in -lm
-configure:1465: checking for glEnable in -lGL
-configure:1506: checking for gluPerspective in -lGLU
-configure:1547: checking for glutMainLoop in -lglut
-configure:1588: checking for _XEditResCheckMessages in -lXmu
-configure:1629: checking for XSendEvent in -lX11
-configure:1672: checking for strdup
-configure:1672: checking for toupper
+configure:558: checking for a BSD compatible install
+configure:611: checking whether build environment is sane
+configure:668: checking whether make sets ${MAKE}
+configure:714: checking for working aclocal
+configure:727: checking for working autoconf
+configure:740: checking for working automake
+configure:753: checking for working autoheader
+configure:766: checking for working makeinfo
+configure:787: checking host system type
+configure:811: checking for gcc
+configure:924: checking whether the C compiler (gcc  ) works
+configure:940: gcc -o conftest    conftest.c  1>&5
+configure:966: checking whether the C compiler (gcc  ) is a cross-compiler
+configure:971: checking whether we are using GNU C
+configure:999: checking whether gcc accepts -g
+configure:1035: checking for c++
+configure:1067: checking whether the C++ compiler (c++  ) works
+configure:1083: c++ -o conftest    conftest.C  1>&5
+configure:1109: checking whether the C++ compiler (c++  ) is a cross-compiler
+configure:1114: checking whether we are using GNU C++
+configure:1142: checking whether c++ accepts -g
+configure:1178: checking how to run the C preprocessor
+configure:1258: checking how to run the C++ preprocessor
+configure:1312: checking for a BSD compatible install
+configure:1367: checking for ranlib
+configure:1400: checking for X
+configure:1714: checking for dnet_ntoa in -ldnet
+configure:1755: checking for dnet_ntoa in -ldnet_stub
+configure:1803: checking for gethostbyname
+configure:1901: checking for connect
+configure:1993: checking for remove
+configure:2085: checking for shmat
+configure:2186: checking for IceConnectionNumber in -lICE
+configure:2234: checking for GL/gl.h
+configure:2268: checking for GL/glu.h
+configure:2302: checking for GL/glut.h
+configure:2340: checking for glEnable in -lGL
+configure:2388: checking for gluPerspective in -lGLU
+configure:2442: checking for strdup
+configure:2442: checking for toupper
+configure:2495: checking for fabs in -lm

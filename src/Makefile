@@ -57,8 +57,12 @@ POST_INSTALL = :
 NORMAL_UNINSTALL = :
 PRE_UNINSTALL = :
 POST_UNINSTALL = :
+host_alias = i686-pc-linux
+host_triplet = i686-pc-linux-gnu
 CC = gcc
+CPP = gcc -E
 CXX = c++
+CXXCPP = c++ -E
 MAKEINFO = makeinfo
 PACKAGE = stellarium
 RANLIB = ranlib
@@ -82,10 +86,14 @@ CONFIG_CLEAN_FILES =
 PROGRAMS =  $(bin_PROGRAMS)
 
 
-DEFS =  -DPACKAGE=\"stellarium\" -DVERSION=\"0.4.7\" -DHAVE_TOUPPER=1  -I. -I$(srcdir) 
+DEFS =  -DPACKAGE=\"stellarium\" -DVERSION=\"0.4.7\" -DCONFIG_DATA_DIR=\"/usr/local/share/stellarium\"  -I. -I$(srcdir) 
 CPPFLAGS = 
 LDFLAGS = 
-LIBS =  -lm -lGL -lGLU -lglut
+LIBS =   -L/usr/X11R6/lib -lGL -lGLU -lglut -lm
+X_CFLAGS =  -I/usr/X11R6/include
+X_LIBS =  -L/usr/X11R6/lib
+X_EXTRA_LIBS = 
+X_PRE_LIBS =  -lSM -lICE
 stellarium_OBJECTS =  constellation_mgr.o nebula_mgr.o planet_mgr.o \
 s_gui_window.o star.o vislimit.o main.o navigation.o parsecfg.o \
 s_font.o s_texture.o star_mgr.o stellarium_ui.o draw.o constellation.o \
