@@ -1,4 +1,4 @@
-/* 
+/*
  * Stellarium
  * Copyright (C) 2002 Fabien Chéreau
  * 
@@ -24,9 +24,10 @@
 #define TEX_LOAD_TYPE_PNG_SOLID 1
 #define TEX_LOAD_TYPE_PNG_BLEND3 2
 #define TEX_LOAD_TYPE_PNG_REPEAT 3
+
+
 class s_texture  
 {
-
 public:
     s_texture(char * _textureName);
     s_texture(char * _textureName, int _loadType);
@@ -34,12 +35,19 @@ public:
     int load();
     void unload();
     int reload();
-    int getID(void) {return texID;}
+    int getID(void) const {return texID;}
+	static void set_texDir(char * _texDir) {strncpy(s_texture::texDir, _texDir, sizeof(texDir));}
+	static void set_suffix(char * _suffix) {strncpy(s_texture::suffix, _suffix, sizeof(suffix));}
 private:
     char * textureName;
     unsigned int texID;
     int loadType;
     int loadType2;
+	static char texDir[255];
+	static char suffix[10];
 };
+
+char s_texture::texDir[255] = "./";
+char s_texture::suffix[10] = "";
 
 #endif // _S_TEXTURE_H_

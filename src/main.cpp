@@ -28,8 +28,6 @@ char DDIR[255];	// Data Directory
 char TDIR[255];	// Textures Directory
 char CDIR[255];	// Config Directory
 
-// Predeclare the function at the end of the file
-void setDirectories(void);
 
 // Print a beautiful console logo !!
 void drawIntro(void)

@@ -295,7 +295,7 @@ stel_ui::init()
     vec3_t clWhite(1.,1.,1.);
 
     /*** Graphic Context ***/
-    gc = new GraphicsContext(core->X_Resolution,core->Y_Resolution);
+    gc = new GraphicsContext(core->screen_W,core->screen_H);
     if (!gc)
     {
         printf("ERROR WHILE CREATING GRAPHIC CONTEXT\n");
@@ -335,7 +335,7 @@ stel_ui::init()
 
     /*** Button container ***/
     ContainerBtFlags = new FilledContainer();
-    ContainerBtFlags->reshape(0,core->Y_Resolution-btSize/*-1*/,btSize*11,btSize/*+1*/);
+    ContainerBtFlags->reshape(0,core->screen_H-btSize/*-1*/,btSize*11,btSize/*+1*/);
     ContainerBtFlags->addComponent(BtConstellationsDraw);
     ContainerBtFlags->addComponent(BtConstellationsName);
     ContainerBtFlags->addComponent(BtAzimutalGrid);
@@ -350,7 +350,7 @@ stel_ui::init()
 
 /*** button legend label ***/
     btLegend = new Label("ERROR, this shouldn't be seen...");
-    btLegend->reshape(3,core->Y_Resolution-btSize-lineHeight-5,100,17);
+    btLegend->reshape(3,core->screen_H-btSize-lineHeight-5,100,17);
     btLegend->setVisible(false);
 
 /*** help TextLabel ***/
@@ -387,7 +387,7 @@ F1  : Toggle fullscreen if possible.\n"
     ,gc->getFont());
     HelpTextLabel->reshape(avgCharLen*2,lineHeight,45*avgCharLen,35*lineHeight);
 
-    HelpWin = new StdBtWin(core->X_Resolution/2-25*avgCharLen, core->Y_Resolution/2-30*lineHeight/2, 48*avgCharLen, 32*(lineHeight+1), "Help", Base, spaceFont);
+    HelpWin = new StdBtWin(core->screen_W/2-25*avgCharLen, core->screen_H/2-30*lineHeight/2, 48*avgCharLen, 32*(lineHeight+1), "Help", Base, spaceFont);
     HelpWin->addComponent(HelpTextLabel);
     HelpWin->setVisible(core->FlagHelp);
     HelpWin->setHideCallback(HelpWinHideCallback);
@@ -419,7 +419,7 @@ Boston, MA  02111-1307, USA.\n"
     ,gc->getFont());
     InfoTextLabel->reshape(avgCharLen*3,lineHeight,62*avgCharLen,35*lineHeight);
     
-    InfoWin = new StdBtWin(core->X_Resolution/2-25*avgCharLen, core->Y_Resolution/2-30*lineHeight/2, 67*avgCharLen, 25*(lineHeight+1), "About Stellarium", Base, spaceFont);
+    InfoWin = new StdBtWin(core->screen_W/2-25*avgCharLen, core->screen_H/2-30*lineHeight/2, 67*avgCharLen, 25*(lineHeight+1), "About Stellarium", Base, spaceFont);
     InfoWin->addComponent(InfoTextLabel);
     InfoWin->setVisible(core->FlagInfos);
     InfoWin->setHideCallback(InfoWinHideCallback);
@@ -438,17 +438,17 @@ Boston, MA  02111-1307, USA.\n"
     HourLabel->reshape(12*avgCharLen+15,2,6*avgCharLen,lineHeight);
     /*** FPS Label ***/
     FPSLabel = new Label("-");
-    FPSLabel->reshape(core->X_Resolution-13*avgCharLen,2,10*avgCharLen,lineHeight);
+    FPSLabel->reshape(core->screen_W-13*avgCharLen,2,10*avgCharLen,lineHeight);
     if (!core->FlagFps) FPSLabel->setVisible(false);
     /*** FOV Label ***/
     FOVLabel = new Label("-");
-    FOVLabel->reshape(core->X_Resolution-26*avgCharLen,2,10*avgCharLen,lineHeight);
+    FOVLabel->reshape(core->screen_W-26*avgCharLen,2,10*avgCharLen,lineHeight);
     /*** AppName Label ***/
     AppNameLabel = new Label(APP_NAME);
-    AppNameLabel->reshape((int)(core->X_Resolution/2-gc->getFont()->getStrLen(APP_NAME)/2),2, (int)(gc->getFont()->getStrLen(APP_NAME)),lineHeight);
+    AppNameLabel->reshape((int)(core->screen_W/2-gc->getFont()->getStrLen(APP_NAME)/2),2, (int)(gc->getFont()->getStrLen(APP_NAME)),lineHeight);
     /*** TopWindowsInfos Container ***/    
     TopWindowsInfos = new FilledContainer();
-    TopWindowsInfos->reshape(0,0,core->X_Resolution,lineHeight+2);
+    TopWindowsInfos->reshape(0,0,core->screen_W,lineHeight+2);
     TopWindowsInfos->addComponent(DateLabel);
     TopWindowsInfos->addComponent(HourLabel);
     TopWindowsInfos->addComponent(FPSLabel);
@@ -503,7 +503,7 @@ Boston, MA  02111-1307, USA.\n"
 
 /*** Base container ***/
     Base = new Container();
-    Base->reshape(0,0,core->X_Resolution,core->Y_Resolution);
+    Base->reshape(0,0,core->screen_W,core->screen_H);
     Base->addComponent(ContainerBtFlags);
     Base->addComponent(btLegend);
     Base->addComponent(InfoSelectLabel);
@@ -531,7 +531,7 @@ stel_ui::~stel_ui()
 /*******************************************************************/
 void stel_ui::render(void)
 {
-    setOrthographicProjection(core->X_Resolution, core->Y_Resolution);    // 2D coordinate
+    setOrthographicProjection(core->screen_W, core->screen_H);    // 2D coordinate
 
     updateStandardWidgets();
 

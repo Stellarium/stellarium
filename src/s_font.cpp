@@ -22,9 +22,6 @@
 #include <string.h>
 #include <stdlib.h>
 #include "s_font.h"
-#include "s_texture.h"
-
-#define SPACING 1
 
 s_font::s_font(float size_i, char * textureName, char * dataFileName) : s_fontTexture(NULL), size(size_i)
 {

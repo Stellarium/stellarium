@@ -21,7 +21,6 @@
 #ifndef _VECMATH_H_
 #define _VECMATH_H_
 
-#include <stdio.h>
 #include <cmath>
 
 template<class T> class Vector2;
@@ -163,7 +162,7 @@ template<class T> class Matrix4
     Matrix4<T> transpose() const;
     Matrix4<T> inverse() const;
 
-	inline void print(void) const;
+	//inline void print(void) const;
 
     T r[16];
 };
@@ -610,7 +609,7 @@ template<class T> Matrix4<T> Matrix4<T>::operator-(const Matrix4<T>& a) const
 
 template<class T> void Matrix4<T>::print(void) const
 {
-	printf("[%.2lf %.2lf %.2lf %.2lf]\n[%.2lf %.2lf %.2lf %.2lf]\n[%.2lf %.2lf %.2lf %.2lf]\n[%.2lf %.2lf %.2lf %.2lf]\n",
+	//printf("[%.2lf %.2lf %.2lf %.2lf]\n[%.2lf %.2lf %.2lf %.2lf]\n[%.2lf %.2lf %.2lf %.2lf]\n[%.2lf %.2lf %.2lf %.2lf]\n",
 	r[0],r[4],r[8],r[12],r[1],r[5],r[9],r[13],r[2],r[6],r[10],r[14],r[3],r[7],r[11],r[15]);
 }
 
