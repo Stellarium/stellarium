@@ -150,6 +150,9 @@ private:
 	// Projector
 	PROJECTOR_TYPE ProjectorType;
 	VIEWPORT_TYPE ViewportType;
+	
+	// localization
+	string SkyCulture;
 
 	// Stars
 	int FlagStarName;

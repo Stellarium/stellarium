@@ -195,17 +195,20 @@ private:
 	s_tui::MultiSet_item<string>* tui_time_startuptime;
 	s_tui::MultiSet_item<string>* tui_time_displayformat;
 
-	// 3. Stars
+	// 3. General
+	s_tui::MultiSet_item<string>* tui_general_sky_culture;
+	s_tui::Boolean_item* tui_general_manual_zoom;
+
+	// 4. Stars
 	s_tui::Boolean_item* tui_stars_show;
 	s_tui::Decimal_item* tui_star_labelmaxmag;
 	s_tui::Decimal_item* tui_stars_twinkle;
 	s_tui::Decimal_item* tui_star_magscale;
 	
-	// 4. Effect
+	// 5. Effects
 	s_tui::MultiSet_item<string>* tui_effect_landscape;
-	s_tui::Boolean_item* tui_effect_manual_zoom;
 
-	// 5. Administration
+	// 6. Administration
 	s_tui::ActionConfirm_item* tui_admin_loaddefault;
 	s_tui::ActionConfirm_item* tui_admin_savedefault;
 	//s_tui::MultiSet_item<string>* tui_admin_setlocal;
@@ -220,6 +223,7 @@ private:
 	/*void tui_cb_admin_set_locale(void);*/		// Set locale parameter (LANG)
 	void tui_cb_admin_updateme(void);		// Launch script for internet update
 	void tui_cb_tui_effect_change_landscape(void);	// Select a new landscape skin
+	void tui_cb_tui_general_change_sky_culture(void);  // select new sky culture
 
 	// Parse a file of type /usr/share/zoneinfo/zone.tab
 	s_tui::MultiSet_item<string>* stel_ui::create_tree_from_time_zone_file(const string& zonetab);
