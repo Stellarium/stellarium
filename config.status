@@ -2,7 +2,7 @@
 # Generated automatically by configure.
 # Run this file to recreate the current configuration.
 # This directory was configured as follows,
-# on host gaia01.obspm.fr:
+# on host siolinh:
 #
 # ./configure 
 #
@@ -38,7 +38,7 @@ sed 's/%@/@@/; s/@%/@@/; s/%g$/@g/; /@g$/s/[\\&%]/\\&/g;
 s%@SHELL@%/bin/sh%g
 s%@CFLAGS@%-g -O2%g
 s%@CPPFLAGS@%%g
-s%@CXXFLAGS@%%g
+s%@CXXFLAGS@%-g -O2%g
 s%@FFLAGS@%%g
 s%@DEFS@% -DPACKAGE=\"stellarium\" -DVERSION=\"0.4.7\" -DHAVE_LIMITS_H=1 -DHAVE_MALLOC_H=1 -DHAVE_STRINGS_H=1 -DHAVE_UNISTD_H=1 -Dconst= -Dinline= -DTM_IN_SYS_TIME=1 %g
 s%@LDFLAGS@%%g
@@ -63,13 +63,28 @@ s%@INSTALL_SCRIPT@%${INSTALL_PROGRAM}%g
 s%@INSTALL_DATA@%${INSTALL} -m 644%g
 s%@PACKAGE@%stellarium%g
 s%@VERSION@%0.4.7%g
-s%@ACLOCAL@%/home/stage2/stellarium/missing aclocal%g
+s%@EXEEXT@%%g
+s%@OBJEXT@%o%g
+s%@ACLOCAL@%aclocal%g
 s%@AUTOCONF@%autoconf%g
 s%@AUTOMAKE@%automake%g
 s%@AUTOHEADER@%autoheader%g
 s%@MAKEINFO@%makeinfo%g
+s%@AMTAR@%tar%g
+s%@install_sh@%/obs/depagne/fabien/work/stellarium/install-sh%g
+s%@INSTALL_STRIP_PROGRAM@%${SHELL} $(install_sh) -c -s%g
+s%@AWK@%mawk%g
 s%@SET_MAKE@%%g
+s%@AMDEP_TRUE@%%g
+s%@AMDEP_FALSE@%#%g
+s%@AMDEPBACKSLASH@%\%g
+s%@DEPDIR@%.deps%g
 s%@CC@%gcc%g
+s%@am__include@%include%g
+s%@am__quote@%%g
+s%@CCDEPMODE@%depmode=gcc%g
+s%@CXX@%c++%g
+s%@CXXDEPMODE@%depmode=gcc%g
 s%@RANLIB@%ranlib%g
 s%@CPP@%cc -E%g
 
@@ -164,6 +179,47 @@ s%@INSTALL@%$INSTALL%g
 fi; done
 rm -f conftest.s*
 
+AMDEP_TRUE=""
+ac_aux_dir="."
+
+
+test x"$AMDEP_TRUE" != x"" ||
+for mf in $CONFIG_FILES; do
+  case "$mf" in
+  Makefile) dirpart=.;;
+  */Makefile) dirpart=`echo "$mf" | sed -e 's|/[^/]*$||'`;;
+  *) continue;;
+  esac
+  grep '^DEP_FILES *= *[^ #]' < "$mf" > /dev/null || continue
+  # Extract the definition of DEP_FILES from the Makefile without
+  # running `make'.
+  DEPDIR=`sed -n -e '/^DEPDIR = / s///p' < "$mf"`
+  test -z "$DEPDIR" && continue
+  # When using ansi2knr, U may be empty or an underscore; expand it
+  U=`sed -n -e '/^U = / s///p' < "$mf"`
+  test -d "$dirpart/$DEPDIR" || mkdir "$dirpart/$DEPDIR"
+  # We invoke sed twice because it is the simplest approach to
+  # changing $(DEPDIR) to its actual value in the expansion.
+  for file in `sed -n -e '
+    /^DEP_FILES = .*\\\\$/ {
+      s/^DEP_FILES = //
+      :loop
+	s/\\\\$//
+	p
+	n
+	/\\\\$/ b loop
+      p
+    }
+    /^DEP_FILES = / s/^DEP_FILES = //p' < "$mf" | \
+       sed -e 's/\$(DEPDIR)/'"$DEPDIR"'/g' -e 's/\$U/'"$U"'/g'`; do
+    # Make sure the directory exists.
+    test -f "$dirpart/$file" && continue
+    fdir=`echo "$file" | sed -e 's|/[^/]*$||'`
+    $ac_aux_dir/mkinstalldirs "$dirpart/$fdir" > /dev/null 2>&1
+    # echo "creating $dirpart/$file"
+    echo '# dummy' > "$dirpart/$file"
+  done
+done
 
 
 exit 0
