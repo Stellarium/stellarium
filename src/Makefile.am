@@ -34,7 +34,7 @@ fisheye_projector.h fisheye_projector.cpp \
 landscape.h			landscape.cpp \
 callbacks.hpp       callback_helpers.hpp \
 s_tui.h				s_tui.cpp \
-stellarium.h \
+stellarium.h        fmath.h \
 vecmath.h bytes.h
 
 stellarium_LDADD = $(top_builddir)/src/glpng/libglpng.a \
