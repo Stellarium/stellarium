@@ -73,8 +73,8 @@ Windows/MacOSX and in $HOME/.stellarium/ on a unix system.
 	Axel Mellinger who gave me the authorisation to use his impressive
 	    milky way panorama.
 	Jesse Jones for his callback library.
-	The celestia project team from which I borrowed many code parts.
-	The libnova team for their planet calculation algorithms.
+	The celestia project team from which I borrowed many code parts (GPL license).
+	The libnova team for their planet calculation algorithms (GPL license).
 	All the SDL team for their remarquable work.
 	All the sourceforge team for hosting my project.
 	Cédric Delfosse for his precious help on debian port.
@@ -136,12 +136,13 @@ Windows/MacOSX and in $HOME/.stellarium/ on a unix system.
 2. Included source code
 	2.1 glpng PNG loader library for OpenGL v1.45 (10/07/00)
 		by Ben Wyatt ben (at) wyatt100.freeserve.co.uk
+		See section 10.2 for full license.
 	2.2 Iniparser library Copyright (c) 2000 by Nicolas Devillard.
 	2.3 The stellastro and stellplanet libraries are mainly subsets of the
 		libnova library (GPL) by Liam Girdwood (liam (at) nova-ioe.org)
 	2.4 The orbit.cpp/h and solve.h files are directly borrowed from
-		Celestia (Chris Laurel). (GPL)
-	2.5 Other pieces of code and ideas are from Celestia too.
+		Celestia (Chris Laurel). (GPL license)
+	2.5 Other pieces of code and ideas are from Celestia too (GPL license).
 
 3. Data
 	3.1 The Hipparcos star catalog
@@ -150,33 +151,44 @@ Windows/MacOSX and in $HOME/.stellarium/ on a unix system.
 	3.2 The solar system data mainly comes from Celestia.
 
 4. Graphics
-	4.1 All graphics are copyrighted by Fabien Chéreau except the ones
+	4.1 All graphics are copyrighted by Fabien Chéreau (GPL) except the ones
 		mentioned below :
-    4.2 The Earth texture was created by NASA (Reto St¨ckli, NASA Earth 
+    4.2 The Earth texture was created by NASA (Reto Stockli, NASA Earth 
 		Observatory) using data from the MODIS instrument aboard the 
-		Terra satellite. See section 4.2 in chapter	6 (NOTES) for full 
-		credits.
+		Terra satellite (Public Domain). See chapter 10.1 for full credits.
 	4.3 Mars texture map is from James Hastings-Trew's collection,
-		http://gw.marketingden.com/planet
+		http://gw.marketingden.com/planets/planets.html
+		Permission given for redistribution, copying and modification if 
+		credited with the URL.
 	4.4 Moon texture map is Courtesy USGS Astrogeology Research Program,
 		http://astrogeology.usgs.gov. (Public Domain, DFSG-free)
   	4.5 All other planet maps from David Seal's site: http://maps.jpl.nasa.gov/
+	    see license in section 10.3 (APPENDIX)
 	4.6 The snowy landscape textures are from the GPL game tuxracer.
+	    "Copyright 1999, 2000, 2001 Jasmin F. Patry" available under GPL license.
 	4.7 The fullsky milky way panorama is created by Axel Mellinger, University
 		of Potsdam, Germany. Further information and more pictures available from
 		http://home.arcor-online.de/axel.mellinger/
+		License: permission given to "Modify and redistribute this image if proper 
+		credit to the original image is given."
 	4.8 All messiers nebula pictures except m31, Orion and the Pleiades from
 		the Grasslands Observatory : "Images courtesy of Tim Hunter and James 
 		McGaha, Grasslands Observatory at http://www.3towers.com."
+		License: permission given to "use the image freely" (including right to 
+		modify and redistribute) "as long as it is credited."
 	4.9 M31, Orion and the Pleiades pictures come from Herm Perez :
 		http://home.att.net/~hermperez/default.htm
+		License: "Feel free to use these images, if you use them in a commercial 
+		setting please attribute the source."
    4.10 Constellation art created by Johan Meuris (Jomejome) 
    		(jomejome at users.sourceforge.net ) http://users.pandora.be/jomejom/
+		License: released under the Free Art License 
+		(http://artlibre.org/licence.php/lalgb.html)
 
 --------------------------------------------------------------------------------
-5. LICENSE
+9. LICENSE
 --------------------------------------------------------------------------------
-   Copyright (C) 2004 Fabien Chéreau chereau (at) free.fr
+   Copyright (C) 2004 Fabien Chéreau fab.chereau (at) free.fr
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -196,32 +208,105 @@ Windows/MacOSX and in $HOME/.stellarium/ on a unix system.
    Public License.
 
 --------------------------------------------------------------------------------
-6 NOTES :
+10 APPENDIX :
 --------------------------------------------------------------------------------
-* Full credits for image 4.2 :
-Author: 
-Reto St¨ckli, NASA Earth Observatory, rstockli@climate.gsfc.nasa.gov
+1. Full credits for image 4.2 :
+	Author: Reto Stockli, NASA Earth Observatory, rstockli (at) climate.gsfc.nasa.gov
+	Address of correspondance:
+		Reto Stockli               
+		ETH/IAC (NFS Klima) & NASA/GSFC Code 913 (SSAI)
+		University Irchel
+		Building 25 Room J53  
+		Winterthurerstrasse 190        
+		8057 Zurich, Switzerland  
+	Phone:  +41 (0)1 635 5209     	
+	Fax:    +41 (0)1 362 5197
+	Email:  rstockli (at) climate.gsfc.nasa.gov
+	http://earthobservatory.nasa.gov
+	http://www.iac.ethz.ch/staff/stockli
+	Supervisors: 
+		Fritz Hasler and David Herring, NASA/Goddard Space Flight Center
+	Funding:
+		This project was realized under the SSAI subcontract 2101-01-027 (NAS5-01070)
 
-Address of correspondance:
-Reto St¨ckli               
-ETH/IAC (NFS Klima) & NASA/GSFC Code 913 (SSAI)
-University Irchel
-Building 25 Room J53  
-Winterthurerstrasse 190        
-8057 Z¾rich 
-Switzerland  
+	License :
+		"Any and all materials published on the Earth Observatory are freely available 
+	for re-publication or re-use, except where copyright is indicated."
+	
+	
+2. License for the GLpng library
+	/*
+	* PNG loader library for OpenGL v1.45 (10/07/00)
+	* by Ben Wyatt ben@wyatt100.freeserve.co.uk
+	* Using LibPNG 1.0.2 and ZLib 1.1.3
+	*
+	* This software is provided 'as-is', without any express or implied warranty.
+	* In no event will the author be held liable for any damages arising from the
+	* use of this software.
+	*
+	* Permission is hereby granted to use, copy, modify, and distribute this
+	* source code, or portions hereof, for any purpose, without fee, subject to
+	* the following restrictions:
+	*
+	* 1. The origin of this source code must not be misrepresented. You must not
+	*    claim that you wrote the original software. If you use this software in
+	*    a product, an acknowledgment in the product documentation would be
+	*    appreciated but is not required.
+	* 2. Altered versions must be plainly marked as such and must not be
+	*    misrepresented as being the original source.
+	* 3. This notice must not be removed or altered from any source distribution.
+	*/
 
-Phone:  +41 (0)1 635 5209     	
-Fax:    +41 (0)1 362 5197
-Email:  rstockli@climate.gsfc.nasa.gov
-
-http://earthobservatory.nasa.gov
-http://www.iac.ethz.ch/staff/stockli
-
-Supervisors: 
-Fritz Hasler and David Herring, NASA/Goddard Space Flight Center
-
-Funding:
-This project was realized under the SSAI subcontract 2101-01-027 (NAS5-01070)
-
-
+	
+ 3. License for the JPL planets images (http://www.jpl.nasa.gov/images/policy/index.cfm)
+	---
+	Unless otherwise noted, images and video on JPL public web sites (public sites 
+	ending with a jpl.nasa.gov address) may be used for any purpose without prior 
+	permission, subject to the special cases noted below. Publishers who wish to 
+	have authorization may print this page and retain it for their records; JPL 
+	does not issue image permissions on an image by image basis. 
+	By electing to download the material from this web site the user agrees: 
+	1. that Caltech makes no representations or warranties with respect to 
+	ownership of copyrights in the images, and does not represent others who may 
+	claim to be authors or owners of copyright of any of the images, and makes no 
+	warranties as to the quality of the images. Caltech shall not be responsible 
+	for any loss or expenses resulting from the use of the images, and you 
+	release and hold Caltech harmless from all liability arising from such use. 
+	2. to use a credit line in connection with images. Unless otherwise noted in 
+	the caption information for an image, the credit line should be "Courtesy 
+	NASA/JPL-Caltech." 
+	3. that the endorsement of any product or service by Caltech, JPL or NASA must 
+	not be claimed or implied. 
+	Special Cases: 
+	* Prior written approval must be obtained to use the NASA insignia logo (the 
+	blue "meatball" insignia), the NASA logotype (the red "worm" logo) and the 
+	NASA seal. These images may not be used by persons who are not NASA employees 
+	or on products (including Web pages) that are not NASA sponsored. In 
+	addition, no image may be used to explicitly or implicitly suggest 
+	endorsement by NASA, JPL or Caltech of commercial goods or services. Requests 
+	to use NASA logos may be directed to Bert Ulrich, Public Services Division, 
+	NASA Headquarters, Code POS, Washington, DC 20546, telephone (202) 358-1713, 
+	fax (202) 358-4331, email bert.ulrich@hq.nasa.gov. 
+	* Prior written approval must be obtained to use the JPL logo (stylized JPL 
+	letters in red or other colors). Requests to use the JPL logo may be directed 
+	to the Television/Imaging Team Leader, Media Relations Office, Mail Stop 
+	186-120, Jet Propulsion Laboratory, Pasadena CA 91109, telephone (818) 
+	354-5011, fax (818) 354-4537. 
+	* If an image includes an identifiable person, using the image for commercial 
+	purposes may infringe that person's right of privacy or publicity, and 
+	permission should be obtained from the person. NASA and JPL generally do not 
+	permit likenesses of current employees to appear on commercial products. For 
+	more information, consult the NASA and JPL points of contact listed above. 
+	* JPL/Caltech contractors and vendors who wish to use JPL images in 
+	advertising or public relation materials should direct requests to the 
+	Television/Imaging Team Leader, Media Relations Office, Mail Stop 186-120, 
+	Jet Propulsion Laboratory, Pasadena CA 91109, telephone (818) 354-5011, fax 
+	(818) 354-4537. 
+	* Some image and video materials on JPL public web sites are owned by 
+	organizations other than JPL or NASA. These owners have agreed to make their 
+	images and video available for journalistic, educational and personal uses, 
+	but restrictions are placed on commercial uses. To obtain permission for 
+	commercial use, contact the copyright owner listed in each image caption. 
+	Ownership of images and video by parties other than JPL and NASA is noted in 
+	the caption material with each image. 
+	---
