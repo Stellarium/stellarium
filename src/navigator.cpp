@@ -95,19 +95,21 @@ void navigator::save_position(char * fileName)
         printf("ERROR %s NOT FOUND\n",fileName);
         exit(-1);
 	}
-
 	position.save(f);
-
 	fclose(f);
 }
 
-// Init the viewing matrix, setting the field of view, the clipping planes, and screen size
-void navigator::init_project_matrix(int w, int h, double nearclip, double farclip)
+// Init the viewing matrix, setting the field of view, the clipping planes, and screen ratio
+// The function is a reimplementation of gluPerspective
+void navigator::init_project_matrix(int w, int h, double zNear, double zFar)
 {
 	glMatrixMode(GL_PROJECTION);
-    glLoadIdentity();
-
-	gluPerspective(fov, (double)w/h, nearclip, farclip);
+	double f = 1./tan(fov*M_PI/360.);
+	mat_projection = Mat4d(	f*h/w, 0., 0., 0.,
+							0., f, 0., 0.,
+							0., 0., (zFar + zNear)/(zNear - zFar), -1.,
+							0., 0., (2.*zFar*zNear)/(zNear - zFar), 0.);
+	glLoadMatrixd(mat_projection);
     glMatrixMode(GL_MODELVIEW);
 }
 
@@ -273,11 +275,13 @@ void navigator::update_move(int delta_time)
     }
 
     // recalc all the position variables
+	if (deltaFov || deltaAz || deltaAlt)
+	{
+    	sphe_to_rect(azVision, altVision, &local_vision);
 
-    sphe_to_rect(azVision, altVision, &local_vision);
-
-    // Calc the equatorial coordinate of the direction of vision wich was in Altazimuthal coordinate
-    equ_vision=local_to_earth_equ(&local_vision);
+    	// Calc the equatorial coordinate of the direction of vision wich was in Altazimuthal coordinate
+    	equ_vision=local_to_earth_equ(&local_vision);
+	}
 
 }
 
@@ -289,71 +293,73 @@ void navigator::update_time(int delta_time)
 }
 
 
+// The non optimized (more clear version is available on the CVS : before date 25/07/2003)
 void navigator::update_transform_matrices(Vec3d earth_ecliptic_pos)
 {
-	// GEI = Geocentric Equatorial Inertial System : used for stars
-	// GEO = Geographic Coordinates
-	// HSE = Heliocentric Solar Ecliptic System
-	// LOC = Geographic coordinate + aware of the observator orientation but position in the center of the planet
-	// POS = LOC but at the real position on the planet (ie including radius translation)
+	mat_local_to_earth_equ = 	Mat4d::zrotation((get_apparent_sidereal_time(JDay)+position.longitude)*M_PI/180.) *
+						Mat4d::yrotation((90.-position.latitude)*M_PI/180.);
 
-	// Tested : OK for earth
-	Mat4d POS_to_LOC =	Mat4d::translation(Vec3d(0.,0., 6378.1/AU+(double)position.altitude/AU));
-	Mat4d LOC_to_POS =	Mat4d::translation(Vec3d(0.,0.,-6378.1/AU-(double)position.altitude/AU));
-
-	Mat4d GEO_to_LOC = 	Mat4d::yrotation((-90.+position.latitude)*M_PI/180.) *
-						Mat4d::zrotation(-position.longitude*M_PI/180.);
-	Mat4d LOC_to_GEO = 	GEO_to_LOC.transpose();
-
-	Mat4d GEI_to_GEO = Mat4d::zrotation(-get_apparent_sidereal_time(JDay)*M_PI/180.);
-	Mat4d GEO_to_GEI = GEI_to_GEO.transpose();
-
-	Mat4d LOC_to_GEI = GEO_to_GEI * LOC_to_GEO;
-	Mat4d GEI_to_LOC = GEO_to_LOC * GEI_to_GEO;
-
-	mat_local_to_earth_equ = LOC_to_GEI;
-	mat_earth_equ_to_local = GEI_to_LOC;
+	mat_earth_equ_to_local = mat_local_to_earth_equ.transpose();
 
 	// These two next have to take into account the position of the observer on the earth
-	Mat4d GEI_to_HSE = 	Mat4d::translation(earth_ecliptic_pos) *
-	                    Mat4d::xrotation(-get_mean_obliquity(JDay)*M_PI/180.);
-
-	Mat4d HSE_to_GEI =  Mat4d::xrotation(get_mean_obliquity(JDay)*M_PI/180.) *
+	mat_helio_to_earth_equ =  Mat4d::xrotation(get_mean_obliquity(JDay)*M_PI/180.) *
 						Mat4d::translation(-earth_ecliptic_pos);
 
+	Mat4d tmp = Mat4d::xrotation(-23.438855*M_PI/180.) *
+						Mat4d::zrotation((position.longitude+get_mean_sidereal_time(JDay))*M_PI/180.) *
+						Mat4d::yrotation((90.-position.latitude)*M_PI/180.);
 
-	Mat4d POS_to_HSE = GEI_to_HSE * LOC_to_GEI * POS_to_LOC;
-	Mat4d HSE_to_POS = LOC_to_POS * GEI_to_LOC * HSE_to_GEI;
+	mat_local_to_helio = 	Mat4d::translation(earth_ecliptic_pos) *
+	                    tmp *
+						Mat4d::translation(Vec3d(0.,0., 6378.1/AU+(double)position.altitude/AU/1000));
 
-	mat_helio_to_earth_equ = HSE_to_GEI;
-	mat_helio_to_local = HSE_to_POS;
-	mat_local_to_helio = POS_to_HSE;
-	//printf("v(%lf,%lf,%lf)\n",v[0],v[1],v[2]);
+	mat_helio_to_local = 	Mat4d::translation(Vec3d(0.,0.,-6378.1/AU-(double)position.altitude/AU/1000)) *
+						tmp.transpose() *
+						Mat4d::translation(-earth_ecliptic_pos);
 }
 
 
 // Place openGL in earth equatorial coordinates
 void navigator::switch_to_earth_equatorial(void)
 {
-	switch_to_local();
-	glMultMatrixd(mat_earth_equ_to_local);
+	glLoadMatrixd(lookAt()*mat_earth_equ_to_local);
+}
+
+// Home made gluLookAt(0., 0., 0.,local_vision[0],local_vision[1],local_vision[2],0.,0.,1.);
+// to keep a better precision to prevent the shaking bug..
+Mat4d navigator::lookAt(void)
+{
+	Vec3d f(local_vision);
+	f.normalize();
+	Vec3d s(f[1],-f[0],0.);
+	Vec3d u(s^f);
+	s.normalize();
+	u.normalize();
+
+	return Mat4d(s[0],u[0],-f[0],0.,
+				s[1],u[1],-f[1],0.,
+				s[2],u[2],-f[2],0.,
+				0.,0.,0.,1.);
 }
 
 // Place openGL in heliocentric coordinates
 void navigator::switch_to_heliocentric(void)
 {
-	switch_to_local();
-	glMultMatrixd(mat_helio_to_local);
+	glLoadMatrixd(lookAt()*mat_helio_to_local);
+}
+
+// Return the matrix which place openGL in heliocentric coordinates
+// Function used to overide standard openGL transformation while planet drawing to prevent
+// the boring shaking bug..
+Mat4d navigator::get_switch_to_heliocentric_mat(void)
+{
+	return lookAt()*mat_helio_to_local;
 }
 
 // Place openGL in local viewer coordinates (Usually somewhere on earth viewing in a specific direction)
 void navigator::switch_to_local(void)
 {
-	glLoadIdentity();
-	gluLookAt(0., 0., 0.,          // Observer position
-              local_vision[0],local_vision[1],local_vision[2],   // direction of vision
-              0.,0.,1.);           // Vertical vector
-
+	glLoadMatrixd(lookAt());
 }
 
 // Return the observer heliocentric position

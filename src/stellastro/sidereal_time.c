@@ -38,7 +38,7 @@ double get_mean_sidereal_time (double JD)
     /* add a convenient multiple of 360 degrees */
     sidereal = range_degrees (sidereal);
 
-    return(sidereal);
+    return sidereal;
 } 
 
 

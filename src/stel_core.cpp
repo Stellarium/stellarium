@@ -180,14 +180,12 @@ void stel_core::update(int delta_time)
 	// Update info about selected object
 	if (selected_object) selected_object->update();
 
+	// compute global sky brightness TODO : function to include in skylight.cpp correctly made
 	// Compute the sun position in local coordinate
 	Vec3d temp(0.,0.,0.);
 	Vec3d sunPos = navigation->helio_to_local(&temp);
 	sunPos.normalize();
-
-
-	// compute global sky brightness TODO : function to include in skylight.cpp correctly made
-	sky_brightness=atmosphere->get_zenith_color(tone_converter)[2];
+	sky_brightness = sunPos[2];
 	if (sky_brightness<0) sky_brightness=0;
 
 	ui->update();
@@ -197,7 +195,7 @@ void stel_core::update(int delta_time)
 void stel_core::draw(int delta_time)
 {
 	// Init openGL viewing with fov, screen size and clip planes
-	navigation->init_project_matrix(screen_W,screen_H,0.00000001 ,40 );
+	navigation->init_project_matrix(screen_W,screen_H,0.001 ,40 );
 
     // Set openGL drawings in equatorial coordinates
     navigation->switch_to_earth_equatorial();
@@ -235,7 +233,7 @@ void stel_core::draw(int delta_time)
 
 	// TODO : make a nice class for lines management
     if (FlagEquator) DrawEquator();		// Draw the celestial equator line
-    if (FlagEcliptic) DrawEcliptic();	// Draw the ecliptic line
+    //if (FlagEcliptic) DrawEcliptic();	// Draw the ecliptic line
 
 	// Draw the pointer on the currently selected object
     if (selected_object) selected_object->draw_pointer(delta_time, du, navigation);
@@ -263,7 +261,7 @@ void stel_core::draw(int delta_time)
 	if (FlagAtmosphere)
 	{
 		navigation->switch_to_local();
-		atmosphere->compute_color(FlagGround, sunPos, moonPos,
+		atmosphere->compute_color(sunPos, moonPos,
 		 	ssystem->get_moon()->get_phase(ssystem->get_earth()->get_heliocentric_ecliptic_pos()),
 		 	tone_converter, du);
 	}

@@ -87,9 +87,10 @@ float skybright::get_luminance(float cos_dist_moon, float cos_dist_sun, float co
 	dist_sun = acosf(cos_dist_sun);
 
 	// Air mass
-	float X = 1.f / (cos_dist_zenith + 0.025f*expf(-11.f*cos_dist_zenith));
-	float bKX = powf(10.f, -0.4f * K * X);
-
+	static float X;
+	static float bKX;
+	X = 1.f / (cos_dist_zenith + 0.025f*expf(-11.f*cos_dist_zenith));
+	bKX = powf(10.f, -0.4f * K * X);
 
 	// Dark night sky brightness
 	b_night = 0.4f+0.6f/sqrt(0.04f + 0.96f * cos_dist_zenith*cos_dist_zenith);
@@ -110,8 +111,9 @@ float skybright::get_luminance(float cos_dist_moon, float cos_dist_sun, float co
 	b_daylight = 9.289663e-12 * (1.f - bKX) * (FS * C4 + 440000.f * (1.f - C4));
 
 	// Total sky brightness
-	if (b_daylight>b_twilight) b_total = b_night + b_twilight + b_moon;
-	else b_total = b_night + b_daylight + b_moon;
+	b_daylight>b_twilight ? b_total = b_night + b_twilight + b_moon : b_total = b_night + b_daylight + b_moon;
+
+	if (b_total<0.f) return 0.f; 
 
 	b_total *= 900900.9;	// In lambert
 	return b_total * M_PI * 1e-4 * 32393895;	// In cd/m^2 : the 32393895 is empirical term because the
