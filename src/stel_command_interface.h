@@ -26,6 +26,7 @@
 
 #include "command_interface.h"
 #include "stel_core.h"
+#include "script_mgr.h"
 
 using namespace std;
 

@@ -38,7 +38,8 @@ stellarium.h        fmath.h \
 vecmath.h bytes.h \
 meteor.h meteor.cpp meteor_mgr.h meteor_mgr.cpp \
 sky_localizer.h sky_localizer.cpp \
-command_interface.h command_interface.cpp stel_command_interface.h stel_command_interface.cpp
+command_interface.h command_interface.cpp stel_command_interface.h stel_command_interface.cpp \
+script_mgr.h script_mgr.cpp
 
 stellarium_LDADD = $(top_builddir)/src/glpng/libglpng.a \
 $(top_builddir)/src/stellplanet/libstellplanet.a \
