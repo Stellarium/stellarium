@@ -1,0 +1,325 @@
+# Makefile.in generated automatically by automake 1.0 from Makefile.am
+
+# Copyright (C) 1994, 1995, 1996 Free Software Foundation, Inc.
+# This Makefile.in is free software; the Free Software Foundation
+# gives unlimited permission to copy, distribute and modify it.
+
+
+SHELL = /bin/sh
+
+srcdir = @srcdir@
+top_srcdir = @top_srcdir@
+VPATH = @srcdir@
+prefix = @prefix@
+exec_prefix = @exec_prefix@
+
+bindir = @bindir@
+sbindir = @sbindir@
+libexecdir = @libexecdir@
+datadir = @datadir@
+sysconfdir = @sysconfdir@
+sharedstatedir = @sharedstatedir@
+localstatedir = @localstatedir@
+libdir = @libdir@
+infodir = @infodir@
+mandir = @mandir@
+includedir = @includedir@
+oldincludedir = /usr/include
+
+pkgdatadir = $(datadir)/@PACKAGE@
+pkglibdir = $(libdir)/@PACKAGE@
+pkgincludedir = $(includedir)/@PACKAGE@
+
+top_builddir = ..
+
+INSTALL = @INSTALL@
+INSTALL_PROGRAM = @INSTALL_PROGRAM@
+INSTALL_DATA = @INSTALL_DATA@
+INSTALL_SCRIPT = @INSTALL_SCRIPT@
+transform = @program_transform_name@
+
+EXTRA_DIST = stellarium.PRJ stellarium.rc
+
+bin_PROGRAMS = stellarium
+stellarium_SOURCES = constellation.h  nebula.h  planet.h s_gui.h  s_utility.h   vector.h constellation_mgr.cpp intl.h  nebula_mgr.cpp  planet_mgr.cpp  s_gui_window.cpp  star.cpp  stellarium.h VISLIMIT.CPP  constellation_mgr.h main.cpp  nebula_mgr.h planet_mgr.h  s_gui_window.h tar.h  VISLIMIT.H  navigation.cpp  parsecfg.c  s_font.cpp    s_texture.cpp star_mgr.cpp   stellarium_ui.cpp draw.cpp navigation.h parsecfg.h s_font.h  s_texture.h   star_mgr.h stellarium_ui.h constellation.cpp  draw.h nebula.cpp  planet.cpp s_gui.cpp  s_utility.cpp stella_types.h  utility.h
+
+stellarium_LDADD = $(top_builddir)/src/glpng/libglpng.a $(top_builddir)/src/astrolib/libastrolib.a
+
+INCLUDES = -I$(top_srcdir)/src/glpng -I$(top_srcdir)/src/astrolib
+
+SUBDIRS = glpng astrolib
+mkinstalldirs = $(top_srcdir)/mkinstalldirs
+PROGRAMS = $(bin_PROGRAMS)
+
+
+CC = @CC@
+LEX = @LEX@
+YACC = @YACC@
+
+DEFS = @DEFS@ -I. -I$(srcdir) 
+CPPFLAGS = @CPPFLAGS@
+CFLAGS = @CFLAGS@
+LDFLAGS = @LDFLAGS@
+LIBS = @LIBS@
+
+COMPILE = $(CC) -c $(DEFS) $(INCLUDES) $(CPPFLAGS) $(CFLAGS)
+LINK = $(CC) $(LDFLAGS) -o $@
+stellarium_OBJECTS = constellation_mgr.cpp nebula_mgr.cpp planet_mgr.cpp \
+s_gui_window.cpp star.cpp VISLIMIT.CPP main.cpp navigation.cpp \
+parsecfg.o s_font.cpp s_texture.cpp star_mgr.cpp stellarium_ui.cpp \
+draw.cpp constellation.cpp nebula.cpp planet.cpp s_gui.cpp \
+s_utility.cpp
+EXTRA_stellarium_SOURCES =
+DIST_COMMON = Makefile.am Makefile.in
+
+
+PACKAGE = @PACKAGE@
+VERSION = @VERSION@
+
+DISTFILES = $(DIST_COMMON) $(SOURCES) $(BUILT_SOURCES) $(HEADERS) \
+	$(TEXINFOS) $(INFOS) $(MANS) $(EXTRA_DIST) $(DATA)
+DEP_DISTFILES = $(DIST_COMMON) $(SOURCES) $(BUILT_SOURCES) $(HEADERS) \
+	$(TEXINFOS) $(INFO_DEPS) $(MANS) $(EXTRA_DIST) $(DATA)
+
+TAR = tar
+DEP_FILES = $(srcdir)/.deps/VISLIMIT.CPP \
+$(srcdir)/.deps/constellation.cpp $(srcdir)/.deps/constellation_mgr.cpp \
+$(srcdir)/.deps/draw.cpp $(srcdir)/.deps/main.cpp \
+$(srcdir)/.deps/navigation.cpp $(srcdir)/.deps/nebula.cpp \
+$(srcdir)/.deps/nebula_mgr.cpp $(srcdir)/.deps/parsecfg.P \
+$(srcdir)/.deps/planet.cpp $(srcdir)/.deps/planet_mgr.cpp \
+$(srcdir)/.deps/s_font.cpp $(srcdir)/.deps/s_gui.cpp \
+$(srcdir)/.deps/s_gui_window.cpp $(srcdir)/.deps/s_texture.cpp \
+$(srcdir)/.deps/s_utility.cpp $(srcdir)/.deps/star.cpp \
+$(srcdir)/.deps/star_mgr.cpp $(srcdir)/.deps/stellarium_ui.cpp
+SOURCES = $(stellarium_SOURCES)
+OBJECTS = $(stellarium_OBJECTS)
+
+default: all
+
+
+$(srcdir)/Makefile.in: Makefile.am $(top_srcdir)/configure.in
+	cd $(top_srcdir) && automake $(subdir)/Makefile
+
+Makefile: $(top_builddir)/config.status Makefile.in
+	cd $(top_builddir) && CONFIG_FILES=$(subdir)/$@ CONFIG_HEADERS= ./config.status
+
+mostlyclean-binPROGRAMS:
+
+clean-binPROGRAMS:
+	rm -f $(bin_PROGRAMS)
+
+distclean-binPROGRAMS:
+
+maintainer-clean-binPROGRAMS:
+
+install-binPROGRAMS: $(bin_PROGRAMS)
+	$(mkinstalldirs) $(bindir)
+	list="$(bin_PROGRAMS)"; for p in $$list; do \
+	  if test -f $$p; then \
+	    $(INSTALL_PROGRAM) $$p $(bindir)/`echo $$p|sed '$(transform)'`; \
+	  else :; fi; \
+	done
+
+uninstall-binPROGRAMS:
+	list="$(bin_PROGRAMS)"; for p in $$list; do \
+	  rm -f $(bindir)/`echo $$p|sed '$(transform)'`; \
+	done
+
+.c.o:
+	$(COMPILE) $<
+
+mostlyclean-compile:
+	rm -f *.o core
+
+clean-compile:
+
+distclean-compile:
+	rm -f *.tab.c
+
+maintainer-clean-compile:
+
+stellarium: $(stellarium_OBJECTS) $(stellarium_DEPENDENCIES)
+	$(LINK) $(stellarium_OBJECTS) $(stellarium_LDADD) $(LIBS)
+
+# This directory's subdirectories are mostly independent; you can cd
+# into them and run `make' without going through this Makefile.
+# To change the values of `make' variables: instead of editing Makefiles,
+# (1) if the variable is set in `config.status', edit `config.status'
+#     (which will cause the Makefiles to be regenerated when you run `make');
+# (2) otherwise, pass the desired values on the `make' command line.
+
+@SET_MAKE@
+
+all-recursive install-data-recursive install-exec-recursive \
+installdirs-recursive install-recursive uninstall-recursive \
+check-recursive installcheck-recursive info-recursive dvi-recursive \
+mostlyclean-recursive clean-recursive distclean-recursive \
+maintainer-clean-recursive:
+	for subdir in $(SUBDIRS); do		\
+	  target=`echo $@ | sed s/-recursive//`; \
+	  echo making $$target in $$subdir;	\
+	  (cd $$subdir && $(MAKE) $$target)	\
+	   || case "$(MFLAGS)" in *k*) fail=yes;; *) exit 1;; esac; \
+	done && test -z "$$fail"
+
+tags: TAGS
+
+tags-recursive:
+	list="$(SUBDIRS)"; for subdir in $$list; do \
+	  (cd $$subdir && $(MAKE) tags); \
+	done
+
+TAGS: tags-recursive $(HEADERS) $(SOURCES) $(CONFIG_HEADER) \
+		$(TAGS_DEPENDENCIES)
+	tags=; \
+	here=`pwd`; \
+	for subdir in $(SUBDIRS); do \
+	  test -f $$subdir/TAGS && { \
+	    tags="$$tags -i $$here/$$subdir/TAGS"; \
+	  } \
+	done; \
+	test -z "$(ETAGS_ARGS)$(CONFIG_HEADER)$(SOURCES)$(HEADERS)$$tags" \
+	  || etags $(ETAGS_ARGS) $$tags $(CONFIG_HEADER) $(SOURCES) $(HEADERS)
+
+mostlyclean-tags:
+
+clean-tags:
+
+distclean-tags:
+	rm -f TAGS ID
+
+maintainer-clean-tags:
+
+subdir = src
+distdir = $(top_builddir)/$(PACKAGE)-$(VERSION)/$(subdir)
+distdir: $(DEP_DISTFILES)
+	@for file in `cd $(srcdir) && echo $(DISTFILES)`; do \
+	  test -f $(distdir)/$$file \
+	  || ln $(srcdir)/$$file $(distdir)/$$file 2> /dev/null \
+	  || cp -p $(srcdir)/$$file $(distdir)/$$file; \
+	done
+	for subdir in $(SUBDIRS); do		\
+	  test -d $(distdir)/$$subdir		\
+	  || mkdir $(distdir)/$$subdir		\
+	  || exit 1;				\
+	  chmod 777 $(distdir)/$$subdir;	\
+	  (cd $$subdir && $(MAKE) distdir=../$(distdir)/$$subdir distdir) \
+	    || exit 1; \
+	done
+
+# This fragment is probably only useful for maintainers.  It relies on
+# GNU make and gcc.  It is only included in the generated Makefile.in
+# if `automake' is not passed the `--include-deps' flag.
+
+MKDEP = gcc -MM $(DEFS) $(INCLUDES) $(CPPFLAGS) $(CFLAGS)
+
+-include $(srcdir)/.deps/.P
+$(srcdir)/.deps/.P: $(BUILT_SOURCES)
+	cd $(srcdir) && test -d .deps || mkdir .deps
+	echo > $@
+
+-include $(DEP_FILES)
+$(DEP_FILES): $(srcdir)/.deps/.P
+
+$(srcdir)/.deps/%.P: $(srcdir)/%.c
+	@echo "mkdeps $< > $@"
+	@re=`echo 's,^$(srcdir)//*,,g;s, $(srcdir)//*, ,g' | sed 's,\.,\\\\.,g'`; \
+	  $(MKDEP) $< | sed "$$re" > $@-tmp
+	@if test -n "$o"; then			\
+	  sed 's/\.o:/$$o:/' $@-tmp > $@;	\
+	  rm $@-tmp;				\
+	else					\
+	  mv $@-tmp $@;				\
+	fi
+
+# End of maintainer-only section
+info: info-recursive
+
+dvi: dvi-recursive
+
+check: all check-recursive
+
+installcheck: installcheck-recursive
+
+all-am: $(PROGRAMS) Makefile
+
+install-exec-am: install-binPROGRAMS
+
+uninstall-am: uninstall-binPROGRAMS
+
+install-exec: install-exec-recursive install-exec-am
+
+install-data: install-data-recursive
+
+install: install-recursive install-exec-am
+	@:
+
+uninstall: uninstall-recursive uninstall-am
+
+all: all-recursive all-am
+
+install-strip:
+	$(MAKE) INSTALL_PROGRAM='$(INSTALL_PROGRAM) -s' install
+installdirs: installdirs-recursive
+	$(mkinstalldirs)  $(bindir)
+
+
+mostlyclean-generic:
+	test -z "$(MOSTLYCLEANFILES)" || rm -f $(MOSTLYCLEANFILES)
+
+clean-generic:
+	test -z "$(CLEANFILES)" || rm -f $(CLEANFILES)
+
+distclean-generic:
+	rm -f Makefile $(DISTCLEANFILES)
+	rm -f config.cache config.log $(CONFIG_HEADER) stamp-h
+
+maintainer-clean-generic:
+	test -z "$(MAINTAINERCLEANFILES)" || rm -f $(MAINTAINERCLEANFILES)
+	test -z "$(BUILT_SOURCES)" || rm -f $(BUILT_SOURCES)
+mostlyclean-am:  mostlyclean-binPROGRAMS mostlyclean-compile \
+		mostlyclean-tags mostlyclean-generic
+
+clean-am:  clean-binPROGRAMS clean-compile clean-tags clean-generic \
+		mostlyclean-am 
+
+distclean-am:  distclean-binPROGRAMS distclean-compile distclean-tags \
+		distclean-generic clean-am 
+
+maintainer-clean-am:  maintainer-clean-binPROGRAMS \
+		maintainer-clean-compile maintainer-clean-tags \
+		maintainer-clean-generic distclean-am 
+
+mostlyclean:  mostlyclean-am mostlyclean-recursive
+
+clean:  clean-am clean-recursive
+
+distclean:  distclean-am distclean-recursive
+	rm -f config.status
+
+maintainer-clean:  maintainer-clean-am maintainer-clean-recursive
+	@echo "This command is intended for maintainers to use;"
+	@echo "it deletes files that may require special tools to rebuild."
+
+.PHONY: default mostlyclean-binPROGRAMS distclean-binPROGRAMS \
+clean-binPROGRAMS maintainer-clean-binPROGRAMS uninstall-binPROGRAMS \
+install-binPROGRAMS mostlyclean-compile distclean-compile clean-compile \
+maintainer-clean-compile install-data-recursive \
+uninstall-data-recursive install-exec-recursive \
+uninstall-exec-recursive installdirs-recursive uninstalldirs-recursive \
+all-recursive check-recursive installcheck-recursive info-recursive \
+dvi-recursive mostlyclean-recursive distclean-recursive clean-recursive \
+maintainer-clean-recursive tags tags-recursive mostlyclean-tags \
+distclean-tags clean-tags maintainer-clean-tags distdir info dvi check \
+installcheck all-am install-exec-am uninstall-am install-exec \
+install-data install uninstall all installdirs mostlyclean-generic \
+distclean-generic clean-generic maintainer-clean-generic clean \
+mostlyclean distclean maintainer-clean
+
+.SUFFIXES:
+.SUFFIXES: .c .o
+
+# Tell versions [3.59,3.63) of GNU make to not export all variables.
+# Otherwise a system limit (for SysV at least) may be exceeded.
+.NOEXPORT:

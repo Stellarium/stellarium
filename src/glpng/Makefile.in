@@ -1,0 +1,241 @@
+# Makefile.in generated automatically by automake 1.0 from Makefile.am
+
+# Copyright (C) 1994, 1995, 1996 Free Software Foundation, Inc.
+# This Makefile.in is free software; the Free Software Foundation
+# gives unlimited permission to copy, distribute and modify it.
+
+
+SHELL = /bin/sh
+
+srcdir = @srcdir@
+top_srcdir = @top_srcdir@
+VPATH = @srcdir@
+prefix = @prefix@
+exec_prefix = @exec_prefix@
+
+bindir = @bindir@
+sbindir = @sbindir@
+libexecdir = @libexecdir@
+datadir = @datadir@
+sysconfdir = @sysconfdir@
+sharedstatedir = @sharedstatedir@
+localstatedir = @localstatedir@
+libdir = @libdir@
+infodir = @infodir@
+mandir = @mandir@
+includedir = @includedir@
+oldincludedir = /usr/include
+
+pkgdatadir = $(datadir)/@PACKAGE@
+pkglibdir = $(libdir)/@PACKAGE@
+pkgincludedir = $(includedir)/@PACKAGE@
+
+top_builddir = ../..
+
+INSTALL = @INSTALL@
+INSTALL_PROGRAM = @INSTALL_PROGRAM@
+INSTALL_DATA = @INSTALL_DATA@
+INSTALL_SCRIPT = @INSTALL_SCRIPT@
+transform = @program_transform_name@
+
+noinst_LIBRARIES = libglpng.a
+
+libglpng_a_SOURCES = adler32.c infcodes.c inftrees.c pngconf.h pngrio.c zlib.h crc32.c infcodes.h inftrees.h pngerror.c pngrtran.c zutil.c glpng.c inffast.c   infutil.c pngget.c pngrutil.c zutil.h glpng.h inffast.h infutil.h pngmem.c    pngset.c infblock.c inffixed.h png.c pngpread.c pngtrans.c infblock.h inflate.c   png.h pngread.c zconf.h
+
+libglpng_a_LIBADD = adler32.o infcodes.o inftrees.o pngrio.o crc32.o pngerror.o pngrtran.o zutil.o glpng.o inffast.o infutil.o pngget.o pngrutil.o pngmem.o pngset.o infblock.o png.o pngpread.o pngtrans.o inflate.o pngread.o
+mkinstalldirs = $(top_srcdir)/mkinstalldirs
+LIBRARIES = $(noinst_LIBRARIES)
+
+noinst_LIBFILES = liblibglpng.a.a
+
+CC = @CC@
+LEX = @LEX@
+YACC = @YACC@
+
+DEFS = @DEFS@ -I. -I$(srcdir) 
+CPPFLAGS = @CPPFLAGS@
+CFLAGS = @CFLAGS@
+LDFLAGS = @LDFLAGS@
+LIBS = @LIBS@
+
+COMPILE = $(CC) -c $(DEFS) $(INCLUDES) $(CPPFLAGS) $(CFLAGS)
+LINK = $(CC) $(LDFLAGS) -o $@
+libglpng.a_LIBADD =
+libglpng.a_SOURCES = libglpng.a.c
+libglpng.a_OBJECTS = libglpng.a.o
+EXTRA_libglpng.a_SOURCES =
+LIBFILES =  liblibglpng.a.a
+AR = ar
+RANLIB = @RANLIB@
+DIST_COMMON = Makefile.am Makefile.in
+
+
+PACKAGE = @PACKAGE@
+VERSION = @VERSION@
+
+DISTFILES = $(DIST_COMMON) $(SOURCES) $(BUILT_SOURCES) $(HEADERS) \
+	$(TEXINFOS) $(INFOS) $(MANS) $(EXTRA_DIST) $(DATA)
+DEP_DISTFILES = $(DIST_COMMON) $(SOURCES) $(BUILT_SOURCES) $(HEADERS) \
+	$(TEXINFOS) $(INFO_DEPS) $(MANS) $(EXTRA_DIST) $(DATA)
+
+TAR = tar
+DEP_FILES = $(srcdir)/.deps/libglpng.a.P
+SOURCES = libglpng.a.c
+OBJECTS = libglpng.a.o
+
+default: all
+
+
+$(srcdir)/Makefile.in: Makefile.am $(top_srcdir)/configure.in
+	cd $(top_srcdir) && automake $(subdir)/Makefile
+
+Makefile: $(top_builddir)/config.status Makefile.in
+	cd $(top_builddir) && CONFIG_FILES=$(subdir)/$@ CONFIG_HEADERS= ./config.status
+
+mostlyclean-noinstLIBRARIES:
+
+clean-noinstLIBRARIES:
+	rm -f $(noinst_LIBFILES)
+
+distclean-noinstLIBRARIES:
+
+maintainer-clean-noinstLIBRARIES:
+
+.c.o:
+	$(COMPILE) $<
+
+mostlyclean-compile:
+	rm -f *.o core
+
+clean-compile:
+
+distclean-compile:
+	rm -f *.tab.c
+
+maintainer-clean-compile:
+
+liblibglpng.a.a: $(libglpng.a_OBJECTS) $(libglpng.a_LIBADD)
+	rm -f liblibglpng.a.a
+	$(AR) cru liblibglpng.a.a $(libglpng.a_OBJECTS) $(libglpng.a_LIBADD)
+	$(RANLIB) liblibglpng.a.a
+
+ID: $(HEADERS) $(SOURCES)
+	here=`pwd` && cd $(srcdir) && mkid -f$$here/ID $(SOURCES) $(HEADERS)
+
+tags: TAGS
+
+TAGS: $(HEADERS) $(SOURCES) $(TAGS_DEPENDENCIES)
+	here=`pwd` && cd $(srcdir) && etags $(ETAGS_ARGS) $(SOURCES) $(HEADERS) -o $$here/TAGS
+
+mostlyclean-tags:
+
+clean-tags:
+
+distclean-tags:
+	rm -f TAGS ID
+
+maintainer-clean-tags:
+
+subdir = src/glpng
+distdir = $(top_builddir)/$(PACKAGE)-$(VERSION)/$(subdir)
+distdir: $(DEP_DISTFILES)
+	@for file in `cd $(srcdir) && echo $(DISTFILES)`; do \
+	  test -f $(distdir)/$$file \
+	  || ln $(srcdir)/$$file $(distdir)/$$file 2> /dev/null \
+	  || cp -p $(srcdir)/$$file $(distdir)/$$file; \
+	done
+
+# This fragment is probably only useful for maintainers.  It relies on
+# GNU make and gcc.  It is only included in the generated Makefile.in
+# if `automake' is not passed the `--include-deps' flag.
+
+MKDEP = gcc -MM $(DEFS) $(INCLUDES) $(CPPFLAGS) $(CFLAGS)
+
+-include $(srcdir)/.deps/.P
+$(srcdir)/.deps/.P: $(BUILT_SOURCES)
+	cd $(srcdir) && test -d .deps || mkdir .deps
+	echo > $@
+
+-include $(DEP_FILES)
+$(DEP_FILES): $(srcdir)/.deps/.P
+
+$(srcdir)/.deps/%.P: $(srcdir)/%.c
+	@echo "mkdeps $< > $@"
+	@re=`echo 's,^$(srcdir)//*,,g;s, $(srcdir)//*, ,g' | sed 's,\.,\\\\.,g'`; \
+	  $(MKDEP) $< | sed "$$re" > $@-tmp
+	@if test -n "$o"; then			\
+	  sed 's/\.o:/$$o:/' $@-tmp > $@;	\
+	  rm $@-tmp;				\
+	else					\
+	  mv $@-tmp $@;				\
+	fi
+
+# End of maintainer-only section
+info:
+
+dvi:
+
+check: all
+
+installcheck:
+
+install-exec: 
+
+install-data: 
+
+install: install-exec install-data all
+	@:
+
+uninstall: 
+
+all: $(LIBFILES) Makefile
+
+install-strip:
+	$(MAKE) INSTALL_PROGRAM='$(INSTALL_PROGRAM) -s' install
+installdirs:
+
+
+mostlyclean-generic:
+	test -z "$(MOSTLYCLEANFILES)" || rm -f $(MOSTLYCLEANFILES)
+
+clean-generic:
+	test -z "$(CLEANFILES)" || rm -f $(CLEANFILES)
+
+distclean-generic:
+	rm -f Makefile $(DISTCLEANFILES)
+	rm -f config.cache config.log $(CONFIG_HEADER) stamp-h
+
+maintainer-clean-generic:
+	test -z "$(MAINTAINERCLEANFILES)" || rm -f $(MAINTAINERCLEANFILES)
+	test -z "$(BUILT_SOURCES)" || rm -f $(BUILT_SOURCES)
+mostlyclean:  mostlyclean-noinstLIBRARIES mostlyclean-compile \
+		mostlyclean-tags mostlyclean-generic
+
+clean:  clean-noinstLIBRARIES clean-compile clean-tags clean-generic \
+		mostlyclean 
+
+distclean:  distclean-noinstLIBRARIES distclean-compile distclean-tags \
+		distclean-generic clean 
+	rm -f config.status
+
+maintainer-clean:  maintainer-clean-noinstLIBRARIES \
+		maintainer-clean-compile maintainer-clean-tags \
+		maintainer-clean-generic distclean 
+	@echo "This command is intended for maintainers to use;"
+	@echo "it deletes files that may require special tools to rebuild."
+
+.PHONY: default mostlyclean-noinstLIBRARIES distclean-noinstLIBRARIES \
+clean-noinstLIBRARIES maintainer-clean-noinstLIBRARIES \
+mostlyclean-compile distclean-compile clean-compile \
+maintainer-clean-compile tags mostlyclean-tags distclean-tags \
+clean-tags maintainer-clean-tags distdir info dvi check installcheck \
+install-exec install-data install uninstall all installdirs \
+mostlyclean-generic distclean-generic clean-generic \
+maintainer-clean-generic clean mostlyclean distclean maintainer-clean
+
+.SUFFIXES:
+.SUFFIXES: .c .o
+
+# Tell versions [3.59,3.63) of GNU make to not export all variables.
+# Otherwise a system limit (for SysV at least) may be exceeded.
+.NOEXPORT:

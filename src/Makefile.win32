@@ -1,0 +1,95 @@
+######################################################
+#  Stellarium0.4.6 Makefile for gcc/g++ on win32     #
+######################################################
+
+# Compiler
+CC=gcc
+CC2=g++
+
+# Parameters given to the compiler
+CFLAGS= -O3 -ID:/Programmation/Dev-C++/Include/G++ -ID:/Programmation/Dev-C++/Include -LD:/Programmation/Dev-C++/Lib/ -LD:/Programmation/Dev-C++/Include/G++/
+
+CPPFLAGS=$(CFLAGS)
+
+LFLAGS=-lopengl32 -lglu32 -lglut32 -lglpng
+
+# Output filename
+OUTPUT="Stellarium"
+
+# Source files
+SRCS=glpng.c navigation.cpp parsecfg.c constellation.cpp star.cpp s_gui.cpp s_gui_window.cpp constellation_mgr.cpp star_mgr.cpp nebula_mgr.cpp planet_mgr.cpp main.cpp nebula.cpp planet.cpp s_font.cpp stellarium_ui.cpp s_texture.cpp s_utility.cpp draw.cpp DateOps.cpp DateOpsIntl.cpp Lunar.cpp MathOps.cpp PlanetData.cpp Pluto.cpp Vsop.cpp VsopData.cpp AstroOps.cpp
+
+# Output object files (*.o)
+OBJS=glpng.o parsecfg.o navigation.o constellation.o star.o s_gui.o s_gui_window.o constellation_mgr.o star_mgr.o nebula_mgr.o planet_mgr.o main.o nebula.o planet.o s_font.o stellarium_ui.o s_texture.o s_utility.o draw.o DateOps.o DateOpsIntl.o Lunar.o MathOps.o PlanetData.o Pluto.o Vsop.o VsopData.o AstroOps.o
+
+# Standard targets
+stellarium : $(OBJS)
+	$(CC2) -o $(OUTPUT) $(OBJS) $(CFLAGS) $(LFLAGS)
+	move "Stellarium.exe" "../."
+
+glpng.o: glpng.c png\png.h png\..\zlib\zlib.h png\..\zlib\zconf.h \
+ png\pngconf.h
+
+navigation.o: navigation.cpp navigation.h planet_mgr.h planet.h \
+ AstroOps.h PlanetData.h Pluto.h DateOps.h stellarium.h stella_types.h \
+ vector.h s_texture.h s_utility.h draw.h
+parsecfg.o: parsecfg.c intl.h parsecfg.h
+constellation.o: constellation.cpp constellation.h star.h stellarium.h \
+ stella_types.h vector.h AstroOps.h s_texture.h s_utility.h s_font.h \
+ star_mgr.h
+star.o: star.cpp star.h stellarium.h stella_types.h vector.h \
+ AstroOps.h s_texture.h s_utility.h s_font.h
+s_gui.o: s_gui.cpp s_gui.h s_font.h s_texture.h vector.h
+s_gui_window.o: s_gui_window.cpp s_gui_window.h s_gui.h s_font.h \
+ s_texture.h vector.h
+constellation_mgr.o: constellation_mgr.cpp constellation.h star.h \
+ stellarium.h stella_types.h vector.h AstroOps.h s_texture.h \
+ s_utility.h s_font.h star_mgr.h constellation_mgr.h
+star_mgr.o: star_mgr.cpp star_mgr.h star.h stellarium.h stella_types.h \
+ vector.h AstroOps.h s_texture.h s_utility.h s_font.h
+nebula_mgr.o: nebula_mgr.cpp nebula_mgr.h nebula.h stellarium.h \
+ stella_types.h vector.h AstroOps.h s_texture.h s_utility.h
+planet_mgr.o: planet_mgr.cpp planet_mgr.h planet.h AstroOps.h \
+ PlanetData.h Pluto.h DateOps.h stellarium.h stella_types.h vector.h \
+ s_texture.h s_utility.h draw.h
+main.o: main.cpp stellarium.h stella_types.h vector.h AstroOps.h \
+ s_texture.h star_mgr.h star.h s_utility.h s_font.h draw.h \
+ constellation.h constellation_mgr.h planet_mgr.h planet.h \
+ PlanetData.h Pluto.h DateOps.h nebula.h nebula_mgr.h stellarium_ui.h \
+ parsecfg.h navigation.h s_gui.h
+nebula.o: nebula.cpp nebula.h stellarium.h stella_types.h vector.h \
+ AstroOps.h s_texture.h s_utility.h
+planet.o: planet.cpp planet.h AstroOps.h PlanetData.h Pluto.h \
+ DateOps.h stellarium.h stella_types.h vector.h s_texture.h \
+ s_utility.h draw.h s_font.h
+s_font.o: s_font.cpp s_font.h s_texture.h
+stellarium_ui.o: stellarium_ui.cpp stellarium_ui.h s_font.h \
+ s_texture.h s_gui.h vector.h s_utility.h s_gui_window.h navigation.h \
+ planet_mgr.h planet.h AstroOps.h PlanetData.h Pluto.h DateOps.h \
+ stellarium.h stella_types.h draw.h nebula_mgr.h nebula.h star_mgr.h \
+ star.h
+s_texture.o: s_texture.cpp stellarium.h stella_types.h vector.h \
+ AstroOps.h s_texture.h
+s_utility.o: s_utility.cpp s_utility.h vector.h stellarium.h \
+ stella_types.h AstroOps.h s_texture.h MathOps.h
+draw.o: draw.cpp draw.h stellarium.h stella_types.h vector.h \
+ AstroOps.h s_texture.h s_utility.h MathOps.h
+DateOps.o: DateOps.cpp DateOps.h
+DateOpsIntl.o: DateOpsIntl.cpp DateOps.h
+Lunar.o: Lunar.cpp Lunar.h AstroOps.h LunarTerms.h MathOps.h
+MathOps.o: MathOps.cpp MathOps.h AstroOps.h
+PlanetData.o: PlanetData.cpp PlanetData.h AstroOps.h Pluto.h MathOps.h \
+ Lunar.h Vsop.h
+Pluto.o: Pluto.cpp AstroOps.h Pluto.h PlutoTerms.h
+Vsop.o: Vsop.cpp Vsop.h PlanetData.h AstroOps.h Pluto.h VsopData.h
+VsopData.o: VsopData.cpp Vsop.h PlanetData.h AstroOps.h Pluto.h
+AstroOps.o: AstroOps.cpp AstroOps.h
+
+
+dependency:
+	$(CC) -c -MM $(SRCS) $(CFLAGS)
+
+clean:
+	del *.o
+    
+mrproper: clean

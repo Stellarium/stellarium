@@ -1,0 +1,42 @@
+######## Location ########
+# LATITUDE : range : [90;-90]    (90=North Pole, 0=equator, -90=South Pole)
+# LONGITUDE: range : [-180;+180] (0=Greenwitch)
+# Copy the values for the location you want in "location.txt" 
+(and fill the "?" with the correct values). 
+##########################
+
+## Paris (France)
+LATITUDE = 48.52
+LONGITUDE = 2.20
+TIME_ZONE = +1
+ALTITUDE = ?
+
+## Moscow (Russia)
+LATITUDE = 55.45
+LONGITUDE = 37.35
+TIME_ZONE = +3
+ALTITUDE = ?
+
+## New York (US) longitude =74.1W => -74.1
+LATITUDE = 40.43
+LONGITUDE = -74.1
+TIME_ZONE = -5
+ALTITUDE = ?
+
+## Sydney (Australia)
+LATITUDE = -33.52
+LONGITUDE = 151.13
+TIME_ZONE = +10
+ALTITUDE = ?
+
+# Guereins (France) -> town of the programmer ;)
+TIME_ZONE = +2
+LATITUDE = 48.5
+LONGITUDE = 6.45
+ALTITUDE = 60
+
+## Mexico city (Mexico)
+TIME_ZONE = ?
+LATITUDE = 19.3
+LONGITUDE = 99.2
+ALTITUDE = ?
