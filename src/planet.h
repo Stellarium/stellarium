@@ -65,43 +65,43 @@ private:
 class planet : public stel_object
 {
 public:
-	planet(const char * _name, int _flagHalo, double _radius, vec3_t _color,
+	planet(const char * _name, int _flagHalo, int _flag_lighting, double _radius, vec3_t _color,
 	const char* tex_map_name, const char* tex_halo_name, pos_func_type _coord_func);
 
     virtual ~planet();
 
 	// Return the information string "ready to print" :)
-	virtual void get_info_string(char * s, navigator * nav) const;
+	void get_info_string(char * s, navigator * nav) const;
 
 	// Compute the position in the parent planet coordinate system
-	virtual void compute_position(double date);
+	void compute_position(double date);
 
 	// Compute the transformation matrix from the local planet coordinate to the parent planet coordinate
-    virtual void compute_trans_matrix(double date);
+    void compute_trans_matrix(double date);
 
 	// Draw the planet, if hint_ON is != 0 draw a circle and the name as well
-    virtual void draw(int hint_ON, draw_utility * du, navigator * nav);
+    void draw(int hint_ON, draw_utility * du, navigator * nav);
 
 	// Add the given planet in the satellite list
-	virtual void add_satellite(planet*);
+	void add_satellite(planet*);
 
 	// Set the orbital elements
-	virtual void set_rotation_elements(float _period, float _offset, double _epoch,
+	void set_rotation_elements(float _period, float _offset, double _epoch,
 		float _obliquity, float _ascendingNode, float _precessionRate);
 
 	// Get the planet position in the parent planet ecliptic coordinate
-	virtual Vec3d get_ecliptic_pos() const;
+	Vec3d get_ecliptic_pos() const;
 
 	// Return the heliocentric ecliptical position
-	virtual Vec3d get_heliocentric_ecliptic_pos() const;
+	Vec3d get_heliocentric_ecliptic_pos() const;
 
 	// Get a matrix which converts from heliocentric ecliptic coordinate to local geographic coordinate
-	virtual Mat4d get_helio_to_geo_matrix();
+	Mat4d get_helio_to_geo_matrix();
 
 	unsigned char get_type(void) const {return STEL_OBJECT_PLANET;}
 
 	// Return the planet position in rectangular earth equatorial coordinate
-	virtual Vec3d get_earth_equ_pos(navigator * nav) const;
+	Vec3d get_earth_equ_pos(navigator * nav) const;
 
 	const char* get_name(void) const {return name;}
 
@@ -109,7 +109,7 @@ public:
 
 protected:
 	// Compute the z rotation to use from equatorial to geographic coordinates
-	virtual void compute_geographic_rotation(double date);
+	void compute_geographic_rotation(double date);
 
 	// Draw the 3D sphere
 	void draw_sphere(void);
@@ -122,12 +122,13 @@ protected:
 
     char * name;
 	int flagHalo;					// Set wether a little "star like" halo will be drawn
+	int flag_lighting;				// Set wether light computation has to be proceed
 	rotation_elements re;			// Rotation param
 	double radius;					// Planet radius in UA
 	Vec3d ecliptic_pos; 			// Position in UA in the rectangular ecliptic coordinate system
 									// centered on the parent planet
 	Vec3d screenPos;				// Used to store temporarily the 2D position on screen
-	vec3_t color;
+	Vec3f color;
 	Mat4d mat_local_to_parent;		// Transfo matrix from local ecliptique to parent ecliptic
 	float axis_rotation;			// Rotation angle of the planet on it's axis
     s_texture * tex_map;			// Planet map texture

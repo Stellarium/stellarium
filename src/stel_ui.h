@@ -83,13 +83,9 @@ private:
 	FlagButton * bt_flag_follow_earth;
 	FlagButton * bt_flag_config;
 	Component* createFlagButtons(void);
-	void cb1(void);	void cb2(void);	void cb3(void);	void cb4(void);
-	void cb5(void);	void cb6(void);	void cb7(void);	void cb8(void);
-	void cb9(void);	void cb10(void);void cb11(void);
+	void cb(void);
 	void bt_flag_ctrOnMouseInOut(void);
-	void cbr1(void);	void cbr2(void);	void cbr3(void);	void cbr4(void);
-	void cbr5(void);	void cbr6(void);	void cbr7(void);	void cbr8(void);
-	void cbr9(void);	void cbr10(void);void cbr11(void);
+	void cbr(void);
 	// The dynamic information about the button under the mouse
 	Label * bt_flag_help_lbl;
 

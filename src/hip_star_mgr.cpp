@@ -18,10 +18,7 @@
  */
 
 // class used to manage groups of Stars
-// TODO : Can optimize a lot the star drawing by using a home made container
-// with a Hip_star* array statically malloced for each grid number
-// and a Hip_star*[] array indexed with the grid number
-// The Hip_star* array can maybe be sorted in magnitude or optimization
+// TODO : Can optimize by sorting the Hip_star* array in magnitude
 
 #include "hip_star_mgr.h"
 #include "s_texture.h"
@@ -32,9 +29,10 @@
 
 #define RADIUS_STAR 25.
 
-Hip_Star_mgr::Hip_Star_mgr() : HipGrid(), StarArray(NULL), starTexture(NULL), starFont(NULL)
+Hip_Star_mgr::Hip_Star_mgr() : starZones(NULL), HipGrid(), StarArray(NULL), starTexture(NULL), starFont(NULL)
 {
-	 starZones = new vector<Hip_Star*>[162];
+	starZones = new vector<Hip_Star*>[HipGrid.getNbPoints()];
+
 	for (int i=0;i<StarArraySize;i++)
 	{
 		StarArray[i]=NULL;
@@ -43,14 +41,15 @@ Hip_Star_mgr::Hip_Star_mgr() : HipGrid(), StarArray(NULL), starTexture(NULL), st
 
 Hip_Star_mgr::~Hip_Star_mgr()
 {
-	delete starZones;
+	if (starZones) delete [] starZones;
 
 	for (int i=0;i<StarArraySize;i++)
 	{
 		if (StarArray[i]) delete StarArray[i];
 		StarArray[i]=NULL;
 	}
-    if (starTexture) delete starTexture;
+
+	if (starTexture) delete starTexture;
     starTexture=NULL;
 	exit(-1);
     if (starFont) delete starFont;
@@ -162,7 +161,6 @@ void Hip_Star_mgr::Draw(float _star_scale, float _twinkle_amount, int name_ON,
     glEnable(GL_BLEND);
     glBindTexture (GL_TEXTURE_2D, starTexture->getID());
 
-    double z;
     GLdouble M[16];
     GLdouble P[16];
     GLint V[4];
@@ -176,25 +174,31 @@ void Hip_Star_mgr::Draw(float _star_scale, float _twinkle_amount, int name_ON,
 	int nbZones=0;
 	static int * zoneList;  // WARNING this is almost a memory leak...
 
-	nbZones = HipGrid.Intersect(equ_vision, du->fov*M_PI/180.*1.4, zoneList);
+	nbZones = HipGrid.Intersect(equ_vision, du->fov*M_PI/180.f*1.12f, zoneList);
 
 	//printf("nbzones = %d\n",nbZones );
 
+	float maxMag = 5.5f+60.f/du->fov;
+	//printf("maxMag = %f\n", maxMag);
+
 	// Print all the stars of all the selected zones
-	for(int i=0;i<nbZones;i++)
+	static vector<Hip_Star *>::iterator end;
+	static vector<Hip_Star *>::iterator iter;
+	for(int i=0;i<nbZones;++i)
 	{
-    	for(vector<Hip_Star *>::iterator iter = starZones[zoneList[i]].begin(); iter!=starZones[zoneList[i]].end(); iter++)
+		end = starZones[zoneList[i]].end();
+    	for(iter = starZones[zoneList[i]].begin(); iter!=end; ++iter)
     	{
 			// If too small, skip
-			if ((*iter)->Mag>6+60./du->fov) continue;
+			if ((*iter)->Mag>maxMag) continue;
 
 			// Compute the 2D position
 	    	gluProject( (*iter)->XYZ[0], (*iter)->XYZ[1], (*iter)->XYZ[2],
-				M,P,V,&((*iter)->XY[0]), &((*iter)->XY[1]),&z);
-        	if (z<1)
+				M,P,V,&((*iter)->XY[0]), &((*iter)->XY[1]),&((*iter)->XY[2]));
+        	if ((*iter)->XY[2]<1.)
         	{
 		        (*iter)->Draw(du);
-		        if ((*iter)->CommonName && name_ON && (*iter)->Mag<maxMagStarName)
+		        if (name_ON && (*iter)->CommonName && (*iter)->Mag<maxMagStarName)
             	{
 		        	(*iter)->DrawName(starFont);
                 	glBindTexture (GL_TEXTURE_2D, starTexture->getID());
@@ -208,7 +212,7 @@ void Hip_Star_mgr::Draw(float _star_scale, float _twinkle_amount, int name_ON,
 
 // Look for a star by XYZ coords
 Hip_Star * Hip_Star_mgr::search(vec3_t Pos)
-{   
+{
     Pos.normalize();
     Hip_Star * nearest=NULL;
     float angleNearest=0.;

@@ -40,7 +40,7 @@ Nebula::~Nebula()
     if (nebTexture) delete nebTexture;
 }
 
-void Nebula::get_info_string(char * s) const
+void Nebula::get_info_string(char * s, navigator * nav) const
 {
 	float tempDE, tempRA;
 	rect_to_sphe(&tempRA,&tempDE,&XYZ);

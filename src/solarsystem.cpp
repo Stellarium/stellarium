@@ -35,7 +35,7 @@ SolarSystem::~SolarSystem()
     {
         if (*iter) delete *iter;
 		*iter = NULL;
-        iter++;
+        ++iter;
     }
 	sun = NULL;
 	moon = NULL;
@@ -65,15 +65,14 @@ void SolarSystem::load(const char* planetfile)
 	init_parser pd(planetfile);	// The planet data ini file parser
 	pd.load();
 
-
-	pos_func_type posfunc;
-
 	int nbSections = pd.get_nsec();
-	for (int i = 0;i<nbSections;i++)
+	for (int i = 0;i<nbSections;++i)
 	{
 		const char* secname = pd.get_secname(i);
-
+		const char * tname = pd.get_str(secname, "name");
 		const char* funcname = pd.get_str(secname, "coord_func");
+
+		pos_func_type posfunc = NULL;
 
 		if (!strcmp(funcname, "sun_special"))
 			posfunc = makeFunctor((p_pos_func_type)0,get_sun_helio_coords);
@@ -93,12 +92,36 @@ void SolarSystem::load(const char* planetfile)
 		if (!strcmp(funcname, "mars_special"))
 			posfunc = makeFunctor((p_pos_func_type)0,get_mars_helio_coords);
 
+		if (!strcmp(funcname, "jupiter_special"))
+			posfunc = makeFunctor((p_pos_func_type)0,get_jupiter_helio_coords);
+
+		if (!strcmp(funcname, "saturn_special"))
+			posfunc = makeFunctor((p_pos_func_type)0,get_saturn_helio_coords);
+
+		if (!strcmp(funcname, "uranus_special"))
+			posfunc = makeFunctor((p_pos_func_type)0,get_uranus_helio_coords);
+
+		if (!strcmp(funcname, "neptune_special"))
+			posfunc = makeFunctor((p_pos_func_type)0,get_neptune_helio_coords);
+
+		if (!strcmp(funcname, "pluto_special"))
+			posfunc = makeFunctor((p_pos_func_type)0,get_pluto_helio_coords);
+
+
+		if (!posfunc)
+		{
+			printf("ERROR : can't find posfunc %s for %s\n",funcname,tname);
+			exit(-1);
+		}
+
 		// Create the planet and add it to the list
-		planet* p = new planet(pd.get_str(secname, "name"), pd.get_boolean(secname, "halo"),
-			pd.get_double(secname, "radius")/AU, str_to_vec3f(pd.get_str(secname, "color")),
+		planet* p = new planet(tname, pd.get_boolean(secname, "halo"),
+			pd.get_boolean(secname, "lightning"), pd.get_double(secname, "radius")/AU,
+			str_to_vec3f(pd.get_str(secname, "color")),
 			pd.get_str(secname, "tex_map"), pd.get_str(secname, "tex_halo"), posfunc);
 
 		const char * str_parent = pd.get_str(secname, "parent");
+
 		if (strcmp(str_parent, "none"))
 		{
 			// Look in the other planets the one named with str_parent
@@ -115,14 +138,14 @@ void SolarSystem::load(const char* planetfile)
     		}
 			if (!have_parent)
 			{
-				printf("ERROR : can't find parent for %s\n",pd.get_str(secname, "name"));
+				printf("ERROR : can't find parent for %s\n",tname);
 				exit(-1);
 			}
 		}
 
-		if (!strcmp(pd.get_str(secname, "name"), "Earth")) earth = p;
-		if (!strcmp(pd.get_str(secname, "name"), "Sun")) sun = p;
-		if (!strcmp(pd.get_str(secname, "name"), "Moon")) moon = p;
+		if (!strcmp(tname, "Earth")) earth = p;
+		if (!strcmp(tname, "Sun")) sun = p;
+		if (!strcmp(tname, "Moon")) moon = p;
 
 		system_planets.push_back(p);
 	}
@@ -178,7 +201,7 @@ void SolarSystem::draw(int hint_ON, draw_utility * du, navigator * nav)
     glMaterialfv(GL_FRONT,GL_SHININESS ,tmp);
     glMaterialfv(GL_FRONT,GL_SPECULAR ,tmp);
 
-	// Light pos in zero
+	// Light pos in zero (sun)
 	float zero4[4] = {0.,0.,0.,1.};
     glLightfv(GL_LIGHT0,GL_POSITION,zero4);
 
@@ -188,7 +211,7 @@ void SolarSystem::draw(int hint_ON, draw_utility * du, navigator * nav)
     vector<planet*>::iterator iter = system_planets.begin();
     while (iter != system_planets.end())
     {
-        (*iter)->draw(hint_ON, du, nav);
+        if (*iter!=earth) (*iter)->draw(hint_ON, du, nav);
         iter++;
     }
 
@@ -236,24 +259,6 @@ planet* SolarSystem::search(Vec3d pos, navigator * nav)
 	io_orbit = new EllipticalOrbit(421600/AU * (1.0 - 0.0041),
 		0.0041, 0.040*M_PI/180., 312.981*M_PI/180., (97.735 - 312.981)*M_PI/180.,
 		-97.735*M_PI/180., 1.769138, 2443000.00038375);
-
-
-    sun_map = new s_texture("sun",TEX_LOAD_TYPE_PNG_SOLID);
-    earth_map = new s_texture("earthmap",TEX_LOAD_TYPE_PNG_SOLID);
-    moon_map = new s_texture("lune",TEX_LOAD_TYPE_PNG_SOLID);
-    mercury_map = new s_texture("mercury",TEX_LOAD_TYPE_PNG_SOLID);
-    venus_map = new s_texture("venus",TEX_LOAD_TYPE_PNG_SOLID);
-    jupiter_map = new s_texture("jupiter",TEX_LOAD_TYPE_PNG_SOLID);
-    ganymede_map = new s_texture("ganymede",TEX_LOAD_TYPE_PNG_SOLID);
-    io_map = new s_texture("io",TEX_LOAD_TYPE_PNG_SOLID);
-    mars_map = new s_texture("mars",TEX_LOAD_TYPE_PNG_SOLID);
-    saturn_map = new s_texture("saturn",TEX_LOAD_TYPE_PNG_SOLID);
-    uranus_map = new s_texture("uranus",TEX_LOAD_TYPE_PNG_SOLID);
-    neptune_map = new s_texture("neptune",TEX_LOAD_TYPE_PNG_SOLID);
-    pluto_map = new s_texture("lune",TEX_LOAD_TYPE_PNG_SOLID);
-
-	small_halo = new s_texture("star16x16");
-	sun_halo = new s_texture("halo");
 
 	saturn_ring_tex = new s_texture("saturn_rings");
 	saturn_ring = new ring(140000./AU,saturn_ring_tex);
