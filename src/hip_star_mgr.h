@@ -35,6 +35,8 @@ public:
     int read(FILE *);
     void draw(float star_scale, float star_mag_scale, float twinkle_amount, int name_ON, float maxMagStarName,
 		Vec3f equ_vision, tone_reproductor* _eye, Projector* prj, bool _gravity_label);	// Draw all the stars
+    void draw_point(float star_scale, float star_mag_scale, float twinkle_amount, int name_ON, float maxMagStarName,
+		Vec3f equ_vision, tone_reproductor* _eye, Projector* prj, bool _gravity_label);	// Draw all the stars as points
     void save(void);                    	// Debug function
     // Load all the stars from the files
     void load(const string& font_fileName, const string& hipCatFile,

@@ -198,6 +198,54 @@ void Hip_Star_mgr::draw(float _star_scale, float _star_mag_scale, float _twinkle
     	{
 			// If too small, skip and Compute the 2D position and check if in screen
 			if ((*iter)->Mag>maxMag || !prj->project_earth_equ_check((*iter)->XYZ, (*iter)->XY)) continue;
+			(*iter)->draw();
+			if (name_ON && (*iter)->CommonName && (*iter)->Mag<maxMagStarName)
+            {
+		       	(*iter)->draw_name(starFont);
+               	glBindTexture (GL_TEXTURE_2D, starTexture->getID());
+            }
+	    }
+	}
+
+    prj->reset_perspective_projection();
+}
+
+// Draw all the stars
+void Hip_Star_mgr::draw_point(float _star_scale, float _star_mag_scale, float _twinkle_amount, int name_ON,
+						float maxMagStarName, Vec3f equ_vision,
+						tone_reproductor* _eye, Projector* prj, bool _gravity_label)
+{
+	Hip_Star::twinkle_amount = _twinkle_amount;
+	Hip_Star::star_scale = _star_scale;
+	Hip_Star::star_mag_scale = _star_mag_scale;
+	Hip_Star::eye = _eye;
+	Hip_Star::proj = prj;
+	Hip_Star::gravity_label = _gravity_label;
+
+	glEnable(GL_TEXTURE_2D);
+    glEnable(GL_BLEND);
+    glBindTexture (GL_TEXTURE_2D, starTexture->getID());
+	glBlendFunc(GL_ONE, GL_ONE);
+
+	// Find the star zones which are in the screen
+	int nbZones=0;
+	static int * zoneList;  // WARNING this is almost a memory leak...
+
+	nbZones = HipGrid.Intersect(equ_vision, prj->get_fov()*M_PI/180.f*1.2f, zoneList);
+	float maxMag = 5.5f+60.f/prj->get_fov();
+
+    prj->set_orthographic_projection();	// set 2D coordinate
+
+	// Print all the stars of all the selected zones
+	static vector<Hip_Star *>::iterator end;
+	static vector<Hip_Star *>::iterator iter;
+	for(int i=0;i<nbZones;++i)
+	{
+		end = starZones[zoneList[i]].end();
+    	for(iter = starZones[zoneList[i]].begin(); iter!=end; ++iter)
+    	{
+			// If too small, skip and Compute the 2D position and check if in screen
+			if ((*iter)->Mag>maxMag || !prj->project_earth_equ_check((*iter)->XYZ, (*iter)->XY)) continue;
 			(*iter)->draw_point();
 			if (name_ON && (*iter)->CommonName && (*iter)->Mag<maxMagStarName)
             {

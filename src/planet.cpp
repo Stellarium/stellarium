@@ -225,7 +225,7 @@ float planet::get_on_screen_size(const navigator * nav, const Projector* prj)
 }
 
 // Draw the planet and all the related infos : name, circle etc..
-void planet::draw(int hint_ON, Projector* prj, const navigator * nav, const tone_reproductor* eye)
+void planet::draw(int hint_ON, Projector* prj, const navigator * nav, const tone_reproductor* eye, int flag_point)
 {
 	Mat4d mat = mat_local_to_parent;
 	planet * p = parent;
@@ -276,7 +276,15 @@ void planet::draw(int hint_ON, Projector* prj, const navigator * nav, const tone
 		}
 		else draw_sphere(prj, mat, screen_sz);
 
-		if (tex_halo) draw_halo(nav, prj, eye);
+		if (flag_point)
+		{
+			if (tex_halo) draw_halo(nav, prj, eye);
+		}
+		else
+		{
+			if (tex_halo) draw_point_halo(nav, prj, eye);
+		}
+
 		if (tex_big_halo) draw_big_halo(nav, prj, eye);
     }
 
@@ -370,6 +378,51 @@ void planet::draw_halo(const navigator* nav, const Projector* prj, const tone_re
 
 	// Global scaling
 	rmag*=planet::star_scale;
+
+	glBlendFunc(GL_ONE, GL_ONE);
+	float screen_r = get_on_screen_size(nav, prj);
+	cmag *= rmag/screen_r;
+	if (cmag>1.f) cmag = 1.f;
+
+	if (rmag<screen_r) rmag = screen_r;
+
+	prj->set_orthographic_projection();    	// 2D coordinate
+
+	glBindTexture(GL_TEXTURE_2D, tex_halo->getID());
+	glEnable(GL_BLEND);
+	glDisable(GL_LIGHTING);
+	glEnable(GL_TEXTURE_2D);
+	glColor3f(color[0]*cmag, color[1]*cmag, color[2]*cmag);
+	glTranslatef(screenPos[0], screenPos[1], 0.f);
+	glBegin(GL_QUADS);
+		glTexCoord2i(0,0);	glVertex3f(-rmag, rmag,0.f);	// Bottom Left
+		glTexCoord2i(1,0);	glVertex3f( rmag, rmag,0.f);	// Bottom Right
+		glTexCoord2i(1,1);	glVertex3f( rmag,-rmag,0.f);	// Top Right
+		glTexCoord2i(0,1);	glVertex3f(-rmag,-rmag,0.f);	// Top Left
+	glEnd();
+
+	prj->reset_perspective_projection();		// Restore the other coordinate
+}
+
+void planet::draw_point_halo(const navigator* nav, const Projector* prj, const tone_reproductor* eye)
+{
+	static float cmag;
+	static float rmag;
+
+	rmag = eye->adapt_luminance(expf(-0.92103f*(compute_magnitude(nav->get_observer_helio_pos()) +
+		12.12331f)) * 108064.73f);
+	rmag = rmag/powf(prj->get_fov(),0.85f)*10.f;
+
+    cmag = 1.f;
+
+    // if size of star is too small (blink) we put its size to 1.2 --> no more blink
+    // And we compensate the difference of brighteness with cmag
+	if (rmag<0.3f) return;
+	cmag=rmag*rmag/(1.4f*1.4f);
+	rmag=1.4f;
+
+	// Global scaling
+	//rmag*=planet::star_scale;
 
 	glBlendFunc(GL_ONE, GL_ONE);
 	float screen_r = get_on_screen_size(nav, prj);
