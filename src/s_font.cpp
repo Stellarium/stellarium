@@ -18,24 +18,23 @@
  */
 
 
+#include <string>
+#include <iostream>
+
 #include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
 #include "s_font.h"
 
-s_font::s_font(float size_i, const char * textureName, const char * dataFileName) : s_fontTexture(NULL), size(size_i)
+s_font::s_font(float size_i, const string& textureName, const string& dataFileName) : size(size_i)
 {
-    if (!buildDisplayLists(dataFileName, textureName)) printf("ERROR WHILE CREATING FONT %s\n",textureName);
+    if (!buildDisplayLists(dataFileName, textureName)) cout << "ERROR WHILE CREATING FONT " << textureName << endl;
 }
 
 s_font::~s_font()
 {
     glDeleteLists(g_base, 128);                          // Delete All 256 Display Lists
-    if (s_fontTexture) delete s_fontTexture;
-    s_fontTexture=NULL;
 }
 
-int s_font::buildDisplayLists(const char * dataFileName, const char * textureName)
+int s_font::buildDisplayLists(const string& dataFileName, const string& textureName)
 {
     int posX;
     int posY;
@@ -48,14 +47,14 @@ int s_font::buildDisplayLists(const char * dataFileName, const char * textureNam
     s_fontTexture = new s_texture(textureName);
     if (!s_fontTexture)
     {
-		printf("ERROR WHILE CREATING FONT TEXTURE\n");
+		cout << "ERROR WHILE CREATING FONT TEXTURE " << textureName << endl;
 		return 0;
     }
 
-	FILE * pFile = fopen(dataFileName,"r");
+	FILE * pFile = fopen(dataFileName.c_str(),"r");
     if (!pFile)
     {
-		printf("ERROR WHILE LOADING %s\n",dataFileName);
+		cout << "ERROR WHILE LOADING "<< dataFileName << endl;
         return 0;
     }
     if (fscanf(pFile,"%s LineSize %d\n",name, &lineHeight)!=2)
@@ -77,6 +76,15 @@ int s_font::buildDisplayLists(const char * dataFileName, const char * textureNam
         theSize[charNum].rightSpacing=0;
         averageCharLen+=sizeX;
         nbChar++;
+
+		// Special ascii code used to set text color
+		if (charNum==16 || charNum==17 || charNum==18)
+		{
+			glNewList(g_base+charNum,GL_COMPILE);
+				glColor3f(charNum==16 ? 0.9f : 0.1f, charNum==17 ? 0.9f : 0.1f, charNum==18 ? 0.9f : 0.1f);
+			glEndList();
+			continue;
+		}
 
         glNewList(g_base+charNum,GL_COMPILE);				// Start Building A List
 			glTranslated(leftSpacing*ratio,0,0);			// Move To The Left Of The Character
@@ -101,14 +109,14 @@ int s_font::buildDisplayLists(const char * dataFileName, const char * textureNam
 	return 1;
 }
 
-void s_font::print(float x, float y, const char * str, int upsidedown) const
+void s_font::print(float x, float y, const string& str, int upsidedown) const
 {
     glBindTexture(GL_TEXTURE_2D, s_fontTexture->getID());  // Select Our s_font Texture
     glPushMatrix();
     glTranslatef(x,y,0);								// Position The Text (0,0 - Top Left)
 	if (upsidedown) glScalef(1, -1, 1);					// invert the y axis, down is positive
     glListBase(g_base);									// Init the Display list base
-    glCallLists(strlen(str),GL_BYTE,str);				// Write The Text To The Screen
+    glCallLists(str.length(), GL_BYTE, str.c_str());	// Write The Text To The Screen
     glPopMatrix();
 }
 
@@ -118,21 +126,21 @@ void s_font::print_char(const char c) const
 	glCallList(g_base+c);
 }
 
-float s_font::getStrLen(const char * str) const
+float s_font::getStrLen(const string& str) const
 {
-	if (!str) return 0;
+	if (str.empty()) return 0;
     float s=0;
-    for (int i=0;i<(int)strlen(str);i++)
+    for (unsigned int i=0;i<str.length();++i)
     { 
 		s+=theSize[str[i]].sizeX+theSize[str[i]].leftSpacing+theSize[str[i]].rightSpacing+SPACING;
     }
     return s*ratio;
 }
 
-float s_font::getStrHeight(const char * str) const
+float s_font::getStrHeight(const string& str) const
 {  
     float s=0;
-    for (int i=0;i<(int)strlen(str);i++)
+    for (unsigned int i=0;i<str.length();++i)
     {
 		if (s<theSize[str[i]].sizeY) s=theSize[str[i]].sizeY;
     }

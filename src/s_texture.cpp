@@ -17,23 +17,23 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#include "s_texture.h"
-#include "stdlib.h"
+#include <iostream>
+
 #include "glpng.h"
+#include "s_texture.h"
 
-char s_texture::texDir[255] = "./";
-char s_texture::suffix[10] = "";
+string s_texture::texDir = "./";
+string s_texture::suffix = "";
 
-s_texture::s_texture(const char * _textureName) : texID(0), loadType(PNG_BLEND1), loadType2(GL_CLAMP)
+s_texture::s_texture(const string& _textureName) : textureName(_textureName), texID(0),
+	loadType(PNG_BLEND1), loadType2(GL_CLAMP)
 {
-    if (!_textureName) exit(-1);
-    textureName=strdup(_textureName);
     load();
 }
 
-s_texture::s_texture(const char * _textureName, int _loadType) : texID(0), loadType(PNG_BLEND3), loadType2(GL_CLAMP)
+s_texture::s_texture(const string& _textureName, int _loadType) : textureName(_textureName),
+	texID(0), loadType(PNG_BLEND3), loadType2(GL_CLAMP)
 {
-    if (!_textureName) exit(-1);
     switch (_loadType)
     {
         case TEX_LOAD_TYPE_PNG_ALPHA : loadType=PNG_ALPHA; break;
@@ -44,42 +44,33 @@ s_texture::s_texture(const char * _textureName, int _loadType) : texID(0), loadT
         default : loadType=PNG_BLEND3;
     }
     texID=0;
-    textureName=strdup(_textureName);
     load();
 }
 
 s_texture::~s_texture()
 {
-//printf("Unloading texture ID=%u %s\n",texID, textureName);
     unload();
-    if (textureName) free(textureName);
 }
 
 int s_texture::load()
 {
 	// Create the full texture name
-    char * fullName = (char*)malloc( sizeof(char) * ( strlen(texDir) + strlen(textureName) + strlen(suffix) + 1) );
-    sprintf(fullName,"%s%s%s",texDir,textureName,suffix);
+    string fullName = texDir + textureName + suffix;
 
-    FILE * tempFile = fopen(fullName,"r");
-    if (!tempFile) printf("WARNING : Can't find texture file %s!\n",fullName);
+    FILE * tempFile = fopen(fullName.c_str(),"r");
+    if (!tempFile) cout << "WARNING : Can't find texture file " << fullName << "!" << endl;
 	fclose(tempFile);
 
     pngInfo info;
     pngSetStandardOrientation(1);
-    texID = pngBind(fullName, PNG_BUILDMIPMAPS, loadType, &info, loadType2, GL_LINEAR, GL_LINEAR);
-
-//printf("loaded texture ID=%u %s\n",texID, fullName);
-
-	if (fullName) free(fullName);
-	fullName=NULL;
+    texID = pngBind(fullName.c_str(), PNG_BUILDMIPMAPS, loadType, &info, loadType2, GL_LINEAR, GL_LINEAR);
 
 	return (texID!=0);
 }
 
 void s_texture::unload()
 {   
-    glDeleteTextures(1, &texID);						// Delete The Texture
+    glDeleteTextures(1, &texID);	// Delete The Texture
 }
 
 int s_texture::reload()
