@@ -25,6 +25,7 @@
 Projector::Projector(int _screenW, int _screenH, double _fov, double _min_fov, double _max_fov) :
 	min_fov(_min_fov), max_fov(_max_fov), zNear(0.1), zFar(10000), flag_auto_zoom(0), hoffset(0), voffset(0)
 {
+	set_viewport(_screenW, _screenH, 0, 0);
 	set_fov(_fov);
 	set_screen_size(_screenW,_screenH);
 	maximize_viewport();
