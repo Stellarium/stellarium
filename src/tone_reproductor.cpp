@@ -97,30 +97,3 @@ void tone_reproductor::xyY_to_RGB(float* color)
 	//printf("%f %f %f\n",color[0],color[1],color[2]);
 }
 
-
-
-/*inline float ward_photopic_operator(float log10_La)
-{
-	if (log10_La<=-2.6f) return powf(10.f, -0.72f);
-	else
-	{
-		if (log10_La>=1.9f) return powf(10.f, log10_La - 1.255f);
-		else
-		{
-			return powf(10.f, powf(0.249f * log10_La + 0.65f, 2.7f) - 0.72f);
-		}
-	}
-}
-
-inline float scotopic_operator(float log10_La)
-{
-	if (log10_La<=-3.94f) return -2.86f;
-	else
-	{
-		if (log10_La>=-1.44f) return log10_La - 0.395f;
-		else
-		{
-			return powf(0.405f * log10_La + 1.6f, 2.18f) - 2.86f;
-		}
-	}
-}*/
