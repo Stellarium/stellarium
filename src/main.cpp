@@ -79,7 +79,7 @@ void drawIntro(void)
 void Draw(int delta_time)
 {
 	// Init openGL viewing with fov, screen size and clip planes
-	navigation.init_project_matrix(global.X_Resolution,global.Y_Resolution,0.0001,1000);
+	navigation.init_project_matrix(global.X_Resolution,global.Y_Resolution,0.00000001,1000);
 
     // Set openGL drawings in equatorial coordinates
     navigation.switch_to_earth_equatorial();

@@ -27,8 +27,7 @@ void sphe_to_rect(double lng, double lat, double r, double *x, double *y, double
     (*x) = cos(lng) * cosLat;
     (*y) = sin(lng) * cosLat;
 	(*z) = sin(lat);
-    cosLat = r/sqrt((*x) * (*x) + (*y) * (*y) + (*z) * (*z));
-	(*x)*=cosLat;
-	(*y)*=cosLat;
-	(*z)*=cosLat;
+	(*x)*=r;
+	(*y)*=r;
+	(*z)*=r;
 }
