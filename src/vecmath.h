@@ -94,10 +94,10 @@ template<class T> class Vector3
 {
 public:
     inline Vector3();
-    inline Vector3(const Vector3<T>&);
+    inline Vector3(const Vector3&);
     inline Vector3(T, T, T);
 
-	inline Vector3& operator=(const Vector3<T>&);
+	inline Vector3& operator=(const Vector3&);
 	inline Vector3& operator=(const T*);
     inline void set(T, T, T);
 
@@ -374,7 +374,7 @@ template<class T> Vector3<T>::Vector3()
 	v[0]=0; v[1]=0; v[2]=0;
 }
 
-template<class T> Vector3<T>::Vector3(const Vector3<T>& a)
+template<class T> Vector3<T>::Vector3(const Vector3& a)
 {
 	v[0]=a.v[0]; v[1]=a.v[1]; v[2]=a.v[2];
 }
@@ -384,11 +384,12 @@ template<class T> Vector3<T>::Vector3(T x, T y, T z)
 	v[0]=x; v[1]=y; v[2]=z;
 }
 
-template<class T> Vector3<T>& Vector3<T>::operator=(const Vector3<T>& a)
+template<class T> Vector3<T>& Vector3<T>::operator=(const Vector3& a)
 {
 	v[0]=a.v[0]; v[1]=a.v[1]; v[2]=a.v[2];
     return *this;
 }
+
 
 template<class T> Vector3<T>& Vector3<T>::operator=(const T* a)
 {

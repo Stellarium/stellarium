@@ -247,11 +247,11 @@ void planet::draw(int hint_ON, Projector* prj, const navigator * nav)
 				double dist = get_earth_equ_pos(nav).length();
 				prj->set_clipping_planes(dist-rings->get_size(), dist+rings->get_size());
 				glEnable(GL_DEPTH_TEST);
-				draw_sphere();
+				draw_sphere(prj, mat);
 				rings->draw();
 				glDisable(GL_DEPTH_TEST);
 			}
-			else draw_sphere();
+			else draw_sphere(prj, mat);
 		}
 
 		if (tex_halo) draw_halo(nav, prj);
@@ -288,7 +288,7 @@ void planet::draw_hints(const navigator* nav, const Projector* prj)
 	prj->reset_perspective_projection();		// Restore the other coordinate
 }
 
-void planet::draw_sphere(void)
+void planet::draw_sphere(const Projector* prj, const Mat4d& mat)
 {
     glEnable(GL_TEXTURE_2D);
 	glEnable(GL_CULL_FACE);
@@ -297,16 +297,14 @@ void planet::draw_sphere(void)
 	glPushMatrix();
 	// Rotate and add an extra half rotation because of the convention in all
     // planet texture maps where zero deg long. is in the middle of the texture.
-	glRotatef(axis_rotation + 180.,0.,0.,1.);
+	//glRotatef(axis_rotation + 180.,0.,0.,1.);
 
 	if (flag_lighting) glEnable(GL_LIGHTING);
 	else glDisable(GL_LIGHTING);
 	glColor3fv(color);
 	glBindTexture(GL_TEXTURE_2D, tex_map->getID());
-	GLUquadricObj * p = gluNewQuadric();
-	gluQuadricTexture(p,GL_TRUE);
-	gluSphere(p,radius,40,40);
-	gluDeleteQuadric(p);
+
+	prj->sSphere(radius*10,40,40, mat);
 
 	glPopMatrix();
     glDisable(GL_CULL_FACE);

@@ -21,7 +21,8 @@
 #include "projector.h"
 
 
-Projector::Projector(int _screenW, int _screenH, double _fov) : zNear(0.1), zFar(10000)
+Projector::Projector(int _screenW, int _screenH, double _fov, double _min_fov, double _max_fov) :
+	min_fov(_min_fov), max_fov(_max_fov), zNear(0.1), zFar(10000)
 {
 	change_fov(_fov);
 	set_screen_size(_screenW,_screenH);
@@ -71,9 +72,9 @@ void Projector::change_fov(double deltaFov)
     // if we are zooming in or out
     if (deltaFov)
     {
-		if (fov+deltaFov>0.001 && fov+deltaFov<100.)  fov+=deltaFov;
-		if (fov+deltaFov>100) fov=100.;
-		if (fov+deltaFov<0.001) fov=0.001;
+		if (fov+deltaFov>min_fov && fov+deltaFov<max_fov)  fov+=deltaFov;
+		if (fov+deltaFov>max_fov) fov=max_fov;
+		if (fov+deltaFov<min_fov) fov=min_fov;
 		init_project_matrix();
     }
 }
@@ -93,6 +94,13 @@ void Projector::init_project_matrix(void)
     glMatrixMode(GL_MODELVIEW);
 }
 
+void Projector::update_openGL(void) const
+{
+	glMatrixMode(GL_PROJECTION);
+	glLoadMatrixd(mat_projection);
+    glMatrixMode(GL_MODELVIEW);
+	glViewport(vec_viewport[0], vec_viewport[1], vec_viewport[2], vec_viewport[3]);
+}
 
 // Set the standard modelview matrices used for projection
 void Projector::set_modelview_matrices(	const Mat4d& _mat_earth_equ_to_eye,
@@ -111,19 +119,17 @@ void Projector::set_modelview_matrices(	const Mat4d& _mat_earth_equ_to_eye,
 
 bool Projector::project_custom(const Vec3f& v, Vec3d& win, const Mat4d& mat) const
 {
-    gluProject(v[0],v[1],v[2],mat,mat_projection,vec_viewport,&win[0],&win[1],&win[2]);
-	return (win[2]<1.);
+	static Vec3d w;
+	w[0] = v[0]; w[1] = v[1]; w[2] = v[2];
+	project_custom(w, win, mat);
 }
+
 bool Projector::project_custom(const Vec3d& v, Vec3d& win, const Mat4d& mat) const
 {
     gluProject(v[0],v[1],v[2],mat,mat_projection,vec_viewport,&win[0],&win[1],&win[2]);
 	return (win[2]<1.);
 }
-bool Projector::project_custom_check(const Vec3f& v, Vec3d& win, const Mat4d& mat) const
-{
-    gluProject(v[0],v[1],v[2],mat,mat_projection,vec_viewport,&win[0],&win[1],&win[2]);
-	return (win[2]<1. && check_in_viewport(win));
-}
+
 void Projector::unproject_custom(double x ,double y, Vec3d& v, const Mat4d& mat) const
 {
 	gluUnProject(x,y,1.,mat,mat_projection,vec_viewport,&v[0],&v[1],&v[2]);
@@ -165,7 +171,6 @@ void Projector::set_orthographic_projection(void) const
     gluOrtho2D(	vec_viewport[0], vec_viewport[0] + vec_viewport[2],
 				vec_viewport[1], vec_viewport[1] + vec_viewport[3]);	// set a 2D orthographic projection
 	glMatrixMode(GL_MODELVIEW);			// modelview matrix mode
-
     glPushMatrix();
     glLoadIdentity();
 }
@@ -176,6 +181,17 @@ void Projector::reset_perspective_projection(void) const
     glMatrixMode(GL_PROJECTION);		// Restore previous matrix
     glPopMatrix();
     glMatrixMode(GL_MODELVIEW);
-
     glPopMatrix();
+}
+
+
+
+// Reimplementation of gluSphere : glu is overrided for non standard projection
+void Projector::sSphere(GLdouble radius, GLint slices, GLint stacks, const Mat4d& mat, int orient_inside) const
+{
+	GLUquadricObj * p = gluNewQuadric();
+	gluQuadricTexture(p,GL_TRUE);
+	if (orient_inside) gluQuadricOrientation(p, GLU_INSIDE);
+	gluSphere(p, radius, slices, stacks);
+	gluDeleteQuadric(p);
 }

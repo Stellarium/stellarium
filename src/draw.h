@@ -23,6 +23,7 @@
 #include "stellarium.h"
 #include "s_font.h"
 #include "projector.h"
+#include "navigator.h"
 #include "tone_reproductor.h"
 
 enum SKY_GRID_TYPE
@@ -94,7 +95,7 @@ private:
 };
 
 
-void DrawMilkyWay(tone_reproductor * eye);
+void DrawMilkyWay(tone_reproductor * eye, const Projector* prj, const navigator* nav);
 void DrawFog(float sky_brightness);
 void DrawDecor(int, float sky_brightness);
 void DrawGround(float sky_brightness);
