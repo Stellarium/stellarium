@@ -565,9 +565,9 @@ Time_item::Time_item(const string& _label, double _JD) :
 	y = new Integer_item(-100000, 100000, 2003);
 	m = new Integer_item(1, 12, 1);
 	d = new Integer_item(1, 31, 1);
-	h = new Integer_item(1, 23, 1);
-	mn = new Integer_item(1, 59, 1);
-	s = new Integer_item(1, 59, 1);
+	h = new Integer_item(0, 23, 0);
+	mn = new Integer_item(0, 59, 0);
+	s = new Integer_item(0, 59, 0);
 	current_edit = y;
 }
 
