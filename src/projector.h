@@ -101,6 +101,9 @@ public:
 	bool project_earth_equ_check(const Vec3d& v, Vec3d& win) const
 		{return project_custom_check(v, win, mat_earth_equ_to_eye);}
 
+	bool project_earth_equ_line_check(const Vec3d& v1, Vec3d& win1, const Vec3d& v2, Vec3d& win2) const
+		{return project_custom_line_check(v1, win1, v2, win2, mat_earth_equ_to_eye);}
+
 	void unproject_earth_equ(double x, double y, Vec3d& v) const
 		{unproject(x, y, inv_mat_earth_equ_to_eye, v);}
 
@@ -128,6 +131,12 @@ public:
 	virtual bool project_custom(const Vec3d& v, Vec3d& win, const Mat4d& mat) const;
 	virtual bool project_custom_check(const Vec3f& v, Vec3d& win, const Mat4d& mat) const
 		{return project_custom(v, win, mat) && check_in_viewport(win);}
+	// project two points and make sure both are in front of viewer and that at least one is on screen
+	virtual bool project_custom_line_check(const Vec3f& v1, Vec3d& win1, 
+					       const Vec3f& v2, Vec3d& win2, const Mat4d& mat) const
+		{return project_custom(v1, win1, mat) && project_custom(v2, win2, mat) && 
+		   (check_in_viewport(win1) || check_in_viewport(win2));}
+
 
 	virtual void unproject_custom(double x, double y, Vec3d& v, const Mat4d& mat) const;
 

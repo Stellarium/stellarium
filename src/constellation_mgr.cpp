@@ -22,13 +22,6 @@
 #include "constellation.h"
 #include "constellation_mgr.h"
 
-/*
-Constellation_mgr::Constellation_mgr(Vec3f _lines_color, Vec3f _names_color) :
-	asterFont(NULL), lines_color(_lines_color), names_color(_names_color)
-{
-}
-*/
-
 // constructor which loads all data from appropriate files
 Constellation_mgr::Constellation_mgr(string _data_dir, string _sky_culture, Hip_Star_mgr *_hip_stars, string _font_filename, 
 				     Vec3f _lines_color, Vec3f _names_color) :

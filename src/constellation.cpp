@@ -93,14 +93,13 @@ void Constellation::draw(Projector* prj, const Vec3f& lines_color) const
 
     for(unsigned int i=0;i<nb_segments;++i)
     {
-		if (prj->project_earth_equ(asterism[2*i]->XYZ,star1) &&
-			prj->project_earth_equ(asterism[2*i+1]->XYZ,star2))
-		{
-			glBegin(GL_LINES);
-				glVertex2f(star1[0],star1[1]);
-				glVertex2f(star2[0],star2[1]);
-        	glEnd();
-		}
+      if(prj->project_earth_equ_line_check(asterism[2*i]->XYZ,star1,asterism[2*i+1]->XYZ,star2) ) {
+	glBegin(GL_LINES);
+	glVertex2f(star1[0],star1[1]);
+	glVertex2f(star2[0],star2[1]);
+	glEnd();
+		
+      }
     }
 
     prj->reset_perspective_projection();
@@ -115,14 +114,14 @@ void Constellation::draw_optim(Projector* prj) const
 
     for(unsigned int i=0;i<nb_segments;++i)
     {
-		if (prj->project_earth_equ(asterism[2*i]->XYZ,star1) &&
-			prj->project_earth_equ(asterism[2*i+1]->XYZ,star2))
-		{
-			glBegin(GL_LINES);
-				glVertex2f(star1[0],star1[1]);
-				glVertex2f(star2[0],star2[1]);
-        	glEnd();
-		}
+
+      if(prj->project_earth_equ_line_check(asterism[2*i]->XYZ,star1,asterism[2*i+1]->XYZ,star2) ) {
+	glBegin(GL_LINES);
+	glVertex2f(star1[0],star1[1]);
+	glVertex2f(star2[0],star2[1]);
+	glEnd();
+		
+      }
     }
 
 }
