@@ -61,7 +61,10 @@ LIBS="$LIBS $SDL_LIBS"
 ;;
 esac
 
-AC_CHECK_LIB(SDL_mixer, Mix_OpenAudio,[AC_CHECK_HEADER(SDL_mixer.h),LIBS="$LIBS -lSDL_mixer",], AC_MSG_WARN(*** SDL_mixer library not found - audio features will be deactivated in Stellarium ***))
+# Check for libpng
+AC_CHECK_LIB(png, png_read_info,[AC_CHECK_HEADER(png.h,LIBS="$LIBS -lpng",)], AC_MSG_ERROR(*** PNG library not found ***), -lz -lm)
+
+AC_CHECK_LIB(SDL_mixer, Mix_OpenAudio,[AC_CHECK_HEADER(SDL_mixer.h,LIBS="$LIBS -lSDL_mixer",)], AC_MSG_WARN(*** SDL_mixer library not found - audio features will be deactivated in Stellarium ***))
 
 AC_CHECK_HEADERS(byteswap.h SDL_mixer.h)
 
