@@ -1,4 +1,4 @@
-/* 
+/*
  * Stellarium
  * Copyright (C) 2002 Fabien Chéreau
  * 
@@ -56,7 +56,20 @@ void AltAz_to_equ(vec3_t &leVect, float raZen, float deZen)
 
 // Calc the x,y coord on the screen with the X,Y and Z pos
 void Project(float objx_i,float objy_i,float objz_i,double & x ,double & y)
-{   double z;
+{
+	double z;
+    GLdouble M[16];
+    GLdouble P[16];
+    GLint V[4];
+    glGetDoublev(GL_MODELVIEW_MATRIX,M);
+    glGetDoublev(GL_PROJECTION_MATRIX,P);
+    glGetIntegerv(GL_VIEWPORT,V);
+    gluProject(objx_i,objy_i,objz_i,M,P,V,&x,&y,&z);
+}
+
+// Calc the x,y coord on the screen with the X,Y and Z pos
+void Project(float objx_i,float objy_i,float objz_i,double & x ,double & y, double & z)
+{
     GLdouble M[16];
     GLdouble P[16];
     GLint V[4];

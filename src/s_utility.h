@@ -1,4 +1,4 @@
-/* 
+/*
  * Stellarium
  * Copyright (C) 2002 Fabien Chéreau
  * 
@@ -38,6 +38,7 @@ void Equ_to_altAz(vec3_t &leVect, float raZen, float deZen);
 void AltAz_to_equ(vec3_t &leVect, float raZen, float deZen);
 
 void Project(float objx_i,float objy_i,float objz_i,double & x ,double & y);
+void Project(float objx_i,float objy_i,float objz_i,double & x ,double & y ,double & z);
 
 void setOrthographicProjection(int w, int h);
 void resetPerspectiveProjection();

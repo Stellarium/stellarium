@@ -1,4 +1,8 @@
-0.5.1b [02/04/2003]
+0.5.1b [06/04/2003]
+Fixed the fantom planets bug.
+Implemented the ClickablePicture ui component to set the position easily by clicking the world map.
+Found and eliminate the boring memory leak i knew since months.
+Set the gui non-dynamic ie the size in pixel of the windows are fixed.
 Fixed the SDL fullscreen bug in linux.
 Fixed some gui bugs.
 Fixed the timezone +13 bug.
@@ -49,7 +53,7 @@ Added an automatic ground and landscape brightness.
 0.4.6 [25/04/2002]
 Added a real configuration panel for stars with the new ui objects.
 Added the info window viewable with the "I" key.
-Improved the navigation system. You now can track an object : usefull to track a plent in accelered time mode.
+Improved the navigation system. You now can track an object : usefull to track a planet in accelered time mode.
 Use fopen fclose etc... in place of the c fstream function which are less portable.
 Completely changed the texture management : now use classes.
 The textures are now in png format : use the (included) glpng library.
