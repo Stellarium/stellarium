@@ -35,16 +35,17 @@
 #endif
 
 #include "SDL.h" // Just for the key codes, i'm lasy to redefine them
-		 // This is to do to make the s_ library independent
+		 // This is TODO to make the s_ library independent
 
 #include <list>
 
 #include "s_texture.h"
 #include "s_font.h"
 #include "vecmath.h"
-#include "callback.h"
+#include "callbacks.hpp"
 
 using namespace std;
+using namespace boost;
 
 // gui Return Values:
 enum S_GUI_VALUE
@@ -58,9 +59,6 @@ enum S_GUI_VALUE
 
 namespace s_gui
 {
-	typedef CBFunctor0 * s_pcallback0;
-	typedef CBFunctor0 s_callback0;
-
 	typedef Vec4f s_color;
 	typedef Vec4i s_square;
 	typedef Vec2i s_vec2i;
@@ -161,14 +159,14 @@ namespace s_gui
     {
     public:
 		CallbackComponent();
-		virtual void setOnMouseInOutCallback(const s_callback0& c) {onMouseInOutCallback = c;}
-        virtual void setOnPressCallback(const s_callback0& c) {onPressCallback = c;}
+		virtual void setOnMouseInOutCallback(const callback<void>& c) {onMouseInOutCallback = c;}
+        virtual void setOnPressCallback(const callback<void>& c) {onPressCallback = c;}
 		virtual int getIsMouseOver(void) {return is_mouse_over;}
 		virtual int onMove(int, int);
 		virtual int onClic(int, int, S_GUI_VALUE, S_GUI_VALUE);
     protected:
-		s_callback0 onPressCallback;
-		s_callback0 onMouseInOutCallback;
+		callback<void> onPressCallback;
+		callback<void> onMouseInOutCallback;
 		int is_mouse_over;
 	};
 
@@ -279,7 +277,7 @@ namespace s_gui
 		LabeledCheckBox(int state = 0, const char* label = NULL);
 		virtual int getState(void) const {return checkbx->getState();}
 		virtual void setState(int s) {checkbx->setState(s);}
-        virtual void setOnPressCallback(const s_callback0& c) {checkbx->setOnPressCallback(c);}
+        virtual void setOnPressCallback(const callback<void>& c) {checkbx->setOnPressCallback(c);}
     protected:
 		CheckBox* checkbx;
 		Label* lbl;
@@ -327,11 +325,11 @@ namespace s_gui
 	    StdBtWin(const char * _title = NULL, s_texture* _header_tex = NULL,
 			s_font * _winfont = NULL, int headerSize = 18);
 		virtual void draw();
-		virtual void setOnHideBtCallback(const s_callback0& c) {onHideBtCallback = c;}
+		virtual void setOnHideBtCallback(const callback<void>& c) {onHideBtCallback = c;}
 	protected:
 		void onHideBt(void);
 		Button * hideBt;
-		s_callback0 onHideBtCallback;
+		callback<void> onHideBtCallback;
 	};
 
 	class TabHeader : public LabeledButton
@@ -366,14 +364,14 @@ namespace s_gui
 	    virtual void draw(void);
         virtual float getValue(void) {return barVal;}
 		virtual void setValue(float _barVal);
-		virtual void setOnChangeCallback(const s_callback0& c) {onChangeCallback = c;}
+		virtual void setOnChangeCallback(const callback<void>& c) {onChangeCallback = c;}
 		virtual int onClic(int, int, S_GUI_VALUE, S_GUI_VALUE);
 		virtual int onMove(int, int);
 	private:
 		int dragging;
 		Button cursor;
 	    float minBar, maxBar, barVal;
-		s_callback0 onChangeCallback;
+		callback<void> onChangeCallback;
 		s_vec2i oldPos;
 	};
 

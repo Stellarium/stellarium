@@ -27,11 +27,10 @@
 #include "tone_reproductor.h"
 #include "vecmath.h"
 #include "stel_object.h"
-#include "callback.h"
+#include "callbacks.hpp"
 
 // The callback type for the external position computation function
-typedef CBFunctor4<double, double*, double*, double*> pos_func_type;
-typedef CBFunctor4<double, double*, double*, double*>* p_pos_func_type;
+typedef boost::callback<void, double, double*> pos_func_type;
 
 // epoch J2000: 12 UT on 1 Jan 2000
 #define J2000 2451545.0
@@ -135,7 +134,7 @@ protected:
 	void compute_geographic_rotation(double date);
 
 	// Draw the 3D sphere
-	void draw_sphere(const Projector* prj, const Mat4d& mat);
+	void draw_sphere(const Projector* prj, const Mat4d& mat, float screen_sz);
 
 	// Draw the small star like 2D halo
 	void draw_halo(const navigator* nav, const Projector* prj, const tone_reproductor* eye);

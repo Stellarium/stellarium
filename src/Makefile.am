@@ -27,12 +27,11 @@ skybright.h			skybright.cpp \
 tone_reproductor.h  tone_reproductor.cpp \
 init_parser.h       init_parser.cpp \
 s_gui.h				s_gui.cpp \
-stel_ui.h			stel_ui.cpp \
+stel_ui.h			stel_ui.cpp  stel_ui_conf.cpp\
 projector.h			projector.cpp \
 fisheye_projector.h fisheye_projector.cpp \
 landscape.h			landscape.cpp \
-stel_ui_conf.cpp \
-callback.h \
+callbacks.hpp       callback_helpers.hpp \
 stellarium.h \
 vecmath.h bytes.h
 

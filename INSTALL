@@ -2,7 +2,7 @@
 
 WINDOWS USERS : ----------------------------------
 
-run setup.exe if you have the installer version.
+run setup.exe and follow the instructions if you have the installer version.
 or
 unzip stellarium.zip then just execute stellarium.exe!
 
@@ -10,8 +10,6 @@ unzip stellarium.zip then just execute stellarium.exe!
 LINUX - POSIX - CYGWIN - MACOSX : ----------------
 
 To compile stellarium, you will need the openGL/GLU and SDL dev libraries installed.
-
-If you had an older version of stellarium, please delete the directory $HOME/.stellarium
 
 You need to compile the sources :
 untar the tar.gz archive
@@ -25,7 +23,7 @@ then type
 then to launch the local version of the program type
 ~$ ./src/stellarium
 
-to fully install stellarium (launch from everywhere) type as root
+to fully install stellarium (so that it will be launchable from everywhere) type as root
 ~$ make install
 
 

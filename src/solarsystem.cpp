@@ -79,7 +79,8 @@ void SolarSystem::load(const char* planetfile)
 		const char * tname = pd.get_str(secname, "name");
 		const char* funcname = pd.get_str(secname, "coord_func");
 
-		pos_func_type posfunc = NULL;
+		pos_func_type posfunc;
+		EllipticalOrbit* orb = NULL;
 
 		if (!strcmp(funcname, "ell_orbit"))
 		{
@@ -98,47 +99,48 @@ void SolarSystem::load(const char* planetfile)
 			double pericenter_distance = semi_major_axis * (1.0 - eccentricity);
 
 			// Create an elliptical orbit
-			EllipticalOrbit* orb = new EllipticalOrbit(pericenter_distance, eccentricity, inclination, ascending_node,
+			orb = new EllipticalOrbit(pericenter_distance, eccentricity, inclination, ascending_node,
 				arg_of_pericenter, anomaly_at_epoch, period, epoch);
 			ell_orbits.push_back(orb);
-			posfunc = makeFunctor((p_pos_func_type)0, *orb, &EllipticalOrbit::positionAtTime);
+
+			posfunc = pos_func_type(orb, &EllipticalOrbit::positionAtTimev);
 		}
 
 		if (!strcmp(funcname, "sun_special"))
-			posfunc = makeFunctor((p_pos_func_type)0,get_sun_helio_coords);
+			posfunc = pos_func_type(get_sun_helio_coordsv);
 
 		if (!strcmp(funcname, "mercury_special"))
-			posfunc = makeFunctor((p_pos_func_type)0,get_mercury_helio_coords);
+			posfunc = pos_func_type(get_mercury_helio_coordsv);
 
 		if (!strcmp(funcname, "venus_special"))
-			posfunc = makeFunctor((p_pos_func_type)0,get_venus_helio_coords);
+			posfunc = pos_func_type(get_venus_helio_coordsv);
 
 		if (!strcmp(funcname, "earth_special"))
-			posfunc = makeFunctor((p_pos_func_type)0,get_earth_helio_coords);
+			posfunc = pos_func_type(get_earth_helio_coordsv);
 
 		if (!strcmp(funcname, "lunar_special"))
-			posfunc = makeFunctor((p_pos_func_type)0,get_lunar_geo_posn);
+			posfunc = pos_func_type(get_lunar_geo_posnv);
 
 		if (!strcmp(funcname, "mars_special"))
-			posfunc = makeFunctor((p_pos_func_type)0,get_mars_helio_coords);
+			posfunc = pos_func_type(get_mars_helio_coordsv);
 
 		if (!strcmp(funcname, "jupiter_special"))
-			posfunc = makeFunctor((p_pos_func_type)0,get_jupiter_helio_coords);
+			posfunc = pos_func_type(get_jupiter_helio_coordsv);
 
 		if (!strcmp(funcname, "saturn_special"))
-			posfunc = makeFunctor((p_pos_func_type)0,get_saturn_helio_coords);
+			posfunc = pos_func_type(get_saturn_helio_coordsv);
 
 		if (!strcmp(funcname, "uranus_special"))
-			posfunc = makeFunctor((p_pos_func_type)0,get_uranus_helio_coords);
+			posfunc = pos_func_type(get_uranus_helio_coordsv);
 
 		if (!strcmp(funcname, "neptune_special"))
-			posfunc = makeFunctor((p_pos_func_type)0,get_neptune_helio_coords);
+			posfunc = pos_func_type(get_neptune_helio_coordsv);
 
 		if (!strcmp(funcname, "pluto_special"))
-			posfunc = makeFunctor((p_pos_func_type)0,get_pluto_helio_coords);
+			posfunc = pos_func_type(get_pluto_helio_coordsv);
 
 
-		if (!posfunc)
+		if (posfunc.empty())
 		{
 			printf("ERROR : can't find posfunc %s for %s\n",funcname,tname);
 			exit(-1);

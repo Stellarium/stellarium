@@ -211,12 +211,20 @@ Vec3d EllipticalOrbit::positionAtTime(double t) const
     return positionAtE(E);
 }
 
-void EllipticalOrbit::positionAtTime(double JD, double * X, double * Y, double * Z)
+void EllipticalOrbit::positionAtTime(double JD, double * X, double * Y, double * Z) const
 {
 	Vec3d pos = positionAtTime(JD);
 	*X=pos[2];
 	*Y=pos[0];
 	*Z=pos[1];
+}
+
+void EllipticalOrbit::positionAtTimev(double JD, double* v)
+{
+	Vec3d pos = positionAtTime(JD);
+	v[0]=pos[2];
+	v[1]=pos[0];
+	v[2]=pos[1];
 }
 
 double EllipticalOrbit::getPeriod() const
