@@ -79,8 +79,8 @@ LIBRARIES =  $(noinst_LIBRARIES)
 
 DEFS =  -DPACKAGE=\"stellarium\" -DVERSION=\"0.4.7\" -DHAVE_TOUPPER=1  -I. -I$(srcdir) 
 CPPFLAGS = 
-LDFLAGS =  -lm
-LIBS =  -lGL -lGLU -lglut
+LDFLAGS = 
+LIBS =  -lm -lGL -lGLU -lglut
 libastrolib_a_DEPENDENCIES =  AstroOps.o DateOpsIntl.o MathOps.o Pluto.o \
 VsopData.o DateOps.o Lunar.o PlanetData.o Vsop.o
 libastrolib_a_OBJECTS =  AstroOps.o DateOpsIntl.o MathOps.o Pluto.o \

@@ -40,9 +40,15 @@ ac_cv_lib_GLU_gluPerspective=${ac_cv_lib_GLU_gluPerspective=yes}
 ac_cv_lib_GL_glEnable=${ac_cv_lib_GL_glEnable=yes}
 ac_cv_lib_GL_glGenTextures=${ac_cv_lib_GL_glGenTextures=no}
 ac_cv_lib_ICE_IceConnectionNumber=${ac_cv_lib_ICE_IceConnectionNumber=yes}
+ac_cv_lib_X11_XSendEvent=${ac_cv_lib_X11_XSendEvent=no}
+ac_cv_lib_Xmu_XmuCreateArea=${ac_cv_lib_Xmu_XmuCreateArea=no}
+ac_cv_lib_Xmu_XmuCvtStringToOrientation=${ac_cv_lib_Xmu_XmuCvtStringToOrientation=no}
+ac_cv_lib_Xmu__XEditResCheckMessages=${ac_cv_lib_Xmu__XEditResCheckMessages=no}
+ac_cv_lib_Xmu_main=${ac_cv_lib_Xmu_main=no}
 ac_cv_lib_dnet_dnet_ntoa=${ac_cv_lib_dnet_dnet_ntoa=no}
 ac_cv_lib_dnet_stub_dnet_ntoa=${ac_cv_lib_dnet_stub_dnet_ntoa=no}
 ac_cv_lib_glut_glutMainLoop=${ac_cv_lib_glut_glutMainLoop=yes}
+ac_cv_lib_m_fabs=${ac_cv_lib_m_fabs=yes}
 ac_cv_lib_m_main=${ac_cv_lib_m_main=yes}
 ac_cv_path_install=${ac_cv_path_install='/usr/bin/install -c'}
 ac_cv_prog_AWK=${ac_cv_prog_AWK=mawk}
