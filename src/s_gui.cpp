@@ -450,7 +450,7 @@ void FilledContainer::draw(void)
 {
     if (!visible) return;
 	painter.drawSquareFill(pos, size);
-	painter.drawSquareEdge(pos, size);
+	//painter.drawSquareEdge(pos, size);
 
 	Container::draw();
 }
@@ -519,7 +519,7 @@ LabeledCheckBox::LabeledCheckBox(int state, const char* label) : Container(), ch
 	checkbx = new CheckBox(state);
 	addComponent(checkbx);
 	lbl = new Label(label);
-	lbl->setPos(0,checkbx->getSizex()+2);
+	lbl->setPos(checkbx->getSizex()+4, 0);
 	addComponent(lbl);
 	setSize(checkbx->getSizex() + lbl->getSizex() + 2,
 		checkbx->getSizey()>lbl->getSizey() ? checkbx->getSizey() : lbl->getSizey());
@@ -947,8 +947,81 @@ void TabContainer::select(TabHeader* t)
     }
 }
 
-/*
+
 // Cursor Bar
+
+CursorBar::CursorBar(float _min, float _max, float _val) : cursor(), minBar(_min), maxBar(_max)
+{
+	float tmpVal = _val;
+	if (tmpVal<minBar && tmpVal>maxBar) tmpVal = (minBar + maxBar)/2;
+	setSize(100,15);
+	cursor.setSize(8, getSizey());
+	setValue(tmpVal);
+	oldPos = cursor.getPos();
+}
+
+void CursorBar::draw(void)
+{
+    if (!visible) return;
+	painter.drawSquareEdge(pos, size);
+    glPushMatrix();
+    glTranslatef(pos[0], pos[1], 0.f);
+    Component::scissor->push(pos, size);
+	cursor.draw();
+    Component::scissor->pop();
+	glPopMatrix();
+	if (dragging)
+	{
+		char temp[255];
+		sprintf(temp,"%.2f",barVal);
+		painter.print(pos[0]+2, pos[1]+2, temp);
+	}
+}
+
+void CursorBar::setValue(float _barVal)
+{
+	barVal = _barVal;
+	if (barVal<minBar) barVal = minBar;
+	if (barVal>maxBar) barVal = maxBar;
+	cursor.setPos((int)((barVal-minBar)/(maxBar-minBar) * (size[0] - cursor.getSizex())), 0);
+}
+
+int CursorBar::onClic(int x, int y, S_GUI_VALUE bt, S_GUI_VALUE state)
+{
+	if (bt==S_GUI_MOUSE_LEFT && state==S_GUI_RELEASED)
+	{
+		dragging = 0;
+		return 0;
+	}
+	if (visible && isIn(x,y) && state==S_GUI_PRESSED)
+	{
+		if (cursor.isIn(x-pos[0],y-pos[1])) dragging = 1;
+		//oldPos = cursor.getPos();
+		return 1;
+	}
+	return 0;
+}
+
+int CursorBar::onMove(int x, int y)
+{
+	if (!visible) return 0;
+	x = x - pos[0];
+	y = y - pos[1];
+	cursor.onMove(x,y);
+	if (!dragging) return 0;
+	if (x<0) x=0;
+	if (x>size[0]-cursor.getSizex()) x=size[0]-cursor.getSizex();
+	cursor.setPos(cursor.getPosx()+x-oldPos[0], cursor.getPosy());
+	if (cursor.getPosx()<0) cursor.setPos(0,cursor.getPosy());
+	if (cursor.getPosx()>size[0]-cursor.getSizex()) cursor.setPos(size[0]-cursor.getSizex(),cursor.getPosy());
+	barVal=(float)cursor.getPosx()/(size[0]-cursor.getSizex()) * (maxBar-minBar);
+	if (onChangeCallback) onChangeCallback();
+	oldPos.set(x,y);
+	return 0;
+}
+
+
+/*
 void ExtCursorBarClicCallback(int x, int y, enum guiValue state, enum guiValue button, Component * me)
 {
     ((CursorBar*)me)->CursorBarClicCallback(x, button, state);
