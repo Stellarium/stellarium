@@ -163,7 +163,21 @@ void stel_core::init(void)
 
 	nebulas->read(DataDir + "spacefont.txt", DataDir + "messier.fab", screen_W/2-150, screen_H/2-20);
 	projection->reset_perspective_projection();
-
+	
+	// Compute the atmosphere color (if necessary)
+	// compute global sky brightness TODO : make this more "scientifically"
+	// Compute the sun position in local coordinate
+	/*Vec3d temp(0.,0.,0.);
+	Vec3d sunPos = navigation->helio_to_local(temp);
+	sunPos.normalize();
+	atmosphere->compute_color(navigation->get_JDay(), sunPos, sunPos,
+				  ssystem->get_moon()->get_phase(ssystem->get_earth()->get_heliocentric_ecliptic_pos()),
+				  tone_converter, projection, observatory->get_latitude(), observatory->get_altitude(),
+				  15.f, 40.f);
+	sky_brightness = sunPos[2] * atmosphere->get_intensity();
+	if( sky_brightness < 0 ) {
+	  sky_brightness = 0;
+	} else if (sky_brightness<0.1) sky_brightness=0.1;*/
 
 }
 
