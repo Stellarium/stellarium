@@ -200,14 +200,23 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
   } else if(command == "date") {
 
     // ISO 8601-like format [+/-]YYYY-MM-DDThh:mm:ss (no timzone offset, T is literal)
-    if(args["absolute"]!="") {
+    if(args["local"]!="") {
       double jd;
-      if(string_to_jday( args["absolute"], jd ) ) {
+      if(string_to_jday( args["local"], jd ) ) {
 	stcore->navigation->set_JDay(jd - stcore->observatory->get_GMT_shift(jd) * JD_HOUR);
       } else {
 	cout << "Error parsing date." << endl;
 	status = 0;
+      } 
+    } else if(args["utc"]!="") {
+      double jd;
+      if(string_to_jday( args["utc"], jd ) ) {
+	stcore->navigation->set_JDay(jd);
+      } else {
+	cout << "Error parsing date." << endl;
+	status = 0;
       }
+
     } else if(args["relative"]!="") {  // value is a float number of days
       double days = str_to_double(args["relative"]);
       stcore->navigation->set_JDay(stcore->navigation->get_JDay() + days );
