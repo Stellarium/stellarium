@@ -30,16 +30,16 @@
 #define RADIUS_STAR 1.
 
 // construct and load all data
-Hip_Star_mgr::Hip_Star_mgr(string _data_dir, string _sky_culture, string _font_filename) :
+Hip_Star_mgr::Hip_Star_mgr(string _data_dir, string _sky_locale, string _font_filename) :
   starZones(NULL), HipGrid(), StarArray(NULL), StarArraySize(0), starTexture(NULL), 
-  starFont(NULL), dataDir(_data_dir), skyCulture(_sky_culture) 
+  starFont(NULL), dataDir(_data_dir), skyLocale(_sky_locale) 
 {
 
   starZones = new vector<Hip_Star*>[HipGrid.getNbPoints()];
 
   load( dataDir + _font_filename, 
 	dataDir + "hipparcos.fab", 
-	dataDir + "sky_cultures/" + skyCulture + "/commonname.fab",
+	dataDir + "star_names." + skyLocale + ".fab",
 	dataDir + "name.fab" );
 
 }
@@ -47,31 +47,31 @@ Hip_Star_mgr::Hip_Star_mgr(string _data_dir, string _sky_culture, string _font_f
 
 Hip_Star_mgr::~Hip_Star_mgr()
 {
-	if (starZones) delete [] starZones;
+  if (starZones) delete [] starZones;
 
-	for (int i=0;i<StarArraySize;i++)
-	{
-		if (StarArray[i]) delete StarArray[i];
-		StarArray[i]=NULL;
-	}
-
-	if (starTexture) delete starTexture;
-    starTexture=NULL;
-	exit(-1);
-    if (starFont) delete starFont;
-    starFont=NULL;
-    if (StarArray) delete StarArray;
-	StarArray = NULL;
+  for (int i=0;i<StarArraySize;i++)
+    {
+      if (StarArray[i]) delete StarArray[i];
+      StarArray[i]=NULL;
+    }
+  
+  if (starTexture) delete starTexture;
+  starTexture=NULL;
+  exit(-1);
+  if (starFont) delete starFont;
+  starFont=NULL;
+  if (StarArray) delete StarArray;
+  StarArray = NULL;
 }
 
-// change star common names to a different sky culture
-void Hip_Star_mgr::set_sky_culture(string _sky_culture) {
+// change star common names to a different sky locale
+void Hip_Star_mgr::set_sky_locale(string _sky_locale) {
 
-  if(skyCulture == _sky_culture) return;
+  if(skyLocale == _sky_locale) return;
 
-  // assuming validated culture already
-  load_common_names( dataDir + "sky_cultures/" + _sky_culture + "/commonname.fab" );
-  skyCulture = _sky_culture;
+  // assuming validated locale already
+  load_common_names( dataDir + "star_names." + _sky_locale + ".fab" );
+  skyLocale = _sky_locale;
 
 }
 
@@ -196,14 +196,6 @@ void Hip_Star_mgr::load_common_names(const string& commonNameFile)
     FILE *cnFile;
     cnFile = NULL;
 
-    cnFile=fopen(commonNameFile.c_str(),"r");
-    if (!cnFile)
-    {   
-        printf("ERROR %s NOT FOUND\n",commonNameFile.c_str());
-        exit(-1);
-    }
-
-
     // clear existing common names (would be faster if common names were in separate array
     // since relatively few are named)
     for (int i=0; i<StarArraySize; i++) {
@@ -211,7 +203,15 @@ void Hip_Star_mgr::load_common_names(const string& commonNameFile)
 	StarArray[i]->CommonName = NULL;
       }
     }
-    
+
+    cnFile=fopen(commonNameFile.c_str(),"r");
+    if (!cnFile)
+    {   
+        printf("ERROR %s NOT FOUND\n",commonNameFile.c_str());
+        return;
+    }
+
+
     int tmp;
     char tmpName[20];   // too small?
     Hip_Star *star;

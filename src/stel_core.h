@@ -154,7 +154,11 @@ private:
 	VIEWPORT_TYPE ViewportType;
 	
 	// localization
-	string SkyCulture;
+	string SkyCulture;  // the culture used for constellations
+	string SkyLocale;   // the locale (usually will just be language code) used for object labels
+	// these are separate so that, for example, someone could view polynesian constellations in Hawaiian 
+	// OR english, french, etc.
+	
 
 	// Stars
 	int FlagStarName;

@@ -130,11 +130,18 @@ void stel_ui::init_tui(void)
 
 	// sky culture goes here
 	tui_general_sky_culture = new s_tui::MultiSet_item<string>("3.1 Sky Culture: ");
-	// temporary - read from directory structure
+	// temporary - read from directory structure or file
 	tui_general_sky_culture->addItemList("western\npolynesian");
-
 	tui_general_sky_culture->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb_tui_general_change_sky_culture));
 	tui_menu_general->addComponent(tui_general_sky_culture);
+
+	tui_general_sky_locale = new s_tui::MultiSet_item<string>("3.1 Sky Locale: ");
+	// temporary - read from directory structure or file
+	tui_general_sky_locale->addItemList("eng\nesl\nfra\nhaw");
+
+	tui_general_sky_locale->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb_tui_general_change_sky_locale));
+	tui_menu_general->addComponent(tui_general_sky_locale);
+
 
 
 	tui_general_manual_zoom = new s_tui::Boolean_item(false, "3.2 Manual zoom: ", "Yes","No");
@@ -257,7 +264,8 @@ void stel_ui::tui_update_widgets(void)
 	tui_time_displayformat->setCurrent(core->observatory->get_time_format_str());
 
 	// 3. general
-	tui_general_sky_culture->setValue(core->SkyCulture);  // could be out of synch...?
+	tui_general_sky_culture->setValue(core->SkyCulture);  // could be out of sync...?
+	tui_general_sky_locale->setValue(core->SkyLocale);  // could be out of sync...?
 	tui_general_manual_zoom->setValue(core->FlagManualZoom);
 
 	// 4. Stars
@@ -345,10 +353,20 @@ void stel_ui::tui_cb_tui_general_change_sky_culture(void) {
 	  core->selected_constellation=NULL;
 	}
 
-	core->hip_stars->set_sky_culture(tui_general_sky_culture->getCurrent());
-	
 	core->SkyCulture = tui_general_sky_culture->getCurrent();  // assuming above worked...
 }
+
+// Set a new sky locale
+void stel_ui::tui_cb_tui_general_change_sky_locale(void) {
+  //	core->asterisms->set_sky_culture(tui_general_sky_culture->getCurrent());
+
+        core->hip_stars->set_sky_locale(tui_general_sky_locale->getCurrent());
+        core->ssystem->set_sky_locale(tui_general_sky_locale->getCurrent());
+	core->asterisms->set_sky_locale(tui_general_sky_locale->getCurrent());
+
+	core->SkyLocale = tui_general_sky_locale->getCurrent();  // assuming above worked...
+}
+
 
 // callback for viewport centering
 void stel_ui::tui_cb_tui_admin_change_viewport(void)

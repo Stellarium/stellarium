@@ -105,7 +105,7 @@ void stel_core::init(void)
 	projection->set_viewport_type(ViewportType);
 
 	// Load hipparcos stars & names
-	hip_stars = new Hip_Star_mgr(DataDir, SkyCulture, "spacefont.txt" );
+	hip_stars = new Hip_Star_mgr(DataDir, SkyLocale, "spacefont.txt" );
 
 
 	nebulas   = new Nebula_mgr(NebulaLabelColor, NebulaCircleColor);
@@ -129,11 +129,11 @@ void stel_core::init(void)
 
 
 	// Load constellations
-	asterisms = new Constellation_mgr(DataDir, SkyCulture, hip_stars, "spacefont.txt", ConstLinesColor, ConstNamesColor);
+	asterisms = new Constellation_mgr(DataDir, SkyCulture, SkyLocale, hip_stars, "spacefont.txt", ConstLinesColor, ConstNamesColor);
 
 
 	// Create and init the solar system
-	ssystem->init(DataDir + "spacefont.txt", DataDir + "ssystem.ini", PlanetNamesColor, PlanetOrbitsColor );
+	ssystem->init(DataDir, SkyLocale, "spacefont.txt", PlanetNamesColor, PlanetOrbitsColor );
 
 	landscape = Landscape::create_from_file(DataDir + "landscapes.ini", observatory->get_landscape_name());
 
@@ -488,7 +488,8 @@ void stel_core::load_config_from(const string& confFile)
 
 	// localization section
 	SkyCulture = conf.get_str("localization", "sky_culture", "western");
-	// default sky culture is western
+	SkyLocale = conf.get_str("localization", "sky_locale", "eng");
+	// default sky is western, english (actually only planet names are english!)
 
 	// Star section
 	StarScale			= conf.get_double ("stars:star_scale");
@@ -628,6 +629,7 @@ void stel_core::save_config_to(const string& confFile)
 
 	// localization section
 	conf.set_str    ("localization:sky_culture", SkyCulture);
+	conf.set_str    ("localization:sky_locale", SkyLocale);
 
 	// Star section
 	conf.set_double ("stars:star_scale", StarScale);

@@ -43,6 +43,8 @@ planet::planet(const string& _name, int _flagHalo, int _flag_lighting, double _r
 	mat_local_to_parent = Mat4d::identity();
 	tex_map = new s_texture(tex_map_name, TEX_LOAD_TYPE_PNG_SOLID_REPEAT);
 	if (flagHalo) tex_halo = new s_texture(tex_halo_name);
+	// temp
+	common_name = _name;
 
 }
 
@@ -70,7 +72,7 @@ void planet::get_info_string(char * s, const navigator * nav) const
 	Vec3d equPos = get_earth_equ_pos(nav);
 	rect_to_sphe(&tempRA,&tempDE,equPos);
 	sprintf(s,"Name :%s%s\nRA : %s\nDE : %s\nDistance : %.8f UA\nMagnitude : %.2f",
-	name.c_str(), scale_str, print_angle_hms(tempRA*180./M_PI).c_str(), print_angle_dms_stel(tempDE*180./M_PI).c_str(), equPos.length(),
+	common_name.c_str(), scale_str, print_angle_hms(tempRA*180./M_PI).c_str(), print_angle_dms_stel(tempDE*180./M_PI).c_str(), equPos.length(),
 	compute_magnitude(nav->get_observer_helio_pos()));
 }
 
@@ -80,7 +82,7 @@ void planet::get_short_info_string(char * s, const navigator * nav) const
 	static char scale_str[100];
 	if (sphere_scale == 1.f) scale_str[0] = '\0';
 	else sprintf(scale_str," (x%.1f)", sphere_scale);
-	sprintf(s,"%s%s: mag %.1f",name.c_str(), scale_str, compute_magnitude(nav->get_observer_helio_pos()));
+	sprintf(s,"%s%s: mag %.1f",common_name.c_str(), scale_str, compute_magnitude(nav->get_observer_helio_pos()));
 }
 
 double planet::get_close_fov(const navigator* nav) const
@@ -395,11 +397,11 @@ void planet::draw_hints(const navigator* nav, const Projector* prj)
 	glDisable(GL_LIGHTING);
 	glEnable(GL_TEXTURE_2D);
 
-	// Draw name + scaling if it's not == 1.
+	// Draw common_name + scaling if it's not == 1.
 	static char scale_str[100];
-	if (sphere_scale == 1.f) sprintf(scale_str,"%s", name.c_str());
-	else sprintf(scale_str,"%s (x%.1f)", name.c_str(), sphere_scale);
-	float tmp = 10.f + get_on_screen_size(prj, nav)/sphere_scale/2.f; // Shift for name printing
+	if (sphere_scale == 1.f) sprintf(scale_str,"%s", common_name.c_str());
+	else sprintf(scale_str,"%s (x%.1f)", common_name.c_str(), sphere_scale);
+	float tmp = 10.f + get_on_screen_size(prj, nav)/sphere_scale/2.f; // Shift for common_name printing
 
 	glColor4f(label_color[0], label_color[1], label_color[2],1.f);
 	gravity_label ? prj->print_gravity180(planet_name_font, screenPos[0],screenPos[1], scale_str, tmp, tmp) :
