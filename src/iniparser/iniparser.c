@@ -4,16 +4,16 @@
    @file    iniparser.c
    @author  N. Devillard
    @date    Mar 2000
-   @version $Revision: 232 $
+   @version $Revision: 236 $
    @brief   Parser for ini files.
 */
 /*--------------------------------------------------------------------------*/
 
 /*
-    $Id: iniparser.c 232 2003-07-22 22:44:45Z xalioth $
+    $Id: iniparser.c 236 2003-07-25 14:16:53Z xalioth $
     $Author: xalioth $
-    $Date: 2003-07-22 23:44:45 +0100 (Tue, 22 Jul 2003) $
-    $Revision: 232 $
+    $Date: 2003-07-25 15:16:53 +0100 (Fri, 25 Jul 2003) $
+    $Revision: 236 $
 */
 
 /*---------------------------------------------------------------------------
@@ -230,7 +230,7 @@ void iniparser_dump_ini(dictionary * d, FILE * f)
   iniparser_getstring() instead.
  */
 /*--------------------------------------------------------------------------*/
-char * iniparser_getstr(dictionary * d, char * key)
+const char * iniparser_getstr(const dictionary * d, const char * key)
 {
     return iniparser_getstring(d, key, NULL);
 }
@@ -251,10 +251,10 @@ char * iniparser_getstr(dictionary * d, char * key)
   the dictionary, do not free or modify it.
  */
 /*--------------------------------------------------------------------------*/
-char * iniparser_getstring(dictionary * d, const char * key, char * def)
+const char * iniparser_getstring(const dictionary * d, const char * key, const char * def)
 {
     char * lc_key ;
-    char * sval ;
+    const char * sval ;
 
     if (d==NULL || key==NULL)
         return def ;
@@ -283,8 +283,7 @@ char * iniparser_getstring(dictionary * d, const char * key, char * def)
 /*--------------------------------------------------------------------------*/
 int iniparser_getint(dictionary * d, const char * key, int notfound)
 {
-    char    *   str ;
-
+    const char * str ;
     str = iniparser_getstring(d, key, INI_INVALID_KEY);
     if (str==INI_INVALID_KEY) return notfound ;
     return atoi(str);
@@ -306,8 +305,7 @@ int iniparser_getint(dictionary * d, const char * key, int notfound)
 /*--------------------------------------------------------------------------*/
 double iniparser_getdouble(dictionary * d, const char * key, double notfound)
 {
-    char    *   str ;
-
+    const char * str;
     str = iniparser_getstring(d, key, INI_INVALID_KEY);
     if (str==INI_INVALID_KEY) return notfound ;
     return atof(str);
@@ -349,7 +347,7 @@ double iniparser_getdouble(dictionary * d, const char * key, double notfound)
 /*--------------------------------------------------------------------------*/
 int iniparser_getboolean(dictionary * d, const char * key, int notfound)
 {
-    char    *   c ;
+    const char * c;
     int         ret ;
 
     c = iniparser_getstring(d, key, INI_INVALID_KEY);

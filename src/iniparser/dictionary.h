@@ -4,7 +4,7 @@
    @file    dictionary.h
    @author  N. Devillard
    @date    Aug 2000
-   @version $Revision: 232 $
+   @version $Revision: 236 $
    @brief   Implements a dictionary for string variables.
 
    This module implements a simple dictionary object, i.e. a list
@@ -14,10 +14,10 @@
 /*--------------------------------------------------------------------------*/
 
 /*
-	$Id: dictionary.h 232 2003-07-22 22:44:45Z xalioth $
+	$Id: dictionary.h 236 2003-07-25 14:16:53Z xalioth $
 	$Author: xalioth $
-	$Date: 2003-07-22 23:44:45 +0100 (Tue, 22 Jul 2003) $
-	$Revision: 232 $
+	$Date: 2003-07-25 15:16:53 +0100 (Fri, 25 Jul 2003) $
+	$Revision: 236 $
 */
 
 #ifndef _DICTIONARY_H_
@@ -112,7 +112,7 @@ void dictionary_del(dictionary * vd);
   dictionary object, you should not try to free it or modify it.
  */
 /*--------------------------------------------------------------------------*/
-char * dictionary_get(dictionary * d, char * key, char * def);
+const char * dictionary_get(const dictionary * d, const char * key, const char * def);
 
 
 /*-------------------------------------------------------------------------*/

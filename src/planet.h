@@ -79,6 +79,9 @@ public:
 	// Compute the transformation matrix from the local planet coordinate to the parent planet coordinate
     void compute_trans_matrix(double date);
 
+	// Get the phase angle for an observer at pos obs_pos in the heliocentric coordinate (in AU)
+	double get_phase(Vec3d obs_pos);
+
 	// Draw the planet, if hint_ON is != 0 draw a circle and the name as well
     void draw(int hint_ON, draw_utility * du, navigator * nav);
 

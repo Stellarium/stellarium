@@ -155,7 +155,7 @@ void skylight::get_xyY_value(skylight_struct * p)
 // p.color[2] is CIE Y color component (luminance)
 void skylight::get_xyY_valuev(skylight_struct2 * p)
 {
-	register float cos_dist_sun = sun_pos[0]*(p->pos[0]) + sun_pos[1]*(p->pos[1]) + sun_pos[2]*(p->pos[2]);
+	register float cos_dist_sun = sun_pos[0]*(p->pos[0]) + sun_pos[1]*(p->pos[1]) + sun_pos[2]*(p->pos[2]) - 0.0000001;
 	register float cos_zenith_angle = p->pos[2];
 	register float dist_sun = acosf(cos_dist_sun);
 	p->color[0] = term_x * (1.f + Ax * expf(Bx/cos_zenith_angle)) * (1.f + Cx * expf(Dx*dist_sun) +

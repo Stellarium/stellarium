@@ -44,18 +44,22 @@ public:
 	// Get a string from the key.
 	const char * get_str(const char * key) const;
 	const char * get_str(const char * section, const char * key) const;
+	const char * get_str(const char * section, const char * key, const char * def) const;
 
 	// Get a integer from the key.
 	int get_int(const char * key) const;
 	int get_int(const char * section, const char * key) const;
+	int get_int(const char * section, const char * key, int def) const;
 
 	// Get a double from the key.
 	double get_double(const char * key) const;
 	double get_double(const char * section, const char * key) const;
+	double get_double(const char * section, const char * key, double def) const;
 
 	// Get a boolean (int) from the key.
 	int get_boolean(const char * key) const;
 	int get_boolean(const char * section, const char * key) const;
+	int get_boolean(const char * section, const char * key, int def) const;
 
 	int get_nsec(void) const;					// Get number of sections.
 	const char * get_secname(int n) const;		// Get name for section n.

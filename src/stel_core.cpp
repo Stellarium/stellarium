@@ -254,7 +254,7 @@ void stel_core::draw(int delta_time)
 	sunPos.normalize();
 
 	// Compute the moon position in local coordinate
-	temp2 = ssystem->get_moon_heliocentric_ecliptic_pos();
+	temp2 = ssystem->get_moon()->get_heliocentric_ecliptic_pos();
 	Vec3d moonPos = navigation->helio_to_local(&temp2);
 	moonPos.normalize();
 
@@ -265,7 +265,9 @@ void stel_core::draw(int delta_time)
 	if (FlagAtmosphere)
 	{
 		navigation->switch_to_local();
-		atmosphere->compute_color(FlagGround, sunPos, moonPos, tone_converter, du);
+		atmosphere->compute_color(FlagGround, sunPos, moonPos,
+		 	ssystem->get_moon()->get_phase(ssystem->get_earth()->get_heliocentric_ecliptic_pos()),
+		 	tone_converter, du);
 	}
 
 	// Draw the atmosphere
