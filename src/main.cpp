@@ -117,7 +117,7 @@ void setDirectories(const char* executableName)
             	// Failure....
             	printf("ERROR : I can't find the datas directories in :\n");
             	printf("%s/ nor in ./ nor in ../\n",CONFIG_DATA_DIR);
-                printf("You may fully install the software (on POSIX systems)\n");
+                printf("You may fully install the software (typ \"make install\" on POSIX systems)\n");
                 printf("or launch the application from the stellarium package directory.\n");
                 exit(-1);
 			}
