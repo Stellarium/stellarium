@@ -319,12 +319,18 @@ void stel_core::draw(int delta_time)
 
 	// Draw the planets
 	if (FlagPlanets) {
-	  if( FlagPlanetsOrbits && selected_planet ) {
+
+	  // Selecting Sun doesn't turn off orbits, becuase it's orbit is the ecliptic (separate control)
+	  // plus makes viewing orbits easier when center on Sun
+	  if( FlagPlanetsOrbits && selected_planet && selected_planet->get_name() != "Sun") {
 	    // draw orbit only for selected planet
+
+	    printf("selected %s\n", selected_planet->get_name().c_str());
 	    selected_planet->draw_orbit(navigation, projection);
 	  }
 	  ssystem->draw(FlagPlanetsHints, projection, navigation, tone_converter,
-			FlagGravityLabels, FlagPointStar, FlagPlanetsOrbits && selected_planet==NULL);
+			FlagGravityLabels, FlagPointStar, FlagPlanetsOrbits && 
+			(selected_planet==NULL || selected_planet->get_name() == "Sun"));
 
 	}
 
