@@ -39278,6 +39278,46 @@ double sum_series_elp36 (double *t)
 }
 
 
+/*----------------------------------------------------------------------------
+ * The obliquity formula (and all the magic numbers below) come from Meeus,
+ * Astro Algorithms.
+ *
+ * Input t is time in julian day.
+ * Valid range is the years -8000 to +12000 (t = -100 to 100).
+ *
+ * return value is mean obliquity (epsilon sub 0) in degrees.
+ */
+double pget_mean_obliquity( double t )
+{
+	double u, u0;
+	static double t0 = 30000.;
+	static double rval = 0.;
+	static const double rvalStart = 23. * 3600. + 26. * 60. + 21.448;
+	static const int OBLIQ_COEFFS = 10;
+	static const double coeffs[ 10 ] = {
+         -468093.,  -155.,  199925.,  -5138.,  -24967.,
+         -3905.,    712.,   2787.,    579.,    245.};
+	int i;
+	t = ( t - 2451545.0 ) / 36525.; // Convert time in centuries
+
+	if( t0 != t )
+	{
+		t0 = t;
+    	u = u0 = t / 100.;     // u is in julian 10000's of years
+    	rval = rvalStart;
+		for( i=0; i<OBLIQ_COEFFS; i++ )
+      	{
+        	rval += u * coeffs[i] / 100.;
+        	u *= u0;
+		}
+      	// convert from seconds to degree
+      	rval /= 3600.;
+	}
+	return rval;
+}
+
+
+
 /* Calculate the rectangular geocentric lunar coordinates to the inertial mean
  * ecliptic and equinox of J2000.
  * The geocentric coordinates returned are in units of UA.
@@ -39383,9 +39423,18 @@ void get_lunar_geo_posn_prec(double JD, double * X, double * Y, double * Z, doub
 	b = pwqw * x + qw2 * y - qw * z;
 	c = -pw * x + qw * y + (pw2 + qw2 -1) * z;
 
-	*X = a/AU;
-	*Y = b/AU;
-	*Z = c/AU;
+	a /= AU;
+	b /= AU;
+	c /= AU;
+
+    /* Convert in rectangular geocentric equatorial coordinate */
+    double obl=pget_mean_obliquity(JD)*M_PI/180.;
+    double rotc = cos(obl);
+    double rots = sin(obl);
+
+    *X = a;
+    *Y = rotc * b - rots * c;
+    *Z = rots * b + rotc * c;
 }
 
 /* Same with lowest precision by default */
