@@ -43,9 +43,9 @@ stel_atmosphere::~stel_atmosphere()
 {
 	for (int k=0; k<sky_resolution+1 ;k++)
 	{
-		if (tab_sky[k]) delete tab_sky[k];
+		if (tab_sky[k]) delete [] tab_sky[k];
 	}
-	if (tab_sky) delete tab_sky;
+	if (tab_sky) delete [] tab_sky;
 }
 
 void stel_atmosphere::show_atmosphere(void)

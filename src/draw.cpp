@@ -77,9 +77,16 @@ SkyGrid::~SkyGrid()
 {
 	for (unsigned int nm=0;nm<nb_meridian;++nm)
 	{
-		delete alt_points[nm];
+		delete [] alt_points[nm];
 	}
-	delete alt_points;
+	delete [] alt_points;
+	
+	for (unsigned int np=0;np<nb_parallel;++np)
+	{
+		delete [] azi_points[np];
+	}
+	delete [] azi_points;
+	
 	if (font) delete font;
 	font = NULL;
 
@@ -271,7 +278,8 @@ SkyLine::SkyLine(SKY_LINE_TYPE line_type, Vec3f line_color, double _radius, unsi
 
 SkyLine::~SkyLine()
 {
-	delete points;
+	delete [] points;
+	points = NULL;
 }
 
 void SkyLine::draw(const Projector* prj) const

@@ -54,7 +54,8 @@ private:
 
 	vector<Hip_Star*>* starZones;       // array of star vector with the grid id as array rank
 	Grid HipGrid;                       // Grid for opimisation
-	Hip_Star ** StarArray;  // The simple array of the star for sequential research
+	Hip_Star * StarArray;  				// Sequential Array of the star for memory allocation optimization
+	Hip_Star ** StarFlatArray; 			// The simple array of the star for sequential research
 	int StarArraySize;      // Number of star in the array
 	s_texture * starTexture;
 	s_font * starFont;

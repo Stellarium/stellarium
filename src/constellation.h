@@ -43,9 +43,9 @@ private:
     void draw_optim(Projector* prj) const;
     void draw_art_optim(Projector* prj, navigator* nav, int delta_time);
     void set_common_name(char *_name) { inter = strdup(_name); }
-    char * name;
+    string name;
     char short_name[4];
-    char * inter;
+    string inter;
     Vec3f XYZname;
 	Vec3d XYname;
     unsigned int nb_segments;
