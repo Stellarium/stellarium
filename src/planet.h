@@ -51,14 +51,15 @@ class planet : public stel_object
 public:
 	planet(char * _name, int _flagHalo, double _radius, vec3_t _color, s_texture * _planetTexture, s_texture * _haloTexture, void (*_coord_func)(double JD, double *, double *, double *));
     virtual ~planet();
-	virtual void computePosition(double date); // Compute the position from the mother planet
-    virtual void compute_trans_matrix(double date);	// Compute the transformation matrix from the mother planet
+	virtual void compute_position(double date); 		// Compute the position from the mother planet
+    virtual void compute_trans_matrix(double date);		// Compute the transformation matrix from the mother planet
 	virtual double getGeographicRotation(double date);	// Return the y rotation to use from equatorial to geographic coordinates
     virtual void draw();
 	virtual void addSatellite(planet*);
 	virtual Vec3d get_ecliptic_pos();
-	virtual Vec3d get_heliocentric_ecliptic_pos();
+	virtual Vec3d get_heliocentric_ecliptic_pos();		// Return the heliocentric ecliptical position
 	unsigned char get_type(void) {return STEL_OBJECT_PLANET;}
+	virtual Vec3d get_equ_pos(void);
 protected:
     char * name;
 	int flagHalo;							// Set if a little "star like" halo will be drawn
@@ -94,9 +95,8 @@ protected:
 class sun_planet : public planet
 {
 public:
-	sun_planet(char * _name, int _flagHalo, double _radius, vec3_t _color, s_texture * _planetTexture, s_texture * _haloTexture, s_texture * _bigHaloTexture, void (*_coord_func)(double JD, double *, double *, double *));
-    virtual void computeCoords(double date);
-    virtual void draw();
+	sun_planet(char * _name, int _flagHalo, double _radius, vec3_t _color, s_texture * _planetTexture, s_texture * _haloTexture, s_texture * _bigHaloTexture);
+	virtual void compute_position(double date);
 protected:
 	s_texture * bigHaloTexture;				// Big halo texture
 };

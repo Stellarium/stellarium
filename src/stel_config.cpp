@@ -162,7 +162,9 @@ void setDirectories(void)
 			printf("Try to create directory %s/.stellarium/%s/\n",homeDir,VERSION);
 			strcpy(tempName2,"mkdir ");
 			strcat(tempName2,homeDir);
-			strcat(tempName2,"/.stellarium/");
+			strcat(tempName2,"/.stellarium");
+			system(tempName2);
+			strcat(tempName2,"/");
 			strcat(tempName2,VERSION);
 			strcat(tempName2,"/");
 			system(tempName2);
@@ -218,13 +220,13 @@ void loadConfig(char * configFile, char * locationFile)
     }
 
     // init the time parameters with current time and date
-	ln_date * date=NULL;
-	get_ln_date_from_sys(date);
+	ln_date date;
+	get_ln_date_from_sys(&date);
 
     // If no date given -> default today
     if (tempDate!=NULL && strcmp(tempDate,"today"))
     {
-    	if (tempDate!=NULL && (sscanf(tempDate,"%d/%d/%d\n",&(date->months),&(date->days),&(date->years)) != 3))
+    	if (tempDate!=NULL && (sscanf(tempDate,"%d/%d/%d\n",&(date.months),&(date.days),&(date.years)) != 3))
     	{
 			printf("ERROR, bad date format : please change config.txt\n\n");
         	exit(-1);
@@ -233,20 +235,20 @@ void loadConfig(char * configFile, char * locationFile)
 
 	if (tempTime!=NULL && strcmp(tempTime,"now"))
 	{
-    	if (tempTime!=NULL && (sscanf(tempTime,"%d:%d:%lf\n",&(date->hours),&(date->minutes),&(date->seconds)) != 3))
+    	if (tempTime!=NULL && (sscanf(tempTime,"%d:%d:%lf\n",&(date.hours),&(date.minutes),&(date.seconds)) != 3))
     	{
 			printf("ERROR, bad time format : please change config.txt\n\n");
         	exit(-1);
         }
     }
 
-    if (date->months>12 || date->months<1 || date->days<1 || date->days>31)
+    if (date.months>12 || date.months<1 || date.days<1 || date.days>31)
     {
 		printf("ERROR, bad month value : please change config.txt\n\n");
         exit(-1);
     }
 
-    if (date->hours>23 || date->hours<0 || date->minutes<0 || date->minutes>59 || date->seconds<0 || date->seconds>=60)
+    if (date.hours>23 || date.hours<0 || date.minutes<0 || date.minutes>59 || date.seconds<0 || date.seconds>=60)
     {
 		printf("ERROR, bad time value : please change config.txt\n\n");
         exit(-1);
@@ -257,13 +259,13 @@ void loadConfig(char * configFile, char * locationFile)
 
     if (tempTime)
     {
-        date->hours-=navigation.get_time_zone();	// maybe bug if time zone+hours>23
+        date.hours-=navigation.get_time_zone();	// maybe bug if time zone+hours>23
         delete tempTime;
 		tempTime=NULL;
     }
 
     // calc the julian date and store it in the global variable JDay
-    navigation.set_JDay(get_julian_day(date));
+    navigation.set_JDay(get_julian_day(&date));
 
 	float r,g,b;
 	if (tempGuiBaseColor!=NULL)

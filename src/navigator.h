@@ -23,6 +23,12 @@
 #include "stellarium.h"
 #include "vecmath.h"
 
+// Conversion in standar Julian time format
+#define JD_SECOND 0.000011574074074074074074
+#define JD_MINUTE 0.00069444444444444444444
+#define JD_HOUR   0.041666666666666666666
+#define JD_DAY    1.
+
 typedef struct          // Struct used to store data on the auto mov
 {
 	Vec3d start;
@@ -69,9 +75,10 @@ public:
 	// Place openGL in local viewer coordinates (Usually somewhere on earth viewing in a specific direction)
 	void switch_to_local(void);
 
-	Vec3d local_to_equ(Vec3d*);		// Transform vector from local coordinate to equatorial
-	Vec3d equ_to_local(Vec3d*);		// Transform vector from equatorial coordinate to local
-	Vec3d helio_to_local(Vec3d*);	// Transform vector from heliocentric coordinate to local
+	Vec3d local_to_earth_equ(Vec3d*);	// Transform vector from local coordinate to equatorial
+	Vec3d earth_equ_to_local(Vec3d*);	// Transform vector from equatorial coordinate to local
+	Vec3d helio_to_local(Vec3d*);		// Transform vector from heliocentric coordinate to local
+	Vec3d helio_to_earth_equ(Vec3d*);	// Transform vector from heliocentric coordinate to local
 
 	// Viewing direction function : 1 move, 0 stop.
 	void move_to(Vec3d _aim);
@@ -108,8 +115,8 @@ private:
 	// Matrices used for every coordinate transfo
 	Mat4d mat_helio_to_local;		// Transform from Heliocentric to Observator local coordinate
 	Mat4d mat_local_to_helio;		// Transform from Observator local coordinate to Heliocentric
-	Mat4d mat_local_to_equ;			// Transform from Observator local coordinate to Earth Equatorial
-	Mat4d mat_equ_to_local;			// Transform from Observator local coordinate to Earth Equatorial
+	Mat4d mat_local_to_earth_equ;	// Transform from Observator local coordinate to Earth Equatorial
+	Mat4d mat_earth_equ_to_local;	// Transform from Observator local coordinate to Earth Equatorial
 
 	// Vision variables
 	double fov;							// Field of view

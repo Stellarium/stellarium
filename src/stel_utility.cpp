@@ -38,23 +38,23 @@ double range_radians (double angle)
 
 double hms_to_rad(unsigned int h, unsigned int m, double s)
 {
-	return (double)PI/24.*h*2.+(double)PI/12.*m/60.+s*PI/43200.;
+	return (double)M_PI/24.*h*2.+(double)M_PI/12.*m/60.+s*M_PI/43200.;
 }
 
 double dms_to_rad(int d, int m, double s)
 {
-	double t = (double)PI/180.*d+(double)PI/10800.*m+s*PI/648000.;
+	double t = (double)M_PI/180.*d+(double)M_PI/10800.*m+s*M_PI/648000.;
 	return fabs(t)*d/abs(d);
 }
 
 double hms_to_rad(unsigned int h, double m)
 {
-	return (double)PI/24.*h*2.+(double)PI/12.*m/60.;
+	return (double)M_PI/24.*h*2.+(double)M_PI/12.*m/60.;
 }
 
 double dms_to_rad(int d, double m)
 {
-	double t = (double)PI/180.*d+(double)PI/10800.*m;
+	double t = (double)M_PI/180.*d+(double)M_PI/10800.*m;
 	return fabs(t)*d/abs(d);
 }
 /*

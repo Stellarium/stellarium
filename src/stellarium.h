@@ -62,15 +62,8 @@
 
 #define APP_NAME "Stellarium v "VERSION
 
-// Conversion in standar Julian time format
-#define JD_SECOND 0.00001157407407407407407407407407407407407407407
-#define JD_MINUTE 0.00069444444444444444444444444444444444444444444
-#define JD_HOUR 0.04166666666666666666666666666666666666666666666
-#define JD_DAY 1
-
-#define PI 3.14159265358979323846264338327950288419716939937510
 #define UA 149597870
-#define myMax(a,b) (((a)>(b))?(a):(b)) 
+#define myMax(a,b) (((a)>(b))?(a):(b))
 #define RAYON 500
 
 // The global structure

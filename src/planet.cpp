@@ -19,6 +19,7 @@
 
 
 #include "planet.h"
+#include "navigator.h"
 
 // epoch J2000: 12 UT on 1 Jan 2000
 #define J2000 2451545.0
@@ -45,7 +46,13 @@ planet::~planet()
 	name=NULL;
 }
 
-void planet::computePosition(double date)
+Vec3d planet::get_equ_pos(void)
+{
+	Vec3d v = get_heliocentric_ecliptic_pos();
+	return navigation.helio_to_earth_equ(&v);
+}
+
+void planet::compute_position(double date)
 {
 	coord_func(date, &(ecliptic_pos[0]), &(ecliptic_pos[1]), &(ecliptic_pos[2]));
 }
@@ -119,6 +126,18 @@ void planet::draw(void)
 
 	glDisable(GL_LIGHTING);
     glDisable(GL_CULL_FACE);
+}
+
+sun_planet::sun_planet(char * _name, int _flagHalo, double _radius, vec3_t _color,
+				s_texture * _planetTexture, s_texture * _haloTexture, s_texture * _bigHaloTexture) : planet(_name,_flagHalo,_radius,_color,_planetTexture,_haloTexture,NULL)
+{
+	ecliptic_pos=Vec3d(0.,0.,0.);
+	name=strdup(_name);
+}
+
+void sun_planet::compute_position(double date)
+{
+	return; // The sun is fixed in the heliocentric coordinate
 }
 
 	/*
