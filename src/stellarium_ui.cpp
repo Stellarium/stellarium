@@ -338,7 +338,7 @@ void LatitudeBarOnChangeValue(float value, Component *)
     char tempValueStr[30];
     sprintf(tempValueStr,"\1 Latitude : %s",print_angle_dms_stel(navigation.get_latitude()));
     LatitudeLabel->setLabel(tempValueStr);
-	EarthMap->setPointerPosition(vec2_t(EarthMap->getPointerPosition()[0],(value+90.)/180.*EarthMap->getSize()[1]));
+	EarthMap->setPointerPosition(vec2_t(EarthMap->getPointerPosition()[0],1-((value-90.)/180.)*(EarthMap->getSize())[1]));
 }
 void LongitudeBarOnChangeValue(float value,Component *)
 {
@@ -372,9 +372,9 @@ void EarthMapOnChangeValue(vec2_t posPoint,Component *)
 {
 	vec2_i sz = EarthMap->getSize();
 	float longi = 360.0*posPoint[0]/sz[0]-180;
-	float lat = 180.0*posPoint[1]/sz[1]-90;
+	float lat = -180.0*posPoint[1]/sz[1]+90;
 	LongitudeBar->setValue(longi);
-	LatitudeBar->setValue(-lat);
+	LatitudeBar->setValue(lat);
 }
 
 /**********************************************************************************/
