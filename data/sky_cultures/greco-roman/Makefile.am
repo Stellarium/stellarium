@@ -1,0 +1,1 @@
+pkgdatadir = $(datadir)/@PACKAGE@/data/sky_cultures/greco-roman
