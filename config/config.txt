@@ -51,7 +51,7 @@ FLAG_CARDINAL_POINTS = true         # Display the cardinal points if true.
 FLAG_MENU = true                    # Display menu bar if true.
 FLAG_HELP = false                   # Display help window if true.
 FLAG_INFOS = false                  # Display infos about stellarium if true.
-FLAG_MILKY_WAY = true               # Display the milky way, put it to false
+FLAG_MILKY_WAY = true               # Display the milky way
 LANDSCAPE_NUMBER	= 2
                                     # if your computer have no 3D hardware acceleration
 FLAG_UTC_TIME = false               # Display time in UTC format (Greenwich time) if true,
@@ -68,7 +68,7 @@ DATE = 08/11/1999
 #DATE = today
 
 # default time is now (UT time)
-# modify and uncomment next line to choose another time
+# modify and uncomment next line to choose another time (UT time ie time in greenwich)
 #TIME = hh:mm:ss
 TIME = 11:15:00
 #TIME = now

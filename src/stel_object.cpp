@@ -159,10 +159,12 @@ stel_object * find_stel_object(Vec3d v)
 // find and select the "nearest" object from screen position
 stel_object * find_stel_object(int x, int y)
 {
+    glPushMatrix();
     navigation.switch_to_earth_equatorial();
-	Vec3d v = UnProject(x,y);
-
-	printf("x=%d, y=%d, v(%lf,%lf,%lf)\n",x,y,v[0],v[1],v[2]);
+	Vec3d v = UnProject((double)x,(double)y);
+    glPopMatrix();
+    
+	printf("x=%d, y=%d, v(%f,%f,%f)\n",x,y,v[0],v[1],v[2]);
 	return find_stel_object(v);
 }
 

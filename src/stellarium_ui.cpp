@@ -897,7 +897,7 @@ void GuiHandleClic(Uint16 x, Uint16 y, Uint8 state, Uint8 button)
         }
         if (button==SDL_BUTTON_LEFT)
         {   
-        	// CTRL + clic = right clic for 1 button mouse
+        	// CTRL + left clic = right clic for 1 button mouse
 			if (SDL_GetModState() & KMOD_CTRL)
 			{
 				selected_object=NULL;
