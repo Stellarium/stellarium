@@ -73,7 +73,7 @@ DEPDIR = .deps
 INSTALL_STRIP_PROGRAM = ${SHELL} $(install_sh) -c -s
 PACKAGE = stellarium
 RANLIB = ranlib
-VERSION = 0.4.8
+VERSION = 0.4.9
 X_CFLAGS = 
 X_EXTRA_LIBS = 
 X_LIBS = 
@@ -83,7 +83,7 @@ am__quote =
 install_sh = /home/Fabien/work/stellarium/install-sh
 
 pkgdatadir = $(datadir)/stellarium/data
-pkgdata_DATA = hipparcos.dat catalog.fab messier.fab spacefont.txt constellationsmaj.fab name.txt stellarium.ico
+pkgdata_DATA = hipparcos.dat messier.fab spacefont.txt constellationship.fab name.fab commonname.fab stellarium.ico
 EXTRA_DIST = $(pkgdata_DATA)
 subdir = data
 mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs

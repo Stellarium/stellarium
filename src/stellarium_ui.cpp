@@ -25,7 +25,7 @@
 #include "s_gui_window.h"
 #include "navigation.h"
 #include "nebula_mgr.h"
-#include "star_mgr.h"
+#include "hip_star_mgr.h"
 #include "stellarium.h"
 #include "parsecfg.h"
 
@@ -495,7 +495,7 @@ F1/F2 : fullscreen window/small window\n\
 /**********************************************************************************/
 /*** Info TextLabel ***/
     InfoTextLabel = new TextLabel(
-"                 \1   " APP_NAME "   May  2002   \1\n\
+"                 \1   " APP_NAME "  August 2002  \1\n\
  \n\
 \1   Copyright (c) 2002 Fabien Chereau\n\
  \n\
@@ -902,9 +902,9 @@ void findObject(int x, int y)
                 InfoSelectLabel->setColour(vec3_t(0.4,0.5,0.8));
             }
             else
-            {   if (!VouteCeleste->Rechercher(tempPointer) && global.FlagStars)
+            {   if (!HipVouteCeleste->Rechercher(tempPointer) && global.FlagStars)
                 {   global.FlagSelect=true;
-                    VouteCeleste->InfoSelect(global.SelectedObject.XYZ,global.SelectedObject.RA,global.SelectedObject.DE,global.SelectedObject.Mag,global.SelectedObject.Name,global.SelectedObject.HR,global.SelectedObject.RGB,global.SelectedObject.CommonName);
+                    HipVouteCeleste->InfoSelect(global.SelectedObject.XYZ,global.SelectedObject.RA,global.SelectedObject.DE,global.SelectedObject.Mag,global.SelectedObject.Name,global.SelectedObject.HR,global.SelectedObject.RGB,global.SelectedObject.CommonName);
                     RA_en_hms(global.SelectedObject.RAh,global.SelectedObject.RAm,global.SelectedObject.RAs,global.SelectedObject.RA);
                     global.SelectedObject.type=0;   //star type
                     global.SelectedObject.Size=10;
@@ -923,7 +923,7 @@ void updateInfoSelectString(void)
     objectInfo[0]=0;
     if (global.SelectedObject.type==0)  //Star
     {   glColor3f(0.4f,0.7f,0.3f);
-        sprintf(objectInfo,"Info : %s\nName :%s\nHR  : %.4d\nRA  : %.2dh %.2dm %.2fs\nDE  : %.2fdeg\nMag : %.2f",
+        sprintf(objectInfo,"Info : %s\nName :%s\nHip : %.4d\nRA  : %.2dh %.2dm %.2fs\nDE  : %.2fdeg\nMag : %.2f",
             global.SelectedObject.CommonName,
             global.SelectedObject.Name,
             global.SelectedObject.HR,

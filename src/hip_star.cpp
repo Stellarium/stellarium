@@ -21,17 +21,22 @@
 #include "bytes.h"
 
 extern unsigned int starTextureId;
+extern s_font * starFont;
 
 static float coef;
 static float cmag;
 static float rmag;
 
-Hip_Star::Hip_Star()
+Hip_Star::Hip_Star() : 
+	CommonName(NULL),
+    Name(NULL)
 {
 }
 
 Hip_Star::~Hip_Star()
 {   
+	if(Name) delete Name;
+	if(CommonName) delete CommonName;
 }
 
 int Hip_Star::Read(FILE * catalog)
@@ -65,7 +70,8 @@ int Hip_Star::Read(FILE * catalog)
     unsigned short int mag;
     fread((char*)&mag,2,1,catalog);
     LE_TO_CPU_INT16(mag, mag);
-    Mag = (float)mag / 256.0;
+    Mag = ((float)mag + 5) / 256.0;
+    if (Mag>250) Mag = Mag - 256;
 
     unsigned short int type;
     fread((char*)&type,2,1,catalog);
@@ -129,7 +135,7 @@ void Hip_Star::Draw(void)
 {
     // Check if in the field of view, if not return
     if ( XY[0]<0 || XY[0]>global.X_Resolution || 
-         XY[1]<0 ||  XY[1]>global.Y_Resolution ) 
+         XY[1]<0 || XY[1]>global.Y_Resolution ) 
         return;
     // Random coef for star twinkling
     coef=(float)rand()/RAND_MAX*global.StarTwinkleAmount/10;
@@ -169,3 +175,8 @@ void Hip_Star::Draw(void)
     glPopMatrix();
 }
 
+void Hip_Star::DrawName(void)
+{   
+    glColor3fv(RGB/2.5);
+	starFont->print(XY[0]+6,global.Y_Resolution-XY[1]+6, CommonName);
+}

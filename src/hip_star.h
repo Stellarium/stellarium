@@ -22,16 +22,19 @@
 
 #include "stellarium.h"
 #include "s_utility.h"
+#include "s_font.h"
 
 class Hip_Star  
 {
 friend class Hip_Star_mgr;
+friend class constellation;
 
 public:
     Hip_Star();
     virtual ~Hip_Star();
     int Read(FILE * pFile); // Read the star data in the stream
     void Draw();            // Draw the star
+    void DrawName();
 private:
     unsigned int HP;        // Hipparcos number
     float Mag;              // Apparent magnitude
@@ -41,6 +44,8 @@ private:
     float MaxColorValue;    // Precalc of the max color value
     double XY[2];           // 2D Position
     char SpType;            // Spectral type
+    char * CommonName;      // Common Name of the star
+    char * Name;            // Scientific name
 };
 
 #endif // _STAR_H_

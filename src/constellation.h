@@ -20,8 +20,8 @@
 #ifndef _CONSTELLATION_H_
 #define _CONSTELLATION_H_
 
-#include "star.h"
-#include "star_mgr.h"
+#include "hip_star.h"
+#include "hip_star_mgr.h"
 #include "stellarium.h"
 #include "s_utility.h"
 #include "s_font.h"
@@ -32,7 +32,7 @@ class constellation
 public:
     constellation();
     virtual ~constellation();
-    int Read(FILE *, Star_mgr * _VouteCeleste);
+    int Read(FILE *, Hip_Star_mgr * _VouteCeleste);
     void Draw();
     void DrawSeule();
     void DrawName();
@@ -45,7 +45,7 @@ private:
     double x_c,y_c;
     unsigned int NbSegments;
     bool inFov;
-    Star ** Asterism;
+    Hip_Star ** Asterism;
 };
 
 #endif // _CONSTELLATION_H_

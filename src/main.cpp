@@ -27,7 +27,6 @@
 #endif
 
 #include "stellarium.h"
-#include "star_mgr.h"
 #include "draw.h"
 #include "constellation.h"
 #include "constellation_mgr.h"
@@ -45,7 +44,6 @@
 using namespace std;
 
 stellariumParams global;
-Star_mgr * VouteCeleste;              // Stars from HR catalog
 Hip_Star_mgr * HipVouteCeleste;       // Class to manage the Hipparcos catalog
 Constellation_mgr * ConstellCeleste;  // Constellation boundary and name
 Nebula_mgr * messiers;                // Class to manage the messier objects
@@ -498,22 +496,24 @@ int main (int argc, char **argv)
     // and try to find the files somewhere else if not found there
     char dataRoot[255];
     char tempName[255];
+    char tempName2[255];
+    char tempName3[255];
     strcpy(tempName,CONFIG_DATA_DIR);
-    strcat(tempName,"/data/catalog.fab");
+    strcat(tempName,"/data/hipparcos.dat");
     FILE * tempFile = fopen(tempName,"r");
     strcpy(dataRoot,CONFIG_DATA_DIR);
     if(!tempFile)
     {
-        tempFile = fopen("./data/catalog.fab","r");
+        tempFile = fopen("./data/hipparcos.dat","r");
         strcpy(dataRoot,".");
         if(!tempFile)
         {
             strcpy(dataRoot,"..");
-            tempFile = fopen("../data/catalog.fab","r");
+            tempFile = fopen("../data/hipparcos.dat","r");
             if(!tempFile)
             {
                 strcpy(dataRoot,"$HOME");
-                tempFile = fopen("$HOME/.stellarium/data/catalog.fab","r");
+                tempFile = fopen("$HOME/.stellarium/data/hipparcos.dat","r");
                 if(!tempFile)
                 {
                     // Failure....
@@ -577,9 +577,6 @@ int main (int argc, char **argv)
     
     init();                          // Set the callbacks
     
-    VouteCeleste = new Star_mgr();
-    if (!VouteCeleste) exit(1);
-
     HipVouteCeleste = new Hip_Star_mgr();
     if (!HipVouteCeleste) exit(1);
 
@@ -594,18 +591,19 @@ int main (int argc, char **argv)
 
     loadCommonTextures();            // Load the common used textures
     SolarSystem->loadTextures();
+
+    // Load hipparcos stars & names
+    strcpy(tempName,global.DataDir);
+    strcat(tempName,"hipparcos.dat");
+    strcpy(tempName2,global.DataDir);
+    strcat(tempName2,"commonname.fab"); 
+    strcpy(tempName3,global.DataDir);
+    strcat(tempName3,"name.fab"); 
+    HipVouteCeleste->Load(tempName,tempName2,tempName3);
     
     strcpy(tempName,global.DataDir);
-    strcat(tempName,"catalog.fab");
-    VouteCeleste->Load(tempName);    // Load stars
-   
-    strcpy(tempName,global.DataDir);
-    strcat(tempName,"hipparcos.dat"); 
-    HipVouteCeleste->Load(tempName); // Load hipparcos stars
-    
-    strcpy(tempName,global.DataDir);
-    strcat(tempName,"constellationsmaj.fab");
-    ConstellCeleste->Load(tempName,VouteCeleste);     // Load constellations      
+    strcat(tempName,"constellationship.fab");
+    ConstellCeleste->Load(tempName,HipVouteCeleste);     // Load constellations      
     SolarSystem->Compute(global.JDay,global.ThePlace);// Compute planet data
     InitMeriParal();                 // Precalculation for the grids drawing
     InitAtmosphere();
