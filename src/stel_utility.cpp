@@ -97,6 +97,13 @@ string vec3f_to_str(const Vec3f& v)
 	return os.str();
 }
 
+
+// Provide the luminance in cd/m^2 from the magnitude and the surface in arcmin^2
+float mag_to_luminance(float mag, float surface)
+{
+	return expf(-0.4f * 2.3025851f * (mag - (-2.5f * log10f(surface)))) * 108064.73f;
+}
+
 // strips trailing whitespaces from buf.
 #define iswhite(c)  ((c)== ' ' || (c)=='\t')
 static char *trim(char *x)

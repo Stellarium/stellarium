@@ -259,7 +259,7 @@ void stel_core::draw(int delta_time)
 
 	// Draw the nebula if they are visible
 	if (FlagNebula && (!FlagAtmosphere || sky_brightness<0.1))
-		nebulas->draw(FlagNebulaName, projection, FlagGravityLabels);
+		nebulas->draw(FlagNebulaName, projection, tone_converter, FlagGravityLabels);
 
 	// Draw the hipparcos stars
 	Vec3d tempv = navigation->get_equ_vision();

@@ -25,6 +25,7 @@
 #include "s_texture.h"
 #include "stel_object.h"
 #include "s_font.h"
+#include "tone_reproductor.h"
 
 /*
      Gx    Galaxy
@@ -67,7 +68,7 @@ public:
 	// Read the Nebula data from a file
     int read(FILE *);
 
-	void draw_tex(const Projector* prj);
+	void draw_tex(const Projector* prj, tone_reproductor* eye);
     void draw_name(const Projector* prj);
     void draw_circle(const Projector* prj);
 
@@ -87,6 +88,8 @@ private:
 
 	s_texture * neb_tex;			// Texture
 	Vec3f* tex_quad_vertex;			// The 4 vertex used to draw the nebula texture
+	float luminance;				// Object luminance to use (value computed to compensate
+									// the texture avergae luminosity)
 
 	float inc_lum;					// Local counter for symbol animation
 	static s_texture * tex_circle;	// The symbolic circle texture

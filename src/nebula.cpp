@@ -105,6 +105,9 @@ int Nebula::read(FILE * catalogue)
 
     neb_tex = new s_texture(tex_name);
 
+	//tex_angular_size*tex_angular_size*3600/4*M_PI
+	luminance = mag_to_luminance(mag, -12.123)/neb_tex->get_average_luminance();
+
 	float tex_size = RADIUS_NEB * sin(tex_angular_size/2/60*M_PI/180);
 
     // Precomputation of the rotation/translation matrix
@@ -122,12 +125,12 @@ int Nebula::read(FILE * catalogue)
     return 1;
 }
 
-void Nebula::draw_tex(const Projector* prj)
+void Nebula::draw_tex(const Projector* prj, tone_reproductor* eye)
 {
     glEnable(GL_TEXTURE_2D);
     glEnable(GL_BLEND);
 
-    float cmag=(1.-mag/12)*2;
+    float cmag=eye->adapt_luminance(luminance);
     glColor3f(cmag,cmag,cmag);
     glBindTexture(GL_TEXTURE_2D, neb_tex->getID());
 
