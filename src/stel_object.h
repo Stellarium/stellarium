@@ -40,7 +40,7 @@ public:
 	virtual void update(void) {return;}
 	void draw_pointer(int delta_time, const Projector* prj, const navigator * nav);
 
-	virtual void get_info_string(char * s, navigator * nav) const;
+	virtual void get_info_string(char * s, const navigator * nav) const;
 	virtual unsigned char get_type(void) const =0;
 	virtual Vec3d get_earth_equ_pos(const navigator * nav) const =0;
 	virtual Vec3f get_RGB(void) const {return Vec3f(0.,0.,0.);}

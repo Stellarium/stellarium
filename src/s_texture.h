@@ -36,6 +36,7 @@
 #define TEX_LOAD_TYPE_PNG_SOLID 1
 #define TEX_LOAD_TYPE_PNG_BLEND3 2
 #define TEX_LOAD_TYPE_PNG_REPEAT 3
+#define TEX_LOAD_TYPE_PNG_SOLID_REPEAT 4
 
 #include <string.h>
 

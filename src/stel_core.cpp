@@ -218,7 +218,7 @@ void stel_core::draw(int delta_time)
 	else DrawMilkyWay(tone_converter);
 
 	// Init the depth buffer which is used by the planets drawing operations
-	glClear(GL_DEPTH_BUFFER_BIT);
+	//glClear(GL_DEPTH_BUFFER_BIT);
 
 	// Draw all the constellations
 	if (FlagAsterismDrawing) asterisms->draw(projection);
@@ -383,8 +383,8 @@ void stel_core::load_config(void)
 void stel_core::load_base_textures(void)
 {
     printf("Loading common textures...\n");
-    texIds[3] = new s_texture("fog",TEX_LOAD_TYPE_PNG_SOLID);
-    texIds[2] = new s_texture("voielactee256x256",TEX_LOAD_TYPE_PNG_SOLID);
+    texIds[3] = new s_texture("fog",TEX_LOAD_TYPE_PNG_SOLID_REPEAT);
+    texIds[2] = new s_texture("voielactee256x256",TEX_LOAD_TYPE_PNG_SOLID_REPEAT);
 
     switch (landscape_number)
     {

@@ -4,16 +4,16 @@
    @file    iniparser.c
    @author  N. Devillard
    @date    Mar 2000
-   @version $Revision: 236 $
+   @version $Revision: 247 $
    @brief   Parser for ini files.
 */
 /*--------------------------------------------------------------------------*/
 
 /*
-    $Id: iniparser.c 236 2003-07-25 14:16:53Z xalioth $
+    $Id: iniparser.c 247 2003-08-02 22:58:01Z xalioth $
     $Author: xalioth $
-    $Date: 2003-07-25 15:16:53 +0100 (Fri, 25 Jul 2003) $
-    $Revision: 236 $
+    $Date: 2003-08-02 23:58:01 +0100 (Sat, 02 Aug 2003) $
+    $Revision: 247 $
 */
 
 /*---------------------------------------------------------------------------
@@ -259,10 +259,9 @@ const char * iniparser_getstring(const dictionary * d, const char * key, const c
     if (d==NULL || key==NULL)
         return def ;
 
-    lc_key = strlwc(strdup(key));
+    lc_key = strlwc(key);
     sval = dictionary_get(d, lc_key, def);
 
-    free(lc_key);
     return sval ;
 }
 
@@ -406,9 +405,7 @@ int iniparser_find_entry(
 
 int iniparser_setstr(dictionary * ini, const char * entry, const char * val)
 {
-	char * tentry = strdup(entry);
-    dictionary_set(ini, strlwc(tentry), val);
-	free(tentry);
+    dictionary_set(ini, strlwc(entry), val);
     return 0 ;
 }
 
@@ -424,9 +421,7 @@ int iniparser_setstr(dictionary * ini, const char * entry, const char * val)
 /*--------------------------------------------------------------------------*/
 void iniparser_unset(dictionary * ini, const char * entry)
 {
-	char * tentry = strdup(entry);
-    dictionary_unset(ini, strlwc(tentry));
-	free(tentry);
+    dictionary_unset(ini, strlwc(entry));
 }
 
 
