@@ -42,19 +42,14 @@ Textured_Button * BtConstellationsName = NULL;
 Textured_Button * BtAzimutalGrid = NULL;
 Textured_Button * BtEquatorialGrid = NULL;
 Textured_Button * BtGround = NULL;
-//Textured_Button * BtFog = NULL;
-/*Textured_Button * BtRealTime = NULL;
-Textured_Button * BtAcceleredTime = NULL;
-Textured_Button * BtVeryFastTime = NULL;*/
 Textured_Button * BtCardinalPoints = NULL;
 Textured_Button * BtAtmosphere = NULL;
 Textured_Button * BtNebula = NULL;
 Textured_Button * BtHelp = NULL;
-//Textured_Button * BtRealMode = NULL;
 Textured_Button * BtFollowEarth = NULL;
 Textured_Button * BtConfig = NULL;
 
-FilledTextLabel * InfoSelectLabel = NULL;      // The TextLabel displaying teh infos about the selected object
+FilledTextLabel * InfoSelectLabel = NULL;      // The TextLabel displaying the infos about the selected object
 
 FilledContainer * TopWindowsInfos = NULL;      // The top bar containing the infos
 Label * DateLabel = NULL;
@@ -101,11 +96,12 @@ Label * AltitudeLabel = NULL;
 Label * TimeZoneLabel = NULL;
 Labeled_Button * SaveLocation = NULL;
 
-StdBtWin * TimeControlWin = NULL;              // The window containing the configuration options
+StdBtWin * TimeControlWin = NULL;              // The window containing the time controls
 Container * TimeControlContainer = NULL;
 Labeled_Button * TimeRW = NULL;
 Labeled_Button * TimeFRW = NULL;
 Labeled_Button * TimeF = NULL;
+Labeled_Button * TimeNow = NULL;
 Labeled_Button * TimeFF = NULL;
 Labeled_Button * TimeReal = NULL;
 Labeled_Button * TimePause = NULL;
@@ -291,7 +287,27 @@ void ToggleMilkyWayOnClicCallback(guiValue button,Component *)
 /*******************************************************************************/
 
 void TimeControlBtOnClicCallback(guiValue button,Component * caller)
-{   global.FlagVeryFastTime = false;
+{   
+	if(caller==TimeNow)
+    {	
+    	// init the time parameters with current time and date
+    	int d,m,y,hour,min,sec;
+    	time_t rawtime;
+    	tm * ptm;
+    	time ( &rawtime );
+    	ptm = gmtime ( &rawtime );
+    	y=ptm->tm_year+1900;
+    	m=ptm->tm_mon+1;
+    	d=ptm->tm_mday;
+    	hour=ptm->tm_hour;
+    	min=ptm->tm_min;
+    	sec=ptm->tm_sec;
+    	
+    	global.JDay=DateOps::dmyToDay(d,m,y);
+    	global.JDay+=((double)hour*HEURE+((double)min+(double)sec/60)*MINUTE);
+    	return;
+	}
+	global.FlagVeryFastTime = false;
     global.FlagAcceleredTime = false;
     global.FlagRealTime = false;
     if(caller==TimeFRW)
@@ -304,7 +320,7 @@ void TimeControlBtOnClicCallback(guiValue button,Component * caller)
     }
     if(caller==TimePause)
     {   global.TimeDirection= 1;
-    }
+	}
     if(caller==TimeReal)
     {   global.TimeDirection= 1;
         global.FlagRealTime=true;
@@ -754,31 +770,34 @@ Boston, MA  02111-1307, USA.\n"
 
 /**********************************************************************************/
 /*** Time control win ***/
-    TimeControlWin = new StdBtWin(gc->winW-120, gc->winH-lineHeight, 0, 0, "Time Control", Base);
-    TimeControlWin->setInSize(vec2_i(120,lineHeight+2),*gc);
+    TimeControlWin = new StdBtWin(gc->winW-140, gc->winH-lineHeight, 0, 0, "Time Control", Base);
+    TimeControlWin->setInSize(vec2_i(140,lineHeight+2),*gc);
     TimeControlWin->setHideCallback(TimeControlWinHideCallback);
 
     TimeControlContainer = new Container();
     int btXSize = 19;
     int btYSize = lineHeight;
-    TimeControlContainer->reshape(vec2_i(1,1),vec2_i(120,btYSize+2));
+    TimeControlContainer->reshape(1,1,140,btYSize+2);
     TimeFRW = new Labeled_Button("\2\2");
-    TimeFRW->reshape(vec2_i(0,0),vec2_i(btXSize,btYSize));
+    TimeFRW->reshape(0,0,btXSize,btYSize);
     TimeFRW->setOnClicCallback(TimeControlBtOnClicCallback);
     TimeRW = new Labeled_Button("\2");
-    TimeRW->reshape(vec2_i(btXSize+1,0),vec2_i(btXSize,btYSize));
+    TimeRW->reshape(btXSize+1,0,btXSize,btYSize);
     TimeRW->setOnClicCallback(TimeControlBtOnClicCallback);
     TimePause = new Labeled_Button("\4");
-    TimePause->reshape(vec2_i(btXSize*2+2,0),vec2_i(btXSize,btYSize));
+    TimePause->reshape(btXSize*2+2,0,btXSize,btYSize);
     TimePause->setOnClicCallback(TimeControlBtOnClicCallback);
+    TimeNow = new Labeled_Button("N");
+    TimeNow->reshape(btXSize*3+3,0,btXSize,btYSize);
+    TimeNow->setOnClicCallback(TimeControlBtOnClicCallback);
     TimeReal = new Labeled_Button("\5");
-    TimeReal->reshape(vec2_i(btXSize*3+3,0),vec2_i(btXSize,btYSize));
+    TimeReal->reshape(btXSize*4+4,0,btXSize,btYSize);
     TimeReal->setOnClicCallback(TimeControlBtOnClicCallback);
     TimeF = new Labeled_Button("\3");
-    TimeF->reshape(vec2_i(btXSize*4+4,0),vec2_i(btXSize,btYSize));
+    TimeF->reshape(btXSize*5+5,0,btXSize,btYSize);
     TimeF->setOnClicCallback(TimeControlBtOnClicCallback);
     TimeFF = new Labeled_Button("\3\3");
-    TimeFF->reshape(vec2_i(btXSize*5+5,0),vec2_i(btXSize,btYSize));
+    TimeFF->reshape(btXSize*6+6,0,btXSize,btYSize);
     TimeFF->setOnClicCallback(TimeControlBtOnClicCallback);
 
     TimeControlWin->reshape(vec2_i(gc->winW-1-TimeControlWin->getSize()[0], gc->winH-TimeControlWin->getSize()[1]),TimeControlWin->getSize());
@@ -786,6 +805,7 @@ Boston, MA  02111-1307, USA.\n"
     TimeControlContainer->addComponent(TimeFRW);
     TimeControlContainer->addComponent(TimeRW);
     TimeControlContainer->addComponent(TimePause);
+    TimeControlContainer->addComponent(TimeNow);
     TimeControlContainer->addComponent(TimeReal);
     TimeControlContainer->addComponent(TimeF);
     TimeControlContainer->addComponent(TimeFF);
