@@ -78,9 +78,9 @@ void ImageMgr::update(int delta_time) {
   }
 }
 
-void ImageMgr::draw(int screenw, int screenh) {
+void ImageMgr::draw(int screenw, int screenh, int vieww, int viewh) {
   for(vector<Image*>::iterator iter = active_images.begin(); iter != active_images.end(); ++iter) {
-    (*iter)->draw(screenw, screenh);
+    (*iter)->draw(screenw, screenh, vieww, viewh);
   }
 }
 

@@ -35,21 +35,25 @@ class Image
   void set_alpha(float alpha, float duration);
   void set_scale(float scale, float duration);
   void set_rotation(float rotation, float duration);
+  void set_location(float xpos, float ypos, float duration);
   bool update(int delta_time);  // update properties
-  void draw(int screenw, int screenh);
+  void draw(int screenw, int screenh, int vieww, int viewh);
   string get_name() { return image_name; };
 
  private:
   s_texture * image_tex;
   string image_name;
-  float image_x, image_y, image_scale, image_alpha, image_rotation;
-  float image_ratio;
+  float image_scale, image_alpha, image_rotation;
+  float image_ratio, image_xpos, image_ypos;
 
-  bool flag_alpha, flag_scale, flag_rotation;
+  bool flag_alpha, flag_scale, flag_rotation, flag_location;
   float coef_alpha, coef_scale, coef_rotation;
   float mult_alpha, mult_scale, mult_rotation;
   float start_alpha, start_scale, start_rotation;
   float end_alpha, end_scale, end_rotation;
+
+  float coef_location, mult_location;
+  float start_xpos, start_ypos, end_xpos, end_ypos;
 
 };
 

@@ -354,7 +354,7 @@ void stel_ui::updateConfigVariables(void)
 	core->MaxMagNebulaName = max_mag_nebula_name->getValue();
 	core->FlagPlanets = planets_cbx->getState();
 	core->FlagPlanetsHints = planets_hints_cbx->getState();
-	core->ssystem->get_moon()->set_sphere_scale(moon_x4_cbx->getState() ? core->moon_scale : 1.f);
+	core->ssystem->get_moon()->set_sphere_scale(moon_x4_cbx->getState() ? core->MoonScale : 1.f);
 	core->FlagEquatorialGrid = equator_grid_cbx->getState();
 	core->FlagAzimutalGrid = azimuth_grid_cbx->getState();
 	core->FlagEquatorLine = equator_cbx->getState();

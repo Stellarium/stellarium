@@ -35,7 +35,7 @@ public:
     virtual ~Hip_Star_mgr();
 	
 	void init(const string& font_fileName, const string& hipCatFile, const string& commonNameFile, const string& sciNameFile);
-	void load_common_names(const string& commonNameFile);
+	int load_common_names(const string& commonNameFile);
 	void load_sci_names(const string& sciNameFile);
     void draw(float star_scale, float star_mag_scale, float twinkle_amount, int name_ON, float maxMagStarName,
 		Vec3f equ_vision, tone_reproductor* _eye, Projector* prj, bool _gravity_label);	// Draw all the stars
