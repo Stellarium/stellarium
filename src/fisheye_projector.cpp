@@ -181,8 +181,13 @@ void Fisheye_projector::sSphere(GLdouble radius, GLint slices, GLint stacks, con
 	static GLint i, j, imin, imax;
 	static GLfloat nsign;
 
-	if (orient_inside) nsign = -1.0;
-	else nsign = 1.0;
+	if (orient_inside) {
+	  nsign = -1.0;
+	  t=0.0; // from inside texture is reversed
+	} else {
+	  nsign = 1.0;
+	  t=1.0;
+	}
 
 	drho = M_PI / (GLfloat) stacks;
 	dtheta = 2.0 * M_PI / (GLfloat) slices;
@@ -191,8 +196,8 @@ void Fisheye_projector::sSphere(GLdouble radius, GLint slices, GLint stacks, con
 	// t goes from -1.0/+1.0 at z = -radius/+radius (linear along longitudes)
 	// cannot use triangle fan on texturing (s coord. at top/bottom tip varies)
 	ds = 1.0 / slices;
-	dt = 1.0 / stacks;
-	t = 1.0;			// because loop now runs from 0
+	dt = nsign / stacks; // from inside texture is reversed
+
 	imin = 0;
 	imax = stacks;
 

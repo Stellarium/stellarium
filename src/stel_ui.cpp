@@ -465,7 +465,7 @@ Left Click       : Select Star\n\
 Right Click      : Clear Pointer\n\
 CTRL+Left Click  : Clear Pointer\n\
 SPACE : Center On Selected Object\n\
-ENTER : Equatorial/Altazimutal mount\n\
+ENTER : Equatorial/Altazimuthal mount\n\
 CTRL + S : Take a Screenshot\n\
 C   : Drawing of the Constellations\n\
 V   : Names of the Constellations\n\
