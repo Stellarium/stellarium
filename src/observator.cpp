@@ -210,6 +210,7 @@ string Observator::get_printable_date_UTC(double JD) const
 		case S_DATE_SYSTEM_DEFAULT : my_strftime(date, 254, "%x", &time_utc); break;
 		case S_DATE_MMDDYYYY : my_strftime(date, 254, "%m/%d/%Y", &time_utc); break;
 		case S_DATE_DDMMYYYY : my_strftime(date, 254, "%d/%m/%Y", &time_utc); break;
+		case S_DATE_YYYYMMDD : my_strftime(date, 254, "%Y-%m-%d", &time_utc); break;
 	}
 	return date;
 }
@@ -247,6 +248,7 @@ string Observator::get_printable_date_local(double JD) const
 		case S_DATE_SYSTEM_DEFAULT : my_strftime(date, 254, "%x", &time_local); break;
 		case S_DATE_MMDDYYYY : my_strftime(date, 254, "%m/%d/%Y", &time_local); break;
 		case S_DATE_DDMMYYYY : my_strftime(date, 254, "%d/%m/%Y", &time_local); break;
+		case S_DATE_YYYYMMDD : my_strftime(date, 254, "%Y-%m-%d", &time_local); break;
 	}
 
 	return date;
@@ -298,6 +300,7 @@ S_DATE_FORMAT Observator::string_to_s_date_format(const string& df) const
 	if (df == "system_default") return S_DATE_SYSTEM_DEFAULT;
 	if (df == "mmddyyyy") return S_DATE_MMDDYYYY;
 	if (df == "ddmmyyyy") return S_DATE_DDMMYYYY;
+	if (df == "yyyymmdd") return S_DATE_YYYYMMDD;  // iso8601
 	cout << "ERROR : unrecognized date_display_format : " << df << " system_default used." << endl;
 	return S_DATE_SYSTEM_DEFAULT;
 }
@@ -307,6 +310,7 @@ string Observator::s_date_format_to_string(S_DATE_FORMAT df) const
 	if (df == S_DATE_SYSTEM_DEFAULT) return "system_default";
 	if (df == S_DATE_MMDDYYYY) return "mmddyyyy";
 	if (df == S_DATE_DDMMYYYY) return "ddmmyyyy";
+	if (df == S_DATE_YYYYMMDD) return "yyyymmdd";
 	cout << "ERROR : unrecognized date_display_format value : " << df << " system_default used." << endl;
 	return "system_default";
 }
