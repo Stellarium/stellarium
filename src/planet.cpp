@@ -348,68 +348,68 @@ void planet::draw(int hint_ON, Projector* prj, const navigator * nav, const tone
 		  int flag_point, int flag_orbits, int flag_trails)
 {
 
-	Mat4d mat = mat_local_to_parent;
-	planet * p = parent;
-	while (p!=NULL && p->parent!=NULL)
+  Mat4d mat = mat_local_to_parent;
+  planet * p = parent;
+  while (p!=NULL && p->parent!=NULL)
+    {
+      mat = p->mat_local_to_parent * mat;
+      p = p->parent;
+    }
+
+  // This removed totally the planet shaking bug!!!
+  mat = nav->get_helio_to_eye_mat() * mat;
+
+  // Compute the 2D position and check if in the screen
+  float screen_sz = get_on_screen_size(prj, nav);
+  float viewport_left = prj->view_left();
+  float viewport_bottom = prj->view_bottom();
+  if (prj->project_custom(Vec3f(0,0,0), screenPos, mat) &&
+      screenPos[1]>viewport_bottom - screen_sz && screenPos[1]<viewport_bottom + prj->viewH()+screen_sz &&
+      screenPos[0]>viewport_left - screen_sz && screenPos[0]<viewport_left + prj->viewW() + screen_sz)
+    {
+      // Draw the name, and the circle if it's not too close from the body it's turning around
+      // this prevents name overlaping (ie for jupiter satellites)
+      float ang_dist = 300.f*atan(get_ecliptic_pos().length()/get_earth_equ_pos(nav).length())/prj->get_fov();
+      if (ang_dist==0.f) ang_dist = 1.f; // if ang_dist == 0, the planet is sun..
+	    
+      if( flag_orbits ) {
+	// by putting here, only draw orbit if planet is visible for clarity
+	draw_orbit(nav, prj);
+      }
+
+      if(flag_trails) draw_trail(nav, prj);
+	    
+      if (hint_ON && ang_dist>0.25)
 	{
-		mat = p->mat_local_to_parent * mat;
-		p = p->parent;
+	  if (ang_dist>1.f) ang_dist = 1.f;
+	  //glColor4f(0.5f*ang_dist,0.5f*ang_dist,0.7f*ang_dist,1.f*ang_dist);
+	  draw_hints(nav, prj);
 	}
-
-	// This removed totally the planet shaking bug!!!
-	mat = nav->get_helio_to_eye_mat() * mat;
-
-	// Compute the 2D position and check if in the screen
-	float screen_sz = get_on_screen_size(prj, nav);
-	float viewport_left = prj->view_left();
-	float viewport_bottom = prj->view_bottom();
-	if (prj->project_custom(Vec3f(0,0,0), screenPos, mat) &&
-		screenPos[1]>viewport_bottom - screen_sz && screenPos[1]<viewport_bottom + prj->viewH()+screen_sz &&
-		screenPos[0]>viewport_left - screen_sz && screenPos[0]<viewport_left + prj->viewW() + screen_sz)
+	    
+      if (rings && screen_sz>1)
 	{
-		// Draw the name, and the circle if it's not too close from the body it's turning around
-		// this prevents name overlaping (ie for jupiter satellites)
-		float ang_dist = 300.f*atan(get_ecliptic_pos().length()/get_earth_equ_pos(nav).length())/prj->get_fov();
-		if (ang_dist==0.f) ang_dist = 1.f; // if ang_dist == 0, the planet is sun..
-
-		if( flag_orbits ) {
-		  // by putting here, only draw orbit if planet if visible for clarity
-		  draw_orbit(nav, prj);
-		}
-
-		if(flag_trails) draw_trail(nav, prj);
-
-     	if (hint_ON && ang_dist>0.25)
-    	{
-			if (ang_dist>1.f) ang_dist = 1.f;
-			//glColor4f(0.5f*ang_dist,0.5f*ang_dist,0.7f*ang_dist,1.f*ang_dist);
-			draw_hints(nav, prj);
-        }
-
-		if (rings && screen_sz>1)
-		{
-			double dist = get_earth_equ_pos(nav).length();
-			double n,f;
-			prj->get_clipping_planes(&n, &f);	// Copy clipping planes
-			prj->set_clipping_planes(dist-rings->get_size()*2, dist+rings->get_size()*2);
-			glClear(GL_DEPTH_BUFFER_BIT);
-			glEnable(GL_DEPTH_TEST);
-			draw_sphere(prj, mat, screen_sz);
-			rings->draw(prj, mat);
-			glDisable(GL_DEPTH_TEST);
-			prj->set_clipping_planes(n ,f);	// Release old clipping planes
-		}
-		else draw_sphere(prj, mat, screen_sz);
-
-		if (flag_point)
-		{
-			if (tex_halo) draw_point_halo(nav, prj, eye);
-		}
-		else
-		{
-			if (tex_halo) draw_halo(nav, prj, eye);
-		}
-		if (tex_big_halo) draw_big_halo(nav, prj, eye);
+	  double dist = get_earth_equ_pos(nav).length();
+	  double n,f;
+	  prj->get_clipping_planes(&n, &f);	// Copy clipping planes
+	  prj->set_clipping_planes(dist-rings->get_size()*2, dist+rings->get_size()*2);
+	  glClear(GL_DEPTH_BUFFER_BIT);
+	  glEnable(GL_DEPTH_TEST);
+	  draw_sphere(prj, mat, screen_sz);
+	  rings->draw(prj, mat);
+	  glDisable(GL_DEPTH_TEST);
+	  prj->set_clipping_planes(n ,f);	// Release old clipping planes
+	}
+      else draw_sphere(prj, mat, screen_sz);
+	    
+      if (flag_point)
+	{
+	  if (tex_halo) draw_point_halo(nav, prj, eye);
+	}
+      else
+	{
+	  if (tex_halo) draw_halo(nav, prj, eye);
+	}
+      if (tex_big_halo) draw_big_halo(nav, prj, eye);
     }
 }
 
@@ -624,7 +624,7 @@ void planet::draw_big_halo(const navigator* nav, const Projector* prj, const ton
 	prj->reset_perspective_projection();		// Restore the other coordinate
 }
 
-void planet::create_stencil(const navigator* nav, const Projector *prj) {
+int planet::create_stencil(const navigator* nav, const Projector *prj) {
   // For lunar eclipse to work, set up stencil buffer here
   // convceivably this might be useful for other shadows
 
@@ -634,32 +634,54 @@ void planet::create_stencil(const navigator* nav, const Projector *prj) {
     // IGNORING projection distortions here and ASSUMING circular as
     // this is currently only used near lunar eclipses
 
-    prj->set_orthographic_projection();    // 2D coordinate
-
-    float screen_sz = get_on_screen_size(prj, nav);
-
-    glEnable(GL_STENCIL_TEST);
     glClear(GL_STENCIL_BUFFER_BIT);
     glClearStencil(0x0);
-    glColorMask(0,0,0,0);  // don't modify color buffer when setting up stencil
-    glStencilFunc(GL_ALWAYS, 0x1, 0x1);
-    glStencilOp(GL_ZERO, GL_REPLACE, GL_REPLACE);
 
-    // Draw the disk in the stencil buffer
-    glTranslatef(screenPos[0], screenPos[1],0.f);
-    glColor3f(1,1,1);
-    GLUquadricObj * p = gluNewQuadric();
-    gluDisk(p, 0., screen_sz/2, 256, 1);
-    gluDeleteQuadric(p);
-    glStencilFunc(GL_EQUAL, 0x1, 0x1);
-    glStencilOp(GL_KEEP, GL_KEEP, GL_KEEP);
+    Mat4d mat = mat_local_to_parent;
+    planet * p = parent;
+    while (p!=NULL && p->parent!=NULL)
+      {
+	mat = p->mat_local_to_parent * mat;
+	p = p->parent;
+      }
+    
+    mat = nav->get_helio_to_eye_mat() * mat;
 
-    glColorMask(1,1,1,1);
-    prj->reset_perspective_projection();
+    // first make sure moon is in field of view
+    float screen_sz = get_on_screen_size(prj, nav);
+    float viewport_left = prj->view_left();
+    float viewport_bottom = prj->view_bottom();
+    if (prj->project_custom(Vec3f(0,0,0), screenPos, mat) &&
+	screenPos[1]>viewport_bottom - screen_sz && screenPos[1]<viewport_bottom + prj->viewH()+screen_sz &&
+	screenPos[0]>viewport_left - screen_sz && screenPos[0]<viewport_left + prj->viewW() + screen_sz)
+      {
+	prj->set_orthographic_projection();    // 2D coordinate
 
-    glDisable(GL_STENCIL_TEST);
+	float screen_sz = get_on_screen_size(prj, nav);
+
+	glEnable(GL_STENCIL_TEST);
+	glColorMask(0,0,0,0);  // don't modify color buffer when setting up stencil
+	glStencilFunc(GL_ALWAYS, 0x1, 0x1);
+	glStencilOp(GL_ZERO, GL_REPLACE, GL_REPLACE);
+	
+	// Draw the disk in the stencil buffer
+	glTranslatef(screenPos[0], screenPos[1],0.f);
+	glColor3f(1,1,1);
+	GLUquadricObj * p = gluNewQuadric();
+	gluDisk(p, 0., screen_sz/2, 256, 1);
+	gluDeleteQuadric(p);
+	glStencilFunc(GL_EQUAL, 0x1, 0x1);
+	glStencilOp(GL_KEEP, GL_KEEP, GL_KEEP);
+	
+	glColorMask(1,1,1,1);
+	prj->reset_perspective_projection();
+	
+	glDisable(GL_STENCIL_TEST);
+	return 1;
+      }
+
   }
-
+  return 0;
 }
 
 ring::ring(float _radius, const string& _texname) : radius(_radius), tex(NULL)

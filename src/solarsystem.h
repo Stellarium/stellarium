@@ -85,8 +85,7 @@ private:
 	};
 
 	string dataDir;
-	s_texture *tex_earth_penumbra;  // for lunar eclipses
-	s_texture *tex_earth_umbra;  // for lunar eclipses
+	s_texture *tex_earth_shadow;  // for lunar eclipses
 };
 
 
