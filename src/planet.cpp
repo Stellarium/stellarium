@@ -152,15 +152,14 @@ void planet::draw(void)
             screenY = global.Y_Resolution - screenY;
 
             setOrthographicProjection(global.X_Resolution, global.Y_Resolution);    // 2D coordinate
- 
+            glEnable(GL_BLEND);
+            glDisable(GL_LIGHTING); 
             glColor3f(0.5,0.5,0.7);
-            float tmp = 0;//radius/navigation.get_fov();
-            planet_name_font->print((int)(screenX-tmp),(int)(screenY-tmp), name);
+            float tmp = 10.;//radius/navigation.get_fov();
+            planet_name_font->print((int)(screenX+tmp),(int)(screenY+tmp), name);
 
             // Draw the circle
-            glDisable(GL_TEXTURE_2D);
-            glDisable(GL_BLEND);
-            glDisable(GL_LIGHTING);
+			glDisable(GL_TEXTURE_2D);
             glBegin(GL_LINE_STRIP);
             for (float r = 0; r < 6.28; r += 0.2)
             {   
