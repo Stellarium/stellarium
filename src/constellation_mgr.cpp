@@ -317,13 +317,13 @@ void Constellation_mgr::draw_names(Projector* prj, bool _gravity_label)
 	if (names_fader==false) return;
 	
 	Constellation::gravity_label = _gravity_label;
-    glColor3fv(names_color*names_fader.get_interstate());
+	glColor3fv(names_color*names_fader.get_interstate());
     glEnable(GL_BLEND);
     glEnable(GL_TEXTURE_2D);
     prj->set_orthographic_projection();	// set 2D coordinate
-	if (selected)
-	{
-		selected->draw_name(asterFont, prj);
+	if (selected) {
+		if(prj->project_prec_earth_equ_check(selected->XYZname, selected->XYname) )
+			selected->draw_name(asterFont, prj);
 	}
 	else
 	{	
