@@ -22,6 +22,7 @@
 
 #include <vector>
 #include "constellation.h"
+#include "fader.h"
 
 class Constellation_mgr  
 {
@@ -55,9 +56,9 @@ private:
     string dataDir;
     string skyCulture;
     string skyLocale;
-	linear_switchor* art_switch;
-	linear_switchor* lines_switch;
-	linear_switchor* names_switch;
+	linear_fader* art_switch;
+	linear_fader* lines_switch;
+	linear_fader* names_switch;
 	Constellation* selected;
 };
 
