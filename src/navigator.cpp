@@ -163,7 +163,6 @@ void navigator::zoom_out(int s)
 
 void navigator::update_vision_vector(int delta_time)
 {
-
     if (flag_auto_move)
     {
 		equ_vision = move.aim*move.coef;

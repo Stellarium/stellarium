@@ -95,14 +95,14 @@ void CalcAtmosphere(void)
     b.zenith_ang_sun = M_PI_2-lat;
 
     b.ht_above_sea_in_meters = navigation.get_altitude();
-    b.latitude = navigation.get_latitude();
+    b.latitude = navigation.get_latitude()*M_PI/180.;
 
 	ln_date d;
 	get_date(navigation.get_JDay(),&d);
     b.year = d.years;
     b.month = d.months;
 
-    b.temperature_in_c = (M_PI_2-(float)fabs(b.latitude*100.)/100.)*20.+15.*cos(b.zenith_ang_sun)-0.01*b.ht_above_sea_in_meters;
+    b.temperature_in_c = 20;
     //printf("%f\n",b.temperature_in_c);
     b.relative_humidity = 30.;
 
@@ -120,27 +120,27 @@ void CalcAtmosphere(void)
     int resY = global.Y_Resolution;
     float stepY = (float)resY / skyResolution;
     int limY;
-    
+
     // Don't calc if under the ground
-    if (global.FlagGround)
+    /*if (global.FlagGround)
     {
         gluProject(1,0,0,M,P,V,objx,objy,objz);
         limY = (int)(skyResolution-(float)(*objy)/stepY+3.);
         if (!(limY<skyResolution+1)) limY = skyResolution+1;
     }
     else
-    {
+    {*/
         limY = skyResolution+1;
-    }
+    //}
 
     for (int x=0; x<skyResolution+1; x++)
-    {   
+    {
         for(int y=0; y<limY; y++)
-        {   
+        {
             gluUnProject(x*stepX,resY-y*stepY,1,M,P,V,objx,objy,objz);
             Vec3d point(*objx,*objy,*objz);
             point.normalize();
-            b.zenith_angle = M_PI_2-asin(point[1]);
+            b.zenith_angle = M_PI_2-asin(point[2]);
             b.dist_sun = acos(point.dot(sunPos));
             if (b.dist_sun<0) b.dist_sun=-b.dist_sun;
             compute_sky_brightness( &b);
