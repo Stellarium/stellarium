@@ -101,6 +101,12 @@ void Hip_Star_mgr::load(const string& font_fileName, const string& hipCatFile,
 	char ** commonNames = new char*[catalogSize];
 	char ** names = new char*[catalogSize];
 
+	for (unsigned int i=0; i<catalogSize; i++)
+	{
+		commonNames[i]=NULL;
+		names[i]=NULL;
+	}
+
 	int tmp;
 	char tmpName[20];
 
