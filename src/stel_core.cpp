@@ -524,6 +524,7 @@ void stel_core::load_config_from(const string& confFile)
 	PresetSkyTime 		= conf.get_double ("navigation","preset_sky_time",2451545.);
 	StartupTimeMode 	= conf.get_str("navigation:startup_time_mode");	// Can be "now" or "preset"
 	FlagEnableZoomKeys	= conf.get_boolean("navigation:flag_enable_zoom_keys");
+	FlagManualZoom	        = conf.get_boolean("navigation:flag_manual_zoom");
 	FlagEnableMoveKeys	= conf.get_boolean("navigation:flag_enable_move_keys");
 	InitFov				= conf.get_double ("navigation","init_fov",60.);
 	InitViewPos 		= str_to_vec3f(conf.get_str("navigation:init_view_pos").c_str());
@@ -654,6 +655,7 @@ void stel_core::save_config_to(const string& confFile)
 	conf.set_double ("navigation:preset_sky_time", PresetSkyTime);
 	conf.set_str	("navigation:startup_time_mode", StartupTimeMode);
 	conf.set_boolean("navigation:flag_enable_zoom_keys", FlagEnableZoomKeys);
+	conf.set_boolean("navigation:flag_manual_zoom", FlagManualZoom);
 	conf.set_boolean("navigation:flag_enable_move_keys", FlagEnableMoveKeys);
 	conf.set_double ("navigation:init_fov", InitFov);
 	conf.set_str	("navigation:init_view_pos", vec3f_to_str(InitViewPos));
@@ -997,19 +999,31 @@ stel_object * stel_core::clever_find(int x, int y) const
 // Go and zoom to the selected object.
 void stel_core::auto_zoom_in(float move_duration)
 {
+        float manual_move_duration;
+
 	if (!selected_object) return;
-
-	if (!navigation->get_flag_traking())
-	{
-		navigation->set_flag_traking(true);
-		navigation->move_to(selected_object->get_earth_equ_pos(navigation), move_duration, false, 1);
+  
+	if (!navigation->get_flag_traking()) {
+	  navigation->set_flag_traking(true);
+	  navigation->move_to(selected_object->get_earth_equ_pos(navigation), move_duration, false, 1);
+	  manual_move_duration = move_duration;
+	} else {
+	  // faster zoom in manual zoom mode once object is centered
+	  manual_move_duration = move_duration*.66f;
 	}
-	float satfov = selected_object->get_satellites_fov(navigation);
-	float closefov = selected_object->get_close_fov(navigation);
 
-	if (satfov>0. && projection->get_fov()*0.9>satfov) projection->zoom_to(satfov, move_duration);
-	else if (projection->get_fov()>closefov) projection->zoom_to(closefov, move_duration);
+	if( FlagManualZoom ) {
+	  // if manual zoom mode, user can zoom in incrementally
+	  float newfov = projection->get_fov()*0.5f;
+	  projection->zoom_to(newfov, manual_move_duration);
 
+	} else {
+	  float satfov = selected_object->get_satellites_fov(navigation);
+	  float closefov = selected_object->get_close_fov(navigation);
+
+	  if (satfov>0. && projection->get_fov()*0.9>satfov) projection->zoom_to(satfov, move_duration);
+	  else if (projection->get_fov()>closefov) projection->zoom_to(closefov, move_duration);
+	}
 }
 
 // Unzoom and go to the init position

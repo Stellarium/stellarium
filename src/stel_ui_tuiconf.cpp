@@ -146,6 +146,10 @@ void stel_ui::init_tui(void)
 	tui_effect_landscape->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb_tui_effect_change_landscape));
 	tui_menu_effects->addComponent(tui_effect_landscape);
 
+	tui_effect_manual_zoom = new s_tui::Boolean_item(false, "4.2 Manual zoom: ", "Yes","No");
+	tui_effect_manual_zoom->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb1));
+	tui_menu_effects->addComponent(tui_effect_manual_zoom);
+
 	// 5. Administration
 	tui_admin_loaddefault = new s_tui::ActionConfirm_item("5.1 Load Default Configuration: ");
 	tui_admin_loaddefault->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb_admin_load_default));
@@ -206,6 +210,9 @@ void stel_ui::tui_cb1(void)
 	core->MaxMagStarName 		= tui_star_labelmaxmag->getValue();
 	core->StarTwinkleAmount		= tui_stars_twinkle->getValue();
 	core->StarMagScale			= tui_star_magscale->getValue();
+
+	// 4. effects
+	core->FlagManualZoom 		= tui_effect_manual_zoom->getValue();
 }
 
 // Update all the tui widgets with values taken from the core parameters
