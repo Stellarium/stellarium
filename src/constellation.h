@@ -41,6 +41,7 @@ public:
 private:
     void draw_optim(Projector* prj) const;
     void draw_art_optim(Projector* prj, int delta_time);
+    void set_common_name(char *_name) { inter = strdup(_name); }
     char * name;
     char short_name[4];
     char * inter;

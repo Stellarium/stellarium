@@ -197,6 +197,7 @@ private:
 
 	// 3. General
 	s_tui::MultiSet_item<string>* tui_general_sky_culture;
+	s_tui::MultiSet_item<string>* tui_general_sky_locale;
 	s_tui::Boolean_item* tui_general_manual_zoom;
 
 	// 4. Stars
@@ -226,6 +227,7 @@ private:
 	void tui_cb_admin_updateme(void);		// Launch script for internet update
 	void tui_cb_tui_effect_change_landscape(void);	// Select a new landscape skin
 	void tui_cb_tui_general_change_sky_culture(void);  // select new sky culture
+	void tui_cb_tui_general_change_sky_locale(void);  // select new sky locale
 	void tui_cb_tui_admin_change_viewport(void);    // Set viewport offset
 
 	// Parse a file of type /usr/share/zoneinfo/zone.tab

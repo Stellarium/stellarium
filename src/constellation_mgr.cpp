@@ -23,7 +23,7 @@
 #include "constellation_mgr.h"
 
 // constructor which loads all data from appropriate files
-Constellation_mgr::Constellation_mgr(string _data_dir, string _sky_culture, Hip_Star_mgr *_hip_stars, string _font_filename, 
+Constellation_mgr::Constellation_mgr(string _data_dir, string _sky_culture, string _sky_locale, Hip_Star_mgr *_hip_stars, string _font_filename, 
 				     Vec3f _lines_color, Vec3f _names_color) :
   asterFont(NULL), lines_color(_lines_color), names_color(_names_color), hipStarMgr(_hip_stars), 
   dataDir( _data_dir), skyCulture(_sky_culture)
@@ -44,6 +44,10 @@ Constellation_mgr::Constellation_mgr(string _data_dir, string _sky_culture, Hip_
 
   load(dataDir + "sky_cultures/" + skyCulture + "/constellationship.fab",
        dataDir + "sky_cultures/" + skyCulture + "/constellationsart.fab", hipStarMgr);
+
+  // load translated labels
+  set_sky_locale(_sky_locale);
+  skyLocale = _sky_locale;
 
 }
 
@@ -108,6 +112,9 @@ void Constellation_mgr::set_sky_culture(string _sky_culture)
   printf( "Changing sky culture to %s\n", skyCulture.c_str() );
   load(dataDir + "sky_cultures/" + skyCulture + "/constellationship.fab",
        dataDir + "sky_cultures/" + skyCulture + "/constellationsart.fab", hipStarMgr);
+
+  // load translated labels
+  set_sky_locale(skyLocale);
 
 }
 
@@ -338,3 +345,48 @@ Constellation* Constellation_mgr::find_from_short_name(const string& shortname) 
     }
 	return NULL;
 }
+
+
+// update constellation names for a new locale
+void Constellation_mgr::set_sky_locale(const string& _sky_locale) {
+
+  vector<Constellation *>::const_iterator iter;
+
+  char short_name[4];
+  char cname[20];
+  Constellation* aster;
+
+  skyLocale = _sky_locale;
+
+  // clear previous names
+  for(iter=asterisms.begin();iter!=asterisms.end();++iter) {
+    (*iter)->set_common_name("");
+  }
+
+  // read in translated common names from file
+  FILE *cnFile;
+  cnFile = NULL;
+
+  string filename = dataDir + "sky_cultures/" + skyCulture + "/constellation_names." + _sky_locale + ".fab";
+  cnFile=fopen(filename.c_str(),"r");
+  if (!cnFile) {
+    printf("ERROR %s NOT FOUND\n",filename.c_str());
+    return;
+  }
+
+  // find matching constellation and update name
+  while(!feof(cnFile)) {
+    fscanf(cnFile,"%s\t%s\n",short_name,cname);
+
+    aster = find_from_short_name(string(short_name));
+
+    if( aster != NULL ) {
+      //      printf( "Found constellation %s (%s)\n", short_name, cname);
+      aster->set_common_name(cname);
+    }
+
+  }
+  fclose(cnFile);
+ 
+}
+
