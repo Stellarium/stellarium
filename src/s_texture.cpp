@@ -105,7 +105,7 @@ float s_texture::get_average_luminance(void) const
 	glGetTexLevelParameteriv(GL_TEXTURE_2D, 0, GL_TEXTURE_HEIGHT, &h);
 	GLfloat* p = (GLfloat*)calloc(w*h, sizeof(GLfloat));
 	glGetTexImage(GL_TEXTURE_2D, 0, GL_LUMINANCE, GL_FLOAT, p);
-	float sum = 0.;
+	float sum = 0.f;
 	for (int i=0;i<w*h;++i)
 	{
 		sum += p[i];
