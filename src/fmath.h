@@ -27,6 +27,21 @@
 # include "config.h"
 #endif
 
+#ifdef MACOSX
+# define acosf(x) (float)(acos(x))
+# define asinf(x) (float)(asin(x))
+# define atan2f(x) (float)(atan2(x))
+# define atanf(x) (float)(atan(x))
+# define cosf(x) (float)(cos(x))
+# define expf(x) (float)(exp(x))
+# define powf(x) (float)(pow(x))
+# define log10f(x) (float)(log10(x))
+# define logf(x) (float)(log(x))
+# define sinf(x) (float)(sin(x))
+# define sqrtf(x) (float)(sqrt(x))
+
+#else
+
 #ifndef HAVE_ACOSF
 # define acosf(x) (float)(acos(x))
 #endif
@@ -60,5 +75,7 @@
 #ifndef HAVE_SQRTF
 # define sqrtf(x) (float)(sqrt(x))
 #endif
+
+#endif /* #ifdef MACOSX */
 
 #endif /*_FMATH_H_*/
