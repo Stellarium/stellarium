@@ -84,6 +84,7 @@ private:
 	float fog_angle_shift;
 	float decor_alt_angle;
 	float decor_angle_shift;
+	float ground_angle_shift;
 };
 
 class Landscape_fisheye : public Landscape

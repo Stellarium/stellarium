@@ -148,10 +148,11 @@ void Landscape_old_style::load(const string& landscape_file, const string& secti
 	fog_tex_coord.tex_coords[2] = c;
 	fog_tex_coord.tex_coords[3] = d;
 
-	fog_alt_angle = pd.get_double(section_name, "fog_alt_angle", 10.);
-	fog_angle_shift = pd.get_double(section_name, "fog_angle_shift", -10.);
-	decor_alt_angle = pd.get_double(section_name, "decor_alt_angle", 10.);
-	decor_angle_shift = pd.get_double(section_name, "decor_angle_shift", -10.);
+	fog_alt_angle = pd.get_double(section_name, "fog_alt_angle", 0.);
+	fog_angle_shift = pd.get_double(section_name, "fog_angle_shift", 0.);
+	decor_alt_angle = pd.get_double(section_name, "decor_alt_angle", 0.);
+	decor_angle_shift = pd.get_double(section_name, "decor_angle_shift", 0.);
+	ground_angle_shift = pd.get_double(section_name, "ground_angle_shift", 0.);
 }
 
 void Landscape_old_style::draw(tone_reproductor * eye, const Projector* prj, const navigator* nav,
@@ -182,12 +183,11 @@ void Landscape_old_style::draw_fog(tone_reproductor * eye, const Projector* prj,
 // Draw the mountains with a few pieces of texture
 void Landscape_old_style::draw_decor(tone_reproductor * eye, const Projector* prj, const navigator* nav) const
 {
-	Mat4d mat = nav->get_local_to_eye_mat() * Mat4d::translation(Vec3d(0.,0.,radius*sinf(decor_angle_shift*M_PI/180.)));
+	Mat4d mat = nav->get_local_to_eye_mat();
 
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glEnable(GL_TEXTURE_2D);
-	glEnable(GL_BLEND);
-	glEnable(GL_CULL_FACE);
+
 	glColor3f(sky_brightness, sky_brightness, sky_brightness);
 	glPushMatrix();
 	glLoadMatrixd(mat);
@@ -196,10 +196,29 @@ void Landscape_old_style::draw_decor(tone_reproductor * eye, const Projector* pr
 	if (subdiv<=0) subdiv = 1;
 	float da = (2.*M_PI)/(nb_side*subdiv*nb_decor_repeat);
 	float dz = radius * sinf(decor_alt_angle*M_PI/180.f);
-	float z = 0;
+	float z = radius*sinf(ground_angle_shift*M_PI/180.);
 	float x,y;
 	float a;
 
+	glDisable(GL_BLEND);
+	glBindTexture(GL_TEXTURE_2D, ground_tex->getID());
+	glBegin(GL_TRIANGLE_STRIP);
+		glTexCoord2f (ground_tex_coord.tex_coords[0],ground_tex_coord.tex_coords[1]);
+		prj->sVertex3(-radius, -radius, z, mat);
+		glTexCoord2f (ground_tex_coord.tex_coords[2], ground_tex_coord.tex_coords[1]);
+		prj->sVertex3(-radius, radius, z, mat);
+		glTexCoord2f (ground_tex_coord.tex_coords[2], ground_tex_coord.tex_coords[3]);
+		prj->sVertex3(radius, radius, z, mat);
+		glTexCoord2f (ground_tex_coord.tex_coords[0], ground_tex_coord.tex_coords[3]);
+		prj->sVertex3(radius, -radius, z, mat);
+		glTexCoord2f (ground_tex_coord.tex_coords[0],ground_tex_coord.tex_coords[1]);
+		prj->sVertex3(-radius, -radius, z, mat);
+	glEnd ();		
+	
+	z=radius*sinf(decor_angle_shift*M_PI/180.);
+	glEnable(GL_BLEND);
+	glEnable(GL_CULL_FACE);	
+	
 	for (int n=0;n<nb_decor_repeat;++n)
 	{
 		a = 2.f*M_PI*n/nb_decor_repeat;
@@ -222,7 +241,6 @@ void Landscape_old_style::draw_decor(tone_reproductor * eye, const Projector* pr
 			glEnd();
 		}
 	}
-
 	glDisable(GL_CULL_FACE);
 	glPopMatrix();
 }
@@ -234,7 +252,7 @@ void Landscape_old_style::draw_ground(tone_reproductor * eye, const Projector* p
 	if (prj->get_type()==FISHEYE_PROJECTOR)
 	{
 		// Need to draw a half sphere ground
-		glColor3f(sky_brightness/2, sky_brightness/2, sky_brightness/2);
+		glColor3f(sky_brightness, sky_brightness, sky_brightness);
 		glEnable(GL_CULL_FACE);
 		glEnable(GL_TEXTURE_2D);
 		glDisable(GL_BLEND);
@@ -245,20 +263,21 @@ void Landscape_old_style::draw_ground(tone_reproductor * eye, const Projector* p
 	else
 	{
 		// Just a horizontal quad for the ground is enought
+		float z=radius*sinf(decor_angle_shift*M_PI/180.);
 		glPushMatrix();
-		glColor3f(sky_brightness/2, sky_brightness/2, sky_brightness/2);
+		glColor3f(sky_brightness, sky_brightness, sky_brightness);
 		glEnable(GL_TEXTURE_2D);
 		glDisable(GL_BLEND);
 		glBindTexture(GL_TEXTURE_2D, ground_tex->getID());
 		glBegin(GL_QUADS);
 			glTexCoord2f (ground_tex_coord.tex_coords[0],ground_tex_coord.tex_coords[1]);
-			glVertex3f (-radius/2, -radius/2, -0.01f);
+			glVertex3f (-radius/2, -radius/2, 0);
 			glTexCoord2f (ground_tex_coord.tex_coords[2], ground_tex_coord.tex_coords[1]);
-			glVertex3f(-radius/2, radius/2, -0.01f);
+			glVertex3f(-radius/2, radius/2, 0);
 			glTexCoord2f (ground_tex_coord.tex_coords[2], ground_tex_coord.tex_coords[3]);
-			glVertex3f( radius/2, radius/2, -0.01f);
+			glVertex3f( radius/2, radius/2, 0);
 			glTexCoord2f (ground_tex_coord.tex_coords[0], ground_tex_coord.tex_coords[3]);
-			glVertex3f( radius/2, -radius/2, -0.01f);
+			glVertex3f( radius/2, -radius/2, 0);
 		glEnd ();
 		glPopMatrix();
 	}

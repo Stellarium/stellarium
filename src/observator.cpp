@@ -166,8 +166,15 @@ string Observator::get_time_zone_name_from_system(double JD) const
 // Fixed 31-05-2004 Now use the extern variables set by tzset()
 float Observator::get_GMT_shift_from_system(double JD) const
 {
+#if defined( MACOSX )
+	struct tm *timeinfo;
+	time_t rawtime; time(&rawtime);
+	timeinfo = localtime(&rawtime);
+	return (float)timeinfo->tm_gmtoff/3600 + (timeinfo->tm_isdst!=0);
+#else
 	return -(float)timezone/3600 + (daylight!=0);
 
+#endif
 	
 /*	time_t rawtime = get_time_t_from_julian(JD);
 
