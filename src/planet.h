@@ -67,7 +67,7 @@ private:
 class planet : public stel_object
 {
 public:
-	planet(const char * _name, int _flagHalo, int _flag_lighting, double _radius, vec3_t _color,
+	planet(const char * _name, int _flagHalo, int _flag_lighting, double _radius, Vec3f _color,
 	float _albedo, const char* tex_map_name, const char* tex_halo_name, pos_func_type _coord_func);
 
     virtual ~planet();

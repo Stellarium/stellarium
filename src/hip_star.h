@@ -38,7 +38,7 @@ public:
     int read(FILE * pFile);	// Read the star data in the stream
     void draw(void);		// Draw the star
     void draw_name(s_font * star_font);
-	vec3_t get_RGB(void) const {return RGB;}
+	Vec3f get_RGB(void) const {return RGB;}
 	void get_info_string(char * s, navigator * nav = NULL) const;
 	unsigned char get_type(void) const {return STEL_OBJECT_STAR;}
 	Vec3d get_earth_equ_pos(navigator* nav=NULL) const {return Vec3d(XYZ[0],XYZ[1],XYZ[2]);}

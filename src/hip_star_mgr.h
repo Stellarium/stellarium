@@ -37,7 +37,7 @@ public:
     void save(void);                    	// Debug function
     // Load all the stars from the files
     void load(char * font_fileName, char * hipCatFile, char * commonNameFile, char * nameFile);
-    Hip_Star * search(vec3_t Pos);  	// Search the star by position
+    Hip_Star * search(Vec3f Pos);  	// Search the star by position
 	Hip_Star * search(unsigned int);	// Search the star by HP number
 private:
 	vector<Hip_Star*>* starZones;       // array of star vector with the grid id as array rank

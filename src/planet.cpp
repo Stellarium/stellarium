@@ -29,7 +29,7 @@ rotation_elements::rotation_elements() : period(1.), offset(0.), epoch(J2000),
 {
 }
 
-planet::planet(const char * _name, int _flagHalo, int _flag_lighting, double _radius, vec3_t _color,
+planet::planet(const char * _name, int _flagHalo, int _flag_lighting, double _radius, Vec3f _color,
 	float _albedo, const char* tex_map_name, const char* tex_halo_name, pos_func_type _coord_func) :
 		name(NULL), flagHalo(_flagHalo), flag_lighting(_flag_lighting), radius(_radius), color(_color),
 		albedo(_albedo), axis_rotation(0.),	tex_map(NULL), tex_halo(NULL), rings(NULL), lastJD(J2000),
@@ -60,7 +60,7 @@ void planet::get_info_string(char * s, navigator * nav) const
 {
 	double tempDE, tempRA;
 	Vec3d equPos = get_earth_equ_pos(nav);
-	rect_to_sphe(&tempRA,&tempDE,&equPos);
+	rect_to_sphe(&tempRA,&tempDE,equPos);
 	sprintf(s,"Name :%s\nRA : %s\nDE : %s\n Distance : %.8f UA",
 	name, print_angle_hms(tempRA*180./M_PI), print_angle_dms_stel(tempDE*180./M_PI), equPos.length());
 }
@@ -81,7 +81,7 @@ void planet::set_rotation_elements(float _period, float _offset, double _epoch, 
 Vec3d planet::get_earth_equ_pos(navigator * nav) const
 {
 	Vec3d v = get_heliocentric_ecliptic_pos();
-	return nav->helio_to_earth_pos_equ(&v); 	// this is earth equatorial but centered
+	return nav->helio_to_earth_pos_equ(v);		// this is earth equatorial but centered
 												// on observer's position (latitude, longitude)
 	//return navigation.helio_to_earth_equ(&v); this is the real equatorial centered on earth center
 }

@@ -46,6 +46,9 @@ stel_core::~stel_core()
 	if (nebulas) delete nebulas;
 	if (equ_grid) delete equ_grid;
 	if (azi_grid) delete azi_grid;
+	if (equator_line) delete equator_line;
+	if (ecliptic_line) delete ecliptic_line;
+	if (cardinals_points) delete cardinals_points;
 	if (atmosphere) delete atmosphere;
 	if (tone_converter) delete tone_converter;
 	if (ssystem) delete ssystem;
@@ -83,12 +86,17 @@ void stel_core::init(void)
 	projection = new Projector(screen_W, screen_H, 60.);
 	equ_grid = new SkyGrid(EQUATORIAL);
 	azi_grid = new SkyGrid(ALTAZIMUTAL);
-
+	equator_line = new SkyLine(EQUATOR);
+	ecliptic_line = new SkyLine(ECLIPTIC);
 	// Temporary strings for file names
     char tempName[255];
     char tempName2[255];
     char tempName3[255];
     char tempName4[255];
+
+    strcpy(tempName,DataDir);
+    strcat(tempName,"spacefont.txt");
+	cardinals_points = new Cardinals(tempName, "spacefont");
 
     // Load hipparcos stars & names
     strcpy(tempName,DataDir);
@@ -144,7 +152,6 @@ void stel_core::init(void)
 	// Compute transform matrices between coordinates systems
 	navigation->update_transform_matrices((ssystem->get_earth())->get_ecliptic_pos());
 	navigation->set_local_vision(Vec3d(1.,0.,0.3));
-
 }
 
 
@@ -179,10 +186,10 @@ void stel_core::update(int delta_time)
 	// Update info about selected object
 	if (selected_object) selected_object->update();
 
-	// compute global sky brightness TODO : function to include in skylight.cpp correctly made
+	// compute global sky brightness TODO : make this more "scientifically"
 	// Compute the sun position in local coordinate
 	Vec3d temp(0.,0.,0.);
-	Vec3d sunPos = navigation->helio_to_local(&temp);
+	Vec3d sunPos = navigation->helio_to_local(temp);
 	sunPos.normalize();
 	if (FlagAtmosphere) sky_brightness = sunPos[2];
 	else sky_brightness = 0.1;
@@ -230,19 +237,18 @@ void stel_core::draw(int delta_time)
 		MaxMagStarName, temp, tone_converter, projection);
 	}
 
+	// Draw the celestial equator line
+    if (FlagEquator) equator_line->draw(projection);
+	// Draw the ecliptic line
+    if (FlagEcliptic) ecliptic_line->draw(projection);
+
 	// Draw the equatorial grid
 	if (FlagEquatorialGrid) equ_grid->draw(projection);
-
-
-	// TODO : make a nice class for lines management
-    //if (FlagEquator) DrawEquator();		// Draw the celestial equator line
-    //if (FlagEcliptic) DrawEcliptic();	// Draw the ecliptic line
+	// Draw the altazimutal grid
+    if (FlagAzimutalGrid) azi_grid->draw(projection);
 
 	// Draw the pointer on the currently selected object
     if (selected_object) selected_object->draw_pointer(delta_time, projection, navigation);
-
-	// Set openGL drawings in heliocentric coordinates
-	navigation->switch_to_heliocentric();
 
 	// Draw the planets
 	if (FlagPlanets) ssystem->draw(FlagPlanetsHints, projection, navigation);
@@ -252,12 +258,12 @@ void stel_core::draw(int delta_time)
 
 	// Compute the sun position in local coordinate
 	Vec3d temp2(0.,0.,0.);
-	Vec3d sunPos = navigation->helio_to_local(&temp2);
+	Vec3d sunPos = navigation->helio_to_local(temp2);
 	sunPos.normalize();
 
 	// Compute the moon position in local coordinate
 	temp2 = ssystem->get_moon()->get_heliocentric_ecliptic_pos();
-	Vec3d moonPos = navigation->helio_to_local(&temp2);
+	Vec3d moonPos = navigation->helio_to_local(temp2);
 	moonPos.normalize();
 
 	// Compute the atmosphere color
@@ -273,10 +279,6 @@ void stel_core::draw(int delta_time)
 	// Draw the atmosphere
 	if (FlagAtmosphere)	atmosphere->draw(projection);
 
-
-	// Draw the altazimutal grid
-    if (FlagAzimutalGrid) azi_grid->draw(projection);
-
 	// Normal transparency mode
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
@@ -291,7 +293,7 @@ void stel_core::draw(int delta_time)
     if (FlagFog) DrawFog(sky_brightness);
 
 	// Daw the cardinal points
-    if (FlagCardinalPoints) DrawCardinaux(projection);
+    if (FlagCardinalPoints) cardinals_points->draw(projection);
 
     // ---- 2D Displays
     ui->draw();
@@ -380,16 +382,8 @@ void stel_core::load_config(void)
 void stel_core::load_base_textures(void)
 {
     printf("Loading common textures...\n");
-    texIds[2] = new s_texture("voielactee256x256",TEX_LOAD_TYPE_PNG_SOLID);
     texIds[3] = new s_texture("fog",TEX_LOAD_TYPE_PNG_SOLID);
-    texIds[6] = new s_texture("n");
-    texIds[7] = new s_texture("s");
-    texIds[8] = new s_texture("e");
-    texIds[9] = new s_texture("w");
-    texIds[10]= new s_texture("zenith");
-
-    texIds[25]= new s_texture("etoile32x32",TEX_LOAD_TYPE_PNG_SOLID);
-    texIds[11]= new s_texture("nadir");
+    texIds[2] = new s_texture("voielactee256x256",TEX_LOAD_TYPE_PNG_SOLID);
 
     switch (landscape_number)
     {

@@ -25,7 +25,7 @@
 #include "s_font.h"
 #include "navigator.h"
 
-#define RADIUS_NEB 28.
+#define RADIUS_NEB 1.
 
 Nebula_mgr::Nebula_mgr() : nebulaFont(NULL)
 {
@@ -106,7 +106,7 @@ void Nebula_mgr::Draw(int names_ON, Projector* prj)
 }
 
 // Look for a nebulae by XYZ coords
-stel_object * Nebula_mgr::search(vec3_t Pos)
+stel_object * Nebula_mgr::search(Vec3f Pos)
 {
 	Pos.normalize();
     vector<Nebula *>::iterator iter;

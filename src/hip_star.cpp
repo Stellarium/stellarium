@@ -24,7 +24,7 @@
 #include "stellastro.h"
 #include "stel_utility.h"
 
-#define RADIUS_STAR 25.
+#define RADIUS_STAR 1.
 
 // Init Static variables
 float Hip_Star::twinkle_amount = 10.f;
@@ -47,7 +47,7 @@ Hip_Star::~Hip_Star()
 void Hip_Star::get_info_string(char * s, navigator * nav) const
 {
 	float tempDE, tempRA;
-	rect_to_sphe(&tempRA,&tempDE,&XYZ);
+	rect_to_sphe(&tempRA,&tempDE,XYZ);
 	sprintf(s,"Name :%s %s\nHip : %.4d\nRA : %s\nDE : %s\nMag : %.2f",
 		CommonName==NULL ? "-" : CommonName,
 		Name==NULL ? "-" : Name, HP, print_angle_hms(tempRA*180./M_PI),
@@ -79,7 +79,7 @@ int Hip_Star::read(FILE * catalog)
 	LE_TO_CPU_INT16(type, type);
 
     // Calc the Cartesian coord with RA and DE
-    sphe_to_rect(RA,DE,&XYZ);
+    sphe_to_rect(RA,DE,XYZ);
 
     XYZ*=RADIUS_STAR;
 
