@@ -304,32 +304,22 @@ void pressKey(Uint8 *keys)
 }
 
 // *******************  Stop mooving and zooming  **********************
-void releaseKey(Uint8 key)
+void releaseKey(SDLKey key)
 {   
     // When a deplacement key is released stop mooving
-    switch (key)
+    if (key==SDLK_LEFT || key==SDLK_RIGHT) global.deltaAz = 0;
+    if (key==SDLK_UP || key==SDLK_DOWN)
     {
-    case SDLK_LEFT :
-    case SDLK_RIGHT : 
-	global.deltaAz = 0;
-	break;
-    case SDLK_UP : 
-    case SDLK_DOWN :
-    
-	if (SDL_GetModState() & KMOD_CTRL)
-	{
-		global.deltaFov = 0;
+		if (SDL_GetModState() & KMOD_CTRL)
+		{
+			global.deltaFov = 0;
+		}
+		else
+		{
+			global.deltaAlt = 0;
+		}
 	}
-	else
-	{
-		global.deltaAlt = 0;
-	}
-	break;
-    case SDLK_PAGEUP :
-    case SDLK_PAGEDOWN :
-	global.deltaFov = 0;
-	break;
-    }
+    if (key==SDLK_PAGEUP || key==SDLK_PAGEDOWN)	global.deltaFov = 0;
 }
 
 bool InitTimers(Uint32 *C)   // This Is Used To Init All The Timers In Our Application
