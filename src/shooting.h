@@ -29,17 +29,17 @@ class ShootingStar
 //friend class ShootingStar_mgr;
 
 public:
-    ShootingStar(int frame);
+    ShootingStar();
     virtual ~ShootingStar();
-    void Draw(int frame);            // Draw the shootingstar
+    void Draw();            // Draw the shootingstar
 	int IsDead(void){return Dead;}
 private:
     float Mag;              // Apparent magnitude
     vec3_t XYZ0;            // Cartesian initial position
-	vec3_t XYZ;				// Parametric coefs
+	vec3_t XYZ1;			// Parametric coefs
+	float coef;
     vec3_t RGB;             // 3 RGB colour values
     double XY[2];           // 2D Position
-	int BirthDate;			// Date of creation of the shooting star
 	s_texture *ShootTexture;// texture ID
 	int Dead;
 };

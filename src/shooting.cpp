@@ -19,35 +19,26 @@
 
 #include "shooting.h"
 
-ShootingStar::ShootingStar(int frame) : 
-	BirthDate(frame),
-	Dead(0)	 
+ShootingStar::ShootingStar() : 
+	Dead(0),
+	coef(0)
 {	
 	ShootTexture = new s_texture("etoile32x32");
-	XYZ0.Set(500.,500,0);
-	XYZ=XYZ0 * -1;
+	XYZ0.Set(000.,500,0);
+	XYZ1.Set(1000.,40,0);
+	XYZ0.Normalize();
+	XYZ1.Normalize();
 	
-	XYZ.Normalize();
-	
-	XYZ[0] += 0.4*rand()/RAND_MAX-0.2;
-	XYZ[1] += 0.4*rand()/RAND_MAX-0.2;
-	XYZ[2] += 0.4*rand()/RAND_MAX-0.2;
 }
 
 ShootingStar::~ShootingStar()
 {   
 }
 
-void ShootingStar::Draw(int frame)
+void ShootingStar::Draw()
 {
-	if (frame-BirthDate>1000) 
-	{
-		Dead=1;
-		return;
-	}
-
     double z;
-    glColor3f(0.7, 0.7, 1.0);
+    glColor3f(1.0, 1.0, 1.0);
     GLdouble M[16];
     GLdouble P[16];
     GLint V[4];
@@ -59,11 +50,23 @@ void ShootingStar::Draw(int frame)
     glPushMatrix();
     glLoadIdentity();
 
+	vec3_t XYZ;
 	
+	XYZ=XYZ1*coef;
+	vec3_t temp = XYZ0*(1.0-coef);
+	XYZ+=temp;
+	XYZ.Normalize();
+	coef+=0.02;//speed;
+	if (coef>=1.)
+	{   
+		Dead=1;
+		glPopMatrix();
+    	resetPerspectiveProjection();
+		return;
+	}
 
-	gluProject(XYZ0[0]+XYZ[0]*(frame-BirthDate),
-				XYZ0[1]+XYZ[1]*(frame-BirthDate),
-				XYZ0[2]+XYZ[2]*(frame-BirthDate),M,P,V,&XY[0],&XY[1],&z);
+
+	gluProject(XYZ[0], XYZ[1], XYZ[2],M,P,V,&XY[0],&XY[1],&z);
     // Check if in the field of view, if not return
     if (z>=1 || XY[0]<0 || XY[0]>global.X_Resolution ||
 		XY[1]<0 || XY[1]>global.Y_Resolution) 
@@ -72,12 +75,11 @@ void ShootingStar::Draw(int frame)
     	resetPerspectiveProjection();
 		return;
 	}
-	float rmag=5.;
+	float rmag=10.;
 
     glEnable(GL_TEXTURE_2D);
     glEnable(GL_BLEND);
     glBindTexture (GL_TEXTURE_2D, ShootTexture->getID());
-
 
     glTranslatef(XY[0],global.Y_Resolution-XY[1],0);
     glBegin(GL_QUADS );

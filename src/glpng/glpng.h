@@ -28,7 +28,7 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-
+/*
 #ifdef _MSC_VER
 	#ifdef _DEBUG
 		#pragma comment (lib, "glpngd.lib")
@@ -36,7 +36,7 @@ extern "C" {
 		#pragma comment (lib, "glpng.lib")
 	#endif
 #endif
-
+*/
 /* Start modif */
 /* Fabien chereau 11/08/2002 */
 #ifndef APIENTRY

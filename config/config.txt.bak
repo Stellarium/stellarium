@@ -28,7 +28,7 @@ BBP_MODE = 32
 
 ######## Option settings ########
 # Initial values of various options, some can be changed during the execution, some can't.
-LANDSCAPE_NUMBER = 1                # Number of the landscape skin : 1 sea, 2 rocky mountains, 3 snowy mountains
+LANDSCAPE_NUMBER = 3                # Number of the landscape skin : 1 sea, 2 rocky mountains, 3 snowy mountains
 STAR_SCALE = 3.8                    # Set the star scaling, the more it is the bigger are the stars
 STAR_TWINKLE_AMOUNT = 1.5           # Change the star twinkling amount (value between 0 and 10)
 FLAG_FOLLOW_EARTH = true            # Activate the Compensation of the earth rotation.
@@ -67,7 +67,7 @@ FLAG_UTC_TIME = false               # Display time in UTC format (Greenwich time
 # default date is today
 # modify and uncomment next line to choose another date
 #DATE = mm/dd/yyyy
-#DATE = 09/17/1980
+DATE = 11/10/1986
 
 # default time is now (UT time)
 # modify and uncomment next line to choose another time

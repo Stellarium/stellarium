@@ -39,10 +39,10 @@ pkglibdir = $(libdir)/stellarium
 pkgincludedir = $(includedir)/stellarium
 top_builddir = ../..
 
-ACLOCAL = ${SHELL} /home/Fabien/work2/stellarium/missing --run aclocal
-AUTOCONF = ${SHELL} /home/Fabien/work2/stellarium/missing --run autoconf
-AUTOMAKE = ${SHELL} /home/Fabien/work2/stellarium/missing --run automake
-AUTOHEADER = ${SHELL} /home/Fabien/work2/stellarium/missing --run autoheader
+ACLOCAL = aclocal
+AUTOCONF = autoconf
+AUTOMAKE = automake
+AUTOHEADER = autoheader
 
 am__cd = CDPATH="$${ZSH_VERSION+.}$(PATH_SEPARATOR)" && cd
 INSTALL = /usr/bin/install -c
@@ -58,17 +58,13 @@ POST_INSTALL = :
 NORMAL_UNINSTALL = :
 PRE_UNINSTALL = :
 POST_UNINSTALL = :
-build_alias = 
-build_triplet = i686-pc-cygwin
 host_alias = 
 host_triplet = i686-pc-cygwin
-target_alias = 
-target_triplet = i686-pc-cygwin
 
 EXEEXT = .exe
 OBJEXT = o
 PATH_SEPARATOR = :
-AMTAR = ${SHELL} /home/Fabien/work2/stellarium/missing --run tar
+AMTAR = tar
 AWK = gawk
 CC = gcc
 CPP = gcc -E
@@ -85,7 +81,7 @@ X_LIBS =
 X_PRE_LIBS = 
 am__include = include
 am__quote = 
-install_sh = /home/Fabien/work2/stellarium/install-sh
+install_sh = /home/Fabien/work/stellarium/install-sh
 
 noinst_LIBRARIES = libglpng.a
 
@@ -116,7 +112,7 @@ DEFS = -DPACKAGE=\"stellarium\" -DVERSION=\"0.4.9\" -DX_DISPLAY_MISSING=1 -DHAVE
 DEFAULT_INCLUDES =  -I. -I$(srcdir)
 CPPFLAGS = 
 LDFLAGS = 
-LIBS =   -lopengl32 -lglu32 -lglut32 -lm
+LIBS =  -lm  -lopengl32 -lglu32 -lglut32 
 depcomp = $(SHELL) $(top_srcdir)/depcomp
 DEP_FILES = $(DEPDIR)/adler32.Po $(DEPDIR)/crc32.Po \
 	$(DEPDIR)/glpng.Po $(DEPDIR)/infblock.Po \
@@ -133,7 +129,7 @@ COMPILE = $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) \
 	$(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
 CCLD = $(CC)
 LINK = $(CCLD) $(AM_CFLAGS) $(CFLAGS) $(AM_LDFLAGS) $(LDFLAGS) -o $@
-CFLAGS = -Wall -O3 -ffast-math -fexpensive-optimizations
+CFLAGS = -Wall -O2 -ffast-math -fexpensive-optimizations  
 DIST_SOURCES = $(libglpng_a_SOURCES)
 DIST_COMMON = Makefile.am Makefile.in
 SOURCES = $(libglpng_a_SOURCES)
