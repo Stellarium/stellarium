@@ -37,7 +37,7 @@ planet::planet(const string& _name, int _flagHalo, int _flag_lighting, double _r
 	float _albedo, const string& tex_map_name, const string& tex_halo_name, pos_func_type _coord_func) :
 		name(_name), flagHalo(_flagHalo), flag_lighting(_flag_lighting), radius(_radius), color(_color),
 		albedo(_albedo), axis_rotation(0.),	tex_map(NULL), tex_halo(NULL), tex_big_halo(NULL), rings(NULL),
-		sphere_scale(1.f), lastJD(J2000), deltaJD(JD_SECOND), coord_func(_coord_func), parent(NULL)
+		sphere_scale(1.f), lastJD(J2000), last_orbitJD(0), deltaJD(JD_SECOND), coord_func(_coord_func), parent(NULL)
 {
 	ecliptic_pos=Vec3d(0.,0.,0.);
 	mat_local_to_parent = Mat4d::identity();

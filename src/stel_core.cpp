@@ -324,8 +324,6 @@ void stel_core::draw(int delta_time)
 	  // plus makes viewing orbits easier when center on Sun
 	  if( FlagPlanetsOrbits && selected_planet && selected_planet->get_name() != "Sun") {
 	    // draw orbit only for selected planet
-
-	    printf("selected %s\n", selected_planet->get_name().c_str());
 	    selected_planet->draw_orbit(navigation, projection);
 	  }
 	  ssystem->draw(FlagPlanetsHints, projection, navigation, tone_converter,
