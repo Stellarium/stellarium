@@ -81,7 +81,7 @@ void planet::get_info_string(char * s, const navigator * nav) const
 
 	Vec3d equPos = get_earth_equ_pos(nav);
 	rect_to_sphe(&tempRA,&tempDE,equPos);
-	sprintf(s,_("Name :%s%s\nRA : %s\nDE : %s\nDistance : %.8f UA\nMagnitude : %.2f"),
+	sprintf(s,_("Name :%s%s\nRA : %s\nDE : %s\nDistance : %.8f AU\nMagnitude : %.2f"),
 			common_name.c_str(), scale_str, print_angle_hms(tempRA*180./M_PI).c_str(), print_angle_dms_stel(tempDE*180./M_PI).c_str(), equPos.length(),
 			compute_magnitude(nav->get_observer_helio_pos()));
 }
