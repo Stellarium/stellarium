@@ -21,6 +21,7 @@
 
 #include "glpng.h"
 #include "s_texture.h"
+#include "stellarium.h"
 
 string s_texture::texDir = "./";
 string s_texture::suffix = "";
@@ -110,5 +111,11 @@ float s_texture::get_average_luminance(void) const
 		sum += p[i];
 	}
 	free(p);
+
+#ifdef NVIDIA
+	return sum*2.56f/(w*h);
+#else
 	return sum/(w*h);
+#endif
+
 }
