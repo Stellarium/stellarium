@@ -19,6 +19,8 @@
 
 #include <string>
 #include <iostream>
+#include "SDL.h"
+
 #include "stellarium.h"
 #include "stel_core.h"
 #include "stel_sdl.h"

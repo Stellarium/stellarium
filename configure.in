@@ -35,6 +35,16 @@ AC_PATH_XTRA
 LIBS="$LIBS $X_LIBS"
 CFLAGS="$CFLAGS $X_CFLAGS"
 
+dnl Check for SDL
+SDL_VERSION=1.2.0
+AM_PATH_SDL($SDL_VERSION,
+           	:,
+           	AC_MSG_ERROR([*** SDL version $SDL_VERSION not found!])
+)
+CFLAGS="$CFLAGS $SDL_CFLAGS"
+CXXFLAGS="$CXXFLAGS $SDL_CFLAGS"
+LIBS="$LIBS $SDL_LIBS"
+
 dnl assign the package directory variable
 if test "$prefix" = "NONE" ; then
    prefix=$ac_default_prefix
@@ -51,10 +61,6 @@ case "$host" in
 	LDFLAGS="$LDFLAGS -flat_namespace -undefined suppress -lz "
 	LIBS="$LIBS -framework OpenGL -lobjc "
 	AC_CHECK_HEADERS(byteswap.h)
-	AM_PATH_SDL
-	LIBS="$LIBS $SDL_LIBS"
-	CFLAGS="$CFLAGS $SDL_CFLAGS"
-	CXXFLAGS="$CXXFLAGS $SDL_CFLAGS"
 ;;
 
 dnl CYGWIN
@@ -62,11 +68,6 @@ dnl CYGWIN
 	AC_DEFINE_UNQUOTED(CYGWIN,1, [If we are on cygwin plateform.])
 	LIBS="$LIBS -lopengl32 -lglu32"
 	AC_CHECK_HEADERS(byteswap.h)
-	dnl Check for SDL.
-	AM_PATH_SDL
-	LIBS="$LIBS $SDL_LIBS"
-	CFLAGS="$CFLAGS $SDL_CFLAGS"
-	CXXFLAGS="$CXXFLAGS $SDL_CFLAGS"
 ;;
 
 dnl MINGW32
@@ -74,8 +75,6 @@ dnl MINGW32
 	AC_DEFINE_UNQUOTED(MINGW32,1, [If we are on mingw32 plateform.])
 	LIBS="$LIBS -lopengl32 -lglu32"
 	AC_CHECK_HEADERS(byteswap.h)
-	AC_CHECK_HEADER(GL/gl.h,,AC_MSG_ERROR(gl.h not found - please install OpenGL))
-	AC_CHECK_HEADER(GL/glu.h,,AC_MSG_ERROR(glu.h not found - please install GLU))
 	dnl Check for SDL but can't use AM_PATH_DSDL on Mingw : it crashes..
 	dnl So directly call the utility and add an include directory by hand..
 	LIBS="$LIBS `sdl-config --libs`"
@@ -86,22 +85,11 @@ dnl MINGW32
 dnl Cross-compiling MINGW32
 i386-pc-mingw32msvc)
 	AC_DEFINE_UNQUOTED(MINGW32,1, [If we are on mingw32 plateform.])
-	AM_PATH_SDL
-	LIBS="$LIBS $SDL_LIBS"
-	CFLAGS="$CFLAGS $SDL_CFLAGS"
-	CXXFLAGS="$CXXFLAGS $SDL_CFLAGS"
 	LIBS="$LIBS -lopengl32 -lglu32"
-	echo $CXXFLAGS
 ;;
 
 dnl OTHER SYSTEMS
 *)
-	dnl Check for SDL.
-	AM_PATH_SDL
-	LIBS="$LIBS $SDL_LIBS"
-	CFLAGS="$CFLAGS $SDL_CFLAGS"
-	CXXFLAGS="$CXXFLAGS $SDL_CFLAGS"
-
 	AC_CHECK_LIB(GL,glEnable)
    	if test "$ac_cv_lib_GL_glEnable" = no ; then
     	AC_CHECK_LIB(MesaGL,glEnable,,AC_MSG_ERROR(GL not found - please install GL or MesaGL))
