@@ -40,7 +40,7 @@ s%@CFLAGS@%-g -O2 -Wall%g
 s%@CPPFLAGS@%%g
 s%@CXXFLAGS@%-g -O2%g
 s%@FFLAGS@%%g
-s%@DEFS@% -DPACKAGE=\"stellarium\" -DVERSION=\"0.4.7\" -DHAVE_GL=1 -DHAVE_GLU=1 -DHAVE_GLUT=1 %g
+s%@DEFS@% -DPACKAGE=\"stellarium\" -DVERSION=\"0.4.7\" %g
 s%@LDFLAGS@% -lm%g
 s%@LIBS@% -lGL -lGLU -lglut%g
 s%@exec_prefix@%${prefix}%g

@@ -1,5 +1,5 @@
 dnl Process this file with autoconf to produce a configure script.
-AC_INIT(src/constellation.h)
+AC_INIT(src/main.cpp)
 AM_INIT_AUTOMAKE(stellarium,0.4.7)
 
 dnl Checks for programs.
@@ -12,9 +12,9 @@ AC_PROG_INSTALL
 AC_PROG_RANLIB
 
 
-AC_CHECK_HEADER(GL/gl.h,AC_DEFINE(HAVE_GL),AC_MSG_ERROR(gl.h not found - please install OpenGL- or Mesa-devel))
-AC_CHECK_HEADER(GL/glu.h,AC_DEFINE(HAVE_GLU),AC_MSG_ERROR(glu.h not found - please install GLU- or MesaGLU-devel))
-AC_CHECK_HEADER(GL/glut.h,AC_DEFINE(HAVE_GLUT),AC_MSG_ERROR(glut.h not found - please install GLUT- or MesaGLUT-devel))
+AC_CHECK_HEADER(GL/gl.h,,AC_MSG_ERROR(gl.h not found - please install OpenGL- or Mesa-devel))
+AC_CHECK_HEADER(GL/glu.h,,AC_MSG_ERROR(glu.h not found - please install GLU- or MesaGLU-devel))
+AC_CHECK_HEADER(GL/glut.h,,AC_MSG_ERROR(glut.h not found - please install GLUT- or MesaGLUT-devel))
 
 AC_CHECK_LIB(GL,glEnable,LIBS="$LIBS -lGL",AC_MSG_ERROR(GL not found - please install GL or MesaGL))
 AC_CHECK_LIB(GLU,gluPerspective,LIBS="$LIBS -lGLU",AC_MSG_ERROR(GLU not found - please install GLU or MesaGLU))
@@ -24,7 +24,7 @@ dnl Checks for header files.
 AC_HEADER_STDC
 
 dnl Checks for library functions.
-AC_CHECK_FUNCS(strdup)
+AC_CHECK_FUNCS(strdup, toupper)
 
 CFLAGS="$CFLAGS -Wall"
 

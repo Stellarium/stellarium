@@ -9,3 +9,4 @@ INCLUDES = -I$(top_srcdir)/src/glpng -I$(top_srcdir)/src/astrolib
 
 SUBDIRS = glpng astrolib
 
+CXXFLAGS = -O3
