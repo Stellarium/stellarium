@@ -59,7 +59,7 @@ public:
 	void set_directories(const string& DDIR, const string& TDIR, const string& CDIR, const string& DATA_ROOT);
 
 	// Set the 2 config files names.
-	void set_config_files(const string& _config_file, const string& _location_file);
+	void set_config_files(const string& _config_file);
 
 	void update(int delta_time);		// Update all the objects in function of the time
 	void draw(int delta_time);			// Execute all the drawing functions
@@ -120,7 +120,6 @@ private:
 	string DataRoot;
 
 	string config_file;
-	string location_file;
 
 	// Main elements of the program
 	navigator * navigation;				// Manage all navigation parameters, coordinate transformations etc..
@@ -203,7 +202,6 @@ private:
     int FlagConstellationName;
 	int FlagConstellationPick;
 	int FlagConstellationArt;
-	string ConstellationCulture;
     int FlagAzimutalGrid;
     int FlagEquatorialGrid;
     int FlagEquatorLine;
