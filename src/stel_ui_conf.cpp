@@ -229,10 +229,12 @@ Component* stel_ui::createConfigWindow(void)
 	Label* system_tz_lbl = new Label("\1 Using System Default Time Zone");
 	tab_time->addComponent(system_tz_lbl);
 	system_tz_lbl->setPos(50 ,y); y+=20;
-
-	system_tz_lbl2 = new Label("(" +
-		 core->observatory->get_time_zone_name_from_system(core->navigation->get_JDay()) + ")");
+	string tmpl("(" + core->observatory->get_time_zone_name_from_system(core->navigation->get_JDay()) + ")");
+	
+	for (unsigned int i=0;i<tmpl.size();i++) {if ((unsigned int)tmpl[i]<0 || (unsigned int)tmpl[i]>255) tmpl[i]='*';}
+	system_tz_lbl2 = new Label(tmpl);
 	tab_time->addComponent(system_tz_lbl2);
+	
 	system_tz_lbl2->setPos(70 ,y); y+=30;
 
 	Label* time_speed_lbl = new Label("\1 Time speed : ");
