@@ -69,10 +69,8 @@ s%@AUTOMAKE@%automake%g
 s%@AUTOHEADER@%autoheader%g
 s%@MAKEINFO@%makeinfo%g
 s%@SET_MAKE@%%g
-s%@AWK@%mawk%g
 s%@CC@%gcc%g
 s%@CXX@%c++%g
-s%@LN_S@%ln -s%g
 s%@RANLIB@%ranlib%g
 s%@CPP@%cc -E%g
 

@@ -9,38 +9,31 @@ configure:725: checking for working autoconf
 configure:738: checking for working automake
 configure:751: checking for working autoheader
 configure:764: checking for working makeinfo
-configure:783: checking for gawk
-configure:815: checking for gcc
-configure:928: checking whether the C compiler (gcc  ) works
-configure:944: gcc -o conftest    conftest.c  1>&5
-configure:970: checking whether the C compiler (gcc  ) is a cross-compiler
-configure:975: checking whether we are using GNU C
-configure:1003: checking whether gcc accepts -g
-configure:1039: checking for c++
-configure:1071: checking whether the C++ compiler (c++  ) works
-configure:1087: c++ -o conftest    conftest.C  1>&5
-configure:1113: checking whether the C++ compiler (c++  ) is a cross-compiler
-configure:1118: checking whether we are using GNU C++
-configure:1146: checking whether c++ accepts -g
-configure:1189: checking for a BSD compatible install
-configure:1242: checking whether ln -s works
-configure:1265: checking for ranlib
-configure:1295: checking how to run the C preprocessor
-configure:1375: checking for ANSI C header files
-configure:1482: checking for limits.h
-configure:1482: checking for malloc.h
-configure:1482: checking for strings.h
-configure:1482: checking for unistd.h
-configure:1522: checking for GL/gl.h
-configure:1522: checking for GL/glu.h
-configure:1522: checking for GL/glut.h
-configure:1560: checking for inline
-configure:1600: checking for size_t
-configure:1633: checking whether struct tm is in sys/time.h or time.h
-configure:1670: checking for strdup
-configure:1670: checking for strerror
-configure:1670: checking for strstr
-configure:1670: checking for strtod
-configure:1670: checking for strtol
-configure:1670: checking for strtoul
-configure:1670: checking for glGenTextures
+configure:781: checking for gcc
+configure:894: checking whether the C compiler (gcc  ) works
+configure:910: gcc -o conftest    conftest.c  1>&5
+configure:936: checking whether the C compiler (gcc  ) is a cross-compiler
+configure:941: checking whether we are using GNU C
+configure:969: checking whether gcc accepts -g
+configure:1005: checking for c++
+configure:1037: checking whether the C++ compiler (c++  ) works
+configure:1053: c++ -o conftest    conftest.C  1>&5
+configure:1079: checking whether the C++ compiler (c++  ) is a cross-compiler
+configure:1084: checking whether we are using GNU C++
+configure:1112: checking whether c++ accepts -g
+configure:1155: checking for a BSD compatible install
+configure:1210: checking for ranlib
+configure:1240: checking how to run the C preprocessor
+configure:1320: checking for ANSI C header files
+configure:1427: checking for limits.h
+configure:1427: checking for malloc.h
+configure:1427: checking for strings.h
+configure:1427: checking for unistd.h
+configure:1467: checking for GL/gl.h
+configure:1467: checking for GL/glu.h
+configure:1467: checking for GL/glut.h
+configure:1505: checking for inline
+configure:1545: checking for size_t
+configure:1578: checking whether struct tm is in sys/time.h or time.h
+configure:1615: checking for strdup
+configure:1615: checking for glGenTextures
