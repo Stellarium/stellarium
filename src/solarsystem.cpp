@@ -181,6 +181,12 @@ void SolarSystem::load(const char* planetfile)
 			pd.get_double(secname, "rot_equator_ascending_node",0.)*M_PI/180.,
 			pd.get_double(secname, "rot_precession_rate",0.) );
 
+		if (pd.get_boolean(secname, "rings", 0))
+		{
+			ring* r = new ring(pd.get_double(secname, "ring_size")/AU, pd.get_str(secname, "tex_ring"));
+			p->set_rings(r);
+		}
+
 		system_planets.push_back(p);
 	}
 
