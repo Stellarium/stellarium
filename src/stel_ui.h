@@ -29,6 +29,8 @@
 #include "s_gui.h"
 #include "s_tui.h"
 
+#define TUI_SCRIPT_MSG "Select and exit to run."
+
 // Predeclaration of the stel_core class
 class stel_core;
 
@@ -228,7 +230,12 @@ private:
 	s_tui::Decimal_item* tui_effect_zoom_duration;
 	s_tui::Boolean_item* tui_effect_manual_zoom;
 
-	// 6. Administration
+	// 6. Scripts
+	s_tui::MultiSet_item<string>* tui_scripts_local;
+	s_tui::MultiSet_item<string>* tui_scripts_removeable;
+	bool flag_scripts_removeable_disk_mounted;  // is the removeable disk for scripts mounted?
+
+	// 7. Administration
 	s_tui::ActionConfirm_item* tui_admin_loaddefault;
 	s_tui::ActionConfirm_item* tui_admin_savedefault;
 	//s_tui::MultiSet_item<string>* tui_admin_setlocal;
@@ -248,6 +255,8 @@ private:
 	void tui_cb_tui_general_change_sky_culture(void);  // select new sky culture
 	void tui_cb_tui_general_change_sky_locale(void);  // select new sky locale
 	void tui_cb_tui_admin_change_viewport(void);    // Set viewport offset
+	void tui_cb_scripts_removeable(void);    // changed removeable disk script selection
+	void tui_cb_scripts_local();             // changed local script selection
 
 	// Parse a file of type /usr/share/zoneinfo/zone.tab
 	s_tui::MultiSet_item<string>* stel_ui::create_tree_from_time_zone_file(const string& zonetab);

@@ -85,12 +85,14 @@ void stel_ui::init_tui(void)
 	s_tui::MenuBranch* tui_menu_general = new s_tui::MenuBranch("3. General ");
 	s_tui::MenuBranch* tui_menu_stars = new s_tui::MenuBranch("4. Stars ");
 	s_tui::MenuBranch* tui_menu_effects = new s_tui::MenuBranch("5. Effects ");
-	s_tui::MenuBranch* tui_menu_administration = new s_tui::MenuBranch("6. Administration ");
+	s_tui::MenuBranch* tui_menu_scripts = new s_tui::MenuBranch("6. Scripts ");
+	s_tui::MenuBranch* tui_menu_administration = new s_tui::MenuBranch("7. Administration ");
 	tui_root->addComponent(tui_menu_location);
 	tui_root->addComponent(tui_menu_time);
 	tui_root->addComponent(tui_menu_general);	
 	tui_root->addComponent(tui_menu_stars);
 	tui_root->addComponent(tui_menu_effects);
+	tui_root->addComponent(tui_menu_scripts);
 	tui_root->addComponent(tui_menu_administration);
 
 	// 1. Location
@@ -178,28 +180,41 @@ void stel_ui::init_tui(void)
 	tui_menu_effects->addComponent(tui_effect_manual_zoom);
 
 
-	// 6. Administration
-	tui_admin_loaddefault = new s_tui::ActionConfirm_item("6.1 Load Default Configuration: ");
+	// 6. Scripts
+	tui_scripts_local = new s_tui::MultiSet_item<string>("6.1 Local Script: ");
+	tui_scripts_local->addItemList(TUI_SCRIPT_MSG + string("\n") + core->scripts->get_script_list("./scripts")); 
+	tui_scripts_local->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb_scripts_local));
+	tui_menu_scripts->addComponent(tui_scripts_local);
+
+	tui_scripts_removeable = new s_tui::MultiSet_item<string>("6.2 CD/DVD Script: ");
+	//	tui_scripts_removeable->addItem("Arrow down to load list.");
+	tui_scripts_removeable->addItem(TUI_SCRIPT_MSG);
+	tui_scripts_removeable->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb_scripts_removeable));
+	tui_menu_scripts->addComponent(tui_scripts_removeable);
+
+
+	// 7. Administration
+	tui_admin_loaddefault = new s_tui::ActionConfirm_item("7.1 Load Default Configuration: ");
 	tui_admin_loaddefault->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb_admin_load_default));
-	tui_admin_savedefault = new s_tui::ActionConfirm_item("6.2 Save Current Configuration as Default: ");
+	tui_admin_savedefault = new s_tui::ActionConfirm_item("7.2 Save Current Configuration as Default: ");
 	tui_admin_savedefault->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb_admin_save_default));
-	/*tui_admin_setlocal = new s_tui::MultiSet_item<string>("6.3 Set Locale: ");
+	/*tui_admin_setlocal = new s_tui::MultiSet_item<string>("7.3 Set Locale: ");
 	tui_admin_setlocal->addItem("fr_FR");
 	tui_admin_setlocal->addItem("en_EN");
 	tui_admin_setlocal->addItem("en_US");
 	tui_admin_setlocal->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb_admin_set_locale));*/
-	tui_admin_updateme = new s_tui::Action_item("6.3 Update me via Internet: ");
+	tui_admin_updateme = new s_tui::Action_item("7.3 Update me via Internet: ");
 	tui_admin_updateme->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb_admin_updateme));
 	tui_menu_administration->addComponent(tui_admin_loaddefault);
 	tui_menu_administration->addComponent(tui_admin_savedefault);
 	//tui_menu_administration->addComponent(tui_admin_setlocal);
 	tui_menu_administration->addComponent(tui_admin_updateme);
 
-	tui_admin_voffset = new s_tui::Integer_item(-10,10,0, "6.4 N-S Centering Offset: ");
+	tui_admin_voffset = new s_tui::Integer_item(-10,10,0, "7.4 N-S Centering Offset: ");
 	tui_admin_voffset->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb_tui_admin_change_viewport));
 	tui_menu_administration->addComponent(tui_admin_voffset);
 
-	tui_admin_hoffset = new s_tui::Integer_item(-10,10,0, "6.5 E-W Centering Offset: ");
+	tui_admin_hoffset = new s_tui::Integer_item(-10,10,0, "7.5 E-W Centering Offset: ");
 	tui_admin_hoffset->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb_tui_admin_change_viewport));
 	tui_menu_administration->addComponent(tui_admin_hoffset);
 
@@ -256,7 +271,6 @@ void stel_ui::tui_cb1(void)
 	core->auto_move_duration	= tui_effect_zoom_duration->getValue();
 	core->FlagManualZoom 		= tui_effect_manual_zoom->getValue();
 
-
 }
 
 // Update all the tui widgets with values taken from the core parameters
@@ -291,7 +305,20 @@ void stel_ui::tui_update_widgets(void)
 	tui_effect_zoom_duration->setValue(core->auto_move_duration);
 	tui_effect_manual_zoom->setValue(core->FlagManualZoom);
 
-	// 6. admin
+	// 6. Scripts
+	// each fresh time enter needs to reset to select message
+	if(core->SelectedScript=="") {
+	  tui_scripts_local->setCurrent(TUI_SCRIPT_MSG);
+
+	  if(core->ScriptRemoveableDiskMounted) {
+	    tui_scripts_removeable->setCurrent(TUI_SCRIPT_MSG);
+	  } else {
+	    // no directory mounted, so put up message
+	    tui_scripts_removeable->replaceItemList("Arrow down to load list.",0);
+	  }
+	}
+
+	// 7. admin
 	tui_admin_voffset->setValue(core->verticalOffset);
 	tui_admin_hoffset->setValue(core->horizontalOffset);
 
@@ -315,7 +342,7 @@ void stel_ui::tui_cb_settimedisplayformat(void)
 	core->observatory->set_time_format_str(tui_time_displayformat->getCurrent());
 }
 
-// 6. Administration actions functions
+// 7. Administration actions functions
 
 // Load default configuration
 void stel_ui::tui_cb_admin_load_default(void)
@@ -396,4 +423,40 @@ void stel_ui::tui_cb_tui_admin_change_viewport(void)
   core->projection->set_viewport_offset( core->horizontalOffset, core->verticalOffset);
   core->projection->set_viewport_type( core->ViewportType );
 
+}
+
+// callback for changing scripts from removeable media
+void stel_ui::tui_cb_scripts_removeable() {
+  
+  if(!core->ScriptRemoveableDiskMounted) {
+    // TODO: make sure disk is mounted here
+
+    cout << "MOUNT DISK for scripts\n";
+    // read scripts from mounted disk
+    tui_scripts_removeable->replaceItemList(TUI_SCRIPT_MSG + string("\n") + core->scripts->get_script_list(SCRIPT_REMOVEABLE_DISK), 0);   
+    core->ScriptRemoveableDiskMounted = 1;
+  } 
+
+  if(tui_scripts_removeable->getCurrent()!=TUI_SCRIPT_MSG){
+    core->SelectedScript = tui_scripts_removeable->getCurrent();
+    core->SelectedScriptDirectory = SCRIPT_REMOVEABLE_DISK;
+    // to avoid confusing user, clear out local script selection as well
+    tui_scripts_local->setCurrent(TUI_SCRIPT_MSG);
+  } else {
+    core->SelectedScript = "";
+  }
+}
+
+
+// callback for changing scripts from local directory
+void stel_ui::tui_cb_scripts_local() {
+  
+  if(tui_scripts_local->getCurrent()!=TUI_SCRIPT_MSG){
+    core->SelectedScript = tui_scripts_local->getCurrent();
+    core->SelectedScriptDirectory = "./scripts/";
+    // to reduce confusion for user, clear out removeable script selection as well
+    tui_scripts_removeable->setCurrent(TUI_SCRIPT_MSG);
+  } else {
+    core->SelectedScript = "";
+  }
 }

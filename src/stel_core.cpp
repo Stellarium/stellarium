@@ -31,6 +31,8 @@ stel_core::stel_core() : screen_W(800), screen_H(600), bppMode(16), Fullscreen(0
 	move_speed(0.001), FlagTimePause(0), is_mouse_moving_horiz(false), is_mouse_moving_vert(false)
 {
 	ProjectorType = PERSPECTIVE_PROJECTOR;
+	SelectedScript = SelectedScriptDirectory = "";
+	ScriptRemoveableDiskMounted = 0;
 }
 
 stel_core::~stel_core()
@@ -884,8 +886,19 @@ int stel_core::handle_keys(SDLKey key, s_gui::S_GUI_VALUE state)
 	{
 		if (state==S_GUI_PRESSED && key==SDLK_m)
 		{
-			FlagShowTuiMenu = false;
-			return 1;
+		  // leave tui menu
+		  FlagShowTuiMenu = false;
+
+		  // If selected a script in tui, run that now
+		  // TODO: pass directory separately
+		  if(SelectedScript!="") commander->execute_command("script action play filename " + SelectedScriptDirectory + SelectedScript);
+		  else {
+		    // TODO unmount disk...
+		    ScriptRemoveableDiskMounted = 0;
+		  }
+		  // clear out now
+		  SelectedScriptDirectory = SelectedScript = "";
+		  return 1;
 		}
 		if (ui->handle_keys_tui(key, tuiv)) return 1;
 		return 1;

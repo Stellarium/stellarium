@@ -22,7 +22,8 @@
 #ifndef _STEL_CORE_H_
 #define _STEL_CORE_H_
 
-using namespace std;
+
+#define SCRIPT_REMOVEABLE_DISK "/tmp/scripts/"
 
 #include <string>
 
@@ -192,6 +193,11 @@ private:
 	// these are separate so that, for example, someone could view polynesian constellations in Hawaiian 
 	// OR english, french, etc.
 	
+
+	// Script related
+	string SelectedScript;  // script filename (without directory) selected in a UI to run when exit UI
+	string SelectedScriptDirectory;  // script directory for same
+	bool ScriptRemoveableDiskMounted;  // is disk for scripts mounted?
 
 	// Stars
 	int FlagStarName;
