@@ -232,6 +232,9 @@ void stel_core::update(int delta_time)
 // Execute all the drawing functions
 void stel_core::draw(int delta_time)
 {
+
+  static float ConstellationArtBrightness = 0.0;
+
 	// Init openGL viewing with fov, screen size and clip planes
 	projection->set_clipping_planes(0.0005 ,50);
 
@@ -260,9 +263,18 @@ void stel_core::draw(int delta_time)
 	// Draw the constellations art
 	if (FlagConstellationArt)
 	{
-		if (FlagConstellationPick && selected_constellation)
-			selected_constellation->draw_art(projection);
-		else asterisms->draw_art(projection);
+	  if( ConstellationArtBrightness < 1 ) {
+	    ConstellationArtBrightness+=1.0/50;
+	  } else {
+	    ConstellationArtBrightness = 1.0;
+	  }
+	  glColor3f( ConstellationArtBrightness, ConstellationArtBrightness, ConstellationArtBrightness);
+
+	  if (FlagConstellationPick && selected_constellation)
+	    selected_constellation->draw_art(projection);
+	  else asterisms->draw_art(projection);
+	} else {
+	  ConstellationArtBrightness = 0.0;
 	}
 
 	// Draw the constellations's names
