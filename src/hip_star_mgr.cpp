@@ -19,6 +19,7 @@
 
 // class used to manage groups of Stars
 
+#include <string>
 #include "hip_star_mgr.h"
 #include "s_texture.h"
 #include "grid.h"
@@ -161,8 +162,10 @@ void Hip_Star_mgr::load_common_names(const string& commonNameFile)
 			char c=line[0];
 			int i=0;
 			while(c!='|' && i<256){c=line[i];++i;}
-			star->CommonName = &(line[i]);
-			star->CommonName[star->CommonName.size()-1] = '\0';
+			star->CommonName =  &(line[i]);
+			// remove newline
+			star->CommonName.erase(star->CommonName.length()-1, 1);
+
 		}
 	} while(fgets(line, 256, cnFile));
 
