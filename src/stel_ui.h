@@ -54,6 +54,7 @@ private:
 	stel_core * core;
 
 	s_font * spaceFont;		// The standard font
+	s_font * courierFont;	// The standard fixed size font
 	s_texture * baseTex;	// The standard fill texture
 
 	Container * desktop;	// The container which contains everything

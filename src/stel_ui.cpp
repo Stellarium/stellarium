@@ -28,6 +28,8 @@
 
 stel_ui::stel_ui(stel_core * _core) :
 	spaceFont(NULL),
+	courierFont(NULL),
+
 	top_bar_ctr(NULL),
 	top_bar_date_lbl(NULL),
 	top_bar_hour_lbl(NULL),
@@ -70,8 +72,17 @@ void stel_ui::init(void)
     char tempName[255];
     strcpy(tempName,core->DataDir);
     strcat(tempName,"spacefont.txt");
-    spaceFont = new s_font(13, "spacefont", tempName);
+    spaceFont = new s_font(14, "spacefont", tempName);
     if (!spaceFont)
+    {
+        printf("ERROR WHILE CREATING FONT\n");
+        exit(-1);
+    }
+
+    strcpy(tempName,core->DataDir);
+    strcat(tempName,"courierfont.txt");
+	courierFont = new s_font(13, "courierfont", tempName);
+    if (!courierFont)
     {
         printf("ERROR WHILE CREATING FONT\n");
         exit(-1);
@@ -89,7 +100,7 @@ void stel_ui::init(void)
 	desktop = new Container();
 	desktop->reshape(0,0,core->screen_W,core->screen_H);
 
-	bt_flag_help_lbl = new Label("Help for the Flag Buttons");
+	bt_flag_help_lbl = new Label("ERROR...");
 	bt_flag_help_lbl->setPos(3,core->screen_H-50);
 	bt_flag_help_lbl->setVisible(0);
 
@@ -111,15 +122,15 @@ void stel_ui::init(void)
 
 Component* stel_ui::createTopBar(void)
 {
-    top_bar_date_lbl = new Label("-");	top_bar_date_lbl->setPos(2,2);
-    top_bar_hour_lbl = new Label("-");	top_bar_hour_lbl->setPos(90,2);
-    top_bar_fps_lbl = new Label("-");	top_bar_fps_lbl->setPos(core->screen_W-75,2);
+    top_bar_date_lbl = new Label("-", courierFont);	top_bar_date_lbl->setPos(2,2);
+    top_bar_hour_lbl = new Label("-", courierFont);	top_bar_hour_lbl->setPos(110,2);
+    top_bar_fps_lbl = new Label("-", courierFont);	top_bar_fps_lbl->setPos(core->screen_W-100,2);
     if (!core->FlagShowFps) top_bar_fps_lbl->setVisible(false);
-    top_bar_fov_lbl = new Label("-");	top_bar_fov_lbl->setPos(core->screen_W-170,2);
+    top_bar_fov_lbl = new Label("-", courierFont);	top_bar_fov_lbl->setPos(core->screen_W-220,2);
     top_bar_appName_lbl = new Label(APP_NAME);
     top_bar_appName_lbl->setPos(core->screen_W/2-top_bar_appName_lbl->getSizex()/2,2);
     top_bar_ctr = new FilledContainer();
-    top_bar_ctr->reshape(0,0,core->screen_W,14);
+    top_bar_ctr->reshape(0,0,core->screen_W,15);
     top_bar_ctr->addComponent(top_bar_date_lbl);
     top_bar_ctr->addComponent(top_bar_hour_lbl);
     top_bar_ctr->addComponent(top_bar_fps_lbl);
@@ -144,9 +155,9 @@ void stel_ui::updateTopBar(void)
 
     top_bar_hour_lbl->setLabel(str);	top_bar_hour_lbl->adjustSize();
 
-    sprintf(str,"FPS : %4.2f",core->fps);
+    sprintf(str,"FPS:%4.2f",core->fps);
     top_bar_fps_lbl->setLabel(str); 	top_bar_fps_lbl->adjustSize();
-    sprintf(str,"fov=%.3f\6", core->navigation->get_fov());
+    sprintf(str,"fov=%2.3f\6", core->navigation->get_fov());
 	top_bar_fov_lbl->setLabel(str);		top_bar_fov_lbl->adjustSize();
 }
 
@@ -278,7 +289,7 @@ of the License, or (at your option) any later version.\n\
  \n\
 This program is distributed in the hope that it will be useful, but\n\
 WITHOUT ANY WARRANTY; without even the implied\n\
-warranty ofMERCHANTABILITY or FITNESS FOR A\n\
+warranty of MERCHANTABILITY or FITNESS FOR A\n\
 PARTICULAR PURPOSE.  See the GNU General Public\n\
 License for more details.\n\
  \n\
