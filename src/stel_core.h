@@ -99,6 +99,8 @@ public:
 	// Unzoom to the old position is reverted by calling the function again
 	void auto_zoom_out(float move_duration = 1.f);
 
+	// Quit the application
+	void stel_core::quit(void);
 private:
 
 	void load_config_from(const string& confFile);
@@ -243,7 +245,6 @@ private:
 
 	int FlagTimePause;
 	double temp_time_velocity;			// Used to store time speed while in pause
-
 
 	// Viewing direction function : 1 move, 0 stop.
 	void turn_right(int);

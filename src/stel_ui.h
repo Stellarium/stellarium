@@ -95,6 +95,7 @@ private:
 	FlagButton * bt_flag_help;
 	FlagButton * bt_flag_follow_earth;
 	FlagButton * bt_flag_config;
+	FlagButton * bt_flag_quit;
 	Component* createFlagButtons(void);
 	void cb(void);
 	void bt_flag_ctrOnMouseInOut(void);
