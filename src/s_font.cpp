@@ -77,15 +77,23 @@ int s_font::buildDisplayLists(const string& dataFileName, const string& textureN
         averageCharLen+=sizeX;
         nbChar++;
 
-		// Special ascii code used to set text color
-		if (charNum==16 || charNum==17 || charNum==18)
-		{
-			glNewList(g_base+charNum,GL_COMPILE);
-				glColor3f(charNum==16 ? 0.9f : 0.1f, charNum==17 ? 0.9f : 0.1f, charNum==18 ? 0.9f : 0.1f);
-			glEndList();
-			continue;
-		}
-
+	// Special ascii code used to set text color
+	// was R,G,B, but changed to normal or hilighted since R G or B was hard to see - rms
+	if (charNum==17 || charNum==18)
+	  {
+	    glNewList(g_base+charNum,GL_COMPILE);
+	    if( charNum==17 ) {
+	      // regular text color
+	      glColor3f(0.5,1,0.5);
+	    } else {
+	      // hilighted text
+	      glColor3f(1,1,1);
+	    }
+	    
+	    glEndList();
+	    continue;
+	  }
+	
         glNewList(g_base+charNum,GL_COMPILE);				// Start Building A List
 			glTranslated(leftSpacing*ratio,0,0);			// Move To The Left Of The Character
 			glBegin(GL_QUADS );

@@ -527,7 +527,7 @@ void Projector::sCylinder(GLdouble radius, GLdouble height, GLint slices, GLint 
 }
 
 void Projector::print_gravity180(const s_font* font, float x, float y, const string& str,
-	float xshift, float yshift) const
+				 bool speed_optimize, float xshift, float yshift) const
 {
 	static float dx, dy, d, theta, psi;
 	dx = x - (vec_viewport[0] + vec_viewport[2]/2);
@@ -540,6 +540,7 @@ void Projector::print_gravity180(const s_font* font, float x, float y, const str
 
 	theta = M_PI + atan2f(dx, dy - 1);
 	psi = atan2f((float)font->getStrLen(str)/str.length(),d + 1) * 180./M_PI;
+
 	if (psi>5) psi = 5;
 	set_orthographic_projection();
 	glTranslatef(x,y,0);
@@ -548,8 +549,19 @@ void Projector::print_gravity180(const s_font* font, float x, float y, const str
 	glScalef(1, -1, 1);
 	for (unsigned int i=0;i<str.length();++i)
 	{
+
 		font->print_char(str[i]);
-		if (str[i]!=16 && str[i]!=17 &&str[i]!=18) glRotatef(psi,0,0,-1);
+		if (str[i]!=16 && str[i]!=17 &&str[i]!=18) {
+
+		  if( !speed_optimize ) {
+		    psi = atan2f((float)font->getStrLen(str.substr(i,1)),d) * 180./M_PI;
+		    if (psi>5) psi = 5;
+		  }
+		  glRotatef(psi,0,0,-1);
+		  
+		}
+
+
 	}
 	reset_perspective_projection();
 }

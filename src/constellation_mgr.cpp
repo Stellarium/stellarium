@@ -61,6 +61,27 @@ Constellation_mgr::~Constellation_mgr()
     asterFont = NULL;
 }
 
+void Constellation_mgr::show_art(void)
+{
+  // unless just one selected... turn on all artwork
+
+  vector<Constellation *>::iterator iter;
+  for(iter=asterisms.begin();iter!=asterisms.end();iter++) {
+    (*iter)->show_art();
+  }
+
+}
+
+
+void Constellation_mgr::hide_art(void)
+{
+  // unless just one selected... turn on all artwork
+
+  vector<Constellation *>::iterator iter;
+  for(iter=asterisms.begin();iter!=asterisms.end();iter++) {
+    (*iter)->hide_art();
+  }
+}
 
 void Constellation_mgr::set_sky_culture(string _sky_culture)
 {

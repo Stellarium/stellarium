@@ -264,22 +264,19 @@ void stel_core::draw(int delta_time)
 		else asterisms->draw(projection);
 	}
 
-	// Draw the constellations art
+	// Draw constellation art
 	if (FlagConstellationArt)
 	{
-	  if( ConstellationArtBrightness < 1 ) {
-	    ConstellationArtBrightness+=1.0/50;
+	  if (FlagConstellationPick && selected_constellation) {
+	    asterisms->hide_art();
+	    selected_constellation->show_art();
 	  } else {
-	    ConstellationArtBrightness = 1.0;
+	    asterisms->show_art();
 	  }
-	  glColor3f( ConstellationArtBrightness, ConstellationArtBrightness, ConstellationArtBrightness);
-
-	  if (FlagConstellationPick && selected_constellation)
-	    selected_constellation->draw_art(projection);
-	  else asterisms->draw_art(projection);
 	} else {
-	  ConstellationArtBrightness = 0.0;
+	  asterisms->hide_art();
 	}
+	asterisms->draw_art(projection);
 
 	// Draw the constellations's names
 	if (FlagConstellationName)

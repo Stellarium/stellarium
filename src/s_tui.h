@@ -56,7 +56,7 @@ namespace s_tui
 	// Caracters '\22' and '\21' correspond to the "change to color" blue and green special
 	// stelarium ascii code, thus inserting them in a string will result in color change for the
 	// next char until another color is set
-	static const string start_active("\22");
+	static const string start_active("\22");  // white is hilight
 	static const string stop_active("\21");
 
 	// Base class. Note that the method bool isEditable(void) has to be overrided by returning true
