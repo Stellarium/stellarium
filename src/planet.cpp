@@ -1,4 +1,4 @@
-/* 
+/*
  * Stellarium
  * Copyright (C) 2002 Fabien Chéreau
  * 
@@ -72,17 +72,7 @@ void Planet::Compute(double date, ObsInfo lieu,vec3_t helioPosObs)
 // Function used for the drawing of the name and circle
 #include "s_font.h"
 extern s_font * planetNameFont;
-// Calc the x,y coord on the screen with the X,Y and Z pos
-void Project2(float objx_i,float objy_i,float objz_i,double & x ,double & y, double & z)
-{   glColor3f(0.5, 1.0, 0.5);
-    GLdouble M[16];
-    GLdouble P[16];
-    GLint V[4];
-    glGetDoublev(GL_MODELVIEW_MATRIX,M);
-    glGetDoublev(GL_PROJECTION_MATRIX,P);
-    glGetIntegerv(GL_VIEWPORT,V);
-    gluProject(objx_i,objy_i,objz_i,M,P,V,&x,&y,&z);
-}
+
 
 void Planet::DrawSpecialDaylight(vec3_t coordLight)
 {
@@ -217,9 +207,9 @@ void Planet::Draw(vec3_t coordLight)
     // Thanks to Nick Porcino for this addition
     {   
         double screenX, screenY, screenZ;
-        Project2(0, 0, 0, screenX, screenY, screenZ);
+        Project(0, 0, 0, screenX, screenY, screenZ);
 
-        if (screenZ > 0)
+        if (screenZ < 1)
         {
             screenY = global.Y_Resolution - screenY;
 

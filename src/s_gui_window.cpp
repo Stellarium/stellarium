@@ -44,16 +44,15 @@ StdWin::StdWin(int posx, int posy, int sizex, int sizey, char * _title, Componen
     setClicCallback(ExtStdWinClicCallback);
     setMoveCallback(ExtStdWinMoveCallback);
     theContainer = new Container();
-    headerSize = (int)winfont->getLineHeight()+2;
+    headerSize = (int)winfont->getLineHeight()+3;
     theContainer->reshape(0,headerSize, sizex,sizey-headerSize);
     Container::addComponent(theContainer);
 }
 
 StdWin::~StdWin()
 {
-	printf("StdWin destructor\n");
 	if (winfont) delete winfont;
-	if (theContainer) delete theContainer;
+	winfont=NULL;
 }
 
 void StdWin::StdWinClicCallback(enum guiValue button,enum guiValue state)

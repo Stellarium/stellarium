@@ -66,7 +66,7 @@ void drawIntro(void)
     printf("    |##   #  ### ### ### # # # #  #  ### # #|\n");
     printf("    |                     %s|\n",APP_NAME);
     printf("    -----------------------------------------\n\n");
-    printf("Copyright (C) 2002 Fabien Chereau\n\n");
+    printf("Copyright (C) 2003 Fabien Chereau\n\n");
     printf("Please send bug report & comments to stellarium@free.fr\n");
     printf("and check last version on http://stellarium.free.fr\n\n");
 };
@@ -165,7 +165,8 @@ void ResizeGL(int w, int h)
     if (!h || (w==global.X_Resolution && h==global.Y_Resolution)) return;
     global.X_Resolution = w;
     global.Y_Resolution = h;
-	//updateUi();
+	clearUi();
+	initUi();
     glViewport(0, 0, global.X_Resolution, global.Y_Resolution);
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
@@ -385,7 +386,7 @@ bool Initialize(void)	     // Any Application & User Initialization Code Goes He
     strcat(tempName,"messier.fab");
     messiers->Read(tempName);        // read the messiers object data
     initUi();                        // initialisation of the User Interface
-    global.XYZVision.Set(0,1,0);
+    global.XYZVision.Set(0,1,-0.4);
     return true;		     // Return TRUE (Initialization Successful)
 }
 
@@ -456,7 +457,10 @@ int main(int argc, char **argv)
 		exit(1);
 	}
 
-	SDL_WM_SetCaption(APP_NAME, NULL);	// Set The Window Caption
+	SDL_WM_SetCaption(APP_NAME, APP_NAME);	// Set The Window Caption
+    strcpy(tempName,global.DataDir);
+    strcat(tempName,"icon.bmp");
+	SDL_WM_SetIcon(SDL_LoadBMP(tempName), NULL);
 
 	if(!InitTimers(&LastCount))			// We Call The Timers Init Function
 	{

@@ -72,31 +72,31 @@ namespace gui
     public:
         Component();
 		virtual ~Component();
-        vec2_i getPosition() const;
-        vec2_i getSize() const;
-        void reshape(vec2_i, vec2_i);
-        void reshape(int x, int y, int w, int h);
-        Component* getParent() const;
+        virtual vec2_i getPosition() const;
+        virtual vec2_i getSize() const;
+        virtual void reshape(vec2_i, vec2_i);
+        virtual void reshape(int x, int y, int w, int h);
+        virtual Component* getParent() const;
         virtual void render(GraphicsContext&) = 0;
-        void setClicCallback(void (*_clicCallback)(int,int,enum guiValue,enum guiValue,Component *));
-        void setMoveCallback(void (*_moveCallback)(int,int,enum guiValue,Component *));
-        void setKeyCallback(int (*_keyCallback)(SDLKey key,int state,Component *));
-        void setParent(Component*);
-        void setVisible(int _visible) {visible=_visible;}
-        int getVisible(void) {return visible;}
-        void setActive(int _active) {active = _active;}
-        int getActive(void) {return active;}
-        void setFocus(int _focus);
-        int getFocus(void) {return focus;}
-        int draging;
-        void setID(int _ID) {ID=_ID;}
-        int getID(void) {return ID;}
+        virtual void setClicCallback(void (*_clicCallback)(int,int,enum guiValue,enum guiValue,Component *));
+        virtual void setMoveCallback(void (*_moveCallback)(int,int,enum guiValue,Component *));
+        virtual void setKeyCallback(int (*_keyCallback)(SDLKey key,int state,Component *));
+        virtual void setParent(Component*);
+        virtual void setVisible(int _visible) {visible=_visible;}
+        virtual int getVisible(void) {return visible;}
+        virtual void setActive(int _active) {active = _active;}
+        virtual int getActive(void) {return active;}
+        //TODO virtual void setFocus(int _focus);
+        virtual int getFocus(void) {return focus;}
+        virtual void setID(int _ID) {ID=_ID;}
+        virtual int getID(void) {return ID;}
+		int draging;
     private:
     protected:
         int passThru;
         int ID;
         int visible;
-        int isIn(float x , float y)
+        virtual int isIn(float x , float y)
         {   return (position[0]<=x && (size[0]+position[0])>=x && 
                     position[1]<=y && (position[1]+size[1])>=y);
         }
@@ -117,13 +117,13 @@ namespace gui
     public:
         Container();
         virtual ~Container();
-        int getComponentCount() const;
-        Component* getComponent(int) const;
-        void addComponent(Component*);
-        void render(GraphicsContext&);
-        int handleMouseClic(int x, int y, enum guiValue, enum guiValue);
-        void handleMouseMove(int x, int y);
-        int handleKey(SDLKey key,int state);
+        virtual int getComponentCount() const;
+        virtual Component* getComponent(int) const;
+        virtual void addComponent(Component*);
+        virtual void render(GraphicsContext&);
+        virtual int handleMouseClic(int x, int y, enum guiValue, enum guiValue);
+        virtual void handleMouseMove(int x, int y);
+        virtual int handleKey(SDLKey key,int state);
     protected:
         std::vector<Component*> components;
     };
@@ -131,7 +131,7 @@ namespace gui
     class FilledContainer : public Container
     {
     public:
-        void render(GraphicsContext&);
+        virtual void render(GraphicsContext&);
     };
 
     class Button : public Component
@@ -139,10 +139,10 @@ namespace gui
     public:
         Button();
         virtual void render(GraphicsContext&);
-        void setOnClicCallback(void (*_onClicCallback)(enum guiValue,Component *));
-        void setOnMouseOverCallback(void (*_onMouseOverCallback)(enum guiValue,Component *));
-        void ButtonClicCallback(enum guiValue button,enum guiValue state);
-        void ButtonMoveCallback(enum guiValue action);
+        virtual void setOnClicCallback(void (*_onClicCallback)(enum guiValue,Component *));
+        virtual void setOnMouseOverCallback(void (*_onMouseOverCallback)(enum guiValue,Component *));
+        virtual void ButtonClicCallback(enum guiValue button,enum guiValue state);
+        virtual void ButtonMoveCallback(enum guiValue action);
     protected:
         int mouseOn;
         void (*onClicCallback)(enum guiValue,Component *);
@@ -154,8 +154,8 @@ namespace gui
     public:
         Labeled_Button(char * _label);
         virtual ~Labeled_Button();
-        const char * getLabel() const;
-        void setLabel(char *);
+        virtual const char * getLabel() const;
+        virtual void setLabel(char *);
         virtual void render(GraphicsContext& gc);
     private:
         char * label;
@@ -180,12 +180,10 @@ namespace gui
         Label(char * _label);
         Label(char * _label, s_font * _theFont);
         virtual ~Label();
-        const char * getLabel() const;
-        void setLabel(char *);
-        void render(GraphicsContext&);
-        void setColour(vec3_t _colour) 
-        {   colour=_colour;
-        }
+        virtual const char * getLabel() const;
+        virtual void setLabel(char *);
+        virtual void render(GraphicsContext&);
+        virtual void setColour(vec3_t _colour) {colour=_colour;}
     private:
         char * label;
         s_font * theFont;
@@ -197,9 +195,9 @@ namespace gui
 	public:
 	    TextLabel(char * _label, s_font * _theFont);
 	    virtual ~TextLabel();
-	    const char * getLabel() const;
-	    void setLabel(char *);
-	    void setColour(vec3_t _colour);
+	    virtual const char * getLabel() const;
+	    virtual void setLabel(char *);
+	    virtual void setColour(vec3_t _colour);
 	protected:
 	    char * label;
 	    s_font * theFont;
@@ -211,7 +209,7 @@ namespace gui
 	public:
 	    FilledTextLabel(char * _label, s_font * _theFont);
 	    //~FilledTextLabel();
-	    void render(GraphicsContext&);
+	    virtual void render(GraphicsContext&);
 	private:
 	};
 
@@ -219,10 +217,11 @@ namespace gui
 	{
 	public:
 	    CursorBar(vec2_i _position, vec2_i _size, float _minBarValue, float _maxBarValue, float _barValue, void(*_onValueChangeCallBack)(float _barValue, Component *));
-	    void render(GraphicsContext&);
-	    void CursorBarClicCallback(int x, enum guiValue button,enum guiValue state);
-	    void CursorBarMoveCallback(int x, enum guiValue action);
-        float getValue(void) { return barValue;}
+	    virtual void render(GraphicsContext&);
+	    virtual void CursorBarClicCallback(int x, enum guiValue button,enum guiValue state);
+	    virtual void CursorBarMoveCallback(int x, enum guiValue action);
+        virtual float getValue(void) { return barValue;}
+		virtual void setValue(float _barValue);
 	private:
 	    int mouseOn;
 	    float minBarValue, maxBarValue, barValue;
@@ -235,7 +234,7 @@ namespace gui
 	public:
 	    Picture(vec2_i _position, vec2_i _size, s_texture * _imageTex);
 		virtual ~Picture();
-	    void render(GraphicsContext&);
+	    virtual void render(GraphicsContext&);
 	private:
 	    s_texture * imageTex;
 	};
@@ -244,8 +243,21 @@ namespace gui
 	{
 	public:
 		BorderPicture(vec2_i _position, vec2_i _size, s_texture * _imageTex);
-		//virtual ~BorderPicture();
-	    void render(GraphicsContext&);
+	    virtual void render(GraphicsContext&);
+	};
+
+	// Class used for the earth map position picker
+    class ClickablePicture : public BorderPicture
+	{
+	public:
+		ClickablePicture(vec2_i _position, vec2_i _size, s_texture * _imageTex, void(*_onValueChangeCallBack)(vec2_t _pointerPosition, Component *));
+		virtual void setPointerPosition(vec2_t _pointerPosition);
+		virtual vec2_t getPointerPosition(void) {return pointerPosition;}
+	    virtual void render(GraphicsContext&);
+		virtual void ClickablePictureClicCallback(int x, int y, enum guiValue button, enum guiValue state);
+	private:
+		void (*onValueChangeCallBack)(vec2_t, Component *);
+		vec2_t pointerPosition;
 	};
 
 };

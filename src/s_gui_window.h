@@ -31,14 +31,14 @@ class StdWin : public Container
 public:
     StdWin(int posx, int posy, int sizex, int sizey, char * title, Component * parent, s_font * winfont_);
 	virtual ~StdWin();
-    void StdWinClicCallback(enum guiValue button,enum guiValue state);
-    void StdWinMoveCallback(int x, int y,enum guiValue action);
-    void render(GraphicsContext& gc);
-    const char * getTitle() const;
-    void setTitle(char * _title);
-    void addComponent(Component * c) {theContainer->addComponent(c);}
-    vec2_i getInSize();
-    void setInSize(vec2_i);
+    virtual void StdWinClicCallback(enum guiValue button,enum guiValue state);
+    virtual void StdWinMoveCallback(int x, int y,enum guiValue action);
+    virtual void render(GraphicsContext& gc);
+    virtual const char * getTitle() const;
+    virtual void setTitle(char * _title);
+    virtual void addComponent(Component * c) {theContainer->addComponent(c);}
+    virtual vec2_i getInSize();
+    virtual void setInSize(vec2_i);
 protected:
     int headerSize;
     Container * theContainer;
