@@ -1,5 +1,5 @@
 Name: stellarium
-Version: 
+Version: @PACKAGE_VERSION@
 Release: 1
 Summary: Astronomical Sky Simulator
 Copyright: GPL

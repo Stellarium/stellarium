@@ -61,10 +61,9 @@ void stel_core::set_directories(const string& DDIR, const string& TDIR, const st
 }
 
 // Set the 2 config files names.
-void stel_core::set_config_files(const string& _config_file, const string& _location_file)
+void stel_core::set_config_files(const string& _config_file)
 {
 	config_file = _config_file;
-	location_file = _location_file;
 }
 
 
@@ -357,7 +356,7 @@ void stel_core::load_config(void)
 		cout << "The current config file is from a version too old (" <<
 			(version.empty() ? "<0.6.0" : version) << ")." << endl;
 		cout << "It will be replaced by the default config file." << endl;
-		system( (string("cp -f ") + DataRoot + "/config/default_config.txt " + ConfigDir + config_file).c_str() );
+		system( (string("cp -f ") + DataRoot + "/config/default_config.ini " + ConfigDir + config_file).c_str() );
 	}
 
 	// Actually load the config file
@@ -480,7 +479,6 @@ void stel_core::load_config_from(const string& confFile)
 	FlagGravityLabels		= conf.get_boolean("viewing:flag_gravity_labels");
 	FlagInitMoonScaled		= conf.get_boolean("viewing:flag_init_moon_scaled");
 	moon_scale				= conf.get_double ("viewing","moon_scale",4.);
-	ConstellationCulture	= conf.get_str("viewing:constellation_culture");
 
 	// Astro section
 	FlagStars				= conf.get_boolean("astro:flag_stars");
@@ -582,7 +580,6 @@ void stel_core::save_config_to(const string& confFile)
 	conf.set_boolean("viewing:flag_gravity_labels", FlagGravityLabels);
 	conf.set_boolean("viewing:flag_init_moon_scaled", FlagInitMoonScaled);
 	conf.set_double ("viewing:moon_scale", moon_scale);
-	conf.set_str	("viewing:constellation_culture", ConstellationCulture);
 
 	// Astro section
 	conf.set_boolean("astro:flag_stars", FlagStars);
