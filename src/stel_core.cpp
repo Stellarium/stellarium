@@ -158,6 +158,8 @@ void stel_core::init(void)
 	// Compute transform matrices between coordinates systems
 	navigation->update_transform_matrices((ssystem->get_earth())->get_ecliptic_pos());
 	navigation->set_local_vision(Vec3d(1.,0.,0.3));
+
+	glClear(GL_COLOR_BUFFER_BIT);
 }
 
 
@@ -221,10 +223,11 @@ void stel_core::draw(int delta_time)
 
 	// Draw the milky way. If not activated, need at least to clear the color buffer
 	if (!FlagMilkyWay) glClear(GL_COLOR_BUFFER_BIT);
-	else DrawMilkyWay(tone_converter);
+	else DrawMilkyWay(tone_converter, projection, navigation);
 
 	// Init the depth buffer which is used by the planets drawing operations
 	glClear(GL_DEPTH_BUFFER_BIT);
+	glClear(GL_COLOR_BUFFER_BIT);
 
 	// Draw all the constellations
 	if (FlagAsterismDrawing) asterisms->draw(projection);

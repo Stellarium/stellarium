@@ -20,18 +20,7 @@
 #ifndef _PROJECTOR_H_
 #define _PROJECTOR_H_
 
-#ifdef HAVE_CONFIG_H
-# include <config.h>
-#endif
-
-#ifdef MACOSX
-# include <OpenGL/gl.h>
-# include <OpenGL/glu.h>
-#else
-# include <GL/gl.h>
-# include <GL/glu.h>
-#endif
-
+#include "stellarium.h"
 #include "vecmath.h"
 
 // Class which handle projection modes and projection matrix
@@ -39,7 +28,8 @@
 class Projector
 {
 public:
-	Projector(int _screenW = 800, int _screenH = 600, double _fov = 60.);
+	Projector(int _screenW = 800, int _screenH = 600, double _fov = 60.,
+		double _min_fov = 0.001, double _max_fov = 100);
 	virtual ~Projector();
 
 	void set_fov(double f) {fov = f; init_project_matrix();}
@@ -107,11 +97,12 @@ public:
 	void unproject_local(double x, double y, Vec3d& v) const
 		{unproject(x, y, inv_mat_local_to_eye, v);}
 
-
 	// Same function but using a custom modelview matrix
 	virtual bool project_custom(const Vec3f& v, Vec3d& win, const Mat4d& mat) const;
 	virtual bool project_custom(const Vec3d& v, Vec3d& win, const Mat4d& mat) const;
-	virtual bool project_custom_check(const Vec3f& v, Vec3d& win, const Mat4d& mat) const;
+	virtual bool project_custom_check(const Vec3f& v, Vec3d& win, const Mat4d& mat) const
+		{return project_custom(v, win, mat) && check_in_viewport(win);}
+
 	virtual void unproject_custom(double x, double y, Vec3d& v, const Mat4d& mat) const;
 
 	// Set the drawing mode in 2D for drawing in the full screen
@@ -126,6 +117,9 @@ public:
 	// Restore the previous projection mode after a call to set_orthographic_projection()
 	void reset_perspective_projection(void) const;
 
+	// Reimplementation of gluSphere : glu is overrided for non standard projection
+	virtual void sSphere(GLdouble radius, GLint slices, GLint stacks, const Mat4d& mat=NULL, int orient_inside = 0) const;
+	void update_openGL(void) const;
 protected:
 	// Init the viewing matrix from the fov, the clipping planes and screen ratio
 	// The function is a reimplementation of gluPerspective
@@ -133,14 +127,16 @@ protected:
 
 	int screenW, screenH;
 	double fov;					// Field of view
+	double min_fov;				// Minimum fov
+	double max_fov;				// Maximum fov
 	float ratio;				// Screen ratio = screenW/screenH
 	double zNear, zFar;			// Near and far clipping planes
 	Vec4i vec_viewport;			// Viewport parameters
 	Mat4d mat_projection;		// Projection matrix
 
-	Mat4d mat_earth_equ_to_eye;	// Modelview Matrix for earth equatorial projection
-	Mat4d mat_helio_to_eye;		// Modelview Matrix for earth equatorial projection
-	Mat4d mat_local_to_eye;		// Modelview Matrix for earth equatorial projection
+	Mat4d mat_earth_equ_to_eye;		// Modelview Matrix for earth equatorial projection
+	Mat4d mat_helio_to_eye;			// Modelview Matrix for earth equatorial projection
+	Mat4d mat_local_to_eye;			// Modelview Matrix for earth equatorial projection
 	Mat4d inv_mat_earth_equ_to_eye;	// Inverse of mat_projection*mat_earth_equ_to_eye
 	Mat4d inv_mat_helio_to_eye;		// Inverse of mat_projection*mat_helio_to_eye
 	Mat4d inv_mat_local_to_eye;		// Inverse of mat_projection*mat_local_to_eye

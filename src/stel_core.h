@@ -95,7 +95,7 @@ private:
 
 	// Main elements of the program
 	navigator * navigation;				// Manage all navigation parameters, coordinate transformations etc..
-	Fisheye_projector * projection;				// Manage the projection mode and matrix
+	Projector * projection;				// Manage the projection mode and matrix
 	stel_object * selected_object;		// The selected object in stellarium
 	Hip_Star_mgr * hip_stars;			// Manage the hipparcos stars
 	Constellation_mgr * asterisms;		// Manage constellations (boundaries, names etc..)

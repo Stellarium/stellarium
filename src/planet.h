@@ -129,7 +129,7 @@ protected:
 	void compute_geographic_rotation(double date);
 
 	// Draw the 3D sphere
-	void draw_sphere(void);
+	void draw_sphere(const Projector* prj, const Mat4d& mat);
 
 	// Draw the small star like 2D halo
 	void draw_halo(const navigator* nav, const Projector* prj);
