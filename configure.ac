@@ -143,7 +143,6 @@ dnl 	AC_LANG_POP
 dnl 	LIBS=$my_ac_save_libs
 dnl ])
 
-LIBS="$LIBS -lglgooey"
 
 dnl Checks for library functions.
 AC_CHECK_FUNCS(round toupper strcasecmp strdup sinf cosf tanf asinf acosf atanf expf logf log10f atan2f sqrtf powf modf putenv setlocale tzset strchr)
