@@ -289,21 +289,19 @@ void DrawMilkyWay(tone_reproductor * eye, const Projector* prj, const navigator*
 	eye->xyY_to_RGB(c);
 	glColor3fv(c);
 
-	glPushMatrix();
-
 	glEnable(GL_CULL_FACE);
 	glEnable(GL_TEXTURE_2D);
 	glDisable(GL_BLEND);
 	glBindTexture(GL_TEXTURE_2D, texIds[2]->getID());
-	glRotatef(206,1,0,0);
-	glRotatef(-16+90,0,1,0);
-	glRotatef(-84,0,0,1);
 
-	prj->sSphere(1.,40,40,nav->get_earth_equ_to_eye_mat());
+	prj->sSphere(1.,40,40,
+	nav->get_earth_equ_to_eye_mat()*
+	Mat4d::xrotation(M_PI/180*206)*
+	Mat4d::yrotation(M_PI/180*74)*
+	Mat4d::zrotation(M_PI/180*-84),1);
 
     glDisable(GL_CULL_FACE);
 
-	glPopMatrix();
 }
 
 

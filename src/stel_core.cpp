@@ -83,7 +83,7 @@ void stel_core::init(void)
 	ssystem = new SolarSystem();
 	atmosphere = new stel_atmosphere();
 	tone_converter = new tone_reproductor();
-	projection = new Projector(screen_W, screen_H, 60.);
+	projection = new Fisheye_projector(screen_W, screen_H, 60.);
 	equ_grid = new SkyGrid(EQUATORIAL);
 	azi_grid = new SkyGrid(ALTAZIMUTAL);
 	equator_line = new SkyLine(EQUATOR);
@@ -221,13 +221,13 @@ void stel_core::draw(int delta_time)
 	//glDisable(GL_DEPTH_TEST);
 	glBlendFunc(GL_ONE, GL_ONE);
 
+	//glClear(GL_COLOR_BUFFER_BIT);
 	// Draw the milky way. If not activated, need at least to clear the color buffer
 	if (!FlagMilkyWay) glClear(GL_COLOR_BUFFER_BIT);
 	else DrawMilkyWay(tone_converter, projection, navigation);
 
 	// Init the depth buffer which is used by the planets drawing operations
 	glClear(GL_DEPTH_BUFFER_BIT);
-	glClear(GL_COLOR_BUFFER_BIT);
 
 	// Draw all the constellations
 	if (FlagAsterismDrawing) asterisms->draw(projection);
