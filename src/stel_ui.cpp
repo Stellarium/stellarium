@@ -320,7 +320,7 @@ Component* stel_ui::createLicenceWindow(void)
 	licence_txtlbl = new TextLabel(
 "                 \1   " APP_NAME "  July 2003  \1\n\
  \n\
-\1   Copyright (c) 2000-2003 Fabien Chereau\n\
+\1   Copyright (c) 2000-2004 Fabien Chereau\n\
  \n\
 \1   Please check last version and send bug report & comments\n\n\
 on stellarium web page : http://stellarium.free.fr\n\n\

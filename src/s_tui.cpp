@@ -437,6 +437,7 @@ bool Integer_item::onKey(SDLKey k, S_TUI_VALUE v)
 string Integer_item::getString(void)
 {
 	ostringstream os;
+
 	if (numInput) os << label << (active ? start_active : "") << strInput << (active ? stop_active : "");
 	else os << label << (active ? start_active : "") << value << (active ? stop_active : "");
 	return os.str();

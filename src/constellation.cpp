@@ -142,12 +142,6 @@ void Constellation::draw_art_optim(Projector* prj) const
 	{
 		static Vec3d v;
     	glBindTexture(GL_TEXTURE_2D, art_tex->getID());
-/*		glBegin(GL_QUADS);
-			if (prj->project_earth_equ(art_vertex[0],v)) {glTexCoord2i(0,0); glVertex2f(v[0],v[1]);}
-			if (prj->project_earth_equ(art_vertex[1],v)) {glTexCoord2i(1,0); glVertex2f(v[0],v[1]);}
-			if (prj->project_earth_equ(art_vertex[2],v)) {glTexCoord2i(1,1); glVertex2f(v[0],v[1]);}
-			if (prj->project_earth_equ(art_vertex[3],v)) {glTexCoord2i(0,1); glVertex2f(v[0],v[1]);}
-		glEnd();*/
 		glBegin(GL_QUADS);
 			if (prj->project_earth_equ(art_vertex[0],v)) {glTexCoord2f(0,0); glVertex2f(v[0],v[1]);}
 			if (prj->project_earth_equ(art_vertex[1],v)) {glTexCoord2f(0.5,0); glVertex2f(v[0],v[1]);}
@@ -190,29 +184,31 @@ void Constellation::draw_art(Projector* prj) const
     	glBindTexture(GL_TEXTURE_2D, art_tex->getID());
 
 		prj->set_orthographic_projection();
-    	glBegin(GL_QUADS);
-			if (prj->project_earth_equ(art_vertex[0],v))
-			{
-				glTexCoord2i(0,0);
-				glVertex2dv(v);
-			}
 
-			if (prj->project_earth_equ(art_vertex[1],v))
-			{
-				glTexCoord2i(1,0);
-				glVertex2dv(v);
-			}
-			if (prj->project_earth_equ(art_vertex[2],v))
-			{
-				glTexCoord2i(1,1);
-				glVertex2dv(v);
-			}
-			if (prj->project_earth_equ(art_vertex[3],v))
-			{
-				glTexCoord2i(0,1);
-				glVertex2dv(v);
-			}
-    	glEnd();
+		glBegin(GL_QUADS);
+			if (prj->project_earth_equ(art_vertex[0],v)) {glTexCoord2f(0,0); glVertex2f(v[0],v[1]);}
+			if (prj->project_earth_equ(art_vertex[1],v)) {glTexCoord2f(0.5,0); glVertex2f(v[0],v[1]);}
+			if (prj->project_earth_equ(art_vertex[2],v)) {glTexCoord2f(0.5,0.5); glVertex2f(v[0],v[1]);}
+			if (prj->project_earth_equ(art_vertex[3],v)) {glTexCoord2f(0,0.5); glVertex2f(v[0],v[1]);}
+		glEnd();
+		glBegin(GL_QUADS);
+			if (prj->project_earth_equ(art_vertex[4],v)) {glTexCoord2f(0.5 + 0,0); glVertex2f(v[0],v[1]);}
+			if (prj->project_earth_equ(art_vertex[5],v)) {glTexCoord2f(0.5 + 0.5,0); glVertex2f(v[0],v[1]);}
+			if (prj->project_earth_equ(art_vertex[6],v)) {glTexCoord2f(0.5 + 0.5,0.5); glVertex2f(v[0],v[1]);}
+			if (prj->project_earth_equ(art_vertex[7],v)) {glTexCoord2f(0.5 + 0,0.5); glVertex2f(v[0],v[1]);}
+		glEnd();
+		glBegin(GL_QUADS);
+			if (prj->project_earth_equ(art_vertex[8],v)) {glTexCoord2f(0.5 + 0, 0.5 + 0); glVertex2f(v[0],v[1]);}
+			if (prj->project_earth_equ(art_vertex[9],v)) {glTexCoord2f(0.5 + 0.5, 0.5 + 0); glVertex2f(v[0],v[1]);}
+			if (prj->project_earth_equ(art_vertex[10],v)) {glTexCoord2f(0.5 + 0.5, 0.5 + 0.5); glVertex2f(v[0],v[1]);}
+			if (prj->project_earth_equ(art_vertex[11],v)) {glTexCoord2f(0.5 +  0, 0.5 + 0.5); glVertex2f(v[0],v[1]);}
+		glEnd();
+		glBegin(GL_QUADS);
+			if (prj->project_earth_equ(art_vertex[12],v)) {glTexCoord2f(0, 0.5 + 0); glVertex2f(v[0],v[1]);}
+			if (prj->project_earth_equ(art_vertex[13],v)) {glTexCoord2f(0.5, 0.5 + 0); glVertex2f(v[0],v[1]);}
+			if (prj->project_earth_equ(art_vertex[14],v)) {glTexCoord2f(0.5, 0.5 + 0.5); glVertex2f(v[0],v[1]);}
+			if (prj->project_earth_equ(art_vertex[15],v)) {glTexCoord2f(0, 0.5 + 0.5); glVertex2f(v[0],v[1]);}
+		glEnd();
 
 		prj->reset_perspective_projection();
 

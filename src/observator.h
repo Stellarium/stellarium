@@ -62,7 +62,7 @@ public:
 	string get_time_zone_name_from_system(double JD) const;
 
 	void set_GMT_shift(int t) {GMT_shift=t;}
-	int get_GMT_shift(double JD = 0) const;
+	float get_GMT_shift(double JD = 0) const;
 
 	void set_custom_tz_name(const string& tzname);
 	string get_custom_tz_name(void) const {return custom_tz_name;}
@@ -93,14 +93,14 @@ private:
 	S_DATE_FORMAT date_format;
 	S_TZ_FORMAT time_zone_mode;		// Can be the system default or a user defined value
 	string custom_tz_name;			// Something like "Europe/Paris"
-	int GMT_shift;					// Time shift between GMT time and local time in hour. (positive for Est of GMT)
+	float GMT_shift;				// Time shift between GMT time and local time in hour. (positive for Est of GMT)
 
 	unsigned int planet;	// Planet number : 0 floating, 1 Mercure - 9 pluton
 
 	// Return the number of hours to add to gmt time to get the local time at tim JD
 	// taking the parameters from system. This takes into account the daylight saving
 	// time if there is. (positive for Est of GMT)
-	int get_GMT_shift_from_system(double JD) const;
+	float get_GMT_shift_from_system(double JD) const;
 
 	// Convert the time format enum to its associated string and reverse
 	S_TIME_FORMAT string_to_s_time_format(const string&) const;

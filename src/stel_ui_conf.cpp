@@ -233,7 +233,7 @@ void stel_ui::updateConfigVariables(void)
 
 void stel_ui::setCurrentTimeFromConfig(void)
 {
-	core->navigation->set_JDay(time_current->getJDay());
+	core->navigation->set_JDay(time_current->getJDay() - core->observatory->get_GMT_shift()*JD_HOUR);
 }
 
 void stel_ui::updateConfigForm(void)
@@ -261,7 +261,7 @@ void stel_ui::updateConfigForm(void)
 	atmosphere_cbx->setState(core->FlagAtmosphere);
 	fog_cbx->setState(core->FlagFog);
 
-	time_current->setJDay(core->navigation->get_JDay());
+	time_current->setJDay(core->navigation->get_JDay() + core->observatory->get_GMT_shift()*JD_HOUR);
 }
 
 void stel_ui::config_win_hideBtCallback(void)
