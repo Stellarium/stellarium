@@ -49,6 +49,9 @@ public:
 	// Search if any planet is close to position given in earth equatorial position.
 	planet* search(Vec3d, const navigator * nav, const Projector * prj);
 
+	// Return a stl vector containing the planets located inside the lim_fov circle around position v
+	vector<stel_object*> search_around(Vec3d v, double lim_fov, const navigator * nav, const Projector * prj);
+
 	planet* get_earth(void) {return earth;}
 
 	planet* get_moon(void) {return moon;}
