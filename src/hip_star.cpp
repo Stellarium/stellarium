@@ -44,7 +44,7 @@ Hip_Star::~Hip_Star()
 	if (CommonName) delete CommonName;
 }
 
-void Hip_Star::get_info_string(char * s, navigator * nav) const
+void Hip_Star::get_info_string(char * s, const navigator * nav) const
 {
 	float tempDE, tempRA;
 	rect_to_sphe(&tempRA,&tempDE,XYZ);
@@ -175,7 +175,7 @@ void Hip_Star::draw(void)
     glEnd();
 }
 
-void Hip_Star::draw_name(s_font* star_font)
+void Hip_Star::draw_name(const s_font* star_font)
 {   
     glColor3fv(RGB*(1./2.5));
 	star_font->print(XY[0]+6,XY[1]-4, CommonName);

@@ -31,7 +31,7 @@ s_texture * stel_object::pointer_nebula = NULL;
 int stel_object::local_time = 0;
 
 // Draw a nice animated pointer around the object
-void stel_object::draw_pointer(int delta_time, Projector* prj, navigator * nav)
+void stel_object::draw_pointer(int delta_time, const Projector* prj, const navigator * nav)
 {
 	local_time+=delta_time;
 	Vec3d pos=get_earth_equ_pos(nav);

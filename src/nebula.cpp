@@ -41,7 +41,7 @@ Nebula::~Nebula()
     if (nebTexture) delete nebTexture;
 }
 
-void Nebula::get_info_string(char * s, navigator * nav) const
+void Nebula::get_info_string(char * s, const navigator * nav) const
 {
 	float tempDE, tempRA;
 	rect_to_sphe(&tempRA,&tempDE,XYZ);
@@ -127,7 +127,7 @@ void Nebula::Draw()
     glPopMatrix();  
 }
 
-void Nebula::DrawCircle(Projector* prj)
+void Nebula::DrawCircle(const Projector* prj)
 {
 	if (prj->get_fov()<sqrt(Taille)*2) return;
     incLum++;
@@ -150,12 +150,12 @@ void Nebula::DrawCircle(Projector* prj)
 }
 
 // Return the radius of a circle containing the object on screen
-float Nebula::get_on_screen_size(navigator * nav, Projector* prj)
+float Nebula::get_on_screen_size(const navigator * nav, const Projector* prj)
 {
 	return Taille/60./prj->get_fov()*prj->scrH();
 }
 
-void Nebula::DrawName(s_font* nebulaFont)
+void Nebula::DrawName(const s_font* nebulaFont)
 {   
     glColor3f(0.4,0.3,0.5);
 	nebulaFont->print(XY[0]+3,XY[1]+3, Name); //"Inter" for internationnal name
