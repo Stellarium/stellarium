@@ -124,7 +124,7 @@ public:
 	// Unzoom to the previous position
 	void auto_zoom_out(float move_duration = 1.f);
 	// Set the sky culture
-	void set_sky_culture(string _culture_dir);
+	int set_sky_culture(string _culture_dir);
 	// Set the locale type
 	void set_sky_locale(string _locale);	
 	// Set the screen size
@@ -273,7 +273,7 @@ private:
     int FlagEclipticLine;
     int FlagCardinalPoints;
 	int FlagGravityLabels;
-	float moon_scale;
+	float MoonScale;
 	int FlagInitMoonScaled;
 	float ConstellationArtIntensity;
 	float ConstellationArtFadeDuration;

@@ -23,10 +23,10 @@
 #include "image.h"
 
 Image::Image( string filename, string name) {
-  flag_alpha = flag_scale = 0;
+  flag_alpha = flag_scale = flag_location = flag_rotation = 0;
   image_alpha = 0;  // begin not visible
   image_rotation = 0;
-  image_x = image_y = .5; // centered is default
+  image_xpos = image_ypos = 0; // centered is default
   image_scale = 1; // full size
   image_name = name;
 
@@ -39,7 +39,7 @@ Image::Image( string filename, string name) {
   int img_w, img_h;
   image_tex->getDimensions(img_w, img_h);
 
-  cout << "script image: " << img_w << " " << img_h << endl;
+  //  cout << "script image: " << img_w << " " << img_h << endl;
 
   if(img_h == 0) image_ratio = -1;  // no image loaded
   else image_ratio = (float)img_w/img_h;
@@ -88,6 +88,24 @@ void Image::set_rotation(float rotation, float duration) {
 }
 
 
+void Image::set_location(float x, float y, float duration) {
+
+  // x and y make sense between -2 and 2 but any reason to check?
+  // at x or y = 1, image is centered on projection edge
+
+  flag_location = 1;
+
+  start_xpos = image_xpos;
+  start_ypos = image_ypos;
+  end_xpos = x;
+  end_ypos = y;
+
+  coef_location = 1.0f/(1000.f*duration);
+  mult_location = 0;
+
+}
+
+
 bool Image::update(int delta_time) {
 
   if(image_ratio < 0) return 0;
@@ -125,14 +143,29 @@ bool Image::update(int delta_time) {
     image_rotation = start_rotation + mult_rotation*(end_rotation-start_rotation);
   }
 
+
+  if(flag_location) {
+    mult_location += coef_location*delta_time;
+
+    if( mult_location >= 1) {
+      mult_location = 1;
+      flag_location = 0;
+    }
+
+    image_xpos = start_xpos + mult_location*(end_xpos-start_xpos);
+    image_ypos = start_ypos + mult_location*(end_ypos-start_ypos);
+
+  }
+
+
   return 1;
 
 }
 
-void Image::draw(int screenw, int screenh) {
+void Image::draw(int screenw, int screenh, int vieww, int viewh) {
 
   if(image_ratio < 0) return;
-  
+
   glPushMatrix();
 
   glEnable(GL_TEXTURE_2D);
@@ -145,15 +178,15 @@ void Image::draw(int screenw, int screenh) {
   float cx = screenw/2.f;
   float cy = screenh/2.f;
 
-  // keep image dimensions to original proportions
-  float prj_ratio = (float)screenw/screenh;
+  // calculations to keep image proportions when scale up to fit view
+  float prj_ratio = (float)vieww/viewh;   
 
   float xbase, ybase;
   if(image_ratio > prj_ratio) {
-    xbase = cx;
+    xbase = vieww/2;
     ybase = xbase/image_ratio;
   } else {
-    ybase = cy;
+    ybase = viewh/2;
     xbase = ybase*image_ratio;
   }
 
@@ -161,8 +194,8 @@ void Image::draw(int screenw, int screenh) {
   float h = image_scale*ybase;
 
 
-  glTranslatef(cx,cy,0);  // rotate around center of image...
-  glRotatef(image_rotation,0,0,1);
+  glTranslatef(cx+image_xpos*vieww/2,cy+image_ypos*viewh/2,0);  // rotate around center of image...
+  glRotatef(image_rotation,0,0,-1);
 
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
   // why is black transparent?
