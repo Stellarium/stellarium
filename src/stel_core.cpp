@@ -358,7 +358,6 @@ void stel_core::load_config(void)
 	load_config_from(ConfigDir + config_file);
 
 	if (observatory) observatory->load(ConfigDir + config_file, "init_location");
-
 }
 
 void stel_core::save_config(void)

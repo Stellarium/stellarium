@@ -135,7 +135,7 @@ private:
 	s_tui::Integer_item* tui_location_altitude;
 
 	// 2. Time & Date
-	s_tui::MenuBranch_item* tui_time_settmz;
+	s_tui::MultiSet_item<string>* tui_time_settmz;
 	s_tui::Time_item* tui_time_skytime;
 	s_tui::Time_item* tui_time_presetskytime;
 	s_tui::Time_item* tui_time_actual;
@@ -168,7 +168,7 @@ private:
 	void tui_cb_tui_effect_change_landscape(void);	// Select a new landscape skin
 
 	// Parse a file of type /usr/share/zoneinfo/zone.tab
-	s_tui::MenuBranch_item* stel_ui::create_tree_from_time_zone_file(const string& zonetab);
+	s_tui::MultiSet_item<string>* stel_ui::create_tree_from_time_zone_file(const string& zonetab);
 };
 
 #endif  //_STEL_UI_H
