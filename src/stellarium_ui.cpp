@@ -31,6 +31,7 @@
 #include "stellarium.h"
 #include "stel_config.h"
 #include "stel_object.h"
+#include "stellastro.h"
 
 using namespace gui;
 

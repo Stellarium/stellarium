@@ -29,7 +29,7 @@ rotation_elements::rotation_elements() : period(0.), offset(0.), epoch(J2000), o
 
 planet::planet(char * _name, int _flagHalo, double _radius, vec3_t _color,
 				s_texture * _planetTexture, s_texture * _haloTexture,
-				void (*_coord_func)(double JD, struct ln_helio_posn * position)) :
+				void (*_coord_func)(double JD, double *, double *, double *)) :
 					flagHalo(_flagHalo), radius(_radius), color(_color),
 					planetTexture(_planetTexture), haloTexture(_haloTexture),
 					coord_func(_coord_func), parent(NULL)
@@ -47,9 +47,7 @@ planet::~planet()
 
 void planet::computePosition(double date)
 {
-	ln_helio_posn helPos;
-	coord_func(date, &helPos);
-	sphe_to_rect(helPos.L, helPos.B, helPos.R, &ecliptic_pos);
+	coord_func(date, &(ecliptic_pos[0]), &(ecliptic_pos[1]), &(ecliptic_pos[2]));
 }
 
 // Get a matrix which converts from local ecliptic to the parent's ecliptic coordinates
