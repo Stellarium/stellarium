@@ -103,7 +103,7 @@ void stel_ui::init_tui(void)
 
 	// 2. Time
 	tui_time_settmz = create_tree_from_time_zone_file(core->DataDir + "zone.tab");
-	tui_time_settmz->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb_settimezone));
+	tui_time_settmz->set_OnTriggerCallback(callback<void>(this, &stel_ui::tui_cb_settimezone));
 	tui_time_skytime = new s_tui::Time_item("2.2 Sky Time: ");
 	tui_time_skytime->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb1));
 	tui_time_presetskytime = new s_tui::Time_item("2.3 Preset Sky Time: ");
@@ -232,8 +232,8 @@ void stel_ui::tui_update_widgets(void)
 // so everything migth have to be re-done internaly :(
 void stel_ui::tui_cb_settimezone(void)
 {
-	system( ( core->DataDir + "script_set_time_zone " + tui_time_settmz->getCurrent()->getCleanString() ).c_str() );
-	putenv(strdup((string("TZ=") + tui_time_settmz->getCurrent()->getCleanString()).c_str()));
+	system( ( core->DataDir + "script_set_time_zone " + tui_time_settmz->getCurrent() ).c_str() );
+	putenv(strdup((string("TZ=") + tui_time_settmz->getCurrent()).c_str()));
 	tzset();
 }
 
@@ -257,12 +257,14 @@ void stel_ui::tui_cb_actualtime(void)
 void stel_ui::tui_cb_admin_load_default(void)
 {
 	core->load_config();
+	system( ( core->DataDir + "script_load_config " ).c_str() );
 }
 
 // Load default configuration
 void stel_ui::tui_cb_admin_save_default(void)
 {
 	core->save_config();
+	system( ( core->DataDir + "script_save_config " ).c_str() );
 }
 
 // Call script to set locale parameter (LANG)
@@ -285,40 +287,23 @@ void stel_ui::tui_cb_tui_effect_change_landscape(void)
 }
 
 // Parse a file of type /usr/share/zoneinfo/zone.tab
-s_tui::MenuBranch_item* stel_ui::create_tree_from_time_zone_file(const string& zonetab)
+s_tui::MultiSet_item<string>* stel_ui::create_tree_from_time_zone_file(const string& zonetab)
 {
-	s_tui::MenuBranch_item* retbranch = new s_tui::MenuBranch_item("2.1 Set Time Zone: ");
+	s_tui::MultiSet_item<string>* retmult = new s_tui::MultiSet_item<string>("2.1 Set Time Zone: ");
 
 	ifstream is(zonetab.c_str());
 	char zoneline[256];
 
 	string unused, tzname;
-	map<string, set<string> > geozone;
 
 	while (is.getline(zoneline, 256))
 	{
 		if (zoneline[0]=='#') continue;
 		istringstream istr(zoneline);
 		istr >> unused >> unused >> tzname;
-
-		int pos = tzname.find('/');
-		string continent = tzname.substr(0,pos);
-		string place = tzname.substr(pos+1,tzname.length());
-		geozone[continent].insert(place);
+		retmult->addItem(tzname);
 	}
 
-	for(map<string, set<string> >::const_iterator it=geozone.begin();it!=geozone.end();++it)
-	{
-		s_tui::MultiSet_item_active<string>* continentset =
-			new s_tui::MultiSet_item_active<string>(it->first + "/");
-		continentset->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb_settimezone));
-
-		for (set<string>::const_iterator it2 = it->second.begin();it2!=it->second.end();++it2)
-		{
-			continentset->addItem(*it2);
-		}
-		retbranch->addComponent(continentset);
-	}
 
 	is.close();
 
@@ -333,20 +318,12 @@ s_tui::MenuBranch_item* stel_ui::create_tree_from_time_zone_file(const string& z
 	{
 		cout << "The TZ environment variable wasn't set." << endl;
 		cout << "The default value in the set time zone menu will be incorrect. The system time zone will be used though.." << endl;
-		return retbranch;
+		return retmult;
 	}
 
-	int pos = currenttz.find('/');
-	string continent = currenttz.substr(0,pos);
-	string place = currenttz.substr(pos+1,currenttz.length());
-	if (!retbranch->setValue_Specialslash(continent))
+	if (!retmult->setValue(currenttz))
 	{
-		cout << "Can't find continent " << continent << " in the continent list" << endl;
+		cout << "Can't find timezone " << currenttz << " in the time zone list" << endl;
 	}
-	s_tui::MultiSet_item_active<string>* tempcomp = (s_tui::MultiSet_item_active<string>*)retbranch->getCurrent();
-	if (!tempcomp->setValue(place))
-	{
-		cout << "Can't find city " << place << " in the city list of " << continent << endl;
-	}
-	return retbranch;
+	return retmult;
 }
