@@ -95,18 +95,15 @@ SkyGrid::~SkyGrid()
 void SkyGrid::draw(const Projector* prj) const
 {
 	if (!fader) return;
-	
-	Vec3f tcolor = color*fader.get_interstate();
-	glColor3fv(tcolor);
-	glDisable(GL_TEXTURE_2D);
-	// Normal transparency mode
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-	static Vec3d pt1;
-	static Vec3d pt2;
+	glDisable(GL_TEXTURE_2D);
+	glEnable(GL_BLEND);	
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
+	
+	Vec3d pt1;
+	Vec3d pt2;
 
 	prj->set_orthographic_projection();	// set 2D coordinate
-	glEnable(GL_BLEND);
 
 	// Draw meridians
 	for (unsigned int nm=0;nm<nb_meridian;++nm)
@@ -116,29 +113,26 @@ void SkyGrid::draw(const Projector* prj) const
 			if ((prj->*proj_func)(alt_points[nm][0], pt1) &&
 				(prj->*proj_func)(alt_points[nm][1], pt2) )
 			{
-				glColor4f(tcolor[0],tcolor[1],tcolor[2],0.f);
+				glColor4f(color[0],color[1],color[2],0.f);
 
 				glBegin (GL_LINES);
 					glVertex2f(pt1[0],pt1[1]);
-					glColor3fv(tcolor);
+					glColor4f(color[0],color[1],color[2],fader.get_interstate());
 					glVertex2f(pt2[0],pt2[1]);
         		glEnd();
 			}
 
-			glColor3fv(tcolor);
+			glColor4f(color[0],color[1],color[2],fader.get_interstate());
 
 			for (unsigned int i=1;i<nb_alt_segment-1;++i)
 			{
 				if ((prj->*proj_func)(alt_points[nm][i], pt1) &&
 					(prj->*proj_func)(alt_points[nm][i+1], pt2) )
 				{
-				  
-
 				  glBegin(GL_LINES);
 				  glVertex2f(pt1[0],pt1[1]);
 				  glVertex2f(pt2[0],pt2[1]);
 				  glEnd();
-				  
 				  
 				  static char str[255];	// TODO use c++ string 
 				  
@@ -204,19 +198,18 @@ void SkyGrid::draw(const Projector* prj) const
 			if ((prj->*proj_func)(alt_points[nm][nb_alt_segment-1], pt1) &&
 				(prj->*proj_func)(alt_points[nm][nb_alt_segment], pt2) )
 			{
-				glColor3fv(tcolor);
+				glColor4f(color[0],color[1],color[2],fader.get_interstate());
 				glBegin (GL_LINES);
 					glVertex2f(pt1[0],pt1[1]);
-					glColor4f(tcolor[0],tcolor[1],tcolor[2],0.f);
+					glColor4f(color[0],color[1],color[2],0.f);
 					glVertex2f(pt2[0],pt2[1]);
         		glEnd();
 			}
 
 		}
-		else	// No transparency
+		else
 		{
-			glDisable(GL_BLEND);
-			glColor3fv(tcolor);
+			glColor4f(color[0],color[1],color[2],fader.get_interstate());
 			for (unsigned int i=0;i<nb_alt_segment;++i)
 			{
 				if ((prj->*proj_func)(alt_points[nm][i], pt1) &&
@@ -232,8 +225,7 @@ void SkyGrid::draw(const Projector* prj) const
 	}
 
 	// Draw parallels
-	glColor3fv(tcolor);
-	glDisable(GL_BLEND);
+	glColor4f(color[0],color[1],color[2],fader.get_interstate());
 	for (unsigned int np=0;np<nb_parallel;++np)
 	{
 		for (unsigned int i=0;i<nb_azi_segment;++i)
@@ -292,9 +284,10 @@ void SkyLine::draw(const Projector* prj) const
 	Vec3d pt1;
 	Vec3d pt2;
 
-	glColor3fv(color*fader.get_interstate());
-	glDisable(GL_BLEND);
+	glColor4f(color[0], color[1], color[2], fader.get_interstate());
 	glDisable(GL_TEXTURE_2D);
+	glEnable(GL_BLEND);	
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
 
 	prj->set_orthographic_projection();	// set 2D coordinate
 
