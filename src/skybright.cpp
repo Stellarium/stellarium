@@ -83,6 +83,15 @@ void skybright::set_sun_moon(float cos_dist_moon_zenith, float cos_dist_sun_zeni
 //			cos_dist_zenith = cos(angular distance between zenith and the position)
 float skybright::get_luminance(float cos_dist_moon, float cos_dist_sun, float cos_dist_zenith)
 {
+
+        // catch rounding errors here or end up with white flashes in some cases
+        if(cos_dist_moon < -1 ) cos_dist_moon = -1;
+	if(cos_dist_moon > 1 ) cos_dist_moon = 1;
+	if(cos_dist_sun < -1 ) cos_dist_moon = -1;
+	if(cos_dist_sun > 1 ) cos_dist_sun = 1;
+	if(cos_dist_zenith < -1 ) cos_dist_zenith = -1;
+	if(cos_dist_zenith > 1 ) cos_dist_zenith = 1;
+	
 	static float dist_moon;
 	dist_moon = acosf(cos_dist_moon);
 	static float dist_sun;

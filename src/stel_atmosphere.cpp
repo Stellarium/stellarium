@@ -147,8 +147,8 @@ void stel_atmosphere::compute_color(double JD,  int delta_time, Vec3d sunPos, Ve
 
 			// Use the skybright.cpp 's models for brightness which gives better results.
 			b2.color[2] = skyb.get_luminance(moon_pos[0]*b2.pos[0]+moon_pos[1]*b2.pos[1]+
-					moon_pos[2]*b2.pos[2] - 0.0000001, sun_pos[0]*b2.pos[0]+sun_pos[1]*b2.pos[1]+
-					sun_pos[2]*b2.pos[2] - 0.0000001, b2.pos[2]);
+					moon_pos[2]*b2.pos[2], sun_pos[0]*b2.pos[0]+sun_pos[1]*b2.pos[1]+
+					sun_pos[2]*b2.pos[2], b2.pos[2]);
 
 
 			sum_lum+=b2.color[2];
