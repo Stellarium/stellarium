@@ -29,11 +29,8 @@
 	#include <windows.h>
 #endif
 
-#ifdef MACOSX
-# include <OpenGL/gl.h>
-#else
-# include <GL/gl.h>
-#endif
+/* Fabien Chéreau 3-03-2004 */
+#include "SDL_opengl.h"
 
 #include "glpng.h"
 #include <stdlib.h>
