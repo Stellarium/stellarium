@@ -32,7 +32,7 @@ public:
     Nebula_mgr();
     virtual ~Nebula_mgr();
     int Read(char * font_fileName, char * fileName);
-    void Draw(int names_ON, draw_utility * du);            // Draw all the Nebulaes
+    void Draw(int names_ON, draw_utility * du, navigator* nav);            // Draw all the Nebulaes
     stel_object * search(vec3_t Pos);             // Search the Nebulae by position
 private:
     vector<Nebula*> Liste;              // list of Nebulaes*

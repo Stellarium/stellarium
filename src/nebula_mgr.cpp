@@ -82,27 +82,19 @@ int Nebula_mgr::Read(char * font_fileName, char * fileName)
 }
 
 // Draw all the Nebulaes
-void Nebula_mgr::Draw(int names_ON, draw_utility * du)
+void Nebula_mgr::Draw(int names_ON, draw_utility * du, navigator* nav)
 {
 	glEnable(GL_TEXTURE_2D);
     glEnable(GL_BLEND);
-    
-    GLdouble M[16];
-    GLdouble P[16];
-    GLint V[4];
-    glGetDoublev(GL_MODELVIEW_MATRIX,M);
-    glGetDoublev(GL_PROJECTION_MATRIX,P);
-    glGetIntegerv(GL_VIEWPORT,V);
 
     vector<Nebula *>::iterator iter;
     for(iter=Liste.begin();iter!=Liste.end();iter++)
     {   
         // project in 2D to check if the nebula is in screen
-	    gluProject((**iter).XYZ[0],(**iter).XYZ[1],(**iter).XYZ[2],M,P,V,&((**iter).XY[0]),
-			&((**iter).XY[1]),&((**iter).XY[2]));
-        if ((**iter).XY[2]<1 && (**iter).XY[0]>0 && (**iter).XY[0]<du->screenW &&
-			(**iter).XY[1]>0 && (**iter).XY[1]<du->screenH)
-	        (**iter).Draw();
+		if ( nav->project_earth_equ_to_screen((*iter)->XYZ,(*iter)->XY) &&
+			(*iter)->XY[0]>0 && (*iter)->XY[0]<du->screenW &&
+			(*iter)->XY[1]>0 && (*iter)->XY[1]<du->screenH )
+	        (*iter)->Draw();
     }
     if (names_ON)
     {

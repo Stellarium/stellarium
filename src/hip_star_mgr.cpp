@@ -123,7 +123,14 @@ void Hip_Star_mgr::Load(char * font_fileName, char * hipCatFile, char * commonNa
         	e=NULL;
         	continue;
         }
- 		
+		else
+		if (e->Mag>9)
+ 		{
+        	delete e;
+        	e=NULL;
+        	continue;
+        }
+
         // Set names if any
         if(commonNames[e->HP]) e->CommonName=commonNames[e->HP];
         if(names[e->HP]) e->Name=names[e->HP];
@@ -151,7 +158,8 @@ void Hip_Star_mgr::Load(char * font_fileName, char * hipCatFile, char * commonNa
 
 // Draw all the stars
 void Hip_Star_mgr::Draw(float _star_scale, float _twinkle_amount, int name_ON,
-						float maxMagStarName, Vec3f equ_vision, draw_utility * du, tone_reproductor* _eye)
+						float maxMagStarName, Vec3f equ_vision, draw_utility * du,
+						tone_reproductor* _eye, navigator* nav)
 {
 	Hip_Star::twinkle_amount = _twinkle_amount;
 	Hip_Star::star_scale = _star_scale;
@@ -160,13 +168,7 @@ void Hip_Star_mgr::Draw(float _star_scale, float _twinkle_amount, int name_ON,
 	glEnable(GL_TEXTURE_2D);
     glEnable(GL_BLEND);
     glBindTexture (GL_TEXTURE_2D, starTexture->getID());
-
-    GLdouble M[16];
-    GLdouble P[16];
-    GLint V[4];
-    glGetDoublev(GL_MODELVIEW_MATRIX,M);
-    glGetDoublev(GL_PROJECTION_MATRIX,P);
-    glGetIntegerv(GL_VIEWPORT,V);
+	glBlendFunc(GL_ONE, GL_ONE);
 
     du->set_orthographic_projection();	// set 2D coordinate
 
@@ -175,11 +177,7 @@ void Hip_Star_mgr::Draw(float _star_scale, float _twinkle_amount, int name_ON,
 	static int * zoneList;  // WARNING this is almost a memory leak...
 
 	nbZones = HipGrid.Intersect(equ_vision, du->fov*M_PI/180.f*1.2f, zoneList);
-
-	//printf("nbzones = %d\n",nbZones );
-
 	float maxMag = 5.5f+60.f/du->fov;
-	//printf("maxMag = %f\n", maxMag);
 
 	// Print all the stars of all the selected zones
 	static vector<Hip_Star *>::iterator end;
@@ -192,10 +190,8 @@ void Hip_Star_mgr::Draw(float _star_scale, float _twinkle_amount, int name_ON,
 			// If too small, skip
 			if ((*iter)->Mag>maxMag) continue;
 
-			// Compute the 2D position
-	    	gluProject( (*iter)->XYZ[0], (*iter)->XYZ[1], (*iter)->XYZ[2],
-				M,P,V,&((*iter)->XY[0]), &((*iter)->XY[1]),&((*iter)->XY[2]));
-        	if ((*iter)->XY[2]<1.)
+			// Compute the 2D position and check if in screen
+        	if (nav->project_earth_equ_to_screen((*iter)->XYZ, (*iter)->XY))
         	{
 		        (*iter)->Draw(du);
 		        if (name_ON && (*iter)->CommonName && (*iter)->Mag<maxMagStarName)
