@@ -217,6 +217,7 @@ void stel_ui::tui_update_widgets(void)
 
 	// 2. Date & Time
 	tui_time_skytime->setJDay(core->navigation->get_JDay() + core->observatory->get_GMT_shift()*JD_HOUR);
+	tui_time_settmz->settz(core->observatory->get_custom_tz_name());
 	tui_time_presetskytime->setJDay(core->PresetSkyTime);
 	tui_time_startuptime->setCurrent(core->StartupTimeMode);
 	tui_time_displayformat->setCurrent(core->observatory->get_time_format_str());
@@ -264,19 +265,12 @@ void stel_ui::tui_cb_admin_load_default(void)
 	system( ( core->DataDir + "script_load_config " ).c_str() );
 }
 
-// Load default configuration
+// Save to default configuration
 void stel_ui::tui_cb_admin_save_default(void)
 {
 	core->save_config();
 	system( ( core->DataDir + "script_save_config " ).c_str() );
 }
-
-// Call script to set locale parameter (LANG)
-/*void stel_ui::tui_cb_admin_set_locale(void)
-{
-	system( ( core->DataDir + "script_set_locale " + tui_admin_setlocal->getCurrent() ).c_str() );
-	putenv(strdup((string("LANG=") + tui_admin_setlocal->getCurrent()).c_str()));
-}*/
 
 // Launch script for internet update
 void stel_ui::tui_cb_admin_updateme(void)
