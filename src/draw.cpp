@@ -88,6 +88,7 @@ void CalcAtmosphere(void)
 
 	Vec3d temp(0.,0.,0.);
 	Vec3d sunPos = navigation.helio_to_local(&temp);
+	sunPos.normalize();
 
 	double lat, lng;
 	rect_to_sphe(&lng, &lat, &sunPos);
@@ -106,7 +107,7 @@ void CalcAtmosphere(void)
 	b.month = d.months;
 
 	b.temperature_in_c = 20;
-	b.relative_humidity = 30.;
+	b.relative_humidity = 80.;
 
 	b.mask = 14;                //31 for all 5 bands
 	set_brightness_params(&b);
@@ -125,16 +126,16 @@ void CalcAtmosphere(void)
 	int limY;
 
 	// Don't calc if under the ground
-	/*if (global.FlagGround)
+	if (global.FlagGround)
 	{
 		gluProject(1,0,0,M,P,V,objx,objy,objz);
 		limY = (int)(skyResolution-(float)(*objy)/stepY+3.);
 		if (!(limY<skyResolution+1)) limY = skyResolution+1;
 	}
 	else
-	{*/
+	{
 		limY = skyResolution+1;
-	//}
+	}
 
 	for (int x=0; x<skyResolution+1; x++)
 	{
@@ -142,7 +143,6 @@ void CalcAtmosphere(void)
 		{
 			gluUnProject(x*stepX,resY-y*stepY,1,M,P,V,objx,objy,objz);
 			Vec3d point(*objx,*objy,*objz);
-			//printf("point[2] = %f\n",point[1]); = to zero
 			point.normalize();
 			b.zenith_angle = M_PI_2-asin(point[2]);
 			b.dist_sun = acos(point.dot(sunPos));

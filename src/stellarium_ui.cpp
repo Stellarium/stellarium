@@ -825,17 +825,21 @@ void updateStandardWidgets(void)
 /**********************************************************************/
 // Update the infos about the selected object in the TextLabel widget
 void updateInfoSelectString(void)
-{   char objectInfo[300];
+{
+	char objectInfo[300];
     objectInfo[0]=0;
 	selected_object->get_info_string(objectInfo);
     InfoSelectLabel->setLabel(objectInfo);
     InfoSelectLabel->setVisible(true);
+	if (selected_object->get_type()==STEL_OBJECT_NEBULA) InfoSelectLabel->setColour(Vec3f(0.4f,0.5f,0.8f));
+	if (selected_object->get_type()==STEL_OBJECT_PLANET) InfoSelectLabel->setColour(Vec3f(1.0f,0.3f,0.3f));
+	if (selected_object->get_type()==STEL_OBJECT_STAR)   InfoSelectLabel->setColour(selected_object->get_RGB());
 }
 
 
 /*******************************************************************/
 void renderUi()
-{   
+{
     setOrthographicProjection(global.X_Resolution, global.Y_Resolution);    // 2D coordinate
     glPushMatrix();
     glLoadIdentity();
