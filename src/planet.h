@@ -35,7 +35,7 @@ typedef boost::callback<void, double, double*> pos_func_type;
 
 // epoch J2000: 12 UT on 1 Jan 2000
 #define J2000 2451545.0
-#define ORBIT_SEGMENTS 100
+#define ORBIT_SEGMENTS 48
 
 using namespace std;
 
@@ -142,6 +142,11 @@ public:
 	static void set_gravity_label_flag(bool gl) {gravity_label = gl;}
 	static void set_label_color(const Vec3f& lc) {label_color = lc;}
 
+        // draw orbital path of planet
+	void planet::draw_orbit(const navigator * nav, const Projector* prj);
+
+
+
 protected:
 	// Return the radius of a circle containing the object on screen
 	float get_on_screen_size(const Projector* prj, const navigator * nav);
@@ -163,9 +168,6 @@ protected:
 
 	// Draw the big halo (for sun or moon)
 	void draw_big_halo(const navigator* nav, const Projector* prj, const tone_reproductor* eye);
-
-        // draw orbital path of planet
-	void planet::draw_orbit(const navigator * nav, const Projector* prj);
 
     string name;
 	int flagHalo;					// Set wether a little "star like" halo will be drawn

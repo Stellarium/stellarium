@@ -497,28 +497,31 @@ int stel_ui::handle_clic(Uint16 x, Uint16 y, Uint8 button, Uint8 state)
 				core->selected_object = core->clever_find((int)x, core->screen_H-(int)y);
             }
 
-            // If an object has been found
-            if (core->selected_object)
+	    // If an object has been found
+	    if (core->selected_object)
             {
-				updateInfoSelectString();
-				// If an object was selected keep the earth following
-				if (core->navigation->get_flag_traking()) core->navigation->set_flag_lock_equ_pos(1);
-				core->navigation->set_flag_traking(0);
+	      updateInfoSelectString();
+	      // If an object was selected keep the earth following
+	      if (core->navigation->get_flag_traking()) core->navigation->set_flag_lock_equ_pos(1);
+	      core->navigation->set_flag_traking(0);
 
-				if (core->selected_object->get_type()==STEL_OBJECT_STAR)
-				{
-					core->selected_constellation=core->asterisms->is_star_in((Hip_Star*)core->selected_object);
-				}
-				else
-				{
-					core->selected_constellation=NULL;
-				}
-            }
-			else
-			{
-				core->selected_constellation=NULL;
-			}
-        }
+	      if (core->selected_object->get_type()==STEL_OBJECT_STAR) {
+		core->selected_constellation=core->asterisms->is_star_in((Hip_Star*)core->selected_object);
+	      } else {
+		core->selected_constellation=NULL;
+	      }
+
+	      if (core->selected_object->get_type()==STEL_OBJECT_PLANET) {
+		core->selected_planet=(planet*)core->selected_object;
+	      } else {
+		core->selected_planet=NULL;
+	      }
+
+            } else {
+	      core->selected_constellation=NULL;
+	      core->selected_planet=NULL;
+	    }
+	}
     }
 	return 0;
 }
