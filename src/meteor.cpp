@@ -217,7 +217,7 @@ bool Meteor::draw(void)
     glEnd();
   }
 
-  
+  /*  
   // TEMP - show radiant
   Vec3d radiant = Vec3d(0,0,0.5f);
   radiant.transfo4d(mmat);
@@ -233,7 +233,7 @@ bool Meteor::draw(void)
     glVertex3f(start[0],start[1]+10,0);
     glEnd();
   }
-  
+  */
 
   glEnable(GL_TEXTURE_2D);
 
