@@ -210,8 +210,9 @@ void stel_core::init(void)
 
 
 
-	// script testing TEMPORARY ***
-	scripts->play_script("./scripts/startup.sts");
+	// could load a startup script
+	// scripts->play_script("./scripts/startup.sts");
+
 
 }
 

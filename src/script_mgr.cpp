@@ -39,6 +39,11 @@ ScriptMgr::~ScriptMgr() {
 void ScriptMgr::play_script(string script_file) {
   // load script...
 
+  if(playing){
+    cout << "Error: script already in progress.  Can't play " << script_file << endl;
+    return;
+  }
+
   script = new Script();
   if( script->load(script_file) ) {
     playing = 1;
@@ -61,7 +66,7 @@ void ScriptMgr::cancel_script() {
   // delete script object...
   delete script;
   script = NULL;
-
+  // images loaded are deleted from stel_command_interface directly
   playing = 0;
   play_paused = 0;
 }
@@ -118,7 +123,8 @@ void ScriptMgr::update(int delta_time) {
 
       } else {
 	// script done
-	playing = 0;
+	cout << "Script completed." << endl;
+	commander->execute_command("script action end");
       }
     }
   }
