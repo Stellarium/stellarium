@@ -23,13 +23,14 @@
 #include "s_font.h"
 #include "s_gui.h"
 #include "s_texture.h"
-#include "s_utility.h"
+#include "stel_utility.h"
 #include "s_gui_window.h"
 #include "navigator.h"
 #include "nebula_mgr.h"
 #include "hip_star_mgr.h"
 #include "stellarium.h"
-#include "stelconfig.h"
+#include "stel_config.h"
+#include "stel_object.h"
 
 using namespace gui;
 
@@ -332,41 +333,32 @@ void TimeControlBtOnClicCallback(guiValue button,Component * caller)
 
 void LatitudeBarOnChangeValue(float value,Component *)
 {
-	EarthMap->setPointerPosition(vec2_t(EarthMap->getPointerPosition()[0],(-value+90.)/180.*EarthMap->getSize()[1]));
-    value=90.-value;
-    global.ThePlace.setLatitude(value);
+    navigation.set_latitude(value);
     char tempValueStr[30];
-    if (global.ThePlace.latitude()-PI/2<0)
-        sprintf(tempValueStr,"\1 Latitude : %.2f N",-(global.ThePlace.latitude()*180./PI-90));
-    else
-        sprintf(tempValueStr,"\1 Latitude : %.2f S",global.ThePlace.latitude()*180./PI-90);
+    sprintf(tempValueStr,"\1 Latitude : %s",get_humanr_location(navigation.get_latitude()));
     LatitudeLabel->setLabel(tempValueStr);
+	EarthMap->setPointerPosition(vec2_t(EarthMap->getPointerPosition()[0],(value+90.)/180.*EarthMap->getSize()[1]));
 }
 void LongitudeBarOnChangeValue(float value,Component *)
-{   
+{
+    navigation.set_longitude(value);
     char tempValueStr[30];
-    if (value < 0)
-        sprintf(tempValueStr,"\1 Longitude : %.2f W",-value);
-    else 
-        sprintf(tempValueStr,"\1 Longitude : %.2f E",value);
+	sprintf(tempValueStr,"\1 Longitude : %s",get_humanr_location(navigation.get_longitude()));
     LongitudeLabel->setLabel(tempValueStr);
 	EarthMap->setPointerPosition(vec2_t((value+180.)/360.*EarthMap->getSize()[0],EarthMap->getPointerPosition()[1]));
-    value=-value;
-    if (value<0) value=360.+value;
-    global.ThePlace.setLongitude(value);
 }
 void AltitudeBarOnChangeValue(float value,Component *)
 {
-    global.Altitude=(int)value;
+    navigation.set_altitude((int)value);
     char tempValueStr[30];
-    sprintf(tempValueStr,"\1 Altitude : %dm",global.Altitude);
+    sprintf(tempValueStr,"\1 Altitude : %dm",navigation.get_altitude());
     AltitudeLabel->setLabel(tempValueStr);
 }
 void TimeZoneBarOnChangeValue(float value,Component *)
 {   
-    global.TimeZone=(int)value;
+    navigation.set_time_zone((int)value);
     char tempValueStr[30];
-    sprintf(tempValueStr,"\1 TimeZone : %d h",global.TimeZone);
+    sprintf(tempValueStr,"\1 TimeZone : %d h",navigation.get_time_zone());
     TimeZoneLabel->setLabel(tempValueStr);
 }
 
@@ -670,36 +662,30 @@ Boston, MA  02111-1307, USA.\n"
 
     LatitudeLabel = new Label("Latitude : ");
     LatitudeLabel->reshape(15,20,20,15);
-    if (global.ThePlace.latitude()-PI/2<0)
-        sprintf(tempValueStr,"\1 Latitude : %.2f N",-(global.ThePlace.latitude()*180./PI-90));
-    else
-        sprintf(tempValueStr,"\1 Latitude : %.2f S",global.ThePlace.latitude()*180./PI-90);
+	sprintf(tempValueStr,"\1 Latitude : %s",get_humanr_location(navigation.get_latitude()));
     LatitudeLabel->setLabel(tempValueStr);
+
     LatitudeBar = new CursorBar(vec2_i(15,35), vec2_i(150,10),-90.,90.,
-		-(global.ThePlace.latitude()*180/PI-90),LatitudeBarOnChangeValue);
+		navigation.get_latitude(),LatitudeBarOnChangeValue);
 
     LongitudeLabel = new Label("Longitude : ");
     LongitudeLabel->reshape(15,60,20,15);
-    float temp = (2*PI-global.ThePlace.longitude())*180/PI;
-    if (temp < 0)
-        sprintf(tempValueStr,"\1 Longitude : %.2f W",-temp);
-    else 
-        sprintf(tempValueStr,"\1 Longitude : %.2f E",temp);
+	sprintf(tempValueStr,"\1 Longitude : %s",get_humanr_location(navigation.get_longitude()));
     LongitudeLabel->setLabel(tempValueStr);
     LongitudeBar = new CursorBar(vec2_i(15,75), vec2_i(150,10),-180,180,
-		(2*PI-global.ThePlace.longitude())*180/PI,LongitudeBarOnChangeValue);
+		navigation.get_longitude(),LongitudeBarOnChangeValue);
 
     AltitudeLabel = new Label("Altitude : ");
     AltitudeLabel->reshape(170,20,20,15);
-    sprintf(tempValueStr,"\1 Altitude : %dm",global.Altitude);
+    sprintf(tempValueStr,"\1 Altitude : %dm",navigation.get_altitude());
     AltitudeLabel->setLabel(tempValueStr);
-    AltitudeBar = new CursorBar(vec2_i(170,35), vec2_i(150,10),-500.,10000.,global.Altitude,AltitudeBarOnChangeValue);
+    AltitudeBar = new CursorBar(vec2_i(170,35), vec2_i(150,10),-500., 10000.,navigation.get_altitude(),AltitudeBarOnChangeValue);
 
     TimeZoneLabel = new Label("TimeZone : ");
     TimeZoneLabel->reshape(170,60,20,15);
-    sprintf(tempValueStr,"\1 TimeZone : %d",global.TimeZone);
+    sprintf(tempValueStr,"\1 TimeZone : %d",navigation.get_time_zone());
     TimeZoneLabel->setLabel(tempValueStr);
-    TimeZoneBar = new CursorBar(vec2_i(170,75), vec2_i(150,10),-12.,13.,global.TimeZone,TimeZoneBarOnChangeValue);
+    TimeZoneBar = new CursorBar(vec2_i(170,75), vec2_i(150,10), -12.,13.,navigation.get_time_zone(),TimeZoneBarOnChangeValue);
     
     SaveLocation = new Labeled_Button("Save location");
     SaveLocation->reshape(120,240,100,20);
@@ -807,106 +793,40 @@ void clearUi(void)
 void updateStandardWidgets(void)
 {   // Update the date and time
     char str[30];
-    int jour,mois;
-    long annee;
+	ln_date d;
 
-    float reste;
     if (global.FlagUTC_Time)
     {   
-	DateOps::dayToDmy((long int)global.JDay,jour,mois,annee);
-        reste=global.JDay-DateOps::dmyToDay(jour,mois,annee);
+		get_date(navigation.get_JDay(),&d);
     }
     else
-    {   
-	DateOps::dayToDmy((long int)(global.JDay+global.TimeZone*HEURE),jour,
-			mois,annee);
-        reste=global.JDay+global.TimeZone*HEURE - 
-	    (float)DateOps::dmyToDay(jour,mois,annee);
+    {
+		get_date(navigation.get_JDay()+navigation.get_time_zone()*JD_HOUR,&d);
     }
-    double heure=reste*24;
-    double minute=(double)(heure-(int)heure)*60;
-    double seconde=(minute-(int)minute)*60;
 
-    sprintf(str,"%.2d/%.2d/%.4d",jour,mois,(int)annee);
+    sprintf(str,"%.2d/%.2d/%.4d",d.days,d.months,d.years);
     DateLabel->setLabel(str);
     if (global.FlagUTC_Time)
-    {   sprintf(str,"%.2d:%.2d:%.2d (UTC)",(int)heure,(int)minute,(int)seconde);
+    {
+		sprintf(str,"%.2d:%.2d:%.2d (UTC)",d.hours,d.minutes,(int)d.seconds);
     }
     else
-    {   sprintf(str,"%.2d:%.2d:%.2d",(int)heure,(int)minute,(int)seconde);
+    {   sprintf(str,"%.2d:%.2d:%.2d",d.hours,d.minutes,(int)d.seconds);
     }
     HourLabel->setLabel(str);
     sprintf(str,"FPS : %4.2f",global.Fps);
     FPSLabel->setLabel(str);
-    sprintf(str,"fov=%.3f", global.Fov);
+    sprintf(str,"fov=%.3f", navigation.get_fov());
     FOVLabel->setLabel(str);
 }
 
-
-/*****************************************************************************/
-// find and select the "nearest" object and retrieve his informations
-void findObject(int x, int y)
-{   // try to select an object
-    GLdouble M[16]; 
-    GLdouble P[16];
-    GLdouble objx[1];
-    GLdouble objy[1];
-    GLdouble objz[1];
-    GLint V[4];
-    Switch_to_equatorial();
-    // Convert x,y screen pos in 3D vector
-    glGetDoublev(GL_MODELVIEW_MATRIX,M);
-    glGetDoublev(GL_PROJECTION_MATRIX,P);
-    glGetIntegerv(GL_VIEWPORT,V);
-    vec3_t tempPointer;
-    if (gluUnProject(x,global.Y_Resolution-y,1,M,P,V,objx,objy,objz))
-    {   tempPointer[0]=*objx;
-        tempPointer[1]=*objy;
-        tempPointer[2]=*objz;
-        if (!SolarSystem->Rechercher(tempPointer) && global.FlagPlanets)
-        {   global.FlagSelect=true;
-            SolarSystem->InfoSelect(global.SelectedObject.XYZ, global.SelectedObject.RA,global.SelectedObject.DE, global.SelectedObject.Name, global.SelectedObject.Distance,global.SelectedObject.Size);
-            RA_en_hms(global.SelectedObject.RAh,global.SelectedObject.RAm,global.SelectedObject.RAs,global.SelectedObject.RA);
-            global.SelectedObject.type=2;   //planet type
-            global.SelectedObject.RGB[0]=1.0;
-            global.SelectedObject.RGB[1]=0.3;
-            global.SelectedObject.RGB[2]=0.3;
-            global.SelectedObject.Size=global.Y_Resolution*(global.SelectedObject.Size/5);
-            InfoSelectLabel->setColour(vec3_t(1.0,0.5,0.5));
-        }
-        else
-        {   if (!messiers->Rechercher(tempPointer) /*&& FlagNeb*/)
-            {   global.FlagSelect=true;
-                messiers->InfoSelect(global.SelectedObject.XYZ,global.SelectedObject.RA,global.SelectedObject.DE,global.SelectedObject.Mag,global.SelectedObject.Name,global.SelectedObject.MessierNum,global.SelectedObject.NGCNum,global.SelectedObject.Size);
-                global.SelectedObject.Size*=0.8;
-                RA_en_hms(global.SelectedObject.RAh,global.SelectedObject.RAm,global.SelectedObject.RAs,global.SelectedObject.RA);
-                global.SelectedObject.type=1;   //nebulae type
-                global.SelectedObject.RGB[0]=0.4;
-                global.SelectedObject.RGB[1]=0.5;
-                global.SelectedObject.RGB[2]=0.8;
-                InfoSelectLabel->setColour(vec3_t(0.4,0.5,0.8));
-            }
-            else
-            {   if (!HipVouteCeleste->Rechercher(tempPointer) && global.FlagStars)
-                {   global.FlagSelect=true;
-                    HipVouteCeleste->InfoSelect(global.SelectedObject.XYZ,global.SelectedObject.RA,global.SelectedObject.DE,global.SelectedObject.Mag,global.SelectedObject.Name,global.SelectedObject.HR,global.SelectedObject.RGB,global.SelectedObject.CommonName);
-                    RA_en_hms(global.SelectedObject.RAh,global.SelectedObject.RAm,global.SelectedObject.RAs,global.SelectedObject.RA);
-                    global.SelectedObject.type=0;   //star type
-                    global.SelectedObject.Size=10;
-                    InfoSelectLabel->setColour(vec3_t(0.4,0.7,0.3));
-                }
-                else global.FlagSelect=false;
-            }
-        }
-    }
-}
 
 /**********************************************************************/
 // Update the infos about the selected object in the TextLabel widget
 void updateInfoSelectString(void)
 {   char objectInfo[300];
     objectInfo[0]=0;
-	strcpy(objectInfo,selected_object.get_info_string());
+	selected_object->get_info_string(objectInfo);
     InfoSelectLabel->setLabel(objectInfo);
     InfoSelectLabel->setVisible(true);
 }
@@ -968,8 +888,10 @@ void GuiHandleClic(Uint16 x, Uint16 y, Uint8 state, Uint8 button)
             return;
         }
         if (button==SDL_BUTTON_MIDDLE)
-        {   if (global.FlagSelect)
-            {   Move_To(global.SelectedObject.XYZ);
+        {
+			if (global.FlagSelect)
+            {
+				navigation.move_to(selected_object->get_equ_pos());
             }
         }
         if (button==SDL_BUTTON_LEFT)
@@ -983,7 +905,7 @@ void GuiHandleClic(Uint16 x, Uint16 y, Uint8 state, Uint8 button)
             	return;
         	}
         	// Left or middle clic -> selection of an object
-            findObject((int)x,(int)y);
+            selected_object=find_stel_object((int)x,(int)y);
             // If an object has been found
             if (global.FlagSelect)
             {   updateInfoSelectString();
@@ -1096,7 +1018,7 @@ bool GuiHandleKeys(SDLKey key, int state)
 		}
         if(key==SDLK_SPACE)
         {	
-        	if (global.FlagSelect) Move_To(global.SelectedObject.XYZ);
+        	if (global.FlagSelect) navigation.move_to(selected_object->get_equ_pos());
 		}
         if(key==SDLK_i)
         {	

@@ -40,6 +40,10 @@ public:
 private:
 };
 
+// find and select the "nearest" object and retrieve his informations
+stel_object * find_stel_object(int x, int y);
+stel_object * find_stel_object(Vec3d);
+
 extern stel_object * selected_object; // Selection instance used in stellarium
 
 #endif // _STEL_OBJECT_H_

@@ -131,7 +131,7 @@ void Nebula_mgr::Draw()
 }
 
 // Look for a nebulae by XYZ coords
-int Nebula_mgr::Rechercher(vec3_t Pos)
+stel_object * Nebula_mgr::search(vec3_t Pos)
 {
 	Pos.normalize();
     vector<Nebula *>::iterator iter;
@@ -144,9 +144,9 @@ int Nebula_mgr::Rechercher(vec3_t Pos)
         }
     }
     if (anglePlusProche>499.9)
-    {   Selectionnee=plusProche;
-        return 0;
+    {
+        return plusProche;
     }
-    else return 1;
+    else return NULL;
 }
 

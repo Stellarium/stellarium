@@ -73,6 +73,16 @@ void sphe_to_rect(double lng, double lat, const Vec3d * v)
     (*v)[2] = cos(lng) * cosLat;
 }
 
+void sphe_to_rect(double lng, double lat, double r, Vec3d *v)
+{
+	const double cosLat = cos(lat);
+    (*v)[0] = sin(lng) * cosLat;
+    (*v)[1] = sin(lat);
+    (*v)[2] = cos(lng) * cosLat;
+	v->normalize();
+	(*v)*=r;
+}
+
 void sphe_to_rect(float lng, float lat, Vec3f &v)
 {
 	const double cosLat = cos(lat);
@@ -133,7 +143,29 @@ void resetPerspectiveProjection()
 }
 
 
+// Convert x,y screen pos in 3D vector
+Vec3d UnProject(double x ,double y)
+{
+	GLdouble M[16];
+    GLdouble P[16];
+    GLdouble objx[1];
+    GLdouble objy[1];
+    GLdouble objz[1];
+    GLint V[4];
+
+    glGetDoublev(GL_MODELVIEW_MATRIX,M);
+    glGetDoublev(GL_PROJECTION_MATRIX,P);
+    glGetIntegerv(GL_VIEWPORT,V);
+
+	gluUnProject(x,(double)global.Y_Resolution-y,1.,M,P,V,objx,objy,objz);
+	return Vec3d(*objx,*objy,*objz);
+}
+
+
+
+#if 0
 // BORROWED FROM libnova GPL library
+
 
 /* local types and macros */
 typedef int BOOL;
@@ -299,3 +331,64 @@ char *get_humanr_location(double location)
     return buf;
 }
 
+/*! \fn void get_date (double JD, struct ln_date * date)
+* \param JD Julian day
+* \param date Pointer to new calendar date.
+*
+* Calculate the date from the Julian day
+*/
+void get_date (double JD, struct ln_date * date)
+{
+   int A,a,B,C,D,E;
+   double F,Z;
+
+   JD += 0.5;
+   Z = (int) JD;
+   F = JD - Z;
+
+   if (Z < 2299161)
+   {
+       A = Z;
+   }
+   else
+   {
+       a = (int) ((Z - 1867216.25) / 36524.25);
+       A = Z + 1 + a - (int)(a / 4);
+   }
+
+   B = A + 1524;
+   C = (int) ((B - 122.1) / 365.25);
+   D = (int) (365.25 * C);
+   E = (int) ((B - D) / 30.6001);
+
+   /* get the hms */
+   date->hours = F * 24;
+   F -= (double)date->hours / 24;
+   date->minutes = F * 1440;
+   F -= (double)date->minutes / 1440;
+   date->seconds = F * 86400;
+
+   /* get the day */
+   date->days = B - D - (int)(30.6001 * E);
+
+   /* get the month */
+   if (E < 14)
+   {
+       date->months = E - 1;
+   }
+   else
+   {
+       date->months = E - 13;
+   }
+
+   /* get the year */
+   if (date->months > 2)
+   {
+       date->years = C - 4716;
+   }
+   else
+   {
+       date->years = C - 4715;
+   }
+}
+#endif

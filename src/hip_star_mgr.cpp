@@ -58,7 +58,7 @@ void Hip_Star_mgr::Load(char * hipCatFile, char * commonNameFile, char * nameFil
     FILE * hipFile, *cnFile, * nFile;
     hipFile=fopen(hipCatFile,"rb");
     if (!hipFile)
-    {   
+    {
         printf("ERROR %s NOT FOUND\n",hipCatFile);
         return;
     }
@@ -202,7 +202,7 @@ void Hip_Star_mgr::Draw(void)
 }
 
 // Look for a star by XYZ coords
-Hip_Star * Hip_Star_mgr::Rechercher(vec3_t Pos)
+Hip_Star * Hip_Star_mgr::search(vec3_t Pos)
 {   
     Pos.normalize();
     Hip_Star * plusProche=NULL;
@@ -253,7 +253,7 @@ void Hip_Star_mgr::Save(void)
 }
 
 // Search the star by HP number
-Hip_Star * Hip_Star_mgr::Rechercher(unsigned int _HP)
+Hip_Star * Hip_Star_mgr::search(unsigned int _HP)
 {
 	if (StarArray[_HP] && StarArray[_HP]->HP == _HP)
 		return StarArray[_HP];
