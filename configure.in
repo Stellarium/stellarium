@@ -10,8 +10,8 @@ dnl Check for compilers.
 AC_PROG_CC
 AC_PROG_CXX
 
-CFLAGS="-Wall -O2 -ffast-math -fexpensive-optimizations"
-CXXFLAGS="-O2 -ffast-math -fexpensive-optimizations"
+CFLAGS="-Wall -O3 -ffast-math -fexpensive-optimizations"
+CXXFLAGS="-O3 -ffast-math -fexpensive-optimizations"
 
 dnl Checks for programs.
 AC_PROG_CPP
@@ -30,6 +30,14 @@ CFLAGS="$CFLAGS $X_CFLAGS "
 AC_C_BIGENDIAN
 AC_CHECK_HEADER(byteswap.h)
 
+dnl assign the package directory variable
+if test "$prefix" = "NONE" ; then
+   prefix=$ac_default_prefix
+fi
+PKGDATADIR=`eval echo "${datadir}/$PACKAGE"`
+AC_DEFINE_UNQUOTED(CONFIG_DATA_DIR, "$PKGDATADIR")
+
+
 dnl For each host type, set the appropriate openGL libraries
 
 dnl MACOSX
@@ -40,6 +48,8 @@ case "$host" in
 	AC_CHECK_HEADER(OpenGL/gl.h,,AC_MSG_ERROR(gl.h not found - please install OpenGL))
 	AC_CHECK_HEADER(OpenGL/glu.h,,AC_MSG_ERROR(glu.h not found - please install GLU))
 	AC_CHECK_HEADER(GLUT/glut.h,,AC_MSG_ERROR(glut.h not found - please install GLUT))
+	
+	AC_DEFINE_UNQUOTED(CONFIG_CFG_DIR, "$PKGDATADIR/config/")
 ;;
 
 dnl CYGWIN
@@ -48,6 +58,7 @@ dnl CYGWIN
 	AC_CHECK_HEADER(GL/gl.h,,AC_MSG_ERROR(gl.h not found - please install OpenGL))
 	AC_CHECK_HEADER(GL/glu.h,,AC_MSG_ERROR(glu.h not found - please install GLU))
 	AC_CHECK_HEADER(GL/glut.h,,AC_MSG_ERROR(glut.h not found - please install GLUT))
+	AC_DEFINE_UNQUOTED(CONFIG_CFG_DIR, "$HOME/.stellarium/")
 ;;
 
 dnl OTHER SYSTEMS
@@ -68,17 +79,12 @@ dnl OTHER SYSTEMS
 
    	AC_CHECK_LIB(glut,glutMainLoop,,AC_MSG_ERROR(GLUT not found - please install GLUT))
 
+	AC_DEFINE_UNQUOTED(CONFIG_CFG_DIR, "$HOME/.stellarium/")
 ;;
 esac
 
 dnl Checks for library functions.
 AC_CHECK_FUNCS(toupper strcasecmp strdup)
 
-dnl assign the package directory variable
-if test "$prefix" = "NONE" ; then
-   prefix=$ac_default_prefix
-fi
-PKGDATADIR=`eval echo "${datadir}/$PACKAGE"`
-AC_DEFINE_UNQUOTED(CONFIG_DATA_DIR, "$PKGDATADIR")
 
 AC_OUTPUT(Makefile src/Makefile src/astrolib/Makefile src/glpng/Makefile config/Makefile data/Makefile textures/Makefile textures/landscapes/Makefile)
