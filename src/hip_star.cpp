@@ -201,29 +201,25 @@ void Hip_Star::draw_point(void)
 	rmag = eye->adapt_luminance(term1);
 	rmag = rmag/powf(proj->get_fov(),0.85f)*50.f;
 
-    cmag = 1.f;
-
     // if size of star is too small (blink) we put its size to 1.2 --> no more blink
     // And we compensate the difference of brighteness with cmag
-        cmag=rmag*rmag/1.44f;
-		if (rmag/star_scale<0.1f || cmag<0.1/star_mag_scale) return;
-        rmag=1.2f;
+    cmag = rmag * rmag / 1.44f;
+
+	if (rmag/star_scale<0.05f || cmag<0.05/star_mag_scale) return;
 
     // Calculation of the luminosity
     // Random coef for star twinkling
     cmag*=(1.-twinkle_amount*rand()/RAND_MAX);
-
-	// Global scaling
-	rmag*=star_scale;
 	cmag*=star_mag_scale;
-
     glColor3fv(RGB*(cmag/MaxColorValue));
-    glBegin(GL_QUADS );
-        glTexCoord2i(0,0);    glVertex2f(XY[0]-rmag,XY[1]-rmag);	// Bottom left
-        glTexCoord2i(1,0);    glVertex2f(XY[0]+rmag,XY[1]-rmag);	// Bottom right
-        glTexCoord2i(1,1);    glVertex2f(XY[0]+rmag,XY[1]+rmag);	// Top right
-        glTexCoord2i(0,1);    glVertex2f(XY[0]-rmag,XY[1]+rmag);	// Top left
-    glEnd();
+
+	// rms - one pixel stars
+	glDisable(GL_TEXTURE_2D);
+	glPointSize(0.1);
+	glBegin(GL_POINTS);
+	glVertex3f(XY[0],XY[1],0);
+	glEnd();
+	glEnable(GL_TEXTURE_2D); // required for star labels to work
 }
 
 void Hip_Star::draw_name(const s_font* star_font)
