@@ -47,6 +47,12 @@ planet::planet(const string& _name, int _flagHalo, int _flag_lighting, double _r
 	// temp
 	common_name = _name;
 
+	// 15 day trails
+	DeltaTrail = 0.125;
+	MaxTrail = 120;
+	last_trailJD = 0; // for now
+	trail_color = Vec3f(1,.7,.7);
+	trail_on = 0;
 }
 
 
@@ -126,6 +132,7 @@ Vec3d planet::get_earth_equ_pos(const navigator * nav) const
 // Actually call the provided function to compute the ecliptical position
 void planet::compute_position(double date)
 {
+
 
 	if (delta_orbitJD > 0 && (fabs(last_orbitJD-date)>delta_orbitJD || !orbit_cached))
 	{
@@ -208,6 +215,7 @@ void planet::compute_position(double date)
 	  coord_func(date, ecliptic_pos);
 	  lastJD = date;
 	}
+
 }
 
 // Compute the transformation matrix from the local planet coordinate to the parent planet coordinate
@@ -216,7 +224,7 @@ void planet::compute_trans_matrix(double date)
 
 	compute_geographic_rotation(date);
 
-	//mat_local_to_parent = Mat4d::translation(ecliptic_pos) // * Mat4d::zrotation(-re.ascendingNode)
+	//	mat_local_to_parent = Mat4d::translation(ecliptic_pos) // * Mat4d::zrotation(-re.ascendingNode)
 	//	* Mat4d::xrotation(-re.obliquity);
 
 	// re.ascendingNode is needed for correct Galilean moon positions viewed from Earth, for example
@@ -332,7 +340,8 @@ float planet::get_on_screen_size(const Projector* prj, const navigator * nav)
 }
 
 // Draw the planet and all the related infos : name, circle etc..
-void planet::draw(int hint_ON, Projector* prj, const navigator * nav, const tone_reproductor* eye, int flag_point, int flag_orbits)
+void planet::draw(int hint_ON, Projector* prj, const navigator * nav, const tone_reproductor* eye, 
+		  int flag_point, int flag_orbits, int flag_trails)
 {
 
 	Mat4d mat = mat_local_to_parent;
@@ -363,6 +372,8 @@ void planet::draw(int hint_ON, Projector* prj, const navigator * nav, const tone
 		  // by putting here, only draw orbit if planet if visible for clarity
 		  draw_orbit(nav, prj);
 		}
+
+		if(flag_trails) draw_trail(nav, prj);
 
      	if (hint_ON && ang_dist>0.25)
     	{
@@ -644,7 +655,6 @@ void ring::draw(const Projector* prj, const Mat4d& mat)
 }
 
 
-
 // draw orbital path of planet
 void planet::draw_orbit(const navigator * nav, const Projector* prj) {
 
@@ -706,4 +716,129 @@ void planet::draw_orbit(const navigator * nav, const Projector* prj) {
   glDisable(GL_BLEND);
   glEnable(GL_LIGHTING);
   glEnable(GL_TEXTURE_2D);
+}
+
+
+
+// draw trail of planet as seen from earth
+void planet::draw_trail(const navigator * nav, const Projector* prj) {
+
+  if(trail.begin() == trail.end()) return;
+
+  Vec3d onscreen1;
+  Vec3d onscreen2;
+
+  //  if(!re.sidereal_period) return;   // limits to planets
+
+  prj->set_orthographic_projection();    // 2D coordinate
+
+  glEnable(GL_BLEND);
+  glDisable(GL_LIGHTING);
+  glDisable(GL_TEXTURE_2D);
+
+  glColor3fv(trail_color);
+	
+  list<TrailPoint>::iterator iter;  
+  list<TrailPoint>::iterator nextiter;
+  list<TrailPoint>::iterator begin = trail.begin();
+  //  begin++;
+
+  nextiter = trail.end();
+  nextiter--;
+
+  for( iter=nextiter; iter != begin; iter--) {
+
+    nextiter--;
+    if( prj->project_earth_equ_line_check( (*iter).point, onscreen1, (*(nextiter)).point, onscreen2) ) {
+      glBegin(GL_LINE_STRIP);
+      glVertex3d(onscreen1[0], onscreen1[1], 0);
+      glVertex3d(onscreen2[0], onscreen2[1], 0);
+      glEnd();
+    }
+  }
+
+  // finish at current planet position
+  if( prj->project_earth_equ_line_check( (*trail.begin()).point, onscreen1, get_earth_equ_pos(nav), onscreen2) ) {
+    glBegin(GL_LINE_STRIP);
+    glVertex3d(onscreen1[0], onscreen1[1], 0);
+    glVertex3d(onscreen2[0], onscreen2[1], 0);
+    glEnd();
+  }
+
+
+  prj->reset_perspective_projection();		// Restore the other coordinate
+  
+  glDisable(GL_BLEND);
+  glEnable(GL_LIGHTING);
+  glEnable(GL_TEXTURE_2D);
+}
+
+// update trail points as needed
+void planet::update_trail(const navigator* nav) {
+
+  if(!trail_on) return;
+
+  double date = nav->get_JDay();
+  // planet trails
+  int dt = abs(int((date-last_trailJD)/DeltaTrail));
+  if(dt>MaxTrail) {
+    dt=1; 
+    // clear old trail
+    trail.clear();
+  } 
+    
+  // Note that when jump by a week or day at a time, loose detail on trails
+  // particularly for moon
+
+  // add only one point at a time, using current position only
+  if(dt) {
+    last_trailJD = date;
+    TrailPoint tp;
+    Vec3d v = get_heliocentric_ecliptic_pos();
+    //      trail.push_front( nav->helio_to_earth_equ(v) );  // centered on earth
+    tp.point = nav->helio_to_earth_pos_equ(v);  
+    tp.date = date;
+    trail.push_front( tp );  
+      
+    //      if( trail.size() > (unsigned int)MaxTrail ) {
+    if( trail.size() > (unsigned int)MaxTrail ) {
+      trail.pop_back();
+    }
+  }
+
+  // because sampling depends on speed and frame rate, need to clear out
+  // points if trail gets longer than desired
+	
+  list<TrailPoint>::iterator iter;  
+  list<TrailPoint>::iterator end = trail.end();
+
+  for( iter=trail.begin(); iter != end; iter++) {
+    if( fabs((*iter).date - date)/DeltaTrail > MaxTrail ) {
+      trail.erase(iter, end);
+      break;
+    }
+  }
+    
+    
+}
+
+
+
+void planet::set_trail_color(const Vec3f _color) {
+  trail_color = _color;
+}
+
+// start accumulating new trail data (clear old data)
+void planet::start_trail(void) {
+  trail.clear();
+
+  //  printf("trail for %s: %f\n", name.c_str(), re.sidereal_period);
+
+  // only interested in trails for planets and Earth's moon
+  if(re.sidereal_period > 0 || name == "Moon") trail_on = 1;
+}
+
+// stop accumulating trail data
+void planet::end_trail(void) {
+  trail_on = 0;
 }

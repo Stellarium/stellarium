@@ -339,6 +339,9 @@ void stel_ui::tui_cb_admin_load_default(void)
 	{
 		core->navigation->set_JDay(get_julian_from_sys());
 	}
+	if(core->FlagObjectTrails && core->ssystem) core->ssystem->start_trails();
+	else  core->ssystem->end_trails();
+
 	system( ( core->DataDir + "script_load_config " ).c_str() );
 }
 

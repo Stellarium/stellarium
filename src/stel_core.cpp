@@ -119,6 +119,8 @@ void stel_core::init(void)
 
 	// Create and init the solar system
 	ssystem = new SolarSystem(DataDir, SkyLocale, "spacefont.txt", PlanetNamesColor, PlanetOrbitsColor );
+	ssystem->set_trail_color(ObjectTrailsColor);
+	if(FlagObjectTrails) ssystem->start_trails();
 
 	atmosphere = new stel_atmosphere();
 	atmosphere->set_fade_duration(AtmosphereFadeDuration);
@@ -231,6 +233,9 @@ void stel_core::update(int delta_time)
 	// Field of view
 	projection->update_auto_zoom(delta_time);
 
+	// planet trails (call after nav is updated)
+	ssystem->update_trails(navigation);
+
 	// Move the view direction and/or fov
 	update_move(delta_time);
 
@@ -339,7 +344,7 @@ void stel_core::draw(int delta_time)
 	Vec3d tempv = navigation->get_equ_vision();
 	Vec3f temp(tempv[0],tempv[1],tempv[2]);
 
-	//	printf("sky: %f\tatm_int: %f\n", sky_brightness, atmosphere->get_intensity());
+	// printf("sky: %f\tatm_int: %f\n", sky_brightness, atmosphere->get_intensity());
 	if (FlagStars && sky_brightness<=0.11)
 	{
 		if (FlagPointStar) hip_stars->draw_point(StarScale, StarMagScale,
@@ -372,9 +377,11 @@ void stel_core::draw(int delta_time)
 	    // draw orbit only for selected planet
 	    selected_planet->draw_orbit(navigation, projection);
 	  }
+
 	  ssystem->draw(FlagPlanetsHints, projection, navigation, tone_converter,
-			FlagGravityLabels, FlagPointStar, FlagPlanetsOrbits && 
-			(selected_planet==NULL || selected_planet->get_name() == "Sun"));
+			FlagGravityLabels, FlagPointStar, 
+			FlagPlanetsOrbits && (selected_planet==NULL || selected_planet->get_name() == "Sun"),
+			FlagObjectTrails);
 
 	}
 
@@ -567,6 +574,7 @@ void stel_core::load_config_from(const string& confFile)
 	CardinalColor 		= str_to_vec3f(conf.get_str("color:cardinal_color").c_str());
 	PlanetNamesColor	= str_to_vec3f(conf.get_str("color:planet_names_color").c_str());
 	PlanetOrbitsColor	= str_to_vec3f(conf.get_str("color", "planet_orbits_color", ".6,1,1").c_str());
+	ObjectTrailsColor	= str_to_vec3f(conf.get_str("color", "object_trails_color", "1,0,1").c_str());
 
 	// Text ui section
 	FlagEnableTuiMenu = conf.get_boolean("tui:flag_enable_tui_menu");
@@ -627,6 +635,7 @@ void stel_core::load_config_from(const string& confFile)
 	FlagPlanets				= conf.get_boolean("astro:flag_planets");
 	FlagPlanetsHints		= conf.get_boolean("astro:flag_planets_hints");
 	FlagPlanetsOrbits		= conf.get_boolean("astro:flag_planets_orbits");
+	FlagObjectTrails		= conf.get_boolean("astro", "flag_object_trails", 0);
 	FlagNebula				= conf.get_boolean("astro:flag_nebula");
 	FlagNebulaName			= conf.get_boolean("astro:flag_nebula_name");
 	MaxMagNebulaName		= conf.get_double("astro:max_mag_nebula_name");
@@ -709,6 +718,7 @@ void stel_core::save_config_to(const string& confFile)
 	conf.set_str    ("color:cardinal_color", vec3f_to_str(CardinalColor));
 	conf.set_str    ("color:planet_names_color", vec3f_to_str(PlanetNamesColor));
 	conf.set_str    ("color:planet_orbits_color", vec3f_to_str(PlanetOrbitsColor));
+	conf.set_str    ("color:object_trails_color", vec3f_to_str(ObjectTrailsColor));
 
 	// Text ui section
 	conf.set_boolean("tui:flag_enable_tui_menu", FlagEnableTuiMenu);
@@ -764,6 +774,7 @@ void stel_core::save_config_to(const string& confFile)
 	conf.set_boolean("astro:flag_planets", FlagPlanets);
 	conf.set_boolean("astro:flag_planets_hints", FlagPlanetsHints);
 	conf.set_boolean("astro:flag_planets_orbits", FlagPlanetsOrbits);
+	conf.set_boolean("astro:flag_object_trails", FlagObjectTrails);
 	conf.set_boolean("astro:flag_nebula", FlagNebula);
 	conf.set_boolean("astro:flag_nebula_name", FlagNebulaName);
 	conf.set_double("astro:max_mag_nebula_name", MaxMagNebulaName);

@@ -36,6 +36,7 @@ stel_atmosphere::stel_atmosphere() : sky_resolution(48), tab_sky(NULL), atm_on(0
 		tab_sky[k] = new Vec3f[sky_resolution+1];
 	}
 	fade_duration = 3000.;
+	ai = 0;
 }
 
 stel_atmosphere::~stel_atmosphere()
