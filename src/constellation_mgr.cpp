@@ -90,11 +90,12 @@ void Constellation_mgr::load(const string& font_fileName, const string& fileName
 	// The coordinate are taken with (0,0) at the top left corner of the image file
 	char shortname[20];
 	char texfile[255];
-	unsigned int x1, y1, x2, y2, hp1, hp2;
+	unsigned int x1, y1, x2, y2, x3, y3, hp1, hp2, hp3;
 	int texSize;
     while(!feof(fic))
     {
-        if (fscanf(fic,"%s %s %u %u %u %u %u %u\n",shortname,texfile,&x1,&y1,&hp1,&x2,&y2,&hp2)!=8)
+        if (fscanf(fic,"%s %s %u %u %u %u %u %u %u %u %u\n",shortname,texfile,&x1,&y1,&hp1,&x2,&y2,&hp2,
+			&x3,&y3,&hp3)!=11)
 		{
 			printf("ERROR while loading art for constellation %s\n", shortname);
 			exit(-1);
@@ -103,40 +104,74 @@ void Constellation_mgr::load(const string& font_fileName, const string& fileName
     }
     fclose(fic);
 
-	// TODO Solve a 12 variables system to get the transfo matrix from texture coord to
-	// 3d position...
-	s_texture * art_tex = new s_texture(texfile);
-	texSize = art_tex->getSize();
-	Vec3f pos_star1 = _VouteCeleste->search(hp1)->get_earth_equ_pos();
-	Vec3f pos_star2 = _VouteCeleste->search(hp2)->get_earth_equ_pos();
+	cons = NULL;
+	cons = find_from_short_name(shortname);
+	if (!cons)
+	{
+		printf("ERROR : Can't find constellation called : %s\n",shortname);
+		exit(-1);
+	}
 
+	cons->art_tex = new s_texture(texfile);
+	texSize = cons->art_tex->getSize();
 
+	Vec3f s1 = _VouteCeleste->search(hp1)->get_earth_equ_pos();
+	Vec3f s2 = _VouteCeleste->search(hp2)->get_earth_equ_pos();
+	Vec3f s3 = _VouteCeleste->search(hp3)->get_earth_equ_pos();
+	// To transform from texture coordinate to 2d coordinate we need to find X with XA = B
+	// A formed of 4 points in texture coordinate, B formed with 4 points in 3d coordinate
+	// We need 3 stars and the 4th point is deduce from the other to get an normal base
+	// X = B inv(A)
+	Vec3f s4 = s1 + (s2-s1)^(s3-s1);
+	Mat4f B(s1[0], s1[1], s1[2], 1, s2[0], s2[1], s2[2], 1, s3[0], s3[1], s3[2], 1, s4[0], s4[1], s4[2], 1);
+	Mat4f A(x1, 128-y1, 0.f, 1.f, x2, 128-y2, 0.f, 1.f, x3, 128-y3, 0.f, 1.f, x1, 128-y1, texSize, 1.f);
+	Mat4f X = B * A.inverse();
+
+	cons->art_vertex[0] = Vec3f(X*Vec3f(0,0,0));
+	cons->art_vertex[1] = Vec3f(X*Vec3f(texSize,0,0));
+	cons->art_vertex[2] = Vec3f(X*Vec3f(texSize,texSize,0));
+	cons->art_vertex[3] = Vec3f(X*Vec3f(0,texSize,0));
 }
 
 // Draw all the constellations in the vector
-void Constellation_mgr::draw(Projector* prj)
+void Constellation_mgr::draw(Projector* prj) const
 {
 	glDisable(GL_TEXTURE_2D);
     glDisable(GL_BLEND);
     glColor3f(0.2,0.2,0.2);
 	prj->set_orthographic_projection();	// set 2D coordinate
-    vector<Constellation *>::iterator iter;
+    vector<Constellation *>::const_iterator iter;
     for(iter=asterisms.begin();iter!=asterisms.end();++iter)
     {
-		(*iter)->draw(prj);
+		(*iter)->draw_optim(prj);
     }
 	prj->reset_perspective_projection();
 }
 
 // Draw one constellation of internationnal name abr
-void Constellation_mgr::draw(Projector* prj, char abr[4])
+void Constellation_mgr::draw(Projector* prj, char abr[4]) const
 {
-	vector<Constellation *>::iterator iter;
+	vector<Constellation *>::const_iterator iter;
     for(iter=asterisms.begin();iter!=asterisms.end();iter++)
     {
 		if (!strcmp((*iter)->short_name,abr)) break;
 	}
-    (*iter)->draw_alone(prj);
+    (*iter)->draw(prj);
+}
+
+void Constellation_mgr::draw_art(Projector* prj) const
+{
+	glBlendFunc(GL_ONE, GL_ONE);
+	glEnable(GL_TEXTURE_2D);
+    glEnable(GL_BLEND);
+    glColor3f(1,1,1);
+	prj->set_orthographic_projection();
+    vector<Constellation *>::const_iterator iter;
+    for(iter=asterisms.begin();iter!=asterisms.end();++iter)
+    {
+		(*iter)->draw_art(prj);
+    }
+	prj->reset_perspective_projection();
 }
 
 // Draw the names of all the constellations
@@ -177,6 +212,17 @@ Constellation* Constellation_mgr::is_star_in(const Hip_Star * s) const
     {
 		// Check if the star is in one of the constellation
     	if ((*iter)->is_star_in(s)) return (*iter);
+    }
+	return NULL;
+}
+
+Constellation* Constellation_mgr::find_from_short_name(const string& shortname) const
+{
+	vector<Constellation *>::const_iterator iter;
+    for(iter=asterisms.begin();iter!=asterisms.end();++iter)
+    {
+		// Check if the star is in one of the constellation
+    	if (string((*iter)->short_name)==shortname) return (*iter);
     }
 	return NULL;
 }

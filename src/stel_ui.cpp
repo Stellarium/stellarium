@@ -499,6 +499,11 @@ int stel_ui::handle_keys(SDLKey key, S_GUI_VALUE state)
     {
     	if(key==SDLK_ESCAPE)
     	{
+			if (core->FlagShowTui)
+			{
+				core->FlagShowTui = false;
+				return 1;
+			}
 			return 0;	// Will quit properly from stel_sdl
 		}
         if(key==SDLK_c)

@@ -32,11 +32,13 @@ public:
     Constellation();
     virtual ~Constellation();
     int read(FILE *, Hip_Star_mgr * _VouteCeleste);
-    void draw(Projector* prj);
-    void draw_alone(Projector* prj) const;
+	void draw(Projector* prj) const;
     void draw_name(s_font * constfont, Projector* prj) const;
+	void draw_art(Projector* prj) const;
 	const Constellation* is_star_in(const Hip_Star *) const;
 private:
+    void draw_optim(Projector* prj) const;
+	void draw_art_optim(Projector* prj) const;
     char * name;
     char short_name[4];
     char * inter;
@@ -47,6 +49,7 @@ private:
 	static bool gravity_label;
 
 	s_texture* art_tex;
+	Vec3f art_vertex[4];
 
 };
 
