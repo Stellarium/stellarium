@@ -1,8 +1,6 @@
 /*
 * Stellarium
-* Copyright (C) 2002 Fabien Chéreau
-* Inspired by the gui.h by Chris Laurel <claurel@shatters.net>
-* in his Open Source Software Celestia
+* Copyright (C) 2003 Fabien Chéreau
 *
 * This program is free software; you can redistribute it and/or
 * modify it under the terms of the GNU General Public License
@@ -19,15 +17,13 @@
 * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 
+// Class which manages a Text User Interface "widgets"
+
 #include "s_tui.h"
 
 using namespace std;
 using namespace s_tui;
 
-
-//////////////////////////////// Container /////////////////////////////////////
-// Manages hierarchical components : send signals ad actions  to childrens
-////////////////////////////////////////////////////////////////////////////////
 
 Container::~Container()
 {
@@ -48,7 +44,7 @@ void Container::addComponent(Component* c)
 	childs.push_back(c);
 }
 
-string Container::getString(void) const
+string Container::getString(void)
 {
 	string s;
     list<Component*>::const_iterator iter = childs.begin();
@@ -72,12 +68,12 @@ bool Container::onKey(SDLKey k, S_TUI_VALUE s)
     return false;
 }
 
-Branch::Branch()
+Branch::Branch() : Container()
 {
 	current = childs.begin();
 }
 
-string Branch::getString(void) const
+string Branch::getString(void)
 {
 	if (!*current) return string();
 	else return (*current)->getString();
@@ -114,7 +110,7 @@ bool Branch::onKey(SDLKey k, S_TUI_VALUE v)
 	return false;
 }
 
-MenuBranch::MenuBranch(const string& s) : label(s), isNavigating(false), isEditing(false)
+MenuBranch::MenuBranch(const string& s) : Branch(), label(s), isNavigating(false), isEditing(false)
 {
 }
 
@@ -169,9 +165,12 @@ bool MenuBranch::onKey(SDLKey k, S_TUI_VALUE v)
 	return false;
 }
 
-string MenuBranch::getString(void) const
+string MenuBranch::getString(void)
 {
-	return label + (isNavigating ? string(" nav ") : string("") ) + (isEditing ? string(" edit ") : string("") ) + Branch::getString();
+	if (isEditing) (*Branch::current)->setActive(true);
+	string s(label + Branch::getString());
+	if (isEditing) (*Branch::current)->setActive(false);
+	return s;
 }
 
 Boolean_item::Boolean_item(bool init_state, const string& _label, const string& _string_activated,
@@ -191,4 +190,188 @@ bool Boolean_item::onKey(SDLKey k, S_TUI_VALUE v)
 		return true;
 	}
 	return false;
+}
+
+string Boolean_item::getString(void)
+{
+	return label + (active ? start_active : "") +
+		(state ? string_activated : string_disabled) +
+		(active ? stop_active : "");
+}
+
+string Integer::getString(void)
+{
+	ostringstream os;
+	os << (active ? start_active : "") << value << (active ? stop_active : "");
+	return os.str();
+}
+
+string Decimal::getString(void)
+{
+	ostringstream os;
+	os << (active ? start_active : "") << value << (active ? stop_active : "");
+	return os.str();
+}
+
+bool Integer_item::onKey(SDLKey k, S_TUI_VALUE v)
+{
+	if (v==S_TUI_PRESSED && k==SDLK_UP)
+	{
+		++value;
+		if (value>max)
+		{
+			value = max;
+			return true;
+		}
+		if (!onChangeCallback.empty()) onChangeCallback();
+		return true;
+	}
+	if (v==S_TUI_PRESSED && k==SDLK_DOWN)
+	{
+		--value;
+		if (value<min)
+		{
+			value = min;
+			return true;
+		}
+		if (!onChangeCallback.empty()) onChangeCallback();
+		return true;
+	}
+	return false;
+}
+
+bool Decimal_item::onKey(SDLKey k, S_TUI_VALUE v)
+{
+	if (v==S_TUI_PRESSED && k==SDLK_UP)
+	{
+		++value;
+		if (value>max)
+		{
+			value = max;
+			return true;
+		}
+		if (!onChangeCallback.empty()) onChangeCallback();
+		return true;
+	}
+	if (v==S_TUI_PRESSED && k==SDLK_DOWN)
+	{
+		--value;
+		if (value<min)
+		{
+			value = min;
+			return true;
+		}
+		if (!onChangeCallback.empty()) onChangeCallback();
+		return true;
+	}
+	return false;
+}
+
+bool Time_item::onKey(SDLKey k, S_TUI_VALUE v)
+{
+	if (v==S_TUI_RELEASED) return false;
+	if (k==SDLK_RIGHT)
+	{
+		++current_edit;
+		if (current_edit>=6) current_edit=0;
+		return true;
+	}
+	if (k==SDLK_LEFT)
+	{
+		--current_edit;
+		if (current_edit<=-1)
+		{
+			current_edit=0;
+			return false;
+		}
+		return true;
+	}
+	if (k==SDLK_UP || k==SDLK_DOWN)
+	{
+		compute_ymdhms();
+		if (current_edit==5) second += (k==SDLK_UP ? 1 : -1);
+		else ymdhms[current_edit] += (k==SDLK_UP ? 1 : -1);
+		compute_JD();
+		return true;
+	}
+	return false;
+}
+
+// Code originally from libnova which appeared to be totally wrong... New code from celestia
+void Time_item::compute_ymdhms(void)
+{
+    int a = (int) (JD + 0.5);
+    double c;
+    if (a < 2299161)
+    {
+        c = a + 1524;
+    }
+    else
+    {
+        double b = (int) ((a - 1867216.25) / 36524.25);
+        c = a + b - (int) (b / 4) + 1525;
+    }
+
+    int d = (int) ((c - 122.1) / 365.25);
+    int e = (int) (365.25 * d);
+    int f = (int) ((c - e) / 30.6001);
+
+    double dday = c - e - (int) (30.6001 * f) + ((JD + 0.5) - (int) (JD + 0.5));
+
+    /* This following used to be 14.0, but gcc was computing it incorrectly, so
+       it was changed to 14 */
+    ymdhms[1] = f - 1 - 12 * (int) (f / 14);
+    ymdhms[0] = d - 4715 - (int) ((7.0 + ymdhms[1]) / 10.0);
+    ymdhms[2] = (int) dday;
+
+    double dhour = (dday - ymdhms[2]) * 24;
+    ymdhms[3] = (int) dhour;
+
+    double dminute = (dhour - ymdhms[3]) * 60;
+    ymdhms[4] = (int) dminute;
+
+    second = (dminute - ymdhms[4]) * 60;
+}
+
+// Code originally from libnova which appeared to be totally wrong... New code from celestia
+void Time_item::compute_JD(void)
+{
+    int y = ymdhms[0], m = ymdhms[1];
+    if (ymdhms[1] <= 2)
+    {
+        y = ymdhms[0] - 1;
+        m = ymdhms[1] + 12;
+    }
+
+    // Correct for the lost days in Oct 1582 when the Gregorian calendar
+    // replaced the Julian calendar.
+    int B = -2;
+    if (ymdhms[0] > 1582 || (ymdhms[0] == 1582 && (ymdhms[1] > 10 || (ymdhms[1] == 10 && ymdhms[2] >= 15))))
+    {
+        B = y / 400 - y / 100;
+    }
+
+    JD = (floor(365.25 * y) +
+            floor(30.6001 * (m + 1)) + B + 1720996.5 +
+            ymdhms[2] + ymdhms[3] / 24.0 + ymdhms[4] / 1440.0 + second / 86400.0);
+}
+
+// Convert Julian day to yyyy/mm/dd hh:mm:ss and return the string
+string Time_item::getString(void)
+{
+	compute_ymdhms();
+
+	ostringstream os;
+	string s1[6];
+	string s2[6];
+	if (active)
+	{
+		s1[current_edit] = start_active;
+		s2[current_edit] = stop_active;
+	}
+
+	os 	<< s1[0] << ymdhms[0] << s2[0] << "/" << s1[1] << ymdhms[1] << s2[1] << "/"
+		<< s1[2] << ymdhms[2] << s2[2] << " " << s1[3] << ymdhms[3] << s2[3] << ":"
+		<< s1[4] << ymdhms[4] << s2[4] << ":"<< s1[5] << (int)round(second) << s2[5];
+	return os.str();
 }

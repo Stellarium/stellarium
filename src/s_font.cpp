@@ -30,7 +30,7 @@ s_font::s_font(float size_i, const char * textureName, const char * dataFileName
 
 s_font::~s_font()
 {
-    glDeleteLists(g_base, 256);                          // Delete All 256 Display Lists
+    glDeleteLists(g_base, 128);                          // Delete All 256 Display Lists
     if (s_fontTexture) delete s_fontTexture;
     s_fontTexture=NULL;
 }

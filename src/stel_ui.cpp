@@ -749,7 +749,8 @@ void stel_ui::init_tui(void)
 	menu1->addComponent(new s_tui::Label("Menu Item 1"));
 	menu1->addComponent(new s_tui::Label("Menu Item 2"));
 	menu1->addComponent(new s_tui::Boolean_item(true, "Fabien est cool? "));
-	menu1->addComponent(new s_tui::Decimal(12.));
+	menu1->addComponent(new s_tui::Decimal_item(0, 20, 12.5));
+	menu1->addComponent(new s_tui::Time_item("Time: "));
 }
 
 // Display the tui
@@ -764,8 +765,9 @@ void stel_ui::draw_tui(void)
 
 	if (tui_root)
 	{
-		glColor3f(0.1,0.1,0.9);
-		core->projection->print_gravity180(spaceFont, x+shift - 10, y-shift + 10, tui_root->getString().c_str());
+		glColor3f(0.1,0.9,0.1);
+		core->projection->print_gravity180(spaceFont, x+shift - 10, y-shift + 10,
+			(s_tui::stop_active + tui_root->getString()).c_str());
 	}
 }
 
