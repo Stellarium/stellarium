@@ -135,7 +135,7 @@ do
     echo "$ac_cs_version"; exit 0 ;;
   --he | --h)
     # Conflict between --help and --header
-    { { echo "$as_me:5444: error: ambiguous option: $1
+    { { echo "$as_me:5416: error: ambiguous option: $1
 Try \`$0 --help' for more information." >&5
 echo "$as_me: error: ambiguous option: $1
 Try \`$0 --help' for more information." >&2;}
@@ -154,7 +154,7 @@ Try \`$0 --help' for more information." >&2;}
     ac_need_defaults=false;;
 
   # This is an error.
-  -*) { { echo "$as_me:5463: error: unrecognized option: $1
+  -*) { { echo "$as_me:5435: error: unrecognized option: $1
 Try \`$0 --help' for more information." >&5
 echo "$as_me: error: unrecognized option: $1
 Try \`$0 --help' for more information." >&2;}
@@ -201,7 +201,7 @@ do
   "textures/Makefile" ) CONFIG_FILES="$CONFIG_FILES textures/Makefile" ;;
   "textures/landscapes/Makefile" ) CONFIG_FILES="$CONFIG_FILES textures/landscapes/Makefile" ;;
   "depfiles" ) CONFIG_COMMANDS="$CONFIG_COMMANDS depfiles" ;;
-  *) { { echo "$as_me:5516: error: invalid argument: $ac_config_target" >&5
+  *) { { echo "$as_me:5488: error: invalid argument: $ac_config_target" >&5
 echo "$as_me: error: invalid argument: $ac_config_target" >&2;}
    { (exit 1); exit 1; }; };;
   esac
@@ -278,19 +278,19 @@ s,@ECHO_N@,-n,;t t
 s,@ECHO_T@,,;t t
 s,@PATH_SEPARATOR@,:,;t t
 s,@DEFS@,-DPACKAGE=\"stellarium\" -DVERSION=\"0.4.9\" -DX_DISPLAY_MISSING=1 -DHAVE_TOUPPER=1 -DHAVE_STRCASECMP=1 -DHAVE_STRDUP=1 -DCONFIG_DATA_DIR=\"/usr/local/share/stellarium\" ,;t t
-s,@LIBS@,  -lopengl32 -lglu32 -lglut32 -lm,;t t
+s,@LIBS@, -lm  -lopengl32 -lglu32 -lglut32 ,;t t
 s,@INSTALL_PROGRAM@,${INSTALL},;t t
 s,@INSTALL_SCRIPT@,${INSTALL},;t t
 s,@INSTALL_DATA@,${INSTALL} -m 644,;t t
 s,@PACKAGE@,stellarium,;t t
 s,@VERSION@,0.4.9,;t t
-s,@ACLOCAL@,${SHELL} /home/Fabien/work2/stellarium/missing --run aclocal,;t t
-s,@AUTOCONF@,${SHELL} /home/Fabien/work2/stellarium/missing --run autoconf,;t t
-s,@AUTOMAKE@,${SHELL} /home/Fabien/work2/stellarium/missing --run automake,;t t
-s,@AUTOHEADER@,${SHELL} /home/Fabien/work2/stellarium/missing --run autoheader,;t t
-s,@MAKEINFO@,${SHELL} /home/Fabien/work2/stellarium/missing --run makeinfo,;t t
-s,@AMTAR@,${SHELL} /home/Fabien/work2/stellarium/missing --run tar,;t t
-s,@install_sh@,/home/Fabien/work2/stellarium/install-sh,;t t
+s,@ACLOCAL@,aclocal,;t t
+s,@AUTOCONF@,autoconf,;t t
+s,@AUTOMAKE@,automake,;t t
+s,@AUTOHEADER@,autoheader,;t t
+s,@MAKEINFO@,makeinfo,;t t
+s,@AMTAR@,tar,;t t
+s,@install_sh@,/home/Fabien/work/stellarium/install-sh,;t t
 s,@INSTALL_STRIP_PROGRAM@,${SHELL} $(install_sh) -c -s,;t t
 s,@AWK@,gawk,;t t
 s,@SET_MAKE@,,;t t
@@ -306,12 +306,8 @@ s,@host@,i686-pc-cygwin,;t t
 s,@host_cpu@,i686,;t t
 s,@host_vendor@,pc,;t t
 s,@host_os@,cygwin,;t t
-s,@target@,i686-pc-cygwin,;t t
-s,@target_cpu@,i686,;t t
-s,@target_vendor@,pc,;t t
-s,@target_os@,cygwin,;t t
 s,@CC@,gcc,;t t
-s,@CFLAGS@,-Wall -O3 -ffast-math -fexpensive-optimizations,;t t
+s,@CFLAGS@,-Wall -O2 -ffast-math -fexpensive-optimizations  ,;t t
 s,@LDFLAGS@,,;t t
 s,@CPPFLAGS@,,;t t
 s,@ac_ct_CC@,gcc,;t t
@@ -321,7 +317,7 @@ s,@am__include@,include,;t t
 s,@am__quote@,,;t t
 s,@CCDEPMODE@,depmode=gcc,;t t
 s,@CXX@,g++,;t t
-s,@CXXFLAGS@,-O3 -ffast-math -fexpensive-optimizations,;t t
+s,@CXXFLAGS@,-O2 -ffast-math -fexpensive-optimizations,;t t
 s,@ac_ct_CXX@,g++,;t t
 s,@CXXDEPMODE@,depmode=gcc,;t t
 s,@CPP@,gcc -E,;t t
@@ -441,7 +437,7 @@ done; }
   esac
 
   if test x"$ac_file" != x-; then
-    { echo "$as_me:5764: creating $ac_file" >&5
+    { echo "$as_me:5732: creating $ac_file" >&5
 echo "$as_me: creating $ac_file" >&6;}
     rm -f "$ac_file"
   fi
@@ -459,7 +455,7 @@ echo "$as_me: creating $ac_file" >&6;}
       -) echo $tmp/stdin ;;
       [\\/$]*)
          # Absolute (can't be DOS-style, as IFS=:)
-         test -f "$f" || { { echo "$as_me:5782: error: cannot find input file: $f" >&5
+         test -f "$f" || { { echo "$as_me:5750: error: cannot find input file: $f" >&5
 echo "$as_me: error: cannot find input file: $f" >&2;}
    { (exit 1); exit 1; }; }
          echo $f;;
@@ -472,7 +468,7 @@ echo "$as_me: error: cannot find input file: $f" >&2;}
            echo $srcdir/$f
          else
            # /dev/null tree
-           { { echo "$as_me:5795: error: cannot find input file: $f" >&5
+           { { echo "$as_me:5763: error: cannot find input file: $f" >&5
 echo "$as_me: error: cannot find input file: $f" >&2;}
    { (exit 1); exit 1; }; }
          fi;;

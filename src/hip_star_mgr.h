@@ -22,7 +22,7 @@
 
 #include <map>
 #include "hip_star.h"
-#include "Grid.h"
+#include "grid.h"
         
 using namespace std ;
 
@@ -33,6 +33,7 @@ public:
     virtual ~Hip_Star_mgr();
     int Read(FILE *);					// Used by Load
     void Draw(void);                    // Draw all the stars
+    void Save(void);                    // Debug function
     // Load all the stars from the files
     void Load(char * hipCatFile, char * commonNameFile, char * nameFile);         
     int Rechercher(vec3_t Pos);         // Search the star by position

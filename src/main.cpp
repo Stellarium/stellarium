@@ -50,7 +50,7 @@ Nebula_mgr * messiers;                // Class to manage the messier objects
 Planet_mgr * SolarSystem;             // Class to manage the planets
 s_texture * texIds[200];              // Common Textures
 
-ShootingStar * TheShooting = NULL;
+/*ShootingStar * TheShooting = NULL;*/
 
 static int timeAtmosphere=0;
 
@@ -102,14 +102,15 @@ void glutDisplay(void)
 	//VouteCeleste->Draw();      // Draw the stars
     }
 
-	if (!TheShooting) TheShooting = new ShootingStar(global.Timefr);
+/*
+	if (!TheShooting) TheShooting = new ShootingStar();
 	if (TheShooting->IsDead())
 	{
 		delete TheShooting;
-		TheShooting = new ShootingStar(global.Timefr);
+		TheShooting = new ShootingStar();
 	}
-	//TheShooting->Draw(global.Timefr);
-
+	TheShooting->Draw();
+*/
     if (global.FlagPlanets || global.FlagPlanetsHintDrawing) 
 	SolarSystem->Draw();         // Draw the planets
     if (global.FlagAtmosphere && global.SkyBrightness>0) 
@@ -503,11 +504,11 @@ int main (int argc, char **argv)
     FILE * tempFile = fopen(tempName,"r");
     strcpy(dataRoot,CONFIG_DATA_DIR);
     if(!tempFile)
-    {
-        tempFile = fopen("./data/hipparcos.dat","r");
+    {    
+        tempFile = fopen("./data/hipparcos.fab","r");
         strcpy(dataRoot,".");
         if(!tempFile)
-        {
+        {	  	
             strcpy(dataRoot,"..");
             tempFile = fopen("../data/hipparcos.dat","r");
             if(!tempFile)
@@ -556,11 +557,12 @@ int main (int argc, char **argv)
         }
         else                         // Error
         {   
-	    printf("\n\nERROR : Unsuported screen mode, change the config.txt file\n");
-            exit(1);
+	    printf("\nWARNING : Unsuported screen mode, please edit the %sconfig.txt file with the best options for your computer.\n I try to run in Windowed mode...\n",global.ConfigDir);
+	    global.Fullscreen = 0;
+            
         }
     }
-    else                             // Windowed mode
+    if (!global.Fullscreen)          // Windowed mode
     {  
 	glutCreateWindow(APP_NAME);
         glutFullScreen();            // Windowed fullscreen mode
@@ -594,7 +596,7 @@ int main (int argc, char **argv)
 
     // Load hipparcos stars & names
     strcpy(tempName,global.DataDir);
-    strcat(tempName,"hipparcos.dat");
+    strcat(tempName,"hipparcos.fab");
     strcpy(tempName2,global.DataDir);
     strcat(tempName2,"commonname.fab"); 
     strcpy(tempName3,global.DataDir);

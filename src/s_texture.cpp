@@ -58,7 +58,7 @@ int s_texture::load()
     if (!tempFile) printf("WARNING : Can't load texture %s!\n",fullName);
     pngInfo info;
     pngSetStandardOrientation(1);
-    texID = pngBind(fullName, PNG_NOMIPMAP, loadType, &info, GL_CLAMP, GL_LINEAR, GL_LINEAR);
+    texID = pngBind(fullName, PNG_BUILDMIPMAPS, loadType, &info, GL_CLAMP, GL_LINEAR, GL_LINEAR);
     return (texID!=0);
 }
 

@@ -46,6 +46,10 @@ private:
     char SpType;            // Spectral type
     char * CommonName;      // Common Name of the star
     char * Name;            // Scientific name
+    
+    unsigned short int typep; //temp
+    unsigned short int magp;  //temp
+    float r,d;
 };
 
 #endif // _STAR_H_

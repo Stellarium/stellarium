@@ -82,11 +82,11 @@ void Hip_Star_mgr::Load(char * hipCatFile, char * commonNameFile, char * nameFil
     
     StarArraySize = 120417;
     // Create the sequential array
-    StarArray = new (Hip_Star *)[StarArraySize];
+    StarArray = new Hip_Star*[StarArraySize];
     
 	// Read common names & names catalog
-	char ** commonNames = new (char *)[120000];
-	char ** names = new (char *)[120000];
+	char ** commonNames = new char*[120000];
+	char ** names = new char*[120000];
 	
 	int tmp;
 	char tmpName[20];
@@ -105,9 +105,11 @@ void Hip_Star_mgr::Load(char * hipCatFile, char * commonNameFile, char * nameFil
 	// Read binary file Hipparcos catalog  
     Hip_Star * e = NULL;
     for(int i=0;i<catalogSize;i++)
-    {   
+    {
 	    e = new Hip_Star;
-        e->Read(hipFile);
+	    e->HP=(unsigned int)i;
+        if (!e->Read(hipFile)) {delete e; continue;}
+ 
         // Set names if any
         if(commonNames[e->HP]) e->CommonName=commonNames[e->HP];
         if(names[e->HP]) e->Name=names[e->HP];
@@ -206,13 +208,38 @@ int Hip_Star_mgr::Rechercher(vec3_t Pos)
             plusProche=(*iter).second;
         }
     }
-//  printf("PlusProche : Name:%s HR:%i RA:%4.2f DE:%4.2f Dist:%4.5f\n",&(*plusProche).Name,(*plusProche).HR,(*plusProche).RaRad*12/3.141,(*plusProche).DecRad*180/3.141,anglePlusProche);
     if (anglePlusProche>498)
     {   
 	    Selectionnee=plusProche;
         return 0;
     }
     else return 1;
+}
+void Hip_Star_mgr::Save(void)
+{
+	FILE * fic = fopen("cat.fab","wb");
+	unsigned int StarArraySizeu = StarArraySize;
+    fwrite((char*)&StarArraySize,4,1,fic);	
+	
+    for(int i=0;i<StarArraySize;i++)
+    {
+    	Hip_Star * s = StarArray[i];
+    	float RAf=0, DEf=0;
+    	unsigned short int mag=0;
+    	unsigned short int type=0;
+
+    	if (s)
+    	{
+    		RAf=s->r; DEf=s->d;
+    		mag = s->magp;
+    		type = s->typep;   	
+    	}
+    	fwrite((char*)&RAf,4,1,fic);
+    	fwrite((char*)&DEf,4,1,fic);
+    	fwrite((char*)&mag,2,1,fic);
+    	fwrite((char*)&type,2,1,fic);	
+    }
+   	fclose(fic);
 }
 
 // Search the star by HP number
