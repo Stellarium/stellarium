@@ -221,7 +221,7 @@ void planet::draw(int hint_ON, Projector* prj, const navigator * nav)
 
 	glPushMatrix();
 
-	glLoadMatrixd(mat);
+	//glLoadMatrixd(mat);
 
 	// Compute the 2D position and check if in the screen
 	float screen_sz = get_on_screen_size(nav, prj);
@@ -294,19 +294,15 @@ void planet::draw_sphere(const Projector* prj, const Mat4d& mat)
 	glEnable(GL_CULL_FACE);
 	glDisable(GL_BLEND);
 
-	glPushMatrix();
-	// Rotate and add an extra half rotation because of the convention in all
-    // planet texture maps where zero deg long. is in the middle of the texture.
-	//glRotatef(axis_rotation + 180.,0.,0.,1.);
-
 	if (flag_lighting) glEnable(GL_LIGHTING);
 	else glDisable(GL_LIGHTING);
 	glColor3fv(color);
 	glBindTexture(GL_TEXTURE_2D, tex_map->getID());
 
-	prj->sSphere(radius*10,40,40, mat);
+	// Rotate and add an extra half rotation because of the convention in all
+    // planet texture maps where zero deg long. is in the middle of the texture.
+	prj->sSphere(radius*10,40,40, mat * Mat4d::zrotation(M_PI/180*(axis_rotation + 180.)));
 
-	glPopMatrix();
     glDisable(GL_CULL_FACE);
 	glDisable(GL_LIGHTING);
 }

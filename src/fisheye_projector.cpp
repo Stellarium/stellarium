@@ -63,6 +63,7 @@ void Fisheye_projector::change_fov(double deltaFov)
 // The function is a reimplementation of glOrtho
 void Fisheye_projector::init_project_matrix(void)
 {
+	// Simplest orthographic projection
 	mat_projection = Mat4d(	1., 0., 0., 0.,
 							0., 1., 0., 0.,
 							0., 0., -1, 0.,
@@ -76,15 +77,17 @@ void Fisheye_projector::init_project_matrix(void)
 bool Fisheye_projector::project_custom(const Vec3d& v, Vec3d& win, const Mat4d& mat) const
 {
 	static Vec3d w;
-	w[0] = v[0]; w[1] = v[1]; w[2] = v[2];
+	w = v;
 	w.transfo4d(mat);
 	w.normalize();
-	w[2] = -w[2];
-
+	w.transfo4d(mat_projection);
+	static double z;
+	z = w[2];
 	double a = fabs(M_PI_2 - asin(w[2]));
 	w[2] = 0;
 	w.normalize();
 	win = center + w * a/M_PI * 360./fov * MY_MIN(vec_viewport[2],vec_viewport[3])/2;
+	win[2] = z;
 	if (a<0.95*M_PI) return true;
 	else return false;
 }
@@ -113,12 +116,14 @@ void Fisheye_projector::unproject(double x, double y, const Mat4d& m, Vec3d& v) 
 }
 
 // Override glVertex3f
+// Here is the main trick for texturing in fisheye mode : The trick is to compute the
+// new coordinate in orthographic projection which will simulate the fisheye projection.
 void Fisheye_projector::sVertex3f(double x, double y, double z, const Mat4d& mat) const
 {
 	static Vec3d win;
 	static Vec3d v;
 	project_custom(Vec3d(x,y,z), win, mat);
-	gluUnProject(win[0],win[1],1,mat,mat_projection,vec_viewport,&v[0],&v[1],&v[2]);
+	gluUnProject(win[0],win[1],win[2],mat,mat_projection,vec_viewport,&v[0],&v[1],&v[2]);
 	glVertex3f(v[0],v[1],v[2]);
 }
 
@@ -152,7 +157,7 @@ void Fisheye_projector::sSphere(GLdouble radius, GLint slices, GLint stacks, con
 	for (i = imin; i < imax; i++)
 	{
 		rho = i * drho;
-		glBegin(GL_TRIANGLE_STRIP);
+		glBegin(GL_QUAD_STRIP);
 		s = 0.0;
 		for (j = 0; j <= slices; j++)
 		{
