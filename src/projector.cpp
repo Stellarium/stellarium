@@ -507,33 +507,6 @@ void Projector::sCylinder(GLdouble radius, GLdouble height, GLint slices, GLint 
 	}
 }
 
-
-/*void Projector::print_gravity(const s_font* font, float x, float y, const string& str, float xshift, float yshift) const
-{
-	static Vec3d top(0., 0., 1.);
-	static Vec3d v;
-	static float dx, dy, d;
-	project_local(top, v);
-	dx = x-v[0];
-	dy = y-v[1];
-	d = sqrt(dx*dx + dy*dy);
-	float theta = M_PI + atan2(dx, dy);
-	float psi = atan2((float)font->getStrLen(str)/str.length(),d) * 180./M_PI;
-	if (psi>20) psi = 20;
-	set_orthographic_projection();
-	glTranslatef(x,y,0);
-	glRotatef(theta*180./M_PI,0,0,-1);
-	glTranslatef(sinf(xshift/d)*d,(1.f-cosf(xshift/d))*d + yshift,0);
-	glRotatef(xshift/d*180./M_PI,0,0,1);
-	glScalef(1, -1, 1);
-	for (unsigned int i=0;i<str.length();++i)
-	{
-		font->print_char(str[i]);
-		glRotatef(psi,0,0,-1);
-	}
-	reset_perspective_projection();
-}*/
-
 void Projector::print_gravity180(const s_font* font, float x, float y, const string& str,
 	float xshift, float yshift) const
 {
