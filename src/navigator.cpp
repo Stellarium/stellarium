@@ -172,7 +172,9 @@ void navigator::set_local_vision(const Vec3d& _pos)
 void navigator::update_move(double deltaAz, double deltaAlt)
 {
 	double azVision, altVision;
-	rect_to_sphe(&azVision,&altVision,local_vision);
+
+	if( viewing_mode == VIEW_EQUATOR) rect_to_sphe(&azVision,&altVision,equ_vision);
+	else rect_to_sphe(&azVision,&altVision,local_vision);
 
     // if we are mooving in the Azimuthal angle (left/right)
     if (deltaAz) azVision-=deltaAz;
@@ -186,10 +188,17 @@ void navigator::update_move(double deltaAz, double deltaAlt)
     // recalc all the position variables
 	if (deltaAz || deltaAlt)
 	{
-    	sphe_to_rect(azVision, altVision, local_vision);
-
-    	// Calc the equatorial coordinate of the direction of vision wich was in Altazimuthal coordinate
-    	equ_vision=local_to_earth_equ(local_vision);
+    	if( viewing_mode == VIEW_EQUATOR)
+		{
+			sphe_to_rect(azVision, altVision, equ_vision);
+			local_vision=earth_equ_to_local(equ_vision);
+		}
+		else
+		{
+			sphe_to_rect(azVision, altVision, local_vision);
+			// Calc the equatorial coordinate of the direction of vision wich was in Altazimuthal coordinate
+    		equ_vision=local_to_earth_equ(local_vision);
+		}
 	}
 
 	// Update the final modelview matrices
@@ -317,4 +326,10 @@ void navigator::set_viewing_mode(VIEWING_MODE_TYPE view_mode)
   // TODO: include some nice smoothing function trigger here to rotate between
   // the two modes 
 
+}
+
+void navigator::switch_viewing_mode(void)
+{
+	if (viewing_mode==VIEW_HORIZON) set_viewing_mode(VIEW_EQUATOR);
+	else set_viewing_mode(VIEW_HORIZON);
 }
