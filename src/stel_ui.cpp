@@ -699,7 +699,9 @@ int stel_ui::handle_keys(SDLKey key, S_GUI_VALUE state)
 	  if(zhr <= 10 ) {
 	    core->meteors->set_ZHR( 80 );  // standard Perseids rate
 	  } else if( zhr <= 80 ) {
-	    core->meteors->set_ZHR( 3000 );  // exceptional Leonid rate
+	    core->meteors->set_ZHR( 10000 );  // exceptional Leonid rate
+	  } else if( zhr <= 10000 ) {
+	    core->meteors->set_ZHR( 144000 );  // highest ever recorded ZHR (1966 Leonids)
 	  } else {
 	    core->meteors->set_ZHR( 10 );  // set to ***default base rate (10 is normal, 0 would be none)
 	  }
