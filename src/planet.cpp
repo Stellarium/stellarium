@@ -17,7 +17,7 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-
+#include <iostream>
 #include "planet.h"
 #include "navigator.h"
 #include "s_font.h"
@@ -77,7 +77,7 @@ void planet::get_info_string(char * s, const navigator * nav) const
 	static char scale_str[100];
 	if (sphere_scale == 1.f) scale_str[0] = '\0';
 	else sprintf(scale_str," (x%.1f)", sphere_scale);
-
+	
 	Vec3d equPos = get_earth_equ_pos(nav);
 	rect_to_sphe(&tempRA,&tempDE,equPos);
 	sprintf(s,_("Name :%s%s\nRA : %s\nDE : %s\nDistance : %.8f UA\nMagnitude : %.2f"),
