@@ -493,8 +493,7 @@ T   : Object Tracking\n\
 S   : Stars\n\
 I   : About Stellarium\n\
 ESC : Quit\n\
-F1/F2 : fullscreen window/small window\n\
-(in windowed mode only)\n"
+F1  : Toggle fullscreen if possible.\n"
     ,gc->getFont());
     HelpTextLabel->reshape(avgCharLen*2,lineHeight,45*avgCharLen,35*lineHeight);
 
@@ -983,12 +982,22 @@ void renderUi()
 
     glEnable(GL_SCISSOR_TEST);
     vec2_i sz = Base->getSize();
+	gc->scissorPos[0]=0;
+	gc->scissorPos[1]=0;
     glScissor(gc->scissorPos[0], gc->winH - gc->scissorPos[1] - sz[1], sz[0], sz[1]);
     
     Base->render(*gc);
     glDisable(GL_SCISSOR_TEST);
     glPopMatrix();
     resetPerspectiveProjection();                                           // Restore the other coordinate
+}
+
+/*******************************************************************/
+void updateUi() // To finish
+{
+	Base->reshape(0,0,global.X_Resolution,global.Y_Resolution);
+	ContainerBtFlags->reshape(vec2_i(0,global.Y_Resolution-ContainerBtFlags->getSize()[1]),
+		ContainerBtFlags->getSize());
 }
 
 /*******************************************************************************/
