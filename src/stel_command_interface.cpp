@@ -17,34 +17,53 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-/* This class handles parsing of a simple command syntax for scripting, 
-   UI components, network commands, etc.
-*/   
-
-#ifndef _COMMAND_INTERFACE_H_
-#define _COMMAND_INTERFACE_H_
-
-#include <stdio.h>
+#include <iostream>
+#include <sstream>
 #include <string>
-#include <map>
+#include "stel_command_interface.h"
+#include "stel_core.h"
 
 using namespace std;
 
-typedef std::map< std::string, std::string > stringHash_t;
-typedef stringHash_t::const_iterator stringHashIter_t;
+StelCommandInterface::StelCommandInterface(stel_core * core) {
+  stcore = core;
+}
 
-class CommandInterface
-{
+StelCommandInterface::~StelCommandInterface() {
+}
 
- public:
-  CommandInterface();
-  virtual ~CommandInterface();
-  virtual int execute_command(string command) = 0;
-  
-  protected:
-  int parse_command(string command_line, string &command, stringHash_t &arguments);
+int StelCommandInterface::execute_command(string commandline) {
+  string command;
+  stringHash_t args;
+  int status = 0;
 
-};
+  status = parse_command(commandline, command, args);
+
+  // stellarium specific logic to run each command
+
+  if(command == "flag") {
+
+    // TODO: loop if want to allow that syntax
+    status = stcore->set_flag( args.begin()->first, args.begin()->second );
+
+  } else if (command == "set") {
 
 
-#endif // _COMMAND_INTERFACE_H
+  } // else if (command == 
+
+  if( status ) {
+
+    // if recording commands, do that now...
+
+    // temp debugging output
+    cout << commandline << endl;
+
+
+  }
+
+  return(status);
+
+
+}
+
+
