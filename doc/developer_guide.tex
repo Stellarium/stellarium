@@ -8,7 +8,7 @@
 \setlength {\evensidemargin} {0cm}
 
 \begin{document}
-\title{\textbf{Stellarium Developer guide} \\{v 0.1}}
+\title{\textbf{Stellarium Developer guide} \\{v 0.2}}
 \author{Fabien Ch\'ereau}
 
 \maketitle
@@ -144,4 +144,158 @@ Class which manages textures. Currently uses glpng library to handle png files.
 	\item[stellastro :] miscelaneous astronomical functions.
 	\item[stellplanet :] compute heliocentric positions of solar system planets.
 \end{description}
+
+\section{Stellarium data files format specification}
+
+\begin{itemize}
+\item commonname.fab and name.fab
+
+\begin{description}
+\item[desc :] Contains the commonly used stars names.
+\item[type :] ascii file, fields separated by $|$ (pipe), end of line is CR ('$\backslash$n')
+\item[line example :] 62956$|$Alioth
+\item[line format :] HPnum$|$Star\_Name
+	\begin{itemize}
+	\item HPnum : (unsigned int) Hipparcos catalog star number
+	\item Star\_Name : (string) The name string without spaces. The '\_' will be replaced by space in the program.
+	\end{itemize}
+\end{description}
+
+\item constellationsart.fab
+
+\begin{description}
+\item[desc :] Contains the constellation art info : i.e. for drawing of mythologic figures.
+\item[type :] ascii file, fields separated by SPACE, end of line is CR ('$\backslash$n')
+\item[line example :] Lep lepus\_m 104 57 24305 90 29 24845 33 42 27288
+\item[line format :] ConstRef TextureFile x1 y1 HP1 x2 y2 HP2 x3 y3 HP3
+	\begin{itemize}
+	\item ConstRef : Short international name abreviation in 3 characters, first char in Capital letter
+	\item TextureFile : Texture file name without the extension (no space character). The texture file has to be in the stellarium texture directory.
+	\item x1 y1 hp1 (respectively 2 and 3) : the x and y position of the matching star
+	  with hipparcos number hp1 (respectively 2 and 3) on the texture image. The
+	  values are in pixels with the (0,0) in the upper left corner.
+	\end{itemize}
+\item[note :] the associated texture file must be in png format and have no alpha channel. The drawing background must be black.
+\end{description}
+
+
+\item constellationship.fab
+
+\begin{description}
+\item[desc :] Contains the constellations lines shape.
+\item[type :] ascii file, fields separated by SPACE, end of line is CR ('$\backslash$n')
+\item[line example :] And ANDROMEDE ANDROMEDA 3  9640 5447 5447 4436 4436 3881
+\item[line format :] ConstRef ConstCommonName ConstInternationnalName NumberOfSegments seg11 seg12 seg21 seg22 etc...
+	\begin{itemize}
+	\item ConstRef : Short international name abreviation in 3 characters, first char
+	  in Capital letter
+	\item ConstCommonName : Commonly used name (currently in french!)
+	\item ConstInternationnalName : The latin internationnal name.
+	\item NumberOfSegments : the number of segments in the shape.
+	\item segx1 segx2 : the hipparcos number of the stars 1 and 2 joined to form the xth segment.
+	\end{itemize}
+\end{description}
+
+
+\item courierfont.txt and spacefont.txt
+
+\begin{description}
+\item[desc :] contains the characters position on the font texture.
+\item[type :] ascii file, fields separated by SPACE, end of line is CR ('$\backslash$n')
+\item[first line format :] CourierFont LineSize 21
+	\begin{itemize}
+	\item Font Name
+	\item LineSize s : s is the maximum character height.
+	\end{itemize}
+\item[other lines example :] 065 02 2 14 21 0
+\item[other lines format :] ascii\# x y w h s
+	\begin{itemize}
+	\item ascii\# : ascii number of the character
+	\item x y : position of the upper left corner of the character in the font texture (in pixel).
+	\item w h : width and height of the character on the texture
+	\item s : space to add at the end of the char when displaying.
+	\end{itemize}
+\end{description}
+
+\item messier.fab
+
+\begin{description}
+\item[desc :] Contains the nebula list (not only messier)
+\item[type :] ascii file, fields separated by SPACE, end of line is CR ('$\backslash$n')
+\item[line example :] 1952 RS 05 34.5 +22 +01 8.2 06.0 0 M1\_-\_Crab\_Nebula m1
+\item[line format :] NGCnumber NebulaType hh min.mm deg min.mm mag size texRotation Name TexName
+	\begin{itemize}
+	\item NGCnumber : NGC catalog number
+	\item NebulaType : TODO and change..
+	\item hh min.mm : Right ascention hour and minutes and tenth of minutes
+	\item deg min.mm : Declinaison in degree min and tenth of minutes
+	\item mag : magnitude
+	\item size : angular size in arcminute
+	\item Name : Nebula name with spaces replaced by '\_'
+	\item TexName : texture file name. png file without alpha chanel.
+	\end{itemize}
+\end{description}
+
+\item name.txt
+\begin{description}
+\item[desc :] More info about stars, not used anymore.
+\end{description}
+
+
+\item ssystem.ini
+
+\begin{description}
+\item[desc :] Solar system bodies informations.
+\item[type :] ini file. One section per body.
+\item[Section example :]
+\begin{verbatim}
+
+[io]                    // Section name, has to be unique
+name = Io               // Body name
+parent = Jupiter        // Body parent
+radius = 1821.          // Radius in km
+halo = true             // Do we have to draw a small halo like a star?
+color = 1.,1.,1.        // Halo color
+tex_map = io            // Texture map file without extension (has to .png)
+tex_halo = star16x16    // Halo texture file
+lightning = true        // Compute shadow on it
+albedo = 0.61           // Body albedo (how it reflects light) range 0 to 1
+rot_rotation_offset = 220.8   // For texture alignment
+rot_obliquity = 0.0           // Planet Obliquity (rotation axe inclination
+                              // relative to the orbit plane)
+coord_func = ell_orbit        // Define the coordinate computation funcion :
+                              // can be a custom func or "ell_orbit"
+orbit_Epoch = 2443000.00038375// Ell_orbit calculation parameter
+orbit_Period = 1.769138       //       "    "
+orbit_SemiMajorAxis = 421600  //       "    "
+orbit_Eccentricity = 0.0041   //       "    "
+orbit_Inclination = 0.040     //       "    "
+orbit_AscendingNode = 312.981 //       "    "
+orbit_LongOfPericenter = 97.73//       "    "
+orbit_MeanLongitude = 106.724 //       "    "
+\end{verbatim}
+\end{description}
+
+
+\item landscape.ini
+
+\begin{description}
+\item[desc :] Landscape skins descriptions.
+\item[type :] ini file. One section per landscape.
+\item[note :] There can be 2 landscape types, the ones made from a fisheye picture and the ones made from many smaller textures. The fisheye textures must be centered on the zenith, north on the bottom.
+\item[Section example for a fisheye :]
+\begin{verbatim}
+
+[palm]                              // Section name
+name = Palm                         // Landscape name
+type = fisheye                      // Type = fisheye
+maptex = landscapes/horizonalpha512 // Fisheye texture file name
+texturefov = 210                    // Field of View covered by the texture
+                                    // (180 = half dome, 360 = full sphere)
+author = Gérard_Dupontd             // Author name
+\end{verbatim}
+\end{description}
+
+\end{itemize}
+
 \end{document}
