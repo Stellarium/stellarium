@@ -46,15 +46,15 @@ void InitMeriParal(void)
 	float Pi_Over_24 = (float)(M_PI / 24.0f);
 	for (register int j = 0; j < 51; ++j)
 	{
-		DmeriParal[j][0] = (float)(20.0f * cos(j * Pi_Over_24));
-		DmeriParal[j][1] = (float)(20.0f * sin(j * Pi_Over_24));
+		DmeriParal[j][0] = (float)(27.0f * cos(j * Pi_Over_24));
+		DmeriParal[j][1] = (float)(27.0f * sin(j * Pi_Over_24));
 	}
 
 
 	float Pi_Over_18 = (float)(M_PI / 18.0f);
 	for (register int k = 0; k < 18; ++k)
 	{
-		sinTable[k] = (float)(20.0f * sin((k - 9) * Pi_Over_18));
+		sinTable[k] = (float)(27.0f * sin((k - 9) * Pi_Over_18));
 		register float _cos = (float)(cos((k - 9) * Pi_Over_18));
 		for (int j = 0; j < 51; ++j){
 			DmeriParalCos[k][j][0] = DmeriParal[j][0] * _cos;
@@ -271,7 +271,7 @@ void DrawMilkyWay(void)
 	glRotatef(-84,0,0,1);
 	GLUquadricObj * MilkyWay=gluNewQuadric();
 	gluQuadricTexture(MilkyWay,GL_TRUE);
-	gluSphere(MilkyWay,500,15,15);
+	gluSphere(MilkyWay,29.,15,15);
 	gluDeleteQuadric(MilkyWay);
 	glPopMatrix();
 }

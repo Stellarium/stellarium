@@ -24,6 +24,8 @@
 #include "stellastro.h"
 #include "stel_utility.h"
 
+#define RADIUS_STAR 25.
+
 extern unsigned int starTextureId;
 extern s_font * starFont;
 
@@ -79,7 +81,7 @@ int Hip_Star::Read(FILE * catalog)
     // Calc the Cartesian coord with RA and DE
     sphe_to_rect(RA,DE,&XYZ);
 
-    XYZ*=RAYON;
+    XYZ*=RADIUS_STAR;
 
     switch(type >> 8 & 0xf)
     {
@@ -116,6 +118,7 @@ int Hip_Star::Read(FILE * catalog)
     }
     
     // First part of the calculation of the demi-size of the star texture
+	// Empirical formula which looks good...
     float L=pow(100,-Mag/4.1);
     MaxColorValue=myMax(RGB[0],RGB[2]);
     rmag_t = sqrt(L/(pow(L,0.46666)+7.079))*sqrt(MaxColorValue)*1200.;
@@ -135,15 +138,16 @@ void Hip_Star::Draw(void)
 			XY[1]>global.Y_Resolution )
         return;
 
-    // Calculation of the demi-size of the star texture
+    // Second part of the calculation of the demi-size of the star texture
+	// Empirical formula which looks good...
     rmag = rmag_t/pow(navigation.get_fov(),0.85);
 
     cmag = 1.;
     
-    // if size of star is too small (blink) we put it to 1 --> no more blink
+    // if size of star is too small (blink) we put its size to 1.2 --> no more blink
     // And we compensate the difference of brighteness with cmag
-    if (rmag<1.2) 
-    {   
+    if (rmag<1.2)
+    {
         if (rmag<0.5) return;
         cmag=pow(rmag,2)/1.44;
         rmag=1.2;

@@ -20,6 +20,8 @@
 #include "constellation.h"
 #include "navigator.h"
 
+#define RADIUS_CONST 8.
+
 extern s_font * constNameFont;
 
 constellation::constellation() : Name(NULL), Inter(NULL), Asterism(NULL)
@@ -78,19 +80,20 @@ int constellation::Read(FILE *  fic, Hip_Star_mgr * _VouteCeleste)
 
 // Draw the lines for the constellation using the coords of the stars (optimized for use with the class Constellation_mgr only)
 void constellation::Draw()
-{   glPushMatrix();
+{
     for(unsigned int i=0;i<NbSegments;i++)
-    {   glBegin (GL_LINES);
-                glVertex3f((*Asterism[2*i]).XYZ[0],(*Asterism[2*i]).XYZ[1],(*Asterism[2*i]).XYZ[2]);
-                glVertex3f((*Asterism[2*i+1]).XYZ[0],(*Asterism[2*i+1]).XYZ[1],(*Asterism[2*i+1]).XYZ[2]);
+    {
+		glBegin (GL_LINES);
+			glVertex3f((*Asterism[2*i]).XYZ[0],(*Asterism[2*i]).XYZ[1],(*Asterism[2*i]).XYZ[2]);
+			glVertex3f((*Asterism[2*i+1]).XYZ[0],(*Asterism[2*i+1]).XYZ[1],(*Asterism[2*i+1]).XYZ[2]);
         glEnd ();
     }
-    glPopMatrix();
 }
 
 // Same thing but for only one separate constellation (can be used without the class Constellation_mgr )
 void constellation::DrawSeule()
-{   glDisable(GL_TEXTURE_2D);
+{
+	glDisable(GL_TEXTURE_2D);
     glDisable(GL_BLEND);
     glColor3f(0.2,0.2,0.2);
     glPushMatrix();
@@ -105,8 +108,9 @@ void constellation::DrawSeule()
 
 // Chek if the constellation is in the field of view and calc the x,y position if true
 void constellation::ComputeName()
-{   if (acos((navigation.get_equ_vision()[0]*Xnom+navigation.get_equ_vision()[1]*Ynom +
-		navigation.get_equ_vision()[2]*Znom)/RAYON)>((float)navigation.get_fov()+4)*M_PI*1.333333/360)
+{
+	if (acos((navigation.get_equ_vision()[0]*Xnom+navigation.get_equ_vision()[1]*Ynom +
+		navigation.get_equ_vision()[2]*Znom)/RADIUS_CONST)>((float)navigation.get_fov()+4)*M_PI*1.333333/360)
     {
 		inFov=false;
         return; // Si hors du champ

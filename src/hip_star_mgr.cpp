@@ -26,6 +26,8 @@
 #include "stellarium.h"
 #include "navigator.h"
 
+#define RADIUS_STAR 25.
+
 s_texture * hipStarTexture;
 s_font * starFont;
 
@@ -213,7 +215,7 @@ Hip_Star * Hip_Star_mgr::search(vec3_t Pos)
 {   
     Pos.normalize();
     Hip_Star * plusProche=NULL;
-    float anglePlusProche=3.15;
+    float anglePlusProche=0.;
     
     multimap<int,Hip_Star *>::iterator iter;
     for(iter=Liste.begin();iter!=Liste.end();iter++)
@@ -226,7 +228,8 @@ Hip_Star * Hip_Star_mgr::search(vec3_t Pos)
         	plusProche=(*iter).second;
     	}
     }
-    if (anglePlusProche>498)
+	printf("%f\n",anglePlusProche);
+    if (anglePlusProche>RADIUS_STAR*0.9999)
     {   
 	    return plusProche;
     }
