@@ -90,11 +90,11 @@ void navigator::save_position(char * fileName)
 }
 
 // Init the viewing matrix, setting the field of view, the clipping planes, and screen size
-void navigator::init_project_matrix(int w, int h, double near, double far)
+void navigator::init_project_matrix(int w, int h, double nearclip, double farclip)
 {
 	glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    gluPerspective(fov, (double)w/h, near, far);
+	gluPerspective(fov, (double)w/h, nearclip, farclip);
     glMatrixMode(GL_MODELVIEW);
 }
 
