@@ -196,11 +196,6 @@ Component* stel_ui::createConfigWindow(void)
 	render_save_bt->setPos(x + 50,y);
 	render_save_bt->setSize(170,25); y+=20;
 
-/*	CursorBar* star_scale_cbar = new CursorBar(0,20,2);
-	star_scale_cbar->setOnChangeCallback(callback<void>(this, &stel_ui::updateConfigVariables));
-	tab_render->addComponent(star_scale_cbar);
-	star_scale_cbar->setPos(x,y); y+=15;*/
-
 	// Date & Time options
 	FilledContainer* tab_time = new FilledContainer();
 	tab_time->setSize(config_tab_ctr->getSize());
@@ -219,12 +214,6 @@ Component* stel_ui::createConfigWindow(void)
 	Label* tzbl = new Label("\1 Time Zone :");
 	tzbl->setPos(x,y); y+=20;
 	tab_time->addComponent(tzbl);
-
-	/*system_tz_cbx = new LabeledCheckBox(core->observatory->get_tz_format()==S_TZ_SYSTEM_DEFAULT,
-		"Using System Default Time Zone");
-	system_tz_cbx->setOnPressCallback(callback<void>(this, &stel_ui::updateConfigVariables));
-	tab_time->addComponent(system_tz_cbx);
-	system_tz_cbx->setPos(50 ,y); y+=30;*/
 
 	Label* system_tz_lbl = new Label("\1 Using System Default Time Zone");
 	tab_time->addComponent(system_tz_lbl);
@@ -345,6 +334,8 @@ Component* stel_ui::createConfigWindow(void)
 	config_tab_ctr->addTab(tab_render, "Rendering");
 	config_win->addComponent(config_tab_ctr);
 	config_win->setOnHideBtCallback(callback<void>(this, &stel_ui::config_win_hideBtCallback));
+
+	
 	return config_win;
 }
 
