@@ -514,7 +514,7 @@ _("CTRL+Q : Quit\n")
 
 	help_txtlbl->adjustSize();
 	help_txtlbl->setPos(10,10);
-	help_win = new StdBtWin("Help");
+	help_win = new StdBtWin(_("Help"));
 	help_win->reshape(300,200,400,380);
 	help_win->addComponent(help_txtlbl);
     help_win->setVisible(core->FlagHelp);
