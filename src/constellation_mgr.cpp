@@ -22,34 +22,101 @@
 #include "constellation.h"
 #include "constellation_mgr.h"
 
-
+/*
 Constellation_mgr::Constellation_mgr(Vec3f _lines_color, Vec3f _names_color) :
 	asterFont(NULL), lines_color(_lines_color), names_color(_names_color)
 {
 }
+*/
+
+// constructor which loads all data from appropriate files
+Constellation_mgr::Constellation_mgr(string _data_dir, string _sky_culture, Hip_Star_mgr *_hip_stars, string _font_filename, 
+				     Vec3f _lines_color, Vec3f _names_color) :
+  asterFont(NULL), hipStarMgr(_hip_stars), dataDir( _data_dir), skyCulture(_sky_culture), lines_color(_lines_color), names_color(_names_color)
+{
+
+  // load font
+  asterFont = new s_font(12.,"spacefont", dataDir + _font_filename);
+  if (!asterFont)
+    {
+      printf("Can't create asterFont\n");
+      exit(-1);
+    }
+
+  // check validity of main sky culture config file
+  if( !validate_sky_culture(_sky_culture) ) {
+      skyCulture = "greco-roman";
+  }
+
+  load(dataDir + "sky_cultures/" + skyCulture + "/constellationship.fab",
+       dataDir + "sky_cultures/" + skyCulture + "/constellationsart.fab", hipStarMgr);
+
+}
+
 
 Constellation_mgr::~Constellation_mgr()
 {
 	vector<Constellation *>::iterator iter;
     for(iter=asterisms.begin();iter!=asterisms.end();iter++)
     {
-		delete (*iter);
+      delete (*iter);
+      asterisms.erase(iter);
+      iter--;  // important!
     }
     if (asterFont) delete asterFont;
     asterFont = NULL;
 }
 
+
+void Constellation_mgr::set_sky_culture(string _sky_culture)
+{
+
+  // check validity of main sky culture config file
+  if( !validate_sky_culture(_sky_culture) ) {
+      _sky_culture = "greco-roman";
+  }
+
+  if( _sky_culture == skyCulture ) return;  // no change
+
+  skyCulture = _sky_culture;
+
+  // remove old data
+  vector<Constellation *>::iterator iter;
+  for(iter=asterisms.begin();iter!=asterisms.end();++iter)
+    {
+      delete (*iter);
+      asterisms.erase(iter);
+      iter--;  // important!
+    }
+
+  // load new culture data
+  printf( "Changing sky culture to %s\n", skyCulture.c_str() );
+  load(dataDir + "sky_cultures/" + skyCulture + "/constellationship.fab",
+       dataDir + "sky_cultures/" + skyCulture + "/constellationsart.fab", hipStarMgr);
+
+}
+
+// test that sky culture seems valid (has config file)
+bool Constellation_mgr::validate_sky_culture(string _sky_culture) {
+
+  string filePath = dataDir + "sky_cultures/" + skyCulture + "/constellationship.fab";
+  FILE * fic = fopen(filePath.c_str(),"r");
+  if (!fic) {
+    printf("Could not locate constellation data for %s culture, defaulting to greco-roman.\n",skyCulture.c_str());
+    skyCulture = "greco-roman";
+    return(0);
+  } else {
+    fclose(fic);
+    return(1);
+  }
+
+}
+
 // Load from file
-void Constellation_mgr::load(const string& font_fileName, const string& fileName, const string& artfileName, Hip_Star_mgr * _VouteCeleste)
+void Constellation_mgr::load(const string& fileName, const string& artfileName, Hip_Star_mgr * _VouteCeleste)
 {
 	printf("Loading constellation data...\n");
 
-    asterFont = new s_font(12.,"spacefont", font_fileName); // load Font
-    if (!asterFont)
-    {
-		printf("Can't create asterFont\n");
-        exit(-1);
-    }
 
 	FILE * fic = fopen(fileName.c_str(),"r");
     if (!fic)
