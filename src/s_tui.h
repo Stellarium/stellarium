@@ -202,6 +202,8 @@ namespace s_tui
 		virtual bool onKey(SDLKey, S_TUI_VALUE);
         virtual void addComponent(Component*);
 		virtual Component* getCurrent(void) const {if (current==childs.end()) return NULL; else return *current;}
+		virtual bool setValue(const string&);
+		virtual bool setValue_Specialslash(const string&);
     protected:
         list<Component*>::iterator current;
     };
@@ -332,6 +334,11 @@ namespace s_tui
 		}
 		const T& getCurrent(void) const {if(current==items.end()) return emptyT; else return *current;}
 		void setCurrent(const T& i) {current = items.find(i);}
+		bool setValue(const T& i)
+		{
+			if (items.find(i) == items.end()) return false;
+			else current = items.find(i); return true;
+		}
 		string getLabel(void) const {return label;}
     protected:
 		T emptyT;
