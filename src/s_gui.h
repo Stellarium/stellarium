@@ -138,6 +138,7 @@ namespace s_gui
 		virtual int onKey(SDLKey, S_GUI_VALUE) {return 0;}
 		virtual void setTexture(const s_texture* tex) {painter.setTexture(tex);}
 		virtual void setFont(const s_font* f) {painter.setFont(f);}
+		const s_font* getFont(void) const {return painter.getFont();}
 		virtual void setTextColor(const s_color& c) {painter.setTextColor(c);}
 		virtual void setBaseColor(const s_color& c) {painter.setBaseColor(c);}
 		virtual void setPainter(const Painter& p) {painter = p;}
@@ -301,6 +302,14 @@ namespace s_gui
 		Label label;
 	};
 
+	class IntIncDecVert : public IntIncDec
+	{
+	public:
+	    IntIncDecVert(const s_font* _font = NULL, const s_texture* tex_up = NULL,
+			const s_texture* tex_down = NULL, int min = 0, int max = 9,
+			int init_value = 0, int inc = 1);
+	};
+
 	class FloatIncDec : public Container
 	{
 	public:
@@ -319,6 +328,18 @@ namespace s_gui
 		TexturedButton* btless;
 		Label label;
 	};
+
+	// Widget used to set time and date.
+    class Time_item : public Container
+    {
+    public:
+		Time_item(const s_font* _font = NULL, const s_texture* tex_up = NULL,
+			const s_texture* tex_down = NULL, double _JD = 2451545.0);
+		double getJDay(void) const;
+		void setJDay(double jd);
+    protected:
+		IntIncDecVert* d, *m, *y, *h, *mn, *s;
+    };
 
 	class LabeledCheckBox : public Container
 	{

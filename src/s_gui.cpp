@@ -24,6 +24,26 @@
 
 using namespace s_gui;
 
+// A float to nearest int conversion routine for the systems which
+// are not C99 conformant
+inline int S_ROUND(float value)
+{
+	static double i_part;
+
+	if (value >= 0)
+	{
+		if (modf((double) value, &i_part) >= 0.5)
+			i_part += 1;
+	}
+	else
+	{
+		if (modf((double) value, &i_part) <= -0.5)
+			i_part -= 1;
+	}
+
+	return ((int) i_part);
+}
+
 Scissor* Component::scissor = NULL;			// Default initialization
 Painter Component::defaultPainter;
 
@@ -1031,16 +1051,16 @@ IntIncDec::IntIncDec(const s_font* _font, const s_texture* tex_up,
 	if (_font) label.setFont(_font);
 	label.setSize(30,10);
 	label.setPos(9,2);
-	btless = new TexturedButton(tex_up);
-	btless->setSize(8,8);
-	btless->setPos(0,0);
-	btless->setBaseColor(painter.getTextColor());
-	btless->setOnPressCallback(callback<void>(this, &IntIncDec::inc_value));
-	btmore = new TexturedButton(tex_down);
+	btmore = new TexturedButton(tex_up);
 	btmore->setSize(8,8);
-	btmore->setPos(0,7);
+	btmore->setPos(0,0);
 	btmore->setBaseColor(painter.getTextColor());
-	btmore->setOnPressCallback(callback<void>(this, &IntIncDec::dec_value));
+	btmore->setOnPressCallback(callback<void>(this, &IntIncDec::inc_value));
+	btless = new TexturedButton(tex_down);
+	btless->setSize(8,8);
+	btless->setPos(0,7);
+	btless->setBaseColor(painter.getTextColor());
+	btless->setOnPressCallback(callback<void>(this, &IntIncDec::dec_value));
 	addComponent(btmore);
 	addComponent(btless);
 	addComponent(&label);
@@ -1061,6 +1081,16 @@ void IntIncDec::draw()
 	Container::draw();
 }
 
+
+IntIncDecVert::IntIncDecVert(const s_font* _font, const s_texture* tex_up,
+		const s_texture* tex_down, int _min, int _max,
+		int _init_value, int _inc) : IntIncDec(_font, tex_up, tex_down, _min, _max, _init_value, _inc)
+{
+	label.setPos(0,0);
+	btmore->setPos(0,12);
+	btless->setPos(0,20);
+	setSize(20,40);
+}
 
 FloatIncDec::FloatIncDec(const s_font* _font, const s_texture* tex_up,
 		const s_texture* tex_down, float _min, float _max,
@@ -1100,210 +1130,121 @@ void FloatIncDec::draw()
 	Container::draw();
 }
 
-/*
-void ExtCursorBarClicCallback(int x, int y, enum guiValue state, enum guiValue button, Component * me)
+// Widget used to set time and date.
+Time_item::Time_item(const s_font* _font, const s_texture* tex_up,
+						const s_texture* tex_down, double _JD) :
+						d(NULL), m(NULL), y(NULL), h(NULL), mn(NULL), s(NULL)
 {
-    ((CursorBar*)me)->CursorBarClicCallback(x, button, state);
+	if (_font) setFont(_font);
+	y = new IntIncDecVert(getFont(), tex_up, tex_down, -9999, 99999, 1930, 1);
+	m = new IntIncDecVert(getFont(), tex_up, tex_down, 1, 12, 12, 1);
+	d = new IntIncDecVert(getFont(), tex_up, tex_down, 1, 31, 11, 1);
+	h = new IntIncDecVert(getFont(), tex_up, tex_down, 0, 23, 16, 1);
+	mn= new IntIncDecVert(getFont(), tex_up, tex_down, 0, 59, 35, 1);
+	s = new IntIncDecVert(getFont(), tex_up, tex_down, 0, 59, 23, 1);
+
+	y->setPos(0,0); y->setSize(55, 32);
+	m->setPos(60,0); m->setSize(30, 32);
+	d->setPos(95,0); d->setSize(30, 32);
+	h->setPos(135,0); h->setSize(30, 32);
+	mn->setPos(165,0);mn->setSize(30, 32);
+	s->setPos(195,0); s->setSize(30, 32);
+
+	Label* l1 = new Label("/");
+	l1->setPos(55,1);
+	Label* l2 = new Label("/");
+	l2->setPos(89,1);
+
+	Label* l3 = new Label(":");
+	l3->setPos(162,1);
+	Label* l4 = new Label(":");
+	l4->setPos(192,1);
+
+	setSize(220, 140);
+
+	addComponent(y);
+	addComponent(m);
+	addComponent(d);
+	addComponent(h);
+	addComponent(mn);
+	addComponent(s);
+
+	addComponent(l1);
+	addComponent(l2);
+	addComponent(l3);
+	addComponent(l4);
+
+	setJDay(_JD);
 }
 
-void ExtCursorBarMoveCallback(int x, int y, enum guiValue action, Component * me)
-{
-    ((CursorBar*)me)->CursorBarMoveCallback(x, action);
-}
 
-CursorBar::CursorBar(
-    vec2_i _position,
-    vec2_i _size,
-    float _minBarValue,
-    float _maxBarValue,
-    float _barValue,
-    void(*_onValueChangeCallBack)(float _barValue, Component *)) :
-        Component(), 
-        mouseOn(false), 
-        minBarValue(_minBarValue),
-        maxBarValue(_maxBarValue),
-        barValue(_barValue),
-        onValueChangeCallBack(_onValueChangeCallBack)
+double Time_item::getJDay(void) const
 {
-    reshape(_position, _size);
-    setClicCallback(ExtCursorBarClicCallback);
-    setMoveCallback(ExtCursorBarMoveCallback);
-}
+	static int iy, im, id, ih, imn, is;
 
-void CursorBar::render(GraphicsContext& gc)
-{
-    glColor3fv(gc.baseColor);
-    glDisable(GL_TEXTURE_2D);
-    vec2_i pos = getPosition();
-    vec2_i sz = getSize();
-    glBegin(GL_LINE_LOOP);
-    	glVertex2i(pos[0] + 3 , pos[1] + sz[1] / 2 - 1);
-    	glVertex2i(pos[0] + sz[0] - 3 , pos[1] + sz[1] / 2 - 1);
-    	glVertex2i(pos[0] + sz[0] - 3 , pos[1] + sz[1] / 2 + 1);
-    	glVertex2i(pos[0] + 3 , pos[1] + sz[1] / 2 + 1);
-    	glVertex2i(pos[0] + 3 , pos[1] + sz[1] / 2 - 1);
-    glEnd();
-    float xpos = pos[0] + 3 + (sz[0] - 6) * ((float)(barValue - minBarValue) / (float)(maxBarValue - minBarValue));
-    glColor3fv(gc.baseColor*2);
-    glBegin(GL_LINE_LOOP);
-    	glVertex2f(xpos - 2 , sz[1] / 2 + pos[1] - 5);
-    	glVertex2f(xpos + 2 , sz[1] / 2 + pos[1] - 5);
-    	glVertex2f(xpos + 2 , sz[1] / 2 + pos[1] + 5);
-    	glVertex2f(xpos - 2 , sz[1] / 2 + pos[1] + 5);
-    	glVertex2f(xpos - 2 , sz[1] / 2 + pos[1] - 5);
-    glEnd();
-}
+	iy = (int)y->getValue();
+	im = (int)m->getValue();
+	id = (int)d->getValue();
+	ih = (int)h->getValue();
+	imn = (int)mn->getValue();
+	is = (int)s->getValue();
 
-void CursorBar::CursorBarClicCallback(int x, enum guiValue button, enum guiValue state)
-{
-    if (state == GUI_DOWN)
+    if (im <= 2)
     {
-        mouseOn = true;
-        draging = true;
-        vec2_i pos = getPosition();
-        vec2_i sz = getSize();
-        float xpos = x - pos[0] - 3;
-        barValue = minBarValue + xpos / (sz[0] - 6) * (maxBarValue - minBarValue);
-        if (barValue < minBarValue) barValue = minBarValue;
-        if (barValue > maxBarValue) barValue = maxBarValue;
-        if (onValueChangeCallBack != NULL) onValueChangeCallBack(barValue, this);
+        iy -= 1;
+        im += 12;
+    }
+
+    // Correct for the lost days in Oct 1582 when the Gregorian calendar
+    // replaced the Julian calendar.
+    int B = -2;
+    if (iy > 1582 || (iy == 1582 && (im > 10 || (im == 10 && id >= 15))))
+    {
+        B = iy / 400 - iy / 100;
+    }
+
+    return floor(365.25 * iy) + floor(30.6001 * (im + 1)) + B + 1720996.5 + id + ih / 24.0 + imn / 1440.0 + (double)is / 86400.0;
+}
+
+void Time_item::setJDay(double JD)
+{
+	static int iy, im, id, ih, imn, is;
+
+    int a = (int) (JD + 0.5);
+    double c;
+    if (a < 2299161)
+    {
+        c = a + 1524;
     }
     else
     {
-        if (state == GUI_UP) mouseOn = false;
-        draging = false;
+        double b = (int) ((a - 1867216.25) / 36524.25);
+        c = a + b - (int) (b / 4) + 1525;
     }
+
+    int dd = (int) ((c - 122.1) / 365.25);
+    int e = (int) (365.25 * dd);
+    int f = (int) ((c - e) / 30.6001);
+
+    double dday = c - e - (int) (30.6001 * f) + ((JD + 0.5) - (int) (JD + 0.5));
+
+    im = f - 1 - 12 * (int) (f / 14);
+    iy = dd - 4715 - (int) ((7.0 + im) / 10.0);
+    id = (int) dday;
+
+    double dhour = (dday - id) * 24;
+    ih = (int) dhour;
+
+    double dminute = (dhour - ih) * 60;
+    imn = (int) dminute;
+
+    is = S_ROUND((dminute - imn) * 60);
+
+	y->setValue(iy);
+	m->setValue(im);
+	d->setValue(id);
+	h->setValue(ih);
+	mn->setValue(imn);
+	s->setValue(S_ROUND(is));
 }
 
-void CursorBar::CursorBarMoveCallback(int x, enum guiValue action)
-{
-    if (action == GUI_MOUSE_ENTER)
-    {
-        mouseOn = false;
-    }
-    if (draging)
-    {
-        float oldBarValue = barValue;
-        vec2_i pos = getPosition();
-        vec2_i sz = getSize();
-        int xpos = x - pos[0] - 3;
-        barValue = minBarValue + (float)xpos / ((float)sz[0] - 6) * (maxBarValue - minBarValue);
-        if (barValue < minBarValue) barValue = minBarValue;
-        if (barValue > maxBarValue) barValue = maxBarValue;
-        if (oldBarValue != barValue && onValueChangeCallBack != NULL) onValueChangeCallBack(barValue, this);
-    }
-}
-
-void CursorBar::setValue(float _barValue)
-{
-	if (_barValue==barValue) return;
-	barValue=_barValue;
-	onValueChangeCallBack(barValue, this);
-}
-
-Picture::Picture(vec2_i _position, vec2_i _size, s_texture * _imageTex) : imageTex(_imageTex)
-{
-	if (!imageTex)
-	{
-		printf("ERROR NO TEXTURE FOR PICTURE WIDGET\n");
-		exit(-1);
-	}
-    reshape(_position, _size);
-}
-
-Picture::~Picture()
-{
-    if (imageTex) delete imageTex;
-    imageTex = NULL;
-}
-
-void Picture::render(GraphicsContext&)
-{
-    glColor3f(1.0,1.0,1.0);
-    vec2_i pos = getPosition();
-    vec2_i sz = getSize();
-    glEnable(GL_TEXTURE_2D);
-    glEnable(GL_BLEND);
-    glBindTexture(GL_TEXTURE_2D, imageTex->getID());
-    glBegin(GL_QUADS );
-        glTexCoord2f(0.0f, 0.0f); glVertex2i(pos[0], pos[1] + sz[1]); // Bas Gauche
-        glTexCoord2f(1.0f, 0.0f); glVertex2i(pos[0] + sz[0], pos[1] + sz[1]); // Bas Droite
-        glTexCoord2f(1.0f, 1.0f); glVertex2i(pos[0] + sz[0], pos[1]); // Haut Droit
-        glTexCoord2f(0.0f, 1.0f); glVertex2i(pos[0], pos[1]); // Haut Gauche
-    glEnd ();
-}
-
-BorderPicture::BorderPicture(vec2_i _position, vec2_i _size, s_texture * _imageTex) : Picture(_position,_size,_imageTex)
-{}
-
-
-void BorderPicture::render(GraphicsContext& gc)
-{
-	Picture::render(gc);
-
-    glColor3fv(gc.baseColor);
-    vec2_i pos = getPosition();
-    vec2_i sz = getSize();
-    glDisable(GL_TEXTURE_2D);
-    glBegin(GL_LINE_LOOP);
-        glVertex2f(pos[0]+0.5, pos[1]+0.5);
-        glVertex2f(pos[0] + sz[0]-0.5, pos[1]+0.5);
-        glVertex2f(pos[0] + sz[0]-0.5, pos[1] + sz[1]-0.5);
-        glVertex2f(pos[0]+0.5, pos[1] + sz[1]-0.5);
-    glEnd();
-}
-
-// ClickablePicture
-
-void ExtClickablePictureClicCallback(int x, int y, enum guiValue state, enum guiValue button, Component * me)
-{
-    ((ClickablePicture*)me)->ClickablePictureClicCallback(x,y,button, state);
-}
-
-
-ClickablePicture::ClickablePicture(vec2_i _position, vec2_i _size, s_texture * _imageTex, void (*_onValueChangeCallBack)(vec2_t _pointerPosition, Component *)) : BorderPicture(_position, _size, _imageTex)
-{
-	setClicCallback(ExtClickablePictureClicCallback);
-	onValueChangeCallBack=_onValueChangeCallBack;
-	pointerPosition=vec2_t(0.0,0.0);
-}
-
-void ClickablePicture::render(GraphicsContext& gc)
-{
-	BorderPicture::render(gc);
-
-	vec2_i pos = getPosition();
-	glTranslatef(pos[0]+0.5, pos[1]+0.5, 0);
-	// Draw the pointer
-	glColor3f(1.0,1.0,1.0);
-    glDisable(GL_TEXTURE_2D);
-	glBegin(GL_LINES);
-		glVertex2f(pointerPosition[0]+1,pointerPosition[1]);
-		glVertex2f(pointerPosition[0]+4,pointerPosition[1]);
-		glVertex2f(pointerPosition[0]-1,pointerPosition[1]);
-		glVertex2f(pointerPosition[0]-4,pointerPosition[1]);
-		glVertex2f(pointerPosition[0],pointerPosition[1]+1);
-		glVertex2f(pointerPosition[0],pointerPosition[1]+4);
-		glVertex2f(pointerPosition[0],pointerPosition[1]-1);
-		glVertex2f(pointerPosition[0],pointerPosition[1]-4);
-    glEnd();
-	glTranslatef(-pos[0]-0.5, -pos[1]-0.5, 0);
-}
-
-void ClickablePicture::setPointerPosition(vec2_t _pointerPosition)
-{
-	pointerPosition=_pointerPosition;
-}
-
-void ClickablePicture::ClickablePictureClicCallback(int x, int y, enum guiValue button, enum guiValue state)
-{
-    if (state == GUI_DOWN)
-    {
-		vec2_i pos = getPosition();
-		pointerPosition[0]=x-pos[0];
-		pointerPosition[1]=y-pos[1];
-        if (onValueChangeCallBack != NULL) onValueChangeCallBack(pointerPosition, this);
-    }
-}
-
-*/
