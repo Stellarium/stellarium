@@ -700,10 +700,10 @@ Boston, MA  02111-1307, USA.\n"
     TimeZoneBar = new CursorBar(vec2_i(170,75), vec2_i(150,10),-12.,13.,global.TimeZone,TimeZoneBarOnChangeValue);
     
     SaveLocation = new Labeled_Button("Save location");
-    SaveLocation->reshape(100,230,100,20);
+    SaveLocation->reshape(120,240,100,20);
     SaveLocation->setOnClicCallback(SaveLocationOnClicCallback);
 
-    EarthMap = new Textured_Button(new s_texture("earthmap"),vec2_i(7,90),vec2_i(320,160),clWhite,clWhite/2,NULL,NULL,1,1);
+    EarthMap = new Textured_Button(new s_texture("earthmap"),vec2_i(30,95),vec2_i(280,140),clWhite,clWhite/2,NULL,NULL,1,1);
 
     LocationConfigContainer->addComponent(LocationLabel);
     LocationConfigContainer->addComponent(LatitudeBar);
