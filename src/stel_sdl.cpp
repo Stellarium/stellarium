@@ -61,9 +61,18 @@ void stel_sdl::init(void)
     Screen = SDL_SetVideoMode(core->get_screen_W(), core->get_screen_H(), core->get_bppMode(), Vflags);
 	if(!Screen)
 	{
-		printf("sdl: Couldn't set %dx%d video mode: %s!",
-		core->get_screen_W(), core->get_screen_H(), SDL_GetError());
-		exit(-1);
+		printf("sdl: Couldn't set %dx%d video mode (%s), retrying with stencil size 0\n",
+ 		core->get_screen_W(), core->get_screen_H(), SDL_GetError());
+
+		SDL_GL_SetAttribute(SDL_GL_STENCIL_SIZE,0);
+		Screen = SDL_SetVideoMode(core->get_screen_W(), core->get_screen_H(), core->get_bppMode(), Vflags);
+
+		if(!Screen)
+		{
+			printf("sdl: Couldn't set %dx%d video mode: %s!\n",
+			core->get_screen_W(), core->get_screen_H(), SDL_GetError());
+			exit(-1);
+		}	
 	}
 
 	// Disable key repeat
