@@ -204,6 +204,15 @@ void stel_core::init(void)
 	if( sky_brightness < 0 ) {
 	  sky_brightness = 0;
 	} else if (sky_brightness<0.1) sky_brightness=0.1;*/
+
+
+
+
+	// script testing TEMPORARY ***
+	scripts->play_script("./scripts/startup.sts");
+
+	
+
 }
 
 void stel_core::quit(void)
@@ -228,6 +237,9 @@ void stel_core::update(int delta_time)
         frame = 0;
         timeBase+=1000;
     }
+
+    // run command from a running script
+    scripts->update(delta_time);
 
     // Update the position of observation and time etc...
 	navigation->update_time(delta_time);
