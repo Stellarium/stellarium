@@ -134,45 +134,55 @@ void setDirectories(void)
     if (strcmp(dataRoot,CONFIG_DATA_DIR))
 		printf(">Found data files in %s : local version.\n",dataRoot);
 
-	// If unix system, check if the file $HOME/.stellarium/config.txt exists,
+	// If unix system, check if the file $HOME/.stellarium/version/config.txt exists,
 	// if not, try to create it.
     strcpy(tempName,homeDir);
-    strcat(tempName,"/.stellarium/config.txt");
+    strcat(tempName,"/.stellarium/");
+	strcat(tempName,VERSION);
+	strcat(tempName,"/config.txt");
 	if ((tempFile = fopen(tempName,"r")))
 	{
 		strcpy(global.ConfigDir,homeDir);
 		strcat(global.ConfigDir,"/.stellarium/");
+		strcat(global.ConfigDir,VERSION);
+		strcat(global.ConfigDir,"/");
 		fclose(tempFile);
 	}
 	else
 	{
-		printf("Will create config files in %s/.stellarium/\n",homeDir);
+		printf("Will create config files in %s/.stellarium/%s/\n",homeDir,VERSION);
 		if ((tempFile = fopen(tempName,"w")))
 		{
 			strcpy(global.ConfigDir,homeDir);
 			strcat(global.ConfigDir,"/.stellarium/");
+			strcat(global.ConfigDir,VERSION);
+			strcat(global.ConfigDir,"/");
 			fclose(tempFile);
 		}
 		else
 		{
 			// Try to create the directory
-			printf("Try to create directory %s/.stellarium/\n",homeDir);
+			printf("Try to create directory %s/.stellarium/%s/\n",homeDir,VERSION);
 			strcpy(tempName2,"mkdir ");
 			strcat(tempName2,homeDir);
 			strcat(tempName2,"/.stellarium/");
+			strcat(tempName2,VERSION);
+			strcat(tempName2,"/");
 			system(tempName2);
 			
 			if ((tempFile = fopen(tempName,"w")))
 			{
 				strcpy(global.ConfigDir,homeDir);
 				strcat(global.ConfigDir,"/.stellarium/");
+				strcat(global.ConfigDir,VERSION);
+				strcat(global.ConfigDir,"/");
 				fclose(tempFile);
 			}
 			else
 			{
 				printf("Can't create the file %s\n",tempName);
-				printf("If the directory %s/.stellarium is missing please create it.\n",homeDir);
-				printf("If not check that you have access to %s/.stellarium/\n",homeDir);
+				printf("If the directory %s/.stellarium/%s/ is missing please create it.\n",homeDir,VERSION);
+				printf("If not check that you have access to %s/.stellarium/%s/\n",homeDir,VERSION);
 				exit(-1);
 			}
 		}
