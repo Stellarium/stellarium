@@ -268,7 +268,7 @@ void planet::draw(int hint_ON, Projector* prj, const navigator * nav, const tone
      	if (hint_ON && ang_dist>0.25)
     	{
 			if (ang_dist>1.f) ang_dist = 1.f;
-			glColor4f(0.5f*ang_dist,0.5f*ang_dist,0.7f*ang_dist,1.f*ang_dist);
+			//glColor4f(0.5f*ang_dist,0.5f*ang_dist,0.7f*ang_dist,1.f*ang_dist);
 			draw_hints(nav, prj);
         }
 

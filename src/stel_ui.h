@@ -150,13 +150,18 @@ private:
 	LabeledCheckBox* atmosphere_cbx;
 	LabeledCheckBox* fog_cbx;
 
+	// Location options
+	MapPicture* earth_map;
+	FloatIncDec* lat_incdec, * long_incdec;
+	void setObserverPositionFromMap(void);
+	void setObserverPositionFromIncDec(void);
 
 	// Date & Time options
 	Time_item* time_current;
+	void setCurrentTimeFromConfig(void);
 
 	void updateConfigVariables(void);
 	void updateConfigForm(void);
-	void setCurrentTimeFromConfig(void);
 
 	////////////////////////////////////////////////////////////////////////////
 	// Text UI components
