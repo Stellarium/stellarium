@@ -247,7 +247,6 @@ private:
 	int FlagTimePause;
 	double temp_time_velocity;			// Used to store time speed while in pause
 
-
 	// Viewing direction function : 1 move, 0 stop.
 	void turn_right(int);
 	void turn_left(int);

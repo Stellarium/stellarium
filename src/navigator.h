@@ -121,6 +121,7 @@ public:
 	void update_move(double deltaAz, double deltaAlt);
 
 	void set_viewing_mode(VIEWING_MODE_TYPE view_mode);
+	void switch_viewing_mode(void);
 
 private:
 
@@ -163,7 +164,7 @@ private:
 	// Position variables
 	Observator* position;
 
-	int viewing_mode;   // defines if view corrects for horizon, or uses equatorial coordinates
+	VIEWING_MODE_TYPE viewing_mode;   // defines if view corrects for horizon, or uses equatorial coordinates
 };
 
 #endif //_NAVIGATOR_H_
