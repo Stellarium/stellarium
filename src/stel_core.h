@@ -189,6 +189,7 @@ private:
 	int FlagShowSelectedObjectInfos;
 	Vec3f GuiBaseColor;
 	Vec3f GuiTextColor;
+	float BaseFontSize;
 
 	Vec3f AzimuthalColor;
 	Vec3f EquatorialColor;
