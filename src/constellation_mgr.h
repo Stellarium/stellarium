@@ -38,12 +38,12 @@ public:
     Constellation* is_star_in(const Hip_Star *) const;
     Constellation* find_from_short_name(const string& shortname) const;
     int  set_sky_locale(const string& _sky_locale);
-	void set_art_fade_duration(float duration) {art_switch->set_duration((int)(duration*1000.f));}
-	void set_art_intensity(float _max) {art_switch->set_max_value(_max);}
-	void update(int delta_time) {art_switch->update(delta_time); lines_switch->update(delta_time); names_switch->update(delta_time);}
-	void show_art(bool b){*art_switch = b;}
-	void show_lines(bool b){*lines_switch = b;}
-	void show_names(bool b){*names_switch = b;}
+	void set_art_fade_duration(float duration) {art_fader.set_duration((int)(duration*1000.f));}
+	void set_art_intensity(float _max) {art_fader.set_max_value(_max);}
+	void update(int delta_time) {art_fader.update(delta_time); lines_fader.update(delta_time); names_fader.update(delta_time);}
+	void show_art(bool b){art_fader = b;}
+	void show_lines(bool b){lines_fader = b;}
+	void show_names(bool b){names_fader = b;}
 	void set_selected(Constellation* c) {selected=c;}
 private:
     int load(const string& catName, const string& artCatName,
@@ -56,9 +56,9 @@ private:
     string dataDir;
     string skyCulture;
     string skyLocale;
-	linear_fader* art_switch;
-	linear_fader* lines_switch;
-	linear_fader* names_switch;
+	linear_fader art_fader;
+	linear_fader lines_fader;
+	linear_fader names_fader;
 	Constellation* selected;
 };
 

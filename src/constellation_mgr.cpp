@@ -43,10 +43,6 @@ Constellation_mgr::Constellation_mgr(string _data_dir, string _sky_culture, stri
   // load translated labels
   set_sky_locale(_sky_locale);
   skyLocale = _sky_locale;
-
-  art_switch = new linear_fader();
-  lines_switch = new linear_fader();
-  names_switch = new linear_fader();
 }
 
 
@@ -64,10 +60,6 @@ Constellation_mgr::~Constellation_mgr()
     asterFont = NULL;
 	if (Constellation::constellation_font) delete Constellation::constellation_font;
 	Constellation::constellation_font = NULL;
-	
-	delete art_switch;
-	delete lines_switch;
-	delete names_switch;
 }
 
 int Constellation_mgr::set_sky_culture(string _sky_culture, const string& _font_fileName, int barx, int bary)
@@ -267,9 +259,10 @@ int Constellation_mgr::load(const string& fileName, const string& artfileName, H
 // Draw all the constellations in the vector
 void Constellation_mgr::draw(Projector* prj) const
 {
+	if (lines_fader==false) return;
     glDisable(GL_TEXTURE_2D);
     glDisable(GL_BLEND);
-    glColor3fv(lines_color*lines_switch->get_interstate());
+    glColor3fv(lines_color*lines_fader.get_interstate());
     prj->set_orthographic_projection();	// set 2D coordinate
 	
 	if (selected)
@@ -290,13 +283,15 @@ void Constellation_mgr::draw(Projector* prj) const
 
 void Constellation_mgr::draw_art(Projector* prj, navigator* nav)
 {
+	if (art_fader==false) return;
+	
 	glBlendFunc(GL_ONE, GL_ONE);
 	glEnable(GL_TEXTURE_2D);
 	glEnable(GL_BLEND);
 	glEnable(GL_CULL_FACE);
 
 	// for fade in
-	glColor3f(art_switch->get_interstate(),art_switch->get_interstate(),art_switch->get_interstate());
+	glColor3f(art_fader.get_interstate(),art_fader.get_interstate(),art_fader.get_interstate());
 	
 	prj->set_orthographic_projection();
 	
@@ -319,8 +314,10 @@ void Constellation_mgr::draw_art(Projector* prj, navigator* nav)
 // Draw the names of all the constellations
 void Constellation_mgr::draw_names(Projector* prj, bool _gravity_label)
 {
+	if (names_fader==false) return;
+	
 	Constellation::gravity_label = _gravity_label;
-    glColor3fv(names_color*names_switch->get_interstate());
+    glColor3fv(names_color*names_fader.get_interstate());
     glEnable(GL_BLEND);
     glEnable(GL_TEXTURE_2D);
     prj->set_orthographic_projection();	// set 2D coordinate
