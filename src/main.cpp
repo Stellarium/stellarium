@@ -36,7 +36,7 @@
 #include "shooting.h"
 #include "stelconfig.h"
 
-#include <SDL.h>
+#include "SDL.h"
 
 using namespace std;
 

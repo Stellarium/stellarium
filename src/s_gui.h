@@ -22,7 +22,7 @@
 #ifndef _GUI_H_
 #define _GUI_H_
 
-#include <SDL.h> // Just for the key codes, i'm lasy to redefine them
+#include "SDL.h" // Just for the key codes, i'm lasy to redefine them
 		 // This is to do to make the s_ library independent
 
 #include <vector>

@@ -22,7 +22,7 @@
 #ifndef _STELLARIUM_UI_H
 #define _STELLARIUM_UI_H
 
-#include <SDL.h>
+#include "SDL.h"
 
 void initUi(void);
 void clearUi(void);

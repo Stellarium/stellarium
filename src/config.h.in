@@ -58,6 +58,9 @@
 /* If we are on macosx plateform. */
 #undef MACOSX
 
+/* If we are on mingw32 plateform. */
+#undef MINGW32
+
 /* Name of package */
 #undef PACKAGE
 
