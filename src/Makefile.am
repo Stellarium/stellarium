@@ -42,9 +42,9 @@ sky_localizer.h sky_localizer.cpp
 stellarium_LDADD = $(top_builddir)/src/glpng/libglpng.a \
 $(top_builddir)/src/stellplanet/libstellplanet.a \
 $(top_builddir)/src/stellastro/libstellastro.a \
-$(top_builddir)/src/iniparser/libiniparser.a
+$(top_builddir)/src/iniparser/libiniparser.a \
+@LIBINTL@
 
-
-INCLUDES = -I$(top_srcdir)/src/glpng -I$(top_srcdir)/src/stellplanet -I$(top_srcdir)/src/stellastro -I$(top_srcdir)/src/iniparser
+INCLUDES = -I$(top_srcdir)/src/glpng -I$(top_srcdir)/src/stellplanet -I$(top_srcdir)/src/stellastro -I$(top_srcdir)/src/iniparser -I$(top_srcdir)/intl
 
 SUBDIRS = glpng stellplanet stellastro iniparser
