@@ -213,7 +213,7 @@ namespace gui
 	    void render(GraphicsContext&);
 	private:
 	};
-    
+
     class CursorBar : public Component
 	{
 	public:
@@ -223,10 +223,22 @@ namespace gui
 	    void CursorBarMoveCallback(int x, enum guiValue action);
         float getValue(void) { return barValue;}
 	private:
-	    int mouseOn;	    
+	    int mouseOn;
 	    float minBarValue, maxBarValue, barValue;
 	    void (*onValueChangeCallBack)(float,Component *);
 	};
+
+
+    class Picture : public Component
+	{
+	public:
+	    Picture(vec2_i _position, vec2_i _size, s_texture * _imageTex);
+		virtual ~Picture();
+	    void render(GraphicsContext&);
+	private:
+	    s_texture * imageTex;
+	};
+
 };
 
 #endif // _GUI_H_
