@@ -198,9 +198,6 @@ void stel_core::draw(int delta_time)
 	// Draw the nebula if they are visible
 	if (FlagNebula && (!FlagAtmosphere || sky_brightness<0.1)) nebulas->Draw(FlagNebulaName, du);
 
-	// Draw all the constellations
-	if (FlagAsterismDrawing) asterisms->Draw();
-
 	// Draw the hipparcos stars
 	// convert.... TODO implicit convertion
 	Vec3d tempv = navigation->get_equ_vision();
@@ -210,6 +207,10 @@ void stel_core::draw(int delta_time)
 
 	// Draw the atmosphere
 	if (FlagAtmosphere)	atmosphere->draw(du);
+
+	// Draw all the constellations
+	if (FlagAsterismDrawing) asterisms->Draw();
+
 
 	// Draw the equatorial grid
 	// TODO : make a nice class for grid wit parameters like numbering and custom color/frequency
