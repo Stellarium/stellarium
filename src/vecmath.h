@@ -151,6 +151,8 @@ template<class T> class Matrix4
 
     static Matrix4<T> identity();
     static Matrix4<T> translation(const Vector3<T>&);
+
+	static Matrix4<T> rotation(const Vector3<T>&);
     static Matrix4<T> xrotation(T);
     static Matrix4<T> yrotation(T);
     static Matrix4<T> zrotation(T);
@@ -496,6 +498,16 @@ template<class T> Matrix4<T> Matrix4<T>::translation(const Vector3<T>& a)
 						a.v[0], a.v[1], a.v[2], 1);
 }
 
+template<class T> Matrix4<T> Matrix4<T>::rotation(const Vector3<T>& a)
+{
+    T c = (T) cos(angle);
+    T s = (T) sin(angle);
+	T d = 1-c;
+	 return Matrix4<T>(	a.v[0]*a.v[0]*d+c, a.v[1]*a.v[0]*d+a.v[2]*s, a.v[0]*a.v[2]*d-a.v[1]*s, 0,
+						a.v[0]*a.v[1]*d-a.v[2]*s, a.v[1]*a.v[1]*d+c, a.v[1]*a.v[2]*d+a.v[0]*s, 0,
+						a.v[0]*a.v[2]*d+a.v[1]*s, a.v[1]*a.v[2]*d-a.v[0]*s, a.v[2]*a.v[2]*d+c, 0,
+						0,0,0,1	);
+}
 
 template<class T> Matrix4<T> Matrix4<T>::xrotation(T angle)
 {

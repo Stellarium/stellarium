@@ -75,9 +75,10 @@ int Hip_Star::Read(FILE * catalog)
     unsigned short int type;
     fread((char*)&type,2,1,catalog);
 	LE_TO_CPU_INT16(type, type);
-	 
+
     // Calc the Cartesian coord with RA and DE
     sphe_to_rect(RA,DE,&XYZ);
+
     XYZ*=RAYON;
 
     switch(type >> 8 & 0xf)
