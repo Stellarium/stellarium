@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium 0.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-03-25 23:57+0100\n"
+"POT-Creation-Date: 2005-03-26 01:18+0100\n"
 "PO-Revision-Date: 2004-12-22 00:25+0100\n"
 "Last-Translator:  <fazylova_genia@mail.ru>\n"
 "Language-Team: Russian <ru@li.org>\n"
@@ -264,11 +264,31 @@ msgstr ""
 msgid "Configuration window"
 msgstr ""
 
-#: src/stel_ui.cpp:422
-msgid "Quit [CTRL + Q]Quit [CMD + Q]"
+#: src/stel_ui.cpp:421
+msgid "Quit [CTRL + Q]"
 msgstr ""
 
-#: src/stel_ui.cpp:482
+#: src/stel_ui.cpp:423
+msgid "Quit [CMD + Q]"
+msgstr ""
+
+#: src/stel_ui.cpp:430
+msgid "Decrease Time Speed [J]"
+msgstr ""
+
+#: src/stel_ui.cpp:432
+msgid "Real Time Speed [K]"
+msgstr ""
+
+#: src/stel_ui.cpp:434
+msgid "Increase Time Speed [L]"
+msgstr ""
+
+#: src/stel_ui.cpp:436
+msgid "Return to Current Time"
+msgstr ""
+
+#: src/stel_ui.cpp:479
 msgid ""
 "4 Directions     : Deplacement RA/DE\n"
 "Page Up/Down     : Zoom\n"
@@ -297,6 +317,212 @@ msgid ""
 "S   : Stars\n"
 "I   : About Stellarium\n"
 "F1  : Toggle fullscreen if possible.\n"
-"CTRL+Q : Quit\n"
-"CMD+Q  : Quit\n"
+msgstr ""
+
+#: src/stel_ui.cpp:508
+msgid "CMD+Q : Quit\n"
+msgstr ""
+
+#: src/stel_ui.cpp:510
+msgid "CTRL+Q : Quit\n"
+msgstr ""
+
+#: src/stel_ui_conf.cpp:27
+msgid "Configuration"
+msgstr ""
+
+#: src/stel_ui_conf.cpp:46
+msgid "Stars"
+msgstr ""
+
+#: src/stel_ui_conf.cpp:51
+msgid "Star Names. Up to mag :"
+msgstr ""
+
+#: src/stel_ui_conf.cpp:64
+msgid "Star Twinkle. Amount :"
+msgstr ""
+
+#: src/stel_ui_conf.cpp:81
+msgid "Constellations"
+msgstr ""
+
+#: src/stel_ui_conf.cpp:86
+msgid "Constellations Names"
+msgstr ""
+
+#: src/stel_ui_conf.cpp:91
+msgid "Selected Constellation Only"
+msgstr ""
+
+#: src/stel_ui_conf.cpp:102
+msgid "Nebulas"
+msgstr ""
+
+#: src/stel_ui_conf.cpp:107
+msgid "Nebulas Names. Up to mag :"
+msgstr ""
+
+#: src/stel_ui_conf.cpp:124
+msgid "Planets"
+msgstr ""
+
+#: src/stel_ui_conf.cpp:129
+msgid "Moon Scale"
+msgstr ""
+
+#: src/stel_ui_conf.cpp:136
+msgid "Planets Hints"
+msgstr ""
+
+#: src/stel_ui_conf.cpp:147
+msgid "Equatorial Grid"
+msgstr ""
+
+#: src/stel_ui_conf.cpp:152
+msgid "Azimuthal Grid"
+msgstr ""
+
+#: src/stel_ui_conf.cpp:157
+msgid "Equator Line"
+msgstr ""
+
+#: src/stel_ui_conf.cpp:162
+msgid "Ecliptic Line"
+msgstr ""
+
+#: src/stel_ui_conf.cpp:173
+msgid "Ground"
+msgstr ""
+
+#: src/stel_ui_conf.cpp:178
+msgid "Cardinal Points"
+msgstr ""
+
+#: src/stel_ui_conf.cpp:183
+msgid "Atmosphere"
+msgstr ""
+
+#: src/stel_ui_conf.cpp:188
+msgid "Fog"
+msgstr ""
+
+#: src/stel_ui_conf.cpp:193 src/stel_ui_conf.cpp:324
+msgid "Save as default"
+msgstr ""
+
+#: src/stel_ui_conf.cpp:205
+msgid " Current Time :"
+msgstr ""
+
+#: src/stel_ui_conf.cpp:214
+msgid " Time Zone :"
+msgstr ""
+
+#: src/stel_ui_conf.cpp:218
+msgid " Using System Default Time Zone"
+msgstr ""
+
+#: src/stel_ui_conf.cpp:229
+msgid " Time speed : "
+msgstr ""
+
+#: src/stel_ui_conf.cpp:237
+msgid ""
+"Use key J and L to decrease and increase\n"
+"   time speed.\n"
+"Use key K to return to real time speed."
+msgstr ""
+
+#: src/stel_ui_conf.cpp:253
+msgid "Longitude : "
+msgstr ""
+
+#: src/stel_ui_conf.cpp:255
+msgid "Latitude : "
+msgstr ""
+
+#: src/stel_ui_conf.cpp:271
+msgid "Save location"
+msgstr ""
+
+#: src/stel_ui_conf.cpp:282
+msgid " Projection :"
+msgstr ""
+
+#: src/stel_ui_conf.cpp:288
+msgid "Fisheye Projection Mode"
+msgstr ""
+
+#: src/stel_ui_conf.cpp:293
+msgid "Disk Viewport"
+msgstr ""
+
+#: src/stel_ui_conf.cpp:298
+msgid " Screen Resolution :"
+msgstr ""
+
+#: src/stel_ui_conf.cpp:302
+msgid "Restart program for"
+msgstr ""
+
+#: src/stel_ui_conf.cpp:303
+msgid "change to apply."
+msgstr ""
+
+#: src/stel_ui_conf.cpp:331
+msgid "Date & Time"
+msgstr ""
+
+#: src/stel_ui_conf.cpp:332
+msgid "Location"
+msgstr ""
+
+#: src/stel_ui_conf.cpp:333
+msgid "Video"
+msgstr ""
+
+#: src/stel_ui_conf.cpp:334
+msgid "Rendering"
+msgstr ""
+
+#: src/stel_ui_conf.cpp:392
+msgid "Saving rendering options in file "
+msgstr ""
+
+#: src/stel_ui_conf.cpp:435
+msgid "Saving video size "
+msgstr ""
+
+#: src/stel_ui_conf.cpp:435
+msgid " in file "
+msgstr ""
+
+#: src/solarsystem.cpp:77
+#, c-format
+msgid "Loading Solar System data...\n"
+msgstr ""
+
+#: src/stel_core.cpp:443
+#, c-format
+msgid ""
+"The current config file is from a previous version (>=0.6.0).\n"
+"Previous options will be imported in the new config file.\n"
+msgstr ""
+
+#. The config file is too old to try an importation
+#: src/stel_core.cpp:462
+#, c-format
+msgid ""
+"The current config file is from a version too old for parameters to be "
+"imported (%s).\n"
+"It will be replaced by the default config file.\n"
+msgstr ""
+
+#: src/stel_core.cpp:485
+msgid "Loading configuration file "
+msgstr ""
+
+#: src/stel_core.cpp:493
+msgid "ERROR : The current config file is from a different version ("
 msgstr ""

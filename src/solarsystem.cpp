@@ -74,7 +74,7 @@ SolarSystem::~SolarSystem()
 // Init and load the solar system data
 void SolarSystem::load(const string& planetfile)
 {
-	printf("Loading Solar System data...\n");
+	printf(_("Loading Solar System data...\n"));
 	init_parser pd;	// The planet data ini file parser
 	pd.load(planetfile);
 
