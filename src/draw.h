@@ -23,35 +23,36 @@
 #include "stellarium.h"
 #include "stel_utility.h"
 #include "tone_reproductor.h"
+#include "navigator.h"
 
 // Class which manages a grid to display in the sky
 class SkyGrid
 {
 public:
 	// Create and precompute positions of a SkyGrid
-	SkyGrid(unsigned int _nb_meridian = 24, unsigned int _nb_parallel = 17,
-			unsigned int _nb_alt_segment = 18, unsigned int nb_azi_segment = 36);
+	SkyGrid(unsigned int _nb_meridian = 24, unsigned int _nb_parallel = 17, double _radius = 1.,
+			unsigned int _nb_alt_segment = 18, unsigned int _nb_azi_segment = 50);
     virtual ~SkyGrid();
-	void draw(draw_utility * du) const;
+	void draw(draw_utility * du, navigator* nav) const;
 private:
 	unsigned int nb_meridian;
 	unsigned int nb_parallel;
+	double radius;
 	unsigned int nb_alt_segment;
 	unsigned int nb_azi_segment;
-	Vec3f ** points;
+	bool transparent_top;
+	Vec3f color;
+	Vec3f** alt_points;
+	Vec3f** azi_points;
 };
 
-void InitMeriParal(void);
+
 void DrawPoint(float X,float Y,float Z);
 
 void DrawCardinaux(draw_utility * du);
 void DrawMilkyWay(tone_reproductor * eye);
-void DrawMeridiens(void);
-void DrawMeridiensAzimut(void);
-void DrawParallelsAzimut(void);
-void DrawParallels(void);
-void DrawEquator(void);
-void DrawEcliptic(void);
+//void DrawEquator(void);
+//void DrawEcliptic(void);
 void DrawFog(float sky_brightness);
 void DrawDecor(int, float sky_brightness);
 void DrawGround(float sky_brightness);

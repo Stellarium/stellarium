@@ -63,7 +63,7 @@ public:
 
 	inline const T& operator[](int x) const;
     inline T& operator[](int);
-	inline operator T*() const;
+	inline operator const T*() const;
 	inline operator T*();
 
     inline Vector2& operator+=(const Vector2<T>&);
@@ -107,6 +107,7 @@ public:
 
     inline T& operator[](int);
     inline const T& operator[](int) const;
+	inline operator const T*() const;
 	inline operator T*();
 
     inline Vector3& operator+=(const Vector3<T>&);
@@ -280,7 +281,7 @@ template<class T> T& Vector2<T>::operator[](int x)
 	return v[x];
 }
 
-template<class T> Vector2<T>::operator T*() const
+template<class T> Vector2<T>::operator const T*() const
 {
 	return v;
 }
@@ -420,11 +421,15 @@ template<class T> const T& Vector3<T>::operator[](int x) const
 	return v[x];
 }
 
-template<class T> Vector3<T>::operator T*()
+template<class T> Vector3<T>::operator const T*() const
 {
 	return v;
 }
 
+template<class T> Vector3<T>::operator T*()
+{
+	return v;
+}
 
 template<class T> Vector3<T>& Vector3<T>::operator+=(const Vector3<T>& a)
 {

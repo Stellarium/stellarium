@@ -35,7 +35,7 @@ using namespace std;
 #include "solarsystem.h"
 #include "stel_utility.h"
 #include "init_parser.h"
-
+#include "draw.h"
 
 class stel_core
 {
@@ -87,6 +87,8 @@ private:
 	Nebula_mgr * nebulas;				// Manage the nebulas
 	SolarSystem* ssystem;				// Manage the solar system 
 	stel_atmosphere * atmosphere;		// Atmosphere
+	SkyGrid * equ_grid;					// Equatorial grid
+	SkyGrid * azi_grid;					// Azimutal grid
 	tone_reproductor * tone_converter;	// Tones conversion between stellarium world and display device
 	stel_ui * ui;						// The main User Interface
 	draw_utility * du;					// A usefull small class used to pass parameters and handy functions

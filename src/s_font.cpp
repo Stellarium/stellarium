@@ -103,15 +103,10 @@ int s_font::buildDisplayLists(const char * dataFileName, const char * textureNam
 
 void s_font::print(float x, float y, const char * str, int upsidedown) const
 {
-    if	(!s_fontTexture)
-    {
-		printf("ERROR, NO FONT TEXTURE\n");
-		exit(-1);
-    }
     glBindTexture(GL_TEXTURE_2D, s_fontTexture->getID());  // Select Our s_font Texture
     glPushMatrix();
     glTranslatef(x,y,0);								// Position The Text (0,0 - Top Left)
-	if (upsidedown) glScalef(1, -1, 1);									// invert the y axis, down is positive
+	if (upsidedown) glScalef(1, -1, 1);					// invert the y axis, down is positive
     glListBase(g_base);									// Init the Display list base
     glCallLists(strlen(str),GL_BYTE,str);				// Write The Text To The Screen
     glPopMatrix();

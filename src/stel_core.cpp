@@ -81,6 +81,8 @@ void stel_core::init(void)
 	// Create tone reproductor
 	tone_converter=new tone_reproductor();
 	du = new draw_utility();
+	equ_grid = new SkyGrid();
+	azi_grid = new SkyGrid();
 
 	// Temporary strings for file names
     char tempName[255];
@@ -97,14 +99,14 @@ void stel_core::init(void)
     strcat(tempName3,"name.fab");
     strcpy(tempName4,DataDir);
     strcat(tempName4,"spacefont.txt");
-    hip_stars->Load(tempName4, tempName,tempName2,tempName3);
+    hip_stars->load(tempName4, tempName,tempName2,tempName3);
 
 	// Load constellations
     strcpy(tempName,DataDir);
     strcat(tempName,"constellationship.fab");
     strcpy(tempName2,DataDir);
     strcat(tempName2,"spacefont.txt");
-    asterisms->Load(tempName2,tempName,hip_stars);
+    asterisms->load(tempName2,tempName,hip_stars);
 
 	// Load the nebulas data TODO : add NGC objects
     strcpy(tempName,DataDir);
@@ -125,9 +127,6 @@ void stel_core::init(void)
 
 	// Load the pointer textures
 	stel_object::init_textures();
-
-	// Precalculation for the grids drawing TODO will be in a class
-    InitMeriParal();
 
 	// initialisation of the User Interface
 	ui = new stel_ui(this);
@@ -209,12 +208,12 @@ void stel_core::draw(int delta_time)
 	else DrawMilkyWay(tone_converter);
 
 	// Init the depth buffer which is used by the planets drawing operations
-	glClear(GL_DEPTH_BUFFER_BIT);
+	//glClear(GL_DEPTH_BUFFER_BIT);
 
 	// Draw all the constellations
-	if (FlagAsterismDrawing) asterisms->Draw();
+	if (FlagAsterismDrawing) asterisms->draw(du, navigation);
 	// Draw the constellations's names
-    if (FlagAsterismName) asterisms->DrawName(du);
+    if (FlagAsterismName) asterisms->draw_names(du, navigation);
 
 	// Draw the nebula if they are visible
 	if (FlagNebula && (!FlagAtmosphere || sky_brightness<0.1)) nebulas->Draw(FlagNebulaName, du, navigation);
@@ -223,19 +222,15 @@ void stel_core::draw(int delta_time)
 	Vec3d tempv = navigation->get_equ_vision();
 	Vec3f temp(tempv[0],tempv[1],tempv[2]);
 	if (FlagStars)
-		hip_stars->Draw(StarScale, StarTwinkleAmount, FlagStarName,
+		hip_stars->draw(StarScale, StarTwinkleAmount, FlagStarName,
 		MaxMagStarName, temp, du, tone_converter, navigation);
 
 	// Draw the equatorial grid
-	// TODO : make a nice class for grid wit parameters like numbering and custom color/frequency
-    if (FlagEquatorialGrid)
-	{
-		DrawMeridiens();				// Draw the meridian lines
-        DrawParallels();				// Draw the parallel lines
-	}
+	if (FlagEquatorialGrid) equ_grid->draw(du, navigation);
+
 
 	// TODO : make a nice class for lines management
-    if (FlagEquator) DrawEquator();		// Draw the celestial equator line
+    //if (FlagEquator) DrawEquator();		// Draw the celestial equator line
     //if (FlagEcliptic) DrawEcliptic();	// Draw the ecliptic line
 
 	// Draw the pointer on the currently selected object
@@ -275,12 +270,7 @@ void stel_core::draw(int delta_time)
 
 
 	// Draw the altazimutal grid
-	// TODO : make a nice class for grid wit parameters like numbering and custom color/frequency
-    if (FlagAzimutalGrid)
-	{
-		DrawMeridiensAzimut();		// Draw the "Altazimuthal meridian" lines
-        DrawParallelsAzimut();		// Draw the "Altazimuthal parallel" lines
-	}
+    if (FlagAzimutalGrid) azi_grid->draw(du, navigation);
 
 	// Normal transparency mode
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);

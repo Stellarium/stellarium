@@ -29,33 +29,139 @@
 #include "stellastro.h"
 
 extern s_texture * texIds[200];            // Common Textures
-float DmeriParal[51][2];                   // For grids drawing optimisation
 
-float DmeriParalCos[18][51][2];
-float sinTable[18];
-
-// precalculation of the grid points
-void InitMeriParal(void)
+SkyGrid::SkyGrid(unsigned int _nb_meridian, unsigned int _nb_parallel, double _radius,
+	unsigned int _nb_alt_segment, unsigned int _nb_azi_segment) :
+	nb_meridian(_nb_meridian), nb_parallel(_nb_parallel), 	radius(_radius),
+	nb_alt_segment(_nb_alt_segment), nb_azi_segment(_nb_azi_segment)
 {
-	float Pi_Over_24 = (float)(M_PI / 24.0f);
-	for (register int j = 0; j < 51; ++j)
-	{
-		DmeriParal[j][0] = (float)(27.0f * cos(j * Pi_Over_24));
-		DmeriParal[j][1] = (float)(27.0f * sin(j * Pi_Over_24));
-	}
+	transparent_top = true;
+	color = Vec3f(0.2,0.2,0.2);
 
-
-	float Pi_Over_18 = (float)(M_PI / 18.0f);
-	for (register int k = 0; k < 18; ++k)
+	// Alt points are the points to draw along the meridian
+	alt_points = new Vec3f*[nb_meridian];
+	for (unsigned int nm=0;nm<nb_meridian;++nm)
 	{
-		sinTable[k] = (float)(27.0f * sin((k - 9) * Pi_Over_18));
-		register float _cos = (float)(cos((k - 9) * Pi_Over_18));
-		for (int j = 0; j < 51; ++j)
+		alt_points[nm] = new Vec3f[nb_alt_segment+1];
+		for (unsigned int i=0;i<nb_alt_segment+1;++i)
 		{
-			DmeriParalCos[k][j][0] = DmeriParal[j][0] * _cos;
-			DmeriParalCos[k][j][1] = DmeriParal[j][1] * _cos;
+			sphe_to_rect((float)nm/(nb_meridian)*2.f*M_PI,
+				(float)i/nb_alt_segment*M_PI-M_PI_2, &alt_points[nm][i]);
 		}
 	}
+
+	// Alt points are the points to draw along the meridian
+	azi_points = new Vec3f*[nb_parallel];
+	for (unsigned int np=0;np<nb_parallel;++np)
+	{
+		azi_points[np] = new Vec3f[nb_azi_segment+1];
+		for (unsigned int i=0;i<nb_azi_segment+1;++i)
+		{
+			sphe_to_rect((float)i/(nb_azi_segment)*2.f*M_PI,
+				(float)(np+1)/(nb_parallel+1)*M_PI-M_PI_2, &azi_points[np][i]);
+		}
+	}
+}
+
+SkyGrid::~SkyGrid()
+{
+	for (unsigned int nm=0;nm<nb_meridian;++nm)
+	{
+		delete alt_points[nm];
+	}
+	delete alt_points;
+}
+
+void SkyGrid::draw(draw_utility * du, navigator* nav) const
+{
+	glColor3fv(color);
+	glDisable(GL_TEXTURE_2D);
+	glEnable(GL_BLEND);
+	// Normal transparency mode
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+
+	static Vec3d pt1;
+	static Vec3d pt2;
+
+	du->set_orthographic_projection();	// set 2D coordinate
+
+	// Draw meridians
+	for (unsigned int nm=0;nm<nb_meridian;++nm)
+	{
+		if (transparent_top)	// Transparency for the first and last points
+		{
+			if (nav->project_earth_equ_to_screen(alt_points[nm][0], pt1) &&
+				nav->project_earth_equ_to_screen(alt_points[nm][1], pt2) )
+			{
+				glBegin (GL_LINES);
+					glColor4f(color[0],color[1],color[2],0.f);
+					glVertex2f(pt1[0],pt1[1]);
+					glColor3fv(color);
+					glVertex2f(pt2[0],pt2[1]);
+        		glEnd();
+			}
+
+			glColor3fv(color);
+			for (unsigned int i=1;i<nb_alt_segment-1;++i)
+			{
+				if (nav->project_earth_equ_to_screen(alt_points[nm][i], pt1) &&
+					nav->project_earth_equ_to_screen(alt_points[nm][i+1], pt2) )
+				{
+					glBegin(GL_LINES);
+						glVertex2f(pt1[0],pt1[1]);
+						glVertex2f(pt2[0],pt2[1]);
+        			glEnd();
+				}
+			}
+
+			if (nav->project_earth_equ_to_screen(alt_points[nm][nb_alt_segment-1], pt1) &&
+				nav->project_earth_equ_to_screen(alt_points[nm][nb_alt_segment], pt2) )
+			{
+				glBegin (GL_LINES);
+					glColor3fv(color);
+					glVertex2f(pt1[0],pt1[1]);
+					glColor4f(color[0],color[1],color[2],0.f);
+					glVertex2f(pt2[0],pt2[1]);
+        		glEnd();
+			}
+
+		}
+		else	// No transparency
+		{
+			glColor3fv(color);
+			for (unsigned int i=0;i<nb_alt_segment;++i)
+			{
+				if (nav->project_earth_equ_to_screen(alt_points[nm][i], pt1) &&
+					nav->project_earth_equ_to_screen(alt_points[nm][i+1], pt2) )
+				{
+					glBegin (GL_LINES);
+						glVertex2f(pt1[0],pt1[1]);
+						glVertex2f(pt2[0],pt2[1]);
+        			glEnd();
+				}
+			}
+		}
+	}
+
+	// Draw parallels
+	glColor3fv(color);
+	for (unsigned int np=0;np<nb_parallel;++np)
+	{
+		for (unsigned int i=0;i<nb_azi_segment;++i)
+		{
+			if (nav->project_earth_equ_to_screen(azi_points[np][i], pt1) &&
+				nav->project_earth_equ_to_screen(azi_points[np][i+1], pt2) )
+			{
+				glBegin (GL_LINES);
+					glVertex2f(pt1[0],pt1[1]);
+					glVertex2f(pt2[0],pt2[1]);
+        		glEnd();
+			}
+		}
+	}
+
+	du->reset_perspective_projection();
 }
 
 
@@ -154,102 +260,9 @@ void DrawMilkyWay(tone_reproductor * eye)
 	glPopMatrix();
 }
 
-// Draw the equatorial merididians
-void DrawMeridiens(void)
-{
-	glPushMatrix(); 
-	glDisable(GL_TEXTURE_2D);
-	glDisable(GL_BLEND);
-	float coef;
-	coef=rand();
-	coef/=RAND_MAX;
-	glColor3f(0.12*coef+0.18,0.015*coef+0.2,0.015*coef+0.2);
-	for(int i=0;i<12;i++)
-	{
-		glRotatef(360./24.,0,0,1);
-		for(int j=0;j<49;++j)
-		{
-			glBegin(GL_LINES);
-			glVertex3f(DmeriParal[j][0], 0.0f, DmeriParal[j][1]);
-			glVertex3f(DmeriParal[j+1][0], 0.0f, DmeriParal[j+1][1]);
-			glEnd();
-		}
-	}
-	glPopMatrix();
-}
-
-
-// Draw the azimuthal merididians
-void DrawMeridiensAzimut(void)
-{
-	glPushMatrix();
-	glDisable(GL_TEXTURE_2D);
-	glDisable(GL_BLEND);
-	float coef = 1;
-	glColor3f(0.015*coef+0.2,0.12*coef+0.18,0.015*coef+0.2);
-	for(int i=0;i<12;i++)
-	{
-		glRotatef(360/24,0,0,1);
-		for(int j=0;j<49;++j)
-		{
-			glBegin(GL_LINES);
-				glVertex3f(DmeriParal[j][0], 0.0f, DmeriParal[j][1]);
-				glVertex3f(DmeriParal[j+1][0], 0.0f, DmeriParal[j+1][1]);
-			glEnd();
-		}
-	}
-	glPopMatrix();
-}
-
-
-// Draw the equatorial parallels
-void DrawParallels(void)
-{       
-	glPushMatrix();
-	glDisable(GL_TEXTURE_2D);
-	glDisable(GL_BLEND);
-
-	float coef = 1;
-	glColor3f(0.2*coef+0.2,0.025*coef+0.2,0.025*coef+0.2);
-	for(int i=0;i<18;++i)
-	{
-		for(int j=0;j<50;++j)
-		{
-			glBegin(GL_LINES);
-				glVertex3f(DmeriParalCos[i] [j] [0],DmeriParalCos[i] [j] [1],sinTable[i]);
-				glVertex3f(DmeriParalCos[i][j+1][0],DmeriParalCos[i][j+1][1],sinTable[i]);
-			glEnd();
-		}
-	}
-	glPopMatrix();
-}
-
-
-// Draw the azimuthal parallels
-void DrawParallelsAzimut(void)
-{
-	glPushMatrix();
-	glDisable(GL_TEXTURE_2D);
-	glDisable(GL_BLEND);
-	
-	float coef = (float)(1.0f * rand() / RAND_MAX);
-	glColor3f(0.015*coef+0.2,0.012*coef+0.18,0.015*coef+0.2);
-	for(int i=0;i<18;++i)
-	{
-		for(int j=0;j<50;++j)
-		{
-			glBegin(GL_LINES);
-				glVertex3f(DmeriParalCos[i] [j] [0],DmeriParalCos[i] [j] [1],sinTable[i]);
-				glVertex3f(DmeriParalCos[i][j+1][0],DmeriParalCos[i][j+1][1],sinTable[i]);
-			glEnd();
-		}
-	}
-	glPopMatrix();
-}
-
 
 // Draw the celestrial equator
-void DrawEquator(void)
+/*void DrawEquator(void)
 {       
 	glPushMatrix();
 	glDisable(GL_TEXTURE_2D);
@@ -265,6 +278,7 @@ void DrawEquator(void)
 	}
 	glPopMatrix();
 }
+*/
 
 // Draw the horizon fog
 void DrawFog(float sky_brightness)

@@ -59,7 +59,7 @@ Hip_Star_mgr::~Hip_Star_mgr()
 }
 
 // Load from file ( create the stream and call the Read function )
-void Hip_Star_mgr::Load(char * font_fileName, char * hipCatFile, char * commonNameFile, char * nameFile)
+void Hip_Star_mgr::load(char * font_fileName, char * hipCatFile, char * commonNameFile, char * nameFile)
 {   
     printf("Loading Hipparcos star data...\n");
     FILE * hipFile, *cnFile, * nFile;
@@ -117,7 +117,7 @@ void Hip_Star_mgr::Load(char * font_fileName, char * hipCatFile, char * commonNa
     {
 	    e = new Hip_Star;
 	    e->HP=(unsigned int)i;
-        if (!e->Read(hipFile)) 
+        if (!e->read(hipFile))
         {
         	delete e;
         	e=NULL;
@@ -157,7 +157,7 @@ void Hip_Star_mgr::Load(char * font_fileName, char * hipCatFile, char * commonNa
 
 
 // Draw all the stars
-void Hip_Star_mgr::Draw(float _star_scale, float _twinkle_amount, int name_ON,
+void Hip_Star_mgr::draw(float _star_scale, float _twinkle_amount, int name_ON,
 						float maxMagStarName, Vec3f equ_vision, draw_utility * du,
 						tone_reproductor* _eye, navigator* nav)
 {
@@ -170,14 +170,14 @@ void Hip_Star_mgr::Draw(float _star_scale, float _twinkle_amount, int name_ON,
     glBindTexture (GL_TEXTURE_2D, starTexture->getID());
 	glBlendFunc(GL_ONE, GL_ONE);
 
-    du->set_orthographic_projection();	// set 2D coordinate
-
 	// Find the star zones which are in the screen
 	int nbZones=0;
 	static int * zoneList;  // WARNING this is almost a memory leak...
 
 	nbZones = HipGrid.Intersect(equ_vision, du->fov*M_PI/180.f*1.2f, zoneList);
 	float maxMag = 5.5f+60.f/du->fov;
+
+    du->set_orthographic_projection();	// set 2D coordinate
 
 	// Print all the stars of all the selected zones
 	static vector<Hip_Star *>::iterator end;
@@ -191,12 +191,12 @@ void Hip_Star_mgr::Draw(float _star_scale, float _twinkle_amount, int name_ON,
 			if ((*iter)->Mag>maxMag) continue;
 
 			// Compute the 2D position and check if in screen
-        	if (nav->project_earth_equ_to_screen((*iter)->XYZ, (*iter)->XY))
+        	if (nav->project_earth_equ_to_screen_check((*iter)->XYZ, (*iter)->XY))
         	{
-		        (*iter)->Draw(du);
+		        (*iter)->draw(du);
 		        if (name_ON && (*iter)->CommonName && (*iter)->Mag<maxMagStarName)
             	{
-		        	(*iter)->DrawName(starFont);
+		        	(*iter)->draw_name(starFont);
                 	glBindTexture (GL_TEXTURE_2D, starTexture->getID());
             	}
         	}
@@ -231,11 +231,21 @@ Hip_Star * Hip_Star_mgr::search(vec3_t Pos)
     else return NULL;
 }
 
+
+// Search the star by HP number
+Hip_Star * Hip_Star_mgr::search(unsigned int _HP)
+{
+	if (StarArray[_HP] && StarArray[_HP]->HP == _HP)
+		return StarArray[_HP];
+    return NULL;
+}
+
+/*
 void Hip_Star_mgr::Save(void)
 {
 	FILE * fic = fopen("cat.fab","wb");
-    fwrite((char*)&StarArraySize,4,1,fic);	
-	
+    fwrite((char*)&StarArraySize,4,1,fic);
+
     for(int i=0;i<StarArraySize;i++)
     {
     	Hip_Star * s = StarArray[i];
@@ -247,20 +257,12 @@ void Hip_Star_mgr::Save(void)
     	{
     		RAf=s->r; DEf=s->d;
     		mag = s->magp;
-    		type = s->typep;   	
+    		type = s->typep;
     	}
     	fwrite((char*)&RAf,4,1,fic);
     	fwrite((char*)&DEf,4,1,fic);
     	fwrite((char*)&mag,2,1,fic);
-    	fwrite((char*)&type,2,1,fic);	
+    	fwrite((char*)&type,2,1,fic);
     }
    	fclose(fic);
-}
-
-// Search the star by HP number
-Hip_Star * Hip_Star_mgr::search(unsigned int _HP)
-{
-	if (StarArray[_HP] && StarArray[_HP]->HP == _HP)
-		return StarArray[_HP];
-    return NULL;
-}
+}*/
