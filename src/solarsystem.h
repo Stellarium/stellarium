@@ -50,7 +50,7 @@ public:
 
 	planet* get_earth(void) {return earth;}
 
-	Vec3d get_moon_heliocentric_ecliptic_pos(void) {return moon->get_heliocentric_ecliptic_pos();}
+	planet* get_moon(void) {return moon;}
 private:
 	planet* sun;
 	planet* moon;

@@ -94,6 +94,15 @@ const char * init_parser::get_str(const char * section, const char * key) const
 	return get_str(tmp);
 }
 
+const char * init_parser::get_str(const char * section, const char * key, const char * def) const
+{
+	char tmp[strlen(section) + strlen(key) + 2];
+	strcpy(tmp,section);
+	strcat(tmp,":");
+	strcat(tmp,key);
+
+	return iniparser_getstring(dico, tmp, def);
+}
 
 int init_parser::get_int(const char * key) const
 {
@@ -120,6 +129,14 @@ int init_parser::get_int(const char * section, const char * key) const
 	return get_int(tmp);
 }
 
+int init_parser::get_int(const char * section, const char * key, int def) const
+{
+	char tmp[strlen(section) + strlen(key) + 2];
+	strcpy(tmp,section);
+	strcat(tmp,":");
+	strcat(tmp,key);
+	return iniparser_getint(dico, tmp, def);
+}
 
 double init_parser::get_double(const char * key) const
 {
@@ -146,6 +163,15 @@ double init_parser::get_double(const char * section, const char * key) const
 	return get_double(tmp);
 }
 
+double init_parser::get_double(const char * section, const char * key, double def) const
+{
+	char tmp[strlen(section) + strlen(key) + 2];
+	strcpy(tmp,section);
+	strcat(tmp,":");
+	strcat(tmp,key);
+	return iniparser_getdouble(dico, tmp, def);
+}
+
 int init_parser::get_boolean(const char * key) const
 {
 	int b = iniparser_getboolean(dico, key, -10);
@@ -169,6 +195,16 @@ int init_parser::get_boolean(const char * section, const char * key) const
 	strcat(tmp,key);
 
 	return get_boolean(tmp);
+}
+
+int init_parser::get_boolean(const char * section, const char * key, int def) const
+{
+	char tmp[strlen(section) + strlen(key) + 2];
+	strcpy(tmp,section);
+	strcat(tmp,":");
+	strcat(tmp,key);
+
+	return iniparser_getboolean(dico, tmp, def);
 }
 
 // Get number of sections

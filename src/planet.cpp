@@ -146,6 +146,19 @@ Vec3d planet::get_heliocentric_ecliptic_pos() const
 	return pos;
 }
 
+// Get the phase angle for an observer at pos obs_pos in the heliocentric coordinate (dist in AU)
+double planet::get_phase(Vec3d obs_pos)
+{
+	/* get distances */
+	double R = obs_pos.length();
+	Vec3d heliopos = get_heliocentric_ecliptic_pos();
+	double r = heliopos.length();
+	double delta = (obs_pos-heliopos).length();
+
+	/* calc phase */
+	return acos((r * r + delta * delta - R * R) / (2. * r * delta));
+}
+
 // Add the given planet in the satellite list
 void planet::add_satellite(planet*p)
 {
@@ -182,8 +195,12 @@ void planet::draw(int hint_ON, draw_utility * du, navigator * nav)
 
 		// Draw the name, and the circle if it's not too close from the body it's turning around
 		// this prevents name overlaping (ie for jupiter satellites)
-    	if (hint_ON && atan(get_ecliptic_pos().length()/earthEquPos.length())/du->fov>0.0005)
+		float ang_dist = atan(get_ecliptic_pos().length()/earthEquPos.length())/du->fov;
+     	if (hint_ON && ang_dist>0.0005)
     	{
+			ang_dist*=300.f;
+			if (ang_dist>1.f) ang_dist = 1.f;
+			glColor4f(0.5f*ang_dist,0.5f*ang_dist,0.7f*ang_dist,1.f*ang_dist);
 			draw_hints(earthEquPos, du);
         }
 
@@ -207,16 +224,17 @@ void planet::draw_hints(Vec3d earthEquPos, draw_utility * du)
 	glEnable(GL_BLEND);
 	glDisable(GL_LIGHTING);
 	glEnable(GL_TEXTURE_2D);
-	glColor3f(0.5,0.5,0.7);
+
 	float tmp = 8.f + radius/earthEquPos.length()*du->screenH*60./du->fov; // Shift for name printing
 	planet_name_font->print(screenPos[0]+tmp,screenPos[1]+tmp, name);
 
-	// Draw the 2D small circle : disapears smoothly on close view
-	tmp-=8.;
-	if (tmp<1) tmp=1.;
-	glColor4f(0.5/tmp,0.5/tmp,0.7/tmp,1/tmp);
+	// Draw the 2D small circle
 	glDisable(GL_TEXTURE_2D);
 	glBegin(GL_LINE_STRIP);
+	// hint disapears smoothly on close view
+	tmp -= 8.f;
+	if (tmp<1) tmp=1;
+ 	glColor4f(0.5f/tmp,0.5f/tmp,0.7f/tmp,1.f/tmp);
 	for (float r = 0; r < 6.28; r += 0.2)
 	{
 		glVertex3f(screenPos[0] + 8. * sin(r), screenPos[1] + 8. * cos(r), 0.0f);
@@ -244,7 +262,7 @@ void planet::draw_sphere(void)
 
 void planet::draw_halo(draw_utility * du)
 {
-	float rmag = 10;//lim*du->screenH*100;
+	float rmag = 5;//lim*du->screenH*100;
 	if (rmag>0.5)
 	{
 		float cmag=1.;

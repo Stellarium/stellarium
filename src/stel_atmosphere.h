@@ -38,7 +38,7 @@ class stel_atmosphere
 public:
     stel_atmosphere();
     virtual ~stel_atmosphere();
-	void compute_color(int ground_ON, Vec3d sunPos, Vec3d moonPos, tone_reproductor * eye, draw_utility * du);
+	void compute_color(int ground_ON, Vec3d sunPos, Vec3d moonPos, float moon_phase, tone_reproductor * eye, draw_utility * du);
 	void draw(draw_utility * du);
 	const float * get_zenith_color(tone_reproductor * eye) const;
 private:

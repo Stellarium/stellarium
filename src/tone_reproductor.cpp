@@ -62,6 +62,7 @@ void tone_reproductor::set_world_adaptation_luminance(float _Lwa)
 	// Update terms
 	alpha_wa_over_alpha_da = alpha_wa/alpha_da;
 	term2 = powf(10.f, (beta_wa-beta_da)/alpha_da) / (M_PI*0.0001f);
+
 }
 
 

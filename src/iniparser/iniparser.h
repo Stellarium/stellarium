@@ -4,16 +4,16 @@
    @file    iniparser.h
    @author  N. Devillard
    @date    Mar 2000
-   @version $Revision: 232 $
+   @version $Revision: 236 $
    @brief   Parser for ini files.
 */
 /*--------------------------------------------------------------------------*/
 
 /*
-	$Id: iniparser.h 232 2003-07-22 22:44:45Z xalioth $
+	$Id: iniparser.h 236 2003-07-25 14:16:53Z xalioth $
 	$Author: xalioth $
-	$Date: 2003-07-22 23:44:45 +0100 (Tue, 22 Jul 2003) $
-	$Revision: 232 $
+	$Date: 2003-07-25 15:16:53 +0100 (Fri, 25 Jul 2003) $
+	$Revision: 236 $
 */
 
 #ifndef _INIPARSER_H_
@@ -121,7 +121,7 @@ void iniparser_dump(dictionary * d, FILE * f);
   iniparser_getstring() instead.
  */
 /*--------------------------------------------------------------------------*/
-char * iniparser_getstr(dictionary * d, char * key);
+const char * iniparser_getstr(const dictionary * d, const char * key);
 
 
 /*-------------------------------------------------------------------------*/
@@ -139,7 +139,7 @@ char * iniparser_getstr(dictionary * d, char * key);
   the dictionary, do not free or modify it.
  */
 /*--------------------------------------------------------------------------*/
-char * iniparser_getstring(dictionary * d, const char * key, char * def);
+const char * iniparser_getstring(const dictionary * d, const char * key, const char * def);
 
 /*-------------------------------------------------------------------------*/
 /**
