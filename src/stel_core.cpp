@@ -333,6 +333,8 @@ void stel_core::draw(int delta_time)
 
     // ---- 2D Displays
     ui->draw();
+
+	ui->draw_gravity_ui();
 }
 
 void stel_core::load_config(void)
@@ -545,35 +547,41 @@ void stel_core::update_move(int delta_time)
     if (deltaAz<0)
     {
 		deltaAz = -depl/30;
+		if (deltaAz<-0.2) deltaAz = -0.2;
     }
     else
     {
 		if (deltaAz>0)
         {
 			deltaAz = (depl/30);
+			if (deltaAz>0.2) deltaAz = 0.2;
         }
     }
     if (deltaAlt<0)
     {
 		deltaAlt = -depl/30;
+		if (deltaAlt<-0.2) deltaAlt = -0.2;
     }
     else
     {
 		if (deltaAlt>0)
         {
 			deltaAlt = depl/30;
+			if (deltaAlt>0.2) deltaAlt = 0.2;
         }
     }
 
     if (deltaFov<0)
     {
 		deltaFov = -depl*5;
+		if (deltaFov<-20) deltaFov = -20;
     }
     else
     {
 		if (deltaFov>0)
         {
 			deltaFov = depl*5;
+			if (deltaFov>20) deltaFov = 20;
         }
     }
 

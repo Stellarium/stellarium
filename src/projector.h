@@ -148,6 +148,9 @@ public:
 	void print_gravity(const s_font* font, float x, float y, const char * str,
 		float xshift = 0, float yshift = 0) const;
 
+	void print_gravity180(const s_font* font, float x, float y, const char * str,
+		float xshift = 0, float yshift = 0) const;
+
 protected:
 	// Init the viewing matrix from the fov, the clipping planes and screen ratio
 	// The function is a reimplementation of gluPerspective
