@@ -66,6 +66,7 @@ public:
 	int view_bottom(void) const {return vec_viewport[1];}
 
 	void set_clipping_planes(double znear, double zfar);
+	void get_clipping_planes(double* zn, double* zf) const {*zn = zNear; *zf = zFar;}
 
 	// Return true if the 2D pos is inside the viewport
 	bool check_in_viewport(const Vec3d& pos) const

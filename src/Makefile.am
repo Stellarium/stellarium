@@ -32,6 +32,7 @@ projector.h			projector.cpp \
 fisheye_projector.h fisheye_projector.cpp \
 landscape.h			landscape.cpp \
 callbacks.hpp       callback_helpers.hpp \
+s_tui.h				s_tui.cpp \
 stellarium.h \
 vecmath.h bytes.h
 
