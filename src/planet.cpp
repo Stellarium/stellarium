@@ -1,6 +1,6 @@
 /*
  * Stellarium
- * Copyright (C) 2002 Fabien Chéreau
+ * Copyright (C) 2002 Fabien Chï¿½eau
  * 
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -80,7 +80,7 @@ void planet::get_info_string(char * s, const navigator * nav) const
 
 	Vec3d equPos = get_earth_equ_pos(nav);
 	rect_to_sphe(&tempRA,&tempDE,equPos);
-	sprintf(s,"Name :%s%s\nRA : %s\nDE : %s\nDistance : %.8f UA\nMagnitude : %.2f",
+	sprintf(s,_("Name :%s%s\nRA : %s\nDE : %s\nDistance : %.8f UA\nMagnitude : %.2f"),
 	common_name.c_str(), scale_str, print_angle_hms(tempRA*180./M_PI).c_str(), print_angle_dms_stel(tempDE*180./M_PI).c_str(), equPos.length(),
 	compute_magnitude(nav->get_observer_helio_pos()));
 }
@@ -91,7 +91,7 @@ void planet::get_short_info_string(char * s, const navigator * nav) const
 	static char scale_str[100];
 	if (sphere_scale == 1.f) scale_str[0] = '\0';
 	else sprintf(scale_str," (x%.1f)", sphere_scale);
-	sprintf(s,"%s%s: mag %.1f",common_name.c_str(), scale_str, compute_magnitude(nav->get_observer_helio_pos()));
+	sprintf(s,_("%s%s: mag %.1f"),common_name.c_str(), scale_str, compute_magnitude(nav->get_observer_helio_pos()));
 }
 
 double planet::get_close_fov(const navigator* nav) const

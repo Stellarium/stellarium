@@ -1,6 +1,6 @@
 /*
  * Stellarium
- * Copyright (C) 2002 Fabien Chéreau
+ * Copyright (C) 2002 Fabien Chï¿½eau
  * 
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -34,16 +34,12 @@ tone_reproductor* Hip_Star::eye = NULL;
 Projector* Hip_Star::proj = NULL;
 bool Hip_Star::gravity_label = false;
 
-Hip_Star::Hip_Star() : 
-	CommonName(NULL),
-    Name(NULL)
+Hip_Star::Hip_Star()
 {
 }
 
 Hip_Star::~Hip_Star()
-{   
-	if (Name) delete Name;
-	if (CommonName) delete CommonName;
+{ 
 }
 
 void Hip_Star::get_info_string(char * s, const navigator * nav) const
@@ -53,9 +49,10 @@ void Hip_Star::get_info_string(char * s, const navigator * nav) const
 
 	float tempDE, tempRA;
 	rect_to_sphe(&tempRA,&tempDE,XYZ);
-	sprintf(s,"Name :%s%s%s\nHip : %.4d\nRA : %s\nDE : %s\nMag : %.2f",
-		CommonName==NULL ? "" : CommonName, CommonName==NULL ? "" : " ",
-		Name==NULL ? tempStr : Name, HP, print_angle_hms(tempRA*180./M_PI).c_str(),
+	// Hip = Hipparcos, RA=Right Ascention, DE=Declinaison, Mag=Magnitude
+	sprintf(s,_("Name :%s%s%s\nHip : %.4d\nRA : %s\nDE : %s\nMag : %.2f"),
+		CommonName.c_str(), CommonName=="" ? "" : " ",
+		SciName=="" ? tempStr : SciName.c_str(), HP, print_angle_hms(tempRA*180./M_PI).c_str(),
 			print_angle_dms_stel(tempDE*180./M_PI).c_str(), Mag);
 }
 
@@ -64,8 +61,8 @@ void Hip_Star::get_short_info_string(char * s, const navigator * nav) const
 	static char tempStr[20];
 	sprintf(tempStr,"HP %d",HP);
 
-	if (CommonName || Name) sprintf(s,"%s: mag %.1f", CommonName==NULL ? Name : CommonName, Mag);
-	else sprintf(s,"%s: mag %.1f", tempStr, Mag);
+	if (CommonName!="" || SciName!="") sprintf(s,_("%s: mag %.1f"), CommonName=="" ? SciName.c_str() : CommonName.c_str(), Mag);
+	else sprintf(s,_("%s: mag %.1f"), tempStr, Mag);
 }
 
 // Read datas in binary catalog and compute x,y,z;

@@ -1,6 +1,6 @@
 /*
  * Stellarium
- * Copyright (C) 2002 Fabien Chéreau
+ * Copyright (C) 2002 Fabien Chï¿½eau
  * 
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -51,7 +51,7 @@ int Nebula_mgr::read(const string& font_fileName, const string& fileName, int ba
   char tmpstr[255];
   int total=0;
 
-  printf("Loading nebulas data...\n");
+  printf(_("Loading nebulas data...\n"));
 
 	FILE * fic;
 	fic = fopen(fileName.c_str(),"r");
@@ -67,7 +67,7 @@ int Nebula_mgr::read(const string& font_fileName, const string& fileName, int ba
     }
     rewind(fic);
 
-    printf("Reading a total of %d nebulas\n", total);
+    printf(_("Reading a total of %d nebulas\n"), total);
 
     if (!Nebula::nebula_font) Nebula::nebula_font = new s_font(12.,"spacefont", font_fileName); // load Font
     if (!Nebula::nebula_font)
@@ -98,7 +98,7 @@ int Nebula_mgr::read(const string& font_fileName, const string& fileName, int ba
       //	sleep(1);
       //}
       glClear(GL_COLOR_BUFFER_BIT);
-      sprintf(tmpstr, "Loading deep space objects: %d/%d", current, total);
+      sprintf(tmpstr, _("Loading deep space objects: %d/%d"), current, total);
 
       glColor3f(1,1,1);
 
