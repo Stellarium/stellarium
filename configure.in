@@ -1,9 +1,9 @@
 dnl Enable CYGWIN/MACOSX/POSIX support
 dnl Process this file with autoconf to produce a configure script.
 
-AC_INIT(stellarium,0.6.1)
+AC_INIT(stellarium,0.7.0)
 AM_CONFIG_HEADER(src/config.h)
-AM_INIT_AUTOMAKE(dist-bzip2)
+AM_INIT_AUTOMAKE()
 
 dnl Check system type
 AC_CANONICAL_HOST
@@ -12,10 +12,10 @@ dnl Check for compilers.
 AC_PROG_CC
 AC_PROG_CXX
 
-CFLAGS=" -Wall -s -O3"
-CXXFLAGS=" -Wall -s -O3"
-dnl CFLAGS=" -g -Wall"
-dnl CXXFLAGS=" -g -Wall"
+dnl CFLAGS=" -Wall -s -O3"
+dnl CXXFLAGS=" -Wall -s -O3"
+CFLAGS=" -g -Wall"
+CXXFLAGS=" -g -Wall"
 dnl CFLAGS=" -Wall -pg"
 dnl CXXFLAGS=" -Wall -pg"
 
