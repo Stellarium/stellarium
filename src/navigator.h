@@ -41,6 +41,8 @@ typedef struct          // Struct used to store data on the auto mov
 class observator_pos
 {
 public:
+	observator_pos();
+	~observator_pos();
 	void save(FILE *);
 	void load(FILE *);
 	char * name;
