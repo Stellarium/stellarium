@@ -9,18 +9,17 @@ AppVerName=Stellarium v0.5.1
 DefaultDirName={pf}\Stellarium
 DefaultGroupName=Stellarium
 UninstallDisplayIcon={app}\stellarium.exe
-LicenseFile=
+LicenseFile=COPYING
 Compression=zip/9
 
 [Files]
 Source: "src\stellarium.exe"; DestDir: "{app}"
 Source: "README"; DestDir: "{app}"; Flags: isreadme; DestName: "README.txt"
 Source: "TODO"; DestDir: "{app}"; DestName: "TODO.txt"
-Source: "GPL"; DestDir: "{app}"; DestName: "GPL.txt"
+Source: "COPYING"; DestDir: "{app}"; DestName: "GPL.txt"
 Source: "AUTHORS"; DestDir: "{app}"; DestName: "AUTHORS.txt"
 Source: "ChangeLog"; DestDir: "{app}";
 Source: "SDL.dll"; DestDir: "{app}";
-Source: "cygwin1.dll"; DestDir: "{app}";
 Source: "data\*"; DestDir: "{app}\data"
 Source: "config\*"; DestDir: "{app}\config"
 Source: "textures\*"; DestDir: "{app}\textures"
