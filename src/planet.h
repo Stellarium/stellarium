@@ -201,6 +201,7 @@ protected:
 	double last_orbitJD;
 	double deltaJD;
 	double delta_orbitJD;
+	bool orbit_cached;       // whether orbit calculations are cached for drawing orbit yet
 
 	// The callback for the calculation of the equatorial rect heliocentric position at time JD.
 	pos_func_type coord_func;
