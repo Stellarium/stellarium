@@ -1,4 +1,4 @@
-/* 
+/*
  * Stellarium
  * Copyright (C) 2002 Fabien Chéreau
  * 
@@ -27,6 +27,7 @@
 void initUi(void);
 void clearUi(void);
 void renderUi();
+void updateUi();
 void GuiHandleClic(Uint16 x, Uint16 y, Uint8 state, Uint8 button);
 void GuiHandleMove(int x, int y);
 bool GuiHandleKeys(SDLKey key, int state);

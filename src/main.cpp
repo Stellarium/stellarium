@@ -162,11 +162,10 @@ void Draw(void)
 // ************************  On resize  *******************************
 void ResizeGL(int w, int h)
 {   
-    if (!h) return;
+    if (!h || (w==global.X_Resolution && h==global.Y_Resolution)) return;
     global.X_Resolution = w;
     global.Y_Resolution = h;
-    clearUi();
-    initUi();
+	//updateUi();
     glViewport(0, 0, global.X_Resolution, global.Y_Resolution);
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
@@ -424,7 +423,6 @@ int main(int argc, char **argv)
     strcat(tempName2,"location.txt");
 
     loadConfig(tempName,tempName2);  // Load the params from config.txt
-    
 
     SDL_Surface *Screen;// The Screen
     SDL_Event	E;		// And Event Used In The Polling Process
@@ -435,10 +433,8 @@ int main(int argc, char **argv)
     Screen = NULL;
     Keys = NULL;
 	
-    // We Want A Hardware Surface, Double Buffering Feature And Special OpenGLBlit Mode
-    // So We Can Even Blit 2D Graphics In our OpenGL Scene
-    Vflags = SDL_HWSURFACE|/*SDL_DOUBLEBUF|*/SDL_OPENGLBLIT;
-    
+    // We Want A Hardware Surface
+    Vflags = SDL_HWSURFACE|SDL_OPENGL;
 
     if(SDL_Init(SDL_INIT_VIDEO)<0)  // Init The SDL Library, The VIDEO Subsystem
     {
@@ -567,10 +563,13 @@ int main(int argc, char **argv)
 				{
 					// Send the event to the gui and stop if it has been intercepted
 					if (!GuiHandleKeys(E.key.keysym.sym,GUI_DOWN))
-					{	
+					{
 						// Take A SnapShot Of The Keyboard
 						Keys = SDL_GetKeyState(NULL);
-						pressKey(Keys);
+						if (Keys[SDLK_F1])
+							SDL_WM_ToggleFullScreen(Screen); // Try fullscreen
+						else
+							pressKey(Keys);
 					}
 					break;
 				}
