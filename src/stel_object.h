@@ -33,6 +33,9 @@ public:
     virtual ~stel_object();
 	virtual void update(void) {return;}
 	virtual void draw_pointer(int delta_time);
+	// find and select the "nearest" object and retrieve his informations
+	static stel_object * find_stel_object(int x, int y);
+	static stel_object * find_stel_object(Vec3d);
 	virtual void get_info_string(char * s);
 	virtual unsigned char get_type(void)=0;
 	virtual Vec3d get_equ_pos(void)=0;
@@ -40,9 +43,6 @@ public:
 private:
 };
 
-// find and select the "nearest" object and retrieve his informations
-stel_object * find_stel_object(int x, int y);
-stel_object * find_stel_object(Vec3d);
 
 extern stel_object * selected_object; // Selection instance used in stellarium
 

@@ -135,7 +135,7 @@ void stel_object::draw_pointer(int delta_time)
 
 /*****************************************************************************/
 // find and select the "nearest" object from earth equatorial position
-stel_object * find_stel_object(Vec3d v)
+stel_object * stel_object::find_stel_object(Vec3d v)
 {
 	stel_object * sobj = NULL;
 
@@ -157,7 +157,7 @@ stel_object * find_stel_object(Vec3d v)
 
 /*****************************************************************************/
 // find and select the "nearest" object from screen position
-stel_object * find_stel_object(int x, int y)
+stel_object * stel_object::find_stel_object(int x, int y)
 {
     glPushMatrix();
     navigation.switch_to_earth_equatorial();
