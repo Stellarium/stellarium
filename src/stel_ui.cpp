@@ -417,14 +417,12 @@ void stel_ui::cbr(void)
 	if (bt_flag_config->getIsMouseOver())
 		bt_flag_help_lbl->setLabel(_("Configuration window"));
 	if (bt_flag_quit->getIsMouseOver())
-		bt_flag_help_lbl->setLabel(_(
 #ifndef MACOSX
-		"Quit [CTRL + Q]"
+		bt_flag_help_lbl->setLabel(_("Quit [CTRL + Q]"));
 #else
-		"Quit [CMD + Q]"
+		bt_flag_help_lbl->setLabel(_("Quit [CMD + Q]"));
 #endif
-)
-);
+
 }
 
 void stel_ui::tcbr(void)
@@ -479,7 +477,7 @@ Boston, MA  02111-1307, USA.\n");
 Component* stel_ui::createHelpWindow(void)
 {
 	help_txtlbl = new TextLabel(
-_("4 Directions     : Deplacement RA/DE\n\
+string(_("4 Directions     : Deplacement RA/DE\n\
 Page Up/Down     : Zoom\n\
 CTRL+Up/Down     : Zoom\n\
 Left Click       : Select Star\n\
@@ -505,13 +503,15 @@ H   : Help\n\
 T   : Object Tracking\n\
 S   : Stars\n\
 I   : About Stellarium\n\
-F1  : Toggle fullscreen if possible.\n"
+F1  : Toggle fullscreen if possible.\n")) + string(
+
 #ifndef MACOSX
-"CTRL+Q : Quit\n"
+_("CMD+Q : Quit\n")
 #else
-"CMD+Q  : Quit\n"
+_("CTRL+Q : Quit\n")
 #endif
-    ),courierFont);
+
+),courierFont);
 
 	help_txtlbl->adjustSize();
 	help_txtlbl->setPos(10,10);
