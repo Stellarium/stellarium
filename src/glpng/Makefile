@@ -108,7 +108,7 @@ am_libglpng_a_OBJECTS = adler32.$(OBJEXT) infcodes.$(OBJEXT) \
 	pngread.$(OBJEXT)
 libglpng_a_OBJECTS = $(am_libglpng_a_OBJECTS)
 
-DEFS = -DPACKAGE=\"stellarium\" -DVERSION=\"0.5.0b\" -DX_DISPLAY_MISSING=1 -DCONFIG_DATA_DIR=\"/usr/local/share/stellarium\" -DCONFIG_CFG_DIR=\"/home/Fabien/.stellarium/\" -DHAVE_TOUPPER=1 -DHAVE_STRCASECMP=1 -DHAVE_STRDUP=1 
+DEFS = -DPACKAGE=\"stellarium\" -DVERSION=\"0.5.0b\" -DX_DISPLAY_MISSING=1 -DCONFIG_DATA_DIR=\"/usr/local/share/stellarium\" -DCYGWIN=1 -DHAVE_TOUPPER=1 -DHAVE_STRCASECMP=1 -DHAVE_STRDUP=1 
 DEFAULT_INCLUDES =  -I. -I$(srcdir)
 CPPFLAGS = 
 LDFLAGS = 

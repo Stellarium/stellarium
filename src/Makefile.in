@@ -86,7 +86,7 @@ install_sh = @install_sh@
 EXTRA_DIST = stellarium.rc
 
 bin_PROGRAMS = stellarium
-stellarium_SOURCES = bytes.h shooting.h shooting.cpp grid.h grid.cpp constellation.h  nebula.h  planet.h s_gui.h  s_utility.h   vector.h constellation_mgr.cpp intl.h  nebula_mgr.cpp  planet_mgr.cpp  s_gui_window.cpp hip_star.cpp stellarium.h vislimit.cpp  constellation_mgr.h main.cpp  nebula_mgr.h planet_mgr.h  s_gui_window.h  hip_star.h vislimit.h  navigation.cpp parsecfg.c s_font.cpp s_texture.cpp hip_star_mgr.cpp stellarium_ui.cpp draw.cpp navigation.h parsecfg.h s_font.h  s_texture.h hip_star_mgr.h stellarium_ui.h constellation.cpp  draw.h nebula.cpp  planet.cpp s_gui.cpp  s_utility.cpp stella_types.h  utility.h
+stellarium_SOURCES = stelconfig.h stelconfig.cpp bytes.h shooting.h shooting.cpp grid.h grid.cpp constellation.h  nebula.h  planet.h s_gui.h  s_utility.h   vector.h constellation_mgr.cpp intl.h  nebula_mgr.cpp  planet_mgr.cpp  s_gui_window.cpp hip_star.cpp stellarium.h vislimit.cpp  constellation_mgr.h main.cpp  nebula_mgr.h planet_mgr.h  s_gui_window.h  hip_star.h vislimit.h  navigation.cpp parsecfg.c s_font.cpp s_texture.cpp hip_star_mgr.cpp stellarium_ui.cpp draw.cpp navigation.h parsecfg.h s_font.h  s_texture.h hip_star_mgr.h stellarium_ui.h constellation.cpp  draw.h nebula.cpp  planet.cpp s_gui.cpp  s_utility.cpp stella_types.h  utility.h
 
 stellarium_LDADD = $(top_builddir)/src/glpng/libglpng.a $(top_builddir)/src/astrolib/libastrolib.a
 
@@ -99,8 +99,8 @@ CONFIG_CLEAN_FILES =
 bin_PROGRAMS = stellarium$(EXEEXT)
 PROGRAMS = $(bin_PROGRAMS)
 
-am_stellarium_OBJECTS = shooting.$(OBJEXT) grid.$(OBJEXT) \
-	constellation_mgr.$(OBJEXT) nebula_mgr.$(OBJEXT) \
+am_stellarium_OBJECTS = stelconfig.$(OBJEXT) shooting.$(OBJEXT) \
+	grid.$(OBJEXT) constellation_mgr.$(OBJEXT) nebula_mgr.$(OBJEXT) \
 	planet_mgr.$(OBJEXT) s_gui_window.$(OBJEXT) hip_star.$(OBJEXT) \
 	vislimit.$(OBJEXT) main.$(OBJEXT) navigation.$(OBJEXT) \
 	parsecfg.$(OBJEXT) s_font.$(OBJEXT) s_texture.$(OBJEXT) \
@@ -128,7 +128,8 @@ depcomp = $(SHELL) $(top_srcdir)/depcomp
 @AMDEP_TRUE@	$(DEPDIR)/s_font.Po $(DEPDIR)/s_gui.Po \
 @AMDEP_TRUE@	$(DEPDIR)/s_gui_window.Po $(DEPDIR)/s_texture.Po \
 @AMDEP_TRUE@	$(DEPDIR)/s_utility.Po $(DEPDIR)/shooting.Po \
-@AMDEP_TRUE@	$(DEPDIR)/stellarium_ui.Po $(DEPDIR)/vislimit.Po
+@AMDEP_TRUE@	$(DEPDIR)/stelconfig.Po $(DEPDIR)/stellarium_ui.Po \
+@AMDEP_TRUE@	$(DEPDIR)/vislimit.Po
 COMPILE = $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) \
 	$(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
 CCLD = $(CC)
@@ -211,6 +212,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/s_texture.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/s_utility.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/shooting.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/stelconfig.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/stellarium_ui.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@$(DEPDIR)/vislimit.Po@am__quote@
 

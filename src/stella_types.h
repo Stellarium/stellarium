@@ -123,7 +123,6 @@ typedef struct params{
     int FlagSelect;
     int FlagMilkyWay;
     int FlagConfig;
-
 } stellariumParams;
 
 #endif /*_STELLA_TYPE_H_*/
