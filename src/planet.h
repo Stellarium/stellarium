@@ -76,7 +76,8 @@ public:
 	// Return the information string "ready to print" :)
 	void get_info_string(char * s, const navigator * nav) const;
 	void get_short_info_string(char * s, const navigator * nav) const;
-	virtual double get_best_fov(const navigator * nav = NULL) const;
+	virtual double get_close_fov(const navigator * nav) const;
+	virtual double get_satellites_fov(const navigator * nav) const;
 	virtual float get_mag(const navigator * nav) const {return compute_magnitude(nav);}
 
 	// Compute the position in the parent planet coordinate system
@@ -122,9 +123,6 @@ public:
 
 	string get_name(void) const {return name;}
 
-	// Return the radius of a circle containing the object on screen
-	float get_on_screen_size(const navigator * nav, const Projector* prj);
-
 	void set_rings(ring* r) {rings = r;}
 
 	void set_sphere_scale(float s) {sphere_scale = s;}
@@ -137,6 +135,9 @@ public:
 	static void set_star_scale(float s) {star_scale = s;}
 	static void set_gravity_label_flag(bool gl) {gravity_label = gl;}
 protected:
+	// Return the radius of a circle containing the object on screen
+	float get_on_screen_size(const Projector* prj, const navigator * nav);
+
 	// Compute the z rotation to use from equatorial to geographic coordinates
 	void compute_geographic_rotation(double date);
 

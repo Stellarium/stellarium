@@ -265,19 +265,19 @@ void Cardinals::draw(const Projector* prj, bool gravityON) const
 	if (gravityON)
 	{
 		// N for North
-		pos.set(-1.f, 0.f, 0.2f);
+		pos.set(-1.f, 0.f, 0.22f);
 		if (prj->project_local(pos,xy)) prj->print_gravity180(font, xy[0], xy[1], "N", -shift, -shift);
 
 		// S for South
-		pos.set(1.f, 0.f, 0.2f);
+		pos.set(1.f, 0.f, 0.22f);
 		if (prj->project_local(pos,xy)) prj->print_gravity180(font, xy[0], xy[1], "S", -shift, -shift);
 
 		// E for East
-		pos.set(0.f, 1.f, 0.2f);
+		pos.set(0.f, 1.f, 0.22f);
 		if (prj->project_local(pos,xy)) prj->print_gravity180(font, xy[0], xy[1], "E", -shift, -shift);
 
 		// W for West
-		pos.set(0.f, -1.f, 0.2f);
+		pos.set(0.f, -1.f, 0.22f);
 		if (prj->project_local(pos,xy)) prj->print_gravity180(font, xy[0], xy[1], "W", -shift, -shift);
 	}
 	else

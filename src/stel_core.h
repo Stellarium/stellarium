@@ -95,11 +95,12 @@ public:
 
 	// Goto the given object
 	void goto_stel_object(const stel_object*, float move_duration = 1.f) const;
-	// Zoom to the given object
-	void zoomto_stel_object(const stel_object*, float move_duration = 1.f) const;
 
-	// Go and zoom temporary to the selected object. Old position is reverted by calling the function again
-	void toggle_selected_object_gozoom(float move_duration = 1.f);
+	// Go and zoom temporary to the selected object.
+	void auto_zoom_in(float move_duration = 1.f);
+
+	// Unzoom to the old position is reverted by calling the function again
+	void auto_zoom_out(float move_duration = 1.f);
 
 private:
 
@@ -213,7 +214,7 @@ private:
 	string PositionFile;
 	int FlagEnableZoomKeys;
 	int FlagEnableMoveKeys;
-	float initFov;
+	float InitFov;
 	double PresetSkyTime;
 	string StartupTimeMode;
 	Vec3d InitViewPos;
@@ -230,12 +231,7 @@ private:
 	int FlagTimePause;
 	double temp_time_velocity;			// Used to store time speed while in pause
 
-	// Var used for goto(à and zoom_to() an object
-	int FlagIsGoZoomOnObject;			// 1 if we are currently on a temporary position on an object
-	Vec3d previous_equ_pos;
-	double previous_fov;
-	int previous_tracking;
-	
+
 	// Viewing direction function : 1 move, 0 stop.
 	void turn_right(int);
 	void turn_left(int);

@@ -46,12 +46,13 @@ public:
 	virtual STEL_OBJECT_TYPE get_type(void) const = 0;
 	virtual Vec3d get_earth_equ_pos(const navigator * nav) const = 0;
 	virtual Vec3f get_RGB(void) const {return Vec3f(0.,0.,0.);}
-	virtual double get_best_fov(const navigator * nav) const {return 10.;}
+	virtual double get_close_fov(const navigator * nav) const {return 10.;}
+	virtual double get_satellites_fov(const navigator * nav) const {return -1.;}
 	virtual float get_mag(const navigator * nav) const = 0;
 
 	static void init_textures(void);
 protected:
-	virtual float get_on_screen_size(const Projector* prj, const navigator * nav = NULL) {return -1.;}
+	virtual float get_on_screen_size(const Projector* prj, const navigator * nav = NULL) {return 0;}
 private:
 	static int local_time;
 	static s_texture * pointer_star;
