@@ -1,4 +1,4 @@
-/* 
+/*
  * Stellarium
  * Copyright (C) 2002 Fabien Chéreau
  * 
@@ -86,12 +86,12 @@ void StdWin::render(GraphicsContext& gc)
     glEnable(GL_TEXTURE_2D);
     glEnable(GL_BLEND);
     glBindTexture(GL_TEXTURE_2D,gc.backGroundTexture->getID());
-    glBegin(GL_QUADS );
+    glBegin(GL_QUADS);
         glTexCoord2f(0.0f,0.0f);    glVertex2i(pos[0],        pos[1] + sz[1]);    // Bas Gauche
         glTexCoord2f(1.0f,0.0f);    glVertex2i(pos[0] + sz[0], pos[1] + sz[1]);   // Bas Droite
         glTexCoord2f(1.0f,1.0f);    glVertex2i(pos[0] + sz[0], pos[1]);  // Haut Droit
         glTexCoord2f(0.0f,1.0f);    glVertex2i(pos[0],        pos[1]);   // Haut Gauche
-    glEnd ();
+    glEnd();
     glBindTexture(GL_TEXTURE_2D,gc.headerTexture->getID());
     glBegin(GL_QUADS );
         glTexCoord2f(0.0f,0.0f);    glVertex2i(pos[0],        pos[1]);    // Bas Gauche
