@@ -20,6 +20,9 @@
 #ifndef _HIP_STAR_H_
 #define _HIP_STAR_H_
 
+#include <functional>
+#include <algorithm>
+
 #include "stellarium.h"
 #include "stel_utility.h"
 #include "s_font.h"
