@@ -136,9 +136,10 @@ void stel_ui::init_tui(void)
 	tui_general_sky_culture->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb_tui_general_change_sky_culture));
 	tui_menu_general->addComponent(tui_general_sky_culture);
 
-	tui_general_sky_locale = new s_tui::MultiSet_item<string>("3.2 Sky Locale: ");
+	tui_general_sky_locale = new s_tui::MultiSet_item<string>("3.2 Sky Language: ");
 	// temporary - get list from sky localization object
-	tui_general_sky_locale->addItemList("eng\nesl\nfra\nhaw");
+	//	tui_general_sky_locale->addItemList("eng\nesl\nfra\nhaw");
+	tui_general_sky_locale->addItemList("English\nSpanish\nFrench\nHawaiian");
 
 	tui_general_sky_locale->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb_tui_general_change_sky_locale));
 	tui_menu_general->addComponent(tui_general_sky_locale);
@@ -269,7 +270,15 @@ void stel_ui::tui_update_widgets(void)
 
 	// 3. general
 	tui_general_sky_culture->setValue(core->SkyCulture);
-	tui_general_sky_locale->setValue(core->SkyLocale);
+
+	// this should be defined elsewhere
+	typedef std::map< std::string, std::string > stringHash_t;
+	stringHash_t locale_name;
+	locale_name["eng"] = "English";
+	locale_name["esl"] = "Spanish";
+	locale_name["fra"]  = "French";
+	locale_name["haw"]  = "Hawaiian";
+	tui_general_sky_locale->setValue(locale_name[core->SkyLocale]);
 
 	// 4. Stars
 	tui_stars_show->setValue(core->FlagStars);
@@ -363,13 +372,21 @@ void stel_ui::tui_cb_tui_general_change_sky_culture(void) {
 
 // Set a new sky locale
 void stel_ui::tui_cb_tui_general_change_sky_locale(void) {
-  //	core->asterisms->set_sky_culture(tui_general_sky_culture->getCurrent());
 
-        core->hip_stars->set_sky_locale(tui_general_sky_locale->getCurrent());
-        core->ssystem->set_sky_locale(tui_general_sky_locale->getCurrent());
-	core->asterisms->set_sky_locale(tui_general_sky_locale->getCurrent());
+  typedef std::map< std::string, std::string > stringHash_t;
+  stringHash_t locale_name;
+  locale_name["English"] = "eng";
+  locale_name["Spanish"] = "esl";
+  locale_name["French"]  = "fra";
+  locale_name["Hawaiian"]  = "haw";
 
-	core->SkyLocale = tui_general_sky_locale->getCurrent();  // assuming above worked...
+  string locale = locale_name[tui_general_sky_locale->getCurrent()];
+
+  core->hip_stars->set_sky_locale(locale);
+  core->ssystem->set_sky_locale(locale);
+  core->asterisms->set_sky_locale(locale);
+
+  core->SkyLocale = locale;
 }
 
 
