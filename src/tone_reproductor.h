@@ -22,6 +22,9 @@
 // Partial implementation of the algorithm from the paper :
 // "Tone Reproduction for Realistic Images", Tumblin and Rushmeier,
 // IEEE Computer Graphics & Application, November 1993
+// More accurate values found in the paper :
+// "Tone Reproduction and Physically Based Spectral Rendering", bye
+// Devlin, Chalmers, Wilkie and Purgathofer in EUROGRAPHICS 2002
 
 // Important : you may call set_display_adaptation_luminance()
 // and set_world_adaptation_luminance() before any call to xyY_to_RGB()
