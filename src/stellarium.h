@@ -62,7 +62,7 @@
 
 #define APP_NAME "Stellarium v "VERSION
 
-#define UA 149597870
+#define UA 149597870.691
 #define myMax(a,b) (((a)>(b))?(a):(b))
 #define RAYON 500
 

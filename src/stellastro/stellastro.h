@@ -45,25 +45,19 @@ struct ln_date
 
 
 /* Calculate the julian day from date.*/
-double get_julian_day (struct ln_date * date);
+double get_julian_day(struct ln_date * date);
 
 /* Calculate the date from the julian day. */
-void get_date (double JD, struct ln_date * date);
+void get_date(double JD, struct ln_date * date);
 
 /* Calculate day of the week. 0 = Sunday .. 6 = Saturday */
 unsigned int get_day_of_week (struct ln_date *date);
 	
 /* Calculate julian day from system time. */
-double get_julian_from_sys ();
+double get_julian_from_sys();
 
-/* Calculate date from system date */
-void get_ln_date_from_sys (struct ln_date * date);
-	
-/* Calculate julian day from time_t */
-double get_julian_from_timet (time_t * time);
-
-/* Calculate time_t from julian day */
-void get_timet_from_julian (double JD, time_t * time);
+/* Calculate gmt date from system date */
+void get_ln_date_from_sys(struct ln_date * date);
 
 
 /* puts a large angle in the correct range 0 - 360 degrees */
