@@ -74,15 +74,11 @@ void planet::compute_position(double date)
     }
 }
 
-// Get a matrix which converts from the parent's ecliptic coordinates to local ecliptic
+// Compute the matrices which converts from the parent's ecliptic coordinates to local ecliptic and oposite
 void planet::compute_trans_matrix(double date)
 {
-    double tempAscendingNode = re.ascendingNode + re.precessionRate * (date - J2000);
-
-	mat_parent_to_local = 	Mat4d::xrotation((90.-re.obliquity)*M_PI/180.) * Mat4d::translation(-ecliptic_pos);
-							//Mat4d::zrotation(tempAscendingNode*M_PI/180.) *
-	mat_local_to_parent =   Mat4d::translation(ecliptic_pos) * Mat4d::zrotation(tempAscendingNode*M_PI/180.) * Mat4d::xrotation((re.obliquity-90.)*M_PI/180.);
-
+	mat_parent_to_local = 	Mat4d::xrotation(re.obliquity*M_PI/180.) * Mat4d::zrotation(re.ascendingNode*M_PI/180.) * Mat4d::translation(-ecliptic_pos);
+	mat_local_to_parent =   Mat4d::translation(ecliptic_pos) * Mat4d::zrotation(-re.ascendingNode*M_PI/180.) * Mat4d::xrotation(-re.obliquity*M_PI/180.);
 
 
 	compute_geographic_rotation(date);
