@@ -74,7 +74,7 @@ DEPDIR = .deps
 INSTALL_STRIP_PROGRAM = ${SHELL} $(install_sh) -c -s
 PACKAGE = stellarium
 RANLIB = ranlib
-VERSION = 0.4.9
+VERSION = 0.5.0b
 X_CFLAGS = 
 X_EXTRA_LIBS = 
 X_LIBS = 
@@ -102,7 +102,7 @@ am_libastrolib_a_OBJECTS = AstroOps.$(OBJEXT) DateOpsIntl.$(OBJEXT) \
 	Vsop.$(OBJEXT)
 libastrolib_a_OBJECTS = $(am_libastrolib_a_OBJECTS)
 
-DEFS = -DPACKAGE=\"stellarium\" -DVERSION=\"0.4.9\" -DX_DISPLAY_MISSING=1 -DCONFIG_DATA_DIR=\"/usr/local/share/stellarium\" -DCONFIG_CFG_DIR=\"/home/Fabien/.stellarium/\" -DHAVE_TOUPPER=1 -DHAVE_STRCASECMP=1 -DHAVE_STRDUP=1 
+DEFS = -DPACKAGE=\"stellarium\" -DVERSION=\"0.5.0b\" -DX_DISPLAY_MISSING=1 -DCONFIG_DATA_DIR=\"/usr/local/share/stellarium\" -DCONFIG_CFG_DIR=\"/home/Fabien/.stellarium/\" -DHAVE_TOUPPER=1 -DHAVE_STRCASECMP=1 -DHAVE_STRDUP=1 
 DEFAULT_INCLUDES =  -I. -I$(srcdir)
 CPPFLAGS = 
 LDFLAGS = 

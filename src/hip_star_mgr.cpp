@@ -147,7 +147,7 @@ void Hip_Star_mgr::Load(char * hipCatFile, char * commonNameFile, char * nameFil
 
 // Draw all the stars
 void Hip_Star_mgr::Draw(void)
-{   
+{   	
     glEnable(GL_TEXTURE_2D);
     glEnable(GL_BLEND);
     glBindTexture (GL_TEXTURE_2D, hipStarTexture->getID());
@@ -167,9 +167,12 @@ void Hip_Star_mgr::Draw(void)
 
     pair<multimap<int,Hip_Star *>::iterator, multimap<int,Hip_Star *>::iterator> p;
 
-	int nbZones=0, * zoneList=NULL;
-	nbZones = HipGrid.Intersect(global.XYZVision, global.Fov*PI/180, zoneList);
+	// Find the star zones which are in the screen
+	int nbZones=0;
+	static int * zoneList;  // WARNING this is almost a memory leak...
+	nbZones = HipGrid.Intersect(global.XYZVision, global.Fov*PI/180*1.4, zoneList);
 	
+	// Print all the stars of all the selected zones
 	for(int i=0;i<nbZones;i++)
 	{
     	p = Liste.equal_range(zoneList[i]);
@@ -190,9 +193,6 @@ void Hip_Star_mgr::Draw(void)
         	}
 	    }
 	}
-
-	delete zoneList;
-	zoneList = NULL;
 
     glPopMatrix();
     resetPerspectiveProjection();
