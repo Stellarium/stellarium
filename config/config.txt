@@ -6,17 +6,17 @@
 # Fullscreen mode is more comfortable than windowed mode but a few videos cards don't support it.
 # true=fullscreen mode, false=windowed mode
 
-FULLSCREEN = false
+FULLSCREEN = true
 
 # Available resolution (for fullscreen mode) are : 400x300, 640x480, 800x600,
 # 1024x768, 1280x1024 and more
 # Width of the fullscreen
 
-X_RESOLUTION = 640
+X_RESOLUTION = 800
 
 # Height of the fullscreen
 
-Y_RESOLUTION = 480
+Y_RESOLUTION = 600
 
 # Number of Bit Per Pixels : set the number of possible colors. Available values are 32 and 16.
 # (16 faster than 32 but reduce the number of colors)
