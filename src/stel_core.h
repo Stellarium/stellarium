@@ -114,52 +114,57 @@ private:
 
 	init_parser * conf;					// The class which manage config retrieves and dumps
 
-    int landscape_number;				// landscape "skin" number
-
 	float fps;
-    float sky_brightness;
 
-	// GUI
-	Vec3f GuiBaseColor;
-	Vec3f GuiTextColor;
-
+	// Stars
 	float MaxMagStarName;
 	float StarScale;
 	float StarTwinkleAmount;
+	int FlagStarTwinkle;
 
-    // Flags
+	// Gui
+	int FlagShowTopBar;
     int FlagUTC_Time;
     int FlagShowFps;
+	int FlagShowTime;
+	int FlagShowDate;
+	int FlagShowAppName;
+	int FlagShowFov;
+    int FlagMenu;
+    int FlagHelp;
+    int FlagInfos;
+    int FlagConfig;
+	int FlagShowSelectedObjectInfos;
+	Vec3f GuiBaseColor;
+	Vec3f GuiTextColor;
+
+	// Astro
     int FlagStars;
 	int FlagStarName;
-	int FlagStarTwinkle;
     int FlagPlanets;
     int FlagPlanetsHints;
     int FlagNebula;
     int FlagNebulaName;
-    int FlagNebulaCircle; // TODO is this useless?
+    int FlagNebulaCircle;
+    int FlagMilkyWay;
+
+	// Landscape
     int FlagGround;
     int FlagHorizon;
     int FlagFog;
     int FlagAtmosphere;
-    int FlagAsterismDrawing;
-    int FlagAsterismName;
-	int FlagSelectAsterism;
+    int landscape_number;		// landscape "skin" number
+	float sky_brightness;
+
+	// Viewing
+    int FlagConstellationDrawing;
+    int FlagConstellationName;
+	int FlagConstellationPick;
     int FlagAzimutalGrid;
     int FlagEquatorialGrid;
-    int FlagEquator;
-    int FlagEcliptic;
+    int FlagEquatorLine;
+    int FlagEclipticLine;
     int FlagCardinalPoints;
-    int FlagRealMode;
-    int FlagRealTime;
-    int FlagAcceleredTime;
-    int FlagVeryFastTime;
-    int FlagMenu;
-    int FlagHelp;
-    int FlagInfos;
-    int FlagMilkyWay;
-    int FlagConfig;
-	int FlagConstellationPick;
 
 	int frame, timefr, timeBase;		// Used for fps counter
 

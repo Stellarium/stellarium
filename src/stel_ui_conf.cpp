@@ -55,20 +55,20 @@ Component* stel_ui::createConfigWindow(void)
 	star_twinkle_cbx->setPos(x,y); y+=30;
 
 
-	LabeledCheckBox* asterism_cbx = new LabeledCheckBox(core->FlagAsterismDrawing, "Asterisms");
-	asterism_cbx->setOnPressCallback(makeFunctor((s_pcallback0)0,*this, &stel_ui::updateConfigVariables));
-	tab_render->addComponent(asterism_cbx);
-	asterism_cbx->setPos(x,y); y+=15;
+	LabeledCheckBox* constellation_cbx = new LabeledCheckBox(core->FlagConstellationDrawing, "Constellations");
+	constellation_cbx->setOnPressCallback(makeFunctor((s_pcallback0)0,*this, &stel_ui::updateConfigVariables));
+	tab_render->addComponent(constellation_cbx);
+	constellation_cbx->setPos(x,y); y+=15;
 
-	LabeledCheckBox* asterism_name_cbx = new LabeledCheckBox(core->FlagAsterismName, "Asterisms Names");
-	asterism_name_cbx->setOnPressCallback(makeFunctor((s_pcallback0)0,*this, &stel_ui::updateConfigVariables));
-	tab_render->addComponent(asterism_name_cbx);
-	asterism_name_cbx->setPos(x,y); y+=15;
+	LabeledCheckBox* constellation_name_cbx = new LabeledCheckBox(core->FlagConstellationName, "Constellations Names");
+	constellation_name_cbx->setOnPressCallback(makeFunctor((s_pcallback0)0,*this, &stel_ui::updateConfigVariables));
+	tab_render->addComponent(constellation_name_cbx);
+	constellation_name_cbx->setPos(x,y); y+=15;
 
-	LabeledCheckBox* sel_asterism_cbx = new LabeledCheckBox(core->FlagSelectAsterism, "Selected Asterism Only");
-	sel_asterism_cbx->setOnPressCallback(makeFunctor((s_pcallback0)0,*this, &stel_ui::updateConfigVariables));
-	tab_render->addComponent(sel_asterism_cbx);
-	sel_asterism_cbx->setPos(x,y); y+=30;
+	LabeledCheckBox* sel_constellation_cbx = new LabeledCheckBox(core->FlagConstellationPick, "Selected Constellation Only");
+	sel_constellation_cbx->setOnPressCallback(makeFunctor((s_pcallback0)0,*this, &stel_ui::updateConfigVariables));
+	tab_render->addComponent(sel_constellation_cbx);
+	sel_constellation_cbx->setPos(x,y); y+=30;
 
 
 	LabeledCheckBox* nebulas_cbx = new LabeledCheckBox(core->FlagNebula, "Nebulas");
@@ -101,12 +101,12 @@ Component* stel_ui::createConfigWindow(void)
 	tab_render->addComponent(azimuth_grid_cbx);
 	azimuth_grid_cbx->setPos(x,y); y+=15;
 
-	LabeledCheckBox* equator_cbx = new LabeledCheckBox(core->FlagEquator, "Equator Line");
+	LabeledCheckBox* equator_cbx = new LabeledCheckBox(core->FlagEquatorLine, "Equator Line");
 	equator_cbx->setOnPressCallback(makeFunctor((s_pcallback0)0,*this, &stel_ui::updateConfigVariables));
 	tab_render->addComponent(equator_cbx);
 	equator_cbx->setPos(x,y); y+=15;
 
-	LabeledCheckBox* ecliptic_cbx = new LabeledCheckBox(core->FlagEcliptic, "Ecliptic Line");
+	LabeledCheckBox* ecliptic_cbx = new LabeledCheckBox(core->FlagEclipticLine, "Ecliptic Line");
 	ecliptic_cbx->setOnPressCallback(makeFunctor((s_pcallback0)0,*this, &stel_ui::updateConfigVariables));
 	tab_render->addComponent(ecliptic_cbx);
 	ecliptic_cbx->setPos(x,y); y+=15;
