@@ -123,6 +123,9 @@ public:
 
 	void set_rings(ring* r) {rings = r;}
 
+	void set_sphere_scale(float s) {sphere_scale = s;}
+	float get_sphere_scale(void) const {return sphere_scale;}
+
 	static void set_font(s_font* f) {planet_name_font = f;}
 	static void set_star_scale(float s) {star_scale = s;}
 	static void set_gravity_label_flag(bool gl) {gravity_label = gl;}
@@ -159,6 +162,8 @@ protected:
 	double distance;				// Temporary variable used to store the distance to a given point
 									// it is used for sorting while drawing
 
+	float sphere_scale;				// Artificial scaling for better viewing
+
 	double lastJD;
 	double deltaJD;
 
@@ -170,6 +175,7 @@ protected:
 	static s_font* planet_name_font;// Font for names
 	static float star_scale;
 	static bool gravity_label;
+
 };
 
 #endif // _PLANET_H_

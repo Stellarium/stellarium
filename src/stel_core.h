@@ -171,6 +171,8 @@ private:
     int FlagEclipticLine;
     int FlagCardinalPoints;
 	int FlagGravityLabels;
+	float moon_scale;
+	int FlagInitMoonScaled;
 
 	// Navigation
 	int FlagEnableZoomKeys;

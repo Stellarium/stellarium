@@ -613,6 +613,13 @@ int stel_ui::handle_keys(SDLKey key, S_GUI_VALUE state)
         {
         	core->navigation->set_time_speed(JD_SECOND);
 		}
+        if(key==SDLK_o)
+        {
+			if (core->ssystem->get_moon()->get_sphere_scale()==1.f)
+        		core->ssystem->get_moon()->set_sphere_scale(core->moon_scale);
+			else
+				core->ssystem->get_moon()->set_sphere_scale(1.f);
+		}
         if(key==SDLK_l)
         {
 			double s = core->navigation->get_time_speed();
