@@ -152,7 +152,9 @@ void Landscape_old_style::load(const string& landscape_file, const string& secti
 	fog_angle_shift = pd.get_double(section_name, "fog_angle_shift", 0.);
 	decor_alt_angle = pd.get_double(section_name, "decor_alt_angle", 0.);
 	decor_angle_shift = pd.get_double(section_name, "decor_angle_shift", 0.);
+	decor_angle_rotatez = pd.get_double(section_name, "decor_angle_rotatez", 0.);
 	ground_angle_shift = pd.get_double(section_name, "ground_angle_shift", 0.);
+	ground_angle_rotatez = pd.get_double(section_name, "ground_angle_rotatez", 0.);
 }
 
 void Landscape_old_style::draw(tone_reproductor * eye, const Projector* prj, const navigator* nav,
@@ -183,7 +185,7 @@ void Landscape_old_style::draw_fog(tone_reproductor * eye, const Projector* prj,
 // Draw the mountains with a few pieces of texture
 void Landscape_old_style::draw_decor(tone_reproductor * eye, const Projector* prj, const navigator* nav) const
 {
-	Mat4d mat = nav->get_local_to_eye_mat();
+	Mat4d mat = nav->get_local_to_eye_mat() * Mat4d::zrotation(ground_angle_rotatez*M_PI/180.f);
 
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glEnable(GL_TEXTURE_2D);
@@ -214,6 +216,11 @@ void Landscape_old_style::draw_decor(tone_reproductor * eye, const Projector* pr
 		glTexCoord2f (ground_tex_coord.tex_coords[0],ground_tex_coord.tex_coords[1]);
 		prj->sVertex3(-radius, -radius, z, mat);
 	glEnd ();		
+
+	glPopMatrix();
+	mat = nav->get_local_to_eye_mat() * Mat4d::zrotation(decor_angle_rotatez*M_PI/180.f);
+	glPushMatrix();
+	glLoadMatrixd(mat);
 	
 	z=radius*sinf(decor_angle_shift*M_PI/180.);
 	glEnable(GL_BLEND);
@@ -228,8 +235,8 @@ void Landscape_old_style::draw_decor(tone_reproductor * eye, const Projector* pr
 			glBegin(GL_QUAD_STRIP);
 			for (int j=0;j<=subdiv;++j)
 			{
-				x = radius * sinf(a + da * j + da * subdiv * i);
-				y = radius * cosf(a + da * j + da * subdiv * i);
+				x = radius * sinf(a + da * j + da * subdiv * i + decor_angle_rotatez*M_PI/180);
+				y = radius * cosf(a + da * j + da * subdiv * i + decor_angle_rotatez*M_PI/180);
 				glNormal3f(-x, -y, 0);
 				glTexCoord2f(sides[i].tex_coords[0] + (float)j/subdiv * (sides[i].tex_coords[2]-sides[i].tex_coords[0]),
 					sides[j].tex_coords[3]);
