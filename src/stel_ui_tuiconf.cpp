@@ -104,7 +104,7 @@ void stel_ui::init_tui(void)
 	// 2. Time
 	tui_time_settmz = create_tree_from_time_zone_file(core->DataDir + "zone.tab");
 	tui_time_settmz->set_OnTriggerCallback(callback<void>(this, &stel_ui::tui_cb_settimezone));
-	tui_time_skytime = new s_tui::Time_item2("2.2 Sky Time: ");
+	tui_time_skytime = new s_tui::Time_item("2.2 Sky Time: ");
 	tui_time_skytime->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb1));
 	tui_time_presetskytime = new s_tui::Time_item("2.3 Preset Sky Time: ");
 	tui_time_presetskytime->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb1));
@@ -132,7 +132,7 @@ void stel_ui::init_tui(void)
 	tui_stars_show->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb1));
 	tui_star_labelmaxmag = new s_tui::Decimal_item(-1.5, 10., 2, "3.2 Maximum Magnitude to Label: ");
 	tui_star_labelmaxmag->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb1));
-	tui_stars_twinkle = new s_tui::Boolean_item(false, "3.3 Twinkle: ", "Yes","No");
+	tui_stars_twinkle = new s_tui::Decimal_item(0., 1., 0.3, "3.3 Twinkling: ", 0.1);
 	tui_stars_twinkle->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb1));
 	tui_menu_stars->addComponent(tui_stars_show);
 	tui_menu_stars->addComponent(tui_star_labelmaxmag);
@@ -202,7 +202,7 @@ void stel_ui::tui_cb1(void)
 	// 3. Stars
 	core->FlagStars 			= tui_stars_show->getValue();
 	core->MaxMagStarName 		= tui_star_labelmaxmag->getValue();
-	core->FlagStarTwinkle 		= tui_stars_twinkle->getValue();
+	core->StarTwinkleAmount		= tui_stars_twinkle->getValue();
 
 }
 
@@ -222,8 +222,7 @@ void stel_ui::tui_update_widgets(void)
 	// 3. Stars
 	tui_stars_show->setValue(core->FlagStars);
 	tui_star_labelmaxmag->setValue(core->MaxMagStarName);
-	tui_stars_twinkle->setValue(core->FlagStarTwinkle);
-
+	tui_stars_twinkle->setValue(core->StarTwinkleAmount);
 }
 
 // Launch script to set time zone in the system locales
@@ -304,7 +303,6 @@ s_tui::MultiSet_item<string>* stel_ui::create_tree_from_time_zone_file(const str
 		retmult->addItem(tzname);
 	}
 
-
 	is.close();
 
 	// Try to detect which time zone is currently used by the system from the TZ environment variable
@@ -316,8 +314,11 @@ s_tui::MultiSet_item<string>* stel_ui::create_tree_from_time_zone_file(const str
 	}
 	if (currenttz.empty())
 	{
-		cout << "The TZ environment variable wasn't set." << endl;
-		cout << "The default value in the set time zone menu will be incorrect. The system time zone will be used though.." << endl;
+		if (core->FlagShowTZWarning)
+		{
+			cout << "The TZ environment variable wasn't set." << endl;
+			cout << "The default value in the set time zone menu will be incorrect. The system time zone will be used though.." << endl;
+		}
 		return retmult;
 	}
 

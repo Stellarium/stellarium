@@ -44,24 +44,34 @@ Component* stel_ui::createConfigWindow(void)
 	tab_render->addComponent(stars_cbx);
 	stars_cbx->setPos(x,y); y+=15;
 
-	LabeledCheckBox* star_names_cbx = new LabeledCheckBox(core->FlagStarName, "Star Names");
+	LabeledCheckBox* star_names_cbx = new LabeledCheckBox(core->FlagStarName, "Star Names. Up to mag :");
 	star_names_cbx->setOnPressCallback(callback<void>(this, &stel_ui::updateConfigVariables));
 	tab_render->addComponent(star_names_cbx);
-	star_names_cbx->setPos(x,y); y+=15;
+	star_names_cbx->setPos(x,y);
+
+	FloatIncDec* max_mag_star_name = new FloatIncDec(courierFont, tex_up, tex_down, -1.5, 9,
+		core->MaxMagStarName, 0.5);
+	tab_render->addComponent(max_mag_star_name);
+	max_mag_star_name->setPos(x + 220,y);
+
+	y+=15;
 
 	LabeledCheckBox* star_sci_names_cbx = new LabeledCheckBox(core->FlagStarSciName, "Star Sci Names");
 	star_sci_names_cbx->setOnPressCallback(callback<void>(this, &stel_ui::updateConfigVariables));
 	tab_render->addComponent(star_sci_names_cbx);
 	star_sci_names_cbx->setPos(x,y); y+=15;
 
-	LabeledCheckBox* star_twinkle_cbx = new LabeledCheckBox(core->FlagStarTwinkle, "Star Twinkle");
+	LabeledCheckBox* star_twinkle_cbx = new LabeledCheckBox(core->FlagStarTwinkle, "Star Twinkle. Amount :");
 	star_twinkle_cbx->setOnPressCallback(callback<void>(this, &stel_ui::updateConfigVariables));
 	tab_render->addComponent(star_twinkle_cbx);
-	star_twinkle_cbx->setPos(x,y); y+=30;
+	star_twinkle_cbx->setPos(x,y);
 
-	DecimalIncDec* max_mag_star_name = new DecimalIncDec(-2,10,0.5,core->MaxMagStarName);
-	tab_render->addComponent(max_mag_star_name);
-	max_mag_star_name->setPos(x,y); y+=30;
+	FloatIncDec* star_twinkle_amount = new FloatIncDec(courierFont, tex_up, tex_down, 0, 1,
+		core->StarTwinkleAmount, 0.1);
+	tab_render->addComponent(star_twinkle_amount);
+	star_twinkle_amount->setPos(x + 220,y);
+
+	y+=30;
 
 	LabeledCheckBox* constellation_cbx = new LabeledCheckBox(core->FlagConstellationDrawing, "Constellations");
 	constellation_cbx->setOnPressCallback(callback<void>(this, &stel_ui::updateConfigVariables));
@@ -84,10 +94,16 @@ Component* stel_ui::createConfigWindow(void)
 	tab_render->addComponent(nebulas_cbx);
 	nebulas_cbx->setPos(x,y); y+=15;
 
-	LabeledCheckBox* nebulas_names_cbx = new LabeledCheckBox(core->FlagNebulaName, "Nebulas Names");
+	LabeledCheckBox* nebulas_names_cbx = new LabeledCheckBox(core->FlagNebulaName, "Nebulas Names. Up to mag :");
 	nebulas_names_cbx->setOnPressCallback(callback<void>(this, &stel_ui::updateConfigVariables));
 	tab_render->addComponent(nebulas_names_cbx);
-	nebulas_names_cbx->setPos(x,y); y+=30;
+	nebulas_names_cbx->setPos(x,y);
+
+	FloatIncDec* max_mag_nebula_name = new FloatIncDec(courierFont, tex_up, tex_down, 0, 12,
+		core->MaxMagNebulaName, 0.5);
+	tab_render->addComponent(max_mag_nebula_name);
+	max_mag_nebula_name->setPos(x + 220,y);
+	y+=30;
 
 	LabeledCheckBox* planets_cbx = new LabeledCheckBox(core->FlagPlanets, "Planets");
 	planets_cbx->setOnPressCallback(callback<void>(this, &stel_ui::updateConfigVariables));

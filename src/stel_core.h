@@ -129,7 +129,7 @@ private:
 	Hip_Star_mgr * hip_stars;			// Manage the hipparcos stars
 	Constellation_mgr * asterisms;		// Manage constellations (boundaries, names etc..)
 	Nebula_mgr * nebulas;				// Manage the nebulas
-	SolarSystem* ssystem;				// Manage the solar system 
+	SolarSystem* ssystem;				// Manage the solar system
 	stel_atmosphere * atmosphere;		// Atmosphere
 	SkyGrid * equ_grid;					// Equatorial grid
 	SkyGrid * azi_grid;					// Azimutal grid
@@ -176,6 +176,7 @@ private:
 	Vec3f GuiTextColor;
 
 	// Text UI
+	int FlagEnableTuiMenu;
 	int FlagShowGravityUi;
 	int FlagShowTuiMenu;
 	int FlagShowTuiDateTime;
@@ -187,6 +188,7 @@ private:
     int FlagPlanetsHints;
     int FlagNebula;
     int FlagNebulaName;
+	float MaxMagNebulaName;
     int FlagNebulaCircle;
     int FlagMilkyWay;
 
@@ -222,6 +224,8 @@ private:
 
 	// Locale
 	int FlagUTC_Time;					// if true display UTC time
+	int FlagShowTZWarning;				// Display a warning at startup if TZ (Time Zone)
+										// environment variable is not set
 
 	int frame, timefr, timeBase;		// Used for fps counter
 

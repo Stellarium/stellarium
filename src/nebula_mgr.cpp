@@ -85,7 +85,7 @@ int Nebula_mgr::read(const string& font_fileName, const string& fileName)
 }
 
 // Draw all the Nebulaes
-void Nebula_mgr::draw(int names_ON, Projector* prj, tone_reproductor* eye, bool _gravity_label)
+void Nebula_mgr::draw(int names_ON, Projector* prj, const navigator * nav, tone_reproductor* eye, bool _gravity_label, float max_mag_name)
 {
 	Nebula::gravity_label = _gravity_label;
 
@@ -99,8 +99,8 @@ void Nebula_mgr::draw(int names_ON, Projector* prj, tone_reproductor* eye, bool 
 		if ( !prj->project_earth_equ_check((*iter)->XYZ,(*iter)->XY) ) continue;
 
 		prj->set_orthographic_projection();
-		(*iter)->draw_tex(prj, eye);
-    	if (names_ON)
+		if ((*iter)->get_on_screen_size(prj, nav)>5) (*iter)->draw_tex(prj, eye);
+    	if (names_ON && (*iter)->mag <= max_mag_name)
     	{
 			(*iter)->draw_name(prj);
 			(*iter)->draw_circle(prj);

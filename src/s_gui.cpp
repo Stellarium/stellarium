@@ -484,6 +484,21 @@ void FilledButton::draw()
 	Button::draw();
 }
 
+//////////////////////////////////// TexturedButton //////////////////////////////////
+// Button with a texture
+////////////////////////////////////////////////////////////////////////////////
+
+
+TexturedButton::TexturedButton(const s_texture* tex)
+{
+	if (tex) setTexture(tex);
+}
+
+void TexturedButton::draw()
+{
+	if (!visible) return;
+	painter.drawSquareFill(pos, size, painter.getBaseColor() * (1.f + 0.4 * is_mouse_over));
+}
 
 //////////////////////////////////// CheckBox //////////////////////////////////
 // Button with a cross on it
@@ -858,7 +873,7 @@ void TabHeader::setActive(int s)
 	else assoc->setVisible(0);
 }
 
-TabContainer::TabContainer(const s_font* _font) : Container(), headerHeight(20)
+TabContainer::TabContainer(const s_font* _font) : Container(), headerHeight(22)
 {
 	if (_font) painter.setFont(_font);
 
@@ -872,7 +887,7 @@ void TabContainer::addTab(Component* c, const string& name)
 
 	TabHeader* tempHead = new TabHeader(tempInside, name);
 	tempHead->setPainter(painter);
-	tempHead->reshape(getHeadersSize(),0,tempHead->getSizex(),headerHeight);
+	tempHead->reshape(getHeadersSize(),0,tempHead->getSizex()+4,headerHeight);
 	headers.push_front(tempHead);
 
 	addComponent(tempInside);
@@ -1008,38 +1023,80 @@ int CursorBar::onMove(int x, int y)
 
 
 
-DecimalIncDec::DecimalIncDec(float _min, float _max, float _inc, float _init_value, const s_font* _font) :
+IntIncDec::IntIncDec(const s_font* _font, const s_texture* tex_up,
+		const s_texture* tex_down, int _min, int _max,
+		int _init_value, int _inc) :
 	Container(), value(_init_value), min(_min), max(_max), inc(_inc), btmore(NULL), btless(NULL)
 {
-	if (_font) painter.setFont(_font);
-	btless = new LabeledButton("-", painter.getFont());
-	btless->setSize(10,10);
-	btless->setOnPressCallback(callback<void>(this, &DecimalIncDec::dec_value));
-	label.setPos(btless->getSizex(),0);
+	if (_font) label.setFont(_font);
 	label.setSize(30,10);
-	btmore = new LabeledButton("+", painter.getFont());
-	btmore->setSize(10,10);
-	btmore->setOnPressCallback(callback<void>(this, &DecimalIncDec::inc_value));
-	btmore->setPos(label.getPosx() + label.getSizex(),0);
+	label.setPos(9,2);
+	btless = new TexturedButton(tex_up);
+	btless->setSize(8,8);
+	btless->setPos(0,0);
+	btless->setBaseColor(painter.getTextColor());
+	btless->setOnPressCallback(callback<void>(this, &IntIncDec::inc_value));
+	btmore = new TexturedButton(tex_down);
+	btmore->setSize(8,8);
+	btmore->setPos(0,7);
+	btmore->setBaseColor(painter.getTextColor());
+	btmore->setOnPressCallback(callback<void>(this, &IntIncDec::dec_value));
 	addComponent(btmore);
 	addComponent(btless);
 	addComponent(&label);
-	setSize(100,50);
+	setSize(40,20);
 }
 
-DecimalIncDec::~DecimalIncDec()
+IntIncDec::~IntIncDec()
 {
 	if (btmore) delete btmore;
 	if (btless) delete btless;
 }
 
-void DecimalIncDec::draw()
+void IntIncDec::draw()
 {
-	static char str[255];
-	snprintf(str, 255, "% .2f",value);
-	label.setLabel(str);
-	btmore->setPos(label.getPosx() + label.getSizex(),0);
+	ostringstream os;
+	os << value;
+	label.setLabel(os.str());
+	Container::draw();
+}
 
+
+FloatIncDec::FloatIncDec(const s_font* _font, const s_texture* tex_up,
+		const s_texture* tex_down, float _min, float _max,
+		float _init_value, float _inc) :
+	Container(), value(_init_value), min(_min), max(_max), inc(_inc), btmore(NULL), btless(NULL)
+{
+	if (_font) label.setFont(_font);
+	label.setSize(30,10);
+	label.setPos(9,2);
+	btless = new TexturedButton(tex_up);
+	btless->setSize(8,8);
+	btless->setPos(0,0);
+	btless->setBaseColor(painter.getTextColor());
+	btless->setOnPressCallback(callback<void>(this, &FloatIncDec::inc_value));
+	btmore = new TexturedButton(tex_down);
+	btmore->setSize(8,8);
+	btmore->setPos(0,7);
+	btmore->setBaseColor(painter.getTextColor());
+	btmore->setOnPressCallback(callback<void>(this, &FloatIncDec::dec_value));
+	addComponent(btmore);
+	addComponent(btless);
+	addComponent(&label);
+	setSize(50,20);
+}
+
+FloatIncDec::~FloatIncDec()
+{
+	if (btmore) delete btmore;
+	if (btless) delete btless;
+}
+
+void FloatIncDec::draw()
+{
+	ostringstream os;
+	os << value;
+	label.setLabel(os.str());
 	Container::draw();
 }
 

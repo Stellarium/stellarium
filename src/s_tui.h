@@ -169,8 +169,8 @@ namespace s_tui
 	class Decimal_item : public Decimal
     {
     public:
-		Decimal_item(double _min, double _max, double init_value, const string& _label = string()) :
-			Decimal(init_value), numInput(false), min(_min), max(_max), label(_label) {;}
+		Decimal_item(double _min, double _max, double init_value, const string& _label = string(), double _delta = 1.0) :
+			Decimal(init_value), numInput(false), min(_min), max(_max), label(_label), delta(_delta) {;}
 		virtual string getString(void);
 		virtual bool isEditable(void) const {return true;}
 		virtual bool onKey(SDLKey, S_TUI_VALUE);
@@ -179,6 +179,7 @@ namespace s_tui
 		string strInput;
 		double min, max;
 		string label;
+		double delta;
     };
 
 	// Passive widget which only display text
@@ -192,8 +193,8 @@ namespace s_tui
         string label;
     };
 
-	// Manage list of components with one of them activated. Can navigate thru the components list
-	// with the arrow keys
+	// Manage list of components with one of them selected.
+	// Can navigate thru the components list with the arrow keys
     class Branch : public Container
     {
     public:
@@ -238,33 +239,13 @@ namespace s_tui
 		bool isEditing;
     };
 
+
 	// Widget used to set time and date. The internal format is the julian day notation
     class Time_item : public CallbackComponent
     {
     public:
-		Time_item(const string& _label = string(), double _JD = 2451545.0) :
-			CallbackComponent(), JD(_JD), current_edit(0), label(_label) {;}
-		virtual bool onKey(SDLKey, S_TUI_VALUE);
-		virtual string getString(void);
-		virtual bool isEditable(void) const {return true;}
-		double getJDay(void) const {return JD;}
-		void setJDay(double jd) {JD = jd;}
-    protected:
-		void compute_ymdhms(void);
-		void compute_JD(void);
-		double JD;
-		int current_edit;	// 0 to 5 year to second
-		string label;
-		int ymdhms[5];
-		double second;
-    };
-
-	// Widget used to set time and date. The internal format is the julian day notation
-    class Time_item2 : public CallbackComponent
-    {
-    public:
-		Time_item2(const string& _label = string(), double _JD = 2451545.0);
-		~Time_item2();
+		Time_item(const string& _label = string(), double _JD = 2451545.0);
+		~Time_item();
 		virtual bool onKey(SDLKey, S_TUI_VALUE);
 		virtual string getString(void);
 		virtual bool isEditable(void) const {return true;}
@@ -279,7 +260,6 @@ namespace s_tui
 		int ymdhms[5];
 		double second;
 		Integer_item *y, *m, *d, *h, *mn, *s;
-		bool isediting;
     };
 
 	// Widget which simply launch the callback when the user press enter

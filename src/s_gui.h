@@ -99,6 +99,7 @@ namespace s_gui
 		void setTextColor(const s_color& c) {textColor = c;}
 		void setBaseColor(const s_color& c) {baseColor = c;}
 		const s_color& getBaseColor(void) const {return baseColor;}
+		const s_color& getTextColor(void) const {return textColor;}
 		const s_font* getFont(void) const {return font;}
     private:
 		const s_texture* tex1;
@@ -203,6 +204,14 @@ namespace s_gui
     protected:
     };
 
+    class TexturedButton : public Button
+    {
+    public:
+		TexturedButton(const s_texture* tex = NULL);
+        virtual void draw();
+    protected:
+    };
+
     class FilledButton : public Button
     {
     public:
@@ -273,19 +282,41 @@ namespace s_gui
         string label;
 	};
 
-	class DecimalIncDec : public Container
+	class IntIncDec : public Container
 	{
 	public:
-	    DecimalIncDec(float min, float max, float inc, float init_value, const s_font* _font = NULL);
-	    virtual ~DecimalIncDec();
+	    IntIncDec(const s_font* _font = NULL, const s_texture* tex_up = NULL,
+			const s_texture* tex_down = NULL, int min = 0, int max = 9,
+			int init_value = 0, int inc = 1);
+	    virtual ~IntIncDec();
 		virtual void draw();
         virtual const float getValue() const {return value;}
+		virtual void setValue(int v) {value=v; if(value>max) value=max; if(value<min) value=min;}
 	protected:
-		void inc_value() {value+=inc; if(value>max) value=max;}
-		void dec_value() {value-=inc; if(value<min) value=min;}
+		void inc_value() {value+=inc; if(value>max) value=max; if (!onPressCallback.empty()) onPressCallback();}
+		void dec_value() {value-=inc; if(value<min) value=min; if (!onPressCallback.empty()) onPressCallback();}
+        int value, min, max, inc;
+		TexturedButton* btmore;
+		TexturedButton* btless;
+		Label label;
+	};
+
+	class FloatIncDec : public Container
+	{
+	public:
+	    FloatIncDec(const s_font* _font = NULL, const s_texture* tex_up = NULL,
+			const s_texture* tex_down = NULL, float min = 0.f, float max = 1.0f,
+			float init_value = 0.5f, float inc = 0.1f);
+	    virtual ~FloatIncDec();
+		virtual void draw();
+        virtual const float getValue() const {return value;}
+		virtual void setValue(int v) {value=v; if(value>max) value=max; if(value<min) value=min;}
+	protected:
+		void inc_value() {value+=inc; if(value>max) value=max; if (!onPressCallback.empty()) onPressCallback();}
+		void dec_value() {value-=inc; if(value<min) value=min; if (!onPressCallback.empty()) onPressCallback();}
         float value, min, max, inc;
-		LabeledButton* btmore;
-		LabeledButton* btless;
+		TexturedButton* btmore;
+		TexturedButton* btless;
 		Label label;
 	};
 

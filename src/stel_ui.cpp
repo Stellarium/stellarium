@@ -75,7 +75,7 @@ stel_ui::stel_ui(stel_core * _core) :
 void stel_ui::init(void)
 {
     // Load standard font
-    spaceFont = new s_font(14, "spacefont", core->DataDir + "spacefont.txt");
+    spaceFont = new s_font(15, "spacefont", core->DataDir + "spacefont.txt");
     if (!spaceFont)
     {
         printf("ERROR WHILE CREATING FONT\n");
@@ -91,6 +91,9 @@ void stel_ui::init(void)
 
 	// Create standard texture
 	baseTex = new s_texture("backmenu");
+
+	tex_up = new s_texture("up");
+	tex_down = new s_texture("down");
 
 	// Set default Painter
 	Painter p(baseTex, spaceFont, core->GuiBaseColor, core->GuiTextColor);
@@ -390,7 +393,6 @@ F1  : Toggle fullscreen if possible.\n"
 void stel_ui::help_win_hideBtCallback(void)
 {
 	help_win->setVisible(0);
-	bt_flag_help->setState(0);
 }
 
 /**********************************************************************************/
@@ -458,7 +460,7 @@ int stel_ui::handle_clic(Uint16 x, Uint16 y, Uint8 button, Uint8 state)
         {
 			if (core->selected_object)
             {
-				core->navigation->move_to(core->selected_object->get_earth_equ_pos(core->navigation));
+				core->navigation->move_to(core->selected_object->get_earth_equ_pos(core->navigation), core->auto_move_duration);
             }
         }
         if (button==SDL_BUTTON_LEFT)
@@ -470,6 +472,7 @@ int stel_ui::handle_clic(Uint16 x, Uint16 y, Uint8 button, Uint8 state)
             	info_select_ctr->setVisible(0);
             	return 1;
         	}
+
         	// Left or middle clic -> selection of an object
 			core->selected_object = core->clever_find((int)x, core->screen_H-(int)y);
             //core->selected_object = core->find_stel_object((int)x, core->screen_H-(int)y);
@@ -478,7 +481,10 @@ int stel_ui::handle_clic(Uint16 x, Uint16 y, Uint8 button, Uint8 state)
             if (core->selected_object)
             {
 				updateInfoSelectString();
+				// If an object was selected keep the earth following
+				if (core->navigation->get_flag_traking()) core->navigation->set_flag_lock_equ_pos(1);
 				core->navigation->set_flag_traking(0);
+
 				if (core->selected_object->get_type()==STEL_OBJECT_STAR)
 				{
 					core->selected_constellation=core->asterisms->is_star_in((Hip_Star*)core->selected_object);
@@ -512,7 +518,6 @@ int stel_ui::handle_keys(SDLKey key, S_GUI_VALUE state)
         if(key==SDLK_c)
         {
         	core->FlagConstellationDrawing=!core->FlagConstellationDrawing;
-			bt_flag_constellation_draw->setState(core->FlagConstellationDrawing);
 		}
         if(key==SDLK_d)
         {
@@ -521,7 +526,6 @@ int stel_ui::handle_keys(SDLKey key, S_GUI_VALUE state)
         if(key==SDLK_1)
         {
         	core->FlagConfig=!core->FlagConfig;
-			bt_flag_config->setState(core->FlagConfig);
 			config_win->setVisible(core->FlagConfig);
 		}
         if(key==SDLK_p)
@@ -531,27 +535,22 @@ int stel_ui::handle_keys(SDLKey key, S_GUI_VALUE state)
         if(key==SDLK_v)
         {
         	core->FlagConstellationName=!core->FlagConstellationName;
-            bt_flag_constellation_name->setState(core->FlagConstellationName);
 		}
         if(key==SDLK_z)
         {	
         	core->FlagAzimutalGrid=!core->FlagAzimutalGrid;
-            bt_flag_azimuth_grid->setState(core->FlagAzimutalGrid);
 		}
         if(key==SDLK_e)
         {	
         	core->FlagEquatorialGrid=!core->FlagEquatorialGrid;
-            bt_flag_equator_grid->setState(core->FlagEquatorialGrid);
 		}
         if(key==SDLK_n)
         {	
         	core->FlagNebulaName=!core->FlagNebulaName;
-            bt_flag_nebula_name->setState(core->FlagNebulaName);
 		}
         if(key==SDLK_g)
         {	
         	core->FlagGround=!core->FlagGround;
-            bt_flag_ground->setState(core->FlagGround);
 		}
         if(key==SDLK_f)
         {	
@@ -560,18 +559,15 @@ int stel_ui::handle_keys(SDLKey key, S_GUI_VALUE state)
         if(key==SDLK_q)
         {	
         	core->FlagCardinalPoints=!core->FlagCardinalPoints;
-            bt_flag_cardinals->setState(core->FlagCardinalPoints);
 		}
         if(key==SDLK_a)
         {	
         	core->FlagAtmosphere=!core->FlagAtmosphere;
-            bt_flag_atmosphere->setState(core->FlagAtmosphere);
 			if (!core->FlagAtmosphere) core->tone_converter->set_world_adaptation_luminance(3.75f);
 		}
         if(key==SDLK_h)
         {	
         	core->FlagHelp=!core->FlagHelp;
-            bt_flag_help->setState(core->FlagHelp);
 			help_win->setVisible(core->FlagHelp);
 		}
 		if(key==SDLK_COMMA)
@@ -586,7 +582,6 @@ int stel_ui::handle_keys(SDLKey key, S_GUI_VALUE state)
         if(key==SDLK_t)
         {
 			core->navigation->set_flag_lock_equ_pos(!core->navigation->get_flag_lock_equ_pos());
-            bt_flag_follow_earth->setState(core->navigation->get_flag_lock_equ_pos());
 		}
         if(key==SDLK_s)
         {	
@@ -616,7 +611,7 @@ int stel_ui::handle_keys(SDLKey key, S_GUI_VALUE state)
 		}
         if(key==SDLK_m)
         {
-        	core->FlagShowTuiMenu = true;
+        	if (core->FlagEnableTuiMenu) core->FlagShowTuiMenu = true;
 		}
         if(key==SDLK_k)
         {
@@ -680,13 +675,13 @@ int stel_ui::handle_keys(SDLKey key, S_GUI_VALUE state)
         {
 			if (SDL_GetModState() & KMOD_CTRL)
 			{
-				core->auto_zoom_out();
+				core->auto_zoom_out(core->auto_move_duration);
 			}
-			else core->auto_zoom_in();
+			else core->auto_zoom_in(core->auto_move_duration);
 		}
 		if(key==SDLK_BACKSLASH)
 		{
-			core->auto_zoom_out();
+			core->auto_zoom_out(core->auto_move_duration);
 		}
 		if(key==SDLK_x)
         {
@@ -708,13 +703,25 @@ int stel_ui::handle_keys(SDLKey key, S_GUI_VALUE state)
 
 
 // Update changing values
-void stel_ui::update(void)
+void stel_ui::gui_update_widgets(void)
 {
 	updateTopBar();
 	// To prevent a minor bug
 	if (!core->FlagShowSelectedObjectInfos) info_select_ctr->setVisible(0);
 	else if (core->selected_object) info_select_ctr->setVisible(1);
 	bt_flag_ctr->setVisible(core->FlagMenu);
+
+	bt_flag_constellation_draw->setState(core->FlagConstellationDrawing);
+	bt_flag_constellation_name->setState(core->FlagConstellationName);
+	bt_flag_azimuth_grid->setState(core->FlagAzimutalGrid);
+	bt_flag_equator_grid->setState(core->FlagEquatorialGrid);
+	bt_flag_ground->setState(core->FlagGround);
+	bt_flag_cardinals->setState(core->FlagCardinalPoints);
+	bt_flag_atmosphere->setState(core->FlagAtmosphere);
+	bt_flag_nebula_name->setState(core->FlagNebulaName);
+	bt_flag_help->setState(help_win->getVisible());
+	bt_flag_follow_earth->setState(core->navigation->get_flag_lock_equ_pos());
+	bt_flag_config->setState(config_win->getVisible());
 }
 
 
