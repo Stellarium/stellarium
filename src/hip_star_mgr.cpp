@@ -41,21 +41,16 @@ Hip_Star_mgr::Hip_Star_mgr(string _catalog_filename, string _names_filename,
 
 Hip_Star_mgr::~Hip_Star_mgr()
 {
-  if (starZones) delete [] starZones;
-
-  for (int i=0;i<StarArraySize;i++)
-    {
-      if (StarArray[i]) delete StarArray[i];
-      StarArray[i]=NULL;
-    }
-  
-  if (starTexture) delete starTexture;
-  starTexture=NULL;
-  exit(-1);
-  if (starFont) delete starFont;
-  starFont=NULL;
-  if (StarArray) delete StarArray;
-  StarArray = NULL;
+	delete [] starZones;
+	starZones=NULL;
+	delete [] StarArray;
+	StarArray=NULL;
+	delete [] StarFlatArray;
+	StarFlatArray=NULL;
+	delete starTexture;
+	starTexture=NULL;
+	delete starFont;
+	starFont=NULL;
 }
 
 void Hip_Star_mgr::init(const string& font_fileName, const string& hipCatFile,
@@ -96,36 +91,34 @@ void Hip_Star_mgr::load_data(const string& hipCatFile)
     StarArraySize = catalogSize;//120417;
 
     printf(_("(%d stars)...\n"), StarArraySize);
-
+	
     // Create the sequential array
-    StarArray = new Hip_Star*[StarArraySize];
+    StarArray = new Hip_Star[StarArraySize];
+	
+	StarFlatArray = new Hip_Star*[StarArraySize];
 	for (int i=0;i<StarArraySize;++i)
 	{
-		StarArray[i] = NULL;
+		StarFlatArray[i] = NULL;
 	}
-
+	
 	// Read binary file Hipparcos catalog  
     Hip_Star * e = NULL;
-    for(unsigned int i=0;i<catalogSize;i++)
+    for(int i=0;i<StarArraySize;i++)
     {
-	    e = new Hip_Star;
-	    e->HP=(unsigned int)i;
+		e = &(StarArray[i]);
+		e->HP=(unsigned int)i;
         if (!e->read(hipFile))
         {
-        	delete e;
-        	e=NULL;
         	continue;
         }
 		else
 		if (e->Mag>9)
  		{
-        	delete e;
-        	e=NULL;
         	continue;
         }
-
         starZones[HipGrid.GetNearest(e->XYZ)].push_back(e);
-        StarArray[e->HP]=e;
+		StarFlatArray[e->HP]=e;
+		
     }
     fclose(hipFile);
 
@@ -141,9 +134,9 @@ void Hip_Star_mgr::load_common_names(const string& commonNameFile)
 {
 	// clear existing names (would be faster if they were in separate array
 	// since relatively few are named)
-    for (int i=0; i<StarArraySize; i++)
+    for (int i=0; i<StarArraySize; ++i)
 	{
-		if (StarArray[i]) StarArray[i]->CommonName = "";
+		StarArray[i].CommonName = "";
     }
 	
 	FILE *cnFile;
@@ -183,7 +176,7 @@ void Hip_Star_mgr::load_sci_names(const string& sciNameFile)
 	// since relatively few are named)
     for (int i=0; i<StarArraySize; i++)
 	{
-		if (StarArray[i]) StarArray[i]->SciName = "";
+		StarArray[i].SciName = "";
     }
 
 	FILE *snFile;
@@ -321,13 +314,13 @@ Hip_Star * Hip_Star_mgr::search(Vec3f Pos)
 
     for(int i=0; i<StarArraySize; i++)
     {
-		if (!StarArray[i]) continue;
-		if 	(StarArray[i]->XYZ[0]*Pos[0] + StarArray[i]->XYZ[1]*Pos[1] +
-			StarArray[i]->XYZ[2]*Pos[2]>angleNearest)
+		if (!StarFlatArray[i]) continue;
+		if 	(StarFlatArray[i]->XYZ[0]*Pos[0] + StarFlatArray[i]->XYZ[1]*Pos[1] +
+			StarFlatArray[i]->XYZ[2]*Pos[2]>angleNearest)
     	{
-			angleNearest = StarArray[i]->XYZ[0]*Pos[0] +
-				StarArray[i]->XYZ[1]*Pos[1] + StarArray[i]->XYZ[2]*Pos[2];
-        	nearest=StarArray[i];
+			angleNearest = StarFlatArray[i]->XYZ[0]*Pos[0] +
+				StarFlatArray[i]->XYZ[1]*Pos[1] + StarFlatArray[i]->XYZ[2]*Pos[2];
+        	nearest=StarFlatArray[i];
     	}
     }
     if (angleNearest>RADIUS_STAR*0.9999)
@@ -347,10 +340,10 @@ vector<stel_object*> Hip_Star_mgr::search_around(Vec3d v, double lim_fov)
 
 	for(int i=0; i<StarArraySize; i++)
     {
-		if (!StarArray[i]) continue;
-		if (StarArray[i]->XYZ[0]*v[0] + StarArray[i]->XYZ[1]*v[1] + StarArray[i]->XYZ[2]*v[2]>=cos_lim_fov)
+		if (!StarFlatArray[i]) continue;
+		if (StarFlatArray[i]->XYZ[0]*v[0] + StarFlatArray[i]->XYZ[1]*v[1] + StarFlatArray[i]->XYZ[2]*v[2]>=cos_lim_fov)
     	{
-			result.push_back(StarArray[i]);
+			result.push_back(StarFlatArray[i]);
     	}
     }
 	return result;
@@ -359,8 +352,8 @@ vector<stel_object*> Hip_Star_mgr::search_around(Vec3d v, double lim_fov)
 // Search the star by HP number
 Hip_Star * Hip_Star_mgr::search(unsigned int _HP)
 {
-	if (StarArray[_HP] && StarArray[_HP]->HP == _HP)
-		return StarArray[_HP];
+	if (StarFlatArray[_HP] && StarFlatArray[_HP]->HP == _HP)
+		return StarFlatArray[_HP];
     return NULL;
 }
 
