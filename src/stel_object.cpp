@@ -22,13 +22,12 @@
 #include "navigator.h"
 #include "stel_utility.h"
 #include "s_texture.h"
-#include "solarsystem.h"
-#include "nebula_mgr.h"
-#include "hip_star_mgr.h"
+
 
 extern s_texture * texIds[200];            // Common Textures
 
 static int local_time=0;
+
 
 stel_object::stel_object()
 {
@@ -39,13 +38,13 @@ stel_object::~stel_object()
 }
 
 // Draw a nice animated pointer around the object
-void stel_object::draw_pointer(int delta_time)
+void stel_object::draw_pointer(int delta_time, draw_utility * du)
 {
 	local_time+=delta_time;
-	double x,y;
+	double x,y,z;
 	Vec3d pos=get_earth_equ_pos();
-	Project(pos[0],pos[1],pos[2],x,y);
-    setOrthographicProjection(global.X_Resolution, global.Y_Resolution);
+	du->project(pos[0],pos[1],pos[2],x,y,z);
+    du->set_orthographic_projection();
 
 	if (get_type()==STEL_OBJECT_NEBULA) glColor3f(0.4f,0.5f,0.8f);
 	if (get_type()==STEL_OBJECT_PLANET) glColor3f(1.0f,0.3f,0.3f);
@@ -56,7 +55,7 @@ void stel_object::draw_pointer(int delta_time)
 		glBindTexture (GL_TEXTURE_2D, texIds[12]->getID());
         glEnable(GL_TEXTURE_2D);
         glEnable(GL_BLEND);
-        glTranslatef(x, global.Y_Resolution-y,0.0f);
+        glTranslatef(x, y, 0.0f);
         glRotatef((float)local_time/20.,0.,0.,1.);
         glBegin(GL_QUADS );
             glTexCoord2f(0.0f,0.0f);    glVertex3f(-13.,-13.,0.);      //Bas Gauche
@@ -66,7 +65,7 @@ void stel_object::draw_pointer(int delta_time)
         glEnd ();
     }
 
-	double size=2000./navigation.get_fov();
+	double size=2000./du->fov;
 
     if (get_type()==STEL_OBJECT_NEBULA || get_type()==STEL_OBJECT_PLANET)
     {
@@ -74,20 +73,20 @@ void stel_object::draw_pointer(int delta_time)
         {
 			glBindTexture(GL_TEXTURE_2D, texIds[26]->getID());
             if (size < 15) size=10;
-            size+=navigation.get_fov()/4;
-            size+=size*sin((float)local_time/400)/200*navigation.get_fov();
+            size+=du->fov/4;
+            size+=size*sin((float)local_time/400)/200*du->fov;
         }
         if (get_type()==STEL_OBJECT_NEBULA)
         {
 			glBindTexture(GL_TEXTURE_2D, texIds[27]->getID());
-            size*=10/navigation.get_fov();
+            size*=10/du->fov;
             if (size<15) size=15;
             size+=size*sin((float)local_time/400)/10;
         }
 
         glEnable(GL_TEXTURE_2D);
         glEnable(GL_BLEND);
-        glTranslatef(x, global.Y_Resolution-y,0.0f);
+        glTranslatef(x, y, 0.0f);
         if (get_type()==STEL_OBJECT_PLANET) glRotatef((float)local_time/100,0,0,-1);
 
         glTranslatef(-size/2, -size/2,0.0f);
@@ -127,41 +126,9 @@ void stel_object::draw_pointer(int delta_time)
         glEnd ();
     }
 
-    resetPerspectiveProjection();
-
+    du->reset_perspective_projection();
 }
 
-/*****************************************************************************/
-// find and select the "nearest" object from earth equatorial position
-stel_object * stel_object::find_stel_object(Vec3d v)
-{
-	stel_object * sobj = NULL;
-
-	if (global.FlagPlanets) sobj = Sun->search(v);
-	if (sobj) return sobj;
-
-	Vec3f u=Vec3f(v[0],v[1],v[2]);
-
-	sobj = messiers->search(u);
-	if (sobj) return sobj;
-
-	if (global.FlagStars) sobj = HipVouteCeleste->search(u);
-
-	return sobj;
-}
-
-/*****************************************************************************/
-// find and select the "nearest" object from screen position
-stel_object * stel_object::find_stel_object(int x, int y)
-{
-    glPushMatrix();
-    navigation.switch_to_earth_equatorial();
-	Vec3d v = UnProject((double)x,(double)y);
-    glPopMatrix();
-    
-	//printf("x=%d, y=%d, v(%f,%f,%f)\n",x,y,v[0],v[1],v[2]);
-	return find_stel_object(v);
-}
 
 void stel_object::get_info_string(char * s)
 {

@@ -27,7 +27,7 @@ extern planet * Sun;             	  // Sun, center of the solar system
 extern planet * Moon;
 extern planet * Earth; 
 
-void InitSolarSystem(void); // Create and init the solar system
+void InitSolarSystem(char * font_fileName); // Create and init the solar system
 
 
 #endif // _PLANET_H_

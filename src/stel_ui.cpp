@@ -26,58 +26,59 @@
 /*                                   CALLBACKS                                    */
 /**********************************************************************************/
 
-void BtFlagsOnClicCallBack(guiValue button,Component * bt)
-{   switch (bt->getID())
-    {   case 1 :    global.FlagConstellationDrawing=!global.FlagConstellationDrawing;
-                    bt->setActive(global.FlagConstellationDrawing);
+void stel_ui::BtFlagsOnClicCallBack(guiValue button,Component * bt)
+{
+	switch (bt->getID())
+    {   case 1 :    core->FlagConstellationDrawing=!core->FlagConstellationDrawing;
+                    bt->setActive(core->FlagConstellationDrawing);
                     return;
-        case 2 :    global.FlagConstellationName=!global.FlagConstellationName;
-                    bt->setActive(global.FlagConstellationName);
+        case 2 :    core->FlagConstellationName=!core->FlagConstellationName;
+                    bt->setActive(core->FlagConstellationName);
                     return;
-        case 3 :    global.FlagAzimutalGrid=!global.FlagAzimutalGrid;
-                    bt->setActive(global.FlagAzimutalGrid);
+        case 3 :    core->FlagAzimutalGrid=!core->FlagAzimutalGrid;
+                    bt->setActive(core->FlagAzimutalGrid);
                     return;
-        case 4 :    global.FlagEquatorialGrid=!global.FlagEquatorialGrid;
-                    bt->setActive(global.FlagEquatorialGrid);
+        case 4 :    core->FlagEquatorialGrid=!core->FlagEquatorialGrid;
+                    bt->setActive(core->FlagEquatorialGrid);
                     return;
-        case 5 :    global.FlagGround=!global.FlagGround;
-                    bt->setActive(global.FlagGround);
+        case 5 :    core->FlagGround=!core->FlagGround;
+                    bt->setActive(core->FlagGround);
                     return;
-        case 6 :    global.FlagFog=!global.FlagFog;
-                    bt->setActive(global.FlagFog);
+        case 6 :    core->FlagFog=!core->FlagFog;
+                    bt->setActive(core->FlagFog);
                     return;
-        case 7 :    global.FlagRealTime=!global.FlagRealTime;
-                    bt->setActive(global.FlagRealTime);
+        case 7 :    core->FlagRealTime=!core->FlagRealTime;
+                    bt->setActive(core->FlagRealTime);
                     return;
-        case 8 :    global.FlagAcceleredTime=!global.FlagAcceleredTime;
-                    bt->setActive(global.FlagAcceleredTime);
+        case 8 :    core->FlagAcceleredTime=!core->FlagAcceleredTime;
+                    bt->setActive(core->FlagAcceleredTime);
                     return;
-        case 9 :    global.FlagVeryFastTime=!global.FlagVeryFastTime;
-                    bt->setActive(global.FlagVeryFastTime);
+        case 9 :    core->FlagVeryFastTime=!core->FlagVeryFastTime;
+                    bt->setActive(core->FlagVeryFastTime);
                     return;
-        case 10 :   global.FlagCardinalPoints=!global.FlagCardinalPoints;
-                    bt->setActive(global.FlagCardinalPoints);
+        case 10 :   core->FlagCardinalPoints=!core->FlagCardinalPoints;
+                    bt->setActive(core->FlagCardinalPoints);
                     return;
-        case 11 :   global.FlagAtmosphere=!global.FlagAtmosphere;
-                    bt->setActive(global.FlagAtmosphere);
+        case 11 :   core->FlagAtmosphere=!core->FlagAtmosphere;
+                    bt->setActive(core->FlagAtmosphere);
                     return;
-        case 12 :   global.FlagNebulaName=!global.FlagNebulaName;
-                    bt->setActive(global.FlagNebulaName);
+        case 12 :   core->FlagNebulaName=!core->FlagNebulaName;
+                    bt->setActive(core->FlagNebulaName);
                     return;
-        case 13 :   global.FlagHelp=!global.FlagHelp;
-                    HelpWin->setVisible(global.FlagHelp);
-                    bt->setActive(global.FlagHelp);
+        case 13 :   core->FlagHelp=!core->FlagHelp;
+                    HelpWin->setVisible(core->FlagHelp);
+                    bt->setActive(core->FlagHelp);
                     return;
-//        case 14 :   global.FlagRealMode=!global.FlagRealMode;
-//                    bt->setActive(global.FlagRealMode);
-//                    Base->setVisible(!global.FlagRealMode);
+//        case 14 :   core->FlagRealMode=!core->FlagRealMode;
+//                    bt->setActive(core->FlagRealMode);
+//                    Base->setVisible(!core->FlagRealMode);
 //                    break;
         case 15 :   navigation.set_flag_lock_equ_pos(!navigation.get_flag_lock_equ_pos());
                     bt->setActive(navigation.get_flag_lock_equ_pos());
                     break;
-        case 16 :   global.FlagConfig=!global.FlagConfig;
-                    ConfigWin->setVisible(global.FlagConfig);
-                    bt->setActive(global.FlagConfig);
+        case 16 :   core->FlagConfig=!core->FlagConfig;
+                    ConfigWin->setVisible(core->FlagConfig);
+                    bt->setActive(core->FlagConfig);
                     break;
 
                     return;
@@ -112,7 +113,7 @@ void BtFlagsOnMouseOverCallBack(guiValue event,Component * bt)
 /*******************************************************************************/
 
 void HelpWinHideCallback(void)
-{   global.FlagHelp=false;
+{   core->FlagHelp=false;
     HelpWin->setVisible(false);
     BtHelp->setActive(false);
 }
@@ -120,7 +121,7 @@ void HelpWinHideCallback(void)
 /*******************************************************************************/
 
 void InfoWinHideCallback(void)
-{   global.FlagInfos=false;
+{   core->FlagInfos=false;
     InfoWin->setVisible(false);
 }
 
@@ -281,7 +282,7 @@ stel_ui::init()
 {
     /*** fonts ***/
     char tempName[255];
-    strcpy(tempName,global.DataDir);
+    strcpy(tempName,core->DataDir);
     strcat(tempName,"spacefont.txt");
     spaceFont = new s_font(13, "spacefont", tempName);
     if (!spaceFont)
@@ -294,15 +295,15 @@ stel_ui::init()
     vec3_t clWhite(1.,1.,1.);
 
     /*** Graphic Context ***/
-    gc = new GraphicsContext(global.X_Resolution,global.Y_Resolution);
+    gc = new GraphicsContext(core->X_Resolution,core->Y_Resolution);
     if (!gc)
     {
         printf("ERROR WHILE CREATING GRAPHIC CONTEXT\n");
         exit(-1);
     }
 
-	gc->baseColor=global.GuiBaseColor;
-	gc->textColor=global.GuiTextColor;
+	gc->baseColor=core->GuiBaseColor;
+	gc->textColor=core->GuiTextColor;
 
     gc->setFont(spaceFont);
     gc->backGroundTexture=new s_texture("backmenu",TEX_LOAD_TYPE_PNG_ALPHA);
@@ -320,21 +321,21 @@ stel_ui::init()
     vec2_i btsz(btSize,btSize);
     vec2_i step(btSize,0);
 
-    BtConstellationsDraw = new Textured_Button(new s_texture("Bouton1"),pos,btsz,clWhite,clWhite/2,BtFlagsOnClicCallBack,BtFlagsOnMouseOverCallBack,1,global.FlagConstellationDrawing);
-    BtConstellationsName = new Textured_Button(new s_texture("Bouton2"),pos+=step,btsz,clWhite,clWhite/2,BtFlagsOnClicCallBack,BtFlagsOnMouseOverCallBack,2,global.FlagConstellationName);
-    BtAzimutalGrid = new Textured_Button(new s_texture("Bouton3"),pos+=step,btsz,clWhite,clWhite/2,BtFlagsOnClicCallBack,BtFlagsOnMouseOverCallBack,3,global.FlagAzimutalGrid);
-    BtEquatorialGrid = new Textured_Button(new s_texture("Bouton3"),pos+=step,btsz,clWhite,clWhite/2,BtFlagsOnClicCallBack,BtFlagsOnMouseOverCallBack,4,global.FlagEquatorialGrid);
-    BtNebula = new Textured_Button(new s_texture("Bouton15"),pos+=step,btsz,clWhite,clWhite/2,BtFlagsOnClicCallBack,BtFlagsOnMouseOverCallBack,12,global.FlagNebulaName);
-    BtGround = new Textured_Button(new s_texture("Bouton4"),pos+=step,btsz,clWhite,clWhite/2,BtFlagsOnClicCallBack,BtFlagsOnMouseOverCallBack,5,global.FlagGround);
-    BtCardinalPoints = new Textured_Button(new s_texture("Bouton8"),pos+=step,btsz,clWhite,clWhite/2,BtFlagsOnClicCallBack,BtFlagsOnMouseOverCallBack,10,global.FlagCardinalPoints);
-    BtAtmosphere = new Textured_Button(new s_texture("Bouton9"),pos+=step,btsz,clWhite,clWhite/2,BtFlagsOnClicCallBack,BtFlagsOnMouseOverCallBack,11,global.FlagAtmosphere);
-    BtHelp = new Textured_Button(new s_texture("Bouton11"),pos+=step,btsz,clWhite,clWhite/2,BtFlagsOnClicCallBack,BtFlagsOnMouseOverCallBack,13,global.FlagHelp);
+    BtConstellationsDraw = new Textured_Button(new s_texture("Bouton1"),pos,btsz,clWhite,clWhite/2,BtFlagsOnClicCallBack,BtFlagsOnMouseOverCallBack,1,core->FlagConstellationDrawing);
+    BtConstellationsName = new Textured_Button(new s_texture("Bouton2"),pos+=step,btsz,clWhite,clWhite/2,BtFlagsOnClicCallBack,BtFlagsOnMouseOverCallBack,2,core->FlagConstellationName);
+    BtAzimutalGrid = new Textured_Button(new s_texture("Bouton3"),pos+=step,btsz,clWhite,clWhite/2,BtFlagsOnClicCallBack,BtFlagsOnMouseOverCallBack,3,core->FlagAzimutalGrid);
+    BtEquatorialGrid = new Textured_Button(new s_texture("Bouton3"),pos+=step,btsz,clWhite,clWhite/2,BtFlagsOnClicCallBack,BtFlagsOnMouseOverCallBack,4,core->FlagEquatorialGrid);
+    BtNebula = new Textured_Button(new s_texture("Bouton15"),pos+=step,btsz,clWhite,clWhite/2,BtFlagsOnClicCallBack,BtFlagsOnMouseOverCallBack,12,core->FlagNebulaName);
+    BtGround = new Textured_Button(new s_texture("Bouton4"),pos+=step,btsz,clWhite,clWhite/2,BtFlagsOnClicCallBack,BtFlagsOnMouseOverCallBack,5,core->FlagGround);
+    BtCardinalPoints = new Textured_Button(new s_texture("Bouton8"),pos+=step,btsz,clWhite,clWhite/2,BtFlagsOnClicCallBack,BtFlagsOnMouseOverCallBack,10,core->FlagCardinalPoints);
+    BtAtmosphere = new Textured_Button(new s_texture("Bouton9"),pos+=step,btsz,clWhite,clWhite/2,BtFlagsOnClicCallBack,BtFlagsOnMouseOverCallBack,11,core->FlagAtmosphere);
+    BtHelp = new Textured_Button(new s_texture("Bouton11"),pos+=step,btsz,clWhite,clWhite/2,BtFlagsOnClicCallBack,BtFlagsOnMouseOverCallBack,13,core->FlagHelp);
     BtFollowEarth = new Textured_Button(new s_texture("Bouton13"),pos+=step,btsz,clWhite,clWhite/2,BtFlagsOnClicCallBack,BtFlagsOnMouseOverCallBack,15,navigation.get_flag_lock_equ_pos());
-    BtConfig = new Textured_Button(new s_texture("Bouton16"),pos+=step,btsz,clWhite,clWhite/2,BtFlagsOnClicCallBack,BtFlagsOnMouseOverCallBack,16,global.FlagConfig);
+    BtConfig = new Textured_Button(new s_texture("Bouton16"),pos+=step,btsz,clWhite,clWhite/2,BtFlagsOnClicCallBack,BtFlagsOnMouseOverCallBack,16,core->FlagConfig);
 
     /*** Button container ***/
     ContainerBtFlags = new FilledContainer();
-    ContainerBtFlags->reshape(0,global.Y_Resolution-btSize/*-1*/,btSize*11,btSize/*+1*/);
+    ContainerBtFlags->reshape(0,core->Y_Resolution-btSize/*-1*/,btSize*11,btSize/*+1*/);
     ContainerBtFlags->addComponent(BtConstellationsDraw);
     ContainerBtFlags->addComponent(BtConstellationsName);
     ContainerBtFlags->addComponent(BtAzimutalGrid);
@@ -349,7 +350,7 @@ stel_ui::init()
 
 /*** button legend label ***/
     btLegend = new Label("ERROR, this shouldn't be seen...");
-    btLegend->reshape(3,global.Y_Resolution-btSize-lineHeight-5,100,17);
+    btLegend->reshape(3,core->Y_Resolution-btSize-lineHeight-5,100,17);
     btLegend->setVisible(false);
 
 /*** help TextLabel ***/
@@ -386,9 +387,9 @@ F1  : Toggle fullscreen if possible.\n"
     ,gc->getFont());
     HelpTextLabel->reshape(avgCharLen*2,lineHeight,45*avgCharLen,35*lineHeight);
 
-    HelpWin = new StdBtWin(global.X_Resolution/2-25*avgCharLen, global.Y_Resolution/2-30*lineHeight/2, 48*avgCharLen, 32*(lineHeight+1), "Help", Base, spaceFont);
+    HelpWin = new StdBtWin(core->X_Resolution/2-25*avgCharLen, core->Y_Resolution/2-30*lineHeight/2, 48*avgCharLen, 32*(lineHeight+1), "Help", Base, spaceFont);
     HelpWin->addComponent(HelpTextLabel);
-    HelpWin->setVisible(global.FlagHelp);
+    HelpWin->setVisible(core->FlagHelp);
     HelpWin->setHideCallback(HelpWinHideCallback);
 
 
@@ -418,9 +419,9 @@ Boston, MA  02111-1307, USA.\n"
     ,gc->getFont());
     InfoTextLabel->reshape(avgCharLen*3,lineHeight,62*avgCharLen,35*lineHeight);
     
-    InfoWin = new StdBtWin(global.X_Resolution/2-25*avgCharLen, global.Y_Resolution/2-30*lineHeight/2, 67*avgCharLen, 25*(lineHeight+1), "About Stellarium", Base, spaceFont);
+    InfoWin = new StdBtWin(core->X_Resolution/2-25*avgCharLen, core->Y_Resolution/2-30*lineHeight/2, 67*avgCharLen, 25*(lineHeight+1), "About Stellarium", Base, spaceFont);
     InfoWin->addComponent(InfoTextLabel);
-    InfoWin->setVisible(global.FlagInfos);
+    InfoWin->setVisible(core->FlagInfos);
     InfoWin->setHideCallback(InfoWinHideCallback);
 
 /*** InfoSelect TextLabel ***/
@@ -437,17 +438,17 @@ Boston, MA  02111-1307, USA.\n"
     HourLabel->reshape(12*avgCharLen+15,2,6*avgCharLen,lineHeight);
     /*** FPS Label ***/
     FPSLabel = new Label("-");
-    FPSLabel->reshape(global.X_Resolution-13*avgCharLen,2,10*avgCharLen,lineHeight);
-    if (!global.FlagFps) FPSLabel->setVisible(false);
+    FPSLabel->reshape(core->X_Resolution-13*avgCharLen,2,10*avgCharLen,lineHeight);
+    if (!core->FlagFps) FPSLabel->setVisible(false);
     /*** FOV Label ***/
     FOVLabel = new Label("-");
-    FOVLabel->reshape(global.X_Resolution-26*avgCharLen,2,10*avgCharLen,lineHeight);
+    FOVLabel->reshape(core->X_Resolution-26*avgCharLen,2,10*avgCharLen,lineHeight);
     /*** AppName Label ***/
     AppNameLabel = new Label(APP_NAME);
-    AppNameLabel->reshape((int)(global.X_Resolution/2-gc->getFont()->getStrLen(APP_NAME)/2),2, (int)(gc->getFont()->getStrLen(APP_NAME)),lineHeight);
+    AppNameLabel->reshape((int)(core->X_Resolution/2-gc->getFont()->getStrLen(APP_NAME)/2),2, (int)(gc->getFont()->getStrLen(APP_NAME)),lineHeight);
     /*** TopWindowsInfos Container ***/    
     TopWindowsInfos = new FilledContainer();
-    TopWindowsInfos->reshape(0,0,global.X_Resolution,lineHeight+2);
+    TopWindowsInfos->reshape(0,0,core->X_Resolution,lineHeight+2);
     TopWindowsInfos->addComponent(DateLabel);
     TopWindowsInfos->addComponent(HourLabel);
     TopWindowsInfos->addComponent(FPSLabel);
@@ -502,7 +503,7 @@ Boston, MA  02111-1307, USA.\n"
 
 /*** Base container ***/
     Base = new Container();
-    Base->reshape(0,0,global.X_Resolution,global.Y_Resolution);
+    Base->reshape(0,0,core->X_Resolution,core->Y_Resolution);
     Base->addComponent(ContainerBtFlags);
     Base->addComponent(btLegend);
     Base->addComponent(InfoSelectLabel);
@@ -530,7 +531,7 @@ stel_ui::~stel_ui()
 /*******************************************************************/
 void stel_ui::render(void)
 {
-    setOrthographicProjection(global.X_Resolution, global.Y_Resolution);    // 2D coordinate
+    setOrthographicProjection(core->X_Resolution, core->Y_Resolution);    // 2D coordinate
 
     updateStandardWidgets();
 
@@ -620,83 +621,83 @@ bool GuiHandleKeys(SDLKey key, int state)
 		}
         if(key==SDLK_c)
         {	
-        	global.FlagConstellationDrawing=!global.FlagConstellationDrawing;
+        	core->FlagConstellationDrawing=!core->FlagConstellationDrawing;
 		}
         if(key==SDLK_p)
         {	
-        	global.FlagPlanetsHintDrawing=!global.FlagPlanetsHintDrawing;
+        	core->FlagPlanetsHintDrawing=!core->FlagPlanetsHintDrawing;
 		}
         if(key==SDLK_v)
         {	
-        	global.FlagConstellationName=!global.FlagConstellationName;
-            BtConstellationsName->setActive(global.FlagConstellationName);
+        	core->FlagConstellationName=!core->FlagConstellationName;
+            BtConstellationsName->setActive(core->FlagConstellationName);
 		}
         if(key==SDLK_z)
         {	
-        	global.FlagAzimutalGrid=!global.FlagAzimutalGrid;
-            BtAzimutalGrid->setActive(global.FlagAzimutalGrid);
+        	core->FlagAzimutalGrid=!core->FlagAzimutalGrid;
+            BtAzimutalGrid->setActive(core->FlagAzimutalGrid);
 		}
         if(key==SDLK_e)
         {	
-        	global.FlagEquatorialGrid=!global.FlagEquatorialGrid;
-            BtEquatorialGrid->setActive(global.FlagEquatorialGrid);
+        	core->FlagEquatorialGrid=!core->FlagEquatorialGrid;
+            BtEquatorialGrid->setActive(core->FlagEquatorialGrid);
 		}
         if(key==SDLK_n)
         {	
-        	global.FlagNebulaName=!global.FlagNebulaName;
-            BtNebula->setActive(global.FlagNebulaName);
+        	core->FlagNebulaName=!core->FlagNebulaName;
+            BtNebula->setActive(core->FlagNebulaName);
 		}
         if(key==SDLK_g)
         {	
-        	global.FlagGround=!global.FlagGround;
-            BtGround->setActive(global.FlagGround);
+        	core->FlagGround=!core->FlagGround;
+            BtGround->setActive(core->FlagGround);
 		}
         if(key==SDLK_f)
         {	
-        	global.FlagFog=!global.FlagFog;
+        	core->FlagFog=!core->FlagFog;
 		}
         if(key==SDLK_1)
         {	
-        	global.FlagRealTime=!global.FlagRealTime;
+        	core->FlagRealTime=!core->FlagRealTime;
 		}
         if(key==SDLK_2)
         {	
-        	global.FlagAcceleredTime=!global.FlagAcceleredTime;
+        	core->FlagAcceleredTime=!core->FlagAcceleredTime;
 		}
         if(key==SDLK_3)
         {	
-        	global.FlagVeryFastTime=!global.FlagVeryFastTime;
+        	core->FlagVeryFastTime=!core->FlagVeryFastTime;
 		}
         if(key==SDLK_q)
         {	
-        	global.FlagCardinalPoints=!global.FlagCardinalPoints;
-            BtCardinalPoints->setActive(global.FlagCardinalPoints);
+        	core->FlagCardinalPoints=!core->FlagCardinalPoints;
+            BtCardinalPoints->setActive(core->FlagCardinalPoints);
 		}
         if(key==SDLK_a)
         {	
-        	global.FlagAtmosphere=!global.FlagAtmosphere;
-            BtAtmosphere->setActive(global.FlagAtmosphere);
+        	core->FlagAtmosphere=!core->FlagAtmosphere;
+            BtAtmosphere->setActive(core->FlagAtmosphere);
 		}
         if(key==SDLK_r)
         {	
-        	global.FlagRealMode=!global.FlagRealMode;
-            TopWindowsInfos->setVisible(!global.FlagRealMode);
-            ContainerBtFlags->setVisible(!global.FlagRealMode);
+        	core->FlagRealMode=!core->FlagRealMode;
+            TopWindowsInfos->setVisible(!core->FlagRealMode);
+            ContainerBtFlags->setVisible(!core->FlagRealMode);
 		}
         if(key==SDLK_h)
         {	
-        	global.FlagHelp=!global.FlagHelp;
-            BtHelp->setActive(global.FlagHelp);
-            HelpWin->setVisible(global.FlagHelp);
-            if (global.FlagHelp && global.FlagInfos) global.FlagInfos=false;
+        	core->FlagHelp=!core->FlagHelp;
+            BtHelp->setActive(core->FlagHelp);
+            HelpWin->setVisible(core->FlagHelp);
+            if (core->FlagHelp && core->FlagInfos) core->FlagInfos=false;
 		}
         if(key==SDLK_4)
         {	
-        	global.FlagEcliptic=!global.FlagEcliptic;
+        	core->FlagEcliptic=!core->FlagEcliptic;
 		}
         if(key==SDLK_5)
         {	
-        	global.FlagEquator=!global.FlagEquator;
+        	core->FlagEquator=!core->FlagEquator;
 		}
         if(key==SDLK_t)
         {
@@ -705,7 +706,7 @@ bool GuiHandleKeys(SDLKey key, int state)
 		}
         if(key==SDLK_s)
         {	
-        	global.FlagStars=!global.FlagStars;
+        	core->FlagStars=!core->FlagStars;
 		}
         if(key==SDLK_SPACE)
         {	
@@ -717,8 +718,8 @@ bool GuiHandleKeys(SDLKey key, int state)
 		}
         if(key==SDLK_i)
         {	
-        	global.FlagInfos=!global.FlagInfos; 
-            InfoWin->setVisible(global.FlagInfos);
+        	core->FlagInfos=!core->FlagInfos; 
+            InfoWin->setVisible(core->FlagInfos);
 		}
     }
     return false;
@@ -733,7 +734,7 @@ void updateStandardWidgets(void)
     char str[30];
 	ln_date d;
 
-    if (global.FlagUTC_Time)
+    if (core->FlagUTC_Time)
     {   
 		get_date(navigation.get_JDay(),&d);
     }
@@ -744,7 +745,7 @@ void updateStandardWidgets(void)
 
     sprintf(str,"%.2d/%.2d/%.4d",d.days,d.months,d.years);
     DateLabel->setLabel(str);
-    if (global.FlagUTC_Time)
+    if (core->FlagUTC_Time)
     {
 		sprintf(str,"%.2d:%.2d:%.2d (UTC)",d.hours,d.minutes,(int)d.seconds);
     }
@@ -752,7 +753,7 @@ void updateStandardWidgets(void)
     {   sprintf(str,"%.2d:%.2d:%.2d",d.hours,d.minutes,(int)d.seconds);
     }
     HourLabel->setLabel(str);
-    sprintf(str,"FPS : %4.2f",global.Fps);
+    sprintf(str,"FPS : %4.2f",core->Fps);
     FPSLabel->setLabel(str);
     sprintf(str,"fov=%.3f\6", navigation.get_fov());
     FOVLabel->setLabel(str);

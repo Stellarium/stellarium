@@ -8,7 +8,6 @@ stel_core.h          stel_core.cpp \
 stel_utility.h      stel_utility.cpp \
 stel_object.h       stel_object.cpp \
 stel_atmosphere.h   stel_atmosphere.cpp \
-shooting.h          shooting.cpp \
 grid.h              grid.cpp \
 constellation.h     constellation.cpp \
 constellation_mgr.h constellation_mgr.cpp \

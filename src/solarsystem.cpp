@@ -74,12 +74,9 @@ void get_ganymede_helio_coords(double JD, double * X, double * Y, double * Z)
 }
 
  // Create and init the solar system
-void InitSolarSystem(void)
+void InitSolarSystem(char * font_fileName)
 {
-    char tempName[255];
-    strcpy(tempName,global.DataDir);
-    strcat(tempName,"spacefont.txt");
-    planet_name_font = new s_font(13,"spacefont", tempName);
+    planet_name_font = new s_font(13,"spacefont", font_fileName);
     if (!planet_name_font)
     {
 	    printf("Can't create planet_name_font\n");

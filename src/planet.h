@@ -61,7 +61,7 @@ public:
 	virtual void compute_position(double date); 		// Compute the position from the mother planet
     virtual void compute_trans_matrix(double date);		// Compute the transformation matrix from the mother planet
 	virtual void compute_geographic_rotation(double date);	// Compute the z rotation to use from equatorial to geographic coordinates
-    virtual void draw();
+    virtual void draw(int hint_ON, draw_utility * du);
 	virtual void addSatellite(planet*);
 	virtual void set_rotation_elements(float _period, float _offset, double _epoch, float _obliquity, float _ascendingNode, float _precessionRate);
 	virtual Vec3d get_ecliptic_pos();
@@ -106,7 +106,7 @@ class ring_planet : public planet
 {
 public:
 	ring_planet(char * _name, int _flagHalo, double _radius, vec3_t _color, s_texture * _planetTexture, s_texture * _haloTexture, void (*_coord_func)(double JD, double *, double *, double *), ring * _planet_ring);
-	virtual void draw();
+	virtual void draw(int hint_ON, draw_utility * du);
 protected:
 	ring * planet_ring;						// Ring for ie saturn/uranus
 };
@@ -119,7 +119,7 @@ public:
 	sun_planet(char * _name, int _flagHalo, double _radius, vec3_t _color, s_texture * _planetTexture, s_texture * _haloTexture, s_texture * _bigHaloTexture);
 	virtual void compute_position(double date);
 	virtual void compute_trans_matrix(double date);
-	virtual void draw();
+	virtual void draw(int hint_ON, draw_utility * du);
 protected:
 	s_texture * bigHaloTexture;				// Big halo texture
 };

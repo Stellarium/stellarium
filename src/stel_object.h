@@ -21,6 +21,7 @@
 #define _STEL_OBJECT_H_
 
 #include "vecmath.h"
+#include "stel_utility.h"
 
 #define STEL_OBJECT_STAR 1
 #define STEL_OBJECT_PLANET 2
@@ -32,18 +33,13 @@ public:
 	stel_object();
     virtual ~stel_object();
 	virtual void update(void) {return;}
-	virtual void draw_pointer(int delta_time);
-	// find and select the "nearest" object and retrieve his informations
-	static stel_object * find_stel_object(int x, int y);
-	static stel_object * find_stel_object(Vec3d);
+	virtual void draw_pointer(int delta_time, draw_utility * du);
+
 	virtual void get_info_string(char * s);
 	virtual unsigned char get_type(void)=0;
 	virtual Vec3d get_earth_equ_pos(void)=0;
 	virtual vec3_t get_RGB(void) {return vec3_t(0.,0.,0.);}
 private:
 };
-
-
-extern stel_object * selected_object; // Selection instance used in stellarium
 
 #endif // _STEL_OBJECT_H_

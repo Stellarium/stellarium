@@ -43,8 +43,9 @@ Nebula_mgr::~Nebula_mgr()
 }
 
 // read from stream
-int Nebula_mgr::Read(char * fileName)
-{   FILE * fic;
+int Nebula_mgr::Read(char * font_fileName, char * fileName)
+{
+	FILE * fic;
 	fic = fopen(fileName,"r");
     if (!fic)
 	{
@@ -69,10 +70,7 @@ int Nebula_mgr::Read(char * fileName)
 	}
 	fclose(fic);
 
-    char tempName[255];
-    strcpy(tempName,global.DataDir);
-    strcat(tempName,"spacefont.txt");
-    nebulaFont=new s_font(0.013*global.X_Resolution,"spacefont", tempName); // load Font
+    nebulaFont=new s_font(12.,"spacefont", font_fileName); // load Font
     if (!nebulaFont)
     {
 	    printf("Can't create nebulaFont\n");
@@ -95,7 +93,7 @@ int Nebula_mgr::ReadTexture()
 }
 
 // Draw all the Nebulaes
-void Nebula_mgr::Draw()
+void Nebula_mgr::Draw(int names_ON, draw_utility * du)
 {   glEnable(GL_TEXTURE_2D);
     glEnable(GL_BLEND);
     
@@ -110,26 +108,26 @@ void Nebula_mgr::Draw()
     for(iter=Liste.begin();iter!=Liste.end();iter++)
     {   
         // project in 2D to check if the nebula is in screen
-	    gluProject((**iter).XYZ[0],(**iter).XYZ[1],(**iter).XYZ[2],M,P,V,&((**iter).XY[0]),&((**iter).XY[1]),&((**iter).XY[2]));
-        if ((**iter).XY[2]<1 && (**iter).XY[0]>0 && (**iter).XY[0]<global.X_Resolution && (**iter).XY[1]>0 && (**iter).XY[1]<global.Y_Resolution) 
+	    gluProject((**iter).XYZ[0],(**iter).XYZ[1],(**iter).XYZ[2],M,P,V,&((**iter).XY[0]),
+			&((**iter).XY[1]),&((**iter).XY[2]));
+        if ((**iter).XY[2]<1 && (**iter).XY[0]>0 && (**iter).XY[0]<du->screenW &&
+			(**iter).XY[1]>0 && (**iter).XY[1]<du->screenH)
 	        (**iter).Draw();
     }
-    if (global.FlagNebulaName) 
-    {   
-        setOrthographicProjection(global.X_Resolution, global.Y_Resolution);
-        glPushMatrix();
-        glLoadIdentity();
+    if (names_ON)
+    {
+        du->set_orthographic_projection();
         for(iter=Liste.begin();iter!=Liste.end();iter++)
         { 
             // Draw the name
-	        if ((**iter).XY[2]<1 && (**iter).XY[0]>0 && (**iter).XY[0]<global.X_Resolution && (**iter).XY[1]>0 && (**iter).XY[1]<global.Y_Resolution)
+	        if ((**iter).XY[2]<1 && (**iter).XY[0]>0 && (**iter).XY[0]<du->screenW &&
+				(**iter).XY[1]>0 && (**iter).XY[1]<du->screenH)
             {
                 (**iter).DrawName();
-                (**iter).DrawCircle();
+                (**iter).DrawCircle(du);
             }
         }
-        glPopMatrix();
-        resetPerspectiveProjection();
+        du->reset_perspective_projection();
     }
 }
 

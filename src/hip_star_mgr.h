@@ -32,10 +32,11 @@ public:
     Hip_Star_mgr();
     virtual ~Hip_Star_mgr();
     int Read(FILE *);						// Used by Load
-    void Draw(void);                    	// Draw all the stars
+    void Draw(float star_scale, float twinkle_amount, int name_ON, int maxMagStarName,
+		draw_utility * du);	// Draw all the stars
     void Save(void);                    	// Debug function
     // Load all the stars from the files
-    void Load(char * hipCatFile, char * commonNameFile, char * nameFile);         
+    void Load(char * font_fileName, char * hipCatFile, char * commonNameFile, char * nameFile);
     Hip_Star * search(vec3_t Pos);  	// Search the star by position
 	Hip_Star * search(unsigned int);	// Search the star by HP number
 private:
@@ -43,14 +44,7 @@ private:
     Grid HipGrid;                           // Grid for opimisation
     Hip_Star ** StarArray;  // The simple array of the star for sequential research
     int StarArraySize;      // Number of star in the array
-
-	float MaxMagStarName;
-    float StarTwinkleAmount;
-    float StarScale;
 };
-
-
-extern Hip_Star_mgr * HipVouteCeleste;           // Class to manage all the stars from Hipparcos catalog
 
 
 #endif // _STAR_MGR_H_
