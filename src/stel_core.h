@@ -156,7 +156,8 @@ private:
 	// Projector
 	PROJECTOR_TYPE ProjectorType;
 	VIEWPORT_TYPE ViewportType;
-	
+	int DistortionFunction;
+
 	// localization
 	string SkyCulture;  // the culture used for constellations
 	string SkyLocale;   // the locale (usually will just be language code) used for object labels
