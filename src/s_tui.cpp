@@ -373,6 +373,7 @@ bool Integer_item::onKey(SDLKey k, S_TUI_VALUE v)
 
 			return true;
 		}
+		return false;
 	}
 	else	// numInput == true
 	{
@@ -384,7 +385,7 @@ bool Integer_item::onKey(SDLKey k, S_TUI_VALUE v)
 			if (value>max) value = max;
 			if (value<min) value = min;
 			if (!onChangeCallback.empty()) onChangeCallback();
-			return false;
+			return true;
 		}
 
 		if (k==SDLK_UP)
@@ -575,6 +576,7 @@ bool Time_item::onKey(SDLKey k, S_TUI_VALUE v)
 		if (!onChangeCallback.empty()) onChangeCallback();
 		return true;
 	}
+
 	return false;
 }
 
@@ -653,6 +655,185 @@ string Time_item::getString(void)
 		<< s1[2] << ymdhms[2] << s2[2] << " " << s1[3] << ymdhms[3] << s2[3] << ":"
 		<< s1[4] << ymdhms[4] << s2[4] << ":"<< s1[5] << S_ROUND(second) << s2[5];
 	return os.str();
+}
+
+
+Time_item2::Time_item2(const string& _label, double _JD) :
+	CallbackComponent(), JD(_JD), current_edit(NULL), label(_label),
+	y(NULL), m(NULL), d(NULL), h(NULL), mn(NULL), s(NULL), isediting(false)
+{
+	y = new Integer_item(-100000, 100000, 2003);
+	m = new Integer_item(1, 12, 1);
+	d = new Integer_item(1, 31, 1);
+	h = new Integer_item(1, 23, 1);
+	mn = new Integer_item(1, 59, 1);
+	s = new Integer_item(1, 59, 1);
+	current_edit = y;
+}
+
+Time_item2::~Time_item2()
+{
+	if (y) delete y;
+	if (m) delete y;
+	if (d) delete y;
+	if (h) delete y;
+	if (mn) delete y;
+	if (s) delete y;
+}
+
+bool Time_item2::onKey(SDLKey k, S_TUI_VALUE v)
+{
+	if (v==S_TUI_RELEASED) return false;
+	if (k==SDLK_RETURN && !isediting)
+	{
+		isediting = true;
+		return true;
+	}
+	if (k==SDLK_RIGHT)
+	{
+		if (!isediting)
+		{
+			isediting = true;
+			return true;
+		}
+
+		if (current_edit==y) current_edit=m;
+		else if (current_edit==m) current_edit=d;
+		else if (current_edit==d) current_edit=h;
+		else if (current_edit==h) current_edit=mn;
+		else if (current_edit==mn) current_edit=s;
+		else if (current_edit==s) current_edit=y;
+		return true;
+	}
+	if (k==SDLK_LEFT)
+	{
+		if (!isediting)
+		{
+			return false;
+		}
+		if (current_edit==y) current_edit=s;
+		else if (current_edit==m) current_edit=y;
+		else if (current_edit==d) current_edit=m;
+		else if (current_edit==h) current_edit=d;
+		else if (current_edit==mn) current_edit=h;
+		else if (current_edit==s) current_edit=mn;
+		return true;
+	}
+
+	if (isediting && current_edit->onKey(k,v))
+	{
+		compute_JD();
+		compute_ymdhms();
+		if (!onChangeCallback.empty()) onChangeCallback();
+		return true;
+	}
+
+	if (k==SDLK_ESCAPE)
+	{
+		if (isediting)
+		{
+			isediting = false;
+			return true;
+		}
+	}
+
+	return false;
+}
+
+// Convert Julian day to yyyy/mm/dd hh:mm:ss and return the string
+string Time_item2::getString(void)
+{
+	compute_ymdhms();
+
+	string s1[6];
+	string s2[6];
+	if (current_edit==y && isediting){s1[0] = start_active; s2[0] = stop_active;}
+	if (current_edit==m && isediting){s1[1] = start_active; s2[1] = stop_active;}
+	if (current_edit==d && isediting){s1[2] = start_active; s2[2] = stop_active;}
+	if (current_edit==h && isediting){s1[3] = start_active; s2[3] = stop_active;}
+	if (current_edit==mn && isediting){s1[4] = start_active; s2[4] = stop_active;}
+	if (current_edit==s && isediting){s1[5] = start_active; s2[5] = stop_active;}
+
+	ostringstream os;
+	os 	<< label <<
+	s1[0] << y->getString() << s2[0] << "/" <<
+	s1[1] << m->getString() << s2[1] << "/" <<
+	s1[2] << d->getString() << s2[2] << " " <<
+	s1[3] << h->getString() << s2[3] << ":" <<
+	s1[4] << mn->getString() << s2[4] << ":" <<
+	s1[5] << s->getString() << s2[5];
+	return os.str();
+}
+
+// Code originally from libnova which appeared to be totally wrong... New code from celestia
+void Time_item2::compute_ymdhms(void)
+{
+    int a = (int) (JD + 0.5);
+    double c;
+    if (a < 2299161)
+    {
+        c = a + 1524;
+    }
+    else
+    {
+        double b = (int) ((a - 1867216.25) / 36524.25);
+        c = a + b - (int) (b / 4) + 1525;
+    }
+
+    int dd = (int) ((c - 122.1) / 365.25);
+    int e = (int) (365.25 * dd);
+    int f = (int) ((c - e) / 30.6001);
+
+    double dday = c - e - (int) (30.6001 * f) + ((JD + 0.5) - (int) (JD + 0.5));
+
+    ymdhms[1] = f - 1 - 12 * (int) (f / 14);
+    ymdhms[0] = dd - 4715 - (int) ((7.0 + ymdhms[1]) / 10.0);
+    ymdhms[2] = (int) dday;
+
+    double dhour = (dday - ymdhms[2]) * 24;
+    ymdhms[3] = (int) dhour;
+
+    double dminute = (dhour - ymdhms[3]) * 60;
+    ymdhms[4] = (int) dminute;
+
+    second = (dminute - ymdhms[4]) * 60;
+
+	y->setValue(ymdhms[0]);
+	m->setValue(ymdhms[1]);
+	d->setValue(ymdhms[2]);
+	h->setValue(ymdhms[3]);
+	mn->setValue(ymdhms[4]);
+	s->setValue(S_ROUND(second));
+}
+
+// Code originally from libnova which appeared to be totally wrong... New code from celestia
+void Time_item2::compute_JD(void)
+{
+	ymdhms[0] = y->getValue();
+	ymdhms[1] = m->getValue();
+	ymdhms[2] = d->getValue();
+	ymdhms[3] = h->getValue();
+	ymdhms[4] = mn->getValue();
+	second = s->getValue();
+
+    int y = ymdhms[0], m = ymdhms[1];
+    if (ymdhms[1] <= 2)
+    {
+        y = ymdhms[0] - 1;
+        m = ymdhms[1] + 12;
+    }
+
+    // Correct for the lost days in Oct 1582 when the Gregorian calendar
+    // replaced the Julian calendar.
+    int B = -2;
+    if (ymdhms[0] > 1582 || (ymdhms[0] == 1582 && (ymdhms[1] > 10 || (ymdhms[1] == 10 && ymdhms[2] >= 15))))
+    {
+        B = y / 400 - y / 100;
+    }
+
+    JD = (floor(365.25 * y) +
+            floor(30.6001 * (m + 1)) + B + 1720996.5 +
+            ymdhms[2] + ymdhms[3] / 24.0 + ymdhms[4] / 1440.0 + second / 86400.0);
 }
 
 string Action_item::getString(void)

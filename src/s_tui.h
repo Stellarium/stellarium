@@ -259,6 +259,29 @@ namespace s_tui
 		double second;
     };
 
+	// Widget used to set time and date. The internal format is the julian day notation
+    class Time_item2 : public CallbackComponent
+    {
+    public:
+		Time_item2(const string& _label = string(), double _JD = 2451545.0);
+		~Time_item2();
+		virtual bool onKey(SDLKey, S_TUI_VALUE);
+		virtual string getString(void);
+		virtual bool isEditable(void) const {return true;}
+		double getJDay(void) const {return JD;}
+		void setJDay(double jd) {JD = jd;}
+    protected:
+		void compute_ymdhms(void);
+		void compute_JD(void);
+		double JD;
+		Integer_item* current_edit;	// 0 to 5 year to second
+		string label;
+		int ymdhms[5];
+		double second;
+		Integer_item *y, *m, *d, *h, *mn, *s;
+		bool isediting;
+    };
+
 	// Widget which simply launch the callback when the user press enter
 	class Action_item : public CallbackComponent
     {
