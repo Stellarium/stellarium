@@ -65,28 +65,30 @@ void stel_atmosphere::compute_color(double JD, Vec3d sunPos, Vec3d moonPos, floa
 	//Vec3d obj;
 	skylight_struct2 b2;
 
+	double sun_angular_size = atan(696000./AU/sunPos.length());
+	double moon_angular_size = atan(1738./AU/moonPos.length());
+
+	double touch_angle = sun_angular_size + moon_angular_size;
+	double dark_angle = moon_angular_size - sun_angular_size;
+	if(dark_angle < 0) dark_angle=0; // annular eclipse
+
 	sunPos.normalize();
 	moonPos.normalize();
 
-	// Patch from Ivan in Ukraine - TODO: double check realism
-	// TODO: Brightness falloff is not linear
-	double Sdiam=0.0075; //Kind of the diameter of the Sun (need to refine)
-	double SLx;
-	double SLy;
-	double SL;
-	float kSL;
-	SLx=sunPos[1]-moonPos[1]; // x dist. between Sun & Moon
-	SLy=sunPos[2]-moonPos[2]; // y dist. between
-	SL=sqrt(SLx*SLx+SLy*SLy); // Just distance
+	// determine luminance falloff during solar eclipses
+	double separation_angle = acos( sunPos.dot( moonPos ));  // angle between them
 
-	//	printf("%f %f %f\n", SLx, SLy, SL);
+	//	printf("touch at %f\tnow at %f (%f)\n", touch_angle, separation_angle, separation_angle/touch_angle);
 
-	if (SL>=Sdiam) {kSL=1;} else {
-	  kSL=(SL/Sdiam)*(SL/Sdiam); // some coefficient proportional to Sun covering
-	  kSL = 0.004 + kSL*0.996;   // under about .004 more stars visible than should be
-	  //	  printf("kSL = %f\tatm_int = %f\n", kSL, atm_intensity);
+	// TODO: bright stars are supposed to be visible, now they are not drawing anymore...
+	if( separation_angle < touch_angle) {
+		// TODO: account for brighter annular eclipses
+		if(separation_angle < dark_angle) atm_intensity = 0.004;
+		else atm_intensity *= .004 + .996*(separation_angle-dark_angle)/touch_angle;
 	}
-	atm_intensity=atm_intensity*kSL;
+
+	//	printf("atm int %f\t", atm_intensity);
+
 
 	float sun_pos[3];
 	sun_pos[0] = sunPos[0];
