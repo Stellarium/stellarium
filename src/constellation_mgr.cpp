@@ -101,36 +101,38 @@ void Constellation_mgr::load(const string& font_fileName, const string& fileName
 			exit(-1);
 		}
 
+		cons = NULL;
+		cons = find_from_short_name(shortname);
+		if (!cons)
+		{
+			printf("ERROR : Can't find constellation called : %s\n",shortname);
+			exit(-1);
+		}
+
+		cons->art_tex = new s_texture(texfile);
+		texSize = cons->art_tex->getSize();
+
+		Vec3f s1 = _VouteCeleste->search(hp1)->get_earth_equ_pos();
+		Vec3f s2 = _VouteCeleste->search(hp2)->get_earth_equ_pos();
+		Vec3f s3 = _VouteCeleste->search(hp3)->get_earth_equ_pos();
+
+		// To transform from texture coordinate to 2d coordinate we need to find X with XA = B
+		// A formed of 4 points in texture coordinate, B formed with 4 points in 3d coordinate
+		// We need 3 stars and the 4th point is deduced from the other to get an normal base
+		// X = B inv(A)
+		Vec3f s4 = s1 + (s2-s1)^(s3-s1);
+		Mat4f B(s1[0], s1[1], s1[2], 1, s2[0], s2[1], s2[2], 1, s3[0], s3[1], s3[2], 1, s4[0], s4[1], s4[2], 1);
+		Mat4f A(x1, texSize-y1, 0.f, 1.f, x2, texSize-y2, 0.f, 1.f,
+			x3, texSize-y3, 0.f, 1.f, x1, texSize-y1, texSize, 1.f);
+		Mat4f X = B * A.inverse();
+
+		cons->art_vertex[0] = Vec3f(X*Vec3f(0,0,0));
+		cons->art_vertex[1] = Vec3f(X*Vec3f(texSize,0,0));
+		cons->art_vertex[2] = Vec3f(X*Vec3f(texSize,texSize,0));
+		cons->art_vertex[3] = Vec3f(X*Vec3f(0,texSize,0));
+
     }
     fclose(fic);
-
-	cons = NULL;
-	cons = find_from_short_name(shortname);
-	if (!cons)
-	{
-		printf("ERROR : Can't find constellation called : %s\n",shortname);
-		exit(-1);
-	}
-
-	cons->art_tex = new s_texture(texfile);
-	texSize = cons->art_tex->getSize();
-
-	Vec3f s1 = _VouteCeleste->search(hp1)->get_earth_equ_pos();
-	Vec3f s2 = _VouteCeleste->search(hp2)->get_earth_equ_pos();
-	Vec3f s3 = _VouteCeleste->search(hp3)->get_earth_equ_pos();
-	// To transform from texture coordinate to 2d coordinate we need to find X with XA = B
-	// A formed of 4 points in texture coordinate, B formed with 4 points in 3d coordinate
-	// We need 3 stars and the 4th point is deduce from the other to get an normal base
-	// X = B inv(A)
-	Vec3f s4 = s1 + (s2-s1)^(s3-s1);
-	Mat4f B(s1[0], s1[1], s1[2], 1, s2[0], s2[1], s2[2], 1, s3[0], s3[1], s3[2], 1, s4[0], s4[1], s4[2], 1);
-	Mat4f A(x1, 128-y1, 0.f, 1.f, x2, 128-y2, 0.f, 1.f, x3, 128-y3, 0.f, 1.f, x1, 128-y1, texSize, 1.f);
-	Mat4f X = B * A.inverse();
-
-	cons->art_vertex[0] = Vec3f(X*Vec3f(0,0,0));
-	cons->art_vertex[1] = Vec3f(X*Vec3f(texSize,0,0));
-	cons->art_vertex[2] = Vec3f(X*Vec3f(texSize,texSize,0));
-	cons->art_vertex[3] = Vec3f(X*Vec3f(0,texSize,0));
 }
 
 // Draw all the constellations in the vector
@@ -170,7 +172,7 @@ void Constellation_mgr::draw_art(Projector* prj) const
     vector<Constellation *>::const_iterator iter;
     for(iter=asterisms.begin();iter!=asterisms.end();++iter)
     {
-		(*iter)->draw_art(prj);
+		(*iter)->draw_art_optim(prj);
     }
 	prj->reset_perspective_projection();
 	glDisable(GL_CULL_FACE);

@@ -68,9 +68,9 @@ bool Fisheye_projector::project_custom(const Vec3d& v, Vec3d& win, const Mat4d& 
 
 	win = v;
 	win.transfo4d(mat);
+	z = win[2];//.length();// * -2/(zFar-zNear) + (zFar+zNear)/(zFar-zNear);
 	win.normalize();
 	win.transfo4d(mat_projection);
-	z = win[2];
 	a = fabs(M_PI_2 - asin(win[2]));
 	win[2] = 0.;
 	win.normalize();
@@ -123,8 +123,12 @@ void Fisheye_projector::sVertex3(double x, double y, double z, const Mat4d& mat)
 	static Vec3d v;
 	v.set(x,y,z);
 	project_custom(v, win, mat);
+
+	//printf("%f %f %f\n", win[0], win[1], win[2]);
 	// Can be optimized by avoiding matrix inversion if it's always the same
 	gluUnProject(win[0],win[1],0.5,mat,mat_projection2,vec_viewport,&v[0],&v[1],&v[2]);
+	//v.normalize();
+	//v*=win[2];
 	glVertex3dv(v);
 }
 

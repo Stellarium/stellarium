@@ -278,11 +278,11 @@ void planet::draw(int hint_ON, Projector* prj, const navigator * nav, const tone
 
 		if (flag_point)
 		{
-			if (tex_halo) draw_halo(nav, prj, eye);
+			if (tex_halo) draw_point_halo(nav, prj, eye);
 		}
 		else
 		{
-			if (tex_halo) draw_point_halo(nav, prj, eye);
+			if (tex_halo) draw_halo(nav, prj, eye);
 		}
 
 		if (tex_big_halo) draw_big_halo(nav, prj, eye);
@@ -384,7 +384,11 @@ void planet::draw_halo(const navigator* nav, const Projector* prj, const tone_re
 	cmag *= rmag/screen_r;
 	if (cmag>1.f) cmag = 1.f;
 
-	if (rmag<screen_r) rmag = screen_r;
+	if (rmag<screen_r)
+	{
+		cmag*=rmag/screen_r;
+		rmag = screen_r;
+	}
 
 	prj->set_orthographic_projection();    	// 2D coordinate
 
@@ -429,8 +433,11 @@ void planet::draw_point_halo(const navigator* nav, const Projector* prj, const t
 	cmag *= rmag/screen_r;
 	if (cmag>1.f) cmag = 1.f;
 
-	if (rmag<screen_r) rmag = screen_r;
-
+	if (rmag<screen_r)
+	{
+		cmag*=rmag/screen_r;
+		rmag = screen_r;
+	}
 	prj->set_orthographic_projection();    	// 2D coordinate
 
 	glBindTexture(GL_TEXTURE_2D, tex_halo->getID());
