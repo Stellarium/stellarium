@@ -66,10 +66,11 @@ void stel_atmosphere::compute_color(double JD, Vec3d sunPos, Vec3d moonPos, floa
 	float latitude, float altitude, float temperature, float relative_humidity)
 {
 
-        // no need to calculate if not visible
-        if( atm_intensity < .001) {
-	  eye->set_world_adaptation_luminance(3.75f);
-	  return;
+	// no need to calculate if not visible
+    if( atm_intensity < .001)
+	{
+		eye->set_world_adaptation_luminance(3.75f);
+		return;
 	}
 
 	//Vec3d obj;
@@ -154,21 +155,14 @@ void stel_atmosphere::compute_color(double JD, Vec3d sunPos, Vec3d moonPos, floa
 // Draw the atmosphere using the precalc values stored in tab_sky
 void stel_atmosphere::draw(Projector* prj, int delta_time)
 {
-
-  // 5 second fade
-  float delta_intensity = delta_time/2000.f;
-
-  // update fade
-  if( !atm_on ) {
-    if( atm_intensity > delta_intensity ) {
-      atm_intensity -= delta_intensity;
-    } else {
-      atm_intensity = 0;
-      return;
-    }
-  }
-
-
+	// 5 second fade
+	float delta_intensity = delta_time/2000.f;
+	// update fade
+	if(!atm_on)
+	{
+    	if( atm_intensity > delta_intensity ) {atm_intensity -= delta_intensity;} 
+		else {atm_intensity = 0; return;}
+	}
 
 	glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_COLOR);
 
@@ -197,13 +191,9 @@ void stel_atmosphere::draw(Projector* prj, int delta_time)
 	prj->reset_perspective_projection();
 
 	// smoother initial fade in when increment after drawing
-	if( atm_on ) {
-	  if( atm_intensity + delta_intensity <= 1 ) {
-	    atm_intensity += delta_intensity;
-	  } else {
-	    atm_intensity = 1;
-	  }
+	if(atm_on)
+	{
+		if( atm_intensity + delta_intensity <= 1 ) {atm_intensity += delta_intensity;} 
+		else {atm_intensity = 1;}
 	}
-
-
 }
