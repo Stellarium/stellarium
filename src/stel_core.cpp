@@ -83,11 +83,12 @@ void stel_core::init(void)
 	ssystem = new SolarSystem();
 	atmosphere = new stel_atmosphere();
 	tone_converter = new tone_reproductor();
-	projection = new Fisheye_projector(screen_W, screen_H, 60.);
+	projection = new Projector(screen_W, screen_H, initFov);
 	equ_grid = new SkyGrid(EQUATORIAL);
 	azi_grid = new SkyGrid(ALTAZIMUTAL);
 	equator_line = new SkyLine(EQUATOR);
 	ecliptic_line = new SkyLine(ECLIPTIC);
+
 	// Temporary strings for file names
     char tempName[255];
     char tempName2[255];
@@ -121,7 +122,7 @@ void stel_core::init(void)
     strcat(tempName,"messier.fab");
     strcpy(tempName2,DataDir);
     strcat(tempName2,"spacefont.txt");
-    nebulas->Read(tempName2, tempName);
+    nebulas->read(tempName2, tempName);
 
 	// Create and init the solar system TODO : use a class
     strcpy(tempName,DataDir);
@@ -145,9 +146,10 @@ void stel_core::init(void)
 
 	// Make the viewport as big as possible
 	projection->set_screen_size(screen_W, screen_H);
-	projection->set_fov(60.);
+	projection->set_fov(initFov);
 	projection->maximize_viewport();
-	//projection->set_viewport(10,10,550,550);
+
+	//projection->set_disk_viewport();
 
 	// Compute planets data and init viewing position
 	// Position of sun and all the satellites (ie planets)
@@ -158,6 +160,7 @@ void stel_core::init(void)
 	// Compute transform matrices between coordinates systems
 	navigation->update_transform_matrices((ssystem->get_earth())->get_ecliptic_pos());
 	navigation->set_local_vision(Vec3d(1.,0.,0.3));
+	navigation->update_model_view_mat();
 
 	glClear(GL_COLOR_BUFFER_BIT);
 }
@@ -246,7 +249,7 @@ void stel_core::draw(int delta_time)
 	}
 
 	// Draw the nebula if they are visible
-	if (FlagNebula && (!FlagAtmosphere || sky_brightness<0.1)) nebulas->Draw(FlagNebulaName, projection);
+	if (FlagNebula && (!FlagAtmosphere || sky_brightness<0.1)) nebulas->draw(FlagNebulaName, projection);
 
 	// Draw the hipparcos stars
 	Vec3d tempv = navigation->get_equ_vision();
@@ -257,15 +260,15 @@ void stel_core::draw(int delta_time)
 		MaxMagStarName, temp, tone_converter, projection);
 	}
 
+	// Draw the equatorial grid
+	if (FlagEquatorialGrid) equ_grid->draw(projection);
+	// Draw the altazimutal grid
+    if (FlagAzimutalGrid) azi_grid->draw(projection);	
+
 	// Draw the celestial equator line
     if (FlagEquatorLine) equator_line->draw(projection);
 	// Draw the ecliptic line
     if (FlagEclipticLine) ecliptic_line->draw(projection);
-
-	// Draw the equatorial grid
-	if (FlagEquatorialGrid) equ_grid->draw(projection);
-	// Draw the altazimutal grid
-    if (FlagAzimutalGrid) azi_grid->draw(projection);
 
 	// Draw the pointer on the currently selected object
     if (selected_object) selected_object->draw_pointer(delta_time, projection, navigation);
@@ -375,6 +378,10 @@ void stel_core::load_config(void)
 
 	if (pDate) navigation->set_JDay(get_julian_day(pDate));
 	else navigation->set_JDay(get_julian_from_sys());
+
+	FlagEnableZoomKeys	= conf->get_boolean("navigation:flag_enable_zoom_keys");
+	FlagEnableMoveKeys	= conf->get_boolean("navigation:flag_enable_move_keys");
+	initFov				= conf->get_double ("navigation","init_fov",60.);
 
 	// Landscape section
 	landscape_number	= conf->get_int    ("landscape:landscape_number");
@@ -564,8 +571,8 @@ void stel_core::update_move(int delta_time)
         }
     }
 
-	projection->change_fov(deltaFov);
-	navigation->update_move(deltaAz, deltaAlt);
+	if (FlagEnableZoomKeys) projection->change_fov(deltaFov);
+	if (FlagEnableMoveKeys) navigation->update_move(deltaAz, deltaAlt);
 }
 
 void stel_core::set_screen_size(int w, int h)

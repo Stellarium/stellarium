@@ -27,53 +27,55 @@
 
 #define RADIUS_NEB 1.
 
-Nebula_mgr::Nebula_mgr() : nebulaFont(NULL)
+Nebula_mgr::Nebula_mgr()
 {
 }
 
 Nebula_mgr::~Nebula_mgr()
 {
 	vector<Nebula *>::iterator iter;
-    for(iter=Liste.begin();iter!=Liste.end();iter++)
+    for(iter=neb_array.begin();iter!=neb_array.end();iter++)
     {
 		delete (*iter);
     }
-    if (Nebula::texCircle) delete Nebula::texCircle;
-	if (nebulaFont) delete nebulaFont;
+    if (Nebula::tex_circle) delete Nebula::tex_circle;
+	Nebula::tex_circle = NULL;
+	if (Nebula::nebula_font) delete Nebula::nebula_font;
+	Nebula::nebula_font = NULL;
 }
 
 // read from stream
-int Nebula_mgr::Read(char * font_fileName, char * fileName)
+int Nebula_mgr::read(char * font_fileName, char * fileName)
 {
+    printf("Loading nebulas data...\n");
+
 	FILE * fic;
 	fic = fopen(fileName,"r");
     if (!fic)
 	{
-		printf("Can't open %s\n",fileName);
-		exit(1);
+		printf("ERROR : Can't open nebula catalog %s\n",fileName);
+		exit(-1);
 	}
 
-    printf("Loading nebulas data...\n");
     Nebula * e = NULL;
     for(;;)
-    {   
+    {
 		e = new Nebula;
-		if (e==NULL) {printf("ERROR, CAN'T CREATE A NEBUKA OBJECT\n"); exit(1);}
-        int temp = e->Read(fic);
+        int temp = e->read(fic);
         if (temp==0) // eof
         {
 			if (e) delete e;
 			e = NULL;
             break;
         }
-        if (temp==1 || temp==2) Liste.push_back(e);
+        if (temp==1 || temp==2) neb_array.push_back(e);
 	}
 	fclose(fic);
 
-	Nebula::texCircle = new s_texture("neb");   // Load circle texture
+	Nebula::tex_circle = new s_texture("neb");   // Load circle texture
 
-    nebulaFont = new s_font(12.,"spacefont", font_fileName); // load Font
-    if (!nebulaFont)
+    Nebula::nebula_font = new s_font(12.,"spacefont", font_fileName); // load Font
+    if (!Nebula::nebula_font)
     {
 	    printf("Can't create nebulaFont\n");
         exit(1);
@@ -83,25 +85,25 @@ int Nebula_mgr::Read(char * font_fileName, char * fileName)
 }
 
 // Draw all the Nebulaes
-void Nebula_mgr::Draw(int names_ON, Projector* prj)
+void Nebula_mgr::draw(int names_ON, Projector* prj)
 {
 	glEnable(GL_TEXTURE_2D);
     glEnable(GL_BLEND);
 
     vector<Nebula *>::iterator iter;
-    for(iter=Liste.begin();iter!=Liste.end();iter++)
+    for(iter=neb_array.begin();iter!=neb_array.end();iter++)
     {   
         // project in 2D to check if the nebula is in screen
 		if ( !prj->project_earth_equ_check((*iter)->XYZ,(*iter)->XY) ) continue;
-		(*iter)->Draw();
 
+		prj->set_orthographic_projection();
+		(*iter)->draw_tex(prj);
     	if (names_ON)
     	{
-			prj->set_orthographic_projection();
-			(*iter)->DrawName(nebulaFont);
-			(*iter)->DrawCircle(prj);
-			prj->reset_perspective_projection();
+			(*iter)->draw_name(prj);
+			(*iter)->draw_circle(prj);
     	}
+		prj->reset_perspective_projection();
 	}
 }
 
@@ -112,7 +114,7 @@ stel_object * Nebula_mgr::search(Vec3f Pos)
     vector<Nebula *>::iterator iter;
     Nebula * plusProche=NULL;
     float anglePlusProche=0.;
-    for(iter=Liste.begin();iter!=Liste.end();iter++)
+    for(iter=neb_array.begin();iter!=neb_array.end();iter++)
     {
 		if ((*iter)->XYZ[0]*Pos[0]+(*iter)->XYZ[1]*Pos[1]+(*iter)->XYZ[2]*Pos[2]>anglePlusProche)
         {

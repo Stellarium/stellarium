@@ -26,41 +26,69 @@
 #include "stel_object.h"
 #include "s_font.h"
 
+/*
+     Gx    Galaxy
+     OC    Open star cluster
+     Gb    Globular star cluster, usually in the Milky Way Galaxy
+     Nb    Bright emission or reflection nebula
+     Pl    Planetary nebula
+     C+N   Cluster associated with nebulosity
+     Ast   Asterism or group of a few stars
+     Kt    Knot  or  nebulous  region  in  an  external galaxy
+     ***   Triple star
+     D*    Double star
+     *     Single star
+     ?     Uncertain type or may not exist
+     blank Unidentified at the place given, or type unknown
+     -     Object called nonexistent in the RNGC (Sulentic and Tifft 1973)
+     PD    Photographic plate defect
+
+enum NEBULA_TYPE
+{
+	,
+	,
+
+};
+*/
+
 class Nebula : public stel_object
 {
 friend class Nebula_mgr;
 public:
     Nebula();
     virtual ~Nebula();
-	void get_info_string(char *, const navigator * nav = NULL) const;
-    int Read(FILE *);       // Read the Nebulae data in the stream
-    void Draw();            // Draw the nebulae
-    void DrawName(const s_font* nebulaFont);
-    void DrawCircle(const Projector* prj);
-	unsigned char get_type(void) const {return STEL_OBJECT_NEBULA;}
-	Vec3d get_earth_equ_pos(const navigator * nav = NULL) const {return Vec3d(XYZ[0],XYZ[1],XYZ[2]);}
+
+	virtual void get_info_string(char *, const navigator * nav = NULL) const;
+	virtual STEL_OBJECT_TYPE get_type(void) const {return STEL_OBJECT_NEBULA;}
+	virtual Vec3d get_earth_equ_pos(const navigator * nav = NULL) const {return Vec3d(XYZ[0],XYZ[1],XYZ[2]);}
+
+	// Read the Nebula data from a file
+    int read(FILE *);
+
+	void draw_tex(const Projector* prj);
+    void draw_name(const Projector* prj);
+    void draw_circle(const Projector* prj);
+
+protected:
 	// Return the radius of a circle containing the object on screen
 	virtual float get_on_screen_size(const navigator * nav, const Projector* prj);
-private:
-	static s_texture * texCircle;
-	short posDash;
-	float incLum;
-	unsigned int Messier;	// Messier catalog number
-	unsigned int NGC;		// NGC catalog number
-	char Name[40];          // Nebulae Name
-	float Mag;              // Apparent magnitude
-	Vec3f XYZ;             // Cartesian position
-	char Type[4];           // Nebulae type
-	Vec3d XY;           // 2D Position
-	double RaRad;            // Right Ascention in radians
-	double DecRad;           // Declinaison in radians
-	float * matTransfo;     // Transformation matrix used to draw the nebulae
-	float Rotation;         // Rotation pour la mettre dans le bon sens...
-	float Taille;           // Taille en minute d'arc
-	char Constellation[5];  // Constellation
-	s_texture * nebTexture; // Texture
-	float RayonPrecalc;     // Taille Précalculée
 
+private:
+	unsigned int NGC_nb;			// NGC catalog number
+
+	char* name;						// Nebula name
+	float mag;						// Apparent magnitude
+	float angular_size;				// Angular size in radians
+	Vec3f XYZ;						// Cartesian equatorial position
+	Vec3d XY;						// Store temporary 2D position
+	char type[4];					// Nebulae type
+
+	s_texture * neb_tex;			// Texture
+	Vec3f* tex_quad_vertex;			// The 4 vertex used to draw the nebula texture
+
+	float inc_lum;					// Local counter for symbol animation
+	static s_texture * tex_circle;	// The symbolic circle texture
+	static s_font* nebula_font;		// Font used for names printing
 };
 
 #endif // _NEBULA_H_

@@ -31,12 +31,18 @@ class Nebula_mgr
 public:
     Nebula_mgr();
     virtual ~Nebula_mgr();
-    int Read(char * font_fileName, char * fileName);
-    void Draw(int names_ON, Projector* prj);            // Draw all the Nebulaes
-    stel_object * search(Vec3f Pos);             // Search the Nebulae by position
+
+	// Read the Nebulas data from a file
+    int read(char * font_fileName, char * fileName);
+
+	// Draw all the Nebulas
+	void draw(int hints_ON, Projector* prj);
+
+	// Search the Nebulae by position
+	stel_object * search(Vec3f Pos);
+
 private:
-    vector<Nebula*> Liste;              // list of Nebulaes*
-	s_font* nebulaFont;
+    vector<Nebula*> neb_array;	// The nebulas list
 };
 
 #endif // _NEBULA_MGR_H_

@@ -24,7 +24,7 @@
 Projector::Projector(int _screenW, int _screenH, double _fov, double _min_fov, double _max_fov) :
 	min_fov(_min_fov), max_fov(_max_fov), zNear(0.1), zFar(10000)
 {
-	change_fov(_fov);
+	set_fov(_fov);
 	set_screen_size(_screenW,_screenH);
 }
 
@@ -32,19 +32,44 @@ Projector::~Projector()
 {
 }
 
-void Projector::maximize_viewport(void)
+void Projector::set_fov(double f)
 {
-	vec_viewport[0] = 0;
-	vec_viewport[1] = 0;
-	vec_viewport[2] = screenW;
-	vec_viewport[3] = screenH;
-	glViewport(0, 0, screenW, screenH);
-	ratio = (float)screenH/screenW;
+	fov = f;
+	if (f>max_fov) fov = max_fov;
+	if (f<min_fov) fov = min_fov;
 	init_project_matrix();
+}
+
+
+void Projector::set_square_viewport(void)
+{
+	glDisable(GL_STENCIL_TEST);
+	int mind = MY_MIN(screenW,screenH);
+	set_viewport((screenW-mind)/2, (screenH-mind)/2, mind, mind);
+}
+
+void Projector::set_disk_viewport(void)
+{
+	set_square_viewport();
+    glEnable(GL_STENCIL_TEST);
+	glClear(GL_STENCIL_BUFFER_BIT);
+ 	glStencilFunc(GL_ALWAYS, 0x1, 0x1);
+    glStencilOp(GL_ZERO, GL_REPLACE, GL_REPLACE);
+
+	// Draw the disk in the stencil buffer
+	set_2Dfullscreen_projection();
+	glTranslatef(screenW/2,screenH/2,0.f);
+	GLUquadricObj * p = gluNewQuadric();
+	gluDisk(p, 0., MY_MIN(screenW,screenH)/2, 128, 1);
+	gluDeleteQuadric(p);
+	restore_from_2Dfullscreen_projection();
+
+	glStencilFunc(GL_EQUAL, 0x1, 0x1);
 }
 
 void Projector::set_viewport(int x, int y, int w, int h)
 {
+	glDisable(GL_STENCIL_TEST);
 	vec_viewport[0] = x;
 	vec_viewport[1] = y;
 	vec_viewport[2] = w;

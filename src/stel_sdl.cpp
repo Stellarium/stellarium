@@ -52,7 +52,7 @@ void stel_sdl::init(void)
 
     // We want a hardware surface
     Vflags = SDL_HWSURFACE|SDL_OPENGL;//|SDL_DOUBLEBUF;
-
+	SDL_GL_SetAttribute(SDL_GL_STENCIL_SIZE,1);
 	// If fullscreen, set the Flag
     if (core->Fullscreen) Vflags|=SDL_FULLSCREEN;
 

@@ -68,7 +68,7 @@ class SkyLine
 {
 public:
 	// Create and precompute positions of a SkyGrid
-	SkyLine(SKY_LINE_TYPE line_type = EQUATOR, double _radius = 1., unsigned int _nb_segment = 24);
+	SkyLine(SKY_LINE_TYPE line_type = EQUATOR, double _radius = 1., unsigned int _nb_segment = 48);
     virtual ~SkyLine();
 	void draw(const Projector* prj) const;
 	void set_color(const Vec3f& c) {color = c;}

@@ -166,6 +166,11 @@ private:
     int FlagEclipticLine;
     int FlagCardinalPoints;
 
+	// Navigation
+	int FlagEnableZoomKeys;
+	int FlagEnableMoveKeys;
+	float initFov;
+
 	int frame, timefr, timeBase;		// Used for fps counter
 
 	double deltaFov,deltaAlt,deltaAz;	// View movement
