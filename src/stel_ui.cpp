@@ -38,8 +38,8 @@ stel_ui::stel_ui(stel_core * _core) :
 	top_bar_fov_lbl(NULL),
 
 	bt_flag_ctr(NULL),
-	bt_flag_asterism_draw(NULL),
-	bt_flag_asterism_name(NULL),
+	bt_flag_constellation_draw(NULL),
+	bt_flag_constellation_name(NULL),
 	bt_flag_azimuth_grid(NULL),
 	bt_flag_equator_grid(NULL),
 	bt_flag_ground(NULL),
@@ -133,7 +133,6 @@ Component* stel_ui::createTopBar(void)
     top_bar_date_lbl = new Label("-", courierFont);	top_bar_date_lbl->setPos(2,2);
     top_bar_hour_lbl = new Label("-", courierFont);	top_bar_hour_lbl->setPos(110,2);
     top_bar_fps_lbl = new Label("-", courierFont);	top_bar_fps_lbl->setPos(core->screen_W-100,2);
-    if (!core->FlagShowFps) top_bar_fps_lbl->setVisible(false);
     top_bar_fov_lbl = new Label("-", courierFont);	top_bar_fov_lbl->setPos(core->screen_W-220,2);
     top_bar_appName_lbl = new Label(APP_NAME);
     top_bar_appName_lbl->setPos(core->screen_W/2-top_bar_appName_lbl->getSizex()/2,2);
@@ -150,36 +149,61 @@ Component* stel_ui::createTopBar(void)
 ////////////////////////////////////////////////////////////////////////////////
 void stel_ui::updateTopBar(void)
 {
+	top_bar_ctr->setVisible(core->FlagShowTopBar);
+	if (!core->FlagShowTopBar) return;
+
     char str[30];
 	ln_date d;
 
-    if (core->FlagUTC_Time) get_date(core->navigation->get_JDay(),&d);
-    else get_date(core->navigation->get_JDay()+core->navigation->get_time_zone()*JD_HOUR,&d);
+	if (core->FlagUTC_Time) get_date(core->navigation->get_JDay(),&d);
+	else get_date(core->navigation->get_JDay()+core->navigation->get_time_zone()*JD_HOUR,&d);
 
-    sprintf(str,"%.2d/%.2d/%.4d",d.days,d.months,d.years);
-    top_bar_date_lbl->setLabel(str);	top_bar_date_lbl->adjustSize();
+	if (core->FlagShowDate)
+	{
+		sprintf(str,"%.2d/%.2d/%.4d",d.days,d.months,d.years);
+		top_bar_date_lbl->setLabel(str);
+		top_bar_date_lbl->adjustSize();
+	}
+	top_bar_date_lbl->setVisible(core->FlagShowDate);
 
-    if (core->FlagUTC_Time) sprintf(str,"%.2d:%.2d:%.2d (UTC)",d.hours,d.minutes,(int)d.seconds);
-    else sprintf(str,"%.2d:%.2d:%.2d",d.hours,d.minutes,(int)d.seconds);
+	if (core->FlagShowTime)
+	{
+	    if (core->FlagUTC_Time) sprintf(str,"%.2d:%.2d:%.2d (UTC)",d.hours,d.minutes,(int)d.seconds);
+	    else sprintf(str,"%.2d:%.2d:%.2d",d.hours,d.minutes,(int)d.seconds);
+		top_bar_hour_lbl->setLabel(str);
+		top_bar_hour_lbl->adjustSize();
+	}
+	top_bar_hour_lbl->setVisible(core->FlagShowTime);
 
-    top_bar_hour_lbl->setLabel(str);	top_bar_hour_lbl->adjustSize();
+	top_bar_appName_lbl->setVisible(core->FlagShowAppName);
 
-    sprintf(str,"FPS:%4.2f",core->fps);
-    top_bar_fps_lbl->setLabel(str); 	top_bar_fps_lbl->adjustSize();
-    sprintf(str,"fov=%2.3f\6", core->projection->get_fov());
-	top_bar_fov_lbl->setLabel(str);		top_bar_fov_lbl->adjustSize();
+    if (core->FlagShowFov)
+	{
+		sprintf(str,"fov=%2.3f\6", core->projection->get_fov());
+		top_bar_fov_lbl->setLabel(str);
+		top_bar_fov_lbl->adjustSize();
+	}
+	top_bar_fov_lbl->setVisible(core->FlagShowFov);
+
+    if (core->FlagShowFps)
+	{
+		sprintf(str,"FPS:%4.2f",core->fps);
+    	top_bar_fps_lbl->setLabel(str);
+		top_bar_fps_lbl->adjustSize();
+	}
+	top_bar_fps_lbl->setVisible(core->FlagShowFps);
 }
 
 // Create the button panel in the lower left corner
 Component* stel_ui::createFlagButtons(void)
 {
-	bt_flag_asterism_draw = new FlagButton(core->FlagAsterismDrawing, NULL, "Bouton1");
-	bt_flag_asterism_draw->setOnPressCallback(makeFunctor((s_pcallback0)0,*this, &stel_ui::cb));
-	bt_flag_asterism_draw->setOnMouseInOutCallback(makeFunctor((s_pcallback0)0,*this, &stel_ui::cbr));
+	bt_flag_constellation_draw = new FlagButton(core->FlagConstellationDrawing, NULL, "Bouton1");
+	bt_flag_constellation_draw->setOnPressCallback(makeFunctor((s_pcallback0)0,*this, &stel_ui::cb));
+	bt_flag_constellation_draw->setOnMouseInOutCallback(makeFunctor((s_pcallback0)0,*this, &stel_ui::cbr));
 
-	bt_flag_asterism_name = new FlagButton(core->FlagAsterismName, NULL, "Bouton2");
-	bt_flag_asterism_name->setOnPressCallback(makeFunctor((s_pcallback0)0,*this, &stel_ui::cb));
-	bt_flag_asterism_name->setOnMouseInOutCallback(makeFunctor((s_pcallback0)0,*this, &stel_ui::cbr));
+	bt_flag_constellation_name = new FlagButton(core->FlagConstellationName, NULL, "Bouton2");
+	bt_flag_constellation_name->setOnPressCallback(makeFunctor((s_pcallback0)0,*this, &stel_ui::cb));
+	bt_flag_constellation_name->setOnMouseInOutCallback(makeFunctor((s_pcallback0)0,*this, &stel_ui::cbr));
 
 	bt_flag_azimuth_grid = new FlagButton(core->FlagAzimutalGrid, NULL, "Bouton3");
 	bt_flag_azimuth_grid->setOnPressCallback(makeFunctor((s_pcallback0)0,*this, &stel_ui::cb));
@@ -218,14 +242,14 @@ Component* stel_ui::createFlagButtons(void)
 	bt_flag_config->setOnMouseInOutCallback(makeFunctor((s_pcallback0)0,*this, &stel_ui::cbr));
 
 	bt_flag_ctr = new FilledContainer();
-	bt_flag_ctr->addComponent(bt_flag_asterism_draw); 	bt_flag_asterism_draw->setPos(0,0);
-	bt_flag_ctr->addComponent(bt_flag_asterism_name);	bt_flag_asterism_name->setPos(32,0);
+	bt_flag_ctr->addComponent(bt_flag_constellation_draw); 	bt_flag_constellation_draw->setPos(0,0);
+	bt_flag_ctr->addComponent(bt_flag_constellation_name);	bt_flag_constellation_name->setPos(32,0);
 	bt_flag_ctr->addComponent(bt_flag_azimuth_grid); 	bt_flag_azimuth_grid->setPos(64,0);
 	bt_flag_ctr->addComponent(bt_flag_equator_grid);	bt_flag_equator_grid->setPos(96,0);
 	bt_flag_ctr->addComponent(bt_flag_ground);			bt_flag_ground->setPos(128,0);
 	bt_flag_ctr->addComponent(bt_flag_cardinals);		bt_flag_cardinals->setPos(160,0);
 	bt_flag_ctr->addComponent(bt_flag_atmosphere);		bt_flag_atmosphere->setPos(192,0);
-	bt_flag_ctr->addComponent(bt_flag_nebula_name);		bt_flag_asterism_draw->setPos(224,0);
+	bt_flag_ctr->addComponent(bt_flag_nebula_name);		bt_flag_constellation_draw->setPos(224,0);
 	bt_flag_ctr->addComponent(bt_flag_help);			bt_flag_nebula_name->setPos(256,0);
 	bt_flag_ctr->addComponent(bt_flag_follow_earth);	bt_flag_follow_earth->setPos(288,0);
 	bt_flag_ctr->addComponent(bt_flag_config);			bt_flag_config->setPos(320,0);
@@ -240,8 +264,8 @@ Component* stel_ui::createFlagButtons(void)
 ////////////////////////////////////////////////////////////////////////////////
 void stel_ui::cb(void)
 {
-	core->FlagAsterismDrawing 	= bt_flag_asterism_draw->getState();
-	core->FlagAsterismName 		= bt_flag_asterism_name->getState();
+	core->FlagConstellationDrawing 	= bt_flag_constellation_draw->getState();
+	core->FlagConstellationName 		= bt_flag_constellation_name->getState();
 	core->FlagAzimutalGrid 		= bt_flag_azimuth_grid->getState();
 	core->FlagEquatorialGrid 	= bt_flag_equator_grid->getState();
 	core->FlagGround	 		= bt_flag_ground->getState();
@@ -263,9 +287,9 @@ void stel_ui::bt_flag_ctrOnMouseInOut(void)
 
 void stel_ui::cbr(void)
 {
-	if (bt_flag_asterism_draw->getIsMouseOver())
+	if (bt_flag_constellation_draw->getIsMouseOver())
 		bt_flag_help_lbl->setLabel("Drawing of the Constellations [C]");
-	if (bt_flag_asterism_name->getIsMouseOver())
+	if (bt_flag_constellation_name->getIsMouseOver())
 		bt_flag_help_lbl->setLabel("Names of the Constellations [V]");
 	if (bt_flag_azimuth_grid->getIsMouseOver())
 		bt_flag_help_lbl->setLabel("Azimutal Grid [Z]");
@@ -482,8 +506,12 @@ int stel_ui::handle_keys(SDLKey key, S_GUI_VALUE state)
 		}
         if(key==SDLK_c)
         {
-        	core->FlagAsterismDrawing=!core->FlagAsterismDrawing;
-			bt_flag_asterism_draw->setState(core->FlagAsterismDrawing);
+        	core->FlagConstellationDrawing=!core->FlagConstellationDrawing;
+			bt_flag_constellation_draw->setState(core->FlagConstellationDrawing);
+		}
+        if(key==SDLK_d)
+        {
+        	core->FlagStarName=!core->FlagStarName;
 		}
         if(key==SDLK_k)
         {
@@ -497,8 +525,8 @@ int stel_ui::handle_keys(SDLKey key, S_GUI_VALUE state)
 		}
         if(key==SDLK_v)
         {
-        	core->FlagAsterismName=!core->FlagAsterismName;
-            bt_flag_asterism_name->setState(core->FlagAsterismName);
+        	core->FlagConstellationName=!core->FlagConstellationName;
+            bt_flag_constellation_name->setState(core->FlagConstellationName);
 		}
         if(key==SDLK_z)
         {	
@@ -543,15 +571,15 @@ int stel_ui::handle_keys(SDLKey key, S_GUI_VALUE state)
 		}
         if(key==SDLK_6)
         {	
-        	core->FlagEcliptic=!core->FlagEcliptic;
+        	core->FlagEclipticLine=!core->FlagEclipticLine;
 		}
         if(key==SDLK_7)
         {
-        	core->FlagEquator=!core->FlagEquator;
+        	core->FlagEquatorLine=!core->FlagEquatorLine;
 		}
         if(key==SDLK_5)
         {
-        	core->FlagEquator = !core->FlagEquator;
+        	core->FlagEquatorLine = !core->FlagEquatorLine;
 		}
         if(key==SDLK_4)
         {
@@ -600,6 +628,9 @@ int stel_ui::handle_keys(SDLKey key, S_GUI_VALUE state)
 void stel_ui::update(void)
 {
 	updateTopBar();
+	// To prevent a minor bug
+	if (!core->FlagShowSelectedObjectInfos) info_select_ctr->setVisible(0);
+	else if (core->selected_object) info_select_ctr->setVisible(1);
 }
 
 
@@ -610,7 +641,7 @@ void stel_ui::updateInfoSelectString(void)
     objectInfo[0]='\0';
 	core->selected_object->get_info_string(objectInfo, core->navigation);
     info_select_txtlbl->setLabel(objectInfo);
-    info_select_ctr->setVisible(1);
+    if (core->FlagShowSelectedObjectInfos) info_select_ctr->setVisible(1);
 	if (core->selected_object->get_type()==STEL_OBJECT_NEBULA)
 		info_select_txtlbl->setTextColor(Vec3f(0.4f,0.5f,0.8f));
 	if (core->selected_object->get_type()==STEL_OBJECT_PLANET)
