@@ -26,7 +26,7 @@
 #include "MathOps.h"
 #include "stellarium.h"
 #include "navigation.h"
-#include "VISLIMIT.H"
+#include "vislimit.h"
 #include "planet_mgr.h"
 
 extern s_texture * texIds[200];            // Common Textures

@@ -515,7 +515,7 @@ void TextLabel::setLabel(char * _label)
     while (pch != NULL)
     {
         tempLabel = new Label(pch, theFont);
-        tempLabel->reshape(vec2_i(3, i*(theFont->getLineHeight() + 1) + 3), vec2_i(theFont->getStrLen(pch), theFont->getLineHeight()));
+        tempLabel->reshape(vec2_i(3,(int)( i*(theFont->getLineHeight() + 1) + 3)), vec2_i((int)theFont->getStrLen(pch), (int)theFont->getLineHeight()));
         tempLabel->setColour(colour);
         addComponent(tempLabel);
         pch = strtok (NULL, "\n");
@@ -619,7 +619,7 @@ void CursorBar::render(GraphicsContext& gc)
     glVertex2i(pos[0] + 3 , pos[1] + sz[1] / 2 + 1);
     glVertex2i(pos[0] + 3 , pos[1] + sz[1] / 2 - 1);
     glEnd();
-    int xpos = pos[0] + 3 + (sz[0] - 6) * ((float)(barValue - minBarValue) / (float)(maxBarValue - minBarValue));
+    int xpos = (int)(pos[0] + 3 + (sz[0] - 6) * ((float)(barValue - minBarValue) / (float)(maxBarValue - minBarValue)));
     glColor3fv(gc.baseColor*2);
     glBegin(GL_LINE_LOOP);
     glVertex2i(xpos - 2 , pos[1] + sz[1] / 2 - 5);

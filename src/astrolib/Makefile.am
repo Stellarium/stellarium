@@ -4,4 +4,5 @@ libastrolib_a_SOURCES = AstroOps.cpp DateOpsIntl.cpp MathOps.cpp Pluto.cpp Vsop.
 
 libastrolib_a_LIBADD = AstroOps.o DateOpsIntl.o MathOps.o Pluto.o VsopData.o DateOps.o Lunar.o PlanetData.o Vsop.o
 
+CFLAGS = -O3 -Wall
 CXXFLAGS = -O3
