@@ -246,6 +246,27 @@ void Painter::print(int x, int y, const char * str) const
 	font->print(x, y, str, 0);	// 0 for upside down mode
 }
 
+void Painter::drawLine(const s_vec2i& pos1, const s_vec2i& pos2) const
+{
+	glColor4fv(baseColor);
+    glEnable(GL_BLEND);
+    glDisable(GL_TEXTURE_2D);
+    glBegin(GL_LINES);
+        glVertex2f(pos1[0] + 0.5, pos1[1] + 0.5);
+        glVertex2f(pos2[0] + 0.5, pos2[1] + 0.5);
+    glEnd();
+}
+
+void Painter::drawLine(const s_vec2i& pos1, const s_vec2i& pos2, const s_color& c) const
+{
+	glColor4fv(c);
+    glEnable(GL_BLEND);
+    glDisable(GL_TEXTURE_2D);
+    glBegin(GL_LINES);
+        glVertex2f(pos1[0] + 0.5, pos1[1] + 0.5);
+        glVertex2f(pos2[0] + 0.5, pos2[1] + 0.5);
+    glEnd();
+}
 
 //////////////////////////////// Component /////////////////////////////////////
 // Mother class for every s_gui object.
@@ -383,7 +404,14 @@ int Container::onClic(int x, int y, S_GUI_VALUE button, S_GUI_VALUE state)
 	list<Component*>::iterator iter = childs.begin();
 	while (iter != childs.end())
 	{
-		if ((*iter)->onClic(x - pos[0], y - pos[1], button, state)) return 1;	// The signal has been intercepted
+		if ((*iter)->onClic(x - pos[0], y - pos[1], button, state))
+		{
+			// The signal has been intercepted
+			// Set the component in first position in the objects list
+			childs.push_front(*iter);
+			childs.erase(iter);
+			return 1;
+		}
         iter++;
     }
 	return CallbackComponent::onClic(x, y, button, state);
@@ -458,6 +486,11 @@ void FilledButton::draw()
 	Button::draw();
 }
 
+
+//////////////////////////////////// CheckBox //////////////////////////////////
+// Button with a cross on it
+////////////////////////////////////////////////////////////////////////////////
+
 CheckBox::CheckBox(int state) : Button(), isChecked(state)
 {
 }
@@ -481,6 +514,16 @@ int CheckBox::onClic(int x, int y, S_GUI_VALUE bt, S_GUI_VALUE state)
 }
 
 
+LabeledCheckBox::LabeledCheckBox(int state, const char* label) : Container(), checkbx(NULL), lbl(NULL)
+{
+	checkbx = new CheckBox(state);
+	addComponent(checkbx);
+	lbl = new Label(label);
+	lbl->setPos(0,checkbx->getSizex()+2);
+	addComponent(lbl);
+	setSize(checkbx->getSizex() + lbl->getSizex() + 2,
+		checkbx->getSizey()>lbl->getSizey() ? checkbx->getSizey() : lbl->getSizey());
+}
 
 FlagButton::FlagButton(int state, const s_texture* tex, const char* specificTexName) : CheckBox(state)
 {
@@ -509,6 +552,11 @@ void FlagButton::draw()
 	}
 	Button::draw();
 }
+
+
+//////////////////////////////////// Label /////////////////////////////////////
+// Text label
+////////////////////////////////////////////////////////////////////////////////
 
 Label::Label(const char * _label, const s_font * _font) : label(NULL)
 {
@@ -549,6 +597,40 @@ void Label::adjustSize(void)
 }
 
 
+/////////////////////////////// LabeledButton //////////////////////////////////
+// Button with text on it
+////////////////////////////////////////////////////////////////////////////////
+
+LabeledButton::LabeledButton(const char * _label, const s_font* font) : Button(), label(NULL)
+{
+	label = new Label(_label, font);
+	setSize(label->getSize()+s_vec2i(4,2));
+}
+
+LabeledButton::~LabeledButton()
+{
+	if (label) delete label;
+	label = NULL;
+}
+
+void LabeledButton::draw(void)
+{
+    if (!visible) return;
+	Button::draw();
+    glPushMatrix();
+    glTranslatef(pos[0], pos[1], 0.f);
+    Component::scissor->push(pos, size);
+	label->setPos((size-label->getSize())/2);
+	label->draw();
+    Component::scissor->pop();
+	glPopMatrix();
+}
+
+
+////////////////////////////////// TextLabel ///////////////////////////////////
+// A text bloc
+////////////////////////////////////////////////////////////////////////////////
+
 TextLabel::TextLabel(const char * _label, const s_font* _font) : Container(), label(NULL)
 {
 	if (_font) painter.setFont(_font);
@@ -578,9 +660,9 @@ void TextLabel::setLabel(const char * _label)
     while (pch != NULL)
     {
         tempLabel = new Label(pch);
-		tempLabel->adjustSize();
 		tempLabel->setPainter(painter);
         tempLabel->setPos(0,i*lineHeight);
+		tempLabel->adjustSize();
         addComponent(tempLabel);
         pch = strtok (NULL, "\n");
         i++;
@@ -589,14 +671,14 @@ void TextLabel::setLabel(const char * _label)
 
 void TextLabel::adjustSize(void)
 {
-	int maxY = 0;
+	int maxX = 0;
 	list<Component*>::iterator iter = childs.begin();
 	while (iter != childs.end())
 	{
-		if ((*iter)->getSizex()>maxY) maxY = (*iter)->getSizex();
+		if ((*iter)->getSizex()>maxX) maxX = (*iter)->getSizex();
         iter++;
     }
-	setSize(maxY,childs.size()*((int)painter.getFont()->getLineHeight()+1));
+	setSize(maxX,childs.size()*((int)painter.getFont()->getLineHeight()+1));
 }
 
 void TextLabel::setTextColor(const s_color& c)
@@ -692,6 +774,7 @@ void StdWin::draw()
 {
 	if (!visible) return;
 	titleLabel->setPos((size[0] - titleLabel->getSizex())/2, (frameSize[3]-titleLabel->getSizey())/2 + 1);
+	painter.drawSquareFill(pos, size);
 	painter.drawSquareFill(pos, s_vec2i(size[0], frameSize[3]));
 	FramedContainer::draw();
 }
@@ -729,23 +812,142 @@ int StdWin::onMove(int x, int y)
 }
 
 StdBtWin::StdBtWin(const char * _title, s_texture* _header_tex, s_font * _winfont, int headerSize) :
-	StdWin(_title, _header_tex, _winfont, headerSize), closeBt(NULL)
+	StdWin(_title, _header_tex, _winfont, headerSize), hideBt(NULL)
 {
-	closeBt = new Button();
-	closeBt->reshape(3,3,headerSize-6,headerSize-6);
-	closeBt->setOnPressCallback(makeFunctor((s_pcallback0)0,*this, &StdBtWin::onCloseBt));
-	Container::addComponent(closeBt);
+	hideBt = new Button();
+	hideBt->reshape(3,3,headerSize-6,headerSize-6);
+	hideBt->setOnPressCallback(makeFunctor((s_pcallback0)0,*this, &StdBtWin::onHideBt));
+	Container::addComponent(hideBt);
 }
 
 void StdBtWin::draw()
 {
 	if (!visible) return;
-	closeBt->setPos(size[0] - closeBt->getSizex() - 3, 3);
+	hideBt->setPos(size[0] - hideBt->getSizex() - 3, 3);
 	StdWin::draw();
 }
 
-/*
+void StdBtWin::onHideBt(void)
+{
+	visible=0;
+	if (onHideBtCallback) onHideBtCallback();
+}
 
+
+///////////////////////////////////// Tab //////////////////////////////////////
+// Everything to handle tabs
+////////////////////////////////////////////////////////////////////////////////
+
+TabHeader::TabHeader(Component* c, const char* _label, const s_font* _font) :
+	LabeledButton(_label, _font), assoc(c)
+{
+}
+
+void TabHeader::draw(void)
+{
+    if (!visible) return;
+	painter.drawSquareFill(pos, size, painter.getBaseColor() * (0.7f + 0.3 * active));
+	if (!active) painter.drawSquareEdge(pos,size);
+	else
+	{
+		painter.drawLine(pos, s_vec2i(pos[0],pos[1]+size[1]));
+		painter.drawLine(s_vec2i(pos[0]+1,pos[1]), s_vec2i(pos[0]+size[0]-1,pos[1]));
+		painter.drawLine(s_vec2i(pos[0]+size[0]-1,pos[1]), pos+size-s_vec2i(1,0));
+	}
+	// Draw laeb
+    glPushMatrix();
+    glTranslatef(pos[0], pos[1], 0.f);
+    Component::scissor->push(pos, size);
+	label->setPos((size-label->getSize())/2 + s_vec2i(1,0));
+	label->draw();
+    Component::scissor->pop();
+	glPopMatrix();
+}
+
+void TabHeader::setActive(int s)
+{
+	active = s;
+	if (active) assoc->setVisible(1);
+	else assoc->setVisible(0);
+}
+
+TabContainer::TabContainer(const s_font* _font) : Container(), headerHeight(20)
+{
+	if (_font) painter.setFont(_font);
+
+}
+
+void TabContainer::addTab(Component* c, const char* name)
+{
+	Container* tempInside = new Container();
+	tempInside->reshape(pos[0], pos[1]+headerHeight, size[0], size[1]-headerHeight);
+	tempInside->addComponent(c);
+
+	TabHeader* tempHead = new TabHeader(tempInside, name);
+	tempHead->setPainter(painter);
+	tempHead->reshape(getHeadersSize(),0,tempHead->getSizex(),headerHeight);
+	headers.push_front(tempHead);
+
+	addComponent(tempInside);
+	addComponent(tempHead);
+	select(tempHead);
+}
+
+void TabContainer::draw(void)
+{
+	painter.drawSquareFill(pos, size);
+	painter.drawLine(s_vec2i(pos[0]+getHeadersSize(), pos[1]+headerHeight-1),
+		s_vec2i(pos[0]+size[0], pos[1]+headerHeight-1));
+	Container::draw();
+}
+
+int TabContainer::getHeadersSize(void)
+{
+	int s = 0;
+	list<TabHeader*>::iterator iter = headers.begin();
+	while (iter != headers.end())
+	{
+		s+=(*iter)->getSizex();
+        iter++;
+    }
+	return s;
+}
+
+int TabContainer::onClic(int x, int y, S_GUI_VALUE button, S_GUI_VALUE state)
+{
+	if (!visible) return 0;
+	list<TabHeader*>::iterator iter = headers.begin();
+	while (iter != headers.end())
+	{
+		if ((*iter)->onClic(x - pos[0], y - pos[1], button, state))
+		{
+			select(*iter);
+			return 1;
+		}
+        iter++;
+    }
+	return Container::onClic(x, y, button, state);
+}
+
+void TabContainer::select(TabHeader* t)
+{
+	list<Component*>::iterator iter = childs.begin();
+	while (iter != childs.end())
+	{
+		(*iter)->setVisible(0);
+        iter++;
+    }
+	list<TabHeader*>::iterator iter2 = headers.begin();
+	while (iter2 != headers.end())
+	{
+		(*iter2)->setVisible(1);
+		if (*iter2==t) (*iter2)->setActive(1);
+		else (*iter2)->setActive(0);
+        iter2++;
+    }
+}
+
+/*
 // Cursor Bar
 void ExtCursorBarClicCallback(int x, int y, enum guiValue state, enum guiValue button, Component * me)
 {

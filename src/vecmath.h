@@ -337,8 +337,7 @@ template<class T> Vector2<T> Vector2<T>::operator*(T s) const
 
 template<class T> Vector2<T> Vector2<T>::operator/(T s) const
 {
-    T is = (T)1 / s;
-    return Vector2<T>(is * v[0], is * v[1]);
+    return Vector2<T>(v[0]/s, v[1]/s);
 }
 
 
@@ -473,8 +472,7 @@ template<class T> Vector3<T> Vector3<T>::operator*(T s) const
 
 template<class T> Vector3<T> Vector3<T>::operator/(T s) const
 {
-    T is = (T)1 / s;
-    return Vector3<T>(is * v[0], is * v[1], is * v[2]);
+    return Vector3<T>(v[0]/s, v[1]/s, v[2]/s);
 }
 
 
@@ -629,8 +627,7 @@ template<class T> Vector4<T> Vector4<T>::operator*(T s) const
 
 template<class T> Vector4<T> Vector4<T>::operator/(T s) const
 {
-    T is = (T)1 / s;
-    return Vector4<T>(is * v[0], is * v[1], is * v[2], is * v[3]);
+    return Vector4<T>(v[0]/s, v[1]/s, v[2]/s, v[3]/s);
 }
 
 template<class T> T Vector4<T>::dot(const Vector4<T>& b) const

@@ -112,6 +112,7 @@ public:
 	double get_fov(void) const {return fov;}
 	Vec3d get_equ_vision(void) const {return equ_vision;}
 	Vec3d get_local_vision(void) const {return local_vision;}
+	void set_local_vision(Vec3d _pos);
 	void set_time_zone(int t) {position.time_zone=t;}
 	int get_time_zone(void) const {return position.time_zone;}
 	void set_latitude(double l) {position.latitude=l;}

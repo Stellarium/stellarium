@@ -208,6 +208,12 @@ void navigator::update_vision_vector(int delta_time, stel_object* selected)
 }
 
 
+void navigator::set_local_vision(Vec3d _pos)
+{
+	local_vision = _pos;
+	equ_vision=local_to_earth_equ(&local_vision);
+}
+
 // Increment/decrement smoothly the vision field and position
 void navigator::update_move(int delta_time)
 {

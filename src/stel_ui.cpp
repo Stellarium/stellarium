@@ -55,7 +55,12 @@ stel_ui::stel_ui(stel_core * _core) :
 	info_select_txtlbl(NULL),
 
 	licence_win(NULL),
-	licence_txtlbl(NULL)
+	licence_txtlbl(NULL),
+
+	help_win(NULL),
+	help_txtlbl(NULL),
+
+	config_win(NULL)
 {
 	if (!_core)
 	{
@@ -92,7 +97,8 @@ void stel_ui::init(void)
 	baseTex = new s_texture("backmenu");
 
 	// Set default Painter
-	Painter p(baseTex, spaceFont, core->GuiBaseColor, core->GuiTextColor);
+	Painter p(baseTex, spaceFont, s_color(core->GuiBaseColor[0],core->GuiBaseColor[1],
+		core->GuiBaseColor[2],0.1), core->GuiTextColor);
 	Component::setDefaultPainter(p);
 
 	Component::initScissor(core->screen_W, core->screen_H);
@@ -117,6 +123,9 @@ void stel_ui::init(void)
 	desktop->addComponent(createFlagButtons());
 	desktop->addComponent(bt_flag_help_lbl);
 	desktop->addComponent(createLicenceWindow());
+	desktop->addComponent(createHelpWindow());
+	desktop->addComponent(createConfigWindow());
+
 }
 
 
@@ -236,7 +245,11 @@ void stel_ui::cb5(void){core->FlagGround	 		= bt_flag_ground->getState();}
 void stel_ui::cb6(void){core->FlagCardinalPoints	= bt_flag_cardinals->getState();}
 void stel_ui::cb7(void){core->FlagAtmosphere 		= bt_flag_atmosphere->getState();}
 void stel_ui::cb8(void){core->FlagNebulaName		= bt_flag_nebula_name->getState();}
-void stel_ui::cb9(void){core->FlagHelp				= bt_flag_help->getState();}
+void stel_ui::cb9(void)
+{
+	core->FlagHelp = bt_flag_help->getState();
+	help_win->setVisible(core->FlagHelp);
+}
 void stel_ui::cb10(void){core->navigation->set_flag_lock_equ_pos(bt_flag_follow_earth->getState());}
 void stel_ui::cb11(void){core->FlagConfig			= bt_flag_config->getState();}
 
@@ -251,9 +264,9 @@ bt_flag_help_lbl->setLabel("Drawing of the Constellations [C]");}
 void stel_ui::cbr2(void) {if (bt_flag_asterism_name->getIsMouseOver())
 bt_flag_help_lbl->setLabel("Names of the Constellations [V]");}
 void stel_ui::cbr3(void) {if (bt_flag_azimuth_grid->getIsMouseOver())
-bt_flag_help_lbl->setLabel("Azimutal Grid");}
+bt_flag_help_lbl->setLabel("Azimutal Grid [Z]");}
 void stel_ui::cbr4(void) {if (bt_flag_equator_grid->getIsMouseOver())
-bt_flag_help_lbl->setLabel("Equatorial Grid");}
+bt_flag_help_lbl->setLabel("Equatorial Grid [E]");}
 void stel_ui::cbr5(void) {if (bt_flag_ground->getIsMouseOver())
 bt_flag_help_lbl->setLabel("Ground [G]");}
 void stel_ui::cbr6(void) {if (bt_flag_cardinals->getIsMouseOver())
@@ -265,7 +278,7 @@ bt_flag_help_lbl->setLabel("Nebulas [N]");}
 void stel_ui::cbr9(void) {if (bt_flag_help->getIsMouseOver())
 bt_flag_help_lbl->setLabel("Help [H]");}
 void stel_ui::cbr10(void) {if (bt_flag_follow_earth->getIsMouseOver())
-bt_flag_help_lbl->setLabel("Compensation of the Earth rotation");}
+bt_flag_help_lbl->setLabel("Compensation of the Earth rotation [T]");}
 void stel_ui::cbr11(void) {if (bt_flag_config->getIsMouseOver())
 bt_flag_help_lbl->setLabel("Configuration window");}
 
@@ -302,8 +315,56 @@ Boston, MA  02111-1307, USA.\n");
 	licence_win = new StdBtWin("Infos");
 	licence_win->reshape(300,200,400,350);
 	licence_win->addComponent(licence_txtlbl);
+	licence_win->setVisible(core->FlagInfos);
 
 	return licence_win;
+}
+
+
+Component* stel_ui::createHelpWindow(void)
+{
+	help_txtlbl = new TextLabel(
+"4 Directions     : Deplacement RA/DE\n\
+Page Up/Down     : Zoom\n\
+CTRL + Up/Down   : Zoom\n\
+Left Clic        : Select Star\n\
+Right Clic       : Clear Pointer\n\
+CTRL + Left Clic : Clear Pointer\n\
+SPACE or Middle Clic : Center On Selected Object\n\
+C   : Drawing of the Constellations\n\
+V   : Names of the Constellations\n\
+E   : Equatorial Grid\n\
+Z   : Azimutal Grid\n\
+N   : Nebulas\n\
+P   : Planet Finder\n\
+G   : Ground\n\
+F   : Fog\n\
+Q   : Cardinal Points\n\
+A   : Atmosphere\n\
+H   : Help\n\
+4   : Ecliptic\n\
+5   : Equator\n\
+T   : Object Tracking\n\
+S   : Stars\n\
+I   : About Stellarium\n\
+ESC : Quit\n\
+F1  : Toggle fullscreen if possible.\n"
+    ,courierFont);
+
+	help_txtlbl->adjustSize();
+	help_txtlbl->setPos(10,10);
+	help_win = new StdBtWin("Help");
+	help_win->reshape(300,200,400,380);
+	help_win->addComponent(help_txtlbl);
+    help_win->setVisible(core->FlagHelp);
+	help_win->setOnHideBtCallback(makeFunctor((s_pcallback0)0,*this, &stel_ui::help_win_hideBtCallback));
+	return help_win;
+}
+
+void stel_ui::help_win_hideBtCallback(void)
+{
+	help_win->setVisible(0);
+	bt_flag_help->setState(0);
 }
 
 /**********************************************************************************/
@@ -406,8 +467,15 @@ int stel_ui::handle_keys(SDLKey key, S_GUI_VALUE state)
 			return 0;	// Will quit properly from stel_sdl
 		}
         if(key==SDLK_c)
-        {	
+        {
         	core->FlagAsterismDrawing=!core->FlagAsterismDrawing;
+			bt_flag_asterism_draw->setState(core->FlagAsterismDrawing);
+		}
+        if(key==SDLK_k)
+        {
+        	core->FlagConfig=!core->FlagConfig;
+			bt_flag_config->setState(core->FlagConfig);
+			config_win->setVisible(core->FlagConfig);
 		}
         if(key==SDLK_p)
         {	
@@ -416,27 +484,27 @@ int stel_ui::handle_keys(SDLKey key, S_GUI_VALUE state)
         if(key==SDLK_v)
         {
         	core->FlagAsterismName=!core->FlagAsterismName;
-            //BtConstellationsName->setActive(core->FlagConstellationName);
+            bt_flag_asterism_name->setState(core->FlagAsterismName);
 		}
         if(key==SDLK_z)
         {	
         	core->FlagAzimutalGrid=!core->FlagAzimutalGrid;
-            //BtAzimutalGrid->setActive(core->FlagAzimutalGrid);
+            bt_flag_azimuth_grid->setState(core->FlagAzimutalGrid);
 		}
         if(key==SDLK_e)
         {	
         	core->FlagEquatorialGrid=!core->FlagEquatorialGrid;
-            //BtEquatorialGrid->setActive(core->FlagEquatorialGrid);
+            bt_flag_equator_grid->setState(core->FlagEquatorialGrid);
 		}
         if(key==SDLK_n)
         {	
         	core->FlagNebulaName=!core->FlagNebulaName;
-            //BtNebula->setActive(core->FlagNebulaName);
+            bt_flag_nebula_name->setState(core->FlagNebulaName);
 		}
         if(key==SDLK_g)
         {	
         	core->FlagGround=!core->FlagGround;
-            //BtGround->setActive(core->FlagGround);
+            bt_flag_ground->setState(core->FlagGround);
 		}
         if(key==SDLK_f)
         {	
@@ -445,19 +513,18 @@ int stel_ui::handle_keys(SDLKey key, S_GUI_VALUE state)
         if(key==SDLK_q)
         {	
         	core->FlagCardinalPoints=!core->FlagCardinalPoints;
-            //BtCardinalPoints->setActive(core->FlagCardinalPoints);
+            bt_flag_cardinals->setState(core->FlagCardinalPoints);
 		}
         if(key==SDLK_a)
         {	
         	core->FlagAtmosphere=!core->FlagAtmosphere;
-            //BtAtmosphere->setActive(core->FlagAtmosphere);
+            bt_flag_atmosphere->setState(core->FlagAtmosphere);
 		}
         if(key==SDLK_h)
         {	
         	core->FlagHelp=!core->FlagHelp;
-            //BtHelp->setActive(core->FlagHelp);
-            //HelpWin->setVisible(core->FlagHelp);
-            if (core->FlagHelp && core->FlagInfos) core->FlagInfos=false;
+            bt_flag_help->setState(core->FlagHelp);
+			help_win->setVisible(core->FlagHelp);
 		}
         if(key==SDLK_4)
         {	
@@ -470,7 +537,7 @@ int stel_ui::handle_keys(SDLKey key, S_GUI_VALUE state)
         if(key==SDLK_t)
         {
 			core->navigation->set_flag_lock_equ_pos(!core->navigation->get_flag_lock_equ_pos());
-            //BtFollowEarth->setActive(navigation.get_flag_lock_equ_pos());
+            bt_flag_follow_earth->setState(core->navigation->get_flag_lock_equ_pos());
 		}
         if(key==SDLK_s)
         {	
