@@ -36,7 +36,7 @@ class Meteor
   Meteor( Projector *proj, navigator *nav, tone_reproductor* eye, double v);
   virtual ~Meteor();
   bool update(int delta_time);  // update position
-  bool draw(void);		// Draw the star
+  bool draw(Projector *proj, navigator* nav);		// Draw the star
   bool is_alive(void);          // see if burned out yet
 
  private:
@@ -51,12 +51,6 @@ class Meteor
   bool alive;      // is it still visible?
   float mag;	   // Apparent magnitude at head, 0-1
   float max_mag;  // 0-1
-
-  static Projector * projection;
-  static navigator * navigation;
-    /*
-      static tone_reproductor* eye;
-    */
 };
 
 

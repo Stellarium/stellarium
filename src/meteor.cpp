@@ -23,15 +23,8 @@
 #include "meteor.h"
 #include "stdlib.h"
 
-// static variables
-Projector* Meteor::projection = NULL;
-navigator* Meteor::navigation = NULL;
-
-Meteor::Meteor( Projector *proj, navigator* nav, tone_reproductor* eye, double v)
+Meteor::Meteor(Projector *proj, navigator* nav, tone_reproductor* eye, double v)
 {
-  projection = proj;
-  navigation = nav;
-
   //  velocity = 11+(double)rand()/((double)RAND_MAX+1)*v;  // abs range 11-72 km/s
   //TEMP
   velocity=v;
@@ -72,7 +65,7 @@ Meteor::Meteor( Projector *proj, navigator* nav, tone_reproductor* eye, double v
   // determine meteor model view matrix (want z in dir of travel of earth)
   // meteor life is so short, no need to recalculate
   double equ_rotation; // rotation needed to align with path of earth
-  Vec3d sun_dir = navigation->helio_to_earth_equ( Vec3d(0,0,0) );
+  Vec3d sun_dir = nav->helio_to_earth_equ( Vec3d(0,0,0) );
 
   Mat4d tmat = Mat4d::xrotation(-23.45f*M_PI/180.f);  // ecliptical tilt
   sun_dir.transfo4d(tmat);  // convert to ecliptical coordinates
@@ -91,7 +84,7 @@ Meteor::Meteor( Projector *proj, navigator* nav, tone_reproductor* eye, double v
   // Determine drawing color given magnitude and eye 
   // (won't be visible during daylight)
   Vec3d RGB = Vec3d(1,1,1);  // *** color varies somewhat depending on velocity
-  float MaxColorValue = MY_MAX(RGB[0],RGB[2]);
+  //float MaxColorValue = MY_MAX(RGB[0],RGB[2]);
 
   float Mag = (double)rand()/((double)RAND_MAX+1)*6.75f - 3;  // meteor visual magnitude
   mag = (5. + Mag) / 256.0;
@@ -105,7 +98,7 @@ Meteor::Meteor( Projector *proj, navigator* nav, tone_reproductor* eye, double v
   // Compute the equivalent star luminance for a 5 arc min circle and convert it
   // in function of the eye adaptation
   rmag = eye->adapt_luminance(term1);
-  rmag = rmag/powf(projection->get_fov(),0.85f)*50.f;
+  rmag = rmag/powf(proj->get_fov(),0.85f)*50.f;
 
   // if size of star is too small (blink) we put its size to 1.2 --> no more blink
   // And we compensate the difference of brighteness with cmag
@@ -158,7 +151,7 @@ bool Meteor::update(int delta_time)
 
 
 // returns true if visible
-bool Meteor::draw(void)
+bool Meteor::draw(Projector *proj, navigator* nav)
 {
 
   if(!alive) return(alive);
@@ -173,13 +166,13 @@ bool Meteor::draw(void)
   epos.transfo4d(mmat);
 
   // convert to local and correct for earth radius [since equ and local coordinates in stellarium use same 0 point!] 
-  spos = navigation->earth_equ_to_local( spos );
-  epos = navigation->earth_equ_to_local( epos );
+  spos = nav->earth_equ_to_local( spos );
+  epos = nav->earth_equ_to_local( epos );
   spos[2] -= EARTH_RADIUS;
   epos[2] -= EARTH_RADIUS;
 
-  int t1 = projection->project_local_check(spos/1216, start);  // 1216 is to scale down under 1 for desktop version
-  int t2 = projection->project_local_check(epos/1216, end);
+  int t1 = proj->project_local_check(spos/1216, start);  // 1216 is to scale down under 1 for desktop version
+  int t2 = proj->project_local_check(epos/1216, end);
 
   // don't draw if not visible (but may come into view)
   if( t1 + t2 == 0 ) return 1;
@@ -197,9 +190,9 @@ bool Meteor::draw(void)
     Vec3d posi = pos_internal; 
     posi[2] = position[2] + (pos_train[2] - position[2])/2;
     posi.transfo4d(mmat);
-    posi = navigation->earth_equ_to_local( posi );
+    posi = nav->earth_equ_to_local( posi );
     posi[2] -= EARTH_RADIUS;
-    projection->project_local(posi/1216, intpos);
+    proj->project_local(posi/1216, intpos);
 
     // draw dark to light
     glBegin(GL_LINE_STRIP);
