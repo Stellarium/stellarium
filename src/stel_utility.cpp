@@ -108,7 +108,7 @@ void rect_to_sphe(float *lng, float *lat, const Vec3f *v)
 
 
 // Calc the x,y coord on the screen with the X,Y and Z pos
-void Project(float objx_i,float objy_i,float objz_i,double & x ,double & y)
+void Project(float objx,float objy,float objz,double & x ,double & y)
 {
 	double z;
     GLdouble M[16];
@@ -117,11 +117,11 @@ void Project(float objx_i,float objy_i,float objz_i,double & x ,double & y)
     glGetDoublev(GL_MODELVIEW_MATRIX,M);
     glGetDoublev(GL_PROJECTION_MATRIX,P);
     glGetIntegerv(GL_VIEWPORT,V);
-    gluProject(objx_i,objy_i,objz_i,M,P,V,&x,&y,&z);
+    gluProject(objx,objy,objz,M,P,V,&x,&y,&z);
 }
 
 // Calc the x,y coord on the screen with the X,Y and Z pos
-void Project(float objx_i,float objy_i,float objz_i,double & x ,double & y, double & z)
+void Project(float objx,float objy,float objz,double & x ,double & y, double & z)
 {
     GLdouble M[16];
     GLdouble P[16];
@@ -129,8 +129,9 @@ void Project(float objx_i,float objy_i,float objz_i,double & x ,double & y, doub
     glGetDoublev(GL_MODELVIEW_MATRIX,M);
     glGetDoublev(GL_PROJECTION_MATRIX,P);
     glGetIntegerv(GL_VIEWPORT,V);
-    gluProject(objx_i,objy_i,objz_i,M,P,V,&x,&y,&z);
+    gluProject(objx,objy,objz,M,P,V,&x,&y,&z);
 }
+
 
 // For text printing
 void setOrthographicProjection(int w, int h)
@@ -141,12 +142,16 @@ void setOrthographicProjection(int w, int h)
     glScalef(1, -1, 1);             // invert the y axis, down is positive
     glTranslatef(0, -h, 0);         // mover the origin from the bottom left corner to the upper left corner
     glMatrixMode(GL_MODELVIEW);
+    glPushMatrix(); 
+    glLoadIdentity();
 }
 
 void resetPerspectiveProjection() 
-{   glMatrixMode(GL_PROJECTION);    // set the current matrix to GL_PROJECTION
+{   
+    glMatrixMode(GL_PROJECTION);    // set the current matrix to GL_PROJECTION
     glPopMatrix();                  // restore previous settings
     glMatrixMode(GL_MODELVIEW);     // get back to GL_MODELVIEW matrix
+    glPopMatrix(); 
 }
 
 

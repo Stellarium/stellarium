@@ -35,6 +35,8 @@
 #define NO_HALO 0
 #define WITH_HALO 1
 
+extern s_font * planet_name_font;
+
 using namespace std;
 
 class rotation_elements
@@ -82,6 +84,7 @@ protected:
 	planet * parent;
 	list<planet *> satellites;				// satellites of the planet
 };
+
 
 class ring
 {
