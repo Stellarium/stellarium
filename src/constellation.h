@@ -24,6 +24,7 @@
 #include "stellarium.h"
 #include "stel_utility.h"
 #include "s_font.h"
+#include "fader.h"
 
 class Constellation
 {
@@ -33,13 +34,19 @@ public:
     ~Constellation();
     int read(FILE *, Hip_Star_mgr * _VouteCeleste);
     void draw(Projector* prj, const Vec3f& lines_color) const;
-    void draw_name(s_font * constfont, Projector* prj) const;
+    void draw_name(s_font * constfont, Projector* prj, Vec3f color) const;
     void draw_art(Projector* prj, navigator* nav);
     const Constellation* is_star_in(const Hip_Star *) const;
 private:
-    void draw_optim(Projector* prj) const;
+    void draw_optim(Projector* prj, Vec3f color) const;
     void draw_art_optim(Projector* prj, navigator* nav);
     void set_common_name(string _name) { inter = _name; }
+
+	void update(int delta_time);
+	void show_line(bool b) {line_fader=b;}
+	void show_name(bool b) {name_fader=b;}
+	void show_art(bool b) {art_fader=b;}
+
     string name;
     char short_name[4];
     string inter;
@@ -53,6 +60,7 @@ private:
 	static s_font* constellation_font;		// Font used for load printing
 	
 	Vec3d art_vertex[9];
+	linear_fader art_fader, line_fader, name_fader;
 };
 
 #endif // _CONSTELLATION_H_

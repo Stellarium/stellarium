@@ -83,10 +83,13 @@ int Constellation::read(FILE *  fic, Hip_Star_mgr * _VouteCeleste)
 // Draw the Constellation lines
 void Constellation::draw(Projector* prj, const Vec3f& lines_color) const
 {
+
+	if(!line_fader.get_interstate()) return;
+
 	glDisable(GL_TEXTURE_2D);
     glDisable(GL_BLEND);
 
-	glColor3fv(lines_color);
+	glColor3fv(lines_color*line_fader.get_interstate());
 
     prj->set_orthographic_projection();	// set 2D coordinate
 
@@ -109,13 +112,17 @@ void Constellation::draw(Projector* prj, const Vec3f& lines_color) const
 
 // Draw the lines for the Constellation using the coords of the stars
 // (optimized for use thru the class Constellation_mgr only)
-void Constellation::draw_optim(Projector* prj) const
+void Constellation::draw_optim(Projector* prj, Vec3f color) const
 {
+
+	if(!line_fader.get_interstate()) return;
+
 	static Vec3d star1;
 	static Vec3d star2;
 
 	//	glDisable(GL_TEXTURE_2D);
     //glDisable(GL_BLEND);
+	glColor3fv(color*line_fader.get_interstate());
 
     for(unsigned int i=0;i<nb_segments;++i)
     {
@@ -131,8 +138,11 @@ void Constellation::draw_optim(Projector* prj) const
 
 
 // Draw the name
-void Constellation::draw_name(s_font * constfont, Projector* prj) const
+void Constellation::draw_name(s_font * constfont, Projector* prj, Vec3f color) const
 {
+	if(!name_fader.get_interstate()) return;
+	glColor3fv(color*name_fader.get_interstate());
+
 	gravity_label ? prj->print_gravity180(constfont, XYname[0], XYname[1], inter, 1, -constfont->getStrLen(inter)/2) :
 	constfont->print(XYname[0]-constfont->getStrLen(inter)/2, XYname[1], inter/*name*/);
 }
@@ -140,8 +150,11 @@ void Constellation::draw_name(s_font * constfont, Projector* prj) const
 // Draw the art texture, optimized function to be called thru a constellation manager only
 void Constellation::draw_art_optim(Projector* prj, navigator* nav) 
 {
-	if (art_tex)
+	float intensity = art_fader.get_interstate(); 
+	if (art_tex && intensity) 
 	{
+		glColor3f(intensity,intensity,intensity);
+
 		Vec3d v0, v1, v2, v3, v4, v5, v6, v7, v8;
 		bool b0, b1, b2, b3, b4, b5, b6, b7, b8; 
 
@@ -203,8 +216,12 @@ void Constellation::draw_art_optim(Projector* prj, navigator* nav)
 // Draw the art texture
 void Constellation::draw_art(Projector* prj, navigator* nav) 
 {
-	if (art_tex)
+
+	float intensity = art_fader.get_interstate(); 
+	if (art_tex && intensity) 
 	{
+		glColor3f(intensity,intensity,intensity);
+
 		glBlendFunc(GL_ONE, GL_ONE);
 		glEnable(GL_TEXTURE_2D);
 		glEnable(GL_BLEND);
@@ -283,4 +300,11 @@ const Constellation* Constellation::is_star_in(const Hip_Star * s) const
 		if (asterism[i]==s) return this;
     }
 	return NULL;
+}
+
+void Constellation::update(int delta_time) {
+	line_fader.update(delta_time);
+	name_fader.update(delta_time);
+	art_fader.update(delta_time);
+
 }
