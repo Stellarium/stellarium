@@ -40,11 +40,11 @@ public:
     int  set_sky_locale(const string& _sky_locale);
 	void set_art_fade_duration(float duration) {art_fader.set_duration((int)(duration*1000.f));}
 	void set_art_intensity(float _max) {art_fader.set_max_value(_max);}
-	void update(int delta_time) {art_fader.update(delta_time); lines_fader.update(delta_time); names_fader.update(delta_time);}
-	void show_art(bool b){art_fader = b;}
-	void show_lines(bool b){lines_fader = b;}
-	void show_names(bool b){names_fader = b;}
-	void set_selected(Constellation* c) {selected=c;}
+	void update(int delta_time);
+	void show_art(bool b);
+	void show_lines(bool b);
+	void show_names(bool b);
+	void set_selected(Constellation* c);
 private:
     int load(const string& catName, const string& artCatName,
 		Hip_Star_mgr * _VouteCeleste, const string& _font_fileName, int barx, int bary);
@@ -60,6 +60,7 @@ private:
 	linear_fader lines_fader;
 	linear_fader names_fader;
 	Constellation* selected;
+	bool art, lines, names;
 };
 
 #endif // _CONSTELLATION_MGR_H_

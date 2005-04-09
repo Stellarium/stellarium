@@ -43,6 +43,8 @@ Constellation_mgr::Constellation_mgr(string _data_dir, string _sky_culture, stri
   // load translated labels
   set_sky_locale(_sky_locale);
   skyLocale = _sky_locale;
+
+  art = lines = names = 0;
 }
 
 
@@ -259,54 +261,37 @@ int Constellation_mgr::load(const string& fileName, const string& artfileName, H
 // Draw all the constellations in the vector
 void Constellation_mgr::draw(Projector* prj) const
 {
-	if (!lines_fader.get_interstate()) return;
+
     glDisable(GL_TEXTURE_2D);
     glEnable(GL_BLEND);
-    glColor3fv(lines_color*lines_fader.get_interstate());
     prj->set_orthographic_projection();	// set 2D coordinate
 	
-	if (selected)
-	{
-		selected->draw_optim(prj);
-	}
-	else
-	{
-		vector<Constellation *>::const_iterator iter;
-		for(iter=asterisms.begin();iter!=asterisms.end();++iter)
+	vector<Constellation *>::const_iterator iter;
+	for(iter=asterisms.begin();iter!=asterisms.end();++iter)
 		{
-		(*iter)->draw_optim(prj);
+			(*iter)->draw_optim(prj, lines_color);
 		}
-	}
+	
     prj->reset_perspective_projection();
 }
 
 
 void Constellation_mgr::draw_art(Projector* prj, navigator* nav)
 {
-	if (!art_fader.get_interstate()) return;
 	
 	glBlendFunc(GL_ONE, GL_ONE);
 	glEnable(GL_TEXTURE_2D);
 	glEnable(GL_BLEND);
 	glEnable(GL_CULL_FACE);
 
-	// for fade in
-	glColor3f(art_fader.get_interstate(),art_fader.get_interstate(),art_fader.get_interstate());
-	
 	prj->set_orthographic_projection();
 	
-	if (selected)
-	{
-		selected->draw_art_optim(prj, nav);
-	}
-	else
-	{
-		vector<Constellation *>::const_iterator iter;
-		for(iter=asterisms.begin();iter!=asterisms.end();++iter)
+	vector<Constellation *>::const_iterator iter;
+	for(iter=asterisms.begin();iter!=asterisms.end();++iter)
 		{
 			(*iter)->draw_art_optim(prj, nav);
 		}
-	}
+
 	prj->reset_perspective_projection();
 	glDisable(GL_CULL_FACE);
 }
@@ -314,27 +299,19 @@ void Constellation_mgr::draw_art(Projector* prj, navigator* nav)
 // Draw the names of all the constellations
 void Constellation_mgr::draw_names(Projector* prj, bool _gravity_label)
 {
-	if (!names_fader.get_interstate()) return;
-	
 	Constellation::gravity_label = _gravity_label;
-	glColor3fv(names_color*names_fader.get_interstate());
     glEnable(GL_BLEND);
     glEnable(GL_TEXTURE_2D);
     prj->set_orthographic_projection();	// set 2D coordinate
-	if (selected) {
-		if(prj->project_prec_earth_equ_check(selected->XYZname, selected->XYname) )
-			selected->draw_name(asterFont, prj);
-	}
-	else
-	{	
-		vector<Constellation *>::iterator iter;
-		for(iter=asterisms.begin();iter!=asterisms.end();iter++)
+
+	vector<Constellation *>::iterator iter;
+	for(iter=asterisms.begin();iter!=asterisms.end();iter++)
 		{
 			// Check if in the field of view
 			if ( prj->project_prec_earth_equ_check((*iter)->XYZname, (*iter)->XYname) )
-				(*iter)->draw_name(asterFont, prj);
+				(*iter)->draw_name(asterFont, prj, names_color);
 		}
-	}
+
     prj->reset_perspective_projection();
 }
 
@@ -407,4 +384,77 @@ int Constellation_mgr::set_sky_locale(const string& _sky_locale) {
   }
   fclose(cnFile);
   return 1;
+}
+
+
+// update faders
+void Constellation_mgr::update(int delta_time) {
+
+	vector<Constellation *>::const_iterator iter;
+    for(iter=asterisms.begin();iter!=asterisms.end();++iter)
+    {
+		(*iter)->update(delta_time);
+    }
+
+}
+
+
+void Constellation_mgr::show_art(bool b) {
+
+	art = b;
+
+	if(selected) {
+		selected->show_art(b);
+	} else {
+		vector<Constellation *>::const_iterator iter;
+		for(iter=asterisms.begin();iter!=asterisms.end();++iter)
+			(*iter)->show_art(b);
+	}
+}
+
+
+void Constellation_mgr::show_lines(bool b) {
+	lines = b;
+
+	if(selected) {
+		selected->show_line(b);
+	} else {
+		vector<Constellation *>::const_iterator iter;
+		for(iter=asterisms.begin();iter!=asterisms.end();++iter)
+			(*iter)->show_line(b);
+	}
+}
+
+void Constellation_mgr::show_names(bool b) {
+
+	names = b;
+
+	if(selected) {
+		selected->show_name(b);
+	} else {
+		vector<Constellation *>::const_iterator iter;
+		for(iter=asterisms.begin();iter!=asterisms.end();++iter)
+			(*iter)->show_name(b);
+	}
+}
+
+void Constellation_mgr::set_selected(Constellation* c) {
+
+	selected = c;
+
+	// update states for other constellations to fade them out
+	if(selected != NULL) {
+
+		vector<Constellation *>::const_iterator iter;
+		for(iter=asterisms.begin();iter!=asterisms.end();++iter) {
+			if((*iter) != selected) {
+				(*iter)->show_line(0);
+				(*iter)->show_name(0);
+				(*iter)->show_art(0);
+			}
+		}
+	} else {
+
+		// TODO reset normal state (then don't need to set each loop in stel_core)
+	}
 }
