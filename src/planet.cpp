@@ -136,7 +136,6 @@ Vec3d planet::get_earth_equ_pos(const navigator * nav) const
 void planet::compute_position(double date)
 {
 
-
 	if (delta_orbitJD > 0 && (fabs(last_orbitJD-date)>delta_orbitJD || !orbit_cached))
 		{
 
@@ -347,6 +346,11 @@ void planet::draw(int hint_ON, Projector* prj, const navigator * nav, const tone
 				  int flag_point, int flag_orbits, int flag_trails)
 {
 
+	// TEMP -- place in command interface 
+	show_hint(hint_ON);
+	show_trail(flag_trails);
+
+
 	Mat4d mat = mat_local_to_parent;
 	planet * p = parent;
 	while (p!=NULL && p->parent!=NULL)
@@ -371,14 +375,12 @@ void planet::draw(int hint_ON, Projector* prj, const navigator * nav, const tone
 			float ang_dist = 300.f*atan(get_ecliptic_pos().length()/get_earth_equ_pos(nav).length())/prj->get_fov();
 			if (ang_dist==0.f) ang_dist = 1.f; // if ang_dist == 0, the planet is sun..
 	    
-			if( flag_orbits ) {
-				// by putting here, only draw orbit if planet is visible for clarity
-				draw_orbit(nav, prj);
-			}
-
-			if(flag_trails) draw_trail(nav, prj);
+			// by putting here, only draw orbit if planet is visible for clarity
+			draw_orbit(nav, prj);  // TODO - fade in here also...
+			
+			draw_trail(nav, prj);
 	    
-			if (hint_ON && ang_dist>0.25)
+			if (ang_dist>0.25)
 				{
 					if (ang_dist>1.f) ang_dist = 1.f;
 					//glColor4f(0.5f*ang_dist,0.5f*ang_dist,0.7f*ang_dist,1.f*ang_dist);
@@ -411,6 +413,11 @@ void planet::draw(int hint_ON, Projector* prj, const navigator * nav, const tone
 void planet::draw_hints(const navigator* nav, const Projector* prj)
 {
 
+	//	printf("Out level %f\n", hint_fader.get_interstate());
+
+
+	if(!hint_fader.get_interstate()) return;
+
 	prj->set_orthographic_projection();    // 2D coordinate
 
 	glEnable(GL_BLEND);
@@ -423,14 +430,17 @@ void planet::draw_hints(const navigator* nav, const Projector* prj)
 	else sprintf(scale_str,"%s (x%.1f)", common_name.c_str(), sphere_scale);
 	float tmp = 10.f + get_on_screen_size(prj, nav)/sphere_scale/2.f; // Shift for common_name printing
 
-	glColor4f(label_color[0], label_color[1], label_color[2],1.f);
+	//	glColor4f(label_color[0], label_color[1], label_color[2],1.f);
+	//	glColor4f(label_color[0], label_color[1], label_color[2],hint_fader.get_interstate());
+	glColor3fv(label_color*hint_fader.get_interstate());
 	gravity_label ? prj->print_gravity180(planet_name_font, screenPos[0],screenPos[1], scale_str, 1, tmp, tmp) :
 		planet_name_font->print(screenPos[0]+tmp,screenPos[1]+tmp, scale_str);
 
 	// hint disapears smoothly on close view
 	tmp -= 10.f;
 	if (tmp<1) tmp=1;
- 	glColor4f(label_color[0]/tmp, label_color[1]/tmp, label_color[2]/tmp,1.f/tmp);
+ 	//glColor4f(label_color[0]/tmp, label_color[1]/tmp, label_color[2]/tmp,hint_fader.get_interstate()/tmp);
+	glColor3fv(label_color*hint_fader.get_interstate()/tmp);
 
 	// Draw the 2D small circle
 	glDisable(GL_TEXTURE_2D);
@@ -717,6 +727,8 @@ void ring::draw(const Projector* prj, const Mat4d& mat)
 // draw orbital path of planet
 void planet::draw_orbit(const navigator * nav, const Projector* prj) {
 
+	if(!orbit_fader.get_interstate()) return;
+
 	Vec3d onscreen;
 
 	if(!re.sidereal_period) return;
@@ -727,7 +739,7 @@ void planet::draw_orbit(const navigator * nav, const Projector* prj) {
 	glDisable(GL_LIGHTING);
 	glDisable(GL_TEXTURE_2D);
 
-	glColor3fv(orbit_color);
+	glColor3fv(orbit_color*orbit_fader.get_interstate());
 	
 	int on=0;
 	int d;
@@ -781,6 +793,8 @@ void planet::draw_orbit(const navigator * nav, const Projector* prj) {
 // draw trail of planet as seen from earth
 void planet::draw_trail(const navigator * nav, const Projector* prj) {
 
+	if(!trail_fader.get_interstate()) return;
+
 	Vec3d onscreen1;
 	Vec3d onscreen2;
 
@@ -792,7 +806,7 @@ void planet::draw_trail(const navigator * nav, const Projector* prj) {
 	glDisable(GL_LIGHTING);
 	glDisable(GL_TEXTURE_2D);
 
-	glColor3fv(trail_color);
+	glColor3fv(trail_color*trail_fader.get_interstate());
 	
 	list<TrailPoint>::iterator iter;  
 	list<TrailPoint>::iterator nextiter;
@@ -900,4 +914,13 @@ void planet::start_trail(void) {
 // stop accumulating trail data
 void planet::end_trail(void) {
 	trail_on = 0;
+}
+
+
+void planet::update(int delta_time) {
+
+	hint_fader.update(delta_time);
+	orbit_fader.update(delta_time);
+	trail_fader.update(delta_time);
+
 }
