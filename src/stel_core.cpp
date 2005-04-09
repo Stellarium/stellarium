@@ -370,14 +370,6 @@ void stel_core::draw(int delta_time)
 	// Draw the planets
 	if (FlagPlanets) {
 
-	  // Selecting Sun doesn't turn off orbits, becuase it's orbit is the ecliptic (separate control)
-	  // plus makes viewing orbits easier when center on Sun
-	  if( FlagPlanetsOrbits && selected_planet && selected_planet->get_name() != "Sun") {
-	    // draw orbit only for selected planet
-		  //	    selected_planet->draw_orbit(navigation, projection);
-		  //		  if(FlagPlanetsOrbits) selected_planet->show_orbit(1);
-	  }
-
 	  ssystem->draw(selected_planet, FlagPlanetsHints, projection, navigation, tone_converter,
 			FlagGravityLabels, FlagPointStar, 
 					FlagPlanetsOrbits,
