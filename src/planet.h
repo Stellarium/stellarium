@@ -29,6 +29,7 @@
 #include "vecmath.h"
 #include "stel_object.h"
 #include "callbacks.hpp"
+#include "fader.h"
 
 // The callback type for the external position computation function
 typedef boost::callback<void, double, double*> pos_func_type;
@@ -165,6 +166,10 @@ public:
 	// create a stencil of the planet (currently just the moon) in stencil buffer
 	int create_stencil(const navigator* nav, const Projector *prj);
 
+	void update(int delta_time);
+	void show_hint(bool b){hint_fader = b;}
+	void show_orbit(bool b){orbit_fader = b;}
+	void show_trail(bool b){trail_fader = b;}
 
 protected:
 	// Return the radius of a circle containing the object on screen
@@ -240,6 +245,8 @@ protected:
 	int MaxTrail;
 	double last_trailJD;
 	bool first_point;  // if need to take first point of trail still
+
+	linear_fader hint_fader, orbit_fader, trail_fader;
 
 };
 

@@ -244,8 +244,8 @@ void stel_core::update(int delta_time)
 	// Field of view
 	projection->update_auto_zoom(delta_time);
 
-	// planet trails (call after nav is updated)
-	ssystem->update_trails(navigation);
+	// update faders and planet trails (call after nav is updated)
+	ssystem->update(delta_time, navigation);
 
 	// Move the view direction and/or fov
 	update_move(delta_time);
@@ -374,12 +374,13 @@ void stel_core::draw(int delta_time)
 	  // plus makes viewing orbits easier when center on Sun
 	  if( FlagPlanetsOrbits && selected_planet && selected_planet->get_name() != "Sun") {
 	    // draw orbit only for selected planet
-	    selected_planet->draw_orbit(navigation, projection);
+		  //	    selected_planet->draw_orbit(navigation, projection);
+		  //		  if(FlagPlanetsOrbits) selected_planet->show_orbit(1);
 	  }
 
-	  ssystem->draw(FlagPlanetsHints, projection, navigation, tone_converter,
+	  ssystem->draw(selected_planet, FlagPlanetsHints, projection, navigation, tone_converter,
 			FlagGravityLabels, FlagPointStar, 
-			FlagPlanetsOrbits && (selected_planet==NULL || selected_planet->get_name() == "Sun"),
+					FlagPlanetsOrbits,
 			FlagObjectTrails);
 
 	}

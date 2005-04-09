@@ -254,9 +254,29 @@ void SolarSystem::compute_trans_matrices(double date)
 
 // Draw all the elements of the solar system
 // We are supposed to be in heliocentric coordinate
-void SolarSystem::draw(int hint_ON, Projector * prj, const navigator * nav, const tone_reproductor* eye, bool _gravity_label, 
-		       int flag_point, int flag_orbits, int flag_trails)
+void SolarSystem::draw(planet* selected, int hint_ON, Projector * prj, const navigator * nav, 
+					   const tone_reproductor* eye, bool _gravity_label, 
+					   int flag_point, int flag_orbits, int flag_trails)
 {
+
+	// if a planet is selected and orbits are on, fade out non-selected ones
+	bool orb;
+	vector<planet*>::iterator iter = system_planets.begin();
+	if(flag_orbits && selected != NULL && selected->get_name() != "Sun") {
+		while (iter != system_planets.end()) {
+			if((*iter)->get_name() == selected->get_name()) orb = 1;
+			else orb = 0;
+			(*iter)->show_orbit(orb);
+			iter++;
+		}
+	} else {
+		while (iter != system_planets.end()) {
+			(*iter)->show_orbit(flag_orbits);
+			iter++;
+		}
+	}
+
+
 	planet::set_gravity_label_flag(_gravity_label);
 
 	// Set the light parameters taking sun as the light source
@@ -281,7 +301,7 @@ void SolarSystem::draw(int hint_ON, Projector * prj, const navigator * nav, cons
 
 	// Compute each planet distance to the observer
 	Vec3d obs_helio_pos = nav->get_observer_helio_pos();
-    vector<planet*>::iterator iter = system_planets.begin();
+    iter = system_planets.begin();
     while (iter != system_planets.end())
     {
         (*iter)->compute_distance(obs_helio_pos);
@@ -588,4 +608,17 @@ void SolarSystem::set_object_scale(float scale) {
 
 	planet::set_object_scale(scale);
 	
+}
+
+
+void SolarSystem::update(int delta_time, navigator* nav) {
+    vector<planet*>::iterator iter = system_planets.begin();
+    while (iter != system_planets.end())
+    {
+        (*iter)->update_trail(nav);
+        (*iter)->update(delta_time);
+        iter++;
+    }
+
+
 }
