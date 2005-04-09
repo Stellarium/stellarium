@@ -20,6 +20,7 @@
 #ifndef _FADER_H_
 #define _FADER_H_
 
+#include <stdio.h>
 
 // Class which manages a (usually smooth) transition between two states (typically ON/OFF) in function of a counter
 // It used for various purpose like smooth transitions between 
@@ -63,13 +64,17 @@ public:
 protected:
 };
 
+// Please note that state is updated instantaneously, so if you need to draw something fading in
+// and out, you need to check the interstate value (!=0) to know to draw when on AND during transitions
 class linear_fader : public fader
 {
 public:
 	// Create and initialise to default
 	linear_fader(int _duration=1000, float _min_value=0.f, float _max_value=1.f, bool _state=false) 
-		: fader(_state, _min_value, _max_value), is_transiting(false), duration(_duration)
+		: fader(_state, _min_value, _max_value)
 	{
+		is_transiting = false;
+		duration = _duration;
 		interstate = state ? max_value : min_value;
 	}
 	
@@ -85,44 +90,50 @@ public:
 			// Transition is over
 			is_transiting = false;
 			interstate = target_value;
-			state = (target_value==max_value) ? true : false;
+			// state = (target_value==max_value) ? true : false;
 		}
 		else
 		{
 			interstate = start_value + (target_value - start_value) * counter/duration;
 		}
+
+		//		printf("Counter %d  interstate %f\n", counter, interstate);
 	}
 	
 	// Get current switch state
 	float get_interstate(void) const { return interstate;}
 	float get_interstate_percentage(void) const {return 100.f * (interstate-min_value)/(max_value-min_value);}
 	
-	// Switchors can be used just as bools
+	// Faders can be used just as bools
 	fader& operator=(bool s)
 	{
-		// If we are not already transiting and the state does not change, do nothing
-		if (s==state && !is_transiting) return *this;
-		else
-		{
-			// We start a new transition or continue a transition
-			state = true;
+
+		if(is_transiting) {
+			// if same end state, no changes
+			if(s == state) return *this;
+			
+			// otherwise need to reverse course
+			state = s;
+			counter = duration - counter;
+			float temp = start_value;
+			start_value = target_value;
+			target_value = temp;
+			
+		} else {
+
+			if(state == s) return *this;  // no change
+
+			// set up and begin transit
+			state = s;
+			start_value = s ? min_value : max_value;
 			target_value = s ? max_value : min_value;
-			if (is_transiting)
-			{
-				counter = (int)(0.5f + fabs((interstate-start_value)/(target_value-start_value)) * duration);
-				start_value = interstate;
-			}
-			else
-			{
-				start_value = s ? min_value : max_value;
-				counter=0;
-				is_transiting = true;
-			}
+			counter=0;
+			is_transiting = true;
 		}
 		return *this;
 	}
 	
-	void set_duration(int _duration) {duration = _duration;}
+	void set_duration(int _duration) {duration = _duration; printf("Duration: %d\n", duration);}
 	void set_min_value(float _min) {min_value = _min;}
 	void set_max_value(float _max) {max_value = _max;}
 	
@@ -133,5 +144,122 @@ protected:
 	int counter;
 	float interstate;
 };
+
+
+// Please note that state is updated instantaneously, so if you need to draw something fading in
+// and out, you need to check the interstate value (!=0) to know to draw when on AND during transitions
+class parabolic_fader : public fader
+{
+public:
+	// Create and initialise to default
+	parabolic_fader(int _duration=1000, float _min_value=0.f, float _max_value=1.f, bool _state=false) 
+		: fader(_state, _min_value, _max_value)
+	{
+		is_transiting = false;
+		duration = _duration;
+		interstate = state ? max_value : min_value;
+	}
+	
+    ~parabolic_fader() {;}
+	
+	// Increments the internal counter of delta_time ticks
+	void update(int delta_ticks)
+	{
+		if (!is_transiting) return; // We are not in transition
+		counter+=delta_ticks;
+		if (counter>=duration)
+		{
+			// Transition is over
+			is_transiting = false;
+			interstate = target_value;
+			// state = (target_value==max_value) ? true : false;
+		}
+		else
+		{
+			interstate = start_value + (target_value - start_value) * counter/duration;
+			interstate *= interstate;
+		}
+
+		// printf("Counter %d  interstate %f\n", counter, interstate);
+	}
+	
+	// Get current switch state
+	float get_interstate(void) const { return interstate;}
+	float get_interstate_percentage(void) const {return 100.f * (interstate-min_value)/(max_value-min_value);}
+	
+	// Faders can be used just as bools
+	fader& operator=(bool s)
+	{
+
+		if(is_transiting) {
+			// if same end state, no changes
+			if(s == state) return *this;
+			
+			// otherwise need to reverse course
+			state = s;
+			counter = duration - counter;
+			float temp = start_value;
+			start_value = target_value;
+			target_value = temp;
+			
+		} else {
+
+			if(state == s) return *this;  // no change
+
+			// set up and begin transit
+			state = s;
+			start_value = s ? min_value : max_value;
+			target_value = s ? max_value : min_value;
+			counter=0;
+			is_transiting = true;
+		}
+		return *this;
+	}
+	
+	void set_duration(int _duration) {duration = _duration; printf("Duration: %d\n", duration);}
+	void set_min_value(float _min) {min_value = _min;}
+	void set_max_value(float _max) {max_value = _max;}
+	
+protected:
+	bool is_transiting;
+	int duration;
+	float start_value, target_value;
+	int counter;
+	float interstate;
+};
+
+
+/* better idea but not working...
+class parabolic_fader : public linear_fader
+{
+public:
+	parabolic_fader(int _duration=1000, float _min_value=0.f, float _max_value=1.f, bool _state=false) 
+		: linear_fader(_duration, _min_value, _max_value, _state)
+		{
+		}
+	
+	// Increments the internal counter of delta_time ticks
+	void update(int delta_ticks)
+	{
+
+		printf("Counter %d  interstate %f\n", counter, interstate);
+		if (!is_transiting) return; // We are not in transition
+		counter+=delta_ticks;
+		if (counter>=duration)
+		{
+			// Transition is over
+			is_transiting = false;
+			interstate = target_value;
+		}
+		else
+		{
+			interstate = start_value + (target_value - start_value) * counter/duration;
+			interstate *= interstate;
+		}
+
+		printf("Counter %d  interstate %f\n", counter, interstate);
+	}
+};
+*/
 
 #endif //_FADER_H_

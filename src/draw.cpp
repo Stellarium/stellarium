@@ -94,7 +94,7 @@ SkyGrid::~SkyGrid()
 
 void SkyGrid::draw(const Projector* prj) const
 {
-	if (!fader) return;
+	if (!fader.get_interstate()) return;
 
 	glDisable(GL_TEXTURE_2D);
 	glEnable(GL_BLEND);	
@@ -279,7 +279,7 @@ SkyLine::~SkyLine()
 
 void SkyLine::draw(const Projector* prj) const
 {
-	if (!fader) return;
+	if (!fader.get_interstate()) return;
 
 	Vec3d pt1;
 	Vec3d pt2;
