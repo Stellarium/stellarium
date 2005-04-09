@@ -52,7 +52,7 @@ void stel_atmosphere::compute_color(double JD, Vec3d sunPos, Vec3d moonPos, floa
 	float latitude, float altitude, float temperature, float relative_humidity)
 {
 	// no need to calculate if not visible
-	if(!fader)
+	if(!fader.get_interstate())
 	{
 		atm_intensity = 0;
 		world_adaptation_luminance = 3.75f;
@@ -178,7 +178,7 @@ void stel_atmosphere::compute_color(double JD, Vec3d sunPos, Vec3d moonPos, floa
 // Draw the atmosphere using the precalc values stored in tab_sky
 void stel_atmosphere::draw(Projector* prj, int delta_time)
 {
-	if(fader)
+	if(fader.get_interstate())
 	{
 
 	  // printf("Atm int: %f\n", atm_intensity);
