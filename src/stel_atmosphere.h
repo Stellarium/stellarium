@@ -60,7 +60,7 @@ private:
 	float atm_intensity;
 // 	float ai;               // used to calculate atm_intensity via curve function
 // 	float fade_duration;    // length of time, in miliseconds, for fade in and out
-	linear_fader fader;
+	parabolic_fader fader;
 };
 
 #endif // _STEL_ATMOSTPHERE_H_

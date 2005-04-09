@@ -259,7 +259,7 @@ int Constellation_mgr::load(const string& fileName, const string& artfileName, H
 // Draw all the constellations in the vector
 void Constellation_mgr::draw(Projector* prj) const
 {
-	if (lines_fader==false) return;
+	if (!lines_fader.get_interstate()) return;
     glDisable(GL_TEXTURE_2D);
     glEnable(GL_BLEND);
     glColor3fv(lines_color*lines_fader.get_interstate());
@@ -283,7 +283,7 @@ void Constellation_mgr::draw(Projector* prj) const
 
 void Constellation_mgr::draw_art(Projector* prj, navigator* nav)
 {
-	if (art_fader==false) return;
+	if (!art_fader.get_interstate()) return;
 	
 	glBlendFunc(GL_ONE, GL_ONE);
 	glEnable(GL_TEXTURE_2D);
@@ -314,7 +314,7 @@ void Constellation_mgr::draw_art(Projector* prj, navigator* nav)
 // Draw the names of all the constellations
 void Constellation_mgr::draw_names(Projector* prj, bool _gravity_label)
 {
-	if (names_fader==false) return;
+	if (!names_fader.get_interstate()) return;
 	
 	Constellation::gravity_label = _gravity_label;
 	glColor3fv(names_color*names_fader.get_interstate());
