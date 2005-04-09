@@ -45,8 +45,9 @@ public:
     void compute_trans_matrices(double date);
 
 	// Draw all the elements of the solar system
-    void draw(int hint_ON, Projector * du, const navigator * nav, const tone_reproductor* eye, bool _gravity_label, 
-	      int flag_point, int flag_orbits, int flag_trails);
+    void draw(planet *selected, int hint_ON, Projector * du, const navigator * nav, 
+			  const tone_reproductor* eye, bool _gravity_label, 
+			  int flag_point, int flag_orbits, int flag_trails);
 
 	// Search if any planet is close to position given in earth equatorial position.
 	planet* search(Vec3d, const navigator * nav, const Projector * prj);
@@ -65,6 +66,7 @@ public:
 	void set_trail_color(const Vec3f _color);
 	void update_trails(const navigator* nav);
 	void set_object_scale(float scale);
+	void update(int delta_time, navigator* nav);
 
 private:
 	planet* sun;
