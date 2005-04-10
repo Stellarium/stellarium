@@ -16,7 +16,7 @@ optional list of arguments in the form of name/value pairs. <br>
   <li>Argument values requiring included whitespace can be enclosed in
 double quotes ("This is a value with spaces."). <br>
   </li>
-  <li>Commands and argument names are case insensitive. <br>
+  <li>Commands and argument names are case insensitive, however argument values are typically case sensitive. <br>
   </li>
   <li>Argument pairs can be arranged in any order.<br>
   </li>
@@ -29,7 +29,7 @@ ARGUMENT_VALUE2 ...<br>
 <ul>
   <li>select planet Jupiter</li>
   <li>flag atmosphere on</li>
-  <li>date absolute 1999-08-11T12:00:00</li>
+  <li>date utc 1999-08-11T12:00:00</li>
   <li>wait duration 2.31</li>
   <li>moveto lat 45.7 lon -122 duration 5<br>
   </li>
@@ -88,6 +88,20 @@ out<br>
       <td> <br>
       </td>
     </tr>
+
+    <tr>
+      <td>clear<br>
+      </td>
+      <td>&nbsp;<br>
+      </td>
+      <td>&nbsp;
+      </td>
+      <td>Turn off atmosphere, fog, ground, and all labels, lines, and art.  
+Turn planet, star, and nebula rendering on.  Deselect any selected objects.<br>
+      </td>
+    </tr>
+
+
     <tr>
       <td colspan="1" rowspan="3">date<br>
       <br>
@@ -180,7 +194,31 @@ off<br>
 0<br>
 toggle </td>
       <td>Set rendering flags. One argument name per command allowed
-currently. </td>
+currently.<p>
+
+The following flags are key user settings 
+and are not accessible from scripts:<p>
+
+constellation_pick<br>
+enable_move_keys<br>
+enable_move_mouse<br>
+enable_tui_menu<br>
+enable_zoom_keys<br>
+gravity_labels<br>
+help<br>
+horizon<br>
+infos<br>
+menu<br>
+show_appname<br>
+show_date<br>
+show_fov<br>
+show_fps<br>
+show_gravity_ui<br>
+show_time<br>
+show_topbar<br>
+utc_time<br>
+
+</td>
     </tr>
     <tr>
       <td rowspan="7" style="vertical-align: top;">image<br>
