@@ -107,7 +107,7 @@ public:
 
 	// Draw the planet, if hint_ON is != 0 draw a circle and the name as well
 	void draw(int hint_ON, Projector* prj, const navigator* nav, const tone_reproductor* eye, 
-		  int flag_point, int flag_orbits, int flag_trails);
+		  int flag_point, int flag_trails);
 
 	// Add the given planet in the satellite list
 	void add_satellite(planet*);

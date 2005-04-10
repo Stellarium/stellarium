@@ -253,33 +253,33 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 
   } else if(command=="image") {
 
-    if(args["name"]=="") {
-      cout << "Image name required" << endl;
-      status = 0;
-    } else if(args["action"]=="drop") {
-      stcore->script_images->drop_image(args["name"]);
-    } else {
-      if(args["action"]=="load" && args["filename"]!="") {
-	if(stcore->scripts->is_playing()) 
-	  stcore->script_images->load_image(stcore->scripts->get_script_path() + args["filename"], args["name"]);
-	else stcore->script_images->load_image(stcore->DataRoot + "/" + args["filename"], args["name"]);
-      
-	Image * img = stcore->script_images->get_image(args["name"]);
-      
-	if(img != NULL) {
-	  if(args["alpha"]!="") img->set_alpha(str_to_double(args["alpha"]), 
-					       str_to_double(args["duration"]));
-	  if(args["scale"]!="") img->set_scale(str_to_double(args["scale"]), 
-					       str_to_double(args["duration"]));
-	  if(args["rotation"]!="") img->set_rotation(str_to_double(args["rotation"]), 
-						     str_to_double(args["duration"]));
-	  if(args["xpos"]!="" && args["ypos"]!="") 
-	    img->set_location(str_to_double(args["xpos"]), 
-			      str_to_double(args["ypos"]), 
-			      str_to_double(args["duration"]));
-	}
-      }
-    }
+	  if(args["name"]=="") {
+		  cout << "Image name required" << endl;
+		  status = 0;
+	  } else if(args["action"]=="drop") {
+		  stcore->script_images->drop_image(args["name"]);
+	  } else {
+		  if(args["action"]=="load" && args["filename"]!="") {
+			  if(stcore->scripts->is_playing()) 
+				  stcore->script_images->load_image(stcore->scripts->get_script_path() + args["filename"], args["name"]);
+			  else stcore->script_images->load_image(stcore->DataRoot + "/" + args["filename"], args["name"]);
+		  }
+
+		  Image * img = stcore->script_images->get_image(args["name"]);
+		  
+		  if(img != NULL) {
+			  if(args["alpha"]!="") img->set_alpha(str_to_double(args["alpha"]), 
+												   str_to_double(args["duration"]));
+			  if(args["scale"]!="") img->set_scale(str_to_double(args["scale"]), 
+												   str_to_double(args["duration"]));
+			  if(args["rotation"]!="") img->set_rotation(str_to_double(args["rotation"]), 
+														 str_to_double(args["duration"]));
+			  if(args["xpos"]!="" && args["ypos"]!="") 
+				  img->set_location(str_to_double(args["xpos"]), 
+									str_to_double(args["ypos"]), 
+									str_to_double(args["duration"]));
+		  }
+	  }
   } else if(command=="audio" && args["action"]=="play" && args["filename"]!="") {
     // only one track at a time allowed
     if(audio) delete audio;

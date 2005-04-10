@@ -33,13 +33,12 @@ Image::Image( string filename, string name) {
   // load image using alpha channel in image, otherwise no transparency
   // other than through set_alpha method -- could allow alpha load option from command 
 
-  // TODO - needs to take path outside texture dir
-  image_tex = new s_texture(filename, TEX_LOAD_TYPE_PNG_ALPHA);  // what if it doesn't load?
+  image_tex = new s_texture(1, filename, TEX_LOAD_TYPE_PNG_ALPHA);  // what if it doesn't load?
 
   int img_w, img_h;
   image_tex->getDimensions(img_w, img_h);
 
-  //  cout << "script image: " << img_w << " " << img_h << endl;
+  cout << "script image: (" << filename << ") " << img_w << " " << img_h << endl;
 
   if(img_h == 0) image_ratio = -1;  // no image loaded
   else image_ratio = (float)img_w/img_h;
