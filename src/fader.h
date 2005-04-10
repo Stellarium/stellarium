@@ -216,7 +216,7 @@ public:
 		return *this;
 	}
 	
-	void set_duration(int _duration) {duration = _duration; printf("Duration: %d\n", duration);}
+	void set_duration(int _duration) {duration = _duration;}
 	void set_min_value(float _min) {min_value = _min;}
 	void set_max_value(float _max) {max_value = _max;}
 	

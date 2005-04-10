@@ -141,8 +141,6 @@ void stel_core::init(void)
 	atmosphere = new stel_atmosphere();
 	atmosphere->set_fade_duration(AtmosphereFadeDuration);
 
-	printf("Atm duration: %f\n", AtmosphereFadeDuration);
-
 	tone_converter = new tone_reproductor();
 
 	equ_grid = new SkyGrid(EQUATORIAL, EquatorialColor, DataDir + "spacefont.txt", "spacefont");
@@ -198,7 +196,7 @@ void stel_core::init(void)
 	selected_planet=NULL;	// Fix a bug on macosX! Thanks Fumio!
 		
 	// could load a startup script
-	commander->execute_command("script action play filename ./scripts/startup.sts");
+	//commander->execute_command("script action play filename ./scripts/startup.sts");
 }
 
 void stel_core::quit(void)

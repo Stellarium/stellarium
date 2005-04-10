@@ -24,31 +24,49 @@
 
 #ifdef HAVE_SDL_MIXER_H
 Audio::Audio(std::string filename, std::string name) {
-  track = Mix_LoadMUS(filename.c_str());
-  track_name = name;
+    // audio parameters (could be set as parameters to this constructor)
+    int audio_rate = 22050;
+    Uint16 audio_format = AUDIO_S16SYS; /* 16-bit stereo */  // TODO: cross platform issues?
+    int audio_channels = 2;
+    int audio_buffers = 4096;
+
+	// initialize audio
+	if(Mix_OpenAudio(audio_rate, audio_format, audio_channels, audio_buffers)) {
+		printf("Unable to open audio!\n");
+		return;
+		// TODO: how to test this case?
+	}
+
+	track = Mix_LoadMUS(filename.c_str());
+	if(track == NULL) 	std::cout << "Could not load audio file " << filename << "\n";
+	track_name = name;
 }
 
 Audio::~Audio() {
   Mix_HaltMusic(); // stop playing
   Mix_FreeMusic(track);  // free memory
+
+  // stop audio use
+  Mix_CloseAudio();
 }
 
 void Audio::play(bool loop) {
-  std::cout << "now playing audio\n";
-  if(loop) Mix_PlayMusic(track, -1);
-  else Mix_PlayMusic(track, 0);
+	
+	if(loop) Mix_PlayMusic(track, -1);
+	else Mix_PlayMusic(track, 0);
+	std::cout << "now playing audio\n";
 }
 
 void Audio::pause() {
-  Mix_PauseMusic();
+	Mix_PauseMusic();
 }
 
 void Audio::resume() {
-  Mix_ResumeMusic();
+	Mix_ResumeMusic();
 }
 
 void Audio::stop() {
-  Mix_HaltMusic();
+	Mix_HaltMusic();
 }
 #else
 // SDL_mixer is not available - no audio
