@@ -187,7 +187,7 @@ void stel_ui::init_tui(void)
 	// 6. Scripts
 	tui_scripts_local = new s_tui::MultiSet_item<string>("6.1 Local Script: ");
 	tui_scripts_local->addItemList(TUI_SCRIPT_MSG + string("\n") 
-				       + core->scripts->get_script_list(core->DataRoot + "/scripts/")); 
+				       + core->scripts->get_script_list(core->DataDir + "scripts/")); 
 	tui_scripts_local->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb_scripts_local));
 	tui_menu_scripts->addComponent(tui_scripts_local);
 
@@ -465,7 +465,7 @@ void stel_ui::tui_cb_scripts_local() {
   
   if(tui_scripts_local->getCurrent()!=TUI_SCRIPT_MSG){
     core->SelectedScript = tui_scripts_local->getCurrent();
-    core->SelectedScriptDirectory = core->DataRoot + "/scripts/";
+    core->SelectedScriptDirectory = core->DataDir + "scripts/";
     // to reduce confusion for user, clear out removeable script selection as well
     if(core->ScriptRemoveableDiskMounted) tui_scripts_removeable->setCurrent(TUI_SCRIPT_MSG);
   } else {

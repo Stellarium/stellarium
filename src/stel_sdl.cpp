@@ -43,11 +43,6 @@ void stel_sdl::init(void)
     Screen = NULL;
 
 #ifdef HAVE_SDL_MIXER_H
-    // audio parameters
-    int audio_rate = 22050;
-    Uint16 audio_format = AUDIO_S16SYS; /* 16-bit stereo */
-    int audio_channels = 2;
-    int audio_buffers = 4096;
 
     // Init the SDL library, the VIDEO subsystem    
     if(SDL_Init(SDL_INIT_VIDEO |  SDL_INIT_AUDIO | SDL_INIT_NOPARACHUTE)<0)
@@ -63,12 +58,15 @@ void stel_sdl::init(void)
     } 
 	else
 	{
+		/*
 		// initialized with audio enabled
 		// TODO: only initi audio if config option allows and script needs
 		if(Mix_OpenAudio(audio_rate, audio_format, audio_channels, audio_buffers))
 		{
 			printf("Unable to open audio!\n");
 		}
+
+		*/
 	}
 #else
 	// SDL_mixer is not available - no audio
