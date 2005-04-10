@@ -43,9 +43,10 @@ class s_texture
 {
 public:
     s_texture(const string& _textureName);
+    s_texture(bool full_path, const string& _textureName, int _loadType);
     s_texture(const string& _textureName, int _loadType);
     virtual ~s_texture();
-    int load();
+    int load(string fullName);
     void unload();
     int reload();
     unsigned int getID(void) const {return texID;}
@@ -63,6 +64,7 @@ private:
     int loadType2;
 	static string texDir;
 	static string suffix;
+	bool whole_path;
 };
 
 

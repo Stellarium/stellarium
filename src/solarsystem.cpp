@@ -315,7 +315,7 @@ void SolarSystem::draw(planet* selected, int hint_ON, Projector * prj, const nav
 	iter = system_planets.begin();
     while (iter != system_planets.end())
     {
-        if (*iter!=earth) (*iter)->draw(hint_ON, prj, nav, eye, flag_point, flag_orbits, flag_trails);
+        if (*iter!=earth) (*iter)->draw(hint_ON, prj, nav, eye, flag_point, flag_trails);
         ++iter;
     }
 

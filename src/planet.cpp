@@ -343,7 +343,7 @@ float planet::get_on_screen_size(const Projector* prj, const navigator * nav)
 
 // Draw the planet and all the related infos : name, circle etc..
 void planet::draw(int hint_ON, Projector* prj, const navigator * nav, const tone_reproductor* eye, 
-				  int flag_point, int flag_orbits, int flag_trails)
+				  int flag_point, int flag_trails)
 {
 
 	// TEMP -- place in command interface 
