@@ -327,6 +327,37 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
       audio->resume();
     } else status =0;
 
+  } else if(command=="clear") {
+
+	  // turn off all labels (used by scripts for simplicity)
+	  execute_command("flag atmosphere off");
+	  execute_command("flag azimutal_grid off");
+	  execute_command("flag cardinal_points off");
+	  execute_command("flag constellation_art off");
+	  execute_command("flag constellation_drawing off");
+	  execute_command("flag constellation_name off");
+	  execute_command("flag ecliptic_line off");
+	  execute_command("flag equatorial_grid off");
+	  execute_command("flag equator_line off");
+	  execute_command("flag fog off");
+	  execute_command("flag ground off");
+	  execute_command("flag nebula_name off");
+	  execute_command("flag object_trails off");
+	  execute_command("flag planets_hints off");
+	  execute_command("flag planets_orbits off");
+	  execute_command("flag show_tui_datetime off");
+	  execute_command("flag star_name off");
+	  execute_command("flag show_tui_short_obj_info off");
+
+	  // make sure planets, stars, etc. are turned on!
+	  // milkyway is left to user, for those without 3d cards
+	  execute_command("flag stars on");
+	  execute_command("flag planets on");
+	  execute_command("flag nebula on");
+
+	  // also deselect everything
+	  execute_command("deselect");
+
   } else {
     cout << "Unrecognized or malformed command: " << command << endl;
     status = 0;
