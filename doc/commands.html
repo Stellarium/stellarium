@@ -243,8 +243,8 @@ drop<br>
       <td style="vertical-align: top;">IMAGE_NAME<br>
       </td>
       <td style="vertical-align: top;">Used to refer to the image in
-later calls to manipulate the image. Images must be in PNG format with
-dimensions that are powers of 2 (128, 256, etc.) </td>
+later calls to manipulate the image. Images must be in PNG format.  If images do not have dimensions 
+that are powers of 2 (128, 256, etc.) they are resized when loaded to meet this requirement.</td>
     </tr>
     <tr>
       <td style="vertical-align: top;">alpha<br>
@@ -252,7 +252,8 @@ dimensions that are powers of 2 (128, 256, etc.) </td>
       <td style="vertical-align: top;">ALPHA<br>
       </td>
       <td style="vertical-align: top;">0 is transparent (default), 1 is
-opaque.&nbsp; ALPHA can be fractional.<br>
+opaque.&nbsp; ALPHA can be fractional.<P>
+Note that images are drawn in the order they were loaded.
       </td>
     </tr>
     <tr>

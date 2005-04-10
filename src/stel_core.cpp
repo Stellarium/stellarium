@@ -258,6 +258,7 @@ void stel_core::update(int delta_time)
 	ecliptic_line->update(delta_time);
 	asterisms->update(delta_time);
 	atmosphere->update(delta_time);
+	landscape->update(delta_time);
 	
 	// Compute the sun position in local coordinate
 	Vec3d temp(0.,0.,0.);
