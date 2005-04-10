@@ -27,6 +27,7 @@
 #include "tone_reproductor.h"
 #include "projector.h"
 #include "navigator.h"
+#include "fader.h"
 
 enum LANDSCAPE_TYPE
 {
@@ -43,6 +44,8 @@ public:
 	virtual void load(const string& file_name, const string& section_name) = 0;
 	void set_parameters(const Vec3f& sun_pos);
 	void set_sky_brightness(float b) {sky_brightness = b;}
+	void show_landscape(bool b) {land_fader=b; }
+	void update(int delta_time) {land_fader.update(delta_time);}
 	virtual void draw(tone_reproductor * eye, const Projector* prj, const navigator* nav,
 		bool flag_fog, bool flag_decor, bool flag_ground) = 0;
 	static Landscape* create_from_file(const string& landscape_file, const string& section_name);
@@ -52,6 +55,7 @@ protected:
 	string name;
 	float sky_brightness;
 	bool valid_landscape;   // was a landscape loaded properly?
+	linear_fader land_fader;
 };
 
 typedef struct
