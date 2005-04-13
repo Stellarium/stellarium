@@ -384,6 +384,120 @@ namespace s_tui
     };
 
 
+	// List item widget with separation between UI keys (will be translated) and code value (never translated).
+	// Assumes one-to-one mapping of keys to values
+	// The callback function is called when the selected item changes
+	template <class T>
+	class MultiSet2_item : public CallbackComponent
+    {
+    public:
+		MultiSet2_item(const string& _label = string()) : CallbackComponent(), label(_label) {current = items.end();}
+		MultiSet2_item(const MultiSet2_item& m) : CallbackComponent(), label(m.label)
+		{
+			setCurrent(m.getCurrent());
+		}
+		virtual string getString(void)
+		{
+			if (current==items.end()) return label;
+			ostringstream os;
+			os << label << (active ? start_active : "") << *current << (active ? stop_active : "");
+			return os.str();
+		}
+		virtual bool isEditable(void) const {return true;}
+		virtual bool onKey(SDLKey k, S_TUI_VALUE v)
+		{
+		  if (current==items.end() || v==S_TUI_RELEASED) return false;
+		        if (k==SDLK_RETURN)
+			{
+				if (!onTriggerCallback.empty()) onTriggerCallback();
+				return false;
+			}
+			if (k==SDLK_UP)
+			{
+				if (current!=items.begin()) --current;
+				else current = --items.end();
+				if (!onChangeCallback.empty()) onChangeCallback();
+				return true;
+			}
+			if (k==SDLK_DOWN)
+			{
+			        if (current!= --items.end()) ++current;
+				else current = items.begin();
+				if (!onChangeCallback.empty()) onChangeCallback();
+				return true;
+			}
+			if (k==SDLK_LEFT || k==SDLK_ESCAPE) return false;
+			return false;
+		}
+		void addItem(const T& newkey, const T& newvalue) {
+		  items.insert(newkey);
+		  value[newkey] = newvalue;
+		  if(current==items.end()) current = items.begin();
+		}
+		void addItemList(string s)  // newline delimited, key and value alternate
+		{
+			istringstream is(s);
+			T key, value;
+			while(getline(is, key) && getline(is, value))
+			{
+				addItem(key, value);
+			}
+		}
+		void replaceItemList(string s, int selection)
+		{
+		  items.clear();
+		  value.clear();
+		  addItemList(s);
+		  current = items.begin();
+		  for(int j=0; j<selection;j++) {
+		    ++current;
+		  }
+		}
+		const T& getCurrent(void) {if(current==items.end()) return emptyT; else return value[(*current)];}
+		void setCurrent(const T& i) {  // set by value, not key
+
+			typename multiset<T>::iterator iter;
+
+			bool found =0;
+			for(iter=items.begin(); iter!=items.end(); iter++ ) {
+				if( i == value[(*iter)]) {
+					current = iter;
+					found = 1;
+					break;
+				}
+			}
+
+			if(!found) current = items.begin();
+		    if (!onChangeCallback.empty()) onChangeCallback();
+		}
+	
+		bool setValue(const T& i)
+		{
+			typename multiset<T>::iterator iter;
+
+			bool found =0;
+			for(iter=items.begin(); iter!=items.end(); iter++ ) {
+				if( i == value[(*iter)]) {
+					current = iter;
+					found = 1;
+					break;
+				}
+			}
+
+			return found;
+		}
+		string getLabel(void) const {return label;}
+		virtual void set_OnTriggerCallback(const callback<void>& c) {onTriggerCallback = c;}
+    protected:
+		T emptyT;
+		multiset<T> items;
+		typename multiset<T>::iterator current;
+		string label;
+		callback<void> onTriggerCallback;
+		map<T, T> value;  // hash of key, value pairs
+    };
+
+
 	// Widget used to set time zone. Initialized from a file of type /usr/share/zoneinfo/zone.tab
     class Time_zone_item : public CallbackComponent
     {
