@@ -108,7 +108,7 @@ string Sky_localizer::get_sky_locale_list(void){
 
   string locales;
   for ( stringHashIter_t iter = name_to_locale.begin(); iter != name_to_locale.end(); ++iter ) {
-    locales += iter->first + "\n";
+    locales += iter->first + "\n" + iter->second + "\n";
   }
 
   return locales;
