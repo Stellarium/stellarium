@@ -7,18 +7,17 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: stellarium 0.7.0\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-03-26 01:18+0100\n"
-"PO-Revision-Date: 2004-12-18 02:43+0100\n"
+"POT-Creation-Date: 2005-04-13 09:42-0700\n"
+"PO-Revision-Date: 2005-04-13 10:01-0700\n"
 "Last-Translator:  <stellarium@free.fr>\n"
 "Language-Team: French <traduc@traduc.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Report-Msgid-Bugs-To: \n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #: src/main.cpp:52
-#, c-format
 msgid ""
 "Please check last version and send bug report & comments \n"
 "on stellarium web page : http://stellarium.free.fr\n"
@@ -92,39 +91,38 @@ msgstr ""
 "Sinon, vérifiez que vous avez accès à %s\n"
 
 #. North
-#: src/draw.cpp:348
+#: src/draw.cpp:341
 msgid "N"
 msgstr "N"
 
 #. South
-#: src/draw.cpp:350
+#: src/draw.cpp:343
 msgid "S"
 msgstr "S"
 
 #. East
-#: src/draw.cpp:352
+#: src/draw.cpp:345
 msgid "E"
 msgstr "E"
 
 #. West
-#: src/draw.cpp:354
+#: src/draw.cpp:347
 msgid "W"
 msgstr "O"
 
 #. no change
 #. load new culture data
-#: src/constellation_mgr.cpp:71
+#: src/constellation_mgr.cpp:73
 #, c-format
 msgid "Changing sky culture to %s\n"
 msgstr "Utilise les noms de la culture %s\n"
 
-#: src/constellation_mgr.cpp:88
-#, c-format
+#: src/constellation_mgr.cpp:90
 msgid "Loading constellation data...\n"
 msgstr "Chargement des données constellations...\n"
 
 #. Draw loading bar
-#: src/constellation_mgr.cpp:172
+#: src/constellation_mgr.cpp:174
 #, c-format
 msgid "Loading Constellation Art: %d/%d"
 msgstr "Chargement des Images Constellations : %d/%d"
@@ -151,7 +149,6 @@ msgid "%s: mag %.1f"
 msgstr "%s: mag %.1f"
 
 #: src/hip_star_mgr.cpp:76
-#, c-format
 msgid "Loading Hipparcos star data "
 msgstr "Chargement du catalogue d'étoiles Hipparcos "
 
@@ -176,7 +173,6 @@ msgstr ""
 "Mag : %.2f"
 
 #: src/nebula_mgr.cpp:54
-#, c-format
 msgid "Loading nebulas data...\n"
 msgstr "Chargement des données Nébuleuse...\n"
 
@@ -186,7 +182,6 @@ msgid "%d deep space objects will be loaded\n"
 msgstr "Chargement de %d objets du ciel profond\n"
 
 #: src/nebula_mgr.cpp:104
-#, c-format
 msgid "Done loading DSOs\n"
 msgstr "Chargement des DSOs terminé\n"
 
@@ -241,6 +236,14 @@ msgstr "Français"
 #: src/sky_localizer.cpp:63
 msgid "Hawaiian"
 msgstr "Hawaien"
+
+#: src/sky_localizer.cpp:64
+msgid "Dutch"
+msgstr ""
+
+#: src/sky_localizer.cpp:65
+msgid "Portuguese"
+msgstr ""
 
 #: src/stel_ui.cpp:396
 msgid "Drawing of the Constellations [C]"
@@ -373,12 +376,17 @@ msgstr ""
 "F1  : Alterne mode plein écran si possible.\n"
 
 #: src/stel_ui.cpp:508
+msgid "CTRL+Q : Quit\n"
+msgstr "CTRL+Q : Quitte\n"
+
+#: src/stel_ui.cpp:510
 msgid "CMD+Q : Quit\n"
 msgstr "CMD+Q : Quitte\n"
 
-#: src/stel_ui.cpp:510
-msgid "CTRL+Q : Quit\n"
-msgstr "CTRL+Q : Quitte\n"
+#: src/stel_ui.cpp:517
+#, fuzzy
+msgid "Help"
+msgstr "Aide [H]"
 
 #: src/stel_ui_conf.cpp:27
 msgid "Configuration"
@@ -555,12 +563,10 @@ msgid " in file "
 msgstr " dans le fichier "
 
 #: src/solarsystem.cpp:77
-#, c-format
 msgid "Loading Solar System data...\n"
 msgstr "Chargement des données Système Solaire...\n"
 
-#: src/stel_core.cpp:443
-#, c-format
+#: src/stel_core.cpp:438
 msgid ""
 "The current config file is from a previous version (>=0.6.0).\n"
 "Previous options will be imported in the new config file.\n"
@@ -571,7 +577,7 @@ msgstr ""
 "configuration.\n"
 
 #. The config file is too old to try an importation
-#: src/stel_core.cpp:462
+#: src/stel_core.cpp:457
 #, c-format
 msgid ""
 "The current config file is from a version too old for parameters to be "
@@ -582,11 +588,176 @@ msgstr ""
 "êtreimporté (%s).\n"
 "Il va être remplacé par le fichier de configuration par défaut.\n"
 
-#: src/stel_core.cpp:485
+#: src/stel_core.cpp:480
 msgid "Loading configuration file "
 msgstr "Chargement du fichier de configuration "
 
-#: src/stel_core.cpp:493
+#: src/stel_core.cpp:488
 msgid "ERROR : The current config file is from a different version ("
 msgstr ""
 "ERREUR : Le fichier de configuration actuel provient d'une autre version ("
+
+#. Submenus
+#: src/stel_ui_tuiconf.cpp:83
+msgid "Set Location "
+msgstr "Enregistre la Position "
+
+#: src/stel_ui_tuiconf.cpp:84
+msgid "Set Time "
+msgstr "Enregistre le Temps "
+
+#: src/stel_ui_tuiconf.cpp:85
+msgid "General "
+msgstr "Général "
+
+#: src/stel_ui_tuiconf.cpp:86
+msgid "Stars "
+msgstr "Etoiles "
+
+#: src/stel_ui_tuiconf.cpp:87
+msgid "Effects "
+msgstr "Effets "
+
+#: src/stel_ui_tuiconf.cpp:88
+msgid "Scripts "
+msgstr "Scripts "
+
+#: src/stel_ui_tuiconf.cpp:89
+msgid "Administration "
+msgstr "Administration "
+
+#. 1. Location
+#: src/stel_ui_tuiconf.cpp:99
+msgid "Latitude: "
+msgstr "Latitude: "
+
+#: src/stel_ui_tuiconf.cpp:101
+msgid "Longitude: "
+msgstr "Longitude: "
+
+#: src/stel_ui_tuiconf.cpp:103
+msgid "Altitude (m): "
+msgstr "Altitude: "
+
+#. 2. Time
+#: src/stel_ui_tuiconf.cpp:110
+msgid "Sky Time: "
+msgstr "Temps du Ciel: "
+
+#: src/stel_ui_tuiconf.cpp:112
+msgid "Set Time Zone: "
+msgstr "Zone Horaire: "
+
+#: src/stel_ui_tuiconf.cpp:115
+msgid "Preset Sky Time: "
+msgstr "Préréglé le Temps du Ciel: "
+
+#: src/stel_ui_tuiconf.cpp:117
+msgid "Sky Time At Start-up: "
+msgstr "Temps du Ciel au Comencement: "
+
+#: src/stel_ui_tuiconf.cpp:121
+msgid "Time Display Format: "
+msgstr "Format du Temps: "
+
+#. 3. General settings
+#. sky culture goes here
+#: src/stel_ui_tuiconf.cpp:136
+msgid "Sky Culture: "
+msgstr "Culture du Ciel: "
+
+#: src/stel_ui_tuiconf.cpp:141
+msgid "Sky Language: "
+msgstr "Langue du Ciel: "
+
+#. 4. Stars
+#: src/stel_ui_tuiconf.cpp:149
+msgid "Show: "
+msgstr "Montre: "
+
+#: src/stel_ui_tuiconf.cpp:149 src/stel_ui_tuiconf.cpp:170
+msgid "Yes"
+msgstr "Oui"
+
+#: src/stel_ui_tuiconf.cpp:149 src/stel_ui_tuiconf.cpp:170
+msgid "No"
+msgstr "Non"
+
+#: src/stel_ui_tuiconf.cpp:151
+msgid "Star Magnitude Multiplier: "
+msgstr "Multiplieur de Magnitude des Étoiles: "
+
+#: src/stel_ui_tuiconf.cpp:153
+msgid "Maximum Magnitude to Label: "
+msgstr "Maximum Magnitude à Labelliser: "
+
+#: src/stel_ui_tuiconf.cpp:155
+msgid "Twinkling: "
+msgstr "Scintillage: "
+
+#. 5. Effects
+#: src/stel_ui_tuiconf.cpp:165
+msgid "Landscape: "
+msgstr "Paysage: "
+
+#: src/stel_ui_tuiconf.cpp:170
+msgid "Manual zoom: "
+msgstr "Zoom Manuel: "
+
+#: src/stel_ui_tuiconf.cpp:174
+msgid "Object Sizing Rule: "
+msgstr "Règle de Taille des Objets: "
+
+#: src/stel_ui_tuiconf.cpp:174
+msgid "Point"
+msgstr "Point"
+
+#: src/stel_ui_tuiconf.cpp:174
+msgid "Magnitude"
+msgstr "Magnitude"
+
+#: src/stel_ui_tuiconf.cpp:178
+msgid "Magnitude Sizing Multiplier: "
+msgstr ""
+
+#: src/stel_ui_tuiconf.cpp:182
+msgid "Zoom duration: "
+msgstr ""
+
+#. 6. Scripts
+#: src/stel_ui_tuiconf.cpp:188
+#, fuzzy
+msgid "Local Script: "
+msgstr "Scripts "
+
+#: src/stel_ui_tuiconf.cpp:194
+#, fuzzy
+msgid "CD/DVD Script: "
+msgstr "Scripts "
+
+#. 7. Administration
+#: src/stel_ui_tuiconf.cpp:202
+#, fuzzy
+msgid "Load Default Configuration: "
+msgstr "Chargement du fichier de configuration "
+
+#: src/stel_ui_tuiconf.cpp:204
+msgid "Save Current Configuration as Default: "
+msgstr ""
+
+#. tui_admin_setlocal = new s_tui::MultiSet_item<string>("7.3 Set Locale: ");
+#. tui_admin_setlocal->addItem("fr_FR");
+#. tui_admin_setlocal->addItem("en_EN");
+#. tui_admin_setlocal->addItem("en_US");
+#. tui_admin_setlocal->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb_admin_set_locale));
+#: src/stel_ui_tuiconf.cpp:211
+msgid "Update me via Internet: "
+msgstr ""
+
+#: src/stel_ui_tuiconf.cpp:218
+msgid "N-S Centering Offset: "
+msgstr ""
+
+#: src/stel_ui_tuiconf.cpp:222
+msgid "E-W Centering Offset: "
+msgstr ""

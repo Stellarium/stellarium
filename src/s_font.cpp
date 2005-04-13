@@ -101,38 +101,38 @@ int s_font::buildDisplayLists(const string& dataFileName, const string& textureN
         averageCharLen+=sizeX;
         nbChar++;
 
-	//	cout << charNum << " " << posX << ":" << posY << endl;
-
-	// Special ascii code used to set text color
-	// was R,G,B, but changed to normal or hilighted since R G or B was hard to see - rms
-	if (charNum==17 || charNum==18)
-	  {
-	    glNewList(g_base+charNum,GL_COMPILE);
-	    if( charNum==17 ) {
-	      // regular text color
-	      glColor3f(0.5,1,0.5);
-	    } else {
-	      // hilighted text
-	      glColor3f(1,1,1);
-	    }
-	    
-	    glEndList();
-	    continue;
-	  }
+		//	cout << charNum << " " << posX << ":" << posY << endl;
+		
+		// Special ascii code used to set text color
+		// was R,G,B, but changed to normal or hilighted since R G or B was hard to see - rms
+		if (charNum==17 || charNum==18)
+			{
+				glNewList(g_base+charNum,GL_COMPILE);
+				if( charNum==17 ) {
+					// regular text color
+					glColor3f(0.5,1,0.5);
+				} else {
+					// hilighted text
+					glColor3f(1,1,1);
+				}
+				
+				glEndList();
+				continue;
+			}
 	
         glNewList(g_base+charNum,GL_COMPILE); {  // Start Building A List
-	  glTranslated(leftSpacing*ratio,0,0);	 // Move To The Left Of The Character
-	  glBegin(GL_QUADS );
-	  glTexCoord2f((float)posX/256,(float)(256-posY-sizeY)/256);
-	  glVertex3f(0,sizeY*ratio,0); //  Bottom Left
-	  glTexCoord2f((float)(posX+sizeX)/256,(float)(256-posY-sizeY)/256);
-	  glVertex3f(sizeX*ratio,sizeY*ratio,0);  // Bottom Right
-	  glTexCoord2f((float)(posX+sizeX)/256,(float)(256-posY)/256);
-	  glVertex3f(sizeX*ratio,0,0); // Top Right
-	  glTexCoord2f((float)posX/256,(float)(256-posY)/256);
-	  glVertex3f(0,0,0); // Top Left
-	  glEnd ();
-	  glTranslated((sizeX+SPACING)*ratio,0,0); }
+			glTranslated(leftSpacing*ratio,0,0);	 // Move To The Left Of The Character
+			glBegin(GL_QUADS );
+			glTexCoord2f((float)posX/256,(float)(256-posY-sizeY)/256);
+			glVertex3f(0,sizeY*ratio,0); //  Bottom Left
+			glTexCoord2f((float)(posX+sizeX)/256,(float)(256-posY-sizeY)/256);
+			glVertex3f(sizeX*ratio,sizeY*ratio,0);  // Bottom Right
+			glTexCoord2f((float)(posX+sizeX)/256,(float)(256-posY)/256);
+			glVertex3f(sizeX*ratio,0,0); // Top Right
+			glTexCoord2f((float)posX/256,(float)(256-posY)/256);
+			glVertex3f(0,0,0); // Top Left
+			glEnd ();
+			glTranslated((sizeX+SPACING)*ratio,0,0); }
         glEndList();   // Done Building The Display List
     }
 
