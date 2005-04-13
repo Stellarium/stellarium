@@ -198,6 +198,8 @@ private:
 	void updateConfigVariables(void);
 	void updateConfigForm(void);
 
+	bool LocaleChanged;  // flag to watch for need to rebuild TUI
+
 	////////////////////////////////////////////////////////////////////////////
 	// Text UI components
 	s_tui::Branch* tui_root;
@@ -239,8 +241,8 @@ private:
 	// 7. Administration
 	s_tui::ActionConfirm_item* tui_admin_loaddefault;
 	s_tui::ActionConfirm_item* tui_admin_savedefault;
-	//s_tui::MultiSet_item<string>* tui_admin_setlocal;
 	s_tui::Action_item* tui_admin_updateme;
+	s_tui::MultiSet_item<string>* tui_admin_setlocale;
 	s_tui::Integer_item* tui_admin_voffset;
 	s_tui::Integer_item* tui_admin_hoffset;
 
@@ -250,7 +252,7 @@ private:
 	void tui_cb_settimedisplayformat(void);	// Set 12/24h format
 	void tui_cb_admin_load_default(void);	// Load default configuration
 	void tui_cb_admin_save_default(void);	// Save default configuration
-	/*void tui_cb_admin_set_locale(void);*/		// Set locale parameter (LANG)
+	void tui_cb_admin_set_locale(void);		// Set locale for UI (not sky)
 	void tui_cb_admin_updateme(void);		// Launch script for internet update
 	void tui_cb_tui_effect_change_landscape(void);	// Select a new landscape skin
 	void tui_cb_tui_general_change_sky_culture(void);  // select new sky culture

@@ -81,6 +81,16 @@ void stel_core::set_config_files(const string& _config_file)
 
 void stel_core::init(void)
 {
+
+	// read current ui locale
+	char *tmp = setlocale(LC_MESSAGES, "");
+	printf("Locale is %s\n", tmp);
+
+	if(tmp == NULL) UILocale = "";
+	else UILocale = tmp;
+
+
+
 	// Set textures directory and suffix
 	s_texture::set_texDir(TextureDir);
 	s_texture::set_suffix(".png");
