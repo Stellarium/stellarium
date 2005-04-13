@@ -234,11 +234,16 @@ If not, check that you have access to %s\n"), CDIR.c_str(), CDIR.c_str(), CDIR.c
 // Main stellarium procedure
 int main(int argc, char **argv)
 {
+
 #ifndef MACOSX
+	// TESTING ONLY
+	//	setenv("LC_ALL", "fr_FR", 1);
+
 	setlocale (LC_CTYPE, "");
 	setlocale (LC_MESSAGES, "");
 	bindtextdomain (PACKAGE, LOCALEDIR);
 	textdomain (PACKAGE);
+
 #endif
 	
 	// Check the command line

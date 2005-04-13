@@ -308,6 +308,7 @@ private:
 	int MouseZoom;
 
 	// Locale
+	string UILocale;                    // locale UI is currently using
 	int FlagUTC_Time;					// if true display UTC time
 
 	int frame, timefr, timeBase;		// Used for fps counter
