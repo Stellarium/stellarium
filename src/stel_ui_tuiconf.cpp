@@ -138,8 +138,8 @@ void stel_ui::init_tui(void)
 	tui_general_sky_culture->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb_tui_general_change_sky_culture));
 	tui_menu_general->addComponent(tui_general_sky_culture);
 
-	tui_general_sky_locale = new s_tui::MultiSet_item<string>("3.2 Sky Language: ");
-	tui_general_sky_locale->addItemList(core->skyloc->get_sky_locale_list());  // human readable names
+	tui_general_sky_locale = new s_tui::MultiSet2_item<string>("3.2 Sky Language: ");
+	tui_general_sky_locale->addItemList(core->skyloc->get_sky_locale_list());
 
 	tui_general_sky_locale->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb_tui_general_change_sky_locale));
 	tui_menu_general->addComponent(tui_general_sky_locale);
@@ -302,7 +302,7 @@ void stel_ui::tui_update_widgets(void)
 
 	// 3. general
 	tui_general_sky_culture->setValue(core->skyloc->convert_directory_to_sky_culture(core->SkyCulture));
-	tui_general_sky_locale->setValue(core->skyloc->convert_locale_to_name(core->SkyLocale));  // human readable names
+	tui_general_sky_locale->setValue(core->SkyLocale);
 
 	// 4. Stars
 	tui_stars_show->setValue(core->FlagStars);
@@ -419,8 +419,9 @@ void stel_ui::tui_cb_tui_general_change_sky_culture(void) {
 // Set a new sky locale
 void stel_ui::tui_cb_tui_general_change_sky_locale(void) {
 
-  string locale = core->skyloc->convert_name_to_locale(tui_general_sky_locale->getCurrent());
-  core->set_sky_locale(locale);
+	//  string locale = core->skyloc->convert_name_to_locale(tui_general_sky_locale->getCurrent());
+	//core->set_sky_locale(locale);
+	core->set_sky_locale(tui_general_sky_locale->getCurrent());
 }
 
 

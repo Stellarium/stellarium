@@ -164,7 +164,7 @@ bool Image::update(int delta_time) {
 
 void Image::draw(int screenw, int screenh, int vieww, int viewh) {
 
-  if(image_ratio < 0) return;
+  if(image_ratio < 0 || image_alpha == 0) return;
 
   glPushMatrix();
 

@@ -216,7 +216,7 @@ private:
 
 	// 3. General
 	s_tui::MultiSet_item<string>* tui_general_sky_culture;
-	s_tui::MultiSet_item<string>* tui_general_sky_locale;
+	s_tui::MultiSet2_item<string>* tui_general_sky_locale;
 
 	// 4. Stars
 	s_tui::Boolean_item* tui_stars_show;
