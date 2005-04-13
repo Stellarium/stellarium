@@ -36,6 +36,7 @@ class Sky_localizer
   Sky_localizer(string _data_dir);
   virtual ~Sky_localizer();
 
+  void init_sky_locales();
   string get_sky_culture_list(void);
   string convert_directory_to_sky_culture(string _directory);
   string convert_sky_culture_to_directory(string _name);

@@ -399,6 +399,11 @@ void SolarSystem::set_sky_locale(string _sky_locale) {
   char planet[40];
   char cname[40];
 
+  // clear existing names (for cases of languages without non-visible planet names, or missing translation files)
+  for( iter = system_planets.begin(); iter < system_planets.end(); iter++ ) {
+	  (*iter)->set_common_name("");
+  }
+
   // read in translated common names from file
   FILE *cnFile;
   cnFile = NULL;

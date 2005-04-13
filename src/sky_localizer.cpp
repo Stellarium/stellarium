@@ -55,36 +55,46 @@ Sky_localizer::Sky_localizer(string _data_dir)
   }
   fclose(fic);
 
-
-  // initialize sky locale list (hardcoded right here)
-  locale_to_name["eng"] = _("English");
-  locale_to_name["esl"] = _("Spanish");
-  locale_to_name["fra"]  = _("French");
-  locale_to_name["haw"]  = _("Hawaiian");
-  locale_to_name["dut"]  = _("Dutch");
-  locale_to_name["por"]  = _("Portuguese");
-
-  for ( stringHashIter_t iter = locale_to_name.begin(); iter != locale_to_name.end(); ++iter ) {
-    name_to_locale[ iter->second ] = iter->first;
-    //    printf("name: %s\tlocale: %s\n", iter->second.c_str(), iter->first.c_str());
-  }
-
+  init_sky_locales();
 
 }
 
 Sky_localizer::~Sky_localizer(void) {
 }
 
+
+// call whenever need to initialize with current translations
+void Sky_localizer::init_sky_locales() {
+
+	locale_to_name.clear();
+	name_to_locale.clear();
+
+	// initialize sky locale list (hardcoded right here)
+	locale_to_name["eng"] = _("English");
+	locale_to_name["esl"] = _("Spanish");
+	locale_to_name["fra"]  = _("French");
+	locale_to_name["haw"]  = _("Hawaiian");
+	locale_to_name["dut"]  = _("Dutch");
+	locale_to_name["por"]  = _("Portuguese");
+
+	for ( stringHashIter_t iter = locale_to_name.begin(); iter != locale_to_name.end(); ++iter ) {
+		name_to_locale[ iter->second ] = iter->first;
+		//    printf("name: %s\tlocale: %s\n", iter->second.c_str(), iter->first.c_str());
+	}
+
+}
+
+
+
 // returns newline delimited list of human readable culture names
 string Sky_localizer::get_sky_culture_list(void){
 
-  string cultures;
-  for ( stringHashIter_t iter = name_to_dir.begin(); iter != name_to_dir.end(); ++iter ) {
-    cultures += iter->first + "\n";
-  }
+	string cultures;
+	for ( stringHashIter_t iter = name_to_dir.begin(); iter != name_to_dir.end(); ++iter ) {
+		cultures += iter->first + "\n";
+	}
 
-  return cultures;
-
+	return cultures;
 }
 
 string Sky_localizer::convert_directory_to_sky_culture(string _directory){
@@ -106,13 +116,15 @@ string Sky_localizer::convert_sky_culture_to_directory(string _name){
 // returns newline delimited list of human readable culture names
 string Sky_localizer::get_sky_locale_list(void){
 
-  string locales;
-  for ( stringHashIter_t iter = name_to_locale.begin(); iter != name_to_locale.end(); ++iter ) {
-    locales += iter->first + "\n" + iter->second + "\n";
-  }
+	init_sky_locales();  // make sure up to date translations
 
-  return locales;
-
+	string locales;
+	for ( stringHashIter_t iter = name_to_locale.begin(); iter != name_to_locale.end(); ++iter ) {
+		locales += iter->first + "\n" + iter->second + "\n";
+	}
+	
+	return locales;
+	
 }
 
 // locale is used by code, locale name is human readable

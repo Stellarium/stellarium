@@ -77,6 +77,7 @@ void stel_ui::draw_gravity_ui(void)
 void stel_ui::init_tui(void)
 {
 	// Menu root branch
+	LocaleChanged=0;
 	tui_root = new s_tui::Branch();
 
 	// Submenus
@@ -203,17 +204,19 @@ void stel_ui::init_tui(void)
 	tui_admin_loaddefault->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb_admin_load_default));
 	tui_admin_savedefault = new s_tui::ActionConfirm_item(string("7.2 ") + _("Save Current Configuration as Default: "));
 	tui_admin_savedefault->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb_admin_save_default));
-	/*tui_admin_setlocal = new s_tui::MultiSet_item<string>("7.3 Set Locale: ");
-	tui_admin_setlocal->addItem("fr_FR");
-	tui_admin_setlocal->addItem("en_EN");
-	tui_admin_setlocal->addItem("en_US");
-	tui_admin_setlocal->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb_admin_set_locale));*/
 	tui_admin_updateme = new s_tui::Action_item(string("7.3 ") + _("Update me via Internet: "));
 	tui_admin_updateme->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb_admin_updateme));
 	tui_menu_administration->addComponent(tui_admin_loaddefault);
 	tui_menu_administration->addComponent(tui_admin_savedefault);
-	//tui_menu_administration->addComponent(tui_admin_setlocal);
 	tui_menu_administration->addComponent(tui_admin_updateme);
+
+	tui_admin_setlocale = new s_tui::MultiSet_item<string>("7.3 Set Locale: ");
+	// Should be defined elsewhere...
+	tui_admin_setlocale->addItem("en_US");
+	tui_admin_setlocale->addItem("fr_FR");
+	tui_admin_setlocale->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb_admin_set_locale));
+	tui_menu_administration->addComponent(tui_admin_setlocale);
+
 
 	tui_admin_voffset = new s_tui::Integer_item(-10,10,0, string("7.4 ") + _("N-S Centering Offset: "));
 	tui_admin_voffset->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb_tui_admin_change_viewport));
@@ -229,6 +232,31 @@ void stel_ui::init_tui(void)
 // Display the tui
 void stel_ui::draw_tui(void)
 {
+
+	// not sure this is best location...
+	// If locale has changed, rebuild TUI with new translated text
+	if(LocaleChanged) {
+		cout << "Reloading TUI due to locale change\n";
+		if(tui_root) delete tui_root;
+		init_tui();
+
+		// THIS IS A HACK, but lacking time for a better solution:
+		// go back to the locale menu, where user left off
+		handle_keys_tui(SDLK_UP, s_tui::S_TUI_PRESSED);
+		handle_keys_tui(SDLK_UP, s_tui::S_TUI_RELEASED);
+		handle_keys_tui(SDLK_RIGHT, s_tui::S_TUI_PRESSED);
+		handle_keys_tui(SDLK_RIGHT, s_tui::S_TUI_RELEASED);
+		handle_keys_tui(SDLK_DOWN, s_tui::S_TUI_PRESSED);
+		handle_keys_tui(SDLK_DOWN, s_tui::S_TUI_RELEASED);
+		handle_keys_tui(SDLK_DOWN, s_tui::S_TUI_PRESSED);
+		handle_keys_tui(SDLK_DOWN, s_tui::S_TUI_RELEASED);
+		handle_keys_tui(SDLK_DOWN, s_tui::S_TUI_PRESSED);
+		handle_keys_tui(SDLK_DOWN, s_tui::S_TUI_RELEASED);
+		handle_keys_tui(SDLK_RIGHT, s_tui::S_TUI_PRESSED);
+		handle_keys_tui(SDLK_RIGHT, s_tui::S_TUI_RELEASED);
+
+	}
+
 	// Normal transparency mode
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glEnable(GL_BLEND);
@@ -331,6 +359,7 @@ void stel_ui::tui_update_widgets(void)
 	}
 
 	// 7. admin
+	tui_admin_setlocale->setValue(core->UILocale);
 	tui_admin_voffset->setValue(core->verticalOffset);
 	tui_admin_hoffset->setValue(core->horizontalOffset);
 
@@ -419,8 +448,6 @@ void stel_ui::tui_cb_tui_general_change_sky_culture(void) {
 // Set a new sky locale
 void stel_ui::tui_cb_tui_general_change_sky_locale(void) {
 
-	//  string locale = core->skyloc->convert_name_to_locale(tui_general_sky_locale->getCurrent());
-	//core->set_sky_locale(locale);
 	core->set_sky_locale(tui_general_sky_locale->getCurrent());
 }
 
@@ -472,4 +499,27 @@ void stel_ui::tui_cb_scripts_local() {
   } else {
     core->SelectedScript = "";
   }
+}
+
+
+// change UI locale
+void stel_ui::tui_cb_admin_set_locale() {
+
+	// Right now just set for the current session
+
+#ifndef MACOSX
+	string tmp = tui_admin_setlocale->getCurrent();
+	setenv("LC_ALL", tmp.c_str(), 1);
+
+	setlocale (LC_CTYPE, "");
+	setlocale (LC_MESSAGES, "");
+	bindtextdomain (PACKAGE, LOCALEDIR);
+	textdomain (PACKAGE);
+
+	// Now need to update all UI components with new translations!
+	core->UILocale = tmp.c_str();
+	LocaleChanged = 1;  // will reload TUI next draw.  Note that position in TUI is lost...
+#endif
+
+
 }
