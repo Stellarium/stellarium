@@ -246,7 +246,7 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
       if(args["lat"]!="") lat = str_to_double(args["lat"]);
       if(args["lon"]!="") lon = str_to_double(args["lon"]);
       if(args["alt"]!="") alt = str_to_double(args["alt"]);
-      delay = str_to_int(args["duration"]);
+      delay = (int)(1000.*str_to_double(args["duration"]));
 
       stcore->observatory->move_to(lat,lon,alt,delay);
     } else status = 0;
@@ -355,8 +355,10 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 	  execute_command("flag planets on");
 	  execute_command("flag nebula on");
 
-	  // also deselect everything
+	  // also deselect everything, set to default fov and real time rate
 	  execute_command("deselect");
+	  execute_command("timerate rate 1");
+	  execute_command("autozoom out");
 
   } else {
     cout << "Unrecognized or malformed command: " << command << endl;
