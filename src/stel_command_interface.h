@@ -56,5 +56,6 @@ int string_to_jday(string date, double &jd);
 double str_to_double(string str);
 int str_to_int(string str);
 string double_to_str(double dbl);
+double str_to_pos_double(string str);
 
 #endif // _STEL_COMMAND_INTERFACE_H

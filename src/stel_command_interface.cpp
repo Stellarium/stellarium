@@ -49,7 +49,6 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
   stringHash_t args;
   int status = 0;  // true if command was understood
   int recordable = 1;  // true if command should be recorded (if recording)
-  string resultCommandline;
   
   wait = 0;  // default, no wait between commands
 
@@ -67,7 +66,7 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
     if(args.begin()->second == "toggle") {
       std::ostringstream oss;
       oss << command << " " << args.begin()->first << " " << val;
-      resultCommandline = oss.str();
+      commandline = oss.str();
     }
 
   }  else if (command == "wait" && args["duration"]!="") {
@@ -162,10 +161,22 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
     stcore->selected_planet = NULL;
     stcore->asterisms->set_selected(NULL);
 
-  } else if(command == "autozoom") {
+  } else if(command == "zoom") {
+	  double duration = str_to_pos_double(args["duration"]);
 
-    if(args["direction"]=="out") stcore->auto_zoom_out(stcore->auto_move_duration);
-    else stcore->auto_zoom_in(stcore->auto_move_duration);
+	  if(args["auto"]!="") {
+		  // auto zoom using specified or default duration
+		  if(duration == 0 ) duration = stcore->auto_move_duration;
+		  		  
+		  if(args["auto"]=="out") stcore->auto_zoom_out(duration);
+		  else stcore->auto_zoom_in(duration);
+	  } else if (args["fov"]!="") {
+		  // zoom to specific field of view
+	  	  stcore->projection->zoom_to( str_to_double(args["fov"]), str_to_double(args["duration"]));
+
+	  } else if (args["delta_fov"]!="") stcore->projection->change_fov(str_to_double(args["delta_fov"]));
+	  // should we record absolute fov instead of delta? isn't usually smooth playback
+	  else status = 0;
 
   } else if(command == "timerate") {   // NOTE: accuracy issue related to frame rate
 
@@ -195,7 +206,7 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
       stcore->navigation->set_time_speed(s);
 
       // for safest script replay, record as absolute amount
-      resultCommandline = "timerate rate " + double_to_str(s/JD_SECOND);
+      commandline = "timerate rate " + double_to_str(s/JD_SECOND);
 
     } else if(args["action"]=="decrement") {
       double s = stcore->navigation->get_time_speed();
@@ -206,7 +217,7 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
       stcore->navigation->set_time_speed(s);
 
       // for safest script replay, record as absolute amount
-      resultCommandline = "timerate rate " + double_to_str(s/JD_SECOND);
+      commandline = "timerate rate " + double_to_str(s/JD_SECOND);
     } else status=0;
     
   } else if(command == "date") {
@@ -274,7 +285,7 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 												   str_to_double(args["duration"]));
 			  if(args["rotation"]!="") img->set_rotation(str_to_double(args["rotation"]), 
 														 str_to_double(args["duration"]));
-			  if(args["xpos"]!="" && args["ypos"]!="") 
+			  if(args["xpos"]!="" || args["ypos"]!="") 
 				  img->set_location(str_to_double(args["xpos"]), 
 									str_to_double(args["ypos"]), 
 									str_to_double(args["duration"]));
@@ -358,7 +369,7 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 	  // also deselect everything, set to default fov and real time rate
 	  execute_command("deselect");
 	  execute_command("timerate rate 1");
-	  execute_command("autozoom out");
+	  execute_command("zoom auto out");
 
   } else {
     cout << "Unrecognized or malformed command: " << command << endl;
@@ -369,7 +380,7 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
   if(status ) {
 
     // if recording commands, do that now
-    if(recordable) stcore->scripts->record_command(resultCommandline);
+    if(recordable) stcore->scripts->record_command(commandline);
 
     //    cout << commandline << endl;
 
@@ -429,19 +440,36 @@ int string_to_jday(string date, double &jd) {
 
 
 double str_to_double(string str) {
-  double dbl;
-  std::istringstream dstr( str );
+
+	if(str=="") return 0;
+	double dbl;
+	std::istringstream dstr( str );
     
-  dstr >> dbl;
-  return dbl;
+	dstr >> dbl;
+	return dbl;
 }
 
+// always positive
+double str_to_pos_double(string str) {
+
+	if(str=="") return 0;
+    double dbl;
+    std::istringstream dstr( str );
+
+    dstr >> dbl;
+    if(dbl < 0 ) dbl *= -1;
+    return dbl;
+}
+
+
 int str_to_int(string str) {
-  int integer;
-  std::istringstream istr( str );
+
+	if(str=="") return 0;
+	int integer;
+	std::istringstream istr( str );
     
-  istr >> integer;
-  return integer;
+	istr >> integer;
+	return integer;
 }
 
 string double_to_str(double dbl) {

@@ -63,8 +63,7 @@ of seconds desired). </p>
       </td>
       <td style="vertical-align: top;">AUDIO_FILENAME<br>
       </td>
-      <td style="vertical-align: top;">Sample rate must be 22050 Hz
-currently.<br>
+      <td style="vertical-align: top;">Currently limited to 16 bit, 22050 Hz, little-endian WAV files.
       </td>
     </tr>
     <tr>
@@ -77,17 +76,6 @@ off<br>
 is off<br>
       </td>
     </tr>
-    <tr>
-      <td>autozoom<br>
-      </td>
-      <td>direction<br>
-      </td>
-      <td>in<br>
-out<br>
-      </td>
-      <td> <br>
-      </td>
-    </tr>
 
     <tr>
       <td>clear<br>
@@ -97,7 +85,7 @@ out<br>
       <td>&nbsp;
       </td>
       <td>Turn off atmosphere, fog, ground, and all labels, lines, and art.  
-Turn planet, star, and nebula rendering on.  Deselect any selected objects.<br>
+Turn planet, star, and nebula rendering on.  Deselect any selected objects.  Return to initial fov and viewing direction.<br>
       </td>
     </tr>
 
@@ -186,6 +174,7 @@ show_tui_short_obj_info<br>
 star_name<br>
 star_twinkle<br>
 stars<br>
+track_object<br>
 utc_time<br>
       </td>
       <td>on<br>
@@ -195,6 +184,9 @@ off<br>
 toggle </td>
       <td>Set rendering flags. One argument name per command allowed
 currently.<p>
+
+track_object is only useful while an object is selected.
+<p>
 
 The following flags are key user settings 
 and are not accessible from scripts:<p>
@@ -261,7 +253,7 @@ Note that images are drawn in the order they were loaded.
       </td>
       <td style="vertical-align: top;">SCALE<br>
       </td>
-      <td style="vertical-align: top;"><br>
+      <td style="vertical-align: top;">How large to draw the image.  1 is maximized to fit on the viewport.<br>
       </td>
     </tr>
     <tr>
@@ -269,7 +261,23 @@ Note that images are drawn in the order they were loaded.
       </td>
       <td style="vertical-align: top;">DEGREES<br>
       </td>
-      <td style="vertical-align: top;">Rotation is clockwise.<br>
+      <td style="vertical-align: top;">Absolute rotation, positive is clockwise.<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">xpos<br>
+      </td>
+      <td style="vertical-align: top;">X_POSITION<br>
+      </td>
+      <td style="vertical-align: top;">Where to draw center of image.  0 is center of viewport, 1 is right edge of viewport.<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">ypos<br>
+      </td>
+      <td style="vertical-align: top;">Y_POSITION<br>
+      </td>
+      <td style="vertical-align: top;">Where to draw center of image.  0 is center of viewport, 1 is bottom edge of viewport.<br>
       </td>
     </tr>
     <tr>
@@ -317,31 +325,31 @@ Note that images are drawn in the order they were loaded.
     </tr>
     <tr>
       <td colspan="1" rowspan="2"
- style="vertical-align: top; background-color: rgb(204, 204, 204);">script<br>
+ style="vertical-align: top;">script<br>
       </td>
       <td
- style="vertical-align: top; background-color: rgb(204, 204, 204);">action<br>
+ style="vertical-align: top;">action<br>
       </td>
       <td
- style="vertical-align: top; background-color: rgb(204, 204, 204);">play<br>
+ style="vertical-align: top;">play<br>
 end<br>
 pause<br>
 resume<br>
       </td>
       <td
- style="vertical-align: top; background-color: rgb(204, 204, 204);">Note
+ style="vertical-align: top;">Note
 that pause toggles playback.<br>
       </td>
     </tr>
     <tr>
       <td
- style="vertical-align: top; background-color: rgb(204, 204, 204);">filename<br>
+ style="vertical-align: top;">filename<br>
       </td>
       <td
- style="vertical-align: top; background-color: rgb(204, 204, 204);">SCRIPT_FILENAME<br>
+ style="vertical-align: top;">SCRIPT_FILENAME<br>
       </td>
       <td
- style="vertical-align: top; background-color: rgb(204, 204, 204);"><br>
+ style="vertical-align: top;"><br>
       </td>
     </tr>
     <tr>
@@ -397,7 +405,7 @@ constellationship.fab, case insensitive.<br>
       <td style="vertical-align: top;">auto_move_duration</td>
       <td style="vertical-align: top;">SECONDS<br>
       </td>
-      <td style="vertical-align: top;">used for autozoom<br>
+      <td style="vertical-align: top;">used for auto zoom<br>
       </td>
     </tr>
     <tr>
@@ -518,6 +526,48 @@ etc.<br>
       <td>Only useful in scripts.&nbsp; SECONDS can be fractional.<br>
       </td>
     </tr>
+
+    <tr>
+      <td rowspan=4>zoom<br>
+      </td>
+      <td>auto<br>
+      </td>
+      <td>in<br>
+out<br>
+      </td>
+      <td>"out" returns to configured initial fov and viewing direction
+      </td>
+    </tr>
+
+<tr>
+      <td>fov<br>
+      </td>
+      <td>FIELD_OF_VIEW
+      </td>
+      <td>in degrees<br>
+      </td>
+    </tr>
+
+<tr>
+      <td>delta_fov<br>
+      </td>
+      <td>DELTA_DEGREES
+      </td>
+      <td> <br>
+      </td>
+    </tr>
+
+<tr>
+      <td>duration<br>
+      </td>
+      <td>SECONDS
+      </td>
+      <td>Not used with delta_fov<br>
+      </td>
+    </tr>
+
+
+
   </tbody>
 </table>
 </p>

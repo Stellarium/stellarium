@@ -677,178 +677,171 @@ int stel_ui::handle_keys(SDLKey key, S_GUI_VALUE state)
 {
 	desktop->onKey(key, state);
 	if (state==S_GUI_PRESSED)
-	{
-		if(key==SDLK_q)
-    	{
-			if (SDL_GetModState() &
+		{
+			if(key==SDLK_q)
+				{
+					if (SDL_GetModState() &
 #ifndef MACOSX
-          KMOD_CTRL
+						KMOD_CTRL
 #else
-          KMOD_META
+						KMOD_META
 #endif
-			) core->quit();
-	}
+						) core->quit();
+				}
 
-      // if script is running, only script control keys are accessible
-      // to pause/resume/cancel the script
-      // (otherwise script could get very confused by user interaction)
-      if(core->scripts->is_playing()) {
+			// if script is running, only script control keys are accessible
+			// to pause/resume/cancel the script
+			// (otherwise script could get very confused by user interaction)
+			if(core->scripts->is_playing()) {
 
-	// here reusing time control keys to control the script playback
-	if(key==SDLK_6) {
-	  // pause/unpause script
-	  core->commander->execute_command( "script action pause");
-	} else if(key==SDLK_k) {
-	  core->commander->execute_command( "script action resume");
-	} else if(key==SDLK_7 || 
-		  (key==SDLK_c && (SDL_GetModState() & KMOD_CTRL))) {
-	  // TODO: should double check with user here...
-	  core->commander->execute_command( "script action end");
-	}
-	else cout << "Playing a script.  Press ctrl-C (or 7) to stop." << endl;
+				// here reusing time control keys to control the script playback
+				if(key==SDLK_6) {
+					// pause/unpause script
+					core->commander->execute_command( "script action pause");
+				} else if(key==SDLK_k) {
+					core->commander->execute_command( "script action resume");
+				} else if(key==SDLK_7 || 
+						  (key==SDLK_c && (SDL_GetModState() & KMOD_CTRL))) {
+					// TODO: should double check with user here...
+					core->commander->execute_command( "script action end");
+				}
+				else cout << "Playing a script.  Press ctrl-C (or 7) to stop." << endl;
 
-	return 0;
-      }
-
-
-      if(key==SDLK_r) {
-	if(SDL_GetModState() & KMOD_CTRL) {
-	  if(core->scripts->is_recording()) core->commander->execute_command( "script action cancelrecord");
-	  else core->commander->execute_command( "script action record");  
-	  // TODO - need filename
-	} else {
-	  if(key==SDLK_r) core->commander->execute_command( "flag constellation_art toggle");
-	}
-      }
+				return 0;
+			}
 
 
-      if(key==SDLK_c) core->commander->execute_command( "flag constellation_drawing toggle");
-      if(key==SDLK_d) {
-	if (SDL_GetModState() & KMOD_CTRL) {
-	  // temp - play demo script
-	  core->commander->execute_command( "script action play filename ./scripts/startup.sts");
-	} else core->commander->execute_command( "flag star_name toggle");
-      }
+			if(key==SDLK_r) {
+				if(SDL_GetModState() & KMOD_CTRL) {
+					if(core->scripts->is_recording()) core->commander->execute_command( "script action cancelrecord");
+					else core->commander->execute_command( "script action record");  
+					// TODO - need filename
+				} else {
+					if(key==SDLK_r) core->commander->execute_command( "flag constellation_art toggle");
+				}
+			}
 
-      if(key==SDLK_1)
-        {
-	  core->FlagConfig=!core->FlagConfig;
-	  config_win->setVisible(core->FlagConfig);
-	}
-      if(key==SDLK_p) {
-	  if(!core->FlagPlanetsHints) {
-	    core->commander->execute_command("flag planets_hints on");
-	  } else if( !core->FlagPlanetsOrbits) {
-	    core->commander->execute_command("flag planets_orbits on");
-	  } else {
-	    core->commander->execute_command("flag planets_orbits off");
-	    core->commander->execute_command("flag planets_hints off");
-	  }
-	}
-        if(key==SDLK_v) core->commander->execute_command( "flag constellation_name toggle");
-        if(key==SDLK_z) core->commander->execute_command( "flag azimutal_grid toggle");
-        if(key==SDLK_e) core->commander->execute_command( "flag equatorial_grid toggle");
-        if(key==SDLK_n) core->commander->execute_command( "flag nebula_name toggle");
-        if(key==SDLK_g) core->commander->execute_command( "flag ground toggle");
-        if(key==SDLK_f) core->commander->execute_command( "flag fog toggle");
-        if(key==SDLK_q) core->commander->execute_command( "flag cardinal_points toggle");
-        if(key==SDLK_a) core->commander->execute_command( "flag atmosphere toggle");
 
-        if(key==SDLK_h)
-        {	
-        	core->FlagHelp=!core->FlagHelp;
-			help_win->setVisible(core->FlagHelp);
-		}
-	if(key==SDLK_COMMA || key==SDLK_4) {
-	  if(!core->FlagEclipticLine) {
-	    core->commander->execute_command( "flag ecliptic_line on");
-	  } else if( !core->FlagObjectTrails) {
-	    core->commander->execute_command( "flag object_trails on");
-	    core->ssystem->start_trails();
-	  } else {
-	    core->commander->execute_command( "flag object_trails off");
-	    core->ssystem->end_trails();
-	    core->commander->execute_command( "flag ecliptic_line off");
-	  }
-	}
-        if(key==SDLK_PERIOD || key==SDLK_5) core->commander->execute_command( "flag equator_line toggle"); 
+			if(key==SDLK_c) core->commander->execute_command( "flag constellation_drawing toggle");
+			if(key==SDLK_d) {
+				if (SDL_GetModState() & KMOD_CTRL) {
+					// temp - play demo script
+					core->commander->execute_command( "script action play filename ./scripts/startup.sts");
+				} else core->commander->execute_command( "flag star_name toggle");
+			}
 
-        if(key==SDLK_t)
-        {
-	  core->navigation->set_flag_lock_equ_pos(!core->navigation->get_flag_lock_equ_pos());
-	}
-        if(key==SDLK_s && !(SDL_GetModState() & KMOD_CTRL)) 	
-	  core->commander->execute_command( "flag stars toggle");
+			if(key==SDLK_1)
+				{
+					core->FlagConfig=!core->FlagConfig;
+					config_win->setVisible(core->FlagConfig);
+				}
+			if(key==SDLK_p) {
+				if(!core->FlagPlanetsHints) {
+					core->commander->execute_command("flag planets_hints on");
+				} else if( !core->FlagPlanetsOrbits) {
+					core->commander->execute_command("flag planets_orbits on");
+				} else {
+					core->commander->execute_command("flag planets_orbits off");
+					core->commander->execute_command("flag planets_hints off");
+				}
+			}
+			if(key==SDLK_v) core->commander->execute_command( "flag constellation_name toggle");
+			if(key==SDLK_z) core->commander->execute_command( "flag azimutal_grid toggle");
+			if(key==SDLK_e) core->commander->execute_command( "flag equatorial_grid toggle");
+			if(key==SDLK_n) core->commander->execute_command( "flag nebula_name toggle");
+			if(key==SDLK_g) core->commander->execute_command( "flag ground toggle");
+			if(key==SDLK_f) core->commander->execute_command( "flag fog toggle");
+			if(key==SDLK_q) core->commander->execute_command( "flag cardinal_points toggle");
+			if(key==SDLK_a) core->commander->execute_command( "flag atmosphere toggle");
+
+			if(key==SDLK_h)
+				{	
+					core->FlagHelp=!core->FlagHelp;
+					help_win->setVisible(core->FlagHelp);
+				}
+			if(key==SDLK_COMMA || key==SDLK_4) {
+				if(!core->FlagEclipticLine) {
+					core->commander->execute_command( "flag ecliptic_line on");
+				} else if( !core->FlagObjectTrails) {
+					core->commander->execute_command( "flag object_trails on");
+					core->ssystem->start_trails();
+				} else {
+					core->commander->execute_command( "flag object_trails off");
+					core->ssystem->end_trails();
+					core->commander->execute_command( "flag ecliptic_line off");
+				}
+			}
+			if(key==SDLK_PERIOD || key==SDLK_5) core->commander->execute_command( "flag equator_line toggle"); 
+
+			if(key==SDLK_t)
+				{
+					core->navigation->set_flag_lock_equ_pos(!core->navigation->get_flag_lock_equ_pos());
+				}
+			if(key==SDLK_s && !(SDL_GetModState() & KMOD_CTRL)) 	
+				core->commander->execute_command( "flag stars toggle");
 	
-        if(key==SDLK_SPACE)
-        {	
-	  if (core->selected_object)
-	    {
-	      core->navigation->move_to(core->selected_object->get_earth_equ_pos(core->navigation),
-					core->auto_move_duration);
-	      core->navigation->set_flag_traking(1);
-	    }
-	}
-        if(key==SDLK_i)
-        {
-	  core->FlagInfos=!core->FlagInfos;
-	  licence_win->setVisible(core->FlagInfos);
-	}
-        if(key==SDLK_EQUALS) core->commander->execute_command( "date relative 1");
-        if(key==SDLK_MINUS) core->commander->execute_command( "date relative -1");
+			if(key==SDLK_SPACE) core->commander->execute_command("flag track_object on");
 
-        if(key==SDLK_m && core->FlagEnableTuiMenu) core->FlagShowTuiMenu = true;  // not recorded
+			if(key==SDLK_i)
+				{
+					core->FlagInfos=!core->FlagInfos;
+					licence_win->setVisible(core->FlagInfos);
+				}
+			if(key==SDLK_EQUALS) core->commander->execute_command( "date relative 1");
+			if(key==SDLK_MINUS) core->commander->execute_command( "date relative -1");
 
-        if(key==SDLK_o) core->commander->execute_command( "flag init_moon_scaled toggle");
-        if(key==SDLK_k) core->commander->execute_command( "timerate rate 1");
-        if(key==SDLK_l) core->commander->execute_command( "timerate action increment");
-        if(key==SDLK_j) core->commander->execute_command( "timerate action decrement");
-        if(key==SDLK_6) core->commander->execute_command( "timerate action pause");
-        if(key==SDLK_7) core->commander->execute_command( "timerate rate 0");
-	if(key==SDLK_8)
-	  {
-	    // set time to default, either actual or preset time based on settings
-	    if (core->StartupTimeMode=="preset" || core->StartupTimeMode=="Preset")
-	      {
-		core->navigation->set_JDay(core->PresetSkyTime -
-					   core->observatory->get_GMT_shift(core->PresetSkyTime) * JD_HOUR);
-	      }
-	    else
-	      {
-		core->navigation->set_JDay(get_julian_from_sys());
-	      }
-	  }
+			if(key==SDLK_m && core->FlagEnableTuiMenu) core->FlagShowTuiMenu = true;  // not recorded
 
-	if(key==SDLK_9) {
-	  int zhr = core->meteors->get_ZHR();
+			if(key==SDLK_o) core->commander->execute_command( "flag init_moon_scaled toggle");
+			if(key==SDLK_k) core->commander->execute_command( "timerate rate 1");
+			if(key==SDLK_l) core->commander->execute_command( "timerate action increment");
+			if(key==SDLK_j) core->commander->execute_command( "timerate action decrement");
+			if(key==SDLK_6) core->commander->execute_command( "timerate action pause");
+			if(key==SDLK_7) core->commander->execute_command( "timerate rate 0");
+			if(key==SDLK_8)
+				{
+					// set time to default, either actual or preset time based on settings
+					if (core->StartupTimeMode=="preset" || core->StartupTimeMode=="Preset")
+						{
+							core->navigation->set_JDay(core->PresetSkyTime -
+													   core->observatory->get_GMT_shift(core->PresetSkyTime) * JD_HOUR);
+						}
+					else
+						{
+							core->navigation->set_JDay(get_julian_from_sys());
+						}
+				}
 
-	  if(zhr <= 10 ) {
-	    core->meteors->set_ZHR( 80 );  // standard Perseids rate
-	  } else if( zhr <= 80 ) {
-	    core->meteors->set_ZHR( 10000 );  // exceptional Leonid rate
-	  } else if( zhr <= 10000 ) {
-	    core->meteors->set_ZHR( 144000 );  // highest ever recorded ZHR (1966 Leonids)
-	  } else {
-	    core->meteors->set_ZHR( 10 );  // set to ***default base rate (10 is normal, 0 would be none)
-	  }
-	}
+			if(key==SDLK_9) {
+				int zhr = core->meteors->get_ZHR();
 
-        if(key==SDLK_LEFTBRACKET) core->commander->execute_command( "date relative -7");
-        if(key==SDLK_RIGHTBRACKET) core->commander->execute_command( "date relative 7");
-	if(key==SDLK_SLASH) {
-	  if (SDL_GetModState() & KMOD_CTRL)  core->commander->execute_command( "autozoom direction out");
-	  else core->commander->execute_command( "autozoom direction in");
-	}
-	if(key==SDLK_BACKSLASH) core->commander->execute_command( "autozoom direction out");
-	if(key==SDLK_x) {
-	  core->commander->execute_command( "flag show_tui_datetime toggle");
-	  core->commander->execute_command( "flag show_tui_short_obj_info toggle");
-	}
-	if(key==SDLK_RETURN)
-	  {
-	    core->navigation->switch_viewing_mode();
-	  }
-    }
+				if(zhr <= 10 ) {
+					core->meteors->set_ZHR( 80 );  // standard Perseids rate
+				} else if( zhr <= 80 ) {
+					core->meteors->set_ZHR( 10000 );  // exceptional Leonid rate
+				} else if( zhr <= 10000 ) {
+					core->meteors->set_ZHR( 144000 );  // highest ever recorded ZHR (1966 Leonids)
+				} else {
+					core->meteors->set_ZHR( 10 );  // set to ***default base rate (10 is normal, 0 would be none)
+				}
+			}
+
+			if(key==SDLK_LEFTBRACKET) core->commander->execute_command( "date relative -7");
+			if(key==SDLK_RIGHTBRACKET) core->commander->execute_command( "date relative 7");
+			if(key==SDLK_SLASH) {
+				if (SDL_GetModState() & KMOD_CTRL)  core->commander->execute_command( "zoom auto out");
+				else core->commander->execute_command( "zoom auto in");
+			}
+			if(key==SDLK_BACKSLASH) core->commander->execute_command( "zoom auto out");
+			if(key==SDLK_x) {
+				core->commander->execute_command( "flag show_tui_datetime toggle");
+				core->commander->execute_command( "flag show_tui_short_obj_info toggle");
+			}
+			if(key==SDLK_RETURN)
+				{
+					core->navigation->switch_viewing_mode();
+				}
+		}
     return 0;
 }
 
