@@ -1015,8 +1015,22 @@ void stel_core::update_move(int delta_time)
         }
     }
 
-	projection->change_fov(deltaFov);
+	//	projection->change_fov(deltaFov);
 	navigation->update_move(deltaAz, deltaAlt);
+	
+	if(deltaFov != 0 ) {
+		std::ostringstream oss;
+		oss << "zoom delta_fov " << deltaFov;
+		commander->execute_command(oss.str());
+	}
+	
+	/*	
+	if(deltaAz != 0 || deltaAlt != 0) {
+		std::ostringstream oss;
+		oss << "updatemove delta_az " << deltaAz << " delta_alt " << deltaAlt;
+		commander->execute_command(oss.str());
+	}
+	*/
 }
 
 void stel_core::set_screen_size(int w, int h)
@@ -1144,7 +1158,7 @@ stel_object * stel_core::clever_find(int x, int y) const
 // Go and zoom to the selected object.
 void stel_core::auto_zoom_in(float move_duration)
 {
-        float manual_move_duration;
+	float manual_move_duration;
 
 	if (!selected_object) return;
   
@@ -1320,6 +1334,17 @@ int stel_core::set_flag(string name, string value, bool &newval, bool trusted) {
 		else if(name=="milky_way") newval = (FlagMilkyWay = !FlagMilkyWay);
 		else if(name=="bright_nebulae") newval = (FlagBrightNebulae = !FlagBrightNebulae);
 		else if(name=="object_trails") newval = (FlagObjectTrails = !FlagObjectTrails);
+		else if(name=="track_object") {
+			if(navigation->get_flag_traking() || !selected_object) {
+				newval = 0;
+				navigation->set_flag_traking(0);
+			} else {
+				navigation->move_to(selected_object->get_earth_equ_pos(navigation),
+									auto_move_duration);
+				navigation->set_flag_traking(1);
+				newval = 1;
+			}
+		}
 		else return(0);  // no matching flag found
 
 	} else {
@@ -1380,6 +1405,15 @@ int stel_core::set_flag(string name, string value, bool &newval, bool trusted) {
 		else if(name=="milky_way") FlagMilkyWay = newval;
 		else if(name=="bright_nebulae") FlagBrightNebulae = newval;
 		else if(name=="object_trails") FlagObjectTrails = newval;
+		else if(name=="track_object") {
+			if(newval && selected_object) {
+				navigation->move_to(selected_object->get_earth_equ_pos(navigation),
+									auto_move_duration);
+				navigation->set_flag_traking(1);
+			} else {
+				navigation->set_flag_traking(0);
+			}
+		}
 		else return(0);  // no matching flag found
 
 	}
