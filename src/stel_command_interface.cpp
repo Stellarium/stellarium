@@ -161,6 +161,22 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
     stcore->selected_planet = NULL;
     stcore->asterisms->set_selected(NULL);
 
+  } else if(command == "look") {  // change direction of view
+	  double duration = str_to_pos_double(args["duration"]);
+
+	  if(args["delta_az"]!="" || args["delta_alt"]!="") {
+		  // immediately change viewing direction
+		  // NOTE: necessitates turning off object tracking 
+		  stcore->navigation->set_flag_traking(0);
+		  stcore->navigation->update_move(str_to_double(args["delta_az"]),
+										  str_to_double(args["delta_alt"]));
+	  }	else status = 0;
+
+	  // TODO, absolute settings
+
+
+	  
+
   } else if(command == "zoom") {
 	  double duration = str_to_pos_double(args["duration"]);
 
