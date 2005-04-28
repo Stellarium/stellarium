@@ -1016,21 +1016,23 @@ void stel_core::update_move(int delta_time)
     }
 
 	//	projection->change_fov(deltaFov);
-	navigation->update_move(deltaAz, deltaAlt);
+	//	navigation->update_move(deltaAz, deltaAlt);
 	
 	if(deltaFov != 0 ) {
 		std::ostringstream oss;
 		oss << "zoom delta_fov " << deltaFov;
 		commander->execute_command(oss.str());
 	}
-	
-	/*	
+
 	if(deltaAz != 0 || deltaAlt != 0) {
 		std::ostringstream oss;
-		oss << "updatemove delta_az " << deltaAz << " delta_alt " << deltaAlt;
+		oss << "look delta_az " << deltaAz << " delta_alt " << deltaAlt;
 		commander->execute_command(oss.str());
+	} else {
+		// must perform call anyway, but don't record!
+		navigation->update_move(deltaAz, deltaAlt);
 	}
-	*/
+	
 }
 
 void stel_core::set_screen_size(int w, int h)
