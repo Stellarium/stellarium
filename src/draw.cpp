@@ -415,7 +415,7 @@ MilkyWay::MilkyWay(const string& tex_file, double _radius) : radius(_radius)
 	tex = new s_texture(tex_file,TEX_LOAD_TYPE_PNG_SOLID_REPEAT);
 
 	// Scotopic color = 0.25, 0.25 in xyY mode. Global stars luminance ~= 0.001 cd/m^2
-	color = Vec3f(0.25f, 0.25f, 0.004f/tex->get_average_luminance());
+	color = Vec3f(0.25f, 0.25f, 0.002f/tex->get_average_luminance());
 }
 
 MilkyWay::~MilkyWay()
