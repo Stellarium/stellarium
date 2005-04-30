@@ -163,9 +163,6 @@ public:
 	void start_trail(void);
 	void end_trail(void);
 
-	// create a stencil of the planet (currently just the moon) in stencil buffer
-	int create_stencil(const navigator* nav, const Projector *prj);
-
 	void update(int delta_time);
 	void show_hint(bool b){hint_fader = b;}
 	void show_orbit(bool b){orbit_fader = b;}

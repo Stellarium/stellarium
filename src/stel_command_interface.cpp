@@ -162,7 +162,7 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
     stcore->asterisms->set_selected(NULL);
 
   } else if(command == "look") {  // change direction of view
-	  double duration = str_to_pos_double(args["duration"]);
+	  //	  double duration = str_to_pos_double(args["duration"]);
 
 	  if(args["delta_az"]!="" || args["delta_alt"]!="") {
 		  // immediately change viewing direction

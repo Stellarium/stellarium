@@ -315,8 +315,26 @@ void SolarSystem::draw(planet* selected, int hint_ON, Projector * prj, const nav
 	iter = system_planets.begin();
     while (iter != system_planets.end())
     {
-        if (*iter!=earth) (*iter)->draw(hint_ON, prj, nav, eye, flag_point, flag_trails);
-        ++iter;
+
+		if(*iter==moon && near_lunar_eclipse(nav, prj)) {
+
+			// special case to update stencil buffer for drawing lunar eclipses
+			glClear(GL_STENCIL_BUFFER_BIT);
+			glClearStencil(0x0);
+
+			glEnable(GL_STENCIL_TEST);
+			glStencilFunc(GL_ALWAYS, 0x1, 0x1);
+			glStencilOp(GL_ZERO, GL_REPLACE, GL_REPLACE);
+
+			(*iter)->draw(hint_ON, prj, nav, eye, flag_point, flag_trails);
+
+			glStencilFunc(GL_EQUAL, 0x1, 0x1);
+			glStencilOp(GL_KEEP, GL_KEEP, GL_KEEP);
+			glDisable(GL_STENCIL_TEST);
+
+		} else if (*iter!=earth) (*iter)->draw(hint_ON, prj, nav, eye, flag_point, flag_trails);
+        
+		++iter;
     }
 
     glDisable(GL_LIGHT0);
@@ -504,11 +522,7 @@ void SolarSystem::draw_earth_shadow(const navigator * nav, Projector * prj) {
 
     // modify shadow location for scaled moon
     Vec3d mdist = shadow - mh;
-    if(mdist.length() > r_penumbra + 2000/AU ||
-       !get_moon()->create_stencil(nav, prj)) {
-      // not visible so don't bother drawing
-      return;
-    }
+    if(mdist.length() > r_penumbra + 2000/AU) return;   // not visible so don't bother drawing
 
     shadow = mh + mdist*mscale;
 
@@ -625,5 +639,31 @@ void SolarSystem::update(int delta_time, navigator* nav) {
         iter++;
     }
 
+
+}
+
+
+// is a lunar eclipse close at hand?
+bool SolarSystem::near_lunar_eclipse(const navigator * nav, Projector *prj) {
+
+	// TODO: could replace with simpler test
+
+    Vec3d e = get_earth()->get_ecliptic_pos();
+    Vec3d m = get_moon()->get_ecliptic_pos();  // relative to earth
+    Vec3d mh = get_moon()->get_heliocentric_ecliptic_pos();  // relative to sun
+
+    // shadow location at earth + moon distance along earth vector from sun
+    Vec3d en = e;
+    en.normalize();
+    Vec3d shadow = en * (e.length() + m.length());
+
+    // find shadow radii in AU
+    double r_penumbra = shadow.length()*702378.1/AU/e.length() - 696000/AU;
+
+    // modify shadow location for scaled moon
+    Vec3d mdist = shadow - mh;
+    if(mdist.length() > r_penumbra + 2000/AU) return 0;   // not visible so don't bother drawing
+
+	return 1;
 
 }

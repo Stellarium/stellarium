@@ -473,13 +473,13 @@ void planet::draw_sphere(const Projector* prj, const Mat4d& mat, float screen_sz
 		}
 	glBindTexture(GL_TEXTURE_2D, tex_map->getID());
 
+
 	// Rotate and add an extra half rotation because of the convention in all
 	// planet texture maps where zero deg long. is in the middle of the texture.
 	prj->sSphere(radius*sphere_scale, nb_facet, nb_facet, mat * Mat4d::zrotation(M_PI/180*(axis_rotation + 180.)));
 
 	glDisable(GL_CULL_FACE);
 	glDisable(GL_LIGHTING);
-
 
 }
 
@@ -627,66 +627,6 @@ void planet::draw_big_halo(const navigator* nav, const Projector* prj, const ton
 	glEnd();
 
 	prj->reset_perspective_projection();		// Restore the other coordinate
-}
-
-int planet::create_stencil(const navigator* nav, const Projector *prj) {
-	// For lunar eclipse to work, set up stencil buffer here
-	// convceivably this might be useful for other shadows
-
-	if(name=="Moon") {
-	  
-		// create a stencil of just the moon
-		// IGNORING projection distortions here and ASSUMING circular as
-		// this is currently only used near lunar eclipses
-
-		glClear(GL_STENCIL_BUFFER_BIT);
-		glClearStencil(0x0);
-
-		Mat4d mat = mat_local_to_parent;
-		planet * p = parent;
-		while (p!=NULL && p->parent!=NULL)
-			{
-				mat = p->mat_local_to_parent * mat;
-				p = p->parent;
-			}
-    
-		mat = nav->get_helio_to_eye_mat() * mat;
-
-		// first make sure moon is in field of view
-		float screen_sz = get_on_screen_size(prj, nav);
-		float viewport_left = prj->view_left();
-		float viewport_bottom = prj->view_bottom();
-		if (prj->project_custom(Vec3f(0,0,0), screenPos, mat) &&
-			screenPos[1]>viewport_bottom - screen_sz && screenPos[1]<viewport_bottom + prj->viewH()+screen_sz &&
-			screenPos[0]>viewport_left - screen_sz && screenPos[0]<viewport_left + prj->viewW() + screen_sz)
-			{
-				prj->set_orthographic_projection();    // 2D coordinate
-
-				float screen_sz = get_on_screen_size(prj, nav);
-
-				glEnable(GL_STENCIL_TEST);
-				glColorMask(0,0,0,0);  // don't modify color buffer when setting up stencil
-				glStencilFunc(GL_ALWAYS, 0x1, 0x1);
-				glStencilOp(GL_ZERO, GL_REPLACE, GL_REPLACE);
-	
-				// Draw the disk in the stencil buffer
-				glTranslatef(screenPos[0], screenPos[1],0.f);
-				glColor3f(1,1,1);
-				GLUquadricObj * p = gluNewQuadric();
-				gluDisk(p, 0., screen_sz/2, 256, 1);
-				gluDeleteQuadric(p);
-				glStencilFunc(GL_EQUAL, 0x1, 0x1);
-				glStencilOp(GL_KEEP, GL_KEEP, GL_KEEP);
-	
-				glColorMask(1,1,1,1);
-				prj->reset_perspective_projection();
-	
-				glDisable(GL_STENCIL_TEST);
-				return 1;
-			}
-
-	}
-	return 0;
 }
 
 ring::ring(float _radius, const string& _texname) : radius(_radius), tex(NULL)
