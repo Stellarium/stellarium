@@ -80,6 +80,7 @@ private:
 	void load(const string& planetfile);// Load the bodies data from a file
 	vector<planet*> system_planets;		// Vector containing all the bodies of the system
 	vector<EllipticalOrbit*> ell_orbits;// Pointers on created elliptical orbits
+	bool near_lunar_eclipse(const navigator * nav, Projector * prj);
 	void draw_earth_shadow(const navigator * nav, Projector * prj);  
 	// draw earth shadow on moon for lunar eclipses
 
