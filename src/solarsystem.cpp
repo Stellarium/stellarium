@@ -525,99 +525,55 @@ void SolarSystem::draw_earth_shadow(const navigator * nav, Projector * prj) {
     if(mdist.length() > r_penumbra + 2000/AU) return;   // not visible so don't bother drawing
 
     shadow = mh + mdist*mscale;
-
     r_penumbra *= mscale;
-    Vec3d left = shadow - rpt;
-    Vec3d right = shadow + rpt;
-    double top = shadow[2] + r_penumbra;
-    double bottom = shadow[2] - r_penumbra;
 
     nav->switch_to_heliocentric();
-
     glEnable(GL_STENCIL_TEST);
 
-    right = shadow + upt;
-    Vec3d uleft = shadow - upt;
-    top = shadow[2] + r_umbra*mscale*1.02;
-    bottom = shadow[2] - r_umbra*mscale*1.02;
+	
+	Mat4d mat = nav->get_helio_to_eye_mat();
+	Mat4d rotate_step = Mat4d::rotation(shadow, 2*M_PI/100);
 
-    
-    prj->set_orthographic_projection();    // 2D coordinate
-
-    Vec3d screenPos, screenRad;
-    
-    
-    prj->project_helio(shadow, screenPos);
-    prj->project_helio(left, screenRad);
-
-    float x = screenPos[0];
-    float y = screenPos[1];
-    float rad = sqrt(pow(screenRad[0]-x,2) + pow(screenRad[1]-y,2));
-
-    Vec3d screenURad;
-    prj->project_helio(uleft, screenURad);
-    float urad = sqrt(pow(screenURad[0]-x,2) + pow(screenURad[1]-y,2));
-
-    
     // shadow radial texture
     glBindTexture(GL_TEXTURE_2D, tex_earth_shadow->getID());
 
+	Vec3d r = upt;
+	Vec3d s;
+
     // umbra first
     glBegin(GL_TRIANGLE_STRIP);
-    float r;
     for (int i=0; i<=100; i++) {
-      r = i*2*M_PI/100.;
+		r = rotate_step * r;
+		s = shadow + r;
 
-      glTexCoord2f(0,0);
-      glVertex3f(x, y, 0.0f);
+		glTexCoord2f(0,0);
+		prj->sVertex3( shadow[0],shadow[1], shadow[2], mat);
 
-      glTexCoord2f(0.6,0);  // position in texture of umbra edge
-      glVertex3f(x + urad * sin(r), y + urad * cos(r), 0.0f);
+		glTexCoord2f(0.6,0);  // position in texture of umbra edge
+		prj->sVertex3( s[0],s[1], s[2], mat);
     }
     glEnd();
+
 
     // now penumbra
+	r = rpt;
+	Vec3d u = upt;
+	Vec3d sp;
     glBegin(GL_TRIANGLE_STRIP);
     for (int i=0; i<=100; i++) {
-      r = i*2*M_PI/100.;
+		r = rotate_step * r;
+		u = rotate_step * u;
+		s = shadow + r;
+		sp = shadow + u;
 
-      glTexCoord2f(0.6,0);  // position in texture of umbra edge
-      glVertex3f(x + urad * sin(r), y + urad * cos(r), 0.0f);
+		glTexCoord2f(0.6,0);
+		prj->sVertex3( sp[0],sp[1], sp[2], mat);
 
-      glTexCoord2f(1,0);
-      glVertex3f(x + rad * sin(r), y + rad * cos(r), 0.0f);
+		glTexCoord2f(1.,0);  // position in texture of umbra edge
+		prj->sVertex3( s[0],s[1], s[2], mat);
     }
     glEnd();
-
-
-    /*
-      Show rings for debug
-
-    Mat4d mat = nav->get_helio_to_eye_mat();
-
-    glDisable(GL_TEXTURE_2D);
-    glColor3f(1,0,0);
-    glDisable(GL_BLEND);
-    glTranslatef(x,y,0);
-    GLUquadricObj * p = gluNewQuadric();
-    gluDisk(p, rad-1, rad, 256, 1);
-    gluDeleteQuadric(p);
-
-
-    // umbra
-
-    glColor3f(0,1,0);
-    p = gluNewQuadric();
-    gluDisk(p, urad-1, urad, 256, 1);
-    gluDeleteQuadric(p);
-
-
-    glColor4f(1,1,1,1);
-    glEnable(GL_TEXTURE_2D);
-    glEnable(GL_BLEND);
-    */
-    
-    prj->reset_perspective_projection();		// Restore the other coordinate
+	
     glDisable(GL_STENCIL_TEST);
 
 }
