@@ -1266,7 +1266,11 @@ void stel_core::set_sky_locale(string _locale)
   if( !hip_stars ) return; // objects not initialized yet
 
   SkyLocale = _locale;
-  hip_stars->load_common_names(DataDir + "star_names." + _locale + ".fab");
+
+  if( !hip_stars->load_common_names(DataDir + "star_names." + _locale + ".fab") ) {
+	  // If no special star names in this language, use international names
+	  hip_stars->load_common_names(DataDir + "star_names.eng.fab");
+  }
   ssystem->set_sky_locale(_locale);
   asterisms->set_sky_locale(_locale);
 
