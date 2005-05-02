@@ -69,12 +69,16 @@ void Sky_localizer::init_sky_locales() {
 	locale_to_name.clear();
 	name_to_locale.clear();
 
+	// TODO: put these in a config file so not hard coded!
+
 	// initialize sky locale list (hardcoded right here)
-	locale_to_name["eng"] = _("English");
-	locale_to_name["esl"] = _("Spanish");
+	locale_to_name["deu"]  = _("German");
+	locale_to_name["dut"]  = _("Dutch");
+	locale_to_name["eng"]  = _("English");
+	locale_to_name["esl"]  = _("Spanish");
 	locale_to_name["fra"]  = _("French");
 	locale_to_name["haw"]  = _("Hawaiian");
-	locale_to_name["dut"]  = _("Dutch");
+	locale_to_name["ita"]  = _("Italian");
 	locale_to_name["por"]  = _("Portuguese");
 
 	for ( stringHashIter_t iter = locale_to_name.begin(); iter != locale_to_name.end(); ++iter ) {
