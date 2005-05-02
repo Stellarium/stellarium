@@ -239,6 +239,9 @@ void stel_core::update(int delta_time)
     observatory->update(delta_time);
     navigation->update_time(delta_time);
 
+	// TODO: for efficiency, if FlagPlanets is false don't run calculations for any 
+	// except sun, earth, moon (affect atmosphere)
+
 	// Position of sun and all the satellites (ie planets)
 	ssystem->compute_positions(navigation->get_JDay());
 	// Matrix for sun and all the satellites (ie planets)
