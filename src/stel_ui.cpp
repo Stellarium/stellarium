@@ -835,7 +835,10 @@ int stel_ui::handle_keys(SDLKey key, S_GUI_VALUE state)
 			if(key==SDLK_BACKSLASH) core->commander->execute_command( "zoom auto out");
 			if(key==SDLK_x) {
 				core->commander->execute_command( "flag show_tui_datetime toggle");
-				core->commander->execute_command( "flag show_tui_short_obj_info toggle");
+
+				// keep these in sync.  Maybe this should just be one flag.
+				if(core->FlagShowTuiDateTime) core->commander->execute_command( "flag show_tui_short_obj_info on");
+				else core->commander->execute_command( "flag show_tui_short_obj_info off");
 			}
 			if(key==SDLK_RETURN)
 				{

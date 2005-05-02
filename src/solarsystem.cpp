@@ -318,6 +318,8 @@ void SolarSystem::draw(planet* selected, int hint_ON, Projector * prj, const nav
 
 		if(*iter==moon && near_lunar_eclipse(nav, prj)) {
 
+			// TODO: moon magnitude label during eclipse isn't accurate... 
+
 			// special case to update stencil buffer for drawing lunar eclipses
 			glClear(GL_STENCIL_BUFFER_BIT);
 			glClearStencil(0x0);
