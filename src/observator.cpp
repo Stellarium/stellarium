@@ -167,26 +167,30 @@ string Observator::get_time_zone_name_from_system(double JD) const
 // Fixed 31-05-2004 Now use the extern variables set by tzset()
 float Observator::get_GMT_shift_from_system(double JD, bool _local) const
 {
-#if defined( MACOSX )
+
+	/* Doesn't seem like MACOSX is a special case... ??? rob
+    #if defined( MACOSX )
 	struct tm *timeinfo;
 	time_t rawtime; time(&rawtime);
 	timeinfo = localtime(&rawtime);
 	return (float)timeinfo->tm_gmtoff/3600;
 	// + (timeinfo->tm_isdst!=0);
-#else
-	// doesn't account for dst changes
-	// TODO come up with correct and portable solution 
-	return -(float)timezone/3600;
-	
-	/* 
-	// correct, but not portable
+	#else
+	*/
+
 	struct tm * timeinfo;
 
 	if(!_local) {
 	  // JD is UTC
 	  struct tm rawtime;
 	  get_tm_from_julian(JD, &rawtime);
+
+#if defined( HAVE_TIMEGM )
 	  time_t ltime = timegm(&rawtime);
+#else
+	  time_t ltime = my_timegm(&rawtime);
+#endif
+
 	  timeinfo = localtime(&ltime);
 	} else {
 	  time_t rtime;
@@ -206,11 +210,29 @@ float Observator::get_GMT_shift_from_system(double JD, bool _local) const
 	float min = 1.f/60.f * atoi(&heure[3]);
 	heure[3] = '\0';
 	return min + atoi(heure);
-	*/
 
-#endif
+	// #endif
 	
 }
+
+// for platforms without built in timegm function
+// taken from the timegm man page
+time_t my_timegm (struct tm *tm) {
+	time_t ret;
+	char *tz;
+	
+	tz = getenv("TZ");
+	setenv("TZ", "", 1);
+	tzset();
+	ret = mktime(tm);
+	if (tz)
+		setenv("TZ", tz, 1);
+	else
+		unsetenv("TZ");
+	tzset();
+	return ret;
+}
+
 
 // Return the time in ISO 8601 format that is : %Y-%m-%d %H:%M:%S
 string Observator::get_ISO8601_time_UTC(double JD) const
@@ -373,7 +395,7 @@ void Observator::update(int delta_time) {
 
     latitude = start_lat - move_to_mult*(start_lat-end_lat);
     longitude = start_lon - move_to_mult*(start_lon-end_lon);
-    altitude = start_alt - move_to_mult*(start_alt-end_alt);
+    altitude = int(start_alt - move_to_mult*(start_alt-end_alt));
 
   }
 }
