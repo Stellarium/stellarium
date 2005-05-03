@@ -1169,12 +1169,13 @@ Time_item::Time_item(const s_font* _font, const s_texture* tex_up,
 {
 	if (_font) setFont(_font);
 
+	// ranges are +1 and -1 from normal to allow rollover
 	y = new IntIncDec(getFont(), tex_up, tex_down, -9999, 99999, 1930, 1);
-	m = new IntIncDec(getFont(), tex_up, tex_down, 1, 12, 12, 1);
-	d = new IntIncDec(getFont(), tex_up, tex_down, 1, 31, 11, 1);
-	h = new IntIncDec(getFont(), tex_up, tex_down, 0, 23, 16, 1);
-	mn= new IntIncDec(getFont(), tex_up, tex_down, 0, 59, 35, 1);
-	s = new IntIncDec(getFont(), tex_up, tex_down, 0, 59, 23, 1);
+	m = new IntIncDec(getFont(), tex_up, tex_down, 0, 13, 12, 1);
+	d = new IntIncDec(getFont(), tex_up, tex_down, 0, 32, 11, 1);
+	h = new IntIncDec(getFont(), tex_up, tex_down, -1, 24, 16, 1);
+	mn= new IntIncDec(getFont(), tex_up, tex_down, -1, 60, 35, 1);
+	s = new IntIncDec(getFont(), tex_up, tex_down, -1, 60, 23, 1);
 
 	y->setOnPressCallback(callback<void>(this, &Time_item::onTimeChange));
 	m->setOnPressCallback(callback<void>(this, &Time_item::onTimeChange));
