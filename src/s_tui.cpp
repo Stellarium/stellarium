@@ -562,12 +562,14 @@ Time_item::Time_item(const string& _label, double _JD) :
 	CallbackComponent(), JD(_JD), current_edit(NULL), label(_label),
 	y(NULL), m(NULL), d(NULL), h(NULL), mn(NULL), s(NULL)
 {
+	// Note: range limits are 1 beyond normal range to allow for rollover
+	// as date is calculated after updates and range limits are enforced then
 	y = new Integer_item(-100000, 100000, 2003);
-	m = new Integer_item(1, 12, 1);
-	d = new Integer_item(1, 31, 1);
-	h = new Integer_item(0, 23, 0);
-	mn = new Integer_item(0, 59, 0);
-	s = new Integer_item(0, 59, 0);
+	m = new Integer_item(0, 13, 1);
+	d = new Integer_item(0, 32, 1);
+	h = new Integer_item(-1, 24, 0);
+	mn = new Integer_item(-1, 60, 0);
+	s = new Integer_item(-1, 60, 0);
 	current_edit = y;
 }
 
