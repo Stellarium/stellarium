@@ -123,5 +123,7 @@ private:
 
 };
 
+time_t my_timegm (struct tm *tm);
+
 
 #endif // _OBSERVATOR_H_
