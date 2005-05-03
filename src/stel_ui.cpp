@@ -746,7 +746,7 @@ int stel_ui::handle_keys(SDLKey key, S_GUI_VALUE state)
 				}
 			}
 			if(key==SDLK_v) core->commander->execute_command( "flag constellation_name toggle");
-			if(key==SDLK_z) core->commander->execute_command( "flag azimutal_grid toggle");
+			if(key==SDLK_z) core->commander->execute_command( "flag azimuthal_grid toggle");
 			if(key==SDLK_e) core->commander->execute_command( "flag equatorial_grid toggle");
 			if(key==SDLK_n) core->commander->execute_command( "flag nebula_name toggle");
 			if(key==SDLK_g) core->commander->execute_command( "flag ground toggle");
