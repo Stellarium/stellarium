@@ -1323,7 +1323,7 @@ int stel_core::set_flag(string name, string value, bool &newval, bool trusted) {
 		else if(name=="constellation_drawing") newval = (FlagConstellationDrawing = !FlagConstellationDrawing);
 		else if(name=="constellation_name") newval = (FlagConstellationName = !FlagConstellationName);
 		else if(name=="constellation_art") newval = (FlagConstellationArt = !FlagConstellationArt);
-		else if(name=="azimutal_grid") newval = (FlagAzimutalGrid = !FlagAzimutalGrid);
+		else if(name=="azimuthal_grid") newval = (FlagAzimutalGrid = !FlagAzimutalGrid);
 		else if(name=="equatorial_grid") newval = (FlagEquatorialGrid = !FlagEquatorialGrid);
 		else if(name=="equator_line") newval = (FlagEquatorLine = !FlagEquatorLine);
 		else if(name=="ecliptic_line") newval = (FlagEclipticLine = !FlagEclipticLine);
@@ -1395,7 +1395,7 @@ int stel_core::set_flag(string name, string value, bool &newval, bool trusted) {
 		else if(name=="constellation_drawing") FlagConstellationDrawing = newval;
 		else if(name=="constellation_name") FlagConstellationName = newval;
 		else if(name=="constellation_art") FlagConstellationArt = newval;
-		else if(name=="azimutal_grid") FlagAzimutalGrid = newval;
+		else if(name=="azimuthal_grid") FlagAzimutalGrid = newval;
 		else if(name=="equatorial_grid") FlagEquatorialGrid = newval;
 		else if(name=="equator_line") FlagEquatorLine = newval;
 		else if(name=="ecliptic_line") FlagEclipticLine = newval;
@@ -1509,7 +1509,7 @@ void stel_core::populate_setting_mgr(SettingMgr *smgr) {
   smgr->set("flag_constellation_name", FlagConstellationName);
   smgr->set("flag_constellation_art", FlagConstellationArt);
   smgr->set("flag_constellation_pick", FlagConstellationPick);
-  smgr->set("flag_azimutal_grid", FlagAzimutalGrid);
+  smgr->set("flag_azimuthal_grid", FlagAzimutalGrid);
   smgr->set("flag_equatorial_grid", FlagEquatorialGrid);
   smgr->set("flag_equator_line", FlagEquatorLine);
   smgr->set("flag_ecliptic_line", FlagEclipticLine);
