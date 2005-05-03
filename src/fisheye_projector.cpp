@@ -23,7 +23,8 @@
 
 
 Fisheye_projector::Fisheye_projector(int _screenW, int _screenH, double _fov,
-	double _min_fov, double _max_fov) : Projector(_screenW, _screenH, _fov, _min_fov, _max_fov)
+	double _min_fov, double _max_fov, int _distortion_function) : 
+	Projector(_screenW, _screenH, _fov, _min_fov, _max_fov)
 {
 
 	set_fov(_fov);

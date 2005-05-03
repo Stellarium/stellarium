@@ -116,7 +116,7 @@ void stel_core::init(void)
 		projection = new Projector(screen_W, screen_H, InitFov);
 		break;
 	case FISHEYE_PROJECTOR :
-		projection = new Fisheye_projector(screen_W, screen_H, InitFov, DistortionFunction);
+		projection = new Fisheye_projector(screen_W, screen_H, InitFov, .001, 300, DistortionFunction);
 		break;
 	default :
 		projection = new Projector(screen_W, screen_H, InitFov);
