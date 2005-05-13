@@ -343,7 +343,7 @@ float planet::get_on_screen_size(const Projector* prj, const navigator * nav)
 
 // Draw the planet and all the related infos : name, circle etc..
 void planet::draw(int hint_ON, Projector* prj, const navigator * nav, const tone_reproductor* eye, 
-				  int flag_point, int flag_trails)
+				  int flag_point, int flag_trails, bool stencil)
 {
 
 	// TEMP -- place in command interface 
@@ -400,7 +400,12 @@ void planet::draw(int hint_ON, Projector* prj, const navigator * nav, const tone
 					glDisable(GL_DEPTH_TEST);
 					prj->set_clipping_planes(n ,f);	// Release old clipping planes
 				}
-			else draw_sphere(prj, mat, screen_sz);
+			else 
+				{
+					if(stencil) glEnable(GL_STENCIL_TEST);
+					draw_sphere(prj, mat, screen_sz);
+					if(stencil) glDisable(GL_STENCIL_TEST);
+				}
 	    
 			if(tex_halo) {
 				if (flag_point) draw_point_halo(nav, prj, eye);
