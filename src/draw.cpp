@@ -414,14 +414,21 @@ MilkyWay::MilkyWay(const string& tex_file, double _radius) : radius(_radius)
 {
 	tex = new s_texture(tex_file,TEX_LOAD_TYPE_PNG_SOLID_REPEAT);
 
-	// Scotopic color = 0.25, 0.25 in xyY mode. Global stars luminance ~= 0.001 cd/m^2
-	color = Vec3f(0.25f, 0.25f, 0.003f/tex->get_average_luminance());
+	set_intensity(1);
 }
 
 MilkyWay::~MilkyWay()
 {
 	if (tex) delete tex;
 	tex = NULL;
+}
+
+void MilkyWay::set_intensity(float _intensity) {
+
+	intensity = _intensity;
+	// Scotopic color = 0.25, 0.25 in xyY mode. Global stars luminance ~= 0.001 cd/m^2
+	color = Vec3f(0.25f, 0.25f, intensity*0.004f/tex->get_average_luminance());
+
 }
 
 void MilkyWay::draw(tone_reproductor * eye, const Projector* prj, const navigator* nav) const

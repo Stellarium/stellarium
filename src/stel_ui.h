@@ -232,6 +232,7 @@ private:
 	s_tui::Boolean_item* tui_effect_pointobj;
 	s_tui::Decimal_item* tui_effect_object_scale;
 	s_tui::Decimal_item* tui_effect_zoom_duration;
+	s_tui::Decimal_item* tui_effect_milkyway_intensity;
 	s_tui::Boolean_item* tui_effect_manual_zoom;
 
 	// 6. Scripts
@@ -261,6 +262,7 @@ private:
 	void tui_cb_tui_admin_change_viewport(void);    // Set viewport offset
 	void tui_cb_scripts_removeable(void);    // changed removeable disk script selection
 	void tui_cb_scripts_local();             // changed local script selection
+	void tui_cb_effects_milkyway_intensity();        // change milky way intensity
 
 	// Parse a file of type /usr/share/zoneinfo/zone.tab
 	s_tui::MultiSet_item<string>* stel_ui::create_tree_from_time_zone_file(const string& zonetab);
