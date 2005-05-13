@@ -195,69 +195,66 @@ bool Meteor::update(int delta_time)
 bool Meteor::draw(Projector *proj, navigator* nav)
 {
 
-  if(!alive) return(0);
+	if(!alive) return(0);
 
-  Vec3d start, end;
+	Vec3d start, end;
 
-  Vec3d spos = position;
-  Vec3d epos = pos_train;
+	Vec3d spos = position;
+	Vec3d epos = pos_train;
 
-  // convert to equ
-  spos.transfo4d(mmat);
-  epos.transfo4d(mmat);
+	// convert to equ
+	spos.transfo4d(mmat);
+	epos.transfo4d(mmat);
 
-  // convert to local and correct for earth radius [since equ and local coordinates in stellarium use same 0 point!] 
-  spos = nav->earth_equ_to_local( spos );
-  epos = nav->earth_equ_to_local( epos );
-  spos[2] -= EARTH_RADIUS;
-  epos[2] -= EARTH_RADIUS;
+	// convert to local and correct for earth radius [since equ and local coordinates in stellarium use same 0 point!] 
+	spos = nav->earth_equ_to_local( spos );
+	epos = nav->earth_equ_to_local( epos );
+	spos[2] -= EARTH_RADIUS;
+	epos[2] -= EARTH_RADIUS;
 
-  int t1 = proj->project_local_check(spos/1216, start);  // 1216 is to scale down under 1 for desktop version
-  int t2 = proj->project_local_check(epos/1216, end);
+	int t1 = proj->project_local_check(spos/1216, start);  // 1216 is to scale down under 1 for desktop version
+	int t2 = proj->project_local_check(epos/1216, end);
 
-  // don't draw if not visible (but may come into view)
-  if( t1 + t2 == 0 ) return 1;
+	// don't draw if not visible (but may come into view)
+	if( t1 + t2 == 0 ) return 1;
 
-  //  printf("[%f %f %f] (%d, %d) (%d, %d)\n", position[0], position[1], position[2], (int)start[0], (int)start[1], (int)end[0], (int)end[1]);
+	//  printf("[%f %f %f] (%d, %d) (%d, %d)\n", position[0], position[1], position[2], (int)start[0], (int)start[1], (int)end[0], (int)end[1]);
 
-  glEnable(GL_BLEND); 
-  glDisable(GL_TEXTURE_2D);  // much dimmer without this
+	if( train ) {
+		// connect this point with last drawn point
 
-  if( train ) {
-    // connect this point with last drawn point
+		double tmag = mag*dist_multiplier;
 
-    double tmag = mag*dist_multiplier;
+		// compute an intermediate point so can curve slightly along projection distortions
+		Vec3d intpos;
+		Vec3d posi = pos_internal; 
+		posi[2] = position[2] + (pos_train[2] - position[2])/2;
+		posi.transfo4d(mmat);
+		posi = nav->earth_equ_to_local( posi );
+		posi[2] -= EARTH_RADIUS;
+		proj->project_local(posi/1216, intpos);
 
-    // compute an intermediate point so can curve slightly along projection distortions
-    Vec3d intpos;
-    Vec3d posi = pos_internal; 
-    posi[2] = position[2] + (pos_train[2] - position[2])/2;
-    posi.transfo4d(mmat);
-    posi = nav->earth_equ_to_local( posi );
-    posi[2] -= EARTH_RADIUS;
-    proj->project_local(posi/1216, intpos);
+		// draw dark to light
+		glBegin(GL_LINE_STRIP);
+		glColor4f(0,0,0,0);
+		glVertex3f(end[0],end[1],0);
+		glColor4f(1,1,1,tmag/2);
+		glVertex3f(intpos[0],intpos[1],0);
+		glColor4f(1,1,1,tmag);
+		glVertex3f(start[0],start[1],0);
+		glEnd();
+	} else {
+		glPointSize(1);
+		glBegin(GL_POINTS);
+		glVertex3f(start[0],start[1],0);
+		glEnd();
+	}
 
-    // draw dark to light
-    glBegin(GL_LINE_STRIP);
-    glColor3f(0,0,0);
-    glVertex3f(end[0],end[1],0);
-    glColor3f(tmag/2,tmag/2,tmag/2);
-    glVertex3f(intpos[0],intpos[1],0);
-    glColor3f(tmag,tmag,tmag);
-    glVertex3f(start[0],start[1],0);
-    glEnd();
-  } else {
-    glPointSize(1);
-    glBegin(GL_POINTS);
-    glVertex3f(start[0],start[1],0);
-    glEnd();
-  }
-
-  /*  
-  // TEMP - show radiant
-  Vec3d radiant = Vec3d(0,0,0.5f);
-  radiant.transfo4d(mmat);
-  if( projection->project_earth_equ(radiant, start) ) {
+	/*  
+	// TEMP - show radiant
+	Vec3d radiant = Vec3d(0,0,0.5f);
+	radiant.transfo4d(mmat);
+	if( projection->project_earth_equ(radiant, start) ) {
     glColor3f(1,0,1);
     glBegin(GL_LINES);
     glVertex3f(start[0]-10,start[1],0);
@@ -268,14 +265,12 @@ bool Meteor::draw(Projector *proj, navigator* nav)
     glVertex3f(start[0],start[1]-10,0);
     glVertex3f(start[0],start[1]+10,0);
     glEnd();
-  }
-  */
+	}
+	*/
 
-  glEnable(GL_TEXTURE_2D);
+	train = 1;
 
-  train = 1;
-
-  return(1);
+	return(1);
 }
 
 bool Meteor::is_alive(void)
