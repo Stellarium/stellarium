@@ -112,10 +112,16 @@ void Meteor_mgr::update(Projector *proj, navigator* nav, tone_reproductor* eye, 
 
 void Meteor_mgr::draw(Projector *proj, navigator* nav) {
 
-  // step through and draw all active meteors
-  for(vector<Meteor*>::iterator iter = active.begin(); iter != active.end(); ++iter) {
-    (*iter)->draw(proj, nav);
-  }
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	glEnable(GL_BLEND); 
+	glDisable(GL_TEXTURE_2D);  // much dimmer without this
 
+	// step through and draw all active meteors
+	for(vector<Meteor*>::iterator iter = active.begin(); iter != active.end(); ++iter) {
+		(*iter)->draw(proj, nav);
+	}
+
+	glEnable(GL_TEXTURE_2D);
+	
 }
 

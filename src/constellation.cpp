@@ -120,8 +120,6 @@ void Constellation::draw_optim(Projector* prj, Vec3f color) const
 	static Vec3d star1;
 	static Vec3d star2;
 
-	//	glDisable(GL_TEXTURE_2D);
-    //glDisable(GL_BLEND);
 	glColor3fv(color*line_fader.get_interstate());
 
     for(unsigned int i=0;i<nb_segments;++i)
