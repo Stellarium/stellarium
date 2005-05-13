@@ -358,7 +358,7 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 
 	  // turn off all labels (used by scripts for simplicity)
 	  execute_command("flag atmosphere off");
-	  execute_command("flag azimutal_grid off");
+	  execute_command("flag azimuthal_grid off");
 	  execute_command("flag cardinal_points off");
 	  execute_command("flag constellation_art off");
 	  execute_command("flag constellation_drawing off");
