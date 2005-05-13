@@ -268,6 +268,7 @@ private:
     float MaxMagNebulaName;
     int FlagNebulaCircle;
     int FlagMilkyWay;
+    float MilkyWayIntensity;
     int FlagBrightNebulae;
 	
 	// Landscape

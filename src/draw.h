@@ -113,10 +113,13 @@ public:
 	MilkyWay(const string& tex_file, double _radius = 1.);
     virtual ~MilkyWay();
 	void draw(tone_reproductor * eye, const Projector* prj, const navigator* nav) const;
+	void set_intensity(float _intensity);
+	float get_intensity() { return intensity; };
 private:
 	double radius;
 	s_texture* tex;
 	Vec3f color;
+	float intensity;
 };
 
 void DrawPoint(float X,float Y,float Z);

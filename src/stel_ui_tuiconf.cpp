@@ -187,7 +187,11 @@ void stel_ui::init_tui(void)
 	tui_effect_object_scale->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb1));
 	tui_menu_effects->addComponent(tui_effect_object_scale);
 
-	tui_effect_zoom_duration = new s_tui::Decimal_item(1, 10, 2, string("5.5 ") + _("Zoom duration: "));
+	tui_effect_milkyway_intensity = new s_tui::Decimal_item(0, 10, 1, string("5.5 ") + _("Milky Way intensity: "), .5);
+	tui_effect_milkyway_intensity->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb_effects_milkyway_intensity));
+	tui_menu_effects->addComponent(tui_effect_milkyway_intensity);
+
+	tui_effect_zoom_duration = new s_tui::Decimal_item(1, 10, 2, string("5.6 ") + _("Zoom duration: "));
 	tui_effect_zoom_duration->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb1));
 	tui_menu_effects->addComponent(tui_effect_zoom_duration);
 
@@ -352,6 +356,7 @@ void stel_ui::tui_update_widgets(void)
 	tui_effect_zoom_duration->setValue(core->auto_move_duration);
 	tui_effect_manual_zoom->setValue(core->FlagManualZoom);
 	tui_effect_object_scale->setValue(core->StarScale);
+	tui_effect_milkyway_intensity->setValue(core->milky_way->get_intensity());
 
 	// 6. Scripts
 	// each fresh time enter needs to reset to select message
@@ -530,5 +535,14 @@ void stel_ui::tui_cb_admin_set_locale() {
 	LocaleChanged = 1;  // will reload TUI next draw.  Note that position in TUI is lost...
 #endif
 
+
+}
+
+
+void stel_ui::tui_cb_effects_milkyway_intensity() {
+
+	std::ostringstream oss;
+	oss << "set milky_way_intensity " << tui_effect_milkyway_intensity->getValue();
+	core->commander->execute_command(oss.str());
 
 }

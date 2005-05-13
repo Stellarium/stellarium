@@ -100,6 +100,10 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 		stcore->ssystem->set_object_scale(scale);
 	} else if(args["star_twinkle_amount"]!="") stcore->StarTwinkleAmount = str_to_double(args["star_twinkle_amount"]);
     else if(args["time_zone"]!="") stcore->observatory->set_custom_tz_name(args["time_zone"]);
+    else if(args["milky_way_intensity"]!="") {
+		stcore->MilkyWayIntensity = str_to_double(args["milky_way_intensity"]);
+		stcore->milky_way->set_intensity(stcore->MilkyWayIntensity);
+	}
 
 
     else status = 0;
