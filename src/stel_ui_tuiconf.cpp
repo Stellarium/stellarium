@@ -124,12 +124,19 @@ void stel_ui::init_tui(void)
 	tui_time_displayformat->addItem("12h");
 	tui_time_displayformat->addItem("system_default");
 	tui_time_displayformat->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb_settimedisplayformat));
+	tui_time_dateformat = new s_tui::MultiSet_item<string>(string("2.6 ") + _("Date Display Format: "));
+	tui_time_dateformat->addItem("yyyymmdd");
+	tui_time_dateformat->addItem("ddmmyyyy");
+	tui_time_dateformat->addItem("mmddyyyy");
+	tui_time_dateformat->addItem("system_default");
+	tui_time_dateformat->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb_settimedisplayformat));
 
 	tui_menu_time->addComponent(tui_time_skytime);
 	tui_menu_time->addComponent(tui_time_settmz);
 	tui_menu_time->addComponent(tui_time_presetskytime);
 	tui_menu_time->addComponent(tui_time_startuptime);
 	tui_menu_time->addComponent(tui_time_displayformat);
+	tui_menu_time->addComponent(tui_time_dateformat);
 
 	// 3. General settings
 
@@ -327,6 +334,7 @@ void stel_ui::tui_update_widgets(void)
 	tui_time_presetskytime->setJDay(core->PresetSkyTime);
 	tui_time_startuptime->setCurrent(core->StartupTimeMode);
 	tui_time_displayformat->setCurrent(core->observatory->get_time_format_str());
+	tui_time_dateformat->setCurrent(core->observatory->get_date_format_str());
 
 	// 3. general
 	tui_general_sky_culture->setValue(core->skyloc->convert_directory_to_sky_culture(core->SkyCulture));
@@ -381,6 +389,7 @@ void stel_ui::tui_cb_settimezone(void)
 void stel_ui::tui_cb_settimedisplayformat(void)
 {
 	core->observatory->set_time_format_str(tui_time_displayformat->getCurrent());
+	core->observatory->set_date_format_str(tui_time_dateformat->getCurrent());
 }
 
 // 7. Administration actions functions

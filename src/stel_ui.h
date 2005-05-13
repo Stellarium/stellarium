@@ -215,6 +215,7 @@ private:
 	s_tui::Time_item* tui_time_presetskytime;
 	s_tui::MultiSet_item<string>* tui_time_startuptime;
 	s_tui::MultiSet_item<string>* tui_time_displayformat;
+	s_tui::MultiSet_item<string>* tui_time_dateformat;
 
 	// 3. General
 	s_tui::MultiSet_item<string>* tui_general_sky_culture;
