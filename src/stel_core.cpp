@@ -163,6 +163,8 @@ void stel_core::init(void)
 	cardinals_points->set_color(CardinalColor);
 
 	milky_way = new MilkyWay("milkyway");
+	milky_way->set_intensity(MilkyWayIntensity);
+		
 	meteors = new Meteor_mgr(10, 60);
 
 	landscape = Landscape::create_from_file(DataDir + "landscapes.ini", observatory->get_landscape_name());
@@ -652,6 +654,9 @@ void stel_core::load_config_from(const string& confFile)
 	FlagNebulaName			= conf.get_boolean("astro:flag_nebula_name");
 	MaxMagNebulaName		= conf.get_double("astro:max_mag_nebula_name");
 	FlagMilkyWay			= conf.get_boolean("astro:flag_milky_way");
+	MilkyWayIntensity       = conf.get_double("astro","milky_way_intensity",1.);
+	if(milky_way) milky_way->set_intensity(MilkyWayIntensity);
+
 	FlagBrightNebulae		= conf.get_boolean("astro:flag_bright_nebulae");
 }
 
@@ -794,6 +799,7 @@ void stel_core::save_config_to(const string& confFile)
 	conf.set_boolean("astro:flag_nebula_name", FlagNebulaName);
 	conf.set_double("astro:max_mag_nebula_name", MaxMagNebulaName);
 	conf.set_boolean("astro:flag_milky_way", FlagMilkyWay);
+	conf.set_double("astro:milky_way_intensity", MilkyWayIntensity);
 	conf.set_boolean("astro:flag_bright_nebulae", FlagBrightNebulae);
 
 	conf.save(confFile);
