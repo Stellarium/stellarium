@@ -324,17 +324,12 @@ void SolarSystem::draw(planet* selected, int hint_ON, Projector * prj, const nav
 			glClear(GL_STENCIL_BUFFER_BIT);
 			glClearStencil(0x0);
 
-			glEnable(GL_STENCIL_TEST);
 			glStencilFunc(GL_ALWAYS, 0x1, 0x1);
 			glStencilOp(GL_ZERO, GL_REPLACE, GL_REPLACE);
 
-			(*iter)->draw(hint_ON, prj, nav, eye, flag_point, flag_trails);
+			(*iter)->draw(hint_ON, prj, nav, eye, flag_point, flag_trails, 1);
 
-			glStencilFunc(GL_EQUAL, 0x1, 0x1);
-			glStencilOp(GL_KEEP, GL_KEEP, GL_KEEP);
-			glDisable(GL_STENCIL_TEST);
-
-		} else if (*iter!=earth) (*iter)->draw(hint_ON, prj, nav, eye, flag_point, flag_trails);
+		} else if (*iter!=earth) (*iter)->draw(hint_ON, prj, nav, eye, flag_point, flag_trails, 0);
         
 		++iter;
     }
@@ -531,25 +526,24 @@ void SolarSystem::draw_earth_shadow(const navigator * nav, Projector * prj) {
 
     nav->switch_to_heliocentric();
     glEnable(GL_STENCIL_TEST);
-
+	glStencilFunc(GL_EQUAL, 0x1, 0x1);
+	glStencilOp(GL_KEEP, GL_KEEP, GL_KEEP);
 	
 	Mat4d mat = nav->get_helio_to_eye_mat();
-	Mat4d rotate_step = Mat4d::rotation(shadow, 2*M_PI/100);
 
     // shadow radial texture
     glBindTexture(GL_TEXTURE_2D, tex_earth_shadow->getID());
 
-	Vec3d r = upt;
-	Vec3d s;
+	Vec3d r, s;
 
     // umbra first
-    glBegin(GL_TRIANGLE_STRIP);
-    for (int i=0; i<=100; i++) {
-		r = rotate_step * r;
-		s = shadow + r;
+    glBegin(GL_TRIANGLE_FAN);
+	glTexCoord2f(0,0);
+	prj->sVertex3( shadow[0],shadow[1], shadow[2], mat);
 
-		glTexCoord2f(0,0);
-		prj->sVertex3( shadow[0],shadow[1], shadow[2], mat);
+    for (int i=0; i<=100; i++) {
+		r = Mat4d::rotation(shadow, 2*M_PI*i/100.) * upt;
+		s = shadow + r;
 
 		glTexCoord2f(0.6,0);  // position in texture of umbra edge
 		prj->sVertex3( s[0],s[1], s[2], mat);
@@ -558,13 +552,11 @@ void SolarSystem::draw_earth_shadow(const navigator * nav, Projector * prj) {
 
 
     // now penumbra
-	r = rpt;
-	Vec3d u = upt;
-	Vec3d sp;
+	Vec3d u, sp;
     glBegin(GL_TRIANGLE_STRIP);
     for (int i=0; i<=100; i++) {
-		r = rotate_step * r;
-		u = rotate_step * u;
+		r = Mat4d::rotation(shadow, 2*M_PI*i/100.) * rpt;
+		u = Mat4d::rotation(shadow, 2*M_PI*i/100.) * upt;
 		s = shadow + r;
 		sp = shadow + u;
 
