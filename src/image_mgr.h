@@ -32,12 +32,12 @@ class ImageMgr
  public:
   ImageMgr();
   virtual ~ImageMgr();
-  int load_image(string filename, string name);
+  int load_image(string filename, string name, IMAGE_POSITIONING position_type);
   int drop_image(string name);
   int drop_all_images();
   Image *get_image(string name);
   void update(int delta_time);  // update properties
-  void draw(int screenw, int screenh, int vieww, int viewh);
+  void draw(int screenw, int screenh, const navigator * nav, Projector * prj);
 
  private:
   vector<Image*> active_images;
