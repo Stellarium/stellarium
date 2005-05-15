@@ -415,7 +415,7 @@ void stel_core::draw(int delta_time)
 
 	// draw images loaded by a script
 	projection->set_orthographic_projection(); 
-	script_images->draw(screen_W, screen_H, projection->viewW(), projection->viewH());  
+	script_images->draw(screen_W, screen_H, navigation, projection);
 	projection->reset_perspective_projection(); 
 
 	projection->draw_viewport_shape();

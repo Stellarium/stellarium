@@ -291,9 +291,17 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 		  stcore->script_images->drop_image(args["name"]);
 	  } else {
 		  if(args["action"]=="load" && args["filename"]!="") {
+
+			  IMAGE_POSITIONING img_pos;
+			  if(args["coordinates"] == "altaz") img_pos = POS_ALTAZ;
+			  else if(args["coordinates"] == "altaz") img_pos = POS_EQUATORIAL;
+			  else img_pos = POS_VIEWPORT;
+
 			  if(stcore->scripts->is_playing()) 
-				  stcore->script_images->load_image(stcore->scripts->get_script_path() + args["filename"], args["name"]);
-			  else stcore->script_images->load_image(stcore->DataRoot + "/" + args["filename"], args["name"]);
+				  stcore->script_images->load_image(stcore->scripts->get_script_path() + args["filename"], 
+													args["name"], img_pos);
+			  else stcore->script_images->load_image(stcore->DataRoot + "/" + args["filename"], 
+													 args["name"], img_pos);
 		  }
 
 		  Image * img = stcore->script_images->get_image(args["name"]);
@@ -306,8 +314,8 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 			  if(args["rotation"]!="") img->set_rotation(str_to_double(args["rotation"]), 
 														 str_to_double(args["duration"]));
 			  if(args["xpos"]!="" || args["ypos"]!="") 
-				  img->set_location(str_to_double(args["xpos"]), 
-									str_to_double(args["ypos"]), 
+				  img->set_location(str_to_double(args["xpos"]), args["xpos"]!="",
+									str_to_double(args["ypos"]), args["ypos"]!="",
 									str_to_double(args["duration"]));
 		  }
 	  }
