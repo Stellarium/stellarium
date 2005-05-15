@@ -21,6 +21,7 @@
 #define __DRAW_H__
 
 #include <string>
+#include <fstream>
 #include "stellarium.h"
 #include "s_font.h"
 #include "projector.h"
@@ -100,10 +101,12 @@ public:
     virtual ~Cardinals();
 	void draw(const Projector* prj, double latitude, bool gravityON = false) const;
 	void set_color(const Vec3f& c) {color = c;}
+	int load_labels(string filename);  // for i18n
 private:
 	double radius;
 	Vec3f color;
 	s_font* font;
+	string sNorth, sSouth, sEast, sWest;
 };
 
 // Class which manages the displaying of the Milky Way
