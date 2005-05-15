@@ -1276,6 +1276,7 @@ void stel_core::set_sky_locale(string _locale)
 
   SkyLocale = _locale;
 
+  cardinals_points->load_labels(DataDir + "cardinals." + _locale + ".fab");
   if( !hip_stars->load_common_names(DataDir + "star_names." + _locale + ".fab") ) {
 	  // If no special star names in this language, use international names
 	  hip_stars->load_common_names(DataDir + "star_names.eng.fab");
