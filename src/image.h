@@ -24,25 +24,37 @@
 
 #include <string>
 #include "s_texture.h"
+#include "projector.h"
+#include "navigator.h"
+
+// is the image flat on the viewport or positioned with alt-azimuthal or earth equatorial coordinates?
+enum IMAGE_POSITIONING
+{
+	POS_VIEWPORT,
+	POS_ALTAZ,
+	POS_EQUATORIAL
+};
+
 
 class Image
 {
 
  public:
-  Image(string filename, string name);
+  Image(string filename, string name, IMAGE_POSITIONING pos_type);
   virtual ~Image();
   //  int drop(string image_name);
   void set_alpha(float alpha, float duration);
   void set_scale(float scale, float duration);
   void set_rotation(float rotation, float duration);
-  void set_location(float xpos, float ypos, float duration);
+  void set_location(float xpos, bool deltax, float ypos, bool deltay, float duration);
   bool update(int delta_time);  // update properties
-  void draw(int screenw, int screenh, int vieww, int viewh);
+  void draw(int screenw, int screenh, const navigator * nav, Projector * prj);
   string get_name() { return image_name; };
 
  private:
   s_texture * image_tex;
   string image_name;
+  IMAGE_POSITIONING image_pos_type;
   float image_scale, image_alpha, image_rotation;
   float image_ratio, image_xpos, image_ypos;
 

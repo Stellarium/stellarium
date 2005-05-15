@@ -31,7 +31,7 @@ ImageMgr::~ImageMgr() {
   drop_all_images();
 }
 
-int ImageMgr::load_image(string filename, string name) {
+int ImageMgr::load_image(string filename, string name, IMAGE_POSITIONING position_type) {
 
   // if name already exists, replace with new image (hash would have been easier...)
   for(vector<Image*>::iterator iter = active_images.begin(); iter != active_images.end(); ++iter) {
@@ -41,7 +41,7 @@ int ImageMgr::load_image(string filename, string name) {
     }
   }
 
-  Image *img = new Image(filename, name);
+  Image *img = new Image(filename, name, position_type);
   active_images.push_back(img);
   return 1;
 }
@@ -79,9 +79,9 @@ void ImageMgr::update(int delta_time) {
   }
 }
 
-void ImageMgr::draw(int screenw, int screenh, int vieww, int viewh) {
+void ImageMgr::draw(int screenw, int screenh, const navigator * nav, Projector * prj) {
   for(vector<Image*>::iterator iter = active_images.begin(); iter != active_images.end(); ++iter) {
-    (*iter)->draw(screenw, screenh, vieww, viewh);
+    (*iter)->draw(screenw, screenh, nav, prj);
   }
 }
 

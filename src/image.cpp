@@ -22,12 +22,13 @@
 #include <iostream>
 #include "image.h"
 
-Image::Image( string filename, string name) {
+Image::Image( string filename, string name, IMAGE_POSITIONING pos_type) {
   flag_alpha = flag_scale = flag_location = flag_rotation = 0;
+  image_pos_type = pos_type;
   image_alpha = 0;  // begin not visible
   image_rotation = 0;
   image_xpos = image_ypos = 0; // centered is default
-  image_scale = 1; // full size
+  image_scale = 1;
   image_name = name;
 
   // load image using alpha channel in image, otherwise no transparency
@@ -88,20 +89,24 @@ void Image::set_rotation(float rotation, float duration) {
 }
 
 
-void Image::set_location(float x, float y, float duration) {
+void Image::set_location( float xpos, bool deltax, float ypos, bool deltay, float duration) {
 
-  // x and y make sense between -2 and 2 but any reason to check?
-  // at x or y = 1, image is centered on projection edge
+	// xpos and ypos are interpreted when drawing based on image position type
 
-  flag_location = 1;
+	flag_location = 1;
 
-  start_xpos = image_xpos;
-  start_ypos = image_ypos;
-  end_xpos = x;
-  end_ypos = y;
+	start_xpos = image_xpos;
+	start_ypos = image_ypos;
 
-  coef_location = 1.0f/(1000.f*duration);
-  mult_location = 0;
+	// only move if changing value
+	if(deltax) end_xpos = xpos;
+	else end_xpos = image_xpos;
+
+	if(deltay) end_ypos = ypos;
+	else end_ypos = image_ypos;
+
+	coef_location = 1.0f/(1000.f*duration);
+	mult_location = 0;
 
 }
 
@@ -162,9 +167,12 @@ bool Image::update(int delta_time) {
 
 }
 
-void Image::draw(int screenw, int screenh, int vieww, int viewh) {
+void Image::draw(int screenw, int screenh, const navigator * nav, Projector * prj) {
 
   if(image_ratio < 0 || image_alpha == 0) return;
+
+  int vieww = prj->viewW();
+  int viewh = prj->viewH();  
 
   glPushMatrix();
 
@@ -174,6 +182,7 @@ void Image::draw(int screenw, int screenh, int vieww, int viewh) {
   glColor4f(1.0,1.0,1.0,image_alpha);
 
   glBindTexture(GL_TEXTURE_2D, image_tex->getID());
+  glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
   float cx = screenw/2.f;
   float cy = screenh/2.f;
@@ -194,23 +203,74 @@ void Image::draw(int screenw, int screenh, int vieww, int viewh) {
   float h = image_scale*ybase;
 
 
-  glTranslatef(cx+image_xpos*vieww/2,cy+image_ypos*viewh/2,0);  // rotate around center of image...
-  glRotatef(image_rotation,0,0,-1);
+  if(image_pos_type == POS_VIEWPORT ) {
 
-  glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-  // why is black transparent?
+	  // at x or y = 1, image is centered on projection edge
+	  // centered in viewport at 0,0
 
-  glBegin(GL_TRIANGLE_STRIP); {
-    glTexCoord2i(1,0);              // Bottom Right
-    glVertex3f(w,-h,0);
-    glTexCoord2i(0,0);              // Bottom Left
-    glVertex3f(-w,-h,0);
-    glTexCoord2i(1,1);              // Top Right
-    glVertex3f(w,h,0);
-    glTexCoord2i(0,1);              // Top Left
-    glVertex3f(-w,h,0); }
-  glEnd();
+	  glTranslatef(cx+image_xpos*vieww/2,cy+image_ypos*viewh/2,0);  // rotate around center of image...
+	  glRotatef(image_rotation,0,0,-1);
 
+	  glBegin(GL_TRIANGLE_STRIP); {
+		  glTexCoord2i(1,0);              // Bottom Right
+		  glVertex3f(w,-h,0);
+		  glTexCoord2i(0,0);              // Bottom Left
+		  glVertex3f(-w,-h,0);
+		  glTexCoord2i(1,1);              // Top Right
+		  glVertex3f(w,h,0);
+		  glTexCoord2i(0,1);              // Top Left
+		  glVertex3f(-w,h,0); }
+	  glEnd();
+	  
+  } else if(image_pos_type == POS_ALTAZ ) {
+
+	  // alt az coords
+	  prj->reset_perspective_projection();
+
+	  nav->switch_to_local();
+	  Mat4d mat = nav->get_local_to_eye_mat();
+
+	  Vec3d gridpt;
+	  
+	  //	  printf("%f %f\n", image_xpos, image_ypos);
+
+	  Vec3d imagev = Mat4d::zrotation(image_xpos*M_PI/180.) 
+		  * Mat4d::xrotation(image_ypos*M_PI/180.) * Vec3d(0,1,0); 
+
+	  Vec3d ortho1 = Mat4d::zrotation(image_xpos*M_PI/180.) * Vec3d(1,0,0);
+	  Vec3d ortho2 = imagev^ortho1;
+
+	  int grid_size = 5;  // per row, column
+	  for (int i=0; i<grid_size; i++) {
+
+		  glBegin(GL_QUAD_STRIP);
+
+		  for (int j=0; j<=grid_size; j++) {
+
+			  for(int k=0; k<=1; k++) {
+
+				  // TODO: separate x, y scales
+				  gridpt = Mat4d::rotation( imagev, image_rotation*M_PI/180.) *
+					  Mat4d::rotation( ortho1, image_scale*(j-grid_size/2.)/(float)grid_size*M_PI/180.) *
+					  Mat4d::rotation( ortho2, image_scale*(i+k-grid_size/2.)/(float)grid_size*M_PI/180.) *
+					  imagev;
+				  
+				  glTexCoord2f((i+k)/(float)grid_size,j/(float)grid_size);
+				  prj->sVertex3( gridpt[0], gridpt[1], gridpt[2], mat);
+			  }
+		  }
+
+		  glEnd();  
+	  }
+	 
+
+
+  } else {
+	  // earth equatorial positioning
+	  printf("Earth equ script image positioning not implemented yet\n");
+
+  }
+  
   glPopMatrix();
 
 }
