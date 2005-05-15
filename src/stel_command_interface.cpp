@@ -23,6 +23,7 @@
 #include "stel_command_interface.h"
 #include "stel_core.h"
 #include "image.h"
+#include "stellastro.h"
 
 using namespace std;
 
@@ -103,6 +104,9 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
     else if(args["milky_way_intensity"]!="") {
 		stcore->MilkyWayIntensity = str_to_double(args["milky_way_intensity"]);
 		stcore->milky_way->set_intensity(stcore->MilkyWayIntensity);
+
+		// safety feature to be able to turn back on
+		if(stcore->MilkyWayIntensity) stcore->FlagMilkyWay = 1;
 	}
 
 
@@ -399,6 +403,42 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 	  execute_command("timerate rate 1");
 	  execute_command("zoom auto out");
 
+  } else if(command=="configuration" && trusted) {
+
+	  if(args["action"]=="load") stcore->load_config();
+	  else if(args["action"]=="reload") {
+
+		  // on reload, be sure to reconfigure as necessary since stel_core::init isn't called
+
+		  stcore->load_config();
+
+		  if(stcore->asterisms) {
+			  stcore->asterisms->set_art_intensity(stcore->ConstellationArtIntensity);
+			  stcore->asterisms->set_art_fade_duration(stcore->ConstellationArtFadeDuration);
+		  }
+		  if (!stcore->FlagAtmosphere && stcore->tone_converter)
+			  stcore->tone_converter->set_world_adaptation_luminance(3.75f);
+		  if (stcore->atmosphere) stcore->atmosphere->set_fade_duration(stcore->AtmosphereFadeDuration);
+		  stcore->observatory->load(stcore->ConfigDir + stcore->config_file, "init_location");
+		  stcore->set_landscape(stcore->observatory->get_landscape_name());
+		  
+		  if (stcore->StartupTimeMode=="preset" || stcore->StartupTimeMode=="Preset")
+			  {
+				  stcore->navigation->set_JDay(stcore->PresetSkyTime -
+											 stcore->observatory->get_GMT_shift(stcore->PresetSkyTime) * JD_HOUR);
+			  }
+		  else
+			  {
+				  stcore->navigation->set_JDay(get_julian_from_sys());
+			  }
+		  if(stcore->FlagObjectTrails && stcore->ssystem) stcore->ssystem->start_trails();
+		  else  stcore->ssystem->end_trails();
+
+		  stcore->set_sky_locale(stcore->SkyLocale);
+		  
+		  system( ( stcore->DataDir + "script_load_config " ).c_str() );
+
+	  }
   } else {
     cout << "Unrecognized or malformed command: " << command << endl;
     status = 0;
