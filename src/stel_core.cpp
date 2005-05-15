@@ -207,6 +207,8 @@ void stel_core::init(void)
 	
 	selected_planet=NULL;	// Fix a bug on macosX! Thanks Fumio!
 		
+	cardinals_points->load_labels(DataDir + "cardinals." + SkyLocale + ".fab");
+
 	// could load a startup script
 	//commander->execute_command("script action play filename ./scripts/startup.sts");
 }

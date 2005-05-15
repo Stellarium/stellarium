@@ -402,6 +402,10 @@ void stel_ui::tui_cb_settimedisplayformat(void)
 // Load default configuration
 void stel_ui::tui_cb_admin_load_default(void)
 {
+
+	core->commander->execute_command("configuration action reload");
+
+	/*
 	core->load_config();
 
 	// believe this is redundant : yes but this must be here and not in stel_core.cpp
@@ -429,6 +433,7 @@ void stel_ui::tui_cb_admin_load_default(void)
 	else  core->ssystem->end_trails();
 
 	system( ( core->DataDir + "script_load_config " ).c_str() );
+	*/
 }
 
 // Save to default configuration
