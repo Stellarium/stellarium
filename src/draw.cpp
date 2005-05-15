@@ -317,6 +317,14 @@ Cardinals::Cardinals(const string& font_file, const string& tex_file, double siz
 		exit(-1);
 	}
 	color = Vec3f(0.6,0.2,0.2);
+
+	// Default labels - if sky locale specified, loaded later
+	// Improvement for gettext translation
+	sNorth = _("N");
+	sSouth = _("S");
+	sEast = _("E");
+	sWest = _("W");
+
 }
 
 Cardinals::~Cardinals()
@@ -334,18 +342,6 @@ void Cardinals::draw(const Projector* prj, double latitude, bool gravityON) cons
   // direction text
   string d[4];
 
-  // Improvement for gettext translation
-  static string sNorth, sSouth, sEast, sWest;
-  
-  // North
-  sNorth = _("N");
-  // South
-  sSouth = _("S");
-  // East
-  sEast = _("E");
-  // West
-  sWest = _("W");
-  
   d[0] = sNorth;
   d[1] = sSouth;
   d[2] = sEast;
@@ -408,6 +404,34 @@ void Cardinals::draw(const Projector* prj, double latitude, bool gravityON) cons
 	prj->reset_perspective_projection();
 }
 
+// load cardinal labels from a file for i18n to sky language
+// (not using gettext because sky language not the same as ui language)
+
+int Cardinals::load_labels(string filename) {
+
+    ifstream input_file;
+
+	input_file.open(filename.c_str());
+
+	if (! input_file.is_open()) {
+		printf("Error opening %s\n", filename.c_str());
+
+		// Default labels - if sky locale specified, loaded later
+		// Improvement for gettext translation
+		sNorth = _("N");
+		sSouth = _("S");
+		sEast = _("E");
+		sWest = _("W");
+
+		return 0;
+	}
+
+
+	input_file >> sNorth >> sEast >> sSouth >> sWest;
+
+	return 1;
+
+}
 
 // Class which manages the displaying of the Milky Way
 MilkyWay::MilkyWay(const string& tex_file, double _radius) : radius(_radius)
