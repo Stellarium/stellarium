@@ -403,6 +403,24 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 	  execute_command("timerate rate 1");
 	  execute_command("zoom auto out");
 
+  } else if(command=="landscape" && args["action"] == "load") {
+
+	  if(args["type"] == "fisheye") {
+
+		  // textures are relative to script
+		  args["maptex"] = stcore->scripts->get_script_path() + args["maptex"];
+		  if (stcore->landscape) delete stcore->landscape;
+		  stcore->landscape = NULL;
+		  stcore->landscape = Landscape::create_from_hash(args);
+
+		  stcore->observatory->set_landscape_name(args["name"]);  
+		  // probably not particularly useful, as not in landscape file
+
+	  } else {
+		  cout << "non fisheye landscape not yet supported\n";
+	  }
+
+
   } else if(command=="configuration" && trusted) {
 
 	  if(args["action"]=="load") stcore->load_config();
@@ -462,88 +480,3 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 }
 
 
-
-// convert string int ISO 8601-like format [+/-]YYYY-MM-DDThh:mm:ss (no timzone offset)
-// to julian day
-// TODO: move to better location for reuse
-int string_to_jday(string date, double &jd) {
-
-    char tmp;
-    int year, month, day, hour, minute, second;
-    std::istringstream dstr( date );
-    
-    dstr >> year >> tmp >> month >> tmp >> day >> tmp >> hour >> tmp >> minute >> tmp >> second;
-    
-    // cout << year << " " << month << " " << day << " " << hour << " " << minute << " " << second << endl;
-
-    // bounds checking (per s_tui time object)
-    if( year > 100000 || year < -100000 || 
-	month < 1 || month > 12 ||
-	day < 1 || day > 31 ||
-	hour < 0 || hour > 23 ||
-	minute < 0 || minute > 59 ||
-	second < 0 || second > 59) return 0;
-
-
-    // code taken from s_tui.cpp
-    if (month <= 2) {
-        year--;
-        month += 12;
-    }
-
-    // Correct for the lost days in Oct 1582 when the Gregorian calendar
-    // replaced the Julian calendar.
-    int B = -2;
-    if (year > 1582 || (year == 1582 && (month > 10 || (month == 10 && day >= 15)))) {
-      B = year / 400 - year / 100;
-    }
-
-    jd = ((floor(365.25 * year) +
-            floor(30.6001 * (month + 1)) + B + 1720996.5 +
-            day + hour / 24.0 + minute / 1440.0 + second / 86400.0));
-
-    return 1;
-
-}
-
-
-double str_to_double(string str) {
-
-	if(str=="") return 0;
-	double dbl;
-	std::istringstream dstr( str );
-    
-	dstr >> dbl;
-	return dbl;
-}
-
-// always positive
-double str_to_pos_double(string str) {
-
-	if(str=="") return 0;
-    double dbl;
-    std::istringstream dstr( str );
-
-    dstr >> dbl;
-    if(dbl < 0 ) dbl *= -1;
-    return dbl;
-}
-
-
-int str_to_int(string str) {
-
-	if(str=="") return 0;
-	int integer;
-	std::istringstream istr( str );
-    
-	istr >> integer;
-	return integer;
-}
-
-string double_to_str(double dbl) {
-
-  std::ostringstream oss;
-  oss << dbl;
-  return oss.str();
-
-}
