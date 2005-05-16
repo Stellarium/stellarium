@@ -48,6 +48,26 @@ Landscape* Landscape::create_from_file(const string& landscape_file, const strin
 
 }
 
+// create landscape from parameters passed in a hash (same keys as with ini file)
+// NOTE: maptex must be full path and filename
+Landscape* Landscape::create_from_hash(stringHash_t param)
+{
+
+	// NOTE: maptex should be full filename (and path) 
+	if (param["type"]=="old_style")
+	{
+		//		Landscape_old_style* ldscp = new Landscape_old_style();
+		//ldscp->load(landscape_file, section_name);
+		//return ldscp;
+	} else {   //	if (s=="fisheye")
+		Landscape_fisheye* ldscp = new Landscape_fisheye();
+		ldscp->create(param["name"], 1, param["maptex"], str_to_double(param["texturefov"]));
+		return ldscp;
+	}
+	return NULL;
+}
+
+
 string Landscape::get_file_content(const string& landscape_file)
 {
 	init_parser pd;	// The landscape data ini file parser
@@ -282,13 +302,25 @@ void Landscape_fisheye::load(const string& landscape_file, const string& section
 	  printf("ERROR : No valid landscape definition found for %s.  No landscape in use.\n", section_name.c_str());
 	  valid_landscape = 0;
 	  return;
-	} else {
-	  valid_landscape = 1;
 	}
 
-	map_tex = new s_texture(pd.get_str(section_name, "maptex"),TEX_LOAD_TYPE_PNG_ALPHA);
-	tex_fov = pd.get_double(section_name, "texturefov", 360) * M_PI/180.;
+	create(name, 0, pd.get_str(section_name, "maptex"), pd.get_double(section_name, "texturefov", 360));
+
 }
+
+// create a fisheye landscape from basic parameters (no ini file needed)
+void Landscape_fisheye::create(const string _name, bool _fullpath, const string _maptex, double _texturefov)
+{
+
+	//	cout << _name << " " << _fullpath << " " << _maptex << " " << _texturefov << "\n";
+
+	valid_landscape = 1;  // assume ok...
+	name = _name;
+	map_tex = new s_texture(_fullpath,_maptex,TEX_LOAD_TYPE_PNG_ALPHA);
+	tex_fov = _texturefov*M_PI/180.;
+}
+
+
 
 void Landscape_fisheye::draw(tone_reproductor * eye, const Projector* prj, const navigator* nav,
 		bool flag_fog, bool flag_decor, bool flag_ground)

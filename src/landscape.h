@@ -28,6 +28,7 @@
 #include "projector.h"
 #include "navigator.h"
 #include "fader.h"
+#include "stel_utility.h"
 
 enum LANDSCAPE_TYPE
 {
@@ -49,6 +50,7 @@ public:
 	virtual void draw(tone_reproductor * eye, const Projector* prj, const navigator* nav,
 		bool flag_fog, bool flag_decor, bool flag_ground) = 0;
 	static Landscape* create_from_file(const string& landscape_file, const string& section_name);
+	static Landscape* create_from_hash(stringHash_t param);
 	static string get_file_content(const string& landscape_file);
 protected:
 	float radius;
@@ -102,8 +104,10 @@ public:
     virtual ~Landscape_fisheye();
 	virtual void load(const string& fileName, const string& section_name);
 	virtual void draw(tone_reproductor * eye, const Projector* prj, const navigator* nav,
-		bool flag_fog, bool flag_decor, bool flag_ground);
+					  bool flag_fog, bool flag_decor, bool flag_ground);
+	void create(const string _name, bool _fullpath, const string _maptex, double _texturefov);
 private:
+
 	s_texture* map_tex;
 	float tex_fov;
 };

@@ -20,11 +20,17 @@
 #ifndef _S_UTILITY_H_
 #define _S_UTILITY_H_
 
+#include <iostream>
+#include <sstream>
 #include <string>
 #include <cmath>
+#include <map>
 #include "vecmath.h"
 
 using namespace std;
+
+typedef std::map< std::string, std::string > stringHash_t;
+typedef stringHash_t::const_iterator stringHashIter_t;
 
 // Angles and coordinate conversions
 double hms_to_rad(unsigned int h, unsigned int m, double s);
@@ -59,5 +65,20 @@ string print_angle_hms(double location);
 
 // Provide the luminance in cd/m^2 from the magnitude and the surface in arcmin^2
 float mag_to_luminance(float mag, float surface);
+
+
+// convert string int ISO 8601-like format [+/-]YYYY-MM-DDThh:mm:ss (no timzone offset)
+// to julian day
+int string_to_jday(string date, double &jd);
+
+double str_to_double(string str);
+
+// always positive
+double str_to_pos_double(string str);
+
+int str_to_int(string str);
+
+string double_to_str(double dbl);
+
 
 #endif

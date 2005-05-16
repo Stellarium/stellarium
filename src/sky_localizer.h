@@ -22,12 +22,9 @@
 
 #include <stdio.h>
 #include <string>
-#include <map>
+#include "stel_utility.h"
 
 using namespace std;
-
-typedef std::map< std::string, std::string > stringHash_t;
-typedef stringHash_t::const_iterator stringHashIter_t;
 
 class Sky_localizer
 {
