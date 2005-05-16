@@ -74,6 +74,7 @@ public:
 	virtual void load(const string& fileName, const string& section_name);
 	virtual void draw(tone_reproductor * eye, const Projector* prj, const navigator* nav,
 		bool flag_fog, bool flag_decor, bool flag_ground);
+	void create(bool _fullpath, stringHash_t param);
 private:
 	void draw_fog(tone_reproductor * eye, const Projector* prj, const navigator* nav) const;
 	void draw_decor(tone_reproductor * eye, const Projector* prj, const navigator* nav) const;

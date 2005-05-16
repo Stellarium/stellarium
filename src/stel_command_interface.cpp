@@ -405,20 +405,14 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 
   } else if(command=="landscape" && args["action"] == "load") {
 
-	  if(args["type"] == "fisheye") {
-
-		  // textures are relative to script
-		  args["maptex"] = stcore->scripts->get_script_path() + args["maptex"];
-		  if (stcore->landscape) delete stcore->landscape;
-		  stcore->landscape = NULL;
-		  stcore->landscape = Landscape::create_from_hash(args);
-
-		  stcore->observatory->set_landscape_name(args["name"]);  
-		  // probably not particularly useful, as not in landscape file
-
-	  } else {
-		  cout << "non fisheye landscape not yet supported\n";
-	  }
+	  // textures are relative to script
+	  args["path"] = stcore->scripts->get_script_path();
+	  if (stcore->landscape) delete stcore->landscape;
+	  stcore->landscape = NULL;
+	  stcore->landscape = Landscape::create_from_hash(args);
+	  
+	  stcore->observatory->set_landscape_name(args["name"]);  
+	  // probably not particularly useful, as not in landscape file
 
 
   } else if(command=="configuration" && trusted) {

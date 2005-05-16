@@ -77,6 +77,7 @@ double str_to_double(string str);
 double str_to_pos_double(string str);
 
 int str_to_int(string str);
+int str_to_int(string str, int default_value);
 
 string double_to_str(double dbl);
 
