@@ -385,6 +385,17 @@ int str_to_int(string str) {
 	return integer;
 }
 
+
+int str_to_int(string str, int default_value) {
+
+	if(str=="") return default_value;
+	int integer;
+	std::istringstream istr( str );
+    
+	istr >> integer;
+	return integer;
+}
+
 string double_to_str(double dbl) {
 
   std::ostringstream oss;
