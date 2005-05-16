@@ -53,18 +53,17 @@ Landscape* Landscape::create_from_file(const string& landscape_file, const strin
 Landscape* Landscape::create_from_hash(stringHash_t param)
 {
 
-	// NOTE: maptex should be full filename (and path) 
+	// NOTE: textures should be full filename (and path) 
 	if (param["type"]=="old_style")
 	{
-		//		Landscape_old_style* ldscp = new Landscape_old_style();
-		//ldscp->load(landscape_file, section_name);
-		//return ldscp;
+		Landscape_old_style* ldscp = new Landscape_old_style();
+		ldscp->create(1, param);
+		return ldscp;
 	} else {   //	if (s=="fisheye")
 		Landscape_fisheye* ldscp = new Landscape_fisheye();
-		ldscp->create(param["name"], 1, param["maptex"], str_to_double(param["texturefov"]));
+		ldscp->create(param["name"], 1, param["path"] + param["maptex"], str_to_double(param["texturefov"]));
 		return ldscp;
 	}
-	return NULL;
 }
 
 
@@ -106,6 +105,8 @@ Landscape_old_style::~Landscape_old_style()
 
 void Landscape_old_style::load(const string& landscape_file, const string& section_name)
 {
+	// TODO: put values into hash and call create method to consolidate code
+
 	init_parser pd;	// The landscape data ini file parser
 	pd.load(landscape_file);
 
@@ -176,6 +177,83 @@ void Landscape_old_style::load(const string& landscape_file, const string& secti
 	ground_angle_rotatez = pd.get_double(section_name, "ground_angle_rotatez", 0.);
 	draw_ground_first = pd.get_int(section_name, "draw_ground_first", 0);
 }
+
+
+// create from a hash of parameters (no ini file needed)
+void Landscape_old_style::create(bool _fullpath, stringHash_t param)
+{
+
+	/*
+	for ( stringHashIter_t iter = param.begin(); iter != param.end(); ++iter ) {
+		cout << iter->first << " : " << iter->second << endl;
+	}
+	*/
+
+	name = param["name"];
+	valid_landscape = 1;  // assume valid if got here
+
+	// Load sides textures
+	nb_side_texs = str_to_int(param["nbsidetex"]);
+	side_texs = new s_texture*[nb_side_texs];
+
+	char tmp[255];
+	for (int i=0;i<nb_side_texs;++i)
+	{
+
+		sprintf(tmp,"tex%d",i);
+		side_texs[i] = new s_texture(_fullpath, param["path"] + param[tmp],TEX_LOAD_TYPE_PNG_ALPHA);
+
+	}
+
+	// Init sides parameters
+	nb_side = str_to_int(param["nbside"]);
+	sides = new landscape_tex_coord[nb_side];
+	string s;
+	int texnum;
+	float a,b,c,d;
+	for (int i=0;i<nb_side;++i)
+	{
+		sprintf(tmp,"side%d",i);
+		s = param[tmp];
+		sscanf(s.c_str(),"tex%d:%f:%f:%f:%f",&texnum,&a,&b,&c,&d);
+		sides[i].tex = side_texs[texnum];
+		sides[i].tex_coords[0] = a;
+		sides[i].tex_coords[1] = b;
+		sides[i].tex_coords[2] = c;
+		sides[i].tex_coords[3] = d;
+		//printf("%f %f %f %f\n",a,b,c,d);
+	}
+
+	nb_decor_repeat = str_to_int(param["nb_decor_repeat"], 1);
+
+	ground_tex = new s_texture(_fullpath, param["path"] + param["groundtex"],TEX_LOAD_TYPE_PNG_SOLID);
+	s = param["ground"];
+	sscanf(s.c_str(),"groundtex:%f:%f:%f:%f",&a,&b,&c,&d);
+	ground_tex_coord.tex = ground_tex;
+	ground_tex_coord.tex_coords[0] = a;
+	ground_tex_coord.tex_coords[1] = b;
+	ground_tex_coord.tex_coords[2] = c;
+	ground_tex_coord.tex_coords[3] = d;
+
+	fog_tex = new s_texture(_fullpath, param["path"] + param["fogtex"],TEX_LOAD_TYPE_PNG_SOLID_REPEAT);
+	s = param["fog"];
+	sscanf(s.c_str(),"fogtex:%f:%f:%f:%f",&a,&b,&c,&d);
+	fog_tex_coord.tex = fog_tex;
+	fog_tex_coord.tex_coords[0] = a;
+	fog_tex_coord.tex_coords[1] = b;
+	fog_tex_coord.tex_coords[2] = c;
+	fog_tex_coord.tex_coords[3] = d;
+
+	fog_alt_angle = str_to_double(param["fog_alt_angle"]);
+	fog_angle_shift = str_to_double(param["fog_angle_shift"]);
+	decor_alt_angle = str_to_double(param["decor_alt_angle"]);
+	decor_angle_shift = str_to_double(param["decor_angle_shift"]);
+	decor_angle_rotatez = str_to_double(param["decor_angle_rotatez"]);
+	ground_angle_shift = str_to_double(param["ground_angle_shift"]);
+	ground_angle_rotatez = str_to_double(param["ground_angle_rotatez"]);
+	draw_ground_first = str_to_int(param["draw_ground_first"]);
+}
+
 
 void Landscape_old_style::draw(tone_reproductor * eye, const Projector* prj, const navigator* nav,
 		bool flag_fog, bool flag_decor, bool flag_ground)
@@ -270,9 +348,10 @@ void Landscape_old_style::draw_ground(tone_reproductor * eye, const Projector* p
 	Mat4d mat = nav->get_local_to_eye_mat() * Mat4d::zrotation(ground_angle_rotatez*M_PI/180.f) * Mat4d::translation(Vec3d(0,0,radius*sinf(ground_angle_shift*M_PI/180.)));
 	glColor4f(sky_brightness, sky_brightness, sky_brightness, land_fader.get_interstate());
 
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glEnable(GL_CULL_FACE);
 	glEnable(GL_TEXTURE_2D);
-	glDisable(GL_BLEND);
+	glEnable(GL_BLEND);
 	glBindTexture(GL_TEXTURE_2D, ground_tex->getID());
 	int subdiv = 32/(nb_decor_repeat*nb_side);
 	if (subdiv<=0) subdiv = 1;
