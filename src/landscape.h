@@ -46,9 +46,9 @@ public:
 	void set_parameters(const Vec3f& sun_pos);
 	void set_sky_brightness(float b) {sky_brightness = b;}
 	void show_landscape(bool b) {land_fader=b; }
-	void update(int delta_time) {land_fader.update(delta_time);}
-	virtual void draw(tone_reproductor * eye, const Projector* prj, const navigator* nav,
-		bool flag_fog, bool flag_decor, bool flag_ground) = 0;
+	void show_fog(bool b) {fog_fader=b; }
+	void update(int delta_time) {land_fader.update(delta_time); fog_fader.update(delta_time);}
+	virtual void draw(tone_reproductor * eye, const Projector* prj, const navigator* nav) = 0;
 	static Landscape* create_from_file(const string& landscape_file, const string& section_name);
 	static Landscape* create_from_hash(stringHash_t param);
 	static string get_file_content(const string& landscape_file);
@@ -58,6 +58,7 @@ protected:
 	float sky_brightness;
 	bool valid_landscape;   // was a landscape loaded properly?
 	linear_fader land_fader;
+	linear_fader fog_fader;
 };
 
 typedef struct
@@ -72,8 +73,7 @@ public:
 	Landscape_old_style(float _radius = 1.);
     virtual ~Landscape_old_style();
 	virtual void load(const string& fileName, const string& section_name);
-	virtual void draw(tone_reproductor * eye, const Projector* prj, const navigator* nav,
-		bool flag_fog, bool flag_decor, bool flag_ground);
+	virtual void draw(tone_reproductor * eye, const Projector* prj, const navigator* nav);
 	void create(bool _fullpath, stringHash_t param);
 private:
 	void draw_fog(tone_reproductor * eye, const Projector* prj, const navigator* nav) const;
@@ -104,8 +104,7 @@ public:
 	Landscape_fisheye(float _radius = 1.);
     virtual ~Landscape_fisheye();
 	virtual void load(const string& fileName, const string& section_name);
-	virtual void draw(tone_reproductor * eye, const Projector* prj, const navigator* nav,
-					  bool flag_fog, bool flag_decor, bool flag_ground);
+	virtual void draw(tone_reproductor * eye, const Projector* prj, const navigator* nav);
 	void create(const string _name, bool _fullpath, const string _maptex, double _texturefov);
 private:
 

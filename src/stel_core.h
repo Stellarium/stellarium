@@ -272,8 +272,7 @@ private:
     int FlagBrightNebulae;
 	
 	// Landscape
-    int FlagGround;
-    int FlagHorizon;
+	int FlagLandscape;
     int FlagFog;
     int FlagAtmosphere;
 	float sky_brightness;

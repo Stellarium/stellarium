@@ -254,27 +254,23 @@ void Landscape_old_style::create(bool _fullpath, stringHash_t param)
 	draw_ground_first = str_to_int(param["draw_ground_first"]);
 }
 
-
-void Landscape_old_style::draw(tone_reproductor * eye, const Projector* prj, const navigator* nav,
-		bool flag_fog, bool flag_decor, bool flag_ground)
+void Landscape_old_style::draw(tone_reproductor * eye, const Projector* prj, const navigator* nav)
 {
 	if(!valid_landscape) return;
-	land_fader = flag_ground;
-
-	bool grnd = land_fader.get_interstate() != 0;
-	if (grnd && draw_ground_first) draw_ground(eye, prj, nav);
+	if (draw_ground_first) draw_ground(eye, prj, nav);
 	draw_decor(eye, prj, nav);
-	if (grnd && !draw_ground_first) draw_ground(eye, prj, nav);
-	if (flag_fog) draw_fog(eye, prj, nav);
+	if (!draw_ground_first) draw_ground(eye, prj, nav);
+	draw_fog(eye, prj, nav);
 }
 
 
 // Draw the horizon fog
 void Landscape_old_style::draw_fog(tone_reproductor * eye, const Projector* prj, const navigator* nav) const
 {
+	if(!fog_fader.get_interstate()) return;
 	glBlendFunc(GL_ONE, GL_ONE);
 	glPushMatrix();
-	glColor3f(0.1f+0.1f*sky_brightness, 0.1f+0.1f*sky_brightness, 0.1f+0.1f*sky_brightness);
+	glColor3f(fog_fader.get_interstate()*(0.1f+0.1f*sky_brightness), fog_fader.get_interstate()*(0.1f+0.1f*sky_brightness), fog_fader.get_interstate()*(0.1f+0.1f*sky_brightness));
 	glEnable(GL_TEXTURE_2D);
 	glEnable(GL_BLEND);
 	glEnable(GL_CULL_FACE);
@@ -288,9 +284,7 @@ void Landscape_old_style::draw_fog(tone_reproductor * eye, const Projector* prj,
 // Draw the mountains with a few pieces of texture
 void Landscape_old_style::draw_decor(tone_reproductor * eye, const Projector* prj, const navigator* nav) const
 {
-
-	if(!land_fader.get_interstate()) return;
-
+	if (!land_fader.get_interstate()) return;
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glEnable(GL_TEXTURE_2D);
 
@@ -342,12 +336,9 @@ void Landscape_old_style::draw_decor(tone_reproductor * eye, const Projector* pr
 // Draw the ground
 void Landscape_old_style::draw_ground(tone_reproductor * eye, const Projector* prj, const navigator* nav) const
 {
-
-	if(!land_fader.get_interstate()) return;
-
+	if (!land_fader.get_interstate()) return;
 	Mat4d mat = nav->get_local_to_eye_mat() * Mat4d::zrotation(ground_angle_rotatez*M_PI/180.f) * Mat4d::translation(Vec3d(0,0,radius*sinf(ground_angle_shift*M_PI/180.)));
 	glColor4f(sky_brightness, sky_brightness, sky_brightness, land_fader.get_interstate());
-
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glEnable(GL_CULL_FACE);
 	glEnable(GL_TEXTURE_2D);
@@ -387,12 +378,11 @@ void Landscape_fisheye::load(const string& landscape_file, const string& section
 
 }
 
+
 // create a fisheye landscape from basic parameters (no ini file needed)
 void Landscape_fisheye::create(const string _name, bool _fullpath, const string _maptex, double _texturefov)
 {
-
 	//	cout << _name << " " << _fullpath << " " << _maptex << " " << _texturefov << "\n";
-
 	valid_landscape = 1;  // assume ok...
 	name = _name;
 	map_tex = new s_texture(_fullpath,_maptex,TEX_LOAD_TYPE_PNG_ALPHA);
@@ -400,16 +390,9 @@ void Landscape_fisheye::create(const string _name, bool _fullpath, const string 
 }
 
 
-
-void Landscape_fisheye::draw(tone_reproductor * eye, const Projector* prj, const navigator* nav,
-		bool flag_fog, bool flag_decor, bool flag_ground)
+void Landscape_fisheye::draw(tone_reproductor * eye, const Projector* prj, const navigator* nav)
 {
-
 	if(!valid_landscape) return;
-
-	land_fader = flag_ground;
-
-
 	if(!land_fader.get_interstate()) return;
 
 	// Normal transparency mode

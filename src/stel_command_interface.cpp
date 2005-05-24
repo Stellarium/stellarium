@@ -383,7 +383,7 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 	  execute_command("flag equatorial_grid off");
 	  execute_command("flag equator_line off");
 	  execute_command("flag fog off");
-	  execute_command("flag ground off");
+	  execute_command("flag landscape off");
 	  execute_command("flag nebula_name off");
 	  execute_command("flag object_trails off");
 	  execute_command("flag planets_hints off");
