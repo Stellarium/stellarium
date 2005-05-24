@@ -410,7 +410,9 @@ void stel_core::draw(int delta_time)
 	atmosphere->draw(projection, delta_time);
 
 	// Draw the landscape
-	landscape->draw(tone_converter, projection, navigation,	FlagFog, FlagHorizon && FlagGround, FlagGround);
+	landscape->show_landscape(FlagLandscape);
+	landscape->show_fog(FlagFog);
+	landscape->draw(tone_converter, projection, navigation);
 
 	// Daw the cardinal points
 	if (FlagCardinalPoints) cardinals_points->draw(projection, observatory->get_latitude(), FlagGravityLabels );
@@ -623,8 +625,7 @@ void stel_core::load_config_from(const string& confFile)
 	}
 
 	// Landscape section
-	FlagGround			= conf.get_boolean("landscape:flag_ground");
-	FlagHorizon			= conf.get_boolean("landscape:flag_horizon");
+	FlagLandscape		= conf.get_boolean("landscape:flag_landscape");
 	FlagFog				= conf.get_boolean("landscape:flag_fog");
 	FlagAtmosphere		= conf.get_boolean("landscape:flag_atmosphere");
 	AtmosphereFadeDuration  = conf.get_double("landscape","atmosphere_fade_duration",1.5);
@@ -767,8 +768,7 @@ void stel_core::save_config_to(const string& confFile)
 	conf.set_str	("navigation:viewing_mode",tmpstr);
 
 	// Landscape section
-	conf.set_boolean("landscape:flag_ground", FlagGround);
-	conf.set_boolean("landscape:flag_horizon", FlagHorizon);
+	conf.set_boolean("landscape:flag_landscape", FlagLandscape);
 	conf.set_boolean("landscape:flag_fog", FlagFog);
 	conf.set_boolean("landscape:flag_atmosphere", FlagAtmosphere);
 	conf.set_double ("viewing:atmosphere_fade_duration", AtmosphereFadeDuration);
@@ -1314,7 +1314,7 @@ int stel_core::set_flag(string name, string value, bool &newval, bool trusted) {
 			else if(name=="show_gravity_ui") newval = (FlagShowGravityUi = !FlagShowGravityUi);
 			else if(name=="utc_time") newval = (FlagUTC_Time = !FlagUTC_Time);
 			else if(name=="gravity_labels") newval = (FlagGravityLabels = !FlagGravityLabels);
-			else if(name=="horizon") newval = (FlagHorizon = !FlagHorizon);
+			else if(name=="landscape") newval = (FlagLandscape = !FlagLandscape);
 			else if(name=="constellation_pick") newval = (FlagConstellationPick = !FlagConstellationPick);
 
 		}
@@ -1326,7 +1326,6 @@ int stel_core::set_flag(string name, string value, bool &newval, bool trusted) {
 		else if(name=="show_tui_datetime") newval = (FlagShowTuiDateTime = !FlagShowTuiDateTime);
 		else if(name=="show_tui_short_obj_info") newval = (FlagShowTuiShortObjInfo = !FlagShowTuiShortObjInfo);
 		else if(name=="manual_zoom") newval = (FlagManualZoom = !FlagManualZoom);
-		else if(name=="ground") newval = (FlagGround = !FlagGround);
 		else if(name=="fog") newval = (FlagFog = !FlagFog);
 		else if(name=="atmosphere") newval = (FlagAtmosphere = !FlagAtmosphere);
 		else if(name=="constellation_drawing") newval = (FlagConstellationDrawing = !FlagConstellationDrawing);
@@ -1387,7 +1386,7 @@ int stel_core::set_flag(string name, string value, bool &newval, bool trusted) {
 			else if(name=="show_gravity_ui") FlagShowGravityUi = newval;
 			else if(name=="utc_time") FlagUTC_Time = newval;
 			else if(name=="gravity_labels") FlagGravityLabels = newval;
-			else if(name=="horizon") FlagHorizon = newval;
+			else if(name=="landscape") FlagLandscape = newval;
 			else if(name=="constellation_pick") FlagConstellationPick = newval;
 		
 		}
@@ -1398,7 +1397,6 @@ int stel_core::set_flag(string name, string value, bool &newval, bool trusted) {
 		else if(name=="show_tui_datetime") FlagShowTuiDateTime = newval;
 		else if(name=="show_tui_short_obj_info") FlagShowTuiShortObjInfo = newval;
 		else if(name=="manual_zoom") FlagManualZoom = newval;
-		else if(name=="ground") FlagGround = newval;
 		else if(name=="fog") FlagFog = newval;
 		else if(name=="atmosphere") FlagAtmosphere = newval;
 		else if(name=="constellation_drawing") FlagConstellationDrawing = newval;

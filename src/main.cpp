@@ -48,9 +48,9 @@ void drawIntro(void)
     printf("    |##   #  ### ### ### # # # #  #  ### # #|\n");
     printf("    |                       %s|\n",APP_NAME);
     printf("    -----------------------------------------\n\n");
-    printf("Copyright (C) 2004 Fabien Chereau\n\n");
+    printf("Copyright (C) 2005 Fabien Chereau\n\n");
     printf(_("Please check last version and send bug report & comments \n\
-on stellarium web page : http://stellarium.free.fr\n\n"));
+on stellarium web page : http://stellarium.sourceforge.net\n\n"));
 };
 
 
