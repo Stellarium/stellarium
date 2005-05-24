@@ -170,7 +170,7 @@ Component* stel_ui::createConfigWindow(void)
 	Picture* pground = new Picture(groundp, x-50, y, 32, 32);
 	tab_render->addComponent(pground);
 
-	ground_cbx = new LabeledCheckBox(core->FlagGround, _("Ground"));
+	ground_cbx = new LabeledCheckBox(core->FlagLandscape, _("Ground"));
 	ground_cbx->setOnPressCallback(callback<void>(this, &stel_ui::updateConfigVariables));
 	tab_render->addComponent(ground_cbx);
 	ground_cbx->setPos(x,y);
@@ -359,7 +359,7 @@ void stel_ui::updateConfigVariables(void)
 	core->FlagAzimutalGrid = azimuth_grid_cbx->getState();
 	core->FlagEquatorLine = equator_cbx->getState();
 	core->FlagEclipticLine = ecliptic_cbx->getState();
-	core->FlagGround = ground_cbx->getState();
+	core->FlagLandscape = ground_cbx->getState();
 	core->FlagCardinalPoints = cardinal_cbx->getState();
 	core->FlagAtmosphere = atmosphere_cbx->getState();
 	core->FlagFog = fog_cbx->getState();
@@ -412,7 +412,7 @@ void stel_ui::saveRenderOptions(void)
 	conf.set_boolean("viewing:flag_azimutal_grid", core->FlagAzimutalGrid);
 	conf.set_boolean("viewing:flag_equator_line", core->FlagEquatorLine);
 	conf.set_boolean("viewing:flag_ecliptic_line", core->FlagEclipticLine);
-	conf.set_boolean("landscape:flag_ground", core->FlagGround);
+	conf.set_boolean("landscape:flag_ground", core->FlagLandscape);
 	conf.set_boolean("viewing:flag_cardinal_points", core->FlagCardinalPoints);
 	conf.set_boolean("landscape:flag_atmosphere", core->FlagAtmosphere);
 	conf.set_boolean("landscape:flag_fog", core->FlagFog);
@@ -509,7 +509,7 @@ void stel_ui::updateConfigForm(void)
 	azimuth_grid_cbx->setState(core->FlagAzimutalGrid);
 	equator_cbx->setState(core->FlagEquatorLine);
 	ecliptic_cbx->setState(core->FlagEclipticLine);
-	ground_cbx->setState(core->FlagGround);
+	ground_cbx->setState(core->FlagLandscape);
 	cardinal_cbx->setState(core->FlagCardinalPoints);
 	atmosphere_cbx->setState(core->FlagAtmosphere);
 	fog_cbx->setState(core->FlagFog);

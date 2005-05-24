@@ -239,7 +239,7 @@ Component* stel_ui::createFlagButtons(void)
 	bt_flag_equator_grid->setOnPressCallback(callback<void>(this, &stel_ui::cb));
 	bt_flag_equator_grid->setOnMouseInOutCallback(callback<void>(this, &stel_ui::cbr));
 
-	bt_flag_ground = new FlagButton(core->FlagGround, NULL, "bt_ground");
+	bt_flag_ground = new FlagButton(core->FlagLandscape, NULL, "bt_ground");
 	bt_flag_ground->setOnPressCallback(callback<void>(this, &stel_ui::cb));
 	bt_flag_ground->setOnMouseInOutCallback(callback<void>(this, &stel_ui::cbr));
 
@@ -366,7 +366,7 @@ void stel_ui::cb(void)
 	core->FlagConstellationArt 	= bt_flag_constellation_art->getState();
 	core->FlagAzimutalGrid 		= bt_flag_azimuth_grid->getState();
 	core->FlagEquatorialGrid 	= bt_flag_equator_grid->getState();
-	core->FlagGround	 		= bt_flag_ground->getState();
+	core->FlagLandscape	 		= bt_flag_ground->getState();
 	core->FlagCardinalPoints	= bt_flag_cardinals->getState();
 	core->FlagAtmosphere 		= bt_flag_atmosphere->getState();
 	core->FlagNebulaName		= bt_flag_nebula_name->getState();
@@ -749,7 +749,7 @@ int stel_ui::handle_keys(SDLKey key, S_GUI_VALUE state)
 			if(key==SDLK_z) core->commander->execute_command( "flag azimuthal_grid toggle");
 			if(key==SDLK_e) core->commander->execute_command( "flag equatorial_grid toggle");
 			if(key==SDLK_n) core->commander->execute_command( "flag nebula_name toggle");
-			if(key==SDLK_g) core->commander->execute_command( "flag ground toggle");
+			if(key==SDLK_g) core->commander->execute_command( "flag landscape toggle");
 			if(key==SDLK_f) core->commander->execute_command( "flag fog toggle");
 			if(key==SDLK_q) core->commander->execute_command( "flag cardinal_points toggle");
 			if(key==SDLK_a) core->commander->execute_command( "flag atmosphere toggle");
@@ -869,7 +869,7 @@ void stel_ui::gui_update_widgets(void)
 	bt_flag_constellation_art->setState(core->FlagConstellationArt);
 	bt_flag_azimuth_grid->setState(core->FlagAzimutalGrid);
 	bt_flag_equator_grid->setState(core->FlagEquatorialGrid);
-	bt_flag_ground->setState(core->FlagGround);
+	bt_flag_ground->setState(core->FlagLandscape);
 	bt_flag_cardinals->setState(core->FlagCardinalPoints);
 	bt_flag_atmosphere->setState(core->FlagAtmosphere);
 	bt_flag_nebula_name->setState(core->FlagNebulaName);

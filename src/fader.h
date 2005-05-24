@@ -20,7 +20,8 @@
 #ifndef _FADER_H_
 #define _FADER_H_
 
-#include <stdio.h>
+#include <cstdio>
+#include <cfloat>
 
 // Class which manages a (usually smooth) transition between two states (typically ON/OFF) in function of a counter
 // It used for various purpose like smooth transitions between 
