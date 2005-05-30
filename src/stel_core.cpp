@@ -25,7 +25,7 @@
 
 stel_core::stel_core() : screen_W(800), screen_H(600), bppMode(16), Fullscreen(0),
 	navigation(NULL), observatory(NULL), projection(NULL), selected_object(NULL), hip_stars(NULL), asterisms(NULL),
-	nebulas(NULL), atmosphere(NULL), ssystem(NULL), milky_way(NULL), tone_converter(NULL), FlagHelp(false), 
+	nebulas(NULL), ssystem(NULL), atmosphere(NULL), milky_way(NULL), tone_converter(NULL), FlagHelp(false), 
 	FlagInfos(false), FlagConfig(false), FlagShowTuiMenu(0), 
 	frame(0), timefr(0), timeBase(0), maxfps(10000.f), deltaFov(0.), deltaAlt(0.), deltaAz(0.),
 	move_speed(0.001), FlagTimePause(0), is_mouse_moving_horiz(false), is_mouse_moving_vert(false)
@@ -1293,6 +1293,8 @@ void stel_core::set_sky_locale(string _locale)
 // newval is new value of flag changed
 int stel_core::set_flag(string name, string value, bool &newval, bool trusted) {
 
+	bool status = 1; 
+
 	// value can be "on", "off", or "toggle"
 	if(value == "toggle") {
 
@@ -1314,11 +1316,10 @@ int stel_core::set_flag(string name, string value, bool &newval, bool trusted) {
 			else if(name=="show_gravity_ui") newval = (FlagShowGravityUi = !FlagShowGravityUi);
 			else if(name=="utc_time") newval = (FlagUTC_Time = !FlagUTC_Time);
 			else if(name=="gravity_labels") newval = (FlagGravityLabels = !FlagGravityLabels);
-			else if(name=="landscape") newval = (FlagLandscape = !FlagLandscape);
 			else if(name=="constellation_pick") newval = (FlagConstellationPick = !FlagConstellationPick);
+			else status = 0;  // no match here, anyway
 
-		}
-
+		} else status = 0;
 
 		if(name=="star_twinkle") newval = (FlagStarTwinkle = !FlagStarTwinkle);
 		else if(name=="point_star") newval = (FlagPointStar = !FlagPointStar);
@@ -1341,6 +1342,7 @@ int stel_core::set_flag(string name, string value, bool &newval, bool trusted) {
 				ssystem->get_moon()->set_sphere_scale(MoonScale);
 			else ssystem->get_moon()->set_sphere_scale(1.);
 		}
+		else if(name=="landscape") newval = (FlagLandscape = !FlagLandscape);
 		else if(name=="stars") newval = (FlagStars = !FlagStars);
 		else if(name=="star_name") newval = (FlagStarName = !FlagStarName);
 		else if(name=="planets") newval = (FlagPlanets = !FlagPlanets);
@@ -1362,7 +1364,7 @@ int stel_core::set_flag(string name, string value, bool &newval, bool trusted) {
 				newval = 1;
 			}
 		}
-		else return(0);  // no matching flag found
+		else return(status);  // no matching flag found untrusted, but maybe trusted matched
 
 	} else {
 
@@ -1386,10 +1388,10 @@ int stel_core::set_flag(string name, string value, bool &newval, bool trusted) {
 			else if(name=="show_gravity_ui") FlagShowGravityUi = newval;
 			else if(name=="utc_time") FlagUTC_Time = newval;
 			else if(name=="gravity_labels") FlagGravityLabels = newval;
-			else if(name=="landscape") FlagLandscape = newval;
 			else if(name=="constellation_pick") FlagConstellationPick = newval;
+			else status = 0;
 		
-		}
+		} else status = 0;
 
 		if(name=="star_twinkle") FlagStarTwinkle = newval;
 		else if(name=="point_star") FlagPointStar = newval;
@@ -1411,6 +1413,7 @@ int stel_core::set_flag(string name, string value, bool &newval, bool trusted) {
 			if((FlagInitMoonScaled = newval)) ssystem->get_moon()->set_sphere_scale(MoonScale);
 			else ssystem->get_moon()->set_sphere_scale(1.);
 		}
+		else if(name=="landscape") FlagLandscape = newval;
 		else if(name=="stars") FlagStars = newval;
 		else if(name=="star_name") FlagStarName = newval;
 		else if(name=="planets") FlagPlanets = newval;
@@ -1430,12 +1433,12 @@ int stel_core::set_flag(string name, string value, bool &newval, bool trusted) {
 				navigation->set_flag_traking(0);
 			}
 		}
-		else return(0);  // no matching flag found
+		else return(status);
 
 	}
 
 
-	return(1);  // everything worked 
+	return(1);  // flag was found and updated
 
 }
 
