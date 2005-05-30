@@ -1346,7 +1346,10 @@ int stel_core::set_flag(string name, string value, bool &newval, bool trusted) {
 		else if(name=="stars") newval = (FlagStars = !FlagStars);
 		else if(name=="star_name") newval = (FlagStarName = !FlagStarName);
 		else if(name=="planets") newval = (FlagPlanets = !FlagPlanets);
-		else if(name=="planets_hints") newval = (FlagPlanetsHints = !FlagPlanetsHints);
+		else if(name=="planets_hints") {
+			newval = (FlagPlanetsHints = !FlagPlanetsHints);
+			if(FlagPlanetsHints) FlagPlanets = 1;  // for safety if script turns planets off
+		}
 		else if(name=="planets_orbits") newval = (FlagPlanetsOrbits = !FlagPlanetsOrbits);
 		else if(name=="nebula") newval = (FlagNebula = !FlagNebula);
 		else if(name=="nebula_name") newval = (FlagNebulaName = !FlagNebulaName);
@@ -1417,7 +1420,10 @@ int stel_core::set_flag(string name, string value, bool &newval, bool trusted) {
 		else if(name=="stars") FlagStars = newval;
 		else if(name=="star_name") FlagStarName = newval;
 		else if(name=="planets") FlagPlanets = newval;
-		else if(name=="planets_hints") FlagPlanetsHints = newval;
+		else if(name=="planets_hints") {
+			FlagPlanetsHints = newval;
+			if(FlagPlanetsHints) FlagPlanets = 1;  // for safety if script turns planets off
+		}
 		else if(name=="planets_orbits") FlagPlanetsOrbits = newval;
 		else if(name=="nebula") FlagNebula = newval;
 		else if(name=="nebula_name") FlagNebulaName = newval;
