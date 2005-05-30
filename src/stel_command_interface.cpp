@@ -372,8 +372,17 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 
   } else if(command=="clear") {
 
-	  // turn off all labels (used by scripts for simplicity)
-	  execute_command("flag atmosphere off");
+	  // set sky to known, standard states (used by scripts for simplicity)
+
+	  if(args["state"] == "natural") {
+		  execute_command("flag atmosphere on");
+		  execute_command("flag landscape on");
+	  } else {
+		  execute_command("flag atmosphere off");
+		  execute_command("flag landscape off");
+	  }
+
+	  // turn off all labels
 	  execute_command("flag azimuthal_grid off");
 	  execute_command("flag cardinal_points off");
 	  execute_command("flag constellation_art off");
@@ -383,7 +392,6 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 	  execute_command("flag equatorial_grid off");
 	  execute_command("flag equator_line off");
 	  execute_command("flag fog off");
-	  execute_command("flag landscape off");
 	  execute_command("flag nebula_name off");
 	  execute_command("flag object_trails off");
 	  execute_command("flag planets_hints off");
