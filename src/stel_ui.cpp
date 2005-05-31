@@ -689,6 +689,8 @@ int stel_ui::handle_keys(SDLKey key, S_GUI_VALUE state)
 						) core->quit();
 				}
 
+			//			cout << "key was: " << key << endl;
+
 			// if script is running, only script control keys are accessible
 			// to pause/resume/cancel the script
 			// (otherwise script could get very confused by user interaction)
@@ -704,8 +706,13 @@ int stel_ui::handle_keys(SDLKey key, S_GUI_VALUE state)
 						  (key==SDLK_c && (SDL_GetModState() & KMOD_CTRL))) {
 					// TODO: should double check with user here...
 					core->commander->execute_command( "script action end");
-				}
-				else cout << "Playing a script.  Press ctrl-C (or 7) to stop." << endl;
+				} else if(key==SDLK_PERIOD && (SDL_GetModState() & KMOD_SHIFT)) {
+					// SDLK_GREATER and LESS did not work, so a problem with non-QWERTY keyboards
+					core->commander->execute_command( "audio volume increment");
+				} else if(key==SDLK_COMMA && (SDL_GetModState() & KMOD_SHIFT)) {
+					core->commander->execute_command( "audio volume decrement");
+				
+				} else cout << "Playing a script.  Press ctrl-C (or 7) to stop." << endl;
 
 				return 0;
 			}

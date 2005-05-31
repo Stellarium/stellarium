@@ -37,6 +37,9 @@ Audio::Audio(std::string filename, std::string name) {
 		// TODO: how to test this case?
 	}
 
+	// set the music volume to 1/2 maximum
+	Mix_VolumeMusic(MIX_MAX_VOLUME/2);
+
 	track = Mix_LoadMUS(filename.c_str());
 	if(track == NULL) 	std::cout << "Could not load audio file " << filename << "\n";
 	track_name = name;
@@ -55,6 +58,7 @@ void Audio::play(bool loop) {
 	if(loop) Mix_PlayMusic(track, -1);
 	else Mix_PlayMusic(track, 0);
 	std::cout << "now playing audio\n";
+
 }
 
 void Audio::pause() {
@@ -68,6 +72,35 @@ void Audio::resume() {
 void Audio::stop() {
 	Mix_HaltMusic();
 }
+
+// _volume should be between 0 and 1
+void Audio::set_volume(float _volume) {
+	Mix_VolumeMusic(int(_volume*MIX_MAX_VOLUME));
+
+}
+
+void Audio::increment_volume() {
+	int vol = Mix_VolumeMusic(-1);
+	
+	int step = int(0.1f * MIX_MAX_VOLUME);
+	if(!step) step = 1;
+	Mix_VolumeMusic(vol+step);
+
+	// printf("volume %d + %d\n", vol, step);
+}
+
+void Audio::decrement_volume() {
+	int vol = Mix_VolumeMusic(-1);
+	
+	int step = int(-0.1f * MIX_MAX_VOLUME);
+	if(!step) step = -1;
+	if(-1*step>vol) vol = step = 0;
+
+	Mix_VolumeMusic(vol+step);
+
+	//	printf("volume %d - %d\n", vol, step);
+}
+
 #else
 // SDL_mixer is not available - no audio
 #endif

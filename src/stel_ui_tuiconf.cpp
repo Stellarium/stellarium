@@ -488,7 +488,8 @@ void stel_ui::tui_cb_tui_admin_change_viewport(void)
 void stel_ui::tui_cb_scripts_removeable() {
   
   if(!core->ScriptRemoveableDiskMounted) {
-    // TODO: make sure disk is mounted here
+    // mount disk
+	system( ( core->DataDir + "script_mount_scripts_disk " ).c_str() );	  
 
     cout << "MOUNT DISK for scripts\n";
     // read scripts from mounted disk
