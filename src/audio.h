@@ -39,6 +39,9 @@ class Audio
   void pause();
   void resume();
   void stop();
+  void set_volume(float _volume);
+  void increment_volume();
+  void decrement_volume();
   std::string get_name() { return track_name; };
 
  private:

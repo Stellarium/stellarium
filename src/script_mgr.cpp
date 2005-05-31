@@ -72,6 +72,7 @@ void ScriptMgr::cancel_script() {
   // images loaded are deleted from stel_command_interface directly
   playing = 0;
   play_paused = 0;
+
 }
 
 
