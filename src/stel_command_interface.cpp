@@ -107,10 +107,8 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 
 		// safety feature to be able to turn back on
 		if(stcore->MilkyWayIntensity) stcore->FlagMilkyWay = 1;
-	}
 
-
-    else status = 0;
+	} else status = 0;
 
 
     if(trusted) {
@@ -323,33 +321,46 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 									str_to_double(args["duration"]));
 		  }
 	  }
-  } else if(command=="audio" && args["action"]=="play" && args["filename"]!="") {
-    // only one track at a time allowed
-    if(audio) delete audio;
+  } else if(command=="audio") {
 
-    // if from script, local to that path
-    string path;
-    if(stcore->scripts->is_playing()) path = stcore->scripts->get_script_path();
-    else path = stcore->DataRoot + "/";
+	   if( args["action"]=="play" && args["filename"]!="") {
+		  // only one track at a time allowed
+		  if(audio) delete audio;
+		  
+		  // if from script, local to that path
+		  string path;
+		  if(stcore->scripts->is_playing()) path = stcore->scripts->get_script_path();
+		  else path = stcore->DataRoot + "/";
+		  
+		  cout << "audio path = " << path << endl;
+		  
+		  audio = new Audio(path + args["filename"], "default track");
+		  audio->play(args["loop"]=="on");
+	  } else if(args["volume"]!="") {
 
-    cout << "audio path = " << path << endl;
-
-    audio = new Audio(path + args["filename"], "default track");
-    audio->play(args["loop"]=="on");
+		  recordable = 0;
+		  if(audio!=NULL) {
+			  if(args["volume"] == "increment") {
+				  audio->increment_volume();
+			  } else if(args["volume"] == "decrement") {
+				  audio->decrement_volume();
+			  } else audio->set_volume( str_to_double(args["volume"]) );
+		  }
+	  } else status = 0;
 
   } else if(command=="script") {
 
     if(args["action"]=="end") {
       // stop script, audio, and unload any loaded images
-      stcore->scripts->cancel_script();
       if(audio) {
-	delete audio;
-	audio = NULL;
+		  delete audio;
+		  audio = NULL;
       }
+      stcore->scripts->cancel_script();
       stcore->script_images->drop_all_images();
 
-      // unmount disk if was mounted to run script
-      // TODO unmount disk...
+      // unmount disk in case was mounted to run script
+	  system( ( stcore->DataDir + "script_unmount_scripts_disk " ).c_str() );	  
       stcore->ScriptRemoveableDiskMounted = 0;
 
     } else if(args["action"]=="play" && args["filename"]!="") {
