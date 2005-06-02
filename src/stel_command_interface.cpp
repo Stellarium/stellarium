@@ -359,9 +359,11 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
       stcore->scripts->cancel_script();
       stcore->script_images->drop_all_images();
 
-      // unmount disk in case was mounted to run script
-	  system( ( stcore->DataDir + "script_unmount_scripts_disk " ).c_str() );	  
-      stcore->ScriptRemoveableDiskMounted = 0;
+	  if(stcore->ScriptRemoveableDiskMounted) {
+		  // unmount disk mounted to run script
+		  system( ( stcore->DataDir + "script_unmount_scripts_disk " ).c_str() );	  
+		  stcore->ScriptRemoveableDiskMounted = 0;
+	  }
 
     } else if(args["action"]=="play" && args["filename"]!="") {
       stcore->scripts->play_script(args["filename"], args["path"]);
