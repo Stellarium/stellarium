@@ -706,10 +706,10 @@ int stel_ui::handle_keys(SDLKey key, S_GUI_VALUE state)
 						  (key==SDLK_c && (SDL_GetModState() & KMOD_CTRL))) {
 					// TODO: should double check with user here...
 					core->commander->execute_command( "script action end");
-				} else if(key==SDLK_PERIOD && (SDL_GetModState() & KMOD_SHIFT)) {
+				} else if((key==SDLK_PERIOD && (SDL_GetModState() & KMOD_SHIFT)) || key==SDLK_n){
 					// SDLK_GREATER and LESS did not work, so a problem with non-QWERTY keyboards
 					core->commander->execute_command( "audio volume increment");
-				} else if(key==SDLK_COMMA && (SDL_GetModState() & KMOD_SHIFT)) {
+				} else if((key==SDLK_COMMA && (SDL_GetModState() & KMOD_SHIFT)) || key==SDLK_d) {
 					core->commander->execute_command( "audio volume decrement");
 				
 				} else cout << "Playing a script.  Press ctrl-C (or 7) to stop." << endl;
