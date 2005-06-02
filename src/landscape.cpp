@@ -298,7 +298,8 @@ void Landscape_old_style::draw_decor(tone_reproductor * eye, const Projector* pr
 	float x,y;
 	float a;
 
-	Mat4d mat = nav->get_local_to_eye_mat() * Mat4d::zrotation(decor_angle_rotatez*M_PI/180.f);
+	//	Mat4d mat = nav->get_local_to_eye_mat() * Mat4d::zrotation(decor_angle_rotatez*M_PI/180.f);
+	Mat4d mat = nav->get_local_to_eye_mat();
 	glPushMatrix();
 	glLoadMatrixd(mat);
 	
