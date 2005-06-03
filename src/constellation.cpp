@@ -59,7 +59,7 @@ int Constellation::read(FILE *  fic, Hip_Star_mgr * _VouteCeleste)
         if (fscanf(fic,"%u",&HP)!=1)
 		{
 			printf("ERROR while loading constellation data (reading %s)\n", inter.c_str());
-			exit(-1);
+			return 0;
 		}
 
         asterism[i]=_VouteCeleste->search(HP);
