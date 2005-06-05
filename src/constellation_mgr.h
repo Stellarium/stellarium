@@ -38,8 +38,8 @@ public:
     Constellation* is_star_in(const Hip_Star *) const;
     Constellation* find_from_short_name(const string& shortname) const;
     int  set_sky_locale(const string& _sky_locale);
-	void set_art_fade_duration(float duration) {art_fader.set_duration((int)(duration*1000.f));}
-	void set_art_intensity(float _max) {art_fader.set_max_value(_max);}
+	void set_art_fade_duration(float duration);
+	void set_art_intensity(float _max);
 	void update(int delta_time);
 	void show_art(bool b);
 	void show_lines(bool b);
@@ -56,11 +56,7 @@ private:
     string dataDir;
     string skyCulture;
     string skyLocale;
-	linear_fader art_fader;
-	linear_fader lines_fader;
-	linear_fader names_fader;
 	Constellation* selected;
-	bool art, lines, names;
 };
 
 #endif // _CONSTELLATION_MGR_H_

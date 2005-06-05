@@ -43,8 +43,6 @@ Constellation_mgr::Constellation_mgr(string _data_dir, string _sky_culture, stri
   // load translated labels
   set_sky_locale(_sky_locale);
   skyLocale = _sky_locale;
-
-  art = lines = names = 0;
 }
 
 
@@ -388,21 +386,18 @@ int Constellation_mgr::set_sky_locale(const string& _sky_locale) {
 
 
 // update faders
-void Constellation_mgr::update(int delta_time) {
-
+void Constellation_mgr::update(int delta_time)
+{
 	vector<Constellation *>::const_iterator iter;
     for(iter=asterisms.begin();iter!=asterisms.end();++iter)
     {
 		(*iter)->update(delta_time);
     }
-
 }
 
 
-void Constellation_mgr::show_art(bool b) {
-
-	art = b;
-
+void Constellation_mgr::show_art(bool b)
+{
 	if(selected) {
 		selected->show_art(b);
 	} else {
@@ -413,9 +408,22 @@ void Constellation_mgr::show_art(bool b) {
 }
 
 
-void Constellation_mgr::show_lines(bool b) {
-	lines = b;
+void Constellation_mgr::set_art_intensity(float _max)
+{
+	vector<Constellation *>::const_iterator iter;
+	for(iter=asterisms.begin();iter!=asterisms.end();++iter)
+			(*iter)->art_fader.set_max_value(_max);
+}
 
+void Constellation_mgr::set_art_fade_duration(float duration)
+{
+	vector<Constellation *>::const_iterator iter;
+	for(iter=asterisms.begin();iter!=asterisms.end();++iter)
+			(*iter)->art_fader.set_duration((int)(duration*1000.f));
+}
+
+void Constellation_mgr::show_lines(bool b)
+{
 	if(selected) {
 		selected->show_line(b);
 	} else {
@@ -425,10 +433,8 @@ void Constellation_mgr::show_lines(bool b) {
 	}
 }
 
-void Constellation_mgr::show_names(bool b) {
-
-	names = b;
-
+void Constellation_mgr::show_names(bool b)
+{
 	if(selected) {
 		selected->show_name(b);
 	} else {
@@ -438,8 +444,8 @@ void Constellation_mgr::show_names(bool b) {
 	}
 }
 
-void Constellation_mgr::set_selected(Constellation* c) {
-
+void Constellation_mgr::set_selected(Constellation* c)
+{
 	selected = c;
 
 	// update states for other constellations to fade them out
