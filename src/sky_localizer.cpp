@@ -17,12 +17,15 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-
+#include <iostream>
+#include <fstream>
 #include "sky_localizer.h"
 #include "stellarium.h"
 
 Sky_localizer::Sky_localizer(string _data_dir)
 {
+
+	// load list of sky cultures from disk
   char culture_name[100];
   char culture_directory[100];
 
@@ -55,6 +58,34 @@ Sky_localizer::Sky_localizer(string _data_dir)
   }
   fclose(fic);
 
+
+  // Load list of languages from disk
+  char buffer[1000];
+
+  ifstream input_file(string(_data_dir + "skylanguages.fab").c_str());
+
+  if (! input_file.is_open()) {
+	  cout << "Error opening " + _data_dir + "skylanguages.fab" << endl;
+	  return;
+  }
+
+  string lcode, lname;
+  while (!input_file.getline(buffer,999).eof()) {
+	  
+	  if( buffer[0] != '#' && buffer[0] != '\n') {
+		
+		  istringstream fline( buffer );
+
+		  if(fline >> lcode >> lname) {
+			  master_locales[lcode] = lname;
+			  // cout << lcode << " : " << lname << endl;
+		  }
+		  
+	  }
+  }
+
+
+  // update language translation hash
   init_sky_locales();
 
 }
@@ -69,23 +100,14 @@ void Sky_localizer::init_sky_locales() {
 	locale_to_name.clear();
 	name_to_locale.clear();
 
-	// TODO: put these in a config file so not hard coded!
+	// initialize sky locale lists by translating locale names from master list
 
-	// initialize sky locale list (hardcoded right here)
-	locale_to_name["deu"]  = _("German");
-	locale_to_name["dut"]  = _("Dutch");
-	locale_to_name["eng"]  = _("English");
-	locale_to_name["esl"]  = _("Spanish");
-	locale_to_name["fra"]  = _("French");
-	locale_to_name["haw"]  = _("Hawaiian");
-	locale_to_name["ita"]  = _("Italian");
-	locale_to_name["por"]  = _("Portuguese");
-
-	for ( stringHashIter_t iter = locale_to_name.begin(); iter != locale_to_name.end(); ++iter ) {
-		name_to_locale[ iter->second ] = iter->first;
-		//    printf("name: %s\tlocale: %s\n", iter->second.c_str(), iter->first.c_str());
+	for ( stringHashIter_t iter = master_locales.begin(); iter != master_locales.end(); ++iter ) {
+		locale_to_name[ iter->first ] = _(iter->second.c_str());
+		name_to_locale[ _(iter->second.c_str()) ] = iter->first;
+		// printf("name: %s\tlocale: %s\n", iter->second.c_str(), iter->first.c_str());
 	}
-
+	
 }
 
 
