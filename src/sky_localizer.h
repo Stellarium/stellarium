@@ -46,8 +46,9 @@ class Sky_localizer
   stringHash_t name_to_dir;
   stringHash_t dir_to_name;
 
-  stringHash_t name_to_locale;
-  stringHash_t locale_to_name;
+  stringHash_t master_locales;  // sky locale data direct from definition file
+  stringHash_t name_to_locale;  // updated with current admin locale translations
+  stringHash_t locale_to_name;  // same as above, but opposite direction
 
 };
 
