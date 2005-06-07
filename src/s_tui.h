@@ -69,7 +69,7 @@ namespace s_tui
 		virtual string getString(void) {return string();}
 		virtual string getCleanString(void);
 		// Return true if key signal intercepted, false if not
-		virtual bool onKey(SDLKey, S_TUI_VALUE) {return false;}
+		virtual bool onKey(Uint16, S_TUI_VALUE) {return false;}
 		virtual bool isEditable(void) const {return false;}
 		void setActive(bool a) {active = a;}
 		bool getActive(void) const {return active;}
@@ -93,7 +93,7 @@ namespace s_tui
         virtual ~Container();
 		virtual string getString(void);
         virtual void addComponent(Component*);
-		virtual bool onKey(SDLKey, S_TUI_VALUE);
+		virtual bool onKey(Uint16, S_TUI_VALUE);
     protected:
         list<Component*> childs;
     };
@@ -131,7 +131,7 @@ namespace s_tui
 		Boolean_item(bool init_state = false, const string& _label = string(),
 			const string& _string_activated = string("ON"),
 			const string& string_disabled  = string("OFF"));
-		virtual bool onKey(SDLKey, S_TUI_VALUE);
+		virtual bool onKey(Uint16, S_TUI_VALUE);
 		virtual string getString(void);
 		virtual bool isEditable(void) const {return true;}
     protected:
@@ -158,7 +158,7 @@ namespace s_tui
 			Integer(init_value), numInput(false), min(_min), max(_max), label(_label) {;}
 		virtual string getString(void);
 		virtual bool isEditable(void) const {return true;}
-		virtual bool onKey(SDLKey, S_TUI_VALUE);
+		virtual bool onKey(Uint16, S_TUI_VALUE);
     protected:
 		bool numInput;
 		string strInput;
@@ -174,7 +174,7 @@ namespace s_tui
 			Decimal(init_value), numInput(false), min(_min), max(_max), label(_label), delta(_delta) {;}
 		virtual string getString(void);
 		virtual bool isEditable(void) const {return true;}
-		virtual bool onKey(SDLKey, S_TUI_VALUE);
+		virtual bool onKey(Uint16, S_TUI_VALUE);
     protected:
 		bool numInput;
 		string strInput;
@@ -201,7 +201,7 @@ namespace s_tui
     public:
 		Branch();
 		virtual string getString(void);
-		virtual bool onKey(SDLKey, S_TUI_VALUE);
+		virtual bool onKey(Uint16, S_TUI_VALUE);
         virtual void addComponent(Component*);
 		virtual Component* getCurrent(void) const {if (current==childs.end()) return NULL; else return *current;}
 		virtual bool setValue(const string&);
@@ -216,7 +216,7 @@ namespace s_tui
     {
     public:
 		MenuBranch(const string& s);
-		virtual bool onKey(SDLKey, S_TUI_VALUE);
+		virtual bool onKey(Uint16, S_TUI_VALUE);
 		virtual string getString(void);
 		virtual bool isEditable(void) const {return true;}
 		string getLabel(void) const {return label;}
@@ -231,7 +231,7 @@ namespace s_tui
     {
     public:
 		MenuBranch_item(const string& s);
-		virtual bool onKey(SDLKey, S_TUI_VALUE);
+		virtual bool onKey(Uint16, S_TUI_VALUE);
 		virtual string getString(void);
 		virtual bool isEditable(void) const {return true;}
 		string getLabel(void) const {return label;}
@@ -247,7 +247,7 @@ namespace s_tui
     public:
 		Time_item(const string& _label = string(), double _JD = 2451545.0);
 		~Time_item();
-		virtual bool onKey(SDLKey, S_TUI_VALUE);
+		virtual bool onKey(Uint16, S_TUI_VALUE);
 		virtual string getString(void);
 		virtual bool isEditable(void) const {return true;}
 		double getJDay(void) const {return JD;}
@@ -270,7 +270,7 @@ namespace s_tui
     public:
 		Action_item(const string& _label = "", const string& sp1 = "Do", const string& sp2 = "Done") :
 			CallbackComponent(), label(_label), string_prompt1(sp1), string_prompt2(sp2) {tempo = clock();}
-		virtual bool onKey(SDLKey, S_TUI_VALUE);
+		virtual bool onKey(Uint16, S_TUI_VALUE);
 		virtual string getString(void);
 		virtual bool isEditable(void) const {return true;}
     protected:
@@ -286,7 +286,7 @@ namespace s_tui
     public:
 		ActionConfirm_item(const string& _label = "", const string& sp1 = "Do", const string& sp2 = "Done",	const string& sc = "Are you sure ?") :
 				Action_item(_label, sp1, sp2), isConfirming(false), string_confirm(sc) {;}
-		virtual bool onKey(SDLKey, S_TUI_VALUE);
+		virtual bool onKey(Uint16, S_TUI_VALUE);
 		virtual string getString(void);
     protected:
 		bool isConfirming;
@@ -311,7 +311,7 @@ namespace s_tui
 			return os.str();
 		}
 		virtual bool isEditable(void) const {return true;}
-		virtual bool onKey(SDLKey k, S_TUI_VALUE v)
+		virtual bool onKey(Uint16 k, S_TUI_VALUE v)
 		{
 		  if (current==items.end() || v==S_TUI_RELEASED) return false;
 		        if (k==SDLK_RETURN)
@@ -404,7 +404,7 @@ namespace s_tui
 			return os.str();
 		}
 		virtual bool isEditable(void) const {return true;}
-		virtual bool onKey(SDLKey k, S_TUI_VALUE v)
+		virtual bool onKey(Uint16 k, S_TUI_VALUE v)
 		{
 		  if (current==items.end() || v==S_TUI_RELEASED) return false;
 		        if (k==SDLK_RETURN)
@@ -503,7 +503,7 @@ namespace s_tui
     {
     public:
 		Time_zone_item(const string& zonetab_file, const string& _label = string());
-		virtual bool onKey(SDLKey, S_TUI_VALUE);
+		virtual bool onKey(Uint16, S_TUI_VALUE);
 		virtual string getString(void);
 		virtual bool isEditable(void) const {return true;}
 		string gettz(void); // should be const but gives a boring error...

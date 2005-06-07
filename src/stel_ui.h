@@ -53,12 +53,12 @@ public:
 	// Handle mouse move
 	int handle_move(int x, int y);
 	// Handle key press and release
-	int handle_keys(SDLKey key, S_GUI_VALUE state);
+	int handle_keys(Uint16 key, S_GUI_VALUE state);
 
 	// Text UI
 	void init_tui(void);
 	void draw_tui(void);		// Display the tui
-	int handle_keys_tui(SDLKey key, s_tui::S_TUI_VALUE state);
+	int handle_keys_tui(Uint16 key, s_tui::S_TUI_VALUE state);
 	// Update all the tui widgets with values taken from the core parameters
 	void tui_update_widgets(void);
 
