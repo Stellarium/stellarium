@@ -284,7 +284,7 @@ void stel_ui::draw_tui(void)
 	}
 }
 
-int stel_ui::handle_keys_tui(SDLKey key, s_tui::S_TUI_VALUE state)
+int stel_ui::handle_keys_tui(Uint16 key, s_tui::S_TUI_VALUE state)
 {
 	return tui_root->onKey(key, state);
 }

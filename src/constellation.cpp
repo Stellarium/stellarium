@@ -66,6 +66,7 @@ int Constellation::read(FILE *  fic, Hip_Star_mgr * _VouteCeleste)
 		if (!asterism[i])
 		{
 			printf("Error in Constellation %s asterism : can't find star HP=%d\n",inter.c_str(),HP);
+			return 0;
 		}
     }
 

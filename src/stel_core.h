@@ -85,7 +85,7 @@ public:
 	// Handle mouse move
 	int handle_move(int x, int y);
 	// Handle key press and release
-	int handle_keys(SDLKey key, s_gui::S_GUI_VALUE state);
+	int handle_keys(Uint16 key, s_gui::S_GUI_VALUE state);
 
 	int get_screen_W(void) const {return screen_W;}
 	int get_screen_H(void) const {return screen_H;}
