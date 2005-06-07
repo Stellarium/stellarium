@@ -139,7 +139,7 @@ namespace s_gui
         virtual int getFocus(void) const {return focus;}
 		virtual int onClic(int, int, S_GUI_VALUE, S_GUI_VALUE) {return 0;}
 		virtual int onMove(int, int) {return 0;}
-		virtual int onKey(SDLKey, S_GUI_VALUE) {return 0;}
+		virtual int onKey(Uint16, S_GUI_VALUE) {return 0;}
 		virtual void setTexture(const s_texture* tex) {painter.setTexture(tex);}
 		virtual void setFont(const s_font* f) {painter.setFont(f);}
 		const s_font* getFont(void) const {return painter.getFont();}
@@ -190,7 +190,7 @@ namespace s_gui
         virtual void draw(void);
 		virtual int onClic(int, int, S_GUI_VALUE, S_GUI_VALUE);
 		virtual int onMove(int, int);
-		virtual int onKey(SDLKey, S_GUI_VALUE);
+		virtual int onKey(Uint16, S_GUI_VALUE);
     protected:
         std::list<Component*> childs;
     };

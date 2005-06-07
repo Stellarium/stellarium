@@ -673,23 +673,21 @@ int stel_ui::handle_clic(Uint16 x, Uint16 y, Uint8 button, Uint8 state)
 
 
 /*******************************************************************************/
-int stel_ui::handle_keys(SDLKey key, S_GUI_VALUE state)
+int stel_ui::handle_keys(Uint16 key, S_GUI_VALUE state)
 {
 	desktop->onKey(key, state);
 	if (state==S_GUI_PRESSED)
 		{
-			if(key==SDLK_q)
-				{
-					if (SDL_GetModState() &
-#ifndef MACOSX
-						KMOD_CTRL
-#else
-						KMOD_META
-#endif
-						) core->quit();
-				}
 
-			//			cout << "key was: " << key << endl;
+
+#ifndef MACOSX
+			if(key==0x0011) { // CTRL-Q
+#else
+ 			if (key == SDLK_q && SDL_GetModState() & KMOD_META) { 
+#endif
+				core->quit();
+			}
+
 
 			// if script is running, only script control keys are accessible
 			// to pause/resume/cancel the script
@@ -702,33 +700,27 @@ int stel_ui::handle_keys(SDLKey key, S_GUI_VALUE state)
 					core->commander->execute_command( "script action pause");
 				} else if(key==SDLK_k) {
 					core->commander->execute_command( "script action resume");
-				} else if(key==SDLK_7 || 
-						  (key==SDLK_c && (SDL_GetModState() & KMOD_CTRL))) {
+				} else if(key==SDLK_7 || key==0x0003) {  // ctrl-c
 					// TODO: should double check with user here...
 					core->commander->execute_command( "script action end");
-				} else if((key==SDLK_PERIOD && (SDL_GetModState() & KMOD_SHIFT)) || key==SDLK_n){
-					// SDLK_GREATER and LESS did not work, so a problem with non-QWERTY keyboards
+				} else if(key==SDLK_GREATER || key==SDLK_n){
 					core->commander->execute_command( "audio volume increment");
-				} else if((key==SDLK_COMMA && (SDL_GetModState() & KMOD_SHIFT)) || key==SDLK_d) {
+				} else if(key==SDLK_LESS || key==SDLK_d) {
 					core->commander->execute_command( "audio volume decrement");
 				
-				} else cout << "Playing a script.  Press ctrl-C (or 7) to stop." << endl;
+				} else cout << "Playing a script.  Press CTRL-C (or 7) to stop." << endl;
 
 				return 0;
 			}
 
 
-			if(key==SDLK_r) {
-				if(SDL_GetModState() & KMOD_CTRL) {
-					if(core->scripts->is_recording()) core->commander->execute_command( "script action cancelrecord");
-					else core->commander->execute_command( "script action record");  
-					// TODO - need filename
-				} else {
-					if(key==SDLK_r) core->commander->execute_command( "flag constellation_art toggle");
-				}
+			if(key==0x0012) {  // ctrl-r
+				if(core->scripts->is_recording()) core->commander->execute_command( "script action cancelrecord");
+				else core->commander->execute_command( "script action record");  
+				// TODO - need filename
 			}
 
-
+			if(key==SDLK_r) core->commander->execute_command( "flag constellation_art toggle");
 			if(key==SDLK_c) core->commander->execute_command( "flag constellation_drawing toggle");
 			if(key==SDLK_d) {
 				if (SDL_GetModState() & KMOD_CTRL) {

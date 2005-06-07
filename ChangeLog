@@ -1,6 +1,7 @@
 0.7.0 [in progress]
 Added planet trails - hit "4" or "," once for ecliptic, again for trails (advance time to observe)
 Added precession of the equinoxes
+Added daylight savings accounting for all platforms (needs testing)
 More realistic and efficient meteor showers
 Added and set-up gettext facilities.
 Added rudimentary scripting features - see doc/commands.html
@@ -10,8 +11,13 @@ Added a fader class, lines and objects fade in/out easily now.
 Added MacosX Xcode project file from Da-Woon Joung.
 Added patches from Fumio Yamamoto for various fixes.
 Removed all the libpng/zlib .c files from the glgpng directory, use host system libpng instead.
+Fix to work with non-US keyboards
+Added more sky label languages
+Sky languages are no longer hard coded
+Cardinal points are now translated based on sky language
+TUI is now using gettext
 Fixed various typos and other bugs
-
+	
 0.6.2 [2004-11-18]
 Fixed time display bug (1 hour ahead of actual sky time during standard time if your timezone has daylight savings).  
 NOTE: Time is only displayed as standard time (no daylight savings effects).

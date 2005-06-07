@@ -858,13 +858,14 @@ int stel_core::handle_move(int x, int y)
 }
 
 // Handle key press and release
-int stel_core::handle_keys(SDLKey key, s_gui::S_GUI_VALUE state)
+int stel_core::handle_keys(Uint16 key, s_gui::S_GUI_VALUE state)
 {
 	s_tui::S_TUI_VALUE tuiv;
 	if (state == s_gui::S_GUI_PRESSED) tuiv = s_tui::S_TUI_PRESSED;
 	else tuiv = s_tui::S_TUI_RELEASED;
 	if (FlagShowTuiMenu)
 	{
+
 		if (state==S_GUI_PRESSED && key==SDLK_m)
 		{
 		  // leave tui menu

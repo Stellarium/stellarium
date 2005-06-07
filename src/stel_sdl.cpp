@@ -269,12 +269,27 @@ void stel_sdl::start_main_loop(void)
 
 				case SDL_KEYDOWN:
 					// Send the event to the gui and stop if it has been intercepted
-					if (!core->handle_keys(E.key.keysym.sym,S_GUI_PRESSED))
+
+					/*
+					printf("key pressed: ");
+					if( E.key.keysym.unicode < 0x80 && E.key.keysym.unicode > 0 ){
+						printf( "%c (0x%04X)\n", (char)E.key.keysym.unicode,
+								E.key.keysym.unicode );
+					}
+					else{
+						printf( "? (0x%04X)\n", E.key.keysym.unicode );
+					}
+					*/
+
+					// use unicode translation, since not keyboard dependent
+					// however, for non-printing keys must revert to just keysym... !
+					if ((E.key.keysym.unicode && !core->handle_keys(E.key.keysym.unicode,S_GUI_PRESSED)) ||
+						(!E.key.keysym.unicode && !core->handle_keys(E.key.keysym.sym,S_GUI_PRESSED)))
 					{
 						if (E.key.keysym.sym==SDLK_F1) SDL_WM_ToggleFullScreen(Screen); // Try fullscreen
 
-						if (E.key.keysym.sym==SDLK_s && (SDL_GetModState() & KMOD_CTRL) &&
-							(Screen->flags & SDL_OPENGL))
+						// ctrl-s saves screenshot
+						if (E.key.keysym.unicode==0x0013 &&  (Screen->flags & SDL_OPENGL))
                         {
 							string tempName;
 							char c[3];

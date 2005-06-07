@@ -89,7 +89,7 @@ string Container::getString(void)
 }
 
 
-bool Container::onKey(SDLKey k, S_TUI_VALUE s)
+bool Container::onKey(Uint16 k, S_TUI_VALUE s)
 {
 	list<Component*>::iterator iter = childs.begin();
 	while (iter != childs.end())
@@ -149,7 +149,7 @@ bool Branch::setValue_Specialslash(const string& s)
 	return false;
 }
 
-bool Branch::onKey(SDLKey k, S_TUI_VALUE v)
+bool Branch::onKey(Uint16 k, S_TUI_VALUE v)
 {
 	if (!*current) return false;
 	if (v==S_TUI_RELEASED) return (*current)->onKey(k,v);
@@ -180,7 +180,7 @@ MenuBranch::MenuBranch(const string& s) : Branch(), label(s), isNavigating(false
 {
 }
 
-bool MenuBranch::onKey(SDLKey k, S_TUI_VALUE v)
+bool MenuBranch::onKey(Uint16 k, S_TUI_VALUE v)
 {
 	if (isNavigating)
 	{
@@ -246,7 +246,7 @@ MenuBranch_item::MenuBranch_item(const string& s) : Branch(), label(s), isEditin
 {
 }
 
-bool MenuBranch_item::onKey(SDLKey k, S_TUI_VALUE v)
+bool MenuBranch_item::onKey(Uint16 k, S_TUI_VALUE v)
 {
 	if (isEditing)
 	{
@@ -302,7 +302,7 @@ Boolean_item::Boolean_item(bool init_state, const string& _label, const string& 
 	string_disabled = _string_disabled;
 }
 
-bool Boolean_item::onKey(SDLKey k, S_TUI_VALUE v)
+bool Boolean_item::onKey(Uint16 k, S_TUI_VALUE v)
 {
 	if (v==S_TUI_PRESSED && (k==SDLK_UP || k==SDLK_DOWN) )
 	{
@@ -334,7 +334,7 @@ string Decimal::getString(void)
 	return os.str();
 }
 
-bool Integer_item::onKey(SDLKey k, S_TUI_VALUE v)
+bool Integer_item::onKey(Uint16 k, S_TUI_VALUE v)
 {
 	if (v==S_TUI_RELEASED) return false;
 	if (!numInput)
@@ -443,7 +443,7 @@ string Integer_item::getString(void)
 	return os.str();
 }
 
-bool Decimal_item::onKey(SDLKey k, S_TUI_VALUE v)
+bool Decimal_item::onKey(Uint16 k, S_TUI_VALUE v)
 {
 	if (v==S_TUI_RELEASED) return false;
 	if (!numInput)
@@ -583,7 +583,7 @@ Time_item::~Time_item()
 	delete s;
 }
 
-bool Time_item::onKey(SDLKey k, S_TUI_VALUE v)
+bool Time_item::onKey(Uint16 k, S_TUI_VALUE v)
 {
 	if (v==S_TUI_RELEASED) return false;
 
@@ -760,7 +760,7 @@ Time_zone_item::Time_zone_item(const string& zonetab_file, const string& _label)
 	current_edit=&continents_names;
 }
 
-bool Time_zone_item::onKey(SDLKey k, S_TUI_VALUE v)
+bool Time_zone_item::onKey(Uint16 k, S_TUI_VALUE v)
 {
 	if (v==S_TUI_RELEASED) return false;
 
@@ -838,7 +838,7 @@ string Action_item::getString(void)
 	}
 }
 
-bool Action_item::onKey(SDLKey k, S_TUI_VALUE v)
+bool Action_item::onKey(Uint16 k, S_TUI_VALUE v)
 {
 	if (v==S_TUI_PRESSED && k==SDLK_RETURN)
 	{
@@ -866,7 +866,7 @@ string ActionConfirm_item::getString(void)
 	else return label + string_prompt1;
 }
 
-bool ActionConfirm_item::onKey(SDLKey k, S_TUI_VALUE v)
+bool ActionConfirm_item::onKey(Uint16 k, S_TUI_VALUE v)
 {
 	if (v==S_TUI_PRESSED && k==SDLK_RETURN)
 	{

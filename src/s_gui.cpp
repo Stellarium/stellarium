@@ -478,7 +478,7 @@ int Container::onMove(int x, int y)
 	return CallbackComponent::onMove(x, y);
 }
 
-int Container::onKey(SDLKey k, S_GUI_VALUE s)
+int Container::onKey(Uint16 k, S_GUI_VALUE s)
 {
 	if (!visible) return 0;
 	list<Component*>::iterator iter = childs.begin();
