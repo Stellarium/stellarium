@@ -135,6 +135,8 @@ int Hip_Star::read(FILE * catalog)
 	// Precomputation of a term used later
 	term1 = expf(-0.92103f*(Mag + 12.12331f)) * 108064.73f;
 
+	//	printf("%d\t%2.1f\t%f\t%f\n", HP, Mag, RA, DE);
+
 	if (mag==0 && type==0)
 	{
 		return 0;

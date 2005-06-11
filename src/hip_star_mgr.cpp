@@ -103,6 +103,7 @@ void Hip_Star_mgr::load_data(const string& hipCatFile)
 	}
 	
 	// Read binary file Hipparcos catalog  
+	unsigned int data_drop =0;
     Hip_Star * e = NULL;
     for(int i=0;i<StarArraySize;i++)
     {
@@ -110,11 +111,7 @@ void Hip_Star_mgr::load_data(const string& hipCatFile)
 		e->HP=(unsigned int)i;
         if (!e->read(hipFile))
         {
-        	continue;
-        }
-		else
-		if (e->Mag>9)
- 		{
+			data_drop++;
         	continue;
         }
         starZones[HipGrid.GetNearest(e->XYZ)].push_back(e);
@@ -122,6 +119,8 @@ void Hip_Star_mgr::load_data(const string& hipCatFile)
 		
     }
     fclose(hipFile);
+
+	printf("%d stars not loaded due to incomplete data.\n", data_drop);
 
     // sort stars by magnitude for faster rendering
     for(int i=0;i < HipGrid.getNbPoints();i++) {
