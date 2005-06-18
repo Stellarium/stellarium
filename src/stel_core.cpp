@@ -1239,34 +1239,28 @@ void stel_core::auto_zoom_out(float move_duration)
 }
 
 // this really belongs elsewhere
-int stel_core::set_sky_culture(string _culture_dir)
+void stel_core::set_sky_culture(string _culture_dir)
 {
-  if(SkyCulture == _culture_dir) return 1;
+  if(SkyCulture == _culture_dir) return;
 
-  if(!projection) return 0;  // objects not initialized yet, will be loaded in init
+  assert(projection);  // objects not initialized yet
 
   // percent complete bar only draws in 2d mode
   projection->set_orthographic_projection();
-  if( asterisms->set_sky_culture(_culture_dir, DataDir + "spacefont.txt", screen_W/2-150, screen_H/2-20) ) {
+  asterisms->set_sky_culture(_culture_dir, screen_W/2-150, screen_H/2-20);
 
-    SkyCulture = _culture_dir;
-
-    // as constellations have changed, clear out any selection and retest for match!
-    if (selected_object && selected_object->get_type()==STEL_OBJECT_STAR)
+	SkyCulture = _culture_dir;
+	// as constellations have changed, clear out any selection and retest for match!
+	if (selected_object && selected_object->get_type()==STEL_OBJECT_STAR)
 	{
-      asterisms->set_selected(asterisms->is_star_in((Hip_Star*)selected_object));
-    }
+		asterisms->set_selected(asterisms->is_star_in((Hip_Star*)selected_object));
+	}
 	else
 	{
-      asterisms->set_selected(NULL);
-    }
-
-    projection->reset_perspective_projection();
-    return 1;
-  }
-  projection->reset_perspective_projection();
-  return 0;
-
+		asterisms->set_selected(NULL);
+	}
+	
+	projection->reset_perspective_projection();
 }
 
 
