@@ -21,7 +21,6 @@
 #include "constellation.h"
 
 bool Constellation::gravity_label = false;
-s_font* Constellation::constellation_font = NULL;
 
 Constellation::Constellation() : asterism(NULL), art_tex(NULL)
 {
