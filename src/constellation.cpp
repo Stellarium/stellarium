@@ -41,32 +41,27 @@ Constellation::~Constellation()
 int Constellation::read(FILE *  fic, Hip_Star_mgr * _VouteCeleste)
 // Read Constellation datas and grab cartesian positions of stars
 {   
-	char buff1[100];
-	char buff2[100];
     unsigned int HP;
 
-	if (fscanf(fic,"%s %s %s %u ",short_name,buff1,buff2,&nb_segments)!=4) return 0;
+	assert(fscanf(fic,"%s %u",short_name,&nb_segments)==2);
 
 	// make short_name uppercase for case insensitive searches
 	for(int a=0; a<3; a++) short_name[a] = ::toupper(short_name[a]);
-
-	name=buff1;
-	inter=buff2;
 
     asterism = new Hip_Star*[nb_segments*2];
     for (unsigned int i=0;i<nb_segments*2;++i)
     {
         if (fscanf(fic,"%u",&HP)!=1)
 		{
-			printf("ERROR while loading constellation data (reading %s)\n", inter.c_str());
-			return 0;
+			printf("ERROR while loading constellation data (reading %s)\n", short_name);
+			assert(0);
 		}
 
         asterism[i]=_VouteCeleste->search(HP);
 		if (!asterism[i])
 		{
-			printf("Error in Constellation %s asterism : can't find star HP=%d\n",inter.c_str(),HP);
-			return 0;
+			printf("Error in Constellation %s asterism : can't find star HP=%d\n",name.c_str(),HP);
+			assert(0);
 		}
     }
 
@@ -142,8 +137,8 @@ void Constellation::draw_name(s_font * constfont, Projector* prj, Vec3f color) c
 	if(!name_fader.get_interstate()) return;
 	glColor3fv(color*name_fader.get_interstate());
 
-	gravity_label ? prj->print_gravity180(constfont, XYname[0], XYname[1], inter, 1, -constfont->getStrLen(inter)/2) :
-	constfont->print(XYname[0]-constfont->getStrLen(inter)/2, XYname[1], inter/*name*/);
+	gravity_label ? prj->print_gravity180(constfont, XYname[0], XYname[1], name, 1, -constfont->getStrLen(name)/2) :
+	constfont->print(XYname[0]-constfont->getStrLen(name)/2, XYname[1], name);
 }
 
 // Draw the art texture, optimized function to be called thru a constellation manager only
