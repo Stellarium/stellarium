@@ -349,7 +349,7 @@ int Constellation_mgr::set_sky_locale(const string& _sky_locale) {
   vector<Constellation *>::const_iterator iter;
 
   char short_name[4];
-  char cname[20];
+  char cname[200];
   Constellation* aster;
 
   // clear previous names
