@@ -26,7 +26,7 @@
 
 // constructor which loads all data from appropriate files
 Constellation_mgr::Constellation_mgr(string _data_dir, string _sky_culture, string _sky_locale,
-									 Hip_Star_mgr * _hip_stars, string _font_filename, int barx, int bary,
+									 Hip_Star_mgr * _hip_stars, string _font_filename, LoadingBar& lb,
 									 Vec3f _lines_color, Vec3f _names_color) : 
 									 asterFont(NULL),
 									 lines_color(_lines_color),
@@ -38,14 +38,10 @@ Constellation_mgr::Constellation_mgr(string _data_dir, string _sky_culture, stri
 	asterFont = new s_font(12., "spacefont", dataDir + _font_filename);
 	assert(asterFont);
 
-	if (!Constellation::constellation_font)
-		Constellation::constellation_font = new s_font(12., "spacefont", dataDir + _font_filename);	// load Font
-	assert(Constellation::constellation_font);	
-	
 	set_sky_locale(_sky_locale);
 	
 	skyCulture = "undefined";
-	set_sky_culture(_sky_culture, barx, bary);
+	set_sky_culture(_sky_culture, lb);
 }
 
 
@@ -61,11 +57,9 @@ Constellation_mgr::~Constellation_mgr()
 
 	if (asterFont) delete asterFont;
 	asterFont = NULL;
-	if (Constellation::constellation_font) delete Constellation::constellation_font;
-	Constellation::constellation_font = NULL;
 }
 
-void Constellation_mgr::set_sky_culture(string _sky_culture, int barx, int bary)
+void Constellation_mgr::set_sky_culture(string _sky_culture, LoadingBar& lb)
 {
 	if (_sky_culture == skyCulture)	return;	// no change
 	skyCulture = _sky_culture;
@@ -73,13 +67,13 @@ void Constellation_mgr::set_sky_culture(string _sky_culture, int barx, int bary)
 	// load new culture data
 	printf(_("Loading constellation for sky culture: \"%s\"\n"), _sky_culture.c_str());
 	load_line_and_art(dataDir + "sky_cultures/" + _sky_culture + "/constellationship.fab",
-		dataDir + "sky_cultures/" + _sky_culture + "/constellationsart.fab", barx, bary);
+		dataDir + "sky_cultures/" + _sky_culture + "/constellationsart.fab", lb);
 	// load translated labels for that culture
 	set_sky_locale(skyLocale);
 }
 
 // Load line and art data from files
-void Constellation_mgr::load_line_and_art(const string & fileName, const string & artfileName, int barx, int bary)
+void Constellation_mgr::load_line_and_art(const string & fileName, const string & artfileName, LoadingBar& lb)
 {
 	FILE *fic = fopen(fileName.c_str(), "r");
 	if (!fic)
@@ -134,7 +128,6 @@ void Constellation_mgr::load_line_and_art(const string & fileName, const string 
 	rewind(fic);
 
 	int current = 0;
-	glDisable(GL_BLEND);
 
 	while (!feof(fic))
 	{
@@ -152,49 +145,9 @@ void Constellation_mgr::load_line_and_art(const string & fileName, const string 
 
 		// Draw loading bar
 		sprintf(tmpstr, _("Loading Constellation Art: %d/%d"), current, total);
-
-		glDisable(GL_TEXTURE_2D);
-
-		// black out background of text for redraws (so can keep sky unaltered)
-		glColor3f(0, 0, 0);
-		glBegin(GL_TRIANGLE_STRIP);
-			glTexCoord2i(1, 0);		// Bottom Right
-			glVertex3f(barx + 302, bary + 36, 0.0f);
-			glTexCoord2i(0, 0);		// Bottom Left
-			glVertex3f(barx - 2, bary + 36, 0.0f);
-			glTexCoord2i(1, 1);		// Top Right
-			glVertex3f(barx + 302, bary + 22, 0.0f);
-			glTexCoord2i(0, 1);		// Top Left
-			glVertex3f(barx - 2, bary + 22, 0.0f);
-		glEnd();
-		glColor3f(1, 1, 1);
-		glBegin(GL_TRIANGLE_STRIP);
-			glTexCoord2i(1, 0);		// Bottom Right
-			glVertex3f(barx + 302, bary + 22, 0.0f);
-			glTexCoord2i(0, 0);		// Bottom Left
-			glVertex3f(barx - 2, bary + 22, 0.0f);
-			glTexCoord2i(1, 1);		// Top Right
-			glVertex3f(barx + 302, bary - 2, 0.0f);
-			glTexCoord2i(0, 1);		// Top Left
-			glVertex3f(barx - 2, bary - 2, 0.0f);
-		glEnd();
-		glColor3f(0.0f, 0.0f, 1.0f);
-		glBegin(GL_TRIANGLE_STRIP);
-			glTexCoord2i(1, 0);		// Bottom Right
-			glVertex3f(barx + 300 * current / total, bary + 20, 0.0f);
-			glTexCoord2i(0, 0);		// Bottom Left
-			glVertex3f(barx, bary + 20, 0.0f);
-			glTexCoord2i(1, 1);		// Top Right
-			glVertex3f(barx + 300 * current / total, bary, 0.0f);
-			glTexCoord2i(0, 1);		// Top Left
-			glVertex3f(barx, bary, 0.0f);
-		glEnd();
-		glColor3f(1, 1, 1);
-		glEnable(GL_TEXTURE_2D);
-		Constellation::constellation_font->print(barx - 2, bary + 35, tmpstr);
-		SDL_GL_SwapBuffers();	// And swap the buffers
-
-
+		lb.SetMessage(tmpstr);
+		lb.Draw((float)current/total);
+		
 		cons = NULL;
 		cons = find_from_short_name(shortname);
 		if (!cons)
