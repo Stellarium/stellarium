@@ -188,31 +188,25 @@ void Constellation_mgr::load_line_and_art(const string & fileName, const string 
 	fclose(fic);
 }
 
-// Draw all the constellations in the vector
-void Constellation_mgr::draw(Projector * prj) const
+
+void Constellation_mgr::draw(Projector * prj, navigator * nav) const
 {
-	glDisable(GL_TEXTURE_2D);
-	glEnable(GL_BLEND);
-	prj->set_orthographic_projection();	// set 2D coordinate
-
-	vector < Constellation * >::const_iterator iter;
-	for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
-	{
-		(*iter)->draw_optim(prj, lines_color);
-	}
-
+	prj->set_orthographic_projection();
+	
+	draw_lines(prj);
+	draw_names(prj);
+	draw_art(prj, nav);
+	
 	prj->reset_perspective_projection();
 }
 
-
-void Constellation_mgr::draw_art(Projector * prj, navigator * nav)
+// Draw constellations art textures
+void Constellation_mgr::draw_art(Projector * prj, navigator * nav) const
 {
 	glBlendFunc(GL_ONE, GL_ONE);
 	glEnable(GL_TEXTURE_2D);
 	glEnable(GL_BLEND);
 	glEnable(GL_CULL_FACE);
-
-	prj->set_orthographic_projection();
 
 	vector < Constellation * >::const_iterator iter;
 	for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
@@ -220,27 +214,34 @@ void Constellation_mgr::draw_art(Projector * prj, navigator * nav)
 		(*iter)->draw_art_optim(prj, nav);
 	}
 
-	prj->reset_perspective_projection();
 	glDisable(GL_CULL_FACE);
 }
 
-// Draw the names of all the constellations
-void Constellation_mgr::draw_names(Projector * prj, bool _gravity_label)
+// Draw constellations lines
+void Constellation_mgr::draw_lines(Projector * prj) const
 {
-	Constellation::gravity_label = _gravity_label;
+	glDisable(GL_TEXTURE_2D);
+	glEnable(GL_BLEND);
+	vector < Constellation * >::const_iterator iter;
+	for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
+	{
+		(*iter)->draw_optim(prj, lines_color);
+	}
+}
+
+// Draw the names of all the constellations
+void Constellation_mgr::draw_names(Projector * prj) const
+{
 	glEnable(GL_BLEND);
 	glEnable(GL_TEXTURE_2D);
-	prj->set_orthographic_projection();	// set 2D coordinate
 
-	vector < Constellation * >::iterator iter;
+	vector < Constellation * >::const_iterator iter;
 	for (iter = asterisms.begin(); iter != asterisms.end(); iter++)
 	{
 		// Check if in the field of view
 		if (prj->project_prec_earth_equ_check((*iter)->XYZname, (*iter)->XYname))
 			(*iter)->draw_name(asterFont, prj, names_color);
 	}
-
-	prj->reset_perspective_projection();
 }
 
 Constellation *Constellation_mgr::is_star_in(const Hip_Star * s) const
