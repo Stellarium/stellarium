@@ -18,10 +18,7 @@
  */
 
 #include <iostream>
-
 #include "constellation.h"
-
-#define RADIUS_CONST 1.
 
 bool Constellation::gravity_label = false;
 s_font* Constellation::constellation_font = NULL;
@@ -38,7 +35,7 @@ Constellation::~Constellation()
 	art_tex = NULL;
 }
 
-int Constellation::read(FILE *  fic, Hip_Star_mgr * _VouteCeleste)
+void Constellation::read(FILE *  fic, Hip_Star_mgr * _VouteCeleste)
 // Read Constellation datas and grab cartesian positions of stars
 {   
     unsigned int HP;
@@ -65,52 +62,43 @@ int Constellation::read(FILE *  fic, Hip_Star_mgr * _VouteCeleste)
 		}
     }
 
-
     for(unsigned int ii=0;ii<nb_segments*2;++ii)
     {
 		XYZname+=(*asterism[ii]).XYZ;
     }
     XYZname*=1./(nb_segments*2);
-
-    return 1;
 }
 
 
 // Draw the Constellation lines
 void Constellation::draw(Projector* prj, const Vec3f& lines_color) const
 {
-
 	if(!line_fader.get_interstate()) return;
 
 	glDisable(GL_TEXTURE_2D);
     glDisable(GL_BLEND);
-
 	glColor3fv(lines_color*line_fader.get_interstate());
-
     prj->set_orthographic_projection();	// set 2D coordinate
-
 	static Vec3d star1;
 	static Vec3d star2;
-
     for(unsigned int i=0;i<nb_segments;++i)
     {
-      if(prj->project_prec_earth_equ_line_check(asterism[2*i]->XYZ,star1,asterism[2*i+1]->XYZ,star2) ) {
-	glBegin(GL_LINES);
-	glVertex2f(star1[0],star1[1]);
-	glVertex2f(star2[0],star2[1]);
-	glEnd();
-		
-      }
-    }
-
-    prj->reset_perspective_projection();
+		if(prj->project_prec_earth_equ_line_check(asterism[2*i]->XYZ,star1,asterism[2*i+1]->XYZ,star2) )
+		{
+			glBegin(GL_LINES);
+			glVertex2f(star1[0],star1[1]);
+			glVertex2f(star2[0],star2[1]);
+			glEnd();
+		}
+	}
+	prj->reset_perspective_projection();
 }
+
 
 // Draw the lines for the Constellation using the coords of the stars
 // (optimized for use thru the class Constellation_mgr only)
 void Constellation::draw_optim(Projector* prj, Vec3f color) const
 {
-
 	if(!line_fader.get_interstate()) return;
 
 	static Vec3d star1;
@@ -136,7 +124,6 @@ void Constellation::draw_name(s_font * constfont, Projector* prj, Vec3f color) c
 {
 	if(!name_fader.get_interstate()) return;
 	glColor3fv(color*name_fader.get_interstate());
-
 	gravity_label ? prj->print_gravity180(constfont, XYname[0], XYname[1], name, 1, -constfont->getStrLen(name)/2) :
 	constfont->print(XYname[0]-constfont->getStrLen(name)/2, XYname[1], name);
 }
@@ -210,7 +197,6 @@ void Constellation::draw_art_optim(Projector* prj, navigator* nav)
 // Draw the art texture
 void Constellation::draw_art(Projector* prj, navigator* nav) 
 {
-
 	float intensity = art_fader.get_interstate(); 
 	if (art_tex && intensity) 
 	{
@@ -296,9 +282,9 @@ const Constellation* Constellation::is_star_in(const Hip_Star * s) const
 	return NULL;
 }
 
-void Constellation::update(int delta_time) {
+void Constellation::update(int delta_time)
+{
 	line_fader.update(delta_time);
 	name_fader.update(delta_time);
 	art_fader.update(delta_time);
-
 }

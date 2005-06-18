@@ -31,13 +31,13 @@ public:
 		Hip_Star_mgr *_hip_stars, string _font_filename, int barx, int bary, 
 		Vec3f _lines_color, Vec3f _names_color);
     virtual ~Constellation_mgr();
-    int set_sky_culture(string _sky_culture, const string& _font_fileName, int barx, int bary);
     void draw(Projector* prj) const;
     void draw_names(Projector* prj, bool gravity_label);
     void draw_art(Projector* prj, navigator* nav);
     Constellation* is_star_in(const Hip_Star *) const;
     Constellation* find_from_short_name(const string& shortname) const;
-    int  set_sky_locale(const string& _sky_locale);
+	void set_sky_locale(const string& _sky_locale);
+	void set_sky_culture(string _sky_culture, int barx, int bary);
 	void set_art_fade_duration(float duration);
 	void set_art_intensity(float _max);
 	void update(int delta_time);
@@ -46,9 +46,7 @@ public:
 	void show_names(bool b);
 	void set_selected(Constellation* c);
 private:
-    int load(const string& catName, const string& artCatName,
-		Hip_Star_mgr * _VouteCeleste, const string& _font_fileName, int barx, int bary);
-
+    void load_line_and_art(const string& catName, const string& artCatName, int barx, int bary);
     vector<Constellation*> asterisms;
     s_font * asterFont;
     Vec3f lines_color, names_color;
