@@ -32,7 +32,7 @@ class Constellation
 public:
     Constellation();
     ~Constellation();
-    int read(FILE *, Hip_Star_mgr * _VouteCeleste);
+    void read(FILE *, Hip_Star_mgr * _VouteCeleste);
     void draw(Projector* prj, const Vec3f& lines_color) const;
     void draw_name(s_font * constfont, Projector* prj, Vec3f color) const;
     void draw_art(Projector* prj, navigator* nav);
@@ -40,7 +40,7 @@ public:
 private:
     void draw_optim(Projector* prj, Vec3f color) const;
     void draw_art_optim(Projector* prj, navigator* nav);
-    void set_common_name(string _name) { inter = _name; }
+    void set_name(string _name) { name = _name; }
 
 	void update(int delta_time);
 	void show_line(bool b) {line_fader=b;}
@@ -49,7 +49,6 @@ private:
 
     string name;
     char short_name[4];
-    string inter;
     Vec3f XYZname;
 	Vec3d XYname;
     unsigned int nb_segments;
