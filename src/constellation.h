@@ -54,10 +54,7 @@ private:
     unsigned int nb_segments;
     Hip_Star ** asterism;
 	static bool gravity_label;
-
 	s_texture* art_tex;
-	static s_font* constellation_font;		// Font used for load printing
-	
 	Vec3d art_vertex[9];
 	linear_fader art_fader, line_fader, name_fader;
 };

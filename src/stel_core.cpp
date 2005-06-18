@@ -197,7 +197,8 @@ void stel_core::init(void)
 	projection->set_orthographic_projection();
 	
 	// Load constellations
-	asterisms = new Constellation_mgr(DataDir, SkyCulture, SkyLocale, hip_stars, "spacefont.txt", screen_W/2-150, screen_H/2-20, ConstLinesColor, ConstNamesColor);
+	LoadingBar lb(projection, DataDir + "spacefont.txt", screen_W/2-150, screen_H/2-20);
+	asterisms = new Constellation_mgr(DataDir, SkyCulture, SkyLocale, hip_stars, "spacefont.txt", lb, ConstLinesColor, ConstNamesColor);
 	asterisms->set_art_intensity(ConstellationArtIntensity);
 	asterisms->set_art_fade_duration(ConstellationArtFadeDuration);
 	
@@ -1243,11 +1244,8 @@ void stel_core::set_sky_culture(string _culture_dir)
 {
   if(SkyCulture == _culture_dir) return;
 
-  assert(projection);  // objects not initialized yet
-
-  // percent complete bar only draws in 2d mode
-  projection->set_orthographic_projection();
-  asterisms->set_sky_culture(_culture_dir, screen_W/2-150, screen_H/2-20);
+  LoadingBar lb(projection, DataDir + "spacefont.txt", screen_W/2-150, screen_H/2-20);
+  asterisms->set_sky_culture(_culture_dir, lb);
 
 	SkyCulture = _culture_dir;
 	// as constellations have changed, clear out any selection and retest for match!
@@ -1259,8 +1257,6 @@ void stel_core::set_sky_culture(string _culture_dir)
 	{
 		asterisms->set_selected(NULL);
 	}
-	
-	projection->reset_perspective_projection();
 }
 
 
