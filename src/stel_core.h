@@ -55,8 +55,6 @@
 class StelCommandInterface;
 class ScriptMgr;
 
-
-
 class stel_core
 {
 friend class stel_ui;

@@ -35,11 +35,11 @@ public:
     void read(FILE *, Hip_Star_mgr * _VouteCeleste);
     void draw(Projector* prj, const Vec3f& lines_color) const;
     void draw_name(s_font * constfont, Projector* prj, Vec3f color) const;
-    void draw_art(Projector* prj, navigator* nav);
+    void draw_art(Projector* prj, navigator* nav) const;
     const Constellation* is_star_in(const Hip_Star *) const;
 private:
-    void draw_optim(Projector* prj, Vec3f color) const;
-    void draw_art_optim(Projector* prj, navigator* nav);
+    void draw_optim(Projector* prj, const Vec3f& lines_color) const;
+    void draw_art_optim(Projector* prj, navigator* nav) const;
     void set_name(string _name) { name = _name; }
 
 	void update(int delta_time);

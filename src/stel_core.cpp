@@ -89,8 +89,6 @@ void stel_core::init(void)
 	if(tmp == NULL) UILocale = "";
 	else UILocale = tmp;
 
-
-
 	// Set textures directory and suffix
 	s_texture::set_texDir(TextureDir);
 	s_texture::set_suffix(".png");
@@ -344,9 +342,8 @@ void stel_core::draw(int delta_time)
 	asterisms->show_lines(FlagConstellationDrawing);
 	asterisms->show_art(FlagConstellationArt);
 	asterisms->show_names(FlagConstellationName);
-	asterisms->draw(projection);
-	asterisms->draw_art(projection, navigation);
-	asterisms->draw_names(projection, FlagGravityLabels);
+	asterisms->set_gravity_label(FlagGravityLabels);
+	asterisms->draw(projection, navigation);
 
 	// Draw the nebula if they are visible
 	if (FlagNebula && sky_brightness<0.11)
