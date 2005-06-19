@@ -78,17 +78,17 @@ Component* stel_ui::createConfigWindow(void)
 	Picture* pconstell = new Picture(constellp, x-50, y+5, 32, 32);
 	tab_render->addComponent(pconstell);
 
-	constellation_cbx = new LabeledCheckBox(core->FlagConstellationDrawing, _("Constellations"));
+	constellation_cbx = new LabeledCheckBox(false, _("Constellations"));
 	constellation_cbx->setOnPressCallback(callback<void>(this, &stel_ui::updateConfigVariables));
 	tab_render->addComponent(constellation_cbx);
 	constellation_cbx->setPos(x,y); y+=15;
 
-	constellation_name_cbx = new LabeledCheckBox(core->FlagConstellationName, _("Constellations Names"));
+	constellation_name_cbx = new LabeledCheckBox(false, _("Constellations Names"));
 	constellation_name_cbx->setOnPressCallback(callback<void>(this, &stel_ui::updateConfigVariables));
 	tab_render->addComponent(constellation_name_cbx);
 	constellation_name_cbx->setPos(x,y); y+=15;
 
-	sel_constellation_cbx = new LabeledCheckBox(core->FlagConstellationPick, _("Selected Constellation Only"));
+	sel_constellation_cbx = new LabeledCheckBox(false, _("Selected Constellation Only"));
 	sel_constellation_cbx->setOnPressCallback(callback<void>(this, &stel_ui::updateConfigVariables));
 	tab_render->addComponent(sel_constellation_cbx);
 	sel_constellation_cbx->setPos(x,y);
@@ -99,12 +99,12 @@ Component* stel_ui::createConfigWindow(void)
 	Picture* pneb = new Picture(nebp, x-50, y, 32, 32);
 	tab_render->addComponent(pneb);
 
-	nebulas_cbx = new LabeledCheckBox(core->FlagNebula, _("Nebulas"));
+	nebulas_cbx = new LabeledCheckBox(false, _("Nebulas"));
 	nebulas_cbx->setOnPressCallback(callback<void>(this, &stel_ui::updateConfigVariables));
 	tab_render->addComponent(nebulas_cbx);
 	nebulas_cbx->setPos(x,y); y+=15;
 
-	nebulas_names_cbx = new LabeledCheckBox(core->FlagNebulaName, _("Nebulas Names. Up to mag :"));
+	nebulas_names_cbx = new LabeledCheckBox(false, _("Nebulas Names. Up to mag :"));
 	nebulas_names_cbx->setOnPressCallback(callback<void>(this, &stel_ui::updateConfigVariables));
 	tab_render->addComponent(nebulas_names_cbx);
 	nebulas_names_cbx->setPos(x,y);
@@ -121,19 +121,19 @@ Component* stel_ui::createConfigWindow(void)
 	Picture* pplan = new Picture(planp, x-50, y, 32, 32);
 	tab_render->addComponent(pplan);
 
-	planets_cbx = new LabeledCheckBox(core->FlagPlanets, _("Planets"));
+	planets_cbx = new LabeledCheckBox(false, _("Planets"));
 	planets_cbx->setOnPressCallback(callback<void>(this, &stel_ui::updateConfigVariables));
 	tab_render->addComponent(planets_cbx);
 	planets_cbx->setPos(x,y);
 
-	moon_x4_cbx = new LabeledCheckBox(core->ssystem->get_moon()->get_sphere_scale()!=1.f, _("Moon Scale"));
+	moon_x4_cbx = new LabeledCheckBox(false, _("Moon Scale"));
 	moon_x4_cbx->setOnPressCallback(callback<void>(this, &stel_ui::updateConfigVariables));
 	tab_render->addComponent(moon_x4_cbx);
 	moon_x4_cbx->setPos(x + 150,y);
 
 	y+=15;
 
-	planets_hints_cbx = new LabeledCheckBox(core->FlagPlanetsHints, _("Planets Hints"));
+	planets_hints_cbx = new LabeledCheckBox(false, _("Planets Hints"));
 	planets_hints_cbx->setOnPressCallback(callback<void>(this, &stel_ui::updateConfigVariables));
 	tab_render->addComponent(planets_hints_cbx);
 	planets_hints_cbx->setPos(x,y);
@@ -144,22 +144,22 @@ Component* stel_ui::createConfigWindow(void)
 	Picture* pgrid = new Picture(gridp, x-50, y, 32, 32);
 	tab_render->addComponent(pgrid);
 
-	equator_grid_cbx = new LabeledCheckBox(core->FlagEquatorialGrid, _("Equatorial Grid"));
+	equator_grid_cbx = new LabeledCheckBox(false, _("Equatorial Grid"));
 	equator_grid_cbx->setOnPressCallback(callback<void>(this, &stel_ui::updateConfigVariables));
 	tab_render->addComponent(equator_grid_cbx);
 	equator_grid_cbx->setPos(x,y); y+=15;
 
-	azimuth_grid_cbx = new LabeledCheckBox(core->FlagAzimutalGrid, _("Azimuthal Grid"));
+	azimuth_grid_cbx = new LabeledCheckBox(false, _("Azimuthal Grid"));
 	azimuth_grid_cbx->setOnPressCallback(callback<void>(this, &stel_ui::updateConfigVariables));
 	tab_render->addComponent(azimuth_grid_cbx);
 	azimuth_grid_cbx->setPos(x,y); y-=15;
 
-	equator_cbx = new LabeledCheckBox(core->FlagEquatorLine, _("Equator Line"));
+	equator_cbx = new LabeledCheckBox(false, _("Equator Line"));
 	equator_cbx->setOnPressCallback(callback<void>(this, &stel_ui::updateConfigVariables));
 	tab_render->addComponent(equator_cbx);
 	equator_cbx->setPos(x + 150,y); y+=15;
 
-	ecliptic_cbx = new LabeledCheckBox(core->FlagEclipticLine, _("Ecliptic Line"));
+	ecliptic_cbx = new LabeledCheckBox(false, _("Ecliptic Line"));
 	ecliptic_cbx->setOnPressCallback(callback<void>(this, &stel_ui::updateConfigVariables));
 	tab_render->addComponent(ecliptic_cbx);
 	ecliptic_cbx->setPos(x + 150,y);
@@ -170,22 +170,22 @@ Component* stel_ui::createConfigWindow(void)
 	Picture* pground = new Picture(groundp, x-50, y, 32, 32);
 	tab_render->addComponent(pground);
 
-	ground_cbx = new LabeledCheckBox(core->FlagLandscape, _("Ground"));
+	ground_cbx = new LabeledCheckBox(false, _("Ground"));
 	ground_cbx->setOnPressCallback(callback<void>(this, &stel_ui::updateConfigVariables));
 	tab_render->addComponent(ground_cbx);
 	ground_cbx->setPos(x,y);
 
-	cardinal_cbx = new LabeledCheckBox(core->FlagCardinalPoints, _("Cardinal Points"));
+	cardinal_cbx = new LabeledCheckBox(false, _("Cardinal Points"));
 	cardinal_cbx->setOnPressCallback(callback<void>(this, &stel_ui::updateConfigVariables));
 	tab_render->addComponent(cardinal_cbx);
 	cardinal_cbx->setPos(x + 150,y); y+=15;
 
-	atmosphere_cbx = new LabeledCheckBox(core->FlagAtmosphere, _("Atmosphere"));
+	atmosphere_cbx = new LabeledCheckBox(false, _("Atmosphere"));
 	atmosphere_cbx->setOnPressCallback(callback<void>(this, &stel_ui::updateConfigVariables));
 	tab_render->addComponent(atmosphere_cbx);
 	atmosphere_cbx->setPos(x,y);
 
-	fog_cbx = new LabeledCheckBox(core->FlagFog, _("Fog"));
+	fog_cbx = new LabeledCheckBox(false, _("Fog"));
 	fog_cbx->setOnPressCallback(callback<void>(this, &stel_ui::updateConfigVariables));
 	tab_render->addComponent(fog_cbx);
 	fog_cbx->setPos(x + 150,y); y+=22;
@@ -346,8 +346,8 @@ void stel_ui::updateConfigVariables(void)
 	core->MaxMagStarName = max_mag_star_name->getValue();
 	core->FlagStarTwinkle = star_twinkle_cbx->getState();
 	core->StarTwinkleAmount = star_twinkle_amount->getValue();
-	core->FlagConstellationDrawing = constellation_cbx->getState();
-	core->FlagConstellationName = constellation_name_cbx->getState();
+	core->constellation_set_flag_lines(constellation_cbx->getState());
+	core->constellation_set_flag_lines(constellation_name_cbx->getState());
 	core->FlagConstellationPick = sel_constellation_cbx->getState();
 	core->FlagNebula = nebulas_cbx->getState();
 	core->FlagNebulaName = nebulas_names_cbx->getState();
@@ -399,8 +399,8 @@ void stel_ui::saveRenderOptions(void)
 	conf.set_double("stars:max_mag_star_name", core->MaxMagStarName);
 	conf.set_boolean("stars:flag_star_twinkle", core->FlagStarTwinkle);
 	conf.set_double("stars:star_twinkle_amount", core->StarTwinkleAmount);
-	conf.set_boolean("viewing:flag_constellation_drawing", core->FlagConstellationDrawing);
-	conf.set_boolean("viewing:flag_constellation_name", core->FlagConstellationName);
+	conf.set_boolean("viewing:flag_constellation_drawing", core->constellation_get_flag_lines());
+	conf.set_boolean("viewing:flag_constellation_name", core->constellation_get_flag_names());
 	conf.set_boolean("viewing:flag_constellation_pick", core->FlagConstellationPick);
 	conf.set_boolean("astro:flag_nebula", core->FlagNebula);
 	conf.set_boolean("astro:flag_nebula_name", core->FlagNebulaName);
@@ -496,8 +496,8 @@ void stel_ui::updateConfigForm(void)
 	max_mag_star_name->setValue(core->MaxMagStarName);
 	star_twinkle_cbx->setState(core->FlagStarTwinkle);
 	star_twinkle_amount->setValue(core->StarTwinkleAmount);
-	constellation_cbx->setState(core->FlagConstellationDrawing);
-	constellation_name_cbx->setState(core->FlagConstellationName);
+	constellation_cbx->setState(core->constellation_get_flag_lines());
+	constellation_name_cbx->setState(core->constellation_get_flag_names());
 	sel_constellation_cbx->setState(core->FlagConstellationPick);
 	nebulas_cbx->setState(core->FlagNebula);
 	nebulas_names_cbx->setState(core->FlagNebulaName);

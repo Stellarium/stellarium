@@ -30,8 +30,7 @@ using namespace std ;
 class Hip_Star_mgr  
 {
 public:
-    Hip_Star_mgr(string _catalog_filename, string _names_filename,
-				 string _common_names_filename, string _font_filename);
+    Hip_Star_mgr();
     virtual ~Hip_Star_mgr();
 	
 	void init(const string& font_fileName, const string& hipCatFile, const string& commonNameFile, const string& sciNameFile);

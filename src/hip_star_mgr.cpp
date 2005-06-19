@@ -30,13 +30,14 @@
 #define RADIUS_STAR 1.
 
 // construct and load all data
-Hip_Star_mgr::Hip_Star_mgr(string _catalog_filename, string _names_filename,
-							string _common_names_filename, string _font_filename) :
-  starZones(NULL), HipGrid(), StarArray(NULL), StarArraySize(0), starTexture(NULL), 
-  starFont(NULL)
+Hip_Star_mgr::Hip_Star_mgr() :
+	starZones(NULL),
+	StarArray(NULL),
+	StarArraySize(0),
+	starTexture(NULL), 
+	starFont(NULL)
 {
-  starZones = new vector<Hip_Star*>[HipGrid.getNbPoints()];
-  init(_font_filename, _catalog_filename, _common_names_filename, _names_filename);
+	starZones = new vector<Hip_Star*>[HipGrid.getNbPoints()];
 }
 
 

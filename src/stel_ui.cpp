@@ -219,51 +219,51 @@ void stel_ui::updateTopBar(void)
 // Create the button panel in the lower left corner
 Component* stel_ui::createFlagButtons(void)
 {
-	bt_flag_constellation_draw = new FlagButton(core->FlagConstellationDrawing, NULL, "bt_constellations");
+	bt_flag_constellation_draw = new FlagButton(false, NULL, "bt_constellations");
 	bt_flag_constellation_draw->setOnPressCallback(callback<void>(this, &stel_ui::cb));
 	bt_flag_constellation_draw->setOnMouseInOutCallback(callback<void>(this, &stel_ui::cbr));
 
-	bt_flag_constellation_name = new FlagButton(core->FlagConstellationName, NULL, "bt_const_names");
+	bt_flag_constellation_name = new FlagButton(false, NULL, "bt_const_names");
 	bt_flag_constellation_name->setOnPressCallback(callback<void>(this, &stel_ui::cb));
 	bt_flag_constellation_name->setOnMouseInOutCallback(callback<void>(this, &stel_ui::cbr));
 
-	bt_flag_constellation_art = new FlagButton(core->FlagConstellationName, NULL, "bt_constart");
+	bt_flag_constellation_art = new FlagButton(false, NULL, "bt_constart");
 	bt_flag_constellation_art->setOnPressCallback(callback<void>(this, &stel_ui::cb));
 	bt_flag_constellation_art->setOnMouseInOutCallback(callback<void>(this, &stel_ui::cbr));	
 	
-	bt_flag_azimuth_grid = new FlagButton(core->FlagAzimutalGrid, NULL, "bt_grid");
+	bt_flag_azimuth_grid = new FlagButton(false, NULL, "bt_grid");
 	bt_flag_azimuth_grid->setOnPressCallback(callback<void>(this, &stel_ui::cb));
 	bt_flag_azimuth_grid->setOnMouseInOutCallback(callback<void>(this, &stel_ui::cbr));
 
-	bt_flag_equator_grid = new FlagButton(core->FlagEquatorialGrid, NULL, "bt_grid");
+	bt_flag_equator_grid = new FlagButton(false, NULL, "bt_grid");
 	bt_flag_equator_grid->setOnPressCallback(callback<void>(this, &stel_ui::cb));
 	bt_flag_equator_grid->setOnMouseInOutCallback(callback<void>(this, &stel_ui::cbr));
 
-	bt_flag_ground = new FlagButton(core->FlagLandscape, NULL, "bt_ground");
+	bt_flag_ground = new FlagButton(false, NULL, "bt_ground");
 	bt_flag_ground->setOnPressCallback(callback<void>(this, &stel_ui::cb));
 	bt_flag_ground->setOnMouseInOutCallback(callback<void>(this, &stel_ui::cbr));
 
-	bt_flag_cardinals = new FlagButton(core->FlagCardinalPoints, NULL, "bt_cardinal");
+	bt_flag_cardinals = new FlagButton(false, NULL, "bt_cardinal");
 	bt_flag_cardinals->setOnPressCallback(callback<void>(this, &stel_ui::cb));
 	bt_flag_cardinals->setOnMouseInOutCallback(callback<void>(this, &stel_ui::cbr));
 
-	bt_flag_atmosphere = new FlagButton(core->FlagAtmosphere, NULL, "bt_atmosphere");
+	bt_flag_atmosphere = new FlagButton(false, NULL, "bt_atmosphere");
 	bt_flag_atmosphere->setOnPressCallback(callback<void>(this, &stel_ui::cb));
 	bt_flag_atmosphere->setOnMouseInOutCallback(callback<void>(this, &stel_ui::cbr));
 
-	bt_flag_nebula_name = new FlagButton(core->FlagNebulaName, NULL, "bt_nebula");
+	bt_flag_nebula_name = new FlagButton(false, NULL, "bt_nebula");
 	bt_flag_nebula_name->setOnPressCallback(callback<void>(this, &stel_ui::cb));
 	bt_flag_nebula_name->setOnMouseInOutCallback(callback<void>(this, &stel_ui::cbr));
 
-	bt_flag_help = new FlagButton(core->FlagHelp, NULL, "bt_help");
+	bt_flag_help = new FlagButton(false, NULL, "bt_help");
 	bt_flag_help->setOnPressCallback(callback<void>(this, &stel_ui::cb));
 	bt_flag_help->setOnMouseInOutCallback(callback<void>(this, &stel_ui::cbr));
 
-	bt_flag_equatorial_mode = new FlagButton(core->navigation->get_viewing_mode()==VIEW_EQUATOR, NULL, "bt_follow");
+	bt_flag_equatorial_mode = new FlagButton(false, NULL, "bt_follow");
 	bt_flag_equatorial_mode->setOnPressCallback(callback<void>(this, &stel_ui::cb));
 	bt_flag_equatorial_mode->setOnMouseInOutCallback(callback<void>(this, &stel_ui::cbr));
 
-	bt_flag_config = new FlagButton(core->FlagConfig, NULL, "bt_config");
+	bt_flag_config = new FlagButton(false, NULL, "bt_config");
 	bt_flag_config->setOnPressCallback(callback<void>(this, &stel_ui::cb));
 	bt_flag_config->setOnMouseInOutCallback(callback<void>(this, &stel_ui::cbr));
 
@@ -361,9 +361,9 @@ void stel_ui::bt_time_now_cb(void)
 ////////////////////////////////////////////////////////////////////////////////
 void stel_ui::cb(void)
 {
-	core->FlagConstellationDrawing 	= bt_flag_constellation_draw->getState();
-	core->FlagConstellationName 	= bt_flag_constellation_name->getState();
-	core->FlagConstellationArt 	= bt_flag_constellation_art->getState();
+	core->constellation_set_flag_lines(bt_flag_constellation_draw->getState());
+	core->constellation_set_flag_names(bt_flag_constellation_name->getState());
+	core->constellation_set_flag_art(  bt_flag_constellation_art->getState());
 	core->FlagAzimutalGrid 		= bt_flag_azimuth_grid->getState();
 	core->FlagEquatorialGrid 	= bt_flag_equator_grid->getState();
 	core->FlagLandscape	 		= bt_flag_ground->getState();
@@ -634,7 +634,7 @@ int stel_ui::handle_clic(Uint16 x, Uint16 y, Uint8 button, Uint8 state)
 	      core->navigation->set_flag_traking(0);
 	      
 	      if (core->selected_object->get_type()==STEL_OBJECT_STAR) {
-		core->asterisms->set_selected(core->asterisms->is_star_in((Hip_Star*)core->selected_object));
+		core->asterisms->set_selected((Hip_Star*)core->selected_object);
 
 		// potentially record this action
 		std::ostringstream oss;
@@ -863,9 +863,9 @@ void stel_ui::gui_update_widgets(void)
 	bt_flag_ctr->setVisible(core->FlagMenu);
 	bt_time_control_ctr->setVisible(core->FlagMenu);
 
-	bt_flag_constellation_draw->setState(core->FlagConstellationDrawing);
-	bt_flag_constellation_name->setState(core->FlagConstellationName);
-	bt_flag_constellation_art->setState(core->FlagConstellationArt);
+	bt_flag_constellation_draw->setState(core->constellation_get_flag_lines());
+	bt_flag_constellation_name->setState(core->constellation_get_flag_names());
+	bt_flag_constellation_art->setState(core->constellation_get_flag_art());
 	bt_flag_azimuth_grid->setState(core->FlagAzimutalGrid);
 	bt_flag_equator_grid->setState(core->FlagEquatorialGrid);
 	bt_flag_ground->setState(core->FlagLandscape);

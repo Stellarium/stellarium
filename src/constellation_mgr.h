@@ -28,28 +28,35 @@
 class Constellation_mgr  
 {
 public:
-    Constellation_mgr(string _data_dir, string _sky_culture, string _sky_locale, 
-		Hip_Star_mgr *_hip_stars, string _font_filename, LoadingBar& lb, 
-		Vec3f _lines_color, Vec3f _names_color);
+    Constellation_mgr(Hip_Star_mgr *_hip_stars);
     virtual ~Constellation_mgr();
     void draw(Projector* prj, navigator* nav) const;
-    Constellation* is_star_in(const Hip_Star *) const;
-    Constellation* find_from_short_name(const string& shortname) const;
+	void update(int delta_time);
+	void set_datadir(const string& s) {dataDir = s;}
 	void set_sky_locale(const string& _sky_locale);
 	void set_sky_culture(string _sky_culture, LoadingBar& lb);
 	void set_art_fade_duration(float duration);
 	void set_art_intensity(float _max);
-	void update(int delta_time);
-	void show_art(bool b);
-	void show_lines(bool b);
-	void show_names(bool b);
-	void set_gravity_label(bool g) {Constellation::gravity_label = g;}
-	void set_selected(Constellation* c);
+	void set_flag_art(bool b);
+	void set_flag_lines(bool b);
+	void set_flag_names(bool b);
+	bool get_flag_art(void) {return ((*(asterisms.begin()))->get_flag_art() || (selected && selected->get_flag_art()));}
+	bool get_flag_lines(void) {return ((*(asterisms.begin()))->get_flag_lines() || (selected && selected->get_flag_lines()));}
+	bool get_flag_names(void) {return ((*(asterisms.begin()))->get_flag_name() || (selected && selected->get_flag_name()));}
+	void set_flag_gravity_label(bool g) {Constellation::gravity_label = g;}
+	void set_lines_color(const Vec3f& c) {lines_color=c;}
+	void set_names_color(const Vec3f& c) {names_color=c;}
+	void set_font(const string& _font_filename);
+	void set_selected(const string& shortname) {set_selected_const(find_from_short_name(shortname));}
+	void set_selected(const Hip_Star * s) {if (!s) set_selected_const(NULL); else set_selected_const(is_star_in(s));}
 private:
     void load_line_and_art(const string& catName, const string& artCatName, LoadingBar& lb);
 	void draw_lines(Projector * prj) const;
 	void draw_art(Projector * prj, navigator * nav) const;
 	void draw_names(Projector * prj) const;
+	void set_selected_const(Constellation* c);
+    Constellation* is_star_in(const Hip_Star *) const;
+    Constellation* find_from_short_name(const string& shortname) const;		
     vector<Constellation*> asterisms;
     s_font * asterFont;
     Vec3f lines_color, names_color;
