@@ -113,37 +113,54 @@ public:
 	
 	// IDEA: replace flags and settings with a hash of structs or classes...
 	int set_flag(string name, string value, bool &nweval, bool trusted);  // set a core flag
-	// Set the value of the parameter TODO
+	// Set the value of the parameter TODO - this should disapear as the flag parameters should be
+	// stored by the classes themself, not by the core
 	void set_param(string& key, float value);
-	// Zoom to the given FOV
+	
+	//! Zoom to the given FOV
 	void zoom_to(double aim_fov, float move_duration = 1.) {projection->zoom_to(aim_fov, move_duration);}
-	// Go and zoom temporary to the selected object.
+	
+	//! Go and zoom temporary to the selected object.
 	void auto_zoom_in(float move_duration = 1.f);
-	// Unzoom to the previous position
+	
+	//! Unzoom to the previous position
 	void auto_zoom_out(float move_duration = 1.f);
-	// Set the sky culture
+	
+	//! Set the sky culture
 	void set_sky_culture(string _culture_dir);
-	// Set the locale type
-	void set_sky_locale(string _locale);	
-	// Set the screen size
+	
+	//! Set the locale type
+	void set_sky_locale(string _locale);
+	
+	//! Set the screen size
 	void set_screen_size(int w, int h);
-	// Set the landscape
+	
+	//! Set the landscape
 	void set_landscape(const string& new_landscape_name);
-	// Set/Get time speed in JDay/sec
+	
+	//! Set/Get time speed in JDay/sec
 	void set_time_speed(double ts) {navigation->set_time_speed(ts);}
 	double get_time_speed(void) const {return navigation->get_time_speed();}
-	// Set/Get JDay
+	
+	//! Set/Get JDay
 	void set_JDay(double JD) {navigation->set_JDay(JD);}
 	double get_JDay(void) const {return navigation->get_JDay();}
-	// Quit the application
+	
+	//! Quit the application
 	void quit(void);
 
-	// Activate/deactivate constellation art
-	void constellation_show_art(bool b) {asterisms->show_art(b);}
+	//! Set/Get display flag of constellation lines
+	void constellation_set_flag_lines(bool b) {asterisms->set_flag_lines(b);}
+	bool constellation_get_flag_lines(void) {return asterisms->get_flag_lines();}
 	
-	//	void populate_setting_mgr(SettingMgr *smgr);  // TEMP until migrate to new config setup
-	//      void load_config_from_setting_mgr(SettingMgr *smgr);  // TEMP until migrate to new config setup
+	//! Set/Get display flag of constellation art
+	void constellation_set_flag_art(bool b) {asterisms->set_flag_art(b);}
+	bool constellation_get_flag_art(void) {return asterisms->get_flag_art();}
 	
+	//! Set/Get display flag of constellation names
+	void constellation_set_flag_names(bool b) {asterisms->set_flag_names(b);}
+	bool constellation_get_flag_names(void) {return asterisms->get_flag_names();}
+
 private:
 
 	void load_config_from(const string& confFile);
@@ -278,10 +295,10 @@ private:
 	float AtmosphereFadeDuration;
 
 	// Viewing
-    int FlagConstellationDrawing;
-    int FlagConstellationName;
+    //int FlagConstellationDrawing;
+    //int FlagConstellationName;
 	int FlagConstellationPick;
-	int FlagConstellationArt;
+	//int FlagConstellationArt;
     int FlagAzimutalGrid;
     int FlagEquatorialGrid;
     int FlagEquatorLine;

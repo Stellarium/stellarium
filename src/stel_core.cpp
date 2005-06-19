@@ -24,7 +24,7 @@
 #include "draw.h"
 
 stel_core::stel_core() : screen_W(800), screen_H(600), bppMode(16), Fullscreen(0),
-	navigation(NULL), observatory(NULL), projection(NULL), selected_object(NULL), hip_stars(NULL), asterisms(NULL),
+	navigation(NULL), observatory(NULL), projection(NULL), selected_object(NULL), hip_stars(NULL),
 	nebulas(NULL), ssystem(NULL), atmosphere(NULL), milky_way(NULL), tone_converter(NULL), FlagHelp(false), 
 	FlagInfos(false), FlagConfig(false), FlagShowTuiMenu(0), 
 	frame(0), timefr(0), timeBase(0), maxfps(10000.f), deltaFov(0.), deltaAlt(0.), deltaAz(0.),
@@ -33,6 +33,9 @@ stel_core::stel_core() : screen_W(800), screen_H(600), bppMode(16), Fullscreen(0
 	ProjectorType = PERSPECTIVE_PROJECTOR;
 	SelectedScript = SelectedScriptDirectory = "";
 	ScriptRemoveableDiskMounted = 0;
+	
+	hip_stars = new Hip_Star_mgr();
+	asterisms = new Constellation_mgr(hip_stars);
 }
 
 stel_core::~stel_core()
@@ -107,7 +110,6 @@ void stel_core::init(void)
 	else navigation->set_JDay(get_julian_from_sys());
 	navigation->set_local_vision(InitViewPos);
 
-
 	switch (ProjectorType)
 	{
 	case PERSPECTIVE_PROJECTOR :
@@ -132,12 +134,12 @@ void stel_core::init(void)
 	skyloc = new Sky_localizer(DataDir);
 
 	// Load hipparcos stars & names
-	hip_stars = new Hip_Star_mgr(
+	hip_stars->init(
+		DataDir + "spacefont.txt",
 		DataDir + "hipparcos.fab",
 		DataDir + "name.fab",
-		DataDir + "star_names." + SkyLocale + ".fab",
-		DataDir + "spacefont.txt" );
-
+		DataDir + "star_names." + SkyLocale + ".fab");	
+	
 	nebulas = new Nebula_mgr(NebulaLabelColor, NebulaCircleColor);
 
 	// Create and init the solar system
@@ -196,10 +198,14 @@ void stel_core::init(void)
 	
 	// Load constellations
 	LoadingBar lb(projection, DataDir + "spacefont.txt", screen_W/2-150, screen_H/2-20);
-	asterisms = new Constellation_mgr(DataDir, SkyCulture, SkyLocale, hip_stars, "spacefont.txt", lb, ConstLinesColor, ConstNamesColor);
+	asterisms->set_datadir(DataDir);
+	asterisms->set_font("spacefont.txt");
+	asterisms->set_sky_locale(SkyLocale);
+	asterisms->set_sky_culture(SkyCulture, lb);
 	asterisms->set_art_intensity(ConstellationArtIntensity);
 	asterisms->set_art_fade_duration(ConstellationArtFadeDuration);
-	
+	asterisms->set_lines_color(ConstLinesColor);
+	asterisms->set_names_color(ConstNamesColor);
 
 	nebulas->read(DataDir + "spacefont.txt", DataDir + "messier.fab", screen_W/2-150, screen_H/2-20);
 	projection->reset_perspective_projection();
@@ -339,10 +345,10 @@ void stel_core::draw(int delta_time)
 	}
 
 	// Draw all the constellations
-	asterisms->show_lines(FlagConstellationDrawing);
-	asterisms->show_art(FlagConstellationArt);
-	asterisms->show_names(FlagConstellationName);
-	asterisms->set_gravity_label(FlagGravityLabels);
+	//asterisms->set_flag_lines(FlagConstellationDrawing);
+	//asterisms->set_flag_art(FlagConstellationArt);
+	//asterisms->set_flag_names(FlagConstellationName);
+	asterisms->set_flag_gravity_label(FlagGravityLabels);
 	asterisms->draw(projection, navigation);
 
 	// Draw the nebula if they are visible
@@ -629,9 +635,9 @@ void stel_core::load_config_from(const string& confFile)
 	AtmosphereFadeDuration  = conf.get_double("landscape","atmosphere_fade_duration",1.5);
 
 	// Viewing section
-	FlagConstellationDrawing= conf.get_boolean("viewing:flag_constellation_drawing");
-	FlagConstellationName	= conf.get_boolean("viewing:flag_constellation_name");
-	FlagConstellationArt	= conf.get_boolean("viewing:flag_constellation_art");
+	asterisms->set_flag_lines(conf.get_boolean("viewing:flag_constellation_drawing"));
+	asterisms->set_flag_names(conf.get_boolean("viewing:flag_constellation_name"));
+	asterisms->set_flag_art(  conf.get_boolean("viewing:flag_constellation_art"));
 	FlagConstellationPick	= conf.get_boolean("viewing:flag_constellation_pick");
 	FlagAzimutalGrid		= conf.get_boolean("viewing:flag_azimutal_grid");
 	FlagEquatorialGrid		= conf.get_boolean("viewing:flag_equatorial_grid");
@@ -772,9 +778,9 @@ void stel_core::save_config_to(const string& confFile)
 	conf.set_double ("viewing:atmosphere_fade_duration", AtmosphereFadeDuration);
 
 	// Viewing section
-	conf.set_boolean("viewing:flag_constellation_drawing", FlagConstellationDrawing);
-	conf.set_boolean("viewing:flag_constellation_name", FlagConstellationName);
-	conf.set_boolean("viewing:flag_constellation_art", FlagConstellationArt);
+	conf.set_boolean("viewing:flag_constellation_drawing", asterisms->get_flag_lines());
+	conf.set_boolean("viewing:flag_constellation_name", asterisms->get_flag_names());
+	conf.set_boolean("viewing:flag_constellation_art", asterisms->get_flag_art());
 	conf.set_boolean("viewing:flag_constellation_pick", FlagConstellationPick);
 	conf.set_boolean("viewing:flag_azimutal_grid", FlagAzimutalGrid);
 	conf.set_boolean("viewing:flag_equatorial_grid", FlagEquatorialGrid);
@@ -1233,22 +1239,21 @@ void stel_core::auto_zoom_out(float move_duration)
 	navigation->move_to(InitViewPos, move_duration, true, -1);
 	navigation->set_flag_traking(false);
 	navigation->set_flag_lock_equ_pos(0);
-
 }
 
 // this really belongs elsewhere
 void stel_core::set_sky_culture(string _culture_dir)
 {
-  if(SkyCulture == _culture_dir) return;
+	if(SkyCulture == _culture_dir) return;
 
-  LoadingBar lb(projection, DataDir + "spacefont.txt", screen_W/2-150, screen_H/2-20);
-  asterisms->set_sky_culture(_culture_dir, lb);
+	LoadingBar lb(projection, DataDir + "spacefont.txt", screen_W/2-150, screen_H/2-20);
+	asterisms->set_sky_culture(_culture_dir, lb);
 
 	SkyCulture = _culture_dir;
 	// as constellations have changed, clear out any selection and retest for match!
 	if (selected_object && selected_object->get_type()==STEL_OBJECT_STAR)
 	{
-		asterisms->set_selected(asterisms->is_star_in((Hip_Star*)selected_object));
+		asterisms->set_selected((Hip_Star*)selected_object);
 	}
 	else
 	{
@@ -1317,9 +1322,6 @@ int stel_core::set_flag(string name, string value, bool &newval, bool trusted) {
 		else if(name=="manual_zoom") newval = (FlagManualZoom = !FlagManualZoom);
 		else if(name=="fog") newval = (FlagFog = !FlagFog);
 		else if(name=="atmosphere") newval = (FlagAtmosphere = !FlagAtmosphere);
-		else if(name=="constellation_drawing") newval = (FlagConstellationDrawing = !FlagConstellationDrawing);
-		else if(name=="constellation_name") newval = (FlagConstellationName = !FlagConstellationName);
-		else if(name=="constellation_art") newval = (FlagConstellationArt = !FlagConstellationArt);
 		else if(name=="azimuthal_grid") newval = (FlagAzimutalGrid = !FlagAzimutalGrid);
 		else if(name=="equatorial_grid") newval = (FlagEquatorialGrid = !FlagEquatorialGrid);
 		else if(name=="equator_line") newval = (FlagEquatorLine = !FlagEquatorLine);
@@ -1392,9 +1394,6 @@ int stel_core::set_flag(string name, string value, bool &newval, bool trusted) {
 		else if(name=="manual_zoom") FlagManualZoom = newval;
 		else if(name=="fog") FlagFog = newval;
 		else if(name=="atmosphere") FlagAtmosphere = newval;
-		else if(name=="constellation_drawing") FlagConstellationDrawing = newval;
-		else if(name=="constellation_name") FlagConstellationName = newval;
-		else if(name=="constellation_art") FlagConstellationArt = newval;
 		else if(name=="azimuthal_grid") FlagAzimutalGrid = newval;
 		else if(name=="equatorial_grid") FlagEquatorialGrid = newval;
 		else if(name=="equator_line") FlagEquatorLine = newval;

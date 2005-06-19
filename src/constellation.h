@@ -43,10 +43,13 @@ private:
     void set_name(string _name) { name = _name; }
 
 	void update(int delta_time);
-	void show_line(bool b) {line_fader=b;}
-	void show_name(bool b) {name_fader=b;}
-	void show_art(bool b) {art_fader=b;}
-
+	void set_flag_lines(bool b) {line_fader=b;}
+	void set_flag_name(bool b) {name_fader=b;}
+	void set_flag_art(bool b) {art_fader=b;}
+	bool get_flag_lines(void) {return line_fader;}
+	bool get_flag_name(void) {return name_fader;}
+	bool get_flag_art(void) {return art_fader;}
+	
     string name;
     char short_name[4];
     Vec3f XYZname;
