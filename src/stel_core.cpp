@@ -23,68 +23,66 @@
 #include "stellastro.h"
 #include "draw.h"
 
-stel_core::stel_core() : screen_W(800), screen_H(600), bppMode(16), Fullscreen(0),
-	navigation(NULL), observatory(NULL), projection(NULL), selected_object(NULL), hip_stars(NULL),
-	nebulas(NULL), ssystem(NULL), atmosphere(NULL), milky_way(NULL), tone_converter(NULL), FlagHelp(false), 
+stel_core::stel_core(const string& DDIR, const string& TDIR, const string& CDIR, const string& DATA_ROOT) : 
+	screen_W(800), screen_H(600), bppMode(16), Fullscreen(0),
+	projection(NULL), selected_object(NULL), hip_stars(NULL),
+	nebulas(NULL), ssystem(NULL), milky_way(NULL), FlagHelp(false), 
 	FlagInfos(false), FlagConfig(false), FlagShowTuiMenu(0), 
 	frame(0), timefr(0), timeBase(0), maxfps(10000.f), deltaFov(0.), deltaAlt(0.), deltaAz(0.),
 	move_speed(0.001), FlagTimePause(0), is_mouse_moving_horiz(false), is_mouse_moving_vert(false)
 {
+	TextureDir = TDIR;
+	ConfigDir = CDIR;
+	DataDir = DDIR;
+	DataRoot = DATA_ROOT; // TODO - should be useless
+	
 	ProjectorType = PERSPECTIVE_PROJECTOR;
 	SelectedScript = SelectedScriptDirectory = "";
 	ScriptRemoveableDiskMounted = 0;
 	
+	tone_converter = new tone_reproductor();		
+	atmosphere = new stel_atmosphere();	
 	hip_stars = new Hip_Star_mgr();
 	asterisms = new Constellation_mgr(hip_stars);
+	observatory = new Observator();
+	navigation = new navigator(observatory);
+	
+	ui = new stel_ui(this);
+	commander = new StelCommandInterface(this);
+	scripts = new ScriptMgr(commander);
+	script_images = new ImageMgr();
 }
 
 stel_core::~stel_core()
 {
-	if (navigation) delete navigation;
-	if (projection) delete projection;
-	if (asterisms) delete asterisms;
-	if (hip_stars) delete hip_stars;
-	if (nebulas) delete nebulas;
-	if (equ_grid) delete equ_grid;
-	if (azi_grid) delete azi_grid;
-	if (equator_line) delete equator_line;
-	if (ecliptic_line) delete ecliptic_line;
-	if (cardinals_points) delete cardinals_points;
+	delete navigation;
+	delete projection;
+	delete asterisms;
+	delete hip_stars;
+	delete nebulas;
+	delete equ_grid;
+	delete azi_grid;
+	delete equator_line;
+	delete ecliptic_line;
+	delete cardinals_points;
 	delete landscape; landscape = NULL;
 	delete observatory; observatory = NULL;
 	delete skyloc; skyloc = NULL;
-	if (milky_way) delete milky_way;
+	delete milky_way;
 	delete meteors; meteors = NULL;
-	if (atmosphere) delete atmosphere;
-	if (tone_converter) delete tone_converter;
-	if (ssystem) delete ssystem;
-	if (ui) delete ui;
-	if (scripts) delete scripts;
-	if (commander) delete commander;
-	if(script_images) delete script_images;
+	delete atmosphere;
+	delete tone_converter;
+	delete ssystem;
+	delete ui;
+	delete scripts;
+	delete commander;
+	delete script_images;
 
 	stel_object::delete_textures(); // Unload the pointer textures 
 }
 
-// Set the main data, textures and configuration directories
-void stel_core::set_directories(const string& DDIR, const string& TDIR, const string& CDIR, const string& DATA_ROOT)
-{
-	TextureDir = TDIR;
-	ConfigDir = CDIR;
-	DataDir = DDIR;
-	DataRoot = DATA_ROOT;
-}
-
-// Set the 2 config files names.
-void stel_core::set_config_files(const string& _config_file)
-{
-	config_file = _config_file;
-}
-
-
 void stel_core::init(void)
 {
-
 	// read current ui locale
 	char *tmp = setlocale(LC_MESSAGES, "");
 	printf("Locale is %s\n", tmp);
@@ -96,14 +94,8 @@ void stel_core::init(void)
 	s_texture::set_texDir(TextureDir);
 	s_texture::set_suffix(".png");
 
-	commander = new StelCommandInterface(this);
-	scripts = new ScriptMgr(commander);
-	script_images = new ImageMgr();
-
-	observatory = new Observator();
 	observatory->load(ConfigDir + config_file, "init_location");
 
-	navigation = new navigator(observatory);
 	navigation->set_viewing_mode(ViewingMode);
 	if (StartupTimeMode=="preset" || StartupTimeMode=="Preset")
 		navigation->set_JDay(PresetSkyTime - observatory->get_GMT_shift(PresetSkyTime) * JD_HOUR);
@@ -148,16 +140,12 @@ void stel_core::init(void)
 	ssystem->set_trail_color(ObjectTrailsColor);
 	if(FlagObjectTrails) ssystem->start_trails();
 
-	atmosphere = new stel_atmosphere();
 	atmosphere->set_fade_duration(AtmosphereFadeDuration);
-
-	tone_converter = new tone_reproductor();
 
 	equ_grid = new SkyGrid(EQUATORIAL, EquatorialColor, DataDir + "spacefont.txt", "spacefont");
 	azi_grid = new SkyGrid(ALTAZIMUTAL, AzimuthalColor, DataDir + "spacefont.txt", "spacefont");
 	equator_line = new SkyLine(EQUATOR, EquatorColor);
 	ecliptic_line = new SkyLine(ECLIPTIC, EclipticColor);
-
 
 	cardinals_points = new Cardinals(DataDir + "spacefont.txt", "spacefont");
 	cardinals_points->set_color(CardinalColor);
@@ -173,9 +161,7 @@ void stel_core::init(void)
 	stel_object::init_textures();
 
 	// initialisation of the User Interface
-	ui = new stel_ui(this);
 	ui->init();
-
 	ui->init_tui();
 
 	tone_converter->set_world_adaptation_luminance(3.75f + atmosphere->get_intensity()*40000.f);
@@ -192,9 +178,6 @@ void stel_core::init(void)
 	// Compute transform matrices between coordinates systems
 	navigation->update_transform_matrices((ssystem->get_earth())->get_ecliptic_pos());
 	navigation->update_model_view_mat();
-
-	// Load the nebulas data TODO : add NGC objects
-	projection->set_orthographic_projection();
 	
 	// Load constellations
 	LoadingBar lb(projection, DataDir + "spacefont.txt", screen_W/2-150, screen_H/2-20);
@@ -207,8 +190,8 @@ void stel_core::init(void)
 	asterisms->set_lines_color(ConstLinesColor);
 	asterisms->set_names_color(ConstNamesColor);
 
+	// Load the nebulas data
 	nebulas->read(DataDir + "spacefont.txt", DataDir + "messier.fab", screen_W/2-150, screen_H/2-20);
-	projection->reset_perspective_projection();
 	
 	selected_planet=NULL;	// Fix a bug on macosX! Thanks Fumio!
 		
@@ -433,9 +416,15 @@ void stel_core::draw(int delta_time)
 
 	if (FlagShowGravityUi) ui->draw_gravity_ui();
 	if (FlagShowTuiMenu) ui->draw_tui();
-
-
 }
+
+
+// Set the 2 config files names.
+void stel_core::set_config_files(const string& _config_file)
+{
+	config_file = _config_file;
+}
+
 
 void stel_core::set_landscape(const string& new_landscape_name)
 {
@@ -1034,21 +1023,23 @@ void stel_core::update_move(int delta_time)
 	//	projection->change_fov(deltaFov);
 	//	navigation->update_move(deltaAz, deltaAlt);
 	
-	if(deltaFov != 0 ) {
+	if(deltaFov != 0 )
+	{
 		std::ostringstream oss;
 		oss << "zoom delta_fov " << deltaFov;
 		commander->execute_command(oss.str());
 	}
 
-	if(deltaAz != 0 || deltaAlt != 0) {
+	if(deltaAz != 0 || deltaAlt != 0)
+	{
 		std::ostringstream oss;
 		oss << "look delta_az " << deltaAz << " delta_alt " << deltaAlt;
 		commander->execute_command(oss.str());
-	} else {
+	} else
+	{
 		// must perform call anyway, but don't record!
 		navigation->update_move(deltaAz, deltaAlt);
 	}
-	
 }
 
 void stel_core::set_screen_size(int w, int h)
