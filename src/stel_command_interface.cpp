@@ -61,8 +61,22 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 
     // TODO: loop if want to allow that syntax
     bool val;
-    status = stcore->set_flag( args.begin()->first, args.begin()->second, val, trusted);
-
+	if (args.begin()->first=="constellation_drawing")
+	{
+		stcore->constellation_set_flag_lines((args.begin()->second=="on") ? true : ((args.begin()->second=="off") ? false : ((args.begin()->second=="toggle") ? !stcore->constellation_get_flag_lines() : true)));
+	}
+	else if (args.begin()->first=="constellation_art")
+	{
+		stcore->constellation_set_flag_art((args.begin()->second=="on") ? true : ((args.begin()->second=="off") ? false : ((args.begin()->second=="toggle") ? !stcore->constellation_get_flag_art() : true)));
+	}
+	else if (args.begin()->first=="constellation_name")
+	{
+		stcore->constellation_set_flag_names((args.begin()->second=="on") ? true : ((args.begin()->second=="off") ? false : ((args.begin()->second=="toggle") ? !stcore->constellation_get_flag_names() : true)));
+	}
+	else
+	{
+    	status = stcore->set_flag( args.begin()->first, args.begin()->second, val, trusted);
+	}
     // rewrite command for recording so that actual state is known (rather than "toggle")
     if(args.begin()->second == "toggle") {
       std::ostringstream oss;
@@ -142,7 +156,7 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
       std::istringstream istr(args["hp"]);
       istr >> hpnum;
       stcore->selected_object = stcore->hip_stars->search(hpnum);
-      stcore->asterisms->set_selected(stcore->asterisms->is_star_in((Hip_Star*)stcore->selected_object));
+      stcore->asterisms->set_selected((Hip_Star*)stcore->selected_object);
       stcore->selected_planet=NULL;
     } else if(args["planet"]!=""){
       stcore->selected_object = stcore->selected_planet = stcore->ssystem->search(args["planet"]);
@@ -152,7 +166,7 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
       stcore->selected_planet=NULL;
       stcore->asterisms->set_selected(NULL);
     } else if(args["constellation"]!=""){
-      stcore->asterisms->set_selected(stcore->asterisms->find_from_short_name(args["constellation"]));
+      stcore->asterisms->set_selected(args["constellation"]);
       stcore->selected_object = NULL;
       stcore->selected_planet=NULL;
     }

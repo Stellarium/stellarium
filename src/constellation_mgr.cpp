@@ -25,25 +25,23 @@
 #include "constellation_mgr.h"
 
 // constructor which loads all data from appropriate files
-Constellation_mgr::Constellation_mgr(string _data_dir, string _sky_culture, string _sky_locale,
-									 Hip_Star_mgr * _hip_stars, string _font_filename, LoadingBar& lb,
-									 Vec3f _lines_color, Vec3f _names_color) : 
-									 asterFont(NULL),
-									 lines_color(_lines_color),
-									 names_color(_names_color),
-									 hipStarMgr(_hip_stars),
-									 dataDir(_data_dir),
-									 selected(NULL)
+Constellation_mgr::Constellation_mgr(Hip_Star_mgr *_hip_stars) : 
+	asterFont(NULL),
+	hipStarMgr(_hip_stars),
+	selected(NULL)
 {
-	asterFont = new s_font(12., "spacefont", dataDir + _font_filename);
-	assert(asterFont);
-
-	set_sky_locale(_sky_locale);
-	
+	assert(hipStarMgr);
 	skyCulture = "undefined";
-	set_sky_culture(_sky_culture, lb);
+	skyLocale = "undefined";
+	dataDir = "undefined";
 }
 
+void Constellation_mgr::set_font(const string& _font_filename)
+{
+	if (asterFont) delete asterFont;
+	asterFont = new s_font(12., "spacefont", dataDir + _font_filename);
+	assert(asterFont);
+}
 
 Constellation_mgr::~Constellation_mgr()
 {
@@ -328,21 +326,6 @@ void Constellation_mgr::update(int delta_time)
 }
 
 
-void Constellation_mgr::show_art(bool b)
-{
-	if (selected)
-	{
-		selected->show_art(b);
-	}
-	else
-	{
-		vector < Constellation * >::const_iterator iter;
-		for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
-			(*iter)->show_art(b);
-	}
-}
-
-
 void Constellation_mgr::set_art_intensity(float _max)
 {
 	vector < Constellation * >::const_iterator iter;
@@ -357,54 +340,87 @@ void Constellation_mgr::set_art_fade_duration(float duration)
 		(*iter)->art_fader.set_duration((int) (duration * 1000.f));
 }
 
-void Constellation_mgr::show_lines(bool b)
+void Constellation_mgr::set_flag_lines(bool b)
 {
 	if (selected)
 	{
-		selected->show_line(b);
+		selected->set_flag_lines(b);
 	}
 	else
 	{
 		vector < Constellation * >::const_iterator iter;
 		for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
-			(*iter)->show_line(b);
+			(*iter)->set_flag_lines(b);
 	}
 }
 
-void Constellation_mgr::show_names(bool b)
+void Constellation_mgr::set_flag_art(bool b)
 {
 	if (selected)
 	{
-		selected->show_name(b);
+		selected->set_flag_art(b);
 	}
 	else
 	{
 		vector < Constellation * >::const_iterator iter;
 		for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
-			(*iter)->show_name(b);
+			(*iter)->set_flag_art(b);
 	}
 }
 
-void Constellation_mgr::set_selected(Constellation * c)
-{
-	selected = c;
 
+void Constellation_mgr::set_flag_names(bool b)
+{
+	if (selected)
+	{
+		selected->set_flag_name(b);
+	}
+	else
+	{
+		vector < Constellation * >::const_iterator iter;
+		for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
+			(*iter)->set_flag_name(b);
+	}
+}
+
+void Constellation_mgr::set_selected_const(Constellation * c)
+{
 	// update states for other constellations to fade them out
-	if (selected != NULL)
+	if (c != NULL)
 	{
+		Constellation* cc;
+		// Propagate old parameters new newly selected constellation
+		if (selected) cc=selected;
+		else cc=*(asterisms.begin());
+		c->set_flag_lines(cc->get_flag_lines());
+		c->set_flag_name(cc->get_flag_name());
+		c->set_flag_art(cc->get_flag_art());
+		selected = c;
+				
 		vector < Constellation * >::const_iterator iter;
 		for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
 		{
 			if ((*iter) != selected)
 			{
-				(*iter)->show_line(false);
-				(*iter)->show_name(false);
-				(*iter)->show_art(false);
+				(*iter)->set_flag_lines(false);
+				(*iter)->set_flag_name(false);
+				(*iter)->set_flag_art(false);
 			}
 		}
 	}
 	else
 	{
-		// TODO reset normal state (then don't need to set each loop in stel_core)
+		if (selected==NULL) return;
+		vector < Constellation * >::const_iterator iter;
+		for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
+		{
+			if ((*iter) != selected)
+			{
+				(*iter)->set_flag_lines(selected->get_flag_lines());
+				(*iter)->set_flag_name(selected->get_flag_name());
+				(*iter)->set_flag_art(selected->get_flag_art());
+			}
+		}
+		selected = NULL;
 	}
 }
