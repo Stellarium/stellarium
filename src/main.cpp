@@ -256,9 +256,7 @@ int main(int argc, char **argv)
     setDirectories(argv[0]);
 
 	// Create the core of stellarium, it has to be initialized
-	stel_core* core = new stel_core();
-
-	core->set_directories(DDIR, TDIR, CDIR, DATA_ROOT);
+	stel_core* core = new stel_core(DDIR, TDIR, CDIR, DATA_ROOT);
 
 	// Give the config file parameters which has to be given "hard coded"
 #if !defined(MACOSX) && !defined(XCODE)
