@@ -60,22 +60,22 @@ class stel_core
 friend class stel_ui;
 friend class StelCommandInterface;
 public:
-    stel_core();
+	// Inputs are the main data, textures, configuration directories relatively to the DATA_ROOT directory
+    stel_core(const string& DDIR, const string& TDIR, const string& CDIR, const string& DATA_ROOT);
     virtual ~stel_core();
 	
+	// Init and load all main core components
 	void init(void);
+	// Update all the objects in function of the time
+	void update(int delta_time);
+	// Execute all the drawing functions
+	void draw(int delta_time);
+
 	void load_config(void);
 	void save_config(void);
-
-	// Set the main data, textures and configuration directories
-	void set_directories(const string& DDIR, const string& TDIR, const string& CDIR, const string& DATA_ROOT);
-
-	// Set the 2 config files names.
-	void set_config_files(const string& _config_file);
-
-	void update(int delta_time);		// Update all the objects in function of the time
-	void draw(int delta_time);			// Execute all the drawing functions
-
+	// Set the config file names.
+	void set_config_files(const string& _config_file);	
+	
 	// Increment/decrement smoothly the vision field and position
 	void update_move(int delta_time);
 
@@ -116,7 +116,7 @@ public:
 	// Set the value of the parameter TODO - this should disapear as the flag parameters should be
 	// stored by the classes themself, not by the core
 	void set_param(string& key, float value);
-	
+		
 	//! Zoom to the given FOV
 	void zoom_to(double aim_fov, float move_duration = 1.) {projection->zoom_to(aim_fov, move_duration);}
 	
