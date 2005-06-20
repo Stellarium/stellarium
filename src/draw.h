@@ -40,10 +40,11 @@ class SkyGrid
 {
 public:
 	// Create and precompute positions of a SkyGrid
-	SkyGrid(SKY_GRID_TYPE grid_type = EQUATORIAL, Vec3f grid_color = Vec3f(0.2, 0.2, 0.2), const string& font_file ="", const string& tex_file ="", unsigned int _nb_meridian = 24, unsigned int _nb_parallel = 17,
+	SkyGrid(SKY_GRID_TYPE grid_type = EQUATORIAL, unsigned int _nb_meridian = 24, unsigned int _nb_parallel = 17,
 	 double _radius = 1., unsigned int _nb_alt_segment = 18, unsigned int _nb_azi_segment = 50);
     virtual ~SkyGrid();
 	void draw(const Projector* prj) const;
+	void set_font(const string& font_filename, const string& font_texture);
 	void set_color(const Vec3f& c) {color = c;}
 	void update(int delta_time) {fader.update(delta_time);}
 	void set_fade_duration(float duration) {fader.set_duration((int)(duration*1000.f));}
@@ -77,7 +78,7 @@ class SkyLine
 {
 public:
 	// Create and precompute positions of a SkyGrid
-	SkyLine(SKY_LINE_TYPE line_type = EQUATOR, Vec3f line_color = Vec3f(0.2,0.2,0.6), double _radius = 1., unsigned int _nb_segment = 48);
+	SkyLine(SKY_LINE_TYPE line_type = EQUATOR, double _radius = 1., unsigned int _nb_segment = 48);
     virtual ~SkyLine();
 	void draw(const Projector* prj) const;
 	void set_color(const Vec3f& c) {color = c;}
@@ -97,15 +98,16 @@ private:
 class Cardinals
 {
 public:
-	Cardinals(const string& font_file, const string& tex_file, double size = 30., double _radius = 1.);
+	Cardinals(float _radius = 1.);
     virtual ~Cardinals();
 	void draw(const Projector* prj, double latitude, bool gravityON = false) const;
 	void set_color(const Vec3f& c) {color = c;}
+	void set_font(const string& font_filename, const string& font_texture, float font_size = 30.f);
 	int load_labels(string filename);  // for i18n
 private:
-	double radius;
+	float radius;
+	s_font* font;	
 	Vec3f color;
-	s_font* font;
 	string sNorth, sSouth, sEast, sWest;
 };
 

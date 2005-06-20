@@ -28,7 +28,7 @@
 
 #define RADIUS_NEB 1.
 
-Nebula_mgr::Nebula_mgr(Vec3f cfont, Vec3f ccircle) : defaultfontcolor(cfont), defaultcirclecolor(ccircle)
+Nebula_mgr::Nebula_mgr() : fontColor(0.4,0.3,0.5), circleColor(0.8,0.8,0.1)
 {
 }
 
@@ -48,69 +48,70 @@ Nebula_mgr::~Nebula_mgr()
 // read from stream
 int Nebula_mgr::read(const string& font_fileName, const string& fileName, int barx, int bary)
 {
-  char tmpstr[255];
-  loaded=total=0;
-
-  printf(_("Loading nebulas data...\n"));
-
-  nebula_fic = fopen(fileName.c_str(),"r");
-  if (!nebula_fic) {
-    printf("ERROR : Can't open nebula catalog %s\n",fileName.c_str());
-    return -1;
-  }
-
-  // determine total number to be loaded for percent complete display
-  while( fgets(tmpstr,255,nebula_fic) ) {
-    total++;
-  }
-  rewind(nebula_fic);
-  
-  printf(_("%d deep space objects will be loaded\n"), total);
-
-  if (!Nebula::nebula_font) Nebula::nebula_font = new s_font(12.,"spacefont", font_fileName); // load Font
-  if (!Nebula::nebula_font)
-    {
-      printf("Can't create nebulaFont\n");
-      return(1);
-    }
-  
-  Nebula::tex_circle = new s_texture("neb");   // Load circle texture
-  
-  if(total<1) {
-    fclose(nebula_fic);
-    return(0);
-  }
-
-  read_one();
-
-  return 0;
+	char tmpstr[255];
+	loaded=total=0;
+	
+	printf(_("Loading nebulas data...\n"));
+	
+	nebula_fic = fopen(fileName.c_str(),"r");
+	if (!nebula_fic)
+	{
+		printf("ERROR : Can't open nebula catalog %s\n",fileName.c_str());
+		return -1;
+	}
+	
+	// determine total number to be loaded for percent complete display
+	while(fgets(tmpstr,255,nebula_fic))
+	{
+		total++;
+	}
+	rewind(nebula_fic);
+	
+	printf(_("%d deep space objects will be loaded\n"), total);
+	
+	if (!Nebula::nebula_font) Nebula::nebula_font = new s_font(12.,"spacefont", font_fileName); // load Font
+	if (!Nebula::nebula_font)
+	{
+		printf("Can't create nebulaFont\n");
+		return(1);
+	}
+	
+	Nebula::tex_circle = new s_texture("neb");   // Load circle texture
+	
+	if(total<1)
+	{
+		fclose(nebula_fic);
+		return(0);
+	}
+	read_one();
+	
+	return 0;
 }
 
 
-void Nebula_mgr::read_one() {
-
-  if(loaded > total ) return;
-  if( total < 1 ) return;
-
-  Nebula * e = NULL;
-
-  e = new Nebula;
-  int temp = e->read(nebula_fic);
-  if (temp==0) // eof
-    {
-      if (e) delete e;
-      e = NULL;
-      fclose(nebula_fic);
-      printf(_("Done loading DSOs\n"));
-    } else {
-
-      e->setFontColor(defaultfontcolor);
-      e->setCircleColor(defaultcirclecolor);
-      if (temp==1 || temp==2) neb_array.push_back(e);
-    }
-
-  loaded++;
-      
+void Nebula_mgr::read_one()
+{
+	if(loaded > total ) return;
+	if( total < 1 ) return;
+	
+	Nebula * e = NULL;
+	
+	e = new Nebula;
+	int temp = e->read(nebula_fic);
+	if (temp==0) // eof
+	{
+		if (e) delete e;
+		e = NULL;
+		fclose(nebula_fic);
+		printf(_("Done loading DSOs\n"));
+	} else
+	{
+		e->setFontColor(fontColor);
+		e->setCircleColor(circleColor);
+		if (temp==1 || temp==2) neb_array.push_back(e);
+	}
+	
+	loaded++;
 }
 
 

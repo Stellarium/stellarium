@@ -22,22 +22,12 @@
 #include "stel_utility.h"
 
 // rms added color as parameter
-SkyGrid::SkyGrid(SKY_GRID_TYPE grid_type, Vec3f grid_color, const string& font_file, const string& tex_file, unsigned int _nb_meridian, unsigned int _nb_parallel, double _radius,
+SkyGrid::SkyGrid(SKY_GRID_TYPE grid_type, unsigned int _nb_meridian, unsigned int _nb_parallel, double _radius,
 	unsigned int _nb_alt_segment, unsigned int _nb_azi_segment) :
 	nb_meridian(_nb_meridian), nb_parallel(_nb_parallel), 	radius(_radius),
-	nb_alt_segment(_nb_alt_segment), nb_azi_segment(_nb_azi_segment)
+	nb_alt_segment(_nb_alt_segment), nb_azi_segment(_nb_azi_segment), color(0.2,0.2,0.2)
 {
-
-	font = new s_font(12, tex_file, font_file);
-	if (!font)
-	{
-		printf("Can't create skygrid font\n");
-		exit(-1);
-	}
-
-
 	transparent_top = true;
-	color = grid_color; // rms Vec3f(0.2,0.2,0.2);
 	gtype = grid_type;
 	switch (grid_type)
 	{
@@ -90,6 +80,12 @@ SkyGrid::~SkyGrid()
 	if (font) delete font;
 	font = NULL;
 
+}
+
+void SkyGrid::set_font(const string& font_filename, const string& font_texture)
+{
+	font = new s_font(12, font_texture, font_filename);
+	assert(font);
 }
 
 void SkyGrid::draw(const Projector* prj) const
@@ -245,10 +241,9 @@ void SkyGrid::draw(const Projector* prj) const
 }
 
 
-SkyLine::SkyLine(SKY_LINE_TYPE line_type, Vec3f line_color, double _radius, unsigned int _nb_segment) :
-	radius(_radius), nb_segment(_nb_segment)
+SkyLine::SkyLine(SKY_LINE_TYPE line_type, double _radius, unsigned int _nb_segment) :
+	radius(_radius), nb_segment(_nb_segment), color(0.f, 0.f, 1.f)
 {
-	color = line_color;  
 	float inclinaison = 0.f;
 	switch (line_type)
 	{
@@ -307,24 +302,14 @@ void SkyLine::draw(const Projector* prj) const
 }
 
 
-Cardinals::Cardinals(const string& font_file, const string& tex_file, double size, double _radius) :
-	radius(_radius), font(NULL)
+Cardinals::Cardinals(float _radius) : radius(_radius), font(NULL), color(0.6,0.2,0.2)
 {
-	font = new s_font(size, tex_file, font_file);
-	if (!font)
-	{
-		printf("Can't create cardinalFont\n");
-		exit(-1);
-	}
-	color = Vec3f(0.6,0.2,0.2);
-
 	// Default labels - if sky locale specified, loaded later
 	// Improvement for gettext translation
 	sNorth = _("N");
 	sSouth = _("S");
 	sEast = _("E");
 	sWest = _("W");
-
 }
 
 Cardinals::~Cardinals()
@@ -333,23 +318,27 @@ Cardinals::~Cardinals()
 	font = NULL;
 }
 
+void Cardinals::set_font(const string& font_filename, const string& font_texture, float font_size)
+{
+	font = new s_font(font_size, font_texture, font_filename);
+	assert(font);
+}
 
 // Draw the cardinals points : N S E W
 // handles special cases at poles
 void Cardinals::draw(const Projector* prj, double latitude, bool gravityON) const
 {
-
-  // direction text
-  string d[4];
-
-  d[0] = sNorth;
-  d[1] = sSouth;
-  d[2] = sEast;
-  d[3] = sWest;
-
-  // fun polar special cases
-  if(latitude ==  90.0 ) d[0] = d[1] = d[2] = d[3] = sSouth;
-  if(latitude == -90.0 ) d[0] = d[1] = d[2] = d[3] = sNorth;
+	// direction text
+	string d[4];
+	
+	d[0] = sNorth;
+	d[1] = sSouth;
+	d[2] = sEast;
+	d[3] = sWest;
+	
+	// fun polar special cases
+	if(latitude ==  90.0 ) d[0] = d[1] = d[2] = d[3] = sSouth;
+	if(latitude == -90.0 ) d[0] = d[1] = d[2] = d[3] = sNorth;
 
     glColor3fv(color);
 	glEnable(GL_BLEND);
@@ -407,13 +396,14 @@ void Cardinals::draw(const Projector* prj, double latitude, bool gravityON) cons
 // load cardinal labels from a file for i18n to sky language
 // (not using gettext because sky language not the same as ui language)
 
-int Cardinals::load_labels(string filename) {
-
+int Cardinals::load_labels(string filename)
+{
     ifstream input_file;
 
 	input_file.open(filename.c_str());
 
-	if (! input_file.is_open()) {
+	if (! input_file.is_open())
+	{
 		printf("Error opening %s\n", filename.c_str());
 
 		// Default labels - if sky locale specified, loaded later
@@ -426,11 +416,8 @@ int Cardinals::load_labels(string filename) {
 		return 0;
 	}
 
-
 	input_file >> sNorth >> sEast >> sSouth >> sWest;
-
 	return 1;
-
 }
 
 // Class which manages the displaying of the Milky Way

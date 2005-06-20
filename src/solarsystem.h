@@ -30,24 +30,29 @@
 class SolarSystem
 {
 public:
-    SolarSystem(const string& _data_dir, const string& _sky_locale, const string& _font_filename, Vec3f label_color, Vec3f orbit_color);
-
+    SolarSystem();
     virtual ~SolarSystem();
 
-	// Init and load the solar system data from the file "planetfile".
-    //	void init(const string& font_fileName, const string& planetfile, Vec3f label_color,  Vec3f orbit_color);
-    //	void init(const string& _data_dir, const string& _sky_locale, const string& _font_filename, Vec3f label_color, Vec3f orbit_color);
-
+	void update(int delta_time, navigator* nav);
+	
+	// Draw all the elements of the solar system
+    void draw(planet *selected, int hint_ON, Projector * du, const navigator * nav, 
+			  const tone_reproductor* eye, bool _gravity_label, 
+			  int flag_point, int flag_orbits, int flag_trails);
+	
+	// Load the bodies data from a file
+	void load(const string& planetfile);
+	void load_names(const string& names_file);
+	
+	void set_font(const string& font_filename);
+	void set_label_color(const Vec3f& c) {planet::set_label_color(c);}
+	void set_orbit_color(const Vec3f& c) {planet::set_orbit_color(c);}
+  
 	// Compute the position for every elements of the solar system.
 	void compute_positions(double date);
 
 	// Compute the transformation matrix for every elements of the solar system.
     void compute_trans_matrices(double date);
-
-	// Draw all the elements of the solar system
-    void draw(planet *selected, int hint_ON, Projector * du, const navigator * nav, 
-			  const tone_reproductor* eye, bool _gravity_label, 
-			  int flag_point, int flag_orbits, int flag_trails);
 
 	// Search if any planet is close to position given in earth equatorial position.
 	planet* search(Vec3d, const navigator * nav, const Projector * prj);
@@ -66,7 +71,6 @@ public:
 	void set_trail_color(const Vec3f _color);
 	void update_trails(const navigator* nav);
 	void set_object_scale(float scale);
-	void update(int delta_time, navigator* nav);
 
 private:
 	planet* sun;
@@ -77,12 +81,12 @@ private:
 	float object_scale;  // should be kept synchronized with star scale...
 
 	s_font* planet_name_font;
-	void load(const string& planetfile);// Load the bodies data from a file
 	vector<planet*> system_planets;		// Vector containing all the bodies of the system
 	vector<EllipticalOrbit*> ell_orbits;// Pointers on created elliptical orbits
 	bool near_lunar_eclipse(const navigator * nav, Projector * prj);
-	void draw_earth_shadow(const navigator * nav, Projector * prj);  
+	
 	// draw earth shadow on moon for lunar eclipses
+	void draw_earth_shadow(const navigator * nav, Projector * prj);  
 
 	// And sort them from the furthest to the closest to the observer
 	struct bigger_distance : public binary_function<planet*, planet*, bool>
@@ -90,7 +94,6 @@ private:
 		bool operator()(planet* p1, planet* p2) { return p1->get_distance() > p2->get_distance(); }
 	};
 
-	string dataDir;
 	s_texture *tex_earth_shadow;  // for lunar eclipses
 };
 

@@ -31,23 +31,18 @@ using namespace std;
 
 #include "draw.h"
 
-SolarSystem::SolarSystem(const string& _data_dir, const string& _sky_locale, const string& _font_filename, 
-			 Vec3f label_color, Vec3f orbit_color) : 
-  sun(NULL), moon(NULL), earth(NULL), tex_earth_shadow(NULL)
-{
-  dataDir = _data_dir;
-  planet_name_font = new s_font(13,"spacefont", dataDir + _font_filename);
-  if (!planet_name_font)
-    {
-      printf("Can't create planet_name_font\n");
-      exit(-1);
-    }
-  planet::set_font(planet_name_font);
-  planet::set_label_color(label_color);
-  planet::set_orbit_color(orbit_color);
-  load(dataDir + "ssystem.ini");
-  set_sky_locale(_sky_locale);
+SolarSystem::SolarSystem() : sun(NULL), moon(NULL), earth(NULL), tex_earth_shadow(NULL)
+{}
 
+void SolarSystem::set_font(const string& font_filename)
+{
+	planet_name_font = new s_font(13,"spacefont", font_filename);
+	if (!planet_name_font)
+	{
+		printf("Can't create planet_name_font\n");
+		exit(-1);
+	}
+	planet::set_font(planet_name_font);
 }
 
 SolarSystem::~SolarSystem()
@@ -225,7 +220,6 @@ void SolarSystem::load(const string& planetfile)
 
 	// special case: load earth shadow texture
 	tex_earth_shadow = new s_texture("earth-shadow", TEX_LOAD_TYPE_PNG_ALPHA);
-
 }
 
 // Compute the position for every elements of the solar system.
@@ -407,47 +401,44 @@ vector<stel_object*> SolarSystem::search_around(Vec3d v, double lim_fov, const n
 
 
 // update planet names for a new locale
-void SolarSystem::set_sky_locale(string _sky_locale) {
-
-  vector<planet*>::iterator iter;      
-
-  char planet[40];
-  char cname[40];
-
-  // clear existing names (for cases of languages without non-visible planet names, or missing translation files)
-  for( iter = system_planets.begin(); iter < system_planets.end(); iter++ ) {
-	  (*iter)->set_common_name("");
-  }
-
-  // read in translated common names from file
-  FILE *cnFile;
-  cnFile = NULL;
-
-  string filename = dataDir + "planet_names." + _sky_locale + ".fab";
-  cnFile=fopen(filename.c_str(),"r");
-  if (!cnFile) {
-    printf("WARNING %s NOT FOUND\n",filename.c_str());
-    return;
-  }
-
-  // find matching planet and update name
-  while(!feof(cnFile)) {
-    fscanf(cnFile,"%s\t%s\n",planet,cname);
-
-
-    for( iter = system_planets.begin(); iter < system_planets.end(); iter++ ) {
-      //      printf("file: %s\tplanet: %s\n", planet, (*iter)->get_name().c_str() );
-      if ( !strcmp( (*iter)->get_name().c_str(), planet) ) {
-	// match
-	//printf("Match!\n\n");
-	(*iter)->set_common_name(string(cname));
-	break;
-      }
-    }
-		
-  }
-  fclose(cnFile);
- 
+void SolarSystem::load_names(const string& names_file)
+{
+	vector<planet*>::iterator iter;      
+	
+	char planet[40];
+	char cname[40];
+	
+	// clear existing names (for cases of languages without non-visible planet names, or missing translation files)
+	for( iter = system_planets.begin(); iter < system_planets.end(); iter++ )
+	{
+		(*iter)->set_common_name("");
+	}
+	
+	// read in translated common names from file
+	FILE *cnFile;
+	cnFile = NULL;
+	
+	cnFile=fopen(names_file.c_str(),"r");
+	if (!cnFile)
+	{
+		printf("WARNING %s NOT FOUND\n",names_file.c_str());
+		return;
+	}
+	
+	// find matching planet and update name
+	while(!feof(cnFile))
+	{
+		fscanf(cnFile,"%s\t%s\n",planet,cname);
+		for( iter = system_planets.begin(); iter < system_planets.end(); iter++ )
+		{
+			if ( !strcmp( (*iter)->get_name().c_str(), planet) )
+			{
+				(*iter)->set_common_name(string(cname));
+				break;
+			}
+		}
+	}
+	fclose(cnFile);
 }
 
 void SolarSystem::update_trails(const navigator* nav) {
