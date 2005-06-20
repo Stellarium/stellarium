@@ -46,6 +46,14 @@ stel_core::stel_core(const string& DDIR, const string& TDIR, const string& CDIR,
 	asterisms = new Constellation_mgr(hip_stars);
 	observatory = new Observator();
 	navigation = new navigator(observatory);
+	nebulas = new Nebula_mgr();
+	ssystem = new SolarSystem();
+	milky_way = new MilkyWay("milkyway");
+	equ_grid = new SkyGrid(EQUATORIAL);
+	azi_grid = new SkyGrid(ALTAZIMUTAL);
+	equator_line = new SkyLine(EQUATOR);
+	ecliptic_line = new SkyLine(ECLIPTIC);
+	cardinals_points = new Cardinals();
 	
 	ui = new stel_ui(this);
 	commander = new StelCommandInterface(this);
@@ -118,7 +126,6 @@ void stel_core::init(void)
 	// Make the viewport as big as possible
 	projection->set_screen_size(screen_W, screen_H);
 	projection->set_fov(InitFov);
-
 	projection->set_viewport_offset(horizontalOffset, verticalOffset);
 	projection->set_viewport_type(ViewportType);
 
@@ -129,28 +136,36 @@ void stel_core::init(void)
 	hip_stars->init(
 		DataDir + "spacefont.txt",
 		DataDir + "hipparcos.fab",
-		DataDir + "name.fab",
-		DataDir + "star_names." + SkyLocale + ".fab");	
+		DataDir + "star_names." + SkyLocale + ".fab",
+		DataDir + "name.fab");
 	
-	nebulas = new Nebula_mgr(NebulaLabelColor, NebulaCircleColor);
-
-	// Create and init the solar system
-	ssystem = new SolarSystem(DataDir, SkyLocale, "spacefont.txt", PlanetNamesColor, PlanetOrbitsColor );
+	// Init nebulas
+	nebulas->set_font_color(NebulaLabelColor);
+	nebulas->set_circle_color(NebulaCircleColor);
+	nebulas->read(DataDir + "spacefont.txt", DataDir + "messier.fab", screen_W/2-150, screen_H/2-20);
+		
+	// Init the solar system
+	ssystem->load(DataDir + "ssystem.ini");
+	ssystem->load_names(DataDir + "planet_names." + SkyLocale + ".fab");
+	ssystem->set_label_color(PlanetNamesColor);
+	ssystem->set_orbit_color(PlanetOrbitsColor);
+	ssystem->set_font(DataDir + "spacefont.txt");
 	ssystem->set_object_scale(StarScale);
 	ssystem->set_trail_color(ObjectTrailsColor);
 	if(FlagObjectTrails) ssystem->start_trails();
 
 	atmosphere->set_fade_duration(AtmosphereFadeDuration);
 
-	equ_grid = new SkyGrid(EQUATORIAL, EquatorialColor, DataDir + "spacefont.txt", "spacefont");
-	azi_grid = new SkyGrid(ALTAZIMUTAL, AzimuthalColor, DataDir + "spacefont.txt", "spacefont");
-	equator_line = new SkyLine(EQUATOR, EquatorColor);
-	ecliptic_line = new SkyLine(ECLIPTIC, EclipticColor);
-
-	cardinals_points = new Cardinals(DataDir + "spacefont.txt", "spacefont");
+	// Init grids, lines and cardinal points
+	equ_grid->set_font(DataDir + "spacefont.txt", "spacefont");
+	equ_grid->set_color(EquatorialColor);
+	azi_grid->set_font(DataDir + "spacefont.txt", "spacefont");
+	azi_grid->set_color(AzimuthalColor);
+	equator_line->set_color(EquatorColor);
+	ecliptic_line->set_color(EclipticColor);
+	cardinals_points->set_font(DataDir + "spacefont.txt", "spacefont");
 	cardinals_points->set_color(CardinalColor);
 
-	milky_way = new MilkyWay("milkyway");
 	milky_way->set_intensity(MilkyWayIntensity);
 		
 	meteors = new Meteor_mgr(10, 60);
@@ -188,9 +203,6 @@ void stel_core::init(void)
 	asterisms->set_art_fade_duration(ConstellationArtFadeDuration);
 	asterisms->set_lines_color(ConstLinesColor);
 	asterisms->set_names_color(ConstNamesColor);
-	
-	// Load the nebulas data
-	nebulas->read(DataDir + "spacefont.txt", DataDir + "messier.fab", screen_W/2-150, screen_H/2-20);
 	
 	selected_planet=NULL;	// Fix a bug on macosX! Thanks Fumio!
 		
@@ -1238,7 +1250,7 @@ void stel_core::set_sky_culture(string _culture_dir)
 	SkyCulture = _culture_dir;
 	
 	LoadingBar lb(projection, DataDir + "spacefont.txt", screen_W/2-150, screen_H/2-20);
-	printf(_("Loading constellation for sky culture: \"%s\"\n"), SkyCulture.c_str());
+	printf(_("Loading constellations for sky culture: \"%s\"\n"), SkyCulture.c_str());
 	asterisms->load_lines_and_art(DataDir + "sky_cultures/" + SkyCulture + "/constellationship.fab",
 		DataDir + "sky_cultures/" + SkyCulture + "/constellationsart.fab", lb);
 	asterisms->load_names(DataDir + "sky_cultures/" + SkyCulture + "/constellation_names." + SkyLocale + ".fab");
@@ -1258,20 +1270,16 @@ void stel_core::set_sky_culture(string _culture_dir)
 // this really belongs elsewhere
 void stel_core::set_sky_locale(string _locale)
 {
-  //  if(SkyLocale == _locale) return;  (not valid as culture can change and must reload)
-
-  if( !hip_stars ) return; // objects not initialized yet
-
-  SkyLocale = _locale;
-
-  cardinals_points->load_labels(DataDir + "cardinals." + _locale + ".fab");
-  if( !hip_stars->load_common_names(DataDir + "star_names." + _locale + ".fab") ) {
-	  // If no special star names in this language, use international names
-	  hip_stars->load_common_names(DataDir + "star_names.eng.fab");
-  }
-  ssystem->set_sky_locale(_locale);
-  asterisms->load_names(DataDir + "sky_cultures/" + SkyCulture + "/constellation_names." + SkyLocale + ".fab");
-
+	if( !hip_stars ) return; // objects not initialized yet
+	SkyLocale = _locale;
+	cardinals_points->load_labels(DataDir + "cardinals." + _locale + ".fab");
+	if( !hip_stars->load_common_names(DataDir + "star_names." + _locale + ".fab") )
+	{
+		// If no special star names in this language, use international names
+		hip_stars->load_common_names(DataDir + "star_names.eng.fab");
+	}
+	ssystem->load_names(DataDir + "planet_names." + SkyLocale + ".fab");
+	asterisms->load_names(DataDir + "sky_cultures/" + SkyCulture + "/constellation_names." + SkyLocale + ".fab");
 }
 
 // set a core flag

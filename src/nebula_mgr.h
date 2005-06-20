@@ -29,7 +29,7 @@ using namespace std;
 class Nebula_mgr  
 {
  public:
-  Nebula_mgr(Vec3f defaultfontcolor = Vec3f(0.4,0.3,0.5), Vec3f defaultcirclecolor = Vec3f(0.8,0.8,0.1));
+  Nebula_mgr();
   virtual ~Nebula_mgr();
 
   // Read the Nebulas data from a file
@@ -42,6 +42,9 @@ class Nebula_mgr
   stel_object * search(string name);  // search by name
   stel_object * search(Vec3f Pos);    // Search the Nebulae by position
   
+  void set_font_color(const Vec3f& c) {fontColor = c;}
+  void set_circle_color(const Vec3f& c) {circleColor = c;}
+  
   // Return a stl vector containing the nebulas located inside the lim_fov circle around position v
   vector<stel_object*> search_around(Vec3d v, double lim_fov);
   
@@ -51,8 +54,8 @@ class Nebula_mgr
   int total;   // total number of nebulas
   int loaded;  // number loaded so far
   vector<Nebula*> neb_array;	// The nebulas list
-  Vec3f defaultfontcolor;
-  Vec3f defaultcirclecolor;
+  Vec3f fontColor;
+  Vec3f circleColor;
 };
 
 #endif // _NEBULA_MGR_H_
