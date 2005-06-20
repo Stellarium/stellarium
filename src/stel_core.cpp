@@ -181,15 +181,14 @@ void stel_core::init(void)
 	
 	// Load constellations
 	LoadingBar lb(projection, DataDir + "spacefont.txt", screen_W/2-150, screen_H/2-20);
-	asterisms->set_datadir(DataDir);
-	asterisms->set_font("spacefont.txt");
-	asterisms->set_sky_locale(SkyLocale);
-	asterisms->set_sky_culture(SkyCulture, lb);
+	string tmpstring=SkyCulture; SkyCulture=""; // Temporary trick
+	set_sky_culture(tmpstring);
+	asterisms->set_font(DataDir + "spacefont.txt");
 	asterisms->set_art_intensity(ConstellationArtIntensity);
 	asterisms->set_art_fade_duration(ConstellationArtFadeDuration);
 	asterisms->set_lines_color(ConstLinesColor);
 	asterisms->set_names_color(ConstNamesColor);
-
+	
 	// Load the nebulas data
 	nebulas->read(DataDir + "spacefont.txt", DataDir + "messier.fab", screen_W/2-150, screen_H/2-20);
 	
@@ -1236,11 +1235,14 @@ void stel_core::auto_zoom_out(float move_duration)
 void stel_core::set_sky_culture(string _culture_dir)
 {
 	if(SkyCulture == _culture_dir) return;
-
-	LoadingBar lb(projection, DataDir + "spacefont.txt", screen_W/2-150, screen_H/2-20);
-	asterisms->set_sky_culture(_culture_dir, lb);
-
 	SkyCulture = _culture_dir;
+	
+	LoadingBar lb(projection, DataDir + "spacefont.txt", screen_W/2-150, screen_H/2-20);
+	printf(_("Loading constellation for sky culture: \"%s\"\n"), SkyCulture.c_str());
+	asterisms->load_lines_and_art(DataDir + "sky_cultures/" + SkyCulture + "/constellationship.fab",
+		DataDir + "sky_cultures/" + SkyCulture + "/constellationsart.fab", lb);
+	asterisms->load_names(DataDir + "sky_cultures/" + SkyCulture + "/constellation_names." + SkyLocale + ".fab");
+	
 	// as constellations have changed, clear out any selection and retest for match!
 	if (selected_object && selected_object->get_type()==STEL_OBJECT_STAR)
 	{
@@ -1268,7 +1270,7 @@ void stel_core::set_sky_locale(string _locale)
 	  hip_stars->load_common_names(DataDir + "star_names.eng.fab");
   }
   ssystem->set_sky_locale(_locale);
-  asterisms->set_sky_locale(_locale);
+  asterisms->load_names(DataDir + "sky_cultures/" + SkyCulture + "/constellation_names." + SkyLocale + ".fab");
 
 }
 
