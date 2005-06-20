@@ -31,15 +31,12 @@ Constellation_mgr::Constellation_mgr(Hip_Star_mgr *_hip_stars) :
 	selected(NULL)
 {
 	assert(hipStarMgr);
-	skyCulture = "undefined";
-	skyLocale = "undefined";
-	dataDir = "undefined";
 }
 
 void Constellation_mgr::set_font(const string& _font_filename)
 {
 	if (asterFont) delete asterFont;
-	asterFont = new s_font(12., "spacefont", dataDir + _font_filename);
+	asterFont = new s_font(12., "spacefont", _font_filename);
 	assert(asterFont);
 }
 
@@ -57,21 +54,8 @@ Constellation_mgr::~Constellation_mgr()
 	asterFont = NULL;
 }
 
-void Constellation_mgr::set_sky_culture(string _sky_culture, LoadingBar& lb)
-{
-	if (_sky_culture == skyCulture)	return;	// no change
-	skyCulture = _sky_culture;
-	
-	// load new culture data
-	printf(_("Loading constellation for sky culture: \"%s\"\n"), _sky_culture.c_str());
-	load_line_and_art(dataDir + "sky_cultures/" + _sky_culture + "/constellationship.fab",
-		dataDir + "sky_cultures/" + _sky_culture + "/constellationsart.fab", lb);
-	// load translated labels for that culture
-	set_sky_locale(skyLocale);
-}
-
 // Load line and art data from files
-void Constellation_mgr::load_line_and_art(const string & fileName, const string & artfileName, LoadingBar& lb)
+void Constellation_mgr::load_lines_and_art(const string & fileName, const string & artfileName, LoadingBar& lb)
 {
 	FILE *fic = fopen(fileName.c_str(), "r");
 	if (!fic)
@@ -271,10 +255,9 @@ Constellation *Constellation_mgr::find_from_short_name(const string & shortname)
 }
 
 
-// update constellation names for a new locale
-void Constellation_mgr::set_sky_locale(const string & _sky_locale)
+// Read constellation names from the given file
+void Constellation_mgr::load_names(const string& names_file)
 {
-	skyLocale = _sky_locale;
 	vector < Constellation * >::const_iterator iter;
 	char short_name[4];
 	char cname[200];
@@ -293,11 +276,10 @@ void Constellation_mgr::set_sky_locale(const string & _sky_locale)
 	FILE *cnFile;
 	cnFile = NULL;
 
-	string filename = dataDir + "sky_cultures/" + skyCulture + "/constellation_names." + _sky_locale + ".fab";
-	cnFile = fopen(filename.c_str(), "r");
+	cnFile = fopen(names_file.c_str(), "r");
 	if (!cnFile)
 	{
-		printf("WARNING %s NOT FOUND\n", filename.c_str());
+		printf("WARNING %s NOT FOUND\n", names_file.c_str());
 		return;
 	}
 
