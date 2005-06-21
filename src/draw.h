@@ -115,13 +115,14 @@ private:
 class MilkyWay
 {
 public:
-	MilkyWay(const string& tex_file, double _radius = 1.);
+	MilkyWay(float _radius = 1.);
     virtual ~MilkyWay();
 	void draw(tone_reproductor * eye, const Projector* prj, const navigator* nav) const;
 	void set_intensity(float _intensity);
 	float get_intensity() { return intensity; };
+	void set_texture(const string& tex_file);
 private:
-	double radius;
+	float radius;
 	s_texture* tex;
 	Vec3f color;
 	float intensity;

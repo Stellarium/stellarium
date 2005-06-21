@@ -21,7 +21,6 @@
 
 #include "stel_core.h"
 #include "stellastro.h"
-#include "draw.h"
 
 stel_core::stel_core(const string& DDIR, const string& TDIR, const string& CDIR, const string& DATA_ROOT) : 
 	screen_W(800), screen_H(600), bppMode(16), Fullscreen(0),
@@ -48,7 +47,7 @@ stel_core::stel_core(const string& DDIR, const string& TDIR, const string& CDIR,
 	navigation = new navigator(observatory);
 	nebulas = new Nebula_mgr();
 	ssystem = new SolarSystem();
-	milky_way = new MilkyWay("milkyway");
+	milky_way = new MilkyWay();
 	equ_grid = new SkyGrid(EQUATORIAL);
 	azi_grid = new SkyGrid(ALTAZIMUTAL);
 	equator_line = new SkyLine(EQUATOR);
@@ -166,6 +165,8 @@ void stel_core::init(void)
 	cardinals_points->set_font(DataDir + "spacefont.txt", "spacefont");
 	cardinals_points->set_color(CardinalColor);
 
+	// Init milky way
+	milky_way->set_texture("milkyway");
 	milky_way->set_intensity(MilkyWayIntensity);
 		
 	meteors = new Meteor_mgr(10, 60);
@@ -382,13 +383,10 @@ void stel_core::draw(int delta_time)
 	if (selected_object) selected_object->draw_pointer(delta_time, projection, navigation);
 
 	// Draw the planets
-	if (FlagPlanets) {
-
-	  ssystem->draw(selected_planet, FlagPlanetsHints, projection, navigation, tone_converter,
-			FlagGravityLabels, FlagPointStar, 
-					FlagPlanetsOrbits,
-			FlagObjectTrails);
-
+	if (FlagPlanets)
+	{
+		ssystem->draw(selected_planet, FlagPlanetsHints, projection, navigation, tone_converter,
+			FlagGravityLabels, FlagPointStar, FlagPlanetsOrbits, FlagObjectTrails);
 	}
 
 	// Set openGL drawings in local coordinates i.e. generally altazimuthal coordinates
@@ -662,7 +660,6 @@ void stel_core::load_config_from(const string& confFile)
 	MaxMagNebulaName		= conf.get_double("astro:max_mag_nebula_name");
 	FlagMilkyWay			= conf.get_boolean("astro:flag_milky_way");
 	MilkyWayIntensity       = conf.get_double("astro","milky_way_intensity",1.);
-	if(milky_way) milky_way->set_intensity(MilkyWayIntensity);
 
 	FlagBrightNebulae		= conf.get_boolean("astro:flag_bright_nebulae");
 }
