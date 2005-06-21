@@ -421,11 +421,9 @@ int Cardinals::load_labels(string filename)
 }
 
 // Class which manages the displaying of the Milky Way
-MilkyWay::MilkyWay(const string& tex_file, double _radius) : radius(_radius)
+MilkyWay::MilkyWay(float _radius) : radius(_radius), color(1.f, 1.f, 1.f)
 {
-	tex = new s_texture(tex_file,TEX_LOAD_TYPE_PNG_SOLID_REPEAT);
-
-	set_intensity(1);
+	tex = NULL;
 }
 
 MilkyWay::~MilkyWay()
@@ -434,16 +432,24 @@ MilkyWay::~MilkyWay()
 	tex = NULL;
 }
 
-void MilkyWay::set_intensity(float _intensity) {
+void MilkyWay::set_texture(const string& tex_file)
+{
+	if (tex) delete tex;
+	tex = new s_texture(tex_file,TEX_LOAD_TYPE_PNG_SOLID_REPEAT);
+}
 
+
+void MilkyWay::set_intensity(float _intensity)
+{
+	assert(tex); // A texture must be loaded before calling this
 	intensity = _intensity;
 	// Scotopic color = 0.25, 0.25 in xyY mode. Global stars luminance ~= 0.001 cd/m^2
 	color = Vec3f(0.25f, 0.25f, intensity*0.004f/tex->get_average_luminance());
-
 }
 
 void MilkyWay::draw(tone_reproductor * eye, const Projector* prj, const navigator* nav) const
 {
+	assert(tex);	// A texture must be loaded before calling this
 	static Vec3f c;
 	c = color;
 	eye->xyY_to_RGB(c);
