@@ -34,12 +34,12 @@ Constellation::~Constellation()
 	art_tex = NULL;
 }
 
-void Constellation::read(FILE *  fic, Hip_Star_mgr * _VouteCeleste)
+bool Constellation::read(FILE *  fic, Hip_Star_mgr * _VouteCeleste)
 // Read Constellation datas and grab cartesian positions of stars
 {   
     unsigned int HP;
 
-	assert(fscanf(fic,"%s %u",short_name,&nb_segments)==2);
+	if(fscanf(fic,"%s %u",short_name,&nb_segments)!=2) return 0;
 
 	// make short_name uppercase for case insensitive searches
 	for(int a=0; a<3; a++) short_name[a] = ::toupper(short_name[a]);
@@ -50,14 +50,14 @@ void Constellation::read(FILE *  fic, Hip_Star_mgr * _VouteCeleste)
         if (fscanf(fic,"%u",&HP)!=1)
 		{
 			printf("ERROR while loading constellation data (reading %s)\n", short_name);
-			assert(0);
+			return(0);
 		}
 
         asterism[i]=_VouteCeleste->search(HP);
 		if (!asterism[i])
 		{
 			printf("Error in Constellation %s asterism : can't find star HP=%d\n",name.c_str(),HP);
-			assert(0);
+			return(0);
 		}
     }
 
