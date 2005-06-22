@@ -110,11 +110,8 @@ public:
 	// Interfaces for external controls (gui, tui or script facility)
 	// Only the function listed here should be called by them
 	// ---------------------------------------------------------------
-	
-	// IDEA: replace flags and settings with a hash of structs or classes...
-	int set_flag(string name, string value, bool &nweval, bool trusted);  // set a core flag
-	// Set the value of the parameter TODO - this should disapear as the flag parameters should be
-	// stored by the classes themself, not by the core
+
+	// TODO move to stel_command_interface or get rid of this method
 	void set_param(string& key, float value);
 		
 	//! Zoom to the given FOV
