@@ -60,23 +60,10 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
   if(command == "flag") {
 
     // TODO: loop if want to allow that syntax
+
     bool val;
-	if (args.begin()->first=="constellation_drawing")
-	{
-		stcore->constellation_set_flag_lines((args.begin()->second=="on") ? true : ((args.begin()->second=="off") ? false : ((args.begin()->second=="toggle") ? !stcore->constellation_get_flag_lines() : true)));
-	}
-	else if (args.begin()->first=="constellation_art")
-	{
-		stcore->constellation_set_flag_art((args.begin()->second=="on") ? true : ((args.begin()->second=="off") ? false : ((args.begin()->second=="toggle") ? !stcore->constellation_get_flag_art() : true)));
-	}
-	else if (args.begin()->first=="constellation_name")
-	{
-		stcore->constellation_set_flag_names((args.begin()->second=="on") ? true : ((args.begin()->second=="off") ? false : ((args.begin()->second=="toggle") ? !stcore->constellation_get_flag_names() : true)));
-	}
-	else
-	{
-    	status = stcore->set_flag( args.begin()->first, args.begin()->second, val, trusted);
-	}
+	status = set_flag( args.begin()->first, args.begin()->second, val, trusted);
+	
     // rewrite command for recording so that actual state is known (rather than "toggle")
     if(args.begin()->second == "toggle") {
       std::ostringstream oss;
@@ -505,6 +492,181 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 
   return(status);
 
+
+}
+
+
+// set flags - TODO: stel_core flag variables will be replaced with object attributes
+// if caller is not trusted, some flags can't be changed 
+// newval is new value of flag changed
+
+int StelCommandInterface::set_flag(string name, string value, bool &newval, bool trusted) {
+
+	bool status = 1; 
+
+	// value can be "on", "off", or "toggle"
+	if(value == "toggle") {
+
+		if(trusted) {
+			// normal scripts shouldn't be able to change these user settings
+			if(name=="enable_zoom_keys") newval = (stcore->FlagEnableZoomKeys = !stcore->FlagEnableZoomKeys);
+			else if(name=="enable_move_keys") newval = (stcore->FlagEnableMoveKeys = !stcore->FlagEnableMoveKeys);
+			else if(name=="enable_move_mouse") newval = (stcore->FlagEnableMoveMouse = !stcore->FlagEnableMoveMouse);
+			else if(name=="menu") newval = (stcore->FlagMenu = !stcore->FlagMenu);
+			else if(name=="help") newval = (stcore->FlagHelp = !stcore->FlagHelp);
+			else if(name=="infos") newval = (stcore->FlagInfos = !stcore->FlagInfos);
+			else if(name=="show_topbar") newval = (stcore->FlagShowTopBar = !stcore->FlagShowTopBar);
+			else if(name=="show_time") newval = (stcore->FlagShowTime = !stcore->FlagShowTime);
+			else if(name=="show_date") newval = (stcore->FlagShowDate = !stcore->FlagShowDate);
+			else if(name=="show_appname") newval = (stcore->FlagShowAppName = !stcore->FlagShowAppName);
+			else if(name=="show_fps") newval = (stcore->FlagShowFps = !stcore->FlagShowFps);
+			else if(name=="show_fov") newval = (stcore->FlagShowFov = !stcore->FlagShowFov);
+			else if(name=="enable_tui_menu") newval = (stcore->FlagEnableTuiMenu = !stcore->FlagEnableTuiMenu);
+			else if(name=="show_gravity_ui") newval = (stcore->FlagShowGravityUi = !stcore->FlagShowGravityUi);
+			else if(name=="utc_time") newval = (stcore->FlagUTC_Time = !stcore->FlagUTC_Time);
+			else if(name=="gravity_labels") newval = (stcore->FlagGravityLabels = !stcore->FlagGravityLabels);
+			else if(name=="constellation_pick") newval = (stcore->FlagConstellationPick = !stcore->FlagConstellationPick);
+			else status = 0;  // no match here, anyway
+
+		} else status = 0;
+
+
+		if(name=="constellation_drawing") {
+			newval = !stcore->asterisms->get_flag_lines();
+			stcore->asterisms->set_flag_lines(newval);
+		} 
+		else if(name=="constellation_name") {
+			newval = !stcore->asterisms->get_flag_names();
+			stcore->asterisms->set_flag_names(newval);
+		} 
+		else if(name=="constellation_art") {
+			newval = !stcore->asterisms->get_flag_art();
+			stcore->asterisms->set_flag_art(newval);
+		} 
+		else if(name=="star_twinkle") newval = (stcore->FlagStarTwinkle = !stcore->FlagStarTwinkle);
+		else if(name=="point_star") newval = (stcore->FlagPointStar = !stcore->FlagPointStar);
+		else if(name=="show_selected_object_info") newval = (stcore->FlagShowSelectedObjectInfo = !stcore->FlagShowSelectedObjectInfo);
+		else if(name=="show_tui_datetime") newval = (stcore->FlagShowTuiDateTime = !stcore->FlagShowTuiDateTime);
+		else if(name=="show_tui_short_obj_info") newval = (stcore->FlagShowTuiShortObjInfo = !stcore->FlagShowTuiShortObjInfo);
+		else if(name=="manual_zoom") newval = (stcore->FlagManualZoom = !stcore->FlagManualZoom);
+		else if(name=="fog") newval = (stcore->FlagFog = !stcore->FlagFog);
+		else if(name=="atmosphere") newval = (stcore->FlagAtmosphere = !stcore->FlagAtmosphere);
+		else if(name=="azimuthal_grid") newval = (stcore->FlagAzimutalGrid = !stcore->FlagAzimutalGrid);
+		else if(name=="equatorial_grid") newval = (stcore->FlagEquatorialGrid = !stcore->FlagEquatorialGrid);
+		else if(name=="equator_line") newval = (stcore->FlagEquatorLine = !stcore->FlagEquatorLine);
+		else if(name=="ecliptic_line") newval = (stcore->FlagEclipticLine = !stcore->FlagEclipticLine);
+		else if(name=="cardinal_points") newval = (stcore->FlagCardinalPoints = !stcore->FlagCardinalPoints);
+		else if(name=="init_moon_scaled") {
+			if(newval = (stcore->FlagInitMoonScaled = !stcore->FlagInitMoonScaled)) 
+				stcore->ssystem->get_moon()->set_sphere_scale(stcore->MoonScale);
+			else stcore->ssystem->get_moon()->set_sphere_scale(1.);
+		}
+		else if(name=="landscape") newval = (stcore->FlagLandscape = !stcore->FlagLandscape);
+		else if(name=="stars") newval = (stcore->FlagStars = !stcore->FlagStars);
+		else if(name=="star_name") newval = (stcore->FlagStarName = !stcore->FlagStarName);
+		else if(name=="planets") newval = (stcore->FlagPlanets = !stcore->FlagPlanets);
+		else if(name=="planets_hints") {
+			newval = (stcore->FlagPlanetsHints = !stcore->FlagPlanetsHints);
+			if(stcore->FlagPlanetsHints) stcore->FlagPlanets = 1;  // for safety if script turns planets off
+		}
+		else if(name=="planets_orbits") newval = (stcore->FlagPlanetsOrbits = !stcore->FlagPlanetsOrbits);
+		else if(name=="nebula") newval = (stcore->FlagNebula = !stcore->FlagNebula);
+		else if(name=="nebula_name") newval = (stcore->FlagNebulaName = !stcore->FlagNebulaName);
+		else if(name=="milky_way") newval = (stcore->FlagMilkyWay = !stcore->FlagMilkyWay);
+		else if(name=="bright_nebulae") newval = (stcore->FlagBrightNebulae = !stcore->FlagBrightNebulae);
+		else if(name=="object_trails") newval = (stcore->FlagObjectTrails = !stcore->FlagObjectTrails);
+		else if(name=="track_object") {
+			if(stcore->navigation->get_flag_traking() || !stcore->selected_object) {
+				newval = 0;
+				stcore->navigation->set_flag_traking(0);
+			} else {
+				stcore->navigation->move_to(stcore->selected_object->get_earth_equ_pos(stcore->navigation),
+									stcore->auto_move_duration);
+				stcore->navigation->set_flag_traking(1);
+				newval = 1;
+			}
+		}
+		else return(status);  // no matching flag found untrusted, but maybe trusted matched
+
+	} else {
+
+		newval = (value == "on" || value == "1");
+
+		if(trusted) {
+			// normal scripts shouldn't be able to change these user settings
+			if(name=="enable_zoom_keys") stcore->FlagEnableZoomKeys = newval;
+			else if(name=="enable_move_keys") stcore->FlagEnableMoveKeys = newval;
+			else if(name=="enable_move_mouse") stcore->FlagEnableMoveMouse = newval;
+			else if(name=="menu") stcore->FlagMenu = newval;
+			else if(name=="help") stcore->FlagHelp = newval;
+			else if(name=="infos") stcore->FlagInfos = newval;
+			else if(name=="show_topbar") stcore->FlagShowTopBar = newval;
+			else if(name=="show_time") stcore->FlagShowTime = newval;
+			else if(name=="show_date") stcore->FlagShowDate = newval;
+			else if(name=="show_appname") stcore->FlagShowAppName = newval;
+			else if(name=="show_fps") stcore->FlagShowFps = newval;
+			else if(name=="show_fov") stcore->FlagShowFov = newval;
+			else if(name=="enable_tui_menu") stcore->FlagEnableTuiMenu = newval;
+			else if(name=="show_gravity_ui") stcore->FlagShowGravityUi = newval;
+			else if(name=="utc_time") stcore->FlagUTC_Time = newval;
+			else if(name=="gravity_labels") stcore->FlagGravityLabels = newval;
+			else if(name=="constellation_pick") stcore->FlagConstellationPick = newval;
+			else status = 0;
+		
+		} else status = 0;
+
+
+
+		if(name=="constellation_drawing") stcore->asterisms->set_flag_lines(newval);
+		else if(name=="constellation_name") stcore->asterisms->set_flag_names(newval);
+		else if(name=="constellation_art") stcore->asterisms->set_flag_art(newval);
+		else if(name=="star_twinkle") stcore->FlagStarTwinkle = newval;
+		else if(name=="point_star") stcore->FlagPointStar = newval;
+		else if(name=="show_selected_object_info") stcore->FlagShowSelectedObjectInfo = newval;
+		else if(name=="show_tui_datetime") stcore->FlagShowTuiDateTime = newval;
+		else if(name=="show_tui_short_obj_info") stcore->FlagShowTuiShortObjInfo = newval;
+		else if(name=="manual_zoom") stcore->FlagManualZoom = newval;
+		else if(name=="fog") stcore->FlagFog = newval;
+		else if(name=="atmosphere") stcore->FlagAtmosphere = newval;
+		else if(name=="azimuthal_grid") stcore->FlagAzimutalGrid = newval;
+		else if(name=="equatorial_grid") stcore->FlagEquatorialGrid = newval;
+		else if(name=="equator_line") stcore->FlagEquatorLine = newval;
+		else if(name=="ecliptic_line") stcore->FlagEclipticLine = newval;
+		else if(name=="cardinal_points") stcore->FlagCardinalPoints = newval;
+		else if(name=="init_moon_scaled") {
+			if((stcore->FlagInitMoonScaled = newval)) 
+				stcore->ssystem->get_moon()->set_sphere_scale(stcore->MoonScale);
+			else stcore->ssystem->get_moon()->set_sphere_scale(1.);
+		}
+		else if(name=="landscape") stcore->FlagLandscape = newval;
+		else if(name=="stars") stcore->FlagStars = newval;
+		else if(name=="star_name") stcore->FlagStarName = newval;
+		else if(name=="planets") stcore->FlagPlanets = newval;
+		else if(name=="planets_hints") {
+			stcore->FlagPlanetsHints = newval;
+			if(stcore->FlagPlanetsHints) stcore->FlagPlanets = 1;  // for safety if script turns planets off
+		}
+		else if(name=="planets_orbits") stcore->FlagPlanetsOrbits = newval;
+		else if(name=="nebula") stcore->FlagNebula = newval;
+		else if(name=="nebula_name") stcore->FlagNebulaName = newval;
+		else if(name=="milky_way") stcore->FlagMilkyWay = newval;
+		else if(name=="bright_nebulae") stcore->FlagBrightNebulae = newval;
+		else if(name=="object_trails") stcore->FlagObjectTrails = newval;
+		else if(name=="track_object") {
+			if(newval && stcore->selected_object) {
+				stcore->navigation->move_to(stcore->selected_object->get_earth_equ_pos(stcore->navigation),
+									stcore->auto_move_duration);
+				stcore->navigation->set_flag_traking(1);
+			} else {
+				stcore->navigation->set_flag_traking(0);
+			}
+		}
+		else return(status);
+
+	}
+
+
+	return(1);  // flag was found and updated
 
 }
 
