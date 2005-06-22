@@ -78,8 +78,12 @@ void Constellation_mgr::load_lines_and_art(const string & fileName, const string
 	{
 		cons = new Constellation;
 		assert(cons);
-		cons->read(fic, hipStarMgr);
-		asterisms.push_back(cons);
+		if(cons->read(fic, hipStarMgr)) {
+			asterisms.push_back(cons);
+		} else {
+			// error reading record
+			delete cons;
+		}
 	}
 	fclose(fic);
 
