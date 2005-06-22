@@ -46,8 +46,6 @@ Constellation_mgr::~Constellation_mgr()
 	for (iter = asterisms.begin(); iter != asterisms.end(); iter++)
 	{
 		delete(*iter);
-		asterisms.erase(iter);
-		iter--;					// important!
 	}
 
 	if (asterFont) delete asterFont;
@@ -69,21 +67,16 @@ void Constellation_mgr::load_lines_and_art(const string & fileName, const string
 	for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
 	{
 		delete(*iter);
-		asterisms.erase(iter);
-		iter--;					// important!
 	}
+	asterisms.clear();
 
 	Constellation *cons = NULL;
 	while (!feof(fic))
 	{
 		cons = new Constellation;
 		assert(cons);
-		if(cons->read(fic, hipStarMgr)) {
-			asterisms.push_back(cons);
-		} else {
-			// error reading record
-			delete cons;
-		}
+		cons->read(fic, hipStarMgr);
+		asterisms.push_back(cons);
 	}
 	fclose(fic);
 
@@ -247,7 +240,7 @@ Constellation *Constellation_mgr::find_from_short_name(const string & shortname)
 	// search in uppercase only
 	string tname = shortname;
 	transform(tname.begin(), tname.end(), tname.begin(),::toupper);
-
+	
 	vector < Constellation * >::const_iterator iter;
 	for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
 	{
