@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: stellarium 0.7.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-06-22 15:50+0200\n"
-"PO-Revision-Date: 2005-06-22 16:10+0200\n"
+"PO-Revision-Date: 2005-06-22 16:23+0200\n"
 "Last-Translator: Fabien Chereau,,,<Fabien.Chereau@obspm.fr> <chereau@obspm.fr>\n"
 "Language-Team:  <en@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -59,7 +59,7 @@ msgid ""
 "You may fully install the software (type \"make install\" on POSIX systems)\n"
 "or launch the application from the stellarium package directory.\n"
 msgstr ""
-"ERREUR : Je ne peux pas trouver les réperoires de données (data) dans :\n"
+"ERREUR : Je ne peux pas trouver les répertoires de données (data) dans :\n"
 "%s/ ni dans ./ ni dans ../\n"
 "Vous pouvez installer complètement le programme (tapez \"make install\" sur "
 "un système POSIX)\n"
@@ -165,7 +165,7 @@ msgstr ""
 #: src/nebula_mgr.cpp:54
 #, c-format
 msgid "Loading nebulas data...\n"
-msgstr "Chargement des données Nébuleuse...\n"
+msgstr "Chargement des données Nébuleuses...\n"
 
 #: src/nebula_mgr.cpp:70
 #, c-format
@@ -180,7 +180,7 @@ msgstr "Chargement des DSOs terminé\n"
 #: src/observator.cpp:61
 #, c-format
 msgid "Loading location: \"%s\", "
-msgstr "Chargement du lieu : \"%s\", "
+msgstr "Chargement de la position : \"%s\", "
 
 #: src/observator.cpp:68
 #, c-format
@@ -190,7 +190,7 @@ msgstr "(le paysage est : \"%s\")\n"
 #: src/observator.cpp:98
 #, c-format
 msgid "Saving location %s to file %s\n"
-msgstr "Enregistre le lieu %s dans le fichier %s\n"
+msgstr "Enregistre la position %s dans le fichier %s\n"
 
 #: src/planet.cpp:84
 #, c-format
@@ -214,11 +214,11 @@ msgstr "%s%s: mag %.1f"
 
 #: src/stel_ui.cpp:396
 msgid "Drawing of the Constellations [C]"
-msgstr "Dessin des constellations [C]"
+msgstr "Dessin des Constellations [C]"
 
 #: src/stel_ui.cpp:398
 msgid "Names of the Constellations [V]"
-msgstr "Noms des constellations [V]"
+msgstr "Noms des Constellations [V]"
 
 #: src/stel_ui.cpp:400
 msgid "Constellations Art [R]"
@@ -270,15 +270,15 @@ msgstr "Quitte [CMD + Q]"
 
 #: src/stel_ui.cpp:430
 msgid "Decrease Time Speed [J]"
-msgstr "Ralenti le Temps"
+msgstr "Ralenti le Temps [J]"
 
 #: src/stel_ui.cpp:432
 msgid "Real Time Speed [K]"
-msgstr "Vitesse Temps Réel"
+msgstr "Vitesse Temps Réel [K]"
 
 #: src/stel_ui.cpp:434
 msgid "Increase Time Speed [L]"
-msgstr "Accélère le Temps"
+msgstr "Accélère le Temps [L]"
 
 #: src/stel_ui.cpp:436
 msgid "Return to Current Time"
@@ -502,7 +502,7 @@ msgstr "pour activer le changement."
 
 #: src/stel_ui_conf.cpp:331
 msgid "Date & Time"
-msgstr "Date & Heur"
+msgstr "Date & Heure"
 
 #: src/stel_ui_conf.cpp:332
 msgid "Location"
@@ -553,7 +553,7 @@ msgid ""
 "It will be replaced by the default config file.\n"
 msgstr ""
 "Le fichier de configuration trouvé provient d'une version trop ancienne pour "
-"êtreimporté (%s).\n"
+"être importé (%s).\n"
 "Il va être remplacé par le fichier de configuration par défaut.\n"
 
 #: src/stel_core.cpp:501
@@ -609,7 +609,7 @@ msgstr "Longitude: "
 
 #: src/stel_ui_tuiconf.cpp:104
 msgid "Altitude (m): "
-msgstr "Altitude: "
+msgstr "Altitude (m): "
 
 #. 2. Time
 #: src/stel_ui_tuiconf.cpp:111
@@ -622,35 +622,34 @@ msgstr "Zone Horaire: "
 
 #: src/stel_ui_tuiconf.cpp:116
 msgid "Preset Sky Time: "
-msgstr "Préréglé le Temps du Ciel: "
+msgstr "Temps du Ciel prédéfini: "
 
 #: src/stel_ui_tuiconf.cpp:118
 msgid "Sky Time At Start-up: "
-msgstr "Temps du Ciel au Comencement: "
+msgstr "Temps du Ciel au démarrage: "
 
 #: src/stel_ui_tuiconf.cpp:122
 msgid "Time Display Format: "
-msgstr "Format du Temps: "
+msgstr "Format de l'heure: "
 
 #: src/stel_ui_tuiconf.cpp:127
-
 msgid "Date Display Format: "
-msgstr "Format du Temps: "
+msgstr "Format des dates: "
 
 #. 3. General settings
 #. sky culture goes here
 #: src/stel_ui_tuiconf.cpp:144
 msgid "Sky Culture: "
-msgstr "Culture du Ciel: "
+msgstr "Civilisation du Ciel: "
 
 #: src/stel_ui_tuiconf.cpp:149
 msgid "Sky Language: "
-msgstr "Langue du Ciel: "
+msgstr "Language du Ciel: "
 
 #. 4. Stars
 #: src/stel_ui_tuiconf.cpp:157
 msgid "Show: "
-msgstr "Montre: "
+msgstr "Affiche: "
 
 #: src/stel_ui_tuiconf.cpp:157 src/stel_ui_tuiconf.cpp:178
 msgid "Yes"
@@ -666,11 +665,11 @@ msgstr "Multiplieur de Magnitude des Étoiles: "
 
 #: src/stel_ui_tuiconf.cpp:161
 msgid "Maximum Magnitude to Label: "
-msgstr "Maximum Magnitude à Labelliser: "
+msgstr "Magnitude Maximum à Labelliser: "
 
 #: src/stel_ui_tuiconf.cpp:163
 msgid "Twinkling: "
-msgstr "Scintillage: "
+msgstr "Scintillement: "
 
 #. 5. Effects
 #: src/stel_ui_tuiconf.cpp:173
@@ -721,7 +720,7 @@ msgstr "Chargement de la configuration par défaut: "
 
 #: src/stel_ui_tuiconf.cpp:216
 msgid "Save Current Configuration as Default: "
-msgstr "Utilise la configuration courante pardéfaut"
+msgstr "Utilise la configuration courante comme défaut"
 
 #: src/stel_ui_tuiconf.cpp:218
 msgid "Update me via Internet: "
