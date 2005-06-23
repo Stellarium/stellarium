@@ -43,8 +43,9 @@ void ScriptMgr::play_script(string script_file, string script_path) {
   // load script...
 
   if(playing){
-    cout << "Error: script already in progress.  Can't play " << script_file << endl;
-    return;
+	  // cancel current script and start next (one script can call another)
+	  cancel_script();
+	  //    cout << "Error: script already in progress.  Can't play " << script_file << endl;
   }
 
   script = new Script();
