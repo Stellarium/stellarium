@@ -16,7 +16,8 @@ optional list of arguments in the form of name/value pairs. <br>
   <li>Argument values requiring included whitespace can be enclosed in
 double quotes ("This is a value with spaces."). <br>
   </li>
-  <li>Commands and argument names are case insensitive, however argument values are typically case sensitive. <br>
+  <li>Commands and argument names are case insensitive, however
+argument values are typically case sensitive. <br>
   </li>
   <li>Argument pairs can be arranged in any order.<br>
   </li>
@@ -63,8 +64,8 @@ of seconds desired). </p>
       </td>
       <td style="vertical-align: top;">AUDIO_FILENAME<br>
       </td>
-      <td style="vertical-align: top;">Currently limited to 16 bit, 22050 Hz, little-endian WAV files.
-      </td>
+      <td style="vertical-align: top;">Currently limited to 16 bit,
+22050 Hz, little-endian WAV files. </td>
     </tr>
     <tr>
       <td style="vertical-align: top;">loop<br>
@@ -76,29 +77,29 @@ off<br>
 is off<br>
       </td>
     </tr>
-
     <tr>
       <td>clear<br>
       </td>
-      <td>&nbsp;<br>
+      <td>state <br>
       </td>
-      <td>&nbsp;
-      </td>
-      <td>Turn off atmosphere, fog, ground, and all labels, lines, and art.  
-Turn planet, star, and nebula rendering on.  Deselect any selected objects.  Return to initial fov and viewing direction.<br>
+      <td>natural&nbsp; </td>
+      <td>Turn off fog and all labels, lines, and art. Turn planet,
+star, and nebula rendering on. Deselect any selected objects. Return to
+initial fov and viewing direction.&nbsp; <br>
+      <br>
+If state is natural, ground and atmosphere will be turned on, otherwise
+these will be turned off.<br>
       </td>
     </tr>
-
-
     <tr>
-      <td colspan="1" rowspan="3">date<br>
+      <td colspan="1" rowspan="4">date<br>
       <br>
       </td>
       <td>local<br>
       </td>
-      <td>[-]YYYY-MM-DDThh:mm:ss<br>
+      <td>[[-]YYYY-MM-DD]Thh:mm:ss<br>
       </td>
-      <td>Set time to a specified date and time using current
+      <td>Set time to a specified date and/or time using current
 timezone.&nbsp; 'T' is literal.<br>
       </td>
     </tr>
@@ -115,6 +116,14 @@ time in UTC time.&nbsp; 'T' is literal.</td>
       <td>DAYS<br>
       </td>
       <td>Change date and time by DAYS (can be fractional).<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">load<br>
+      </td>
+      <td style="vertical-align: top;">current<br>
+      </td>
+      <td style="vertical-align: top;">Set date to current date.<br>
       </td>
     </tr>
     <tr>
@@ -183,15 +192,12 @@ off<br>
 0<br>
 toggle </td>
       <td>Set rendering flags. One argument name per command allowed
-currently.<p>
-
-track_object is only useful while an object is selected.
-<p>
-
-The following flags are key user settings 
-and are not accessible from scripts:<p>
-
-constellation_pick<br>
+currently.
+      <p>track_object is only useful while an object is selected.
+      </p>
+      <p>The following flags are key user settings and are not
+accessible from scripts:</p>
+      <p>constellation_pick<br>
 enable_move_keys<br>
 enable_move_mouse<br>
 enable_tui_menu<br>
@@ -209,8 +215,8 @@ show_gravity_ui<br>
 show_time<br>
 show_topbar<br>
 utc_time<br>
-
-</td>
+      </p>
+      </td>
     </tr>
     <tr>
       <td rowspan="7" style="vertical-align: top;">image<br>
@@ -235,8 +241,9 @@ drop<br>
       <td style="vertical-align: top;">IMAGE_NAME<br>
       </td>
       <td style="vertical-align: top;">Used to refer to the image in
-later calls to manipulate the image. Images must be in PNG format.  If images do not have dimensions 
-that are powers of 2 (128, 256, etc.) they are resized when loaded to meet this requirement.</td>
+later calls to manipulate the image. Images must be in PNG format. If
+images do not have dimensions that are powers of 2 (128, 256, etc.)
+they are resized when loaded to meet this requirement.</td>
     </tr>
     <tr>
       <td style="vertical-align: top;">alpha<br>
@@ -244,8 +251,8 @@ that are powers of 2 (128, 256, etc.) they are resized when loaded to meet this 
       <td style="vertical-align: top;">ALPHA<br>
       </td>
       <td style="vertical-align: top;">0 is transparent (default), 1 is
-opaque.&nbsp; ALPHA can be fractional.<P>
-Note that images are drawn in the order they were loaded.
+opaque.&nbsp; ALPHA can be fractional.
+      <p>Note that images are drawn in the order they were loaded. </p>
       </td>
     </tr>
     <tr>
@@ -253,7 +260,8 @@ Note that images are drawn in the order they were loaded.
       </td>
       <td style="vertical-align: top;">SCALE<br>
       </td>
-      <td style="vertical-align: top;">How large to draw the image.  1 is maximized to fit on the viewport.<br>
+      <td style="vertical-align: top;">How large to draw the image. 1
+is maximized to fit on the viewport.<br>
       </td>
     </tr>
     <tr>
@@ -261,7 +269,8 @@ Note that images are drawn in the order they were loaded.
       </td>
       <td style="vertical-align: top;">DEGREES<br>
       </td>
-      <td style="vertical-align: top;">Absolute rotation, positive is clockwise.<br>
+      <td style="vertical-align: top;">Absolute rotation, positive is
+clockwise.<br>
       </td>
     </tr>
     <tr>
@@ -269,7 +278,19 @@ Note that images are drawn in the order they were loaded.
       </td>
       <td style="vertical-align: top;">X_POSITION<br>
       </td>
-      <td style="vertical-align: top;">Where to draw center of image.  0 is center of viewport, 1 is right edge of viewport.<br>
+      <td style="vertical-align: top;">Where to draw center of image. 0
+is center of viewport, 1 is right edge of viewport.<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">landscape<br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;">Load a landscape.&nbsp;
+Arguments have same names and possible values as in landscapes.ini file.<br>
       </td>
     </tr>
     <tr>
@@ -277,13 +298,18 @@ Note that images are drawn in the order they were loaded.
       </td>
       <td style="vertical-align: top;">Y_POSITION<br>
       </td>
-      <td style="vertical-align: top;">Where to draw center of image.  0 is center of viewport, 1 is bottom edge of viewport.<br>
+      <td style="vertical-align: top;">Where to draw center of image. 0
+is center of viewport, 1 is bottom edge of viewport.<br>
+      </td>
+      <td style="vertical-align: top;"><br>
       </td>
     </tr>
     <tr>
       <td style="vertical-align: top;">duration<br>
       </td>
       <td style="vertical-align: top;">SECONDS<br>
+      </td>
+      <td style="vertical-align: top;"><br>
       </td>
       <td style="vertical-align: top;"><br>
       </td>
@@ -324,32 +350,27 @@ Note that images are drawn in the order they were loaded.
       </td>
     </tr>
     <tr>
-      <td colspan="1" rowspan="2"
- style="vertical-align: top;">script<br>
+      <td colspan="1" rowspan="2" style="vertical-align: top;">script<br>
       </td>
-      <td
- style="vertical-align: top;">action<br>
+      <td style="vertical-align: top;">action<br>
       </td>
-      <td
- style="vertical-align: top;">play<br>
+      <td style="vertical-align: top;">play<br>
 end<br>
 pause<br>
 resume<br>
       </td>
-      <td
- style="vertical-align: top;">Note
+      <td style="vertical-align: top;">Note
 that pause toggles playback.<br>
+If a script plays another script, the first will terminate at that
+point.<br>
       </td>
     </tr>
     <tr>
-      <td
- style="vertical-align: top;">filename<br>
+      <td style="vertical-align: top;">filename<br>
       </td>
-      <td
- style="vertical-align: top;">SCRIPT_FILENAME<br>
+      <td style="vertical-align: top;">SCRIPT_FILENAME<br>
       </td>
-      <td
- style="vertical-align: top;"><br>
+      <td style="vertical-align: top;"><br>
       </td>
     </tr>
     <tr>
@@ -526,9 +547,8 @@ etc.<br>
       <td>Only useful in scripts.&nbsp; SECONDS can be fractional.<br>
       </td>
     </tr>
-
     <tr>
-      <td rowspan=4>zoom<br>
+      <td rowspan="4">zoom<br>
       </td>
       <td>auto<br>
       </td>
@@ -538,36 +558,27 @@ out<br>
       <td>"out" returns to configured initial fov and viewing direction
       </td>
     </tr>
-
-<tr>
+    <tr>
       <td>fov<br>
       </td>
-      <td>FIELD_OF_VIEW
-      </td>
+      <td>FIELD_OF_VIEW </td>
       <td>in degrees<br>
       </td>
     </tr>
-
-<tr>
+    <tr>
       <td>delta_fov<br>
       </td>
-      <td>DELTA_DEGREES
-      </td>
+      <td>DELTA_DEGREES </td>
       <td> <br>
       </td>
     </tr>
-
-<tr>
+    <tr>
       <td>duration<br>
       </td>
-      <td>SECONDS
-      </td>
+      <td>SECONDS </td>
       <td>Not used with delta_fov<br>
       </td>
     </tr>
-
-
-
   </tbody>
 </table>
 </p>

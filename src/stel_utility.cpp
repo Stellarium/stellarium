@@ -310,13 +310,16 @@ string print_angle_hms(double angle)
 
 // convert string int ISO 8601-like format [+/-]YYYY-MM-DDThh:mm:ss (no timzone offset)
 // to julian day
-// TODO: move to better location for reuse
+
 int string_to_jday(string date, double &jd) {
 
     char tmp;
     int year, month, day, hour, minute, second;
+    year = month = day = hour = minute = second = 0;
+
     std::istringstream dstr( date );
-    
+
+	// TODO better error checking
     dstr >> year >> tmp >> month >> tmp >> day >> tmp >> hour >> tmp >> minute >> tmp >> second;
     
     // cout << year << " " << month << " " << day << " " << hour << " " << minute << " " << second << endl;
