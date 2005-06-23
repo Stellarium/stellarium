@@ -244,46 +244,58 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
     } else status=0;
     
   } else if(command == "date") {
+	  
+	  // ISO 8601-like format [+/-]YYYY-MM-DDThh:mm:ss (no timzone offset, T is literal)
+	  if(args["local"]!="") {
+		  double jd;
+		  string new_date;
 
-    // ISO 8601-like format [+/-]YYYY-MM-DDThh:mm:ss (no timzone offset, T is literal)
-    if(args["local"]!="") {
-      double jd;
-      if(string_to_jday( args["local"], jd ) ) {
-	stcore->navigation->set_JDay(jd - stcore->observatory->get_GMT_shift(jd) * JD_HOUR);
-      } else {
-	cout << "Error parsing date." << endl;
-	status = 0;
-      } 
-    } else if(args["utc"]!="") {
-      double jd;
-      if(string_to_jday( args["utc"], jd ) ) {
-	stcore->navigation->set_JDay(jd);
-      } else {
-	cout << "Error parsing date." << endl;
-	status = 0;
-      }
+		  if(args["local"][0] == 'T') {
+			  // set time only (don't change day)
+			  string sky_date = stcore->observatory->get_ISO8601_time_local(stcore->navigation->get_JDay());
+			  new_date = sky_date.substr(0,10) + args["local"];
+		  } else new_date = args["local"];
 
-    } else if(args["relative"]!="") {  // value is a float number of days
-      double days = str_to_double(args["relative"]);
-      stcore->navigation->set_JDay(stcore->navigation->get_JDay() + days );
-    } else status=0;
-    
+		  if(string_to_jday( new_date, jd ) ) {
+			  stcore->navigation->set_JDay(jd - stcore->observatory->get_GMT_shift(jd) * JD_HOUR);
+		  } else {
+			  cout << "Error parsing date: " << new_date << endl;
+			  status = 0;
+		  } 
+		  
+	  } else if(args["utc"]!="") {
+		  double jd;
+		  if(string_to_jday( args["utc"], jd ) ) {
+			  stcore->navigation->set_JDay(jd);
+		  } else {
+			  cout << "Error parsing date." << endl;
+			  status = 0;
+		  }
+		  
+	  } else if(args["relative"]!="") {  // value is a float number of days
+		  double days = str_to_double(args["relative"]);
+		  stcore->navigation->set_JDay(stcore->navigation->get_JDay() + days );
+	  } else if(args["load"]=="current") {
+		  // set date to current date
+ 		  stcore->navigation->set_JDay(get_julian_from_sys());
+	  } else status=0;
+	  
   } else if (command == "moveto") {
+	  
+	  if(args["lat"]!="" || args["lon"]!="" || args["alt"]!="") {
 
-    if(args["lat"]!="" || args["lon"]!="" || args["alt"]!="") {
-
-      double lat = stcore->observatory->get_latitude();
-      double lon = stcore->observatory->get_longitude();
-      double alt = stcore->observatory->get_altitude();
-      int delay;
-
-      if(args["lat"]!="") lat = str_to_double(args["lat"]);
-      if(args["lon"]!="") lon = str_to_double(args["lon"]);
-      if(args["alt"]!="") alt = str_to_double(args["alt"]);
-      delay = (int)(1000.*str_to_double(args["duration"]));
-
-      stcore->observatory->move_to(lat,lon,alt,delay);
-    } else status = 0;
+		  double lat = stcore->observatory->get_latitude();
+		  double lon = stcore->observatory->get_longitude();
+		  double alt = stcore->observatory->get_altitude();
+		  int delay;
+		  
+		  if(args["lat"]!="") lat = str_to_double(args["lat"]);
+		  if(args["lon"]!="") lon = str_to_double(args["lon"]);
+		  if(args["alt"]!="") alt = str_to_double(args["alt"]);
+		  delay = (int)(1000.*str_to_double(args["duration"]));
+		  
+		  stcore->observatory->move_to(lat,lon,alt,delay);
+	  } else status = 0;
 
   } else if(command=="image") {
 

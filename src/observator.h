@@ -58,6 +58,7 @@ public:
 
 	// Return the time in ISO 8601 format that is : %Y-%m-%d %H:%M:%S
 	string get_ISO8601_time_UTC(double JD) const;
+	string get_ISO8601_time_local(double JD) const;
 
 	// Return the time zone name taken from system locale
 	string get_time_zone_name_from_system(double JD) const;
