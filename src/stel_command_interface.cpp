@@ -367,7 +367,15 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 	  }
 
     } else if(args["action"]=="play" && args["filename"]!="") {
-      stcore->scripts->play_script(args["filename"], args["path"]);
+		if(stcore->scripts->is_playing()) {
+			
+			// keep same script path 
+			stcore->scripts->play_script(stcore->scripts->get_script_path() + args["filename"], 
+										 stcore->scripts->get_script_path());
+		} else {
+			stcore->scripts->play_script(args["filename"], args["path"]);
+		}
+
     } else if(args["action"]=="record") {  // TEMP
       //    if(args["action"]=="record" && args["filename"]!="") {
       stcore->scripts->record_script(args["filename"]);
