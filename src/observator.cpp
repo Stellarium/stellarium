@@ -279,6 +279,21 @@ string Observator::get_printable_time_UTC(double JD) const
 	return heure;
 }
 
+// Return the time in ISO 8601 format that is : %Y-%m-%d %H:%M:%S
+string Observator::get_ISO8601_time_local(double JD) const
+{
+	struct tm time_local;
+	if (time_zone_mode == S_TZ_GMT_SHIFT)
+		get_tm_from_julian(JD + GMT_shift, &time_local);
+	else
+		get_tm_from_julian(JD + get_GMT_shift_from_system(JD)*0.041666666666, &time_local);
+
+	static char isotime[255];
+	my_strftime(isotime, 254, "%Y-%m-%d %H:%M:%S", &time_local);
+	return isotime;
+}
+
+
 // Return a string with the local date formated according to the date_format variable
 string Observator::get_printable_date_local(double JD) const
 {
