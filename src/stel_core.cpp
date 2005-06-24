@@ -1254,7 +1254,7 @@ void stel_core::set_sky_culture(string _culture_dir)
 	bool flagNames = asterisms->get_flag_names();
 	
 	LoadingBar lb(projection, DataDir + "spacefont.txt", screen_W/2-150, screen_H/2-20);
-	printf(_("Loading constellations for sky culture: \"%s\"\n"), SkyCulture.c_str());
+	//	printf(_("Loading constellations for sky culture: \"%s\"\n"), SkyCulture.c_str());
 	asterisms->load_lines_and_art(DataDir + "sky_cultures/" + SkyCulture + "/constellationship.fab",
 		DataDir + "sky_cultures/" + SkyCulture + "/constellationsart.fab", lb);
 	asterisms->load_names(DataDir + "sky_cultures/" + SkyCulture + "/constellation_names." + SkyLocale + ".fab");
