@@ -388,8 +388,7 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 			stcore->scripts->play_script(args["filename"], args["path"]);
 		}
 
-    } else if(args["action"]=="record") {  // TEMP
-      //    if(args["action"]=="record" && args["filename"]!="") {
+    } else if(args["action"]=="record") {
       stcore->scripts->record_script(args["filename"]);
       recordable = 0;  // don't record this command!
     } else if(args["action"]=="cancelrecord") {

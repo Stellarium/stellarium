@@ -453,21 +453,29 @@ void stel_ui::tui_cb_admin_updateme(void)
 // Set a new landscape skin
 void stel_ui::tui_cb_tui_effect_change_landscape(void)
 {
-	core->set_landscape(tui_effect_landscape->getCurrent());
+	//	core->set_landscape(tui_effect_landscape->getCurrent());
+	std::ostringstream oss;
+	oss << "set landscape " << tui_effect_landscape->getCurrent();
+	core->commander->execute_command(oss.str());
 }
 
 
 // Set a new sky culture
 void stel_ui::tui_cb_tui_general_change_sky_culture(void) {
 
-  core->set_sky_culture(core->skyloc->convert_sky_culture_to_directory(tui_general_sky_culture->getCurrent()));
-
+	//  core->set_sky_culture(core->skyloc->convert_sky_culture_to_directory(tui_general_sky_culture->getCurrent()));
+	std::ostringstream oss;
+	oss << "set sky_culture " << core->skyloc->convert_sky_culture_to_directory(tui_general_sky_culture->getCurrent());
+	core->commander->execute_command(oss.str());
 }
 
 // Set a new sky locale
 void stel_ui::tui_cb_tui_general_change_sky_locale(void) {
 
-	core->set_sky_locale(tui_general_sky_locale->getCurrent());
+	//	core->set_sky_locale(tui_general_sky_locale->getCurrent());
+	std::ostringstream oss;
+	oss << "set sky_locale " << tui_general_sky_locale->getCurrent();
+	core->commander->execute_command(oss.str());
 }
 
 

@@ -24,6 +24,8 @@
 #ifndef _SCRIPT_MGR_H_
 #define _SCRIPT_MGR_H_
 
+#include <iostream>
+#include <fstream>
 #include "stel_command_interface.h"
 #include "script.h"
 
@@ -61,7 +63,7 @@ class ScriptMgr
   bool recording;  // is a script being recorded?
   bool playing;    // is a script playing?  (could be paused)
   bool play_paused;// is script playback paused?
-
+  fstream rec_file;
 };
 
 
