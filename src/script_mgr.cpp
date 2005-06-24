@@ -90,10 +90,59 @@ void ScriptMgr::resume_script() {
 
 void ScriptMgr::record_script(string script_filename) {
 
-  // open file...
+	// TODO: filename should be selected in a UI window, but until then this works
+	if(recording) {
+		cout << _("Already recording script.") << endl;
+		return;
+	}
 
-  recording = 1;
-  record_elapsed_time = 0;
+	if(script_filename != "") {
+		rec_file.open(script_filename.c_str(), fstream::out);
+	} else {
+
+		string sdir;
+#if defined(WIN32) || defined(CYGWIN) || defined(__MINGW32__)
+		if(getenv("USERPROFILE")!=NULL){
+			//for Win XP etc.
+			sdir = string(getenv("USERPROFILE")) + "\\My Documents\\";
+		}else{
+			//for Win 98 etc.
+			sdir = "C:\\My Documents\\";
+		}
+#else
+		sdir = string(getenv("HOME")) + "/";
+#endif
+#ifdef MACOSX
+		sdir += "/Desktop/";
+#endif
+
+		// add a number to be unique
+		char c[3];
+		FILE * fp;
+		for(int j=0; j<=100; ++j)
+			{
+				snprintf(c,3,"%d",j);
+
+				script_filename = sdir + "stellarium" + c + ".sts";
+				fp = fopen(script_filename.c_str(), "r");
+				if(fp == NULL)
+					break;
+				else
+					fclose(fp);
+			}
+	
+		rec_file.open(script_filename.c_str(), fstream::out);
+
+	}
+	
+
+	if(rec_file.is_open()) {
+		recording = 1;
+		record_elapsed_time = 0;
+		cout << _("Now recording actions to file: ") << script_filename << endl;
+	} else {
+		cout << _("Error opening script file for writing: ") << script_filename << endl;
+	} 
 }
 
 void ScriptMgr::record_command(string commandline) {
@@ -102,17 +151,20 @@ void ScriptMgr::record_command(string commandline) {
     // write to file...
 
     if(record_elapsed_time) {
-      cout << "wait duration " << record_elapsed_time/1000.f << endl;
+      rec_file << "wait duration " << record_elapsed_time/1000.f << endl;
       record_elapsed_time = 0;
     }
-    // temp:
-    cout << commandline << endl;
+    
+    rec_file << commandline << endl;
   }
 }
 
 void ScriptMgr::cancel_record_script() {
-  // close file...
-  recording = 0;
+	// close file...
+	rec_file.close();
+	recording = 0;
+
+	cout << _("Script recording stopped.") << endl;
 }
 	 
 
