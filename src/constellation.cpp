@@ -34,17 +34,20 @@ Constellation::~Constellation()
 	art_tex = NULL;
 }
 
-// Read Constellation datas and grab cartesian positions of stars
-void Constellation::read(FILE *  fic, Hip_Star_mgr * _VouteCeleste)
+// Read Constellation data record and grab cartesian positions of stars
+// returns false if can't parse record
+bool Constellation::read(string record, Hip_Star_mgr * _VouteCeleste)
 {   
-	assert(fic);
-	
 	unsigned int HP;
 
-	if (fscanf(fic,"%s %u",short_name,&nb_segments)!=2)
-	{
-		printf("ERROR corrupted constellation data file (check that there is no new line at end of file)\n");
-		assert(0);
+	short_name[0] = 0;
+	nb_segments = 0;
+
+	std::istringstream istr(record);
+	istr >> short_name >> nb_segments;
+
+	if(short_name == "" || nb_segments == 0) {
+		return(0);
 	}
 		
 	// make short_name uppercase for case insensitive searches
@@ -53,17 +56,18 @@ void Constellation::read(FILE *  fic, Hip_Star_mgr * _VouteCeleste)
     asterism = new Hip_Star*[nb_segments*2];
     for (unsigned int i=0;i<nb_segments*2;++i)
     {
-        if (fscanf(fic,"%u",&HP)!=1)
+		HP = 0;
+        istr >> HP;
+		if(HP == 0)
 		{
-			printf("ERROR while loading constellation data (reading %s)\n", short_name);
-			assert(0);
+			return(0);
 		}
 
         asterism[i]=_VouteCeleste->search(HP);
 		if (!asterism[i])
 		{
 			printf("Error in Constellation %s asterism : can't find star HP=%d\n",name.c_str(),HP);
-			assert(0);
+			return(0);
 		}
     }
 
@@ -72,6 +76,7 @@ void Constellation::read(FILE *  fic, Hip_Star_mgr * _VouteCeleste)
 		XYZname+=(*asterism[ii]).XYZ;
     }
     XYZname*=1./(nb_segments*2);
+	return 1;
 }
 
 

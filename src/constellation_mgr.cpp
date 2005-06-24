@@ -19,6 +19,7 @@
 
 
 #include <iostream>
+#include <fstream>
 
 // Class used to manage group of constellation
 #include "constellation.h"
@@ -55,10 +56,11 @@ Constellation_mgr::~Constellation_mgr()
 // Load line and art data from files
 void Constellation_mgr::load_lines_and_art(const string & fileName, const string & artfileName, LoadingBar& lb)
 {
-	FILE *fic = fopen(fileName.c_str(), "r");
-	if (!fic)
+	std::ifstream inf(fileName.c_str());
+
+	if (!inf.is_open())
 	{
-		printf("Can't open %s\n", fileName.c_str());
+		printf("Can't open constellation data file %s\n", fileName.c_str());
 		assert(0);
 	}
 
@@ -71,16 +73,21 @@ void Constellation_mgr::load_lines_and_art(const string & fileName, const string
 	asterisms.clear();
 
 	Constellation *cons = NULL;
-	while (!feof(fic))
-	{
+
+	string record;
+	while(!std::getline(inf, record).eof()) {
 		cons = new Constellation;
 		assert(cons);
-		cons->read(fic, hipStarMgr);
-		asterisms.push_back(cons);
+		if(cons->read(record, hipStarMgr)) {
+			asterisms.push_back(cons);
+		} else { 
+			cout << "ERROR with constellation record: \"" << record << "\"" << endl;
+			delete cons;
+		}
 	}
-	fclose(fic);
+	inf.close();
 
-	fic = fopen(artfileName.c_str(), "r");
+	FILE *fic = fopen(artfileName.c_str(), "r");
 	if (!fic)
 	{
 		printf("Can't open %s\n", artfileName.c_str());
