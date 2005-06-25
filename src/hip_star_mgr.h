@@ -24,6 +24,7 @@
 #include <string>
 #include "hip_star.h"
 #include "grid.h"
+#include "fader.h"
 
 using namespace std ;
 
@@ -32,15 +33,17 @@ class Hip_Star_mgr
 public:
     Hip_Star_mgr();
     virtual ~Hip_Star_mgr();
-	
 	void init(const string& font_fileName, const string& hipCatFile, const string& commonNameFile, const string& sciNameFile);
+	void update(int delta_time) {names_fader.update(delta_time);}
+	void set_names_fade_duration(float duration) {names_fader.set_duration((int) (duration * 1000.f));}
 	int load_common_names(const string& commonNameFile);
 	void load_sci_names(const string& sciNameFile);
-    void draw(float star_scale, float star_mag_scale, float twinkle_amount, int name_ON, float maxMagStarName,
+    void draw(float star_scale, float star_mag_scale, float twinkle_amount, float maxMagStarName,
 		Vec3f equ_vision, tone_reproductor* _eye, Projector* prj, bool _gravity_label);	// Draw all the stars
-    void draw_point(float star_scale, float star_mag_scale, float twinkle_amount, int name_ON, float maxMagStarName,
+    void draw_point(float star_scale, float star_mag_scale, float twinkle_amount, float maxMagStarName,
 		Vec3f equ_vision, tone_reproductor* _eye, Projector* prj, bool _gravity_label);	// Draw all the stars as points
     void save(void);                    	// Debug function
+	void set_flag_names(bool b) {names_fader=b;}
     Hip_Star * search(Vec3f Pos);  	// Search the star by position
 	Hip_Star * search(unsigned int);	// Search the star by HP number
 	// Return a stl vector containing the stars located inside the lim_fov circle around position v
@@ -58,6 +61,7 @@ private:
 	int StarArraySize;      // Number of star in the array
 	s_texture * starTexture;
 	s_font * starFont;
+	linear_fader names_fader;
 };
 
 
