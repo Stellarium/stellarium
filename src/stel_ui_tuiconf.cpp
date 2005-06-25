@@ -564,13 +564,7 @@ void stel_ui::tui_cb_effects()
 // set sky time
 void stel_ui::tui_cb_sky_time()
 {
-
 	std::ostringstream oss;
-
-	//	double skyJDay = tui_time_skytime->getJDay();
-	//core->navigation->set_JDay(skyJDay -   
-	//			   core->observatory->get_GMT_shift(skyJDay,1)*JD_HOUR);
-
 	oss << "date local " << tui_time_skytime->getDateString();
 	core->commander->execute_command(oss.str());
 }
