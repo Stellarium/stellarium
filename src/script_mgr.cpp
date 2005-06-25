@@ -156,6 +156,9 @@ void ScriptMgr::record_command(string commandline) {
     }
     
     rec_file << commandline << endl;
+
+	// TEMPORARY for debugging
+    cout << commandline << endl;
   }
 }
 
