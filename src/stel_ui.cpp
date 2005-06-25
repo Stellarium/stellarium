@@ -797,19 +797,7 @@ int stel_ui::handle_keys(Uint16 key, S_GUI_VALUE state)
 			if(key==SDLK_j) core->commander->execute_command( "timerate action decrement");
 			if(key==SDLK_6) core->commander->execute_command( "timerate action pause");
 			if(key==SDLK_7) core->commander->execute_command( "timerate rate 0");
-			if(key==SDLK_8)
-				{
-					// set time to default, either actual or preset time based on settings
-					if (core->StartupTimeMode=="preset" || core->StartupTimeMode=="Preset")
-						{
-							core->navigation->set_JDay(core->PresetSkyTime -
-													   core->observatory->get_GMT_shift(core->PresetSkyTime) * JD_HOUR);
-						}
-					else
-						{
-							core->navigation->set_JDay(get_julian_from_sys());
-						}
-				}
+			if(key==SDLK_8) core->commander->execute_command( "date load preset");
 
 			if(key==SDLK_9) {
 				int zhr = core->meteors->get_ZHR();
