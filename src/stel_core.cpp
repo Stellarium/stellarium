@@ -206,8 +206,9 @@ void stel_core::init(void)
 	asterisms->set_names_color(ConstNamesColor);
 	
 	selected_planet=NULL;	// Fix a bug on macosX! Thanks Fumio!
-		
-	cardinals_points->load_labels(DataDir + "cardinals." + SkyLocale + ".fab");
+
+	// load translated labels for sky language
+	set_sky_locale(SkyLocale);
 
 	// could load a startup script
 	//commander->execute_command("script action play filename ./scripts/startup.sts");
@@ -1287,6 +1288,7 @@ void stel_core::set_sky_locale(string _locale)
 	if( !hip_stars->load_common_names(DataDir + "star_names." + _locale + ".fab") )
 	{
 		// If no special star names in this language, use international names
+		cout << "Using international star names.\n";
 		hip_stars->load_common_names(DataDir + "star_names.eng.fab");
 	}
 	ssystem->load_names(DataDir + "planet_names." + SkyLocale + ".fab");
