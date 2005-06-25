@@ -463,6 +463,10 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 	  stcore->observatory->set_landscape_name(args["name"]);  
 	  // probably not particularly useful, as not in landscape file
 
+  } else if(command=="meteors") {
+	  if(args["zhr"]!="") {
+		  stcore->meteors->set_ZHR(str_to_int(args["zhr"]));
+	  } else status =0;
 
   } else if(command=="configuration" && trusted) {
 
