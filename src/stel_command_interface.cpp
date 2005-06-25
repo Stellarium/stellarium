@@ -42,6 +42,29 @@ int StelCommandInterface::execute_command(string commandline ) {
   // delay is ignored, as not needed by the ui callers
 }
 
+// for easy calling of simple commands with a double as last argument value
+int StelCommandInterface::execute_command(string command, double arg) {
+  unsigned long int delay;
+
+  std::ostringstream commandline;
+  commandline << command << arg;
+
+  return execute_command(commandline.str(), delay, 1);  // Assumed to be trusted!
+  // delay is ignored, as not needed by the ui callers
+}
+
+// for easy calling of simple commands with an int as last argument value
+int StelCommandInterface::execute_command(string command, int arg) {
+  unsigned long int delay;
+
+  std::ostringstream commandline;
+  commandline << command << arg;
+
+  return execute_command(commandline.str(), delay, 1);  // Assumed to be trusted!
+  // delay is ignored, as not needed by the ui callers
+}
+
+
 // called by script executors
 // certain key settings can't be modified by scripts unless
 // they are "trusted" - TODO details TBD when needed
