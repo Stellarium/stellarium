@@ -34,6 +34,7 @@ Constellation::~Constellation()
 	art_tex = NULL;
 }
 
+
 // Read Constellation data record and grab cartesian positions of stars
 // returns false if can't parse record
 bool Constellation::read(string record, Hip_Star_mgr * _VouteCeleste)
@@ -60,14 +61,14 @@ bool Constellation::read(string record, Hip_Star_mgr * _VouteCeleste)
         istr >> HP;
 		if(HP == 0)
 		{
-			return(0);
+			return(false);
 		}
 
         asterism[i]=_VouteCeleste->search(HP);
 		if (!asterism[i])
 		{
 			printf("Error in Constellation %s asterism : can't find star HP=%d\n",name.c_str(),HP);
-			return(0);
+			return(false);
 		}
     }
 
@@ -76,7 +77,7 @@ bool Constellation::read(string record, Hip_Star_mgr * _VouteCeleste)
 		XYZname+=(*asterism[ii]).XYZ;
     }
     XYZname*=1./(nb_segments*2);
-	return 1;
+	return true;
 }
 
 

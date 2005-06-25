@@ -224,12 +224,12 @@ string ScriptMgr::get_script_list(string directory) {
 
     if(tmp.length()>4 && tmp.find(".sts", tmp.length()-4)!=string::npos ) {
       result += tmp + "\n";
-      cout << entryp->d_name << endl;
+      //cout << entryp->d_name << endl;
     }
   }
   closedir(dp);
 
-  cout << "Result = " << result;
+  //cout << "Result = " << result;
   return result;
 
 }
