@@ -245,7 +245,7 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
     
   } else if(command == "date") {
 	  
-	  // ISO 8601-like format [+/-]YYYY-MM-DDThh:mm:ss (no timzone offset, T is literal)
+	  // ISO 8601-like format [[+/-]YYYY-MM-DD]Thh:mm:ss (no timzone offset, T is literal)
 	  if(args["local"]!="") {
 		  double jd;
 		  string new_date;
@@ -278,6 +278,14 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 	  } else if(args["load"]=="current") {
 		  // set date to current date
  		  stcore->navigation->set_JDay(get_julian_from_sys());
+	  } else if(args["load"]=="preset") {
+		  // set date to preset (or current) date, based on user setup
+		  // TODO: should this record as the actual date used?
+		  if (stcore->StartupTimeMode=="preset" || stcore->StartupTimeMode=="Preset")
+			  stcore->navigation->set_JDay(stcore->PresetSkyTime -
+										 stcore->observatory->get_GMT_shift(stcore->PresetSkyTime) * JD_HOUR);
+		  else stcore->navigation->set_JDay(get_julian_from_sys());
+
 	  } else status=0;
 	  
   } else if (command == "moveto") {
