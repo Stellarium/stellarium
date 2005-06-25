@@ -308,7 +308,8 @@ void stel_core::update(int delta_time)
 
 	ui->gui_update_widgets();
 
-	if (FlagShowGravityUi || FlagShowTuiMenu) ui->tui_update_widgets();
+	//	if (FlagShowGravityUi || FlagShowTuiMenu) ui->tui_update_widgets();
+	if (FlagShowTuiMenu) ui->tui_update_widgets();  // only update if in menu
 
 	if(!scripts->is_paused()) script_images->update(delta_time);
 }

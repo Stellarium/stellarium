@@ -77,7 +77,7 @@ public:
 	double get_longitude(void) const {return longitude;}
 	void set_altitude(int a) {altitude=a;}
 	int get_altitude(void) const {return altitude;}
-	void set_landscape_name(string s) {landscape_name = s;}
+	void set_landscape_name(string s);
 	string get_landscape_name(void) const {return landscape_name;}
 
 	string get_time_format_str(void) const {return s_time_format_to_string(time_format);}

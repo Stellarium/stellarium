@@ -338,10 +338,14 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 	  } else {
 		  if(args["action"]=="load" && args["filename"]!="") {
 
-			  IMAGE_POSITIONING img_pos;
+			  // TODO: more image positioning coordinates
+			  IMAGE_POSITIONING img_pos = POS_VIEWPORT;
+
+			  /*
 			  if(args["coordinates"] == "altaz") img_pos = POS_ALTAZ;
-			  else if(args["coordinates"] == "altaz") img_pos = POS_EQUATORIAL;
+			  else if(args["coordinates"] == "rade") img_pos = POS_EQUATORIAL;
 			  else img_pos = POS_VIEWPORT;
+			  */
 
 			  if(stcore->scripts->is_playing()) 
 				  stcore->script_images->load_image(stcore->scripts->get_script_path() + args["filename"], 
@@ -491,10 +495,14 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 		  stcore->meteors->set_ZHR(str_to_int(args["zhr"]));
 	  } else status =0;
 
-  } else if(command=="configuration" && trusted) {
+  } else if(command=="configuration") {
 
-	  if(args["action"]=="load") stcore->load_config();
-	  else if(args["action"]=="reload") {
+	  if(args["action"]=="load" && trusted) {
+		  // eventually load/reload are not both needed, but for now this is called at startup, reload later
+		  stcore->load_config();
+		  recordable = 0;  // don't record as scripts can not run this
+
+	  } else if(args["action"]=="reload") {
 
 		  // on reload, be sure to reconfigure as necessary since stel_core::init isn't called
 
@@ -526,7 +534,8 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 		  
 		  system( ( stcore->DataDir + "script_load_config " ).c_str() );
 
-	  }
+	  } else status = 0;
+
   } else {
     cout << "Unrecognized or malformed command: " << command << endl;
     status = 0;

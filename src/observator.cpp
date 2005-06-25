@@ -63,7 +63,7 @@ void Observator::load(const string& file, const string& section)
 	latitude  = get_dec_angle(conf.get_str(section, "latitude"));
 	longitude = get_dec_angle(conf.get_str(section, "longitude"));
 	altitude = conf.get_int(section, "altitude");
-	landscape_name = conf.get_str(section, "landscape_name", "sea");
+	set_landscape_name(conf.get_str(section, "landscape_name", "sea"));
 
 	printf(_("(landscape is: \"%s\")\n"), landscape_name.c_str());
 
@@ -91,6 +91,13 @@ void Observator::load(const string& file, const string& section)
 
 	time_format = string_to_s_time_format(conf.get_str(section, "time_display_format"));
 	date_format = string_to_s_date_format(conf.get_str(section, "date_display_format"));
+}
+
+void Observator::set_landscape_name(string s) {
+
+	// need to lower case name because config file parser lowercases section names
+	transform(s.begin(), s.end(), s.begin(), ::tolower);
+	landscape_name = s;
 }
 
 void Observator::save(const string& file, const string& section)
