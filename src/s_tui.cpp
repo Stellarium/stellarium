@@ -651,6 +651,23 @@ string Time_item::getString(void)
 	return os.str();
 }
 
+
+// for use with commands - no special characters, just the local date
+string Time_item::getDateString(void)
+{
+	compute_ymdhms();  // possibly redundant
+
+	ostringstream os;
+	os << y->getString() << ":"
+	   << m->getString() << ":"
+	   << d->getString() << "T"
+	   << h->getString() << ":"
+	   << mn->getString() << ":"
+	   << s->getString();
+	return os.str();
+}
+
+
 // Code originally from libnova which appeared to be totally wrong... New code from celestia
 void Time_item::compute_ymdhms(void)
 {
