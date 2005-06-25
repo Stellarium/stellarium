@@ -1250,6 +1250,20 @@ double Time_item::getJDay(void) const
     return floor(365.25 * iy) + floor(30.6001 * (im + 1)) + B + 1720996.5 + id + ih / 24.0 + imn / 1440.0 + (double)is / 86400.0;
 }
 
+// for use with commands - no special characters, just the local date
+string Time_item::getDateString(void)
+{
+	ostringstream os;
+	os << y->getValue() << ":"
+	   << m->getValue() << ":"
+	   << d->getValue() << "T"
+	   << h->getValue() << ":"
+	   << mn->getValue() << ":"
+	   << s->getValue();
+	return os.str();
+}
+
+
 void Time_item::setJDay(double JD)
 {
 	static int iy, im, id, ih, imn, is;

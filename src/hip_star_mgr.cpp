@@ -74,7 +74,7 @@ void Hip_Star_mgr::init(const string& font_fileName, const string& hipCatFile,
 // Load from file ( create the stream and call the Read function )
 void Hip_Star_mgr::load_data(const string& hipCatFile)
 {
-    printf(_("Loading Hipparcos star data "));
+    printf(_("Loading Hipparcos star data\n"));
     FILE * hipFile;
     hipFile = NULL;
 
@@ -92,8 +92,6 @@ void Hip_Star_mgr::load_data(const string& hipCatFile)
 
     StarArraySize = catalogSize;//120417;
 
-    printf(_("(%d stars)...\n"), StarArraySize);
-	
     // Create the sequential array
     StarArray = new Hip_Star[StarArraySize];
 	
@@ -121,7 +119,7 @@ void Hip_Star_mgr::load_data(const string& hipCatFile)
     }
     fclose(hipFile);
 
-	printf("%d stars not loaded due to incomplete data.\n", data_drop);
+	printf("%d stars loaded.\n", StarArraySize-data_drop);
 
     // sort stars by magnitude for faster rendering
     for(int i=0;i < HipGrid.getNbPoints();i++) {

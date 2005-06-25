@@ -343,6 +343,7 @@ namespace s_gui
 		Time_item(const s_font* _font = NULL, const s_texture* tex_up = NULL,
 			const s_texture* tex_down = NULL, double _JD = 2451545.0);
 		double getJDay(void) const;
+		string getDateString(void);
 		void setJDay(double jd);
 		virtual void draw();
 		void onTimeChange(void);
