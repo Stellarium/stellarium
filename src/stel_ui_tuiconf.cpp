@@ -98,11 +98,11 @@ void stel_ui::init_tui(void)
 
 	// 1. Location
 	tui_location_latitude = new s_tui::Decimal_item(-90., 90., 0.,string("1.1 ") + _("Latitude: "));
-	tui_location_latitude->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb1));
+	tui_location_latitude->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb_setlocation));
 	tui_location_longitude = new s_tui::Decimal_item(-180., 180., 0.,string("1.2 ") + _("Longitude: "));
-	tui_location_longitude->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb1));
+	tui_location_longitude->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb_setlocation));
 	tui_location_altitude = new s_tui::Integer_item(-500, 10000, 0,string("1.3 ") + _("Altitude (m): "));
-	tui_location_altitude->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb1));
+	tui_location_altitude->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb_setlocation));
 	tui_menu_location->addComponent(tui_location_latitude);
 	tui_menu_location->addComponent(tui_location_longitude);
 	tui_menu_location->addComponent(tui_location_altitude);
@@ -155,13 +155,13 @@ void stel_ui::init_tui(void)
 
 	// 4. Stars
 	tui_stars_show = new s_tui::Boolean_item(false, string("4.1 ") + _("Show: "), _("Yes"),_("No"));
-	tui_stars_show->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb1));
+	tui_stars_show->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb_stars));
 	tui_star_magscale = new s_tui::Decimal_item(1,30, 1, string("4.2 ") + _("Star Magnitude Multiplier: "));
-	tui_star_magscale->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb1));
+	tui_star_magscale->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb_stars));
 	tui_star_labelmaxmag = new s_tui::Decimal_item(-1.5, 10., 2, string("4.3 ") + _("Maximum Magnitude to Label: "));
-	tui_star_labelmaxmag->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb1));
+	tui_star_labelmaxmag->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb_stars));
 	tui_stars_twinkle = new s_tui::Decimal_item(0., 1., 0.3, string("4.4 ") + _("Twinkling: "), 0.1);
-	tui_stars_twinkle->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb1));
+	tui_stars_twinkle->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb_stars));
 
 	tui_menu_stars->addComponent(tui_stars_show);
 	tui_menu_stars->addComponent(tui_star_magscale);
@@ -292,11 +292,6 @@ int stel_ui::handle_keys_tui(Uint16 key, s_tui::S_TUI_VALUE state)
 // Update all the core parameters with values taken from the tui widgets
 void stel_ui::tui_cb1(void)
 {
-	// 1. Location
-
-	core->observatory->set_latitude(tui_location_latitude->getValue());
-	core->observatory->set_longitude(tui_location_longitude->getValue());
-	core->observatory->set_altitude(tui_location_altitude->getValue());
 
 	// 2. Date & Time
 	double skyJDay = tui_time_skytime->getJDay();
@@ -304,12 +299,6 @@ void stel_ui::tui_cb1(void)
 				   core->observatory->get_GMT_shift(skyJDay,1)*JD_HOUR);
 	core->PresetSkyTime 		= tui_time_presetskytime->getJDay();
 	core->StartupTimeMode 		= tui_time_startuptime->getCurrent();
-
-	// 4. Stars
-	core->FlagStars 			= tui_stars_show->getValue();
-	core->MaxMagStarName 		= tui_star_labelmaxmag->getValue();
-	core->StarTwinkleAmount		= tui_stars_twinkle->getValue();
-	core->StarMagScale			= tui_star_magscale->getValue();
 
 	// 5. effects
 	core->FlagPointStar 		= tui_effect_pointobj->getValue();
@@ -405,35 +394,6 @@ void stel_ui::tui_cb_admin_load_default(void)
 
 	core->commander->execute_command("configuration action reload");
 
-	/*
-	core->load_config();
-
-	// believe this is redundant : yes but this must be here and not in stel_core.cpp
-	if(core->asterisms)
-	{
-		core->asterisms->set_art_intensity(core->ConstellationArtIntensity);
-		core->asterisms->set_art_fade_duration(core->ConstellationArtFadeDuration);
-	}
-	if (!core->FlagAtmosphere && core->tone_converter)
-		core->tone_converter->set_world_adaptation_luminance(3.75f);
-	if (core->atmosphere) core->atmosphere->set_fade_duration(core->AtmosphereFadeDuration);
-	core->observatory->load(core->ConfigDir + core->config_file, "init_location");
-	core->set_landscape(core->observatory->get_landscape_name());
-	
-	if (core->StartupTimeMode=="preset" || core->StartupTimeMode=="Preset")
-	{
-		core->navigation->set_JDay(core->PresetSkyTime -
-			core->observatory->get_GMT_shift(core->PresetSkyTime) * JD_HOUR);
-	}
-	else
-	{
-		core->navigation->set_JDay(get_julian_from_sys());
-	}
-	if(core->FlagObjectTrails && core->ssystem) core->ssystem->start_trails();
-	else  core->ssystem->end_trails();
-
-	system( ( core->DataDir + "script_load_config " ).c_str() );
-	*/
 }
 
 // Save to default configuration
@@ -454,9 +414,7 @@ void stel_ui::tui_cb_admin_updateme(void)
 void stel_ui::tui_cb_tui_effect_change_landscape(void)
 {
 	//	core->set_landscape(tui_effect_landscape->getCurrent());
-	std::ostringstream oss;
-	oss << "set landscape " << tui_effect_landscape->getCurrent();
-	core->commander->execute_command(oss.str());
+	core->commander->execute_command(string("set landscape_name " +  tui_effect_landscape->getCurrent()));
 }
 
 
@@ -464,18 +422,15 @@ void stel_ui::tui_cb_tui_effect_change_landscape(void)
 void stel_ui::tui_cb_tui_general_change_sky_culture(void) {
 
 	//  core->set_sky_culture(core->skyloc->convert_sky_culture_to_directory(tui_general_sky_culture->getCurrent()));
-	std::ostringstream oss;
-	oss << "set sky_culture " << core->skyloc->convert_sky_culture_to_directory(tui_general_sky_culture->getCurrent());
-	core->commander->execute_command(oss.str());
+	core->commander->execute_command( string("set sky_culture " + 
+											 core->skyloc->convert_sky_culture_to_directory(tui_general_sky_culture->getCurrent())));
 }
 
 // Set a new sky locale
 void stel_ui::tui_cb_tui_general_change_sky_locale(void) {
 
 	//	core->set_sky_locale(tui_general_sky_locale->getCurrent());
-	std::ostringstream oss;
-	oss << "set sky_locale " << tui_general_sky_locale->getCurrent();
-	core->commander->execute_command(oss.str());
+	core->commander->execute_command( string("set sky_locale " + tui_general_sky_locale->getCurrent()));
 }
 
 
@@ -558,5 +513,38 @@ void stel_ui::tui_cb_effects_milkyway_intensity() {
 	std::ostringstream oss;
 	oss << "set milky_way_intensity " << tui_effect_milkyway_intensity->getValue();
 	core->commander->execute_command(oss.str());
+}
+
+void stel_ui::tui_cb_setlocation() {
+	
+	std::ostringstream oss;
+	oss << "moveto lat " << tui_location_latitude->getValue() 
+		<< " lon " <<  tui_location_longitude->getValue()
+		<< " alt " << tui_location_altitude->getValue();
+	core->commander->execute_command(oss.str());
 
 }
+
+
+void stel_ui::tui_cb_stars()
+{
+	// 4. Stars
+	std::ostringstream oss;
+
+	oss << "flag stars " << tui_stars_show->getValue();
+	core->commander->execute_command(oss.str());
+
+	oss.str("");
+	oss << "set max_mag_star_name " << tui_star_labelmaxmag->getValue();
+	core->commander->execute_command(oss.str());
+
+	oss.str("");
+	oss << "set star_twinkle_amount " << tui_stars_twinkle->getValue();
+	core->commander->execute_command(oss.str());
+
+	oss.str("");
+	oss << "set star_mag_scale " << tui_star_magscale->getValue();
+	core->commander->execute_command(oss.str());
+
+}
+

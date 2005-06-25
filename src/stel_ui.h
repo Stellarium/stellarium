@@ -263,6 +263,8 @@ private:
 	void tui_cb_scripts_removeable(void);    // changed removeable disk script selection
 	void tui_cb_scripts_local();             // changed local script selection
 	void tui_cb_effects_milkyway_intensity();        // change milky way intensity
+	void tui_cb_setlocation();        // change observer position
+	void tui_cb_stars();        // change star parameters
 
 	// Parse a file of type /usr/share/zoneinfo/zone.tab
 	s_tui::MultiSet_item<string>* stel_ui::create_tree_from_time_zone_file(const string& zonetab);
