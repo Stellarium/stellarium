@@ -172,6 +172,7 @@ void stel_ui::init_tui(void)
 	// 5. Effects
 	tui_effect_landscape = new s_tui::MultiSet_item<string>(string("5.1 ") + _("Landscape: "));
 	tui_effect_landscape->addItemList(Landscape::get_file_content(core->DataDir + "landscapes.ini"));
+
 	tui_effect_landscape->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb_tui_effect_change_landscape));
 	tui_menu_effects->addComponent(tui_effect_landscape);
 
