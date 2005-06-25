@@ -341,45 +341,48 @@ Component* stel_ui::createConfigWindow(void)
 
 void stel_ui::updateConfigVariables(void)
 {
-	core->FlagStars = stars_cbx->getState();
-	core->FlagStarName = star_names_cbx->getState();
-	core->MaxMagStarName = max_mag_star_name->getValue();
-	core->FlagStarTwinkle = star_twinkle_cbx->getState();
-	core->StarTwinkleAmount = star_twinkle_amount->getValue();
-	core->constellation_set_flag_lines(constellation_cbx->getState());
-	core->constellation_set_flag_lines(constellation_name_cbx->getState());
-	core->FlagConstellationPick = sel_constellation_cbx->getState();
-	core->FlagNebula = nebulas_cbx->getState();
-	core->FlagNebulaName = nebulas_names_cbx->getState();
-	core->MaxMagNebulaName = max_mag_nebula_name->getValue();
-	core->FlagPlanets = planets_cbx->getState();
-	core->FlagPlanetsHints = planets_hints_cbx->getState();
-	core->ssystem->get_moon()->set_sphere_scale(moon_x4_cbx->getState() ? core->MoonScale : 1.f);
-	core->FlagEquatorialGrid = equator_grid_cbx->getState();
-	core->FlagAzimutalGrid = azimuth_grid_cbx->getState();
-	core->FlagEquatorLine = equator_cbx->getState();
-	core->FlagEclipticLine = ecliptic_cbx->getState();
-	core->FlagLandscape = ground_cbx->getState();
-	core->FlagCardinalPoints = cardinal_cbx->getState();
-	core->FlagAtmosphere = atmosphere_cbx->getState();
-	core->FlagFog = fog_cbx->getState();
+	core->commander->execute_command("flag stars ", stars_cbx->getState());
+	core->commander->execute_command("flag star_name ", star_names_cbx->getState());
+	core->commander->execute_command("set max_mag_star_name ", max_mag_star_name->getValue());
+	core->commander->execute_command("flag star_twinkle ", star_twinkle_cbx->getState());
+	core->commander->execute_command("set star_twinkle_amount ", star_twinkle_amount->getValue());
+	core->commander->execute_command("flag constellation_drawing ", constellation_cbx->getState());
+	core->commander->execute_command("flag constellation_name ", constellation_name_cbx->getState());
+	core->commander->execute_command("flag constellation_pick ", sel_constellation_cbx->getState());
+	core->commander->execute_command("flag nebula ", nebulas_cbx->getState());
+	core->commander->execute_command("flag nebula_name ", nebulas_names_cbx->getState());
+	core->commander->execute_command("set max_mag_nebula_name ", max_mag_nebula_name->getValue());
+	core->commander->execute_command("flag planets ", planets_cbx->getState());
+	core->commander->execute_command("flag planets_hints ", planets_hints_cbx->getState());
+	core->commander->execute_command("set moon_scale ", moon_x4_cbx->getState() ? core->MoonScale : 1.f);
+	core->commander->execute_command("flag equatorial_grid ", equator_grid_cbx->getState());
+	core->commander->execute_command("flag azimuthal_grid ", azimuth_grid_cbx->getState());
+	core->commander->execute_command("flag equator_line ", equator_cbx->getState());
+	core->commander->execute_command("flag ecliptic_line ", ecliptic_cbx->getState());
+	core->commander->execute_command("flag landscape ", ground_cbx->getState());
+	core->commander->execute_command("flag cardinal_points ", cardinal_cbx->getState());
+	core->commander->execute_command("flag atmosphere ", atmosphere_cbx->getState());
+	core->commander->execute_command("flag fog ", fog_cbx->getState());
 }
 
 void stel_ui::setCurrentTimeFromConfig(void)
 {
-	core->navigation->set_JDay(time_current->getJDay() - core->observatory->get_GMT_shift()*JD_HOUR);
+	//	core->navigation->set_JDay(time_current->getJDay() - core->observatory->get_GMT_shift()*JD_HOUR);
+	core->commander->execute_command(string("date local " + time_current->getDateString()));
 }
 
 void stel_ui::setObserverPositionFromMap(void)
 {
-	core->observatory->set_latitude(earth_map->getPointerLatitude());
-	core->observatory->set_longitude(earth_map->getPointerLongitude());
+	std::ostringstream oss;
+	oss << "moveto lat " << earth_map->getPointerLatitude() << " lon " << earth_map->getPointerLongitude();
+	core->commander->execute_command(oss.str());
 }
 
 void stel_ui::setObserverPositionFromIncDec(void)
 {
-	core->observatory->set_latitude(lat_incdec->getValue());
-	core->observatory->set_longitude(long_incdec->getValue());
+	std::ostringstream oss;
+	oss << "moveto lat " << lat_incdec->getValue() << " lon " << long_incdec->getValue();
+	core->commander->execute_command(oss.str());
 }
 
 void stel_ui::saveObserverPosition(void)
