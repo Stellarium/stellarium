@@ -68,6 +68,7 @@ private:
 	static float twinkle_amount;
 	static float star_scale;
 	static float star_mag_scale;
+	static float names_brightness;
 	static tone_reproductor* eye;
 	static Projector* proj;
 	static bool gravity_label;

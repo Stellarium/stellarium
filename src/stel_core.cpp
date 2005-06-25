@@ -276,6 +276,7 @@ void stel_core::update(int delta_time)
 	asterisms->update(delta_time);
 	atmosphere->update(delta_time);
 	landscape->update(delta_time);
+	hip_stars->update(delta_time);
 	
 	// Compute the sun position in local coordinate
 	Vec3d temp(0.,0.,0.);
@@ -354,14 +355,14 @@ void stel_core::draw(int delta_time)
 	// Draw the hipparcos stars
 	Vec3d tempv = navigation->get_prec_equ_vision();
 	Vec3f temp(tempv[0],tempv[1],tempv[2]);
-
+	hip_stars->set_flag_names(FlagStarName);
 	if (FlagStars && sky_brightness<=0.11)
 	{
 		if (FlagPointStar) hip_stars->draw_point(StarScale, StarMagScale,
-			FlagStarTwinkle ? StarTwinkleAmount : 0.f, FlagStarName,
+			FlagStarTwinkle ? StarTwinkleAmount : 0.f,
 			MaxMagStarName, temp, tone_converter, projection, FlagGravityLabels);
 		else hip_stars->draw(StarScale, StarMagScale,
-			FlagStarTwinkle ? StarTwinkleAmount : 0.f, FlagStarName,
+			FlagStarTwinkle ? StarTwinkleAmount : 0.f,
 			MaxMagStarName, temp, tone_converter, projection, FlagGravityLabels);
 	}
 

@@ -214,7 +214,7 @@ void Hip_Star_mgr::load_sci_names(const string& sciNameFile)
 }
 
 // Draw all the stars
-void Hip_Star_mgr::draw(float _star_scale, float _star_mag_scale, float _twinkle_amount, int name_ON,
+void Hip_Star_mgr::draw(float _star_scale, float _star_mag_scale, float _twinkle_amount,
 						float maxMagStarName, Vec3f equ_vision,
 						tone_reproductor* _eye, Projector* prj, bool _gravity_label)
 {
@@ -224,7 +224,8 @@ void Hip_Star_mgr::draw(float _star_scale, float _star_mag_scale, float _twinkle
 	Hip_Star::eye = _eye;
 	Hip_Star::proj = prj;
 	Hip_Star::gravity_label = _gravity_label;
-
+	Hip_Star::names_brightness = names_fader.get_interstate();
+	
 	glEnable(GL_TEXTURE_2D);
     glEnable(GL_BLEND);
     glBindTexture (GL_TEXTURE_2D, starTexture->getID());
@@ -250,7 +251,7 @@ void Hip_Star_mgr::draw(float _star_scale, float _star_mag_scale, float _twinkle
 			if((*iter)->Mag>maxMag) break;
 			if(!prj->project_prec_earth_equ_check((*iter)->XYZ, (*iter)->XY)) continue;
 			(*iter)->draw();
-			if ((*iter)->CommonName!="" && name_ON && (*iter)->Mag<maxMagStarName)
+			if ((*iter)->CommonName!="" && names_fader.get_interstate() && (*iter)->Mag<maxMagStarName)
 			{
 				(*iter)->draw_name(starFont);
 				glBindTexture (GL_TEXTURE_2D, starTexture->getID());
@@ -262,7 +263,7 @@ void Hip_Star_mgr::draw(float _star_scale, float _star_mag_scale, float _twinkle
 }
 
 // Draw all the stars
-void Hip_Star_mgr::draw_point(float _star_scale, float _star_mag_scale, float _twinkle_amount, int name_ON, float maxMagStarName, Vec3f equ_vision, tone_reproductor* _eye, Projector* prj, bool _gravity_label)
+void Hip_Star_mgr::draw_point(float _star_scale, float _star_mag_scale, float _twinkle_amount, float maxMagStarName, Vec3f equ_vision, tone_reproductor* _eye, Projector* prj, bool _gravity_label)
 {
 	Hip_Star::twinkle_amount = _twinkle_amount;
 	Hip_Star::star_scale = _star_scale;
@@ -270,6 +271,7 @@ void Hip_Star_mgr::draw_point(float _star_scale, float _star_mag_scale, float _t
 	Hip_Star::eye = _eye;
 	Hip_Star::proj = prj;
 	Hip_Star::gravity_label = _gravity_label;
+	Hip_Star::names_brightness = names_fader.get_interstate();
 
 	glEnable(GL_TEXTURE_2D);
     glEnable(GL_BLEND);
@@ -296,7 +298,7 @@ void Hip_Star_mgr::draw_point(float _star_scale, float _star_mag_scale, float _t
 	      if((*iter)->Mag>maxMag) break;
 	      if(!prj->project_prec_earth_equ_check((*iter)->XYZ, (*iter)->XY)) continue;
 	      (*iter)->draw_point();
-	      if ((*iter)->CommonName!="" && name_ON && (*iter)->Mag<maxMagStarName)
+	      if ((*iter)->CommonName!="" && names_fader.get_interstate() && (*iter)->Mag<maxMagStarName)
 		{
 		  (*iter)->draw_name(starFont);
 		  glBindTexture (GL_TEXTURE_2D, starTexture->getID());

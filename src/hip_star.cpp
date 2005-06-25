@@ -30,6 +30,7 @@
 float Hip_Star::twinkle_amount = 10.f;
 float Hip_Star::star_scale = 10.f;
 float Hip_Star::star_mag_scale = 10.f;
+float Hip_Star::names_brightness = 1.f;
 tone_reproductor* Hip_Star::eye = NULL;
 Projector* Hip_Star::proj = NULL;
 bool Hip_Star::gravity_label = false;
@@ -224,7 +225,7 @@ void Hip_Star::draw_point(void)
 
 void Hip_Star::draw_name(const s_font* star_font)
 {   
-    glColor3fv(RGB*0.75);
+    glColor3fv(RGB*0.75*names_brightness);
 	gravity_label ? proj->print_gravity180(star_font, XY[0],XY[1], CommonName, 1, 6, -4) :
 	star_font->print(XY[0]+6,XY[1]-4, CommonName);
 }
