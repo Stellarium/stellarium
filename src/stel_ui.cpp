@@ -476,38 +476,43 @@ Boston, MA  02111-1307, USA.\n");
 Component* stel_ui::createHelpWindow(void)
 {
 	help_txtlbl = new TextLabel(
-string(_("4 Directions     : Deplacement RA/DE\n\
+string(_("\
+Arrow Keys       : Change viewing RA/DE\n\
 Page Up/Down     : Zoom\n\
 CTRL+Up/Down     : Zoom\n\
-Left Click       : Select Star\n\
-Right Click      : Clear Pointer\n\
-CTRL+Left Click  : Clear Pointer\n\
-SPACE : Center On Selected Object\n\
-ENTER : Equatorial/Altazimuthal mount\n\
-CTRL + S : Take a Screenshot\n\
-C   : Drawing of the Constellations\n\
-V   : Names of the Constellations\n\
-R   : Constellation Art\n\
-E   : Equatorial Grid\n\
-Z   : Azimuthal Grid\n\
-N   : Nebulas\n\
-P   : Planet Finder\n\
+Left Click       : Select object\n\
+Right Click      : Unselect\n\
+CTRL+Left Click  : Unselect\n\
+SPACE : Center on selected object\n\
+ENTER : Equatorial/altazimuthal mount\n\
+C   : Constellation lines\n\
+V   : Constellation labels\n\
+R   : Constellation art\n\
+E   : Equatorial grid\n\
+Z   : Azimuthal grid\n\
+N   : Nebula labels\n\
+P   : Planet labels\n\
 G   : Ground\n\
 F   : Fog\n\
-Q   : Cardinal Points\n\
+Q   : Cardinal points\n\
 A   : Atmosphere\n\
 H   : Help\n\
-4   : Ecliptic Line\n\
-5   : Equator Line\n\
-T   : Object Tracking\n\
+4   : Ecliptic line\n\
+5   : Equator line\n\
+T   : Object tracking\n\
 S   : Stars\n\
+8   : Set time to current time\n\
+9   : Toggle meteor shower rates\n\
 I   : About Stellarium\n\
-F1  : Toggle fullscreen if possible.\n")) + string(
+M   : Text menu\n\
+F1  : Toggle fullscreen if possible.\n\
+CTRL + S : Take a screenshot\n\
+CTRL + R : Toggle script recording\n")) + string(
 
 #ifndef MACOSX
-_("CTRL+Q : Quit\n")
+_("CTRL + Q : Quit\n")
 #else
-_("CMD+Q : Quit\n")
+_("CMD + Q  : Quit\n")
 #endif
 
 ),courierFont);
@@ -515,7 +520,7 @@ _("CMD+Q : Quit\n")
 	help_txtlbl->adjustSize();
 	help_txtlbl->setPos(10,10);
 	help_win = new StdBtWin(_("Help"));
-	help_win->reshape(300,200,400,380);
+	help_win->reshape(300,200,400,450);
 	help_win->addComponent(help_txtlbl);
     help_win->setVisible(core->FlagHelp);
 	help_win->setOnHideBtCallback(callback<void>(this, &stel_ui::help_win_hideBtCallback));
