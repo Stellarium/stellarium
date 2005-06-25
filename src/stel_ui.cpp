@@ -803,13 +803,13 @@ int stel_ui::handle_keys(Uint16 key, S_GUI_VALUE state)
 				int zhr = core->meteors->get_ZHR();
 
 				if(zhr <= 10 ) {
-					core->meteors->set_ZHR( 80 );  // standard Perseids rate
+					core->commander->execute_command("meteors zhr 80");  // standard Perseids rate
 				} else if( zhr <= 80 ) {
-					core->meteors->set_ZHR( 10000 );  // exceptional Leonid rate
+					core->commander->execute_command("meteors zhr 10000"); // exceptional Leonid rate
 				} else if( zhr <= 10000 ) {
-					core->meteors->set_ZHR( 144000 );  // highest ever recorded ZHR (1966 Leonids)
+					core->commander->execute_command("meteors zhr 144000");  // highest ever recorded ZHR (1966 Leonids)
 				} else {
-					core->meteors->set_ZHR( 10 );  // set to ***default base rate (10 is normal, 0 would be none)
+					core->commander->execute_command("meteors zhr 10");  // set to default base rate (10 is normal, 0 would be none)
 				}
 			}
 
