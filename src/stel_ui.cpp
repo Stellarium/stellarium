@@ -727,12 +727,7 @@ int stel_ui::handle_keys(Uint16 key, S_GUI_VALUE state)
 
 			if(key==SDLK_r) core->commander->execute_command( "flag constellation_art toggle");
 			if(key==SDLK_c) core->commander->execute_command( "flag constellation_drawing toggle");
-			if(key==SDLK_d) {
-				if (SDL_GetModState() & KMOD_CTRL) {
-					// temp - play demo script
-					core->commander->execute_command( "script action play filename ./scripts/startup.sts");
-				} else core->commander->execute_command( "flag star_names toggle");
-			}
+			if(key==SDLK_d) core->commander->execute_command( "flag star_names toggle");
 
 			if(key==SDLK_1)
 				{
