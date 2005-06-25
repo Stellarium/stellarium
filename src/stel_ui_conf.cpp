@@ -342,18 +342,18 @@ Component* stel_ui::createConfigWindow(void)
 void stel_ui::updateConfigVariables(void)
 {
 	core->commander->execute_command("flag stars ", stars_cbx->getState());
-	core->commander->execute_command("flag star_name ", star_names_cbx->getState());
+	core->commander->execute_command("flag star_names ", star_names_cbx->getState());
 	core->commander->execute_command("set max_mag_star_name ", max_mag_star_name->getValue());
 	core->commander->execute_command("flag star_twinkle ", star_twinkle_cbx->getState());
 	core->commander->execute_command("set star_twinkle_amount ", star_twinkle_amount->getValue());
 	core->commander->execute_command("flag constellation_drawing ", constellation_cbx->getState());
-	core->commander->execute_command("flag constellation_name ", constellation_name_cbx->getState());
+	core->commander->execute_command("flag constellation_names ", constellation_name_cbx->getState());
 	core->commander->execute_command("flag constellation_pick ", sel_constellation_cbx->getState());
-	core->commander->execute_command("flag nebula ", nebulas_cbx->getState());
-	core->commander->execute_command("flag nebula_name ", nebulas_names_cbx->getState());
+	core->commander->execute_command("flag nebulae ", nebulas_cbx->getState());
+	core->commander->execute_command("flag nebula_names ", nebulas_names_cbx->getState());
 	core->commander->execute_command("set max_mag_nebula_name ", max_mag_nebula_name->getValue());
 	core->commander->execute_command("flag planets ", planets_cbx->getState());
-	core->commander->execute_command("flag planets_hints ", planets_hints_cbx->getState());
+	core->commander->execute_command("flag planet_names ", planets_hints_cbx->getState());
 	core->commander->execute_command("set moon_scale ", moon_x4_cbx->getState() ? core->MoonScale : 1.f);
 	core->commander->execute_command("flag equatorial_grid ", equator_grid_cbx->getState());
 	core->commander->execute_command("flag azimuthal_grid ", azimuth_grid_cbx->getState());

@@ -92,6 +92,17 @@ these will be turned off.<br>
       </td>
     </tr>
     <tr>
+      <td style="vertical-align: top;">configuration<br>
+      </td>
+      <td style="vertical-align: top;">action</td>
+      <td style="vertical-align: top;">load<br>
+reload<br>
+      </td>
+      <td style="vertical-align: top;">Only reload is acceptable from a
+script.&nbsp; Reloads default settings.<br>
+      </td>
+    </tr>
+    <tr>
       <td colspan="1" rowspan="4">date<br>
       <br>
       </td>
@@ -146,7 +157,7 @@ bright_nebulae<br>
 cardinal_points<br>
 constellation_art<br>
 constellation_drawing<br>
-constellation_name<br>
+constellation_names<br>
 constellation_pick<br>
 ecliptic_line<br>
 enable_move_keys<br>
@@ -156,7 +167,6 @@ equator_line<br>
 equatorial_grid<br>
 fog<br>
 gravity_labels<br>
-ground<br>
 help<br>
 horizon<br>
 infos<br>
@@ -164,11 +174,11 @@ init_moon_scaled<br>
 manual_zoom<br>
 menu<br>
 milky_way<br>
-nebula<br>
-nebula_name<br>
+nebulae<br>
+nebula_names<br>
 planets<br>
-planets_hints<br>
-planets_orbits<br>
+planet_names<br>
+planet_orbits<br>
 point_star<br>
 show_appname<br>
 show_date<br>
@@ -180,7 +190,7 @@ show_time<br>
 show_topbar<br>
 show_tui_datetime<br>
 show_tui_short_obj_info<br>
-star_name<br>
+star_names<br>
 star_twinkle<br>
 stars<br>
 track_object<br>
@@ -193,8 +203,7 @@ off<br>
 toggle </td>
       <td>Set rendering flags. One argument name per command allowed
 currently.
-      <p>track_object is only useful while an object is selected.
-      </p>
+      <p>track_object is only useful while an object is selected. </p>
       <p>The following flags are key user settings and are not
 accessible from scripts:</p>
       <p>constellation_pick<br>
@@ -219,7 +228,7 @@ utc_time<br>
       </td>
     </tr>
     <tr>
-      <td rowspan="7" style="vertical-align: top;">image<br>
+      <td colspan="1" rowspan="8" style="vertical-align: top;">image<br>
       <br>
       </td>
       <td>action</td>
@@ -283,6 +292,14 @@ is center of viewport, 1 is right edge of viewport.<br>
       </td>
     </tr>
     <tr>
+      <td style="vertical-align: top;">ypos<br>
+      </td>
+      <td style="vertical-align: top;">Y_POSITION<br>
+      </td>
+      <td style="vertical-align: top;">Where to draw center of image. 0
+is center of viewport, 1 is top edge of viewport.</td>
+    </tr>
+    <tr>
       <td style="vertical-align: top;">landscape<br>
       </td>
       <td style="vertical-align: top;"><br>
@@ -291,6 +308,16 @@ is center of viewport, 1 is right edge of viewport.<br>
       </td>
       <td style="vertical-align: top;">Load a landscape.&nbsp;
 Arguments have same names and possible values as in landscapes.ini file.<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">meteors<br>
+      </td>
+      <td style="vertical-align: top;">zhr<br>
+      </td>
+      <td style="vertical-align: top;">ZENITH_HOURLY_RATE<br>
+      </td>
+      <td style="vertical-align: top;"><br>
       </td>
     </tr>
     <tr>

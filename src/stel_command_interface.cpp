@@ -460,19 +460,19 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 	  execute_command("flag equatorial_grid off");
 	  execute_command("flag equator_line off");
 	  execute_command("flag fog off");
-	  execute_command("flag nebula_name off");
+	  execute_command("flag nebula_names off");
 	  execute_command("flag object_trails off");
-	  execute_command("flag planets_hints off");
-	  execute_command("flag planets_orbits off");
+	  execute_command("flag planet_names off");
+	  execute_command("flag planet_orbits off");
 	  execute_command("flag show_tui_datetime off");
-	  execute_command("flag star_name off");
+	  execute_command("flag star_names off");
 	  execute_command("flag show_tui_short_obj_info off");
 
 	  // make sure planets, stars, etc. are turned on!
 	  // milkyway is left to user, for those without 3d cards
 	  execute_command("flag stars on");
 	  execute_command("flag planets on");
-	  execute_command("flag nebula on");
+	  execute_command("flag nebulae on");
 
 	  // also deselect everything, set to default fov and real time rate
 	  execute_command("deselect");
@@ -598,7 +598,7 @@ int StelCommandInterface::set_flag(string name, string value, bool &newval, bool
 			newval = !stcore->asterisms->get_flag_lines();
 			stcore->asterisms->set_flag_lines(newval);
 		} 
-		else if(name=="constellation_name") {
+		else if(name=="constellation_names") {
 			newval = !stcore->asterisms->get_flag_names();
 			stcore->asterisms->set_flag_names(newval);
 		} 
@@ -626,15 +626,15 @@ int StelCommandInterface::set_flag(string name, string value, bool &newval, bool
 		}
 		else if(name=="landscape") newval = (stcore->FlagLandscape = !stcore->FlagLandscape);
 		else if(name=="stars") newval = (stcore->FlagStars = !stcore->FlagStars);
-		else if(name=="star_name") newval = (stcore->FlagStarName = !stcore->FlagStarName);
+		else if(name=="star_names") newval = (stcore->FlagStarName = !stcore->FlagStarName);
 		else if(name=="planets") newval = (stcore->FlagPlanets = !stcore->FlagPlanets);
-		else if(name=="planets_hints") {
+		else if(name=="planet_names") {
 			newval = (stcore->FlagPlanetsHints = !stcore->FlagPlanetsHints);
 			if(stcore->FlagPlanetsHints) stcore->FlagPlanets = 1;  // for safety if script turns planets off
 		}
-		else if(name=="planets_orbits") newval = (stcore->FlagPlanetsOrbits = !stcore->FlagPlanetsOrbits);
-		else if(name=="nebula") newval = (stcore->FlagNebula = !stcore->FlagNebula);
-		else if(name=="nebula_name") newval = (stcore->FlagNebulaName = !stcore->FlagNebulaName);
+		else if(name=="planet_orbits") newval = (stcore->FlagPlanetsOrbits = !stcore->FlagPlanetsOrbits);
+		else if(name=="nebulae") newval = (stcore->FlagNebula = !stcore->FlagNebula);
+		else if(name=="nebula_names") newval = (stcore->FlagNebulaName = !stcore->FlagNebulaName);
 		else if(name=="milky_way") newval = (stcore->FlagMilkyWay = !stcore->FlagMilkyWay);
 		else if(name=="bright_nebulae") newval = (stcore->FlagBrightNebulae = !stcore->FlagBrightNebulae);
 		else if(name=="object_trails") newval = (stcore->FlagObjectTrails = !stcore->FlagObjectTrails);
@@ -681,7 +681,7 @@ int StelCommandInterface::set_flag(string name, string value, bool &newval, bool
 
 
 		if(name=="constellation_drawing") stcore->asterisms->set_flag_lines(newval);
-		else if(name=="constellation_name") stcore->asterisms->set_flag_names(newval);
+		else if(name=="constellation_names") stcore->asterisms->set_flag_names(newval);
 		else if(name=="constellation_art") stcore->asterisms->set_flag_art(newval);
 		else if(name=="star_twinkle") stcore->FlagStarTwinkle = newval;
 		else if(name=="point_star") stcore->FlagPointStar = newval;
@@ -703,15 +703,15 @@ int StelCommandInterface::set_flag(string name, string value, bool &newval, bool
 		}
 		else if(name=="landscape") stcore->FlagLandscape = newval;
 		else if(name=="stars") stcore->FlagStars = newval;
-		else if(name=="star_name") stcore->FlagStarName = newval;
+		else if(name=="star_names") stcore->FlagStarName = newval;
 		else if(name=="planets") stcore->FlagPlanets = newval;
-		else if(name=="planets_hints") {
+		else if(name=="planet_names") {
 			stcore->FlagPlanetsHints = newval;
 			if(stcore->FlagPlanetsHints) stcore->FlagPlanets = 1;  // for safety if script turns planets off
 		}
-		else if(name=="planets_orbits") stcore->FlagPlanetsOrbits = newval;
-		else if(name=="nebula") stcore->FlagNebula = newval;
-		else if(name=="nebula_name") stcore->FlagNebulaName = newval;
+		else if(name=="planet_orbits") stcore->FlagPlanetsOrbits = newval;
+		else if(name=="nebulae") stcore->FlagNebula = newval;
+		else if(name=="nebula_names") stcore->FlagNebulaName = newval;
 		else if(name=="milky_way") stcore->FlagMilkyWay = newval;
 		else if(name=="bright_nebulae") stcore->FlagBrightNebulae = newval;
 		else if(name=="object_trails") stcore->FlagObjectTrails = newval;
