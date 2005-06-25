@@ -731,7 +731,7 @@ int stel_ui::handle_keys(Uint16 key, S_GUI_VALUE state)
 				if (SDL_GetModState() & KMOD_CTRL) {
 					// temp - play demo script
 					core->commander->execute_command( "script action play filename ./scripts/startup.sts");
-				} else core->commander->execute_command( "flag star_name toggle");
+				} else core->commander->execute_command( "flag star_names toggle");
 			}
 
 			if(key==SDLK_1)
@@ -741,18 +741,18 @@ int stel_ui::handle_keys(Uint16 key, S_GUI_VALUE state)
 				}
 			if(key==SDLK_p) {
 				if(!core->FlagPlanetsHints) {
-					core->commander->execute_command("flag planets_hints on");
+					core->commander->execute_command("flag planet_names on");
 				} else if( !core->FlagPlanetsOrbits) {
-					core->commander->execute_command("flag planets_orbits on");
+					core->commander->execute_command("flag planet_orbits on");
 				} else {
-					core->commander->execute_command("flag planets_orbits off");
-					core->commander->execute_command("flag planets_hints off");
+					core->commander->execute_command("flag planet_orbits off");
+					core->commander->execute_command("flag planet_names off");
 				}
 			}
-			if(key==SDLK_v) core->commander->execute_command( "flag constellation_name toggle");
+			if(key==SDLK_v) core->commander->execute_command( "flag constellation_names toggle");
 			if(key==SDLK_z) core->commander->execute_command( "flag azimuthal_grid toggle");
 			if(key==SDLK_e) core->commander->execute_command( "flag equatorial_grid toggle");
-			if(key==SDLK_n) core->commander->execute_command( "flag nebula_name toggle");
+			if(key==SDLK_n) core->commander->execute_command( "flag nebula_names toggle");
 			if(key==SDLK_g) core->commander->execute_command( "flag landscape toggle");
 			if(key==SDLK_f) core->commander->execute_command( "flag fog toggle");
 			if(key==SDLK_q) core->commander->execute_command( "flag cardinal_points toggle");
