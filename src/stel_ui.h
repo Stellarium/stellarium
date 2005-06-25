@@ -265,6 +265,8 @@ private:
 	void tui_cb_effects_milkyway_intensity();        // change milky way intensity
 	void tui_cb_setlocation();        // change observer position
 	void tui_cb_stars();        // change star parameters
+	void tui_cb_effects();        // change effect parameters
+	void tui_cb_sky_time();        // change effect parameters
 
 	// Parse a file of type /usr/share/zoneinfo/zone.tab
 	s_tui::MultiSet_item<string>* stel_ui::create_tree_from_time_zone_file(const string& zonetab);
