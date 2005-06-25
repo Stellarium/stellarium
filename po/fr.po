@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium 0.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-06-22 15:50+0200\n"
+"POT-Creation-Date: 2005-06-25 02:05+0200\n"
 "PO-Revision-Date: 2005-06-22 16:23+0200\n"
 "Last-Translator: Fabien Chereau,,,<Fabien.Chereau@obspm.fr> <chereau@obspm."
 "fr>\n"
@@ -566,11 +566,6 @@ msgid "ERROR : The current config file is from a different version ("
 msgstr ""
 "ERREUR : Le fichier de configuration actuel provient d'une autre version ("
 
-#: src/stel_core.cpp:1250
-#, c-format
-msgid "Loading constellations for sky culture: \"%s\"\n"
-msgstr "Chargement des Images Constellations pour la civilisation : \"%s\"\n"
-
 #. Submenus
 #: src/stel_ui_tuiconf.cpp:84
 msgid "Set Location "
@@ -735,6 +730,10 @@ msgstr "Décalage du centrage N-S"
 #: src/stel_ui_tuiconf.cpp:236
 msgid "E-W Centering Offset: "
 msgstr "Décalage du centrage E-O"
+
+#~ msgid "Loading constellations for sky culture: \"%s\"\n"
+#~ msgstr ""
+#~ "Chargement des Images Constellations pour la civilisation : \"%s\"\n"
 
 #~ msgid "Changing sky culture to %s\n"
 #~ msgstr "Utilise les noms de la culture %s\n"
