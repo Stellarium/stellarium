@@ -249,6 +249,7 @@ namespace s_tui
 		~Time_item();
 		virtual bool onKey(Uint16, S_TUI_VALUE);
 		virtual string getString(void);
+		virtual string getDateString(void);
 		virtual bool isEditable(void) const {return true;}
 		double getJDay(void) const {return JD;}
 		void setJDay(double jd) {JD = jd;}

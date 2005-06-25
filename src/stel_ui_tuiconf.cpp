@@ -109,7 +109,7 @@ void stel_ui::init_tui(void)
 
 	// 2. Time
 	tui_time_skytime = new s_tui::Time_item(string("2.1 ") + _("Sky Time: "));
-	tui_time_skytime->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb1));
+	tui_time_skytime->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb_sky_time));
 	tui_time_settmz = new s_tui::Time_zone_item(core->DataDir + "zone.tab", string("2.2 ") + _("Set Time Zone: "));
 	tui_time_settmz->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb_settimezone));
 	tui_time_settmz->settz(core->observatory->get_custom_tz_name());
@@ -176,15 +176,15 @@ void stel_ui::init_tui(void)
 	tui_menu_effects->addComponent(tui_effect_landscape);
 
 	tui_effect_manual_zoom = new s_tui::Boolean_item(false, string("5.2 ") + _("Manual zoom: "), _("Yes"),_("No"));
-	tui_effect_manual_zoom->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb1));
+	tui_effect_manual_zoom->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb_effects));
 	tui_menu_effects->addComponent(tui_effect_manual_zoom);
 
 	tui_effect_pointobj = new s_tui::Boolean_item(false, string("5.3 ") + _("Object Sizing Rule: "), _("Point"),_("Magnitude"));
-	tui_effect_pointobj->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb1));
+	tui_effect_pointobj->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb_effects));
 	tui_menu_effects->addComponent(tui_effect_pointobj);
 
 	tui_effect_object_scale = new s_tui::Decimal_item(0, 25, 1, string("5.4 ") + _("Magnitude Sizing Multiplier: "), 0.1);
-	tui_effect_object_scale->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb1));
+	tui_effect_object_scale->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb_effects));
 	tui_menu_effects->addComponent(tui_effect_object_scale);
 
 	tui_effect_milkyway_intensity = new s_tui::Decimal_item(0, 10, 1, string("5.5 ") + _("Milky Way intensity: "), .5);
@@ -192,7 +192,7 @@ void stel_ui::init_tui(void)
 	tui_menu_effects->addComponent(tui_effect_milkyway_intensity);
 
 	tui_effect_zoom_duration = new s_tui::Decimal_item(1, 10, 2, string("5.6 ") + _("Zoom duration: "));
-	tui_effect_zoom_duration->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb1));
+	tui_effect_zoom_duration->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb_effects));
 	tui_menu_effects->addComponent(tui_effect_zoom_duration);
 
 
@@ -293,22 +293,11 @@ int stel_ui::handle_keys_tui(Uint16 key, s_tui::S_TUI_VALUE state)
 void stel_ui::tui_cb1(void)
 {
 
+	std::ostringstream oss;
+
 	// 2. Date & Time
-	double skyJDay = tui_time_skytime->getJDay();
-	core->navigation->set_JDay(skyJDay -   
-				   core->observatory->get_GMT_shift(skyJDay,1)*JD_HOUR);
 	core->PresetSkyTime 		= tui_time_presetskytime->getJDay();
 	core->StartupTimeMode 		= tui_time_startuptime->getCurrent();
-
-	// 5. effects
-	core->FlagPointStar 		= tui_effect_pointobj->getValue();
-	core->auto_move_duration	= tui_effect_zoom_duration->getValue();
-	core->FlagManualZoom 		= tui_effect_manual_zoom->getValue();
-
-
-	std::ostringstream oss;
-	oss << "set star_scale " << tui_effect_object_scale->getValue();
-	core->commander->execute_command(oss.str());
 
 }
 
@@ -548,3 +537,40 @@ void stel_ui::tui_cb_stars()
 
 }
 
+void stel_ui::tui_cb_effects()
+{
+
+	// 5. effects
+	std::ostringstream oss;
+
+	oss << "flag point_star " << tui_effect_pointobj->getValue();
+	core->commander->execute_command(oss.str());
+
+	oss.str("");
+	oss << "set auto_move_duration " << tui_effect_zoom_duration->getValue();
+	core->commander->execute_command(oss.str());
+
+	oss.str("");
+	oss << "flag manual_zoom " << tui_effect_manual_zoom->getValue();
+	core->commander->execute_command(oss.str());
+
+	oss.str("");
+	oss << "set star_scale " << tui_effect_object_scale->getValue();
+	core->commander->execute_command(oss.str());
+
+}
+
+
+// set sky time
+void stel_ui::tui_cb_sky_time()
+{
+
+	std::ostringstream oss;
+
+	//	double skyJDay = tui_time_skytime->getJDay();
+	//core->navigation->set_JDay(skyJDay -   
+	//			   core->observatory->get_GMT_shift(skyJDay,1)*JD_HOUR);
+
+	oss << "date local " << tui_time_skytime->getDateString();
+	core->commander->execute_command(oss.str());
+}
