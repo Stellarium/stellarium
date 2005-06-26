@@ -49,10 +49,7 @@ class Nebula_mgr
   vector<stel_object*> search_around(Vec3d v, double lim_fov);
   
  private:
-  void read_one();  // load next nebula from file
   FILE * nebula_fic;
-  int total;   // total number of nebulas
-  int loaded;  // number loaded so far
   vector<Nebula*> neb_array;	// The nebulas list
   Vec3f fontColor;
   Vec3f circleColor;

@@ -17,7 +17,9 @@ Sky languages are no longer hard coded
 Cardinal points are now translated based on sky language
 TUI is now using gettext
 Fixed various typos and other bugs
-	
+Added a Loading Bar class.
+Started a code spring clean aiming at removing the design mistakes with the core class. 
+
 0.6.2 [2004-11-18]
 Fixed time display bug (1 hour ahead of actual sky time during standard time if your timezone has daylight savings).  
 NOTE: Time is only displayed as standard time (no daylight savings effects).

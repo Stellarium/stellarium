@@ -48,26 +48,42 @@ Nebula_mgr::~Nebula_mgr()
 // read from stream
 int Nebula_mgr::read(const string& font_fileName, const string& fileName, int barx, int bary)
 {
-	char tmpstr[255];
-	loaded=total=0;
+	printf(_("Loading nebulas data "));
 	
-	printf(_("Loading nebulas data...\n"));
-	
-	nebula_fic = fopen(fileName.c_str(),"r");
-	if (!nebula_fic)
+	std::ifstream inf(fileName.c_str());
+	if (!inf.is_open())
 	{
-		printf("ERROR : Can't open nebula catalog %s\n",fileName.c_str());
-		return -1;
+		printf("Can't open nebula catalog %s\n", fileName.c_str());
+		assert(0);
 	}
 	
 	// determine total number to be loaded for percent complete display
-	while(fgets(tmpstr,255,nebula_fic))
+	string record;
+	int total=0;
+	while(!std::getline(inf, record).eof())
 	{
-		total++;
+		++total;
 	}
-	rewind(nebula_fic);
+	inf.clear();
+	inf.seekg(0);
 	
-	printf(_("%d deep space objects will be loaded\n"), total);
+	printf(_("(%d deep space objects)...\n"), total);
+	
+	while(!std::getline(inf, record).eof())
+	{
+		Nebula * e = new Nebula;
+		int temp = e->read(record);
+		if (!temp) // reading error
+		{
+			printf("Error while parsing nebula %s\n", e->name.c_str());
+			delete e;
+			e = NULL;
+		} 
+		else
+		{
+			neb_array.push_back(e);
+		}
+	}
 	
 	if (!Nebula::nebula_font) Nebula::nebula_font = new s_font(12.,"spacefont", font_fileName); // load Font
 	if (!Nebula::nebula_font)
@@ -78,42 +94,8 @@ int Nebula_mgr::read(const string& font_fileName, const string& fileName, int ba
 	
 	Nebula::tex_circle = new s_texture("neb");   // Load circle texture
 	
-	if(total<1)
-	{
-		fclose(nebula_fic);
-		return(0);
-	}
-	read_one();
-	
 	return 0;
 }
-
-
-void Nebula_mgr::read_one()
-{
-	if(loaded > total ) return;
-	if( total < 1 ) return;
-	
-	Nebula * e = NULL;
-	
-	e = new Nebula;
-	int temp = e->read(nebula_fic);
-	if (temp==0) // eof
-	{
-		if (e) delete e;
-		e = NULL;
-		fclose(nebula_fic);
-		printf(_("Done loading DSOs\n"));
-	} else
-	{
-		e->setFontColor(fontColor);
-		e->setCircleColor(circleColor);
-		if (temp==1 || temp==2) neb_array.push_back(e);
-	}
-	
-	loaded++;
-}
-
 
 // Draw all the Nebulaes
 void Nebula_mgr::draw(int names_ON, Projector* prj, const navigator * nav, tone_reproductor* eye, bool _gravity_label, float max_mag_name, bool bright_nebulae)
@@ -142,10 +124,6 @@ void Nebula_mgr::draw(int names_ON, Projector* prj, const navigator * nav, tone_
     	}
       prj->reset_perspective_projection();
     }
-
-    // load nebulas one per frame until all loaded
-    read_one();
-
 }
 
 // search by name

@@ -32,7 +32,7 @@ class Constellation
 public:
     Constellation();
     ~Constellation();
-    bool read(string record, Hip_Star_mgr * _VouteCeleste);
+    bool read(const string& record, Hip_Star_mgr * _VouteCeleste);
     void draw(Projector* prj, const Vec3f& lines_color) const;
     void draw_name(s_font * constfont, Projector* prj, Vec3f color) const;
     void draw_art(Projector* prj, navigator* nav) const;

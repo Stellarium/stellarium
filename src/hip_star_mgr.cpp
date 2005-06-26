@@ -240,18 +240,20 @@ void Hip_Star_mgr::draw(float _star_scale, float _star_mag_scale, float _twinkle
 	// Print all the stars of all the selected zones
 	static vector<Hip_Star *>::iterator end;
 	static vector<Hip_Star *>::iterator iter;
+	Hip_Star* h;
 	for(int i=0;i<nbZones;++i)
 	{
 		end = starZones[zoneList[i]].end();
 	    for(iter = starZones[zoneList[i]].begin(); iter!=end; ++iter)
 		{
+			h=*iter;
 			// If too small, skip and Compute the 2D position and check if in screen
-			if((*iter)->Mag>maxMag) break;
-			if(!prj->project_prec_earth_equ_check((*iter)->XYZ, (*iter)->XY)) continue;
-			(*iter)->draw();
-			if ((*iter)->CommonName!="" && names_fader.get_interstate() && (*iter)->Mag<maxMagStarName)
+			if(h->Mag>maxMag) break;
+			if(!prj->project_prec_earth_equ_check(h->XYZ, h->XY)) continue;
+			h->draw();
+			if (!h->CommonName.empty() && names_fader.get_interstate() && h->Mag<maxMagStarName)
 			{
-				(*iter)->draw_name(starFont);
+				h->draw_name(starFont);
 				glBindTexture (GL_TEXTURE_2D, starTexture->getID());
 			}
 		}
@@ -287,21 +289,23 @@ void Hip_Star_mgr::draw_point(float _star_scale, float _star_mag_scale, float _t
 	// Print all the stars of all the selected zones
 	static vector<Hip_Star *>::iterator end;
 	static vector<Hip_Star *>::iterator iter;
+	Hip_Star* h;
 	for(int i=0;i<nbZones;++i)
 	{
-	  end = starZones[zoneList[i]].end();
-	  for(iter = starZones[zoneList[i]].begin(); iter!=end; ++iter)
-	    {
-	      // If too small, skip and Compute the 2D position and check if in screen
-	      if((*iter)->Mag>maxMag) break;
-	      if(!prj->project_prec_earth_equ_check((*iter)->XYZ, (*iter)->XY)) continue;
-	      (*iter)->draw_point();
-	      if ((*iter)->CommonName!="" && names_fader.get_interstate() && (*iter)->Mag<maxMagStarName)
+		end = starZones[zoneList[i]].end();
+		for(iter = starZones[zoneList[i]].begin(); iter!=end; ++iter)
 		{
-		  (*iter)->draw_name(starFont);
-		  glBindTexture (GL_TEXTURE_2D, starTexture->getID());
+			h=*iter;
+			// If too small, skip and Compute the 2D position and check if in screen
+			if(h->Mag>maxMag) break;
+			if(!prj->project_prec_earth_equ_check(h->XYZ, h->XY)) continue;
+			h->draw_point();
+			if (!h->CommonName.empty() && names_fader.get_interstate() && h->Mag<maxMagStarName)
+			{
+				h->draw_name(starFont);
+				glBindTexture (GL_TEXTURE_2D, starTexture->getID());
+			}
 		}
-	    }
 	}
 
     prj->reset_perspective_projection();

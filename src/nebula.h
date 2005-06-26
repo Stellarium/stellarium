@@ -27,8 +27,7 @@
 #include "s_font.h"
 #include "tone_reproductor.h"
 
-/*
-     Gx    Galaxy
+/*   Gx    Galaxy
      OC    Open star cluster
      Gb    Globular star cluster, usually in the Milky Way Galaxy
      Nb    Bright emission or reflection nebula
@@ -42,15 +41,7 @@
      ?     Uncertain type or may not exist
      blank Unidentified at the place given, or type unknown
      -     Object called nonexistent in the RNGC (Sulentic and Tifft 1973)
-     PD    Photographic plate defect
-
-enum NEBULA_TYPE
-{
-	,
-	,
-
-};
-*/
+     PD    Photographic plate defect */
 
 class Nebula : public stel_object
 {
@@ -70,7 +61,7 @@ public:
 	void setCircleColor(Vec3f& v) {circlecolor = v;}
 
 	// Read the Nebula data from a file
-    int read(FILE *);
+    bool read(const string&);
 
 	void draw_tex(const Projector* prj, tone_reproductor* eye, bool bright_nebulae);
     void draw_name(const Projector* prj);
@@ -83,7 +74,6 @@ protected:
 
 private:
 	unsigned int NGC_nb;			// NGC catalog number
-
 	string name;					// Nebula name
 	string credit;					// Nebula image credit
 	float mag;						// Apparent magnitude
@@ -91,12 +81,10 @@ private:
 	Vec3f XYZ;						// Cartesian equatorial position
 	Vec3d XY;						// Store temporary 2D position
 	char type[4];					// Nebulae type
-
 	s_texture * neb_tex;			// Texture
-	Vec3f* tex_quad_vertex;			// The 4 vertex used to draw the nebula texture
+	Vec3f tex_quad_vertex[4];		// The 4 vertex used to draw the nebula texture
 	float luminance;				// Object luminance to use (value computed to compensate
 									// the texture avergae luminosity)
-
 	float inc_lum;					// Local counter for symbol animation
 	static s_texture * tex_circle;	// The symbolic circle texture
 	static s_font* nebula_font;		// Font used for names printing
