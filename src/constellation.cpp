@@ -37,7 +37,7 @@ Constellation::~Constellation()
 
 // Read Constellation data record and grab cartesian positions of stars
 // returns false if can't parse record
-bool Constellation::read(string record, Hip_Star_mgr * _VouteCeleste)
+bool Constellation::read(const string& record, Hip_Star_mgr * _VouteCeleste)
 {   
 	unsigned int HP;
 
@@ -45,11 +45,7 @@ bool Constellation::read(string record, Hip_Star_mgr * _VouteCeleste)
 	nb_segments = 0;
 
 	std::istringstream istr(record);
-	istr >> short_name >> nb_segments;
-
-	if(short_name == "" || nb_segments == 0) {
-		return(0);
-	}
+	if (!(istr >> short_name >> nb_segments)) return false;
 		
 	// make short_name uppercase for case insensitive searches
 	for(int a=0; a<3; a++) short_name[a] = ::toupper(short_name[a]);

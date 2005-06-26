@@ -144,10 +144,14 @@ public:
 
 	inline void unproject_local(double x, double y, Vec3d& v) const
 		{unproject(x, y, inv_mat_local_to_eye, v);}
-
+		
 	// Same function but using a custom modelview matrix
-	virtual bool project_custom(const Vec3d& v, Vec3d& win, const Mat4d& mat) const;
-	virtual inline bool project_custom_check(const Vec3f& v, Vec3d& win, const Mat4d& mat) const
+	virtual bool project_custom(const Vec3d& v, Vec3d& win, const Mat4d& mat) const
+	{
+		gluProject(v[0],v[1],v[2],mat,mat_projection,vec_viewport,&win[0],&win[1],&win[2]);
+		return (win[2]<1.);
+	}
+	virtual bool project_custom_check(const Vec3f& v, Vec3d& win, const Mat4d& mat) const
 		{return (project_custom(v, win, mat) && check_in_viewport(win));}
 	// project two points and make sure both are in front of viewer and that at least one is on screen
 	virtual inline bool project_custom_line_check(const Vec3f& v1, Vec3d& win1, 
@@ -156,7 +160,9 @@ public:
 		   (check_in_viewport(win1) || check_in_viewport(win2));}
 
 
-	virtual void unproject_custom(double x, double y, Vec3d& v, const Mat4d& mat) const;
+	virtual void unproject_custom(double x, double y, Vec3d& v, const Mat4d& mat) const
+	{gluUnProject(x,y,1.,mat,mat_projection,vec_viewport,&v[0],&v[1],&v[2]);}
+	
 
 	// Set the drawing mode in 2D for drawing in the full screen
 	// Use restore_from_2Dfullscreen_projection() to restore previous projection mode
@@ -236,7 +242,7 @@ protected:
 	Mat4d inv_mat_earth_equ_to_eye;	// Inverse of mat_projection*mat_earth_equ_to_eye
 	Mat4d inv_mat_helio_to_eye;		// Inverse of mat_projection*mat_helio_to_eye
 	Mat4d inv_mat_local_to_eye;		// Inverse of mat_projection*mat_local_to_eye
-
+	
 	// transformation from screen 2D point x,y to object
 	// m is here the already inverted full tranfo matrix
 	virtual inline void unproject(double x, double y, const Mat4d& m, Vec3d& v) const
@@ -246,7 +252,7 @@ protected:
 				1.0);
 		v.transfo4d(m);
 	}
-
+	
 	// Automove
 	auto_zoom zoom_move;					// Current auto movement
 	int flag_auto_zoom;				// Define if autozoom is on or off

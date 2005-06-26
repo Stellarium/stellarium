@@ -16,7 +16,8 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
-
+		
+#include <iostream>	
 #include "nebula.h"
 #include "s_texture.h"
 #include "stellarium.h"
@@ -30,8 +31,7 @@ s_texture * Nebula::tex_circle = NULL;
 s_font* Nebula::nebula_font = NULL;
 bool Nebula::gravity_label = false;
 
-Nebula::Nebula() : NGC_nb(0), neb_tex(NULL), tex_quad_vertex(NULL),
-		fontcolor(0.4,0.3,0.5), circlecolor(0.8,0.8,0.1)
+Nebula::Nebula() : NGC_nb(0), neb_tex(NULL), fontcolor(0.4,0.3,0.5), circlecolor(0.8,0.8,0.1)
 {
 	inc_lum = rand()/RAND_MAX*M_PI;
 }
@@ -40,8 +40,6 @@ Nebula::~Nebula()
 {
     delete neb_tex;
 	neb_tex = NULL;
-	delete [] tex_quad_vertex;
-	tex_quad_vertex = NULL;
 }
 
 void Nebula::get_info_string(char * s, const navigator*) const
@@ -72,33 +70,27 @@ double Nebula::get_close_fov(const navigator*) const
 }
 
 // Read nebula data from file and compute x,y and z;
-int Nebula::read(FILE * catalogue)
+// returns false if can't parse record
+bool Nebula::read(const string& record)
 {
+	string tex_name;
 	int rahr;
     float ramin;
     int dedeg;
     float demin;
 	float tex_angular_size;
 	float tex_rotation;
-	char tex_name[255];
-	char tempName[255];
-	char tempCredit[255];
+	
+	std::istringstream istr(record);
+	if (!(istr >> NGC_nb >> type >> rahr >> ramin >> dedeg >> demin >> mag >> tex_angular_size >> tex_rotation >> name >> tex_name >> credit)) return false ;
 
-    if (fscanf(catalogue,"%u %s %d %f %d %f %f %f %f %s %s %s\n",
-		&NGC_nb, type, &rahr, &ramin,&dedeg,&demin,
-		&mag,&tex_angular_size,&tex_rotation, tempName, tex_name, tempCredit)!=12)
-	{
-		return 0;
-	}
-
-	name = tempName;
     // Replace the "_" with " "
     for (string::size_type i=0;i<name.length();++i)
 	{
 		if (name[i]=='_') name[i]=' ';
 	}
 
-    credit = string("Credit: ") + tempCredit;	
+    credit = string("Credit: ") + credit;	
     for (string::size_type i=0;i<credit.length();++i)
 	{
 		if (credit[i]=='_') credit[i]=' ';
@@ -128,13 +120,12 @@ int Nebula::read(FILE * catalogue)
 						Mat4f::yrotation(-DecRad) *
 						Mat4f::xrotation(tex_rotation*M_PI/180.);
 
-	tex_quad_vertex = new Vec3f[4];
 	tex_quad_vertex[0] = mat_precomp * Vec3f(0.,-tex_size,-tex_size); // Bottom Right
 	tex_quad_vertex[1] = mat_precomp * Vec3f(0., tex_size,-tex_size); // Bottom Right
 	tex_quad_vertex[2] = mat_precomp * Vec3f(0.,-tex_size, tex_size); // Bottom Right
 	tex_quad_vertex[3] = mat_precomp * Vec3f(0., tex_size, tex_size); // Bottom Right
 
-    return 1;
+    return true;
 }
 
 void Nebula::draw_tex(const Projector* prj, tone_reproductor* eye, bool bright_nebulae)
