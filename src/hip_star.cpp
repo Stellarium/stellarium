@@ -149,16 +149,13 @@ int Hip_Star::read(FILE * catalog)
 
 void Hip_Star::draw(void)
 {
-	static float cmag;
-	static float rmag;
-
     // Compute the equivalent star luminance for a 5 arc min circle and convert it
 	// in function of the eye adaptation
-	rmag = eye->adapt_luminance(term1);
-	rmag = rmag/powf(proj->get_fov(),0.85f)*70.f;
-
-    cmag = 1.f;
-
+	float rmag = eye->adapt_luminance(term1);
+	rmag/=powf(proj->get_fov(),0.85f);
+	rmag*=70.f;
+	float cmag = 1.f;
+	
     // if size of star is too small (blink) we put its size to 1.2 --> no more blink
     // And we compensate the difference of brighteness with cmag
     if (rmag<1.2f)
@@ -194,8 +191,8 @@ void Hip_Star::draw(void)
 
 void Hip_Star::draw_point(void)
 {
-	static float cmag;
-	static float rmag;
+	float cmag;
+	float rmag;
 
     // Compute the equivalent star luminance for a 5 arc min circle and convert it
 	// in function of the eye adaptation

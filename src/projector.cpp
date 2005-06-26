@@ -175,7 +175,7 @@ void Projector::set_modelview_matrices(	const Mat4d& _mat_earth_equ_to_eye,
 
 	inv_mat_earth_equ_to_eye = (mat_projection*mat_earth_equ_to_eye).inverse();
 	inv_mat_helio_to_eye = (mat_projection*mat_helio_to_eye).inverse();
-	inv_mat_local_to_eye = (mat_projection*mat_local_to_eye).inverse();
+	inv_mat_local_to_eye = (mat_projection*mat_local_to_eye).inverse();	
 }
 
 // Update auto_zoom if activated
@@ -229,18 +229,6 @@ void Projector::zoom_to(double aim_fov, float move_duration)
     zoom_move.speed=1.f/(move_duration*1000);
     zoom_move.coef=0.;
     flag_auto_zoom = true;
-}
-
-
-bool Projector::project_custom(const Vec3d& v, Vec3d& win, const Mat4d& mat) const
-{
-    gluProject(v[0],v[1],v[2],mat,mat_projection,vec_viewport,&win[0],&win[1],&win[2]);
-	return (win[2]<1.);
-}
-
-void Projector::unproject_custom(double x ,double y, Vec3d& v, const Mat4d& mat) const
-{
-	gluUnProject(x,y,1.,mat,mat_projection,vec_viewport,&v[0],&v[1],&v[2]);
 }
 
 // Set the drawing mode in 2D for drawing in the full screen

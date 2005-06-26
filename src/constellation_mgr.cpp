@@ -75,12 +75,15 @@ void Constellation_mgr::load_lines_and_art(const string & fileName, const string
 	Constellation *cons = NULL;
 
 	string record;
-	while(!std::getline(inf, record).eof()) {
+	while(!std::getline(inf, record).eof())
+	{
 		cons = new Constellation;
 		assert(cons);
-		if(cons->read(record, hipStarMgr)) {
+		if(cons->read(record, hipStarMgr))
+		{
 			asterisms.push_back(cons);
-		} else { 
+		} else
+		{ 
 			cout << "ERROR with constellation record: \"" << record << "\"" << endl;
 			delete cons;
 		}
