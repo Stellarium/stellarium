@@ -23,17 +23,16 @@
 #include "stellastro.h"
 
 stel_core::stel_core(const string& DDIR, const string& TDIR, const string& CDIR, const string& DATA_ROOT) : 
-	screen_W(800), screen_H(600), bppMode(16), Fullscreen(0),
 	projection(NULL), selected_object(NULL), hip_stars(NULL),
-	nebulas(NULL), ssystem(NULL), milky_way(NULL), FlagHelp(false), 
-	FlagInfos(false), FlagConfig(false), FlagShowTuiMenu(0), 
+	nebulas(NULL), ssystem(NULL), milky_way(NULL), screen_W(800), screen_H(600), bppMode(16), Fullscreen(0),
+	FlagHelp(false), FlagInfos(false), FlagConfig(false), FlagShowTuiMenu(0), 
 	frame(0), timefr(0), timeBase(0), maxfps(10000.f), deltaFov(0.), deltaAlt(0.), deltaAz(0.),
 	move_speed(0.001), FlagTimePause(0), is_mouse_moving_horiz(false), is_mouse_moving_vert(false)
 {
 	TextureDir = TDIR;
 	ConfigDir = CDIR;
 	DataDir = DDIR;
-	DataRoot = DATA_ROOT; // TODO - should be useless
+	DataRoot = DATA_ROOT;
 	
 	ProjectorType = PERSPECTIVE_PROJECTOR;
 	SelectedScript = SelectedScriptDirectory = "";
@@ -132,16 +131,18 @@ void stel_core::init(void)
 	skyloc = new Sky_localizer(DataDir);
 
 	// Load hipparcos stars & names
+	LoadingBar lb(projection, DataDir + "spacefont.txt", screen_W/2-150, screen_H/2-20);
 	hip_stars->init(
 		DataDir + "spacefont.txt",
 		DataDir + "hipparcos.fab",
 		DataDir + "star_names." + SkyLocale + ".fab",
-		DataDir + "name.fab");
+		DataDir + "name.fab",
+		lb);
 	
 	// Init nebulas
 	nebulas->set_font_color(NebulaLabelColor);
 	nebulas->set_circle_color(NebulaCircleColor);
-	nebulas->read(DataDir + "spacefont.txt", DataDir + "messier.fab", screen_W/2-150, screen_H/2-20);
+	nebulas->read(DataDir + "spacefont.txt", DataDir + "messier.fab", screen_W/2-150, screen_H/2-20, lb);
 		
 	// Init the solar system
 	ssystem->load(DataDir + "ssystem.ini");
@@ -196,7 +197,6 @@ void stel_core::init(void)
 	navigation->update_model_view_mat();
 	
 	// Load constellations
-	LoadingBar lb(projection, DataDir + "spacefont.txt", screen_W/2-150, screen_H/2-20);
 	string tmpstring=SkyCulture; SkyCulture=""; // Temporary trick
 	set_sky_culture(tmpstring);
 	asterisms->set_font(DataDir + "spacefont.txt");
@@ -440,7 +440,6 @@ void stel_core::set_config_files(const string& _config_file)
 
 void stel_core::set_landscape(const string& new_landscape_name)
 {
-    //	if (new_landscape_name.empty() || new_landscape_name==observatory->get_landscape_name()) return;
     if (new_landscape_name.empty()) return;
     if (landscape) delete landscape;
     landscape = NULL;
@@ -910,7 +909,7 @@ int stel_core::handle_keys(Uint16 key, s_gui::S_GUI_VALUE state)
    		if (key==SDLK_PAGEDOWN) zoom_out(1);
 	}
 	else
-	{
+	{	
 	    // When a deplacement key is released stop mooving
    		if (key==SDLK_LEFT) turn_left(0);
 		if (key==SDLK_RIGHT) turn_right(0);

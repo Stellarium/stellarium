@@ -46,7 +46,7 @@ Nebula_mgr::~Nebula_mgr()
 }
 
 // read from stream
-int Nebula_mgr::read(const string& font_fileName, const string& fileName, int barx, int bary)
+int Nebula_mgr::read(const string& font_fileName, const string& fileName, int barx, int bary, LoadingBar& lb)
 {
 	printf(_("Loading nebulas data "));
 	
@@ -69,8 +69,15 @@ int Nebula_mgr::read(const string& font_fileName, const string& fileName, int ba
 	
 	printf(_("(%d deep space objects)...\n"), total);
 	
+	int current = 0;
+	char tmpstr[512];
 	while(!std::getline(inf, record).eof())
 	{
+		// Draw loading bar
+		snprintf(tmpstr, 512, _("Loading Nebula Data: %d/%d"), current, total);
+		lb.SetMessage(tmpstr);
+		lb.Draw((float)current/total);
+		
 		Nebula * e = new Nebula;
 		int temp = e->read(record);
 		if (!temp) // reading error
@@ -83,6 +90,8 @@ int Nebula_mgr::read(const string& font_fileName, const string& fileName, int ba
 		{
 			neb_array.push_back(e);
 		}
+		
+		++current;
 	}
 	
 	if (!Nebula::nebula_font) Nebula::nebula_font = new s_font(12.,"spacefont", font_fileName); // load Font
