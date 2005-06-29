@@ -887,6 +887,35 @@ void StdBtWin::onHideBt(void)
 }
 
 
+StdTransBtWin::StdTransBtWin(const char * _title, int _time_out, s_texture* _header_tex, s_font * _winfont, int headerSize) :
+	StdBtWin(_title, _header_tex, _winfont, headerSize)
+{
+
+	set_timeout(_time_out);
+}
+
+void StdTransBtWin::update(int delta_time)
+{
+	if(timer_on) {
+		time_left -= delta_time;
+		if(time_left<=0) {
+			visible=0;
+			timer_on=0;
+		}
+	}
+
+	//	printf("Time left: %d (%d)\n", time_left, timer_on);
+}
+
+// new timeout value
+void StdTransBtWin::set_timeout(int _time_out) 
+{
+	if(_time_out==0) timer_on = 0;
+	else timer_on = 1;
+
+	time_left = _time_out;
+}
+
 ///////////////////////////////////// Tab //////////////////////////////////////
 // Everything to handle tabs
 ////////////////////////////////////////////////////////////////////////////////

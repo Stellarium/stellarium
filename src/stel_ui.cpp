@@ -139,6 +139,16 @@ void stel_ui::init(void)
 	info_select_ctr->addComponent(info_select_txtlbl);
 	desktop->addComponent(info_select_ctr);
 
+	// TEST message window
+	message_txtlbl = new TextLabel("", spaceFont);
+	message_txtlbl->adjustSize();
+	message_txtlbl->setPos(10,10);
+	message_win = new StdTransBtWin(_("Message"), 5000);
+	message_win->reshape(300,200,400,100);
+	message_win->addComponent(message_txtlbl);
+    message_win->setVisible(0);
+	desktop->addComponent(message_win);
+
 	desktop->addComponent(createTopBar());
 	desktop->addComponent(createFlagButtons());
 	desktop->addComponent(createTimeControlButtons());
@@ -147,6 +157,23 @@ void stel_ui::init(void)
 	desktop->addComponent(createLicenceWindow());
 	desktop->addComponent(createHelpWindow());
 	desktop->addComponent(createConfigWindow());
+
+}
+
+
+////////////////////////////////////////////////////////////////////////////////
+void stel_ui::show_message(string _message, int _time_out)
+{
+	// draws a message window to display a message to user
+	// if timeout is zero, won't time out
+	// otherwise use miliseconds
+
+	// TODO figure out how to size better for varying message lengths
+
+	message_txtlbl->setLabel(_message);
+	message_txtlbl->adjustSize();
+	message_win->set_timeout(_time_out);
+	message_win->setVisible(1);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -720,9 +747,20 @@ int stel_ui::handle_keys(Uint16 key, S_GUI_VALUE state)
 
 
 			if(key==0x0012) {  // ctrl-r
-				if(core->scripts->is_recording()) core->commander->execute_command( "script action cancelrecord");
-				else core->commander->execute_command( "script action record");  
-				// TODO - need filename
+				if(core->scripts->is_recording()) {
+					core->commander->execute_command( "script action cancelrecord");
+					show_message(_("Command recording stopped."), 3000);
+				} else {
+					core->commander->execute_command( "script action record");  
+					
+					if(core->scripts->is_recording()) {
+						show_message(string( _("Recording commands to script file:\n") 
+											 + core->scripts->get_record_filename() + "\n\n"
+											 + _("Hit CTRL-R again to stop.\n")), 4000);
+					} else {
+						show_message(_("Error: Unable to open script file to record commands."), 3000);
+					}
+				}
 			}
 
 			if(key==SDLK_r) core->commander->execute_command( "flag constellation_art toggle");
@@ -837,9 +875,12 @@ int stel_ui::handle_keys(Uint16 key, S_GUI_VALUE state)
 
 
 // Update changing values
-void stel_ui::gui_update_widgets(void)
+void stel_ui::gui_update_widgets(int delta_time)
 {
 	updateTopBar();
+	
+	// update message win
+	message_win->update(delta_time);
 
 	// To prevent a minor bug
 	if (!core->FlagShowSelectedObjectInfo || !core->selected_object) info_select_ctr->setVisible(0);

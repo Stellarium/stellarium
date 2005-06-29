@@ -414,6 +414,19 @@ namespace s_gui
 		callback<void> onHideBtCallback;
 	};
 
+	// stdbtwin with transient (timeout) functionality
+	class StdTransBtWin : public StdBtWin
+	{
+	public:
+	    StdTransBtWin(const char * _title = NULL, int _time_out =0, s_texture* _header_tex = NULL,
+			s_font * _winfont = NULL, int headerSize = 18);
+		virtual void update(int _delta_time);
+		virtual void set_timeout(int _time_out=0);
+	protected:
+		int time_left;
+		bool timer_on;
+	};
+
 	class TabHeader : public LabeledButton
 	{
 	public:
