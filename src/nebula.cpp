@@ -33,7 +33,7 @@ bool Nebula::gravity_label = false;
 
 Nebula::Nebula() : NGC_nb(0), neb_tex(NULL), fontcolor(0.4,0.3,0.5), circlecolor(0.8,0.8,0.1)
 {
-	inc_lum = rand()/RAND_MAX*M_PI;
+	inc_lum = rand()/RAND_MAX*M_PI;	
 }
 
 Nebula::~Nebula()

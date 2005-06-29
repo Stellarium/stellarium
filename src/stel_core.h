@@ -61,6 +61,7 @@ friend class stel_ui;
 friend class StelCommandInterface;
 public:
 	// Inputs are the main data, textures, configuration directories relatively to the DATA_ROOT directory
+	// TODO : stel_core should not handle any directory
     stel_core(const string& DDIR, const string& TDIR, const string& CDIR, const string& DATA_ROOT);
     virtual ~stel_core();
 	
@@ -71,30 +72,11 @@ public:
 	// Execute all the drawing functions
 	void draw(int delta_time);
 
-	void load_config(void);
-	void save_config(void);
-	// Set the config file names.
-	void set_config_files(const string& _config_file);	
-	
-	// Increment/decrement smoothly the vision field and position
-	void update_move(int delta_time);
-
-	// Handle mouse clics
-	int handle_clic(Uint16 x, Uint16 y, Uint8 state, Uint8 button);
-	// Handle mouse move
-	int handle_move(int x, int y);
-	// Handle key press and release
-	int handle_keys(Uint16 key, s_gui::S_GUI_VALUE state);
-
+	// TODO : only viewport size is managed by the projection class
+	// Actual screen size should be managed by the stel_app class
 	int get_screen_W(void) const {return screen_W;}
 	int get_screen_H(void) const {return screen_H;}
-	int get_bppMode(void) const {return bppMode;}
-	int get_Fullscreen(void) const {return Fullscreen;}
-
-	const string& get_DataDir(void) const {return DataDir;}
-	
-	const float getMaxFPS(void) const {return maxfps;}
-
+		
 	// find and select the "nearest" object and retrieve his informations
 	stel_object * find_stel_object(int x, int y) const;
 	stel_object * find_stel_object(const Vec3d& pos) const;
@@ -102,18 +84,12 @@ public:
 	// Find and select in a "clever" way an object
 	stel_object * clever_find(const Vec3d& pos) const;
 	stel_object * clever_find(int x, int y) const;
-
-	int get_mouse_zoom(void) const {return MouseZoom;}
-
-
+	
 	// ---------------------------------------------------------------
 	// Interfaces for external controls (gui, tui or script facility)
 	// Only the function listed here should be called by them
 	// ---------------------------------------------------------------
-
-	// TODO move to stel_command_interface or get rid of this method
-	void set_param(string& key, float value);
-		
+	
 	//! Zoom to the given FOV
 	void zoom_to(double aim_fov, float move_duration = 1.) {projection->zoom_to(aim_fov, move_duration);}
 	
@@ -142,10 +118,7 @@ public:
 	//! Set/Get JDay
 	void set_JDay(double JD) {navigation->set_JDay(JD);}
 	double get_JDay(void) const {return navigation->get_JDay();}
-	
-	//! Quit the application
-	void quit(void);
-
+		
 	//! Set/Get display flag of constellation lines
 	void constellation_set_flag_lines(bool b) {asterisms->set_flag_lines(b);}
 	bool constellation_get_flag_lines(void) {return asterisms->get_flag_lines();}
@@ -157,9 +130,75 @@ public:
 	//! Set/Get display flag of constellation names
 	void constellation_set_flag_names(bool b) {asterisms->set_flag_names(b);}
 	bool constellation_get_flag_names(void) {return asterisms->get_flag_names();}
+		
+	///////////////////////////////////////////////////////////////////////////////
+	// Below this limit, all the function will end up in the stel_app class
+	///////////////////////////////////////////////////////////////////////////////
+	
+	void load_config(void);
+	void save_config(void);
+	// Set the config file names.
+	void set_config_files(const string& _config_file);	
+	
+	// Increment/decrement smoothly the vision field and position
+	void update_move(int delta_time);
+
+	// Handle mouse clics
+	int handle_clic(Uint16 x, Uint16 y, Uint8 state, Uint8 button);
+	// Handle mouse move
+	int handle_move(int x, int y);
+	// Handle key press and release
+	int handle_keys(Uint16 key, s_gui::S_GUI_VALUE state);
+
+	int get_bppMode(void) const {return bppMode;}
+	int get_Fullscreen(void) const {return Fullscreen;}
+
+	const string& get_DataDir(void) const {return DataDir;}
+	
+	const float getMaxFPS(void) const {return maxfps;}
+
+	int get_mouse_zoom(void) const {return MouseZoom;}
+
+	// TODO move to stel_command_interface or get rid of this method
+	void set_param(string& key, float value);
+	
+	//! Quit the application
+	void quit(void);
 
 private:
 
+	// Main elements of the program
+	navigator * navigation;				// Manage all navigation parameters, coordinate transformations etc..
+	Observator * observatory;			// Manage observer position and locales for its country
+	Projector * projection;				// Manage the projection mode and matrix
+	stel_object * selected_object;		// The selected object in stellarium
+	Hip_Star_mgr * hip_stars;			// Manage the hipparcos stars
+	Constellation_mgr * asterisms;		// Manage constellations (boundaries, names etc..)
+	Nebula_mgr * nebulas;				// Manage the nebulas
+	SolarSystem* ssystem;				// Manage the solar system
+	stel_atmosphere * atmosphere;		// Atmosphere
+	SkyGrid * equ_grid;					// Equatorial grid
+	SkyGrid * azi_grid;					// Azimutal grid
+	SkyLine * equator_line;				// Celestial Equator line
+	SkyLine * ecliptic_line;			// Eclptic line
+	Cardinals * cardinals_points;		// Cardinals points
+	MilkyWay * milky_way;				// Our galaxy
+	Meteor_mgr * meteors;				// Manage meteor showers
+	Landscape * landscape;				// The landscape ie the fog, the ground and "decor"
+	tone_reproductor * tone_converter;	// Tones conversion between stellarium world and display device
+
+	planet* selected_planet;
+
+	// Projector
+	PROJECTOR_TYPE ProjectorType;
+	VIEWPORT_TYPE ViewportType;
+	int DistortionFunction;
+	
+		
+	///////////////////////////////////////////////////////////////////////////////
+	// Below this limit, all the attributes will end up in the stel_app class
+	///////////////////////////////////////////////////////////////////////////////
+	
 	void load_config_from(const string& confFile);
 	void save_config_to(const string& confFile);
 
@@ -179,37 +218,13 @@ private:
 
 	string config_file;
 
-	// Main elements of the program
+	// Main elements of the stel_app
 	StelCommandInterface * commander;       // interface to perform all UI and scripting actions
 	ScriptMgr * scripts;                    // manage playing and recording scripts
-	navigator * navigation;			// Manage all navigation parameters, coordinate transformations etc..
-	Observator * observatory;		// Manage observer position and locales for its country
-	Projector * projection;			// Manage the projection mode and matrix
-	stel_object * selected_object;		// The selected object in stellarium
-	Hip_Star_mgr * hip_stars;		// Manage the hipparcos stars
-	Constellation_mgr * asterisms;		// Manage constellations (boundaries, names etc..)
-	Nebula_mgr * nebulas;			// Manage the nebulas
-	SolarSystem* ssystem;			// Manage the solar system
-	stel_atmosphere * atmosphere;		// Atmosphere
-	SkyGrid * equ_grid;			// Equatorial grid
-	SkyGrid * azi_grid;			// Azimutal grid
-	SkyLine * equator_line;			// Celestial Equator line
-	SkyLine * ecliptic_line;		// Eclptic line
-	Cardinals * cardinals_points;		// Cardinals points
-	MilkyWay * milky_way;			// Our galaxy
-	Meteor_mgr * meteors;
-	Landscape * landscape;			// The landscape ie the fog, the ground and "decor"
-	tone_reproductor * tone_converter;	// Tones conversion between stellarium world and display device
-	stel_ui * ui;				// The main User Interface
+	stel_ui * ui;							// The main User Interface
 	ImageMgr * script_images;               // for script loaded image display
-
-	planet* selected_planet;
-
-	// Projector
-	PROJECTOR_TYPE ProjectorType;
-	VIEWPORT_TYPE ViewportType;
-	int DistortionFunction;
-
+	Sky_localizer *skyloc;					// for sky cultures and locales
+	
 	// localization
 	string SkyCulture;  // the culture used for constellations
 	string SkyLocale;   // the locale (usually will just be language code) used for object labels
@@ -222,6 +237,11 @@ private:
 	string SelectedScriptDirectory;  // script directory for same
 	bool ScriptRemoveableDiskMounted;  // is disk for scripts mounted?
 
+	///////////////////////////////////////////////////////////////////////////////
+	// Below this limit, all the attributes will be removed from the program and 
+	// handled by the sub classes themselve
+	///////////////////////////////////////////////////////////////////////////////
+		
 	// Stars
 	int FlagStarName;
 	int FlagStarSciName;
@@ -345,8 +365,6 @@ private:
 	// Flags for mouse movements
 	bool is_mouse_moving_horiz;
 	bool is_mouse_moving_vert;
-	
-	Sky_localizer *skyloc;  // for sky cultures and locales
 };
 
 #endif // _STEL_CORE_H_
