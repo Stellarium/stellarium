@@ -23,6 +23,7 @@
 #include <vector>
 #include "nebula.h"
 #include "s_font.h"
+#include "loadingbar.h"
 
 using namespace std;
 
@@ -33,7 +34,7 @@ class Nebula_mgr
   virtual ~Nebula_mgr();
 
   // Read the Nebulas data from a file
-  int read(const string& font_fileName, const string& fileName, int barx, int bary);
+  int read(const string& font_fileName, const string& fileName, int barx, int bary, LoadingBar& lb);
   
   // Draw all the Nebulas
   void draw(int hints_ON, Projector* prj, const navigator * nav, tone_reproductor* eye,

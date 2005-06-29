@@ -56,9 +56,9 @@ Hip_Star_mgr::~Hip_Star_mgr()
 }
 
 void Hip_Star_mgr::init(const string& font_fileName, const string& hipCatFile,
-	const string& commonNameFile, const string& sciNameFile)
+	const string& commonNameFile, const string& sciNameFile, LoadingBar& lb)
 {
-	load_data(hipCatFile);
+	load_data(hipCatFile, lb);
     load_common_names(commonNameFile);
 	load_sci_names(sciNameFile);
 	
@@ -72,8 +72,10 @@ void Hip_Star_mgr::init(const string& font_fileName, const string& hipCatFile,
 }
 
 // Load from file ( create the stream and call the Read function )
-void Hip_Star_mgr::load_data(const string& hipCatFile)
+void Hip_Star_mgr::load_data(const string& hipCatFile, LoadingBar& lb)
 {
+	char tmpstr[512];
+	
     printf(_("Loading Hipparcos star data\n"));
     FILE * hipFile;
     hipFile = NULL;
@@ -106,6 +108,14 @@ void Hip_Star_mgr::load_data(const string& hipCatFile)
     Hip_Star * e = NULL;
     for(int i=0;i<StarArraySize;i++)
     {
+		if (!(i%2000))
+		{
+			// Draw loading bar
+			snprintf(tmpstr, 512, _("Loading Hipparcos catalog: %d/%d"), i, StarArraySize);
+			lb.SetMessage(tmpstr);
+			lb.Draw((float)i/StarArraySize);
+		}
+		
 		e = &(StarArray[i]);
 		e->HP=(unsigned int)i;
         if (!e->read(hipFile))
@@ -115,7 +125,6 @@ void Hip_Star_mgr::load_data(const string& hipCatFile)
         }
         starZones[HipGrid.GetNearest(e->XYZ)].push_back(e);
 		StarFlatArray[e->HP]=e;
-		
     }
     fclose(hipFile);
 
