@@ -52,6 +52,8 @@ class ScriptMgr
   void update(int delta_time);  // execute commands in running script
   string get_script_list(string directory);  // get list of scripts in a directory
   string get_script_path();
+  string get_record_filename() { return rec_filename; }  // file record is writing to
+
 
  private:
 
@@ -64,6 +66,7 @@ class ScriptMgr
   bool playing;    // is a script playing?  (could be paused)
   bool play_paused;// is script playback paused?
   fstream rec_file;
+  string rec_filename;
 };
 
 
