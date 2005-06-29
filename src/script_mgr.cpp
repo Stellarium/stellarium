@@ -140,8 +140,10 @@ void ScriptMgr::record_script(string script_filename) {
 		recording = 1;
 		record_elapsed_time = 0;
 		cout << _("Now recording actions to file: ") << script_filename << endl;
+		rec_filename = script_filename;
 	} else {
 		cout << _("Error opening script file for writing: ") << script_filename << endl;
+		rec_filename = "";
 	} 
 }
 

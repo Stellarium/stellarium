@@ -44,7 +44,7 @@ public:
     virtual ~stel_ui();		// Delete the ui
 	void init(void);		// Initialize the ui.
 	void draw(void);		// Display the ui
-	void gui_update_widgets(void);		// Update changing values
+	void gui_update_widgets(int delta_time);		// Update changing values
 
 	void draw_gravity_ui(void);	// Draw simple gravity text ui.
 
@@ -61,6 +61,7 @@ public:
 	int handle_keys_tui(Uint16 key, s_tui::S_TUI_VALUE state);
 	// Update all the tui widgets with values taken from the core parameters
 	void tui_update_widgets(void);
+	void show_message(string _message, int _time_out=0);
 
 private:
 	stel_core * core;		// The main core can be accessed because stel_ui is a friend class
@@ -137,6 +138,10 @@ private:
 	TextLabel * help_txtlbl;
 	Component* createHelpWindow(void);
 	void help_win_hideBtCallback(void);
+
+	// window for transient messages
+	StdTransBtWin * message_win;
+	TextLabel * message_txtlbl;
 
 	// The window managing the configuration
 	StdBtWin* config_win;

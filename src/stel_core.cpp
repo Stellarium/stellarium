@@ -307,7 +307,7 @@ void stel_core::update(int delta_time)
 
 	landscape->set_sky_brightness(sky_brightness);
 
-	ui->gui_update_widgets();
+	ui->gui_update_widgets(delta_time);
 
 	//	if (FlagShowGravityUi || FlagShowTuiMenu) ui->tui_update_widgets();
 	if (FlagShowTuiMenu) ui->tui_update_widgets();  // only update if in menu
