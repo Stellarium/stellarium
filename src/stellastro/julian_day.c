@@ -70,7 +70,7 @@ void get_tm_from_julian(double JD, struct tm * tm_time)
 {
 	ln_date date;
 	get_date(JD, &date);
-	tm_time->tm_sec = date.seconds;
+	tm_time->tm_sec = (int)date.seconds;
 	tm_time->tm_min = date.minutes;
 	tm_time->tm_hour = date.hours;
 	tm_time->tm_mday = date.days;
@@ -163,7 +163,7 @@ time_t get_time_t_from_julian(double JD)
 
 	get_date(JD, &date);
 
-	loctime.tm_sec = date.seconds;
+	loctime.tm_sec = (int)date.seconds;
 	loctime.tm_min = date.minutes;
 	loctime.tm_hour = date.hours;
 	loctime.tm_mday =date.days;
