@@ -481,8 +481,8 @@ void stel_ui::tui_cb_admin_set_locale() {
 	// Right now just set for the current session
 
 #ifndef MACOSX
-	string tmp = tui_admin_setlocale->getCurrent();
-	setenv("LC_ALL", tmp.c_str(), 1);
+	string tmp = "LC_ALL=" + tui_admin_setlocale->getCurrent();
+	putenv(tmp.c_str());
 
 	setlocale (LC_CTYPE, "");
 	setlocale (LC_MESSAGES, "");
@@ -490,7 +490,8 @@ void stel_ui::tui_cb_admin_set_locale() {
 	textdomain (PACKAGE);
 
 	// Now need to update all UI components with new translations!
-	core->UILocale = tmp.c_str();
+	
+	core->UILocale = tui_admin_setlocale->getCurrent().c_str();
 	LocaleChanged = 1;  // will reload TUI next draw.  Note that position in TUI is lost...
 #endif
 

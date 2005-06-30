@@ -19,6 +19,7 @@
 
 #include <string>
 #include <ctime>
+#include <stdlib.h>
 #include <clocale>
 #include "stellarium.h"
 #include "stel_utility.h"
@@ -227,15 +228,18 @@ float Observator::get_GMT_shift_from_system(double JD, bool _local) const
 time_t my_timegm (struct tm *tm) {
 	time_t ret;
 	char *tz;
-	
+	char tmpstr[255];
 	tz = getenv("TZ");
-	setenv("TZ", "", 1);
+	putenv("TZ=");
 	tzset();
 	ret = mktime(tm);
 	if (tz)
-		setenv("TZ", tz, 1);
-	else
-		unsetenv("TZ");
+	{
+ snprintf(tmpstr, 255, "TZ=%s", tz);
+		putenv(tmpstr);
+   }
+    else
+		putenv("");
 	tzset();
 	return ret;
 }
