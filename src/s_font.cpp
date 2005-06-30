@@ -71,8 +71,8 @@ int s_font::buildDisplayLists(const string& dataFileName, const string& textureN
 
     // initialize character size data and set up unrecognized character glyph
     for(int i=0; i<256; i++) {
-      theSize[i].sizeX=size;
-      theSize[i].sizeY=size;
+      theSize[i].sizeX=(int)size;
+      theSize[i].sizeY=(int)size;
       theSize[i].leftSpacing=0;
       theSize[i].rightSpacing=0;
 

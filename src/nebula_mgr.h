@@ -40,7 +40,7 @@ class Nebula_mgr
   void draw(int hints_ON, Projector* prj, const navigator * nav, tone_reproductor* eye,
 	    bool _gravity_label, float max_mag_name, bool bright_nebulae);
   
-  stel_object * search(string name);  // search by name
+  stel_object * search(const string& name);  // search by name
   stel_object * search(Vec3f Pos);    // Search the Nebulae by position
   
   void set_font_color(const Vec3f& c) {fontColor = c;}
