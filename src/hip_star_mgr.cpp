@@ -76,7 +76,7 @@ void Hip_Star_mgr::load_data(const string& hipCatFile, LoadingBar& lb)
 {
 	char tmpstr[512];
 	
-    printf(_("Loading Hipparcos star data\n"));
+    printf(_("Loading Hipparcos star data "));
     FILE * hipFile;
     hipFile = NULL;
 
@@ -128,7 +128,7 @@ void Hip_Star_mgr::load_data(const string& hipCatFile, LoadingBar& lb)
     }
     fclose(hipFile);
 
-	printf("%d stars loaded.\n", StarArraySize-data_drop);
+	printf("(%d stars loaded).\n", StarArraySize-data_drop);
 
     // sort stars by magnitude for faster rendering
     for(int i=0;i < HipGrid.getNbPoints();i++) {
