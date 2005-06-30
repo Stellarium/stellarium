@@ -4,7 +4,7 @@
    @file	dictionary.c
    @author	N. Devillard
    @date	Aug 2000
-   @version	$Revision: 247 $
+   @version	$Revision: 744 $
    @brief	Implements a dictionary for string variables.
 
    This module implements a simple dictionary object, i.e. a list
@@ -14,10 +14,10 @@
 /*--------------------------------------------------------------------------*/
 
 /*
-	$Id: dictionary.c 247 2003-08-02 22:58:01Z xalioth $
+	$Id: dictionary.c 744 2005-06-30 16:04:58Z xalioth $
 	$Author: xalioth $
-	$Date: 2003-08-02 23:58:01 +0100 (Sat, 02 Aug 2003) $
-	$Revision: 247 $
+	$Date: 2005-06-30 17:04:58 +0100 (Thu, 30 Jun 2005) $
+	$Revision: 744 $
 */
 
 /*---------------------------------------------------------------------------
@@ -114,11 +114,11 @@ dictionary * dictionary_new(int size)
 	/* If no size was specified, allocate space for DICTMINSZ */
 	if (size<DICTMINSZ) size=DICTMINSZ ;
 
-	d = calloc(1, sizeof(dictionary));
+	d = (dictionary*)calloc(1, sizeof(dictionary));
 	d->size = size ;
-	d->val  = calloc(size, sizeof(char*));
-	d->key  = calloc(size, sizeof(char*));
-	d->hash = calloc(size, sizeof(unsigned));
+	d->val  = (char**)calloc(size, sizeof(char*));
+	d->key  = (char**)calloc(size, sizeof(char*));
+	d->hash = (unsigned*) calloc(size, sizeof(unsigned));
 	return d ;
 }
 
@@ -316,9 +316,9 @@ void dictionary_set(dictionary * d, const char * key, const char * val)
 	if (d->n==d->size) {
 
 		/* Reached maximum size: reallocate blackboard */
-		d->val  = mem_double(d->val,  d->size * sizeof(char*)) ;
-		d->key  = mem_double(d->key,  d->size * sizeof(char*)) ;
-		d->hash = mem_double(d->hash, d->size * sizeof(unsigned)) ;
+		d->val  = (char**)mem_double(d->val,  d->size * sizeof(char*)) ;
+		d->key  = (char**)mem_double(d->key,  d->size * sizeof(char*)) ;
+		d->hash = (unsigned*)mem_double(d->hash, d->size * sizeof(unsigned)) ;
 
 		/* Double size */
 		d->size *= 2 ;
