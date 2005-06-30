@@ -74,6 +74,7 @@ int Nebula_mgr::read(const string& font_fileName, const string& fileName, int ba
 	while(!std::getline(inf, record).eof())
 	{
 		// Draw loading bar
+		++current;
 		snprintf(tmpstr, 512, _("Loading Nebula Data: %d/%d"), current, total);
 		lb.SetMessage(tmpstr);
 		lb.Draw((float)current/total);
@@ -90,8 +91,6 @@ int Nebula_mgr::read(const string& font_fileName, const string& fileName, int ba
 		{
 			neb_array.push_back(e);
 		}
-		
-		++current;
 	}
 	
 	if (!Nebula::nebula_font) Nebula::nebula_font = new s_font(12.,"spacefont", font_fileName); // load Font
@@ -136,7 +135,7 @@ void Nebula_mgr::draw(int names_ON, Projector* prj, const navigator * nav, tone_
 }
 
 // search by name
-stel_object * Nebula_mgr::search(string name)
+stel_object * Nebula_mgr::search(const string& name)
 {
     vector<Nebula *>::iterator iter;
 
