@@ -481,8 +481,8 @@ void stel_ui::tui_cb_admin_set_locale() {
 	// Right now just set for the current session
 
 #ifndef MACOSX
-	string tmp = "LC_ALL=" + tui_admin_setlocale->getCurrent();
-	putenv(tmp.c_str());
+	string tmp = string("LC_ALL=" + tui_admin_setlocale->getCurrent());
+	putenv((char *)tmp.c_str());
 
 	setlocale (LC_CTYPE, "");
 	setlocale (LC_MESSAGES, "");
