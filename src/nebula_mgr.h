@@ -1,6 +1,6 @@
 /*
  * Stellarium
- * Copyright (C) 2002 Fabien Chéreau
+ * Copyright (C) 2002 Fabien Chereau
  * 
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -29,31 +29,31 @@ using namespace std;
 
 class Nebula_mgr  
 {
- public:
-  Nebula_mgr();
-  virtual ~Nebula_mgr();
+public:
+	Nebula_mgr();
+	virtual ~Nebula_mgr();
+	
+	// Read the Nebulas data from a file
+	int read(const string& font_fileName, const string& fileName, int barx, int bary, LoadingBar& lb);
+	
+	// Draw all the Nebulas
+	void draw(int hints_ON, Projector* prj, const navigator * nav, tone_reproductor* eye,
+		bool _gravity_label, float max_mag_name, bool bright_nebulae);
+	
+	stel_object * search(const string& name);  // search by name
+	stel_object * search(Vec3f Pos);    // Search the Nebulae by position
+	
+	void set_font_color(const Vec3f& c) {fontColor = c;}
+	void set_circle_color(const Vec3f& c) {circleColor = c;}
+	
+	// Return a stl vector containing the nebulas located inside the lim_fov circle around position v
+	vector<stel_object*> search_around(Vec3d v, double lim_fov);
 
-  // Read the Nebulas data from a file
-  int read(const string& font_fileName, const string& fileName, int barx, int bary, LoadingBar& lb);
-  
-  // Draw all the Nebulas
-  void draw(int hints_ON, Projector* prj, const navigator * nav, tone_reproductor* eye,
-	    bool _gravity_label, float max_mag_name, bool bright_nebulae);
-  
-  stel_object * search(const string& name);  // search by name
-  stel_object * search(Vec3f Pos);    // Search the Nebulae by position
-  
-  void set_font_color(const Vec3f& c) {fontColor = c;}
-  void set_circle_color(const Vec3f& c) {circleColor = c;}
-  
-  // Return a stl vector containing the nebulas located inside the lim_fov circle around position v
-  vector<stel_object*> search_around(Vec3d v, double lim_fov);
-  
- private:
-  FILE * nebula_fic;
-  vector<Nebula*> neb_array;	// The nebulas list
-  Vec3f fontColor;
-  Vec3f circleColor;
+private:
+	FILE * nebula_fic;
+	vector<Nebula*> neb_array;	// The nebulas list
+	Vec3f fontColor;
+	Vec3f circleColor;
 };
 
 #endif // _NEBULA_MGR_H_
