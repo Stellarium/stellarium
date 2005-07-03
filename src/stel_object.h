@@ -1,6 +1,6 @@
 /*
  * Stellarium
- * Copyright (C) 2002 Fabien Chéreau
+ * Copyright (C) 2002 Fabien Chereau
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -40,6 +40,7 @@ public:
 	virtual void update(void) {return;}
 	void draw_pointer(int delta_time, const Projector* prj, const navigator * nav);
 
+	//! Write information about the object in char* s 
 	virtual void get_info_string(char * s, const navigator * nav) const;
 	virtual void get_short_info_string(char * s, const navigator * nav) const;
 

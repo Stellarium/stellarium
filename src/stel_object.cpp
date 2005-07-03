@@ -1,6 +1,6 @@
 /*
  * Stellarium
- * Copyright (C) 2002 Fabien Chéreau
+ * Copyright (C) 2002 Fabien Chereau
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -115,7 +115,7 @@ void stel_object::draw_pointer(int delta_time, const Projector* prj, const navig
     prj->reset_perspective_projection();
 }
 
-
+//! Write information about the object in char* s 
 void stel_object::get_info_string(char * s, const navigator * nav) const
 {
 	sprintf(s,"No info for this object...");
