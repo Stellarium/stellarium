@@ -76,6 +76,10 @@ int Hip_Star::read(FILE * catalog)
 
 	fread(&xDE,4,1,catalog);
 	LE_TO_CPU_FLOAT(DE, xDE);
+
+	// for debug printing
+	//	float rao = RA;
+	//  float deo = DE;
      
     RA*=M_PI/12.;     // Convert from hours to rad
     DE*=M_PI/180.;    // Convert from deg to rad
@@ -136,12 +140,13 @@ int Hip_Star::read(FILE * catalog)
 	// Precomputation of a term used later
 	term1 = expf(-0.92103f*(Mag + 12.12331f)) * 108064.73f;
 
-	//	printf("%d\t%2.1f\t%f\t%f\n", HP, Mag, RA, DE);
-
 	if (mag==0 && type==0)
 	{
 		return 0;
 	}
+
+	//	printf("%d\t%d\t%.4f\t%.4f\t%c\n", HP, mag, rao, deo, SpType);
+
     return 1;
 
 }
