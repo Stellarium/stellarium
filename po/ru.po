@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium 0.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-06-25 02:05+0200\n"
+"POT-Creation-Date: 2005-07-10 10:24+0200\n"
 "PO-Revision-Date: 2004-12-22 00:25+0100\n"
 "Last-Translator:  <fazylova_genia@mail.ru>\n"
 "Language-Team: Russian <ru@li.org>\n"
@@ -98,13 +98,13 @@ msgid "W"
 msgstr ""
 
 #. Draw loading bar
-#: src/constellation_mgr.cpp:133
+#: src/constellation_mgr.cpp:136
 #, c-format
 msgid "Loading Constellation Art: %d/%d"
 msgstr ""
 
 #. Hip = Hipparcos, RA=Right Ascention, DE=Declinaison, Mag=Magnitude
-#: src/hip_star.cpp:53
+#: src/hip_star.cpp:54
 #, c-format
 msgid ""
 "Name :%s%s%s\n"
@@ -114,24 +114,24 @@ msgid ""
 "Mag : %.2f"
 msgstr ""
 
-#: src/hip_star.cpp:64 src/hip_star.cpp:65 src/nebula.cpp:65
+#: src/hip_star.cpp:65 src/hip_star.cpp:66 src/nebula.cpp:63
 #, c-format
 msgid "%s: mag %.1f"
 msgstr ""
 
-#: src/hip_star_mgr.cpp:77
+#: src/hip_star_mgr.cpp:79
 #, c-format
 msgid "Loading Hipparcos star data "
 msgstr ""
 
-#. 120417;
-#: src/hip_star_mgr.cpp:95
+#. Draw loading bar
+#: src/hip_star_mgr.cpp:114
 #, c-format
-msgid "(%d stars)...\n"
+msgid "Loading Hipparcos catalog: %d/%d"
 msgstr ""
 
 #. RA=Right ascention, DE=Declinaison, Mag=Magnitude
-#: src/nebula.cpp:52
+#: src/nebula.cpp:50
 #, c-format
 msgid ""
 "Name : %s (NGC %u)\n"
@@ -140,32 +140,32 @@ msgid ""
 "Mag : %.2f"
 msgstr ""
 
-#: src/nebula_mgr.cpp:54
+#: src/nebula_mgr.cpp:51
 #, c-format
-msgid "Loading nebulas data...\n"
+msgid "Loading nebulas data "
 msgstr ""
 
 #: src/nebula_mgr.cpp:70
 #, c-format
-msgid "%d deep space objects will be loaded\n"
+msgid "(%d deep space objects)...\n"
 msgstr ""
 
-#: src/nebula_mgr.cpp:106
+#: src/nebula_mgr.cpp:78
 #, c-format
-msgid "Done loading DSOs\n"
+msgid "Loading Nebula Data: %d/%d"
 msgstr ""
 
-#: src/observator.cpp:61
+#: src/observator.cpp:62
 #, c-format
 msgid "Loading location: \"%s\", "
 msgstr ""
 
-#: src/observator.cpp:68
+#: src/observator.cpp:69
 #, c-format
 msgid "(landscape is: \"%s\")\n"
 msgstr ""
 
-#: src/observator.cpp:98
+#: src/observator.cpp:106
 #, c-format
 msgid "Saving location %s to file %s\n"
 msgstr ""
@@ -185,119 +185,143 @@ msgstr ""
 msgid "%s%s: mag %.1f"
 msgstr ""
 
-#: src/stel_ui.cpp:396
-msgid "Drawing of the Constellations [C]"
-msgstr ""
-
-#: src/stel_ui.cpp:398
-msgid "Names of the Constellations [V]"
-msgstr ""
-
-#: src/stel_ui.cpp:400
-msgid "Constellations Art [R]"
-msgstr ""
-
-#: src/stel_ui.cpp:402
-msgid "Azimuthal Grid [Z]"
-msgstr ""
-
-#: src/stel_ui.cpp:404
-msgid "Equatorial Grid [E]"
-msgstr ""
-
-#: src/stel_ui.cpp:406
-msgid "Ground [G]"
-msgstr ""
-
-#: src/stel_ui.cpp:408
-msgid "Cardinal Points [Q]"
-msgstr ""
-
-#: src/stel_ui.cpp:410
-msgid "Atmosphere [A]"
-msgstr ""
-
-#: src/stel_ui.cpp:412
-msgid "Nebulas [N]"
-msgstr ""
-
-#: src/stel_ui.cpp:414
-msgid "Help [H]"
-msgstr ""
-
-#: src/stel_ui.cpp:416
-msgid "Equatorial/Altazimuthal Mount [ENTER]"
-msgstr ""
-
-#: src/stel_ui.cpp:418
-msgid "Configuration window"
-msgstr ""
-
-#: src/stel_ui.cpp:421
-msgid "Quit [CTRL + Q]"
+#: src/stel_ui.cpp:146
+msgid "Message"
 msgstr ""
 
 #: src/stel_ui.cpp:423
+msgid "Drawing of the Constellations [C]"
+msgstr ""
+
+#: src/stel_ui.cpp:425
+msgid "Names of the Constellations [V]"
+msgstr ""
+
+#: src/stel_ui.cpp:427
+msgid "Constellations Art [R]"
+msgstr ""
+
+#: src/stel_ui.cpp:429
+msgid "Azimuthal Grid [Z]"
+msgstr ""
+
+#: src/stel_ui.cpp:431
+msgid "Equatorial Grid [E]"
+msgstr ""
+
+#: src/stel_ui.cpp:433
+msgid "Ground [G]"
+msgstr ""
+
+#: src/stel_ui.cpp:435
+msgid "Cardinal Points [Q]"
+msgstr ""
+
+#: src/stel_ui.cpp:437
+msgid "Atmosphere [A]"
+msgstr ""
+
+#: src/stel_ui.cpp:439
+msgid "Nebulas [N]"
+msgstr ""
+
+#: src/stel_ui.cpp:441
+msgid "Help [H]"
+msgstr ""
+
+#: src/stel_ui.cpp:443
+msgid "Equatorial/Altazimuthal Mount [ENTER]"
+msgstr ""
+
+#: src/stel_ui.cpp:445
+msgid "Configuration window"
+msgstr ""
+
+#: src/stel_ui.cpp:448
+msgid "Quit [CTRL + Q]"
+msgstr ""
+
+#: src/stel_ui.cpp:450
 msgid "Quit [CMD + Q]"
 msgstr ""
 
-#: src/stel_ui.cpp:430
+#: src/stel_ui.cpp:457
 msgid "Decrease Time Speed [J]"
 msgstr ""
 
-#: src/stel_ui.cpp:432
+#: src/stel_ui.cpp:459
 msgid "Real Time Speed [K]"
 msgstr ""
 
-#: src/stel_ui.cpp:434
+#: src/stel_ui.cpp:461
 msgid "Increase Time Speed [L]"
 msgstr ""
 
-#: src/stel_ui.cpp:436
+#: src/stel_ui.cpp:463
 msgid "Return to Current Time"
 msgstr ""
 
-#: src/stel_ui.cpp:479
+#: src/stel_ui.cpp:506
 msgid ""
-"4 Directions     : Deplacement RA/DE\n"
+"Arrow Keys       : Change viewing RA/DE\n"
 "Page Up/Down     : Zoom\n"
 "CTRL+Up/Down     : Zoom\n"
-"Left Click       : Select Star\n"
-"Right Click      : Clear Pointer\n"
-"CTRL+Left Click  : Clear Pointer\n"
-"SPACE : Center On Selected Object\n"
-"ENTER : Equatorial/Altazimuthal mount\n"
-"CTRL + S : Take a Screenshot\n"
-"C   : Drawing of the Constellations\n"
-"V   : Names of the Constellations\n"
-"R   : Constellation Art\n"
-"E   : Equatorial Grid\n"
-"Z   : Azimuthal Grid\n"
-"N   : Nebulas\n"
-"P   : Planet Finder\n"
+"Left Click       : Select object\n"
+"Right Click      : Unselect\n"
+"CTRL+Left Click  : Unselect\n"
+"SPACE : Center on selected object\n"
+"ENTER : Equatorial/altazimuthal mount\n"
+"C   : Constellation lines\n"
+"V   : Constellation labels\n"
+"R   : Constellation art\n"
+"E   : Equatorial grid\n"
+"Z   : Azimuthal grid\n"
+"N   : Nebula labels\n"
+"P   : Planet labels\n"
 "G   : Ground\n"
 "F   : Fog\n"
-"Q   : Cardinal Points\n"
+"Q   : Cardinal points\n"
 "A   : Atmosphere\n"
 "H   : Help\n"
-"4   : Ecliptic Line\n"
-"5   : Equator Line\n"
-"T   : Object Tracking\n"
+"4   : Ecliptic line\n"
+"5   : Equator line\n"
+"T   : Object tracking\n"
 "S   : Stars\n"
+"8   : Set time to current time\n"
+"9   : Toggle meteor shower rates\n"
 "I   : About Stellarium\n"
+"M   : Text menu\n"
 "F1  : Toggle fullscreen if possible.\n"
+"CTRL + S : Take a screenshot\n"
+"CTRL + R : Toggle script recording\n"
 msgstr ""
 
-#: src/stel_ui.cpp:508
-msgid "CTRL+Q : Quit\n"
+#: src/stel_ui.cpp:540
+msgid "CTRL + Q : Quit\n"
 msgstr ""
 
-#: src/stel_ui.cpp:510
-msgid "CMD+Q : Quit\n"
+#: src/stel_ui.cpp:542
+msgid "CMD + Q  : Quit\n"
 msgstr ""
 
-#: src/stel_ui.cpp:517
+#: src/stel_ui.cpp:549
 msgid "Help"
+msgstr ""
+
+#: src/stel_ui.cpp:752
+msgid "Command recording stopped."
+msgstr ""
+
+#: src/stel_ui.cpp:757
+msgid "Recording commands to script file:\n"
+msgstr ""
+
+#: src/stel_ui.cpp:759
+msgid "Hit CTRL-R again to stop.\n"
+msgstr ""
+
+#: src/stel_ui.cpp:761
+msgid "Error: Unable to open script file to record commands."
 msgstr ""
 
 #: src/stel_ui_conf.cpp:27
@@ -459,15 +483,15 @@ msgstr ""
 msgid "Rendering"
 msgstr ""
 
-#: src/stel_ui_conf.cpp:392
+#: src/stel_ui_conf.cpp:395
 msgid "Saving rendering options in file "
 msgstr ""
 
-#: src/stel_ui_conf.cpp:435
+#: src/stel_ui_conf.cpp:438
 msgid "Saving video size "
 msgstr ""
 
-#: src/stel_ui_conf.cpp:435
+#: src/stel_ui_conf.cpp:438
 msgid " in file "
 msgstr ""
 
@@ -476,7 +500,7 @@ msgstr ""
 msgid "Loading Solar System data...\n"
 msgstr ""
 
-#: src/stel_core.cpp:459
+#: src/stel_core.cpp:461
 #, c-format
 msgid ""
 "The current config file is from a previous version (>=0.6.0).\n"
@@ -484,7 +508,7 @@ msgid ""
 msgstr ""
 
 #. The config file is too old to try an importation
-#: src/stel_core.cpp:478
+#: src/stel_core.cpp:480
 #, c-format
 msgid ""
 "The current config file is from a version too old for parameters to be "
@@ -492,11 +516,11 @@ msgid ""
 "It will be replaced by the default config file.\n"
 msgstr ""
 
-#: src/stel_core.cpp:501
+#: src/stel_core.cpp:503
 msgid "Loading configuration file "
 msgstr ""
 
-#: src/stel_core.cpp:509
+#: src/stel_core.cpp:511
 msgid "ERROR : The current config file is from a different version ("
 msgstr ""
 
@@ -582,11 +606,11 @@ msgstr ""
 msgid "Show: "
 msgstr ""
 
-#: src/stel_ui_tuiconf.cpp:157 src/stel_ui_tuiconf.cpp:178
+#: src/stel_ui_tuiconf.cpp:157 src/stel_ui_tuiconf.cpp:179
 msgid "Yes"
 msgstr ""
 
-#: src/stel_ui_tuiconf.cpp:157 src/stel_ui_tuiconf.cpp:178
+#: src/stel_ui_tuiconf.cpp:157 src/stel_ui_tuiconf.cpp:179
 msgid "No"
 msgstr ""
 
@@ -607,60 +631,60 @@ msgstr ""
 msgid "Landscape: "
 msgstr ""
 
-#: src/stel_ui_tuiconf.cpp:178
+#: src/stel_ui_tuiconf.cpp:179
 msgid "Manual zoom: "
 msgstr ""
 
-#: src/stel_ui_tuiconf.cpp:182
+#: src/stel_ui_tuiconf.cpp:183
 msgid "Object Sizing Rule: "
 msgstr ""
 
-#: src/stel_ui_tuiconf.cpp:182
+#: src/stel_ui_tuiconf.cpp:183
 msgid "Point"
 msgstr ""
 
-#: src/stel_ui_tuiconf.cpp:182
+#: src/stel_ui_tuiconf.cpp:183
 msgid "Magnitude"
 msgstr ""
 
-#: src/stel_ui_tuiconf.cpp:186
+#: src/stel_ui_tuiconf.cpp:187
 msgid "Magnitude Sizing Multiplier: "
 msgstr ""
 
-#: src/stel_ui_tuiconf.cpp:190
+#: src/stel_ui_tuiconf.cpp:191
 msgid "Milky Way intensity: "
 msgstr ""
 
-#: src/stel_ui_tuiconf.cpp:194
+#: src/stel_ui_tuiconf.cpp:195
 msgid "Zoom duration: "
 msgstr ""
 
 #. 6. Scripts
-#: src/stel_ui_tuiconf.cpp:200
+#: src/stel_ui_tuiconf.cpp:201
 msgid "Local Script: "
 msgstr ""
 
-#: src/stel_ui_tuiconf.cpp:206
+#: src/stel_ui_tuiconf.cpp:207
 msgid "CD/DVD Script: "
 msgstr ""
 
 #. 7. Administration
-#: src/stel_ui_tuiconf.cpp:214
+#: src/stel_ui_tuiconf.cpp:215
 msgid "Load Default Configuration: "
 msgstr ""
 
-#: src/stel_ui_tuiconf.cpp:216
+#: src/stel_ui_tuiconf.cpp:217
 msgid "Save Current Configuration as Default: "
 msgstr ""
 
-#: src/stel_ui_tuiconf.cpp:218
+#: src/stel_ui_tuiconf.cpp:219
 msgid "Update me via Internet: "
 msgstr ""
 
-#: src/stel_ui_tuiconf.cpp:232
+#: src/stel_ui_tuiconf.cpp:233
 msgid "N-S Centering Offset: "
 msgstr ""
 
-#: src/stel_ui_tuiconf.cpp:236
+#: src/stel_ui_tuiconf.cpp:237
 msgid "E-W Centering Offset: "
 msgstr ""
