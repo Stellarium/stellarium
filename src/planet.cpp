@@ -232,8 +232,15 @@ void planet::compute_trans_matrix(double date)
 	// re.ascendingNode is needed for correct Galilean moon positions viewed from Earth, for example
 	// However, most values grabbed from celestia are incorrect, at least for stellarium
 	// TODO: Figure out the discrepancy
-	mat_local_to_parent = Mat4d::translation(ecliptic_pos) * Mat4d::zrotation(re.ascendingNode)
-		* Mat4d::xrotation(-re.obliquity); 
+
+	// Special case - heliocentric coordinates are on ecliptic, not solar equator...
+	if(name=="Sun" ) {
+		mat_local_to_parent = Mat4d::translation(ecliptic_pos); 
+	} else {
+		mat_local_to_parent = Mat4d::translation(ecliptic_pos) * Mat4d::zrotation(re.ascendingNode)
+			* Mat4d::xrotation(-re.obliquity); 
+	}
+
 }
 
 
