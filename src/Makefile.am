@@ -43,7 +43,8 @@ script_mgr.h script_mgr.cpp script.h script.cpp \
 image_mgr.h image_mgr.cpp image.h image.cpp \
 audio.h audio.cpp \
 loadingbar.h        loadingbar.cpp \
-fader.h
+fader.h \
+gettext.h
 
 stellarium_LDADD = $(top_builddir)/src/glpng/libglpng.a \
 $(top_builddir)/src/stellplanet/libstellplanet.a \
