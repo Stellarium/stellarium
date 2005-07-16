@@ -21,49 +21,58 @@
 #include "script.h"
 
 
-Script::Script() {
-  input_file = NULL;
-  path = "";
+Script::Script()
+{
+	input_file = NULL;
+	path = "";
 }
 
-Script::~Script() {
-  if(input_file) delete input_file;  // closes automatically
+Script::~Script()
+{
+	if(input_file)
+		delete input_file;  // closes automatically
 }
 
-int Script::load(string script_file, string script_path) {
-  input_file = new ifstream(script_file.c_str());
+int Script::load(string script_file, string script_path)
+{
+	input_file = new ifstream(script_file.c_str());
 
-  if (! input_file->is_open()) {
-    cout << "Error opening script " << script_file << endl;
-    return 0;
-  }
-  path = script_path;
+	if (! input_file->is_open())
+	{
+		cout << "Error opening script " << script_file << endl;
+		return 0;
+	}
+	path = script_path;
 
-  // TODO check first line of file for script identifier... ?
+	// TODO check first line of file for script identifier... ?
 
-  return 1;
+	return 1;
 }
 
-int Script::next_command(string &command) {
+int Script::next_command(string &command)
+{
 
-  char buffer[1000];
-  
-  while (! input_file->eof() ) {
-    input_file->getline (buffer,999);
-    
-    if(input_file->eof()) return 0;
+	char buffer[1000];
 
-    if( buffer[0] != '#' && buffer[0] != '\n') {
+	while (! input_file->eof() )
+	{
+		input_file->getline (buffer,999);
 
-      //      printf("Buffer is: %s\n", buffer);
+		if(input_file->eof())
+			return 0;
+
+		if( buffer[0] != '#' && buffer[0] != '\n')
+		{
+
+			//      printf("Buffer is: %s\n", buffer);
 
 
-      command = string(buffer);
-      return 1;
-    }
-  }
+			command = string(buffer);
+			return 1;
+		}
+	}
 
-  return 0;
+	return 0;
 }
 
 
