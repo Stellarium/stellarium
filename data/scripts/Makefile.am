@@ -1,2 +1,2 @@
-pkgdata_DATA = *.sts
+pkgdata_DATA = $(wildcard *.sts)
 EXTRA_DIST = $(pkgdata_DATA)

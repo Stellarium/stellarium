@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004 Fabien Chéreau
+ * Copyright (C) 2004 Fabien Chï¿½eau
  * 
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -27,6 +27,9 @@
 # include "config.h"
 #endif
 
+#ifndef HAVE_POW10
+# define pow10(x) (float)pow(10.f,(x))
+#endif
 #ifndef HAVE_ACOSF
 # define acosf(x) (float)(acos(x))
 #endif

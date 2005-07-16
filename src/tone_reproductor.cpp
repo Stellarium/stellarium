@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003 Fabien Chéreau
+ * Copyright (C) 2003 Fabien Chï¿½eau
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -49,7 +49,7 @@ void tone_reproductor::set_display_adaptation_luminance(float _Lda)
 
 	// Update terms
 	alpha_wa_over_alpha_da = alpha_wa/alpha_da;
-	term2 = powf(10.f, (beta_wa-beta_da)/alpha_da) / (M_PI*0.0001f);
+	term2 = pow10((beta_wa-beta_da)/alpha_da) / (M_PI*0.0001f);
 }
 
 // Set the eye adaptation luminance for the world and precompute what can be
@@ -64,7 +64,7 @@ void tone_reproductor::set_world_adaptation_luminance(float _Lwa)
 
 	// Update terms
 	alpha_wa_over_alpha_da = alpha_wa/alpha_da;
-	term2 = powf(10.f, (beta_wa-beta_da)/alpha_da) / (M_PI*0.0001f);
+	term2 = pow10((beta_wa-beta_da)/alpha_da) / (M_PI*0.0001f);
 
 }
 
