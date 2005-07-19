@@ -131,7 +131,7 @@ void stel_core::init(void)
 	skyloc = new Sky_localizer(DataDir);
 
 	// Load hipparcos stars & names
-	LoadingBar lb(projection, DataDir + "spacefont.txt", screen_W/2-150, screen_H/2-20);
+	LoadingBar lb(projection, DataDir + "spacefont.txt", "logo24bits", screen_W, screen_H);
 	hip_stars->init(
 		DataDir + "spacefont.txt",
 		DataDir + "hipparcos.fab",
@@ -142,7 +142,7 @@ void stel_core::init(void)
 	// Init nebulas
 	nebulas->set_font_color(NebulaLabelColor);
 	nebulas->set_circle_color(NebulaCircleColor);
-	nebulas->read(DataDir + "spacefont.txt", DataDir + "messier.fab", screen_W/2-150, screen_H/2-20, lb);
+	nebulas->read(DataDir + "spacefont.txt", DataDir + "messier.fab", lb);
 		
 	// Init the solar system
 	ssystem->load(DataDir + "ssystem.ini");
@@ -1255,7 +1255,7 @@ void stel_core::set_sky_culture(string _culture_dir)
 	bool flagLines = asterisms->get_flag_lines();
 	bool flagNames = asterisms->get_flag_names();
 	
-	LoadingBar lb(projection, DataDir + "spacefont.txt", screen_W/2-150, screen_H/2-20);
+	LoadingBar lb(projection, DataDir + "spacefont.txt", "logo24bits", screen_W, screen_H);
 	//	printf(_("Loading constellations for sky culture: \"%s\"\n"), SkyCulture.c_str());
 	asterisms->load_lines_and_art(DataDir + "sky_cultures/" + SkyCulture + "/constellationship.fab",
 		DataDir + "sky_cultures/" + SkyCulture + "/constellationsart.fab", lb);

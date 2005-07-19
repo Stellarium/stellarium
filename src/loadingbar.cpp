@@ -1,6 +1,6 @@
 /*
  * Stellarium
- * Copyright (C) 2005 Fabien Chéreau
+ * Copyright (C) 2005 Fabien Chï¿½eau
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,16 +19,22 @@
 
 #include "loadingbar.h"
 
-LoadingBar::LoadingBar(Projector* _prj, string _font_filename, int _barx, int _bary) :
-	prj(_prj), barx(_barx), bary(_bary)
+LoadingBar::LoadingBar(Projector* _prj, const string& _font_filename, const string& splash_tex, int screenw, int screenh) :
+	prj(_prj), width(512), height(512), barwidth(400), barheight(10)
 {
+	splashx = (screenw - width)/2;
+	splashy = (screenh - height)/2;
+	barx = (screenw - barwidth)/2;
+	bary = splashy + 34;
 	barfont = new s_font(12., "spacefont", _font_filename);
+	if (!splash_tex.empty()) splash = new s_texture(splash_tex);
 	assert(barfont);
 }
 	
 LoadingBar::~LoadingBar()
 {
-	if (barfont) delete barfont;
+	delete barfont;
+	if (splash) delete splash;
 	barfont = NULL;
 }
 	
@@ -37,6 +43,26 @@ void LoadingBar::Draw(float val)
 	// percent complete bar only draws in 2d mode
 	prj->set_orthographic_projection();
   
+	// Draw the splash screen if available
+	if (splash)
+	{
+		glDisable(GL_BLEND);
+		glEnable(GL_TEXTURE_2D);
+		glColor3f(1, 1, 1);
+		glDisable(GL_CULL_FACE);
+		glBindTexture(GL_TEXTURE_2D, splash->getID());
+
+		glBegin(GL_QUADS);
+			glTexCoord2i(0, 0);		// Bottom Left
+			glVertex3f(splashx, splashy, 0.0f);
+			glTexCoord2i(1, 0);		// Bottom Right
+			glVertex3f(splashx + width, splashy, 0.0f);
+			glTexCoord2i(1, 1);		// Top Right
+			glVertex3f(splashx + width, splashy + height, 0.0f);
+			glTexCoord2i(0, 1);		// Top Left
+			glVertex3f(splashx, splashy + height, 0.0f);
+		glEnd();
+	}
 	glDisable(GL_BLEND);
 	glDisable(GL_TEXTURE_2D);
 
@@ -44,40 +70,40 @@ void LoadingBar::Draw(float val)
 	glColor3f(0, 0, 0);
 	glBegin(GL_TRIANGLE_STRIP);
 		glTexCoord2i(1, 0);		// Bottom Right
-		glVertex3f(barx + 302, bary + 36, 0.0f);
+		glVertex3f(barx + barwidth, bary, 0.0f);
 		glTexCoord2i(0, 0);		// Bottom Left
-		glVertex3f(barx - 2, bary + 36, 0.0f);
+		glVertex3f(barx, bary, 0.0f);
 		glTexCoord2i(1, 1);		// Top Right
-		glVertex3f(barx + 302, bary + 22, 0.0f);
+		glVertex3f(barx + barwidth, bary + 20, 0.0f);
 		glTexCoord2i(0, 1);		// Top Left
-		glVertex3f(barx - 2, bary + 22, 0.0f);
-	glEnd();
-	glColor3f(1, 1, 1);
-	glBegin(GL_TRIANGLE_STRIP);
-		glTexCoord2i(1, 0);		// Bottom Right
-		glVertex3f(barx + 302, bary + 22, 0.0f);
-		glTexCoord2i(0, 0);		// Bottom Left
-		glVertex3f(barx - 2, bary + 22, 0.0f);
-		glTexCoord2i(1, 1);		// Top Right
-		glVertex3f(barx + 302, bary - 2, 0.0f);
-		glTexCoord2i(0, 1);		// Top Left
-		glVertex3f(barx - 2, bary - 2, 0.0f);
-	glEnd();
-	glColor3f(0.0f, 0.0f, 1.0f);
-	glBegin(GL_TRIANGLE_STRIP);
-		glTexCoord2i(1, 0);		// Bottom Right
-		glVertex3f(barx + 300 * val, bary + 20, 0.0f);
-		glTexCoord2i(0, 0);		// Bottom Left
 		glVertex3f(barx, bary + 20, 0.0f);
+	glEnd();
+	glColor3f(0.8, 0.8, 1);
+	glBegin(GL_TRIANGLE_STRIP);
+		glTexCoord2i(1, 0);		// Bottom Right
+		glVertex3f(barx + barwidth, bary + barheight, 0.0f);
+		glTexCoord2i(0, 0);		// Bottom Left
+		glVertex3f(barx, bary + barheight, 0.0f);
 		glTexCoord2i(1, 1);		// Top Right
-		glVertex3f(barx + 300 * val, bary, 0.0f);
+		glVertex3f(barx + barwidth, bary, 0.0f);
 		glTexCoord2i(0, 1);		// Top Left
 		glVertex3f(barx, bary, 0.0f);
+	glEnd();
+	glColor3f(0.4f, 0.4f, 0.6f);
+	glBegin(GL_TRIANGLE_STRIP);
+		glTexCoord2i(1, 0);		// Bottom Right
+		glVertex3f(-1 + barx + barwidth * val, bary + barheight - 1, 0.0f);
+		glTexCoord2i(0, 0);		// Bottom Left
+		glVertex3f(1 + barx, bary + barheight - 1, 0.0f);
+		glTexCoord2i(1, 1);		// Top Right
+		glVertex3f(-1 + barx + barwidth * val, bary + 1, 0.0f);
+		glTexCoord2i(0, 1);		// Top Left
+		glVertex3f(1 + barx, bary + 1, 0.0f);
 	glEnd();
 	
 	glColor3f(1, 1, 1);
 	glEnable(GL_TEXTURE_2D);
-	barfont->print(barx - 2, bary + 35, message);
+	barfont->print(barx, bary-5, message);
 	SDL_GL_SwapBuffers();	// And swap the buffers
 	
 	prj->reset_perspective_projection();
