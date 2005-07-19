@@ -1,6 +1,6 @@
 /*
  * Stellarium
- * Copyright (C) 2002 Fabien Chéreau
+ * Copyright (C) 2002 Fabien Chï¿½eau
  * 
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -46,7 +46,7 @@ Nebula_mgr::~Nebula_mgr()
 }
 
 // read from stream
-int Nebula_mgr::read(const string& font_fileName, const string& fileName, int barx, int bary, LoadingBar& lb)
+int Nebula_mgr::read(const string& font_fileName, const string& fileName, LoadingBar& lb)
 {
 	printf(_("Loading nebulas data "));
 	
