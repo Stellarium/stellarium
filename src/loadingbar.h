@@ -1,6 +1,6 @@
 /*
  * Stellarium
- * Copyright (C) 2005 Fabien Chéreau
+ * Copyright (C) 2005 Fabien Chï¿½eau
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -28,15 +28,16 @@ class LoadingBar
 {
 public:
 	// Create and initialise
-	LoadingBar(Projector* prj, string _font_filename, int barx, int bary);
+	LoadingBar(Projector* prj, const string& _font_filename, const string&  splash_tex, int barx, int bary);
 	virtual ~LoadingBar();
 	void SetMessage(string m) {message=m;}
 	void Draw(float val);
 private:
 	string message;
 	Projector* prj;
-	int barx, bary;
+	int splashx, splashy, barx, bary, width, height, barwidth, barheight;
 	s_font* barfont;
+	s_texture* splash;
 };
 
 #endif //_LOADINGBAR_H_

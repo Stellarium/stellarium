@@ -1,6 +1,6 @@
 /*
  * Stellarium
- * Copyright (C) 2002 Fabien Chï¿?eau
+ * Copyright (C) 2002 Fabien Chï¿½eau
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -472,7 +472,7 @@ Component* stel_ui::createLicenceWindow(void)
 \1   Copyright (c) 2000-2005 Fabien Chereau\n\
  \n\
 \1   Please check last version and send bug report & comments\n\n\
-on stellarium web page : http://stellarium.free.fr\n\n\
+on stellarium web page : http://stellarium.sourceforge.net\n\n\
  \n\
 \1   This program is free software; you can redistribute it and/or\n\
 modify it under the terms of the GNU General Public License\n\
