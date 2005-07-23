@@ -1,6 +1,6 @@
 /*
  * Stellarium
- * Copyright (C) 2003 Fabien Chéreau
+ * Copyright (C) 2003 Fabien Chereau
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -168,6 +168,7 @@ void stel_atmosphere::compute_color(double JD, Vec3d sunPos, Vec3d moonPos, floa
 		}
 	}
 
+	milkyway_adaptation_luminance = 30*sum_lum/nb_lum;
 	world_adaptation_luminance = 3.75f + 3.5*sum_lum/nb_lum*atm_intensity;
 	sum_lum = 0.f;
 	nb_lum = 0;

@@ -441,20 +441,17 @@ void MilkyWay::set_texture(const string& tex_file)
 
 void MilkyWay::set_intensity(float _intensity)
 {
-	assert(tex); // A texture must be loaded before calling this
 	intensity = _intensity;
-	// Scotopic color = 0.25, 0.25 in xyY mode. Global stars luminance ~= 0.001 cd/m^2
-	color = Vec3f(0.25f, 0.25f, intensity*0.004f/tex->get_average_luminance());
 }
 
 void MilkyWay::draw(tone_reproductor * eye, const Projector* prj, const navigator* nav) const
 {
 	assert(tex);	// A texture must be loaded before calling this
-	static Vec3f c;
-	c = color;
+	// Scotopic color = 0.25, 0.25 in xyY mode. Global stars luminance ~= 0.001 cd/m^2
+	Vec3f c = Vec3f(0.25f, 0.25f, intensity*0.002f);
 	eye->xyY_to_RGB(c);
 	glColor3fv(c);
-
+	c[2]/=tex->get_average_luminance();
 	glEnable(GL_CULL_FACE);
 	glEnable(GL_TEXTURE_2D);
 	glDisable(GL_BLEND);

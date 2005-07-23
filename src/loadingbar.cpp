@@ -1,6 +1,6 @@
 /*
  * Stellarium
- * Copyright (C) 2005 Fabien Ch�eau
+ * Copyright (C) 2005 Fabien Chereau
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -37,7 +37,7 @@ LoadingBar::~LoadingBar()
 	if (splash) delete splash;
 	barfont = NULL;
 }
-	
+
 void LoadingBar::Draw(float val)
 {
 	// percent complete bar only draws in 2d mode
@@ -46,7 +46,7 @@ void LoadingBar::Draw(float val)
 	// Draw the splash screen if available
 	if (splash)
 	{
-		glDisable(GL_BLEND);
+		glEnable(GL_BLEND);
 		glEnable(GL_TEXTURE_2D);
 		glColor3f(1, 1, 1);
 		glDisable(GL_CULL_FACE);
@@ -70,13 +70,13 @@ void LoadingBar::Draw(float val)
 	glColor3f(0, 0, 0);
 	glBegin(GL_TRIANGLE_STRIP);
 		glTexCoord2i(1, 0);		// Bottom Right
-		glVertex3f(barx + barwidth, bary, 0.0f);
+		glVertex3f(barx + barwidth, bary-17, 0.0f);
 		glTexCoord2i(0, 0);		// Bottom Left
-		glVertex3f(barx, bary, 0.0f);
+		glVertex3f(barx, bary-17, 0.0f);
 		glTexCoord2i(1, 1);		// Top Right
-		glVertex3f(barx + barwidth, bary + 20, 0.0f);
+		glVertex3f(barx + barwidth, bary-5, 0.0f);
 		glTexCoord2i(0, 1);		// Top Left
-		glVertex3f(barx, bary + 20, 0.0f);
+		glVertex3f(barx, bary-5, 0.0f);
 	glEnd();
 	glColor3f(0.8, 0.8, 1);
 	glBegin(GL_TRIANGLE_STRIP);
