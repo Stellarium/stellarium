@@ -1,6 +1,6 @@
 /*
  * Stellarium
- * Copyright (C) 2003 Fabien Chéreau
+ * Copyright (C) 2003 Fabien Chereau
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -49,6 +49,7 @@ public:
 	float get_intensity(void) {return atm_intensity; }  // tells you actual atm intensity due to eclipses + fader
 	float get_fade_intensity(void) {return fader.get_interstate();}  // let's you know how far faded in or out the atm is (0-1)
 	float get_world_adaptation_luminance(void) const {return world_adaptation_luminance;}
+	float get_milkyway_adaptation_luminance(void) const {return milkyway_adaptation_luminance;}
 private:
 	skylight sky;
 	skybright skyb;
@@ -56,6 +57,7 @@ private:
 	Vec3f ** tab_sky;	// For Atmosphere calculation
 	int startY;			// intern variable used to store the Horizon Y screen value
 	float world_adaptation_luminance;
+	float milkyway_adaptation_luminance;
 // 	bool atm_on;
 	float atm_intensity;
 // 	float ai;               // used to calculate atm_intensity via curve function
