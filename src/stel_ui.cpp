@@ -531,7 +531,6 @@ S   : Stars\n\
 8   : Set time to current time\n\
 9   : Toggle meteor shower rates\n\
 I   : About Stellarium\n\
-M   : Text menu\n\
 F1  : Toggle fullscreen if possible.\n\
 CTRL + S : Take a screenshot\n\
 CTRL + R : Toggle script recording\n")) + string(
