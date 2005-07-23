@@ -335,7 +335,9 @@ void stel_core::draw(int delta_time)
 	// Draw the milky way. If not activated, need at least to clear the color buffer
 	if (FlagMilkyWay)
 	{
+		tone_converter->set_world_adaptation_luminance(atmosphere->get_milkyway_adaptation_luminance());
 		milky_way->draw(tone_converter, projection, navigation);
+		tone_converter->set_world_adaptation_luminance(atmosphere->get_world_adaptation_luminance());
 	}
 	else
 	{
