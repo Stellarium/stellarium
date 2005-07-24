@@ -396,7 +396,7 @@ void stel_ui::cb(void)
 	core->FlagLandscape	 		= bt_flag_ground->getState();
 	core->FlagCardinalPoints	= bt_flag_cardinals->getState();
 	core->FlagAtmosphere 		= bt_flag_atmosphere->getState();
-	core->FlagNebulaName		= bt_flag_nebula_name->getState();
+	core->nebulas->set_flag_hints( bt_flag_nebula_name->getState() );
 	core->FlagHelp = bt_flag_help->getState();
 	help_win->setVisible(core->FlagHelp);
 	core->navigation->set_viewing_mode(bt_flag_equatorial_mode->getState() ? VIEW_EQUATOR : VIEW_HORIZON);
@@ -899,7 +899,7 @@ void stel_ui::gui_update_widgets(int delta_time)
 	bt_flag_ground->setState(core->FlagLandscape);
 	bt_flag_cardinals->setState(core->FlagCardinalPoints);
 	bt_flag_atmosphere->setState(core->FlagAtmosphere);
-	bt_flag_nebula_name->setState(core->FlagNebulaName);
+	bt_flag_nebula_name->setState(core->nebulas->get_flag_hints());
 	bt_flag_help->setState(help_win->getVisible());
 	bt_flag_equatorial_mode->setState(core->navigation->get_viewing_mode()==VIEW_EQUATOR);
 	bt_flag_config->setState(config_win->getVisible());

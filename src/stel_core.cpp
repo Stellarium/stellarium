@@ -278,6 +278,7 @@ void stel_core::update(int delta_time)
 	atmosphere->update(delta_time);
 	landscape->update(delta_time);
 	hip_stars->update(delta_time);
+	nebulas->update(delta_time);
 	
 	// Compute the sun position in local coordinate
 	Vec3d temp(0.,0.,0.);
@@ -352,9 +353,8 @@ void stel_core::draw(int delta_time)
 	asterisms->draw(projection, navigation);
 
 	// Draw the nebula if they are visible
-	if (FlagNebula && sky_brightness<0.11)
-		nebulas->draw(FlagNebulaName, projection, navigation, tone_converter,
-			FlagGravityLabels, MaxMagNebulaName, FlagBrightNebulae);
+	if (FlagNebula) nebulas->draw(projection, navigation, tone_converter, (sky_brightness<0.11),
+								  FlagGravityLabels, MaxMagNebulaName, FlagBrightNebulae);
 
 	// Draw the hipparcos stars
 	Vec3d tempv = navigation->get_prec_equ_vision();
@@ -659,7 +659,7 @@ void stel_core::load_config_from(const string& confFile)
 	FlagPlanetsOrbits		= conf.get_boolean("astro:flag_planets_orbits");
 	FlagObjectTrails		= conf.get_boolean("astro", "flag_object_trails", 0);
 	FlagNebula				= conf.get_boolean("astro:flag_nebula");
-	FlagNebulaName			= conf.get_boolean("astro:flag_nebula_name");
+	nebulas->set_flag_hints(conf.get_boolean("astro:flag_nebula_name"));
 	MaxMagNebulaName		= conf.get_double("astro:max_mag_nebula_name");
 	FlagMilkyWay			= conf.get_boolean("astro:flag_milky_way");
 	MilkyWayIntensity       = conf.get_double("astro","milky_way_intensity",1.);
@@ -802,7 +802,7 @@ void stel_core::save_config_to(const string& confFile)
 	conf.set_boolean("astro:flag_planets_orbits", FlagPlanetsOrbits);
 	conf.set_boolean("astro:flag_object_trails", FlagObjectTrails);
 	conf.set_boolean("astro:flag_nebula", FlagNebula);
-	conf.set_boolean("astro:flag_nebula_name", FlagNebulaName);
+	conf.set_boolean("astro:flag_nebula_name", nebulas->get_flag_hints());
 	conf.set_double("astro:max_mag_nebula_name", MaxMagNebulaName);
 	conf.set_boolean("astro:flag_milky_way", FlagMilkyWay);
 	conf.set_double("astro:milky_way_intensity", MilkyWayIntensity);
@@ -1142,7 +1142,7 @@ stel_object * stel_core::clever_find(const Vec3d& v) const
 		float distance = sqrt((xpos-winpos[0])*(xpos-winpos[0]) + (ypos-winpos[1])*(ypos-winpos[1]));
 		float mag = (*iter)->get_mag(navigation);
 		if ((*iter)->get_type()==STEL_OBJECT_NEBULA) {
-		  if( FlagNebulaName ) {
+		  if( nebulas->get_flag_hints() ) {
 		    // make very easy to select if labeled
 		    mag = -1;
 		  } else {

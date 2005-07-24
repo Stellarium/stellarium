@@ -88,6 +88,7 @@ private:
 	float inc_lum;					// Local counter for symbol animation
 	static s_texture * tex_circle;	// The symbolic circle texture
 	static s_font* nebula_font;		// Font used for names printing
+	static float hints_brightness;
 	static bool gravity_label;
 
 	Vec3f fontcolor;

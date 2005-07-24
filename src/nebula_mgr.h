@@ -24,6 +24,7 @@
 #include "nebula.h"
 #include "s_font.h"
 #include "loadingbar.h"
+#include "fader.h"
 
 using namespace std;
 
@@ -37,7 +38,7 @@ public:
 	int read(const string& font_fileName, const string& fileName, LoadingBar& lb);
 	
 	// Draw all the Nebulas
-	void draw(int hints_ON, Projector* prj, const navigator * nav, tone_reproductor* eye,
+	void draw(Projector* prj, const navigator * nav, tone_reproductor* eye, bool draw_tex,
 		bool _gravity_label, float max_mag_name, bool bright_nebulae);
 	
 	stel_object * search(const string& name);  // search by name
@@ -46,6 +47,11 @@ public:
 	void set_font_color(const Vec3f& c) {fontColor = c;}
 	void set_circle_color(const Vec3f& c) {circleColor = c;}
 	
+	void update(int delta_time) {hints_fader.update(delta_time);}
+	void set_hints_fade_duration(float duration) {hints_fader.set_duration((int) (duration * 1000.f));}
+	void set_flag_hints(bool b) {hints_fader=b;}
+	bool get_flag_hints() {return hints_fader;}
+
 	// Return a stl vector containing the nebulas located inside the lim_fov circle around position v
 	vector<stel_object*> search_around(Vec3d v, double lim_fov);
 
@@ -54,6 +60,7 @@ private:
 	vector<Nebula*> neb_array;	// The nebulas list
 	Vec3f fontColor;
 	Vec3f circleColor;
+	linear_fader hints_fader;
 };
 
 #endif // _NEBULA_MGR_H_
