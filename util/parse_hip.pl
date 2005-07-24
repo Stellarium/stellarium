@@ -29,6 +29,9 @@ sleep 2;
 open(IN, "hip_main.dat") || die "Can't find hip_main.dat\n";
 open(OUT, ">hipparcos.fab") || die "Can't write hipparcos.fab\n";
 
+my $dmin = 1000000000000;
+my $dmax = 0;
+
 while(<IN>) {
 
 	chomp;
@@ -48,6 +51,7 @@ while(<IN>) {
 		if($1 eq "-") { $ra *= -1; }
 	} else {
 		print "error with ra on hp $hp\n";
+		next;
 	}
 
 	if( $f[4] =~ /(\-*)(\d\d) (\d\d) (\d\d.\d)/ ) {
@@ -55,6 +59,7 @@ while(<IN>) {
 		if($1) { $de *= -1; }
 	} else {
 		print "error with de on hp $hp\n";
+		next;
 	}
 
 	$f[76] =~/^(.)(.)/;
@@ -102,7 +107,20 @@ while(<IN>) {
 
 #	printf( "%d\t%d\t%.4f\t%.4f\t%s\n", $hp, $x, $ra, $de, $spcode);
 
-	$out{int($hp)} = pack("ffSxC", $ra, $de, $x, $sptype);
+	# distance
+	if($f[11]==0) {
+		$ly = 0;
+		print "No parallax for hp $hp\n";
+	} else {
+		$ly = abs(3.2616/($f[11]/1000));
+
+		if($ly<$dmin) {$dmin = $ly;}
+		if($ly>$dmax) {$dmax = $ly;}
+	}
+
+
+	$out{int($hp)} = pack("ffSCf", $ra, $de, $x, $sptype, $ly);
+#	$out{int($hp)} = pack("ffSxC", $ra, $de, $x, $sptype);
 
 
 }
@@ -110,7 +128,8 @@ while(<IN>) {
 
 # catalog size
 
-print "Highest hp = $hp\n";
+print "Highest hp = $high\n";
+print "ly min: $dmin\tlymax: $dmax\n";
 
 print OUT pack("L", $high+1);  # hp numbers start at 1
 
@@ -118,7 +137,7 @@ print OUT pack("L", $high+1);  # hp numbers start at 1
 for( $a=0; $a<=$high; $a++) {
 
 	if($out{$a} eq "" ) {
-		print OUT pack("xxxxxxxxxxxx");
+		print OUT pack("xxxxxxxxxxxxxxx");
 	} else {
 		print OUT $out{$a};
 	}
