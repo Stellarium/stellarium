@@ -104,11 +104,17 @@ public:
 	void set_color(const Vec3f& c) {color = c;}
 	void set_font(const string& font_filename, const string& font_texture, float font_size = 30.f);
 	int load_labels(string filename);  // for i18n
+	void update(int delta_time) {fader.update(delta_time);}
+	void set_fade_duration(float duration) {fader.set_duration((int)(duration*1000.f));}
+	void set_flag_show(bool b){fader = b;}
+	bool get_flag_show(){return fader;}
+
 private:
 	float radius;
 	s_font* font;	
 	Vec3f color;
 	string sNorth, sSouth, sEast, sWest;
+	linear_fader fader;
 };
 
 // Class which manages the displaying of the Milky Way

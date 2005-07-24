@@ -328,6 +328,9 @@ void Cardinals::set_font(const string& font_filename, const string& font_texture
 // handles special cases at poles
 void Cardinals::draw(const Projector* prj, double latitude, bool gravityON) const
 {
+
+	if (!fader.get_interstate()) return;
+
 	// direction text
 	string d[4];
 	
@@ -340,7 +343,7 @@ void Cardinals::draw(const Projector* prj, double latitude, bool gravityON) cons
 	if(latitude ==  90.0 ) d[0] = d[1] = d[2] = d[3] = sSouth;
 	if(latitude == -90.0 ) d[0] = d[1] = d[2] = d[3] = sNorth;
 
-    glColor3fv(color);
+	glColor4f(color[0],color[1],color[2],fader.get_interstate());
 	glEnable(GL_BLEND);
 	glEnable(GL_TEXTURE_2D);
 	// Normal transparency mode

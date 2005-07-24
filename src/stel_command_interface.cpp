@@ -618,7 +618,10 @@ int StelCommandInterface::set_flag(string name, string value, bool &newval, bool
 		else if(name=="equatorial_grid") newval = (stcore->FlagEquatorialGrid = !stcore->FlagEquatorialGrid);
 		else if(name=="equator_line") newval = (stcore->FlagEquatorLine = !stcore->FlagEquatorLine);
 		else if(name=="ecliptic_line") newval = (stcore->FlagEclipticLine = !stcore->FlagEclipticLine);
-		else if(name=="cardinal_points") newval = (stcore->FlagCardinalPoints = !stcore->FlagCardinalPoints);
+		else if(name=="cardinal_points") {
+			newval = !stcore->cardinals_points->get_flag_show();
+			stcore->cardinals_points->set_flag_show(newval);
+		}
 		else if(name=="init_moon_scaled") {
 			if(newval = (stcore->FlagInitMoonScaled = !stcore->FlagInitMoonScaled)) 
 				stcore->ssystem->get_moon()->set_sphere_scale(stcore->MoonScale);
@@ -698,7 +701,7 @@ int StelCommandInterface::set_flag(string name, string value, bool &newval, bool
 		else if(name=="equatorial_grid") stcore->FlagEquatorialGrid = newval;
 		else if(name=="equator_line") stcore->FlagEquatorLine = newval;
 		else if(name=="ecliptic_line") stcore->FlagEclipticLine = newval;
-		else if(name=="cardinal_points") stcore->FlagCardinalPoints = newval;
+		else if(name=="cardinal_points") stcore->cardinals_points->set_flag_show(newval);
 		else if(name=="init_moon_scaled") {
 			if((stcore->FlagInitMoonScaled = newval)) 
 				stcore->ssystem->get_moon()->set_sphere_scale(stcore->MoonScale);
