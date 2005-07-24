@@ -279,7 +279,8 @@ void stel_core::update(int delta_time)
 	landscape->update(delta_time);
 	hip_stars->update(delta_time);
 	nebulas->update(delta_time);
-	
+	cardinals_points->update(delta_time);
+
 	// Compute the sun position in local coordinate
 	Vec3d temp(0.,0.,0.);
 	Vec3d sunPos = navigation->helio_to_local(temp);
@@ -415,8 +416,9 @@ void stel_core::draw(int delta_time)
 	landscape->show_fog(FlagFog);
 	landscape->draw(tone_converter, projection, navigation);
 
-	// Daw the cardinal points
-	if (FlagCardinalPoints) cardinals_points->draw(projection, observatory->get_latitude(), FlagGravityLabels );
+	// Draw the cardinal points
+	//if (FlagCardinalPoints) 
+	cardinals_points->draw(projection, observatory->get_latitude(), FlagGravityLabels );
 
 	// draw images loaded by a script
 	projection->set_orthographic_projection(); 
@@ -644,7 +646,7 @@ void stel_core::load_config_from(const string& confFile)
 	FlagEquatorialGrid		= conf.get_boolean("viewing:flag_equatorial_grid");
 	FlagEquatorLine			= conf.get_boolean("viewing:flag_equator_line");
 	FlagEclipticLine		= conf.get_boolean("viewing:flag_ecliptic_line");
-	FlagCardinalPoints		= conf.get_boolean("viewing:flag_cardinal_points");
+	cardinals_points->set_flag_show(conf.get_boolean("viewing:flag_cardinal_points"));
 	FlagGravityLabels		= conf.get_boolean("viewing:flag_gravity_labels");
 	FlagInitMoonScaled		= conf.get_boolean("viewing:flag_init_moon_scaled");
 	MoonScale				= conf.get_double ("viewing","moon_scale",5.);
@@ -786,7 +788,7 @@ void stel_core::save_config_to(const string& confFile)
 	conf.set_boolean("viewing:flag_equatorial_grid", FlagEquatorialGrid);
 	conf.set_boolean("viewing:flag_equator_line", FlagEquatorLine);
 	conf.set_boolean("viewing:flag_ecliptic_line", FlagEclipticLine);
-	conf.set_boolean("viewing:flag_cardinal_points", FlagCardinalPoints);
+	conf.set_boolean("viewing:flag_cardinal_points", cardinals_points->get_flag_show());
 	conf.set_boolean("viewing:flag_gravity_labels", FlagGravityLabels);
 	conf.set_boolean("viewing:flag_init_moon_scaled", FlagInitMoonScaled);
 	conf.set_double ("viewing:moon_scale", MoonScale);

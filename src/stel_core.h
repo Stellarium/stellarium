@@ -320,7 +320,7 @@ private:
     int FlagEquatorialGrid;
     int FlagEquatorLine;
     int FlagEclipticLine;
-    int FlagCardinalPoints;
+	//    int FlagCardinalPoints;
 	int FlagGravityLabels;
 	float MoonScale;
 	int FlagInitMoonScaled;

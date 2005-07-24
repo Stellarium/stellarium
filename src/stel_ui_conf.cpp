@@ -416,7 +416,7 @@ void stel_ui::saveRenderOptions(void)
 	conf.set_boolean("viewing:flag_equator_line", core->FlagEquatorLine);
 	conf.set_boolean("viewing:flag_ecliptic_line", core->FlagEclipticLine);
 	conf.set_boolean("landscape:flag_ground", core->FlagLandscape);
-	conf.set_boolean("viewing:flag_cardinal_points", core->FlagCardinalPoints);
+	conf.set_boolean("viewing:flag_cardinal_points", core->cardinals_points->get_flag_show());
 	conf.set_boolean("landscape:flag_atmosphere", core->FlagAtmosphere);
 	conf.set_boolean("landscape:flag_fog", core->FlagFog);
 
@@ -513,7 +513,7 @@ void stel_ui::updateConfigForm(void)
 	equator_cbx->setState(core->FlagEquatorLine);
 	ecliptic_cbx->setState(core->FlagEclipticLine);
 	ground_cbx->setState(core->FlagLandscape);
-	cardinal_cbx->setState(core->FlagCardinalPoints);
+	cardinal_cbx->setState(core->cardinals_points->get_flag_show());
 	atmosphere_cbx->setState(core->FlagAtmosphere);
 	fog_cbx->setState(core->FlagFog);
 
