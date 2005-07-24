@@ -394,7 +394,7 @@ void stel_ui::cb(void)
 	core->FlagAzimutalGrid 		= bt_flag_azimuth_grid->getState();
 	core->FlagEquatorialGrid 	= bt_flag_equator_grid->getState();
 	core->FlagLandscape	 		= bt_flag_ground->getState();
-	core->FlagCardinalPoints	= bt_flag_cardinals->getState();
+	core->cardinals_points->set_flag_show(bt_flag_cardinals->getState());
 	core->FlagAtmosphere 		= bt_flag_atmosphere->getState();
 	core->nebulas->set_flag_hints( bt_flag_nebula_name->getState() );
 	core->FlagHelp = bt_flag_help->getState();
@@ -897,7 +897,7 @@ void stel_ui::gui_update_widgets(int delta_time)
 	bt_flag_azimuth_grid->setState(core->FlagAzimutalGrid);
 	bt_flag_equator_grid->setState(core->FlagEquatorialGrid);
 	bt_flag_ground->setState(core->FlagLandscape);
-	bt_flag_cardinals->setState(core->FlagCardinalPoints);
+	bt_flag_cardinals->setState(core->cardinals_points->get_flag_show());
 	bt_flag_atmosphere->setState(core->FlagAtmosphere);
 	bt_flag_nebula_name->setState(core->nebulas->get_flag_hints());
 	bt_flag_help->setState(help_win->getVisible());

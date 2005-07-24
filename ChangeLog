@@ -16,6 +16,7 @@ Added more sky label languages.
 Sky languages are no longer hard coded.
 Cardinal points are now translated based on sky language.
 TUI is now using gettext.
+Added some accented characters to spacefont
 Fixed various typos and other bugs.
 Added a Loading Bar class.
 Started a code spring clean aiming at removing the design mistakes with the core class. The goal is to split the current stel_core into 2 classes, one being the actual core managing sky display, the other one stel_app will manage all I/O, parameters managment, UI, locales etc..
@@ -27,6 +28,7 @@ Added splash screen, new icons and improved pointers by Johan.
 Improved Milky Way tone conversion. 
 Sky labels now default to user locale language if possible
 Added fader on nebula hints (hints can now draw even when atmosphere is on)
+Added fader on cardinal points
 	
 0.6.2 [2004-11-18]
 Fixed time display bug (1 hour ahead of actual sky time during standard time if your timezone has daylight savings).  
