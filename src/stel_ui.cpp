@@ -132,9 +132,9 @@ void stel_ui::init(void)
 	
 	// Info on selected object
 	info_select_ctr = new Container();
-	info_select_ctr->reshape(0,15,300,80);
+	info_select_ctr->reshape(0,15,300,100);
     info_select_txtlbl = new TextLabel("Info");
-    info_select_txtlbl->reshape(5,5,290,82);
+    info_select_txtlbl->reshape(5,5,290,102);
     info_select_ctr->setVisible(0);
 	info_select_ctr->addComponent(info_select_txtlbl);
 	desktop->addComponent(info_select_ctr);
