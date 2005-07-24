@@ -64,6 +64,7 @@ private:
     string CommonName;		// Common Name of the star
     string SciName;			// Scientific name		
     char SpType;			// Spectral type
+	float Distance;         // Distance from Earth in light years
 
 	static float twinkle_amount;
 	static float star_scale;

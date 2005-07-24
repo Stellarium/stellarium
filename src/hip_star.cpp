@@ -48,13 +48,17 @@ void Hip_Star::get_info_string(char * s, const navigator * nav) const
 	static char tempStr[20];
 	sprintf(tempStr,"HP %d",HP);
 
+	static char tempLy[20];
+	if(Distance) sprintf(tempLy, "LY : %.1f", Distance);
+	else tempLy[0] = 0; 
+
 	float tempDE, tempRA;
 	rect_to_sphe(&tempRA,&tempDE,XYZ);
 	// Hip = Hipparcos, RA=Right Ascention, DE=Declinaison, Mag=Magnitude
-	sprintf(s,_("Name :%s%s%s\nHip : %.4d\nRA : %s\nDE : %s\nMag : %.2f"),
+	sprintf(s,_("Name : %s%s%s\nHip : %.4d\nRA : %s\nDE : %s\nMag : %.2f\n%s"),
 		CommonName.c_str(), CommonName=="" ? "" : " ",
 		SciName=="" ? tempStr : SciName.c_str(), HP, print_angle_hms(tempRA*180./M_PI).c_str(),
-			print_angle_dms_stel(tempDE*180./M_PI).c_str(), Mag);
+			print_angle_dms_stel(tempDE*180./M_PI).c_str(), Mag, tempLy);
 }
 
 void Hip_Star::get_short_info_string(char * s, const navigator * nav) const
@@ -62,8 +66,12 @@ void Hip_Star::get_short_info_string(char * s, const navigator * nav) const
 	static char tempStr[20];
 	sprintf(tempStr,"HP %d",HP);
 
-	if (CommonName!="" || SciName!="") sprintf(s,_("%s: mag %.1f"), CommonName=="" ? SciName.c_str() : CommonName.c_str(), Mag);
-	else sprintf(s,_("%s: mag %.1f"), tempStr, Mag);
+	static char tempLy[20];
+	if(Distance) sprintf(tempLy, "%.1f ly", Distance);
+	else tempLy[0] = 0; 
+
+	if (CommonName!="" || SciName!="") sprintf(s,_("%s: mag %.1f %s"), CommonName=="" ? SciName.c_str() : CommonName.c_str(), Mag, tempLy);
+	else sprintf(s,_("%s: mag %.1f %s"), tempStr, Mag, tempLy);
 }
 
 // Read datas in binary catalog and compute x,y,z;
@@ -91,16 +99,16 @@ int Hip_Star::read(FILE * catalog)
 	Mag = (5. + mag) / 256.0;
 	if (Mag>250) Mag = Mag - 256;
 
-	unsigned short int type, xtype;
-	fread(&xtype,2,1,catalog);
-	LE_TO_CPU_INT16(type, xtype);
+	unsigned char type;
+	fread(&type,1,1,catalog);
+	//	LE_TO_CPU_INT16(type, xtype);
 
 	// Calc the Cartesian coord with RA and DE
     sphe_to_rect(RA,DE,XYZ);
 
     XYZ*=RADIUS_STAR;
 
-    switch(type >> 8 & 0xf)
+    switch(type)
     {
         case 0 : SpType = 'O'; break;
         case 1 : SpType = 'B'; break;
@@ -140,10 +148,13 @@ int Hip_Star::read(FILE * catalog)
 	// Precomputation of a term used later
 	term1 = expf(-0.92103f*(Mag + 12.12331f)) * 108064.73f;
 
-	if (mag==0 && type==0)
-	{
-		return 0;
-	}
+	// distance
+	float LY;
+	fread(&LY,4,1,catalog);
+	LE_TO_CPU_FLOAT(Distance, LY);
+
+
+	if (mag==0 && type==0) return 0;
 
 	//	printf("%d\t%d\t%.4f\t%.4f\t%c\n", HP, mag, rao, deo, SpType);
 
