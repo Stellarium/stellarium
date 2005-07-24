@@ -30,6 +30,7 @@
 s_texture * Nebula::tex_circle = NULL;
 s_font* Nebula::nebula_font = NULL;
 bool Nebula::gravity_label = false;
+float Nebula::hints_brightness = 0;
 
 Nebula::Nebula() : NGC_nb(0), neb_tex(NULL), fontcolor(0.4,0.3,0.5), circlecolor(0.8,0.8,0.1)
 {
@@ -166,7 +167,7 @@ void Nebula::draw_circle(const Projector* prj, const navigator * nav)
 	if (2.f/get_on_screen_size(prj, nav)<0.1) return;
     inc_lum++;
 	float lum = MY_MIN(1,2.f/get_on_screen_size(prj, nav))*(0.8+0.2*sinf(inc_lum/10));
-    glColor3fv(circlecolor*lum);
+    glColor3fv(circlecolor*lum*hints_brightness);
     glBindTexture (GL_TEXTURE_2D, Nebula::tex_circle->getID());
     glBegin(GL_TRIANGLE_STRIP);
         glTexCoord2i(1,0);              // Bottom Right
@@ -188,7 +189,7 @@ float Nebula::get_on_screen_size(const Projector* prj, const navigator * nav)
 
 void Nebula::draw_name(const Projector* prj)
 {
-    glColor3fv(fontcolor);
+    glColor3fv(fontcolor*hints_brightness);
     float size = get_on_screen_size(prj);
     float shift = 8.f + size/2.f;
     gravity_label ? prj->print_gravity180(nebula_font, XY[0]+shift, XY[1]+shift, name, 1, 0, 0) :

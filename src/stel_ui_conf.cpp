@@ -406,7 +406,7 @@ void stel_ui::saveRenderOptions(void)
 	conf.set_boolean("viewing:flag_constellation_name", core->constellation_get_flag_names());
 	conf.set_boolean("viewing:flag_constellation_pick", core->FlagConstellationPick);
 	conf.set_boolean("astro:flag_nebula", core->FlagNebula);
-	conf.set_boolean("astro:flag_nebula_name", core->FlagNebulaName);
+	conf.set_boolean("astro:flag_nebula_name", core->nebulas->get_flag_hints());
 	conf.set_double("astro:max_mag_nebula_name", core->MaxMagNebulaName);
 	conf.set_boolean("astro:flag_planets", core->FlagPlanets);
 	conf.set_boolean("astro:flag_planets_hints", core->FlagPlanetsHints);
@@ -503,7 +503,7 @@ void stel_ui::updateConfigForm(void)
 	constellation_name_cbx->setState(core->constellation_get_flag_names());
 	sel_constellation_cbx->setState(core->FlagConstellationPick);
 	nebulas_cbx->setState(core->FlagNebula);
-	nebulas_names_cbx->setState(core->FlagNebulaName);
+	nebulas_names_cbx->setState(core->nebulas->get_flag_hints());
 	max_mag_nebula_name->setValue(core->MaxMagNebulaName);
 	planets_cbx->setState(core->FlagPlanets);
 	planets_hints_cbx->setState(core->FlagPlanetsHints);

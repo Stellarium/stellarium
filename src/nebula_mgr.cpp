@@ -106,9 +106,10 @@ int Nebula_mgr::read(const string& font_fileName, const string& fileName, Loadin
 }
 
 // Draw all the Nebulaes
-void Nebula_mgr::draw(int names_ON, Projector* prj, const navigator * nav, tone_reproductor* eye, bool _gravity_label, float max_mag_name, bool bright_nebulae)
+void Nebula_mgr::draw(Projector* prj, const navigator * nav, tone_reproductor* eye, bool draw_tex, bool _gravity_label, float max_mag_name, bool bright_nebulae)
 {
 	Nebula::gravity_label = _gravity_label;
+	Nebula::hints_brightness = hints_fader.get_interstate();
 
 	glEnable(GL_TEXTURE_2D);
     glEnable(GL_BLEND);
@@ -124,12 +125,15 @@ void Nebula_mgr::draw(int names_ON, Projector* prj, const navigator * nav, tone_
       if ( !prj->project_earth_equ_check(pXYZ,(*iter)->XY) ) continue;
 
       prj->set_orthographic_projection();
-      if ((*iter)->get_on_screen_size(prj, nav)>5) (*iter)->draw_tex(prj, eye, bright_nebulae && (*iter)->get_on_screen_size(prj, nav)>15 );
-      if (names_ON && (*iter)->mag <= max_mag_name)
-    	{
-	  (*iter)->draw_name(prj);
-	  (*iter)->draw_circle(prj, nav);
-    	}
+
+      if (draw_tex && (*iter)->get_on_screen_size(prj, nav)>5) 
+		  (*iter)->draw_tex(prj, eye, bright_nebulae && (*iter)->get_on_screen_size(prj, nav)>15 );
+
+      if (hints_fader.get_interstate() && (*iter)->mag <= max_mag_name)
+		  {
+			  (*iter)->draw_name(prj);
+			  (*iter)->draw_circle(prj, nav);
+		  }
       prj->reset_perspective_projection();
     }
 }
