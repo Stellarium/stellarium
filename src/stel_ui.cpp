@@ -591,7 +591,11 @@ int stel_ui::handle_clic(Uint16 x, Uint16 y, Uint8 button, Uint8 state)
     enum S_GUI_VALUE st;
     enum S_GUI_VALUE bt;
     
-		if (state==SDL_RELEASED) st=S_GUI_RELEASED; else st=S_GUI_PRESSED;
+	// Do not allow use of mouse while script is playing
+	// otherwise script can get confused
+	if(core->scripts->is_playing()) return 0;
+
+	if (state==SDL_RELEASED) st=S_GUI_RELEASED; else st=S_GUI_PRESSED;
 		
     switch (button)
     {   case SDL_BUTTON_RIGHT : bt=S_GUI_MOUSE_RIGHT; break;
