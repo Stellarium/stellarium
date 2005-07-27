@@ -111,7 +111,8 @@ bool Nebula::read(const string& record)
     neb_tex = new s_texture(tex_name);
 
 	//tex_angular_size*tex_angular_size*3600/4*M_PI
-	luminance = mag_to_luminance(mag, tex_angular_size*tex_angular_size*3600) /	neb_tex->get_average_luminance() * 50;
+	//	luminance = mag_to_luminance(mag, tex_angular_size*tex_angular_size*3600) /	neb_tex->get_average_luminance() * 50;
+	luminance = mag_to_luminance(mag, tex_angular_size*tex_angular_size*3600);
 
 	float tex_size = RADIUS_NEB * sin(tex_angular_size/2/60*M_PI/180);
 
@@ -142,8 +143,14 @@ void Nebula::draw_tex(const Projector* prj, tone_reproductor* eye, bool bright_n
 	}
 	else
 	{
-		float cmag=eye->adapt_luminance(luminance);
+		float ad_lum=eye->adapt_luminance(luminance);
+
+		// TODO this should be revisited to be less ad hoc
+		// 3 is a fudge factor since only about 1/3 of a texture is not black background
+		float cmag = 3 * ad_lum / neb_tex->get_average_luminance();
 		glColor3f(cmag,cmag,cmag);
+
+		//		printf("%s: lum %f ad_lum %f cmag %f angle %f\n", name.c_str(), luminance, ad_lum, cmag, angular_size);
 	}
 
 	glBindTexture(GL_TEXTURE_2D, neb_tex->getID());
