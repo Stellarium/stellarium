@@ -409,7 +409,8 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 
 	  if(stcore->ScriptRemoveableDiskMounted) {
 		  // unmount disk mounted to run script
-		  system( ( stcore->DataDir + "script_unmount_scripts_disk " ).c_str() );	  
+		  cout << "UNMOUNTING script disk\n";
+		  system( ( stcore->DataDir + "script_unmount_script_disk " ).c_str() );	  
 		  stcore->ScriptRemoveableDiskMounted = 0;
 	  }
 

@@ -442,7 +442,7 @@ void stel_ui::tui_cb_scripts_removeable() {
   
   if(!core->ScriptRemoveableDiskMounted) {
     // mount disk
-	system( ( core->DataDir + "script_mount_scripts_disk " ).c_str() );	  
+	system( ( core->DataDir + "script_mount_script_disk " ).c_str() );	  
 
     cout << "MOUNT DISK for scripts\n";
     // read scripts from mounted disk

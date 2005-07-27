@@ -880,8 +880,8 @@ int stel_core::handle_keys(Uint16 key, s_gui::S_GUI_VALUE state)
 		  // If selected a script in tui, run that now
 		  if(SelectedScript!="") commander->execute_command("script action play filename " + SelectedScriptDirectory + SelectedScript + " path " + SelectedScriptDirectory);
 		  else {
-		    // TODO unmount disk...
-		    ScriptRemoveableDiskMounted = 0;
+			  // unmount disk if necessary
+			  commander->execute_command("script action end");
 		  }
 		  // clear out now
 		  SelectedScriptDirectory = SelectedScript = "";
