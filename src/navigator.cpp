@@ -50,125 +50,125 @@ navigator::~navigator()
 ////////////////////////////////////////////////////////////////////////////////
 void navigator::update_vision_vector(int delta_time, stel_object* selected)
 {
-  if (flag_auto_move)
-    {
-      double ra_aim, de_aim, ra_start, de_start, ra_now, de_now;
+	if (flag_auto_move)
+		{
+			double ra_aim, de_aim, ra_start, de_start, ra_now, de_now;
 
-      if( zooming_mode == 1 ) {
-	// if zooming in, object may be moving so be sure to zoom to latest position
-	move.aim=selected->get_earth_equ_pos(this);
-	move.aim.normalize();
-	move.aim*=2.;
-      }
+			if( zooming_mode == 1 && selected) {
+				// if zooming in, object may be moving so be sure to zoom to latest position
+				move.aim=selected->get_earth_equ_pos(this);
+				move.aim.normalize();
+				move.aim*=2.;
+			}
 
-      // Use a smooth function
-      float smooth = 4.f;
-      double c;
+			// Use a smooth function
+			float smooth = 4.f;
+			double c;
 
-      if (zooming_mode == 1) {
-	if( move.coef > .9 ) {
-	  c = 1;
-	} else {
-	  c = 1 - pow(1.-1.11*(move.coef),3);
-	}
-      }
-      else if(zooming_mode == -1) {
-	if( move.coef < 0.1 ) { 
-	  // keep in view at first as zoom out
-	  c = 0;
+			if (zooming_mode == 1) {
+				if( move.coef > .9 ) {
+					c = 1;
+				} else {
+					c = 1 - pow(1.-1.11*(move.coef),3);
+				}
+			}
+			else if(zooming_mode == -1) {
+				if( move.coef < 0.1 ) { 
+					// keep in view at first as zoom out
+					c = 0;
 
-	  /* could track as moves too, but would need to know if start was actually
-	     a zoomed in view on the object or an extraneous zoom out command
-	     if(move.local_pos) {
-	     move.start=earth_equ_to_local(selected->get_earth_equ_pos(this));
-	     } else {
-	     move.start=selected->get_earth_equ_pos(this);
-	     }
-	     move.start.normalize();
-	  */
+					/* could track as moves too, but would need to know if start was actually
+					   a zoomed in view on the object or an extraneous zoom out command
+					   if(move.local_pos) {
+					   move.start=earth_equ_to_local(selected->get_earth_equ_pos(this));
+					   } else {
+					   move.start=selected->get_earth_equ_pos(this);
+					   }
+					   move.start.normalize();
+					*/
 
-	}else {
-	  c =  pow(1.11*(move.coef-.1),3);		  
-	}
-      }
-      else c = atanf(smooth * 2.*move.coef-smooth)/atanf(smooth)/2+0.5;
+				}else {
+					c =  pow(1.11*(move.coef-.1),3);		  
+				}
+			}
+			else c = atanf(smooth * 2.*move.coef-smooth)/atanf(smooth)/2+0.5;
 
 
-      if (move.local_pos)
-	{
-	  rect_to_sphe(&ra_aim, &de_aim, move.aim);
-	  rect_to_sphe(&ra_start, &de_start, move.start);
-	}
-      else
-	{
-	  rect_to_sphe(&ra_aim, &de_aim, earth_equ_to_local(move.aim));
-	  rect_to_sphe(&ra_start, &de_start, earth_equ_to_local(move.start));
-	}
+			if (move.local_pos)
+				{
+					rect_to_sphe(&ra_aim, &de_aim, move.aim);
+					rect_to_sphe(&ra_start, &de_start, move.start);
+				}
+			else
+				{
+					rect_to_sphe(&ra_aim, &de_aim, earth_equ_to_local(move.aim));
+					rect_to_sphe(&ra_start, &de_start, earth_equ_to_local(move.start));
+				}
 
-      /*  Was causing changes in direction while zooming, and seems unneccessary
+			/*  Was causing changes in direction while zooming, and seems unneccessary
 
-      // Trick to choose the good moving direction and never travel on a distance > PI
-      float delta = ra_start;
-      ra_start -= delta;		// ra_start = 0
-      ra_aim -= delta;
+			// Trick to choose the good moving direction and never travel on a distance > PI
+			float delta = ra_start;
+			ra_start -= delta;		// ra_start = 0
+			ra_aim -= delta;
 
-      if (ra_aim > M_PI) ra_aim = -2.*M_PI + ra_aim;
-      if (ra_aim < -M_PI) ra_aim = 2.*M_PI + ra_aim;
+			if (ra_aim > M_PI) ra_aim = -2.*M_PI + ra_aim;
+			if (ra_aim < -M_PI) ra_aim = 2.*M_PI + ra_aim;
 
-      ra_now = ra_aim*c + ra_start*(1. - c);
-      de_now = de_aim*c + de_start*(1. - c);
+			ra_now = ra_aim*c + ra_start*(1. - c);
+			de_now = de_aim*c + de_start*(1. - c);
 
-      ra_now += delta;
-      */
+			ra_now += delta;
+			*/
 
-      de_now = de_aim*c + de_start*(1. - c);
-      ra_now = ra_aim*c + ra_start*(1. - c);
+			de_now = de_aim*c + de_start*(1. - c);
+			ra_now = ra_aim*c + ra_start*(1. - c);
 
-      sphe_to_rect(ra_now, de_now, local_vision);
-      equ_vision = local_to_earth_equ(local_vision);
+			sphe_to_rect(ra_now, de_now, local_vision);
+			equ_vision = local_to_earth_equ(local_vision);
 
-      move.coef+=move.speed*delta_time;
-      if (move.coef>=1.)
-	{
-	  flag_auto_move=0;
-	  if (move.local_pos)
-	    {
-	      local_vision=move.aim;
-	      equ_vision=local_to_earth_equ(local_vision);
-	    }
-	  else
-	    {
-	      equ_vision=move.aim;
-	      local_vision=earth_equ_to_local(equ_vision);
-	    }
-	}
-    }
-  else
-    {
-      if (flag_traking && selected) // Equatorial vision vector locked on selected object
-	{
-	  equ_vision=selected->get_earth_equ_pos(this);
-	  // Recalc local vision vector
+			move.coef+=move.speed*delta_time;
+			if (move.coef>=1.)
+				{
+					flag_auto_move=0;
+					if (move.local_pos)
+						{
+							local_vision=move.aim;
+							equ_vision=local_to_earth_equ(local_vision);
+						}
+					else
+						{
+							equ_vision=move.aim;
+							local_vision=earth_equ_to_local(equ_vision);
+						}
+				}
+		}
+	else
+		{
+			if (flag_traking && selected) // Equatorial vision vector locked on selected object
+				{
+					equ_vision=selected->get_earth_equ_pos(this);
+					// Recalc local vision vector
 			
-	  local_vision=earth_equ_to_local(equ_vision);
+					local_vision=earth_equ_to_local(equ_vision);
 			
-	}
-      else
-	{
-	  if (flag_lock_equ_pos) // Equatorial vision vector locked
-	    {
-	      // Recalc local vision vector
-	      local_vision=earth_equ_to_local(equ_vision);
-	    }
-	  else // Local vision vector locked
-	    {
-	      // Recalc equatorial vision vector
-	      equ_vision=local_to_earth_equ(local_vision);
-	    }
-	}
-    }
+				}
+			else
+				{
+					if (flag_lock_equ_pos) // Equatorial vision vector locked
+						{
+							// Recalc local vision vector
+							local_vision=earth_equ_to_local(equ_vision);
+						}
+					else // Local vision vector locked
+						{
+							// Recalc equatorial vision vector
+							equ_vision=local_to_earth_equ(local_vision);
+						}
+				}
+		}
     
-  prec_equ_vision = mat_earth_equ_to_prec_earth_equ*equ_vision;
+	prec_equ_vision = mat_earth_equ_to_prec_earth_equ*equ_vision;
 
     
 }
