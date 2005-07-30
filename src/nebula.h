@@ -85,6 +85,7 @@ private:
 	Vec3f tex_quad_vertex[4];		// The 4 vertex used to draw the nebula texture
 	float luminance;				// Object luminance to use (value computed to compensate
 									// the texture avergae luminosity)
+	float tex_avg_luminance;        // avg luminance of the texture (saved here for performance)
 	float inc_lum;					// Local counter for symbol animation
 	static s_texture * tex_circle;	// The symbolic circle texture
 	static s_font* nebula_font;		// Font used for names printing

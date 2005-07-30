@@ -115,27 +115,34 @@ void Nebula_mgr::draw(Projector* prj, const navigator * nav, tone_reproductor* e
     glEnable(GL_BLEND);
     Vec3f pXYZ; 
 
+	prj->set_orthographic_projection();
+
+	bool hints = (hints_fader.get_interstate() != 0);
+
     vector<Nebula *>::iterator iter;
     for(iter=neb_array.begin();iter!=neb_array.end();iter++) {   
 
-      // correct for precession
-      pXYZ = nav->prec_earth_equ_to_earth_equ((*iter)->XYZ);
+		// improve performance by skipping if too small to see
+		if ((hints  && (*iter)->mag <= max_mag_name)
+			|| (*iter)->get_on_screen_size(prj, nav)>5) {
 
-      // project in 2D to check if the nebula is in screen
-      if ( !prj->project_earth_equ_check(pXYZ,(*iter)->XY) ) continue;
+			// correct for precession
+			pXYZ = nav->prec_earth_equ_to_earth_equ((*iter)->XYZ);
 
-      prj->set_orthographic_projection();
+			// project in 2D to check if the nebula is in screen
+			if ( !prj->project_earth_equ_check(pXYZ,(*iter)->XY) ) continue;
 
-      if (draw_tex && (*iter)->get_on_screen_size(prj, nav)>5) 
-		  (*iter)->draw_tex(prj, eye, bright_nebulae && (*iter)->get_on_screen_size(prj, nav)>15 );
+			if (draw_tex && (*iter)->get_on_screen_size(prj, nav)>5) 
+				(*iter)->draw_tex(prj, eye, bright_nebulae && (*iter)->get_on_screen_size(prj, nav)>15 );
 
-      if (hints_fader.get_interstate() && (*iter)->mag <= max_mag_name)
-		  {
-			  (*iter)->draw_name(prj);
-			  (*iter)->draw_circle(prj, nav);
-		  }
-      prj->reset_perspective_projection();
-    }
+			if (hints) {
+				(*iter)->draw_name(prj);
+				(*iter)->draw_circle(prj, nav);
+			}
+		}
+	}
+    
+	prj->reset_perspective_projection();
 }
 
 // search by name
