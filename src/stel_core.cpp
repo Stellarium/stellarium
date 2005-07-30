@@ -569,6 +569,7 @@ void stel_core::load_config_from(const string& confFile)
 	MaxMagStarName		= conf.get_double ("stars:max_mag_star_name");
 	FlagStarTwinkle		= conf.get_boolean("stars:flag_star_twinkle");
 	FlagPointStar		= conf.get_boolean("stars:flag_point_star");
+	//	hip_stars->set_limiting_mag(conf.get_double("stars", "star_limiting_mag", 6.5f));
 
 	// Ui section
 	FlagShowFps			= conf.get_boolean("gui:flag_show_fps");
@@ -717,6 +718,7 @@ void stel_core::save_config_to(const string& confFile)
 	conf.set_double ("stars:max_mag_star_name", MaxMagStarName);
 	conf.set_boolean("stars:flag_star_twinkle", FlagStarTwinkle);
 	conf.set_boolean("stars:flag_point_star", FlagPointStar);
+	//	conf.set_double("stars:star_limiting_mag", hip_stars->get_limiting_mag());
 
 	// Ui section
 	conf.set_boolean("gui:flag_show_fps" ,FlagShowFps);

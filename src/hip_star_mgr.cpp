@@ -35,7 +35,8 @@ Hip_Star_mgr::Hip_Star_mgr() :
 	StarArray(NULL),
 	StarArraySize(0),
 	starTexture(NULL), 
-	starFont(NULL)
+	starFont(NULL),
+	limiting_mag(6.5f)
 {
 	starZones = new vector<Hip_Star*>[HipGrid.getNbPoints()];
 }
@@ -242,7 +243,7 @@ void Hip_Star_mgr::draw(float _star_scale, float _star_mag_scale, float _twinkle
 	int nbZones=0;
 	nbZones = HipGrid.Intersect(equ_vision, prj->get_fov()*M_PI/180.f*1.2f);
 	static int * zoneList = HipGrid.getResult();
-	float maxMag = 5.5f+60.f/prj->get_fov();
+	float maxMag = limiting_mag-1 + 60.f/prj->get_fov();
 
     prj->set_orthographic_projection();	// set 2D coordinate
 

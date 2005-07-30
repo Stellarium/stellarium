@@ -45,6 +45,8 @@ public:
 		Vec3f equ_vision, tone_reproductor* _eye, Projector* prj, bool _gravity_label);	// Draw all the stars as points
     void save(void);                    	// Debug function
 	void set_flag_names(bool b) {names_fader=b;}
+	void set_limiting_mag(float _mag) {limiting_mag=_mag;}
+	float get_limiting_mag() {return limiting_mag;}
     Hip_Star * search(Vec3f Pos);  	// Search the star by position
 	Hip_Star * search(unsigned int);	// Search the star by HP number
 	// Return a stl vector containing the stars located inside the lim_fov circle around position v
@@ -59,10 +61,11 @@ private:
 	Grid HipGrid;                       // Grid for opimisation
 	Hip_Star * StarArray;  				// Sequential Array of the star for memory allocation optimization
 	Hip_Star ** StarFlatArray; 			// The simple array of the star for sequential research
-	int StarArraySize;      // Number of star in the array
+	int StarArraySize;                  // Number of star in the array
 	s_texture * starTexture;
 	s_font * starFont;
 	linear_fader names_fader;
+	float limiting_mag;                  // limiting magnitude at 60 degree fov
 };
 
 
