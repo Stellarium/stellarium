@@ -51,11 +51,15 @@ void stel_atmosphere::compute_color(double JD, Vec3d sunPos, Vec3d moonPos, floa
 	tone_reproductor * eye, Projector* prj,
 	float latitude, float altitude, float temperature, float relative_humidity)
 {
+
+	float min_mw_lum = 0.13;
+
 	// no need to calculate if not visible
 	if(!fader.get_interstate())
 	{
 		atm_intensity = 0;
 		world_adaptation_luminance = 3.75f;
+		milkyway_adaptation_luminance = min_mw_lum;  // brighter than without atm, since no drawing addition of atm brightness
 		return;
 	}
 	else
@@ -168,8 +172,9 @@ void stel_atmosphere::compute_color(double JD, Vec3d sunPos, Vec3d moonPos, floa
 		}
 	}
 
-	milkyway_adaptation_luminance = 30*sum_lum/nb_lum;
 	world_adaptation_luminance = 3.75f + 3.5*sum_lum/nb_lum*atm_intensity;
+	milkyway_adaptation_luminance = min_mw_lum*(1-atm_intensity) + 30*sum_lum/nb_lum*atm_intensity;
+
 	sum_lum = 0.f;
 	nb_lum = 0;
 }
