@@ -439,6 +439,9 @@ void MilkyWay::set_texture(const string& tex_file)
 {
 	if (tex) delete tex;
 	tex = new s_texture(tex_file,TEX_LOAD_TYPE_PNG_SOLID_REPEAT);
+
+	// big performance improvement to cache this
+	tex_avg_luminance = tex->get_average_luminance();
 }
 
 
@@ -454,7 +457,7 @@ void MilkyWay::draw(tone_reproductor * eye, const Projector* prj, const navigato
 	Vec3f c = Vec3f(0.25f, 0.25f, intensity*0.002f);
 	eye->xyY_to_RGB(c);
 	glColor3fv(c);
-	c[2]/=tex->get_average_luminance();
+	c[2]/=tex_avg_luminance;
 	glEnable(GL_CULL_FACE);
 	glEnable(GL_TEXTURE_2D);
 	glDisable(GL_BLEND);
