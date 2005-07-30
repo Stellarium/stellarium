@@ -114,6 +114,9 @@ bool Nebula::read(const string& record)
 	//	luminance = mag_to_luminance(mag, tex_angular_size*tex_angular_size*3600) /	neb_tex->get_average_luminance() * 50;
 	luminance = mag_to_luminance(mag, tex_angular_size*tex_angular_size*3600);
 
+	// this is a huge performance drag if called every frame, so cache here
+	tex_avg_luminance = neb_tex->get_average_luminance();
+
 	float tex_size = RADIUS_NEB * sin(tex_angular_size/2/60*M_PI/180);
 
     // Precomputation of the rotation/translation matrix
@@ -147,7 +150,7 @@ void Nebula::draw_tex(const Projector* prj, tone_reproductor* eye, bool bright_n
 
 		// TODO this should be revisited to be less ad hoc
 		// 3 is a fudge factor since only about 1/3 of a texture is not black background
-		float cmag = 3 * ad_lum / neb_tex->get_average_luminance();
+		float cmag = 3 * ad_lum / tex_avg_luminance;
 		glColor3f(cmag,cmag,cmag);
 
 		//		printf("%s: lum %f ad_lum %f cmag %f angle %f\n", name.c_str(), luminance, ad_lum, cmag, angular_size);

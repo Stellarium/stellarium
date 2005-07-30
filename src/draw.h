@@ -132,6 +132,7 @@ private:
 	s_texture* tex;
 	Vec3f color;
 	float intensity;
+	float tex_avg_luminance;
 };
 
 void DrawPoint(float X,float Y,float Z);
