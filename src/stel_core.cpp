@@ -27,7 +27,7 @@ stel_core::stel_core(const string& DDIR, const string& TDIR, const string& CDIR,
 	nebulas(NULL), ssystem(NULL), milky_way(NULL), screen_W(800), screen_H(600), bppMode(16), Fullscreen(0),
 	FlagHelp(false), FlagInfos(false), FlagConfig(false), FlagShowTuiMenu(0), 
 	frame(0), timefr(0), timeBase(0), fps(0), maxfps(10000.f), deltaFov(0.), deltaAlt(0.), deltaAz(0.),
-	move_speed(0.001), FlagTimePause(0), is_mouse_moving_horiz(false), is_mouse_moving_vert(false)
+	move_speed(0.00025), FlagTimePause(0), is_mouse_moving_horiz(false), is_mouse_moving_vert(false)
 {
 	TextureDir = TDIR;
 	ConfigDir = CDIR;

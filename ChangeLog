@@ -4,6 +4,7 @@ Added precession of the equinoxes.
 Added daylight savings accounting for all platforms (needs testing).
 More realistic and efficient meteor showers.
 Added and set-up gettext facilities.
+Added maximum_fps configuration setting to allow limiting CPU usage
 Added rudimentary scripting features - see doc/commands.html.
 Atmosphere now darkens during solar eclipses.
 Added lunar eclipse simulation.
@@ -19,8 +20,7 @@ TUI is now using gettext.
 Added some accented characters to spacefont
 Fixed various typos and other bugs.
 Added a Loading Bar class.
-Started a code spring clean aiming at removing the design mistakes with the core class. The goal is to split the current stel_core into 2 classes, one being the actual core managing sky display, the other one stel_app will manage all I/O, parameters managment, UI, locales etc..
-Added fader on stars labels.
+Started a code spring clean aiming at removing the design mistakes with the core class. The goal is to split the current stel_core into 2 classes, one being the actual core managing sky display, the other one stel_app will manage all I/O, parameters managment, UI, locales etc..Added fader on stars labels.
 Added loading bars for nebulae and stars loading.
 Corrected Sun rotational period
 Added missing hipparcos stars to database
@@ -33,6 +33,7 @@ Now display star distances
 Added Spanish translation by Sergio Trujillo
 Fixed deselect while zooming in crash bug
 Added Dutch translation by Johan Meuris
+Slowed down pan and tilt speed
 	
 0.6.2 [2004-11-18]
 Fixed time display bug (1 hour ahead of actual sky time during standard time if your timezone has daylight savings).  

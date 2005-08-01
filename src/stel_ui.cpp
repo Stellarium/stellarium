@@ -467,32 +467,31 @@ void stel_ui::tcbr(void)
 Component* stel_ui::createLicenceWindow(void)
 {
 	licence_txtlbl = new TextLabel(
-"                 \1   " APP_NAME "  April 2005  \1\n\
- \n\
-\1   Copyright (c) 2000-2005 Fabien Chereau\n\
- \n\
-\1   Please check last version and send bug report & comments\n\n\
-on stellarium web page : http://stellarium.sourceforge.net\n\n\
- \n\
-\1   This program is free software; you can redistribute it and/or\n\
+string("                 \1   " APP_NAME "  August 2005  \1\n\n") +
+"\1   Copyright (c) 2000-2005 Fabien Chereau et al.\n\n" +
+
+_("\1   Please check for newer versions and send bug reports\n\
+and comments to us at: http://stellarium.sourceforge.net\n\n") +
+_("\1   This program is free software; you can redistribute it and/or\n\
 modify it under the terms of the GNU General Public License\n\
 as published by the Free Software Foundation; either version 2\n\
-of the License, or (at your option) any later version.\n\
- \n\
-This program is distributed in the hope that it will be useful, but\n\
+of the License, or (at your option) any later version.\n\n") +
+_("This program is distributed in the hope that it will be useful, but\n\
 WITHOUT ANY WARRANTY; without even the implied\n\
 warranty of MERCHANTABILITY or FITNESS FOR A\n\
 PARTICULAR PURPOSE.  See the GNU General Public\n\
-License for more details.\n\
- \n\
-You should have received a copy of the GNU General Public\n\
-License along with this program; if not, write to the\n\
-Free Software Foundation, Inc., 59 Temple Place - Suite 330\n\
-Boston, MA  02111-1307, USA.\n");
+License for more details.\n\n") +
+_("You should have received a copy of the GNU General Public\n\
+License along with this program; if not, write to:\n") +
+"              Free Software Foundation, Inc.\n\
+              59 Temple Place - Suite 330\n\
+              Boston, MA  02111-1307, USA.\n\
+              http://www.fsf.org");
 	licence_txtlbl->adjustSize();
 	licence_txtlbl->setPos(10,10);
-	licence_win = new StdBtWin("Infos");
-	licence_win->reshape(300,200,400,350);
+	licence_win = new StdBtWin(_("Information"));
+	//	licence_win->reshape(300,200,400,350);
+	licence_win->reshape(275,175,450,400);
 	licence_win->addComponent(licence_txtlbl);
 	licence_win->setVisible(core->FlagInfos);
 
