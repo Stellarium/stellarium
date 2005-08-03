@@ -4,6 +4,7 @@ Stop using the glpng library which is the cause of bugs and which is not very po
 Need to make stellarium own texture loader using for example SDL_image library.
 
 Important features :
+* Use unicode font so that any language can be used for the UI
 * Use jpg format instead of png.
 * Selection of any object available in a list.
     - need the implementation of the widget "list" in gui.
@@ -13,6 +14,10 @@ Features :
 * More nebulas.
 * More landscapes skins.
 * Minor planets
+* Simulate light pollution situations
+* Use alternate orbital algorithms for long time frames, when current ones degrade
+* Show precession circle
+* Star proper motion
 
 Other cool features :
 * Artificial satellites
