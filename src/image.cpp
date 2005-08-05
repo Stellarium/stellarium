@@ -127,14 +127,19 @@ bool Image::update(int delta_time) {
   }
 
   if(flag_scale) {
-    mult_scale += coef_scale*delta_time;
 
-    if( mult_scale >= 1) {
-      mult_scale = 1;
-      flag_scale = 0;
-    }
+	  mult_scale += coef_scale*delta_time;
 
-    image_scale = start_scale + mult_scale*(end_scale-start_scale);
+	  if( mult_scale >= 1) {
+		  mult_scale = 1;
+		  flag_scale = 0;
+	  }
+
+
+	  // this transition is parabolic for better visual results
+	  if(start_scale > end_scale) {
+		  image_scale = start_scale + (1 - (1-mult_scale)*(1-mult_scale))*(end_scale-start_scale);
+	  } else image_scale = start_scale + mult_scale*mult_scale*(end_scale-start_scale);
   }
 
   if(flag_rotation) {
