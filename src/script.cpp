@@ -61,7 +61,7 @@ int Script::next_command(string &command)
 		if(input_file->eof())
 			return 0;
 
-		if( buffer[0] != '#' && buffer[0] != '\n')
+		if( buffer[0] != '#' && buffer[0] != 0)
 		{
 
 			//      printf("Buffer is: %s\n", buffer);
