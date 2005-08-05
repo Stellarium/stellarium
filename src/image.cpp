@@ -40,7 +40,7 @@ Image::Image( string filename, string name, IMAGE_POSITIONING pos_type) {
   int img_w, img_h;
   image_tex->getDimensions(img_w, img_h);
 
-  cout << "script image: (" << filename << ") " << img_w << " " << img_h << endl;
+  //  cout << "script image: (" << filename << ") " << img_w << " " << img_h << endl;
 
   if(img_h == 0) image_ratio = -1;  // no image loaded
   else image_ratio = (float)img_w/img_h;
