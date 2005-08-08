@@ -644,6 +644,7 @@ int StelCommandInterface::set_flag(string name, string value, bool &newval, bool
 		else if(name=="nebulae") newval = (stcore->FlagNebula = !stcore->FlagNebula);
 		else if(name=="nebula_names") {
 			newval = !stcore->nebulas->get_flag_hints();
+			if(newval) stcore->FlagNebula = 1;  // make sure visible
 			stcore->nebulas->set_flag_hints(newval);
 		}
 		else if(name=="milky_way") newval = (stcore->FlagMilkyWay = !stcore->FlagMilkyWay);
@@ -722,7 +723,10 @@ int StelCommandInterface::set_flag(string name, string value, bool &newval, bool
 		}
 		else if(name=="planet_orbits") stcore->FlagPlanetsOrbits = newval;
 		else if(name=="nebulae") stcore->FlagNebula = newval;
-		else if(name=="nebula_names") stcore->nebulas->set_flag_hints(newval);
+		else if(name=="nebula_names") {
+			stcore->FlagNebula = 1;  // make sure visible
+			stcore->nebulas->set_flag_hints(newval);
+		}
 		else if(name=="milky_way") stcore->FlagMilkyWay = newval;
 		else if(name=="bright_nebulae") stcore->FlagBrightNebulae = newval;
 		else if(name=="object_trails") stcore->FlagObjectTrails = newval;
