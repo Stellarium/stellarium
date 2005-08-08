@@ -144,7 +144,7 @@ public:
 	void update_move(int delta_time);
 
 	// Handle mouse clics
-	int handle_clic(Uint16 x, Uint16 y, Uint8 state, Uint8 button);
+	int handle_clic(Uint16 x, Uint16 y, s_gui::S_GUI_VALUE button, s_gui::S_GUI_VALUE state);
 	// Handle mouse move
 	int handle_move(int x, int y);
 	// Handle key press and release
@@ -337,7 +337,6 @@ private:
 	double PresetSkyTime;
 	string StartupTimeMode;
 	Vec3d InitViewPos;
-	VIEWING_MODE_TYPE ViewingMode;
 	int MouseZoom;
 
 	// Locale

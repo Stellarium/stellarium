@@ -102,7 +102,6 @@ void stel_core::init(void)
 
 	observatory->load(ConfigDir + config_file, "init_location");
 
-	navigation->set_viewing_mode(ViewingMode);
 	if (StartupTimeMode=="preset" || StartupTimeMode=="Preset")
 		navigation->set_JDay(PresetSkyTime - observatory->get_GMT_shift(PresetSkyTime) * JD_HOUR);
 	else navigation->set_JDay(get_julian_from_sys());
@@ -621,14 +620,14 @@ void stel_core::load_config_from(const string& confFile)
 
 	// Viewing Mode
 	tmpstr = conf.get_str("navigation:viewing_mode");
-	if (tmpstr=="equator") ViewingMode = VIEW_EQUATOR;
+	if (tmpstr=="equator") 	navigation->set_viewing_mode(VIEW_EQUATOR);
 	else
 	{
-		if (tmpstr=="horizon") ViewingMode = VIEW_HORIZON;
+		if (tmpstr=="horizon") navigation->set_viewing_mode(VIEW_HORIZON);
 		else
 		{
 			cout << "ERROR : Unknown viewing mode type : " << tmpstr << endl;
-			ViewingMode = VIEW_HORIZON;
+			assert(0);
 		}
 	}
 
@@ -767,7 +766,7 @@ void stel_core::save_config_to(const string& confFile)
 	conf.set_double ("navigation:auto_move_duration", auto_move_duration);
 	conf.set_boolean("navigation:flag_utc_time", FlagUTC_Time);
 	conf.set_int("navigation:mouse_zoom", MouseZoom);
-	switch (ViewingMode)
+	switch (navigation->get_viewing_mode())
 	{
 		case VIEW_HORIZON : tmpstr="horizon";	break;
 		case VIEW_EQUATOR : tmpstr="equator";		break;
@@ -817,9 +816,9 @@ void stel_core::save_config_to(const string& confFile)
 
 
 // Handle mouse clics
-int stel_core::handle_clic(Uint16 x, Uint16 y, Uint8 state, Uint8 button)
+int stel_core::handle_clic(Uint16 x, Uint16 y, S_GUI_VALUE button, S_GUI_VALUE state)
 {
-	return ui->handle_clic(x, y, state, button);
+	return ui->handle_clic(x, y, button, state);
 }
 
 // Handle mouse move
