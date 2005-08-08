@@ -586,7 +586,7 @@ int stel_ui::handle_move(int x, int y)
 {
 	if (is_dragging)
 	{
-		if (sqrtf((x-previous_x)*(x-previous_x)+(y-previous_y)*(y-previous_y))>2.)
+		if (sqrtf((x-previous_x)*(x-previous_x)+(y-previous_y)*(y-previous_y))>4.)
 		{
 			has_dragged = true;
 			Vec3d tempvec1, tempvec2;
