@@ -226,6 +226,7 @@ void TerminateApplication(void)
 void stel_sdl::start_main_loop(void)
 {
     bool AppVisible = true;			// At The Beginning, Our App Is Visible
+    enum S_GUI_VALUE bt;
 
     // Hold the value of SDL_GetTicks at start of main loop (set 0 time)
     LastCount = SDL_GetTicks();
@@ -258,13 +259,33 @@ void stel_sdl::start_main_loop(void)
 				case SDL_MOUSEMOTION:
 				  	core->handle_move(E.motion.x,E.motion.y);
 					break;
-
+				
 				case SDL_MOUSEBUTTONDOWN:
-					core->handle_clic(E.button.x,E.button.y,E.button.button,E.button.state);
+					// Convert the name from GLU to my GUI
+					switch (E.button.button)
+					{
+						case SDL_BUTTON_RIGHT : bt=S_GUI_MOUSE_RIGHT; break;
+						case SDL_BUTTON_LEFT :  bt=S_GUI_MOUSE_LEFT; break;
+						case SDL_BUTTON_MIDDLE : bt=S_GUI_MOUSE_MIDDLE; break;
+						case SDL_BUTTON_WHEELUP : bt=S_GUI_MOUSE_WHEELUP; break;
+						case SDL_BUTTON_WHEELDOWN : bt=S_GUI_MOUSE_WHEELDOWN; break;
+						default : bt=S_GUI_MOUSE_LEFT;
+					}
+					core->handle_clic(E.button.x,E.button.y,bt,S_GUI_PRESSED);
 					break;
 
 				case SDL_MOUSEBUTTONUP:
-					core->handle_clic(E.button.x,E.button.y,E.button.button,E.button.state);
+					// Convert the name from GLU to my GUI
+					switch (E.button.button)
+					{
+						case SDL_BUTTON_RIGHT : bt=S_GUI_MOUSE_RIGHT; break;
+						case SDL_BUTTON_LEFT :  bt=S_GUI_MOUSE_LEFT; break;
+						case SDL_BUTTON_MIDDLE : bt=S_GUI_MOUSE_MIDDLE; break;
+						case SDL_BUTTON_WHEELUP : bt=S_GUI_MOUSE_WHEELUP; break;
+						case SDL_BUTTON_WHEELDOWN : bt=S_GUI_MOUSE_WHEELDOWN; break;
+						default : bt=S_GUI_MOUSE_LEFT;
+					}
+					core->handle_clic(E.button.x,E.button.y,bt,S_GUI_RELEASED);
 					break;
 
 				case SDL_KEYDOWN:
