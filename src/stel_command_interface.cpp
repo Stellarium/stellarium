@@ -340,8 +340,7 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 
 			  // TODO: more image positioning coordinates
 			  IMAGE_POSITIONING img_pos = POS_VIEWPORT;
-
-			  if(args["coordinates"] == "altaz") img_pos = POS_ALTAZ;
+			  if(args["coordinate_system"] == "horizontal") img_pos = POS_HORIZONTAL;
 			  /*
 			  else if(args["coordinates"] == "rade") img_pos = POS_EQUATORIAL;
 			  else img_pos = POS_VIEWPORT;

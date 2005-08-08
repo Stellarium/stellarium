@@ -227,7 +227,7 @@ void Image::draw(int screenw, int screenh, const navigator * nav, Projector * pr
 		  glVertex3f(-w,h,0); }
 	  glEnd();
 	  
-  } else if(image_pos_type == POS_ALTAZ ) {
+  } else if(image_pos_type == POS_HORIZONTAL ) {
 
 	  // alt az coords
 	  prj->reset_perspective_projection();

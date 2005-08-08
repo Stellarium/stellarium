@@ -168,9 +168,9 @@ equatorial_grid<br>
 fog<br>
 gravity_labels<br>
 help<br>
-horizon<br>
 infos<br>
 init_moon_scaled<br>
+landscape<br>
 manual_zoom<br>
 menu<br>
 milky_way<br>
@@ -228,7 +228,7 @@ utc_time<br>
       </td>
     </tr>
     <tr>
-      <td colspan="1" rowspan="8" style="vertical-align: top;">image<br>
+      <td colspan="1" rowspan="12" style="vertical-align: top;">image<br>
       <br>
       </td>
       <td>action</td>
@@ -239,9 +239,48 @@ drop<br>
       </td>
     </tr>
     <tr>
+      <td style="vertical-align: top;">altitude<br>
+      </td>
+      <td style="vertical-align: top;">ALTITUDE_ANGLE<br>
+      </td>
+      <td style="vertical-align: top;">For positioning the center of
+the image in horizontal coordinates. &nbsp;Zero is at the horizon, 90
+is at the zenith.<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">azimuth<br>
+      </td>
+      <td style="vertical-align: top;">AZIMUTH_ANGLE<br>
+      </td>
+      <td style="vertical-align: top;">For positioning the center of
+the image in horizontal coordinates. &nbsp;Zero is North, 90 is East.<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">coordinate_system<br>
+      </td>
+      <td style="vertical-align: top;">viewport<br>
+horizontal<br>
+      </td>
+      <td style="vertical-align: top;">What coordinate system to use to
+position the image. &nbsp;Must be defined at image load. &nbsp;Can not
+be changed later. &nbsp;Default is viewport.<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">duration<br>
+      </td>
+      <td style="vertical-align: top;">SECONDS<br>
+      </td>
+      <td style="vertical-align: top;">How long to take to complete the
+command.<br>
+      </td>
+    </tr>
+    <tr>
       <td style="vertical-align: top;">filename</td>
       <td style="vertical-align: top;">IMAGE_FILENAME</td>
-      <td style="vertical-align: top;">path is relative to script<br>
+      <td style="vertical-align: top;">Path must be relative to script.<br>
       </td>
     </tr>
     <tr>
@@ -251,8 +290,8 @@ drop<br>
       </td>
       <td style="vertical-align: top;">Used to refer to the image in
 later calls to manipulate the image. Images must be in PNG format. If
-images do not have dimensions that are powers of 2 (128, 256, etc.)
-they are resized when loaded to meet this requirement.</td>
+images do not have dimensions that are powers of 2 (128, 256, etc.) they
+are resized when loaded to meet this requirement.</td>
     </tr>
     <tr>
       <td style="vertical-align: top;">alpha<br>
@@ -269,8 +308,10 @@ opaque.&nbsp; ALPHA can be fractional.
       </td>
       <td style="vertical-align: top;">SCALE<br>
       </td>
-      <td style="vertical-align: top;">How large to draw the image. 1
-is maximized to fit on the viewport.<br>
+      <td style="vertical-align: top;">How large to draw the image. In
+viewport coordinates, at 1 the image is scaled to fit maximized in the
+viewport. &nbsp;In horizontal coordinates, this defineds the the width
+of the image in degrees.<br>
       </td>
     </tr>
     <tr>
@@ -321,27 +362,6 @@ Arguments have same names and possible values as in landscapes.ini file.<br>
       </td>
     </tr>
     <tr>
-      <td style="vertical-align: top;">ypos<br>
-      </td>
-      <td style="vertical-align: top;">Y_POSITION<br>
-      </td>
-      <td style="vertical-align: top;">Where to draw center of image. 0
-is center of viewport, 1 is bottom edge of viewport.<br>
-      </td>
-      <td style="vertical-align: top;"><br>
-      </td>
-    </tr>
-    <tr>
-      <td style="vertical-align: top;">duration<br>
-      </td>
-      <td style="vertical-align: top;">SECONDS<br>
-      </td>
-      <td style="vertical-align: top;"><br>
-      </td>
-      <td style="vertical-align: top;"><br>
-      </td>
-    </tr>
-    <tr>
       <td colspan="1" rowspan="4" style="vertical-align: top;">moveto<br>
       <br>
       </td>
@@ -386,8 +406,7 @@ end<br>
 pause<br>
 resume<br>
       </td>
-      <td style="vertical-align: top;">Note
-that pause toggles playback.<br>
+      <td style="vertical-align: top;">Note that pause toggles playback.<br>
 If a script plays another script, the first will terminate at that
 point.<br>
       </td>
@@ -583,7 +602,7 @@ etc.<br>
 out<br>
       </td>
       <td>"out" returns to configured initial fov and viewing direction
-      </td>
+ </td>
     </tr>
     <tr>
       <td>fov<br>
