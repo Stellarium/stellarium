@@ -239,10 +239,11 @@ void Image::draw(int screenw, int screenh, const navigator * nav, Projector * pr
 	  
 	  //	  printf("%f %f\n", image_xpos, image_ypos);
 
-	  Vec3d imagev = Mat4d::zrotation(image_xpos*M_PI/180.) 
-		  * Mat4d::xrotation(image_ypos*M_PI/180.) * Vec3d(0,1,0); 
+	  // altitude = xpos, azimuth = ypos (0 at North), image top towards zenith when rotation = 0 
+	  Vec3d imagev = Mat4d::zrotation(-1*(image_ypos-90)*M_PI/180.) 
+		  * Mat4d::xrotation(image_xpos*M_PI/180.) * Vec3d(0,1,0); 
 
-	  Vec3d ortho1 = Mat4d::zrotation(image_xpos*M_PI/180.) * Vec3d(1,0,0);
+	  Vec3d ortho1 = Mat4d::zrotation((-1*(image_ypos-90))*M_PI/180.) * Vec3d(1,0,0);
 	  Vec3d ortho2 = imagev^ortho1;
 
 	  int grid_size = 5;  // per row, column
@@ -255,7 +256,7 @@ void Image::draw(int screenw, int screenh, const navigator * nav, Projector * pr
 			  for(int k=0; k<=1; k++) {
 
 				  // TODO: separate x, y scales
-				  gridpt = Mat4d::rotation( imagev, image_rotation*M_PI/180.) *
+				  gridpt = Mat4d::rotation( imagev, (image_rotation+180)*M_PI/180.) *
 					  Mat4d::rotation( ortho1, image_scale*(j-grid_size/2.)/(float)grid_size*M_PI/180.) *
 					  Mat4d::rotation( ortho2, image_scale*(i+k-grid_size/2.)/(float)grid_size*M_PI/180.) *
 					  imagev;

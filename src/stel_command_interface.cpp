@@ -341,8 +341,8 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 			  // TODO: more image positioning coordinates
 			  IMAGE_POSITIONING img_pos = POS_VIEWPORT;
 
-			  /*
 			  if(args["coordinates"] == "altaz") img_pos = POS_ALTAZ;
+			  /*
 			  else if(args["coordinates"] == "rade") img_pos = POS_EQUATORIAL;
 			  else img_pos = POS_VIEWPORT;
 			  */
@@ -366,6 +366,11 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 			  if(args["xpos"]!="" || args["ypos"]!="") 
 				  img->set_location(str_to_double(args["xpos"]), args["xpos"]!="",
 									str_to_double(args["ypos"]), args["ypos"]!="",
+									str_to_double(args["duration"]));
+			  // for more human readable scripts, as long as someone doesn't do both...
+			  if(args["altitude"]!="" || args["azimuth"]!="") 
+				  img->set_location(str_to_double(args["altitude"]), args["altitude"]!="",
+									str_to_double(args["azimuth"]), args["azimuth"]!="",
 									str_to_double(args["duration"]));
 		  }
 	  }
