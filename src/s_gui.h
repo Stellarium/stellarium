@@ -1,6 +1,6 @@
 /*
  * Stellarium
- * Copyright (C) 2002 Fabien Chéreau
+ * Copyright (C) 2002 Fabien Chï¿½eau
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -53,6 +53,8 @@ namespace s_gui
 		S_GUI_MOUSE_LEFT,
 		S_GUI_MOUSE_RIGHT,
     	S_GUI_MOUSE_MIDDLE,
+		S_GUI_MOUSE_WHEELUP,
+		S_GUI_MOUSE_WHEELDOWN,
 		S_GUI_PRESSED,
 		S_GUI_RELEASED
 	};

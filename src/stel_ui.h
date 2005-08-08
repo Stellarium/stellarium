@@ -1,6 +1,6 @@
 /*
  * Stellarium
- * Copyright (C) 2002 Fabien Chéreau
+ * Copyright (C) 2002 Fabien Chï¿½eau
  * 
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -49,7 +49,7 @@ public:
 	void draw_gravity_ui(void);	// Draw simple gravity text ui.
 
 	// Handle mouse clics
-	int handle_clic(Uint16 x, Uint16 y, Uint8 state, Uint8 button);
+	int handle_clic(Uint16 x, Uint16 y, S_GUI_VALUE button, S_GUI_VALUE state);
 	// Handle mouse move
 	int handle_move(int x, int y);
 	// Handle key press and release
@@ -204,6 +204,10 @@ private:
 	void updateConfigForm(void);
 
 	bool LocaleChanged;  // flag to watch for need to rebuild TUI
+
+	// Mouse control options
+	bool is_dragging, has_dragged;
+	int previous_x, previous_y;
 
 	////////////////////////////////////////////////////////////////////////////
 	// Text UI components
