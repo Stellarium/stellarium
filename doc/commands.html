@@ -64,8 +64,11 @@ of seconds desired). </p>
       </td>
       <td style="vertical-align: top;">AUDIO_FILENAME<br>
       </td>
-      <td style="vertical-align: top;">Currently limited to 16 bit,
-22050 Hz, little-endian WAV files. </td>
+      <td style="vertical-align: top;">Format support depends on your
+binary. &nbsp;Ogg Vorbis format is recommended. WAV format should work
+but is discouraged because in this case the audio track will not adjust
+if the script is rewound or fast forwarded! &nbsp;[This is a current
+limitation of the&nbsp; SDL_Mixer library.] </td>
     </tr>
     <tr>
       <td style="vertical-align: top;">loop<br>
@@ -244,8 +247,8 @@ drop<br>
       <td style="vertical-align: top;">ALTITUDE_ANGLE<br>
       </td>
       <td style="vertical-align: top;">For positioning the center of
-the image in horizontal coordinates. &nbsp;Zero is at the horizon, 90
-is at the zenith.<br>
+the image in horizontal coordinates. &nbsp;Zero is at the horizon, 90 is
+at the zenith.<br>
       </td>
     </tr>
     <tr>
@@ -393,7 +396,7 @@ Arguments have same names and possible values as in landscapes.ini file.<br>
       </td>
       <td>SECONDS<br>
       </td>
-      <td>How long to effect this change.<br>
+      <td>How long to take to effect this change.<br>
       </td>
     </tr>
     <tr>

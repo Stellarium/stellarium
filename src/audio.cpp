@@ -24,14 +24,10 @@
 
 #ifdef HAVE_SDL_MIXER_H
 Audio::Audio(std::string filename, std::string name) {
-    // audio parameters (could be set as parameters to this constructor)
-    int audio_rate = 22050;
-    Uint16 audio_format = AUDIO_S16SYS; /* 16-bit stereo */  // TODO: cross platform issues?
-    int audio_channels = 2;
-    int audio_buffers = 4096;
+    // audio parameters could be passed in... 
 
 	// initialize audio
-	if(Mix_OpenAudio(audio_rate, audio_format, audio_channels, audio_buffers)) {
+	if(Mix_OpenAudio(22050, MIX_DEFAULT_FORMAT, 2, 4096)) {
 		printf("Unable to open audio!\n");
 		return;
 		// TODO: how to test this case?
