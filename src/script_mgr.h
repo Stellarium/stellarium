@@ -37,9 +37,10 @@ class ScriptMgr
 {
 
  public:
-  ScriptMgr(StelCommandInterface * command_interface);
+  ScriptMgr(StelCommandInterface * command_interface, string _data_dir);
   ~ScriptMgr();
-  void play_script(string script_file, string script_path);
+  bool play_script(string script_file, string script_path);
+  bool play_startup_script();
   void cancel_script();  // stop playing current script
   void pause_script();
   void resume_script();  // start playing paused script
@@ -54,7 +55,6 @@ class ScriptMgr
   string get_script_path();
   string get_record_filename() { return rec_filename; }  // file record is writing to
 
-
  private:
 
   StelCommandInterface * commander;  // for executing script commands
@@ -67,6 +67,9 @@ class ScriptMgr
   bool play_paused;// is script playback paused?
   fstream rec_file;
   string rec_filename;
+  string RemoveableScriptDirectory;
+  bool RemoveableDirectoryMounted;
+  string DataDir;  
 };
 
 

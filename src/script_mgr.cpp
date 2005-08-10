@@ -28,41 +28,50 @@
 using namespace std;
 
 
-ScriptMgr::ScriptMgr(StelCommandInterface *command_interface) : play_paused(false) {
+ScriptMgr::ScriptMgr(StelCommandInterface *command_interface, string _data_dir) : play_paused(false) {
   commander = command_interface;
+  DataDir = _data_dir;
   recording = 0;
   playing = 0;
   record_elapsed_time = 0;
+
+  // used when scripts are on a CD that needs to be mounted manually
+  RemoveableScriptDirectory = "";
+  RemoveableDirectoryMounted = 0;
 }
 
 ScriptMgr::~ScriptMgr() {
 }
 
 // path is used for loading script assets 
-void ScriptMgr::play_script(string script_file, string script_path) {
+bool ScriptMgr::play_script(string script_file, string script_path) {
   // load script...
 
   if(playing){
 	  // cancel current script and start next (one script can call another)
 	  cancel_script();
-	  //    cout << "Error: script already in progress.  Can't play " << script_file << endl;
   }
 
   script = new Script();
+
+  // if script is on mountable disk, mount that now
+  if( RemoveableScriptDirectory != "" &&
+	  script_file.compare(0,RemoveableScriptDirectory.length(), RemoveableScriptDirectory) ==0) {
+	  system( ( DataDir + "script_mount_script_disk " ).c_str() );	  
+	  cout << "MOUNT DISK to read script\n";
+		
+	  RemoveableDirectoryMounted = 1;
+  }
+
   if( script->load(script_file, script_path) ) {
     playing = 1;
     play_paused = 0;
     elapsed_time = wait_time = 0;
-
-    /*    // temp
-    string comd;
-    while(script->next_command(comd)) {
-      cout << "Command: " << comd << endl;
-    }
-    */
+	return 1;
 
   } else {
     delete script;
+	return 0;
   }
 }
 
@@ -74,6 +83,11 @@ void ScriptMgr::cancel_script() {
   playing = 0;
   play_paused = 0;
 
+  if(RemoveableDirectoryMounted) {
+	  system( ( DataDir + "script_unmount_script_disk " ).c_str() );	  
+	  cout << "UNMOUNT DISK\n";
+	  RemoveableDirectoryMounted = 0;
+  }
 }
 
 
@@ -215,6 +229,15 @@ string ScriptMgr::get_script_list(string directory) {
   string result="";
   string tmp;
 
+  // if directory is on mountable disk, mount that now
+  if( RemoveableScriptDirectory != "" &&
+	  directory.compare(0,RemoveableScriptDirectory.length(), RemoveableScriptDirectory) ==0) {
+	  system( ( DataDir + "script_mount_script_disk " ).c_str() );	  
+	  cout << "MOUNT DISK to read directory\n";
+		
+	  RemoveableDirectoryMounted = 1;
+  }
+
   if ((dp = opendir(directory.c_str())) == NULL) {
     cout << "Error reading script directory " << directory << endl;
     return "";
@@ -231,6 +254,13 @@ string ScriptMgr::get_script_list(string directory) {
   }
   closedir(dp);
 
+  if(RemoveableDirectoryMounted) {
+	  // leave disk unmounted
+	  system( ( DataDir + "script_unmount_script_disk " ).c_str() );	  
+	  cout << "UNMOUNT DISK\n";
+	  RemoveableDirectoryMounted = 0;
+  }
+
   //cout << "Result = " << result;
   return result;
 
@@ -239,4 +269,20 @@ string ScriptMgr::get_script_list(string directory) {
 string ScriptMgr::get_script_path() { 
   if(script) return script->get_path(); 
   return ""; 
+}
+
+
+// look for a script called "startup.sts"
+bool ScriptMgr::play_startup_script() {
+
+	// first try on removeable directory
+	if(RemoveableScriptDirectory !="" &&
+	   play_script(RemoveableScriptDirectory + "scripts/startup.sts", 
+					RemoveableScriptDirectory + "scripts/")) {
+		return 1;
+	} else {
+		// try in stellarium tree
+		return play_script(DataDir + "scripts/startup.sts", DataDir + "scripts/");
+	} 
+
 }
