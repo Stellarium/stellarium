@@ -279,6 +279,8 @@ private:
 
 	// Parse a file of type /usr/share/zoneinfo/zone.tab
 	s_tui::MultiSet_item<string>* stel_ui::create_tree_from_time_zone_file(const string& zonetab);
+
+	bool ScriptDirectoryRead;
 };
 
 #endif  //_STEL_UI_H
