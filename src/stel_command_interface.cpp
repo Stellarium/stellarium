@@ -618,7 +618,10 @@ int StelCommandInterface::set_flag(string name, string value, bool &newval, bool
 		else if(name=="show_tui_short_obj_info") newval = (stcore->FlagShowTuiShortObjInfo = !stcore->FlagShowTuiShortObjInfo);
 		else if(name=="manual_zoom") newval = (stcore->FlagManualZoom = !stcore->FlagManualZoom);
 		else if(name=="fog") newval = (stcore->FlagFog = !stcore->FlagFog);
-		else if(name=="atmosphere") newval = (stcore->FlagAtmosphere = !stcore->FlagAtmosphere);
+		else if(name=="atmosphere") {
+			newval = (stcore->FlagAtmosphere = !stcore->FlagAtmosphere);
+			if(!newval) stcore->FlagFog = 0;  // turn off fog with atmosphere
+		}
 		else if(name=="azimuthal_grid") newval = (stcore->FlagAzimutalGrid = !stcore->FlagAzimutalGrid);
 		else if(name=="equatorial_grid") newval = (stcore->FlagEquatorialGrid = !stcore->FlagEquatorialGrid);
 		else if(name=="equator_line") newval = (stcore->FlagEquatorLine = !stcore->FlagEquatorLine);
@@ -702,7 +705,10 @@ int StelCommandInterface::set_flag(string name, string value, bool &newval, bool
 		else if(name=="show_tui_short_obj_info") stcore->FlagShowTuiShortObjInfo = newval;
 		else if(name=="manual_zoom") stcore->FlagManualZoom = newval;
 		else if(name=="fog") stcore->FlagFog = newval;
-		else if(name=="atmosphere") stcore->FlagAtmosphere = newval;
+		else if(name=="atmosphere") { 
+			stcore->FlagAtmosphere = newval;
+			if(!newval) stcore->FlagFog = 0;  // turn off fog with atmosphere
+		}
 		else if(name=="azimuthal_grid") stcore->FlagAzimutalGrid = newval;
 		else if(name=="equatorial_grid") stcore->FlagEquatorialGrid = newval;
 		else if(name=="equator_line") stcore->FlagEquatorLine = newval;
