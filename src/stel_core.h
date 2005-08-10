@@ -235,7 +235,7 @@ private:
 	// Script related
 	string SelectedScript;  // script filename (without directory) selected in a UI to run when exit UI
 	string SelectedScriptDirectory;  // script directory for same
-	bool ScriptRemoveableDiskMounted;  // is disk for scripts mounted?
+
 
 	///////////////////////////////////////////////////////////////////////////////
 	// Below this limit, all the attributes will be removed from the program and 

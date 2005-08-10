@@ -36,7 +36,6 @@ stel_core::stel_core(const string& DDIR, const string& TDIR, const string& CDIR,
 	
 	ProjectorType = PERSPECTIVE_PROJECTOR;
 	SelectedScript = SelectedScriptDirectory = "";
-	ScriptRemoveableDiskMounted = 0;
 	
 	tone_converter = new tone_reproductor();		
 	atmosphere = new stel_atmosphere();	
@@ -55,7 +54,7 @@ stel_core::stel_core(const string& DDIR, const string& TDIR, const string& CDIR,
 	
 	ui = new stel_ui(this);
 	commander = new StelCommandInterface(this);
-	scripts = new ScriptMgr(commander);
+	scripts = new ScriptMgr(commander, DataDir);
 	script_images = new ImageMgr();
 }
 
@@ -209,8 +208,9 @@ void stel_core::init(void)
 	// load translated labels for sky language
 	set_sky_locale(SkyLocale);
 
-	// could load a startup script
-	//commander->execute_command("script action play filename ./scripts/startup.sts");
+	// play startup script, if available
+	scripts->play_startup_script();
+
 }
 
 void stel_core::quit(void)
@@ -879,11 +879,11 @@ int stel_core::handle_keys(Uint16 key, s_gui::S_GUI_VALUE state)
 		  FlagShowTuiMenu = false;
 
 		  // If selected a script in tui, run that now
-		  if(SelectedScript!="") commander->execute_command("script action play filename " + SelectedScriptDirectory + SelectedScript + " path " + SelectedScriptDirectory);
-		  else {
-			  // unmount disk if necessary
-			  commander->execute_command("script action end");
-		  }
+		  if(SelectedScript!="") 
+			  commander->execute_command("script action play filename "
+										 + SelectedScriptDirectory + SelectedScript 
+										 + " path " + SelectedScriptDirectory);
+		  
 		  // clear out now
 		  SelectedScriptDirectory = SelectedScript = "";
 		  return 1;

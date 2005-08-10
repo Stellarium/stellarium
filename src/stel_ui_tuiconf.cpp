@@ -78,6 +78,7 @@ void stel_ui::init_tui(void)
 {
 	// Menu root branch
 	LocaleChanged=0;
+	ScriptDirectoryRead = 0;
 	tui_root = new s_tui::Branch();
 
 	// Submenus
@@ -342,7 +343,7 @@ void stel_ui::tui_update_widgets(void)
 	if(core->SelectedScript=="") {
 		tui_scripts_local->setCurrent(TUI_SCRIPT_MSG);
 		
-		if(core->ScriptRemoveableDiskMounted) {
+		if(ScriptDirectoryRead) {
 			tui_scripts_removeable->setCurrent(TUI_SCRIPT_MSG);
 		} else {
 			// no directory mounted, so put up message
@@ -440,24 +441,21 @@ void stel_ui::tui_cb_tui_admin_change_viewport(void)
 // callback for changing scripts from removeable media
 void stel_ui::tui_cb_scripts_removeable() {
   
-  if(!core->ScriptRemoveableDiskMounted) {
-    // mount disk
-	system( ( core->DataDir + "script_mount_script_disk " ).c_str() );	  
-
-    cout << "MOUNT DISK for scripts\n";
-    // read scripts from mounted disk
-    tui_scripts_removeable->replaceItemList(TUI_SCRIPT_MSG + string("\n") + core->scripts->get_script_list(SCRIPT_REMOVEABLE_DISK), 0);   
-    core->ScriptRemoveableDiskMounted = 1;
+  if(!ScriptDirectoryRead) {
+	  // read scripts from mounted disk
+	  string script_list = core->scripts->get_script_list(SCRIPT_REMOVEABLE_DISK);
+	  tui_scripts_removeable->replaceItemList(TUI_SCRIPT_MSG + string("\n") + script_list,0);
+	  ScriptDirectoryRead = 1;
   } 
 
-  if(tui_scripts_removeable->getCurrent()!=TUI_SCRIPT_MSG){
-    core->SelectedScript = tui_scripts_removeable->getCurrent();
-    core->SelectedScriptDirectory = SCRIPT_REMOVEABLE_DISK;
-    // to avoid confusing user, clear out local script selection as well
-    tui_scripts_local->setCurrent(TUI_SCRIPT_MSG);
+  if(tui_scripts_removeable->getCurrent()==TUI_SCRIPT_MSG) {
+	  core->SelectedScript = "";
   } else {
-    core->SelectedScript = "";
-  }
+	  core->SelectedScript = tui_scripts_removeable->getCurrent();
+	  core->SelectedScriptDirectory = SCRIPT_REMOVEABLE_DISK;
+	  // to avoid confusing user, clear out local script selection as well
+	  tui_scripts_local->setCurrent(TUI_SCRIPT_MSG);
+  } 
 }
 
 
@@ -468,7 +466,7 @@ void stel_ui::tui_cb_scripts_local() {
     core->SelectedScript = tui_scripts_local->getCurrent();
     core->SelectedScriptDirectory = core->DataDir + "scripts/";
     // to reduce confusion for user, clear out removeable script selection as well
-    if(core->ScriptRemoveableDiskMounted) tui_scripts_removeable->setCurrent(TUI_SCRIPT_MSG);
+    if(ScriptDirectoryRead) tui_scripts_removeable->setCurrent(TUI_SCRIPT_MSG);
   } else {
     core->SelectedScript = "";
   }
