@@ -469,26 +469,25 @@ void stel_ui::tcbr(void)
 Component* stel_ui::createLicenceWindow(void)
 {
 	licence_txtlbl = new TextLabel(
-	                     string("                 \1   " APP_NAME "  August 2005  \1\n\n") +
-	                     "\1   Copyright (c) 2000-2005 Fabien Chereau et al.\n\n" +
-
-	                     _("\1   Please check for newer versions and send bug reports\n\
-	                       and comments to us at: http://stellarium.sourceforge.net\n\n") +
-	                     _("\1   This program is free software; you can redistribute it and/or\n\
-	                       modify it under the terms of the GNU General Public License\n\
-	                       as published by the Free Software Foundation; either version 2\n\
-	                       of the License, or (at your option) any later version.\n\n") +
-	                     _("This program is distributed in the hope that it will be useful, but\n\
-	                       WITHOUT ANY WARRANTY; without even the implied\n\
-	                       warranty of MERCHANTABILITY or FITNESS FOR A\n\
-	                       PARTICULAR PURPOSE.  See the GNU General Public\n\
-	                       License for more details.\n\n") +
-	                     _("You should have received a copy of the GNU General Public\n\
-	                       License along with this program; if not, write to:\n") +
-	                     "              Free Software Foundation, Inc.\n\
-	                     59 Temple Place - Suite 330\n\
-	                     Boston, MA  02111-1307, USA.\n\
-	                     http://www.fsf.org");
+string("                 \1   " APP_NAME "  August 2005  \1\n\n") +
+"\1   Copyright (c) 2000-2005 Fabien Chereau et al.\n\n" +
+_("\1   Please check for newer versions and send bug reports\n\
+and comments to us at: http://stellarium.sourceforge.net\n\n") +
+_("\1   This program is free software; you can redistribute it and/or\n\
+modify it under the terms of the GNU General Public License\n\
+as published by the Free Software Foundation; either version 2\n\
+of the License, or (at your option) any later version.\n\n") +
+_("This program is distributed in the hope that it will be useful, but\n\
+WITHOUT ANY WARRANTY; without even the implied\n\
+warranty of MERCHANTABILITY or FITNESS FOR A\n\
+PARTICULAR PURPOSE.  See the GNU General Public\n\
+License for more details.\n\n") +
+_("You should have received a copy of the GNU General Public\n\
+License along with this program; if not, write to:\n") +
+"Free Software Foundation, Inc.\n\
+59 Temple Place - Suite 330\n\
+Boston, MA  02111-1307, USA.\n\
+http://www.fsf.org");
 	licence_txtlbl->adjustSize();
 	licence_txtlbl->setPos(10,10);
 	licence_win = new StdBtWin(_("Information"));
@@ -505,38 +504,37 @@ Component* stel_ui::createHelpWindow(void)
 {
 	help_txtlbl = new TextLabel(
 	                  string(_("\
-	                           Arrow Keys       : Change viewing RA/DE\n\
-	                           Page Up/Down     : Zoom\n\
-	                           CTRL+Up/Down     : Zoom\n\
-	                           Left Click       : Select object\n\
-	                           Right Click      : Unselect\n\
-	                           CTRL+Left Click  : Unselect\n\
-	                           SPACE : Center on selected object\n\
-	                           ENTER : Equatorial/altazimuthal mount\n\
-	                           C   : Constellation lines\n\
-	                           V   : Constellation labels\n\
-	                           R   : Constellation art\n\
-	                           E   : Equatorial grid\n\
-	                           Z   : Azimuthal grid\n\
-	                           N   : Nebula labels\n\
-	                           P   : Planet labels\n\
-	                           G   : Ground\n\
-	                           F   : Fog\n\
-	                           Q   : Cardinal points\n\
-	                           A   : Atmosphere\n\
-	                           H   : Help\n\
-	                           4   : Ecliptic line\n\
-	                           5   : Equator line\n\
-	                           T   : Object tracking\n\
-	                           S   : Stars\n\
-	                           8   : Set time to current time\n\
-	                           9   : Toggle meteor shower rates\n\
-	                           I   : About Stellarium\n\
-	                           M   : Text menu\n\
-	                           F1  : Toggle fullscreen if possible.\n\
-	                           CTRL + S : Take a screenshot\n\
-	                           CTRL + R : Toggle script recording\n")) + string(
-
+Arrow Keys       : Change viewing RA/DE\n\
+Page Up/Down     : Zoom\n\
+CTRL+Up/Down     : Zoom\n\
+Left Click       : Select object\n\
+Right Click      : Unselect\n\
+CTRL+Left Click  : Unselect\n\
+SPACE : Center on selected object\n\
+ENTER : Equatorial/altazimuthal mount\n\
+C   : Constellation lines\n\
+V   : Constellation labels\n\
+R   : Constellation art\n\
+E   : Equatorial grid\n\
+Z   : Azimuthal grid\n\
+N   : Nebula labels\n\
+P   : Planet labels\n\
+G   : Ground\n\
+F   : Fog\n\
+Q   : Cardinal points\n\
+A   : Atmosphere\n\
+H   : Help\n\
+4   : Ecliptic line\n\
+5   : Equator line\n\
+T   : Object tracking\n\
+S   : Stars\n\
+8   : Set time to current time\n\
+9   : Toggle meteor shower rates\n\
+I   : About Stellarium\n\
+M   : Text menu\n\
+F1  : Toggle fullscreen if possible.\n\
+CTRL + S : Take a screenshot\n\
+CTRL + R : Toggle script recording\n")) + string(
 #ifndef MACOSX
 	                      _("CTRL + Q : Quit\n")
 #else

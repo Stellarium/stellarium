@@ -1,6 +1,6 @@
 /*
  * Stellarium
- * Copyright (C) 2002 Fabien Chéreau
+ * Copyright (C) 2002 Fabien Chï¿½eau
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -311,15 +311,27 @@ Component* stel_ui::createConfigWindow(void)
 	screen_size_sl->addItem("640x480");
 	screen_size_sl->addItem("800x600");
 	screen_size_sl->addItem("1024x768");
+	screen_size_sl->addItem("1280x800");
 	screen_size_sl->addItem("1280x1024");
+	screen_size_sl->addItem("1400x1050");
 	screen_size_sl->addItem("1600x1200");
 	screen_size_sl->adjustSize();
-	char vs[100];
+	char vs[1000];
 	sprintf(vs, "%dx%d", core->screen_W, core->screen_H);
 	screen_size_sl->setValue(vs);
 	tab_video->addComponent(screen_size_sl);
 
 	y+=100;
+
+	snprintf(vs, 999, "%sconfig.ini", core->ConfigDir.c_str());
+	Label * lblvideo5 = new Label(_("For unlisted screen resolution, edit the file :"));
+	Label * lblvideo6 = new Label(string(vs));
+	lblvideo5->setPos(30, y+25);
+	lblvideo6->setPos(30, y+40);
+	tab_video->addComponent(lblvideo5);
+	tab_video->addComponent(lblvideo6);
+
+	y+=80;
 
 	LabeledButton* video_save_bt = new LabeledButton(_("Save as default"));
 	video_save_bt->setOnPressCallback(callback<void>(this, &stel_ui::setVideoOption));
