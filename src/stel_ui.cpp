@@ -603,7 +603,6 @@ int stel_ui::handle_move(int x, int y)
 			}
 			rect_to_sphe(&az1, &alt1, tempvec1);
 			rect_to_sphe(&az2, &alt2, tempvec2);
-			cout << az2-az1 << alt2-alt1 <<endl;
 			core->navigation->update_move(az2-az1, alt1-alt2);
 			previous_x = x;
 			previous_y = y;
