@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium 0.7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-07-16 03:36+0200\n"
+"POT-Creation-Date: 2005-07-26 10:26+0200\n"
 "PO-Revision-Date: 2004-12-22 00:25+0100\n"
 "Last-Translator:  <fazylova_genia@mail.ru>\n"
 "Language-Team: Russian <ru@li.org>\n"
@@ -290,37 +290,36 @@ msgid ""
 "8   : Set time to current time\n"
 "9   : Toggle meteor shower rates\n"
 "I   : About Stellarium\n"
-"M   : Text menu\n"
 "F1  : Toggle fullscreen if possible.\n"
 "CTRL + S : Take a screenshot\n"
 "CTRL + R : Toggle script recording\n"
 msgstr ""
 
-#: src/stel_ui.cpp:540
+#: src/stel_ui.cpp:539
 msgid "CTRL + Q : Quit\n"
 msgstr ""
 
-#: src/stel_ui.cpp:542
+#: src/stel_ui.cpp:541
 msgid "CMD + Q  : Quit\n"
 msgstr ""
 
-#: src/stel_ui.cpp:549
+#: src/stel_ui.cpp:548
 msgid "Help"
 msgstr ""
 
-#: src/stel_ui.cpp:752
+#: src/stel_ui.cpp:751
 msgid "Command recording stopped."
 msgstr ""
 
-#: src/stel_ui.cpp:757
+#: src/stel_ui.cpp:756
 msgid "Recording commands to script file:\n"
 msgstr ""
 
-#: src/stel_ui.cpp:759
+#: src/stel_ui.cpp:758
 msgid "Hit CTRL-R again to stop.\n"
 msgstr ""
 
-#: src/stel_ui.cpp:761
+#: src/stel_ui.cpp:760
 msgid "Error: Unable to open script file to record commands."
 msgstr ""
 
@@ -500,7 +499,7 @@ msgstr ""
 msgid "Loading Solar System data...\n"
 msgstr ""
 
-#: src/stel_core.cpp:461
+#: src/stel_core.cpp:463
 #, c-format
 msgid ""
 "The current config file is from a previous version (>=0.6.0).\n"
@@ -508,7 +507,7 @@ msgid ""
 msgstr ""
 
 #. The config file is too old to try an importation
-#: src/stel_core.cpp:480
+#: src/stel_core.cpp:482
 #, c-format
 msgid ""
 "The current config file is from a version too old for parameters to be "
@@ -516,12 +515,24 @@ msgid ""
 "It will be replaced by the default config file.\n"
 msgstr ""
 
-#: src/stel_core.cpp:503
+#: src/stel_core.cpp:505
 msgid "Loading configuration file "
 msgstr ""
 
-#: src/stel_core.cpp:511
+#: src/stel_core.cpp:513
 msgid "ERROR : The current config file is from a different version ("
+msgstr ""
+
+#: src/stel_core.cpp:1308
+msgid "Using sky language from environment locale\n"
+msgstr ""
+
+#: src/stel_core.cpp:1311
+msgid "Did not recognize locale language code "
+msgstr ""
+
+#: src/stel_core.cpp:1312
+msgid ". Defaulting to english sky labels\n"
 msgstr ""
 
 #. Submenus
