@@ -1,6 +1,6 @@
 /*
  * Stellarium
- * Copyright (C) 2003 Fabien Chéreau
+ * Copyright (C) 2003 Fabien Chï¿½eau
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -242,7 +242,7 @@ void navigator::update_time(int delta_time)
 void navigator::update_transform_matrices(Vec3d earth_ecliptic_pos)
 {
 
-        double lat = position->get_latitude();  
+	double lat = position->get_latitude();  
 	// TODO: Figure out how to keep continuity in sky as reach poles  
 	// otherwise sky jumps in rotation when reach poles
 

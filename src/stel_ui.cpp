@@ -586,24 +586,25 @@ int stel_ui::handle_move(int x, int y)
 {
 	if (is_dragging)
 	{
-		if (sqrtf((x-previous_x)*(x-previous_x)+(y-previous_y)*(y-previous_y))>4.)
+		if ((has_dragged || sqrtf((x-previous_x)*(x-previous_x)+(y-previous_y)*(y-previous_y))>4.))
 		{
 			has_dragged = true;
 			Vec3d tempvec1, tempvec2;
 			double az1, alt1, az2, alt2;
 			if (core->navigation->get_viewing_mode()==VIEW_HORIZON)
 			{
-				core->projection->unproject_local(x,y, tempvec2);
-				core->projection->unproject_local(previous_x,previous_y, tempvec1);
+				core->projection->unproject_local(x,core->screen_H-y, tempvec2);
+				core->projection->unproject_local(previous_x,core->screen_H-previous_y, tempvec1);
 			}
 			else
 			{
-				core->projection->unproject_earth_equ(x,y, tempvec2);
-				core->projection->unproject_earth_equ(previous_x,previous_y, tempvec1);
+				core->projection->unproject_earth_equ(x,core->screen_H-y, tempvec2);
+				core->projection->unproject_earth_equ(previous_x,core->screen_H-previous_y, tempvec1);
 			}
 			rect_to_sphe(&az1, &alt1, tempvec1);
 			rect_to_sphe(&az2, &alt2, tempvec2);
-			core->navigation->update_move(az2-az1, alt2-alt1);
+			cout << az2-az1 << alt2-alt1 <<endl;
+			core->navigation->update_move(az2-az1, alt1-alt2);
 			previous_x = x;
 			previous_y = y;
 		}
