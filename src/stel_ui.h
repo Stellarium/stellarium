@@ -205,6 +205,11 @@ private:
 
 	bool LocaleChanged;  // flag to watch for need to rebuild TUI
 
+	// Landscape options
+	StringList* landscape_sl;
+	void setLandscape(void);
+	void saveLandscapeOption(void);
+
 	// Mouse control options
 	bool is_dragging, has_dragged;
 	int previous_x, previous_y;

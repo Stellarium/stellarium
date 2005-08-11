@@ -515,6 +515,15 @@ namespace s_gui
 		virtual void draw(void);
 		virtual int onClic(int, int, S_GUI_VALUE, S_GUI_VALUE);
 		void addItem(const string &);
+		void addItemList(const string& s)
+		{
+			istringstream is(s);
+			string elem;
+			while(getline(is, elem))
+			{
+				addItem(elem);
+			}
+		}
 		const string getValue() const;
 		bool setValue(const string &);
 		void adjustSize(void) {setSizey(elemsSize);}

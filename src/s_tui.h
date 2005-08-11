@@ -1,6 +1,6 @@
 /*
  * Stellarium
- * Copyright (C) 2003 Fabien Chéreau
+ * Copyright (C) 2003 Fabien Chï¿½eau
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -341,7 +341,7 @@ namespace s_tui
 		  items.insert(newitem); 
 		  if(current==items.end()) current = items.begin();
 		}
-		void addItemList(string s)
+		void addItemList(const string& s)
 		{
 			istringstream is(s);
 			T elem;
