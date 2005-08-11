@@ -339,9 +339,40 @@ Component* stel_ui::createConfigWindow(void)
 	video_save_bt->setPos(x + 50,y);
 	video_save_bt->setSize(170,25); y+=20;
 
+	// Landscapes option
+	FilledContainer* tab_landscapes = new FilledContainer();
+	tab_landscapes->setSize(config_tab_ctr->getSize());
+
+	x=10; y=10;
+	Label * lbllandscapes1 = new Label(_("\1 Choose landscapes :"));
+	lbllandscapes1->setPos(x, y);
+	tab_landscapes->addComponent(lbllandscapes1);
+
+	x=50; y+=20;
+
+	landscape_sl = new StringList();
+	landscape_sl->setPos(x,y);
+	landscape_sl->addItemList(Landscape::get_file_content(core->DataDir + "landscapes.ini"));
+	landscape_sl->adjustSize();
+	sprintf(vs, "%s", core->observatory->get_landscape_name().c_str());
+	landscape_sl->setValue(vs);
+	landscape_sl->setOnPressCallback(callback<void>(this, &stel_ui::setLandscape));
+	tab_landscapes->addComponent(landscape_sl);
+
+	y+=150;	
+
+	Label * lbllandscape1 = new Label(_("Please save option in tab \"Location\""));
+	Label * lbllandscape2 = new Label(_("to save current landscape as the default landscape."));
+	lbllandscape1->setPos(30, y+25);
+	lbllandscape2->setPos(30, y+40);
+	tab_landscapes->addComponent(lbllandscape1);
+	tab_landscapes->addComponent(lbllandscape2);
+
+	// Global window
 	config_tab_ctr->setTexture(flipBaseTex);
 	config_tab_ctr->addTab(tab_time, _("Date & Time"));
 	config_tab_ctr->addTab(tab_location, _("Location"));
+	config_tab_ctr->addTab(tab_landscapes, _("Landscapes"));
 	config_tab_ctr->addTab(tab_video, _("Video"));
 	config_tab_ctr->addTab(tab_render, _("Rendering"));
 	config_win->addComponent(config_tab_ctr);
@@ -472,6 +503,11 @@ void stel_ui::setVideoOption(void)
 	conf.set_int("video:screen_w", w);
 	conf.set_int("video:screen_h", h);
 	conf.save(core->ConfigDir + core->config_file);
+}
+
+void stel_ui::setLandscape(void)
+{
+	core->set_landscape(landscape_sl->getValue());
 }
 
 void stel_ui::updateVideoVariables(void)
