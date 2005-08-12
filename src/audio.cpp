@@ -26,18 +26,17 @@
 
 float Audio::master_volume = 0.5;
 
-Audio::Audio(std::string filename, std::string name) {
-    // audio parameters could be passed in... 
+Audio::Audio(std::string filename, std::string name, long int output_rate) {
+
+	if(output_rate < 1000) output_rate = 22050;
 
 	// initialize audio
-	if(Mix_OpenAudio(22050, MIX_DEFAULT_FORMAT, 2, 4096)) {
+	if(Mix_OpenAudio(output_rate, MIX_DEFAULT_FORMAT, 2, 4096)) {
 		printf("Unable to open audio output!\n");
 		track = NULL;
 		return;
-		// TODO: how to test this case?
 	}
 
-	// set the music volume to 1/2 maximum
 	Mix_VolumeMusic(int(MIX_MAX_VOLUME*master_volume));
 
 	track = Mix_LoadMUS(filename.c_str());

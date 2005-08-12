@@ -406,3 +406,13 @@ string double_to_str(double dbl) {
   return oss.str();
 
 }
+
+long int str_to_long(string str) {
+
+	if(str=="") return 0;
+	long int integer;
+	std::istringstream istr( str );
+    
+	istr >> integer;
+	return integer;
+}

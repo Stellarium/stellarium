@@ -80,6 +80,6 @@ int str_to_int(string str);
 int str_to_int(string str, int default_value);
 
 string double_to_str(double dbl);
-
+long int str_to_long(string str);
 
 #endif
