@@ -48,6 +48,8 @@ class StelCommandInterface : CommandInterface
   virtual int StelCommandInterface::execute_command(string command, int arg);
   virtual int execute_command(string command, unsigned long int &wait, bool trusted);
   virtual int set_flag(string name, string value, bool &newval, bool trusted);
+  void update(int delta_time);
+
  private:
   stel_core * stcore;
   Audio * audio;  // for audio track from script

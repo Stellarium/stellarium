@@ -23,21 +23,29 @@
 #include "audio.h"
 
 #ifdef HAVE_SDL_MIXER_H
+
+float Audio::master_volume = 0.5;
+
 Audio::Audio(std::string filename, std::string name) {
     // audio parameters could be passed in... 
 
 	// initialize audio
 	if(Mix_OpenAudio(22050, MIX_DEFAULT_FORMAT, 2, 4096)) {
-		printf("Unable to open audio!\n");
+		printf("Unable to open audio output!\n");
+		track = NULL;
 		return;
 		// TODO: how to test this case?
 	}
 
 	// set the music volume to 1/2 maximum
-	Mix_VolumeMusic(MIX_MAX_VOLUME/2);
+	Mix_VolumeMusic(int(MIX_MAX_VOLUME*master_volume));
 
 	track = Mix_LoadMUS(filename.c_str());
-	if(track == NULL) 	std::cout << "Could not load audio file " << filename << "\n";
+	if(track == NULL) {
+		is_playing = 0;
+		std::cout << "Could not load audio file " << filename << "\n";
+	} else is_playing = 1;
+
 	track_name = name;
 }
 
@@ -51,50 +59,79 @@ Audio::~Audio() {
 
 void Audio::play(bool loop) {
 	
-	if(loop) Mix_PlayMusic(track, -1);
-	else Mix_PlayMusic(track, 0);
-	std::cout << "now playing audio\n";
+	// TODO check for load errors
 
+	if(track) {
+		if(loop) Mix_PlayMusic(track, -1);
+		else Mix_PlayMusic(track, 0);
+		is_playing = 1;
+		elapsed_seconds = 0;
+		std::cout << "now playing audio\n";
+	} else {
+		std::cout << "Can't play empty track\n";
+	}
+}
+
+// used solely to track elapsed seconds of play
+void Audio::update(int delta_time) {
+	
+	if(track) elapsed_seconds += delta_time/1000.f;
+
+}
+
+// sychronize with elapsed time
+void Audio::sync() {
+	if(track==NULL) return;
+
+	Mix_RewindMusic();
+	Mix_SetMusicPosition(elapsed_seconds);  // TODO doesn't work for all audio formats
+	Mix_ResumeMusic();
+	is_playing = 1;
+
+	//	printf("Synced audio to %f seconds\n", elapsed_seconds);
 }
 
 void Audio::pause() {
 	Mix_PauseMusic();
+	is_playing=0;
 }
 
 void Audio::resume() {
 	Mix_ResumeMusic();
+	is_playing=1;
 }
 
 void Audio::stop() {
 	Mix_HaltMusic();
+	is_playing=0;
 }
 
 // _volume should be between 0 and 1
 void Audio::set_volume(float _volume) {
-	Mix_VolumeMusic(int(_volume*MIX_MAX_VOLUME));
-
+	if(_volume >= 0 && _volume <= 1) {
+		master_volume = _volume;
+		Mix_VolumeMusic(int(MIX_MAX_VOLUME*master_volume));
+	}
 }
 
 void Audio::increment_volume() {
-	int vol = Mix_VolumeMusic(-1);
-	
-	int step = int(0.1f * MIX_MAX_VOLUME);
-	if(!step) step = 1;
-	Mix_VolumeMusic(vol+step);
+	master_volume += 0.1f;  // 10%
 
-	// printf("volume %d + %d\n", vol, step);
+	if(master_volume > 1) master_volume = 1;
+
+	Mix_VolumeMusic(int(MIX_MAX_VOLUME*master_volume));
+
+	// printf("volume %f\n", master_volume);
 }
 
 void Audio::decrement_volume() {
-	int vol = Mix_VolumeMusic(-1);
-	
-	int step = int(-0.1f * MIX_MAX_VOLUME);
-	if(!step) step = -1;
-	if(-1*step>vol) vol = step = 0;
+	master_volume -= 0.1f;  // 10%
 
-	Mix_VolumeMusic(vol+step);
+	if(master_volume < 0) master_volume = 0;
 
-	//	printf("volume %d - %d\n", vol, step);
+	Mix_VolumeMusic(int(MIX_MAX_VOLUME*master_volume));
+
+	//	printf("volume %f\n", master_volume);
 }
 
 #else

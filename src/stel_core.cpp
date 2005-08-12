@@ -56,6 +56,8 @@ stel_core::stel_core(const string& DDIR, const string& TDIR, const string& CDIR,
 	commander = new StelCommandInterface(this);
 	scripts = new ScriptMgr(commander, DataDir);
 	script_images = new ImageMgr();
+
+	time_multiplier = 1;
 }
 
 stel_core::~stel_core()
@@ -235,6 +237,13 @@ void stel_core::update(int delta_time)
         frame = 0;
         timeBase+=1000;
     }
+
+	// change time rate if needed to fast forward scripts
+	delta_time *= time_multiplier;
+
+
+	// keep audio position updated if changing time multiplier
+	if(!scripts->is_paused()) commander->update(delta_time);
 
     // run command from a running script
     scripts->update(delta_time);

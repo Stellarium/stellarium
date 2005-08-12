@@ -765,6 +765,7 @@ int stel_ui::handle_keys(Uint16 key, S_GUI_VALUE state)
 		}
 
 
+
 		// if script is running, only script control keys are accessible
 		// to pause/resume/cancel the script
 		// (otherwise script could get very confused by user interaction)
@@ -776,10 +777,12 @@ int stel_ui::handle_keys(Uint16 key, S_GUI_VALUE state)
 			{
 				// pause/unpause script
 				core->commander->execute_command( "script action pause");
+				core->time_multiplier = 1;  // don't allow resumption of ffwd this way (confusing for audio)
 			}
 			else if(key==SDLK_k)
 			{
 				core->commander->execute_command( "script action resume");
+				core->time_multiplier = 1;
 			}
 			else if(key==SDLK_7 || key==0x0003)
 			{  // ctrl-c
@@ -795,9 +798,30 @@ int stel_ui::handle_keys(Uint16 key, S_GUI_VALUE state)
 				core->commander->execute_command( "audio volume decrement");
 
 			}
+			else if(key==SDLK_j)
+			{
+				if(core->time_multiplier==2) {
+					core->time_multiplier = 1;
+
+					// restart audio in correct place
+					core->commander->execute_command( "audio action sync");
+				} else if(core->time_multiplier > 1 ) {
+					core->time_multiplier /= 2;
+				}
+
+			}
+			else if(key==SDLK_l)
+			{
+				// stop audio since won't play at higher speeds
+				core->commander->execute_command( "audio action pause");
+				core->time_multiplier *= 2;
+				if(core->time_multiplier>8) core->time_multiplier = 8;
+			}
 			else cout << "Playing a script.  Press CTRL-C (or 7) to stop." << endl;
 
 			return 0;
+		} else {
+			core->time_multiplier = 1;  // if no script in progress always real time
 		}
 
 
