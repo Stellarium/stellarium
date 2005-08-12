@@ -392,10 +392,10 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 		  
 		  //		  cout << "audio path = " << path << endl;
 		  
-		  audio = new Audio(path + args["filename"], "default track");
+		  audio = new Audio(path + args["filename"], "default track", str_to_long(args["output_rate"]));
 		  audio->play(args["loop"]=="on");
 
-		  // if fast forwarding don't make audible
+		  // if fast forwarding mute (pause) audio
 		  if(stcore->get_time_multiplier()!=1) audio->pause();
 
 	  } else if(args["volume"]!="") {

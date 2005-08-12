@@ -33,7 +33,7 @@
 class Audio
 {
  public:
-  Audio(std::string filename, std::string name);
+  Audio(std::string filename, std::string name, long int output_rate);
   virtual ~Audio();
   void play(bool loop);
   void sync();  // reset audio track time offset to elapsed time
