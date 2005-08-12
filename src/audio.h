@@ -36,6 +36,7 @@ class Audio
   Audio(std::string filename, std::string name);
   virtual ~Audio();
   void play(bool loop);
+  void sync();  // reset audio track time offset to elapsed time
   void pause();
   void resume();
   void stop();
@@ -43,10 +44,14 @@ class Audio
   void increment_volume();
   void decrement_volume();
   std::string get_name() { return track_name; };
+  void update(int delta_time);
 
  private:
   Mix_Music *track;
   std::string track_name;
+  bool is_playing;
+  static float master_volume;  // audio level
+  double elapsed_seconds;  // current offset into the track
 };
 #else
 // SDL_mixer is not available - no audio
@@ -57,12 +62,15 @@ class Audio
   virtual ~Audio() {;}
   void play(bool loop) {;}
   void pause() {;}
+  void resync() {;}
   void resume() {;}
   void stop() {;}
   void set_volume(float _volume) {;}
   void increment_volume() {;}
   void decrement_volume() {;}
   std::string get_name() { return "Compiled with no Audio!"; };
+  void update(int delta_time) {;}
+
  private:
 };
 #endif

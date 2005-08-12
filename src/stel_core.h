@@ -161,7 +161,10 @@ public:
 
 	// TODO move to stel_command_interface or get rid of this method
 	void set_param(string& key, float value);
-	
+
+	// n.b. - do not confuse this with sky time rate
+	int get_time_multiplier() { return time_multiplier; };
+
 	//! Quit the application
 	void quit(void);
 
@@ -364,6 +367,7 @@ private:
 	// Flags for mouse movements
 	bool is_mouse_moving_horiz;
 	bool is_mouse_moving_vert;
+	int time_multiplier;  // used for adjusting delta_time for script speeds
 };
 
 #endif // _STEL_CORE_H_

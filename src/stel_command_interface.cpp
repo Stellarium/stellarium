@@ -374,8 +374,14 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 		  }
 	  }
   } else if(command=="audio") {
+	  
+	  if(args["action"]=="sync") {
+		  if(audio) audio->sync();
 
-	   if( args["action"]=="play" && args["filename"]!="") {
+	  } else if(args["action"]=="pause") {
+		  if(audio) audio->pause();
+
+	  } else if( args["action"]=="play" && args["filename"]!="") {
 		  // only one track at a time allowed
 		  if(audio) delete audio;
 		  
@@ -384,10 +390,14 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 		  if(stcore->scripts->is_playing()) path = stcore->scripts->get_script_path();
 		  else path = stcore->DataRoot + "/";
 		  
-		  cout << "audio path = " << path << endl;
+		  //		  cout << "audio path = " << path << endl;
 		  
 		  audio = new Audio(path + args["filename"], "default track");
 		  audio->play(args["loop"]=="on");
+
+		  // if fast forwarding don't make audible
+		  if(stcore->get_time_multiplier()!=1) audio->pause();
+
 	  } else if(args["volume"]!="") {
 
 		  recordable = 0;
@@ -433,7 +443,7 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
       stcore->scripts->pause_script();
     } else if (args["action"]=="pause" || args["action"]=="resume") {
       stcore->scripts->resume_script();
-      audio->resume();
+      audio->sync();
     } else status =0;
 
   } else if(command=="clear") {
@@ -748,3 +758,6 @@ int StelCommandInterface::set_flag(string name, string value, bool &newval, bool
 }
 
 
+void StelCommandInterface::update(int delta_time) {
+	if(audio) audio->update(delta_time);
+}
