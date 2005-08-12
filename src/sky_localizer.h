@@ -41,6 +41,7 @@ class Sky_localizer
   string get_sky_locale_list(void);
   string convert_locale_to_name(string _locale);
   string convert_name_to_locale(string _name);
+  string clean_sky_locale_name(string _locale);
 
  private:
   stringHash_t name_to_dir;
