@@ -239,7 +239,7 @@ string ScriptMgr::get_script_list(string directory) {
   }
 
   if ((dp = opendir(directory.c_str())) == NULL) {
-    cout << "Error reading script directory " << directory << endl;
+    cout << _("Unable to read script directory") << directory << endl;
     return "";
   }
 
@@ -274,6 +274,8 @@ string ScriptMgr::get_script_path() {
 
 // look for a script called "startup.sts"
 bool ScriptMgr::play_startup_script() {
+
+	cout << _("Looking for startup script to run.") << endl;
 
 	// first try on removeable directory
 	if(RemoveableScriptDirectory !="" &&

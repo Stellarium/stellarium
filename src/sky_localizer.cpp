@@ -168,4 +168,38 @@ string Sky_localizer::convert_name_to_locale(string _name){
 
 }
 
+string Sky_localizer::clean_sky_locale_name(string _locale) {
 
+	// if locale is "system_default" try to use language from 
+	// user's environment locale, otherwise default to English
+	if( _locale == "system_default" ) {
+		// read current ui locale
+		char *tmp = setlocale(LC_MESSAGES, "");
+		string ltmp(tmp);
+		string language = ltmp.substr(0,ltmp.find('_'));
+		//		printf("Language code is %s\n", language.c_str());
+
+		// temporary - TODO: this hash should be created from a text file
+		stringHash_t locale_to_lang;
+		locale_to_lang["en"] = "eng";
+		locale_to_lang["fr"] = "fra";
+		locale_to_lang["de"] = "deu";
+		locale_to_lang["es"] = "esl";
+		locale_to_lang["pt"] = "por";
+		locale_to_lang["nl"] = "dut";
+		locale_to_lang["it"] = "ita";
+		
+		_locale = locale_to_lang[language];
+		
+		cout << _("Using sky language from environment locale\n");
+
+		if( _locale == "" ) {
+			cout << _("Did not recognize locale language code ") <<
+				language << _(". Defaulting to english sky labels\n");
+			_locale = "eng";  // default
+		}
+	}
+
+	return _locale;
+
+}

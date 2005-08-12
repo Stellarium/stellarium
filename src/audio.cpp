@@ -21,6 +21,7 @@
 
 #include <iostream>
 #include "audio.h"
+#include "stellarium.h"
 
 #ifdef HAVE_SDL_MIXER_H
 
@@ -42,7 +43,7 @@ Audio::Audio(std::string filename, std::string name, long int output_rate) {
 	track = Mix_LoadMUS(filename.c_str());
 	if(track == NULL) {
 		is_playing = 0;
-		std::cout << "Could not load audio file " << filename << "\n";
+		std::cout << _("Could not load audio file ") << filename << "\n";
 	} else is_playing = 1;
 
 	track_name = name;
@@ -65,9 +66,7 @@ void Audio::play(bool loop) {
 		else Mix_PlayMusic(track, 0);
 		is_playing = 1;
 		elapsed_seconds = 0;
-		std::cout << "now playing audio\n";
-	} else {
-		std::cout << "Can't play empty track\n";
+		//		std::cout << "now playing audio\n";
 	}
 }
 
@@ -83,7 +82,7 @@ void Audio::sync() {
 	if(track==NULL) return;
 
 	Mix_RewindMusic();
-	Mix_SetMusicPosition(elapsed_seconds);  // TODO doesn't work for all audio formats
+	Mix_SetMusicPosition(elapsed_seconds);  // ISSUE doesn't work for all audio formats
 	Mix_ResumeMusic();
 	is_playing = 1;
 
