@@ -39,7 +39,7 @@ int Script::load(string script_file, string script_path)
 
 	if (! input_file->is_open())
 	{
-		cout << "Error opening script " << script_file << endl;
+		cout << _("Unable to open script ") << script_file << endl;
 		return 0;
 	}
 	path = script_path;
