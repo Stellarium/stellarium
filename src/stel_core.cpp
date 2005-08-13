@@ -51,6 +51,7 @@ stel_core::stel_core(const string& DDIR, const string& TDIR, const string& CDIR,
 	equator_line = new SkyLine(EQUATOR);
 	ecliptic_line = new SkyLine(ECLIPTIC);
 	cardinals_points = new Cardinals();
+	skyloc = new Sky_localizer(DataDir);
 	
 	ui = new stel_ui(this);
 	commander = new StelCommandInterface(this);
@@ -126,11 +127,6 @@ void stel_core::init(void)
 	projection->set_fov(InitFov);
 	projection->set_viewport_offset(horizontalOffset, verticalOffset);
 	projection->set_viewport_type(ViewportType);
-
-	// get ready for sky localization
-	skyloc = new Sky_localizer(DataDir);
-
-	SkyLocale = skyloc->clean_sky_locale_name(SkyLocale);  // cleans up SkyLocale if "system_default"
 
 	// Load hipparcos stars & names
 	LoadingBar lb(projection, DataDir + "spacefont.txt", "logo24bits", screen_W, screen_H);
@@ -569,6 +565,8 @@ void stel_core::load_config_from(const string& confFile)
 	// localization section
 	SkyCulture = conf.get_str("localization", "sky_culture", "western");
 	SkyLocale = conf.get_str("localization", "sky_locale", "system_default");
+
+	SkyLocale = skyloc->clean_sky_locale_name(SkyLocale);  // looks at environment locale if "system_default"
 
 	// Star section
 	StarScale			= conf.get_double ("stars:star_scale");
