@@ -191,7 +191,7 @@ string Sky_localizer::clean_sky_locale_name(string _locale) {
 		
 		_locale = locale_to_lang[language];
 		
-		cout << _("Using sky language from environment locale\n");
+		cout << _("Using sky language from environment locale: ") << _locale << endl;
 
 		if( _locale == "" ) {
 			cout << _("Did not recognize locale language code ") <<
