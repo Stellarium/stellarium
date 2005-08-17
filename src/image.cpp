@@ -116,6 +116,7 @@ bool Image::update(int delta_time) {
   if(image_ratio < 0) return 0;
 
   if(flag_alpha) {
+
     mult_alpha += coef_alpha*delta_time;
 
     if( mult_alpha >= 1) {
@@ -176,10 +177,10 @@ void Image::draw(int screenw, int screenh, const navigator * nav, Projector * pr
 
   if(image_ratio < 0 || image_alpha == 0) return;
 
+  //  printf("draw image %s alpha %f\n", image_name.c_str(), image_alpha);
+
   int vieww = prj->viewW();
   int viewh = prj->viewH();  
-
-  glPushMatrix();
 
   glEnable(GL_TEXTURE_2D);
   glEnable(GL_BLEND);
@@ -213,6 +214,8 @@ void Image::draw(int screenw, int screenh, const navigator * nav, Projector * pr
 	  // at x or y = 1, image is centered on projection edge
 	  // centered in viewport at 0,0
 
+	  prj->set_orthographic_projection();	// set 2D coordinate
+
 	  glTranslatef(cx+image_xpos*vieww/2,cy+image_ypos*viewh/2,0);  // rotate around center of image...
 	  glRotatef(image_rotation,0,0,-1);
 
@@ -227,6 +230,8 @@ void Image::draw(int screenw, int screenh, const navigator * nav, Projector * pr
 		  glVertex3f(-w,h,0); }
 	  glEnd();
 	  
+	  prj->reset_perspective_projection();
+
   } else if(image_pos_type == POS_HORIZONTAL ) {
 
 	  // alt az coords
@@ -277,7 +282,6 @@ void Image::draw(int screenw, int screenh, const navigator * nav, Projector * pr
 
   }
   
-  glPopMatrix();
 
 }
 

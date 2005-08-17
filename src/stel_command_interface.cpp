@@ -439,11 +439,11 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
       recordable = 0;  // don't record this command!
     } else if(args["action"]=="pause" && !stcore->scripts->is_paused()) {
       // n.b. action=pause TOGGLES pause
-      audio->pause();
+      if(audio) audio->pause();
       stcore->scripts->pause_script();
     } else if (args["action"]=="pause" || args["action"]=="resume") {
       stcore->scripts->resume_script();
-      audio->sync();
+      if(audio) audio->sync();
     } else status =0;
 
   } else if(command=="clear") {
