@@ -50,11 +50,11 @@ Audio::Audio(std::string filename, std::string name, long int output_rate) {
 }
 
 Audio::~Audio() {
-  Mix_HaltMusic(); // stop playing
-  Mix_FreeMusic(track);  // free memory
+	Mix_HaltMusic(); // stop playing
+	Mix_FreeMusic(track);  // free memory
 
-  // stop audio use
-  Mix_CloseAudio();
+	// stop audio use
+	Mix_CloseAudio();
 }
 
 void Audio::play(bool loop) {
