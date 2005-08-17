@@ -251,7 +251,9 @@ void Image::draw(int screenw, int screenh, const navigator * nav, Projector * pr
 	  Vec3d ortho1 = Mat4d::zrotation((-1*(image_ypos-90))*M_PI/180.) * Vec3d(1,0,0);
 	  Vec3d ortho2 = imagev^ortho1;
 
-	  int grid_size = 5;  // per row, column
+	  int grid_size = int(image_scale/5.);  // divisions per row, column
+	  if(grid_size < 5) grid_size = 5;
+
 	  for (int i=0; i<grid_size; i++) {
 
 		  glBegin(GL_QUAD_STRIP);
@@ -260,12 +262,21 @@ void Image::draw(int screenw, int screenh, const navigator * nav, Projector * pr
 
 			  for(int k=0; k<=1; k++) {
 
-				  // TODO: separate x, y scales
-				  gridpt = Mat4d::rotation( imagev, (image_rotation+180)*M_PI/180.) *
-					  Mat4d::rotation( ortho1, image_scale*(j-grid_size/2.)/(float)grid_size*M_PI/180.) *
-					  Mat4d::rotation( ortho2, image_scale*(i+k-grid_size/2.)/(float)grid_size*M_PI/180.) *
-					  imagev;
-				  
+				  // TODO: separate x, y scales?
+				  if(image_ratio<1) {
+					  // image height is maximum angular dimension
+					  gridpt = Mat4d::rotation( imagev, (image_rotation+180)*M_PI/180.) *
+						  Mat4d::rotation( ortho1, image_scale*(j-grid_size/2.)/(float)grid_size*M_PI/180.) *
+						  Mat4d::rotation( ortho2, image_scale/image_ratio*(i+k-grid_size/2.)/(float)grid_size*M_PI/180.) *
+						  imagev;
+
+				  } else {
+					  // image width is maximum angular dimension
+					  gridpt = Mat4d::rotation( imagev, (image_rotation+180)*M_PI/180.) *
+						  Mat4d::rotation( ortho1, image_scale/image_ratio*(j-grid_size/2.)/(float)grid_size*M_PI/180.) *
+						  Mat4d::rotation( ortho2, image_scale*(i+k-grid_size/2.)/(float)grid_size*M_PI/180.) *
+						  imagev;
+				  }
 				  glTexCoord2f((i+k)/(float)grid_size,j/(float)grid_size);
 				  prj->sVertex3( gridpt[0], gridpt[1], gridpt[2], mat);
 			  }
@@ -278,7 +289,7 @@ void Image::draw(int screenw, int screenh, const navigator * nav, Projector * pr
 
   } else {
 	  // earth equatorial positioning
-	  printf("Earth equ script image positioning not implemented yet\n");
+	  printf("Earth equatorial script image positioning not implemented yet\n");
 
   }
   

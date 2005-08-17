@@ -38,6 +38,7 @@ int ImageMgr::load_image(string filename, string name, IMAGE_POSITIONING positio
     if((*iter)->get_name()==name) {
       delete (*iter);
       active_images.erase(iter);
+	  break;
     }
   }
 
