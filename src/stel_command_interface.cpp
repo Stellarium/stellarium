@@ -184,6 +184,10 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
     if (stcore->selected_object) {
       if (stcore->navigation->get_flag_traking()) stcore->navigation->set_flag_lock_equ_pos(1);
       stcore->navigation->set_flag_traking(0);
+
+	  // determine if selected object pointer should be displayed
+	  if(args["pointer"]=="off" || args["pointer"]=="0") stcore->set_object_pointer_visibility(0);
+	  else stcore->set_object_pointer_visibility(1);
     }
 
   } else if (command == "deselect") {

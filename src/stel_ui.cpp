@@ -693,6 +693,8 @@ int stel_ui::handle_clic(Uint16 x, Uint16 y, S_GUI_VALUE button, S_GUI_VALUE sta
 			// If an object has been found
 			if (core->selected_object)
 			{
+
+				core->set_object_pointer_visibility(1);  // by default draw pointer around object
 				updateInfoSelectString();
 				// If an object was selected keep the earth following
 				if (core->navigation->get_flag_traking()) core->navigation->set_flag_lock_equ_pos(1);
