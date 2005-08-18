@@ -1218,7 +1218,7 @@ void stel_core::auto_zoom_in(float move_duration)
 }
 
 // Unzoom and go to the init position
-void stel_core::auto_zoom_out(float move_duration)
+void stel_core::auto_zoom_out(float move_duration, bool full)
 {
 	if (!selected_object)
 	{
@@ -1229,24 +1229,26 @@ void stel_core::auto_zoom_out(float move_duration)
 		return;
 	}
 
-	// If the selected object has satellites, unzoom to satellites view
-	float satfov = selected_object->get_satellites_fov(navigation);
-	if (projection->get_fov()<=satfov*0.9 && satfov>0.)
-	{
-		projection->zoom_to(satfov, move_duration);
-		return;
-	}
-
-	// If the selected object is part of a planet subsystem (other than sun),
-	// unzoom to subsystem view
-	if (selected_object->get_type() == STEL_OBJECT_PLANET && selected_object!=ssystem->get_sun() && ((planet*)selected_object)->get_parent()!=ssystem->get_sun())
-	{
-		float satfov = ((planet*)selected_object)->get_parent()->get_satellites_fov(navigation);
+	// If the selected object has satellites, unzoom to satellites view unless specified otherwise
+	if(!full) {
+		float satfov = selected_object->get_satellites_fov(navigation);
 		if (projection->get_fov()<=satfov*0.9 && satfov>0.)
-		{
-			projection->zoom_to(satfov, move_duration);
-			return;
-		}
+			{
+				projection->zoom_to(satfov, move_duration);
+				return;
+			}
+
+		// If the selected object is part of a planet subsystem (other than sun),
+		// unzoom to subsystem view
+		if (selected_object->get_type() == STEL_OBJECT_PLANET && selected_object!=ssystem->get_sun() && ((planet*)selected_object)->get_parent()!=ssystem->get_sun())
+			{
+				float satfov = ((planet*)selected_object)->get_parent()->get_satellites_fov(navigation);
+				if (projection->get_fov()<=satfov*0.9 && satfov>0.)
+					{
+						projection->zoom_to(satfov, move_duration);
+						return;
+					}
+			}
 	}
 
 	projection->zoom_to(InitFov, move_duration);
