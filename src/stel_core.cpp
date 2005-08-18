@@ -59,6 +59,7 @@ stel_core::stel_core(const string& DDIR, const string& TDIR, const string& CDIR,
 	script_images = new ImageMgr();
 
 	time_multiplier = 1;
+	object_pointer_visibility = 1;
 }
 
 stel_core::~stel_core()
@@ -392,7 +393,7 @@ void stel_core::draw(int delta_time)
 	ecliptic_line->draw(projection);
 
 	// Draw the pointer on the currently selected object
-	if (selected_object) selected_object->draw_pointer(delta_time, projection, navigation);
+	if (selected_object && object_pointer_visibility) selected_object->draw_pointer(delta_time, projection, navigation);
 
 	// Draw the planets
 	if (FlagPlanets)
