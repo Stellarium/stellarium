@@ -97,7 +97,7 @@ public:
 	void auto_zoom_in(float move_duration = 1.f);
 	
 	//! Unzoom to the previous position
-	void auto_zoom_out(float move_duration = 1.f);
+	void auto_zoom_out(float move_duration = 1.f, bool full = 0);
 	
 	//! Set the sky culture
 	void set_sky_culture(string _culture_dir);

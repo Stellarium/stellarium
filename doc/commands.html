@@ -50,11 +50,13 @@ of seconds desired). </p>
       <td><b>Notes</b></td>
     </tr>
     <tr>
-      <td colspan="1" rowspan="3" style="vertical-align: top;">audio<br>
+      <td colspan="1" rowspan="5" style="vertical-align: top;">audio<br>
       </td>
       <td style="vertical-align: top;">action<br>
       </td>
-      <td style="vertical-align: top;">play<br>
+      <td style="vertical-align: top;">pause<br>
+play<br>
+sync<br>
       </td>
       <td style="vertical-align: top;"><br>
       </td>
@@ -64,11 +66,11 @@ of seconds desired). </p>
       </td>
       <td style="vertical-align: top;">AUDIO_FILENAME<br>
       </td>
-      <td style="vertical-align: top;">Format support depends on your
-binary. &nbsp;Ogg Vorbis format is recommended. WAV format should work
-but is discouraged because in this case the audio track will not adjust
-if the script is rewound or fast forwarded! &nbsp;[This is a current
-limitation of the&nbsp; SDL_Mixer library.] </td>
+      <td style="vertical-align: top;">Used with "play" action.
+&nbsp;Format support depends on your binary. &nbsp;Ogg Vorbis format is
+recommended. WAV format should work but is discouraged because in this
+case the audio track will not adjust if the script is fast forwarded.
+&nbsp;[This is a current limitation of the&nbsp; SDL_Mixer library.] </td>
     </tr>
     <tr>
       <td style="vertical-align: top;">loop<br>
@@ -76,8 +78,25 @@ limitation of the&nbsp; SDL_Mixer library.] </td>
       <td style="vertical-align: top;">on<br>
 off<br>
       </td>
-      <td style="vertical-align: top;">Used with action=play. Default
-is off<br>
+      <td style="vertical-align: top;">Used with "play" action.
+&nbsp;Default is off<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">output_rate</td>
+      <td style="vertical-align: top;">SAMPLES_PER_SECOND</td>
+      <td style="vertical-align: top;">For example, 44100 is CD quality
+audio.</td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">volume<br>
+      </td>
+      <td style="vertical-align: top;">decrement<br>
+increment<br>
+VOLUME_LEVEL<br>
+      </td>
+      <td style="vertical-align: top;">VOLUME_LEVEL is between 0 and 1,
+inclusive.<br>
       </td>
     </tr>
     <tr>
@@ -313,8 +332,8 @@ opaque.&nbsp; ALPHA can be fractional.
       </td>
       <td style="vertical-align: top;">How large to draw the image. In
 viewport coordinates, at 1 the image is scaled to fit maximized in the
-viewport. &nbsp;In horizontal coordinates, this defineds the the width
-of the image in degrees.<br>
+viewport. &nbsp;In horizontal coordinates, this defines the maximum
+angular width of the image in degrees.<br>
       </td>
     </tr>
     <tr>
@@ -410,8 +429,7 @@ pause<br>
 resume<br>
       </td>
       <td style="vertical-align: top;">Note that pause toggles playback.<br>
-If a script plays another script, the first will terminate at that
-point.<br>
+If a script plays another script, the first will terminate.<br>
       </td>
     </tr>
     <tr>
@@ -602,10 +620,11 @@ etc.<br>
       <td>auto<br>
       </td>
       <td>in<br>
+initial<br>
 out<br>
       </td>
-      <td>"out" returns to configured initial fov and viewing direction
- </td>
+      <td>"initial" returns to configured initial fov and viewing
+direction </td>
     </tr>
     <tr>
       <td>fov<br>

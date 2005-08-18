@@ -212,9 +212,10 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 
 	  if(args["auto"]!="") {
 		  // auto zoom using specified or default duration
-		  if(duration == 0 ) duration = stcore->auto_move_duration;
+		  if(args["duration"]=="") duration = stcore->auto_move_duration;
 		  		  
-		  if(args["auto"]=="out") stcore->auto_zoom_out(duration);
+		  if(args["auto"]=="out") stcore->auto_zoom_out(duration, 0);
+		  else if(args["auto"]=="initial") stcore->auto_zoom_out(duration, 1);
 		  else stcore->auto_zoom_in(duration);
 	  } else if (args["fov"]!="") {
 		  // zoom to specific field of view
@@ -485,7 +486,7 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 	  // also deselect everything, set to default fov and real time rate
 	  execute_command("deselect");
 	  execute_command("timerate rate 1");
-	  execute_command("zoom auto out");
+	  execute_command("zoom auto initial");
 
   } else if(command=="landscape" && args["action"] == "load") {
 
