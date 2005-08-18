@@ -441,7 +441,7 @@ If a script plays another script, the first will terminate.<br>
       </td>
     </tr>
     <tr>
-      <td colspan="1" rowspan="5" style="vertical-align: top;">select </td>
+      <td colspan="1" rowspan="6" style="vertical-align: top;">select </td>
       <td style="vertical-align: top;"><br>
       </td>
       <td style="vertical-align: top;"><br>
@@ -451,10 +451,21 @@ deselects current object.&nbsp; (Leaves constellation selection
 alone.)&nbsp; See deselect command.<br>
       </td>
     </tr>
+    <tr>
+      <td style="vertical-align: top;">constellation</td>
+      <td style="vertical-align: top;">CONSTELLATION_SHORT_NAME</td>
+      <td style="vertical-align: top;">3 character abbreviation from
+constellationship.fab, case insensitive.</td>
+    </tr>
     <tr valign="top">
       <td>hp</td>
       <td>HP_NUMBER</td>
       <td rowspan="1">&nbsp;</td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">nebula</td>
+      <td style="vertical-align: top;">NEBULA_NAME</td>
+      <td style="vertical-align: top;">Name as defined in messier.fab</td>
     </tr>
     <tr>
       <td style="vertical-align: top;">planet<br>
@@ -465,19 +476,13 @@ alone.)&nbsp; See deselect command.<br>
       </td>
     </tr>
     <tr>
-      <td style="vertical-align: top;">nebula<br>
-      </td>
-      <td style="vertical-align: top;">NEBULA_NAME</td>
-      <td style="vertical-align: top;">Name as defined in messier.fab<br>
-      </td>
-    </tr>
-    <tr>
-      <td style="vertical-align: top;">constellation<br>
-      </td>
-      <td style="vertical-align: top;">CONSTELLATION_SHORT_NAME<br>
-      </td>
-      <td style="vertical-align: top;">3 letter abbreviation from
-constellationship.fab, case insensitive.<br>
+      <td style="vertical-align: top;">pointer </td>
+      <td style="vertical-align: top;">on<br>
+1<br>
+off<br>
+0</td>
+      <td style="vertical-align: top;">Whether to draw the highlighting
+pointer around the selected object. &nbsp;Default is on.<br>
       </td>
     </tr>
     <tr>
