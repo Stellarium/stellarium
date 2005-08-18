@@ -167,6 +167,7 @@ public:
 
 	//! Quit the application
 	void quit(void);
+	void set_object_pointer_visibility(bool _newval) { object_pointer_visibility = _newval; }
 
 private:
 
@@ -368,6 +369,8 @@ private:
 	bool is_mouse_moving_horiz;
 	bool is_mouse_moving_vert;
 	int time_multiplier;  // used for adjusting delta_time for script speeds
+
+	bool object_pointer_visibility;  // should selected object pointer be drawn
 };
 
 #endif // _STEL_CORE_H_
