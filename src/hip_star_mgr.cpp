@@ -1,6 +1,6 @@
 /*
  * Stellarium
- * Copyright (C) 2002 Fabien Ch�eau
+ * Copyright (C) 2002 Fabien Chï¿½eau
  * 
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -109,10 +109,12 @@ void Hip_Star_mgr::load_data(const string& hipCatFile, LoadingBar& lb)
     Hip_Star * e = NULL;
     for(int i=0;i<StarArraySize;i++)
     {
-		if (!(i%2000))
+        // Tony - added "|| (i == StarArraySize-1)"
+		if (!(i%2000) || (i == StarArraySize-1))
 		{
 			// Draw loading bar
-			snprintf(tmpstr, 512, _("Loading Hipparcos catalog: %d/%d"), i, StarArraySize);
+            // Tony - added "+1"
+			snprintf(tmpstr, 512, _("Loading Hipparcos catalog: %d/%d"), i+1, StarArraySize);
 			lb.SetMessage(tmpstr);
 			lb.Draw((float)i/StarArraySize);
 		}

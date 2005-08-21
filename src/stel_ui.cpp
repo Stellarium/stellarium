@@ -136,7 +136,7 @@ void stel_ui::init(void)
 	info_select_ctr = new Container();
 	info_select_ctr->reshape(0,15,300,100);
 	info_select_txtlbl = new TextLabel("Info");
-	info_select_txtlbl->reshape(5,5,290,102);
+    info_select_txtlbl->reshape(5,5,550,102);  // Tony - widened box to get NGC for nebula with long names
 	info_select_ctr->setVisible(0);
 	info_select_ctr->addComponent(info_select_txtlbl);
 	desktop->addComponent(info_select_ctr);
@@ -582,11 +582,17 @@ void stel_ui::draw(void)
 /*******************************************************************************/
 int stel_ui::handle_move(int x, int y)
 {
+	// Do not allow use of mouse while script is playing
+	// otherwise script can get confused
+	if(core->scripts->is_playing()) return 0;
+
+	if (desktop->onMove(x, y)) return 1;
 	if (is_dragging)
 	{
 		if ((has_dragged || sqrtf((x-previous_x)*(x-previous_x)+(y-previous_y)*(y-previous_y))>4.))
 		{
 			has_dragged = true;
+			core->navigation->set_flag_traking(0);
 			Vec3d tempvec1, tempvec2;
 			double az1, alt1, az2, alt2;
 			if (core->navigation->get_viewing_mode()==VIEW_HORIZON)
@@ -605,8 +611,9 @@ int stel_ui::handle_move(int x, int y)
 			previous_x = x;
 			previous_y = y;
 		}
+		return 1;
 	}
-	return desktop->onMove(x, y);
+	return 0;
 }
 
 /*******************************************************************************/
@@ -751,7 +758,10 @@ int stel_ui::handle_clic(Uint16 x, Uint16 y, S_GUI_VALUE button, S_GUI_VALUE sta
 /*******************************************************************************/
 int stel_ui::handle_keys(Uint16 key, S_GUI_VALUE state)
 {
-	desktop->onKey(key, state);
+    // Tony
+	if (desktop->onKey(key, state)) 
+       return 1;
+
 	if (state==S_GUI_PRESSED)
 	{
 
@@ -879,7 +889,22 @@ int stel_ui::handle_keys(Uint16 key, S_GUI_VALUE state)
 		if(key==SDLK_v) core->commander->execute_command( "flag constellation_names toggle");
 		if(key==SDLK_z) core->commander->execute_command( "flag azimuthal_grid toggle");
 		if(key==SDLK_e) core->commander->execute_command( "flag equatorial_grid toggle");
-		if(key==SDLK_n) core->commander->execute_command( "flag nebula_names toggle");
+  		if(key==SDLK_n)  // Tony for long nebula names - toggles between no name, shortname and longname
+        {
+            if (!core->nebulas->get_flag_hints())
+            {
+               core->commander->execute_command( "flag nebula_names on");
+            }
+            else if (!core->FlagNebulaLongName)
+            {
+                 core->commander->execute_command( "flag nebula_long_names on");
+            }
+            else
+            {
+                 core->commander->execute_command( "flag nebula_names off");
+                 core->commander->execute_command( "flag nebula_long_names off");
+            }
+        }
 		if(key==SDLK_g) core->commander->execute_command( "flag landscape toggle");
 		if(key==SDLK_f) core->commander->execute_command( "flag fog toggle");
 		if(key==SDLK_q) core->commander->execute_command( "flag cardinal_points toggle");

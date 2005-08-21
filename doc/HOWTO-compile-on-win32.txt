@@ -1,0 +1,161 @@
+By Tony - 21-08-2005
+
+STELLARIUM FOR WINDOWS XP - COMPILING WITH DevC++
+
+PROGRAM INSTALLATION
+
+Created a directory on D drive d:\Source
+Created a directory on D drive d:\Source\Install
+Created a directory on D drive d:\Source\Library
+Created a directory on D drive d:\Source\Made
+Created a directory on D drive d:\Source\Made\Library
+Created a directory on D drive d:\Source\Made\Include
+Created a directory on D drive d:\Source\Made\Bin
+
+1. Install DevC++ 4.9.9.2 from Install to c:\GNU\Dev-cpp
+
+2. Install MSYS-1.0.10.exe from Install to c:\GNU\MSYS\1.0
+Say "Y" to normalise
+Say "Y" to ming installed
+Nominate "c:/GNU/Dev-Cpp" for ming location (note forward slashes)
+
+3. Install msysDTK-1.0.1.exe from Install to c:\GNU\MSYS\1.0
+
+
+
+
+LIBRARIES
+
+1. ZLIB (www.zlib.net - source in zipfile format)
+
+Extract files from the ZLib123.zip from Install into Library\ZLib123
+Extract the zlib1.dll from ZLib123-dll.zip from Install and copy into Made\bin
+Extract the Includes from ZLib123-dll.zip from Install and copy into Made\lib
+
+Run MSYS
+$ cd  /d/source/library/zlib123
+$configure
+$ make
+Exit MSYS
+Copy the newly created ...\zlib123\zlib1.dll to the Made\bin directory
+Copy the newly created ...\zlib123\zlib.a to the Made\lib directory
+Copy the ...\zlib123\Include\*.* to the Made\Include directory
+
+2. PNG (www.libpng.org)
+
+Extract files from the libpng-1.2.8-bin.zip and libpng-1.2.8-lib into Library\libpng-1.2.8
+Copy the ...\libpng-1.2.8\Library\*.* to Made\Library
+Copy the ...\libpng-1.2.8\Include\*.* to Made\Include
+Copy the ...\libpng-1.2.8\Bin\*.* to made\bin
+
+3. SDL (www.libsdl.org - SDL1.2)
+
+Extract files from the SDL-devel-1.2.8-mingw32.tar.gz from Install into Library\SDL-1.2.8
+
+Copy the SDL.DLL from the Library\SDL-1.2.8\Bin directory to \Made\bin
+Copy the i386-mingw32msvc-dsl-config from the Library\SDL-1.2.8\Bin directory to \Made\bin and rename to SDL-config
+Edit the SDL-Config and edit the line with prefix to prefix=c:/GNU/dev-cpp (no end slash)
+Copy the ...\SDL-1.2.8\Include\*.* (SDL directory) to the Made\Include directory
+Copy the SDL-1.2.8\Library\*.* to the \Library
+
+
+READY
+
+Copy the made\*.* to c:\gnu\dev-cpp\  (the lib into lib, bin into bin and include into include)
+
+
+3. SDL_MIXER
+
+Extract files from the SDL_Mixer-1.2.6zip from Install into Library\SDL_Mixer-1.2.6
+Copy the ...\SDL-1.2.8\Bin\SDL.DLL to Library\SDL_mixer-1.2.6\
+
+Run MSYS
+$ cd  /d/source/library/SDL_Mixer-1.2.6
+$configure
+(Should correctly detect the SDL library is present - this is the only problem!)
+$ make
+Exit MSYS
+Copy the ...\SLD_Mixer-1.6.2\.libs\*.a (2 libs) to the Made\library
+Copy the ...\SLD_Mixer-1.6.2\.libs\SDL_mixer.dll to the Made\bin
+Copy the ...\SLD_Mixer-1.6.2\sdl_mixer.h to the Made\include
+
+READY
+
+Copy the made\*.* to c:\gnu\dev-cpp\  (the lib into lib, bin into bin and include into include)
+
+
+COMPILING Stellarium-0.6.2 USING MSYS
+
+Extract files from ...\source\stellarium-0.6.2.tar.gz to the ...\stellarium\stellarium-0.6.2 directory
+Copy the ...\SDL-1.2.8\Bin\SDL.DLL to Library\SDL_mixer-1.2.6\
+
+Run MSYS
+c$ cd  /d/source/Stellarium/Stellarium-0.6.2
+$configure
+$ make
+Exit MSYS
+
+Move the Stellarium.exe created in the src directory to the stellarium-0.6.2 directory
+Copy the default_config.ini to config.ini in the config directory
+
+
+COMPILING Stellarium-0.7.0 USING MSYS
+
+Not possible at this time
+
+COMPILING Stellarium-0.7.0 USING CPP-DEV
+
+Set up 4 new projects (staic library), C Project (not c++), 1 for each of the program subdirectories
+
+Add the Project options > Parameters tab > compiler options:
+
+C Compiler option (copy these 3 lines using ctrl-c and paste ctrl-v into the 
+-Ic:/dev-cpp/include/SDL 
+-Dmain=SDL_main 
+-O3
+
+Add the c source files in the subdirectory
+
+Compile each to the respective library (*.a)
+
+
+Set up a c++ project Stellarium as an empty project
+
+Add the Project options > Parameters tab > compiler options:
+
+C++ Compiler option (copy these 3 lines using ctrl-c and paste ctrl-v into the 
+-Ic:/GNU/dev-cpp/include/SDL 
+-Dmain=SDL_main 
+-O3
+-DHAVE_CONFIG_H
+ 
+Linker
+
+glpng/glpng.a
+iniparser/iniparser.a
+stellastro/stellastro.a
+stellplanet/stellplanet.a
+-lmingw32
+-lSDLmain 
+-lSDL
+-lSDL_mixer
+-mwindows
+-lopengl32 
+-lglu32
+-lpng
+-lz
+
+
+Add the Project options > Parameters tab > directory > Include
+
+to glpng, iniparser,stellastro & stellpolanet
+
+Add the cpp files to the project
+
+Under Tools > 
+
+Copy all the dll's to the src directory to run
+Copy the default_config.ini to config.ini in the config directory
+
+
+Run Stellarium - check the stdout.txt log for hints now

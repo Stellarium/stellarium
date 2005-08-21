@@ -106,7 +106,7 @@ int Nebula_mgr::read(const string& font_fileName, const string& fileName, Loadin
 }
 
 // Draw all the Nebulaes
-void Nebula_mgr::draw(Projector* prj, const navigator * nav, tone_reproductor* eye, bool draw_tex, bool _gravity_label, float max_mag_name, bool bright_nebulae)
+void Nebula_mgr::draw(int hint_ON, Projector* prj, const navigator * nav, tone_reproductor* eye, bool draw_tex, bool _gravity_label, float max_mag_name, bool bright_nebulae) //Tony - added "int hint_ON"
 {
 	Nebula::gravity_label = _gravity_label;
 	Nebula::hints_brightness = hints_fader.get_interstate();
@@ -136,7 +136,7 @@ void Nebula_mgr::draw(Projector* prj, const navigator * nav, tone_reproductor* e
 				(*iter)->draw_tex(prj, eye, bright_nebulae && (*iter)->get_on_screen_size(prj, nav)>15 );
 
 			if (hints) {
-				(*iter)->draw_name(prj);
+				(*iter)->draw_name(hint_ON, prj);
 				(*iter)->draw_circle(prj, nav);
 			}
 		}

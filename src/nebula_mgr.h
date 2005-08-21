@@ -38,8 +38,8 @@ public:
 	int read(const string& font_fileName, const string& fileName, LoadingBar& lb);
 	
 	// Draw all the Nebulas
-	void draw(Projector* prj, const navigator * nav, tone_reproductor* eye, bool draw_tex,
-		bool _gravity_label, float max_mag_name, bool bright_nebulae);
+	void draw(int hint_ON,Projector* prj, const navigator * nav, tone_reproductor* eye, bool draw_tex, // Tony
+		bool _gravity_label, float max_mag_name, bool bright_nebulae); 
 	
 	stel_object * search(const string& name);  // search by name
 	stel_object * search(Vec3f Pos);    // Search the Nebulae by position
