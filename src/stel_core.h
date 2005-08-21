@@ -54,6 +54,7 @@
 // Predeclaration of the StelCommandInterface class
 class StelCommandInterface;
 class ScriptMgr;
+class stel_ui;
 
 class stel_core
 {
