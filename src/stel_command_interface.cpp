@@ -114,7 +114,7 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
     else if(args["moon_scale"]!="") {
       stcore->MoonScale = str_to_double(args["moon_scale"]);
       if(stcore->MoonScale<0) stcore->MoonScale=1;  // negative numbers reverse drawing!
-      stcore->ssystem->get_moon()->set_sphere_scale(stcore->MoonScale);
+      if (stcore->FlagMoonScaled) stcore->ssystem->get_moon()->set_sphere_scale(stcore->MoonScale);
     }
     else if(args["sky_culture"]!="") stcore->set_sky_culture(args["sky_culture"]);
     else if(args["sky_locale"]!="") stcore->set_sky_locale(args["sky_locale"]);
@@ -644,15 +644,18 @@ int StelCommandInterface::set_flag(string name, string value, bool &newval, bool
 			newval = !stcore->cardinals_points->get_flag_show();
 			stcore->cardinals_points->set_flag_show(newval);
 		}
-		else if(name=="init_moon_scaled") {
-			if(newval = (stcore->FlagInitMoonScaled = !stcore->FlagInitMoonScaled)) 
-				stcore->ssystem->get_moon()->set_sphere_scale(stcore->MoonScale);
+		else if(name=="moon_scaled") {
+			newval = (stcore->FlagMoonScaled = !stcore->FlagMoonScaled);
+			if (newval)	stcore->ssystem->get_moon()->set_sphere_scale(stcore->MoonScale);
 			else stcore->ssystem->get_moon()->set_sphere_scale(1.);
 		}
 		else if(name=="landscape") newval = (stcore->FlagLandscape = !stcore->FlagLandscape);
 		else if(name=="stars") newval = (stcore->FlagStars = !stcore->FlagStars);
 		else if(name=="star_names") newval = (stcore->FlagStarName = !stcore->FlagStarName);
-		else if(name=="planets") newval = (stcore->FlagPlanets = !stcore->FlagPlanets);
+		else if(name=="planets") {
+			newval = (stcore->FlagPlanets = !stcore->FlagPlanets);
+			if (!stcore->FlagPlanets) stcore->FlagPlanetsHints = 0;
+		}
 		else if(name=="planet_names") {
 			newval = (stcore->FlagPlanetsHints = !stcore->FlagPlanetsHints);
 			if(stcore->FlagPlanetsHints) stcore->FlagPlanets = 1;  // for safety if script turns planets off
@@ -734,15 +737,18 @@ int StelCommandInterface::set_flag(string name, string value, bool &newval, bool
 		else if(name=="equator_line") stcore->FlagEquatorLine = newval;
 		else if(name=="ecliptic_line") stcore->FlagEclipticLine = newval;
 		else if(name=="cardinal_points") stcore->cardinals_points->set_flag_show(newval);
-		else if(name=="init_moon_scaled") {
-			if((stcore->FlagInitMoonScaled = newval)) 
+		else if(name=="moon_scaled") {
+			if((stcore->FlagMoonScaled = newval)) 
 				stcore->ssystem->get_moon()->set_sphere_scale(stcore->MoonScale);
 			else stcore->ssystem->get_moon()->set_sphere_scale(1.);
 		}
 		else if(name=="landscape") stcore->FlagLandscape = newval;
 		else if(name=="stars") stcore->FlagStars = newval;
 		else if(name=="star_names") stcore->FlagStarName = newval;
-		else if(name=="planets") stcore->FlagPlanets = newval;
+		else if(name=="planets") {
+			stcore->FlagPlanets = newval;
+			if (!stcore->FlagPlanets) stcore->FlagPlanetsHints = 0;
+		}
 		else if(name=="planet_names") {
 			stcore->FlagPlanetsHints = newval;
 			if(stcore->FlagPlanetsHints) stcore->FlagPlanets = 1;  // for safety if script turns planets off

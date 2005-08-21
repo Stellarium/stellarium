@@ -187,7 +187,7 @@ void stel_core::init(void)
 	tone_converter->set_world_adaptation_luminance(3.75f + atmosphere->get_intensity()*40000.f);
 
 	// Set the default moon scaling
-	if (FlagInitMoonScaled) ssystem->get_moon()->set_sphere_scale(MoonScale);
+	if (FlagMoonScaled) ssystem->get_moon()->set_sphere_scale(MoonScale);
 
 	// Compute planets data and init viewing position
 	// Position of sun and all the satellites (ie planets)
@@ -663,7 +663,7 @@ void stel_core::load_config_from(const string& confFile)
 	FlagEclipticLine		= conf.get_boolean("viewing:flag_ecliptic_line");
 	cardinals_points->set_flag_show(conf.get_boolean("viewing:flag_cardinal_points"));
 	FlagGravityLabels		= conf.get_boolean("viewing:flag_gravity_labels");
-	FlagInitMoonScaled		= conf.get_boolean("viewing:flag_init_moon_scaled");
+	FlagMoonScaled			= conf.get_boolean("viewing:flag_moon_scaled");
 	MoonScale				= conf.get_double ("viewing","moon_scale",5.);
 	ConstellationArtIntensity       = conf.get_double("viewing","constellation_art_intensity", 0.5);
 	ConstellationArtFadeDuration    = conf.get_double("viewing","constellation_art_fade_duration",2.);
@@ -807,7 +807,7 @@ void stel_core::save_config_to(const string& confFile)
 	conf.set_boolean("viewing:flag_ecliptic_line", FlagEclipticLine);
 	conf.set_boolean("viewing:flag_cardinal_points", cardinals_points->get_flag_show());
 	conf.set_boolean("viewing:flag_gravity_labels", FlagGravityLabels);
-	conf.set_boolean("viewing:flag_init_moon_scaled", FlagInitMoonScaled);
+	conf.set_boolean("viewing:flag_moon_scaled", FlagMoonScaled);
 	conf.set_double ("viewing:moon_scale", MoonScale);
 	conf.set_double ("viewing:constellation_art_intensity", ConstellationArtIntensity);
 	conf.set_double ("viewing:constellation_art_fade_duration", ConstellationArtFadeDuration);
@@ -998,6 +998,7 @@ void stel_core::zoom_in(int s)
 {
 	if (FlagEnableZoomKeys) deltaFov = -1*(s!=0);
 }
+
 
 void stel_core::zoom_out(int s)
 {

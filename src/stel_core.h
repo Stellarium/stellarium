@@ -329,7 +329,7 @@ private:
 	//    int FlagCardinalPoints;
 	int FlagGravityLabels;
 	float MoonScale;
-	int FlagInitMoonScaled;
+	int FlagMoonScaled;
 	float ConstellationArtIntensity;
 	float ConstellationArtFadeDuration;
 
