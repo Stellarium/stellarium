@@ -1,6 +1,6 @@
 /*
  * Stellarium
- * Copyright (C) 2002 Fabien Chéreau
+ * Copyright (C) 2002 Fabien ChÃ©reau
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -478,7 +478,8 @@ void stel_ui::tui_cb_admin_set_locale() {
 
 	// Right now just set for the current session
 
-#ifndef MACOSX
+// Tony - added "&& !defined(WIN32)"
+#if !defined(MACOSX) && !defined(WIN32)
 	string tmp = string("LC_ALL=" + tui_admin_setlocale->getCurrent());
 	putenv((char *)tmp.c_str());
 

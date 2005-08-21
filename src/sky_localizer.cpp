@@ -169,7 +169,7 @@ string Sky_localizer::convert_name_to_locale(string _name){
 }
 
 string Sky_localizer::clean_sky_locale_name(string _locale) {
-
+#if !defined(MACOSX) && !defined(WIN32)
 	// if locale is "system_default" try to use language from 
 	// user's environment locale, otherwise default to English
 	if( _locale == "system_default" ) {
@@ -199,7 +199,9 @@ string Sky_localizer::clean_sky_locale_name(string _locale) {
 			_locale = "eng";  // default
 		}
 	}
-
+#else
+     _locale = "eng";  // default
+#endif
 	return _locale;
 
 }

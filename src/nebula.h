@@ -64,7 +64,7 @@ public:
     bool read(const string&);
 
 	void draw_tex(const Projector* prj, tone_reproductor* eye, bool bright_nebulae);
-    void draw_name(const Projector* prj);
+    void draw_name(int hint_ON, const Projector* prj);
     void draw_circle(const Projector* prj, const navigator * nav);
     string get_name() { return name; };
 
@@ -75,6 +75,7 @@ protected:
 private:
 	unsigned int NGC_nb;			// NGC catalog number
 	string name;					// Nebula name
+	string longname;				// Tony Nebula name & description
 	string credit;					// Nebula image credit
 	float mag;						// Apparent magnitude
 	float angular_size;				// Angular size in radians

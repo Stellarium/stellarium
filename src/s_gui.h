@@ -1,6 +1,6 @@
 /*
  * Stellarium
- * Copyright (C) 2002 Fabien Ch�eau
+ * Copyright (C) 2002 Fabien Chï¿½eau
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -278,6 +278,29 @@ namespace s_gui
 		Label label;
     };
 
+    class EditBox : public Button
+    {
+    public:
+        EditBox(const string& _label = "", const s_font* font = NULL);
+		virtual ~EditBox();
+		virtual void setOnReturnKeyCallback(const callback<void>& c) {onReturnKeyCallback = c;}
+        virtual void draw(void);
+		virtual void setActive(int _active) {Button::setActive(_active); label.setActive(_active);}
+		virtual void setFont(const s_font* f) {Button::setFont(f); label.setFont(f);}
+		virtual void setTextColor(const s_color& c) {Button::setTextColor(c); label.setTextColor(c);}
+		virtual void setPainter(const Painter& p) {Button::setPainter(p); label.setPainter(p);}
+		virtual int onKey(Uint16, S_GUI_VALUE);
+		string getText(void);
+		void setFocus(void);
+		void resetFocus(void);
+	protected:
+		callback<void> onReturnKeyCallback;
+		void setLabel();
+        Label label;
+		bool isEditing;
+		string text;
+		unsigned int cursorPos;
+    };
 
     class TextLabel : public Container
 	{

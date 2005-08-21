@@ -378,7 +378,9 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 									str_to_double(args["duration"]));
 		  }
 	  }
-  } else if(command=="audio") {
+  } 
+#ifdef HAVE_SDL_MIXER_H
+else if(command=="audio") {
 	  
 	  if(args["action"]=="sync") {
 		  if(audio) audio->sync();
@@ -414,8 +416,9 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 			  } else audio->set_volume( str_to_double(args["volume"]) );
 		  }
 	  } else status = 0;
-
-  } else if(command=="script") {
+  }
+#endif 
+else if(command=="script") {
 
     if(args["action"]=="end") {
       // stop script, audio, and unload any loaded images
@@ -448,7 +451,10 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
       stcore->scripts->pause_script();
     } else if (args["action"]=="pause" || args["action"]=="resume") {
       stcore->scripts->resume_script();
+
+#ifdef HAVE_SDL_MIXER_H
       if(audio) audio->sync();
+#endif
     } else status =0;
 
   } else if(command=="clear") {
@@ -658,6 +664,12 @@ int StelCommandInterface::set_flag(string name, string value, bool &newval, bool
 			if(newval) stcore->FlagNebula = 1;  // make sure visible
 			stcore->nebulas->set_flag_hints(newval);
 		}
+        else if(name=="nebula_long_names") {  // Tony - added long names
+			newval = !stcore->FlagNebulaLongName;
+			if(newval) stcore->FlagNebula = 1;  // make sure visible
+			stcore->nebulas->set_flag_hints(newval);
+			stcore->FlagNebulaLongName = newval;
+		}
 		else if(name=="milky_way") newval = (stcore->FlagMilkyWay = !stcore->FlagMilkyWay);
 		else if(name=="bright_nebulae") newval = (stcore->FlagBrightNebulae = !stcore->FlagBrightNebulae);
 		else if(name=="object_trails") newval = (stcore->FlagObjectTrails = !stcore->FlagObjectTrails);
@@ -740,6 +752,11 @@ int StelCommandInterface::set_flag(string name, string value, bool &newval, bool
 		else if(name=="nebula_names") {
 			stcore->FlagNebula = 1;  // make sure visible
 			stcore->nebulas->set_flag_hints(newval);
+		}
+		else if(name=="nebula_long_names") {         //Tony - added long names
+			stcore->FlagNebula = 1;  // make sure visible
+			stcore->nebulas->set_flag_hints(newval); // make sure visible
+			stcore->FlagNebulaLongName = newval;
 		}
 		else if(name=="milky_way") stcore->FlagMilkyWay = newval;
 		else if(name=="bright_nebulae") stcore->FlagBrightNebulae = newval;
