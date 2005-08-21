@@ -954,7 +954,7 @@ int stel_ui::handle_keys(Uint16 key, S_GUI_VALUE state)
 
 		if(key==SDLK_m && core->FlagEnableTuiMenu) core->FlagShowTuiMenu = true;  // not recorded
 
-		if(key==SDLK_o) core->commander->execute_command( "flag init_moon_scaled toggle");
+		if(key==SDLK_o) core->commander->execute_command( "flag moon_scaled toggle");
 		if(key==SDLK_k) core->commander->execute_command( "timerate rate 1");
 		if(key==SDLK_l) core->commander->execute_command( "timerate action increment");
 		if(key==SDLK_j) core->commander->execute_command( "timerate action decrement");

@@ -99,10 +99,7 @@ Component* stel_ui::createConfigWindow(void)
 	Picture* pneb = new Picture(nebp, x-50, y, 32, 32);
 	tab_render->addComponent(pneb);
 
-	nebulas_cbx = new LabeledCheckBox(false, _("Nebulas"));
-	nebulas_cbx->setOnPressCallback(callback<void>(this, &stel_ui::updateConfigVariables));
-	tab_render->addComponent(nebulas_cbx);
-	nebulas_cbx->setPos(x,y); y+=15;
+	y+=15;
 
 	nebulas_names_cbx = new LabeledCheckBox(false, _("Nebulas Names. Up to mag :"));
 	nebulas_names_cbx->setOnPressCallback(callback<void>(this, &stel_ui::updateConfigVariables));
@@ -122,7 +119,7 @@ Component* stel_ui::createConfigWindow(void)
 	tab_render->addComponent(pplan);
 
 	planets_cbx = new LabeledCheckBox(false, _("Planets"));
-	planets_cbx->setOnPressCallback(callback<void>(this, &stel_ui::updateConfigVariables));
+	planets_cbx->setOnPressCallback(callback<void>(this, &stel_ui::updateConfigVariables2));
 	tab_render->addComponent(planets_cbx);
 	planets_cbx->setPos(x,y);
 
@@ -392,12 +389,10 @@ void stel_ui::updateConfigVariables(void)
 	core->commander->execute_command("flag constellation_drawing ", constellation_cbx->getState());
 	core->commander->execute_command("flag constellation_names ", constellation_name_cbx->getState());
 	core->commander->execute_command("flag constellation_pick ", sel_constellation_cbx->getState());
-	core->commander->execute_command("flag nebulae ", nebulas_cbx->getState());
 	core->commander->execute_command("flag nebula_names ", nebulas_names_cbx->getState());
 	core->commander->execute_command("set max_mag_nebula_name ", max_mag_nebula_name->getValue());
-	core->commander->execute_command("flag planets ", planets_cbx->getState());
 	core->commander->execute_command("flag planet_names ", planets_hints_cbx->getState());
-	core->commander->execute_command("set moon_scale ", moon_x4_cbx->getState() ? core->MoonScale : 1.f);
+	core->commander->execute_command("flag moon_scaled ", moon_x4_cbx->getState());
 	core->commander->execute_command("flag equatorial_grid ", equator_grid_cbx->getState());
 	core->commander->execute_command("flag azimuthal_grid ", azimuth_grid_cbx->getState());
 	core->commander->execute_command("flag equator_line ", equator_cbx->getState());
@@ -406,6 +401,11 @@ void stel_ui::updateConfigVariables(void)
 	core->commander->execute_command("flag cardinal_points ", cardinal_cbx->getState());
 	core->commander->execute_command("flag atmosphere ", atmosphere_cbx->getState());
 	core->commander->execute_command("flag fog ", fog_cbx->getState());
+}
+
+void stel_ui::updateConfigVariables2(void)
+{
+	core->commander->execute_command("flag planets ", planets_cbx->getState());
 }
 
 void stel_ui::setCurrentTimeFromConfig(void)
@@ -550,12 +550,11 @@ void stel_ui::updateConfigForm(void)
 	constellation_cbx->setState(core->constellation_get_flag_lines());
 	constellation_name_cbx->setState(core->constellation_get_flag_names());
 	sel_constellation_cbx->setState(core->FlagConstellationPick);
-	nebulas_cbx->setState(core->FlagNebula);
 	nebulas_names_cbx->setState(core->nebulas->get_flag_hints());
 	max_mag_nebula_name->setValue(core->MaxMagNebulaName);
 	planets_cbx->setState(core->FlagPlanets);
 	planets_hints_cbx->setState(core->FlagPlanetsHints);
-	moon_x4_cbx->setState(core->ssystem->get_moon()->get_sphere_scale()!=1.f);
+	moon_x4_cbx->setState(core->FlagMoonScaled);
 	equator_grid_cbx->setState(core->FlagEquatorialGrid);
 	azimuth_grid_cbx->setState(core->FlagAzimutalGrid);
 	equator_cbx->setState(core->FlagEquatorLine);

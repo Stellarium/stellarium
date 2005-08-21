@@ -159,7 +159,6 @@ private:
 	LabeledCheckBox* constellation_cbx;
 	LabeledCheckBox* constellation_name_cbx;
 	LabeledCheckBox* sel_constellation_cbx;
-	LabeledCheckBox* nebulas_cbx;
 	LabeledCheckBox* nebulas_names_cbx;
 	FloatIncDec* max_mag_nebula_name;
 	LabeledCheckBox* planets_cbx;
@@ -201,6 +200,7 @@ private:
 	void updateVideoVariables(void);
 
 	void updateConfigVariables(void);
+	void updateConfigVariables2(void);
 	void updateConfigForm(void);
 
 	bool LocaleChanged;  // flag to watch for need to rebuild TUI
