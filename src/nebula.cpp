@@ -1,6 +1,6 @@
 /*
  * Stellarium
- * Copyright (C) 2002 Fabien Ch�eau
+ * Copyright (C) 2002 Fabien Chï¿½eau
  * 
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -83,12 +83,14 @@ bool Nebula::read(const string& record)
 	float tex_rotation;
 	
 	std::istringstream istr(record);
-	if (!(istr >> NGC_nb >> type >> rahr >> ramin >> dedeg >> demin >> mag >> tex_angular_size >> tex_rotation >> name >> tex_name >> credit)) return false ;
+    //Tony - added longname
+	if (!(istr >> NGC_nb >> type >> rahr >> ramin >> dedeg >> demin >> mag >> tex_angular_size >> tex_rotation >> longname >> tex_name >> credit)) return false ;
 
     // Replace the "_" with " "
-    for (string::size_type i=0;i<name.length();++i)
+    for (string::size_type i=0;i<longname.length();++i)
 	{
-		if (name[i]=='_') name[i]=' ';
+		if (longname[i]=='_') longname[i]=' ';
+        if (longname[i]=='-') name = longname.substr(0,i);  //Tony - added name (ie M81) extraction from longname
 	}
 
     credit = string("Credit: ") + credit;	
@@ -197,13 +199,13 @@ float Nebula::get_on_screen_size(const Projector* prj, const navigator * nav)
 	return angular_size*180./M_PI/prj->get_fov()*prj->viewH();
 }
 
-void Nebula::draw_name(const Projector* prj)
+void Nebula::draw_name(int hint_ON, const Projector* prj)
 {
     glColor3fv(fontcolor*hints_brightness);
     float size = get_on_screen_size(prj);
     float shift = 8.f + size/2.f;
-    gravity_label ? prj->print_gravity180(nebula_font, XY[0]+shift, XY[1]+shift, name, 1, 0, 0) :
-      nebula_font->print(XY[0]+shift, XY[1]+shift, name);
+    gravity_label ? prj->print_gravity180(nebula_font, XY[0]+shift, XY[1]+shift, (hint_ON==1?longname:name), 1, 0, 0) :
+      nebula_font->print(XY[0]+shift, XY[1]+shift, (hint_ON==1?longname:name));
 
     // draw image credit, if it fits easily
     if( size > nebula_font->getStrLen(credit) ) {

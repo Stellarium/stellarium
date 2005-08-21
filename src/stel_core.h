@@ -301,6 +301,7 @@ private:
     int FlagPlanetsOrbits;
     int FlagObjectTrails;
     int FlagNebula;
+    int FlagNebulaLongName;       // Tony
 	//    int FlagNebulaName;
     float MaxMagNebulaName;
     int FlagNebulaCircle;

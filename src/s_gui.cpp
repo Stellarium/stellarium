@@ -1,6 +1,6 @@
 /*
 * Stellarium
-* Copyright (C) 2002 Fabien Ch�eau
+* Copyright (C) 2002 Fabien Chï¿½eau
 *
 * This program is free software; you can redistribute it and/or
 * modify it under the terms of the GNU General Public License
@@ -388,7 +388,7 @@ int CallbackComponent::onMove(int x, int y)
 }
 
 //////////////////////////////// Container /////////////////////////////////////
-// Manages hierarchical components : send signals ad actions  to childrens
+// Manages hierarchical components : send signals and actions to childrens
 ////////////////////////////////////////////////////////////////////////////////
 
 Container::Container() : CallbackComponent()
@@ -528,6 +528,7 @@ int Button::onClic(int x, int y, S_GUI_VALUE bt, S_GUI_VALUE state)
 	return 0;
 }
 
+
 void FilledButton::draw()
 {
 	if (!visible) return;
@@ -656,6 +657,119 @@ void Label::adjustSize(void)
 	size[1] = (int)ceilf(painter.getFont()->getLineHeight());
 }
 
+
+// Tony
+/////////////////////////////// EditBox //////////////////////////////////
+// Button with text on it
+////////////////////////////////////////////////////////////////////////////////
+
+EditBox::EditBox(const string& _label, const s_font* font) : Button(), label(_label, font), isEditing(false)
+{
+	Component::setSize(label.getSize()+s_vec2i(4,2));
+	text = _label;
+    cursorPos = 0;
+	label.setLabel(">  " + text);
+}
+
+EditBox::~EditBox()
+{
+}
+
+void EditBox::draw(void)
+{
+    if (!visible) return;
+	Button::draw();
+    glPushMatrix();
+    glTranslatef(pos[0], pos[1], 0.f);
+    Component::scissor->push(pos, size);
+	label.setPos(6, (size[1]-label.getSizey())/2);
+	label.draw();
+    Component::scissor->pop();
+	glPopMatrix();
+}
+
+void EditBox::setLabel()
+{
+     if (isEditing)
+        label.setLabel("> " + text.substr(0,cursorPos) + "?" + text.substr(cursorPos)); 
+     else
+        label.setLabel("> " + text); 
+     
+}
+void EditBox::setFocus(void)
+{
+      isEditing = true;
+      setLabel(); 
+}
+
+void EditBox::resetFocus(void)
+{
+      isEditing = false;
+      setLabel(); 
+}
+
+string EditBox::getText(void)
+{
+       return text;
+}
+
+int EditBox::onKey(Uint16 k, S_GUI_VALUE s)
+{
+    if (!isEditing)
+       return 0;
+
+	if (s==S_GUI_PRESSED)
+    { 
+  		if (k == SDLK_LEFT)
+  		{
+              if (cursorPos > 0) cursorPos--;
+        }
+        else if (k == SDLK_RIGHT)
+        {
+              if (cursorPos < text.length()) cursorPos++;
+        }
+        else if (k == SDLK_HOME)
+        {
+             cursorPos = 0;
+        }
+        else if (k == SDLK_END)
+        {
+             cursorPos = text.length();
+        }
+  		else if (k == SDLK_DELETE || k == SDLK_BACKSPACE)
+        {
+           if (cursorPos > 0)
+           {
+               cursorPos--;
+               text = text.erase(text.length() - 1);
+           }
+        }
+        else if (k == SDLK_ESCAPE)
+        {
+             cursorPos = 0;
+             text = "";             
+        }
+        else if ((k >= SDLK_0 && k <= SDLK_9) || (k >= SDLK_a && k <= SDLK_z) 
+        || (k >= 65 && k <= 90) || k == SDLK_SPACE || k == SDLK_UNDERSCORE)
+        {
+             cursorPos++;
+            text += k;
+        }
+        else if  (k==SDLK_RETURN)
+        {
+       		if (!onReturnKeyCallback.empty()) onReturnKeyCallback();
+             cursorPos = 0;
+             text = "";             
+        }
+        else
+            return 0;
+          
+        setLabel();
+        return 1;
+    }
+
+    return 0;
+}
 
 /////////////////////////////// LabeledButton //////////////////////////////////
 // Button with text on it
@@ -860,6 +974,7 @@ int StdWin::onMove(int x, int y)
 	{
 		pos+=(s_vec2i(x,y)-oldpos);
 		oldpos.set(x,y);
+		return 1;
 	}
 	return 0;
 }

@@ -1,6 +1,6 @@
 /*
  * Stellarium
- * Copyright (C) 2002 Fabien Ch�eau
+ * Copyright (C) 2002 Fabien Chï¿½eau
  * 
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -78,7 +78,7 @@ void Constellation_mgr::load_lines_and_art(const string & fileName, const string
 	int line=0;
 	while(!std::getline(inf, record).eof())
 	{
-		line++;
+        line++;
 		cons = new Constellation;
 		assert(cons);
 		if(cons->read(record, hipStarMgr))
@@ -86,7 +86,7 @@ void Constellation_mgr::load_lines_and_art(const string & fileName, const string
 			asterisms.push_back(cons);
 		} else
 		{ 
-			printf(_("ERROR on line %d of %s\n"), line, fileName.c_str());
+            printf(_("ERROR on line %d of %s\n"), line, fileName.c_str());
 			delete cons;
 		}
 	}
@@ -135,7 +135,8 @@ void Constellation_mgr::load_lines_and_art(const string & fileName, const string
 		}
 
 		// Draw loading bar
-		sprintf(tmpstr, _("Loading Constellation Art: %d/%d"), current, total);
+        //Tony - added "+1" to ensure art finsihes at last entry
+		sprintf(tmpstr, _("Loading Constellation Art: %d/%d"), current+1, total);
 		lb.SetMessage(tmpstr);
 		lb.Draw((float)current/total);
 		

@@ -185,6 +185,7 @@ float Observator::get_GMT_shift_from_system(double JD, bool _local) const
 	// + (timeinfo->tm_isdst!=0);
 	#else
 	*/
+#if !defined(MACOSX) && !defined(WIN32)
 
 	struct tm * timeinfo;
 
@@ -218,6 +219,9 @@ float Observator::get_GMT_shift_from_system(double JD, bool _local) const
 	float min = 1.f/60.f * atoi(&heure[3]);
 	heure[3] = '\0';
 	return min + atoi(heure);
+#else
+	return -(float)timezone/3600;
+#endif
 
 	// #endif
 	

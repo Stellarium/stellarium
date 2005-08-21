@@ -86,6 +86,9 @@
 
 #ifndef	WIN32
 #include <unistd.h>
+//Tony - added #else #include <io.h>
+#else
+#include <io.h>
 #endif
 
 #include "mmgr.h"

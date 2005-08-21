@@ -1,6 +1,6 @@
 /*
  * Stellarium
- * Copyright (C) 2002 Fabien Ch�eau
+ * Copyright (C) 2002 Fabien Chï¿½eau
  * 
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -235,7 +235,8 @@ If not, check that you have access to %s\n"), CDIR.c_str(), CDIR.c_str(), CDIR.c
 int main(int argc, char **argv)
 {
 
-#ifndef MACOSX
+//Tony - added "&& !defined(WIN32)"
+#if !defined(MACOSX) && !defined(WIN32)
 	// TESTING ONLY
 	//	setenv("LC_ALL", "fr_FR", 1);
 

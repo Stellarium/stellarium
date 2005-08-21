@@ -92,12 +92,16 @@ stel_core::~stel_core()
 
 void stel_core::init(void)
 {
+#if !defined(WIN32)
 	// read current ui locale
 	char *tmp = setlocale(LC_MESSAGES, "");
 	printf("Locale is %s\n", tmp);
 
 	if(tmp == NULL) UILocale = "";
 	else UILocale = tmp;
+#else
+     UILocale = "";
+#endif
 
 	// Set textures directory and suffix
 	s_texture::set_texDir(TextureDir);
@@ -361,7 +365,8 @@ void stel_core::draw(int delta_time)
 	asterisms->draw(projection, navigation);
 
 	// Draw the nebula if they are visible
-	if (FlagNebula) nebulas->draw(projection, navigation, tone_converter, (sky_brightness<0.11),
+	//Tony - added "FlagNebulaLongName"
+	if (FlagNebula) nebulas->draw(FlagNebulaLongName, projection, navigation, tone_converter, (sky_brightness<0.11),
 								  FlagGravityLabels, MaxMagNebulaName, FlagBrightNebulae);
 
 	// Draw the hipparcos stars
@@ -672,6 +677,7 @@ void stel_core::load_config_from(const string& confFile)
 	FlagObjectTrails		= conf.get_boolean("astro", "flag_object_trails", 0);
 	FlagNebula				= conf.get_boolean("astro:flag_nebula");
 	nebulas->set_flag_hints(conf.get_boolean("astro:flag_nebula_name"));
+    FlagNebulaLongName     = conf.get_boolean("astro:flag_nebula_long_name"); // Tony - added long name
 	MaxMagNebulaName		= conf.get_double("astro:max_mag_nebula_name");
 	FlagMilkyWay			= conf.get_boolean("astro:flag_milky_way");
 	MilkyWayIntensity       = conf.get_double("astro","milky_way_intensity",1.);
@@ -816,6 +822,7 @@ void stel_core::save_config_to(const string& confFile)
 	conf.set_boolean("astro:flag_object_trails", FlagObjectTrails);
 	conf.set_boolean("astro:flag_nebula", FlagNebula);
 	conf.set_boolean("astro:flag_nebula_name", nebulas->get_flag_hints());
+	conf.set_boolean("astro:flag_nebula_long_name", FlagNebulaLongName); // Tony - added long name
 	conf.set_double("astro:max_mag_nebula_name", MaxMagNebulaName);
 	conf.set_boolean("astro:flag_milky_way", FlagMilkyWay);
 	conf.set_double("astro:milky_way_intensity", MilkyWayIntensity);
