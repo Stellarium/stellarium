@@ -169,7 +169,6 @@ public:
 	//! Quit the application
 	void quit(void);
 	void set_object_pointer_visibility(bool _newval) { object_pointer_visibility = _newval; }
-
 private:
 
 	// Main elements of the program
@@ -193,6 +192,12 @@ private:
 	tone_reproductor * tone_converter;	// Tones conversion between stellarium world and display device
 
 	planet* selected_planet;
+
+    // Tony for autocompletes
+    vector<string> constellationNames;
+    vector<string> constellationShortNames;
+    vector<string> planetNames;
+    vector<string> starNames;
 
 	// Projector
 	PROJECTOR_TYPE ProjectorType;
@@ -269,6 +274,7 @@ private:
     int FlagHelp;
     int FlagInfos;
     int FlagConfig;
+    int FlagSearch;  // Tony
 	int FlagShowSelectedObjectInfo;
 	Vec3f GuiBaseColor;
 	Vec3f GuiTextColor;

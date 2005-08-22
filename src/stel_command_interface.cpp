@@ -176,8 +176,11 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
       stcore->selected_planet=NULL;
       stcore->asterisms->set_selected(NULL);
     } else if(args["constellation"]!=""){
+      unsigned int hpnum; // Tony - highlight the constellation and the first star in the list
       stcore->asterisms->set_selected(args["constellation"]);
-      stcore->selected_object = NULL;
+      hpnum = stcore->asterisms->get_first_selected_HP();
+      stcore->selected_object = stcore->hip_stars->search(hpnum);
+      stcore->asterisms->set_selected((Hip_Star*)stcore->selected_object);
       stcore->selected_planet=NULL;
     }
 
@@ -381,7 +384,7 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
   } 
 #ifdef HAVE_SDL_MIXER_H
 else if(command=="audio") {
-	  
+  
 	  if(args["action"]=="sync") {
 		  if(audio) audio->sync();
 
@@ -451,7 +454,6 @@ else if(command=="script") {
       stcore->scripts->pause_script();
     } else if (args["action"]=="pause" || args["action"]=="resume") {
       stcore->scripts->resume_script();
-
 #ifdef HAVE_SDL_MIXER_H
       if(audio) audio->sync();
 #endif
@@ -662,6 +664,10 @@ int StelCommandInterface::set_flag(string name, string value, bool &newval, bool
 		}
 		else if(name=="planet_orbits") newval = (stcore->FlagPlanetsOrbits = !stcore->FlagPlanetsOrbits);
 		else if(name=="nebulae") newval = (stcore->FlagNebula = !stcore->FlagNebula);
+		else if(name=="constellation_isolate_selected") { 
+             newval = !stcore->asterisms->get_isolate_selected();
+             stcore->asterisms->set_isolate_selected(newval);
+        }
 		else if(name=="nebula_names") {
 			newval = !stcore->nebulas->get_flag_hints();
 			if(newval) stcore->FlagNebula = 1;  // make sure visible
@@ -755,6 +761,9 @@ int StelCommandInterface::set_flag(string name, string value, bool &newval, bool
 		}
 		else if(name=="planet_orbits") stcore->FlagPlanetsOrbits = newval;
 		else if(name=="nebulae") stcore->FlagNebula = newval;
+     	else if(name=="constellation_isolate_selected") { 
+             stcore->asterisms->set_isolate_selected(newval);
+        }
 		else if(name=="nebula_names") {
 			stcore->FlagNebula = 1;  // make sure visible
 			stcore->nebulas->set_flag_hints(newval);

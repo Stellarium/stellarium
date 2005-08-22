@@ -49,6 +49,14 @@ public:
 	void set_font(const string& _font_filename);
 	void set_selected(const string& shortname) {set_selected_const(find_from_short_name(shortname));}
 	void set_selected(const Hip_Star * s) {if (!s) set_selected_const(NULL); else set_selected_const(is_star_in(s));}
+    // Tony - isolateSelected flag for isolating the constellations 
+	void set_isolate_selected(bool s) { isolateSelected = s; }
+	bool get_isolate_selected(void) { return isolateSelected; }
+    // Tony - get__first_selected_HP returns the first node in the selected constellation 
+	unsigned int get_first_selected_HP(void) {if (selected != NULL) return selected->asterism[0]->get_hp_number(); else return 0;}  //Tony
+    // Tony - for getting the names and shortnames as a list
+	vector<string> getNames(void);
+	vector<string> getShortNames(void);
 private:
 	void draw_lines(Projector * prj) const;
 	void draw_art(Projector * prj, navigator * nav) const;
@@ -61,6 +69,7 @@ private:
     Vec3f lines_color, names_color;
     Hip_Star_mgr * hipStarMgr;
 	Constellation* selected;
+	bool isolateSelected;     // Tony - flag for isolating the constellations 
 };
 
 #endif // _CONSTELLATION_MGR_H_

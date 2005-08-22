@@ -64,6 +64,7 @@ stel_ui::stel_ui(stel_core * _core) :
 		help_txtlbl(NULL),
 
 		config_win(NULL),
+		search_win(NULL), // Tony - added the search window
 		tui_root(NULL)
 
 {
@@ -136,7 +137,8 @@ void stel_ui::init(void)
 	info_select_ctr = new Container();
 	info_select_ctr->reshape(0,15,300,100);
 	info_select_txtlbl = new TextLabel("Info");
-    info_select_txtlbl->reshape(5,5,550,102);  // Tony - widened box to get NGC for nebula with long names
+	info_select_txtlbl = new TextLabel("Info");
+    info_select_txtlbl->reshape(5,5,550,102);
 	info_select_ctr->setVisible(0);
 	info_select_ctr->addComponent(info_select_txtlbl);
 	desktop->addComponent(info_select_ctr);
@@ -159,6 +161,7 @@ void stel_ui::init(void)
 	desktop->addComponent(createLicenceWindow());
 	desktop->addComponent(createHelpWindow());
 	desktop->addComponent(createConfigWindow());
+	desktop->addComponent(createSearchWindow()); // Tony - added the search window
 
 }
 
@@ -176,6 +179,14 @@ void stel_ui::show_message(string _message, int _time_out)
 	message_txtlbl->adjustSize();
 	message_win->set_timeout(_time_out);
 	message_win->setVisible(1);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+// Tony
+void stel_ui::gotoObject(void)
+{
+    core->navigation->move_to(core->selected_object->get_earth_equ_pos(core->navigation),
+	                      core->auto_move_duration);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -300,6 +311,22 @@ Component* stel_ui::createFlagButtons(void)
 	bt_flag_quit->setOnPressCallback(callback<void>(this, &stel_ui::cb));
 	bt_flag_quit->setOnMouseInOutCallback(callback<void>(this, &stel_ui::cbr));
 
+    // Tony - added the search button
+	bt_flag_search = new FlagButton(true, NULL, "bt_search");
+	bt_flag_search->setOnPressCallback(callback<void>(this, &stel_ui::cb));
+	bt_flag_search->setOnMouseInOutCallback(callback<void>(this, &stel_ui::cbr));
+
+    // Tony - added the script edit box
+	bt_script = new EditBox(_(""));
+	bt_script->setSize(299,24);
+	bt_script->setOnReturnKeyCallback(callback<void>(this, &stel_ui::cbEditScriptExecute));
+	bt_script->setOnMouseInOutCallback(callback<void>(this, &stel_ui::cbr));
+
+    // Tony - added the goto object button
+	bt_flag_goto = new FlagButton(true, NULL, "bt_track");
+	bt_flag_goto->setOnPressCallback(callback<void>(this, &stel_ui::cb));
+	bt_flag_goto->setOnMouseInOutCallback(callback<void>(this, &stel_ui::cbr));
+
 	bt_flag_ctr = new FilledContainer();
 	bt_flag_ctr->addComponent(bt_flag_constellation_draw); 	bt_flag_constellation_draw->setPos(0,0);
 	bt_flag_ctr->addComponent(bt_flag_constellation_name);	bt_flag_constellation_name->setPos(25,0);
@@ -312,11 +339,15 @@ Component* stel_ui::createFlagButtons(void)
 	bt_flag_ctr->addComponent(bt_flag_nebula_name);		bt_flag_nebula_name->setPos(200,0);
 	bt_flag_ctr->addComponent(bt_flag_help);			bt_flag_help->setPos(225,0);
 	bt_flag_ctr->addComponent(bt_flag_equatorial_mode);	bt_flag_equatorial_mode->setPos(250,0);
-	bt_flag_ctr->addComponent(bt_flag_config);			bt_flag_config->setPos(275,0);
-	bt_flag_ctr->addComponent(bt_flag_quit);			bt_flag_quit->setPos(300,0);
+	bt_flag_ctr->addComponent(bt_flag_search);			bt_flag_search->setPos(275,0);
+	bt_flag_ctr->addComponent(bt_script);			    bt_script->setPos(300,0);
+	bt_flag_ctr->addComponent(bt_flag_goto);			bt_flag_goto->setPos(600,0);
+	bt_flag_ctr->addComponent(bt_flag_config);			bt_flag_config->setPos(625,0);
+	bt_flag_ctr->addComponent(bt_flag_quit);			bt_flag_quit->setPos(650,0);
 
 	bt_flag_ctr->setOnMouseInOutCallback(callback<void>(this, &stel_ui::bt_flag_ctrOnMouseInOut));
-	bt_flag_ctr->reshape(0, core->screen_H-25, 13*25 -1, 25);
+    // Tony - changed size to accomodate extra components (search, edit, goto object)
+	bt_flag_ctr->reshape(0, core->screen_H-25, 15*25+300 - 1, 25);
 
 	return bt_flag_ctr;
 
@@ -326,22 +357,22 @@ Component* stel_ui::createFlagButtons(void)
 Component* stel_ui::createTimeControlButtons(void)
 {
 	bt_dec_time_speed = new LabeledButton("\2\2");
-	bt_dec_time_speed->setSize(25,25);
+	bt_dec_time_speed->setSize(24,24);
 	bt_dec_time_speed->setOnPressCallback(callback<void>(this, &stel_ui::bt_dec_time_speed_cb));
 	bt_dec_time_speed->setOnMouseInOutCallback(callback<void>(this, &stel_ui::tcbr));
 
 	bt_real_time_speed = new LabeledButton("\5");
-	bt_real_time_speed->setSize(25,25);
+	bt_real_time_speed->setSize(24,24);
 	bt_real_time_speed->setOnPressCallback(callback<void>(this, &stel_ui::bt_real_time_speed_cb));
 	bt_real_time_speed->setOnMouseInOutCallback(callback<void>(this, &stel_ui::tcbr));
 
 	bt_inc_time_speed = new LabeledButton("\3\3");
-	bt_inc_time_speed->setSize(25,25);
+	bt_inc_time_speed->setSize(24,24);
 	bt_inc_time_speed->setOnPressCallback(callback<void>(this, &stel_ui::bt_inc_time_speed_cb));
 	bt_inc_time_speed->setOnMouseInOutCallback(callback<void>(this, &stel_ui::tcbr));
 
 	bt_time_now = new LabeledButton("N");
-	bt_time_now->setSize(25,25);
+	bt_time_now->setSize(24,24);
 	bt_time_now->setOnPressCallback(callback<void>(this, &stel_ui::bt_time_now_cb));
 	bt_time_now->setOnMouseInOutCallback(callback<void>(this, &stel_ui::tcbr));
 
@@ -388,6 +419,27 @@ void stel_ui::bt_time_now_cb(void)
 }
 
 ////////////////////////////////////////////////////////////////////////////////
+// Tony - script command line
+void stel_ui::cbEditScriptInOut(void)
+{
+	if (bt_script->getIsMouseOver())
+	{
+		bt_flag_help_lbl->setLabel(_("Script commander"));
+        bt_script->setFocus();
+    }
+	else
+        bt_script->resetFocus();
+}
+
+// Tony - script command line
+void stel_ui::cbEditScriptExecute(void)
+{
+     printf("Executing script %s",bt_script->getText().c_str());
+     if (!core->commander->execute_command(bt_script->getText()))
+		bt_flag_help_lbl->setLabel(_("Invalid Script command"));
+}
+
+////////////////////////////////////////////////////////////////////////////////
 void stel_ui::cb(void)
 {
 	core->constellation_set_flag_lines(bt_flag_constellation_draw->getState());
@@ -404,6 +456,14 @@ void stel_ui::cb(void)
 	core->navigation->set_viewing_mode(bt_flag_equatorial_mode->getState() ? VIEW_EQUATOR : VIEW_HORIZON);
 	core->FlagConfig			= bt_flag_config->getState();
 	config_win->setVisible(core->FlagConfig);
+
+    // Tony search and goto buttons
+	core->FlagSearch			= bt_flag_search->getState();
+	search_win->setVisible(core->FlagSearch);
+	if (bt_flag_goto->getState() && core->selected_object)
+        gotoObject();
+	bt_flag_goto->setState(false);
+
 	if (!bt_flag_quit->getState()) core->quit();
 }
 
@@ -451,6 +511,12 @@ void stel_ui::cbr(void)
 #else
 		bt_flag_help_lbl->setLabel(_("Quit [CMD + Q]"));
 #endif
+	if (bt_flag_search->getIsMouseOver())     // Tony
+		bt_flag_help_lbl->setLabel(_("Search for object"));
+	if (bt_script->getIsMouseOver())     // Tony
+		bt_flag_help_lbl->setLabel(_("Script commander"));
+	if (bt_flag_goto->getIsMouseOver())     // Tony
+		bt_flag_help_lbl->setLabel(_("Goto selected object"));
 }
 
 void stel_ui::tcbr(void)
@@ -610,8 +676,8 @@ int stel_ui::handle_move(int x, int y)
 			core->navigation->update_move(az2-az1, alt1-alt2);
 			previous_x = x;
 			previous_y = y;
+			return 1;
 		}
-		return 1;
 	}
 	return 0;
 }
@@ -622,6 +688,13 @@ int stel_ui::handle_clic(Uint16 x, Uint16 y, S_GUI_VALUE button, S_GUI_VALUE sta
 	// Do not allow use of mouse while script is playing
 	// otherwise script can get confused
 	if(core->scripts->is_playing()) return 0;
+
+    // Tony - moved the onClic check so if the ui handles, then don't need anymore attention
+	if (desktop->onClic((int)x, (int)y, button, state))
+    {
+        has_dragged = true;
+		return 1;
+	}
 
 	switch (button)
 	{
@@ -652,11 +725,12 @@ int stel_ui::handle_clic(Uint16 x, Uint16 y, S_GUI_VALUE button, S_GUI_VALUE sta
 	}
 
 	// Send the mouse event to the User Interface
-	if (desktop->onClic((int)x, (int)y, button, state))
-	{
-		return 1;
-	}
-	else
+//	if (desktop->onClic((int)x, (int)y, button, state))
+//    {
+//        has_dragged = true;
+//		return 1;
+//	}
+//	else
 		// Manage the event for the main window
 	{
 		if (state==S_GUI_PRESSED) return 1;
@@ -759,8 +833,8 @@ int stel_ui::handle_clic(Uint16 x, Uint16 y, S_GUI_VALUE button, S_GUI_VALUE sta
 int stel_ui::handle_keys(Uint16 key, S_GUI_VALUE state)
 {
     // Tony
-	if (desktop->onKey(key, state)) 
-       return 1;
+	if (desktop->onKey(key, state))
+	   return 1;
 
 	if (state==S_GUI_PRESSED)
 	{
@@ -1040,6 +1114,10 @@ void stel_ui::gui_update_widgets(int delta_time)
 	bt_flag_help->setState(help_win->getVisible());
 	bt_flag_equatorial_mode->setState(core->navigation->get_viewing_mode()==VIEW_EQUATOR);
 	bt_flag_config->setState(config_win->getVisible());
+	// Tony - search and goto button
+	bt_flag_search->setState(search_win->getVisible());
+//	bt_flag_track->setState(core->navigation->get_flag_traking()); 
+	bt_flag_goto->setState(false); 
 
 	if (config_win->getVisible()) updateConfigForm();
 }

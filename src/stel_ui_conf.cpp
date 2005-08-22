@@ -19,6 +19,7 @@
 
 #include "stel_ui.h"
 
+
 using namespace s_gui;
 
 
@@ -375,8 +376,247 @@ Component* stel_ui::createConfigWindow(void)
 	config_win->addComponent(config_tab_ctr);
 	config_win->setOnHideBtCallback(callback<void>(this, &stel_ui::config_win_hideBtCallback));
 
-	
 	return config_win;
+}
+
+// Tony - search window
+
+Component* stel_ui::createSearchWindow(void)
+{
+	// The current drawing position
+	int xi,yi;
+	xi=20; yi=15;
+
+	int x,y;
+	x=70; y=yi+5;
+	
+	int h = 120;
+
+     // Bring up dialog
+	search_win = new StdBtWin(_("Object Search"));
+	search_win->reshape(300,200,400,h);
+	search_win->setVisible(core->FlagSearch);
+
+	search_tab_ctr = new TabContainer();
+	search_tab_ctr->setSize(search_win->getSizex(),search_win->getSizey()- 20);
+
+	lblSearchMessage = new Label(_(""));
+	lblSearchMessage->setPos(10, search_win->getSizey()-15);
+
+	// stars
+	FilledContainer* tab_stars = new FilledContainer();
+	tab_stars->setSize(search_tab_ctr->getSize());
+
+	s_texture* starp = new s_texture("halo");
+	Picture* pstar = new Picture(starp, xi, yi, 32, 32);
+	tab_stars->addComponent(pstar);
+
+	Label * lblstars1 = new Label(_("HP No./Name"));
+	lblstars1->setPos(x, y+5);
+	tab_stars->addComponent(lblstars1);
+
+	Label * lblstars2 = new Label(_("eg. 60718 (aCrux) or Canopus"));
+	lblstars2->setPos(x+100, y+35);
+	tab_stars->addComponent(lblstars2);
+
+	star_edit = new EditBox(_(""));
+	star_edit->setOnReturnKeyCallback(callback<void>(this, &stel_ui::doStarSearch));
+	star_edit->setOnAutoCompleteCallback(callback<void>(this, &stel_ui::showStarAutoComplete));
+	tab_stars->addComponent(star_edit);
+	star_edit->setPos(x+100,y);
+	star_edit->setSize(170,25);
+
+    // constellation
+	FilledContainer* tab_constellations = new FilledContainer();
+	tab_constellations->setSize(search_tab_ctr->getSize());
+
+	s_texture* constellp = new s_texture("bt_constellations");
+	Picture* pconstell = new Picture(constellp, xi, yi, 32, 32);
+	tab_constellations->addComponent(pconstell);
+
+	Label * lblconst1 = new Label(_("Constellation"));
+	lblconst1->setPos(x, y+5);
+	tab_constellations->addComponent(lblconst1);
+
+	Label * lblconst2 = new Label(_("eg. Crux"));
+	lblconst2->setPos(x+100, y+35);
+	tab_constellations->addComponent(lblconst2);
+
+	constellation_edit = new EditBox(_(""));
+	constellation_edit->setOnReturnKeyCallback(callback<void>(this, &stel_ui::doConstellationSearch));
+	constellation_edit->setOnAutoCompleteCallback(callback<void>(this, &stel_ui::showConstellationAutoComplete));
+	tab_constellations->addComponent(constellation_edit);
+	constellation_edit->setPos(x+100,y);
+	constellation_edit->setSize(170,25);
+	
+    // nebula
+	FilledContainer* tab_nebula = new FilledContainer();
+	tab_nebula->setSize(search_tab_ctr->getSize());
+ 
+	s_texture* nebp = new s_texture("bt_nebula");
+	Picture* pneb = new Picture(nebp, xi, yi, 32, 32);
+	tab_nebula->addComponent(pneb);
+
+	Label * lblnebula1 = new Label(_("Messier No."));
+	lblnebula1->setPos(x, y+5);
+	tab_nebula->addComponent(lblnebula1);
+
+	Label * lblnebula2 = new Label(_("eg. M83"));
+	lblnebula2->setPos(x+100, y+35);
+	tab_nebula->addComponent(lblnebula2);
+
+	nebula_edit = new EditBox(_(""));
+	nebula_edit->setOnReturnKeyCallback(callback<void>(this, &stel_ui::doNebulaSearch));
+	tab_nebula->addComponent(nebula_edit);
+	nebula_edit->setPos(x+100,y);
+	nebula_edit->setSize(170,25);
+
+    // Planets
+	FilledContainer* tab_planets = new FilledContainer();
+	tab_planets->setSize(search_tab_ctr->getSize());
+
+	s_texture* planp = new s_texture("bt_planet");
+	Picture* pplan = new Picture(planp, xi, yi, 32, 32);
+	tab_planets->addComponent(pplan);
+
+	Label * lblplanet1 = new Label(_("Planet/Moon"));
+	lblplanet1->setPos(x, y+5);
+	tab_planets->addComponent(lblplanet1);
+
+	Label * lblplanet2 = new Label(_("eg. Pluto or Io"));
+	lblplanet2->setPos(x+100, y+35);
+	tab_planets->addComponent(lblplanet2);
+
+	planet_edit = new EditBox(_(""));
+	planet_edit->setOnReturnKeyCallback(callback<void>(this, &stel_ui::doPlanetSearch));
+	planet_edit->setOnAutoCompleteCallback(callback<void>(this, &stel_ui::showPlanetAutoComplete));
+	tab_planets->addComponent(planet_edit);
+	planet_edit->setPos(x+100,y);
+	planet_edit->setSize(170,25);
+	
+	// Tony
+	search_tab_ctr->setTexture(flipBaseTex);
+	search_tab_ctr->addTab(tab_stars, _("Stars"));
+	search_tab_ctr->addTab(tab_constellations, _("Constellation"));
+	search_tab_ctr->addTab(tab_nebula, _("Nebula"));
+	search_tab_ctr->addTab(tab_planets, _("Planets & Moons"));
+    search_win->addComponent(search_tab_ctr);
+	search_win->addComponent(lblSearchMessage);
+	search_win->setOnHideBtCallback(callback<void>(this, &stel_ui::search_win_hideBtCallback));
+
+	return search_win;
+
+}
+
+void stel_ui::hideSearchMessage(void)
+{
+       lblSearchMessage->setLabel("");
+       lblSearchMessage->adjustSize();
+}
+
+void stel_ui::showSearchMessage(string _message)
+{
+       lblSearchMessage->setLabel(_message);
+       lblSearchMessage->adjustSize();
+       int x1 = search_win->getSizex();
+       int x2 = lblSearchMessage->getSizex();
+       lblSearchMessage->setPos((x1-x2)/2,search_win->getSizey()-17);
+       search_win->draw();
+}
+
+void stel_ui::doSearchCommand(string _command, string _error)
+{
+	if(!core->commander->execute_command(_command))
+        return;
+
+    if (core->selected_object)
+    {
+        gotoObject();
+        hideSearchMessage();
+    }    
+    else
+        showSearchMessage(_error);
+}
+
+//Tony
+void stel_ui::doNebulaSearch(void)
+{
+    string objectName = string((char*)nebula_edit->getText().c_str());
+    transform(objectName.begin(), objectName.end(), objectName.begin(), (int(*)(int))toupper);
+    string command = string("select nebula " + objectName);
+    string error = string("Nebula '" + objectName + "' not found");
+    
+    doSearchCommand(command, error);
+}
+
+//Tony
+void stel_ui::doConstellationSearch(void)
+{
+    string rawObjectName = constellation_edit->getText();
+    string objectName;
+
+    unsigned int i = 0; 
+    while (i < core->constellationNames.size())
+    {
+        if (fcompare(core->constellationNames[i], rawObjectName) == 0)
+        {                                               
+           objectName = core->constellationShortNames[i];
+           break;
+        }
+        i++;
+    }
+    
+    if (!objectName.empty())
+    {
+       string command = string("select constellation " + objectName);
+       string error = string("Constellation '" + objectName + "' not found");
+       doSearchCommand(command, error);
+    }
+    else
+        showSearchMessage(string("Constellation " + rawObjectName + " not found"));
+}
+
+//Tony
+void stel_ui::showStarAutoComplete(void)
+{
+    showSearchMessage(star_edit->getAutoCompleteOptions());
+}
+
+//Tony
+void stel_ui::showConstellationAutoComplete(void)
+{
+    showSearchMessage(constellation_edit->getAutoCompleteOptions());
+}
+
+//Tony
+void stel_ui::doStarSearch(void)
+{
+    string objectName = star_edit->getText();
+    unsigned int HP = core->hip_stars->getCommonNameHP(objectName);
+    char no[20];
+    
+    sprintf(no, "%u", HP);
+    if (HP > 0) objectName = no;
+      
+    string command = string("select HP " + objectName);
+    string error = string("Star 'HP " + objectName + "' not found");
+     
+    doSearchCommand(command, error);
+}
+
+//Tony
+void stel_ui::doPlanetSearch(void)
+{
+    string objectName = planet_edit->getText();
+    string command = string("select planet " + objectName);
+    string error = string("Planet '" + objectName + "' not found");
+
+    doSearchCommand(command, error);
+}
+
+void stel_ui::showPlanetAutoComplete(void)
+{
+    showSearchMessage(planet_edit->getAutoCompleteOptions());
 }
 
 void stel_ui::updateConfigVariables(void)
@@ -586,4 +826,12 @@ void stel_ui::config_win_hideBtCallback(void)
 	core->FlagConfig = false;
 	config_win->setVisible(false);
 	bt_flag_config->setState(0);
+}
+
+// Tony
+void stel_ui::search_win_hideBtCallback(void)
+{
+	core->FlagSearch = false;
+	search_win->setVisible(false);
+	bt_flag_search->setState(0);
 }

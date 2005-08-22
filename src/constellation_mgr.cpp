@@ -32,6 +32,7 @@ Constellation_mgr::Constellation_mgr(Hip_Star_mgr *_hip_stars) :
 	selected(NULL)
 {
 	assert(hipStarMgr);
+	isolateSelected = false; // Tony - flag for isolating the constellations 
 }
 
 void Constellation_mgr::set_font(const string& _font_filename)
@@ -78,7 +79,7 @@ void Constellation_mgr::load_lines_and_art(const string & fileName, const string
 	int line=0;
 	while(!std::getline(inf, record).eof())
 	{
-        line++;
+		line++;
 		cons = new Constellation;
 		assert(cons);
 		if(cons->read(record, hipStarMgr))
@@ -86,7 +87,7 @@ void Constellation_mgr::load_lines_and_art(const string & fileName, const string
 			asterisms.push_back(cons);
 		} else
 		{ 
-            printf(_("ERROR on line %d of %s\n"), line, fileName.c_str());
+			printf(_("ERROR on line %d of %s\n"), line, fileName.c_str());
 			delete cons;
 		}
 	}
@@ -135,7 +136,7 @@ void Constellation_mgr::load_lines_and_art(const string & fileName, const string
 		}
 
 		// Draw loading bar
-        //Tony - added "+1" to ensure art finsihes at last entry
+		//Tony - added "+1" to ensure art finsihes at last entry
 		sprintf(tmpstr, _("Loading Constellation Art: %d/%d"), current+1, total);
 		lb.SetMessage(tmpstr);
 		lb.Draw((float)current/total);
@@ -306,6 +307,33 @@ void Constellation_mgr::load_names(const string& names_file)
 	fclose(cnFile);
 }
 
+// Tony to get the names for the autocomplete
+vector <string> Constellation_mgr::getNames(void) 
+{
+     vector<string> names;
+  	 vector < Constellation * >::const_iterator iter;
+     string name;
+
+	for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
+	{
+		name = (*iter)->getName();
+		transform(name.begin(), name.end(), name.begin(), (int(*)(int))tolower);
+        transform(name.begin(), name.begin()+1, name.begin(), (int(*)(int))toupper);
+        names.push_back(name);
+     }
+     return names;
+}
+
+// Tony to get the names for the autocomplete
+vector<string> Constellation_mgr::getShortNames(void)
+{
+    vector<string> names;
+	vector < Constellation * >::const_iterator iter;
+
+	for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
+        names.push_back((*iter)->getShortName());
+    return names;
+}
 
 // update faders
 void Constellation_mgr::update(int delta_time)
@@ -314,7 +342,7 @@ void Constellation_mgr::update(int delta_time)
 	for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
 	{
 		(*iter)->update(delta_time);
-	}
+    }
 }
 
 
@@ -389,16 +417,20 @@ void Constellation_mgr::set_selected_const(Constellation * c)
 		c->set_flag_art(cc->get_flag_art());
 		selected = c;
 				
-		vector < Constellation * >::const_iterator iter;
-		for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
+		// Tony - isolateSelected flag for isolating the constellations 
+		if (isolateSelected)
 		{
-			if ((*iter) != selected)
-			{
-				(*iter)->set_flag_lines(false);
-				(*iter)->set_flag_name(false);
-				(*iter)->set_flag_art(false);
-			}
-		}
+		    vector < Constellation * >::const_iterator iter;
+		    for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
+		    {
+                if ((*iter) != selected)
+	    	    {
+	    	        (*iter)->set_flag_lines(false);
+		            (*iter)->set_flag_name(false);
+		            (*iter)->set_flag_art(false);
+		        }
+             }
+        }
 	}
 	else
 	{
