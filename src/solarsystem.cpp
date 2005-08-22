@@ -399,6 +399,15 @@ vector<stel_object*> SolarSystem::search_around(Vec3d v, double lim_fov, const n
 	return result;
 }
 
+vector<string> SolarSystem::getNames(void)
+{
+    vector<string> names;
+	vector < planet * >::iterator iter;
+
+	for (iter = system_planets.begin(); iter != system_planets.end(); ++iter)
+        names.push_back((*iter)->get_name());
+    return names;
+}
 
 // update planet names for a new locale
 void SolarSystem::load_names(const string& names_file)

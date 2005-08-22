@@ -20,8 +20,10 @@
 #include <iostream>
 #include <sstream>
 #include <fstream>
-
+// Tony - for editbox blink timer
+#include "SDL_timer.h"
 #include "s_gui.h"
+#include "stel_utility.h"
 
 using namespace s_gui;
 
@@ -524,10 +526,9 @@ int Button::onClic(int x, int y, S_GUI_VALUE bt, S_GUI_VALUE state)
 {
 	if (!visible) return 0;
 	CallbackComponent::onClic(x,y,bt,state);
-	if (state==S_GUI_PRESSED && bt==S_GUI_MOUSE_LEFT && isIn(x, y))	return 1;
+	if (state==S_GUI_PRESSED && bt==S_GUI_MOUSE_LEFT && isIn(x, y)) return 1;
 	return 0;
 }
-
 
 void FilledButton::draw()
 {
@@ -651,6 +652,18 @@ void Label::draw()
 	//painter.drawSquareEdge(pos, size);
 }
 
+void Label::draw(float _intensity)
+{
+	if (!visible) return;
+    glPushMatrix();
+    if (painter.getFont())
+    {
+		painter.print(pos[0], pos[1], label, painter.getTextColor() * _intensity);
+    }
+    glPopMatrix();
+	//painter.drawSquareEdge(pos, size);
+}
+
 void Label::adjustSize(void)
 {
 	size[0] = (int)ceilf(painter.getFont()->getStrLen(label));
@@ -658,21 +671,49 @@ void Label::adjustSize(void)
 }
 
 
-// Tony
 /////////////////////////////// EditBox //////////////////////////////////
-// Button with text on it
+// Editbox - Tony
 ////////////////////////////////////////////////////////////////////////////////
+
+EditBox *focusEditBox = NULL;
+bool blinkOn;
 
 EditBox::EditBox(const string& _label, const s_font* font) : Button(), label(_label, font), isEditing(false)
 {
 	Component::setSize(label.getSize()+s_vec2i(4,2));
 	text = _label;
     cursorPos = 0;
-	label.setLabel(">  " + text);
+    resetHistory();
+    blinkOn = false;
+    autoCompleteOptions = "";
+    countAutoCompleteOptions = 0;
+    countAutoCompletePos = 0;
+    autoCompleteReady = false;
 }
 
 EditBox::~EditBox()
 {
+    SDL_SetTimer(0, NULL);
+    focusEditBox = NULL;       
+}
+
+int EditBox::onClic(int x, int y, S_GUI_VALUE bt, S_GUI_VALUE state)
+{
+	if (!visible) return 0;
+	if (state==S_GUI_PRESSED && bt==S_GUI_MOUSE_LEFT)
+	{
+		if (isIn(x, y)) 
+        {
+            setFocus();
+            return 1;
+        }
+		else if (isEditing) 
+		{
+            resetFocus();
+            return 1;
+         }
+	}
+	return Button::onClic(x,y,bt,state);
 }
 
 void EditBox::draw(void)
@@ -682,45 +723,185 @@ void EditBox::draw(void)
     glPushMatrix();
     glTranslatef(pos[0], pos[1], 0.f);
     Component::scissor->push(pos, size);
-	label.setPos(6, (size[1]-label.getSizey())/2);
-	label.draw();
+	label.setPos(6, (size[1]-label.getSizey())/2+1);
+
+    refreshLabel();
+	if (isEditing) label.draw();
+    else label.draw(.3);   // faded
+    
     Component::scissor->pop();
 	glPopMatrix();
 }
 
-void EditBox::setLabel()
+void EditBox::refreshLabel(void)
 {
-     if (isEditing)
-        label.setLabel("> " + text.substr(0,cursorPos) + "?" + text.substr(cursorPos)); 
-     else
-        label.setLabel("> " + text); 
-     
+     if (!isEditing) label.setLabel("> " + text); 
+     {
+        if (!blinkOn) label.setLabel("> " + text); 
+        else
+        {
+            if (cursorPos == text.length()) // at end
+               label.setLabel("> " + text + "?"); 
+            else if (cursorPos == text.length()-1 ) // last one
+               label.setLabel("> " + text.substr(0,cursorPos) + "?"); 
+            else
+               label.setLabel("> " + text.substr(0,cursorPos) + "?" + text.substr(cursorPos+1)); 
+        }
+     }
 }
+
+void EditBox::clearText(void)
+{
+     cursorPos = 0;
+     text = "";             
+}
+
+Uint32 toggleBlink(Uint32 interval)
+{
+     SDL_SetTimer(0, NULL);
+     if (blinkOn == true)
+     {
+        blinkOn = false;
+        SDL_SetTimer(400, (SDL_TimerCallback)toggleBlink);
+     }
+     else
+     {
+        blinkOn = true;
+        SDL_SetTimer(600, (SDL_TimerCallback)toggleBlink);
+    }
+     
+     return interval;
+}
+
 void EditBox::setFocus(void)
 {
       isEditing = true;
-      setLabel(); 
+      blinkOn = true;
+      resetAutoComplete(false);
+      SDL_SetTimer(600, (SDL_TimerCallback)toggleBlink);
 }
 
 void EditBox::resetFocus(void)
 {
       isEditing = false;
-      setLabel(); 
+      blinkOn = false;
+      SDL_SetTimer(0, NULL);
+      focusEditBox = NULL;
+      resetAutoComplete(false);
 }
 
-string EditBox::getText(void)
+void EditBox::resetHistory(void)
 {
-       return text;
+    historyPos = 0;
+    historyMaxPos = 0;
+    for (int i = 0; i < 9; i++) history[i] = "";
+}
+
+void EditBox::addHistory(const string& _history)
+{
+     history[historyPos] = _history;
+
+     if (++historyMaxPos > 9) historyMaxPos = 9;
+     if (++historyPos > 9) historyPos = 0;
+}       
+
+string EditBox::prevHistory(void)
+{
+     if (--historyPos < 0) historyPos = historyMaxPos;
+     return history[historyPos];
+}
+
+string EditBox::nextHistory(void)
+{
+     if (++historyPos > 9) historyPos = 0;
+     return history[historyPos];
+}
+
+
+void EditBox::testAutoComplete(void)
+{
+     if (!lstAutoComplete.empty())
+     {
+         autoCompleteOptions = "";
+         countAutoCompleteOptions = 0;
+         countAutoCompletePos = 0;
+         autoCompleteReady = false;
+         
+         unsigned int i = 0;
+         while (i < lstAutoComplete.size())
+         {
+               if (fcompare(lstAutoComplete[i], text) == 0)
+               {
+                 if (autoCompleteOptions.empty())
+                 { 
+                    autoCompleteOptions += lstAutoComplete[i];
+                    firstAutoComplete = lstAutoComplete[i];
+                 }
+                 else autoCompleteOptions = autoCompleteOptions + ", " + lstAutoComplete[i];
+                 if (countAutoCompleteOptions++ > 5)
+                   break;
+               }
+               i++;
+         }
+         
+         if (!autoCompleteOptions.empty()) 
+         {
+            countAutoCompletePos = text.length();
+             text = firstAutoComplete;
+             cursorPos = countAutoCompletePos;
+             autoCompleteReady = true;
+         }
+         if (!onAutoCompleteCallback.empty()) onAutoCompleteCallback();
+     }
+}
+
+void EditBox::resetAutoComplete(bool keepChanges)
+{
+     if (autoCompleteReady && !firstAutoComplete.empty() && !keepChanges)
+     { 
+         clearText();
+         text = firstAutoComplete.substr(0,countAutoCompletePos);
+         cursorPos = countAutoCompletePos;
+     }
+     else
+     {
+         if (!firstAutoComplete.empty()) cursorPos = text.length();
+     }
+
+      autoCompleteOptions = "";
+      countAutoCompleteOptions = 0;
+      countAutoCompletePos = 0;
+      autoCompleteReady = false;
 }
 
 int EditBox::onKey(Uint16 k, S_GUI_VALUE s)
 {
-    if (!isEditing)
-       return 0;
+    if (!isEditing) return 0;
 
 	if (s==S_GUI_PRESSED)
     { 
-  		if (k == SDLK_LEFT)
+        if  (k==SDLK_RETURN)
+        {
+            resetAutoComplete(true);
+            addHistory(text);
+       		if (!onReturnKeyCallback.empty()) onReturnKeyCallback();
+       		clearText();
+       		resetFocus();
+            return 1;
+        }
+
+  		if (k == SDLK_TAB) resetAutoComplete(true);
+  		else if (k == SDLK_UP)
+  		{
+              text = prevHistory();
+              cursorPos = text.length();
+        }
+  		else if (k == SDLK_DOWN)
+  		{
+              text = nextHistory();
+              cursorPos = text.length();
+        }
+  		else if (k == SDLK_LEFT)
   		{
               if (cursorPos > 0) cursorPos--;
         }
@@ -728,48 +909,45 @@ int EditBox::onKey(Uint16 k, S_GUI_VALUE s)
         {
               if (cursorPos < text.length()) cursorPos++;
         }
-        else if (k == SDLK_HOME)
-        {
-             cursorPos = 0;
+        else if (k == SDLK_HOME) cursorPos = 0;
+        else if (k == SDLK_END)  cursorPos = text.length();
+  		else if (k == SDLK_DELETE)
+  		{
+           resetAutoComplete(false);
+           if (cursorPos < text.length()) text = text.erase(cursorPos, 1);
         }
-        else if (k == SDLK_END)
+        else if (k == SDLK_BACKSPACE)
         {
-             cursorPos = text.length();
-        }
-  		else if (k == SDLK_DELETE || k == SDLK_BACKSPACE)
-        {
+           resetAutoComplete(false);
            if (cursorPos > 0)
            {
                cursorPos--;
-               text = text.erase(text.length() - 1);
+               text = text.erase(cursorPos, 1);
            }
         }
-        else if (k == SDLK_ESCAPE)
-        {
-             cursorPos = 0;
-             text = "";             
-        }
+        else if (k == SDLK_ESCAPE) clearText(); 
         else if ((k >= SDLK_0 && k <= SDLK_9) || (k >= SDLK_a && k <= SDLK_z) 
         || (k >= 65 && k <= 90) || k == SDLK_SPACE || k == SDLK_UNDERSCORE)
         {
-             cursorPos++;
-            text += k;
-        }
-        else if  (k==SDLK_RETURN)
-        {
-       		if (!onReturnKeyCallback.empty()) onReturnKeyCallback();
-             cursorPos = 0;
-             text = "";             
+            resetAutoComplete(false);
+            string newtext = "";
+            newtext += text.substr(0, cursorPos);
+            newtext += k;
+            newtext += text.substr(cursorPos);
+            text = newtext;
+            cursorPos++;
         }
         else
             return 0;
-          
-        setLabel();
+        
+        if (!text.empty()) testAutoComplete();
         return 1;
     }
 
     return 0;
 }
+
+// End of EditBox
 
 /////////////////////////////// LabeledButton //////////////////////////////////
 // Button with text on it

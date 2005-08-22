@@ -45,7 +45,8 @@ void stel_sdl::init(void)
 #ifdef HAVE_SDL_MIXER_H
 
     // Init the SDL library, the VIDEO subsystem    
-    if(SDL_Init(SDL_INIT_VIDEO |  SDL_INIT_AUDIO | SDL_INIT_NOPARACHUTE)<0)
+    // Tony - added timer
+    if(SDL_Init(SDL_INIT_VIDEO |  SDL_INIT_AUDIO | SDL_INIT_NOPARACHUTE | SDL_INIT_TIMER)<0)
 	{
 		// couldn't init audio, so try without
 		printf("Unable to open SDL with audio: %s\n", SDL_GetError() );

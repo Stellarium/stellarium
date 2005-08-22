@@ -1,6 +1,6 @@
 /*
  * Stellarium
- * Copyright (C) 2003 Fabien Chéreau
+ * Copyright (C) 2003 Fabien Chï¿½eau
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -35,7 +35,7 @@ Fisheye_projector::Fisheye_projector(int _screenW, int _screenH, double _fov,
 							0., 0., 0., 1.);
 }
 
-Fisheye_projector::Fisheye_projector(const Projector& p) : Projector(800, 600, 180.f, 0.001, 300.)
+Fisheye_projector::Fisheye_projector(const Projector& p) : Projector(800, 600, 180.f, 0.001, 180.00001)
 {
 	set_fov(p.get_fov());
 	set_screen_size(p.get_screenW(),p.get_screenH());

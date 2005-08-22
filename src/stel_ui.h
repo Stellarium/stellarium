@@ -62,7 +62,10 @@ public:
 	// Update all the tui widgets with values taken from the core parameters
 	void tui_update_widgets(void);
 	void show_message(string _message, int _time_out=0);
-
+    void gotoObject(void);
+    void setConstellationAutoComplete(vector<string> _autoComplete ) { constellation_edit->setAutoComplete(_autoComplete);}
+    void setPlanetAutoComplete(vector<string> _autoComplete ) { planet_edit->setAutoComplete(_autoComplete);}
+    void setStarAutoComplete(vector<string> _autoComplete ) { star_edit->setAutoComplete(_autoComplete);}
 private:
 	stel_core * core;		// The main core can be accessed because stel_ui is a friend class
 
@@ -99,12 +102,22 @@ private:
 	FlagButton * bt_flag_help;
 	FlagButton * bt_flag_equatorial_mode;
 	FlagButton * bt_flag_config;
+	
+	// Tony search. script editor and goto button
+	FlagButton * bt_flag_track;
+	FlagButton * bt_flag_search;  
+	EditBox * bt_script;
+    void cbEditScriptInOut(void);
+    void cbEditScriptPress(void);
+    void cbEditScriptExecute(void);
+	FlagButton * bt_flag_goto;
+	
 	FlagButton * bt_flag_quit;
 	Component* createFlagButtons(void);
 	void cb(void);
 	void bt_flag_ctrOnMouseInOut(void);
 	void cbr(void);
-	
+
 	// Tile control buttons
 	FilledContainer * bt_time_control_ctr;
 	LabeledButton * bt_dec_time_speed;
@@ -150,6 +163,15 @@ private:
 
 	TabContainer * config_tab_ctr;
 
+	// The window managing the search - Tony
+	StdBtWin* search_win;
+	TabContainer * search_tab_ctr;
+	Component* createSearchWindow(void);
+	void search_win_hideBtCallback(void);
+    void showSearchMessage(string _error); 
+    void hideSearchMessage(void); 
+    void doSearchCommand(string _command, string _error);
+
 	// Rendering options
 	LabeledCheckBox* stars_cbx;
 	LabeledCheckBox* star_names_cbx;
@@ -191,7 +213,6 @@ private:
 	Label* time_speed_lbl2;
 	void setTimeZone(void);
 
-
 	// Video Options
 	LabeledCheckBox* fisheye_projection_cbx;
 	LabeledCheckBox* disk_viewport_cbx;
@@ -213,6 +234,20 @@ private:
 	// Mouse control options
 	bool is_dragging, has_dragged;
 	int previous_x, previous_y;
+	
+    // Tony - search options
+    EditBox* nebula_edit;
+    void doNebulaSearch(void);
+    EditBox* star_edit;
+    void showStarAutoComplete(void);
+    void doStarSearch(void);
+    EditBox* constellation_edit;
+    void doConstellationSearch(void);
+    void showConstellationAutoComplete(void);
+    EditBox* planet_edit;
+    void doPlanetSearch(void);
+    void showPlanetAutoComplete(void);
+    Label *lblSearchMessage;
 
 	////////////////////////////////////////////////////////////////////////////
 	// Text UI components
