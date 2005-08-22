@@ -158,6 +158,12 @@ int Hip_Star_mgr::load_common_names(const string& commonNameFile)
         return 0;
     }
 
+    // Tony - Because this is called twice???
+    if (!lstCommonNames.empty())
+    {
+       lstCommonNames.clear();
+       lstCommonNamesHP.clear();
+    }
 	// Assign names to the matching stars, now support spaces in names
     unsigned int tmp;
     char line[256];
@@ -175,13 +181,28 @@ int Hip_Star_mgr::load_common_names(const string& commonNameFile)
 			star->CommonName =  &(line[i]);
 			// remove newline
 			star->CommonName.erase(star->CommonName.length()-1, 1);
-
+			lstCommonNames.push_back(star->CommonName);
+			lstCommonNamesHP.push_back(tmp);
 		}
 	} while(fgets(line, 256, cnFile));
 
     fclose(cnFile);
     return 1;
 }
+
+unsigned int Hip_Star_mgr::getCommonNameHP(string _commonname)
+{
+    unsigned int i = 0;
+
+	while ( i < lstCommonNames.size())
+    {
+        if (fcompare(_commonname,lstCommonNames[i]) == 0)
+           return lstCommonNamesHP[i];
+        i++;
+    }
+    return 0;
+}   
+
 
 // Load scientific names from file 
 void Hip_Star_mgr::load_sci_names(const string& sciNameFile)

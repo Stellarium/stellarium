@@ -21,11 +21,12 @@
 
 #include "stel_core.h"
 #include "stellastro.h"
+#include "stel_utility.h"
 
 stel_core::stel_core(const string& DDIR, const string& TDIR, const string& CDIR, const string& DATA_ROOT) : 
 	projection(NULL), selected_object(NULL), hip_stars(NULL),
 	nebulas(NULL), ssystem(NULL), milky_way(NULL), screen_W(800), screen_H(600), bppMode(16), Fullscreen(0),
-	FlagHelp(false), FlagInfos(false), FlagConfig(false), FlagShowTuiMenu(0), 
+	FlagHelp(false), FlagInfos(false), FlagConfig(false), FlagSearch(false), FlagShowTuiMenu(0), 
 	frame(0), timefr(0), timeBase(0), fps(0), maxfps(10000.f), deltaFov(0.), deltaAlt(0.), deltaAz(0.),
 	move_speed(0.00025), FlagTimePause(0), is_mouse_moving_horiz(false), is_mouse_moving_vert(false)
 {
@@ -120,7 +121,7 @@ void stel_core::init(void)
 		projection = new Projector(screen_W, screen_H, InitFov);
 		break;
 	case FISHEYE_PROJECTOR :
-		projection = new Fisheye_projector(screen_W, screen_H, InitFov, .001, 300, DistortionFunction);
+		projection = new Fisheye_projector(screen_W, screen_H, InitFov, .001, 180.00001, DistortionFunction);
 		break;
 	default :
 		projection = new Projector(screen_W, screen_H, InitFov);
@@ -212,6 +213,15 @@ void stel_core::init(void)
 
 	// make sure have loaded translated labels for sky language
 	set_sky_locale(SkyLocale);
+
+	// Tony - add EditBox autocomplete
+    starNames = hip_stars->getNames();
+    ui->setStarAutoComplete(starNames);
+    planetNames = ssystem->getNames();
+    constellationNames = asterisms->getNames();
+    constellationShortNames = asterisms->getShortNames();
+    ui->setConstellationAutoComplete(constellationNames);
+    ui->setPlanetAutoComplete(planetNames);
 
 	// play startup script, if available
 	scripts->play_startup_script();
@@ -667,7 +677,8 @@ void stel_core::load_config_from(const string& confFile)
 	MoonScale				= conf.get_double ("viewing","moon_scale",5.);
 	ConstellationArtIntensity       = conf.get_double("viewing","constellation_art_intensity", 0.5);
 	ConstellationArtFadeDuration    = conf.get_double("viewing","constellation_art_fade_duration",2.);
-	
+	asterisms->set_isolate_selected(conf.get_boolean("viewing:constellation_isolate_selected"));
+
 	// Astro section
 	FlagStars				= conf.get_boolean("astro:flag_stars");
 	FlagStarName			= conf.get_boolean("astro:flag_star_name");
@@ -811,6 +822,7 @@ void stel_core::save_config_to(const string& confFile)
 	conf.set_double ("viewing:moon_scale", MoonScale);
 	conf.set_double ("viewing:constellation_art_intensity", ConstellationArtIntensity);
 	conf.set_double ("viewing:constellation_art_fade_duration", ConstellationArtFadeDuration);
+	conf.set_boolean("viewing:constellation_isolate_selected", asterisms->get_isolate_selected()); // Tony
 
 
 	// Astro section
@@ -999,12 +1011,10 @@ void stel_core::zoom_in(int s)
 	if (FlagEnableZoomKeys) deltaFov = -1*(s!=0);
 }
 
-
 void stel_core::zoom_out(int s)
 {
 	if (FlagEnableZoomKeys) deltaFov = (s!=0);
 }
-
 
 // Increment/decrement smoothly the vision field and position
 void stel_core::update_move(int delta_time)

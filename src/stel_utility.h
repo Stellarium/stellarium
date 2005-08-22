@@ -1,6 +1,6 @@
 /*
  * Stellarium
- * Copyright (C) 2002 Fabien Chéreau
+ * Copyright (C) 2002 Fabien Chï¿½eau
  * 
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -54,7 +54,7 @@ string vec3f_to_str(const Vec3f& v);
 /* Obtains Latitude, Longitude, RA or Declination from a string. */
 double get_dec_angle(const string&);
 
-/* Obtains a human readable angle in the form: ddºmm'ss.ss" */
+/* Obtains a human readable angle in the form: ddmm'ss.ss" */
 string print_angle_dms(double location);
 
 /* Obtains a human readable angle in the form: dd\6mm'ss.ss" */
@@ -81,5 +81,7 @@ int str_to_int(string str, int default_value);
 
 string double_to_str(double dbl);
 long int str_to_long(string str);
+
+int fcompare(const string& _base, const string& _sub);
 
 #endif

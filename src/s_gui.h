@@ -45,6 +45,9 @@
 using namespace std;
 using namespace boost;
 
+// Tony - Editbox blink callback (can't get to work with the class!)
+Uint32 toggleBlink(Uint32 interval);
+
 namespace s_gui
 {
 	// gui Return Values:
@@ -259,6 +262,7 @@ namespace s_gui
         virtual const string& getLabel() const {return label;}
         virtual void setLabel(const string&);
         virtual void draw();
+        virtual void draw(float intensity);
 		virtual void adjustSize(void);
     protected:
         string label;
@@ -278,24 +282,49 @@ namespace s_gui
 		Label label;
     };
 
+    // Tony - Editbox
     class EditBox : public Button
     {
     public:
         EditBox(const string& _label = "", const s_font* font = NULL);
 		virtual ~EditBox();
 		virtual void setOnReturnKeyCallback(const callback<void>& c) {onReturnKeyCallback = c;}
+		virtual void setOnAutoCompleteCallback(const callback<void>& c) {onAutoCompleteCallback = c;}
         virtual void draw(void);
 		virtual void setActive(int _active) {Button::setActive(_active); label.setActive(_active);}
 		virtual void setFont(const s_font* f) {Button::setFont(f); label.setFont(f);}
 		virtual void setTextColor(const s_color& c) {Button::setTextColor(c); label.setTextColor(c);}
 		virtual void setPainter(const Painter& p) {Button::setPainter(p); label.setPainter(p);}
 		virtual int onKey(Uint16, S_GUI_VALUE);
-		string getText(void);
+		virtual int onClic(int, int, S_GUI_VALUE, S_GUI_VALUE);
+		virtual void setAutoComplete(vector<string> _autocomplete) { lstAutoComplete = _autocomplete; };
+		string getAutoCompleteOptions() { return autoCompleteOptions; }
+		string getText(void) { return text; }
 		void setFocus(void);
 		void resetFocus(void);
+		void refreshLabel(void);
 	protected:
 		callback<void> onReturnKeyCallback;
-		void setLabel();
+
+		callback<void> onAutoCompleteCallback;
+		vector<string> lstAutoComplete;
+        string autoCompleteOptions;
+        int countAutoCompleteOptions;
+        int countAutoCompletePos;
+        string firstAutoComplete;
+        bool autoCompleteReady;
+		void testAutoComplete(void);
+		void resetAutoComplete(bool keepChanges);
+
+		void clearText(void);
+
+		void addHistory(const string& _history);
+		string prevHistory(void);
+		string nextHistory(void);
+		void resetHistory(void);
+		string history[10];
+        int historyPos, historyMaxPos;
+
         Label label;
 		bool isEditing;
 		string text;

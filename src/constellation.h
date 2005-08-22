@@ -37,6 +37,9 @@ public:
     void draw_name(s_font * constfont, Projector* prj, Vec3f color) const;
     void draw_art(Projector* prj, navigator* nav) const;
     const Constellation* is_star_in(const Hip_Star *) const;
+    // Tony
+    string getName(void) { return name; };
+    string getShortName(void) { return short_name; };
 private:
     void draw_optim(Projector* prj, const Vec3f& lines_color) const;
     void draw_art_optim(Projector* prj, navigator* nav) const;

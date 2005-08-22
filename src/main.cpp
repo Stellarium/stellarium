@@ -278,6 +278,9 @@ int main(int argc, char **argv)
 
 	core->init();
 
+    // Tony - added Re-load of config to re-enable flags available once the core has loaded 
+	core->load_config();
+
 	// Start the main loop until the end of the execution
 	sdl_mgr.start_main_loop();
 

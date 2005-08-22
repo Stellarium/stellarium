@@ -1,6 +1,6 @@
 /*
  * Stellarium
- * Copyright (C) 2002 Fabien Chéreau
+ * Copyright (C) 2002 Fabien Chï¿½eau
  * 
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -137,7 +137,7 @@ double get_dec_angle(const string& str)
 	const char* s = str.c_str();
 	char *mptr, *ptr, *dec, *hh;
 	int negative = 0;
-	char delim1[] = " :.,;ºDdHhMm'\n\t";
+	char delim1[] = " :.,;DdHhMm'\n\t";
 	char delim2[] = " NSEWnsew\"\n\t";
 	int dghh = 0, minutes = 0;
 	double seconds = 0.0, pos;
@@ -234,7 +234,7 @@ double get_dec_angle(const string& str)
 * \param location Location angle in degress
 * \return Angle string
 *
-* Obtains a human readable location in the form: ddºmm'ss.ss"
+* Obtains a human readable location in the form: ddmm'ss.ss"
 */
 string print_angle_dms(double location)
 {
@@ -267,7 +267,7 @@ string print_angle_dms(double location)
       }
     }
  
-    sprintf(buf,"%+.2dº%.2d'%.2f\"",(int)deg, (int) min, sec);
+    sprintf(buf,"%+.2d%.2d'%.2f\"",(int)deg, (int) min, sec);
     return buf;
 }
 
@@ -415,4 +415,15 @@ long int str_to_long(string str) {
     
 	istr >> integer;
 	return integer;
+}
+
+int fcompare(const string& _base, const string& _sub)
+{
+     unsigned int i = 0; 
+     while (i < _sub.length())
+     { 
+         if (toupper(_base[i]) == toupper(_sub[i])) i++;
+         else return -1;  
+     }
+     return 0;
 }

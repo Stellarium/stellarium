@@ -1,6 +1,6 @@
 /*
  * Stellarium
- * Copyright (C) 2002 Fabien Chéreau
+ * Copyright (C) 2002 Fabien Chï¿½eau
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -43,7 +43,7 @@ public:
 	// Load the bodies data from a file
 	void load(const string& planetfile);
 	void load_names(const string& names_file);
-	
+
 	void set_font(const string& font_filename);
 	void set_label_color(const Vec3f& c) {planet::set_label_color(c);}
 	void set_orbit_color(const Vec3f& c) {planet::set_orbit_color(c);}
@@ -71,7 +71,8 @@ public:
 	void set_trail_color(const Vec3f _color);
 	void update_trails(const navigator* nav);
 	void set_object_scale(float scale);
-
+    // Tony for autoCOmplete
+	vector<string> getNames(void);
 private:
 	planet* sun;
 	planet* moon;

@@ -51,7 +51,9 @@ public:
 	Hip_Star * search(unsigned int);	// Search the star by HP number
 	// Return a stl vector containing the stars located inside the lim_fov circle around position v
 	vector<stel_object*> search_around(Vec3d v, double lim_fov);
-
+	vector<string> getNames(void) { return lstCommonNames; }
+	unsigned int getCommonNameHP(string _commonname);
+	
 private:
 
 	// Load all the stars from the files
@@ -66,6 +68,8 @@ private:
 	s_font * starFont;
 	linear_fader names_fader;
 	float limiting_mag;                  // limiting magnitude at 60 degree fov
+	vector<string> lstCommonNames;
+	vector<unsigned int> lstCommonNamesHP;
 };
 
 

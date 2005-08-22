@@ -275,7 +275,7 @@ void Landscape_old_style::draw_fog(tone_reproductor * eye, const Projector* prj,
 	glEnable(GL_BLEND);
 	glEnable(GL_CULL_FACE);
 	glBindTexture(GL_TEXTURE_2D, fog_tex->getID());
-	prj->sCylinder(radius, radius*sinf(fog_alt_angle*M_PI/180.), 32, 1, nav->get_local_to_eye_mat() *
+	prj->sCylinder(radius, radius*sinf(fog_alt_angle*M_PI/180.), 128, 1, nav->get_local_to_eye_mat() *
 		Mat4d::translation(Vec3d(0.,0.,radius*sinf(fog_angle_shift*M_PI/180.))), 1);
 	glDisable(GL_CULL_FACE);
 	glPopMatrix();
@@ -290,7 +290,7 @@ void Landscape_old_style::draw_decor(tone_reproductor * eye, const Projector* pr
 
 	glColor4f(sky_brightness, sky_brightness, sky_brightness, land_fader.get_interstate());
 
-	int subdiv = 32/(nb_decor_repeat*nb_side);
+	int subdiv = 128/(nb_decor_repeat*nb_side);
 	if (subdiv<=0) subdiv = 1;
 	float da = (2.*M_PI)/(nb_side*subdiv*nb_decor_repeat);
 	float dz = radius * sinf(decor_alt_angle*M_PI/180.f);
@@ -320,10 +320,10 @@ void Landscape_old_style::draw_decor(tone_reproductor * eye, const Projector* pr
 				y = radius * cosf(a + da * j + da * subdiv * i + decor_angle_rotatez*M_PI/180);
 				glNormal3f(-x, -y, 0);
 				glTexCoord2f(sides[i].tex_coords[0] + (float)j/subdiv * (sides[i].tex_coords[2]-sides[i].tex_coords[0]),
-					sides[j].tex_coords[3]);
+					sides[i].tex_coords[3]);
 				prj->sVertex3(x, y, z + dz * (sides[i].tex_coords[3]-sides[i].tex_coords[1]), mat);
 				glTexCoord2f(sides[i].tex_coords[0] + (float)j/subdiv * (sides[i].tex_coords[2]-sides[i].tex_coords[0]),
-					sides[j].tex_coords[1]);
+					sides[i].tex_coords[1]);
 				prj->sVertex3(x, y, z , mat);
 			}
 			glEnd();
@@ -345,7 +345,7 @@ void Landscape_old_style::draw_ground(tone_reproductor * eye, const Projector* p
 	glEnable(GL_TEXTURE_2D);
 	glEnable(GL_BLEND);
 	glBindTexture(GL_TEXTURE_2D, ground_tex->getID());
-	int subdiv = 32/(nb_decor_repeat*nb_side);
+	int subdiv = 128/(nb_decor_repeat*nb_side);
 	if (subdiv<=0) subdiv = 1;
 	prj->sDisk(radius,nb_side*subdiv*nb_decor_repeat,5, mat, 1);
 	glDisable(GL_CULL_FACE);
