@@ -634,11 +634,13 @@ void stel_core::load_config_from(const string& confFile)
 	FlagManualZoom		= conf.get_boolean("navigation:flag_manual_zoom");
 	FlagEnableMoveKeys	= conf.get_boolean("navigation:flag_enable_move_keys");
 	FlagEnableMoveMouse	= conf.get_boolean("navigation","flag_enable_move_mouse",1);
-	InitFov	                = conf.get_double ("navigation","init_fov",60.);
+	InitFov	            = conf.get_double ("navigation","init_fov",60.);
 	InitViewPos 		= str_to_vec3f(conf.get_str("navigation:init_view_pos").c_str());
 	auto_move_duration	= conf.get_double ("navigation","auto_move_duration",1.5);
 	FlagUTC_Time		= conf.get_boolean("navigation:flag_utc_time");
-	MouseZoom		= conf.get_int("navigation","mouse_zoom",30);
+	MouseZoom			= conf.get_int("navigation","mouse_zoom",30);
+	move_speed			= conf.get_double("navigation:move_speed");
+	zoom_speed			= conf.get_double("navigation:zoom_speed");
 
 	// Viewing Mode
 	tmpstr = conf.get_str("navigation:viewing_mode");
@@ -674,7 +676,7 @@ void stel_core::load_config_from(const string& confFile)
 	MoonScale				= conf.get_double ("viewing","moon_scale",5.);
 	ConstellationArtIntensity       = conf.get_double("viewing","constellation_art_intensity", 0.5);
 	ConstellationArtFadeDuration    = conf.get_double("viewing","constellation_art_fade_duration",2.);
-	asterisms->set_flag_isolate_selected(conf.get_boolean("viewing:constellation_isolate_selected"));
+	asterisms->set_flag_isolate_selected(conf.get_boolean("viewing:flag_constellation_isolate_selected"));
 
 	// Astro section
 	FlagStars				= conf.get_boolean("astro:flag_stars");
@@ -790,6 +792,9 @@ void stel_core::save_config_to(const string& confFile)
 	conf.set_double ("navigation:auto_move_duration", auto_move_duration);
 	conf.set_boolean("navigation:flag_utc_time", FlagUTC_Time);
 	conf.set_int("navigation:mouse_zoom", MouseZoom);
+	conf.set_double ("navigation:move_speed", move_speed);
+	conf.set_double ("navigation:zoom_speed", zoom_speed);
+
 	switch (navigation->get_viewing_mode())
 	{
 		case VIEW_HORIZON : tmpstr="horizon";	break;
@@ -819,7 +824,7 @@ void stel_core::save_config_to(const string& confFile)
 	conf.set_double ("viewing:moon_scale", MoonScale);
 	conf.set_double ("viewing:constellation_art_intensity", ConstellationArtIntensity);
 	conf.set_double ("viewing:constellation_art_fade_duration", ConstellationArtFadeDuration);
-	conf.set_boolean("viewing:constellation_isolate_selected", asterisms->get_flag_isolate_selected()); // Tony
+	conf.set_boolean("viewing:flag_constellation_isolate_selected", asterisms->get_flag_isolate_selected()); // Tony
 
 
 	// Astro section
@@ -1018,6 +1023,7 @@ void stel_core::update_move(int delta_time)
 {
 	// the more it is zoomed, the more the mooving speed is low (in angle)
     double depl=move_speed*delta_time*projection->get_fov();
+	double deplzoom=zoom_speed*delta_time*projection->get_fov();
     if (deltaAz<0)
     {
 		deltaAz = -depl/30;
@@ -1047,14 +1053,14 @@ void stel_core::update_move(int delta_time)
 
     if (deltaFov<0)
     {
-		deltaFov = -depl*5;
+		deltaFov = -deplzoom*5;
 		if (deltaFov<-0.15*projection->get_fov()) deltaFov = -0.15*projection->get_fov();
     }
     else
     {
 		if (deltaFov>0)
         {
-			deltaFov = depl*5;
+			deltaFov = deplzoom*5;
 			if (deltaFov>20) deltaFov = 20;
         }
     }
