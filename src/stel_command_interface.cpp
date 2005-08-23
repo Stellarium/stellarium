@@ -476,7 +476,7 @@ else if(command=="script") {
 	  execute_command("flag cardinal_points off");
 	  execute_command("flag constellation_art off");
 	  execute_command("flag constellation_drawing off");
-	  execute_command("flag constellation_name off");
+	  execute_command("flag constellation_names off");
 	  execute_command("flag ecliptic_line off");
 	  execute_command("flag equatorial_grid off");
 	  execute_command("flag equator_line off");
