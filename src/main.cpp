@@ -281,6 +281,9 @@ int main(int argc, char **argv)
     // Tony - added Re-load of config to re-enable flags available once the core has loaded 
 	core->load_config();
 
+	// play startup script, if available
+	core->play_startup_script();
+
 	// Start the main loop until the end of the execution
 	sdl_mgr.start_main_loop();
 
