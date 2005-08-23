@@ -357,7 +357,7 @@ private:
 	float maxfps;
 	
 	double deltaFov,deltaAlt,deltaAz;	// View movement
-	double move_speed;					// Speed of movement
+	double move_speed, zoom_speed;		// Speed of movement and zooming
 	float auto_move_duration;			// Duration of movement for the auto move to a selected object
 
 	int FlagTimePause;
