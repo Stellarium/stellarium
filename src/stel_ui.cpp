@@ -434,9 +434,11 @@ void stel_ui::cbEditScriptInOut(void)
 // Tony - script command line
 void stel_ui::cbEditScriptExecute(void)
 {
-     printf("Executing script %s",bt_script->getText().c_str());
+     printf("Executing user command %s\n",bt_script->getText().c_str());
      if (!core->commander->execute_command(bt_script->getText()))
-		bt_flag_help_lbl->setLabel(_("Invalid Script command"));
+		 bt_flag_help_lbl->setLabel(_("Invalid Script command"));
+	 else 
+		 bt_flag_help_lbl->setLabel(_("Script commander"));  // clear out last error message
 }
 
 ////////////////////////////////////////////////////////////////////////////////

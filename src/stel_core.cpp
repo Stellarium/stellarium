@@ -223,9 +223,6 @@ void stel_core::init(void)
     ui->setConstellationAutoComplete(constellationNames);
     ui->setPlanetAutoComplete(planetNames);
 
-	// play startup script, if available
-	scripts->play_startup_script();
-
 }
 
 void stel_core::quit(void)
@@ -1327,4 +1324,8 @@ void stel_core::set_sky_locale(string _locale)
 	}
 	ssystem->load_names(DataDir + "planet_names." + SkyLocale + ".fab");
 	asterisms->load_names(DataDir + "sky_cultures/" + SkyCulture + "/constellation_names." + SkyLocale + ".fab");
+}
+
+void stel_core::play_startup_script() {
+	if(scripts) scripts->play_startup_script();
 }
