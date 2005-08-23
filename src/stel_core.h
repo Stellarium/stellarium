@@ -312,7 +312,6 @@ private:
     int FlagObjectTrails;
     int FlagNebula;
     int FlagNebulaLongName;       // Tony
-	//    int FlagNebulaName;
     float MaxMagNebulaName;
     int FlagNebulaCircle;
     int FlagMilkyWay;
@@ -327,15 +326,10 @@ private:
 	float AtmosphereFadeDuration;
 
 	// Viewing
-    //int FlagConstellationDrawing;
-    //int FlagConstellationName;
-	int FlagConstellationPick;
-	//int FlagConstellationArt;
     int FlagAzimutalGrid;
     int FlagEquatorialGrid;
     int FlagEquatorLine;
     int FlagEclipticLine;
-	//    int FlagCardinalPoints;
 	int FlagGravityLabels;
 	float MoonScale;
 	int FlagMoonScaled;

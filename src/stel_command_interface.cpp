@@ -609,7 +609,10 @@ int StelCommandInterface::set_flag(string name, string value, bool &newval, bool
 			else if(name=="show_gravity_ui") newval = (stcore->FlagShowGravityUi = !stcore->FlagShowGravityUi);
 			else if(name=="utc_time") newval = (stcore->FlagUTC_Time = !stcore->FlagUTC_Time);
 			else if(name=="gravity_labels") newval = (stcore->FlagGravityLabels = !stcore->FlagGravityLabels);
-			else if(name=="constellation_pick") newval = (stcore->FlagConstellationPick = !stcore->FlagConstellationPick);
+			else if(name=="constellation_isolate_selected") {
+				stcore->asterisms->set_flag_isolate_selected(!stcore->asterisms->get_flag_isolate_selected());
+				newval = stcore->asterisms->get_flag_isolate_selected();
+			}
 			else status = 0;  // no match here, anyway
 
 		} else status = 0;
@@ -664,10 +667,6 @@ int StelCommandInterface::set_flag(string name, string value, bool &newval, bool
 		}
 		else if(name=="planet_orbits") newval = (stcore->FlagPlanetsOrbits = !stcore->FlagPlanetsOrbits);
 		else if(name=="nebulae") newval = (stcore->FlagNebula = !stcore->FlagNebula);
-		else if(name=="constellation_isolate_selected") { 
-             newval = !stcore->asterisms->get_isolate_selected();
-             stcore->asterisms->set_isolate_selected(newval);
-        }
 		else if(name=="nebula_names") {
 			newval = !stcore->nebulas->get_flag_hints();
 			if(newval) stcore->FlagNebula = 1;  // make sure visible
@@ -717,7 +716,7 @@ int StelCommandInterface::set_flag(string name, string value, bool &newval, bool
 			else if(name=="show_gravity_ui") stcore->FlagShowGravityUi = newval;
 			else if(name=="utc_time") stcore->FlagUTC_Time = newval;
 			else if(name=="gravity_labels") stcore->FlagGravityLabels = newval;
-			else if(name=="constellation_pick") stcore->FlagConstellationPick = newval;
+			else if(name=="constellation_isolate_selected") stcore->asterisms->set_flag_isolate_selected(newval);
 			else status = 0;
 		
 		} else status = 0;
@@ -761,9 +760,6 @@ int StelCommandInterface::set_flag(string name, string value, bool &newval, bool
 		}
 		else if(name=="planet_orbits") stcore->FlagPlanetsOrbits = newval;
 		else if(name=="nebulae") stcore->FlagNebula = newval;
-     	else if(name=="constellation_isolate_selected") { 
-             stcore->asterisms->set_isolate_selected(newval);
-        }
 		else if(name=="nebula_names") {
 			stcore->FlagNebula = 1;  // make sure visible
 			stcore->nebulas->set_flag_hints(newval);

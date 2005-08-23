@@ -628,7 +628,7 @@ void stel_ui::updateConfigVariables(void)
 	core->commander->execute_command("set star_twinkle_amount ", star_twinkle_amount->getValue());
 	core->commander->execute_command("flag constellation_drawing ", constellation_cbx->getState());
 	core->commander->execute_command("flag constellation_names ", constellation_name_cbx->getState());
-	core->commander->execute_command("flag constellation_pick ", sel_constellation_cbx->getState());
+	core->commander->execute_command("flag constellation_isolate_selected ", sel_constellation_cbx->getState());
 	core->commander->execute_command("flag nebula_names ", nebulas_names_cbx->getState());
 	core->commander->execute_command("set max_mag_nebula_name ", max_mag_nebula_name->getValue());
 	core->commander->execute_command("flag planet_names ", planets_hints_cbx->getState());
@@ -687,7 +687,7 @@ void stel_ui::saveRenderOptions(void)
 	conf.set_double("stars:star_twinkle_amount", core->StarTwinkleAmount);
 	conf.set_boolean("viewing:flag_constellation_drawing", core->constellation_get_flag_lines());
 	conf.set_boolean("viewing:flag_constellation_name", core->constellation_get_flag_names());
-	conf.set_boolean("viewing:flag_constellation_pick", core->FlagConstellationPick);
+	conf.set_boolean("viewing:constellation_isolate_selected", core->asterisms->get_flag_isolate_selected());
 	conf.set_boolean("astro:flag_nebula", core->FlagNebula);
 	conf.set_boolean("astro:flag_nebula_name", core->nebulas->get_flag_hints());
 	conf.set_double("astro:max_mag_nebula_name", core->MaxMagNebulaName);
@@ -789,7 +789,7 @@ void stel_ui::updateConfigForm(void)
 	star_twinkle_amount->setValue(core->StarTwinkleAmount);
 	constellation_cbx->setState(core->constellation_get_flag_lines());
 	constellation_name_cbx->setState(core->constellation_get_flag_names());
-	sel_constellation_cbx->setState(core->FlagConstellationPick);
+	sel_constellation_cbx->setState(core->asterisms->get_flag_isolate_selected());
 	nebulas_names_cbx->setState(core->nebulas->get_flag_hints());
 	max_mag_nebula_name->setValue(core->MaxMagNebulaName);
 	planets_cbx->setState(core->FlagPlanets);
