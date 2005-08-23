@@ -168,7 +168,10 @@ public:
 
 	//! Quit the application
 	void quit(void);
+
 	void set_object_pointer_visibility(bool _newval) { object_pointer_visibility = _newval; }
+	void play_startup_script();
+
 private:
 
 	// Main elements of the program
