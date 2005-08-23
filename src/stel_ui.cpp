@@ -317,10 +317,10 @@ Component* stel_ui::createFlagButtons(void)
 	bt_flag_search->setOnMouseInOutCallback(callback<void>(this, &stel_ui::cbr));
 
     // Tony - added the script edit box
-	bt_script = new EditBox(_(""));
-	bt_script->setSize(299,24);
-	bt_script->setOnReturnKeyCallback(callback<void>(this, &stel_ui::cbEditScriptExecute));
-	bt_script->setOnMouseInOutCallback(callback<void>(this, &stel_ui::cbr));
+// 	bt_script = new EditBox(_(""));
+// 	bt_script->setSize(299,24);
+// 	bt_script->setOnReturnKeyCallback(callback<void>(this, &stel_ui::cbEditScriptExecute));
+// 	bt_script->setOnMouseInOutCallback(callback<void>(this, &stel_ui::cbr));
 
     // Tony - added the goto object button
 	bt_flag_goto = new FlagButton(true, NULL, "bt_track");
@@ -340,14 +340,14 @@ Component* stel_ui::createFlagButtons(void)
 	bt_flag_ctr->addComponent(bt_flag_help);			bt_flag_help->setPos(225,0);
 	bt_flag_ctr->addComponent(bt_flag_equatorial_mode);	bt_flag_equatorial_mode->setPos(250,0);
 	bt_flag_ctr->addComponent(bt_flag_search);			bt_flag_search->setPos(275,0);
-	bt_flag_ctr->addComponent(bt_script);			    bt_script->setPos(300,0);
-	bt_flag_ctr->addComponent(bt_flag_goto);			bt_flag_goto->setPos(600,0);
-	bt_flag_ctr->addComponent(bt_flag_config);			bt_flag_config->setPos(625,0);
-	bt_flag_ctr->addComponent(bt_flag_quit);			bt_flag_quit->setPos(650,0);
+	//bt_flag_ctr->addComponent(bt_script);			    bt_script->setPos(300,0);
+	bt_flag_ctr->addComponent(bt_flag_goto);			bt_flag_goto->setPos(300,0);
+	bt_flag_ctr->addComponent(bt_flag_config);			bt_flag_config->setPos(325,0);
+	bt_flag_ctr->addComponent(bt_flag_quit);			bt_flag_quit->setPos(350,0);
 
 	bt_flag_ctr->setOnMouseInOutCallback(callback<void>(this, &stel_ui::bt_flag_ctrOnMouseInOut));
     // Tony - changed size to accomodate extra components (search, edit, goto object)
-	bt_flag_ctr->reshape(0, core->screen_H-25, 15*25+300 - 1, 25);
+	bt_flag_ctr->reshape(0, core->screen_H-25, 15*25 - 1, 25);
 
 	return bt_flag_ctr;
 
@@ -420,26 +420,26 @@ void stel_ui::bt_time_now_cb(void)
 
 ////////////////////////////////////////////////////////////////////////////////
 // Tony - script command line
-void stel_ui::cbEditScriptInOut(void)
-{
-	if (bt_script->getIsMouseOver())
-	{
-		bt_flag_help_lbl->setLabel(_("Script commander"));
-        bt_script->setFocus();
-    }
-	else
-        bt_script->resetFocus();
-}
-
-// Tony - script command line
-void stel_ui::cbEditScriptExecute(void)
-{
-     printf("Executing user command %s\n",bt_script->getText().c_str());
-     if (!core->commander->execute_command(bt_script->getText()))
-		 bt_flag_help_lbl->setLabel(_("Invalid Script command"));
-	 else 
-		 bt_flag_help_lbl->setLabel(_("Script commander"));  // clear out last error message
-}
+// void stel_ui::cbEditScriptInOut(void)
+// {
+// 	if (bt_script->getIsMouseOver())
+// 	{
+// 		bt_flag_help_lbl->setLabel(_("Script commander"));
+//         bt_script->setFocus();
+//     }
+// 	else
+//         bt_script->resetFocus();
+// }
+// 
+// // Tony - script command line
+// void stel_ui::cbEditScriptExecute(void)
+// {
+//      printf("Executing user command %s\n",bt_script->getText().c_str());
+//      if (!core->commander->execute_command(bt_script->getText()))
+// 		 bt_flag_help_lbl->setLabel(_("Invalid Script command"));
+// 	 else 
+// 		 bt_flag_help_lbl->setLabel(_("Script commander"));  // clear out last error message
+// }
 
 ////////////////////////////////////////////////////////////////////////////////
 void stel_ui::cb(void)
@@ -515,10 +515,10 @@ void stel_ui::cbr(void)
 #endif
 	if (bt_flag_search->getIsMouseOver())     // Tony
 		bt_flag_help_lbl->setLabel(_("Search for object"));
-	if (bt_script->getIsMouseOver())     // Tony
-		bt_flag_help_lbl->setLabel(_("Script commander"));
+// 	if (bt_script->getIsMouseOver())     // Tony
+// 		bt_flag_help_lbl->setLabel(_("Script commander"));
 	if (bt_flag_goto->getIsMouseOver())     // Tony
-		bt_flag_help_lbl->setLabel(_("Goto selected object"));
+		bt_flag_help_lbl->setLabel(_("Goto selected object [SPACE]"));
 }
 
 void stel_ui::tcbr(void)

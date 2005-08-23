@@ -106,10 +106,10 @@ private:
 	// Tony search. script editor and goto button
 	FlagButton * bt_flag_track;
 	FlagButton * bt_flag_search;  
-	EditBox * bt_script;
-    void cbEditScriptInOut(void);
-    void cbEditScriptPress(void);
-    void cbEditScriptExecute(void);
+	// EditBox * bt_script;
+	// void cbEditScriptInOut(void);
+	// void cbEditScriptPress(void);
+	// void cbEditScriptExecute(void);
 	FlagButton * bt_flag_goto;
 	
 	FlagButton * bt_flag_quit;
