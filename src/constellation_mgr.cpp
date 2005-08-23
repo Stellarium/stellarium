@@ -431,6 +431,16 @@ void Constellation_mgr::set_selected_const(Constellation * c)
 		        }
              }
         }
+		else
+		{
+			vector < Constellation * >::const_iterator iter;
+			for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
+			{
+					(*iter)->set_flag_lines(c->get_flag_lines());
+					(*iter)->set_flag_name(c->get_flag_name());
+					(*iter)->set_flag_art(c->get_flag_art());
+			}
+		}
 	}
 	else
 	{
