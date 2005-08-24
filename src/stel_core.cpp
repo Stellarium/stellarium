@@ -657,7 +657,8 @@ void stel_core::load_config_from(const string& confFile)
 	}
 
 	// Landscape section
-	FlagLandscape		= conf.get_boolean("landscape:flag_landscape");
+	FlagLandscape		= conf.get_boolean("landscape", "flag_landscape", 
+										   conf.get_boolean("landscape", "flag_ground", 1));  // name change
 	FlagFog				= conf.get_boolean("landscape:flag_fog");
 	FlagAtmosphere		= conf.get_boolean("landscape:flag_atmosphere");
 	AtmosphereFadeDuration  = conf.get_double("landscape","atmosphere_fade_duration",1.5);
@@ -666,14 +667,17 @@ void stel_core::load_config_from(const string& confFile)
 	asterisms->set_flag_lines(conf.get_boolean("viewing:flag_constellation_drawing"));
 	asterisms->set_flag_names(conf.get_boolean("viewing:flag_constellation_name"));
 	asterisms->set_flag_art(  conf.get_boolean("viewing:flag_constellation_art"));
-	asterisms->set_flag_isolate_selected(conf.get_boolean("viewing:flag_constellation_pick"));
+	// name change
+	asterisms->set_flag_isolate_selected(conf.get_boolean("viewing", "flag_constellation_isolate_selected",
+														  conf.get_boolean("viewing", "flag_constellation_pick", 0)));
 	FlagAzimutalGrid		= conf.get_boolean("viewing:flag_azimutal_grid");
 	FlagEquatorialGrid		= conf.get_boolean("viewing:flag_equatorial_grid");
 	FlagEquatorLine			= conf.get_boolean("viewing:flag_equator_line");
 	FlagEclipticLine		= conf.get_boolean("viewing:flag_ecliptic_line");
 	cardinals_points->set_flag_show(conf.get_boolean("viewing:flag_cardinal_points"));
 	FlagGravityLabels		= conf.get_boolean("viewing:flag_gravity_labels");
-	FlagMoonScaled			= conf.get_boolean("viewing:flag_moon_scaled");
+	FlagMoonScaled			= conf.get_boolean("viewing", "flag_moon_scaled",
+											   conf.get_boolean("viewing", "flag_init_moon_scaled", 0));  // name change
 	MoonScale				= conf.get_double ("viewing","moon_scale",5.);
 	ConstellationArtIntensity       = conf.get_double("viewing","constellation_art_intensity", 0.5);
 	ConstellationArtFadeDuration    = conf.get_double("viewing","constellation_art_fade_duration",2.);
