@@ -27,7 +27,7 @@ LoadingBar::LoadingBar(Projector* _prj, const string& _font_filename, const stri
 	barx = (screenw - barwidth)/2;
 	bary = splashy + 34;
 	barfont = new s_font(12., "spacefont", _font_filename);
-	if (!splash_tex.empty()) splash = new s_texture(splash_tex);
+	if (!splash_tex.empty()) splash = new s_texture(splash_tex, 0);
 	assert(barfont);
 }
 	
