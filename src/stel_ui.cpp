@@ -323,7 +323,7 @@ Component* stel_ui::createFlagButtons(void)
 	bt_flag_search->setOnPressCallback(callback<void>(this, &stel_ui::cb));
 	bt_flag_search->setOnMouseInOutCallback(callback<void>(this, &stel_ui::cbr));
 
-	bt_script = new EditBox(_(""));
+	bt_script = new EditBox("");
 	bt_script->setSize(299,24);
 	bt_script->setOnReturnKeyCallback(callback<void>(this, &stel_ui::cbEditScriptExecute));
 	bt_script->setOnMouseInOutCallback(callback<void>(this, &stel_ui::cbr));
