@@ -318,12 +318,13 @@ void stel_core::update(int delta_time)
 	sunPos.normalize();	
 	moonPos.normalize();
 	// compute global sky brightness TODO : make this more "scientifically"
-	sky_brightness = sunPos[2] * atmosphere->get_intensity();
-	if( sky_brightness < 0 )
-	{
+	// TODO: also add moonlight illumination
+
+	if(sunPos[2] < -0.1 ) {
 		sky_brightness = 0;
+	} else {
+		sky_brightness = (0.1 + 1.5*sunPos[2]) * atmosphere->get_intensity();
 	}
-	else if (sky_brightness<0.1) sky_brightness=0.1;
 
 	landscape->set_sky_brightness(sky_brightness);
 
@@ -639,8 +640,8 @@ void stel_core::load_config_from(const string& confFile)
 	auto_move_duration	= conf.get_double ("navigation","auto_move_duration",1.5);
 	FlagUTC_Time		= conf.get_boolean("navigation:flag_utc_time");
 	MouseZoom			= conf.get_int("navigation","mouse_zoom",30);
-	move_speed			= conf.get_double("navigation:move_speed");
-	zoom_speed			= conf.get_double("navigation:zoom_speed");
+	move_speed			= conf.get_double("navigation","move_speed",0.0004);
+	zoom_speed			= conf.get_double("navigation","zoom_speed", 0.0004);
 
 	// Viewing Mode
 	tmpstr = conf.get_str("navigation:viewing_mode");
