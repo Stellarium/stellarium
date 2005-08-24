@@ -362,7 +362,7 @@ void Constellation_mgr::set_art_fade_duration(float duration)
 
 void Constellation_mgr::set_flag_lines(bool b)
 {
-	if (selected)
+	if (selected && isolateSelected)
 	{
 		selected->set_flag_lines(b);
 	}
@@ -376,7 +376,7 @@ void Constellation_mgr::set_flag_lines(bool b)
 
 void Constellation_mgr::set_flag_art(bool b)
 {
-	if (selected)
+	if (selected && isolateSelected)
 	{
 		selected->set_flag_art(b);
 	}
@@ -391,7 +391,7 @@ void Constellation_mgr::set_flag_art(bool b)
 
 void Constellation_mgr::set_flag_names(bool b)
 {
-	if (selected)
+	if (selected && isolateSelected)
 	{
 		selected->set_flag_name(b);
 	}
