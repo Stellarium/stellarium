@@ -400,7 +400,7 @@ Component* stel_ui::createSearchWindow(void)
 	search_tab_ctr = new TabContainer();
 	search_tab_ctr->setSize(search_win->getSizex(),search_win->getSizey()- 20);
 
-	lblSearchMessage = new Label(_(""));
+	lblSearchMessage = new Label("");
 	lblSearchMessage->setPos(10, search_win->getSizey()-15);
 
 	// stars
@@ -419,7 +419,7 @@ Component* stel_ui::createSearchWindow(void)
 	lblstars2->setPos(x+100, y+35);
 	tab_stars->addComponent(lblstars2);
 
-	star_edit = new EditBox(_(""));
+	star_edit = new EditBox("");
 	star_edit->setOnReturnKeyCallback(callback<void>(this, &stel_ui::doStarSearch));
 	star_edit->setOnAutoCompleteCallback(callback<void>(this, &stel_ui::showStarAutoComplete));
 	tab_stars->addComponent(star_edit);
@@ -442,7 +442,7 @@ Component* stel_ui::createSearchWindow(void)
 	lblconst2->setPos(x+100, y+35);
 	tab_constellations->addComponent(lblconst2);
 
-	constellation_edit = new EditBox(_(""));
+	constellation_edit = new EditBox("");
 	constellation_edit->setOnReturnKeyCallback(callback<void>(this, &stel_ui::doConstellationSearch));
 	constellation_edit->setOnAutoCompleteCallback(callback<void>(this, &stel_ui::showConstellationAutoComplete));
 	tab_constellations->addComponent(constellation_edit);
@@ -465,7 +465,7 @@ Component* stel_ui::createSearchWindow(void)
 	lblnebula2->setPos(x+100, y+35);
 	tab_nebula->addComponent(lblnebula2);
 
-	nebula_edit = new EditBox(_(""));
+	nebula_edit = new EditBox("");
 	nebula_edit->setOnReturnKeyCallback(callback<void>(this, &stel_ui::doNebulaSearch));
 	tab_nebula->addComponent(nebula_edit);
 	nebula_edit->setPos(x+100,y);
@@ -487,7 +487,7 @@ Component* stel_ui::createSearchWindow(void)
 	lblplanet2->setPos(x+100, y+35);
 	tab_planets->addComponent(lblplanet2);
 
-	planet_edit = new EditBox(_(""));
+	planet_edit = new EditBox("");
 	planet_edit->setOnReturnKeyCallback(callback<void>(this, &stel_ui::doPlanetSearch));
 	planet_edit->setOnAutoCompleteCallback(callback<void>(this, &stel_ui::showPlanetAutoComplete));
 	tab_planets->addComponent(planet_edit);
