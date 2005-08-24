@@ -667,6 +667,7 @@ void stel_core::load_config_from(const string& confFile)
 	asterisms->set_flag_names(conf.get_boolean("viewing:flag_constellation_name"));
 	asterisms->set_flag_art(  conf.get_boolean("viewing:flag_constellation_art"));
 	asterisms->set_flag_isolate_selected(conf.get_boolean("viewing:flag_constellation_pick"));
+	asterisms->set_flag_isolate_selected(conf.get_boolean("viewing:flag_constellation_isolate_selected"));
 	FlagAzimutalGrid		= conf.get_boolean("viewing:flag_azimutal_grid");
 	FlagEquatorialGrid		= conf.get_boolean("viewing:flag_equatorial_grid");
 	FlagEquatorLine			= conf.get_boolean("viewing:flag_equator_line");
@@ -677,7 +678,6 @@ void stel_core::load_config_from(const string& confFile)
 	MoonScale				= conf.get_double ("viewing","moon_scale",5.);
 	ConstellationArtIntensity       = conf.get_double("viewing","constellation_art_intensity", 0.5);
 	ConstellationArtFadeDuration    = conf.get_double("viewing","constellation_art_fade_duration",2.);
-	asterisms->set_flag_isolate_selected(conf.get_boolean("viewing:flag_constellation_isolate_selected"));
 
 	// Astro section
 	FlagStars				= conf.get_boolean("astro:flag_stars");
@@ -814,7 +814,11 @@ void stel_core::save_config_to(const string& confFile)
 	conf.set_boolean("viewing:flag_constellation_drawing", asterisms->get_flag_lines());
 	conf.set_boolean("viewing:flag_constellation_name", asterisms->get_flag_names());
 	conf.set_boolean("viewing:flag_constellation_art", asterisms->get_flag_art());
-	conf.set_boolean("viewing:flag_constellation_pick", asterisms->get_flag_isolate_selected());
+
+	//  changed name.
+	//	conf.set_boolean("viewing:flag_constellation_pick", asterisms->get_flag_isolate_selected());
+	conf.set_boolean("viewing:flag_constellation_isolate_selected", asterisms->get_flag_isolate_selected()); // Tony
+
 	conf.set_boolean("viewing:flag_azimutal_grid", FlagAzimutalGrid);
 	conf.set_boolean("viewing:flag_equatorial_grid", FlagEquatorialGrid);
 	conf.set_boolean("viewing:flag_equator_line", FlagEquatorLine);
@@ -825,8 +829,6 @@ void stel_core::save_config_to(const string& confFile)
 	conf.set_double ("viewing:moon_scale", MoonScale);
 	conf.set_double ("viewing:constellation_art_intensity", ConstellationArtIntensity);
 	conf.set_double ("viewing:constellation_art_fade_duration", ConstellationArtFadeDuration);
-	conf.set_boolean("viewing:flag_constellation_isolate_selected", asterisms->get_flag_isolate_selected()); // Tony
-
 
 	// Astro section
 	conf.set_boolean("astro:flag_stars", FlagStars);
