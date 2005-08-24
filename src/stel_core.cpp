@@ -633,13 +633,14 @@ void stel_core::load_config_from(const string& confFile)
 	PresetSkyTime 		= conf.get_double ("navigation","preset_sky_time",2451545.);
 	StartupTimeMode 	= conf.get_str("navigation:startup_time_mode");	// Can be "now" or "preset"
 	FlagEnableZoomKeys	= conf.get_boolean("navigation:flag_enable_zoom_keys");
+	FlagEnableMoveKeys  = conf.get_boolean("navigation:flag_enable_move_keys");
 	FlagManualZoom		= conf.get_boolean("navigation:flag_manual_zoom");
 	FlagEnableMoveMouse	= conf.get_boolean("navigation","flag_enable_move_mouse",1);
-	InitFov	                = conf.get_double ("navigation","init_fov",60.);
+	InitFov				= conf.get_double ("navigation","init_fov",60.);
 	InitViewPos 		= str_to_vec3f(conf.get_str("navigation:init_view_pos").c_str());
 	auto_move_duration	= conf.get_double ("navigation","auto_move_duration",1.5);
 	FlagUTC_Time		= conf.get_boolean("navigation:flag_utc_time");
-	MouseZoom		= conf.get_int("navigation","mouse_zoom",30);
+	MouseZoom			= conf.get_int("navigation","mouse_zoom",30);
 	move_speed			= conf.get_double("navigation","move_speed",0.0004);
 	zoom_speed			= conf.get_double("navigation","zoom_speed", 0.0004);
 
@@ -667,7 +668,6 @@ void stel_core::load_config_from(const string& confFile)
 	asterisms->set_flag_lines(conf.get_boolean("viewing:flag_constellation_drawing"));
 	asterisms->set_flag_names(conf.get_boolean("viewing:flag_constellation_name"));
 	asterisms->set_flag_art(  conf.get_boolean("viewing:flag_constellation_art"));
-	// name change
 	asterisms->set_flag_isolate_selected(conf.get_boolean("viewing", "flag_constellation_isolate_selected",
 														  conf.get_boolean("viewing", "flag_constellation_pick", 0)));
 	FlagAzimutalGrid		= conf.get_boolean("viewing:flag_azimutal_grid");
@@ -763,6 +763,7 @@ void stel_core::save_config_to(const string& confFile)
 	conf.set_str	("gui:gui_base_color", vec3f_to_str(GuiBaseColor));
 	conf.set_str	("gui:gui_text_color", vec3f_to_str(GuiTextColor));
 	conf.set_double ("gui:base_font_size", BaseFontSize);
+	conf.set_boolean("gui:flag_show_script_bar",FlagShowScriptBar);
 	
 	// Colors
 	conf.set_str    ("color:azimuthal_color", vec3f_to_str(AzimuthalColor));
@@ -789,14 +790,13 @@ void stel_core::save_config_to(const string& confFile)
 	conf.set_str	("navigation:startup_time_mode", StartupTimeMode);
 	conf.set_boolean("navigation:flag_enable_zoom_keys", FlagEnableZoomKeys);
 	conf.set_boolean("navigation:flag_manual_zoom", FlagManualZoom);
-	conf.set_boolean("gui:flag_show_script_bar",FlagShowScriptBar);
 	conf.set_boolean("navigation:flag_enable_move_keys", FlagEnableMoveKeys);
 	conf.set_boolean("navigation:flag_enable_move_mouse", FlagEnableMoveMouse);
 	conf.set_double ("navigation:init_fov", InitFov);
 	conf.set_str	("navigation:init_view_pos", vec3f_to_str(InitViewPos));
 	conf.set_double ("navigation:auto_move_duration", auto_move_duration);
 	conf.set_boolean("navigation:flag_utc_time", FlagUTC_Time);
-	conf.set_int("navigation:mouse_zoom", MouseZoom);
+	conf.set_int    ("navigation:mouse_zoom", MouseZoom);
 	conf.set_double ("navigation:move_speed", move_speed);
 	conf.set_double ("navigation:zoom_speed", zoom_speed);
 
@@ -989,6 +989,7 @@ void stel_core::turn_left(int s)
 		deltaAz = -1;
 		navigation->set_flag_traking(0);
 		navigation->set_flag_lock_equ_pos(0);
+		
 	}
 	else deltaAz = 0;
 }
@@ -1025,7 +1026,6 @@ void stel_core::zoom_out(int s)
 	if (FlagEnableZoomKeys) deltaFov = (s!=0);
 }
 
-// Increment/decrement smoothly the vision field and position
 // Increment/decrement smoothly the vision field and position
 void stel_core::update_move(int delta_time)
 {
