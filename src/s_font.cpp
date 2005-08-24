@@ -1,6 +1,6 @@
 /*
  * Stellarium
- * Copyright (C) 2002 Fabien Chéreau
+ * Copyright (C) 2002 Fabien Chï¿½eau
  * 
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -42,7 +42,8 @@ int s_font::buildDisplayLists(const string& dataFileName, const string& textureN
     int posY;
     int sizeX;
     int sizeY;
-    int leftSpacing;
+    int leftSpacing, rightSpacing;
+    char spacing[40];
     int charNum=0;
     int nbChar=0;
 
@@ -92,12 +93,17 @@ int s_font::buildDisplayLists(const string& dataFileName, const string& textureN
 
     glBindTexture(GL_TEXTURE_2D, s_fontTexture->getID());          // Select Our s_font Texture
 
-    while(fscanf(pFile,"%d %d %d %d %d %d\n",&charNum,&posX,&posY,&sizeX,&sizeY,&leftSpacing)==6)
+    while(fscanf(pFile,"%d %d %d %d %d %s\n",&charNum,&posX,&posY,&sizeX,&sizeY,spacing) == 6)
     {
-        theSize[charNum].sizeX=sizeX;
+        if (sscanf(spacing,"%d,%d",&leftSpacing,&rightSpacing) == 1)
+		{
+			rightSpacing = 0;
+        }
+
+		theSize[charNum].sizeX=sizeX;
         theSize[charNum].sizeY=sizeY;
         theSize[charNum].leftSpacing=leftSpacing;
-        theSize[charNum].rightSpacing=0;
+        theSize[charNum].rightSpacing=rightSpacing;
         averageCharLen+=sizeX;
         nbChar++;
 
@@ -106,19 +112,19 @@ int s_font::buildDisplayLists(const string& dataFileName, const string& textureN
 		// Special ascii code used to set text color
 		// was R,G,B, but changed to normal or hilighted since R G or B was hard to see - rms
 		if (charNum==17 || charNum==18)
-			{
-				glNewList(g_base+charNum,GL_COMPILE);
-				if( charNum==17 ) {
-					// regular text color
-					glColor3f(0.5,1,0.5);
-				} else {
-					// hilighted text
-					glColor3f(1,1,1);
-				}
-				
-				glEndList();
-				continue;
+		{
+			glNewList(g_base+charNum,GL_COMPILE);
+			if( charNum==17 ) {
+				// regular text color
+				glColor3f(0.5,1,0.5);
+			} else {
+				// hilighted text
+				glColor3f(1,1,1);
 			}
+			
+			glEndList();
+			continue;
+		}
 	
         glNewList(g_base+charNum,GL_COMPILE); {  // Start Building A List
 			glTranslated(leftSpacing*ratio,0,0);	 // Move To The Left Of The Character
@@ -132,7 +138,7 @@ int s_font::buildDisplayLists(const string& dataFileName, const string& textureN
 			glTexCoord2f((float)posX/256,(float)(256-posY)/256);
 			glVertex3f(0,0,0); // Top Left
 			glEnd ();
-			glTranslated((sizeX+SPACING)*ratio,0,0); }
+			glTranslated((sizeX+rightSpacing+SPACING)*ratio,0,0); }
         glEndList();   // Done Building The Display List
     }
 

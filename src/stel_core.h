@@ -196,7 +196,7 @@ private:
 
 	planet* selected_planet;
 
-    // Tony for autocompletes
+    // For editbox autocomplete keywords
     vector<string> constellationNames;
     vector<string> constellationShortNames;
     vector<string> planetNames;
@@ -277,7 +277,7 @@ private:
     int FlagHelp;
     int FlagInfos;
     int FlagConfig;
-    int FlagSearch;  // Tony
+    int FlagSearch;
 	int FlagShowSelectedObjectInfo;
 	Vec3f GuiBaseColor;
 	Vec3f GuiTextColor;
@@ -311,7 +311,7 @@ private:
     int FlagPlanetsOrbits;
     int FlagObjectTrails;
     int FlagNebula;
-    int FlagNebulaLongName;       // Tony
+    int FlagNebulaLongName;
     float MaxMagNebulaName;
     int FlagNebulaCircle;
     int FlagMilkyWay;
@@ -340,6 +340,7 @@ private:
 	string PositionFile;
 	int FlagEnableZoomKeys;
 	int FlagManualZoom;
+	int FlagShowScriptBar;
 	int FlagEnableMoveKeys;
 	int FlagEnableMoveMouse;  // allow mouse at edge of screen to move view
 	float InitFov;

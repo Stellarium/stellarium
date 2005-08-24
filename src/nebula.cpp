@@ -48,7 +48,7 @@ void Nebula::get_info_string(char * s, const navigator*) const
 	float tempDE, tempRA;
 	rect_to_sphe(&tempRA,&tempDE,XYZ);
 	// RA=Right ascention, DE=Declinaison, Mag=Magnitude
-	sprintf(s,_("Name : %s (NGC %u)\nRA : %s\nDE : %s\nMag : %.2f"), name.c_str(), NGC_nb,
+	sprintf(s,_("Name : %s (NGC %u)\nRA : %s\nDE : %s\nMagnitude : %.2f"), name.c_str(), NGC_nb,
 		print_angle_hms(tempRA*180./M_PI).c_str(), print_angle_dms_stel(tempDE*180./M_PI).c_str(), mag);
 }
 
