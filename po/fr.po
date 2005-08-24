@@ -4,6 +4,12 @@
 # Copyright (C) 2004, 2005 Free Software Foundation, Inc.
 # This file is distributed under the same license as the stellarium package.
 # Fabien Chéreau, 2005.
+# Fabien Chéreau, 2005.
+# Fabien Chéreau, 2005.
+# Fabien Chéreau, 2005.
+# Fabien Chéreau, 2005.
+# Fabien Chéreau, 2005.
+# Fabien Chéreau, 2005.
 #  <stellarium@free.fr>, 2004.
 # Fabien Chéreau, 2005.
 #
@@ -11,10 +17,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-08-24 18:14+0200\n"
-"PO-Revision-Date: 2005-07-10 22:13+0200\n"
+"POT-Creation-Date: 2005-08-24 23:22+0200\n"
+"PO-Revision-Date: 2005-08-24 23:22+0200\n"
 "Last-Translator: Fabien Chéreau\n"
-"Language-Team:  <fr@li.org>\n"
+"Language-Team:  <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -116,7 +122,7 @@ msgstr "O"
 #: src/constellation_mgr.cpp:90
 #, c-format
 msgid "ERROR on line %d of %s\n"
-msgstr ""
+msgstr "ERREUR à la ligne %d de %s\n"
 
 #. Draw loading bar
 #. Tony - added "+1" to ensure art finsihes at last entry
@@ -127,7 +133,7 @@ msgstr "Chargement des Images Constellations : %d/%d"
 
 #. Hip = Hipparcos, RA=Right Ascention, DE=Declinaison, Mag=Magnitude
 #: src/hip_star.cpp:58
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Name : %s%s%s\n"
 "RA : %s\n"
@@ -136,16 +142,17 @@ msgid ""
 "Distance : %s Light Years\n"
 "Hip : %.4d\n"
 msgstr ""
-"Nom :%s%s\n"
+"Nom :%s%s%s\n"
 "AD : %s\n"
 "DE : %s\n"
-"Distance : %.8f UA\n"
-"Magnitude : %.2f"
+"Magnitude : %.2f\n"
+"Distance : %s Années Lumière\n"
+"Hip : %.4d\n"
 
 #: src/hip_star.cpp:73 src/hip_star.cpp:74
-#, fuzzy, c-format
+#, c-format
 msgid "%s: mag %.1f %s"
-msgstr "%s: mag %.1f"
+msgstr "%s: mag %.1f %s"
 
 #: src/hip_star_mgr.cpp:80
 #, c-format
@@ -161,7 +168,7 @@ msgstr "Chargement du catalogue d'étoiles Hipparcos : %d/%d"
 
 #. RA=Right ascention, DE=Declinaison, Mag=Magnitude
 #: src/nebula.cpp:51
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Name : %s (NGC %u)\n"
 "RA : %s\n"
@@ -171,7 +178,7 @@ msgstr ""
 "Nom : %s (NGC %u)\n"
 "AD : %s\n"
 "DE : %s\n"
-"Mag : %.2f"
+"Magnitude : %.2f"
 
 #: src/nebula.cpp:64
 #, c-format
@@ -209,7 +216,7 @@ msgid "Saving location %s to file %s\n"
 msgstr "Enregistre la position %s dans le fichier %s\n"
 
 #: src/planet.cpp:84
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Name :%s%s\n"
 "RA : %s\n"
@@ -220,8 +227,8 @@ msgstr ""
 "Nom :%s%s\n"
 "AD : %s\n"
 "DE : %s\n"
-"Distance : %.8f UA\n"
-"Magnitude : %.2f"
+"Magnitude : %.2f\n"
+"Distance : %.8f UA"
 
 #: src/planet.cpp:95
 #, c-format
@@ -230,15 +237,15 @@ msgstr "%s%s: mag %.1f"
 
 #: src/sky_localizer.cpp:194
 msgid "Using sky language from environment locale: "
-msgstr ""
+msgstr "Utilise le language des locales d'environement: "
 
 #: src/sky_localizer.cpp:197
 msgid "Did not recognize locale language code "
-msgstr ""
+msgstr "Ne reconnait pas le code language "
 
 #: src/sky_localizer.cpp:198
 msgid ". Defaulting to english sky labels\n"
-msgstr ""
+msgstr " Va utiliser les noms anglais par défaut\n"
 
 #: src/stel_ui.cpp:153
 msgid "Message"
@@ -246,11 +253,11 @@ msgstr "Message"
 
 #: src/stel_ui.cpp:444 src/stel_ui.cpp:555
 msgid "Script commander"
-msgstr ""
+msgstr "Commandes de script"
 
 #: src/stel_ui.cpp:476
 msgid "Invalid Script command"
-msgstr ""
+msgstr "Commande de script invalide"
 
 #: src/stel_ui.cpp:523
 msgid "Drawing of the Constellations [C]"
@@ -310,15 +317,15 @@ msgstr "Quitte [CMD + Q]"
 
 #: src/stel_ui.cpp:553
 msgid "Search for object"
-msgstr ""
+msgstr "Chercher un objet"
 
 #: src/stel_ui.cpp:557
 msgid "Goto selected object [SPACE]"
-msgstr ""
+msgstr "Va à l'objet sélectionné [ESPACE]"
 
 #: src/stel_ui.cpp:559
 msgid "Track object"
-msgstr ""
+msgstr "Suivi de l'objet"
 
 #: src/stel_ui.cpp:565
 msgid "Decrease Time Speed [J]"
@@ -337,48 +344,20 @@ msgid "Return to Current Time"
 msgstr "Revient au Temps Actuel"
 
 #: src/stel_ui.cpp:580
-#, fuzzy
 msgid ""
 "   Please check for newer versions and send bug reports\n"
 "and comments to us at: http://stellarium.sourceforge.net\n"
 "\n"
 msgstr ""
-"Téléchargez la dernière version et envoyez vos rapports de \n"
-"bogues sur la page web de stellarium : http://stellarium.sourceforge.net\n"
+"Téléchargez les mise à jour et envoyez vos rapports de \n"
+"bogues sur : http://stellarium.sourceforge.net\n"
 "\n"
-
-#: src/stel_ui.cpp:582
-msgid ""
-"   This program is free software; you can redistribute it and/or\n"
-"modify it under the terms of the GNU General Public License\n"
-"as published by the Free Software Foundation; either version 2\n"
-"of the License, or (at your option) any later version.\n"
-"\n"
-msgstr ""
-
-#: src/stel_ui.cpp:586
-msgid ""
-"This program is distributed in the hope that it will be useful, but\n"
-"WITHOUT ANY WARRANTY; without even the implied\n"
-"warranty of MERCHANTABILITY or FITNESS FOR A\n"
-"PARTICULAR PURPOSE.  See the GNU General Public\n"
-"License for more details.\n"
-"\n"
-msgstr ""
-
-#: src/stel_ui.cpp:591
-msgid ""
-"You should have received a copy of the GNU General Public\n"
-"License along with this program; if not, write to:\n"
-msgstr ""
 
 #: src/stel_ui.cpp:599
-#, fuzzy
 msgid "Information"
-msgstr "Configuration"
+msgstr "Information"
 
 #: src/stel_ui.cpp:612
-#, fuzzy
 msgid ""
 "Arrow Keys       : Change viewing RA/DE\n"
 "Page Up/Down     : Zoom\n"
@@ -618,19 +597,19 @@ msgstr "pour activer le changement."
 
 #: src/stel_ui_conf.cpp:325
 msgid "For unlisted screen resolution, edit the file :"
-msgstr ""
+msgstr "Pour d'autres résolutions, éditer le fichier :"
 
 #: src/stel_ui_conf.cpp:345
 msgid " Choose landscapes :"
-msgstr ""
+msgstr "  Choix du paysage :"
 
 #: src/stel_ui_conf.cpp:362
 msgid "Please save option in tab \"Location\""
-msgstr ""
+msgstr "Sauvez les options dans l'onglet \"Location\""
 
 #: src/stel_ui_conf.cpp:363
 msgid "to save current landscape as the default landscape."
-msgstr ""
+msgstr "pour enregistrer le paysage courant comme défaut."
 
 #: src/stel_ui_conf.cpp:371
 msgid "Date & Time"
@@ -641,9 +620,8 @@ msgid "Location"
 msgstr "Position"
 
 #: src/stel_ui_conf.cpp:373
-#, fuzzy
 msgid "Landscapes"
-msgstr "Paysage: "
+msgstr "Paysages : "
 
 #: src/stel_ui_conf.cpp:374
 msgid "Video"
@@ -656,51 +634,47 @@ msgstr "Rendu"
 #. Bring up dialog
 #: src/stel_ui_conf.cpp:396
 msgid "Object Search"
-msgstr ""
+msgstr "Recherche d'objet"
 
 #: src/stel_ui_conf.cpp:414
 msgid "HP No./Name"
-msgstr ""
+msgstr "HP No/Nom"
 
 #: src/stel_ui_conf.cpp:418
 msgid "eg. 60718 (aCrux) or Canopus"
-msgstr ""
+msgstr "ex. 60718 (aCrux) ou Canopus"
 
 #: src/stel_ui_conf.cpp:437 src/stel_ui_conf.cpp:500
-#, fuzzy
 msgid "Constellation"
-msgstr "Constellations"
+msgstr "Constellation"
 
 #: src/stel_ui_conf.cpp:441
 msgid "eg. Crux"
-msgstr ""
+msgstr "ex. Croix du Sud"
 
 #: src/stel_ui_conf.cpp:460
 msgid "Messier No."
-msgstr ""
+msgstr "No. Messier"
 
 #: src/stel_ui_conf.cpp:464
 msgid "eg. M83"
-msgstr ""
+msgstr "ex. M83"
 
 #: src/stel_ui_conf.cpp:482
-#, fuzzy
 msgid "Planet/Moon"
-msgstr "Planètes"
+msgstr "Planète/Lune"
 
 #: src/stel_ui_conf.cpp:486
 msgid "eg. Pluto or Io"
-msgstr ""
+msgstr "ex. Pluton ou Io"
 
 #: src/stel_ui_conf.cpp:501
-#, fuzzy
 msgid "Nebula"
-msgstr "Nébuleuses"
+msgstr "Nébuleuse"
 
 #: src/stel_ui_conf.cpp:502
-#, fuzzy
 msgid "Planets & Moons"
-msgstr "Infos Planètes"
+msgstr "Planètes & Lunes"
 
 #: src/stel_ui_conf.cpp:672
 msgid "Saving rendering options in file "
@@ -915,18 +889,3 @@ msgstr "Décalage du centrage N-S"
 #: src/stel_ui_tuiconf.cpp:238
 msgid "E-W Centering Offset: "
 msgstr "Décalage du centrage E-O"
-
-#, fuzzy
-#~ msgid ""
-#~ "Name : %s%s%s\n"
-#~ "Hip : %.4d\n"
-#~ "RA : %s\n"
-#~ "DE : %s\n"
-#~ "Mag : %.2f\n"
-#~ "%s"
-#~ msgstr ""
-#~ "Nom :%s%s%s\n"
-#~ "Hip : %.4d\n"
-#~ "AD : %s\n"
-#~ "DE : %s\n"
-#~ "Mag : %.2f"
