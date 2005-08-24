@@ -49,16 +49,16 @@ void Hip_Star::get_info_string(char * s, const navigator * nav) const
 	sprintf(tempStr,"HP %d",HP);
 
 	static char tempLy[20];
-	if(Distance) sprintf(tempLy, "LY : %.1f", Distance);
+	if(Distance) sprintf(tempLy, "%.1f", Distance);
 	else tempLy[0] = 0; 
 
 	float tempDE, tempRA;
 	rect_to_sphe(&tempRA,&tempDE,XYZ);
 	// Hip = Hipparcos, RA=Right Ascention, DE=Declinaison, Mag=Magnitude
-	sprintf(s,_("Name : %s%s%s\nHip : %.4d\nRA : %s\nDE : %s\nMag : %.2f\n%s"),
+	sprintf(s,_("Name : %s%s%s\nRA : %s\nDE : %s\nMagnitude : %.2f\nDistance : %s Light Years\nHip : %.4d\n"),
 		CommonName.c_str(), CommonName=="" ? "" : " ",
-		SciName=="" ? tempStr : SciName.c_str(), HP, print_angle_hms(tempRA*180./M_PI).c_str(),
-			print_angle_dms_stel(tempDE*180./M_PI).c_str(), Mag, tempLy);
+		SciName=="" ? tempStr : SciName.c_str(), print_angle_hms(tempRA*180./M_PI).c_str(),
+			print_angle_dms_stel(tempDE*180./M_PI).c_str(), Mag, tempLy, HP);
 }
 
 void Hip_Star::get_short_info_string(char * s, const navigator * nav) const

@@ -1,6 +1,6 @@
 /*
  * Stellarium
- * Copyright (C) 2002 Fabien Chereau
+ * Copyright (C) 2002 Fabien Ch�eau
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -538,7 +538,6 @@ void stel_ui::doSearchCommand(string _command, string _error)
         showSearchMessage(_error);
 }
 
-//Tony
 void stel_ui::doNebulaSearch(void)
 {
     string objectName = string((char*)nebula_edit->getText().c_str());
@@ -549,7 +548,6 @@ void stel_ui::doNebulaSearch(void)
     doSearchCommand(command, error);
 }
 
-//Tony
 void stel_ui::doConstellationSearch(void)
 {
     string rawObjectName = constellation_edit->getText();
@@ -576,19 +574,16 @@ void stel_ui::doConstellationSearch(void)
         showSearchMessage(string("Constellation " + rawObjectName + " not found"));
 }
 
-//Tony
 void stel_ui::showStarAutoComplete(void)
 {
     showSearchMessage(star_edit->getAutoCompleteOptions());
 }
 
-//Tony
 void stel_ui::showConstellationAutoComplete(void)
 {
     showSearchMessage(constellation_edit->getAutoCompleteOptions());
 }
 
-//Tony
 void stel_ui::doStarSearch(void)
 {
     string objectName = star_edit->getText();
@@ -604,7 +599,6 @@ void stel_ui::doStarSearch(void)
     doSearchCommand(command, error);
 }
 
-//Tony
 void stel_ui::doPlanetSearch(void)
 {
     string objectName = planet_edit->getText();
@@ -628,7 +622,7 @@ void stel_ui::updateConfigVariables(void)
 	core->commander->execute_command("set star_twinkle_amount ", star_twinkle_amount->getValue());
 	core->commander->execute_command("flag constellation_drawing ", constellation_cbx->getState());
 	core->commander->execute_command("flag constellation_names ", constellation_name_cbx->getState());
-	core->commander->execute_command("flag constellation_isolate_selected ", sel_constellation_cbx->getState());
+	core->commander->execute_command("flag constellation_pick ", sel_constellation_cbx->getState());
 	core->commander->execute_command("flag nebula_names ", nebulas_names_cbx->getState());
 	core->commander->execute_command("set max_mag_nebula_name ", max_mag_nebula_name->getValue());
 	core->commander->execute_command("flag planet_names ", planets_hints_cbx->getState());
@@ -687,7 +681,7 @@ void stel_ui::saveRenderOptions(void)
 	conf.set_double("stars:star_twinkle_amount", core->StarTwinkleAmount);
 	conf.set_boolean("viewing:flag_constellation_drawing", core->constellation_get_flag_lines());
 	conf.set_boolean("viewing:flag_constellation_name", core->constellation_get_flag_names());
-	conf.set_boolean("viewing:constellation_isolate_selected", core->asterisms->get_flag_isolate_selected());
+	conf.set_boolean("viewing:flag_constellation_pick", core->asterisms->get_flag_isolate_selected());
 	conf.set_boolean("astro:flag_nebula", core->FlagNebula);
 	conf.set_boolean("astro:flag_nebula_name", core->nebulas->get_flag_hints());
 	conf.set_double("astro:max_mag_nebula_name", core->MaxMagNebulaName);

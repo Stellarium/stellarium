@@ -102,17 +102,17 @@ private:
 	FlagButton * bt_flag_help;
 	FlagButton * bt_flag_equatorial_mode;
 	FlagButton * bt_flag_config;
-	
-	// Tony search. script editor and goto button
 	FlagButton * bt_flag_track;
-	FlagButton * bt_flag_search;  
-	// EditBox * bt_script;
-	// void cbEditScriptInOut(void);
-	// void cbEditScriptPress(void);
-	// void cbEditScriptExecute(void);
+	FlagButton * bt_flag_search;
+	EditBox * bt_script;
 	FlagButton * bt_flag_goto;
-	
 	FlagButton * bt_flag_quit;
+
+    void cbEditScriptInOut(void);
+    void cbEditScriptPress(void);
+    void cbEditScriptExecute(void);
+    void cbEditScriptWordCount(void);
+
 	Component* createFlagButtons(void);
 	void cb(void);
 	void bt_flag_ctrOnMouseInOut(void);
@@ -235,7 +235,7 @@ private:
 	bool is_dragging, has_dragged;
 	int previous_x, previous_y;
 	
-    // Tony - search options
+    // Search options
     EditBox* nebula_edit;
     void doNebulaSearch(void);
     EditBox* star_edit;

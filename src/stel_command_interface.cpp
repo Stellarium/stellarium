@@ -476,7 +476,7 @@ else if(command=="script") {
 	  execute_command("flag cardinal_points off");
 	  execute_command("flag constellation_art off");
 	  execute_command("flag constellation_drawing off");
-	  execute_command("flag constellation_names off");
+	  execute_command("flag constellation_name off");
 	  execute_command("flag ecliptic_line off");
 	  execute_command("flag equatorial_grid off");
 	  execute_command("flag equator_line off");
@@ -609,10 +609,6 @@ int StelCommandInterface::set_flag(string name, string value, bool &newval, bool
 			else if(name=="show_gravity_ui") newval = (stcore->FlagShowGravityUi = !stcore->FlagShowGravityUi);
 			else if(name=="utc_time") newval = (stcore->FlagUTC_Time = !stcore->FlagUTC_Time);
 			else if(name=="gravity_labels") newval = (stcore->FlagGravityLabels = !stcore->FlagGravityLabels);
-			else if(name=="constellation_isolate_selected") {
-				stcore->asterisms->set_flag_isolate_selected(!stcore->asterisms->get_flag_isolate_selected());
-				newval = stcore->asterisms->get_flag_isolate_selected();
-			}
 			else status = 0;  // no match here, anyway
 
 		} else status = 0;
@@ -630,12 +626,17 @@ int StelCommandInterface::set_flag(string name, string value, bool &newval, bool
 			newval = !stcore->asterisms->get_flag_art();
 			stcore->asterisms->set_flag_art(newval);
 		} 
+		else if(name=="constellation_pick") { 
+             newval = !stcore->asterisms->get_flag_isolate_selected();
+             stcore->asterisms->set_flag_isolate_selected(newval);
+        }
 		else if(name=="star_twinkle") newval = (stcore->FlagStarTwinkle = !stcore->FlagStarTwinkle);
 		else if(name=="point_star") newval = (stcore->FlagPointStar = !stcore->FlagPointStar);
 		else if(name=="show_selected_object_info") newval = (stcore->FlagShowSelectedObjectInfo = !stcore->FlagShowSelectedObjectInfo);
 		else if(name=="show_tui_datetime") newval = (stcore->FlagShowTuiDateTime = !stcore->FlagShowTuiDateTime);
 		else if(name=="show_tui_short_obj_info") newval = (stcore->FlagShowTuiShortObjInfo = !stcore->FlagShowTuiShortObjInfo);
 		else if(name=="manual_zoom") newval = (stcore->FlagManualZoom = !stcore->FlagManualZoom);
+		else if(name=="show_script_bar") newval = (stcore->FlagShowScriptBar = !stcore->FlagShowScriptBar);
 		else if(name=="fog") newval = (stcore->FlagFog = !stcore->FlagFog);
 		else if(name=="atmosphere") {
 			newval = (stcore->FlagAtmosphere = !stcore->FlagAtmosphere);
@@ -716,22 +717,21 @@ int StelCommandInterface::set_flag(string name, string value, bool &newval, bool
 			else if(name=="show_gravity_ui") stcore->FlagShowGravityUi = newval;
 			else if(name=="utc_time") stcore->FlagUTC_Time = newval;
 			else if(name=="gravity_labels") stcore->FlagGravityLabels = newval;
-			else if(name=="constellation_isolate_selected") stcore->asterisms->set_flag_isolate_selected(newval);
 			else status = 0;
 		
 		} else status = 0;
 
-
-
 		if(name=="constellation_drawing") stcore->asterisms->set_flag_lines(newval);
 		else if(name=="constellation_names") stcore->asterisms->set_flag_names(newval);
 		else if(name=="constellation_art") stcore->asterisms->set_flag_art(newval);
+     	else if(name=="constellation_pick") stcore->asterisms->set_flag_isolate_selected(newval);
 		else if(name=="star_twinkle") stcore->FlagStarTwinkle = newval;
 		else if(name=="point_star") stcore->FlagPointStar = newval;
 		else if(name=="show_selected_object_info") stcore->FlagShowSelectedObjectInfo = newval;
 		else if(name=="show_tui_datetime") stcore->FlagShowTuiDateTime = newval;
 		else if(name=="show_tui_short_obj_info") stcore->FlagShowTuiShortObjInfo = newval;
 		else if(name=="manual_zoom") stcore->FlagManualZoom = newval;
+		else if(name=="show_script_bar") stcore->FlagShowScriptBar = newval;
 		else if(name=="fog") stcore->FlagFog = newval;
 		else if(name=="atmosphere") { 
 			stcore->FlagAtmosphere = newval;

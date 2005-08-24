@@ -298,15 +298,15 @@ namespace s_gui
 		virtual int onKey(Uint16, S_GUI_VALUE);
 		virtual int onClic(int, int, S_GUI_VALUE, S_GUI_VALUE);
 		virtual void setAutoComplete(vector<string> _autocomplete) { lstAutoComplete = _autocomplete; };
-		string getAutoCompleteOptions() { return autoCompleteOptions; }
+		string getAutoCompleteOptions(void) { return autoCompleteOptions; }
 		string getText(void) { return text; }
 		void setFocus(void);
 		void resetFocus(void);
 		void refreshLabel(void);
 	protected:
 		callback<void> onReturnKeyCallback;
-
 		callback<void> onAutoCompleteCallback;
+		callback<void> onWordCountChangedCallback;
 		vector<string> lstAutoComplete;
         string autoCompleteOptions;
         int countAutoCompleteOptions;
@@ -324,6 +324,9 @@ namespace s_gui
 		void resetHistory(void);
 		string history[10];
         int historyPos, historyMaxPos;
+        
+        void cursorToNextWord(void);
+        void cursorToPrevWord(void);
 
         Label label;
 		bool isEditing;
