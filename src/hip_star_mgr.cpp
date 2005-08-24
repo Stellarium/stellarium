@@ -194,7 +194,7 @@ unsigned int Hip_Star_mgr::getCommonNameHP(string _commonname)
 {
     unsigned int i = 0;
 
-	while ( i < lstCommonNames.size())
+	while (i < lstCommonNames.size())
     {
         if (fcompare(_commonname,lstCommonNames[i]) == 0)
            return lstCommonNamesHP[i];

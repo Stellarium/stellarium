@@ -52,8 +52,11 @@ stel_ui::stel_ui(stel_core * _core) :
 		bt_flag_help(NULL),
 		bt_flag_equatorial_mode(NULL),
 		bt_flag_config(NULL),
+		bt_flag_track(NULL),
+		bt_flag_search(NULL),
+        bt_script(NULL),
+		bt_flag_goto(NULL),
 		bt_flag_help_lbl(NULL),
-
 		info_select_ctr(NULL),
 		info_select_txtlbl(NULL),
 
@@ -64,7 +67,7 @@ stel_ui::stel_ui(stel_core * _core) :
 		help_txtlbl(NULL),
 
 		config_win(NULL),
-		search_win(NULL), // Tony - added the search window
+		search_win(NULL),
 		tui_root(NULL)
 
 {
@@ -257,8 +260,13 @@ void stel_ui::updateTopBar(void)
 }
 
 // Create the button panel in the lower left corner
+#define UI_PADDING 5
+#define UI_BT 25
+#define UI_SCRIPT_BAR 300
 Component* stel_ui::createFlagButtons(void)
 {
+    int x = 0;
+    
 	bt_flag_constellation_draw = new FlagButton(false, NULL, "bt_constellations");
 	bt_flag_constellation_draw->setOnPressCallback(callback<void>(this, &stel_ui::cb));
 	bt_flag_constellation_draw->setOnMouseInOutCallback(callback<void>(this, &stel_ui::cbr));
@@ -311,43 +319,51 @@ Component* stel_ui::createFlagButtons(void)
 	bt_flag_quit->setOnPressCallback(callback<void>(this, &stel_ui::cb));
 	bt_flag_quit->setOnMouseInOutCallback(callback<void>(this, &stel_ui::cbr));
 
-    // Tony - added the search button
 	bt_flag_search = new FlagButton(true, NULL, "bt_search");
 	bt_flag_search->setOnPressCallback(callback<void>(this, &stel_ui::cb));
 	bt_flag_search->setOnMouseInOutCallback(callback<void>(this, &stel_ui::cbr));
 
-    // Tony - added the script edit box
-// 	bt_script = new EditBox(_(""));
-// 	bt_script->setSize(299,24);
-// 	bt_script->setOnReturnKeyCallback(callback<void>(this, &stel_ui::cbEditScriptExecute));
-// 	bt_script->setOnMouseInOutCallback(callback<void>(this, &stel_ui::cbr));
+	bt_script = new EditBox(_(""));
+	bt_script->setSize(299,24);
+	bt_script->setOnReturnKeyCallback(callback<void>(this, &stel_ui::cbEditScriptExecute));
+	bt_script->setOnMouseInOutCallback(callback<void>(this, &stel_ui::cbr));
 
-    // Tony - added the goto object button
-	bt_flag_goto = new FlagButton(true, NULL, "bt_track");
+	bt_flag_goto = new FlagButton(true, NULL, "bt_goto");
 	bt_flag_goto->setOnPressCallback(callback<void>(this, &stel_ui::cb));
 	bt_flag_goto->setOnMouseInOutCallback(callback<void>(this, &stel_ui::cbr));
 
+	bt_flag_track = new FlagButton(true, NULL, "bt_track");
+	bt_flag_track->setOnPressCallback(callback<void>(this, &stel_ui::cb));
+	bt_flag_track->setOnMouseInOutCallback(callback<void>(this, &stel_ui::cbr));
+
 	bt_flag_ctr = new FilledContainer();
-	bt_flag_ctr->addComponent(bt_flag_constellation_draw); 	bt_flag_constellation_draw->setPos(0,0);
-	bt_flag_ctr->addComponent(bt_flag_constellation_name);	bt_flag_constellation_name->setPos(25,0);
-	bt_flag_ctr->addComponent(bt_flag_constellation_art);	bt_flag_constellation_art->setPos(50,0);
-	bt_flag_ctr->addComponent(bt_flag_azimuth_grid); 	bt_flag_azimuth_grid->setPos(75,0);
-	bt_flag_ctr->addComponent(bt_flag_equator_grid);	bt_flag_equator_grid->setPos(100,0);
-	bt_flag_ctr->addComponent(bt_flag_ground);			bt_flag_ground->setPos(125,0);
-	bt_flag_ctr->addComponent(bt_flag_cardinals);		bt_flag_cardinals->setPos(150,0);
-	bt_flag_ctr->addComponent(bt_flag_atmosphere);		bt_flag_atmosphere->setPos(175,0);
-	bt_flag_ctr->addComponent(bt_flag_nebula_name);		bt_flag_nebula_name->setPos(200,0);
-	bt_flag_ctr->addComponent(bt_flag_help);			bt_flag_help->setPos(225,0);
-	bt_flag_ctr->addComponent(bt_flag_equatorial_mode);	bt_flag_equatorial_mode->setPos(250,0);
-	bt_flag_ctr->addComponent(bt_flag_search);			bt_flag_search->setPos(275,0);
-	//bt_flag_ctr->addComponent(bt_script);			    bt_script->setPos(300,0);
-	bt_flag_ctr->addComponent(bt_flag_goto);			bt_flag_goto->setPos(300,0);
-	bt_flag_ctr->addComponent(bt_flag_config);			bt_flag_config->setPos(325,0);
-	bt_flag_ctr->addComponent(bt_flag_quit);			bt_flag_quit->setPos(350,0);
+	bt_flag_ctr->addComponent(bt_flag_constellation_draw); 	bt_flag_constellation_draw->setPos(x,0); x+=UI_BT;
+	bt_flag_ctr->addComponent(bt_flag_constellation_name);	bt_flag_constellation_name->setPos(x,0); x+=UI_BT;
+	bt_flag_ctr->addComponent(bt_flag_constellation_art);	bt_flag_constellation_art->setPos(x,0); x+=UI_BT;
+	bt_flag_ctr->addComponent(bt_flag_azimuth_grid); 	bt_flag_azimuth_grid->setPos(x,0); x+=UI_BT;
+	bt_flag_ctr->addComponent(bt_flag_equator_grid);	bt_flag_equator_grid->setPos(x,0); x+=UI_BT;
+	bt_flag_ctr->addComponent(bt_flag_ground);			bt_flag_ground->setPos(x,0); x+=UI_BT;
+	bt_flag_ctr->addComponent(bt_flag_cardinals);		bt_flag_cardinals->setPos(x,0); x+=UI_BT;
+	bt_flag_ctr->addComponent(bt_flag_atmosphere);		bt_flag_atmosphere->setPos(x,0); x+=UI_BT;
+	bt_flag_ctr->addComponent(bt_flag_nebula_name);		bt_flag_nebula_name->setPos(x,0); x+=UI_BT;
+	bt_flag_ctr->addComponent(bt_flag_equatorial_mode);	bt_flag_equatorial_mode->setPos(x,0);x+=UI_BT;
+	bt_flag_ctr->addComponent(bt_flag_track);			bt_flag_track->setPos(x,0); x+=UI_BT;
+
+    x+= UI_PADDING;
+    if (core->FlagShowScriptBar)
+    {
+	    bt_flag_ctr->addComponent(bt_script);			bt_script->setPos(x,0); x+=UI_SCRIPT_BAR;
+	    bt_flag_ctr->addComponent(bt_flag_goto);		bt_flag_goto->setPos(x,0); x+=UI_BT;
+        x+= UI_PADDING;
+    }
+
+	bt_flag_ctr->addComponent(bt_flag_search);			bt_flag_search->setPos(x,0); x+=UI_BT;
+	bt_flag_ctr->addComponent(bt_flag_config);			bt_flag_config->setPos(x,0); x+=UI_BT;
+	bt_flag_ctr->addComponent(bt_flag_help);			bt_flag_help->setPos(x,0); x+=UI_BT;
+	bt_flag_ctr->addComponent(bt_flag_quit);			bt_flag_quit->setPos(x,0); x+=UI_BT;
 
 	bt_flag_ctr->setOnMouseInOutCallback(callback<void>(this, &stel_ui::bt_flag_ctrOnMouseInOut));
-    // Tony - changed size to accomodate extra components (search, edit, goto object)
-	bt_flag_ctr->reshape(0, core->screen_H-25, 15*25 - 1, 25);
+	bt_flag_ctr->reshape(0, core->screen_H-25, x-1, 25);
 
 	return bt_flag_ctr;
 
@@ -419,27 +435,47 @@ void stel_ui::bt_time_now_cb(void)
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-// Tony - script command line
-// void stel_ui::cbEditScriptInOut(void)
-// {
-// 	if (bt_script->getIsMouseOver())
-// 	{
-// 		bt_flag_help_lbl->setLabel(_("Script commander"));
-//         bt_script->setFocus();
-//     }
-// 	else
-//         bt_script->resetFocus();
-// }
-// 
-// // Tony - script command line
-// void stel_ui::cbEditScriptExecute(void)
-// {
-//      printf("Executing user command %s\n",bt_script->getText().c_str());
-//      if (!core->commander->execute_command(bt_script->getText()))
-// 		 bt_flag_help_lbl->setLabel(_("Invalid Script command"));
-// 	 else 
-// 		 bt_flag_help_lbl->setLabel(_("Script commander"));  // clear out last error message
-// }
+// Script edit command line
+
+void stel_ui::cbEditScriptInOut(void)
+{
+	if (bt_script->getIsMouseOver())
+	{
+		bt_flag_help_lbl->setLabel(_("Script commander"));
+        bt_script->setFocus();
+    }
+	else
+        bt_script->resetFocus();
+}
+
+void stel_ui::cbEditScriptExecute(void)
+{
+     printf("Executing script: %s\n",bt_script->getText().c_str());
+     
+     if (bt_script->getText() == "tony")
+     {
+        // this is a specified goto
+        // test out on M83
+	    int rahr = 13;
+        float ramin = 37.1;
+        int dedeg = -29;
+        float demin = -52.0;
+
+    	Vec3f XYZ;						// Cartesian equatorial position
+        float RaRad = hms_to_rad(rahr, (double)ramin);
+        float DecRad = dms_to_rad(dedeg, (double)demin);
+
+       // Calc the Cartesian coord with RA and DE
+       sphe_to_rect(RaRad,DecRad,XYZ);
+       core->navigation->move_to(XYZ, core->auto_move_duration, false, 1);
+                       
+     }
+     else
+     {
+        if (!core->commander->execute_command(bt_script->getText()))
+    		bt_flag_help_lbl->setLabel(_("Invalid Script command"));
+    }
+}
 
 ////////////////////////////////////////////////////////////////////////////////
 void stel_ui::cb(void)
@@ -459,7 +495,7 @@ void stel_ui::cb(void)
 	core->FlagConfig			= bt_flag_config->getState();
 	config_win->setVisible(core->FlagConfig);
 
-    // Tony search and goto buttons
+	core->navigation->set_flag_traking(bt_flag_track->getState());
 	core->FlagSearch			= bt_flag_search->getState();
 	search_win->setVisible(core->FlagSearch);
 	if (bt_flag_goto->getState() && core->selected_object)
@@ -513,12 +549,14 @@ void stel_ui::cbr(void)
 #else
 		bt_flag_help_lbl->setLabel(_("Quit [CMD + Q]"));
 #endif
-	if (bt_flag_search->getIsMouseOver())     // Tony
+	if (bt_flag_search->getIsMouseOver())
 		bt_flag_help_lbl->setLabel(_("Search for object"));
-// 	if (bt_script->getIsMouseOver())     // Tony
-// 		bt_flag_help_lbl->setLabel(_("Script commander"));
-	if (bt_flag_goto->getIsMouseOver())     // Tony
+	if (bt_script->getIsMouseOver())
+		bt_flag_help_lbl->setLabel(_("Script commander"));
+	if (bt_flag_goto->getIsMouseOver())
 		bt_flag_help_lbl->setLabel(_("Goto selected object [SPACE]"));
+	if (bt_flag_track->getIsMouseOver())
+		bt_flag_help_lbl->setLabel(_("Track object"));
 }
 
 void stel_ui::tcbr(void)
@@ -1116,9 +1154,8 @@ void stel_ui::gui_update_widgets(int delta_time)
 	bt_flag_help->setState(help_win->getVisible());
 	bt_flag_equatorial_mode->setState(core->navigation->get_viewing_mode()==VIEW_EQUATOR);
 	bt_flag_config->setState(config_win->getVisible());
-	// Tony - search and goto button
 	bt_flag_search->setState(search_win->getVisible());
-//	bt_flag_track->setState(core->navigation->get_flag_traking()); 
+	bt_flag_track->setState(core->navigation->get_flag_traking()); 
 	bt_flag_goto->setState(false); 
 
 	if (config_win->getVisible()) updateConfigForm();

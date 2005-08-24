@@ -733,19 +733,19 @@ void EditBox::draw(void)
 	glPopMatrix();
 }
 
+#define EDITBOX_CURSOR "\7"
 void EditBox::refreshLabel(void)
 {
-     if (!isEditing) label.setLabel("> " + text); 
+     if (!isEditing) label.setLabel("> " + text);
+     else
      {
         if (!blinkOn) label.setLabel("> " + text); 
         else
         {
             if (cursorPos == text.length()) // at end
-               label.setLabel("> " + text + "?"); 
-            else if (cursorPos == text.length()-1 ) // last one
-               label.setLabel("> " + text.substr(0,cursorPos) + "?"); 
+               label.setLabel("> " + text + EDITBOX_CURSOR); 
             else
-               label.setLabel("> " + text.substr(0,cursorPos) + "?" + text.substr(cursorPos+1)); 
+               label.setLabel("> " + text.substr(0,cursorPos) + EDITBOX_CURSOR + text.substr(cursorPos)); 
         }
      }
 }
@@ -790,6 +790,88 @@ void EditBox::resetFocus(void)
       resetAutoComplete(false);
 }
 
+int EditBox::onKey(Uint16 k, S_GUI_VALUE s)
+{
+    if (!isEditing) return 0;
+
+	if (s==S_GUI_PRESSED)
+    { 
+        if  (k==SDLK_RETURN)
+        {
+            resetAutoComplete(true);
+            addHistory(text);
+       		if (!onReturnKeyCallback.empty()) onReturnKeyCallback();
+       		clearText();
+       		resetFocus();
+            return 1;
+        }
+
+  		if (k == SDLK_TAB) resetAutoComplete(true);
+  		else if (k == SDLK_UP)
+  		{
+              text = prevHistory();
+              cursorPos = text.length();
+        }
+  		else if (k == SDLK_DOWN)
+  		{
+              text = nextHistory();
+              cursorPos = text.length();
+        }
+  		else if (k == SDLK_LEFT)  		
+  		{
+            if (SDL_GetModState() & KMOD_CTRL)
+                cursorToPrevWord();
+            else
+                if (cursorPos > 0) cursorPos--;
+        }
+        else if (k == SDLK_RIGHT)
+        {
+            if (SDL_GetModState() & KMOD_CTRL)
+                cursorToNextWord();
+            else
+              if (cursorPos < text.length()) cursorPos++;
+        }
+        else if (k == SDLK_HOME) cursorPos = 0;
+        else if (k == SDLK_END)  cursorPos = text.length();
+  		else if (k == SDLK_DELETE)
+  		{
+           resetAutoComplete(false);
+           if (cursorPos < text.length()) text = text.erase(cursorPos, 1);
+        }
+        else if (k == SDLK_BACKSPACE)
+        {
+           resetAutoComplete(false);
+           if (cursorPos > 0)
+           {
+               cursorPos--;
+               text = text.erase(cursorPos, 1);
+           }
+        }
+        else if (k == SDLK_ESCAPE) clearText(); 
+        else if ((k >= SDLK_0 && k <= SDLK_9) || (k >= SDLK_a && k <= SDLK_z) 
+        || (k >= 65 && k <= 90) || k == SDLK_SPACE || k == SDLK_UNDERSCORE)
+        {
+            resetAutoComplete(false);
+            string newtext = "";
+            newtext += text.substr(0, cursorPos);
+            newtext += k;
+            newtext += text.substr(cursorPos);
+            text = newtext;
+            cursorPos++;
+        }
+        else
+            return 0;
+
+       if (!text.empty()) testAutoComplete();
+        return 1;
+    }
+
+    return 0;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+// EditBox::History
+
 void EditBox::resetHistory(void)
 {
     historyPos = 0;
@@ -817,6 +899,8 @@ string EditBox::nextHistory(void)
      return history[historyPos];
 }
 
+////////////////////////////////////////////////////////////////////////////////
+// EditBox::AutoCompete
 
 void EditBox::testAutoComplete(void)
 {
@@ -874,80 +958,41 @@ void EditBox::resetAutoComplete(bool keepChanges)
       autoCompleteReady = false;
 }
 
-int EditBox::onKey(Uint16 k, S_GUI_VALUE s)
+////////////////////////////////////////////////////////////////////////////////
+// EditBox::Cursor Previous and next words
+
+void EditBox::cursorToNextWord(void)
 {
-    if (!isEditing) return 0;
-
-	if (s==S_GUI_PRESSED)
-    { 
-        if  (k==SDLK_RETURN)
+    while (cursorPos < text.length())
+    {
+        cursorPos++;  
+        if (text[cursorPos] == ' ')
         {
-            resetAutoComplete(true);
-            addHistory(text);
-       		if (!onReturnKeyCallback.empty()) onReturnKeyCallback();
-       		clearText();
-       		resetFocus();
-            return 1;
+            if (cursorPos + 1 < text.length() && text[cursorPos+1] != ' ')
+            {
+               cursorPos++;
+               break;
+               }
         }
-
-  		if (k == SDLK_TAB) resetAutoComplete(true);
-  		else if (k == SDLK_UP)
-  		{
-              text = prevHistory();
-              cursorPos = text.length();
-        }
-  		else if (k == SDLK_DOWN)
-  		{
-              text = nextHistory();
-              cursorPos = text.length();
-        }
-  		else if (k == SDLK_LEFT)
-  		{
-              if (cursorPos > 0) cursorPos--;
-        }
-        else if (k == SDLK_RIGHT)
-        {
-              if (cursorPos < text.length()) cursorPos++;
-        }
-        else if (k == SDLK_HOME) cursorPos = 0;
-        else if (k == SDLK_END)  cursorPos = text.length();
-  		else if (k == SDLK_DELETE)
-  		{
-           resetAutoComplete(false);
-           if (cursorPos < text.length()) text = text.erase(cursorPos, 1);
-        }
-        else if (k == SDLK_BACKSPACE)
-        {
-           resetAutoComplete(false);
-           if (cursorPos > 0)
-           {
-               cursorPos--;
-               text = text.erase(cursorPos, 1);
-           }
-        }
-        else if (k == SDLK_ESCAPE) clearText(); 
-        else if ((k >= SDLK_0 && k <= SDLK_9) || (k >= SDLK_a && k <= SDLK_z) 
-        || (k >= 65 && k <= 90) || k == SDLK_SPACE || k == SDLK_UNDERSCORE)
-        {
-            resetAutoComplete(false);
-            string newtext = "";
-            newtext += text.substr(0, cursorPos);
-            newtext += k;
-            newtext += text.substr(cursorPos);
-            text = newtext;
-            cursorPos++;
-        }
-        else
-            return 0;
-        
-        if (!text.empty()) testAutoComplete();
-        return 1;
     }
-
-    return 0;
 }
 
-// End of EditBox
+void EditBox::cursorToPrevWord(void)
+{
+    while (cursorPos > 0)
+    {
+        cursorPos--;
+        // cater for the cursor at the start of the word already 
+        while (cursorPos > 0 && text[cursorPos] == ' ' && text[cursorPos-1] == ' ')
+              cursorPos--;
+
+        if (text[cursorPos] == ' ' && text[cursorPos+1] != ' ')
+        {
+            cursorPos++;
+            break;
+        }
+    }
+}
 
 /////////////////////////////// LabeledButton //////////////////////////////////
 // Button with text on it
