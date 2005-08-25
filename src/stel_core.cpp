@@ -1288,12 +1288,19 @@ void stel_core::auto_zoom_out(float move_duration, bool full)
 }
 
 // this really belongs elsewhere
-void stel_core::set_sky_culture(string _culture_dir)
+int stel_core::set_sky_culture(string _culture_dir)
 {
-	if(SkyCulture == _culture_dir) return;
+	if(SkyCulture == _culture_dir) return 2;
+
+	// make sure culture definition exists before attempting
+	if( !skyloc->test_sky_culture_directory(_culture_dir) ) {
+		cout << _("Invalid sky culture directory: ") << _culture_dir << endl;
+		return 0;
+	}
+
 	SkyCulture = _culture_dir;
 
-	if(!asterisms) return;
+	if(!asterisms) return 3;
 
 	// Store state
 	bool flagArt = asterisms->get_flag_art();
@@ -1320,6 +1327,8 @@ void stel_core::set_sky_culture(string _culture_dir)
 	asterisms->set_flag_art(flagArt);
 	asterisms->set_flag_lines(flagLines);
 	asterisms->set_flag_names(flagNames);
+	return 1;
+
 }
 
 
