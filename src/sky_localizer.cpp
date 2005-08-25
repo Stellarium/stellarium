@@ -111,6 +111,10 @@ void Sky_localizer::init_sky_locales() {
 }
 
 
+// is this a valid culture directory?
+bool Sky_localizer::test_sky_culture_directory(string _culture_dir) {
+	return (dir_to_name[_culture_dir] != "");
+}
 
 // returns newline delimited list of human readable culture names
 string Sky_localizer::get_sky_culture_list(void){

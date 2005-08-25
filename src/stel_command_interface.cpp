@@ -82,17 +82,19 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 
   if(command == "flag") {
 
-    // TODO: loop if want to allow that syntax
-
-    bool val;
-	status = set_flag( args.begin()->first, args.begin()->second, val, trusted);
+	  // TODO: loop if want to allow that syntax
+	  if(args.begin() != args.end()) {  
+	  
+		  bool val;
+		  status = set_flag( args.begin()->first, args.begin()->second, val, trusted);
 	
-    // rewrite command for recording so that actual state is known (rather than "toggle")
-    if(args.begin()->second == "toggle") {
-      std::ostringstream oss;
-      oss << command << " " << args.begin()->first << " " << val;
-      commandline = oss.str();
-    }
+		  // rewrite command for recording so that actual state is known (rather than "toggle")
+		  if(args.begin()->second == "toggle") {
+			  std::ostringstream oss;
+			  oss << command << " " << args.begin()->first << " " << val;
+			  commandline = oss.str();
+		  }
+	  } else status = 0;
 
   }  else if (command == "wait" && args["duration"]!="") {
 
@@ -116,7 +118,7 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
       if(stcore->MoonScale<0) stcore->MoonScale=1;  // negative numbers reverse drawing!
       if (stcore->FlagMoonScaled) stcore->ssystem->get_moon()->set_sphere_scale(stcore->MoonScale);
     }
-    else if(args["sky_culture"]!="") stcore->set_sky_culture(args["sky_culture"]);
+    else if(args["sky_culture"]!="") status = stcore->set_sky_culture(args["sky_culture"]);
     else if(args["sky_locale"]!="") stcore->set_sky_locale(args["sky_locale"]);
     else if(args["star_mag_scale"]!="") stcore->StarMagScale = str_to_double(args["star_mag_scale"]);
     else if(args["star_scale"]!="") {
