@@ -179,9 +179,12 @@ string Sky_localizer::clean_sky_locale_name(string _locale) {
 	if( _locale == "system_default" ) {
 		// read current ui locale
 		char *tmp = setlocale(LC_MESSAGES, "");
+
+		if (!tmp) return "eng";
+
 		string ltmp(tmp);
 		string language = ltmp.substr(0,ltmp.find('_'));
-		//		printf("Language code is %s\n", language.c_str());
+		// printf("Language code is %s\n", language.c_str());
 
 		// temporary - TODO: this hash should be created from a text file
 		stringHash_t locale_to_lang;
