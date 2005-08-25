@@ -43,22 +43,29 @@ int CommandInterface::parse_command(string command_line, string &command, string
    transform(command.begin(), command.end(), command.begin(), ::tolower);
 
    while(commandstr >> key >> value ) {
-     if(value[0] == '"') {
-       // pull in all text inside quotes
-       value = value.substr(1, value.length() -1 );
+	   if(value[0] == '"') {
+		   // pull in all text inside quotes
 
-       while(1){
-	 nextc = commandstr.get();
-	 if( nextc == '"' || !commandstr.good()) break;
-	 value.push_back( nextc );
-       }
-     } 
+		   if(value[value.length()-1] == '"') {
+			   // one word in quotes
+			   value = value.substr(1, value.length() -2 );
+		   } else {
+			   // multiple words in quotes
+			   value = value.substr(1, value.length() -1 );
 
-     transform(key.begin(), key.end(), key.begin(), ::tolower);
-     arguments[key] = value;
-
+			   while(1){
+				   nextc = commandstr.get();
+				   if( nextc == '"' || !commandstr.good()) break;
+				   value.push_back( nextc );
+			   }
+		   }
+	   } 
+	   
+	   transform(key.begin(), key.end(), key.begin(), ::tolower);
+	   arguments[key] = value;
+	   
    }
-
+   
 
 #ifdef PARSE_DEBUG
 
