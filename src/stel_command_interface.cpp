@@ -552,6 +552,10 @@ else if(command=="script") {
 		  else  stcore->ssystem->end_trails();
 
 		  stcore->set_sky_locale(stcore->SkyLocale);
+
+		  string temp = stcore->SkyCulture;  // fool caching in below method
+		  stcore->SkyCulture = "";
+		  stcore->set_sky_culture(temp);
 		  
 		  system( ( stcore->DataDir + "script_load_config " ).c_str() );
 

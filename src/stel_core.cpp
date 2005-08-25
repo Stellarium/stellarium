@@ -1290,11 +1290,11 @@ void stel_core::auto_zoom_out(float move_duration, bool full)
 // this really belongs elsewhere
 void stel_core::set_sky_culture(string _culture_dir)
 {
-	assert(asterisms);
-	
 	if(SkyCulture == _culture_dir) return;
 	SkyCulture = _culture_dir;
-	
+
+	if(!asterisms) return;
+
 	// Store state
 	bool flagArt = asterisms->get_flag_art();
 	bool flagLines = asterisms->get_flag_lines();
