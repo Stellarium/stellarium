@@ -101,7 +101,7 @@ public:
 	void auto_zoom_out(float move_duration = 1.f, bool full = 0);
 	
 	//! Set the sky culture
-	void set_sky_culture(string _culture_dir);
+	int set_sky_culture(string _culture_dir);
 	
 	//! Set the locale type
 	void set_sky_locale(string _locale);
