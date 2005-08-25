@@ -3,26 +3,26 @@
 # Traduction anglaise du package stellarium.
 # Copyright (C) 2004, 2005 Free Software Foundation, Inc.
 # This file is distributed under the same license as the stellarium package.
-# Fabien ChÃ©reau, 2005.
-# Fabien ChÃ©reau, 2005.
-# Fabien ChÃ©reau, 2005.
-# Fabien ChÃ©reau, 2005.
-# Fabien ChÃ©reau, 2005.
-# Fabien ChÃ©reau, 2005.
-# Fabien ChÃ©reau, 2005.
+# Fabien Chéreau, 2005.
+# Fabien Chéreau, 2005.
+# Fabien Chéreau, 2005.
+# Fabien Chéreau, 2005.
+# Fabien Chéreau, 2005.
+# Fabien Chéreau, 2005.
+# Fabien Chéreau, 2005.
 #  <stellarium@free.fr>, 2004.
-# Fabien ChÃ©reau, 2005.
+# Fabien Chéreau, 2005.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-08-24 23:22+0200\n"
-"PO-Revision-Date: 2005-08-24 23:22+0200\n"
-"Last-Translator: Fabien ChÃ©reau\n"
+"PO-Revision-Date: 2005-08-25 16:24-0700\n"
+"Last-Translator: Fabien Chéreau\n"
 "Language-Team:  <de@li.org>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=ISO-8859-1\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: KBabel 1.10\n"
@@ -34,7 +34,7 @@ msgid ""
 "on stellarium web page : http://stellarium.sourceforge.net\n"
 "\n"
 msgstr ""
-"TÃ©lÃ©chargez la derniÃ¨re version et envoyez vos rapports de \n"
+"Téléchargez la dernière version et envoyez vos rapports de \n"
 "bogues sur la page web de stellarium : http://stellarium.sourceforge.net\n"
 "\n"
 
@@ -68,27 +68,27 @@ msgid ""
 "You may fully install the software (type \"make install\" on POSIX systems)\n"
 "or launch the application from the stellarium package directory.\n"
 msgstr ""
-"ERREUR : Je ne peux pas trouver les rÃ©pertoires de donnÃ©es (data) dans :\n"
+"ERREUR : Je ne peux pas trouver les répertoires de données (data) dans :\n"
 "%s/ ni dans ./ ni dans ../\n"
-"Vous pouvez installer complÃ¨tement le programme (tapez \"make install\" sur "
-"un systÃ¨me POSIX)\n"
-"ou lancer l'application du rÃ©pertoire oÃ¹ est installÃ© stellarium.\n"
+"Vous pouvez installer complètement le programme (tapez \"make install\" sur "
+"un système POSIX)\n"
+"ou lancer l'application du répertoire où est installé stellarium.\n"
 
 #: src/main.cpp:169
 #, c-format
 msgid "> Found data files in %s : local version.\n"
-msgstr "> TrouvÃ© les fichiers de donnÃ©e dans %s : version locale.\n"
+msgstr "> Trouvé les fichiers de donnée dans %s : version locale.\n"
 
 #: src/main.cpp:187
 #, c-format
 msgid "Will create config files in %s\n"
-msgstr "Va crÃ©er les fichiers de config dans %s\n"
+msgstr "Va créer les fichiers de config dans %s\n"
 
 #. Maybe the directory is not created so try to create it
 #: src/main.cpp:195
 #, c-format
 msgid "Try to create directory %s\n"
-msgstr "Essai de crÃ©er le rÃ©pertoire %s\n"
+msgstr "Essai de créer le répertoire %s\n"
 
 #: src/main.cpp:204
 #, c-format
@@ -97,9 +97,9 @@ msgid ""
 "If the directory %s is missing please create it by hand.\n"
 "If not, check that you have access to %s\n"
 msgstr ""
-"Ne peux pas crÃ©er le fichier %sconfig.ini\n"
-"Si le rÃ©pertoire %s est manquant, crÃ©ez le Ã  la main SVP..\n"
-"Sinon, vÃ©rifiez que vous avez accÃ¨s Ã  %s\n"
+"Ne peux pas créer le fichier %sconfig.ini\n"
+"Si le répertoire %s est manquant, créez le à la main SVP..\n"
+"Sinon, vérifiez que vous avez accès à %s\n"
 
 #. Default labels - if sky locale specified, loaded later
 #. Improvement for gettext translation
@@ -122,7 +122,7 @@ msgstr "O"
 #: src/constellation_mgr.cpp:90
 #, c-format
 msgid "ERROR on line %d of %s\n"
-msgstr "ERREUR Ã  la ligne %d de %s\n"
+msgstr "ERREUR à la ligne %d de %s\n"
 
 #. Draw loading bar
 #. Tony - added "+1" to ensure art finsihes at last entry
@@ -146,7 +146,7 @@ msgstr ""
 "AD : %s\n"
 "DE : %s\n"
 "Magnitude : %.2f\n"
-"Distance : %s AnnÃ©es LumiÃ¨re\n"
+"Distance : %s Années Lumière\n"
 "Hip : %.4d\n"
 
 #: src/hip_star.cpp:73 src/hip_star.cpp:74
@@ -157,14 +157,14 @@ msgstr "%s: mag %.1f %s"
 #: src/hip_star_mgr.cpp:80
 #, c-format
 msgid "Loading Hipparcos star data "
-msgstr "Chargement du catalogue d'Ã©toiles Hipparcos "
+msgstr "Chargement du catalogue d'étoiles Hipparcos "
 
 #. Draw loading bar
 #. Tony - added "+1"
 #: src/hip_star_mgr.cpp:117
 #, c-format
 msgid "Loading Hipparcos catalog: %d/%d"
-msgstr "Chargement du catalogue d'Ã©toiles Hipparcos : %d/%d"
+msgstr "Chargement du catalogue d'étoiles Hipparcos : %d/%d"
 
 #. RA=Right ascention, DE=Declinaison, Mag=Magnitude
 #: src/nebula.cpp:51
@@ -188,7 +188,7 @@ msgstr "%s: mag %.1f"
 #: src/nebula_mgr.cpp:51
 #, c-format
 msgid "Loading nebulas data "
-msgstr "Chargement des donnÃ©es NÃ©buleuses "
+msgstr "Chargement des données Nébuleuses "
 
 #: src/nebula_mgr.cpp:70
 #, c-format
@@ -198,7 +198,7 @@ msgstr "(%d objets du ciel profond)...\n"
 #: src/nebula_mgr.cpp:78
 #, c-format
 msgid "Loading Nebula Data: %d/%d"
-msgstr "Chargement des donnÃ©es NÃ©buleuses : %d/%d"
+msgstr "Chargement des données Nébuleuses : %d/%d"
 
 #: src/observator.cpp:62
 #, c-format
@@ -245,7 +245,7 @@ msgstr "Ne reconnait pas le code language "
 
 #: src/sky_localizer.cpp:198
 msgid ". Defaulting to english sky labels\n"
-msgstr " Va utiliser les noms anglais par dÃ©faut\n"
+msgstr " Va utiliser les noms anglais par défaut\n"
 
 #: src/stel_ui.cpp:153
 msgid "Message"
@@ -289,11 +289,11 @@ msgstr "Points Cardinaux [Q]"
 
 #: src/stel_ui.cpp:537
 msgid "Atmosphere [A]"
-msgstr "AtmosphÃ¨re [A]"
+msgstr "Atmosphère [A]"
 
 #: src/stel_ui.cpp:539
 msgid "Nebulas [N]"
-msgstr "NÃ©buleuses [N]"
+msgstr "Nébuleuses [N]"
 
 #: src/stel_ui.cpp:541
 msgid "Help [H]"
@@ -305,7 +305,7 @@ msgstr "Monture Equatorial/Altazimutale [ENTER]"
 
 #: src/stel_ui.cpp:545
 msgid "Configuration window"
-msgstr "FenÃªtre de configuration"
+msgstr "Fenêtre de configuration"
 
 #: src/stel_ui.cpp:548
 msgid "Quit [CTRL + Q]"
@@ -321,7 +321,7 @@ msgstr "Chercher un objet"
 
 #: src/stel_ui.cpp:557
 msgid "Goto selected object [SPACE]"
-msgstr "Va Ã  l'objet sÃ©lectionnÃ© [ESPACE]"
+msgstr "Va à l'objet sélectionné [ESPACE]"
 
 #: src/stel_ui.cpp:559
 msgid "Track object"
@@ -333,11 +333,11 @@ msgstr "Ralenti le Temps [J]"
 
 #: src/stel_ui.cpp:567
 msgid "Real Time Speed [K]"
-msgstr "Vitesse Temps RÃ©el [K]"
+msgstr "Vitesse Temps Réel [K]"
 
 #: src/stel_ui.cpp:569
 msgid "Increase Time Speed [L]"
-msgstr "AccÃ©lÃ¨re le Temps [L]"
+msgstr "Accélère le Temps [L]"
 
 #: src/stel_ui.cpp:571
 msgid "Return to Current Time"
@@ -349,7 +349,7 @@ msgid ""
 "and comments to us at: http://stellarium.sourceforge.net\n"
 "\n"
 msgstr ""
-"TÃ©lÃ©chargez les mise Ã  jour et envoyez vos rapports de \n"
+"Téléchargez les mise à jour et envoyez vos rapports de \n"
 "bogues sur : http://stellarium.sourceforge.net\n"
 "\n"
 
@@ -391,37 +391,37 @@ msgid ""
 "CTRL + S : Take a screenshot\n"
 "CTRL + R : Toggle script recording\n"
 msgstr ""
-"4 Directions     : DÃ©placement RA/DE\n"
+"4 Directions     : Déplacement RA/DE\n"
 "Page Up/Down     : Zoom\n"
 "CTRL+Up/Down     : Zoom\n"
 "Clic Gauche      : Selectionne objet\n"
-"Clic Droit       : DÃ©selectionne\n"
-"CTRL+Clic Gauche : DÃ©selectionne\n"
-"ESPACE : Centre sur l'objet sÃ©lectionnÃ©\n"
+"Clic Droit       : Déselectionne\n"
+"CTRL+Clic Gauche : Déselectionne\n"
+"ESPACE : Centre sur l'objet sélectionné\n"
 "ENTER : Monture Equatoriale/Altazimuthale\n"
-"CTRL + S : Prend une photo d'Ã©cran\n"
+"CTRL + S : Prend une photo d'écran\n"
 "C   : Dessin des Constellations\n"
 "V   : Noms des Constellations\n"
 "R   : Images des Constellations\n"
 "E   : Grille Equatoriale\n"
 "Z   : Grille Azimuthale\n"
-"N   : NÃ©buleuses\n"
-"P   : Mise en valeur des PlanÃ¨tes\n"
+"N   : Nébuleuses\n"
+"P   : Mise en valeur des Planètes\n"
 "G   : Sol\n"
 "F   : Brume\n"
 "Q   : Points Cardinaux\n"
-"A   : AtmosphÃ¨re\n"
+"A   : Atmosphère\n"
 "H   : Aide\n"
-"4   : Ligne de l'Ã©cliptique\n"
-"5   : Ligne de l'Ã©quateur cÃ©leste\n"
+"4   : Ligne de l'écliptique\n"
+"5   : Ligne de l'équateur céleste\n"
 "T   : Suivi d'objet\n"
 "S   : Etoiles\n"
 "8   : Temps actuel\n"
-"9   : Active le contrÃ´le des Ã©toiles filantes\n"
+"9   : Active le contrôle des étoiles filantes\n"
 "I   : A propos de Stellarium\n"
 "M   : Menu textuel\n"
-"F1  : Alterne mode plein Ã©cran si possible.\n"
-"CTRL + S : Prend une capture d'Ã©cran\n"
+"F1  : Alterne mode plein écran si possible.\n"
+"CTRL + S : Prend une capture d'écran\n"
 "CTRL + R : Active l'enregistrement de scripts\n"
 
 #: src/stel_ui.cpp:645
@@ -438,7 +438,7 @@ msgstr "Aide"
 
 #: src/stel_ui.cpp:959
 msgid "Command recording stopped."
-msgstr "Enregistrement des commandes arrÃªtÃ©."
+msgstr "Enregistrement des commandes arrêté."
 
 #: src/stel_ui.cpp:967
 msgid "Recording commands to script file:\n"
@@ -446,7 +446,7 @@ msgstr "Enregistre les commandes sur le fichier script:\n"
 
 #: src/stel_ui.cpp:969
 msgid "Hit CTRL-R again to stop.\n"
-msgstr "Appuyez sur CTRL-R Ã  nouveau pour arrÃªter.\n"
+msgstr "Appuyez sur CTRL-R à nouveau pour arrêter.\n"
 
 #: src/stel_ui.cpp:973
 msgid "Error: Unable to open script file to record commands."
@@ -463,7 +463,7 @@ msgstr "Etoiles"
 
 #: src/stel_ui_conf.cpp:52
 msgid "Star Names. Up to mag :"
-msgstr "Noms des Ã©toiles. +- :"
+msgstr "Noms des étoiles. +- :"
 
 #: src/stel_ui_conf.cpp:65
 msgid "Star Twinkle. Amount :"
@@ -479,15 +479,15 @@ msgstr "Noms des Constellations"
 
 #: src/stel_ui_conf.cpp:92
 msgid "Selected Constellation Only"
-msgstr "Constellation sÃ©lectionnÃ©e seulement"
+msgstr "Constellation sélectionnée seulement"
 
 #: src/stel_ui_conf.cpp:105
 msgid "Nebulas Names. Up to mag :"
-msgstr "Noms des nÃ©buleuses. +- :"
+msgstr "Noms des nébuleuses. +- :"
 
 #: src/stel_ui_conf.cpp:122
 msgid "Planets"
-msgstr "PlanÃ¨tes"
+msgstr "Planètes"
 
 #: src/stel_ui_conf.cpp:127
 msgid "Moon Scale"
@@ -495,7 +495,7 @@ msgstr "Grossissement de la lune"
 
 #: src/stel_ui_conf.cpp:134
 msgid "Planets Hints"
-msgstr "Infos PlanÃ¨tes"
+msgstr "Infos Planètes"
 
 #: src/stel_ui_conf.cpp:145
 msgid "Equatorial Grid"
@@ -507,7 +507,7 @@ msgstr "Grille Azimutale"
 
 #: src/stel_ui_conf.cpp:155
 msgid "Equator Line"
-msgstr "Equateur CÃ©leste"
+msgstr "Equateur Céleste"
 
 #: src/stel_ui_conf.cpp:160
 msgid "Ecliptic Line"
@@ -523,7 +523,7 @@ msgstr "Points Cardinaux"
 
 #: src/stel_ui_conf.cpp:181
 msgid "Atmosphere"
-msgstr "AtmosphÃ¨re"
+msgstr "Atmosphère"
 
 #: src/stel_ui_conf.cpp:186
 msgid "Fog"
@@ -531,7 +531,7 @@ msgstr "Brume"
 
 #: src/stel_ui_conf.cpp:191 src/stel_ui_conf.cpp:334
 msgid "Save as default"
-msgstr "Enregistre comme dÃ©faut"
+msgstr "Enregistre comme défaut"
 
 #: src/stel_ui_conf.cpp:203
 msgid " Current Time :"
@@ -543,7 +543,7 @@ msgstr "  Zone horaire :"
 
 #: src/stel_ui_conf.cpp:216
 msgid " Using System Default Time Zone"
-msgstr "  Utilise la zone horaire par dÃ©faut"
+msgstr "  Utilise la zone horaire par défaut"
 
 #: src/stel_ui_conf.cpp:227
 msgid " Time speed : "
@@ -557,7 +557,7 @@ msgid ""
 msgstr ""
 "Les touches J et L augmentent et diminuent\n"
 "   la vitesse du temps.\n"
-"touche K pour revenir en vitesse temps rÃ©elle."
+"touche K pour revenir en vitesse temps réelle."
 
 #: src/stel_ui_conf.cpp:251
 msgid "Longitude : "
@@ -585,7 +585,7 @@ msgstr "Mode de vue disque"
 
 #: src/stel_ui_conf.cpp:296
 msgid " Screen Resolution :"
-msgstr " Resolution Ã©cran  :"
+msgstr " Resolution écran  :"
 
 #: src/stel_ui_conf.cpp:300
 msgid "Restart program for"
@@ -597,7 +597,7 @@ msgstr "pour activer le changement."
 
 #: src/stel_ui_conf.cpp:325
 msgid "For unlisted screen resolution, edit the file :"
-msgstr "Pour d'autres rÃ©solutions, Ã©diter le fichier :"
+msgstr "Pour d'autres résolutions, éditer le fichier :"
 
 #: src/stel_ui_conf.cpp:345
 msgid " Choose landscapes :"
@@ -609,7 +609,7 @@ msgstr "Sauvez les options dans l'onglet \"Location\""
 
 #: src/stel_ui_conf.cpp:363
 msgid "to save current landscape as the default landscape."
-msgstr "pour enregistrer le paysage courant comme dÃ©faut."
+msgstr "pour enregistrer le paysage courant comme défaut."
 
 #: src/stel_ui_conf.cpp:371
 msgid "Date & Time"
@@ -625,7 +625,7 @@ msgstr "Paysages"
 
 #: src/stel_ui_conf.cpp:374
 msgid "Video"
-msgstr "VidÃ©o"
+msgstr "Vidéo"
 
 #: src/stel_ui_conf.cpp:375
 msgid "Rendering"
@@ -662,7 +662,7 @@ msgstr "ex. M83"
 
 #: src/stel_ui_conf.cpp:482
 msgid "Planet/Moon"
-msgstr "PlanÃ¨te/Lune"
+msgstr "Planète/Lune"
 
 #: src/stel_ui_conf.cpp:486
 msgid "eg. Pluto or Io"
@@ -670,11 +670,11 @@ msgstr "ex. Pluton ou Io"
 
 #: src/stel_ui_conf.cpp:501
 msgid "Nebula"
-msgstr "NÃ©buleuse"
+msgstr "Nébuleuse"
 
 #: src/stel_ui_conf.cpp:502
 msgid "Planets & Moons"
-msgstr "PlanÃ¨tes & Lunes"
+msgstr "Planètes & Lunes"
 
 #: src/stel_ui_conf.cpp:672
 msgid "Saving rendering options in file "
@@ -691,7 +691,7 @@ msgstr " dans le fichier "
 #: src/solarsystem.cpp:72
 #, c-format
 msgid "Loading Solar System data...\n"
-msgstr "Chargement des donnÃ©es SystÃ¨me Solaire...\n"
+msgstr "Chargement des données Système Solaire...\n"
 
 #: src/stel_core.cpp:485
 #, c-format
@@ -699,9 +699,9 @@ msgid ""
 "The current config file is from a previous version (>=0.6.0).\n"
 "Previous options will be imported in the new config file.\n"
 msgstr ""
-"Le fichier de configuration trouvÃ© provient d'une version prÃ©cÃ©dente "
+"Le fichier de configuration trouvé provient d'une version précédente "
 "(>=0.6.0).\n"
-"Les options prÃ©cÃ©dentes vont Ãªtre importÃ©es dans le nouveau fichier de "
+"Les options précédentes vont être importées dans le nouveau fichier de "
 "configuration.\n"
 
 #. The config file is too old to try an importation
@@ -712,9 +712,9 @@ msgid ""
 "imported (%s).\n"
 "It will be replaced by the default config file.\n"
 msgstr ""
-"Le fichier de configuration trouvÃ© provient d'une version trop ancienne pour "
-"Ãªtre importÃ© (%s).\n"
-"Il va Ãªtre remplacÃ© par le fichier de configuration par dÃ©faut.\n"
+"Le fichier de configuration trouvé provient d'une version trop ancienne pour "
+"être importé (%s).\n"
+"Il va être remplacé par le fichier de configuration par défaut.\n"
 
 #: src/stel_core.cpp:527
 msgid "Loading configuration file "
@@ -736,7 +736,7 @@ msgstr "Enregistre le Temps "
 
 #: src/stel_ui_tuiconf.cpp:87
 msgid "General "
-msgstr "GÃ©nÃ©ral "
+msgstr "Général "
 
 #: src/stel_ui_tuiconf.cpp:88
 msgid "Stars "
@@ -778,11 +778,11 @@ msgstr "Zone Horaire: "
 
 #: src/stel_ui_tuiconf.cpp:117
 msgid "Preset Sky Time: "
-msgstr "Temps du Ciel prÃ©dÃ©fini: "
+msgstr "Temps du Ciel prédéfini: "
 
 #: src/stel_ui_tuiconf.cpp:119
 msgid "Sky Time At Start-up: "
-msgstr "Temps du Ciel au dÃ©marrage: "
+msgstr "Temps du Ciel au démarrage: "
 
 #: src/stel_ui_tuiconf.cpp:123
 msgid "Time Display Format: "
@@ -817,11 +817,11 @@ msgstr "Non"
 
 #: src/stel_ui_tuiconf.cpp:160
 msgid "Star Magnitude Multiplier: "
-msgstr "Multiplieur de Magnitude des Ã‰toiles: "
+msgstr "Multiplieur de Magnitude des Étoiles: "
 
 #: src/stel_ui_tuiconf.cpp:162
 msgid "Maximum Magnitude to Label: "
-msgstr "Magnitude Maximum Ã  Labelliser: "
+msgstr "Magnitude Maximum à Labelliser: "
 
 #: src/stel_ui_tuiconf.cpp:164
 msgid "Twinkling: "
@@ -838,7 +838,7 @@ msgstr "Zoom Manuel: "
 
 #: src/stel_ui_tuiconf.cpp:184
 msgid "Object Sizing Rule: "
-msgstr "RÃ¨gle de Taille des Objets: "
+msgstr "Règle de Taille des Objets: "
 
 #: src/stel_ui_tuiconf.cpp:184
 msgid "Point"
@@ -854,11 +854,11 @@ msgstr "Ratio taille/magnitude: "
 
 #: src/stel_ui_tuiconf.cpp:192
 msgid "Milky Way intensity: "
-msgstr "LuminositÃ© de la Voie LactÃ©e"
+msgstr "Luminosité de la Voie Lactée"
 
 #: src/stel_ui_tuiconf.cpp:196
 msgid "Zoom duration: "
-msgstr "DurÃ©e du zoom"
+msgstr "Durée du zoom"
 
 #. 6. Scripts
 #: src/stel_ui_tuiconf.cpp:202
@@ -872,20 +872,20 @@ msgstr "Scripts CD/DVD:"
 #. 7. Administration
 #: src/stel_ui_tuiconf.cpp:216
 msgid "Load Default Configuration: "
-msgstr "Chargement de la configuration par dÃ©faut: "
+msgstr "Chargement de la configuration par défaut: "
 
 #: src/stel_ui_tuiconf.cpp:218
 msgid "Save Current Configuration as Default: "
-msgstr "Utilise la configuration courante comme dÃ©faut"
+msgstr "Utilise la configuration courante comme défaut"
 
 #: src/stel_ui_tuiconf.cpp:220
 msgid "Update me via Internet: "
-msgstr "Mise Ã  jour via Internet"
+msgstr "Mise à jour via Internet"
 
 #: src/stel_ui_tuiconf.cpp:234
 msgid "N-S Centering Offset: "
-msgstr "DÃ©calage du centrage N-S"
+msgstr "Décalage du centrage N-S"
 
 #: src/stel_ui_tuiconf.cpp:238
 msgid "E-W Centering Offset: "
-msgstr "DÃ©calage du centrage E-O"
+msgstr "Décalage du centrage E-O"

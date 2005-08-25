@@ -245,6 +245,9 @@ int main(int argc, char **argv)
 	bindtextdomain (PACKAGE, LOCALEDIR);
 	textdomain (PACKAGE);
 
+	// TODO: move to utf8
+	bind_textdomain_codeset(PACKAGE, "iso-8859-1");
+
 #endif
 	
 	// Check the command line
