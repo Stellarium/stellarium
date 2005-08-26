@@ -89,7 +89,7 @@ bool Nebula::read(const string& record)
     // Replace the "_" with " "
     for (string::size_type i=0;i<name.length();++i)
 	{
-		if (name[i]=='_') longname[i]=' ';
+		if (name[i]=='_') name[i]=' ';
 	}
 
     for (string::size_type i=0;i<longname.length();++i)
