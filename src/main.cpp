@@ -238,7 +238,7 @@ int main(int argc, char **argv)
 //Tony - added "&& !defined(WIN32)"
 #if !defined(MACOSX) && !defined(WIN32)
 	// TESTING ONLY
-	//	setenv("LC_ALL", "fr_FR", 1);
+	// setenv("LC_ALL", "fr_FR", 1);
 
 	setlocale (LC_CTYPE, "");
 	setlocale (LC_MESSAGES, "");
