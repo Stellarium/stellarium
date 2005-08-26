@@ -84,13 +84,17 @@ bool Nebula::read(const string& record)
 	
 	std::istringstream istr(record);
     //Tony - added longname
-	if (!(istr >> NGC_nb >> type >> rahr >> ramin >> dedeg >> demin >> mag >> tex_angular_size >> tex_rotation >> longname >> tex_name >> credit)) return false ;
+	if (!(istr >> NGC_nb >> type >> rahr >> ramin >> dedeg >> demin >> mag >> tex_angular_size >> tex_rotation >> name >> longname >> tex_name >> credit)) return false ;
 
     // Replace the "_" with " "
+    for (string::size_type i=0;i<name.length();++i)
+	{
+		if (name[i]=='_') longname[i]=' ';
+	}
+
     for (string::size_type i=0;i<longname.length();++i)
 	{
 		if (longname[i]=='_') longname[i]=' ';
-        if (longname[i]=='-') name = longname.substr(0,i);  //Tony - added name (ie M81) extraction from longname
 	}
 
     credit = string("Credit: ") + credit;	
