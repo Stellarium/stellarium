@@ -1218,7 +1218,7 @@ stel_object * stel_core::clever_find(int x, int y) const
 }
 
 // Go and zoom to the selected object.
-void stel_core::auto_zoom_in(float move_duration)
+void stel_core::auto_zoom_in(float move_duration, bool allow_manual_zoom)
 {
 	float manual_move_duration;
 
@@ -1233,7 +1233,7 @@ void stel_core::auto_zoom_in(float move_duration)
 	  manual_move_duration = move_duration*.66f;
 	}
 
-	if( FlagManualZoom ) {
+	if( allow_manual_zoom && FlagManualZoom ) {
 	  // if manual zoom mode, user can zoom in incrementally
 	  float newfov = projection->get_fov()*0.5f;
 	  projection->zoom_to(newfov, manual_move_duration);
