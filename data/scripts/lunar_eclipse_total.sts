@@ -1,9 +1,8 @@
+clear
 date utc 2004:05:04T17:51:00
-select planet Moon
+select planet Moon pointer off
 wait duration 2
 zoom auto in
-flag cardinal_points on
-flag show_tui_datetime on
 wait duration 2
 timerate rate 250
 script action end
