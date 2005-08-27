@@ -225,7 +225,10 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 		  		  
 		  if(args["auto"]=="out") stcore->auto_zoom_out(duration, 0);
 		  else if(args["auto"]=="initial") stcore->auto_zoom_out(duration, 1);
-		  else stcore->auto_zoom_in(duration);
+		  else if(args["manual"]=="1") {
+			  stcore->auto_zoom_in(duration, 1);  // have to explicity allow possible manual zoom 
+		  } else stcore->auto_zoom_in(duration, 0);  
+
 	  } else if (args["fov"]!="") {
 		  // zoom to specific field of view
 	  	  stcore->projection->zoom_to( str_to_double(args["fov"]), str_to_double(args["duration"]));

@@ -95,7 +95,7 @@ public:
 	void zoom_to(double aim_fov, float move_duration = 1.) {projection->zoom_to(aim_fov, move_duration);}
 	
 	//! Go and zoom temporary to the selected object.
-	void auto_zoom_in(float move_duration = 1.f);
+	void auto_zoom_in(float move_duration = 1.f, bool allow_manual_zoom = 1);
 	
 	//! Unzoom to the previous position
 	void auto_zoom_out(float move_duration = 1.f, bool full = 0);

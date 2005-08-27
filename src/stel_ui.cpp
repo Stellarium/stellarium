@@ -1103,7 +1103,12 @@ int stel_ui::handle_keys(Uint16 key, S_GUI_VALUE state)
 		if(key==SDLK_SLASH)
 		{
 			if (SDL_GetModState() & KMOD_CTRL)  core->commander->execute_command( "zoom auto out");
-			else core->commander->execute_command( "zoom auto in");
+			else {
+				// here we help script recorders by selecting the right type of zoom option
+				// based on current settings of manual or full auto zoom
+				if(core->FlagManualZoom) core->commander->execute_command( "zoom auto in manual 1");
+				else core->commander->execute_command( "zoom auto in");
+			}
 		}
 		if(key==SDLK_BACKSLASH) core->commander->execute_command( "zoom auto out");
 		if(key==SDLK_x)
