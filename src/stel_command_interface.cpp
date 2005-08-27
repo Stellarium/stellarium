@@ -478,7 +478,7 @@ else if(command=="script") {
 	  execute_command("flag cardinal_points off");
 	  execute_command("flag constellation_art off");
 	  execute_command("flag constellation_drawing off");
-	  execute_command("flag constellation_name off");
+	  execute_command("flag constellation_names off");
 	  execute_command("flag ecliptic_line off");
 	  execute_command("flag equatorial_grid off");
 	  execute_command("flag equator_line off");
@@ -663,7 +663,10 @@ int StelCommandInterface::set_flag(string name, string value, bool &newval, bool
 		}
 		else if(name=="landscape") newval = (stcore->FlagLandscape = !stcore->FlagLandscape);
 		else if(name=="stars") newval = (stcore->FlagStars = !stcore->FlagStars);
-		else if(name=="star_names") newval = (stcore->FlagStarName = !stcore->FlagStarName);
+		else if(name=="star_names") {
+			newval = (stcore->FlagStarName = !stcore->FlagStarName);
+			if(newval) stcore->FlagStars = 1;  // make sure stars on if want labels
+		}
 		else if(name=="planets") {
 			newval = (stcore->FlagPlanets = !stcore->FlagPlanets);
 			if (!stcore->FlagPlanets) stcore->FlagPlanetsHints = 0;
@@ -755,7 +758,10 @@ int StelCommandInterface::set_flag(string name, string value, bool &newval, bool
 		}
 		else if(name=="landscape") stcore->FlagLandscape = newval;
 		else if(name=="stars") stcore->FlagStars = newval;
-		else if(name=="star_names") stcore->FlagStarName = newval;
+		else if(name=="star_names") {
+			stcore->FlagStarName = newval;
+			if(newval) stcore->FlagStars = 1;  // make sure stars on if want labels
+		}
 		else if(name=="planets") {
 			stcore->FlagPlanets = newval;
 			if (!stcore->FlagPlanets) stcore->FlagPlanetsHints = 0;
