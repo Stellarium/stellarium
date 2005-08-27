@@ -28,7 +28,7 @@
 
 #define RADIUS_NEB 1.
 
-Nebula_mgr::Nebula_mgr() : fontColor(0.4,0.3,0.5), circleColor(0.8,0.8,0.1)
+Nebula_mgr::Nebula_mgr()
 {
 }
 
@@ -106,7 +106,7 @@ int Nebula_mgr::read(const string& font_fileName, const string& fileName, Loadin
 }
 
 // Draw all the Nebulaes
-void Nebula_mgr::draw(int hint_ON, Projector* prj, const navigator * nav, tone_reproductor* eye, bool draw_tex, bool _gravity_label, float max_mag_name, bool bright_nebulae) //Tony - added "int hint_ON"
+void Nebula_mgr::draw(int hint_ON, Projector* prj, const navigator * nav, tone_reproductor* eye, bool draw_tex, bool _gravity_label, float max_mag_name, bool bright_nebulae)
 {
 	Nebula::gravity_label = _gravity_label;
 	Nebula::hints_brightness = hints_fader.get_interstate();

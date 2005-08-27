@@ -31,8 +31,11 @@ s_texture * Nebula::tex_circle = NULL;
 s_font* Nebula::nebula_font = NULL;
 bool Nebula::gravity_label = false;
 float Nebula::hints_brightness = 0;
+Vec3f Nebula::fontcolor = Vec3f(0.4,0.3,0.5);
+Vec3f Nebula::circlecolor = Vec3f(0.8,0.8,0.1);
 
-Nebula::Nebula() : NGC_nb(0), neb_tex(NULL), fontcolor(0.4,0.3,0.5), circlecolor(0.8,0.8,0.1)
+
+Nebula::Nebula() : NGC_nb(0), neb_tex(NULL)
 {
 	inc_lum = rand()/RAND_MAX*M_PI;	
 }

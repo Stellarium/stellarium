@@ -44,8 +44,8 @@ public:
 	stel_object * search(const string& name);  // search by name
 	stel_object * search(Vec3f Pos);    // Search the Nebulae by position
 	
-	void set_font_color(const Vec3f& c) {fontColor = c;}
-	void set_circle_color(const Vec3f& c) {circleColor = c;}
+	void set_font_color(const Vec3f& c) {Nebula::fontcolor = c;}
+	void set_circle_color(const Vec3f& c) {Nebula::circlecolor = c;}
 	
 	void update(int delta_time) {hints_fader.update(delta_time);}
 	void set_hints_fade_duration(float duration) {hints_fader.set_duration((int) (duration * 1000.f));}
@@ -58,8 +58,6 @@ public:
 private:
 	FILE * nebula_fic;
 	vector<Nebula*> neb_array;	// The nebulas list
-	Vec3f fontColor;
-	Vec3f circleColor;
 	linear_fader hints_fader;
 };
 
