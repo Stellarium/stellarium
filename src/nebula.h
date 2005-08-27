@@ -93,8 +93,8 @@ private:
 	static float hints_brightness;
 	static bool gravity_label;
 
-	Vec3f fontcolor;
-	Vec3f circlecolor;
+	static Vec3f fontcolor;
+	static Vec3f circlecolor;
 };
 
 #endif // _NEBULA_H_
