@@ -17,7 +17,7 @@
 echo "Generating configuration files for Stellarium, please wait...."
 echo;
 
-aclocal $ACLOCAL_FLAGS || exit;
+aclocal -I m4 || exit;
 autoheader || exit;
 automake --add-missing --copy;
 autoconf || exit;
