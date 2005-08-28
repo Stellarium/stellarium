@@ -7,8 +7,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: es\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-08-24 23:22+0200\n"
+"Report-Msgid-Bugs-To: stellarium@free.fr\n"
+"POT-Creation-Date: 2005-08-28 21:59+0200\n"
 "PO-Revision-Date: 2005-07-26 21:42+0100\n"
 "Last-Translator: Johan Meuris <johanmeuris@antwerpen.be>\n"
 "Language-Team: \n"
@@ -52,7 +52,6 @@ msgstr "%s: Foutieve command line optieparameter \n"
 msgid "Try `%s --help' for more information.\n"
 msgstr "Typ `%s --help' voor meer informatie.\n"
 
-#. Failure....
 #: src/main.cpp:126
 #, c-format
 msgid ""
@@ -78,7 +77,6 @@ msgid "Will create config files in %s\n"
 msgstr "Zal configuratiebestanden aanmaken in %s\n"
 
 # Quizás el directorio no está creado así que se intenta crear
-#. Maybe the directory is not created so try to create it
 #: src/main.cpp:195
 #, c-format
 msgid "Try to create directory %s\n"
@@ -96,8 +94,6 @@ msgstr ""
 "Indien de map wel bestaat, kijk na of je er toegang toe hebt. %s\n"
 
 # Noorden
-#. Default labels - if sky locale specified, loaded later
-#. Improvement for gettext translation
 #: src/draw.cpp:309 src/draw.cpp:414
 msgid "N"
 msgstr "N"
@@ -122,14 +118,11 @@ msgstr "W"
 msgid "ERROR on line %d of %s\n"
 msgstr ""
 
-#. Draw loading bar
-#. Tony - added "+1" to ensure art finsihes at last entry
 #: src/constellation_mgr.cpp:140
 #, c-format
 msgid "Loading Constellation Art: %d/%d"
 msgstr "Laden sterrenbeelden %d/%d"
 
-#. Hip = Hipparcos, RA=Right Ascention, DE=Declinaison, Mag=Magnitude
 #: src/hip_star.cpp:58
 #, fuzzy, c-format
 msgid ""
@@ -157,16 +150,13 @@ msgid "Loading Hipparcos star data "
 msgstr "Laden Hipparcos sterrendata"
 
 # Dibuja barra de carga
-#. Draw loading bar
-#. Tony - added "+1"
 #: src/hip_star_mgr.cpp:117
 #, c-format
 msgid "Loading Hipparcos catalog: %d/%d"
 msgstr "Laden Hipparcos sterrencataloog: %d/%d"
 
 # RK=Rechte Klimming, DE=Declinatie, Mag=Magnitude
-#. RA=Right ascention, DE=Declinaison, Mag=Magnitude
-#: src/nebula.cpp:51
+#: src/nebula.cpp:54
 #, fuzzy, c-format
 msgid ""
 "Name : %s (NGC %u)\n"
@@ -179,7 +169,7 @@ msgstr ""
 "DE: %s\n"
 "Mag: %.2f"
 
-#: src/nebula.cpp:64
+#: src/nebula.cpp:67
 #, c-format
 msgid "%s: mag %.1f"
 msgstr "%s: mag %.1f"
@@ -234,15 +224,15 @@ msgstr ""
 msgid "%s%s: mag %.1f"
 msgstr "%s%s: mag %.1f"
 
-#: src/sky_localizer.cpp:194
+#: src/sky_localizer.cpp:201
 msgid "Using sky language from environment locale: "
 msgstr ""
 
-#: src/sky_localizer.cpp:197
+#: src/sky_localizer.cpp:204
 msgid "Did not recognize locale language code "
 msgstr ""
 
-#: src/sky_localizer.cpp:198
+#: src/sky_localizer.cpp:205
 msgid ". Defaulting to english sky labels\n"
 msgstr ""
 
@@ -632,7 +622,6 @@ msgstr "Video"
 msgid "Rendering"
 msgstr "Rendering"
 
-#. Bring up dialog
 #: src/stel_ui_conf.cpp:396
 msgid "Object Search"
 msgstr ""
@@ -708,7 +697,6 @@ msgstr ""
 "(>=0.6.0).\n"
 "Eerdere instellingen worden geïmporteerd in het nieuwe configuratiebestand.\n"
 
-#. The config file is too old to try an importation
 #: src/stel_core.cpp:504
 #, c-format
 msgid ""
@@ -729,7 +717,10 @@ msgid "ERROR : The current config file is from a different version ("
 msgstr ""
 "ERROR : het huidige configuratiebestand is van een andere programmaversie ("
 
-#. Submenus
+#: src/stel_core.cpp:1297
+msgid "Invalid sky culture directory: "
+msgstr ""
+
 #: src/stel_ui_tuiconf.cpp:85
 msgid "Set Location "
 msgstr "Instellen positie"
@@ -758,7 +749,6 @@ msgstr "Scripts "
 msgid "Administration "
 msgstr "Administratie "
 
-#. 1. Location
 #: src/stel_ui_tuiconf.cpp:101
 msgid "Latitude: "
 msgstr "Breedte: "
@@ -771,7 +761,6 @@ msgstr "Lengte: "
 msgid "Altitude (m): "
 msgstr "Hoogte (m): "
 
-#. 2. Time
 #: src/stel_ui_tuiconf.cpp:112
 msgid "Sky Time: "
 msgstr "Hemeltijd: "
@@ -796,8 +785,6 @@ msgstr "Tijdnotatie: "
 msgid "Date Display Format: "
 msgstr "Datumnotatie: "
 
-#. 3. General settings
-#. sky culture goes here
 #: src/stel_ui_tuiconf.cpp:145
 msgid "Sky Culture: "
 msgstr "Hemelcultuur: "
@@ -806,7 +793,6 @@ msgstr "Hemelcultuur: "
 msgid "Sky Language: "
 msgstr "Hemeltaal: "
 
-#. 4. Stars
 #: src/stel_ui_tuiconf.cpp:158
 msgid "Show: "
 msgstr "Toon: "
@@ -831,7 +817,6 @@ msgstr "Maximum te labelen magnitude: "
 msgid "Twinkling: "
 msgstr "Fonkelen: "
 
-#. 5. Effects
 #: src/stel_ui_tuiconf.cpp:174
 msgid "Landscape: "
 msgstr "Landschap: "
@@ -866,7 +851,6 @@ msgstr "Intensiteit melkweg: "
 msgid "Zoom duration: "
 msgstr "Duurtijd zoom: "
 
-#. 6. Scripts
 #: src/stel_ui_tuiconf.cpp:202
 msgid "Local Script: "
 msgstr "Lokaal script: "
@@ -875,7 +859,6 @@ msgstr "Lokaal script: "
 msgid "CD/DVD Script: "
 msgstr "CD/DVD script:"
 
-#. 7. Administration
 #: src/stel_ui_tuiconf.cpp:216
 msgid "Load Default Configuration: "
 msgstr "Laad standaard configuratie: "
