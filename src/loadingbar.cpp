@@ -27,7 +27,7 @@ LoadingBar::LoadingBar(Projector* _prj, const string& _font_filename, const stri
 	barx = (screenw - barwidth)/2;
 	bary = splashy + 34;
 	barfont = new s_font(12., "spacefont", _font_filename);
-	if (!splash_tex.empty()) splash = new s_texture(splash_tex, 0);
+	if (!splash_tex.empty()) splash = new s_texture(splash_tex, TEX_LOAD_TYPE_PNG_ALPHA);
 	assert(barfont);
 }
 	
@@ -47,6 +47,7 @@ void LoadingBar::Draw(float val)
 	if (splash)
 	{
 		glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		glEnable(GL_TEXTURE_2D);
 		glColor3f(1, 1, 1);
 		glDisable(GL_CULL_FACE);
