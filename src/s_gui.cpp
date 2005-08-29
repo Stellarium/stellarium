@@ -643,25 +643,21 @@ void Label::setLabel(const string& _label)
 void Label::draw()
 {
 	if (!visible) return;
-    glPushMatrix();
     if (painter.getFont())
     {
 		painter.print(pos[0], pos[1], label);
     }
-    glPopMatrix();
-	//painter.drawSquareEdge(pos, size);
+	// painter.drawSquareEdge(pos, size);
 }
 
 void Label::draw(float _intensity)
 {
 	if (!visible) return;
-    glPushMatrix();
     if (painter.getFont())
     {
 		painter.print(pos[0], pos[1], label, painter.getTextColor() * _intensity);
     }
-    glPopMatrix();
-	//painter.drawSquareEdge(pos, size);
+	// painter.drawSquareEdge(pos, size);
 }
 
 void Label::adjustSize(void)
