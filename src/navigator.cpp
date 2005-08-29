@@ -112,26 +112,20 @@ void navigator::update_vision_vector(int delta_time, stel_object* selected)
 			rect_to_sphe(&ra_aim, &de_aim, earth_equ_to_local(move.aim));
 			rect_to_sphe(&ra_start, &de_start, earth_equ_to_local(move.start));
 		}
-
-		/*  Was causing changes in direction while zooming, and seems unneccessary
-
+		
 		// Trick to choose the good moving direction and never travel on a distance > PI
-		float delta = ra_start;
-		ra_start -= delta;		// ra_start = 0
-		ra_aim -= delta;
-
-		if (ra_aim > M_PI) ra_aim = -2.*M_PI + ra_aim;
-		if (ra_aim < -M_PI) ra_aim = 2.*M_PI + ra_aim;
-
-		ra_now = ra_aim*c + ra_start*(1. - c);
-		de_now = de_aim*c + de_start*(1. - c);
-
-		ra_now += delta;
-		*/
-
+		if (ra_aim-ra_start > M_PI)
+		{
+			ra_aim -= 2.*M_PI;
+		}
+		else if (ra_aim-ra_start < -M_PI)
+		{
+			ra_aim += 2.*M_PI;
+		}
+		
 		de_now = de_aim*c + de_start*(1. - c);
 		ra_now = ra_aim*c + ra_start*(1. - c);
-
+		
 		sphe_to_rect(ra_now, de_now, local_vision);
 		equ_vision = local_to_earth_equ(local_vision);
 
