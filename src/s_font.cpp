@@ -20,8 +20,8 @@
 
 #include <string>
 #include <iostream>
-
-#include <stdio.h>
+#include <cassert>
+#include <cstdio>
 #include "s_font.h"
 
 
@@ -209,9 +209,9 @@ float s_font::getStrLen(const string& str) const
 	if (str.empty()) return 0;
     float s=0;
     for (unsigned int i=0;i<str.length();++i)
-    { 
-		s += theSize[(unsigned int)str[i]].sizeX + theSize[(unsigned int)str[i]].leftSpacing +
-			theSize[(unsigned int)str[i]].rightSpacing + SPACING;
+    {
+		s += theSize[(unsigned char)str[i]].sizeX + theSize[(unsigned char)str[i]].leftSpacing +
+			theSize[(unsigned char)str[i]].rightSpacing + SPACING;
     }
     return s*ratio;
 }
@@ -221,7 +221,7 @@ float s_font::getStrHeight(const string& str) const
     float s=0;
     for (unsigned int i=0;i<str.length();++i)
     {
-		if (s<theSize[(unsigned int)str[i]].sizeY) s=theSize[(unsigned int)str[i]].sizeY;
+		if (s<theSize[(unsigned char)str[i]].sizeY) s=theSize[(unsigned char)str[i]].sizeY;
     }
     return s*ratio;
 }

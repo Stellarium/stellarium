@@ -52,7 +52,6 @@ stel_ui::stel_ui(stel_core * _core) :
 		bt_flag_help(NULL),
 		bt_flag_equatorial_mode(NULL),
 		bt_flag_config(NULL),
-		bt_flag_track(NULL),
 		bt_flag_search(NULL),
         bt_script(NULL),
 		bt_flag_goto(NULL),
@@ -139,7 +138,6 @@ void stel_ui::init(void)
 	// Info on selected object
 	info_select_ctr = new Container();
 	info_select_ctr->reshape(0,15,300,100);
-	info_select_txtlbl = new TextLabel("Info");
 	info_select_txtlbl = new TextLabel("Info");
     info_select_txtlbl->reshape(5,5,550,102);
 	info_select_ctr->setVisible(0);
@@ -332,10 +330,6 @@ Component* stel_ui::createFlagButtons(void)
 	bt_flag_goto->setOnPressCallback(callback<void>(this, &stel_ui::cb));
 	bt_flag_goto->setOnMouseInOutCallback(callback<void>(this, &stel_ui::cbr));
 
-	bt_flag_track = new FlagButton(true, NULL, "bt_track");
-	bt_flag_track->setOnPressCallback(callback<void>(this, &stel_ui::cb));
-	bt_flag_track->setOnMouseInOutCallback(callback<void>(this, &stel_ui::cbr));
-
 	bt_flag_ctr = new FilledContainer();
 	bt_flag_ctr->addComponent(bt_flag_constellation_draw); 	bt_flag_constellation_draw->setPos(x,0); x+=UI_BT;
 	bt_flag_ctr->addComponent(bt_flag_constellation_name);	bt_flag_constellation_name->setPos(x,0); x+=UI_BT;
@@ -347,15 +341,19 @@ Component* stel_ui::createFlagButtons(void)
 	bt_flag_ctr->addComponent(bt_flag_atmosphere);		bt_flag_atmosphere->setPos(x,0); x+=UI_BT;
 	bt_flag_ctr->addComponent(bt_flag_nebula_name);		bt_flag_nebula_name->setPos(x,0); x+=UI_BT;
 	bt_flag_ctr->addComponent(bt_flag_equatorial_mode);	bt_flag_equatorial_mode->setPos(x,0);x+=UI_BT;
-	bt_flag_ctr->addComponent(bt_flag_track);			bt_flag_track->setPos(x,0); x+=UI_BT;
+	bt_flag_ctr->addComponent(bt_flag_goto);			bt_flag_goto->setPos(x,0); x+=UI_BT;
 
     x+= UI_PADDING;
-    if (core->FlagShowScriptBar)
+    bt_flag_ctr->addComponent(bt_script);			bt_script->setPos(x,0);
+	if (!core->FlagShowScriptBar)
     {
-	    bt_flag_ctr->addComponent(bt_script);			bt_script->setPos(x,0); x+=UI_SCRIPT_BAR;
-	    bt_flag_ctr->addComponent(bt_flag_goto);		bt_flag_goto->setPos(x,0); x+=UI_BT;
-        x+= UI_PADDING;
+		bt_script->setVisible(false);
     }
+    else
+	{
+		x+=UI_SCRIPT_BAR;
+		x+= UI_PADDING;
+	}
 
 	bt_flag_ctr->addComponent(bt_flag_search);			bt_flag_search->setPos(x,0); x+=UI_BT;
 	bt_flag_ctr->addComponent(bt_flag_config);			bt_flag_config->setPos(x,0); x+=UI_BT;
@@ -495,7 +493,6 @@ void stel_ui::cb(void)
 	core->FlagConfig			= bt_flag_config->getState();
 	config_win->setVisible(core->FlagConfig);
 
-	core->navigation->set_flag_traking(bt_flag_track->getState());
 	core->FlagSearch			= bt_flag_search->getState();
 	search_win->setVisible(core->FlagSearch);
 	if (bt_flag_goto->getState() && core->selected_object)
@@ -555,8 +552,6 @@ void stel_ui::cbr(void)
 		bt_flag_help_lbl->setLabel(_("Script commander"));
 	if (bt_flag_goto->getIsMouseOver())
 		bt_flag_help_lbl->setLabel(_("Goto selected object [SPACE]"));
-	if (bt_flag_track->getIsMouseOver())
-		bt_flag_help_lbl->setLabel(_("Track object"));
 }
 
 void stel_ui::tcbr(void)
@@ -1159,8 +1154,7 @@ void stel_ui::gui_update_widgets(int delta_time)
 	bt_flag_help->setState(help_win->getVisible());
 	bt_flag_equatorial_mode->setState(core->navigation->get_viewing_mode()==VIEW_EQUATOR);
 	bt_flag_config->setState(config_win->getVisible());
-	bt_flag_search->setState(search_win->getVisible());
-	bt_flag_track->setState(core->navigation->get_flag_traking()); 
+	bt_flag_search->setState(search_win->getVisible()); 
 	bt_flag_goto->setState(false); 
 
 	if (config_win->getVisible()) updateConfigForm();
