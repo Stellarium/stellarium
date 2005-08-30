@@ -1,6 +1,6 @@
 /*
  * Stellarium
- * Copyright (C) 2003 Fabien Chéreau
+ * Copyright (C) 2003 Fabien Chï¿½eau
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -40,7 +40,7 @@ enum LANDSCAPE_TYPE
 class Landscape
 {
 public:
-	Landscape(float _radius = 1.);
+	Landscape(float _radius = 2.);
     virtual ~Landscape();
 	virtual void load(const string& file_name, const string& section_name) = 0;
 	void set_parameters(const Vec3f& sun_pos);
@@ -70,7 +70,7 @@ typedef struct
 class Landscape_old_style : public Landscape
 {
 public:
-	Landscape_old_style(float _radius = 1.);
+	Landscape_old_style(float _radius = 2.);
     virtual ~Landscape_old_style();
 	virtual void load(const string& fileName, const string& section_name);
 	virtual void draw(tone_reproductor * eye, const Projector* prj, const navigator* nav);
