@@ -317,8 +317,8 @@ vector <string> Constellation_mgr::getNames(void)
 	for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
 	{
 		name = (*iter)->getName();
-		transform(name.begin(), name.end(), name.begin(), (int(*)(int))tolower);
-        transform(name.begin(), name.begin()+1, name.begin(), (int(*)(int))toupper);
+		transform(name.begin(), name.end(), name.begin(), ::tolower);
+		transform(name.begin(), name.begin()+1, name.begin(), ::toupper);
         names.push_back(name);
      }
      return names;
