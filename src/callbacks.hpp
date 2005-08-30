@@ -7,7 +7,7 @@
 //  any purpose.
 
 //  Revision History
-//   20 Aug 2003 by Fabien Chéreau
+//   20 Aug 2003 by Fabien Chereau
 //                Removed an implicitly typename warning that occured with gcc 3.2.2
 //                and changed file names for consistency
 //   22 Nov 2000  1) Introduced numbered base classes to get compile time errors with too few arguments
