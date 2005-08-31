@@ -112,6 +112,7 @@ void setDirectories(const char* executableName)
 		if (tempFile)
 		{
 			DATA_ROOT = ".";
+			
 		}
 		else
 		{
