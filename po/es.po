@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: stellarium@free.fr\n"
-"POT-Creation-Date: 2005-08-28 21:59+0200\n"
+"POT-Creation-Date: 2005-08-31 16:32+0200\n"
 "PO-Revision-Date: 2005-07-25 18:00+0100\n"
 "Last-Translator: Sergio Trujillo <sergiotrujillo@telefonica.net>\n"
 "Language-Team: \n"
@@ -54,7 +54,7 @@ msgstr "%s: Error en argumento(s) de la línea de comandos\n"
 msgid "Try `%s --help' for more information.\n"
 msgstr "Intenta `%s --help' para más información.\n"
 
-#: src/main.cpp:126
+#: src/main.cpp:127
 #, c-format
 msgid ""
 "ERROR : I can't find the datas directories in :\n"
@@ -68,23 +68,23 @@ msgstr ""
 "sistema POSIX)\n"
 "o lance la aplicación desde el directorio de stellarium.\n"
 
-#: src/main.cpp:169
+#: src/main.cpp:170
 #, c-format
 msgid "> Found data files in %s : local version.\n"
 msgstr "> Encontrados los archivos de datos en %s : versión local.\n"
 
-#: src/main.cpp:187
+#: src/main.cpp:188
 #, c-format
 msgid "Will create config files in %s\n"
 msgstr "Se crearán los archivos de configuración en %s\n"
 
 # Quizás el directorio no está creado así que se intenta crear
-#: src/main.cpp:195
+#: src/main.cpp:196
 #, c-format
 msgid "Try to create directory %s\n"
 msgstr "Intento de crear el directorio %s\n"
 
-#: src/main.cpp:204
+#: src/main.cpp:205
 #, c-format
 msgid ""
 "Can't create the file %sconfig.ini\n"
@@ -238,103 +238,99 @@ msgstr ""
 msgid ". Defaulting to english sky labels\n"
 msgstr ""
 
-#: src/stel_ui.cpp:153
+#: src/stel_ui.cpp:151
 msgid "Message"
 msgstr "Mensaje"
 
-#: src/stel_ui.cpp:444 src/stel_ui.cpp:555
+#: src/stel_ui.cpp:442 src/stel_ui.cpp:552
 msgid "Script commander"
 msgstr ""
 
-#: src/stel_ui.cpp:476
+#: src/stel_ui.cpp:474
 msgid "Invalid Script command"
 msgstr ""
 
-#: src/stel_ui.cpp:523
+#: src/stel_ui.cpp:520
 msgid "Drawing of the Constellations [C]"
 msgstr "Dibujo de las Constelaciones [C]"
 
-#: src/stel_ui.cpp:525
+#: src/stel_ui.cpp:522
 msgid "Names of the Constellations [V]"
 msgstr "Nombres de las Constelaciones [V]"
 
-#: src/stel_ui.cpp:527
+#: src/stel_ui.cpp:524
 msgid "Constellations Art [R]"
 msgstr "Imágenes de las Constelaciones [R]"
 
-#: src/stel_ui.cpp:529
+#: src/stel_ui.cpp:526
 msgid "Azimuthal Grid [Z]"
 msgstr "Cuadrícula Azimutal [Z]"
 
-#: src/stel_ui.cpp:531
+#: src/stel_ui.cpp:528
 msgid "Equatorial Grid [E]"
 msgstr "Cuadrícula Ecuatorial [E]"
 
-#: src/stel_ui.cpp:533
+#: src/stel_ui.cpp:530
 msgid "Ground [G]"
 msgstr "Suelo [G]"
 
-#: src/stel_ui.cpp:535
+#: src/stel_ui.cpp:532
 msgid "Cardinal Points [Q]"
 msgstr "Puntos Cardinales [Q]"
 
-#: src/stel_ui.cpp:537
+#: src/stel_ui.cpp:534
 msgid "Atmosphere [A]"
 msgstr "Atmósfera [A]"
 
-#: src/stel_ui.cpp:539
+#: src/stel_ui.cpp:536
 msgid "Nebulas [N]"
 msgstr "Nebulosas [N]"
 
-#: src/stel_ui.cpp:541
+#: src/stel_ui.cpp:538
 msgid "Help [H]"
 msgstr "Ayuda [H]"
 
-#: src/stel_ui.cpp:543
+#: src/stel_ui.cpp:540
 msgid "Equatorial/Altazimuthal Mount [ENTER]"
 msgstr "Montura Ecuatorial/Altazimutal [ENTER]"
 
-#: src/stel_ui.cpp:545
+#: src/stel_ui.cpp:542
 msgid "Configuration window"
 msgstr "Ventana de configuración"
 
-#: src/stel_ui.cpp:548
+#: src/stel_ui.cpp:545
 msgid "Quit [CTRL + Q]"
 msgstr "Quitar [CTRL + Q]"
 
-#: src/stel_ui.cpp:550
+#: src/stel_ui.cpp:547
 msgid "Quit [CMD + Q]"
 msgstr "Quitar [CMD + Q]"
 
-#: src/stel_ui.cpp:553
+#: src/stel_ui.cpp:550
 msgid "Search for object"
 msgstr ""
 
-#: src/stel_ui.cpp:557
+#: src/stel_ui.cpp:554
 msgid "Goto selected object [SPACE]"
 msgstr ""
 
-#: src/stel_ui.cpp:559
-msgid "Track object"
-msgstr ""
-
-#: src/stel_ui.cpp:565
+#: src/stel_ui.cpp:560
 msgid "Decrease Time Speed [J]"
 msgstr "Ralentizar velocidad del tiempo [J]"
 
-#: src/stel_ui.cpp:567
+#: src/stel_ui.cpp:562
 msgid "Real Time Speed [K]"
 msgstr "Velocidad normal del tiempo [K]"
 
-#: src/stel_ui.cpp:569
+#: src/stel_ui.cpp:564
 msgid "Increase Time Speed [L]"
 msgstr "Acelerar velocidad del tiempo [L]"
 
-#: src/stel_ui.cpp:571
+#: src/stel_ui.cpp:566
 msgid "Return to Current Time"
 msgstr "Volver a la hora y fecha actual"
 
-#: src/stel_ui.cpp:580
+#: src/stel_ui.cpp:575
 #, fuzzy
 msgid ""
 "   Please check for newer versions and send bug reports\n"
@@ -346,12 +342,12 @@ msgstr ""
 "desde la página web de stellarium : http://stellarium.sourceforge.net\n"
 "\n"
 
-#: src/stel_ui.cpp:599
+#: src/stel_ui.cpp:594
 #, fuzzy
 msgid "Information"
 msgstr "Configuración"
 
-#: src/stel_ui.cpp:612
+#: src/stel_ui.cpp:607
 msgid ""
 "Arrow Keys       : Change viewing RA/DE\n"
 "Page Up/Down     : Zoom\n"
@@ -418,31 +414,31 @@ msgstr ""
 "CTRL + S : Tomar una captura de pantalla\n"
 "CTRL + R : Activar registro de scripts\n"
 
-#: src/stel_ui.cpp:645
+#: src/stel_ui.cpp:640
 msgid "CTRL + Q : Quit\n"
 msgstr "CTRL+Q : Quitar\n"
 
-#: src/stel_ui.cpp:647
+#: src/stel_ui.cpp:642
 msgid "CMD + Q  : Quit\n"
 msgstr "CMD+Q : Quitar\n"
 
-#: src/stel_ui.cpp:654
+#: src/stel_ui.cpp:649
 msgid "Help"
 msgstr "Ayuda"
 
-#: src/stel_ui.cpp:959
+#: src/stel_ui.cpp:954
 msgid "Command recording stopped."
 msgstr "Comando de grabación parado."
 
-#: src/stel_ui.cpp:967
+#: src/stel_ui.cpp:962
 msgid "Recording commands to script file:\n"
 msgstr "Grabando comandos en el archivo de script:\n"
 
-#: src/stel_ui.cpp:969
+#: src/stel_ui.cpp:964
 msgid "Hit CTRL-R again to stop.\n"
 msgstr "Presiona CTRL-R otra vez para parar.\n"
 
-#: src/stel_ui.cpp:973
+#: src/stel_ui.cpp:968
 msgid "Error: Unable to open script file to record commands."
 msgstr "Error: Imposible abrir archivo de script para grabar los comandos."
 
