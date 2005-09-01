@@ -1,6 +1,6 @@
 /*
  *
- * Copyright (C) 2003 Fabien Chéreau
+ * Copyright (C) 2003 Fabien Chï¿½eau
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -73,8 +73,8 @@ public:
     inline Vector2 operator-(const Vector2<T>&) const;
     inline Vector2 operator+(const Vector2<T>&) const;
 
-	inline Vector2 Vector2<T>::operator-() const;
-	inline Vector2 Vector2<T>::operator+() const;
+	inline Vector2 operator-() const;
+	inline Vector2 operator+() const;
 
 	inline Vector2 operator*(T) const;
 	inline Vector2 operator/(T) const;
@@ -119,8 +119,8 @@ public:
     inline Vector3 operator-(const Vector3<T>&) const;
     inline Vector3 operator+(const Vector3<T>&) const;
 
-	inline Vector3 Vector3<T>::operator-() const;
-	inline Vector3 Vector3<T>::operator+() const;
+	inline Vector3 operator-() const;
+	inline Vector3 operator+() const;
 
 	inline Vector3 operator*(T) const;
 	inline Vector3 operator/(T) const;
@@ -168,8 +168,8 @@ public:
     inline Vector4 operator-(const Vector4<T>&) const;
     inline Vector4 operator+(const Vector4<T>&) const;
 
-	inline Vector4 Vector4<T>::operator-() const;
-	inline Vector4 Vector4<T>::operator+() const;
+	inline Vector4 operator-() const;
+	inline Vector4 operator+() const;
 
 	inline Vector4 operator*(T) const;
 	inline Vector4 operator/(T) const;
