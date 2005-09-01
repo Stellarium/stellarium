@@ -39,18 +39,19 @@ public:
 	void set_flag_art(bool b);
 	void set_flag_lines(bool b);
 	void set_flag_names(bool b);
+	void set_flag_isolate_selected(bool s) { isolateSelected = s; set_selected_const(selected);}
 	// TODO : all the asterisms.empty() will be removed
 	bool get_flag_art(void) {return (!asterisms.empty() && (*(asterisms.begin()))->get_flag_art() || (selected && selected->get_flag_art()));}
 	bool get_flag_lines(void) {return (!asterisms.empty() && (*(asterisms.begin()))->get_flag_lines() || (selected && selected->get_flag_lines()));}
 	bool get_flag_names(void) {return (!asterisms.empty() && (*(asterisms.begin()))->get_flag_name() || (selected && selected->get_flag_name()));}
+	bool get_flag_isolate_selected(void) { return isolateSelected;}
+
 	void set_flag_gravity_label(bool g) {Constellation::gravity_label = g;}
 	void set_lines_color(const Vec3f& c) {lines_color=c;}
 	void set_names_color(const Vec3f& c) {names_color=c;}
 	void set_font(const string& _font_filename);
 	void set_selected(const string& shortname) {set_selected_const(find_from_short_name(shortname));}
 	void set_selected(const Hip_Star * s) {if (!s) set_selected_const(NULL); else set_selected_const(is_star_in(s));}
-	void set_flag_isolate_selected(bool s) { isolateSelected = s; set_selected_const(selected);}
-	bool get_flag_isolate_selected(void) { return isolateSelected; set_selected_const(selected);}
 	unsigned int get_first_selected_HP(void) {if (selected != NULL) return selected->asterism[0]->get_hp_number(); else return 0;}  //Tony
 	vector<string> getNames(void);
 	vector<string> getShortNames(void);

@@ -818,10 +818,7 @@ void stel_core::save_config_to(const string& confFile)
 	conf.set_boolean("viewing:flag_constellation_drawing", asterisms->get_flag_lines());
 	conf.set_boolean("viewing:flag_constellation_name", asterisms->get_flag_names());
 	conf.set_boolean("viewing:flag_constellation_art", asterisms->get_flag_art());
-
-	//  changed name.
-	//	conf.set_boolean("viewing:flag_constellation_pick", asterisms->get_flag_isolate_selected());
-	conf.set_boolean("viewing:flag_constellation_isolate_selected", asterisms->get_flag_isolate_selected()); // Tony
+	conf.set_boolean("viewing:flag_constellation_isolate_selected", asterisms->get_flag_isolate_selected());
 
 	conf.set_boolean("viewing:flag_azimutal_grid", FlagAzimutalGrid);
 	conf.set_boolean("viewing:flag_equatorial_grid", FlagEquatorialGrid);

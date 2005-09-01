@@ -37,6 +37,7 @@ class navigator;
 class stel_object
 {
 public:
+	virtual ~stel_object() {;}
 	virtual void update(void) {return;}
 	void draw_pointer(int delta_time, const Projector* prj, const navigator * nav);
 
