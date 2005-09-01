@@ -19,6 +19,7 @@ class OrbitSampleProc;
 class Orbit
 {
 public:
+	virtual ~Orbit() {;}
     virtual Vec3d positionAtTime(double) const = 0;
     virtual double getPeriod() const = 0;
     virtual double getBoundingRadius() const = 0;
@@ -60,6 +61,7 @@ private:
 class OrbitSampleProc
 {
  public:
+	virtual ~OrbitSampleProc() {;}
     virtual void sample(const Vec3d&) = 0;
 };
 
