@@ -526,7 +526,7 @@ template<class T> T Vector3<T>::lengthSquared() const
 
 template<class T> void Vector3<T>::normalize()
 {
-    register T s = (T) (1. / sqrt(v[0] * v[0] + v[1] * v[1] + v[2] * v[2]));
+    T s = (T) (1. / sqrt(v[0] * v[0] + v[1] * v[1] + v[2] * v[2]));
     v[0] *= s;
     v[1] *= s;
     v[2] *= s;

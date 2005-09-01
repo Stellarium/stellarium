@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003 Fabien Ch�eau
+ * Copyright (C) 2003 Fabien Chereau
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -16,8 +16,8 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#include <stdio.h>
-#include <math.h>
+#include <cstdio>
+#include <cmath>
 #include "fmath.h"
 
 #include "skybright.h"
