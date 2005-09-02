@@ -3,7 +3,11 @@
 <head>
 </head>
 <body bgcolor="white">
-This document outlines commands supported by Stellarium for UI or
+<h1>Stellarium Command Reference</h1>
+Version 1.0 - September 2, 2005<br>
+Robert Spearman<br>
+<br>
+This document outlines commands supported by Stellarium 0.7.0 for UI or
 script use.<br>
 <br>
 Command format basics:<br>
@@ -25,7 +29,7 @@ argument values are typically case sensitive. <br>
 <p>COMMAND ARGUMENT_NAME1 ARGUMENT_VALUE1 ARGUMENT_NAME2
 ARGUMENT_VALUE2 ...<br>
 </p>
-<p>Example commands:<br>
+<p>Example Commands:<br>
 </p>
 <ul>
   <li>select planet Jupiter</li>
@@ -35,11 +39,10 @@ ARGUMENT_VALUE2 ...<br>
   <li>moveto lat 45.7 lon -122 duration 5<br>
   </li>
 </ul>
-<p></p>
-<p>Below is a complete list of valid commands, along with their
+Below is a complete list of valid commands, along with their
 supported argument names and values. Lowercase values are literal,
 uppercase values are explanatory (i.e. replace SECONDS with the number
-of seconds desired). </p>
+of seconds desired).
 <p>
 <table border="1">
   <tbody>
@@ -228,8 +231,7 @@ currently.
       <p>track_object is only useful while an object is selected. </p>
       <p>The following flags are key user settings and are not
 accessible from scripts:</p>
-      <p>constellation_pick<br>
-enable_move_keys<br>
+      <p>enable_move_keys<br>
 enable_move_mouse<br>
 enable_tui_menu<br>
 enable_zoom_keys<br>
@@ -315,7 +317,8 @@ command.<br>
 later calls to manipulate the image. Images must be in PNG format. If
 images do not have dimensions that are powers of 2 (128, 256, etc.)
 they
-are resized when loaded to meet this requirement.</td>
+are resized when loaded to meet this requirement.<br>
+      </td>
     </tr>
     <tr>
       <td style="vertical-align: top;">alpha<br>
@@ -372,7 +375,9 @@ is center of viewport, 1 is top edge of viewport.</td>
       <td style="vertical-align: top;"><br>
       </td>
       <td style="vertical-align: top;">Load a landscape.&nbsp;
-Arguments have same names and possible values as in landscapes.ini file.<br>
+Arguments have same names and possible values as in landscapes.ini file
+except that texture file names need to be specified in full including
+the path relative to the script.<br>
       </td>
     </tr>
     <tr>
