@@ -24,6 +24,7 @@
 // Class used to manage group of constellation
 #include "constellation.h"
 #include "constellation_mgr.h"
+#include "stel_utility.h"
 
 // constructor which loads all data from appropriate files
 Constellation_mgr::Constellation_mgr(Hip_Star_mgr *_hip_stars) : 
@@ -301,6 +302,12 @@ void Constellation_mgr::load_names(const string& names_file)
 		aster = find_from_short_name(string(short_name));
 		if (aster != NULL)
 		{
+
+			int i=0;
+			while(cname[i] != 0 && i<199) {
+				if(cname[i]=='_') cname[i]=' ';
+				i++;
+			}
 			aster->set_name(cname);
 		}
 	}
@@ -334,6 +341,19 @@ vector<string> Constellation_mgr::getShortNames(void)
         names.push_back((*iter)->getShortName());
     return names;
 }
+
+string Constellation_mgr::get_short_name_by_name(string _name) {
+
+	vector < Constellation * >::const_iterator iter;
+
+	for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
+	{
+		if( str_compare_case_insensitive(_name, (*iter)->getName()) == 0) return (*iter)->getShortName();
+	}
+	return "";
+
+}
+
 
 // update faders
 void Constellation_mgr::update(int delta_time)

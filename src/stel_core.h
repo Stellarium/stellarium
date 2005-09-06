@@ -196,11 +196,13 @@ private:
 
 	planet* selected_planet;
 
+	/*
     // For editbox autocomplete keywords
     vector<string> constellationNames;
     vector<string> constellationShortNames;
     vector<string> planetNames;
     vector<string> starNames;
+	*/
 
 	// Projector
 	PROJECTOR_TYPE ProjectorType;
