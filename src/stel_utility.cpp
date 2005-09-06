@@ -427,3 +427,26 @@ int fcompare(const string& _base, const string& _sub)
      }
      return 0;
 }
+
+int str_compare_case_insensitive(const string& str1, const string& str2)
+{
+
+	string tmp1 = str1;
+	string tmp2 = str2;
+
+    unsigned int i = 0; 
+	while (i < tmp1.length()) { 
+		tmp1[i] = toupper(tmp1[i]);
+		i++;
+	}
+
+	i = 0;
+	while (i < tmp2.length()) { 
+		tmp2[i] = toupper(tmp2[i]);
+		i++;
+	}
+
+	return strcmp( tmp1.c_str(), tmp2.c_str() );
+
+}
+

@@ -970,6 +970,12 @@ int stel_ui::handle_keys(Uint16 key, S_GUI_VALUE state)
 			}
 		}
 
+		// ctrl-f - find window
+		if(key==0x0006) {
+			core->FlagSearch = !core->FlagSearch;
+			search_win->setVisible(core->FlagSearch);
+		}
+
 		if(key==SDLK_r) core->commander->execute_command( "flag constellation_art toggle");
 		if(key==SDLK_c) core->commander->execute_command( "flag constellation_drawing toggle");
 		if(key==SDLK_d) core->commander->execute_command( "flag star_names toggle");
