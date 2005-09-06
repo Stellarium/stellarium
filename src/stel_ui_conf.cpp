@@ -394,7 +394,7 @@ Component* stel_ui::createSearchWindow(void)
 
      // Bring up dialog
 	search_win = new StdBtWin(_("Object Search"));
-	search_win->reshape(300,200,400,h);
+	search_win->reshape(300,70,400,h);
 	search_win->setVisible(core->FlagSearch);
 
 	search_tab_ctr = new TabContainer();
@@ -551,27 +551,18 @@ void stel_ui::doNebulaSearch(void)
 void stel_ui::doConstellationSearch(void)
 {
     string rawObjectName = constellation_edit->getText();
-    string objectName;
 
-    unsigned int i = 0; 
-    while (i < core->constellationNames.size())
-    {
-        if (fcompare(core->constellationNames[i], rawObjectName) == 0)
-        {                                               
-           objectName = core->constellationShortNames[i];
-           break;
-        }
-        i++;
-    }
-    
-    if (!objectName.empty())
+    string objectName = core->asterisms->get_short_name_by_name(rawObjectName);
+
+    if (objectName != "")
     {
        string command = string("select constellation " + objectName);
        string error = string("Constellation '" + objectName + "' not found");
        doSearchCommand(command, error);
     }
-    else
+    else {
         showSearchMessage(string("Constellation " + rawObjectName + " not found"));
+	}
 }
 
 void stel_ui::showStarAutoComplete(void)

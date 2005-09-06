@@ -341,7 +341,8 @@ planet* SolarSystem::search(string planet_name) {
 
   vector<planet*>::iterator iter = system_planets.begin();
   while (iter != system_planets.end()) {
-    if( (*iter)->get_name() == planet_name ) return (*iter);
+    if( (*iter)->get_common_name() == planet_name ) return (*iter);
+    if( (*iter)->get_name() == planet_name ) return (*iter);  // also check standard ini file names 
     ++iter;
   }
   return NULL;
@@ -405,7 +406,7 @@ vector<string> SolarSystem::getNames(void)
 	vector < planet * >::iterator iter;
 
 	for (iter = system_planets.begin(); iter != system_planets.end(); ++iter)
-        names.push_back((*iter)->get_name());
+        names.push_back((*iter)->get_common_name());
     return names;
 }
 

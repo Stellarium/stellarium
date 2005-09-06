@@ -55,6 +55,8 @@ public:
 	unsigned int get_first_selected_HP(void) {if (selected != NULL) return selected->asterism[0]->get_hp_number(); else return 0;}  //Tony
 	vector<string> getNames(void);
 	vector<string> getShortNames(void);
+	string get_short_name_by_name(string _name);  // return short name from long common name
+
 private:
 	void draw_lines(Projector * prj) const;
 	void draw_art(Projector * prj, navigator * nav) const;

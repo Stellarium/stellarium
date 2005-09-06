@@ -84,4 +84,6 @@ long int str_to_long(string str);
 
 int fcompare(const string& _base, const string& _sub);
 
+int str_compare_case_insensitive(const string& str1, const string& str2);
+
 #endif

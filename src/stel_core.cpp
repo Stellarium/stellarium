@@ -214,14 +214,6 @@ void stel_core::init(void)
 	// make sure have loaded translated labels for sky language
 	set_sky_locale(SkyLocale);
 
-	// Tony - add EditBox autocomplete
-    starNames = hip_stars->getNames();
-    ui->setStarAutoComplete(starNames);
-    planetNames = ssystem->getNames();
-    constellationNames = asterisms->getNames();
-    constellationShortNames = asterisms->getShortNames();
-    ui->setConstellationAutoComplete(constellationNames);
-    ui->setPlanetAutoComplete(planetNames);
 
 }
 
@@ -1345,6 +1337,12 @@ void stel_core::set_sky_locale(string _locale)
 	}
 	ssystem->load_names(DataDir + "planet_names." + SkyLocale + ".fab");
 	asterisms->load_names(DataDir + "sky_cultures/" + SkyCulture + "/constellation_names." + SkyLocale + ".fab");
+
+	// refresh EditBox with new names
+    ui->setStarAutoComplete(hip_stars->getNames());
+    ui->setConstellationAutoComplete(asterisms->getNames());
+    ui->setPlanetAutoComplete(ssystem->getNames());
+
 }
 
 void stel_core::play_startup_script() {
