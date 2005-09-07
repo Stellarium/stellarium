@@ -845,7 +845,8 @@ int EditBox::onKey(Uint16 k, S_GUI_VALUE s)
         }
         else if (k == SDLK_ESCAPE) clearText(); 
         else if ((k >= SDLK_0 && k <= SDLK_9) || (k >= SDLK_a && k <= SDLK_z) 
-        || (k >= 65 && k <= 90) || (k >= 224 && k <= 255) || k == SDLK_SPACE || k == SDLK_UNDERSCORE)
+        || (k >= 65 && k <= 90) || (k >= 224 && k <= 255) || k == SDLK_SPACE 
+				 || k == SDLK_UNDERSCORE || k == 39 || k == 45)
         {
             resetAutoComplete(false);
             string newtext = "";
