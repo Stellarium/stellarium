@@ -181,6 +181,12 @@ int Hip_Star_mgr::load_common_names(const string& commonNameFile)
 			star->CommonName =  &(line[i]);
 			// remove newline
 			star->CommonName.erase(star->CommonName.length()-1, 1);
+
+			// remove underscores
+			for (string::size_type j=0;j<star->CommonName.length();++j) {
+				if (star->CommonName[j]=='_') star->CommonName[j]=' ';
+			}
+
 			lstCommonNames.push_back(star->CommonName);
 			lstCommonNamesHP.push_back(tmp);
 		}
@@ -237,7 +243,13 @@ void Hip_Star_mgr::load_sci_names(const string& sciNameFile)
 			int i=0;
 			while(c!='|' && i<256){c=line[i];++i;}
 			star->SciName = &(line[i]);
-			star->SciName[star->SciName.size()-1] = '\0';
+			star->SciName.erase(star->SciName.length()-1, 1);
+
+			// remove underscores
+			for (string::size_type j=0;j<star->SciName.length();++j) {
+				if (star->SciName[j]=='_') star->SciName[j]=' ';
+			}
+
 		}
 	} while(fgets(line, 256, snFile));
 

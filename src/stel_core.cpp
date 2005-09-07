@@ -1312,7 +1312,10 @@ int stel_core::set_sky_culture(string _culture_dir)
 		asterisms->set_selected(NULL);
 	}
 	
-	// Reset state
+	// update autocomplete with new names
+    ui->setConstellationAutoComplete(asterisms->getNames());
+
+	// Reset state - TODO: this state should be kept inside constellation_mgr
 	asterisms->set_flag_art(flagArt);
 	asterisms->set_flag_lines(flagLines);
 	asterisms->set_flag_names(flagNames);
