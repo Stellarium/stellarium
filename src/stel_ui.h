@@ -62,7 +62,6 @@ public:
 	// Update all the tui widgets with values taken from the core parameters
 	void tui_update_widgets(void);
 	void show_message(string _message, int _time_out=0);
-    void gotoObject(void);
     void setConstellationAutoComplete(vector<string> _autoComplete ) { constellation_edit->setAutoComplete(_autoComplete);}
     void setPlanetAutoComplete(vector<string> _autoComplete ) { planet_edit->setAutoComplete(_autoComplete);}
     void setStarAutoComplete(vector<string> _autoComplete ) { star_edit->setAutoComplete(_autoComplete);}
