@@ -21,6 +21,7 @@
 #define _CONSTELLATION_MGR_H_
 
 #include <vector>
+
 #include "constellation.h"
 #include "fader.h"
 #include "loadingbar.h"

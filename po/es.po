@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: stellarium@free.fr\n"
-"POT-Creation-Date: 2005-08-31 16:32+0200\n"
+"POT-Creation-Date: 2005-09-07 18:19+0200\n"
 "PO-Revision-Date: 2005-07-25 18:00+0100\n"
 "Last-Translator: Sergio Trujillo <sergiotrujillo@telefonica.net>\n"
 "Language-Team: \n"
@@ -191,17 +191,17 @@ msgstr "(%d objetos del cielo profundo)...\n"
 msgid "Loading Nebula Data: %d/%d"
 msgstr "Cargando datos de Nebulosa: %d/%d"
 
-#: src/observator.cpp:62
+#: src/observator.cpp:63
 #, c-format
 msgid "Loading location: \"%s\", "
 msgstr "Cargando posición: \"%s\", "
 
-#: src/observator.cpp:69
+#: src/observator.cpp:70
 #, c-format
 msgid "(landscape is: \"%s\")\n"
 msgstr "(el paisaje es: \"%s\")\n"
 
-#: src/observator.cpp:106
+#: src/observator.cpp:107
 #, c-format
 msgid "Saving location %s to file %s\n"
 msgstr "Grabando posición %s en el archivo %s\n"
@@ -716,7 +716,7 @@ msgid "ERROR : The current config file is from a different version ("
 msgstr ""
 "ERROR : El archivo de configuración actual es de una versión diferente ("
 
-#: src/stel_core.cpp:1297
+#: src/stel_core.cpp:1294
 msgid "Invalid sky culture directory: "
 msgstr ""
 

@@ -1,6 +1,6 @@
 /*
  * Stellarium
- * Copyright (C) 2002 Fabien Ch�eau
+ * Copyright (C) 2002 Fabien Chereau
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -531,7 +531,7 @@ void stel_ui::doSearchCommand(string _command, string _error)
 
     if (core->selected_object)
     {
-        gotoObject();
+        core->commander->execute_command("flag track_object on");
         hideSearchMessage();
     }    
     else

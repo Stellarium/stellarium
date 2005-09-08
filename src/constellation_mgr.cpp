@@ -17,11 +17,11 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
+// Class used to manage group of constellation
 
 #include <iostream>
 #include <fstream>
 
-// Class used to manage group of constellation
 #include "constellation.h"
 #include "constellation_mgr.h"
 #include "stel_utility.h"

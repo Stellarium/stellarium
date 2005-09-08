@@ -20,7 +20,7 @@
 #ifndef _SKY_LOCALIZER_H_
 #define _SKY_LOCALIZER_H_
 
-#include <stdio.h>
+#include <cstdio>
 #include <string>
 #include "stel_utility.h"
 

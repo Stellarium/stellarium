@@ -28,8 +28,8 @@ which are generally not at the apex of the Earth's way, such as the Perseids sho
 
 // Improved realism and efficiency 2004-12
 
+#include <cstdlib>
 #include "meteor.h"
-#include "stdlib.h"
 
 Meteor::Meteor(Projector *proj, navigator* nav, tone_reproductor* eye, double v)
 {

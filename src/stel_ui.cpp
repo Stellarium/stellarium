@@ -19,10 +19,10 @@
 
 // Class which handles a stellarium User Interface
 
-#include "stel_ui.h"
-#include "stellastro.h"
 #include <iostream>
 
+#include "stel_ui.h"
+#include "stellastro.h"
 
 ////////////////////////////////////////////////////////////////////////////////
 //								CLASS FUNCTIONS
@@ -182,13 +182,6 @@ void stel_ui::show_message(string _message, int _time_out)
 	message_win->setVisible(1);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-// Tony
-void stel_ui::gotoObject(void)
-{
-    core->navigation->move_to(core->selected_object->get_earth_equ_pos(core->navigation),
-	                      core->auto_move_duration);
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 Component* stel_ui::createTopBar(void)
@@ -495,8 +488,7 @@ void stel_ui::cb(void)
 
 	core->FlagSearch			= bt_flag_search->getState();
 	search_win->setVisible(core->FlagSearch);
-	if (bt_flag_goto->getState() && core->selected_object)
-        gotoObject();
+	if (bt_flag_goto->getState() && core->selected_object) core->commander->execute_command("flag track_object on");
 	bt_flag_goto->setState(false);
 
 	if (!bt_flag_quit->getState()) core->quit();
