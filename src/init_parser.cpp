@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003 Fabien Chéreau
+ * Copyright (C) 2003 Fabien Chereau
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,9 +19,10 @@
 // Class which parse an init file
 // C++ warper for the iniparser free library from N.Devillard
 
-#include "init_parser.h"
 #include <sstream>
 #include <iomanip>
+
+#include "init_parser.h"
 
 init_parser::init_parser(void) : dico(NULL)
 {
