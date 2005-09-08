@@ -99,8 +99,10 @@ void ScriptMgr::pause_script() {
 }
 
 void ScriptMgr::resume_script() { 
-  play_paused = 0;
-  commander->execute_command("timerate action resume");
+	if(play_paused) {
+		play_paused = 0;
+		commander->execute_command("timerate action resume");
+	}
 }
 
 void ScriptMgr::record_script(string script_filename) {
