@@ -176,16 +176,14 @@ string Observator::get_time_zone_name_from_system(double JD) const
 // Fixed 31-05-2004 Now use the extern variables set by tzset()
 float Observator::get_GMT_shift_from_system(double JD, bool _local) const
 {
-
 	/* Doesn't seem like MACOSX is a special case... ??? rob
-    #if defined( MACOSX )
+    #if defined( MACOSX ) || defined(WIN32)
 	struct tm *timeinfo;
 	time_t rawtime; time(&rawtime);
 	timeinfo = localtime(&rawtime);
-	return (float)timeinfo->tm_gmtoff/3600;
-	// + (timeinfo->tm_isdst!=0);
-	#else
-	*/
+	return (float)timeinfo->tm_gmtoff/3600 + (timeinfo->tm_isdst!=0); 
+	#else */
+
 #if !defined(MACOSX) && !defined(WIN32)
 
 	struct tm * timeinfo;
@@ -194,13 +192,8 @@ float Observator::get_GMT_shift_from_system(double JD, bool _local) const
 	  // JD is UTC
 	  struct tm rawtime;
 	  get_tm_from_julian(JD, &rawtime);
-
-#ifdef HAVE_TIMEGM
-	  time_t ltime = timegm(&rawtime);
-#else
 	  time_t ltime = my_timegm(&rawtime);
-#endif
-
+	  
 	  timeinfo = localtime(&ltime);
 	} else {
 	  time_t rtime;
@@ -221,10 +214,13 @@ float Observator::get_GMT_shift_from_system(double JD, bool _local) const
 	heure[3] = '\0';
 	return min + atoi(heure);
 #else
-	return -(float)timezone/3600;
+     struct tm *timeinfo;
+     time_t rawtime; time(&rawtime);
+     timeinfo = localtime(&rawtime);
+     return -(float)timezone/3600 + (timeinfo->tm_isdst!=0);
 #endif
 
-	// #endif
+	 //#endif
 	
 }
 
