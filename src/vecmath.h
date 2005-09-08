@@ -1,6 +1,6 @@
 /*
  *
- * Copyright (C) 2003 Fabien Ch�eau
+ * Copyright (C) 2003 Fabien Chereau
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -25,8 +25,8 @@
 #define _VECMATH_H_
 
 #include <cmath>
-#include <string.h>
-#include <stdio.h>
+#include <cstring>
+#include <cstdio>
 
 template<class T> class Vector2;
 template<class T> class Vector3;

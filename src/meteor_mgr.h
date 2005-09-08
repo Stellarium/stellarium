@@ -20,11 +20,12 @@
 #ifndef _METEOR_MGR_H_
 #define _METEOR__MGR_H_
 
+#include <vector>
+#include <functional>
+
 #include "projector.h"
 #include "navigator.h"
 #include "meteor.h"
-#include <vector>
-#include <functional>
 
 class Meteor_mgr
 {

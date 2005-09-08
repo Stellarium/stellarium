@@ -24,7 +24,7 @@
 #ifndef _COMMAND_INTERFACE_H_
 #define _COMMAND_INTERFACE_H_
 
-#include <stdio.h>
+#include <cstdio>
 #include <string>
 #include <map>
 

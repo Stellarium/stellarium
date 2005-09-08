@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003 Fabien Chéreau
+ * Copyright (C) 2003 Fabien Chereau
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,9 +20,9 @@
 // Fast implementation of the algorithm from the article
 // "A Practical Analytic Model for Daylight" by A. J. Preetham, Peter Shirley and Brian Smits.
 
-#include <math.h>
-#include <stdio.h>
-#include <stdlib.h>
+#include <cmath>
+#include <cstdio>
+#include <cstdlib>
 
 #include "fmath.h"
 #include "skylight.h"

@@ -21,7 +21,8 @@
 #include <iostream>
 #include <string>
 #include <dirent.h>
-#include <stdio.h>
+#include <cstdio>
+
 #include "script_mgr.h"
 
 

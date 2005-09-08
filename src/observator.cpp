@@ -19,8 +19,9 @@
 
 #include <string>
 #include <ctime>
-#include <stdlib.h>
+#include <cstdlib>
 #include <clocale>
+
 #include "stellarium.h"
 #include "stel_utility.h"
 #include "stellastro.h"
