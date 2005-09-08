@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: stellarium@free.fr\n"
-"POT-Creation-Date: 2005-09-07 18:19+0200\n"
+"POT-Creation-Date: 2005-09-08 20:40+0200\n"
 "PO-Revision-Date: 2005-07-25 18:00+0100\n"
 "Last-Translator: Sergio Trujillo <sergiotrujillo@telefonica.net>\n"
 "Language-Team: \n"
@@ -115,12 +115,12 @@ msgstr "E"
 msgid "W"
 msgstr "O"
 
-#: src/constellation_mgr.cpp:90
+#: src/constellation_mgr.cpp:91
 #, c-format
 msgid "ERROR on line %d of %s\n"
 msgstr ""
 
-#: src/constellation_mgr.cpp:140
+#: src/constellation_mgr.cpp:141
 #, c-format
 msgid "Loading Constellation Art: %d/%d"
 msgstr "Cargando imágenes de las Constelaciones : %d/%d"
@@ -242,95 +242,95 @@ msgstr ""
 msgid "Message"
 msgstr "Mensaje"
 
-#: src/stel_ui.cpp:442 src/stel_ui.cpp:552
+#: src/stel_ui.cpp:435 src/stel_ui.cpp:544
 msgid "Script commander"
 msgstr ""
 
-#: src/stel_ui.cpp:474
+#: src/stel_ui.cpp:467
 msgid "Invalid Script command"
 msgstr ""
 
-#: src/stel_ui.cpp:520
+#: src/stel_ui.cpp:512
 msgid "Drawing of the Constellations [C]"
 msgstr "Dibujo de las Constelaciones [C]"
 
-#: src/stel_ui.cpp:522
+#: src/stel_ui.cpp:514
 msgid "Names of the Constellations [V]"
 msgstr "Nombres de las Constelaciones [V]"
 
-#: src/stel_ui.cpp:524
+#: src/stel_ui.cpp:516
 msgid "Constellations Art [R]"
 msgstr "Imágenes de las Constelaciones [R]"
 
-#: src/stel_ui.cpp:526
+#: src/stel_ui.cpp:518
 msgid "Azimuthal Grid [Z]"
 msgstr "Cuadrícula Azimutal [Z]"
 
-#: src/stel_ui.cpp:528
+#: src/stel_ui.cpp:520
 msgid "Equatorial Grid [E]"
 msgstr "Cuadrícula Ecuatorial [E]"
 
-#: src/stel_ui.cpp:530
+#: src/stel_ui.cpp:522
 msgid "Ground [G]"
 msgstr "Suelo [G]"
 
-#: src/stel_ui.cpp:532
+#: src/stel_ui.cpp:524
 msgid "Cardinal Points [Q]"
 msgstr "Puntos Cardinales [Q]"
 
-#: src/stel_ui.cpp:534
+#: src/stel_ui.cpp:526
 msgid "Atmosphere [A]"
 msgstr "Atmósfera [A]"
 
-#: src/stel_ui.cpp:536
+#: src/stel_ui.cpp:528
 msgid "Nebulas [N]"
 msgstr "Nebulosas [N]"
 
-#: src/stel_ui.cpp:538
+#: src/stel_ui.cpp:530
 msgid "Help [H]"
 msgstr "Ayuda [H]"
 
-#: src/stel_ui.cpp:540
+#: src/stel_ui.cpp:532
 msgid "Equatorial/Altazimuthal Mount [ENTER]"
 msgstr "Montura Ecuatorial/Altazimutal [ENTER]"
 
-#: src/stel_ui.cpp:542
+#: src/stel_ui.cpp:534
 msgid "Configuration window"
 msgstr "Ventana de configuración"
 
-#: src/stel_ui.cpp:545
+#: src/stel_ui.cpp:537
 msgid "Quit [CTRL + Q]"
 msgstr "Quitar [CTRL + Q]"
 
-#: src/stel_ui.cpp:547
+#: src/stel_ui.cpp:539
 msgid "Quit [CMD + Q]"
 msgstr "Quitar [CMD + Q]"
 
-#: src/stel_ui.cpp:550
+#: src/stel_ui.cpp:542
 msgid "Search for object"
 msgstr ""
 
-#: src/stel_ui.cpp:554
+#: src/stel_ui.cpp:546
 msgid "Goto selected object [SPACE]"
 msgstr ""
 
-#: src/stel_ui.cpp:560
+#: src/stel_ui.cpp:552
 msgid "Decrease Time Speed [J]"
 msgstr "Ralentizar velocidad del tiempo [J]"
 
-#: src/stel_ui.cpp:562
+#: src/stel_ui.cpp:554
 msgid "Real Time Speed [K]"
 msgstr "Velocidad normal del tiempo [K]"
 
-#: src/stel_ui.cpp:564
+#: src/stel_ui.cpp:556
 msgid "Increase Time Speed [L]"
 msgstr "Acelerar velocidad del tiempo [L]"
 
-#: src/stel_ui.cpp:566
+#: src/stel_ui.cpp:558
 msgid "Return to Current Time"
 msgstr "Volver a la hora y fecha actual"
 
-#: src/stel_ui.cpp:575
+#: src/stel_ui.cpp:567
 #, fuzzy
 msgid ""
 "   Please check for newer versions and send bug reports\n"
@@ -342,12 +342,12 @@ msgstr ""
 "desde la página web de stellarium : http://stellarium.sourceforge.net\n"
 "\n"
 
-#: src/stel_ui.cpp:594
+#: src/stel_ui.cpp:586
 #, fuzzy
 msgid "Information"
 msgstr "Configuración"
 
-#: src/stel_ui.cpp:607
+#: src/stel_ui.cpp:599
 msgid ""
 "Arrow Keys       : Change viewing RA/DE\n"
 "Page Up/Down     : Zoom\n"
@@ -414,31 +414,31 @@ msgstr ""
 "CTRL + S : Tomar una captura de pantalla\n"
 "CTRL + R : Activar registro de scripts\n"
 
-#: src/stel_ui.cpp:640
+#: src/stel_ui.cpp:632
 msgid "CTRL + Q : Quit\n"
 msgstr "CTRL+Q : Quitar\n"
 
-#: src/stel_ui.cpp:642
+#: src/stel_ui.cpp:634
 msgid "CMD + Q  : Quit\n"
 msgstr "CMD+Q : Quitar\n"
 
-#: src/stel_ui.cpp:649
+#: src/stel_ui.cpp:641
 msgid "Help"
 msgstr "Ayuda"
 
-#: src/stel_ui.cpp:954
+#: src/stel_ui.cpp:946
 msgid "Command recording stopped."
 msgstr "Comando de grabación parado."
 
-#: src/stel_ui.cpp:962
+#: src/stel_ui.cpp:954
 msgid "Recording commands to script file:\n"
 msgstr "Grabando comandos en el archivo de script:\n"
 
-#: src/stel_ui.cpp:964
+#: src/stel_ui.cpp:956
 msgid "Hit CTRL-R again to stop.\n"
 msgstr "Presiona CTRL-R otra vez para parar.\n"
 
-#: src/stel_ui.cpp:968
+#: src/stel_ui.cpp:960
 msgid "Error: Unable to open script file to record commands."
 msgstr "Error: Imposible abrir archivo de script para grabar los comandos."
 
@@ -669,15 +669,15 @@ msgstr "Nebulosas"
 msgid "Planets & Moons"
 msgstr "Info Planetas"
 
-#: src/stel_ui_conf.cpp:672
+#: src/stel_ui_conf.cpp:663
 msgid "Saving rendering options in file "
 msgstr "Grabando opciones de renderizado en archivo "
 
-#: src/stel_ui_conf.cpp:715
+#: src/stel_ui_conf.cpp:706
 msgid "Saving video size "
 msgstr "Grabando el tamaño de video "
 
-#: src/stel_ui_conf.cpp:715
+#: src/stel_ui_conf.cpp:706
 msgid " in file "
 msgstr " en el archivo "
 
@@ -686,7 +686,7 @@ msgstr " en el archivo "
 msgid "Loading Solar System data...\n"
 msgstr "Cargando datos del Sistema Solar...\n"
 
-#: src/stel_core.cpp:485
+#: src/stel_core.cpp:477
 #, c-format
 msgid ""
 "The current config file is from a previous version (>=0.6.0).\n"
@@ -696,7 +696,7 @@ msgstr ""
 "Las anteriores opciones serán importadas en el nuevo archivo de "
 "configuración.\n"
 
-#: src/stel_core.cpp:504
+#: src/stel_core.cpp:496
 #, c-format
 msgid ""
 "The current config file is from a version too old for parameters to be "
@@ -707,16 +707,16 @@ msgstr ""
 "para poder importar sus parámetros (%s).\n"
 "Será reemplazado por el archivo de configuración por defecto.\n"
 
-#: src/stel_core.cpp:527
+#: src/stel_core.cpp:519
 msgid "Loading configuration file "
 msgstr "Cargando el archivo de configuración "
 
-#: src/stel_core.cpp:535
+#: src/stel_core.cpp:527
 msgid "ERROR : The current config file is from a different version ("
 msgstr ""
 "ERROR : El archivo de configuración actual es de una versión diferente ("
 
-#: src/stel_core.cpp:1294
+#: src/stel_core.cpp:1286
 msgid "Invalid sky culture directory: "
 msgstr ""
 
