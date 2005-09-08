@@ -1,5 +1,3 @@
-EXTRA_DIST = stellarium.rc
-
 bin_PROGRAMS = stellarium
 stellarium_SOURCES = \
 main.cpp \
