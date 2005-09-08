@@ -4,6 +4,8 @@
 DisableStartupPrompt=yes
 WizardSmallImageFile=data\icon.bmp
 WizardImageFile=data\splash.bmp
+WizardImageStretch=no
+WizardImageBackColor=clBlack
 AppName=Stellarium
 AppVerName=Stellarium 0.7.0
 DefaultDirName={pf}\Stellarium
@@ -14,7 +16,7 @@ Compression=zip/9
 
 [Files]
 Source: "src\stellarium.exe"; DestDir: "{app}"
-Source: "README"; DestDir: "{app}"; Flags: isreadme; DestName: "README.txt"
+Source: "README"; DestDir: "{app}"; Flags: isreadme; DestName: "README.rtf"
 Source: "INSTALL"; DestDir: "{app}"; DestName: "INSTALL.txt"
 Source: "COPYING"; DestDir: "{app}"; DestName: "GPL.txt"
 Source: "AUTHORS"; DestDir: "{app}"; DestName: "AUTHORS.txt"
