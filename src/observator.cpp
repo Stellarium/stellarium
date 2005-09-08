@@ -188,18 +188,20 @@ float Observator::get_GMT_shift_from_system(double JD, bool _local) const
 
 	struct tm * timeinfo;
 
-	if(!_local) {
-	  // JD is UTC
-	  struct tm rawtime;
-	  get_tm_from_julian(JD, &rawtime);
-
+	if(!_local)
+	{
+		// JD is UTC
+		struct tm rawtime;
+		get_tm_from_julian(JD, &rawtime);
+		
 #ifdef HAVE_TIMEGM
-	  time_t ltime = timegm(&rawtime);
+		time_t ltime = timegm(&rawtime);
 #else
-	  time_t ltime = my_timegm(&rawtime);
+		// This does not work
+		time_t ltime = my_timegm(&rawtime);
 #endif
-	  
-	  timeinfo = localtime(&ltime);
+		
+		timeinfo = localtime(&ltime);
 	} else {
 	  time_t rtime;
 	  rtime = get_time_t_from_julian(JD);
