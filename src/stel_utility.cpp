@@ -2,8 +2,6 @@
  * Stellarium
  * Copyright (C) 2002 Fabien Chereau
  * 
- * DO NOT CONVERT THIS FILE AS PLAIN ASCII!!!  Or reading lat/lon won't work.
- *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
@@ -139,7 +137,7 @@ double get_dec_angle(const string& str)
 	const char* s = str.c_str();
 	char *mptr, *ptr, *dec, *hh;
 	int negative = 0;
-	char delim1[] = " :.,;ºDdHhMm'\n\t";  // needs degree character here!
+	char delim1[] = " :.,;DdHhMm'\n\t\xBA";  // 0xBA was old degree delimiter
 	char delim2[] = " NSEWnsew\"\n\t";
 	int dghh = 0, minutes = 0;
 	double seconds = 0.0, pos;
