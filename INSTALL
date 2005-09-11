@@ -3,7 +3,7 @@
 ===============================================================================
                            BINARY INSTALLATION
 ===============================================================================
-Most of the end users will prefere using precompiled binary packages:
+Most users will prefer using precompiled binary packages:
 
 - WINDOWS USERS :
 run setup.exe and follow the instructions.
@@ -89,6 +89,7 @@ To get the latest cvs snapshot type in a console:
 then to compile type:
 ~$ cd stellarium
 ~$ ./autogen.sh
+~$ ./configure
 ~$ make
 
 then to launch the local version of the program type
