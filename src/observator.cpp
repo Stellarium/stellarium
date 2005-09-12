@@ -157,6 +157,12 @@ float Observator::get_GMT_shift(double JD, bool _local) const
 // Return the time zone name taken from system locale
 string Observator::get_time_zone_name_from_system(double JD) const
 {
+
+	// Windows will crash if date before 1970
+	// And no changes on Linux before that year either
+	// TODO: ALSO, on Win XP timezone never changes anyway??? 
+	if(JD < 2440588 ) JD = 2440588;
+
 	// The timezone name depends on the day because of the summer time
 	time_t rawtime = get_time_t_from_julian(JD);
 
