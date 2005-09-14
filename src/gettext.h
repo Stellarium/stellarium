@@ -19,6 +19,8 @@
 #ifndef _LIBGETTEXT_H
 #define _LIBGETTEXT_H 1
 
+#include <config.h>
+
 /* NLS can be disabled through the configure --disable-nls option.  */
 #if ENABLE_NLS
 
@@ -36,6 +38,26 @@
 #if defined(__sun)
 # include <locale.h>
 #endif
+
+/* Linux g++ may include <libintl.h>, which will choke if gettext etc.
+   are defined as macros.  So we include it now to make later inclusions
+   of <libintl.h> a NOP.  We then undefine all macros defined below.  */
+/* FIXME:
+   The test "if defined(__linux)" should be replaced by something better.
+   */
+# if defined(__linux)
+#  include <libintl.h>
+# endif
+
+# undef gettext
+# undef dgettext
+# undef dcgettext
+# undef ngettext
+# undef dngettext
+# undef dcngettext
+# undef textdomain
+# undef bindtextdomain
+# undef bind_textdomain_codeset
 
 /* Disabled NLS.
    The casts to 'const char *' serve the purpose of producing warnings
