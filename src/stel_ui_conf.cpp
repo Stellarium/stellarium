@@ -575,19 +575,34 @@ void stel_ui::showConstellationAutoComplete(void)
     showSearchMessage(constellation_edit->getAutoCompleteOptions());
 }
 
-void stel_ui::doStarSearch(void)
-{
-    string objectName = star_edit->getText();
-    unsigned int HP = core->hip_stars->getCommonNameHP(objectName);
-    char no[20];
-    
-    sprintf(no, "%u", HP);
-    if (HP > 0) objectName = no;
-      
-    string command = string("select HP " + objectName);
-    string error = string("Star 'HP " + objectName + "' not found");
-     
-    doSearchCommand(command, error);
+void stel_ui::doStarSearch(void) 
+{ 
+	string objectName = star_edit->getText();
+	unsigned int HP = core->hip_stars->getCommonNameHP(objectName);
+	
+	if (HP > 0)
+	{
+		char sname[20];
+		sprintf(sname,"%u",HP);
+		objectName = sname;
+	}
+	else
+	{
+		int number;
+		if (sscanf(objectName.c_str(),"%d",&number) != 1 || number < 0)
+		{
+			showSearchMessage(string("Invalid star name '" + objectName + "'"));
+			objectName = "";
+		}
+	}
+	
+	if (objectName != "")
+	{
+		string command = string("select HP " + objectName);
+		string error = string("Star 'HP " + objectName + "' not found");
+	
+		doSearchCommand(command, error);
+	}
 }
 
 void stel_ui::doPlanetSearch(void)
