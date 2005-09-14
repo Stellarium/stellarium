@@ -1,6 +1,6 @@
 dnl Process this file with autoconf to produce a configure script.
 
-AC_INIT(stellarium,0.7.0, stellarium@free.fr)
+AC_INIT(stellarium,0.7.1, stellarium@free.fr)
 AC_CONFIG_SRCDIR([src/main.cpp])
 
 AC_PREREQ(2.52)
