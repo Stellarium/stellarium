@@ -17,9 +17,9 @@ Compression=zip/9
 [Files]
 Source: "src\stellarium.exe"; DestDir: "{app}"
 Source: "README"; DestDir: "{app}"; Flags: isreadme; DestName: "README.rtf"
-Source: "INSTALL"; DestDir: "{app}"; DestName: "INSTALL.txt"
-Source: "COPYING"; DestDir: "{app}"; DestName: "GPL.txt"
-Source: "AUTHORS"; DestDir: "{app}"; DestName: "AUTHORS.txt"
+Source: "INSTALL"; DestDir: "{app}"; DestName: "INSTALL.rtf"
+Source: "COPYING"; DestDir: "{app}"; DestName: "GPL.rtf"
+Source: "AUTHORS"; DestDir: "{app}"; DestName: "AUTHORS.rtf"
 Source: "ChangeLog"; DestDir: "{app}";
 Source: "SDL.dll"; DestDir: "{app}";
 Source: "libpng13.dll"; DestDir: "{app}";
@@ -30,6 +30,7 @@ Source: "data\sky_cultures\polynesian\*"; DestDir: "{app}\data\sky_cultures\poly
 Source: "data\sky_cultures\western\*"; DestDir: "{app}\data\sky_cultures\western\"
 Source: "data\sky_cultures\chinese\*"; DestDir: "{app}\data\sky_cultures\chinese\"
 Source: "data\sky_cultures\egyptian\*"; DestDir: "{app}\data\sky_cultures\egyptian\"
+Source: "data\scripts\*"; DestDir: "{app}\data\scripts\"
 Source: "config\*"; DestDir: "{app}\config"
 Source: "textures\*"; DestDir: "{app}\textures"
 Source: "textures\landscapes\*"; DestDir: "{app}\textures\landscapes"
