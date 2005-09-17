@@ -50,7 +50,7 @@ void drawIntro(void)
     printf("    -----------------------------------------\n\n");
     printf("Copyright (C) 2000-2005 Fabien Chereau et al.\n\n");
     printf(_("Please check last version and send bug report & comments \n\
-on stellarium web page : http://stellarium.sourceforge.net\n\n"));
+on stellarium web page : http://www.stellarium.org\n\n"));
 };
 
 

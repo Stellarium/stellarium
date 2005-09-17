@@ -693,12 +693,12 @@ void stel_ui::saveRenderOptions(void)
 	conf.set_double("astro:max_mag_nebula_name", core->MaxMagNebulaName);
 	conf.set_boolean("astro:flag_planets", core->FlagPlanets);
 	conf.set_boolean("astro:flag_planets_hints", core->FlagPlanetsHints);
-	conf.set_double("viewing:moon_scale", core->ssystem->get_moon()->get_sphere_scale());
+	conf.set_double("viewing:flag_moon_scaled", core->FlagMoonScaled);
 	conf.set_boolean("viewing:flag_equatorial_grid", core->FlagEquatorialGrid);
 	conf.set_boolean("viewing:flag_azimutal_grid", core->FlagAzimutalGrid);
 	conf.set_boolean("viewing:flag_equator_line", core->FlagEquatorLine);
 	conf.set_boolean("viewing:flag_ecliptic_line", core->FlagEclipticLine);
-	conf.set_boolean("landscape:flag_ground", core->FlagLandscape);
+	conf.set_boolean("landscape:flag_landscape", core->FlagLandscape);
 	conf.set_boolean("viewing:flag_cardinal_points", core->cardinals_points->get_flag_show());
 	conf.set_boolean("landscape:flag_atmosphere", core->FlagAtmosphere);
 	conf.set_boolean("landscape:flag_fog", core->FlagFog);
