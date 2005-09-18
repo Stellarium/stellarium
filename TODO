@@ -1,25 +1,75 @@
-Stellarium TODO list :
+#
+# Todo list for Stellarium 0.8
+# 
 
-Stop using the glpng library which is the cause of bugs and which is not very portable.
-Need to make stellarium own texture loader using for example SDL_image library.
+### Bugs
 
-Important features :
-* Use unicode font so that any language can be used for the UI
-* Use jpg format instead of png.
-* Selection of any object available in a list.
-    - need the implementation of the widget "list" in gui.
-* Reduce the program size by reducing the stellplanet library size, especially the moon coefficents file.
+- Selected object flashes on windows when tracking
+- Does gettext work on windows now?
 
-Features :
-* More nebulas.
-* More landscapes skins.
-* Minor planets
-* Simulate light pollution situations
-* Use alternate orbital algorithms for long time frames, when current ones degrade
-* Show precession circle
-* Star proper motion
 
-Other cool features :
-* Artificial satellites
-* Northern Lights
-* Using real 3D landscape with data taken from the site http://www.megginson.com/flightsim/fgfs-vmap0/
+### Non-code enhancements
+
+- more nebulae
+- more landscapes
+- more translations
+- minor planets
+- more natural satelites
+- more documentation
+
+
+### Cleanup
+
+- Move object attributes out of globals and into the objects
+- Move version number out of logo image
+- stop using glpng and use SDL_image or similar
+
+
+## Features for 0.8.0
+
+T select location by city
+T search text area should get focus when bring up search window
+- GUI access to set sky language and sky culture (ideally with new pulldown menu)
+R sidereal day/week key control 
+- limiting magnitude/simulate light pollution
+T alt/az readout for selected object
+- unicode font support (need to choose solution)
+T error message windows as option to be easier for windows users (script errors in particular)
+R mouse cursor hide after timeout as option
+R limiting mag for nebulae set in TUI
+R constellation line color set in TUI
+R remove planet orbits from 'p' key - move to another key and TUI
+R set zoom location
+- precession circle drawing
+- meridian line (first press of 'z')
+T hour angle on equator line (already on equatorial grid)
+- ecliptic line with (localized) months labeled
+- script display text command
+- i18n nebulae labels
+T object name pick option (show only label/hint for selected object)
+
+
+### Future feature ideas
+
+T chart/print option
+- select multiple constellations at once (for scripts)
+T select zodiac constellations somehow
+- planet rotational position issues - only galilean  moons accurate
+- comets
+- orbit algorithm degeneration issue beyond =/- 10k years 
+- script meteor radiant
+T constellation boundaries
+- object distances besides stars
+- proper motion of stars (after fix orbits over time issue)
+- star trails/time exposure
+- script images in dome alt-az coords
+- script images in equatorial coords
+- font scales?
+- planet trails of longer duration (script?)
+- background audio option
+- scripts allow user interaction during playback option?
+- Reduce the program size by reducing the stellplanet library size, especially the moon coefficents file?
+- Artificial satellites
+- Aurorae
+- telescope control???
+
