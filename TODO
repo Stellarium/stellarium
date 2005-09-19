@@ -17,14 +17,17 @@
 - more natural satellites
 - more documentation
 - constellation art for other cultures
-
+- We should considere using rosetta for translators (https://launchpad.net/rosetta)
 
 ### Cleanup
 
 - Move object attributes out of globals and into the objects
 - Move version number out of logo image
-- stop using glpng and use SDL_image or similar
-
+- stop using glpng and use SDL_image or similar.
+- Split stel_core+stel_sdl class into a real independant core managing sky rendering only and a stel_app class which manage GUI, I/O etc... This may include a reorganization of the src file structure itself.
+- Separate all s_gui code into an independant library.
+- Replace all translatable char* and c++ string by w_char* and c++ wstring for unicode support
+- Think on a way to include plug-ins for telescope control etc..
 
 ## Features for 0.8.0
 
@@ -32,9 +35,9 @@ T select location by city
 T search text area should get focus when bring up search window
 - GUI access to set sky language and sky culture (ideally with new pulldown menu)
 R sidereal day/week key control 
-- limiting magnitude/simulate light pollution
+- limiting magnitude/simulate light pollution (the feature somehow already exists in the skybright class BASIC version)
 T alt/az readout for selected object
-- unicode font support (need to choose solution)
+- unicode font support (need to choose solution between glgooey/FTGL/our own implemenation)
 T error message windows as option to be easier for windows users (script errors in particular)
 R mouse cursor hide after timeout as option
 R limiting mag for nebulae set in TUI
@@ -48,11 +51,14 @@ T hour angle on equator line (already on equatorial grid)
 - script display text command
 - i18n nebulae labels
 T object name pick option (show only label/hint for selected object)
-
+F cylindrical projection mode.
+- Night vision mode (red Gui)
+- Create a directory dedicated to landscapes with one landscapeXX.ini per landscape so that users can install extra landscapes just be copying them there without editing landscape.ini file.
 
 ### Future feature ideas
 
-T chart/print option
+- Constellation boundaries.
+T chart/print option (We should think about a real postscript/pdf renderer for printing)
 - select multiple constellations at once (for scripts)
 T select zodiac constellations somehow
 - planet rotational position issues - only galilean  moons accurate
@@ -72,5 +78,7 @@ T constellation boundaries
 - Reduce the program size by reducing the stellplanet library size, especially the moon coefficents file?
 - Artificial satellites
 - Aurorae
+- Clouds
 - telescope control???
-
+- Use libjpeg for some texture to reduce data files size.
+- Use 3D landscapes (data from google earth?)
