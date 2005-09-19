@@ -30,6 +30,7 @@
 #include "s_tui.h"
 
 #define TUI_SCRIPT_MSG "Select and exit to run."
+#define MOUSE_TIMEOUT 5000
 
 // Predeclaration of the stel_core class
 class stel_core;
@@ -319,6 +320,7 @@ private:
 	s_tui::MultiSet_item<string>* stel_ui::create_tree_from_time_zone_file(const string& zonetab);
 
 	bool ScriptDirectoryRead;
+	int MouseTimeLeft;
 };
 
 #endif  //_STEL_UI_H

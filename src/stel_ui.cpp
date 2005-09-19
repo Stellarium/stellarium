@@ -111,6 +111,9 @@ void stel_ui::init(void)
 		exit(-1);
 	}
 
+	// set up mouse cursor timeout
+	MouseTimeLeft = MOUSE_TIMEOUT;
+
 	// Create standard texture
 	baseTex = new s_texture("backmenu", TEX_LOAD_TYPE_PNG_ALPHA);
 	flipBaseTex = new s_texture("backmenu_flip", TEX_LOAD_TYPE_PNG_ALPHA);
@@ -679,6 +682,10 @@ int stel_ui::handle_move(int x, int y)
 	// otherwise script can get confused
 	if(core->scripts->is_playing()) return 0;
 
+	// Show cursor
+	SDL_ShowCursor(1);
+	MouseTimeLeft = MOUSE_TIMEOUT; 
+
 	if (desktop->onMove(x, y)) return 1;
 	if (is_dragging)
 	{
@@ -716,7 +723,11 @@ int stel_ui::handle_clic(Uint16 x, Uint16 y, S_GUI_VALUE button, S_GUI_VALUE sta
 	// otherwise script can get confused
 	if(core->scripts->is_playing()) return 0;
 
-    // Tony - moved the onClic check so if the ui handles, then don't need anymore attention
+	// Show cursor
+	SDL_ShowCursor(1);
+	MouseTimeLeft = MOUSE_TIMEOUT; 
+
+    // moved the onClic check so if the ui handles, then don't need anymore attention
 	if (desktop->onClic((int)x, (int)y, button, state))
     {
         has_dragged = true;
@@ -1125,6 +1136,14 @@ int stel_ui::handle_keys(Uint16 key, S_GUI_VALUE state)
 void stel_ui::gui_update_widgets(int delta_time)
 {
 	updateTopBar();
+
+	// handle mouse cursor timeout
+	if(MouseTimeLeft > delta_time) MouseTimeLeft -= delta_time;
+	else {
+		// hide cursor
+		MouseTimeLeft = 0;
+		SDL_ShowCursor(0);
+	}
 
 	// update message win
 	message_win->update(delta_time);
