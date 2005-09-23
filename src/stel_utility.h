@@ -60,6 +60,9 @@ string print_angle_dms(double location);
 /* Obtains a human readable angle in the form: dd\6mm'ss.ss" */
 string print_angle_dms_stel(double location);
 
+/* Obtains a human readable angle in the form: dd\6mm'ss" */
+string print_angle_dms_stel0(double location);
+
 /* Obtains a human readable angle in the form: hhhmmmss.sss" */
 string print_angle_hms(double location);
 
@@ -85,5 +88,7 @@ long int str_to_long(string str);
 int fcompare(const string& _base, const string& _sub);
 
 int str_compare_case_insensitive(const string& str1, const string& str2);
+
+string translateGreek(const string& s, bool greekOnly);
 
 #endif

@@ -137,7 +137,7 @@ double get_dec_angle(const string& str)
 	const char* s = str.c_str();
 	char *mptr, *ptr, *dec, *hh;
 	int negative = 0;
-	char delim1[] = " :.,;DdHhMm'\n\t\xBA";  // 0xBA was old degree delimiter
+	char delim1[] = " :.,;Dd°HhMm'\n\t\xBA";  // 0xBA was old degree delimiter
 	char delim2[] = " NSEWnsew\"\n\t";
 	int dghh = 0, minutes = 0;
 	double seconds = 0.0, pos;
@@ -236,14 +236,13 @@ double get_dec_angle(const string& str)
 *
 * Obtains a human readable location in the form: dd mm'ss.ss"
 */
+
 string print_angle_dms(double location)
 {
     static char buf[16];
     double deg = 0.0;
     double min = 0.0;
     double sec = 0.0;
-                                                                                                                      
-    *buf = 0;
                                                                                                                       
     sec = 60.0 * (modf(location, &deg));
     if (sec <= 0.0)
@@ -267,17 +266,19 @@ string print_angle_dms(double location)
       }
     }
  
-    sprintf(buf,"%+.2d% .2d'%.2f\"",(int)deg, (int) min, sec);
+    sprintf(buf,"%+.2d %.2d'%.2f\"",(int)deg, (int) min, sec);
     return buf;
 }
 
-string print_angle_dms_stel(double location)
+
+string print_angle_dms_stel_main(double location, bool decimals)
 {
     static char buf[16];
     double deg = 0.0;
     double min = 0.0;
     double sec = 0.0;
 	char sign = '+';
+	int d, m, s;
 
 	if(location<0) {
 		location *= -1;
@@ -286,8 +287,44 @@ string print_angle_dms_stel(double location)
 
     sec = 60.0 * (modf(location, &deg));
     sec = 60.0 * (modf(sec, &min));
-    sprintf(buf,"%c%.2d\6%.2d'%.2f\"", sign, (int)deg, (int) min, sec);
+    
+    d = (int)deg;
+    m = (int)min;
+    s = (int)sec;
+    
+    if (decimals)
+    // not sure this is ever used!
+	    sprintf(buf,"%c%.2dd%.2d'%.2f\"", sign, d, m, sec);
+	else
+	{
+		double sf = sec - s;
+		if (sf > 0.5f)
+		{
+			s += 1;
+			if (s == 60)
+			{
+				s = 0;
+				m += 1;
+				if (m == 60) 
+				{
+					m = 0;
+					d += 1;
+				}
+			}
+		}
+	    sprintf(buf,"%c%.2d\6%.2d'%.2d\"", sign, d, m, s);
+	}
     return buf;
+}
+
+string print_angle_dms_stel0(double location)
+{
+	return print_angle_dms_stel_main(location, 0);
+}
+
+string print_angle_dms_stel(double location)
+{
+	return print_angle_dms_stel_main(location, 2);
 }
 
 /* Obtains a human readable angle in the form: hhhmmmss.sss" */
@@ -450,3 +487,42 @@ int str_compare_case_insensitive(const string& str1, const string& str2)
 
 }
 
+string translateGreek(const string& s, bool greekOnly)
+{
+	int sz, n;
+	unsigned char ch;
+	
+	string greek, first; 
+//	string letters("ALF BET GAM DEL EPS ZET ETA THE IOT KAP LAM MU NU XI OMI PI RHO SIG TAU UPS PHI CHI PSI OME");
+	const string letters("AL BE GA DE EP ZE ET TE IO KA LA MU NU KS OM PI RH SI TA UP PH KH PS OM");
+	const int array[25] = { 3,3,3,3,3,3,3,3,3,3,3,2,2,2,3,2,3,3,3,3,3,3,3,3 };
+	unsigned int loc;
+	
+	first = s.substr(0,2);
+	
+	loc = letters.find(first,0);
+	if (loc != string::npos)
+	{
+		n = (int)loc/3;
+		sz = array[n];
+		
+		ch = 130 + n;
+		greek = string("a");
+		greek[0] = ch;
+		if (!greekOnly)
+			greek += s.substr(sz);
+
+		return greek;
+	}
+	else if (greekOnly)
+	{
+		// strip the stuff after the space if a number
+		loc = s.find(" ",0);
+		if (loc != string::npos)
+			return s.substr(0,loc);
+
+		return s;
+	}
+	else
+		return s;
+}
