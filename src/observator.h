@@ -71,6 +71,7 @@ public:
 
 	S_TZ_FORMAT get_tz_format(void) const {return time_zone_mode;}
 
+	string get_name(void);
 	void set_latitude(double l) {latitude=l;}
 	double get_latitude(void) const {return latitude;}
 	void set_longitude(double l) {longitude=l;}
@@ -85,7 +86,7 @@ public:
 	string get_date_format_str(void) const {return s_date_format_to_string(date_format);}
 	void set_date_format_str(const string& df) {date_format=string_to_s_date_format(df);}
 
-	void move_to(double lat, double lon, double alt, int duration);  // duration in ms
+	void move_to(double lat, double lon, double alt, int duration, const string& _name);  // duration in ms
 	void update(int delta_time);  // for moving observing position 
 
 private:
