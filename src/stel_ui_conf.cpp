@@ -18,15 +18,15 @@
  */
 
 #include "stel_ui.h"
-
+#include "stel_utility.h"
 
 using namespace s_gui;
-
 
 Component* stel_ui::createConfigWindow(void)
 {
 	config_win = new StdBtWin(_("Configuration"));
-	config_win->reshape(300,200,400,350);
+	config_win->setOpaque(opaqueGUI);
+	config_win->reshape(300,200,400,390);
 	config_win->setVisible(core->FlagConfig);
 
 	config_tab_ctr = new TabContainer();
@@ -191,7 +191,7 @@ Component* stel_ui::createConfigWindow(void)
 	LabeledButton* render_save_bt = new LabeledButton(_("Save as default"));
 	render_save_bt->setOnPressCallback(callback<void>(this, &stel_ui::saveRenderOptions));
 	tab_render->addComponent(render_save_bt);
-	render_save_bt->setPos(x + 50,y);
+	render_save_bt->setPos(120,y+22);
 	render_save_bt->setSize(170,25); y+=20;
 
 	// Date & Time options
@@ -241,35 +241,67 @@ Component* stel_ui::createConfigWindow(void)
 	tab_location->setSize(config_tab_ctr->getSize());
 
 	x=5; y=5;
-	s_texture * earth = new s_texture("earthmap");
-	s_texture * pointertex = new s_texture("neb");
-	earth_map = new MapPicture(earth, pointertex, x, y, tab_location->getSizex()-10, 250);
+	// TODO: specify the earthmap in the ini
+	s_texture *earth = new s_texture("earthmap");
+	s_texture *pointertex = new s_texture("pointeur1");
+	s_texture *citytex = new s_texture("city");
+	earth_map = new MapPicture(earth, pointertex, citytex, x,y,tab_location->getSizex()-10, 250);
 	earth_map->setOnPressCallback(callback<void>(this, &stel_ui::setObserverPositionFromMap));
+	earth_map->setOnNearestCityCallback(callback<void>(this, &stel_ui::setCityFromMap));
 	tab_location->addComponent(earth_map);
-	y+=earth_map->getSizey() + 20;
-
+	y+=earth_map->getSizey();
+	earth_map->set_font(core->MapFontSize, core->BaseFontPngName, core->BaseFontTxtName);
+	load_cities(core->DataDir + "cities.fab");
+	
+	y += 5;
+	Label * lblcursor = new Label(_("Cursor : "));
+	lblcursor->setPos(20, y+1);
+	lblMapLocation = new Label();
+	lblMapLocation->setPos(100, y+1);
+	
+	Label * lblloc = new Label(_("Selected : "));
+	lblloc->setPos(20, y+21);
+	lblMapPointer = new Label(core->observatory->get_name());
+	lblMapPointer->setPos(100, y+21);
+	
 	Label * lbllong = new Label(_("Longitude : "));
-	lbllong->setPos(30, y+1);
-	Label * lbllat = new Label(_("Latitude : "));
-	lbllat->setPos(30, y+21);
-	tab_location->addComponent(lbllong);
-	tab_location->addComponent(lbllat);
-
-	long_incdec	= new FloatIncDec(courierFont, tex_up, tex_down, -180, 180, 0, 0.05);
-	long_incdec->setSizex(100);
+	lbllong->setPos(20, y+41);
+	long_incdec	= new FloatIncDec(courierFont, tex_up, tex_down, -180, 180, 0, 1.f/60);
+	long_incdec->setSizex(135);
+	long_incdec->setFormat(FORMAT_LONGITUDE);
 	long_incdec->setOnPressCallback(callback<void>(this, &stel_ui::setObserverPositionFromIncDec));
-	long_incdec->setPos(110,y);
-	lat_incdec	= new FloatIncDec(courierFont, tex_up, tex_down, -90, 90, 0, 0.05);
-	lat_incdec->setSizex(100);
+	long_incdec->setPos(100,y+40);
+
+	Label * lbllat = new Label(_("Latitude : "));
+	lbllat->setPos(20, y+61);
+	lat_incdec	= new FloatIncDec(courierFont, tex_up, tex_down, -90, 90, 0, 1.f/60);
+	lat_incdec->setFormat(FORMAT_LATITUDE);
+	lat_incdec->setSizex(135);
 	lat_incdec->setOnPressCallback(callback<void>(this, &stel_ui::setObserverPositionFromIncDec));
-	lat_incdec->setPos(110,y+20);
-	tab_location->addComponent(long_incdec);
-	tab_location->addComponent(lat_incdec);
+	lat_incdec->setPos(100,y+60);
+
+	Label * lblalt = new Label(_("Altitude : "));
+	lblalt->setPos(20, y+81);
+	alt_incdec	= new IntIncDec(courierFont, tex_up, tex_down, 0, 2000, 0, 10);
+	alt_incdec->setSizex(135);
+	alt_incdec->setOnPressCallback(callback<void>(this, &stel_ui::setObserverPositionFromIncDec));
+	alt_incdec->setPos(100,y+80);
 
 	LabeledButton* location_save_bt = new LabeledButton(_("Save location"));
 	location_save_bt->setOnPressCallback(callback<void>(this, &stel_ui::saveObserverPosition));
-	location_save_bt->setPos(200,y+5);
-	location_save_bt->setSize(170,25);
+	location_save_bt->setPos(250,y+70);
+	location_save_bt->setSize(120,25);
+
+	tab_location->addComponent(lblcursor);
+	tab_location->addComponent(lblloc);
+	tab_location->addComponent(lblMapLocation);
+	tab_location->addComponent(lblMapPointer);
+	tab_location->addComponent(lbllong);
+	tab_location->addComponent(lbllat);
+	tab_location->addComponent(lblalt);
+	tab_location->addComponent(long_incdec);
+	tab_location->addComponent(lat_incdec);
+	tab_location->addComponent(alt_incdec);
 	tab_location->addComponent(location_save_bt);
 
 	// Video Options
@@ -334,7 +366,7 @@ Component* stel_ui::createConfigWindow(void)
 	LabeledButton* video_save_bt = new LabeledButton(_("Save as default"));
 	video_save_bt->setOnPressCallback(callback<void>(this, &stel_ui::setVideoOption));
 	tab_video->addComponent(video_save_bt);
-	video_save_bt->setPos(x + 50,y);
+	video_save_bt->setPos(120,y+22);
 	video_save_bt->setSize(170,25); y+=20;
 
 	// Landscapes option
@@ -379,7 +411,88 @@ Component* stel_ui::createConfigWindow(void)
 	return config_win;
 }
 
-// Tony - search window
+void stel_ui::load_cities(const string & fileName)
+{
+	string name, state, country;
+	float time;
+
+	char linetmp[200];
+	char cname[50],cstate[50],ccountry[50],clat[20],clon[20],ctime[20];
+	int showatzoom;
+	int alt;
+	char tmpstr[2000];
+	int total = 0;
+
+	printf("Loading cities file %s ... ", fileName.c_str());
+	FILE *fic = fopen(fileName.c_str(), "r");
+	if (!fic)
+	{
+		printf("Can't open %s\n", fileName.c_str());
+		return; // no art, but still loaded constellation data
+	}
+
+	// determine total number to be loaded for percent complete display
+	while (fgets(tmpstr, 2000, fic)) {++total;}
+	rewind(fic);
+
+//	LoadingBar lb(core->projection, core->LoadingBarSize, core->BaseFontPngName, core->BaseFontTxtName, "logo24bits", core->screen_W, core->screen_H);
+
+	int line = 0;
+	while (!feof(fic))
+	{
+/*
+		if (!(line%100) || (line == total-1))
+		{
+			sprintf(tmpstr, _("Loading city data: %d/%d"), line+1, total);
+			lb.SetMessage(tmpstr);
+			lb.Draw((float)(line+1)/total);
+		}
+*/
+		fgets(linetmp, 100, fic);
+		if (linetmp[0] != '#')
+		{
+			if (sscanf(linetmp, "%s %s %s %s %s %d %s %d\n", cname, cstate, ccountry, clat, 
+				clon, &alt, ctime, &showatzoom) != 8)
+			{
+				if (feof(fic))
+				{
+					// Empty city file
+					fclose(fic);
+					return;		
+				}
+				printf("ERROR while loading city data in line %d\n", line);
+				assert(0);
+			}
+			
+			name = cname;
+		    for (string::size_type i=0;i<name.length();++i)
+			{
+				if (name[i]=='_') name[i]=' ';
+			}	
+			state = cstate;
+		    for (string::size_type i=0;i<state.length();++i)
+			{
+				if (state[i]=='_') state[i]=' ';
+			}
+			country = ccountry;
+		    for (string::size_type i=0;i<country.length();++i)
+			{
+				if (country[i]=='_') country[i]=' ';
+			}	
+			if (ctime[0] == 'x')
+				time = 0;
+			else 
+				sscanf(ctime,"%f",&time);
+			earth_map->addCity(name, state, country, get_dec_angle(clon), 
+				get_dec_angle(clat), time, showatzoom, alt);
+		}
+		line++;
+	}
+	fclose(fic);
+	printf("loaded %d cities.\n", line);
+}
+
+// Search window
 
 Component* stel_ui::createSearchWindow(void)
 {
@@ -390,11 +503,13 @@ Component* stel_ui::createSearchWindow(void)
 	int x,y;
 	x=70; y=yi+5;
 	
-	int h = 120;
+//	int h = 120;
+	int h = 300;
 
      // Bring up dialog
 	search_win = new StdBtWin(_("Object Search"));
-	search_win->reshape(300,70,400,h);
+	search_win->setOpaque(opaqueGUI);
+	search_win->reshape(300,200,400,h);
 	search_win->setVisible(core->FlagSearch);
 
 	search_tab_ctr = new TabContainer();
@@ -471,6 +586,71 @@ Component* stel_ui::createSearchWindow(void)
 	nebula_edit->setPos(x+100,y);
 	nebula_edit->setSize(170,25);
 
+    // controls
+	FilledContainer* tab_example = new FilledContainer();
+	tab_example->setSize(search_tab_ctr->getSize());
+
+	// example horizontal cursorbar
+	CursorBar *chbar = new CursorBar(false, -.6,1.7);
+	tab_example->addComponent(chbar);
+	chbar->setPos(60,10);
+	chbar->setSize(150,20);
+	
+	// example horizontal cursorbar
+    CursorBar *cvbar = new CursorBar(true, 5,15);
+	cvbar->setPos(30,30);
+	cvbar->setSize(20,120);
+	tab_example->addComponent(cvbar);
+
+	// example vscrollbar
+	ScrollBar *vbar = new ScrollBar(true, 5,1);
+	vbar->setPos(320,20);
+	vbar->setSize(20,140);
+	tab_example->addComponent(vbar);
+
+	// example hscrollbar
+	ScrollBar *hbar = new ScrollBar(false,12,3);
+	hbar->setPos(80,160);
+	hbar->setSize(240,20);
+	tab_example->addComponent(hbar);
+
+	listBox = new ListBox(6);
+	listBox->setPos(60,40);
+	listBox->setSizex(200);
+	listBox->setOnChangeCallback(callback<void>(this, &stel_ui::listBoxChanged));
+	tab_example->addComponent(listBox);
+
+	// example editbox
+	EditBox *editbox = new EditBox();
+	editbox->setPos(20,180);
+	editbox->setSize(250,25);
+	tab_example->addComponent(editbox);
+
+	// example messageboxes and inputboxes
+	LabeledButton *button1 = new LabeledButton("MsgBox 1");
+	button1->setPos(20,220);
+	button1->setSize(80,25);
+	button1->setOnPressCallback(callback<void>(this, &stel_ui::msgbox1));
+	tab_example->addComponent(button1);
+
+	LabeledButton *button2 = new LabeledButton("MsgBox 2");
+	button2->setPos(115,220);
+	button2->setSize(80,25);
+	button2->setOnPressCallback(callback<void>(this, &stel_ui::msgbox2));
+	tab_example->addComponent(button2);
+
+	LabeledButton *button3 = new LabeledButton("MsgBox 3");
+	button3->setPos(205,220);
+	button3->setSize(80,25);
+	button3->setOnPressCallback(callback<void>(this, &stel_ui::msgbox3));
+	tab_example->addComponent(button3);
+
+	LabeledButton *button4 = new LabeledButton("Inputbox");
+	button4->setPos(300,220);
+	button4->setSize(80,25);
+	button4->setOnPressCallback(callback<void>(this, &stel_ui::inputbox1));
+	tab_example->addComponent(button4);
+
     // Planets
 	FilledContainer* tab_planets = new FilledContainer();
 	tab_planets->setSize(search_tab_ctr->getSize());
@@ -494,18 +674,80 @@ Component* stel_ui::createSearchWindow(void)
 	planet_edit->setPos(x+100,y);
 	planet_edit->setSize(170,25);
 	
-	// Tony
+	// Search tab
 	search_tab_ctr->setTexture(flipBaseTex);
 	search_tab_ctr->addTab(tab_stars, _("Stars"));
 	search_tab_ctr->addTab(tab_constellations, _("Constellation"));
 	search_tab_ctr->addTab(tab_nebula, _("Nebula"));
 	search_tab_ctr->addTab(tab_planets, _("Planets & Moons"));
+	search_tab_ctr->addTab(tab_example, _("Widgets"));
     search_win->addComponent(search_tab_ctr);
 	search_win->addComponent(lblSearchMessage);
 	search_win->setOnHideBtCallback(callback<void>(this, &stel_ui::search_win_hideBtCallback));
 
 	return search_win;
 
+}
+
+void stel_ui::msgbox1(void)
+{
+	dialog_win->MessageBox("Stellarium",string("This is a 1 button message (OK only)\nWith an Alert Icon\nAnd an extra line"), 
+		BT_OK + BT_ICON_ALERT, "1 button test");
+}
+
+void stel_ui::msgbox2(void)
+{
+	dialog_win->MessageBox("Stellarium","This is a 2 button message (OK & CANCEL)\nWith a Question Icon", 
+		BT_OK + BT_CANCEL + BT_ICON_QUESTION, "2 button test");
+}
+
+void stel_ui::msgbox3(void)
+{
+	dialog_win->MessageBox("Stellarium","This is a 2 button message (OK & CANCEL)\nWith a Blank Icon", 
+		BT_OK + BT_CANCEL + BT_ICON_BLANK, "2 button test");
+}
+
+void stel_ui::inputbox1(void)
+{
+	dialog_win->InputBox("Stellarium","Input a string into the EditBox class below.", "input test");
+}
+
+void stel_ui::dialogCallback(void)
+{
+	string lastID = dialog_win->getLastID();
+	int lastButton = dialog_win->getLastButton();
+	string lastInput = dialog_win->getLastInput();
+	int lastType = dialog_win->getLastType();
+
+	if (lastID == "observatory name")
+	{
+		if (lastButton != BT_OK || lastInput == "")
+			lastInput = UNKNOWN_OBSERVATORY;
+		doSaveObserverPosition(lastInput);
+		setCityFromMap();
+	}
+	else if (lastID != "")
+	{
+		string msg = lastID;
+		msg += " returned btn: ";
+	
+		if (lastButton == BT_OK) msg += "BT_OK";
+		else if (lastButton == BT_YES) msg += "BT_YES";
+		else if (lastButton == BT_NO) msg += "BT_NO";
+		else if (lastButton == BT_CANCEL) msg += "BT_CANCEL";
+	
+		if (lastType == STDDLGWIN_MSG) dialog_win->MessageBox("Stellarium",msg, BT_OK);
+		else if (lastType == STDDLGWIN_INPUT) dialog_win->MessageBox("Stellarium",msg + " inp: " + lastInput, BT_OK);
+	}		
+}
+
+void stel_ui::listBoxChanged(void)
+{
+	int value = listBox->getValue();
+	string objectName = listBox->getItem(value);
+    string command = string("select planet " + objectName);
+    string error = string("Planet '" + objectName + "' not found");
+	doSearchCommand(command, error);
 }
 
 void stel_ui::hideSearchMessage(void)
@@ -521,7 +763,6 @@ void stel_ui::showSearchMessage(string _message)
        int x1 = search_win->getSizex();
        int x2 = lblSearchMessage->getSizex();
        lblSearchMessage->setPos((x1-x2)/2,search_win->getSizey()-17);
-       search_win->draw();
 }
 
 void stel_ui::doSearchCommand(string _command, string _error)
@@ -546,6 +787,7 @@ void stel_ui::doNebulaSearch(void)
     string error = string("Nebula '" + objectName + "' not found");
     
     doSearchCommand(command, error);
+    nebula_edit->clearText();
 }
 
 void stel_ui::doConstellationSearch(void)
@@ -556,18 +798,15 @@ void stel_ui::doConstellationSearch(void)
 
     if (objectName != "")
     {
-       string command = string("select constellation " + objectName);
-       string error = string("Constellation '" + objectName + "' not found");
-       doSearchCommand(command, error);
-    }
-    else {
-        showSearchMessage(string("Constellation " + rawObjectName + " not found"));
-	}
-}
+		string command = string("select constellation " + objectName);
+		string error = string("Constellation '" + objectName + "' not found");
 
-void stel_ui::showStarAutoComplete(void)
-{
-    showSearchMessage(star_edit->getAutoCompleteOptions());
+		doSearchCommand(command, error);
+    }
+    else
+        showSearchMessage(string("Constellation " + rawObjectName + " not found"));
+
+	constellation_edit->clearText();
 }
 
 void stel_ui::showConstellationAutoComplete(void)
@@ -575,12 +814,14 @@ void stel_ui::showConstellationAutoComplete(void)
     showSearchMessage(constellation_edit->getAutoCompleteOptions());
 }
 
-void stel_ui::doStarSearch(void) 
-{ 
-	string objectName = star_edit->getText();
-	unsigned int HP = core->hip_stars->getCommonNameHP(objectName);
-	
-	if (HP > 0)
+void stel_ui::doStarSearch(void)
+{
+    string objectName = star_edit->getText();
+    unsigned int HP = core->hip_stars->getCommonNameHP(objectName);
+
+	star_edit->clearText();
+    
+    if (HP > 0)
 	{
 		char sname[20];
 		sprintf(sname,"%u",HP);
@@ -591,18 +832,23 @@ void stel_ui::doStarSearch(void)
 		int number;
 		if (sscanf(objectName.c_str(),"%d",&number) != 1 || number < 0)
 		{
-			showSearchMessage(string("Invalid star name '" + objectName + "'"));
+			showSearchMessage(string("Invalid star name '" + objectName + "'")); 
 			objectName = "";
 		}
 	}
-	
-	if (objectName != "")
-	{
-		string command = string("select HP " + objectName);
-		string error = string("Star 'HP " + objectName + "' not found");
-	
-		doSearchCommand(command, error);
+      
+    if (objectName != "")
+    {
+	    string command = string("select HP " + objectName);
+    	string error = string("Star 'HP " + objectName + "' not found");
+     
+	    doSearchCommand(command, error);
 	}
+}
+
+void stel_ui::showStarAutoComplete(void)
+{
+    showSearchMessage(star_edit->getAutoCompleteOptions());
 }
 
 void stel_ui::doPlanetSearch(void)
@@ -611,7 +857,9 @@ void stel_ui::doPlanetSearch(void)
     string command = string("select planet " + objectName);
     string error = string("Planet '" + objectName + "' not found");
 
-    doSearchCommand(command, error);
+    planet_edit->clearText();
+    
+	doSearchCommand(command, error);
 }
 
 void stel_ui::showPlanetAutoComplete(void)
@@ -657,20 +905,52 @@ void stel_ui::setCurrentTimeFromConfig(void)
 void stel_ui::setObserverPositionFromMap(void)
 {
 	std::ostringstream oss;
-	oss << "moveto lat " << earth_map->getPointerLatitude() << " lon " << earth_map->getPointerLongitude();
+	oss << "moveto lat " << earth_map->getPointerLatitude() << " lon " << earth_map->getPointerLongitude()
+		<< " alt " << earth_map->getPointerAltitude();
 	core->commander->execute_command(oss.str());
+}
+
+void stel_ui::setCityFromMap(void)
+{
+	waitOnLocation = false;
+	lblMapLocation->setLabel(earth_map->getCursorString());
+	lblMapPointer->setLabel(earth_map->getPositionString());
 }
 
 void stel_ui::setObserverPositionFromIncDec(void)
 {
 	std::ostringstream oss;
-	oss << "moveto lat " << lat_incdec->getValue() << " lon " << long_incdec->getValue();
+	oss << "moveto lat " << lat_incdec->getValue() << " lon " << long_incdec->getValue()
+		<< " alt " << alt_incdec->getValue();
 	core->commander->execute_command(oss.str());
+}
+
+void stel_ui::doSaveObserverPosition(const string& name)
+{
+	string location = name;
+    for (string::size_type i=0;i<location.length();++i)
+	{
+		if (location[i]==' ') location[i]='_';
+	}
+
+	std::ostringstream oss;
+	oss << "moveto lat " << lat_incdec->getValue() << " lon " << long_incdec->getValue()
+		<< " name " << location;
+	core->commander->execute_command(oss.str());
+
+	core->observatory->save(core->ConfigDir + core->config_file, "init_location");
+	core->ui->setTitleObservatoryName(core->ui->getTitleWithAltitude());
 }
 
 void stel_ui::saveObserverPosition(void)
 {
-	core->observatory->save(core->ConfigDir + core->config_file, "init_location");
+	string location = earth_map->getPositionString();
+
+	if (location == UNKNOWN_OBSERVATORY)	
+		dialog_win->InputBox("Stellarium","Enter observatory name", "observatory name");
+	else
+		doSaveObserverPosition(location);
+
 }
 
 void stel_ui::saveRenderOptions(void)
@@ -693,7 +973,9 @@ void stel_ui::saveRenderOptions(void)
 	conf.set_double("astro:max_mag_nebula_name", core->MaxMagNebulaName);
 	conf.set_boolean("astro:flag_planets", core->FlagPlanets);
 	conf.set_boolean("astro:flag_planets_hints", core->FlagPlanetsHints);
-	conf.set_double("viewing:flag_moon_scaled", core->FlagMoonScaled);
+	conf.set_double("viewing:moon_scale", core->ssystem->get_moon()->get_sphere_scale());
+	conf.set_boolean("viewing:flag_night", core->FlagNight);
+	conf.set_boolean("viewing:use_common_names", core->FlagUseCommonNames);
 	conf.set_boolean("viewing:flag_equatorial_grid", core->FlagEquatorialGrid);
 	conf.set_boolean("viewing:flag_azimutal_grid", core->FlagAzimutalGrid);
 	conf.set_boolean("viewing:flag_equator_line", core->FlagEquatorLine);
@@ -795,6 +1077,7 @@ void stel_ui::updateConfigForm(void)
 	planets_cbx->setState(core->FlagPlanets);
 	planets_hints_cbx->setState(core->FlagPlanetsHints);
 	moon_x4_cbx->setState(core->FlagMoonScaled);
+	// TODO: add charting button
 	equator_grid_cbx->setState(core->FlagEquatorialGrid);
 	azimuth_grid_cbx->setState(core->FlagAzimutalGrid);
 	equator_cbx->setState(core->FlagEquatorLine);
@@ -808,6 +1091,16 @@ void stel_ui::updateConfigForm(void)
 	earth_map->setPointerLatitude(core->observatory->get_latitude());
 	long_incdec->setValue(core->observatory->get_longitude());
 	lat_incdec->setValue(core->observatory->get_latitude());
+	alt_incdec->setValue(core->observatory->get_altitude());
+	lblMapLocation->setLabel(earth_map->getCursorString());
+	if (!waitOnLocation)
+		lblMapPointer->setLabel(earth_map->getPositionString());
+	else
+	{
+		earth_map->findPosition(core->observatory->get_longitude(),core->observatory->get_latitude());
+		lblMapPointer->setLabel(earth_map->getPositionString());
+		waitOnLocation = false;
+	}
 
 	time_current->setJDay(core->navigation->get_JDay() + core->observatory->get_GMT_shift(core->navigation->get_JDay())*JD_HOUR);
 	system_tz_lbl2->setLabel("(" +
@@ -825,10 +1118,13 @@ void stel_ui::config_win_hideBtCallback(void)
 {
 	core->FlagConfig = false;
 	config_win->setVisible(false);
+	// for MapPicture - when the dialog appears, this tells the system
+	// not to show the city until MapPicture has located the name
+	// from the lat and long.
+	waitOnLocation = true;
 	bt_flag_config->setState(0);
 }
 
-// Tony
 void stel_ui::search_win_hideBtCallback(void)
 {
 	core->FlagSearch = false;
