@@ -655,7 +655,6 @@ int StelCommandInterface::set_flag(string name, string value, bool &newval, bool
 		}
 		else if(name=="night") {
 			newval = stcore->FlagNight = !stcore->FlagNight;
-			stcore->CalcDrawMode();
 		}
 		else if(name=="azimuthal_grid") newval = (stcore->FlagAzimutalGrid = !stcore->FlagAzimutalGrid);
 		else if(name=="equatorial_grid") newval = (stcore->FlagEquatorialGrid = !stcore->FlagEquatorialGrid);
@@ -757,7 +756,6 @@ int StelCommandInterface::set_flag(string name, string value, bool &newval, bool
 		}
 		else if(name=="night") {
 			stcore->FlagNight = newval;
-			stcore->CalcDrawMode();
 		}
 		else if(name=="azimuthal_grid") stcore->FlagAzimutalGrid = newval;
 		else if(name=="equatorial_grid") stcore->FlagEquatorialGrid = newval;
