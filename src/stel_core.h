@@ -283,6 +283,8 @@ private:
 	int FlagShowSelectedObjectInfo;
 	Vec3f GuiBaseColor;
 	Vec3f GuiTextColor;
+	Vec3f GuiBaseColorr;
+	Vec3f GuiTextColorr;
 	float BaseFontSize;
 
 	Vec3f AzimuthalColor;
@@ -300,43 +302,44 @@ private:
 	Vec3f ObjectTrailsColor;
 
 	// Text UI
-	int FlagEnableTuiMenu;
-	int FlagShowGravityUi;
-	int FlagShowTuiMenu;
-	int FlagShowTuiDateTime;
-	int FlagShowTuiShortObjInfo;
+	bool FlagEnableTuiMenu;
+	bool FlagShowGravityUi;
+	bool FlagShowTuiMenu;
+	bool FlagShowTuiDateTime;
+	bool FlagShowTuiShortObjInfo;
 
 	// Astro
-    int FlagStars;
-    int FlagPlanets;
-    int FlagPlanetsHints;
-    int FlagPlanetsOrbits;
-    int FlagObjectTrails;
-    int FlagNebula;
-    int FlagNebulaLongName;
+    bool FlagStars;
+    bool FlagPlanets;
+    bool FlagPlanetsHints;
+    bool FlagPlanetsOrbits;
+    bool FlagObjectTrails;
+    bool FlagNebula;
+    bool FlagNebulaLongName;
     float MaxMagNebulaName;
-    int FlagNebulaCircle;
-    int FlagMilkyWay;
+    bool FlagNebulaCircle;
+    bool FlagMilkyWay;
     float MilkyWayIntensity;
-    int FlagBrightNebulae;
+    bool FlagBrightNebulae;
 	
 	// Landscape
-	int FlagLandscape;
-    int FlagFog;
-    int FlagAtmosphere;
+	bool FlagLandscape;
+    bool FlagFog;
+    bool FlagAtmosphere;
 	float sky_brightness;
 	float AtmosphereFadeDuration;
 
 	// Viewing
-    int FlagAzimutalGrid;
-    int FlagEquatorialGrid;
-    int FlagEquatorLine;
-    int FlagEclipticLine;
-	int FlagGravityLabels;
+    bool FlagAzimutalGrid;
+    bool FlagEquatorialGrid;
+    bool FlagEquatorLine;
+    bool FlagEclipticLine;
+	bool FlagGravityLabels;
 	float MoonScale;
-	int FlagMoonScaled;
+	bool FlagMoonScaled;
 	float ConstellationArtIntensity;
 	float ConstellationArtFadeDuration;
+	bool FlagNight;
 
 	// Navigation
 	string PositionFile;
