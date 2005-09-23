@@ -140,7 +140,7 @@ void Constellation_mgr::load_lines_and_art(const string & fileName, const string
 		//Tony - added "+1" to ensure art finsihes at last entry
 		sprintf(tmpstr, _("Loading Constellation Art: %d/%d"), current+1, total);
 		lb.SetMessage(tmpstr);
-		lb.Draw((float)current/total);
+		lb.Draw((float)(current+1)/total);
 		
 		cons = NULL;
 		cons = find_from_short_name(shortname);
@@ -314,7 +314,6 @@ void Constellation_mgr::load_names(const string& names_file)
 	fclose(cnFile);
 }
 
-// Tony to get the names for the autocomplete
 vector <string> Constellation_mgr::getNames(void) 
 {
      vector<string> names;
@@ -331,7 +330,6 @@ vector <string> Constellation_mgr::getNames(void)
      return names;
 }
 
-// Tony to get the names for the autocomplete
 vector<string> Constellation_mgr::getShortNames(void)
 {
     vector<string> names;
@@ -437,7 +435,6 @@ void Constellation_mgr::set_selected_const(Constellation * c)
 		c->set_flag_art(cc->get_flag_art());
 		selected = c;
 				
-		// Tony - isolateSelected flag for isolating the constellations 
 		if (isolateSelected)
 		{
 		    vector < Constellation * >::const_iterator iter;
