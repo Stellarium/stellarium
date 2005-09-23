@@ -331,14 +331,16 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 		  double lat = stcore->observatory->get_latitude();
 		  double lon = stcore->observatory->get_longitude();
 		  double alt = stcore->observatory->get_altitude();
+		  string name;
 		  int delay;
 		  
+		  if(args["name"]!="") name = args["name"];
 		  if(args["lat"]!="") lat = str_to_double(args["lat"]);
 		  if(args["lon"]!="") lon = str_to_double(args["lon"]);
 		  if(args["alt"]!="") alt = str_to_double(args["alt"]);
 		  delay = (int)(1000.*str_to_double(args["duration"]));
 		  
-		  stcore->observatory->move_to(lat,lon,alt,delay);
+		  stcore->observatory->move_to(lat,lon,alt,delay,name);
 	  } else status = 0;
 
   } else if(command=="image") {
@@ -651,6 +653,10 @@ int StelCommandInterface::set_flag(string name, string value, bool &newval, bool
 			newval = (stcore->FlagAtmosphere = !stcore->FlagAtmosphere);
 			if(!newval) stcore->FlagFog = 0;  // turn off fog with atmosphere
 		}
+		else if(name=="night") {
+			newval = stcore->FlagNight = !stcore->FlagNight;
+			stcore->CalcDrawMode();
+		}
 		else if(name=="azimuthal_grid") newval = (stcore->FlagAzimutalGrid = !stcore->FlagAzimutalGrid);
 		else if(name=="equatorial_grid") newval = (stcore->FlagEquatorialGrid = !stcore->FlagEquatorialGrid);
 		else if(name=="equator_line") newval = (stcore->FlagEquatorLine = !stcore->FlagEquatorLine);
@@ -748,6 +754,10 @@ int StelCommandInterface::set_flag(string name, string value, bool &newval, bool
 		else if(name=="atmosphere") { 
 			stcore->FlagAtmosphere = newval;
 			if(!newval) stcore->FlagFog = 0;  // turn off fog with atmosphere
+		}
+		else if(name=="night") {
+			stcore->FlagNight = newval;
+			stcore->CalcDrawMode();
 		}
 		else if(name=="azimuthal_grid") stcore->FlagAzimutalGrid = newval;
 		else if(name=="equatorial_grid") stcore->FlagEquatorialGrid = newval;
