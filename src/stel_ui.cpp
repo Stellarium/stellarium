@@ -52,6 +52,7 @@ stel_ui::stel_ui(stel_core * _core) :
 		bt_flag_help(NULL),
 		bt_flag_equatorial_mode(NULL),
 		bt_flag_config(NULL),
+		bt_flag_night(NULL),
 		bt_flag_search(NULL),
         bt_script(NULL),
 		bt_flag_goto(NULL),
@@ -67,6 +68,7 @@ stel_ui::stel_ui(stel_core * _core) :
 
 		config_win(NULL),
 		search_win(NULL),
+		dialog_win(NULL),
 		tui_root(NULL)
 
 {
@@ -77,6 +79,9 @@ stel_ui::stel_ui(stel_core * _core) :
 	}
 	core = _core;
 	is_dragging = false;
+	waitOnLocation = true;
+	opaqueGUI = true;
+	initialised = false;
 }
 
 /**********************************************************************************/
@@ -127,7 +132,7 @@ void stel_ui::init(void)
 
 	Component::initScissor(core->screen_W, core->screen_H);
 
-	desktop = new Container();
+	desktop = new Container(true);
 	desktop->reshape(0,0,core->screen_W,core->screen_H);
 
 	bt_flag_help_lbl = new Label("ERROR...");
@@ -148,10 +153,11 @@ void stel_ui::init(void)
 	desktop->addComponent(info_select_ctr);
 
 	// TEST message window
-	message_txtlbl = new TextLabel("", spaceFont);
+	message_txtlbl = new TextLabel();
 	message_txtlbl->adjustSize();
 	message_txtlbl->setPos(10,10);
 	message_win = new StdTransBtWin(_("Message"), 5000);
+	message_win->setOpaque(opaqueGUI);
 	message_win->reshape(300,200,400,100);
 	message_win->addComponent(message_txtlbl);
 	message_win->setVisible(0);
@@ -162,11 +168,18 @@ void stel_ui::init(void)
 	desktop->addComponent(createTimeControlButtons());
 	desktop->addComponent(bt_flag_help_lbl);
 	desktop->addComponent(bt_flag_time_control_lbl);
+
+	dialog_win = new StdDlgWin(_("Stellarium"));
+	dialog_win->setOpaque(opaqueGUI);
+	dialog_win->setDialogCallback(callback<void>(this, &stel_ui::dialogCallback));
+	desktop->addComponent(dialog_win);
+
 	desktop->addComponent(createLicenceWindow());
 	desktop->addComponent(createHelpWindow());
 	desktop->addComponent(createConfigWindow());
 	desktop->addComponent(createSearchWindow()); // Tony - added the search window
 
+	initialised = true;
 }
 
 
@@ -186,6 +199,7 @@ void stel_ui::show_message(string _message, int _time_out)
 }
 
 
+#define TOP_BAR_HEIGHT 17
 ////////////////////////////////////////////////////////////////////////////////
 Component* stel_ui::createTopBar(void)
 {
@@ -193,10 +207,10 @@ Component* stel_ui::createTopBar(void)
 	top_bar_hour_lbl = new Label("-", courierFont);	top_bar_hour_lbl->setPos(110,2);
 	top_bar_fps_lbl = new Label("-", courierFont);	top_bar_fps_lbl->setPos(core->screen_W-100,2);
 	top_bar_fov_lbl = new Label("-", courierFont);	top_bar_fov_lbl->setPos(core->screen_W-220,2);
-	top_bar_appName_lbl = new Label(APP_NAME);
+	top_bar_appName_lbl = new Label(APP_NAME, courierFont);
 	top_bar_appName_lbl->setPos(core->screen_W/2-top_bar_appName_lbl->getSizex()/2,2);
 	top_bar_ctr = new FilledContainer();
-	top_bar_ctr->reshape(0,0,core->screen_W,15);
+	top_bar_ctr->reshape(0,0,core->screen_W,TOP_BAR_HEIGHT);
 	top_bar_ctr->addComponent(top_bar_date_lbl);
 	top_bar_ctr->addComponent(top_bar_hour_lbl);
 	top_bar_ctr->addComponent(top_bar_fps_lbl);
@@ -309,6 +323,11 @@ Component* stel_ui::createFlagButtons(void)
 	bt_flag_config->setOnPressCallback(callback<void>(this, &stel_ui::cb));
 	bt_flag_config->setOnMouseInOutCallback(callback<void>(this, &stel_ui::cbr));
 
+
+	bt_flag_night = new FlagButton(false, NULL, "bt_night");
+	bt_flag_night->setOnPressCallback(callback<void>(this, &stel_ui::cb));
+	bt_flag_night->setOnMouseInOutCallback(callback<void>(this, &stel_ui::cbr));
+
 	bt_flag_quit = new FlagButton(true, NULL, "bt_quit");
 	bt_flag_quit->setOnPressCallback(callback<void>(this, &stel_ui::cb));
 	bt_flag_quit->setOnMouseInOutCallback(callback<void>(this, &stel_ui::cbr));
@@ -318,7 +337,9 @@ Component* stel_ui::createFlagButtons(void)
 	bt_flag_search->setOnMouseInOutCallback(callback<void>(this, &stel_ui::cbr));
 
 	bt_script = new EditBox("");
+	bt_script->setAutoFocus(false);
 	bt_script->setSize(299,24);
+	bt_script->setOnKeyCallback(callback<void>(this, &stel_ui::cbEditScriptKey));
 	bt_script->setOnReturnKeyCallback(callback<void>(this, &stel_ui::cbEditScriptExecute));
 	bt_script->setOnMouseInOutCallback(callback<void>(this, &stel_ui::cbr));
 
@@ -353,6 +374,7 @@ Component* stel_ui::createFlagButtons(void)
 
 	bt_flag_ctr->addComponent(bt_flag_search);			bt_flag_search->setPos(x,0); x+=UI_BT;
 	bt_flag_ctr->addComponent(bt_flag_config);			bt_flag_config->setPos(x,0); x+=UI_BT;
+	bt_flag_ctr->addComponent(bt_flag_night);			bt_flag_night->setPos(x,0); x+=UI_BT;
 	bt_flag_ctr->addComponent(bt_flag_help);			bt_flag_help->setPos(x,0); x+=UI_BT;
 	bt_flag_ctr->addComponent(bt_flag_quit);			bt_flag_quit->setPos(x,0); x+=UI_BT;
 
@@ -436,17 +458,33 @@ void stel_ui::cbEditScriptInOut(void)
 	if (bt_script->getIsMouseOver())
 	{
 		bt_flag_help_lbl->setLabel(_("Script commander"));
-        bt_script->setFocus();
     }
-	else
-        bt_script->resetFocus();
+}
+
+void stel_ui::cbEditScriptKey(void)
+{
+	if (bt_script->getLastKey() == SDLK_SPACE || bt_script->getLastKey() == SDLK_TAB)
+	{
+		string command = bt_script->getText();
+        transform(command.begin(), command.end(), command.begin(), ::tolower);
+        if (bt_script->getLastKey() == SDLK_SPACE) command = command.substr(0,command.length()-1);
+	}
+	else if	(bt_script->getLastKey() == SDLK_ESCAPE)
+	{
+		bt_script->clearText();
+	}
 }
 
 void stel_ui::cbEditScriptExecute(void)
 {
      printf("Executing script: %s\n",bt_script->getText().c_str());
+	string text = bt_script->getText();
+
+	bt_script->clearText();
+	bt_script->setEditing(false);
      
-     if (bt_script->getText() == "tony")
+	if (text == "goto")
+	// Tony - testing
      {
         // this is a specified goto
         // test out on M83
@@ -487,6 +525,7 @@ void stel_ui::cb(void)
 	help_win->setVisible(core->FlagHelp);
 	core->navigation->set_viewing_mode(bt_flag_equatorial_mode->getState() ? VIEW_EQUATOR : VIEW_HORIZON);
 	core->FlagConfig			= bt_flag_config->getState();
+	core->FlagNight				= bt_flag_night->getState();
 	config_win->setVisible(core->FlagConfig);
 
 	core->FlagSearch			= bt_flag_search->getState();
@@ -535,6 +574,8 @@ void stel_ui::cbr(void)
 		bt_flag_help_lbl->setLabel(_("Equatorial/Altazimuthal Mount [ENTER]"));
 	if (bt_flag_config->getIsMouseOver())
 		bt_flag_help_lbl->setLabel(_("Configuration window"));
+	if (bt_flag_night->getIsMouseOver())
+		bt_flag_help_lbl->setLabel(_("Night (red) mode"));
 	if (bt_flag_quit->getIsMouseOver())
 #ifndef MACOSX
 		bt_flag_help_lbl->setLabel(_("Quit [CTRL + Q]"));
@@ -587,7 +628,7 @@ http://www.fsf.org");
 	licence_txtlbl->adjustSize();
 	licence_txtlbl->setPos(10,10);
 	licence_win = new StdBtWin(_("Information"));
-	//	licence_win->reshape(300,200,400,350);
+	licence_win->setOpaque(opaqueGUI);
 	licence_win->reshape(275,175,450,400);
 	licence_win->addComponent(licence_txtlbl);
 	licence_win->setVisible(core->FlagInfos);
@@ -642,6 +683,7 @@ CTRL + R : Toggle script recording\n")) + string(
 	help_txtlbl->adjustSize();
 	help_txtlbl->setPos(10,10);
 	help_win = new StdBtWin(_("Help"));
+	help_win->setOpaque(opaqueGUI);
 	help_win->reshape(300,200,400,450);
 	help_win->addComponent(help_txtlbl);
 	help_win->setVisible(core->FlagHelp);
@@ -662,6 +704,10 @@ void stel_ui::draw(void)
 	glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
 
 	glEnable(GL_BLEND);
+	if (core->FlagNight)
+		Component::setColorScheme(core->GuiBaseColorr, core->GuiTextColorr);
+	else
+		Component::setColorScheme(core->GuiBaseColor, core->GuiTextColor);
 
 	core->projection->set_2Dfullscreen_projection();	// 2D coordinate
 	Component::enableScissor();
@@ -727,7 +773,6 @@ int stel_ui::handle_clic(Uint16 x, Uint16 y, S_GUI_VALUE button, S_GUI_VALUE sta
 	SDL_ShowCursor(1);
 	MouseTimeLeft = MOUSE_TIMEOUT; 
 
-    // moved the onClic check so if the ui handles, then don't need anymore attention
 	if (desktop->onClic((int)x, (int)y, button, state))
     {
         has_dragged = true;
@@ -1171,6 +1216,7 @@ void stel_ui::gui_update_widgets(int delta_time)
 	bt_flag_help->setState(help_win->getVisible());
 	bt_flag_equatorial_mode->setState(core->navigation->get_viewing_mode()==VIEW_EQUATOR);
 	bt_flag_config->setState(config_win->getVisible());
+	bt_flag_night->setState(core->FlagNight);
 	bt_flag_search->setState(search_win->getVisible()); 
 	bt_flag_goto->setState(false); 
 
@@ -1194,3 +1240,23 @@ void stel_ui::updateInfoSelectString(void)
 		info_select_txtlbl->setTextColor(core->selected_object->get_RGB());
 }
 
+void stel_ui::setTitleObservatoryName(const string& name)
+{
+	if (name == "")
+		top_bar_appName_lbl->setLabel(APP_NAME);
+	else
+	{
+		std::ostringstream oss;
+		oss << APP_NAME << " (" << name << ")";
+		top_bar_appName_lbl->setLabel(oss.str());
+	}
+	top_bar_appName_lbl->setPos(core->screen_W/2-top_bar_appName_lbl->getSizex()/2,2);
+}
+
+string stel_ui::getTitleWithAltitude(void)
+{
+	std::ostringstream oss;
+	oss << core->observatory->get_name() << " @ " << core->observatory->get_altitude() << "m";
+
+	return oss.str();
+}

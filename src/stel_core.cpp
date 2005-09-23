@@ -93,17 +93,33 @@ stel_core::~stel_core()
 
 void stel_core::init(void)
 {
-#if !defined(WIN32)
 	// read current ui locale
 	char *tmp = setlocale(LC_MESSAGES, "");
 	printf("Locale is %s\n", tmp);
 
 	if(tmp == NULL) UILocale = "";
 	else UILocale = tmp;
-#else
-     UILocale = "";
-#endif
 
+	// These values are updated in the config, others just an easier place to find
+	// Mostly not implemented in this commit
+	BaseFontSize = 12.5f; // updated in the config
+	BaseFontTxtName = DataDir + "arial.txt";
+	BaseFontPngName = "arial";
+	
+	BaseCFontSize = 12.5;
+	BaseCFontTxtName = DataDir + "courierfont.txt";
+	BaseCFontPngName = "courierfont";
+	MapFontSize = 9.5f;
+	ConstellationFontSize = 16.f;
+	StarFontSize = 12.f;
+	PlanetFontSize = 13.f;
+	NebulaFontSize = 12.0f;
+	GridFontSize = 12.f;
+	CardinalsFontSize = 30.f;
+	LoadingBarFontSize = 12.f;
+	
+//	glEnable(GL_LINE_SMOOTH);
+	
 	// Set textures directory and suffix
 	s_texture::set_texDir(TextureDir);
 	s_texture::set_suffix(".png");
@@ -183,6 +199,7 @@ void stel_core::init(void)
 
 	// initialisation of the User Interface
 	ui->init();
+	ui->setTitleObservatoryName(ui->getTitleWithAltitude());
 	ui->init_tui();
 
 	tone_converter->set_world_adaptation_luminance(3.75f + atmosphere->get_intensity()*40000.f);
@@ -598,6 +615,8 @@ void stel_core::load_config_from(const string& confFile)
 	FlagShowSelectedObjectInfo = conf.get_boolean("gui:flag_show_selected_object_info");
 	GuiBaseColor		= str_to_vec3f(conf.get_str("gui:gui_base_color").c_str());
 	GuiTextColor		= str_to_vec3f(conf.get_str("gui:gui_text_color").c_str());
+	GuiBaseColorr		= str_to_vec3f(conf.get_str("gui:gui_base_colorr").c_str());
+	GuiTextColorr		= str_to_vec3f(conf.get_str("gui:gui_text_colorr").c_str());
 	BaseFontSize		= conf.get_double ("gui","base_font_size",15);
 	FlagShowScriptBar	= conf.get_boolean("gui","flag_show_script_bar",0);
 
@@ -673,6 +692,8 @@ void stel_core::load_config_from(const string& confFile)
 	MoonScale				= conf.get_double ("viewing","moon_scale",5.);
 	ConstellationArtIntensity       = conf.get_double("viewing","constellation_art_intensity", 0.5);
 	ConstellationArtFadeDuration    = conf.get_double("viewing","constellation_art_fade_duration",2.);
+	FlagNight    = conf.get_boolean("viewing:flag_night");
+	FlagUseCommonNames    = conf.get_boolean("viewing:flag_use_common_names");
 
 	// Astro section
 	FlagStars				= conf.get_boolean("astro:flag_stars");
@@ -754,6 +775,8 @@ void stel_core::save_config_to(const string& confFile)
 	conf.set_boolean("gui:flag_show_selected_object_info", FlagShowSelectedObjectInfo);
 	conf.set_str	("gui:gui_base_color", vec3f_to_str(GuiBaseColor));
 	conf.set_str	("gui:gui_text_color", vec3f_to_str(GuiTextColor));
+	conf.set_str	("gui:gui_base_colorr", vec3f_to_str(GuiBaseColorr));
+	conf.set_str	("gui:gui_text_colorr", vec3f_to_str(GuiTextColorr));
 	conf.set_double ("gui:base_font_size", BaseFontSize);
 	conf.set_boolean("gui:flag_show_script_bar",FlagShowScriptBar);
 	
@@ -822,6 +845,8 @@ void stel_core::save_config_to(const string& confFile)
 	conf.set_double ("viewing:moon_scale", MoonScale);
 	conf.set_double ("viewing:constellation_art_intensity", ConstellationArtIntensity);
 	conf.set_double ("viewing:constellation_art_fade_duration", ConstellationArtFadeDuration);
+	conf.set_boolean("viewing:flag_night", FlagNight);
+	conf.set_boolean("viewing:flag_use_common_names", FlagUseCommonNames);
 
 	// Astro section
 	conf.set_boolean("astro:flag_stars", FlagStars);
@@ -1345,7 +1370,7 @@ void stel_core::set_sky_locale(string _locale)
     ui->setStarAutoComplete(hip_stars->getNames());
     ui->setConstellationAutoComplete(asterisms->getNames());
     ui->setPlanetAutoComplete(ssystem->getNames());
-
+    ui->setListNames(ssystem->getNames());
 }
 
 void stel_core::play_startup_script() {

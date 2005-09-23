@@ -63,12 +63,16 @@ public:
 	// Update all the tui widgets with values taken from the core parameters
 	void tui_update_widgets(void);
 	void show_message(string _message, int _time_out=0);
-    void setConstellationAutoComplete(vector<string> _autoComplete ) { constellation_edit->setAutoComplete(_autoComplete);}
-    void setPlanetAutoComplete(vector<string> _autoComplete ) { planet_edit->setAutoComplete(_autoComplete);}
-    void setStarAutoComplete(vector<string> _autoComplete ) { star_edit->setAutoComplete(_autoComplete);}
+    void setConstellationAutoComplete(vector<string> _autoComplete ) { constellation_edit->setAutoCompleteOptions(_autoComplete);}
+    void setPlanetAutoComplete(vector<string> _autoComplete ) { planet_edit->setAutoCompleteOptions(_autoComplete);}
+    void setStarAutoComplete(vector<string> _autoComplete ) { star_edit->setAutoCompleteOptions(_autoComplete);}
+    void setListNames(vector<string> _names ) { listBox->addItems(_names);}
+    void setTitleObservatoryName(const string& name);
+    string getTitleWithAltitude(void);
+    bool isInitialised(void) { return initialised; }
 private:
 	stel_core * core;		// The main core can be accessed because stel_ui is a friend class
-
+	bool initialised;
 	s_font * spaceFont;		// The standard font
 	s_font * courierFont;	// The standard fixed size font
 	s_texture * baseTex;	// The standard fill texture
@@ -77,7 +81,7 @@ private:
 	s_texture * tex_down;	// Down arrow texture
 
 	Container * desktop;	// The container which contains everything
-
+	bool opaqueGUI;
 	// The top bar containing the main infos (date, time, fps etc...)
 	FilledContainer * top_bar_ctr;
 	Label * top_bar_date_lbl;
@@ -102,6 +106,7 @@ private:
 	FlagButton * bt_flag_help;
 	FlagButton * bt_flag_equatorial_mode;
 	FlagButton * bt_flag_config;
+	FlagButton * bt_flag_night;
 	FlagButton * bt_flag_search;
 	EditBox * bt_script;
 	FlagButton * bt_flag_goto;
@@ -110,6 +115,7 @@ private:
     void cbEditScriptInOut(void);
     void cbEditScriptPress(void);
     void cbEditScriptExecute(void);
+    void cbEditScriptKey(void);
     void cbEditScriptWordCount(void);
 
 	Component* createFlagButtons(void);
@@ -162,6 +168,9 @@ private:
 
 	TabContainer * config_tab_ctr;
 
+	void load_cities(const string & fileName);
+	vector<City*> cities;
+
 	// The window managing the search - Tony
 	StdBtWin* search_win;
 	TabContainer * search_tab_ctr;
@@ -171,6 +180,10 @@ private:
     void hideSearchMessage(void); 
     void doSearchCommand(string _command, string _error);
 
+	// standard dialogs
+	StdDlgWin* dialog_win;
+	void dialogCallback(void);
+	
 	// Rendering options
 	LabeledCheckBox* stars_cbx;
 	LabeledCheckBox* star_names_cbx;
@@ -196,11 +209,17 @@ private:
 	void saveRenderOptions(void);
 
 	// Location options
+	bool waitOnLocation;
 	MapPicture* earth_map;
+	Label *lblMapLocation;
+	Label *lblMapPointer;
 	FloatIncDec* lat_incdec, * long_incdec;
+	IntIncDec* alt_incdec;
 	void setObserverPositionFromMap(void);
+	void setCityFromMap(void);
 	void setObserverPositionFromIncDec(void);
-	void saveObserverPosition(void);
+	void doSaveObserverPosition(const string &name);
+	void saveObserverPosition(void); // callback to the MapPicture change
 
 	// Date & Time options
 	Time_item* time_current;
@@ -247,7 +266,15 @@ private:
     void doPlanetSearch(void);
     void showPlanetAutoComplete(void);
     Label *lblSearchMessage;
-
+	
+	// Example tab of widgets
+	ListBox *listBox;
+	void msgbox1(void);
+	void msgbox2(void);
+	void msgbox3(void);
+	void inputbox1(void);
+	void listBoxChanged(void);
+	
 	////////////////////////////////////////////////////////////////////////////
 	// Text UI components
 	s_tui::Branch* tui_root;

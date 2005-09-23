@@ -227,6 +227,8 @@ void stel_ui::init_tui(void)
 	// Should be defined elsewhere...
 	tui_admin_setlocale->addItem("en_US");
 	tui_admin_setlocale->addItem("fr_FR");
+	tui_admin_setlocale->addItem("nl_NL");
+	tui_admin_setlocale->addItem("es_ES");
 	tui_admin_setlocale->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb_admin_set_locale));
 	tui_menu_administration->addComponent(tui_admin_setlocale);
 
@@ -478,8 +480,7 @@ void stel_ui::tui_cb_admin_set_locale() {
 
 	// Right now just set for the current session
 
-// Tony - added "&& !defined(WIN32)"
-#if !defined(MACOSX) && !defined(WIN32)
+#if !defined(MACOSX)
 	string tmp = string("LC_ALL=" + tui_admin_setlocale->getCurrent());
 	putenv((char *)tmp.c_str());
 
