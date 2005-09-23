@@ -62,6 +62,11 @@ void Observator::load(const string& file, const string& section)
 
 	printf(_("Loading location: \"%s\", "), name.c_str());
 
+	for (string::size_type i=0;i<name.length();++i)
+	{
+		if (name[i]=='_') name[i]=' ';
+	}
+
 	latitude  = get_dec_angle(conf.get_str(section, "latitude"));
 	longitude = get_dec_angle(conf.get_str(section, "longitude"));
 	altitude = conf.get_int(section, "altitude");
@@ -404,7 +409,8 @@ string Observator::s_date_format_to_string(S_DATE_FORMAT df) const
 
 
 // move gradually to a new observation location
-void Observator::move_to(double lat, double lon, double alt, int duration) {
+void Observator::move_to(double lat, double lon, double alt, int duration, const string& _name)
+{
   flag_move_to = 1;
 
   start_lat = latitude;
@@ -419,7 +425,18 @@ void Observator::move_to(double lat, double lon, double alt, int duration) {
   move_to_coef = 1.0f/duration;
   move_to_mult = 0;
 
+	name = _name;
   //  printf("coef = %f\n", move_to_coef);
+}
+
+string Observator::get_name(void)
+{
+	string _name = name;
+    for (string::size_type i=0;i<_name.length();++i)
+	{
+		if (_name[i]=='_') _name[i]=' ';
+	}
+	return _name;
 }
 
 // for moving observator position gradually
