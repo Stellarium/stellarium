@@ -236,11 +236,11 @@ If not, check that you have access to %s\n"), CDIR.c_str(), CDIR.c_str(), CDIR.c
 int main(int argc, char **argv)
 {
 
-//Tony - added "&& !defined(WIN32)"
-#if !defined(MACOSX) && !defined(WIN32)
+#if !defined(MACOSX)
 	// TESTING ONLY
 	// setenv("LC_ALL", "fr_FR", 1);
 
+// TODO: move this out - set_system_locale to be committed once tested (elsewhere)
 	setlocale (LC_CTYPE, "");
 	setlocale (LC_MESSAGES, "");
 	bindtextdomain (PACKAGE, LOCALEDIR);
@@ -271,7 +271,7 @@ int main(int argc, char **argv)
 #endif
 
 	// Load the configuration options from the given file names
-	// This includes the video parameters
+	// This includes the video parameters & the system locale
 	core->load_config();
 
 	// Create a stellarium sdl manager
@@ -282,7 +282,7 @@ int main(int argc, char **argv)
 
 	core->init();
 
-    // Tony - added Re-load of config to re-enable flags available once the core has loaded 
+    // Re-load of config to re-enable flags available once the core has loaded 
 	core->load_config();
 
 	// play startup script, if available
