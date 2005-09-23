@@ -196,14 +196,6 @@ private:
 
 	planet* selected_planet;
 
-	/*
-    // For editbox autocomplete keywords
-    vector<string> constellationNames;
-    vector<string> constellationShortNames;
-    vector<string> planetNames;
-    vector<string> starNames;
-	*/
-
 	// Projector
 	PROJECTOR_TYPE ProjectorType;
 	VIEWPORT_TYPE ViewportType;
@@ -286,6 +278,19 @@ private:
 	Vec3f GuiBaseColorr;
 	Vec3f GuiTextColorr;
 	float BaseFontSize;
+	string BaseFontTxtName;
+	string BaseFontPngName;
+	float BaseCFontSize;
+	string BaseCFontTxtName;
+	string BaseCFontPngName;
+	float MapFontSize;
+	float ConstellationFontSize;
+	float StarFontSize;
+	float PlanetFontSize;
+	float NebulaFontSize;
+	float GridFontSize;
+	float CardinalsFontSize;
+	float LoadingBarFontSize;
 
 	Vec3f AzimuthalColor;
 	Vec3f EquatorialColor;
@@ -339,6 +344,7 @@ private:
 	bool FlagMoonScaled;
 	float ConstellationArtIntensity;
 	float ConstellationArtFadeDuration;
+	bool FlagUseCommonNames;
 	bool FlagNight;
 
 	// Navigation
