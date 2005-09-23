@@ -17,13 +17,79 @@
 * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 
+// TODO: time_zone_item char* removal
+// DONE: change char* to string typically
+
 #include <iostream>
 #include <sstream>
 #include <fstream>
-// Tony - for editbox blink timer
 #include "SDL_timer.h"
 #include "s_gui.h"
 #include "stel_utility.h"
+
+// TODO: int magnify??? for printer dpi
+
+void glCircle(const Vec3d& pos, float radius, float line_width)
+{
+	float angle, facets;
+	bool lastState = glIsEnabled(GL_TEXTURE_2D);
+	
+	glDisable(GL_TEXTURE_2D);
+	glLineWidth(line_width);
+	glBegin(GL_LINE_LOOP);
+
+	if (radius < 2) facets = 6;
+	else facets = (int)(radius*3);
+	
+	for (int i = 0; i < facets; i++)
+	{
+		angle = 2.0f*M_PI*i/facets;
+		glVertex3f(pos[0] + radius * sin(angle), pos[1] + radius * cos(angle), 0.0f);
+	}
+	glEnd();
+	
+	if (lastState) glEnable(GL_TEXTURE_2D);
+	glLineWidth(1.0f);
+}
+
+void glEllipse(const Vec3d& pos, float radius, float y_ratio, float line_width)
+{
+	float angle, facets;
+	bool lastState = glIsEnabled(GL_TEXTURE_2D);
+	
+	glDisable(GL_TEXTURE_2D);
+	glLineWidth(line_width);
+	glBegin(GL_LINE_LOOP);
+
+	if (radius < 2) facets = 6;
+	else facets = (int)(radius*3);
+	
+	for (int i = 0; i < facets; i++)
+	{
+		angle = 2.0f*M_PI*i/facets;
+		glVertex3f(pos[0] + radius * sin(angle), pos[1] + y_ratio* radius * cos(angle), 0.0f);
+	}
+	glEnd();
+	
+	if (lastState) glEnable(GL_TEXTURE_2D);
+	glLineWidth(1.0f);
+}
+
+using namespace std;
+
+void *lastCallback;
+#define RUNCALLBACK(c) doCallback((c), (void*)this)
+
+void* getLastCallbackObject(void)
+{
+	return lastCallback;
+}
+
+inline void doCallback(const callback<void>& c, void *_component)
+{
+	lastCallback = _component;
+	c();
+}
 
 using namespace s_gui;
 
@@ -157,7 +223,8 @@ void Scissor::pop(void)
 
 Painter::Painter() :
 	tex1(NULL),
-	font(NULL)
+	font(NULL),
+	opaque(false)
 {
 }
 
@@ -207,7 +274,10 @@ void Painter::drawSquareFill(const s_vec2i& pos, const s_vec2i& sz) const
 {
     glColor4fv(baseColor);
     glEnable(GL_TEXTURE_2D);
-    glEnable(GL_BLEND);
+
+	if (opaque) glDisable(GL_BLEND);
+	else glEnable(GL_BLEND);
+	
     glBindTexture(GL_TEXTURE_2D, tex1->getID());
     glBegin(GL_QUADS );
         glTexCoord2s(0, 0); glVertex2i(pos[0]        , pos[1] + sz[1]);	// Bottom Left
@@ -222,7 +292,10 @@ void Painter::drawSquareFill(const s_vec2i& pos, const s_vec2i& sz, const s_colo
 {
     glColor4fv(c);
     glEnable(GL_TEXTURE_2D);
-    glEnable(GL_BLEND);
+
+//	if (opaque) 
+	glEnable(GL_BLEND);
+	
     glBindTexture(GL_TEXTURE_2D, tex1->getID());
     glBegin(GL_QUADS );
         glTexCoord2s(0, 0); glVertex2i(pos[0]        , pos[1] + sz[1]);	// Bottom Left
@@ -237,7 +310,9 @@ void Painter::drawSquareFill(const s_vec2i& pos, const s_vec2i& sz, const s_colo
 {
     glColor4fv(c);
     glEnable(GL_TEXTURE_2D);
-    glEnable(GL_BLEND);
+
+	glEnable(GL_BLEND);
+
     glBindTexture(GL_TEXTURE_2D, t->getID());
     glBegin(GL_QUADS );
         glTexCoord2s(0, 0); glVertex2i(pos[0]        , pos[1] + sz[1]);	// Bottom Left
@@ -247,7 +322,7 @@ void Painter::drawSquareFill(const s_vec2i& pos, const s_vec2i& sz, const s_colo
     glEnd ();
 }
 
-// Draw a cross with the default base color
+// Draw a cross with the default base color (part of checkbox requirements)
 void Painter::drawCross(const s_vec2i& pos, const s_vec2i& sz) const
 {
 	glColor4fv(baseColor);
@@ -305,18 +380,70 @@ void Painter::drawLine(const s_vec2i& pos1, const s_vec2i& pos2, const s_color& 
 // Mother class for every s_gui object.
 ////////////////////////////////////////////////////////////////////////////////
 
+bool Component::changed_mode = false;
+s_color Component::baseColor = s_color(0.3,0.4,0.7);
+s_color Component::textColor = s_color(0.7,0.8,0.9);
+
 Component::Component() :
 	pos(0, 0),
 	size(0, 0),
-	visible(1),
-	active(1),
-	focus(0),
-	painter(defaultPainter)
+	visible(true),
+	focus(false),
+	painter(defaultPainter),
+	moveToFront(false),
+	type(CT_COMPONENTBASE),
+	desktop(false)
 {
 }
 
 Component::~Component()
 {
+}
+
+void Component::setVisible(bool _visible)
+{
+	visible = _visible;
+	if (getType() & CT_CONTAINER)
+	{
+		Container *c = (Container*)this;
+	    list<Component*>::iterator iter = c->childs.begin();
+	
+		while (iter != c->childs.end())
+		{
+			(*iter)->setVisible(true);
+			iter++;
+		}
+	}
+}
+
+void Container::setFocus(bool _focus)
+{
+	// set the focus to all children
+
+	list<Component*>::iterator iter = childs.begin();
+	while (iter != childs.end())
+	{
+		(*iter)->setFocus(_focus);
+        iter++;
+	}
+	focus=_focus;
+}
+
+void Component::draw(void)
+{
+	if (changed_mode)
+	{
+		painter.setTextColor(textColor);
+		painter.setBaseColor(baseColor);
+	}
+}
+
+void Component::setColorScheme(const s_color& _baseColor, const s_color& _textColor)
+{
+	changed_mode = true;
+	baseColor = _baseColor;
+	textColor = _textColor;
+	// change the color scheme on the next draw cycle
 }
 
 void Component::reshape(const s_vec2i& _pos, const s_vec2i& _size)
@@ -331,7 +458,7 @@ void Component::reshape(int x, int y, int w, int h)
 	size.set(w, h);
 }
 
-int Component::isIn(int x, int y)
+bool Component::isIn(int x, int y)
 {
 	return (pos[0]<=x && (size[0]+pos[0])>=x && pos[1]<=y && (pos[1]+size[1])>=y);
 }
@@ -348,53 +475,68 @@ void Component::deleteScissor(void)
 	scissor = NULL;
 }
 
-CallbackComponent::CallbackComponent() : Component(), is_mouse_over(0)
+///////////////////////////// CallbackComponent ////////////////////////////////
+// Manages hierarchical components : send signals and actions to childrens
+////////////////////////////////////////////////////////////////////////////////
+
+CallbackComponent::CallbackComponent() : Component(), is_mouse_over(false), pressed(false)
 {
 }
 
-int CallbackComponent::onClic(int x, int y, S_GUI_VALUE bt, S_GUI_VALUE state)
+bool CallbackComponent::onClic(int x, int y, S_GUI_VALUE bt, S_GUI_VALUE state)
 {
-	if (!visible) return 0;
+	if (!visible) return false;
+	pressed = false;
 	if (state==S_GUI_PRESSED && bt==S_GUI_MOUSE_LEFT && isIn(x, y))
 	{
-		if (!onPressCallback.empty()) onPressCallback();
+		pressed = true;
+		if (!onPressCallback.empty()) RUNCALLBACK(onPressCallback);
 	}
-	return 0;
+	return false;
 }
 
-int CallbackComponent::onMove(int x, int y)
+bool CallbackComponent::onMove(int x, int y)
 {
-	if (!visible) return 0;
+	if (!visible) 
+	{
+		is_mouse_over = false;
+		pressed = false;
+		return false;
+	}
 	if (isIn(x, y))
 	{
 		if (!onMouseInOutCallback.empty() && !is_mouse_over)
 		{
-			is_mouse_over = 1;
-			onMouseInOutCallback();
+			is_mouse_over = true;
+			RUNCALLBACK(onMouseInOutCallback);
 		}
-		is_mouse_over = 1;
+		is_mouse_over = true;
 	}
 	else
 	{
+		pressed = false;
 		if (is_mouse_over)
 		{
 			if (!onMouseInOutCallback.empty() && is_mouse_over)
 			{
-				is_mouse_over = 0;
-				onMouseInOutCallback();
+				is_mouse_over = false;
+				RUNCALLBACK(onMouseInOutCallback);
 			}
 		}
-		is_mouse_over = 0;
+		is_mouse_over = false;
 	}
-	return 0;
+	return false;
 }
 
 //////////////////////////////// Container /////////////////////////////////////
 // Manages hierarchical components : send signals and actions to childrens
 ////////////////////////////////////////////////////////////////////////////////
 
-Container::Container() : CallbackComponent()
+Container::Container(bool _desktop) : 
+	CallbackComponent()
 {
+	type += CT_CONTAINER;
+	desktop = _desktop;
 }
 
 Container::~Container()
@@ -429,10 +571,43 @@ void Container::removeAllComponents(void)
 	childs.clear();
 }
 
+// This is a one reliable call to manage the gui layering every program loop......
 void Container::draw(void)
 {
+	Component::draw(); // for potential colour changes
+	
     if (!visible) return;
+	static Component *firstFocus = NULL;
+	static bool justMovedToFront;
+    
+    if (desktop) // first draw of cycle
+	{
+	    firstFocus = NULL;
+    	justMovedToFront = false;
+	}
+    
     list<Component*>::iterator iter = childs.begin();
+	
+	// look through the sub children for an in front component
+	
+	while (iter != childs.end())
+	{
+		if ((*iter)->inFront() == true)
+		{
+			(*iter)->setInFront(false);
+			childs.push_front(*iter);
+			childs.erase(iter);
+			justMovedToFront = true;
+			break;
+		}
+		iter++;
+	}
+	
+    // reverse the child order so the current control is drawn on last (top)
+    childs.reverse();
+
+	// Draw the components
+    iter = childs.begin();
     glPushMatrix();
     glTranslatef(pos[0], pos[1], 0.f);
 
@@ -440,19 +615,59 @@ void Container::draw(void)
 
 	while (iter != childs.end())
 	{
+		if (((*iter)->getType() & CT_EDITBOX) && (*iter)->getVisible())
+			firstFocus = (*iter);
 		(*iter)->draw();
 		iter++;
 	}
 
     Component::scissor->pop();
+    
+	// swap back now the actual order of the components 
+    childs.reverse();
 
     glPopMatrix();
+    
+	// after all the desktop and sub compopnents have been drawn
+	// see a editbox that is displaying needs a cursor?
+    if (desktop && firstFocus && justMovedToFront)
+    {
+	    if ((firstFocus->getType() & CT_EDITBOX) && ((EditBox*)firstFocus)->getAutoFocus())
+			((EditBox*)firstFocus)->setEditing(true);
+		firstFocus = NULL;
+		changed_mode = false;
+	}
 }
 
-int Container::onClic(int x, int y, S_GUI_VALUE button, S_GUI_VALUE state)
+
+bool Container::onClic(int x, int y, S_GUI_VALUE button, S_GUI_VALUE state)
 {
-	if (!visible) return 0;
+	bool hasFocus = false;
+	if (!visible) return false;
+	
 	list<Component*>::iterator iter = childs.begin();
+
+	// check if a component has elected sole focus for it and its children
+	while (iter != childs.end())
+	{
+		if ((*iter)->getFocus())	
+		{
+			hasFocus = true;
+			if ((*iter)->onClic(x - pos[0], y - pos[1], button, state)) 
+			{
+			// The signal has been intercepted
+			// Set the component in first position in the objects list
+				childs.push_front(*iter);
+				childs.erase(iter);
+				return true;
+			}
+		}
+        iter++;
+	}
+	// focus but not handled - return unhandled
+	if (hasFocus) return false;
+	
+	iter = childs.begin();
 	while (iter != childs.end())
 	{
 		if ((*iter)->onClic(x - pos[0], y - pos[1], button, state))
@@ -461,35 +676,70 @@ int Container::onClic(int x, int y, S_GUI_VALUE button, S_GUI_VALUE state)
 			// Set the component in first position in the objects list
 			childs.push_front(*iter);
 			childs.erase(iter);
-			return 1;
+			return true;
 		}
         iter++;
     }
 	return CallbackComponent::onClic(x, y, button, state);
 }
 
-int Container::onMove(int x, int y)
+bool Container::onMove(int x, int y)
 {
-	if (!visible) return 0;
+	bool hasFocus = false;
+
+	if (!visible) return false;
 	list<Component*>::iterator iter = childs.begin();
+
+	// check if a component has elected sole focus for it and its children
 	while (iter != childs.end())
 	{
-		if ((*iter)->onMove(x - pos[0], y - pos[1])) return 1;	// The signal has been intercepted
+		if ((*iter)->getFocus())	
+		{
+			hasFocus = true;
+			if ((*iter)->onMove(x - pos[0], y - pos[1])) return true;
+		}
+        iter++;
+	}
+	// focus but not handled - return
+	if (hasFocus) return CallbackComponent::onMove(x, y);
+	
+	iter = childs.begin();
+
+	while (iter != childs.end())
+	{
+		if ((*iter)->onMove(x - pos[0], y - pos[1])) return true;	// The signal has been intercepted
         iter++;
     }
 	return CallbackComponent::onMove(x, y);
 }
 
-int Container::onKey(Uint16 k, S_GUI_VALUE s)
+bool Container::onKey(Uint16 k, S_GUI_VALUE s)
 {
-	if (!visible) return 0;
+	bool hasFocus = false;
+	if (!visible) return false;
 	list<Component*>::iterator iter = childs.begin();
+
+	// check if a component has elected sole focus for it and
+	// its children
+	while (iter != childs.end())
+	{
+		if ((*iter)->getFocus())	
+		{
+			hasFocus = true;
+			if ((*iter)->onKey(k,s)) return true;
+		}
+        iter++;
+	}
+	// not handled, so we return at this point saying keys have been handled
+	if (hasFocus) return true;
+	
+	iter = childs.begin();
 	while (iter != childs.end())
 	{
 		if ((*iter)->onKey(k, s)) return 1;	// The signal has been intercepted
         iter++;
     }
-    return 0;
+    return false;
 }
 
 //////////////////////////// FilledContainer ///////////////////////////////////
@@ -499,9 +749,10 @@ int Container::onKey(Uint16 k, S_GUI_VALUE s)
 
 void FilledContainer::draw(void)
 {
+	Component::draw(); // for potential colour changes
+	
     if (!visible) return;
 	painter.drawSquareFill(pos, size);
-	//painter.drawSquareEdge(pos, size);
 
 	Container::draw();
 }
@@ -511,20 +762,39 @@ void FilledContainer::draw(void)
 // Simplest button with one press callback
 ////////////////////////////////////////////////////////////////////////////////
 
-Button::Button() : CallbackComponent()
+#define BUTTON_HEIGHT 25
+
+Button::Button() : 
+	CallbackComponent(),
+	hideBorder(false),
+	hideBorderMouseOver(false),
+	hideTexture(false)
 {
 	size.set(10,10);
 }
 
 void Button::draw()
 {
+	Component::draw(); // for potential colour changes
+	
 	if (!visible) return;
-	painter.drawSquareEdge(pos, size, painter.getBaseColor() * (1.f + 0.4 * is_mouse_over));
+
+	if (!is_mouse_over)
+	{
+		if (!hideBorder)
+			painter.drawSquareEdge(pos, size, painter.getBaseColor() * 1.f);
+	}
+	else
+	{
+		if (!hideBorderMouseOver)
+			painter.drawSquareEdge(pos, size, painter.getBaseColor() * 1.4f);
+	}
 }
 
-int Button::onClic(int x, int y, S_GUI_VALUE bt, S_GUI_VALUE state)
+bool Button::onClic(int x, int y, S_GUI_VALUE bt, S_GUI_VALUE state)
 {
-	if (!visible) return 0;
+	if (!visible) return false;
+
 	CallbackComponent::onClic(x,y,bt,state);
 	if (state==S_GUI_PRESSED && bt==S_GUI_MOUSE_LEFT && isIn(x, y)) return 1;
 	return 0;
@@ -532,6 +802,8 @@ int Button::onClic(int x, int y, S_GUI_VALUE bt, S_GUI_VALUE state)
 
 void FilledButton::draw()
 {
+	Component::draw(); // for potential colour changes
+
 	if (!visible) return;
 	painter.drawSquareFill(pos, size);
 	Button::draw();
@@ -549,6 +821,8 @@ TexturedButton::TexturedButton(const s_texture* tex)
 
 void TexturedButton::draw()
 {
+	Component::draw(); // for potential colour changes
+
 	if (!visible) return;
 	painter.drawSquareFill(pos, size, painter.getBaseColor() * (1.f + 0.4 * is_mouse_over));
 }
@@ -563,22 +837,20 @@ CheckBox::CheckBox(int state) : Button(), isChecked(state)
 
 void CheckBox::draw()
 {
+	Component::draw(); // for potential colour changes
+
 	if (!visible) return;
 	if (isChecked) painter.drawCross(pos, size);
 	Button::draw();
 }
 
-int CheckBox::onClic(int x, int y, S_GUI_VALUE bt, S_GUI_VALUE state)
+bool CheckBox::onClic(int x, int y, S_GUI_VALUE bt, S_GUI_VALUE state)
 {
-	if (!visible) return 0;
+	if (!visible) return false;
 	if (state==S_GUI_PRESSED && bt==S_GUI_MOUSE_LEFT && isIn(x, y))
-	{
-		if (isChecked) isChecked = 0;
-		else isChecked = 1;
-	}
+		isChecked = !isChecked;
 	return Button::onClic(x,y,bt,state);
 }
-
 
 LabeledCheckBox::LabeledCheckBox(int state, const string& label) : Container(), checkbx(NULL), lbl(NULL)
 {
@@ -605,6 +877,8 @@ FlagButton::~FlagButton()
 
 void FlagButton::draw()
 {
+	Component::draw(); // for potential colour changes
+
 	if (!visible) return;
 	if (isChecked)
 	{
@@ -638,26 +912,25 @@ Label::~Label()
 void Label::setLabel(const string& _label)
 {
     label = _label;
+	adjustSize();
 }
 
 void Label::draw()
 {
+	Component::draw(); // for potential colour changes
+
 	if (!visible) return;
     if (painter.getFont())
-    {
 		painter.print(pos[0], pos[1], label);
-    }
-	// painter.drawSquareEdge(pos, size);
 }
 
 void Label::draw(float _intensity)
 {
+	Component::draw(); // for potential colour changes
+
 	if (!visible) return;
     if (painter.getFont())
-    {
-		painter.print(pos[0], pos[1], label, painter.getTextColor() * _intensity);
-    }
-	// painter.drawSquareEdge(pos, size);
+		painter.print(pos[0], pos[1], label, painter.getTextColor()*_intensity);
 }
 
 void Label::adjustSize(void)
@@ -666,47 +939,163 @@ void Label::adjustSize(void)
 	size[1] = (int)ceilf(painter.getFont()->getLineHeight());
 }
 
-
-/////////////////////////////// EditBox //////////////////////////////////
-// Editbox - Tony
+////////////////////////////////////////////////////////////////////////////////
+// History
 ////////////////////////////////////////////////////////////////////////////////
 
-EditBox *focusEditBox = NULL;
-bool blinkOn;
+History::History(unsigned int _items)
+{
+	if (_items == 0) 
+		maxItems = 1;
+	else 
+		maxItems = _items;
+}
 
-EditBox::EditBox(const string& _label, const s_font* font) : Button(), label(_label, font), isEditing(false)
+void History::clear(void)
+{
+    pos = 0;
+	history.clear();
+}
+
+void History::add(const string& _text)
+{
+	if (_text == "" || _text.empty()) return;
+	
+	if (history.size() == maxItems)
+	{
+		vector<string>::iterator iter = history.begin();
+		history.erase(iter);
+	}
+	history.push_back(_text);
+	pos = history.size();
+}       
+
+string History::prev(void)
+{
+    if (pos > 0) 
+	{
+		pos--;
+	    return history[pos];
+	}
+	pos = -1;
+	return "";
+}
+
+string History::next(void)
+{
+	if (pos < (int)history.size()-1)  
+	{
+		pos++;
+    	return history[pos];
+	}
+	pos = history.size();
+	return "";
+}
+
+////////////////////////////////////////////////////////////////////////////////
+// AutoCompleteString
+////////////////////////////////////////////////////////////////////////////////
+
+AutoCompleteString::AutoCompleteString()
+{
+	maxMatches = 5;
+}
+
+string AutoCompleteString::test(const string& _text)
+{
+	matches.clear();
+
+    if (options.size() == 0) return "";
+	
+	unsigned int i = 0;
+	while (i < options.size())
+	{
+		if (fcompare(options[i], _text) == 0) // match with item i
+       		matches.push_back(options[i]);
+		i++;
+    }
+         
+	if (matches.empty()) 
+		lastMatchPos = 0;
+	else
+    	lastMatchPos = _text.length();
+    
+	return getFirstMatch();;
+}
+
+void AutoCompleteString::reset(void)
+{
+	lastMatchPos = 0;
+	matches.clear();
+}
+
+string AutoCompleteString::getOptions(int _number)
+{
+	if (_number == -1)
+		_number = maxMatches;
+		
+    if (options.size() == 0) return "";
+
+	int i = 0;
+	string text = "";
+	
+	while (i < _number && i < (int)matches.size())
+	{
+       	if (text == "") // first match
+        	text += matches[i];
+		else 
+			text = text + ", " + matches[i];
+		i++;
+	}
+	return text;
+}
+
+
+string AutoCompleteString::getFirstMatch(void)
+{
+	if (matches.size() > 0)
+		return matches[0];
+	else
+		return "";
+}
+
+///////////////////////////////// EditBox //////////////////////////////////////
+// Standard Editbox component
+////////////////////////////////////////////////////////////////////////////////
+
+bool cursorVisible;
+
+EditBox::EditBox(const string& _label, const s_font* font) 
+	: Button(), label(_label, font), isEditing(false), cursorPos(0)
 {
 	Component::setSize(label.getSize()+s_vec2i(4,2));
 	text = _label;
-    cursorPos = 0;
-    resetHistory();
-    blinkOn = false;
-    autoCompleteOptions = "";
-    countAutoCompleteOptions = 0;
-    countAutoCompletePos = 0;
-    autoCompleteReady = false;
+	lastText = text;
+    cursorVisible = false;
+    setPrompt();
+    type += CT_EDITBOX;
+    autoFocus = true;
 }
 
 EditBox::~EditBox()
 {
     SDL_SetTimer(0, NULL);
-    focusEditBox = NULL;       
 }
 
-int EditBox::onClic(int x, int y, S_GUI_VALUE bt, S_GUI_VALUE state)
+bool EditBox::onClic(int x, int y, S_GUI_VALUE bt, S_GUI_VALUE state)
 {
-	if (!visible) return 0;
+	if (!visible) return false;
 	if (state==S_GUI_PRESSED && bt==S_GUI_MOUSE_LEFT)
 	{
 		if (isIn(x, y)) 
         {
-            setFocus();
-            return 1;
+            setEditing(true);
+            return true;
         }
 		else if (isEditing) 
 		{
-            resetFocus();
-            return 1;
+            setEditing(false);
+            return false;
          }
 	}
 	return Button::onClic(x,y,bt,state);
@@ -714,7 +1103,10 @@ int EditBox::onClic(int x, int y, S_GUI_VALUE bt, S_GUI_VALUE state)
 
 void EditBox::draw(void)
 {
+	Component::draw(); // for potential colour changes
+
     if (!visible) return;
+
 	Button::draw();
     glPushMatrix();
     glTranslatef(pos[0], pos[1], 0.f);
@@ -724,93 +1116,113 @@ void EditBox::draw(void)
     refreshLabel();
 	if (isEditing) label.draw();
     else label.draw(.3);   // faded
-    
+
     Component::scissor->pop();
 	glPopMatrix();
 }
 
 #define EDITBOX_CURSOR "\7"
+#define EDITBOX_DEFAULT_PROMPT "> "
 void EditBox::refreshLabel(void)
 {
-     if (!isEditing) label.setLabel("> " + text);
+     if (!isEditing) label.setLabel(prompt + text);
      else
      {
-        if (!blinkOn) label.setLabel("> " + text); 
+        if (!cursorVisible) label.setLabel(prompt + text); 
         else
         {
             if (cursorPos == text.length()) // at end
-               label.setLabel("> " + text + EDITBOX_CURSOR); 
+               label.setLabel(prompt + text + EDITBOX_CURSOR); 
             else
-               label.setLabel("> " + text.substr(0,cursorPos) + EDITBOX_CURSOR + text.substr(cursorPos)); 
+               label.setLabel(prompt + text.substr(0,cursorPos) + EDITBOX_CURSOR + text.substr(cursorPos)); 
         }
      }
 }
 
-void EditBox::clearText(void)
+void EditBox::setText(const string &_text)
 {
-     cursorPos = 0;
-     text = "";             
+	text = _text;
+	lastText = text;
+    cursorPos = _text.length();
 }
 
 Uint32 toggleBlink(Uint32 interval)
 {
      SDL_SetTimer(0, NULL);
-     if (blinkOn == true)
-     {
-        blinkOn = false;
+
+     if (cursorVisible == true)
         SDL_SetTimer(400, (SDL_TimerCallback)toggleBlink);
-     }
      else
-     {
-        blinkOn = true;
         SDL_SetTimer(600, (SDL_TimerCallback)toggleBlink);
-    }
      
+     cursorVisible = !cursorVisible;
      return interval;
 }
 
-void EditBox::setFocus(void)
+void EditBox::setEditing(bool _editing)
 {
+	if (_editing)
+	{
       isEditing = true;
-      blinkOn = true;
-      resetAutoComplete(false);
-      SDL_SetTimer(600, (SDL_TimerCallback)toggleBlink);
-}
+      cursorVisible = true;
+      autoComplete.reset();
 
-void EditBox::resetFocus(void)
-{
-      isEditing = false;
-      blinkOn = false;
       SDL_SetTimer(0, NULL);
-      focusEditBox = NULL;
-      resetAutoComplete(false);
+      SDL_SetTimer(600, (SDL_TimerCallback)toggleBlink);
+	}
+	else
+	{
+		isEditing = false;
+		cursorVisible = false;
+		autoComplete.reset();
+
+    	SDL_SetTimer(0, NULL);
+	}
 }
 
-int EditBox::onKey(Uint16 k, S_GUI_VALUE s)
+void EditBox::setPrompt(const string &p)
 {
-    if (!isEditing) return 0;
+	if (p.empty()) 
+		prompt = EDITBOX_DEFAULT_PROMPT; 
+	else 
+		prompt = p; 
+}
+
+string EditBox::getDefaultPrompt(void)
+{
+	return EDITBOX_DEFAULT_PROMPT;
+}
+
+#define SDLK_A 65
+#define SDLK_Z 90
+
+bool EditBox::onKey(Uint16 k, S_GUI_VALUE s)
+{
+    if (!isEditing) return false;
 
 	if (s==S_GUI_PRESSED)
     { 
+		lastKey = k;
         if  (k==SDLK_RETURN)
         {
-            resetAutoComplete(true);
-            addHistory(text);
-       		if (!onReturnKeyCallback.empty()) onReturnKeyCallback();
-       		clearText();
-       		resetFocus();
+			if (autoComplete.hasMatch()) text = autoComplete.getFirstMatch();
+            history.add(text);
+       		if (!onReturnKeyCallback.empty()) RUNCALLBACK(onReturnKeyCallback);
             return 1;
         }
 
-  		if (k == SDLK_TAB) resetAutoComplete(true);
+  		if (k == SDLK_TAB)
+  		{
+			if (autoComplete.hasMatch()) text = autoComplete.getFirstMatch();
+		}
   		else if (k == SDLK_UP)
   		{
-              text = prevHistory();
+              text = history.prev();
               cursorPos = text.length();
         }
   		else if (k == SDLK_DOWN)
   		{
-              text = nextHistory();
+              text = history.next();
               cursorPos = text.length();
         }
   		else if (k == SDLK_LEFT)  		
@@ -831,24 +1243,23 @@ int EditBox::onKey(Uint16 k, S_GUI_VALUE s)
         else if (k == SDLK_END)  cursorPos = text.length();
   		else if (k == SDLK_DELETE)
   		{
-           resetAutoComplete(false);
+           text = lastText;
            if (cursorPos < text.length()) text = text.erase(cursorPos, 1);
         }
         else if (k == SDLK_BACKSPACE)
         {
-           resetAutoComplete(false);
+           text = lastText;
            if (cursorPos > 0)
            {
                cursorPos--;
                text = text.erase(cursorPos, 1);
            }
         }
-        else if (k == SDLK_ESCAPE) clearText(); 
+        else if (k == SDLK_ESCAPE) setText("");
         else if ((k >= SDLK_0 && k <= SDLK_9) || (k >= SDLK_a && k <= SDLK_z) 
-        || (k >= 65 && k <= 90) || (k >= 224 && k <= 255) || k == SDLK_SPACE 
-				 || k == SDLK_UNDERSCORE || k == 39 || k == 45)
+        || (k >= 65 && k <= 90) || (k >= 224 && k <= 255) || k == SDLK_SPACE || k == SDLK_UNDERSCORE)
         {
-            resetAutoComplete(false);
+			text = lastText;
             string newtext = "";
             newtext += text.substr(0, cursorPos);
             newtext += k;
@@ -857,102 +1268,23 @@ int EditBox::onKey(Uint16 k, S_GUI_VALUE s)
             cursorPos++;
         }
         else
-            return 0;
+            return false;
 
-       if (!text.empty()) testAutoComplete();
-        return 1;
+		lastText = text;
+		if (!onKeyCallback.empty()) RUNCALLBACK(onKeyCallback);
+		if (!text.empty()) 
+		{
+			autoComplete.test(text);
+			if (autoComplete.hasMatch())
+			{
+				text = autoComplete.getFirstMatch();
+				if (!onAutoCompleteCallback.empty()) RUNCALLBACK(onAutoCompleteCallback);
+			}
+		}
+        return true;
     }
 
-    return 0;
-}
-
-////////////////////////////////////////////////////////////////////////////////
-// EditBox::History
-
-void EditBox::resetHistory(void)
-{
-    historyPos = 0;
-    historyMaxPos = 0;
-    for (int i = 0; i < 9; i++) history[i] = "";
-}
-
-void EditBox::addHistory(const string& _history)
-{
-     history[historyPos] = _history;
-
-     if (++historyMaxPos > 9) historyMaxPos = 9;
-     if (++historyPos > 9) historyPos = 0;
-}       
-
-string EditBox::prevHistory(void)
-{
-     if (--historyPos < 0) historyPos = historyMaxPos;
-     return history[historyPos];
-}
-
-string EditBox::nextHistory(void)
-{
-     if (++historyPos > 9) historyPos = 0;
-     return history[historyPos];
-}
-
-////////////////////////////////////////////////////////////////////////////////
-// EditBox::AutoCompete
-
-void EditBox::testAutoComplete(void)
-{
-     if (!lstAutoComplete.empty())
-     {
-         autoCompleteOptions = "";
-         countAutoCompleteOptions = 0;
-         countAutoCompletePos = 0;
-         autoCompleteReady = false;
-         
-         unsigned int i = 0;
-         while (i < lstAutoComplete.size())
-         {
-               if (fcompare(lstAutoComplete[i], text) == 0)
-               {
-                 if (autoCompleteOptions.empty())
-                 { 
-                    autoCompleteOptions += lstAutoComplete[i];
-                    firstAutoComplete = lstAutoComplete[i];
-                 }
-                 else autoCompleteOptions = autoCompleteOptions + ", " + lstAutoComplete[i];
-                 if (countAutoCompleteOptions++ > 5)
-                   break;
-               }
-               i++;
-         }
-         
-         if (!autoCompleteOptions.empty()) 
-         {
-            countAutoCompletePos = text.length();
-             text = firstAutoComplete;
-             cursorPos = countAutoCompletePos;
-             autoCompleteReady = true;
-         }
-         if (!onAutoCompleteCallback.empty()) onAutoCompleteCallback();
-     }
-}
-
-void EditBox::resetAutoComplete(bool keepChanges)
-{
-     if (autoCompleteReady && !firstAutoComplete.empty() && !keepChanges)
-     { 
-         clearText();
-         text = firstAutoComplete.substr(0,countAutoCompletePos);
-         cursorPos = countAutoCompletePos;
-     }
-     else
-     {
-         if (!firstAutoComplete.empty()) cursorPos = text.length();
-     }
-
-      autoCompleteOptions = "";
-      countAutoCompleteOptions = 0;
-      countAutoCompletePos = 0;
-      autoCompleteReady = false;
+    return false;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -991,11 +1323,353 @@ void EditBox::cursorToPrevWord(void)
     }
 }
 
+//////////////////////////////// ScrollBar /////////////////////////////////////
+// ScrollBar
+////////////////////////////////////////////////////////////////////////////////
+#define SCROLL_SIZE 15
+
+ScrollBar::ScrollBar(bool _vertical, int _totalElements, int _elementsForBar) 
+	: dragging(false), value(0), firstElement(0), sized(false)
+
+{
+	vertical = _vertical;
+	elements = _totalElements;
+	elementsForBar = _elementsForBar;
+}
+	
+void ScrollBar::draw(void)
+{
+	Component::draw(); // for potential colour changes
+
+    if (!visible) return;
+
+	painter.drawSquareEdge(pos, size);
+    glPushMatrix();
+    glTranslatef(pos[0], pos[1], 0.f);
+    Component::scissor->push(pos, size);
+
+	if (!sized)
+		adjustSize();
+	scrollBt.draw();
+    Component::scissor->pop();
+	glPopMatrix();
+
+	stringstream ss;
+	string p;
+	ss.precision(0);
+	ss << value;
+	p = ss.str();
+	painter.print(pos[0]+2, pos[1]+2, p);
+}
+
+bool ScrollBar::onClic(int x, int y, S_GUI_VALUE bt, S_GUI_VALUE state)
+{
+	if (bt==S_GUI_MOUSE_LEFT && state==S_GUI_RELEASED)
+	{
+		dragging = false;
+		return false;
+	}
+	
+	if (visible && isIn(x,y) && state==S_GUI_PRESSED)
+	{
+		if (scrollBt.isIn(x-pos[0],y-pos[1])) 
+		{
+			oldPos.set(x-pos[0],y-pos[1]);
+			oldValue = value;
+			dragging = true;
+		}
+		else
+		{
+			unsigned int n;
+
+			if (vertical)
+				n = y-pos[1];
+			else
+				n = x-pos[0];
+				
+			if (n < scrollOffset) setValue(value - 1);
+			else if (n > scrollOffset + scrollSize) setValue(value +1);
+			
+		}
+		return true;
+	}
+	return false;
+}
+
+bool ScrollBar::onMove(int x, int y)
+{
+	float delta, v;
+	
+	if (!visible) return false;
+
+	scrollBt.onMove(x-pos[0],y-pos[1]);
+
+	if (!isIn(x, y)) 
+	{
+		dragging = false;
+		return false;
+	}
+
+	if (!dragging) return false;
+
+	if (vertical)
+		delta = ((float)(y - pos[1]) - oldPos[1])/(size[1]-(int)scrollSize);
+	else
+		delta = ((float)(x - pos[0]) - oldPos[0])/(size[0]-(int)scrollSize);
+
+	v = (float)oldValue + delta*(elements-elementsForBar);
+	
+	if (v < 0) v = 0;
+	else if (v > elements-elementsForBar) v = elements-elementsForBar;
+	
+	setValue(int(v));
+	if (!onChangeCallback.empty()) RUNCALLBACK(onChangeCallback);
+
+	return false;
+}
+
+void ScrollBar::setTotalElements(int _elements) 
+{
+	elements = _elements; 
+	sized = false;
+}
+
+void ScrollBar::setElementsForBar(int _elementsForBar)
+{
+	if(_elementsForBar>(int)elements) 
+		elementsForBar = elements; 
+	else 
+		elementsForBar =_elementsForBar; 
+	sized = false; 
+}
+
+void ScrollBar::adjustSize(void)
+{
+	int s;
+	
+	if (vertical)
+	{
+		s = getSizey();
+		setSize(SCROLL_SIZE,s);
+	}
+	else
+	{
+		s = getSizex();
+		setSize(s,SCROLL_SIZE);
+	}
+	
+	scrollSize = (int)(((float)elementsForBar/elements)*s)-2;
+	scrollOffset = (int)(((float)firstElement/elements)*s)+1;
+	
+	if (value >= elements - elementsForBar && s-scrollSize-scrollOffset > 1)
+		scrollOffset = s-scrollSize-1;
+		
+	if (vertical)
+	{
+		scrollBt.setSize(getSizex()-2, scrollSize);
+		scrollBt.setPos(1, scrollOffset);
+	}
+	else
+	{
+		scrollBt.setSize(scrollSize, getSizey()-2);
+		scrollBt.setPos(scrollOffset, 1);
+	}
+	sized = true;
+}
+
+void ScrollBar::setValue(int _value)
+{
+	value = _value;
+	firstElement = value;
+	if (!onChangeCallback.empty()) RUNCALLBACK(onChangeCallback);
+	sized = false;
+}
+
+
+////////////////////////////////// ListBox /////////////////////////////////////
+// ListBox
+////////////////////////////////////////////////////////////////////////////////
+
+#define LISTBOX_ITEM_HEIGHT (BUTTON_HEIGHT - 8)
+
+ListBox::ListBox(int _displayLines) : 
+	scrollBar(true), firstItemIndex(0), value(-1)
+{
+	displayLines = _displayLines;
+	scrollBar.setVisible(false);
+	scrollBar.setElementsForBar(displayLines);
+}
+
+void ListBox::createLines(void)
+{
+	unsigned int i;
+	LabeledButton *bt;
+	
+    vector<LabeledButton*>::iterator iter = itemBt.begin();
+    while (iter != itemBt.end())
+    {
+        delete (*iter);
+        (*iter)=NULL;
+        iter++;
+    }
+	itemBt.clear();
+	
+	for (i = 0; i < displayLines; i++)
+	{
+		bt = new LabeledButton();
+		bt->setHideBorder(true);
+		bt->setHideBorderMouseOver(true);
+		bt->setHideTexture(true);
+		bt->setJustification(JUSTIFY_LEFT);
+		itemBt.push_back(bt);
+	}
+}
+
+void ListBox::draw(void)
+{
+	Component::draw(); // for potential colour changes
+
+	unsigned int i, j;
+	if (!visible) return;
+
+	painter.drawSquareEdge(pos, size);
+    glPushMatrix();
+    glTranslatef(pos[0], pos[1], 0.f);
+    Component::scissor->push(pos, size);
+
+	scrollBar.setVisible(items.size() > displayLines);
+	if (scrollBar.getVisible()) scrollBar.draw();
+
+	i = firstItemIndex;
+	j = 0;
+	while (i < firstItemIndex + displayLines && i < items.size())
+	{
+		if (value != -1 && value == (int)i)
+			itemBt[j]->setBright(true);
+		else
+			itemBt[j]->setBright(false);
+		itemBt[j++]->draw();
+		i++;
+	}
+    Component::scissor->pop();
+	glPopMatrix();
+}
+
+bool ListBox::onClic(int x, int y, S_GUI_VALUE button, S_GUI_VALUE state)
+{
+	if (!visible) return false;
+	if (!isIn(x,y)) return false;
+	
+	x = x - pos[0];
+	y = y - pos[1];
+	if (scrollBar.getVisible())
+	{
+		if (scrollBar.onClic(x, y, button, state)) return true;
+	}
+
+	if (state==S_GUI_PRESSED)
+	{
+		int i = firstItemIndex;
+    	vector<LabeledButton*>::iterator iter = itemBt.begin();
+		while (iter != itemBt.end())
+		{
+			if ((*iter)->onClic(x, y, button, state)) 
+			{
+				value = i;
+				if (!onChangeCallback.empty()) RUNCALLBACK(onChangeCallback);
+				return true;
+			}
+	   	    iter++;
+	   	    i++;
+		}
+	}	
+
+	return false;
+}
+
+bool ListBox::onMove(int x, int y)
+{
+	if (!visible) return false;
+	x = x - pos[0];
+	y = y - pos[1];
+   	vector<LabeledButton*>::iterator iter = itemBt.begin();
+	// highlight the item with the mouse over
+	while (iter != itemBt.end())
+	{
+		(*iter)->onMove(x, y); 
+   	    iter++;
+	}
+	if (scrollBar.onMove(x, y)) return true;
+	
+	return false;
+}
+
+void ListBox::addItems(const vector<string> _items)
+{
+	if (_items.empty()) return;
+	
+	unsigned int i = 0;
+	while (i < _items.size()) items.push_back(_items[i++]);
+	adjustAfterItemsAdded();
+}
+
+void ListBox::addItem(const string& _text)
+{
+	if (!items.empty())	items.push_back(_text);
+	adjustAfterItemsAdded();
+}
+
+void ListBox::adjustAfterItemsAdded(void)
+{
+	createLines();
+	setSize(getSizex(),LISTBOX_ITEM_HEIGHT * displayLines);
+	scrollBar.setOnChangeCallback(callback<void>(this, &ListBox::scrollChanged));
+	scrollBar.setSize(SCROLL_SIZE,getSizey());
+	scrollBar.setPos(getSizex()-SCROLL_SIZE,0);
+	scrollBar.setTotalElements(items.size());
+	scrollBar.setElementsForBar(displayLines);
+	scrollChanged();
+}
+
+void ListBox::scrollChanged(void)
+{
+	firstItemIndex = scrollBar.getValue();
+
+	unsigned int i = firstItemIndex;
+	unsigned int j = 0;
+	int w = getSizex();
+	w = w - ((int)scrollBar.getVisible() * scrollBar.getSizex());
+	while (i < firstItemIndex + displayLines && i < items.size())
+	{
+		itemBt[j]->setPos(0,j*LISTBOX_ITEM_HEIGHT);
+		itemBt[j]->setSize(w,LISTBOX_ITEM_HEIGHT-1);
+		itemBt[j++]->setLabel(items[i++]);
+	}
+}
+
+void ListBox::clear(void)
+{
+	items.clear();
+	adjustAfterItemsAdded();
+}
+
+string ListBox::getItem(int value)
+{
+	if (items.empty() || value < 0 || value >= (int)items.size()) 
+		return string();	
+	else
+		return items[value];
+}
+
+
 /////////////////////////////// LabeledButton //////////////////////////////////
 // Button with text on it
 ////////////////////////////////////////////////////////////////////////////////
 
-LabeledButton::LabeledButton(const string& _label, const s_font* font) : Button(), label(_label, font)
+#define LABEL_PAD 10
+
+LabeledButton::LabeledButton(const string& _label, const s_font* font, Justification _j, bool _bright) 
+	: Button(), label(_label, font), justification(_j), isBright(_bright)
 {
 	Component::setSize(label.getSize()+s_vec2i(4,2));
 }
@@ -1006,13 +1680,26 @@ LabeledButton::~LabeledButton()
 
 void LabeledButton::draw(void)
 {
+	Component::draw(); // for potential colour changes
+	
     if (!visible) return;
+	
+	if (!hideTexture)
+		painter.drawSquareFill(pos, size, painter.getBaseColor() * 1.f);
 	Button::draw();
+
     glPushMatrix();
     glTranslatef(pos[0], pos[1], 0.f);
     Component::scissor->push(pos, size);
-	label.setPos((size-label.getSize())/2);
-	label.draw();
+    if (justification == JUSTIFY_CENTER)
+		label.setPos((size[0]-label.getSizex())/2,(size[1]-label.getSizey())/2+2);
+	else if (justification == JUSTIFY_LEFT)
+		label.setPos(0 + LABEL_PAD,(size[1]-label.getSizey())/2+2);
+	else if (justification == JUSTIFY_RIGHT)
+		label.setPos(size[0]-label.getSizex() - LABEL_PAD,(size[1]-label.getSizey())/2+2);
+	
+	if (pressed || isBright) label.draw();
+    else label.draw(.3);   // faded
     Component::scissor->pop();
 	glPopMatrix();
 }
@@ -1054,6 +1741,7 @@ void TextLabel::setLabel(const string& _label)
         addComponent(tempLabel);
         ++i;
     }
+    adjustSize(); // Tony
 }
 
 void TextLabel::adjustSize(void)
@@ -1092,6 +1780,8 @@ FramedContainer::FramedContainer() : Container(), frameSize(3,3,3,3)
 
 void FramedContainer::draw(void)
 {
+	Component::draw(); // for potential colour changes
+
     if (!visible) return;
 	painter.drawSquareEdge(pos, size);
 	painter.drawSquareEdge(inside->getPos()-s_vec2i(1,1) + pos, inside->getSize() + s_vec2i(2,2));
@@ -1140,8 +1830,8 @@ void FramedContainer::setFrameSize(int left, int right, int bottom, int top)
 // Standard window widget
 ////////////////////////////////////////////////////////////////////////////////
 
-StdWin::StdWin(const char * _title, s_texture* _header_tex, s_font * _winfont, int headerSize) :
-	FramedContainer(), titleLabel(NULL), header_tex(NULL), dragging(0)
+StdWin::StdWin(const string& _title, s_texture* _header_tex, s_font * _winfont, int headerSize) :
+	FramedContainer(), titleLabel(NULL), header_tex(NULL), dragging(false)
 {
 	if (_header_tex) header_tex = _header_tex;
 	if (_winfont) painter.setFont(_winfont);
@@ -1151,7 +1841,7 @@ StdWin::StdWin(const char * _title, s_texture* _header_tex, s_font * _winfont, i
 	Container::addComponent(titleLabel);
 }
 
-void StdWin::setTitle(const char * _title)
+void StdWin::setTitle(const string& _title)
 {
 	titleLabel->setLabel(_title);
 	titleLabel->adjustSize();
@@ -1159,6 +1849,8 @@ void StdWin::setTitle(const char * _title)
 
 void StdWin::draw()
 {
+	Component::draw(); // for potential colour changes
+
 	if (!visible) return;
 	titleLabel->setPos((size[0] - titleLabel->getSizex())/2, (frameSize[3]-titleLabel->getSizey())/2 + 1);
 	painter.drawSquareFill(pos, size);
@@ -1166,40 +1858,50 @@ void StdWin::draw()
 	FramedContainer::draw();
 }
 
-int StdWin::onClic(int x, int y, S_GUI_VALUE bt, S_GUI_VALUE state)
+bool StdWin::onClic(int x, int y, S_GUI_VALUE bt, S_GUI_VALUE state)
 {
-	if (!visible) return 0;
+	if (!visible) return false;
 	if (FramedContainer::onClic(x, y, bt, state)) return 1;
 	if (state==S_GUI_RELEASED && bt==S_GUI_MOUSE_LEFT)
 	{
-		dragging = 0;
+		dragging = false;
 	}
 	if (isIn(x, y))
 	{
 		if (state==S_GUI_PRESSED && bt==S_GUI_MOUSE_LEFT)
 		{
-			dragging = 1;
-			oldpos.set(x,y);
+			dragging = true;
+			oldPos.set(x,y);
 		}
-		return 1;
+		return true;
 	}
-	return 0;
+	return false;
 }
 
-int StdWin::onMove(int x, int y)
+bool StdWin::onMove(int x, int y)
 {
-	if (!visible) return 0;
+	if (!visible) return false;
 	if (FramedContainer::onMove(x, y)) return 1;
 	if (dragging)
 	{
-		pos+=(s_vec2i(x,y)-oldpos);
-		oldpos.set(x,y);
-		return 1;
+		pos+=(s_vec2i(x,y)-oldPos);
+		oldPos.set(x,y);
+		return true;
 	}
-	return 0;
+	return false;
 }
 
-StdBtWin::StdBtWin(const char * _title, s_texture* _header_tex, s_font * _winfont, int headerSize) :
+void StdWin::setVisible(bool _visible)
+{
+	moveToFront = _visible;
+	Component::setVisible(_visible);
+}
+
+///////////////////////////////// StdBtWin //////////////////////////////////////
+// Standard Button Window - StdWin with a close button in the title bar
+////////////////////////////////////////////////////////////////////////////////
+
+StdBtWin::StdBtWin(const string& _title, s_texture* _header_tex, s_font * _winfont, int headerSize) :
 	StdWin(_title, _header_tex, _winfont, headerSize), hideBt(NULL)
 {
 	hideBt = new Button();
@@ -1210,6 +1912,8 @@ StdBtWin::StdBtWin(const char * _title, s_texture* _header_tex, s_font * _winfon
 
 void StdBtWin::draw()
 {
+	Component::draw(); // for potential colour changes
+
 	if (!visible) return;
 	hideBt->setPos(size[0] - hideBt->getSizex() - 3, 3);
 	StdWin::draw();
@@ -1217,17 +1921,21 @@ void StdBtWin::draw()
 
 void StdBtWin::onHideBt(void)
 {
-	visible=0;
-	if (!onHideBtCallback.empty()) onHideBtCallback();
+	setVisible(false);
+	if (!onHideBtCallback.empty()) RUNCALLBACK(onHideBtCallback);
 }
 
 
-StdTransBtWin::StdTransBtWin(const char * _title, int _time_out, s_texture* _header_tex, s_font * _winfont, int headerSize) :
+StdTransBtWin::StdTransBtWin(const string& _title, int _time_out, s_texture* _header_tex, s_font * _winfont, int headerSize) :
 	StdBtWin(_title, _header_tex, _winfont, headerSize)
 {
 
 	set_timeout(_time_out);
 }
+
+////////////////////////////// StdTranBtWin ////////////////////////////////////
+// Standard Button Window with timed close
+////////////////////////////////////////////////////////////////////////////////
 
 void StdTransBtWin::update(int delta_time)
 {
@@ -1251,17 +1959,224 @@ void StdTransBtWin::set_timeout(int _time_out)
 	time_left = _time_out;
 }
 
+///////////////////////////////// StdDlgWin ////////////////////////////////////
+// Standard Button Window - StdWin with a close button in the title bar
+////////////////////////////////////////////////////////////////////////////////
+
+#define STDDLGWIN_BT_WIDTH 90
+#define STDDLGWIN_BT_HEIGHT BUTTON_HEIGHT
+#define STDDLGWIN_BT_BOTTOM_OFFSET 25
+#define STDDLGWIN_MSG_SIDE_OFFSET 25
+#define STDDLGWIN_MSG_TOP_OFFSET 10
+#define STDDLGWIN_BT_BOTTOM_OFFSET 25
+#define STDDLGWIN_BT_SEPARATION 25
+#define STDDLGWIN_BT_ICON (32+15)
+#define STDDLGWIN_BT_ICON_LEFT 20
+#define STDDLGWIN_BT_ICON_TOP 20
+
+StdDlgWin::StdDlgWin(const string& _title, s_texture* _header_tex, s_font * _winfont, int headerSize) :
+	StdWin(_title, _header_tex, _winfont, headerSize), firstBt(NULL), secondBt(NULL), messageLabel(NULL)
+	,inputEdit(NULL)
+{
+	reshape(300,200,400,100);
+
+	numBtns = 1;
+	firstBt = new LabeledButton("1");
+	firstBt->setSize(STDDLGWIN_BT_WIDTH,STDDLGWIN_BT_HEIGHT);
+	firstBt->setOnPressCallback(callback<void>(this, &StdDlgWin::onFirstBt));
+	addComponent(firstBt);
+	firstBt->setVisible(true);
+
+	secondBt = new LabeledButton("2");
+	secondBt->setSize(STDDLGWIN_BT_WIDTH,STDDLGWIN_BT_HEIGHT);
+	secondBt->setOnPressCallback(callback<void>(this, &StdDlgWin::onSecondBt));
+	addComponent(secondBt);
+
+	blankIcon = new s_texture("bt_blank");
+	questionIcon = new s_texture("bt_question");
+	alertIcon = new s_texture("bt_alert");
+	picture = new Picture(questionIcon, STDDLGWIN_BT_ICON_LEFT, STDDLGWIN_BT_ICON_TOP, 32, 32);
+	addComponent(picture);
+
+	messageLabel = new TextLabel("");
+	messageLabel->setPos(STDDLGWIN_MSG_SIDE_OFFSET,STDDLGWIN_MSG_TOP_OFFSET);
+	addComponent(messageLabel);
+	
+	inputEdit = new EditBox("");
+	inputEdit->setPos(STDDLGWIN_MSG_SIDE_OFFSET,STDDLGWIN_MSG_TOP_OFFSET + 20);
+	inputEdit->setSize(size[0] - 2*STDDLGWIN_MSG_SIDE_OFFSET, STDDLGWIN_BT_HEIGHT);
+	inputEdit->setVisible(false);
+	inputEdit->setOnReturnKeyCallback(callback<void>(this, &StdDlgWin::onInputReturnKey));
+	addComponent(inputEdit);
+	
+	arrangeButtons();
+	originalTitle = _title;
+	setVisible(false);
+		
+	resetResponse();
+}
+
+void StdDlgWin::resetResponse(void)
+{
+	lastButton = BT_NOTSET;
+	lastInput = "";
+	firstBtType = BT_NOTSET;	
+	secondBtType = BT_NOTSET;	
+}
+
+void StdDlgWin::arrangeButtons(void)
+{
+	int firstLeft, secondLeft, top;
+	
+	if (numBtns == 2) firstLeft = (size[0] - (2*STDDLGWIN_BT_WIDTH + STDDLGWIN_BT_SEPARATION)) / 2;
+	else firstLeft = (size[0] - STDDLGWIN_BT_WIDTH) / 2;
+	secondLeft = firstLeft + STDDLGWIN_BT_WIDTH + STDDLGWIN_BT_SEPARATION;
+	top = size[1] - STDDLGWIN_BT_BOTTOM_OFFSET - STDDLGWIN_BT_HEIGHT;
+
+	if (hasIcon)
+	{
+		messageLabel->setPos(STDDLGWIN_MSG_SIDE_OFFSET + STDDLGWIN_BT_ICON, STDDLGWIN_MSG_TOP_OFFSET);
+		inputEdit->setPos(STDDLGWIN_MSG_SIDE_OFFSET + STDDLGWIN_BT_ICON,STDDLGWIN_MSG_TOP_OFFSET + 20);
+	}
+	else
+	{
+		messageLabel->setPos(STDDLGWIN_MSG_SIDE_OFFSET,STDDLGWIN_MSG_TOP_OFFSET);
+		inputEdit->setPos(STDDLGWIN_MSG_SIDE_OFFSET,STDDLGWIN_MSG_TOP_OFFSET + 20);
+	}
+
+	firstBt->setPos(firstLeft,top);
+	secondBt->setPos(secondLeft,top);
+	secondBt->setVisible((numBtns > 1));
+	
+	picture->setVisible(hasIcon);
+}
+
+// Used for GNU gettext translations
+#ifndef MACOSX
+#include "gettext.h"
+#define _(String) gettext (String)
+#define N_(String) gettext_noop(String)
+#else
+# include "POSupport.h"
+# define _(String) localizedUTF8String(String)
+# define N_(String) (String)
+#endif
+
+void StdDlgWin::MessageBox(const string &_title, const string &_prompt, int _buttons, const string &_ID)
+{
+	lastID = _ID;
+	lastType = STDDLGWIN_MSG;
+	
+	resetResponse();
+
+	numBtns = 1;
+
+	if (!_title.empty()) setTitle(_title.c_str()); 
+	else setTitle(originalTitle.c_str());
+
+	messageLabel->setLabel(_prompt);
+	inputEdit->setVisible(false);	
+
+	if (_buttons & BT_NO)
+	{
+		secondBtType = BT_NO;
+		secondBt->setLabel(_("No"));
+		numBtns = 2;
+	}
+	else if (_buttons & BT_CANCEL)
+	{
+		secondBtType = BT_CANCEL;
+		secondBt->setLabel(_("Cancel"));
+		numBtns = 2;
+	}
+
+	hasIcon = (_buttons >= BT_ICON_BLANK);
+	
+	if (_buttons & BT_ICON_BLANK) picture->setTexture(blankIcon);
+	else if (_buttons & BT_ICON_ALERT) picture->setTexture(alertIcon);
+	else if (_buttons & BT_ICON_QUESTION) picture->setTexture(questionIcon);
+
+	if (_buttons & BT_YES)
+	{
+		firstBtType = BT_YES;
+		firstBt->setLabel(_("Yes"));
+	}
+	else
+	{
+		firstBtType = BT_OK;
+		firstBt->setLabel(_("OK"));
+	}		
+	
+	arrangeButtons();
+	setFocus(true);
+	setVisible(true);
+}
+
+void StdDlgWin::InputBox(const string &_title, const string &_prompt, const string &_ID)
+{
+	lastID = _ID;
+	lastType = STDDLGWIN_INPUT;
+
+	resetResponse();
+
+	numBtns = 2;
+	hasIcon = false;
+
+	if (!_title.empty()) setTitle(_title.c_str());
+	else setTitle(originalTitle.c_str()); 
+
+	messageLabel->setLabel(_prompt);
+	inputEdit->clearText();
+	inputEdit->setVisible(true);	
+
+	firstBtType = BT_OK;
+	firstBt->setLabel(_("OK"));
+	secondBtType = BT_CANCEL;
+	secondBt->setLabel(_("Cancel"));
+
+	arrangeButtons();
+	setVisible(true);
+	setFocus(true);
+	inputEdit->setEditing(true);
+}
+
+void StdDlgWin::onInputReturnKey(void)
+{
+	inputEdit->setEditing(false);
+	onFirstBt();
+}
+	
+void StdDlgWin::onFirstBt(void)
+{
+	lastButton = firstBtType;
+	lastInput = inputEdit->getText();
+	setVisible(false);
+	setFocus(false);
+	if (!onCompleteCallback.empty()) RUNCALLBACK(onCompleteCallback);
+}
+
+void StdDlgWin::onSecondBt(void)
+{
+	lastButton = secondBtType;
+	lastInput = inputEdit->getText();
+	setVisible(false);
+	setFocus(false);
+	if (!onCompleteCallback.empty()) RUNCALLBACK(onCompleteCallback);
+}
+
 ///////////////////////////////////// Tab //////////////////////////////////////
 // Everything to handle tabs
 ////////////////////////////////////////////////////////////////////////////////
 
 TabHeader::TabHeader(Component* c, const string& _label, const s_font* _font) :
-	LabeledButton(_label, _font), assoc(c)
+	LabeledButton(_label, _font), assoc(c), active(false)
 {
 }
 
 void TabHeader::draw(void)
 {
+	Component::draw(); // for potential colour changes
+
     if (!visible) return;
 	painter.drawSquareFill(pos, size, painter.getBaseColor() * (0.7f + 0.3 * active));
 	if (!active) painter.drawSquareEdge(pos,size);
@@ -1271,27 +2186,25 @@ void TabHeader::draw(void)
 		painter.drawLine(s_vec2i(pos[0]+1,pos[1]), s_vec2i(pos[0]+size[0]-1,pos[1]));
 		painter.drawLine(s_vec2i(pos[0]+size[0]-1,pos[1]), pos+size-s_vec2i(1,0));
 	}
-	// Draw laeb
+	// Draw label
     glPushMatrix();
     glTranslatef(pos[0], pos[1], 0.f);
     Component::scissor->push(pos, size);
 	label.setPos((size-label.getSize())/2 + s_vec2i(1,0));
-	label.draw();
+	label.draw(0.7f + 0.3 * active);
     Component::scissor->pop();
 	glPopMatrix();
 }
 
-void TabHeader::setActive(int s)
+void TabHeader::setActive(bool s)
 {
 	active = s;
-	if (active) assoc->setVisible(1);
-	else assoc->setVisible(0);
+	assoc->setVisible(active);
 }
 
 TabContainer::TabContainer(const s_font* _font) : Container(), headerHeight(22)
 {
 	if (_font) painter.setFont(_font);
-
 }
 
 void TabContainer::addTab(Component* c, const string& name)
@@ -1312,6 +2225,8 @@ void TabContainer::addTab(Component* c, const string& name)
 
 void TabContainer::draw(void)
 {
+	Component::draw(); // for potential colour changes
+
 	if (!visible) return;
 	painter.drawSquareFill(pos, size, painter.getBaseColor()/3);
 	painter.drawLine(s_vec2i(pos[0]+getHeadersSize(), pos[1]+headerHeight-1),
@@ -1331,16 +2246,17 @@ int TabContainer::getHeadersSize(void)
 	return s;
 }
 
-int TabContainer::onClic(int x, int y, S_GUI_VALUE button, S_GUI_VALUE state)
+bool TabContainer::onClic(int x, int y, S_GUI_VALUE button, S_GUI_VALUE state)
 {
-	if (!visible) return 0;
+	if (!visible) return false;
 	list<TabHeader*>::iterator iter = headers.begin();
 	while (iter != headers.end())
 	{
 		if ((*iter)->onClic(x - pos[0], y - pos[1], button, state))
 		{
 			select(*iter);
-			return 1;
+			(*iter)->setInFront(true);
+			return true;
 		}
         iter++;
     }
@@ -1352,92 +2268,160 @@ void TabContainer::select(TabHeader* t)
 	list<Component*>::iterator iter = childs.begin();
 	while (iter != childs.end())
 	{
-		(*iter)->setVisible(0);
+		(*iter)->setVisible(false);
         iter++;
     }
 	list<TabHeader*>::iterator iter2 = headers.begin();
 	while (iter2 != headers.end())
 	{
-		(*iter2)->setVisible(1);
-		if (*iter2==t) (*iter2)->setActive(1);
-		else (*iter2)->setActive(0);
+		(*iter2)->setVisible(true);
+		if (*iter2==t) (*iter2)->setActive(true);
+		else (*iter2)->setActive(false);
         iter2++;
     }
 }
 
-
-// Cursor Bar
-
-CursorBar::CursorBar(float _min, float _max, float _val) : cursor(), minBar(_min), maxBar(_max)
+//////////////////////////////// CursorBar /////////////////////////////////////
+// CursorBar
+////////////////////////////////////////////////////////////////////////////////
+#define CURSOR_SIZE 8
+CursorBar::CursorBar(bool _vertical, float _min, float _max, float _val) : cursorBt(), sized(false)
 {
 	float tmpVal = _val;
-	if (tmpVal<minBar && tmpVal>maxBar) tmpVal = (minBar + maxBar)/2;
-	setSize(100,15);
-	cursor.setSize(8, getSizey());
+	minValue = _min;
+	maxValue = _max;
+	range = maxValue - minValue;
+	vertical = _vertical;
+
+	if (tmpVal < minValue || tmpVal > maxValue) tmpVal = (minValue + maxValue)/2;
 	setValue(tmpVal);
-	oldPos = cursor.getPos();
 }
 
 void CursorBar::draw(void)
 {
+	Component::draw(); // for potential colour changes
+
     if (!visible) return;
 	painter.drawSquareEdge(pos, size);
     glPushMatrix();
     glTranslatef(pos[0], pos[1], 0.f);
     Component::scissor->push(pos, size);
-	cursor.draw();
+
+	if (!sized)
+		adjustSize();
+
+	cursorBt.draw();
     Component::scissor->pop();
 	glPopMatrix();
 	if (dragging)
 	{
-		char temp[255];
-		sprintf(temp,"%.2f",barVal);
-		painter.print(pos[0]+2, pos[1]+2, temp);
+		stringstream ss;
+		string p;
+		ss.precision(2);
+
+		ss << value;
+		p = ss.str();
+
+		painter.print(pos[0]+2, pos[1]+2, p);
 	}
 }
 
-void CursorBar::setValue(float _barVal)
+void CursorBar::adjustSize(void)
 {
-	barVal = _barVal;
-	if (barVal<minBar) barVal = minBar;
-	if (barVal>maxBar) barVal = maxBar;
-	cursor.setPos((int)((barVal-minBar)/(maxBar-minBar) * (size[0] - cursor.getSizex())), 0);
+	int s, scrollOffset;
+	
+	if (vertical)
+	{
+		s = getSizey();
+		setSize(SCROLL_SIZE,s);
+	}
+	else
+	{
+		s = getSizex();
+		setSize(s,SCROLL_SIZE);
+	}
+	s = s - CURSOR_SIZE;
+	
+	scrollOffset = (int)((float)(value-minValue)/range*s)+1;
+	
+	if (value >= minValue + range)
+		scrollOffset = s-1;
+		
+	if (vertical)
+	{
+		cursorBt.setSize(getSizex()-2, CURSOR_SIZE);
+		cursorBt.setPos(1, scrollOffset);
+	}
+	else
+	{
+		cursorBt.setSize(CURSOR_SIZE, getSizey()-2);
+		cursorBt.setPos(scrollOffset, 1);
+	}
+	sized = true;
 }
 
-int CursorBar::onClic(int x, int y, S_GUI_VALUE bt, S_GUI_VALUE state)
+void CursorBar::setValue(float _value)
+{
+	value = _value;
+	sized = false;
+}
+
+bool CursorBar::onClic(int x, int y, S_GUI_VALUE bt, S_GUI_VALUE state)
 {
 	if (bt==S_GUI_MOUSE_LEFT && state==S_GUI_RELEASED)
 	{
-		dragging = 0;
-		return 0;
+		dragging = false;
+		return false;
 	}
+	
 	if (visible && isIn(x,y) && state==S_GUI_PRESSED)
 	{
-		if (cursor.isIn(x-pos[0],y-pos[1])) dragging = 1;
-		return 1;
+		if (cursorBt.isIn(x-pos[0],y-pos[1])) 
+		{
+			oldPos.set(x-pos[0],y-pos[1]);
+			oldValue = value;
+			dragging = true;
+		}
+		return true;
 	}
-	return 0;
+	return false;
 }
 
-int CursorBar::onMove(int x, int y)
+bool CursorBar::onMove(int x, int y)
 {
-	if (!visible) return 0;
-	x = x - pos[0];
-	y = y - pos[1];
-	cursor.onMove(x,y);
-	if (!dragging) return 0;
-	if (x<0) x=0;
-	if (x>size[0]-cursor.getSizex()) x=size[0]-cursor.getSizex();
-	cursor.setPos(cursor.getPosx()+x-oldPos[0], cursor.getPosy());
-	if (cursor.getPosx()<0) cursor.setPos(0,cursor.getPosy());
-	if (cursor.getPosx()>size[0]-cursor.getSizex()) cursor.setPos(size[0]-cursor.getSizex(),cursor.getPosy());
-	barVal=(float)cursor.getPosx()/(size[0]-cursor.getSizex()) * (maxBar-minBar);
-	if (!onChangeCallback.empty()) onChangeCallback();
-	oldPos.set(x,y);
-	return 0;
+	float delta, v;
+	
+	if (!visible) return false;
+	
+	cursorBt.onMove(x-pos[0],y-pos[1]);
+	
+	if (!isIn(x, y)) 
+	{
+		dragging = false;
+		return false;
+	}
+
+	if (!dragging) return false;
+
+	if (vertical)
+		delta = ((float)(y - pos[1]) - oldPos[1])/(size[1] - CURSOR_SIZE);
+	else
+		delta = ((float)(x - pos[0]) - oldPos[0])/(size[0] - CURSOR_SIZE);
+
+	v = (float)oldValue + delta*range;
+	
+	if (v < minValue) v = minValue; 
+	else if (v > maxValue) v = maxValue;
+	
+	setValue(v);
+	if (!onChangeCallback.empty()) RUNCALLBACK(onChangeCallback);
+
+	return false;
 }
 
-
+//////////////////////////////// IntIncDec /////////////////////////////////////
+// 
+////////////////////////////////////////////////////////////////////////////////
 
 IntIncDec::IntIncDec(const s_font* _font, const s_texture* tex_up,
 		const s_texture* tex_down, int _min, int _max,
@@ -1470,6 +2454,8 @@ IntIncDec::~IntIncDec()
 
 void IntIncDec::draw()
 {
+	Component::draw(); // for potential colour changes
+
 	if (!visible) return;
 	ostringstream os;
 	os << value;
@@ -1491,7 +2477,8 @@ IntIncDecVert::IntIncDecVert(const s_font* _font, const s_texture* tex_up,
 FloatIncDec::FloatIncDec(const s_font* _font, const s_texture* tex_up,
 		const s_texture* tex_down, float _min, float _max,
 		float _init_value, float _inc) :
-	Container(), value(_init_value), min(_min), max(_max), inc(_inc), btmore(NULL), btless(NULL), label(NULL)
+	Container(), value(_init_value), min(_min), max(_max), inc(_inc), btmore(NULL), 
+	btless(NULL), label(NULL), format(FORMAT_DEFAULT)
 {
 	label = new Label;
 	if (_font) label->setFont(_font);
@@ -1519,14 +2506,72 @@ FloatIncDec::~FloatIncDec()
 
 void FloatIncDec::draw()
 {
+	Component::draw(); // for potential colour changes
+
 	if (!visible) return;
-	ostringstream os;
-	os << value;
-	label->setLabel(os.str());
+	
+	if (format == FORMAT_DEFAULT)
+	{
+		ostringstream os;
+		os << value;
+		label->setLabel(os.str());
+	}
+	else if (format == FORMAT_LONGITUDE || format == FORMAT_LATITUDE)
+	{
+		string l = print_angle_dms_stel0(value);
+		string m = l.substr(1);
+		if (format == FORMAT_LATITUDE)
+		{
+			if (l[0] == '+') m += "N";
+			if (l[0] == '-') m += "S";
+		}
+		else
+		{
+			if (l[0] == '+') m += "E";
+			if (l[0] == '-') m += "W";
+		}
+		label->setLabel(m); 
+	}
+
 	Container::draw();
 }
 
+void FloatIncDec::inc_value() 
+{
+	float v = value;
+	
+	if (format == FORMAT_LONGITUDE || format == FORMAT_LATITUDE)
+	{
+		v = (int)(v * 60);
+		v = v / 60;
+	}
+	value = v;
+	value += inc; 
+	if(value > max) 
+		value = max; 
+	if (!onPressCallback.empty()) RUNCALLBACK(onPressCallback);
+}
+
+void FloatIncDec::dec_value() 
+{
+	float v = value;
+	
+	if (format == FORMAT_LONGITUDE || format == FORMAT_LATITUDE)
+	{
+		v = (int)(v * 60);
+		v = v / 60;
+	}
+	value = v;
+	value -= inc; 
+	if(value < min) 
+		value = min; 
+	if (!onPressCallback.empty()) RUNCALLBACK(onPressCallback);
+}
+
+/////////////////////////////// Time_item //////////////////////////////////////
 // Widget used to set time and date.
+////////////////////////////////////////////////////////////////////////////////
+
 Time_item::Time_item(const s_font* _font, const s_texture* tex_up,
 						const s_texture* tex_down, double _JD) :
 						d(NULL), m(NULL), y(NULL), h(NULL), mn(NULL), s(NULL)
@@ -1585,7 +2630,6 @@ Time_item::Time_item(const s_font* _font, const s_texture* tex_up,
 	setJDay(_JD);
 }
 
-
 double Time_item::getJDay(void) const
 {
 	static int iy, im, id, ih, imn, is;
@@ -1626,7 +2670,6 @@ string Time_item::getDateString(void)
 	   << s->getValue();
 	return os.str();
 }
-
 
 void Time_item::setJDay(double JD)
 {
@@ -1672,6 +2715,8 @@ void Time_item::setJDay(double JD)
 
 void Time_item::draw()
 {
+	Component::draw(); // for potential colour changes
+
     if (!visible) return;
 	painter.drawSquareEdge(pos, size);
 	painter.drawSquareFill(pos, size);
@@ -1680,8 +2725,12 @@ void Time_item::draw()
 
 void Time_item::onTimeChange(void)
 {
-	if (!onChangeTimeCallback.empty()) onChangeTimeCallback();
+	if (!onChangeTimeCallback.empty()) RUNCALLBACK(onChangeTimeCallback);
 }
+
+//////////////////////////////// Picture  //////////////////////////////////////
+// 
+////////////////////////////////////////////////////////////////////////////////
 
 Picture::Picture(s_texture * _imageTex, int xpos, int ypos, int xsize, int ysize) :
 	imageTex(_imageTex), imgcolor(s_color(1,1,1))
@@ -1700,63 +2749,509 @@ Picture::~Picture()
 
 void Picture::draw(void)
 {
+	Component::draw(); // for potential colour changes
+
 	if (!visible) return;
 	painter.drawSquareFill(pos, size, imgcolor);
 	if (showedges) painter.drawSquareEdge(pos, size);
 }
 
-MapPicture::MapPicture(s_texture * _imageTex, s_texture * _pointerTex, int xpos, int ypos, int xsize, int ysize) :
-	Picture(_imageTex, xpos, ypos, xsize, ysize), pointer(NULL)
+
+///////////////////////////// MapPicture  //////////////////////////////////////
+// MapPicture - for selecting the current location
+////////////////////////////////////////////////////////////////////////////////
+
+City::City(const string& _name, const string& _state, const string& _country, 
+	double _longitude, double _latitude, float zone, int _showatzoom, int _altitude) :
+	name(_name), state(_state), country(_country), latitude(_latitude), longitude(_longitude), showatzoom(_showatzoom), altitude(_altitude)
 {
-	pointer = new Picture(_pointerTex, 0, 0, 5, 5);
-	setShowEdge(true);
-	pointer->setImgColor(s_color(1,1,0));
+}
+
+City_Mgr::City_Mgr(double _proximity) : proximity(_proximity)
+{
+}
+
+
+void City_Mgr::addCity(const string& _name, const string& _state, 
+	const string& _country, double _longitude, double _latitude, float _zone, int _showatzoom, int _altitude)
+{
+	City *city = new City(_name, _state, _country, _longitude, _latitude, _zone, _showatzoom, _altitude);
+	cities.push_back(city);
+}
+
+int City_Mgr::getNearest(double _longitude, double _latitude)
+{
+	double dist, closest;
+	int index = -1;
+	int i;
+	string name;
+
+	if (cities.size() == 0) return -1;
+	
+	i = 0;
+    while (i < (int)cities.size())
+    {
+		name = cities[i]->getName();
+		dist = powf(_latitude - cities[i]->getLatitude(),2.f) +
+			powf(_longitude - cities[i]->getLongitude(),2.f);
+		dist = powf(dist,0.5f);
+		if (index == -1) 
+		{
+			closest = dist;
+			index = i;
+		}
+		else if (dist < closest) 
+		{
+			closest = dist;
+			index = i;
+		}
+	    i++;
+    }
+    if (closest < proximity)
+	    return index;
+	else 
+		return -1;
+}
+
+City *City_Mgr::getCity(unsigned int _index)
+{
+	if (_index < cities.size())
+		return cities[_index];
+	else
+		return NULL;
+}
+
+void City_Mgr::setProximity(double _proximity)
+{
+	if (_proximity < 0)
+		proximity = CITIES_PROXIMITY;
+	else
+		proximity = _proximity;
+}
+
+
+///////////////////////////// MapPicture  //////////////////////////////////////
+// MapPicture - for selecting the current location
+////////////////////////////////////////////////////////////////////////////////
+#define POINTER_SIZE 10
+#define CITY_SIZE 5
+#define CITY_SELECT s_color(1,0,0)
+#define CITY_HOVER s_color(1,1,0)
+#define CITY_WITH_NAME s_color(1,.4,0)
+#define CITY_WITHOUT_NAME s_color(.8,.6,0)
+
+MapPicture::MapPicture(s_texture * _imageTex, s_texture * _pointerTex, s_texture *_cityTex, int xpos, int ypos, int xsize, int ysize) :
+	Picture(_imageTex, xpos, ypos, xsize, ysize), pointer(NULL), panning(false), 
+	dragging(false), zoom(1.f), sized(false), exact(false)
+{
+	pointer = new Picture(_pointerTex, 0, 0, POINTER_SIZE, POINTER_SIZE);
+	pointer->setImgColor(CITY_SELECT);
+	
+	cityPointer = new Picture(_cityTex, 0, 0, CITY_SIZE, CITY_SIZE);
+	cityPointer->setImgColor(CITY_HOVER);
+	
+	setShowEdge(false);  // draw our own
+	cities.setProximity(30.f);
+	nearestIndex = -1;
+	pointerIndex = -1;
+	city_name_font = NULL;
 }
 
 MapPicture::~MapPicture()
 {
 	delete pointer;
 	pointer = NULL;
+
+	if (city_name_font) delete city_name_font;
+	city_name_font = NULL;
+}
+
+void MapPicture::set_font(float font_size, const string& fontpng_filename, const string& fonttxt_filename)
+{
+	city_name_font = new s_font(font_size, fontpng_filename, fonttxt_filename);
+	if (!city_name_font)
+	{
+		printf("Can't create city_name_font\n");
+		exit(-1);
+	}
+	fontsize = font_size;
+}
+
+#define CITY_TYPE_NAMED 1
+#define CITY_TYPE_UNNAMED 2
+#define CITY_TYPE_HOVER 3
+void MapPicture::drawCity(const s_vec2i& cityPos, int ctype)
+{
+	Component::draw(); // for potential colour changes
+
+	if (zoom == 1) 
+		cityPointer->setSize((int)zoom, (int)zoom);
+	else
+		cityPointer->setSize((int)zoom/3, (int)zoom/3);
+
+	if (ctype == CITY_TYPE_HOVER)
+		cityPointer->setImgColor(CITY_HOVER);
+	else if (ctype == CITY_TYPE_NAMED)
+		cityPointer->setImgColor(CITY_WITH_NAME);
+	else
+		cityPointer->setImgColor(CITY_WITHOUT_NAME);
+
+	cityPointer->setPos(cityPos[0]-cityPointer->getSizex()/2, cityPos[1]-cityPointer->getSizey()/2);
+	cityPointer->draw();
+}
+
+void MapPicture::drawCityName(const s_vec2i& cityPos, const string& _name)
+{
+	int x, y, strLen;
+
+	// don't draw if not in the current view (ok in the y axis!)
+	if ((cityPos[0] > originalPos[0] + originalSize[0]) || (cityPos[0] < originalPos[0]))
+		return;
+		
+	y = cityPos[1]-(int)(fontsize/2);
+	strLen = (int)city_name_font->getStrLen(_name);
+	x = cityPos[0] + cityPointer->getSizex()/2 + 1;
+	if (x + strLen + 1 >= originalPos[0] + originalSize[0])
+		x = cityPos[0] - cityPointer->getSizex()/2 - 1 - strLen;
+	city_name_font->print(x, y, _name, 0);
+}
+
+void MapPicture::drawCities(void)
+{
+	s_vec2i cityPos;
+	int cityzoom;
+	
+	for (unsigned int i=0; i < cities.size(); i++)
+	{
+		cityzoom = cities.getCity(i)->getShowAtZoom();
+		cityPos[0] = pos[0] + getxFromLongitude(cities.getCity(i)->getLongitude());
+		cityPos[1] = pos[1] + getyFromLatitude(cities.getCity(i)->getLatitude());
+		// draw the city name if at least at that zoom level, or it is a selected city
+		if (cityzoom != 0 && cityzoom <= (int)zoom || (pointerIndex != -1 && (int)i == pointerIndex))
+		{
+			drawCity(cityPos, CITY_TYPE_NAMED);
+			if ((int)i == pointerIndex)
+				glColor3fv(CITY_SELECT);
+			else
+				glColor3fv(CITY_WITH_NAME);
+			drawCityName(cityPos, cities.getCity(i)->getName());
+		}
+		else 
+			drawCity(cityPos, CITY_TYPE_UNNAMED);
+	}
+}
+
+void MapPicture::drawNearestCity(void)
+{
+	s_vec2i cityPos;
+	int lastIndex = nearestIndex;
+	
+	if ((dragging && nearestIndex == pointerIndex && nearestIndex != -1) ||
+		(!dragging && nearestIndex != -1))
+	{
+		cityPos[0] = pos[0] + getxFromLongitude(cities.getCity(nearestIndex)->getLongitude());
+		cityPos[1] = pos[1] + getyFromLatitude(cities.getCity(nearestIndex)->getLatitude());
+		cityPointer->setImgColor(CITY_HOVER);
+		drawCity(cityPos, CITY_TYPE_HOVER);
+		glColor3fv(CITY_HOVER);
+		drawCityName(cityPos, cities.getCity(nearestIndex)->getName());
+		if (!onNearestCityCallback.empty()) RUNCALLBACK(onNearestCityCallback);
+		return;
+	}
+	
+	// if dragging - leave the city along
+	if (dragging)
+	{
+		nearestIndex = -1;
+		if (!onNearestCityCallback.empty()) RUNCALLBACK(onNearestCityCallback);
+		return;
+	}
+	
+	if (lastIndex != -1 && nearestIndex == -1)
+		if (!onNearestCityCallback.empty()) RUNCALLBACK(onNearestCityCallback);
 }
 
 void MapPicture::draw(void)
 {
+	Component::draw(); // for potential colour changes
+
 	if (!visible) return;
+	if (!sized)
+	{
+		originalSize = size;
+		originalPos = pos;
+		sized = true;
+	}
+	
+    glPushMatrix();
+    Component::scissor->push(originalPos, originalSize);
+
 	Picture::draw();
-	pointer->setPos(s_vec2i(crosspos[0]+pos[0]-pointer->getSizex()/2, crosspos[1]+pos[1]-pointer->getSizey()/2));
+
+	drawCities();
+	drawNearestCity();
+	
+	if (zoom == 1) 
+		pointer->setSize((int)zoom*6, (int)zoom*6);
+	else
+		pointer->setSize((int)(zoom*2), (int)(zoom*2));
+	pointer->setPos(s_vec2i(pointerPos[0]+pos[0]-pointer->getSizex()/2, pointerPos[1]+pos[1]-pointer->getSizey()/2));
 	pointer->draw();
+	
+    Component::scissor->pop();
+    glPopMatrix();
+
+	painter.drawSquareEdge(originalPos, originalSize);
 }
 
-int MapPicture::onClic(int x, int y, S_GUI_VALUE button, S_GUI_VALUE state)
+bool MapPicture::isIn(int x, int y)
 {
-	if (!visible || state!=S_GUI_PRESSED || !isIn(x,y)) return 0;
-	crosspos.set(x - pos[0], y - pos[1]);
-	if (!onPressCallback.empty()) onPressCallback();
-	return 1;
+	return (originalPos[0]<=x && (originalSize[0]+originalPos[0])>=x && originalPos[1]<=y && (originalPos[1]+originalSize[1])>=y);
 }
 
-float MapPicture::getPointerLongitude(void) const
+bool MapPicture::onKey(Uint16 k, S_GUI_VALUE s)
 {
-	return (float)getPointerx()/size[0]*360.f-180.f;
+	if (s==S_GUI_PRESSED)
+	{
+		if (k == SDLK_PAGEUP) 
+			zoomInOut(1.f);
+		else if (k == SDLK_PAGEDOWN) 
+			zoomInOut(-1.f);
+		else
+			return false;
+		return true;
+	}
+	return false;
 }
 
-float MapPicture::getPointerLatitude(void) const
+void MapPicture::calcPointerPos(int x, int y)
 {
-	return (float)(1.f - (float)getPointery()/size[1])*180.f-90.f;
+	if (SDL_GetModState() & KMOD_CTRL)
+	{
+		nearestIndex = cities.getNearest(getLongitudeFromx(x - pos[0]), getLatitudeFromy(y - pos[1]));
+		if (nearestIndex != -1)
+		{
+			string n = cities.getCity(nearestIndex)->getName();
+			double lat, lon;
+			exactLongitude = cities.getCity(nearestIndex)->getLongitude();
+			exactLatitude = cities.getCity(nearestIndex)->getLatitude();
+			exactAltitude = cities.getCity(nearestIndex)->getAltitude();
+			lat = exactLatitude;
+			lon = exactLongitude;
+			pointerPos[0] = getxFromLongitude(exactLongitude);
+			pointerPos[1] = getyFromLatitude(exactLatitude);
+			exact = true;
+
+			// lock onto this selected city			
+			pointerIndex = nearestIndex;
+			return;
+		}
+	}
+
+	// just roaming
+	pointerIndex = -1;
+	pointerPos[0] = x - pos[0];
+	pointerPos[1] = y - pos[1];
+	exact = false;
 }
 
-void MapPicture::setPointerLongitude(float l)
+bool MapPicture::onClic(int x, int y, S_GUI_VALUE button, S_GUI_VALUE state)
 {
-	setPointerx((int)((l+180.f)/360.f * size[0]));
+	if (!visible) return false;
+
+ 	if (!isIn(x,y)) 
+	{
+		dragging = false;
+		panning = false;
+		return false;
+	}
+
+	if (button==S_GUI_MOUSE_LEFT)
+	{
+		if (state == S_GUI_PRESSED)
+		{
+			dragging = true;
+			calcPointerPos(x, y);
+			if (!onPressCallback.empty()) RUNCALLBACK(onPressCallback);
+		}
+		else
+			dragging = false;
+	}
+	if (button==S_GUI_MOUSE_RIGHT)
+	{
+		if (state == S_GUI_PRESSED)
+		{
+			panning = true;
+			oldPos.set(x,y);
+		}
+		else
+			panning = false;
+	}
+	else if (button == 	S_GUI_MOUSE_WHEELUP)
+		zoomInOut(0.5f); //polls twice - press and release I assume
+	else if (button == 	S_GUI_MOUSE_WHEELDOWN)
+		zoomInOut(-0.5f);
+	return true;
 }
 
-void MapPicture::setPointerLatitude(float l)
+bool MapPicture::onMove(int x, int y)
 {
-	setPointery(size[1] - (int)((l+90.f)/180.f * size[1]));
+	if (!visible) return false;
+ 	if (!isIn(x,y)) return false;
+
+	cursorPos.set(x - pos[0], y - pos[1]);
+	nearestIndex = cities.getNearest(getLongitudeFromx(x - pos[0]), getLatitudeFromy(y - pos[1]));
+
+	if (dragging)
+	{
+		calcPointerPos(x, y);
+		if (!onPressCallback.empty()) RUNCALLBACK(onPressCallback);
+	}
+	else if (panning)
+	{
+		// make sure can't go further than top left corner
+		int l = pos[0]-(oldPos[0]-x);
+		if (l > 0) l = 0;
+
+		int t = pos[1]-(oldPos[1]-y);
+		if (t > 0) t = 0;
+
+		// check bottom corner
+		int r = l + size[0];
+		if (r < originalPos[0] + originalSize[0]) l = originalPos[0] + originalSize[0] - size[0];
+
+		int b = t + size[1];
+		if (b < originalPos[1] + originalSize[1]) t = originalPos[1] + originalSize[1] - size[1];
+
+		setPos(l, t);
+		
+	}
+	oldPos.set(x,y);
+	return true;
 }
 
+void MapPicture::zoomInOut(float _step)
+{
+	float lastZoom = zoom;
+	s_vec2i oldCursorPos = cursorPos;
 
+	zoom += _step;
+	if (zoom < 1.f) zoom = 1.f;
+	else if (zoom > ZOOM_LIMIT) zoom = ZOOM_LIMIT;
+
+	cursorPos[0] = (int)((float)cursorPos[0] * zoom / lastZoom);
+	cursorPos[1] = (int)((float)cursorPos[1] * zoom / lastZoom);
+	pointerPos[0] = (int)((float)pointerPos[0] * zoom / lastZoom);
+	pointerPos[1] = (int)((float)pointerPos[1] * zoom / lastZoom);
+	size[0] = (int)((float)originalSize[0] * zoom);
+	size[1] = (int)((float)originalSize[1] * zoom);
+
+	pos -= (cursorPos - oldCursorPos);
+
+	if (pos[0] > originalPos[0])
+		pos[0] = originalPos[0];
+
+	if (pos[1] > originalPos[1])
+		pos[1] = originalPos[1];
+
+	if (pos[0] + size[0] < originalPos[0] + originalSize[0])
+		pos[0] = originalPos[0] + originalSize[0] - size[0];
+
+	if (pos[1] + size[1] < originalPos[1] + originalSize[1])
+		pos[1] = originalPos[1] + originalSize[1] - size[1];
+}
+
+void MapPicture::findPosition(double longitude, double latitude)
+{
+	// get 1 second accuracy to locate the city
+	cities.setProximity(1.f/3600);
+	pointerIndex = cities.getNearest(longitude, latitude);
+	cities.setProximity(-1);
+}
+
+string MapPicture::getLocationString(int index)
+{
+	string city, state, country;
+
+	if (index == -1)
+		return "";
+
+	city = getCity(index) + ", ";
+	state= getState(index);
+	country = getCountry(index);
+	
+	if (state == "<>")
+		state = "";
+	else
+		state += ", ";
+
+	return city + state + country;
+}
+
+string MapPicture::getPositionString(void)
+{
+	if (pointerIndex == -1)
+		return UNKNOWN_OBSERVATORY;
+	else
+		return getLocationString(pointerIndex);
+}
+
+string MapPicture::getCursorString(void)
+{
+	if (nearestIndex == -1)
+		return "";
+	else
+		return getLocationString(nearestIndex);
+}
+
+int MapPicture::getPointerAltitude(void)
+{
+	if (exact)
+		return exactAltitude;
+	else 
+		return 0; 
+}
+
+double MapPicture::getPointerLongitude(void)
+{
+	if (exact)
+		return exactLongitude;
+	else 
+		return getLongitudeFromx(pointerPos[0]); 
+}
+
+double MapPicture::getPointerLatitude(void)
+{
+	if (exact)
+		return exactLatitude;
+	else 
+		return getLatitudeFromy(pointerPos[1]); 
+}
+
+int MapPicture::getxFromLongitude(double _longitude)
+{
+	return (int)((_longitude+180.f)/360.f * size[0]);
+}
+
+int MapPicture::getyFromLatitude(double _latitude)
+{
+	return (size[1] - (int)((_latitude+90.f)/180.f * size[1]));
+}
+
+double MapPicture::getLongitudeFromx(int x)
+{
+	return (double)x/size[0]*360.f-180.f;
+}
+
+double MapPicture::getLatitudeFromy(int y)
+{
+	return (double)(1.f - (float)y/size[1])*180.f-90.f;
+}
+
+///////////////////////////// StringList ///////////////////////////////////////
 // ClicList
+////////////////////////////////////////////////////////////////////////////////
+
 StringList::StringList()
 {
 	elemsSize = 0;
@@ -1768,6 +3263,8 @@ StringList::StringList()
 
 void StringList::draw(void)
 {
+	Component::draw(); // for potential colour changes
+
 	if (!visible) return;
 	painter.drawSquareEdge(pos, size);
 
@@ -1794,13 +3291,13 @@ void StringList::draw(void)
 	}
 }
 
-int StringList::onClic(int x, int y, S_GUI_VALUE button, S_GUI_VALUE state)
+bool StringList::onClic(int x, int y, S_GUI_VALUE button, S_GUI_VALUE state)
 {
 	if (!visible || state!=S_GUI_PRESSED || !isIn(x,y)) return 0;
 	int poss = (y-pos[1])/itemSize;
 	if (items.begin()+poss == items.end() || (unsigned int)poss>items.size()) return 1;
 	current = items.begin()+poss;
-	if (!onPressCallback.empty()) onPressCallback();
+	if (!onPressCallback.empty()) RUNCALLBACK(onPressCallback);
 	return 1;
 }
 
@@ -1831,8 +3328,10 @@ bool StringList::setValue(const string & s)
 	return false;
 }
 
-// Time Zone Item :
+///////////////////////////// Time_zone_item////////////////////////////////////
 // Widget used to set time zone. Initialized from a file of type /usr/share/zoneinfo/zone.tab
+////////////////////////////////////////////////////////////////////////////////
+
 Time_zone_item::Time_zone_item(const string& zonetab_file)
 {
 	if (zonetab_file.empty())
@@ -1884,6 +3383,8 @@ Time_zone_item::Time_zone_item(const string& zonetab_file)
 
 void Time_zone_item::draw(void)
 {
+	Component::draw(); // for potential colour changes
+
 	if (!visible) return;
 	//painter.drawSquareEdge(pos, size);
 	Container::draw();
@@ -1908,10 +3409,10 @@ void Time_zone_item::onContinentClic(void)
 	removeAllComponents();
 	addComponent(&continents_names);
 	addComponent(&continents[continents_names.getValue()]);
-	if (!onPressCallback.empty()) onPressCallback();
+	if (!onPressCallback.empty()) RUNCALLBACK(onPressCallback);
 }
 
 void Time_zone_item::onCityClic(void)
 {
-	if (!onPressCallback.empty()) onPressCallback();
+	if (!onPressCallback.empty()) RUNCALLBACK(onPressCallback);
 }
