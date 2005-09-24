@@ -193,9 +193,17 @@ void stel_ui::init_tui(void)
 	tui_effect_milkyway_intensity->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb_effects_milkyway_intensity));
 	tui_menu_effects->addComponent(tui_effect_milkyway_intensity);
 
-	tui_effect_zoom_duration = new s_tui::Decimal_item(1, 10, 2, string("5.6 ") + _("Zoom duration: "));
+	tui_effect_nebulae_label_magnitude = new s_tui::Decimal_item(0, 100, 1, string("5.6 ") + _("Maximum Nebula Magnitude to Label: "), .5);
+	tui_effect_nebulae_label_magnitude->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb_effects_nebulae_label_magnitude));
+	tui_menu_effects->addComponent(tui_effect_nebulae_label_magnitude);
+
+	tui_effect_zoom_duration = new s_tui::Decimal_item(1, 10, 2, string("5.7 ") + _("Zoom Duration: "));
 	tui_effect_zoom_duration->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb_effects));
 	tui_menu_effects->addComponent(tui_effect_zoom_duration);
+
+	tui_effect_cursor_timeout = new s_tui::Decimal_item(0, 60, 1, string("5.8 ") + _("Cursor Timeout: "));
+	tui_effect_cursor_timeout->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb_effects));
+	tui_menu_effects->addComponent(tui_effect_cursor_timeout);
 
 
 	// 6. Scripts
@@ -339,6 +347,9 @@ void stel_ui::tui_update_widgets(void)
 	tui_effect_manual_zoom->setValue(core->FlagManualZoom);
 	tui_effect_object_scale->setValue(core->StarScale);
 	tui_effect_milkyway_intensity->setValue(core->milky_way->get_intensity());
+	tui_effect_cursor_timeout->setValue(core->MouseCursorTimeout);
+	tui_effect_nebulae_label_magnitude->setValue(core->MaxMagNebulaName);
+
 
 	// 6. Scripts
 	// each fresh time enter needs to reset to select message
@@ -560,6 +571,8 @@ void stel_ui::tui_cb_effects()
 	oss << "set star_scale " << tui_effect_object_scale->getValue();
 	core->commander->execute_command(oss.str());
 
+	core->MouseCursorTimeout = tui_effect_cursor_timeout->getValue();  // never recorded
+
 }
 
 
@@ -568,5 +581,14 @@ void stel_ui::tui_cb_sky_time()
 {
 	std::ostringstream oss;
 	oss << "date local " << tui_time_skytime->getDateString();
+	core->commander->execute_command(oss.str());
+}
+
+
+// set nebula label limit
+void stel_ui::tui_cb_effects_nebulae_label_magnitude()
+{
+	std::ostringstream oss;
+	oss << "set max_mag_nebula_name " << tui_effect_nebulae_label_magnitude->getValue();
 	core->commander->execute_command(oss.str());
 }

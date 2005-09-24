@@ -1,6 +1,6 @@
 /*
  * Stellarium
- * Copyright (C) 2002 Fabien Chereau
+ * Copyright (C) 2002 Fabien Ch�eau
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -241,15 +241,19 @@ void SkyGrid::draw(const Projector* prj) const
 }
 
 
-SkyLine::SkyLine(SKY_LINE_TYPE line_type, double _radius, unsigned int _nb_segment) :
+SkyLine::SkyLine(SKY_LINE_TYPE _line_type, double _radius, unsigned int _nb_segment) :
 	radius(_radius), nb_segment(_nb_segment), color(0.f, 0.f, 1.f)
 {
 	float inclinaison = 0.f;
+	line_type = _line_type;
+
 	switch (line_type)
-	{
+		{
 		case LOCAL : proj_func = &Projector::project_local; break;
+		case MERIDIAN : proj_func = &Projector::project_local; 
+			inclinaison = 90; break;
 		case ECLIPTIC : proj_func = &Projector::project_earth_equ;
-						inclinaison = 23.45f; break;
+			inclinaison = 23.45f; break;
 		case EQUATOR : proj_func = &Projector::project_earth_equ; break;
 		default : proj_func = &Projector::project_earth_equ;
 	}
@@ -272,6 +276,12 @@ SkyLine::~SkyLine()
 	points = NULL;
 }
 
+void SkyLine::set_font(const string& font_filename, const string& font_texture)
+{
+	font = new s_font(12, font_texture, font_filename);
+	assert(font);
+}
+
 void SkyLine::draw(const Projector* prj) const
 {
 	if (!fader.get_interstate()) return;
@@ -291,10 +301,52 @@ void SkyLine::draw(const Projector* prj) const
 		if ((prj->*proj_func)(points[i], pt1) &&
 			(prj->*proj_func)(points[i+1], pt2) )
 		{
+
+			double angle;
+			double d;
+
+			// TODO: allow for other numbers of meridians and parallels without
+			// screwing up labels?
+
 			glBegin (GL_LINES);
 				glVertex2f(pt1[0],pt1[1]);
 				glVertex2f(pt2[0],pt2[1]);
        		glEnd();
+
+
+			if(line_type == MERIDIAN) {
+				d = sqrt( (pt1[0]-pt2[0])*(pt1[0]-pt2[0]) + (pt1[1]-pt2[1])*(pt1[1]-pt2[1]) );
+				  
+				angle = acos((pt1[1]-pt2[1])/d);
+				if( pt1[0] < pt2[0] ) {
+					angle *= -1;
+				}
+
+				// draw text label
+				std::ostringstream oss;	
+				
+				if(i<=8) oss << (i+1)*10;
+				else if(i<=16) {
+					oss << (17-i)*10;
+					angle += M_PI;
+				}
+				else oss << "";
+				
+				glPushMatrix();
+				glTranslatef(pt2[0],pt2[1],0);
+				glRotatef(180+angle*180./M_PI,0,0,-1);
+				
+				glBegin (GL_LINES);
+				  glVertex2f(-3,0);
+				  glVertex2f(3,0);
+				glEnd();
+				glEnable(GL_TEXTURE_2D);
+
+				if(font) font->print(2,-2,oss.str());
+				glPopMatrix();
+				glDisable(GL_TEXTURE_2D);
+
+			}
 		}
 	}
 
