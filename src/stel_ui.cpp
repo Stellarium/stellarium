@@ -117,7 +117,7 @@ void stel_ui::init(void)
 	}
 
 	// set up mouse cursor timeout
-	MouseTimeLeft = MOUSE_TIMEOUT;
+	MouseTimeLeft = core->MouseCursorTimeout*1000;
 
 	// Create standard texture
 	baseTex = new s_texture("backmenu", TEX_LOAD_TYPE_PNG_ALPHA);
@@ -730,7 +730,7 @@ int stel_ui::handle_move(int x, int y)
 
 	// Show cursor
 	SDL_ShowCursor(1);
-	MouseTimeLeft = MOUSE_TIMEOUT; 
+	MouseTimeLeft = core->MouseCursorTimeout*1000; 
 
 	if (desktop->onMove(x, y)) return 1;
 	if (is_dragging)
@@ -771,7 +771,7 @@ int stel_ui::handle_clic(Uint16 x, Uint16 y, S_GUI_VALUE button, S_GUI_VALUE sta
 
 	// Show cursor
 	SDL_ShowCursor(1);
-	MouseTimeLeft = MOUSE_TIMEOUT; 
+	MouseTimeLeft = core->MouseCursorTimeout*1000; 
 
 	if (desktop->onClic((int)x, (int)y, button, state))
     {
@@ -915,7 +915,7 @@ int stel_ui::handle_clic(Uint16 x, Uint16 y, S_GUI_VALUE button, S_GUI_VALUE sta
 /*******************************************************************************/
 int stel_ui::handle_keys(Uint16 key, S_GUI_VALUE state)
 {
-    // Tony
+
 	if (desktop->onKey(key, state))
 	   return 1;
 
@@ -953,10 +953,11 @@ int stel_ui::handle_keys(Uint16 key, S_GUI_VALUE state)
 				core->commander->execute_command( "script action resume");
 				core->time_multiplier = 1;
 			}
-			else if(key==SDLK_7 || key==0x0003)
+			else if(key==SDLK_7 || key==0x0003 || (key==SDLK_m && core->FlagEnableTuiMenu))
 			{  // ctrl-c
 				// TODO: should double check with user here...
 				core->commander->execute_command( "script action end");
+				if(key==SDLK_m) core->FlagShowTuiMenu = true;
 			}
 			else if(key==SDLK_GREATER || key==SDLK_n)
 			{
@@ -1050,7 +1051,15 @@ int stel_ui::handle_keys(Uint16 key, S_GUI_VALUE state)
 			}
 		}
 		if(key==SDLK_v) core->commander->execute_command( "flag constellation_names toggle");
-		if(key==SDLK_z) core->commander->execute_command( "flag azimuthal_grid toggle");
+		if(key==SDLK_z) {
+			if(!core->FlagMeridianLine) {
+				if(core->FlagAzimutalGrid) core->commander->execute_command( "flag azimuthal_grid 0");
+				else core->commander->execute_command( "flag meridian_line 1");
+			} else {
+				core->commander->execute_command( "flag meridian_line 0");
+				core->commander->execute_command( "flag azimuthal_grid 1");
+			}
+		}
 		if(key==SDLK_e) core->commander->execute_command( "flag equatorial_grid toggle");
   		if(key==SDLK_n)  // Tony for long nebula names - toggles between no name, shortname and longname
         {
@@ -1183,11 +1192,13 @@ void stel_ui::gui_update_widgets(int delta_time)
 	updateTopBar();
 
 	// handle mouse cursor timeout
-	if(MouseTimeLeft > delta_time) MouseTimeLeft -= delta_time;
-	else {
-		// hide cursor
-		MouseTimeLeft = 0;
-		SDL_ShowCursor(0);
+	if(core->MouseCursorTimeout > 0) {
+		if(MouseTimeLeft > delta_time) MouseTimeLeft -= delta_time;
+		else {
+			// hide cursor
+			MouseTimeLeft = 0;
+			SDL_ShowCursor(0);
+		}
 	}
 
 	// update message win
