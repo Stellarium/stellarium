@@ -480,6 +480,7 @@ else if(command=="script") {
 
 	  // turn off all labels
 	  execute_command("flag azimuthal_grid off");
+	  execute_command("flag meridian_line off");
 	  execute_command("flag cardinal_points off");
 	  execute_command("flag constellation_art off");
 	  execute_command("flag constellation_drawing off");
@@ -660,6 +661,7 @@ int StelCommandInterface::set_flag(string name, string value, bool &newval, bool
 		else if(name=="equatorial_grid") newval = (stcore->FlagEquatorialGrid = !stcore->FlagEquatorialGrid);
 		else if(name=="equator_line") newval = (stcore->FlagEquatorLine = !stcore->FlagEquatorLine);
 		else if(name=="ecliptic_line") newval = (stcore->FlagEclipticLine = !stcore->FlagEclipticLine);
+		else if(name=="meridian_line") newval = (stcore->FlagMeridianLine = !stcore->FlagMeridianLine);
 		else if(name=="cardinal_points") {
 			newval = !stcore->cardinals_points->get_flag_show();
 			stcore->cardinals_points->set_flag_show(newval);
@@ -761,6 +763,7 @@ int StelCommandInterface::set_flag(string name, string value, bool &newval, bool
 		else if(name=="equatorial_grid") stcore->FlagEquatorialGrid = newval;
 		else if(name=="equator_line") stcore->FlagEquatorLine = newval;
 		else if(name=="ecliptic_line") stcore->FlagEclipticLine = newval;
+		else if(name=="meridian_line") stcore->FlagMeridianLine = newval;
 		else if(name=="cardinal_points") stcore->cardinals_points->set_flag_show(newval);
 		else if(name=="moon_scaled") {
 			if((stcore->FlagMoonScaled = newval)) 

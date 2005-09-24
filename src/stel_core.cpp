@@ -51,6 +51,7 @@ stel_core::stel_core(const string& DDIR, const string& TDIR, const string& CDIR,
 	azi_grid = new SkyGrid(ALTAZIMUTAL);
 	equator_line = new SkyLine(EQUATOR);
 	ecliptic_line = new SkyLine(ECLIPTIC);
+	meridian_line = new SkyLine(MERIDIAN, 1, 36);
 	cardinals_points = new Cardinals();
 	skyloc = new Sky_localizer(DataDir);
 	
@@ -74,6 +75,7 @@ stel_core::~stel_core()
 	delete azi_grid;
 	delete equator_line;
 	delete ecliptic_line;
+	delete meridian_line;
 	delete cardinals_points;
 	delete landscape; landscape = NULL;
 	delete observatory; observatory = NULL;
@@ -183,6 +185,9 @@ void stel_core::init(void)
 	azi_grid->set_color(AzimuthalColor);
 	equator_line->set_color(EquatorColor);
 	ecliptic_line->set_color(EclipticColor);
+	ecliptic_line->set_font(DataDir + "spacefont.txt", "spacefont");
+	meridian_line->set_color(AzimuthalColor);
+	meridian_line->set_font(DataDir + "spacefont.txt", "spacefont");
 	cardinals_points->set_font(DataDir + "spacefont.txt", "spacefont");
 	cardinals_points->set_color(CardinalColor);
 
@@ -301,6 +306,7 @@ void stel_core::update(int delta_time)
 	azi_grid->update(delta_time);
 	equator_line->update(delta_time);
 	ecliptic_line->update(delta_time);
+	meridian_line->update(delta_time);
 	asterisms->update(delta_time);
 	atmosphere->update(delta_time);
 	landscape->update(delta_time);
@@ -413,6 +419,8 @@ void stel_core::draw(int delta_time)
 	// Draw the ecliptic line
 	ecliptic_line->show(FlagEclipticLine);
 	ecliptic_line->draw(projection);
+	meridian_line->show(FlagMeridianLine);
+	meridian_line->draw(projection);
 
 	// Draw the pointer on the currently selected object
 	if (selected_object && object_pointer_visibility) selected_object->draw_pointer(delta_time, projection, navigation);
@@ -619,6 +627,7 @@ void stel_core::load_config_from(const string& confFile)
 	GuiTextColorr		= str_to_vec3f(conf.get_str("gui:gui_text_colorr").c_str());
 	BaseFontSize		= conf.get_double ("gui","base_font_size",15);
 	FlagShowScriptBar	= conf.get_boolean("gui","flag_show_script_bar",0);
+	MouseCursorTimeout  = conf.get_double("gui","mouse_cursor_timeout",0);
 
 	// Colors
 	AzimuthalColor		= str_to_vec3f(conf.get_str("color:azimuthal_color").c_str());
@@ -685,6 +694,7 @@ void stel_core::load_config_from(const string& confFile)
 	FlagEquatorialGrid		= conf.get_boolean("viewing:flag_equatorial_grid");
 	FlagEquatorLine			= conf.get_boolean("viewing:flag_equator_line");
 	FlagEclipticLine		= conf.get_boolean("viewing:flag_ecliptic_line");
+	FlagMeridianLine		= conf.get_boolean("viewing:flag_meridian_line");
 	cardinals_points->set_flag_show(conf.get_boolean("viewing:flag_cardinal_points"));
 	FlagGravityLabels		= conf.get_boolean("viewing:flag_gravity_labels");
 	FlagMoonScaled			= conf.get_boolean("viewing", "flag_moon_scaled",
@@ -704,8 +714,8 @@ void stel_core::load_config_from(const string& confFile)
 	FlagObjectTrails		= conf.get_boolean("astro", "flag_object_trails", 0);
 	FlagNebula				= conf.get_boolean("astro:flag_nebula");
 	nebulas->set_flag_hints(conf.get_boolean("astro:flag_nebula_name"));
-    FlagNebulaLongName     = conf.get_boolean("astro:flag_nebula_long_name"); // Tony - added long name
-	MaxMagNebulaName		= conf.get_double("astro:max_mag_nebula_name");
+    FlagNebulaLongName      = conf.get_boolean("astro:flag_nebula_long_name"); 
+	MaxMagNebulaName		= conf.get_double("astro", "max_mag_nebula_name", 99);
 	FlagMilkyWay			= conf.get_boolean("astro:flag_milky_way");
 	MilkyWayIntensity       = conf.get_double("astro","milky_way_intensity",1.);
 
@@ -779,6 +789,7 @@ void stel_core::save_config_to(const string& confFile)
 	conf.set_str	("gui:gui_text_colorr", vec3f_to_str(GuiTextColorr));
 	conf.set_double ("gui:base_font_size", BaseFontSize);
 	conf.set_boolean("gui:flag_show_script_bar",FlagShowScriptBar);
+	conf.set_double("gui:mouse_cursor_timeout",MouseCursorTimeout);
 	
 	// Colors
 	conf.set_str    ("color:azimuthal_color", vec3f_to_str(AzimuthalColor));
@@ -839,6 +850,7 @@ void stel_core::save_config_to(const string& confFile)
 	conf.set_boolean("viewing:flag_equatorial_grid", FlagEquatorialGrid);
 	conf.set_boolean("viewing:flag_equator_line", FlagEquatorLine);
 	conf.set_boolean("viewing:flag_ecliptic_line", FlagEclipticLine);
+	conf.set_boolean("viewing:flag_meridian_line", FlagMeridianLine);
 	conf.set_boolean("viewing:flag_cardinal_points", cardinals_points->get_flag_show());
 	conf.set_boolean("viewing:flag_gravity_labels", FlagGravityLabels);
 	conf.set_boolean("viewing:flag_moon_scaled", FlagMoonScaled);

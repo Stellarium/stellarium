@@ -70,7 +70,8 @@ enum SKY_LINE_TYPE
 {
 	EQUATOR,
 	ECLIPTIC,
-	LOCAL
+	LOCAL,
+	MERIDIAN
 };
 
 // Class which manages a line to display around the sky like the ecliptic line
@@ -78,20 +79,24 @@ class SkyLine
 {
 public:
 	// Create and precompute positions of a SkyGrid
-	SkyLine(SKY_LINE_TYPE line_type = EQUATOR, double _radius = 1., unsigned int _nb_segment = 48);
+	SkyLine(SKY_LINE_TYPE _line_type = EQUATOR, double _radius = 1., unsigned int _nb_segment = 48);
     virtual ~SkyLine();
 	void draw(const Projector* prj) const;
 	void set_color(const Vec3f& c) {color = c;}
 	void update(int delta_time) {fader.update(delta_time);}
 	void set_fade_duration(float duration) {fader.set_duration((int)(duration*1000.f));}
 	void show(bool b){fader = b;}
+	void set_font(const string& font_filename, const string& font_texture);
+
 private:
 	double radius;
 	unsigned int nb_segment;
+	SKY_LINE_TYPE line_type;
 	Vec3f color;
 	Vec3f* points;
 	bool (Projector::*proj_func)(const Vec3d&, Vec3d&) const;
 	linear_fader fader;
+	s_font * font;
 };
 
 // Class which manages the cardinal points displaying

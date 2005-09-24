@@ -30,7 +30,6 @@
 #include "s_tui.h"
 
 #define TUI_SCRIPT_MSG "Select and exit to run."
-#define MOUSE_TIMEOUT 5000
 
 // Predeclaration of the stel_core class
 class stel_core;
@@ -308,7 +307,9 @@ private:
 	s_tui::Decimal_item* tui_effect_object_scale;
 	s_tui::Decimal_item* tui_effect_zoom_duration;
 	s_tui::Decimal_item* tui_effect_milkyway_intensity;
+	s_tui::Decimal_item* tui_effect_nebulae_label_magnitude;
 	s_tui::Boolean_item* tui_effect_manual_zoom;
+	s_tui::Decimal_item* tui_effect_cursor_timeout;
 
 	// 6. Scripts
 	s_tui::MultiSet_item<string>* tui_scripts_local;
@@ -338,6 +339,7 @@ private:
 	void tui_cb_scripts_removeable(void);    // changed removeable disk script selection
 	void tui_cb_scripts_local();             // changed local script selection
 	void tui_cb_effects_milkyway_intensity();        // change milky way intensity
+	void tui_cb_effects_nebulae_label_magnitude();    // change nebula label limiting magnitude
 	void tui_cb_setlocation();        // change observer position
 	void tui_cb_stars();        // change star parameters
 	void tui_cb_effects();        // change effect parameters
@@ -347,7 +349,7 @@ private:
 	s_tui::MultiSet_item<string>* stel_ui::create_tree_from_time_zone_file(const string& zonetab);
 
 	bool ScriptDirectoryRead;
-	int MouseTimeLeft;
+	double MouseTimeLeft;  // for cursor timeout (seconds)
 };
 
 #endif  //_STEL_UI_H

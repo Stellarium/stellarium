@@ -187,7 +187,8 @@ private:
 	SkyGrid * equ_grid;					// Equatorial grid
 	SkyGrid * azi_grid;					// Azimutal grid
 	SkyLine * equator_line;				// Celestial Equator line
-	SkyLine * ecliptic_line;			// Eclptic line
+	SkyLine * ecliptic_line;			// Ecliptic line
+	SkyLine * meridian_line;			// Meridian line
 	Cardinals * cardinals_points;		// Cardinals points
 	MilkyWay * milky_way;				// Our galaxy
 	Meteor_mgr * meteors;				// Manage meteor showers
@@ -306,6 +307,8 @@ private:
 	Vec3f PlanetOrbitsColor;
 	Vec3f ObjectTrailsColor;
 
+	double MouseCursorTimeout;  // seconds to hide cursor when not used.  0 means no timeout
+
 	// Text UI
 	bool FlagEnableTuiMenu;
 	bool FlagShowGravityUi;
@@ -339,6 +342,7 @@ private:
     bool FlagEquatorialGrid;
     bool FlagEquatorLine;
     bool FlagEclipticLine;
+    bool FlagMeridianLine;
 	bool FlagGravityLabels;
 	float MoonScale;
 	bool FlagMoonScaled;
