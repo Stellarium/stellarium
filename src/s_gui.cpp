@@ -1869,15 +1869,15 @@ void TextLabel::setLabel(const string& _label, bool _translate)
     Label * tempLabel;
     string pch;
 
-    int i = 0;
-	int lineHeight = (int)painter.getFont()->getLineHeight()+1;
+    unsigned int i = 0;
+	unsigned int lineHeight = (int)painter.getFont()->getLineHeight()+1;
 
 	istringstream is(label);
     while (getline(is, pch))
     {
         tempLabel = new Label();
-        tempLabel->setLabel(pch,false);  // don't translate (done already)!!!
 		tempLabel->setPainter(painter);
+        tempLabel->setLabel(pch,false);  // don't translate (done already)!!!
         tempLabel->setPos(0,i*lineHeight);
         addComponent(tempLabel);
         i++;
@@ -1896,14 +1896,15 @@ void TextLabel::draw(void)
 
 void TextLabel::adjustSize(void)
 {
-	int maxX = 0;
-	int linelen;
+	unsigned int maxX = 0;
+	unsigned int linelen;
 	
 	list<Component*>::iterator iter = childs.begin();
 	while (iter != childs.end())
 	{
 		linelen = (*iter)->getSizex();	
-		if (linelen > maxX) maxX = linelen;
+		if (linelen > maxX) 
+			maxX = linelen;
         iter++;
     }
 	setSize(maxX,childs.size()*((int)painter.getFont()->getLineHeight()+1));
