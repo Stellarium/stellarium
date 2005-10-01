@@ -45,6 +45,8 @@ s_font::s_font(float size_i, const string& fontName) :
 		
     if (!buildDisplayLists(dataFileName, textureName)) 
 		cout << "ERROR WHILE CREATING FONT " << fontName << endl;
+		
+	name = textureName;
 }
 
 s_font::~s_font()
@@ -78,7 +80,7 @@ int s_font::buildDisplayLists(const string& dataFileName, const string& textureN
 		cout << "ERROR WHILE LOADING "<< dataFileName << endl;
         return 0;
     }
-    if (fscanf(pFile,"%s LineSize %d\n",name, &lineHeight)!=2)
+    if (fscanf(pFile,"%s LineSize %d\n",name.c_str(), &lineHeight)!=2)
     {
 		fclose(pFile);
         return 0;
