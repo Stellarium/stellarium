@@ -59,7 +59,7 @@ void stel_ui::draw_gravity_ui(void)
 		if (core->FlagShowFps) os << "  FPS " << core->fps;
 
 		glColor3f(0.5,1,0.5);
-		core->projection->print_gravity180(spaceFont, x-shift + 30, y-shift + 38, os.str(), 0);
+		core->projection->print_gravity180(baseFont, x-shift + 30, y-shift + 38, os.str(), 0);
 	}
 
 	if (core->selected_object && core->FlagShowTuiShortObjInfo)
@@ -69,7 +69,7 @@ void stel_ui::draw_gravity_ui(void)
 		if (core->selected_object->get_type()==STEL_OBJECT_NEBULA) glColor3fv(core->NebulaLabelColor);
 		if (core->selected_object->get_type()==STEL_OBJECT_PLANET) glColor3fv(core->PlanetNamesColor);
 		if (core->selected_object->get_type()==STEL_OBJECT_STAR) glColor3fv(core->selected_object->get_RGB());
-		core->projection->print_gravity180(spaceFont, x+shift - 30, y+shift - 38, str, 0);
+		core->projection->print_gravity180(baseFont, x+shift - 30, y+shift - 38, str, 0);
 	}
 }
 
@@ -290,7 +290,7 @@ void stel_ui::draw_tui(void)
 	if (tui_root)
 	{
 		glColor3f(0.5,1,0.5);
-		core->projection->print_gravity180(spaceFont, x+shift - 30, y-shift + 38,
+		core->projection->print_gravity180(baseFont, x+shift - 30, y-shift + 38,
 						   s_tui::stop_active + tui_root->getString(), 0);
 
 	}
@@ -492,6 +492,7 @@ void stel_ui::tui_cb_admin_set_locale() {
 	// Right now just set for the current session
 
 #if !defined(MACOSX)
+/*
 	string tmp = string("LC_ALL=" + tui_admin_setlocale->getCurrent());
 	putenv((char *)tmp.c_str());
 
@@ -503,7 +504,9 @@ void stel_ui::tui_cb_admin_set_locale() {
 	// Now need to update all UI components with new translations!
 	
 	core->UILocale = tui_admin_setlocale->getCurrent().c_str();
+*/
 	LocaleChanged = 1;  // will reload TUI next draw.  Note that position in TUI is lost...
+	core->set_system_locale_by_code(tui_admin_setlocale->getCurrent().c_str());
 #endif
 
 

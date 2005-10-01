@@ -250,7 +250,7 @@ Component* stel_ui::createConfigWindow(void)
 	earth_map->setOnNearestCityCallback(callback<void>(this, &stel_ui::setCityFromMap));
 	tab_location->addComponent(earth_map);
 	y+=earth_map->getSizey();
-	earth_map->set_font(core->MapFontSize, core->BaseFontPngName, core->BaseFontTxtName);
+	earth_map->set_font(core->MapFontSize, core->BaseFontName);
 	load_cities(core->DataDir + "cities.fab");
 	
 	y += 5;
@@ -772,7 +772,7 @@ void stel_ui::doSearchCommand(string _command, string _error)
 
     if (core->selected_object)
     {
-        core->commander->execute_command("flag track_object on");
+        gotoObject();
         hideSearchMessage();
     }    
     else
