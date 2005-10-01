@@ -36,10 +36,10 @@ Constellation_mgr::Constellation_mgr(Hip_Star_mgr *_hip_stars) :
 	isolateSelected = false; // Tony - flag for isolating the constellations 
 }
 
-void Constellation_mgr::set_font(const string& _font_filename)
+void Constellation_mgr::set_font(float font_size, const string& font_name)
 {
 	if (asterFont) delete asterFont;
-	asterFont = new s_font(12., "spacefont", _font_filename);
+	asterFont = new s_font(font_size, font_name);
 	assert(asterFont);
 }
 
@@ -219,7 +219,7 @@ void Constellation_mgr::draw_lines(Projector * prj) const
 	vector < Constellation * >::const_iterator iter;
 	for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
 	{
-		(*iter)->draw_optim(prj, lines_color);
+		(*iter)->draw_optim(prj, line_color);
 	}
 }
 
@@ -234,7 +234,7 @@ void Constellation_mgr::draw_names(Projector * prj) const
 	{
 		// Check if in the field of view
 		if (prj->project_prec_earth_equ_check((*iter)->XYZname, (*iter)->XYname))
-			(*iter)->draw_name(asterFont, prj, names_color);
+			(*iter)->draw_name(asterFont, prj, label_color);
 	}
 }
 

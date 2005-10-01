@@ -33,7 +33,7 @@
 class Hip_Star : public stel_object
 {
 friend class Hip_Star_mgr;
-friend class Constellation;
+	friend class Constellation;  // for xyz coordinate
 
 public:
     Hip_Star();

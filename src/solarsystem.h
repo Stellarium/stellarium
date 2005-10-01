@@ -44,7 +44,7 @@ public:
 	void load(const string& planetfile);
 	void load_names(const string& names_file);
 
-	void set_font(const string& font_filename);
+	void set_font(float font_size, const string& font_name);
 	void set_label_color(const Vec3f& c) {planet::set_label_color(c);}
 	void set_orbit_color(const Vec3f& c) {planet::set_orbit_color(c);}
   

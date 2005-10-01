@@ -41,7 +41,7 @@ typedef struct
 class s_font
 {
 public:
-    s_font(float size_i, const string& textureName, const string& dataFileName);
+    s_font(float size_i, const string& fontName);
     virtual ~s_font();
     void print(float x, float y, const string& str, int upsidedown = 1) const;
     void print_char(const unsigned char c) const;

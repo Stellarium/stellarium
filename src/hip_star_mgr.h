@@ -34,7 +34,7 @@ class Hip_Star_mgr
 public:
     Hip_Star_mgr();
     virtual ~Hip_Star_mgr();
-	void init(const string& font_fileName, const string& hipCatFile, const string& commonNameFile, const string& sciNameFile, LoadingBar& lb);
+	void init(float font_size, const string& font_name, const string& hipCatFile, const string& commonNameFile, const string& sciNameFile, LoadingBar& lb);
 	void update(int delta_time) {names_fader.update(delta_time);}
 	void set_names_fade_duration(float duration) {names_fader.set_duration((int) (duration * 1000.f));}
 	int load_common_names(const string& commonNameFile);

@@ -23,6 +23,7 @@
 #include "navigator.h"
 #include "stellastro.h"
 #include "stel_utility.h"
+#include "s_gui.h"  //circle
 
 #define RADIUS_STAR 1.
 
@@ -47,6 +48,12 @@ void Hip_Star::get_info_string(char * s, const navigator * nav) const
 {
 	static char tempStr[20];
 	sprintf(tempStr,"HP %d",HP);
+	string greekName;
+
+	if (SciName == "")
+		greekName = "";
+	else
+		greekName = translateGreek(SciName, false);
 
 	static char tempLy[20];
 	if(Distance) sprintf(tempLy, "%.1f", Distance);
@@ -57,7 +64,7 @@ void Hip_Star::get_info_string(char * s, const navigator * nav) const
 	// Hip = Hipparcos, RA=Right Ascention, DE=Declinaison, Mag=Magnitude
 	sprintf(s,_("Name : %s%s%s\nRA : %s\nDE : %s\nMagnitude : %.2f\nDistance : %s Light Years\nHip : %.4d\n"),
 		CommonName.c_str(), CommonName=="" ? "" : " ",
-		SciName=="" ? tempStr : SciName.c_str(), print_angle_hms(tempRA*180./M_PI).c_str(),
+		SciName=="" ? tempStr : greekName.c_str(), print_angle_hms(tempRA*180./M_PI).c_str(),
 			print_angle_dms_stel(tempDE*180./M_PI).c_str(), Mag, tempLy, HP);
 }
 

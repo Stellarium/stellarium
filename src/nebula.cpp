@@ -24,6 +24,7 @@
 #include "s_font.h"
 #include "navigator.h"
 #include "stel_utility.h"
+#include "s_gui.h"
 
 #define RADIUS_NEB 1.
 
@@ -31,8 +32,8 @@ s_texture * Nebula::tex_circle = NULL;
 s_font* Nebula::nebula_font = NULL;
 bool Nebula::gravity_label = false;
 float Nebula::hints_brightness = 0;
-Vec3f Nebula::fontcolor = Vec3f(0.4,0.3,0.5);
-Vec3f Nebula::circlecolor = Vec3f(0.8,0.8,0.1);
+Vec3f Nebula::label_color = Vec3f(0.4,0.3,0.5);
+Vec3f Nebula::circle_color = Vec3f(0.8,0.8,0.1);
 
 
 Nebula::Nebula() : NGC_nb(0), neb_tex(NULL)
@@ -86,7 +87,7 @@ bool Nebula::read(const string& record)
 	float tex_rotation;
 	
 	std::istringstream istr(record);
-    //Tony - added longname
+
 	if (!(istr >> NGC_nb >> type >> rahr >> ramin >> dedeg >> demin >> mag >> tex_angular_size >> tex_rotation >> name >> longname >> tex_name >> credit)) return false ;
 
     // Replace the "_" with " "
@@ -100,7 +101,11 @@ bool Nebula::read(const string& record)
 		if (longname[i]=='_') longname[i]=' ';
 	}
 
-    credit = string("Credit: ") + credit;	
+	if (credit  == "none")
+		credit = "";
+	else
+		credit = string("Credit: ") + credit;	
+		
     for (string::size_type i=0;i<credit.length();++i)
 	{
 		if (credit[i]=='_') credit[i]=' ';
@@ -138,6 +143,17 @@ bool Nebula::read(const string& record)
 	tex_quad_vertex[1] = mat_precomp * Vec3f(0., tex_size,-tex_size); // Bottom Right
 	tex_quad_vertex[2] = mat_precomp * Vec3f(0.,-tex_size, tex_size); // Bottom Right
 	tex_quad_vertex[3] = mat_precomp * Vec3f(0., tex_size, tex_size); // Bottom Right
+
+	if (!strcmp(type,"N")) { nType = NEB_N; typeDesc = "Supernova reemnant"; }
+	else if (!strcmp(type,"SG")) { nType = NEB_SG; typeDesc = "Sipral galaxy"; }
+	else if (!strcmp(type,"PN")) { nType = NEB_PN; typeDesc = "Planetary nebula"; }
+	else if (!strcmp(type,"LG")) { nType = NEB_LG; typeDesc = "Lenticular galaxy"; }
+	else if (!strcmp(type,"EG")) { nType = NEB_EG; typeDesc = "Elliptical galaxy"; }
+	else if (!strcmp(type,"OC")) { nType = NEB_OC; typeDesc = "Open cluster"; }
+	else if (!strcmp(type,"GC")) { nType = NEB_GC; typeDesc = "Globular cluster"; }
+	else if (!strcmp(type,"DN")) { nType = NEB_DN; typeDesc = "Globular cluster"; }
+	else if (!strcmp(type,"IG")) { nType = NEB_IG; typeDesc = "Irregular galaxy"; }
+	else { nType = NEB_UNKNOWN; typeDesc = "Unknown type"; }
 
     return true;
 }
@@ -186,7 +202,7 @@ void Nebula::draw_circle(const Projector* prj, const navigator * nav)
 	if (2.f/get_on_screen_size(prj, nav)<0.1) return;
     inc_lum++;
 	float lum = MY_MIN(1,2.f/get_on_screen_size(prj, nav))*(0.8+0.2*sinf(inc_lum/10));
-    glColor3fv(circlecolor*lum*hints_brightness);
+    glColor3fv(circle_color*lum*hints_brightness);
     glBindTexture (GL_TEXTURE_2D, Nebula::tex_circle->getID());
     glBegin(GL_TRIANGLE_STRIP);
         glTexCoord2i(1,0);              // Bottom Right
@@ -208,16 +224,21 @@ float Nebula::get_on_screen_size(const Projector* prj, const navigator * nav)
 
 void Nebula::draw_name(int hint_ON, const Projector* prj)
 {
-    glColor3fv(fontcolor*hints_brightness);
+    glColor3fv(label_color*hints_brightness);
     float size = get_on_screen_size(prj);
     float shift = 8.f + size/2.f;
-    gravity_label ? prj->print_gravity180(nebula_font, XY[0]+shift, XY[1]+shift, (hint_ON==1?longname:name), 1, 0, 0) :
-      nebula_font->print(XY[0]+shift, XY[1]+shift, (hint_ON==1?longname:name));
+	std::ostringstream oss;
+	oss << longname << " (" << typeDesc << ")";
+
+    string lname = oss.str();
+
+    gravity_label ? prj->print_gravity180(nebula_font, XY[0]+shift, XY[1]+shift, (hint_ON==1?lname:name), 1, 0, 0) :
+      nebula_font->print(XY[0]+shift, XY[1]+shift, (hint_ON==1?lname:name));
 
     // draw image credit, if it fits easily
-    if( size > nebula_font->getStrLen(credit) ) {
-      gravity_label ? prj->print_gravity180(nebula_font, XY[0]-shift-40, XY[1]+-shift-40, credit, 1, 0, 0) :
-	nebula_font->print(XY[0]-shift, XY[1]-shift-60, credit);
+    if(credit != "" && size > nebula_font->getStrLen(credit))
+	{
+		gravity_label ? prj->print_gravity180(nebula_font, XY[0]-shift-40, XY[1]+-shift-40, credit, 1, 0, 0) :
+			nebula_font->print(XY[0]-shift, XY[1]-shift-60, credit);
     }
 }
-

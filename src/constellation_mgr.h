@@ -48,9 +48,9 @@ public:
 	bool get_flag_isolate_selected(void) { return isolateSelected;}
 
 	void set_flag_gravity_label(bool g) {Constellation::gravity_label = g;}
-	void set_lines_color(const Vec3f& c) {lines_color=c;}
-	void set_names_color(const Vec3f& c) {names_color=c;}
-	void set_font(const string& _font_filename);
+	void set_line_color(const Vec3f& c) {line_color=c;}
+	void set_label_color(const Vec3f& c) {label_color=c;}
+	void set_font(float font_size, const string& font_name);
 	void set_selected(const string& shortname) {set_selected_const(find_from_short_name(shortname));}
 	void set_selected(const Hip_Star * s) {if (!s) set_selected_const(NULL); else set_selected_const(is_star_in(s));}
 	unsigned int get_first_selected_HP(void) {if (selected != NULL) return selected->asterism[0]->get_hp_number(); else return 0;}  //Tony
@@ -63,14 +63,15 @@ private:
 	void draw_art(Projector * prj, navigator * nav) const;
 	void draw_names(Projector * prj) const;
 	void set_selected_const(Constellation* c);
+
     Constellation* is_star_in(const Hip_Star *) const;
     Constellation* find_from_short_name(const string& shortname) const;		
     vector<Constellation*> asterisms;
     s_font * asterFont;
-    Vec3f lines_color, names_color;
+    Vec3f line_color, label_color;
     Hip_Star_mgr * hipStarMgr;
 	Constellation* selected;
-	bool isolateSelected;     // Tony - flag for isolating the constellations 
+	bool isolateSelected;
 };
 
 #endif // _CONSTELLATION_MGR_H_

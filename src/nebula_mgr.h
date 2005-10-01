@@ -35,7 +35,7 @@ public:
 	virtual ~Nebula_mgr();
 	
 	// Read the Nebulas data from a file
-	int read(const string& font_fileName, const string& fileName, LoadingBar& lb);
+	int read(float font_size, const string& font_name, const string& fileName, LoadingBar& lb);
 	
 	// Draw all the Nebulas
 	void draw(int hint_ON,Projector* prj, const navigator * nav, tone_reproductor* eye, bool draw_tex, // Tony
@@ -44,8 +44,8 @@ public:
 	stel_object * search(const string& name);  // search by name
 	stel_object * search(Vec3f Pos);    // Search the Nebulae by position
 	
-	void set_font_color(const Vec3f& c) {Nebula::fontcolor = c;}
-	void set_circle_color(const Vec3f& c) {Nebula::circlecolor = c;}
+	void set_label_color(const Vec3f& c) {Nebula::label_color = c;}
+	void set_circle_color(const Vec3f& c) {Nebula::circle_color = c;}
 	
 	void update(int delta_time) {hints_fader.update(delta_time);}
 	void set_hints_fade_duration(float duration) {hints_fader.set_duration((int) (duration * 1000.f));}
