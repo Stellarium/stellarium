@@ -105,7 +105,9 @@ public:
 	
 	//! Set the locale type
 	void set_sky_locale(string _locale);
-	
+	void set_system_locale_by_code(const string& _locale); // ie fr_FR
+	void set_system_locale_by_name(const string& _locale); // ie fra
+
 	//! Set the screen size
 	void set_screen_size(int w, int h);
 	
@@ -173,6 +175,8 @@ public:
 	void play_startup_script();
 
 private:
+	void set_system_locale(void);
+	void set_sky_locale(void);
 
 	// Main elements of the program
 	navigator * navigation;				// Manage all navigation parameters, coordinate transformations etc..
@@ -279,11 +283,11 @@ private:
 	Vec3f GuiBaseColorr;
 	Vec3f GuiTextColorr;
 	float BaseFontSize;
-	string BaseFontTxtName;
-	string BaseFontPngName;
+	string BaseFontName;
+
 	float BaseCFontSize;
-	string BaseCFontTxtName;
-	string BaseCFontPngName;
+	string BaseCFontName;
+	
 	float MapFontSize;
 	float ConstellationFontSize;
 	float StarFontSize;

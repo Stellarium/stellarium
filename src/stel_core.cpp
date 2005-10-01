@@ -102,15 +102,12 @@ void stel_core::init(void)
 	if(tmp == NULL) UILocale = "";
 	else UILocale = tmp;
 
-	// These values are updated in the config, others just an easier place to find
-	// Mostly not implemented in this commit
+	// These values are overriden as required in the config
 	BaseFontSize = 12.5f; // updated in the config
-	BaseFontTxtName = DataDir + "arial.txt";
-	BaseFontPngName = "arial";
+	BaseFontName = DataDir + "arial.txt";
 	
 	BaseCFontSize = 12.5;
-	BaseCFontTxtName = DataDir + "courierfont.txt";
-	BaseCFontPngName = "courierfont";
+	BaseCFontName = DataDir + "courierfont.txt";
 	MapFontSize = 9.5f;
 	ConstellationFontSize = 16.f;
 	StarFontSize = 12.f;
@@ -153,25 +150,25 @@ void stel_core::init(void)
 	projection->set_viewport_type(ViewportType);
 
 	// Load hipparcos stars & names
-	LoadingBar lb(projection, DataDir + "spacefont.txt", "logo24bits", screen_W, screen_H);
+	LoadingBar lb(projection, LoadingBarFontSize, BaseFontName, "logo24bits", screen_W, screen_H);
 	hip_stars->init(
-		DataDir + "spacefont.txt",
+		StarFontSize, BaseFontName, 
 		DataDir + "hipparcos.fab",
 		DataDir + "star_names." + SkyLocale + ".fab",
 		DataDir + "name.fab",
 		lb);
 	
 	// Init nebulas
-	nebulas->set_font_color(NebulaLabelColor);
+	nebulas->set_label_color(NebulaLabelColor);
 	nebulas->set_circle_color(NebulaCircleColor);
-	nebulas->read(DataDir + "spacefont.txt", DataDir + "messier.fab", lb);
+	nebulas->read(NebulaFontSize, BaseFontName, DataDir + "messier.fab", lb);
 		
 	// Init the solar system
 	ssystem->load(DataDir + "ssystem.ini");
 	ssystem->load_names(DataDir + "planet_names." + SkyLocale + ".fab");
 	ssystem->set_label_color(PlanetNamesColor);
 	ssystem->set_orbit_color(PlanetOrbitsColor);
-	ssystem->set_font(DataDir + "spacefont.txt");
+	ssystem->set_font(StarFontSize, BaseFontName);
 	ssystem->set_object_scale(StarScale);
 	ssystem->set_trail_color(ObjectTrailsColor);
 	if(FlagObjectTrails) ssystem->start_trails();
@@ -179,16 +176,22 @@ void stel_core::init(void)
 	atmosphere->set_fade_duration(AtmosphereFadeDuration);
 
 	// Init grids, lines and cardinal points
-	equ_grid->set_font(DataDir + "spacefont.txt", "spacefont");
+	equ_grid->set_font(GridFontSize, BaseFontName);
 	equ_grid->set_color(EquatorialColor);
-	azi_grid->set_font(DataDir + "spacefont.txt", "spacefont");
+
+	azi_grid->set_font(GridFontSize, BaseFontName);
 	azi_grid->set_color(AzimuthalColor);
+
 	equator_line->set_color(EquatorColor);
+	equator_line->set_font(12, BaseFontName);
+
 	ecliptic_line->set_color(EclipticColor);
-	ecliptic_line->set_font(DataDir + "spacefont.txt", "spacefont");
+	ecliptic_line->set_font(12, BaseFontName);
+
 	meridian_line->set_color(AzimuthalColor);
-	meridian_line->set_font(DataDir + "spacefont.txt", "spacefont");
-	cardinals_points->set_font(DataDir + "spacefont.txt", "spacefont");
+	meridian_line->set_font(12, BaseFontName);
+
+	cardinals_points->set_font(CardinalsFontSize, BaseFontName);
 	cardinals_points->set_color(CardinalColor);
 
 	// Init milky way
@@ -206,6 +209,9 @@ void stel_core::init(void)
 	ui->init();
 	ui->setTitleObservatoryName(ui->getTitleWithAltitude());
 	ui->init_tui();
+	
+	// now redo this so we fill the autocomplete dialogs now UI inititalised
+	set_system_locale_by_name(SkyLocale); // and UILocale are the same but different format fra vs fr_FR!!!! TONY
 
 	tone_converter->set_world_adaptation_luminance(3.75f + atmosphere->get_intensity()*40000.f);
 
@@ -225,17 +231,16 @@ void stel_core::init(void)
 	// Load constellations
 	string tmpstring=SkyCulture; SkyCulture=""; // Temporary trick
 	set_sky_culture(tmpstring);
-	asterisms->set_font(DataDir + "spacefont.txt");
+	asterisms->set_font(StarFontSize, BaseFontName);
 	asterisms->set_art_intensity(ConstellationArtIntensity);
 	asterisms->set_art_fade_duration(ConstellationArtFadeDuration);
-	asterisms->set_lines_color(ConstLinesColor);
-	asterisms->set_names_color(ConstNamesColor);
+	asterisms->set_line_color(ConstLinesColor);
+	asterisms->set_label_color(ConstNamesColor);
 	
 	selected_planet=NULL;	// Fix a bug on macosX! Thanks Fumio!
 
 	// make sure have loaded translated labels for sky language
-	set_sky_locale(SkyLocale);
-
+	//set_sky_locale(SkyLocale); // hapens during config
 
 }
 
@@ -419,6 +424,7 @@ void stel_core::draw(int delta_time)
 	// Draw the ecliptic line
 	ecliptic_line->show(FlagEclipticLine);
 	ecliptic_line->draw(projection);
+	// Draw the meridian line
 	meridian_line->show(FlagMeridianLine);
 	meridian_line->draw(projection);
 
@@ -595,9 +601,9 @@ void stel_core::load_config_from(const string& confFile)
 
 	// localization section
 	SkyCulture = conf.get_str("localization", "sky_culture", "western");
-	SkyLocale = conf.get_str("localization", "sky_locale", "system_default");
 
-	SkyLocale = skyloc->clean_sky_locale_name(SkyLocale);  // looks at environment locale if "system_default"
+	string locale = conf.get_str("localization", "sky_locale", "system_default");
+	set_system_locale_by_name(skyloc->clean_sky_locale_name(locale));  // looks at environment locale if "system_default"
 
 	// Star section
 	StarScale			= conf.get_double ("stars:star_scale");
@@ -621,10 +627,10 @@ void stel_core::load_config_from(const string& confFile)
 	FlagShowAppName		= conf.get_boolean("gui:flag_show_appname");
 	FlagShowFov			= conf.get_boolean("gui:flag_show_fov");
 	FlagShowSelectedObjectInfo = conf.get_boolean("gui:flag_show_selected_object_info");
-	GuiBaseColor		= str_to_vec3f(conf.get_str("gui:gui_base_color").c_str());
-	GuiTextColor		= str_to_vec3f(conf.get_str("gui:gui_text_color").c_str());
-	GuiBaseColorr		= str_to_vec3f(conf.get_str("gui:gui_base_colorr").c_str());
-	GuiTextColorr		= str_to_vec3f(conf.get_str("gui:gui_text_colorr").c_str());
+	GuiBaseColor		= str_to_vec3f(conf.get_str("color", "gui:gui_base_color", "0.3,0.4,0.7").c_str());
+	GuiTextColor		= str_to_vec3f(conf.get_str("color", "gui:gui_text_color", "0.7,0.8,0.9").c_str());
+	GuiBaseColorr		= str_to_vec3f(conf.get_str("color", "gui:gui_base_colorr", "0.7,0.2,0.1").c_str());
+	GuiTextColorr		= str_to_vec3f(conf.get_str("color", "gui:gui_text_colorr", "0.9,0.4,0.2").c_str());
 	BaseFontSize		= conf.get_double ("gui","base_font_size",15);
 	FlagShowScriptBar	= conf.get_boolean("gui","flag_show_script_bar",0);
 	MouseCursorTimeout  = conf.get_double("gui","mouse_cursor_timeout",0);
@@ -1332,8 +1338,9 @@ int stel_core::set_sky_culture(string _culture_dir)
 	bool flagArt = asterisms->get_flag_art();
 	bool flagLines = asterisms->get_flag_lines();
 	bool flagNames = asterisms->get_flag_names();
-	
-	LoadingBar lb(projection, DataDir + "spacefont.txt", "logo24bits", screen_W, screen_H);
+
+	LoadingBar lb(projection, LoadingBarFontSize, BaseFontName, "logo24bits", screen_W, screen_H);
+
 	//	printf(_("Loading constellations for sky culture: \"%s\"\n"), SkyCulture.c_str());
 	asterisms->load_lines_and_art(DataDir + "sky_cultures/" + SkyCulture + "/constellationship.fab",
 		DataDir + "sky_cultures/" + SkyCulture + "/constellationsart.fab", lb);
@@ -1360,14 +1367,73 @@ int stel_core::set_sky_culture(string _culture_dir)
 
 }
 
+void stel_core::set_system_locale(void)
+{
+	string tmp = string("LC_ALL=" + UILocale);
+	putenv((char *)tmp.c_str());
+
+	setlocale(LC_CTYPE, "");
+	setlocale(LC_MESSAGES, "");
+	bindtextdomain(PACKAGE, LOCALEDIR);
+	textdomain(PACKAGE);
+
+	bind_textdomain_codeset(PACKAGE, "iso-8859-1");
+
+	if (ui->isInitialised())
+	{
+		ssystem->load_names(DataDir + "planet_names." + SkyLocale + ".fab");
+		set_sky_locale();
+		ui->changeLocale();
+		// TODO: clear the list box in the widget and reload
+	}
+}
+
+
+void stel_core::set_system_locale_by_name(const string& _locale)
+{
+	stringHash_t locale_to_lang;
+	
+	locale_to_lang["eng"] = "en_US";
+	locale_to_lang["fra"] = "fr_FR";
+	locale_to_lang["deu"] = "de_DE";
+	locale_to_lang["esl"] = "es_ES";
+	locale_to_lang["por"] = "pt_PT";
+	locale_to_lang["dut"] = "nl_NL";
+	locale_to_lang["ita"] = "it_IT";
+		
+	// UILocale in format "fr_FR" etc.
+	// _locale in format "fra" etc
+	SkyLocale = _locale;
+	UILocale = locale_to_lang[_locale]; 
+
+	set_system_locale();
+}
+
+void stel_core::set_system_locale_by_code(const string& _locale)
+{
+	stringHash_t locale_to_lang;
+	locale_to_lang["en_US"] = "eng";
+	locale_to_lang["fr_FR"] = "fra";
+	locale_to_lang["de_DE"] = "deu";
+	locale_to_lang["es_ES"] = "esl";
+	locale_to_lang["pt_PT"] = "por";
+	locale_to_lang["nl_NL"] = "dut";
+	locale_to_lang["it_IT"] = "ita";
+	
+	// UILocale in format "fr_FR" etc.
+	// _locale in format "fra" etc
+	SkyLocale = locale_to_lang[_locale];
+	UILocale = _locale;
+		
+	set_system_locale();
+}
 
 // this really belongs elsewhere
-void stel_core::set_sky_locale(string _locale)
+void stel_core::set_sky_locale(void)
 {
 
 	if( !hip_stars || !cardinals_points || !asterisms) return; // objects not initialized yet
 
-	SkyLocale = _locale;
 	cardinals_points->load_labels(DataDir + "cardinals." + SkyLocale + ".fab");
 	if( !hip_stars->load_common_names(DataDir + "star_names." + SkyLocale + ".fab") )
 	{
