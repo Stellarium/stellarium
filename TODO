@@ -5,7 +5,7 @@
 ### Bugs
 
 - Selected object flashes on windows when tracking
-- Does gettext work on windows now?
+- Does gettext work on windows now? - DONE
 - Date display wrong for negative JD dates
 
 ### Non-code enhancements
@@ -29,17 +29,19 @@
 - Replace all translatable char* and c++ string by w_char* and c++ wstring for unicode support
 - Think on a way to include plug-ins for telescope control etc..
 - Why does each object have it's own font object?  What about sharing one per font to save memory?
+ > because each has a different size, the openGL needs a list for each size.
 
 ## Features for 0.8.0
 
-T select location by city
-T search text area should get focus when bring up search window
+T select location by city - DONE
+T search text area should get focus when bring up search window - DONE
 - GUI access to set sky language and sky culture (ideally with new pulldown menu)
 R sidereal day/week key control 
 - limiting magnitude/simulate light pollution (the feature somehow already exists in the skybright class BASIC version)
-T alt/az readout for selected object
+- alt/az readout for selected object
 - unicode font support (need to choose solution between glgooey/FTGL/our own implemenation)
-T error message windows as option to be easier for windows users (script errors in particular)
+  > ftgl looks good
+- error message windows as option to be easier for windows users (script errors in particular)
 R mouse cursor hide after timeout as option - DONE
 R limiting mag for nebulae set in TUI - DONE
 R constellation line color set in TUI
@@ -47,19 +49,21 @@ R remove planet orbits from 'p' key - move to another key and TUI
 R set zoom location
 - precession circle drawing
 R meridian line (first press of 'z') - DONE
-T hour angle on equator line (already on equatorial grid)
+- hour angle on equator line (already on equatorial grid)
 - ecliptic line with (localized) months labeled
 - script display text command
 - i18n nebulae labels
-T object name pick option (show only label/hint for selected object)
+- object name pick option (show only label/hint for selected object)
 F cylindrical projection mode.
-- Night vision mode (red Gui)
+T Night vision mode (red Gui) - DONE
 - Create a directory dedicated to landscapes with one landscapeXX.ini per landscape so that users can install extra landscapes just be copying them there without editing landscape.ini file.
+- other star catalogs incl double stars and variable stars
 
 ### Future feature ideas
 
 - Constellation boundaries.
-T chart/print option (We should think about a real postscript/pdf renderer for printing)
+T chart option
+- print option (We should think about a real postscript/pdf renderer for printing)
 - select multiple constellations at once (for scripts)
 T select zodiac constellations somehow
 - planet rotational position issues - only galilean  moons accurate
@@ -72,7 +76,7 @@ T constellation boundaries
 - star trails/time exposure
 - script images in dome alt-az coords
 - script images in equatorial coords
-- font scales?
+- outline fonts
 - planet trails of longer duration (script?)
 - background audio option
 - scripts allow user interaction during playback option?
@@ -80,6 +84,6 @@ T constellation boundaries
 - Artificial satellites
 - Aurorae
 - Clouds
-- telescope control???
-- Use libjpeg for some texture to reduce data files size.
+- telescope control
+- Use libjpeg for some texture to reduce data files size
 - Use 3D landscapes (data from google earth?)
