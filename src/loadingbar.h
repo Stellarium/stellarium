@@ -28,7 +28,7 @@ class LoadingBar
 {
 public:
 	// Create and initialise
-	LoadingBar(Projector* prj, const string& _font_filename, const string&  splash_tex, int barx, int bary);
+	LoadingBar(Projector* prj, float font_size, const string& font_name, const string&  splash_tex, int barx, int bary);
 	virtual ~LoadingBar();
 	void SetMessage(string m) {message=m;}
 	void Draw(float val);

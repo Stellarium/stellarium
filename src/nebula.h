@@ -43,6 +43,8 @@
      -     Object called nonexistent in the RNGC (Sulentic and Tifft 1973)
      PD    Photographic plate defect */
 
+	enum nebula_type { NEB_N, NEB_SG, NEB_PN, NEB_LG, NEB_EG, NEB_OC, NEB_GC, NEB_DN, NEB_IG, NEB_UNKNOWN };
+
 class Nebula : public stel_object
 {
 friend class Nebula_mgr;
@@ -57,8 +59,8 @@ public:
 	virtual double get_close_fov(const navigator * nav = NULL) const;
 	virtual float get_mag(const navigator * nav = NULL) const {return mag;}
 
-	void setFontColor(Vec3f& v) {fontcolor = v;}
-	void setCircleColor(Vec3f& v) {circlecolor = v;}
+	void set_label_color(Vec3f& v) {label_color = v;}
+	void set_circle_color(Vec3f& v) {circle_color = v;}
 
 	// Read the Nebula data from a file
     bool read(const string&);
@@ -82,6 +84,9 @@ private:
 	Vec3f XYZ;						// Cartesian equatorial position
 	Vec3d XY;						// Store temporary 2D position
 	char type[4];					// Nebulae type
+	nebula_type nType;
+	string typeDesc;
+
 	s_texture * neb_tex;			// Texture
 	Vec3f tex_quad_vertex[4];		// The 4 vertex used to draw the nebula texture
 	float luminance;				// Object luminance to use (value computed to compensate
@@ -93,8 +98,7 @@ private:
 	static float hints_brightness;
 	static bool gravity_label;
 
-	static Vec3f fontcolor;
-	static Vec3f circlecolor;
+	static Vec3f label_color, circle_color;
 };
 
 #endif // _NEBULA_H_

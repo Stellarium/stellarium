@@ -33,8 +33,8 @@ public:
     Constellation();
     ~Constellation();
     bool read(const string& record, Hip_Star_mgr * _VouteCeleste);
-    void draw(Projector* prj, const Vec3f& lines_color) const;
-    void draw_name(s_font * constfont, Projector* prj, Vec3f color) const;
+    void draw(Projector* prj, const Vec3f& line_color) const;
+    void draw_name(s_font * constfont, Projector* prj, Vec3f label_color) const;
     void draw_art(Projector* prj, navigator* nav) const;
     const Constellation* is_star_in(const Hip_Star *) const;
     // Tony

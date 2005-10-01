@@ -24,16 +24,34 @@
 #include <cstdio>
 #include "s_font.h"
 
+#define PNGFONTDATAFILE_EXT ".txt"
 
-s_font::s_font(float size_i, const string& textureName, const string& dataFileName) : size(size_i)
+s_font::s_font(float size_i, const string& fontName) :
+	size(size_i)
 {
-    if (!buildDisplayLists(dataFileName, textureName)) cout << "ERROR WHILE CREATING FONT " << textureName << endl;
+	string textureName = fontName;
+
+	// create the texture string (no path or extension)
+	unsigned int loc = textureName.rfind("/");
+	
+	if (loc != string::npos)
+		textureName = textureName.substr(loc+1);
+
+	loc = textureName.rfind(PNGFONTDATAFILE_EXT);
+	if (loc != string::npos)
+		textureName = textureName.substr(0,loc);
+
+	string dataFileName = fontName;
+		
+    if (!buildDisplayLists(dataFileName, textureName)) 
+		cout << "ERROR WHILE CREATING FONT " << fontName << endl;
 }
 
 s_font::~s_font()
 {
-    glDeleteLists(g_base, 256);                          // Delete All 256 Display Lists
-    delete s_fontTexture; s_fontTexture = NULL;
+    glDeleteLists(g_base, 256);		// Delete All 256 character display lists (png)
+    delete s_fontTexture; 
+	s_fontTexture = NULL;
 }
 
 int s_font::buildDisplayLists(const string& dataFileName, const string& textureName)
@@ -72,22 +90,22 @@ int s_font::buildDisplayLists(const string& dataFileName, const string& textureN
 
     // initialize character size data and set up unrecognized character glyph
     for(int i=0; i<256; i++) {
-      theSize[i].sizeX=(int)size;
-      theSize[i].sizeY=(int)size;
-      theSize[i].leftSpacing=0;
-      theSize[i].rightSpacing=0;
+    	theSize[i].sizeX=(int)size;
+    	theSize[i].sizeY=(int)size;
+    	theSize[i].leftSpacing=0;
+    	theSize[i].rightSpacing=0;
 
-      // default to a block to signify an unrecognized character
-      glNewList(g_base+i,GL_COMPILE); {  // Start Building A List
-	  glDisable(GL_TEXTURE_2D);
-	  glBegin(GL_QUADS );
-	  glVertex3f(0,size,0); //  Bottom Left
-	  glVertex3f(size,size,0);  // Bottom Right
-	  glVertex3f(size,0,0); // Top Right
-	  glVertex3f(0,0,0); // Top Left
-	  glEnd ();
-	  glEnable(GL_TEXTURE_2D);
-	  glTranslated(size+SPACING*ratio,0,0); }
+    	// default to a block to signify an unrecognized character
+    	glNewList(g_base+i,GL_COMPILE); {  // Start Building A List
+	  		glDisable(GL_TEXTURE_2D);
+			glBegin(GL_QUADS );
+			glVertex3f(0,size,0); //  Bottom Left
+			glVertex3f(size,size,0);  // Bottom Right
+			glVertex3f(size,0,0); // Top Right
+			glVertex3f(0,0,0); // Top Left
+			glEnd ();
+			glEnable(GL_TEXTURE_2D);
+			glTranslated(size+SPACING*ratio,0,0); }
       glEndList();   // Done Building The Display List
     }
 
@@ -149,7 +167,6 @@ int s_font::buildDisplayLists(const string& dataFileName, const string& textureN
     return 1;
 }
 
-
 void s_font::print(float x, float y, const string& str, int upsidedown) const
 {
     glBindTexture(GL_TEXTURE_2D, s_fontTexture->getID());  // Select Our s_font Texture
@@ -163,45 +180,43 @@ void s_font::print(float x, float y, const string& str, int upsidedown) const
 
 void s_font::print_char(const unsigned char c) const
 {
-  glBindTexture(GL_TEXTURE_2D, s_fontTexture->getID());  // Select Our s_font Texture
-  glCallList(g_base+c);
+	glBindTexture(GL_TEXTURE_2D, s_fontTexture->getID());  // Select Our s_font Texture
+	glCallList(g_base+c);
 }
 
 // print with dark outline
 // this is somewhere between a hack and a kludge
 void s_font::print_char_outlined(const unsigned char c) const
-{
-
-  GLfloat current_color[4];
-  glGetFloatv(GL_CURRENT_COLOR, current_color);	 
+{	
+	GLfloat current_color[4];
+	glGetFloatv(GL_CURRENT_COLOR, current_color);	 
  	 	 
-  glBindTexture(GL_TEXTURE_2D, s_fontTexture->getID());  // Select Our s_font Texture
+	glBindTexture(GL_TEXTURE_2D, s_fontTexture->getID());  // Select Our s_font Texture
 
-  glColor3f(0.2,0.2,0.2);
+	glColor3f(0.2,0.2,0.2);
 
-  glPushMatrix();
-  glTranslatef(1,1,0);		
-  glCallList(g_base+c);	
-  glPopMatrix();
+	glPushMatrix();
+	glTranslatef(1,1,0);		
+	glCallList(g_base+c);	
+	glPopMatrix();
 
-  glPushMatrix();
-  glTranslatef(-1,-1,0);		
-  glCallList(g_base+c);	
-  glPopMatrix();
+	glPushMatrix();
+	glTranslatef(-1,-1,0);		
+	glCallList(g_base+c);	
+	glPopMatrix();
 
-  glPushMatrix();
-  glTranslatef(1,-1,0);		
-  glCallList(g_base+c);	
-  glPopMatrix();
+	glPushMatrix();
+	glTranslatef(1,-1,0);		
+	glCallList(g_base+c);	
+	glPopMatrix();
 
-  glPushMatrix();
-  glTranslatef(-1,1,0);		
-  glCallList(g_base+c);	
-  glPopMatrix();
+	glPushMatrix();
+	glTranslatef(-1,1,0);		
+	glCallList(g_base+c);	
+	glPopMatrix();
 
-  glColor3f(current_color[0],current_color[1],current_color[2]);
-  glCallList(g_base+c);
-
+	glColor3f(current_color[0],current_color[1],current_color[2]);
+	glCallList(g_base+c);
 }
 
 float s_font::getStrLen(const string& str) const
@@ -225,4 +240,3 @@ float s_font::getStrHeight(const string& str) const
     }
     return s*ratio;
 }
-

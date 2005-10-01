@@ -19,14 +19,14 @@
 
 #include "loadingbar.h"
 
-LoadingBar::LoadingBar(Projector* _prj, const string& _font_filename, const string& splash_tex, int screenw, int screenh) :
+LoadingBar::LoadingBar(Projector* _prj, float font_size, const string& font_name, const string& splash_tex, int screenw, int screenh) :
 	prj(_prj), width(512), height(512), barwidth(400), barheight(10)
 {
 	splashx = (screenw - width)/2;
 	splashy = (screenh - height)/2;
 	barx = (screenw - barwidth)/2;
 	bary = splashy + 34;
-	barfont = new s_font(12., "spacefont", _font_filename);
+	barfont = new s_font(font_size, font_name);
 	if (!splash_tex.empty()) splash = new s_texture(splash_tex, TEX_LOAD_TYPE_PNG_ALPHA);
 	assert(barfont);
 }

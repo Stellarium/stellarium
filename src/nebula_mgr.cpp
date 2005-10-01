@@ -46,7 +46,7 @@ Nebula_mgr::~Nebula_mgr()
 }
 
 // read from stream
-int Nebula_mgr::read(const string& font_fileName, const string& fileName, LoadingBar& lb)
+int Nebula_mgr::read(float font_size, const string& font_name, const string& fileName, LoadingBar& lb)
 {
 	printf(_("Loading nebulas data "));
 	
@@ -93,7 +93,7 @@ int Nebula_mgr::read(const string& font_fileName, const string& fileName, Loadin
 		}
 	}
 	
-	if (!Nebula::nebula_font) Nebula::nebula_font = new s_font(12.,"spacefont", font_fileName); // load Font
+	if (!Nebula::nebula_font) Nebula::nebula_font = new s_font(font_size, font_name); // load Font
 	if (!Nebula::nebula_font)
 	{
 		printf("Can't create nebulaFont\n");
