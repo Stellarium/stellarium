@@ -1,6 +1,6 @@
 /*
  * Stellarium
- * Copyright (C) 2002 Fabien Ch�eau
+ * Copyright (C) 2002 Fabien Chereau
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -82,9 +82,9 @@ SkyGrid::~SkyGrid()
 
 }
 
-void SkyGrid::set_font(const string& font_filename, const string& font_texture)
+void SkyGrid::set_font(float font_size, const string& font_name)
 {
-	font = new s_font(12, font_texture, font_filename);
+	font = new s_font(font_size, font_name);
 	assert(font);
 }
 
@@ -276,9 +276,9 @@ SkyLine::~SkyLine()
 	points = NULL;
 }
 
-void SkyLine::set_font(const string& font_filename, const string& font_texture)
+void SkyLine::set_font(float font_size, const string& font_name)
 {
-	font = new s_font(12, font_texture, font_filename);
+	font = new s_font(font_size, font_name);
 	assert(font);
 }
 
@@ -337,8 +337,8 @@ void SkyLine::draw(const Projector* prj) const
 				glRotatef(180+angle*180./M_PI,0,0,-1);
 				
 				glBegin (GL_LINES);
-				  glVertex2f(-3,0);
-				  glVertex2f(3,0);
+				glVertex2f(-3,0);
+				glVertex2f(3,0);
 				glEnd();
 				glEnable(GL_TEXTURE_2D);
 
@@ -370,9 +370,9 @@ Cardinals::~Cardinals()
 	font = NULL;
 }
 
-void Cardinals::set_font(const string& font_filename, const string& font_texture, float font_size)
+void Cardinals::set_font(float font_size, const string& font_name)
 {
-	font = new s_font(font_size, font_texture, font_filename);
+	font = new s_font(font_size, font_name);
 	assert(font);
 }
 

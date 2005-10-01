@@ -44,7 +44,7 @@ public:
 	 double _radius = 1., unsigned int _nb_alt_segment = 18, unsigned int _nb_azi_segment = 50);
     virtual ~SkyGrid();
 	void draw(const Projector* prj) const;
-	void set_font(const string& font_filename, const string& font_texture);
+	void set_font(float font_size, const string& font_name);
 	void set_color(const Vec3f& c) {color = c;}
 	void update(int delta_time) {fader.update(delta_time);}
 	void set_fade_duration(float duration) {fader.set_duration((int)(duration*1000.f));}
@@ -86,7 +86,7 @@ public:
 	void update(int delta_time) {fader.update(delta_time);}
 	void set_fade_duration(float duration) {fader.set_duration((int)(duration*1000.f));}
 	void show(bool b){fader = b;}
-	void set_font(const string& font_filename, const string& font_texture);
+	void set_font(float font_size, const string& font_name);
 
 private:
 	double radius;
@@ -107,7 +107,7 @@ public:
     virtual ~Cardinals();
 	void draw(const Projector* prj, double latitude, bool gravityON = false) const;
 	void set_color(const Vec3f& c) {color = c;}
-	void set_font(const string& font_filename, const string& font_texture, float font_size = 30.f);
+	void set_font(float font_size, const string& font_name);
 	int load_labels(string filename);  // for i18n
 	void update(int delta_time) {fader.update(delta_time);}
 	void set_fade_duration(float duration) {fader.set_duration((int)(duration*1000.f));}

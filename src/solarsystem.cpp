@@ -34,9 +34,9 @@ using namespace std;
 SolarSystem::SolarSystem() : sun(NULL), moon(NULL), earth(NULL), tex_earth_shadow(NULL)
 {}
 
-void SolarSystem::set_font(const string& font_filename)
+void SolarSystem::set_font(float font_size, const string& font_name)
 {
-	planet_name_font = new s_font(13,"spacefont", font_filename);
+	planet_name_font = new s_font(font_size, font_name);
 	if (!planet_name_font)
 	{
 		printf("Can't create planet_name_font\n");

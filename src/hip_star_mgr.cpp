@@ -56,7 +56,7 @@ Hip_Star_mgr::~Hip_Star_mgr()
 	starFont=NULL;
 }
 
-void Hip_Star_mgr::init(const string& font_fileName, const string& hipCatFile,
+void Hip_Star_mgr::init(float font_size, const string& font_name, const string& hipCatFile,
 	const string& commonNameFile, const string& sciNameFile, LoadingBar& lb)
 {
 	load_data(hipCatFile, lb);
@@ -64,7 +64,7 @@ void Hip_Star_mgr::init(const string& font_fileName, const string& hipCatFile,
 	load_sci_names(sciNameFile);
 	
 	starTexture = new s_texture("star16x16",TEX_LOAD_TYPE_PNG_SOLID);  // Load star texture
-    starFont = new s_font(11.f,"spacefont", font_fileName); // load Font
+    starFont = new s_font(font_size, font_name);
     if (!starFont)
     {
 	    printf("Can't create starFont\n");
@@ -109,11 +109,9 @@ void Hip_Star_mgr::load_data(const string& hipCatFile, LoadingBar& lb)
     Hip_Star * e = NULL;
     for(int i=0;i<StarArraySize;i++)
     {
-        // Tony - added "|| (i == StarArraySize-1)"
 		if (!(i%2000) || (i == StarArraySize-1))
 		{
 			// Draw loading bar
-            // Tony - added "+1"
 			snprintf(tmpstr, 512, _("Loading Hipparcos catalog: %d/%d"), i+1, StarArraySize);
 			lb.SetMessage(tmpstr);
 			lb.Draw((float)i/StarArraySize);
@@ -409,7 +407,7 @@ vector<stel_object*> Hip_Star_mgr::search_around(Vec3d v, double lim_fov)
 // Search the star by HP number
 Hip_Star * Hip_Star_mgr::search(unsigned int _HP)
 {
-	if (StarFlatArray[_HP] && StarFlatArray[_HP]->HP == _HP)
+	if (_HP < (unsigned int)StarArraySize && StarFlatArray[_HP] && StarFlatArray[_HP]->HP == _HP)
 		return StarFlatArray[_HP];
     return NULL;
 }

@@ -92,10 +92,10 @@ void Constellation::draw(Projector* prj, const Vec3f& lines_color) const
 
 // Draw the lines for the Constellation using the coords of the stars
 // (optimized for use thru the class Constellation_mgr only)
-void Constellation::draw_optim(Projector* prj, const Vec3f& lines_color) const
+void Constellation::draw_optim(Projector* prj, const Vec3f& line_color) const
 {
 	if(!line_fader.get_interstate()) return;
-	glColor3fv(lines_color*line_fader.get_interstate());
+	glColor3fv(line_color*line_fader.get_interstate());
 	Vec3d star1;
 	Vec3d star2;
     for(unsigned int i=0;i<nb_segments;++i)
@@ -112,10 +112,10 @@ void Constellation::draw_optim(Projector* prj, const Vec3f& lines_color) const
 
 
 // Draw the name
-void Constellation::draw_name(s_font * constfont, Projector* prj, Vec3f color) const
+void Constellation::draw_name(s_font * constfont, Projector* prj, Vec3f label_color) const
 {
 	if(!name_fader.get_interstate()) return;
-	glColor3fv(color*name_fader.get_interstate());
+	glColor3fv(label_color*name_fader.get_interstate());
 	gravity_label ? prj->print_gravity180(constfont, XYname[0], XYname[1], name, 1, -constfont->getStrLen(name)/2) :
 	constfont->print(XYname[0]-constfont->getStrLen(name)/2, XYname[1], name);
 }
