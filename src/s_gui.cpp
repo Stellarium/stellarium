@@ -29,6 +29,17 @@
 
 // TODO: int magnify??? for printer dpi
 
+// Used for GNU gettext translations
+#ifndef MACOSX
+#include "gettext.h"
+#define _(String) gettext (String)
+#define N_(String) gettext_noop(String)
+#else
+# include "POSupport.h"
+# define _(String) localizedUTF8String(String)
+# define N_(String) (String)
+#endif
+
 void glCircle(const Vec3d& pos, float radius, float line_width)
 {
 	float angle, facets;
@@ -92,6 +103,9 @@ inline void doCallback(const callback<void>& c, void *_component)
 }
 
 using namespace s_gui;
+
+bool cursorVisible = false;
+EditBox *activeEditBox = NULL;
 
 // A float to nearest int conversion routine for the systems which
 // are not C99 conformant
@@ -277,7 +291,7 @@ void Painter::drawSquareFill(const s_vec2i& pos, const s_vec2i& sz) const
 
 	if (opaque) glDisable(GL_BLEND);
 	else glEnable(GL_BLEND);
-	
+
     glBindTexture(GL_TEXTURE_2D, tex1->getID());
     glBegin(GL_QUADS );
         glTexCoord2s(0, 0); glVertex2i(pos[0]        , pos[1] + sz[1]);	// Bottom Left
@@ -293,9 +307,10 @@ void Painter::drawSquareFill(const s_vec2i& pos, const s_vec2i& sz, const s_colo
     glColor4fv(c);
     glEnable(GL_TEXTURE_2D);
 
-//	if (opaque) 
+//	if (opaque) glDisable(GL_BLEND);
+	//else 
 	glEnable(GL_BLEND);
-	
+
     glBindTexture(GL_TEXTURE_2D, tex1->getID());
     glBegin(GL_QUADS );
         glTexCoord2s(0, 0); glVertex2i(pos[0]        , pos[1] + sz[1]);	// Bottom Left
@@ -380,9 +395,11 @@ void Painter::drawLine(const s_vec2i& pos1, const s_vec2i& pos2, const s_color& 
 // Mother class for every s_gui object.
 ////////////////////////////////////////////////////////////////////////////////
 
-bool Component::changed_mode = false;
+bool Component::change_mode = false;
+bool Component::change_locale = false;
 s_color Component::baseColor = s_color(0.3,0.4,0.7);
 s_color Component::textColor = s_color(0.7,0.8,0.9);
+bool Component::focusing = false;
 
 Component::Component() :
 	pos(0, 0),
@@ -391,9 +408,12 @@ Component::Component() :
 	focus(false),
 	painter(defaultPainter),
 	moveToFront(false),
+	needNewTopEdit(false),
 	type(CT_COMPONENTBASE),
 	desktop(false)
 {
+	change_mode = false;
+	change_locale = false;
 }
 
 Component::~Component()
@@ -403,6 +423,7 @@ Component::~Component()
 void Component::setVisible(bool _visible)
 {
 	visible = _visible;
+/*
 	if (getType() & CT_CONTAINER)
 	{
 		Container *c = (Container*)this;
@@ -414,6 +435,7 @@ void Component::setVisible(bool _visible)
 			iter++;
 		}
 	}
+*/
 }
 
 void Container::setFocus(bool _focus)
@@ -427,11 +449,12 @@ void Container::setFocus(bool _focus)
         iter++;
 	}
 	focus=_focus;
+	focusing = _focus;
 }
 
 void Component::draw(void)
 {
-	if (changed_mode)
+	if (change_mode)
 	{
 		painter.setTextColor(textColor);
 		painter.setBaseColor(baseColor);
@@ -440,7 +463,7 @@ void Component::draw(void)
 
 void Component::setColorScheme(const s_color& _baseColor, const s_color& _textColor)
 {
-	changed_mode = true;
+	change_mode = true;
 	baseColor = _baseColor;
 	textColor = _textColor;
 	// change the color scheme on the next draw cycle
@@ -579,11 +602,13 @@ void Container::draw(void)
     if (!visible) return;
 	static Component *firstFocus = NULL;
 	static bool justMovedToFront;
+	static bool neededNewTopEdit;
     
     if (desktop) // first draw of cycle
 	{
 	    firstFocus = NULL;
     	justMovedToFront = false;
+    	neededNewTopEdit = false;
 	}
     
     list<Component*>::iterator iter = childs.begin();
@@ -594,6 +619,7 @@ void Container::draw(void)
 	{
 		if ((*iter)->inFront() == true)
 		{
+			activeEditBox = NULL;
 			(*iter)->setInFront(false);
 			childs.push_front(*iter);
 			childs.erase(iter);
@@ -617,6 +643,11 @@ void Container::draw(void)
 	{
 		if (((*iter)->getType() & CT_EDITBOX) && (*iter)->getVisible())
 			firstFocus = (*iter);
+		if ((*iter)->getNeedNewEdit())
+		{
+			(*iter)->setNeedNewEdit(false);
+			neededNewTopEdit = true;
+		}
 		(*iter)->draw();
 		iter++;
 	}
@@ -630,20 +661,28 @@ void Container::draw(void)
     
 	// after all the desktop and sub compopnents have been drawn
 	// see a editbox that is displaying needs a cursor?
-    if (desktop && firstFocus && justMovedToFront)
-    {
-	    if ((firstFocus->getType() & CT_EDITBOX) && ((EditBox*)firstFocus)->getAutoFocus())
-			((EditBox*)firstFocus)->setEditing(true);
-		firstFocus = NULL;
-		changed_mode = false;
+    if (desktop)
+	{
+		 //need to check that the firstfocus is a child of the one just moved to
+		 //the front, otherwise it may be close to the top and blinking,
+		 //but not the currently top window!
+		 
+		if (firstFocus && (justMovedToFront || neededNewTopEdit))
+	    {
+		    if (((EditBox*)firstFocus)->getAutoFocus())
+				((EditBox*)firstFocus)->setEditing(true);
+			firstFocus = NULL;
+		}
+		change_mode = false;
+		change_locale = false;
 	}
 }
 
-
 bool Container::onClic(int x, int y, S_GUI_VALUE button, S_GUI_VALUE state)
 {
-	bool hasFocus = false;
 	if (!visible) return false;
+
+	bool hasFocus = false;
 	
 	list<Component*>::iterator iter = childs.begin();
 
@@ -655,8 +694,8 @@ bool Container::onClic(int x, int y, S_GUI_VALUE button, S_GUI_VALUE state)
 			hasFocus = true;
 			if ((*iter)->onClic(x - pos[0], y - pos[1], button, state)) 
 			{
-			// The signal has been intercepted
-			// Set the component in first position in the objects list
+				// The signal has been intercepted
+				// Set the component in first position in the objects list
 				childs.push_front(*iter);
 				childs.erase(iter);
 				return true;
@@ -831,7 +870,7 @@ void TexturedButton::draw()
 // Button with a cross on it
 ////////////////////////////////////////////////////////////////////////////////
 
-CheckBox::CheckBox(int state) : Button(), isChecked(state)
+CheckBox::CheckBox(bool state) : Button(), isChecked(state)
 {
 }
 
@@ -852,15 +891,34 @@ bool CheckBox::onClic(int x, int y, S_GUI_VALUE bt, S_GUI_VALUE state)
 	return Button::onClic(x,y,bt,state);
 }
 
-LabeledCheckBox::LabeledCheckBox(int state, const string& label) : Container(), checkbx(NULL), lbl(NULL)
+LabeledCheckBox::LabeledCheckBox(bool state, const string& _label) : 
+		Container(), 
+		checkbox(NULL), 
+		label(NULL)
 {
-	checkbx = new CheckBox(state);
-	addComponent(checkbx);
-	lbl = new Label(label);
-	lbl->setPos(checkbx->getSizex()+4, 0);
-	addComponent(lbl);
-	setSize(checkbx->getSizex() + lbl->getSizex() + 2,
-		checkbx->getSizey()>lbl->getSizey() ? checkbx->getSizey() : lbl->getSizey());
+	checkbox = new CheckBox(state);
+	addComponent(checkbox);
+	label = new Label(_label);
+	label->setPos(checkbox->getSizex()+4, 0);
+	addComponent(label);
+	setSize(checkbox->getSizex() + label->getSizex() + 2,
+		checkbox->getSizey()>label->getSizey() ? checkbox->getSizey() : label->getSizey());
+}
+
+LabeledCheckBox::~LabeledCheckBox()
+{
+}
+
+void LabeledCheckBox::draw(void)
+{
+	Component::draw();
+
+	if (!visible) return;
+	
+	setSize(checkbox->getSizex() + label->getSizex() + 2,
+		checkbox->getSizey()>label->getSizey() ? checkbox->getSizey() : label->getSizey());
+
+	Container::draw();
 }
 
 FlagButton::FlagButton(int state, const s_texture* tex, const string& specificTexName) : CheckBox(state)
@@ -900,8 +958,8 @@ void FlagButton::draw()
 
 Label::Label(const string& _label, const s_font * _font)
 {
-	setLabel(_label);
 	if (_font) painter.setFont(_font);
+	setLabel(_label);
 	adjustSize();
 }
 
@@ -909,18 +967,28 @@ Label::~Label()
 {
 }
 
-void Label::setLabel(const string& _label)
+void Label::setLabel(const string& _label, bool _translate)
 {
-    label = _label;
-	adjustSize();
+	label_native = _label;
+	label = _label;
+#ifdef ENABLE_NLS
+	if (_translate && label_native != "") label = _(label_native.c_str());
+#endif
+    adjustSize();
 }
 
 void Label::draw()
 {
 	Component::draw(); // for potential colour changes
 
+#ifdef ENABLE_NLS
+	if (change_locale) 
+		setLabel(label_native);
+#endif
+
 	if (!visible) return;
-    if (painter.getFont())
+
+    if (painter.getFont()) 
 		painter.print(pos[0], pos[1], label);
 }
 
@@ -928,8 +996,14 @@ void Label::draw(float _intensity)
 {
 	Component::draw(); // for potential colour changes
 
+#ifdef ENABLE_NLS
+	if (change_locale) 
+		setLabel(label_native);
+#endif
+
 	if (!visible) return;
-    if (painter.getFont())
+
+    if (painter.getFont()) 
 		painter.print(pos[0], pos[1], label, painter.getTextColor()*_intensity);
 }
 
@@ -1063,7 +1137,7 @@ string AutoCompleteString::getFirstMatch(void)
 // Standard Editbox component
 ////////////////////////////////////////////////////////////////////////////////
 
-bool cursorVisible;
+// we need to set this when actrivated, and only blink the active one
 
 EditBox::EditBox(const string& _label, const s_font* font) 
 	: Button(), label(_label, font), isEditing(false), cursorPos(0)
@@ -1107,6 +1181,10 @@ void EditBox::draw(void)
 
     if (!visible) return;
 
+	// may have been snatched away!
+	if (isEditing && focusing && !focus)
+		setEditing(false);
+		
 	Button::draw();
     glPushMatrix();
     glTranslatef(pos[0], pos[1], 0.f);
@@ -1125,16 +1203,16 @@ void EditBox::draw(void)
 #define EDITBOX_DEFAULT_PROMPT "> "
 void EditBox::refreshLabel(void)
 {
-     if (!isEditing) label.setLabel(prompt + text);
+     if (!isEditing) label.setLabel(prompt + text, false);
      else
      {
-        if (!cursorVisible) label.setLabel(prompt + text); 
+        if (!cursorVisible) label.setLabel(prompt + text, false); 
         else
         {
             if (cursorPos == text.length()) // at end
-               label.setLabel(prompt + text + EDITBOX_CURSOR); 
+               label.setLabel(prompt + text + EDITBOX_CURSOR, false); 
             else
-               label.setLabel(prompt + text.substr(0,cursorPos) + EDITBOX_CURSOR + text.substr(cursorPos)); 
+               label.setLabel(prompt + text.substr(0,cursorPos) + EDITBOX_CURSOR + text.substr(cursorPos), false); 
         }
      }
 }
@@ -1145,6 +1223,14 @@ void EditBox::setText(const string &_text)
 	lastText = text;
     cursorPos = _text.length();
 }
+
+void EditBox::setVisible(bool _visible)
+{
+	label.setVisible(_visible);
+	Component::setVisible(_visible);
+	draw();
+}
+
 
 Uint32 toggleBlink(Uint32 interval)
 {
@@ -1163,19 +1249,23 @@ void EditBox::setEditing(bool _editing)
 {
 	if (_editing)
 	{
-      isEditing = true;
-      cursorVisible = true;
-      autoComplete.reset();
+    	isEditing = true;
+    	cursorVisible = true;
+		autoComplete.reset();
 
-      SDL_SetTimer(0, NULL);
-      SDL_SetTimer(600, (SDL_TimerCallback)toggleBlink);
+		if (activeEditBox != this && activeEditBox != NULL)
+			activeEditBox->setEditing(false);
+		activeEditBox = this;
+
+//    	SDL_SetTimer(0, NULL);
+    	SDL_SetTimer(600, (SDL_TimerCallback)toggleBlink);
 	}
 	else
 	{
 		isEditing = false;
 		cursorVisible = false;
 		autoComplete.reset();
-
+		activeEditBox = NULL;
     	SDL_SetTimer(0, NULL);
 	}
 }
@@ -1257,11 +1347,11 @@ bool EditBox::onKey(Uint16 k, S_GUI_VALUE s)
         }
         else if (k == SDLK_ESCAPE) setText("");
         else if ((k >= SDLK_0 && k <= SDLK_9) || (k >= SDLK_a && k <= SDLK_z) 
-        || (k >= 65 && k <= 90) || (k >= 224 && k <= 255) || k == SDLK_SPACE || k == SDLK_UNDERSCORE)
+        || (k >= SDLK_A && k <= SDLK_Z) || (k >= 224 && k <= 255) 
+		|| k == SDLK_SPACE || k == SDLK_UNDERSCORE)
         {
 			text = lastText;
-            string newtext = "";
-            newtext += text.substr(0, cursorPos);
+            string newtext = text.substr(0, cursorPos);
             newtext += k;
             newtext += text.substr(cursorPos);
             text = newtext;
@@ -1493,7 +1583,9 @@ void ScrollBar::setValue(int _value)
 #define LISTBOX_ITEM_HEIGHT (BUTTON_HEIGHT - 8)
 
 ListBox::ListBox(int _displayLines) : 
-	scrollBar(true), firstItemIndex(0), value(-1)
+	scrollBar(true), 
+	firstItemIndex(0), 
+	value(-1)
 {
 	displayLines = _displayLines;
 	scrollBar.setVisible(false);
@@ -1516,11 +1608,12 @@ void ListBox::createLines(void)
 	
 	for (i = 0; i < displayLines; i++)
 	{
-		bt = new LabeledButton();
+		bt = new LabeledButton(string()); 
 		bt->setHideBorder(true);
 		bt->setHideBorderMouseOver(true);
 		bt->setHideTexture(true);
 		bt->setJustification(JUSTIFY_LEFT);
+		bt->setVisible(visible);
 		itemBt.push_back(bt);
 	}
 }
@@ -1530,6 +1623,19 @@ void ListBox::draw(void)
 	Component::draw(); // for potential colour changes
 
 	unsigned int i, j;
+	
+#ifdef ENABLE_NLS
+	if (change_locale) 
+	{
+		i = 0;
+		while (i < items.size())
+		{
+			items[i] = _(items_native[i].c_str());
+			i++;
+		}
+	}
+#endif
+
 	if (!visible) return;
 
 	painter.drawSquareEdge(pos, size);
@@ -1604,12 +1710,33 @@ bool ListBox::onMove(int x, int y)
 	return false;
 }
 
+void ListBox::setVisible(bool _visible)
+{
+    vector<LabeledButton*>::iterator iter = itemBt.begin();
+    while (iter != itemBt.end())
+    {
+		(*iter)->setVisible(_visible);
+        iter++;
+    }
+	Component::setVisible(_visible);
+}
+
 void ListBox::addItems(const vector<string> _items)
 {
 	if (_items.empty()) return;
+	string item;
 	
 	unsigned int i = 0;
-	while (i < _items.size()) items.push_back(_items[i++]);
+	while (i < _items.size())
+	{
+		item = _items[i];
+		items_native.push_back(_items[i]);
+#ifdef ENABLE_NLS
+		item = _(item.c_str());
+#endif
+		items.push_back(item);
+		i++;
+	}
 	adjustAfterItemsAdded();
 }
 
@@ -1634,7 +1761,6 @@ void ListBox::adjustAfterItemsAdded(void)
 void ListBox::scrollChanged(void)
 {
 	firstItemIndex = scrollBar.getValue();
-
 	unsigned int i = firstItemIndex;
 	unsigned int j = 0;
 	int w = getSizex();
@@ -1691,6 +1817,7 @@ void LabeledButton::draw(void)
     glPushMatrix();
     glTranslatef(pos[0], pos[1], 0.f);
     Component::scissor->push(pos, size);
+    
     if (justification == JUSTIFY_CENTER)
 		label.setPos((size[0]-label.getSizex())/2,(size[1]-label.getSizey())/2+2);
 	else if (justification == JUSTIFY_LEFT)
@@ -1700,8 +1827,15 @@ void LabeledButton::draw(void)
 	
 	if (pressed || isBright) label.draw();
     else label.draw(.3);   // faded
+
     Component::scissor->pop();
 	glPopMatrix();
+}
+
+void LabeledButton::setVisible(bool _visible)
+{
+	label.setVisible(_visible);
+	Component::setVisible(_visible);
 }
 
 
@@ -1709,7 +1843,8 @@ void LabeledButton::draw(void)
 // A text bloc
 ////////////////////////////////////////////////////////////////////////////////
 
-TextLabel::TextLabel(const string& _label, const s_font* _font) : Container()
+TextLabel::TextLabel(const string& _label, const s_font* _font) :
+	Container()
 {
 	if (_font) painter.setFont(_font);
 	setLabel(_label);
@@ -1720,9 +1855,15 @@ TextLabel::~TextLabel()
 {
 }
 
-void TextLabel::setLabel(const string& _label)
+void TextLabel::setLabel(const string& _label, bool _translate)
 {
-    label = _label;
+	label_native = _label;
+	label = _label;
+	
+#ifdef ENABLE_NLS
+	if (_translate && label_native != "") label = _(label_native.c_str());
+#endif
+
     childs.clear();
 
     Label * tempLabel;
@@ -1734,23 +1875,35 @@ void TextLabel::setLabel(const string& _label)
 	istringstream is(label);
     while (getline(is, pch))
     {
-        tempLabel = new Label(pch);
+        tempLabel = new Label();
+        tempLabel->setLabel(pch,false);  // don't translate (done already)!!!
 		tempLabel->setPainter(painter);
         tempLabel->setPos(0,i*lineHeight);
-		tempLabel->adjustSize();
         addComponent(tempLabel);
-        ++i;
+        i++;
     }
-    adjustSize(); // Tony
+    adjustSize();
+}
+
+void TextLabel::draw(void)
+{
+#ifdef ENABLE_NLS
+	if (change_locale) 
+		setLabel(label_native);
+#endif
+	Container::draw();
 }
 
 void TextLabel::adjustSize(void)
 {
 	int maxX = 0;
+	int linelen;
+	
 	list<Component*>::iterator iter = childs.begin();
 	while (iter != childs.end())
 	{
-		if ((*iter)->getSizex()>maxX) maxX = (*iter)->getSizex();
+		linelen = (*iter)->getSizex();	
+		if (linelen > maxX) maxX = linelen;
         iter++;
     }
 	setSize(maxX,childs.size()*((int)painter.getFont()->getLineHeight()+1));
@@ -1836,15 +1989,16 @@ StdWin::StdWin(const string& _title, s_texture* _header_tex, s_font * _winfont, 
 	if (_header_tex) header_tex = _header_tex;
 	if (_winfont) painter.setFont(_winfont);
 	setFrameSize(1,1,1,headerSize);
-	titleLabel = new Label();
-	setTitle(_title);
+
+	titleLabel = new Label(_title);
+	titleLabel->adjustSize();
+
 	Container::addComponent(titleLabel);
 }
 
 void StdWin::setTitle(const string& _title)
 {
 	titleLabel->setLabel(_title);
-	titleLabel->adjustSize();
 }
 
 void StdWin::draw()
@@ -1894,6 +2048,7 @@ bool StdWin::onMove(int x, int y)
 void StdWin::setVisible(bool _visible)
 {
 	moveToFront = _visible;
+	needNewTopEdit = true;
 	Component::setVisible(_visible);
 }
 
@@ -1998,11 +2153,11 @@ StdDlgWin::StdDlgWin(const string& _title, s_texture* _header_tex, s_font * _win
 	picture = new Picture(questionIcon, STDDLGWIN_BT_ICON_LEFT, STDDLGWIN_BT_ICON_TOP, 32, 32);
 	addComponent(picture);
 
-	messageLabel = new TextLabel("");
+	messageLabel = new TextLabel();
 	messageLabel->setPos(STDDLGWIN_MSG_SIDE_OFFSET,STDDLGWIN_MSG_TOP_OFFSET);
 	addComponent(messageLabel);
 	
-	inputEdit = new EditBox("");
+	inputEdit = new EditBox();
 	inputEdit->setPos(STDDLGWIN_MSG_SIDE_OFFSET,STDDLGWIN_MSG_TOP_OFFSET + 20);
 	inputEdit->setSize(size[0] - 2*STDDLGWIN_MSG_SIDE_OFFSET, STDDLGWIN_BT_HEIGHT);
 	inputEdit->setVisible(false);
@@ -2051,17 +2206,6 @@ void StdDlgWin::arrangeButtons(void)
 	picture->setVisible(hasIcon);
 }
 
-// Used for GNU gettext translations
-#ifndef MACOSX
-#include "gettext.h"
-#define _(String) gettext (String)
-#define N_(String) gettext_noop(String)
-#else
-# include "POSupport.h"
-# define _(String) localizedUTF8String(String)
-# define N_(String) (String)
-#endif
-
 void StdDlgWin::MessageBox(const string &_title, const string &_prompt, int _buttons, const string &_ID)
 {
 	lastID = _ID;
@@ -2080,13 +2224,13 @@ void StdDlgWin::MessageBox(const string &_title, const string &_prompt, int _but
 	if (_buttons & BT_NO)
 	{
 		secondBtType = BT_NO;
-		secondBt->setLabel(_("No"));
+		secondBt->setLabel("No");
 		numBtns = 2;
 	}
 	else if (_buttons & BT_CANCEL)
 	{
 		secondBtType = BT_CANCEL;
-		secondBt->setLabel(_("Cancel"));
+		secondBt->setLabel("Cancel");
 		numBtns = 2;
 	}
 
@@ -2099,12 +2243,12 @@ void StdDlgWin::MessageBox(const string &_title, const string &_prompt, int _but
 	if (_buttons & BT_YES)
 	{
 		firstBtType = BT_YES;
-		firstBt->setLabel(_("Yes"));
+		firstBt->setLabel("Yes");
 	}
 	else
 	{
 		firstBtType = BT_OK;
-		firstBt->setLabel(_("OK"));
+		firstBt->setLabel("OK");
 	}		
 	
 	arrangeButtons();
@@ -2130,9 +2274,9 @@ void StdDlgWin::InputBox(const string &_title, const string &_prompt, const stri
 	inputEdit->setVisible(true);	
 
 	firstBtType = BT_OK;
-	firstBt->setLabel(_("OK"));
+	firstBt->setLabel("OK");
 	secondBtType = BT_CANCEL;
-	secondBt->setLabel(_("Cancel"));
+	secondBt->setLabel("Cancel");
 
 	arrangeButtons();
 	setVisible(true);
@@ -2190,8 +2334,11 @@ void TabHeader::draw(void)
     glPushMatrix();
     glTranslatef(pos[0], pos[1], 0.f);
     Component::scissor->push(pos, size);
+    // todo gettext first TONY
+	
 	label.setPos((size-label.getSize())/2 + s_vec2i(1,0));
 	label.draw(0.7f + 0.3 * active);
+
     Component::scissor->pop();
 	glPopMatrix();
 }
@@ -2231,6 +2378,17 @@ void TabContainer::draw(void)
 	painter.drawSquareFill(pos, size, painter.getBaseColor()/3);
 	painter.drawLine(s_vec2i(pos[0]+getHeadersSize(), pos[1]+headerHeight-1),
 		s_vec2i(pos[0]+size[0], pos[1]+headerHeight-1));
+
+	int s = 0;
+	list<TabHeader*>::iterator iter = headers.begin();
+	while (iter != headers.end())
+	{
+		(*iter)->setPosx(s);
+		(*iter)->setSizex((*iter)->label.getSizex()+4);
+		s+=(*iter)->getSizex();
+        iter++;
+    }
+
 	Container::draw();
 }
 
@@ -2428,7 +2586,7 @@ IntIncDec::IntIncDec(const s_font* _font, const s_texture* tex_up,
 		int _init_value, int _inc) :
 	Container(), value(_init_value), min(_min), max(_max), inc(_inc), btmore(NULL), btless(NULL), label(NULL)
 {
-	label = new Label;
+	label = new Label();
 	if (_font) label->setFont(_font);
 	label->setSize(30,10);
 	label->setPos(9,2);
@@ -2866,9 +3024,9 @@ MapPicture::~MapPicture()
 	city_name_font = NULL;
 }
 
-void MapPicture::set_font(float font_size, const string& fontpng_filename, const string& fonttxt_filename)
+void MapPicture::set_font(float font_size, const string& font_name)
 {
-	city_name_font = new s_font(font_size, fontpng_filename, fonttxt_filename);
+	city_name_font = new s_font(font_size, font_name);
 	if (!city_name_font)
 	{
 		printf("Can't create city_name_font\n");

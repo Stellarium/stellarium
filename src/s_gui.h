@@ -159,15 +159,16 @@ namespace s_gui
 		bool opaque;
     };
 
-#define CT_COMPONENTBASE	0x0000
-#define CT_LABEL 			0x1000
-#define CT_CURSORBAR 		0x2000
-#define CT_CALLBACK 		0x3000
-	#define CT_STRINGLIST 	0x0010
-	#define CT_PICTURE 		0x0020
-	#define CT_BUTTON 		0x0040
-	#define CT_EDITBOX 		0x0080
-	#define CT_CONTAINER 	0x0100
+#define CT_COMPONENTBASE		0x0000
+#define CT_LABEL 				0x1000
+#define CT_CURSORBAR 			0x2000
+#define CT_CALLBACK 			0x3000
+	#define CT_STRINGLIST 		0x0010
+	#define CT_PICTURE 			0x0020
+	#define CT_BUTTON 			0x0040
+		#define CT_TABHEADER 	0x0001
+	#define CT_EDITBOX 			0x0080
+	#define CT_CONTAINER 		0x0100
 
     class Component
     {
@@ -211,7 +212,9 @@ namespace s_gui
 		static void enableScissor(void) {scissor->activate();}
 		static void disableScissor(void) {scissor->desactivate();}
 		bool inFront(void) { return moveToFront; }
-		void setInFront(bool b) { moveToFront = b; }
+		bool getNeedNewEdit(void) { return needNewTopEdit; }
+		void setNeedNewEdit(bool _b) { needNewTopEdit = _b; }
+		void setInFront(bool b) { moveToFront = b; } // signals this component to move to front
 		void setOpaque(bool b) { painter.setOpaque(b); }
 		unsigned int getType(void) { return type; }
 		static void setColorScheme(const s_color& _baseColor, const s_color& _textColor);
@@ -220,14 +223,17 @@ namespace s_gui
         s_vec2i size;
         bool visible;
         bool focus;
+        static bool focusing;
 		Painter painter;
 		
-		static bool changed_mode; // signals to the components to change colour for night/day mode
+		static bool change_mode; // signals to the components to change colour for night/day mode
+		static bool change_locale; // signals to the components to change locale
 		static s_color baseColor;
 		static s_color textColor;
 		static Painter defaultPainter;
 		static Scissor* scissor;
 		bool moveToFront;
+		bool needNewTopEdit;
 		unsigned int type;
 		bool desktop;
     private:
@@ -263,16 +269,24 @@ namespace s_gui
 		virtual bool onMove(int, int);
 		virtual bool onKey(Uint16, S_GUI_VALUE);
         virtual void setFocus(bool _focus);
+   		void changeLocale(void) { change_locale = true; } // var in component base
     protected:
         std::list<Component*> childs;
     };
 
+////////////////////////////////////////////////////////////////////////////////
+// FilledContainer
+////////////////////////////////////////////////////////////////////////////////
 
     class FilledContainer : public Container
     {
     public:
         virtual void draw(void);
     };
+
+////////////////////////////////////////////////////////////////////////////////
+// Button
+////////////////////////////////////////////////////////////////////////////////
 
     class Button : public CallbackComponent
     {
@@ -289,6 +303,10 @@ namespace s_gui
 		bool hideTexture;
     };
 
+////////////////////////////////////////////////////////////////////////////////
+// TexturedButton
+////////////////////////////////////////////////////////////////////////////////
+
     class TexturedButton : public Button
     {
     public:
@@ -304,10 +322,14 @@ namespace s_gui
     protected:
     };
 
+////////////////////////////////////////////////////////////////////////////////
+// CheckBox
+////////////////////////////////////////////////////////////////////////////////
+
 	class CheckBox : public Button
     {
     public:
-		CheckBox(int state = 0);
+		CheckBox(bool state = false);
         virtual void draw();
 		virtual int getState(void) const {return isChecked;}
 		virtual void setState(int s) {isChecked = s;}
@@ -326,35 +348,45 @@ namespace s_gui
 		s_texture* specific_tex;
     };
 
+////////////////////////////////////////////////////////////////////////////////
+// Label
+////////////////////////////////////////////////////////////////////////////////
+
     class Label : public Component
     {
     public:
         Label(const string& _label = "", const s_font* _font = NULL);
         virtual ~Label();
         virtual const string& getLabel() const {return label;}
-        virtual void setLabel(const string&);
+        virtual void setLabel(const string&, bool _translate = true);
         virtual void draw();
         virtual void draw(float intensity);
 		virtual void adjustSize(void);
     protected:
+        string label_native;
         string label;
     };
+
+////////////////////////////////////////////////////////////////////////////////
+// LabeledButton
+////////////////////////////////////////////////////////////////////////////////
 
 	enum Justification { JUSTIFY_LEFT, JUSTIFY_CENTER, JUSTIFY_RIGHT };
 
     class LabeledButton : public Button
     {
+		friend class TabContainer;
     public:
         LabeledButton(const string& _label = "", const s_font* font = NULL, 
 			Justification _j = JUSTIFY_CENTER, bool _bright = false);
 		virtual ~LabeledButton();
         virtual void draw(void);
-//		virtual void setActive(int _active) {Button::setActive(_active); label.setActive(_active);}
+		virtual void setVisible(bool _visible);
 		virtual void setFont(const s_font* f) {Button::setFont(f); label.setFont(f);}
 		virtual void setTextColor(const s_color& c) {Button::setTextColor(c); label.setTextColor(c);}
 		virtual void setPainter(const Painter& p) {Button::setPainter(p); label.setPainter(p);}
-		void setJustification(Justification _j) { justification = _j; }
-        virtual void setLabel(const string& _label) { label.setLabel(_label);};
+		virtual void setJustification(Justification _j) { justification = _j; }
+        void setLabel(const string& _label, bool _translate = true) { label.setLabel(_label, _translate); };
         void setBright(bool _b) { isBright = _b; };
     protected:
 		Label label;
@@ -419,7 +451,8 @@ namespace s_gui
 		virtual void setPainter(const Painter& p) {Button::setPainter(p); label.setPainter(p);}
 		virtual bool onKey(Uint16, S_GUI_VALUE);
 		virtual bool onClic(int, int, S_GUI_VALUE, S_GUI_VALUE);
-		virtual void setAutoCompleteOptions(vector<string> _autocomplete) { autoComplete.setOptions(_autocomplete); };
+		void setVisible(bool _visible);
+		void setAutoCompleteOptions(vector<string> _autocomplete) { autoComplete.setOptions(_autocomplete); };
 		string getAutoCompleteOptions(void) { return autoComplete.getOptions(); }
 		string getText(void) { return text; }
 		void setEditing(bool _b);
@@ -489,6 +522,7 @@ namespace s_gui
 		virtual bool onClic(int, int, S_GUI_VALUE, S_GUI_VALUE);
 		virtual bool onMove(int, int);
         virtual void draw();
+   		virtual void setVisible(bool _visible);
 		string getItem(int value);
 		void addItems(const vector<string> _items);
 		void addItem(const string& _text);
@@ -504,6 +538,7 @@ namespace s_gui
 		int firstItemIndex;
 		vector<LabeledButton*> itemBt;
 		vector<string> items;
+		vector<string> items_native;
 		int value;
 		unsigned int displayLines;
 	};
@@ -514,10 +549,12 @@ namespace s_gui
 	    TextLabel(const string& _label = "", const s_font* _font = NULL);
 	    virtual ~TextLabel();
         virtual const string& getLabel() const {return label;}
-        virtual void setLabel(const string&);
+        virtual void draw(void);
+        virtual void setLabel(const string&, bool _translate = true);
 		virtual void adjustSize(void);
 		virtual void setTextColor(const s_color& c);
 	protected:
+        string label_native;
         string label;
 	};
 
@@ -590,13 +627,15 @@ namespace s_gui
 	class LabeledCheckBox : public Container
 	{
 	public:
-		LabeledCheckBox(int state = 0, const string& label = "");
-		virtual int getState(void) const {return checkbx->getState();}
-		virtual void setState(int s) {checkbx->setState(s);}
-        virtual void setOnPressCallback(const callback<void>& c) {checkbx->setOnPressCallback(c);}
+		LabeledCheckBox(bool state = false, const string& _label = "");
+		~LabeledCheckBox();
+        virtual void draw(void);
+		virtual int getState(void) const {return checkbox->getState();}
+		virtual void setState(int s) {checkbox->setState(s);}
+        virtual void setOnPressCallback(const callback<void>& c) {checkbox->setOnPressCallback(c);}
     protected:
-		CheckBox* checkbx;
-		Label* lbl;
+		CheckBox* checkbox;
+		Label* label;
 	};
 
     class FramedContainer : public Container
@@ -830,7 +869,7 @@ namespace s_gui
 		virtual bool isIn(int x, int y);
 		bool onKey(Uint16 k, S_GUI_VALUE s);
 
-		void set_font(float font_size, const string& fontpng_fileName, const string& fonttxt_filename);
+		void set_font(float font_size, const string& font_name);
 
 		double getPointerLongitude(void);
 		double getPointerLatitude(void);
