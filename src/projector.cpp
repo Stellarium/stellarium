@@ -559,6 +559,10 @@ void Projector::print_gravity180(const s_font* font, float x, float y, const str
 	glRotatef(theta*180./M_PI,0,0,-1);
 	glTranslatef(xshift, -yshift, 0);
 	glScalef(1, -1, 1);
+	
+    glEnable(GL_BLEND);
+	glEnable(GL_TEXTURE_2D);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
 	for (unsigned int i=0;i<str.length();++i)
 	{
 
