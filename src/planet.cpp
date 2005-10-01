@@ -21,6 +21,7 @@
 #include "planet.h"
 #include "navigator.h"
 #include "s_font.h"
+#include "s_gui.h" // for the circle function >> probably better elsewhere
 
 s_font* planet::planet_name_font = NULL;
 float planet::object_scale = 1.f;
@@ -352,7 +353,6 @@ float planet::get_on_screen_size(const Projector* prj, const navigator * nav)
 void planet::draw(int hint_ON, Projector* prj, const navigator * nav, const tone_reproductor* eye, 
 				  int flag_point, int flag_trails, bool stencil)
 {
-
 	// TEMP -- place in command interface 
 	show_hint(hint_ON);
 	show_trail(flag_trails);
@@ -427,7 +427,6 @@ void planet::draw_hints(const navigator* nav, const Projector* prj)
 
 	//	printf("Out level %f\n", hint_fader.get_interstate());
 
-
 	if(!hint_fader.get_interstate()) return;
 
 	prj->set_orthographic_projection();    // 2D coordinate
@@ -455,14 +454,7 @@ void planet::draw_hints(const navigator* nav, const Projector* prj)
 	glColor3fv(label_color*hint_fader.get_interstate()/tmp);
 
 	// Draw the 2D small circle
-	glDisable(GL_TEXTURE_2D);
-	glBegin(GL_LINE_STRIP);
-	for (float r=0.f; r<2.f*M_PI; r+=M_PI/5.f)
-		{
-			glVertex3f(screenPos[0] + 8. * sin(r), screenPos[1] + 8. * cos(r), 0.0f);
-		}
-	glEnd();
-
+	glCircle(screenPos, 8);
 	prj->reset_perspective_projection();		// Restore the other coordinate
 }
 
@@ -677,7 +669,8 @@ void ring::draw(const Projector* prj, const Mat4d& mat)
 
 
 // draw orbital path of planet
-void planet::draw_orbit(const navigator * nav, const Projector* prj) {
+void planet::draw_orbit(const navigator * nav, const Projector* prj)
+{
 
 	if(!orbit_fader.get_interstate()) return;
 
@@ -726,9 +719,6 @@ void planet::draw_orbit(const navigator * nav, const Projector* prj) {
 				on=0;
 			}
 		}
-
-
-    
 	}
  
 	if(on) glEnd(); 
@@ -743,8 +733,8 @@ void planet::draw_orbit(const navigator * nav, const Projector* prj) {
 
 
 // draw trail of planet as seen from earth
-void planet::draw_trail(const navigator * nav, const Projector* prj) {
-
+void planet::draw_trail(const navigator * nav, const Projector* prj)
+ {
 	if(!trail_fader.get_interstate()) return;
 
 	Vec3d onscreen1;
