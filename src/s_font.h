@@ -51,6 +51,7 @@ public:
     float getLineHeight(void) const {return lineHeight*ratio;}
     float getStrHeight(const string&) const;
     s_texture * s_fontTexture;
+    string getFontName(void) { return name; }
 protected:
     int buildDisplayLists(const string& dataFileName, const string& textureName);
     GLuint g_base;
@@ -59,7 +60,7 @@ protected:
     int lineHeight;
     float averageCharLen;
     float ratio;
-    char name[20];
+    string name;
     const static int SPACING = 1;
 };
 
