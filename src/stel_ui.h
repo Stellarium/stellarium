@@ -62,6 +62,7 @@ public:
 	// Update all the tui widgets with values taken from the core parameters
 	void tui_update_widgets(void);
 	void show_message(string _message, int _time_out=0);
+    void gotoObject(void);
     void setConstellationAutoComplete(vector<string> _autoComplete ) { constellation_edit->setAutoCompleteOptions(_autoComplete);}
     void setPlanetAutoComplete(vector<string> _autoComplete ) { planet_edit->setAutoCompleteOptions(_autoComplete);}
     void setStarAutoComplete(vector<string> _autoComplete ) { star_edit->setAutoCompleteOptions(_autoComplete);}
@@ -69,10 +70,11 @@ public:
     void setTitleObservatoryName(const string& name);
     string getTitleWithAltitude(void);
     bool isInitialised(void) { return initialised; }
+    void changeLocale(void) { desktop->changeLocale(); }
 private:
 	stel_core * core;		// The main core can be accessed because stel_ui is a friend class
 	bool initialised;
-	s_font * spaceFont;		// The standard font
+	s_font * baseFont;		// The standard font
 	s_font * courierFont;	// The standard fixed size font
 	s_texture * baseTex;	// The standard fill texture
 	s_texture * flipBaseTex;	// The standard fill texture

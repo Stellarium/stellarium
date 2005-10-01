@@ -119,7 +119,8 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
       if (stcore->FlagMoonScaled) stcore->ssystem->get_moon()->set_sphere_scale(stcore->MoonScale);
     }
     else if(args["sky_culture"]!="") status = stcore->set_sky_culture(args["sky_culture"]);
-    else if(args["sky_locale"]!="") stcore->set_sky_locale(args["sky_locale"]);
+//    else if(args["sky_locale"]!="") stcore->set_sky_locale(args["sky_locale"]); // Tony NOT SURE
+    else if(args["sky_locale"]!="") stcore->set_system_locale_by_name(args["sky_locale"]);
     else if(args["star_mag_scale"]!="") stcore->StarMagScale = str_to_double(args["star_mag_scale"]);
     else if(args["star_scale"]!="") {
 		float scale = str_to_double(args["star_scale"]);
@@ -559,7 +560,8 @@ else if(command=="script") {
 		  if(stcore->FlagObjectTrails && stcore->ssystem) stcore->ssystem->start_trails();
 		  else  stcore->ssystem->end_trails();
 
-		  stcore->set_sky_locale(stcore->SkyLocale);
+//		  stcore->set_sky_locale(stcore->SkyLocale); Tony not sure
+		  stcore->set_system_locale_by_name(stcore->SkyLocale);
 
 		  string temp = stcore->SkyCulture;  // fool caching in below method
 		  stcore->SkyCulture = "";
@@ -657,6 +659,7 @@ int StelCommandInterface::set_flag(string name, string value, bool &newval, bool
 		else if(name=="night") {
 			newval = stcore->FlagNight = !stcore->FlagNight;
 		}
+		else if(name=="use_common_names") newval = (stcore->FlagUseCommonNames = !stcore->FlagUseCommonNames);
 		else if(name=="azimuthal_grid") newval = (stcore->FlagAzimutalGrid = !stcore->FlagAzimutalGrid);
 		else if(name=="equatorial_grid") newval = (stcore->FlagEquatorialGrid = !stcore->FlagEquatorialGrid);
 		else if(name=="equator_line") newval = (stcore->FlagEquatorLine = !stcore->FlagEquatorLine);
@@ -759,6 +762,7 @@ int StelCommandInterface::set_flag(string name, string value, bool &newval, bool
 		else if(name=="night") {
 			stcore->FlagNight = newval;
 		}
+		else if(name=="use_common_names") stcore->FlagUseCommonNames = newval;
 		else if(name=="azimuthal_grid") stcore->FlagAzimutalGrid = newval;
 		else if(name=="equatorial_grid") stcore->FlagEquatorialGrid = newval;
 		else if(name=="equator_line") stcore->FlagEquatorLine = newval;

@@ -29,7 +29,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 stel_ui::stel_ui(stel_core * _core) :
-		spaceFont(NULL),
+		baseFont(NULL),
 		courierFont(NULL),
 
 		top_bar_ctr(NULL),
@@ -88,7 +88,7 @@ stel_ui::stel_ui(stel_core * _core) :
 stel_ui::~stel_ui()
 {
 	delete desktop; 	desktop = NULL;
-	delete spaceFont; 	spaceFont = NULL;
+	delete baseFont; 	baseFont = NULL;
 	delete baseTex; 	baseTex = NULL;
 	delete flipBaseTex; flipBaseTex = NULL;
 	delete courierFont; courierFont = NULL;
@@ -102,14 +102,14 @@ stel_ui::~stel_ui()
 void stel_ui::init(void)
 {
 	// Load standard font
-	spaceFont = new s_font(core->BaseFontSize, "spacefont", core->DataDir + "spacefont.txt");
-	if (!spaceFont)
+	baseFont = new s_font(core->BaseFontSize, core->BaseFontName);
+	if (!baseFont)
 	{
 		printf("ERROR WHILE CREATING FONT\n");
 		exit(-1);
 	}
 
-	courierFont = new s_font(12.5, "courierfont", core->DataDir + "courierfont.txt");
+	courierFont = new s_font(core->BaseCFontSize, core->BaseCFontName);
 	if (!courierFont)
 	{
 		printf("ERROR WHILE CREATING FONT\n");
@@ -127,7 +127,7 @@ void stel_ui::init(void)
 	tex_down = new s_texture("down");
 
 	// Set default Painter
-	Painter p(baseTex, spaceFont, core->GuiBaseColor, core->GuiTextColor);
+	Painter p(baseTex, baseFont, core->GuiBaseColor, core->GuiTextColor);
 	Component::setDefaultPainter(p);
 
 	Component::initScissor(core->screen_W, core->screen_H);
@@ -198,6 +198,13 @@ void stel_ui::show_message(string _message, int _time_out)
 	message_win->setVisible(1);
 }
 
+////////////////////////////////////////////////////////////////////////////////
+// Tony
+void stel_ui::gotoObject(void)
+{
+    core->navigation->move_to(core->selected_object->get_earth_equ_pos(core->navigation),
+	                      core->auto_move_duration);
+}
 
 #define TOP_BAR_HEIGHT 17
 ////////////////////////////////////////////////////////////////////////////////
@@ -336,7 +343,7 @@ Component* stel_ui::createFlagButtons(void)
 	bt_flag_search->setOnPressCallback(callback<void>(this, &stel_ui::cb));
 	bt_flag_search->setOnMouseInOutCallback(callback<void>(this, &stel_ui::cbr));
 
-	bt_script = new EditBox("");
+	bt_script = new EditBox();
 	bt_script->setAutoFocus(false);
 	bt_script->setSize(299,24);
 	bt_script->setOnKeyCallback(callback<void>(this, &stel_ui::cbEditScriptKey));
@@ -530,7 +537,8 @@ void stel_ui::cb(void)
 
 	core->FlagSearch			= bt_flag_search->getState();
 	search_win->setVisible(core->FlagSearch);
-	if (bt_flag_goto->getState() && core->selected_object) core->commander->execute_command("flag track_object on");
+	if (bt_flag_goto->getState() && core->selected_object)
+        gotoObject();
 	bt_flag_goto->setState(false);
 
 	if (!bt_flag_quit->getState()) core->quit();
@@ -680,7 +688,7 @@ CTRL + R : Toggle script recording\n")) + string(
 
 	                  ),courierFont);
 
-	help_txtlbl->adjustSize();
+//	help_txtlbl->adjustSize();
 	help_txtlbl->setPos(10,10);
 	help_win = new StdBtWin(_("Help"));
 	help_win->setOpaque(opaqueGUI);
