@@ -724,6 +724,7 @@ void stel_core::load_config_from(const string& confFile)
 	MaxMagNebulaName		= conf.get_double("astro", "max_mag_nebula_name", 99);
 	FlagMilkyWay			= conf.get_boolean("astro:flag_milky_way");
 	MilkyWayIntensity       = conf.get_double("astro","milky_way_intensity",1.);
+	milky_way->set_intensity(MilkyWayIntensity);
 
 	FlagBrightNebulae		= conf.get_boolean("astro:flag_bright_nebulae");
 }
