@@ -484,13 +484,13 @@ void stel_ui::cbEditScriptKey(void)
 
 void stel_ui::cbEditScriptExecute(void)
 {
-     printf("Executing script: %s\n",bt_script->getText().c_str());
-	string text = bt_script->getText();
+	cout << "Executing command: " << bt_script->getText() << endl;
+	string command_string = bt_script->getText();
 
 	bt_script->clearText();
 	bt_script->setEditing(false);
      
-	if (text == "goto")
+	if (command_string == "goto")
 	// Tony - testing
      {
         // this is a specified goto
@@ -511,7 +511,7 @@ void stel_ui::cbEditScriptExecute(void)
      }
      else
      {
-        if (!core->commander->execute_command(bt_script->getText()))
+        if (!core->commander->execute_command(command_string))
     		bt_flag_help_lbl->setLabel(_("Invalid Script command"));
     }
 }
