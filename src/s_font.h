@@ -60,7 +60,7 @@ protected:
     int lineHeight;
     float averageCharLen;
     float ratio;
-    string name;
+    char name[20];
     const static int SPACING = 1;
 };
 
