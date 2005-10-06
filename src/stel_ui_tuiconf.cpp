@@ -189,7 +189,7 @@ void stel_ui::init_tui(void)
 	tui_effect_object_scale->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb_effects));
 	tui_menu_effects->addComponent(tui_effect_object_scale);
 
-	tui_effect_milkyway_intensity = new s_tui::Decimal_item(0, 10, 1, string("5.5 ") + _("Milky Way intensity: "), .5);
+	tui_effect_milkyway_intensity = new s_tui::Decimal_item(0, 100, 1, string("5.5 ") + _("Milky Way intensity: "), .5);
 	tui_effect_milkyway_intensity->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb_effects_milkyway_intensity));
 	tui_menu_effects->addComponent(tui_effect_milkyway_intensity);
 
