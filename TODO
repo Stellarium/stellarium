@@ -6,6 +6,8 @@
 
 - Selected object flashes on windows when tracking
 - Does gettext work on windows now? - DONE
+- Is Windows locale mapped to gettext locale on windows?
+- No daylight savings correction on Windows
 - Date display wrong for negative JD dates
 
 ### Non-code enhancements
@@ -43,7 +45,7 @@ R sidereal day/week key control
   > ftgl looks good
 - error message windows as option to be easier for windows users (script errors in particular)
 R mouse cursor hide after timeout as option - DONE
-R limiting mag for nebulae set in TUI - DONE
+R limiting mag for nebulae labels set in TUI - DONE
 R constellation line color set in TUI
 R remove planet orbits from 'p' key - move to another key and TUI
 R set zoom location
@@ -55,7 +57,7 @@ R meridian line (first press of 'z') - DONE
 - i18n nebulae labels
 - object name pick option (show only label/hint for selected object)
 F cylindrical projection mode.
-T Night vision mode (red Gui) - DONE
+T Night vision mode (red Gui) - DONE <-- Need more descriptive flag names (like night_vision_ui instead of night) R
 - Create a directory dedicated to landscapes with one landscapeXX.ini per landscape so that users can install extra landscapes just be copying them there without editing landscape.ini file.
 - other star catalogs incl double stars and variable stars
 
