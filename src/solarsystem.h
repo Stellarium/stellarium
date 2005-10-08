@@ -36,9 +36,9 @@ public:
 	void update(int delta_time, navigator* nav);
 	
 	// Draw all the elements of the solar system
-    void draw(planet *selected, int hint_ON, Projector * du, const navigator * nav, 
+    void draw(planet *selected, bool hint_ON, Projector * du, const navigator * nav, 
 			  const tone_reproductor* eye, bool _gravity_label, 
-			  int flag_point, int flag_orbits, int flag_trails);
+			  bool flag_point, bool flag_orbits, bool flag_trails);
 	
 	// Load the bodies data from a file
 	void load(const string& planetfile);
@@ -68,10 +68,10 @@ public:
 	void set_sky_locale(string _sky_locale);
 	void start_trails(void);
 	void end_trails(void);
-	void set_trail_color(const Vec3f _color);
+	void set_trail_color(const Vec3f& c)  {planet::set_trail_color(c);}
 	void update_trails(const navigator* nav);
 	void set_object_scale(float scale);
-    // Tony for autoCOmplete
+
 	vector<string> getNames(void);
 private:
 	planet* sun;
