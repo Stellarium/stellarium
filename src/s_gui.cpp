@@ -1445,11 +1445,9 @@ void ScrollBar::draw(void)
 	glPopMatrix();
 
 	stringstream ss;
-	string p;
 	ss.precision(0);
 	ss << value;
-	p = ss.str();
-	painter.print(pos[0]+2, pos[1]+2, p);
+	painter.print(pos[0]+2, pos[1]+2, ss.str());
 }
 
 bool ScrollBar::onClic(int x, int y, S_GUI_VALUE bt, S_GUI_VALUE state)
