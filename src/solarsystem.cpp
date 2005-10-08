@@ -248,9 +248,9 @@ void SolarSystem::compute_trans_matrices(double date)
 
 // Draw all the elements of the solar system
 // We are supposed to be in heliocentric coordinate
-void SolarSystem::draw(planet* selected, int hint_ON, Projector * prj, const navigator * nav, 
+void SolarSystem::draw(planet* selected, bool hint_ON, Projector * prj, const navigator * nav, 
 					   const tone_reproductor* eye, bool _gravity_label, 
-					   int flag_point, int flag_orbits, int flag_trails)
+					   bool flag_point, bool flag_orbits, bool flag_trails)
 {
 
 	// if a planet is selected and orbits are on, fade out non-selected ones
@@ -477,16 +477,6 @@ void SolarSystem::end_trails(void) {
   }
 
 }
-
-void SolarSystem::set_trail_color(const Vec3f _color) {
-
-  vector<planet*>::iterator iter;      
-  for( iter = system_planets.begin(); iter < system_planets.end(); iter++ ) {
-    (*iter)->set_trail_color(_color);
-  }
-
-}
-
 
 // draws earth shadow overlapping the moon using stencil buffer
 // umbra and penumbra are sized separately for accuracy
