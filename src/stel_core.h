@@ -104,7 +104,6 @@ public:
 	int set_sky_culture(string _culture_dir);
 	
 	//! Set the locale type
-	void set_sky_locale(string _locale);
 	void set_system_locale_by_code(const string& _locale); // ie fr_FR
 	void set_system_locale_by_name(const string& _locale); // ie fra
 
@@ -259,6 +258,7 @@ private:
 	int FlagStarSciName;
 	float MaxMagStarName;
 	float MaxMagStarSciName;
+	float NebulaScale;
 	float StarScale;
 	float StarMagScale;
 	float StarTwinkleAmount;
