@@ -84,8 +84,8 @@ public:
     virtual ~planet();
 
 	// Return the information string "ready to print" :)
-	void get_info_string(char * s, const navigator * nav) const;
-	void get_short_info_string(char * s, const navigator * nav) const;
+	string get_info_string(const navigator * nav) const;
+	string get_short_info_string(const navigator * nav) const;
 	virtual double get_close_fov(const navigator * nav) const;
 	virtual double get_satellites_fov(const navigator * nav) const;
 	virtual float get_mag(const navigator * nav) const {return compute_magnitude(nav);}
@@ -159,7 +159,7 @@ public:
 
 	void update_trail(const navigator* nav);
 	void draw_trail(const navigator * nav, const Projector* prj);
-	void set_trail_color(const Vec3f _color);
+	static void set_trail_color(const Vec3f& c) { trail_color = c; }
 	void start_trail(void);
 	void end_trail(void);
 
@@ -234,7 +234,7 @@ protected:
 	static bool gravity_label;
 	static Vec3f label_color;
 	static Vec3f orbit_color;
-	Vec3f trail_color;
+	static Vec3f trail_color;
 
 	list<TrailPoint>trail;
 	bool trail_on;  // accumulate trail data if true
