@@ -26,6 +26,7 @@
 #include "bytes.h"
 #include "stellarium.h"
 #include "navigator.h"
+#include "stel_utility.h"
 
 #define RADIUS_STAR 1.
 
@@ -77,7 +78,7 @@ void Hip_Star_mgr::load_data(const string& hipCatFile, LoadingBar& lb)
 {
 	char tmpstr[512];
 	
-    printf(_("Loading Hipparcos star data "));
+    printf(_("Loading Hipparcos star data..."));
     FILE * hipFile;
     hipFile = NULL;
 
@@ -112,12 +113,12 @@ void Hip_Star_mgr::load_data(const string& hipCatFile, LoadingBar& lb)
 		if (!(i%2000) || (i == StarArraySize-1))
 		{
 			// Draw loading bar
-			snprintf(tmpstr, 512, _("Loading Hipparcos catalog: %d/%d"), i+1, StarArraySize);
+			snprintf(tmpstr, 512, _("Loading Hipparcos catalog: %d/%d"), i == StarArraySize-1 ? StarArraySize: i, StarArraySize);
 			lb.SetMessage(tmpstr);
 			lb.Draw((float)i/StarArraySize);
 		}
 		
-		e = &(StarArray[i]);
+		e = &StarArray[i];
 		e->HP=(unsigned int)i;
         if (!e->read(hipFile))
         {
@@ -129,7 +130,7 @@ void Hip_Star_mgr::load_data(const string& hipCatFile, LoadingBar& lb)
     }
     fclose(hipFile);
 
-	printf("(%d stars loaded).\n", StarArraySize-data_drop);
+	printf("(%d stars loaded [%d dropped]).\n", StarArraySize-data_drop,data_drop);
 
     // sort stars by magnitude for faster rendering
     for(int i=0;i < HipGrid.getNbPoints();i++) {
@@ -170,7 +171,7 @@ int Hip_Star_mgr::load_common_names(const string& commonNameFile)
 	do
 	{
 		sscanf(line,"%u",&tmp);
-		star = search(tmp);
+		star = searchHP(tmp);
 		if (star)
 		{
 			char c=line[0];
@@ -234,7 +235,7 @@ void Hip_Star_mgr::load_sci_names(const string& sciNameFile)
 	do
 	{
 		sscanf(line,"%u",&tmp);
-		star = search(tmp);
+		star = searchHP(tmp);
 		if (star)
 		{
 			char c=line[0];
@@ -405,10 +406,12 @@ vector<stel_object*> Hip_Star_mgr::search_around(Vec3d v, double lim_fov)
 }
 
 // Search the star by HP number
-Hip_Star * Hip_Star_mgr::search(unsigned int _HP)
+Hip_Star * Hip_Star_mgr::searchHP(unsigned int _HP)
 {
-	if (_HP < (unsigned int)StarArraySize && StarFlatArray[_HP] && StarFlatArray[_HP]->HP == _HP)
+	if (_HP != 0 && _HP < (unsigned int)StarArraySize && StarFlatArray[_HP] 
+		&& StarFlatArray[_HP]->HP == _HP)
 		return StarFlatArray[_HP];
+    return NULL;
     return NULL;
 }
 

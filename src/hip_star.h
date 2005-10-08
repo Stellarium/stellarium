@@ -29,10 +29,11 @@
 #include "stel_object.h"
 #include "tone_reproductor.h"
 #include "projector.h"
+#include "stel_utility.h"
 
 class Hip_Star : public stel_object
 {
-friend class Hip_Star_mgr;
+	friend class Hip_Star_mgr;
 	friend class Constellation;  // for xyz coordinate
 
 public:
@@ -43,8 +44,8 @@ public:
 	void draw_point(void);	// Draw the star as a point
     void draw_name(const s_font * star_font);
 	virtual Vec3f get_RGB(void) const {return RGB;}
-	virtual void get_info_string(char * s, const navigator * nav = NULL) const;
-	virtual void get_short_info_string(char * s, const navigator * nav = NULL) const;
+	virtual string get_info_string(const navigator * nav = NULL) const;
+	virtual string get_short_info_string(const navigator * nav = NULL) const;
 	virtual STEL_OBJECT_TYPE get_type(void) const {return STEL_OBJECT_STAR;}
 	virtual Vec3d get_earth_equ_pos(const navigator * nav = NULL) const {return nav->prec_earth_equ_to_earth_equ(XYZ);}
 	virtual Vec3d get_prec_earth_equ_pos(void) const {return XYZ;}
@@ -73,6 +74,7 @@ private:
 	static tone_reproductor* eye;
 	static Projector* proj;
 	static bool gravity_label;
+	static Vec3f circle_color, label_color;
 };
 
 struct Hip_Star_Mag_Comparer : public std::binary_function<Hip_Star*,Hip_Star*,bool> {
