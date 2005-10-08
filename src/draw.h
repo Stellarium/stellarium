@@ -49,6 +49,7 @@ public:
 	void update(int delta_time) {fader.update(delta_time);}
 	void set_fade_duration(float duration) {fader.set_duration((int)(duration*1000.f));}
 	void show(bool b){fader = b;}
+	void set_top_transparancy(bool b) { transparent_top= b; }
 private:
 	unsigned int nb_meridian;
 	unsigned int nb_parallel;
@@ -131,7 +132,7 @@ public:
 	void draw(tone_reproductor * eye, const Projector* prj, const navigator* nav) const;
 	void set_intensity(float _intensity);
 	float get_intensity() { return intensity; };
-	void set_texture(const string& tex_file);
+	void set_texture(const string& tex_file, bool blend = false);
 private:
 	float radius;
 	s_texture* tex;
