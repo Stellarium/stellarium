@@ -487,10 +487,10 @@ MilkyWay::~MilkyWay()
 	tex = NULL;
 }
 
-void MilkyWay::set_texture(const string& tex_file)
+void MilkyWay::set_texture(const string& tex_file, bool blend)
 {
 	if (tex) delete tex;
-	tex = new s_texture(tex_file,TEX_LOAD_TYPE_PNG_SOLID_REPEAT);
+ 	tex = new s_texture(tex_file,!blend ? TEX_LOAD_TYPE_PNG_SOLID_REPEAT : TEX_LOAD_TYPE_PNG_BLEND3);
 
 	// big performance improvement to cache this
 	tex_avg_luminance = tex->get_average_luminance();
