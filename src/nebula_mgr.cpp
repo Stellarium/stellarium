@@ -46,9 +46,9 @@ Nebula_mgr::~Nebula_mgr()
 }
 
 // read from stream
-int Nebula_mgr::read(float font_size, const string& font_name, const string& fileName, LoadingBar& lb)
+bool Nebula_mgr::read(float font_size, const string& font_name, const string& fileName, LoadingBar& lb)
 {
-	printf(_("Loading nebulas data "));
+	printf(_("Loading messier nebulas data "));
 	
 	std::ifstream inf(fileName.c_str());
 	if (!inf.is_open())
@@ -80,8 +80,7 @@ int Nebula_mgr::read(float font_size, const string& font_name, const string& fil
 		lb.Draw((float)current/total);
 		
 		Nebula * e = new Nebula;
-		int temp = e->read(record);
-		if (!temp) // reading error
+		if (!e->read(record)) // reading error
 		{
 			printf("Error while parsing nebula %s\n", e->name.c_str());
 			delete e;
@@ -100,9 +99,10 @@ int Nebula_mgr::read(float font_size, const string& font_name, const string& fil
 		return(1);
 	}
 	
-	Nebula::tex_circle = new s_texture("neb");   // Load circle texture
+	if (!Nebula::tex_circle) 
+		Nebula::tex_circle = new s_texture("neb");   // Load circle texture
 	
-	return 0;
+	return true;
 }
 
 // Draw all the Nebulaes
@@ -148,13 +148,12 @@ void Nebula_mgr::draw(int hint_ON, Projector* prj, const navigator * nav, tone_r
 // search by name
 stel_object * Nebula_mgr::search(const string& name)
 {
-    vector<Nebula *>::iterator iter;
-
-    for(iter=neb_array.begin();iter!=neb_array.end();iter++) {
-      if ((*iter)->name == name) return (*iter);
-    }
-
-    return NULL;
+	string n = string(name);
+    for (string::size_type i=0;i<n.length();++i)
+	{
+		if (n[i]=='_') n[i]=' ';
+	}	
+	return _search(n);
 }
 
 
@@ -200,4 +199,16 @@ vector<stel_object*> Nebula_mgr::search_around(Vec3d v, double lim_fov)
         iter++;
     }
 	return result;
+}
+
+// search by name
+stel_object * Nebula_mgr::_search(const string& name)
+{
+    vector<Nebula *>::iterator iter;
+    for(iter=neb_array.begin();iter!=neb_array.end();iter++) 
+	{
+		if ((*iter)->name == name) return (*iter);
+    }
+
+    return NULL;
 }

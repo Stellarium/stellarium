@@ -42,8 +42,8 @@ public:
 	void draw_pointer(int delta_time, const Projector* prj, const navigator * nav);
 
 	//! Write information about the object in char* s 
-	virtual void get_info_string(char * s, const navigator * nav) const;
-	virtual void get_short_info_string(char * s, const navigator * nav) const;
+	virtual string get_info_string(const navigator * nav) const;
+	virtual string get_short_info_string(const navigator * nav) const;
 
 	virtual STEL_OBJECT_TYPE get_type(void) const = 0;
 	virtual Vec3d get_earth_equ_pos(const navigator * nav) const = 0;

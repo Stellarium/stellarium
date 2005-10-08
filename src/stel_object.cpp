@@ -116,14 +116,14 @@ void stel_object::draw_pointer(int delta_time, const Projector* prj, const navig
 }
 
 //! Write information about the object in char* s 
-void stel_object::get_info_string(char * s, const navigator * nav) const
+string stel_object::get_info_string(const navigator * nav) const
 {
-	sprintf(s,"No info for this object...");
+	return "No info for this object...";
 }
 
-void stel_object::get_short_info_string(char * s, const navigator * nav) const
+string stel_object::get_short_info_string(const navigator * nav) const
 {
-	sprintf(s,"No info");
+	return "No info";
 }
 
 void stel_object::init_textures(void)
