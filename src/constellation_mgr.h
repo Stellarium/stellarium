@@ -30,7 +30,7 @@ class Constellation_mgr
 {
 public:
     Constellation_mgr(Hip_Star_mgr *_hip_stars);
-    virtual ~Constellation_mgr();
+    ~Constellation_mgr();
     void draw(Projector* prj, navigator* nav) const;
 	void update(int delta_time);
 	void load_names(const string& names_file);
@@ -48,8 +48,8 @@ public:
 	bool get_flag_isolate_selected(void) { return isolateSelected;}
 
 	void set_flag_gravity_label(bool g) {Constellation::gravity_label = g;}
-	void set_line_color(const Vec3f& c) {line_color=c;}
-	void set_label_color(const Vec3f& c) {label_color=c;}
+	void set_line_color(const Vec3f& c) {Constellation::set_line_color(c);}
+	void set_label_color(const Vec3f& c) {Constellation::set_label_color(c);}
 	void set_font(float font_size, const string& font_name);
 	void set_selected(const string& shortname) {set_selected_const(find_from_short_name(shortname));}
 	void set_selected(const Hip_Star * s) {if (!s) set_selected_const(NULL); else set_selected_const(is_star_in(s));}
@@ -67,9 +67,8 @@ private:
     Constellation* is_star_in(const Hip_Star *) const;
     Constellation* find_from_short_name(const string& shortname) const;		
     vector<Constellation*> asterisms;
-    s_font * asterFont;
-    Vec3f line_color, label_color;
-    Hip_Star_mgr * hipStarMgr;
+    s_font *asterFont;
+    Hip_Star_mgr *hipStarMgr;
 	Constellation* selected;
 	bool isolateSelected;
 };
