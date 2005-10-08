@@ -117,7 +117,7 @@ void stel_core::init(void)
 	CardinalsFontSize = 30.f;
 	LoadingBarFontSize = 12.f;
 	
-//	glEnable(GL_LINE_SMOOTH);
+	// glEnable(GL_LINE_SMOOTH);
 	
 	// Set textures directory and suffix
 	s_texture::set_texDir(TextureDir);
@@ -393,7 +393,6 @@ void stel_core::draw(int delta_time)
 	asterisms->draw(projection, navigation);
 
 	// Draw the nebula if they are visible
-	//Tony - added "FlagNebulaLongName"
 	if (FlagNebula) nebulas->draw(FlagNebulaLongName, projection, navigation, tone_converter, (sky_brightness<0.11),
 								  FlagGravityLabels, MaxMagNebulaName, FlagBrightNebulae);
 
@@ -414,6 +413,7 @@ void stel_core::draw(int delta_time)
 	// Draw the equatorial grid
 	equ_grid->show(FlagEquatorialGrid);
 	equ_grid->draw(projection);
+
 	// Draw the altazimutal grid
 	azi_grid->show(FlagAzimutalGrid);
 	azi_grid->draw(projection);
@@ -421,9 +421,11 @@ void stel_core::draw(int delta_time)
 	// Draw the celestial equator line
 	equator_line->show(FlagEquatorLine);
 	equator_line->draw(projection);
+
 	// Draw the ecliptic line
 	ecliptic_line->show(FlagEclipticLine);
 	ecliptic_line->draw(projection);
+	
 	// Draw the meridian line
 	meridian_line->show(FlagMeridianLine);
 	meridian_line->draw(projection);
@@ -606,6 +608,7 @@ void stel_core::load_config_from(const string& confFile)
 	set_system_locale_by_name(skyloc->clean_sky_locale_name(locale));  // looks at environment locale if "system_default"
 
 	// Star section
+	NebulaScale			= conf.get_double ("stars:nebula_scale");
 	StarScale			= conf.get_double ("stars:star_scale");
 	if(ssystem) ssystem->set_object_scale(StarScale);  // if reload config
 
@@ -684,10 +687,10 @@ void stel_core::load_config_from(const string& confFile)
 	}
 
 	// Landscape section
-	FlagLandscape		= conf.get_boolean("landscape", "flag_landscape", 
+	FlagLandscape			= conf.get_boolean("landscape", "flag_landscape", 
 										   conf.get_boolean("landscape", "flag_ground", 1));  // name change
-	FlagFog				= conf.get_boolean("landscape:flag_fog");
-	FlagAtmosphere		= conf.get_boolean("landscape:flag_atmosphere");
+	FlagFog					= conf.get_boolean("landscape:flag_fog");
+	FlagAtmosphere			= conf.get_boolean("landscape:flag_atmosphere");
 	AtmosphereFadeDuration  = conf.get_double("landscape","atmosphere_fade_duration",1.5);
 
 	// Viewing section
@@ -708,8 +711,8 @@ void stel_core::load_config_from(const string& confFile)
 	MoonScale				= conf.get_double ("viewing","moon_scale",5.);
 	ConstellationArtIntensity       = conf.get_double("viewing","constellation_art_intensity", 0.5);
 	ConstellationArtFadeDuration    = conf.get_double("viewing","constellation_art_fade_duration",2.);
-	FlagNight    = conf.get_boolean("viewing:flag_night");
-	FlagUseCommonNames    = conf.get_boolean("viewing:flag_use_common_names");
+	FlagNight    			= conf.get_boolean("viewing:flag_night");
+	FlagUseCommonNames		= conf.get_boolean("viewing:flag_use_common_names");
 
 	// Astro section
 	FlagStars				= conf.get_boolean("astro:flag_stars");
