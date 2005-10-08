@@ -33,7 +33,7 @@ Constellation_mgr::Constellation_mgr(Hip_Star_mgr *_hip_stars) :
 	selected(NULL)
 {
 	assert(hipStarMgr);
-	isolateSelected = false; // Tony - flag for isolating the constellations 
+	isolateSelected = false;
 }
 
 void Constellation_mgr::set_font(float font_size, const string& font_name)
@@ -137,7 +137,6 @@ void Constellation_mgr::load_lines_and_art(const string & fileName, const string
 		}
 
 		// Draw loading bar
-		//Tony - added "+1" to ensure art finsihes at last entry
 		sprintf(tmpstr, _("Loading Constellation Art: %d/%d"), current+1, total);
 		lb.SetMessage(tmpstr);
 		lb.Draw((float)(current+1)/total);
@@ -153,9 +152,9 @@ void Constellation_mgr::load_lines_and_art(const string & fileName, const string
 			cons->art_tex = new s_texture(texfile);
 			texSize = cons->art_tex->getSize();
 
-			Vec3f s1 = hipStarMgr->search(hp1)->get_prec_earth_equ_pos();
-			Vec3f s2 = hipStarMgr->search(hp2)->get_prec_earth_equ_pos();
-			Vec3f s3 = hipStarMgr->search(hp3)->get_prec_earth_equ_pos();
+			Vec3f s1 = hipStarMgr->searchHP(hp1)->get_prec_earth_equ_pos();
+			Vec3f s2 = hipStarMgr->searchHP(hp2)->get_prec_earth_equ_pos();
+			Vec3f s3 = hipStarMgr->searchHP(hp3)->get_prec_earth_equ_pos();
 
 			// To transform from texture coordinate to 2d coordinate we need to find X with XA = B
 			// A formed of 4 points in texture coordinate, B formed with 4 points in 3d coordinate
@@ -181,7 +180,6 @@ void Constellation_mgr::load_lines_and_art(const string & fileName, const string
 	}
 	fclose(fic);
 }
-
 
 void Constellation_mgr::draw(Projector * prj, navigator * nav) const
 {
@@ -214,12 +212,11 @@ void Constellation_mgr::draw_art(Projector * prj, navigator * nav) const
 // Draw constellations lines
 void Constellation_mgr::draw_lines(Projector * prj) const
 {
-	glDisable(GL_TEXTURE_2D);
-	glEnable(GL_BLEND);
+
 	vector < Constellation * >::const_iterator iter;
 	for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
 	{
-		(*iter)->draw_optim(prj, line_color);
+		(*iter)->draw_optim(prj);
 	}
 }
 
@@ -228,13 +225,14 @@ void Constellation_mgr::draw_names(Projector * prj) const
 {
 	glEnable(GL_BLEND);
 	glEnable(GL_TEXTURE_2D);
-
+	glBlendFunc(GL_ONE, GL_ONE);
+	
 	vector < Constellation * >::const_iterator iter;
 	for (iter = asterisms.begin(); iter != asterisms.end(); iter++)
 	{
 		// Check if in the field of view
 		if (prj->project_prec_earth_equ_check((*iter)->XYZname, (*iter)->XYname))
-			(*iter)->draw_name(asterFont, prj, label_color);
+			(*iter)->draw_name(asterFont, prj);
 	}
 }
 
