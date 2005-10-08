@@ -126,7 +126,13 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 		float scale = str_to_double(args["star_scale"]);
 		stcore->StarScale = scale;
 		stcore->ssystem->set_object_scale(scale);
-	} else if(args["star_twinkle_amount"]!="") stcore->StarTwinkleAmount = str_to_double(args["star_twinkle_amount"]);
+	} 
+	else if(args["nebula_scale"]!="")
+	{
+		float scale = str_to_double(args["nebula_scale"]);
+		stcore->NebulaScale = scale;
+	} 
+	else if(args["star_twinkle_amount"]!="") stcore->StarTwinkleAmount = str_to_double(args["star_twinkle_amount"]);
     else if(args["time_zone"]!="") stcore->observatory->set_custom_tz_name(args["time_zone"]);
     else if(args["milky_way_intensity"]!="") {
 		stcore->MilkyWayIntensity = str_to_double(args["milky_way_intensity"]);
@@ -168,7 +174,7 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
       unsigned int hpnum;
       std::istringstream istr(args["hp"]);
       istr >> hpnum;
-      stcore->selected_object = stcore->hip_stars->search(hpnum);
+      stcore->selected_object = stcore->hip_stars->searchHP(hpnum);
       stcore->asterisms->set_selected((Hip_Star*)stcore->selected_object);
       stcore->selected_planet=NULL;
     } else if(args["planet"]!=""){
@@ -182,7 +188,7 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
       unsigned int hpnum; // Tony - highlight the constellation and the first star in the list
       stcore->asterisms->set_selected(args["constellation"]);
       hpnum = stcore->asterisms->get_first_selected_HP();
-      stcore->selected_object = stcore->hip_stars->search(hpnum);
+      stcore->selected_object = stcore->hip_stars->searchHP(hpnum);
       stcore->asterisms->set_selected((Hip_Star*)stcore->selected_object);
       stcore->selected_planet=NULL;
     }
