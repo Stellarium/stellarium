@@ -22,6 +22,9 @@
 
 bool Constellation::gravity_label = false;
 
+Vec3f Constellation::line_color = Vec3f(.4,.4,.8);
+Vec3f Constellation::label_color = Vec3f(.4,.4,.8);
+
 Constellation::Constellation() : asterism(NULL), art_tex(NULL)
 {
 }
@@ -30,6 +33,7 @@ Constellation::~Constellation()
 {   
 	if (asterism) delete[] asterism;
     asterism = NULL;
+    
 	if (art_tex) delete art_tex;
 	art_tex = NULL;
 }
@@ -49,6 +53,7 @@ bool Constellation::read(const string& record, Hip_Star_mgr * _VouteCeleste)
 		
 	// make short_name uppercase for case insensitive searches
 	for(int a=0; a<3; a++) short_name[a] = ::toupper(short_name[a]);
+	name = string(short_name);
 
     asterism = new Hip_Star*[nb_segments*2];
     for (unsigned int i=0;i<nb_segments*2;++i)
@@ -60,7 +65,7 @@ bool Constellation::read(const string& record, Hip_Star_mgr * _VouteCeleste)
 			return(false);
 		}
 
-        asterism[i]=_VouteCeleste->search(HP);
+        asterism[i]=_VouteCeleste->searchHP(HP);
 		if (!asterism[i])
 		{
 			printf("Error in Constellation %s asterism : can't find star HP=%d\n",name.c_str(),HP);
@@ -76,25 +81,23 @@ bool Constellation::read(const string& record, Hip_Star_mgr * _VouteCeleste)
 	return true;
 }
 
-
 // Draw the Constellation lines
-void Constellation::draw(Projector* prj, const Vec3f& lines_color) const
+void Constellation::draw(Projector* prj) const
 {
-	glDisable(GL_TEXTURE_2D);
-    glDisable(GL_BLEND);
     prj->set_orthographic_projection();	// set 2D coordinate
-
-	draw_optim(prj, lines_color);
-	
+	draw_optim(prj);
 	prj->reset_perspective_projection();
 }
 
-
 // Draw the lines for the Constellation using the coords of the stars
 // (optimized for use thru the class Constellation_mgr only)
-void Constellation::draw_optim(Projector* prj, const Vec3f& line_color) const
+void Constellation::draw_optim(Projector* prj) const
 {
+	glDisable(GL_TEXTURE_2D);
+    glDisable(GL_BLEND);
+
 	if(!line_fader.get_interstate()) return;
+
 	glColor3fv(line_color*line_fader.get_interstate());
 	Vec3d star1;
 	Vec3d star2;
@@ -110,9 +113,8 @@ void Constellation::draw_optim(Projector* prj, const Vec3f& line_color) const
 	}
 }
 
-
 // Draw the name
-void Constellation::draw_name(s_font * constfont, Projector* prj, Vec3f label_color) const
+void Constellation::draw_name(s_font * constfont, Projector* prj) const
 {
 	if(!name_fader.get_interstate()) return;
 	glColor3fv(label_color*name_fader.get_interstate());
