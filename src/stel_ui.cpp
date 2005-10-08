@@ -1246,9 +1246,9 @@ void stel_ui::gui_update_widgets(int delta_time)
 // Update the infos about the selected object in the TextLabel widget
 void stel_ui::updateInfoSelectString(void)
 {
-	static char objectInfo[300];
-	objectInfo[0]='\0';
-	core->selected_object->get_info_string(objectInfo, core->navigation);
+	string objectInfo = "";
+	
+	objectInfo = core->selected_object->get_info_string(core->navigation);
 	info_select_txtlbl->setLabel(objectInfo);
 	if (core->FlagShowSelectedObjectInfo) info_select_ctr->setVisible(1);
 	if (core->selected_object->get_type()==STEL_OBJECT_NEBULA)

@@ -36,6 +36,9 @@ tone_reproductor* Hip_Star::eye = NULL;
 Projector* Hip_Star::proj = NULL;
 bool Hip_Star::gravity_label = false;
 
+Vec3f Hip_Star::circle_color = Vec3f(0.f,0.f,0.f);
+Vec3f Hip_Star::label_color = Vec3f(.8f,.8f,.8f);
+
 Hip_Star::Hip_Star()
 {
 }
@@ -44,41 +47,59 @@ Hip_Star::~Hip_Star()
 { 
 }
 
-void Hip_Star::get_info_string(char * s, const navigator * nav) const
+string Hip_Star::get_info_string(const navigator * nav) const
 {
-	static char tempStr[20];
-	sprintf(tempStr,"HP %d",HP);
-	string greekName;
-
-	if (SciName == "")
-		greekName = "";
-	else
-		greekName = translateGreek(SciName, false);
-
-	static char tempLy[20];
-	if(Distance) sprintf(tempLy, "%.1f", Distance);
-	else tempLy[0] = 0; 
+	stringstream ss;
 
 	float tempDE, tempRA;
 	rect_to_sphe(&tempRA,&tempDE,XYZ);
-	// Hip = Hipparcos, RA=Right Ascention, DE=Declinaison, Mag=Magnitude
-	sprintf(s,_("Name : %s%s%s\nRA : %s\nDE : %s\nMagnitude : %.2f\nDistance : %s Light Years\nHip : %.4d\n"),
-		CommonName.c_str(), CommonName=="" ? "" : " ",
-		SciName=="" ? tempStr : greekName.c_str(), print_angle_hms(tempRA*180./M_PI).c_str(),
-			print_angle_dms_stel(tempDE*180./M_PI).c_str(), Mag, tempLy, HP);
+
+	if (CommonName!="" || SciName!="")
+	{
+		ss << "Name : " << CommonName << string(CommonName == "" ? "" : " ");
+		ss << string (SciName=="" ? "" : translateGreek(SciName,false)) << endl; 
+	}
+	else 
+	{
+		ss << "HP " << HP << endl;
+	}
+	
+	ss << "Cat : HP:";
+	if (HP > 0)	ss << HP; else ss << "-";
+
+	ss << endl;
+	ss << "RA : " << print_angle_hms(tempRA*180./M_PI) << endl;
+	ss << "DE : " << print_angle_dms_stel(tempDE*180./M_PI) << endl;
+
+	ss.setf(ios::fixed);
+	ss.precision(2);
+	ss << "Magnitude : " << Mag << endl;
+	ss << "Distance : ";
+	
+	ss.precision(1);
+	if(Distance) ss << Distance; else ss << "-";
+	ss << " Light Years" << endl;
+	
+	return ss.str();
 }
 
-void Hip_Star::get_short_info_string(char * s, const navigator * nav) const
+string Hip_Star::get_short_info_string(const navigator * nav) const
 {
-	static char tempStr[20];
-	sprintf(tempStr,"HP %d",HP);
+	stringstream ss;
+	
+	if (CommonName!="" || SciName!="")
+	{
+		if (CommonName == "") ss << SciName; else ss << CommonName; 
+	}
+	else 
+		ss << "HP " << HP;
 
-	static char tempLy[20];
-	if(Distance) sprintf(tempLy, "%.1f ly", Distance);
-	else tempLy[0] = 0; 
+	ss.setf(ios::fixed);
+	ss.precision(1);
+	ss << ": mag " << Mag;
+	if(Distance) ss << Distance << "ly";
 
-	if (CommonName!="" || SciName!="") sprintf(s,_("%s: mag %.1f %s"), CommonName=="" ? SciName.c_str() : CommonName.c_str(), Mag, tempLy);
-	else sprintf(s,_("%s: mag %.1f %s"), tempStr, Mag, tempLy);
+	return ss.str();
 }
 
 // Read datas in binary catalog and compute x,y,z;

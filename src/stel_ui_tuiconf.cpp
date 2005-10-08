@@ -64,12 +64,12 @@ void stel_ui::draw_gravity_ui(void)
 
 	if (core->selected_object && core->FlagShowTuiShortObjInfo)
 	{
-	    static char str[255];	// TODO use c++ string for get_short_info_string() func
-		core->selected_object->get_short_info_string(str, core->navigation);
+	    string info = "";
+		info = core->selected_object->get_short_info_string(core->navigation);
 		if (core->selected_object->get_type()==STEL_OBJECT_NEBULA) glColor3fv(core->NebulaLabelColor);
 		if (core->selected_object->get_type()==STEL_OBJECT_PLANET) glColor3fv(core->PlanetNamesColor);
 		if (core->selected_object->get_type()==STEL_OBJECT_STAR) glColor3fv(core->selected_object->get_RGB());
-		core->projection->print_gravity180(baseFont, x+shift - 30, y+shift - 38, str, 0);
+		core->projection->print_gravity180(baseFont, x+shift - 30, y+shift - 38, info, 0);
 	}
 }
 

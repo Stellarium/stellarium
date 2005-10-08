@@ -782,9 +782,16 @@ void stel_ui::doSearchCommand(string _command, string _error)
 void stel_ui::doNebulaSearch(void)
 {
     string objectName = string((char*)nebula_edit->getText().c_str());
+    string originalName = objectName;
+    
     transform(objectName.begin(), objectName.end(), objectName.begin(), (int(*)(int))toupper);
+    for (string::size_type i=0;i<objectName.length();++i)
+	{
+		if (objectName[i]==' ') objectName[i]='_';
+	}
+
     string command = string("select nebula " + objectName);
-    string error = string("Nebula '" + objectName + "' not found");
+    string error = string("Nebula '" + originalName + "' not found");
     
     doSearchCommand(command, error);
     nebula_edit->clearText();

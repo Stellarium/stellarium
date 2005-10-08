@@ -47,8 +47,8 @@ public:
 	void set_flag_names(bool b) {names_fader=b;}
 	void set_limiting_mag(float _mag) {limiting_mag=_mag;}
 	float get_limiting_mag() {return limiting_mag;}
-    Hip_Star * search(Vec3f Pos);  	// Search the star by position
-	Hip_Star * search(unsigned int);	// Search the star by HP number
+    Hip_Star *search(Vec3f Pos);  		// Search the star by position
+	Hip_Star *searchHP(unsigned int);	// Search the star by HP number
 	// Return a stl vector containing the stars located inside the lim_fov circle around position v
 	vector<stel_object*> search_around(Vec3d v, double lim_fov);
 	vector<string> getNames(void) { return lstCommonNames; }

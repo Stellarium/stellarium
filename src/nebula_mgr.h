@@ -35,14 +35,14 @@ public:
 	virtual ~Nebula_mgr();
 	
 	// Read the Nebulas data from a file
-	int read(float font_size, const string& font_name, const string& fileName, LoadingBar& lb);
+	bool read(float font_size, const string& font_name, const string& fileName, LoadingBar& lb);
 	
 	// Draw all the Nebulas
-	void draw(int hint_ON,Projector* prj, const navigator * nav, tone_reproductor* eye, bool draw_tex, // Tony
+	void draw(int hint_ON,Projector *prj, const navigator *nav, tone_reproductor *eye, bool draw_tex, // Tony
 		bool _gravity_label, float max_mag_name, bool bright_nebulae); 
 	
-	stel_object * search(const string& name);  // search by name
-	stel_object * search(Vec3f Pos);    // Search the Nebulae by position
+	stel_object *search(const string& name);  // search by name
+	stel_object *search(Vec3f Pos);    // Search the Nebulae by position
 	
 	void set_label_color(const Vec3f& c) {Nebula::label_color = c;}
 	void set_circle_color(const Vec3f& c) {Nebula::circle_color = c;}
@@ -56,6 +56,7 @@ public:
 	vector<stel_object*> search_around(Vec3d v, double lim_fov);
 
 private:
+	stel_object *_search(const string& name);  // search by name such as NGC_1310
 	FILE * nebula_fic;
 	vector<Nebula*> neb_array;	// The nebulas list
 	linear_fader hints_fader;

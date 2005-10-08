@@ -52,8 +52,8 @@ public:
     Nebula();
     virtual ~Nebula();
 
-	virtual void get_info_string(char *, const navigator * nav = NULL) const;
-	virtual void get_short_info_string(char *, const navigator * nav = NULL) const;
+	virtual string get_info_string(const navigator * nav = NULL) const;
+	virtual string get_short_info_string(const navigator * nav = NULL) const;
 	virtual STEL_OBJECT_TYPE get_type(void) const {return STEL_OBJECT_NEBULA;}
 	virtual Vec3d get_earth_equ_pos(const navigator * nav = NULL) const {return nav->prec_earth_equ_to_earth_equ(XYZ);}
 	virtual double get_close_fov(const navigator * nav = NULL) const;
@@ -76,8 +76,9 @@ protected:
 
 private:
 	unsigned int NGC_nb;			// NGC catalog number
+	unsigned int IC_nb;				// IC catalog number
 	string name;					// Nebula name
-	string longname;				// Tony Nebula name & description
+	string longname;				// Nebula name & description
 	string credit;					// Nebula image credit
 	float mag;						// Apparent magnitude
 	float angular_size;				// Angular size in radians
@@ -99,6 +100,7 @@ private:
 	static bool gravity_label;
 
 	static Vec3f label_color, circle_color;
+	static float nebula_scale;
 };
 
 #endif // _NEBULA_H_

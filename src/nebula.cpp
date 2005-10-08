@@ -30,6 +30,7 @@
 
 s_texture * Nebula::tex_circle = NULL;
 s_font* Nebula::nebula_font = NULL;
+float Nebula::nebula_scale = 1.f;
 bool Nebula::gravity_label = false;
 float Nebula::hints_brightness = 0;
 Vec3f Nebula::label_color = Vec3f(0.4,0.3,0.5);
@@ -39,6 +40,8 @@ Vec3f Nebula::circle_color = Vec3f(0.8,0.8,0.1);
 Nebula::Nebula() : NGC_nb(0), neb_tex(NULL)
 {
 	inc_lum = rand()/RAND_MAX*M_PI;	
+	longname = "";
+	name = "";
 }
 
 Nebula::~Nebula()
@@ -47,26 +50,46 @@ Nebula::~Nebula()
 	neb_tex = NULL;
 }
 
-void Nebula::get_info_string(char * s, const navigator*) const
+string Nebula::get_info_string(const navigator*) const
 {
 	float tempDE, tempRA;
 	rect_to_sphe(&tempRA,&tempDE,XYZ);
-	// RA=Right ascention, DE=Declinaison, Mag=Magnitude
-	sprintf(s,_("Name : %s (NGC %u)\nRA : %s\nDE : %s\nMagnitude : %.2f"), name.c_str(), NGC_nb,
-		print_angle_hms(tempRA*180./M_PI).c_str(), print_angle_dms_stel(tempDE*180./M_PI).c_str(), mag);
+	stringstream ss;
+
+	ss << "Name : " << name << endl;
+	ss << "Cat: NGC ";
+	if (NGC_nb > 0) ss << NGC_nb; else ss << "-";
+	ss << "  IC ";
+	if (IC_nb > 0) ss << IC_nb; else ss << "-";
+	ss << endl;
+	
+	ss << "RA : " << print_angle_hms(tempRA*180./M_PI) << endl;
+	ss << "DE : " << print_angle_dms_stel(tempDE*180./M_PI) << endl;
+
+	ss.setf(ios::fixed);
+	ss.precision(2);
+	ss << "Magnitude : " << mag << endl;
+	ss << "Type : " << string(typeDesc == "" ? "-" : typeDesc) << endl;
+	ss << "Size : " << print_angle_dms_stel0(angular_size*180./M_PI) << endl; 
+	
+	return ss.str();
 }
 
-void Nebula::get_short_info_string(char * s, const navigator*) const
+string Nebula::get_short_info_string(const navigator*) const
 {
-	if( mag == 99 )
-	{
-		// we don't know actual magnitude for some reason, so don't label
-		sprintf(s,"%s", name.c_str());
-	}
+	stringstream ss;
+	
+	if(mag == 99 || mag < 4)
+		ss << name;	
 	else
 	{
-		sprintf(s,_("%s: mag %.1f"), name.c_str(), mag);
+		ss << name << mag;
+		ss.setf(ios::fixed);
+		ss.precision(1);
+		ss << ": mag " << mag;
 	}
+	
+	return ss.str();
 }
 
 double Nebula::get_close_fov(const navigator*) const
@@ -163,8 +186,11 @@ void Nebula::draw_tex(const Projector* prj, tone_reproductor* eye, bool bright_n
     glEnable(GL_TEXTURE_2D);
     glEnable(GL_BLEND);
 
+	if (!neb_tex) return;
+	
 	// if start zooming in, turn up brightness to full for DSO images
 	// gradual change might be better
+
 	if(bright_nebulae)
 	{
 		glColor3f(1.0,1.0,1.0);
@@ -227,13 +253,16 @@ void Nebula::draw_name(int hint_ON, const Projector* prj)
     glColor3fv(label_color*hints_brightness);
     float size = get_on_screen_size(prj);
     float shift = 8.f + size/2.f;
-	std::ostringstream oss;
-	oss << longname << " (" << typeDesc << ")";
 
-    string lname = oss.str();
+	std::stringstream ss;
+	ss << longname;
+	if (typeDesc != "") ss << " (" << typeDesc << ")";
+	string lname = ss.str();
 
-    gravity_label ? prj->print_gravity180(nebula_font, XY[0]+shift, XY[1]+shift, (hint_ON==1?lname:name), 1, 0, 0) :
-      nebula_font->print(XY[0]+shift, XY[1]+shift, (hint_ON==1?lname:name));
+    if (gravity_label)
+		prj->print_gravity180(nebula_font, XY[0]+shift, XY[1]+shift, (hint_ON==1?lname:name), 1, 0, 0);
+	else
+    	nebula_font->print(XY[0]+shift, XY[1]+shift, (hint_ON==1?lname:name));
 
     // draw image credit, if it fits easily
     if(credit != "" && size > nebula_font->getStrLen(credit))
