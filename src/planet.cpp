@@ -28,6 +28,7 @@ float planet::object_scale = 1.f;
 bool planet::gravity_label = false;
 Vec3f planet::label_color = Vec3f(.4,.4,.8);
 Vec3f planet::orbit_color = Vec3f(1,.6,1);
+Vec3f planet::trail_color = Vec3f(1,.7,.7);
 
 rotation_elements::rotation_elements() : period(1.), offset(0.), epoch(J2000),
 										 obliquity(0.), ascendingNode(0.), precessionRate(0.)
@@ -54,7 +55,6 @@ planet::planet(const string& _name, int _flagHalo, int _flag_lighting, double _r
 	// if decide to show moon trail
 	MaxTrail = 60;
 	last_trailJD = 0; // for now
-	trail_color = Vec3f(1,.7,.7);
 	trail_on = 0;
 	first_point = 1;
 
@@ -73,27 +73,44 @@ planet::~planet()
 }
 
 // Return the information string "ready to print" :)
-void planet::get_info_string(char * s, const navigator * nav) const
+string planet::get_info_string(const navigator * nav) const
 {
 	double tempDE, tempRA;
-	static char scale_str[100];
-	if (sphere_scale == 1.f) scale_str[0] = '\0';
-	else sprintf(scale_str," (x%.1f)", sphere_scale);
+	stringstream ss;
 
+	ss << "Name :" << common_name;
+
+	ss.setf(ios::fixed);
+	ss.precision(1);
+	if (sphere_scale != 1.f) ss << sphere_scale;
+	ss << endl;
+	
 	Vec3d equPos = get_earth_equ_pos(nav);
 	rect_to_sphe(&tempRA,&tempDE,equPos);
-	sprintf(s,_("Name :%s%s\nRA : %s\nDE : %s\nMagnitude : %.2f\nDistance : %.8f AU"),
-			common_name.c_str(), scale_str, print_angle_hms(tempRA*180./M_PI).c_str(), print_angle_dms_stel(tempDE*180./M_PI).c_str(),
-			compute_magnitude(nav->get_observer_helio_pos()), equPos.length());
+	
+	ss << "RA : " << print_angle_hms(tempRA*180./M_PI) << endl;
+	ss << "DE : " << print_angle_dms_stel(tempDE*180./M_PI) << endl;
+	
+	ss.precision(2);
+	ss << "Magnitude : " << compute_magnitude(nav->get_observer_helio_pos()) << endl;
+	ss.precision(8);
+	ss << "Distance : " << equPos.length() << "AU";
+
+	return ss.str();
 }
 
 // Return the information string "ready to print" :)
-void planet::get_short_info_string(char * s, const navigator * nav) const
+string planet::get_short_info_string(const navigator * nav) const
 {
-	static char scale_str[100];
-	if (sphere_scale == 1.f) scale_str[0] = '\0';
-	else sprintf(scale_str," (x%.1f)", sphere_scale);
-	sprintf(s,_("%s%s: mag %.1f"),common_name.c_str(), scale_str, compute_magnitude(nav->get_observer_helio_pos()));
+	stringstream ss;
+
+	ss << common_name;
+	ss.setf(ios::fixed);
+	ss.precision(1);
+	if (sphere_scale != 1.f) ss << sphere_scale;
+	ss << ": mag " << compute_magnitude(nav->get_observer_helio_pos());
+
+	return ss.str();
 }
 
 double planet::get_close_fov(const navigator* nav) const
@@ -836,11 +853,6 @@ void planet::update_trail(const navigator* nav) {
 	}
     
     
-}
-
-
-void planet::set_trail_color(const Vec3f _color) {
-	trail_color = _color;
 }
 
 // start accumulating new trail data (clear old data)
