@@ -202,6 +202,7 @@ meridian_line<br>
 milky_way<br>
 nebulae<br>
 nebula_names<br>
+object_trails<br>
 planets<br>
 planet_names<br>
 planet_orbits<br>
@@ -269,7 +270,8 @@ drop<br>
       <td style="vertical-align: top;">ALTITUDE_ANGLE<br>
       </td>
       <td style="vertical-align: top;">For positioning the center of
-the image in horizontal coordinates. &nbsp;Zero is at the horizon, 90 is
+the image in horizontal coordinates. &nbsp;Zero is at the horizon, 90
+is
 at the zenith.<br>
       </td>
     </tr>
@@ -315,7 +317,8 @@ command.<br>
       </td>
       <td style="vertical-align: top;">Used to refer to the image in
 later calls to manipulate the image. Images must be in PNG format. If
-images do not have dimensions that are powers of 2 (128, 256, etc.) they
+images do not have dimensions that are powers of 2 (128, 256, etc.)
+they
 are resized when loaded to meet this requirement.<br>
       </td>
     </tr>
@@ -377,6 +380,8 @@ is center of viewport, 1 is top edge of viewport.</td>
 Arguments have same names and possible values as in landscapes.ini file
 except that texture file names need to be specified in full including
 the path relative to the script.<br>
+      <br>
+Also add argument "action load"<br>
       </td>
     </tr>
     <tr>
