@@ -69,7 +69,6 @@ string print_angle_hms(double location);
 // Provide the luminance in cd/m^2 from the magnitude and the surface in arcmin^2
 float mag_to_luminance(float mag, float surface);
 
-
 // convert string int ISO 8601-like format [+/-]YYYY-MM-DDThh:mm:ss (no timzone offset)
 // to julian day
 int string_to_jday(string date, double &jd);
@@ -87,8 +86,11 @@ long int str_to_long(string str);
 
 int fcompare(const string& _base, const string& _sub);
 
-int str_compare_case_insensitive(const string& str1, const string& str2);
+//int str_compare_case_insensitive(const string& str1, const string& str2);
 
-string translateGreek(const string& s, bool greekOnly);
+//string translateGreek(const string& s, bool greekOnly);
+string translateGreek(const string& s);
+string stripConstellation(const string& s);
+
 
 #endif
