@@ -39,6 +39,7 @@ using namespace s_gui;
 
 class stel_ui
 {
+	friend class stel_core;
 public:
 	stel_ui(stel_core *);	// Create a stellarium ui. Need to call init() before use
     virtual ~stel_ui();		// Delete the ui
