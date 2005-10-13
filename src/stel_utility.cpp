@@ -465,6 +465,7 @@ int fcompare(const string& _base, const string& _sub)
      return 0;
 }
 
+/*
 int str_compare_case_insensitive(const string& str1, const string& str2)
 {
 
@@ -486,8 +487,9 @@ int str_compare_case_insensitive(const string& str1, const string& str2)
 	return strcmp( tmp1.c_str(), tmp2.c_str() );
 
 }
+*/
 
-string translateGreek(const string& s, bool greekOnly)
+/*string translateGreek(const string& s, bool greekOnly)
 {
 	int sz, n;
 	unsigned char ch;
@@ -511,10 +513,16 @@ string translateGreek(const string& s, bool greekOnly)
 		greek[0] = ch;
 		if (!greekOnly)
 			greek += s.substr(sz);
-
+		else
+		{
+			loc = s.find(" ",sz-1);
+			if (loc != string::npos)
+				greek+=s.substr(sz,loc-sz);
+		}
 		return greek;
 	}
-	else if (greekOnly)
+
+	else if (greekOnly) // (but not translateable)
 	{
 		// strip the stuff after the space if a number
 		loc = s.find(" ",0);
@@ -526,3 +534,56 @@ string translateGreek(const string& s, bool greekOnly)
 	else
 		return s;
 }
+*/
+string translateGreek(const string& s)
+{
+	int sz, n;
+	ostringstream oss;
+	
+//	string letters("ALF BET GAM DEL EPS ZET ETA THE IOT KAP LAM MU. NU. XI OMI PI RHO SIG TAU UPS PHI CHI PSI OME");
+	const string letters("AL BE GA DE EP ZE ET TE IO KA LA MU NU KS OM PI RH SI TA UP PH KH PS OM");
+//	const int array[25] = { 3,3,3,3,3,3,3,3,3,3,3,2,2,2,3,2,3,3,3,3,3,3,3,3 };
+	unsigned int loc;
+	
+	// Match the first 2 characters
+	loc = letters.find(s.substr(0,2),0);
+
+	// no match then return the original string	
+	if (loc == string::npos) return s;
+
+	// get the corresponding number of characters in the greek string
+	n = (int)loc/3;
+//	sz = array[n];
+	sz = 3;	
+	oss << char(130 + n);
+
+	// see if a number code after and translate to the supertext characters.
+	loc = s.substr(sz).find(" ");
+	if (loc != string::npos) 
+	{
+		string subscript = s.substr(sz,loc);
+		if (loc > 0) 
+		{
+			unsigned int i = 0;
+			if (loc > 1)
+			{
+				while (i < loc && (subscript[i] == '.' || subscript[i] == '0')) i++;
+			}	
+	
+			while (i < loc)	oss << char(subscript[i++]+112);
+		}
+	}
+		
+	return oss.str();
+}
+
+string stripConstellation(const string& s)
+{
+	unsigned int loc = s.rfind(" ");
+	if (loc != string::npos) return s.substr(0,loc);
+	
+	return s;
+}
+
+
+
