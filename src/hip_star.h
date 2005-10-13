@@ -42,7 +42,7 @@ public:
     int read(FILE * pFile);	// Read the star data in the stream
     void draw(void);		// Draw the star
 	void draw_point(void);	// Draw the star as a point
-    void draw_name(const s_font * star_font);
+    bool draw_name(void);	// draw the name - returns true if something drawn (and texture re-assigned for fonts)
 	virtual Vec3f get_RGB(void) const {return RGB;}
 	virtual string get_info_string(const navigator * nav = NULL) const;
 	virtual string get_short_info_string(const navigator * nav = NULL) const;
@@ -53,18 +53,26 @@ public:
 	virtual float get_mag(const navigator * nav = NULL) const {return Mag;}
 	virtual unsigned int get_hp_number() { return HP; };
 
+	static void set_starname_format(int _format) {nameFormat = _format;}
+	static int get_starname_format(void) {return nameFormat;}
+	void set_label_color(Vec3f& v) {label_color = v;}
+	void set_circle_color(Vec3f& v) {circle_color = v;}
 private:
     unsigned int HP;		// Hipparcos number
     float Mag;				// Apparent magnitude
+    bool doubleStar;		// double star flag
+    bool variableStar;		// not implemented yet
     Vec3f XYZ;				// Cartesian position
-    Vec3f RGB;				// 3 RGB colour values
+    Vec3f RGB;				// RGB colour values
     float MaxColorValue;	// Precalc of the max color value
     Vec3d XY;				// 2D Position + z homogeneous value
 	float term1;			// Optimization term
 
     string CommonName;		// Common Name of the star
-    string SciName;			// Scientific name		
-    char SpType;			// Spectral type
+    string SciName;			// Scientific name incl constellation		
+    string ShortSciName;	// Scientific name (no constellation)
+    string OrigSciName;		// Scientific name (no greek)		
+    char SpType;			// Spectral type code
 	float Distance;         // Distance from Earth in light years
 
 	static float twinkle_amount;
@@ -75,6 +83,8 @@ private:
 	static Projector* proj;
 	static bool gravity_label;
 	static Vec3f circle_color, label_color;
+	static int nameFormat;		// 0 - standard, 1 shortsciname, 2 sciname (incl constellation)
+	static s_font *starFont;
 };
 
 struct Hip_Star_Mag_Comparer : public std::binary_function<Hip_Star*,Hip_Star*,bool> {
