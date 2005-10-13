@@ -69,7 +69,7 @@ SolarSystem::~SolarSystem()
 // Init and load the solar system data
 void SolarSystem::load(const string& planetfile)
 {
-	printf(_("Loading Solar System data...\n"));
+	cout << _("Loading Solar System data...");
 	init_parser pd;	// The planet data ini file parser
 	pd.load(planetfile);
 
@@ -220,6 +220,8 @@ void SolarSystem::load(const string& planetfile)
 
 	// special case: load earth shadow texture
 	tex_earth_shadow = new s_texture("earth-shadow", TEX_LOAD_TYPE_PNG_ALPHA);
+
+	cout << "(loaded)" << endl;
 }
 
 // Compute the position for every elements of the solar system.
