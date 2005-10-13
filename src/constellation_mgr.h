@@ -39,17 +39,20 @@ public:
 	void set_art_intensity(float _max);
 	void set_flag_art(bool b);
 	void set_flag_lines(bool b);
+	void set_flag_boundaries(bool b);
 	void set_flag_names(bool b);
 	void set_flag_isolate_selected(bool s) { isolateSelected = s; set_selected_const(selected);}
 	// TODO : all the asterisms.empty() will be removed
 	bool get_flag_art(void) {return (!asterisms.empty() && (*(asterisms.begin()))->get_flag_art() || (selected && selected->get_flag_art()));}
 	bool get_flag_lines(void) {return (!asterisms.empty() && (*(asterisms.begin()))->get_flag_lines() || (selected && selected->get_flag_lines()));}
 	bool get_flag_names(void) {return (!asterisms.empty() && (*(asterisms.begin()))->get_flag_name() || (selected && selected->get_flag_name()));}
+	bool get_flag_boundaries(void) {return (!asterisms.empty() && (*(asterisms.begin()))->get_flag_boundaries() || (selected && selected->get_flag_boundaries()));}
 	bool get_flag_isolate_selected(void) { return isolateSelected;}
 
 	void set_flag_gravity_label(bool g) {Constellation::gravity_label = g;}
 	void set_line_color(const Vec3f& c) {Constellation::set_line_color(c);}
 	void set_label_color(const Vec3f& c) {Constellation::set_label_color(c);}
+	void set_boundary_color(const Vec3f& c) {Constellation::set_boundary_color(c);}
 	void set_font(float font_size, const string& font_name);
 	void set_selected(const string& shortname) {set_selected_const(find_from_short_name(shortname));}
 	void set_selected(const Hip_Star * s) {if (!s) set_selected_const(NULL); else set_selected_const(is_star_in(s));}
@@ -57,7 +60,8 @@ public:
 	vector<string> getNames(void);
 	vector<string> getShortNames(void);
 	string get_short_name_by_name(string _name);  // return short name from long common name
-
+	bool load_boundaries(const string& conCatFile);
+	void draw_boundaries(Projector* prj) const;
 private:
 	void draw_lines(Projector * prj) const;
 	void draw_art(Projector * prj, navigator * nav) const;

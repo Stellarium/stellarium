@@ -25,6 +25,7 @@
 #include "stel_utility.h"
 #include "s_font.h"
 #include "fader.h"
+#include <vector>
 
 class Constellation
 {
@@ -33,23 +34,27 @@ public:
     Constellation();
     ~Constellation();
     bool read(const string& record, Hip_Star_mgr * _VouteCeleste);
-    void draw(Projector* prj) const;
+//    void draw(Projector* prj) const;
     void draw_name(s_font * constfont, Projector* prj) const;
     void draw_art(Projector* prj, navigator* nav) const;
+    void draw_boundary_optim(Projector* prj) const;
     const Constellation* is_star_in(const Hip_Star *) const;
     string getName(void) { return name; };
     string getShortName(void) { return short_name; };
     static void set_line_color(const Vec3f& c) { line_color = c; }
     static void set_label_color(const Vec3f& c) { label_color = c; }
+    static void set_boundary_color(const Vec3f& c) { boundary_color = c; }
 private:
     void draw_optim(Projector* prj) const;
     void draw_art_optim(Projector* prj, navigator* nav) const;
     void set_name(string _name) { name = _name; }
 	void update(int delta_time);
 	void set_flag_lines(bool b) {line_fader=b;}
+	void set_flag_boundaries(bool b) {boundary_fader=b;}
 	void set_flag_name(bool b) {name_fader=b;}
 	void set_flag_art(bool b) {art_fader=b;}
 	bool get_flag_lines(void) {return line_fader;}
+	bool get_flag_boundaries(void) {return boundary_fader;}
 	bool get_flag_name(void) {return name_fader;}
 	bool get_flag_art(void) {return art_fader;}
 	
@@ -62,8 +67,13 @@ private:
 	static bool gravity_label;
 	s_texture* art_tex;
 	Vec3d art_vertex[9];
-	linear_fader art_fader, line_fader, name_fader;
-	static Vec3f line_color, label_color;
+	linear_fader art_fader, line_fader, name_fader, boundary_fader;
+	static Vec3f line_color, label_color, boundary_color;
+
+	static bool singleSelected;
+//	vector<Vec3f> boundaryXYZ;
+	vector<vector<Vec3f> *> isolatedBoundarySegments;
+	vector<vector<Vec3f> *> sharedBoundarySegments;
 };
 
 #endif // _CONSTELLATION_H_
