@@ -395,10 +395,8 @@ void Painter::drawLine(const s_vec2i& pos1, const s_vec2i& pos2, const s_color& 
 // Mother class for every s_gui object.
 ////////////////////////////////////////////////////////////////////////////////
 
-bool Component::change_mode = false;
-bool Component::change_locale = false;
-s_color Component::baseColor = s_color(0.3,0.4,0.7);
-s_color Component::textColor = s_color(0.7,0.8,0.9);
+s_color Component::guiBaseColor = s_color(0.3,0.4,0.7);
+s_color Component::guiTextColor = s_color(0.7,0.8,0.9);
 bool Component::focusing = false;
 
 Component::Component() :
@@ -407,67 +405,31 @@ Component::Component() :
 	visible(true),
 	focus(false),
 	painter(defaultPainter),
+	GUIColorSchemeMember(true),
 	moveToFront(false),
 	needNewTopEdit(false),
 	type(CT_COMPONENTBASE),
 	desktop(false)
 {
-	change_mode = false;
-	change_locale = false;
 }
 
 Component::~Component()
 {
 }
 
+void Component::draw(void)
+{
+}
+
+void Component::changeLocale(void)
+{
+}
+
 void Component::setVisible(bool _visible)
 {
 	visible = _visible;
-/*
-	if (getType() & CT_CONTAINER)
-	{
-		Container *c = (Container*)this;
-	    list<Component*>::iterator iter = c->childs.begin();
-	
-		while (iter != c->childs.end())
-		{
-			(*iter)->setVisible(true);
-			iter++;
-		}
-	}
-*/
 }
 
-void Container::setFocus(bool _focus)
-{
-	// set the focus to all children
-
-	list<Component*>::iterator iter = childs.begin();
-	while (iter != childs.end())
-	{
-		(*iter)->setFocus(_focus);
-        iter++;
-	}
-	focus=_focus;
-	focusing = _focus;
-}
-
-void Component::draw(void)
-{
-	if (change_mode)
-	{
-		painter.setTextColor(textColor);
-		painter.setBaseColor(baseColor);
-	}
-}
-
-void Component::setColorScheme(const s_color& _baseColor, const s_color& _textColor)
-{
-	change_mode = true;
-	baseColor = _baseColor;
-	textColor = _textColor;
-	// change the color scheme on the next draw cycle
-}
 
 void Component::reshape(const s_vec2i& _pos, const s_vec2i& _size)
 {
@@ -573,6 +535,11 @@ Container::~Container()
     }
 }
 
+void Container::setGUIColorSchemeMember(bool _b)
+{
+    GUIColorSchemeMember = _b;
+}
+
 void Container::addComponent(Component* c)
 {
 	childs.push_front(c);
@@ -594,11 +561,69 @@ void Container::removeAllComponents(void)
 	childs.clear();
 }
 
-// This is a one reliable call to manage the gui layering every program loop......
+void Container::setFocus(bool _focus)
+{
+	// set the focus to all children
+
+	list<Component*>::iterator iter = childs.begin();
+	while (iter != childs.end())
+	{
+		(*iter)->setFocus(_focus);
+        iter++;
+	}
+	focus=_focus;
+	focusing = _focus;
+}
+
+void Container::setColorScheme(const s_color& _baseColor, const s_color& _textColor)
+{
+	if (!desktop || !GUIColorSchemeMember) return;
+
+	guiBaseColor = _baseColor;
+	guiTextColor = _textColor;
+	defaultPainter.setTextColor(guiTextColor);
+	defaultPainter.setBaseColor(guiBaseColor);
+	painter.setTextColor(guiTextColor);
+	painter.setBaseColor(guiBaseColor);
+
+	setColorScheme();
+}
+
+void Container::setColorScheme(void)
+{
+	if (!GUIColorSchemeMember) return;
+
+    list<Component*>::iterator iter = childs.begin();
+	while (iter != childs.end())
+	{
+		(*iter)->setColorScheme();
+		iter++;
+	}
+	painter.setTextColor(guiTextColor);
+	painter.setBaseColor(guiBaseColor);
+}
+
+void Component::setColorScheme(void)
+{
+	if (!GUIColorSchemeMember) return;
+	painter.setTextColor(guiTextColor);
+	painter.setBaseColor(guiBaseColor);
+}
+
+void Container::changeLocale(void)
+{
+#ifdef ENABLE_NLS
+    list<Component*>::iterator iter = childs.begin();
+	while (iter != childs.end())
+	{
+		(*iter)->changeLocale();
+		iter++;
+	}
+#endif
+}
+
 void Container::draw(void)
 {
-	Component::draw(); // for potential colour changes
-	
     if (!visible) return;
 	static Component *firstFocus = NULL;
 	static bool justMovedToFront;
@@ -673,8 +698,6 @@ void Container::draw(void)
 				((EditBox*)firstFocus)->setEditing(true);
 			firstFocus = NULL;
 		}
-		change_mode = false;
-		change_locale = false;
 	}
 }
 
@@ -788,8 +811,6 @@ bool Container::onKey(Uint16 k, S_GUI_VALUE s)
 
 void FilledContainer::draw(void)
 {
-	Component::draw(); // for potential colour changes
-	
     if (!visible) return;
 	painter.drawSquareFill(pos, size);
 
@@ -814,8 +835,6 @@ Button::Button() :
 
 void Button::draw()
 {
-	Component::draw(); // for potential colour changes
-	
 	if (!visible) return;
 
 	if (!is_mouse_over)
@@ -841,8 +860,6 @@ bool Button::onClic(int x, int y, S_GUI_VALUE bt, S_GUI_VALUE state)
 
 void FilledButton::draw()
 {
-	Component::draw(); // for potential colour changes
-
 	if (!visible) return;
 	painter.drawSquareFill(pos, size);
 	Button::draw();
@@ -860,8 +877,6 @@ TexturedButton::TexturedButton(const s_texture* tex)
 
 void TexturedButton::draw()
 {
-	Component::draw(); // for potential colour changes
-
 	if (!visible) return;
 	painter.drawSquareFill(pos, size, painter.getBaseColor() * (1.f + 0.4 * is_mouse_over));
 }
@@ -876,8 +891,6 @@ CheckBox::CheckBox(bool state) : Button(), isChecked(state)
 
 void CheckBox::draw()
 {
-	Component::draw(); // for potential colour changes
-
 	if (!visible) return;
 	if (isChecked) painter.drawCross(pos, size);
 	Button::draw();
@@ -911,8 +924,6 @@ LabeledCheckBox::~LabeledCheckBox()
 
 void LabeledCheckBox::draw(void)
 {
-	Component::draw();
-
 	if (!visible) return;
 	
 	setSize(checkbox->getSizex() + label->getSizex() + 2,
@@ -935,8 +946,6 @@ FlagButton::~FlagButton()
 
 void FlagButton::draw()
 {
-	Component::draw(); // for potential colour changes
-
 	if (!visible) return;
 	if (isChecked)
 	{
@@ -977,15 +986,15 @@ void Label::setLabel(const string& _label, bool _translate)
     adjustSize();
 }
 
-void Label::draw()
+void Label::changeLocale(void)
 {
-	Component::draw(); // for potential colour changes
-
 #ifdef ENABLE_NLS
-	if (change_locale) 
-		setLabel(label_native);
+	setLabel(label_native);
 #endif
+}
 
+void Label::draw(void)
+{
 	if (!visible) return;
 
     if (painter.getFont()) 
@@ -994,13 +1003,6 @@ void Label::draw()
 
 void Label::draw(float _intensity)
 {
-	Component::draw(); // for potential colour changes
-
-#ifdef ENABLE_NLS
-	if (change_locale) 
-		setLabel(label_native);
-#endif
-
 	if (!visible) return;
 
     if (painter.getFont()) 
@@ -1175,10 +1177,15 @@ bool EditBox::onClic(int x, int y, S_GUI_VALUE bt, S_GUI_VALUE state)
 	return Button::onClic(x,y,bt,state);
 }
 
+void EditBox::setColorScheme(void)
+{
+	if (!GUIColorSchemeMember) return;
+	label.setColorScheme();
+	Component::setColorScheme();
+}
+
 void EditBox::draw(void)
 {
-	Component::draw(); // for potential colour changes
-
     if (!visible) return;
 
 	// may have been snatched away!
@@ -1429,8 +1436,6 @@ ScrollBar::ScrollBar(bool _vertical, int _totalElements, int _elementsForBar)
 	
 void ScrollBar::draw(void)
 {
-	Component::draw(); // for potential colour changes
-
     if (!visible) return;
 
 	painter.drawSquareEdge(pos, size);
@@ -1444,10 +1449,10 @@ void ScrollBar::draw(void)
     Component::scissor->pop();
 	glPopMatrix();
 
-	stringstream ss;
-	ss.precision(0);
-	ss << value;
-	painter.print(pos[0]+2, pos[1]+2, ss.str());
+	ostringstream oss;
+	oss.precision(0);
+	oss << value;
+	painter.print(pos[0]+2, pos[1]+2, oss.str());
 }
 
 bool ScrollBar::onClic(int x, int y, S_GUI_VALUE bt, S_GUI_VALUE state)
@@ -1616,24 +1621,22 @@ void ListBox::createLines(void)
 	}
 }
 
-void ListBox::draw(void)
+void ListBox::changeLocale(void)
 {
-	Component::draw(); // for potential colour changes
-
-	unsigned int i, j;
-	
 #ifdef ENABLE_NLS
-	if (change_locale) 
+	unsigned int i = 0;
+	while (i < items.size())
 	{
-		i = 0;
-		while (i < items.size())
-		{
-			items[i] = _(items_native[i].c_str());
-			i++;
-		}
+		items[i] = _(items_native[i].c_str());
+		i++;
 	}
 #endif
+}
 
+void ListBox::draw(void)
+{
+	unsigned int i, j;
+	
 	if (!visible) return;
 
 	painter.drawSquareEdge(pos, size);
@@ -1802,10 +1805,22 @@ LabeledButton::~LabeledButton()
 {
 }
 
+void LabeledButton::changeLocale(void)
+{
+#ifdef ENABLE_NLS
+	label.changeLocale();
+#endif
+}
+
+void LabeledButton::setColorScheme(void)
+{
+	if (!GUIColorSchemeMember) return;
+	label.setColorScheme();
+	Component::setColorScheme();
+}
+
 void LabeledButton::draw(void)
 {
-	Component::draw(); // for potential colour changes
-	
     if (!visible) return;
 	
 	if (!hideTexture)
@@ -1883,12 +1898,15 @@ void TextLabel::setLabel(const string& _label, bool _translate)
     adjustSize();
 }
 
-void TextLabel::draw(void)
+void TextLabel::changeLocale(void)
 {
 #ifdef ENABLE_NLS
-	if (change_locale) 
-		setLabel(label_native);
+	setLabel(label_native);
 #endif
+}
+
+void TextLabel::draw(void)
+{
 	Container::draw();
 }
 
@@ -1911,6 +1929,7 @@ void TextLabel::adjustSize(void)
 void TextLabel::setTextColor(const s_color& c)
 {
 	list<Component*>::iterator iter = childs.begin();
+	Component::setTextColor(c);
 	while (iter != childs.end())
 	{
 		(*iter)->setTextColor(c);
@@ -1932,9 +1951,8 @@ FramedContainer::FramedContainer() : Container(), frameSize(3,3,3,3)
 
 void FramedContainer::draw(void)
 {
-	Component::draw(); // for potential colour changes
-
     if (!visible) return;
+
 	painter.drawSquareEdge(pos, size);
 	painter.drawSquareEdge(inside->getPos()-s_vec2i(1,1) + pos, inside->getSize() + s_vec2i(2,2));
 
@@ -2002,9 +2020,8 @@ void StdWin::setTitle(const string& _title)
 
 void StdWin::draw()
 {
-	Component::draw(); // for potential colour changes
-
 	if (!visible) return;
+
 	titleLabel->setPos((size[0] - titleLabel->getSizex())/2, (frameSize[3]-titleLabel->getSizey())/2 + 1);
 	painter.drawSquareFill(pos, size);
 	painter.drawSquareFill(pos, s_vec2i(size[0], frameSize[3]));
@@ -2066,9 +2083,8 @@ StdBtWin::StdBtWin(const string& _title, s_texture* _header_tex, s_font * _winfo
 
 void StdBtWin::draw()
 {
-	Component::draw(); // for potential colour changes
-
 	if (!visible) return;
+
 	hideBt->setPos(size[0] - hideBt->getSizex() - 3, 3);
 	StdWin::draw();
 }
@@ -2318,9 +2334,8 @@ TabHeader::TabHeader(Component* c, const string& _label, const s_font* _font) :
 
 void TabHeader::draw(void)
 {
-	Component::draw(); // for potential colour changes
-
     if (!visible) return;
+
 	painter.drawSquareFill(pos, size, painter.getBaseColor() * (0.7f + 0.3 * active));
 	if (!active) painter.drawSquareEdge(pos,size);
 	else
@@ -2329,11 +2344,11 @@ void TabHeader::draw(void)
 		painter.drawLine(s_vec2i(pos[0]+1,pos[1]), s_vec2i(pos[0]+size[0]-1,pos[1]));
 		painter.drawLine(s_vec2i(pos[0]+size[0]-1,pos[1]), pos+size-s_vec2i(1,0));
 	}
+
 	// Draw label
     glPushMatrix();
     glTranslatef(pos[0], pos[1], 0.f);
     Component::scissor->push(pos, size);
-    // todo gettext first TONY
 	
 	label.setPos((size-label.getSize())/2 + s_vec2i(1,0));
 	label.draw(0.7f + 0.3 * active);
@@ -2371,9 +2386,8 @@ void TabContainer::addTab(Component* c, const string& name)
 
 void TabContainer::draw(void)
 {
-	Component::draw(); // for potential colour changes
-
 	if (!visible) return;
+
 	painter.drawSquareFill(pos, size, painter.getBaseColor()/3);
 	painter.drawLine(s_vec2i(pos[0]+getHeadersSize(), pos[1]+headerHeight-1),
 		s_vec2i(pos[0]+size[0], pos[1]+headerHeight-1));
@@ -2389,6 +2403,32 @@ void TabContainer::draw(void)
     }
 
 	Container::draw();
+}
+
+void TabContainer::changeLocale(void)
+{
+#ifdef ENABLE_NLS
+	list<TabHeader*>::iterator iter = headers.begin();
+	while (iter != headers.end())
+	{
+		(*iter)->changeLocale();
+		iter++;
+	}
+	Container::changeLocale();
+#endif
+}
+
+void TabContainer::setColorScheme(void)
+{
+	if (!GUIColorSchemeMember) return;
+
+	list<TabHeader*>::iterator iter = headers.begin();
+	while (iter != headers.end())
+	{
+		(*iter)->setColorScheme();
+		iter++;
+	}
+	Container::setColorScheme();
 }
 
 int TabContainer::getHeadersSize(void)
@@ -2456,9 +2496,8 @@ CursorBar::CursorBar(bool _vertical, float _min, float _max, float _val) : curso
 
 void CursorBar::draw(void)
 {
-	Component::draw(); // for potential colour changes
-
     if (!visible) return;
+
 	painter.drawSquareEdge(pos, size);
     glPushMatrix();
     glTranslatef(pos[0], pos[1], 0.f);
@@ -2472,14 +2511,10 @@ void CursorBar::draw(void)
 	glPopMatrix();
 	if (dragging)
 	{
-		stringstream ss;
-		string p;
-		ss.precision(2);
-
-		ss << value;
-		p = ss.str();
-
-		painter.print(pos[0]+2, pos[1]+2, p);
+		ostringstream oss;
+		oss.precision(2);
+		oss << value;
+		painter.print(pos[0]+2, pos[1]+2, oss.str());
 	}
 }
 
@@ -2611,9 +2646,8 @@ IntIncDec::~IntIncDec()
 
 void IntIncDec::draw()
 {
-	Component::draw(); // for potential colour changes
-
 	if (!visible) return;
+
 	ostringstream os;
 	os << value;
 	label->setLabel(os.str());
@@ -2663,8 +2697,6 @@ FloatIncDec::~FloatIncDec()
 
 void FloatIncDec::draw()
 {
-	Component::draw(); // for potential colour changes
-
 	if (!visible) return;
 	
 	if (format == FORMAT_DEFAULT)
@@ -2872,8 +2904,6 @@ void Time_item::setJDay(double JD)
 
 void Time_item::draw()
 {
-	Component::draw(); // for potential colour changes
-
     if (!visible) return;
 	painter.drawSquareEdge(pos, size);
 	painter.drawSquareFill(pos, size);
@@ -2906,9 +2936,8 @@ Picture::~Picture()
 
 void Picture::draw(void)
 {
-	Component::draw(); // for potential colour changes
-
 	if (!visible) return;
+
 	painter.drawSquareFill(pos, size, imgcolor);
 	if (showedges) painter.drawSquareEdge(pos, size);
 }
@@ -3039,8 +3068,6 @@ void MapPicture::set_font(float font_size, const string& font_name)
 #define CITY_TYPE_HOVER 3
 void MapPicture::drawCity(const s_vec2i& cityPos, int ctype)
 {
-	Component::draw(); // for potential colour changes
-
 	if (zoom == 1) 
 		cityPointer->setSize((int)zoom, (int)zoom);
 	else
@@ -3130,9 +3157,8 @@ void MapPicture::drawNearestCity(void)
 
 void MapPicture::draw(void)
 {
-	Component::draw(); // for potential colour changes
-
 	if (!visible) return;
+
 	if (!sized)
 	{
 		originalSize = size;
@@ -3420,9 +3446,8 @@ StringList::StringList()
 
 void StringList::draw(void)
 {
-	Component::draw(); // for potential colour changes
-
 	if (!visible) return;
+
 	painter.drawSquareEdge(pos, size);
 
 	vector<string>::iterator iter = items.begin();
@@ -3540,10 +3565,8 @@ Time_zone_item::Time_zone_item(const string& zonetab_file)
 
 void Time_zone_item::draw(void)
 {
-	Component::draw(); // for potential colour changes
-
 	if (!visible) return;
-	//painter.drawSquareEdge(pos, size);
+
 	Container::draw();
 }
 
