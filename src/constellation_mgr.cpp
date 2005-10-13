@@ -21,6 +21,7 @@
 
 #include <iostream>
 #include <fstream>
+#include <vector>
 
 #include "constellation.h"
 #include "constellation_mgr.h"
@@ -36,13 +37,6 @@ Constellation_mgr::Constellation_mgr(Hip_Star_mgr *_hip_stars) :
 	isolateSelected = false;
 }
 
-void Constellation_mgr::set_font(float font_size, const string& font_name)
-{
-	if (asterFont) delete asterFont;
-	asterFont = new s_font(font_size, font_name);
-	assert(asterFont);
-}
-
 Constellation_mgr::~Constellation_mgr()
 {
 	vector < Constellation * >::iterator iter;
@@ -55,8 +49,15 @@ Constellation_mgr::~Constellation_mgr()
 	asterFont = NULL;
 }
 
+void Constellation_mgr::set_font(float font_size, const string& font_name)
+{
+	if (asterFont) delete asterFont;
+	asterFont = new s_font(font_size, font_name);
+	assert(asterFont);
+}
+
 // Load line and art data from files
-void Constellation_mgr::load_lines_and_art(const string & fileName, const string & artfileName, LoadingBar& lb)
+void Constellation_mgr::load_lines_and_art(const string &fileName, const string & artfileName, LoadingBar& lb)
 {
 	std::ifstream inf(fileName.c_str());
 
@@ -179,16 +180,17 @@ void Constellation_mgr::load_lines_and_art(const string & fileName, const string
 		}
 	}
 	fclose(fic);
+	
+	load_boundaries(fileName);
 }
 
 void Constellation_mgr::draw(Projector * prj, navigator * nav) const
 {
 	prj->set_orthographic_projection();
-	
 	draw_lines(prj);
 	draw_names(prj);
 	draw_art(prj, nav);
-	
+	draw_boundaries(prj);
 	prj->reset_perspective_projection();
 }
 
@@ -212,6 +214,8 @@ void Constellation_mgr::draw_art(Projector * prj, navigator * nav) const
 // Draw constellations lines
 void Constellation_mgr::draw_lines(Projector * prj) const
 {
+	glDisable(GL_TEXTURE_2D);
+    glDisable(GL_BLEND);
 
 	vector < Constellation * >::const_iterator iter;
 	for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
@@ -344,7 +348,7 @@ string Constellation_mgr::get_short_name_by_name(string _name) {
 
 	for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
 	{
-		if( str_compare_case_insensitive(_name, (*iter)->getName()) == 0) return (*iter)->getShortName();
+		if( fcompare(_name, (*iter)->getName()) == 0) return (*iter)->getShortName();
 	}
 	return "";
 
@@ -390,6 +394,20 @@ void Constellation_mgr::set_flag_lines(bool b)
 	}
 }
 
+void Constellation_mgr::set_flag_boundaries(bool b)
+{
+	if (selected && isolateSelected)
+	{
+		selected->set_flag_boundaries(b);
+	}
+	else
+	{
+		vector < Constellation * >::const_iterator iter;
+		for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
+			(*iter)->set_flag_boundaries(b);
+	}
+}
+
 void Constellation_mgr::set_flag_art(bool b)
 {
 	if (selected && isolateSelected)
@@ -431,6 +449,7 @@ void Constellation_mgr::set_selected_const(Constellation * c)
 		c->set_flag_lines(cc->get_flag_lines());
 		c->set_flag_name(cc->get_flag_name());
 		c->set_flag_art(cc->get_flag_art());
+		c->set_flag_boundaries(cc->get_flag_boundaries());
 		selected = c;
 				
 		if (isolateSelected)
@@ -443,8 +462,10 @@ void Constellation_mgr::set_selected_const(Constellation * c)
 	    	        (*iter)->set_flag_lines(false);
 		            (*iter)->set_flag_name(false);
 		            (*iter)->set_flag_art(false);
+		            (*iter)->set_flag_boundaries(false);
 		        }
              }
+             Constellation::singleSelected = true;
         }
 		else
 		{
@@ -454,7 +475,9 @@ void Constellation_mgr::set_selected_const(Constellation * c)
 					(*iter)->set_flag_lines(c->get_flag_lines());
 					(*iter)->set_flag_name(c->get_flag_name());
 					(*iter)->set_flag_art(c->get_flag_art());
+		            (*iter)->set_flag_boundaries(c->get_flag_art());
 			}
+             Constellation::singleSelected = false;
 		}
 	}
 	else
@@ -468,8 +491,109 @@ void Constellation_mgr::set_selected_const(Constellation * c)
 				(*iter)->set_flag_lines(selected->get_flag_lines());
 				(*iter)->set_flag_name(selected->get_flag_name());
 				(*iter)->set_flag_art(selected->get_flag_art());
+				(*iter)->set_flag_boundaries(selected->get_flag_boundaries());
 			}
 		}
 		selected = NULL;
 	}
+}
+
+// Load from file 
+bool Constellation_mgr::load_boundaries(const string& conCatFile)
+{
+	char record[1024];
+	Constellation *cons = NULL;
+	string dataDir = conCatFile;
+	unsigned int i, j;
+	
+	vector <Constellation *>::const_iterator iter;
+	for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
+	{
+		for (i=0;i<(*iter)->isolatedBoundarySegments.size();i++)
+			delete (*iter)->isolatedBoundarySegments[i];
+
+		(*iter)->isolatedBoundarySegments.clear();
+		(*iter)->sharedBoundarySegments.clear();
+	}
+
+	unsigned int loc = dataDir.rfind("/");
+	
+	if (loc != string::npos)
+		dataDir = dataDir.substr(0,loc+1);
+
+	// load the hip data
+
+    cout << _("Loading Constellation boundary data...");
+	// Modified boundary file by Torsten Bronger with permission
+	// http://pp3.sourceforge.net
+	
+	string conData = dataDir + "boundaries.dat";
+    ifstream dataFile;
+	dataFile.open(conData.c_str());
+    if (!dataFile.is_open())
+    {
+        cout << "Boundary file " << conData << " not found" << endl;
+        return false;
+    }
+
+	float DE, RA;
+	Vec3f XYZ;
+	unsigned num, numc;
+	vector<Vec3f> *points;
+	string consname;
+	i = 0;
+	while (!dataFile.eof())	
+	{
+		points = new vector<Vec3f>;
+		istringstream istr(record);
+		dataFile >> num;
+		for (j=0;j<num;j++)
+		{
+			dataFile >> RA >> DE;
+			
+			RA*=M_PI/12.;     // Convert from hours to rad
+			DE*=M_PI/180.;    // Convert from deg to rad
+
+			// Calc the Cartesian coord with RA and DE
+	    	sphe_to_rect(RA,DE,XYZ);
+			points->push_back(XYZ);
+		}
+		
+		dataFile >> numc;  
+		// there are 2 constellations per boundary
+		
+		for (j=0;j<numc;j++)
+		{
+			dataFile >> consname;
+			if (consname == "SER1" || consname == "SER2") consname = "SER";
+			
+			cons = find_from_short_name(consname);
+				if (!cons) cout << "ERROR : Can't find constellation called : " << consname << endl;
+			else cons->isolatedBoundarySegments.push_back(points);
+		}
+
+		if (cons) cons->sharedBoundarySegments.push_back(points);
+		i++;
+	}
+    dataFile.close();
+	cout << "(" << i << " segments loaded)" << endl;
+    
+    return true;
+}
+
+// Draw constellations lines
+void Constellation_mgr::draw_boundaries(Projector * prj) const
+{
+	glDisable(GL_TEXTURE_2D);
+    glDisable(GL_BLEND);
+
+	glLineStipple(2, 0x3333);
+	glEnable(GL_LINE_STIPPLE);
+
+	vector < Constellation * >::const_iterator iter;
+	for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
+	{
+		(*iter)->draw_boundary_optim(prj);
+	}
+	glDisable(GL_LINE_STIPPLE);
 }

@@ -24,6 +24,8 @@ bool Constellation::gravity_label = false;
 
 Vec3f Constellation::line_color = Vec3f(.4,.4,.8);
 Vec3f Constellation::label_color = Vec3f(.4,.4,.8);
+Vec3f Constellation::boundary_color = Vec3f(0.8,0.3,0.3);
+bool Constellation::singleSelected = false;
 
 Constellation::Constellation() : asterism(NULL), art_tex(NULL)
 {
@@ -36,8 +38,16 @@ Constellation::~Constellation()
     
 	if (art_tex) delete art_tex;
 	art_tex = NULL;
+	
+	// data is shared so only delete one lot
+	for (unsigned int i=0;i<sharedBoundarySegments.size();i++)
+	{
+		delete sharedBoundarySegments[i];
+		sharedBoundarySegments[i] = NULL;
+	}
+	isolatedBoundarySegments.clear();
+	sharedBoundarySegments.clear();
 }
-
 
 // Read Constellation data record and grab cartesian positions of stars
 // returns false if can't parse record
@@ -62,14 +72,16 @@ bool Constellation::read(const string& record, Hip_Star_mgr * _VouteCeleste)
         istr >> HP;
 		if(HP == 0)
 		{
-			return(false);
+			delete [] asterism;
+			return false;
 		}
 
         asterism[i]=_VouteCeleste->searchHP(HP);
 		if (!asterism[i])
 		{
-			printf("Error in Constellation %s asterism : can't find star HP=%d\n",name.c_str(),HP);
-			return(false);
+			cout << "Error in Constellation " << name << " asterism : can't find star HP= " << HP << endl;
+			delete [] asterism;
+			return false;
 		}
     }
 
@@ -78,24 +90,24 @@ bool Constellation::read(const string& record, Hip_Star_mgr * _VouteCeleste)
 		XYZname+=(*asterism[ii]).XYZ;
     }
     XYZname*=1./(nb_segments*2);
+
 	return true;
 }
 
 // Draw the Constellation lines
+/*
 void Constellation::draw(Projector* prj) const
 {
     prj->set_orthographic_projection();	// set 2D coordinate
 	draw_optim(prj);
 	prj->reset_perspective_projection();
 }
+*/
 
 // Draw the lines for the Constellation using the coords of the stars
 // (optimized for use thru the class Constellation_mgr only)
 void Constellation::draw_optim(Projector* prj) const
 {
-	glDisable(GL_TEXTURE_2D);
-    glDisable(GL_BLEND);
-
 	if(!line_fader.get_interstate()) return;
 
 	glColor3fv(line_color*line_fader.get_interstate());
@@ -219,4 +231,56 @@ void Constellation::update(int delta_time)
 	line_fader.update(delta_time);
 	name_fader.update(delta_time);
 	art_fader.update(delta_time);
+	boundary_fader.update(delta_time);
+}
+
+// Draw the Constellation lines
+void Constellation::draw_boundary_optim(Projector* prj) const
+{
+	if(!boundary_fader.get_interstate()) return;
+
+//    if (boundaryXYZ.size() <= 2) return;
+//    if (!isolatedBoundarySegments.size()) return;
+
+	if (singleSelected) glColor3fv(boundary_color);
+	else glColor3fv(boundary_color*boundary_fader.get_interstate());
+/* drawing for original bound_20 data
+	i = 0;
+	Vec3d pt1;
+	Vec3d pt2;
+    do
+    {
+		if(prj->project_prec_earth_equ_line_check(boundaryXYZ[i],pt1,boundaryXYZ[i+1],pt2) ) 
+		{
+			glBegin(GL_LINES);
+				glVertex2f(pt1[0],pt1[1]);
+				glVertex2f(pt2[0],pt2[1]);
+			glEnd();
+		}
+		i++;
+	} while ( k < boundaryXYZ.size());
+*/
+	unsigned int i, j, size;
+	Vec3d pt1, pt2;
+	vector<Vec3f> *points;
+
+	if (singleSelected) size = isolatedBoundarySegments.size();
+	else size = sharedBoundarySegments.size();
+	
+	for (i=0;i<size;i++)
+	{
+		if (singleSelected) points = isolatedBoundarySegments[i];
+		else points = sharedBoundarySegments[i];
+
+		for (j=0;j<points->size()-1;j++)
+		{
+			if(prj->project_prec_earth_equ_line_check(points->at(j),pt1,points->at(j+1),pt2)) 
+			{
+				glBegin(GL_LINES);
+					glVertex2f(pt1[0],pt1[1]);
+					glVertex2f(pt2[0],pt2[1]);
+				glEnd();
+			}
+		}			
+	}
 }
