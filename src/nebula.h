@@ -64,11 +64,17 @@ public:
 
 	// Read the Nebula data from a file
     bool read(const string&);
-
+    bool read_NGC(char *record);
+    bool read_messier_texture(const string&);
 	void draw_tex(const Projector* prj, tone_reproductor* eye, bool bright_nebulae);
+	void draw_no_tex(const Projector* prj, const navigator * nav, tone_reproductor* eye);
     void draw_name(int hint_ON, const Projector* prj);
     void draw_circle(const Projector* prj, const navigator * nav);
     string get_name() { return name; };
+    bool hasTex(void) { return (neb_tex != NULL); }
+    static void set_nebula_scale(float scale) {nebula_scale = scale; }
+	static void set_nebulaname_format(int _format) { nameFormat = _format; }
+	static int get_nebulaname_format(void) { return nameFormat; }
 
 protected:
 	// Return the radius of a circle containing the object on screen
@@ -77,6 +83,7 @@ protected:
 private:
 	unsigned int NGC_nb;			// NGC catalog number
 	unsigned int IC_nb;				// IC catalog number
+	unsigned int Messier_nb;		// messier
 	string name;					// Nebula name
 	string longname;				// Nebula name & description
 	string credit;					// Nebula image credit
@@ -101,6 +108,10 @@ private:
 
 	static Vec3f label_color, circle_color;
 	static float nebula_scale;
+	static int nameFormat;		// 0 - standard (M83, 1234, I1234), 
+								// 1 - M83, NGC 1234, IC 1234
+								// 2 - 1 + name
+								// 3 - 1 + name + (type)
 };
 
 #endif // _NEBULA_H_
