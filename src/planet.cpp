@@ -76,41 +76,41 @@ planet::~planet()
 string planet::get_info_string(const navigator * nav) const
 {
 	double tempDE, tempRA;
-	stringstream ss;
+	ostringstream oss;
 
-	ss << "Name :" << common_name;
+	oss << "Name :" << common_name;
 
-	ss.setf(ios::fixed);
-	ss.precision(1);
-	if (sphere_scale != 1.f) ss << sphere_scale;
-	ss << endl;
+	oss.setf(ios::fixed);
+	oss.precision(1);
+	if (sphere_scale != 1.f) oss << sphere_scale;
+	oss << endl;
 	
 	Vec3d equPos = get_earth_equ_pos(nav);
 	rect_to_sphe(&tempRA,&tempDE,equPos);
 	
-	ss << "RA : " << print_angle_hms(tempRA*180./M_PI) << endl;
-	ss << "DE : " << print_angle_dms_stel(tempDE*180./M_PI) << endl;
+	oss << "RA : " << print_angle_hms(tempRA*180./M_PI) << endl;
+	oss << "DE : " << print_angle_dms_stel(tempDE*180./M_PI) << endl;
 	
-	ss.precision(2);
-	ss << "Magnitude : " << compute_magnitude(nav->get_observer_helio_pos()) << endl;
-	ss.precision(8);
-	ss << "Distance : " << equPos.length() << "AU";
+	oss.precision(2);
+	oss << "Magnitude : " << compute_magnitude(nav->get_observer_helio_pos()) << endl;
+	oss.precision(8);
+	oss << "Distance : " << equPos.length() << "AU";
 
-	return ss.str();
+	return oss.str();
 }
 
 // Return the information string "ready to print" :)
 string planet::get_short_info_string(const navigator * nav) const
 {
-	stringstream ss;
+	ostringstream oss;
 
-	ss << common_name;
-	ss.setf(ios::fixed);
-	ss.precision(1);
-	if (sphere_scale != 1.f) ss << sphere_scale;
-	ss << ": mag " << compute_magnitude(nav->get_observer_helio_pos());
+	oss << common_name;
+	oss.setf(ios::fixed);
+	oss.precision(1);
+	if (sphere_scale != 1.f) oss << sphere_scale;
+	oss << ": mag " << compute_magnitude(nav->get_observer_helio_pos());
 
-	return ss.str();
+	return oss.str();
 }
 
 double planet::get_close_fov(const navigator* nav) const
