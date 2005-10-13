@@ -423,7 +423,7 @@ void stel_ui::load_cities(const string & fileName)
 	char tmpstr[2000];
 	int total = 0;
 
-	printf("Loading cities file %s ... ", fileName.c_str());
+	cout << "Loading Cities data...";
 	FILE *fic = fopen(fileName.c_str(), "r");
 	if (!fic)
 	{
@@ -489,7 +489,7 @@ void stel_ui::load_cities(const string & fileName)
 		line++;
 	}
 	fclose(fic);
-	printf("loaded %d cities.\n", line);
+	cout << "(" << line << " cities loaded)" << endl;
 }
 
 // Search window
@@ -576,7 +576,7 @@ Component* stel_ui::createSearchWindow(void)
 	lblnebula1->setPos(x, y+5);
 	tab_nebula->addComponent(lblnebula1);
 
-	Label * lblnebula2 = new Label(_("eg. M83"));
+	Label * lblnebula2 = new Label(_("eg. M83, NGC 7009, IC 2118"));
 	lblnebula2->setPos(x+100, y+35);
 	tab_nebula->addComponent(lblnebula2);
 
@@ -680,7 +680,7 @@ Component* stel_ui::createSearchWindow(void)
 	search_tab_ctr->addTab(tab_constellations, _("Constellation"));
 	search_tab_ctr->addTab(tab_nebula, _("Nebula"));
 	search_tab_ctr->addTab(tab_planets, _("Planets & Moons"));
-	search_tab_ctr->addTab(tab_example, _("Widgets"));
+	//search_tab_ctr->addTab(tab_example, _("Widgets"));
     search_win->addComponent(search_tab_ctr);
 	search_win->addComponent(lblSearchMessage);
 	search_win->setOnHideBtCallback(callback<void>(this, &stel_ui::search_win_hideBtCallback));
@@ -781,7 +781,7 @@ void stel_ui::doSearchCommand(string _command, string _error)
 
 void stel_ui::doNebulaSearch(void)
 {
-    string objectName = string((char*)nebula_edit->getText().c_str());
+    string objectName = nebula_edit->getText();
     string originalName = objectName;
     
     transform(objectName.begin(), objectName.end(), objectName.begin(), (int(*)(int))toupper);
@@ -824,33 +824,29 @@ void stel_ui::showConstellationAutoComplete(void)
 void stel_ui::doStarSearch(void)
 {
     string objectName = star_edit->getText();
+    string originalName = objectName;
     unsigned int HP = core->hip_stars->getCommonNameHP(objectName);
 
-	star_edit->clearText();
-    
     if (HP > 0)
-	{
-		char sname[20];
-		sprintf(sname,"%u",HP);
-		objectName = sname;
+    {
+		ostringstream oss;
+		oss << "HP_" << HP;
+		objectName	= oss.str();
 	}
 	else
 	{
-		int number;
-		if (sscanf(objectName.c_str(),"%d",&number) != 1 || number < 0)
+	    transform(objectName.begin(), objectName.end(), objectName.begin(), (int(*)(int))toupper);
+    	for (string::size_type i=0;i<objectName.length();++i)
 		{
-			showSearchMessage(string("Invalid star name '" + objectName + "'")); 
-			objectName = "";
+			if (objectName[i]==' ') objectName[i]='_';
 		}
 	}
-      
-    if (objectName != "")
-    {
-	    string command = string("select HP " + objectName);
-    	string error = string("Star 'HP " + objectName + "' not found");
-     
-	    doSearchCommand(command, error);
-	}
+    
+	string command = string("select star " + objectName);
+    string error = string("Star '" + originalName + "' not found");
+    
+    doSearchCommand(command, error);
+    star_edit->clearText();
 }
 
 void stel_ui::showStarAutoComplete(void)
@@ -974,6 +970,7 @@ void stel_ui::saveRenderOptions(void)
 	conf.set_double("stars:star_twinkle_amount", core->StarTwinkleAmount);
 	conf.set_boolean("viewing:flag_constellation_drawing", core->constellation_get_flag_lines());
 	conf.set_boolean("viewing:flag_constellation_name", core->constellation_get_flag_names());
+	conf.set_boolean("viewing:flag_constellation_boundaries", core->constellation_get_flag_boundaries());
 	conf.set_boolean("viewing:flag_constellation_pick", core->asterisms->get_flag_isolate_selected());
 	conf.set_boolean("astro:flag_nebula", core->FlagNebula);
 	conf.set_boolean("astro:flag_nebula_name", core->nebulas->get_flag_hints());
@@ -982,7 +979,7 @@ void stel_ui::saveRenderOptions(void)
 	conf.set_boolean("astro:flag_planets_hints", core->FlagPlanetsHints);
 	conf.set_double("viewing:moon_scale", core->ssystem->get_moon()->get_sphere_scale());
 	conf.set_boolean("viewing:flag_night", core->FlagNight);
-	conf.set_boolean("viewing:use_common_names", core->FlagUseCommonNames);
+	//conf.set_boolean("viewing:use_common_names", core->FlagUseCommonNames);
 	conf.set_boolean("viewing:flag_equatorial_grid", core->FlagEquatorialGrid);
 	conf.set_boolean("viewing:flag_azimutal_grid", core->FlagAzimutalGrid);
 	conf.set_boolean("viewing:flag_equator_line", core->FlagEquatorLine);
