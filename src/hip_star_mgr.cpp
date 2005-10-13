@@ -36,7 +36,6 @@ Hip_Star_mgr::Hip_Star_mgr() :
 	StarArray(NULL),
 	StarArraySize(0),
 	starTexture(NULL), 
-	starFont(NULL),
 	limiting_mag(6.5f)
 {
 	starZones = new vector<Hip_Star*>[HipGrid.getNbPoints()];
@@ -45,16 +44,21 @@ Hip_Star_mgr::Hip_Star_mgr() :
 
 Hip_Star_mgr::~Hip_Star_mgr()
 {
-	delete [] starZones;
-	starZones=NULL;
-	delete [] StarArray;
-	StarArray=NULL;
-	delete [] StarFlatArray;
-	StarFlatArray=NULL;
 	delete starTexture;
 	starTexture=NULL;
-	delete starFont;
-	starFont=NULL;
+
+	
+	delete Hip_Star::starFont;
+	Hip_Star::starFont=NULL;
+
+	delete [] starZones;
+	starZones=NULL;
+
+	delete [] StarArray;
+	StarArray=NULL;
+
+	delete [] StarFlatArray;
+	StarFlatArray=NULL;
 }
 
 void Hip_Star_mgr::init(float font_size, const string& font_name, const string& hipCatFile,
@@ -65,8 +69,8 @@ void Hip_Star_mgr::init(float font_size, const string& font_name, const string& 
 	load_sci_names(sciNameFile);
 	
 	starTexture = new s_texture("star16x16",TEX_LOAD_TYPE_PNG_SOLID);  // Load star texture
-    starFont = new s_font(font_size, font_name);
-    if (!starFont)
+    Hip_Star::starFont = new s_font(font_size, font_name);
+    if (!Hip_Star::starFont)
     {
 	    printf("Can't create starFont\n");
         exit(-1);
@@ -153,11 +157,10 @@ int Hip_Star_mgr::load_common_names(const string& commonNameFile)
     cnFile=fopen(commonNameFile.c_str(),"r");
     if (!cnFile)
     {   
-        // printf("WARNING %s NOT FOUND\n",commonNameFile.c_str());
+        cout << "WARNING " << commonNameFile << "NOT FOUND" << endl;
         return 0;
     }
 
-    // Tony - Because this is called twice???
     if (!lstCommonNames.empty())
     {
        lstCommonNames.clear();
@@ -217,6 +220,8 @@ void Hip_Star_mgr::load_sci_names(const string& sciNameFile)
     for (int i=0; i<StarArraySize; i++)
 	{
 		StarArray[i].SciName = "";
+		StarArray[i].ShortSciName = "";
+		StarArray[i].OrigSciName = "";
     }
 
 	FILE *snFile;
@@ -245,10 +250,13 @@ void Hip_Star_mgr::load_sci_names(const string& sciNameFile)
 			star->SciName.erase(star->SciName.length()-1, 1);
 
 			// remove underscores
-			for (string::size_type j=0;j<star->SciName.length();++j) {
+			for (string::size_type j=0;j<star->SciName.length();++j) 
+			{
 				if (star->SciName[j]=='_') star->SciName[j]=' ';
 			}
 
+			star->SciName = translateGreek(star->SciName);
+			star->ShortSciName = stripConstellation(star->SciName);
 		}
 	} while(fgets(line, 256, snFile));
 
@@ -272,7 +280,7 @@ void Hip_Star_mgr::draw(float _star_scale, float _star_mag_scale, float _twinkle
     glEnable(GL_BLEND);
     glBindTexture (GL_TEXTURE_2D, starTexture->getID());
 	glBlendFunc(GL_ONE, GL_ONE);
-
+    
 	// Find the star zones which are in the screen
 	int nbZones=0;
 
@@ -291,6 +299,7 @@ void Hip_Star_mgr::draw(float _star_scale, float _star_mag_scale, float _twinkle
 	static vector<Hip_Star *>::iterator end;
 	static vector<Hip_Star *>::iterator iter;
 	Hip_Star* h;
+
 	for(int i=0;i<nbZones;++i)
 	{
 		end = starZones[zoneList[i]].end();
@@ -303,8 +312,8 @@ void Hip_Star_mgr::draw(float _star_scale, float _star_mag_scale, float _twinkle
 			h->draw();
 			if (!h->CommonName.empty() && names_fader.get_interstate() && h->Mag<maxMagStarName)
 			{
-				h->draw_name(starFont);
-				glBindTexture (GL_TEXTURE_2D, starTexture->getID());
+					if (h->draw_name())
+						glBindTexture (GL_TEXTURE_2D, starTexture->getID());
 			}
 		}
 	}
@@ -313,7 +322,8 @@ void Hip_Star_mgr::draw(float _star_scale, float _star_mag_scale, float _twinkle
 }
 
 // Draw all the stars
-void Hip_Star_mgr::draw_point(float _star_scale, float _star_mag_scale, float _twinkle_amount, float maxMagStarName, Vec3f equ_vision, tone_reproductor* _eye, Projector* prj, bool _gravity_label)
+void Hip_Star_mgr::draw_point(float _star_scale, float _star_mag_scale, float _twinkle_amount, 
+	float maxMagStarName, Vec3f equ_vision, tone_reproductor* _eye, Projector* prj, bool _gravity_label)
 {
 	Hip_Star::twinkle_amount = _twinkle_amount;
 	Hip_Star::star_scale = _star_scale;
@@ -352,7 +362,7 @@ void Hip_Star_mgr::draw_point(float _star_scale, float _star_mag_scale, float _t
 			h->draw_point();
 			if (!h->CommonName.empty() && names_fader.get_interstate() && h->Mag<maxMagStarName)
 			{
-				h->draw_name(starFont);
+				h->draw_name();
 				glBindTexture (GL_TEXTURE_2D, starTexture->getID());
 			}
 		}

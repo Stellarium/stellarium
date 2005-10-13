@@ -53,7 +53,10 @@ public:
 	vector<stel_object*> search_around(Vec3d v, double lim_fov);
 	vector<string> getNames(void) { return lstCommonNames; }
 	unsigned int getCommonNameHP(string _commonname);
-	
+	void set_starname_format(int format) { Hip_Star::set_starname_format(format); }
+	int get_starname_format(void) { return Hip_Star::get_starname_format(); }
+	void set_label_color(const Vec3f& c) {Hip_Star::label_color = c;}
+	void set_circle_color(const Vec3f& c) {Hip_Star::circle_color = c;}
 private:
 
 	// Load all the stars from the files
@@ -65,7 +68,6 @@ private:
 	Hip_Star ** StarFlatArray; 			// The simple array of the star for sequential research
 	int StarArraySize;                  // Number of star in the array
 	s_texture * starTexture;
-	s_font * starFont;
 	linear_fader names_fader;
 	float limiting_mag;                  // limiting magnitude at 60 degree fov
 	vector<string> lstCommonNames;
