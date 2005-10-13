@@ -35,12 +35,21 @@ float Hip_Star::names_brightness = 1.f;
 tone_reproductor* Hip_Star::eye = NULL;
 Projector* Hip_Star::proj = NULL;
 bool Hip_Star::gravity_label = false;
+int Hip_Star::nameFormat = 0;
+s_font *Hip_Star::starFont = NULL;
 
 Vec3f Hip_Star::circle_color = Vec3f(0.f,0.f,0.f);
 Vec3f Hip_Star::label_color = Vec3f(.8f,.8f,.8f);
 
-Hip_Star::Hip_Star()
+Hip_Star::Hip_Star() :
+	HP(0),
+	doubleStar(false),
+	variableStar(false)
 {
+	CommonName = "";
+	SciName = "";
+	ShortSciName = "";
+	OrigSciName = "";
 }
 
 Hip_Star::~Hip_Star()
@@ -49,57 +58,58 @@ Hip_Star::~Hip_Star()
 
 string Hip_Star::get_info_string(const navigator * nav) const
 {
-	stringstream ss;
-
 	float tempDE, tempRA;
 	rect_to_sphe(&tempRA,&tempDE,XYZ);
 
+	ostringstream oss;
 	if (CommonName!="" || SciName!="")
 	{
-		ss << "Name : " << CommonName << string(CommonName == "" ? "" : " ");
-		ss << string (SciName=="" ? "" : translateGreek(SciName,false)) << endl; 
+		oss << "Name : " << CommonName << string(CommonName == "" ? "" : " ");
+		oss << string (SciName=="" ? "" : SciName);
+			//translateGreek(SciName,false)); 
 	}
 	else 
 	{
-		ss << "HP " << HP << endl;
+		oss << "HP " << HP << endl;
 	}
 	
-	ss << "Cat : HP:";
-	if (HP > 0)	ss << HP; else ss << "-";
+	oss << "Cat : HP:";
+	if (HP > 0)	oss << HP; else oss << "-";
 
-	ss << endl;
-	ss << "RA : " << print_angle_hms(tempRA*180./M_PI) << endl;
-	ss << "DE : " << print_angle_dms_stel(tempDE*180./M_PI) << endl;
+	oss << endl;
 
-	ss.setf(ios::fixed);
-	ss.precision(2);
-	ss << "Magnitude : " << Mag << endl;
-	ss << "Distance : ";
+	oss << "RA : " << print_angle_hms(tempRA*180./M_PI) << endl;
+	oss << "DE : " << print_angle_dms_stel(tempDE*180./M_PI) << endl;
+
+	oss << "Spectral : " << SpType << endl;
+	oss.setf(ios::fixed);
+	oss.precision(2);
+	oss << "Magnitude : " << Mag << endl;
+	oss << "Distance : ";
 	
-	ss.precision(1);
-	if(Distance) ss << Distance; else ss << "-";
-	ss << " Light Years" << endl;
+	oss.precision(1);
+	if(Distance) oss << Distance; else oss << "-";
+	oss << " Light Years" << endl;
 	
-	return ss.str();
+	return oss.str();
 }
 
 string Hip_Star::get_short_info_string(const navigator * nav) const
 {
-	stringstream ss;
-	
+	ostringstream oss;
 	if (CommonName!="" || SciName!="")
 	{
-		if (CommonName == "") ss << SciName; else ss << CommonName; 
+		if (CommonName == "") oss << SciName; else oss << CommonName; 
 	}
 	else 
-		ss << "HP " << HP;
+		oss << "HP " << HP;
 
-	ss.setf(ios::fixed);
-	ss.precision(1);
-	ss << ": mag " << Mag;
-	if(Distance) ss << Distance << "ly";
+	oss.setf(ios::fixed);
+	oss.precision(1);
+	oss << ": mag " << Mag;
+	if(Distance) oss << Distance << "ly";
 
-	return ss.str();
+	return oss.str();
 }
 
 // Read datas in binary catalog and compute x,y,z;
@@ -169,7 +179,6 @@ int Hip_Star::read(FILE * catalog)
         case 'S':   RGB[0]=1.5f;  RGB[1]=0.8f; RGB[2]=0.2f;  break;
         default :   RGB[0]=1.0f;  RGB[1]=1.0f; RGB[2]=1.0f;
     }
-    
 
     MaxColorValue = MY_MAX(RGB[0],RGB[2]);
 
@@ -181,7 +190,6 @@ int Hip_Star::read(FILE * catalog)
 	fread(&LY,4,1,catalog);
 	LE_TO_CPU_FLOAT(Distance, LY);
 
-
 	if (mag==0 && type==0) return 0;
 
 	//	printf("%d\t%d\t%.4f\t%.4f\t%c\n", HP, mag, rao, deo, SpType);
@@ -189,7 +197,6 @@ int Hip_Star::read(FILE * catalog)
     return 1;
 
 }
-
 
 void Hip_Star::draw(void)
 {
@@ -264,9 +271,36 @@ void Hip_Star::draw_point(void)
 	glEnable(GL_TEXTURE_2D); // required for star labels to work
 }
 
-void Hip_Star::draw_name(const s_font* star_font)
+bool Hip_Star::draw_name(void)
 {   
+	string starname;
+	
+	if (nameFormat == 0) // commonname
+	{
+		if (CommonName == "") return false;
+		starname = CommonName;
+	}
+	else // nameFormat 1 & 2
+	{
+		if (SciName == "") return false;
+		// format 1 only has the star scientific name
+		// format 2 also has the constellation letters.
+		if (nameFormat == 1)
+			starname = ShortSciName;
+		else
+			starname = SciName;
+//		starname = translateGreek(SciName, (nameFormat == 1));
+		
+		if (CommonName != "")
+		{
+			ostringstream oss;
+			oss << starname << "(" + CommonName + ")";
+			starname = oss.str();
+		}
+	}
     glColor3fv(RGB*0.75*names_brightness);
-	gravity_label ? proj->print_gravity180(star_font, XY[0],XY[1], CommonName, 1, 6, -4) :
-	star_font->print(XY[0]+6,XY[1]-4, CommonName);
+	gravity_label ? proj->print_gravity180(starFont, XY[0],XY[1], starname, 1, 6, -4) :
+	starFont->print(XY[0]+6,XY[1]-4, starname);
+	
+	return true;
 }
