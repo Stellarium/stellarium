@@ -492,6 +492,7 @@ else if(command=="script") {
 	  execute_command("flag constellation_art off");
 	  execute_command("flag constellation_drawing off");
 	  execute_command("flag constellation_names off");
+	  execute_command("flag constellation_boundaries off");
 	  execute_command("flag ecliptic_line off");
 	  execute_command("flag equatorial_grid off");
 	  execute_command("flag equator_line off");
@@ -582,7 +583,6 @@ else if(command=="script") {
     status = 0;
   }
 
-
   if(status ) {
 
     // if recording commands, do that now
@@ -595,7 +595,6 @@ else if(command=="script") {
   }
 
   return(status);
-
 
 }
 
@@ -646,6 +645,10 @@ int StelCommandInterface::set_flag(string name, string value, bool &newval, bool
 			newval = !stcore->asterisms->get_flag_art();
 			stcore->asterisms->set_flag_art(newval);
 		} 
+		else if(name=="constellation_boundaries") {
+			newval = !stcore->asterisms->get_flag_boundaries();
+			stcore->asterisms->set_flag_boundaries(newval);
+		} 
 		else if(name=="constellation_pick") { 
              newval = !stcore->asterisms->get_flag_isolate_selected();
              stcore->asterisms->set_flag_isolate_selected(newval);
@@ -665,7 +668,7 @@ int StelCommandInterface::set_flag(string name, string value, bool &newval, bool
 		else if(name=="night") {
 			newval = stcore->FlagNight = !stcore->FlagNight;
 		}
-		else if(name=="use_common_names") newval = (stcore->FlagUseCommonNames = !stcore->FlagUseCommonNames);
+		//else if(name=="use_common_names") newval = (stcore->FlagUseCommonNames = !stcore->FlagUseCommonNames);
 		else if(name=="azimuthal_grid") newval = (stcore->FlagAzimutalGrid = !stcore->FlagAzimutalGrid);
 		else if(name=="equatorial_grid") newval = (stcore->FlagEquatorialGrid = !stcore->FlagEquatorialGrid);
 		else if(name=="equator_line") newval = (stcore->FlagEquatorLine = !stcore->FlagEquatorLine);
@@ -752,6 +755,7 @@ int StelCommandInterface::set_flag(string name, string value, bool &newval, bool
 		if(name=="constellation_drawing") stcore->asterisms->set_flag_lines(newval);
 		else if(name=="constellation_names") stcore->asterisms->set_flag_names(newval);
 		else if(name=="constellation_art") stcore->asterisms->set_flag_art(newval);
+		else if(name=="constellation_boundaries") stcore->asterisms->set_flag_boundaries(newval);
      	else if(name=="constellation_pick") stcore->asterisms->set_flag_isolate_selected(newval);
 		else if(name=="star_twinkle") stcore->FlagStarTwinkle = newval;
 		else if(name=="point_star") stcore->FlagPointStar = newval;
@@ -768,7 +772,7 @@ int StelCommandInterface::set_flag(string name, string value, bool &newval, bool
 		else if(name=="night") {
 			stcore->FlagNight = newval;
 		}
-		else if(name=="use_common_names") stcore->FlagUseCommonNames = newval;
+//		else if(name=="use_common_names") stcore->FlagUseCommonNames = newval;
 		else if(name=="azimuthal_grid") stcore->FlagAzimutalGrid = newval;
 		else if(name=="equatorial_grid") stcore->FlagEquatorialGrid = newval;
 		else if(name=="equator_line") stcore->FlagEquatorLine = newval;
