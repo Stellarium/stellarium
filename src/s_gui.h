@@ -176,6 +176,7 @@ namespace s_gui
         Component();
 		virtual ~Component();
         virtual void draw(void);
+        virtual void changeLocale(void);
         virtual void reshape(const s_vec2i& _pos, const s_vec2i& _size);
         virtual void reshape(int x, int y, int w, int h);
         virtual int getPosx() const {return pos[0];}
@@ -217,7 +218,8 @@ namespace s_gui
 		void setInFront(bool b) { moveToFront = b; } // signals this component to move to front
 		void setOpaque(bool b) { painter.setOpaque(b); }
 		unsigned int getType(void) { return type; }
-		static void setColorScheme(const s_color& _baseColor, const s_color& _textColor);
+		virtual void setColorScheme(void);
+   		virtual void setGUIColorSchemeMember(bool _b) {GUIColorSchemeMember = _b;}
     protected:
         s_vec2i pos;
         s_vec2i size;
@@ -226,10 +228,9 @@ namespace s_gui
         static bool focusing;
 		Painter painter;
 		
-		static bool change_mode; // signals to the components to change colour for night/day mode
-		static bool change_locale; // signals to the components to change locale
-		static s_color baseColor;
-		static s_color textColor;
+		static s_color guiBaseColor;
+		static s_color guiTextColor;
+		bool GUIColorSchemeMember;
 		static Painter defaultPainter;
 		static Scissor* scissor;
 		bool moveToFront;
@@ -265,11 +266,14 @@ namespace s_gui
         virtual void removeComponent(Component*);
 		virtual void removeAllComponents(void);
         virtual void draw(void);
+        virtual void changeLocale(void);
 		virtual bool onClic(int, int, S_GUI_VALUE, S_GUI_VALUE);
 		virtual bool onMove(int, int);
 		virtual bool onKey(Uint16, S_GUI_VALUE);
         virtual void setFocus(bool _focus);
-   		void changeLocale(void) { change_locale = true; } // var in component base
+   		void setGUIColorSchemeMember(bool _b);
+		void setColorScheme(const s_color& _baseColor, const s_color& _textColor);
+		virtual void setColorScheme(void);
     protected:
         std::list<Component*> childs;
     };
@@ -361,6 +365,7 @@ namespace s_gui
         virtual void setLabel(const string&, bool _translate = true);
         virtual void draw();
         virtual void draw(float intensity);
+        virtual void changeLocale(void);
 		virtual void adjustSize(void);
     protected:
         string label_native;
@@ -381,6 +386,7 @@ namespace s_gui
 			Justification _j = JUSTIFY_CENTER, bool _bright = false);
 		virtual ~LabeledButton();
         virtual void draw(void);
+		virtual void setColorScheme(void);
 		virtual void setVisible(bool _visible);
 		virtual void setFont(const s_font* f) {Button::setFont(f); label.setFont(f);}
 		virtual void setTextColor(const s_color& c) {Button::setTextColor(c); label.setTextColor(c);}
@@ -388,6 +394,7 @@ namespace s_gui
 		virtual void setJustification(Justification _j) { justification = _j; }
         void setLabel(const string& _label, bool _translate = true) { label.setLabel(_label, _translate); };
         void setBright(bool _b) { isBright = _b; };
+        virtual void changeLocale(void);
     protected:
 		Label label;
 		Justification justification;
@@ -446,6 +453,7 @@ namespace s_gui
 		virtual void setOnKeyCallback(const callback<void>& c) {onKeyCallback = c;}
 		virtual void setOnAutoCompleteCallback(const callback<void>& c) {onAutoCompleteCallback = c;}
         virtual void draw(void);
+		virtual void setColorScheme(void);
 		virtual void setFont(const s_font* f) {Button::setFont(f); label.setFont(f);}
 		virtual void setTextColor(const s_color& c) {Button::setTextColor(c); label.setTextColor(c);}
 		virtual void setPainter(const Painter& p) {Button::setPainter(p); label.setPainter(p);}
@@ -521,7 +529,8 @@ namespace s_gui
 		virtual void setOnChangeCallback(const callback<void>& c) {onChangeCallback = c;}
 		virtual bool onClic(int, int, S_GUI_VALUE, S_GUI_VALUE);
 		virtual bool onMove(int, int);
-        virtual void draw();
+        virtual void draw(void);
+        virtual void changeLocale(void);
    		virtual void setVisible(bool _visible);
 		string getItem(int value);
 		void addItems(const vector<string> _items);
@@ -550,6 +559,7 @@ namespace s_gui
 	    virtual ~TextLabel();
         virtual const string& getLabel() const {return label;}
         virtual void draw(void);
+        virtual void changeLocale(void);
         virtual void setLabel(const string&, bool _translate = true);
 		virtual void adjustSize(void);
 		virtual void setTextColor(const s_color& c);
@@ -767,6 +777,8 @@ namespace s_gui
 		void addTab(Component* c, const string& name);
 		virtual void draw(void);
 		virtual bool onClic(int, int, S_GUI_VALUE, S_GUI_VALUE);
+		virtual void setColorScheme(void);
+		virtual void changeLocale(void);
 	protected:
 		int getHeadersSize(void);
 		void select(TabHeader*);
