@@ -146,10 +146,11 @@ void stel_ui::init(void)
 	// Info on selected object
 	info_select_ctr = new Container();
 	info_select_ctr->reshape(0,15,300,100);
-	info_select_txtlbl = new TextLabel("Info");
+	info_select_txtlbl = new TextLabel();
     info_select_txtlbl->reshape(5,5,550,102);
 	info_select_ctr->setVisible(0);
 	info_select_ctr->addComponent(info_select_txtlbl);
+	info_select_ctr->setGUIColorSchemeMember(false);
 	desktop->addComponent(info_select_ctr);
 
 	// TEST message window
@@ -160,7 +161,7 @@ void stel_ui::init(void)
 	message_win->setOpaque(opaqueGUI);
 	message_win->reshape(300,200,400,100);
 	message_win->addComponent(message_txtlbl);
-	message_win->setVisible(0);
+	message_win->setVisible(false);
 	desktop->addComponent(message_win);
 
 	desktop->addComponent(createTopBar());
@@ -528,7 +529,7 @@ void stel_ui::cb(void)
 	core->cardinals_points->set_flag_show(bt_flag_cardinals->getState());
 	core->FlagAtmosphere 		= bt_flag_atmosphere->getState();
 	core->nebulas->set_flag_hints( bt_flag_nebula_name->getState() );
-	core->FlagHelp = bt_flag_help->getState();
+	core->FlagHelp 				= bt_flag_help->getState();
 	help_win->setVisible(core->FlagHelp);
 	core->navigation->set_viewing_mode(bt_flag_equatorial_mode->getState() ? VIEW_EQUATOR : VIEW_HORIZON);
 	core->FlagConfig			= bt_flag_config->getState();
@@ -712,10 +713,6 @@ void stel_ui::draw(void)
 	glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
 
 	glEnable(GL_BLEND);
-	if (core->FlagNight)
-		Component::setColorScheme(core->GuiBaseColorr, core->GuiTextColorr);
-	else
-		Component::setColorScheme(core->GuiBaseColor, core->GuiTextColor);
 
 	core->projection->set_2Dfullscreen_projection();	// 2D coordinate
 	Component::enableScissor();
@@ -1034,7 +1031,18 @@ int stel_ui::handle_keys(Uint16 key, S_GUI_VALUE state)
 		}
 
 		if(key==SDLK_r) core->commander->execute_command( "flag constellation_art toggle");
-		if(key==SDLK_c) core->commander->execute_command( "flag constellation_drawing toggle");
+		if(key==SDLK_c) 
+		{
+			if (core->asterisms->get_flag_lines() == false)
+				core->commander->execute_command( "flag constellation_drawing on");
+			else if (core->asterisms->get_flag_boundaries() == true)
+			{
+				core->commander->execute_command( "flag constellation_drawing off");
+				core->commander->execute_command( "flag constellation_boundaries off");
+			}
+			else
+				core->commander->execute_command( "flag constellation_boundaries on");
+		}
 		if(key==SDLK_d) core->commander->execute_command( "flag star_names toggle");
 
 		if(key==SDLK_1)
@@ -1071,6 +1079,23 @@ int stel_ui::handle_keys(Uint16 key, S_GUI_VALUE state)
 		if(key==SDLK_e) core->commander->execute_command( "flag equatorial_grid toggle");
   		if(key==SDLK_n)  // Tony for long nebula names - toggles between no name, shortname and longname
         {
+			if (!core->nebulas->get_flag_hints())
+			{
+				core->nebulas->set_nebulaname_format(0);
+				core->commander->execute_command( "flag nebula_names on");
+			}
+			else
+			{
+				if (core->nebulas->get_nebulaname_format() < 3)
+					core->nebulas->set_nebulaname_format(core->nebulas->get_nebulaname_format()+1);
+				else
+				{
+					core->nebulas->set_nebulaname_format(0);
+					core->commander->execute_command( "flag nebula_names off");
+				}
+			}
+			
+/*
             if (!core->nebulas->get_flag_hints())
             {
                core->commander->execute_command( "flag nebula_names on");
@@ -1084,6 +1109,7 @@ int stel_ui::handle_keys(Uint16 key, S_GUI_VALUE state)
                  core->commander->execute_command( "flag nebula_names off");
                  core->commander->execute_command( "flag nebula_long_names off");
             }
+*/
         }
 		if(key==SDLK_g) core->commander->execute_command( "flag landscape toggle");
 		if(key==SDLK_f) core->commander->execute_command( "flag fog toggle");
@@ -1120,7 +1146,24 @@ int stel_ui::handle_keys(Uint16 key, S_GUI_VALUE state)
 			core->navigation->set_flag_lock_equ_pos(!core->navigation->get_flag_lock_equ_pos());
 		}
 		if(key==SDLK_s && !(SDL_GetModState() & KMOD_CTRL))
-			core->commander->execute_command( "flag stars toggle");
+		{
+			if (!core->FlagStars)
+			{
+				core->hip_stars->set_starname_format(0);
+				core->commander->execute_command( "flag stars on");
+			}
+			else
+			{
+				if (core->hip_stars->get_starname_format() < 2)
+					core->hip_stars->set_starname_format(core->hip_stars->get_starname_format()+1);
+				else
+				{
+					core->hip_stars->set_starname_format(0);
+					core->commander->execute_command( "flag stars off");
+				}
+			}
+			//core->commander->execute_command( "flag stars toggle");
+		}
 
 		if(key==SDLK_SPACE) core->commander->execute_command("flag track_object on");
 
