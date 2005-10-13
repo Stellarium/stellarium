@@ -39,8 +39,10 @@ Nebula_mgr::~Nebula_mgr()
     {
 		delete (*iter);
     }
+
     if (Nebula::tex_circle) delete Nebula::tex_circle;
 	Nebula::tex_circle = NULL;
+
 	if (Nebula::nebula_font) delete Nebula::nebula_font;
 	Nebula::nebula_font = NULL;
 }
@@ -48,6 +50,9 @@ Nebula_mgr::~Nebula_mgr()
 // read from stream
 bool Nebula_mgr::read(float font_size, const string& font_name, const string& fileName, LoadingBar& lb)
 {
+	read_NGC_catalog(fileName, lb);
+	read_messier_textures(fileName, lb);
+/*	
 	printf(_("Loading messier nebulas data "));
 	
 	std::ifstream inf(fileName.c_str());
@@ -79,7 +84,7 @@ bool Nebula_mgr::read(float font_size, const string& font_name, const string& fi
 		lb.SetMessage(tmpstr);
 		lb.Draw((float)current/total);
 		
-		Nebula * e = new Nebula;
+		Nebula *e = new Nebula;
 		if (!e->read(record)) // reading error
 		{
 			printf("Error while parsing nebula %s\n", e->name.c_str());
@@ -91,7 +96,8 @@ bool Nebula_mgr::read(float font_size, const string& font_name, const string& fi
 			neb_array.push_back(e);
 		}
 	}
-	
+*/
+
 	if (!Nebula::nebula_font) Nebula::nebula_font = new s_font(font_size, font_name); // load Font
 	if (!Nebula::nebula_font)
 	{
@@ -133,7 +139,10 @@ void Nebula_mgr::draw(int hint_ON, Projector* prj, const navigator * nav, tone_r
 			if ( !prj->project_earth_equ_check(pXYZ,(*iter)->XY) ) continue;
 
 			if (draw_tex && (*iter)->get_on_screen_size(prj, nav)>5) 
-				(*iter)->draw_tex(prj, eye, bright_nebulae && (*iter)->get_on_screen_size(prj, nav)>15 );
+				if ((*iter)->hasTex())
+					(*iter)->draw_tex(prj, eye, bright_nebulae && (*iter)->get_on_screen_size(prj, nav)>15 );
+				else 
+					(*iter)->draw_no_tex(prj, nav, eye);
 
 			if (hints) {
 				(*iter)->draw_name(hint_ON, prj);
@@ -148,12 +157,41 @@ void Nebula_mgr::draw(int hint_ON, Projector* prj, const navigator * nav, tone_r
 // search by name
 stel_object * Nebula_mgr::search(const string& name)
 {
-	string n = string(name);
+	const string catalogs("NGC IC");
+	string cat;
+	unsigned int num;
+
+	string n = name;
     for (string::size_type i=0;i<n.length();++i)
 	{
 		if (n[i]=='_') n[i]=' ';
 	}	
-	return _search(n);
+	
+	if (name.c_str()[0] == 'M')
+	{
+		n = n.substr(1);		
+		istringstream ss(n);
+		ss >> num;
+		if (ss.fail()) return NULL;
+		cat = "M";
+	}
+	else
+	{
+		istringstream ss(n);
+
+		ss >> cat;
+	
+		// check if a valid catalog reference
+		if (catalogs.find(cat,0) == string::npos)
+			return NULL;
+
+		ss >> num;
+		if (ss.fail()) return NULL;
+	}
+	
+	if (cat == "M") return searchMessier(num);
+	if (cat == "NGC") return searchNGC(num);
+	return searchIC(num);
 }
 
 
@@ -201,14 +239,218 @@ vector<stel_object*> Nebula_mgr::search_around(Vec3d v, double lim_fov)
 	return result;
 }
 
-// search by name
-stel_object * Nebula_mgr::_search(const string& name)
+stel_object * Nebula_mgr::searchNGC(unsigned int NGC)
 {
     vector<Nebula *>::iterator iter;
     for(iter=neb_array.begin();iter!=neb_array.end();iter++) 
 	{
-		if ((*iter)->name == name) return (*iter);
+		if ((*iter)->NGC_nb == NGC) return (*iter);
     }
 
     return NULL;
+}
+
+stel_object * Nebula_mgr::searchIC(unsigned int IC)
+{
+    vector<Nebula *>::iterator iter;
+    for(iter=neb_array.begin();iter!=neb_array.end();iter++) 
+	{
+		if ((*iter)->IC_nb == IC) return (*iter);
+    }
+
+    return NULL;
+}
+
+// search by name
+stel_object * Nebula_mgr::searchMessier(unsigned int M)
+{
+    vector<Nebula *>::iterator iter;
+    for(iter=neb_array.begin();iter!=neb_array.end();iter++) 
+	{
+		if ((*iter)->Messier_nb == M) return (*iter);
+    }
+
+    return NULL;
+}
+
+
+// read from stream
+bool Nebula_mgr::read_NGC_catalog(const string& fileName, LoadingBar& lb)
+{
+	char recordstr[512], tmpstr[512];
+	string dataDir = fileName;
+	unsigned int catalogSize, i;
+	unsigned int data_drop;
+
+	// create the texture string (no path or extension)
+	unsigned int loc = dataDir.rfind("/");
+	
+	if (loc != string::npos)
+		dataDir = dataDir.substr(0,loc+1);
+
+    cout << _("Loading NGC data...");
+	string ngcData = dataDir + "ngc2000.dat";
+    FILE * ngcFile = fopen(ngcData.c_str(),"rb");
+    if (!ngcFile)
+    {
+        cout << "NGC data file " << ngcData << " not found" << endl;
+		return false;
+    }
+
+	// read the number of lines
+    catalogSize=0;
+	while (fgets(recordstr,512,ngcFile)) catalogSize++;
+	rewind(ngcFile);
+
+	// Read the NGC entries
+	i = 0;
+	data_drop = 0;
+	while (fgets(recordstr,512,ngcFile)) // temporary for testing
+	{
+		if (!(i%200) || (i == catalogSize-1))
+		{
+			// Draw loading bar
+			snprintf(tmpstr, 512, _("Loading NGC catalog: %d/%d"), i == catalogSize-1 ? catalogSize : i, catalogSize);
+			lb.SetMessage(tmpstr);
+			lb.Draw((float)i/catalogSize);
+		}
+		Nebula *e = new Nebula;
+		int temp = e->read_NGC(recordstr);
+		if (!temp) // reading error
+		{
+			cout << "Error while parsing nebula " << e->name << endl;
+			delete e;
+			e = NULL;
+			data_drop++;
+		} 
+		else
+		{
+			neb_array.push_back(e);
+		}
+		i++;
+	}
+    fclose(ngcFile);
+	cout << "(" << i << " items loaded [" << data_drop << " dropped])" << endl;
+
+    cout << _("Loading NGC name data...");
+	string ngcNameData = dataDir + "ngc2000names.dat";
+    FILE * ngcNameFile = fopen(ngcNameData.c_str(),"rb");
+    if (!ngcNameFile)
+    {
+        cout << "NGC name data file " << ngcNameData << " not found" << endl;
+		return false;
+    }
+    
+    // Read the names of the NGC objects
+	i = 0;
+	char n[40];
+	int nb, k;
+	string name;
+	Nebula *e;
+	
+	while (fgets(recordstr,512,ngcNameFile))
+	{
+		ostringstream oss;
+		sscanf(&recordstr[38],"%d",&nb);
+		if (recordstr[37] == 'I')
+		{
+			oss << "IC " << nb;
+			e = (Nebula*)searchIC(nb);
+		}
+		else
+		{
+			oss << "NGC " << nb;
+			e = (Nebula*)searchNGC(nb);
+		}
+		name = oss.str();
+		
+		if (e)
+		{
+			strncpy(n, recordstr, 36);
+			// trim the white spaces at the back
+			n[36] = 0;
+			k = 36;
+			while (n[--k] == ' ' && k > 0);
+			n[k+1] = 0;
+			
+			// also a messier - we will call it a messier then
+			if (!strncmp(n, "M ",2))
+			{
+				istringstream iss(string(n).substr(1));  // remove the 'M'
+				ostringstream oss;
+
+				int num;
+				string old = name;
+				
+				iss >> num;
+				oss << "M" << num;
+				e->name = oss.str();
+
+				oss << "-" << old;
+				string check = oss.str();
+				e->longname = oss.str();
+				e->Messier_nb = num;
+			}
+			else
+			{
+				ostringstream oss;
+				oss << name << "-" << string(n);
+				e->longname = oss.str();
+			}
+		}
+		else
+			cout << endl << "...no position data for " << name;
+		i++;
+	}
+    fclose(ngcNameFile);
+	cout << "(" << i << " items loaded)" << endl;
+
+	return true;
+}
+
+bool Nebula_mgr::read_messier_textures(const string& fileName, LoadingBar& lb)
+{	
+	cout << _("Loading Messier textures...");
+	
+	std::ifstream inf(fileName.c_str());
+	if (!inf.is_open())
+	{
+		cout << "Can't open nebula catalog " << fileName << endl;
+		return false;
+	}
+	
+	// determine total number to be loaded for percent complete display
+	string record;
+	int total=0;
+	while(!getline(inf, record).eof())
+	{
+		++total;
+	}
+	inf.clear();
+	inf.seekg(0);
+	
+	cout << "(" << total << _(" deep space objects)") << endl;
+	
+	int current = 0;
+	int NGC;
+	char tmpstr[512];
+	while(!getline(inf, record).eof())
+	{
+		// Draw loading bar
+		++current;
+		snprintf(tmpstr, 512, _("Loading Nebula Data: %d/%d"), current, total);
+		lb.SetMessage(tmpstr);
+		lb.Draw((float)current/total);
+		
+		istringstream istr(record);
+		istr >> NGC;
+		
+		Nebula *e = (Nebula*)searchNGC(NGC);
+		if (e)
+		{
+			if (!e->read(record)) // reading error
+				printf("Error while parsing nebula %s\n", e->name.c_str());
+		}
+	}
+	return true;
 }
