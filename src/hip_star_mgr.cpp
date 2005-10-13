@@ -310,7 +310,7 @@ void Hip_Star_mgr::draw(float _star_scale, float _star_mag_scale, float _twinkle
 			if(h->Mag>maxMag) break;
 			if(!prj->project_prec_earth_equ_check(h->XYZ, h->XY)) continue;
 			h->draw();
-			if (!h->CommonName.empty() && names_fader.get_interstate() && h->Mag<maxMagStarName)
+			if (/*!h->CommonName.empty() && */names_fader.get_interstate() && h->Mag<maxMagStarName)
 			{
 					if (h->draw_name())
 						glBindTexture (GL_TEXTURE_2D, starTexture->getID());
