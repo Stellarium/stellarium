@@ -125,6 +125,9 @@ public:
 	void constellation_set_flag_lines(bool b) {asterisms->set_flag_lines(b);}
 	bool constellation_get_flag_lines(void) {return asterisms->get_flag_lines();}
 	
+	//! Set/Get display flag of constellation boundaries
+	bool constellation_get_flag_boundaries(void) {return asterisms->get_flag_boundaries();}
+
 	//! Set/Get display flag of constellation art
 	void constellation_set_flag_art(bool b) {asterisms->set_flag_art(b);}
 	bool constellation_get_flag_art(void) {return asterisms->get_flag_art();}
@@ -176,6 +179,8 @@ public:
 private:
 	void set_system_locale(void);
 	void set_sky_locale(void);
+	string get_cursor_pos(int x, int y);
+
 
 	// Main elements of the program
 	navigator * navigation;				// Manage all navigation parameters, coordinate transformations etc..
@@ -352,7 +357,7 @@ private:
 	bool FlagMoonScaled;
 	float ConstellationArtIntensity;
 	float ConstellationArtFadeDuration;
-	bool FlagUseCommonNames;
+	//bool FlagUseCommonNames;
 	bool FlagNight;
 
 	// Navigation

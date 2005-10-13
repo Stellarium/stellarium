@@ -62,6 +62,7 @@ stel_core::stel_core(const string& DDIR, const string& TDIR, const string& CDIR,
 
 	time_multiplier = 1;
 	object_pointer_visibility = 1;
+
 }
 
 stel_core::~stel_core()
@@ -97,7 +98,11 @@ void stel_core::init(void)
 {
 	// read current ui locale
 	char *tmp = setlocale(LC_MESSAGES, "");
-	printf("Locale is %s\n", tmp);
+	
+	cout << "Locale is ";
+	if (!tmp) cout << "(Default)";
+	else cout << tmp;
+	cout << endl;
 
 	if(tmp == NULL) UILocale = "";
 	else UILocale = tmp;
@@ -112,7 +117,7 @@ void stel_core::init(void)
 	ConstellationFontSize = 16.f;
 	StarFontSize = 12.f;
 	PlanetFontSize = 13.f;
-	NebulaFontSize = 12.0f;
+	NebulaFontSize = 11.0f;
 	GridFontSize = 12.f;
 	CardinalsFontSize = 30.f;
 	LoadingBarFontSize = 12.f;
@@ -210,6 +215,9 @@ void stel_core::init(void)
 	ui->setTitleObservatoryName(ui->getTitleWithAltitude());
 	ui->init_tui();
 	
+	if (!FlagNight) ui->desktop->setColorScheme(GuiBaseColor, GuiTextColor);
+	else ui->desktop->setColorScheme(GuiBaseColorr, GuiTextColorr);
+
 	// now redo this so we fill the autocomplete dialogs now UI inititalised
 	set_system_locale_by_name(SkyLocale); // and UILocale are the same but different format fra vs fr_FR!!!! TONY
 
@@ -359,6 +367,7 @@ void stel_core::update(int delta_time)
 // Execute all the drawing functions
 void stel_core::draw(int delta_time)
 {
+	
 	// Init openGL viewing with fov, screen size and clip planes
 	projection->set_clipping_planes(0.0005 ,50);
 
@@ -386,9 +395,6 @@ void stel_core::draw(int delta_time)
 	}
 
 	// Draw all the constellations
-	//asterisms->set_flag_lines(FlagConstellationDrawing);
-	//asterisms->set_flag_art(FlagConstellationArt);
-	//asterisms->set_flag_names(FlagConstellationName);
 	asterisms->set_flag_gravity_label(FlagGravityLabels);
 	asterisms->draw(projection, navigation);
 
@@ -608,7 +614,6 @@ void stel_core::load_config_from(const string& confFile)
 	set_system_locale_by_name(skyloc->clean_sky_locale_name(locale));  // looks at environment locale if "system_default"
 
 	// Star section
-	NebulaScale			= conf.get_double ("stars:nebula_scale");
 	StarScale			= conf.get_double ("stars:star_scale");
 	if(ssystem) ssystem->set_object_scale(StarScale);  // if reload config
 
@@ -696,6 +701,7 @@ void stel_core::load_config_from(const string& confFile)
 	// Viewing section
 	asterisms->set_flag_lines(conf.get_boolean("viewing:flag_constellation_drawing"));
 	asterisms->set_flag_names(conf.get_boolean("viewing:flag_constellation_name"));
+	asterisms->set_flag_boundaries(conf.get_boolean("viewing","flag_constellation_boundaries",false));
 	asterisms->set_flag_art(  conf.get_boolean("viewing:flag_constellation_art"));
 	asterisms->set_flag_isolate_selected(conf.get_boolean("viewing", "flag_constellation_isolate_selected",
 														  conf.get_boolean("viewing", "flag_constellation_pick", 0)));
@@ -712,7 +718,7 @@ void stel_core::load_config_from(const string& confFile)
 	ConstellationArtIntensity       = conf.get_double("viewing","constellation_art_intensity", 0.5);
 	ConstellationArtFadeDuration    = conf.get_double("viewing","constellation_art_fade_duration",2.);
 	FlagNight    			= conf.get_boolean("viewing:flag_night");
-	FlagUseCommonNames		= conf.get_boolean("viewing:flag_use_common_names");
+//	FlagUseCommonNames		= conf.get_boolean("viewing:flag_use_common_names");
 
 	// Astro section
 	FlagStars				= conf.get_boolean("astro:flag_stars");
@@ -725,6 +731,7 @@ void stel_core::load_config_from(const string& confFile)
 	nebulas->set_flag_hints(conf.get_boolean("astro:flag_nebula_name"));
     FlagNebulaLongName      = conf.get_boolean("astro:flag_nebula_long_name"); 
 	MaxMagNebulaName		= conf.get_double("astro", "max_mag_nebula_name", 99);
+	NebulaScale				= conf.get_double("astro", "nebula_scale",1.0f);
 	FlagMilkyWay			= conf.get_boolean("astro:flag_milky_way");
 	MilkyWayIntensity       = conf.get_double("astro","milky_way_intensity",1.);
 	milky_way->set_intensity(MilkyWayIntensity);
@@ -854,6 +861,7 @@ void stel_core::save_config_to(const string& confFile)
 	conf.set_boolean("viewing:flag_constellation_drawing", asterisms->get_flag_lines());
 	conf.set_boolean("viewing:flag_constellation_name", asterisms->get_flag_names());
 	conf.set_boolean("viewing:flag_constellation_art", asterisms->get_flag_art());
+	conf.set_boolean("viewing:flag_constellation_boundaries", asterisms->get_flag_boundaries());
 	conf.set_boolean("viewing:flag_constellation_isolate_selected", asterisms->get_flag_isolate_selected());
 
 	conf.set_boolean("viewing:flag_azimutal_grid", FlagAzimutalGrid);
@@ -868,7 +876,7 @@ void stel_core::save_config_to(const string& confFile)
 	conf.set_double ("viewing:constellation_art_intensity", ConstellationArtIntensity);
 	conf.set_double ("viewing:constellation_art_fade_duration", ConstellationArtFadeDuration);
 	conf.set_boolean("viewing:flag_night", FlagNight);
-	conf.set_boolean("viewing:flag_use_common_names", FlagUseCommonNames);
+	//conf.set_boolean("viewing:flag_use_common_names", FlagUseCommonNames);
 
 	// Astro section
 	conf.set_boolean("astro:flag_stars", FlagStars);
@@ -881,6 +889,7 @@ void stel_core::save_config_to(const string& confFile)
 	conf.set_boolean("astro:flag_nebula_name", nebulas->get_flag_hints());
 	conf.set_boolean("astro:flag_nebula_long_name", FlagNebulaLongName); // Tony - added long name
 	conf.set_double("astro:max_mag_nebula_name", MaxMagNebulaName);
+	conf.set_double("astro:nebula_scale", NebulaScale);
 	conf.set_boolean("astro:flag_milky_way", FlagMilkyWay);
 	conf.set_double("astro:milky_way_intensity", MilkyWayIntensity);
 	conf.set_boolean("astro:flag_bright_nebulae", FlagBrightNebulae);
