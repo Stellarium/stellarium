@@ -133,6 +133,7 @@ public:
 	void set_intensity(float _intensity);
 	float get_intensity() { return intensity; };
 	void set_texture(const string& tex_file, bool blend = false);
+	void set_color(const Vec3f& c) { color=c;}
 private:
 	float radius;
 	s_texture* tex;
