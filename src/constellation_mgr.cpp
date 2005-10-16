@@ -39,7 +39,7 @@ Constellation_mgr::Constellation_mgr(Hip_Star_mgr *_hip_stars) :
 
 Constellation_mgr::~Constellation_mgr()
 {
-	vector < Constellation * >::iterator iter;
+	vector<Constellation *>::iterator iter;
 	for (iter = asterisms.begin(); iter != asterisms.end(); iter++)
 	{
 		delete(*iter);
@@ -47,6 +47,13 @@ Constellation_mgr::~Constellation_mgr()
 
 	if (asterFont) delete asterFont;
 	asterFont = NULL;
+
+	vector<vector<Vec3f> *>::iterator iter1;
+	for (iter1 = allBoundarySegments.begin(); iter1 != allBoundarySegments.end(); ++iter1)
+	{
+		delete (*iter1);
+	}
+	allBoundarySegments.clear();
 }
 
 void Constellation_mgr::set_font(float font_size, const string& font_name)
@@ -506,16 +513,14 @@ bool Constellation_mgr::load_boundaries(const string& conCatFile)
 	string dataDir = conCatFile;
 	unsigned int i, j;
 	
-	vector <Constellation *>::const_iterator iter;
-	for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
+	
+	vector<vector<Vec3f> *>::iterator iter;
+	for (iter = allBoundarySegments.begin(); iter != allBoundarySegments.end(); ++iter)
 	{
-		for (i=0;i<(*iter)->isolatedBoundarySegments.size();i++)
-			delete (*iter)->isolatedBoundarySegments[i];
-
-		(*iter)->isolatedBoundarySegments.clear();
-		(*iter)->sharedBoundarySegments.clear();
+		delete (*iter);
 	}
-
+	allBoundarySegments.clear();
+	
 	unsigned int loc = dataDir.rfind("/");
 	
 	if (loc != string::npos)
@@ -559,6 +564,9 @@ bool Constellation_mgr::load_boundaries(const string& conCatFile)
 			points->push_back(XYZ);
 		}
 		
+		// this list is for the de-allocation
+		allBoundarySegments.push_back(points);
+
 		dataFile >> numc;  
 		// there are 2 constellations per boundary
 		
