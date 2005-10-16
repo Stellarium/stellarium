@@ -308,6 +308,7 @@ private:
 	Vec3f EclipticColor;
 
 	Vec3f ConstLinesColor;
+	Vec3f ConstBoundaryColor;
 	Vec3f ConstNamesColor;
 	Vec3f NebulaLabelColor;
 	Vec3f NebulaCircleColor;

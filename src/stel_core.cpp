@@ -243,6 +243,7 @@ void stel_core::init(void)
 	asterisms->set_art_intensity(ConstellationArtIntensity);
 	asterisms->set_art_fade_duration(ConstellationArtFadeDuration);
 	asterisms->set_line_color(ConstLinesColor);
+	asterisms->set_boundary_color(ConstBoundaryColor);
 	asterisms->set_label_color(ConstNamesColor);
 	
 	selected_planet=NULL;	// Fix a bug on macosX! Thanks Fumio!
@@ -622,7 +623,7 @@ void stel_core::load_config_from(const string& confFile)
 	MaxMagStarName		= conf.get_double ("stars:max_mag_star_name");
 	FlagStarTwinkle		= conf.get_boolean("stars:flag_star_twinkle");
 	FlagPointStar		= conf.get_boolean("stars:flag_point_star");
-	//	hip_stars->set_limiting_mag(conf.get_double("stars", "star_limiting_mag", 6.5f));
+	hip_stars->set_limiting_mag(conf.get_double("stars", "star_limiting_mag", 6.5f));
 
 	// Ui section
 	FlagShowFps			= conf.get_boolean("gui:flag_show_fps");
@@ -650,6 +651,7 @@ void stel_core::load_config_from(const string& confFile)
 	EclipticColor		= str_to_vec3f(conf.get_str("color:ecliptic_color").c_str());
 	ConstLinesColor		= str_to_vec3f(conf.get_str("color:const_lines_color").c_str());
 	ConstNamesColor		= str_to_vec3f(conf.get_str("color:const_names_color").c_str());
+	ConstBoundaryColor	= str_to_vec3f(conf.get_str("color", "const_boundary_color", "0.8,0.3,0.3").c_str());
 	NebulaLabelColor	= str_to_vec3f(conf.get_str("color:nebula_label_color").c_str());
 	NebulaCircleColor	= str_to_vec3f(conf.get_str("color:nebula_circle_color").c_str());
 	CardinalColor 		= str_to_vec3f(conf.get_str("color:cardinal_color").c_str());
