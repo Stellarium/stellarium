@@ -75,6 +75,7 @@ private:
     Hip_Star_mgr *hipStarMgr;
 	Constellation* selected;
 	bool isolateSelected;
+	vector<vector<Vec3f> *> allBoundarySegments;
 };
 
 #endif // _CONSTELLATION_MGR_H_
