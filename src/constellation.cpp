@@ -38,15 +38,6 @@ Constellation::~Constellation()
     
 	if (art_tex) delete art_tex;
 	art_tex = NULL;
-	
-	// data is shared so only delete one lot
-	for (unsigned int i=0;i<sharedBoundarySegments.size();i++)
-	{
-		delete sharedBoundarySegments[i];
-		sharedBoundarySegments[i] = NULL;
-	}
-	isolatedBoundarySegments.clear();
-	sharedBoundarySegments.clear();
 }
 
 // Read Constellation data record and grab cartesian positions of stars
