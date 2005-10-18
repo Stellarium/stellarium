@@ -533,7 +533,12 @@ void stel_ui::cb(void)
 	help_win->setVisible(core->FlagHelp);
 	core->navigation->set_viewing_mode(bt_flag_equatorial_mode->getState() ? VIEW_EQUATOR : VIEW_HORIZON);
 	core->FlagConfig			= bt_flag_config->getState();
-	core->FlagNight				= bt_flag_night->getState();
+	if  (core->FlagNight != bt_flag_night->getState())
+	{
+		core->FlagNight				= bt_flag_night->getState();
+		if (!core->FlagNight) desktop->setColorScheme(core->GuiBaseColor, core->GuiTextColor);
+		else desktop->setColorScheme(core->GuiBaseColorr, core->GuiTextColorr);
+	}
 	config_win->setVisible(core->FlagConfig);
 
 	core->FlagSearch			= bt_flag_search->getState();
