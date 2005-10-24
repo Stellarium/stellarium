@@ -297,6 +297,7 @@ private:
 	// 3. General
 	s_tui::MultiSet_item<string>* tui_general_sky_culture;
 	s_tui::MultiSet2_item<string>* tui_general_sky_locale;
+	s_tui::Vector_item* tui_general_constellation_line_color;
 
 	// 4. Stars
 	s_tui::Boolean_item* tui_stars_show;
@@ -347,6 +348,7 @@ private:
 	void tui_cb_stars();        // change star parameters
 	void tui_cb_effects();        // change effect parameters
 	void tui_cb_sky_time();        // change effect parameters
+	void tui_cb_change_color();        // change colors
 
 	// Parse a file of type /usr/share/zoneinfo/zone.tab
 	s_tui::MultiSet_item<string>* stel_ui::create_tree_from_time_zone_file(const string& zonetab);

@@ -153,6 +153,11 @@ void stel_ui::init_tui(void)
 	tui_general_sky_locale->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb_tui_general_change_sky_locale));
 	tui_menu_general->addComponent(tui_general_sky_locale);
 
+	// TESTING
+	tui_general_constellation_line_color = new s_tui::Vector_item(string("3.3 ") + _("Constellation color: "));
+	tui_general_constellation_line_color->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb_change_color));
+	tui_menu_general->addComponent(tui_general_constellation_line_color);
+
 
 	// 4. Stars
 	tui_stars_show = new s_tui::Boolean_item(false, string("4.1 ") + _("Show: "), _("Yes"),_("No"));
@@ -595,3 +600,13 @@ void stel_ui::tui_cb_effects_nebulae_label_magnitude()
 	oss << "set max_mag_nebula_name " << tui_effect_nebulae_label_magnitude->getValue();
 	core->commander->execute_command(oss.str());
 }
+
+
+void stel_ui::tui_cb_change_color() {
+
+	// TESTING ONLY
+	core->asterisms->set_line_color( tui_general_constellation_line_color->getVector() );
+
+}
+
+
