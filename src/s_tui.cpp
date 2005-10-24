@@ -911,3 +911,81 @@ bool ActionConfirm_item::onKey(Uint16 k, S_TUI_VALUE v)
 	}
 	return true;
 }
+
+
+
+Vector_item::Vector_item(const string& _label, Vec3d _init_vector) :
+	CallbackComponent(), vector(_init_vector), current_edit(NULL), label(_label),
+	a(NULL), b(NULL), c(NULL)
+{
+	a = new Decimal_item(0, 1, 0, "", 0.05);
+	b = new Decimal_item(0, 1, 0, "", 0.05);
+	c = new Decimal_item(0, 1, 0, "", 0.05);
+	current_edit = a;
+}
+
+Vector_item::~Vector_item()
+{
+	delete a;
+	delete b;
+	delete c;
+}
+
+bool Vector_item::onKey(Uint16 k, S_TUI_VALUE v)
+{
+	if (v==S_TUI_RELEASED) return false;
+
+	if (current_edit->onKey(k,v))
+	{
+		vector[0] = a->getValue();
+		vector[1] = b->getValue();
+		vector[2] = c->getValue();
+
+		if (!onChangeCallback.empty()) onChangeCallback();
+		return true;
+	}
+	else
+	{
+		if (k==SDLK_ESCAPE)
+		{
+			return false;
+		}
+
+		if (k==SDLK_RIGHT)
+		{
+			if (current_edit==a) current_edit=b;
+			else if (current_edit==b) current_edit=c;
+			else if (current_edit==c) current_edit=a;
+			return true;
+		}
+		if (k==SDLK_LEFT)
+		{
+			if (current_edit==a) current_edit=c;
+			else if (current_edit==c) current_edit=b;
+			else if (current_edit==b) current_edit=a;
+			return true;
+		}
+	}
+
+	return false;
+}
+
+
+string Vector_item::getString(void)
+{
+
+	string s1[3];
+	string s2[3];
+	if (current_edit==a && active){s1[0] = start_active; s2[0] = stop_active;}
+	if (current_edit==b && active){s1[1] = start_active; s2[1] = stop_active;}
+	if (current_edit==c && active){s1[2] = start_active; s2[2] = stop_active;}
+
+	ostringstream os;
+	os 	<< label <<
+	s1[0] << a->getString() << s2[0] << " " <<
+	s1[1] << b->getString() << s2[1] << " " <<
+		s1[2] << c->getString() << s2[2] << " ";
+	return os.str();
+}
+
+
