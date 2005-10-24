@@ -516,6 +516,27 @@ namespace s_tui
 		MultiSet_item<string>* current_edit;
     };
 
+
+	// Widget used to edit a vector
+    class Vector_item : public CallbackComponent
+    {
+    public:
+		Vector_item(const string& _label = string(), Vec3d _init_vector = Vec3d(0,0,0));
+		~Vector_item();
+		virtual bool onKey(Uint16, S_TUI_VALUE);
+		virtual string getString(void);
+		virtual bool isEditable(void) const {return true;}
+		Vec3d getVector(void) const {return vector;}
+		void setVector(Vec3d _vector) {vector = _vector;}
+    protected:
+		Vec3d vector;
+		Decimal_item* current_edit;	// 0 to 2
+		string label;
+		Decimal_item *a, *b, *c;
+    };
+
+
+
 }; // namespace s_tui
 
 #endif // _TUI_H_
