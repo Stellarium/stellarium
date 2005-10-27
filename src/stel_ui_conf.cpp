@@ -250,7 +250,7 @@ Component* stel_ui::createConfigWindow(void)
 	earth_map->setOnNearestCityCallback(callback<void>(this, &stel_ui::setCityFromMap));
 	tab_location->addComponent(earth_map);
 	y+=earth_map->getSizey();
-	earth_map->set_font(core->MapFontSize, core->BaseFontName);
+	earth_map->set_font(core->MapFontSize, core->DataDir + core->BaseFontName);
 	load_cities(core->DataDir + "cities.fab");
 	
 	y += 5;

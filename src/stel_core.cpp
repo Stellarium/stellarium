@@ -107,10 +107,7 @@ void stel_core::init(void)
 	if(tmp == NULL) UILocale = "";
 	else UILocale = tmp;
 
-	// These values are overriden as required in the config
-	BaseFontSize = 12.5f; // updated in the config
-	BaseFontName = DataDir + "arial.txt";
-	
+	// Warning: These values are not overriden by the config!
 	BaseCFontSize = 12.5;
 	BaseCFontName = DataDir + "courierfont.txt";
 	MapFontSize = 9.5f;
@@ -155,9 +152,9 @@ void stel_core::init(void)
 	projection->set_viewport_type(ViewportType);
 
 	// Load hipparcos stars & names
-	LoadingBar lb(projection, LoadingBarFontSize, BaseFontName, "logo24bits", screen_W, screen_H);
+	LoadingBar lb(projection, LoadingBarFontSize, DataDir + BaseFontName, "logo24bits", screen_W, screen_H);
 	hip_stars->init(
-		StarFontSize, BaseFontName, 
+		StarFontSize, DataDir + BaseFontName, 
 		DataDir + "hipparcos.fab",
 		DataDir + "star_names." + SkyLocale + ".fab",
 		DataDir + "name.fab",
@@ -166,14 +163,14 @@ void stel_core::init(void)
 	// Init nebulas
 	nebulas->set_label_color(NebulaLabelColor);
 	nebulas->set_circle_color(NebulaCircleColor);
-	nebulas->read(NebulaFontSize, BaseFontName, DataDir + "messier.fab", lb);
+	nebulas->read(NebulaFontSize, DataDir + BaseFontName, DataDir + "messier.fab", lb);
 		
 	// Init the solar system
 	ssystem->load(DataDir + "ssystem.ini");
 	ssystem->load_names(DataDir + "planet_names." + SkyLocale + ".fab");
 	ssystem->set_label_color(PlanetNamesColor);
 	ssystem->set_orbit_color(PlanetOrbitsColor);
-	ssystem->set_font(StarFontSize, BaseFontName);
+	ssystem->set_font(StarFontSize, DataDir + BaseFontName);
 	ssystem->set_object_scale(StarScale);
 	ssystem->set_trail_color(ObjectTrailsColor);
 	if(FlagObjectTrails) ssystem->start_trails();
@@ -181,22 +178,22 @@ void stel_core::init(void)
 	atmosphere->set_fade_duration(AtmosphereFadeDuration);
 
 	// Init grids, lines and cardinal points
-	equ_grid->set_font(GridFontSize, BaseFontName);
+	equ_grid->set_font(GridFontSize, DataDir + BaseFontName);
 	equ_grid->set_color(EquatorialColor);
 
-	azi_grid->set_font(GridFontSize, BaseFontName);
+	azi_grid->set_font(GridFontSize, DataDir + BaseFontName);
 	azi_grid->set_color(AzimuthalColor);
 
 	equator_line->set_color(EquatorColor);
-	equator_line->set_font(12, BaseFontName);
+	equator_line->set_font(12, DataDir + BaseFontName);
 
 	ecliptic_line->set_color(EclipticColor);
-	ecliptic_line->set_font(12, BaseFontName);
+	ecliptic_line->set_font(12, DataDir + BaseFontName);
 
 	meridian_line->set_color(AzimuthalColor);
-	meridian_line->set_font(12, BaseFontName);
+	meridian_line->set_font(12, DataDir + BaseFontName);
 
-	cardinals_points->set_font(CardinalsFontSize, BaseFontName);
+	cardinals_points->set_font(CardinalsFontSize, DataDir + BaseFontName);
 	cardinals_points->set_color(CardinalColor);
 
 	// Init milky way
@@ -239,7 +236,7 @@ void stel_core::init(void)
 	// Load constellations
 	string tmpstring=SkyCulture; SkyCulture=""; // Temporary trick
 	set_sky_culture(tmpstring);
-	asterisms->set_font(StarFontSize, BaseFontName);
+	asterisms->set_font(StarFontSize, DataDir + BaseFontName);
 	asterisms->set_art_intensity(ConstellationArtIntensity);
 	asterisms->set_art_fade_duration(ConstellationArtFadeDuration);
 	asterisms->set_line_color(ConstLinesColor);
@@ -641,6 +638,7 @@ void stel_core::load_config_from(const string& confFile)
 	GuiBaseColorr		= str_to_vec3f(conf.get_str("color", "gui:gui_base_colorr", "0.7,0.2,0.1").c_str());
 	GuiTextColorr		= str_to_vec3f(conf.get_str("color", "gui:gui_text_colorr", "0.9,0.4,0.2").c_str());
 	BaseFontSize		= conf.get_double ("gui","base_font_size",15);
+	BaseFontName        = conf.get_str("gui", "base_font_name", "spacefont.txt");
 	FlagShowScriptBar	= conf.get_boolean("gui","flag_show_script_bar",0);
 	MouseCursorTimeout  = conf.get_double("gui","mouse_cursor_timeout",0);
 
@@ -807,6 +805,7 @@ void stel_core::save_config_to(const string& confFile)
 	conf.set_str	("gui:gui_base_colorr", vec3f_to_str(GuiBaseColorr));
 	conf.set_str	("gui:gui_text_colorr", vec3f_to_str(GuiTextColorr));
 	conf.set_double ("gui:base_font_size", BaseFontSize);
+	conf.set_str	("gui:base_font_name", BaseFontName);
 	conf.set_boolean("gui:flag_show_script_bar",FlagShowScriptBar);
 	conf.set_double("gui:mouse_cursor_timeout",MouseCursorTimeout);
 	
@@ -1354,7 +1353,7 @@ int stel_core::set_sky_culture(string _culture_dir)
 	bool flagLines = asterisms->get_flag_lines();
 	bool flagNames = asterisms->get_flag_names();
 
-	LoadingBar lb(projection, LoadingBarFontSize, BaseFontName, "logo24bits", screen_W, screen_H);
+	LoadingBar lb(projection, LoadingBarFontSize, DataDir + BaseFontName, "logo24bits", screen_W, screen_H);
 
 	//	printf(_("Loading constellations for sky culture: \"%s\"\n"), SkyCulture.c_str());
 	asterisms->load_lines_and_art(DataDir + "sky_cultures/" + SkyCulture + "/constellationship.fab",

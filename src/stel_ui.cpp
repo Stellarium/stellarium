@@ -102,7 +102,7 @@ stel_ui::~stel_ui()
 void stel_ui::init(void)
 {
 	// Load standard font
-	baseFont = new s_font(core->BaseFontSize, core->BaseFontName);
+	baseFont = new s_font(core->BaseFontSize, core->DataDir + core->BaseFontName);
 	if (!baseFont)
 	{
 		printf("ERROR WHILE CREATING FONT\n");
