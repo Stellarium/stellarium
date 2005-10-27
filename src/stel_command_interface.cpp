@@ -185,12 +185,9 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
       stcore->selected_planet=NULL;
       stcore->asterisms->set_selected(NULL);
     } else if(args["constellation"]!=""){
-      unsigned int hpnum; // Tony - highlight the constellation and the first star in the list
-      stcore->asterisms->set_selected(args["constellation"]);
-      hpnum = stcore->asterisms->get_first_selected_HP();
-      stcore->selected_object = stcore->hip_stars->searchHP(hpnum);
-      stcore->asterisms->set_selected((Hip_Star*)stcore->selected_object);
-      stcore->selected_planet=NULL;
+		stcore->asterisms->set_selected(args["constellation"]);
+		stcore->selected_object = NULL;
+		stcore->selected_planet=NULL;
     }
 
     if (stcore->selected_object) {
