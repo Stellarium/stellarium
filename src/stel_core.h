@@ -307,12 +307,8 @@ private:
 	Vec3f EquatorColor;
 	Vec3f EclipticColor;
 
-	Vec3f ConstLinesColor;
-	Vec3f ConstBoundaryColor;
-	Vec3f ConstNamesColor;
 	Vec3f NebulaLabelColor;
 	Vec3f NebulaCircleColor;
-	Vec3f CardinalColor;
 	Vec3f PlanetNamesColor;
 	Vec3f PlanetOrbitsColor;
 	Vec3f ObjectTrailsColor;

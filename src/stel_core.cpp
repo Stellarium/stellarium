@@ -194,7 +194,6 @@ void stel_core::init(void)
 	meridian_line->set_font(12, DataDir + BaseFontName);
 
 	cardinals_points->set_font(CardinalsFontSize, DataDir + BaseFontName);
-	cardinals_points->set_color(CardinalColor);
 
 	// Init milky way
 	milky_way->set_texture("milkyway");
@@ -239,9 +238,6 @@ void stel_core::init(void)
 	asterisms->set_font(StarFontSize, DataDir + BaseFontName);
 	asterisms->set_art_intensity(ConstellationArtIntensity);
 	asterisms->set_art_fade_duration(ConstellationArtFadeDuration);
-	asterisms->set_line_color(ConstLinesColor);
-	asterisms->set_boundary_color(ConstBoundaryColor);
-	asterisms->set_label_color(ConstNamesColor);
 	
 	selected_planet=NULL;	// Fix a bug on macosX! Thanks Fumio!
 
@@ -647,12 +643,13 @@ void stel_core::load_config_from(const string& confFile)
 	EquatorialColor		= str_to_vec3f(conf.get_str("color:equatorial_color").c_str());
 	EquatorColor		= str_to_vec3f(conf.get_str("color:equator_color").c_str());
 	EclipticColor		= str_to_vec3f(conf.get_str("color:ecliptic_color").c_str());
-	ConstLinesColor		= str_to_vec3f(conf.get_str("color:const_lines_color").c_str());
-	ConstNamesColor		= str_to_vec3f(conf.get_str("color:const_names_color").c_str());
-	ConstBoundaryColor	= str_to_vec3f(conf.get_str("color", "const_boundary_color", "0.8,0.3,0.3").c_str());
+	asterisms->set_line_color( str_to_vec3f(conf.get_str("color:const_lines_color").c_str()));
+	asterisms->set_label_color( str_to_vec3f(conf.get_str("color:const_names_color").c_str()));
+	asterisms->set_boundary_color( str_to_vec3f(conf.get_str("color", "const_boundary_color", "0.8,0.3,0.3").c_str()));
 	NebulaLabelColor	= str_to_vec3f(conf.get_str("color:nebula_label_color").c_str());
 	NebulaCircleColor	= str_to_vec3f(conf.get_str("color:nebula_circle_color").c_str());
-	CardinalColor 		= str_to_vec3f(conf.get_str("color:cardinal_color").c_str());
+	cardinals_points->set_color( str_to_vec3f(conf.get_str("color:cardinal_color").c_str()) );
+	//	CardinalColor 		= str_to_vec3f(conf.get_str("color:cardinal_color").c_str());
 	PlanetNamesColor	= str_to_vec3f(conf.get_str("color:planet_names_color").c_str());
 	PlanetOrbitsColor	= str_to_vec3f(conf.get_str("color", "planet_orbits_color", ".6,1,1").c_str());
 	ObjectTrailsColor	= str_to_vec3f(conf.get_str("color", "object_trails_color", "1,0.7,0").c_str());
@@ -814,11 +811,12 @@ void stel_core::save_config_to(const string& confFile)
 	conf.set_str    ("color:equatorial_color", vec3f_to_str(EquatorialColor));
 	conf.set_str    ("color:equator_color", vec3f_to_str(EquatorColor));
 	conf.set_str    ("color:ecliptic_color", vec3f_to_str(EclipticColor));
-	conf.set_str    ("color:const_lines_color", vec3f_to_str(ConstLinesColor));
-	conf.set_str    ("color:const_names_color", vec3f_to_str(ConstNamesColor));
+	conf.set_str    ("color:const_lines_color", vec3f_to_str(asterisms->get_line_color()));
+	conf.set_str    ("color:const_names_color", vec3f_to_str(asterisms->get_label_color()));
+	conf.set_str    ("color:const_boundary_color", vec3f_to_str(asterisms->get_boundary_color()));
 	conf.set_str	("color:nebula_label_color", vec3f_to_str(NebulaLabelColor));
 	conf.set_str	("color:nebula_circle_color", vec3f_to_str(NebulaCircleColor));
-	conf.set_str    ("color:cardinal_color", vec3f_to_str(CardinalColor));
+	conf.set_str    ("color:cardinal_color", vec3f_to_str(cardinals_points->get_color()));
 	conf.set_str    ("color:planet_names_color", vec3f_to_str(PlanetNamesColor));
 	conf.set_str    ("color:planet_orbits_color", vec3f_to_str(PlanetOrbitsColor));
 	conf.set_str    ("color:object_trails_color", vec3f_to_str(ObjectTrailsColor));
