@@ -51,8 +51,11 @@ public:
 
 	void set_flag_gravity_label(bool g) {Constellation::gravity_label = g;}
 	void set_line_color(const Vec3f& c) {Constellation::set_line_color(c);}
+	Vec3f get_line_color() {return Constellation::get_line_color();}
 	void set_label_color(const Vec3f& c) {Constellation::set_label_color(c);}
+	Vec3f get_label_color() {return Constellation::get_label_color();}
 	void set_boundary_color(const Vec3f& c) {Constellation::set_boundary_color(c);}
+	Vec3f get_boundary_color() {return Constellation::get_boundary_color();}
 	void set_font(float font_size, const string& font_name);
 	void set_selected(const string& shortname) {set_selected_const(find_from_short_name(shortname));}
 	void set_selected(const Hip_Star * s) {if (!s) set_selected_const(NULL); else set_selected_const(is_star_in(s));}

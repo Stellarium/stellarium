@@ -297,7 +297,6 @@ private:
 	// 3. General
 	s_tui::MultiSet_item<string>* tui_general_sky_culture;
 	s_tui::MultiSet2_item<string>* tui_general_sky_locale;
-	s_tui::Vector_item* tui_general_constellation_line_color;
 
 	// 4. Stars
 	s_tui::Boolean_item* tui_stars_show;
@@ -305,6 +304,11 @@ private:
 	s_tui::Decimal_item* tui_stars_twinkle;
 	s_tui::Decimal_item* tui_star_magscale;
 	
+	//  Colors
+	s_tui::Vector_item* tui_colors_const_line_color;
+	s_tui::Vector_item* tui_colors_const_label_color;
+	s_tui::Vector_item* tui_colors_cardinal_color;
+
 	// 5. Effects
 	s_tui::MultiSet_item<string>* tui_effect_landscape;
 	s_tui::Boolean_item* tui_effect_pointobj;

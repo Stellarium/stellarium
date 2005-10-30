@@ -86,6 +86,7 @@ void stel_ui::init_tui(void)
 	s_tui::MenuBranch* tui_menu_time = new s_tui::MenuBranch(string("2. ") + _("Set Time "));
 	s_tui::MenuBranch* tui_menu_general = new s_tui::MenuBranch(string("3. ") + _("General "));
 	s_tui::MenuBranch* tui_menu_stars = new s_tui::MenuBranch(string("4. ") + _("Stars "));
+	s_tui::MenuBranch* tui_menu_colors = new s_tui::MenuBranch(string("5. ") + _("Colors "));
 	s_tui::MenuBranch* tui_menu_effects = new s_tui::MenuBranch(string("5. ") + _("Effects "));
 	s_tui::MenuBranch* tui_menu_scripts = new s_tui::MenuBranch(string("6. ") + _("Scripts "));
 	s_tui::MenuBranch* tui_menu_administration = new s_tui::MenuBranch(string("7. ") + _("Administration "));
@@ -93,6 +94,7 @@ void stel_ui::init_tui(void)
 	tui_root->addComponent(tui_menu_time);
 	tui_root->addComponent(tui_menu_general);	
 	tui_root->addComponent(tui_menu_stars);
+	tui_root->addComponent(tui_menu_colors);
 	tui_root->addComponent(tui_menu_effects);
 	tui_root->addComponent(tui_menu_scripts);
 	tui_root->addComponent(tui_menu_administration);
@@ -153,11 +155,6 @@ void stel_ui::init_tui(void)
 	tui_general_sky_locale->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb_tui_general_change_sky_locale));
 	tui_menu_general->addComponent(tui_general_sky_locale);
 
-	// TESTING
-	tui_general_constellation_line_color = new s_tui::Vector_item(string("3.3 ") + _("Constellation color: "));
-	tui_general_constellation_line_color->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb_change_color));
-	tui_menu_general->addComponent(tui_general_constellation_line_color);
-
 
 	// 4. Stars
 	tui_stars_show = new s_tui::Boolean_item(false, string("4.1 ") + _("Show: "), _("Yes"),_("No"));
@@ -173,6 +170,22 @@ void stel_ui::init_tui(void)
 	tui_menu_stars->addComponent(tui_star_magscale);
 	tui_menu_stars->addComponent(tui_star_labelmaxmag);
 	tui_menu_stars->addComponent(tui_stars_twinkle);
+
+	// 5. Colors
+	tui_colors_const_line_color = new s_tui::Vector_item(string("5.1 ") + _("Constellation lines: "));
+	tui_colors_const_line_color->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb_change_color));
+	tui_menu_colors->addComponent(tui_colors_const_line_color);
+
+	tui_colors_const_label_color = new s_tui::Vector_item(string("5.2 ") + _("Constellation labels: "));
+	tui_colors_const_label_color->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb_change_color));
+	tui_menu_colors->addComponent(tui_colors_const_label_color);
+
+	tui_colors_cardinal_color = new s_tui::Vector_item(string("5.3 ") + _("Cardinal points: "));
+	tui_colors_cardinal_color->set_OnChangeCallback(callback<void>(this, &stel_ui::tui_cb_change_color));
+	tui_menu_colors->addComponent(tui_colors_cardinal_color);
+
+
+	
 
 
 	// 5. Effects
@@ -344,6 +357,11 @@ void stel_ui::tui_update_widgets(void)
 	tui_star_labelmaxmag->setValue(core->MaxMagStarName);
 	tui_stars_twinkle->setValue(core->StarTwinkleAmount);
 	tui_star_magscale->setValue(core->StarMagScale);
+
+	// 5. Colors
+	tui_colors_const_line_color->setVector(core->asterisms->get_line_color());
+	tui_colors_const_label_color->setVector(core->asterisms->get_label_color());
+	tui_colors_cardinal_color->setVector(core->cardinals_points->get_color());
 
 	// 5. effects
 	tui_effect_landscape->setValue(core->observatory->get_landscape_name());
@@ -604,8 +622,9 @@ void stel_ui::tui_cb_effects_nebulae_label_magnitude()
 
 void stel_ui::tui_cb_change_color() {
 
-	// TESTING ONLY
-	core->asterisms->set_line_color( tui_general_constellation_line_color->getVector() );
+	core->asterisms->set_line_color( tui_colors_const_line_color->getVector() );
+	core->asterisms->set_label_color( tui_colors_const_label_color->getVector() );
+	core->cardinals_points->set_color( tui_colors_cardinal_color->getVector() );
 
 }
 

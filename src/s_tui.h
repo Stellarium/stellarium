@@ -526,10 +526,10 @@ namespace s_tui
 		virtual bool onKey(Uint16, S_TUI_VALUE);
 		virtual string getString(void);
 		virtual bool isEditable(void) const {return true;}
-		Vec3d getVector(void) const {return vector;}
-		void setVector(Vec3d _vector) {vector = _vector;}
+		Vec3d getVector(void) const { return Vec3d( a->getValue(), b->getValue(), c->getValue()); }
+		void setVector(Vec3d _vector) { a->setValue(_vector[0]); b->setValue(_vector[1]); c->setValue(_vector[2]); }
+
     protected:
-		Vec3d vector;
 		Decimal_item* current_edit;	// 0 to 2
 		string label;
 		Decimal_item *a, *b, *c;
