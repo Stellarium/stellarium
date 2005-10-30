@@ -108,6 +108,7 @@ public:
     virtual ~Cardinals();
 	void draw(const Projector* prj, double latitude, bool gravityON = false) const;
 	void set_color(const Vec3f& c) {color = c;}
+	Vec3f get_color() {return color;}
 	void set_font(float font_size, const string& font_name);
 	int load_labels(string filename);  // for i18n
 	void update(int delta_time) {fader.update(delta_time);}

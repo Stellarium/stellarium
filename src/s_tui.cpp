@@ -915,13 +915,14 @@ bool ActionConfirm_item::onKey(Uint16 k, S_TUI_VALUE v)
 
 
 Vector_item::Vector_item(const string& _label, Vec3d _init_vector) :
-	CallbackComponent(), vector(_init_vector), current_edit(NULL), label(_label),
+	CallbackComponent(), current_edit(NULL), label(_label),
 	a(NULL), b(NULL), c(NULL)
 {
 	a = new Decimal_item(0, 1, 0, "", 0.05);
 	b = new Decimal_item(0, 1, 0, "", 0.05);
 	c = new Decimal_item(0, 1, 0, "", 0.05);
 	current_edit = a;
+	setVector(_init_vector);
 }
 
 Vector_item::~Vector_item()
@@ -937,9 +938,6 @@ bool Vector_item::onKey(Uint16 k, S_TUI_VALUE v)
 
 	if (current_edit->onKey(k,v))
 	{
-		vector[0] = a->getValue();
-		vector[1] = b->getValue();
-		vector[2] = c->getValue();
 
 		if (!onChangeCallback.empty()) onChangeCallback();
 		return true;

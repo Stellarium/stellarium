@@ -41,9 +41,14 @@ public:
     const Constellation* is_star_in(const Hip_Star *) const;
     string getName(void) { return name; };
     string getShortName(void) { return short_name; };
-    static void set_line_color(const Vec3f& c) { line_color = c; }
-    static void set_label_color(const Vec3f& c) { label_color = c; }
-    static void set_boundary_color(const Vec3f& c) { boundary_color = c; }
+    static void  set_line_color(const Vec3f& c) { line_color = c; }
+    static Vec3f get_line_color() { return line_color; }
+
+    static void  set_label_color(const Vec3f& c) { label_color = c; }
+    static Vec3f get_label_color() { return label_color; }
+
+    static void  set_boundary_color(const Vec3f& c) { boundary_color = c; }
+    static Vec3f get_boundary_color() { return boundary_color; }
 private:
     void draw_optim(Projector* prj) const;
     void draw_art_optim(Projector* prj, navigator* nav) const;
