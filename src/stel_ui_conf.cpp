@@ -805,7 +805,7 @@ void stel_ui::doConstellationSearch(void)
 
     if (objectName != "")
     {
-		string command = string("select constellation " + objectName);
+		string command = string("select constellation_star " + objectName);
 		string error = string("Constellation '" + objectName + "' not found");
 
 		doSearchCommand(command, error);

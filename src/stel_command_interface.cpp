@@ -185,10 +185,29 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
       stcore->selected_planet=NULL;
       stcore->asterisms->set_selected(NULL);
     } else if(args["constellation"]!=""){
-		stcore->asterisms->set_selected(args["constellation"]);
+
+		// Select only constellation, nothing else 	 
+		stcore->asterisms->set_selected(args["constellation"]); 
+
 		stcore->selected_object = NULL;
 		stcore->selected_planet=NULL;
+
+    } else if(args["constellation_star"]!=""){
+
+		// For Find capability, select a star in constellation so can center view on constellation 	 
+		unsigned int hpnum; 
+		stcore->asterisms->set_selected(args["constellation_star"]); 
+
+		hpnum = stcore->asterisms->get_first_selected_HP();
+		stcore->selected_object = stcore->hip_stars->searchHP(hpnum); 	 
+		stcore->asterisms->set_selected((Hip_Star*)stcore->selected_object); 	 
+		stcore->selected_planet=NULL;
+
+		// Some stars are shared, so now force constellation
+		stcore->asterisms->set_selected(args["constellation_star"]);
+
     }
+
 
     if (stcore->selected_object) {
       if (stcore->navigation->get_flag_traking()) stcore->navigation->set_flag_lock_equ_pos(1);
