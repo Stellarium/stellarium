@@ -183,13 +183,13 @@ bool Nebula::read(const string& record)
 	else { nType = NEB_UNKNOWN; typeDesc = ""; }
 /*
 	if (!strcmp(type,"N")) { nType = NEB_N; typeDesc = "Nebula"; } // supernova remnant
-	else if (!strcmp(type,"SG")) { nType = NEB_SG; typeDesc = "Sipral galaxy"; }
+	else if (!strcmp(type,"SG")) { nType = NEB_SG; typeDesc = "Spiral galaxy"; }
 	else if (!strcmp(type,"PN")) { nType = NEB_PN; typeDesc = "Planetary nebula"; }
 	else if (!strcmp(type,"LG")) { nType = NEB_LG; typeDesc = "Lenticular galaxy"; }
 	else if (!strcmp(type,"EG")) { nType = NEB_EG; typeDesc = "Elliptical galaxy"; }
 	else if (!strcmp(type,"OC")) { nType = NEB_OC; typeDesc = "Open cluster"; }
 	else if (!strcmp(type,"GC")) { nType = NEB_GC; typeDesc = "Globular cluster"; }
-	else if (!strcmp(type,"DN")) { nType = NEB_DN; typeDesc = "Globular cluster"; }
+	else if (!strcmp(type,"DN")) { nType = NEB_DN; typeDesc = "Diffuse Nebula"; }
 	else if (!strcmp(type,"IG")) { nType = NEB_IG; typeDesc = "Irregular galaxy"; }
 	else { nType = NEB_UNKNOWN; typeDesc = "Unknown type"; }
 */
