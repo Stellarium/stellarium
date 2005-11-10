@@ -51,17 +51,22 @@ other lines format : ascii# x y w h s
 
 5. messier.fab
 desc : Contains the nebula list (not only messier)
-type : ascii file, fields separated by SPACE, end of line is CR ('\n')
-line example : 1952 RS 05 34.5 +22 +01 8.2 06.0 0 M1_-_Crab_Nebula m1
-lines format : NGCnumber NebulaType hh min.mm deg min.mm mag size texRotation Name TexName
+type : ascii file, fields separated by whitespace, end of line is newline ('\n')
+line example : 1952 N 5 34.5 22 1 8.2 6 0 M1 M1_-_Crab_Nebula m1 Grasslands_Observatory
+lines format : NGCnumber NebulaType hh min.mm deg min.mm mag size texRotation Name TexName Credit
 	- NGCnumber : NGC catalog number
-	- NebulaType : TODO and change..
+	- NebulaType : DN, EG, GC, IG, LG, N, OC, PN, SG
+	  (Diffuse Nebula, Elliptical Galaxy, Globular Cluster, Irregular Galaxy, 
+	  Lenticular Galaxy, Nebula, Open Cluster, Planetary Nebula, Spiral Galaxy) 
 	- hh min.mm : Right ascention hour and minutes and tenth of minutes
-	- deg min.mm : Declinaison in degree min and tenth of minutes
+	- deg min.mm : Declination in degree min and tenth of minutes
 	- mag : magnitude
-	- size : angular size in arcminute
+	- size : angular size of texture in arcminutes
+	- texRotation : rotation of texture in degrees
 	- Name : Nebula name with spaces replaced by '_'
-	- TexName : texture file name. png file without alpha chanel.
+	- Descriptive Name: More descriptive nebula name with spaces replaced by '_'
+	- TexName : texture file name. png file without alpha channel
+	- Credit : Credit for the photograph source, with spaces replaced by '_'
 
 6. name.txt
 desc : More info about stars, not used anymore.
