@@ -28,7 +28,9 @@
 
 #define RADIUS_NEB 1.
 
-Nebula_mgr::Nebula_mgr()
+Nebula_mgr::Nebula_mgr() :
+	showNGC(false),
+	showMessier(false)
 {
 }
 
@@ -126,8 +128,20 @@ void Nebula_mgr::draw(int hint_ON, Projector* prj, const navigator * nav, tone_r
 	bool hints = (hints_fader.get_interstate() != 0);
 
     vector<Nebula *>::iterator iter;
-    for(iter=neb_array.begin();iter!=neb_array.end();iter++) {   
-
+    for(iter=neb_array.begin();iter!=neb_array.end();iter++) 
+	{   
+		if (showMessier)
+		{
+			if ((*iter)->Messier_nb != 0) goto show_nebula;
+		}
+		
+		if (showNGC)
+		{
+			if ((*iter)->NGC_nb != 0 || (*iter)->IC_nb != 0) goto show_nebula;
+		}
+		goto next_nebula;
+		
+show_nebula:
 		// improve performance by skipping if too small to see
 		if ((hints  && (*iter)->mag <= max_mag_name)
 			|| (*iter)->get_on_screen_size(prj, nav)>5) {
@@ -149,6 +163,7 @@ void Nebula_mgr::draw(int hint_ON, Projector* prj, const navigator * nav, tone_r
 				(*iter)->draw_circle(prj, nav);
 			}
 		}
+next_nebula:;
 	}
     
 	prj->reset_perspective_projection();

@@ -51,6 +51,8 @@ public:
 	void set_hints_fade_duration(float duration) {hints_fader.set_duration((int) (duration * 1000.f));}
 	void set_flag_hints(bool b) {hints_fader=b;}
 	bool get_flag_hints() {return hints_fader;}
+	void set_show_ngc(bool b) { showNGC = b; }
+	void set_show_messier(bool b) { showMessier = b; }
 
 	// Return a stl vector containing the nebulas located inside the lim_fov circle around position v
 	vector<stel_object*> search_around(Vec3d v, double lim_fov);
@@ -66,6 +68,8 @@ private:
 	FILE *nebula_fic;
 	vector<Nebula*> neb_array;	// The nebulas list
 	linear_fader hints_fader;
+	bool showNGC;
+	bool showMessier;
 };
 
 #endif // _NEBULA_MGR_H_
