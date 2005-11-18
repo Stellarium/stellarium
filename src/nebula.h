@@ -43,7 +43,7 @@
      -     Object called nonexistent in the RNGC (Sulentic and Tifft 1973)
      PD    Photographic plate defect */
 
-	enum nebula_type { NEB_N, NEB_SG, NEB_PN, NEB_LG, NEB_EG, NEB_OC, NEB_GC, NEB_DN, NEB_IG, NEB_UNKNOWN };
+	enum nebula_type { NEB_N, NEB_SG, NEB_PN, NEB_LG, NEB_EG, NEB_OC, NEB_GC, NEB_DN, NEB_IG, NEB_GX, NEB_UNKNOWN };
 
 class Nebula : public stel_object
 {
