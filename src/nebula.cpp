@@ -389,7 +389,7 @@ bool Nebula::read_NGC(char *recordstr)
 	// this is a huge performance drag if called every frame, so cache here
 	neb_tex = NULL;
 
-	if (!strncmp(&recordstr[8],"Gx",2)) strcpy(type,"Gx");
+	if (!strncmp(&recordstr[8],"Gx",2)) { nType = NEB_GX; typeDesc = "Gx"; }
 	else if (!strncmp(&recordstr[8],"OC",2))  { nType = NEB_OC; typeDesc = "Oc"; }
 	else if (!strncmp(&recordstr[8],"Gb",2))  { nType = NEB_GC; typeDesc = "Gb"; }
 	else if (!strncmp(&recordstr[8],"Nb",2)) { nType = NEB_N; typeDesc = "Nb"; }
