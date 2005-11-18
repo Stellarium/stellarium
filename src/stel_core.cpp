@@ -729,6 +729,8 @@ void stel_core::load_config_from(const string& confFile)
     FlagNebulaLongName      = conf.get_boolean("astro:flag_nebula_long_name"); 
 	MaxMagNebulaName		= conf.get_double("astro", "max_mag_nebula_name", 99);
 	NebulaScale				= conf.get_double("astro", "nebula_scale",1.0f);
+	nebulas->set_show_ngc(conf.get_boolean("astro", "flag_nebula_ngc",false)); 
+	nebulas->set_show_messier(conf.get_boolean("astro", "flag_nebula_messier",true)); 
 	FlagMilkyWay			= conf.get_boolean("astro:flag_milky_way");
 	MilkyWayIntensity       = conf.get_double("astro","milky_way_intensity",1.);
 	milky_way->set_intensity(MilkyWayIntensity);
