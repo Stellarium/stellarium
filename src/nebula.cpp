@@ -54,10 +54,13 @@ Nebula::~Nebula()
 	neb_tex = NULL;
 }
 
-string Nebula::get_info_string(const navigator*) const
+string Nebula::get_info_string(const navigator* nav) const
 {
 	float tempDE, tempRA;
-	rect_to_sphe(&tempRA,&tempDE,XYZ);
+
+	Vec3d equatorial_pos = nav->prec_earth_equ_to_earth_equ(XYZ);
+	rect_to_sphe(&tempRA,&tempDE,equatorial_pos);
+
 	ostringstream oss;
 
 	oss << "Name : " << name << endl;
