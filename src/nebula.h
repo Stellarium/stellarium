@@ -52,7 +52,7 @@ public:
     Nebula();
     virtual ~Nebula();
 
-	virtual string get_info_string(const navigator * nav = NULL) const;
+	virtual string get_info_string(const navigator * nav) const;
 	virtual string get_short_info_string(const navigator * nav = NULL) const;
 	virtual STEL_OBJECT_TYPE get_type(void) const {return STEL_OBJECT_NEBULA;}
 	virtual Vec3d get_earth_equ_pos(const navigator * nav = NULL) const {return nav->prec_earth_equ_to_earth_equ(XYZ);}
