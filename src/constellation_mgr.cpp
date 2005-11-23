@@ -542,6 +542,7 @@ bool Constellation_mgr::load_boundaries(const string& conCatFile)
     }
 
 	float DE, RA;
+	float oDE, oRA;
 	Vec3f XYZ;
 	unsigned num, numc;
 	vector<Vec3f> *points;
@@ -551,11 +552,18 @@ bool Constellation_mgr::load_boundaries(const string& conCatFile)
 	{
 		points = new vector<Vec3f>;
 		istringstream istr(record);
+
+		num = 0;
 		dataFile >> num;
+		if(num == 0) continue;  // empty line
+
 		for (j=0;j<num;j++)
 		{
 			dataFile >> RA >> DE;
-			
+
+			oRA =RA;
+			oDE= DE;
+
 			RA*=M_PI/12.;     // Convert from hours to rad
 			DE*=M_PI/180.;    // Convert from deg to rad
 
@@ -573,6 +581,7 @@ bool Constellation_mgr::load_boundaries(const string& conCatFile)
 		for (j=0;j<numc;j++)
 		{
 			dataFile >> consname;
+			// not used?
 			if (consname == "SER1" || consname == "SER2") consname = "SER";
 			
 			cons = find_from_short_name(consname);
@@ -582,6 +591,7 @@ bool Constellation_mgr::load_boundaries(const string& conCatFile)
 
 		if (cons) cons->sharedBoundarySegments.push_back(points);
 		i++;
+
 	}
     dataFile.close();
 	cout << "(" << i << " segments loaded)" << endl;
