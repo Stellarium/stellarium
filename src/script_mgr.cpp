@@ -72,23 +72,24 @@ bool ScriptMgr::play_script(string script_file, string script_path) {
 
   } else {
     delete script;
+	script = NULL;
 	return 0;
   }
 }
 
 void ScriptMgr::cancel_script() {
-  // delete script object...
-  delete script;
-  script = NULL;
-  // images loaded are deleted from stel_command_interface directly
-  playing = 0;
-  play_paused = 0;
-
-  if(RemoveableDirectoryMounted) {
-	  system( ( DataDir + "script_unmount_script_disk " ).c_str() );	  
-	  cout << "UNMOUNT DISK\n";
-	  RemoveableDirectoryMounted = 0;
-  }
+	// delete script object...
+	if(script) delete script;
+	script = NULL;
+	// images loaded are deleted from stel_command_interface directly
+	playing = 0;
+	play_paused = 0;
+	
+	if(RemoveableDirectoryMounted) {
+		system( ( DataDir + "script_unmount_script_disk " ).c_str() );	  
+		cout << "UNMOUNT DISK\n";
+		RemoveableDirectoryMounted = 0;
+	}
 }
 
 
@@ -278,7 +279,7 @@ string ScriptMgr::get_script_path() {
 // look for a script called "startup.sts"
 bool ScriptMgr::play_startup_script() {
 
-	cout << _("Looking for startup script to run.") << endl;
+	//	cout << _("Looking for startup script to run.") << endl;
 
 	// first try on removeable directory
 	if(RemoveableScriptDirectory !="" &&
