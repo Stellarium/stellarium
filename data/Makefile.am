@@ -32,6 +32,8 @@ files_format.txt \
 zone.tab \
 hipparcos.fab \
 name.txt \
-skylanguages.fab
+skylanguages.fab \
+cities.fab \
+arial.txt
 EXTRA_DIST = $(pkgdata_DATA) $(man_MANS)
 SUBDIRS = sky_cultures scripts
