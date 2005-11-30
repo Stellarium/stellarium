@@ -943,6 +943,19 @@ int stel_ui::handle_keys(Uint16 key, S_GUI_VALUE state)
 			core->quit();
 		}
 
+#ifndef MACOSX
+		if(key==0x0010)
+		{ // CTRL-P  Play startup script, NOW!
+#else
+		if (key == SDLK_p && SDL_GetModState() & KMOD_META)
+		{
+#endif
+
+			// first clear out audio and images kept in core
+			core->commander->execute_command( "script action end");
+			core->scripts->play_startup_script();
+			return 1;
+		}
 
 
 		// if script is running, only script control keys are accessible
@@ -969,10 +982,12 @@ int stel_ui::handle_keys(Uint16 key, S_GUI_VALUE state)
 				core->commander->execute_command( "script action end");
 				if(key==SDLK_m) core->FlagShowTuiMenu = true;
 			}
+			// TODO n is bad key if ui allowed
 			else if(key==SDLK_GREATER || key==SDLK_n)
 			{
 				core->commander->execute_command( "audio volume increment");
 			}
+			// TODO d is bad key if ui allowed
 			else if(key==SDLK_LESS || key==SDLK_d)
 			{
 				core->commander->execute_command( "audio volume decrement");
@@ -997,16 +1012,32 @@ int stel_ui::handle_keys(Uint16 key, S_GUI_VALUE state)
 				core->time_multiplier *= 2;
 				if(core->time_multiplier>8) core->time_multiplier = 8;
 			}
-			else cout << "Playing a script.  Press CTRL-C (or 7) to stop." << endl;
+			else if(!core->scripts->get_allow_ui()) {
+				cout << "Playing a script.  Press CTRL-C (or 7) to stop." << endl;
+			}
 
-			return 0;
+			if(!core->scripts->get_allow_ui()) return 0;  // only limited user interaction allowed with script
+
 		} else {
 			core->time_multiplier = 1;  // if no script in progress always real time
+
+			// normal time controls here (taken over for script control above if playing a script)
+			if(key==SDLK_k) core->commander->execute_command( "timerate rate 1");
+			if(key==SDLK_l) core->commander->execute_command( "timerate action increment");
+			if(key==SDLK_j) core->commander->execute_command( "timerate action decrement");
+			if(key==SDLK_6) core->commander->execute_command( "timerate action pause");
+			if(key==SDLK_7) core->commander->execute_command( "timerate rate 0");
+			if(key==SDLK_8) core->commander->execute_command( "date load preset");
+
 		}
 
-
+#ifndef MACOSX
 		if(key==0x0012)
-		{  // ctrl-r
+		{ // CTRL-R
+#else
+		if (key == SDLK_r && SDL_GetModState() & KMOD_META)
+		{
+#endif
 			if(core->scripts->is_recording())
 			{
 				core->commander->execute_command( "script action cancelrecord");
@@ -1183,12 +1214,6 @@ int stel_ui::handle_keys(Uint16 key, S_GUI_VALUE state)
 		if(key==SDLK_m && core->FlagEnableTuiMenu) core->FlagShowTuiMenu = true;  // not recorded
 
 		if(key==SDLK_o) core->commander->execute_command( "flag moon_scaled toggle");
-		if(key==SDLK_k) core->commander->execute_command( "timerate rate 1");
-		if(key==SDLK_l) core->commander->execute_command( "timerate action increment");
-		if(key==SDLK_j) core->commander->execute_command( "timerate action decrement");
-		if(key==SDLK_6) core->commander->execute_command( "timerate action pause");
-		if(key==SDLK_7) core->commander->execute_command( "timerate rate 0");
-		if(key==SDLK_8) core->commander->execute_command( "date load preset");
 
 		if(key==SDLK_9)
 		{
