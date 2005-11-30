@@ -21,6 +21,8 @@ callisto.png           m107.png          m28.png  m52.png  m73.png  m96.png  up.
 courierfont.png        m108.png          m29.png  m53.png  m74.png  m97.png  uranus.png \
 deimos.png             m109.png          m2.png   m54.png  m75.png  m98.png  venus.png \
 down.png               m10.png           m30.png  m55.png  m76.png  m99.png  zenith.png \
-earthmap.png           m110.png          m31.png  m56.png  m78.png  m9.png
+earthmap.png           m110.png          m31.png  m56.png  m78.png  m9.png \
+arial.png              bt_alert.png      bt_blank.png      bt_night.png \
+bt_question.png        city.png          pointeur1.png
 EXTRA_DIST = $(pkgdata_DATA)
 SUBDIRS = landscapes constellation-art

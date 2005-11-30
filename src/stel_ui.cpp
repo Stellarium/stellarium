@@ -650,42 +650,54 @@ http://www.fsf.org");
 	return licence_win;
 }
 
-
 Component* stel_ui::createHelpWindow(void)
 {
+        cerr << "stel_ui::createHelpWindow called" << endl;
 	help_txtlbl = new TextLabel(
 	                  string(_("\
+Movement & selection:\n\
 Arrow Keys       : Change viewing RA/DE\n\
 Page Up/Down     : Zoom\n\
 CTRL+Up/Down     : Zoom\n\
 Left Click       : Select object\n\
 Right Click      : Unselect\n\
 CTRL+Left Click  : Unselect\n\
-SPACE : Center on selected object\n\
+\\                : Zoom out (planet + moons if applicable)\n\
+/                : Zoom to selected object\n\
+SPACE            : Center on selected object\n\
+\n\
+Display options:\n\
 ENTER : Equatorial/altazimuthal mount\n\
-C   : Constellation lines\n\
-V   : Constellation labels\n\
-R   : Constellation art\n\
-E   : Equatorial grid\n\
-Z   : Azimuthal grid\n\
-N   : Nebula labels\n\
-P   : Planet labels\n\
-G   : Ground\n\
-F   : Fog\n\
-Q   : Cardinal points\n\
-A   : Atmosphere\n\
-H   : Help\n\
-4   : Ecliptic line\n\
-5   : Equator line\n\
-T   : Object tracking\n\
-S   : Stars\n\
-8   : Set time to current time\n\
-9   : Toggle meteor shower rates\n\
-I   : About Stellarium\n\
-M   : Text menu\n\
 F1  : Toggle fullscreen if possible.\n\
+C   : Constellation lines  V   : Constellation labels\n\
+R   : Constellation art    E   : Equatorial grid\n\
+Z   : Azimuthal grid       N   : Nebula labels\n\
+P   : Planet labels        G   : Ground\n\
+A   : Atmosphere           F   : Fog\n\
+Q   : Cardinal points      O   : Toggle moon scaling\n\
+T   : Object tracking      S   : Stars\n\
+4 , : Ecliptic line        5 . : Equator line\n\
+\n\
+Dialogs & other controls:\n\
+H   : Help                 I   : About Stellarium\n\
+M   : Text menu            1 (one)  : Configuration\n\
 CTRL + S : Take a screenshot\n\
-CTRL + R : Toggle script recording\n")) + string(
+CTRL + R : Toggle script recording\n\
+CTRL + F : Toggle object finder\n\
+\n\
+Time & Date:\n\
+6   : Time rate pause      7   : Time rate 0\n\
+8   : Set current time     J   : Decrease time rate\n\
+K   : Normal time rate     L   : Increase time rate\n\
+-   : Back 24 hours        =   : Forward 24 hours\n\
+[   : Back 7 days          ]   : Forward 7 days\n\
+\n\
+During Script Playback:\n\
+CTRL + C : End Script\n\
+6   : pause script         K   : resume script\n\
+\n\
+Misc:\n\
+9   : Toggle meteor shower rates\n")) + string(
 #ifndef MACOSX
 	                      _("CTRL + Q : Quit\n")
 #else
@@ -698,7 +710,7 @@ CTRL + R : Toggle script recording\n")) + string(
 	help_txtlbl->setPos(10,10);
 	help_win = new StdBtWin(_("Help"));
 	help_win->setOpaque(opaqueGUI);
-	help_win->reshape(300,200,400,450);
+	help_win->reshape(215,70,580,600);
 	help_win->addComponent(help_txtlbl);
 	help_win->setVisible(core->FlagHelp);
 	help_win->setOnHideBtCallback(callback<void>(this, &stel_ui::help_win_hideBtCallback));
@@ -1059,6 +1071,27 @@ int stel_ui::handle_keys(Uint16 key, S_GUI_VALUE state)
 				}
 			}
 		}
+
+		// RFE 1310384, ESC closes dialogs
+		if(key==SDLK_ESCAPE)
+		{
+			// close search mode
+			core->FlagSearch=false;
+			search_win->setVisible(core->FlagSearch);
+	
+			// close config dialog
+			core->FlagConfig = false;
+			config_win->setVisible(core->FlagConfig);
+	
+			// close help dialog
+			core->FlagHelp = false;
+			help_win->setVisible(core->FlagHelp);
+	
+			// close information dialog
+			core->FlagInfos = false;
+			licence_win->setVisible(core->FlagInfos);
+		}
+		// END RFE 1310384
 
 #ifndef MACOSX
 		if(key==0x0006)
