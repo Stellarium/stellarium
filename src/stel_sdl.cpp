@@ -305,8 +305,8 @@ void stel_sdl::start_main_loop(void)
 
 					// use unicode translation, since not keyboard dependent
 					// however, for non-printing keys must revert to just keysym... !
-					if ((E.key.keysym.unicode && !core->handle_keys(E.key.keysym.unicode,S_GUI_PRESSED)) ||
-						(!E.key.keysym.unicode && !core->handle_keys(E.key.keysym.sym,S_GUI_PRESSED)))
+					if ((E.key.keysym.sym >= SDLK_LAST && !core->handle_keys(E.key.keysym.unicode,S_GUI_PRESSED)) ||
+						(E.key.keysym.sym < SDLK_LAST && !core->handle_keys(E.key.keysym.sym,S_GUI_PRESSED)))
 					{
 						if (E.key.keysym.sym==SDLK_F1) SDL_WM_ToggleFullScreen(Screen); // Try fullscreen
 
