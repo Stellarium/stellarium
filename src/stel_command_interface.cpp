@@ -464,12 +464,21 @@ else if(command=="script") {
 
     } else if(args["action"]=="play" && args["filename"]!="") {
 		if(stcore->scripts->is_playing()) {
-			
+
+			string script_path = stcore->scripts->get_script_path();
+
+			// stop script, audio, and unload any loaded images
+			if(audio) {
+				delete audio;
+				audio = NULL;
+			}
+			stcore->scripts->cancel_script();
+			stcore->script_images->drop_all_images();
+
 			// keep same script path 
-			stcore->scripts->play_script(stcore->scripts->get_script_path() + args["filename"], 
-										 stcore->scripts->get_script_path());
+			stcore->scripts->play_script(script_path + args["filename"], script_path);
 		} else {
-			stcore->scripts->play_script(args["filename"], args["path"]);
+			stcore->scripts->play_script(args["path"] + args["filename"], args["path"]);
 		}
 
     } else if(args["action"]=="record") {

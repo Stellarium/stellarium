@@ -637,6 +637,7 @@ void stel_core::load_config_from(const string& confFile)
 	BaseFontName        = conf.get_str("gui", "base_font_name", "spacefont.txt");
 	FlagShowScriptBar	= conf.get_boolean("gui","flag_show_script_bar",0);
 	MouseCursorTimeout  = conf.get_double("gui","mouse_cursor_timeout",0);
+	scripts->set_allow_ui( conf.get_boolean("gui","flag_script_allow_ui",0) );
 
 	// Colors
 	AzimuthalColor		= str_to_vec3f(conf.get_str("color:azimuthal_color").c_str());
@@ -807,7 +808,8 @@ void stel_core::save_config_to(const string& confFile)
 	conf.set_str	("gui:base_font_name", BaseFontName);
 	conf.set_boolean("gui:flag_show_script_bar",FlagShowScriptBar);
 	conf.set_double("gui:mouse_cursor_timeout",MouseCursorTimeout);
-	
+	conf.set_boolean("gui:flag_script_allow_ui",scripts->get_allow_ui());
+
 	// Colors
 	conf.set_str    ("color:azimuthal_color", vec3f_to_str(AzimuthalColor));
 	conf.set_str    ("color:equatorial_color", vec3f_to_str(EquatorialColor));
@@ -964,8 +966,7 @@ int stel_core::handle_keys(Uint16 key, s_gui::S_GUI_VALUE state)
 
 		  // If selected a script in tui, run that now
 		  if(SelectedScript!="") 
-			  commander->execute_command("script action play filename "
-										 + SelectedScriptDirectory + SelectedScript 
+			  commander->execute_command("script action play filename " +  SelectedScript  
 										 + " path " + SelectedScriptDirectory);
 		  
 		  // clear out now

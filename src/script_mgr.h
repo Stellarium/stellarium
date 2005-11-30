@@ -54,6 +54,8 @@ class ScriptMgr
   string get_script_list(string directory);  // get list of scripts in a directory
   string get_script_path();
   string get_record_filename() { return rec_filename; }  // file record is writing to
+  void set_allow_ui(bool _aui) { allow_ui = _aui; }
+  bool get_allow_ui() { return allow_ui; }
 
  private:
 
@@ -70,6 +72,8 @@ class ScriptMgr
   string RemoveableScriptDirectory;
   bool RemoveableDirectoryMounted;
   string DataDir;  
+  bool allow_ui;    // Allow user interface to function during scripts 
+                    // (except for time related keys which control script playback)
 };
 
 
