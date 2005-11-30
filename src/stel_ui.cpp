@@ -1060,25 +1060,24 @@ int stel_ui::handle_keys(Uint16 key, S_GUI_VALUE state)
 			}
 		}
 
-		// ctrl-f - find window
-		if(key==0x0006) {
+#ifndef MACOSX
+		if(key==0x0006)
+		{ // CTRL-f
+#else
+		if (key == SDLK_f && SDL_GetModState() & KMOD_META)
+		{
+#endif
 			core->FlagSearch = !core->FlagSearch;
 			search_win->setVisible(core->FlagSearch);
 		}
 
 		if(key==SDLK_r) core->commander->execute_command( "flag constellation_art toggle");
-		if(key==SDLK_c) 
-		{
-			if (core->asterisms->get_flag_lines() == false)
-				core->commander->execute_command( "flag constellation_drawing on");
-			else if (core->asterisms->get_flag_boundaries() == true)
-			{
-				core->commander->execute_command( "flag constellation_drawing off");
-				core->commander->execute_command( "flag constellation_boundaries off");
-			}
-			else
-				core->commander->execute_command( "flag constellation_boundaries on");
-		}
+
+		//		printf( "key = %d\n", key);
+
+		if(key==SDLK_c) core->commander->execute_command( "flag constellation_drawing toggle");
+		if(key=='C') core->commander->execute_command( "flag constellation_boundaries toggle");
+
 		if(key==SDLK_d) core->commander->execute_command( "flag star_names toggle");
 
 		if(key==SDLK_1)
@@ -1113,24 +1112,19 @@ int stel_ui::handle_keys(Uint16 key, S_GUI_VALUE state)
 			}
 		}
 		if(key==SDLK_e) core->commander->execute_command( "flag equatorial_grid toggle");
-  		if(key==SDLK_n)  // Tony for long nebula names - toggles between no name, shortname and longname
-        {
-			if (!core->nebulas->get_flag_hints())
-			{
-				core->nebulas->set_nebulaname_format(0);
-				core->commander->execute_command( "flag nebula_names on");
-			}
-			else
-			{
-				if (core->nebulas->get_nebulaname_format() < 3)
-					core->nebulas->set_nebulaname_format(core->nebulas->get_nebulaname_format()+1);
-				else
-				{
-					core->nebulas->set_nebulaname_format(0);
-					core->commander->execute_command( "flag nebula_names off");
-				}
-			}
-			
+
+  		if(key==SDLK_n) core->commander->execute_command( "flag nebula_names toggle");
+		if(key=='N') {
+			// Tony for long nebula names - toggles between no name, shortname and longname
+	
+			// TODO: I vote for this key turning NGC drawing on/off - Rob
+		
+			// TODO this should be recordable via an execute_command
+			if (core->nebulas->get_nebulaname_format() < 3)
+				core->nebulas->set_nebulaname_format(core->nebulas->get_nebulaname_format()+1);
+			else core->nebulas->set_nebulaname_format(0);
+		}
+
 /*
             if (!core->nebulas->get_flag_hints())
             {
@@ -1146,7 +1140,6 @@ int stel_ui::handle_keys(Uint16 key, S_GUI_VALUE state)
                  core->commander->execute_command( "flag nebula_long_names off");
             }
 */
-        }
 		if(key==SDLK_g) core->commander->execute_command( "flag landscape toggle");
 		if(key==SDLK_f) core->commander->execute_command( "flag fog toggle");
 		if(key==SDLK_q) core->commander->execute_command( "flag cardinal_points toggle");
