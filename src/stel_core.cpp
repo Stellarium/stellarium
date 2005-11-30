@@ -140,6 +140,9 @@ void stel_core::init(void)
 	case FISHEYE_PROJECTOR :
 		projection = new Fisheye_projector(screen_W, screen_H, InitFov, .001, 180.00001, DistortionFunction);
 		break;
+	case CYLINDER_PROJECTOR :
+		projection = new Cylinder_projector(screen_W, screen_H, InitFov, .001, 180.00001);
+		break;
 	default :
 		projection = new Projector(screen_W, screen_H, InitFov);
 		break;
@@ -579,8 +582,12 @@ void stel_core::load_config_from(const string& confFile)
 		if (tmpstr=="fisheye") ProjectorType = FISHEYE_PROJECTOR;
 		else
 		{
-			cout << "ERROR : Unknown projector type : " << tmpstr << endl;
-			exit(-1);
+			if (tmpstr=="cylinder") ProjectorType = CYLINDER_PROJECTOR;
+			else
+			{
+				cout << "ERROR : Unknown projector type : " << tmpstr << endl;
+				exit(-1);
+			}
 		}
 	}
 
@@ -762,6 +769,7 @@ void stel_core::save_config_to(const string& confFile)
 	{
 		case PERSPECTIVE_PROJECTOR : tmpstr="perspective";	break;
 		case FISHEYE_PROJECTOR : tmpstr="fisheye";		break;
+		case CYLINDER_PROJECTOR : tmpstr="cylinder";		break;
 		default : tmpstr="perspective";
 	}
 	conf.set_str	("projection:type",tmpstr);

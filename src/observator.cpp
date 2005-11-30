@@ -195,7 +195,7 @@ float Observator::get_GMT_shift_from_system(double JD, bool _local) const
 	return (float)timeinfo->tm_gmtoff/3600 + (timeinfo->tm_isdst!=0); 
 	#else */
 
-#if !defined(MACOSX) && !defined(WIN32)
+#if !defined(WIN32)
 
 	struct tm * timeinfo;
 
