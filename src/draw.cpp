@@ -260,6 +260,10 @@ SkyLine::SkyLine(SKY_LINE_TYPE _line_type, double _radius, unsigned int _nb_segm
 
 	Mat4f r = Mat4f::xrotation(inclinaison*M_PI/180.f);
 
+	// correct for month labels
+	// TODO: can make this more accurate
+	if(line_type == ECLIPTIC ) r = r * Mat4f::zrotation(-77.9*M_PI/180.);
+
 	// Points to draw along the circle
 	points = new Vec3f[nb_segment+1];
 	for (unsigned int i=0;i<nb_segment+1;++i)
@@ -347,6 +351,66 @@ void SkyLine::draw(const Projector* prj) const
 				glDisable(GL_TEXTURE_2D);
 
 			}
+
+				  
+			if(line_type == EQUATOR && (i+1) % 2 == 0) {
+
+				d = sqrt( (pt1[0]-pt2[0])*(pt1[0]-pt2[0]) + (pt1[1]-pt2[1])*(pt1[1]-pt2[1]) );
+				  
+				angle = acos((pt1[1]-pt2[1])/d);
+				if( pt1[0] < pt2[0] ) {
+					angle *= -1;
+				}
+
+				// draw text label
+				std::ostringstream oss;	
+
+				if((i+1)/2 == 24) oss << "0h";
+				else oss << (i+1)/2 << "h";
+
+				glPushMatrix();
+				glTranslatef(pt2[0],pt2[1],0);
+				glRotatef(180+angle*180./M_PI,0,0,-1);
+				
+				glBegin (GL_LINES);
+				glVertex2f(-3,0);
+				glVertex2f(3,0);
+				glEnd();
+				glEnable(GL_TEXTURE_2D);
+
+				if(font) font->print(2,-2,oss.str());
+				glPopMatrix();
+				glDisable(GL_TEXTURE_2D);
+
+			}
+
+			// Draw months on ecliptic
+			if(line_type == ECLIPTIC && (i+3) % 4 == 0) {
+
+				d = sqrt( (pt1[0]-pt2[0])*(pt1[0]-pt2[0]) + (pt1[1]-pt2[1])*(pt1[1]-pt2[1]) );
+				  
+				angle = acos((pt1[1]-pt2[1])/d);
+				if( pt1[0] < pt2[0] ) {
+					angle *= -1;
+				}
+
+				// draw text label
+				std::ostringstream oss;	
+
+				oss << (i+3)/4;
+
+				glPushMatrix();
+				glTranslatef(pt2[0],pt2[1],0);
+				glRotatef(-90+angle*180./M_PI,0,0,-1);
+				
+				glEnable(GL_TEXTURE_2D);
+
+				if(font) font->print(0,-2,oss.str());
+				glPopMatrix();
+				glDisable(GL_TEXTURE_2D);
+
+			}
+
 		}
 	}
 
