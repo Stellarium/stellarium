@@ -904,6 +904,7 @@ void stel_core::save_config_to(const string& confFile)
 	conf.set_boolean("astro:flag_milky_way", FlagMilkyWay);
 	conf.set_double("astro:milky_way_intensity", MilkyWayIntensity);
 	conf.set_boolean("astro:flag_bright_nebulae", FlagBrightNebulae);
+	conf.set_boolean("astro:flag_nebula_ngc", nebulas->get_show_ngc());
 
 	conf.save(confFile);
 }

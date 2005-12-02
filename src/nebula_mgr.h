@@ -52,7 +52,9 @@ public:
 	void set_flag_hints(bool b) {hints_fader=b;}
 	bool get_flag_hints() {return hints_fader;}
 	void set_show_ngc(bool b) { showNGC = b; }
+	bool get_show_ngc() { return showNGC; }
 	void set_show_messier(bool b) { showMessier = b; }
+	bool get_show_messier() { return showMessier; }
 
 	// Return a stl vector containing the nebulas located inside the lim_fov circle around position v
 	vector<stel_object*> search_around(Vec3d v, double lim_fov);
