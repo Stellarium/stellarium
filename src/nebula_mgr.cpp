@@ -130,42 +130,38 @@ void Nebula_mgr::draw(int hint_ON, Projector* prj, const navigator * nav, tone_r
     vector<Nebula *>::iterator iter;
     for(iter=neb_array.begin();iter!=neb_array.end();iter++) 
 	{   
-		if (showMessier)
+
+		//		if ((showMessier && (*iter)->Messier_nb != 0) ||
+		//	(showNGC && ((*iter)->NGC_nb != 0 || (*iter)->IC_nb != 0)))
+
+		// TODO correct the names, make just one variable
+		if (showNGC || (showMessier && (*iter)->hasTex()))
 		{
-			if ((*iter)->Messier_nb != 0) goto show_nebula;
-		}
-		
-		if (showNGC)
-		{
-			if ((*iter)->NGC_nb != 0 || (*iter)->IC_nb != 0) goto show_nebula;
-		}
-		goto next_nebula;
-		
-show_nebula:
-		// improve performance by skipping if too small to see
-		if ((hints  && (*iter)->mag <= max_mag_name)
-			|| (*iter)->get_on_screen_size(prj, nav)>5) {
 
-			// correct for precession
-			pXYZ = nav->prec_earth_equ_to_earth_equ((*iter)->XYZ);
-
-			// project in 2D to check if the nebula is in screen
-			if ( !prj->project_earth_equ_check(pXYZ,(*iter)->XY) ) continue;
-
-			if (draw_tex && (*iter)->get_on_screen_size(prj, nav)>5) 
-				if ((*iter)->hasTex())
-					(*iter)->draw_tex(prj, eye, bright_nebulae && (*iter)->get_on_screen_size(prj, nav)>15 );
-				else 
-					(*iter)->draw_no_tex(prj, nav, eye);
-
-			if (hints) {
-				(*iter)->draw_name(hint_ON, prj);
-				(*iter)->draw_circle(prj, nav);
+			// improve performance by skipping if too small to see
+			if ((hints  && (*iter)->mag <= max_mag_name)
+				|| (*iter)->get_on_screen_size(prj, nav)>5) {
+				
+				// correct for precession
+				pXYZ = nav->prec_earth_equ_to_earth_equ((*iter)->XYZ);
+				
+				// project in 2D to check if the nebula is in screen
+				if ( !prj->project_earth_equ_check(pXYZ,(*iter)->XY) ) continue;
+				
+				if (draw_tex && (*iter)->get_on_screen_size(prj, nav)>5) 
+					if ((*iter)->hasTex())
+						(*iter)->draw_tex(prj, eye, bright_nebulae && (*iter)->get_on_screen_size(prj, nav)>15 );
+					else 
+						(*iter)->draw_no_tex(prj, nav, eye);
+				
+				if (hints) {
+					(*iter)->draw_name(hint_ON, prj);
+					(*iter)->draw_circle(prj, nav);
+				}
 			}
 		}
-next_nebula:;
 	}
-    
+			
 	prj->reset_perspective_projection();
 }
 

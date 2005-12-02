@@ -1108,10 +1108,18 @@ int stel_ui::handle_keys(Uint16 key, S_GUI_VALUE state)
 
 		//		printf( "key = %d\n", key);
 
-		if(key==SDLK_c) core->commander->execute_command( "flag constellation_drawing toggle");
+		if(key=='c') core->commander->execute_command( "flag constellation_drawing toggle");
 		if(key=='C') core->commander->execute_command( "flag constellation_boundaries toggle");
 
-		if(key==SDLK_d) core->commander->execute_command( "flag star_names toggle");
+		if(key=='d') core->commander->execute_command( "flag star_names toggle");
+		if(key=='D')
+		{
+			// TODO: move to execute_command so can record
+			if (core->hip_stars->get_starname_format() < 2)
+				core->hip_stars->set_starname_format(core->hip_stars->get_starname_format()+1);
+			else
+				core->hip_stars->set_starname_format(0);
+		}
 
 		if(key==SDLK_1)
 		{
@@ -1148,14 +1156,19 @@ int stel_ui::handle_keys(Uint16 key, S_GUI_VALUE state)
 
   		if(key==SDLK_n) core->commander->execute_command( "flag nebula_names toggle");
 		if(key=='N') {
+			// TODO this should be recordable via an execute_command
+			// TODO should toggle between just nebulas with images and all nebulas
+			// TODO when these are turned off, should not be selectable either!
+			core->nebulas->set_show_ngc(!core->nebulas->get_show_ngc());
+
+			/* TODO: move into nebula - pick based on screen size
 			// Tony for long nebula names - toggles between no name, shortname and longname
 	
-			// TODO: I vote for this key turning NGC drawing on/off - Rob
-		
-			// TODO this should be recordable via an execute_command
+
 			if (core->nebulas->get_nebulaname_format() < 3)
 				core->nebulas->set_nebulaname_format(core->nebulas->get_nebulaname_format()+1);
 			else core->nebulas->set_nebulaname_format(0);
+			*/
 		}
 
 /*
@@ -1208,24 +1221,7 @@ int stel_ui::handle_keys(Uint16 key, S_GUI_VALUE state)
 			core->navigation->set_flag_lock_equ_pos(!core->navigation->get_flag_lock_equ_pos());
 		}
 		if(key==SDLK_s && !(SDL_GetModState() & KMOD_CTRL))
-		{
-			if (!core->FlagStars)
-			{
-				core->hip_stars->set_starname_format(0);
-				core->commander->execute_command( "flag stars on");
-			}
-			else
-			{
-				if (core->hip_stars->get_starname_format() < 2)
-					core->hip_stars->set_starname_format(core->hip_stars->get_starname_format()+1);
-				else
-				{
-					core->hip_stars->set_starname_format(0);
-					core->commander->execute_command( "flag stars off");
-				}
-			}
-			//core->commander->execute_command( "flag stars toggle");
-		}
+			core->commander->execute_command( "flag stars toggle");
 
 		if(key==SDLK_SPACE) core->commander->execute_command("flag track_object on");
 
