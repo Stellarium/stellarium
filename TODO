@@ -35,8 +35,20 @@
 
 ## Features for 0.8.0
 
+Completed:
+
+T Constellation boundaries. - DONE
 T select location by city - DONE
 T search text area should get focus when bring up search window - DONE
+R mouse cursor hide after timeout as option - DONE
+R limiting mag for nebulae labels set in TUI - DONE
+R constellation line color set in TUI - DONE
+R meridian line (first press of 'z') - DONE
+R remove planet orbits from 'p' key - move to another key and TUI - LEAVING AS IS FOR NOW
+
+
+Outstanding:
+
 - GUI access to set sky language and sky culture (ideally with new pulldown menu)
 R sidereal day/week key control 
 - limiting magnitude/simulate light pollution (the feature somehow already exists in the skybright class BASIC version)
@@ -44,13 +56,8 @@ R sidereal day/week key control
 - unicode font support (need to choose solution between glgooey/FTGL/our own implemenation)
   > ftgl looks good
 - error message windows as option to be easier for windows users (script errors in particular)
-R mouse cursor hide after timeout as option - DONE
-R limiting mag for nebulae labels set in TUI - DONE
-R constellation line color set in TUI - DONE
-R remove planet orbits from 'p' key - move to another key and TUI - LEAVING AS IS FOR NOW
 R set zoom location
 - precession circle drawing
-R meridian line (first press of 'z') - DONE
 - hour angle on equator line (already on equatorial grid)
 - ecliptic line with (localized) months labeled
 - script display text command
@@ -63,7 +70,6 @@ T Night vision mode (red Gui) - DONE <-- Need more descriptive flag names (like 
 
 ### Future feature ideas
 
-- Constellation boundaries.
 T chart option
 - print option (We should think about a real postscript/pdf renderer for printing)
 - select multiple constellations at once (for scripts)
