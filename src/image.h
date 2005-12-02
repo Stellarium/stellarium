@@ -50,6 +50,7 @@ class Image
   bool update(int delta_time);  // update properties
   void draw(int screenw, int screenh, const navigator * nav, Projector * prj);
   string get_name() { return image_name; };
+  bool image_loaded() { return (image_ratio != -1); }  // was texture loaded from disk?
 
  private:
   s_texture * image_tex;

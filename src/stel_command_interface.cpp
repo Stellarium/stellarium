@@ -73,7 +73,8 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
   stringHash_t args;
   int status = 0;  // true if command was understood
   int recordable = 1;  // true if command should be recorded (if recording)
-  
+  string debug_message;  // detailed errors can be placed in here for printout at end of method
+
   wait = 0;  // default, no wait between commands
 
   status = parse_command(commandline, command, args);
@@ -318,7 +319,7 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 		  if(string_to_jday( new_date, jd ) ) {
 			  stcore->navigation->set_JDay(jd - stcore->observatory->get_GMT_shift(jd) * JD_HOUR);
 		  } else {
-			  cout << "Error parsing date: " << new_date << endl;
+			  debug_message = _("Error parsing date.");
 			  status = 0;
 		  } 
 		  
@@ -327,7 +328,7 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 		  if(string_to_jday( args["utc"], jd ) ) {
 			  stcore->navigation->set_JDay(jd);
 		  } else {
-			  cout << "Error parsing date." << endl;
+			  debug_message = _("Error parsing date.");
 			  status = 0;
 		  }
 		  
@@ -369,7 +370,7 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
   } else if(command=="image") {
 
 	  if(args["name"]=="") {
-		  cout << "Image name required" << endl;
+		  debug_message = _("Image name required.");
 		  status = 0;
 	  } else if(args["action"]=="drop") {
 		  stcore->script_images->drop_image(args["name"]);
@@ -384,36 +385,49 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 			  else img_pos = POS_VIEWPORT;
 			  */
 
+			  string image_filename;
 			  if(stcore->scripts->is_playing()) 
-				  stcore->script_images->load_image(stcore->scripts->get_script_path() + args["filename"], 
-													args["name"], img_pos);
-			  else stcore->script_images->load_image(stcore->DataRoot + "/" + args["filename"], 
-													 args["name"], img_pos);
+				  image_filename = stcore->scripts->get_script_path() + args["filename"];
+			  else 
+				  image_filename = stcore->DataRoot + "/" + args["filename"];
+				  
+			  status = stcore->script_images->load_image(image_filename, args["name"], img_pos);
+
+			  if(status==0) debug_message = string(_("Unable to open file: ")) + image_filename;
 		  }
 
-		  Image * img = stcore->script_images->get_image(args["name"]);
-		  
-		  if(img != NULL) {
-			  if(args["alpha"]!="") img->set_alpha(str_to_double(args["alpha"]), 
-												   str_to_double(args["duration"]));
-			  if(args["scale"]!="") img->set_scale(str_to_double(args["scale"]), 
-												   str_to_double(args["duration"]));
-			  if(args["rotation"]!="") img->set_rotation(str_to_double(args["rotation"]), 
-														 str_to_double(args["duration"]));
-			  if(args["xpos"]!="" || args["ypos"]!="") 
-				  img->set_location(str_to_double(args["xpos"]), args["xpos"]!="",
-									str_to_double(args["ypos"]), args["ypos"]!="",
-									str_to_double(args["duration"]));
-			  // for more human readable scripts, as long as someone doesn't do both...
-			  if(args["altitude"]!="" || args["azimuth"]!="") 
-				  img->set_location(str_to_double(args["altitude"]), args["altitude"]!="",
-									str_to_double(args["azimuth"]), args["azimuth"]!="",
-									str_to_double(args["duration"]));
+		  if( status ) {
+			  Image * img = stcore->script_images->get_image(args["name"]);
+			  
+			  if(img != NULL) {
+				  if(args["alpha"]!="") img->set_alpha(str_to_double(args["alpha"]), 
+													   str_to_double(args["duration"]));
+				  if(args["scale"]!="") img->set_scale(str_to_double(args["scale"]), 
+													   str_to_double(args["duration"]));
+				  if(args["rotation"]!="") img->set_rotation(str_to_double(args["rotation"]), 
+															 str_to_double(args["duration"]));
+				  if(args["xpos"]!="" || args["ypos"]!="") 
+					  img->set_location(str_to_double(args["xpos"]), args["xpos"]!="",
+										str_to_double(args["ypos"]), args["ypos"]!="",
+										str_to_double(args["duration"]));
+				  // for more human readable scripts, as long as someone doesn't do both...
+				  if(args["altitude"]!="" || args["azimuth"]!="") 
+					  img->set_location(str_to_double(args["altitude"]), args["altitude"]!="",
+										str_to_double(args["azimuth"]), args["azimuth"]!="",
+										str_to_double(args["duration"]));
+			  } else {
+				  debug_message = string(_("Unable to find image: ")) + args["name"];
+				  status=0;
+			  }
 		  }
 	  }
   } 
-#ifdef HAVE_SDL_MIXER_H
-else if(command=="audio") {
+  else if(command=="audio") {
+
+#ifndef HAVE_SDL_MIXER_H
+	  debug_message = _("This executable was compiled without audio support.");
+	  status = 0;
+#else
   
 	  if(args["action"]=="sync") {
 		  if(audio) audio->sync();
@@ -449,9 +463,9 @@ else if(command=="audio") {
 			  } else audio->set_volume( str_to_double(args["volume"]) );
 		  }
 	  } else status = 0;
-  }
 #endif 
-else if(command=="script") {
+  }
+  else if(command=="script") {
 
     if(args["action"]=="end") {
       // stop script, audio, and unload any loaded images
@@ -604,7 +618,7 @@ else if(command=="script") {
 	  } else status = 0;
 
   } else {
-    cout << "Unrecognized or malformed command: " << command << endl;
+    debug_message = _("Unrecognized or malformed command name.");
     status = 0;
   }
 
@@ -616,7 +630,13 @@ else if(command=="script") {
     //    cout << commandline << endl;
 
   } else {
-    cout << "Could not execute: " << commandline << endl;
+
+	  // Show gui error window only if script asked for gui debugging
+	  if(stcore->scripts->is_playing() && stcore->scripts->get_gui_debug()) 
+		  stcore->ui->show_message(string(_("Could not execute command:")) + "\n\"" + 
+								   commandline + "\"\n\n" + debug_message, 7000);
+			
+	  cout << "Could not execute: " << commandline << endl << debug_message << endl;
   }
 
   return(status);
@@ -749,6 +769,10 @@ int StelCommandInterface::set_flag(string name, string value, bool &newval, bool
 				newval = 1;
 			}
 		}
+		else if(name=="script_gui_debug") {  // Not written to config - script specific
+			newval = !stcore->scripts->get_gui_debug();
+			stcore->scripts->set_gui_debug(newval);
+		}
 		else return(status);  // no matching flag found untrusted, but maybe trusted matched
 
 	} else {
@@ -846,6 +870,7 @@ int StelCommandInterface::set_flag(string name, string value, bool &newval, bool
 				stcore->navigation->set_flag_traking(0);
 			}
 		}
+		else if(name=="script_gui_debug") stcore->scripts->set_gui_debug(newval); // Not written to config - script specific
 		else return(status);
 
 	}

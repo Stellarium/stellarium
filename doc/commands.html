@@ -4,7 +4,7 @@
 </head>
 <body bgcolor="white">
 <h1>Stellarium Command Reference</h1>
-Version 1.1 - October 11, 2005<br>
+Version 1.2 - December 2, 2005<br>
 Robert Spearman<br>
 <br>
 This document outlines commands supported by Stellarium 0.7.0 for UI or
@@ -207,6 +207,7 @@ planets<br>
 planet_names<br>
 planet_orbits<br>
 point_star<br>
+script_gui_debug<br>
 show_appname<br>
 show_date<br>
 show_fov<br>
@@ -230,7 +231,12 @@ off<br>
 toggle </td>
       <td>Set rendering flags. One argument name per command allowed
 currently.
-      <p>track_object is only useful while an object is selected. </p>
+      <p>track_object is only useful while an object is selected.<br>
+      </p>
+      <p>script_gui_debug determines whether a gui error message is
+shown at script errors. This must be set in a script and applies only
+for the scope of the script.<br>
+      </p>
       <p>The following flags are key user settings and are not
 accessible from scripts:</p>
       <p>enable_move_keys<br>
@@ -270,8 +276,7 @@ drop<br>
       <td style="vertical-align: top;">ALTITUDE_ANGLE<br>
       </td>
       <td style="vertical-align: top;">For positioning the center of
-the image in horizontal coordinates. &nbsp;Zero is at the horizon, 90
-is
+the image in horizontal coordinates. &nbsp;Zero is at the horizon, 90 is
 at the zenith.<br>
       </td>
     </tr>
@@ -317,8 +322,7 @@ command.<br>
       </td>
       <td style="vertical-align: top;">Used to refer to the image in
 later calls to manipulate the image. Images must be in PNG format. If
-images do not have dimensions that are powers of 2 (128, 256, etc.)
-they
+images do not have dimensions that are powers of 2 (128, 256, etc.) they
 are resized when loaded to meet this requirement.<br>
       </td>
     </tr>

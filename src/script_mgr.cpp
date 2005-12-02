@@ -53,6 +53,8 @@ bool ScriptMgr::play_script(string script_file, string script_path) {
 	  cancel_script();
   }
 
+  set_gui_debug(0);  // Default off until script sets otherwise
+
   script = new Script();
 
   // if script is on mountable disk, mount that now

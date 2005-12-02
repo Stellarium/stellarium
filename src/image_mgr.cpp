@@ -43,8 +43,12 @@ int ImageMgr::load_image(string filename, string name, IMAGE_POSITIONING positio
   }
 
   Image *img = new Image(filename, name, position_type);
-  active_images.push_back(img);
-  return 1;
+
+  if(!img || img->image_loaded()) {
+	  active_images.push_back(img);
+	  return 1;
+  } else return 0;
+
 }
 
 int ImageMgr::drop_image(string name) {

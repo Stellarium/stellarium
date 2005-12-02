@@ -56,6 +56,8 @@ class ScriptMgr
   string get_record_filename() { return rec_filename; }  // file record is writing to
   void set_allow_ui(bool _aui) { allow_ui = _aui; }
   bool get_allow_ui() { return allow_ui; }
+  void set_gui_debug(bool _gdebug) { gui_debug = _gdebug; }  // Should script errors be shown onscreen?
+  bool get_gui_debug() { return gui_debug; }
 
  private:
 
@@ -74,6 +76,7 @@ class ScriptMgr
   string DataDir;  
   bool allow_ui;    // Allow user interface to function during scripts 
                     // (except for time related keys which control script playback)
+  bool gui_debug;
 };
 
 
