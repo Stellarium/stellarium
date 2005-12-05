@@ -143,6 +143,30 @@ void SolarSystem::load(const string& planetfile)
 		if (funcname=="saturn_special")
 			posfunc = pos_func_type(get_saturn_helio_coordsv);
 
+		if (funcname=="mimas_special")
+			posfunc = pos_func_type(get_mimas_parent_coordsv);
+
+		if (funcname=="enceladus_special")
+			posfunc = pos_func_type(get_enceladus_parent_coordsv);
+
+		if (funcname=="tethys_special")
+			posfunc = pos_func_type(get_tethys_parent_coordsv);
+
+		if (funcname=="dione_special")
+			posfunc = pos_func_type(get_dione_parent_coordsv);
+
+		if (funcname=="rhea_special")
+			posfunc = pos_func_type(get_rhea_parent_coordsv);
+
+		if (funcname=="titan_special")
+			posfunc = pos_func_type(get_titan_parent_coordsv);
+
+		if (funcname=="iapetus_special")
+			posfunc = pos_func_type(get_iapetus_parent_coordsv);
+
+		if (funcname=="hyperion_special")
+			posfunc = pos_func_type(get_hyperion_parent_coordsv);
+
 		if (funcname=="uranus_special")
 			posfunc = pos_func_type(get_uranus_helio_coordsv);
 
@@ -155,7 +179,7 @@ void SolarSystem::load(const string& planetfile)
 
 		if (posfunc.empty())
 		{
-			cout << "ERROR : can't find posfunc %s for " << funcname << tname << endl;
+			cout << "ERROR : can't find posfunc " << funcname << " for " << tname << endl;
 			exit(-1);
 		}
 
