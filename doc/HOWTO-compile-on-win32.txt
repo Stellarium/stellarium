@@ -30,7 +30,7 @@ LIBRARIES
 
 Extract files from the ZLib123.zip from Install into Library\ZLib123
 Extract the zlib1.dll from ZLib123-dll.zip from Install and copy into Made\bin
-Extract the Includes from ZLib123-dll.zip from Install and copy into Made\lib
+Extract the Includes from ZLib123-dll.zip from Install and copy into Made\include
 
 Run MSYS
 $ cd  /d/source/library/zlib123
@@ -39,13 +39,13 @@ $ make
 Exit MSYS
 Copy the newly created ...\zlib123\zlib1.dll to the Made\bin directory
 Copy the newly created ...\zlib123\zlib.a to the Made\lib directory
-Copy the ...\zlib123\Include\*.* to the Made\Include directory
+Copy the ...\zlib123\Include\*.* to the Made\include directory
 
 2. PNG (www.libpng.org)
 
 Extract files from the libpng-1.2.8-bin.zip and libpng-1.2.8-lib into Library\libpng-1.2.8
-Copy the ...\libpng-1.2.8\Library\*.* to Made\Library
-Copy the ...\libpng-1.2.8\Include\*.* to Made\Include
+Copy the ...\libpng-1.2.8\Library\*.* to Made\lib
+Copy the ...\libpng-1.2.8\Include\*.* to Made\include
 Copy the ...\libpng-1.2.8\Bin\*.* to made\bin
 
 3. SDL (www.libsdl.org - SDL1.2)
@@ -55,8 +55,8 @@ Extract files from the SDL-devel-1.2.8-mingw32.tar.gz from Install into Library\
 Copy the SDL.DLL from the Library\SDL-1.2.8\Bin directory to \Made\bin
 Copy the i386-mingw32msvc-dsl-config from the Library\SDL-1.2.8\Bin directory to \Made\bin and rename to SDL-config
 Edit the SDL-Config and edit the line with prefix to prefix=c:/GNU/dev-cpp (no end slash)
-Copy the ...\SDL-1.2.8\Include\*.* (SDL directory) to the Made\Include directory
-Copy the SDL-1.2.8\Library\*.* to the \Library
+Copy the ...\SDL-1.2.8\Include\*.* (SDL directory) to the Made\include directory
+Copy the SDL-1.2.8\Library\*.* to the Made\lib
 
 
 READY
