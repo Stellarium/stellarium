@@ -20,6 +20,8 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 #ifndef _STELLPLANET_H_
 #define _STELLPLANET_H_
 
+#include "tass17.h"
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -74,6 +76,23 @@ void get_europa_parent_coordsv(double JD, double* XYZ) {get_europa_parent_coords
 void get_callisto_parent_coordsv(double JD, double* XYZ) {get_callisto_parent_coords(JD, &XYZ[0], &XYZ[1], &XYZ[2]);}
 void get_io_parent_coordsv(double JD, double* XYZ) {get_io_parent_coords(JD, &XYZ[0], &XYZ[1], &XYZ[2]);}
 void get_ganymede_parent_coordsv(double JD, double* XYZ) {get_ganymede_parent_coords(JD, &XYZ[0], &XYZ[1], &XYZ[2]);}
+
+void get_mimas_parent_coordsv(double JD, double* XYZ)
+  {GetTass17Coor(JD,TASS17_MIMAS,XYZ);}
+void get_enceladus_parent_coordsv(double JD, double* XYZ)
+  {GetTass17Coor(JD,TASS17_ENCELADUS,XYZ);}
+void get_tethys_parent_coordsv(double JD, double* XYZ)
+  {GetTass17Coor(JD,TASS17_TETHYS,XYZ);}
+void get_dione_parent_coordsv(double JD, double* XYZ)
+  {GetTass17Coor(JD,TASS17_DIONE,XYZ);}
+void get_rhea_parent_coordsv(double JD, double* XYZ)
+  {GetTass17Coor(JD,TASS17_RHEA,XYZ);}
+void get_titan_parent_coordsv(double JD, double* XYZ)
+  {GetTass17Coor(JD,TASS17_TITAN,XYZ);}
+void get_hyperion_parent_coordsv(double JD, double* XYZ)
+  {GetTass17Coor(JD,TASS17_HYPERION,XYZ);}
+void get_iapetus_parent_coordsv(double JD, double* XYZ)
+  {GetTass17Coor(JD,TASS17_IAPETUS,XYZ);}
 
 void get_sun_helio_coordsv(double JD, double* XYZ) {XYZ[0]=0.; XYZ[1]=0.; XYZ[2]=0.;}
 
