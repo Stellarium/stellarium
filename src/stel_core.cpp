@@ -170,7 +170,6 @@ void stel_core::init(void)
 		
 	// Init the solar system
 	ssystem->load(DataDir + "ssystem.ini");
-	ssystem->load_names(DataDir + "planet_names." + SkyLocale + ".fab");
 	ssystem->set_label_color(PlanetNamesColor);
 	ssystem->set_orbit_color(PlanetOrbitsColor);
 	ssystem->set_font(StarFontSize, DataDir + BaseFontName);
@@ -1405,7 +1404,6 @@ void stel_core::set_system_locale(void)
 
 	if (ui->isInitialised())
 	{
-		ssystem->load_names(DataDir + "planet_names." + SkyLocale + ".fab");
 		set_sky_locale();
 		ui->changeLocale();
 		// TODO: clear the list box in the widget and reload
@@ -1465,7 +1463,6 @@ void stel_core::set_sky_locale(void)
 		cout << "Using international star names.\n";
 		hip_stars->load_common_names(DataDir + "star_names.eng.fab");
 	}
-	ssystem->load_names(DataDir + "planet_names." + SkyLocale + ".fab");
 	asterisms->load_names(DataDir + "sky_cultures/" + SkyCulture + "/constellation_names." + SkyLocale + ".fab");
 
 	// refresh EditBox with new names

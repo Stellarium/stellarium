@@ -61,6 +61,7 @@ public:
 	vector<stel_object*> search_around(Vec3d v, double lim_fov, const navigator * nav, const Projector * prj);
 
 	planet* search(string object_name);
+	planet* searchByCommonNames(string planetCommonName);
 	planet* get_sun(void) {return sun;}
 	planet* get_earth(void) {return earth;}
 	planet* get_moon(void) {return moon;}
