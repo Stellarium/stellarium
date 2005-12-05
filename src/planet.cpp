@@ -35,7 +35,7 @@ rotation_elements::rotation_elements() : period(1.), offset(0.), epoch(J2000),
 {
 }
 
-planet::planet(const string& _name, int _flagHalo, int _flag_lighting, double _radius, Vec3f _color,
+planet::planet(const string& _name, const string& tname, int _flagHalo, int _flag_lighting, double _radius, Vec3f _color,
 			   float _albedo, const string& tex_map_name, const string& tex_halo_name, pos_func_type _coord_func) :
 	name(_name), flagHalo(_flagHalo), flag_lighting(_flag_lighting), radius(_radius), color(_color),
 	albedo(_albedo), axis_rotation(0.),	tex_map(NULL), tex_halo(NULL), tex_big_halo(NULL), rings(NULL),
@@ -46,8 +46,9 @@ planet::planet(const string& _name, int _flagHalo, int _flag_lighting, double _r
 	mat_local_to_parent = Mat4d::identity();
 	tex_map = new s_texture(tex_map_name, TEX_LOAD_TYPE_PNG_SOLID_REPEAT);
 	if (flagHalo) tex_halo = new s_texture(tex_halo_name);
-	// temp
-	common_name = _name;
+
+	// Translated name
+	common_name = tname;
 
 	// 60 day trails
 	DeltaTrail = 1;  
@@ -104,7 +105,7 @@ string planet::get_short_info_string(const navigator * nav) const
 {
 	ostringstream oss;
 
-	oss << common_name;
+	oss << common_name.c_str();
 	oss.setf(ios::fixed);
 	oss.precision(1);
 	if (sphere_scale != 1.f) oss << sphere_scale;

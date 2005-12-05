@@ -78,7 +78,7 @@ private:
 class planet : public stel_object
 {
 public:
-	planet(const string& _name, int _flagHalo, int _flag_lighting, double _radius, Vec3f _color,
+	planet(const string& _name, const string& commonname, int _flagHalo, int _flag_lighting, double _radius, Vec3f _color,
 	float _albedo, const string& tex_map_name, const string& tex_halo_name, pos_func_type _coord_func);
 
     virtual ~planet();
@@ -136,7 +136,6 @@ public:
 
 	string get_name(void) const {return name;}
 	string get_common_name(void) const {return common_name;}
-	void set_common_name(string cn) {common_name = cn;}
 
 	void set_rings(ring* r) {rings = r;}
 
