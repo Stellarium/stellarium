@@ -253,7 +253,7 @@ void planet::compute_trans_matrix(double date)
 	// TODO: Figure out the discrepancy
 
 	// Special case - heliocentric coordinates are on ecliptic, not solar equator...
-	if(name=="Sun" ) {
+	if(name=="sun" ) {
 		mat_local_to_parent = Mat4d::translation(ecliptic_pos); 
 	} else {
 		mat_local_to_parent = Mat4d::translation(ecliptic_pos) * Mat4d::zrotation(re.ascendingNode)
