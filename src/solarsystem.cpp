@@ -313,7 +313,7 @@ void SolarSystem::draw(planet* selected, bool hint_ON, Projector * prj, const na
 	// if a planet is selected and orbits are on, fade out non-selected ones
 	bool orb;
 	vector<planet*>::iterator iter = system_planets.begin();
-	if(flag_orbits && selected != NULL && selected->get_name() != "Sun") {
+	if(flag_orbits && selected != NULL && selected->get_name() != "sun") {
 		while (iter != system_planets.end()) {
 			if((*iter)->get_name() == selected->get_name()) orb = 1;
 			else orb = 0;
