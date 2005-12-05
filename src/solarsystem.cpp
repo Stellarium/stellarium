@@ -396,22 +396,30 @@ void SolarSystem::draw(planet* selected, bool hint_ON, Projector * prj, const na
 
 planet* SolarSystem::search(string planet_name) {
 
-  vector<planet*>::iterator iter = system_planets.begin();
-  while (iter != system_planets.end()) {
-    if( (*iter)->get_name() == planet_name ) return (*iter);  // also check standard ini file names 
-    ++iter;
-  }
-  return NULL;
+	// side effect - bad?
+	transform(planet_name.begin(), planet_name.end(), planet_name.begin(), ::tolower);
+
+	vector<planet*>::iterator iter = system_planets.begin();
+	while (iter != system_planets.end()) {
+
+		if( (*iter)->get_name() == planet_name ) return (*iter);  // also check standard ini file names 
+		++iter;
+	}
+	return NULL;
 }
 
 planet* SolarSystem::searchByCommonNames(string planetCommonName) {
 
-  vector<planet*>::iterator iter = system_planets.begin();
-  while (iter != system_planets.end()) {
-    if( (*iter)->get_common_name() == planetCommonName ) return (*iter);  // also check standard ini file names 
-    ++iter;
-  }
-  return NULL;
+	// side effect - bad?
+	transform(planetCommonName.begin(), planetCommonName.end(), planetCommonName.begin(), ::tolower);
+
+	vector<planet*>::iterator iter = system_planets.begin();
+	while (iter != system_planets.end()) {
+		
+		if( (*iter)->get_common_name() == planetCommonName ) return (*iter);  // also check standard ini file names 
+		++iter;
+	}
+	return NULL;
 }
 
 // Search if any planet is close to position given in earth equatorial position and return the distance
