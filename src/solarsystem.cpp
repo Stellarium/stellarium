@@ -32,7 +32,37 @@ using namespace std;
 #include "draw.h"
 
 SolarSystem::SolarSystem() : sun(NULL), moon(NULL), earth(NULL), tex_earth_shadow(NULL)
-{}
+{
+	// Generate Gettext strings for traduction
+	char * tmp = NULL;
+	tmp = gettext_noop("Sun");
+	tmp = gettext_noop("Mercury");
+	tmp = gettext_noop("Venus");
+	tmp = gettext_noop("Earth");
+	tmp = gettext_noop("Moon");
+	tmp = gettext_noop("Mars");
+	tmp = gettext_noop("Deimos");
+	tmp = gettext_noop("Phobos");
+	tmp = gettext_noop("Jupiter");
+	tmp = gettext_noop("Io");
+	tmp = gettext_noop("Europa");
+	tmp = gettext_noop("Ganymede");
+	tmp = gettext_noop("Callisto");
+	tmp = gettext_noop("Saturn");
+	tmp = gettext_noop("Mimas");
+	tmp = gettext_noop("Enceladus");
+	tmp = gettext_noop("Tethys");
+	tmp = gettext_noop("Dione");
+	tmp = gettext_noop("Rhea");
+	tmp = gettext_noop("Titan");
+	tmp = gettext_noop("Hyperion");
+	tmp = gettext_noop("Iapetus");
+	tmp = gettext_noop("Phoebe");
+	tmp = gettext_noop("Neptune");
+	tmp = gettext_noop("Uranus");
+	tmp = gettext_noop("Pluto");
+	tmp = gettext_noop("Charon");	
+}
 
 void SolarSystem::set_font(float font_size, const string& font_name)
 {
@@ -77,7 +107,7 @@ void SolarSystem::load(const string& planetfile)
 	for (int i = 0;i<nbSections;++i)
 	{
 		string secname = pd.get_secname(i);
-		string tname = pd.get_str(secname, "name");
+		string tname = gettext(pd.get_str(secname, "name").c_str());
 		string funcname = pd.get_str(secname, "coord_func");
 
 		pos_func_type posfunc;
@@ -184,7 +214,7 @@ void SolarSystem::load(const string& planetfile)
 		}
 
 		// Create the planet and add it to the list
-		planet* p = new planet(tname, pd.get_boolean(secname, "halo"),
+		planet* p = new planet(secname, tname, pd.get_boolean(secname, "halo"),
 			pd.get_boolean(secname, "lightning"), pd.get_double(secname, "radius")/AU,
 			str_to_vec3f(pd.get_str(secname, "color").c_str()), pd.get_double(secname, "albedo"),
 			pd.get_str(secname, "tex_map"), pd.get_str(secname, "tex_halo"), posfunc);
@@ -212,9 +242,10 @@ void SolarSystem::load(const string& planetfile)
 			}
 		}
 
-		if (tname=="Earth") earth = p;
-		if (tname=="Sun") sun = p;
-		if (tname=="Moon") moon = p;
+		if (secname=="earth")
+			earth = p;
+		if (secname=="sun") sun = p;
+		if (secname=="moon") moon = p;
 
 		p->set_rotation_elements(
 			pd.get_double(secname, "rot_periode", pd.get_double(secname, "orbit_Period", 24.))/24.,
@@ -367,8 +398,17 @@ planet* SolarSystem::search(string planet_name) {
 
   vector<planet*>::iterator iter = system_planets.begin();
   while (iter != system_planets.end()) {
-    if( (*iter)->get_common_name() == planet_name ) return (*iter);
     if( (*iter)->get_name() == planet_name ) return (*iter);  // also check standard ini file names 
+    ++iter;
+  }
+  return NULL;
+}
+
+planet* SolarSystem::searchByCommonNames(string planetCommonName) {
+
+  vector<planet*>::iterator iter = system_planets.begin();
+  while (iter != system_planets.end()) {
+    if( (*iter)->get_common_name() == planetCommonName ) return (*iter);  // also check standard ini file names 
     ++iter;
   }
   return NULL;
@@ -434,47 +474,6 @@ vector<string> SolarSystem::getNames(void)
 	for (iter = system_planets.begin(); iter != system_planets.end(); ++iter)
         names.push_back((*iter)->get_common_name());
     return names;
-}
-
-// update planet names for a new locale
-void SolarSystem::load_names(const string& names_file)
-{
-	vector<planet*>::iterator iter;      
-	
-	char planet[40];
-	char cname[40];
-	
-	// clear existing names (for cases of languages without non-visible planet names, or missing translation files)
-	for( iter = system_planets.begin(); iter < system_planets.end(); iter++ )
-	{
-		(*iter)->set_common_name("");
-	}
-	
-	// read in translated common names from file
-	FILE *cnFile;
-	cnFile = NULL;
-	
-	cnFile=fopen(names_file.c_str(),"r");
-	if (!cnFile)
-	{
-		printf("WARNING %s NOT FOUND\n",names_file.c_str());
-		return;
-	}
-	
-	// find matching planet and update name
-	while(!feof(cnFile))
-	{
-		fscanf(cnFile,"%s\t%s\n",planet,cname);
-		for( iter = system_planets.begin(); iter < system_planets.end(); iter++ )
-		{
-			if ( !strcmp( (*iter)->get_name().c_str(), planet) )
-			{
-				(*iter)->set_common_name(string(cname));
-				break;
-			}
-		}
-	}
-	fclose(cnFile);
 }
 
 void SolarSystem::update_trails(const navigator* nav) {
