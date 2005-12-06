@@ -121,8 +121,8 @@ double planet::get_close_fov(const navigator* nav) const
 
 double planet::get_satellites_fov(const navigator * nav) const
 {
-	if (name=="Jupiter") return atanf(0.005/get_earth_equ_pos(nav).length())*180./M_PI * 4;
-	if (name=="Saturn") return atanf(0.005/get_earth_equ_pos(nav).length())*180./M_PI * 4;
+	if (name=="jupiter") return atanf(0.005/get_earth_equ_pos(nav).length())*180./M_PI * 4;
+	if (name=="saturn") return atanf(0.005/get_earth_equ_pos(nav).length())*180./M_PI * 4;
 	return -1.;
 }
 
