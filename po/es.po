@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: stellarium@free.fr\n"
-"POT-Creation-Date: 2005-12-05 14:31+0100\n"
+"POT-Creation-Date: 2005-12-06 17:10+0100\n"
 "PO-Revision-Date: 2005-07-25 18:00+0100\n"
 "Last-Translator: Sergio Trujillo <sergiotrujillo@telefonica.net>\n"
 "Language-Team: \n"
@@ -96,22 +96,22 @@ msgstr ""
 "Si no, compruebe que tiene acceso a %s\n"
 
 # Norte
-#: src/draw.cpp:361 src/draw.cpp:466
+#: src/draw.cpp:425 src/draw.cpp:535
 msgid "N"
 msgstr "N"
 
 # Sur
-#: src/draw.cpp:362 src/draw.cpp:467
+#: src/draw.cpp:426 src/draw.cpp:536
 msgid "S"
 msgstr "S"
 
 # Este
-#: src/draw.cpp:363 src/draw.cpp:468
+#: src/draw.cpp:427 src/draw.cpp:537
 msgid "E"
 msgstr "E"
 
 # Oeste
-#: src/draw.cpp:364 src/draw.cpp:469
+#: src/draw.cpp:428 src/draw.cpp:538
 msgid "W"
 msgstr "O"
 
@@ -756,7 +756,7 @@ msgstr ""
 msgid "Loading Solar System data..."
 msgstr "Cargando datos del Sistema Solar...\n"
 
-#: src/stel_core.cpp:513
+#: src/stel_core.cpp:512
 #, c-format
 msgid ""
 "The current config file is from a previous version (>=0.6.0).\n"
@@ -766,7 +766,7 @@ msgstr ""
 "Las anteriores opciones serán importadas en el nuevo archivo de "
 "configuración.\n"
 
-#: src/stel_core.cpp:532
+#: src/stel_core.cpp:531
 #, c-format
 msgid ""
 "The current config file is from a version too old for parameters to be "
@@ -777,16 +777,16 @@ msgstr ""
 "para poder importar sus parámetros (%s).\n"
 "Será reemplazado por el archivo de configuración por defecto.\n"
 
-#: src/stel_core.cpp:555
+#: src/stel_core.cpp:554
 msgid "Loading configuration file "
 msgstr "Cargando el archivo de configuración "
 
-#: src/stel_core.cpp:563
+#: src/stel_core.cpp:562
 msgid "ERROR : The current config file is from a different version ("
 msgstr ""
 "ERROR : El archivo de configuración actual es de una versión diferente ("
 
-#: src/stel_core.cpp:1353
+#: src/stel_core.cpp:1352
 msgid "Invalid sky culture directory: "
 msgstr ""
 
