@@ -16,12 +16,8 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-// Main class for stellarium
-// Manage all the objects to be used in the program
-
 #ifndef _STEL_CORE_H_
 #define _STEL_CORE_H_
-
 
 #define SCRIPT_REMOVEABLE_DISK "/tmp/scripts/"
 
@@ -57,6 +53,14 @@ class StelCommandInterface;
 class ScriptMgr;
 class stel_ui;
 
+
+/**
+ *  @brief Main class for stellarium core processing. 
+ *  
+ * Manage all the objects to be used in the program. 
+ * This class will be the main API of the program after the currently planned 
+ * reorganization of the source code. It must be documented using doxygen.
+ */
 class stel_core
 {
 friend class stel_ui;
@@ -67,11 +71,15 @@ public:
     stel_core(const string& DDIR, const string& TDIR, const string& CDIR, const string& DATA_ROOT);
     virtual ~stel_core();
 	
-	// Init and load all main core components
+	//! @brief Init and load all main core components.
 	void init(void);
-	// Update all the objects in function of the time
+
+	//! @brief Update all the objects with respect to the time.
+	//! @param delta_time the time increment in ms.
 	void update(int delta_time);
-	// Execute all the drawing functions
+
+	//! @brief Execute all the drawing functions
+	//! @param delta_time the time increment in ms.
 	void draw(int delta_time);
 
 	// TODO : only viewport size is managed by the projection class
@@ -104,9 +112,13 @@ public:
 	//! Set the sky culture
 	int set_sky_culture(string _culture_dir);
 	
-	//! Set the locale type
-	void set_system_locale_by_code(const string& _locale); // ie fr_FR
-	void set_system_locale_by_name(const string& _locale); // ie fra
+	//! @brief Set the locale type from locale code
+	//! @param locale locale code, e.g fr_FR
+	void set_system_locale_by_code(const string& locale);
+	
+	//! @brief Set the locale type from language code
+	//! @param locale language code, e.g fra
+	void set_system_locale_by_name(const string& locale);
 
 	//! Set the screen size
 	void set_screen_size(int w, int h);
@@ -114,27 +126,32 @@ public:
 	//! Set the landscape
 	void set_landscape(const string& new_landscape_name);
 	
-	//! Set/Get time speed in JDay/sec
+	//! Set time speed in JDay/sec
 	void set_time_speed(double ts) {navigation->set_time_speed(ts);}
+	//! Get time speed in JDay/sec
 	double get_time_speed(void) const {return navigation->get_time_speed();}
 	
-	//! Set/Get JDay
+	//! Set the current date in Julian Day
 	void set_JDay(double JD) {navigation->set_JDay(JD);}
+	//! Get the current date in Julian Day
 	double get_JDay(void) const {return navigation->get_JDay();}
 		
-	//! Set/Get display flag of constellation lines
+	//! Set display flag of constellation lines
 	void constellation_set_flag_lines(bool b) {asterisms->set_flag_lines(b);}
+	//! Get display flag of constellation lines
 	bool constellation_get_flag_lines(void) {return asterisms->get_flag_lines();}
 	
-	//! Set/Get display flag of constellation boundaries
+	//! Get display flag of constellation boundaries
 	bool constellation_get_flag_boundaries(void) {return asterisms->get_flag_boundaries();}
 
-	//! Set/Get display flag of constellation art
+	//! Set display flag of constellation art
 	void constellation_set_flag_art(bool b) {asterisms->set_flag_art(b);}
+	//! Get display flag of constellation art
 	bool constellation_get_flag_art(void) {return asterisms->get_flag_art();}
 	
-	//! Set/Get display flag of constellation names
+	//! Set display flag of constellation names
 	void constellation_set_flag_names(bool b) {asterisms->set_flag_names(b);}
+	//! Get display flag of constellation names
 	bool constellation_get_flag_names(void) {return asterisms->get_flag_names();}
 		
 	///////////////////////////////////////////////////////////////////////////////
@@ -207,8 +224,8 @@ private:
 	planet* selected_planet;
 
 	// Projector
-	PROJECTOR_TYPE ProjectorType;
-	VIEWPORT_TYPE ViewportType;
+	Projector::PROJECTOR_TYPE ProjectorType;
+	Projector::VIEWPORT_TYPE ViewportType;
 	int DistortionFunction;
 	
 		

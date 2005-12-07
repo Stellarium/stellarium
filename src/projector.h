@@ -24,26 +24,29 @@
 #include "vecmath.h"
 #include "s_font.h"
 
-enum PROJECTOR_TYPE
-{
-	PERSPECTIVE_PROJECTOR,
-	FISHEYE_PROJECTOR,
-	CYLINDER_PROJECTOR
-};
 
-enum VIEWPORT_TYPE
-{
-	MAXIMIZED,
-	SQUARE,
-	DISK,
-	UNKNOWN
-};
+
 
 // Class which handle projection modes and projection matrix
 // Overide some function usually handled by glu
 class Projector
 {
 public:
+	enum PROJECTOR_TYPE
+	{
+		PERSPECTIVE_PROJECTOR,
+		FISHEYE_PROJECTOR,
+		CYLINDER_PROJECTOR
+	};
+
+	enum VIEWPORT_TYPE
+	{
+		MAXIMIZED,
+		SQUARE,
+		DISK,
+		UNKNOWN
+	};
+
 	Projector(int _screenW = 800, int _screenH = 600, double _fov = 60.,
 		double _min_fov = 0.001, double _max_fov = 100);
 	virtual ~Projector();

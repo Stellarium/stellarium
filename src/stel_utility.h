@@ -32,24 +32,50 @@ using namespace std;
 typedef std::map< std::string, std::string > stringHash_t;
 typedef stringHash_t::const_iterator stringHashIter_t;
 
+class StelUtility {
+public:
+	//! @brief Convert an angle in hms format to radian
+	//! @param h hour component
+	//! @param m minute component
+	//!	@param s second component
+	//! @return angle in radian
+	static double hms_to_rad(unsigned int h, unsigned int m, double s);
+			   
+	//! @brief Convert an angle in dms format to radian
+	//! @param d degree component
+	//! @param m arcmin component
+	//!	@param s arcsec component
+	//! @return angle in radian
+	static double dms_to_rad(int d, int m, double s);	  
+
+	/**
+	* Obtains a Vec3f from a string
+	* @param s the string describing the Vector with the form "x,y,z"
+	* @return The correspondong vector
+	*/
+	static Vec3f str_to_vec3f(const string& s);
+	
+	/**
+	* Obtains a string from a Vec3f 
+	* @param v The vector
+	* @return the string describing the Vector with the form "x,y,z"
+	*/
+	static string vec3f_to_str(const Vec3f& v); 
+};
+
 // Angles and coordinate conversions
-double hms_to_rad(unsigned int h, unsigned int m, double s);
-double dms_to_rad(int d, int m, double s);
+//double hms_to_rad(unsigned int h, unsigned int m, double s);
+//double dms_to_rad(int d, int m, double s);
 
 double hms_to_rad(unsigned int h, double m);
 double dms_to_rad(int d, double m);
 
-//void rad_to_hms(unsigned int *h, unsigned int *m, double *s, double r);
+
 void sphe_to_rect(double lng, double lat, Vec3d& v);
 void sphe_to_rect(double lng, double lat, double r, Vec3d& v);
 void sphe_to_rect(float lng, float lat, Vec3f& v);
 void rect_to_sphe(double *lng, double *lat, const Vec3d& v);
 void rect_to_sphe(float *lng, float *lat, const Vec3f& v);
-
-// Obtains a Vec3f from a string
-Vec3f str_to_vec3f(const string& s);
-// Obtains a string from a Vec3f with the form x,y,z
-string vec3f_to_str(const Vec3f& v);
 
 /* Obtains Latitude, Longitude, RA or Declination from a string. */
 double get_dec_angle(const string&);
@@ -86,9 +112,6 @@ long int str_to_long(string str);
 
 int fcompare(const string& _base, const string& _sub);
 
-//int str_compare_case_insensitive(const string& str1, const string& str2);
-
-//string translateGreek(const string& s, bool greekOnly);
 string translateGreek(const string& s);
 string stripConstellation(const string& s);
 

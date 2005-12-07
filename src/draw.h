@@ -29,16 +29,16 @@
 #include "tone_reproductor.h"
 #include "fader.h"
 
-enum SKY_GRID_TYPE
-{
-	EQUATORIAL,
-	ALTAZIMUTAL
-};
 
 // Class which manages a grid to display in the sky
 class SkyGrid
 {
 public:
+	enum SKY_GRID_TYPE
+	{
+		EQUATORIAL,
+		ALTAZIMUTAL
+	};
 	// Create and precompute positions of a SkyGrid
 	SkyGrid(SKY_GRID_TYPE grid_type = EQUATORIAL, unsigned int _nb_meridian = 24, unsigned int _nb_parallel = 17,
 	 double _radius = 1., unsigned int _nb_alt_segment = 18, unsigned int _nb_azi_segment = 50);
@@ -67,18 +67,17 @@ private:
 };
 
 
-enum SKY_LINE_TYPE
-{
-	EQUATOR,
-	ECLIPTIC,
-	LOCAL,
-	MERIDIAN
-};
-
 // Class which manages a line to display around the sky like the ecliptic line
 class SkyLine
 {
 public:
+	enum SKY_LINE_TYPE
+	{
+		EQUATOR,
+		ECLIPTIC,
+		LOCAL,
+		MERIDIAN
+	};
 	// Create and precompute positions of a SkyGrid
 	SkyLine(SKY_LINE_TYPE _line_type = EQUATOR, double _radius = 1., unsigned int _nb_segment = 48);
     virtual ~SkyLine();
