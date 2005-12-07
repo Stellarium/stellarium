@@ -315,12 +315,12 @@ Component* stel_ui::createConfigWindow(void)
 
 	x=50; y+=20;
 
-	fisheye_projection_cbx = new LabeledCheckBox(core->projection->get_type()==FISHEYE_PROJECTOR, _("Fisheye Projection Mode"));
+	fisheye_projection_cbx = new LabeledCheckBox(core->projection->get_type()==Projector::FISHEYE_PROJECTOR, _("Fisheye Projection Mode"));
 	fisheye_projection_cbx->setOnPressCallback(callback<void>(this, &stel_ui::updateVideoVariables));
 	tab_video->addComponent(fisheye_projection_cbx);
 	fisheye_projection_cbx->setPos(x,y); y+=15;
 
-	disk_viewport_cbx = new LabeledCheckBox(core->projection->get_viewport_type()==DISK, _("Disk Viewport"));
+	disk_viewport_cbx = new LabeledCheckBox(core->projection->get_viewport_type()==Projector::DISK, _("Disk Viewport"));
 	disk_viewport_cbx->setOnPressCallback(callback<void>(this, &stel_ui::updateVideoVariables));
 	tab_video->addComponent(disk_viewport_cbx);
 	disk_viewport_cbx->setPos(x,y); y+=35;
@@ -1011,17 +1011,17 @@ void stel_ui::setVideoOption(void)
 
 	switch (core->projection->get_type())
 	{
-		case FISHEYE_PROJECTOR : conf.set_str("projection:type", "fisheye"); break;
-		case PERSPECTIVE_PROJECTOR :
+		case Projector::FISHEYE_PROJECTOR : conf.set_str("projection:type", "fisheye"); break;
+		case Projector::PERSPECTIVE_PROJECTOR :
 		default :
 			conf.set_str("projection:type", "perspective"); break;
 	}
 
 	switch (core->projection->get_viewport_type())
 	{
-		case SQUARE : conf.set_str("projection:viewport", "square"); break;
-		case DISK : conf.set_str("projection:viewport", "disk"); break;
-		case MAXIMIZED :
+		case Projector::SQUARE : conf.set_str("projection:viewport", "square"); break;
+		case Projector::DISK : conf.set_str("projection:viewport", "disk"); break;
+		case Projector::MAXIMIZED :
 		default :
 			conf.set_str("projection:viewport", "maximized"); break;
 	}
@@ -1038,14 +1038,14 @@ void stel_ui::setLandscape(void)
 
 void stel_ui::updateVideoVariables(void)
 {
-	if (fisheye_projection_cbx->getState() && core->projection->get_type()!=FISHEYE_PROJECTOR)
+	if (fisheye_projection_cbx->getState() && core->projection->get_type()!=Projector::FISHEYE_PROJECTOR)
 	{
 		// Switch to fisheye projection
 		Fisheye_projector* p = new Fisheye_projector(*(core->projection));
 		delete core->projection;
 		core->projection = p;
 	}
-	if (!fisheye_projection_cbx->getState() && core->projection->get_type()==FISHEYE_PROJECTOR)
+	if (!fisheye_projection_cbx->getState() && core->projection->get_type()==Projector::FISHEYE_PROJECTOR)
 	{
 		// Switch to perspective projection
 		Projector* p = new Projector(*(core->projection));
@@ -1055,11 +1055,11 @@ void stel_ui::updateVideoVariables(void)
 	}
 
 
-	if (disk_viewport_cbx->getState() && core->projection->get_viewport_type()!=DISK)
+	if (disk_viewport_cbx->getState() && core->projection->get_viewport_type()!=Projector::DISK)
 	{
 		core->projection->set_disk_viewport();
 	}
-	if (!disk_viewport_cbx->getState() && core->projection->get_viewport_type()==DISK)
+	if (!disk_viewport_cbx->getState() && core->projection->get_viewport_type()==Projector::DISK)
 	{
 		core->projection->maximize_viewport();
 	}
@@ -1114,8 +1114,8 @@ void stel_ui::updateConfigForm(void)
 	sprintf(tempstr, "%.1f", core->navigation->get_time_speed()/JD_SECOND);
 	time_speed_lbl2->setLabel("\1 Current Time Speed is x" + string(tempstr));
 
-	fisheye_projection_cbx->setState(core->projection->get_type()==FISHEYE_PROJECTOR);
-	disk_viewport_cbx->setState(core->projection->get_viewport_type()==DISK);
+	fisheye_projection_cbx->setState(core->projection->get_type()==Projector::FISHEYE_PROJECTOR);
+	disk_viewport_cbx->setState(core->projection->get_viewport_type()==Projector::DISK);
 }
 
 void stel_ui::config_win_hideBtCallback(void)

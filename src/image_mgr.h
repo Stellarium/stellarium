@@ -32,7 +32,7 @@ class ImageMgr
  public:
   ImageMgr();
   virtual ~ImageMgr();
-  int load_image(string filename, string name, IMAGE_POSITIONING position_type);
+  int load_image(string filename, string name, Image::IMAGE_POSITIONING position_type);
   int drop_image(string name);
   int drop_all_images();
   Image *get_image(string name);

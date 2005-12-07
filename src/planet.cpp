@@ -21,7 +21,7 @@
 #include "planet.h"
 #include "navigator.h"
 #include "s_font.h"
-#include "s_gui.h" // for the circle function >> probably better elsewhere
+#include "s_gui.h"
 
 s_font* planet::planet_name_font = NULL;
 float planet::object_scale = 1.f;

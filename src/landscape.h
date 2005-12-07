@@ -30,16 +30,16 @@
 #include "fader.h"
 #include "stel_utility.h"
 
-enum LANDSCAPE_TYPE
-{
-	OLD_STYLE,
-	FISHEYE
-};
-
 // Class which manages the displaying of the Landscape
 class Landscape
 {
 public:
+	enum LANDSCAPE_TYPE
+	{
+		OLD_STYLE,
+		FISHEYE
+	};
+
 	Landscape(float _radius = 2.);
     virtual ~Landscape();
 	virtual void load(const string& file_name, const string& section_name) = 0;

@@ -8,11 +8,10 @@
     <primarylanguage>C++</primarylanguage>
     <ignoreparts>
       <part>kdevfileselector</part>
-      <part>kdevbookmarks</part>
     </ignoreparts>
     <projectdirectory>.</projectdirectory>
     <absoluteprojectpath>false</absoluteprojectpath>
-    <description/>
+    <description></description>
     <versioncontrol>kdevcvsservice</versioncontrol>
   </general>
   <kdevautoproject>
@@ -71,12 +70,12 @@
   </kdevautoproject>
   <kdevdebugger>
     <general>
-      <dbgshell/>
-      <programargs/>
-      <gdbpath/>
-      <configGdbScript/>
-      <runShellScript/>
-      <runGdbScript/>
+      <dbgshell></dbgshell>
+      <programargs></programargs>
+      <gdbpath></gdbpath>
+      <configGdbScript></configGdbScript>
+      <runShellScript></runShellScript>
+      <runGdbScript></runGdbScript>
       <breakonloadinglibs>true</breakonloadinglibs>
       <separatetty>false</separatetty>
       <floatingtoolbar>false</floatingtoolbar>
@@ -161,14 +160,17 @@
       <headerCompletionDelay>250</headerCompletionDelay>
     </codecompletion>
     <creategettersetter>
-      <prefixGet/>
+      <prefixGet></prefixGet>
       <prefixSet>set</prefixSet>
       <prefixVariable>m_,_</prefixVariable>
       <parameterName>theValue</parameterName>
       <inlineGet>true</inlineGet>
       <inlineSet>true</inlineSet>
     </creategettersetter>
-    <references/>
+    <references>
+      <pcs>libstdc++</pcs>
+      <pcs>libSDL</pcs>
+    </references>
   </kdevcppsupport>
   <kdevdocumentation>
     <projectdoc>
@@ -189,8 +191,8 @@
     </tree>
   </kdevfileview>
   <ctagspart>
-    <customArguments/>
-    <customTagfilePath/>
+    <customArguments></customArguments>
+    <customTagfilePath>/home/fabien/prog/stellarium/tags</customTagfilePath>
   </ctagspart>
   <dist>
     <custom>false</custom>
@@ -216,4 +218,13 @@
     <appskde>false</appskde>
     <url/>
   </dist>
+  <kdevvisualadvance>
+    <emulator>VisualBoyAdvance</emulator>
+    <binary></binary>
+    <addOptions></addOptions>
+    <terminal>false</terminal>
+    <fullscreen>false</fullscreen>
+    <graphicFilter>-f0</graphicFilter>
+    <scaling>-1</scaling>
+  </kdevvisualadvance>
 </kdevelop>

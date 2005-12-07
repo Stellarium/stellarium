@@ -216,7 +216,7 @@ void SolarSystem::load(const string& planetfile)
 		// Create the planet and add it to the list
 		planet* p = new planet(secname, tname, pd.get_boolean(secname, "halo"),
 			pd.get_boolean(secname, "lightning"), pd.get_double(secname, "radius")/AU,
-			str_to_vec3f(pd.get_str(secname, "color").c_str()), pd.get_double(secname, "albedo"),
+			StelUtility::str_to_vec3f(pd.get_str(secname, "color").c_str()), pd.get_double(secname, "albedo"),
 			pd.get_str(secname, "tex_map"), pd.get_str(secname, "tex_halo"), posfunc);
 
 		string str_parent = pd.get_str(secname, "parent");

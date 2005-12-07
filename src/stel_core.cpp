@@ -35,7 +35,7 @@ stel_core::stel_core(const string& DDIR, const string& TDIR, const string& CDIR,
 	DataDir = DDIR;
 	DataRoot = DATA_ROOT;
 	
-	ProjectorType = PERSPECTIVE_PROJECTOR;
+	ProjectorType = Projector::PERSPECTIVE_PROJECTOR;
 	SelectedScript = SelectedScriptDirectory = "";
 	
 	tone_converter = new tone_reproductor();		
@@ -47,11 +47,11 @@ stel_core::stel_core(const string& DDIR, const string& TDIR, const string& CDIR,
 	nebulas = new Nebula_mgr();
 	ssystem = new SolarSystem();
 	milky_way = new MilkyWay();
-	equ_grid = new SkyGrid(EQUATORIAL);
-	azi_grid = new SkyGrid(ALTAZIMUTAL);
-	equator_line = new SkyLine(EQUATOR);
-	ecliptic_line = new SkyLine(ECLIPTIC);
-	meridian_line = new SkyLine(MERIDIAN, 1, 36);
+	equ_grid = new SkyGrid(SkyGrid::EQUATORIAL);
+	azi_grid = new SkyGrid(SkyGrid::ALTAZIMUTAL);
+	equator_line = new SkyLine(SkyLine::EQUATOR);
+	ecliptic_line = new SkyLine(SkyLine::ECLIPTIC);
+	meridian_line = new SkyLine(SkyLine::MERIDIAN, 1, 36);
 	cardinals_points = new Cardinals();
 	skyloc = new Sky_localizer(DataDir);
 	
@@ -134,13 +134,13 @@ void stel_core::init(void)
 
 	switch (ProjectorType)
 	{
-	case PERSPECTIVE_PROJECTOR :
+	case Projector::PERSPECTIVE_PROJECTOR :
 		projection = new Projector(screen_W, screen_H, InitFov);
 		break;
-	case FISHEYE_PROJECTOR :
+	case Projector::FISHEYE_PROJECTOR :
 		projection = new Fisheye_projector(screen_W, screen_H, InitFov, .001, 180.00001, DistortionFunction);
 		break;
-	case CYLINDER_PROJECTOR :
+	case Projector::CYLINDER_PROJECTOR :
 		projection = new Cylinder_projector(screen_W, screen_H, InitFov, .001, 180.00001);
 		break;
 	default :
@@ -575,13 +575,13 @@ void stel_core::load_config_from(const string& confFile)
 
 	// Projector
 	string tmpstr = conf.get_str("projection:type");
-	if (tmpstr=="perspective") ProjectorType = PERSPECTIVE_PROJECTOR;
+	if (tmpstr=="perspective") ProjectorType = Projector::PERSPECTIVE_PROJECTOR;
 	else
 	{
-		if (tmpstr=="fisheye") ProjectorType = FISHEYE_PROJECTOR;
+		if (tmpstr=="fisheye") ProjectorType = Projector::FISHEYE_PROJECTOR;
 		else
 		{
-			if (tmpstr=="cylinder") ProjectorType = CYLINDER_PROJECTOR;
+			if (tmpstr=="cylinder") ProjectorType = Projector::CYLINDER_PROJECTOR;
 			else
 			{
 				cout << "ERROR : Unknown projector type : " << tmpstr << endl;
@@ -591,12 +591,12 @@ void stel_core::load_config_from(const string& confFile)
 	}
 
 	tmpstr = conf.get_str("projection:viewport");
-	if (tmpstr=="maximized") ViewportType = MAXIMIZED;
+	if (tmpstr=="maximized") ViewportType = Projector::MAXIMIZED;
 	else
-	if (tmpstr=="square") ViewportType = SQUARE;
+	if (tmpstr=="square") ViewportType = Projector::SQUARE;
 	else
 	{
-		if (tmpstr=="disk") ViewportType = DISK;
+		if (tmpstr=="disk") ViewportType = Projector::DISK;
 		else
 		{
 			cout << "ERROR : Unknown viewport type : " << tmpstr << endl;
@@ -635,10 +635,10 @@ void stel_core::load_config_from(const string& confFile)
 	FlagShowAppName		= conf.get_boolean("gui:flag_show_appname");
 	FlagShowFov			= conf.get_boolean("gui:flag_show_fov");
 	FlagShowSelectedObjectInfo = conf.get_boolean("gui:flag_show_selected_object_info");
-	GuiBaseColor		= str_to_vec3f(conf.get_str("color", "gui:gui_base_color", "0.3,0.4,0.7").c_str());
-	GuiTextColor		= str_to_vec3f(conf.get_str("color", "gui:gui_text_color", "0.7,0.8,0.9").c_str());
-	GuiBaseColorr		= str_to_vec3f(conf.get_str("color", "gui:gui_base_colorr", "0.7,0.2,0.1").c_str());
-	GuiTextColorr		= str_to_vec3f(conf.get_str("color", "gui:gui_text_colorr", "0.9,0.4,0.2").c_str());
+	GuiBaseColor		= StelUtility::StelUtility::StelUtility::str_to_vec3f(conf.get_str("color", "gui:gui_base_color", "0.3,0.4,0.7").c_str());
+	GuiTextColor		= StelUtility::StelUtility::StelUtility::str_to_vec3f(conf.get_str("color", "gui:gui_text_color", "0.7,0.8,0.9").c_str());
+	GuiBaseColorr		= StelUtility::StelUtility::StelUtility::str_to_vec3f(conf.get_str("color", "gui:gui_base_colorr", "0.7,0.2,0.1").c_str());
+	GuiTextColorr		= StelUtility::StelUtility::StelUtility::str_to_vec3f(conf.get_str("color", "gui:gui_text_colorr", "0.9,0.4,0.2").c_str());
 	BaseFontSize		= conf.get_double ("gui","base_font_size",15);
 	BaseFontName        = conf.get_str("gui", "base_font_name", "spacefont.txt");
 	FlagShowScriptBar	= conf.get_boolean("gui","flag_show_script_bar",0);
@@ -646,20 +646,20 @@ void stel_core::load_config_from(const string& confFile)
 	scripts->set_allow_ui( conf.get_boolean("gui","flag_script_allow_ui",0) );
 
 	// Colors
-	AzimuthalColor		= str_to_vec3f(conf.get_str("color:azimuthal_color").c_str());
-	EquatorialColor		= str_to_vec3f(conf.get_str("color:equatorial_color").c_str());
-	EquatorColor		= str_to_vec3f(conf.get_str("color:equator_color").c_str());
-	EclipticColor		= str_to_vec3f(conf.get_str("color:ecliptic_color").c_str());
-	asterisms->set_line_color( str_to_vec3f(conf.get_str("color:const_lines_color").c_str()));
-	asterisms->set_label_color( str_to_vec3f(conf.get_str("color:const_names_color").c_str()));
-	asterisms->set_boundary_color( str_to_vec3f(conf.get_str("color", "const_boundary_color", "0.8,0.3,0.3").c_str()));
-	NebulaLabelColor	= str_to_vec3f(conf.get_str("color:nebula_label_color").c_str());
-	NebulaCircleColor	= str_to_vec3f(conf.get_str("color:nebula_circle_color").c_str());
-	cardinals_points->set_color( str_to_vec3f(conf.get_str("color:cardinal_color").c_str()) );
-	//	CardinalColor 		= str_to_vec3f(conf.get_str("color:cardinal_color").c_str());
-	PlanetNamesColor	= str_to_vec3f(conf.get_str("color:planet_names_color").c_str());
-	PlanetOrbitsColor	= str_to_vec3f(conf.get_str("color", "planet_orbits_color", ".6,1,1").c_str());
-	ObjectTrailsColor	= str_to_vec3f(conf.get_str("color", "object_trails_color", "1,0.7,0").c_str());
+	AzimuthalColor		= StelUtility::StelUtility::StelUtility::str_to_vec3f(conf.get_str("color:azimuthal_color").c_str());
+	EquatorialColor		= StelUtility::StelUtility::StelUtility::str_to_vec3f(conf.get_str("color:equatorial_color").c_str());
+	EquatorColor		= StelUtility::StelUtility::StelUtility::str_to_vec3f(conf.get_str("color:equator_color").c_str());
+	EclipticColor		= StelUtility::StelUtility::StelUtility::str_to_vec3f(conf.get_str("color:ecliptic_color").c_str());
+	asterisms->set_line_color( StelUtility::StelUtility::str_to_vec3f(conf.get_str("color:const_lines_color").c_str()));
+	asterisms->set_label_color( StelUtility::StelUtility::str_to_vec3f(conf.get_str("color:const_names_color").c_str()));
+	asterisms->set_boundary_color( StelUtility::StelUtility::str_to_vec3f(conf.get_str("color", "const_boundary_color", "0.8,0.3,0.3").c_str()));
+	NebulaLabelColor	= StelUtility::StelUtility::str_to_vec3f(conf.get_str("color:nebula_label_color").c_str());
+	NebulaCircleColor	= StelUtility::StelUtility::str_to_vec3f(conf.get_str("color:nebula_circle_color").c_str());
+	cardinals_points->set_color( StelUtility::StelUtility::str_to_vec3f(conf.get_str("color:cardinal_color").c_str()) );
+	//	CardinalColor 		= StelUtility::StelUtility::str_to_vec3f(conf.get_str("color:cardinal_color").c_str());
+	PlanetNamesColor	= StelUtility::StelUtility::str_to_vec3f(conf.get_str("color:planet_names_color").c_str());
+	PlanetOrbitsColor	= StelUtility::StelUtility::str_to_vec3f(conf.get_str("color", "planet_orbits_color", ".6,1,1").c_str());
+	ObjectTrailsColor	= StelUtility::StelUtility::str_to_vec3f(conf.get_str("color", "object_trails_color", "1,0.7,0").c_str());
 
 	// Text ui section
 	FlagEnableTuiMenu = conf.get_boolean("tui:flag_enable_tui_menu");
@@ -675,7 +675,7 @@ void stel_core::load_config_from(const string& confFile)
 	FlagManualZoom		= conf.get_boolean("navigation:flag_manual_zoom");
 	FlagEnableMoveMouse	= conf.get_boolean("navigation","flag_enable_move_mouse",1);
 	InitFov				= conf.get_double ("navigation","init_fov",60.);
-	InitViewPos 		= str_to_vec3f(conf.get_str("navigation:init_view_pos").c_str());
+	InitViewPos 		= StelUtility::StelUtility::str_to_vec3f(conf.get_str("navigation:init_view_pos").c_str());
 	auto_move_duration	= conf.get_double ("navigation","auto_move_duration",1.5);
 	FlagUTC_Time		= conf.get_boolean("navigation:flag_utc_time");
 	MouseZoom			= conf.get_int("navigation","mouse_zoom",30);
@@ -684,10 +684,10 @@ void stel_core::load_config_from(const string& confFile)
 
 	// Viewing Mode
 	tmpstr = conf.get_str("navigation:viewing_mode");
-	if (tmpstr=="equator") 	navigation->set_viewing_mode(VIEW_EQUATOR);
+	if (tmpstr=="equator") 	navigation->set_viewing_mode(navigator::VIEW_EQUATOR);
 	else
 	{
-		if (tmpstr=="horizon") navigation->set_viewing_mode(VIEW_HORIZON);
+		if (tmpstr=="horizon") navigation->set_viewing_mode(navigator::VIEW_HORIZON);
 		else
 		{
 			cout << "ERROR : Unknown viewing mode type : " << tmpstr << endl;
@@ -766,18 +766,18 @@ void stel_core::save_config_to(const string& confFile)
 	string tmpstr;
 	switch (ProjectorType)
 	{
-		case PERSPECTIVE_PROJECTOR : tmpstr="perspective";	break;
-		case FISHEYE_PROJECTOR : tmpstr="fisheye";		break;
-		case CYLINDER_PROJECTOR : tmpstr="cylinder";		break;
+		case Projector::PERSPECTIVE_PROJECTOR : tmpstr="perspective";	break;
+		case Projector::FISHEYE_PROJECTOR : tmpstr="fisheye";		break;
+		case Projector::CYLINDER_PROJECTOR : tmpstr="cylinder";		break;
 		default : tmpstr="perspective";
 	}
 	conf.set_str	("projection:type",tmpstr);
 
 	switch (ViewportType)
 	{
-		case MAXIMIZED : tmpstr="maximized";	break;
-		case SQUARE : tmpstr="square";	break;
-		case DISK : tmpstr="disk";		break;
+		case Projector::MAXIMIZED : tmpstr="maximized";	break;
+		case Projector::SQUARE : tmpstr="square";	break;
+		case Projector::DISK : tmpstr="disk";		break;
 		default : tmpstr="maximized";
 	}
 	conf.set_str	("projection:viewport", tmpstr);
@@ -807,10 +807,10 @@ void stel_core::save_config_to(const string& confFile)
 	conf.set_boolean("gui:flag_show_appname", FlagShowAppName);
 	conf.set_boolean("gui:flag_show_fov", FlagShowFov);
 	conf.set_boolean("gui:flag_show_selected_object_info", FlagShowSelectedObjectInfo);
-	conf.set_str	("gui:gui_base_color", vec3f_to_str(GuiBaseColor));
-	conf.set_str	("gui:gui_text_color", vec3f_to_str(GuiTextColor));
-	conf.set_str	("gui:gui_base_colorr", vec3f_to_str(GuiBaseColorr));
-	conf.set_str	("gui:gui_text_colorr", vec3f_to_str(GuiTextColorr));
+	conf.set_str	("gui:gui_base_color", StelUtility::vec3f_to_str(GuiBaseColor));
+	conf.set_str	("gui:gui_text_color", StelUtility::vec3f_to_str(GuiTextColor));
+	conf.set_str	("gui:gui_base_colorr", StelUtility::vec3f_to_str(GuiBaseColorr));
+	conf.set_str	("gui:gui_text_colorr", StelUtility::vec3f_to_str(GuiTextColorr));
 	conf.set_double ("gui:base_font_size", BaseFontSize);
 	conf.set_str	("gui:base_font_name", BaseFontName);
 	conf.set_boolean("gui:flag_show_script_bar",FlagShowScriptBar);
@@ -818,19 +818,19 @@ void stel_core::save_config_to(const string& confFile)
 	conf.set_boolean("gui:flag_script_allow_ui",scripts->get_allow_ui());
 
 	// Colors
-	conf.set_str    ("color:azimuthal_color", vec3f_to_str(AzimuthalColor));
-	conf.set_str    ("color:equatorial_color", vec3f_to_str(EquatorialColor));
-	conf.set_str    ("color:equator_color", vec3f_to_str(EquatorColor));
-	conf.set_str    ("color:ecliptic_color", vec3f_to_str(EclipticColor));
-	conf.set_str    ("color:const_lines_color", vec3f_to_str(asterisms->get_line_color()));
-	conf.set_str    ("color:const_names_color", vec3f_to_str(asterisms->get_label_color()));
-	conf.set_str    ("color:const_boundary_color", vec3f_to_str(asterisms->get_boundary_color()));
-	conf.set_str	("color:nebula_label_color", vec3f_to_str(NebulaLabelColor));
-	conf.set_str	("color:nebula_circle_color", vec3f_to_str(NebulaCircleColor));
-	conf.set_str    ("color:cardinal_color", vec3f_to_str(cardinals_points->get_color()));
-	conf.set_str    ("color:planet_names_color", vec3f_to_str(PlanetNamesColor));
-	conf.set_str    ("color:planet_orbits_color", vec3f_to_str(PlanetOrbitsColor));
-	conf.set_str    ("color:object_trails_color", vec3f_to_str(ObjectTrailsColor));
+	conf.set_str    ("color:azimuthal_color", StelUtility::vec3f_to_str(AzimuthalColor));
+	conf.set_str    ("color:equatorial_color", StelUtility::vec3f_to_str(EquatorialColor));
+	conf.set_str    ("color:equator_color", StelUtility::vec3f_to_str(EquatorColor));
+	conf.set_str    ("color:ecliptic_color", StelUtility::vec3f_to_str(EclipticColor));
+	conf.set_str    ("color:const_lines_color", StelUtility::vec3f_to_str(asterisms->get_line_color()));
+	conf.set_str    ("color:const_names_color", StelUtility::vec3f_to_str(asterisms->get_label_color()));
+	conf.set_str    ("color:const_boundary_color", StelUtility::vec3f_to_str(asterisms->get_boundary_color()));
+	conf.set_str	("color:nebula_label_color", StelUtility::vec3f_to_str(NebulaLabelColor));
+	conf.set_str	("color:nebula_circle_color", StelUtility::vec3f_to_str(NebulaCircleColor));
+	conf.set_str    ("color:cardinal_color", StelUtility::vec3f_to_str(cardinals_points->get_color()));
+	conf.set_str    ("color:planet_names_color", StelUtility::vec3f_to_str(PlanetNamesColor));
+	conf.set_str    ("color:planet_orbits_color", StelUtility::vec3f_to_str(PlanetOrbitsColor));
+	conf.set_str    ("color:object_trails_color", StelUtility::vec3f_to_str(ObjectTrailsColor));
 
 	// Text ui section
 	conf.set_boolean("tui:flag_enable_tui_menu", FlagEnableTuiMenu);
@@ -846,7 +846,7 @@ void stel_core::save_config_to(const string& confFile)
 	conf.set_boolean("navigation:flag_enable_move_keys", FlagEnableMoveKeys);
 	conf.set_boolean("navigation:flag_enable_move_mouse", FlagEnableMoveMouse);
 	conf.set_double ("navigation:init_fov", InitFov);
-	conf.set_str	("navigation:init_view_pos", vec3f_to_str(InitViewPos));
+	conf.set_str	("navigation:init_view_pos", StelUtility::vec3f_to_str(InitViewPos));
 	conf.set_double ("navigation:auto_move_duration", auto_move_duration);
 	conf.set_boolean("navigation:flag_utc_time", FlagUTC_Time);
 	conf.set_int    ("navigation:mouse_zoom", MouseZoom);
@@ -855,8 +855,8 @@ void stel_core::save_config_to(const string& confFile)
 
 	switch (navigation->get_viewing_mode())
 	{
-		case VIEW_HORIZON : tmpstr="horizon";	break;
-		case VIEW_EQUATOR : tmpstr="equator";		break;
+		case navigator::VIEW_HORIZON : tmpstr="horizon";	break;
+		case navigator::VIEW_EQUATOR : tmpstr="equator";		break;
 		default : tmpstr="horizon";
 	}
 	conf.set_str	("navigation:viewing_mode",tmpstr);
@@ -1238,13 +1238,13 @@ stel_object * stel_core::clever_find(const Vec3d& v) const
 
 		float distance = sqrt((xpos-winpos[0])*(xpos-winpos[0]) + (ypos-winpos[1])*(ypos-winpos[1]));
 		float mag = (*iter)->get_mag(navigation);
-		if ((*iter)->get_type()==STEL_OBJECT_NEBULA) {
+		if ((*iter)->get_type()==stel_object::STEL_OBJECT_NEBULA) {
 		  if( nebulas->get_flag_hints() ) {
 		    // make very easy to select if labeled
 		    mag = -1;
 		  }
 		}
-		if ((*iter)->get_type()==STEL_OBJECT_PLANET) {
+		if ((*iter)->get_type()==stel_object::STEL_OBJECT_PLANET) {
 		  if( FlagPlanetsHints ) {
 		    // easy to select, especially pluto
 		    mag -= 15.f;
@@ -1323,7 +1323,7 @@ void stel_core::auto_zoom_out(float move_duration, bool full)
 
 		// If the selected object is part of a planet subsystem (other than sun),
 		// unzoom to subsystem view
-		if (selected_object->get_type() == STEL_OBJECT_PLANET && selected_object!=ssystem->get_sun() && ((planet*)selected_object)->get_parent()!=ssystem->get_sun())
+		if (selected_object->get_type() == stel_object::STEL_OBJECT_PLANET && selected_object!=ssystem->get_sun() && ((planet*)selected_object)->get_parent()!=ssystem->get_sun())
 			{
 				float satfov = ((planet*)selected_object)->get_parent()->get_satellites_fov(navigation);
 				if (projection->get_fov()<=satfov*0.9 && satfov>0.)
@@ -1368,7 +1368,7 @@ int stel_core::set_sky_culture(string _culture_dir)
 	asterisms->load_names(DataDir + "sky_cultures/" + SkyCulture + "/constellation_names." + SkyLocale + ".fab");
 	
 	// as constellations have changed, clear out any selection and retest for match!
-	if (selected_object && selected_object->get_type()==STEL_OBJECT_STAR)
+	if (selected_object && selected_object->get_type()==stel_object::STEL_OBJECT_STAR)
 	{
 		asterisms->set_selected((Hip_Star*)selected_object);
 	}
