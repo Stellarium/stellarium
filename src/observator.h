@@ -20,31 +20,32 @@
 #ifndef _OBSERVATOR_H_
 #define _OBSERVATOR_H_
 
-enum S_TIME_FORMAT
-{
-	S_TIME_24H,
-	S_TIME_12H,
-	S_TIME_SYSTEM_DEFAULT
-};
-
-enum S_DATE_FORMAT
-{
-	S_DATE_MMDDYYYY,
-	S_DATE_DDMMYYYY,
-	S_DATE_SYSTEM_DEFAULT,
-	S_DATE_YYYYMMDD
-};
-
-enum S_TZ_FORMAT
-{
-	S_TZ_CUSTOM,
-	S_TZ_GMT_SHIFT,
-	S_TZ_SYSTEM_DEFAULT
-};
 
 class Observator
 {
 public:
+	enum S_TIME_FORMAT
+	{
+		S_TIME_24H,
+		S_TIME_12H,
+		S_TIME_SYSTEM_DEFAULT
+	};
+	
+	enum S_DATE_FORMAT
+	{
+		S_DATE_MMDDYYYY,
+		S_DATE_DDMMYYYY,
+		S_DATE_SYSTEM_DEFAULT,
+		S_DATE_YYYYMMDD
+	};
+	
+	enum S_TZ_FORMAT
+	{
+		S_TZ_CUSTOM,
+		S_TZ_GMT_SHIFT,
+		S_TZ_SYSTEM_DEFAULT
+	};
+
 	Observator();
 	~Observator();
 

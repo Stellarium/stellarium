@@ -25,18 +25,19 @@
 #include "navigator.h"
 #include "s_texture.h"
 
-enum STEL_OBJECT_TYPE
-{
-	STEL_OBJECT_STAR,
-	STEL_OBJECT_PLANET,
-	STEL_OBJECT_NEBULA
-};
 
 class navigator;
 
 class stel_object
 {
 public:
+	enum STEL_OBJECT_TYPE
+	{
+		STEL_OBJECT_STAR,
+		STEL_OBJECT_PLANET,
+		STEL_OBJECT_NEBULA
+	};
+
 	virtual ~stel_object() {;}
 	virtual void update(void) {return;}
 	void draw_pointer(int delta_time, const Projector* prj, const navigator * nav);

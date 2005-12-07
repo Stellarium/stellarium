@@ -31,7 +31,7 @@ ImageMgr::~ImageMgr() {
   drop_all_images();
 }
 
-int ImageMgr::load_image(string filename, string name, IMAGE_POSITIONING position_type) {
+int ImageMgr::load_image(string filename, string name, Image::IMAGE_POSITIONING position_type) {
 
   // if name already exists, replace with new image (hash would have been easier...)
   for(vector<Image*>::iterator iter = active_images.begin(); iter != active_images.end(); ++iter) {

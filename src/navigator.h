@@ -32,12 +32,6 @@
 #define JD_DAY    1.
 
 
-enum VIEWING_MODE_TYPE
-{
-  VIEW_HORIZON,
-  VIEW_EQUATOR
-};
-
 class stel_object;
 
 // Class which manages a navigation context
@@ -45,6 +39,12 @@ class stel_object;
 class navigator
 {
 public:
+
+	enum VIEWING_MODE_TYPE
+	{
+		VIEW_HORIZON,
+		VIEW_EQUATOR
+	};
 	// Create and initialise to default a navigation context
 	navigator(Observator* obs);
     virtual ~navigator();

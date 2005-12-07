@@ -434,6 +434,11 @@ Cardinals::~Cardinals()
 	font = NULL;
 }
 
+/**
+ * Set the font for cardinal points
+ * @param font_size size in pixel
+ * @param font_name name of the font
+ */
 void Cardinals::set_font(float font_size, const string& font_name)
 {
 	font = new s_font(font_size, font_name);

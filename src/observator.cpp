@@ -368,7 +368,7 @@ string Observator::get_printable_time_local(double JD) const
 }
 
 // Convert the time format enum to its associated string and reverse
-S_TIME_FORMAT Observator::string_to_s_time_format(const string& tf) const
+Observator::S_TIME_FORMAT Observator::string_to_s_time_format(const string& tf) const
 {
 	if (tf == "system_default") return S_TIME_SYSTEM_DEFAULT;
 	if (tf == "24h") return S_TIME_24H;
@@ -387,7 +387,7 @@ string Observator::s_time_format_to_string(S_TIME_FORMAT tf) const
 }
 
 // Convert the date format enum to its associated string and reverse
-S_DATE_FORMAT Observator::string_to_s_date_format(const string& df) const
+Observator::S_DATE_FORMAT Observator::string_to_s_date_format(const string& df) const
 {
 	if (df == "system_default") return S_DATE_SYSTEM_DEFAULT;
 	if (df == "mmddyyyy") return S_DATE_MMDDYYYY;

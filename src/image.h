@@ -27,19 +27,18 @@
 #include "projector.h"
 #include "navigator.h"
 
-// is the image flat on the viewport or positioned with alt-azimuthal or earth equatorial coordinates?
-enum IMAGE_POSITIONING
-{
-	POS_VIEWPORT,
-	POS_HORIZONTAL,
-	POS_EQUATORIAL
-};
-
 
 class Image
 {
-
  public:
+	// is the image flat on the viewport or positioned with alt-azimuthal or earth equatorial coordinates?
+	enum IMAGE_POSITIONING
+	{
+		POS_VIEWPORT,
+		POS_HORIZONTAL,
+		POS_EQUATORIAL
+	};
+
   Image(string filename, string name, IMAGE_POSITIONING pos_type);
   virtual ~Image();
   //  int drop(string image_name);

@@ -29,15 +29,14 @@
 #include "stellarium.h"
 
 
-double hms_to_rad(unsigned int h, unsigned int m, double s)
+double StelUtility::hms_to_rad( unsigned int h, unsigned int m, double s )
 {
 	return (double)M_PI/24.*h*2.+(double)M_PI/12.*m/60.+s*M_PI/43200.;
 }
 
-double dms_to_rad(int d, int m, double s)
+double StelUtility::dms_to_rad(int d, int m, double s)
 {
-	double t = (double)M_PI/180.*d+(double)M_PI/10800.*m+s*M_PI/648000.;
-	return t;
+	return (double)M_PI/180.*d+(double)M_PI/10800.*m+s*M_PI/648000.;
 }
 
 double hms_to_rad(unsigned int h, double m)
@@ -86,7 +85,7 @@ void rect_to_sphe(float *lng, float *lat, const Vec3f& v)
 
 
 // Obtains a Vec3f from a string with the form x,y,z
-Vec3f str_to_vec3f(const string& s)
+Vec3f StelUtility::str_to_vec3f(const string& s)
 {
 	float x, y, z;
 	if (s.empty() || (sscanf(s.c_str(),"%f,%f,%f",&x, &y, &z)!=3)) return Vec3f(0.f,0.f,0.f);
@@ -94,13 +93,12 @@ Vec3f str_to_vec3f(const string& s)
 }
 
 // Obtains a string from a Vec3f with the form x,y,z
-string vec3f_to_str(const Vec3f& v)
+string StelUtility::vec3f_to_str(const Vec3f& v)
 {
 	ostringstream os;
 	os << v[0] << "," << v[1] << "," << v[2];
 	return os.str();
 }
-
 
 // Provide the luminance in cd/m^2 from the magnitude and the surface in arcmin^2
 float mag_to_luminance(float mag, float surface)
@@ -137,7 +135,7 @@ double get_dec_angle(const string& str)
 	const char* s = str.c_str();
 	char *mptr, *ptr, *dec, *hh;
 	int negative = 0;
-	char delim1[] = " :.,;Dd°HhMm'\n\t\xBA";  // 0xBA was old degree delimiter
+	char delim1[] = " :.,;DdHhMm'\n\t\xBA";  // 0xBA was old degree delimiter
 	char delim2[] = " NSEWnsew\"\n\t";
 	int dghh = 0, minutes = 0;
 	double seconds = 0.0, pos;
@@ -584,6 +582,7 @@ string stripConstellation(const string& s)
 	
 	return s;
 }
+
 
 
 

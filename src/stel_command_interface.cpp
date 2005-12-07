@@ -378,8 +378,8 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 		  if(args["action"]=="load" && args["filename"]!="") {
 
 			  // TODO: more image positioning coordinates
-			  IMAGE_POSITIONING img_pos = POS_VIEWPORT;
-			  if(args["coordinate_system"] == "horizontal") img_pos = POS_HORIZONTAL;
+			  Image::IMAGE_POSITIONING img_pos = Image::POS_VIEWPORT;
+			  if(args["coordinate_system"] == "horizontal") img_pos = Image::POS_HORIZONTAL;
 			  /*
 			  else if(args["coordinates"] == "rade") img_pos = POS_EQUATORIAL;
 			  else img_pos = POS_VIEWPORT;
