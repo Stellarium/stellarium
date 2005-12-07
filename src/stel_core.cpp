@@ -1242,8 +1242,6 @@ stel_object * stel_core::clever_find(const Vec3d& v) const
 		  if( nebulas->get_flag_hints() ) {
 		    // make very easy to select if labeled
 		    mag = -1;
-		  } else {
-		    mag -= 9.f;
 		  }
 		}
 		if ((*iter)->get_type()==STEL_OBJECT_PLANET) {
@@ -1251,7 +1249,7 @@ stel_object * stel_core::clever_find(const Vec3d& v) const
 		    // easy to select, especially pluto
 		    mag -= 15.f;
 		  } else {
-		    mag -= 8.f;
+			mag -= 8.f;
 		  }
 		}
 		if (distance + mag < best_object_value)
