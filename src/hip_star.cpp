@@ -72,7 +72,7 @@ string Hip_Star::get_info_string(const navigator * nav) const
 	}
 	else 
 	{
-		oss << "HP " << HP << endl;
+		oss << "HP " << HP;
 	}
 	oss << endl;
 	
