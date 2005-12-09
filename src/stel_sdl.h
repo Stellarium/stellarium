@@ -25,16 +25,16 @@
 #include "stellarium.h"
 #include "stel_core.h"
 
-class stel_sdl
+class StelSdl
 {
 public:
-    stel_sdl(stel_core * core);
-    virtual ~stel_sdl();
+    StelSdl(StelCore * core);
+    virtual ~StelSdl();
 	void init(void);
 	void start_main_loop(void);
 
 private:
-	stel_core * core;
+	StelCore * core;
 
 	// Function to call when the window size changes
 	void resize_GL(int w, int h);

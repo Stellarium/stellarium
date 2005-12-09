@@ -28,13 +28,13 @@
 
 using namespace std;
 
-class init_parser
+class InitParser
 {
 public:
 	// Create the parser object from the given file
 	// You need to call load() before using the get() functions
-    init_parser();
-    virtual ~init_parser();
+    InitParser();
+    virtual ~InitParser();
 
 	// Load the config file (the parsing operation)
 	void load(const string& file_name);

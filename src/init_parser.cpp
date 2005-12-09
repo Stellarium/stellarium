@@ -24,18 +24,18 @@
 
 #include "init_parser.h"
 
-init_parser::init_parser(void) : dico(NULL)
+InitParser::InitParser(void) : dico(NULL)
 {
 	dico = dictionary_new(0);
 }
 
-init_parser::~init_parser()
+InitParser::~InitParser()
 {
 	if (dico) free_dico();
 	dico = NULL;
 }
 
-void init_parser::load(const string& file)
+void InitParser::load(const string& file)
 {
 	// Check file presence
 	FILE * fp = NULL;
@@ -60,7 +60,7 @@ void init_parser::load(const string& file)
 	}
 }
 
-void init_parser::save(const string& file_name) const
+void InitParser::save(const string& file_name) const
 {
 	// Check file presence
 	FILE * fp = NULL;
@@ -77,24 +77,24 @@ void init_parser::save(const string& file_name) const
 	if (fp) fclose(fp);
 }
 
-string init_parser::get_str(const string& key) const
+string InitParser::get_str(const string& key) const
 {
 	if (iniparser_getstring(dico, key.c_str(), NULL)) return string(iniparser_getstring(dico, key.c_str(), NULL));
 	else cout << "WARNING : Can't find the configuration key " << key << " default empty string returned" << endl;
 	return string();
 }
 
-string init_parser::get_str(const string& section, const string& key) const
+string InitParser::get_str(const string& section, const string& key) const
 {
 	return get_str((section+":"+key).c_str());
 }
 
-string init_parser::get_str(const string& section, const string& key, const string& def) const
+string InitParser::get_str(const string& section, const string& key, const string& def) const
 {
 	return iniparser_getstring(dico, (section+":"+key).c_str(), def.c_str());
 }
 
-int init_parser::get_int(const string& key) const
+int InitParser::get_int(const string& key) const
 {
 	int i = iniparser_getint(dico, key.c_str(), -11111);
 	// To be sure :) (bugfree)
@@ -109,17 +109,17 @@ int init_parser::get_int(const string& key) const
 	return i;
 }
 
-int init_parser::get_int(const string& section, const string& key) const
+int InitParser::get_int(const string& section, const string& key) const
 {
 	return get_int((section+":"+key).c_str());
 }
 
-int init_parser::get_int(const string& section, const string& key, int def) const
+int InitParser::get_int(const string& section, const string& key, int def) const
 {
 	return iniparser_getint(dico, (section+":"+key).c_str(), def);
 }
 
-double init_parser::get_double(const string& key) const
+double InitParser::get_double(const string& key) const
 {
 	double d = iniparser_getdouble(dico, key.c_str(), -11111.111111356);
 	// To be sure :) (bugfree)
@@ -134,17 +134,17 @@ double init_parser::get_double(const string& key) const
 	return d;
 }
 
-double init_parser::get_double(const string& section, const string& key) const
+double InitParser::get_double(const string& section, const string& key) const
 {
 	return get_double((section+":"+key).c_str());
 }
 
-double init_parser::get_double(const string& section, const string& key, double def) const
+double InitParser::get_double(const string& section, const string& key, double def) const
 {
 	return iniparser_getdouble(dico, (section+":"+key).c_str(), def);
 }
 
-bool init_parser::get_boolean(const string& key) const
+bool InitParser::get_boolean(const string& key) const
 {
 	int b = iniparser_getboolean(dico, key.c_str(), -10);
 	// To be sure :) (bugfree)
@@ -159,19 +159,19 @@ bool init_parser::get_boolean(const string& key) const
 	return b;
 }
 
-bool init_parser::get_boolean(const string& section, const string& key) const
+bool InitParser::get_boolean(const string& section, const string& key) const
 {
 	return get_boolean((section+":"+key).c_str());
 }
 
-bool init_parser::get_boolean(const string& section, const string& key, bool def) const
+bool InitParser::get_boolean(const string& section, const string& key, bool def) const
 {
 	return iniparser_getboolean(dico, (section+":"+key).c_str(), def);
 }
 
 // Set the given entry with the provided value. If the entry cannot be found
 // -1 is returned and the entry is created. Else 0 is returned.
-int init_parser::set_str(const string& key, const string& val)
+int InitParser::set_str(const string& key, const string& val)
 {
 	make_section_from_key(key);
 	int return_val;
@@ -182,7 +182,7 @@ int init_parser::set_str(const string& key, const string& val)
 	return return_val;
 }
 
-int init_parser::set_int(const string& key, int val)
+int InitParser::set_int(const string& key, int val)
 {
 	make_section_from_key(key);
 	int return_val;
@@ -194,7 +194,7 @@ int init_parser::set_int(const string& key, int val)
 	return return_val;
 }
 
-int init_parser::set_double(const string& key, double val)
+int InitParser::set_double(const string& key, double val)
 {
 	make_section_from_key(key);
 	int return_val;
@@ -208,7 +208,7 @@ int init_parser::set_double(const string& key, double val)
 	return return_val;
 }
 
-int init_parser::set_boolean(const string& key, bool val)
+int InitParser::set_boolean(const string& key, bool val)
 {
 	if (val) return set_str(key, "true");
 	else return set_str(key, "false");
@@ -216,7 +216,7 @@ int init_parser::set_boolean(const string& key, bool val)
 
 // Check if the key is in the form section:key and if yes create the section in the dictionnary
 // if it doesn't exist.
-void init_parser::make_section_from_key(const string& key)
+void InitParser::make_section_from_key(const string& key)
 {
 	int pos = key.find(':');
 	if (!pos) return;				// No ':' were found
@@ -226,25 +226,25 @@ void init_parser::make_section_from_key(const string& key)
 }
 
 // Get number of sections
-int init_parser::get_nsec(void) const
+int InitParser::get_nsec(void) const
 {
 	return iniparser_getnsec(dico);
 }
 
 // Get name for section n.
-string init_parser::get_secname(int n) const
+string InitParser::get_secname(int n) const
 {
 	if (iniparser_getsecname(dico, n)) return string(iniparser_getsecname(dico, n));
 	return string();
 }
 
 // Return 1 if the entry exists, 0 otherwise
-int init_parser::find_entry(const string& entry) const
+int InitParser::find_entry(const string& entry) const
 {
 	return iniparser_find_entry(dico, entry.c_str());
 }
 
-void init_parser::free_dico(void)
+void InitParser::free_dico(void)
 {
 	iniparser_freedict(dico);
 }

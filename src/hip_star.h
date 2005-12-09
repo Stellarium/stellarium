@@ -31,26 +31,26 @@
 #include "projector.h"
 #include "stel_utility.h"
 
-class Hip_Star : public stel_object
+class HipStar : public StelObject
 {
-	friend class Hip_Star_mgr;
+	friend class HipStarMgr;
 	friend class Constellation;  // for xyz coordinate
 
 public:
-    Hip_Star();
-    virtual ~Hip_Star();
+    HipStar();
+    virtual ~HipStar();
     int read(FILE * pFile);	// Read the star data in the stream
     void draw(void);		// Draw the star
 	void draw_point(void);	// Draw the star as a point
     bool draw_name(void);	// draw the name - returns true if something drawn (and texture re-assigned for fonts)
 	virtual Vec3f get_RGB(void) const {return RGB;}
-	virtual string get_info_string(const navigator * nav = NULL) const;
-	virtual string get_short_info_string(const navigator * nav = NULL) const;
+	virtual string get_info_string(const Navigator * nav = NULL) const;
+	virtual string get_short_info_string(const Navigator * nav = NULL) const;
 	virtual STEL_OBJECT_TYPE get_type(void) const {return STEL_OBJECT_STAR;}
-	virtual Vec3d get_earth_equ_pos(const navigator * nav = NULL) const {return nav->prec_earth_equ_to_earth_equ(XYZ);}
+	virtual Vec3d get_earth_equ_pos(const Navigator * nav = NULL) const {return nav->prec_earth_equ_to_earth_equ(XYZ);}
 	virtual Vec3d get_prec_earth_equ_pos(void) const {return XYZ;}
-	virtual double get_best_fov(const navigator * nav = NULL) const {return (13.f - 2.f * Mag > 1.f) ? (13.f - Mag) : 1.f;}
-	virtual float get_mag(const navigator * nav = NULL) const {return Mag;}
+	virtual double get_best_fov(const Navigator * nav = NULL) const {return (13.f - 2.f * Mag > 1.f) ? (13.f - Mag) : 1.f;}
+	virtual float get_mag(const Navigator * nav = NULL) const {return Mag;}
 	virtual unsigned int get_hp_number() { return HP; };
 
 	static void set_starname_format(int _format) {nameFormat = _format;}
@@ -87,8 +87,8 @@ private:
 	static s_font *starFont;
 };
 
-struct Hip_Star_Mag_Comparer : public std::binary_function<Hip_Star*,Hip_Star*,bool> {
-     const bool operator()( Hip_Star* const & x, Hip_Star* const & y) const {
+struct Hip_Star_Mag_Comparer : public std::binary_function<HipStar*,HipStar*,bool> {
+     const bool operator()( HipStar* const & x, HipStar* const & y) const {
        return x->get_mag() >= y->get_mag(); 
      }
 };

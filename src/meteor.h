@@ -34,10 +34,10 @@ class Meteor
 {
 
  public:
-  Meteor( Projector *proj, navigator *nav, tone_reproductor* eye, double v);
+  Meteor( Projector *proj, Navigator *nav, tone_reproductor* eye, double v);
   virtual ~Meteor();
   bool update(int delta_time);  // update position
-  bool draw(Projector *proj, navigator* nav);		// Draw the meteor
+  bool draw(Projector *proj, Navigator* nav);		// Draw the meteor
   bool is_alive(void);          // see if burned out yet
 
  private:

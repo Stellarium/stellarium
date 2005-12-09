@@ -19,7 +19,7 @@
 
 /*
 	Class which compute and display the daylight sky color using openGL
-	the sky is computed with the skylight class.
+	the sky is computed with the Skylight class.
 */
 
 #ifndef _STEL_ATMOSTPHERE_H_
@@ -34,11 +34,11 @@
 
 using namespace std;
 
-class stel_atmosphere
+class Atmosphere
 {
 public:
-    stel_atmosphere();
-    virtual ~stel_atmosphere();
+    Atmosphere();
+    virtual ~Atmosphere();
 	void compute_color(double JD, Vec3d sunPos, Vec3d moonPos, float moon_phase, tone_reproductor * eye, Projector* prj,
 		float latitude = 45.f, float altitude = 200.f,
 		float temperature = 15.f, float relative_humidity = 40.f);
@@ -47,12 +47,12 @@ public:
 	void set_fade_duration(float duration) {fader.set_duration((int)(duration*1000.f));}
 	void show(bool b){fader = b;}
 	float get_intensity(void) {return atm_intensity; }  // tells you actual atm intensity due to eclipses + fader
-	float get_fade_intensity(void) {return fader.get_interstate();}  // let's you know how far faded in or out the atm is (0-1)
+	float get_fade_intensity(void) {return fader.getInterstate();}  // let's you know how far faded in or out the atm is (0-1)
 	float get_world_adaptation_luminance(void) const {return world_adaptation_luminance;}
 	float get_milkyway_adaptation_luminance(void) const {return milkyway_adaptation_luminance;}
 private:
-	skylight sky;
-	skybright skyb;
+	Skylight sky;
+	Skybright skyb;
 	int sky_resolution;
 	Vec3f ** tab_sky;	// For Atmosphere calculation
 	int startY;			// intern variable used to store the Horizon Y screen value
@@ -62,7 +62,7 @@ private:
 	float atm_intensity;
 // 	float ai;               // used to calculate atm_intensity via curve function
 // 	float fade_duration;    // length of time, in miliseconds, for fade in and out
-	parabolic_fader fader;
+	ParabolicFader fader;
 };
 
 #endif // _STEL_ATMOSTPHERE_H_

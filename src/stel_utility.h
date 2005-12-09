@@ -48,24 +48,16 @@ public:
 	//! @return angle in radian
 	static double dms_to_rad(int d, int m, double s);	  
 
-	/**
-	* Obtains a Vec3f from a string
-	* @param s the string describing the Vector with the form "x,y,z"
-	* @return The correspondong vector
-	*/
+	//! @brief Obtains a Vec3f from a string
+	//! @param s the string describing the Vector with the form "x,y,z"
+	//! @return The correspondong vector
 	static Vec3f str_to_vec3f(const string& s);
 	
-	/**
-	* Obtains a string from a Vec3f 
-	* @param v The vector
-	* @return the string describing the Vector with the form "x,y,z"
-	*/
+	//! @brief Obtains a string from a Vec3f 
+	//! @param v The vector
+	//! @return the string describing the Vector with the form "x,y,z"
 	static string vec3f_to_str(const Vec3f& v); 
 };
-
-// Angles and coordinate conversions
-//double hms_to_rad(unsigned int h, unsigned int m, double s);
-//double dms_to_rad(int d, int m, double s);
 
 double hms_to_rad(unsigned int h, double m);
 double dms_to_rad(int d, double m);

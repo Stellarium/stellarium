@@ -27,16 +27,16 @@
 #include "fmath.h"
 #include "skylight.h"
 
-skylight::skylight() : thetas(0.f), T(0.f)
+Skylight::Skylight() : thetas(0.f), T(0.f)
 {
 }
 
-skylight::~skylight()
+Skylight::~Skylight()
 {
 }
 
 
-void skylight::set_params(float _sun_zenith_angle, float _turbidity)
+void Skylight::set_params(float _sun_zenith_angle, float _turbidity)
 {
 	// Set the two main variables
 	thetas = _sun_zenith_angle;
@@ -56,7 +56,7 @@ void skylight::set_params(float _sun_zenith_angle, float _turbidity)
 
 }
 
-void skylight::set_paramsv(const float * _sun_pos, float _turbidity)
+void Skylight::set_paramsv(const float * _sun_pos, float _turbidity)
 {
 	// Store sun position
 	sun_pos[0] = _sun_pos[0];
@@ -81,7 +81,7 @@ void skylight::set_paramsv(const float * _sun_pos, float _turbidity)
 }
 
 // Compute CIE luminance for zenith in cd/m^2
-inline void skylight::compute_zenith_luminance(void)
+inline void Skylight::compute_zenith_luminance(void)
 {
 	zenith_luminance = 1000.f * ((4.0453f*T - 4.9710f) * tanf( (0.4444f - T/120.f) * (M_PI-2.f*thetas) ) -
 		0.2155f*T + 2.4192f);
@@ -89,7 +89,7 @@ inline void skylight::compute_zenith_luminance(void)
 }
 
 // Compute CIE x and y color components
-inline void skylight::compute_zenith_color(void)
+inline void Skylight::compute_zenith_color(void)
 {
 	static float thetas2;
 	static float thetas3;
@@ -110,7 +110,7 @@ inline void skylight::compute_zenith_color(void)
 }
 
 // Compute the luminance distribution coefficients
-inline void skylight::compute_luminance_distribution_coefs(void)
+inline void Skylight::compute_luminance_distribution_coefs(void)
 {
 	AY = 0.1787f*T - 1.4630f;
 	BY =-0.3554f*T + 0.4275f;
@@ -120,7 +120,7 @@ inline void skylight::compute_luminance_distribution_coefs(void)
 }
 
 // Compute the color distribution coefficients
-inline void skylight::compute_color_distribution_coefs(void)
+inline void Skylight::compute_color_distribution_coefs(void)
 {
 	Ax =-0.0193f*T - 0.2592f;
 	Bx =-0.0665f*T + 0.0008f;
@@ -139,7 +139,7 @@ inline void skylight::compute_color_distribution_coefs(void)
 // p.color[0] is CIE x color component
 // p.color[1] is CIE y color component
 // p.color[2] is CIE Y color component (luminance)
-void skylight::get_xyY_value(skylight_struct * p)
+void Skylight::get_xyY_value(skylight_struct * p)
 {
 	float cos_dist_sun = cosf(p->dist_sun);
 	float one_over_cos_zenith_angle = 1.f/cosf(p->zenith_angle);
@@ -155,7 +155,7 @@ void skylight::get_xyY_value(skylight_struct * p)
 // p.color[0] is CIE x color component
 // p.color[1] is CIE y color component
 // p.color[2] is CIE Y color component (luminance)
-void skylight::get_xyY_valuev(skylight_struct2 * p)
+void Skylight::get_xyY_valuev(skylight_struct2 * p)
 {
 //	if (p->pos[2]<0.)
 //	{
@@ -185,7 +185,7 @@ void skylight::get_xyY_valuev(skylight_struct2 * p)
 }
 
 // Return the current zenith color in xyY color system
-void skylight::get_zenith_color(float * v) const
+void Skylight::get_zenith_color(float * v) const
 {
 	v[0] = zenith_color_x;
 	v[1] = zenith_color_y;

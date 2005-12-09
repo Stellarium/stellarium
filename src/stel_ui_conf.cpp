@@ -960,7 +960,7 @@ void stel_ui::saveRenderOptions(void)
 {
 	cout << _("Saving rendering options in file ") << core->ConfigDir + core->config_file << endl;
 
-	init_parser conf;
+	InitParser conf;
 	conf.load(core->ConfigDir + core->config_file);
 
 	conf.set_boolean("astro:flag_stars", core->FlagStars);
@@ -1006,7 +1006,7 @@ void stel_ui::setVideoOption(void)
 
 	cout << _("Saving video size ") << w << "x" << h << _(" in file ") << core->ConfigDir + core->config_file << endl;
 
-	init_parser conf;
+	InitParser conf;
 	conf.load(core->ConfigDir + core->config_file);
 
 	switch (core->projection->get_type())
@@ -1041,7 +1041,7 @@ void stel_ui::updateVideoVariables(void)
 	if (fisheye_projection_cbx->getState() && core->projection->get_type()!=Projector::FISHEYE_PROJECTOR)
 	{
 		// Switch to fisheye projection
-		Fisheye_projector* p = new Fisheye_projector(*(core->projection));
+		FisheyeProjector* p = new FisheyeProjector(*(core->projection));
 		delete core->projection;
 		core->projection = p;
 	}

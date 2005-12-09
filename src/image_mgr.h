@@ -37,7 +37,7 @@ class ImageMgr
   int drop_all_images();
   Image *get_image(string name);
   void update(int delta_time);  // update properties
-  void draw(int screenw, int screenh, const navigator * nav, Projector * prj);
+  void draw(int screenw, int screenh, const Navigator * nav, Projector * prj);
 
  private:
   vector<Image*> active_images;

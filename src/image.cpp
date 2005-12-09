@@ -173,7 +173,7 @@ bool Image::update(int delta_time) {
 
 }
 
-void Image::draw(int screenw, int screenh, const navigator * nav, Projector * prj) {
+void Image::draw(int screenw, int screenh, const Navigator * nav, Projector * prj) {
 
   if(image_ratio < 0 || image_alpha == 0) return;
 

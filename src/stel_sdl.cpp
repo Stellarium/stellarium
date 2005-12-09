@@ -22,7 +22,7 @@
 #include "SDL_mixer.h"
 #endif
 
-stel_sdl::stel_sdl(stel_core * _core)
+StelSdl::StelSdl(StelCore * _core)
 {
 	if (!_core)
 	{
@@ -32,12 +32,12 @@ stel_sdl::stel_sdl(stel_core * _core)
 	core = _core;
 }
 
-stel_sdl::~stel_sdl()
+StelSdl::~StelSdl()
 {
   SDL_FreeCursor(Cursor);
 }
 
-void stel_sdl::init(void)
+void StelSdl::init(void)
 {
     Uint32	Vflags;		// Our Video Flags
     Screen = NULL;
@@ -177,7 +177,7 @@ static const char *arrow[] = {
 
 
 // from an sdl wiki
-SDL_Cursor* stel_sdl::create_cursor(const char *image[])
+SDL_Cursor* StelSdl::create_cursor(const char *image[])
 {
   int i, row, col;
   Uint8 data[4*32];
@@ -224,7 +224,7 @@ void TerminateApplication(void)
 	}
 }
 
-void stel_sdl::start_main_loop(void)
+void StelSdl::start_main_loop(void)
 {
     bool AppVisible = true;			// At The Beginning, Our App Is Visible
     enum S_GUI_VALUE bt;
@@ -418,7 +418,7 @@ void stel_sdl::start_main_loop(void)
 }
 
 
-void stel_sdl::resize_GL(int w, int h)
+void StelSdl::resize_GL(int w, int h)
 {
     if (!h || !w) return;
 	core->set_screen_size(w, h);

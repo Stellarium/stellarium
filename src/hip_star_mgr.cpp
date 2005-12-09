@@ -31,25 +31,25 @@
 #define RADIUS_STAR 1.
 
 // construct and load all data
-Hip_Star_mgr::Hip_Star_mgr() :
+HipStarMgr::HipStarMgr() :
 	starZones(NULL),
 	StarArray(NULL),
-	StarArraySize(0),
+	starArraySize(0),
 	starTexture(NULL), 
 	limiting_mag(6.5f)
 {
-	starZones = new vector<Hip_Star*>[HipGrid.getNbPoints()];
+	starZones = new vector<HipStar*>[HipGrid.getNbPoints()];
 }
 
 
-Hip_Star_mgr::~Hip_Star_mgr()
+HipStarMgr::~HipStarMgr()
 {
 	delete starTexture;
 	starTexture=NULL;
 
 	
-	delete Hip_Star::starFont;
-	Hip_Star::starFont=NULL;
+	delete HipStar::starFont;
+	HipStar::starFont=NULL;
 
 	delete [] starZones;
 	starZones=NULL;
@@ -61,7 +61,7 @@ Hip_Star_mgr::~Hip_Star_mgr()
 	StarFlatArray=NULL;
 }
 
-void Hip_Star_mgr::init(float font_size, const string& font_name, const string& hipCatFile,
+void HipStarMgr::init(float font_size, const string& font_name, const string& hipCatFile,
 	const string& commonNameFile, const string& sciNameFile, LoadingBar& lb)
 {
 	load_data(hipCatFile, lb);
@@ -69,8 +69,8 @@ void Hip_Star_mgr::init(float font_size, const string& font_name, const string& 
 	load_sci_names(sciNameFile);
 	
 	starTexture = new s_texture("star16x16",TEX_LOAD_TYPE_PNG_SOLID);  // Load star texture
-    Hip_Star::starFont = new s_font(font_size, font_name);
-    if (!Hip_Star::starFont)
+    HipStar::starFont = new s_font(font_size, font_name);
+    if (!HipStar::starFont)
     {
 	    printf("Can't create starFont\n");
         exit(-1);
@@ -78,7 +78,7 @@ void Hip_Star_mgr::init(float font_size, const string& font_name, const string& 
 }
 
 // Load from file ( create the stream and call the Read function )
-void Hip_Star_mgr::load_data(const string& hipCatFile, LoadingBar& lb)
+void HipStarMgr::load_data(const string& hipCatFile, LoadingBar& lb)
 {
 	char tmpstr[512];
 	
@@ -98,28 +98,28 @@ void Hip_Star_mgr::load_data(const string& hipCatFile, LoadingBar& lb)
     fread((char*)&catalogSize,4,1,hipFile);
     LE_TO_CPU_INT32(catalogSize,catalogSize);
 
-    StarArraySize = catalogSize;//120417;
+    starArraySize = catalogSize;//120417;
 
     // Create the sequential array
-    StarArray = new Hip_Star[StarArraySize];
+    StarArray = new HipStar[starArraySize];
 	
-	StarFlatArray = new Hip_Star*[StarArraySize];
-	for (int i=0;i<StarArraySize;++i)
+	StarFlatArray = new HipStar*[starArraySize];
+	for (int i=0;i<starArraySize;++i)
 	{
 		StarFlatArray[i] = NULL;
 	}
 	
 	// Read binary file Hipparcos catalog  
 	unsigned int data_drop =0;
-    Hip_Star * e = NULL;
-    for(int i=0;i<StarArraySize;i++)
+    HipStar * e = NULL;
+    for(int i=0;i<starArraySize;i++)
     {
-		if (!(i%2000) || (i == StarArraySize-1))
+		if (!(i%2000) || (i == starArraySize-1))
 		{
 			// Draw loading bar
-			snprintf(tmpstr, 512, _("Loading Hipparcos catalog: %d/%d"), i == StarArraySize-1 ? StarArraySize: i, StarArraySize);
+			snprintf(tmpstr, 512, _("Loading Hipparcos catalog: %d/%d"), i == starArraySize-1 ? starArraySize: i, starArraySize);
 			lb.SetMessage(tmpstr);
-			lb.Draw((float)i/StarArraySize);
+			lb.Draw((float)i/starArraySize);
 		}
 		
 		e = &StarArray[i];
@@ -134,7 +134,7 @@ void Hip_Star_mgr::load_data(const string& hipCatFile, LoadingBar& lb)
     }
     fclose(hipFile);
 
-	printf("(%d stars loaded [%d dropped]).\n", StarArraySize-data_drop,data_drop);
+	printf("(%d stars loaded [%d dropped]).\n", starArraySize-data_drop,data_drop);
 
     // sort stars by magnitude for faster rendering
     for(int i=0;i < HipGrid.getNbPoints();i++) {
@@ -144,11 +144,11 @@ void Hip_Star_mgr::load_data(const string& hipCatFile, LoadingBar& lb)
 
 
 // Load common names from file 
-int Hip_Star_mgr::load_common_names(const string& commonNameFile)
+int HipStarMgr::load_common_names(const string& commonNameFile)
 {
 	// clear existing names (would be faster if they were in separate array
 	// since relatively few are named)
-    for (int i=0; i<StarArraySize; ++i)
+    for (int i=0; i<starArraySize; ++i)
       {
 	StarArray[i].CommonName = "";
       }
@@ -169,7 +169,7 @@ int Hip_Star_mgr::load_common_names(const string& commonNameFile)
 	// Assign names to the matching stars, now support spaces in names
     unsigned int tmp;
     char line[256];
-    Hip_Star *star;
+    HipStar *star;
 	fgets(line, 256, cnFile);
 	do
 	{
@@ -198,7 +198,7 @@ int Hip_Star_mgr::load_common_names(const string& commonNameFile)
     return 1;
 }
 
-unsigned int Hip_Star_mgr::getCommonNameHP(string _commonname)
+unsigned int HipStarMgr::getCommonNameHP(string _commonname)
 {
     unsigned int i = 0;
 
@@ -213,11 +213,11 @@ unsigned int Hip_Star_mgr::getCommonNameHP(string _commonname)
 
 
 // Load scientific names from file 
-void Hip_Star_mgr::load_sci_names(const string& sciNameFile)
+void HipStarMgr::load_sci_names(const string& sciNameFile)
 {
 	// clear existing names (would be faster if they were in separate arrays
 	// since relatively few are named)
-    for (int i=0; i<StarArraySize; i++)
+    for (int i=0; i<starArraySize; i++)
 	{
 		StarArray[i].SciName = "";
 		StarArray[i].ShortSciName = "";
@@ -235,7 +235,7 @@ void Hip_Star_mgr::load_sci_names(const string& sciNameFile)
 	// Assign names to the matching stars, now support spaces in names
     unsigned int tmp;
     char line[256];
-    Hip_Star *star;
+    HipStar *star;
 	fgets(line, 256, snFile);
 	do
 	{
@@ -264,17 +264,17 @@ void Hip_Star_mgr::load_sci_names(const string& sciNameFile)
 }
 
 // Draw all the stars
-void Hip_Star_mgr::draw(float _star_scale, float _star_mag_scale, float _twinkle_amount,
+void HipStarMgr::draw(float _star_scale, float _star_mag_scale, float _twinkle_amount,
 						float maxMagStarName, Vec3f equ_vision,
 						tone_reproductor* _eye, Projector* prj, bool _gravity_label)
 {
-	Hip_Star::twinkle_amount = _twinkle_amount;
-	Hip_Star::star_scale = _star_scale;
-	Hip_Star::star_mag_scale = _star_mag_scale;
-	Hip_Star::eye = _eye;
-	Hip_Star::proj = prj;
-	Hip_Star::gravity_label = _gravity_label;
-	Hip_Star::names_brightness = names_fader.get_interstate();
+	HipStar::twinkle_amount = _twinkle_amount;
+	HipStar::star_scale = _star_scale;
+	HipStar::star_mag_scale = _star_mag_scale;
+	HipStar::eye = _eye;
+	HipStar::proj = prj;
+	HipStar::gravity_label = _gravity_label;
+	HipStar::names_brightness = names_fader.getInterstate();
 	
 	glEnable(GL_TEXTURE_2D);
     glEnable(GL_BLEND);
@@ -296,9 +296,9 @@ void Hip_Star_mgr::draw(float _star_scale, float _star_mag_scale, float _twinkle
     prj->set_orthographic_projection();	// set 2D coordinate
 
 	// Print all the stars of all the selected zones
-	static vector<Hip_Star *>::iterator end;
-	static vector<Hip_Star *>::iterator iter;
-	Hip_Star* h;
+	static vector<HipStar *>::iterator end;
+	static vector<HipStar *>::iterator iter;
+	HipStar* h;
 
 	for(int i=0;i<nbZones;++i)
 	{
@@ -310,7 +310,7 @@ void Hip_Star_mgr::draw(float _star_scale, float _star_mag_scale, float _twinkle
 			if(h->Mag>maxMag) break;
 			if(!prj->project_prec_earth_equ_check(h->XYZ, h->XY)) continue;
 			h->draw();
-			if (/*!h->CommonName.empty() && */names_fader.get_interstate() && h->Mag<maxMagStarName)
+			if (/*!h->CommonName.empty() && */names_fader.getInterstate() && h->Mag<maxMagStarName)
 			{
 					if (h->draw_name())
 						glBindTexture (GL_TEXTURE_2D, starTexture->getID());
@@ -322,16 +322,16 @@ void Hip_Star_mgr::draw(float _star_scale, float _star_mag_scale, float _twinkle
 }
 
 // Draw all the stars
-void Hip_Star_mgr::draw_point(float _star_scale, float _star_mag_scale, float _twinkle_amount, 
+void HipStarMgr::draw_point(float _star_scale, float _star_mag_scale, float _twinkle_amount, 
 	float maxMagStarName, Vec3f equ_vision, tone_reproductor* _eye, Projector* prj, bool _gravity_label)
 {
-	Hip_Star::twinkle_amount = _twinkle_amount;
-	Hip_Star::star_scale = _star_scale;
-	Hip_Star::star_mag_scale = _star_mag_scale;
-	Hip_Star::eye = _eye;
-	Hip_Star::proj = prj;
-	Hip_Star::gravity_label = _gravity_label;
-	Hip_Star::names_brightness = names_fader.get_interstate();
+	HipStar::twinkle_amount = _twinkle_amount;
+	HipStar::star_scale = _star_scale;
+	HipStar::star_mag_scale = _star_mag_scale;
+	HipStar::eye = _eye;
+	HipStar::proj = prj;
+	HipStar::gravity_label = _gravity_label;
+	HipStar::names_brightness = names_fader.getInterstate();
 
 	glEnable(GL_TEXTURE_2D);
     glEnable(GL_BLEND);
@@ -347,9 +347,9 @@ void Hip_Star_mgr::draw_point(float _star_scale, float _star_mag_scale, float _t
     prj->set_orthographic_projection();	// set 2D coordinate
 
 	// Print all the stars of all the selected zones
-	static vector<Hip_Star *>::iterator end;
-	static vector<Hip_Star *>::iterator iter;
-	Hip_Star* h;
+	static vector<HipStar *>::iterator end;
+	static vector<HipStar *>::iterator iter;
+	HipStar* h;
 	for(int i=0;i<nbZones;++i)
 	{
 		end = starZones[zoneList[i]].end();
@@ -360,7 +360,7 @@ void Hip_Star_mgr::draw_point(float _star_scale, float _star_mag_scale, float _t
 			if(h->Mag>maxMag) break;
 			if(!prj->project_prec_earth_equ_check(h->XYZ, h->XY)) continue;
 			h->draw_point();
-			if (!h->CommonName.empty() && names_fader.get_interstate() && h->Mag<maxMagStarName)
+			if (!h->CommonName.empty() && names_fader.getInterstate() && h->Mag<maxMagStarName)
 			{
 				h->draw_name();
 				glBindTexture (GL_TEXTURE_2D, starTexture->getID());
@@ -372,13 +372,13 @@ void Hip_Star_mgr::draw_point(float _star_scale, float _star_mag_scale, float _t
 }
 
 // Look for a star by XYZ coords
-Hip_Star * Hip_Star_mgr::search(Vec3f Pos)
+HipStar * HipStarMgr::search(Vec3f Pos)
 {
     Pos.normalize();
-    Hip_Star * nearest=NULL;
+    HipStar * nearest=NULL;
     float angleNearest=0.;
 
-    for(int i=0; i<StarArraySize; i++)
+    for(int i=0; i<starArraySize; i++)
     {
 		if (!StarFlatArray[i]) continue;
 		if 	(StarFlatArray[i]->XYZ[0]*Pos[0] + StarFlatArray[i]->XYZ[1]*Pos[1] +
@@ -397,14 +397,14 @@ Hip_Star * Hip_Star_mgr::search(Vec3f Pos)
 }
 
 // Return a stl vector containing the nebulas located inside the lim_fov circle around position v
-vector<stel_object*> Hip_Star_mgr::search_around(Vec3d v, double lim_fov)
+vector<StelObject*> HipStarMgr::search_around(Vec3d v, double lim_fov)
 {
-	vector<stel_object*> result;
+	vector<StelObject*> result;
     v.normalize();
 	double cos_lim_fov = cos(lim_fov * M_PI/180.);
 	//	static Vec3d equPos;
 
-	for(int i=0; i<StarArraySize; i++)
+	for(int i=0; i<starArraySize; i++)
     {
 		if (!StarFlatArray[i]) continue;
 		if (StarFlatArray[i]->XYZ[0]*v[0] + StarFlatArray[i]->XYZ[1]*v[1] + StarFlatArray[i]->XYZ[2]*v[2]>=cos_lim_fov)
@@ -416,9 +416,9 @@ vector<stel_object*> Hip_Star_mgr::search_around(Vec3d v, double lim_fov)
 }
 
 // Search the star by HP number
-Hip_Star * Hip_Star_mgr::searchHP(unsigned int _HP)
+HipStar * HipStarMgr::searchHP(unsigned int _HP)
 {
-	if (_HP != 0 && _HP < (unsigned int)StarArraySize && StarFlatArray[_HP] 
+	if (_HP != 0 && _HP < (unsigned int)starArraySize && StarFlatArray[_HP] 
 		&& StarFlatArray[_HP]->HP == _HP)
 		return StarFlatArray[_HP];
     return NULL;
@@ -426,14 +426,14 @@ Hip_Star * Hip_Star_mgr::searchHP(unsigned int _HP)
 }
 
 /*
-void Hip_Star_mgr::Save(void)
+void HipStarMgr::Save(void)
 {
 	FILE * fic = fopen("cat.fab","wb");
-    fwrite((char*)&StarArraySize,4,1,fic);
+    fwrite((char*)&starArraySize,4,1,fic);
 
-    for(int i=0;i<StarArraySize;i++)
+    for(int i=0;i<starArraySize;i++)
     {
-    	Hip_Star * s = StarArray[i];
+    	HipStar * s = StarArray[i];
     	float RAf=0, DEf=0;
     	unsigned short int mag=0;
     	unsigned short int type=0;

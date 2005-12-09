@@ -19,10 +19,10 @@
 #ifndef _SKYBRIGHT_H_
 #define _SKYBRIGHT_H_
 
-class skybright
+class Skybright
 {
 public:
-    skybright();
+    Skybright();
 
 	// month : 1=Jan, 12=Dec
 	// moon_phase in radian 0=Full Moon, PI/2=First Quadrant/Last Quadran, PI=No Moon

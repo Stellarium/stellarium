@@ -29,16 +29,16 @@
 
 class Constellation
 {
-    friend class Constellation_mgr;
+    friend class ConstellationMgr;
 public:
     Constellation();
     ~Constellation();
-    bool read(const string& record, Hip_Star_mgr * _VouteCeleste);
+    bool read(const string& record, HipStarMgr * _VouteCeleste);
 //    void draw(Projector* prj) const;
     void draw_name(s_font * constfont, Projector* prj) const;
-    void draw_art(Projector* prj, navigator* nav) const;
+    void draw_art(Projector* prj, Navigator* nav) const;
     void draw_boundary_optim(Projector* prj) const;
-    const Constellation* is_star_in(const Hip_Star *) const;
+    const Constellation* is_star_in(const HipStar *) const;
     string getName(void) { return name; };
     string getShortName(void) { return short_name; };
     static void  set_line_color(const Vec3f& c) { line_color = c; }
@@ -51,7 +51,7 @@ public:
     static Vec3f get_boundary_color() { return boundary_color; }
 private:
     void draw_optim(Projector* prj) const;
-    void draw_art_optim(Projector* prj, navigator* nav) const;
+    void draw_art_optim(Projector* prj, Navigator* nav) const;
     void set_name(string _name) { name = _name; }
 	void update(int delta_time);
 	void set_flag_lines(bool b) {line_fader=b;}
@@ -68,11 +68,11 @@ private:
     Vec3f XYZname;
 	Vec3d XYname;
     unsigned int nb_segments;
-    Hip_Star ** asterism;
+    HipStar ** asterism;
 	static bool gravity_label;
 	s_texture* art_tex;
 	Vec3d art_vertex[9];
-	linear_fader art_fader, line_fader, name_fader, boundary_fader;
+	LinearFader art_fader, line_fader, name_fader, boundary_fader;
 	static Vec3f line_color, label_color, boundary_color;
 
 	static bool singleSelected;

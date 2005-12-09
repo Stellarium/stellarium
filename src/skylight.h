@@ -34,11 +34,11 @@ typedef struct {
 	float color[3];			// 3 component color, can be RGB or CIE color system
 	} skylight_struct2;
 
-class skylight
+class Skylight
 {
 public:
-    skylight();
-    virtual ~skylight();
+    Skylight();
+    virtual ~Skylight();
 	// Set the fixed parameters and precompute what can be
 	// This funtion has to be called once before any call to get_*_value()
     void set_params(float sun_zenith_angle, float turbidity);

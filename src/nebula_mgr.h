@@ -28,21 +28,21 @@
 
 using namespace std;
 
-class Nebula_mgr  
+class NebulaMgr  
 {
 public:
-	Nebula_mgr();
-	virtual ~Nebula_mgr();
+	NebulaMgr();
+	virtual ~NebulaMgr();
 	
 	// Read the Nebulas data from a file
 	bool read(float font_size, const string& font_name, const string& fileName, LoadingBar& lb);
 	
 	// Draw all the Nebulas
-	void draw(int hint_ON,Projector *prj, const navigator *nav, tone_reproductor *eye, bool draw_tex, // Tony
+	void draw(int hint_ON,Projector *prj, const Navigator *nav, tone_reproductor *eye, bool draw_tex, // Tony
 		bool _gravity_label, float max_mag_name, bool bright_nebulae); 
 	
-	stel_object *search(const string& name);  // search by name M83, NGC 1123, IC 1234
-	stel_object *search(Vec3f Pos);    // Search the Nebulae by position
+	StelObject *search(const string& name);  // search by name M83, NGC 1123, IC 1234
+	StelObject *search(Vec3f Pos);    // Search the Nebulae by position
 	
 	void set_label_color(const Vec3f& c) {Nebula::label_color = c;}
 	void set_circle_color(const Vec3f& c) {Nebula::circle_color = c;}
@@ -57,19 +57,19 @@ public:
 	bool get_show_messier() { return showMessier; }
 
 	// Return a stl vector containing the nebulas located inside the lim_fov circle around position v
-	vector<stel_object*> search_around(Vec3d v, double lim_fov);
+	vector<StelObject*> search_around(Vec3d v, double lim_fov);
 	void set_nebulaname_format(int format) { Nebula::set_nebulaname_format(format); }
 	int get_nebulaname_format(void) { return Nebula::get_nebulaname_format(); }
 private:
-	stel_object *searchNGC(unsigned int NGC);
-	stel_object *searchIC(unsigned int NGC);
-	stel_object *searchMessier(unsigned int M);
+	StelObject *searchNGC(unsigned int NGC);
+	StelObject *searchIC(unsigned int NGC);
+	StelObject *searchMessier(unsigned int M);
 	bool read_NGC_catalog(const string& fileName, LoadingBar& lb);
 	bool read_messier_textures(const string& fileName, LoadingBar& lb);
 
 	FILE *nebula_fic;
 	vector<Nebula*> neb_array;	// The nebulas list
-	linear_fader hints_fader;
+	LinearFader hints_fader;
 	bool showNGC;
 	bool showMessier;
 };

@@ -29,11 +29,11 @@
 
 using namespace std ;
 
-class Hip_Star_mgr  
+class HipStarMgr  
 {
 public:
-    Hip_Star_mgr();
-    virtual ~Hip_Star_mgr();
+    HipStarMgr();
+    virtual ~HipStarMgr();
 	void init(float font_size, const string& font_name, const string& hipCatFile, const string& commonNameFile, const string& sciNameFile, LoadingBar& lb);
 	void update(int delta_time) {names_fader.update(delta_time);}
 	void set_names_fade_duration(float duration) {names_fader.set_duration((int) (duration * 1000.f));}
@@ -47,28 +47,28 @@ public:
 	void set_flag_names(bool b) {names_fader=b;}
 	void set_limiting_mag(float _mag) {limiting_mag=_mag;}
 	float get_limiting_mag() {return limiting_mag;}
-    Hip_Star *search(Vec3f Pos);  		// Search the star by position
-	Hip_Star *searchHP(unsigned int);	// Search the star by HP number
+    HipStar *search(Vec3f Pos);  		// Search the star by position
+	HipStar *searchHP(unsigned int);	// Search the star by HP number
 	// Return a stl vector containing the stars located inside the lim_fov circle around position v
-	vector<stel_object*> search_around(Vec3d v, double lim_fov);
+	vector<StelObject*> search_around(Vec3d v, double lim_fov);
 	vector<string> getNames(void) { return lstCommonNames; }
 	unsigned int getCommonNameHP(string _commonname);
-	void set_starname_format(int format) { Hip_Star::set_starname_format(format); }
-	int get_starname_format(void) { return Hip_Star::get_starname_format(); }
-	void set_label_color(const Vec3f& c) {Hip_Star::label_color = c;}
-	void set_circle_color(const Vec3f& c) {Hip_Star::circle_color = c;}
+	void set_starname_format(int format) { HipStar::set_starname_format(format); }
+	int get_starname_format(void) { return HipStar::get_starname_format(); }
+	void set_label_color(const Vec3f& c) {HipStar::label_color = c;}
+	void set_circle_color(const Vec3f& c) {HipStar::circle_color = c;}
 private:
 
 	// Load all the stars from the files
 	void load_data(const string& hipCatFile, LoadingBar& lb);
 
-	vector<Hip_Star*>* starZones;       // array of star vector with the grid id as array rank
+	vector<HipStar*>* starZones;       // array of star vector with the grid id as array rank
 	Grid HipGrid;                       // Grid for opimisation
-	Hip_Star * StarArray;  				// Sequential Array of the star for memory allocation optimization
-	Hip_Star ** StarFlatArray; 			// The simple array of the star for sequential research
-	int StarArraySize;                  // Number of star in the array
+	HipStar * StarArray;  				// Sequential Array of the star for memory allocation optimization
+	HipStar ** StarFlatArray; 			// The simple array of the star for sequential research
+	int starArraySize;                  // Number of star in the array
 	s_texture * starTexture;
-	linear_fader names_fader;
+	LinearFader names_fader;
 	float limiting_mag;                  // limiting magnitude at 60 degree fov
 	vector<string> lstCommonNames;
 	vector<unsigned int> lstCommonNamesHP;
