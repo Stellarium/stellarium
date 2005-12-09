@@ -261,7 +261,7 @@ int main(int argc, char **argv)
     setDirectories(argv[0]);
 
 	// Create the core of stellarium, it has to be initialized
-	stel_core* core = new stel_core(DDIR, TDIR, CDIR, DATA_ROOT);
+	StelCore* core = new StelCore(DDIR, TDIR, CDIR, DATA_ROOT);
 
 	// Give the config file parameters which has to be given "hard coded"
 #if !defined(MACOSX) && !defined(XCODE)
@@ -275,7 +275,7 @@ int main(int argc, char **argv)
 	core->load_config();
 
 	// Create a stellarium sdl manager
-	stel_sdl sdl_mgr(core);
+	StelSdl sdl_mgr(core);
 
 	// Initialize video device and other sdl parameters
 	sdl_mgr.init();

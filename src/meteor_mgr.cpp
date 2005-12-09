@@ -19,7 +19,7 @@
 
 #include "meteor_mgr.h"
 
-Meteor_mgr::Meteor_mgr(int zhr, int maxv )
+MeteorMgr::MeteorMgr(int zhr, int maxv )
 {
   ZHR = zhr;
   max_velocity = maxv;
@@ -33,22 +33,22 @@ Meteor_mgr::Meteor_mgr(int zhr, int maxv )
   // this is a correction factor to adjust for the model as programmed to match observed rates
 }
 
-Meteor_mgr::~Meteor_mgr() {
+MeteorMgr::~MeteorMgr() {
 }
 
-void Meteor_mgr::set_ZHR(int zhr){
+void MeteorMgr::set_ZHR(int zhr){
   ZHR = zhr;
 }
 
-int Meteor_mgr::get_ZHR(){
+int MeteorMgr::get_ZHR(){
   return ZHR;
 }
 
-void Meteor_mgr::set_max_velocity(int maxv) {
+void MeteorMgr::set_max_velocity(int maxv) {
   max_velocity = maxv;
 }
 
-void Meteor_mgr::update(Projector *proj, navigator* nav, tone_reproductor* eye, int delta_time) {
+void MeteorMgr::update(Projector *proj, Navigator* nav, tone_reproductor* eye, int delta_time) {
 
   // step through and update all active meteors
   int n =0;
@@ -110,7 +110,7 @@ void Meteor_mgr::update(Projector *proj, navigator* nav, tone_reproductor* eye, 
 }
 
 
-void Meteor_mgr::draw(Projector *proj, navigator* nav) {
+void MeteorMgr::draw(Projector *proj, Navigator* nav) {
 
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glEnable(GL_BLEND); 

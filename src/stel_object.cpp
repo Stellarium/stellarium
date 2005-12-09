@@ -24,14 +24,14 @@
 #include "s_texture.h"
 #include "planet.h"
 
-s_texture * stel_object::pointer_star = NULL;
-s_texture * stel_object::pointer_planet = NULL;
-s_texture * stel_object::pointer_nebula = NULL;
+s_texture * StelObject::pointer_star = NULL;
+s_texture * StelObject::pointer_planet = NULL;
+s_texture * StelObject::pointer_nebula = NULL;
 
-int stel_object::local_time = 0;
+int StelObject::local_time = 0;
 
 // Draw a nice animated pointer around the object
-void stel_object::draw_pointer(int delta_time, const Projector* prj, const navigator * nav)
+void StelObject::draw_pointer(int delta_time, const Projector* prj, const Navigator * nav)
 {
 	local_time+=delta_time;
 	Vec3d pos=get_earth_equ_pos(nav);
@@ -116,24 +116,24 @@ void stel_object::draw_pointer(int delta_time, const Projector* prj, const navig
 }
 
 //! Write information about the object in char* s 
-string stel_object::get_info_string(const navigator * nav) const
+string StelObject::get_info_string(const Navigator * nav) const
 {
 	return "No info for this object...";
 }
 
-string stel_object::get_short_info_string(const navigator * nav) const
+string StelObject::get_short_info_string(const Navigator * nav) const
 {
 	return "No info";
 }
 
-void stel_object::init_textures(void)
+void StelObject::init_textures(void)
 {
 	pointer_star = new s_texture("pointeur2");
 	pointer_planet = new s_texture("pointeur4");
 	pointer_nebula = new s_texture("pointeur5");
 }
 
-void stel_object::delete_textures(void)
+void StelObject::delete_textures(void)
 {
 	delete pointer_star; pointer_star = NULL;
 	delete pointer_planet; pointer_planet = NULL;

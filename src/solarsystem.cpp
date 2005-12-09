@@ -72,12 +72,12 @@ void SolarSystem::set_font(float font_size, const string& font_name)
 		printf("Can't create planet_name_font\n");
 		exit(-1);
 	}
-	planet::set_font(planet_name_font);
+	Planet::set_font(planet_name_font);
 }
 
 SolarSystem::~SolarSystem()
 {
-    for(vector<planet*>::iterator iter = system_planets.begin(); iter != system_planets.end(); ++iter)
+    for(vector<Planet*>::iterator iter = system_planets.begin(); iter != system_planets.end(); ++iter)
     {
         if (*iter) delete *iter;
 		*iter = NULL;
@@ -100,7 +100,7 @@ SolarSystem::~SolarSystem()
 void SolarSystem::load(const string& planetfile)
 {
 	cout << _("Loading Solar System data...");
-	init_parser pd;	// The planet data ini file parser
+	InitParser pd;	// The Planet data ini file parser
 	pd.load(planetfile);
 
 	int nbSections = pd.get_nsec();
@@ -213,8 +213,8 @@ void SolarSystem::load(const string& planetfile)
 			exit(-1);
 		}
 
-		// Create the planet and add it to the list
-		planet* p = new planet(secname, tname, pd.get_boolean(secname, "halo"),
+		// Create the Planet and add it to the list
+		Planet* p = new Planet(secname, tname, pd.get_boolean(secname, "halo"),
 			pd.get_boolean(secname, "lightning"), pd.get_double(secname, "radius")/AU,
 			StelUtility::str_to_vec3f(pd.get_str(secname, "color").c_str()), pd.get_double(secname, "albedo"),
 			pd.get_str(secname, "tex_map"), pd.get_str(secname, "tex_halo"), posfunc);
@@ -225,7 +225,7 @@ void SolarSystem::load(const string& planetfile)
 		{
 			// Look in the other planets the one named with str_parent
 			bool have_parent = false;
-    		vector<planet*>::iterator iter = system_planets.begin();
+    		vector<Planet*>::iterator iter = system_planets.begin();
     		while (iter != system_planets.end())
     		{
         		if ((*iter)->get_name()==str_parent)
@@ -259,7 +259,7 @@ void SolarSystem::load(const string& planetfile)
 
 		if (pd.get_boolean(secname, "rings", 0))
 		{
-			ring* r = new ring(pd.get_double(secname, "ring_size")/AU, pd.get_str(secname, "tex_ring"));
+			Ring* r = new Ring(pd.get_double(secname, "ring_size")/AU, pd.get_str(secname, "tex_ring"));
 			p->set_rings(r);
 		}
 
@@ -283,7 +283,7 @@ void SolarSystem::load(const string& planetfile)
 // The order is not important since the position is computed relatively to the mother body
 void SolarSystem::compute_positions(double date)
 {
-    vector<planet*>::iterator iter = system_planets.begin();
+    vector<Planet*>::iterator iter = system_planets.begin();
     while (iter != system_planets.end())
     {
         (*iter)->compute_position(date);
@@ -295,7 +295,7 @@ void SolarSystem::compute_positions(double date)
 // The elements have to be ordered hierarchically, eg. it's important to compute earth before moon.
 void SolarSystem::compute_trans_matrices(double date)
 {
-    vector<planet*>::iterator iter = system_planets.begin();
+    vector<Planet*>::iterator iter = system_planets.begin();
     while (iter != system_planets.end())
     {
         (*iter)->compute_trans_matrix(date);
@@ -305,14 +305,14 @@ void SolarSystem::compute_trans_matrices(double date)
 
 // Draw all the elements of the solar system
 // We are supposed to be in heliocentric coordinate
-void SolarSystem::draw(planet* selected, bool hint_ON, Projector * prj, const navigator * nav, 
+void SolarSystem::draw(Planet* selected, bool hint_ON, Projector * prj, const Navigator * nav, 
 					   const tone_reproductor* eye, bool _gravity_label, 
 					   bool flag_point, bool flag_orbits, bool flag_trails)
 {
 
-	// if a planet is selected and orbits are on, fade out non-selected ones
+	// if a Planet is selected and orbits are on, fade out non-selected ones
 	bool orb;
-	vector<planet*>::iterator iter = system_planets.begin();
+	vector<Planet*>::iterator iter = system_planets.begin();
 	if(flag_orbits && selected != NULL && selected->get_name() != "sun") {
 		while (iter != system_planets.end()) {
 			if((*iter)->get_name() == selected->get_name()) orb = 1;
@@ -328,7 +328,7 @@ void SolarSystem::draw(planet* selected, bool hint_ON, Projector * prj, const na
 	}
 
 
-	planet::set_gravity_label_flag(_gravity_label);
+	Planet::set_gravity_label_flag(_gravity_label);
 
 	// Set the light parameters taking sun as the light source
     float tmp[4] = {0,0,0,0};
@@ -350,7 +350,7 @@ void SolarSystem::draw(planet* selected, bool hint_ON, Projector * prj, const na
     glLightfv(GL_LIGHT0,GL_POSITION,Vec4f(0.f,0.f,0.f,1.f));
 	glEnable(GL_LIGHT0);
 
-	// Compute each planet distance to the observer
+	// Compute each Planet distance to the observer
 	Vec3d obs_helio_pos = nav->get_observer_helio_pos();
     iter = system_planets.begin();
     while (iter != system_planets.end())
@@ -394,12 +394,12 @@ void SolarSystem::draw(planet* selected, bool hint_ON, Projector * prj, const na
 
 }
 
-planet* SolarSystem::search(string planet_name) {
+Planet* SolarSystem::search(string planet_name) {
 
 	// side effect - bad?
 	transform(planet_name.begin(), planet_name.end(), planet_name.begin(), ::tolower);
 
-	vector<planet*>::iterator iter = system_planets.begin();
+	vector<Planet*>::iterator iter = system_planets.begin();
 	while (iter != system_planets.end()) {
 
 		if( (*iter)->get_name() == planet_name ) return (*iter);  // also check standard ini file names 
@@ -408,12 +408,12 @@ planet* SolarSystem::search(string planet_name) {
 	return NULL;
 }
 
-planet* SolarSystem::searchByCommonNames(string planetCommonName) {
+Planet* SolarSystem::searchByCommonNames(string planetCommonName) {
 
 	// side effect - bad?
 	transform(planetCommonName.begin(), planetCommonName.end(), planetCommonName.begin(), ::tolower);
 
-	vector<planet*>::iterator iter = system_planets.begin();
+	vector<Planet*>::iterator iter = system_planets.begin();
 	while (iter != system_planets.end()) {
 		
 		if( (*iter)->get_common_name() == planetCommonName ) return (*iter);  // also check standard ini file names 
@@ -422,15 +422,15 @@ planet* SolarSystem::searchByCommonNames(string planetCommonName) {
 	return NULL;
 }
 
-// Search if any planet is close to position given in earth equatorial position and return the distance
-planet* SolarSystem::search(Vec3d pos, const navigator * nav, const Projector * prj)
+// Search if any Planet is close to position given in earth equatorial position and return the distance
+Planet* SolarSystem::search(Vec3d pos, const Navigator * nav, const Projector * prj)
 {
     pos.normalize();
-    planet * closest = NULL;
+    Planet * closest = NULL;
 	double cos_angle_closest = 0.;
 	static Vec3d equPos;
 
-    vector<planet*>::iterator iter = system_planets.begin();
+    vector<Planet*>::iterator iter = system_planets.begin();
     while (iter != system_planets.end())
     {
         equPos = (*iter)->get_earth_equ_pos(nav);
@@ -453,14 +453,14 @@ planet* SolarSystem::search(Vec3d pos, const navigator * nav, const Projector * 
 }
 
 // Return a stl vector containing the planets located inside the lim_fov circle around position v
-vector<stel_object*> SolarSystem::search_around(Vec3d v, double lim_fov, const navigator * nav, const Projector * prj)
+vector<StelObject*> SolarSystem::search_around(Vec3d v, double lim_fov, const Navigator * nav, const Projector * prj)
 {
-	vector<stel_object*> result;
+	vector<StelObject*> result;
     v.normalize();
 	double cos_lim_fov = cos(lim_fov * M_PI/180.);
 	static Vec3d equPos;
 
-    vector<planet*>::iterator iter = system_planets.begin();
+    vector<Planet*>::iterator iter = system_planets.begin();
     while (iter != system_planets.end())
     {
         equPos = (*iter)->get_earth_equ_pos(nav);
@@ -477,16 +477,16 @@ vector<stel_object*> SolarSystem::search_around(Vec3d v, double lim_fov, const n
 vector<string> SolarSystem::getNames(void)
 {
     vector<string> names;
-	vector < planet * >::iterator iter;
+	vector < Planet * >::iterator iter;
 
 	for (iter = system_planets.begin(); iter != system_planets.end(); ++iter)
         names.push_back((*iter)->get_common_name());
     return names;
 }
 
-void SolarSystem::update_trails(const navigator* nav) {
+void SolarSystem::update_trails(const Navigator* nav) {
 
-  vector<planet*>::iterator iter;      
+  vector<Planet*>::iterator iter;      
   for( iter = system_planets.begin(); iter < system_planets.end(); iter++ ) {
     (*iter)->update_trail(nav);
   }
@@ -495,7 +495,7 @@ void SolarSystem::update_trails(const navigator* nav) {
 
 void SolarSystem::start_trails(void) {
 
-  vector<planet*>::iterator iter;      
+  vector<Planet*>::iterator iter;      
   for( iter = system_planets.begin(); iter < system_planets.end(); iter++ ) {
     (*iter)->start_trail();
   }
@@ -504,7 +504,7 @@ void SolarSystem::start_trails(void) {
 
 void SolarSystem::end_trails(void) {
 
-  vector<planet*>::iterator iter;      
+  vector<Planet*>::iterator iter;      
   for( iter = system_planets.begin(); iter < system_planets.end(); iter++ ) {
     (*iter)->end_trail();
   }
@@ -514,7 +514,7 @@ void SolarSystem::end_trails(void) {
 // draws earth shadow overlapping the moon using stencil buffer
 // umbra and penumbra are sized separately for accuracy
 
-void SolarSystem::draw_earth_shadow(const navigator * nav, Projector * prj) {
+void SolarSystem::draw_earth_shadow(const Navigator * nav, Projector * prj) {
 
     Vec3d e = get_earth()->get_ecliptic_pos();
     Vec3d m = get_moon()->get_ecliptic_pos();  // relative to earth
@@ -599,13 +599,13 @@ void SolarSystem::draw_earth_shadow(const navigator * nav, Projector * prj) {
 
 void SolarSystem::set_object_scale(float scale) {
 
-	planet::set_object_scale(scale);
+	Planet::set_object_scale(scale);
 	
 }
 
 
-void SolarSystem::update(int delta_time, navigator* nav) {
-    vector<planet*>::iterator iter = system_planets.begin();
+void SolarSystem::update(int delta_time, Navigator* nav) {
+    vector<Planet*>::iterator iter = system_planets.begin();
     while (iter != system_planets.end())
     {
         (*iter)->update_trail(nav);
@@ -618,7 +618,7 @@ void SolarSystem::update(int delta_time, navigator* nav) {
 
 
 // is a lunar eclipse close at hand?
-bool SolarSystem::near_lunar_eclipse(const navigator * nav, Projector *prj) {
+bool SolarSystem::near_lunar_eclipse(const Navigator * nav, Projector *prj) {
 
 	// TODO: could replace with simpler test
 

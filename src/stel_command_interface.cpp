@@ -28,7 +28,7 @@
 using namespace std;
 
 
-StelCommandInterface::StelCommandInterface(stel_core * core) {
+StelCommandInterface::StelCommandInterface(StelCore * core) {
   stcore = core;
   audio = NULL;
 }
@@ -176,7 +176,7 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
       std::istringstream istr(args["hp"]);
       istr >> hpnum;
       stcore->selected_object = stcore->hip_stars->searchHP(hpnum);
-      stcore->asterisms->set_selected((Hip_Star*)stcore->selected_object);
+      stcore->asterisms->set_selected((HipStar*)stcore->selected_object);
       stcore->selected_planet=NULL;
     } else if(args["planet"]!=""){
       stcore->selected_object = stcore->selected_planet = stcore->ssystem->search(args["planet"]);
@@ -201,7 +201,7 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 
 		hpnum = stcore->asterisms->get_first_selected_HP();
 		stcore->selected_object = stcore->hip_stars->searchHP(hpnum); 	 
-		stcore->asterisms->set_selected((Hip_Star*)stcore->selected_object); 	 
+		stcore->asterisms->set_selected((HipStar*)stcore->selected_object); 	 
 		stcore->selected_planet=NULL;
 
 		// Some stars are shared, so now force constellation
@@ -580,7 +580,7 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 
 	  } else if(args["action"]=="reload") {
 
-		  // on reload, be sure to reconfigure as necessary since stel_core::init isn't called
+		  // on reload, be sure to reconfigure as necessary since StelCore::init isn't called
 
 		  stcore->load_config();
 
@@ -644,7 +644,7 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 }
 
 
-// set flags - TODO: stel_core flag variables will be replaced with object attributes
+// set flags - TODO: StelCore flag variables will be replaced with object attributes
 // if caller is not trusted, some flags can't be changed 
 // newval is new value of flag changed
 

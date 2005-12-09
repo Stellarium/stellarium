@@ -31,17 +31,17 @@
 
 #define TUI_SCRIPT_MSG "Select and exit to run."
 
-// Predeclaration of the stel_core class
-class stel_core;
+// Predeclaration of the StelCore class
+class StelCore;
 
 using namespace std;
 using namespace s_gui;
 
 class stel_ui
 {
-	friend class stel_core;
+	friend class StelCore;
 public:
-	stel_ui(stel_core *);	// Create a stellarium ui. Need to call init() before use
+	stel_ui(StelCore *);	// Create a stellarium ui. Need to call init() before use
     virtual ~stel_ui();		// Delete the ui
 	void init(void);		// Initialize the ui.
 	void draw(void);		// Display the ui
@@ -73,7 +73,7 @@ public:
     bool isInitialised(void) { return initialised; }
     void changeLocale(void) { desktop->changeLocale(); }
 private:
-	stel_core * core;		// The main core can be accessed because stel_ui is a friend class
+	StelCore * core;		// The main core can be accessed because stel_ui is a friend class
 	bool initialised;
 	s_font * baseFont;		// The standard font
 	s_font * courierFont;	// The standard fixed size font

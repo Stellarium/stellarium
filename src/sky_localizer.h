@@ -26,12 +26,12 @@
 
 using namespace std;
 
-class Sky_localizer
+class SkyLocalizer
 {
 
  public:
-  Sky_localizer(string _data_dir);
-  virtual ~Sky_localizer();
+  SkyLocalizer(string _data_dir);
+  virtual ~SkyLocalizer();
 
   void init_sky_locales();
   string get_sky_culture_list(void);

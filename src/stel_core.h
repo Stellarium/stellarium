@@ -61,15 +61,15 @@ class stel_ui;
  * This class will be the main API of the program after the currently planned 
  * reorganization of the source code. It must be documented using doxygen.
  */
-class stel_core
+class StelCore
 {
 friend class stel_ui;
 friend class StelCommandInterface;
 public:
 	// Inputs are the main data, textures, configuration directories relatively to the DATA_ROOT directory
-	// TODO : stel_core should not handle any directory
-    stel_core(const string& DDIR, const string& TDIR, const string& CDIR, const string& DATA_ROOT);
-    virtual ~stel_core();
+	// TODO : StelCore should not handle any directory
+    StelCore(const string& DDIR, const string& TDIR, const string& CDIR, const string& DATA_ROOT);
+    virtual ~StelCore();
 	
 	//! @brief Init and load all main core components.
 	void init(void);
@@ -88,12 +88,12 @@ public:
 	int get_screen_H(void) const {return screen_H;}
 		
 	// find and select the "nearest" object and retrieve his informations
-	stel_object * find_stel_object(int x, int y) const;
-	stel_object * find_stel_object(const Vec3d& pos) const;
+	StelObject * find_stel_object(int x, int y) const;
+	StelObject * find_stel_object(const Vec3d& pos) const;
 
 	// Find and select in a "clever" way an object
-	stel_object * clever_find(const Vec3d& pos) const;
-	stel_object * clever_find(int x, int y) const;
+	StelObject * clever_find(const Vec3d& pos) const;
+	StelObject * clever_find(int x, int y) const;
 	
 	// ---------------------------------------------------------------
 	// Interfaces for external controls (gui, tui or script facility)
@@ -201,15 +201,15 @@ private:
 
 
 	// Main elements of the program
-	navigator * navigation;				// Manage all navigation parameters, coordinate transformations etc..
+	Navigator * navigation;				// Manage all navigation parameters, coordinate transformations etc..
 	Observator * observatory;			// Manage observer position and locales for its country
 	Projector * projection;				// Manage the projection mode and matrix
-	stel_object * selected_object;		// The selected object in stellarium
-	Hip_Star_mgr * hip_stars;			// Manage the hipparcos stars
-	Constellation_mgr * asterisms;		// Manage constellations (boundaries, names etc..)
-	Nebula_mgr * nebulas;				// Manage the nebulas
+	StelObject * selected_object;		// The selected object in stellarium
+	HipStarMgr * hip_stars;			// Manage the hipparcos stars
+	ConstellationMgr * asterisms;		// Manage constellations (boundaries, names etc..)
+	NebulaMgr * nebulas;				// Manage the nebulas
 	SolarSystem* ssystem;				// Manage the solar system
-	stel_atmosphere * atmosphere;		// Atmosphere
+	Atmosphere * atmosphere;		// Atmosphere
 	SkyGrid * equ_grid;					// Equatorial grid
 	SkyGrid * azi_grid;					// Azimutal grid
 	SkyLine * equator_line;				// Celestial Equator line
@@ -217,11 +217,11 @@ private:
 	SkyLine * meridian_line;			// Meridian line
 	Cardinals * cardinals_points;		// Cardinals points
 	MilkyWay * milky_way;				// Our galaxy
-	Meteor_mgr * meteors;				// Manage meteor showers
+	MeteorMgr * meteors;				// Manage meteor showers
 	Landscape * landscape;				// The landscape ie the fog, the ground and "decor"
 	tone_reproductor * tone_converter;	// Tones conversion between stellarium world and display device
 
-	planet* selected_planet;
+	Planet* selected_planet;
 
 	// Projector
 	Projector::PROJECTOR_TYPE ProjectorType;
@@ -257,7 +257,7 @@ private:
 	ScriptMgr * scripts;                    // manage playing and recording scripts
 	stel_ui * ui;							// The main User Interface
 	ImageMgr * script_images;               // for script loaded image display
-	Sky_localizer *skyloc;					// for sky cultures and locales
+	SkyLocalizer *skyloc;					// for sky cultures and locales
 	
 	// localization
 	string SkyCulture;  // the culture used for constellations

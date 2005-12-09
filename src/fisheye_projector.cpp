@@ -22,7 +22,7 @@
 #include "fisheye_projector.h"
 
 
-Fisheye_projector::Fisheye_projector(int _screenW, int _screenH, double _fov,
+FisheyeProjector::FisheyeProjector(int _screenW, int _screenH, double _fov,
 	double _min_fov, double _max_fov, int _distortion_function) : 
 	Projector(_screenW, _screenH, _fov, _min_fov, _max_fov)
 {
@@ -35,7 +35,7 @@ Fisheye_projector::Fisheye_projector(int _screenW, int _screenH, double _fov,
 							0., 0., 0., 1.);
 }
 
-Fisheye_projector::Fisheye_projector(const Projector& p) : Projector(800, 600, 180.f, 0.001, 180.00001)
+FisheyeProjector::FisheyeProjector(const Projector& p) : Projector(800, 600, 180.f, 0.001, 180.00001)
 {
 	set_fov(p.get_fov());
 	set_screen_size(p.get_screenW(),p.get_screenH());
@@ -47,7 +47,7 @@ Fisheye_projector::Fisheye_projector(const Projector& p) : Projector(800, 600, 1
 }
 
 // For a fisheye, ratio is alway = 1
-void Fisheye_projector::set_viewport(int x, int y, int w, int h)
+void FisheyeProjector::set_viewport(int x, int y, int w, int h)
 {
 	Projector::set_viewport(x, y, w, h);
 	center.set(vec_viewport[0]+vec_viewport[2]/2,vec_viewport[1]+vec_viewport[3]/2,0);
@@ -55,14 +55,14 @@ void Fisheye_projector::set_viewport(int x, int y, int w, int h)
 
 // Init the viewing matrix, setting the field of view, the clipping planes, and screen ratio
 // The function is a reimplementation of glOrtho
-void Fisheye_projector::init_project_matrix(void)
+void FisheyeProjector::init_project_matrix(void)
 {
 	glMatrixMode(GL_PROJECTION);
 	glLoadMatrixd(mat_projection);
     glMatrixMode(GL_MODELVIEW);
 }
 
-void Fisheye_projector::update_openGL(void) const
+void FisheyeProjector::update_openGL(void) const
 {
 	glMatrixMode(GL_PROJECTION);
 	glLoadMatrixd(mat_projection);
@@ -70,7 +70,7 @@ void Fisheye_projector::update_openGL(void) const
 	glViewport(vec_viewport[0], vec_viewport[1], vec_viewport[2], vec_viewport[3]);
 }
 
-bool Fisheye_projector::project_custom(const Vec3d& v, Vec3d& win, const Mat4d& mat) const
+bool FisheyeProjector::project_custom(const Vec3d& v, Vec3d& win, const Mat4d& mat) const
 {
 	double z;
 	double a;
@@ -89,12 +89,12 @@ bool Fisheye_projector::project_custom(const Vec3d& v, Vec3d& win, const Mat4d& 
 }
 
 
-void Fisheye_projector::unproject_custom(double x ,double y, Vec3d& v, const Mat4d& mat) const
+void FisheyeProjector::unproject_custom(double x ,double y, Vec3d& v, const Mat4d& mat) const
 {
 	unproject(x, y, (mat_projection*mat).inverse(), v);
 }
 
-void Fisheye_projector::unproject(double x, double y, const Mat4d& m, Vec3d& v) const
+void FisheyeProjector::unproject(double x, double y, const Mat4d& m, Vec3d& v) const
 {
 	double d = MY_MIN(vec_viewport[2],vec_viewport[3])/2;
 	static double length;
@@ -125,7 +125,7 @@ void Fisheye_projector::unproject(double x, double y, const Mat4d& m, Vec3d& v) 
 // Override glVertex3f
 // Here is the main trick for texturing in fisheye mode : The trick is to compute the
 // new coordinate in orthographic projection which will simulate the fisheye projection.
-void Fisheye_projector::sVertex3(double x, double y, double z, const Mat4d& mat) const
+void FisheyeProjector::sVertex3(double x, double y, double z, const Mat4d& mat) const
 {
 	Vec3d win;
 	Vec3d v(x,y,z);
@@ -136,7 +136,7 @@ void Fisheye_projector::sVertex3(double x, double y, double z, const Mat4d& mat)
 	glVertex3dv(v);
 }
 
-void Fisheye_projector::sSphere(GLdouble radius, GLint slices, GLint stacks, const Mat4d& mat, int orient_inside) const
+void FisheyeProjector::sSphere(GLdouble radius, GLint slices, GLint stacks, const Mat4d& mat, int orient_inside) const
 {
 	glPushMatrix();
 	glLoadMatrixd(mat);
@@ -243,7 +243,7 @@ void Fisheye_projector::sSphere(GLdouble radius, GLint slices, GLint stacks, con
 }
 
 // Reimplementation of gluCylinder : glu is overrided for non standard projection
-void Fisheye_projector::sCylinder(GLdouble radius, GLdouble height, GLint slices, GLint stacks,
+void FisheyeProjector::sCylinder(GLdouble radius, GLdouble height, GLint slices, GLint stacks,
 const Mat4d& mat, int orient_inside) const
 {
 	glPushMatrix();

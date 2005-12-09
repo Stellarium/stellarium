@@ -18,7 +18,7 @@
  */
 
 //	Class which compute and display the daylight sky color using openGL
-//	the sky is computed with the skylight class.
+//	the sky is computed with the Skylight class.
 
 // TODO : Adaptative resolution for optimization
 
@@ -27,7 +27,7 @@
 #include "stellastro.h"
 #include "stel_atmosphere.h"
 
-stel_atmosphere::stel_atmosphere() : sky_resolution(48), tab_sky(NULL), world_adaptation_luminance(0.f), atm_intensity(0)
+Atmosphere::Atmosphere() : sky_resolution(48), tab_sky(NULL), world_adaptation_luminance(0.f), atm_intensity(0)
 {
 	// Create the vector array used to store the sky color on the full field of view
 	tab_sky = new Vec3f*[sky_resolution+1];
@@ -38,7 +38,7 @@ stel_atmosphere::stel_atmosphere() : sky_resolution(48), tab_sky(NULL), world_ad
 	set_fade_duration(3.f);
 }
 
-stel_atmosphere::~stel_atmosphere()
+Atmosphere::~Atmosphere()
 {
 	for (int k=0; k<sky_resolution+1 ;k++)
 	{
@@ -47,7 +47,7 @@ stel_atmosphere::~stel_atmosphere()
 	if (tab_sky) delete [] tab_sky;
 }
 
-void stel_atmosphere::compute_color(double JD, Vec3d sunPos, Vec3d moonPos, float moon_phase,
+void Atmosphere::compute_color(double JD, Vec3d sunPos, Vec3d moonPos, float moon_phase,
 	tone_reproductor * eye, Projector* prj,
 	float latitude, float altitude, float temperature, float relative_humidity)
 {
@@ -55,7 +55,7 @@ void stel_atmosphere::compute_color(double JD, Vec3d sunPos, Vec3d moonPos, floa
 	float min_mw_lum = 0.13;
 
 	// no need to calculate if not visible
-	if(!fader.get_interstate())
+	if(!fader.getInterstate())
 	{
 		atm_intensity = 0;
 		world_adaptation_luminance = 3.75f;
@@ -64,7 +64,7 @@ void stel_atmosphere::compute_color(double JD, Vec3d sunPos, Vec3d moonPos, floa
 	}
 	else
 	{
-		atm_intensity = fader.get_interstate();
+		atm_intensity = fader.getInterstate();
 	}
 
 	
@@ -156,10 +156,10 @@ void stel_atmosphere::compute_color(double JD, Vec3d sunPos, Vec3d moonPos, floa
 			b2.pos[1] = point[1];
 			b2.pos[2] = point[2];
 
-			// Use the skylight model for the color
+			// Use the Skylight model for the color
 			sky.get_xyY_valuev(&b2);
 
-			// Use the skybright.cpp 's models for brightness which gives better results.
+			// Use the Skybright.cpp 's models for brightness which gives better results.
 			b2.color[2] = skyb.get_luminance(moon_pos[0]*b2.pos[0]+moon_pos[1]*b2.pos[1]+
 					moon_pos[2]*b2.pos[2], sun_pos[0]*b2.pos[0]+sun_pos[1]*b2.pos[1]+
 					sun_pos[2]*b2.pos[2], b2.pos[2]);
@@ -182,9 +182,9 @@ void stel_atmosphere::compute_color(double JD, Vec3d sunPos, Vec3d moonPos, floa
 
 
 // Draw the atmosphere using the precalc values stored in tab_sky
-void stel_atmosphere::draw(Projector* prj, int delta_time)
+void Atmosphere::draw(Projector* prj, int delta_time)
 {
-	if(fader.get_interstate())
+	if(fader.getInterstate())
 	{
 
 	  // printf("Atm int: %f\n", atm_intensity);

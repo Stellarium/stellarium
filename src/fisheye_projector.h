@@ -24,16 +24,16 @@
 
 // Class which handle projection modes and projection matrix
 // Overide some function usually handled by glu
-class Fisheye_projector : public Projector
+class FisheyeProjector : public Projector
 {
 public:
-    Fisheye_projector(int _screenW = 800, int _screenH = 600, double _fov = 175., 
+    FisheyeProjector(int _screenW = 800, int _screenH = 600, double _fov = 175., 
 		    double _min_fov = 0.001, double _max_fov = 300., int _distortion_function = -1);
 
                     // distortion_function can be used to select between different projection distortions
                     // currently not used by standard stellarium version, but needed by Digitalis
 
-	Fisheye_projector(const Projector&);
+	FisheyeProjector(const Projector&);
 
 	virtual PROJECTOR_TYPE get_type(void) const {return FISHEYE_PROJECTOR;}
 

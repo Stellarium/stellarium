@@ -23,19 +23,19 @@
 #include "s_font.h"
 #include "s_gui.h"
 
-s_font* planet::planet_name_font = NULL;
-float planet::object_scale = 1.f;
-bool planet::gravity_label = false;
-Vec3f planet::label_color = Vec3f(.4,.4,.8);
-Vec3f planet::orbit_color = Vec3f(1,.6,1);
-Vec3f planet::trail_color = Vec3f(1,.7,.7);
+s_font* Planet::planet_name_font = NULL;
+float Planet::object_scale = 1.f;
+bool Planet::gravity_label = false;
+Vec3f Planet::label_color = Vec3f(.4,.4,.8);
+Vec3f Planet::orbit_color = Vec3f(1,.6,1);
+Vec3f Planet::trail_color = Vec3f(1,.7,.7);
 
-rotation_elements::rotation_elements() : period(1.), offset(0.), epoch(J2000),
+RotationElements::RotationElements() : period(1.), offset(0.), epoch(J2000),
 										 obliquity(0.), ascendingNode(0.), precessionRate(0.)
 {
 }
 
-planet::planet(const string& _name, const string& tname, int _flagHalo, int _flag_lighting, double _radius, Vec3f _color,
+Planet::Planet(const string& _name, const string& tname, int _flagHalo, int _flag_lighting, double _radius, Vec3f _color,
 			   float _albedo, const string& tex_map_name, const string& tex_halo_name, pos_func_type _coord_func) :
 	name(_name), flagHalo(_flagHalo), flag_lighting(_flag_lighting), radius(_radius), color(_color),
 	albedo(_albedo), axis_rotation(0.),	tex_map(NULL), tex_halo(NULL), tex_big_halo(NULL), rings(NULL),
@@ -61,7 +61,7 @@ planet::planet(const string& _name, const string& tname, int _flagHalo, int _fla
 
 }
 
-planet::~planet()
+Planet::~Planet()
 {
 	if (tex_map) delete tex_map;
 	tex_map = NULL;
@@ -74,7 +74,7 @@ planet::~planet()
 }
 
 // Return the information string "ready to print" :)
-string planet::get_info_string(const navigator * nav) const
+string Planet::get_info_string(const Navigator * nav) const
 {
 	double tempDE, tempRA;
 	ostringstream oss;
@@ -101,7 +101,7 @@ string planet::get_info_string(const navigator * nav) const
 }
 
 // Return the information string "ready to print" :)
-string planet::get_short_info_string(const navigator * nav) const
+string Planet::get_short_info_string(const Navigator * nav) const
 {
 	ostringstream oss;
 
@@ -114,12 +114,12 @@ string planet::get_short_info_string(const navigator * nav) const
 	return oss.str();
 }
 
-double planet::get_close_fov(const navigator* nav) const
+double Planet::get_close_fov(const Navigator* nav) const
 {
 	return atanf(radius*sphere_scale*2.f/get_earth_equ_pos(nav).length())*180./M_PI * 4;
 }
 
-double planet::get_satellites_fov(const navigator * nav) const
+double Planet::get_satellites_fov(const Navigator * nav) const
 {
 	if (name=="jupiter") return atanf(0.005/get_earth_equ_pos(nav).length())*180./M_PI * 4;
 	if (name=="saturn") return atanf(0.005/get_earth_equ_pos(nav).length())*180./M_PI * 4;
@@ -127,7 +127,7 @@ double planet::get_satellites_fov(const navigator * nav) const
 }
 
 // Set the orbital elements
-void planet::set_rotation_elements(float _period, float _offset, double _epoch, float _obliquity, float _ascendingNode, float _precessionRate, double _sidereal_period )
+void Planet::set_rotation_elements(float _period, float _offset, double _epoch, float _obliquity, float _ascendingNode, float _precessionRate, double _sidereal_period )
 {
     re.period = _period;
 	re.offset = _offset;
@@ -141,8 +141,8 @@ void planet::set_rotation_elements(float _period, float _offset, double _epoch, 
 }
 
 
-// Return the planet position in rectangular earth equatorial coordinate
-Vec3d planet::get_earth_equ_pos(const navigator * nav) const
+// Return the Planet position in rectangular earth equatorial coordinate
+Vec3d Planet::get_earth_equ_pos(const Navigator * nav) const
 {
 	Vec3d v = get_heliocentric_ecliptic_pos();
 	return nav->helio_to_earth_pos_equ(v);		// this is earth equatorial but centered
@@ -150,9 +150,9 @@ Vec3d planet::get_earth_equ_pos(const navigator * nav) const
 	//return navigation.helio_to_earth_equ(&v); this is the real equatorial centered on earth center
 }
 
-// Compute the position in the parent planet coordinate system
+// Compute the position in the parent Planet coordinate system
 // Actually call the provided function to compute the ecliptical position
-void planet::compute_position(double date)
+void Planet::compute_position(double date)
 {
 
 	if (delta_orbitJD > 0 && (fabs(last_orbitJD-date)>delta_orbitJD || !orbit_cached))
@@ -225,22 +225,22 @@ void planet::compute_position(double date)
 			}
 
 
-			// calculate actual planet position
+			// calculate actual Planet position
 			coord_func(date, ecliptic_pos);
 
 			lastJD = date;
 
 		} else if (fabs(lastJD-date)>deltaJD) {
 	  
-			// calculate actual planet position
+			// calculate actual Planet position
 			coord_func(date, ecliptic_pos);
 			lastJD = date;
 		}
 
 }
 
-// Compute the transformation matrix from the local planet coordinate to the parent planet coordinate
-void planet::compute_trans_matrix(double date)
+// Compute the transformation matrix from the local Planet coordinate to the parent Planet coordinate
+void Planet::compute_trans_matrix(double date)
 {
 
 	compute_geographic_rotation(date);
@@ -264,13 +264,13 @@ void planet::compute_trans_matrix(double date)
 
 
 // Get a matrix which converts from heliocentric ecliptic coordinate to local geographic coordinate
-Mat4d planet::get_helio_to_geo_matrix()
+Mat4d Planet::get_helio_to_geo_matrix()
 {
 	Mat4d mat = mat_local_to_parent;
 	mat = mat * Mat4d::zrotation(axis_rotation*M_PI/180.);
 
 	// Iterate thru parents
-	planet * p = parent;
+	Planet * p = parent;
 	while (p!=NULL && p->parent!=NULL)
 		{
 			mat = p->mat_local_to_parent * mat;
@@ -280,7 +280,7 @@ Mat4d planet::get_helio_to_geo_matrix()
 }
 
 // Compute the z rotation to use from equatorial to geographic coordinates
-void planet::compute_geographic_rotation(double date)
+void Planet::compute_geographic_rotation(double date)
 {
     double t = date - re.epoch;
     double rotations = t / (double) re.period;
@@ -291,17 +291,17 @@ void planet::compute_geographic_rotation(double date)
 
 }
 
-// Get the planet position in the parent planet ecliptic coordinate
-Vec3d planet::get_ecliptic_pos() const
+// Get the Planet position in the parent Planet ecliptic coordinate
+Vec3d Planet::get_ecliptic_pos() const
 {
 	return ecliptic_pos;
 }
 
 // Return the heliocentric ecliptical position
-Vec3d planet::get_heliocentric_ecliptic_pos() const
+Vec3d Planet::get_heliocentric_ecliptic_pos() const
 {
 	Vec3d pos = ecliptic_pos;
-	planet * p = parent;
+	Planet * p = parent;
 	while (p!=NULL)
 		{
 			pos.transfo4d(p->mat_local_to_parent);
@@ -311,14 +311,14 @@ Vec3d planet::get_heliocentric_ecliptic_pos() const
 }
 
 // Compute the distance to the given position in heliocentric coordinate (in AU)
-double planet::compute_distance(const Vec3d& obs_helio_pos)
+double Planet::compute_distance(const Vec3d& obs_helio_pos)
 {
 	distance = (obs_helio_pos-get_heliocentric_ecliptic_pos()).length();
 	return distance;
 }
 
 // Get the phase angle for an observer at pos obs_pos in the heliocentric coordinate (dist in AU)
-double planet::get_phase(Vec3d obs_pos) const
+double Planet::get_phase(Vec3d obs_pos) const
 {
 	Vec3d heliopos = get_heliocentric_ecliptic_pos();
 	double R = heliopos.length();
@@ -329,7 +329,7 @@ double planet::get_phase(Vec3d obs_pos) const
 	return (1.f - acosf(cos_chi)/M_PI) * cos_chi + sqrt(1.f - cos_chi*cos_chi) / M_PI;
 }
 
-float planet::compute_magnitude(Vec3d obs_pos) const
+float Planet::compute_magnitude(Vec3d obs_pos) const
 {
 	Vec3d heliopos = get_heliocentric_ecliptic_pos();
 	double R = heliopos.length();
@@ -344,31 +344,31 @@ float planet::compute_magnitude(Vec3d obs_pos) const
 	return -26.73f - 2.5f * log10f(F);
 }
 
-float planet::compute_magnitude(const navigator * nav) const
+float Planet::compute_magnitude(const Navigator * nav) const
 {
 	return compute_magnitude(nav->get_observer_helio_pos());
 }
 
-// Add the given planet in the satellite list
-void planet::add_satellite(planet*p)
+// Add the given Planet in the satellite list
+void Planet::add_satellite(Planet*p)
 {
 	satellites.push_back(p);
 	p->parent=this;
 }
 
-void planet::set_big_halo(const string& halotexfile)
+void Planet::set_big_halo(const string& halotexfile)
 {
 	tex_big_halo = new s_texture(halotexfile, TEX_LOAD_TYPE_PNG_SOLID);
 }
 
 // Return the radius of a circle containing the object on screen
-float planet::get_on_screen_size(const Projector* prj, const navigator * nav)
+float Planet::get_on_screen_size(const Projector* prj, const Navigator * nav)
 {
 	return atanf(radius*sphere_scale*2.f/get_earth_equ_pos(nav).length())*180./M_PI/prj->get_fov()*prj->viewH();
 }
 
-// Draw the planet and all the related infos : name, circle etc..
-void planet::draw(int hint_ON, Projector* prj, const navigator * nav, const tone_reproductor* eye, 
+// Draw the Planet and all the related infos : name, circle etc..
+void Planet::draw(int hint_ON, Projector* prj, const Navigator * nav, const tone_reproductor* eye, 
 				  int flag_point, int flag_trails, bool stencil)
 {
 	// TEMP -- place in command interface 
@@ -377,14 +377,14 @@ void planet::draw(int hint_ON, Projector* prj, const navigator * nav, const tone
 
 
 	Mat4d mat = mat_local_to_parent;
-	planet * p = parent;
+	Planet * p = parent;
 	while (p!=NULL && p->parent!=NULL)
 		{
 			mat = p->mat_local_to_parent * mat;
 			p = p->parent;
 		}
 
-	// This removed totally the planet shaking bug!!!
+	// This removed totally the Planet shaking bug!!!
 	mat = nav->get_helio_to_eye_mat() * mat;
 
 	// Compute the 2D position and check if in the screen
@@ -398,9 +398,9 @@ void planet::draw(int hint_ON, Projector* prj, const navigator * nav, const tone
 			// Draw the name, and the circle if it's not too close from the body it's turning around
 			// this prevents name overlaping (ie for jupiter satellites)
 			float ang_dist = 300.f*atan(get_ecliptic_pos().length()/get_earth_equ_pos(nav).length())/prj->get_fov();
-			if (ang_dist==0.f) ang_dist = 1.f; // if ang_dist == 0, the planet is sun..
+			if (ang_dist==0.f) ang_dist = 1.f; // if ang_dist == 0, the Planet is sun..
 	    
-			// by putting here, only draw orbit if planet is visible for clarity
+			// by putting here, only draw orbit if Planet is visible for clarity
 			draw_orbit(nav, prj);  // TODO - fade in here also...
 			
 			draw_trail(nav, prj);
@@ -440,12 +440,12 @@ void planet::draw(int hint_ON, Projector* prj, const navigator * nav, const tone
 		}
 }
 
-void planet::draw_hints(const navigator* nav, const Projector* prj)
+void Planet::draw_hints(const Navigator* nav, const Projector* prj)
 {
 
-	//	printf("Out level %f\n", hint_fader.get_interstate());
+	//	printf("Out level %f\n", hint_fader.getInterstate());
 
-	if(!hint_fader.get_interstate()) return;
+	if(!hint_fader.getInterstate()) return;
 
 	prj->set_orthographic_projection();    // 2D coordinate
 
@@ -460,23 +460,23 @@ void planet::draw_hints(const navigator* nav, const Projector* prj)
 	float tmp = 10.f + get_on_screen_size(prj, nav)/sphere_scale/2.f; // Shift for common_name printing
 
 	//	glColor4f(label_color[0], label_color[1], label_color[2],1.f);
-	//	glColor4f(label_color[0], label_color[1], label_color[2],hint_fader.get_interstate());
-	glColor3fv(label_color*hint_fader.get_interstate());
+	//	glColor4f(label_color[0], label_color[1], label_color[2],hint_fader.getInterstate());
+	glColor3fv(label_color*hint_fader.getInterstate());
 	gravity_label ? prj->print_gravity180(planet_name_font, screenPos[0],screenPos[1], scale_str, 1, tmp, tmp) :
 		planet_name_font->print(screenPos[0]+tmp,screenPos[1]+tmp, scale_str);
 
 	// hint disapears smoothly on close view
 	tmp -= 10.f;
 	if (tmp<1) tmp=1;
- 	//glColor4f(label_color[0]/tmp, label_color[1]/tmp, label_color[2]/tmp,hint_fader.get_interstate()/tmp);
-	glColor3fv(label_color*hint_fader.get_interstate()/tmp);
+ 	//glColor4f(label_color[0]/tmp, label_color[1]/tmp, label_color[2]/tmp,hint_fader.getInterstate()/tmp);
+	glColor3fv(label_color*hint_fader.getInterstate()/tmp);
 
 	// Draw the 2D small circle
 	glCircle(screenPos, 8);
 	prj->reset_perspective_projection();		// Restore the other coordinate
 }
 
-void planet::draw_sphere(const Projector* prj, const Mat4d& mat, float screen_sz)
+void Planet::draw_sphere(const Projector* prj, const Mat4d& mat, float screen_sz)
 {
 	// Adapt the number of facets according with the size of the sphere for optimization
 	int nb_facet = (int)(screen_sz * 40/50);	// 40 facets for 1024 pixels diameter on screen
@@ -497,7 +497,7 @@ void planet::draw_sphere(const Projector* prj, const Mat4d& mat, float screen_sz
 
 
 	// Rotate and add an extra half rotation because of the convention in all
-	// planet texture maps where zero deg long. is in the middle of the texture.
+	// Planet texture maps where zero deg long. is in the middle of the texture.
 	prj->sSphere(radius*sphere_scale, nb_facet, nb_facet, mat * Mat4d::zrotation(M_PI/180*(axis_rotation + 180.)));
 
 	glDisable(GL_CULL_FACE);
@@ -505,7 +505,7 @@ void planet::draw_sphere(const Projector* prj, const Mat4d& mat, float screen_sz
 
 }
 
-void planet::draw_halo(const navigator* nav, const Projector* prj, const tone_reproductor* eye)
+void Planet::draw_halo(const Navigator* nav, const Projector* prj, const tone_reproductor* eye)
 {
 	static float cmag;
 	static float rmag;
@@ -538,7 +538,7 @@ void planet::draw_halo(const navigator* nav, const Projector* prj, const tone_re
 
 
 	// Global scaling
-	rmag*=planet::object_scale;
+	rmag*=Planet::object_scale;
 
 	glBlendFunc(GL_ONE, GL_ONE);
 	float screen_r = get_on_screen_size(prj, nav);
@@ -569,7 +569,7 @@ void planet::draw_halo(const navigator* nav, const Projector* prj, const tone_re
 	prj->reset_perspective_projection();		// Restore the other coordinate
 }
 
-void planet::draw_point_halo(const navigator* nav, const Projector* prj, const tone_reproductor* eye)
+void Planet::draw_point_halo(const Navigator* nav, const Projector* prj, const tone_reproductor* eye)
 {
 	static float cmag;
 	static float rmag;
@@ -587,7 +587,7 @@ void planet::draw_point_halo(const navigator* nav, const Projector* prj, const t
 	rmag=1.4f;
 
 	// Global scaling
-	//rmag*=planet::star_scale;
+	//rmag*=Planet::star_scale;
 
 	glBlendFunc(GL_ONE, GL_ONE);
 	float screen_r = get_on_screen_size(prj, nav);
@@ -617,7 +617,7 @@ void planet::draw_point_halo(const navigator* nav, const Projector* prj, const t
 	prj->reset_perspective_projection();		// Restore the other coordinate
 }
 
-void planet::draw_big_halo(const navigator* nav, const Projector* prj, const tone_reproductor* eye)
+void Planet::draw_big_halo(const Navigator* nav, const Projector* prj, const tone_reproductor* eye)
 {
 	glBlendFunc(GL_ONE, GL_ONE);
 	float screen_r = get_on_screen_size(prj, nav);
@@ -651,18 +651,18 @@ void planet::draw_big_halo(const navigator* nav, const Projector* prj, const ton
 	prj->reset_perspective_projection();		// Restore the other coordinate
 }
 
-ring::ring(float _radius, const string& _texname) : radius(_radius), tex(NULL)
+Ring::Ring(float _radius, const string& _texname) : radius(_radius), tex(NULL)
 {
 	tex = new s_texture(_texname,TEX_LOAD_TYPE_PNG_ALPHA);
 }
 
-ring::~ring()
+Ring::~Ring()
 {
 	if (tex) delete tex;
 	tex = NULL;
 }
 
-void ring::draw(const Projector* prj, const Mat4d& mat)
+void Ring::draw(const Projector* prj, const Mat4d& mat)
 {
 	glPushMatrix();
 	glLoadMatrixd(mat);
@@ -686,11 +686,11 @@ void ring::draw(const Projector* prj, const Mat4d& mat)
 }
 
 
-// draw orbital path of planet
-void planet::draw_orbit(const navigator * nav, const Projector* prj)
+// draw orbital path of Planet
+void Planet::draw_orbit(const Navigator * nav, const Projector* prj)
 {
 
-	if(!orbit_fader.get_interstate()) return;
+	if(!orbit_fader.getInterstate()) return;
 
 	Vec3d onscreen;
 
@@ -702,7 +702,7 @@ void planet::draw_orbit(const navigator * nav, const Projector* prj)
 	glDisable(GL_LIGHTING);
 	glDisable(GL_TEXTURE_2D);
 
-	glColor3fv(orbit_color*orbit_fader.get_interstate());
+	glColor3fv(orbit_color*orbit_fader.getInterstate());
 	
 	int on=0;
 	int d;
@@ -714,7 +714,7 @@ void planet::draw_orbit(const navigator * nav, const Projector* prj)
 			d = n;
 		}
 
-		// special case - use current planet position as center vertex so that draws
+		// special case - use current Planet position as center vertex so that draws
 		// on it's orbit all the time (since segmented rather than smooth curve)
 		if( n == ORBIT_SEGMENTS/2 ) {
 
@@ -750,10 +750,10 @@ void planet::draw_orbit(const navigator * nav, const Projector* prj)
 }
 
 
-// draw trail of planet as seen from earth
-void planet::draw_trail(const navigator * nav, const Projector* prj)
+// draw trail of Planet as seen from earth
+void Planet::draw_trail(const Navigator * nav, const Projector* prj)
  {
-	if(!trail_fader.get_interstate()) return;
+	if(!trail_fader.getInterstate()) return;
 
 	Vec3d onscreen1;
 	Vec3d onscreen2;
@@ -766,7 +766,7 @@ void planet::draw_trail(const navigator * nav, const Projector* prj)
 	glDisable(GL_LIGHTING);
 	glDisable(GL_TEXTURE_2D);
 
-	glColor3fv(trail_color*trail_fader.get_interstate());
+	glColor3fv(trail_color*trail_fader.getInterstate());
 	
 	list<TrailPoint>::iterator iter;  
 	list<TrailPoint>::iterator nextiter;
@@ -790,7 +790,7 @@ void planet::draw_trail(const navigator * nav, const Projector* prj)
 		}
 	}
 
-	// draw final segment to finish at current planet position
+	// draw final segment to finish at current Planet position
 	if( !first_point && prj->project_earth_equ_line_check( (*trail.begin()).point, onscreen1, get_earth_equ_pos(nav), onscreen2) ) {
 		glBegin(GL_LINE_STRIP);
 		glVertex3d(onscreen1[0], onscreen1[1], 0);
@@ -807,7 +807,7 @@ void planet::draw_trail(const navigator * nav, const Projector* prj)
 }
 
 // update trail points as needed
-void planet::update_trail(const navigator* nav) {
+void Planet::update_trail(const Navigator* nav) {
 
 	if(!trail_on) return;
 
@@ -857,7 +857,7 @@ void planet::update_trail(const navigator* nav) {
 }
 
 // start accumulating new trail data (clear old data)
-void planet::start_trail(void) {
+void Planet::start_trail(void) {
 	first_point = 1;
 
 	//  printf("trail for %s: %f\n", name.c_str(), re.sidereal_period);
@@ -867,12 +867,12 @@ void planet::start_trail(void) {
 }
 
 // stop accumulating trail data
-void planet::end_trail(void) {
+void Planet::end_trail(void) {
 	trail_on = 0;
 }
 
 
-void planet::update(int delta_time) {
+void Planet::update(int delta_time) {
 
 	hint_fader.update(delta_time);
 	orbit_fader.update(delta_time);

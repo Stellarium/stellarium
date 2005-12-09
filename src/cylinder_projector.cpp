@@ -22,7 +22,7 @@
 #include "cylinder_projector.h"
 
 
-Cylinder_projector::Cylinder_projector(int _screenW, int _screenH, double _fov,
+CylinderProjector::CylinderProjector(int _screenW, int _screenH, double _fov,
 	double _min_fov, double _max_fov) : 
 	Projector(_screenW, _screenH, _fov, _min_fov, _max_fov)
 {
@@ -35,7 +35,7 @@ Cylinder_projector::Cylinder_projector(int _screenW, int _screenH, double _fov,
 							0., 0., 0., 1.);
 }
 
-Cylinder_projector::Cylinder_projector(const Projector& p) : Projector(800, 600, 350.f, 0.001, 350.00001)
+CylinderProjector::CylinderProjector(const Projector& p) : Projector(800, 600, 350.f, 0.001, 350.00001)
 {
 	set_fov(p.get_fov());
 	set_screen_size(p.get_screenW(),p.get_screenH());
@@ -47,7 +47,7 @@ Cylinder_projector::Cylinder_projector(const Projector& p) : Projector(800, 600,
 }
 
 // For a fisheye, ratio is alway = 1
-void Cylinder_projector::set_viewport(int x, int y, int w, int h)
+void CylinderProjector::set_viewport(int x, int y, int w, int h)
 {
 	Projector::set_viewport(x, y, w, h);
 	center.set(vec_viewport[0]+vec_viewport[2]/2,vec_viewport[1]+vec_viewport[3]/2,0);
@@ -55,14 +55,14 @@ void Cylinder_projector::set_viewport(int x, int y, int w, int h)
 
 // Init the viewing matrix, setting the field of view, the clipping planes, and screen ratio
 // The function is a reimplementation of glOrtho
-void Cylinder_projector::init_project_matrix(void)
+void CylinderProjector::init_project_matrix(void)
 {
 	glMatrixMode(GL_PROJECTION);
 	glLoadMatrixd(mat_projection);
     glMatrixMode(GL_MODELVIEW);
 }
 
-void Cylinder_projector::update_openGL(void) const
+void CylinderProjector::update_openGL(void) const
 {
 	glMatrixMode(GL_PROJECTION);
 	glLoadMatrixd(mat_projection);
@@ -70,7 +70,7 @@ void Cylinder_projector::update_openGL(void) const
 	glViewport(vec_viewport[0], vec_viewport[1], vec_viewport[2], vec_viewport[3]);
 }
 
-bool Cylinder_projector::project_custom(const Vec3d& v, Vec3d& win, const Mat4d& mat) const
+bool CylinderProjector::project_custom(const Vec3d& v, Vec3d& win, const Mat4d& mat) const
 {
 	double z;
 	double alpha, delta;
@@ -90,12 +90,12 @@ bool Cylinder_projector::project_custom(const Vec3d& v, Vec3d& win, const Mat4d&
 }
 
 
-void Cylinder_projector::unproject_custom(double x ,double y, Vec3d& v, const Mat4d& mat) const
+void CylinderProjector::unproject_custom(double x ,double y, Vec3d& v, const Mat4d& mat) const
 {
 	unproject(x, y, (mat_projection*mat).inverse(), v);
 }
 
-void Cylinder_projector::unproject(double x, double y, const Mat4d& m, Vec3d& v) const
+void CylinderProjector::unproject(double x, double y, const Mat4d& m, Vec3d& v) const
 {
 	double d = MY_MIN(vec_viewport[2],vec_viewport[3])/2;
 	static double length;
@@ -126,7 +126,7 @@ void Cylinder_projector::unproject(double x, double y, const Mat4d& m, Vec3d& v)
 // Override glVertex3f
 // Here is the main trick for texturing in fisheye mode : The trick is to compute the
 // new coordinate in orthographic projection which will simulate the fisheye projection.
-void Cylinder_projector::sVertex3(double x, double y, double z, const Mat4d& mat) const
+void CylinderProjector::sVertex3(double x, double y, double z, const Mat4d& mat) const
 {
 	Vec3d win;
 	Vec3d v(x,y,z);
@@ -137,7 +137,7 @@ void Cylinder_projector::sVertex3(double x, double y, double z, const Mat4d& mat
 	glVertex3dv(v);
 }
 
-void Cylinder_projector::sSphere(GLdouble radius, GLint slices, GLint stacks, const Mat4d& mat, int orient_inside) const
+void CylinderProjector::sSphere(GLdouble radius, GLint slices, GLint stacks, const Mat4d& mat, int orient_inside) const
 {
 	glPushMatrix();
 	glLoadMatrixd(mat);
@@ -244,7 +244,7 @@ void Cylinder_projector::sSphere(GLdouble radius, GLint slices, GLint stacks, co
 }
 
 // Reimplementation of gluCylinder : glu is overrided for non standard projection
-void Cylinder_projector::sCylinder(GLdouble radius, GLdouble height, GLint slices, GLint stacks,
+void CylinderProjector::sCylinder(GLdouble radius, GLdouble height, GLint slices, GLint stacks,
 const Mat4d& mat, int orient_inside) const
 {
 	glPushMatrix();

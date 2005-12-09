@@ -22,7 +22,7 @@
 #include "sky_localizer.h"
 #include "stellarium.h"
 
-Sky_localizer::Sky_localizer(string _data_dir)
+SkyLocalizer::SkyLocalizer(string _data_dir)
 {
 
 	// load list of sky cultures from disk
@@ -90,12 +90,12 @@ Sky_localizer::Sky_localizer(string _data_dir)
 
 }
 
-Sky_localizer::~Sky_localizer(void) {
+SkyLocalizer::~SkyLocalizer(void) {
 }
 
 
 // call whenever need to initialize with current translations
-void Sky_localizer::init_sky_locales() {
+void SkyLocalizer::init_sky_locales() {
 
 	locale_to_name.clear();
 	name_to_locale.clear();
@@ -112,12 +112,12 @@ void Sky_localizer::init_sky_locales() {
 
 
 // is this a valid culture directory?
-bool Sky_localizer::test_sky_culture_directory(string _culture_dir) {
+bool SkyLocalizer::test_sky_culture_directory(string _culture_dir) {
 	return (dir_to_name[_culture_dir] != "");
 }
 
 // returns newline delimited list of human readable culture names
-string Sky_localizer::get_sky_culture_list(void){
+string SkyLocalizer::get_sky_culture_list(void){
 
 	string cultures;
 	for ( stringHashIter_t iter = name_to_dir.begin(); iter != name_to_dir.end(); ++iter ) {
@@ -127,14 +127,14 @@ string Sky_localizer::get_sky_culture_list(void){
 	return cultures;
 }
 
-string Sky_localizer::convert_directory_to_sky_culture(string _directory){
+string SkyLocalizer::convert_directory_to_sky_culture(string _directory){
 
   return dir_to_name[_directory];
 
 }
 
 
-string Sky_localizer::convert_sky_culture_to_directory(string _name){
+string SkyLocalizer::convert_sky_culture_to_directory(string _name){
 
   return name_to_dir[_name];
 
@@ -144,7 +144,7 @@ string Sky_localizer::convert_sky_culture_to_directory(string _name){
 
 
 // returns newline delimited list of human readable culture names
-string Sky_localizer::get_sky_locale_list(void){
+string SkyLocalizer::get_sky_locale_list(void){
 
 	init_sky_locales();  // make sure up to date translations
 
@@ -159,20 +159,20 @@ string Sky_localizer::get_sky_locale_list(void){
 
 // locale is used by code, locale name is human readable
 // e.g. fra = French
-string Sky_localizer::convert_locale_to_name(string _locale){
+string SkyLocalizer::convert_locale_to_name(string _locale){
 
   return locale_to_name[_locale];
 
 }
 
 
-string Sky_localizer::convert_name_to_locale(string _name){
+string SkyLocalizer::convert_name_to_locale(string _name){
 
   return name_to_locale[_name];
 
 }
 
-string Sky_localizer::clean_sky_locale_name(string _locale) {
+string SkyLocalizer::clean_sky_locale_name(string _locale) {
 #if !defined(MACOSX)
 	// if locale is "system_default" try to use language from 
 	// user's environment locale, otherwise default to English

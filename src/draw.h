@@ -63,7 +63,7 @@ private:
 	bool (Projector::*proj_func)(const Vec3d&, Vec3d&) const;
 	s_font* font;
 	SKY_GRID_TYPE gtype;
-	linear_fader fader;
+	LinearFader fader;
 };
 
 
@@ -95,7 +95,7 @@ private:
 	Vec3f color;
 	Vec3f* points;
 	bool (Projector::*proj_func)(const Vec3d&, Vec3d&) const;
-	linear_fader fader;
+	LinearFader fader;
 	s_font * font;
 };
 
@@ -120,7 +120,7 @@ private:
 	s_font* font;	
 	Vec3f color;
 	string sNorth, sSouth, sEast, sWest;
-	linear_fader fader;
+	LinearFader fader;
 };
 
 // Class which manages the displaying of the Milky Way
@@ -129,7 +129,7 @@ class MilkyWay
 public:
 	MilkyWay(float _radius = 1.);
     virtual ~MilkyWay();
-	void draw(tone_reproductor * eye, const Projector* prj, const navigator* nav) const;
+	void draw(tone_reproductor * eye, const Projector* prj, const Navigator* nav) const;
 	void set_intensity(float _intensity);
 	float get_intensity() { return intensity; };
 	void set_texture(const string& tex_file, bool blend = false);

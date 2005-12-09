@@ -28,7 +28,7 @@
 //								CLASS FUNCTIONS
 ////////////////////////////////////////////////////////////////////////////////
 
-stel_ui::stel_ui(stel_core * _core) :
+stel_ui::stel_ui(StelCore * _core) :
 		baseFont(NULL),
 		courierFont(NULL),
 
@@ -531,7 +531,7 @@ void stel_ui::cb(void)
 	core->nebulas->set_flag_hints( bt_flag_nebula_name->getState() );
 	core->FlagHelp 				= bt_flag_help->getState();
 	help_win->setVisible(core->FlagHelp);
-	core->navigation->set_viewing_mode(bt_flag_equatorial_mode->getState() ? navigator::VIEW_EQUATOR : navigator::VIEW_HORIZON);
+	core->navigation->set_viewing_mode(bt_flag_equatorial_mode->getState() ? Navigator::VIEW_EQUATOR : Navigator::VIEW_HORIZON);
 	core->FlagConfig			= bt_flag_config->getState();
 	if  (core->FlagNight != bt_flag_night->getState())
 	{
@@ -763,7 +763,7 @@ int stel_ui::handle_move(int x, int y)
 			core->navigation->set_flag_traking(0);
 			Vec3d tempvec1, tempvec2;
 			double az1, alt1, az2, alt2;
-			if (core->navigation->get_viewing_mode()==navigator::VIEW_HORIZON)
+			if (core->navigation->get_viewing_mode()==Navigator::VIEW_HORIZON)
 			{
 				core->projection->unproject_local(x,core->screen_H-y, tempvec2);
 				core->projection->unproject_local(previous_x,core->screen_H-previous_y, tempvec1);
@@ -864,7 +864,7 @@ int stel_ui::handle_clic(Uint16 x, Uint16 y, S_GUI_VALUE button, S_GUI_VALUE sta
 			}
 
 			// Left clic -> selection of an object
-			stel_object* tempselect= core->clever_find((int)x, core->screen_H-(int)y);
+			StelObject* tempselect= core->clever_find((int)x, core->screen_H-(int)y);
 
 			// Unselect on second clic on the same object
 			if (core->selected_object!=NULL && core->selected_object==tempselect)
@@ -886,13 +886,13 @@ int stel_ui::handle_clic(Uint16 x, Uint16 y, S_GUI_VALUE button, S_GUI_VALUE sta
 				if (core->navigation->get_flag_traking()) core->navigation->set_flag_lock_equ_pos(1);
 				core->navigation->set_flag_traking(0);
 
-				if (core->selected_object->get_type()==stel_object::STEL_OBJECT_STAR)
+				if (core->selected_object->get_type()==StelObject::STEL_OBJECT_STAR)
 				{
-					core->asterisms->set_selected((Hip_Star*)core->selected_object);
+					core->asterisms->set_selected((HipStar*)core->selected_object);
 
 					// potentially record this action
 					std::ostringstream oss;
-					oss << ((Hip_Star *)core->selected_object)->get_hp_number();
+					oss << ((HipStar *)core->selected_object)->get_hp_number();
 					core->scripts->record_command("select hp " + oss.str());
 
 				}
@@ -901,12 +901,12 @@ int stel_ui::handle_clic(Uint16 x, Uint16 y, S_GUI_VALUE button, S_GUI_VALUE sta
 					core->asterisms->set_selected(NULL);
 				}
 
-				if (core->selected_object->get_type()==stel_object::STEL_OBJECT_PLANET)
+				if (core->selected_object->get_type()==StelObject::STEL_OBJECT_PLANET)
 				{
-					core->selected_planet=(planet*)core->selected_object;
+					core->selected_planet=(Planet*)core->selected_object;
 
 					// potentially record this action
-					core->scripts->record_command("select planet " + ((planet *)core->selected_object)->get_name());
+					core->scripts->record_command("select planet " + ((Planet *)core->selected_object)->get_name());
 
 				}
 				else
@@ -914,7 +914,7 @@ int stel_ui::handle_clic(Uint16 x, Uint16 y, S_GUI_VALUE button, S_GUI_VALUE sta
 					core->selected_planet=NULL;
 				}
 
-				if (core->selected_object->get_type()==stel_object::STEL_OBJECT_NEBULA)
+				if (core->selected_object->get_type()==StelObject::STEL_OBJECT_NEBULA)
 				{
 
 					// potentially record this action
@@ -1328,7 +1328,7 @@ void stel_ui::gui_update_widgets(int delta_time)
 	bt_flag_atmosphere->setState(core->FlagAtmosphere);
 	bt_flag_nebula_name->setState(core->nebulas->get_flag_hints());
 	bt_flag_help->setState(help_win->getVisible());
-	bt_flag_equatorial_mode->setState(core->navigation->get_viewing_mode()==navigator::VIEW_EQUATOR);
+	bt_flag_equatorial_mode->setState(core->navigation->get_viewing_mode()==Navigator::VIEW_EQUATOR);
 	bt_flag_config->setState(config_win->getVisible());
 	bt_flag_night->setState(core->FlagNight);
 	bt_flag_search->setState(search_win->getVisible()); 
@@ -1346,11 +1346,11 @@ void stel_ui::updateInfoSelectString(void)
 	objectInfo = core->selected_object->get_info_string(core->navigation);
 	info_select_txtlbl->setLabel(objectInfo);
 	if (core->FlagShowSelectedObjectInfo) info_select_ctr->setVisible(1);
-	if (core->selected_object->get_type()==stel_object::STEL_OBJECT_NEBULA)
+	if (core->selected_object->get_type()==StelObject::STEL_OBJECT_NEBULA)
 		info_select_txtlbl->setTextColor(core->NebulaLabelColor);
-	if (core->selected_object->get_type()==stel_object::STEL_OBJECT_PLANET)
+	if (core->selected_object->get_type()==StelObject::STEL_OBJECT_PLANET)
 		info_select_txtlbl->setTextColor(core->PlanetNamesColor);
-	if (core->selected_object->get_type()==stel_object::STEL_OBJECT_STAR)
+	if (core->selected_object->get_type()==StelObject::STEL_OBJECT_STAR)
 		info_select_txtlbl->setTextColor(core->selected_object->get_RGB());
 }
 

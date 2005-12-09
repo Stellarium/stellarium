@@ -84,7 +84,7 @@ void ImageMgr::update(int delta_time) {
   }
 }
 
-void ImageMgr::draw(int screenw, int screenh, const navigator * nav, Projector * prj) {
+void ImageMgr::draw(int screenw, int screenh, const Navigator * nav, Projector * prj) {
   for(vector<Image*>::iterator iter = active_images.begin(); iter != active_images.end(); ++iter) {
     (*iter)->draw(screenw, screenh, nav, prj);
   }
