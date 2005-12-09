@@ -306,7 +306,7 @@ void SolarSystem::compute_trans_matrices(double date)
 // Draw all the elements of the solar system
 // We are supposed to be in heliocentric coordinate
 void SolarSystem::draw(Planet* selected, bool hint_ON, Projector * prj, const Navigator * nav, 
-					   const tone_reproductor* eye, bool _gravity_label, 
+					   const ToneReproductor* eye, bool _gravity_label, 
 					   bool flag_point, bool flag_orbits, bool flag_trails)
 {
 

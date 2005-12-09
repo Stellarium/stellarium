@@ -40,9 +40,9 @@ public:
 	int load_common_names(const string& commonNameFile);
 	void load_sci_names(const string& sciNameFile);
     void draw(float star_scale, float star_mag_scale, float twinkle_amount, float maxMagStarName,
-		Vec3f equ_vision, tone_reproductor* _eye, Projector* prj, bool _gravity_label);	// Draw all the stars
+		Vec3f equ_vision, ToneReproductor* _eye, Projector* prj, bool _gravity_label);	// Draw all the stars
     void draw_point(float star_scale, float star_mag_scale, float twinkle_amount, float maxMagStarName,
-		Vec3f equ_vision, tone_reproductor* _eye, Projector* prj, bool _gravity_label);	// Draw all the stars as points
+		Vec3f equ_vision, ToneReproductor* _eye, Projector* prj, bool _gravity_label);	// Draw all the stars as points
     void save(void);                    	// Debug function
 	void set_flag_names(bool b) {names_fader=b;}
 	void set_limiting_mag(float _mag) {limiting_mag=_mag;}

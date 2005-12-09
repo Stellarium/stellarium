@@ -34,7 +34,7 @@ class Meteor
 {
 
  public:
-  Meteor( Projector *proj, Navigator *nav, tone_reproductor* eye, double v);
+  Meteor( Projector *proj, Navigator *nav, ToneReproductor* eye, double v);
   virtual ~Meteor();
   bool update(int delta_time);  // update position
   bool draw(Projector *proj, Navigator* nav);		// Draw the meteor

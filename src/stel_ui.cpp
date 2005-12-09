@@ -28,7 +28,7 @@
 //								CLASS FUNCTIONS
 ////////////////////////////////////////////////////////////////////////////////
 
-stel_ui::stel_ui(StelCore * _core) :
+StelUI::StelUI(StelCore * _core) :
 		baseFont(NULL),
 		courierFont(NULL),
 
@@ -85,7 +85,7 @@ stel_ui::stel_ui(StelCore * _core) :
 }
 
 /**********************************************************************************/
-stel_ui::~stel_ui()
+StelUI::~StelUI()
 {
 	delete desktop; 	desktop = NULL;
 	delete baseFont; 	baseFont = NULL;
@@ -99,7 +99,7 @@ stel_ui::~stel_ui()
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-void stel_ui::init(void)
+void StelUI::init(void)
 {
 	// Load standard font
 	baseFont = new s_font(core->BaseFontSize, core->DataDir + core->BaseFontName);
@@ -172,7 +172,7 @@ void stel_ui::init(void)
 
 	dialog_win = new StdDlgWin(_("Stellarium"));
 	dialog_win->setOpaque(opaqueGUI);
-	dialog_win->setDialogCallback(callback<void>(this, &stel_ui::dialogCallback));
+	dialog_win->setDialogCallback(callback<void>(this, &StelUI::dialogCallback));
 	desktop->addComponent(dialog_win);
 
 	desktop->addComponent(createLicenceWindow());
@@ -185,7 +185,7 @@ void stel_ui::init(void)
 
 
 ////////////////////////////////////////////////////////////////////////////////
-void stel_ui::show_message(string _message, int _time_out)
+void StelUI::show_message(string _message, int _time_out)
 {
 	// draws a message window to display a message to user
 	// if timeout is zero, won't time out
@@ -201,7 +201,7 @@ void stel_ui::show_message(string _message, int _time_out)
 
 ////////////////////////////////////////////////////////////////////////////////
 // Tony
-void stel_ui::gotoObject(void)
+void StelUI::gotoObject(void)
 {
     core->navigation->move_to(core->selected_object->get_earth_equ_pos(core->navigation),
 	                      core->auto_move_duration);
@@ -209,7 +209,7 @@ void stel_ui::gotoObject(void)
 
 #define TOP_BAR_HEIGHT 17
 ////////////////////////////////////////////////////////////////////////////////
-Component* stel_ui::createTopBar(void)
+Component* StelUI::createTopBar(void)
 {
 	top_bar_date_lbl = new Label("-", courierFont);	top_bar_date_lbl->setPos(2,2);
 	top_bar_hour_lbl = new Label("-", courierFont);	top_bar_hour_lbl->setPos(110,2);
@@ -228,7 +228,7 @@ Component* stel_ui::createTopBar(void)
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-void stel_ui::updateTopBar(void)
+void StelUI::updateTopBar(void)
 {
 	top_bar_ctr->setVisible(core->FlagShowTopBar);
 	if (!core->FlagShowTopBar) return;
@@ -279,81 +279,81 @@ void stel_ui::updateTopBar(void)
 #define UI_PADDING 5
 #define UI_BT 25
 #define UI_SCRIPT_BAR 300
-Component* stel_ui::createFlagButtons(void)
+Component* StelUI::createFlagButtons(void)
 {
     int x = 0;
     
 	bt_flag_constellation_draw = new FlagButton(false, NULL, "bt_constellations");
-	bt_flag_constellation_draw->setOnPressCallback(callback<void>(this, &stel_ui::cb));
-	bt_flag_constellation_draw->setOnMouseInOutCallback(callback<void>(this, &stel_ui::cbr));
+	bt_flag_constellation_draw->setOnPressCallback(callback<void>(this, &StelUI::cb));
+	bt_flag_constellation_draw->setOnMouseInOutCallback(callback<void>(this, &StelUI::cbr));
 
 	bt_flag_constellation_name = new FlagButton(false, NULL, "bt_const_names");
-	bt_flag_constellation_name->setOnPressCallback(callback<void>(this, &stel_ui::cb));
-	bt_flag_constellation_name->setOnMouseInOutCallback(callback<void>(this, &stel_ui::cbr));
+	bt_flag_constellation_name->setOnPressCallback(callback<void>(this, &StelUI::cb));
+	bt_flag_constellation_name->setOnMouseInOutCallback(callback<void>(this, &StelUI::cbr));
 
 	bt_flag_constellation_art = new FlagButton(false, NULL, "bt_constart");
-	bt_flag_constellation_art->setOnPressCallback(callback<void>(this, &stel_ui::cb));
-	bt_flag_constellation_art->setOnMouseInOutCallback(callback<void>(this, &stel_ui::cbr));
+	bt_flag_constellation_art->setOnPressCallback(callback<void>(this, &StelUI::cb));
+	bt_flag_constellation_art->setOnMouseInOutCallback(callback<void>(this, &StelUI::cbr));
 
 	bt_flag_azimuth_grid = new FlagButton(false, NULL, "bt_grid");
-	bt_flag_azimuth_grid->setOnPressCallback(callback<void>(this, &stel_ui::cb));
-	bt_flag_azimuth_grid->setOnMouseInOutCallback(callback<void>(this, &stel_ui::cbr));
+	bt_flag_azimuth_grid->setOnPressCallback(callback<void>(this, &StelUI::cb));
+	bt_flag_azimuth_grid->setOnMouseInOutCallback(callback<void>(this, &StelUI::cbr));
 
 	bt_flag_equator_grid = new FlagButton(false, NULL, "bt_grid");
-	bt_flag_equator_grid->setOnPressCallback(callback<void>(this, &stel_ui::cb));
-	bt_flag_equator_grid->setOnMouseInOutCallback(callback<void>(this, &stel_ui::cbr));
+	bt_flag_equator_grid->setOnPressCallback(callback<void>(this, &StelUI::cb));
+	bt_flag_equator_grid->setOnMouseInOutCallback(callback<void>(this, &StelUI::cbr));
 
 	bt_flag_ground = new FlagButton(false, NULL, "bt_ground");
-	bt_flag_ground->setOnPressCallback(callback<void>(this, &stel_ui::cb));
-	bt_flag_ground->setOnMouseInOutCallback(callback<void>(this, &stel_ui::cbr));
+	bt_flag_ground->setOnPressCallback(callback<void>(this, &StelUI::cb));
+	bt_flag_ground->setOnMouseInOutCallback(callback<void>(this, &StelUI::cbr));
 
 	bt_flag_cardinals = new FlagButton(false, NULL, "bt_cardinal");
-	bt_flag_cardinals->setOnPressCallback(callback<void>(this, &stel_ui::cb));
-	bt_flag_cardinals->setOnMouseInOutCallback(callback<void>(this, &stel_ui::cbr));
+	bt_flag_cardinals->setOnPressCallback(callback<void>(this, &StelUI::cb));
+	bt_flag_cardinals->setOnMouseInOutCallback(callback<void>(this, &StelUI::cbr));
 
 	bt_flag_atmosphere = new FlagButton(false, NULL, "bt_atmosphere");
-	bt_flag_atmosphere->setOnPressCallback(callback<void>(this, &stel_ui::cb));
-	bt_flag_atmosphere->setOnMouseInOutCallback(callback<void>(this, &stel_ui::cbr));
+	bt_flag_atmosphere->setOnPressCallback(callback<void>(this, &StelUI::cb));
+	bt_flag_atmosphere->setOnMouseInOutCallback(callback<void>(this, &StelUI::cbr));
 
 	bt_flag_nebula_name = new FlagButton(false, NULL, "bt_nebula");
-	bt_flag_nebula_name->setOnPressCallback(callback<void>(this, &stel_ui::cb));
-	bt_flag_nebula_name->setOnMouseInOutCallback(callback<void>(this, &stel_ui::cbr));
+	bt_flag_nebula_name->setOnPressCallback(callback<void>(this, &StelUI::cb));
+	bt_flag_nebula_name->setOnMouseInOutCallback(callback<void>(this, &StelUI::cbr));
 
 	bt_flag_help = new FlagButton(false, NULL, "bt_help");
-	bt_flag_help->setOnPressCallback(callback<void>(this, &stel_ui::cb));
-	bt_flag_help->setOnMouseInOutCallback(callback<void>(this, &stel_ui::cbr));
+	bt_flag_help->setOnPressCallback(callback<void>(this, &StelUI::cb));
+	bt_flag_help->setOnMouseInOutCallback(callback<void>(this, &StelUI::cbr));
 
 	bt_flag_equatorial_mode = new FlagButton(false, NULL, "bt_follow");
-	bt_flag_equatorial_mode->setOnPressCallback(callback<void>(this, &stel_ui::cb));
-	bt_flag_equatorial_mode->setOnMouseInOutCallback(callback<void>(this, &stel_ui::cbr));
+	bt_flag_equatorial_mode->setOnPressCallback(callback<void>(this, &StelUI::cb));
+	bt_flag_equatorial_mode->setOnMouseInOutCallback(callback<void>(this, &StelUI::cbr));
 
 	bt_flag_config = new FlagButton(false, NULL, "bt_config");
-	bt_flag_config->setOnPressCallback(callback<void>(this, &stel_ui::cb));
-	bt_flag_config->setOnMouseInOutCallback(callback<void>(this, &stel_ui::cbr));
+	bt_flag_config->setOnPressCallback(callback<void>(this, &StelUI::cb));
+	bt_flag_config->setOnMouseInOutCallback(callback<void>(this, &StelUI::cbr));
 
 
 	bt_flag_night = new FlagButton(false, NULL, "bt_night");
-	bt_flag_night->setOnPressCallback(callback<void>(this, &stel_ui::cb));
-	bt_flag_night->setOnMouseInOutCallback(callback<void>(this, &stel_ui::cbr));
+	bt_flag_night->setOnPressCallback(callback<void>(this, &StelUI::cb));
+	bt_flag_night->setOnMouseInOutCallback(callback<void>(this, &StelUI::cbr));
 
 	bt_flag_quit = new FlagButton(true, NULL, "bt_quit");
-	bt_flag_quit->setOnPressCallback(callback<void>(this, &stel_ui::cb));
-	bt_flag_quit->setOnMouseInOutCallback(callback<void>(this, &stel_ui::cbr));
+	bt_flag_quit->setOnPressCallback(callback<void>(this, &StelUI::cb));
+	bt_flag_quit->setOnMouseInOutCallback(callback<void>(this, &StelUI::cbr));
 
 	bt_flag_search = new FlagButton(true, NULL, "bt_search");
-	bt_flag_search->setOnPressCallback(callback<void>(this, &stel_ui::cb));
-	bt_flag_search->setOnMouseInOutCallback(callback<void>(this, &stel_ui::cbr));
+	bt_flag_search->setOnPressCallback(callback<void>(this, &StelUI::cb));
+	bt_flag_search->setOnMouseInOutCallback(callback<void>(this, &StelUI::cbr));
 
 	bt_script = new EditBox();
 	bt_script->setAutoFocus(false);
 	bt_script->setSize(299,24);
-	bt_script->setOnKeyCallback(callback<void>(this, &stel_ui::cbEditScriptKey));
-	bt_script->setOnReturnKeyCallback(callback<void>(this, &stel_ui::cbEditScriptExecute));
-	bt_script->setOnMouseInOutCallback(callback<void>(this, &stel_ui::cbr));
+	bt_script->setOnKeyCallback(callback<void>(this, &StelUI::cbEditScriptKey));
+	bt_script->setOnReturnKeyCallback(callback<void>(this, &StelUI::cbEditScriptExecute));
+	bt_script->setOnMouseInOutCallback(callback<void>(this, &StelUI::cbr));
 
 	bt_flag_goto = new FlagButton(true, NULL, "bt_goto");
-	bt_flag_goto->setOnPressCallback(callback<void>(this, &stel_ui::cb));
-	bt_flag_goto->setOnMouseInOutCallback(callback<void>(this, &stel_ui::cbr));
+	bt_flag_goto->setOnPressCallback(callback<void>(this, &StelUI::cb));
+	bt_flag_goto->setOnMouseInOutCallback(callback<void>(this, &StelUI::cbr));
 
 	bt_flag_ctr = new FilledContainer();
 	bt_flag_ctr->addComponent(bt_flag_constellation_draw); 	bt_flag_constellation_draw->setPos(x,0); x+=UI_BT;
@@ -386,7 +386,7 @@ Component* stel_ui::createFlagButtons(void)
 	bt_flag_ctr->addComponent(bt_flag_help);			bt_flag_help->setPos(x,0); x+=UI_BT;
 	bt_flag_ctr->addComponent(bt_flag_quit);			bt_flag_quit->setPos(x,0); x+=UI_BT;
 
-	bt_flag_ctr->setOnMouseInOutCallback(callback<void>(this, &stel_ui::bt_flag_ctrOnMouseInOut));
+	bt_flag_ctr->setOnMouseInOutCallback(callback<void>(this, &StelUI::bt_flag_ctrOnMouseInOut));
 	bt_flag_ctr->reshape(0, core->screen_H-25, x-1, 25);
 
 	return bt_flag_ctr;
@@ -394,27 +394,27 @@ Component* stel_ui::createFlagButtons(void)
 }
 
 // Create the button panel in the lower right corner
-Component* stel_ui::createTimeControlButtons(void)
+Component* StelUI::createTimeControlButtons(void)
 {
 	bt_dec_time_speed = new LabeledButton("\2\2");
 	bt_dec_time_speed->setSize(24,24);
-	bt_dec_time_speed->setOnPressCallback(callback<void>(this, &stel_ui::bt_dec_time_speed_cb));
-	bt_dec_time_speed->setOnMouseInOutCallback(callback<void>(this, &stel_ui::tcbr));
+	bt_dec_time_speed->setOnPressCallback(callback<void>(this, &StelUI::bt_dec_time_speed_cb));
+	bt_dec_time_speed->setOnMouseInOutCallback(callback<void>(this, &StelUI::tcbr));
 
 	bt_real_time_speed = new LabeledButton("\5");
 	bt_real_time_speed->setSize(24,24);
-	bt_real_time_speed->setOnPressCallback(callback<void>(this, &stel_ui::bt_real_time_speed_cb));
-	bt_real_time_speed->setOnMouseInOutCallback(callback<void>(this, &stel_ui::tcbr));
+	bt_real_time_speed->setOnPressCallback(callback<void>(this, &StelUI::bt_real_time_speed_cb));
+	bt_real_time_speed->setOnMouseInOutCallback(callback<void>(this, &StelUI::tcbr));
 
 	bt_inc_time_speed = new LabeledButton("\3\3");
 	bt_inc_time_speed->setSize(24,24);
-	bt_inc_time_speed->setOnPressCallback(callback<void>(this, &stel_ui::bt_inc_time_speed_cb));
-	bt_inc_time_speed->setOnMouseInOutCallback(callback<void>(this, &stel_ui::tcbr));
+	bt_inc_time_speed->setOnPressCallback(callback<void>(this, &StelUI::bt_inc_time_speed_cb));
+	bt_inc_time_speed->setOnMouseInOutCallback(callback<void>(this, &StelUI::tcbr));
 
 	bt_time_now = new LabeledButton("N");
 	bt_time_now->setSize(24,24);
-	bt_time_now->setOnPressCallback(callback<void>(this, &stel_ui::bt_time_now_cb));
-	bt_time_now->setOnMouseInOutCallback(callback<void>(this, &stel_ui::tcbr));
+	bt_time_now->setOnPressCallback(callback<void>(this, &StelUI::bt_time_now_cb));
+	bt_time_now->setOnMouseInOutCallback(callback<void>(this, &StelUI::tcbr));
 
 	bt_time_control_ctr = new FilledContainer();
 	bt_time_control_ctr->addComponent(bt_dec_time_speed);	bt_dec_time_speed->setPos(0,0);
@@ -422,13 +422,13 @@ Component* stel_ui::createTimeControlButtons(void)
 	bt_time_control_ctr->addComponent(bt_inc_time_speed);	bt_inc_time_speed->setPos(50,0);
 	bt_time_control_ctr->addComponent(bt_time_now);			bt_time_now->setPos(75,0);
 
-	bt_time_control_ctr->setOnMouseInOutCallback(callback<void>(this, &stel_ui::bt_time_control_ctrOnMouseInOut));
+	bt_time_control_ctr->setOnMouseInOutCallback(callback<void>(this, &StelUI::bt_time_control_ctrOnMouseInOut));
 	bt_time_control_ctr->reshape(core->screen_W-4*25-1, core->screen_H-25, 4*25, 25);
 
 	return bt_time_control_ctr;
 }
 
-void stel_ui::bt_dec_time_speed_cb(void)
+void StelUI::bt_dec_time_speed_cb(void)
 {
 	double s = core->get_time_speed();
 	if (s>JD_SECOND) s/=10.;
@@ -438,7 +438,7 @@ void stel_ui::bt_dec_time_speed_cb(void)
 	core->set_time_speed(s);
 }
 
-void stel_ui::bt_inc_time_speed_cb(void)
+void StelUI::bt_inc_time_speed_cb(void)
 {
 	double s = core->get_time_speed();
 	if (s>=JD_SECOND) s*=10.;
@@ -448,12 +448,12 @@ void stel_ui::bt_inc_time_speed_cb(void)
 	core->set_time_speed(s);
 }
 
-void stel_ui::bt_real_time_speed_cb(void)
+void StelUI::bt_real_time_speed_cb(void)
 {
 	core->set_time_speed(JD_SECOND);
 }
 
-void stel_ui::bt_time_now_cb(void)
+void StelUI::bt_time_now_cb(void)
 {
 	core->set_JDay(get_julian_from_sys());
 }
@@ -461,7 +461,7 @@ void stel_ui::bt_time_now_cb(void)
 ////////////////////////////////////////////////////////////////////////////////
 // Script edit command line
 
-void stel_ui::cbEditScriptInOut(void)
+void StelUI::cbEditScriptInOut(void)
 {
 	if (bt_script->getIsMouseOver())
 	{
@@ -469,7 +469,7 @@ void stel_ui::cbEditScriptInOut(void)
     }
 }
 
-void stel_ui::cbEditScriptKey(void)
+void StelUI::cbEditScriptKey(void)
 {
 	if (bt_script->getLastKey() == SDLK_SPACE || bt_script->getLastKey() == SDLK_TAB)
 	{
@@ -483,7 +483,7 @@ void stel_ui::cbEditScriptKey(void)
 	}
 }
 
-void stel_ui::cbEditScriptExecute(void)
+void StelUI::cbEditScriptExecute(void)
 {
 	cout << "Executing command: " << bt_script->getText() << endl;
 	string command_string = bt_script->getText();
@@ -518,7 +518,7 @@ void stel_ui::cbEditScriptExecute(void)
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-void stel_ui::cb(void)
+void StelUI::cb(void)
 {
 	core->constellation_set_flag_lines(bt_flag_constellation_draw->getState());
 	core->constellation_set_flag_names(bt_flag_constellation_name->getState());
@@ -550,19 +550,19 @@ void stel_ui::cb(void)
 	if (!bt_flag_quit->getState()) core->quit();
 }
 
-void stel_ui::bt_flag_ctrOnMouseInOut(void)
+void StelUI::bt_flag_ctrOnMouseInOut(void)
 {
 	if (bt_flag_ctr->getIsMouseOver()) bt_flag_help_lbl->setVisible(1);
 	else bt_flag_help_lbl->setVisible(0);
 }
 
-void stel_ui::bt_time_control_ctrOnMouseInOut(void)
+void StelUI::bt_time_control_ctrOnMouseInOut(void)
 {
 	if (bt_time_control_ctr->getIsMouseOver()) bt_flag_time_control_lbl->setVisible(1);
 	else bt_flag_time_control_lbl->setVisible(0);
 }
 
-void stel_ui::cbr(void)
+void StelUI::cbr(void)
 {
 	if (bt_flag_constellation_draw->getIsMouseOver())
 		bt_flag_help_lbl->setLabel(_("Drawing of the Constellations [C]"));
@@ -604,7 +604,7 @@ void stel_ui::cbr(void)
 		bt_flag_help_lbl->setLabel(_("Goto selected object [SPACE]"));
 }
 
-void stel_ui::tcbr(void)
+void StelUI::tcbr(void)
 {
 	if (bt_dec_time_speed->getIsMouseOver())
 		bt_flag_time_control_lbl->setLabel(_("Decrease Time Speed [J]"));
@@ -617,7 +617,7 @@ void stel_ui::tcbr(void)
 }
 
 // The window containing the info (licence)
-Component* stel_ui::createLicenceWindow(void)
+Component* StelUI::createLicenceWindow(void)
 {
 	licence_txtlbl = new TextLabel(
 string("                 \1   " APP_NAME "  August 2005  \1\n\n") +
@@ -650,7 +650,7 @@ http://www.fsf.org");
 	return licence_win;
 }
 
-Component* stel_ui::createHelpWindow(void)
+Component* StelUI::createHelpWindow(void)
 {
         cerr << "stel_ui::createHelpWindow called" << endl;
 	help_txtlbl = new TextLabel(
@@ -713,18 +713,18 @@ Misc:\n\
 	help_win->reshape(215,70,580,600);
 	help_win->addComponent(help_txtlbl);
 	help_win->setVisible(core->FlagHelp);
-	help_win->setOnHideBtCallback(callback<void>(this, &stel_ui::help_win_hideBtCallback));
+	help_win->setOnHideBtCallback(callback<void>(this, &StelUI::help_win_hideBtCallback));
 	return help_win;
 }
 
-void stel_ui::help_win_hideBtCallback(void)
+void StelUI::help_win_hideBtCallback(void)
 {
 	help_win->setVisible(0);
 }
 
 
 /*******************************************************************/
-void stel_ui::draw(void)
+void StelUI::draw(void)
 {
 	// Special cool text transparency mode
 	glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
@@ -744,7 +744,7 @@ void stel_ui::draw(void)
 }
 
 /*******************************************************************************/
-int stel_ui::handle_move(int x, int y)
+int StelUI::handle_move(int x, int y)
 {
 	// Do not allow use of mouse while script is playing
 	// otherwise script can get confused
@@ -785,7 +785,7 @@ int stel_ui::handle_move(int x, int y)
 }
 
 /*******************************************************************************/
-int stel_ui::handle_clic(Uint16 x, Uint16 y, S_GUI_VALUE button, S_GUI_VALUE state)
+int StelUI::handle_clic(Uint16 x, Uint16 y, S_GUI_VALUE button, S_GUI_VALUE state)
 {
 	// Do not allow use of mouse while script is playing
 	// otherwise script can get confused
@@ -935,7 +935,7 @@ int stel_ui::handle_clic(Uint16 x, Uint16 y, S_GUI_VALUE button, S_GUI_VALUE sta
 
 
 /*******************************************************************************/
-int stel_ui::handle_keys(Uint16 key, S_GUI_VALUE state)
+int StelUI::handle_keys(Uint16 key, S_GUI_VALUE state)
 {
 
 	if (desktop->onKey(key, state))
@@ -1290,7 +1290,7 @@ int stel_ui::handle_keys(Uint16 key, S_GUI_VALUE state)
 
 
 // Update changing values
-void stel_ui::gui_update_widgets(int delta_time)
+void StelUI::gui_update_widgets(int delta_time)
 {
 	updateTopBar();
 
@@ -1339,7 +1339,7 @@ void stel_ui::gui_update_widgets(int delta_time)
 
 
 // Update the infos about the selected object in the TextLabel widget
-void stel_ui::updateInfoSelectString(void)
+void StelUI::updateInfoSelectString(void)
 {
 	string objectInfo = "";
 	
@@ -1354,7 +1354,7 @@ void stel_ui::updateInfoSelectString(void)
 		info_select_txtlbl->setTextColor(core->selected_object->get_RGB());
 }
 
-void stel_ui::setTitleObservatoryName(const string& name)
+void StelUI::setTitleObservatoryName(const string& name)
 {
 	if (name == "")
 		top_bar_appName_lbl->setLabel(APP_NAME);
@@ -1367,7 +1367,7 @@ void stel_ui::setTitleObservatoryName(const string& name)
 	top_bar_appName_lbl->setPos(core->screen_W/2-top_bar_appName_lbl->getSizex()/2,2);
 }
 
-string stel_ui::getTitleWithAltitude(void)
+string StelUI::getTitleWithAltitude(void)
 {
 	std::ostringstream oss;
 	oss << core->observatory->get_name() << " @ " << core->observatory->get_altitude() << "m";

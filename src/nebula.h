@@ -67,8 +67,8 @@ public:
     bool read(const string&);
     bool read_NGC(char *record);
     bool read_messier_texture(const string&);
-	void draw_tex(const Projector* prj, tone_reproductor* eye, bool bright_nebulae);
-	void draw_no_tex(const Projector* prj, const Navigator * nav, tone_reproductor* eye);
+	void draw_tex(const Projector* prj, ToneReproductor* eye, bool bright_nebulae);
+	void draw_no_tex(const Projector* prj, const Navigator * nav, ToneReproductor* eye);
     void draw_name(int hint_ON, const Projector* prj);
     void draw_circle(const Projector* prj, const Navigator * nav);
     string get_name() { return name; };

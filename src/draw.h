@@ -129,7 +129,7 @@ class MilkyWay
 public:
 	MilkyWay(float _radius = 1.);
     virtual ~MilkyWay();
-	void draw(tone_reproductor * eye, const Projector* prj, const Navigator* nav) const;
+	void draw(ToneReproductor * eye, const Projector* prj, const Navigator* nav) const;
 	void set_intensity(float _intensity);
 	float get_intensity() { return intensity; };
 	void set_texture(const string& tex_file, bool blend = false);

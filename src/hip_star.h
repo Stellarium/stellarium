@@ -79,7 +79,7 @@ private:
 	static float star_scale;
 	static float star_mag_scale;
 	static float names_brightness;
-	static tone_reproductor* eye;
+	static ToneReproductor* eye;
 	static Projector* proj;
 	static bool gravity_label;
 	static Vec3f circle_color, label_color;
