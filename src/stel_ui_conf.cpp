@@ -22,7 +22,7 @@
 
 using namespace s_gui;
 
-Component* stel_ui::createConfigWindow(void)
+Component* StelUI::createConfigWindow(void)
 {
 	config_win = new StdBtWin(_("Configuration"));
 	config_win->setOpaque(opaqueGUI);
@@ -45,31 +45,31 @@ Component* stel_ui::createConfigWindow(void)
 	tab_render->addComponent(pstar);
 
 	stars_cbx = new LabeledCheckBox(core->FlagStars, _("Stars"));
-	stars_cbx->setOnPressCallback(callback<void>(this, &stel_ui::updateConfigVariables));
+	stars_cbx->setOnPressCallback(callback<void>(this, &StelUI::updateConfigVariables));
 	tab_render->addComponent(stars_cbx);
 	stars_cbx->setPos(x,y); y+=15;
 
 	star_names_cbx = new LabeledCheckBox(core->FlagStarName, _("Star Names. Up to mag :"));
-	star_names_cbx->setOnPressCallback(callback<void>(this, &stel_ui::updateConfigVariables));
+	star_names_cbx->setOnPressCallback(callback<void>(this, &StelUI::updateConfigVariables));
 	tab_render->addComponent(star_names_cbx);
 	star_names_cbx->setPos(x,y);
 
 	max_mag_star_name = new FloatIncDec(courierFont, tex_up, tex_down, -1.5, 9,
 		core->MaxMagStarName, 0.5);
-	max_mag_star_name->setOnPressCallback(callback<void>(this, &stel_ui::updateConfigVariables));
+	max_mag_star_name->setOnPressCallback(callback<void>(this, &StelUI::updateConfigVariables));
 	tab_render->addComponent(max_mag_star_name);
 	max_mag_star_name->setPos(x + 220,y);
 
 	y+=15;
 
 	star_twinkle_cbx = new LabeledCheckBox(core->FlagStarTwinkle, _("Star Twinkle. Amount :"));
-	star_twinkle_cbx->setOnPressCallback(callback<void>(this, &stel_ui::updateConfigVariables));
+	star_twinkle_cbx->setOnPressCallback(callback<void>(this, &StelUI::updateConfigVariables));
 	tab_render->addComponent(star_twinkle_cbx);
 	star_twinkle_cbx->setPos(x,y);
 
 	star_twinkle_amount = new FloatIncDec(courierFont, tex_up, tex_down, 0, 0.6,
 		core->StarTwinkleAmount, 0.1);
-	star_twinkle_amount->setOnPressCallback(callback<void>(this, &stel_ui::updateConfigVariables));
+	star_twinkle_amount->setOnPressCallback(callback<void>(this, &StelUI::updateConfigVariables));
 	tab_render->addComponent(star_twinkle_amount);
 	star_twinkle_amount->setPos(x + 220,y);
 
@@ -80,17 +80,17 @@ Component* stel_ui::createConfigWindow(void)
 	tab_render->addComponent(pconstell);
 
 	constellation_cbx = new LabeledCheckBox(false, _("Constellations"));
-	constellation_cbx->setOnPressCallback(callback<void>(this, &stel_ui::updateConfigVariables));
+	constellation_cbx->setOnPressCallback(callback<void>(this, &StelUI::updateConfigVariables));
 	tab_render->addComponent(constellation_cbx);
 	constellation_cbx->setPos(x,y); y+=15;
 
 	constellation_name_cbx = new LabeledCheckBox(false, _("Constellations Names"));
-	constellation_name_cbx->setOnPressCallback(callback<void>(this, &stel_ui::updateConfigVariables));
+	constellation_name_cbx->setOnPressCallback(callback<void>(this, &StelUI::updateConfigVariables));
 	tab_render->addComponent(constellation_name_cbx);
 	constellation_name_cbx->setPos(x,y); y+=15;
 
 	sel_constellation_cbx = new LabeledCheckBox(false, _("Selected Constellation Only"));
-	sel_constellation_cbx->setOnPressCallback(callback<void>(this, &stel_ui::updateConfigVariables));
+	sel_constellation_cbx->setOnPressCallback(callback<void>(this, &StelUI::updateConfigVariables));
 	tab_render->addComponent(sel_constellation_cbx);
 	sel_constellation_cbx->setPos(x,y);
 
@@ -103,13 +103,13 @@ Component* stel_ui::createConfigWindow(void)
 	y+=15;
 
 	nebulas_names_cbx = new LabeledCheckBox(false, _("Nebulas Names. Up to mag :"));
-	nebulas_names_cbx->setOnPressCallback(callback<void>(this, &stel_ui::updateConfigVariables));
+	nebulas_names_cbx->setOnPressCallback(callback<void>(this, &StelUI::updateConfigVariables));
 	tab_render->addComponent(nebulas_names_cbx);
 	nebulas_names_cbx->setPos(x,y);
 
 	max_mag_nebula_name = new FloatIncDec(courierFont, tex_up, tex_down, 0, 12,
 		core->MaxMagNebulaName, 0.5);
-	max_mag_nebula_name->setOnPressCallback(callback<void>(this, &stel_ui::updateConfigVariables));
+	max_mag_nebula_name->setOnPressCallback(callback<void>(this, &StelUI::updateConfigVariables));
 	tab_render->addComponent(max_mag_nebula_name);
 	max_mag_nebula_name->setPos(x + 220,y);
 
@@ -120,19 +120,19 @@ Component* stel_ui::createConfigWindow(void)
 	tab_render->addComponent(pplan);
 
 	planets_cbx = new LabeledCheckBox(false, _("Planets"));
-	planets_cbx->setOnPressCallback(callback<void>(this, &stel_ui::updateConfigVariables2));
+	planets_cbx->setOnPressCallback(callback<void>(this, &StelUI::updateConfigVariables2));
 	tab_render->addComponent(planets_cbx);
 	planets_cbx->setPos(x,y);
 
 	moon_x4_cbx = new LabeledCheckBox(false, _("Moon Scale"));
-	moon_x4_cbx->setOnPressCallback(callback<void>(this, &stel_ui::updateConfigVariables));
+	moon_x4_cbx->setOnPressCallback(callback<void>(this, &StelUI::updateConfigVariables));
 	tab_render->addComponent(moon_x4_cbx);
 	moon_x4_cbx->setPos(x + 150,y);
 
 	y+=15;
 
 	planets_hints_cbx = new LabeledCheckBox(false, _("Planets Hints"));
-	planets_hints_cbx->setOnPressCallback(callback<void>(this, &stel_ui::updateConfigVariables));
+	planets_hints_cbx->setOnPressCallback(callback<void>(this, &StelUI::updateConfigVariables));
 	tab_render->addComponent(planets_hints_cbx);
 	planets_hints_cbx->setPos(x,y);
 
@@ -143,22 +143,22 @@ Component* stel_ui::createConfigWindow(void)
 	tab_render->addComponent(pgrid);
 
 	equator_grid_cbx = new LabeledCheckBox(false, _("Equatorial Grid"));
-	equator_grid_cbx->setOnPressCallback(callback<void>(this, &stel_ui::updateConfigVariables));
+	equator_grid_cbx->setOnPressCallback(callback<void>(this, &StelUI::updateConfigVariables));
 	tab_render->addComponent(equator_grid_cbx);
 	equator_grid_cbx->setPos(x,y); y+=15;
 
 	azimuth_grid_cbx = new LabeledCheckBox(false, _("Azimuthal Grid"));
-	azimuth_grid_cbx->setOnPressCallback(callback<void>(this, &stel_ui::updateConfigVariables));
+	azimuth_grid_cbx->setOnPressCallback(callback<void>(this, &StelUI::updateConfigVariables));
 	tab_render->addComponent(azimuth_grid_cbx);
 	azimuth_grid_cbx->setPos(x,y); y-=15;
 
 	equator_cbx = new LabeledCheckBox(false, _("Equator Line"));
-	equator_cbx->setOnPressCallback(callback<void>(this, &stel_ui::updateConfigVariables));
+	equator_cbx->setOnPressCallback(callback<void>(this, &StelUI::updateConfigVariables));
 	tab_render->addComponent(equator_cbx);
 	equator_cbx->setPos(x + 150,y); y+=15;
 
 	ecliptic_cbx = new LabeledCheckBox(false, _("Ecliptic Line"));
-	ecliptic_cbx->setOnPressCallback(callback<void>(this, &stel_ui::updateConfigVariables));
+	ecliptic_cbx->setOnPressCallback(callback<void>(this, &StelUI::updateConfigVariables));
 	tab_render->addComponent(ecliptic_cbx);
 	ecliptic_cbx->setPos(x + 150,y);
 
@@ -169,27 +169,27 @@ Component* stel_ui::createConfigWindow(void)
 	tab_render->addComponent(pground);
 
 	ground_cbx = new LabeledCheckBox(false, _("Ground"));
-	ground_cbx->setOnPressCallback(callback<void>(this, &stel_ui::updateConfigVariables));
+	ground_cbx->setOnPressCallback(callback<void>(this, &StelUI::updateConfigVariables));
 	tab_render->addComponent(ground_cbx);
 	ground_cbx->setPos(x,y);
 
 	cardinal_cbx = new LabeledCheckBox(false, _("Cardinal Points"));
-	cardinal_cbx->setOnPressCallback(callback<void>(this, &stel_ui::updateConfigVariables));
+	cardinal_cbx->setOnPressCallback(callback<void>(this, &StelUI::updateConfigVariables));
 	tab_render->addComponent(cardinal_cbx);
 	cardinal_cbx->setPos(x + 150,y); y+=15;
 
 	atmosphere_cbx = new LabeledCheckBox(false, _("Atmosphere"));
-	atmosphere_cbx->setOnPressCallback(callback<void>(this, &stel_ui::updateConfigVariables));
+	atmosphere_cbx->setOnPressCallback(callback<void>(this, &StelUI::updateConfigVariables));
 	tab_render->addComponent(atmosphere_cbx);
 	atmosphere_cbx->setPos(x,y);
 
 	fog_cbx = new LabeledCheckBox(false, _("Fog"));
-	fog_cbx->setOnPressCallback(callback<void>(this, &stel_ui::updateConfigVariables));
+	fog_cbx->setOnPressCallback(callback<void>(this, &StelUI::updateConfigVariables));
 	tab_render->addComponent(fog_cbx);
 	fog_cbx->setPos(x + 150,y); y+=22;
 
 	LabeledButton* render_save_bt = new LabeledButton(_("Save as default"));
-	render_save_bt->setOnPressCallback(callback<void>(this, &stel_ui::saveRenderOptions));
+	render_save_bt->setOnPressCallback(callback<void>(this, &StelUI::saveRenderOptions));
 	tab_render->addComponent(render_save_bt);
 	render_save_bt->setPos(120,y+22);
 	render_save_bt->setSize(170,25); y+=20;
@@ -205,7 +205,7 @@ Component* stel_ui::createConfigWindow(void)
 	tab_time->addComponent(tclbl);
 
 	time_current = new Time_item(courierFont, tex_up, tex_down);
-	time_current->setOnChangeTimeCallback(callback<void>(this, &stel_ui::setCurrentTimeFromConfig));
+	time_current->setOnChangeTimeCallback(callback<void>(this, &StelUI::setCurrentTimeFromConfig));
 	tab_time->addComponent(time_current);
 	time_current->setPos(50,y); y+=80;
 
@@ -246,8 +246,8 @@ Component* stel_ui::createConfigWindow(void)
 	s_texture *pointertex = new s_texture("pointeur1");
 	s_texture *citytex = new s_texture("city");
 	earth_map = new MapPicture(earth, pointertex, citytex, x,y,tab_location->getSizex()-10, 250);
-	earth_map->setOnPressCallback(callback<void>(this, &stel_ui::setObserverPositionFromMap));
-	earth_map->setOnNearestCityCallback(callback<void>(this, &stel_ui::setCityFromMap));
+	earth_map->setOnPressCallback(callback<void>(this, &StelUI::setObserverPositionFromMap));
+	earth_map->setOnNearestCityCallback(callback<void>(this, &StelUI::setCityFromMap));
 	tab_location->addComponent(earth_map);
 	y+=earth_map->getSizey();
 	earth_map->set_font(core->MapFontSize, core->DataDir + core->BaseFontName);
@@ -269,7 +269,7 @@ Component* stel_ui::createConfigWindow(void)
 	long_incdec	= new FloatIncDec(courierFont, tex_up, tex_down, -180, 180, 0, 1.f/60);
 	long_incdec->setSizex(135);
 	long_incdec->setFormat(FORMAT_LONGITUDE);
-	long_incdec->setOnPressCallback(callback<void>(this, &stel_ui::setObserverPositionFromIncDec));
+	long_incdec->setOnPressCallback(callback<void>(this, &StelUI::setObserverPositionFromIncDec));
 	long_incdec->setPos(100,y+40);
 
 	Label * lbllat = new Label(_("Latitude : "));
@@ -277,18 +277,18 @@ Component* stel_ui::createConfigWindow(void)
 	lat_incdec	= new FloatIncDec(courierFont, tex_up, tex_down, -90, 90, 0, 1.f/60);
 	lat_incdec->setFormat(FORMAT_LATITUDE);
 	lat_incdec->setSizex(135);
-	lat_incdec->setOnPressCallback(callback<void>(this, &stel_ui::setObserverPositionFromIncDec));
+	lat_incdec->setOnPressCallback(callback<void>(this, &StelUI::setObserverPositionFromIncDec));
 	lat_incdec->setPos(100,y+60);
 
 	Label * lblalt = new Label(_("Altitude : "));
 	lblalt->setPos(20, y+81);
 	alt_incdec	= new IntIncDec(courierFont, tex_up, tex_down, 0, 2000, 0, 10);
 	alt_incdec->setSizex(135);
-	alt_incdec->setOnPressCallback(callback<void>(this, &stel_ui::setObserverPositionFromIncDec));
+	alt_incdec->setOnPressCallback(callback<void>(this, &StelUI::setObserverPositionFromIncDec));
 	alt_incdec->setPos(100,y+80);
 
 	LabeledButton* location_save_bt = new LabeledButton(_("Save location"));
-	location_save_bt->setOnPressCallback(callback<void>(this, &stel_ui::saveObserverPosition));
+	location_save_bt->setOnPressCallback(callback<void>(this, &StelUI::saveObserverPosition));
 	location_save_bt->setPos(250,y+70);
 	location_save_bt->setSize(120,25);
 
@@ -316,12 +316,12 @@ Component* stel_ui::createConfigWindow(void)
 	x=50; y+=20;
 
 	fisheye_projection_cbx = new LabeledCheckBox(core->projection->get_type()==Projector::FISHEYE_PROJECTOR, _("Fisheye Projection Mode"));
-	fisheye_projection_cbx->setOnPressCallback(callback<void>(this, &stel_ui::updateVideoVariables));
+	fisheye_projection_cbx->setOnPressCallback(callback<void>(this, &StelUI::updateVideoVariables));
 	tab_video->addComponent(fisheye_projection_cbx);
 	fisheye_projection_cbx->setPos(x,y); y+=15;
 
 	disk_viewport_cbx = new LabeledCheckBox(core->projection->get_viewport_type()==Projector::DISK, _("Disk Viewport"));
-	disk_viewport_cbx->setOnPressCallback(callback<void>(this, &stel_ui::updateVideoVariables));
+	disk_viewport_cbx->setOnPressCallback(callback<void>(this, &StelUI::updateVideoVariables));
 	tab_video->addComponent(disk_viewport_cbx);
 	disk_viewport_cbx->setPos(x,y); y+=35;
 
@@ -364,7 +364,7 @@ Component* stel_ui::createConfigWindow(void)
 	y+=80;
 
 	LabeledButton* video_save_bt = new LabeledButton(_("Save as default"));
-	video_save_bt->setOnPressCallback(callback<void>(this, &stel_ui::setVideoOption));
+	video_save_bt->setOnPressCallback(callback<void>(this, &StelUI::setVideoOption));
 	tab_video->addComponent(video_save_bt);
 	video_save_bt->setPos(120,y+22);
 	video_save_bt->setSize(170,25); y+=20;
@@ -386,7 +386,7 @@ Component* stel_ui::createConfigWindow(void)
 	landscape_sl->adjustSize();
 	sprintf(vs, "%s", core->observatory->get_landscape_name().c_str());
 	landscape_sl->setValue(vs);
-	landscape_sl->setOnPressCallback(callback<void>(this, &stel_ui::setLandscape));
+	landscape_sl->setOnPressCallback(callback<void>(this, &StelUI::setLandscape));
 	tab_landscapes->addComponent(landscape_sl);
 
 	y+=150;	
@@ -406,12 +406,12 @@ Component* stel_ui::createConfigWindow(void)
 	config_tab_ctr->addTab(tab_video, _("Video"));
 	config_tab_ctr->addTab(tab_render, _("Rendering"));
 	config_win->addComponent(config_tab_ctr);
-	config_win->setOnHideBtCallback(callback<void>(this, &stel_ui::config_win_hideBtCallback));
+	config_win->setOnHideBtCallback(callback<void>(this, &StelUI::config_win_hideBtCallback));
 
 	return config_win;
 }
 
-void stel_ui::load_cities(const string & fileName)
+void StelUI::load_cities(const string & fileName)
 {
 	string name, state, country;
 	float time;
@@ -494,7 +494,7 @@ void stel_ui::load_cities(const string & fileName)
 
 // Search window
 
-Component* stel_ui::createSearchWindow(void)
+Component* StelUI::createSearchWindow(void)
 {
 	// The current drawing position
 	int xi,yi;
@@ -535,8 +535,8 @@ Component* stel_ui::createSearchWindow(void)
 	tab_stars->addComponent(lblstars2);
 
 	star_edit = new EditBox("");
-	star_edit->setOnReturnKeyCallback(callback<void>(this, &stel_ui::doStarSearch));
-	star_edit->setOnAutoCompleteCallback(callback<void>(this, &stel_ui::showStarAutoComplete));
+	star_edit->setOnReturnKeyCallback(callback<void>(this, &StelUI::doStarSearch));
+	star_edit->setOnAutoCompleteCallback(callback<void>(this, &StelUI::showStarAutoComplete));
 	tab_stars->addComponent(star_edit);
 	star_edit->setPos(x+100,y);
 	star_edit->setSize(170,25);
@@ -558,8 +558,8 @@ Component* stel_ui::createSearchWindow(void)
 	tab_constellations->addComponent(lblconst2);
 
 	constellation_edit = new EditBox("");
-	constellation_edit->setOnReturnKeyCallback(callback<void>(this, &stel_ui::doConstellationSearch));
-	constellation_edit->setOnAutoCompleteCallback(callback<void>(this, &stel_ui::showConstellationAutoComplete));
+	constellation_edit->setOnReturnKeyCallback(callback<void>(this, &StelUI::doConstellationSearch));
+	constellation_edit->setOnAutoCompleteCallback(callback<void>(this, &StelUI::showConstellationAutoComplete));
 	tab_constellations->addComponent(constellation_edit);
 	constellation_edit->setPos(x+100,y);
 	constellation_edit->setSize(170,25);
@@ -581,7 +581,7 @@ Component* stel_ui::createSearchWindow(void)
 	tab_nebula->addComponent(lblnebula2);
 
 	nebula_edit = new EditBox("");
-	nebula_edit->setOnReturnKeyCallback(callback<void>(this, &stel_ui::doNebulaSearch));
+	nebula_edit->setOnReturnKeyCallback(callback<void>(this, &StelUI::doNebulaSearch));
 	tab_nebula->addComponent(nebula_edit);
 	nebula_edit->setPos(x+100,y);
 	nebula_edit->setSize(170,25);
@@ -617,7 +617,7 @@ Component* stel_ui::createSearchWindow(void)
 	listBox = new ListBox(6);
 	listBox->setPos(60,40);
 	listBox->setSizex(200);
-	listBox->setOnChangeCallback(callback<void>(this, &stel_ui::listBoxChanged));
+	listBox->setOnChangeCallback(callback<void>(this, &StelUI::listBoxChanged));
 	tab_example->addComponent(listBox);
 
 	// example editbox
@@ -630,25 +630,25 @@ Component* stel_ui::createSearchWindow(void)
 	LabeledButton *button1 = new LabeledButton("MsgBox 1");
 	button1->setPos(20,220);
 	button1->setSize(80,25);
-	button1->setOnPressCallback(callback<void>(this, &stel_ui::msgbox1));
+	button1->setOnPressCallback(callback<void>(this, &StelUI::msgbox1));
 	tab_example->addComponent(button1);
 
 	LabeledButton *button2 = new LabeledButton("MsgBox 2");
 	button2->setPos(115,220);
 	button2->setSize(80,25);
-	button2->setOnPressCallback(callback<void>(this, &stel_ui::msgbox2));
+	button2->setOnPressCallback(callback<void>(this, &StelUI::msgbox2));
 	tab_example->addComponent(button2);
 
 	LabeledButton *button3 = new LabeledButton("MsgBox 3");
 	button3->setPos(205,220);
 	button3->setSize(80,25);
-	button3->setOnPressCallback(callback<void>(this, &stel_ui::msgbox3));
+	button3->setOnPressCallback(callback<void>(this, &StelUI::msgbox3));
 	tab_example->addComponent(button3);
 
 	LabeledButton *button4 = new LabeledButton("Inputbox");
 	button4->setPos(300,220);
 	button4->setSize(80,25);
-	button4->setOnPressCallback(callback<void>(this, &stel_ui::inputbox1));
+	button4->setOnPressCallback(callback<void>(this, &StelUI::inputbox1));
 	tab_example->addComponent(button4);
 
     // Planets
@@ -668,8 +668,8 @@ Component* stel_ui::createSearchWindow(void)
 	tab_planets->addComponent(lblplanet2);
 
 	planet_edit = new EditBox("");
-	planet_edit->setOnReturnKeyCallback(callback<void>(this, &stel_ui::doPlanetSearch));
-	planet_edit->setOnAutoCompleteCallback(callback<void>(this, &stel_ui::showPlanetAutoComplete));
+	planet_edit->setOnReturnKeyCallback(callback<void>(this, &StelUI::doPlanetSearch));
+	planet_edit->setOnAutoCompleteCallback(callback<void>(this, &StelUI::showPlanetAutoComplete));
 	tab_planets->addComponent(planet_edit);
 	planet_edit->setPos(x+100,y);
 	planet_edit->setSize(170,25);
@@ -683,36 +683,36 @@ Component* stel_ui::createSearchWindow(void)
 	//search_tab_ctr->addTab(tab_example, _("Widgets"));
     search_win->addComponent(search_tab_ctr);
 	search_win->addComponent(lblSearchMessage);
-	search_win->setOnHideBtCallback(callback<void>(this, &stel_ui::search_win_hideBtCallback));
+	search_win->setOnHideBtCallback(callback<void>(this, &StelUI::search_win_hideBtCallback));
 
 	return search_win;
 
 }
 
-void stel_ui::msgbox1(void)
+void StelUI::msgbox1(void)
 {
 	dialog_win->MessageBox("Stellarium",string("This is a 1 button message (OK only)\nWith an Alert Icon\nAnd an extra line"), 
 		BT_OK + BT_ICON_ALERT, "1 button test");
 }
 
-void stel_ui::msgbox2(void)
+void StelUI::msgbox2(void)
 {
 	dialog_win->MessageBox("Stellarium","This is a 2 button message (OK & CANCEL)\nWith a Question Icon", 
 		BT_OK + BT_CANCEL + BT_ICON_QUESTION, "2 button test");
 }
 
-void stel_ui::msgbox3(void)
+void StelUI::msgbox3(void)
 {
 	dialog_win->MessageBox("Stellarium","This is a 2 button message (OK & CANCEL)\nWith a Blank Icon", 
 		BT_OK + BT_CANCEL + BT_ICON_BLANK, "2 button test");
 }
 
-void stel_ui::inputbox1(void)
+void StelUI::inputbox1(void)
 {
 	dialog_win->InputBox("Stellarium","Input a string into the EditBox class below.", "input test");
 }
 
-void stel_ui::dialogCallback(void)
+void StelUI::dialogCallback(void)
 {
 	string lastID = dialog_win->getLastID();
 	int lastButton = dialog_win->getLastButton();
@@ -741,7 +741,7 @@ void stel_ui::dialogCallback(void)
 	}		
 }
 
-void stel_ui::listBoxChanged(void)
+void StelUI::listBoxChanged(void)
 {
 	int value = listBox->getValue();
 	string objectName = listBox->getItem(value);
@@ -750,13 +750,13 @@ void stel_ui::listBoxChanged(void)
 	doSearchCommand(command, error);
 }
 
-void stel_ui::hideSearchMessage(void)
+void StelUI::hideSearchMessage(void)
 {
        lblSearchMessage->setLabel("");
        lblSearchMessage->adjustSize();
 }
 
-void stel_ui::showSearchMessage(string _message)
+void StelUI::showSearchMessage(string _message)
 {
        lblSearchMessage->setLabel(_message);
        lblSearchMessage->adjustSize();
@@ -765,7 +765,7 @@ void stel_ui::showSearchMessage(string _message)
        lblSearchMessage->setPos((x1-x2)/2,search_win->getSizey()-17);
 }
 
-void stel_ui::doSearchCommand(string _command, string _error)
+void StelUI::doSearchCommand(string _command, string _error)
 {
 	if(!core->commander->execute_command(_command))
         return;
@@ -779,7 +779,7 @@ void stel_ui::doSearchCommand(string _command, string _error)
         showSearchMessage(_error);
 }
 
-void stel_ui::doNebulaSearch(void)
+void StelUI::doNebulaSearch(void)
 {
     string objectName = nebula_edit->getText();
     string originalName = objectName;
@@ -797,7 +797,7 @@ void stel_ui::doNebulaSearch(void)
     nebula_edit->clearText();
 }
 
-void stel_ui::doConstellationSearch(void)
+void StelUI::doConstellationSearch(void)
 {
     string rawObjectName = constellation_edit->getText();
 
@@ -816,12 +816,12 @@ void stel_ui::doConstellationSearch(void)
 	constellation_edit->clearText();
 }
 
-void stel_ui::showConstellationAutoComplete(void)
+void StelUI::showConstellationAutoComplete(void)
 {
     showSearchMessage(constellation_edit->getAutoCompleteOptions());
 }
 
-void stel_ui::doStarSearch(void)
+void StelUI::doStarSearch(void)
 {
     string objectName = star_edit->getText();
     string originalName = objectName;
@@ -849,12 +849,12 @@ void stel_ui::doStarSearch(void)
     star_edit->clearText();
 }
 
-void stel_ui::showStarAutoComplete(void)
+void StelUI::showStarAutoComplete(void)
 {
     showSearchMessage(star_edit->getAutoCompleteOptions());
 }
 
-void stel_ui::doPlanetSearch(void)
+void StelUI::doPlanetSearch(void)
 {
     string objectName = planet_edit->getText();
     string command = string("select planet " + objectName);
@@ -865,12 +865,12 @@ void stel_ui::doPlanetSearch(void)
 	doSearchCommand(command, error);
 }
 
-void stel_ui::showPlanetAutoComplete(void)
+void StelUI::showPlanetAutoComplete(void)
 {
     showSearchMessage(planet_edit->getAutoCompleteOptions());
 }
 
-void stel_ui::updateConfigVariables(void)
+void StelUI::updateConfigVariables(void)
 {
 	core->commander->execute_command("flag stars ", stars_cbx->getState());
 	core->commander->execute_command("flag star_names ", star_names_cbx->getState());
@@ -894,18 +894,18 @@ void stel_ui::updateConfigVariables(void)
 	core->commander->execute_command("flag fog ", fog_cbx->getState());
 }
 
-void stel_ui::updateConfigVariables2(void)
+void StelUI::updateConfigVariables2(void)
 {
 	core->commander->execute_command("flag planets ", planets_cbx->getState());
 }
 
-void stel_ui::setCurrentTimeFromConfig(void)
+void StelUI::setCurrentTimeFromConfig(void)
 {
 	//	core->navigation->set_JDay(time_current->getJDay() - core->observatory->get_GMT_shift()*JD_HOUR);
 	core->commander->execute_command(string("date local " + time_current->getDateString()));
 }
 
-void stel_ui::setObserverPositionFromMap(void)
+void StelUI::setObserverPositionFromMap(void)
 {
 	std::ostringstream oss;
 	oss << "moveto lat " << earth_map->getPointerLatitude() << " lon " << earth_map->getPointerLongitude()
@@ -913,14 +913,14 @@ void stel_ui::setObserverPositionFromMap(void)
 	core->commander->execute_command(oss.str());
 }
 
-void stel_ui::setCityFromMap(void)
+void StelUI::setCityFromMap(void)
 {
 	waitOnLocation = false;
 	lblMapLocation->setLabel(earth_map->getCursorString());
 	lblMapPointer->setLabel(earth_map->getPositionString());
 }
 
-void stel_ui::setObserverPositionFromIncDec(void)
+void StelUI::setObserverPositionFromIncDec(void)
 {
 	std::ostringstream oss;
 	oss << "moveto lat " << lat_incdec->getValue() << " lon " << long_incdec->getValue()
@@ -928,7 +928,7 @@ void stel_ui::setObserverPositionFromIncDec(void)
 	core->commander->execute_command(oss.str());
 }
 
-void stel_ui::doSaveObserverPosition(const string& name)
+void StelUI::doSaveObserverPosition(const string& name)
 {
 	string location = name;
     for (string::size_type i=0;i<location.length();++i)
@@ -945,7 +945,7 @@ void stel_ui::doSaveObserverPosition(const string& name)
 	core->ui->setTitleObservatoryName(core->ui->getTitleWithAltitude());
 }
 
-void stel_ui::saveObserverPosition(void)
+void StelUI::saveObserverPosition(void)
 {
 	string location = earth_map->getPositionString();
 
@@ -956,7 +956,7 @@ void stel_ui::saveObserverPosition(void)
 
 }
 
-void stel_ui::saveRenderOptions(void)
+void StelUI::saveRenderOptions(void)
 {
 	cout << _("Saving rendering options in file ") << core->ConfigDir + core->config_file << endl;
 
@@ -992,12 +992,12 @@ void stel_ui::saveRenderOptions(void)
 	conf.save(core->ConfigDir + core->config_file);
 }
 
-void stel_ui::setTimeZone(void)
+void StelUI::setTimeZone(void)
 {
 	core->observatory->set_custom_tz_name(tzselector->gettz());
 }
 
-void stel_ui::setVideoOption(void)
+void StelUI::setVideoOption(void)
 {
 	string s = screen_size_sl->getValue();
 	int i = s.find("x");
@@ -1031,12 +1031,12 @@ void stel_ui::setVideoOption(void)
 	conf.save(core->ConfigDir + core->config_file);
 }
 
-void stel_ui::setLandscape(void)
+void StelUI::setLandscape(void)
 {
 	core->set_landscape(landscape_sl->getValue());
 }
 
-void stel_ui::updateVideoVariables(void)
+void StelUI::updateVideoVariables(void)
 {
 	if (fisheye_projection_cbx->getState() && core->projection->get_type()!=Projector::FISHEYE_PROJECTOR)
 	{
@@ -1066,7 +1066,7 @@ void stel_ui::updateVideoVariables(void)
 
 }
 
-void stel_ui::updateConfigForm(void)
+void StelUI::updateConfigForm(void)
 {
 	stars_cbx->setState(core->FlagStars);
 	star_names_cbx->setState(core->FlagStarName);
@@ -1118,7 +1118,7 @@ void stel_ui::updateConfigForm(void)
 	disk_viewport_cbx->setState(core->projection->get_viewport_type()==Projector::DISK);
 }
 
-void stel_ui::config_win_hideBtCallback(void)
+void StelUI::config_win_hideBtCallback(void)
 {
 	core->FlagConfig = false;
 	config_win->setVisible(false);
@@ -1129,7 +1129,7 @@ void stel_ui::config_win_hideBtCallback(void)
 	bt_flag_config->setState(0);
 }
 
-void stel_ui::search_win_hideBtCallback(void)
+void StelUI::search_win_hideBtCallback(void)
 {
 	core->FlagSearch = false;
 	search_win->setVisible(false);

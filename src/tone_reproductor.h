@@ -50,11 +50,11 @@
 
 #include "fmath.h"
 
-class tone_reproductor
+class ToneReproductor
 {
 public:
-    tone_reproductor();
-    virtual ~tone_reproductor();
+    ToneReproductor();
+    virtual ~ToneReproductor();
 
 	// Set the eye adaptation luminance for the display (and precompute what can be)
 	// Usual luminance range is 1-100 cd/m^2 for a CRT screen

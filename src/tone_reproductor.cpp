@@ -22,7 +22,7 @@
 #include "tone_reproductor.h"
 
 // Set some values to prevent bugs in case of bad use
-tone_reproductor::tone_reproductor() : Lda(50.f), Lwa(40000.f), MaxdL(100.f), gamma(2.3f)
+ToneReproductor::ToneReproductor() : Lda(50.f), Lwa(40000.f), MaxdL(100.f), gamma(2.3f)
 {
 	// Update alpha_da and beta_da values
 	float log10Lwa = log10f(Lwa);
@@ -33,13 +33,13 @@ tone_reproductor::tone_reproductor() : Lda(50.f), Lwa(40000.f), MaxdL(100.f), ga
 	set_world_adaptation_luminance(Lwa);
 }
 
-tone_reproductor::~tone_reproductor()
+ToneReproductor::~ToneReproductor()
 {
 }
 
 // Set the eye adaptation luminance for the display and precompute what can be
 // Usual luminance range is 1-100 cd/m^2 for a CRT screen
-void tone_reproductor::set_display_adaptation_luminance(float _Lda)
+void ToneReproductor::set_display_adaptation_luminance(float _Lda)
 {
 	Lda = _Lda;
 
@@ -54,7 +54,7 @@ void tone_reproductor::set_display_adaptation_luminance(float _Lda)
 }
 
 // Set the eye adaptation luminance for the world and precompute what can be
-void tone_reproductor::set_world_adaptation_luminance(float _Lwa)
+void ToneReproductor::set_world_adaptation_luminance(float _Lwa)
 {
 	Lwa = _Lwa;
 
@@ -72,7 +72,7 @@ void tone_reproductor::set_world_adaptation_luminance(float _Lwa)
 
 // Convert from xyY color system to RGB according to the adaptation
 // The Y component is in cd/m^2
-void tone_reproductor::xyY_to_RGB(float* color)
+void ToneReproductor::xyY_to_RGB(float* color)
 {
 	// 1. Hue conversion
 	float log10Y = log10f(color[2]);

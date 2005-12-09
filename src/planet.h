@@ -106,7 +106,7 @@ public:
 	float compute_magnitude(const Navigator * nav) const;
 
 	// Draw the Planet, if hint_ON is != 0 draw a circle and the name as well
-	void draw(int hint_ON, Projector* prj, const Navigator* nav, const tone_reproductor* eye, 
+	void draw(int hint_ON, Projector* prj, const Navigator* nav, const ToneReproductor* eye, 
 		  int flag_point, int flag_trails, bool stencil);
 
 	// Add the given Planet in the satellite list
@@ -178,16 +178,16 @@ protected:
 	void draw_sphere(const Projector* prj, const Mat4d& mat, float screen_sz);
 
 	// Draw the small star-like 2D halo
-	void draw_halo(const Navigator* nav, const Projector* prj, const tone_reproductor* eye);
+	void draw_halo(const Navigator* nav, const Projector* prj, const ToneReproductor* eye);
 
 	// Draw the small star-like point
-	void draw_point_halo(const Navigator* nav, const Projector* prj, const tone_reproductor* eye);
+	void draw_point_halo(const Navigator* nav, const Projector* prj, const ToneReproductor* eye);
 
 	// Draw the circle and name of the Planet
 	void draw_hints(const Navigator* nav, const Projector* prj);
 
 	// Draw the big halo (for sun or moon)
-	void draw_big_halo(const Navigator* nav, const Projector* prj, const tone_reproductor* eye);
+	void draw_big_halo(const Navigator* nav, const Projector* prj, const ToneReproductor* eye);
 
 
 	string name; // used in code, solarsystem ini file (english)

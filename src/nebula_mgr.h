@@ -38,7 +38,7 @@ public:
 	bool read(float font_size, const string& font_name, const string& fileName, LoadingBar& lb);
 	
 	// Draw all the Nebulas
-	void draw(int hint_ON,Projector *prj, const Navigator *nav, tone_reproductor *eye, bool draw_tex, // Tony
+	void draw(int hint_ON,Projector *prj, const Navigator *nav, ToneReproductor *eye, bool draw_tex, // Tony
 		bool _gravity_label, float max_mag_name, bool bright_nebulae); 
 	
 	StelObject *search(const string& name);  // search by name M83, NGC 1123, IC 1234

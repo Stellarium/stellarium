@@ -266,7 +266,7 @@ void HipStarMgr::load_sci_names(const string& sciNameFile)
 // Draw all the stars
 void HipStarMgr::draw(float _star_scale, float _star_mag_scale, float _twinkle_amount,
 						float maxMagStarName, Vec3f equ_vision,
-						tone_reproductor* _eye, Projector* prj, bool _gravity_label)
+						ToneReproductor* _eye, Projector* prj, bool _gravity_label)
 {
 	HipStar::twinkle_amount = _twinkle_amount;
 	HipStar::star_scale = _star_scale;
@@ -323,7 +323,7 @@ void HipStarMgr::draw(float _star_scale, float _star_mag_scale, float _twinkle_a
 
 // Draw all the stars
 void HipStarMgr::draw_point(float _star_scale, float _star_mag_scale, float _twinkle_amount, 
-	float maxMagStarName, Vec3f equ_vision, tone_reproductor* _eye, Projector* prj, bool _gravity_label)
+	float maxMagStarName, Vec3f equ_vision, ToneReproductor* _eye, Projector* prj, bool _gravity_label)
 {
 	HipStar::twinkle_amount = _twinkle_amount;
 	HipStar::star_scale = _star_scale;

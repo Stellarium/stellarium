@@ -38,7 +38,7 @@ StelCore::StelCore(const string& DDIR, const string& TDIR, const string& CDIR, c
 	ProjectorType = Projector::PERSPECTIVE_PROJECTOR;
 	SelectedScript = SelectedScriptDirectory = "";
 	
-	tone_converter = new tone_reproductor();		
+	tone_converter = new ToneReproductor();		
 	atmosphere = new Atmosphere();	
 	hip_stars = new HipStarMgr();
 	asterisms = new ConstellationMgr(hip_stars);
@@ -55,7 +55,7 @@ StelCore::StelCore(const string& DDIR, const string& TDIR, const string& CDIR, c
 	cardinals_points = new Cardinals();
 	skyloc = new SkyLocalizer(DataDir);
 	
-	ui = new stel_ui(this);
+	ui = new StelUI(this);
 	commander = new StelCommandInterface(this);
 	scripts = new ScriptMgr(commander, DataDir);
 	script_images = new ImageMgr();

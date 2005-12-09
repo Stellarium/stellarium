@@ -254,7 +254,7 @@ void LandscapeOldStyle::create(bool _fullpath, stringHash_t param)
 	draw_ground_first = str_to_int(param["draw_ground_first"]);
 }
 
-void LandscapeOldStyle::draw(tone_reproductor * eye, const Projector* prj, const Navigator* nav)
+void LandscapeOldStyle::draw(ToneReproductor * eye, const Projector* prj, const Navigator* nav)
 {
 	if(!valid_landscape) return;
 	if (draw_ground_first) draw_ground(eye, prj, nav);
@@ -265,7 +265,7 @@ void LandscapeOldStyle::draw(tone_reproductor * eye, const Projector* prj, const
 
 
 // Draw the horizon fog
-void LandscapeOldStyle::draw_fog(tone_reproductor * eye, const Projector* prj, const Navigator* nav) const
+void LandscapeOldStyle::draw_fog(ToneReproductor * eye, const Projector* prj, const Navigator* nav) const
 {
 	if(!fog_fader.getInterstate()) return;
 	glBlendFunc(GL_ONE, GL_ONE);
@@ -282,7 +282,7 @@ void LandscapeOldStyle::draw_fog(tone_reproductor * eye, const Projector* prj, c
 }
 
 // Draw the mountains with a few pieces of texture
-void LandscapeOldStyle::draw_decor(tone_reproductor * eye, const Projector* prj, const Navigator* nav) const
+void LandscapeOldStyle::draw_decor(ToneReproductor * eye, const Projector* prj, const Navigator* nav) const
 {
 	if (!land_fader.getInterstate()) return;
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -335,7 +335,7 @@ void LandscapeOldStyle::draw_decor(tone_reproductor * eye, const Projector* prj,
 
 
 // Draw the ground
-void LandscapeOldStyle::draw_ground(tone_reproductor * eye, const Projector* prj, const Navigator* nav) const
+void LandscapeOldStyle::draw_ground(ToneReproductor * eye, const Projector* prj, const Navigator* nav) const
 {
 	if (!land_fader.getInterstate()) return;
 	Mat4d mat = nav->get_local_to_eye_mat() * Mat4d::zrotation(ground_angle_rotatez*M_PI/180.f) * Mat4d::translation(Vec3d(0,0,radius*sinf(ground_angle_shift*M_PI/180.)));
@@ -391,7 +391,7 @@ void LandscapeFisheye::create(const string _name, bool _fullpath, const string _
 }
 
 
-void LandscapeFisheye::draw(tone_reproductor * eye, const Projector* prj, const Navigator* nav)
+void LandscapeFisheye::draw(ToneReproductor * eye, const Projector* prj, const Navigator* nav)
 {
 	if(!valid_landscape) return;
 	if(!land_fader.getInterstate()) return;

@@ -39,7 +39,7 @@ class Atmosphere
 public:
     Atmosphere();
     virtual ~Atmosphere();
-	void compute_color(double JD, Vec3d sunPos, Vec3d moonPos, float moon_phase, tone_reproductor * eye, Projector* prj,
+	void compute_color(double JD, Vec3d sunPos, Vec3d moonPos, float moon_phase, ToneReproductor * eye, Projector* prj,
 		float latitude = 45.f, float altitude = 200.f,
 		float temperature = 15.f, float relative_humidity = 40.f);
 	void draw(Projector* prj, int delta_time);

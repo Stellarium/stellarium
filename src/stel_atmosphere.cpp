@@ -48,7 +48,7 @@ Atmosphere::~Atmosphere()
 }
 
 void Atmosphere::compute_color(double JD, Vec3d sunPos, Vec3d moonPos, float moon_phase,
-	tone_reproductor * eye, Projector* prj,
+	ToneReproductor * eye, Projector* prj,
 	float latitude, float altitude, float temperature, float relative_humidity)
 {
 

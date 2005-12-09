@@ -114,7 +114,7 @@ bool NebulaMgr::read(float font_size, const string& font_name, const string& fil
 }
 
 // Draw all the Nebulaes
-void NebulaMgr::draw(int hint_ON, Projector* prj, const Navigator * nav, tone_reproductor* eye, bool draw_tex, bool _gravity_label, float max_mag_name, bool bright_nebulae)
+void NebulaMgr::draw(int hint_ON, Projector* prj, const Navigator * nav, ToneReproductor* eye, bool draw_tex, bool _gravity_label, float max_mag_name, bool bright_nebulae)
 {
 	Nebula::gravity_label = _gravity_label;
 	Nebula::hints_brightness = hints_fader.getInterstate();

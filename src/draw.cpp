@@ -571,7 +571,7 @@ void MilkyWay::set_intensity(float _intensity)
 	intensity = _intensity;
 }
 
-void MilkyWay::draw(tone_reproductor * eye, const Projector* prj, const Navigator* nav) const
+void MilkyWay::draw(ToneReproductor * eye, const Projector* prj, const Navigator* nav) const
 {
 	assert(tex);	// A texture must be loaded before calling this
 	// Scotopic color = 0.25, 0.25 in xyY mode. Global stars luminance ~= 0.001 cd/m^2
