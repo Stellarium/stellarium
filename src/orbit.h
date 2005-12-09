@@ -69,7 +69,7 @@ class OrbitSampleProc
 
 // Custom orbit classes should be derived from CachingOrbit.  The custom
 // orbits can be expensive to compute, with more than 50 periodic terms.
-// Celestia may need require position of a planet more than once per frame; in
+// Celestia may need require position of a Planet more than once per frame; in
 // order to avoid redundant calculation, the CachingOrbit class saves the
 // result of the last calculation and uses it if the time matches the cached
 // time.

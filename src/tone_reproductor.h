@@ -62,7 +62,7 @@ public:
 	void set_display_adaptation_luminance(float display_adaptation_luminance);
 
 	// Set the eye adaptation luminance for the world (and precompute what can be)
-	// default value = 40000 cd/m^2 for skylight
+	// default value = 40000 cd/m^2 for Skylight
 	// Star Light      : 0.001  cd/m^2
 	// Moon Light      : 0.1    cd/m^2
 	// Indoor Lighting : 100    cd/m^2

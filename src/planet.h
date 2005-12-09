@@ -48,25 +48,25 @@ struct TrailPoint {
 
 
 // Class used to store orbital elements
-class rotation_elements
+class RotationElements
 {
  public:
-    rotation_elements();
+    RotationElements();
     float period;        // rotation period
     float offset;        // rotation at epoch
     double epoch;
     float obliquity;     // tilt of rotation axis w.r.t. ecliptic
     float ascendingNode; // long. of ascending node of equator on the ecliptic
     float precessionRate; // rate of precession of rotation axis in rads/day
-    double sidereal_period; // sidereal period (planet year in earth days)
+    double sidereal_period; // sidereal period (Planet year in earth days)
 };
 
 // Class to manage rings for planets like saturn
-class ring
+class Ring
 {
 public:
-	ring(float _radius, const string& _texname);
-	virtual ~ring();
+	Ring(float _radius, const string& _texname);
+	virtual ~Ring();
 	void draw(const Projector* prj, const Mat4d& mat);
 	double get_size(void) const {return radius;}
 private:
@@ -75,27 +75,27 @@ private:
 };
 
 
-class planet : public stel_object
+class Planet : public StelObject
 {
 public:
-	planet(const string& _name, const string& commonname, int _flagHalo, int _flag_lighting, double _radius, Vec3f _color,
+	Planet(const string& _name, const string& commonname, int _flagHalo, int _flag_lighting, double _radius, Vec3f _color,
 	float _albedo, const string& tex_map_name, const string& tex_halo_name, pos_func_type _coord_func);
 
-    virtual ~planet();
+    virtual ~Planet();
 
 	// Return the information string "ready to print" :)
-	string get_info_string(const navigator * nav) const;
-	string get_short_info_string(const navigator * nav) const;
-	virtual double get_close_fov(const navigator * nav) const;
-	virtual double get_satellites_fov(const navigator * nav) const;
-	virtual float get_mag(const navigator * nav) const {return compute_magnitude(nav);}
+	string get_info_string(const Navigator * nav) const;
+	string get_short_info_string(const Navigator * nav) const;
+	virtual double get_close_fov(const Navigator * nav) const;
+	virtual double get_satellites_fov(const Navigator * nav) const;
+	virtual float get_mag(const Navigator * nav) const {return compute_magnitude(nav);}
 
 	//	void setLabelColor(const Vec3f& v) {label_color = v;}
 
-	// Compute the position in the parent planet coordinate system
+	// Compute the position in the parent Planet coordinate system
 	void compute_position(double date);
 
-	// Compute the transformation matrix from the local planet coordinate to the parent planet coordinate
+	// Compute the transformation matrix from the local Planet coordinate to the parent Planet coordinate
 	void compute_trans_matrix(double date);
 
 	// Get the phase angle for an observer at pos obs_pos in the heliocentric coordinate (in AU)
@@ -103,20 +103,20 @@ public:
 
 	// Get the magnitude for an observer at pos obs_pos in the heliocentric coordinate (in AU)
 	float compute_magnitude(const Vec3d obs_pos) const;
-	float compute_magnitude(const navigator * nav) const;
+	float compute_magnitude(const Navigator * nav) const;
 
-	// Draw the planet, if hint_ON is != 0 draw a circle and the name as well
-	void draw(int hint_ON, Projector* prj, const navigator* nav, const tone_reproductor* eye, 
+	// Draw the Planet, if hint_ON is != 0 draw a circle and the name as well
+	void draw(int hint_ON, Projector* prj, const Navigator* nav, const tone_reproductor* eye, 
 		  int flag_point, int flag_trails, bool stencil);
 
-	// Add the given planet in the satellite list
-	void add_satellite(planet*);
+	// Add the given Planet in the satellite list
+	void add_satellite(Planet*);
 
 	// Set the orbital elements
 	void set_rotation_elements(float _period, float _offset, double _epoch,
 		float _obliquity, float _ascendingNode, float _precessionRate, double _sidereal_period);
 
-	// Get the planet position in the parent planet ecliptic coordinate
+	// Get the Planet position in the parent Planet ecliptic coordinate
 	Vec3d get_ecliptic_pos() const;
 
 	// Return the heliocentric ecliptical position
@@ -131,18 +131,18 @@ public:
 
 	STEL_OBJECT_TYPE get_type(void) const {return STEL_OBJECT_PLANET;}
 
-	// Return the planet position in rectangular earth equatorial coordinate
-	Vec3d get_earth_equ_pos(const navigator * nav) const;
+	// Return the Planet position in rectangular earth equatorial coordinate
+	Vec3d get_earth_equ_pos(const Navigator * nav) const;
 
 	string get_name(void) const {return name;}
 	string get_common_name(void) const {return common_name;}
 
-	void set_rings(ring* r) {rings = r;}
+	void set_rings(Ring* r) {rings = r;}
 
 	void set_sphere_scale(float s) {sphere_scale = s;}
 	float get_sphere_scale(void) const {return sphere_scale;}
 
-	planet* get_parent(void) {return parent;}
+	Planet* get_parent(void) {return parent;}
 
 	void set_big_halo(const string& halotexfile);
 	void set_halo_size(float s) {big_halo_size = s;}
@@ -153,11 +153,11 @@ public:
 	static void set_label_color(const Vec3f& lc) {label_color = lc;}
 	static void set_orbit_color(const Vec3f& oc) {orbit_color = oc;}
 
-        // draw orbital path of planet
-	void draw_orbit(const navigator * nav, const Projector* prj);
+        // draw orbital path of Planet
+	void draw_orbit(const Navigator * nav, const Projector* prj);
 
-	void update_trail(const navigator* nav);
-	void draw_trail(const navigator * nav, const Projector* prj);
+	void update_trail(const Navigator* nav);
+	void draw_trail(const Navigator * nav, const Projector* prj);
 	static void set_trail_color(const Vec3f& c) { trail_color = c; }
 	void start_trail(void);
 	void end_trail(void);
@@ -169,7 +169,7 @@ public:
 
 protected:
 	// Return the radius of a circle containing the object on screen
-	float get_on_screen_size(const Projector* prj, const navigator * nav);
+	float get_on_screen_size(const Projector* prj, const Navigator * nav);
 
 	// Compute the z rotation to use from equatorial to geographic coordinates
 	void compute_geographic_rotation(double date);
@@ -178,39 +178,39 @@ protected:
 	void draw_sphere(const Projector* prj, const Mat4d& mat, float screen_sz);
 
 	// Draw the small star-like 2D halo
-	void draw_halo(const navigator* nav, const Projector* prj, const tone_reproductor* eye);
+	void draw_halo(const Navigator* nav, const Projector* prj, const tone_reproductor* eye);
 
 	// Draw the small star-like point
-	void draw_point_halo(const navigator* nav, const Projector* prj, const tone_reproductor* eye);
+	void draw_point_halo(const Navigator* nav, const Projector* prj, const tone_reproductor* eye);
 
-	// Draw the circle and name of the planet
-	void draw_hints(const navigator* nav, const Projector* prj);
+	// Draw the circle and name of the Planet
+	void draw_hints(const Navigator* nav, const Projector* prj);
 
 	// Draw the big halo (for sun or moon)
-	void draw_big_halo(const navigator* nav, const Projector* prj, const tone_reproductor* eye);
+	void draw_big_halo(const Navigator* nav, const Projector* prj, const tone_reproductor* eye);
 
 
 	string name; // used in code, solarsystem ini file (english)
 	string common_name; // in sky locale language
 	int flagHalo;					// Set wether a little "star like" halo will be drawn
 	int flag_lighting;				// Set wether light computation has to be proceed
-	rotation_elements re;			// Rotation param
+	RotationElements re;			// Rotation param
 	double radius;					// Planet radius in UA
 	Vec3d orbit[ORBIT_SEGMENTS];                        // store heliocentric coordinates for drawing the orbit
 	Vec3d ecliptic_pos; 			// Position in UA in the rectangular ecliptic coordinate system
-									// centered on the parent planet
+									// centered on the parent Planet
 	Vec3d screenPos;				// Used to store temporarily the 2D position on screen
 	Vec3f color;
 	float albedo;					// Planet albedo
 	Mat4d mat_local_to_parent;		// Transfo matrix from local ecliptique to parent ecliptic
-	float axis_rotation;			// Rotation angle of the planet on it's axis
+	float axis_rotation;			// Rotation angle of the Planet on it's axis
     s_texture * tex_map;			// Planet map texture
 	s_texture * tex_halo;			// Little halo texture
 	s_texture * tex_big_halo;		// Big halo texture
 
 	float big_halo_size;				// Halo size on screen
 
-	ring* rings;					// Planet rings
+	Ring* rings;					// Planet rings
 
 	double distance;				// Temporary variable used to store the distance to a given point
 									// it is used for sorting while drawing
@@ -225,8 +225,8 @@ protected:
 
 	// The callback for the calculation of the equatorial rect heliocentric position at time JD.
 	pos_func_type coord_func;
-	planet * parent;				// Planet parent i.e. sun for earth
-	list<planet *> satellites;		// satellites of the planet
+	Planet * parent;				// Planet parent i.e. sun for earth
+	list<Planet *> satellites;		// satellites of the Planet
 
 	static s_font* planet_name_font;// Font for names
 	static float object_scale;
@@ -242,7 +242,7 @@ protected:
 	double last_trailJD;
 	bool first_point;  // if need to take first point of trail still
 
-	linear_fader hint_fader, orbit_fader, trail_fader;
+	LinearFader hint_fader, orbit_fader, trail_fader;
 
 };
 

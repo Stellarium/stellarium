@@ -33,10 +33,10 @@ public:
     SolarSystem();
     virtual ~SolarSystem();
 
-	void update(int delta_time, navigator* nav);
+	void update(int delta_time, Navigator* nav);
 	
 	// Draw all the elements of the solar system
-    void draw(planet *selected, bool hint_ON, Projector * du, const navigator * nav, 
+    void draw(Planet *selected, bool hint_ON, Projector * du, const Navigator * nav, 
 			  const tone_reproductor* eye, bool _gravity_label, 
 			  bool flag_point, bool flag_orbits, bool flag_trails);
 	
@@ -45,8 +45,8 @@ public:
 	void load_names(const string& names_file);
 
 	void set_font(float font_size, const string& font_name);
-	void set_label_color(const Vec3f& c) {planet::set_label_color(c);}
-	void set_orbit_color(const Vec3f& c) {planet::set_orbit_color(c);}
+	void set_label_color(const Vec3f& c) {Planet::set_label_color(c);}
+	void set_orbit_color(const Vec3f& c) {Planet::set_orbit_color(c);}
   
 	// Compute the position for every elements of the solar system.
 	void compute_positions(double date);
@@ -54,46 +54,46 @@ public:
 	// Compute the transformation matrix for every elements of the solar system.
     void compute_trans_matrices(double date);
 
-	// Search if any planet is close to position given in earth equatorial position.
-	planet* search(Vec3d, const navigator * nav, const Projector * prj);
+	// Search if any Planet is close to position given in earth equatorial position.
+	Planet* search(Vec3d, const Navigator * nav, const Projector * prj);
 
 	// Return a stl vector containing the planets located inside the lim_fov circle around position v
-	vector<stel_object*> search_around(Vec3d v, double lim_fov, const navigator * nav, const Projector * prj);
+	vector<StelObject*> search_around(Vec3d v, double lim_fov, const Navigator * nav, const Projector * prj);
 
-	planet* search(string object_name);
-	planet* searchByCommonNames(string planetCommonName);
-	planet* get_sun(void) {return sun;}
-	planet* get_earth(void) {return earth;}
-	planet* get_moon(void) {return moon;}
+	Planet* search(string object_name);
+	Planet* searchByCommonNames(string planetCommonName);
+	Planet* get_sun(void) {return sun;}
+	Planet* get_earth(void) {return earth;}
+	Planet* get_moon(void) {return moon;}
 
 	void set_sky_locale(string _sky_locale);
 	void start_trails(void);
 	void end_trails(void);
-	void set_trail_color(const Vec3f& c)  {planet::set_trail_color(c);}
-	void update_trails(const navigator* nav);
+	void set_trail_color(const Vec3f& c)  {Planet::set_trail_color(c);}
+	void update_trails(const Navigator* nav);
 	void set_object_scale(float scale);
 
 	vector<string> getNames(void);
 private:
-	planet* sun;
-	planet* moon;
-	planet* earth;
+	Planet* sun;
+	Planet* moon;
+	Planet* earth;
 
 	// solar system related settings
 	float object_scale;  // should be kept synchronized with star scale...
 
 	s_font* planet_name_font;
-	vector<planet*> system_planets;		// Vector containing all the bodies of the system
+	vector<Planet*> system_planets;		// Vector containing all the bodies of the system
 	vector<EllipticalOrbit*> ell_orbits;// Pointers on created elliptical orbits
-	bool near_lunar_eclipse(const navigator * nav, Projector * prj);
+	bool near_lunar_eclipse(const Navigator * nav, Projector * prj);
 	
 	// draw earth shadow on moon for lunar eclipses
-	void draw_earth_shadow(const navigator * nav, Projector * prj);  
+	void draw_earth_shadow(const Navigator * nav, Projector * prj);  
 
 	// And sort them from the furthest to the closest to the observer
-	struct bigger_distance : public binary_function<planet*, planet*, bool>
+	struct bigger_distance : public binary_function<Planet*, Planet*, bool>
 	{
-		bool operator()(planet* p1, planet* p2) { return p1->get_distance() > p2->get_distance(); }
+		bool operator()(Planet* p1, Planet* p2) { return p1->get_distance() > p2->get_distance(); }
 	};
 
 	s_texture *tex_earth_shadow;  // for lunar eclipses

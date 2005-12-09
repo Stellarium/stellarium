@@ -24,16 +24,16 @@
 
 // Class which handle projection modes and projection matrix
 // Overide some function usually handled by glu
-class Cylinder_projector : public Projector
+class CylinderProjector : public Projector
 {
 public:
-    Cylinder_projector(int _screenW = 800, int _screenH = 600, double _fov = 175., 
+    CylinderProjector(int _screenW = 800, int _screenH = 600, double _fov = 175., 
 		    double _min_fov = 0.001, double _max_fov = 300.);
 
                     // distortion_function can be used to select between different projection distortions
                     // currently not used by standard stellarium version, but needed by Digitalis
 
-	Cylinder_projector(const Projector&);
+	CylinderProjector(const Projector&);
 
 	virtual PROJECTOR_TYPE get_type(void) const {return FISHEYE_PROJECTOR;}
 

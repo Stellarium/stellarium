@@ -28,20 +28,20 @@
 #define RADIUS_STAR 1.
 
 // Init Static variables
-float Hip_Star::twinkle_amount = 10.f;
-float Hip_Star::star_scale = 10.f;
-float Hip_Star::star_mag_scale = 10.f;
-float Hip_Star::names_brightness = 1.f;
-tone_reproductor* Hip_Star::eye = NULL;
-Projector* Hip_Star::proj = NULL;
-bool Hip_Star::gravity_label = false;
-int Hip_Star::nameFormat = 0;
-s_font *Hip_Star::starFont = NULL;
+float HipStar::twinkle_amount = 10.f;
+float HipStar::star_scale = 10.f;
+float HipStar::star_mag_scale = 10.f;
+float HipStar::names_brightness = 1.f;
+tone_reproductor* HipStar::eye = NULL;
+Projector* HipStar::proj = NULL;
+bool HipStar::gravity_label = false;
+int HipStar::nameFormat = 0;
+s_font *HipStar::starFont = NULL;
 
-Vec3f Hip_Star::circle_color = Vec3f(0.f,0.f,0.f);
-Vec3f Hip_Star::label_color = Vec3f(.8f,.8f,.8f);
+Vec3f HipStar::circle_color = Vec3f(0.f,0.f,0.f);
+Vec3f HipStar::label_color = Vec3f(.8f,.8f,.8f);
 
-Hip_Star::Hip_Star() :
+HipStar::HipStar() :
 	HP(0),
 	doubleStar(false),
 	variableStar(false)
@@ -52,11 +52,11 @@ Hip_Star::Hip_Star() :
 	OrigSciName = "";
 }
 
-Hip_Star::~Hip_Star()
+HipStar::~HipStar()
 { 
 }
 
-string Hip_Star::get_info_string(const navigator * nav) const
+string HipStar::get_info_string(const Navigator * nav) const
 {
 	float tempDE, tempRA;
 
@@ -97,7 +97,7 @@ string Hip_Star::get_info_string(const navigator * nav) const
 	return oss.str();
 }
 
-string Hip_Star::get_short_info_string(const navigator * nav) const
+string HipStar::get_short_info_string(const Navigator * nav) const
 {
 	ostringstream oss;
 	if (CommonName!="" || SciName!="")
@@ -117,7 +117,7 @@ string Hip_Star::get_short_info_string(const navigator * nav) const
 
 // Read datas in binary catalog and compute x,y,z;
 // The aliasing bug on some architecture has been fixed by Rainer Canavan on 26/11/2003
-int Hip_Star::read(FILE * catalog)
+int HipStar::read(FILE * catalog)
 {
 	float RA=0, DE=0, xDE, xRA;
 	fread(&xRA,4,1,catalog);
@@ -201,7 +201,7 @@ int Hip_Star::read(FILE * catalog)
 
 }
 
-void Hip_Star::draw(void)
+void HipStar::draw(void)
 {
     // Compute the equivalent star luminance for a 5 arc min circle and convert it
 	// in function of the eye adaptation
@@ -243,7 +243,7 @@ void Hip_Star::draw(void)
     glEnd();
 }
 
-void Hip_Star::draw_point(void)
+void HipStar::draw_point(void)
 {
 	float cmag;
 	float rmag;
@@ -274,7 +274,7 @@ void Hip_Star::draw_point(void)
 	glEnable(GL_TEXTURE_2D); // required for star labels to work
 }
 
-bool Hip_Star::draw_name(void)
+bool HipStar::draw_name(void)
 {   
 	string starname;
 	

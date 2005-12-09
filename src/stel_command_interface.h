@@ -32,8 +32,8 @@
 
 using namespace std;
 
-// Predeclaration of the stel_core class
-class stel_core;
+// Predeclaration of the StelCore class
+class StelCore;
 
 
 
@@ -41,7 +41,7 @@ class StelCommandInterface : CommandInterface
 {
 
  public:
-  StelCommandInterface(stel_core * core);
+  StelCommandInterface(StelCore * core);
   virtual ~StelCommandInterface();
   virtual int StelCommandInterface::execute_command(string commandline);
   virtual int StelCommandInterface::execute_command(string command, double arg);
@@ -51,7 +51,7 @@ class StelCommandInterface : CommandInterface
   void update(int delta_time);
 
  private:
-  stel_core * stcore;
+  StelCore * stcore;
   Audio * audio;  // for audio track from script
 };
 

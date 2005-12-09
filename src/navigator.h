@@ -32,11 +32,11 @@
 #define JD_DAY    1.
 
 
-class stel_object;
+class StelObject;
 
 // Class which manages a navigation context
 // Manage date/time, viewing direction/fov, observer position, and coordinate changes
-class navigator
+class Navigator
 {
 public:
 
@@ -46,15 +46,15 @@ public:
 		VIEW_EQUATOR
 	};
 	// Create and initialise to default a navigation context
-	navigator(Observator* obs);
-    virtual ~navigator();
+	Navigator(Observator* obs);
+    virtual ~Navigator();
 
 	// Init the viewing matrix, setting the field of view, the clipping planes, and screen size
 	void init_project_matrix(int w, int h, double near, double far);
 
 	void update_time(int delta_time);
 	void update_transform_matrices(Vec3d earth_ecliptic_pos);
-	void update_vision_vector(int delta_time, stel_object* selected);
+	void update_vision_vector(int delta_time, StelObject* selected);
 
 	// Update the modelview matrices
 	void update_model_view_mat(void);

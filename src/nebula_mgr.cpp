@@ -28,13 +28,13 @@
 
 #define RADIUS_NEB 1.
 
-Nebula_mgr::Nebula_mgr() :
+NebulaMgr::NebulaMgr() :
 	showNGC(false),
 	showMessier(false)
 {
 }
 
-Nebula_mgr::~Nebula_mgr()
+NebulaMgr::~NebulaMgr()
 {
 	vector<Nebula *>::iterator iter;
     for(iter=neb_array.begin();iter!=neb_array.end();iter++)
@@ -50,7 +50,7 @@ Nebula_mgr::~Nebula_mgr()
 }
 
 // read from stream
-bool Nebula_mgr::read(float font_size, const string& font_name, const string& fileName, LoadingBar& lb)
+bool NebulaMgr::read(float font_size, const string& font_name, const string& fileName, LoadingBar& lb)
 {
 	read_NGC_catalog(fileName, lb);
 	read_messier_textures(fileName, lb);
@@ -114,10 +114,10 @@ bool Nebula_mgr::read(float font_size, const string& font_name, const string& fi
 }
 
 // Draw all the Nebulaes
-void Nebula_mgr::draw(int hint_ON, Projector* prj, const navigator * nav, tone_reproductor* eye, bool draw_tex, bool _gravity_label, float max_mag_name, bool bright_nebulae)
+void NebulaMgr::draw(int hint_ON, Projector* prj, const Navigator * nav, tone_reproductor* eye, bool draw_tex, bool _gravity_label, float max_mag_name, bool bright_nebulae)
 {
 	Nebula::gravity_label = _gravity_label;
-	Nebula::hints_brightness = hints_fader.get_interstate();
+	Nebula::hints_brightness = hints_fader.getInterstate();
 
 	glEnable(GL_TEXTURE_2D);
     glEnable(GL_BLEND);
@@ -125,7 +125,7 @@ void Nebula_mgr::draw(int hint_ON, Projector* prj, const navigator * nav, tone_r
 
 	prj->set_orthographic_projection();
 
-	bool hints = (hints_fader.get_interstate() != 0);
+	bool hints = (hints_fader.getInterstate() != 0);
 
     vector<Nebula *>::iterator iter;
     for(iter=neb_array.begin();iter!=neb_array.end();iter++) 
@@ -166,7 +166,7 @@ void Nebula_mgr::draw(int hint_ON, Projector* prj, const navigator * nav, tone_r
 }
 
 // search by name
-stel_object * Nebula_mgr::search(const string& name)
+StelObject * NebulaMgr::search(const string& name)
 {
 	const string catalogs("NGC IC");
 	string cat;
@@ -207,7 +207,7 @@ stel_object * Nebula_mgr::search(const string& name)
 
 
 // Look for a nebulae by XYZ coords
-stel_object * Nebula_mgr::search(Vec3f Pos)
+StelObject * NebulaMgr::search(Vec3f Pos)
 {
 	Pos.normalize();
     vector<Nebula *>::iterator iter;
@@ -229,9 +229,9 @@ stel_object * Nebula_mgr::search(Vec3f Pos)
 }
 
 // Return a stl vector containing the nebulas located inside the lim_fov circle around position v
-vector<stel_object*> Nebula_mgr::search_around(Vec3d v, double lim_fov)
+vector<StelObject*> NebulaMgr::search_around(Vec3d v, double lim_fov)
 {
-	vector<stel_object*> result;
+	vector<StelObject*> result;
     v.normalize();
 	double cos_lim_fov = cos(lim_fov * M_PI/180.);
 	static Vec3d equPos;
@@ -250,7 +250,7 @@ vector<stel_object*> Nebula_mgr::search_around(Vec3d v, double lim_fov)
 	return result;
 }
 
-stel_object * Nebula_mgr::searchNGC(unsigned int NGC)
+StelObject * NebulaMgr::searchNGC(unsigned int NGC)
 {
     vector<Nebula *>::iterator iter;
     for(iter=neb_array.begin();iter!=neb_array.end();iter++) 
@@ -261,7 +261,7 @@ stel_object * Nebula_mgr::searchNGC(unsigned int NGC)
     return NULL;
 }
 
-stel_object * Nebula_mgr::searchIC(unsigned int IC)
+StelObject * NebulaMgr::searchIC(unsigned int IC)
 {
     vector<Nebula *>::iterator iter;
     for(iter=neb_array.begin();iter!=neb_array.end();iter++) 
@@ -273,7 +273,7 @@ stel_object * Nebula_mgr::searchIC(unsigned int IC)
 }
 
 // search by name
-stel_object * Nebula_mgr::searchMessier(unsigned int M)
+StelObject * NebulaMgr::searchMessier(unsigned int M)
 {
     vector<Nebula *>::iterator iter;
     for(iter=neb_array.begin();iter!=neb_array.end();iter++) 
@@ -286,7 +286,7 @@ stel_object * Nebula_mgr::searchMessier(unsigned int M)
 
 
 // read from stream
-bool Nebula_mgr::read_NGC_catalog(const string& fileName, LoadingBar& lb)
+bool NebulaMgr::read_NGC_catalog(const string& fileName, LoadingBar& lb)
 {
 	char recordstr[512], tmpstr[512];
 	string dataDir = fileName;
@@ -419,7 +419,7 @@ bool Nebula_mgr::read_NGC_catalog(const string& fileName, LoadingBar& lb)
 	return true;
 }
 
-bool Nebula_mgr::read_messier_textures(const string& fileName, LoadingBar& lb)
+bool NebulaMgr::read_messier_textures(const string& fileName, LoadingBar& lb)
 {	
 	cout << _("Loading Messier textures...");
 	

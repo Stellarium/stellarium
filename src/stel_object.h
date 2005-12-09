@@ -26,9 +26,9 @@
 #include "s_texture.h"
 
 
-class navigator;
+class Navigator;
 
-class stel_object
+class StelObject
 {
 public:
 	enum STEL_OBJECT_TYPE
@@ -38,25 +38,25 @@ public:
 		STEL_OBJECT_NEBULA
 	};
 
-	virtual ~stel_object() {;}
+	virtual ~StelObject() {;}
 	virtual void update(void) {return;}
-	void draw_pointer(int delta_time, const Projector* prj, const navigator * nav);
+	void draw_pointer(int delta_time, const Projector* prj, const Navigator * nav);
 
 	//! Write information about the object in char* s 
-	virtual string get_info_string(const navigator * nav) const;
-	virtual string get_short_info_string(const navigator * nav) const;
+	virtual string get_info_string(const Navigator * nav) const;
+	virtual string get_short_info_string(const Navigator * nav) const;
 
 	virtual STEL_OBJECT_TYPE get_type(void) const = 0;
-	virtual Vec3d get_earth_equ_pos(const navigator * nav) const = 0;
+	virtual Vec3d get_earth_equ_pos(const Navigator * nav) const = 0;
 	virtual Vec3f get_RGB(void) const {return Vec3f(0.,0.,0.);}
-	virtual double get_close_fov(const navigator * nav) const {return 10.;}
-	virtual double get_satellites_fov(const navigator * nav) const {return -1.;}
-	virtual float get_mag(const navigator * nav) const = 0;
+	virtual double get_close_fov(const Navigator * nav) const {return 10.;}
+	virtual double get_satellites_fov(const Navigator * nav) const {return -1.;}
+	virtual float get_mag(const Navigator * nav) const = 0;
 
 	static void init_textures(void);
 	static void delete_textures(void);
 protected:
-	virtual float get_on_screen_size(const Projector* prj, const navigator * nav = NULL) {return 0;}
+	virtual float get_on_screen_size(const Projector* prj, const Navigator * nav = NULL) {return 0;}
 private:
 	static int local_time;
 	static s_texture * pointer_star;

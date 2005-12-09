@@ -26,7 +26,7 @@
 
 
 ////////////////////////////////////////////////////////////////////////////////
-navigator::navigator(Observator* obs) : flag_traking(0), flag_lock_equ_pos(0), flag_auto_move(0),
+Navigator::Navigator(Observator* obs) : flag_traking(0), flag_lock_equ_pos(0), flag_auto_move(0),
 		time_speed(JD_SECOND), JDay(0.), position(obs)
 {
 	if (!position)
@@ -43,11 +43,11 @@ navigator::navigator(Observator* obs) : flag_traking(0), flag_lock_equ_pos(0), f
 
 }
 
-navigator::~navigator()
+Navigator::~Navigator()
 {}
 
 ////////////////////////////////////////////////////////////////////////////////
-void navigator::update_vision_vector(int delta_time, stel_object* selected)
+void Navigator::update_vision_vector(int delta_time, StelObject* selected)
 {
 	if (flag_auto_move)
 	{
@@ -176,7 +176,7 @@ void navigator::update_vision_vector(int delta_time, stel_object* selected)
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-void navigator::set_local_vision(const Vec3d& _pos)
+void Navigator::set_local_vision(const Vec3d& _pos)
 {
 	local_vision = _pos;
 	equ_vision=local_to_earth_equ(local_vision);
@@ -184,7 +184,7 @@ void navigator::set_local_vision(const Vec3d& _pos)
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-void navigator::update_move(double deltaAz, double deltaAlt)
+void Navigator::update_move(double deltaAz, double deltaAlt)
 {
 	double azVision, altVision;
 
@@ -224,7 +224,7 @@ void navigator::update_move(double deltaAz, double deltaAlt)
 
 ////////////////////////////////////////////////////////////////////////////////
 // Increment time
-void navigator::update_time(int delta_time)
+void Navigator::update_time(int delta_time)
 {
 	JDay+=time_speed*(double)delta_time/1000.;
 
@@ -241,7 +241,7 @@ void navigator::update_time(int delta_time)
 
 ////////////////////////////////////////////////////////////////////////////////
 // The non optimized (more clear version is available on the CVS : before date 25/07/2003)
-void navigator::update_transform_matrices(Vec3d earth_ecliptic_pos)
+void Navigator::update_transform_matrices(Vec3d earth_ecliptic_pos)
 {
 
 	double lat = position->get_latitude();
@@ -292,7 +292,7 @@ void navigator::update_transform_matrices(Vec3d earth_ecliptic_pos)
 
 ////////////////////////////////////////////////////////////////////////////////
 // Update the modelview matrices
-void navigator::update_model_view_mat(void)
+void Navigator::update_model_view_mat(void)
 {
 
 	Vec3d f;
@@ -337,7 +337,7 @@ void navigator::update_model_view_mat(void)
 
 ////////////////////////////////////////////////////////////////////////////////
 // Return the observer heliocentric position
-Vec3d navigator::get_observer_helio_pos(void) const
+Vec3d Navigator::get_observer_helio_pos(void) const
 {
 	Vec3d v(0.,0.,0.);
 	return mat_local_to_helio*v;
@@ -345,7 +345,7 @@ Vec3d navigator::get_observer_helio_pos(void) const
 
 ////////////////////////////////////////////////////////////////////////////////
 // Move to the given equatorial position
-void navigator::move_to(const Vec3d& _aim, float move_duration, bool _local_pos, int zooming)
+void Navigator::move_to(const Vec3d& _aim, float move_duration, bool _local_pos, int zooming)
 {
 	zooming_mode = zooming;
 	move.aim=_aim;
@@ -369,7 +369,7 @@ void navigator::move_to(const Vec3d& _aim, float move_duration, bool _local_pos,
 
 ////////////////////////////////////////////////////////////////////////////////
 // Set type of viewing mode (align with horizon or equatorial coordinates)
-void navigator::set_viewing_mode(VIEWING_MODE_TYPE view_mode)
+void Navigator::set_viewing_mode(VIEWING_MODE_TYPE view_mode)
 {
 	viewing_mode = view_mode;
 
@@ -378,7 +378,7 @@ void navigator::set_viewing_mode(VIEWING_MODE_TYPE view_mode)
 
 }
 
-void navigator::switch_viewing_mode(void)
+void Navigator::switch_viewing_mode(void)
 {
 	if (viewing_mode==VIEW_HORIZON) set_viewing_mode(VIEW_EQUATOR);
 	else set_viewing_mode(VIEW_HORIZON);

@@ -90,7 +90,7 @@ void SkyGrid::set_font(float font_size, const string& font_name)
 
 void SkyGrid::draw(const Projector* prj) const
 {
-	if (!fader.get_interstate()) return;
+	if (!fader.getInterstate()) return;
 
 	glDisable(GL_TEXTURE_2D);
 	glEnable(GL_BLEND);	
@@ -113,12 +113,12 @@ void SkyGrid::draw(const Projector* prj) const
 
 				glBegin (GL_LINES);
 					glVertex2f(pt1[0],pt1[1]);
-					glColor4f(color[0],color[1],color[2],fader.get_interstate());
+					glColor4f(color[0],color[1],color[2],fader.getInterstate());
 					glVertex2f(pt2[0],pt2[1]);
         		glEnd();
 			}
 
-			glColor4f(color[0],color[1],color[2],fader.get_interstate());
+			glColor4f(color[0],color[1],color[2],fader.getInterstate());
 
 			for (unsigned int i=1;i<nb_alt_segment-1;++i)
 			{
@@ -194,7 +194,7 @@ void SkyGrid::draw(const Projector* prj) const
 			if ((prj->*proj_func)(alt_points[nm][nb_alt_segment-1], pt1) &&
 				(prj->*proj_func)(alt_points[nm][nb_alt_segment], pt2) )
 			{
-				glColor4f(color[0],color[1],color[2],fader.get_interstate());
+				glColor4f(color[0],color[1],color[2],fader.getInterstate());
 				glBegin (GL_LINES);
 					glVertex2f(pt1[0],pt1[1]);
 					glColor4f(color[0],color[1],color[2],0.f);
@@ -205,7 +205,7 @@ void SkyGrid::draw(const Projector* prj) const
 		}
 		else
 		{
-			glColor4f(color[0],color[1],color[2],fader.get_interstate());
+			glColor4f(color[0],color[1],color[2],fader.getInterstate());
 			for (unsigned int i=0;i<nb_alt_segment;++i)
 			{
 				if ((prj->*proj_func)(alt_points[nm][i], pt1) &&
@@ -221,7 +221,7 @@ void SkyGrid::draw(const Projector* prj) const
 	}
 
 	// Draw parallels
-	glColor4f(color[0],color[1],color[2],fader.get_interstate());
+	glColor4f(color[0],color[1],color[2],fader.getInterstate());
 	for (unsigned int np=0;np<nb_parallel;++np)
 	{
 		for (unsigned int i=0;i<nb_azi_segment;++i)
@@ -288,12 +288,12 @@ void SkyLine::set_font(float font_size, const string& font_name)
 
 void SkyLine::draw(const Projector* prj) const
 {
-	if (!fader.get_interstate()) return;
+	if (!fader.getInterstate()) return;
 
 	Vec3d pt1;
 	Vec3d pt2;
 
-	glColor4f(color[0], color[1], color[2], fader.get_interstate());
+	glColor4f(color[0], color[1], color[2], fader.getInterstate());
 	glDisable(GL_TEXTURE_2D);
 	glEnable(GL_BLEND);	
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
@@ -450,7 +450,7 @@ void Cardinals::set_font(float font_size, const string& font_name)
 void Cardinals::draw(const Projector* prj, double latitude, bool gravityON) const
 {
 
-	if (!fader.get_interstate()) return;
+	if (!fader.getInterstate()) return;
 
 	// direction text
 	string d[4];
@@ -464,7 +464,7 @@ void Cardinals::draw(const Projector* prj, double latitude, bool gravityON) cons
 	if(latitude ==  90.0 ) d[0] = d[1] = d[2] = d[3] = sSouth;
 	if(latitude == -90.0 ) d[0] = d[1] = d[2] = d[3] = sNorth;
 
-	glColor4f(color[0],color[1],color[2],fader.get_interstate());
+	glColor4f(color[0],color[1],color[2],fader.getInterstate());
 	glEnable(GL_BLEND);
 	glEnable(GL_TEXTURE_2D);
 	// Normal transparency mode
@@ -571,7 +571,7 @@ void MilkyWay::set_intensity(float _intensity)
 	intensity = _intensity;
 }
 
-void MilkyWay::draw(tone_reproductor * eye, const Projector* prj, const navigator* nav) const
+void MilkyWay::draw(tone_reproductor * eye, const Projector* prj, const Navigator* nav) const
 {
 	assert(tex);	// A texture must be loaded before calling this
 	// Scotopic color = 0.25, 0.25 in xyY mode. Global stars luminance ~= 0.001 cd/m^2

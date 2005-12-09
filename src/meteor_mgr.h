@@ -27,17 +27,17 @@
 #include "navigator.h"
 #include "meteor.h"
 
-class Meteor_mgr
+class MeteorMgr
 {
 
  public:
-  Meteor_mgr(int zhr, int maxv );  // base_zhr is zenith hourly rate sans meteor shower
-  virtual ~Meteor_mgr();
+  MeteorMgr(int zhr, int maxv );  // base_zhr is zenith hourly rate sans meteor shower
+  virtual ~MeteorMgr();
   void set_ZHR(int zhr);   // set zenith hourly rate
   int get_ZHR(void);   
   void set_max_velocity(int maxv);   // set maximum meteoroid velocity km/s
-  void update(Projector *proj, navigator* nav, tone_reproductor* eye, int delta_time);          // update positions
-  void draw(Projector *proj, navigator* nav);		// Draw the meteors
+  void update(Projector *proj, Navigator* nav, tone_reproductor* eye, int delta_time);          // update positions
+  void draw(Projector *proj, Navigator* nav);		// Draw the meteors
 
 
  private:

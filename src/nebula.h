@@ -44,21 +44,21 @@
      PD    Photographic plate defect */
 
 
-class Nebula : public stel_object
+class Nebula : public StelObject
 {
-friend class Nebula_mgr;
+friend class NebulaMgr;
 public:
 	enum nebula_type { NEB_N, NEB_SG, NEB_PN, NEB_LG, NEB_EG, NEB_OC, NEB_GC, NEB_DN, NEB_IG, NEB_GX, NEB_UNKNOWN };
 
     Nebula();
     virtual ~Nebula();
 
-	virtual string get_info_string(const navigator * nav) const;
-	virtual string get_short_info_string(const navigator * nav = NULL) const;
+	virtual string get_info_string(const Navigator * nav) const;
+	virtual string get_short_info_string(const Navigator * nav = NULL) const;
 	virtual STEL_OBJECT_TYPE get_type(void) const {return STEL_OBJECT_NEBULA;}
-	virtual Vec3d get_earth_equ_pos(const navigator * nav = NULL) const {return nav->prec_earth_equ_to_earth_equ(XYZ);}
-	virtual double get_close_fov(const navigator * nav = NULL) const;
-	virtual float get_mag(const navigator * nav = NULL) const {return mag;}
+	virtual Vec3d get_earth_equ_pos(const Navigator * nav = NULL) const {return nav->prec_earth_equ_to_earth_equ(XYZ);}
+	virtual double get_close_fov(const Navigator * nav = NULL) const;
+	virtual float get_mag(const Navigator * nav = NULL) const {return mag;}
 
 	void set_label_color(Vec3f& v) {label_color = v;}
 	void set_circle_color(Vec3f& v) {circle_color = v;}
@@ -68,9 +68,9 @@ public:
     bool read_NGC(char *record);
     bool read_messier_texture(const string&);
 	void draw_tex(const Projector* prj, tone_reproductor* eye, bool bright_nebulae);
-	void draw_no_tex(const Projector* prj, const navigator * nav, tone_reproductor* eye);
+	void draw_no_tex(const Projector* prj, const Navigator * nav, tone_reproductor* eye);
     void draw_name(int hint_ON, const Projector* prj);
-    void draw_circle(const Projector* prj, const navigator * nav);
+    void draw_circle(const Projector* prj, const Navigator * nav);
     string get_name() { return name; };
     bool hasTex(void) { return (neb_tex != NULL); }
     static void set_nebula_scale(float scale) {nebula_scale = scale; }
@@ -79,7 +79,7 @@ public:
 
 protected:
 	// Return the radius of a circle containing the object on screen
-	virtual float get_on_screen_size(const Projector* prj, const navigator * nav = NULL);
+	virtual float get_on_screen_size(const Projector* prj, const Navigator * nav = NULL);
 
 private:
 	unsigned int NGC_nb;			// NGC catalog number

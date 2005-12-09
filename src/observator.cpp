@@ -49,7 +49,7 @@ Observator::~Observator()
 
 void Observator::load(const string& file, const string& section)
 {
-	init_parser conf;
+	InitParser conf;
 	conf.load(file);
 
 	if (!conf.find_entry(section))
@@ -111,7 +111,7 @@ void Observator::save(const string& file, const string& section)
 {
 	printf(_("Saving location %s to file %s\n"),name.c_str(), file.c_str());
 
-	init_parser conf;
+	InitParser conf;
 	conf.load(file);
 
 	conf.set_str(section + ":name", name);

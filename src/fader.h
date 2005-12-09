@@ -26,19 +26,19 @@
 // Class which manages a (usually smooth) transition between two states (typically ON/OFF) in function of a counter
 // It used for various purpose like smooth transitions between 
 
-class fader
+class Fader
 {
 public:
 	// Create and initialise
-	fader(bool _state, float _min_value=0.f, float _max_value=1.f) : state(_state), min_value(_min_value), max_value(_max_value) {;}
-    virtual ~fader() {;}
+	Fader(bool _state, float _min_value=0.f, float _max_value=1.f) : state(_state), min_value(_min_value), max_value(_max_value) {;}
+    virtual ~Fader() {;}
 	// Increments the internal counter of delta_time ticks
 	virtual void update(int delta_ticks) = 0;
 	// Gets current switch state
-	virtual float get_interstate(void) const = 0;
+	virtual float getInterstate(void) const = 0;
 	virtual float get_interstate_percentage(void) const = 0;
 	// Switchors can be used just as bools
-	virtual fader& operator=(bool s) = 0;
+	virtual Fader& operator=(bool s) = 0;
 	bool operator==(bool s) const {return state==s;}
 	operator bool() const {return state;}
 	virtual void set_duration(int _duration) {;}
@@ -49,37 +49,37 @@ protected:
 	float min_value, max_value;
 };
 
-class boolean_fader : public fader
+class BooleanFader : public Fader
 {
 public:
 	// Create and initialise
-	boolean_fader(bool _state=false, float _min_value=0.f, float _max_value=1.f) : fader(_state, _min_value, _max_value) {;}
-    ~boolean_fader() {;}
+	BooleanFader(bool _state=false, float _min_value=0.f, float _max_value=1.f) : Fader(_state, _min_value, _max_value) {;}
+    ~BooleanFader() {;}
 	// Increments the internal counter of delta_time ticks
 	void update(int delta_ticks) {;}
 	// Gets current switch state
-	float get_interstate(void) const {return state ? max_value : min_value;}
+	float getInterstate(void) const {return state ? max_value : min_value;}
 	float get_interstate_percentage(void) const {return state ? 100.f : 0.f;}
 	// Switchors can be used just as bools
-	fader& operator=(bool s) {state=s; return *this;}
+	Fader& operator=(bool s) {state=s; return *this;}
 protected:
 };
 
 // Please note that state is updated instantaneously, so if you need to draw something fading in
 // and out, you need to check the interstate value (!=0) to know to draw when on AND during transitions
-class linear_fader : public fader
+class LinearFader : public Fader
 {
 public:
 	// Create and initialise to default
-	linear_fader(int _duration=1000, float _min_value=0.f, float _max_value=1.f, bool _state=false) 
-		: fader(_state, _min_value, _max_value)
+	LinearFader(int _duration=1000, float _min_value=0.f, float _max_value=1.f, bool _state=false) 
+		: Fader(_state, _min_value, _max_value)
 	{
 		is_transiting = false;
 		duration = _duration;
 		interstate = state ? max_value : min_value;
 	}
 	
-    ~linear_fader() {;}
+    ~LinearFader() {;}
 	
 	// Increments the internal counter of delta_time ticks
 	void update(int delta_ticks)
@@ -102,11 +102,11 @@ public:
 	}
 	
 	// Get current switch state
-	float get_interstate(void) const { return interstate;}
+	float getInterstate(void) const { return interstate;}
 	float get_interstate_percentage(void) const {return 100.f * (interstate-min_value)/(max_value-min_value);}
 	
 	// Faders can be used just as bools
-	fader& operator=(bool s)
+	Fader& operator=(bool s)
 	{
 
 		if(is_transiting) {
@@ -149,19 +149,19 @@ protected:
 
 // Please note that state is updated instantaneously, so if you need to draw something fading in
 // and out, you need to check the interstate value (!=0) to know to draw when on AND during transitions
-class parabolic_fader : public fader
+class ParabolicFader : public Fader
 {
 public:
 	// Create and initialise to default
-	parabolic_fader(int _duration=1000, float _min_value=0.f, float _max_value=1.f, bool _state=false) 
-		: fader(_state, _min_value, _max_value)
+	ParabolicFader(int _duration=1000, float _min_value=0.f, float _max_value=1.f, bool _state=false) 
+		: Fader(_state, _min_value, _max_value)
 	{
 		is_transiting = false;
 		duration = _duration;
 		interstate = state ? max_value : min_value;
 	}
 	
-    ~parabolic_fader() {;}
+    ~ParabolicFader() {;}
 	
 	// Increments the internal counter of delta_time ticks
 	void update(int delta_ticks)
@@ -185,11 +185,11 @@ public:
 	}
 	
 	// Get current switch state
-	float get_interstate(void) const { return interstate;}
+	float getInterstate(void) const { return interstate;}
 	float get_interstate_percentage(void) const {return 100.f * (interstate-min_value)/(max_value-min_value);}
 	
 	// Faders can be used just as bools
-	fader& operator=(bool s)
+	Fader& operator=(bool s)
 	{
 
 		if(is_transiting) {
@@ -231,11 +231,11 @@ protected:
 
 
 /* better idea but not working...
-class parabolic_fader : public linear_fader
+class ParabolicFader : public LinearFader
 {
 public:
-	parabolic_fader(int _duration=1000, float _min_value=0.f, float _max_value=1.f, bool _state=false) 
-		: linear_fader(_duration, _min_value, _max_value, _state)
+	ParabolicFader(int _duration=1000, float _min_value=0.f, float _max_value=1.f, bool _state=false) 
+		: LinearFader(_duration, _min_value, _max_value, _state)
 		{
 		}
 	

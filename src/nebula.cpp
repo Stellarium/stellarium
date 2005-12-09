@@ -54,7 +54,7 @@ Nebula::~Nebula()
 	neb_tex = NULL;
 }
 
-string Nebula::get_info_string(const navigator* nav) const
+string Nebula::get_info_string(const Navigator* nav) const
 {
 	float tempDE, tempRA;
 
@@ -82,7 +82,7 @@ string Nebula::get_info_string(const navigator* nav) const
 	return oss.str();
 }
 
-string Nebula::get_short_info_string(const navigator*) const
+string Nebula::get_short_info_string(const Navigator*) const
 {
 	ostringstream oss;
 	
@@ -99,7 +99,7 @@ string Nebula::get_short_info_string(const navigator*) const
 	return oss.str();
 }
 
-double Nebula::get_close_fov(const navigator*) const
+double Nebula::get_close_fov(const Navigator*) const
 {
 	return angular_size * 180./M_PI * 4;
 }
@@ -241,7 +241,7 @@ void Nebula::draw_tex(const Projector* prj, tone_reproductor* eye, bool bright_n
     glEnd();
 }
 
-void Nebula::draw_circle(const Projector* prj, const navigator * nav)
+void Nebula::draw_circle(const Projector* prj, const Navigator * nav)
 {
 	if (2.f/get_on_screen_size(prj, nav)<0.1) return;
     inc_lum++;
@@ -260,7 +260,7 @@ void Nebula::draw_circle(const Projector* prj, const navigator * nav)
     glEnd ();
 }
 
-void Nebula::draw_no_tex(const Projector* prj, const navigator * nav,tone_reproductor* eye)
+void Nebula::draw_no_tex(const Projector* prj, const Navigator * nav,tone_reproductor* eye)
 {
 	float r = (get_on_screen_size(prj, nav)/2);
 //	if (r < 5) r = 5;
@@ -281,7 +281,7 @@ void Nebula::draw_no_tex(const Projector* prj, const navigator * nav,tone_reprod
 }
 
 // Return the radius of a circle containing the object on screen
-float Nebula::get_on_screen_size(const Projector* prj, const navigator * nav)
+float Nebula::get_on_screen_size(const Projector* prj, const Navigator * nav)
 {
 	return angular_size*180./M_PI/prj->get_fov()*prj->viewH();
 }
