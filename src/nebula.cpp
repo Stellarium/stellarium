@@ -199,7 +199,7 @@ bool Nebula::read(const string& record)
     return true;
 }
 
-void Nebula::draw_tex(const Projector* prj, tone_reproductor* eye, bool bright_nebulae)
+void Nebula::draw_tex(const Projector* prj, ToneReproductor* eye, bool bright_nebulae)
 {
     glEnable(GL_TEXTURE_2D);
     glEnable(GL_BLEND);
@@ -260,7 +260,7 @@ void Nebula::draw_circle(const Projector* prj, const Navigator * nav)
     glEnd ();
 }
 
-void Nebula::draw_no_tex(const Projector* prj, const Navigator * nav,tone_reproductor* eye)
+void Nebula::draw_no_tex(const Projector* prj, const Navigator * nav,ToneReproductor* eye)
 {
 	float r = (get_on_screen_size(prj, nav)/2);
 //	if (r < 5) r = 5;

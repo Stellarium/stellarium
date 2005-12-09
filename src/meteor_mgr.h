@@ -36,7 +36,7 @@ class MeteorMgr
   void set_ZHR(int zhr);   // set zenith hourly rate
   int get_ZHR(void);   
   void set_max_velocity(int maxv);   // set maximum meteoroid velocity km/s
-  void update(Projector *proj, Navigator* nav, tone_reproductor* eye, int delta_time);          // update positions
+  void update(Projector *proj, Navigator* nav, ToneReproductor* eye, int delta_time);          // update positions
   void draw(Projector *proj, Navigator* nav);		// Draw the meteors
 
 

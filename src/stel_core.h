@@ -51,7 +51,7 @@
 // Predeclaration of the StelCommandInterface class
 class StelCommandInterface;
 class ScriptMgr;
-class stel_ui;
+class StelUI;
 
 
 /**
@@ -63,7 +63,7 @@ class stel_ui;
  */
 class StelCore
 {
-friend class stel_ui;
+friend class StelUI;
 friend class StelCommandInterface;
 public:
 	// Inputs are the main data, textures, configuration directories relatively to the DATA_ROOT directory
@@ -219,7 +219,7 @@ private:
 	MilkyWay * milky_way;				// Our galaxy
 	MeteorMgr * meteors;				// Manage meteor showers
 	Landscape * landscape;				// The landscape ie the fog, the ground and "decor"
-	tone_reproductor * tone_converter;	// Tones conversion between stellarium world and display device
+	ToneReproductor * tone_converter;	// Tones conversion between stellarium world and display device
 
 	Planet* selected_planet;
 
@@ -255,7 +255,7 @@ private:
 	// Main elements of the stel_app
 	StelCommandInterface * commander;       // interface to perform all UI and scripting actions
 	ScriptMgr * scripts;                    // manage playing and recording scripts
-	stel_ui * ui;							// The main User Interface
+	StelUI * ui;							// The main User Interface
 	ImageMgr * script_images;               // for script loaded image display
 	SkyLocalizer *skyloc;					// for sky cultures and locales
 	

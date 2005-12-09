@@ -31,7 +31,7 @@ which are generally not at the apex of the Earth's way, such as the Perseids sho
 #include <cstdlib>
 #include "meteor.h"
 
-Meteor::Meteor(Projector *proj, Navigator* nav, tone_reproductor* eye, double v)
+Meteor::Meteor(Projector *proj, Navigator* nav, ToneReproductor* eye, double v)
 {
   //  velocity = 11+(double)rand()/((double)RAND_MAX+1)*v;  // abs range 11-72 km/s
   velocity=v;

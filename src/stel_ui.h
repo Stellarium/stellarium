@@ -37,12 +37,12 @@ class StelCore;
 using namespace std;
 using namespace s_gui;
 
-class stel_ui
+class StelUI
 {
 	friend class StelCore;
 public:
-	stel_ui(StelCore *);	// Create a stellarium ui. Need to call init() before use
-    virtual ~stel_ui();		// Delete the ui
+	StelUI(StelCore *);	// Create a stellarium ui. Need to call init() before use
+    virtual ~StelUI();		// Delete the ui
 	void init(void);		// Initialize the ui.
 	void draw(void);		// Display the ui
 	void gui_update_widgets(int delta_time);		// Update changing values
@@ -73,7 +73,7 @@ public:
     bool isInitialised(void) { return initialised; }
     void changeLocale(void) { desktop->changeLocale(); }
 private:
-	StelCore * core;		// The main core can be accessed because stel_ui is a friend class
+	StelCore * core;		// The main core can be accessed because StelUI is a friend class
 	bool initialised;
 	s_font * baseFont;		// The standard font
 	s_font * courierFont;	// The standard fixed size font
@@ -355,7 +355,7 @@ private:
 	void tui_cb_change_color();        // change colors
 
 	// Parse a file of type /usr/share/zoneinfo/zone.tab
-	s_tui::MultiSet_item<string>* stel_ui::create_tree_from_time_zone_file(const string& zonetab);
+	s_tui::MultiSet_item<string>* StelUI::create_tree_from_time_zone_file(const string& zonetab);
 
 	bool ScriptDirectoryRead;
 	double MouseTimeLeft;  // for cursor timeout (seconds)

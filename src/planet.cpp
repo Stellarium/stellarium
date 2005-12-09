@@ -368,7 +368,7 @@ float Planet::get_on_screen_size(const Projector* prj, const Navigator * nav)
 }
 
 // Draw the Planet and all the related infos : name, circle etc..
-void Planet::draw(int hint_ON, Projector* prj, const Navigator * nav, const tone_reproductor* eye, 
+void Planet::draw(int hint_ON, Projector* prj, const Navigator * nav, const ToneReproductor* eye, 
 				  int flag_point, int flag_trails, bool stencil)
 {
 	// TEMP -- place in command interface 
@@ -505,7 +505,7 @@ void Planet::draw_sphere(const Projector* prj, const Mat4d& mat, float screen_sz
 
 }
 
-void Planet::draw_halo(const Navigator* nav, const Projector* prj, const tone_reproductor* eye)
+void Planet::draw_halo(const Navigator* nav, const Projector* prj, const ToneReproductor* eye)
 {
 	static float cmag;
 	static float rmag;
@@ -569,7 +569,7 @@ void Planet::draw_halo(const Navigator* nav, const Projector* prj, const tone_re
 	prj->reset_perspective_projection();		// Restore the other coordinate
 }
 
-void Planet::draw_point_halo(const Navigator* nav, const Projector* prj, const tone_reproductor* eye)
+void Planet::draw_point_halo(const Navigator* nav, const Projector* prj, const ToneReproductor* eye)
 {
 	static float cmag;
 	static float rmag;
@@ -617,7 +617,7 @@ void Planet::draw_point_halo(const Navigator* nav, const Projector* prj, const t
 	prj->reset_perspective_projection();		// Restore the other coordinate
 }
 
-void Planet::draw_big_halo(const Navigator* nav, const Projector* prj, const tone_reproductor* eye)
+void Planet::draw_big_halo(const Navigator* nav, const Projector* prj, const ToneReproductor* eye)
 {
 	glBlendFunc(GL_ONE, GL_ONE);
 	float screen_r = get_on_screen_size(prj, nav);
