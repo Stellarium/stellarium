@@ -46,13 +46,13 @@ R constellation line color set in TUI - DONE
 R meridian line (first press of 'z') - DONE
 R remove planet orbits from 'p' key - move to another key and TUI - LEAVING AS IS FOR NOW
 R popup error windows as script debugging option - DONE
+R alt/az readout for selected object
 
 Outstanding:
 
 - GUI access to set sky language and sky culture (ideally with new pulldown menu)
 R sidereal day/week key control 
 - limiting magnitude/simulate light pollution (the feature somehow already exists in the skybright class BASIC version)
-- alt/az readout for selected object
 - unicode font support (need to choose solution between glgooey/FTGL/our own implemenation)
   > ftgl looks good
 R set zoom location
