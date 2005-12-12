@@ -58,8 +58,8 @@ string Nebula::get_info_string(const Navigator* nav) const
 {
 	float tempDE, tempRA;
 
-	Vec3d equatorial_pos = nav->prec_earth_equ_to_earth_equ(XYZ);
-	rect_to_sphe(&tempRA,&tempDE,equatorial_pos);
+	Vec3d equPos = nav->prec_earth_equ_to_earth_equ(XYZ);
+	rect_to_sphe(&tempRA,&tempDE,equPos);
 
 	ostringstream oss;
 
@@ -79,6 +79,16 @@ string Nebula::get_info_string(const Navigator* nav) const
 	oss << "Type : " << string(typeDesc == "" ? "-" : typeDesc) << endl;
 	oss << "Size : " << print_angle_dms_stel0(angular_size*180./M_PI) << endl; 
 	
+	// calculate alt az
+	Vec3d localPos = nav->earth_equ_to_local(equPos);
+	rect_to_sphe(&tempRA,&tempDE,localPos);
+	tempRA = 3*M_PI - tempRA;  // N is zero, E is 90 degrees
+	if(tempRA > M_PI*2) tempRA -= M_PI*2;
+
+	oss << "Az  : " << print_angle_dms_stel(tempRA*180./M_PI) << endl;
+	oss << "Alt : " << print_angle_dms_stel(tempDE*180./M_PI) << endl;
+
+
 	return oss.str();
 }
 
