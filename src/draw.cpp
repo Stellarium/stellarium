@@ -593,6 +593,25 @@ void MilkyWay::draw(ToneReproductor * eye, const Projector* prj, const Navigator
 	glDisable(GL_CULL_FACE);
 }
 
+void MilkyWay::draw_chart(ToneReproductor * eye, const Projector* prj, const Navigator* nav) 
+{
+	assert(tex);	// A texture must be loaded before calling this
+
+	glColor3fv(color);
+	glEnable(GL_CULL_FACE);
+	glEnable(GL_TEXTURE_2D); 
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	glBindTexture(GL_TEXTURE_2D, tex->getID());
+
+	prj->sSphere(radius,20,20,
+		     nav->get_prec_earth_equ_to_eye_mat()*
+		     Mat4d::xrotation(M_PI/180*23)*
+		     Mat4d::yrotation(M_PI/180*120)*
+		     Mat4d::zrotation(M_PI/180*7), 1);
+
+	glDisable(GL_CULL_FACE);
+}
 
 // Draw a point... (used for tests)
 void DrawPoint(float X,float Y,float Z)
