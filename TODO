@@ -45,7 +45,7 @@ R limiting mag for nebulae labels set in TUI - DONE
 R constellation line color set in TUI - DONE
 R meridian line (first press of 'z') - DONE
 R remove planet orbits from 'p' key - move to another key and TUI - LEAVING AS IS FOR NOW
-
+R popup error windows as script debugging option - DONE
 
 Outstanding:
 
@@ -55,11 +55,10 @@ R sidereal day/week key control
 - alt/az readout for selected object
 - unicode font support (need to choose solution between glgooey/FTGL/our own implemenation)
   > ftgl looks good
-- error message windows as option to be easier for windows users (script errors in particular)
 R set zoom location
 - precession circle drawing
-- hour angle on equator line (already on equatorial grid)
-- ecliptic line with (localized) months labeled
+R hour angle on equator line (already on equatorial grid) - MAKE OPTIONAL?
+R ecliptic line with (localized?) months labeled  - MAKE OPTIONAL?
 - script display text command
 - i18n nebulae labels
 - object name pick option (show only label/hint for selected object)

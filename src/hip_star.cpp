@@ -61,6 +61,7 @@ string HipStar::get_info_string(const Navigator * nav) const
 	float tempDE, tempRA;
 
 	Vec3d equatorial_pos = nav->prec_earth_equ_to_earth_equ(XYZ);
+	
 	rect_to_sphe(&tempRA,&tempDE,equatorial_pos);
 
 	ostringstream oss;
@@ -93,6 +94,16 @@ string HipStar::get_info_string(const Navigator * nav) const
 	oss.precision(1);
 	if(Distance) oss << Distance; else oss << "-";
 	oss << " Light Years" << endl;
+
+	// TEST alt az readout
+	Vec3d local_pos = nav->earth_equ_to_local(equatorial_pos);
+	rect_to_sphe(&tempRA,&tempDE,local_pos);
+	tempRA += M_PI;
+	if(tempRA > M_PI*2) tempRA -= M_PI*2;
+
+	oss << "Az  : " << print_angle_hms(tempRA*180./M_PI) << endl;
+	oss << "Alt : " << print_angle_dms_stel(tempDE*180./M_PI) << endl;
+
 	
 	return oss.str();
 }
