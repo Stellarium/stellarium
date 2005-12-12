@@ -135,7 +135,7 @@ double get_dec_angle(const string& str)
 	const char* s = str.c_str();
 	char *mptr, *ptr, *dec, *hh;
 	int negative = 0;
-	char delim1[] = " :.,;DdHhMm'\n\t\xBA";  // 0xBA was old degree delimiter
+	char delim1[] = " :.,;Dd°HhMm'\n\t\xBA";  // 0xBA was old degree delimiter
 	char delim2[] = " NSEWnsew\"\n\t";
 	int dghh = 0, minutes = 0;
 	double seconds = 0.0, pos;
@@ -584,5 +584,6 @@ string stripConstellation(const string& s)
 }
 
 
+// charting
 
-
+int draw_mode; // 0 normal, 1 chart, 2 night
