@@ -134,6 +134,7 @@ public:
 	float get_intensity() { return intensity; };
 	void set_texture(const string& tex_file, bool blend = false);
 	void set_color(const Vec3f& c) { color=c;}
+	void draw_chart(ToneReproductor * eye, const Projector* prj, const Navigator* nav);
 private:
 	float radius;
 	s_texture* tex;
