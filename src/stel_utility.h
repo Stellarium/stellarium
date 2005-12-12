@@ -107,5 +107,7 @@ int fcompare(const string& _base, const string& _sub);
 string translateGreek(const string& s);
 string stripConstellation(const string& s);
 
+enum DRAWMODE { DM_NORMAL=0, DM_CHART, DM_NIGHTCHART };
+extern int draw_mode;
 
 #endif
