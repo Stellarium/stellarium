@@ -95,7 +95,17 @@ string Planet::get_info_string(const Navigator * nav) const
 	oss.precision(2);
 	oss << "Magnitude : " << compute_magnitude(nav->get_observer_helio_pos()) << endl;
 	oss.precision(8);
-	oss << "Distance : " << equPos.length() << "AU";
+	oss << "Distance : " << equPos.length() << "AU" << endl;
+
+	// calculate alt az
+	Vec3d localPos = nav->earth_equ_to_local(equPos);
+	rect_to_sphe(&tempRA,&tempDE,localPos);
+	tempRA = 3*M_PI - tempRA;  // N is zero, E is 90 degrees
+	if(tempRA > M_PI*2) tempRA -= M_PI*2;
+
+	oss << "Az  : " << print_angle_dms_stel(tempRA*180./M_PI) << endl;
+	oss << "Alt : " << print_angle_dms_stel(tempDE*180./M_PI) << endl;
+
 
 	return oss.str();
 }
