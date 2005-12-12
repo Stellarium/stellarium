@@ -95,13 +95,13 @@ string HipStar::get_info_string(const Navigator * nav) const
 	if(Distance) oss << Distance; else oss << "-";
 	oss << " Light Years" << endl;
 
-	// TEST alt az readout
+	// calculate alt az
 	Vec3d local_pos = nav->earth_equ_to_local(equatorial_pos);
 	rect_to_sphe(&tempRA,&tempDE,local_pos);
-	tempRA += M_PI;
+	tempRA = 3*M_PI - tempRA;  // N is zero, E is 90 degrees
 	if(tempRA > M_PI*2) tempRA -= M_PI*2;
 
-	oss << "Az  : " << print_angle_hms(tempRA*180./M_PI) << endl;
+	oss << "Az  : " << print_angle_dms_stel(tempRA*180./M_PI) << endl;
 	oss << "Alt : " << print_angle_dms_stel(tempDE*180./M_PI) << endl;
 
 	
