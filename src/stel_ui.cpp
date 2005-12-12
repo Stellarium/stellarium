@@ -145,9 +145,9 @@ void StelUI::init(void)
 
 	// Info on selected object
 	info_select_ctr = new Container();
-	info_select_ctr->reshape(0,15,300,100);
+	info_select_ctr->reshape(0,15,300,200);
 	info_select_txtlbl = new TextLabel();
-    info_select_txtlbl->reshape(5,5,550,102);
+    info_select_txtlbl->reshape(5,5,550,202);
 	info_select_ctr->setVisible(0);
 	info_select_ctr->addComponent(info_select_txtlbl);
 	info_select_ctr->setGUIColorSchemeMember(false);
