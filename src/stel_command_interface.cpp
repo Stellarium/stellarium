@@ -710,8 +710,13 @@ int StelCommandInterface::set_flag(string name, string value, bool &newval, bool
 			newval = (stcore->FlagAtmosphere = !stcore->FlagAtmosphere);
 			if(!newval) stcore->FlagFog = 0;  // turn off fog with atmosphere
 		}
+		else if(name=="chart") {
+			newval = stcore->FlagChart = !stcore->FlagChart;
+			stcore->SetDrawMode();
+		}
 		else if(name=="night") {
 			newval = stcore->FlagNight = !stcore->FlagNight;
+			stcore->SetDrawMode();
 		}
 		//else if(name=="use_common_names") newval = (stcore->FlagUseCommonNames = !stcore->FlagUseCommonNames);
 		else if(name=="azimuthal_grid") newval = (stcore->FlagAzimutalGrid = !stcore->FlagAzimutalGrid);
@@ -818,9 +823,15 @@ int StelCommandInterface::set_flag(string name, string value, bool &newval, bool
 			stcore->FlagAtmosphere = newval;
 			if(!newval) stcore->FlagFog = 0;  // turn off fog with atmosphere
 		}
+		else if(name=="chart") {
+			stcore->FlagChart = newval;
+			stcore->SetDrawMode();
+		}
 		else if(name=="night") {
 			stcore->FlagNight = newval;
+			stcore->SetDrawMode();
 		}
+		else if(name=="chart") stcore->FlagChart = newval;
 //		else if(name=="use_common_names") stcore->FlagUseCommonNames = newval;
 		else if(name=="azimuthal_grid") stcore->FlagAzimutalGrid = newval;
 		else if(name=="equatorial_grid") stcore->FlagEquatorialGrid = newval;
