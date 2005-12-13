@@ -47,6 +47,7 @@
 #include "script_mgr.h"
 #include "image_mgr.h"
 #include "loadingbar.h"
+#include "typeface.h"
 
 // Predeclaration of the StelCommandInterface class
 class StelCommandInterface;
@@ -195,6 +196,8 @@ public:
 	void play_startup_script();
 
 private:
+	TypeFace* UTFfont;
+
 	void set_system_locale(void);
 	void set_sky_locale(void);
 	string get_cursor_pos(int x, int y);
