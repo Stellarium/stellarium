@@ -378,6 +378,92 @@ void HipStar::draw_chart(void)
 		glLineWidth(1.0f);
 	}
 }
+
+bool HipStar::readSAO(char *record, float maxmag)
+{
+	int RAh, RAm, DEd, DEm;
+	float RAs, DEs;
+	double DE, RA;
+	int num;
+	
+	// filter the magnitude
+	sscanf(&record[103],"%f",&Mag);
+	if (Mag < -1) Mag = 14; 			// trap -9.99's
+	if (Mag > maxmag) return false;
+
+	sscanf(&record[0],"%d",&SAO);
+	sscanf(&record[11],"%d",&num);
+	if (num > 0) HD = num;
+	
+	sscanf(&record[37],"%d %d %f",&RAh, &RAm, &RAs);
+	sscanf(&record[52],"%d %d %f",&DEd, &DEm, &DEs);
+	RA = (double)RAh+(float)RAm/60.+(float)RAs/3600.;
+	DE = (double)DEd+(float)DEm/60.+(float)DEs/3600.;
+	if (record[51] == '-') DE *= -1.;
+
+	RA*=M_PI/12.;     // Convert from hours to rad
+	DE*=M_PI/180.;    // Convert from deg to rad
+
+	// Calc the Cartesian coord with RA and DE
+    sphe_to_rect(RA,DE,XYZ);
+	XYZ *= RADIUS_STAR;
+
+	SpType = record[143];
+	setColor(SpType);
+
+	Distance = 0; // not in file (no parallex)
+
+	return true;
+}
+
+bool HipStar::readHP(char *record, float maxmag)
+{
+	int RAh, RAm, DEd, DEm;
+	float RAs, DEs;
+	double DE, RA;
+	int num;
+	float par;
+	
+	sscanf(&record[2],"%d",&HP);
+
+	// filter the magnitude
+	sscanf(&record[351],"%f",&Mag);
+	if (Mag < -2) Mag = 14;				// trap -9.99's, sirius = -1.03!
+	if (Mag > maxmag)
+		return false;
+
+	sscanf(&record[465],"%d",&num);
+	if (num > 0) HD = num;
+
+	sscanf(&record[14],"%d %d %f",&RAh, &RAm, &RAs);
+	sscanf(&record[28],"%d %d %f",&DEd, &DEm, &DEs);
+	RA = (double)RAh+(float)RAm/60.+(float)RAs/3600.;
+	DE = (double)DEd+(float)DEm/60.+(float)DEs/3600.;
+	if (record[27] == '-') DE *= -1.;
+	
+	RA*=M_PI/12.;     // Convert from hours to rad
+	DE*=M_PI/180.;    // Convert from deg to rad
+
+	// Calc the Cartesian coord with RA and DE
+    sphe_to_rect(RA,DE,XYZ);
+	XYZ *= RADIUS_STAR;
+
+	SpType = record[516];
+	setColor(SpType);
+
+	// Determine the distance from the parallax
+	sscanf(&record[87],"%f",&par);
+	if (par <= 0.001)
+		Distance = 0;
+	else
+	{
+		Distance = 1.f*3261.64/par;
+		if (Distance < 0) Distance = 0;
+	}
+
+	return true;
+}
+
 void HipStar::setColor(char sp)
 {
 	// Normal star colors
