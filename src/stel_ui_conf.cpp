@@ -576,7 +576,7 @@ Component* StelUI::createSearchWindow(void)
 	lblnebula1->setPos(x, y+5);
 	tab_nebula->addComponent(lblnebula1);
 
-	Label * lblnebula2 = new Label(_("eg. M83, NGC 7009, IC 2118"));
+	Label * lblnebula2 = new Label(_("eg. M83, NGC 7009, IC 2118, CW 113, SH 40" ));
 	lblnebula2->setPos(x+100, y+35);
 	tab_nebula->addComponent(lblnebula2);
 
@@ -978,6 +978,7 @@ void StelUI::saveRenderOptions(void)
 	conf.set_boolean("astro:flag_planets", core->FlagPlanets);
 	conf.set_boolean("astro:flag_planets_hints", core->FlagPlanetsHints);
 	conf.set_double("viewing:moon_scale", core->ssystem->get_moon()->get_sphere_scale());
+	conf.set_boolean("viewing:flag_chart", core->FlagChart);
 	conf.set_boolean("viewing:flag_night", core->FlagNight);
 	//conf.set_boolean("viewing:use_common_names", core->FlagUseCommonNames);
 	conf.set_boolean("viewing:flag_equatorial_grid", core->FlagEquatorialGrid);
