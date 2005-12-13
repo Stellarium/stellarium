@@ -179,7 +179,7 @@ void StelUI::init(void)
 	desktop->addComponent(createLicenceWindow());
 	desktop->addComponent(createHelpWindow());
 	desktop->addComponent(createConfigWindow());
-	desktop->addComponent(createSearchWindow()); // Tony - added the search window
+	desktop->addComponent(createSearchWindow());
 
 	initialised = true;
 }
@@ -386,6 +386,7 @@ Component* StelUI::createFlagButtons(void)
 
 	bt_flag_ctr->addComponent(bt_flag_search);			bt_flag_search->setPos(x,0); x+=UI_BT;
 	bt_flag_ctr->addComponent(bt_flag_config);			bt_flag_config->setPos(x,0); x+=UI_BT;
+	bt_flag_ctr->addComponent(bt_flag_chart);			bt_flag_chart->setPos(x,0); x+=UI_BT;
 	bt_flag_ctr->addComponent(bt_flag_night);			bt_flag_night->setPos(x,0); x+=UI_BT;
 	bt_flag_ctr->addComponent(bt_flag_help);			bt_flag_help->setPos(x,0); x+=UI_BT;
 	bt_flag_ctr->addComponent(bt_flag_quit);			bt_flag_quit->setPos(x,0); x+=UI_BT;
@@ -544,6 +545,7 @@ void StelUI::cb(void)
 		if (!core->FlagNight) desktop->setColorScheme(core->GuiBaseColor, core->GuiTextColor);
 		else desktop->setColorScheme(core->GuiBaseColorr, core->GuiTextColorr);
 	}
+	core->SetDrawMode();
 	config_win->setVisible(core->FlagConfig);
 
 	core->FlagSearch			= bt_flag_search->getState();
