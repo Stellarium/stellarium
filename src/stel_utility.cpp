@@ -586,4 +586,4 @@ string stripConstellation(const string& s)
 
 // charting
 
-int draw_mode; // 0 normal, 1 chart, 2 night
+int draw_mode = DM_NORMAL; // 0 normal, 1 chart, 2 night
