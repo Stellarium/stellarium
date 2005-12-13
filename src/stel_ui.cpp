@@ -1339,6 +1339,7 @@ void StelUI::gui_update_widgets(int delta_time)
 	bt_flag_help->setState(help_win->getVisible());
 	bt_flag_equatorial_mode->setState(core->navigation->get_viewing_mode()==Navigator::VIEW_EQUATOR);
 	bt_flag_config->setState(config_win->getVisible());
+	bt_flag_chart->setState(core->FlagChart);
 	bt_flag_night->setState(core->FlagNight);
 	bt_flag_search->setState(search_win->getVisible()); 
 	bt_flag_goto->setState(false); 
