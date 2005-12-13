@@ -47,6 +47,8 @@ HipStarMgr::~HipStarMgr()
 	delete starTexture;
 	starTexture=NULL;
 
+	delete starcTexture;
+	starcTexture=NULL;
 	
 	delete HipStar::starFont;
 	HipStar::starFont=NULL;
@@ -68,6 +70,7 @@ void HipStarMgr::init(float font_size, const string& font_name, const string& hi
     load_common_names(commonNameFile);
 	load_sci_names(sciNameFile);
 	
+	starcTexture = new s_texture("starc64x64",TEX_LOAD_TYPE_PNG_BLEND3);  // Load star chart texture
 	starTexture = new s_texture("star16x16",TEX_LOAD_TYPE_PNG_SOLID);  // Load star texture
     HipStar::starFont = new s_font(font_size, font_name);
     if (!HipStar::starFont)
