@@ -373,7 +373,12 @@ private:
 	float ConstellationArtIntensity;
 	float ConstellationArtFadeDuration;
 	//bool FlagUseCommonNames;
+	bool FlagChart;
 	bool FlagNight;
+	bool ColorSchemeChanged;
+	inline void SetDrawMode(void) { draw_mode = (int)FlagChart;	if (FlagChart) draw_mode += (int)FlagNight; ColorSchemeChanged = true;}
+	void ChangeColorScheme(void);
+	void draw_chart_background(void);
 
 	// Navigation
 	string PositionFile;

@@ -63,6 +63,8 @@ StelCore::StelCore(const string& DDIR, const string& TDIR, const string& CDIR, c
 	time_multiplier = 1;
 	object_pointer_visibility = 1;
 
+	draw_mode = DM_NORMAL;
+	ColorSchemeChanged = true;
 }
 
 StelCore::~StelCore()
@@ -363,6 +365,7 @@ void StelCore::update(int delta_time)
 // Execute all the drawing functions
 void StelCore::draw(int delta_time)
 {
+	if (ColorSchemeChanged) ChangeColorScheme();
 	
 	// Init openGL viewing with fov, screen size and clip planes
 	projection->set_clipping_planes(0.0005 ,50);
@@ -378,11 +381,17 @@ void StelCore::draw(int delta_time)
 
 	glBlendFunc(GL_ONE, GL_ONE);
 
+	if (draw_mode != DM_NORMAL)
+		draw_chart_background();
+
 	// Draw the milky way. If not activated, need at least to clear the color buffer
 	if (FlagMilkyWay)
 	{
 		tone_converter->set_world_adaptation_luminance(atmosphere->get_milkyway_adaptation_luminance());
-		milky_way->draw(tone_converter, projection, navigation);
+		if (draw_mode == DM_NORMAL)
+			milky_way->draw(tone_converter, projection, navigation);
+		else
+			milky_way->draw_chart(tone_converter, projection, navigation);
 		tone_converter->set_world_adaptation_luminance(atmosphere->get_world_adaptation_luminance());
 	}
 	else
@@ -721,7 +730,9 @@ void StelCore::load_config_from(const string& confFile)
 	MoonScale				= conf.get_double ("viewing","moon_scale",5.);
 	ConstellationArtIntensity       = conf.get_double("viewing","constellation_art_intensity", 0.5);
 	ConstellationArtFadeDuration    = conf.get_double("viewing","constellation_art_fade_duration",2.);
+	FlagChart    			= conf.get_boolean("viewing:flag_chart");
 	FlagNight    			= conf.get_boolean("viewing:flag_night");
+	SetDrawMode();
 //	FlagUseCommonNames		= conf.get_boolean("viewing:flag_use_common_names");
 
 	// Astro section
@@ -1472,4 +1483,27 @@ void StelCore::set_sky_locale(void)
 
 void StelCore::play_startup_script() {
 	if(scripts) scripts->play_startup_script();
+}
+void StelCore::ChangeColorScheme(void)
+{
+	ColorSchemeChanged = false;
+}
+
+void StelCore::draw_chart_background(void)
+{
+	int stepX = projection->viewW();
+	int stepY = projection->viewH();
+	int viewport_left = projection->view_left();
+	int view_bottom = projection->view_bottom();
+
+	glDisable(GL_TEXTURE_2D);
+	glDisable(GL_BLEND);
+	projection->set_orthographic_projection();	// set 2D coordinate
+	glBegin(GL_QUADS);
+	   	glTexCoord2s(0, 0); glVertex2i(viewport_left, view_bottom);	// Bottom Left
+    	glTexCoord2s(1, 0); glVertex2i(viewport_left+stepX, view_bottom);	// Bottom Right
+       	glTexCoord2s(1, 1); glVertex2i(viewport_left+stepX,view_bottom+stepY);	// Top Right
+        glTexCoord2s(0, 1); glVertex2i(viewport_left,view_bottom+stepY);	// Top Left
+	glEnd();
+	projection->reset_perspective_projection();
 }
