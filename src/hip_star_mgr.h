@@ -68,6 +68,7 @@ private:
 	HipStar ** StarFlatArray; 			// The simple array of the star for sequential research
 	int starArraySize;                  // Number of star in the array
 	s_texture * starTexture;
+	s_texture *starcTexture;			// charted interior disc
 	LinearFader names_fader;
 	float limiting_mag;                  // limiting magnitude at 60 degree fov
 	vector<string> lstCommonNames;
