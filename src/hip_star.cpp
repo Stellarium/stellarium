@@ -40,9 +40,21 @@ s_font *HipStar::starFont = NULL;
 
 Vec3f HipStar::circle_color = Vec3f(0.f,0.f,0.f);
 Vec3f HipStar::label_color = Vec3f(.8f,.8f,.8f);
+Vec3f HipStar::ChartColors[20] = 
+{
+	Vec3f(0.25,0.60,1.00) /* A+*/,	Vec3f(0.73,0.13,0.59) /* B+*/,	Vec3f(1.00,0.50,0.00) /* C-*/,
+	Vec3f(0.00,0.00,0.00) /* Dx*/,	Vec3f(0.00,0.00,0.00) /* Ex*/,	Vec3f(0.15,0.85,0.00) /* F+*/,
+	Vec3f(1.00,1.00,0.25) /* G+*/,	Vec3f(0.00,0.00,0.00) /* Hx*/,	Vec3f(0.00,0.00,0.00) /* Ix*/,
+	Vec3f(0.00,0.00,0.00) /* Jx*/,	Vec3f(1.00,0.65,0.25) /* K+*/,	Vec3f(0.00,0.00,0.00) /* Lx*/,
+	Vec3f(1.00,0.00,0.00) /* M */,	Vec3f(1.00,0.00,0.00) /* N+*/,	Vec3f(0.73,0.13,0.59) /* O+*/,
+	Vec3f(0.00,0.00,0.00) /* Px*/,	Vec3f(0.00,0.00,0.00) /* Qx*/,	Vec3f(1.00,0.00,0.00) /* R+*/,
+	Vec3f(0.00,0.00,0.00) /* S+*/,	Vec3f(0.50,0.50,0.50) /* Defualt */
+};
 
 HipStar::HipStar() :
 	HP(0),
+	HD(0),
+	SAO(0),
 	doubleStar(false),
 	variableStar(false)
 {
@@ -312,9 +324,98 @@ bool HipStar::draw_name(void)
 			starname = oss.str();
 		}
 	}
-    glColor3fv(RGB*0.75*names_brightness);
+	
+	if (draw_mode == DM_NORMAL) glColor3fv(RGB*0.75*names_brightness);
+	else glColor3fv(label_color);
+
 	gravity_label ? proj->print_gravity180(starFont, XY[0],XY[1], starname, 1, 6, -4) :
 	starFont->print(XY[0]+6,XY[1]-4, starname);
 	
 	return true;
+}
+
+void HipStar::draw_chart(void)
+{
+	float r = Mag*-0.81+8.85;
+
+	// multiplier = 1 at fov = 35, and 1/2 at fov=180
+	r = r *((.5-1)/(180-35)*proj->get_fov()+(1-35*((.5-1)/(180-35))));
+
+	if (r < 2.4) return;
+	
+    glColor3fv(ChartColors[ChartColorIndex]);
+
+//	glBindTexture (GL_TEXTURE_2D, idcTex);
+   	glBegin(GL_QUADS);
+        glTexCoord2i(0,0);    glVertex2f(XY[0]-r,XY[1]-r);	// Bottom left
+   	    glTexCoord2i(1,0);    glVertex2f(XY[0]+r,XY[1]-r);	// Bottom right
+       	glTexCoord2i(1,1);    glVertex2f(XY[0]+r,XY[1]+r);	// Top right
+        glTexCoord2i(0,1);    glVertex2f(XY[0]-r,XY[1]+r);	// Top left
+    glEnd();
+
+   	glColor3fv(circle_color);
+	glCircle(XY,r);
+	if (variableStar)
+		glCircle(XY,(r-2));
+	else if (doubleStar)
+	{
+		bool lastState = glIsEnabled(GL_TEXTURE_2D);
+
+		glDisable(GL_TEXTURE_2D);
+		glLineWidth(1.f);
+			
+		glBegin(GL_LINE_LOOP);
+			glVertex3f(XY[0] - r - 4, XY[1],0.f);
+			glVertex3f(XY[0] - r, XY[1],0.f);
+		glEnd();
+			
+		glBegin(GL_LINE_LOOP);
+			glVertex3f(XY[0] + r, XY[1],0.f);
+			glVertex3f(XY[0] + r+4, XY[1],0.f);
+		glEnd();
+			
+		if (lastState) glEnable(GL_TEXTURE_2D);
+		glLineWidth(1.0f);
+	}
+}
+void HipStar::setColor(char sp)
+{
+	// Normal star colors
+    switch (sp)             // Color depending on the spectral type
+    {
+        case 'O':   RGB[0]=0.8f;  RGB[1]=1.0f; RGB[2]=1.3f;  break;
+        case 'B':   RGB[0]=0.9f;  RGB[1]=1.0f; RGB[2]=1.2f;  break;
+        case 'A':   RGB[0]=0.95f; RGB[1]=1.0f; RGB[2]=1.15f; break;
+        case 'F':   RGB[0]=1.05f; RGB[1]=1.0f; RGB[2]=1.05f; break;
+        case 'G':   RGB[0]=1.3f;  RGB[1]=1.0f; RGB[2]=0.9f;  break;
+        case 'K':   RGB[0]=1.15f; RGB[1]=0.95f;RGB[2]=0.8f;  break;
+        case 'M':   RGB[0]=1.15f; RGB[1]=0.85f;RGB[2]=0.8f;  break;
+        case 'C':   RGB[0]=1.3f;  RGB[1]=0.85f;RGB[2]=0.6f;  break;
+        case 'R':
+        case 'N':
+        case 'S':   RGB[0]=1.5f;  RGB[1]=0.8f; RGB[2]=0.2f;  break;
+        default :   RGB[0]=1.0f;  RGB[1]=1.0f; RGB[2]=1.0f;
+    }
+
+	// Precomputation of a term used later
+	term1 = expf(-0.92103f*(Mag + 12.12331f)) * 108064.73f;
+
+    MaxColorValue = MY_MAX(RGB[0],RGB[2]);
+
+	// chart star color
+    switch (sp)             // Color depending on the spectral type
+    {
+        case 'O':   ChartColorIndex = 14;  break;
+        case 'B':	ChartColorIndex = 1; break;
+        case 'A': 	ChartColorIndex = 0; break;
+        case 'F':	ChartColorIndex = 5; break;
+        case 'G':	ChartColorIndex = 6; break;
+        case 'K':	ChartColorIndex = 10; break;
+        case 'M':	ChartColorIndex = 12; break;
+        case 'C':	ChartColorIndex = 2; break;
+        case 'R':	ChartColorIndex = 17; break;
+        case 'N':	ChartColorIndex = 13; break;
+		case 'S':	ChartColorIndex = 18; break;
+        default :	ChartColorIndex = 20; break;
+    }
 }
