@@ -66,7 +66,9 @@ public:
 	// Read the Nebula data from a file
     bool read(const string&);
     bool read_NGC(char *record);
+    bool read_Sharpless(char *record);
     bool read_messier_texture(const string&);
+	void draw_chart(const Projector* prj, const Navigator * nav, bool bright_nebulae);
 	void draw_tex(const Projector* prj, ToneReproductor* eye, bool bright_nebulae);
 	void draw_no_tex(const Projector* prj, const Navigator * nav, ToneReproductor* eye);
     void draw_name(int hint_ON, const Projector* prj);
@@ -85,6 +87,8 @@ private:
 	unsigned int NGC_nb;			// NGC catalog number
 	unsigned int IC_nb;				// IC catalog number
 	unsigned int Messier_nb;		// messier
+	unsigned int Cadwell_nb;		// NGC catalog number
+	unsigned int Sharpless_nb;		// NGC catalog number
 	string name;					// Nebula name
 	string longname;				// Nebula name & description
 	string credit;					// Nebula image credit

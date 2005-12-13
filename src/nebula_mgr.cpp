@@ -53,6 +53,8 @@ NebulaMgr::~NebulaMgr()
 bool NebulaMgr::read(float font_size, const string& font_name, const string& fileName, LoadingBar& lb)
 {
 	read_NGC_catalog(fileName, lb);
+	read_Sharpless_catalog(fileName, lb);
+	read_Cadwell_catalog(fileName, lb);
 	read_messier_textures(fileName, lb);
 /*	
 	printf(_("Loading messier nebulas data "));
@@ -121,6 +123,9 @@ void NebulaMgr::draw(int hint_ON, Projector* prj, const Navigator * nav, ToneRep
 
 	glEnable(GL_TEXTURE_2D);
     glEnable(GL_BLEND);
+	if (draw_mode == DM_NORMAL) glBlendFunc(GL_ONE, GL_ONE);
+	else glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // charting
+	    
     Vec3f pXYZ; 
 
 	prj->set_orthographic_projection();
@@ -148,16 +153,21 @@ void NebulaMgr::draw(int hint_ON, Projector* prj, const Navigator * nav, ToneRep
 				// project in 2D to check if the nebula is in screen
 				if ( !prj->project_earth_equ_check(pXYZ,(*iter)->XY) ) continue;
 				
-				if (draw_tex && (*iter)->get_on_screen_size(prj, nav)>5) 
-					if ((*iter)->hasTex())
-						(*iter)->draw_tex(prj, eye, bright_nebulae && (*iter)->get_on_screen_size(prj, nav)>15 );
-					else 
-						(*iter)->draw_no_tex(prj, nav, eye);
-				
-				if (hints) {
-					(*iter)->draw_name(hint_ON, prj);
-					(*iter)->draw_circle(prj, nav);
+				if (draw_mode == DM_NORMAL)
+				{
+					if (draw_tex && (*iter)->get_on_screen_size(prj, nav)>5) 
+					{
+						if ((*iter)->hasTex())
+							(*iter)->draw_tex(prj, eye, bright_nebulae && (*iter)->get_on_screen_size(prj, nav)>15 );
+						else 
+							(*iter)->draw_no_tex(prj, nav, eye);
+					}				
 				}
+				else
+					(*iter)->draw_chart(prj, nav, bright_nebulae);	// charting
+
+				if (hints) (*iter)->draw_name(hint_ON, prj);
+				if (hints && !draw_mode) (*iter)->draw_circle(prj, nav);
 			}
 		}
 	}
@@ -168,7 +178,7 @@ void NebulaMgr::draw(int hint_ON, Projector* prj, const Navigator * nav, ToneRep
 // search by name
 StelObject * NebulaMgr::search(const string& name)
 {
-	const string catalogs("NGC IC");
+	const string catalogs("NGC IC CW SH");
 	string cat;
 	unsigned int num;
 
@@ -202,6 +212,8 @@ StelObject * NebulaMgr::search(const string& name)
 	
 	if (cat == "M") return searchMessier(num);
 	if (cat == "NGC") return searchNGC(num);
+	if (cat == "SH") return searchSharpless(num);
+	if (cat == "CW") return searchCadwell(num);
 	return searchIC(num);
 }
 
@@ -256,6 +268,28 @@ StelObject * NebulaMgr::searchNGC(unsigned int NGC)
     for(iter=neb_array.begin();iter!=neb_array.end();iter++) 
 	{
 		if ((*iter)->NGC_nb == NGC) return (*iter);
+    }
+
+    return NULL;
+}
+
+StelObject * NebulaMgr::searchSharpless(unsigned int Sharpless)
+{
+    vector<Nebula *>::iterator iter;
+    for(iter=neb_array.begin();iter!=neb_array.end();iter++) 
+	{
+		if ((*iter)->Sharpless_nb == Sharpless) return (*iter);
+    }
+
+    return NULL;
+}
+
+StelObject * NebulaMgr::searchCadwell(unsigned int Cadwell)
+{
+    vector<Nebula *>::iterator iter;
+    for(iter=neb_array.begin();iter!=neb_array.end();iter++) 
+	{
+		if ((*iter)->Cadwell_nb == Cadwell) return (*iter);
     }
 
     return NULL;
@@ -415,6 +449,176 @@ bool NebulaMgr::read_NGC_catalog(const string& fileName, LoadingBar& lb)
 	}
     fclose(ngcNameFile);
 	cout << "(" << i << " items loaded)" << endl;
+
+	return true;
+}
+
+// read from stream
+bool NebulaMgr::read_Sharpless_catalog(const string& fileName, LoadingBar& lb)
+{
+	char recordstr[512], tmpstr[512];
+	string dataDir = fileName;
+	unsigned int catalogSize, i;
+	unsigned int data_drop;
+
+	// create the texture string (no path or extension)
+	unsigned int loc = dataDir.rfind("/");
+	
+	if (loc != string::npos)
+		dataDir = dataDir.substr(0,loc+1);
+
+    cout << _("Loading Sharpless data...");
+	string SharplessData = dataDir + "Sharpless.dat";
+    FILE * SharplessFile = fopen(SharplessData.c_str(),"rb");
+    if (!SharplessFile)
+    {
+        cout << "Sharpless data file " << SharplessData << " not found" << endl;
+		return false;
+    }
+
+	// read the number of lines
+    catalogSize=0;
+	while (fgets(recordstr,512,SharplessFile)) catalogSize++;
+	rewind(SharplessFile);
+
+	// Read the Sharpless entries
+	i = 0;
+	data_drop = 0;
+	while (fgets(recordstr,512,SharplessFile)) // temporary for testing
+	{
+		if (!(i%200) || (i == catalogSize-1))
+		{
+			// Draw loading bar
+			snprintf(tmpstr, 512, _("Loading Sharpless catalog: %d/%d"), i == catalogSize-1 ? catalogSize : i, catalogSize);
+			lb.SetMessage(tmpstr);
+			lb.Draw((float)i/catalogSize);
+		}
+		Nebula *e = new Nebula;
+		int temp = e->read_Sharpless(recordstr);
+		if (!temp) // reading error
+		{
+			cout << "Error while parsing nebula " << e->name << endl;
+			delete e;
+			e = NULL;
+			data_drop++;
+		} 
+		else
+		{
+			neb_array.push_back(e);
+		}
+		i++;
+	}
+    fclose(SharplessFile);
+	cout << "(" << i << " items loaded [" << data_drop << " dropped])" << endl;
+
+	return true;
+}
+
+// read from stream
+bool NebulaMgr::read_Cadwell_catalog(const string& fileName, LoadingBar& lb)
+{
+	char recordstr[512], tmpstr[512];
+	string dataDir = fileName;
+	unsigned int catalogSize, i;
+	unsigned int data_drop;
+	int nb, ref_nb;
+	char ref_type;
+
+	// create the texture string (no path or extension)
+	unsigned int loc = dataDir.rfind("/");
+	
+	if (loc != string::npos)
+		dataDir = dataDir.substr(0,loc+1);
+
+    cout << _("Loading Cadwell reference data...");
+	string CadwellData = dataDir + "Cadwell.dat";
+    FILE * CadwellFile = fopen(CadwellData.c_str(),"rb");
+    if (!CadwellFile)
+    {
+        cout << "Cadwell data file " << CadwellData << " not found" << endl;
+		return false;
+    }
+
+	// read the number of lines
+    catalogSize=0;
+	while (fgets(recordstr,512,CadwellFile)) catalogSize++;
+	rewind(CadwellFile);
+
+	// Read the Cadwell entries
+	i = 0;
+	data_drop = 0;
+	Nebula *e;
+	while (fgets(recordstr,512,CadwellFile)) // temporary for testing
+	{
+		if (!(i%200) || (i == catalogSize-1))
+		{
+			// Draw loading bar
+			snprintf(tmpstr, 512, _("Loading Cadwell catalog: %d/%d"), i == catalogSize-1 ? catalogSize : i, catalogSize);
+			lb.SetMessage(tmpstr);
+			lb.Draw((float)i/catalogSize);
+		}
+		istringstream ss(recordstr);
+		ss >> nb >> ref_type >> ref_nb;
+		
+		if (ref_type == 'N')
+			e = (Nebula *)searchNGC(nb);
+		else if (ref_type == 'I')
+			e = (Nebula *)searchIC(nb);
+		else if (ref_type == 'S')
+			e = (Nebula *)searchSharpless(nb);
+		else if (ref_type == 'R')
+			e = new Nebula;
+		else
+			e = NULL;
+			
+		if (!e)
+		{
+			cout << "Error reading line " << i << ":" << recordstr << endl;
+		} 
+		else
+		{
+			e->Cadwell_nb = nb;
+			if (ref_type == 'R')
+			{
+				int rahr;
+		    	float ramin;
+			    int dedeg;
+			    float demin;
+			    char sign;
+			    string name;
+
+				ss >> rahr >> ramin;
+				ss >> sign;
+				ss >> dedeg >> demin;
+				float RaRad = (double)rahr+ramin/60;
+				float DecRad = (float)dedeg+demin/60;
+				if (sign == '-') DecRad *= -1.;
+
+				RaRad*=M_PI/12.;     // Convert from hours 	to rad
+				DecRad*=M_PI/180.;    // Convert from deg to rad
+
+	    		// Calc the Cartesian coord with RA and DE
+		    	sphe_to_rect(RaRad,DecRad,e->XYZ);
+			    e->XYZ*=RADIUS_NEB;
+				e->mag = 4;
+				e->angular_size = (50)/2/60*M_PI/180;
+				e->luminance = mag_to_luminance(e->mag, e->angular_size*e->angular_size*3600);
+				if (e->luminance < 0) e->luminance = .0075;
+
+				ss >> name;
+				e->name = name;
+				e->longname = name;
+				ss >> e->typeDesc;
+				
+				if (e->typeDesc == "Oc") { e->nType = Nebula::NEB_OC; e->typeDesc = "Oc"; }
+				else { e->nType = Nebula::NEB_UNKNOWN; e->typeDesc = ""; }
+
+				neb_array.push_back(e);
+			}
+		}
+	}
+    fclose(CadwellFile);
+	cout << "(" << i << " items loaded [" << data_drop << " dropped])" << endl;
 
 	return true;
 }
