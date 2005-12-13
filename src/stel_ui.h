@@ -108,6 +108,7 @@ private:
 	FlagButton * bt_flag_help;
 	FlagButton * bt_flag_equatorial_mode;
 	FlagButton * bt_flag_config;
+	FlagButton * bt_flag_chart;
 	FlagButton * bt_flag_night;
 	FlagButton * bt_flag_search;
 	EditBox * bt_script;

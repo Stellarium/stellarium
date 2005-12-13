@@ -52,6 +52,7 @@ StelUI::StelUI(StelCore * _core) :
 		bt_flag_help(NULL),
 		bt_flag_equatorial_mode(NULL),
 		bt_flag_config(NULL),
+		bt_flag_chart(NULL),
 		bt_flag_night(NULL),
 		bt_flag_search(NULL),
         bt_script(NULL),
@@ -331,6 +332,9 @@ Component* StelUI::createFlagButtons(void)
 	bt_flag_config->setOnPressCallback(callback<void>(this, &StelUI::cb));
 	bt_flag_config->setOnMouseInOutCallback(callback<void>(this, &StelUI::cbr));
 
+	bt_flag_chart = new FlagButton(false, NULL, "bt_chart");
+	bt_flag_chart->setOnPressCallback(callback<void>(this, &StelUI::cb));
+	bt_flag_chart->setOnMouseInOutCallback(callback<void>(this, &StelUI::cbr));
 
 	bt_flag_night = new FlagButton(false, NULL, "bt_night");
 	bt_flag_night->setOnPressCallback(callback<void>(this, &StelUI::cb));
@@ -533,6 +537,7 @@ void StelUI::cb(void)
 	help_win->setVisible(core->FlagHelp);
 	core->navigation->set_viewing_mode(bt_flag_equatorial_mode->getState() ? Navigator::VIEW_EQUATOR : Navigator::VIEW_HORIZON);
 	core->FlagConfig			= bt_flag_config->getState();
+	core->FlagChart				= bt_flag_chart->getState();
 	if  (core->FlagNight != bt_flag_night->getState())
 	{
 		core->FlagNight				= bt_flag_night->getState();
@@ -588,6 +593,8 @@ void StelUI::cbr(void)
 		bt_flag_help_lbl->setLabel(_("Equatorial/Altazimuthal Mount [ENTER]"));
 	if (bt_flag_config->getIsMouseOver())
 		bt_flag_help_lbl->setLabel(_("Configuration window"));
+	if (bt_flag_chart->getIsMouseOver())
+		bt_flag_help_lbl->setLabel("Chart mode");
 	if (bt_flag_night->getIsMouseOver())
 		bt_flag_help_lbl->setLabel(_("Night (red) mode"));
 	if (bt_flag_quit->getIsMouseOver())
