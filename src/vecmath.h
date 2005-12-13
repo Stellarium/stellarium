@@ -35,6 +35,7 @@ template<class T> class Matrix4;
 
 typedef Vector2<float>	Vec2f;
 typedef Vector2<int>	Vec2i;
+typedef Vector2<size_t> Vec2size_t;
 
 typedef Vector3<float>	Vec3f;
 typedef Vector3<double>	Vec3d;

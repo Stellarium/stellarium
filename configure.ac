@@ -23,6 +23,18 @@ AC_ISC_POSIX
 AC_PROG_CXX
 AC_PROG_RANLIB
 
+
+# Check for freetype2
+# This macro won't work on my system?!... use the old way until the problem is fixed..
+# AC_CHECK_FT2(2.0.4,,)
+AC_CHECK_LIB(freetype, FT_Init_FreeType,,AC_MSG_ERROR(freetype library not found, please install libfreetype.))
+FT2_CFLAGS="`freetype-config --cflags`"
+FT2_LIBS="`freetype-config --libs`"
+CFLAGS="$CFLAGS $FT2_CFLAGS"
+CXXFLAGS="$CXXFLAGS $FT2_CFLAGS"
+LIBS="$LIBS $FT2_LIBS"
+
+
 dnl Can't find later libGLU if -lm not set here!?!??!
 AC_CHECK_LIB(m,fabs,LIBS="$LIBS -lm",AC_MSG_RESULT(math library not found))
 
