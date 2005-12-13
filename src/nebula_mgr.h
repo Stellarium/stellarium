@@ -63,8 +63,12 @@ public:
 private:
 	StelObject *searchNGC(unsigned int NGC);
 	StelObject *searchIC(unsigned int NGC);
+	StelObject *searchSharpless(unsigned int Sharpless);
+	StelObject *searchCadwell(unsigned int Sharpless);
 	StelObject *searchMessier(unsigned int M);
 	bool read_NGC_catalog(const string& fileName, LoadingBar& lb);
+	bool read_Sharpless_catalog(const string& fileName, LoadingBar& lb);
+	bool read_Cadwell_catalog(const string& fileName, LoadingBar& lb);
 	bool read_messier_textures(const string& fileName, LoadingBar& lb);
 
 	FILE *nebula_fic;
