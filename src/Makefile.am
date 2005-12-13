@@ -15,7 +15,9 @@ stellarium_SOURCES = main.cpp stel_sdl.h stel_sdl.cpp stel_core.h stel_core.cpp 
 	stel_command_interface.h stel_command_interface.cpp script_mgr.h script_mgr.cpp script.h \
 	script.cpp image_mgr.h image_mgr.cpp image.h image.cpp audio.h audio.cpp \
 	loadingbar.h loadingbar.cpp fader.h gettext.h cylinder_projector.cpp \
-	cylinder_projector.h
+	cylinder_projector.h \
+	typeface.h typeface.cpp 
+
 
 stellarium_LDADD = $(top_builddir)/src/glpng/libglpng.a \
 $(top_builddir)/src/stellplanet/libstellplanet.a \
