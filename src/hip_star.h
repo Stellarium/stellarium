@@ -40,6 +40,8 @@ public:
     HipStar();
     virtual ~HipStar();
     int read(FILE * pFile);	// Read the star data in the stream
+	bool readSAO(char *record, float maxmag);
+	bool readHP(char *record, float maxmag);
     void draw(void);		// Draw the star
 	void draw_point(void);	// Draw the star as a point
     bool draw_name(void);	// draw the name - returns true if something drawn (and texture re-assigned for fonts)
@@ -52,18 +54,23 @@ public:
 	virtual double get_best_fov(const Navigator * nav = NULL) const {return (13.f - 2.f * Mag > 1.f) ? (13.f - Mag) : 1.f;}
 	virtual float get_mag(const Navigator * nav = NULL) const {return Mag;}
 	virtual unsigned int get_hp_number() { return HP; };
-
+    void draw_chart(void);
 	static void set_starname_format(int _format) {nameFormat = _format;}
 	static int get_starname_format(void) {return nameFormat;}
 	void set_label_color(Vec3f& v) {label_color = v;}
 	void set_circle_color(Vec3f& v) {circle_color = v;}
 private:
+	void setColor(char sp);
+
     unsigned int HP;		// Hipparcos number
+    unsigned int HD;		// HD number
+    unsigned int SAO;		// SAO number
     float Mag;				// Apparent magnitude
     bool doubleStar;		// double star flag
     bool variableStar;		// not implemented yet
     Vec3f XYZ;				// Cartesian position
     Vec3f RGB;				// RGB colour values
+    int ChartColorIndex;
     float MaxColorValue;	// Precalc of the max color value
     Vec3d XY;				// 2D Position + z homogeneous value
 	float term1;			// Optimization term
@@ -84,6 +91,7 @@ private:
 	static bool gravity_label;
 	static Vec3f circle_color, label_color;
 	static int nameFormat;		// 0 - standard, 1 shortsciname, 2 sciname (incl constellation)
+	static Vec3f ChartColors[20];
 	static s_font *starFont;
 };
 
