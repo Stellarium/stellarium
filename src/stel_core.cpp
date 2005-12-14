@@ -172,6 +172,8 @@ void StelCore::init(void)
 	nebulas->set_circle_color(NebulaCircleColor);
 	nebulas->read(NebulaFontSize, DataDir + BaseFontName, DataDir + "messier.fab", lb);
 		
+	// Init stars
+
 	// Init the solar system
 	ssystem->load(DataDir + "ssystem.ini");
 	ssystem->set_label_color(PlanetNamesColor);
@@ -202,7 +204,9 @@ void StelCore::init(void)
 	cardinals_points->set_font(CardinalsFontSize, DataDir + BaseFontName);
 
 	// Init milky way
-	milky_way->set_texture("milkyway");
+	if (draw_mode == DM_NORMAL)	milky_way->set_texture("milkyway");
+	else milky_way->set_texture("milkyway_chart",true);
+
 	milky_way->set_intensity(MilkyWayIntensity);
 		
 	meteors = new MeteorMgr(10, 60);
@@ -651,10 +655,10 @@ void StelCore::load_config_from(const string& confFile)
 	FlagShowAppName		= conf.get_boolean("gui:flag_show_appname");
 	FlagShowFov			= conf.get_boolean("gui:flag_show_fov");
 	FlagShowSelectedObjectInfo = conf.get_boolean("gui:flag_show_selected_object_info");
-	GuiBaseColor		= StelUtility::StelUtility::StelUtility::str_to_vec3f(conf.get_str("color", "gui:gui_base_color", "0.3,0.4,0.7").c_str());
-	GuiTextColor		= StelUtility::StelUtility::StelUtility::str_to_vec3f(conf.get_str("color", "gui:gui_text_color", "0.7,0.8,0.9").c_str());
-	GuiBaseColorr		= StelUtility::StelUtility::StelUtility::str_to_vec3f(conf.get_str("color", "gui:gui_base_colorr", "0.7,0.2,0.1").c_str());
-	GuiTextColorr		= StelUtility::StelUtility::StelUtility::str_to_vec3f(conf.get_str("color", "gui:gui_text_colorr", "0.9,0.4,0.2").c_str());
+	GuiBaseColor		= StelUtility::str_to_vec3f(conf.get_str("color", "gui:gui_base_color", "0.3,0.4,0.7").c_str());
+	GuiTextColor		= StelUtility::str_to_vec3f(conf.get_str("color", "gui:gui_text_color", "0.7,0.8,0.9").c_str());
+	GuiBaseColorr		= StelUtility::str_to_vec3f(conf.get_str("color", "gui:gui_base_colorr", "0.7,0.2,0.1").c_str());
+	GuiTextColorr		= StelUtility::str_to_vec3f(conf.get_str("color", "gui:gui_text_colorr", "0.9,0.4,0.2").c_str());
 	BaseFontSize		= conf.get_double ("gui","base_font_size",15);
 	BaseFontName        = conf.get_str("gui", "base_font_name", "spacefont.txt");
 	FlagShowScriptBar	= conf.get_boolean("gui","flag_show_script_bar",0);
@@ -691,7 +695,7 @@ void StelCore::load_config_from(const string& confFile)
 	FlagManualZoom		= conf.get_boolean("navigation:flag_manual_zoom");
 	FlagEnableMoveMouse	= conf.get_boolean("navigation","flag_enable_move_mouse",1);
 	InitFov				= conf.get_double ("navigation","init_fov",60.);
-	InitViewPos 		= StelUtility::StelUtility::str_to_vec3f(conf.get_str("navigation:init_view_pos").c_str());
+	InitViewPos 		= StelUtility::str_to_vec3f(conf.get_str("navigation:init_view_pos").c_str());
 	auto_move_duration	= conf.get_double ("navigation","auto_move_duration",1.5);
 	FlagUTC_Time		= conf.get_boolean("navigation:flag_utc_time");
 	MouseZoom			= conf.get_int("navigation","mouse_zoom",30);
@@ -903,6 +907,7 @@ void StelCore::save_config_to(const string& confFile)
 	conf.set_double ("viewing:moon_scale", MoonScale);
 	conf.set_double ("viewing:constellation_art_intensity", ConstellationArtIntensity);
 	conf.set_double ("viewing:constellation_art_fade_duration", ConstellationArtFadeDuration);
+	conf.set_boolean("viewing:flag_chart", FlagChart);
 	conf.set_boolean("viewing:flag_night", FlagNight);
 	//conf.set_boolean("viewing:flag_use_common_names", FlagUseCommonNames);
 
@@ -1493,6 +1498,11 @@ void StelCore::play_startup_script() {
 }
 void StelCore::ChangeColorScheme(void)
 {
+
+	// Init milky way
+	if (draw_mode == DM_NORMAL)	milky_way->set_texture("milkyway");
+	else milky_way->set_texture("milkyway_chart",true);
+
 	ColorSchemeChanged = false;
 }
 
