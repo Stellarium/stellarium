@@ -66,7 +66,7 @@ StelCore::StelCore(const string& DDIR, const string& TDIR, const string& CDIR, c
 	draw_mode = DM_NORMAL;
 	ColorSchemeChanged = true;
 
-	UTFfont = new TypeFace(DataDir+"accid___.ttf", 30, 72);
+	UTFfont = new TypeFace(DataDir+"DejaVuSans.ttf", 14, 72);
 }
 
 StelCore::~StelCore()
@@ -486,8 +486,8 @@ void StelCore::draw(int delta_time)
 	projection->set_orthographic_projection(); 
 	script_images->draw(screen_W, screen_H, navigation, projection);
 	
-	std::wstring s(L"Fabien Chéreau :)");
-	UTFfont->render(s, Vec2f(40, 40));
+	std::wstring s(L"Fabien Chereau");
+	UTFfont->render(s, Vec2f(40, 400));
 	
 	projection->reset_perspective_projection(); 
 
