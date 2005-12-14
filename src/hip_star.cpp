@@ -87,6 +87,8 @@ string HipStar::get_info_string(const Navigator * nav) const
 	{
 		oss << "HP " << HP;
 	}
+	if (doubleStar) oss << "(Dbl)";
+	else if (variableStar) oss << "(Var)";
 	oss << endl;
 	
 	oss << "Cat : HP:";

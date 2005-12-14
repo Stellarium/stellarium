@@ -48,7 +48,10 @@ public:
 	void set_limiting_mag(float _mag) {limiting_mag=_mag;}
 	float get_limiting_mag() {return limiting_mag;}
     HipStar *search(Vec3f Pos);  		// Search the star by position
+	HipStar *search(const string&);	// Search the star by string (incl catalog prefix)
 	HipStar *searchHP(unsigned int);	// Search the star by HP number
+	HipStar *searchSAO(unsigned int);	// Search the star by SAO number
+	HipStar *searchHD(unsigned int);	// Search the star by HD number
 	// Return a stl vector containing the stars located inside the lim_fov circle around position v
 	vector<StelObject*> search_around(Vec3d v, double lim_fov);
 	vector<string> getNames(void) { return lstCommonNames; }
@@ -67,6 +70,8 @@ private:
 	HipStar * StarArray;  				// Sequential Array of the star for memory allocation optimization
 	HipStar ** StarFlatArray; 			// The simple array of the star for sequential research
 	int starArraySize;                  // Number of star in the array
+
+	int CombinedTotal;
 	s_texture * starTexture;
 	s_texture *starcTexture;			// charted interior disc
 	LinearFader names_fader;
