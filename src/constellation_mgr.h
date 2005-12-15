@@ -66,7 +66,7 @@ public:
 	void set_boundary_color(const Vec3f& c) {Constellation::set_boundary_color(c);}
 	Vec3f get_boundary_color() {return Constellation::get_boundary_color();}
 	void set_font(float font_size, const string& font_name);
-	void set_selected(const string& shortname) {set_selected_const(find_from_short_name(shortname));}
+	void set_selected(const string& shortname) {set_selected_const(findFromAbbreviation(shortname));}
 	void set_selected(const HipStar * s) {if (!s) set_selected_const(NULL); else set_selected_const(is_star_in(s));}
 	unsigned int get_first_selected_HP(void) {if (selected != NULL) return selected->asterism[0]->get_hp_number(); else return 0;}  //Tony
 	vector<string> getNames(void);
@@ -81,7 +81,7 @@ private:
 	void set_selected_const(Constellation* c);
 
     Constellation* is_star_in(const HipStar *) const;
-    Constellation* find_from_short_name(const string& shortname) const;		
+    Constellation* findFromAbbreviation(const string& abbreviation) const;		
     vector<Constellation*> asterisms;
     s_font *asterFont;
     HipStarMgr *hipStarMgr;

@@ -18,6 +18,7 @@
  */
 
 #include <iostream>
+#include <algorithm>
 #include "constellation.h"
 
 bool Constellation::gravity_label = false;
@@ -46,15 +47,14 @@ bool Constellation::read(const string& record, HipStarMgr * _VouteCeleste)
 {   
 	unsigned int HP;
 
-	short_name[0] = 0;
+	abbreviation.clear();
 	nb_segments = 0;
 
 	std::istringstream istr(record);
-	if (!(istr >> short_name >> nb_segments)) return false;
+	if (!(istr >> abbreviation >> nb_segments)) return false;
 		
 	// make short_name uppercase for case insensitive searches
-	for(int a=0; a<3; a++) short_name[a] = ::toupper(short_name[a]);
-	name = string(short_name);
+	transform(abbreviation.begin(),abbreviation.end(), abbreviation.begin(), ::toupper);
 
     asterism = new HipStar*[nb_segments*2];
     for (unsigned int i=0;i<nb_segments*2;++i)
@@ -70,7 +70,7 @@ bool Constellation::read(const string& record, HipStarMgr * _VouteCeleste)
         asterism[i]=_VouteCeleste->searchHP(HP);
 		if (!asterism[i])
 		{
-			cout << "Error in Constellation " << name << " asterism : can't find star HP= " << HP << endl;
+			cout << "Error in Constellation " << abbreviation << " asterism : can't find star HP= " << HP << endl;
 			delete [] asterism;
 			return false;
 		}
@@ -121,8 +121,8 @@ void Constellation::draw_name(s_font * constfont, Projector* prj) const
 {
 	if(!name_fader.getInterstate()) return;
 	glColor3fv(label_color*name_fader.getInterstate());
-	gravity_label ? prj->print_gravity180(constfont, XYname[0], XYname[1], name, 1, -constfont->getStrLen(name)/2) :
-	constfont->print(XYname[0]-constfont->getStrLen(name)/2, XYname[1], name);
+	gravity_label ? prj->print_gravity180(constfont, XYname[0], XYname[1], nameI18, 1, -constfont->getStrLen(nameI18)/2) :
+	constfont->print(XYname[0]-constfont->getStrLen(nameI18)/2, XYname[1], nameI18);
 }
 
 // Draw the art texture, optimized function to be called thru a constellation manager only

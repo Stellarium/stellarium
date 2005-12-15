@@ -150,7 +150,7 @@ void ConstellationMgr::load_lines_and_art(const string &fileName, const string &
 		lb.Draw((float)(current+1)/total);
 		
 		cons = NULL;
-		cons = find_from_short_name(shortname);
+		cons = findFromAbbreviation(shortname);
 		if (!cons)
 		{
 			printf("ERROR : Can't find constellation called : %s\n", shortname);
@@ -260,17 +260,17 @@ Constellation *ConstellationMgr::is_star_in(const HipStar * s) const
 	return NULL;
 }
 
-Constellation *ConstellationMgr::find_from_short_name(const string & shortname) const
+Constellation *ConstellationMgr::findFromAbbreviation(const string & abbreviation) const
 {
 	// search in uppercase only
-	string tname = shortname;
+	string tname = abbreviation;
 	transform(tname.begin(), tname.end(), tname.begin(),::toupper);
 	
 	vector < Constellation * >::const_iterator iter;
 	for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
 	{
 		// Check if the star is in one of the constellation
-		if (string((*iter)->short_name) == tname)
+		if (string((*iter)->abbreviation) == tname)
 			return (*iter);
 	}
 	return NULL;
@@ -288,7 +288,7 @@ void ConstellationMgr::loadNames(const string& namesFile)
 	vector < Constellation * >::const_iterator iter;
 	for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
 	{
-		(*iter)->name.clear();
+		(*iter)->englishName.clear();
 	}
 
 	// read in translated common names from file
@@ -307,7 +307,7 @@ void ConstellationMgr::loadNames(const string& namesFile)
 	{
 		istringstream in(record); 
 		in >> tmpShortName;
-		aster = find_from_short_name(tmpShortName);
+		aster = findFromAbbreviation(tmpShortName);
 		if (aster != NULL)
 		{
 			// Read the names in english
@@ -327,7 +327,7 @@ void ConstellationMgr::translateNames()
 	vector < Constellation * >::const_iterator iter;
 	for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
 	{
-		(*iter)->name = gettext((*iter)->englishName.c_str());
+		(*iter)->nameI18 = gettext((*iter)->englishName.c_str());
 	}
 }
 
@@ -339,7 +339,7 @@ vector <string> ConstellationMgr::getNames(void)
 
 	for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
 	{
-		name = (*iter)->getName();
+		name = (*iter)->getNameI18();
 		transform(name.begin(), name.end(), name.begin(), ::tolower);
 		transform(name.begin(), name.begin()+1, name.begin(), ::toupper);
         names.push_back(name);
@@ -363,7 +363,7 @@ string ConstellationMgr::get_short_name_by_name(string _name) {
 
 	for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
 	{
-		if( fcompare(_name, (*iter)->getName()) == 0) return (*iter)->getShortName();
+		if( fcompare(_name, (*iter)->getNameI18()) == 0) return (*iter)->getShortName();
 	}
 	return "";
 
@@ -592,7 +592,7 @@ bool ConstellationMgr::load_boundaries(const string& conCatFile)
 			// not used?
 			if (consname == "SER1" || consname == "SER2") consname = "SER";
 			
-			cons = find_from_short_name(consname);
+			cons = findFromAbbreviation(consname);
 				if (!cons) cout << "ERROR : Can't find constellation called : " << consname << endl;
 			else cons->isolatedBoundarySegments.push_back(points);
 		}
