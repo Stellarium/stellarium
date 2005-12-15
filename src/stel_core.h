@@ -323,16 +323,24 @@ private:
 	float CardinalsFontSize;
 	float LoadingBarFontSize;
 
-	Vec3f AzimuthalColor;
-	Vec3f EquatorialColor;
-	Vec3f EquatorColor;
-	Vec3f EclipticColor;
+	Vec3f AzimuthalColor[3];
+	Vec3f EquatorialColor[3];
+	Vec3f EquatorColor[3];
+	Vec3f EclipticColor[3];
 
-	Vec3f NebulaLabelColor;
-	Vec3f NebulaCircleColor;
-	Vec3f PlanetNamesColor;
-	Vec3f PlanetOrbitsColor;
-	Vec3f ObjectTrailsColor;
+	Vec3f ConstLinesColor[3];
+	Vec3f ConstBoundaryColor[3];
+	Vec3f ConstNamesColor[3];
+	Vec3f NebulaLabelColor[3];
+	Vec3f NebulaCircleColor[3];
+	Vec3f StarLabelColor[3];
+	Vec3f StarCircleColor[3];
+	Vec3f CardinalColor[3];
+	Vec3f PlanetNamesColor[3];
+	Vec3f PlanetOrbitsColor[3];
+	Vec3f ObjectTrailsColor[3];
+	Vec3f ChartColor[3];
+	Vec3f MilkyWayColor[3];
 
 	double MouseCursorTimeout;  // seconds to hide cursor when not used.  0 means no timeout
 

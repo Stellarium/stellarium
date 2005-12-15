@@ -533,6 +533,9 @@ int str_compare_case_insensitive(const string& str1, const string& str2)
 		return s;
 }
 */
+
+//#define BUILDING_SAO_CAT
+
 string translateGreek(const string& s)
 {
 	int sz, n;
@@ -540,7 +543,11 @@ string translateGreek(const string& s)
 	
 //	string letters("ALF BET GAM DEL EPS ZET ETA THE IOT KAP LAM MU. NU. XI OMI PI RHO SIG TAU UPS PHI CHI PSI OME");
 	const string letters("AL BE GA DE EP ZE ET TE IO KA LA MU NU KS OM PI RH SI TA UP PH KH PS OM");
-//	const int array[25] = { 3,3,3,3,3,3,3,3,3,3,3,2,2,2,3,2,3,3,3,3,3,3,3,3 };
+#ifdef BUILDING_SAO_CAT
+	const int array[25] = { 3,3,3,3,3,3,3,3,3,3,3,2,2,2,3,2,3,3,3,3,3,3,3,3 };
+#else
+	const int array[25] = { 3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3 };
+#endif
 	unsigned int loc;
 	
 	// Match the first 2 characters
@@ -551,8 +558,7 @@ string translateGreek(const string& s)
 
 	// get the corresponding number of characters in the greek string
 	n = (int)loc/3;
-//	sz = array[n];
-	sz = 3;	
+	sz = array[n];
 	oss << char(130 + n);
 
 	// see if a number code after and translate to the supertext characters.
@@ -571,7 +577,6 @@ string translateGreek(const string& s)
 			while (i < loc)	oss << char(subscript[i++]+112);
 		}
 	}
-		
 	return oss.str();
 }
 
