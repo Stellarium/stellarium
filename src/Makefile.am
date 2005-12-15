@@ -28,3 +28,4 @@ $(top_builddir)/src/iniparser/libiniparser.a \
 INCLUDES = -I$(top_srcdir)/src/glpng -I$(top_srcdir)/src/stellplanet -I$(top_srcdir)/src/stellastro -I$(top_srcdir)/src/iniparser -I$(top_srcdir)/intl
 
 SUBDIRS = glpng stellplanet stellastro iniparser
+noinst_HEADERS = translations.h

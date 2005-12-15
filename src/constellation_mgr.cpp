@@ -277,51 +277,58 @@ Constellation *ConstellationMgr::find_from_short_name(const string & shortname) 
 }
 
 
-// Read constellation names from the given file
-void ConstellationMgr::load_names(const string& names_file)
+//! @brief Read constellation names from the given file
+//! @param namesFile Name of the file containing the constellation names in english
+void ConstellationMgr::loadNames(const string& namesFile)
 {
-	vector < Constellation * >::const_iterator iter;
-	char short_name[4];
-	char cname[200];
-	Constellation *aster;
-	
 	// Constellation not loaded yet
 	if (asterisms.empty()) return;
 	
 	// clear previous names
+	vector < Constellation * >::const_iterator iter;
 	for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
 	{
-		(*iter)->set_name("");
+		(*iter)->name.clear();
 	}
 
 	// read in translated common names from file
-	FILE *cnFile;
-	cnFile = NULL;
-
-	cnFile = fopen(names_file.c_str(), "r");
-	if (!cnFile)
+	ifstream commonNameFile(namesFile.c_str());
+	if (!commonNameFile.is_open())
 	{
-		printf("WARNING %s NOT FOUND\n", names_file.c_str());
+		cout << "Can't open file" << namesFile << endl;
 		return;
 	}
-
+	
 	// find matching constellation and update name
-	while (!feof(cnFile))
+	string record;
+	string tmpShortName;
+	Constellation *aster;
+	while (!std::getline(commonNameFile, record).eof())
 	{
-		fscanf(cnFile, "%s\t%s\n", short_name, cname);
-		aster = find_from_short_name(string(short_name));
+		istringstream in(record); 
+		in >> tmpShortName;
+		aster = find_from_short_name(tmpShortName);
 		if (aster != NULL)
 		{
-
-			int i=0;
-			while(cname[i] != 0 && i<199) {
-				if(cname[i]=='_') cname[i]=' ';
-				i++;
-			}
-			aster->set_name(cname);
+			// Read the names in english
+			aster->englishName = record.substr(tmpShortName.length()+1,record.length()).c_str();
 		}
 	}
-	fclose(cnFile);
+	commonNameFile.close();
+	
+	// Translate i18 names to current locale
+	translateNames();
+}
+
+//! @brief Update i18 names from english names according to current locale
+//! The translation is done using gettext with translated strings defined in translations.h
+void ConstellationMgr::translateNames()
+{
+	vector < Constellation * >::const_iterator iter;
+	for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
+	{
+		(*iter)->name = gettext((*iter)->englishName.c_str());
+	}
 }
 
 vector <string> ConstellationMgr::getNames(void) 

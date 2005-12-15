@@ -52,7 +52,6 @@ public:
 private:
     void draw_optim(Projector* prj) const;
     void draw_art_optim(Projector* prj, Navigator* nav) const;
-    void set_name(string _name) { name = _name; }
 	void update(int delta_time);
 	void set_flag_lines(bool b) {line_fader=b;}
 	void set_flag_boundaries(bool b) {boundary_fader=b;}
@@ -63,7 +62,10 @@ private:
 	bool get_flag_name(void) {return name_fader;}
 	bool get_flag_art(void) {return art_fader;}
 	
+	//! International name (translated using gettext)
     string name;
+    //! Name in english
+	string englishName;
     char short_name[4];
     Vec3f XYZname;
 	Vec3d XYname;
@@ -76,7 +78,6 @@ private:
 	static Vec3f line_color, label_color, boundary_color;
 
 	static bool singleSelected;
-//	vector<Vec3f> boundaryXYZ;
 	vector<vector<Vec3f> *> isolatedBoundarySegments;
 	vector<vector<Vec3f> *> sharedBoundarySegments;
 };

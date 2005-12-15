@@ -32,36 +32,7 @@ using namespace std;
 #include "draw.h"
 
 SolarSystem::SolarSystem() : sun(NULL), moon(NULL), earth(NULL), tex_earth_shadow(NULL)
-{
-	// Generate Gettext strings for traduction
-	char * tmp = NULL;
-	tmp = gettext_noop("Sun");
-	tmp = gettext_noop("Mercury");
-	tmp = gettext_noop("Venus");
-	tmp = gettext_noop("Earth");
-	tmp = gettext_noop("Moon");
-	tmp = gettext_noop("Mars");
-	tmp = gettext_noop("Deimos");
-	tmp = gettext_noop("Phobos");
-	tmp = gettext_noop("Jupiter");
-	tmp = gettext_noop("Io");
-	tmp = gettext_noop("Europa");
-	tmp = gettext_noop("Ganymede");
-	tmp = gettext_noop("Callisto");
-	tmp = gettext_noop("Saturn");
-	tmp = gettext_noop("Mimas");
-	tmp = gettext_noop("Enceladus");
-	tmp = gettext_noop("Tethys");
-	tmp = gettext_noop("Dione");
-	tmp = gettext_noop("Rhea");
-	tmp = gettext_noop("Titan");
-	tmp = gettext_noop("Hyperion");
-	tmp = gettext_noop("Iapetus");
-	tmp = gettext_noop("Phoebe");
-	tmp = gettext_noop("Neptune");
-	tmp = gettext_noop("Uranus");
-	tmp = gettext_noop("Pluto");
-	tmp = gettext_noop("Charon");	
+{	
 }
 
 void SolarSystem::set_font(float font_size, const string& font_name)

@@ -1477,7 +1477,7 @@ int StelCore::set_sky_culture(string _culture_dir)
 	//	printf(_("Loading constellations for sky culture: \"%s\"\n"), SkyCulture.c_str());
 	asterisms->load_lines_and_art(DataDir + "sky_cultures/" + SkyCulture + "/constellationship.fab",
 		DataDir + "sky_cultures/" + SkyCulture + "/constellationsart.fab", lb);
-	asterisms->load_names(DataDir + "sky_cultures/" + SkyCulture + "/constellation_names." + SkyLocale + ".fab");
+	asterisms->loadNames(DataDir + "sky_cultures/" + SkyCulture + "/constellation_names.eng.fab");
 	
 	// as constellations have changed, clear out any selection and retest for match!
 	if (selected_object && selected_object->get_type()==StelObject::STEL_OBJECT_STAR)
@@ -1566,14 +1566,16 @@ void StelCore::set_sky_locale(void)
 
 	if( !hip_stars || !cardinals_points || !asterisms) return; // objects not initialized yet
 
-	cardinals_points->load_labels(DataDir + "cardinals." + SkyLocale + ".fab");
+	cardinals_points->translateLabels();
+	asterisms->translateNames();
+	
 	if( !hip_stars->load_common_names(DataDir + "star_names." + SkyLocale + ".fab") )
 	{
 		// If no special star names in this language, use international names
 		cout << "Using international star names.\n";
 		hip_stars->load_common_names(DataDir + "star_names.eng.fab");
 	}
-	asterisms->load_names(DataDir + "sky_cultures/" + SkyCulture + "/constellation_names." + SkyLocale + ".fab");
+	
 
 	// refresh EditBox with new names
     ui->setStarAutoComplete(hip_stars->getNames());
