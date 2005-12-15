@@ -39,8 +39,8 @@ public:
     void draw_art(Projector* prj, Navigator* nav) const;
     void draw_boundary_optim(Projector* prj) const;
     const Constellation* is_star_in(const HipStar *) const;
-    string getName(void) { return name; };
-    string getShortName(void) { return short_name; };
+    string getNameI18(void) { return nameI18; };
+    string getShortName(void) { return abbreviation; };
     static void  set_line_color(const Vec3f& c) { line_color = c; }
     static Vec3f get_line_color() { return line_color; }
 
@@ -63,10 +63,11 @@ private:
 	bool get_flag_art(void) {return art_fader;}
 	
 	//! International name (translated using gettext)
-    string name;
+    string nameI18;
     //! Name in english
 	string englishName;
-    char short_name[4];
+	//! Abbreviation of the latin name (for western constellations)
+    string abbreviation;
     Vec3f XYZname;
 	Vec3d XYname;
     unsigned int nb_segments;
