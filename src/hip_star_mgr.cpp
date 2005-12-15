@@ -496,7 +496,7 @@ HipStar *HipStarMgr::search(const string& name)
 {
 	const string catalogs("HP HD SAO");
 
-	string n = string(name);
+	string n = name;
     for (string::size_type i=0;i<n.length();++i)
 	{
 		if (n[i]=='_') n[i]=' ';
@@ -539,7 +539,7 @@ HipStar *HipStarMgr::searchHP(unsigned int _HP)
 HipStar *HipStarMgr::searchHD(unsigned int _HD)
 {
 	if (_HD != 0 && _HD < (unsigned int)HDStarArraySize && HDStarFlatArray[_HD] 
-		&& StarFlatArray[_HD]->HD == _HD)
+		&& HDStarFlatArray[_HD]->HD == _HD)
 		return HDStarFlatArray[_HD];
     return NULL;
 }
