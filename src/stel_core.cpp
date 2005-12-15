@@ -168,45 +168,50 @@ void StelCore::init(void)
 		lb);
 	
 	// Init nebulas
-	nebulas->set_label_color(NebulaLabelColor);
-	nebulas->set_circle_color(NebulaCircleColor);
+	nebulas->set_label_color(NebulaLabelColor[draw_mode]);
+	nebulas->set_circle_color(NebulaCircleColor[draw_mode]);
+	nebulas->set_nebula_scale(NebulaScale);
 	nebulas->read(NebulaFontSize, DataDir + BaseFontName, DataDir + "messier.fab", lb);
 		
 	// Init stars
+	hip_stars->set_label_color(StarLabelColor[draw_mode]);
+	hip_stars->set_circle_color(StarCircleColor[draw_mode]);
 
 	// Init the solar system
 	ssystem->load(DataDir + "ssystem.ini");
-	ssystem->set_label_color(PlanetNamesColor);
-	ssystem->set_orbit_color(PlanetOrbitsColor);
+	ssystem->set_label_color(PlanetNamesColor[draw_mode]);
+	ssystem->set_orbit_color(PlanetOrbitsColor[draw_mode]);
 	ssystem->set_font(StarFontSize, DataDir + BaseFontName);
 	ssystem->set_object_scale(StarScale);
-	ssystem->set_trail_color(ObjectTrailsColor);
+	ssystem->set_trail_color(ObjectTrailsColor[draw_mode]);
 	if(FlagObjectTrails) ssystem->start_trails();
 
 	atmosphere->set_fade_duration(AtmosphereFadeDuration);
 
 	// Init grids, lines and cardinal points
 	equ_grid->set_font(GridFontSize, DataDir + BaseFontName);
-	equ_grid->set_color(EquatorialColor);
+	equ_grid->set_color(EquatorialColor[draw_mode]);
 
 	azi_grid->set_font(GridFontSize, DataDir + BaseFontName);
-	azi_grid->set_color(AzimuthalColor);
+	azi_grid->set_color(AzimuthalColor[draw_mode]);
 
-	equator_line->set_color(EquatorColor);
+	equator_line->set_color(EquatorColor[draw_mode]);
 	equator_line->set_font(12, DataDir + BaseFontName);
 
-	ecliptic_line->set_color(EclipticColor);
+	ecliptic_line->set_color(EclipticColor[draw_mode]);
 	ecliptic_line->set_font(12, DataDir + BaseFontName);
 
-	meridian_line->set_color(AzimuthalColor);
+	meridian_line->set_color(AzimuthalColor[draw_mode]);
 	meridian_line->set_font(12, DataDir + BaseFontName);
 
 	cardinals_points->set_font(CardinalsFontSize, DataDir + BaseFontName);
+	cardinals_points->set_color(CardinalColor[draw_mode]);
 
 	// Init milky way
 	if (draw_mode == DM_NORMAL)	milky_way->set_texture("milkyway");
 	else milky_way->set_texture("milkyway_chart",true);
 
+	milky_way->set_color(MilkyWayColor[draw_mode]);
 	milky_way->set_intensity(MilkyWayIntensity);
 		
 	meteors = new MeteorMgr(10, 60);
@@ -248,6 +253,9 @@ void StelCore::init(void)
 	asterisms->set_font(StarFontSize, DataDir + BaseFontName);
 	asterisms->set_art_intensity(ConstellationArtIntensity);
 	asterisms->set_art_fade_duration(ConstellationArtFadeDuration);
+	asterisms->set_line_color(ConstLinesColor[draw_mode]);
+	asterisms->set_boundary_color(ConstBoundaryColor[draw_mode]);
+	asterisms->set_label_color(ConstNamesColor[draw_mode]);
 	
 	selected_planet=NULL;	// Fix a bug on macosX! Thanks Fumio!
 
@@ -486,7 +494,12 @@ void StelCore::draw(int delta_time)
 	projection->set_orthographic_projection(); 
 	script_images->draw(screen_W, screen_H, navigation, projection);
 	
-	std::wstring s(L"Fabien Chereau");
+	std::wstring s;
+	if (draw_mode == DM_NORMAL)
+		s = L"Fabien Chereau";
+	else
+		s = L"Tony Furr";
+		
 	UTFfont->render(s, Vec2f(40, 400));
 	
 	projection->reset_perspective_projection(); 
@@ -666,20 +679,59 @@ void StelCore::load_config_from(const string& confFile)
 	scripts->set_allow_ui( conf.get_boolean("gui","flag_script_allow_ui",0) );
 
 	// Colors
-	AzimuthalColor		= StelUtility::StelUtility::StelUtility::str_to_vec3f(conf.get_str("color:azimuthal_color").c_str());
-	EquatorialColor		= StelUtility::StelUtility::StelUtility::str_to_vec3f(conf.get_str("color:equatorial_color").c_str());
-	EquatorColor		= StelUtility::StelUtility::StelUtility::str_to_vec3f(conf.get_str("color:equator_color").c_str());
-	EclipticColor		= StelUtility::StelUtility::StelUtility::str_to_vec3f(conf.get_str("color:ecliptic_color").c_str());
-	asterisms->set_line_color( StelUtility::StelUtility::str_to_vec3f(conf.get_str("color:const_lines_color").c_str()));
-	asterisms->set_label_color( StelUtility::StelUtility::str_to_vec3f(conf.get_str("color:const_names_color").c_str()));
-	asterisms->set_boundary_color( StelUtility::StelUtility::str_to_vec3f(conf.get_str("color", "const_boundary_color", "0.8,0.3,0.3").c_str()));
-	NebulaLabelColor	= StelUtility::StelUtility::str_to_vec3f(conf.get_str("color:nebula_label_color").c_str());
-	NebulaCircleColor	= StelUtility::StelUtility::str_to_vec3f(conf.get_str("color:nebula_circle_color").c_str());
-	cardinals_points->set_color( StelUtility::StelUtility::str_to_vec3f(conf.get_str("color:cardinal_color").c_str()) );
-	//	CardinalColor 		= StelUtility::StelUtility::str_to_vec3f(conf.get_str("color:cardinal_color").c_str());
-	PlanetNamesColor	= StelUtility::StelUtility::str_to_vec3f(conf.get_str("color:planet_names_color").c_str());
-	PlanetOrbitsColor	= StelUtility::StelUtility::str_to_vec3f(conf.get_str("color", "planet_orbits_color", ".6,1,1").c_str());
-	ObjectTrailsColor	= StelUtility::StelUtility::str_to_vec3f(conf.get_str("color", "object_trails_color", "1,0.7,0").c_str());
+	AzimuthalColor[0]		= StelUtility::str_to_vec3f(conf.get_str("color:azimuthal_color").c_str());
+	EquatorialColor[0]		= StelUtility::str_to_vec3f(conf.get_str("color:equatorial_color").c_str());
+	EquatorColor[0]			= StelUtility::str_to_vec3f(conf.get_str("color:equator_color").c_str());
+	EclipticColor[0]		= StelUtility::str_to_vec3f(conf.get_str("color:ecliptic_color").c_str());
+	ConstLinesColor[0]		= StelUtility::str_to_vec3f(conf.get_str("color:const_lines_color").c_str());
+	ConstNamesColor[0]		= StelUtility::str_to_vec3f(conf.get_str("color:const_names_color").c_str());
+	ConstBoundaryColor[0]	= StelUtility::str_to_vec3f(conf.get_str("color", "const_boundary_color", "0.8,0.3,0.3").c_str());
+	NebulaLabelColor[0]		= StelUtility::str_to_vec3f(conf.get_str("color:nebula_label_color").c_str());
+	NebulaCircleColor[0]	= StelUtility::str_to_vec3f(conf.get_str("color:nebula_circle_color").c_str());
+	StarLabelColor[0]		= StelUtility::str_to_vec3f(conf.get_str("color:star_label_color").c_str());
+	StarCircleColor[0]		= StelUtility::str_to_vec3f(conf.get_str("color:star_circle_color").c_str());
+	CardinalColor[0] 		= StelUtility::str_to_vec3f(conf.get_str("color:cardinal_color").c_str());
+	PlanetNamesColor[0]		= StelUtility::str_to_vec3f(conf.get_str("color:planet_names_color").c_str());
+	PlanetOrbitsColor[0]	= StelUtility::str_to_vec3f(conf.get_str("color", "planet_orbits_color", ".6,1,1").c_str());
+	ObjectTrailsColor[0]	= StelUtility::str_to_vec3f(conf.get_str("color", "object_trails_color", "1,0.7,0").c_str());
+	ChartColor[0]			= StelUtility::str_to_vec3f(conf.get_str("color:chart_color").c_str());
+	MilkyWayColor[0]		= StelUtility::str_to_vec3f(conf.get_str("color:milky_way_color").c_str());
+
+	AzimuthalColor[1]		= StelUtility::str_to_vec3f(conf.get_str("colorc:azimuthal_color").c_str());
+	EquatorialColor[1]		= StelUtility::str_to_vec3f(conf.get_str("colorc:equatorial_color").c_str());
+	EquatorColor[1]			= StelUtility::str_to_vec3f(conf.get_str("colorc:equator_color").c_str());
+	EclipticColor[1]		= StelUtility::str_to_vec3f(conf.get_str("colorc:ecliptic_color").c_str());
+	ConstLinesColor[1]		= StelUtility::str_to_vec3f(conf.get_str("colorc:const_lines_color").c_str());
+	ConstBoundaryColor[1]	= StelUtility::str_to_vec3f(conf.get_str("colorc", "const_boundary_color", "0.8,0.3,0.3").c_str());
+	ConstNamesColor[1]		= StelUtility::str_to_vec3f(conf.get_str("colorc:const_names_color").c_str());
+	NebulaLabelColor[1]		= StelUtility::str_to_vec3f(conf.get_str("colorc:nebula_label_color").c_str());
+	NebulaCircleColor[1]	= StelUtility::str_to_vec3f(conf.get_str("colorc:nebula_circle_color").c_str());
+	StarLabelColor[1]		= StelUtility::str_to_vec3f(conf.get_str("colorc:star_label_color").c_str());
+	StarCircleColor[1]		= StelUtility::str_to_vec3f(conf.get_str("colorc:star_circle_color").c_str());
+	CardinalColor[1] 		= StelUtility::str_to_vec3f(conf.get_str("colorc:cardinal_color").c_str());
+	PlanetNamesColor[1]		= StelUtility::str_to_vec3f(conf.get_str("colorc:planet_names_color").c_str());
+	PlanetOrbitsColor[1]	= StelUtility::str_to_vec3f(conf.get_str("colorc", "planet_orbits_color", ".6,1,1").c_str());
+	ObjectTrailsColor[1]	= StelUtility::str_to_vec3f(conf.get_str("colorc", "object_trails_color", "1,0.7,0").c_str());
+	ChartColor[1]			= StelUtility::str_to_vec3f(conf.get_str("colorc:chart_color").c_str());
+	MilkyWayColor[1]		= StelUtility::str_to_vec3f(conf.get_str("colorc:milky_way_color").c_str());
+
+	AzimuthalColor[2]		= StelUtility::str_to_vec3f(conf.get_str("colorr:azimuthal_color").c_str());
+	EquatorialColor[2]		= StelUtility::str_to_vec3f(conf.get_str("colorr:equatorial_color").c_str());
+	EquatorColor[2]			= StelUtility::str_to_vec3f(conf.get_str("colorr:equator_color").c_str());
+	EclipticColor[2]		= StelUtility::str_to_vec3f(conf.get_str("colorr:ecliptic_color").c_str());
+	ConstLinesColor[2]		= StelUtility::str_to_vec3f(conf.get_str("colorr:const_lines_color").c_str());
+	ConstBoundaryColor[2]	= StelUtility::str_to_vec3f(conf.get_str("colorr", "const_boundary_color", "0.8,0.3,0.3").c_str());
+	ConstNamesColor[2]		= StelUtility::str_to_vec3f(conf.get_str("colorr:const_names_color").c_str());
+	NebulaLabelColor[2]		= StelUtility::str_to_vec3f(conf.get_str("colorr:nebula_label_color").c_str());
+	NebulaCircleColor[2]	= StelUtility::str_to_vec3f(conf.get_str("colorr:nebula_circle_color").c_str());
+	StarLabelColor[2]		= StelUtility::str_to_vec3f(conf.get_str("colorr:star_label_color").c_str());
+	StarCircleColor[2]		= StelUtility::str_to_vec3f(conf.get_str("colorr:star_circle_color").c_str());
+	CardinalColor[2] 		= StelUtility::str_to_vec3f(conf.get_str("colorr:cardinal_color").c_str());
+	PlanetNamesColor[2]		= StelUtility::str_to_vec3f(conf.get_str("colorr:planet_names_color").c_str());
+	PlanetOrbitsColor[2]	= StelUtility::str_to_vec3f(conf.get_str("colorr", "planet_orbits_color", ".6,1,1").c_str());
+	ObjectTrailsColor[2]	= StelUtility::str_to_vec3f(conf.get_str("colorr", "object_trails_color", "1,0.7,0").c_str());
+	ChartColor[2]			= StelUtility::str_to_vec3f(conf.get_str("colorr:chart_color").c_str());
+	MilkyWayColor[2]		= StelUtility::str_to_vec3f(conf.get_str("colorr:milky_way_color").c_str());
 
 	// Text ui section
 	FlagEnableTuiMenu = conf.get_boolean("tui:flag_enable_tui_menu");
@@ -840,19 +892,56 @@ void StelCore::save_config_to(const string& confFile)
 	conf.set_boolean("gui:flag_script_allow_ui",scripts->get_allow_ui());
 
 	// Colors
-	conf.set_str    ("color:azimuthal_color", StelUtility::vec3f_to_str(AzimuthalColor));
-	conf.set_str    ("color:equatorial_color", StelUtility::vec3f_to_str(EquatorialColor));
-	conf.set_str    ("color:equator_color", StelUtility::vec3f_to_str(EquatorColor));
-	conf.set_str    ("color:ecliptic_color", StelUtility::vec3f_to_str(EclipticColor));
-	conf.set_str    ("color:const_lines_color", StelUtility::vec3f_to_str(asterisms->get_line_color()));
-	conf.set_str    ("color:const_names_color", StelUtility::vec3f_to_str(asterisms->get_label_color()));
-	conf.set_str    ("color:const_boundary_color", StelUtility::vec3f_to_str(asterisms->get_boundary_color()));
-	conf.set_str	("color:nebula_label_color", StelUtility::vec3f_to_str(NebulaLabelColor));
-	conf.set_str	("color:nebula_circle_color", StelUtility::vec3f_to_str(NebulaCircleColor));
-	conf.set_str    ("color:cardinal_color", StelUtility::vec3f_to_str(cardinals_points->get_color()));
-	conf.set_str    ("color:planet_names_color", StelUtility::vec3f_to_str(PlanetNamesColor));
-	conf.set_str    ("color:planet_orbits_color", StelUtility::vec3f_to_str(PlanetOrbitsColor));
-	conf.set_str    ("color:object_trails_color", StelUtility::vec3f_to_str(ObjectTrailsColor));
+	conf.set_str    ("color:azimuthal_color", StelUtility::vec3f_to_str(AzimuthalColor[0]));
+	conf.set_str    ("color:equatorial_color", StelUtility::vec3f_to_str(EquatorialColor[0]));
+	conf.set_str    ("color:equator_color", StelUtility::vec3f_to_str(EquatorColor[0]));
+	conf.set_str    ("color:ecliptic_color", StelUtility::vec3f_to_str(EclipticColor[0]));
+	conf.set_str    ("color:const_lines_color", StelUtility::vec3f_to_str(ConstLinesColor[0]));
+	conf.set_str    ("color:const_names_color", StelUtility::vec3f_to_str(ConstNamesColor[0]));
+	conf.set_str    ("color:const_boundary_color", StelUtility::vec3f_to_str(ConstBoundaryColor[0]));
+	conf.set_str	("color:nebula_label_color", StelUtility::vec3f_to_str(NebulaLabelColor[0]));
+	conf.set_str	("color:nebula_circle_color", StelUtility::vec3f_to_str(NebulaCircleColor[0]));
+	conf.set_str	("color:star_label_color", StelUtility::vec3f_to_str(StarLabelColor[0]));
+	conf.set_str	("color:star_circle_color", StelUtility::vec3f_to_str(StarCircleColor[0]));
+	conf.set_str    ("color:cardinal_color", StelUtility::vec3f_to_str(CardinalColor[0]));
+	conf.set_str    ("color:planet_names_color", StelUtility::vec3f_to_str(PlanetNamesColor[0]));
+	conf.set_str    ("color:planet_orbits_color", StelUtility::vec3f_to_str(PlanetOrbitsColor[0]));
+	conf.set_str    ("color:object_trails_color", StelUtility::vec3f_to_str(ObjectTrailsColor[0]));
+	conf.set_str    ("color:chart_color", StelUtility::vec3f_to_str(ChartColor[0]));
+
+	conf.set_str    ("colorc:azimuthal_color", StelUtility::vec3f_to_str(AzimuthalColor[1]));
+	conf.set_str    ("colorc:equatorial_color", StelUtility::vec3f_to_str(EquatorialColor[1]));
+	conf.set_str    ("colorc:equator_color", StelUtility::vec3f_to_str(EquatorColor[1]));
+	conf.set_str    ("colorc:ecliptic_color", StelUtility::vec3f_to_str(EclipticColor[1]));
+	conf.set_str    ("colorc:const_lines_color", StelUtility::vec3f_to_str(ConstLinesColor[1]));
+	conf.set_str    ("colorc:const_names_color", StelUtility::vec3f_to_str(ConstNamesColor[1]));
+	conf.set_str    ("colorc:const_boundary_color", StelUtility::vec3f_to_str(ConstBoundaryColor[1]));
+	conf.set_str	("colorc:nebula_label_color", StelUtility::vec3f_to_str(NebulaLabelColor[1]));
+	conf.set_str	("colorc:nebula_circle_color", StelUtility::vec3f_to_str(NebulaCircleColor[1]));
+	conf.set_str	("colorc:star_label_color", StelUtility::vec3f_to_str(StarLabelColor[1]));
+	conf.set_str	("colorc:star_circle_color", StelUtility::vec3f_to_str(StarCircleColor[1]));
+	conf.set_str    ("colorc:cardinal_color", StelUtility::vec3f_to_str(CardinalColor[1]));
+	conf.set_str    ("colorc:planet_names_color", StelUtility::vec3f_to_str(PlanetNamesColor[1]));
+	conf.set_str    ("colorc:planet_orbits_color", StelUtility::vec3f_to_str(PlanetOrbitsColor[1]));
+	conf.set_str    ("colorc:object_trails_color", StelUtility::vec3f_to_str(ObjectTrailsColor[1]));
+	conf.set_str    ("colorc:chart_color", StelUtility::vec3f_to_str(ChartColor[1]));
+
+	conf.set_str    ("colorr:azimuthal_color", StelUtility::vec3f_to_str(AzimuthalColor[2]));
+	conf.set_str    ("colorr:equatorial_color", StelUtility::vec3f_to_str(EquatorialColor[2]));
+	conf.set_str    ("colorr:equator_color", StelUtility::vec3f_to_str(EquatorColor[2]));
+	conf.set_str    ("colorr:ecliptic_color", StelUtility::vec3f_to_str(EclipticColor[2]));
+	conf.set_str    ("colorr:const_lines_color", StelUtility::vec3f_to_str(ConstLinesColor[2]));
+	conf.set_str    ("colorr:const_names_color", StelUtility::vec3f_to_str(ConstNamesColor[2]));
+	conf.set_str    ("colorr:const_boundary_color", StelUtility::vec3f_to_str(ConstBoundaryColor[2]));
+	conf.set_str	("colorr:nebula_label_color", StelUtility::vec3f_to_str(NebulaLabelColor[2]));
+	conf.set_str	("colorr:nebula_circle_color", StelUtility::vec3f_to_str(NebulaCircleColor[2]));
+	conf.set_str	("colorr:star_label_color", StelUtility::vec3f_to_str(StarLabelColor[2]));
+	conf.set_str	("colorr:star_circle_color", StelUtility::vec3f_to_str(StarCircleColor[2]));
+	conf.set_str    ("colorr:cardinal_color", StelUtility::vec3f_to_str(CardinalColor[2]));
+	conf.set_str    ("colorr:planet_names_color", StelUtility::vec3f_to_str(PlanetNamesColor[2]));
+	conf.set_str    ("colorr:planet_orbits_color", StelUtility::vec3f_to_str(PlanetOrbitsColor[2]));
+	conf.set_str    ("colorr:object_trails_color", StelUtility::vec3f_to_str(ObjectTrailsColor[2]));
+	conf.set_str    ("colorr:chart_color", StelUtility::vec3f_to_str(ChartColor[2]));
 
 	// Text ui section
 	conf.set_boolean("tui:flag_enable_tui_menu", FlagEnableTuiMenu);
@@ -1496,12 +1585,33 @@ void StelCore::set_sky_locale(void)
 void StelCore::play_startup_script() {
 	if(scripts) scripts->play_startup_script();
 }
+
 void StelCore::ChangeColorScheme(void)
 {
+	nebulas->set_label_color(NebulaLabelColor[draw_mode]);
+	nebulas->set_circle_color(NebulaCircleColor[draw_mode]);
+	hip_stars->set_label_color(StarLabelColor[draw_mode]);
+	hip_stars->set_circle_color(StarCircleColor[draw_mode]);
+	ssystem->set_label_color(PlanetNamesColor[draw_mode]);
+	ssystem->set_orbit_color(PlanetOrbitsColor[draw_mode]);
+	ssystem->set_trail_color(ObjectTrailsColor[draw_mode]);
+	equ_grid->set_color(EquatorialColor[draw_mode]);
+	equ_grid->set_top_transparancy(draw_mode==DM_NORMAL);
+	azi_grid->set_color(AzimuthalColor[draw_mode]);
+	azi_grid->set_top_transparancy(draw_mode==DM_NORMAL);
+	equator_line->set_color(EquatorColor[draw_mode]);
+	ecliptic_line->set_color(EclipticColor[draw_mode]);
+	meridian_line->set_font(12, BaseFontName);
+	cardinals_points->set_color(CardinalColor[draw_mode]);
 
 	// Init milky way
 	if (draw_mode == DM_NORMAL)	milky_way->set_texture("milkyway");
 	else milky_way->set_texture("milkyway_chart",true);
+
+	milky_way->set_color(MilkyWayColor[draw_mode]);
+	asterisms->set_line_color(ConstLinesColor[draw_mode]);
+	asterisms->set_boundary_color(ConstBoundaryColor[draw_mode]);
+	asterisms->set_label_color(ConstNamesColor[draw_mode]);
 
 	ColorSchemeChanged = false;
 }
@@ -1515,6 +1625,7 @@ void StelCore::draw_chart_background(void)
 
 	glDisable(GL_TEXTURE_2D);
 	glDisable(GL_BLEND);
+	glColor3fv(ChartColor[draw_mode]);
 	projection->set_orthographic_projection();	// set 2D coordinate
 	glBegin(GL_QUADS);
 	   	glTexCoord2s(0, 0); glVertex2i(viewport_left, view_bottom);	// Bottom Left
@@ -1523,4 +1634,19 @@ void StelCore::draw_chart_background(void)
         glTexCoord2s(0, 1); glVertex2i(viewport_left,view_bottom+stepY);	// Top Left
 	glEnd();
 	projection->reset_perspective_projection();
+}
+
+string StelCore::get_cursor_pos(int x, int y)
+{
+	Vec3d v;
+	projection->unproject_earth_equ(x,y,v);
+
+	ostringstream oss; 
+	
+	float tempDE, tempRA;
+	rect_to_sphe(&tempRA,&tempDE,v);
+	oss << "RA : " << print_angle_hms(tempRA*180./M_PI) << endl;
+	oss << "DE : " << print_angle_dms_stel(tempDE*180./M_PI);
+	
+	return oss.str();
 }

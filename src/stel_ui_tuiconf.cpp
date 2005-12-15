@@ -66,8 +66,8 @@ void StelUI::draw_gravity_ui(void)
 	{
 	    string info = "";
 		info = core->selected_object->get_short_info_string(core->navigation);
-		if (core->selected_object->get_type()==StelObject::STEL_OBJECT_NEBULA) glColor3fv(core->NebulaLabelColor);
-		if (core->selected_object->get_type()==StelObject::STEL_OBJECT_PLANET) glColor3fv(core->PlanetNamesColor);
+		if (core->selected_object->get_type()==StelObject::STEL_OBJECT_NEBULA) glColor3fv(core->NebulaLabelColor[draw_mode]);
+		if (core->selected_object->get_type()==StelObject::STEL_OBJECT_PLANET)glColor3fv(core->PlanetNamesColor[draw_mode]);
 		if (core->selected_object->get_type()==StelObject::STEL_OBJECT_STAR) glColor3fv(core->selected_object->get_RGB());
 		core->projection->print_gravity180(baseFont, x+shift - 30, y+shift - 38, info, 0);
 	}
