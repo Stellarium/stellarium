@@ -61,8 +61,25 @@ public:
 	void set_label_color(const Vec3f& c) {HipStar::label_color = c;}
 	void set_circle_color(const Vec3f& c) {HipStar::circle_color = c;}
 private:
+	void saveData(void);
 
 	// Load all the stars from the files
+	bool load_SAO_HIP_NAME_data(const string& hipCatFile, LoadingBar& lb, float maxmag);
+	bool load_combined(const string& hipCatFile, LoadingBar& lb);
+	bool load_combined_bin(const string& hipCatFile, LoadingBar& lb);
+
+	bool load_doubleraw(const string& hipCatFile);
+	bool load_double(const string& hipCatFile);
+	bool load_variable(const string& hipCatFile);
+	bool save_double(void);
+	bool save_variable(void);
+
+	bool save_combined(void);
+	bool save_combined_bin(void);
+	bool save_record(FILE *dataFile, HipStar *e);
+	bool save_name_record(FILE *dataFile, unsigned int HP, string name);
+	bool save_record_bin(FILE *dataFile, HipStar *e);
+
 	void load_data(const string& hipCatFile, LoadingBar& lb);
 
 	vector<HipStar*>* starZones;       // array of star vector with the grid id as array rank
@@ -72,7 +89,19 @@ private:
 	int starArraySize;                  // Number of star in the array
 
 	int CombinedTotal;
-	s_texture * starTexture;
+	// TEMP for building data
+	HipStar *SAOStarArray;  			// Sequential Array of the star for memory allocation optimization
+
+	HipStar **HPStarFlatArray; 		// The simple array of the star for sequential research
+	int HPStarArraySize;               // Number of star in the array
+
+	HipStar **HDStarFlatArray; 		// The simple array of the star for sequential research
+	int HDStarArraySize;               // Number of star in the array
+
+	HipStar **SAOStarFlatArray; 		// The simple array of the star for sequential research
+	int SAOStarArraySize;                  // Number of star in the array
+
+	s_texture *starTexture;			// star texture
 	s_texture *starcTexture;			// charted interior disc
 	LinearFader names_fader;
 	float limiting_mag;                  // limiting magnitude at 60 degree fov
