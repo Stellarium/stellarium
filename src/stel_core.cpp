@@ -1601,7 +1601,7 @@ void StelCore::ChangeColorScheme(void)
 	azi_grid->set_top_transparancy(draw_mode==DM_NORMAL);
 	equator_line->set_color(EquatorColor[draw_mode]);
 	ecliptic_line->set_color(EclipticColor[draw_mode]);
-	meridian_line->set_font(12, BaseFontName);
+	meridian_line->set_font(12, DataDir + BaseFontName);
 	cardinals_points->set_color(CardinalColor[draw_mode]);
 
 	// Init milky way
