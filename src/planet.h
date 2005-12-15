@@ -77,8 +77,9 @@ private:
 
 class Planet : public StelObject
 {
+friend class SolarSystem;
 public:
-	Planet(const string& _name, const string& commonname, int _flagHalo, int _flag_lighting, double _radius, Vec3f _color,
+	Planet(const string& englishName, int _flagHalo, int _flag_lighting, double _radius, Vec3f _color,
 	float _albedo, const string& tex_map_name, const string& tex_halo_name, pos_func_type _coord_func);
 
     virtual ~Planet();
@@ -134,8 +135,8 @@ public:
 	// Return the Planet position in rectangular earth equatorial coordinate
 	Vec3d get_earth_equ_pos(const Navigator * nav) const;
 
-	string get_name(void) const {return name;}
-	string get_common_name(void) const {return common_name;}
+	string getEnglishName(void) const {return englishName;}
+	string getNameI18(void) const {return nameI18;}
 
 	void set_rings(Ring* r) {rings = r;}
 
@@ -190,8 +191,8 @@ protected:
 	void draw_big_halo(const Navigator* nav, const Projector* prj, const ToneReproductor* eye);
 
 
-	string name; // used in code, solarsystem ini file (english)
-	string common_name; // in sky locale language
+	string englishName; // english planet name
+	string nameI18;		// International translated name
 	int flagHalo;					// Set wether a little "star like" halo will be drawn
 	int flag_lighting;				// Set wether light computation has to be proceed
 	RotationElements re;			// Rotation param

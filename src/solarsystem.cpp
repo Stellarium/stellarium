@@ -78,7 +78,7 @@ void SolarSystem::load(const string& planetfile)
 	for (int i = 0;i<nbSections;++i)
 	{
 		string secname = pd.get_secname(i);
-		string tname = gettext(pd.get_str(secname, "name").c_str());
+		string englishName = pd.get_str(secname, "name");
 		string funcname = pd.get_str(secname, "coord_func");
 
 		pos_func_type posfunc;
@@ -180,12 +180,12 @@ void SolarSystem::load(const string& planetfile)
 
 		if (posfunc.empty())
 		{
-			cout << "ERROR : can't find posfunc " << funcname << " for " << tname << endl;
+			cout << "ERROR : can't find posfunc " << funcname << " for " << englishName << endl;
 			exit(-1);
 		}
 
 		// Create the Planet and add it to the list
-		Planet* p = new Planet(secname, tname, pd.get_boolean(secname, "halo"),
+		Planet* p = new Planet(englishName, pd.get_boolean(secname, "halo"),
 			pd.get_boolean(secname, "lightning"), pd.get_double(secname, "radius")/AU,
 			StelUtility::str_to_vec3f(pd.get_str(secname, "color").c_str()), pd.get_double(secname, "albedo"),
 			pd.get_str(secname, "tex_map"), pd.get_str(secname, "tex_halo"), posfunc);
@@ -199,7 +199,7 @@ void SolarSystem::load(const string& planetfile)
     		vector<Planet*>::iterator iter = system_planets.begin();
     		while (iter != system_planets.end())
     		{
-        		if ((*iter)->get_name()==str_parent)
+        		if ((*iter)->getEnglishName()==str_parent)
 				{
 					(*iter)->add_satellite(p);
 					have_parent = true;
@@ -208,7 +208,7 @@ void SolarSystem::load(const string& planetfile)
     		}
 			if (!have_parent)
 			{
-				cout << "ERROR : can't find parent for " << tname << endl;
+				cout << "ERROR : can't find parent for " << englishName << endl;
 				exit(-1);
 			}
 		}
@@ -284,9 +284,9 @@ void SolarSystem::draw(Planet* selected, bool hint_ON, Projector * prj, const Na
 	// if a Planet is selected and orbits are on, fade out non-selected ones
 	bool orb;
 	vector<Planet*>::iterator iter = system_planets.begin();
-	if(flag_orbits && selected != NULL && selected->get_name() != "sun") {
+	if(flag_orbits && selected != NULL && selected->getEnglishName() != "Sun") {
 		while (iter != system_planets.end()) {
-			if((*iter)->get_name() == selected->get_name()) orb = 1;
+			if((*iter)->getEnglishName() == selected->getEnglishName()) orb = 1;
 			else orb = 0;
 			(*iter)->show_orbit(orb);
 			iter++;
@@ -365,29 +365,29 @@ void SolarSystem::draw(Planet* selected, bool hint_ON, Projector * prj, const Na
 
 }
 
-Planet* SolarSystem::search(string planet_name) {
+Planet* SolarSystem::searchByEnglishName(string planetEnglishName) {
 
 	// side effect - bad?
-	transform(planet_name.begin(), planet_name.end(), planet_name.begin(), ::tolower);
+	transform(planetEnglishName.begin(), planetEnglishName.end(), planetEnglishName.begin(), ::tolower);
 
 	vector<Planet*>::iterator iter = system_planets.begin();
 	while (iter != system_planets.end()) {
 
-		if( (*iter)->get_name() == planet_name ) return (*iter);  // also check standard ini file names 
+		if( (*iter)->getEnglishName() == planetEnglishName ) return (*iter);  // also check standard ini file names 
 		++iter;
 	}
 	return NULL;
 }
 
-Planet* SolarSystem::searchByCommonNames(string planetCommonName) {
+Planet* SolarSystem::searchByNamesI18(string planetNameI18) {
 
 	// side effect - bad?
-	transform(planetCommonName.begin(), planetCommonName.end(), planetCommonName.begin(), ::tolower);
+	transform(planetNameI18.begin(), planetNameI18.end(), planetNameI18.begin(), ::tolower);
 
 	vector<Planet*>::iterator iter = system_planets.begin();
 	while (iter != system_planets.end()) {
 		
-		if( (*iter)->get_common_name() == planetCommonName ) return (*iter);  // also check standard ini file names 
+		if( (*iter)->getNameI18() == planetNameI18 ) return (*iter);  // also check standard ini file names 
 		++iter;
 	}
 	return NULL;
@@ -445,23 +445,34 @@ vector<StelObject*> SolarSystem::search_around(Vec3d v, double lim_fov, const Na
 	return result;
 }
 
-vector<string> SolarSystem::getNames(void)
+//! @brief Update i18 names from english names according to current locale
+//! The translation is done using gettext with translated strings defined in translations.h
+void SolarSystem::translateNames()
+{
+	vector<Planet*>::iterator iter;      
+	for( iter = system_planets.begin(); iter < system_planets.end(); iter++ )
+	{
+		(*iter)->nameI18 = gettext((*iter)->englishName.c_str());
+	}
+}
+
+vector<string> SolarSystem::getNamesI18(void)
 {
     vector<string> names;
 	vector < Planet * >::iterator iter;
 
 	for (iter = system_planets.begin(); iter != system_planets.end(); ++iter)
-        names.push_back((*iter)->get_common_name());
+        names.push_back((*iter)->getEnglishName());
     return names;
 }
 
-void SolarSystem::update_trails(const Navigator* nav) {
-
-  vector<Planet*>::iterator iter;      
-  for( iter = system_planets.begin(); iter < system_planets.end(); iter++ ) {
-    (*iter)->update_trail(nav);
-  }
-
+void SolarSystem::update_trails(const Navigator* nav)
+{
+	vector<Planet*>::iterator iter;      
+	for( iter = system_planets.begin(); iter < system_planets.end(); iter++ )
+	{
+		(*iter)->update_trail(nav);
+	}
 }
 
 void SolarSystem::start_trails(void) {

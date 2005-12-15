@@ -185,7 +185,7 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
       stcore->asterisms->set_selected((HipStar*)stcore->selected_object);
       stcore->selected_planet=NULL;
     } else if(args["planet"]!=""){
-      stcore->selected_object = stcore->selected_planet = stcore->ssystem->search(args["planet"]);
+      stcore->selected_object = stcore->selected_planet = stcore->ssystem->searchByEnglishName(args["planet"]);
       stcore->asterisms->set_selected(NULL);
     } else if(args["nebula"]!=""){
       stcore->selected_object = stcore->nebulas->search(args["nebula"]);
