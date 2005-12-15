@@ -915,7 +915,7 @@ int StelUI::handle_clic(Uint16 x, Uint16 y, S_GUI_VALUE button, S_GUI_VALUE stat
 					core->selected_planet=(Planet*)core->selected_object;
 
 					// potentially record this action
-					core->scripts->record_command("select planet " + ((Planet *)core->selected_object)->get_name());
+					core->scripts->record_command("select planet " + ((Planet *)core->selected_object)->getEnglishName());
 
 				}
 				else
