@@ -85,7 +85,10 @@ string HipStar::get_info_string(const Navigator * nav) const
 	}
 	else 
 	{
-		oss << "HP " << HP;
+		if (HP) oss << "HP " << HP;
+#ifdef DATA_FILES_USE_SAO
+		else oss << "SAO" << SAO;
+#endif
 	}
 	if (doubleStar) oss << "(Dbl)";
 	else if (variableStar) oss << "(Var)";
@@ -94,6 +97,13 @@ string HipStar::get_info_string(const Navigator * nav) const
 	oss << "Cat : HP:";
 	if (HP > 0)	oss << HP; else oss << "-";
 
+#ifdef DATA_FILES_USE_SAO
+	oss << "  HD:";
+	if (HD > 0)	oss << HD; else oss << "-";
+
+	oss << "  SAO:";
+	if (SAO > 0)	oss << SAO; else oss << "-";
+#endif
 	oss << endl;
 
 	oss << "RA : " << print_angle_hms(tempRA*180./M_PI) << endl;
@@ -192,26 +202,7 @@ int HipStar::read(FILE * catalog)
         default: SpType = '?';
     }
 
-    switch (SpType)             // Color depending on the spectral type
-    {
-        case 'O':   RGB[0]=0.8f;  RGB[1]=1.0f; RGB[2]=1.3f;  break;
-        case 'B':   RGB[0]=0.9f;  RGB[1]=1.0f; RGB[2]=1.2f;  break;
-        case 'A':   RGB[0]=0.95f; RGB[1]=1.0f; RGB[2]=1.15f; break;
-        case 'F':   RGB[0]=1.05f; RGB[1]=1.0f; RGB[2]=1.05f; break;
-        case 'G':   RGB[0]=1.3f;  RGB[1]=1.0f; RGB[2]=0.9f;  break;
-        case 'K':   RGB[0]=1.15f; RGB[1]=0.95f;RGB[2]=0.8f;  break;
-        case 'M':   RGB[0]=1.15f; RGB[1]=0.85f;RGB[2]=0.8f;  break;
-        case 'C':   RGB[0]=1.3f;  RGB[1]=0.85f;RGB[2]=0.6f;  break;
-        case 'R':
-        case 'N':
-        case 'S':   RGB[0]=1.5f;  RGB[1]=0.8f; RGB[2]=0.2f;  break;
-        default :   RGB[0]=1.0f;  RGB[1]=1.0f; RGB[2]=1.0f;
-    }
-
-    MaxColorValue = MY_MAX(RGB[0],RGB[2]);
-
-	// Precomputation of a term used later
-	term1 = expf(-0.92103f*(Mag + 12.12331f)) * 108064.73f;
+	setColor(SpType); // Color depending on the spectral type
 
 	// distance
 	float LY;
@@ -411,7 +402,7 @@ bool HipStar::readSAO(char *record, float maxmag)
 	XYZ *= RADIUS_STAR;
 
 	SpType = record[143];
-	setColor(SpType);
+	setColor(SpType); // Color depending on the spectral type
 
 	Distance = 0; // not in file (no parallex)
 
@@ -451,7 +442,7 @@ bool HipStar::readHP(char *record, float maxmag)
 	XYZ *= RADIUS_STAR;
 
 	SpType = record[516];
-	setColor(SpType);
+	setColor(SpType); // Color depending on the spectral type
 
 	// Determine the distance from the parallax
 	sscanf(&record[87],"%f",&par);
@@ -465,6 +456,8 @@ bool HipStar::readHP(char *record, float maxmag)
 
 	return true;
 }
+
+// Color depending on the spectral type
 
 void HipStar::setColor(char sp)
 {
