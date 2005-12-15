@@ -526,13 +526,16 @@ Component* StelUI::createSearchWindow(void)
 	Picture* pstar = new Picture(starp, xi, yi, 32, 32);
 	tab_stars->addComponent(pstar);
 
-	Label * lblstars1 = new Label(_("HP No./Name"));
+	Label * lblstars1 = new Label(_("Star No./Name"));
 	lblstars1->setPos(x, y+5);
 	tab_stars->addComponent(lblstars1);
 
 	Label * lblstars2 = new Label(_("eg. 60718 (aCrux) or Canopus"));
+	Label * lblstars3 = new Label(_("HP 60718, HD 108248, SAO 251904"));
 	lblstars2->setPos(x+100, y+35);
+	lblstars3->setPos(x+100, y+51);
 	tab_stars->addComponent(lblstars2);
+	tab_stars->addComponent(lblstars3);
 
 	star_edit = new EditBox("");
 	star_edit->setOnReturnKeyCallback(callback<void>(this, &StelUI::doStarSearch));
@@ -572,13 +575,16 @@ Component* StelUI::createSearchWindow(void)
 	Picture* pneb = new Picture(nebp, xi, yi, 32, 32);
 	tab_nebula->addComponent(pneb);
 
-	Label * lblnebula1 = new Label(_("Messier No."));
+	Label * lblnebula1 = new Label(_("Nebula"));
 	lblnebula1->setPos(x, y+5);
 	tab_nebula->addComponent(lblnebula1);
 
-	Label * lblnebula2 = new Label(_("eg. M83, NGC 7009, IC 2118, CW 113, SH 40" ));
+	Label * lblnebula2 = new Label(_("eg. M83, NGC 7009, IC 2118" ));
+	Label * lblnebula3 = new Label(_("CW 113, SH 40" ));
 	lblnebula2->setPos(x+100, y+35);
+	lblnebula3->setPos(x+100, y+51);
 	tab_nebula->addComponent(lblnebula2);
+	tab_nebula->addComponent(lblnebula3);
 
 	nebula_edit = new EditBox("");
 	nebula_edit->setOnReturnKeyCallback(callback<void>(this, &StelUI::doNebulaSearch));
