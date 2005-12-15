@@ -517,31 +517,13 @@ void Cardinals::draw(const Projector* prj, double latitude, bool gravityON) cons
 	prj->reset_perspective_projection();
 }
 
-// load cardinal labels from a file for i18n to sky language
-// (not using gettext because sky language not the same as ui language)
-
-int Cardinals::load_labels(string filename)
+// Translate cardinal labels with gettext to current sky language
+void Cardinals::translateLabels()
 {
-    ifstream input_file;
-
-	input_file.open(filename.c_str());
-
-	if (! input_file.is_open())
-	{
-		printf("Error opening %s\n", filename.c_str());
-
-		// Default labels - if sky locale specified, loaded later
-		// Improvement for gettext translation
 		sNorth = _("N");
 		sSouth = _("S");
 		sEast = _("E");
 		sWest = _("W");
-
-		return 0;
-	}
-
-	input_file >> sNorth >> sEast >> sSouth >> sWest;
-	return 1;
 }
 
 // Class which manages the displaying of the Milky Way

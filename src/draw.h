@@ -109,7 +109,7 @@ public:
 	void set_color(const Vec3f& c) {color = c;}
 	Vec3f get_color() {return color;}
 	void set_font(float font_size, const string& font_name);
-	int load_labels(string filename);  // for i18n
+	void translateLabels();  // for i18n
 	void update(int delta_time) {fader.update(delta_time);}
 	void set_fade_duration(float duration) {fader.set_duration((int)(duration*1000.f));}
 	void set_flag_show(bool b){fader = b;}
