@@ -1560,7 +1560,7 @@ void StelCore::set_system_locale_by_code(const string& _locale)
 	set_system_locale();
 }
 
-// this really belongs elsewhere
+//! @brief Set the sky locale
 void StelCore::set_sky_locale(void)
 {
 
@@ -1568,6 +1568,7 @@ void StelCore::set_sky_locale(void)
 
 	cardinals_points->translateLabels();
 	asterisms->translateNames();
+	ssystem->translateNames();
 	
 	if( !hip_stars->load_common_names(DataDir + "star_names." + SkyLocale + ".fab") )
 	{
@@ -1580,8 +1581,8 @@ void StelCore::set_sky_locale(void)
 	// refresh EditBox with new names
     ui->setStarAutoComplete(hip_stars->getNames());
     ui->setConstellationAutoComplete(asterisms->getNames());
-    ui->setPlanetAutoComplete(ssystem->getNames());
-    ui->setListNames(ssystem->getNames());
+    ui->setPlanetAutoComplete(ssystem->getNamesI18());
+    ui->setListNames(ssystem->getNamesI18());
 }
 
 void StelCore::play_startup_script() {

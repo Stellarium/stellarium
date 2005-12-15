@@ -35,9 +35,9 @@ RotationElements::RotationElements() : period(1.), offset(0.), epoch(J2000),
 {
 }
 
-Planet::Planet(const string& _name, const string& tname, int _flagHalo, int _flag_lighting, double _radius, Vec3f _color,
+Planet::Planet(const string& _englishName, int _flagHalo, int _flag_lighting, double _radius, Vec3f _color,
 			   float _albedo, const string& tex_map_name, const string& tex_halo_name, pos_func_type _coord_func) :
-	name(_name), flagHalo(_flagHalo), flag_lighting(_flag_lighting), radius(_radius), color(_color),
+	englishName(_englishName), flagHalo(_flagHalo), flag_lighting(_flag_lighting), radius(_radius), color(_color),
 	albedo(_albedo), axis_rotation(0.),	tex_map(NULL), tex_halo(NULL), tex_big_halo(NULL), rings(NULL),
 	sphere_scale(1.f), lastJD(J2000), last_orbitJD(0), deltaJD(JD_SECOND), orbit_cached(0),
 	coord_func(_coord_func), parent(NULL)
@@ -46,9 +46,6 @@ Planet::Planet(const string& _name, const string& tname, int _flagHalo, int _fla
 	mat_local_to_parent = Mat4d::identity();
 	tex_map = new s_texture(tex_map_name, TEX_LOAD_TYPE_PNG_SOLID_REPEAT);
 	if (flagHalo) tex_halo = new s_texture(tex_halo_name);
-
-	// Translated name
-	common_name = tname;
 
 	// 60 day trails
 	DeltaTrail = 1;  
@@ -59,6 +56,7 @@ Planet::Planet(const string& _name, const string& tname, int _flagHalo, int _fla
 	trail_on = 0;
 	first_point = 1;
 
+	nameI18 = gettext(englishName.c_str());
 }
 
 Planet::~Planet()
@@ -79,7 +77,7 @@ string Planet::get_info_string(const Navigator * nav) const
 	double tempDE, tempRA;
 	ostringstream oss;
 
-	oss << "Name :" << common_name;
+	oss << "Name :" << nameI18;
 
 	oss.setf(ios::fixed);
 	oss.precision(1);
@@ -115,7 +113,7 @@ string Planet::get_short_info_string(const Navigator * nav) const
 {
 	ostringstream oss;
 
-	oss << common_name.c_str();
+	oss << nameI18.c_str();
 	oss.setf(ios::fixed);
 	oss.precision(1);
 	if (sphere_scale != 1.f) oss << sphere_scale;
@@ -131,8 +129,8 @@ double Planet::get_close_fov(const Navigator* nav) const
 
 double Planet::get_satellites_fov(const Navigator * nav) const
 {
-	if (name=="jupiter") return atanf(0.005/get_earth_equ_pos(nav).length())*180./M_PI * 4;
-	if (name=="saturn") return atanf(0.005/get_earth_equ_pos(nav).length())*180./M_PI * 4;
+	if (englishName=="Jupiter") return atanf(0.005/get_earth_equ_pos(nav).length())*180./M_PI * 4;
+	if (englishName=="Saturn") return atanf(0.005/get_earth_equ_pos(nav).length())*180./M_PI * 4;
 	return -1.;
 }
 
@@ -263,7 +261,7 @@ void Planet::compute_trans_matrix(double date)
 	// TODO: Figure out the discrepancy
 
 	// Special case - heliocentric coordinates are on ecliptic, not solar equator...
-	if(name=="sun" ) {
+	if(englishName=="Sun" ) {
 		mat_local_to_parent = Mat4d::translation(ecliptic_pos); 
 	} else {
 		mat_local_to_parent = Mat4d::translation(ecliptic_pos) * Mat4d::zrotation(re.ascendingNode)
@@ -463,11 +461,11 @@ void Planet::draw_hints(const Navigator* nav, const Projector* prj)
 	glDisable(GL_LIGHTING);
 	glEnable(GL_TEXTURE_2D);
 
-	// Draw common_name + scaling if it's not == 1.
+	// Draw nameI18 + scaling if it's not == 1.
 	static char scale_str[100];
-	if (sphere_scale == 1.f) sprintf(scale_str,"%s", common_name.c_str());
-	else sprintf(scale_str,"%s (x%.1f)", common_name.c_str(), sphere_scale);
-	float tmp = 10.f + get_on_screen_size(prj, nav)/sphere_scale/2.f; // Shift for common_name printing
+	if (sphere_scale == 1.f) sprintf(scale_str,"%s", nameI18.c_str());
+	else sprintf(scale_str,"%s (x%.1f)", nameI18.c_str(), sphere_scale);
+	float tmp = 10.f + get_on_screen_size(prj, nav)/sphere_scale/2.f; // Shift for nameI18 printing
 
 	//	glColor4f(label_color[0], label_color[1], label_color[2],1.f);
 	//	glColor4f(label_color[0], label_color[1], label_color[2],hint_fader.getInterstate());

@@ -44,6 +44,10 @@ public:
 	void load(const string& planetfile);
 	void load_names(const string& names_file);
 
+	//! @brief Update i18 names from english names according to current locale
+	//! The translation is done using gettext with translated strings defined in translations.h
+	void SolarSystem::translateNames();
+
 	void set_font(float font_size, const string& font_name);
 	void set_label_color(const Vec3f& c) {Planet::set_label_color(c);}
 	void set_orbit_color(const Vec3f& c) {Planet::set_orbit_color(c);}
@@ -60,8 +64,8 @@ public:
 	// Return a stl vector containing the planets located inside the lim_fov circle around position v
 	vector<StelObject*> search_around(Vec3d v, double lim_fov, const Navigator * nav, const Projector * prj);
 
-	Planet* search(string object_name);
-	Planet* searchByCommonNames(string planetCommonName);
+	Planet* searchByEnglishName(string planetEnglishName);
+	Planet* searchByNamesI18(string planetNameI18);
 	Planet* get_sun(void) {return sun;}
 	Planet* get_earth(void) {return earth;}
 	Planet* get_moon(void) {return moon;}
@@ -73,7 +77,7 @@ public:
 	void update_trails(const Navigator* nav);
 	void set_object_scale(float scale);
 
-	vector<string> getNames(void);
+	vector<string> getNamesI18(void);
 private:
 	Planet* sun;
 	Planet* moon;
