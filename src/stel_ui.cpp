@@ -1316,13 +1316,20 @@ void StelUI::gui_update_widgets(int delta_time)
 	// update message win
 	message_win->update(delta_time);
 
+/*
 	// To prevent a minor bug
-	if (!core->FlagShowSelectedObjectInfo || !core->selected_object) info_select_ctr->setVisible(0);
-	else if (core->selected_object)
+	if (!core->FlagShowSelectedObjectInfo || !core->selected_object) 
+		info_select_ctr->setVisible(0);
+	else 
+	if (core->selected_object)
 	{
 		info_select_ctr->setVisible(1);
 		if(core->FlagShowSelectedObjectInfo) updateInfoSelectString();
 	}
+*/
+	// TONY
+	if (core->FlagShowSelectedObjectInfo && core->selected_object) 
+		updateInfoSelectString();
 
 	bt_flag_ctr->setVisible(core->FlagMenu);
 	bt_time_control_ctr->setVisible(core->FlagMenu);
@@ -1347,21 +1354,26 @@ void StelUI::gui_update_widgets(int delta_time)
 	if (config_win->getVisible()) updateConfigForm();
 }
 
-
 // Update the infos about the selected object in the TextLabel widget
 void StelUI::updateInfoSelectString(void)
 {
-	string objectInfo = "";
+//	if (core->FlagShowSelectedObjectInfo)
+//	{
+//		info_select_ctr->setVisible(1);
+	if (draw_mode == DM_NORMAL)
+	{
+		if (core->selected_object->get_type()==StelObject::STEL_OBJECT_NEBULA)
+			info_select_txtlbl->setTextColor(core->NebulaLabelColor[draw_mode]);
+		else if (core->selected_object->get_type()==StelObject::STEL_OBJECT_PLANET)
+			info_select_txtlbl->setTextColor(core->PlanetNamesColor[draw_mode]);
+		else if (core->selected_object->get_type()==StelObject::STEL_OBJECT_STAR)
+			info_select_txtlbl->setTextColor(core->selected_object->get_RGB());
+	}
+	else
+		info_select_txtlbl->setTextColor(Vec3f(1.0,0.2,0.2));
 	
-	objectInfo = core->selected_object->get_info_string(core->navigation);
-	info_select_txtlbl->setLabel(objectInfo);
-	if (core->FlagShowSelectedObjectInfo) info_select_ctr->setVisible(1);
-	if (core->selected_object->get_type()==StelObject::STEL_OBJECT_NEBULA)
-		info_select_txtlbl->setTextColor(core->NebulaLabelColor);
-	if (core->selected_object->get_type()==StelObject::STEL_OBJECT_PLANET)
-		info_select_txtlbl->setTextColor(core->PlanetNamesColor);
-	if (core->selected_object->get_type()==StelObject::STEL_OBJECT_STAR)
-		info_select_txtlbl->setTextColor(core->selected_object->get_RGB());
+	info_select_txtlbl->setLabel(core->selected_object->get_info_string(core->navigation));
+//	}
 }
 
 void StelUI::setTitleObservatoryName(const string& name)
