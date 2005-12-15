@@ -336,7 +336,7 @@ Component* StelUI::createFlagButtons(void)
 	bt_flag_chart->setOnPressCallback(callback<void>(this, &StelUI::cb));
 	bt_flag_chart->setOnMouseInOutCallback(callback<void>(this, &StelUI::cbr));
 
-	bt_flag_night = new FlagButton(false, NULL, "bt_night");
+	bt_flag_night = new FlagButton(false, NULL, "bt_nightview");
 	bt_flag_night->setOnPressCallback(callback<void>(this, &StelUI::cb));
 	bt_flag_night->setOnMouseInOutCallback(callback<void>(this, &StelUI::cbr));
 
