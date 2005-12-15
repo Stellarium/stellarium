@@ -33,8 +33,17 @@ public:
     ~ConstellationMgr();
     void draw(Projector* prj, Navigator* nav) const;
 	void update(int delta_time);
-	void load_names(const string& names_file);
+	
+	//! @brief Read constellation names from the given file
+	//! @param namesFile Name of the file containing the constellation names in english
+	void loadNames(const string& names_file);
+	
+	//! @brief Update i18 names from english names according to current locale
+	//! The translation is done using gettext with translated strings defined in translations.h
+	void translateNames();
+					   
 	void load_lines_and_art(const string& lines_file, const string& art_file, LoadingBar& lb);
+	
 	void set_art_fade_duration(float duration);
 	void set_art_intensity(float _max);
 	void set_flag_art(bool b);
