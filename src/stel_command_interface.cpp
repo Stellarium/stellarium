@@ -178,6 +178,12 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
       stcore->selected_object = stcore->hip_stars->searchHP(hpnum);
       stcore->asterisms->set_selected((HipStar*)stcore->selected_object);
       stcore->selected_planet=NULL;
+	}
+	else if(args["star"]!="")
+	{
+      stcore->selected_object = stcore->hip_stars->search(args["star"]);
+      stcore->asterisms->set_selected((HipStar*)stcore->selected_object);
+      stcore->selected_planet=NULL;
     } else if(args["planet"]!=""){
       stcore->selected_object = stcore->selected_planet = stcore->ssystem->search(args["planet"]);
       stcore->asterisms->set_selected(NULL);
