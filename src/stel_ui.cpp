@@ -149,7 +149,7 @@ void StelUI::init(void)
 	info_select_ctr->reshape(0,15,300,200);
 	info_select_txtlbl = new TextLabel();
     info_select_txtlbl->reshape(5,5,550,202);
-	info_select_ctr->setVisible(0);
+	info_select_ctr->setVisible(1);
 	info_select_ctr->addComponent(info_select_txtlbl);
 	info_select_ctr->setGUIColorSchemeMember(false);
 	desktop->addComponent(info_select_ctr);
