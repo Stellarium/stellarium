@@ -468,7 +468,7 @@ bool NebulaMgr::read_Sharpless_catalog(const string& fileName, LoadingBar& lb)
 		dataDir = dataDir.substr(0,loc+1);
 
     cout << _("Loading Sharpless data...");
-	string SharplessData = dataDir + "Sharpless.dat";
+	string SharplessData = dataDir + "sharpless.dat";
     FILE * SharplessFile = fopen(SharplessData.c_str(),"rb");
     if (!SharplessFile)
     {
@@ -531,7 +531,7 @@ bool NebulaMgr::read_Cadwell_catalog(const string& fileName, LoadingBar& lb)
 		dataDir = dataDir.substr(0,loc+1);
 
     cout << _("Loading Cadwell reference data...");
-	string CadwellData = dataDir + "Cadwell.dat";
+	string CadwellData = dataDir + "cadwell.dat";
     FILE * CadwellFile = fopen(CadwellData.c_str(),"rb");
     if (!CadwellFile)
     {
