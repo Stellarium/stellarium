@@ -160,7 +160,7 @@ void NebulaMgr::draw(int hint_ON, Projector* prj, const Navigator * nav, ToneRep
 						if ((*iter)->hasTex())
 							(*iter)->draw_tex(prj, eye, bright_nebulae && (*iter)->get_on_screen_size(prj, nav)>15 );
 						else 
-							(*iter)->draw_no_tex(prj, nav, eye);
+							if (hints) (*iter)->draw_no_tex(prj, nav, eye);
 					}				
 				}
 				else
@@ -653,7 +653,7 @@ bool NebulaMgr::read_messier_textures(const string& fileName, LoadingBar& lb)
 	{
 		// Draw loading bar
 		++current;
-		snprintf(tmpstr, 512, _("Loading Nebula Data: %d/%d"), current, total);
+		snprintf(tmpstr, 512, _("Loading Nebula Textures: %d/%d"), current, total);
 		lb.SetMessage(tmpstr);
 		lb.Draw((float)current/total);
 		
