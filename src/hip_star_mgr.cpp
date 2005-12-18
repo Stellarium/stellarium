@@ -666,7 +666,7 @@ bool HipStarMgr::load_double(const string& hipCatFile)
     HipStar *e = NULL;
 	int HP;
 	FILE *dataFile;
-	int i;
+	int i=0;
 	
 	unsigned int loc = dataDir.rfind("/");
 	
@@ -710,7 +710,7 @@ bool HipStarMgr::load_variable(const string& hipCatFile)
     HipStar *e = NULL;
 	int HP;
 	FILE *dataFile;
-	int i;
+	int i=0;
 	
 	unsigned int loc = dataDir.rfind("/");
 	

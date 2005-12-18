@@ -137,11 +137,11 @@ void StelUI::init(void)
 	desktop->reshape(0,0,core->screen_W,core->screen_H);
 
 	bt_flag_help_lbl = new Label("ERROR...");
-	bt_flag_help_lbl->setPos(3,core->screen_H-40);
+	bt_flag_help_lbl->setPos(3,core->screen_H-41-(int)baseFont->getDescent());
 	bt_flag_help_lbl->setVisible(0);
 
 	bt_flag_time_control_lbl = new Label("ERROR...");
-	bt_flag_time_control_lbl->setPos(core->screen_W-180,core->screen_H-40);
+	bt_flag_time_control_lbl->setPos(core->screen_W-180,core->screen_H-41-(int)baseFont->getDescent());
 	bt_flag_time_control_lbl->setVisible(0);
 
 	// Info on selected object
@@ -208,18 +208,17 @@ void StelUI::gotoObject(void)
 	                      core->auto_move_duration);
 }
 
-#define TOP_BAR_HEIGHT 17
 ////////////////////////////////////////////////////////////////////////////////
 Component* StelUI::createTopBar(void)
 {
-	top_bar_date_lbl = new Label("-", courierFont);	top_bar_date_lbl->setPos(2,2);
-	top_bar_hour_lbl = new Label("-", courierFont);	top_bar_hour_lbl->setPos(110,2);
-	top_bar_fps_lbl = new Label("-", courierFont);	top_bar_fps_lbl->setPos(core->screen_W-100,2);
-	top_bar_fov_lbl = new Label("-", courierFont);	top_bar_fov_lbl->setPos(core->screen_W-220,2);
-	top_bar_appName_lbl = new Label(APP_NAME, courierFont);
+	top_bar_date_lbl = new Label("-", baseFont);	top_bar_date_lbl->setPos(2,2);
+	top_bar_hour_lbl = new Label("-", baseFont);	top_bar_hour_lbl->setPos(110,2);
+	top_bar_fps_lbl = new Label("-", baseFont);	top_bar_fps_lbl->setPos(core->screen_W-100,2);
+	top_bar_fov_lbl = new Label("-", baseFont);	top_bar_fov_lbl->setPos(core->screen_W-220,2);
+	top_bar_appName_lbl = new Label(APP_NAME, baseFont);
 	top_bar_appName_lbl->setPos(core->screen_W/2-top_bar_appName_lbl->getSizex()/2,2);
 	top_bar_ctr = new FilledContainer();
-	top_bar_ctr->reshape(0,0,core->screen_W,TOP_BAR_HEIGHT);
+	top_bar_ctr->reshape(0,0,core->screen_W,(int)(baseFont->getLineHeight()+0.5)+5);
 	top_bar_ctr->addComponent(top_bar_date_lbl);
 	top_bar_ctr->addComponent(top_bar_hour_lbl);
 	top_bar_ctr->addComponent(top_bar_fps_lbl);

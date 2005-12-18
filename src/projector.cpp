@@ -538,7 +538,14 @@ void Projector::sCylinder(GLdouble radius, GLdouble height, GLint slices, GLint 
 	}
 }
 
-void Projector::print_gravity180(const s_font* font, float x, float y, const string& str,
+void Projector::print_gravity180(s_font* font, float x, float y, const string& s,
+				 bool speed_optimize, float xshift, float yshift) const
+{
+	wstring ws = s_font::strToWstring(s);
+	print_gravity180(font, x, y, ws, speed_optimize, xshift, yshift);
+}
+
+void Projector::print_gravity180(s_font* font, float x, float y, const wstring& str,
 				 bool speed_optimize, float xshift, float yshift) const
 {
 	static float dx, dy, d, theta, psi;

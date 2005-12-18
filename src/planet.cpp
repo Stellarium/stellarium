@@ -87,8 +87,8 @@ string Planet::get_info_string(const Navigator * nav) const
 	Vec3d equPos = get_earth_equ_pos(nav);
 	rect_to_sphe(&tempRA,&tempDE,equPos);
 	
-	oss << "RA : " << print_angle_hms(tempRA*180./M_PI) << endl;
-	oss << "DE : " << print_angle_dms_stel(tempDE*180./M_PI) << endl;
+	oss << "RA : " << StelUtility::printAngleHMS(tempRA) << endl;
+	oss << "DE : " << StelUtility::printAngleDMS(tempDE) << endl;
 	
 	oss.precision(2);
 	oss << "Magnitude : " << compute_magnitude(nav->get_observer_helio_pos()) << endl;
@@ -101,8 +101,8 @@ string Planet::get_info_string(const Navigator * nav) const
 	tempRA = 3*M_PI - tempRA;  // N is zero, E is 90 degrees
 	if(tempRA > M_PI*2) tempRA -= M_PI*2;
 
-	oss << "Az  : " << print_angle_dms_stel(tempRA*180./M_PI) << endl;
-	oss << "Alt : " << print_angle_dms_stel(tempDE*180./M_PI) << endl;
+	oss << "Az  : " << StelUtility::printAngleDMS(tempRA) << endl;
+	oss << "Alt : " << StelUtility::printAngleDMS(tempDE) << endl;
 
 
 	return oss.str();

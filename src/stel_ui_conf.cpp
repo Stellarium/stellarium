@@ -423,7 +423,7 @@ void StelUI::load_cities(const string & fileName)
 	char tmpstr[2000];
 	int total = 0;
 
-	cout << "Loading Cities data...";
+	cout << _("Loading Cities data...");
 	FILE *fic = fopen(fileName.c_str(), "r");
 	if (!fic)
 	{

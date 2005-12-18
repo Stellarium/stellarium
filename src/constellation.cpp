@@ -117,7 +117,7 @@ void Constellation::draw_optim(Projector* prj) const
 }
 
 // Draw the name
-void Constellation::draw_name(s_font * constfont, Projector* prj) const
+void Constellation::draw_name(s_font *constfont, Projector* prj) const
 {
 	if(!name_fader.getInterstate()) return;
 	glColor3fv(label_color*name_fader.getInterstate());

@@ -26,6 +26,8 @@
 #include <cstddef>
 #include <vector>
 #include <map>
+#include <iostream>
+#include <fstream>
 #include <ft2build.h>
 #include FT_FREETYPE_H
 #include FT_GLYPH_H
@@ -316,6 +318,13 @@ struct DestroyTexture
 TypeFace::TypeFace(const std::string& aFaceName, size_t aPointSize, size_t aResolution) :
     data_(new Data(aPointSize, aResolution))
 {
+	std::ifstream ifs(aFaceName.c_str(), std::ios_base::in);
+	if (!ifs.is_open())
+	{
+		std::cerr << "Error: cannot find TTF font file " << aFaceName << "." << std::endl;
+	}
+	ifs.close();
+	
 	if (FTinitialized==false)
 	{
 		assert(FT_Init_FreeType(&ftlibrary_) == 0);
@@ -489,7 +498,7 @@ TypeFace::addNewTexture(const Vec2size_t& aGlyphSize)
 
 // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 void
-TypeFace::render(const std::wstring& aString, const Vec2f& aPosition)
+TypeFace::render(const std::wstring& aString, const Vec2f& aPosition, bool upsideDown)
 {
     glPushAttrib(GL_ENABLE_BIT | GL_COLOR_BUFFER_BIT | GL_HINT_BIT | GL_LINE_BIT | GL_PIXEL_MODE_BIT);
     glEnable(GL_TEXTURE_2D);
@@ -499,7 +508,11 @@ TypeFace::render(const std::wstring& aString, const Vec2f& aPosition)
 
     glPushMatrix();
     glTranslatef(aPosition[0], aPosition[1], 0.0f);
-	glScalef(1.f, -1.f, 1.f);
+	if (upsideDown)
+	{
+		glScalef(1.f, -1.f, 1.f);
+		glTranslatef(0.f, lineHeight(), 0.f);
+	}
 
     renderGlyphs(aString);
 
