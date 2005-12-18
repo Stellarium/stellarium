@@ -101,7 +101,12 @@ void Constellation::draw_optim(Projector* prj) const
 {
 	if(!line_fader.getInterstate()) return;
 
-	glColor3fv(line_color*line_fader.getInterstate());
+	glDisable(GL_TEXTURE_2D);
+	glEnable(GL_BLEND);	
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
+
+	glColor4f(line_color[0], line_color[1], line_color[2], line_fader.getInterstate());
+
 	Vec3d star1;
 	Vec3d star2;
     for(unsigned int i=0;i<nb_segments;++i)
@@ -233,8 +238,16 @@ void Constellation::draw_boundary_optim(Projector* prj) const
 //    if (boundaryXYZ.size() <= 2) return;
 //    if (!isolatedBoundarySegments.size()) return;
 
-	if (singleSelected) glColor3fv(boundary_color);
-	else glColor3fv(boundary_color*boundary_fader.getInterstate());
+	glDisable(GL_TEXTURE_2D);
+	glEnable(GL_BLEND);	
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
+
+	// TODO - Fix this so that works like constellation art fade with selections
+	if(singleSelected) 	
+		glColor4f(boundary_color[0], boundary_color[1], boundary_color[2], 1);  
+	else
+		glColor4f(boundary_color[0], boundary_color[1], boundary_color[2], boundary_fader.getInterstate());
+
 /* drawing for original bound_20 data
 	i = 0;
 	Vec3d pt1;
