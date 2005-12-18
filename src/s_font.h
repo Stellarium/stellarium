@@ -49,12 +49,7 @@ public:
 
 	void print_char_outlined(const unsigned char c) {
 
-		// TODO add back in outline feature
-
-		wchar_t wc[] = L"xx";
-		wc[0] = c;
-		wc[1] = 0;  // terminate string
-		typeFace.renderGlyphs((wstring(wc)));
+		print_char_outlined(wchar_t(c));
 	}
 
 	void print_char(const wchar_t c) {
@@ -66,11 +61,41 @@ public:
 
 	void print_char_outlined(const wchar_t c) {
 
-		// TODO add back in outline feature
+		// This is not the most elegant way to do this,
+		// but avoids needing two fonts loaded
 
 		wchar_t wc[] = L"xx";
 		wc[0] = c;
 		wc[1] = 0;  // terminate string
+
+		GLfloat current_color[4];
+		glGetFloatv(GL_CURRENT_COLOR, current_color);	 
+ 	 	 
+
+		glColor3f(0.2,0.2,0.2);
+
+		glPushMatrix();
+		glTranslatef(1,1,0);		
+		typeFace.renderGlyphs((wstring(wc)));
+		glPopMatrix();
+
+		glPushMatrix();
+		glTranslatef(-1,-1,0);		
+		typeFace.renderGlyphs((wstring(wc)));
+		glPopMatrix();
+
+		glPushMatrix();
+		glTranslatef(1,-1,0);		
+		typeFace.renderGlyphs((wstring(wc)));
+		glPopMatrix();
+
+		glPushMatrix();
+		glTranslatef(-1,1,0);		
+		typeFace.renderGlyphs((wstring(wc)));
+		glPopMatrix();
+
+		glColor4fv(current_color);
+
 		typeFace.renderGlyphs((wstring(wc)));
 	}
 
