@@ -39,8 +39,42 @@ public:
     virtual ~s_font() {;}
     void print(float x, float y, const wstring& s, int upsidedown = 1) {typeFace.render(s, Vec2f(x, y), upsidedown==1);}
     void print(float x, float y, const string& s, int upsidedown = 1) {typeFace.render(StelUtility::stringToWstring(s), Vec2f(x, y), upsidedown==1);}
-    void print_char(const unsigned char c) {wchar_t wc = c; typeFace.renderGlyphs((wstring(&wc)));}
-    void print_char_outlined(const unsigned char c) {wchar_t wc = c; typeFace.renderGlyphs((wstring(&wc)));}
+
+	void print_char(const unsigned char c) {
+		wchar_t wc[] = L"xx";
+		wc[0] = c;
+		wc[1] = 0;  // terminate string
+		typeFace.renderGlyphs((wstring(wc)));
+	}
+
+	void print_char_outlined(const unsigned char c) {
+
+		// TODO add back in outline feature
+
+		wchar_t wc[] = L"xx";
+		wc[0] = c;
+		wc[1] = 0;  // terminate string
+		typeFace.renderGlyphs((wstring(wc)));
+	}
+
+	void print_char(const wchar_t c) {
+		wchar_t wc[] = L"xx";
+		wc[0] = c;
+		wc[1] = 0;  // terminate string
+		typeFace.renderGlyphs((wstring(wc)));
+	}
+
+	void print_char_outlined(const wchar_t c) {
+
+		// TODO add back in outline feature
+
+		wchar_t wc[] = L"xx";
+		wc[0] = c;
+		wc[1] = 0;  // terminate string
+		typeFace.renderGlyphs((wstring(wc)));
+	}
+
+
     float getStrLen(const wstring& s) {return typeFace.width(s);}
     float getStrLen(const string& s) {return typeFace.width(StelUtility::stringToWstring(s));}
     float getLineHeight(void) {return typeFace.lineHeight();}
