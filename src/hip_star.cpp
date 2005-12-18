@@ -145,7 +145,7 @@ string HipStar::get_short_info_string(const Navigator * nav) const
 	oss.setf(ios::fixed);
 	oss.precision(1);
 	oss << ": mag " << Mag;
-	if(Distance) oss << Distance << "ly";
+	if(Distance) oss << "  " << Distance << "ly";
 
 	return oss.str();
 }
@@ -318,7 +318,9 @@ bool HipStar::draw_name(void)
 		}
 	}
 	
-	if (draw_mode == DM_NORMAL) glColor3fv(RGB*0.75*names_brightness);
+	if (draw_mode == DM_NORMAL) {
+		glColor4f(RGB[0]*0.75, RGB[1]*0.75, RGB[2]*0.75, names_brightness);
+	}
 	else glColor3fv(label_color);
 
 	gravity_label ? proj->print_gravity180(starFont, XY[0],XY[1], starname, 1, 6, -4) :
