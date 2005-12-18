@@ -327,7 +327,7 @@ void ConstellationMgr::translateNames()
 	vector < Constellation * >::const_iterator iter;
 	for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
 	{
-		(*iter)->nameI18 = StelUtility::stringToWstring(gettext((*iter)->englishName.c_str()));
+		(*iter)->nameI18 = gettext((*iter)->englishName.c_str());
 	}
 }
 
@@ -339,7 +339,7 @@ vector <string> ConstellationMgr::getNames(void)
 
 	for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
 	{
-		name = StelUtility::wstringToString((*iter)->getNameI18());
+		name = (*iter)->getNameI18();
 		transform(name.begin(), name.end(), name.begin(), ::tolower);
 		transform(name.begin(), name.begin()+1, name.begin(), ::toupper);
         names.push_back(name);
@@ -363,7 +363,7 @@ string ConstellationMgr::get_short_name_by_name(string _name) {
 
 	for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
 	{
-		if( _name==StelUtility::wstringToString((*iter)->getNameI18())) return (*iter)->getShortName();
+		if( _name==(*iter)->getNameI18()) return (*iter)->getShortName();
 	}
 	return "";
 
