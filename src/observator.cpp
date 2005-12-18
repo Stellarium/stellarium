@@ -115,8 +115,8 @@ void Observator::save(const string& file, const string& section)
 	conf.load(file);
 
 	conf.set_str(section + ":name", name);
-	conf.set_str(section + ":latitude", print_angle_dms(latitude));
-    conf.set_str(section + ":longitude", print_angle_dms(longitude));
+	conf.set_str(section + ":latitude", StelUtility::printAngleDMS(latitude, true, true));
+    conf.set_str(section + ":longitude", StelUtility::printAngleDMS(longitude, true, true));
 
 	conf.set_int(section + ":altitude", altitude);
 	conf.set_str(section + ":landscape_name", landscape_name);

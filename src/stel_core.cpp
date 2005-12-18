@@ -105,7 +105,6 @@ void StelCore::init(void)
 	
 	cout << "Locale is ";
 	if (!tmp) cout << "(Default)";
-	else cout << tmp;
 	cout << endl;
 
 	if(tmp == NULL) UILocale = "";
@@ -113,7 +112,7 @@ void StelCore::init(void)
 
 	// Warning: These values are not overriden by the config!
 	BaseCFontSize = 12.5;
-	BaseCFontName = DataDir + "courierfont.txt";
+	BaseCFontName = DataDir + "DejaVuSansMono-Roman.ttf";
 	MapFontSize = 9.5f;
 	ConstellationFontSize = 16.f;
 	StarFontSize = 12.f;
@@ -673,7 +672,7 @@ void StelCore::load_config_from(const string& confFile)
 	GuiBaseColorr		= StelUtility::str_to_vec3f(conf.get_str("color", "gui:gui_base_colorr", "0.7,0.2,0.1").c_str());
 	GuiTextColorr		= StelUtility::str_to_vec3f(conf.get_str("color", "gui:gui_text_colorr", "0.9,0.4,0.2").c_str());
 	BaseFontSize		= conf.get_double ("gui","base_font_size",15);
-	BaseFontName        = conf.get_str("gui", "base_font_name", "spacefont.txt");
+	BaseFontName        = conf.get_str("gui", "base_font_name", "DejaVuSans.ttf");
 	FlagShowScriptBar	= conf.get_boolean("gui","flag_show_script_bar",0);
 	MouseCursorTimeout  = conf.get_double("gui","mouse_cursor_timeout",0);
 	scripts->set_allow_ui( conf.get_boolean("gui","flag_script_allow_ui",0) );
@@ -1510,7 +1509,7 @@ void StelCore::set_system_locale(void)
 	bindtextdomain(PACKAGE, LOCALEDIR);
 	textdomain(PACKAGE);
 
-	bind_textdomain_codeset(PACKAGE, "iso-8859-1");
+	bind_textdomain_codeset(PACKAGE, "UTF-8"); // iso-8859-1
 
 	if (ui->isInitialised())
 	{
@@ -1648,8 +1647,8 @@ string StelCore::get_cursor_pos(int x, int y)
 	
 	float tempDE, tempRA;
 	rect_to_sphe(&tempRA,&tempDE,v);
-	oss << "RA : " << print_angle_hms(tempRA*180./M_PI) << endl;
-	oss << "DE : " << print_angle_dms_stel(tempDE*180./M_PI);
+	oss << "RA : " << StelUtility::printAngleHMS(tempRA) << endl;
+	oss << "DE : " << StelUtility::printAngleDMS(tempDE);
 	
 	return oss.str();
 }

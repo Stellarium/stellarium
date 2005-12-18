@@ -28,40 +28,28 @@
 
 #include "SDL_opengl.h"
 
+#include "stel_utility.h"
 #include "s_texture.h"
-
-typedef struct
-{   int sizeX;
-    int sizeY;
-    int leftSpacing;
-    int rightSpacing;
-} s_fontGlyphInfo;
-
+#include "typeface.h"
 
 class s_font
 {
 public:
-    s_font(float size_i, const string& fontName);
-    virtual ~s_font();
-    void print(float x, float y, const string& str, int upsidedown = 1) const;
-    void print_char(const unsigned char c) const;
-    void print_char_outlined(const unsigned char c) const;
-    float getStrLen(const string&) const;
-    float getAverageCharLen(void) const {return averageCharLen*ratio;}
-    float getLineHeight(void) const {return lineHeight*ratio;}
-    float getStrHeight(const string&) const;
-    s_texture * s_fontTexture;
-    string getFontName(void) { return name; }
+    s_font(float size_i, const string& ttfFileName) : typeFace(ttfFileName, (size_t)(size_i), 72) {;}
+    virtual ~s_font() {;}
+    void print(float x, float y, const wstring& s, int upsidedown = 1) {typeFace.render(s, Vec2f(x, y), upsidedown==1);}
+    void print(float x, float y, const string& s, int upsidedown = 1) {typeFace.render(StelUtility::stringToWstring(s), Vec2f(x, y), upsidedown==1);}
+    void print_char(const unsigned char c) {wchar_t wc = c; typeFace.renderGlyphs((wstring(&wc)));}
+    void print_char_outlined(const unsigned char c) {wchar_t wc = c; typeFace.renderGlyphs((wstring(&wc)));}
+    float getStrLen(const wstring& s) {return typeFace.width(s);}
+    float getStrLen(const string& s) {return typeFace.width(StelUtility::stringToWstring(s));}
+    float getLineHeight(void) {return typeFace.lineHeight();}
+    float getAscent(void) {return typeFace.ascent();}
+    float getDescent(void) {return typeFace.descent();}
+    static wstring strToWstring(const string& s) {wstring ws(s.begin(), s.end()); ws.assign(s.begin(), s.end()); return ws;}
 protected:
-    int buildDisplayLists(const string& dataFileName, const string& textureName);
-    GLuint g_base;
-    s_fontGlyphInfo theSize[256];
-    float size;
-    int lineHeight;
-    float averageCharLen;
-    float ratio;
-    char name[20];
-    const static int SPACING = 1;
+	TypeFace typeFace;
+	
 };
 
 

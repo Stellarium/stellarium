@@ -29,6 +29,31 @@
 #include "stellarium.h"
 
 
+wstring StelUtility::stringToWstring(const string& s)
+{
+	// Get wide string length
+	size_t len = mbstowcs(NULL, s.c_str(), 0)+1;
+	// Create wide string
+	wchar_t* ws = new wchar_t[len];
+	mbstowcs(ws, s.c_str(), len);
+	wstring wws(ws);
+	delete [] ws;
+	return wws;
+}
+
+
+string StelUtility::wstringToString(const wstring& ws)
+{
+	// Get UTF-8 string length
+	size_t len = wcstombs(NULL, ws.c_str(), 0)+1;
+	// Create wide string
+	char* s = new char[len];
+	wcstombs(s, ws.c_str(), len);
+	string ss(s);
+	delete [] s;
+	return ss;	
+}
+
 double StelUtility::hms_to_rad( unsigned int h, unsigned int m, double s )
 {
 	return (double)M_PI/24.*h*2.+(double)M_PI/12.*m/60.+s*M_PI/43200.;
@@ -135,7 +160,7 @@ double get_dec_angle(const string& str)
 	const char* s = str.c_str();
 	char *mptr, *ptr, *dec, *hh;
 	int negative = 0;
-	char delim1[] = " :.,;Dd�HhMm'\n\t\xBA";  // 0xBA was old degree delimiter
+	char delim1[] = " :.,;DdHhMm'\n\t\xBA";  // 0xBA was old degree delimiter
 	char delim2[] = " NSEWnsew\"\n\t";
 	int dghh = 0, minutes = 0;
 	double seconds = 0.0, pos;
@@ -205,7 +230,7 @@ double get_dec_angle(const string& str)
 	if ((ptr = strtok(NULL," \n\t")) != NULL)
 	{
 		skipwhite(&ptr);
-		if (*ptr == 'S' || *ptr == 'W' || *ptr == 's' || *ptr == 'W') negative = 1;
+		if (*ptr == 'S' || *ptr == 'W' || *ptr == 's' || *ptr == 'w') negative = 1;
 	}
 
 	free(mptr);
@@ -268,8 +293,12 @@ string print_angle_dms(double location)
     return buf;
 }
 
-
-string print_angle_dms_stel_main(double location, bool decimals)
+//! @brief Print the passed angle with the format dd°mm'ss(.ss)"
+//! @param angle Angle in radian
+//! @param decimal Define if 2 decimal must also be printed
+//! @param useD Define if letter "d" must be used instead of °
+//! @return The corresponding string
+string StelUtility::printAngleDMS(double angle, bool decimals, bool useD)
 {
     static char buf[16];
     double deg = 0.0;
@@ -277,13 +306,18 @@ string print_angle_dms_stel_main(double location, bool decimals)
     double sec = 0.0;
 	char sign = '+';
 	int d, m, s;
+	char degsign = '\6';
 
-	if(location<0) {
-		location *= -1;
+	if (useD) degsign = 'd';
+
+	angle *= 180./M_PI;
+
+	if(angle<0) {
+		angle *= -1;
 		sign = '-';
 	}
 
-    sec = 60.0 * (modf(location, &deg));
+    sec = 60.0 * (modf(angle, &deg));
     sec = 60.0 * (modf(sec, &min));
     
     d = (int)deg;
@@ -291,8 +325,7 @@ string print_angle_dms_stel_main(double location, bool decimals)
     s = (int)sec;
     
     if (decimals)
-    // not sure this is ever used!
-	    sprintf(buf,"%c%.2dd%.2d'%.2f\"", sign, d, m, sec);
+	    sprintf(buf,"%c%.2d%c%.2d'%.2f\"", sign, d, degsign, m, sec);
 	else
 	{
 		double sf = sec - s;
@@ -310,37 +343,31 @@ string print_angle_dms_stel_main(double location, bool decimals)
 				}
 			}
 		}
-	    sprintf(buf,"%c%.2d\6%.2d'%.2d\"", sign, d, m, s);
+	    sprintf(buf,"%c%.2d%c%.2d'%.2d\"", sign, d, degsign, m, s);
 	}
     return buf;
 }
 
-string print_angle_dms_stel0(double location)
-{
-	return print_angle_dms_stel_main(location, 0);
-}
-
-string print_angle_dms_stel(double location)
-{
-	return print_angle_dms_stel_main(location, 2);
-}
-
-/* Obtains a human readable angle in the form: hhhmmmss.sss" */
-string print_angle_hms(double angle)
+//! @brief Print the passed angle with the format +hhhmmmss(.ss)"
+//! @param angle Angle in radian
+//! @param decimals Define if 2 decimal must also be printed
+//! @return The corresponding string
+string StelUtility::printAngleHMS(double angle, bool decimals)
 {
     static char buf[16];
     double hr = 0.0;
     double min = 0.0;
     double sec = 0.0;
+    angle *= 180./M_PI;
     *buf = 0;
 	while (angle<0) angle+=360;
 	angle/=15.;
     min = 60.0 * (modf(angle, &hr));
     sec = 60.0 * (modf(min, &min));
-    sprintf(buf,"%.2dh%.2dm%.2fs",(int)hr, (int) min, sec);
+    if (decimals) sprintf(buf,"%.2dh%.2dm%.2fs",(int)hr, (int) min, sec);
+    else sprintf(buf,"%.2dh%.2dm%.0fs",(int)hr, (int) min, sec);
     return buf;
 }
-
 
 
 // convert string int ISO 8601-like format [+/-]YYYY-MM-DDThh:mm:ss (no timzone offset)

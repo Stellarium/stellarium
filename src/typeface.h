@@ -36,13 +36,14 @@ struct FT_BitmapGlyphRec_;
 //! Base class for gem type faces
 class TypeFace
 {
+	friend class s_font;
     // ----------------------------------------------------------------------------------------------
     //  Xstruction
     // ----------------------------------------------------------------------------------------------
 public:
     //! Construction requires the name of the font file and optionally the size and resolution
     explicit TypeFace(const std::string& aFileName, size_t aPointSize = 12, size_t aResolution = 100);
-
+	
     //! Destructor
     virtual ~TypeFace();
 
@@ -63,7 +64,7 @@ public:
     void setResolution(size_t aResolution);
 
     //! Renders the passed in string at the passed in position
-    void render(const std::wstring& aString, const Vec2f& aPosition);
+    void render(const std::wstring& aString, const Vec2f& aPosition, bool upsideDown=false);
 
     //! \brief Returns the ascent of this type face in pixels.
     //! \note This is a positive value representing the distance from the baseline to the
