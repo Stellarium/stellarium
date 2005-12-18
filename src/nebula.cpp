@@ -75,14 +75,14 @@ string Nebula::get_info_string(const Navigator* nav) const
 	if (IC_nb > 0) oss << IC_nb; else oss << "-";
 	oss << endl;
 	
-	oss << "RA : " << print_angle_hms(tempRA*180./M_PI) << endl;
-	oss << "DE : " << print_angle_dms_stel(tempDE*180./M_PI) << endl;
+	oss << "RA : " << StelUtility::printAngleHMS(tempRA) << endl;
+	oss << "DE : " << StelUtility::printAngleDMS(tempDE) << endl;
 
 	oss.setf(ios::fixed);
 	oss.precision(2);
 	oss << "Magnitude : " << mag << endl;
 	oss << "Type : " << string(typeDesc == "" ? "-" : typeDesc) << endl;
-	oss << "Size : " << print_angle_dms_stel0(angular_size*180./M_PI) << endl; 
+	oss << "Size : " << StelUtility::printAngleDMS(angular_size*M_PI/180.) << endl; 
 	
 	// calculate alt az
 	Vec3d localPos = nav->earth_equ_to_local(equPos);
@@ -90,8 +90,8 @@ string Nebula::get_info_string(const Navigator* nav) const
 	tempRA = 3*M_PI - tempRA;  // N is zero, E is 90 degrees
 	if(tempRA > M_PI*2) tempRA -= M_PI*2;
 
-	oss << "Az  : " << print_angle_dms_stel(tempRA*180./M_PI) << endl;
-	oss << "Alt : " << print_angle_dms_stel(tempDE*180./M_PI) << endl;
+	oss << "Az  : " << StelUtility::printAngleDMS(tempRA) << endl;
+	oss << "Alt : " << StelUtility::printAngleDMS(tempDE) << endl;
 
 
 	return oss.str();

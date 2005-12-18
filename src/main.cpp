@@ -247,7 +247,7 @@ int main(int argc, char **argv)
 	textdomain (PACKAGE);
 
 	// TODO: move to utf8
-	bind_textdomain_codeset(PACKAGE, "iso-8859-1");
+	bind_textdomain_codeset(PACKAGE, "UTF-8"); // iso-8859-1
 
 #endif
 	

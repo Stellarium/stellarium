@@ -242,7 +242,7 @@ Painter::Painter() :
 {
 }
 
-Painter::Painter(const s_texture* _tex1, const s_font* _font,
+Painter::Painter(const s_texture* _tex1, s_font* _font,
 	const s_color& _baseColor, const s_color& _textColor) :
 		tex1(_tex1),
 		font(_font),
@@ -352,7 +352,7 @@ void Painter::drawCross(const s_vec2i& pos, const s_vec2i& sz) const
 }
 
 // Print the text with the default font and default text color
-void Painter::print(int x, int y, const string& str) const
+void Painter::print(int x, int y, const string& str)
 {
     glColor4fv(textColor);
     glEnable(GL_TEXTURE_2D);
@@ -361,7 +361,7 @@ void Painter::print(int x, int y, const string& str) const
 }
 
 // Print the text with the default font and given text color
-void Painter::print(int x, int y, const string& str, const s_color& c) const
+void Painter::print(int x, int y, const string& str, const s_color& c)
 {
     glColor4fv(c);
     glEnable(GL_TEXTURE_2D);
@@ -965,7 +965,7 @@ void FlagButton::draw()
 // Text label
 ////////////////////////////////////////////////////////////////////////////////
 
-Label::Label(const string& _label, const s_font * _font)
+Label::Label(const string& _label, s_font * _font)
 {
 	if (_font) painter.setFont(_font);
 	setLabel(_label);
@@ -998,7 +998,7 @@ void Label::draw(void)
 	if (!visible) return;
 
     if (painter.getFont()) 
-		painter.print(pos[0], pos[1], label);
+		painter.print(pos[0], pos[1]+size[1], label);
 }
 
 void Label::draw(float _intensity)
@@ -1006,7 +1006,7 @@ void Label::draw(float _intensity)
 	if (!visible) return;
 
     if (painter.getFont()) 
-		painter.print(pos[0], pos[1], label, painter.getTextColor()*_intensity);
+		painter.print(pos[0], pos[1]+size[1], label, painter.getTextColor()*_intensity);
 }
 
 void Label::adjustSize(void)
@@ -1141,7 +1141,7 @@ string AutoCompleteString::getFirstMatch(void)
 
 // we need to set this when actrivated, and only blink the active one
 
-EditBox::EditBox(const string& _label, const s_font* font) 
+EditBox::EditBox(const string& _label, s_font* font) 
 	: Button(), label(_label, font), isEditing(false), cursorPos(0)
 {
 	Component::setSize(label.getSize()+s_vec2i(4,2));
@@ -1795,7 +1795,7 @@ string ListBox::getItem(int value)
 
 #define LABEL_PAD 10
 
-LabeledButton::LabeledButton(const string& _label, const s_font* font, Justification _j, bool _bright) 
+LabeledButton::LabeledButton(const string& _label, s_font* font, Justification _j, bool _bright) 
 	: Button(), label(_label, font), justification(_j), isBright(_bright)
 {
 	Component::setSize(label.getSize()+s_vec2i(4,2));
@@ -1856,7 +1856,7 @@ void LabeledButton::setVisible(bool _visible)
 // A text bloc
 ////////////////////////////////////////////////////////////////////////////////
 
-TextLabel::TextLabel(const string& _label, const s_font* _font) :
+TextLabel::TextLabel(const string& _label, s_font* _font) :
 	Container()
 {
 	if (_font) painter.setFont(_font);
@@ -2327,7 +2327,7 @@ void StdDlgWin::onSecondBt(void)
 // Everything to handle tabs
 ////////////////////////////////////////////////////////////////////////////////
 
-TabHeader::TabHeader(Component* c, const string& _label, const s_font* _font) :
+TabHeader::TabHeader(Component* c, const string& _label, s_font* _font) :
 	LabeledButton(_label, _font), assoc(c), active(false)
 {
 }
@@ -2363,7 +2363,7 @@ void TabHeader::setActive(bool s)
 	assoc->setVisible(active);
 }
 
-TabContainer::TabContainer(const s_font* _font) : Container(), headerHeight(22)
+TabContainer::TabContainer(s_font* _font) : Container(), headerHeight(22)
 {
 	if (_font) painter.setFont(_font);
 }
@@ -2615,7 +2615,7 @@ bool CursorBar::onMove(int x, int y)
 // 
 ////////////////////////////////////////////////////////////////////////////////
 
-IntIncDec::IntIncDec(const s_font* _font, const s_texture* tex_up,
+IntIncDec::IntIncDec(s_font* _font, const s_texture* tex_up,
 		const s_texture* tex_down, int _min, int _max,
 		int _init_value, int _inc) :
 	Container(), value(_init_value), min(_min), max(_max), inc(_inc), btmore(NULL), btless(NULL), label(NULL)
@@ -2655,7 +2655,7 @@ void IntIncDec::draw()
 }
 
 
-IntIncDecVert::IntIncDecVert(const s_font* _font, const s_texture* tex_up,
+IntIncDecVert::IntIncDecVert(s_font* _font, const s_texture* tex_up,
 		const s_texture* tex_down, int _min, int _max,
 		int _init_value, int _inc) : IntIncDec(_font, tex_up, tex_down, _min, _max, _init_value, _inc)
 {
@@ -2665,7 +2665,7 @@ IntIncDecVert::IntIncDecVert(const s_font* _font, const s_texture* tex_up,
 	setSize(_max/10 * 8 + 16,40);
 }
 
-FloatIncDec::FloatIncDec(const s_font* _font, const s_texture* tex_up,
+FloatIncDec::FloatIncDec(s_font* _font, const s_texture* tex_up,
 		const s_texture* tex_down, float _min, float _max,
 		float _init_value, float _inc) :
 	Container(), value(_init_value), min(_min), max(_max), inc(_inc), btmore(NULL), 
@@ -2707,7 +2707,7 @@ void FloatIncDec::draw()
 	}
 	else if (format == FORMAT_LONGITUDE || format == FORMAT_LATITUDE)
 	{
-		string l = print_angle_dms_stel0(value);
+		string l = StelUtility::printAngleDMS(value*M_PI/180.);
 		string m = l.substr(1);
 		if (format == FORMAT_LATITUDE)
 		{
@@ -2761,7 +2761,7 @@ void FloatIncDec::dec_value()
 // Widget used to set time and date.
 ////////////////////////////////////////////////////////////////////////////////
 
-Time_item::Time_item(const s_font* _font, const s_texture* tex_up,
+Time_item::Time_item(s_font* _font, const s_texture* tex_up,
 						const s_texture* tex_down, double _JD) :
 						d(NULL), m(NULL), y(NULL), h(NULL), mn(NULL), s(NULL)
 {
@@ -2967,7 +2967,7 @@ void City_Mgr::addCity(const string& _name, const string& _state,
 
 int City_Mgr::getNearest(double _longitude, double _latitude)
 {
-	double dist, closest;
+	double dist, closest=10000.;
 	int index = -1;
 	int i;
 	string name;

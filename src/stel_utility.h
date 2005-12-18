@@ -56,7 +56,31 @@ public:
 	//! @brief Obtains a string from a Vec3f 
 	//! @param v The vector
 	//! @return the string describing the Vector with the form "x,y,z"
-	static string vec3f_to_str(const Vec3f& v); 
+	static string vec3f_to_str(const Vec3f& v);
+	
+	//! @brief Print the passed angle with the format dd°mm'ss(.ss)"
+	//! @param angle Angle in radian
+	//! @param decimal Define if 2 decimal must also be printed
+	//! @param useD Define if letter "d" must be used instead of °
+	//! @return The corresponding string
+	static string printAngleDMS(double angle, bool decimals = false, bool useD = false);
+	
+	//! @brief Print the passed angle with the format +hh:mm:ss(.ss)"
+	//! @param angle Angle in radian
+	//! @param decimals Define if 2 decimal must also be printed
+	//! @return The corresponding string
+	static string printAngleHMS(double angle, bool decimals = false);
+		
+	//! @brief Convert UTF-8 std::string to std::wstring using mbstowcs() function
+	//! @param The input string in UTF-8 format
+	//! @return The matching wide string
+	static wstring stringToWstring(const string& s);
+	
+	//! @brief Convert std::wstring to UTF-8 std::string using wcstombs() function
+	//! @param The input wide character string
+	//! @return The matching string in UTF-8 format
+	static string wstringToString(const wstring& ws);
+	
 };
 
 double hms_to_rad(unsigned int h, double m);
@@ -72,17 +96,6 @@ void rect_to_sphe(float *lng, float *lat, const Vec3f& v);
 /* Obtains Latitude, Longitude, RA or Declination from a string. */
 double get_dec_angle(const string&);
 
-/* Obtains a human readable angle in the form: ddmm'ss.ss" */
-string print_angle_dms(double location);
-
-/* Obtains a human readable angle in the form: dd\6mm'ss.ss" */
-string print_angle_dms_stel(double location);
-
-/* Obtains a human readable angle in the form: dd\6mm'ss" */
-string print_angle_dms_stel0(double location);
-
-/* Obtains a human readable angle in the form: hhhmmmss.sss" */
-string print_angle_hms(double location);
 
 // Provide the luminance in cd/m^2 from the magnitude and the surface in arcmin^2
 float mag_to_luminance(float mag, float surface);
