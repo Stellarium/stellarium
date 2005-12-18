@@ -548,6 +548,7 @@ void Projector::print_gravity180(s_font* font, float x, float y, const string& s
 void Projector::print_gravity180(s_font* font, float x, float y, const wstring& str,
 				 bool speed_optimize, float xshift, float yshift) const
 {
+
 	static float dx, dy, d, theta, psi;
 	dx = x - (vec_viewport[0] + vec_viewport[2]/2);
 	dy = y - (vec_viewport[1] + vec_viewport[3]/2);
@@ -573,20 +574,33 @@ void Projector::print_gravity180(s_font* font, float x, float y, const wstring& 
 	for (unsigned int i=0;i<str.length();++i)
 	{
 
-	  if( !speed_optimize ) {
-	    font->print_char_outlined(str[i]);
-	  } else {
-	    font->print_char(str[i]);
-	  }
+		if (str[i]>=16 && str[i]<=18) {
+			// handle hilight colors (TUI)
 
-		if (str[i]!=16 && str[i]!=17 &&str[i]!=18) {
+			// Note: this is hard coded - not generalized
 
-		  if( !speed_optimize ) {
-		    psi = atan2f((float)font->getStrLen(str.substr(i,1)),d) * 180./M_PI;
-		    if (psi>5) psi = 5;
-		  }
-		  glRotatef(psi,0,0,-1);
-		  
+			if( str[i]==17 ) glColor3f(0.5,1,0.5);  // normal
+			if( str[i]==18 ) glColor3f(1,1,1);    // hilight
+
+		} else {
+
+			if( !speed_optimize ) {
+				font->print_char_outlined(str[i]);
+			} else {
+				font->print_char(str[i]);
+			}
+
+			// with typeface need to manually advance
+			// TODO, absolute rotation would be better than relative
+			// TODO: would look better with kerning information...
+			glTranslatef(font->getStrLen(str.substr(i,1)), 0, 0);
+
+			if( !speed_optimize ) {
+				psi = atan2f((float)font->getStrLen(str.substr(i,1)),d) * 180./M_PI;
+				if (psi>5) psi = 5;
+			}
+			glRotatef(psi,0,0,-1);
+			
 		}
 
 
