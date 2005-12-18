@@ -538,17 +538,11 @@ void Projector::sCylinder(GLdouble radius, GLdouble height, GLint slices, GLint 
 	}
 }
 
+
 void Projector::print_gravity180(s_font* font, float x, float y, const string& s,
 				 bool speed_optimize, float xshift, float yshift) const
 {
-	wstring ws = s_font::strToWstring(s);
-	print_gravity180(font, x, y, ws, speed_optimize, xshift, yshift);
-}
-
-void Projector::print_gravity180(s_font* font, float x, float y, const wstring& str,
-				 bool speed_optimize, float xshift, float yshift) const
-{
-
+	wstring ws = StelUtility::stringToWstring(s);
 	static float dx, dy, d, theta, psi;
 	dx = x - (vec_viewport[0] + vec_viewport[2]/2);
 	dy = y - (vec_viewport[1] + vec_viewport[3]/2);
@@ -559,7 +553,7 @@ void Projector::print_gravity180(s_font* font, float x, float y, const wstring& 
 
 
 	theta = M_PI + atan2f(dx, dy - 1);
-	psi = atan2f((float)font->getStrLen(str)/str.length(),d + 1) * 180./M_PI;
+	psi = atan2f((float)font->getStrLen(ws)/ws.length(),d + 1) * 180./M_PI;
 
 	if (psi>5) psi = 5;
 	set_orthographic_projection();
@@ -571,32 +565,32 @@ void Projector::print_gravity180(s_font* font, float x, float y, const wstring& 
     glEnable(GL_BLEND);
 	glEnable(GL_TEXTURE_2D);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
-	for (unsigned int i=0;i<str.length();++i)
+	for (unsigned int i=0;i<ws.length();++i)
 	{
 
-		if (str[i]>=16 && str[i]<=18) {
+		if (ws[i]>=16 && ws[i]<=18) {
 			// handle hilight colors (TUI)
 
 			// Note: this is hard coded - not generalized
 
-			if( str[i]==17 ) glColor3f(0.5,1,0.5);  // normal
-			if( str[i]==18 ) glColor3f(1,1,1);    // hilight
+			if( ws[i]==17 ) glColor3f(0.5,1,0.5);  // normal
+			if( ws[i]==18 ) glColor3f(1,1,1);    // hilight
 
 		} else {
 
 			if( !speed_optimize ) {
-				font->print_char_outlined(str[i]);
+				font->print_char_outlined(ws[i]);
 			} else {
-				font->print_char(str[i]);
+				font->print_char(ws[i]);
 			}
 
 			// with typeface need to manually advance
 			// TODO, absolute rotation would be better than relative
 			// TODO: would look better with kerning information...
-			glTranslatef(font->getStrLen(str.substr(i,1)) * 1.05, 0, 0);
+			glTranslatef(font->getStrLen(ws.substr(i,1)) * 1.05, 0, 0);
 
 			if( !speed_optimize ) {
-				psi = atan2f((float)font->getStrLen(str.substr(i,1)),d) * 180./M_PI;
+				psi = atan2f((float)font->getStrLen(ws.substr(i,1)),d) * 180./M_PI;
 				if (psi>5) psi = 5;
 			}
 			glRotatef(psi,0,0,-1);
