@@ -593,7 +593,7 @@ void Projector::print_gravity180(s_font* font, float x, float y, const wstring& 
 			// with typeface need to manually advance
 			// TODO, absolute rotation would be better than relative
 			// TODO: would look better with kerning information...
-			glTranslatef(font->getStrLen(str.substr(i,1)), 0, 0);
+			glTranslatef(font->getStrLen(str.substr(i,1)) * 1.05, 0, 0);
 
 			if( !speed_optimize ) {
 				psi = atan2f((float)font->getStrLen(str.substr(i,1)),d) * 180./M_PI;
