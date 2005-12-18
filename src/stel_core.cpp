@@ -493,14 +493,6 @@ void StelCore::draw(int delta_time)
 	projection->set_orthographic_projection(); 
 	script_images->draw(screen_W, screen_H, navigation, projection);
 	
-	std::wstring s;
-	if (draw_mode == DM_NORMAL)
-		s = L"Fabien Chereau";
-	else
-		s = L"Tony Furr";
-		
-	UTFfont->render(s, Vec2f(40, 400));
-	
 	projection->reset_perspective_projection(); 
 
 	projection->draw_viewport_shape();

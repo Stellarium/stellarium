@@ -37,20 +37,8 @@ class s_font
 public:
     s_font(float size_i, const string& ttfFileName) : typeFace(ttfFileName, (size_t)(size_i), 72) {;}
     virtual ~s_font() {;}
-    void print(float x, float y, const wstring& s, int upsidedown = 1) {typeFace.render(s, Vec2f(x, y), upsidedown==1);}
+    
     void print(float x, float y, const string& s, int upsidedown = 1) {typeFace.render(StelUtility::stringToWstring(s), Vec2f(x, y), upsidedown==1);}
-
-	void print_char(const unsigned char c) {
-		wchar_t wc[] = L"xx";
-		wc[0] = c;
-		wc[1] = 0;  // terminate string
-		typeFace.renderGlyphs((wstring(wc)));
-	}
-
-	void print_char_outlined(const unsigned char c) {
-
-		print_char_outlined(wchar_t(c));
-	}
 
 	void print_char(const wchar_t c) {
 		wchar_t wc[] = L"xx";
@@ -98,15 +86,26 @@ public:
 
 		typeFace.renderGlyphs((wstring(wc)));
 	}
+	
+	void print_char(const unsigned char c) {
+		wchar_t wc[] = L"xx";
+		wc[0] = c;
+		wc[1] = 0;  // terminate string
+		typeFace.renderGlyphs((wstring(wc)));
+	}
 
+	void print_char_outlined(const unsigned char c) {
+
+		print_char_outlined(wchar_t(c));
+	}
 
     float getStrLen(const wstring& s) {return typeFace.width(s);}
     float getStrLen(const string& s) {return typeFace.width(StelUtility::stringToWstring(s));}
     float getLineHeight(void) {return typeFace.lineHeight();}
     float getAscent(void) {return typeFace.ascent();}
     float getDescent(void) {return typeFace.descent();}
-    static wstring strToWstring(const string& s) {wstring ws(s.begin(), s.end()); ws.assign(s.begin(), s.end()); return ws;}
 protected:
+	
 	TypeFace typeFace;
 	
 };
