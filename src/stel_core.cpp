@@ -116,8 +116,8 @@ void StelCore::init(void)
 	MapFontSize = 9.5f;
 	ConstellationFontSize = 16.f;
 	StarFontSize = 12.f;
-	PlanetFontSize = 13.f;
-	NebulaFontSize = 11.0f;
+	PlanetFontSize = 14.f;
+	NebulaFontSize = 12.0f;
 	GridFontSize = 12.f;
 	CardinalsFontSize = 30.f;
 	LoadingBarFontSize = 12.f;
@@ -180,7 +180,7 @@ void StelCore::init(void)
 	ssystem->load(DataDir + "ssystem.ini");
 	ssystem->set_label_color(PlanetNamesColor[draw_mode]);
 	ssystem->set_orbit_color(PlanetOrbitsColor[draw_mode]);
-	ssystem->set_font(StarFontSize, DataDir + BaseFontName);
+	ssystem->set_font(PlanetFontSize, DataDir + BaseFontName);
 	ssystem->set_object_scale(StarScale);
 	ssystem->set_trail_color(ObjectTrailsColor[draw_mode]);
 	if(FlagObjectTrails) ssystem->start_trails();
@@ -249,7 +249,7 @@ void StelCore::init(void)
 	// Load constellations
 	string tmpstring=SkyCulture; SkyCulture=""; // Temporary trick
 	set_sky_culture(tmpstring);
-	asterisms->set_font(StarFontSize, DataDir + BaseFontName);
+	asterisms->set_font(ConstellationFontSize, DataDir + BaseFontName);
 	asterisms->set_art_intensity(ConstellationArtIntensity);
 	asterisms->set_art_fade_duration(ConstellationArtFadeDuration);
 	asterisms->set_line_color(ConstLinesColor[draw_mode]);
