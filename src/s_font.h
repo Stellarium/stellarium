@@ -60,7 +60,8 @@ public:
 		glGetFloatv(GL_CURRENT_COLOR, current_color);	 
  	 	 
 
-		glColor3f(0.2,0.2,0.2);
+		glColor3f(0,0,0);
+		//		glColor3f(0.2,0.2,0.2);
 
 		glPushMatrix();
 		glTranslatef(1,1,0);		

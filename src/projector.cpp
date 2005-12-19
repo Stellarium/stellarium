@@ -590,7 +590,7 @@ void Projector::print_gravity180(s_font* font, float x, float y, const string& s
 			glTranslatef(font->getStrLen(ws.substr(i,1)) * 1.05, 0, 0);
 
 			if( !speed_optimize ) {
-				psi = atan2f((float)font->getStrLen(ws.substr(i,1)),d) * 180./M_PI;
+				psi = atan2f((float)font->getStrLen(ws.substr(i,1))*1.05,d) * 180./M_PI;
 				if (psi>5) psi = 5;
 			}
 			glRotatef(psi,0,0,-1);
