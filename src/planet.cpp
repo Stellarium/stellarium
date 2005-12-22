@@ -268,9 +268,9 @@ void Planet::compute_trans_matrix(double date)
 	else
 	{
 		mat_local_to_parent = 
-			Mat4d::translation(ecliptic_pos) * 
-			Mat4d::xrotation(re.obliquity) * 
-			Mat4d::zrotation(re.ascendingNode); 
+			  Mat4d::translation(ecliptic_pos) 
+			* Mat4d::zrotation(re.ascendingNode) 
+			* Mat4d::xrotation(re.obliquity);
 	}
 
 }
