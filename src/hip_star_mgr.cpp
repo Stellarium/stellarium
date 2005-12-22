@@ -35,8 +35,11 @@ HipStarMgr::HipStarMgr() :
 	starZones(NULL),
 	StarArray(NULL),
 	starArraySize(0), // This is the full data array including HP, HP SAO (not duplicated)
+	HPStarFlatArray(NULL),
 	HPStarArraySize(0),
+	HDStarFlatArray(NULL),
 	HDStarArraySize(0),
+	SAOStarFlatArray(NULL),
 	SAOStarArraySize(0),
 	starTexture(NULL), 
 	limiting_mag(6.5f)

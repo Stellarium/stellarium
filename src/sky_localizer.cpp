@@ -86,7 +86,7 @@ SkyLocalizer::SkyLocalizer(string _data_dir)
 
 
   // update language translation hash
-  init_sky_locales();
+  //init_sky_locales();
 
 }
 
@@ -95,20 +95,20 @@ SkyLocalizer::~SkyLocalizer(void) {
 
 
 // call whenever need to initialize with current translations
-void SkyLocalizer::init_sky_locales() {
-
-	locale_to_name.clear();
-	name_to_locale.clear();
-
-	// initialize sky locale lists by translating locale names from master list
-
-	for ( stringHashIter_t iter = master_locales.begin(); iter != master_locales.end(); ++iter ) {
-		locale_to_name[ iter->first ] = _(iter->second.c_str());
-		name_to_locale[ _(iter->second.c_str()) ] = iter->first;
-		// printf("name: %s\tlocale: %s\n", iter->second.c_str(), iter->first.c_str());
-	}
-	
-}
+// void SkyLocalizer::init_sky_locales() {
+// 
+// 	locale_to_name.clear();
+// 	name_to_locale.clear();
+// 
+// 	// initialize sky locale lists by translating locale names from master list
+// 
+// 	for ( stringHashIter_t iter = master_locales.begin(); iter != master_locales.end(); ++iter ) {
+// 		locale_to_name[ iter->first ] = _(iter->second.c_str());
+// 		name_to_locale[ _(iter->second.c_str()) ] = iter->first;
+// 		// printf("name: %s\tlocale: %s\n", iter->second.c_str(), iter->first.c_str());
+// 	}
+// 	
+// }
 
 
 // is this a valid culture directory?
@@ -142,7 +142,7 @@ string SkyLocalizer::convert_sky_culture_to_directory(string _name){
 
 
 
-
+/*
 // returns newline delimited list of human readable culture names
 string SkyLocalizer::get_sky_locale_list(void){
 
@@ -211,4 +211,4 @@ string SkyLocalizer::clean_sky_locale_name(string _locale) {
 #endif
 	return _locale;
 
-}
+}*/

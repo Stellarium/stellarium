@@ -121,7 +121,7 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
     }
     else if(args["sky_culture"]!="") status = stcore->set_sky_culture(args["sky_culture"]);
 //    else if(args["sky_locale"]!="") stcore->set_sky_locale(args["sky_locale"]); // Tony NOT SURE
-    else if(args["sky_locale"]!="") stcore->set_system_locale_by_name(args["sky_locale"]);
+    else if(args["sky_locale"]!="") stcore->setAppLocale(stcore->tryLocale(args["sky_locale"]));
     else if(args["star_mag_scale"]!="") stcore->StarMagScale = str_to_double(args["star_mag_scale"]);
     else if(args["star_scale"]!="") {
 		float scale = str_to_double(args["star_scale"]);
@@ -613,7 +613,7 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 		  else  stcore->ssystem->end_trails();
 
 //		  stcore->set_sky_locale(stcore->SkyLocale); Tony not sure
-		  stcore->set_system_locale_by_name(stcore->SkyLocale);
+		  stcore->setAppLocale(stcore->tryLocale(stcore->SkyLocale));
 
 		  string temp = stcore->SkyCulture;  // fool caching in below method
 		  stcore->SkyCulture = "";

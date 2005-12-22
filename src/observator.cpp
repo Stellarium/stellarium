@@ -38,9 +38,6 @@ Observator::Observator() : longitude(0.), latitude(0.), altitude(0), GMT_shift(0
 {
 	name = "Anonymous_Location";
 	flag_move_to = 0;
-
-	// Set the time format global intern variables from the system locale
-	setlocale(LC_TIME, "");
 }
 
 Observator::~Observator()

@@ -66,7 +66,6 @@ StelCore::StelCore(const string& DDIR, const string& TDIR, const string& CDIR, c
 	draw_mode = DM_NORMAL;
 	ColorSchemeChanged = true;
 
-	UTFfont = new TypeFace(DataDir+"DejaVuSans.ttf", 14, 72);
 }
 
 StelCore::~StelCore()
@@ -101,14 +100,14 @@ StelCore::~StelCore()
 void StelCore::init(void)
 {
 	// read current ui locale
-	char *tmp = setlocale(LC_MESSAGES, "");
+	// char *tmp = setlocale(LC_MESSAGES, "");
 	
-	cout << "Locale is ";
-	if (!tmp) cout << "(Default)";
-	cout << endl;
-
-	if(tmp == NULL) UILocale = "";
-	else UILocale = tmp;
+// 	cout << "Locale is ";
+// 	if (!tmp) cout << "(Default)";
+// 	cout << endl;
+// 
+// 	if(tmp == NULL) UILocale = "";
+// 	else UILocale = tmp;
 
 	// Warning: These values are not overriden by the config!
 	BaseCFontSize = 12.5;
@@ -162,7 +161,7 @@ void StelCore::init(void)
 	hip_stars->init(
 		StarFontSize, DataDir + BaseFontName, 
 		DataDir + "hipparcos.fab",
-		DataDir + "star_names." + SkyLocale + ".fab",
+		DataDir + "star_names.eng.fab",
 		DataDir + "name.fab",
 		lb);
 	
@@ -229,7 +228,7 @@ void StelCore::init(void)
 	else ui->desktop->setColorScheme(GuiBaseColorr, GuiTextColorr);
 
 	// now redo this so we fill the autocomplete dialogs now UI inititalised
-	set_system_locale_by_name(SkyLocale); // and UILocale are the same but different format fra vs fr_FR!!!! TONY
+	// set_system_locale_by_name(SkyLocale); // and UILocale are the same but different format fra vs fr_FR!!!! TONY
 
 	tone_converter->set_world_adaptation_luminance(3.75f + atmosphere->get_intensity()*40000.f);
 
@@ -634,8 +633,10 @@ void StelCore::load_config_from(const string& confFile)
 	// localization section
 	SkyCulture = conf.get_str("localization", "sky_culture", "western");
 
-	string locale = conf.get_str("localization", "sky_locale", "system_default");
-	set_system_locale_by_name(skyloc->clean_sky_locale_name(locale));  // looks at environment locale if "system_default"
+	string skyLocaleName = conf.get_str("localization", "sky_locale", "system_default");
+	string appLocaleName = conf.get_str("localization", "app_locale", "system_default");
+	setSkyLocale(StelCore::tryLocale(skyLocaleName));
+	setAppLocale(StelCore::tryLocale(appLocaleName));
 
 	// Star section
 	StarScale			= conf.get_double ("stars:star_scale");
@@ -850,7 +851,8 @@ void StelCore::save_config_to(const string& confFile)
 
 	// localization section
 	conf.set_str    ("localization:sky_culture", SkyCulture);
-	conf.set_str    ("localization:sky_locale", SkyLocale);
+	conf.set_str    ("localization:app_locale", appLocale.name());
+	conf.set_str    ("localization:sky_locale", skyLocale.name());
 
 	// Star section
 	conf.set_double ("stars:star_scale", StarScale);
@@ -1467,8 +1469,11 @@ int StelCore::set_sky_culture(string _culture_dir)
 
 	//	printf(_("Loading constellations for sky culture: \"%s\"\n"), SkyCulture.c_str());
 	asterisms->load_lines_and_art(DataDir + "sky_cultures/" + SkyCulture + "/constellationship.fab",
-		DataDir + "sky_cultures/" + SkyCulture + "/constellationsart.fab", lb);
+		DataDir + "sky_cultures/" + SkyCulture + "/constellationsart.fab", DataDir + "sky_cultures/" + SkyCulture + "/boundaries.dat", lb);
 	asterisms->loadNames(DataDir + "sky_cultures/" + SkyCulture + "/constellation_names.eng.fab");
+	
+	// Re-translated constellation names
+	setSkyLocale(skyLocale);
 	
 	// as constellations have changed, clear out any selection and retest for match!
 	if (selected_object && selected_object->get_type()==StelObject::STEL_OBJECT_STAR)
@@ -1491,89 +1496,68 @@ int StelCore::set_sky_culture(string _culture_dir)
 
 }
 
-void StelCore::set_system_locale(void)
+
+//! @brief Create a locale matching with a locale name
+std::locale StelCore::tryLocale(const string& localeName)
 {
-	string tmp = string("LC_ALL=" + UILocale);
-	putenv((char *)tmp.c_str());
-
-	setlocale(LC_CTYPE, "");
-	setlocale(LC_MESSAGES, "");
-	bindtextdomain(PACKAGE, LOCALEDIR);
-	textdomain(PACKAGE);
-
-	bind_textdomain_codeset(PACKAGE, "UTF-8"); // iso-8859-1
-
-	if (ui->isInitialised())
+	std::locale loc;
+	if (localeName=="system_default" || localeName=="system")
 	{
-		set_sky_locale();
-		ui->changeLocale();
-		// TODO: clear the list box in the widget and reload
+		return std::locale("");
 	}
+	else
+	{
+		try
+		{
+			loc = std::locale(localeName.c_str());
+		}
+		catch (const std::exception& e)
+		{
+			cout << e.what() << "\"" << localeName << "\" : revert to default locale \"" << std::locale("").name() << "\"" << endl;
+			// Fallback with current locale
+			loc = std::locale();
+		}
+	}
+	return loc;
 }
 
-
-void StelCore::set_system_locale_by_name(const string& _locale)
+//! @brief Set the application locale. This apply to GUI, console messages etc..
+void StelCore::setAppLocale(const std::locale newAppLocale)
 {
-	stringHash_t locale_to_lang;
+	// Set the new app locale - only MESSAGES and CTYPE facets are kept to prevent I/O problems
+	appLocale = std::locale(std::locale::classic(), newAppLocale, std::locale::messages);
+	appLocale = std::locale(appLocale, newAppLocale, std::locale::ctype);
+	appLocale = std::locale(appLocale, newAppLocale, std::locale::time);
 	
-	locale_to_lang["eng"] = "en_US";
-	locale_to_lang["fra"] = "fr_FR";
-	locale_to_lang["deu"] = "de_DE";
-	locale_to_lang["esl"] = "es_ES";
-	locale_to_lang["por"] = "pt_PT";
-	locale_to_lang["dut"] = "nl_NL";
-	locale_to_lang["ita"] = "it_IT";
-		
-	// UILocale in format "fr_FR" etc.
-	// _locale in format "fra" etc
-	SkyLocale = _locale;
-	UILocale = locale_to_lang[_locale]; 
-
-	set_system_locale();
+	// Just set the locale as global application locale
+	std::locale::global(appLocale);
 }
 
-void StelCore::set_system_locale_by_code(const string& _locale)
-{
-	stringHash_t locale_to_lang;
-	locale_to_lang["en_US"] = "eng";
-	locale_to_lang["fr_FR"] = "fra";
-	locale_to_lang["de_DE"] = "deu";
-	locale_to_lang["es_ES"] = "esl";
-	locale_to_lang["pt_PT"] = "por";
-	locale_to_lang["nl_NL"] = "dut";
-	locale_to_lang["it_IT"] = "ita";
-	
-	// UILocale in format "fr_FR" etc.
-	// _locale in format "fra" etc
-	SkyLocale = locale_to_lang[_locale];
-	UILocale = _locale;
-		
-	set_system_locale();
-}
 
-//! @brief Set the sky locale
-void StelCore::set_sky_locale(void)
+//! @brief Set the sky locale and reload the sky objects names for gettext translation
+void StelCore::setSkyLocale(const std::locale newSkyLocale)
 {
-
 	if( !hip_stars || !cardinals_points || !asterisms) return; // objects not initialized yet
+	
+	// Set the new sky locale
+	skyLocale = newSkyLocale;
+	
+	// Set the sky locale as global
+	std::locale::global(skyLocale);
 
+	// Translate all labels using gettext with the new global locale
 	cardinals_points->translateLabels();
 	asterisms->translateNames();
 	ssystem->translateNames();
 	
-	if( !hip_stars->load_common_names(DataDir + "star_names." + SkyLocale + ".fab") )
-	{
-		// If no special star names in this language, use international names
-		cout << "Using international star names.\n";
-		hip_stars->load_common_names(DataDir + "star_names.eng.fab");
-	}
-	
+	// revert previous locale
+	std::locale::global(appLocale);
 
 	// refresh EditBox with new names
-    ui->setStarAutoComplete(hip_stars->getNames());
-    ui->setConstellationAutoComplete(asterisms->getNames());
-    ui->setPlanetAutoComplete(ssystem->getNamesI18());
-    ui->setListNames(ssystem->getNamesI18());
+    //ui->setStarAutoComplete(hip_stars->getNames());
+    //ui->setConstellationAutoComplete(asterisms->getNames());
+    //ui->setPlanetAutoComplete(ssystem->getNamesI18());
+    //ui->setListNames(ssystem->getNamesI18());
 }
 
 void StelCore::play_startup_script() {

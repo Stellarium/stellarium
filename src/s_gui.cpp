@@ -247,7 +247,8 @@ Painter::Painter(const s_texture* _tex1, s_font* _font,
 		tex1(_tex1),
 		font(_font),
 		baseColor(_baseColor),
-		textColor(_textColor)
+		textColor(_textColor),
+		opaque(false)
 {
 }
 
@@ -2145,8 +2146,8 @@ void StdTransBtWin::set_timeout(int _time_out)
 #define STDDLGWIN_BT_ICON_TOP 20
 
 StdDlgWin::StdDlgWin(const string& _title, s_texture* _header_tex, s_font * _winfont, int headerSize) :
-	StdWin(_title, _header_tex, _winfont, headerSize), firstBt(NULL), secondBt(NULL), messageLabel(NULL)
-	,inputEdit(NULL)
+	StdWin(_title, _header_tex, _winfont, headerSize), firstBt(NULL), secondBt(NULL), messageLabel(NULL), 
+	inputEdit(NULL), hasIcon(false)
 {
 	reshape(300,200,400,100);
 
