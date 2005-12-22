@@ -660,7 +660,6 @@ http://www.fsf.org");
 
 Component* StelUI::createHelpWindow(void)
 {
-        cerr << "stel_ui::createHelpWindow called" << endl;
 	help_txtlbl = new TextLabel(
 	                  string(_("\
 Movement & selection:\n\

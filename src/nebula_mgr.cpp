@@ -497,7 +497,7 @@ bool NebulaMgr::read_Sharpless_catalog(const string& fileName, LoadingBar& lb)
 		int temp = e->read_Sharpless(recordstr);
 		if (!temp) // reading error
 		{
-			cout << "Error while parsing nebula " << e->name << endl;
+			cout << "Error while parsing Sharpless nebula " << e->name << endl;
 			delete e;
 			e = NULL;
 			data_drop++;
@@ -664,7 +664,7 @@ bool NebulaMgr::read_messier_textures(const string& fileName, LoadingBar& lb)
 		if (e)
 		{
 			if (!e->read(record)) // reading error
-				printf("Error while parsing nebula %s\n", e->name.c_str());
+				cout << "Error while parsing messier nebula " << e->name << endl;
 		}
 	}
 	return true;

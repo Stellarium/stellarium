@@ -150,7 +150,7 @@ void StelUI::init_tui(void)
 	tui_menu_general->addComponent(tui_general_sky_culture);
 
 	tui_general_sky_locale = new s_tui::MultiSet2_item<string>(string("3.2 ") + _("Sky Language: "));
-	tui_general_sky_locale->addItemList(core->skyloc->get_sky_locale_list());
+	//tui_general_sky_locale->addItemList(core->skyloc->get_sky_locale_list());
 
 	tui_general_sky_locale->set_OnChangeCallback(callback<void>(this, &StelUI::tui_cb_tui_general_change_sky_locale));
 	tui_menu_general->addComponent(tui_general_sky_locale);
@@ -388,7 +388,7 @@ void StelUI::tui_update_widgets(void)
 	}
 
 	// 7. admin
-	tui_admin_setlocale->setValue(core->UILocale);
+	//tui_admin_setlocale->setValue(core->UILocale);
 	tui_admin_voffset->setValue(core->verticalOffset);
 	tui_admin_hoffset->setValue(core->horizontalOffset);
 
@@ -515,21 +515,8 @@ void StelUI::tui_cb_admin_set_locale() {
 	// Right now just set for the current session
 
 #if !defined(MACOSX)
-/*
-	string tmp = string("LC_ALL=" + tui_admin_setlocale->getCurrent());
-	putenv((char *)tmp.c_str());
-
-	setlocale (LC_CTYPE, "");
-	setlocale (LC_MESSAGES, "");
-	bindtextdomain (PACKAGE, LOCALEDIR);
-	textdomain (PACKAGE);
-
-	// Now need to update all UI components with new translations!
-	
-	core->UILocale = tui_admin_setlocale->getCurrent().c_str();
-*/
 	LocaleChanged = 1;  // will reload TUI next draw.  Note that position in TUI is lost...
-	core->set_system_locale_by_code(tui_admin_setlocale->getCurrent().c_str());
+	core->setAppLocale(core->tryLocale(tui_admin_setlocale->getCurrent()));
 #endif
 
 

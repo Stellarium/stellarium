@@ -64,7 +64,7 @@ void ConstellationMgr::set_font(float font_size, const string& ttfFileName)
 }
 
 // Load line and art data from files
-void ConstellationMgr::load_lines_and_art(const string &fileName, const string & artfileName, LoadingBar& lb)
+void ConstellationMgr::load_lines_and_art(const string &fileName, const string &artfileName, const string &boundaryfileName, LoadingBar& lb)
 {
 	std::ifstream inf(fileName.c_str());
 
@@ -145,6 +145,7 @@ void ConstellationMgr::load_lines_and_art(const string &fileName, const string &
 		}
 
 		// Draw loading bar
+		
 		sprintf(tmpstr, _("Loading Constellation Art: %d/%d"), current+1, total);
 		lb.SetMessage(tmpstr);
 		lb.Draw((float)(current+1)/total);
@@ -188,7 +189,7 @@ void ConstellationMgr::load_lines_and_art(const string &fileName, const string &
 	}
 	fclose(fic);
 	
-	load_boundaries(fileName);
+	load_boundaries(boundaryfileName);
 }
 
 void ConstellationMgr::draw(Projector * prj, Navigator * nav) const
@@ -315,9 +316,7 @@ void ConstellationMgr::loadNames(const string& namesFile)
 		}
 	}
 	commonNameFile.close();
-	
-	// Translate i18 names to current locale
-	translateNames();
+
 }
 
 //! @brief Update i18 names from english names according to current locale
@@ -514,13 +513,10 @@ void ConstellationMgr::set_selected_const(Constellation * c)
 }
 
 // Load from file 
-bool ConstellationMgr::load_boundaries(const string& conCatFile)
+bool ConstellationMgr::load_boundaries(const string& boundaryFile)
 {
-	char record[1024];
 	Constellation *cons = NULL;
-	string dataDir = conCatFile;
 	unsigned int i, j;
-	
 	
 	vector<vector<Vec3f> *>::iterator iter;
 	for (iter = allBoundarySegments.begin(); iter != allBoundarySegments.end(); ++iter)
@@ -528,24 +524,16 @@ bool ConstellationMgr::load_boundaries(const string& conCatFile)
 		delete (*iter);
 	}
 	allBoundarySegments.clear();
-	
-	unsigned int loc = dataDir.rfind("/");
-	
-	if (loc != string::npos)
-		dataDir = dataDir.substr(0,loc+1);
-
-	// load the hip data
 
     cout << _("Loading Constellation boundary data...");
 	// Modified boundary file by Torsten Bronger with permission
 	// http://pp3.sourceforge.net
 	
-	string conData = dataDir + "boundaries.dat";
     ifstream dataFile;
-	dataFile.open(conData.c_str());
+	dataFile.open(boundaryFile.c_str());
     if (!dataFile.is_open())
     {
-        cout << "Boundary file " << conData << " not found" << endl;
+        cout << "Boundary file " << boundaryFile << " not found" << endl;
         return false;
     }
 
@@ -553,13 +541,12 @@ bool ConstellationMgr::load_boundaries(const string& conCatFile)
 	float oDE, oRA;
 	Vec3f XYZ;
 	unsigned num, numc;
-	vector<Vec3f> *points;
+	vector<Vec3f> *points = NULL;
 	string consname;
 	i = 0;
 	while (!dataFile.eof())	
 	{
 		points = new vector<Vec3f>;
-		istringstream istr(record);
 
 		num = 0;
 		dataFile >> num;

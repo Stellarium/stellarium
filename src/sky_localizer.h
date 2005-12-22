@@ -33,16 +33,16 @@ class SkyLocalizer
   SkyLocalizer(string _data_dir);
   virtual ~SkyLocalizer();
 
-  void init_sky_locales();
+//  void init_sky_locales();
   string get_sky_culture_list(void);
   string convert_directory_to_sky_culture(string _directory);
   string convert_sky_culture_to_directory(string _name);
   bool test_sky_culture_directory(string _culture_dir);
 
-  string get_sky_locale_list(void);
-  string convert_locale_to_name(string _locale);
-  string convert_name_to_locale(string _name);
-  string clean_sky_locale_name(string _locale);
+//  string get_sky_locale_list(void);
+//  string convert_locale_to_name(string _locale);
+//  string convert_name_to_locale(string _name);
+//  string clean_sky_locale_name(string _locale);
 
 
  private:

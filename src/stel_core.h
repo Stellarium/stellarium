@@ -112,14 +112,6 @@ public:
 	//! Set the sky culture
 	int set_sky_culture(string _culture_dir);
 	
-	//! @brief Set the locale type from locale code
-	//! @param locale locale code, e.g fr_FR
-	void set_system_locale_by_code(const string& locale);
-	
-	//! @brief Set the locale type from language code
-	//! @param locale language code, e.g fra
-	void set_system_locale_by_name(const string& locale);
-
 	//! Set the screen size
 	void set_screen_size(int w, int h);
 	
@@ -153,7 +145,23 @@ public:
 	void constellation_set_flag_names(bool b) {asterisms->set_flag_names(b);}
 	//! Get display flag of constellation names
 	bool constellation_get_flag_names(void) {return asterisms->get_flag_names();}
-		
+
+
+
+	/**
+	 * @brief Set the application locale
+	 * This apply to GUI, console messages etc..
+	 * @param newAppLocale The std::locale to use for GUI, TUI and console messages etc..
+	 */
+	void StelCore::setAppLocale(const std::locale newAppLocale);
+
+	/** 
+	 * @brief Set the sky locale and reload the sky objects names for gettext translation
+	 * This function has no permanent effect on the global locale
+	 * @param newSkyLocale The std::locale object to use for sky object labels
+	 */
+	void StelCore::setSkyLocale(const std::locale newSkyLocale);
+
 	///////////////////////////////////////////////////////////////////////////////
 	// Below this limit, all the function will end up in the stel_app class
 	///////////////////////////////////////////////////////////////////////////////
@@ -197,21 +205,21 @@ public:
 private:
 	TypeFace* UTFfont;
 
-	void set_system_locale(void);
-	void set_sky_locale(void);
 	string get_cursor_pos(int x, int y);
 
+	std::locale appLocale;				// The global application locale used for GUI and console messages
+	std::locale skyLocale;				// The sky locale used for object naming
 
 	// Main elements of the program
 	Navigator * navigation;				// Manage all navigation parameters, coordinate transformations etc..
 	Observator * observatory;			// Manage observer position and locales for its country
 	Projector * projection;				// Manage the projection mode and matrix
 	StelObject * selected_object;		// The selected object in stellarium
-	HipStarMgr * hip_stars;			// Manage the hipparcos stars
+	HipStarMgr * hip_stars;				// Manage the hipparcos stars
 	ConstellationMgr * asterisms;		// Manage constellations (boundaries, names etc..)
 	NebulaMgr * nebulas;				// Manage the nebulas
 	SolarSystem* ssystem;				// Manage the solar system
-	Atmosphere * atmosphere;		// Atmosphere
+	Atmosphere * atmosphere;			// Atmosphere
 	SkyGrid * equ_grid;					// Equatorial grid
 	SkyGrid * azi_grid;					// Azimutal grid
 	SkyLine * equator_line;				// Celestial Equator line
@@ -234,6 +242,12 @@ private:
 	///////////////////////////////////////////////////////////////////////////////
 	// Below this limit, all the attributes will end up in the stel_app class
 	///////////////////////////////////////////////////////////////////////////////
+	
+	//! @brief Create a locale from locale name.
+	//! If the locale cannot be created, try different names until one work. If none work fall back to "C" locale.
+	//! @param localeName Locale name e.g fr_FR, fr_FR.utf8, french etc..
+	//! @return std::locale matching with the locale name
+	static std::locale tryLocale(const string& localeName);
 	
 	void load_config_from(const string& confFile);
 	void save_config_to(const string& confFile);
@@ -404,7 +418,6 @@ private:
 	int MouseZoom;
 
 	// Locale
-	string UILocale;                    // locale UI is currently using
 	int FlagUTC_Time;					// if true display UTC time
 
 	int frame, timefr, timeBase;		// Used for fps counter
