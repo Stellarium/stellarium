@@ -3169,6 +3169,10 @@ CalcCoor(double rmu,double aam,const double elem[6],double xyz[]) {
          + Y1 * Tass17ToJ2000[7]
          + Z1 * Tass17ToJ2000[8];
 
+  xyz[0] = X1;
+  xyz[1] = Y1;
+  xyz[2] = Z1;
+
 //  const double rsam1 = -rk * cf - rh * sf;
 //  const double h = (amo*dga)/(1 + rsam1);
 //  const double vx1 = h * (-sf - psi * rh * rsam1);

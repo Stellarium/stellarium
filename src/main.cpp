@@ -235,19 +235,13 @@ If not, check that you have access to %s\n"), CDIR.c_str(), CDIR.c_str(), CDIR.c
 // Main stellarium procedure
 int main(int argc, char **argv)
 {
-
 #if !defined(MACOSX)
-	// TESTING ONLY
-	// setenv("LC_ALL", "fr_FR", 1);
-
-// TODO: move this out - set_system_locale to be committed once tested (elsewhere)
-	setlocale (LC_CTYPE, "");
-	setlocale (LC_MESSAGES, "");
-	bindtextdomain (PACKAGE, LOCALEDIR);
-	textdomain (PACKAGE);
-
-	// TODO: move to utf8
-	bind_textdomain_codeset(PACKAGE, "UTF-8"); // iso-8859-1
+	// Init gettext things
+ 	bindtextdomain (PACKAGE, LOCALEDIR);
+ 	textdomain (PACKAGE);
+// 
+// 	// TODO: move to utf8
+//	bind_textdomain_codeset(PACKAGE, "UTF-8"); // iso-8859-1
 
 #endif
 	

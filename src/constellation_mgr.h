@@ -42,7 +42,7 @@ public:
 	//! The translation is done using gettext with translated strings defined in translations.h
 	void translateNames();
 					   
-	void load_lines_and_art(const string& lines_file, const string& art_file, LoadingBar& lb);
+	void load_lines_and_art(const string& lines_file, const string& art_file, const string &boundaryfileName, LoadingBar& lb);
 	
 	void set_art_fade_duration(float duration);
 	void set_art_intensity(float _max);

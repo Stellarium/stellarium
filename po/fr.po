@@ -25,7 +25,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: stellarium@free.fr\n"
-"POT-Creation-Date: 2005-12-15 22:20+0100\n"
+"POT-Creation-Date: 2005-12-21 00:29+0100\n"
 "PO-Revision-Date: 2005-12-15 19:36+0100\n"
 "Last-Translator: Fabien Chéreau\n"
 "Language-Team:  <fr@li.org>\n"
@@ -107,19 +107,19 @@ msgstr ""
 "Si le répertoire %s est manquant, créez le à la main SVP..\n"
 "Sinon, vérifiez que vous avez accès à %s\n"
 
-#: src/draw.cpp:425 src/draw.cpp:535 src/translations.h:63
+#: src/draw.cpp:425 src/draw.cpp:523 src/translations.h:62
 msgid "N"
 msgstr "N"
 
-#: src/draw.cpp:426 src/draw.cpp:536 src/translations.h:65
+#: src/draw.cpp:426 src/draw.cpp:524 src/translations.h:63
 msgid "S"
 msgstr "S"
 
-#: src/draw.cpp:427 src/draw.cpp:537 src/translations.h:67
+#: src/draw.cpp:427 src/draw.cpp:525 src/translations.h:64
 msgid "E"
 msgstr "E"
 
-#: src/draw.cpp:428 src/draw.cpp:538 src/translations.h:69
+#: src/draw.cpp:428 src/draw.cpp:526 src/translations.h:65
 msgid "W"
 msgstr "O"
 
@@ -133,7 +133,7 @@ msgstr "ERREUR à la ligne %d de %s\n"
 msgid "Loading Constellation Art: %d/%d"
 msgstr "Chargement des Images Constellations : %d/%d"
 
-#: src/constellation_mgr.cpp:525
+#: src/constellation_mgr.cpp:539
 msgid "Loading Constellation boundary data..."
 msgstr "Chargement des limites des Constellations..."
 
@@ -222,8 +222,8 @@ msgid " deep space objects)"
 msgstr " objets du ciel profond)"
 
 #: src/nebula_mgr.cpp:656
-#, c-format
-msgid "Loading Nebula Data: %d/%d"
+#, fuzzy, c-format
+msgid "Loading Nebula Textures: %d/%d"
 msgstr "Chargement des données Nébuleuses : %d/%d"
 
 #: src/observator.cpp:63
@@ -261,99 +261,99 @@ msgstr "Message"
 msgid "Stellarium"
 msgstr "Stellarium"
 
-#: src/stel_ui.cpp:473 src/stel_ui.cpp:611
+#: src/stel_ui.cpp:472 src/stel_ui.cpp:610
 msgid "Script commander"
 msgstr "Commandes de script"
 
-#: src/stel_ui.cpp:521
+#: src/stel_ui.cpp:520
 msgid "Invalid Script command"
 msgstr "Commande de script invalide"
 
-#: src/stel_ui.cpp:575
+#: src/stel_ui.cpp:574
 msgid "Drawing of the Constellations [C]"
 msgstr "Dessin des Constellations [C]"
 
-#: src/stel_ui.cpp:577
+#: src/stel_ui.cpp:576
 msgid "Names of the Constellations [V]"
 msgstr "Noms des Constellations [V]"
 
-#: src/stel_ui.cpp:579
+#: src/stel_ui.cpp:578
 msgid "Constellations Art [R]"
 msgstr "Images des Constellations [R]"
 
-#: src/stel_ui.cpp:581
+#: src/stel_ui.cpp:580
 msgid "Azimuthal Grid [Z]"
 msgstr "Grille Azimutale [Z]"
 
-#: src/stel_ui.cpp:583
+#: src/stel_ui.cpp:582
 msgid "Equatorial Grid [E]"
 msgstr "Grille Equatoriale [E]"
 
-#: src/stel_ui.cpp:585
+#: src/stel_ui.cpp:584
 msgid "Ground [G]"
 msgstr "Sol [G]"
 
-#: src/stel_ui.cpp:587
+#: src/stel_ui.cpp:586
 msgid "Cardinal Points [Q]"
 msgstr "Points Cardinaux [Q]"
 
-#: src/stel_ui.cpp:589
+#: src/stel_ui.cpp:588
 msgid "Atmosphere [A]"
 msgstr "Atmosphère [A]"
 
-#: src/stel_ui.cpp:591
+#: src/stel_ui.cpp:590
 msgid "Nebulas [N]"
 msgstr "Nébuleuses [N]"
 
-#: src/stel_ui.cpp:593
+#: src/stel_ui.cpp:592
 msgid "Help [H]"
 msgstr "Aide [H]"
 
-#: src/stel_ui.cpp:595
+#: src/stel_ui.cpp:594
 msgid "Equatorial/Altazimuthal Mount [ENTER]"
 msgstr "Monture Equatorial/Altazimutale [ENTER]"
 
-#: src/stel_ui.cpp:597
+#: src/stel_ui.cpp:596
 msgid "Configuration window"
 msgstr "Fenêtre de configuration"
 
-#: src/stel_ui.cpp:601
+#: src/stel_ui.cpp:600
 msgid "Night (red) mode"
 msgstr "Mode vision de nuit (rouge)"
 
-#: src/stel_ui.cpp:604
+#: src/stel_ui.cpp:603
 msgid "Quit [CTRL + Q]"
 msgstr "Quitte [CTRL + Q]"
 
-#: src/stel_ui.cpp:606
+#: src/stel_ui.cpp:605
 msgid "Quit [CMD + Q]"
 msgstr "Quitte [CMD + Q]"
 
-#: src/stel_ui.cpp:609
+#: src/stel_ui.cpp:608
 msgid "Search for object"
 msgstr "Chercher un objet"
 
-#: src/stel_ui.cpp:613
+#: src/stel_ui.cpp:612
 msgid "Goto selected object [SPACE]"
 msgstr "Va à l'objet sélectionné [ESPACE]"
 
-#: src/stel_ui.cpp:619
+#: src/stel_ui.cpp:618
 msgid "Decrease Time Speed [J]"
 msgstr "Ralenti le Temps [J]"
 
-#: src/stel_ui.cpp:621
+#: src/stel_ui.cpp:620
 msgid "Real Time Speed [K]"
 msgstr "Vitesse Temps Réel [K]"
 
-#: src/stel_ui.cpp:623
+#: src/stel_ui.cpp:622
 msgid "Increase Time Speed [L]"
 msgstr "Accélère le Temps [L]"
 
-#: src/stel_ui.cpp:625
+#: src/stel_ui.cpp:624
 msgid "Return to Current Time"
 msgstr "Revient au Temps Actuel"
 
-#: src/stel_ui.cpp:634
+#: src/stel_ui.cpp:633
 msgid ""
 "   Please check for newer versions and send bug reports\n"
 "and comments to us at: http://stellarium.sourceforge.net\n"
@@ -363,11 +363,11 @@ msgstr ""
 "bogues sur : http://stellarium.sourceforge.net\n"
 "\n"
 
-#: src/stel_ui.cpp:653
+#: src/stel_ui.cpp:652
 msgid "Information"
 msgstr "Information"
 
-#: src/stel_ui.cpp:666
+#: src/stel_ui.cpp:665
 msgid ""
 "Movement & selection:\n"
 "Arrow Keys       : Change viewing RA/DE\n"
@@ -414,31 +414,31 @@ msgid ""
 "9   : Toggle meteor shower rates\n"
 msgstr ""
 
-#: src/stel_ui.cpp:711
+#: src/stel_ui.cpp:710
 msgid "CTRL + Q : Quit\n"
 msgstr "CTRL+Q : Quitte\n"
 
-#: src/stel_ui.cpp:713
+#: src/stel_ui.cpp:712
 msgid "CMD + Q  : Quit\n"
 msgstr "CMD+Q : Quitte\n"
 
-#: src/stel_ui.cpp:720
+#: src/stel_ui.cpp:719
 msgid "Help"
 msgstr "Aide"
 
-#: src/stel_ui.cpp:1065
+#: src/stel_ui.cpp:1064
 msgid "Command recording stopped."
 msgstr "Enregistrement des commandes arrêté."
 
-#: src/stel_ui.cpp:1073
+#: src/stel_ui.cpp:1072
 msgid "Recording commands to script file:\n"
 msgstr "Enregistre les commandes sur le fichier script:\n"
 
-#: src/stel_ui.cpp:1075
+#: src/stel_ui.cpp:1074
 msgid "Hit CTRL-R again to stop.\n"
 msgstr "Appuyez sur CTRL-R à nouveau pour arrêter.\n"
 
-#: src/stel_ui.cpp:1079
+#: src/stel_ui.cpp:1078
 msgid "Error: Unable to open script file to record commands."
 msgstr ""
 "Erreur: Impossible d'ouvrir le fichier script pour enregistrer les commandes."
@@ -633,6 +633,11 @@ msgstr "Vidéo"
 msgid "Rendering"
 msgstr "Rendu"
 
+#: src/stel_ui_conf.cpp:426
+#, fuzzy
+msgid "Loading Cities data..."
+msgstr "Chargement des données NGC..."
+
 #: src/stel_ui_conf.cpp:510
 msgid "Object Search"
 msgstr "Recherche d'objet"
@@ -697,7 +702,7 @@ msgstr " dans le fichier "
 msgid "Loading Solar System data..."
 msgstr "Chargement des données Système Solaire..."
 
-#: src/stel_core.cpp:545
+#: src/stel_core.cpp:536
 #, c-format
 msgid ""
 "The current config file is from a previous version (>=0.6.0).\n"
@@ -708,7 +713,7 @@ msgstr ""
 "Les options précédentes vont être importées dans le nouveau fichier de "
 "configuration.\n"
 
-#: src/stel_core.cpp:564
+#: src/stel_core.cpp:555
 #, c-format
 msgid ""
 "The current config file is from a version too old for parameters to be "
@@ -719,16 +724,16 @@ msgstr ""
 "être importé (%s).\n"
 "Il va être remplacé par le fichier de configuration par défaut.\n"
 
-#: src/stel_core.cpp:587
+#: src/stel_core.cpp:578
 msgid "Loading configuration file "
 msgstr "Chargement du fichier de configuration "
 
-#: src/stel_core.cpp:595
+#: src/stel_core.cpp:586
 msgid "ERROR : The current config file is from a different version ("
 msgstr ""
 "ERREUR : Le fichier de configuration actuel provient d'une autre version ("
 
-#: src/stel_core.cpp:1462
+#: src/stel_core.cpp:1456
 msgid "Invalid sky culture directory: "
 msgstr "Répertoire de culture de ciel invalide:"
 
@@ -1020,354 +1025,354 @@ msgstr "Pluton"
 msgid "Charon"
 msgstr "Charon"
 
-#: src/translations.h:72
+#: src/translations.h:68
 msgid "Aquila"
 msgstr "Aigle"
 
-#: src/translations.h:73
+#: src/translations.h:69
 msgid "Andromeda"
 msgstr "Andromède"
 
-#: src/translations.h:74
+#: src/translations.h:70
 msgid "Sculptor"
 msgstr "Atelier du Sculpteur"
 
-#: src/translations.h:75
+#: src/translations.h:71
 msgid "Ara"
 msgstr "Autel"
 
-#: src/translations.h:76
+#: src/translations.h:72
 msgid "Libra"
 msgstr "Balance"
 
-#: src/translations.h:77
+#: src/translations.h:73
 msgid "Cetus"
 msgstr "Baleine"
 
-#: src/translations.h:78
+#: src/translations.h:74
 msgid "Aries"
 msgstr "Belier"
 
-#: src/translations.h:79 src/translations.h:149
+#: src/translations.h:75 src/translations.h:145
 msgid "Scutum"
 msgstr "Bouclier"
 
-#: src/translations.h:80
+#: src/translations.h:76
 msgid "Pyxis"
 msgstr "Boussole"
 
-#: src/translations.h:81
+#: src/translations.h:77
 msgid "Bootes"
 msgstr "Bouvier"
 
-#: src/translations.h:82
+#: src/translations.h:78
 msgid "Caelum"
 msgstr "Burin"
 
-#: src/translations.h:83
+#: src/translations.h:79
 msgid "Chamaeleon"
 msgstr "Caméléon"
 
-#: src/translations.h:84
+#: src/translations.h:80
 msgid "Cancer"
 msgstr "Cancer"
 
-#: src/translations.h:85
+#: src/translations.h:81
 msgid "Capricornus"
 msgstr "Capricorne"
 
-#: src/translations.h:86
+#: src/translations.h:82
 msgid "Carina"
 msgstr "Carène"
 
-#: src/translations.h:87
+#: src/translations.h:83
 msgid "Cassiopeia"
 msgstr "Cassiopé"
 
-#: src/translations.h:88
+#: src/translations.h:84
 msgid "Centaurus"
 msgstr "Centaure"
 
-#: src/translations.h:89
+#: src/translations.h:85
 msgid "Cepheus"
 msgstr "Céphée"
 
-#: src/translations.h:90
+#: src/translations.h:86
 msgid "Coma Berenices"
 msgstr "Chevelure de Bérénice"
 
-#: src/translations.h:91
+#: src/translations.h:87
 msgid "Canes Venatici"
 msgstr "Chiens de Chasse"
 
-#: src/translations.h:92
+#: src/translations.h:88
 msgid "Auriga"
 msgstr "Cocher"
 
-#: src/translations.h:93
+#: src/translations.h:89
 msgid "Columba"
 msgstr "Colombe"
 
-#: src/translations.h:94
+#: src/translations.h:90
 msgid "Circinus"
 msgstr "Compas"
 
-#: src/translations.h:95
+#: src/translations.h:91
 msgid "Crater"
 msgstr "Coupe"
 
-#: src/translations.h:96
+#: src/translations.h:92
 msgid "Corona Australis"
 msgstr "Couronne Australe"
 
-#: src/translations.h:97
+#: src/translations.h:93
 msgid "Corona Borealis"
 msgstr "Couronne Boréale"
 
-#: src/translations.h:98
+#: src/translations.h:94
 msgid "Corvus"
 msgstr "Corbeau"
 
-#: src/translations.h:99
+#: src/translations.h:95
 msgid "Crux"
 msgstr "Croix du Sud"
 
-#: src/translations.h:100
+#: src/translations.h:96
 msgid "Cygnus"
 msgstr "Cygne"
 
-#: src/translations.h:101
+#: src/translations.h:97
 msgid "Delphinus"
 msgstr "Dauphin"
 
-#: src/translations.h:102
+#: src/translations.h:98
 msgid "Dorado"
 msgstr "Dorade"
 
-#: src/translations.h:103
+#: src/translations.h:99
 msgid "Draco"
 msgstr "Dragon"
 
-#: src/translations.h:104
+#: src/translations.h:100
 msgid "Norma"
 msgstr "Equerre"
 
-#: src/translations.h:105
+#: src/translations.h:101
 msgid "Eridanus"
 msgstr "Eridan"
 
-#: src/translations.h:106
+#: src/translations.h:102
 msgid "Sagitta"
 msgstr "Sagittaire"
 
-#: src/translations.h:107
+#: src/translations.h:103
 msgid "Fornax"
 msgstr "Fourneau"
 
-#: src/translations.h:108
+#: src/translations.h:104
 msgid "Gemini"
 msgstr "Gémeaux"
 
-#: src/translations.h:109
+#: src/translations.h:105
 msgid "Camelopardalis"
 msgstr "Girafe"
 
-#: src/translations.h:110
+#: src/translations.h:106
 msgid "Canis Major"
 msgstr "Grand Chien"
 
-#: src/translations.h:111
+#: src/translations.h:107
 msgid "Ursa Major"
 msgstr "Grande Ourse"
 
-#: src/translations.h:112
+#: src/translations.h:108
 msgid "Grus"
 msgstr "Grue"
 
-#: src/translations.h:113
+#: src/translations.h:109
 msgid "Hercules"
 msgstr "Hercule"
 
-#: src/translations.h:114
+#: src/translations.h:110
 msgid "Horologium"
 msgstr "Horloge"
 
-#: src/translations.h:115
+#: src/translations.h:111
 msgid "Hydra"
 msgstr "Hydre Femelle"
 
-#: src/translations.h:116
+#: src/translations.h:112
 msgid "Hydrus"
 msgstr "Hydre Mâle"
 
-#: src/translations.h:117
+#: src/translations.h:113
 msgid "Indus"
 msgstr "Indien"
 
-#: src/translations.h:118
+#: src/translations.h:114
 msgid "Lacerta"
 msgstr "Lézard"
 
-#: src/translations.h:119
+#: src/translations.h:115
 msgid "Monoceros"
 msgstr "Licorne"
 
-#: src/translations.h:120
+#: src/translations.h:116
 msgid "Lepus"
 msgstr "Lièvre"
 
-#: src/translations.h:121
+#: src/translations.h:117
 msgid "Leo"
 msgstr "Lion"
 
-#: src/translations.h:122
+#: src/translations.h:118
 msgid "Lupus"
 msgstr "Loup"
 
-#: src/translations.h:123
+#: src/translations.h:119
 msgid "Lynx"
 msgstr "Lynx"
 
-#: src/translations.h:124
+#: src/translations.h:120
 msgid "Lyra"
 msgstr "Lyre"
 
-#: src/translations.h:125
+#: src/translations.h:121
 msgid "Antlia"
 msgstr "Machine Pneumatique"
 
-#: src/translations.h:126
+#: src/translations.h:122
 msgid "Microscopium"
 msgstr "Microscope"
 
-#: src/translations.h:127
+#: src/translations.h:123
 msgid "Musca"
 msgstr "Mouche"
 
-#: src/translations.h:128
+#: src/translations.h:124
 msgid "Octans"
 msgstr "Octant"
 
-#: src/translations.h:129
+#: src/translations.h:125
 msgid "Apus"
 msgstr "Oiseau de Paradis"
 
-#: src/translations.h:130
+#: src/translations.h:126
 msgid "Ophiuchus"
 msgstr "Ophiuchus"
 
-#: src/translations.h:131
+#: src/translations.h:127
 msgid "Orion"
 msgstr "Orion"
 
-#: src/translations.h:132
+#: src/translations.h:128
 msgid "Pavo"
 msgstr "Paon"
 
-#: src/translations.h:133
+#: src/translations.h:129
 msgid "Pegasus"
 msgstr "Pégase"
 
-#: src/translations.h:134
+#: src/translations.h:130
 msgid "Pictor"
 msgstr "Peintre"
 
-#: src/translations.h:135
+#: src/translations.h:131
 msgid "Perseus"
 msgstr "Persée"
 
-#: src/translations.h:136
+#: src/translations.h:132
 msgid "Equuleus"
 msgstr "Petit Cheval"
 
-#: src/translations.h:137
+#: src/translations.h:133
 msgid "Canis Minor"
 msgstr "Petit Chien"
 
-#: src/translations.h:138
+#: src/translations.h:134
 msgid "Leo Minor"
 msgstr "Petit Lion"
 
-#: src/translations.h:139
+#: src/translations.h:135
 msgid "Vulpecula"
 msgstr "Petit Renard"
 
-#: src/translations.h:140
+#: src/translations.h:136
 msgid "Ursa Minor"
 msgstr "Petite Ourse"
 
-#: src/translations.h:141
+#: src/translations.h:137
 msgid "Phoenix"
 msgstr "Phénix"
 
-#: src/translations.h:142
+#: src/translations.h:138
 msgid "Pisces Austrinus"
 msgstr "Poisson Austral"
 
-#: src/translations.h:143
+#: src/translations.h:139
 msgid "Piscis"
 msgstr "Poissons"
 
-#: src/translations.h:144
+#: src/translations.h:140
 msgid "Volans"
 msgstr "Poisson Volant"
 
-#: src/translations.h:145
+#: src/translations.h:141
 msgid "Puppis"
 msgstr "Poupe"
 
-#: src/translations.h:146
+#: src/translations.h:142
 msgid "Reticulum"
 msgstr "Réticule"
 
-#: src/translations.h:147
+#: src/translations.h:143
 msgid "Sagittarius"
 msgstr "Sagittaire"
 
-#: src/translations.h:148
+#: src/translations.h:144
 msgid "Scorpius"
 msgstr "Scorpion"
 
-#: src/translations.h:150
+#: src/translations.h:146
 msgid "Serpens"
 msgstr "Serpent"
 
-#: src/translations.h:151
+#: src/translations.h:147
 msgid "Sextans"
 msgstr "Sextant"
 
-#: src/translations.h:152
+#: src/translations.h:148
 msgid "Mensa"
 msgstr "Table"
 
-#: src/translations.h:153
+#: src/translations.h:149
 msgid "Taurus"
 msgstr "Taureau"
 
-#: src/translations.h:154
+#: src/translations.h:150
 msgid "Telescopium"
 msgstr "Télescope"
 
-#: src/translations.h:155
+#: src/translations.h:151
 msgid "Tucana"
 msgstr "Toucan"
 
-#: src/translations.h:156
+#: src/translations.h:152
 msgid "Triangulum"
 msgstr "Triangle"
 
-#: src/translations.h:157
+#: src/translations.h:153
 msgid "Triangulum Australe"
 msgstr "Triangle Austral"
 
-#: src/translations.h:158
+#: src/translations.h:154
 msgid "Aquarius"
 msgstr "Verseau"
 
-#: src/translations.h:159
+#: src/translations.h:155
 msgid "Virgo"
 msgstr "Vierge"
 
-#: src/translations.h:160
+#: src/translations.h:156
 msgid "Vela"
 msgstr "Voiles"
