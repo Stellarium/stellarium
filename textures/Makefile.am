@@ -20,6 +20,6 @@ pkgdata_DATA = backmenu_flip.png earth-shadow.png m11.png m33.png m57.png \
 	m98.png venus.png down.png m10.png m30.png m55.png m76.png m99.png zenith.png \
 	earthmap.png m110.png m31.png m56.png m78.png m9.png bt_alert.png bt_blank.png \
 	bt_night.png bt_question.png city.png pointeur1.png bt_chart.png bt_nightview.png \
-	milkyway_chart.png ngc2000names.dat
+	milkyway_chart.png
 EXTRA_DIST = $(pkgdata_DATA)
 SUBDIRS = landscapes constellation-art
