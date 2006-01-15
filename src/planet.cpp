@@ -37,13 +37,22 @@ RotationElements::RotationElements() : period(1.), offset(0.), epoch(J2000),
 {
 }
 
-Planet::Planet(const string& _englishName, int _flagHalo, int _flag_lighting, double _radius, Vec3f _color,
-			   float _albedo, const string& tex_map_name, const string& tex_halo_name, pos_func_type _coord_func) :
+Planet::Planet(Planet *parent,
+               const string& _englishName,
+               int _flagHalo,
+               int _flag_lighting,
+               double _radius,
+               Vec3f _color,
+               float _albedo,
+               const string& tex_map_name,
+               const string& tex_halo_name,
+               pos_func_type _coord_func) :
 	englishName(_englishName), flagHalo(_flagHalo), flag_lighting(_flag_lighting), radius(_radius), color(_color),
 	albedo(_albedo), axis_rotation(0.),	tex_map(NULL), tex_halo(NULL), tex_big_halo(NULL), rings(NULL),
 	sphere_scale(1.f), lastJD(J2000), last_orbitJD(0), deltaJD(JD_SECOND), orbit_cached(0),
-	coord_func(_coord_func), parent(NULL)
+	coord_func(_coord_func), parent(parent)
 {
+    if (parent) parent->satellites.push_back(this);
 	ecliptic_pos=Vec3d(0.,0.,0.);
 	mat_local_to_parent = Mat4d::identity();
 	tex_map = new s_texture(tex_map_name, TEX_LOAD_TYPE_PNG_SOLID_REPEAT);
@@ -57,6 +66,8 @@ Planet::Planet(const string& _englishName, int _flagHalo, int _flag_lighting, do
 	last_trailJD = 0; // for now
 	trail_on = 0;
 	first_point = 1;
+
+	nameI18 = StelUtility::stringToWstring(englishName);
 }
 
 Planet::~Planet()
@@ -277,20 +288,20 @@ void Planet::compute_trans_matrix(double date)
 
 
 // Get a matrix which converts from heliocentric ecliptic coordinate to local geographic coordinate
-Mat4d Planet::get_helio_to_geo_matrix()
-{
-	Mat4d mat = mat_local_to_parent;
-	mat = mat * Mat4d::zrotation(axis_rotation*M_PI/180.);
-
-	// Iterate thru parents
-	Planet * p = parent;
-	while (p!=NULL && p->parent!=NULL)
-		{
-			mat = p->mat_local_to_parent * mat;
-			p=p->parent;
-		}
-	return mat;
-}
+//Mat4d Planet::get_helio_to_geo_matrix()
+//{
+//	Mat4d mat = mat_local_to_parent;
+//	mat = mat * Mat4d::zrotation(axis_rotation*M_PI/180.);
+//
+//	// Iterate thru parents
+//	Planet * p = parent;
+//	while (p!=NULL && p->parent!=NULL)
+//		{
+//			mat = p->mat_local_to_parent * mat;
+//			p=p->parent;
+//		}
+//	return mat;
+//}
 
 // Compute the z rotation to use from equatorial to geographic coordinates
 void Planet::compute_geographic_rotation(double date)
@@ -311,14 +322,21 @@ Vec3d Planet::get_ecliptic_pos() const
 }
 
 // Return the heliocentric ecliptical position
+// used only for earth shadow, lunar eclipse
 Vec3d Planet::get_heliocentric_ecliptic_pos() const
 {
 	Vec3d pos = ecliptic_pos;
-	Planet * p = parent;
-	while (p!=NULL)
+	const Planet *p = parent;
+	while (p!=NULL
+           && p->parent!=NULL)
 		{
-			pos.transfo4d(p->mat_local_to_parent);
-			p=p->parent;
+//johannes			pos.transfo4d(p->mat_local_to_parent);
+            pos += p->ecliptic_pos;
+			p = p->parent;
+            if (p->parent) {
+                // a satellite has no satellites
+              exit(128);
+            }
 		}
 	return pos;
 }
@@ -362,13 +380,6 @@ float Planet::compute_magnitude(const Navigator * nav) const
 	return compute_magnitude(nav->get_observer_helio_pos());
 }
 
-// Add the given Planet in the satellite list
-void Planet::add_satellite(Planet*p)
-{
-	satellites.push_back(p);
-	p->parent=this;
-}
-
 void Planet::set_big_halo(const string& halotexfile)
 {
 	tex_big_halo = new s_texture(halotexfile, TEX_LOAD_TYPE_PNG_SOLID);
@@ -390,11 +401,16 @@ void Planet::draw(int hint_ON, Projector* prj, const Navigator * nav, const Tone
 
 
 	Mat4d mat = mat_local_to_parent;
-	Planet * p = parent;
+	const Planet *p = parent;
 	while (p!=NULL && p->parent!=NULL)
 		{
-			mat = p->mat_local_to_parent * mat;
+//johannes			mat = p->mat_local_to_parent * mat;
+			mat = Mat4d::translation(p->ecliptic_pos) * mat;
 			p = p->parent;
+            if (p->parent) {
+                // a satellite has no satellites
+              exit(128);
+            }
 		}
 
 	// This removed totally the Planet shaking bug!!!

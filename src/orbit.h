@@ -30,15 +30,31 @@ public:
 class EllipticalOrbit : public Orbit
 {
 public:
-    EllipticalOrbit(double, double, double, double, double, double, double,
-                    double _epoch = 2451545.0);
+    EllipticalOrbit(double pericenterDistance,
+                    double eccentricity,
+                    double inclination,
+                    double ascendingNode,
+                    double argOfPeriapsis,
+                    double meanAnomalyAtEpoch,
+                    double period,
+                    double epoch, // = 2451545.0,
+                    double parent_rot_obliquity, // = 0.0,
+                    double parent_rot_ascendingnode // = 0.0
+                    );
 
     // Compute the orbit for a specified Julian date and return a "stellarium compliant" function
-	void positionAtTime(double JD, double * X, double * Y, double * Z) const;
-	void positionAtTimev(double JD, double* v);
+//    void positionAtTime(double JD, double * X, double * Y, double * Z) const;
+//    void positionAtTimev(double JD, double* v);
 
-	// Original one
-	Vec3d positionAtTime(double) const;
+      // Compute position for a specified Julian date and return coordinates
+      // given in "dynamical equinox and ecliptic J2000"
+      // which is the reference frame for VSOP87
+      // In order to rotate to VSOP87
+      // parent_rot_obliquity and parent_rot_ascendingnode must be supplied.
+    void positionAtTimevInVSOP87Coordinates(double JD, double* v) const;
+
+      // Original one
+    Vec3d positionAtTime(double) const;
     double getPeriod() const;
     double getBoundingRadius() const;
     virtual void sample(double, double, int, OrbitSampleProc&) const;
@@ -55,6 +71,7 @@ private:
     double meanAnomalyAtEpoch;
     double period;
     double epoch;
+    double rotate_to_vsop87[9];
 };
 
 

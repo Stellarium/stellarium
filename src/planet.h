@@ -30,6 +30,7 @@
 #include "stel_object.h"
 #include "callbacks.hpp"
 #include "fader.h"
+#include "translator.h"
 
 // The callback type for the external position computation function
 typedef boost::callback<void, double, double*> pos_func_type;
@@ -77,10 +78,17 @@ private:
 
 class Planet : public StelObject
 {
-friend class SolarSystem;
 public:
-	Planet(const string& englishName, int _flagHalo, int _flag_lighting, double _radius, Vec3f _color,
-	float _albedo, const string& tex_map_name, const string& tex_halo_name, pos_func_type _coord_func);
+	Planet(Planet *parent,
+           const string& englishName,
+           int _flagHalo,
+           int _flag_lighting,
+           double _radius,
+           Vec3f _color,
+           float _albedo,
+           const string& tex_map_name,
+           const string& tex_halo_name,
+           pos_func_type _coord_func);
 
     virtual ~Planet();
 
@@ -91,8 +99,9 @@ public:
 	virtual double get_satellites_fov(const Navigator * nav) const;
 	virtual float get_mag(const Navigator * nav) const {return compute_magnitude(nav);}
 
-	//	void setLabelColor(const Vec3f& v) {label_color = v;}
-
+	/** Translate planet name using the passed translator */
+	void translateName(Translator& trans) {nameI18 = trans.translate(englishName);}
+	
 	// Compute the position in the parent Planet coordinate system
 	void compute_position(double date);
 
@@ -110,12 +119,12 @@ public:
 	void draw(int hint_ON, Projector* prj, const Navigator* nav, const ToneReproductor* eye, 
 		  int flag_point, int flag_trails, bool stencil);
 
-	// Add the given Planet in the satellite list
-	void add_satellite(Planet*);
-
 	// Set the orbital elements
 	void set_rotation_elements(float _period, float _offset, double _epoch,
 		float _obliquity, float _ascendingNode, float _precessionRate, double _sidereal_period);
+    double getRotAscendingnode(void) const {return re.ascendingNode;}
+    double getRotObliquity(void) const {return re.obliquity;}
+
 
 	// Get the Planet position in the parent Planet ecliptic coordinate
 	Vec3d get_ecliptic_pos() const;
@@ -143,7 +152,7 @@ public:
 	void set_sphere_scale(float s) {sphere_scale = s;}
 	float get_sphere_scale(void) const {return sphere_scale;}
 
-	Planet* get_parent(void) {return parent;}
+	const Planet *get_parent(void) const {return parent;}
 
 	void set_big_halo(const string& halotexfile);
 	void set_halo_size(float s) {big_halo_size = s;}
@@ -192,7 +201,7 @@ protected:
 
 
 	string englishName; // english planet name
-	wstring nameI18;		// International translated name
+	wstring nameI18;				// International translated name
 	int flagHalo;					// Set wether a little "star like" halo will be drawn
 	int flag_lighting;				// Set wether light computation has to be proceed
 	RotationElements re;			// Rotation param
@@ -226,7 +235,7 @@ protected:
 
 	// The callback for the calculation of the equatorial rect heliocentric position at time JD.
 	pos_func_type coord_func;
-	Planet * parent;				// Planet parent i.e. sun for earth
+	const Planet *const parent;				// Planet parent i.e. sun for earth
 	list<Planet *> satellites;		// satellites of the Planet
 
 	static s_font* planet_name_font;// Font for names

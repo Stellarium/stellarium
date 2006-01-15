@@ -77,9 +77,32 @@ void SolarSystem::load(const string& planetfile)
 	int nbSections = pd.get_nsec();
 	for (int i = 0;i<nbSections;++i)
 	{
-		string secname = pd.get_secname(i);
-		string englishName = pd.get_str(secname, "name");
-		string funcname = pd.get_str(secname, "coord_func");
+		const string secname = pd.get_secname(i);
+		const string englishName = pd.get_str(secname, "name");
+
+		const string str_parent = pd.get_str(secname, "parent");
+        Planet *parent = NULL;
+
+		if (str_parent!="none")
+		{
+			// Look in the other planets the one named with str_parent
+    		vector<Planet*>::iterator iter = system_planets.begin();
+    		while (iter != system_planets.end())
+    		{
+        		if ((*iter)->getEnglishName()==str_parent)
+				{
+					parent = (*iter);
+				}
+        		iter++;
+    		}
+			if (parent == NULL)
+			{
+				cout << "ERROR : can't find parent for " << englishName << endl;
+				exit(-1);
+			}
+		}
+
+		const string funcname = pd.get_str(secname, "coord_func");
 
 		pos_func_type posfunc;
 		EllipticalOrbit* orb = NULL;
@@ -101,11 +124,19 @@ void SolarSystem::load(const string& planetfile)
 			double pericenter_distance = semi_major_axis * (1.0 - eccentricity);
 
 			// Create an elliptical orbit
-			orb = new EllipticalOrbit(pericenter_distance, eccentricity, inclination, ascending_node,
-				arg_of_pericenter, anomaly_at_epoch, period, epoch);
+			orb = new EllipticalOrbit(pericenter_distance,
+                                      eccentricity,
+                                      inclination,
+                                      ascending_node,
+                                      arg_of_pericenter,
+                                      anomaly_at_epoch,
+                                      period,
+                                      epoch,
+                                      parent->getRotObliquity(),
+                                      parent->getRotAscendingnode());
 			ell_orbits.push_back(orb);
 
-			posfunc = pos_func_type(orb, &EllipticalOrbit::positionAtTimev);
+			posfunc = pos_func_type(orb, &EllipticalOrbit::positionAtTimevInVSOP87Coordinates);
 		}
 
 		if (funcname=="sun_special")
@@ -121,10 +152,16 @@ void SolarSystem::load(const string& planetfile)
 			posfunc = pos_func_type(get_earth_helio_coordsv);
 
 		if (funcname=="lunar_special")
-			posfunc = pos_func_type(get_lunar_geo_posnv);
+			posfunc = pos_func_type(get_lunar_parent_coordsv);
 
 		if (funcname=="mars_special")
 			posfunc = pos_func_type(get_mars_helio_coordsv);
+
+		if (funcname=="phobos_special")
+			posfunc = pos_func_type(get_phobos_parent_coordsv);
+
+		if (funcname=="deimos_special")
+			posfunc = pos_func_type(get_deimos_parent_coordsv);
 
 		if (funcname=="jupiter_special")
 			posfunc = pos_func_type(get_jupiter_helio_coordsv);
@@ -171,6 +208,21 @@ void SolarSystem::load(const string& planetfile)
 		if (funcname=="uranus_special")
 			posfunc = pos_func_type(get_uranus_helio_coordsv);
 
+		if (funcname=="miranda_special")
+			posfunc = pos_func_type(get_miranda_parent_coordsv);
+
+		if (funcname=="ariel_special")
+			posfunc = pos_func_type(get_ariel_parent_coordsv);
+
+		if (funcname=="umbriel_special")
+			posfunc = pos_func_type(get_umbriel_parent_coordsv);
+
+		if (funcname=="titania_special")
+			posfunc = pos_func_type(get_titania_parent_coordsv);
+
+		if (funcname=="oberon_special")
+			posfunc = pos_func_type(get_oberon_parent_coordsv);
+
 		if (funcname=="neptune_special")
 			posfunc = pos_func_type(get_neptune_helio_coordsv);
 
@@ -185,36 +237,18 @@ void SolarSystem::load(const string& planetfile)
 		}
 
 		// Create the Planet and add it to the list
-		Planet* p = new Planet(englishName, pd.get_boolean(secname, "halo"),
-			pd.get_boolean(secname, "lightning"), pd.get_double(secname, "radius")/AU,
-			StelUtility::str_to_vec3f(pd.get_str(secname, "color").c_str()), pd.get_double(secname, "albedo"),
-			pd.get_str(secname, "tex_map"), pd.get_str(secname, "tex_halo"), posfunc);
+		Planet* p = new Planet(parent,
+                               englishName,
+                               pd.get_boolean(secname, "halo"),
+                               pd.get_boolean(secname, "lightning"),
+                               pd.get_double(secname, "radius")/AU,
+                               StelUtility::str_to_vec3f(pd.get_str(secname, "color").c_str()),
+                               pd.get_double(secname, "albedo"),
+                               pd.get_str(secname, "tex_map"),
+                               pd.get_str(secname, "tex_halo"),
+                               posfunc);
 
-		string str_parent = pd.get_str(secname, "parent");
-
-		if (str_parent!="none")
-		{
-			// Look in the other planets the one named with str_parent
-			bool have_parent = false;
-    		vector<Planet*>::iterator iter = system_planets.begin();
-    		while (iter != system_planets.end())
-    		{
-        		if ((*iter)->getEnglishName()==str_parent)
-				{
-					(*iter)->add_satellite(p);
-					have_parent = true;
-				}
-        		iter++;
-    		}
-			if (!have_parent)
-			{
-				cout << "ERROR : can't find parent for " << englishName << endl;
-				exit(-1);
-			}
-		}
-
-		if (secname=="earth")
-			earth = p;
+		if (secname=="earth") earth = p;
 		if (secname=="sun") sun = p;
 		if (secname=="moon") moon = p;
 
@@ -452,7 +486,7 @@ void SolarSystem::translateNames(Translator& trans)
 	vector<Planet*>::iterator iter;      
 	for( iter = system_planets.begin(); iter < system_planets.end(); iter++ )
 	{
-		(*iter)->nameI18 = trans.translate((*iter)->englishName.c_str());
+		(*iter)->translateName(trans);
 	}
 }
 
