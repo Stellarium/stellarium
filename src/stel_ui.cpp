@@ -435,32 +435,32 @@ Component* StelUI::createTimeControlButtons(void)
 
 void StelUI::bt_dec_time_speed_cb(void)
 {
-	double s = core->get_time_speed();
+	double s = core->getTimeSpeed();
 	if (s>JD_SECOND) s/=10.;
 	else if (s<=-JD_SECOND) s*=10.;
 	else if (s>-JD_SECOND && s<=0.) s=-JD_SECOND;
 	else if (s>0. && s<=JD_SECOND) s=0.;
-	core->set_time_speed(s);
+	core->setTimeSpeed(s);
 }
 
 void StelUI::bt_inc_time_speed_cb(void)
 {
-	double s = core->get_time_speed();
+	double s = core->getTimeSpeed();
 	if (s>=JD_SECOND) s*=10.;
 	else if (s<-JD_SECOND) s/=10.;
 	else if (s>=0. && s<JD_SECOND) s=JD_SECOND;
 	else if (s>=-JD_SECOND && s<0.) s=0.;
-	core->set_time_speed(s);
+	core->setTimeSpeed(s);
 }
 
 void StelUI::bt_real_time_speed_cb(void)
 {
-	core->set_time_speed(JD_SECOND);
+	core->setTimeSpeed(JD_SECOND);
 }
 
 void StelUI::bt_time_now_cb(void)
 {
-	core->set_JDay(get_julian_from_sys());
+	core->setJDay(get_julian_from_sys());
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -804,11 +804,11 @@ int StelUI::handle_clic(Uint16 x, Uint16 y, S_GUI_VALUE button, S_GUI_VALUE stat
 	case S_GUI_MOUSE_MIDDLE : break;
 	case S_GUI_MOUSE_WHEELUP :
 		core->zoom_in(state==S_GUI_PRESSED);
-		core->update_move( core->get_mouse_zoom());
+		core->updateMove( core->getMouseZoom());
 		return 1;
 	case S_GUI_MOUSE_WHEELDOWN :
 		core->zoom_out(state==S_GUI_PRESSED);
-		core->update_move( core->get_mouse_zoom());
+		core->updateMove( core->getMouseZoom());
 		return 1;
 	default: break;
 	}
@@ -864,7 +864,7 @@ int StelUI::handle_clic(Uint16 x, Uint16 y, S_GUI_VALUE button, S_GUI_VALUE stat
 			if (core->selected_object)
 			{
 
-				core->set_object_pointer_visibility(1);  // by default draw pointer around object
+				core->setObjectPointerVisibility(1);  // by default draw pointer around object
 				updateInfoSelectString();
 				// If an object was selected keep the earth following
 				if (core->navigation->get_flag_traking()) core->navigation->set_flag_lock_equ_pos(1);

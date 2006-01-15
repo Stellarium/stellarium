@@ -249,7 +249,7 @@ void StelCore::init(void)
 	
 	// Load constellations
 	string tmpstring=SkyCulture; SkyCulture=""; // Temporary trick
-	set_sky_culture(tmpstring);
+	setSkyCulture(tmpstring);
 	asterisms->set_font(ConstellationFontSize, DataDir + BaseFontName);
 	asterisms->set_art_intensity(ConstellationArtIntensity);
 	asterisms->set_art_fade_duration(ConstellationArtFadeDuration);
@@ -321,7 +321,7 @@ void StelCore::update(int delta_time)
 	ssystem->update(delta_time, navigation);
 
 	// Move the view direction and/or fov
-	update_move(delta_time);
+	updateMove(delta_time);
 
 	// Update info about selected object
 	if (selected_object) selected_object->update();
@@ -508,13 +508,13 @@ void StelCore::draw(int delta_time)
 
 
 // Set the 2 config files names.
-void StelCore::set_config_files(const string& _config_file)
+void StelCore::setConfigFiles(const string& _config_file)
 {
 	config_file = _config_file;
 }
 
 
-void StelCore::set_landscape(const string& new_landscape_name)
+void StelCore::setLandscape(const string& new_landscape_name)
 {
     if (new_landscape_name.empty()) return;
     if (landscape) delete landscape;
@@ -523,7 +523,7 @@ void StelCore::set_landscape(const string& new_landscape_name)
     observatory->set_landscape_name(new_landscape_name);
 }
 
-void StelCore::load_config(void)
+void StelCore::loadConfig(void)
 {
 	InitParser conf;
 	conf.load(ConfigDir + config_file);
@@ -543,12 +543,12 @@ void StelCore::load_config(void)
 			// Set the new landscape though
 			tempobs.set_landscape_name("Guereins");
 			
-			load_config_from(ConfigDir + config_file);			
+			loadConfigFrom(ConfigDir + config_file);			
 			// We just imported previous parameters (from >=0.6.0)
-			save_config_to(ConfigDir + config_file);
+			saveConfigTo(ConfigDir + config_file);
 			tempobs.save(ConfigDir + config_file, "init_location");
 
-			load_config_from(ConfigDir + config_file);
+			loadConfigFrom(ConfigDir + config_file);
 		}
 		else
 		{
@@ -557,24 +557,24 @@ void StelCore::load_config(void)
 			system( (string("cp -f ") + DataRoot + "/config/default_config.ini " + ConfigDir + config_file).c_str() );
 			
 			// Actually load the config file
-			load_config_from(ConfigDir + config_file);
+			loadConfigFrom(ConfigDir + config_file);
 			return;
 		}
 	}
 	
 	// Versions match, there was no pblms
-	load_config_from(ConfigDir + config_file);
+	loadConfigFrom(ConfigDir + config_file);
 	
 }
 
-void StelCore::save_config(void)
+void StelCore::saveConfig(void)
 {
 	// The config file is supposed to be valid and from the correct stellarium version.
 	// This is normally the case if the program is running.
-	save_config_to(ConfigDir + config_file);
+	saveConfigTo(ConfigDir + config_file);
 }
 
-void StelCore::load_config_from(const string& confFile)
+void StelCore::loadConfigFrom(const string& confFile)
 {
     cout << "Loading configuration file " << confFile << " ..." << endl;
 	InitParser conf;
@@ -813,7 +813,7 @@ void StelCore::load_config_from(const string& confFile)
 	FlagBrightNebulae		= conf.get_boolean("astro:flag_bright_nebulae");
 }
 
-void StelCore::save_config_to(const string& confFile)
+void StelCore::saveConfigTo(const string& confFile)
 {
     cout << "Saving configuration file " << confFile << " ..." << endl;
 	InitParser conf;
@@ -1017,13 +1017,13 @@ void StelCore::save_config_to(const string& confFile)
 
 
 // Handle mouse clics
-int StelCore::handle_clic(Uint16 x, Uint16 y, S_GUI_VALUE button, S_GUI_VALUE state)
+int StelCore::handleClick(Uint16 x, Uint16 y, S_GUI_VALUE button, S_GUI_VALUE state)
 {
 	return ui->handle_clic(x, y, button, state);
 }
 
 // Handle mouse move
-int StelCore::handle_move(int x, int y)
+int StelCore::handleMove(int x, int y)
 {
   // Turn if the mouse is at the edge of the screen.
   // unless config asks otherwise
@@ -1066,7 +1066,7 @@ int StelCore::handle_move(int x, int y)
 }
 
 // Handle key press and release
-int StelCore::handle_keys(Uint16 key, s_gui::S_GUI_VALUE state)
+int StelCore::handleKeys(Uint16 key, s_gui::S_GUI_VALUE state)
 {
 	s_tui::S_TUI_VALUE tuiv;
 	if (state == s_gui::S_GUI_PRESSED) tuiv = s_tui::S_TUI_PRESSED;
@@ -1189,7 +1189,7 @@ void StelCore::zoom_out(int s)
 }
 
 // Increment/decrement smoothly the vision field and position
-void StelCore::update_move(int delta_time)
+void StelCore::updateMove(int delta_time)
 {
 	// the more it is zoomed, the more the mooving speed is low (in angle)
     double depl=move_speed*delta_time*projection->get_fov();
@@ -1257,7 +1257,7 @@ void StelCore::update_move(int delta_time)
 	}
 }
 
-void StelCore::set_screen_size(int w, int h)
+void StelCore::setScreenSize(int w, int h)
 {
 	if (w==screen_W && h==screen_H) return;
     screen_W = w;
@@ -1378,7 +1378,7 @@ StelObject * StelCore::clever_find(int x, int y) const
 }
 
 // Go and zoom to the selected object.
-void StelCore::auto_zoom_in(float move_duration, bool allow_manual_zoom)
+void StelCore::autoZoomIn(float move_duration, bool allow_manual_zoom)
 {
 	float manual_move_duration;
 
@@ -1408,7 +1408,7 @@ void StelCore::auto_zoom_in(float move_duration, bool allow_manual_zoom)
 }
 
 // Unzoom and go to the init position
-void StelCore::auto_zoom_out(float move_duration, bool full)
+void StelCore::autoZoomOut(float move_duration, bool full)
 {
 	if (!selected_object)
 	{
@@ -1448,7 +1448,7 @@ void StelCore::auto_zoom_out(float move_duration, bool full)
 }
 
 // this really belongs elsewhere
-int StelCore::set_sky_culture(string _culture_dir)
+int StelCore::setSkyCulture(string _culture_dir)
 {
 	if(SkyCulture == _culture_dir) return 2;
 
@@ -1528,7 +1528,7 @@ void StelCore::setSkyLanguage(const std::string& newSkyLocaleName)
     //ui->setListNames(ssystem->getNamesI18());
 }
 
-void StelCore::play_startup_script() {
+void StelCore::playStartupScript() {
 	if(scripts) scripts->play_startup_script();
 }
 
