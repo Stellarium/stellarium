@@ -50,6 +50,7 @@ void Translator::init(const std::string& domain, const std::string& moDirectory)
 // 	return unicode;
 // }
 
+/** Convert from char* UTF-8 to wchar_t UCS4 - stolen from SDL_ttf library */
 static wchar_t *UTF8_to_UNICODE(wchar_t *unicode, const char *utf8, int len)
 {
 	int i, j;

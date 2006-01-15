@@ -101,32 +101,32 @@ public:
 	// ---------------------------------------------------------------
 	
 	//! Zoom to the given FOV
-	void zoom_to(double aim_fov, float move_duration = 1.) {projection->zoom_to(aim_fov, move_duration);}
+	void zoomTo(double aim_fov, float move_duration = 1.) {projection->zoom_to(aim_fov, move_duration);}
 	
 	//! Go and zoom temporary to the selected object.
-	void auto_zoom_in(float move_duration = 1.f, bool allow_manual_zoom = 1);
+	void autoZoomIn(float move_duration = 1.f, bool allow_manual_zoom = 1);
 	
 	//! Unzoom to the previous position
-	void auto_zoom_out(float move_duration = 1.f, bool full = 0);
+	void autoZoomOut(float move_duration = 1.f, bool full = 0);
 	
 	//! Set the sky culture
-	int set_sky_culture(string _culture_dir);
+	int setSkyCulture(string _culture_dir);
 	
 	//! Set the screen size
-	void set_screen_size(int w, int h);
+	void setScreenSize(int w, int h);
 	
 	//! Set the landscape
-	void set_landscape(const string& new_landscape_name);
+	void setLandscape(const string& new_landscape_name);
 	
 	//! Set time speed in JDay/sec
-	void set_time_speed(double ts) {navigation->set_time_speed(ts);}
+	void setTimeSpeed(double ts) {navigation->set_time_speed(ts);}
 	//! Get time speed in JDay/sec
-	double get_time_speed(void) const {return navigation->get_time_speed();}
+	double getTimeSpeed(void) const {return navigation->get_time_speed();}
 	
 	//! Set the current date in Julian Day
-	void set_JDay(double JD) {navigation->set_JDay(JD);}
+	void setJDay(double JD) {navigation->set_JDay(JD);}
 	//! Get the current date in Julian Day
-	double get_JDay(void) const {return navigation->get_JDay();}
+	double getJDay(void) const {return navigation->get_JDay();}
 		
 	//! Set display flag of constellation lines
 	void constellation_set_flag_lines(bool b) {asterisms->set_flag_lines(b);}
@@ -167,41 +167,41 @@ public:
 	// Below this limit, all the function will end up in the stel_app class
 	///////////////////////////////////////////////////////////////////////////////
 	
-	void load_config(void);
-	void save_config(void);
+	void loadConfig(void);
+	void saveConfig(void);
 	// Set the config file names.
-	void set_config_files(const string& _config_file);	
+	void setConfigFiles(const string& _config_file);	
 	
 	// Increment/decrement smoothly the vision field and position
-	void update_move(int delta_time);
+	void updateMove(int delta_time);
 
 	// Handle mouse clics
-	int handle_clic(Uint16 x, Uint16 y, s_gui::S_GUI_VALUE button, s_gui::S_GUI_VALUE state);
+	int handleClick(Uint16 x, Uint16 y, s_gui::S_GUI_VALUE button, s_gui::S_GUI_VALUE state);
 	// Handle mouse move
-	int handle_move(int x, int y);
+	int handleMove(int x, int y);
 	// Handle key press and release
-	int handle_keys(Uint16 key, s_gui::S_GUI_VALUE state);
+	int handleKeys(Uint16 key, s_gui::S_GUI_VALUE state);
 
-	int get_bppMode(void) const {return bppMode;}
-	int get_Fullscreen(void) const {return Fullscreen;}
+	int getBppMode(void) const {return bppMode;}
+	int getFullscreen(void) const {return Fullscreen;}
 
-	const string& get_DataDir(void) const {return DataDir;}
+	const string& getDataDir(void) const {return DataDir;}
 	
 	const float getMaxFPS(void) const {return maxfps;}
 
-	int get_mouse_zoom(void) const {return MouseZoom;}
+	int getMouseZoom(void) const {return MouseZoom;}
 
 	// TODO move to stel_command_interface or get rid of this method
-	void set_param(string& key, float value);
+	void setParam(string& key, float value);
 
 	// n.b. - do not confuse this with sky time rate
-	int get_time_multiplier() { return time_multiplier; };
+	int getTimeMultiplier() { return time_multiplier; };
 
 	//! Quit the application
 	void quit(void);
 
-	void set_object_pointer_visibility(bool _newval) { object_pointer_visibility = _newval; }
-	void play_startup_script();
+	void setObjectPointerVisibility(bool _newval) { object_pointer_visibility = _newval; }
+	void playStartupScript();
 	
 private:
 	TypeFace* UTFfont;
@@ -243,8 +243,8 @@ private:
 	// Below this limit, all the attributes will end up in the stel_app class
 	///////////////////////////////////////////////////////////////////////////////
 	
-	void load_config_from(const string& confFile);
-	void save_config_to(const string& confFile);
+	void loadConfigFrom(const string& confFile);
+	void saveConfigTo(const string& confFile);
 
 	// Big options
 	int screen_W;
