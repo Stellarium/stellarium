@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: stellarium@free.fr\n"
-"POT-Creation-Date: 2006-01-15 18:13+0100\n"
+"POT-Creation-Date: 2006-01-15 21:29+0100\n"
 "PO-Revision-Date: 2005-07-25 18:00+0100\n"
 "Last-Translator: Sergio Trujillo <sergiotrujillo@telefonica.net>\n"
 "Language-Team: \n"
@@ -47,7 +47,7 @@ msgstr "Intenta `%s --help' para más información.\n"
 msgid "Loading Constellation Art: %d/%d"
 msgstr "Cargando imágenes de las Constelaciones : %d/%d"
 
-#: src/hip_star.cpp:77 src/nebula.cpp:71 src/planet.cpp:80
+#: src/hip_star.cpp:77 src/nebula.cpp:71 src/planet.cpp:91
 msgid "Name : "
 msgstr ""
 
@@ -59,11 +59,11 @@ msgstr ""
 msgid "(Var)"
 msgstr ""
 
-#: src/hip_star.cpp:104 src/nebula.cpp:78 src/planet.cpp:90
+#: src/hip_star.cpp:104 src/nebula.cpp:78 src/planet.cpp:101
 msgid "RA : "
 msgstr ""
 
-#: src/hip_star.cpp:105 src/nebula.cpp:79 src/planet.cpp:91
+#: src/hip_star.cpp:105 src/nebula.cpp:79 src/planet.cpp:102
 msgid "DE : "
 msgstr ""
 
@@ -71,12 +71,12 @@ msgstr ""
 msgid "Spectral : "
 msgstr ""
 
-#: src/hip_star.cpp:110 src/nebula.cpp:83 src/planet.cpp:94
+#: src/hip_star.cpp:110 src/nebula.cpp:83 src/planet.cpp:105
 #, fuzzy
 msgid "Magnitude : "
 msgstr "Magnitud"
 
-#: src/hip_star.cpp:111 src/planet.cpp:96
+#: src/hip_star.cpp:111 src/planet.cpp:107
 msgid "Distance : "
 msgstr ""
 
@@ -84,16 +84,16 @@ msgstr ""
 msgid " Light Years"
 msgstr ""
 
-#: src/hip_star.cpp:123 src/nebula.cpp:93 src/planet.cpp:104
+#: src/hip_star.cpp:123 src/nebula.cpp:93 src/planet.cpp:115
 msgid "Az  : "
 msgstr ""
 
-#: src/hip_star.cpp:124 src/nebula.cpp:94 src/planet.cpp:105
+#: src/hip_star.cpp:124 src/nebula.cpp:94 src/planet.cpp:116
 #, fuzzy
 msgid "Alt : "
 msgstr "Altitud (m): "
 
-#: src/hip_star.cpp:142 src/nebula.cpp:111 src/planet.cpp:120
+#: src/hip_star.cpp:142 src/nebula.cpp:111 src/planet.cpp:131
 #, fuzzy
 msgid ": mag "
 msgstr "%s: mag %.1f"
@@ -161,7 +161,7 @@ msgstr "Cargando Catálogo Hiparcos : %d/%d"
 msgid "Loading Nebula Textures: %d/%d"
 msgstr "Cargando datos de Nebulosa: %d/%d"
 
-#: src/planet.cpp:96
+#: src/planet.cpp:107
 msgid "AU"
 msgstr ""
 
