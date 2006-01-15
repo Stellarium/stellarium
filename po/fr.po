@@ -32,7 +32,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: stellarium@free.fr\n"
-"POT-Creation-Date: 2006-01-15 18:13+0100\n"
+"POT-Creation-Date: 2006-01-15 21:29+0100\n"
 "PO-Revision-Date: 2006-01-15 18:47+0100\n"
 "Last-Translator: Fabien Chéreau\n"
 "Language-Team:  <fr@li.org>\n"
@@ -68,7 +68,7 @@ msgstr "Essayez `%s --help' pour plus d'information.\n"
 msgid "Loading Constellation Art: %d/%d"
 msgstr "Chargement des Images Constellations : %d/%d"
 
-#: src/hip_star.cpp:77 src/nebula.cpp:71 src/planet.cpp:80
+#: src/hip_star.cpp:77 src/nebula.cpp:71 src/planet.cpp:91
 msgid "Name : "
 msgstr "Nom : "
 
@@ -80,11 +80,11 @@ msgstr "(Bbl)"
 msgid "(Var)"
 msgstr "(Var)"
 
-#: src/hip_star.cpp:104 src/nebula.cpp:78 src/planet.cpp:90
+#: src/hip_star.cpp:104 src/nebula.cpp:78 src/planet.cpp:101
 msgid "RA : "
 msgstr "AD : "
 
-#: src/hip_star.cpp:105 src/nebula.cpp:79 src/planet.cpp:91
+#: src/hip_star.cpp:105 src/nebula.cpp:79 src/planet.cpp:102
 msgid "DE : "
 msgstr "DE : "
 
@@ -92,11 +92,11 @@ msgstr "DE : "
 msgid "Spectral : "
 msgstr "Spectral : "
 
-#: src/hip_star.cpp:110 src/nebula.cpp:83 src/planet.cpp:94
+#: src/hip_star.cpp:110 src/nebula.cpp:83 src/planet.cpp:105
 msgid "Magnitude : "
 msgstr "Magnitude : "
 
-#: src/hip_star.cpp:111 src/planet.cpp:96
+#: src/hip_star.cpp:111 src/planet.cpp:107
 msgid "Distance : "
 msgstr "Distance : "
 
@@ -104,15 +104,15 @@ msgstr "Distance : "
 msgid " Light Years"
 msgstr " Années Lumière"
 
-#: src/hip_star.cpp:123 src/nebula.cpp:93 src/planet.cpp:104
+#: src/hip_star.cpp:123 src/nebula.cpp:93 src/planet.cpp:115
 msgid "Az  : "
 msgstr "Az  : "
 
-#: src/hip_star.cpp:124 src/nebula.cpp:94 src/planet.cpp:105
+#: src/hip_star.cpp:124 src/nebula.cpp:94 src/planet.cpp:116
 msgid "Alt : "
 msgstr "Alt : "
 
-#: src/hip_star.cpp:142 src/nebula.cpp:111 src/planet.cpp:120
+#: src/hip_star.cpp:142 src/nebula.cpp:111 src/planet.cpp:131
 msgid ": mag "
 msgstr ": mag "
 
@@ -172,7 +172,7 @@ msgstr "Chargement du catalogue Cadwell: %d/%d"
 msgid "Loading Nebula Textures: %d/%d"
 msgstr "Chargement des textures des Nébuleuses : %d/%d"
 
-#: src/planet.cpp:96
+#: src/planet.cpp:107
 msgid "AU"
 msgstr "UA"
 
