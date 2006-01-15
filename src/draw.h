@@ -28,7 +28,7 @@
 #include "navigator.h"
 #include "tone_reproductor.h"
 #include "fader.h"
-
+#include "translator.h"
 
 // Class which manages a grid to display in the sky
 class SkyGrid
@@ -109,7 +109,7 @@ public:
 	void set_color(const Vec3f& c) {color = c;}
 	Vec3f get_color() {return color;}
 	void set_font(float font_size, const string& font_name);
-	void translateLabels();  // for i18n
+	void translateLabels(Translator& trans);  // for i18n
 	void update(int delta_time) {fader.update(delta_time);}
 	void set_fade_duration(float duration) {fader.set_duration((int)(duration*1000.f));}
 	void set_flag_show(bool b){fader = b;}
@@ -119,7 +119,7 @@ private:
 	float radius;
 	s_font* font;	
 	Vec3f color;
-	string sNorth, sSouth, sEast, sWest;
+	wstring sNorth, sSouth, sEast, sWest;
 	LinearFader fader;
 };
 

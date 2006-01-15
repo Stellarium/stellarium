@@ -31,6 +31,8 @@ using namespace std;
 
 typedef std::map< std::string, std::string > stringHash_t;
 typedef stringHash_t::const_iterator stringHashIter_t;
+typedef std::map< std::string, std::wstring > wstringHash_t;
+typedef wstringHash_t::const_iterator wstringHashIter_t;
 
 class StelUtility {
 public:
@@ -63,13 +65,13 @@ public:
 	//! @param decimal Define if 2 decimal must also be printed
 	//! @param useD Define if letter "d" must be used instead of °
 	//! @return The corresponding string
-	static string printAngleDMS(double angle, bool decimals = false, bool useD = false);
+	static wstring printAngleDMS(double angle, bool decimals = false, bool useD = false);
 	
 	//! @brief Print the passed angle with the format +hh:mm:ss(.ss)"
 	//! @param angle Angle in radian
 	//! @param decimals Define if 2 decimal must also be printed
 	//! @return The corresponding string
-	static string printAngleHMS(double angle, bool decimals = false);
+	static wstring printAngleHMS(double angle, bool decimals = false);
 		
 	//! @brief Convert UTF-8 std::string to std::wstring using mbstowcs() function
 	//! @param The input string in UTF-8 format
@@ -116,8 +118,9 @@ string double_to_str(double dbl);
 long int str_to_long(string str);
 
 int fcompare(const string& _base, const string& _sub);
+int fcompare(const wstring& _base, const wstring& _sub);
 
-string translateGreek(const string& s);
+wstring translateGreek(const string& s);
 string stripConstellation(const string& s);
 
 enum DRAWMODE { DM_NORMAL=0, DM_CHART, DM_NIGHTCHART };

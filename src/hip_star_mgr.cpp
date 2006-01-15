@@ -27,6 +27,7 @@
 #include "stellarium.h"
 #include "navigator.h"
 #include "stel_utility.h"
+#include "translator.h"
 
 #define RADIUS_STAR 1.
 
@@ -130,16 +131,16 @@ void HipStarMgr::init(float font_size, const string& font_name, const string& hi
 // Load from file ( create the stream and call the Read function )
 void HipStarMgr::load_data(const string& hipCatFile, LoadingBar& lb)
 {
-	char tmpstr[512];
+	wchar_t tmpstr[512];
 	
-    printf(_("Loading Hipparcos star data..."));
+    cout << "Loading Hipparcos star data...";
     FILE * hipFile;
     hipFile = NULL;
 
     hipFile=fopen(hipCatFile.c_str(),"rb");
     if (!hipFile)
     {
-        printf("ERROR %s NOT FOUND\n",hipCatFile.c_str());
+        cerr << "ERROR " << hipCatFile << " NOT FOUND" << endl;
         exit(-1);
     }
 
@@ -173,7 +174,7 @@ void HipStarMgr::load_data(const string& hipCatFile, LoadingBar& lb)
 		if (!(i%2000) || (i == starArraySize-1))
 		{
 			// Draw loading bar
-			snprintf(tmpstr, 512, _("Loading Hipparcos catalog: %d/%d"), i == starArraySize-1 ? starArraySize: i, starArraySize);
+			swprintf(tmpstr, 512, _("Loading Hipparcos catalog: %d/%d"), i == starArraySize-1 ? starArraySize: i, starArraySize);
 			lb.SetMessage(tmpstr);
 			lb.Draw((float)i/starArraySize);
 		}
@@ -207,15 +208,15 @@ int HipStarMgr::load_common_names(const string& commonNameFile)
 	// clear existing names (would be faster if they were in separate array
 	// since relatively few are named)
     for (int i=0; i<starArraySize; ++i)
-      {
-	StarArray[i].CommonName = "";
-      }
+    {
+		StarArray[i].englishCommonName = "";
+    }
 	
     FILE *cnFile;
     cnFile=fopen(commonNameFile.c_str(),"r");
     if (!cnFile)
     {   
-        cout << "WARNING " << commonNameFile << "NOT FOUND" << endl;
+        cerr << "Warning " << commonNameFile << "not found." << endl;
         return 0;
     }
 
@@ -238,16 +239,16 @@ int HipStarMgr::load_common_names(const string& commonNameFile)
 			char c=line[0];
 			int i=0;
 			while(c!='|' && i<256){c=line[i];++i;}
-			star->CommonName =  &(line[i]);
+			star->englishCommonName =  &(line[i]);
 			// remove newline
-			star->CommonName.erase(star->CommonName.length()-1, 1);
+			star->englishCommonName.erase(star->englishCommonName.length()-1, 1);
 
 			// remove underscores
-			for (string::size_type j=0;j<star->CommonName.length();++j) {
-				if (star->CommonName[j]=='_') star->CommonName[j]=' ';
+			for (string::size_type j=0;j<star->englishCommonName.length();++j) {
+				if (star->englishCommonName[j]=='_') star->englishCommonName[j]=' ';
 			}
-
-			lstCommonNames.push_back(star->CommonName);
+			star->commonNameI18 = _(star->englishCommonName.c_str());
+			lstCommonNames.push_back(star->commonNameI18);
 			lstCommonNamesHP.push_back(tmp);
 		}
 	} while(fgets(line, 256, cnFile));
@@ -256,7 +257,7 @@ int HipStarMgr::load_common_names(const string& commonNameFile)
     return 1;
 }
 
-unsigned int HipStarMgr::getCommonNameHP(string _commonname)
+unsigned int HipStarMgr::getCommonNameHP(wstring _commonname)
 {
     unsigned int i = 0;
 
@@ -277,16 +278,14 @@ void HipStarMgr::load_sci_names(const string& sciNameFile)
 	// since relatively few are named)
     for (int i=0; i<starArraySize; i++)
 	{
-		StarArray[i].SciName = "";
-		StarArray[i].ShortSciName = "";
-		StarArray[i].OrigSciName = "";
+		StarArray[i].sciName = L"";
     }
 
 	FILE *snFile;
     snFile=fopen(sciNameFile.c_str(),"r");
     if (!snFile)
     {   
-        printf("WARNING %s NOT FOUND\n",sciNameFile.c_str());
+        cerr << "Warning " << sciNameFile.c_str() << " not found" << endl;
         return;
     }
 
@@ -304,17 +303,16 @@ void HipStarMgr::load_sci_names(const string& sciNameFile)
 			char c=line[0];
 			int i=0;
 			while(c!='|' && i<256){c=line[i];++i;}
-			star->SciName = &(line[i]);
-			star->SciName.erase(star->SciName.length()-1, 1);
+			string sciName = &(line[i]);
+			sciName.erase(sciName.length()-1, 1);
 
 			// remove underscores
-			for (string::size_type j=0;j<star->SciName.length();++j) 
+			for (string::size_type j=0;j<star->sciName.length();++j) 
 			{
-				if (star->SciName[j]=='_') star->SciName[j]=' ';
+				if (star->sciName[j]=='_') star->sciName[j]=' ';
 			}
-
-			star->SciName = translateGreek(star->SciName);
-			star->ShortSciName = stripConstellation(star->SciName);
+			sciName = stripConstellation(sciName);
+			star->sciName = translateGreek(sciName);
 		}
 	} while(fgets(line, 256, snFile));
 
@@ -440,7 +438,7 @@ void HipStarMgr::draw_point(float _star_scale, float _star_mag_scale, float _twi
 			if(h->Mag>maxMag) break;
 			if(!prj->project_prec_earth_equ_check(h->XYZ, h->XY)) continue;
 			h->draw_point();
-			if (!h->CommonName.empty() && names_fader.getInterstate() && h->Mag<maxMagStarName)
+			if (!h->commonNameI18.empty() && names_fader.getInterstate() && h->Mag<maxMagStarName)
 			{
 				h->draw_name();
 				glBindTexture (GL_TEXTURE_2D, starTexture->getID());
@@ -601,13 +599,13 @@ bool HipStarMgr::load_doubleraw(const string& hipCatFile)
 	if (loc != string::npos)
 		dataDir = dataDir.substr(0,loc+1);
 
-    cout << _("Loading Hipparcos double stars...");
+    cout << "Loading Hipparcos double stars...";
 	string hipData = dataDir + "hipparcos_d.dat";
 
     dataFile = fopen(hipData.c_str(),"r");
     if (!dataFile)
     {
-        cout << "Hipparcos double star data file " << hipData << " not found" << endl;
+        cerr << "Hipparcos double star data file " << hipData << " not found" << endl;
 //		MessageBox(NULL,string("ERROR " + hipData + " NOT FOUND").c_str(),"Stellarium", MB_OK | MB_ICONINFORMATION);
 		return false;
     }
@@ -641,7 +639,7 @@ bool HipStarMgr::save_double(void)
     FILE *dataFile = fopen(saoData.c_str(),"w");
     if (!dataFile)
     {
-        cout << "Data file " << saoData << " would not open for saving" << endl;
+        cerr << "Data file " << saoData << " would not open for saving" << endl;
         exit(-1);
     }
 
@@ -676,13 +674,13 @@ bool HipStarMgr::load_double(const string& hipCatFile)
 	if (loc != string::npos)
 		dataDir = dataDir.substr(0,loc+1);
 
-    cout << _("Loading Hipparcos double stars...");
+    cout << "Loading Hipparcos double stars...";
 	string hipData = dataDir + "double_txt.dat";
 
     dataFile = fopen(hipData.c_str(),"r");
     if (!dataFile)
     {
-        cout << "Hipparcos double star data file " << hipData << " not found" << endl;
+        cerr << "Hipparcos double star data file " << hipData << " not found" << endl;
 		return false;
     }
 
@@ -720,7 +718,7 @@ bool HipStarMgr::load_variable(const string& hipCatFile)
 	if (loc != string::npos)
 		dataDir = dataDir.substr(0,loc+1);
 
-    cout << _("Loading Hipparcos periodic variable stars...");
+    cout << "Loading Hipparcos periodic variable stars...";
 #ifdef BUILDING_DATA_FILES_VARIABLE
 	string hipData = dataDir+"hipparcos_v.dat";
 #else
@@ -729,7 +727,7 @@ bool HipStarMgr::load_variable(const string& hipCatFile)
     dataFile = fopen(hipData.c_str(),"r");
     if (!dataFile)
     {
-        cout << "Hipparcos variable star data file " << hipData << " not found" << endl;
+        cerr << "Hipparcos variable star data file " << hipData << " not found" << endl;
 //		MessageBox(NULL,string("ERROR " + hipData + " NOT FOUND").c_str(),"Stellarium", MB_OK | MB_ICONINFORMATION);
 		return false;
     }
@@ -765,7 +763,7 @@ bool HipStarMgr::save_variable(void)
     FILE *dataFile = fopen(saoData.c_str(),"w");
     if (!dataFile)
     {
-        cout << "Data file " << saoData << " would not open for saving" << endl;
+        cerr << "Data file " << saoData << " would not open for saving" << endl;
         exit(-1);
     }
 
@@ -802,12 +800,12 @@ bool HipStarMgr::load_combined(const string& hipCatFile, LoadingBar& lb)
 
 	// load the hip data
 
-    cout << _("Loading Hipparcos/SAO star data...");
+    cout << "Loading Hipparcos/SAO star data...";
 	string hipData = dataDir + "catalog_txt.dat";
     dataFile = fopen(hipData.c_str(),"r");
     if (!dataFile)
     {
-        cout << "Hipparcos/SAO star data file " << hipData << " not found" << endl;
+        cerr << "Hipparcos/SAO star data file " << hipData << " not found" << endl;
         exit(-1);
     }
     
@@ -969,7 +967,7 @@ bool HipStarMgr::save_combined(void)
     FILE *dataFile = fopen(saoData.c_str(),"w");
     if (!dataFile)
     {
-        cout << "Data file " << saoData << " would not open for saving" << endl;
+        cerr << "Data file " << saoData << " would not open for saving" << endl;
         exit(-1);
     }
 
@@ -1012,7 +1010,7 @@ bool HipStarMgr::save_combined(void)
     dataFile = fopen(saoData.c_str(),"w");
     if (!dataFile)
     {
-        cout << "Data file " << saoData << " would not open for saving" << endl;
+        cerr << "Data file " << saoData << " would not open for saving" << endl;
         exit(-1);
     }
 
@@ -1029,7 +1027,7 @@ bool HipStarMgr::save_combined(void)
     dataFile = fopen(saoData.c_str(),"w");
     if (!dataFile)
     {
-        cout << "Data file " << saoData << " would not open for saving" << endl;
+        cerr << "Data file " << saoData << " would not open for saving" << endl;
         exit(-1);
     }
 
@@ -1096,7 +1094,7 @@ bool HipStarMgr::save_combined_bin(void)
     FILE * dataFile = fopen(saoData.c_str(),"wb");
     if (!dataFile)
     {
-        cout << "Data file " << saoData << " would not open for saving" << endl;
+        cerr << "Data file " << saoData << " would not open for saving" << endl;
         exit(-1);
     }
 
@@ -1147,7 +1145,7 @@ bool HipStarMgr::load_SAO_HIP_NAME_data(const string& hipCatFile, LoadingBar& lb
 
 	// load the hip data
 
-    printf(_("Loading Hipparcos star data..."));
+    printf("Loading Hipparcos star data...");
 	string hipData = dataDir+"1239_hip_main.dat";
     dataFile  = fopen(hipData.c_str(),"r");
     if (!dataFile)
@@ -1232,12 +1230,12 @@ bool HipStarMgr::load_SAO_HIP_NAME_data(const string& hipCatFile, LoadingBar& lb
 
 	// scan the SAO data  for max SAO and HD
 	
-    cout << _("Loading SAO star data ");
+    cout << "Loading SAO star data ";
 	string saoData = dataDir + "5015_catalog.dat";
     FILE * saoFile = fopen(saoData.c_str(),"r");
     if (!saoFile)
     {
-        cout << "SAO data file " << saoData << " not found" << endl;
+        cerr << "SAO data file " << saoData << " not found" << endl;
         return false;
     }
 
@@ -1341,12 +1339,12 @@ bool HipStarMgr::load_SAO_HIP_NAME_data(const string& hipCatFile, LoadingBar& lb
 	if (data_drop > 0) cout << "[" << data_drop << " dropped]";
 	cout << ")" << endl;
 
-    cout << _("Loading star name data ") << endl;
+    cout << "Loading star name data " << endl;
 	string nameData = dataDir + "4022_index.dat";
     FILE * nameFile = fopen(nameData.c_str(),"r");
     if (!nameFile)
     {
-        cout << "Star name data file " << nameData << " not found" << endl;
+        cerr << "Star name data file " << nameData << " not found" << endl;
         exit(-1);
     }
 	// read the number of lines
@@ -1466,12 +1464,12 @@ bool HipStarMgr::load_combined_bin(const string& hipCatFile, LoadingBar& lb)
 
 	// load the hip data
 
-    cout << _("Loading Hipparcos/SAO star data...");
+    cout << "Loading Hipparcos/SAO star data...";
 	string hipData = dataDir +"catalog_bin.dat";
     dataFile = fopen(hipData. c_str(),"rb");
     if (!dataFile)
     {
-        cout << "Data file " << hipData << " not found" << endl;
+        cerr << "Data file " << hipData << " not found" << endl;
         exit(-1);
     }
 

@@ -23,13 +23,15 @@
 #include "stellastro.h"
 #include "stel_utility.h"
 
+Translator StelCore::skyTranslator(APP_NAME, LOCALEDIR, "");
+
 StelCore::StelCore(const string& DDIR, const string& TDIR, const string& CDIR, const string& DATA_ROOT) : 
 	projection(NULL), selected_object(NULL), hip_stars(NULL),
 	nebulas(NULL), ssystem(NULL), milky_way(NULL), screen_W(800), screen_H(600), bppMode(16), Fullscreen(0),
 	FlagHelp(false), FlagInfos(false), FlagConfig(false), FlagSearch(false), FlagShowTuiMenu(0), 
 	frame(0), timefr(0), timeBase(0), fps(0), maxfps(10000.f), deltaFov(0.), deltaAlt(0.), deltaAz(0.),
 	move_speed(0.00025), FlagTimePause(0), is_mouse_moving_horiz(false), is_mouse_moving_vert(false)
-{
+{	
 	TextureDir = TDIR;
 	ConfigDir = CDIR;
 	DataDir = DDIR;
@@ -532,7 +534,7 @@ void StelCore::load_config(void)
 	{
 		if (version>="0.6.0" && version != string(VERSION))
 		{
-			printf(_("The current config file is from a previous version (>=0.6.0).\nPrevious options will be imported in the new config file.\n"));
+			cout << "The current config file is from a previous version (>=0.6.0).\nPrevious options will be imported in the new config file." << endl;
 			
 			// Store temporarily the previous observator parameters
 			Observator tempobs;
@@ -551,7 +553,7 @@ void StelCore::load_config(void)
 		else
 		{
 			// The config file is too old to try an importation
-			printf(_("The current config file is from a version too old for parameters to be imported (%s).\nIt will be replaced by the default config file.\n"), version.empty() ? "<0.6.0" : version.c_str());
+			printf("The current config file is from a version too old for parameters to be imported (%s).\nIt will be replaced by the default config file.\n", version.empty() ? "<0.6.0" : version.c_str());
 			system( (string("cp -f ") + DataRoot + "/config/default_config.ini " + ConfigDir + config_file).c_str() );
 			
 			// Actually load the config file
@@ -574,7 +576,7 @@ void StelCore::save_config(void)
 
 void StelCore::load_config_from(const string& confFile)
 {
-    cout << _("Loading configuration file ") << confFile << " ..." << endl;
+    cout << "Loading configuration file " << confFile << " ..." << endl;
 	InitParser conf;
 	conf.load(confFile);
 
@@ -582,7 +584,7 @@ void StelCore::load_config_from(const string& confFile)
 	string version = conf.get_str("main:version");
 	if (version!=string(VERSION) && version<"0.6.0")
 	{
-		cout << _("ERROR : The current config file is from a different version (") <<
+		cerr << "ERROR : The current config file is from a different version (" <<
 			(version.empty() ? "<0.6.0" : version) << ")." << endl;
 		exit(-1);
 	}
@@ -607,7 +609,7 @@ void StelCore::load_config_from(const string& confFile)
 			if (tmpstr=="cylinder") ProjectorType = Projector::CYLINDER_PROJECTOR;
 			else
 			{
-				cout << "ERROR : Unknown projector type : " << tmpstr << endl;
+				cerr << "ERROR : Unknown projector type : " << tmpstr << endl;
 				exit(-1);
 			}
 		}
@@ -622,7 +624,7 @@ void StelCore::load_config_from(const string& confFile)
 		if (tmpstr=="disk") ViewportType = Projector::DISK;
 		else
 		{
-			cout << "ERROR : Unknown viewport type : " << tmpstr << endl;
+			cerr << "ERROR : Unknown viewport type : " << tmpstr << endl;
 			exit(-1);
 		}
 	}
@@ -635,8 +637,8 @@ void StelCore::load_config_from(const string& confFile)
 
 	string skyLocaleName = conf.get_str("localization", "sky_locale", "system_default");
 	string appLocaleName = conf.get_str("localization", "app_locale", "system_default");
-	setSkyLocale(StelCore::tryLocale(skyLocaleName));
-	setAppLocale(StelCore::tryLocale(appLocaleName));
+	setSkyLanguage(skyLocaleName);
+	setAppLanguage(appLocaleName);
 
 	// Star section
 	StarScale			= conf.get_double ("stars:star_scale");
@@ -754,7 +756,7 @@ void StelCore::load_config_from(const string& confFile)
 		if (tmpstr=="horizon") navigation->set_viewing_mode(Navigator::VIEW_HORIZON);
 		else
 		{
-			cout << "ERROR : Unknown viewing mode type : " << tmpstr << endl;
+			cerr << "ERROR : Unknown viewing mode type : " << tmpstr << endl;
 			assert(0);
 		}
 	}
@@ -851,8 +853,8 @@ void StelCore::save_config_to(const string& confFile)
 
 	// localization section
 	conf.set_str    ("localization:sky_culture", SkyCulture);
-	conf.set_str    ("localization:app_locale", appLocale.name());
-	conf.set_str    ("localization:sky_locale", skyLocale.name());
+	conf.set_str    ("localization:app_locale", Translator::globalTranslator.getLocaleName());
+	conf.set_str    ("localization:sky_locale", skyTranslator.getLocaleName());
 
 	// Star section
 	conf.set_double ("stars:star_scale", StarScale);
@@ -1452,7 +1454,7 @@ int StelCore::set_sky_culture(string _culture_dir)
 
 	// make sure culture definition exists before attempting
 	if( !skyloc->test_sky_culture_directory(_culture_dir) ) {
-		cout << _("Invalid sky culture directory: ") << _culture_dir << endl;
+		cerr << "Invalid sky culture directory: " << _culture_dir << endl;
 		return 0;
 	}
 
@@ -1467,13 +1469,12 @@ int StelCore::set_sky_culture(string _culture_dir)
 
 	LoadingBar lb(projection, LoadingBarFontSize, DataDir + BaseFontName, "logo24bits", screen_W, screen_H);
 
-	//	printf(_("Loading constellations for sky culture: \"%s\"\n"), SkyCulture.c_str());
 	asterisms->load_lines_and_art(DataDir + "sky_cultures/" + SkyCulture + "/constellationship.fab",
 		DataDir + "sky_cultures/" + SkyCulture + "/constellationsart.fab", DataDir + "sky_cultures/" + SkyCulture + "/boundaries.dat", lb);
 	asterisms->loadNames(DataDir + "sky_cultures/" + SkyCulture + "/constellation_names.eng.fab");
 	
 	// Re-translated constellation names
-	setSkyLocale(skyLocale);
+	asterisms->translateNames(skyTranslator);
 	
 	// as constellations have changed, clear out any selection and retest for match!
 	if (selected_object && selected_object->get_type()==StelObject::STEL_OBJECT_STAR)
@@ -1497,61 +1498,28 @@ int StelCore::set_sky_culture(string _culture_dir)
 }
 
 
-//! @brief Create a locale matching with a locale name
-std::locale StelCore::tryLocale(const string& localeName)
-{
-	std::locale loc;
-	if (localeName=="system_default" || localeName=="system")
-	{
-		return std::locale("");
-	}
-	else
-	{
-		try
-		{
-			loc = std::locale(localeName.c_str());
-		}
-		catch (const std::exception& e)
-		{
-			cout << e.what() << "\"" << localeName << "\" : revert to default locale \"" << std::locale("").name() << "\"" << endl;
-			// Fallback with current locale
-			loc = std::locale();
-		}
-	}
-	return loc;
-}
-
 //! @brief Set the application locale. This apply to GUI, console messages etc..
-void StelCore::setAppLocale(const std::locale newAppLocale)
+void StelCore::setAppLanguage(const std::string& newAppLocaleName)
 {
-	// Set the new app locale - only MESSAGES and CTYPE facets are kept to prevent I/O problems
-	appLocale = std::locale(std::locale::classic(), newAppLocale, std::locale::messages);
-	appLocale = std::locale(appLocale, newAppLocale, std::locale::ctype);
-	appLocale = std::locale(appLocale, newAppLocale, std::locale::time);
-	
-	// Just set the locale as global application locale
-	std::locale::global(appLocale);
+	// Update the translator with new locale name
+	Translator::globalTranslator = Translator(PACKAGE, LOCALEDIR, newAppLocaleName);
+	cout << "Application locale is " << Translator::globalTranslator.getLocaleName() << endl;
 }
 
 
 //! @brief Set the sky locale and reload the sky objects names for gettext translation
-void StelCore::setSkyLocale(const std::locale newSkyLocale)
+void StelCore::setSkyLanguage(const std::string& newSkyLocaleName)
 {
 	if( !hip_stars || !cardinals_points || !asterisms) return; // objects not initialized yet
 	
-	// Set the new sky locale
-	skyLocale = newSkyLocale;
+	// Update the translator with new locale name
+	skyTranslator = Translator(PACKAGE, LOCALEDIR, newSkyLocaleName);
+	cout << "Sky locale is " << skyTranslator.getLocaleName() << endl;
 	
-	// Set the sky locale as global
-	std::locale::global(skyLocale);
-
-	// Translate all labels using gettext with the new global locale
-	cardinals_points->translateLabels();
-	asterisms->translateNames();
-	ssystem->translateNames();
-	
-	// revert previous locale
-	std::locale::global(appLocale);
+	// Translate all labels with the new language
+	cardinals_points->translateLabels(skyTranslator);
+	asterisms->translateNames(skyTranslator);
+	ssystem->translateNames(skyTranslator);
 
 	// refresh EditBox with new names
     //ui->setStarAutoComplete(hip_stars->getNames());
@@ -1614,12 +1582,12 @@ void StelCore::draw_chart_background(void)
 	projection->reset_perspective_projection();
 }
 
-string StelCore::get_cursor_pos(int x, int y)
+wstring StelCore::get_cursor_pos(int x, int y)
 {
 	Vec3d v;
 	projection->unproject_earth_equ(x,y,v);
 
-	ostringstream oss; 
+	wostringstream oss; 
 	
 	float tempDE, tempRA;
 	rect_to_sphe(&tempRA,&tempDE,v);

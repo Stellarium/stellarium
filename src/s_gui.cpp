@@ -27,18 +27,6 @@
 #include "s_gui.h"
 #include "stel_utility.h"
 
-// TODO: int magnify??? for printer dpi
-
-// Used for GNU gettext translations
-#ifndef MACOSX
-#include "gettext.h"
-#define _(String) gettext (String)
-#define N_(String) gettext_noop(String)
-#else
-# include "POSupport.h"
-# define _(String) localizedUTF8String(String)
-# define N_(String) (String)
-#endif
 
 void glCircle(const Vec3d& pos, float radius, float line_width)
 {
@@ -361,8 +349,26 @@ void Painter::print(int x, int y, const string& str)
 	font->print(x, y, str, 0);	// 0 for upside down mode
 }
 
+// Print the text with the default font and default text color
+void Painter::print(int x, int y, const wstring& str)
+{
+    glColor4fv(textColor);
+    glEnable(GL_TEXTURE_2D);
+    glEnable(GL_BLEND);
+	font->print(x, y, str, 0);	// 0 for upside down mode
+}
+
 // Print the text with the default font and given text color
 void Painter::print(int x, int y, const string& str, const s_color& c)
+{
+    glColor4fv(c);
+    glEnable(GL_TEXTURE_2D);
+    glEnable(GL_BLEND);
+	font->print(x, y, str, 0);	// 0 for upside down mode
+}
+
+// Print the text with the default font and given text color
+void Painter::print(int x, int y, const wstring& str, const s_color& c)
 {
     glColor4fv(c);
     glEnable(GL_TEXTURE_2D);
@@ -905,7 +911,7 @@ bool CheckBox::onClic(int x, int y, S_GUI_VALUE bt, S_GUI_VALUE state)
 	return Button::onClic(x,y,bt,state);
 }
 
-LabeledCheckBox::LabeledCheckBox(bool state, const string& _label) : 
+LabeledCheckBox::LabeledCheckBox(bool state, const wstring& _label) : 
 		Container(), 
 		checkbox(NULL), 
 		label(NULL)
@@ -966,7 +972,7 @@ void FlagButton::draw()
 // Text label
 ////////////////////////////////////////////////////////////////////////////////
 
-Label::Label(const string& _label, s_font * _font)
+Label::Label(const wstring& _label, s_font * _font)
 {
 	if (_font) painter.setFont(_font);
 	setLabel(_label);
@@ -977,21 +983,10 @@ Label::~Label()
 {
 }
 
-void Label::setLabel(const string& _label, bool _translate)
+void Label::setLabel(const wstring& _label)
 {
-	label_native = _label;
 	label = _label;
-#ifdef ENABLE_NLS
-	if (_translate && label_native != "") label = _(label_native.c_str());
-#endif
     adjustSize();
-}
-
-void Label::changeLocale(void)
-{
-#ifdef ENABLE_NLS
-	setLabel(label_native);
-#endif
 }
 
 void Label::draw(void)
@@ -1034,20 +1029,20 @@ void History::clear(void)
 	history.clear();
 }
 
-void History::add(const string& _text)
+void History::add(const wstring& _text)
 {
-	if (_text == "" || _text.empty()) return;
+	if (_text == L"" || _text.empty()) return;
 	
 	if (history.size() == maxItems)
 	{
-		vector<string>::iterator iter = history.begin();
+		vector<wstring>::iterator iter = history.begin();
 		history.erase(iter);
 	}
 	history.push_back(_text);
 	pos = history.size();
 }       
 
-string History::prev(void)
+wstring History::prev(void)
 {
     if (pos > 0) 
 	{
@@ -1055,10 +1050,10 @@ string History::prev(void)
 	    return history[pos];
 	}
 	pos = -1;
-	return "";
+	return L"";
 }
 
-string History::next(void)
+wstring History::next(void)
 {
 	if (pos < (int)history.size()-1)  
 	{
@@ -1066,7 +1061,7 @@ string History::next(void)
     	return history[pos];
 	}
 	pos = history.size();
-	return "";
+	return L"";
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -1078,11 +1073,11 @@ AutoCompleteString::AutoCompleteString()
 	maxMatches = 5;
 }
 
-string AutoCompleteString::test(const string& _text)
+wstring AutoCompleteString::test(const wstring& _text)
 {
 	matches.clear();
 
-    if (options.size() == 0) return "";
+    if (options.size() == 0) return L"";
 	
 	unsigned int i = 0;
 	while (i < options.size())
@@ -1106,34 +1101,34 @@ void AutoCompleteString::reset(void)
 	matches.clear();
 }
 
-string AutoCompleteString::getOptions(int _number)
+wstring AutoCompleteString::getOptions(int _number)
 {
 	if (_number == -1)
 		_number = maxMatches;
 		
-    if (options.size() == 0) return "";
+    if (options.size() == 0) return L"";
 
 	int i = 0;
-	string text = "";
+	wstring text = L"";
 	
 	while (i < _number && i < (int)matches.size())
 	{
-       	if (text == "") // first match
+       	if (text == L"") // first match
         	text += matches[i];
 		else 
-			text = text + ", " + matches[i];
+			text = text + L", " + matches[i];
 		i++;
 	}
 	return text;
 }
 
 
-string AutoCompleteString::getFirstMatch(void)
+wstring AutoCompleteString::getFirstMatch(void)
 {
 	if (matches.size() > 0)
 		return matches[0];
 	else
-		return "";
+		return L"";
 }
 
 ///////////////////////////////// EditBox //////////////////////////////////////
@@ -1142,7 +1137,7 @@ string AutoCompleteString::getFirstMatch(void)
 
 // we need to set this when actrivated, and only blink the active one
 
-EditBox::EditBox(const string& _label, s_font* font) 
+EditBox::EditBox(const wstring& _label, s_font* font) 
 	: Button(), label(_label, font), isEditing(false), cursorPos(0)
 {
 	Component::setSize(label.getSize()+s_vec2i(4,2));
@@ -1207,25 +1202,25 @@ void EditBox::draw(void)
 	glPopMatrix();
 }
 
-#define EDITBOX_CURSOR "\7"
-#define EDITBOX_DEFAULT_PROMPT "> "
+#define EDITBOX_CURSOR L"\7"
+#define EDITBOX_DEFAULT_PROMPT L"> "
 void EditBox::refreshLabel(void)
 {
-     if (!isEditing) label.setLabel(prompt + text, false);
+     if (!isEditing) label.setLabel(prompt + text);
      else
      {
-        if (!cursorVisible) label.setLabel(prompt + text, false); 
+        if (!cursorVisible) label.setLabel(prompt + text); 
         else
         {
             if (cursorPos == text.length()) // at end
-               label.setLabel(prompt + text + EDITBOX_CURSOR, false); 
+               label.setLabel(prompt + text + EDITBOX_CURSOR); 
             else
-               label.setLabel(prompt + text.substr(0,cursorPos) + EDITBOX_CURSOR + text.substr(cursorPos), false); 
+               label.setLabel(prompt + text.substr(0,cursorPos) + EDITBOX_CURSOR + text.substr(cursorPos)); 
         }
      }
 }
 
-void EditBox::setText(const string &_text)
+void EditBox::setText(const wstring &_text)
 {
 	text = _text;
 	lastText = text;
@@ -1278,7 +1273,7 @@ void EditBox::setEditing(bool _editing)
 	}
 }
 
-void EditBox::setPrompt(const string &p)
+void EditBox::setPrompt(const wstring &p)
 {
 	if (p.empty()) 
 		prompt = EDITBOX_DEFAULT_PROMPT; 
@@ -1286,7 +1281,7 @@ void EditBox::setPrompt(const string &p)
 		prompt = p; 
 }
 
-string EditBox::getDefaultPrompt(void)
+wstring EditBox::getDefaultPrompt(void)
 {
 	return EDITBOX_DEFAULT_PROMPT;
 }
@@ -1353,13 +1348,13 @@ bool EditBox::onKey(Uint16 k, S_GUI_VALUE s)
                text = text.erase(cursorPos, 1);
            }
         }
-        else if (k == SDLK_ESCAPE) setText("");
+        else if (k == SDLK_ESCAPE) setText(L"");
         else if ((k >= SDLK_0 && k <= SDLK_9) || (k >= SDLK_a && k <= SDLK_z) 
         || (k >= SDLK_A && k <= SDLK_Z) || (k >= 224 && k <= 255) 
 		|| k == SDLK_SPACE || k == SDLK_UNDERSCORE)
         {
 			text = lastText;
-            string newtext = text.substr(0, cursorPos);
+            wstring newtext = text.substr(0, cursorPos);
             newtext += k;
             newtext += text.substr(cursorPos);
             text = newtext;
@@ -1612,7 +1607,7 @@ void ListBox::createLines(void)
 	
 	for (i = 0; i < displayLines; i++)
 	{
-		bt = new LabeledButton(string()); 
+		bt = new LabeledButton(wstring()); 
 		bt->setHideBorder(true);
 		bt->setHideBorderMouseOver(true);
 		bt->setHideTexture(true);
@@ -1620,18 +1615,6 @@ void ListBox::createLines(void)
 		bt->setVisible(visible);
 		itemBt.push_back(bt);
 	}
-}
-
-void ListBox::changeLocale(void)
-{
-#ifdef ENABLE_NLS
-	unsigned int i = 0;
-	while (i < items.size())
-	{
-		items[i] = _(items_native[i].c_str());
-		i++;
-	}
-#endif
 }
 
 void ListBox::draw(void)
@@ -1723,26 +1706,22 @@ void ListBox::setVisible(bool _visible)
 	Component::setVisible(_visible);
 }
 
-void ListBox::addItems(const vector<string> _items)
+void ListBox::addItems(const vector<wstring> _items)
 {
 	if (_items.empty()) return;
-	string item;
+	wstring item;
 	
 	unsigned int i = 0;
 	while (i < _items.size())
 	{
 		item = _items[i];
-		items_native.push_back(_items[i]);
-#ifdef ENABLE_NLS
-		item = _(item.c_str());
-#endif
 		items.push_back(item);
 		i++;
 	}
 	adjustAfterItemsAdded();
 }
 
-void ListBox::addItem(const string& _text)
+void ListBox::addItem(const wstring& _text)
 {
 	if (!items.empty())	items.push_back(_text);
 	adjustAfterItemsAdded();
@@ -1781,10 +1760,10 @@ void ListBox::clear(void)
 	adjustAfterItemsAdded();
 }
 
-string ListBox::getItem(int value)
+wstring ListBox::getItem(int value)
 {
 	if (items.empty() || value < 0 || value >= (int)items.size()) 
-		return string();	
+		return wstring();	
 	else
 		return items[value];
 }
@@ -1796,7 +1775,7 @@ string ListBox::getItem(int value)
 
 #define LABEL_PAD 10
 
-LabeledButton::LabeledButton(const string& _label, s_font* font, Justification _j, bool _bright) 
+LabeledButton::LabeledButton(const wstring& _label, s_font* font, Justification _j, bool _bright) 
 	: Button(), label(_label, font), justification(_j), isBright(_bright)
 {
 	Component::setSize(label.getSize()+s_vec2i(4,2));
@@ -1804,13 +1783,6 @@ LabeledButton::LabeledButton(const string& _label, s_font* font, Justification _
 
 LabeledButton::~LabeledButton()
 {
-}
-
-void LabeledButton::changeLocale(void)
-{
-#ifdef ENABLE_NLS
-	label.changeLocale();
-#endif
 }
 
 void LabeledButton::setColorScheme(void)
@@ -1857,7 +1829,7 @@ void LabeledButton::setVisible(bool _visible)
 // A text bloc
 ////////////////////////////////////////////////////////////////////////////////
 
-TextLabel::TextLabel(const string& _label, s_font* _font) :
+TextLabel::TextLabel(const wstring& _label, s_font* _font) :
 	Container()
 {
 	if (_font) painter.setFont(_font);
@@ -1869,41 +1841,28 @@ TextLabel::~TextLabel()
 {
 }
 
-void TextLabel::setLabel(const string& _label, bool _translate)
+void TextLabel::setLabel(const wstring& _label)
 {
-	label_native = _label;
 	label = _label;
-	
-#ifdef ENABLE_NLS
-	if (_translate && label_native != "") label = _(label_native.c_str());
-#endif
-
     childs.clear();
 
     Label * tempLabel;
-    string pch;
+    wstring pch;
 
     unsigned int i = 0;
 	unsigned int lineHeight = (int)painter.getFont()->getLineHeight()+1;
 
-	istringstream is(label);
+	wistringstream is(label);
     while (getline(is, pch))
     {
         tempLabel = new Label();
 		tempLabel->setPainter(painter);
-        tempLabel->setLabel(pch,false);  // don't translate (done already)!!!
+        tempLabel->setLabel(pch);
         tempLabel->setPos(0,i*lineHeight);
         addComponent(tempLabel);
         i++;
     }
     adjustSize();
-}
-
-void TextLabel::changeLocale(void)
-{
-#ifdef ENABLE_NLS
-	setLabel(label_native);
-#endif
 }
 
 void TextLabel::draw(void)
@@ -2001,7 +1960,7 @@ void FramedContainer::setFrameSize(int left, int right, int bottom, int top)
 // Standard window widget
 ////////////////////////////////////////////////////////////////////////////////
 
-StdWin::StdWin(const string& _title, s_texture* _header_tex, s_font * _winfont, int headerSize) :
+StdWin::StdWin(const wstring& _title, s_texture* _header_tex, s_font * _winfont, int headerSize) :
 	FramedContainer(), titleLabel(NULL), header_tex(NULL), dragging(false)
 {
 	if (_header_tex) header_tex = _header_tex;
@@ -2014,7 +1973,7 @@ StdWin::StdWin(const string& _title, s_texture* _header_tex, s_font * _winfont, 
 	Container::addComponent(titleLabel);
 }
 
-void StdWin::setTitle(const string& _title)
+void StdWin::setTitle(const wstring& _title)
 {
 	titleLabel->setLabel(_title);
 }
@@ -2073,7 +2032,7 @@ void StdWin::setVisible(bool _visible)
 // Standard Button Window - StdWin with a close button in the title bar
 ////////////////////////////////////////////////////////////////////////////////
 
-StdBtWin::StdBtWin(const string& _title, s_texture* _header_tex, s_font * _winfont, int headerSize) :
+StdBtWin::StdBtWin(const wstring& _title, s_texture* _header_tex, s_font * _winfont, int headerSize) :
 	StdWin(_title, _header_tex, _winfont, headerSize), hideBt(NULL)
 {
 	hideBt = new Button();
@@ -2097,7 +2056,7 @@ void StdBtWin::onHideBt(void)
 }
 
 
-StdTransBtWin::StdTransBtWin(const string& _title, int _time_out, s_texture* _header_tex, s_font * _winfont, int headerSize) :
+StdTransBtWin::StdTransBtWin(const wstring& _title, int _time_out, s_texture* _header_tex, s_font * _winfont, int headerSize) :
 	StdBtWin(_title, _header_tex, _winfont, headerSize)
 {
 
@@ -2145,20 +2104,20 @@ void StdTransBtWin::set_timeout(int _time_out)
 #define STDDLGWIN_BT_ICON_LEFT 20
 #define STDDLGWIN_BT_ICON_TOP 20
 
-StdDlgWin::StdDlgWin(const string& _title, s_texture* _header_tex, s_font * _winfont, int headerSize) :
+StdDlgWin::StdDlgWin(const wstring& _title, s_texture* _header_tex, s_font * _winfont, int headerSize) :
 	StdWin(_title, _header_tex, _winfont, headerSize), firstBt(NULL), secondBt(NULL), messageLabel(NULL), 
 	inputEdit(NULL), hasIcon(false)
 {
 	reshape(300,200,400,100);
 
 	numBtns = 1;
-	firstBt = new LabeledButton("1");
+	firstBt = new LabeledButton(L"1");
 	firstBt->setSize(STDDLGWIN_BT_WIDTH,STDDLGWIN_BT_HEIGHT);
 	firstBt->setOnPressCallback(callback<void>(this, &StdDlgWin::onFirstBt));
 	addComponent(firstBt);
 	firstBt->setVisible(true);
 
-	secondBt = new LabeledButton("2");
+	secondBt = new LabeledButton(L"2");
 	secondBt->setSize(STDDLGWIN_BT_WIDTH,STDDLGWIN_BT_HEIGHT);
 	secondBt->setOnPressCallback(callback<void>(this, &StdDlgWin::onSecondBt));
 	addComponent(secondBt);
@@ -2190,7 +2149,7 @@ StdDlgWin::StdDlgWin(const string& _title, s_texture* _header_tex, s_font * _win
 void StdDlgWin::resetResponse(void)
 {
 	lastButton = BT_NOTSET;
-	lastInput = "";
+	lastInput = L"";
 	firstBtType = BT_NOTSET;	
 	secondBtType = BT_NOTSET;	
 }
@@ -2222,7 +2181,7 @@ void StdDlgWin::arrangeButtons(void)
 	picture->setVisible(hasIcon);
 }
 
-void StdDlgWin::MessageBox(const string &_title, const string &_prompt, int _buttons, const string &_ID)
+void StdDlgWin::MessageBox(const wstring &_title, const wstring &_prompt, int _buttons, const string &_ID)
 {
 	lastID = _ID;
 	lastType = STDDLGWIN_MSG;
@@ -2231,8 +2190,8 @@ void StdDlgWin::MessageBox(const string &_title, const string &_prompt, int _but
 
 	numBtns = 1;
 
-	if (!_title.empty()) setTitle(_title.c_str()); 
-	else setTitle(originalTitle.c_str());
+	if (!_title.empty()) setTitle(_title); 
+	else setTitle(originalTitle);
 
 	messageLabel->setLabel(_prompt);
 	inputEdit->setVisible(false);	
@@ -2240,13 +2199,13 @@ void StdDlgWin::MessageBox(const string &_title, const string &_prompt, int _but
 	if (_buttons & BT_NO)
 	{
 		secondBtType = BT_NO;
-		secondBt->setLabel("No");
+		secondBt->setLabel(_("No"));
 		numBtns = 2;
 	}
 	else if (_buttons & BT_CANCEL)
 	{
 		secondBtType = BT_CANCEL;
-		secondBt->setLabel("Cancel");
+		secondBt->setLabel(_("Cancel"));
 		numBtns = 2;
 	}
 
@@ -2259,12 +2218,12 @@ void StdDlgWin::MessageBox(const string &_title, const string &_prompt, int _but
 	if (_buttons & BT_YES)
 	{
 		firstBtType = BT_YES;
-		firstBt->setLabel("Yes");
+		firstBt->setLabel(_("Yes"));
 	}
 	else
 	{
 		firstBtType = BT_OK;
-		firstBt->setLabel("OK");
+		firstBt->setLabel(_("OK"));
 	}		
 	
 	arrangeButtons();
@@ -2272,7 +2231,7 @@ void StdDlgWin::MessageBox(const string &_title, const string &_prompt, int _but
 	setVisible(true);
 }
 
-void StdDlgWin::InputBox(const string &_title, const string &_prompt, const string &_ID)
+void StdDlgWin::InputBox(const wstring &_title, const wstring &_prompt, const string &_ID)
 {
 	lastID = _ID;
 	lastType = STDDLGWIN_INPUT;
@@ -2290,9 +2249,9 @@ void StdDlgWin::InputBox(const string &_title, const string &_prompt, const stri
 	inputEdit->setVisible(true);	
 
 	firstBtType = BT_OK;
-	firstBt->setLabel("OK");
+	firstBt->setLabel(_("OK"));
 	secondBtType = BT_CANCEL;
-	secondBt->setLabel("Cancel");
+	secondBt->setLabel(_("Cancel"));
 
 	arrangeButtons();
 	setVisible(true);
@@ -2328,7 +2287,7 @@ void StdDlgWin::onSecondBt(void)
 // Everything to handle tabs
 ////////////////////////////////////////////////////////////////////////////////
 
-TabHeader::TabHeader(Component* c, const string& _label, s_font* _font) :
+TabHeader::TabHeader(Component* c, const wstring& _label, s_font* _font) :
 	LabeledButton(_label, _font), assoc(c), active(false)
 {
 }
@@ -2369,7 +2328,7 @@ TabContainer::TabContainer(s_font* _font) : Container(), headerHeight(22)
 	if (_font) painter.setFont(_font);
 }
 
-void TabContainer::addTab(Component* c, const string& name)
+void TabContainer::addTab(Component* c, const wstring& name)
 {
 	Container* tempInside = new Container();
 	tempInside->reshape(pos[0], pos[1]+headerHeight, size[0], size[1]-headerHeight);
@@ -2649,7 +2608,7 @@ void IntIncDec::draw()
 {
 	if (!visible) return;
 
-	ostringstream os;
+	wostringstream os;
 	os << value;
 	label->setLabel(os.str());
 	Container::draw();
@@ -2702,23 +2661,23 @@ void FloatIncDec::draw()
 	
 	if (format == FORMAT_DEFAULT)
 	{
-		ostringstream os;
+		wostringstream os;
 		os << value;
 		label->setLabel(os.str());
 	}
 	else if (format == FORMAT_LONGITUDE || format == FORMAT_LATITUDE)
 	{
-		string l = StelUtility::printAngleDMS(value*M_PI/180.);
-		string m = l.substr(1);
+		wstring l = StelUtility::printAngleDMS(value*M_PI/180.);
+		wstring m = l.substr(1);
 		if (format == FORMAT_LATITUDE)
 		{
-			if (l[0] == '+') m += "N";
-			if (l[0] == '-') m += "S";
+			if (l[0] == '+') m += _("N");
+			if (l[0] == '-') m += _("S");
 		}
 		else
 		{
-			if (l[0] == '+') m += "E";
-			if (l[0] == '-') m += "W";
+			if (l[0] == '+') m += _("E");
+			if (l[0] == '-') m += _("W");
 		}
 		label->setLabel(m); 
 	}
@@ -2783,22 +2742,22 @@ Time_item::Time_item(s_font* _font, const s_texture* tex_up,
 	mn->setOnPressCallback(callback<void>(this, &Time_item::onTimeChange));
 	s->setOnPressCallback(callback<void>(this, &Time_item::onTimeChange));
 
-	Label* l1 = new Label("Year"); l1->setPos(5,5);
+	Label* l1 = new Label(_("Year")); l1->setPos(5,5);
 	y->setPos(50,5); y->setSize(50, 32);
 
-	Label* l2 = new Label("Month"); l2->setPos(5,25);
+	Label* l2 = new Label(_("Month")); l2->setPos(5,25);
 	m->setPos(50,25); m->setSize(50, 32);
 
-	Label* l3 = new Label("Day"); l3->setPos(5,45);
+	Label* l3 = new Label(_("Day")); l3->setPos(5,45);
 	d->setPos(50,45); d->setSize(50, 32);
 
-	Label* l4 = new Label("Hour"); l4->setPos(130,5);
+	Label* l4 = new Label(_("Hour")); l4->setPos(130,5);
 	h->setPos(190,5); h->setSize(50, 32);
 
-	Label* l5 = new Label("Minutes"); l5->setPos(130,25);
+	Label* l5 = new Label(_("Minutes")); l5->setPos(130,25);
 	mn->setPos(190,25);mn->setSize(50, 32);
 
-	Label* l6 = new Label("Seconds"); l6->setPos(130,45);
+	Label* l6 = new Label(_("Seconds")); l6->setPos(130,45);
 	s->setPos(190,45); s->setSize(50, 32);
 
 	setSize(230, 65);
@@ -3085,7 +3044,7 @@ void MapPicture::drawCity(const s_vec2i& cityPos, int ctype)
 	cityPointer->draw();
 }
 
-void MapPicture::drawCityName(const s_vec2i& cityPos, const string& _name)
+void MapPicture::drawCityName(const s_vec2i& cityPos, const wstring& _name)
 {
 	int x, y, strLen;
 
@@ -3119,7 +3078,7 @@ void MapPicture::drawCities(void)
 				glColor3fv(CITY_SELECT);
 			else
 				glColor3fv(CITY_WITH_NAME);
-			drawCityName(cityPos, cities.getCity(i)->getName());
+			drawCityName(cityPos, cities.getCity(i)->getNameI18());
 		}
 		else 
 			drawCity(cityPos, CITY_TYPE_UNNAMED);
@@ -3139,7 +3098,7 @@ void MapPicture::drawNearestCity(void)
 		cityPointer->setImgColor(CITY_HOVER);
 		drawCity(cityPos, CITY_TYPE_HOVER);
 		glColor3fv(CITY_HOVER);
-		drawCityName(cityPos, cities.getCity(nearestIndex)->getName());
+		drawCityName(cityPos, cities.getCity(nearestIndex)->getNameI18());
 		if (!onNearestCityCallback.empty()) RUNCALLBACK(onNearestCityCallback);
 		return;
 	}
@@ -3215,7 +3174,7 @@ void MapPicture::calcPointerPos(int x, int y)
 		nearestIndex = cities.getNearest(getLongitudeFromx(x - pos[0]), getLatitudeFromy(y - pos[1]));
 		if (nearestIndex != -1)
 		{
-			string n = cities.getCity(nearestIndex)->getName();
+			wstring n = cities.getCity(nearestIndex)->getNameI18();
 			double lat, lon;
 			exactLongitude = cities.getCity(nearestIndex)->getLongitude();
 			exactLatitude = cities.getCity(nearestIndex)->getLatitude();

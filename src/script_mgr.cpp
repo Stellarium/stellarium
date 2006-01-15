@@ -112,7 +112,7 @@ void ScriptMgr::record_script(string script_filename) {
 
 	// TODO: filename should be selected in a UI window, but until then this works
 	if(recording) {
-		cout << _("Already recording script.") << endl;
+		cout << "Already recording script." << endl;
 		return;
 	}
 
@@ -159,10 +159,10 @@ void ScriptMgr::record_script(string script_filename) {
 	if(rec_file.is_open()) {
 		recording = 1;
 		record_elapsed_time = 0;
-		cout << _("Now recording actions to file: ") << script_filename << endl;
+		cout << "Now recording actions to file: " << script_filename << endl;
 		rec_filename = script_filename;
 	} else {
-		cout << _("Error opening script file for writing: ") << script_filename << endl;
+		cout << "Error opening script file for writing: " << script_filename << endl;
 		rec_filename = "";
 	} 
 }
@@ -189,7 +189,7 @@ void ScriptMgr::cancel_record_script() {
 	rec_file.close();
 	recording = 0;
 
-	cout << _("Script recording stopped.") << endl;
+	cout << "Script recording stopped." << endl;
 }
 	 
 
@@ -245,7 +245,7 @@ string ScriptMgr::get_script_list(string directory) {
   }
 
   if ((dp = opendir(directory.c_str())) == NULL) {
-    cout << _("Unable to read script directory") << directory << endl;
+    cout << "Unable to read script directory" << directory << endl;
     return "";
   }
 
@@ -280,8 +280,6 @@ string ScriptMgr::get_script_path() {
 
 // look for a script called "startup.sts"
 bool ScriptMgr::play_startup_script() {
-
-	//	cout << _("Looking for startup script to run.") << endl;
 
 	// first try on removeable directory
 	if(RemoveableScriptDirectory !="" &&

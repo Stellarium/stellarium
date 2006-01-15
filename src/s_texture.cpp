@@ -86,7 +86,7 @@ int s_texture::load(string fullName)
     FILE * tempFile = fopen(fullName.c_str(),"r");
     if (!tempFile)
 	{
-		cout << "WARNING : Can't find texture file " << fullName << "!" << endl;
+		cerr << "WARNING : Can't find texture file " << fullName << "!" << endl;
 		return 0;
 	}
 	fclose(tempFile);

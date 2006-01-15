@@ -422,10 +422,10 @@ Cardinals::Cardinals(float _radius) : radius(_radius), font(NULL), color(0.6,0.2
 {
 	// Default labels - if sky locale specified, loaded later
 	// Improvement for gettext translation
-	sNorth = _("N");
-	sSouth = _("S");
-	sEast = _("E");
-	sWest = _("W");
+	sNorth = L"N";
+	sSouth = L"S";
+	sEast = L"E";
+	sWest = L"W";
 }
 
 Cardinals::~Cardinals()
@@ -453,7 +453,7 @@ void Cardinals::draw(const Projector* prj, double latitude, bool gravityON) cons
 	if (!fader.getInterstate()) return;
 
 	// direction text
-	string d[4];
+	wstring d[4];
 	
 	d[0] = sNorth;
 	d[1] = sSouth;
@@ -518,12 +518,12 @@ void Cardinals::draw(const Projector* prj, double latitude, bool gravityON) cons
 }
 
 // Translate cardinal labels with gettext to current sky language
-void Cardinals::translateLabels()
+void Cardinals::translateLabels(Translator& trans)
 {
-		sNorth = _("N");
-		sSouth = _("S");
-		sEast = _("E");
-		sWest = _("W");
+		sNorth = trans.translate("N");
+		sSouth = trans.translate("S");
+		sEast = trans.translate("E");
+		sWest = trans.translate("W");
 }
 
 // Class which manages the displaying of the Milky Way

@@ -52,17 +52,17 @@ public:
 	void save(const string& file, const string& section);
 	void load(const string& file, const string& section);
 
-	string get_printable_date_UTC(double JD) const;
-	string get_printable_date_local(double JD) const;
-	string get_printable_time_UTC(double JD) const;
-	string get_printable_time_local(double JD) const;
+	wstring get_printable_date_UTC(double JD) const;
+	wstring get_printable_date_local(double JD) const;
+	wstring get_printable_time_UTC(double JD) const;
+	wstring get_printable_time_local(double JD) const;
 
 	// Return the time in ISO 8601 format that is : %Y-%m-%d %H:%M:%S
 	string get_ISO8601_time_UTC(double JD) const;
 	string get_ISO8601_time_local(double JD) const;
 
 	// Return the time zone name taken from system locale
-	string get_time_zone_name_from_system(double JD) const;
+	wstring get_time_zone_name_from_system(double JD) const;
 
 	void set_GMT_shift(int t) {GMT_shift=t;}
 	float get_GMT_shift(double JD = 0, bool _local=0) const;
@@ -72,7 +72,7 @@ public:
 
 	S_TZ_FORMAT get_tz_format(void) const {return time_zone_mode;}
 
-	string get_name(void);
+	wstring get_name(void);
 	void set_latitude(double l) {latitude=l;}
 	double get_latitude(void) const {return latitude;}
 	void set_longitude(double l) {longitude=l;}
@@ -87,11 +87,11 @@ public:
 	string get_date_format_str(void) const {return s_date_format_to_string(date_format);}
 	void set_date_format_str(const string& df) {date_format=string_to_s_date_format(df);}
 
-	void move_to(double lat, double lon, double alt, int duration, const string& _name);  // duration in ms
+	void move_to(double lat, double lon, double alt, int duration, const wstring& _name);  // duration in ms
 	void update(int delta_time);  // for moving observing position 
 
 private:
-	string name;			// Position name
+	wstring name;			// Position name
 	double longitude;		// Longitude in degree
 	double latitude;		// Latitude in degree
 	int altitude;			// Altitude in meter

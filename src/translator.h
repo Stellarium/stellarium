@@ -20,33 +20,38 @@
 #ifndef TRANSLATOR_H
 #define TRANSLATOR_H
 
+#include <config.h>
+
 #include <string>
 #include <locale>
 #include <iostream>
 #include "iconv.h"
+#include <cerrno>
 
 /**
  * Class used to translate strings to any language.
  * Implements a nice interface to gettext thru use of C++ std::messages class.
  * All its operations do not modify the global locale. 
  * The purpose of this class is to remove all non-OO C locale functions from stellarium.
+ * It could be extended for all locale management using e.g the portable IBM ICU library.
  * @author Fabien Chereau
  */
+
+// These macro are used as global function replacing standard gettext operation
+#ifndef MACOSX
+#include "gettext.h"
+#define _(String) Translator::globalTranslator.translate( gettext_noop(String) ).c_str()
+#define N_(String) gettext_noop(String)
+#else
+# include "POSupport.h"
+# define _(String) localizedUTF8String(String)
+# define N_(String) (String)
+#endif
 
 using namespace std;
 
 class Translator{
 public:
-	/**
-	 * @brief Create a Translator with passed std::locale
-	 * @param domain The name of the domain to use for translation
-	 * @param moDirectory The directory where to look for the domain.mo translation files.
-	 * @param loc The locale to use.
-	 */
-    Translator(const std::string& domain, const std::string& moDirectory, const std::locale& _loc) : loc(_loc)
-    {
-		init(domain, moDirectory);
-	}
 
 	/**
 	 * @brief Create a translator from a locale or language name.
@@ -60,15 +65,9 @@ public:
      */
      Translator(const std::string& domain, const std::string& moDirectory, const std::string& localeName)
      {
-     	loc = std::locale(localeName.c_str());
+     	loc = tryLocale(localeName);
      	init(domain, moDirectory);
 	 }
-	
-    /** Destructor */
-    ~Translator()
-    {
-    	iconv_close(iconvDesc);
-    }
 	 
 	/**
 	 * @brief Translate input message.
@@ -90,16 +89,30 @@ public:
 	 	return UTF8stringToWstring(translateUTF8(s));
 	 }	 
 	 
+	 /**
+	  * @brief Get translator locale name. This name can be used to create a translator.
+	  * @return Locale name e.g "fr_FR"
+	  */
+	 std::string getLocaleName(void)
+	 {
+	 	return loc.name();
+	 }
+	 
+	 /** Used as a global translator by the whole app */
+	 static Translator globalTranslator;
+	 
 private:
+	//! @brief Create a locale from locale name.
+	//! If the locale cannot be created, try different names until one work. If none work fall back to "C" locale.
+	//! @param localeName Locale name e.g fr_FR, fr_FR.utf8, french etc..
+	//! @return std::locale matching with the locale name
+	static std::locale tryLocale(const string& localeName);	
 	
 	/** The locale internally used */
 	std::locale loc;
 	
 	/** The messages facet, it is pointing on an object internal to loc and therefore desn't need to be de-allocated */
 	const std::messages<char>* msg;
-	
-	/** The iconv conversion descriptor from UTF-8 to wchar_t */
-	iconv_t iconvDesc;
 	
 	/** The catalog to use */
 	std::messages_base::catalog cat;
@@ -108,23 +121,8 @@ private:
 	void init(const std::string& domain, const std::string& moDirectory);
 	
 	/** Convert from UTF-8 to wchar_t */
-	std::wstring UTF8stringToWstring(const string& s)
-	{
-		size_t inbytesleft = s.length();
-		char* inbuf = new char[inbytesleft];
-		char* inbufsav = inbuf;
-		strcpy(inbuf, s.c_str());
-		// In the maximum case there is one wchar_t per char (e.g for an ASCII string)
-		size_t outbytesleft = (inbytesleft)*sizeof(wchar_t);
-		wchar_t* outbuf = new wchar_t[outbytesleft];
-		wchar_t* outbufsav = outbuf;
-		size_t n = iconv(iconvDesc, &inbuf, &inbytesleft, (char**)&outbuf, &outbytesleft);
-		assert(n != (size_t) (-1));
-		std::wstring ws(outbufsav);
-		delete[]inbufsav;
-		delete[]outbufsav;
-		return ws;
-	}
+	std::wstring UTF8stringToWstring(const string& s);
+
 };
 
 #endif

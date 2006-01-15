@@ -25,7 +25,7 @@
 #include "s_font.h"
 #include "navigator.h"
 #include "stel_sdl.h"
-
+#include <locale>
 #define RADIUS_NEB 1.
 
 NebulaMgr::NebulaMgr() :
@@ -322,7 +322,8 @@ StelObject * NebulaMgr::searchMessier(unsigned int M)
 // read from stream
 bool NebulaMgr::read_NGC_catalog(const string& fileName, LoadingBar& lb)
 {
-	char recordstr[512], tmpstr[512];
+	char recordstr[512];
+	wchar_t tmpstr[512];
 	string dataDir = fileName;
 	unsigned int catalogSize, i;
 	unsigned int data_drop;
@@ -333,12 +334,12 @@ bool NebulaMgr::read_NGC_catalog(const string& fileName, LoadingBar& lb)
 	if (loc != string::npos)
 		dataDir = dataDir.substr(0,loc+1);
 
-    cout << _("Loading NGC data...");
+    cout << "Loading NGC data... ";
 	string ngcData = dataDir + "ngc2000.dat";
     FILE * ngcFile = fopen(ngcData.c_str(),"rb");
     if (!ngcFile)
     {
-        cout << "NGC data file " << ngcData << " not found" << endl;
+        cerr << "NGC data file " << ngcData << " not found" << endl;
 		return false;
     }
 
@@ -355,7 +356,7 @@ bool NebulaMgr::read_NGC_catalog(const string& fileName, LoadingBar& lb)
 		if (!(i%200) || (i == catalogSize-1))
 		{
 			// Draw loading bar
-			snprintf(tmpstr, 512, _("Loading NGC catalog: %d/%d"), i == catalogSize-1 ? catalogSize : i, catalogSize);
+			swprintf(tmpstr, 512, _("Loading NGC catalog: %d/%d"), i == catalogSize-1 ? catalogSize : i, catalogSize);
 			lb.SetMessage(tmpstr);
 			lb.Draw((float)i/catalogSize);
 		}
@@ -363,7 +364,7 @@ bool NebulaMgr::read_NGC_catalog(const string& fileName, LoadingBar& lb)
 		int temp = e->read_NGC(recordstr);
 		if (!temp) // reading error
 		{
-			cout << "Error while parsing nebula " << e->name << endl;
+			cerr << "Error while parsing nebula " << e->englishName << endl;
 			delete e;
 			e = NULL;
 			data_drop++;
@@ -375,14 +376,14 @@ bool NebulaMgr::read_NGC_catalog(const string& fileName, LoadingBar& lb)
 		i++;
 	}
     fclose(ngcFile);
-	cout << "(" << i << " items loaded [" << data_drop << " dropped])" << endl;
 
-    cout << _("Loading NGC name data...");
+	printf("(%d items loaded [%d dropped])\n", i, data_drop);
+    cout << "Loading NGC name data..." << endl;
 	string ngcNameData = dataDir + "ngc2000names.dat";
     FILE * ngcNameFile = fopen(ngcNameData.c_str(),"rb");
     if (!ngcNameFile)
     {
-        cout << "NGC name data file " << ngcNameData << " not found" << endl;
+        cerr << "NGC name data file " << ngcNameData << " not found." << endl;
 		return false;
     }
     
@@ -429,26 +430,26 @@ bool NebulaMgr::read_NGC_catalog(const string& fileName, LoadingBar& lb)
 				
 				iss >> num;
 				oss << "M" << num;
-				e->name = oss.str();
+				e->englishName = oss.str();
 
 				oss << "-" << old;
 				string check = oss.str();
-				e->longname = oss.str();
+				e->englishLongName = oss.str();
 				e->Messier_nb = num;
 			}
 			else
 			{
 				ostringstream oss;
 				oss << name << "-" << string(n);
-				e->longname = oss.str();
+				e->englishLongName = oss.str();
 			}
 		}
 		else
-			cout << endl << "...no position data for " << name;
+			cerr << endl << "...no position data for " << name;
 		i++;
 	}
     fclose(ngcNameFile);
-	cout << "(" << i << " items loaded)" << endl;
+	cout << "( " << i << "items loaded)" << endl;
 
 	return true;
 }
@@ -456,7 +457,8 @@ bool NebulaMgr::read_NGC_catalog(const string& fileName, LoadingBar& lb)
 // read from stream
 bool NebulaMgr::read_Sharpless_catalog(const string& fileName, LoadingBar& lb)
 {
-	char recordstr[512], tmpstr[512];
+	char recordstr[512];
+	wchar_t tmpstr[512];
 	string dataDir = fileName;
 	unsigned int catalogSize, i;
 	unsigned int data_drop;
@@ -467,12 +469,12 @@ bool NebulaMgr::read_Sharpless_catalog(const string& fileName, LoadingBar& lb)
 	if (loc != string::npos)
 		dataDir = dataDir.substr(0,loc+1);
 
-    cout << _("Loading Sharpless data...");
+    cout << "Loading Sharpless data...";
 	string SharplessData = dataDir + "sharpless.dat";
     FILE * SharplessFile = fopen(SharplessData.c_str(),"rb");
     if (!SharplessFile)
     {
-        cout << "Sharpless data file " << SharplessData << " not found" << endl;
+        cerr << "Sharpless data file " << SharplessData << " not found" << endl;
 		return false;
     }
 
@@ -489,7 +491,7 @@ bool NebulaMgr::read_Sharpless_catalog(const string& fileName, LoadingBar& lb)
 		if (!(i%200) || (i == catalogSize-1))
 		{
 			// Draw loading bar
-			snprintf(tmpstr, 512, _("Loading Sharpless catalog: %d/%d"), i == catalogSize-1 ? catalogSize : i, catalogSize);
+			swprintf(tmpstr, 512, _("Loading Sharpless catalog: %d/%d"), i == catalogSize-1 ? catalogSize : i, catalogSize);
 			lb.SetMessage(tmpstr);
 			lb.Draw((float)i/catalogSize);
 		}
@@ -497,7 +499,7 @@ bool NebulaMgr::read_Sharpless_catalog(const string& fileName, LoadingBar& lb)
 		int temp = e->read_Sharpless(recordstr);
 		if (!temp) // reading error
 		{
-			cout << "Error while parsing Sharpless nebula " << e->name << endl;
+			cerr << "Error while parsing Sharpless nebula " << e->englishName << endl;
 			delete e;
 			e = NULL;
 			data_drop++;
@@ -509,7 +511,7 @@ bool NebulaMgr::read_Sharpless_catalog(const string& fileName, LoadingBar& lb)
 		i++;
 	}
     fclose(SharplessFile);
-	cout << "(" << i << " items loaded [" << data_drop << " dropped])" << endl;
+	printf("(%d items loaded [%d dropped])\n", i, data_drop);
 
 	return true;
 }
@@ -517,7 +519,8 @@ bool NebulaMgr::read_Sharpless_catalog(const string& fileName, LoadingBar& lb)
 // read from stream
 bool NebulaMgr::read_Cadwell_catalog(const string& fileName, LoadingBar& lb)
 {
-	char recordstr[512], tmpstr[512];
+	char recordstr[512];
+	wchar_t tmpstr[512];
 	string dataDir = fileName;
 	unsigned int catalogSize, i;
 	unsigned int data_drop;
@@ -530,12 +533,12 @@ bool NebulaMgr::read_Cadwell_catalog(const string& fileName, LoadingBar& lb)
 	if (loc != string::npos)
 		dataDir = dataDir.substr(0,loc+1);
 
-    cout << _("Loading Cadwell reference data...");
+    cout << "Loading Cadwell reference data...";
 	string CadwellData = dataDir + "cadwell.dat";
     FILE * CadwellFile = fopen(CadwellData.c_str(),"rb");
     if (!CadwellFile)
     {
-        cout << "Cadwell data file " << CadwellData << " not found" << endl;
+        cerr << "Cadwell data file " << CadwellData << " not found" << endl;
 		return false;
     }
 
@@ -553,7 +556,7 @@ bool NebulaMgr::read_Cadwell_catalog(const string& fileName, LoadingBar& lb)
 		if (!(i%200) || (i == catalogSize-1))
 		{
 			// Draw loading bar
-			snprintf(tmpstr, 512, _("Loading Cadwell catalog: %d/%d"), i == catalogSize-1 ? catalogSize : i, catalogSize);
+			swprintf(tmpstr, 512, _("Loading Cadwell catalog: %d/%d"), i == catalogSize-1 ? catalogSize : i, catalogSize);
 			lb.SetMessage(tmpstr);
 			lb.Draw((float)i/catalogSize);
 		}
@@ -573,7 +576,7 @@ bool NebulaMgr::read_Cadwell_catalog(const string& fileName, LoadingBar& lb)
 			
 		if (!e)
 		{
-			cout << "Error reading line " << i << ":" << recordstr << endl;
+			cerr << "Error reading line " << i << ":" << recordstr << endl;
 		} 
 		else
 		{
@@ -606,31 +609,33 @@ bool NebulaMgr::read_Cadwell_catalog(const string& fileName, LoadingBar& lb)
 				if (e->luminance < 0) e->luminance = .0075;
 
 				ss >> name;
-				e->name = name;
-				e->longname = name;
-				ss >> e->typeDesc;
+				e->englishName = name;
+				e->englishLongName = name;
 				
-				if (e->typeDesc == "Oc") { e->nType = Nebula::NEB_OC; e->typeDesc = "Oc"; }
-				else { e->nType = Nebula::NEB_UNKNOWN; e->typeDesc = ""; }
+				string typeDesc;
+				ss >> typeDesc;
+				
+				if (typeDesc == "Oc") { e->nType = Nebula::NEB_OC;}
+				else { e->nType = Nebula::NEB_UNKNOWN; }
 
 				neb_array.push_back(e);
 			}
 		}
 	}
     fclose(CadwellFile);
-	cout << "(" << i << " items loaded [" << data_drop << " dropped])" << endl;
+	printf("(%d items loaded [%d dropped])\n", i, data_drop);
 
 	return true;
 }
 
 bool NebulaMgr::read_messier_textures(const string& fileName, LoadingBar& lb)
 {	
-	cout << _("Loading Messier textures...");
+	cout << "Loading Messier textures...";
 	
 	std::ifstream inf(fileName.c_str());
 	if (!inf.is_open())
 	{
-		cout << "Can't open nebula catalog " << fileName << endl;
+		cerr << "Can't open nebula catalog " << fileName << endl;
 		return false;
 	}
 	
@@ -644,16 +649,16 @@ bool NebulaMgr::read_messier_textures(const string& fileName, LoadingBar& lb)
 	inf.clear();
 	inf.seekg(0);
 	
-	cout << "(" << total << _(" deep space objects)") << endl;
+	printf("(%d deep space objects)\n", total);
 	
 	int current = 0;
 	int NGC;
-	char tmpstr[512];
+	wchar_t tmpstr[512];
 	while(!getline(inf, record).eof())
 	{
 		// Draw loading bar
 		++current;
-		snprintf(tmpstr, 512, _("Loading Nebula Textures: %d/%d"), current, total);
+		swprintf(tmpstr, 512, _("Loading Nebula Textures: %d/%d"), current, total);
 		lb.SetMessage(tmpstr);
 		lb.Draw((float)current/total);
 		
@@ -664,7 +669,7 @@ bool NebulaMgr::read_messier_textures(const string& fileName, LoadingBar& lb)
 		if (e)
 		{
 			if (!e->read(record)) // reading error
-				cout << "Error while parsing messier nebula " << e->name << endl;
+				cerr << "Error while parsing messier nebula " << e->englishName << endl;
 		}
 	}
 	return true;

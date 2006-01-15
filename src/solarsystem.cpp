@@ -70,7 +70,7 @@ SolarSystem::~SolarSystem()
 // Init and load the solar system data
 void SolarSystem::load(const string& planetfile)
 {
-	cout << _("Loading Solar System data...");
+	cout << "Loading Solar System data...";
 	InitParser pd;	// The Planet data ini file parser
 	pd.load(planetfile);
 
@@ -379,7 +379,7 @@ Planet* SolarSystem::searchByEnglishName(string planetEnglishName) {
 	return NULL;
 }
 
-Planet* SolarSystem::searchByNamesI18(string planetNameI18) {
+Planet* SolarSystem::searchByNamesI18(wstring planetNameI18) {
 
 	// side effect - bad?
 	transform(planetNameI18.begin(), planetNameI18.end(), planetNameI18.begin(), ::tolower);
@@ -447,22 +447,22 @@ vector<StelObject*> SolarSystem::search_around(Vec3d v, double lim_fov, const Na
 
 //! @brief Update i18 names from english names according to current locale
 //! The translation is done using gettext with translated strings defined in translations.h
-void SolarSystem::translateNames()
+void SolarSystem::translateNames(Translator& trans)
 {
 	vector<Planet*>::iterator iter;      
 	for( iter = system_planets.begin(); iter < system_planets.end(); iter++ )
 	{
-		(*iter)->nameI18 = gettext((*iter)->englishName.c_str());
+		(*iter)->nameI18 = trans.translate((*iter)->englishName.c_str());
 	}
 }
 
-vector<string> SolarSystem::getNamesI18(void)
+vector<wstring> SolarSystem::getNamesI18(void)
 {
-    vector<string> names;
+    vector<wstring> names;
 	vector < Planet * >::iterator iter;
 
 	for (iter = system_planets.begin(); iter != system_planets.end(); ++iter)
-        names.push_back((*iter)->getEnglishName());
+        names.push_back((*iter)->getNameI18());
     return names;
 }
 

@@ -39,7 +39,8 @@ public:
     virtual ~s_font() {;}
     
     void print(float x, float y, const string& s, int upsidedown = 1) {typeFace.render(StelUtility::stringToWstring(s), Vec2f(x, y), upsidedown==1);}
-
+	void print(float x, float y, const wstring& ws, int upsidedown = 1) {typeFace.render(ws, Vec2f(x, y), upsidedown==1);}
+	
 	void print_char(const wchar_t c) {
 		wchar_t wc[] = L"xx";
 		wc[0] = c;
