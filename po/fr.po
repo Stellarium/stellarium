@@ -1,7 +1,7 @@
 # translation of fr.po to
 # French translations for stellarium package
 # Traduction anglaise du package stellarium.
-# Copyright (C) 2004, 2005 Free Software Foundation, Inc.
+# Copyright (C) 2004, 2005, 2006 Free Software Foundation, Inc.
 # This file is distributed under the same license as the stellarium package.
 # Fabien Chéreau, 2005.
 # Fabien Chéreau, 2005.
@@ -18,15 +18,22 @@
 # Fabien Chéreau, 2005.
 # Fabien Chéreau, 2005.
 # Fabien Chéreau, 2005.
-#  <stellarium@free.fr>, 2004.
 # Fabien Chéreau, 2005.
+# Fabien Chéreau, 2006.
+# Fabien Chéreau, 2006.
+# Fabien Chéreau, 2006.
+# Fabien Chéreau, 2006.
+# Fabien Chéreau, 2006.
+# Fabien Chéreau, 2006.
+#  <stellarium@free.fr>, 2004.
+# Fabien Chéreau, 2006.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: stellarium@free.fr\n"
-"POT-Creation-Date: 2005-12-21 00:29+0100\n"
-"PO-Revision-Date: 2005-12-15 19:36+0100\n"
+"POT-Creation-Date: 2006-01-15 18:13+0100\n"
+"PO-Revision-Date: 2006-01-15 18:47+0100\n"
 "Last-Translator: Fabien Chéreau\n"
 "Language-Team:  <fr@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -35,18 +42,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: KBabel 1.10.2\n"
 
-#: src/main.cpp:52
-#, c-format
-msgid ""
-"Please check last version and send bug report & comments \n"
-"on stellarium web page : http://www.stellarium.org\n"
-"\n"
-msgstr ""
-"Téléchargez la dernière version et envoyez vos rapports de \n"
-"bogues sur la page web de stellarium : http://www.stellarium.org\n"
-"\n"
-
-#: src/main.cpp:60
+#: src/main.cpp:54
 #, c-format
 msgid ""
 "Usage: %s [OPTION] ...\n"
@@ -57,303 +53,234 @@ msgstr ""
 " -v, --version          Affiche les informations de version et quitte.\n"
 " -h, --help             Affiche cette aide et quitte.\n"
 
-#: src/main.cpp:84
+#: src/main.cpp:78
 #, c-format
 msgid "%s: Bad command line argument(s)\n"
 msgstr "%s: Mauvais argument(s) sur la ligne de commande\n"
 
-#: src/main.cpp:85
+#: src/main.cpp:79
 #, c-format
 msgid "Try `%s --help' for more information.\n"
 msgstr "Essayez `%s --help' pour plus d'information.\n"
 
-#: src/main.cpp:127
-#, c-format
-msgid ""
-"ERROR : I can't find the datas directories in :\n"
-"%s/ nor in ./ nor in ../\n"
-"You may fully install the software (type \"make install\" on POSIX systems)\n"
-"or launch the application from the stellarium package directory.\n"
-msgstr ""
-"ERREUR : Je ne peux pas trouver les répertoires de données (data) dans :\n"
-"%s/ ni dans ./ ni dans ../\n"
-"Vous pouvez installer complètement le programme (tapez \"make install\" sur "
-"un système POSIX)\n"
-"ou lancer l'application du répertoire où est installé stellarium.\n"
-
-#: src/main.cpp:170
-#, c-format
-msgid "> Found data files in %s : local version.\n"
-msgstr "> Trouvé les fichiers de donnée dans %s : version locale.\n"
-
-#: src/main.cpp:188
-#, c-format
-msgid "Will create config files in %s\n"
-msgstr "Va créer les fichiers de config dans %s\n"
-
-#: src/main.cpp:196
-#, c-format
-msgid "Try to create directory %s\n"
-msgstr "Essai de créer le répertoire %s\n"
-
-#: src/main.cpp:205
-#, c-format
-msgid ""
-"Can't create the file %sconfig.ini\n"
-"If the directory %s is missing please create it by hand.\n"
-"If not, check that you have access to %s\n"
-msgstr ""
-"Ne peux pas créer le fichier %sconfig.ini\n"
-"Si le répertoire %s est manquant, créez le à la main SVP..\n"
-"Sinon, vérifiez que vous avez accès à %s\n"
-
-#: src/draw.cpp:425 src/draw.cpp:523 src/translations.h:62
-msgid "N"
-msgstr "N"
-
-#: src/draw.cpp:426 src/draw.cpp:524 src/translations.h:63
-msgid "S"
-msgstr "S"
-
-#: src/draw.cpp:427 src/draw.cpp:525 src/translations.h:64
-msgid "E"
-msgstr "E"
-
-#: src/draw.cpp:428 src/draw.cpp:526 src/translations.h:65
-msgid "W"
-msgstr "O"
-
-#: src/constellation_mgr.cpp:99
-#, c-format
-msgid "ERROR on line %d of %s\n"
-msgstr "ERREUR à la ligne %d de %s\n"
-
-#: src/constellation_mgr.cpp:148
+#: src/constellation_mgr.cpp:150
 #, c-format
 msgid "Loading Constellation Art: %d/%d"
 msgstr "Chargement des Images Constellations : %d/%d"
 
-#: src/constellation_mgr.cpp:539
-msgid "Loading Constellation boundary data..."
-msgstr "Chargement des limites des Constellations..."
+#: src/hip_star.cpp:77 src/nebula.cpp:71 src/planet.cpp:80
+msgid "Name : "
+msgstr "Nom : "
 
-#: src/hip_star_mgr.cpp:132 src/hip_star_mgr.cpp:1147
-#, c-format
-msgid "Loading Hipparcos star data..."
-msgstr "Chargement du catalogue d'étoiles Hipparcos..."
+#: src/hip_star.cpp:88
+msgid "(Dbl)"
+msgstr "(Bbl)"
 
-#: src/hip_star_mgr.cpp:173
+#: src/hip_star.cpp:89
+msgid "(Var)"
+msgstr "(Var)"
+
+#: src/hip_star.cpp:104 src/nebula.cpp:78 src/planet.cpp:90
+msgid "RA : "
+msgstr "AD : "
+
+#: src/hip_star.cpp:105 src/nebula.cpp:79 src/planet.cpp:91
+msgid "DE : "
+msgstr "DE : "
+
+#: src/hip_star.cpp:107
+msgid "Spectral : "
+msgstr "Spectral : "
+
+#: src/hip_star.cpp:110 src/nebula.cpp:83 src/planet.cpp:94
+msgid "Magnitude : "
+msgstr "Magnitude : "
+
+#: src/hip_star.cpp:111 src/planet.cpp:96
+msgid "Distance : "
+msgstr "Distance : "
+
+#: src/hip_star.cpp:115
+msgid " Light Years"
+msgstr " Années Lumière"
+
+#: src/hip_star.cpp:123 src/nebula.cpp:93 src/planet.cpp:104
+msgid "Az  : "
+msgstr "Az  : "
+
+#: src/hip_star.cpp:124 src/nebula.cpp:94 src/planet.cpp:105
+msgid "Alt : "
+msgstr "Alt : "
+
+#: src/hip_star.cpp:142 src/nebula.cpp:111 src/planet.cpp:120
+msgid ": mag "
+msgstr ": mag "
+
+#: src/hip_star.cpp:143
+msgid "ly"
+msgstr "al"
+
+#: src/hip_star_mgr.cpp:177
 #, c-format
 msgid "Loading Hipparcos catalog: %d/%d"
 msgstr "Chargement du catalogue d'étoiles Hipparcos : %d/%d"
 
-#: src/hip_star_mgr.cpp:601 src/hip_star_mgr.cpp:676
-msgid "Loading Hipparcos double stars..."
-msgstr "Chargement des étoiles doubles Hipparcos..."
-
-#: src/hip_star_mgr.cpp:720
-msgid "Loading Hipparcos periodic variable stars..."
-msgstr "Chargement des étoiles variables Hipparcos..."
-
-#: src/hip_star_mgr.cpp:802 src/hip_star_mgr.cpp:1466
-msgid "Loading Hipparcos/SAO star data..."
-msgstr "Chargement du catalogue d'étoiles Hipparcos/SAO..."
-
-#: src/hip_star_mgr.cpp:860 src/hip_star_mgr.cpp:1527
+#: src/hip_star_mgr.cpp:861 src/hip_star_mgr.cpp:1528
 #, c-format
 msgid "Loading HIP/SAO catalogs: %d/%d"
 msgstr "Loading des catalogues HIP/SAO: %d/%d"
 
-#: src/hip_star_mgr.cpp:1203
+#: src/hip_star_mgr.cpp:1204
 #, c-format
 msgid "Loading HIP catalog: %d/%d"
 msgstr "Chargement du catalogue HIP: %d/%d"
 
-#: src/hip_star_mgr.cpp:1232
-msgid "Loading SAO star data "
-msgstr "Chargement des données d'étoiles SAO..."
-
-#: src/hip_star_mgr.cpp:1298
+#: src/hip_star_mgr.cpp:1299
 #, c-format
 msgid "Loading SAO catalog: %d/%d"
 msgstr "Chargement du catalogue NGC: %d/%d"
 
-#: src/hip_star_mgr.cpp:1341
-msgid "Loading star name data "
-msgstr "Chargement des noms d'étoiles..."
+#: src/nebula.cpp:72
+msgid "Cat: NGC "
+msgstr "Cat: NGC "
 
-#: src/nebula_mgr.cpp:336
-msgid "Loading NGC data..."
-msgstr "Chargement des données NGC..."
+#: src/nebula.cpp:84
+msgid "Type : "
+msgstr "Type : "
 
-#: src/nebula_mgr.cpp:358
+#: src/nebula.cpp:85
+msgid "Size : "
+msgstr "Taille : "
+
+#: src/nebula_mgr.cpp:359
 #, c-format
 msgid "Loading NGC catalog: %d/%d"
 msgstr "Chargement du catalogue NGC: %d/%d"
 
-#: src/nebula_mgr.cpp:380
-msgid "Loading NGC name data..."
-msgstr "Chargement des noms NGC..."
-
-#: src/nebula_mgr.cpp:470
-msgid "Loading Sharpless data..."
-msgstr "Chargement des données Sharpless..."
-
-#: src/nebula_mgr.cpp:492
+#: src/nebula_mgr.cpp:494
 #, c-format
 msgid "Loading Sharpless catalog: %d/%d"
 msgstr "Chargement du catalogue Sharpless : %d/%d"
 
-#: src/nebula_mgr.cpp:533
-msgid "Loading Cadwell reference data..."
-msgstr "Chargement des references Cadwell..."
-
-#: src/nebula_mgr.cpp:556
+#: src/nebula_mgr.cpp:559
 #, c-format
 msgid "Loading Cadwell catalog: %d/%d"
 msgstr "Chargement du catalogue Cadwell: %d/%d"
 
-#: src/nebula_mgr.cpp:628
-msgid "Loading Messier textures..."
-msgstr "Chargement des textures des objets de Messier..."
-
-#: src/nebula_mgr.cpp:647
-msgid " deep space objects)"
-msgstr " objets du ciel profond)"
-
-#: src/nebula_mgr.cpp:656
-#, fuzzy, c-format
+#: src/nebula_mgr.cpp:661
+#, c-format
 msgid "Loading Nebula Textures: %d/%d"
-msgstr "Chargement des données Nébuleuses : %d/%d"
+msgstr "Chargement des textures des Nébuleuses : %d/%d"
 
-#: src/observator.cpp:63
-#, c-format
-msgid "Loading location: \"%s\", "
-msgstr "Chargement de la position : \"%s\", "
-
-#: src/observator.cpp:75
-#, c-format
-msgid "(landscape is: \"%s\")\n"
-msgstr "(le paysage est : \"%s\")\n"
-
-#: src/observator.cpp:112
-#, c-format
-msgid "Saving location %s to file %s\n"
-msgstr "Enregistre la position %s dans le fichier %s\n"
-
-#: src/sky_localizer.cpp:201
-msgid "Using sky language from environment locale: "
-msgstr "Utilise le language des locales d'environement: "
-
-#: src/sky_localizer.cpp:204
-msgid "Did not recognize locale language code "
-msgstr "Ne reconnait pas le code language "
-
-#: src/sky_localizer.cpp:205
-msgid ". Defaulting to english sky labels\n"
-msgstr " Va utiliser les noms anglais par défaut\n"
+#: src/planet.cpp:96
+msgid "AU"
+msgstr "UA"
 
 #: src/stel_ui.cpp:161
 msgid "Message"
 msgstr "Message"
 
-#: src/stel_ui.cpp:174
-msgid "Stellarium"
-msgstr "Stellarium"
+#: src/stel_ui.cpp:251
+msgid " (UTC)"
+msgstr " (UTC)"
 
-#: src/stel_ui.cpp:472 src/stel_ui.cpp:610
+#: src/stel_ui.cpp:473 src/stel_ui.cpp:589
 msgid "Script commander"
 msgstr "Commandes de script"
 
-#: src/stel_ui.cpp:520
+#: src/stel_ui.cpp:500
 msgid "Invalid Script command"
 msgstr "Commande de script invalide"
 
-#: src/stel_ui.cpp:574
+#: src/stel_ui.cpp:553
 msgid "Drawing of the Constellations [C]"
 msgstr "Dessin des Constellations [C]"
 
-#: src/stel_ui.cpp:576
+#: src/stel_ui.cpp:555
 msgid "Names of the Constellations [V]"
 msgstr "Noms des Constellations [V]"
 
-#: src/stel_ui.cpp:578
+#: src/stel_ui.cpp:557
 msgid "Constellations Art [R]"
 msgstr "Images des Constellations [R]"
 
-#: src/stel_ui.cpp:580
+#: src/stel_ui.cpp:559
 msgid "Azimuthal Grid [Z]"
 msgstr "Grille Azimutale [Z]"
 
-#: src/stel_ui.cpp:582
+#: src/stel_ui.cpp:561
 msgid "Equatorial Grid [E]"
 msgstr "Grille Equatoriale [E]"
 
-#: src/stel_ui.cpp:584
+#: src/stel_ui.cpp:563
 msgid "Ground [G]"
 msgstr "Sol [G]"
 
-#: src/stel_ui.cpp:586
+#: src/stel_ui.cpp:565
 msgid "Cardinal Points [Q]"
 msgstr "Points Cardinaux [Q]"
 
-#: src/stel_ui.cpp:588
+#: src/stel_ui.cpp:567
 msgid "Atmosphere [A]"
 msgstr "Atmosphère [A]"
 
-#: src/stel_ui.cpp:590
+#: src/stel_ui.cpp:569
 msgid "Nebulas [N]"
 msgstr "Nébuleuses [N]"
 
-#: src/stel_ui.cpp:592
+#: src/stel_ui.cpp:571
 msgid "Help [H]"
 msgstr "Aide [H]"
 
-#: src/stel_ui.cpp:594
+#: src/stel_ui.cpp:573
 msgid "Equatorial/Altazimuthal Mount [ENTER]"
 msgstr "Monture Equatorial/Altazimutale [ENTER]"
 
-#: src/stel_ui.cpp:596
+#: src/stel_ui.cpp:575
 msgid "Configuration window"
 msgstr "Fenêtre de configuration"
 
-#: src/stel_ui.cpp:600
+#: src/stel_ui.cpp:577
+msgid "Chart mode"
+msgstr "Mode Carte"
+
+#: src/stel_ui.cpp:579
 msgid "Night (red) mode"
 msgstr "Mode vision de nuit (rouge)"
 
-#: src/stel_ui.cpp:603
+#: src/stel_ui.cpp:582
 msgid "Quit [CTRL + Q]"
 msgstr "Quitte [CTRL + Q]"
 
-#: src/stel_ui.cpp:605
+#: src/stel_ui.cpp:584
 msgid "Quit [CMD + Q]"
 msgstr "Quitte [CMD + Q]"
 
-#: src/stel_ui.cpp:608
+#: src/stel_ui.cpp:587
 msgid "Search for object"
 msgstr "Chercher un objet"
 
-#: src/stel_ui.cpp:612
+#: src/stel_ui.cpp:591
 msgid "Goto selected object [SPACE]"
 msgstr "Va à l'objet sélectionné [ESPACE]"
 
-#: src/stel_ui.cpp:618
+#: src/stel_ui.cpp:597
 msgid "Decrease Time Speed [J]"
 msgstr "Ralenti le Temps [J]"
 
-#: src/stel_ui.cpp:620
+#: src/stel_ui.cpp:599
 msgid "Real Time Speed [K]"
 msgstr "Vitesse Temps Réel [K]"
 
-#: src/stel_ui.cpp:622
+#: src/stel_ui.cpp:601
 msgid "Increase Time Speed [L]"
 msgstr "Accélère le Temps [L]"
 
-#: src/stel_ui.cpp:624
+#: src/stel_ui.cpp:603
 msgid "Return to Current Time"
 msgstr "Revient au Temps Actuel"
 
-#: src/stel_ui.cpp:633
+#: src/stel_ui.cpp:612
 msgid ""
 "   Please check for newer versions and send bug reports\n"
 "and comments to us at: http://stellarium.sourceforge.net\n"
@@ -363,11 +290,11 @@ msgstr ""
 "bogues sur : http://stellarium.sourceforge.net\n"
 "\n"
 
-#: src/stel_ui.cpp:652
+#: src/stel_ui.cpp:631
 msgid "Information"
 msgstr "Information"
 
-#: src/stel_ui.cpp:665
+#: src/stel_ui.cpp:643
 msgid ""
 "Movement & selection:\n"
 "Arrow Keys       : Change viewing RA/DE\n"
@@ -380,65 +307,128 @@ msgid ""
 "/                : Zoom to selected object\n"
 "SPACE            : Center on selected object\n"
 "\n"
+msgstr ""
+"Mouvement & sélection:\n"
+"Flèches          : Change vue AD/DE\n"
+"Page Up/Down     : Zoom\n"
+"CTRL+Up/Down     : Zoom\n"
+"Clic gauche      : Sélectionne objet\n"
+"Clic droit       : Désélectionne\n"
+"CTRL+Clic gauche : Désélectionne\n"
+"\\                : Zoom arrière (planète + lunes si possible)\n"
+"/                : Zoom sur l'objet sélectionné\n"
+"ESPACE           : Centre sur l'objet sélectionné\n"
+"\n"
+
+#: src/stel_ui.cpp:654
+msgid ""
 "Display options:\n"
 "ENTER : Equatorial/altazimuthal mount\n"
 "F1  : Toggle fullscreen if possible.\n"
-"C   : Constellation lines  V   : Constellation labels\n"
-"R   : Constellation art    E   : Equatorial grid\n"
-"Z   : Azimuthal grid       N   : Nebula labels\n"
-"P   : Planet labels        G   : Ground\n"
-"A   : Atmosphere           F   : Fog\n"
-"Q   : Cardinal points      O   : Toggle moon scaling\n"
-"T   : Object tracking      S   : Stars\n"
-"4 , : Ecliptic line        5 . : Equator line\n"
+"C   : Constellation lines       V   : Constellation labels\n"
+"R   : Constellation art         E   : Equatorial grid\n"
+"Z   : Azimuthal grid            N   : Nebula labels\n"
+"P   : Planet labels             G   : Ground\n"
+"A   : Atmosphere                F   : Fog\n"
+"Q   : Cardinal points           O   : Toggle moon scaling\n"
+"T   : Object tracking           S   : Stars\n"
+"4 , : Ecliptic line             5 . : Equator line\n"
 "\n"
+msgstr ""
+"Options d'affichage:\n"
+"ENTREE : Monture Equatoriale/altazimuthale\n"
+"F1  : Alterne Plein Ecran si possible.\n"
+"C   : Lignes des Constellations V   : Labels des Constellations\n"
+"R   : Images des Constellations E   : Grille Equatoriale\n"
+"Z   : Grille Azimuthale         N   : Lebels des Nébuleuses\n"
+"P   : Labels des Planètes       G   : Sol\n"
+"A   : Atmosphère                F   : Brume\n"
+"Q   : Points Cardinaux          O   : Alterne Grossissement de la lune\n"
+"T   : Suivi des objets          S   : Etoiles\n"
+"4 , : Ligne de l'Ecliptique     5 . : Ligne de l'Equateur Céleste\n"
+"\n"
+
+#: src/stel_ui.cpp:666
+msgid ""
 "Dialogs & other controls:\n"
-"H   : Help                 I   : About Stellarium\n"
-"M   : Text menu            1 (one)  : Configuration\n"
+"H   : Help                      I   : About Stellarium\n"
+"M   : Text menu                 1 (one)  : Configuration\n"
 "CTRL + S : Take a screenshot\n"
 "CTRL + R : Toggle script recording\n"
 "CTRL + F : Toggle object finder\n"
 "\n"
-"Time & Date:\n"
-"6   : Time rate pause      7   : Time rate 0\n"
-"8   : Set current time     J   : Decrease time rate\n"
-"K   : Normal time rate     L   : Increase time rate\n"
-"-   : Back 24 hours        =   : Forward 24 hours\n"
-"[   : Back 7 days          ]   : Forward 7 days\n"
+msgstr ""
+"Dialogues & autres controles:\n"
+"H   : Aide                      I   : A propos de Stellarium\n"
+"M   : Menu textuel              1 (one)  : Configuration\n"
+"CTRL + S : Prend une capture d'écran\n"
+"CTRL + R : Alterne l'enregistrement du script\n"
+"CTRL + F : Alterne l'affichage du chercheur d object\n"
 "\n"
+
+#: src/stel_ui.cpp:673
+msgid ""
+"Time & Date:\n"
+"6   : Time rate pause           7   : Time rate 0\n"
+"8   : Set current time          J   : Decrease time rate\n"
+"K   : Normal time rate          L   : Increase time rate\n"
+"-   : Back 24 hours             =   : Forward 24 hours\n"
+"[   : Back 7 days               ]   : Forward 7 days\n"
+"\n"
+msgstr ""
+"Temps & Date:\n"
+"6   : Arrête le temps           7   : Vitesse du Temps 0\n"
+"8   : Va au temps actuel        J   : Ralenti le temps\n"
+"K   : Vitesse temps réel        L   : Accélère le temps\n"
+"-   : 24 heures en arrière      =   : 24 heures en avant\n"
+"[   : 7 jours en arrière        ]   : 7 jours en avant\n"
+"\n"
+
+#: src/stel_ui.cpp:680
+msgid ""
 "During Script Playback:\n"
 "CTRL + C : End Script\n"
-"6   : pause script         K   : resume script\n"
+"6   : pause script              K   : resume script\n"
 "\n"
+msgstr ""
+"Pendant la lecture d'un script:\n"
+"CTRL + C : Arrête le script\n"
+"6   : Met le script en pause    K   : Relance le script\n"
+"\n"
+
+#: src/stel_ui.cpp:684
+msgid ""
 "Misc:\n"
 "9   : Toggle meteor shower rates\n"
 msgstr ""
+"Autres:\n"
+"9   : Alterne la fréquence des pluies d'étoiles filantes\n"
 
-#: src/stel_ui.cpp:710
+#: src/stel_ui.cpp:687
 msgid "CTRL + Q : Quit\n"
 msgstr "CTRL+Q : Quitte\n"
 
-#: src/stel_ui.cpp:712
+#: src/stel_ui.cpp:689
 msgid "CMD + Q  : Quit\n"
 msgstr "CMD+Q : Quitte\n"
 
-#: src/stel_ui.cpp:719
+#: src/stel_ui.cpp:695
 msgid "Help"
 msgstr "Aide"
 
-#: src/stel_ui.cpp:1064
+#: src/stel_ui.cpp:1040
 msgid "Command recording stopped."
 msgstr "Enregistrement des commandes arrêté."
 
-#: src/stel_ui.cpp:1072
+#: src/stel_ui.cpp:1048
 msgid "Recording commands to script file:\n"
 msgstr "Enregistre les commandes sur le fichier script:\n"
 
-#: src/stel_ui.cpp:1074
+#: src/stel_ui.cpp:1050
 msgid "Hit CTRL-R again to stop.\n"
 msgstr "Appuyez sur CTRL-R à nouveau pour arrêter.\n"
 
-#: src/stel_ui.cpp:1078
+#: src/stel_ui.cpp:1054
 msgid "Error: Unable to open script file to record commands."
 msgstr ""
 "Erreur: Impossible d'ouvrir le fichier script pour enregistrer les commandes."
@@ -447,7 +437,7 @@ msgstr ""
 msgid "Configuration"
 msgstr "Configuration"
 
-#: src/stel_ui_conf.cpp:47 src/stel_ui_conf.cpp:685
+#: src/stel_ui_conf.cpp:47 src/stel_ui_conf.cpp:688
 msgid "Stars"
 msgstr "Etoiles"
 
@@ -633,109 +623,61 @@ msgstr "Vidéo"
 msgid "Rendering"
 msgstr "Rendu"
 
-#: src/stel_ui_conf.cpp:426
-#, fuzzy
-msgid "Loading Cities data..."
-msgstr "Chargement des données NGC..."
-
-#: src/stel_ui_conf.cpp:510
+#: src/stel_ui_conf.cpp:513
 msgid "Object Search"
 msgstr "Recherche d'objet"
 
-#: src/stel_ui_conf.cpp:529
+#: src/stel_ui_conf.cpp:532
 msgid "Star No./Name"
 msgstr "No/Nom se l'étoile"
 
-#: src/stel_ui_conf.cpp:533
+#: src/stel_ui_conf.cpp:536
 msgid "eg. 60718 (aCrux) or Canopus"
 msgstr "ex. 60718 (aCrux) ou Canopus"
 
-#: src/stel_ui_conf.cpp:534
+#: src/stel_ui_conf.cpp:537
 msgid "HP 60718, HD 108248, SAO 251904"
 msgstr "HP 60718, HD 108248, SAO 251904"
 
-#: src/stel_ui_conf.cpp:555 src/stel_ui_conf.cpp:686
+#: src/stel_ui_conf.cpp:558 src/stel_ui_conf.cpp:689
 msgid "Constellation"
 msgstr "Constellation"
 
-#: src/stel_ui_conf.cpp:559
+#: src/stel_ui_conf.cpp:562
 msgid "eg. Crux"
 msgstr "ex. Croix du Sud"
 
-#: src/stel_ui_conf.cpp:578 src/stel_ui_conf.cpp:687
+#: src/stel_ui_conf.cpp:581 src/stel_ui_conf.cpp:690
 msgid "Nebula"
 msgstr "Nébuleuse"
 
-#: src/stel_ui_conf.cpp:582
+#: src/stel_ui_conf.cpp:585
 msgid "eg. M83, NGC 7009, IC 2118"
 msgstr "ex. M83, NGC 7009, IC 2118"
 
-#: src/stel_ui_conf.cpp:583
+#: src/stel_ui_conf.cpp:586
 msgid "CW 113, SH 40"
 msgstr "CW 113, SH 40"
 
-#: src/stel_ui_conf.cpp:668
+#: src/stel_ui_conf.cpp:671
 msgid "Planet/Moon"
 msgstr "Planète/Lune"
 
-#: src/stel_ui_conf.cpp:672
+#: src/stel_ui_conf.cpp:675
 msgid "eg. Pluto or Io"
 msgstr "ex. Pluton ou Io"
 
-#: src/stel_ui_conf.cpp:688
+#: src/stel_ui_conf.cpp:691
 msgid "Planets & Moons"
 msgstr "Planètes & Lunes"
 
-#: src/stel_ui_conf.cpp:967
-msgid "Saving rendering options in file "
-msgstr "Enregistre les options de rendu dans le fichier "
+#: src/stel_ui_conf.cpp:962
+msgid "Enter observatory name"
+msgstr "Entrez le nom de l'observatoire"
 
-#: src/stel_ui_conf.cpp:1014
-msgid "Saving video size "
-msgstr "Enregistre la taille "
-
-#: src/stel_ui_conf.cpp:1014
-msgid " in file "
-msgstr " dans le fichier "
-
-#: src/solarsystem.cpp:73
-msgid "Loading Solar System data..."
-msgstr "Chargement des données Système Solaire..."
-
-#: src/stel_core.cpp:536
-#, c-format
-msgid ""
-"The current config file is from a previous version (>=0.6.0).\n"
-"Previous options will be imported in the new config file.\n"
-msgstr ""
-"Le fichier de configuration trouvé provient d'une version précédente "
-"(>=0.6.0).\n"
-"Les options précédentes vont être importées dans le nouveau fichier de "
-"configuration.\n"
-
-#: src/stel_core.cpp:555
-#, c-format
-msgid ""
-"The current config file is from a version too old for parameters to be "
-"imported (%s).\n"
-"It will be replaced by the default config file.\n"
-msgstr ""
-"Le fichier de configuration trouvé provient d'une version trop ancienne pour "
-"être importé (%s).\n"
-"Il va être remplacé par le fichier de configuration par défaut.\n"
-
-#: src/stel_core.cpp:578
-msgid "Loading configuration file "
-msgstr "Chargement du fichier de configuration "
-
-#: src/stel_core.cpp:586
-msgid "ERROR : The current config file is from a different version ("
-msgstr ""
-"ERREUR : Le fichier de configuration actuel provient d'une autre version ("
-
-#: src/stel_core.cpp:1456
-msgid "Invalid sky culture directory: "
-msgstr "Répertoire de culture de ciel invalide:"
+#: src/stel_ui_conf.cpp:1125
+msgid " Current Time Speed is x"
+msgstr " La vistesse du temps actuelle est x"
 
 #: src/stel_ui_tuiconf.cpp:85
 msgid "Set Location "
@@ -1024,6 +966,22 @@ msgstr "Pluton"
 #: src/translations.h:59
 msgid "Charon"
 msgstr "Charon"
+
+#: src/translations.h:62
+msgid "N"
+msgstr "N"
+
+#: src/translations.h:63
+msgid "S"
+msgstr "S"
+
+#: src/translations.h:64
+msgid "E"
+msgstr "E"
+
+#: src/translations.h:65
+msgid "W"
+msgstr "O"
 
 #: src/translations.h:68
 msgid "Aquila"

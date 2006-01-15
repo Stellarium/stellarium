@@ -54,10 +54,8 @@ public:
 	HipStar *searchHD(unsigned int);	// Search the star by HD number
 	// Return a stl vector containing the stars located inside the lim_fov circle around position v
 	vector<StelObject*> search_around(Vec3d v, double lim_fov);
-	vector<string> getNames(void) { return lstCommonNames; }
-	unsigned int getCommonNameHP(string _commonname);
-	void set_starname_format(int format) { HipStar::set_starname_format(format); }
-	int get_starname_format(void) { return HipStar::get_starname_format(); }
+	vector<wstring> getNames(void) { return lstCommonNames; }
+	unsigned int getCommonNameHP(wstring _commonname);
 	void set_label_color(const Vec3f& c) {HipStar::label_color = c;}
 	void set_circle_color(const Vec3f& c) {HipStar::circle_color = c;}
 private:
@@ -105,7 +103,7 @@ private:
 	s_texture *starcTexture;			// charted interior disc
 	LinearFader names_fader;
 	float limiting_mag;                  // limiting magnitude at 60 degree fov
-	vector<string> lstCommonNames;
+	vector<wstring> lstCommonNames;
 	vector<unsigned int> lstCommonNamesHP;
 };
 

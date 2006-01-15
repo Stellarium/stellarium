@@ -46,8 +46,8 @@ Nebula::Nebula() :
 	neb_tex(NULL)
 {
 	inc_lum = rand()/RAND_MAX*M_PI;	
-	longname = "";
-	name = "";
+	longnameI18 = L"";
+	nameI18 = L"";
 }
 
 Nebula::~Nebula()
@@ -59,30 +59,30 @@ Nebula::~Nebula()
 	tex_circle = NULL;
 }
 
-string Nebula::get_info_string(const Navigator* nav) const
+wstring Nebula::get_info_string(const Navigator* nav) const
 {
 	float tempDE, tempRA;
 
 	Vec3d equPos = nav->prec_earth_equ_to_earth_equ(XYZ);
 	rect_to_sphe(&tempRA,&tempDE,equPos);
 
-	ostringstream oss;
+	wostringstream oss;
 
-	oss << "Name : " << name << endl;
-	oss << "Cat: NGC ";
-	if (NGC_nb > 0) oss << NGC_nb; else oss << "-";
-	oss << "  IC ";
-	if (IC_nb > 0) oss << IC_nb; else oss << "-";
+	oss << _("Name : ") << nameI18 << endl;
+	oss << _("Cat: NGC ");
+	if (NGC_nb > 0) oss << NGC_nb; else oss << L"-";
+	oss << L"  IC ";
+	if (IC_nb > 0) oss << IC_nb; else oss << L"-";
 	oss << endl;
 	
-	oss << "RA : " << StelUtility::printAngleHMS(tempRA) << endl;
-	oss << "DE : " << StelUtility::printAngleDMS(tempDE) << endl;
+	oss << _("RA : ") << StelUtility::printAngleHMS(tempRA) << endl;
+	oss << _("DE : ") << StelUtility::printAngleDMS(tempDE) << endl;
 
 	oss.setf(ios::fixed);
 	oss.precision(2);
-	oss << "Magnitude : " << mag << endl;
-	oss << "Type : " << string(typeDesc == "" ? "-" : typeDesc) << endl;
-	oss << "Size : " << StelUtility::printAngleDMS(angular_size*M_PI/180.) << endl; 
+	oss << _("Magnitude : ") << mag << endl;
+	oss << _("Type : ") << getTypeString() << endl;
+	oss << _("Size : ") << StelUtility::printAngleDMS(angular_size*M_PI/180.) << endl; 
 	
 	// calculate alt az
 	Vec3d localPos = nav->earth_equ_to_local(equPos);
@@ -90,25 +90,25 @@ string Nebula::get_info_string(const Navigator* nav) const
 	tempRA = 3*M_PI - tempRA;  // N is zero, E is 90 degrees
 	if(tempRA > M_PI*2) tempRA -= M_PI*2;
 
-	oss << "Az  : " << StelUtility::printAngleDMS(tempRA) << endl;
-	oss << "Alt : " << StelUtility::printAngleDMS(tempDE) << endl;
+	oss << _("Az  : ") << StelUtility::printAngleDMS(tempRA) << endl;
+	oss << _("Alt : ") << StelUtility::printAngleDMS(tempDE) << endl;
 
 
 	return oss.str();
 }
 
-string Nebula::get_short_info_string(const Navigator*) const
+wstring Nebula::get_short_info_string(const Navigator*) const
 {
-	ostringstream oss;
+	wostringstream oss;
 	
 	if(mag == 99 || mag < 4)
-		oss << name;	
+		oss << nameI18;	
 	else
 	{
-		oss << name << mag;
+		oss << nameI18 << mag;
 		oss.setf(ios::fixed);
 		oss.precision(1);
-		oss << ": mag " << mag;
+		oss << _(": mag ") << mag;
 	}
 	
 	return oss.str();
@@ -133,17 +133,17 @@ bool Nebula::read(const string& record)
 	
 	std::istringstream istr(record);
 
-	if (!(istr >> NGC_nb >> type >> rahr >> ramin >> dedeg >> demin >> mag >> tex_angular_size >> tex_rotation >> name >> longname >> tex_name >> credit)) return false ;
+	if (!(istr >> NGC_nb >> type >> rahr >> ramin >> dedeg >> demin >> mag >> tex_angular_size >> tex_rotation >> englishName >> englishLongName >> tex_name >> credit)) return false ;
 
     // Replace the "_" with " "
-    for (string::size_type i=0;i<name.length();++i)
+    for (string::size_type i=0;i<englishName.length();++i)
 	{
-		if (name[i]=='_') name[i]=' ';
+		if (englishName[i]=='_') englishName[i]=' ';
 	}
 
-    for (string::size_type i=0;i<longname.length();++i)
+    for (string::size_type i=0;i<englishLongName.length();++i)
 	{
-		if (longname[i]=='_') longname[i]=' ';
+		if (englishLongName[i]=='_') englishLongName[i]=' ';
 	}
 
 	if (credit  == "none")
@@ -188,17 +188,29 @@ bool Nebula::read(const string& record)
 	tex_quad_vertex[1] = mat_precomp * Vec3f(0., tex_size,-tex_size); // Bottom Right
 	tex_quad_vertex[2] = mat_precomp * Vec3f(0.,-tex_size, tex_size); // Bottom Right
 	tex_quad_vertex[3] = mat_precomp * Vec3f(0., tex_size, tex_size); // Bottom Right
+	
+	if (!strcmp(type,"N")) { nType = NEB_N;} // supernova remnant
+	else if (!strcmp(type,"SG")) { nType = NEB_SG;}
+	else if (!strcmp(type,"PN")) { nType = NEB_PN;}
+	else if (!strcmp(type,"LG")) { nType = NEB_LG;}
+	else if (!strcmp(type,"EG")) { nType = NEB_EG;}
+	else if (!strcmp(type,"OC")) { nType = NEB_OC;}
+	else if (!strcmp(type,"GC")) { nType = NEB_GC;}
+	else if (!strcmp(type,"DN")) { nType = NEB_DN;}
+	else if (!strcmp(type,"IG")) { nType = NEB_IG;}
+	else { nType = NEB_UNKNOWN;}
 
-	if (!strcmp(type,"N")) { nType = NEB_N; typeDesc = "Ne"; } // supernova remnant
-	else if (!strcmp(type,"SG")) { nType = NEB_SG; typeDesc = "Sg"; }
-	else if (!strcmp(type,"PN")) { nType = NEB_PN; typeDesc = "Pl"; }
-	else if (!strcmp(type,"LG")) { nType = NEB_LG; typeDesc = "Lg"; }
-	else if (!strcmp(type,"EG")) { nType = NEB_EG; typeDesc = "Eg"; }
-	else if (!strcmp(type,"OC")) { nType = NEB_OC; typeDesc = "Oc"; }
-	else if (!strcmp(type,"GC")) { nType = NEB_GC; typeDesc = "Gc"; }
-	else if (!strcmp(type,"DN")) { nType = NEB_DN; typeDesc = "Gc"; }
-	else if (!strcmp(type,"IG")) { nType = NEB_IG; typeDesc = "Ig"; }
-	else { nType = NEB_UNKNOWN; typeDesc = ""; }
+
+// 	if (!strcmp(type,"N")) { nType = NEB_N; typeDesc = "Ne"; } // supernova remnant
+// 	else if (!strcmp(type,"SG")) { nType = NEB_SG; typeDesc = "Sg"; }
+// 	else if (!strcmp(type,"PN")) { nType = NEB_PN; typeDesc = "Pl"; }
+// 	else if (!strcmp(type,"LG")) { nType = NEB_LG; typeDesc = "Lg"; }
+// 	else if (!strcmp(type,"EG")) { nType = NEB_EG; typeDesc = "Eg"; }
+// 	else if (!strcmp(type,"OC")) { nType = NEB_OC; typeDesc = "Oc"; }
+// 	else if (!strcmp(type,"GC")) { nType = NEB_GC; typeDesc = "Gc"; }
+// 	else if (!strcmp(type,"DN")) { nType = NEB_DN; typeDesc = "Gc"; }
+// 	else if (!strcmp(type,"IG")) { nType = NEB_IG; typeDesc = "Ig"; }
+// 	else { nType = NEB_UNKNOWN; typeDesc = ""; }
 /*
 	if (!strcmp(type,"N")) { nType = NEB_N; typeDesc = "Nebula"; } // supernova remnant
 	else if (!strcmp(type,"SG")) { nType = NEB_SG; typeDesc = "Spiral galaxy"; }
@@ -399,55 +411,55 @@ float Nebula::get_on_screen_size(const Projector* prj, const Navigator * nav)
 
 void Nebula::draw_name(int hint_ON, const Projector* prj)
 {
-	string nebulaname;
+	wstring nebulaname;
 	
     glColor3fv(label_color*hints_brightness);
     float size = get_on_screen_size(prj);
     float shift = 8.f + size/2.f;
 
-	if (name == "") return;
+	if (nameI18 == L"") return;
 	if (nameFormat == 0) // M83, 1234, I1234
 	{
-		if (name.c_str()[0] == 'M') nebulaname = name;
-		else if (NGC_nb) nebulaname = name.substr(4);
-		else if (IC_nb) nebulaname = "I." + name.substr(3);
-		else if (Sharpless_nb) nebulaname = "S." + name.substr(3);
+		if (nameI18.c_str()[0] == L'M') nebulaname = nameI18;
+		else if (NGC_nb) nebulaname = nameI18.substr(4);
+		else if (IC_nb) nebulaname = L"I." + nameI18.substr(3);
+		else if (Sharpless_nb) nebulaname = L"S." + nameI18.substr(3);
 		else if (Cadwell_nb)
 		{
-			ostringstream ss(nebulaname);
-			if (name != "")	ss << name << " (";
+			wostringstream ss(nebulaname);
+			if (nameI18 != L"")	ss << nameI18 << L" (";
 			ss << "C." << Cadwell_nb;
-			if (name != "")	ss <<  ")";
+			if (nameI18 != L"")	ss <<  L")";
 			nebulaname = ss.str();
 		}
 		else return;
 		if ((IC_nb || NGC_nb) && Cadwell_nb)
 		{
-			ostringstream ss(nebulaname);
-			ss << "(C." << Cadwell_nb << ")";
+			wostringstream ss(nebulaname);
+			ss << L"(C." << Cadwell_nb << L")";
 			nebulaname = ss.str();
 		}
 	}
 	else if (nameFormat == 1)
 	{
-		nebulaname = name;
+		nebulaname = nameI18;
 		if ((IC_nb || NGC_nb) && Cadwell_nb)
 		{
-			ostringstream ss(name);
-			ss << "(C." << Cadwell_nb << ")";
-			name = ss.str();
+			wostringstream ss(nameI18);
+			ss << L"(C." << Cadwell_nb << L")";
+			nameI18 = ss.str();
 		}
 	}
 	else if (nameFormat == 2)
 	{
-		if (longname != "")	nebulaname = longname;
-		else nebulaname = name;
+		if (longnameI18 != L"")	nebulaname = longnameI18;
+		else nebulaname = nameI18;
 	}
 	else if (nameFormat == 3)
 	{
-		if (longname != "")	nebulaname = longname;
-		else nebulaname = name;
-		if (typeDesc != "") nebulaname += " (" + typeDesc + ")";
+		if (longnameI18 != L"")	nebulaname = longnameI18;
+		else nebulaname = nameI18;
+		if (nType != Nebula::NEB_UNKNOWN) nebulaname += L" (" + getTypeString() + L")";
 	}
 
     if (gravity_label)
@@ -475,7 +487,7 @@ bool Nebula::read_NGC(char *recordstr)
 	int nb;
 
 	sscanf(&recordstr[1],"%d",&nb);
-	ostringstream oss;
+	wostringstream oss;
 	
 	if (recordstr[0] == 'I')
 	{
@@ -487,8 +499,8 @@ bool Nebula::read_NGC(char *recordstr)
 		NGC_nb = nb;
 		oss << "NGC " << nb;
 	}
-	name = oss.str();
-	longname = name;
+	nameI18 = oss.str();
+	longnameI18 = nameI18;
 	
 	sscanf(&recordstr[12],"%d %f",&rahr, &ramin);
 	sscanf(&recordstr[22],"%d %f",&dedeg, &demin);
@@ -524,12 +536,12 @@ bool Nebula::read_NGC(char *recordstr)
 	// this is a huge performance drag if called every frame, so cache here
 	neb_tex = NULL;
 
-	if (!strncmp(&recordstr[8],"Gx",2)) { nType = NEB_GX; typeDesc = "Gx"; }
-	else if (!strncmp(&recordstr[8],"OC",2))  { nType = NEB_OC; typeDesc = "Oc"; }
-	else if (!strncmp(&recordstr[8],"Gb",2))  { nType = NEB_GC; typeDesc = "Gb"; }
-	else if (!strncmp(&recordstr[8],"Nb",2)) { nType = NEB_N; typeDesc = "Nb"; }
-	else if (!strncmp(&recordstr[8],"Pl",2))  { nType = NEB_PN; typeDesc = "Pl"; }
-	else { nType = NEB_UNKNOWN; typeDesc = ""; }
+	if (!strncmp(&recordstr[8],"Gx",2)) { nType = NEB_GX;}
+	else if (!strncmp(&recordstr[8],"OC",2))  { nType = NEB_OC;}
+	else if (!strncmp(&recordstr[8],"Gb",2))  { nType = NEB_GC;}
+	else if (!strncmp(&recordstr[8],"Nb",2)) { nType = NEB_N;}
+	else if (!strncmp(&recordstr[8],"Pl",2))  { nType = NEB_PN;}
+	else { nType = NEB_UNKNOWN;}
 
 /*	if (!strncmp(&recordstr[8],"Gx",2)) strcpy(type,"Galaxy");
 	else if (!strncmp(&recordstr[8],"OC",2))  { nType = NEB_OC; typeDesc = "Open cluster"; }
@@ -559,12 +571,12 @@ bool Nebula::read_Sharpless(char *recordstr)
 	int nb;
 
 	sscanf(&recordstr[1],"%d",&nb);
-	ostringstream oss;
+	wostringstream oss;
 	
 	Sharpless_nb = nb;
 	oss << "Sh " << nb;
-	name = oss.str();
-	longname = name;
+	nameI18 = oss.str();
+	longnameI18 = nameI18;
 
 	sscanf(&recordstr[53],"%d %d %d",&rahr, &ramin, &rasec);
 	sscanf(&recordstr[22],"%d %d %d",&dedeg, &demin, &desec);
@@ -596,8 +608,6 @@ bool Nebula::read_Sharpless(char *recordstr)
 
 	// this is a huge performance drag if called every frame, so cache here
 	neb_tex = NULL;
-
-	typeDesc = "";
    	
     return true;
 }

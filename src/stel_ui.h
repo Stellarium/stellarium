@@ -29,7 +29,7 @@
 #include "s_gui.h"
 #include "s_tui.h"
 
-#define TUI_SCRIPT_MSG "Select and exit to run."
+#define TUI_SCRIPT_MSG L"Select and exit to run."
 
 // Predeclaration of the StelCore class
 class StelCore;
@@ -62,16 +62,15 @@ public:
 	int handle_keys_tui(Uint16 key, s_tui::S_TUI_VALUE state);
 	// Update all the tui widgets with values taken from the core parameters
 	void tui_update_widgets(void);
-	void show_message(string _message, int _time_out=0);
+	void show_message(wstring _message, int _time_out=0);
     void gotoObject(void);
-    void setConstellationAutoComplete(vector<string> _autoComplete ) { constellation_edit->setAutoCompleteOptions(_autoComplete);}
-    void setPlanetAutoComplete(vector<string> _autoComplete ) { planet_edit->setAutoCompleteOptions(_autoComplete);}
-    void setStarAutoComplete(vector<string> _autoComplete ) { star_edit->setAutoCompleteOptions(_autoComplete);}
-    void setListNames(vector<string> _names ) { listBox->addItems(_names);}
-    void setTitleObservatoryName(const string& name);
-    string getTitleWithAltitude(void);
+    void setConstellationAutoComplete(vector<wstring> _autoComplete ) { constellation_edit->setAutoCompleteOptions(_autoComplete);}
+    void setPlanetAutoComplete(vector<wstring> _autoComplete ) { planet_edit->setAutoCompleteOptions(_autoComplete);}
+    void setStarAutoComplete(vector<wstring> _autoComplete ) { star_edit->setAutoCompleteOptions(_autoComplete);}
+    void setListNames(vector<wstring> _names ) { listBox->addItems(_names);}
+    void setTitleObservatoryName(const wstring& name);
+    wstring getTitleWithAltitude(void);
     bool isInitialised(void) { return initialised; }
-    void changeLocale(void) { desktop->changeLocale(); }
 private:
 	StelCore * core;		// The main core can be accessed because StelUI is a friend class
 	bool initialised;
@@ -179,9 +178,9 @@ private:
 	TabContainer * search_tab_ctr;
 	Component* createSearchWindow(void);
 	void search_win_hideBtCallback(void);
-    void showSearchMessage(string _error); 
+    void showSearchMessage(wstring _error); 
     void hideSearchMessage(void); 
-    void doSearchCommand(string _command, string _error);
+    void doSearchCommand(string _command, wstring _error);
 
 	// standard dialogs
 	StdDlgWin* dialog_win;
@@ -291,13 +290,13 @@ private:
 	s_tui::Time_zone_item* tui_time_settmz;
 	s_tui::Time_item* tui_time_skytime;
 	s_tui::Time_item* tui_time_presetskytime;
-	s_tui::MultiSet_item<string>* tui_time_startuptime;
-	s_tui::MultiSet_item<string>* tui_time_displayformat;
-	s_tui::MultiSet_item<string>* tui_time_dateformat;
+	s_tui::MultiSet_item<wstring>* tui_time_startuptime;
+	s_tui::MultiSet_item<wstring>* tui_time_displayformat;
+	s_tui::MultiSet_item<wstring>* tui_time_dateformat;
 
 	// 3. General
-	s_tui::MultiSet_item<string>* tui_general_sky_culture;
-	s_tui::MultiSet2_item<string>* tui_general_sky_locale;
+	s_tui::MultiSet_item<wstring>* tui_general_sky_culture;
+	s_tui::MultiSet2_item<wstring>* tui_general_sky_locale;
 
 	// 4. Stars
 	s_tui::Boolean_item* tui_stars_show;
@@ -311,7 +310,7 @@ private:
 	s_tui::Vector_item* tui_colors_cardinal_color;
 
 	// 5. Effects
-	s_tui::MultiSet_item<string>* tui_effect_landscape;
+	s_tui::MultiSet_item<wstring>* tui_effect_landscape;
 	s_tui::Boolean_item* tui_effect_pointobj;
 	s_tui::Decimal_item* tui_effect_object_scale;
 	s_tui::Decimal_item* tui_effect_zoom_duration;
@@ -321,15 +320,15 @@ private:
 	s_tui::Decimal_item* tui_effect_cursor_timeout;
 
 	// 6. Scripts
-	s_tui::MultiSet_item<string>* tui_scripts_local;
-	s_tui::MultiSet_item<string>* tui_scripts_removeable;
+	s_tui::MultiSet_item<wstring>* tui_scripts_local;
+	s_tui::MultiSet_item<wstring>* tui_scripts_removeable;
 	bool flag_scripts_removeable_disk_mounted;  // is the removeable disk for scripts mounted?
 
 	// 7. Administration
 	s_tui::ActionConfirm_item* tui_admin_loaddefault;
 	s_tui::ActionConfirm_item* tui_admin_savedefault;
 	s_tui::Action_item* tui_admin_updateme;
-	s_tui::MultiSet_item<string>* tui_admin_setlocale;
+	s_tui::MultiSet_item<wstring>* tui_admin_setlocale;
 	s_tui::Integer_item* tui_admin_voffset;
 	s_tui::Integer_item* tui_admin_hoffset;
 
@@ -356,7 +355,7 @@ private:
 	void tui_cb_change_color();        // change colors
 
 	// Parse a file of type /usr/share/zoneinfo/zone.tab
-	s_tui::MultiSet_item<string>* StelUI::create_tree_from_time_zone_file(const string& zonetab);
+	s_tui::MultiSet_item<wstring>* StelUI::create_tree_from_time_zone_file(const string& zonetab);
 
 	bool ScriptDirectoryRead;
 	double MouseTimeLeft;  // for cursor timeout (seconds)

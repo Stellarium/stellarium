@@ -18,6 +18,8 @@
  */
 
 #include <iostream>
+#include <iomanip>
+
 #include "planet.h"
 #include "navigator.h"
 #include "s_font.h"
@@ -55,8 +57,6 @@ Planet::Planet(const string& _englishName, int _flagHalo, int _flag_lighting, do
 	last_trailJD = 0; // for now
 	trail_on = 0;
 	first_point = 1;
-
-	nameI18 = gettext(englishName.c_str());
 }
 
 Planet::~Planet()
@@ -72,12 +72,12 @@ Planet::~Planet()
 }
 
 // Return the information string "ready to print" :)
-string Planet::get_info_string(const Navigator * nav) const
+wstring Planet::get_info_string(const Navigator * nav) const
 {
 	double tempDE, tempRA;
-	ostringstream oss;
+	wostringstream oss;
 
-	oss << "Name :" << nameI18;
+	oss << _("Name : ") << nameI18;
 
 	oss.setf(ios::fixed);
 	oss.precision(1);
@@ -87,13 +87,13 @@ string Planet::get_info_string(const Navigator * nav) const
 	Vec3d equPos = get_earth_equ_pos(nav);
 	rect_to_sphe(&tempRA,&tempDE,equPos);
 	
-	oss << "RA : " << StelUtility::printAngleHMS(tempRA) << endl;
-	oss << "DE : " << StelUtility::printAngleDMS(tempDE) << endl;
+	oss << _("RA : ") << StelUtility::printAngleHMS(tempRA) << endl;
+	oss << _("DE : ") << StelUtility::printAngleDMS(tempDE) << endl;
 	
 	oss.precision(2);
-	oss << "Magnitude : " << compute_magnitude(nav->get_observer_helio_pos()) << endl;
+	oss << _("Magnitude : ") << compute_magnitude(nav->get_observer_helio_pos()) << endl;
 	oss.precision(8);
-	oss << "Distance : " << equPos.length() << "AU" << endl;
+	oss << _("Distance : ") << equPos.length() << _("AU") << endl;
 
 	// calculate alt az
 	Vec3d localPos = nav->earth_equ_to_local(equPos);
@@ -101,23 +101,23 @@ string Planet::get_info_string(const Navigator * nav) const
 	tempRA = 3*M_PI - tempRA;  // N is zero, E is 90 degrees
 	if(tempRA > M_PI*2) tempRA -= M_PI*2;
 
-	oss << "Az  : " << StelUtility::printAngleDMS(tempRA) << endl;
-	oss << "Alt : " << StelUtility::printAngleDMS(tempDE) << endl;
+	oss << _("Az  : ") << StelUtility::printAngleDMS(tempRA) << endl;
+	oss << _("Alt : ") << StelUtility::printAngleDMS(tempDE) << endl;
 
 
 	return oss.str();
 }
 
 // Return the information string "ready to print" :)
-string Planet::get_short_info_string(const Navigator * nav) const
+wstring Planet::get_short_info_string(const Navigator * nav) const
 {
-	ostringstream oss;
+	wostringstream oss;
 
-	oss << nameI18.c_str();
+	oss << nameI18;
 	oss.setf(ios::fixed);
 	oss.precision(1);
 	if (sphere_scale != 1.f) oss << sphere_scale;
-	oss << ": mag " << compute_magnitude(nav->get_observer_helio_pos());
+	oss << _(": mag ") << compute_magnitude(nav->get_observer_helio_pos());
 
 	return oss.str();
 }
@@ -467,16 +467,17 @@ void Planet::draw_hints(const Navigator* nav, const Projector* prj)
 	glEnable(GL_TEXTURE_2D);
 
 	// Draw nameI18 + scaling if it's not == 1.
-	static char scale_str[100];
-	if (sphere_scale == 1.f) sprintf(scale_str,"%s", nameI18.c_str());
-	else sprintf(scale_str,"%s (x%.1f)", nameI18.c_str(), sphere_scale);
+	wostringstream wos;
+	if (sphere_scale == 1.f) wos << nameI18;
+	else wos << nameI18 << "(x" << setprecision(1) << sphere_scale << ")";
+	
 	float tmp = 10.f + get_on_screen_size(prj, nav)/sphere_scale/2.f; // Shift for nameI18 printing
 
 	//	glColor4f(label_color[0], label_color[1], label_color[2],1.f);
 	//	glColor4f(label_color[0], label_color[1], label_color[2],hint_fader.getInterstate());
 	glColor3fv(label_color*hint_fader.getInterstate());
-	gravity_label ? prj->print_gravity180(planet_name_font, screenPos[0],screenPos[1], scale_str, 1, tmp, tmp) :
-		planet_name_font->print(screenPos[0]+tmp,screenPos[1]+tmp, scale_str);
+	gravity_label ? prj->print_gravity180(planet_name_font, screenPos[0],screenPos[1], wos.str(), 1, tmp, tmp) :
+		planet_name_font->print(screenPos[0]+tmp,screenPos[1]+tmp, wos.str());
 
 	// hint disapears smoothly on close view
 	tmp -= 10.f;
@@ -502,10 +503,10 @@ void Planet::draw_sphere(const Projector* prj, const Mat4d& mat, float screen_sz
 
 	if (flag_lighting) glEnable(GL_LIGHTING);
 	else
-		{
-			glDisable(GL_LIGHTING);
-			glColor3fv(color);
-		}
+	{
+		glDisable(GL_LIGHTING);
+		glColor3fv(color);
+	}
 	glBindTexture(GL_TEXTURE_2D, tex_map->getID());
 
 

@@ -51,8 +51,8 @@ public:
 	void draw_point(void);	// Draw the star as a point
     bool draw_name(void);	// draw the name - returns true if something drawn (and texture re-assigned for fonts)
 	virtual Vec3f get_RGB(void) const {return RGB;}
-	virtual string get_info_string(const Navigator * nav = NULL) const;
-	virtual string get_short_info_string(const Navigator * nav = NULL) const;
+	virtual wstring get_info_string(const Navigator * nav = NULL) const;
+	virtual wstring get_short_info_string(const Navigator * nav = NULL) const;
 	virtual STEL_OBJECT_TYPE get_type(void) const {return STEL_OBJECT_STAR;}
 	virtual Vec3d get_earth_equ_pos(const Navigator * nav = NULL) const {return nav->prec_earth_equ_to_earth_equ(XYZ);}
 	virtual Vec3d get_prec_earth_equ_pos(void) const {return XYZ;}
@@ -60,8 +60,6 @@ public:
 	virtual float get_mag(const Navigator * nav = NULL) const {return Mag;}
 	virtual unsigned int get_hp_number() { return HP; };
     void draw_chart(void);
-	static void set_starname_format(int _format) {nameFormat = _format;}
-	static int get_starname_format(void) {return nameFormat;}
 	void set_label_color(Vec3f& v) {label_color = v;}
 	void set_circle_color(Vec3f& v) {circle_color = v;}
 private:
@@ -80,10 +78,9 @@ private:
     Vec3d XY;				// 2D Position + z homogeneous value
 	float term1;			// Optimization term
 
-    string CommonName;		// Common Name of the star
-    string SciName;			// Scientific name incl constellation		
-    string ShortSciName;	// Scientific name (no constellation)
-    string OrigSciName;		// Scientific name (no greek)		
+	string englishCommonName;	// English common Name of the star
+    wstring commonNameI18;		// Common Name of the star
+    wstring sciName;			// Scientific name incl constellation			
     char SpType;			// Spectral type code
 	float Distance;         // Distance from Earth in light years
 
@@ -95,7 +92,6 @@ private:
 	static Projector* proj;
 	static bool gravity_label;
 	static Vec3f circle_color, label_color;
-	static int nameFormat;		// 0 - standard, 1 shortsciname, 2 sciname (incl constellation)
 	static Vec3f ChartColors[20];
 	static s_font *starFont;
 };

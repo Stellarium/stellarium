@@ -253,62 +253,23 @@ double get_dec_angle(const string& str)
 
 
 
-/*! \fn char * get_humanr_location(double location)
-* \param location Location angle in degress
-* \return Angle string
-*
-* Obtains a human readable location in the form: dd mm'ss.ss"
-*/
-
-string print_angle_dms(double location)
-{
-    static char buf[16];
-    double deg = 0.0;
-    double min = 0.0;
-    double sec = 0.0;
-                                                                                                                      
-    sec = 60.0 * (modf(location, &deg));
-    if (sec <= 0.0)
-        sec *= -1;
-    sec = 60.0 * (modf(sec, &min));
-                                                                                                                      
-    // this solves some rounding errors
-    // try 122d 18m 0s for example --> was coming out 122 17 60
-    // which error handling turns into 0.0!
-    // would be better to store as ints to avoid fp errors
-    if ( sec > 59.9 ) {
-      sec = 0.0;
-      min++;
-    }
-    if( min > 59 ) {
-      min = 0.0;
-      if( deg >= 0 ) {
-        deg++;
-      } else {
-        deg--;
-      }
-    }
- 
-    sprintf(buf,"%+.2d %.2d'%.2f\"",(int)deg, (int) min, sec);
-    return buf;
-}
 
 //! @brief Print the passed angle with the format dd°mm'ss(.ss)"
 //! @param angle Angle in radian
 //! @param decimal Define if 2 decimal must also be printed
 //! @param useD Define if letter "d" must be used instead of °
 //! @return The corresponding string
-string StelUtility::printAngleDMS(double angle, bool decimals, bool useD)
+wstring StelUtility::printAngleDMS(double angle, bool decimals, bool useD)
 {
-    static char buf[16];
+    wchar_t buf[32];
+    buf[31]=L'\0';
     double deg = 0.0;
     double min = 0.0;
     double sec = 0.0;
-	char sign = '+';
+	wchar_t sign = L'+';
 	int d, m, s;
-	char degsign = '\6';
-
-	if (useD) degsign = 'd';
+	wchar_t degsign = L'°';
+	if (useD) degsign = L'd';
 
 	angle *= 180./M_PI;
 
@@ -325,7 +286,7 @@ string StelUtility::printAngleDMS(double angle, bool decimals, bool useD)
     s = (int)sec;
     
     if (decimals)
-	    sprintf(buf,"%c%.2d%c%.2d'%.2f\"", sign, d, degsign, m, sec);
+	    swprintf(buf,sizeof(buf),L"%lc%.2d%lc%.2d'%.2f\"", sign, d, degsign, m, sec);
 	else
 	{
 		double sf = sec - s;
@@ -343,7 +304,7 @@ string StelUtility::printAngleDMS(double angle, bool decimals, bool useD)
 				}
 			}
 		}
-	    sprintf(buf,"%c%.2d%c%.2d'%.2d\"", sign, d, degsign, m, s);
+	    swprintf(buf,sizeof(buf), L"%lc%.2d%lc%.2d'%.2d\"", sign, d, degsign, m, s);
 	}
     return buf;
 }
@@ -352,20 +313,20 @@ string StelUtility::printAngleDMS(double angle, bool decimals, bool useD)
 //! @param angle Angle in radian
 //! @param decimals Define if 2 decimal must also be printed
 //! @return The corresponding string
-string StelUtility::printAngleHMS(double angle, bool decimals)
+wstring StelUtility::printAngleHMS(double angle, bool decimals)
 {
-    static char buf[16];
+    static wchar_t buf[16];
+    buf[15] = L'\0';
     double hr = 0.0;
     double min = 0.0;
     double sec = 0.0;
     angle *= 180./M_PI;
-    *buf = 0;
 	while (angle<0) angle+=360;
 	angle/=15.;
     min = 60.0 * (modf(angle, &hr));
     sec = 60.0 * (modf(min, &min));
-    if (decimals) sprintf(buf,"%.2dh%.2dm%.2fs",(int)hr, (int) min, sec);
-    else sprintf(buf,"%.2dh%.2dm%.0fs",(int)hr, (int) min, sec);
+    if (decimals) swprintf(buf,sizeof(buf),L"%.2dh%.2dm%.2fs",(int)hr, (int) min, sec);
+    else swprintf(buf,sizeof(buf),L"%.2dh%.2dm%.0fs",(int)hr, (int) min, sec);
     return buf;
 }
 
@@ -490,6 +451,17 @@ int fcompare(const string& _base, const string& _sub)
      return 0;
 }
 
+int fcompare(const wstring& _base, const wstring& _sub)
+{
+     unsigned int i = 0; 
+     while (i < _sub.length())
+     { 
+         if (toupper(_base[i]) == toupper(_sub[i])) i++;
+         else return -1;  
+     }
+     return 0;
+}
+
 /*
 int str_compare_case_insensitive(const string& str1, const string& str2)
 {
@@ -563,10 +535,10 @@ int str_compare_case_insensitive(const string& str1, const string& str2)
 
 //#define BUILDING_SAO_CAT
 
-string translateGreek(const string& s)
+wstring translateGreek(const string& s)
 {
 	int sz, n;
-	ostringstream oss;
+	wostringstream oss;
 	
 //	string letters("ALF BET GAM DEL EPS ZET ETA THE IOT KAP LAM MU. NU. XI OMI PI RHO SIG TAU UPS PHI CHI PSI OME");
 	const string letters("AL BE GA DE EP ZE ET TE IO KA LA MU NU KS OM PI RH SI TA UP PH KH PS OM");
@@ -581,7 +553,7 @@ string translateGreek(const string& s)
 	loc = letters.find(s.substr(0,2),0);
 
 	// no match then return the original string	
-	if (loc == string::npos) return s;
+	if (loc == string::npos) return StelUtility::stringToWstring(s);
 
 	// get the corresponding number of characters in the greek string
 	n = (int)loc/3;

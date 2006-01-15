@@ -20,7 +20,7 @@
 // Class which handles a stellarium User Interface
 
 #include <iostream>
-
+#include <iomanip>
 #include "stel_ui.h"
 #include "stellastro.h"
 
@@ -136,11 +136,11 @@ void StelUI::init(void)
 	desktop = new Container(true);
 	desktop->reshape(0,0,core->screen_W,core->screen_H);
 
-	bt_flag_help_lbl = new Label("ERROR...");
+	bt_flag_help_lbl = new Label(L"ERROR...");
 	bt_flag_help_lbl->setPos(3,core->screen_H-41-(int)baseFont->getDescent());
 	bt_flag_help_lbl->setVisible(0);
 
-	bt_flag_time_control_lbl = new Label("ERROR...");
+	bt_flag_time_control_lbl = new Label(L"ERROR...");
 	bt_flag_time_control_lbl->setPos(core->screen_W-180,core->screen_H-41-(int)baseFont->getDescent());
 	bt_flag_time_control_lbl->setVisible(0);
 
@@ -171,7 +171,7 @@ void StelUI::init(void)
 	desktop->addComponent(bt_flag_help_lbl);
 	desktop->addComponent(bt_flag_time_control_lbl);
 
-	dialog_win = new StdDlgWin(_("Stellarium"));
+	dialog_win = new StdDlgWin(L"Stellarium");
 	dialog_win->setOpaque(opaqueGUI);
 	dialog_win->setDialogCallback(callback<void>(this, &StelUI::dialogCallback));
 	desktop->addComponent(dialog_win);
@@ -186,7 +186,7 @@ void StelUI::init(void)
 
 
 ////////////////////////////////////////////////////////////////////////////////
-void StelUI::show_message(string _message, int _time_out)
+void StelUI::show_message(wstring _message, int _time_out)
 {
 	// draws a message window to display a message to user
 	// if timeout is zero, won't time out
@@ -211,11 +211,11 @@ void StelUI::gotoObject(void)
 ////////////////////////////////////////////////////////////////////////////////
 Component* StelUI::createTopBar(void)
 {
-	top_bar_date_lbl = new Label("-", baseFont);	top_bar_date_lbl->setPos(2,2);
-	top_bar_hour_lbl = new Label("-", baseFont);	top_bar_hour_lbl->setPos(110,2);
-	top_bar_fps_lbl = new Label("-", baseFont);	top_bar_fps_lbl->setPos(core->screen_W-100,2);
-	top_bar_fov_lbl = new Label("-", baseFont);	top_bar_fov_lbl->setPos(core->screen_W-220,2);
-	top_bar_appName_lbl = new Label(APP_NAME, baseFont);
+	top_bar_date_lbl = new Label(L"-", baseFont);	top_bar_date_lbl->setPos(2,2);
+	top_bar_hour_lbl = new Label(L"-", baseFont);	top_bar_hour_lbl->setPos(110,2);
+	top_bar_fps_lbl = new Label(L"-", baseFont);	top_bar_fps_lbl->setPos(core->screen_W-100,2);
+	top_bar_fov_lbl = new Label(L"-", baseFont);	top_bar_fov_lbl->setPos(core->screen_W-220,2);
+	top_bar_appName_lbl = new Label(StelUtility::stringToWstring(APP_NAME), baseFont);
 	top_bar_appName_lbl->setPos(core->screen_W/2-top_bar_appName_lbl->getSizex()/2,2);
 	top_bar_ctr = new FilledContainer();
 	top_bar_ctr->reshape(0,0,core->screen_W,(int)(baseFont->getLineHeight()+0.5)+5);
@@ -248,7 +248,7 @@ void StelUI::updateTopBar(void)
 	if (core->FlagShowTime)
 	{
 		if (core->FlagUTC_Time)
-			top_bar_hour_lbl->setLabel(core->observatory->get_printable_time_UTC(jd) + " (UTC)");
+			top_bar_hour_lbl->setLabel(core->observatory->get_printable_time_UTC(jd) + _(" (UTC)"));
 		else
 			top_bar_hour_lbl->setLabel(core->observatory->get_printable_time_local(jd));
 		top_bar_hour_lbl->adjustSize();
@@ -257,19 +257,20 @@ void StelUI::updateTopBar(void)
 
 	top_bar_appName_lbl->setVisible(core->FlagShowAppName);
 
-	char str[30];
 	if (core->FlagShowFov)
 	{
-		sprintf(str,"fov=%2.3f\6", core->projection->get_visible_fov());
-		top_bar_fov_lbl->setLabel(str);
+		wstringstream wos;
+		wos << L"FOV=" << setprecision(3) << core->projection->get_visible_fov() << L"°";
+		top_bar_fov_lbl->setLabel(wos.str());
 		top_bar_fov_lbl->adjustSize();
 	}
 	top_bar_fov_lbl->setVisible(core->FlagShowFov);
 
 	if (core->FlagShowFps)
 	{
-		sprintf(str,"FPS:%4.2f",core->fps);
-		top_bar_fps_lbl->setLabel(str);
+		wstringstream wos;
+		wos << L"FPS=" << /* setw(7) << */setprecision(4) << core->fps;
+		top_bar_fps_lbl->setLabel(wos.str());
 		top_bar_fps_lbl->adjustSize();
 	}
 	top_bar_fps_lbl->setVisible(core->FlagShowFps);
@@ -400,22 +401,22 @@ Component* StelUI::createFlagButtons(void)
 // Create the button panel in the lower right corner
 Component* StelUI::createTimeControlButtons(void)
 {
-	bt_dec_time_speed = new LabeledButton("\2\2");
+	bt_dec_time_speed = new LabeledButton(L"<<");
 	bt_dec_time_speed->setSize(24,24);
 	bt_dec_time_speed->setOnPressCallback(callback<void>(this, &StelUI::bt_dec_time_speed_cb));
 	bt_dec_time_speed->setOnMouseInOutCallback(callback<void>(this, &StelUI::tcbr));
 
-	bt_real_time_speed = new LabeledButton("\5");
+	bt_real_time_speed = new LabeledButton(L"R");
 	bt_real_time_speed->setSize(24,24);
 	bt_real_time_speed->setOnPressCallback(callback<void>(this, &StelUI::bt_real_time_speed_cb));
 	bt_real_time_speed->setOnMouseInOutCallback(callback<void>(this, &StelUI::tcbr));
 
-	bt_inc_time_speed = new LabeledButton("\3\3");
+	bt_inc_time_speed = new LabeledButton(L">>");
 	bt_inc_time_speed->setSize(24,24);
 	bt_inc_time_speed->setOnPressCallback(callback<void>(this, &StelUI::bt_inc_time_speed_cb));
 	bt_inc_time_speed->setOnMouseInOutCallback(callback<void>(this, &StelUI::tcbr));
 
-	bt_time_now = new LabeledButton("N");
+	bt_time_now = new LabeledButton(L"|");
 	bt_time_now->setSize(24,24);
 	bt_time_now->setOnPressCallback(callback<void>(this, &StelUI::bt_time_now_cb));
 	bt_time_now->setOnMouseInOutCallback(callback<void>(this, &StelUI::tcbr));
@@ -477,7 +478,7 @@ void StelUI::cbEditScriptKey(void)
 {
 	if (bt_script->getLastKey() == SDLK_SPACE || bt_script->getLastKey() == SDLK_TAB)
 	{
-		string command = bt_script->getText();
+		wstring command = bt_script->getText();
         transform(command.begin(), command.end(), command.begin(), ::tolower);
         if (bt_script->getLastKey() == SDLK_SPACE) command = command.substr(0,command.length()-1);
 	}
@@ -489,36 +490,14 @@ void StelUI::cbEditScriptKey(void)
 
 void StelUI::cbEditScriptExecute(void)
 {
-	cout << "Executing command: " << bt_script->getText() << endl;
-	string command_string = bt_script->getText();
-
+	string command_string = StelUtility::wstringToString(bt_script->getText());
+	cout << "Executing command: " << command_string << endl;
+	
 	bt_script->clearText();
 	bt_script->setEditing(false);
      
-	if (command_string == "goto")
-	// Tony - testing
-     {
-        // this is a specified goto
-        // test out on M83
-	    int rahr = 13;
-        float ramin = 37.1;
-        int dedeg = -29;
-        float demin = -52.0;
-
-    	Vec3f XYZ;						// Cartesian equatorial position
-        float RaRad = hms_to_rad(rahr, (double)ramin);
-        float DecRad = dms_to_rad(dedeg, (double)demin);
-
-       // Calc the Cartesian coord with RA and DE
-       sphe_to_rect(RaRad,DecRad,XYZ);
-       core->navigation->move_to(XYZ, core->auto_move_duration, false, 1);
-                       
-     }
-     else
-     {
-        if (!core->commander->execute_command(command_string))
-    		bt_flag_help_lbl->setLabel(_("Invalid Script command"));
-    }
+    if (!core->commander->execute_command(command_string))
+    	bt_flag_help_lbl->setLabel(_("Invalid Script command"));
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -595,7 +574,7 @@ void StelUI::cbr(void)
 	if (bt_flag_config->getIsMouseOver())
 		bt_flag_help_lbl->setLabel(_("Configuration window"));
 	if (bt_flag_chart->getIsMouseOver())
-		bt_flag_help_lbl->setLabel("Chart mode");
+		bt_flag_help_lbl->setLabel(_("Chart mode"));
 	if (bt_flag_night->getIsMouseOver())
 		bt_flag_help_lbl->setLabel(_("Night (red) mode"));
 	if (bt_flag_quit->getIsMouseOver())
@@ -628,22 +607,22 @@ void StelUI::tcbr(void)
 Component* StelUI::createLicenceWindow(void)
 {
 	licence_txtlbl = new TextLabel(
-string("                 \1   " APP_NAME "  August 2005  \1\n\n") +
-"\1   Copyright (c) 2000-2005 Fabien Chereau et al.\n\n" +
+wstring(L"                 \1   " APP_NAME "  August 2005  \1\n\n") +
+L"\1   Copyright (c) 2000-2005 Fabien Chereau et al.\n\n" +
 _("\1   Please check for newer versions and send bug reports\n\
 and comments to us at: http://stellarium.sourceforge.net\n\n") +
-"\1   This program is free software; you can redistribute it and/or\n\
+L"\1   This program is free software; you can redistribute it and/or\n\
 modify it under the terms of the GNU General Public License\n\
 as published by the Free Software Foundation; either version 2\n\
 of the License, or (at your option) any later version.\n\n" +
-"This program is distributed in the hope that it will be useful, but\n\
+L"This program is distributed in the hope that it will be useful, but\n\
 WITHOUT ANY WARRANTY; without even the implied\n\
 warranty of MERCHANTABILITY or FITNESS FOR A\n\
 PARTICULAR PURPOSE.  See the GNU General Public\n\
 License for more details.\n\n" +
-"You should have received a copy of the GNU General Public\n\
+L"You should have received a copy of the GNU General Public\n\
 License along with this program; if not, write to:\n" +
-"Free Software Foundation, Inc.\n\
+L"Free Software Foundation, Inc.\n\
 59 Temple Place - Suite 330\n\
 Boston, MA  02111-1307, USA.\n\
 http://www.fsf.org");
@@ -661,8 +640,7 @@ http://www.fsf.org");
 Component* StelUI::createHelpWindow(void)
 {
 	help_txtlbl = new TextLabel(
-	                  string(_("\
-Movement & selection:\n\
+wstring(_("Movement & selection:\n\
 Arrow Keys       : Change viewing RA/DE\n\
 Page Up/Down     : Zoom\n\
 CTRL+Up/Down     : Zoom\n\
@@ -672,45 +650,44 @@ CTRL+Left Click  : Unselect\n\
 \\                : Zoom out (planet + moons if applicable)\n\
 /                : Zoom to selected object\n\
 SPACE            : Center on selected object\n\
-\n\
-Display options:\n\
+\n"))+
+wstring(_("Display options:\n\
 ENTER : Equatorial/altazimuthal mount\n\
 F1  : Toggle fullscreen if possible.\n\
-C   : Constellation lines  V   : Constellation labels\n\
-R   : Constellation art    E   : Equatorial grid\n\
-Z   : Azimuthal grid       N   : Nebula labels\n\
-P   : Planet labels        G   : Ground\n\
-A   : Atmosphere           F   : Fog\n\
-Q   : Cardinal points      O   : Toggle moon scaling\n\
-T   : Object tracking      S   : Stars\n\
-4 , : Ecliptic line        5 . : Equator line\n\
-\n\
-Dialogs & other controls:\n\
-H   : Help                 I   : About Stellarium\n\
-M   : Text menu            1 (one)  : Configuration\n\
+C   : Constellation lines       V   : Constellation labels\n\
+R   : Constellation art         E   : Equatorial grid\n\
+Z   : Azimuthal grid            N   : Nebula labels\n\
+P   : Planet labels             G   : Ground\n\
+A   : Atmosphere                F   : Fog\n\
+Q   : Cardinal points           O   : Toggle moon scaling\n\
+T   : Object tracking           S   : Stars\n\
+4 , : Ecliptic line             5 . : Equator line\n\
+\n")) +
+wstring(_("Dialogs & other controls:\n\
+H   : Help                      I   : About Stellarium\n\
+M   : Text menu                 1 (one)  : Configuration\n\
 CTRL + S : Take a screenshot\n\
 CTRL + R : Toggle script recording\n\
 CTRL + F : Toggle object finder\n\
-\n\
-Time & Date:\n\
-6   : Time rate pause      7   : Time rate 0\n\
-8   : Set current time     J   : Decrease time rate\n\
-K   : Normal time rate     L   : Increase time rate\n\
--   : Back 24 hours        =   : Forward 24 hours\n\
-[   : Back 7 days          ]   : Forward 7 days\n\
-\n\
-During Script Playback:\n\
+\n")) + 
+wstring(_("Time & Date:\n\
+6   : Time rate pause           7   : Time rate 0\n\
+8   : Set current time          J   : Decrease time rate\n\
+K   : Normal time rate          L   : Increase time rate\n\
+-   : Back 24 hours             =   : Forward 24 hours\n\
+[   : Back 7 days               ]   : Forward 7 days\n\
+\n")) + 
+wstring(_("During Script Playback:\n\
 CTRL + C : End Script\n\
-6   : pause script         K   : resume script\n\
-\n\
-Misc:\n\
-9   : Toggle meteor shower rates\n")) + string(
+6   : pause script              K   : resume script\n\
+\n")) + 
+wstring(_("Misc:\n\
+9   : Toggle meteor shower rates\n")) + wstring(
 #ifndef MACOSX
 	                      _("CTRL + Q : Quit\n")
 #else
 	                      _("CMD + Q  : Quit\n")
 #endif
-
 	                  ),courierFont);
 
 //	help_txtlbl->adjustSize();
@@ -925,7 +902,7 @@ int StelUI::handle_clic(Uint16 x, Uint16 y, S_GUI_VALUE button, S_GUI_VALUE stat
 				{
 
 					// potentially record this action
-					core->scripts->record_command("select nebula " + ((Nebula *)core->selected_object)->get_name());
+					core->scripts->record_command("select nebula " + ((Nebula *)core->selected_object)->getEnglishName());
 
 				}
 
@@ -1068,8 +1045,8 @@ int StelUI::handle_keys(Uint16 key, S_GUI_VALUE state)
 
 				if(core->scripts->is_recording())
 				{
-					show_message(string( _("Recording commands to script file:\n")
-					                     + core->scripts->get_record_filename() + "\n\n"
+					show_message(wstring( _("Recording commands to script file:\n")
+					                     + StelUtility::stringToWstring(core->scripts->get_record_filename()) + L"\n\n"
 					                     + _("Hit CTRL-R again to stop.\n")), 4000);
 				}
 				else
@@ -1113,20 +1090,11 @@ int StelUI::handle_keys(Uint16 key, S_GUI_VALUE state)
 
 		if(key==SDLK_r) core->commander->execute_command( "flag constellation_art toggle");
 
-		//		printf( "key = %d\n", key);
 
 		if(key=='c') core->commander->execute_command( "flag constellation_drawing toggle");
 		if(key=='C') core->commander->execute_command( "flag constellation_boundaries toggle");
 
 		if(key=='d') core->commander->execute_command( "flag star_names toggle");
-		if(key=='D')
-		{
-			// TODO: move to execute_command so can record
-			if (core->hip_stars->get_starname_format() < 2)
-				core->hip_stars->set_starname_format(core->hip_stars->get_starname_format()+1);
-			else
-				core->hip_stars->set_starname_format(0);
-		}
 
 		if(key==SDLK_1)
 		{
@@ -1374,23 +1342,23 @@ void StelUI::updateInfoSelectString(void)
 //	}
 }
 
-void StelUI::setTitleObservatoryName(const string& name)
+void StelUI::setTitleObservatoryName(const wstring& name)
 {
-	if (name == "")
-		top_bar_appName_lbl->setLabel(APP_NAME);
+	if (name == L"")
+		top_bar_appName_lbl->setLabel(StelUtility::stringToWstring(APP_NAME));
 	else
 	{
-		std::ostringstream oss;
-		oss << APP_NAME << " (" << name << ")";
+		std::wostringstream oss;
+		oss << StelUtility::stringToWstring(APP_NAME) << L" (" << name << L")";
 		top_bar_appName_lbl->setLabel(oss.str());
 	}
 	top_bar_appName_lbl->setPos(core->screen_W/2-top_bar_appName_lbl->getSizex()/2,2);
 }
 
-string StelUI::getTitleWithAltitude(void)
+wstring StelUI::getTitleWithAltitude(void)
 {
-	std::ostringstream oss;
-	oss << core->observatory->get_name() << " @ " << core->observatory->get_altitude() << "m";
+	std::wostringstream oss;
+	oss << core->observatory->get_name() << L" @ " << core->observatory->get_altitude() << L"m";
 
 	return oss.str();
 }

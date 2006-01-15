@@ -41,23 +41,17 @@ string DATA_ROOT;	// Data Root Directory
 // Print a beautiful console logo !!
 void drawIntro(void)
 {
-    printf("\n");
-    printf("    -----------------------------------------\n");
-    printf("    | ## ### ### #   #   ### ###  #  # # # #|\n");
-    printf("    | #   #  ##  #   #   ### ##   #  # # ###|\n");
-    printf("    |##   #  ### ### ### # # # #  #  ### # #|\n");
-    printf("    |                       %s|\n",APP_NAME);
-    printf("    -----------------------------------------\n\n");
-    printf("Copyright (C) 2000-2005 Fabien Chereau et al.\n\n");
-    printf(_("Please check last version and send bug report & comments \n\
-on stellarium web page : http://www.stellarium.org\n\n"));
+    cout << " _______________________________________________________" << endl;
+    cout << "[ This is "<< APP_NAME << " - http://www.stellarium.org ]" << endl;
+    cout << "[ Copyright (C) 2000-2005 Fabien Chereau et al         ]" << endl;
+    cout << " -------------------------------------------------------" << endl;
 };
 
 
 // Display stellarium usage in the console
 void usage(char **argv)
 {
-	printf(_("Usage: %s [OPTION] ...\n -v, --version          Output version information and exit.\n -h, --help             Display this help and exit.\n"), argv[0]);
+	wprintf(_("Usage: %s [OPTION] ...\n -v, --version          Output version information and exit.\n -h, --help             Display this help and exit.\n"), argv[0]);
 }
 
 
@@ -69,7 +63,7 @@ void check_command_line(int argc, char **argv)
     {
         if (!(strcmp(argv[1],"--version") && strcmp(argv[1],"-v")))
         {
-            printf("%s\n", APP_NAME);
+            wprintf(L"%s\n", APP_NAME);
             exit(0);
         }
         if (!(strcmp(argv[1],"--help") && strcmp(argv[1],"-h")))
@@ -81,8 +75,8 @@ void check_command_line(int argc, char **argv)
 
     if (argc > 1)
     {
-        printf(_("%s: Bad command line argument(s)\n"), argv[0]);
-        printf(_("Try `%s --help' for more information.\n"), argv[0]);
+        wprintf(_("%s: Bad command line argument(s)\n"), argv[0]);
+        wprintf(_("Try `%s --help' for more information.\n"), argv[0]);
         exit(1);
     }
 }
@@ -124,10 +118,8 @@ void setDirectories(const char* executableName)
 			else
 			{
             	// Failure....
-            	printf(_("ERROR : I can't find the datas directories in :\n\
-%s/ nor in ./ nor in ../\n\
-You may fully install the software (type \"make install\" on POSIX systems)\n\
-or launch the application from the stellarium package directory.\n"),CONFIG_DATA_DIR);
+            	cerr << "ERROR : I can't find the datas directories in :\n"  << CONFIG_DATA_DIR << 
+            	"/ nor in ./ nor in ../\nYou may fully install the software (type \"make install\" on POSIX systems)\nor launch the application from the stellarium package directory." << endl;
                 exit(-1);
 			}
 		}
@@ -167,7 +159,7 @@ or launch the application from the stellarium package directory.\n"),CONFIG_DATA
 
 	// Just an indication if we are on unix/linux that we use local data files
 	if (DATA_ROOT != string(CONFIG_DATA_DIR))
-		printf(_("> Found data files in %s : local version.\n"), DATA_ROOT.c_str());
+		printf("> Found data files in %s : local version.\n", DATA_ROOT.c_str());
 
 	// The problem is more complexe in the case of a unix/linux system
 	// The config files are in the HOME/.stellarium/ directory and this directory
@@ -185,7 +177,7 @@ or launch the application from the stellarium package directory.\n"),CONFIG_DATA
 	}
 	else
 	{
-		printf(_("Will create config files in %s\n"), CDIR.c_str());
+		printf("Will create config files in %s\n", CDIR.c_str());
 		if ((tempFile = fopen((CDIR + "config.ini").c_str(),"w")))
 		{
 			fclose(tempFile);
@@ -193,7 +185,7 @@ or launch the application from the stellarium package directory.\n"),CONFIG_DATA
 		else
 		{
 			// Maybe the directory is not created so try to create it
-			printf(_("Try to create directory %s\n"),CDIR.c_str());
+			printf("Try to create directory %s\n",CDIR.c_str());
 			system(string("mkdir " + CDIR).c_str());
 
 			if ((tempFile = fopen((CDIR + "config.ini").c_str(),"w")))
@@ -202,9 +194,9 @@ or launch the application from the stellarium package directory.\n"),CONFIG_DATA
 			}
 			else
 			{
-				printf(_("Can't create the file %sconfig.ini\n\
-If the directory %s is missing please create it by hand.\n\
-If not, check that you have access to %s\n"), CDIR.c_str(), CDIR.c_str(), CDIR.c_str());
+				cerr << "Can't create the file "<< CDIR << "config.ini\nIf the directory " << 
+				CDIR << " is missing please create it by hand.\nIf not, check that you have access to " <<
+				CDIR << endl;
 				exit(-1);
 			}
 		}
@@ -237,12 +229,9 @@ int main(int argc, char **argv)
 {
 #if !defined(MACOSX)
 	// Init gettext things
- 	bindtextdomain (PACKAGE, LOCALEDIR);
- 	textdomain (PACKAGE);
-// 
-// 	// TODO: move to utf8
-//	bind_textdomain_codeset(PACKAGE, "UTF-8"); // iso-8859-1
-
+	setlocale(LC_CTYPE, "");				// Use default system char type : used for proper console output
+	bindtextdomain (PACKAGE, LOCALEDIR);	
+	textdomain (PACKAGE);
 #endif
 	
 	// Check the command line

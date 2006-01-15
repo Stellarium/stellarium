@@ -30,10 +30,10 @@ public:
 	// Create and initialise
 	LoadingBar(Projector* prj, float font_size, const string& font_name, const string&  splash_tex, int barx, int bary);
 	virtual ~LoadingBar();
-	void SetMessage(string m) {message=m;}
+	void SetMessage(wstring m) {message=m;}
 	void Draw(float val);
 private:
-	string message;
+	wstring message;
 	Projector* prj;
 	int splashx, splashy, barx, bary, width, height, barwidth, barheight;
 	s_font* barfont;

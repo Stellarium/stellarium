@@ -35,7 +35,6 @@ float HipStar::names_brightness = 1.f;
 ToneReproductor* HipStar::eye = NULL;
 Projector* HipStar::proj = NULL;
 bool HipStar::gravity_label = false;
-int HipStar::nameFormat = 0;
 s_font *HipStar::starFont = NULL;
 
 Vec3f HipStar::circle_color = Vec3f(0.f,0.f,0.f);
@@ -58,17 +57,13 @@ HipStar::HipStar() :
 	doubleStar(false),
 	variableStar(false)
 {
-	CommonName = "";
-	SciName = "";
-	ShortSciName = "";
-	OrigSciName = "";
 }
 
 HipStar::~HipStar()
 { 
 }
 
-string HipStar::get_info_string(const Navigator * nav) const
+wstring HipStar::get_info_string(const Navigator * nav) const
 {
 	float tempDE, tempRA;
 
@@ -76,48 +71,48 @@ string HipStar::get_info_string(const Navigator * nav) const
 	
 	rect_to_sphe(&tempRA,&tempDE,equatorial_pos);
 
-	ostringstream oss;
-	if (CommonName!="" || SciName!="")
+	wostringstream oss;
+	if (commonNameI18!=L"" || sciName!=L"")
 	{
-		oss << "Name : " << CommonName << string(CommonName == "" ? "" : " ");
-		oss << string (SciName=="" ? "" : SciName);
+		oss << _("Name : ") << commonNameI18 << wstring(commonNameI18 == L"" ? L"" : L" ");
+		oss << wstring (sciName==L"" ? L"" : sciName);
 			//translateGreek(SciName,false)); 
 	}
 	else 
 	{
-		if (HP) oss << "HP " << HP;
+		if (HP) oss << L"HP " << HP;
 #ifdef DATA_FILES_USE_SAO
-		else oss << "SAO" << SAO;
+		else oss << L"SAO" << SAO;
 #endif
 	}
-	if (doubleStar) oss << "(Dbl)";
-	else if (variableStar) oss << "(Var)";
+	if (doubleStar) oss << _("(Dbl)");
+	else if (variableStar) oss << _("(Var)");
 	oss << endl;
 	
-	oss << "Cat : HP:";
+	oss << L"Cat : HP:";
 	if (HP > 0)	oss << HP; else oss << "-";
 
 #ifdef DATA_FILES_USE_SAO
-	oss << "  HD:";
+	oss << L"  HD:";
 	if (HD > 0)	oss << HD; else oss << "-";
 
-	oss << "  SAO:";
+	oss << L"  SAO:";
 	if (SAO > 0)	oss << SAO; else oss << "-";
 #endif
 	oss << endl;
 
-	oss << "RA : " << StelUtility::printAngleHMS(tempRA) << endl;
-	oss << "DE : " << StelUtility::printAngleDMS(tempDE) << endl;
+	oss << _("RA : ") << StelUtility::printAngleHMS(tempRA) << endl;
+	oss << _("DE : ") << StelUtility::printAngleDMS(tempDE) << endl;
 
-	oss << "Spectral : " << SpType << endl;
+	oss << _("Spectral : ") << SpType << endl;
 	oss.setf(ios::fixed);
 	oss.precision(2);
-	oss << "Magnitude : " << Mag << endl;
-	oss << "Distance : ";
+	oss << _("Magnitude : ") << Mag << endl;
+	oss << _("Distance : ");
 	
 	oss.precision(1);
 	if(Distance) oss << Distance; else oss << "-";
-	oss << " Light Years" << endl;
+	oss << _(" Light Years") << endl;
 
 	// calculate alt az
 	Vec3d local_pos = nav->earth_equ_to_local(equatorial_pos);
@@ -125,27 +120,27 @@ string HipStar::get_info_string(const Navigator * nav) const
 	tempRA = 3*M_PI - tempRA;  // N is zero, E is 90 degrees
 	if(tempRA > M_PI*2) tempRA -= M_PI*2;
 
-	oss << "Az  : " << StelUtility::printAngleDMS(tempRA) << endl;
-	oss << "Alt : " << StelUtility::printAngleDMS(tempDE) << endl;
+	oss << _("Az  : ") << StelUtility::printAngleDMS(tempRA) << endl;
+	oss << _("Alt : ") << StelUtility::printAngleDMS(tempDE) << endl;
 
 	
 	return oss.str();
 }
 
-string HipStar::get_short_info_string(const Navigator * nav) const
+wstring HipStar::get_short_info_string(const Navigator * nav) const
 {
-	ostringstream oss;
-	if (CommonName!="" || SciName!="")
+	wostringstream oss;
+	if (commonNameI18!=L"" || sciName!=L"")
 	{
-		if (CommonName == "") oss << SciName; else oss << CommonName; 
+		if (commonNameI18 == L"") oss << sciName; else oss << commonNameI18; 
 	}
 	else 
-		oss << "HP " << HP;
+		oss << L"HP " << HP;
 
 	oss.setf(ios::fixed);
 	oss.precision(1);
-	oss << ": mag " << Mag;
-	if(Distance) oss << "  " << Distance << "ly";
+	oss << _(": mag ") << Mag;
+	if(Distance) oss << L"  " << Distance << _("ly");
 
 	return oss.str();
 }
@@ -292,31 +287,10 @@ void HipStar::draw_point(void)
 
 bool HipStar::draw_name(void)
 {   
-	string starname;
+	wstring starname;
 	
-	if (nameFormat == 0) // commonname
-	{
-		if (CommonName == "") return false;
-		starname = CommonName;
-	}
-	else // nameFormat 1 & 2
-	{
-		if (SciName == "") return false;
-		// format 1 only has the star scientific name
-		// format 2 also has the constellation letters.
-		if (nameFormat == 1)
-			starname = ShortSciName;
-		else
-			starname = SciName;
-//		starname = translateGreek(SciName, (nameFormat == 1));
-		
-		if (CommonName != "")
-		{
-			ostringstream oss;
-			oss << starname << "(" + CommonName + ")";
-			starname = oss.str();
-		}
-	}
+	if (commonNameI18 == L"") return false;
+	starname = commonNameI18;
 	
 	if (draw_mode == DM_NORMAL) {
 		glColor4f(RGB[0]*0.75, RGB[1]*0.75, RGB[2]*0.75, names_brightness);

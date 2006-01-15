@@ -30,130 +30,130 @@ class Translations
 		assert(0);
 		
 		// Planets and satellites from ssystem.ini
-		gettext_noop("Sun");
-		gettext_noop("Mercury");
-		gettext_noop("Venus");
-		gettext_noop("Earth");
-		gettext_noop("Moon");
-		gettext_noop("Mars");
-		gettext_noop("Deimos");
-		gettext_noop("Phobos");
-		gettext_noop("Jupiter");
-		gettext_noop("Io");
-		gettext_noop("Europa");
-		gettext_noop("Ganymede");
-		gettext_noop("Callisto");
-		gettext_noop("Saturn");
-		gettext_noop("Mimas");
-		gettext_noop("Enceladus");
-		gettext_noop("Tethys");
-		gettext_noop("Dione");
-		gettext_noop("Rhea");
-		gettext_noop("Titan");
-		gettext_noop("Hyperion");
-		gettext_noop("Iapetus");
-		gettext_noop("Phoebe");
-		gettext_noop("Neptune");
-		gettext_noop("Uranus");
-		gettext_noop("Pluto");
-		gettext_noop("Charon");
+		N_("Sun");
+		N_("Mercury");
+		N_("Venus");
+		N_("Earth");
+		N_("Moon");
+		N_("Mars");
+		N_("Deimos");
+		N_("Phobos");
+		N_("Jupiter");
+		N_("Io");
+		N_("Europa");
+		N_("Ganymede");
+		N_("Callisto");
+		N_("Saturn");
+		N_("Mimas");
+		N_("Enceladus");
+		N_("Tethys");
+		N_("Dione");
+		N_("Rhea");
+		N_("Titan");
+		N_("Hyperion");
+		N_("Iapetus");
+		N_("Phoebe");
+		N_("Neptune");
+		N_("Uranus");
+		N_("Pluto");
+		N_("Charon");
 		
 		// Cardinals names
-		gettext_noop("N");	// North
-		gettext_noop("S");	// South
-		gettext_noop("E");	// East
-		gettext_noop("W");	// West
+		N_("N");	// North
+		N_("S");	// South
+		N_("E");	// East
+		N_("W");	// West
 		
 		// Western Constellations
-		gettext_noop("Aquila");				// aql
-		gettext_noop("Andromeda");			// and
-		gettext_noop("Sculptor");			// scl
-		gettext_noop("Ara");				// ara
-		gettext_noop("Libra");				// lib
-		gettext_noop("Cetus");				// cet
-		gettext_noop("Aries");				// ari
-		gettext_noop("Scutum");				// sct
-		gettext_noop("Pyxis");				// pyx
-		gettext_noop("Bootes");				// boo
-		gettext_noop("Caelum");				// cae
-		gettext_noop("Chamaeleon");			// cha
-		gettext_noop("Cancer");				// cnc
-		gettext_noop("Capricornus");		// cap
-		gettext_noop("Carina");				// car
-		gettext_noop("Cassiopeia");			// cas
-		gettext_noop("Centaurus");			// cen
-		gettext_noop("Cepheus");			// cep
-		gettext_noop("Coma Berenices");		// com
-		gettext_noop("Canes Venatici");		// cvn
-		gettext_noop("Auriga");				// aur
-		gettext_noop("Columba");			// col
-		gettext_noop("Circinus");			// cir
-		gettext_noop("Crater");				// crt
-		gettext_noop("Corona Australis");	// cra
-		gettext_noop("Corona Borealis");	// crb
-		gettext_noop("Corvus");				// crv
-		gettext_noop("Crux");				// cru
-		gettext_noop("Cygnus");				// cyg
-		gettext_noop("Delphinus");			// del
-		gettext_noop("Dorado");				// dor
-		gettext_noop("Draco");				// dra
-		gettext_noop("Norma");				// nor
-		gettext_noop("Eridanus");			// eri
-		gettext_noop("Sagitta");			// sge
-		gettext_noop("Fornax");				// for
-		gettext_noop("Gemini");				// gem
-		gettext_noop("Camelopardalis");		// cam
-		gettext_noop("Canis Major");		// cma
-		gettext_noop("Ursa Major");			// uma
-		gettext_noop("Grus");				// gru
-		gettext_noop("Hercules");			// her
-		gettext_noop("Horologium");			// hor
-		gettext_noop("Hydra");				// hya
-		gettext_noop("Hydrus");				// hyi
-		gettext_noop("Indus");				// ind
-		gettext_noop("Lacerta");			// lac
-		gettext_noop("Monoceros");			// mon
-		gettext_noop("Lepus");				// lep
-		gettext_noop("Leo");				// leo
-		gettext_noop("Lupus");				// lup
-		gettext_noop("Lynx");				// lyn
-		gettext_noop("Lyra");				// lyr
-		gettext_noop("Antlia");				// ant
-		gettext_noop("Microscopium");		// mic
-		gettext_noop("Musca");				// mus
-		gettext_noop("Octans");				// oct
-		gettext_noop("Apus");				// aps
-		gettext_noop("Ophiuchus");			// oph
-		gettext_noop("Orion");				// ori
-		gettext_noop("Pavo");				// pav
-		gettext_noop("Pegasus");			// peg
-		gettext_noop("Pictor");				// pic
-		gettext_noop("Perseus");			// per
-		gettext_noop("Equuleus");			// equ
-		gettext_noop("Canis Minor");		// cmi
-		gettext_noop("Leo Minor");			// lmi
-		gettext_noop("Vulpecula");			// vul
-		gettext_noop("Ursa Minor");			// umi
-		gettext_noop("Phoenix");			// phe
-		gettext_noop("Pisces Austrinus");	// psc
-		gettext_noop("Piscis");				// psa
-		gettext_noop("Volans");				// vol
-		gettext_noop("Puppis");				// pup
-		gettext_noop("Reticulum");			// ret
-		gettext_noop("Sagittarius");		// sgr
-		gettext_noop("Scorpius");			// sco
-		gettext_noop("Scutum");				// sct
-		gettext_noop("Serpens");			// ser
-		gettext_noop("Sextans");			// sex
-		gettext_noop("Mensa");				// men
-		gettext_noop("Taurus");				// tau
-		gettext_noop("Telescopium");		// tel
-		gettext_noop("Tucana");				// tuc
-		gettext_noop("Triangulum");			// tri
-		gettext_noop("Triangulum Australe");// tra
-		gettext_noop("Aquarius");			// aqr
-		gettext_noop("Virgo");				// vir
-		gettext_noop("Vela");				// vel
+		N_("Aquila");				// aql
+		N_("Andromeda");			// and
+		N_("Sculptor");			// scl
+		N_("Ara");				// ara
+		N_("Libra");				// lib
+		N_("Cetus");				// cet
+		N_("Aries");				// ari
+		N_("Scutum");				// sct
+		N_("Pyxis");				// pyx
+		N_("Bootes");				// boo
+		N_("Caelum");				// cae
+		N_("Chamaeleon");			// cha
+		N_("Cancer");				// cnc
+		N_("Capricornus");		// cap
+		N_("Carina");				// car
+		N_("Cassiopeia");			// cas
+		N_("Centaurus");			// cen
+		N_("Cepheus");			// cep
+		N_("Coma Berenices");		// com
+		N_("Canes Venatici");		// cvn
+		N_("Auriga");				// aur
+		N_("Columba");			// col
+		N_("Circinus");			// cir
+		N_("Crater");				// crt
+		N_("Corona Australis");	// cra
+		N_("Corona Borealis");	// crb
+		N_("Corvus");				// crv
+		N_("Crux");				// cru
+		N_("Cygnus");				// cyg
+		N_("Delphinus");			// del
+		N_("Dorado");				// dor
+		N_("Draco");				// dra
+		N_("Norma");				// nor
+		N_("Eridanus");			// eri
+		N_("Sagitta");			// sge
+		N_("Fornax");				// for
+		N_("Gemini");				// gem
+		N_("Camelopardalis");		// cam
+		N_("Canis Major");		// cma
+		N_("Ursa Major");			// uma
+		N_("Grus");				// gru
+		N_("Hercules");			// her
+		N_("Horologium");			// hor
+		N_("Hydra");				// hya
+		N_("Hydrus");				// hyi
+		N_("Indus");				// ind
+		N_("Lacerta");			// lac
+		N_("Monoceros");			// mon
+		N_("Lepus");				// lep
+		N_("Leo");				// leo
+		N_("Lupus");				// lup
+		N_("Lynx");				// lyn
+		N_("Lyra");				// lyr
+		N_("Antlia");				// ant
+		N_("Microscopium");		// mic
+		N_("Musca");				// mus
+		N_("Octans");				// oct
+		N_("Apus");				// aps
+		N_("Ophiuchus");			// oph
+		N_("Orion");				// ori
+		N_("Pavo");				// pav
+		N_("Pegasus");			// peg
+		N_("Pictor");				// pic
+		N_("Perseus");			// per
+		N_("Equuleus");			// equ
+		N_("Canis Minor");		// cmi
+		N_("Leo Minor");			// lmi
+		N_("Vulpecula");			// vul
+		N_("Ursa Minor");			// umi
+		N_("Phoenix");			// phe
+		N_("Pisces Austrinus");	// psc
+		N_("Piscis");				// psa
+		N_("Volans");				// vol
+		N_("Puppis");				// pup
+		N_("Reticulum");			// ret
+		N_("Sagittarius");		// sgr
+		N_("Scorpius");			// sco
+		N_("Scutum");				// sct
+		N_("Serpens");			// ser
+		N_("Sextans");			// sex
+		N_("Mensa");				// men
+		N_("Taurus");				// tau
+		N_("Telescopium");		// tel
+		N_("Tucana");				// tuc
+		N_("Triangulum");			// tri
+		N_("Triangulum Australe");// tra
+		N_("Aquarius");			// aqr
+		N_("Virgo");				// vir
+		N_("Vela");				// vel
 
 		
 	}

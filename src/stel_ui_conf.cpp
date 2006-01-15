@@ -216,7 +216,7 @@ Component* StelUI::createConfigWindow(void)
 	Label* system_tz_lbl = new Label(_("\1 Using System Default Time Zone"));
 	tab_time->addComponent(system_tz_lbl);
 	system_tz_lbl->setPos(50 ,y); y+=20;
-	string tmpl("(" + core->observatory->get_time_zone_name_from_system(core->navigation->get_JDay()) + ")");
+	wstring tmpl(L"(" + core->observatory->get_time_zone_name_from_system(core->navigation->get_JDay()) + L")");
 	
 	for (unsigned int i=0;i<tmpl.size();i++) {if ((unsigned int)tmpl[i]<0 || (unsigned int)tmpl[i]>255) tmpl[i]='*';}
 	system_tz_lbl2 = new Label(tmpl);
@@ -228,7 +228,7 @@ Component* StelUI::createConfigWindow(void)
 	tab_time->addComponent(time_speed_lbl);
 	time_speed_lbl->setPos(x ,y); y+=20;
 
-	time_speed_lbl2 = new Label("\1 Current Time Speed is XX sec/sec.");
+	time_speed_lbl2 = new Label();
 	tab_time->addComponent(time_speed_lbl2);
 	time_speed_lbl2->setPos(50 ,y); y+=30;
 
@@ -355,7 +355,7 @@ Component* StelUI::createConfigWindow(void)
 
 	snprintf(vs, 999, "%sconfig.ini", core->ConfigDir.c_str());
 	Label * lblvideo5 = new Label(_("For unlisted screen resolution, edit the file :"));
-	Label * lblvideo6 = new Label(string(vs));
+	Label * lblvideo6 = new Label(StelUtility::stringToWstring(string(vs)));
 	lblvideo5->setPos(30, y+25);
 	lblvideo6->setPos(30, y+40);
 	tab_video->addComponent(lblvideo5);
@@ -413,7 +413,6 @@ Component* StelUI::createConfigWindow(void)
 
 void StelUI::load_cities(const string & fileName)
 {
-	string name, state, country;
 	float time;
 
 	char linetmp[200];
@@ -423,11 +422,11 @@ void StelUI::load_cities(const string & fileName)
 	char tmpstr[2000];
 	int total = 0;
 
-	cout << _("Loading Cities data...");
+	cout << "Loading Cities data...";
 	FILE *fic = fopen(fileName.c_str(), "r");
 	if (!fic)
 	{
-		printf("Can't open %s\n", fileName.c_str());
+		cerr << "Can't open " << fileName << endl;
 		return; // no art, but still loaded constellation data
 	}
 
@@ -460,10 +459,11 @@ void StelUI::load_cities(const string & fileName)
 					fclose(fic);
 					return;		
 				}
-				printf("ERROR while loading city data in line %d\n", line);
+				cerr << "ERROR while loading city data in line " << line << endl;
 				assert(0);
 			}
 			
+			string name, state, country;
 			name = cname;
 		    for (string::size_type i=0;i<name.length();++i)
 			{
@@ -483,7 +483,10 @@ void StelUI::load_cities(const string & fileName)
 				time = 0;
 			else 
 				sscanf(ctime,"%f",&time);
-			earth_map->addCity(name, state, country, get_dec_angle(clon), 
+			earth_map->addCity(name, 
+			state, 
+			country, 
+			get_dec_angle(clon), 
 				get_dec_angle(clat), time, showatzoom, alt);
 		}
 		line++;
@@ -515,7 +518,7 @@ Component* StelUI::createSearchWindow(void)
 	search_tab_ctr = new TabContainer();
 	search_tab_ctr->setSize(search_win->getSizex(),search_win->getSizey()- 20);
 
-	lblSearchMessage = new Label("");
+	lblSearchMessage = new Label();
 	lblSearchMessage->setPos(10, search_win->getSizey()-15);
 
 	// stars
@@ -537,7 +540,7 @@ Component* StelUI::createSearchWindow(void)
 	tab_stars->addComponent(lblstars2);
 	tab_stars->addComponent(lblstars3);
 
-	star_edit = new EditBox("");
+	star_edit = new EditBox();
 	star_edit->setOnReturnKeyCallback(callback<void>(this, &StelUI::doStarSearch));
 	star_edit->setOnAutoCompleteCallback(callback<void>(this, &StelUI::showStarAutoComplete));
 	tab_stars->addComponent(star_edit);
@@ -560,7 +563,7 @@ Component* StelUI::createSearchWindow(void)
 	lblconst2->setPos(x+100, y+35);
 	tab_constellations->addComponent(lblconst2);
 
-	constellation_edit = new EditBox("");
+	constellation_edit = new EditBox();
 	constellation_edit->setOnReturnKeyCallback(callback<void>(this, &StelUI::doConstellationSearch));
 	constellation_edit->setOnAutoCompleteCallback(callback<void>(this, &StelUI::showConstellationAutoComplete));
 	tab_constellations->addComponent(constellation_edit);
@@ -586,7 +589,7 @@ Component* StelUI::createSearchWindow(void)
 	tab_nebula->addComponent(lblnebula2);
 	tab_nebula->addComponent(lblnebula3);
 
-	nebula_edit = new EditBox("");
+	nebula_edit = new EditBox();
 	nebula_edit->setOnReturnKeyCallback(callback<void>(this, &StelUI::doNebulaSearch));
 	tab_nebula->addComponent(nebula_edit);
 	nebula_edit->setPos(x+100,y);
@@ -633,25 +636,25 @@ Component* StelUI::createSearchWindow(void)
 	tab_example->addComponent(editbox);
 
 	// example messageboxes and inputboxes
-	LabeledButton *button1 = new LabeledButton("MsgBox 1");
+	LabeledButton *button1 = new LabeledButton(L"MsgBox 1");
 	button1->setPos(20,220);
 	button1->setSize(80,25);
 	button1->setOnPressCallback(callback<void>(this, &StelUI::msgbox1));
 	tab_example->addComponent(button1);
 
-	LabeledButton *button2 = new LabeledButton("MsgBox 2");
+	LabeledButton *button2 = new LabeledButton(L"MsgBox 2");
 	button2->setPos(115,220);
 	button2->setSize(80,25);
 	button2->setOnPressCallback(callback<void>(this, &StelUI::msgbox2));
 	tab_example->addComponent(button2);
 
-	LabeledButton *button3 = new LabeledButton("MsgBox 3");
+	LabeledButton *button3 = new LabeledButton(L"MsgBox 3");
 	button3->setPos(205,220);
 	button3->setSize(80,25);
 	button3->setOnPressCallback(callback<void>(this, &StelUI::msgbox3));
 	tab_example->addComponent(button3);
 
-	LabeledButton *button4 = new LabeledButton("Inputbox");
+	LabeledButton *button4 = new LabeledButton(L"Inputbox");
 	button4->setPos(300,220);
 	button4->setSize(80,25);
 	button4->setOnPressCallback(callback<void>(this, &StelUI::inputbox1));
@@ -673,7 +676,7 @@ Component* StelUI::createSearchWindow(void)
 	lblplanet2->setPos(x+100, y+35);
 	tab_planets->addComponent(lblplanet2);
 
-	planet_edit = new EditBox("");
+	planet_edit = new EditBox();
 	planet_edit->setOnReturnKeyCallback(callback<void>(this, &StelUI::doPlanetSearch));
 	planet_edit->setOnAutoCompleteCallback(callback<void>(this, &StelUI::showPlanetAutoComplete));
 	tab_planets->addComponent(planet_edit);
@@ -697,32 +700,32 @@ Component* StelUI::createSearchWindow(void)
 
 void StelUI::msgbox1(void)
 {
-	dialog_win->MessageBox("Stellarium",string("This is a 1 button message (OK only)\nWith an Alert Icon\nAnd an extra line"), 
+	dialog_win->MessageBox(L"Stellarium",wstring(L"This is a 1 button message (OK only)\nWith an Alert Icon\nAnd an extra line"), 
 		BT_OK + BT_ICON_ALERT, "1 button test");
 }
 
 void StelUI::msgbox2(void)
 {
-	dialog_win->MessageBox("Stellarium","This is a 2 button message (OK & CANCEL)\nWith a Question Icon", 
+	dialog_win->MessageBox(L"Stellarium",L"This is a 2 button message (OK & CANCEL)\nWith a Question Icon", 
 		BT_OK + BT_CANCEL + BT_ICON_QUESTION, "2 button test");
 }
 
 void StelUI::msgbox3(void)
 {
-	dialog_win->MessageBox("Stellarium","This is a 2 button message (OK & CANCEL)\nWith a Blank Icon", 
+	dialog_win->MessageBox(L"Stellarium",L"This is a 2 button message (OK & CANCEL)\nWith a Blank Icon", 
 		BT_OK + BT_CANCEL + BT_ICON_BLANK, "2 button test");
 }
 
 void StelUI::inputbox1(void)
 {
-	dialog_win->InputBox("Stellarium","Input a string into the EditBox class below.", "input test");
+	dialog_win->InputBox(L"Stellarium",L"Input a string into the EditBox class below.", "input test");
 }
 
 void StelUI::dialogCallback(void)
 {
 	string lastID = dialog_win->getLastID();
 	int lastButton = dialog_win->getLastButton();
-	string lastInput = dialog_win->getLastInput();
+	string lastInput = StelUtility::wstringToString(dialog_win->getLastInput());
 	int lastType = dialog_win->getLastType();
 
 	if (lastID == "observatory name")
@@ -742,27 +745,27 @@ void StelUI::dialogCallback(void)
 		else if (lastButton == BT_NO) msg += "BT_NO";
 		else if (lastButton == BT_CANCEL) msg += "BT_CANCEL";
 	
-		if (lastType == STDDLGWIN_MSG) dialog_win->MessageBox("Stellarium",msg, BT_OK);
-		else if (lastType == STDDLGWIN_INPUT) dialog_win->MessageBox("Stellarium",msg + " inp: " + lastInput, BT_OK);
+		if (lastType == STDDLGWIN_MSG) dialog_win->MessageBox(L"Stellarium",StelUtility::stringToWstring(msg), BT_OK);
+		else if (lastType == STDDLGWIN_INPUT) dialog_win->MessageBox(L"Stellarium",StelUtility::stringToWstring(msg) + L" inp: " + StelUtility::stringToWstring(lastInput), BT_OK);
 	}		
 }
 
 void StelUI::listBoxChanged(void)
 {
 	int value = listBox->getValue();
-	string objectName = listBox->getItem(value);
-    string command = string("select planet " + objectName);
-    string error = string("Planet '" + objectName + "' not found");
+	Planet* object = core->ssystem->searchByNamesI18(listBox->getItem(value));
+    string command = string("select planet " + object->getEnglishName());
+    wstring error = wstring(L"Planet '" + listBox->getItem(value) + L"' not found");
 	doSearchCommand(command, error);
 }
 
 void StelUI::hideSearchMessage(void)
 {
-       lblSearchMessage->setLabel("");
+       lblSearchMessage->setLabel(L"");
        lblSearchMessage->adjustSize();
 }
 
-void StelUI::showSearchMessage(string _message)
+void StelUI::showSearchMessage(wstring _message)
 {
        lblSearchMessage->setLabel(_message);
        lblSearchMessage->adjustSize();
@@ -771,7 +774,7 @@ void StelUI::showSearchMessage(string _message)
        lblSearchMessage->setPos((x1-x2)/2,search_win->getSizey()-17);
 }
 
-void StelUI::doSearchCommand(string _command, string _error)
+void StelUI::doSearchCommand(string _command, wstring _error)
 {
 	if(!core->commander->execute_command(_command))
         return;
@@ -787,37 +790,37 @@ void StelUI::doSearchCommand(string _command, string _error)
 
 void StelUI::doNebulaSearch(void)
 {
-    string objectName = nebula_edit->getText();
-    string originalName = objectName;
-    
-    transform(objectName.begin(), objectName.end(), objectName.begin(), (int(*)(int))toupper);
-    for (string::size_type i=0;i<objectName.length();++i)
-	{
-		if (objectName[i]==' ') objectName[i]='_';
-	}
-
-    string command = string("select nebula " + objectName);
-    string error = string("Nebula '" + originalName + "' not found");
-    
-    doSearchCommand(command, error);
-    nebula_edit->clearText();
+//     wstring objectName = nebula_edit->getText();
+//     wstring originalName = objectName;
+//     
+//     transform(objectName.begin(), objectName.end(), objectName.begin(), ::toupper);
+//     for (string::size_type i=0;i<objectName.length();++i)
+// 	{
+// 		if (objectName[i]==' ') objectName[i]='_';
+// 	}
+// 
+//     string command = string("select nebula " + objectName);
+//     string error = string("Nebula '" + originalName + "' not found");
+//     
+//     doSearchCommand(command, error);
+//     nebula_edit->clearText();
 }
 
 void StelUI::doConstellationSearch(void)
 {
-    string rawObjectName = constellation_edit->getText();
+    wstring rawObjectName = constellation_edit->getText();
 
     string objectName = core->asterisms->get_short_name_by_name(rawObjectName);
 
     if (objectName != "")
     {
 		string command = string("select constellation_star " + objectName);
-		string error = string("Constellation '" + objectName + "' not found");
+		wstring error = wstring(L"Constellation '" + rawObjectName + L"' not found");
 
 		doSearchCommand(command, error);
     }
     else
-        showSearchMessage(string("Constellation " + rawObjectName + " not found"));
+        showSearchMessage(wstring(L"Constellation " + rawObjectName + L" not found"));
 
 	constellation_edit->clearText();
 }
@@ -829,30 +832,30 @@ void StelUI::showConstellationAutoComplete(void)
 
 void StelUI::doStarSearch(void)
 {
-    string objectName = star_edit->getText();
-    string originalName = objectName;
-    unsigned int HP = core->hip_stars->getCommonNameHP(objectName);
-
-    if (HP > 0)
-    {
-		ostringstream oss;
-		oss << "HP_" << HP;
-		objectName	= oss.str();
-	}
-	else
-	{
-	    transform(objectName.begin(), objectName.end(), objectName.begin(), (int(*)(int))toupper);
-    	for (string::size_type i=0;i<objectName.length();++i)
-		{
-			if (objectName[i]==' ') objectName[i]='_';
-		}
-	}
-    
-	string command = string("select star " + objectName);
-    string error = string("Star '" + originalName + "' not found");
-    
-    doSearchCommand(command, error);
-    star_edit->clearText();
+//     string objectName = star_edit->getText();
+//     string originalName = objectName;
+//     unsigned int HP = core->hip_stars->getCommonNameHP(objectName);
+// 
+//     if (HP > 0)
+//     {
+// 		ostringstream oss;
+// 		oss << "HP_" << HP;
+// 		objectName	= oss.str();
+// 	}
+// 	else
+// 	{
+// 	    transform(objectName.begin(), objectName.end(), objectName.begin(), (int(*)(int))toupper);
+//     	for (string::size_type i=0;i<objectName.length();++i)
+// 		{
+// 			if (objectName[i]==' ') objectName[i]='_';
+// 		}
+// 	}
+//     
+// 	string command = string("select star " + objectName);
+//     string error = string("Star '" + originalName + "' not found");
+//     
+//     doSearchCommand(command, error);
+//     star_edit->clearText();
 }
 
 void StelUI::showStarAutoComplete(void)
@@ -862,13 +865,13 @@ void StelUI::showStarAutoComplete(void)
 
 void StelUI::doPlanetSearch(void)
 {
-    string objectName = planet_edit->getText();
-    string command = string("select planet " + objectName);
-    string error = string("Planet '" + objectName + "' not found");
-
-    planet_edit->clearText();
-    
-	doSearchCommand(command, error);
+//     string objectName = planet_edit->getText();
+//     string command = string("select planet " + objectName);
+//     string error = string("Planet '" + objectName + "' not found");
+// 
+//     planet_edit->clearText();
+//     
+// 	doSearchCommand(command, error);
 }
 
 void StelUI::showPlanetAutoComplete(void)
@@ -922,8 +925,8 @@ void StelUI::setObserverPositionFromMap(void)
 void StelUI::setCityFromMap(void)
 {
 	waitOnLocation = false;
-	lblMapLocation->setLabel(earth_map->getCursorString());
-	lblMapPointer->setLabel(earth_map->getPositionString());
+	lblMapLocation->setLabel(StelUtility::stringToWstring(earth_map->getCursorString()));
+	lblMapPointer->setLabel(StelUtility::stringToWstring(earth_map->getPositionString()));
 }
 
 void StelUI::setObserverPositionFromIncDec(void)
@@ -956,7 +959,7 @@ void StelUI::saveObserverPosition(void)
 	string location = earth_map->getPositionString();
 
 	if (location == UNKNOWN_OBSERVATORY)	
-		dialog_win->InputBox("Stellarium","Enter observatory name", "observatory name");
+		dialog_win->InputBox(L"Stellarium",_("Enter observatory name"), "observatory name");
 	else
 		doSaveObserverPosition(location);
 
@@ -964,7 +967,7 @@ void StelUI::saveObserverPosition(void)
 
 void StelUI::saveRenderOptions(void)
 {
-	cout << _("Saving rendering options in file ") << core->ConfigDir + core->config_file << endl;
+	cout << "Saving rendering options in file " << core->ConfigDir + core->config_file << endl;
 
 	InitParser conf;
 	conf.load(core->ConfigDir + core->config_file);
@@ -1011,7 +1014,7 @@ void StelUI::setVideoOption(void)
 	int w = atoi(s.substr(0,i).c_str());
 	int h = atoi(s.substr(i+1,s.size()).c_str());
 
-	cout << _("Saving video size ") << w << "x" << h << _(" in file ") << core->ConfigDir + core->config_file << endl;
+	cout << "Saving video size " << w << "x" << h << " in file " << core->ConfigDir + core->config_file << endl;
 
 	InitParser conf;
 	conf.load(core->ConfigDir + core->config_file);
@@ -1103,23 +1106,23 @@ void StelUI::updateConfigForm(void)
 	long_incdec->setValue(core->observatory->get_longitude());
 	lat_incdec->setValue(core->observatory->get_latitude());
 	alt_incdec->setValue(core->observatory->get_altitude());
-	lblMapLocation->setLabel(earth_map->getCursorString());
+	lblMapLocation->setLabel(StelUtility::stringToWstring(earth_map->getCursorString()));
 	if (!waitOnLocation)
-		lblMapPointer->setLabel(earth_map->getPositionString());
+		lblMapPointer->setLabel(StelUtility::stringToWstring(earth_map->getPositionString()));
 	else
 	{
 		earth_map->findPosition(core->observatory->get_longitude(),core->observatory->get_latitude());
-		lblMapPointer->setLabel(earth_map->getPositionString());
+		lblMapPointer->setLabel(StelUtility::stringToWstring(earth_map->getPositionString()));
 		waitOnLocation = false;
 	}
 
 	time_current->setJDay(core->navigation->get_JDay() + core->observatory->get_GMT_shift(core->navigation->get_JDay())*JD_HOUR);
-	system_tz_lbl2->setLabel("(" +
-		 core->observatory->get_time_zone_name_from_system(core->navigation->get_JDay()) + ")");
+	system_tz_lbl2->setLabel(L"(" +
+		 core->observatory->get_time_zone_name_from_system(core->navigation->get_JDay()) + L")");
 
-	static char tempstr[100];
-	sprintf(tempstr, "%.1f", core->navigation->get_time_speed()/JD_SECOND);
-	time_speed_lbl2->setLabel("\1 Current Time Speed is x" + string(tempstr));
+	wchar_t tempstr[100];
+	swprintf(tempstr, sizeof(tempstr), L"%.1f", core->navigation->get_time_speed()/JD_SECOND);
+	time_speed_lbl2->setLabel(_("\1 Current Time Speed is x") + wstring(tempstr));
 
 	fisheye_projection_cbx->setState(core->projection->get_type()==Projector::FISHEYE_PROJECTOR);
 	disk_viewport_cbx->setState(core->projection->get_viewport_type()==Projector::DISK);
