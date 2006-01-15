@@ -17,25 +17,39 @@
 using namespace std;
 
 
-EllipticalOrbit::EllipticalOrbit(double _pericenterDistance,
-                                 double _eccentricity,
-                                 double _inclination,
-                                 double _ascendingNode,
-                                 double _argOfPeriapsis,
-                                 double _meanAnomalyAtEpoch,
-                                 double _period,
-                                 double _epoch) :
-    pericenterDistance(_pericenterDistance),
-    eccentricity(_eccentricity),
-    inclination(_inclination),
-    ascendingNode(_ascendingNode),
-    argOfPeriapsis(_argOfPeriapsis),
-    meanAnomalyAtEpoch(_meanAnomalyAtEpoch),
-    period(_period),
-    epoch(_epoch)
+EllipticalOrbit::EllipticalOrbit(double pericenterDistance,
+                                 double eccentricity,
+                                 double inclination,
+                                 double ascendingNode,
+                                 double argOfPeriapsis,
+                                 double meanAnomalyAtEpoch,
+                                 double period,
+                                 double epoch,
+                                 double parent_rot_obliquity,
+                                 double parent_rot_ascendingnode) :
+    pericenterDistance(pericenterDistance),
+    eccentricity(eccentricity),
+    inclination(inclination),
+    ascendingNode(ascendingNode),
+    argOfPeriapsis(argOfPeriapsis),
+    meanAnomalyAtEpoch(meanAnomalyAtEpoch),
+    period(period),
+    epoch(epoch)
 {
+  const double c_obl = cos(parent_rot_obliquity);
+  const double s_obl = sin(parent_rot_obliquity);
+  const double c_nod = cos(parent_rot_ascendingnode);
+  const double s_nod = sin(parent_rot_ascendingnode);
+  rotate_to_vsop87[0] =  c_nod;
+  rotate_to_vsop87[1] = -s_nod * c_obl;
+  rotate_to_vsop87[2] =  s_nod * s_obl;
+  rotate_to_vsop87[3] =  s_nod;
+  rotate_to_vsop87[4] =  c_nod * c_obl;
+  rotate_to_vsop87[5] = -c_nod * s_obl;
+  rotate_to_vsop87[6] =  0.0;
+  rotate_to_vsop87[7] =          s_obl;
+  rotate_to_vsop87[8] =          c_obl;
 }
-
 
 // Standard iteration for solving Kepler's Equation
 struct SolveKeplerFunc1 : public unary_function<double, double>
@@ -211,20 +225,28 @@ Vec3d EllipticalOrbit::positionAtTime(double t) const
     return positionAtE(E);
 }
 
-void EllipticalOrbit::positionAtTime(double JD, double * X, double * Y, double * Z) const
-{
-	Vec3d pos = positionAtTime(JD);
-	*X=pos[2];
-	*Y=pos[0];
-	*Z=pos[1];
-}
+//void EllipticalOrbit::positionAtTime(double JD, double * X, double * Y, double * Z) const
+//{
+//	Vec3d pos = positionAtTime(JD);
+//	*X=pos[2];
+//	*Y=pos[0];
+//	*Z=pos[1];
+//}
 
-void EllipticalOrbit::positionAtTimev(double JD, double* v)
+//void EllipticalOrbit::positionAtTimev(double JD, double* v)
+//{
+//	Vec3d pos = positionAtTime(JD);
+//	v[0]=pos[2];
+//	v[1]=pos[0];
+//	v[2]=pos[1];
+//}
+
+void EllipticalOrbit::positionAtTimevInVSOP87Coordinates(double JD, double* v) const
 {
-	Vec3d pos = positionAtTime(JD);
-	v[0]=pos[2];
-	v[1]=pos[0];
-	v[2]=pos[1];
+  Vec3d pos = positionAtTime(JD);
+  v[0] = rotate_to_vsop87[0]*pos[2] + rotate_to_vsop87[1]*pos[0] + rotate_to_vsop87[1]*pos[1];
+  v[1] = rotate_to_vsop87[3]*pos[2] + rotate_to_vsop87[4]*pos[0] + rotate_to_vsop87[5]*pos[1];
+  v[2] = rotate_to_vsop87[6]*pos[2] + rotate_to_vsop87[7]*pos[0] + rotate_to_vsop87[8]*pos[1];
 }
 
 double EllipticalOrbit::getPeriod() const

@@ -79,7 +79,10 @@ static wchar_t *UTF8_to_UNICODE(wchar_t *unicode, const char *utf8, int len)
 	return unicode;
 }
 
-/** Convert from UTF-8 to wchar_t */
+/** 
+ * Convert from UTF-8 to wchar_t 
+ * Warning this is likely to be not very portable
+ */
 std::wstring Translator::UTF8stringToWstring(const string& s)
 {
 	wchar_t* outbuf = new wchar_t[s.length()+1];
