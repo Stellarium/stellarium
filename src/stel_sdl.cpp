@@ -88,17 +88,17 @@ void StelSdl::init(void)
     Vflags = SDL_HWSURFACE|SDL_OPENGL;//|SDL_DOUBLEBUF;
 	SDL_GL_SetAttribute(SDL_GL_STENCIL_SIZE,1);
 	// If fullscreen, set the Flag
-    if (core->get_Fullscreen()) Vflags|=SDL_FULLSCREEN;
+    if (core->getFullscreen()) Vflags|=SDL_FULLSCREEN;
 
 	// Create the SDL screen surface
-    Screen = SDL_SetVideoMode(core->get_screen_W(), core->get_screen_H(), core->get_bppMode(), Vflags);
+    Screen = SDL_SetVideoMode(core->get_screen_W(), core->get_screen_H(), core->getBppMode(), Vflags);
 	if(!Screen)
 	{
 		printf("sdl: Couldn't set %dx%d video mode (%s), retrying with stencil size 0\n",
  		core->get_screen_W(), core->get_screen_H(), SDL_GetError());
 
 		SDL_GL_SetAttribute(SDL_GL_STENCIL_SIZE,0);
-		Screen = SDL_SetVideoMode(core->get_screen_W(), core->get_screen_H(), core->get_bppMode(), Vflags);
+		Screen = SDL_SetVideoMode(core->get_screen_W(), core->get_screen_H(), core->getBppMode(), Vflags);
 
 		if(!Screen)
 		{
@@ -166,7 +166,7 @@ static const char *arrow[] = {
 	SDL_WM_SetCaption(APP_NAME, APP_NAME);
 
 	// Set the window icon
-	SDL_Surface *icon = SDL_LoadBMP((core->get_DataDir() + "icon.bmp").c_str());
+	SDL_Surface *icon = SDL_LoadBMP((core->getDataDir() + "icon.bmp").c_str());
 	SDL_WM_SetIcon(icon, NULL);
 	SDL_FreeSurface(icon);
 	
@@ -258,7 +258,7 @@ void StelSdl::start_main_loop(void)
 					break;
 
 				case SDL_MOUSEMOTION:
-				  	core->handle_move(E.motion.x,E.motion.y);
+				  	core->handleMove(E.motion.x,E.motion.y);
 					break;
 				
 				case SDL_MOUSEBUTTONDOWN:
@@ -272,7 +272,7 @@ void StelSdl::start_main_loop(void)
 						case SDL_BUTTON_WHEELDOWN : bt=S_GUI_MOUSE_WHEELDOWN; break;
 						default : bt=S_GUI_MOUSE_LEFT;
 					}
-					core->handle_clic(E.button.x,E.button.y,bt,S_GUI_PRESSED);
+					core->handleClick(E.button.x,E.button.y,bt,S_GUI_PRESSED);
 					break;
 
 				case SDL_MOUSEBUTTONUP:
@@ -286,7 +286,7 @@ void StelSdl::start_main_loop(void)
 						case SDL_BUTTON_WHEELDOWN : bt=S_GUI_MOUSE_WHEELDOWN; break;
 						default : bt=S_GUI_MOUSE_LEFT;
 					}
-					core->handle_clic(E.button.x,E.button.y,bt,S_GUI_RELEASED);
+					core->handleClick(E.button.x,E.button.y,bt,S_GUI_RELEASED);
 					break;
 
 				case SDL_KEYDOWN:
@@ -305,8 +305,8 @@ void StelSdl::start_main_loop(void)
 
 					// use unicode translation, since not keyboard dependent
 					// however, for non-printing keys must revert to just keysym... !
-					if ((E.key.keysym.unicode && !core->handle_keys(E.key.keysym.unicode,S_GUI_PRESSED)) ||
-						(!E.key.keysym.unicode && !core->handle_keys(E.key.keysym.sym,S_GUI_PRESSED)))
+					if ((E.key.keysym.unicode && !core->handleKeys(E.key.keysym.unicode,S_GUI_PRESSED)) ||
+						(!E.key.keysym.unicode && !core->handleKeys(E.key.keysym.sym,S_GUI_PRESSED)))
 					{
 
 						/* Fumio patch... can't use because ignores unicode values and hence is US keyboard specific.
@@ -387,7 +387,7 @@ void StelSdl::start_main_loop(void)
 					break;
 
 				case SDL_KEYUP:
-					core->handle_keys(E.key.keysym.sym,S_GUI_RELEASED);
+					core->handleKeys(E.key.keysym.sym,S_GUI_RELEASED);
 			}
 		}
 		else  // No events to poll
@@ -421,6 +421,6 @@ void StelSdl::start_main_loop(void)
 void StelSdl::resize_GL(int w, int h)
 {
     if (!h || !w) return;
-	core->set_screen_size(w, h);
+	core->setScreenSize(w, h);
 }
 

@@ -248,14 +248,14 @@ int main(int argc, char **argv)
 
 	// Give the config file parameters which has to be given "hard coded"
 #if !defined(MACOSX) && !defined(XCODE)
-	core->set_config_files("config.ini");
+	core->setConfigFiles("config.ini");
 #else
-    core->set_config_files(STELLARIUM_CONF_FILE);
+    core->setConfigFiles(STELLARIUM_CONF_FILE);
 #endif
 
 	// Load the configuration options from the given file names
 	// This includes the video parameters & the system locale
-	core->load_config();
+	core->loadConfig();
 
 	// Create a stellarium sdl manager
 	StelSdl sdl_mgr(core);
@@ -266,10 +266,10 @@ int main(int argc, char **argv)
 	core->init();
 
     // Re-load of config to re-enable flags available once the core has loaded 
-	core->load_config();
+	core->loadConfig();
 
 	// play startup script, if available
-	core->play_startup_script();
+	core->playStartupScript();
 
 	// Start the main loop until the end of the execution
 	sdl_mgr.start_main_loop();

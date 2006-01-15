@@ -1043,7 +1043,7 @@ void StelUI::setVideoOption(void)
 
 void StelUI::setLandscape(void)
 {
-	core->set_landscape(landscape_sl->getValue());
+	core->setLandscape(landscape_sl->getValue());
 }
 
 void StelUI::updateVideoVariables(void)

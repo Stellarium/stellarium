@@ -111,7 +111,7 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
     else if(args["auto_move_duration"]!="") stcore->auto_move_duration = str_to_double(args["auto_move_duration"]);
     else if(args["constellation_art_fade_duration"]!="") stcore->ConstellationArtFadeDuration = str_to_double(args["constellation_art_fade_duration"]);
     else if(args["constellation_art_intensity"]!="") stcore->ConstellationArtIntensity = str_to_double(args["constellation_art_intensity"]);
-    else if(args["landscape_name"]!="") stcore->set_landscape(args["landscape_name"]);
+    else if(args["landscape_name"]!="") stcore->setLandscape(args["landscape_name"]);
     else if(args["max_mag_nebula_name"]!="") stcore->MaxMagNebulaName = str_to_double(args["max_mag_nebula_name"]);
     else if(args["max_mag_star_name"]!="") stcore->MaxMagStarName = str_to_double(args["max_mag_star_name"]);
     else if(args["moon_scale"]!="") {
@@ -119,7 +119,7 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
       if(stcore->MoonScale<0) stcore->MoonScale=1;  // negative numbers reverse drawing!
       if (stcore->FlagMoonScaled) stcore->ssystem->get_moon()->set_sphere_scale(stcore->MoonScale);
     }
-    else if(args["sky_culture"]!="") status = stcore->set_sky_culture(args["sky_culture"]);
+    else if(args["sky_culture"]!="") status = stcore->setSkyCulture(args["sky_culture"]);
 //    else if(args["sky_locale"]!="") stcore->set_sky_locale(args["sky_locale"]); // Tony NOT SURE
     else if(args["sky_locale"]!="") stcore->setAppLanguage(args["sky_locale"]);
     else if(args["star_mag_scale"]!="") stcore->StarMagScale = str_to_double(args["star_mag_scale"]);
@@ -221,8 +221,8 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
       stcore->navigation->set_flag_traking(0);
 
 	  // determine if selected object pointer should be displayed
-	  if(args["pointer"]=="off" || args["pointer"]=="0") stcore->set_object_pointer_visibility(0);
-	  else stcore->set_object_pointer_visibility(1);
+	  if(args["pointer"]=="off" || args["pointer"]=="0") stcore->setObjectPointerVisibility(0);
+	  else stcore->setObjectPointerVisibility(1);
     }
 
   } else if (command == "deselect") {
@@ -253,11 +253,11 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 		  // auto zoom using specified or default duration
 		  if(args["duration"]=="") duration = stcore->auto_move_duration;
 		  		  
-		  if(args["auto"]=="out") stcore->auto_zoom_out(duration, 0);
-		  else if(args["auto"]=="initial") stcore->auto_zoom_out(duration, 1);
+		  if(args["auto"]=="out") stcore->autoZoomOut(duration, 0);
+		  else if(args["auto"]=="initial") stcore->autoZoomOut(duration, 1);
 		  else if(args["manual"]=="1") {
-			  stcore->auto_zoom_in(duration, 1);  // have to explicity allow possible manual zoom 
-		  } else stcore->auto_zoom_in(duration, 0);  
+			  stcore->autoZoomIn(duration, 1);  // have to explicity allow possible manual zoom 
+		  } else stcore->autoZoomIn(duration, 0);  
 
 	  } else if (args["fov"]!="") {
 		  // zoom to specific field of view
@@ -581,14 +581,14 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 
 	  if(args["action"]=="load" && trusted) {
 		  // eventually load/reload are not both needed, but for now this is called at startup, reload later
-		  stcore->load_config();
+		  stcore->loadConfig();
 		  recordable = 0;  // don't record as scripts can not run this
 
 	  } else if(args["action"]=="reload") {
 
 		  // on reload, be sure to reconfigure as necessary since StelCore::init isn't called
 
-		  stcore->load_config();
+		  stcore->loadConfig();
 
 		  if(stcore->asterisms) {
 			  stcore->asterisms->set_art_intensity(stcore->ConstellationArtIntensity);
@@ -598,7 +598,7 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 			  stcore->tone_converter->set_world_adaptation_luminance(3.75f);
 		  if (stcore->atmosphere) stcore->atmosphere->set_fade_duration(stcore->AtmosphereFadeDuration);
 		  stcore->observatory->load(stcore->ConfigDir + stcore->config_file, "init_location");
-		  stcore->set_landscape(stcore->observatory->get_landscape_name());
+		  stcore->setLandscape(stcore->observatory->get_landscape_name());
 		  
 		  if (stcore->StartupTimeMode=="preset" || stcore->StartupTimeMode=="Preset")
 			  {
@@ -614,9 +614,9 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 
 		  string temp = stcore->SkyCulture;  // fool caching in below method
 		  stcore->SkyCulture = "";
-		  stcore->set_sky_culture(temp);
+		  stcore->setSkyCulture(temp);
 		  
-		  system( ( stcore->DataDir + "script_load_config " ).c_str() );
+		  system( ( stcore->DataDir + "script_loadConfig " ).c_str() );
 
 	  } else status = 0;
 
