@@ -166,8 +166,22 @@ void get_europa_parent_coords(double JD, double * X, double * Y, double * Z)
 
     /* convert to rectangular coord */
     //    sphe_to_rect(L, B, R, X, Y, Z);
+    
+// Johannes: try convert to VSOP87
+    double x,y,z;
     // convert R to AU
-    sphe_to_rect(L, B, R/AU, X, Y, Z);
+    sphe_to_rect(L, B, R/AU, &x,&y,&z);
+    
+    const double obl = 2.222461 * (M_PI/180);
+    const double nod = -22.203 * (M_PI/180);
+    const double c_obl = cos(obl);
+    const double s_obl = sin(obl);
+    const double c_nod = cos(nod);
+    const double s_nod = sin(nod);
+    
+    *X =  c_nod*x - s_nod*c_obl*y + s_nod*s_obl*z;
+    *Y =  s_nod*x + c_nod*c_obl*y - c_nod*s_obl*z;
+    *Z =          +       s_obl*y +       c_obl*z;
 }
 
 
@@ -289,8 +303,21 @@ void get_callisto_parent_coords(double JD, double * X, double * Y, double * Z)
 
     L += JupAscendingNode;
 
-    sphe_to_rect(L, B, R/AU, X, Y, Z);
-
+    
+    double x,y,z;
+    // convert R to AU
+    sphe_to_rect(L, B, R/AU, &x,&y,&z);
+    
+    const double obl = 2.222461 * (M_PI/180);
+    const double nod = -22.203 * (M_PI/180);
+    const double c_obl = cos(obl);
+    const double s_obl = sin(obl);
+    const double c_nod = cos(nod);
+    const double s_nod = sin(nod);
+    
+    *X =  c_nod*x - s_nod*c_obl*y + s_nod*s_obl*z;
+    *Y =  s_nod*x + c_nod*c_obl*y - c_nod*s_obl*z;
+    *Z =          +       s_obl*y +       c_obl*z;
 }
 
 
@@ -356,8 +383,21 @@ void get_io_parent_coords(double JD, double * X, double * Y, double * Z)
     L += JupAscendingNode;
 
 
-
-   sphe_to_rect(L, B, R/AU, X, Y, Z);
+    
+    double x,y,z;
+    // convert R to AU
+    sphe_to_rect(L, B, R/AU, &x,&y,&z);
+    
+    const double obl = 2.222461 * (M_PI/180);
+    const double nod = -22.203 * (M_PI/180);
+    const double c_obl = cos(obl);
+    const double s_obl = sin(obl);
+    const double c_nod = cos(nod);
+    const double s_nod = sin(nod);
+    
+    *X =  c_nod*x - s_nod*c_obl*y + s_nod*s_obl*z;
+    *Y =  s_nod*x + c_nod*c_obl*y - c_nod*s_obl*z;
+    *Z =          +       s_obl*y +       c_obl*z;
 }
 
 
@@ -436,8 +476,21 @@ void get_ganymede_parent_coords(double JD, double * X, double * Y, double * Z)
 
 
 
-    sphe_to_rect(L, B, R/AU, X, Y, Z);
-
+    
+    double x,y,z;
+    // convert R to AU
+    sphe_to_rect(L, B, R/AU, &x,&y,&z);
+    
+    const double obl = 2.222461 * (M_PI/180);
+    const double nod = -22.203 * (M_PI/180);
+    const double c_obl = cos(obl);
+    const double s_obl = sin(obl);
+    const double c_nod = cos(nod);
+    const double s_nod = sin(nod);
+    
+    *X =  c_nod*x - s_nod*c_obl*y + s_nod*s_obl*z;
+    *Y =  s_nod*x + c_nod*c_obl*y - c_nod*s_obl*z;
+    *Z =          +       s_obl*y +       c_obl*z;
 }
 
 

@@ -20,7 +20,9 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 #ifndef _STELLPLANET_H_
 #define _STELLPLANET_H_
 
-#include "tass17.h"
+#include "tass17gust86.h"
+#include "esaphodei.h"
+#include "elp82b.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -51,16 +53,12 @@ void get_sun_helio_coords(double JD, double * X, double * Y, double * Z) {*X=0.;
 /* Calculate the rectangular geocentric lunar coordinates to the inertial mean
  * ecliptic and equinox of J2000.
  * The geocentric coordinates returned are in units of UA.
- * The truncation level of the series in radians for longitude
- * and latitude and in km for distance. (Valid range 0 - 0.01, 0 being highest accuracy)
  * This function is based upon the Lunar Solution ELP2000-82B by
  * Michelle Chapront-Touze and Jean Chapront of the Bureau des Longitudes,
  * Paris. ELP 2000-82B theory
- * param JD Julian day, rect pos, precision */
-void get_lunar_geo_posn_prec(double JD, double * X, double * Y, double * Z, double precision);
-
-/* Same with lowest precision by default */
-void get_lunar_geo_posn(double JD, double * X, double * Y, double * Z);
+ * param JD Julian day, rect pos */
+void get_lunar_parent_coordsv(double JD, double* XYZ)
+  {GetElp82bCoor(JD,XYZ);}
 
 void get_mercury_helio_coordsv(double JD, double* XYZ) {get_mercury_helio_coords(JD, &XYZ[0], &XYZ[1], &XYZ[2]);}
 void get_venus_helio_coordsv(double JD, double* XYZ) {get_venus_helio_coords(JD, &XYZ[0], &XYZ[1], &XYZ[2]);}
@@ -71,6 +69,11 @@ void get_saturn_helio_coordsv(double JD, double* XYZ) {get_saturn_helio_coords(J
 void get_uranus_helio_coordsv(double JD, double* XYZ) {get_uranus_helio_coords(JD, &XYZ[0], &XYZ[1], &XYZ[2]);}
 void get_neptune_helio_coordsv(double JD, double* XYZ) {get_neptune_helio_coords(JD, &XYZ[0], &XYZ[1], &XYZ[2]);}
 void get_pluto_helio_coordsv(double JD, double* XYZ) {get_pluto_helio_coords(JD, &XYZ[0], &XYZ[1], &XYZ[2]);}
+
+void get_phobos_parent_coordsv(double JD, double* XYZ)
+  {GetEsaPhoDeiCoor(JD,ESAPHODEI_PHOBOS,XYZ);}
+void get_deimos_parent_coordsv(double JD, double* XYZ)
+  {GetEsaPhoDeiCoor(JD,ESAPHODEI_DEIMOS,XYZ);}
 
 void get_europa_parent_coordsv(double JD, double* XYZ) {get_europa_parent_coords(JD, &XYZ[0], &XYZ[1], &XYZ[2]);}
 void get_callisto_parent_coordsv(double JD, double* XYZ) {get_callisto_parent_coords(JD, &XYZ[0], &XYZ[1], &XYZ[2]);}
@@ -94,11 +97,18 @@ void get_hyperion_parent_coordsv(double JD, double* XYZ)
 void get_iapetus_parent_coordsv(double JD, double* XYZ)
   {GetTass17Coor(JD,TASS17_IAPETUS,XYZ);}
 
-void get_sun_helio_coordsv(double JD, double* XYZ) {XYZ[0]=0.; XYZ[1]=0.; XYZ[2]=0.;}
+void get_miranda_parent_coordsv(double JD, double* XYZ)
+  {GetGust86Coor(JD,GUST86_MIRANDA,XYZ);}
+void get_ariel_parent_coordsv(double JD, double* XYZ)
+  {GetGust86Coor(JD,GUST86_ARIEL,XYZ);}
+void get_umbriel_parent_coordsv(double JD, double* XYZ)
+  {GetGust86Coor(JD,GUST86_UMBRIEL,XYZ);}
+void get_titania_parent_coordsv(double JD, double* XYZ)
+  {GetGust86Coor(JD,GUST86_TITANIA,XYZ);}
+void get_oberon_parent_coordsv(double JD, double* XYZ)
+  {GetGust86Coor(JD,GUST86_OBERON,XYZ);}
 
-void get_lunar_geo_posn_precv(double JD, double* XYZ, double precision)
-	{get_lunar_geo_posn_prec(JD, &XYZ[0], &XYZ[1], &XYZ[2], precision);}
-void get_lunar_geo_posnv(double JD, double* XYZ) {get_lunar_geo_posn(JD, &XYZ[0], &XYZ[1], &XYZ[2]);}
+void get_sun_helio_coordsv(double JD, double* XYZ) {XYZ[0]=0.; XYZ[1]=0.; XYZ[2]=0.;}
 
 #ifdef __cplusplus
 };
