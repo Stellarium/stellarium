@@ -26,6 +26,9 @@
 # include <config.h>
 #endif
 
+#include "stel_utility.h"
+#include "translator.h"
+
 // SDL is used only for the key codes, i'm lasy to redefine them
 // This is TODO to make the s_ library independent
 #include "SDL.h"
@@ -56,8 +59,8 @@ namespace s_tui
 	// Caracters '\22' and '\21' correspond to the "change to color" blue and green special
 	// stelarium ascii code, thus inserting them in a string will result in color change for the
 	// next char until another color is set
-	static const string start_active("\22");  // white is hilight
-	static const string stop_active("\21");
+	static const wstring start_active(L"\22");  // white is hilight
+	static const wstring stop_active(L"\21");
 
 	// Base class. Note that the method bool isEditable(void) has to be overrided by returning true
 	// for all the non passives components.
@@ -66,8 +69,8 @@ namespace s_tui
     public:
 		Component() : active(false) {;}
 		virtual ~Component() {;}
-		virtual string getString(void) {return string();}
-		virtual string getCleanString(void);
+		virtual wstring getString(void) {return wstring();}
+		virtual wstring getCleanString(void);
 		// Return true if key signal intercepted, false if not
 		virtual bool onKey(Uint16, S_TUI_VALUE) {return false;}
 		virtual bool isEditable(void) const {return false;}
@@ -91,7 +94,7 @@ namespace s_tui
     {
     public:
         virtual ~Container();
-		virtual string getString(void);
+		virtual wstring getString(void);
         virtual void addComponent(Component*);
 		virtual bool onKey(Uint16, S_TUI_VALUE);
     protected:
@@ -103,12 +106,12 @@ namespace s_tui
     {
     public:
 		Bistate(bool init_state = false) : CallbackComponent(), state(init_state) {;}
-		virtual string getString(void) {return state ? string_activated : string_disabled;}
+		virtual wstring getString(void) {return state ? string_activated : string_disabled;}
 		bool getValue(void) const {return state;}
 		void setValue(bool s) {state = s;}
     protected:
-		string string_activated;
-		string string_disabled;
+		wstring string_activated;
+		wstring string_disabled;
 		bool state;
     };
 
@@ -117,7 +120,7 @@ namespace s_tui
     {
     public:
 		Integer(int init_value = 0) : CallbackComponent(), value(init_value) {;}
-		virtual string getString(void);
+		virtual wstring getString(void);
 		int getValue(void) const {return value;}
 		void setValue(int v) {value = v;}
     protected:
@@ -128,14 +131,14 @@ namespace s_tui
 	class Boolean_item : public Bistate
     {
     public:
-		Boolean_item(bool init_state = false, const string& _label = string(),
-			const string& _string_activated = string("ON"),
-			const string& string_disabled  = string("OFF"));
+		Boolean_item(bool init_state = false, const wstring& _label = wstring(),
+			const wstring& _string_activated = wstring(L"ON"),
+			const wstring& string_disabled  = wstring(L"OFF"));
 		virtual bool onKey(Uint16, S_TUI_VALUE);
-		virtual string getString(void);
+		virtual wstring getString(void);
 		virtual bool isEditable(void) const {return true;}
     protected:
-		string label;
+		wstring label;
     };
 
 	// Component which manages decimal (double) value
@@ -143,7 +146,7 @@ namespace s_tui
     {
     public:
 		Decimal(double init_value = 0.) : CallbackComponent(), value(init_value) {;}
-		virtual string getString(void);
+		virtual wstring getString(void);
 		double getValue(void) const {return value;}
 		void setValue(double v) {value = v;}
     protected:
@@ -154,32 +157,32 @@ namespace s_tui
 	class Integer_item : public Integer
     {
     public:
-		Integer_item(int _min, int _max, int init_value, const string& _label = string()) :
+		Integer_item(int _min, int _max, int init_value, const wstring& _label = wstring()) :
 			Integer(init_value), numInput(false), min(_min), max(_max), label(_label) {;}
-		virtual string getString(void);
+		virtual wstring getString(void);
 		virtual bool isEditable(void) const {return true;}
 		virtual bool onKey(Uint16, S_TUI_VALUE);
     protected:
 		bool numInput;
-		string strInput;
+		wstring strInput;
 		int min, max;
-		string label;
+		wstring label;
     };
 
 	// Decimal item widget. The callback function is called when the value is changed
 	class Decimal_item : public Decimal
     {
     public:
-		Decimal_item(double _min, double _max, double init_value, const string& _label = string(), double _delta = 1.0) :
+		Decimal_item(double _min, double _max, double init_value, const wstring& _label = wstring(), double _delta = 1.0) :
 			Decimal(init_value), numInput(false), min(_min), max(_max), label(_label), delta(_delta) {;}
-		virtual string getString(void);
+		virtual wstring getString(void);
 		virtual bool isEditable(void) const {return true;}
 		virtual bool onKey(Uint16, S_TUI_VALUE);
     protected:
 		bool numInput;
-		string strInput;
+		wstring strInput;
 		double min, max;
-		string label;
+		wstring label;
 		double delta;
     };
 
@@ -187,11 +190,11 @@ namespace s_tui
     class Label_item : public Component
     {
     public:
-        Label_item(const string& _label) : Component(), label(_label) {;}
-		virtual string getString(void) {return label;}
-		void setLabel(const string& s) {label=s;}
+        Label_item(const wstring& _label) : Component(), label(_label) {;}
+		virtual wstring getString(void) {return label;}
+		void setLabel(const wstring& s) {label=s;}
     protected:
-        string label;
+        wstring label;
     };
 
 	// Manage list of components with one of them selected.
@@ -200,12 +203,12 @@ namespace s_tui
     {
     public:
 		Branch();
-		virtual string getString(void);
+		virtual wstring getString(void);
 		virtual bool onKey(Uint16, S_TUI_VALUE);
         virtual void addComponent(Component*);
 		virtual Component* getCurrent(void) const {if (current==childs.end()) return NULL; else return *current;}
-		virtual bool setValue(const string&);
-		virtual bool setValue_Specialslash(const string&);
+		virtual bool setValue(const wstring&);
+		virtual bool setValue_Specialslash(const wstring&);
     protected:
         list<Component*>::const_iterator current;
     };
@@ -215,13 +218,13 @@ namespace s_tui
     class MenuBranch : public Branch
     {
     public:
-		MenuBranch(const string& s);
+		MenuBranch(const wstring& s);
 		virtual bool onKey(Uint16, S_TUI_VALUE);
-		virtual string getString(void);
+		virtual wstring getString(void);
 		virtual bool isEditable(void) const {return true;}
-		string getLabel(void) const {return label;}
+		wstring getLabel(void) const {return label;}
     protected:
-		string label;
+		wstring label;
 		bool isNavigating;
 		bool isEditing;
     };
@@ -230,13 +233,13 @@ namespace s_tui
     class MenuBranch_item : public Branch
     {
     public:
-		MenuBranch_item(const string& s);
+		MenuBranch_item(const wstring& s);
 		virtual bool onKey(Uint16, S_TUI_VALUE);
-		virtual string getString(void);
+		virtual wstring getString(void);
 		virtual bool isEditable(void) const {return true;}
-		string getLabel(void) const {return label;}
+		wstring getLabel(void) const {return label;}
     protected:
-		string label;
+		wstring label;
 		bool isEditing;
     };
 
@@ -245,11 +248,11 @@ namespace s_tui
     class Time_item : public CallbackComponent
     {
     public:
-		Time_item(const string& _label = string(), double _JD = 2451545.0);
+		Time_item(const wstring& _label = wstring(), double _JD = 2451545.0);
 		~Time_item();
 		virtual bool onKey(Uint16, S_TUI_VALUE);
-		virtual string getString(void);
-		virtual string getDateString(void);
+		virtual wstring getString(void);
+		virtual wstring getDateString(void);
 		virtual bool isEditable(void) const {return true;}
 		double getJDay(void) const {return JD;}
 		void setJDay(double jd) {JD = jd;}
@@ -258,7 +261,7 @@ namespace s_tui
 		void compute_JD(void);
 		double JD;
 		Integer_item* current_edit;	// 0 to 5 year to second
-		string label;
+		wstring label;
 		int ymdhms[5];
 		double second;
 		Integer_item *y, *m, *d, *h, *mn, *s;
@@ -269,15 +272,15 @@ namespace s_tui
 	class Action_item : public CallbackComponent
     {
     public:
-		Action_item(const string& _label = "", const string& sp1 = "Do", const string& sp2 = "Done") :
+		Action_item(const wstring& _label = L"", const wstring& sp1 = _("Do"), const wstring& sp2 = _("Done")) :
 			CallbackComponent(), label(_label), string_prompt1(sp1), string_prompt2(sp2) {tempo = clock();}
 		virtual bool onKey(Uint16, S_TUI_VALUE);
-		virtual string getString(void);
+		virtual wstring getString(void);
 		virtual bool isEditable(void) const {return true;}
     protected:
-		string label;
-		string string_prompt1;
-		string string_prompt2;
+		wstring label;
+		wstring string_prompt1;
+		wstring string_prompt2;
 		int tempo;
     };
 
@@ -285,13 +288,13 @@ namespace s_tui
 	class ActionConfirm_item : public Action_item
     {
     public:
-		ActionConfirm_item(const string& _label = "", const string& sp1 = "Do", const string& sp2 = "Done",	const string& sc = "Are you sure ?") :
+		ActionConfirm_item(const wstring& _label = L"", const wstring& sp1 = _("Do"), const wstring& sp2 = _("Done"),	const wstring& sc = _("Are you sure ?")) :
 				Action_item(_label, sp1, sp2), isConfirming(false), string_confirm(sc) {;}
 		virtual bool onKey(Uint16, S_TUI_VALUE);
-		virtual string getString(void);
+		virtual wstring getString(void);
     protected:
 		bool isConfirming;
-		string string_confirm;
+		wstring string_confirm;
     };
 
 	// List item widget. The callback function is called when the selected item changes
@@ -299,16 +302,16 @@ namespace s_tui
 	class MultiSet_item : public CallbackComponent
     {
     public:
-		MultiSet_item(const string& _label = string()) : CallbackComponent(), label(_label) {current = items.end();}
+		MultiSet_item(const wstring& _label = wstring()) : CallbackComponent(), label(_label) {current = items.end();}
 		MultiSet_item(const MultiSet_item& m) : CallbackComponent(), label(m.label)
 		{
 			setCurrent(m.getCurrent());
 		}
-		virtual string getString(void)
+		virtual wstring getString(void)
 		{
 			if (current==items.end()) return label;
-			ostringstream os;
-			os << label << (active ? start_active : "") << *current << (active ? stop_active : "");
+			wostringstream os;
+			os << label << (active ? start_active : L"") << *current << (active ? stop_active : L"");
 			return os.str();
 		}
 		virtual bool isEditable(void) const {return true;}
@@ -341,16 +344,16 @@ namespace s_tui
 		  items.insert(newitem); 
 		  if(current==items.end()) current = items.begin();
 		}
-		void addItemList(const string& s)
+		void addItemList(const wstring& s)
 		{
-			istringstream is(s);
+			wistringstream is(s);
 			T elem;
 			while(getline(is, elem))
 			{
 				addItem(elem);
 			}
 		}
-		void replaceItemList(string s, int selection)
+		void replaceItemList(wstring s, int selection)
 		{
 		  items.clear();
 		  addItemList(s);
@@ -374,15 +377,19 @@ namespace s_tui
 			if (items.find(i) == items.end()) return false;
 			else current = items.find(i); return true;
 		}
-		string getLabel(void) const {return label;}
+		wstring getLabel(void) const {return label;}
 		virtual void set_OnTriggerCallback(const callback<void>& c) {onTriggerCallback = c;}
     protected:
 		T emptyT;
 		multiset<T> items;
 		typename multiset<T>::iterator current;
-		string label;
+		wstring label;
 		callback<void> onTriggerCallback;
     };
+
+	// Specialization for strings because operator wstream << string does not exists..
+	template<>
+	wstring MultiSet_item<string>::getString(void);
 
 
 	// List item widget with separation between UI keys (will be translated) and code value (never translated).
@@ -392,16 +399,16 @@ namespace s_tui
 	class MultiSet2_item : public CallbackComponent
     {
     public:
-		MultiSet2_item(const string& _label = string()) : CallbackComponent(), label(_label) {current = items.end();}
+		MultiSet2_item(const wstring& _label = wstring()) : CallbackComponent(), label(_label) {current = items.end();}
 		MultiSet2_item(const MultiSet2_item& m) : CallbackComponent(), label(m.label)
 		{
 			setCurrent(m.getCurrent());
 		}
-		virtual string getString(void)
+		virtual wstring getString(void)
 		{
 			if (current==items.end()) return label;
-			ostringstream os;
-			os << label << (active ? start_active : "") << *current << (active ? stop_active : "");
+			wostringstream os;
+			os << label << (active ? start_active : L"") << *current << (active ? stop_active : L"");
 			return os.str();
 		}
 		virtual bool isEditable(void) const {return true;}
@@ -435,16 +442,16 @@ namespace s_tui
 		  value[newkey] = newvalue;
 		  if(current==items.end()) current = items.begin();
 		}
-		void addItemList(string s)  // newline delimited, key and value alternate
+		void addItemList(wstring s)  // newline delimited, key and value alternate
 		{
-			istringstream is(s);
+			wistringstream is(s);
 			T key, value;
 			while(getline(is, key) && getline(is, value))
 			{
 				addItem(key, value);
 			}
 		}
-		void replaceItemList(string s, int selection)
+		void replaceItemList(wstring s, int selection)
 		{
 		  items.clear();
 		  value.clear();
@@ -487,13 +494,13 @@ namespace s_tui
 
 			return found;
 		}
-		string getLabel(void) const {return label;}
+		wstring getLabel(void) const {return label;}
 		virtual void set_OnTriggerCallback(const callback<void>& c) {onTriggerCallback = c;}
     protected:
 		T emptyT;
 		multiset<T> items;
 		typename multiset<T>::iterator current;
-		string label;
+		wstring label;
 		callback<void> onTriggerCallback;
 		map<T, T> value;  // hash of key, value pairs
     };
@@ -503,16 +510,16 @@ namespace s_tui
     class Time_zone_item : public CallbackComponent
     {
     public:
-		Time_zone_item(const string& zonetab_file, const string& _label = string());
+		Time_zone_item(const string& zonetab_file, const wstring& _label = wstring());
 		virtual bool onKey(Uint16, S_TUI_VALUE);
-		virtual string getString(void);
+		virtual wstring getString(void);
 		virtual bool isEditable(void) const {return true;}
 		string gettz(void); // should be const but gives a boring error...
 		void settz(const string& tz);
     protected:
 		MultiSet_item<string> continents_names;
 		map<string, MultiSet_item<string> > continents;
-		string label;
+		wstring label;
 		MultiSet_item<string>* current_edit;
     };
 
@@ -521,17 +528,17 @@ namespace s_tui
     class Vector_item : public CallbackComponent
     {
     public:
-		Vector_item(const string& _label = string(), Vec3d _init_vector = Vec3d(0,0,0));
+		Vector_item(const wstring& _label = wstring(), Vec3d _init_vector = Vec3d(0,0,0));
 		~Vector_item();
 		virtual bool onKey(Uint16, S_TUI_VALUE);
-		virtual string getString(void);
+		virtual wstring getString(void);
 		virtual bool isEditable(void) const {return true;}
 		Vec3d getVector(void) const { return Vec3d( a->getValue(), b->getValue(), c->getValue()); }
 		void setVector(Vec3d _vector) { a->setValue(_vector[0]); b->setValue(_vector[1]); c->setValue(_vector[2]); }
 
     protected:
 		Decimal_item* current_edit;	// 0 to 2
-		string label;
+		wstring label;
 		Decimal_item *a, *b, *c;
     };
 

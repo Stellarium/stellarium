@@ -23,6 +23,10 @@
 #include <cmath>
 #include "s_tui.h"
 
+using namespace std;
+using namespace s_tui;
+
+
 // A float to nearest int conversion routine for the systems which
 // are not C99 conformant
 inline int S_ROUND(float value)
@@ -43,13 +47,11 @@ inline int S_ROUND(float value)
 	return ((int) i_part);
 }
 
-using namespace std;
-using namespace s_tui;
 
 // Same function as getString but cleaned of every color informations
-string Component::getCleanString(void)
+wstring Component::getCleanString(void)
 {
-	string result, s(getString());
+	wstring result, s(getString());
 	for (unsigned int i=0;i<s.length();++i)
 	{
 		if (s[i]!=start_active[0] && s[i]!=stop_active[0]) result.push_back(s[i]);
@@ -76,9 +78,9 @@ void Container::addComponent(Component* c)
 	childs.push_back(c);
 }
 
-string Container::getString(void)
+wstring Container::getString(void)
 {
-	string s;
+	wstring s;
     list<Component*>::const_iterator iter = childs.begin();
 	while (iter != childs.end())
 	{
@@ -105,9 +107,9 @@ Branch::Branch() : Container()
 	current = childs.begin();
 }
 
-string Branch::getString(void)
+wstring Branch::getString(void)
 {
-	if (!*current) return string();
+	if (!*current) return wstring();
 	else return (*current)->getString();
 }
 
@@ -117,12 +119,12 @@ void Branch::addComponent(Component* c)
 	if (childs.size()==1) current = childs.begin();
 }
 
-bool Branch::setValue(const string& s)
+bool Branch::setValue(const wstring& s)
 {
 	list<Component*>::iterator c;
 	for (c=childs.begin();c!=childs.end();c++)
 	{
-		cout << (*c)->getCleanString() << endl;
+		//wcout << (*c)->getCleanString() << endl;
 		if ((*c)->getCleanString()==s)
 		{
 			current = c;
@@ -132,14 +134,14 @@ bool Branch::setValue(const string& s)
 	return false;
 }
 
-bool Branch::setValue_Specialslash(const string& s)
+bool Branch::setValue_Specialslash(const wstring& s)
 {
 	list<Component*>::iterator c;
 	for (c=childs.begin();c!=childs.end();c++)
 	{
-		string cs = (*c)->getCleanString();
+		wstring cs = (*c)->getCleanString();
 		int pos = cs.find('/');
-		string ccs = cs.substr(0,pos);
+		wstring ccs = cs.substr(0,pos);
 		if (ccs==s)
 		{
 			current = c;
@@ -176,7 +178,7 @@ bool Branch::onKey(Uint16 k, S_TUI_VALUE v)
 	return false;
 }
 
-MenuBranch::MenuBranch(const string& s) : Branch(), label(s), isNavigating(false), isEditing(false)
+MenuBranch::MenuBranch(const wstring& s) : Branch(), label(s), isNavigating(false), isEditing(false)
 {
 }
 
@@ -231,18 +233,18 @@ bool MenuBranch::onKey(Uint16 k, S_TUI_VALUE v)
 	return false;
 }
 
-string MenuBranch::getString(void)
+wstring MenuBranch::getString(void)
 {
 	if (!isNavigating) return label;
 	if (isEditing) (*Branch::current)->setActive(true);
-	string s(Branch::getString());
+	wstring s(Branch::getString());
 	if (isEditing) (*Branch::current)->setActive(false);
 	return s;
 }
 
 
 
-MenuBranch_item::MenuBranch_item(const string& s) : Branch(), label(s), isEditing(false)
+MenuBranch_item::MenuBranch_item(const wstring& s) : Branch(), label(s), isEditing(false)
 {
 }
 
@@ -286,16 +288,16 @@ bool MenuBranch_item::onKey(Uint16 k, S_TUI_VALUE v)
 	return false;
 }
 
-string MenuBranch_item::getString(void)
+wstring MenuBranch_item::getString(void)
 {
 	if (active) (*Branch::current)->setActive(true);
-	string s(label + Branch::getString());
+	wstring s(label + Branch::getString());
 	if (active) (*Branch::current)->setActive(false);
 	return s;
 }
 
-Boolean_item::Boolean_item(bool init_state, const string& _label, const string& _string_activated,
-	const string& _string_disabled) :
+Boolean_item::Boolean_item(bool init_state, const wstring& _label, const wstring& _string_activated,
+	const wstring& _string_disabled) :
 		Bistate(init_state), label(_label)
 {
 	string_activated = _string_activated;
@@ -313,24 +315,24 @@ bool Boolean_item::onKey(Uint16 k, S_TUI_VALUE v)
 	return false;
 }
 
-string Boolean_item::getString(void)
+wstring Boolean_item::getString(void)
 {
-	return label + (active ? start_active : "") +
+	return label + (active ? start_active : L"") +
 		(state ? string_activated : string_disabled) +
-		(active ? stop_active : "");
+		(active ? stop_active : L"");
 }
 
-string Integer::getString(void)
+wstring Integer::getString(void)
 {
-	ostringstream os;
-	os << (active ? start_active : "") << value << (active ? stop_active : "");
+	wostringstream os;
+	os << (active ? start_active : L"") << value << (active ? stop_active : L"");
 	return os.str();
 }
 
-string Decimal::getString(void)
+wstring Decimal::getString(void)
 {
-	ostringstream os;
-	os << (active ? start_active : "") << value << (active ? stop_active : "");
+	wostringstream os;
+	os << (active ? start_active : L"") << value << (active ? stop_active : L"");
 	return os.str();
 }
 
@@ -381,7 +383,7 @@ bool Integer_item::onKey(Uint16 k, S_TUI_VALUE v)
 		if (k==SDLK_RETURN)
 		{
 			numInput=false;
-			istringstream is(strInput);
+			wistringstream is(strInput);
 			is >> value;
 			if (value>max) value = max;
 			if (value<min) value = min;
@@ -391,24 +393,24 @@ bool Integer_item::onKey(Uint16 k, S_TUI_VALUE v)
 
 		if (k==SDLK_UP)
 		{
-			istringstream is(strInput);
+			wistringstream is(strInput);
 			is >> value;
 			++value;
 			if (value>max) value = max;
 			if (value<min) value = min;
-			ostringstream os;
+			wostringstream os;
 			os << value;
 			strInput = os.str();
 			return true;
 		}
 		if (k==SDLK_DOWN)
 		{
-			istringstream is(strInput);
+			wistringstream is(strInput);
 			is >> value;
 			--value;
 			if (value>max) value = max;
 			if (value<min) value = min;
-			ostringstream os;
+			wostringstream os;
 			os << value;
 			strInput = os.str();
 			return true;
@@ -434,12 +436,12 @@ bool Integer_item::onKey(Uint16 k, S_TUI_VALUE v)
 	return false;
 }
 
-string Integer_item::getString(void)
+wstring Integer_item::getString(void)
 {
-	ostringstream os;
+	wostringstream os;
 
-	if (numInput) os << label << (active ? start_active : "") << strInput << (active ? stop_active : "");
-	else os << label << (active ? start_active : "") << value << (active ? stop_active : "");
+	if (numInput) os << label << (active ? start_active : L"") << strInput << (active ? stop_active : L"");
+	else os << label << (active ? start_active : L"") << value << (active ? stop_active : L"");
 	return os.str();
 }
 
@@ -489,7 +491,7 @@ bool Decimal_item::onKey(Uint16 k, S_TUI_VALUE v)
 		if (k==SDLK_RETURN || k==SDLK_LEFT)
 		{
 			numInput=false;
-			istringstream is(strInput);
+			wistringstream is(strInput);
 			is >> value;
 			if (value>max) value = max;
 			if (value<min) value = min;
@@ -499,27 +501,26 @@ bool Decimal_item::onKey(Uint16 k, S_TUI_VALUE v)
 
 		if (k==SDLK_UP)
 		{
-			istringstream is(strInput);
+			wistringstream is(strInput);
 			is >> value;
 			value+=delta;
 			if (value>max) value = max;
 			if (value<min) value = min;
-			static char tempstr[16];
-			snprintf(tempstr, 15, "%.2f", value);
-			string os(tempstr);
-			strInput = os.c_str();
+			static wchar_t tempstr[16];
+			swprintf(tempstr, 15, L"%.2f", value);
+			strInput = tempstr;
 			return true;
 		}
 		if (k==SDLK_DOWN)
 		{
-			value = atof(strInput.c_str());
+			wistringstream wistemp(strInput);
+			wistemp >> value;
 			value-=delta;
 			if (value>max) value = max;
 			if (value<min) value = min;
-			static char tempstr[16];
-			snprintf(tempstr, 15, "%.2f", value);
-			string os(tempstr);
-			strInput = os.c_str();
+			static wchar_t tempstr[16];
+			swprintf(tempstr, 15, L"%.2f", value);
+			strInput = tempstr;
 			return true;
 		}
 
@@ -527,7 +528,7 @@ bool Decimal_item::onKey(Uint16 k, S_TUI_VALUE v)
 			k==SDLK_6 || k==SDLK_7 || k==SDLK_8 || k==SDLK_9 || k==SDLK_PERIOD || k==SDLK_MINUS)
 		{
 			// The user was already editing
-			char c = k;
+			wchar_t c = (wchar_t)k;
 			strInput += c;
 			return true;
 		}
@@ -543,22 +544,22 @@ bool Decimal_item::onKey(Uint16 k, S_TUI_VALUE v)
 	return false;
 }
 
-string Decimal_item::getString(void)
+wstring Decimal_item::getString(void)
 {
-	ostringstream os;
+	wostringstream os;
 
 	// Can't directly write value in os because there is a float precision limit bug..
-	static char tempstr[16];
-	snprintf(tempstr, 15, "%.2f", value);
-	string vstr(tempstr);
+	static wchar_t tempstr[16];
+	swprintf(tempstr, 15, L"%.2f", value);
+	wstring vstr(tempstr);
 
-	if (numInput) os << label << (active ? start_active : "") << strInput << (active ? stop_active : "");
-	else os << label << (active ? start_active : "") << vstr.c_str() << (active ? stop_active : "");
+	if (numInput) os << label << (active ? start_active : L"") << strInput << (active ? stop_active : L"");
+	else os << label << (active ? start_active : L"") << vstr << (active ? stop_active : L"");
 	return os.str();
 }
 
 
-Time_item::Time_item(const string& _label, double _JD) :
+Time_item::Time_item(const wstring& _label, double _JD) :
 	CallbackComponent(), JD(_JD), current_edit(NULL), label(_label),
 	y(NULL), m(NULL), d(NULL), h(NULL), mn(NULL), s(NULL)
 {
@@ -627,12 +628,12 @@ bool Time_item::onKey(Uint16 k, S_TUI_VALUE v)
 }
 
 // Convert Julian day to yyyy/mm/dd hh:mm:ss and return the string
-string Time_item::getString(void)
+wstring Time_item::getString(void)
 {
 	compute_ymdhms();
 
-	string s1[6];
-	string s2[6];
+	wstring s1[6];
+	wstring s2[6];
 	if (current_edit==y && active){s1[0] = start_active; s2[0] = stop_active;}
 	if (current_edit==m && active){s1[1] = start_active; s2[1] = stop_active;}
 	if (current_edit==d && active){s1[2] = start_active; s2[2] = stop_active;}
@@ -640,29 +641,29 @@ string Time_item::getString(void)
 	if (current_edit==mn && active){s1[4] = start_active; s2[4] = stop_active;}
 	if (current_edit==s && active){s1[5] = start_active; s2[5] = stop_active;}
 
-	ostringstream os;
+	wostringstream os;
 	os 	<< label <<
-	s1[0] << y->getString() << s2[0] << "/" <<
-	s1[1] << m->getString() << s2[1] << "/" <<
-	s1[2] << d->getString() << s2[2] << " " <<
-	s1[3] << h->getString() << s2[3] << ":" <<
-	s1[4] << mn->getString() << s2[4] << ":" <<
+	s1[0] << y->getString() << s2[0] << L"/" <<
+	s1[1] << m->getString() << s2[1] << L"/" <<
+	s1[2] << d->getString() << s2[2] << L" " <<
+	s1[3] << h->getString() << s2[3] << L":" <<
+	s1[4] << mn->getString() << s2[4] << L":" <<
 	s1[5] << s->getString() << s2[5];
 	return os.str();
 }
 
 
 // for use with commands - no special characters, just the local date
-string Time_item::getDateString(void)
+wstring Time_item::getDateString(void)
 {
 	compute_ymdhms();  // possibly redundant
 
-	ostringstream os;
-	os << y->getString() << ":"
-	   << m->getString() << ":"
-	   << d->getString() << "T"
-	   << h->getString() << ":"
-	   << mn->getString() << ":"
+	wostringstream os;
+	os << y->getString() << L":"
+	   << m->getString() << L":"
+	   << d->getString() << L"T"
+	   << h->getString() << L":"
+	   << mn->getString() << L":"
 	   << s->getString();
 	return os.str();
 }
@@ -741,11 +742,11 @@ void Time_item::compute_JD(void)
 
 
 // Widget used to set time zone. Initialized from a file of type /usr/share/zoneinfo/zone.tab
-Time_zone_item::Time_zone_item(const string& zonetab_file, const string& _label) : label(_label)
+Time_zone_item::Time_zone_item(const string& zonetab_file, const wstring& _label) : label(_label)
 {
 	if (zonetab_file.empty())
 	{
-		cout << "Can't find file \"" << zonetab_file << "\"\n" ;
+		cerr << "Can't find file \"" << zonetab_file << "\"\n" ;
 		exit(0);
 	}
 
@@ -810,14 +811,14 @@ bool Time_zone_item::onKey(Uint16 k, S_TUI_VALUE v)
 	return false;
 }
 
-string Time_zone_item::getString(void)
+wstring Time_zone_item::getString(void)
 {
-	string s1[2], s2[2];
+	wstring s1[2], s2[2];
 	if (current_edit==&continents_names && active){s1[0] = start_active; s2[0] = stop_active;}
 	if (current_edit!=&continents_names && active){s1[1] = start_active; s2[1] = stop_active;}
 
-	return label + s1[0] + continents_names.getCurrent() + s2[0] + "/" + s1[1] +
-		continents[continents_names.getCurrent()].getCurrent() + s2[1];
+	return label + s1[0] + StelUtility::stringToWstring(continents_names.getCurrent()) + s2[0] + L"/" + s1[1] +
+		StelUtility::stringToWstring(continents[continents_names.getCurrent()].getCurrent()) + s2[1];
 }
 
 string Time_zone_item::gettz(void) // should be const but gives a boring error...
@@ -835,7 +836,7 @@ void Time_zone_item::settz(const string& tz)
 }
 
 
-string Action_item::getString(void)
+wstring Action_item::getString(void)
 {
 	if (clock() - tempo > CLOCKS_PER_SEC)
 	{
@@ -867,7 +868,7 @@ bool Action_item::onKey(Uint16 k, S_TUI_VALUE v)
 	return false;
 }
 
-string ActionConfirm_item::getString(void)
+wstring ActionConfirm_item::getString(void)
 {
 	if (active)
 	{
@@ -914,13 +915,13 @@ bool ActionConfirm_item::onKey(Uint16 k, S_TUI_VALUE v)
 
 
 
-Vector_item::Vector_item(const string& _label, Vec3d _init_vector) :
+Vector_item::Vector_item(const wstring& _label, Vec3d _init_vector) :
 	CallbackComponent(), current_edit(NULL), label(_label),
 	a(NULL), b(NULL), c(NULL)
 {
-	a = new Decimal_item(0, 1, 0, "", 0.05);
-	b = new Decimal_item(0, 1, 0, "", 0.05);
-	c = new Decimal_item(0, 1, 0, "", 0.05);
+	a = new Decimal_item(0, 1, 0, L"", 0.05);
+	b = new Decimal_item(0, 1, 0, L"", 0.05);
+	c = new Decimal_item(0, 1, 0, L"", 0.05);
 	current_edit = a;
 	setVector(_init_vector);
 }
@@ -969,21 +970,28 @@ bool Vector_item::onKey(Uint16 k, S_TUI_VALUE v)
 }
 
 
-string Vector_item::getString(void)
+wstring Vector_item::getString(void)
 {
-
-	string s1[3];
-	string s2[3];
+	wstring s1[3];
+	wstring s2[3];
 	if (current_edit==a && active){s1[0] = start_active; s2[0] = stop_active;}
 	if (current_edit==b && active){s1[1] = start_active; s2[1] = stop_active;}
 	if (current_edit==c && active){s1[2] = start_active; s2[2] = stop_active;}
 
-	ostringstream os;
+	wostringstream os;
 	os 	<< label <<
-	s1[0] << a->getString() << s2[0] << " " <<
-	s1[1] << b->getString() << s2[1] << " " <<
-		s1[2] << c->getString() << s2[2] << " ";
+	s1[0] << a->getString() << s2[0] << L" " <<
+	s1[1] << b->getString() << s2[1] << L" " <<
+	s1[2] << c->getString() << s2[2] << L" ";
 	return os.str();
 }
 
-
+// Specialization for strings because operator wstream << string does not exists..
+	template<>
+	wstring MultiSet_item<string>::getString(void)
+	{
+		if (current==items.end()) return label;
+		wostringstream os;
+		os << label << (active ? start_active : L"") << StelUtility::stringToWstring(*current) << (active ? stop_active : L"");
+		return os.str();
+	}

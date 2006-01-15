@@ -28,6 +28,8 @@
 #include <map>
 #include <iostream>
 #include <fstream>
+//#include <assert>
+
 #include <ft2build.h>
 #include FT_FREETYPE_H
 #include FT_GLYPH_H

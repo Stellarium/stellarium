@@ -42,6 +42,8 @@
 #include "vecmath.h"
 #include "callbacks.hpp"
 
+#include "translator.h"
+
 void glCircle(const Vec3d& pos, float radius, float linewidth = 1.0);
 void glEllipse(const Vec3d& pos, float radius, float y_ratio, float linewidth = 1.0);
 
@@ -93,7 +95,7 @@ void* getLastCallbackObject(void);
 ////////////////////////////////////////////////////////////////////////////////
 
 namespace s_gui
-{
+{	
 	// gui Return Values:
 	enum S_GUI_VALUE
 	{
@@ -143,6 +145,8 @@ namespace s_gui
 		void drawLine(const s_vec2i& pos1, const s_vec2i& pos2, const s_color& c) const;
 		void print(int x, int y, const string& str);
 		void print(int x, int y, const string& str, const s_color& c);
+		void print(int x, int y, const wstring& str);
+		void print(int x, int y, const wstring& str, const s_color& c);		
 		void setTexture(const s_texture* tex) {tex1 = tex;}
 		void setFont(s_font* f) {font = f;}
 		void setTextColor(const s_color& c) {textColor = c;}
@@ -359,17 +363,16 @@ namespace s_gui
     class Label : public Component
     {
     public:
-        Label(const string& _label = "", s_font* _font = NULL);
+        Label(const wstring& _label = L"", s_font* _font = NULL);
         virtual ~Label();
-        virtual const string& getLabel() const {return label;}
-        virtual void setLabel(const string&, bool _translate = true);
+        virtual const wstring& getLabel() const {return label;}
+        /** @brief Set new label */
+        virtual void setLabel(const wstring&);
         virtual void draw();
         virtual void draw(float intensity);
-        virtual void changeLocale(void);
 		virtual void adjustSize(void);
     protected:
-        string label_native;
-        string label;
+        wstring label;
     };
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -382,7 +385,7 @@ namespace s_gui
     {
 		friend class TabContainer;
     public:
-        LabeledButton(const string& _label = "", s_font* font = NULL, 
+        LabeledButton(const wstring& _label = L"", s_font* font = NULL, 
 			Justification _j = JUSTIFY_CENTER, bool _bright = false);
 		virtual ~LabeledButton();
         virtual void draw(void);
@@ -392,9 +395,8 @@ namespace s_gui
 		virtual void setTextColor(const s_color& c) {Button::setTextColor(c); label.setTextColor(c);}
 		virtual void setPainter(const Painter& p) {Button::setPainter(p); label.setPainter(p);}
 		virtual void setJustification(Justification _j) { justification = _j; }
-        void setLabel(const string& _label, bool _translate = true) { label.setLabel(_label, _translate); };
+        void setLabel(const wstring& _label) { label.setLabel(_label); };
         void setBright(bool _b) { isBright = _b; };
-        virtual void changeLocale(void);
     protected:
 		Label label;
 		Justification justification;
@@ -410,13 +412,13 @@ namespace s_gui
     public:
 		History(unsigned int _items = 0);
 		void clear(void);
-		void add(const string& _text);
-		string prev(void);
-		string next(void);
+		void add(const wstring& _text);
+		wstring prev(void);
+		wstring next(void);
 	private:
 		unsigned int maxItems;
 		int pos;
-		vector<string> history;
+		vector<wstring> history;
 	};
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -427,17 +429,17 @@ namespace s_gui
     {
     public:
 		AutoCompleteString();
-		string test(const string& _text);
-		void setOptions(vector<string> _options) { options = _options; }
-		string getOptions(int _number = -1);
-		string getFirstMatch(void);
+		wstring test(const wstring& _text);
+		void setOptions(vector<wstring> _options) { options = _options; }
+		wstring getOptions(int _number = -1);
+		wstring getFirstMatch(void);
 		void reset(void);
 		bool hasMatch(void) { return matches.size() > 0; }
 	private:
 		int lastMatchPos;
 		int maxMatches;
-		vector<string> options;
-		vector<string> matches;
+		vector<wstring> options;
+		vector<wstring> matches;
 	};    
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -447,7 +449,7 @@ namespace s_gui
     class EditBox : public Button
     {
     public:
-        EditBox(const string& _label = "", s_font* font = NULL);
+        EditBox(const wstring& _label = L"", s_font* font = NULL);
 		virtual ~EditBox();
 		virtual void setOnReturnKeyCallback(const callback<void>& c) {onReturnKeyCallback = c;}
 		virtual void setOnKeyCallback(const callback<void>& c) {onKeyCallback = c;}
@@ -460,16 +462,16 @@ namespace s_gui
 		virtual bool onKey(Uint16, S_GUI_VALUE);
 		virtual bool onClic(int, int, S_GUI_VALUE, S_GUI_VALUE);
 		void setVisible(bool _visible);
-		void setAutoCompleteOptions(vector<string> _autocomplete) { autoComplete.setOptions(_autocomplete); };
-		string getAutoCompleteOptions(void) { return autoComplete.getOptions(); }
-		string getText(void) { return text; }
+		void setAutoCompleteOptions(vector<wstring> _autocomplete) { autoComplete.setOptions(_autocomplete); };
+		wstring getAutoCompleteOptions(void) { return autoComplete.getOptions(); }
+		wstring getText(void) { return text; }
 		void setEditing(bool _b);
 		void refreshLabel(void);
-		void setPrompt(const string &p);
-		void setPrompt(void) { setPrompt(string()); };
-		void setText(const string &_text);
-		void clearText(void) { setText(""); }
-		string getDefaultPrompt(void);
+		void setPrompt(const wstring &p);
+		void setPrompt(void) { setPrompt(wstring()); };
+		void setText(const wstring &_text);
+		void clearText(void) { setText(L""); }
+		wstring getDefaultPrompt(void);
 		Uint16 getLastKey(void) { return lastKey;}
 		void setAutoFocus(bool _b) {autoFocus = _b; }
 		bool getAutoFocus(void) { return autoFocus; }
@@ -485,10 +487,10 @@ namespace s_gui
 
         Label label;
 		bool isEditing;
-		string text;
+		wstring text;
 		unsigned int cursorPos;
-		string lastText;
-		string prompt;
+		wstring lastText;
+		wstring prompt;
 		Uint16 lastKey;
 		bool autoFocus;
     };
@@ -530,11 +532,10 @@ namespace s_gui
 		virtual bool onClic(int, int, S_GUI_VALUE, S_GUI_VALUE);
 		virtual bool onMove(int, int);
         virtual void draw(void);
-        virtual void changeLocale(void);
    		virtual void setVisible(bool _visible);
-		string getItem(int value);
-		void addItems(const vector<string> _items);
-		void addItem(const string& _text);
+		wstring getItem(int value);
+		void addItems(const vector<wstring> _items);
+		void addItem(const wstring& _text);
 		void clear(void);
 		int getValue(void) { return value;}
 	private:
@@ -546,8 +547,7 @@ namespace s_gui
 		callback<void> onChangedCallback;
 		int firstItemIndex;
 		vector<LabeledButton*> itemBt;
-		vector<string> items;
-		vector<string> items_native;
+		vector<wstring> items;
 		int value;
 		unsigned int displayLines;
 	};
@@ -555,17 +555,15 @@ namespace s_gui
     class TextLabel : public Container
 	{
 	public:
-	    TextLabel(const string& _label = "", s_font* _font = NULL);
+	    TextLabel(const wstring& _label = L"", s_font* _font = NULL);
 	    virtual ~TextLabel();
-        virtual const string& getLabel() const {return label;}
+        virtual const wstring& getLabel() const {return label;}
         virtual void draw(void);
-        virtual void changeLocale(void);
-        virtual void setLabel(const string&, bool _translate = true);
+        virtual void setLabel(const wstring&);
 		virtual void adjustSize(void);
 		virtual void setTextColor(const s_color& c);
 	protected:
-        string label_native;
-        string label;
+        wstring label;
 	};
 
 	class IntIncDec : public Container
@@ -637,7 +635,7 @@ namespace s_gui
 	class LabeledCheckBox : public Container
 	{
 	public:
-		LabeledCheckBox(bool state = false, const string& _label = "");
+		LabeledCheckBox(bool state = false, const wstring& _label = "");
 		~LabeledCheckBox();
         virtual void draw(void);
 		virtual int getState(void) const {return checkbox->getState();}
@@ -670,11 +668,11 @@ namespace s_gui
 	class StdWin : public FramedContainer
 	{
 	public:
-	    StdWin(const string& _title = NULL, s_texture* _header_tex = NULL,
+	    StdWin(const wstring& _title = L"", s_texture* _header_tex = NULL,
 			s_font * _winfont = NULL, int headerSize = 18);
 	   	virtual void draw();
-	    virtual string getTitle() const {return titleLabel->getLabel().c_str();}
-	    virtual void setTitle(const string& _title);
+	    virtual wstring getTitle() const {return titleLabel->getLabel();}
+	    virtual void setTitle(const wstring& _title);
 		virtual bool onClic(int, int, S_GUI_VALUE, S_GUI_VALUE);
 		virtual bool onMove(int, int);
 		virtual void setVisible(bool _visible);
@@ -702,15 +700,15 @@ namespace s_gui
 	class StdDlgWin : public StdWin
 	{
 	public:
-		StdDlgWin(const string& _title = NULL, s_texture* _header_tex = NULL , s_font * _winfont = NULL, int headerSize = 18);
+		StdDlgWin(const wstring& _title = NULL, s_texture* _header_tex = NULL , s_font * _winfont = NULL, int headerSize = 18);
 		virtual void setDialogCallback(const callback<void>& c) {onCompleteCallback = c;}
-		void MessageBox(const string &_title, const string &_prompt, int _buttons, const string &_ID = "");
-		void InputBox(const string &_title, const string &_prompt, const string &_ID = "");
+		void MessageBox(const wstring &_title, const wstring &_prompt, int _buttons, const string &_ID = "");
+		void InputBox(const wstring &_title, const wstring &_prompt, const string &_ID = "");
 		virtual void setOnCompleteCallback(const callback<void>& c) {onCompleteCallback = c;}
 		string getLastID(void) { return lastID;}
 		int getLastType(void) { return lastType;}
 		int getLastButton(void) { return lastButton;}
-		string getLastInput(void) { return lastInput;}
+		wstring getLastInput(void) { return lastInput;}
 	private:
 		callback<void> onCompleteCallback;
 		void resetResponse(void);
@@ -723,20 +721,20 @@ namespace s_gui
 		EditBox *inputEdit;
 		s_texture *blankIcon, *questionIcon, *alertIcon;
 		Picture *picture;
-		string originalTitle;
+		wstring originalTitle;
 		bool hasIcon;
 		int numBtns;
 		int firstBtType, secondBtType;
 		string lastID;
 		int lastType;	
 		int lastButton;
-		string lastInput;
+		wstring lastInput;
 	};
 	
 	class StdBtWin : public StdWin
 	{
 	public:
-	    StdBtWin(const string& _title = NULL, s_texture* _header_tex = NULL,
+	    StdBtWin(const wstring& _title = NULL, s_texture* _header_tex = NULL,
 			s_font * _winfont = NULL, int headerSize = 18);
 		virtual void draw();
 		virtual void setOnHideBtCallback(const callback<void>& c) {onHideBtCallback = c;}
@@ -750,7 +748,7 @@ namespace s_gui
 	class StdTransBtWin : public StdBtWin
 	{
 	public:
-	    StdTransBtWin(const string& _title = NULL, int _time_out =0, s_texture* _header_tex = NULL,
+	    StdTransBtWin(const wstring& _title = L"", int _time_out =0, s_texture* _header_tex = NULL,
 			s_font * _winfont = NULL, int headerSize = 18);
 		virtual void update(int _delta_time);
 		virtual void set_timeout(int _time_out=0);
@@ -762,7 +760,7 @@ namespace s_gui
 	class TabHeader : public LabeledButton
 	{
 	public:
-		TabHeader(Component*, const string& _label = "", s_font* _font = NULL);
+		TabHeader(Component*, const wstring& _label = L"", s_font* _font = NULL);
 		void draw(void);
 		void setActive(bool);
 	protected:
@@ -774,7 +772,7 @@ namespace s_gui
 	{
 	public:
 		TabContainer(s_font* _font = NULL);
-		void addTab(Component* c, const string& name);
+		void addTab(Component* c, const wstring& name);
 		virtual void draw(void);
 		virtual bool onClic(int, int, S_GUI_VALUE, S_GUI_VALUE);
 		virtual void setColorScheme(void);
@@ -833,8 +831,11 @@ namespace s_gui
 		void addCity(const string& _name = "", const string& _state = "", const string& _country = "", 
 			double _longitude = 0.f, double _latitude = 0.f, float zone = 0, int _showatzoom = 0, int _altitude = 0);
 		string getName(void) { return name; }
+		wstring getNameI18(void) { return _(name); }
 		string getState(void) { return state; }
+		wstring getStateI18(void) { return _(state.c_str()); }
 		string getCountry(void) { return country; }
+		wstring getCountryI18(void) { return _(country.c_str()); }
 		double getLatitude(void) { return latitude; }
 		double getLongitude(void) { return longitude; }
 		int getShowAtZoom(void) { return showatzoom; }
@@ -907,7 +908,7 @@ namespace s_gui
 		double getLongitudeFromx(int x);
 		double getLatitudeFromy(int y);
 		void drawCities(void);
-		void drawCityName(const s_vec2i& cityPos, const string& _name);
+		void drawCityName(const s_vec2i& cityPos, const wstring& _name);
 		void drawCity(const s_vec2i& cityPos, int ctype);
 		void drawNearestCity(void);
 		void calcPointerPos(int x, int y);

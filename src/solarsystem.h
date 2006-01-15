@@ -26,6 +26,7 @@
 #include "stellarium.h"
 #include "planet.h"
 #include "orbit.h"
+#include "translator.h"
 
 class SolarSystem
 {
@@ -46,7 +47,7 @@ public:
 
 	//! @brief Update i18 names from english names according to current locale
 	//! The translation is done using gettext with translated strings defined in translations.h
-	void SolarSystem::translateNames();
+	void SolarSystem::translateNames(Translator& trans);
 
 	void set_font(float font_size, const string& font_name);
 	void set_label_color(const Vec3f& c) {Planet::set_label_color(c);}
@@ -65,19 +66,18 @@ public:
 	vector<StelObject*> search_around(Vec3d v, double lim_fov, const Navigator * nav, const Projector * prj);
 
 	Planet* searchByEnglishName(string planetEnglishName);
-	Planet* searchByNamesI18(string planetNameI18);
+	Planet* searchByNamesI18(wstring planetNameI18);
 	Planet* get_sun(void) {return sun;}
 	Planet* get_earth(void) {return earth;}
 	Planet* get_moon(void) {return moon;}
 
-	void set_sky_locale(string _sky_locale);
 	void start_trails(void);
 	void end_trails(void);
 	void set_trail_color(const Vec3f& c)  {Planet::set_trail_color(c);}
 	void update_trails(const Navigator* nav);
 	void set_object_scale(float scale);
 
-	vector<string> getNamesI18(void);
+	vector<wstring> getNamesI18(void);
 private:
 	Planet* sun;
 	Planet* moon;

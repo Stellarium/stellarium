@@ -539,10 +539,9 @@ void Projector::sCylinder(GLdouble radius, GLdouble height, GLint slices, GLint 
 }
 
 
-void Projector::print_gravity180(s_font* font, float x, float y, const string& s,
+void Projector::print_gravity180(s_font* font, float x, float y, const wstring& ws,
 				 bool speed_optimize, float xshift, float yshift) const
 {
-	wstring ws = StelUtility::stringToWstring(s);
 	static float dx, dy, d, theta, psi;
 	dx = x - (vec_viewport[0] + vec_viewport[2]/2);
 	dy = y - (vec_viewport[1] + vec_viewport[3]/2);

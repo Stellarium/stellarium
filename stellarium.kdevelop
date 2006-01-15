@@ -157,7 +157,7 @@
       <includeGlobalFunctions>true</includeGlobalFunctions>
       <includeTypes>true</includeTypes>
       <includeEnums>true</includeEnums>
-      <includeTypedefs>false</includeTypedefs>
+      <includeTypedefs>true</includeTypedefs>
       <automaticCodeCompletion>true</automaticCodeCompletion>
       <automaticArgumentsHint>true</automaticArgumentsHint>
       <automaticHeaderCompletion>true</automaticHeaderCompletion>
@@ -174,8 +174,8 @@
       <inlineSet>true</inlineSet>
     </creategettersetter>
     <references>
-      <pcs>libstdc++</pcs>
       <pcs>libSDL</pcs>
+      <pcs>stdcppfab</pcs>
     </references>
   </kdevcppsupport>
   <kdevdocumentation>

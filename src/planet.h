@@ -85,8 +85,8 @@ public:
     virtual ~Planet();
 
 	// Return the information string "ready to print" :)
-	string get_info_string(const Navigator * nav) const;
-	string get_short_info_string(const Navigator * nav) const;
+	wstring get_info_string(const Navigator * nav) const;
+	wstring get_short_info_string(const Navigator * nav) const;
 	virtual double get_close_fov(const Navigator * nav) const;
 	virtual double get_satellites_fov(const Navigator * nav) const;
 	virtual float get_mag(const Navigator * nav) const {return compute_magnitude(nav);}
@@ -136,7 +136,7 @@ public:
 	Vec3d get_earth_equ_pos(const Navigator * nav) const;
 
 	string getEnglishName(void) const {return englishName;}
-	string getNameI18(void) const {return nameI18;}
+	wstring getNameI18(void) const {return nameI18;}
 
 	void set_rings(Ring* r) {rings = r;}
 
@@ -154,7 +154,7 @@ public:
 	static void set_label_color(const Vec3f& lc) {label_color = lc;}
 	static void set_orbit_color(const Vec3f& oc) {orbit_color = oc;}
 
-        // draw orbital path of Planet
+	// draw orbital path of Planet
 	void draw_orbit(const Navigator * nav, const Projector* prj);
 
 	void update_trail(const Navigator* nav);
@@ -192,7 +192,7 @@ protected:
 
 
 	string englishName; // english planet name
-	string nameI18;		// International translated name
+	wstring nameI18;		// International translated name
 	int flagHalo;					// Set wether a little "star like" halo will be drawn
 	int flag_lighting;				// Set wether light computation has to be proceed
 	RotationElements re;			// Rotation param

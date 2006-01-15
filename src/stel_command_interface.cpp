@@ -73,7 +73,7 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
   stringHash_t args;
   int status = 0;  // true if command was understood
   int recordable = 1;  // true if command should be recorded (if recording)
-  string debug_message;  // detailed errors can be placed in here for printout at end of method
+  wstring debug_message;  // detailed errors can be placed in here for printout at end of method
 
   wait = 0;  // default, no wait between commands
 
@@ -121,7 +121,7 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
     }
     else if(args["sky_culture"]!="") status = stcore->set_sky_culture(args["sky_culture"]);
 //    else if(args["sky_locale"]!="") stcore->set_sky_locale(args["sky_locale"]); // Tony NOT SURE
-    else if(args["sky_locale"]!="") stcore->setAppLocale(stcore->tryLocale(args["sky_locale"]));
+    else if(args["sky_locale"]!="") stcore->setAppLanguage(args["sky_locale"]);
     else if(args["star_mag_scale"]!="") stcore->StarMagScale = str_to_double(args["star_mag_scale"]);
     else if(args["star_scale"]!="") {
 		float scale = str_to_double(args["star_scale"]);
@@ -370,7 +370,7 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 		  if(args["alt"]!="") alt = str_to_double(args["alt"]);
 		  delay = (int)(1000.*str_to_double(args["duration"]));
 		  
-		  stcore->observatory->move_to(lat,lon,alt,delay,name);
+		  stcore->observatory->move_to(lat,lon,alt,delay,StelUtility::stringToWstring(name));
 	  } else status = 0;
 
   } else if(command=="image") {
@@ -399,7 +399,7 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 				  
 			  status = stcore->script_images->load_image(image_filename, args["name"], img_pos);
 
-			  if(status==0) debug_message = string(_("Unable to open file: ")) + image_filename;
+			  if(status==0) debug_message = _("Unable to open file: ") + StelUtility::stringToWstring(image_filename);
 		  }
 
 		  if( status ) {
@@ -422,7 +422,7 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 										str_to_double(args["azimuth"]), args["azimuth"]!="",
 										str_to_double(args["duration"]));
 			  } else {
-				  debug_message = string(_("Unable to find image: ")) + args["name"];
+				  debug_message = _("Unable to find image: ") + StelUtility::stringToWstring(args["name"]);
 				  status=0;
 			  }
 		  }
@@ -612,9 +612,6 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 		  if(stcore->FlagObjectTrails && stcore->ssystem) stcore->ssystem->start_trails();
 		  else  stcore->ssystem->end_trails();
 
-//		  stcore->set_sky_locale(stcore->SkyLocale); Tony not sure
-		  stcore->setAppLocale(stcore->tryLocale(stcore->SkyLocale));
-
 		  string temp = stcore->SkyCulture;  // fool caching in below method
 		  stcore->SkyCulture = "";
 		  stcore->set_sky_culture(temp);
@@ -639,10 +636,10 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 
 	  // Show gui error window only if script asked for gui debugging
 	  if(stcore->scripts->is_playing() && stcore->scripts->get_gui_debug()) 
-		  stcore->ui->show_message(string(_("Could not execute command:")) + "\n\"" + 
-								   commandline + "\"\n\n" + debug_message, 7000);
+		  stcore->ui->show_message(_("Could not execute command:") + wstring(L"\n\"") + 
+		   StelUtility::stringToWstring(commandline) + wstring(L"\"\n\n") + debug_message, 7000);
 			
-	  cout << "Could not execute: " << commandline << endl << debug_message << endl;
+	  cerr << "Could not execute: " << commandline << endl << StelUtility::wstringToString(debug_message) << endl;
   }
 
   return(status);

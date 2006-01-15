@@ -46,7 +46,7 @@ void InitParser::load(const string& file)
 	}
 	else
 	{
-		cout << "ERROR : Can't find config file " << file << endl;
+		cerr << "ERROR : Can't find config file " << file << endl;
 		exit(-1);
 	}
 
@@ -55,7 +55,7 @@ void InitParser::load(const string& file)
 	dico = iniparser_load(file.c_str());
 	if (!dico)
 	{
-		cout << "ERROR : Couldn't read config file " << file << endl;
+		cerr << "ERROR : Couldn't read config file " << file << endl;
 		exit(-1);
 	}
 }
@@ -71,7 +71,7 @@ void InitParser::save(const string& file_name) const
 	}
 	else
 	{
-		cout << "ERROR : Can't open file " << file_name << endl;
+		cerr << "ERROR : Can't open file " << file_name << endl;
 		exit(-1);
 	}
 	if (fp) fclose(fp);
@@ -80,7 +80,7 @@ void InitParser::save(const string& file_name) const
 string InitParser::get_str(const string& key) const
 {
 	if (iniparser_getstring(dico, key.c_str(), NULL)) return string(iniparser_getstring(dico, key.c_str(), NULL));
-	else cout << "WARNING : Can't find the configuration key " << key << " default empty string returned" << endl;
+	else cerr << "WARNING : Can't find the configuration key " << key << " default empty string returned" << endl;
 	return string();
 }
 
@@ -103,7 +103,7 @@ int InitParser::get_int(const string& key) const
 		i = iniparser_getint(dico, key.c_str(), 0);
 		if (i==0)
 		{
-			printf("WARNING : Can't find the configuration key %s, default 0 value returned\n", key.c_str());
+			cerr << "WARNING : Can't find the configuration key " << key << "default 0 value returned\n";
 		}
 	}
 	return i;
@@ -128,7 +128,7 @@ double InitParser::get_double(const string& key) const
 		d = iniparser_getdouble(dico, key.c_str(), 0.);
 		if (d==0.)
 		{
-			printf("WARNING : Can't find the configuration key %s, default 0 value returned\n", key.c_str());
+			cerr << "WARNING : Can't find the configuration key " << key << "default 0 value returned\n";
 		}
 	}
 	return d;
@@ -153,7 +153,7 @@ bool InitParser::get_boolean(const string& key) const
 		b = iniparser_getboolean(dico, key.c_str(), 0);
 		if (b==0)
 		{
-			printf("WARNING : Can't find the configuration key %s, default 0 value returned\n", key.c_str());
+			cerr << "WARNING : Can't find the configuration key " << key << "default 0 value returned\n";
 		}
 	}
 	return b;

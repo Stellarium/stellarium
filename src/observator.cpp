@@ -27,6 +27,7 @@
 #include "stellastro.h"
 #include "init_parser.h"
 #include "observator.h"
+#include "translator.h"
 
 // Use to remove a boring warning
 size_t my_strftime(char *s, size_t max, const char *fmt, const struct tm *tm)
@@ -36,7 +37,7 @@ size_t my_strftime(char *s, size_t max, const char *fmt, const struct tm *tm)
 
 Observator::Observator() : longitude(0.), latitude(0.), altitude(0), GMT_shift(0), planet(3)
 {
-	name = "Anonymous_Location";
+	name = L"Anonymous_Location";
 	flag_move_to = 0;
 }
 
@@ -51,13 +52,13 @@ void Observator::load(const string& file, const string& section)
 
 	if (!conf.find_entry(section))
 	{
-		cout << "ERROR : Can't find observator section " << section << " in file " << file << endl;
+		cerr << "ERROR : Can't find observator section " << section << " in file " << file << endl;
 		exit(-1);
 	}
 
-	name = conf.get_str(section, "name");
+	name = _(conf.get_str(section, "name").c_str());
 
-	printf(_("Loading location: \"%s\", "), name.c_str());
+	printf("Loading location: \"%s\", ", StelUtility::wstringToString(name).c_str());
 
 	for (string::size_type i=0;i<name.length();++i)
 	{
@@ -69,7 +70,7 @@ void Observator::load(const string& file, const string& section)
 	altitude = conf.get_int(section, "altitude");
 	set_landscape_name(conf.get_str(section, "landscape_name", "sea"));
 
-	printf(_("(landscape is: \"%s\")\n"), landscape_name.c_str());
+	printf("(landscape is: \"%s\")\n", landscape_name.c_str());
 
 	string tzstr = conf.get_str(section, "time_zone");
 	if (tzstr == "system_default")
@@ -106,14 +107,14 @@ void Observator::set_landscape_name(string s) {
 
 void Observator::save(const string& file, const string& section)
 {
-	printf(_("Saving location %s to file %s\n"),name.c_str(), file.c_str());
+	printf("Saving location %s to file %s\n",StelUtility::wstringToString(name).c_str(), file.c_str());
 
 	InitParser conf;
 	conf.load(file);
 
-	conf.set_str(section + ":name", name);
-	conf.set_str(section + ":latitude", StelUtility::printAngleDMS(latitude, true, true));
-    conf.set_str(section + ":longitude", StelUtility::printAngleDMS(longitude, true, true));
+	conf.set_str(section + ":name", StelUtility::wstringToString(name));
+	conf.set_str(section + ":latitude", StelUtility::wstringToString(StelUtility::printAngleDMS(latitude, true, true)));
+    conf.set_str(section + ":longitude", StelUtility::wstringToString(StelUtility::printAngleDMS(longitude, true, true)));
 
 	conf.set_int(section + ":altitude", altitude);
 	conf.set_str(section + ":landscape_name", landscape_name);
@@ -157,7 +158,7 @@ float Observator::get_GMT_shift(double JD, bool _local) const
 }
 
 // Return the time zone name taken from system locale
-string Observator::get_time_zone_name_from_system(double JD) const
+wstring Observator::get_time_zone_name_from_system(double JD) const
 {
 
 	// Windows will crash if date before 1970
@@ -173,7 +174,7 @@ string Observator::get_time_zone_name_from_system(double JD) const
 	static char timez[255];
 	timez[0] = 0;
 	my_strftime(timez, 254, "%Z", timeinfo);
-	return timez;
+	return StelUtility::stringToWstring(timez);
 }
 
 
@@ -273,7 +274,7 @@ string Observator::get_ISO8601_time_UTC(double JD) const
 }
 
 // Return a string with the UTC date formated according to the date_format variable
-string Observator::get_printable_date_UTC(double JD) const
+wstring Observator::get_printable_date_UTC(double JD) const
 {
 	struct tm time_utc;
 	get_tm_from_julian(JD, &time_utc);
@@ -286,12 +287,12 @@ string Observator::get_printable_date_UTC(double JD) const
 		case S_DATE_DDMMYYYY : my_strftime(date, 254, "%d/%m/%Y", &time_utc); break;
 		case S_DATE_YYYYMMDD : my_strftime(date, 254, "%Y-%m-%d", &time_utc); break;
 	}
-	return date;
+	return StelUtility::stringToWstring(date);
 }
 
 // Return a string with the UTC time formated according to the time_format variable
 // TODO : for some locales (french) the %p returns nothing
-string Observator::get_printable_time_UTC(double JD) const
+wstring Observator::get_printable_time_UTC(double JD) const
 {
 	struct tm time_utc;
 	get_tm_from_julian(JD, &time_utc);
@@ -303,7 +304,7 @@ string Observator::get_printable_time_UTC(double JD) const
 		case S_TIME_24H : my_strftime(heure, 254, "%H:%M:%S", &time_utc); break;
 		case S_TIME_12H : my_strftime(heure, 254, "%I:%M:%S %p", &time_utc); break;
 	}
-	return heure;
+	return StelUtility::stringToWstring(heure);
 }
 
 // Return the time in ISO 8601 format that is : %Y-%m-%d %H:%M:%S
@@ -322,7 +323,7 @@ string Observator::get_ISO8601_time_local(double JD) const
 
 
 // Return a string with the local date formated according to the date_format variable
-string Observator::get_printable_date_local(double JD) const
+wstring Observator::get_printable_date_local(double JD) const
 {
 	struct tm time_local;
 
@@ -340,12 +341,12 @@ string Observator::get_printable_date_local(double JD) const
 		case S_DATE_YYYYMMDD : my_strftime(date, 254, "%Y-%m-%d", &time_local); break;
 	}
 
-	return date;
+	return StelUtility::stringToWstring(date);
 }
 
 // Return a string with the local time (according to time_zone_mode variable) formated
 // according to the time_format variable
-string Observator::get_printable_time_local(double JD) const
+wstring Observator::get_printable_time_local(double JD) const
 {
 	struct tm time_local;
 
@@ -361,7 +362,7 @@ string Observator::get_printable_time_local(double JD) const
 		case S_TIME_24H : my_strftime(heure, 254, "%H:%M:%S", &time_local); break;
 		case S_TIME_12H : my_strftime(heure, 254, "%I:%M:%S %p", &time_local); break;
 	}
-	return heure;
+	return StelUtility::stringToWstring(heure);
 }
 
 // Convert the time format enum to its associated string and reverse
@@ -406,7 +407,7 @@ string Observator::s_date_format_to_string(S_DATE_FORMAT df) const
 
 
 // move gradually to a new observation location
-void Observator::move_to(double lat, double lon, double alt, int duration, const string& _name)
+void Observator::move_to(double lat, double lon, double alt, int duration, const wstring& _name)
 {
   flag_move_to = 1;
 
@@ -426,14 +427,9 @@ void Observator::move_to(double lat, double lon, double alt, int duration, const
   //  printf("coef = %f\n", move_to_coef);
 }
 
-string Observator::get_name(void)
+wstring Observator::get_name(void)
 {
-	string _name = name;
-    for (string::size_type i=0;i<_name.length();++i)
-	{
-		if (_name[i]=='_') _name[i]=' ';
-	}
-	return _name;
+	return name;
 }
 
 // for moving observator position gradually

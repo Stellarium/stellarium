@@ -96,7 +96,7 @@ void ConstellationMgr::load_lines_and_art(const string &fileName, const string &
 			asterisms.push_back(cons);
 		} else
 		{ 
-			printf(_("ERROR on line %d of %s\n"), line, fileName.c_str());
+			cerr << "ERROR on line " << line << "of " << fileName.c_str() << endl;
 			delete cons;
 		}
 	}
@@ -105,7 +105,7 @@ void ConstellationMgr::load_lines_and_art(const string &fileName, const string &
 	FILE *fic = fopen(artfileName.c_str(), "r");
 	if (!fic)
 	{
-		printf("Can't open %s\n", artfileName.c_str());
+		cerr << "Can't open " << artfileName.c_str() << endl;
 		return; // no art, but still loaded constellation data
 	}
 
@@ -121,6 +121,7 @@ void ConstellationMgr::load_lines_and_art(const string &fileName, const string &
 	char texfile[255];
 	unsigned int x1, y1, x2, y2, x3, y3, hp1, hp2, hp3;
 	int texSize;
+	
 	char tmpstr[2000];
 	int total = 0;
 
@@ -140,21 +141,21 @@ void ConstellationMgr::load_lines_and_art(const string &fileName, const string &
 				fclose(fic);
 				return;		// no art is OK
 			}
-			printf("ERROR while loading art for constellation %s\n", shortname);
+			cerr << "Error while loading art for constellation " <<  shortname << endl;;
 			assert(0);
 		}
 
 		// Draw loading bar
-		
-		sprintf(tmpstr, _("Loading Constellation Art: %d/%d"), current+1, total);
-		lb.SetMessage(tmpstr);
+		wchar_t wtmpstr[2000];
+		swprintf(wtmpstr,sizeof(wtmpstr), _("Loading Constellation Art: %d/%d"), current+1, total);
+		lb.SetMessage(wtmpstr);
 		lb.Draw((float)(current+1)/total);
 		
 		cons = NULL;
 		cons = findFromAbbreviation(shortname);
 		if (!cons)
 		{
-			printf("ERROR : Can't find constellation called : %s\n", shortname);
+			cerr << "ERROR : Can't find constellation called : " << shortname << endl;
 		}
 		else
 		{
@@ -321,20 +322,20 @@ void ConstellationMgr::loadNames(const string& namesFile)
 
 //! @brief Update i18 names from english names according to current locale
 //! The translation is done using gettext with translated strings defined in translations.h
-void ConstellationMgr::translateNames()
+void ConstellationMgr::translateNames(Translator& trans)
 {
 	vector < Constellation * >::const_iterator iter;
 	for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
 	{
-		(*iter)->nameI18 = gettext((*iter)->englishName.c_str());
+		(*iter)->nameI18 = trans.translate((*iter)->englishName.c_str());
 	}
 }
 
-vector <string> ConstellationMgr::getNames(void) 
+vector <wstring> ConstellationMgr::getNames(void) 
 {
-     vector<string> names;
+     vector<wstring> names;
   	 vector < Constellation * >::const_iterator iter;
-     string name;
+     wstring name;
 
 	for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
 	{
@@ -356,7 +357,7 @@ vector<string> ConstellationMgr::getShortNames(void)
     return names;
 }
 
-string ConstellationMgr::get_short_name_by_name(string _name) {
+string ConstellationMgr::get_short_name_by_name(wstring _name) {
 
 	vector < Constellation * >::const_iterator iter;
 
@@ -525,7 +526,7 @@ bool ConstellationMgr::load_boundaries(const string& boundaryFile)
 	}
 	allBoundarySegments.clear();
 
-    cout << _("Loading Constellation boundary data...");
+    cout << "Loading Constellation boundary data...";
 	// Modified boundary file by Torsten Bronger with permission
 	// http://pp3.sourceforge.net
 	
@@ -533,7 +534,7 @@ bool ConstellationMgr::load_boundaries(const string& boundaryFile)
 	dataFile.open(boundaryFile.c_str());
     if (!dataFile.is_open())
     {
-        cout << "Boundary file " << boundaryFile << " not found" << endl;
+        cerr << "Boundary file " << boundaryFile << " not found" << endl;
         return false;
     }
 

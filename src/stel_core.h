@@ -149,18 +149,19 @@ public:
 
 
 	/**
-	 * @brief Set the application locale
+	 * @brief Set the application language
 	 * This apply to GUI, console messages etc..
-	 * @param newAppLocale The std::locale to use for GUI, TUI and console messages etc..
+	 * This function has no permanent effect on the global locale
+	 * @param newAppLocaleName The name of the locale (e.g fr_FR) to use for GUI, TUI and console messages etc..
 	 */
-	void StelCore::setAppLocale(const std::locale newAppLocale);
+	void StelCore::setAppLanguage(const std::string& newAppLocaleName);
 
 	/** 
-	 * @brief Set the sky locale and reload the sky objects names for gettext translation
+	 * @brief Set the sky language and reload the sky objects names with the new translation
 	 * This function has no permanent effect on the global locale
-	 * @param newSkyLocale The std::locale object to use for sky object labels
+	 * @param newSkyLocaleName The name of the locale (e.g fr_FR) to use for sky object labels
 	 */
-	void StelCore::setSkyLocale(const std::locale newSkyLocale);
+	void StelCore::setSkyLanguage(const std::string& newSkyLocaleName);
 
 	///////////////////////////////////////////////////////////////////////////////
 	// Below this limit, all the function will end up in the stel_app class
@@ -201,14 +202,13 @@ public:
 
 	void set_object_pointer_visibility(bool _newval) { object_pointer_visibility = _newval; }
 	void play_startup_script();
-
+	
 private:
 	TypeFace* UTFfont;
 
-	string get_cursor_pos(int x, int y);
+	wstring get_cursor_pos(int x, int y);
 
-	std::locale appLocale;				// The global application locale used for GUI and console messages
-	std::locale skyLocale;				// The sky locale used for object naming
+	static Translator skyTranslator;			// The translator used for astronomical object naming
 
 	// Main elements of the program
 	Navigator * navigation;				// Manage all navigation parameters, coordinate transformations etc..
@@ -243,12 +243,6 @@ private:
 	// Below this limit, all the attributes will end up in the stel_app class
 	///////////////////////////////////////////////////////////////////////////////
 	
-	//! @brief Create a locale from locale name.
-	//! If the locale cannot be created, try different names until one work. If none work fall back to "C" locale.
-	//! @param localeName Locale name e.g fr_FR, fr_FR.utf8, french etc..
-	//! @return std::locale matching with the locale name
-	static std::locale tryLocale(const string& localeName);
-	
 	void load_config_from(const string& confFile);
 	void save_config_to(const string& confFile);
 
@@ -277,10 +271,6 @@ private:
 	
 	// localization
 	string SkyCulture;  // the culture used for constellations
-	string SkyLocale;   // the locale (usually will just be language code) used for object labels
-	// these are separate so that, for example, someone could view polynesian constellations in Hawaiian 
-	// OR english, french, etc.
-	
 
 	// Script related
 	string SelectedScript;  // script filename (without directory) selected in a UI to run when exit UI

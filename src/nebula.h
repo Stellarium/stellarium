@@ -53,8 +53,8 @@ public:
     Nebula();
     virtual ~Nebula();
 
-	virtual string get_info_string(const Navigator * nav) const;
-	virtual string get_short_info_string(const Navigator * nav = NULL) const;
+	virtual wstring get_info_string(const Navigator * nav) const;
+	virtual wstring get_short_info_string(const Navigator * nav = NULL) const;
 	virtual STEL_OBJECT_TYPE get_type(void) const {return STEL_OBJECT_NEBULA;}
 	virtual Vec3d get_earth_equ_pos(const Navigator * nav = NULL) const {return nav->prec_earth_equ_to_earth_equ(XYZ);}
 	virtual double get_close_fov(const Navigator * nav = NULL) const;
@@ -73,11 +73,18 @@ public:
 	void draw_no_tex(const Projector* prj, const Navigator * nav, ToneReproductor* eye);
     void draw_name(int hint_ON, const Projector* prj);
     void draw_circle(const Projector* prj, const Navigator * nav);
-    string get_name() { return name; };
+    wstring get_name() { return nameI18; };
+    string getEnglishName() { return englishName; };
     bool hasTex(void) { return (neb_tex != NULL); }
     static void set_nebula_scale(float scale) {nebula_scale = scale; }
 	static void set_nebulaname_format(int _format) { nameFormat = _format; }
 	static int get_nebulaname_format(void) { return nameFormat; }
+	
+	/**
+	 * @brief Get the printable nebula Type
+	 * @return the nebula type code.
+	 */
+	wstring getTypeString(void) const {return L"TODO";}
 
 protected:
 	// Return the radius of a circle containing the object on screen
@@ -89,8 +96,10 @@ private:
 	unsigned int Messier_nb;		// messier
 	unsigned int Cadwell_nb;		// NGC catalog number
 	unsigned int Sharpless_nb;		// NGC catalog number
-	string name;					// Nebula name
-	string longname;				// Nebula name & description
+	string englishName;				// English name
+	string englishLongName;			// English name & description
+	wstring nameI18;				// Nebula name
+	wstring longnameI18;			// Nebula name & description
 	string credit;					// Nebula image credit
 	float mag;						// Apparent magnitude
 	float angular_size;				// Angular size in radians
@@ -98,7 +107,6 @@ private:
 	Vec3d XY;						// Store temporary 2D position
 	char type[4];					// Nebulae type
 	nebula_type nType;
-	string typeDesc;
 
 	s_texture * neb_tex;			// Texture
 	Vec3f tex_quad_vertex[4];		// The 4 vertex used to draw the nebula texture

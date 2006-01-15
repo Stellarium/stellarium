@@ -25,6 +25,7 @@
 #include "constellation.h"
 #include "fader.h"
 #include "loadingbar.h"
+#include "translator.h"
 
 class ConstellationMgr  
 {
@@ -40,7 +41,7 @@ public:
 	
 	//! @brief Update i18 names from english names according to current locale
 	//! The translation is done using gettext with translated strings defined in translations.h
-	void translateNames();
+	void translateNames(Translator& trans);
 					   
 	void load_lines_and_art(const string& lines_file, const string& art_file, const string &boundaryfileName, LoadingBar& lb);
 	
@@ -69,9 +70,9 @@ public:
 	void set_selected(const string& shortname) {set_selected_const(findFromAbbreviation(shortname));}
 	void set_selected(const HipStar * s) {if (!s) set_selected_const(NULL); else set_selected_const(is_star_in(s));}
 	unsigned int get_first_selected_HP(void) {if (selected != NULL) return selected->asterism[0]->get_hp_number(); else return 0;}  //Tony
-	vector<string> getNames(void);
+	vector<wstring> getNames(void);
 	vector<string> getShortNames(void);
-	string get_short_name_by_name(string _name);  // return short name from long common name
+	string get_short_name_by_name(wstring _name);  // return short name from long common name
 	bool load_boundaries(const string& conCatFile);
 	void draw_boundaries(Projector* prj) const;
 private:
