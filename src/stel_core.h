@@ -128,45 +128,121 @@ public:
 	//! Get the current date in Julian Day
 	double getJDay(void) const {return navigation->get_JDay();}
 		
-	//! Set display flag of constellation lines
-	void constellation_set_flag_lines(bool b) {asterisms->set_flag_lines(b);}
-	//! Get display flag of constellation lines
-	bool constellation_get_flag_lines(void) {return asterisms->get_flag_lines();}
-	
-	//! Get display flag of constellation boundaries
-	bool constellation_get_flag_boundaries(void) {return asterisms->get_flag_boundaries();}
-
-	//! Set display flag of constellation art
-	void constellation_set_flag_art(bool b) {asterisms->set_flag_art(b);}
-	//! Get display flag of constellation art
-	bool constellation_get_flag_art(void) {return asterisms->get_flag_art();}
-	
-	//! Set display flag of constellation names
-	void constellation_set_flag_names(bool b) {asterisms->set_flag_names(b);}
-	//! Get display flag of constellation names
-	bool constellation_get_flag_names(void) {return asterisms->get_flag_names();}
-
-
-
-	/**
-	 * @brief Set the application language
-	 * This apply to GUI, console messages etc..
-	 * This function has no permanent effect on the global locale
-	 * @param newAppLocaleName The name of the locale (e.g fr_FR) to use for GUI, TUI and console messages etc..
-	 */
-	void StelCore::setAppLanguage(const std::string& newAppLocaleName);
 
 	/** 
 	 * @brief Set the sky language and reload the sky objects names with the new translation
 	 * This function has no permanent effect on the global locale
 	 * @param newSkyLocaleName The name of the locale (e.g fr_FR) to use for sky object labels
 	 */
-	void StelCore::setSkyLanguage(const std::string& newSkyLocaleName);
+	void setSkyLanguage(const std::string& newSkyLocaleName);
 
-	///////////////////////////////////////////////////////////////////////////////
-	// Below this limit, all the function will end up in the stel_app class
-	///////////////////////////////////////////////////////////////////////////////
+	void setObjectPointerVisibility(bool _newval) { object_pointer_visibility = _newval; }
+
+	// n.b. - do not confuse this with sky time rate
+	int getTimeMultiplier() { return time_multiplier; };
+
+	int getBppMode(void) const {return bppMode;}
+	int getFullscreen(void) const {return Fullscreen;}
 	
+	// Constellations methods
+	//! Set display flag of constellation lines
+	void setFlagConstellationLines(bool b) {asterisms->setFlagLines(b);}
+	//! Get display flag of constellation lines
+	bool getFlagConstellationLines(void) {return asterisms->getFlagLines();}
+	
+	//! Set display flag of constellation art
+	void setFlagConstellationArt(bool b) {asterisms->setFlagArt(b);}
+	//! Get display flag of constellation art
+	bool getFlagConstellationArt(void) {return asterisms->getFlagArt();}
+	
+	//! Set display flag of constellation names
+	void setFlagConstellationNames(bool b) {asterisms->setFlagNames(b);}
+	//! Get display flag of constellation names
+	bool getFlagConstellationNames(void) {return asterisms->getFlagNames();}
+
+	//! Set display flag of constellation boundaries
+	void setFlagConstellationBoundaries(bool b) {asterisms->setFlagBoundaries(b);}
+	//! Get display flag of constellation boundaries
+	bool getFlagConstellationBoundaries(void) {return asterisms->getFlagBoundaries();}
+	
+	/** Set constellation art intensity */
+	void setConstellationArtIntensity(float f) {asterisms->setArtIntensity(f);}
+	/** Get constellation art intensity */
+	float getConstellationArtIntensity(void) const {return asterisms->getArtIntensity();}	
+	
+	/** Set constellation art intensity */
+	void setConstellationArtFadeDuration(float f) {asterisms->setArtFadeDuration(f);}
+	/** Get constellation art intensity */
+	float getConstellationArtFadeDuration(void) const {return asterisms->getArtFadeDuration();}		
+	
+	/** Set whether selected constellation is drawn alone */
+	void setFlagConstellationIsolateSelected(bool b) {asterisms->setFlagIsolateSelected(b);}
+	/** Get whether selected constellation is drawn alone */
+	bool getFlagConstellationIsolateSelected(void) {return asterisms->getFlagIsolateSelected();}
+	
+	/** Set constellation font size */
+	void setConstellationFontSize(float f) {asterisms->setFont(f, DataDir + BaseFontName);}
+	
+	// Stars methods
+	/** Set display flag for Stars */
+	void setFlagStars(bool b) {hip_stars->setFlagStars(b);}
+	/** Get display flag for Stars */
+	bool getFlagStars(void) const {return hip_stars->getFlagStars();}
+		
+	/** Set display flag for Star names. Also make sure that stars are on if want labels */
+	void setFlagStarName(bool b) {hip_stars->setFlagStarName(b);}
+	/** Get display flag for Star names */
+	bool getFlagStarName(void) const {return hip_stars->getFlagStarName();}
+	
+	/** Set display flag for Star Scientific names */
+	void setFlagStarSciName(bool b) {hip_stars->setFlagStarSciName(b);}
+	/** Get display flag for Star Scientific names */
+	bool getFlagStarSciName(void) const {return hip_stars->getFlagStarSciName();}	
+	
+	/** Set flag for Star twinkling */
+	void setFlagStarTwinkle(bool b) {hip_stars->setFlagStarTwinkle(b);}
+	/** Get flag for Star twinkling */
+	bool getFlagStarTwinkle(void) const {return hip_stars->getFlagStarTwinkle();}	
+		
+	/** Set flag for displaying Star as GLpoints (faster but not so nice) */
+	void setFlagPointStar(bool b) {hip_stars->setFlagPointStar(b);}
+	/** Get flag for displaying Star as GLpoints (faster but not so nice) */
+	bool getFlagPointStar(void) const {return hip_stars->getFlagPointStar();}	
+	
+	/** Set maximum magnitude at which stars names are displayed */
+	void setMaxMagStarName(float f) {hip_stars->setMaxMagStarName(f);}
+	/** Get maximum magnitude at which stars names are displayed */
+	float getMaxMagStarName(void) const {return hip_stars->getMaxMagStarName();}	
+	
+	/** Set maximum magnitude at which stars scientific names are displayed */
+	void setMaxMagStarSciName(float f) {hip_stars->setMaxMagStarSciName(f);}
+	/** Get maximum magnitude at which stars scientific names are displayed */
+	float getMaxMagStarSciName(void) const {return hip_stars->getMaxMagStarSciName();}	
+		
+	/** Set base stars display scaling factor */
+	void setStarScale(float f) {hip_stars->setStarScale(f);}
+	/** Get base stars display scaling factor */
+	float getStarScale(void) const {return hip_stars->getStarScale();}			
+	
+	/** Set stars display scaling factor wrt magnitude */
+	void setStarMagScale(float f) {hip_stars->setStarMagScale(f);}
+	/** Get base stars display scaling factor wrt magnitude */
+	float getStarMagScale(void) const {return hip_stars->getStarMagScale();}
+
+	/** Set stars twinkle amount */
+	void setStarTwinkleAmount(float f) {hip_stars->setStarTwinkleAmount(f);}
+	/** Get stars twinkle amount */
+	float getStarTwinkleAmount(void) const {return hip_stars->getStarTwinkleAmount();}
+	
+	/** Set stars limiting display magnitude */
+	void setStarLimitingMag(float f) {hip_stars->setStarLimitingMag(f);}
+	/** Get stars limiting display magnitude */
+	float getStarLimitingMag(void) const {return hip_stars->getStarLimitingMag();}
+	
+	////////////////////////////////////////////////
+	// TODO move to STELAPP
+	////////////////////////////////////////////////
+
 	void loadConfig(void);
 	void saveConfig(void);
 	// Set the config file names.
@@ -182,9 +258,6 @@ public:
 	// Handle key press and release
 	int handleKeys(Uint16 key, s_gui::S_GUI_VALUE state);
 
-	int getBppMode(void) const {return bppMode;}
-	int getFullscreen(void) const {return Fullscreen;}
-
 	const string& getDataDir(void) const {return DataDir;}
 	
 	const float getMaxFPS(void) const {return maxfps;}
@@ -194,15 +267,18 @@ public:
 	// TODO move to stel_command_interface or get rid of this method
 	void setParam(string& key, float value);
 
-	// n.b. - do not confuse this with sky time rate
-	int getTimeMultiplier() { return time_multiplier; };
-
 	//! Quit the application
 	void quit(void);
 
-	void setObjectPointerVisibility(bool _newval) { object_pointer_visibility = _newval; }
 	void playStartupScript();
-	
+
+	/**
+	 * @brief Set the application language
+	 * This apply to GUI, console messages etc..
+	 * This function has no permanent effect on the global locale
+	 * @param newAppLocaleName The name of the locale (e.g fr_FR) to use for GUI, TUI and console messages etc..
+	 */
+	void setAppLanguage(const std::string& newAppLocaleName);
 private:
 	TypeFace* UTFfont;
 
@@ -212,7 +288,7 @@ private:
 
 	// Main elements of the program
 	Navigator * navigation;				// Manage all navigation parameters, coordinate transformations etc..
-	Observator * observatory;			// Manage observer position and locales for its country
+	Observator * observatory;			// Manage observer position
 	Projector * projection;				// Manage the projection mode and matrix
 	StelObject * selected_object;		// The selected object in stellarium
 	HipStarMgr * hip_stars;				// Manage the hipparcos stars
@@ -262,12 +338,7 @@ private:
 
 	string config_file;
 
-	// Main elements of the stel_app
-	StelCommandInterface * commander;       // interface to perform all UI and scripting actions
-	ScriptMgr * scripts;                    // manage playing and recording scripts
-	StelUI * ui;							// The main User Interface
-	ImageMgr * script_images;               // for script loaded image display
-	SkyLocalizer *skyloc;					// for sky cultures and locales
+
 	
 	// localization
 	string SkyCulture;  // the culture used for constellations
@@ -281,18 +352,6 @@ private:
 	// Below this limit, all the attributes will be removed from the program and 
 	// handled by the sub classes themselve
 	///////////////////////////////////////////////////////////////////////////////
-		
-	// Stars
-	int FlagStarName;
-	int FlagStarSciName;
-	float MaxMagStarName;
-	float MaxMagStarSciName;
-	float NebulaScale;
-	float StarScale;
-	float StarMagScale;
-	float StarTwinkleAmount;
-	int FlagStarTwinkle;
-	int FlagPointStar;
 
 	// Gui
 	int FlagShowTopBar;
@@ -318,7 +377,6 @@ private:
 	string BaseCFontName;
 	
 	float MapFontSize;
-	float ConstellationFontSize;
 	float StarFontSize;
 	float PlanetFontSize;
 	float NebulaFontSize;
@@ -355,7 +413,6 @@ private:
 	bool FlagShowTuiShortObjInfo;
 
 	// Astro
-    bool FlagStars;
     bool FlagPlanets;
     bool FlagPlanetsHints;
     bool FlagPlanetsOrbits;
@@ -382,10 +439,10 @@ private:
     bool FlagEclipticLine;
     bool FlagMeridianLine;
 	bool FlagGravityLabels;
+	float NebulaScale;
 	float MoonScale;
 	bool FlagMoonScaled;
-	float ConstellationArtIntensity;
-	float ConstellationArtFadeDuration;
+
 	//bool FlagUseCommonNames;
 	bool FlagChart;
 	bool FlagNight;
@@ -434,6 +491,17 @@ private:
 	int time_multiplier;  // used for adjusting delta_time for script speeds
 
 	bool object_pointer_visibility;  // should selected object pointer be drawn
+	
+	////////////////////////////////////////////////
+	// TODO move to STELAPP
+	////////////////////////////////////////////////
+	
+		// Main elements of the stel_app
+	StelCommandInterface * commander;       // interface to perform all UI and scripting actions
+	ScriptMgr * scripts;                    // manage playing and recording scripts
+	StelUI * ui;							// The main User Interface
+	ImageMgr * script_images;               // for script loaded image display
+	SkyLocalizer *skyloc;					// for sky cultures and locales
 };
 
 #endif // _STEL_CORE_H_

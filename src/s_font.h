@@ -107,9 +107,7 @@ public:
     float getAscent(void) {return typeFace.ascent();}
     float getDescent(void) {return typeFace.descent();}
 protected:
-	
 	TypeFace typeFace;
-	
 };
 
 

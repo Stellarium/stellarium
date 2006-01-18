@@ -503,9 +503,9 @@ void StelUI::cbEditScriptExecute(void)
 ////////////////////////////////////////////////////////////////////////////////
 void StelUI::cb(void)
 {
-	core->constellation_set_flag_lines(bt_flag_constellation_draw->getState());
-	core->constellation_set_flag_names(bt_flag_constellation_name->getState());
-	core->constellation_set_flag_art(  bt_flag_constellation_art->getState());
+	core->setFlagConstellationLines(bt_flag_constellation_draw->getState());
+	core->setFlagConstellationNames(bt_flag_constellation_name->getState());
+	core->setFlagConstellationArt(bt_flag_constellation_art->getState());
 	core->FlagAzimutalGrid 		= bt_flag_azimuth_grid->getState();
 	core->FlagEquatorialGrid 	= bt_flag_equator_grid->getState();
 	core->FlagLandscape	 		= bt_flag_ground->getState();
@@ -872,7 +872,7 @@ int StelUI::handle_clic(Uint16 x, Uint16 y, S_GUI_VALUE button, S_GUI_VALUE stat
 
 				if (core->selected_object->get_type()==StelObject::STEL_OBJECT_STAR)
 				{
-					core->asterisms->set_selected((HipStar*)core->selected_object);
+					core->asterisms->setSelected((HipStar*)core->selected_object);
 
 					// potentially record this action
 					std::ostringstream oss;
@@ -882,7 +882,7 @@ int StelUI::handle_clic(Uint16 x, Uint16 y, S_GUI_VALUE button, S_GUI_VALUE stat
 				}
 				else
 				{
-					core->asterisms->set_selected(NULL);
+					core->asterisms->setSelected(NULL);
 				}
 
 				if (core->selected_object->get_type()==StelObject::STEL_OBJECT_PLANET)
@@ -909,7 +909,7 @@ int StelUI::handle_clic(Uint16 x, Uint16 y, S_GUI_VALUE button, S_GUI_VALUE stat
 			}
 			else
 			{
-				core->asterisms->set_selected(NULL);
+				core->asterisms->setSelected(NULL);
 				core->selected_planet=NULL;
 			}
 		}
@@ -1300,9 +1300,9 @@ void StelUI::gui_update_widgets(int delta_time)
 	bt_flag_ctr->setVisible(core->FlagMenu);
 	bt_time_control_ctr->setVisible(core->FlagMenu);
 
-	bt_flag_constellation_draw->setState(core->constellation_get_flag_lines());
-	bt_flag_constellation_name->setState(core->constellation_get_flag_names());
-	bt_flag_constellation_art->setState(core->constellation_get_flag_art());
+	bt_flag_constellation_draw->setState(core->getFlagConstellationLines());
+	bt_flag_constellation_name->setState(core->getFlagConstellationNames());
+	bt_flag_constellation_art->setState(core->getFlagConstellationArt());
 	bt_flag_azimuth_grid->setState(core->FlagAzimutalGrid);
 	bt_flag_equator_grid->setState(core->FlagEquatorialGrid);
 	bt_flag_ground->setState(core->FlagLandscape);

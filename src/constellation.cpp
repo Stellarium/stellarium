@@ -21,11 +21,11 @@
 #include <algorithm>
 #include "constellation.h"
 
-bool Constellation::gravity_label = false;
+bool Constellation::gravityLabel = false;
 
-Vec3f Constellation::line_color = Vec3f(.4,.4,.8);
-Vec3f Constellation::label_color = Vec3f(.4,.4,.8);
-Vec3f Constellation::boundary_color = Vec3f(0.8,0.3,0.3);
+Vec3f Constellation::lineColor = Vec3f(.4,.4,.8);
+Vec3f Constellation::labelColor = Vec3f(.4,.4,.8);
+Vec3f Constellation::boundaryColor = Vec3f(0.8,0.3,0.3);
 bool Constellation::singleSelected = false;
 
 Constellation::Constellation() : asterism(NULL), art_tex(NULL)
@@ -105,7 +105,7 @@ void Constellation::draw_optim(Projector* prj) const
 	glEnable(GL_BLEND);	
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
 
-	glColor4f(line_color[0], line_color[1], line_color[2], line_fader.getInterstate());
+	glColor4f(lineColor[0], lineColor[1], lineColor[2], line_fader.getInterstate());
 
 	Vec3d star1;
 	Vec3d star2;
@@ -125,8 +125,8 @@ void Constellation::draw_optim(Projector* prj) const
 void Constellation::draw_name(s_font *constfont, Projector* prj) const
 {
 	if(!name_fader.getInterstate()) return;
-	glColor3fv(label_color*name_fader.getInterstate());
-	gravity_label ? prj->print_gravity180(constfont, XYname[0], XYname[1], nameI18, 1, -constfont->getStrLen(nameI18)/2) :
+	glColor3fv(labelColor*name_fader.getInterstate());
+	gravityLabel ? prj->print_gravity180(constfont, XYname[0], XYname[1], nameI18, 1, -constfont->getStrLen(nameI18)/2) :
 	constfont->print(XYname[0]-constfont->getStrLen(nameI18)/2, XYname[1], nameI18);
 }
 
@@ -244,9 +244,9 @@ void Constellation::draw_boundary_optim(Projector* prj) const
 
 	// TODO - Fix this so that works like constellation art fade with selections
 	if(singleSelected) 	
-		glColor4f(boundary_color[0], boundary_color[1], boundary_color[2], 1);  
+		glColor4f(boundaryColor[0], boundaryColor[1], boundaryColor[2], 1);  
 	else
-		glColor4f(boundary_color[0], boundary_color[1], boundary_color[2], boundary_fader.getInterstate());
+		glColor4f(boundaryColor[0], boundaryColor[1], boundaryColor[2], boundary_fader.getInterstate());
 
 /* drawing for original bound_20 data
 	i = 0;
