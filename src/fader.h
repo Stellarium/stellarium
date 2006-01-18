@@ -42,8 +42,11 @@ public:
 	bool operator==(bool s) const {return state==s;}
 	operator bool() const {return state;}
 	virtual void set_duration(int _duration) {;}
+	virtual float get_duration(void) = 0;
 	void set_min_value(float _min) {min_value = _min;}
 	void set_max_value(float _max) {max_value = _max;}
+	float get_min_value(void) {return min_value;}
+	float get_max_value(void) {return max_value;}
 protected:
 	bool state;
 	float min_value, max_value;
@@ -62,6 +65,7 @@ public:
 	float get_interstate_percentage(void) const {return state ? 100.f : 0.f;}
 	// Switchors can be used just as bools
 	Fader& operator=(bool s) {state=s; return *this;}
+	virtual float get_duration(void) {return 0.f;}
 protected:
 };
 
@@ -135,9 +139,7 @@ public:
 	}
 	
 	void set_duration(int _duration) {duration = _duration;}
-	void set_min_value(float _min) {min_value = _min;}
-	void set_max_value(float _max) {max_value = _max;}
-	
+	virtual float get_duration(void) {return duration;}
 protected:
 	bool is_transiting;
 	int duration;
@@ -218,9 +220,7 @@ public:
 	}
 	
 	void set_duration(int _duration) {duration = _duration;}
-	void set_min_value(float _min) {min_value = _min;}
-	void set_max_value(float _max) {max_value = _max;}
-	
+	virtual float get_duration(void) {return duration;}
 protected:
 	bool is_transiting;
 	int duration;

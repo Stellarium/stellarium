@@ -30,7 +30,7 @@
 class Constellation
 {
     friend class ConstellationMgr;
-public:
+private:
     Constellation();
     ~Constellation();
     bool read(const string& record, HipStarMgr * _VouteCeleste);
@@ -40,46 +40,56 @@ public:
     const Constellation* is_star_in(const HipStar *) const;
     wstring getNameI18(void) { return nameI18; };
     string getShortName(void) { return abbreviation; };
-    static void  set_line_color(const Vec3f& c) { line_color = c; }
-    static Vec3f get_line_color() { return line_color; }
 
-    static void  set_label_color(const Vec3f& c) { label_color = c; }
-    static Vec3f get_label_color() { return label_color; }
-
-    static void  set_boundary_color(const Vec3f& c) { boundary_color = c; }
-    static Vec3f get_boundary_color() { return boundary_color; }
-private:
     void draw_optim(Projector* prj) const;
     void draw_art_optim(Projector* prj, Navigator* nav) const;
 	void update(int delta_time);
-	void set_flag_lines(bool b) {line_fader=b;}
-	void set_flag_boundaries(bool b) {boundary_fader=b;}
-	void set_flag_name(bool b) {name_fader=b;}
-	void set_flag_art(bool b) {art_fader=b;}
-	bool get_flag_lines(void) {return line_fader;}
-	bool get_flag_boundaries(void) {return boundary_fader;}
-	bool get_flag_name(void) {return name_fader;}
-	bool get_flag_art(void) {return art_fader;}
 	
-	//! International name (translated using gettext)
+	void setFlagLines(bool b) {line_fader=b;}
+	void setFlagBoundaries(bool b) {boundary_fader=b;}
+	void setFlagName(bool b) {name_fader=b;}
+	void setFlagArt(bool b) {art_fader=b;}
+	bool getFlagLines(void) const {return line_fader;}
+	bool getFlagBoundaries(void) const {return boundary_fader;}
+	bool getFlagName(void) const {return name_fader;}
+	bool getFlagArt(void) const {return art_fader;}
+	
+	/** International name (translated using gettext) */
     wstring nameI18;
-    //! Name in english
+    
+    /** Name in english */
 	string englishName;
-	//! Abbreviation (of the latin name for western constellations)
+	
+	/** Abbreviation (of the latin name for western constellations) */
     string abbreviation;
+    
+    /** Direction vector pointing on constellation name drawing position */
     Vec3f XYZname;
 	Vec3d XYname;
+	
+	/** Number of segments in the lines */
     unsigned int nb_segments;
+    
+    /** List of stars forming the segments */
     HipStar ** asterism;
-	static bool gravity_label;
+   
 	s_texture* art_tex;
 	Vec3d art_vertex[9];
+	
+	/** Define whether art, lines, names and boundary must be drawn */
 	LinearFader art_fader, line_fader, name_fader, boundary_fader;
-	static Vec3f line_color, label_color, boundary_color;
-
-	static bool singleSelected;
+	
 	vector<vector<Vec3f> *> isolatedBoundarySegments;
 	vector<vector<Vec3f> *> sharedBoundarySegments;
+	
+	// Currently we only need one color for all constellations, this may change at some point
+	static Vec3f lineColor;
+	static Vec3f labelColor;
+	static Vec3f boundaryColor;
+
+    /** Whether labels are to be printed with gravity */
+	static bool gravityLabel;
+	static bool singleSelected;
 };
 
 #endif // _CONSTELLATION_H_

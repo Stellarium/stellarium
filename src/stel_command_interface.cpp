@@ -109,11 +109,11 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 
     if(args["atmosphere_fade_duration"]!="") stcore->AtmosphereFadeDuration = str_to_double(args["atmosphere_fade_duration"]);
     else if(args["auto_move_duration"]!="") stcore->auto_move_duration = str_to_double(args["auto_move_duration"]);
-    else if(args["constellation_art_fade_duration"]!="") stcore->ConstellationArtFadeDuration = str_to_double(args["constellation_art_fade_duration"]);
-    else if(args["constellation_art_intensity"]!="") stcore->ConstellationArtIntensity = str_to_double(args["constellation_art_intensity"]);
+    else if(args["constellation_art_fade_duration"]!="") stcore->setConstellationArtFadeDuration(str_to_double(args["constellation_art_fade_duration"]));
+    else if(args["constellation_art_intensity"]!="") stcore->setConstellationArtIntensity(str_to_double(args["constellation_art_intensity"]));
     else if(args["landscape_name"]!="") stcore->setLandscape(args["landscape_name"]);
     else if(args["max_mag_nebula_name"]!="") stcore->MaxMagNebulaName = str_to_double(args["max_mag_nebula_name"]);
-    else if(args["max_mag_star_name"]!="") stcore->MaxMagStarName = str_to_double(args["max_mag_star_name"]);
+    else if(args["max_mag_star_name"]!="") stcore->setMaxMagStarName(str_to_double(args["max_mag_star_name"]));
     else if(args["moon_scale"]!="") {
       stcore->MoonScale = str_to_double(args["moon_scale"]);
       if(stcore->MoonScale<0) stcore->MoonScale=1;  // negative numbers reverse drawing!
@@ -122,10 +122,10 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
     else if(args["sky_culture"]!="") status = stcore->setSkyCulture(args["sky_culture"]);
 //    else if(args["sky_locale"]!="") stcore->set_sky_locale(args["sky_locale"]); // Tony NOT SURE
     else if(args["sky_locale"]!="") stcore->setAppLanguage(args["sky_locale"]);
-    else if(args["star_mag_scale"]!="") stcore->StarMagScale = str_to_double(args["star_mag_scale"]);
+    else if(args["star_mag_scale"]!="") stcore->setStarMagScale(str_to_double(args["star_mag_scale"]));
     else if(args["star_scale"]!="") {
 		float scale = str_to_double(args["star_scale"]);
-		stcore->StarScale = scale;
+		stcore->setStarScale(scale);
 		stcore->ssystem->set_object_scale(scale);
 	} 
 	else if(args["nebula_scale"]!="")
@@ -133,7 +133,7 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 		float scale = str_to_double(args["nebula_scale"]);
 		stcore->NebulaScale = scale;
 	} 
-	else if(args["star_twinkle_amount"]!="") stcore->StarTwinkleAmount = str_to_double(args["star_twinkle_amount"]);
+	else if(args["star_twinkle_amount"]!="") stcore->setStarTwinkleAmount(str_to_double(args["star_twinkle_amount"]));
     else if(args["time_zone"]!="") stcore->observatory->set_custom_tz_name(args["time_zone"]);
     else if(args["milky_way_intensity"]!="") {
 		stcore->MilkyWayIntensity = str_to_double(args["milky_way_intensity"]);
@@ -176,25 +176,25 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
       std::istringstream istr(args["hp"]);
       istr >> hpnum;
       stcore->selected_object = stcore->hip_stars->searchHP(hpnum);
-      stcore->asterisms->set_selected((HipStar*)stcore->selected_object);
+      stcore->asterisms->setSelected((HipStar*)stcore->selected_object);
       stcore->selected_planet=NULL;
 	}
 	else if(args["star"]!="")
 	{
       stcore->selected_object = stcore->hip_stars->search(args["star"]);
-      stcore->asterisms->set_selected((HipStar*)stcore->selected_object);
+      stcore->asterisms->setSelected((HipStar*)stcore->selected_object);
       stcore->selected_planet=NULL;
     } else if(args["planet"]!=""){
       stcore->selected_object = stcore->selected_planet = stcore->ssystem->searchByEnglishName(args["planet"]);
-      stcore->asterisms->set_selected(NULL);
+      stcore->asterisms->setSelected(NULL);
     } else if(args["nebula"]!=""){
       stcore->selected_object = stcore->nebulas->search(args["nebula"]);
       stcore->selected_planet=NULL;
-      stcore->asterisms->set_selected(NULL);
+      stcore->asterisms->setSelected(NULL);
     } else if(args["constellation"]!=""){
 
 		// Select only constellation, nothing else 	 
-		stcore->asterisms->set_selected(args["constellation"]); 
+		stcore->asterisms->setSelected(args["constellation"]); 
 
 		stcore->selected_object = NULL;
 		stcore->selected_planet=NULL;
@@ -203,15 +203,15 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 
 		// For Find capability, select a star in constellation so can center view on constellation 	 
 		unsigned int hpnum; 
-		stcore->asterisms->set_selected(args["constellation_star"]); 
+		stcore->asterisms->setSelected(args["constellation_star"]); 
 
-		hpnum = stcore->asterisms->get_first_selected_HP();
+		hpnum = stcore->asterisms->getFirstSelectedHP();
 		stcore->selected_object = stcore->hip_stars->searchHP(hpnum); 	 
-		stcore->asterisms->set_selected((HipStar*)stcore->selected_object); 	 
+		stcore->asterisms->setSelected((HipStar*)stcore->selected_object); 	 
 		stcore->selected_planet=NULL;
 
 		// Some stars are shared, so now force constellation
-		stcore->asterisms->set_selected(args["constellation_star"]);
+		stcore->asterisms->setSelected(args["constellation_star"]);
 
     }
 
@@ -228,7 +228,7 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
   } else if (command == "deselect") {
     stcore->selected_object = NULL;
     stcore->selected_planet = NULL;
-    stcore->asterisms->set_selected(NULL);
+    stcore->asterisms->setSelected(NULL);
 
   } else if(command == "look") {  // change direction of view
 	  //	  double duration = str_to_pos_double(args["duration"]);
@@ -591,8 +591,8 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 		  stcore->loadConfig();
 
 		  if(stcore->asterisms) {
-			  stcore->asterisms->set_art_intensity(stcore->ConstellationArtIntensity);
-			  stcore->asterisms->set_art_fade_duration(stcore->ConstellationArtFadeDuration);
+			  stcore->setConstellationArtIntensity(stcore->getConstellationArtIntensity());
+			  stcore->setConstellationArtFadeDuration(stcore->getConstellationArtFadeDuration());
 		  }
 		  if (!stcore->FlagAtmosphere && stcore->tone_converter)
 			  stcore->tone_converter->set_world_adaptation_luminance(3.75f);
@@ -682,27 +682,33 @@ int StelCommandInterface::set_flag(string name, string value, bool &newval, bool
 
 
 		if(name=="constellation_drawing") {
-			newval = !stcore->asterisms->get_flag_lines();
-			stcore->asterisms->set_flag_lines(newval);
+			newval = !stcore->getFlagConstellationLines();
+			stcore->setFlagConstellationLines(newval);
 		} 
 		else if(name=="constellation_names") {
-			newval = !stcore->asterisms->get_flag_names();
-			stcore->asterisms->set_flag_names(newval);
+			newval = !stcore->getFlagConstellationNames();
+			stcore->setFlagConstellationNames(newval);
 		} 
 		else if(name=="constellation_art") {
-			newval = !stcore->asterisms->get_flag_art();
-			stcore->asterisms->set_flag_art(newval);
+			newval = !stcore->getFlagConstellationArt();
+			stcore->setFlagConstellationArt(newval);
 		} 
 		else if(name=="constellation_boundaries") {
-			newval = !stcore->asterisms->get_flag_boundaries();
-			stcore->asterisms->set_flag_boundaries(newval);
+			newval = !stcore->getFlagConstellationBoundaries();
+			stcore->setFlagConstellationBoundaries(newval);
 		} 
 		else if(name=="constellation_pick") { 
-             newval = !stcore->asterisms->get_flag_isolate_selected();
-             stcore->asterisms->set_flag_isolate_selected(newval);
+             newval = !stcore->getFlagConstellationIsolateSelected();
+             stcore->setFlagConstellationIsolateSelected(newval);
         }
-		else if(name=="star_twinkle") newval = (stcore->FlagStarTwinkle = !stcore->FlagStarTwinkle);
-		else if(name=="point_star") newval = (stcore->FlagPointStar = !stcore->FlagPointStar);
+		else if(name=="star_twinkle") {
+			newval = !stcore->getFlagStarTwinkle();
+			stcore->setFlagStarTwinkle(newval);
+		}
+		else if(name=="point_star") {
+			newval = !stcore->getFlagPointStar();
+			stcore->setFlagPointStar(newval);
+		}
 		else if(name=="show_selected_object_info") newval = (stcore->FlagShowSelectedObjectInfo = !stcore->FlagShowSelectedObjectInfo);
 		else if(name=="show_tui_datetime") newval = (stcore->FlagShowTuiDateTime = !stcore->FlagShowTuiDateTime);
 		else if(name=="show_tui_short_obj_info") newval = (stcore->FlagShowTuiShortObjInfo = !stcore->FlagShowTuiShortObjInfo);
@@ -737,10 +743,13 @@ int StelCommandInterface::set_flag(string name, string value, bool &newval, bool
 			else stcore->ssystem->get_moon()->set_sphere_scale(1.);
 		}
 		else if(name=="landscape") newval = (stcore->FlagLandscape = !stcore->FlagLandscape);
-		else if(name=="stars") newval = (stcore->FlagStars = !stcore->FlagStars);
+		else if(name=="stars") {
+			newval = !stcore->getFlagStars();
+			stcore->setFlagStars(newval);
+		}
 		else if(name=="star_names") {
-			newval = (stcore->FlagStarName = !stcore->FlagStarName);
-			if(newval) stcore->FlagStars = 1;  // make sure stars on if want labels
+			newval = !stcore->getFlagStarName();
+			stcore->setFlagStarName(newval);
 		}
 		else if(name=="planets") {
 			newval = (stcore->FlagPlanets = !stcore->FlagPlanets);
@@ -809,13 +818,13 @@ int StelCommandInterface::set_flag(string name, string value, bool &newval, bool
 		
 		} else status = 0;
 
-		if(name=="constellation_drawing") stcore->asterisms->set_flag_lines(newval);
-		else if(name=="constellation_names") stcore->asterisms->set_flag_names(newval);
-		else if(name=="constellation_art") stcore->asterisms->set_flag_art(newval);
-		else if(name=="constellation_boundaries") stcore->asterisms->set_flag_boundaries(newval);
-     	else if(name=="constellation_pick") stcore->asterisms->set_flag_isolate_selected(newval);
-		else if(name=="star_twinkle") stcore->FlagStarTwinkle = newval;
-		else if(name=="point_star") stcore->FlagPointStar = newval;
+		if(name=="constellation_drawing") stcore->setFlagConstellationLines(newval);
+		else if(name=="constellation_names") stcore->setFlagConstellationNames(newval);
+		else if(name=="constellation_art") stcore->setFlagConstellationArt(newval);
+		else if(name=="constellation_boundaries") stcore->setFlagConstellationBoundaries(newval);
+     	else if(name=="constellation_pick") stcore->setFlagConstellationIsolateSelected(newval);
+		else if(name=="star_twinkle") stcore->setFlagStarTwinkle(newval);
+		else if(name=="point_star") stcore->setFlagPointStar(newval);
 		else if(name=="show_selected_object_info") stcore->FlagShowSelectedObjectInfo = newval;
 		else if(name=="show_tui_datetime") stcore->FlagShowTuiDateTime = newval;
 		else if(name=="show_tui_short_obj_info") stcore->FlagShowTuiShortObjInfo = newval;
@@ -848,11 +857,8 @@ int StelCommandInterface::set_flag(string name, string value, bool &newval, bool
 			else stcore->ssystem->get_moon()->set_sphere_scale(1.);
 		}
 		else if(name=="landscape") stcore->FlagLandscape = newval;
-		else if(name=="stars") stcore->FlagStars = newval;
-		else if(name=="star_names") {
-			stcore->FlagStarName = newval;
-			if(newval) stcore->FlagStars = 1;  // make sure stars on if want labels
-		}
+		else if(name=="stars") stcore->setFlagStars(newval);
+		else if(name=="star_names") stcore->setFlagStarName(newval);
 		else if(name=="planets") {
 			stcore->FlagPlanets = newval;
 			if (!stcore->FlagPlanets) stcore->FlagPlanetsHints = 0;
