@@ -32,54 +32,102 @@ class ConstellationMgr
 public:
     ConstellationMgr(HipStarMgr *_hip_stars);
     ~ConstellationMgr();
+    
+    /** Draw constellation lines, art, names and boundaries if activated */
     void draw(Projector* prj, Navigator* nav) const;
+    
+    /** Update faders */
 	void update(int delta_time);
 	
-	//! @brief Read constellation names from the given file
-	//! @param namesFile Name of the file containing the constellation names in english
+	/** 
+	 * @brief Read constellation names from the given file
+	 * @param namesFile Name of the file containing the constellation names in english
+	 */
 	void loadNames(const string& names_file);
 	
-	//! @brief Update i18 names from english names according to current locale
-	//! The translation is done using gettext with translated strings defined in translations.h
+	/**
+	 * @brief Update i18 names from english names according to current locale
+	 * The translation is done using gettext with translated strings defined in translations.h
+	 */
 	void translateNames(Translator& trans);
-					   
-	void load_lines_and_art(const string& lines_file, const string& art_file, const string &boundaryfileName, LoadingBar& lb);
+		   
+	/** @brief Load constellation line shapes, art textures and boundaries shapes from data files*/
+	void loadLinesAndArt(const string& lines_file, const string& art_file, const string &boundaryfileName, LoadingBar& lb);
 	
-	void set_art_fade_duration(float duration);
-	void set_art_intensity(float _max);
-	void set_flag_art(bool b);
-	void set_flag_lines(bool b);
-	void set_flag_boundaries(bool b);
-	void set_flag_names(bool b);
-	void set_flag_isolate_selected(bool s) { isolateSelected = s; set_selected_const(selected);}
-	// TODO : all the asterisms.empty() will be removed
-	bool get_flag_art(void) {return (!asterisms.empty() && (*(asterisms.begin()))->get_flag_art() || (selected && selected->get_flag_art()));}
-	bool get_flag_lines(void) {return (!asterisms.empty() && (*(asterisms.begin()))->get_flag_lines() || (selected && selected->get_flag_lines()));}
-	bool get_flag_names(void) {return (!asterisms.empty() && (*(asterisms.begin()))->get_flag_name() || (selected && selected->get_flag_name()));}
-	bool get_flag_boundaries(void) {return (!asterisms.empty() && (*(asterisms.begin()))->get_flag_boundaries() || (selected && selected->get_flag_boundaries()));}
-	bool get_flag_isolate_selected(void) { return isolateSelected;}
-
-	void set_flag_gravity_label(bool g) {Constellation::gravity_label = g;}
-	void set_line_color(const Vec3f& c) {Constellation::set_line_color(c);}
-	Vec3f get_line_color() {return Constellation::get_line_color();}
-	void set_label_color(const Vec3f& c) {Constellation::set_label_color(c);}
-	Vec3f get_label_color() {return Constellation::get_label_color();}
-	void set_boundary_color(const Vec3f& c) {Constellation::set_boundary_color(c);}
-	Vec3f get_boundary_color() {return Constellation::get_boundary_color();}
-	void set_font(float font_size, const string& font_name);
-	void set_selected(const string& shortname) {set_selected_const(findFromAbbreviation(shortname));}
-	void set_selected(const HipStar * s) {if (!s) set_selected_const(NULL); else set_selected_const(is_star_in(s));}
-	unsigned int get_first_selected_HP(void) {if (selected != NULL) return selected->asterism[0]->get_hp_number(); else return 0;}  //Tony
+	/** Set constellation art fade duration */
+	void setArtFadeDuration(float duration);
+	/** Set constellation art intensity */
+	float getArtFadeDuration() const {return (!asterisms.empty() && (*(asterisms.begin()))->art_fader.get_duration() || (selected && selected->art_fader.get_duration()));}
+		
+	/** Set constellation art intensity */
+	void setArtIntensity(float f);
+	/** Set constellation art intensity */
+	float getArtIntensity() const {return (!asterisms.empty() && (*(asterisms.begin()))->art_fader.get_max_value() || (selected && selected->art_fader.get_max_value()));}
+	
+	/** Set whether constellation art will be displayed */
+	void setFlagArt(bool b);
+	/** Get whether constellation art is displayed */
+	bool getFlagArt(void) const {return (!asterisms.empty() && (*(asterisms.begin()))->getFlagArt() || (selected && selected->getFlagArt()));}
+	
+	/** Set whether constellation path lines will be displayed */
+	void setFlagLines(bool b);
+	/** Get whether constellation path lines are displayed */
+	bool getFlagLines(void) const {return (!asterisms.empty() && (*(asterisms.begin()))->getFlagLines() || (selected && selected->getFlagLines()));}
+	
+	/** Set whether constellation boundaries lines will be displayed */
+	void setFlagBoundaries(bool b);
+	/** Get whether constellation boundaries lines are displayed */
+	bool getFlagBoundaries(void) const {return (!asterisms.empty() && (*(asterisms.begin()))->getFlagBoundaries() || (selected && selected->getFlagBoundaries()));}
+	
+	/** Set whether constellation names will be displayed */
+	void setFlagNames(bool b);
+	/** Set whether constellation names are displayed */
+	bool getFlagNames(void) const {return (!asterisms.empty() && (*(asterisms.begin()))->getFlagName() || (selected && selected->getFlagName()));}
+	
+	/** Set whether selected constellation must be displayed alone */
+	void setFlagIsolateSelected(bool s) { isolateSelected = s; setSelectedConst(selected);}
+	/** Get whether selected constellation is displayed alone */
+	bool getFlagIsolateSelected(void) const { return isolateSelected;}
+	
+	/** Define wehther lable are print with gravity effect */
+	void setFlagGravityLabel(bool g) {Constellation::gravityLabel = g;}
+	
+	/** Define line color */
+	void setLineColor(const Vec3f& c) {Constellation::lineColor = c;}
+	/** Get line color */
+	Vec3f getLineColor() const {return Constellation::lineColor;}
+	
+	/** Define boundary color */
+	void setBoundaryColor(const Vec3f& c) {Constellation::boundaryColor = c;}
+	/** Get current boundary color */
+	Vec3f getBoundaryColor() const {return Constellation::boundaryColor;}
+		
+	/** Set label color for names */
+	void setLabelColor(const Vec3f& c) {Constellation::labelColor = c;}
+	/** Get label color for names */
+	Vec3f getLabelColor() const {return Constellation::labelColor;}
+	
+	/** Define font file name and size to use for constellation names display */
+	void setFont(float font_size, const string& font_name);
+	
+	/** Define which constellation is selected from its abbreviation */
+	void setSelected(const string& abbreviation) {setSelectedConst(findFromAbbreviation(abbreviation));}
+	
+	/** Define which constellation is selected from a star number */
+	void setSelected(const HipStar * s) {if (!s) setSelectedConst(NULL); else setSelectedConst(is_star_in(s));}
+	
+	unsigned int getFirstSelectedHP(void) {if (selected != NULL) return selected->asterism[0]->get_hp_number(); else return 0;}  //Tony
 	vector<wstring> getNames(void);
 	vector<string> getShortNames(void);
-	string get_short_name_by_name(wstring _name);  // return short name from long common name
-	bool load_boundaries(const string& conCatFile);
-	void draw_boundaries(Projector* prj) const;
+	string getShortNameByNameI18(wstring _name);  // return short name from long common name
+
 private:
+	bool loadBoundaries(const string& conCatFile);
 	void draw_lines(Projector * prj) const;
 	void draw_art(Projector * prj, Navigator * nav) const;
 	void draw_names(Projector * prj) const;
-	void set_selected_const(Constellation* c);
+	void drawBoundaries(Projector* prj) const;	
+	void setSelectedConst(Constellation* c);
 
     Constellation* is_star_in(const HipStar *) const;
     Constellation* findFromAbbreviation(const string& abbreviation) const;		

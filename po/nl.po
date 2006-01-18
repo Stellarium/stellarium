@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: stellarium@free.fr\n"
-"POT-Creation-Date: 2006-01-15 21:29+0100\n"
+"POT-Creation-Date: 2006-01-17 22:31+0100\n"
 "PO-Revision-Date: 2005-07-26 21:42+0100\n"
 "Last-Translator: Johan Meuris <johanmeuris@antwerpen.be>\n"
 "Language-Team: \n"
@@ -41,7 +41,7 @@ msgstr "%s: Foutieve command line optieparameter \n"
 msgid "Try `%s --help' for more information.\n"
 msgstr "Typ `%s --help' voor meer informatie.\n"
 
-#: src/constellation_mgr.cpp:150
+#: src/constellation_mgr.cpp:155
 #, c-format
 msgid "Loading Constellation Art: %d/%d"
 msgstr "Laden sterrenbeelden %d/%d"
@@ -108,19 +108,19 @@ msgid "Loading Hipparcos catalog: %d/%d"
 msgstr "Laden Hipparcos sterrencataloog: %d/%d"
 
 # Dibuja barra de carga
-#: src/hip_star_mgr.cpp:861 src/hip_star_mgr.cpp:1528
+#: src/hip_star_mgr.cpp:854 src/hip_star_mgr.cpp:1521
 #, fuzzy, c-format
 msgid "Loading HIP/SAO catalogs: %d/%d"
 msgstr "Laden Hipparcos sterrencataloog: %d/%d"
 
 # Dibuja barra de carga
-#: src/hip_star_mgr.cpp:1204
+#: src/hip_star_mgr.cpp:1197
 #, fuzzy, c-format
 msgid "Loading HIP catalog: %d/%d"
 msgstr "Laden Hipparcos sterrencataloog: %d/%d"
 
 # Dibuja barra de carga
-#: src/hip_star_mgr.cpp:1299
+#: src/hip_star_mgr.cpp:1292
 #, fuzzy, c-format
 msgid "Loading SAO catalog: %d/%d"
 msgstr "Laden Hipparcos sterrencataloog: %d/%d"
@@ -383,7 +383,7 @@ msgstr "Error: Geen toegang tot een script om commands te registreren."
 msgid "Configuration"
 msgstr "Instellingen"
 
-#: src/stel_ui_conf.cpp:47 src/stel_ui_conf.cpp:688
+#: src/stel_ui_conf.cpp:47 src/stel_ui_conf.cpp:686
 msgid "Stars"
 msgstr "Sterren"
 
@@ -391,91 +391,91 @@ msgstr "Sterren"
 msgid "Star Names. Up to mag :"
 msgstr "Namen van de sterren. Tot magnitude:"
 
-#: src/stel_ui_conf.cpp:65
+#: src/stel_ui_conf.cpp:64
 msgid "Star Twinkle. Amount :"
 msgstr "Fonkelen van de sterren. Intensiteit :"
 
-#: src/stel_ui_conf.cpp:82
+#: src/stel_ui_conf.cpp:80
 msgid "Constellations"
 msgstr "Sterrenbeelden"
 
-#: src/stel_ui_conf.cpp:87
+#: src/stel_ui_conf.cpp:85
 msgid "Constellations Names"
 msgstr "Namen van de sterrenbeelden"
 
-#: src/stel_ui_conf.cpp:92
+#: src/stel_ui_conf.cpp:90
 msgid "Selected Constellation Only"
 msgstr "Enkel het geselecteerde sterrenbeeld"
 
-#: src/stel_ui_conf.cpp:105
+#: src/stel_ui_conf.cpp:103
 msgid "Nebulas Names. Up to mag :"
 msgstr "Namen van de nevels. Tot magnitude :"
 
-#: src/stel_ui_conf.cpp:122
+#: src/stel_ui_conf.cpp:120
 msgid "Planets"
 msgstr "Planeten"
 
-#: src/stel_ui_conf.cpp:127
+#: src/stel_ui_conf.cpp:125
 msgid "Moon Scale"
 msgstr "Grootte maan"
 
-#: src/stel_ui_conf.cpp:134
+#: src/stel_ui_conf.cpp:132
 msgid "Planets Hints"
 msgstr "Labels planeten"
 
-#: src/stel_ui_conf.cpp:145
+#: src/stel_ui_conf.cpp:143
 msgid "Equatorial Grid"
 msgstr "Equatoriaal raster"
 
-#: src/stel_ui_conf.cpp:150
+#: src/stel_ui_conf.cpp:148
 msgid "Azimuthal Grid"
 msgstr "Azimutaal raster"
 
-#: src/stel_ui_conf.cpp:155
+#: src/stel_ui_conf.cpp:153
 msgid "Equator Line"
 msgstr "Hemelequator"
 
-#: src/stel_ui_conf.cpp:160
+#: src/stel_ui_conf.cpp:158
 msgid "Ecliptic Line"
 msgstr "Ecliptica"
 
-#: src/stel_ui_conf.cpp:171
+#: src/stel_ui_conf.cpp:169
 msgid "Ground"
 msgstr "Grond"
 
-#: src/stel_ui_conf.cpp:176
+#: src/stel_ui_conf.cpp:174
 msgid "Cardinal Points"
 msgstr "Kardinaalpunten"
 
-#: src/stel_ui_conf.cpp:181
+#: src/stel_ui_conf.cpp:179
 msgid "Atmosphere"
 msgstr "Atmosfeer"
 
-#: src/stel_ui_conf.cpp:186
+#: src/stel_ui_conf.cpp:184
 msgid "Fog"
 msgstr "Nevel"
 
-#: src/stel_ui_conf.cpp:191 src/stel_ui_conf.cpp:366
+#: src/stel_ui_conf.cpp:189 src/stel_ui_conf.cpp:364
 msgid "Save as default"
 msgstr "Opslaan als standaard"
 
-#: src/stel_ui_conf.cpp:203
+#: src/stel_ui_conf.cpp:201
 msgid " Current Time :"
 msgstr " Huidige tijd :"
 
-#: src/stel_ui_conf.cpp:212
+#: src/stel_ui_conf.cpp:210
 msgid " Time Zone :"
 msgstr " Tijdzone :"
 
-#: src/stel_ui_conf.cpp:216
+#: src/stel_ui_conf.cpp:214
 msgid " Using System Default Time Zone"
 msgstr " Standaard tijdzone"
 
-#: src/stel_ui_conf.cpp:227
+#: src/stel_ui_conf.cpp:225
 msgid " Time speed : "
 msgstr " Snelheid tijd : "
 
-#: src/stel_ui_conf.cpp:235
+#: src/stel_ui_conf.cpp:233
 msgid ""
 "Use key J and L to decrease and increase\n"
 "   time speed.\n"
@@ -485,149 +485,149 @@ msgstr ""
 "  of vertragen.\n"
 "Druk K om naar normale snelheid terug te keren."
 
-#: src/stel_ui_conf.cpp:257
+#: src/stel_ui_conf.cpp:255
 msgid "Cursor : "
 msgstr ""
 
-#: src/stel_ui_conf.cpp:262
+#: src/stel_ui_conf.cpp:260
 msgid "Selected : "
 msgstr ""
 
-#: src/stel_ui_conf.cpp:267
+#: src/stel_ui_conf.cpp:265
 msgid "Longitude : "
 msgstr "Lengte: "
 
-#: src/stel_ui_conf.cpp:275
+#: src/stel_ui_conf.cpp:273
 msgid "Latitude : "
 msgstr "Breedte: "
 
-#: src/stel_ui_conf.cpp:283
+#: src/stel_ui_conf.cpp:281
 #, fuzzy
 msgid "Altitude : "
 msgstr "Hoogte (m): "
 
-#: src/stel_ui_conf.cpp:290
+#: src/stel_ui_conf.cpp:288
 msgid "Save location"
 msgstr "Positie opslaan"
 
-#: src/stel_ui_conf.cpp:312
+#: src/stel_ui_conf.cpp:310
 msgid " Projection :"
 msgstr " Projectie:"
 
-#: src/stel_ui_conf.cpp:318
+#: src/stel_ui_conf.cpp:316
 msgid "Fisheye Projection Mode"
 msgstr "Visoogprojectie"
 
-#: src/stel_ui_conf.cpp:323
+#: src/stel_ui_conf.cpp:321
 msgid "Disk Viewport"
 msgstr "Schijfvormig venster."
 
-#: src/stel_ui_conf.cpp:328
+#: src/stel_ui_conf.cpp:326
 msgid " Screen Resolution :"
 msgstr " Schermresolutie:"
 
-#: src/stel_ui_conf.cpp:332
+#: src/stel_ui_conf.cpp:330
 msgid "Restart program for"
 msgstr "Herstart programma om"
 
-#: src/stel_ui_conf.cpp:333
+#: src/stel_ui_conf.cpp:331
 msgid "change to apply."
 msgstr "verander om toe te passen."
 
-#: src/stel_ui_conf.cpp:357
+#: src/stel_ui_conf.cpp:355
 msgid "For unlisted screen resolution, edit the file :"
 msgstr ""
 
-#: src/stel_ui_conf.cpp:377
+#: src/stel_ui_conf.cpp:375
 msgid " Choose landscapes :"
 msgstr ""
 
-#: src/stel_ui_conf.cpp:394
+#: src/stel_ui_conf.cpp:392
 msgid "Please save option in tab \"Location\""
 msgstr ""
 
-#: src/stel_ui_conf.cpp:395
+#: src/stel_ui_conf.cpp:393
 msgid "to save current landscape as the default landscape."
 msgstr ""
 
-#: src/stel_ui_conf.cpp:403
+#: src/stel_ui_conf.cpp:401
 msgid "Date & Time"
 msgstr "Datum & Tijd"
 
-#: src/stel_ui_conf.cpp:404
+#: src/stel_ui_conf.cpp:402
 msgid "Location"
 msgstr "Positie"
 
-#: src/stel_ui_conf.cpp:405
+#: src/stel_ui_conf.cpp:403
 #, fuzzy
 msgid "Landscapes"
 msgstr "Landschap: "
 
-#: src/stel_ui_conf.cpp:406
+#: src/stel_ui_conf.cpp:404
 msgid "Video"
 msgstr "Video"
 
-#: src/stel_ui_conf.cpp:407
+#: src/stel_ui_conf.cpp:405
 msgid "Rendering"
 msgstr "Rendering"
 
-#: src/stel_ui_conf.cpp:513
+#: src/stel_ui_conf.cpp:511
 msgid "Object Search"
 msgstr ""
 
-#: src/stel_ui_conf.cpp:532
+#: src/stel_ui_conf.cpp:530
 msgid "Star No./Name"
 msgstr ""
 
-#: src/stel_ui_conf.cpp:536
+#: src/stel_ui_conf.cpp:534
 msgid "eg. 60718 (aCrux) or Canopus"
 msgstr ""
 
-#: src/stel_ui_conf.cpp:537
+#: src/stel_ui_conf.cpp:535
 msgid "HP 60718, HD 108248, SAO 251904"
 msgstr ""
 
-#: src/stel_ui_conf.cpp:558 src/stel_ui_conf.cpp:689
+#: src/stel_ui_conf.cpp:556 src/stel_ui_conf.cpp:687
 #, fuzzy
 msgid "Constellation"
 msgstr "Sterrenbeelden"
 
-#: src/stel_ui_conf.cpp:562
+#: src/stel_ui_conf.cpp:560
 msgid "eg. Crux"
 msgstr ""
 
-#: src/stel_ui_conf.cpp:581 src/stel_ui_conf.cpp:690
+#: src/stel_ui_conf.cpp:579 src/stel_ui_conf.cpp:688
 #, fuzzy
 msgid "Nebula"
 msgstr "Nevels"
 
-#: src/stel_ui_conf.cpp:585
+#: src/stel_ui_conf.cpp:583
 msgid "eg. M83, NGC 7009, IC 2118"
 msgstr ""
 
-#: src/stel_ui_conf.cpp:586
+#: src/stel_ui_conf.cpp:584
 msgid "CW 113, SH 40"
 msgstr ""
 
-#: src/stel_ui_conf.cpp:671
+#: src/stel_ui_conf.cpp:669
 #, fuzzy
 msgid "Planet/Moon"
 msgstr "Planeten"
 
-#: src/stel_ui_conf.cpp:675
+#: src/stel_ui_conf.cpp:673
 msgid "eg. Pluto or Io"
 msgstr ""
 
-#: src/stel_ui_conf.cpp:691
+#: src/stel_ui_conf.cpp:689
 #, fuzzy
 msgid "Planets & Moons"
 msgstr "Labels planeten"
 
-#: src/stel_ui_conf.cpp:962
+#: src/stel_ui_conf.cpp:960
 msgid "Enter observatory name"
 msgstr ""
 
-#: src/stel_ui_conf.cpp:1125
+#: src/stel_ui_conf.cpp:1123
 #, fuzzy
 msgid " Current Time Speed is x"
 msgstr " Huidige tijd :"

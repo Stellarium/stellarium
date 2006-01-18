@@ -350,22 +350,22 @@ void StelUI::tui_update_widgets(void)
 	tui_general_sky_locale->setValue(StelUtility::stringToWstring(core->skyTranslator.getLocaleName()));
 
 	// 4. Stars
-	tui_stars_show->setValue(core->FlagStars);
-	tui_star_labelmaxmag->setValue(core->MaxMagStarName);
-	tui_stars_twinkle->setValue(core->StarTwinkleAmount);
-	tui_star_magscale->setValue(core->StarMagScale);
+	tui_stars_show->setValue(core->getFlagStars());
+	tui_star_labelmaxmag->setValue(core->getMaxMagStarName());
+	tui_stars_twinkle->setValue(core->getStarTwinkleAmount());
+	tui_star_magscale->setValue(core->getStarMagScale());
 
 	// 5. Colors
-	tui_colors_const_line_color->setVector(core->asterisms->get_line_color());
-	tui_colors_const_label_color->setVector(core->asterisms->get_label_color());
+	tui_colors_const_line_color->setVector(core->asterisms->getLineColor());
+	tui_colors_const_label_color->setVector(core->asterisms->getLabelColor());
 	tui_colors_cardinal_color->setVector(core->cardinals_points->get_color());
 
 	// 5. effects
 	tui_effect_landscape->setValue(StelUtility::stringToWstring(core->observatory->get_landscape_name()));
-	tui_effect_pointobj->setValue(core->FlagPointStar);
+	tui_effect_pointobj->setValue(core->getFlagPointStar());
 	tui_effect_zoom_duration->setValue(core->auto_move_duration);
 	tui_effect_manual_zoom->setValue(core->FlagManualZoom);
-	tui_effect_object_scale->setValue(core->StarScale);
+	tui_effect_object_scale->setValue(core->getStarScale());
 	tui_effect_milkyway_intensity->setValue(core->milky_way->get_intensity());
 	tui_effect_cursor_timeout->setValue(core->MouseCursorTimeout);
 	tui_effect_nebulae_label_magnitude->setValue(core->MaxMagNebulaName);
@@ -606,7 +606,7 @@ void StelUI::tui_cb_effects_nebulae_label_magnitude()
 
 void StelUI::tui_cb_change_color()
 {
-	core->asterisms->set_line_color( tui_colors_const_line_color->getVector() );
-	core->asterisms->set_label_color( tui_colors_const_label_color->getVector() );
+	core->asterisms->setLineColor( tui_colors_const_line_color->getVector() );
+	core->asterisms->setLabelColor( tui_colors_const_label_color->getVector() );
 	core->cardinals_points->set_color( tui_colors_cardinal_color->getVector() );
 }

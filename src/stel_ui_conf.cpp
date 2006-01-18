@@ -44,31 +44,29 @@ Component* StelUI::createConfigWindow(void)
 	Picture* pstar = new Picture(starp, x-50, y+5, 32, 32);
 	tab_render->addComponent(pstar);
 
-	stars_cbx = new LabeledCheckBox(core->FlagStars, _("Stars"));
+	stars_cbx = new LabeledCheckBox(core->getFlagStars(), _("Stars"));
 	stars_cbx->setOnPressCallback(callback<void>(this, &StelUI::updateConfigVariables));
 	tab_render->addComponent(stars_cbx);
 	stars_cbx->setPos(x,y); y+=15;
 
-	star_names_cbx = new LabeledCheckBox(core->FlagStarName, _("Star Names. Up to mag :"));
+	star_names_cbx = new LabeledCheckBox(core->getFlagStarName(), _("Star Names. Up to mag :"));
 	star_names_cbx->setOnPressCallback(callback<void>(this, &StelUI::updateConfigVariables));
 	tab_render->addComponent(star_names_cbx);
 	star_names_cbx->setPos(x,y);
 
-	max_mag_star_name = new FloatIncDec(courierFont, tex_up, tex_down, -1.5, 9,
-		core->MaxMagStarName, 0.5);
+	max_mag_star_name = new FloatIncDec(courierFont, tex_up, tex_down, -1.5, 9, core->getMaxMagStarName(), 0.5);
 	max_mag_star_name->setOnPressCallback(callback<void>(this, &StelUI::updateConfigVariables));
 	tab_render->addComponent(max_mag_star_name);
 	max_mag_star_name->setPos(x + 220,y);
 
 	y+=15;
 
-	star_twinkle_cbx = new LabeledCheckBox(core->FlagStarTwinkle, _("Star Twinkle. Amount :"));
+	star_twinkle_cbx = new LabeledCheckBox(core->getFlagStarTwinkle(), _("Star Twinkle. Amount :"));
 	star_twinkle_cbx->setOnPressCallback(callback<void>(this, &StelUI::updateConfigVariables));
 	tab_render->addComponent(star_twinkle_cbx);
 	star_twinkle_cbx->setPos(x,y);
 
-	star_twinkle_amount = new FloatIncDec(courierFont, tex_up, tex_down, 0, 0.6,
-		core->StarTwinkleAmount, 0.1);
+	star_twinkle_amount = new FloatIncDec(courierFont, tex_up, tex_down, 0, 0.6, core->getStarTwinkleAmount(), 0.1);
 	star_twinkle_amount->setOnPressCallback(callback<void>(this, &StelUI::updateConfigVariables));
 	tab_render->addComponent(star_twinkle_amount);
 	star_twinkle_amount->setPos(x + 220,y);
@@ -810,7 +808,7 @@ void StelUI::doConstellationSearch(void)
 {
     wstring rawObjectName = constellation_edit->getText();
 
-    string objectName = core->asterisms->get_short_name_by_name(rawObjectName);
+    string objectName = core->asterisms->getShortNameByNameI18(rawObjectName);
 
     if (objectName != "")
     {
@@ -972,15 +970,15 @@ void StelUI::saveRenderOptions(void)
 	InitParser conf;
 	conf.load(core->ConfigDir + core->config_file);
 
-	conf.set_boolean("astro:flag_stars", core->FlagStars);
-	conf.set_boolean("astro:flag_star_name", core->FlagStarName);
-	conf.set_double("stars:max_mag_star_name", core->MaxMagStarName);
-	conf.set_boolean("stars:flag_star_twinkle", core->FlagStarTwinkle);
-	conf.set_double("stars:star_twinkle_amount", core->StarTwinkleAmount);
-	conf.set_boolean("viewing:flag_constellation_drawing", core->constellation_get_flag_lines());
-	conf.set_boolean("viewing:flag_constellation_name", core->constellation_get_flag_names());
-	conf.set_boolean("viewing:flag_constellation_boundaries", core->constellation_get_flag_boundaries());
-	conf.set_boolean("viewing:flag_constellation_pick", core->asterisms->get_flag_isolate_selected());
+	conf.set_boolean("astro:flag_stars", core->getFlagStars());
+	conf.set_boolean("astro:flag_star_name", core->getFlagStarName());
+	conf.set_double("stars:max_mag_star_name", core->getMaxMagStarName());
+	conf.set_boolean("stars:flag_star_twinkle", core->getFlagStarTwinkle());
+	conf.set_double("stars:star_twinkle_amount", core->getStarTwinkleAmount());
+	conf.set_boolean("viewing:flag_constellation_drawing", core->getFlagConstellationLines());
+	conf.set_boolean("viewing:flag_constellation_name", core->getFlagConstellationNames());
+	conf.set_boolean("viewing:flag_constellation_boundaries", core->getFlagConstellationBoundaries());
+	conf.set_boolean("viewing:flag_constellation_pick", core->getFlagConstellationIsolateSelected());
 	conf.set_boolean("astro:flag_nebula", core->FlagNebula);
 	conf.set_boolean("astro:flag_nebula_name", core->nebulas->get_flag_hints());
 	conf.set_double("astro:max_mag_nebula_name", core->MaxMagNebulaName);
@@ -1078,14 +1076,14 @@ void StelUI::updateVideoVariables(void)
 
 void StelUI::updateConfigForm(void)
 {
-	stars_cbx->setState(core->FlagStars);
-	star_names_cbx->setState(core->FlagStarName);
-	max_mag_star_name->setValue(core->MaxMagStarName);
-	star_twinkle_cbx->setState(core->FlagStarTwinkle);
-	star_twinkle_amount->setValue(core->StarTwinkleAmount);
-	constellation_cbx->setState(core->constellation_get_flag_lines());
-	constellation_name_cbx->setState(core->constellation_get_flag_names());
-	sel_constellation_cbx->setState(core->asterisms->get_flag_isolate_selected());
+	stars_cbx->setState(core->getFlagStars());
+	star_names_cbx->setState(core->getFlagStarName());
+	max_mag_star_name->setValue(core->getMaxMagStarName());
+	star_twinkle_cbx->setState(core->getFlagStarTwinkle());
+	star_twinkle_amount->setValue(core->getStarTwinkleAmount());
+	constellation_cbx->setState(core->getFlagConstellationLines());
+	constellation_name_cbx->setState(core->getFlagConstellationNames());
+	sel_constellation_cbx->setState(core->getFlagConstellationIsolateSelected());
 	nebulas_names_cbx->setState(core->nebulas->get_flag_hints());
 	max_mag_nebula_name->setValue(core->MaxMagNebulaName);
 	planets_cbx->setState(core->FlagPlanets);

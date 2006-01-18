@@ -33,6 +33,7 @@
 
 // construct and load all data
 HipStarMgr::HipStarMgr() :
+	limitingMag(6.5f),
 	starZones(NULL),
 	StarArray(NULL),
 	starArraySize(0), // This is the full data array including HP, HP SAO (not duplicated)
@@ -42,8 +43,7 @@ HipStarMgr::HipStarMgr() :
 	HDStarArraySize(0),
 	SAOStarFlatArray(NULL),
 	SAOStarArraySize(0),
-	starTexture(NULL), 
-	limiting_mag(6.5f)
+	starTexture(NULL)
 {
 	starZones = new vector<HipStar*>[HipGrid.getNbPoints()];
 }
@@ -320,17 +320,19 @@ void HipStarMgr::load_sci_names(const string& sciNameFile)
 }
 
 // Draw all the stars
-void HipStarMgr::draw(float _star_scale, float _star_mag_scale, float _twinkle_amount,
-						float maxMagStarName, Vec3f equ_vision,
-						ToneReproductor* _eye, Projector* prj, bool _gravity_label)
+void HipStarMgr::draw(Vec3f equ_vision, ToneReproductor* eye, Projector* prj)
 {
-	HipStar::twinkle_amount = _twinkle_amount;
-	HipStar::star_scale = _star_scale;
-	HipStar::star_mag_scale = _star_mag_scale;
-	HipStar::eye = _eye;
-	HipStar::proj = prj;
-	HipStar::gravity_label = _gravity_label;
+	// Set temporary static variable for optimization
+	if (flagStarTwinkle) HipStar::twinkle_amount = twinkleAmount;
+	else HipStar::twinkle_amount = 0;
+	HipStar::star_scale = starScale * starsFader.getInterstate();
+	HipStar::star_mag_scale = starMagScale;
+	HipStar::gravity_label = gravityLabel;
 	HipStar::names_brightness = names_fader.getInterstate();
+	HipStar::eye = eye;
+	HipStar::proj = prj;
+	
+	if (flagPointStar) drawPoint(equ_vision, eye, prj);
 	
 	glEnable(GL_TEXTURE_2D);
     glEnable(GL_BLEND);
@@ -345,7 +347,7 @@ void HipStarMgr::draw(float _star_scale, float _star_mag_scale, float _twinkle_a
 	nbZones = HipGrid.Intersect(equ_vision, max_fov*M_PI/180.f*1.2f);
 	static int * zoneList = HipGrid.getResult();
 	//	float maxMag = limiting_mag-1 + 60.f/prj->get_fov();
-	float maxMag = limiting_mag-1 + 60.f/max_fov;
+	float maxMag = limitingMag-1 + 60.f/max_fov;
 
     prj->set_orthographic_projection();	// set 2D coordinate
 
@@ -400,17 +402,8 @@ void HipStarMgr::draw(float _star_scale, float _star_mag_scale, float _twinkle_a
 }
 
 // Draw all the stars
-void HipStarMgr::draw_point(float _star_scale, float _star_mag_scale, float _twinkle_amount, 
-	float maxMagStarName, Vec3f equ_vision, ToneReproductor* _eye, Projector* prj, bool _gravity_label)
+void HipStarMgr::drawPoint(Vec3f equ_vision, ToneReproductor* _eye, Projector* prj)
 {
-	HipStar::twinkle_amount = _twinkle_amount;
-	HipStar::star_scale = _star_scale;
-	HipStar::star_mag_scale = _star_mag_scale;
-	HipStar::eye = _eye;
-	HipStar::proj = prj;
-	HipStar::gravity_label = _gravity_label;
-	HipStar::names_brightness = names_fader.getInterstate();
-
 	glEnable(GL_TEXTURE_2D);
     glEnable(GL_BLEND);
     glBindTexture (GL_TEXTURE_2D, starTexture->getID());
