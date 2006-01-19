@@ -25,7 +25,6 @@
 #include <string>
 #include <locale>
 #include <iostream>
-#include "iconv.h"
 #include <cerrno>
 
 /**

@@ -34,6 +34,8 @@ CFLAGS="$CFLAGS $FT2_CFLAGS"
 CXXFLAGS="$CXXFLAGS $FT2_CFLAGS"
 LIBS="$LIBS $FT2_LIBS"
 
+# Compilation with STLPort
+#AM_PATH_STLPORT
 
 dnl Can't find later libGLU if -lm not set here!?!??!
 AC_CHECK_LIB(m,fabs,LIBS="$LIBS -lm",AC_MSG_RESULT(math library not found))

@@ -17,10 +17,12 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#include "command_interface.h"
 #include <iostream>
 #include <sstream>
 #include <string>
+#include <algorithm>
+
+#include "command_interface.h"
 
 using namespace std;
 

@@ -20,6 +20,8 @@
 #include <iostream>
 #include <sstream>
 #include <string>
+#include <algorithm>
+
 #include "stel_command_interface.h"
 #include "stel_core.h"
 #include "image.h"

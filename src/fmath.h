@@ -28,7 +28,7 @@
 #endif
 
 #ifndef HAVE_POW10
-# define pow10(x) (float)pow(10.f,(x))
+# define pow10(x) pow(10,(x))
 #endif
 #ifndef HAVE_ACOSF
 # define acosf(x) (float)(acos(x))

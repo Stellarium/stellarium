@@ -28,7 +28,8 @@
 #include <map>
 #include <iostream>
 #include <fstream>
-//#include <assert>
+#include <cassert>
+#include <algorithm>
 
 #include <ft2build.h>
 #include FT_FREETYPE_H

@@ -635,7 +635,7 @@ namespace s_gui
 	class LabeledCheckBox : public Container
 	{
 	public:
-		LabeledCheckBox(bool state = false, const wstring& _label = "");
+		LabeledCheckBox(bool state = false, const wstring& _label = L"");
 		~LabeledCheckBox();
         virtual void draw(void);
 		virtual int getState(void) const {return checkbox->getState();}
