@@ -344,9 +344,9 @@ bool Integer_item::onKey(Uint16 k, S_TUI_VALUE v)
 		if (k==SDLK_UP)
 		{
 			++value;
-			if (value>max)
+			if (value>mmax)
 			{
-				value = max;
+				value = mmax;
 				return true;
 			}
 			if (!onChangeCallback.empty()) onChangeCallback();
@@ -355,9 +355,9 @@ bool Integer_item::onKey(Uint16 k, S_TUI_VALUE v)
 		if (k==SDLK_DOWN)
 		{
 			--value;
-			if (value<min)
+			if (value<mmin)
 			{
-				value = min;
+				value = mmin;
 				return true;
 			}
 			if (!onChangeCallback.empty()) onChangeCallback();
@@ -385,8 +385,8 @@ bool Integer_item::onKey(Uint16 k, S_TUI_VALUE v)
 			numInput=false;
 			wistringstream is(strInput);
 			is >> value;
-			if (value>max) value = max;
-			if (value<min) value = min;
+			if (value>mmax) value = mmax;
+			if (value<mmin) value = mmin;
 			if (!onChangeCallback.empty()) onChangeCallback();
 			return true;
 		}
@@ -396,8 +396,8 @@ bool Integer_item::onKey(Uint16 k, S_TUI_VALUE v)
 			wistringstream is(strInput);
 			is >> value;
 			++value;
-			if (value>max) value = max;
-			if (value<min) value = min;
+			if (value>mmax) value = mmax;
+			if (value<mmin) value = mmin;
 			wostringstream os;
 			os << value;
 			strInput = os.str();
@@ -408,8 +408,8 @@ bool Integer_item::onKey(Uint16 k, S_TUI_VALUE v)
 			wistringstream is(strInput);
 			is >> value;
 			--value;
-			if (value>max) value = max;
-			if (value<min) value = min;
+			if (value>mmax) value = mmax;
+			if (value<mmin) value = mmin;
 			wostringstream os;
 			os << value;
 			strInput = os.str();
@@ -453,9 +453,9 @@ bool Decimal_item::onKey(Uint16 k, S_TUI_VALUE v)
 		if (k==SDLK_UP)
 		{
 			value+=delta;
-			if (value>max)
+			if (value>mmax)
 			{
-				value = max;
+				value = mmax;
 				return true;
 			}
 			if (!onChangeCallback.empty()) onChangeCallback();
@@ -464,9 +464,9 @@ bool Decimal_item::onKey(Uint16 k, S_TUI_VALUE v)
 		if (k==SDLK_DOWN)
 		{
 			value-=delta;
-			if (value<min)
+			if (value<mmin)
 			{
-				value = min;
+				value = mmin;
 				return true;
 			}
 			if (!onChangeCallback.empty()) onChangeCallback();
@@ -493,8 +493,8 @@ bool Decimal_item::onKey(Uint16 k, S_TUI_VALUE v)
 			numInput=false;
 			wistringstream is(strInput);
 			is >> value;
-			if (value>max) value = max;
-			if (value<min) value = min;
+			if (value>mmax) value = mmax;
+			if (value<mmin) value = mmin;
 			if (!onChangeCallback.empty()) onChangeCallback();
 			return false;
 		}
@@ -504,11 +504,11 @@ bool Decimal_item::onKey(Uint16 k, S_TUI_VALUE v)
 			wistringstream is(strInput);
 			is >> value;
 			value+=delta;
-			if (value>max) value = max;
-			if (value<min) value = min;
-			static wchar_t tempstr[16];
-			swprintf(tempstr, 15, L"%.2f", value);
-			strInput = tempstr;
+			if (value>mmax) value = mmax;
+			if (value<mmin) value = mmin;
+			wostringstream os;
+			os << value;
+			strInput = os.str();
 			return true;
 		}
 		if (k==SDLK_DOWN)
@@ -516,11 +516,11 @@ bool Decimal_item::onKey(Uint16 k, S_TUI_VALUE v)
 			wistringstream wistemp(strInput);
 			wistemp >> value;
 			value-=delta;
-			if (value>max) value = max;
-			if (value<min) value = min;
-			static wchar_t tempstr[16];
-			swprintf(tempstr, 15, L"%.2f", value);
-			strInput = tempstr;
+			if (value>mmax) value = mmax;
+			if (value<mmin) value = mmin;
+			wostringstream os;
+			os << value;
+			strInput = os.str();
 			return true;
 		}
 
@@ -550,7 +550,11 @@ wstring Decimal_item::getString(void)
 
 	// Can't directly write value in os because there is a float precision limit bug..
 	static wchar_t tempstr[16];
+#ifndef MINGW32
 	swprintf(tempstr, 15, L"%.2f", value);
+#else
+    swprintf(tempstr, L"%.2f", value);
+#endif
 	wstring vstr(tempstr);
 
 	if (numInput) os << label << (active ? start_active : L"") << strInput << (active ? stop_active : L"");

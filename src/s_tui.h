@@ -158,14 +158,14 @@ namespace s_tui
     {
     public:
 		Integer_item(int _min, int _max, int init_value, const wstring& _label = wstring()) :
-			Integer(init_value), numInput(false), min(_min), max(_max), label(_label) {;}
+			Integer(init_value), numInput(false), mmin(_min), mmax(_max), label(_label) {;}
 		virtual wstring getString(void);
 		virtual bool isEditable(void) const {return true;}
 		virtual bool onKey(Uint16, S_TUI_VALUE);
     protected:
 		bool numInput;
 		wstring strInput;
-		int min, max;
+		int mmin, mmax;
 		wstring label;
     };
 
@@ -174,14 +174,14 @@ namespace s_tui
     {
     public:
 		Decimal_item(double _min, double _max, double init_value, const wstring& _label = wstring(), double _delta = 1.0) :
-			Decimal(init_value), numInput(false), min(_min), max(_max), label(_label), delta(_delta) {;}
+			Decimal(init_value), numInput(false), mmin(_min), mmax(_max), label(_label), delta(_delta) {;}
 		virtual wstring getString(void);
 		virtual bool isEditable(void) const {return true;}
 		virtual bool onKey(Uint16, S_TUI_VALUE);
     protected:
 		bool numInput;
 		wstring strInput;
-		double min, max;
+		double mmin, mmax;
 		wstring label;
 		double delta;
     };

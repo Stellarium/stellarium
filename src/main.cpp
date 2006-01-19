@@ -41,7 +41,7 @@ string DATA_ROOT;	// Data Root Directory
 // Print a beautiful console logo !!
 void drawIntro(void)
 {
-    cout << " _______________________________________________________" << endl;
+    cout << " -------------------------------------------------------" << endl;
     cout << "[ This is "<< APP_NAME << " - http://www.stellarium.org ]" << endl;
     cout << "[ Copyright (C) 2000-2005 Fabien Chereau et al         ]" << endl;
     cout << " -------------------------------------------------------" << endl;
@@ -229,7 +229,7 @@ int main(int argc, char **argv)
 {
 #if !defined(MACOSX)
 	// Init gettext things
-	setlocale(LC_CTYPE, "");				// Use default system char type : used for proper console output
+	//setlocale(LC_CTYPE, "");				// Use default system char type : used for proper console output
 	bindtextdomain (PACKAGE, LOCALEDIR);	
 	textdomain (PACKAGE);
 #endif
