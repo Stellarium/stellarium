@@ -323,7 +323,6 @@ StelObject * NebulaMgr::searchMessier(unsigned int M)
 bool NebulaMgr::read_NGC_catalog(const string& fileName, LoadingBar& lb)
 {
 	char recordstr[512];
-	wchar_t tmpstr[512];
 	string dataDir = fileName;
 	unsigned int catalogSize, i;
 	unsigned int data_drop;
@@ -356,8 +355,9 @@ bool NebulaMgr::read_NGC_catalog(const string& fileName, LoadingBar& lb)
 		if (!(i%200) || (i == catalogSize-1))
 		{
 			// Draw loading bar
-			swprintf(tmpstr, 512, _("Loading NGC catalog: %d/%d"), i == catalogSize-1 ? catalogSize : i, catalogSize);
-			lb.SetMessage(tmpstr);
+			wostringstream os;
+			os << _("Loading NGC catalog: ") << (i == catalogSize-1 ? catalogSize : i) << catalogSize;
+			lb.SetMessage(os.str());
 			lb.Draw((float)i/catalogSize);
 		}
 		Nebula *e = new Nebula;
@@ -458,7 +458,6 @@ bool NebulaMgr::read_NGC_catalog(const string& fileName, LoadingBar& lb)
 bool NebulaMgr::read_Sharpless_catalog(const string& fileName, LoadingBar& lb)
 {
 	char recordstr[512];
-	wchar_t tmpstr[512];
 	string dataDir = fileName;
 	unsigned int catalogSize, i;
 	unsigned int data_drop;
@@ -491,8 +490,9 @@ bool NebulaMgr::read_Sharpless_catalog(const string& fileName, LoadingBar& lb)
 		if (!(i%200) || (i == catalogSize-1))
 		{
 			// Draw loading bar
-			swprintf(tmpstr, 512, _("Loading Sharpless catalog: %d/%d"), i == catalogSize-1 ? catalogSize : i, catalogSize);
-			lb.SetMessage(tmpstr);
+			wostringstream os;
+			os << _("Loading Sharpless catalog:") << (i == catalogSize-1 ? catalogSize : i) << catalogSize;
+			lb.SetMessage(os.str());
 			lb.Draw((float)i/catalogSize);
 		}
 		Nebula *e = new Nebula;
@@ -520,7 +520,6 @@ bool NebulaMgr::read_Sharpless_catalog(const string& fileName, LoadingBar& lb)
 bool NebulaMgr::read_Cadwell_catalog(const string& fileName, LoadingBar& lb)
 {
 	char recordstr[512];
-	wchar_t tmpstr[512];
 	string dataDir = fileName;
 	unsigned int catalogSize, i;
 	unsigned int data_drop;
@@ -556,8 +555,9 @@ bool NebulaMgr::read_Cadwell_catalog(const string& fileName, LoadingBar& lb)
 		if (!(i%200) || (i == catalogSize-1))
 		{
 			// Draw loading bar
-			swprintf(tmpstr, 512, _("Loading Cadwell catalog: %d/%d"), i == catalogSize-1 ? catalogSize : i, catalogSize);
-			lb.SetMessage(tmpstr);
+			wostringstream os;
+			os << _("Loading Cadwell catalog:") <<  (i == catalogSize-1 ? catalogSize : i) << catalogSize;
+			lb.SetMessage(os.str());
 			lb.Draw((float)i/catalogSize);
 		}
 		istringstream ss(recordstr);
@@ -653,13 +653,13 @@ bool NebulaMgr::read_messier_textures(const string& fileName, LoadingBar& lb)
 	
 	int current = 0;
 	int NGC;
-	wchar_t tmpstr[512];
 	while(!getline(inf, record).eof())
 	{
 		// Draw loading bar
 		++current;
-		swprintf(tmpstr, 512, _("Loading Nebula Textures: %d/%d"), current, total);
-		lb.SetMessage(tmpstr);
+		wostringstream os;
+		os << _("Loading Nebula Textures:") << current << total;
+		lb.SetMessage(os.str());
 		lb.Draw((float)current/total);
 		
 		istringstream istr(record);

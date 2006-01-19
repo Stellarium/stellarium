@@ -215,8 +215,6 @@ Component* StelUI::createConfigWindow(void)
 	tab_time->addComponent(system_tz_lbl);
 	system_tz_lbl->setPos(50 ,y); y+=20;
 	wstring tmpl(L"(" + core->observatory->get_time_zone_name_from_system(core->navigation->get_JDay()) + L")");
-	
-	for (unsigned int i=0;i<tmpl.size();i++) {if ((unsigned int)tmpl[i]<0 || (unsigned int)tmpl[i]>255) tmpl[i]='*';}
 	system_tz_lbl2 = new Label(tmpl);
 	tab_time->addComponent(system_tz_lbl2);
 	
@@ -1118,9 +1116,9 @@ void StelUI::updateConfigForm(void)
 	system_tz_lbl2->setLabel(L"(" +
 		 core->observatory->get_time_zone_name_from_system(core->navigation->get_JDay()) + L")");
 
-	wchar_t tempstr[100];
-	swprintf(tempstr, sizeof(tempstr), L"%.1f", core->navigation->get_time_speed()/JD_SECOND);
-	time_speed_lbl2->setLabel(_("\1 Current Time Speed is x") + wstring(tempstr));
+	wostringstream os;
+    os << core->navigation->get_time_speed()/JD_SECOND;
+	time_speed_lbl2->setLabel(_("\1 Current Time Speed is x") + os.str());
 
 	fisheye_projection_cbx->setState(core->projection->get_type()==Projector::FISHEYE_PROJECTOR);
 	disk_viewport_cbx->setState(core->projection->get_viewport_type()==Projector::DISK);

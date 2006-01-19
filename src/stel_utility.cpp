@@ -25,6 +25,10 @@
  #include <malloc.h>
 #endif
 
+#ifdef MINGW32
+#define swprintf snwprintf
+#endif
+
 #include "stel_utility.h"
 #include "stellarium.h"
 
@@ -254,7 +258,7 @@ double get_dec_angle(const string& str)
 
 
 
-//! @brief Print the passed angle with the format dd°mm'ss(.ss)"
+//! @brief Print the passed angle with the format ddÃÂ°mm'ss(.ss)"
 //! @param angle Angle in radian
 //! @param decimal Define if 2 decimal must also be printed
 //! @param useD Define if letter "d" must be used instead of °

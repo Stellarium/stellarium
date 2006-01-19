@@ -131,8 +131,6 @@ void HipStarMgr::init(float font_size, const string& font_name, const string& hi
 // Load from file ( create the stream and call the Read function )
 void HipStarMgr::load_data(const string& hipCatFile, LoadingBar& lb)
 {
-	wchar_t tmpstr[512];
-	
     cout << "Loading Hipparcos star data...";
     FILE * hipFile;
     hipFile = NULL;
@@ -174,8 +172,9 @@ void HipStarMgr::load_data(const string& hipCatFile, LoadingBar& lb)
 		if (!(i%2000) || (i == starArraySize-1))
 		{
 			// Draw loading bar
-			swprintf(tmpstr, 512, _("Loading Hipparcos catalog: %d/%d"), i == starArraySize-1 ? starArraySize: i, starArraySize);
-			lb.SetMessage(tmpstr);
+			wostringstream os;
+			os << _("Loading Hipparcos catalog:") << (i == starArraySize-1 ? starArraySize: i) << starArraySize;
+			lb.SetMessage(os.str());
 			lb.Draw((float)i/starArraySize);
 		}
 		

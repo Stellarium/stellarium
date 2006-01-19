@@ -21,6 +21,7 @@
 #include <ctime>
 #include <cstdlib>
 #include <clocale>
+#include <algorithm>
 
 #include "stellarium.h"
 #include "stel_utility.h"

@@ -151,9 +151,9 @@ void ConstellationMgr::loadLinesAndArt(const string &fileName, const string &art
 		}
 
 		// Draw loading bar
-		wchar_t wtmpstr[2000];
-		swprintf(wtmpstr,sizeof(wtmpstr), _("Loading Constellation Art: %d/%d"), current+1, total);
-		lb.SetMessage(wtmpstr);
+        wostringstream os;
+		os << _("Loading Constellation Art: ") << current+1 << L"/" << total;
+		lb.SetMessage(os.str());
 		lb.Draw((float)(current+1)/total);
 		
 		cons = NULL;

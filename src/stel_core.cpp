@@ -955,8 +955,8 @@ void StelCore::loadConfigFrom(const string& confFile)
 	// localization section
 	SkyCulture = conf.get_str("localization", "sky_culture", "western");
 
-	string skyLocaleName = conf.get_str("localization", "sky_locale", "system_default");
-	string appLocaleName = conf.get_str("localization", "app_locale", "system_default");
+	string skyLocaleName = conf.get_str("localization", "sky_locale", "system");
+	string appLocaleName = conf.get_str("localization", "app_locale", "system");
 	setSkyLanguage(skyLocaleName);
 	setAppLanguage(appLocaleName);
 

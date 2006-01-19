@@ -18,6 +18,9 @@
 */
 
 #include <config.h>
+#include <cassert>
+#include <locale>
+
 #include "translator.h"
 
 // Use system locale language by default
@@ -33,8 +36,17 @@ void Translator::init(const std::string& domain, const std::string& moDirectory)
 		assert(result=="UTF-8");
 		
 		// Create the message catalog and open it
+		//char* oldenv = getenv("LANGUAGE");
+		//string cmd = string("LANGUAGE=")+string("de_DE");
+		putenv("LANGUAGE=de_DE");
 		msg = &(std::use_facet<std::messages<char> >(loc));
+#ifndef STLPORT
 		cat = msg->open(domain.c_str(), loc, moDirectory.c_str());
+#else
+		cat = msg->open(domain.c_str(), loc);
+#endif
+		putenv("LANGUAGE=fr_FR");
+		
 }
 
 /** Convert from ASCII to wchar_t */
@@ -110,9 +122,9 @@ std::locale Translator::tryLocale(const string& localeName)
 		}
 		catch (const std::exception& e)
 		{
-			cout << e.what() << "\"" << localeName << "\" : revert to default locale \"" << std::locale("").name() << "\"" << endl;
+			cout << e.what() << " \"" << localeName << "\" : revert to default locale \"" << std::locale("").name() << "\"" << endl;
 			// Fallback with current locale
-			loc = std::locale();
+			loc = std::locale("");
 		}
 	}
 	return loc;
