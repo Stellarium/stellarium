@@ -25,28 +25,29 @@
 
 // Use system locale language by default
 Translator Translator::globalTranslator = Translator(PACKAGE, LOCALEDIR, "");
+Translator* Translator::lastUsed = NULL;
 
-void Translator::init(const std::string& domain, const std::string& moDirectory)
+std::string Translator::translateUTF8(const std::string& s)
 {
-		// The stellarium domain uses UTF-8 codeset to allow for locale independant coding.
-		// There is the possibility to use WCHAR_T type to directly obtain wchar_t type strings
-		// But it causes troubles when the string isn't defined : in this case gettext returns char* instead of wchar_t!!
-		// Fortunately UTF-8 is ASCII compatible therefore no translation is also valid UTF-8.
-		std::string result = bind_textdomain_codeset(domain.c_str(), "UTF-8");
-		assert(result=="UTF-8");
-		
-		// Create the message catalog and open it
-		//char* oldenv = getenv("LANGUAGE");
-		//string cmd = string("LANGUAGE=")+string("de_DE");
-		putenv("LANGUAGE=de_DE");
-		msg = &(std::use_facet<std::messages<char> >(loc));
-#ifndef STLPORT
-		cat = msg->open(domain.c_str(), loc, moDirectory.c_str());
-#else
-		cat = msg->open(domain.c_str(), loc);
-#endif
-		putenv("LANGUAGE=fr_FR");
-		
+	reload();
+	return gettext(s.c_str());
+}
+
+void Translator::reload()
+{
+	if (Translator::lastUsed == this) return;
+	// This needs to be static as it is used a each gettext call... It tooks me quite a while before I got that :(
+	static char envstr[25];
+	snprintf(envstr, 25, "LANGUAGE=%s", langName.c_str());
+	//printf("Setting locale: %s\n", envstr);
+	putenv(envstr);
+	setlocale(LC_MESSAGES, "");
+	
+	std::string result = bind_textdomain_codeset(domain.c_str(), "UTF-8");
+	assert(result=="UTF-8");
+	bindtextdomain (domain.c_str(), moDirectory.c_str());	
+	textdomain (domain.c_str());
+	Translator::lastUsed = this;
 }
 
 /** Convert from ASCII to wchar_t */
@@ -107,25 +108,25 @@ std::wstring Translator::UTF8stringToWstring(const string& s)
 
 
 //! @brief Create a locale matching with a locale name
-std::locale Translator::tryLocale(const string& localeName)
-{
-	std::locale loc;
-	if (localeName=="system_default" || localeName=="system")
-	{
-		return std::locale("");
-	}
-	else
-	{
-		try
-		{
-			loc = std::locale(localeName.c_str());
-		}
-		catch (const std::exception& e)
-		{
-			cout << e.what() << " \"" << localeName << "\" : revert to default locale \"" << std::locale("").name() << "\"" << endl;
-			// Fallback with current locale
-			loc = std::locale("");
-		}
-	}
-	return loc;
-}
+// std::locale Translator::tryLocale(const string& localeName)
+// {
+// 	std::locale loc;
+// 	if (localeName=="system_default" || localeName=="system")
+// 	{
+// 		return std::locale("");
+// 	}
+// 	else
+// 	{
+// 		try
+// 		{
+// 			loc = std::locale(localeName.c_str());
+// 		}
+// 		catch (const std::exception& e)
+// 		{
+// 			cout << e.what() << " \"" << localeName << "\" : revert to default locale \"" << std::locale("").name() << "\"" << endl;
+// 			// Fallback with current locale
+// 			loc = std::locale("");
+// 		}
+// 	}
+// 	return loc;
+// }
