@@ -25,6 +25,7 @@
 # Fabien Chéreau, 2006.
 # Fabien Chéreau, 2006.
 # Fabien Chéreau, 2006.
+# Fabien Chéreau, 2006.
 #  <stellarium@free.fr>, 2004.
 # Fabien Chéreau, 2006.
 #
@@ -32,8 +33,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: stellarium@free.fr\n"
-"POT-Creation-Date: 2006-01-17 22:31+0100\n"
-"PO-Revision-Date: 2006-01-15 18:47+0100\n"
+"POT-Creation-Date: 2006-01-20 17:48+0100\n"
+"PO-Revision-Date: 2006-01-20 17:49+0100\n"
 "Last-Translator: Fabien Chéreau\n"
 "Language-Team:  <fr@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -64,9 +65,8 @@ msgid "Try `%s --help' for more information.\n"
 msgstr "Essayez `%s --help' pour plus d'information.\n"
 
 #: src/constellation_mgr.cpp:155
-#, c-format
-msgid "Loading Constellation Art: %d/%d"
-msgstr "Chargement des Images Constellations : %d/%d"
+msgid "Loading Constellation Art: "
+msgstr "Chargement des Images Constellations : "
 
 #: src/hip_star.cpp:77 src/nebula.cpp:71 src/planet.cpp:91
 msgid "Name : "
@@ -120,22 +120,21 @@ msgstr ": mag "
 msgid "ly"
 msgstr "al"
 
-#: src/hip_star_mgr.cpp:177
-#, c-format
-msgid "Loading Hipparcos catalog: %d/%d"
-msgstr "Chargement du catalogue d'étoiles Hipparcos : %d/%d"
+#: src/hip_star_mgr.cpp:176
+msgid "Loading Hipparcos catalog:"
+msgstr "Chargement du catalogue d'étoiles Hipparcos :"
 
-#: src/hip_star_mgr.cpp:854 src/hip_star_mgr.cpp:1521
+#: src/hip_star_mgr.cpp:853 src/hip_star_mgr.cpp:1520
 #, c-format
 msgid "Loading HIP/SAO catalogs: %d/%d"
 msgstr "Loading des catalogues HIP/SAO: %d/%d"
 
-#: src/hip_star_mgr.cpp:1197
+#: src/hip_star_mgr.cpp:1196
 #, c-format
 msgid "Loading HIP catalog: %d/%d"
 msgstr "Chargement du catalogue HIP: %d/%d"
 
-#: src/hip_star_mgr.cpp:1292
+#: src/hip_star_mgr.cpp:1291
 #, c-format
 msgid "Loading SAO catalog: %d/%d"
 msgstr "Chargement du catalogue NGC: %d/%d"
@@ -153,24 +152,20 @@ msgid "Size : "
 msgstr "Taille : "
 
 #: src/nebula_mgr.cpp:359
-#, c-format
-msgid "Loading NGC catalog: %d/%d"
-msgstr "Chargement du catalogue NGC: %d/%d"
+msgid "Loading NGC catalog: "
+msgstr "Chargement du catalogue NGC: "
 
 #: src/nebula_mgr.cpp:494
-#, c-format
-msgid "Loading Sharpless catalog: %d/%d"
-msgstr "Chargement du catalogue Sharpless : %d/%d"
+msgid "Loading Sharpless catalog:"
+msgstr "Chargement du catalogue Sharpless :"
 
 #: src/nebula_mgr.cpp:559
-#, c-format
-msgid "Loading Cadwell catalog: %d/%d"
-msgstr "Chargement du catalogue Cadwell: %d/%d"
+msgid "Loading Cadwell catalog:"
+msgstr "Chargement du catalogue Cadwell:"
 
 #: src/nebula_mgr.cpp:661
-#, c-format
-msgid "Loading Nebula Textures: %d/%d"
-msgstr "Chargement des textures des Nébuleuses : %d/%d"
+msgid "Loading Nebula Textures:"
+msgstr "Chargement des textures des Nébuleuses :"
 
 #: src/planet.cpp:107
 msgid "AU"
@@ -437,7 +432,7 @@ msgstr ""
 msgid "Configuration"
 msgstr "Configuration"
 
-#: src/stel_ui_conf.cpp:47 src/stel_ui_conf.cpp:686
+#: src/stel_ui_conf.cpp:47 src/stel_ui_conf.cpp:684
 msgid "Stars"
 msgstr "Etoiles"
 
@@ -509,7 +504,7 @@ msgstr "Atmosphère"
 msgid "Fog"
 msgstr "Brume"
 
-#: src/stel_ui_conf.cpp:189 src/stel_ui_conf.cpp:364
+#: src/stel_ui_conf.cpp:189 src/stel_ui_conf.cpp:362
 msgid "Save as default"
 msgstr "Enregistre comme défaut"
 
@@ -525,11 +520,11 @@ msgstr "  Zone horaire :"
 msgid " Using System Default Time Zone"
 msgstr "  Utilise la zone horaire par défaut"
 
-#: src/stel_ui_conf.cpp:225
+#: src/stel_ui_conf.cpp:223
 msgid " Time speed : "
 msgstr "  Vitesse du Temps : "
 
-#: src/stel_ui_conf.cpp:233
+#: src/stel_ui_conf.cpp:231
 msgid ""
 "Use key J and L to decrease and increase\n"
 "   time speed.\n"
@@ -539,143 +534,143 @@ msgstr ""
 "   la vitesse du temps.\n"
 "touche K pour revenir en vitesse temps réelle."
 
-#: src/stel_ui_conf.cpp:255
+#: src/stel_ui_conf.cpp:253
 msgid "Cursor : "
 msgstr "Curseur : "
 
-#: src/stel_ui_conf.cpp:260
+#: src/stel_ui_conf.cpp:258
 msgid "Selected : "
 msgstr "Sélectionné : "
 
-#: src/stel_ui_conf.cpp:265
+#: src/stel_ui_conf.cpp:263
 msgid "Longitude : "
 msgstr "Longitude : "
 
-#: src/stel_ui_conf.cpp:273
+#: src/stel_ui_conf.cpp:271
 msgid "Latitude : "
 msgstr "Latitude : "
 
-#: src/stel_ui_conf.cpp:281
+#: src/stel_ui_conf.cpp:279
 msgid "Altitude : "
 msgstr "Altitude : "
 
-#: src/stel_ui_conf.cpp:288
+#: src/stel_ui_conf.cpp:286
 msgid "Save location"
 msgstr "Enregistre la position"
 
-#: src/stel_ui_conf.cpp:310
+#: src/stel_ui_conf.cpp:308
 msgid " Projection :"
 msgstr " Projection :"
 
-#: src/stel_ui_conf.cpp:316
+#: src/stel_ui_conf.cpp:314
 msgid "Fisheye Projection Mode"
 msgstr "Mode de Projection Fisheye"
 
-#: src/stel_ui_conf.cpp:321
+#: src/stel_ui_conf.cpp:319
 msgid "Disk Viewport"
 msgstr "Mode de vue disque"
 
-#: src/stel_ui_conf.cpp:326
+#: src/stel_ui_conf.cpp:324
 msgid " Screen Resolution :"
 msgstr " Resolution écran  :"
 
-#: src/stel_ui_conf.cpp:330
+#: src/stel_ui_conf.cpp:328
 msgid "Restart program for"
 msgstr "Relancer le programme"
 
-#: src/stel_ui_conf.cpp:331
+#: src/stel_ui_conf.cpp:329
 msgid "change to apply."
 msgstr "pour activer le changement."
 
-#: src/stel_ui_conf.cpp:355
+#: src/stel_ui_conf.cpp:353
 msgid "For unlisted screen resolution, edit the file :"
 msgstr "Pour d'autres résolutions, éditer le fichier :"
 
-#: src/stel_ui_conf.cpp:375
+#: src/stel_ui_conf.cpp:373
 msgid " Choose landscapes :"
 msgstr " Choix du paysage :"
 
-#: src/stel_ui_conf.cpp:392
+#: src/stel_ui_conf.cpp:390
 msgid "Please save option in tab \"Location\""
 msgstr "Sauvez les options dans l'onglet \"Position\""
 
-#: src/stel_ui_conf.cpp:393
+#: src/stel_ui_conf.cpp:391
 msgid "to save current landscape as the default landscape."
 msgstr "pour enregistrer le paysage courant comme défaut."
 
-#: src/stel_ui_conf.cpp:401
+#: src/stel_ui_conf.cpp:399
 msgid "Date & Time"
 msgstr "Date & Heure"
 
-#: src/stel_ui_conf.cpp:402
+#: src/stel_ui_conf.cpp:400
 msgid "Location"
 msgstr "Position"
 
-#: src/stel_ui_conf.cpp:403
+#: src/stel_ui_conf.cpp:401
 msgid "Landscapes"
 msgstr "Paysages"
 
-#: src/stel_ui_conf.cpp:404
+#: src/stel_ui_conf.cpp:402
 msgid "Video"
 msgstr "Vidéo"
 
-#: src/stel_ui_conf.cpp:405
+#: src/stel_ui_conf.cpp:403
 msgid "Rendering"
 msgstr "Rendu"
 
-#: src/stel_ui_conf.cpp:511
+#: src/stel_ui_conf.cpp:509
 msgid "Object Search"
 msgstr "Recherche d'objet"
 
-#: src/stel_ui_conf.cpp:530
+#: src/stel_ui_conf.cpp:528
 msgid "Star No./Name"
 msgstr "No/Nom se l'étoile"
 
-#: src/stel_ui_conf.cpp:534
+#: src/stel_ui_conf.cpp:532
 msgid "eg. 60718 (aCrux) or Canopus"
 msgstr "ex. 60718 (aCrux) ou Canopus"
 
-#: src/stel_ui_conf.cpp:535
+#: src/stel_ui_conf.cpp:533
 msgid "HP 60718, HD 108248, SAO 251904"
 msgstr "HP 60718, HD 108248, SAO 251904"
 
-#: src/stel_ui_conf.cpp:556 src/stel_ui_conf.cpp:687
+#: src/stel_ui_conf.cpp:554 src/stel_ui_conf.cpp:685
 msgid "Constellation"
 msgstr "Constellation"
 
-#: src/stel_ui_conf.cpp:560
+#: src/stel_ui_conf.cpp:558
 msgid "eg. Crux"
 msgstr "ex. Croix du Sud"
 
-#: src/stel_ui_conf.cpp:579 src/stel_ui_conf.cpp:688
+#: src/stel_ui_conf.cpp:577 src/stel_ui_conf.cpp:686
 msgid "Nebula"
 msgstr "Nébuleuse"
 
-#: src/stel_ui_conf.cpp:583
+#: src/stel_ui_conf.cpp:581
 msgid "eg. M83, NGC 7009, IC 2118"
 msgstr "ex. M83, NGC 7009, IC 2118"
 
-#: src/stel_ui_conf.cpp:584
+#: src/stel_ui_conf.cpp:582
 msgid "CW 113, SH 40"
 msgstr "CW 113, SH 40"
 
-#: src/stel_ui_conf.cpp:669
+#: src/stel_ui_conf.cpp:667
 msgid "Planet/Moon"
 msgstr "Planète/Lune"
 
-#: src/stel_ui_conf.cpp:673
+#: src/stel_ui_conf.cpp:671
 msgid "eg. Pluto or Io"
 msgstr "ex. Pluton ou Io"
 
-#: src/stel_ui_conf.cpp:689
+#: src/stel_ui_conf.cpp:687
 msgid "Planets & Moons"
 msgstr "Planètes & Lunes"
 
-#: src/stel_ui_conf.cpp:960
+#: src/stel_ui_conf.cpp:958
 msgid "Enter observatory name"
 msgstr "Entrez le nom de l'observatoire"
 
-#: src/stel_ui_conf.cpp:1123
+#: src/stel_ui_conf.cpp:1121
 msgid " Current Time Speed is x"
 msgstr " La vistesse du temps actuelle est x"
 
