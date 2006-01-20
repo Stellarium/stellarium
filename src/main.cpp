@@ -230,8 +230,8 @@ int main(int argc, char **argv)
 #if !defined(MACOSX)
 	// Init gettext things
 	//setlocale(LC_CTYPE, "");				// Use default system char type : used for proper console output
-	bindtextdomain (PACKAGE, LOCALEDIR);	
-	textdomain (PACKAGE);
+	//bindtextdomain (PACKAGE, LOCALEDIR);	
+	//textdomain (PACKAGE);
 #endif
 	
 	// Check the command line

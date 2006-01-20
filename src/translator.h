@@ -62,10 +62,9 @@ public:
 	 * @param moDirectory The directory where to look for the domain.mo translation files.
      * @param localeName The C locale name or language name. If string is "" or "system" it will use the system locale.
      */
-     Translator(const std::string& domain, const std::string& moDirectory, const std::string& localeName)
+     Translator(const std::string& _domain, const std::string& _moDirectory, const std::string& _langName) :
+     	domain(_domain), moDirectory(_moDirectory), langName(_langName)
      {
-     	loc = tryLocale(localeName);
-     	init(domain, moDirectory);
 	 }
 	 
 	/**
@@ -73,10 +72,7 @@ public:
 	 * @param s input string in english.
 	 * @return The translated string in UTF-8 characters.
 	 */
-	 std::string translateUTF8(const std::string& s)
-	 {
-	 	return msg->get(cat, 0, 0, s).c_str();
-	 }
+	 std::string translateUTF8(const std::string& s);
 	 
 	/**
 	 * @brief Translate input message.
@@ -94,7 +90,7 @@ public:
 	  */
 	 std::string getLocaleName(void)
 	 {
-	 	return loc.name();
+	 	return langName;
 	 }
 	 
 	 /** Used as a global translator by the whole app */
@@ -105,23 +101,25 @@ private:
 	//! If the locale cannot be created, try different names until one work. If none work fall back to "C" locale.
 	//! @param localeName Locale name e.g fr_FR, fr_FR.utf8, french etc..
 	//! @return std::locale matching with the locale name
-	static std::locale tryLocale(const string& localeName);	
+	//static std::locale tryLocale(const string& localeName);	
 	
-	/** The locale internally used */
-	std::locale loc;
+	/** Reload the current locale info so that gettext use them */
+	void reload();
 	
-	/** The messages facet, it is pointing on an object internal to loc and therefore desn't need to be de-allocated */
-	const std::messages<char>* msg;
+	/** The domain name */
+	string domain;
 	
-	/** The catalog to use */
-	std::messages_base::catalog cat;
+	/** The directory where the locale file tree stands */
+	string moDirectory;
 	
-	/** init everything  : call global bind_textdomain_codeset function.. */
-	void init(const std::string& domain, const std::string& moDirectory);
+	/** The two letter string defining the current language name */
+	string langName;
+	
+	/** Keep in memory which one was the last used transator to prevent reloading it at each tranlate() call */
+	static Translator* lastUsed;
 	
 	/** Convert from UTF-8 to wchar_t */
 	std::wstring UTF8stringToWstring(const string& s);
-
 };
 
 #endif
