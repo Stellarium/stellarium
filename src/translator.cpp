@@ -26,19 +26,21 @@
 // Use system locale language by default
 Translator Translator::globalTranslator = Translator(PACKAGE, LOCALEDIR, "");
 Translator* Translator::lastUsed = NULL;
-
-std::string Translator::translateUTF8(const std::string& s)
-{
-	reload();
-	return gettext(s.c_str());
-}
+const string Translator::systemLangName = (getenv("LANGUAGE")!=NULL) ? getenv("LANGUAGE") : getenv("LANG");
 
 void Translator::reload()
 {
 	if (Translator::lastUsed == this) return;
 	// This needs to be static as it is used a each gettext call... It tooks me quite a while before I got that :(
 	static char envstr[25];
-	snprintf(envstr, 25, "LANGUAGE=%s", langName.c_str());
+	if (langName=="system" || langName=="system_default") 
+	{
+		snprintf(envstr, 25, "LANGUAGE=%s", Translator::systemLangName.c_str());
+	}
+	else
+	{
+		snprintf(envstr, 25, "LANGUAGE=%s", langName.c_str());
+	}
 	//printf("Setting locale: %s\n", envstr);
 	putenv(envstr);
 	setlocale(LC_MESSAGES, "");

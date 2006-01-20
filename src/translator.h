@@ -72,7 +72,11 @@ public:
 	 * @param s input string in english.
 	 * @return The translated string in UTF-8 characters.
 	 */
-	 std::string translateUTF8(const std::string& s);
+	 std::string translateUTF8(const std::string& s)
+	 {
+		reload();
+		return gettext(s.c_str());
+	 }
 	 
 	/**
 	 * @brief Translate input message.
@@ -97,12 +101,6 @@ public:
 	 static Translator globalTranslator;
 	 
 private:
-	//! @brief Create a locale from locale name.
-	//! If the locale cannot be created, try different names until one work. If none work fall back to "C" locale.
-	//! @param localeName Locale name e.g fr_FR, fr_FR.utf8, french etc..
-	//! @return std::locale matching with the locale name
-	//static std::locale tryLocale(const string& localeName);	
-	
 	/** Reload the current locale info so that gettext use them */
 	void reload();
 	
@@ -117,6 +115,9 @@ private:
 	
 	/** Keep in memory which one was the last used transator to prevent reloading it at each tranlate() call */
 	static Translator* lastUsed;
+	
+	/** Store the system default language name as taken from LANGUAGE environement variable */
+	static const string systemLangName;
 	
 	/** Convert from UTF-8 to wchar_t */
 	std::wstring UTF8stringToWstring(const string& s);
