@@ -25,17 +25,16 @@
 
 Translator StelCore::skyTranslator(APP_NAME, LOCALEDIR, "");
 
-StelCore::StelCore(const string& DDIR, const string& TDIR, const string& CDIR, const string& DATA_ROOT) : 
+StelCore::StelCore(const string& CDIR, const string& LDIR, const string& DATA_ROOT) : 
 	projection(NULL), selected_object(NULL), hip_stars(NULL),
 	nebulas(NULL), ssystem(NULL), milky_way(NULL), screen_W(800), screen_H(600), bppMode(16), Fullscreen(0),
 	FlagHelp(false), FlagInfos(false), FlagConfig(false), FlagSearch(false), FlagShowTuiMenu(0), 
 	frame(0), timefr(0), timeBase(0), fps(0), maxfps(10000.f), deltaFov(0.), deltaAlt(0.), deltaAz(0.),
 	move_speed(0.00025), FlagTimePause(0), is_mouse_moving_horiz(false), is_mouse_moving_vert(false)
 {	
-	TextureDir = TDIR;
-	ConfigDir = CDIR;
-	DataDir = DDIR;
-	DataRoot = DATA_ROOT;
+	configDir = CDIR;
+	localeDir = LDIR;
+	dataRoot = DATA_ROOT;
 	
 	ProjectorType = Projector::PERSPECTIVE_PROJECTOR;
 	SelectedScript = SelectedScriptDirectory = "";
@@ -55,11 +54,11 @@ StelCore::StelCore(const string& DDIR, const string& TDIR, const string& CDIR, c
 	ecliptic_line = new SkyLine(SkyLine::ECLIPTIC);
 	meridian_line = new SkyLine(SkyLine::MERIDIAN, 1, 36);
 	cardinals_points = new Cardinals();
-	skyloc = new SkyLocalizer(DataDir);
+	skyloc = new SkyLocalizer(getDataDir());
 	
 	ui = new StelUI(this);
 	commander = new StelCommandInterface(this);
-	scripts = new ScriptMgr(commander, DataDir);
+	scripts = new ScriptMgr(commander, getDataDir());
 	script_images = new ImageMgr();
 
 	time_multiplier = 1;
@@ -113,7 +112,7 @@ void StelCore::init(void)
 
 	// Warning: These values are not overriden by the config!
 	BaseCFontSize = 12.5;
-	BaseCFontName = DataDir + "DejaVuSansMono-Roman.ttf";
+	BaseCFontName = getDataDir() + "DejaVuSansMono-Roman.ttf";
 	MapFontSize = 9.5f;
 	StarFontSize = 12.f;
 	PlanetFontSize = 14.f;
@@ -125,10 +124,9 @@ void StelCore::init(void)
 	// glEnable(GL_LINE_SMOOTH);
 	
 	// Set textures directory and suffix
-	s_texture::set_texDir(TextureDir);
-	s_texture::set_suffix(".png");
+	s_texture::set_texDir(getDataRoot() + "/textures/");
 
-	observatory->load(ConfigDir + config_file, "init_location");
+	observatory->load(configDir + config_file, "init_location");
 
 	if (StartupTimeMode=="preset" || StartupTimeMode=="Preset")
 		navigation->set_JDay(PresetSkyTime - observatory->get_GMT_shift(PresetSkyTime) * JD_HOUR);
@@ -158,29 +156,29 @@ void StelCore::init(void)
 	projection->set_viewport_type(ViewportType);
 
 	// Load hipparcos stars & names
-	LoadingBar lb(projection, LoadingBarFontSize, DataDir + BaseFontName, "logo24bits", screen_W, screen_H);
+	LoadingBar lb(projection, LoadingBarFontSize, getDataDir() + BaseFontName, "logo24bits.png", screen_W, screen_H);
 	hip_stars->init(
-		StarFontSize, DataDir + BaseFontName, 
-		DataDir + "hipparcos.fab",
-		DataDir + "star_names.eng.fab",
-		DataDir + "name.fab",
+		StarFontSize, getDataDir() + BaseFontName, 
+		getDataDir() + "hipparcos.fab",
+		getDataDir() + "star_names.fab",
+		getDataDir() + "name.fab",
 		lb);
 	
 	// Init nebulas
 	nebulas->set_label_color(NebulaLabelColor[draw_mode]);
 	nebulas->set_circle_color(NebulaCircleColor[draw_mode]);
 	nebulas->set_nebula_scale(NebulaScale);
-	nebulas->read(NebulaFontSize, DataDir + BaseFontName, DataDir + "messier.fab", lb);
+	nebulas->read(NebulaFontSize, getDataDir() + BaseFontName, getDataDir() + "messier.fab", lb);
 		
 	// Init stars
 	hip_stars->set_label_color(StarLabelColor[draw_mode]);
 	hip_stars->set_circle_color(StarCircleColor[draw_mode]);
 
 	// Init the solar system
-	ssystem->load(DataDir + "ssystem.ini");
+	ssystem->load(getDataDir() + "ssystem.ini");
 	ssystem->set_label_color(PlanetNamesColor[draw_mode]);
 	ssystem->set_orbit_color(PlanetOrbitsColor[draw_mode]);
-	ssystem->set_font(PlanetFontSize, DataDir + BaseFontName);
+	ssystem->set_font(PlanetFontSize, getDataDir() + BaseFontName);
 	ssystem->set_object_scale(getStarScale());
 	ssystem->set_trail_color(ObjectTrailsColor[draw_mode]);
 	if(FlagObjectTrails) ssystem->start_trails();
@@ -188,34 +186,34 @@ void StelCore::init(void)
 	atmosphere->set_fade_duration(AtmosphereFadeDuration);
 
 	// Init grids, lines and cardinal points
-	equ_grid->set_font(GridFontSize, DataDir + BaseFontName);
+	equ_grid->set_font(GridFontSize, getDataDir() + BaseFontName);
 	equ_grid->set_color(EquatorialColor[draw_mode]);
 
-	azi_grid->set_font(GridFontSize, DataDir + BaseFontName);
+	azi_grid->set_font(GridFontSize, getDataDir() + BaseFontName);
 	azi_grid->set_color(AzimuthalColor[draw_mode]);
 
 	equator_line->set_color(EquatorColor[draw_mode]);
-	equator_line->set_font(12, DataDir + BaseFontName);
+	equator_line->set_font(12, getDataDir() + BaseFontName);
 
 	ecliptic_line->set_color(EclipticColor[draw_mode]);
-	ecliptic_line->set_font(12, DataDir + BaseFontName);
+	ecliptic_line->set_font(12, getDataDir() + BaseFontName);
 
 	meridian_line->set_color(AzimuthalColor[draw_mode]);
-	meridian_line->set_font(12, DataDir + BaseFontName);
+	meridian_line->set_font(12, getDataDir() + BaseFontName);
 
-	cardinals_points->set_font(CardinalsFontSize, DataDir + BaseFontName);
+	cardinals_points->set_font(CardinalsFontSize, getDataDir() + BaseFontName);
 	cardinals_points->set_color(CardinalColor[draw_mode]);
 
 	// Init milky way
-	if (draw_mode == DM_NORMAL)	milky_way->set_texture("milkyway");
-	else milky_way->set_texture("milkyway_chart",true);
+	if (draw_mode == DM_NORMAL)	milky_way->set_texture("milkyway.png");
+	else milky_way->set_texture("milkyway_chart.png",true);
 
 	milky_way->set_color(MilkyWayColor[draw_mode]);
 	milky_way->set_intensity(MilkyWayIntensity);
 		
 	meteors = new MeteorMgr(10, 60);
 
-	landscape = Landscape::create_from_file(DataDir + "landscapes.ini", observatory->get_landscape_name());
+	landscape = Landscape::create_from_file(getDataDir() + "landscapes.ini", observatory->get_landscape_name());
 
 	// Load the pointer textures
 	StelObject::init_textures();
@@ -505,7 +503,7 @@ void StelCore::setLandscape(const string& new_landscape_name)
     if (new_landscape_name.empty()) return;
     if (landscape) delete landscape;
     landscape = NULL;
-    landscape = Landscape::create_from_file(DataDir + "landscapes.ini", new_landscape_name);
+    landscape = Landscape::create_from_file(getDataDir() + "landscapes.ini", new_landscape_name);
     observatory->set_landscape_name(new_landscape_name);
 }
 
@@ -716,11 +714,11 @@ int StelCore::setSkyCulture(string _culture_dir)
 
 	if(!asterisms) return 3;
 
-	LoadingBar lb(projection, LoadingBarFontSize, DataDir + BaseFontName, "logo24bits", screen_W, screen_H);
+	LoadingBar lb(projection, LoadingBarFontSize, getDataDir() + BaseFontName, "logo24bits.png", screen_W, screen_H);
 
-	asterisms->loadLinesAndArt(DataDir + "sky_cultures/" + SkyCulture + "/constellationship.fab",
-		DataDir + "sky_cultures/" + SkyCulture + "/constellationsart.fab", DataDir + "sky_cultures/" + SkyCulture + "/boundaries.dat", lb);
-	asterisms->loadNames(DataDir + "sky_cultures/" + SkyCulture + "/constellation_names.eng.fab");
+	asterisms->loadLinesAndArt(getDataDir() + "sky_cultures/" + SkyCulture + "/constellationship.fab",
+		getDataDir() + "sky_cultures/" + SkyCulture + "/constellationsart.fab", getDataDir() + "sky_cultures/" + SkyCulture + "/boundaries.dat", lb);
+	asterisms->loadNames(getDataDir() + "sky_cultures/" + SkyCulture + "/constellation_names.eng.fab");
 	
 	// Re-translated constellation names
 	asterisms->translateNames(skyTranslator);
@@ -792,12 +790,12 @@ void StelCore::ChangeColorScheme(void)
 	azi_grid->set_top_transparancy(draw_mode==DM_NORMAL);
 	equator_line->set_color(EquatorColor[draw_mode]);
 	ecliptic_line->set_color(EclipticColor[draw_mode]);
-	meridian_line->set_font(12, DataDir + BaseFontName);
+	meridian_line->set_font(12, getDataDir() + BaseFontName);
 	cardinals_points->set_color(CardinalColor[draw_mode]);
 
 	// Init milky way
-	if (draw_mode == DM_NORMAL)	milky_way->set_texture("milkyway");
-	else milky_way->set_texture("milkyway_chart",true);
+	if (draw_mode == DM_NORMAL)	milky_way->set_texture("milkyway.png");
+	else milky_way->set_texture("milkyway_chart.png",true);
 
 	milky_way->set_color(MilkyWayColor[draw_mode]);
 	asterisms->setLineColor(ConstLinesColor[draw_mode]);
@@ -846,7 +844,7 @@ wstring StelCore::get_cursor_pos(int x, int y)
 void StelCore::loadConfig(void)
 {
 	InitParser conf;
-	conf.load(ConfigDir + config_file);
+	conf.load(configDir + config_file);
 
 	// Main section
 	string version = conf.get_str("main:version");
@@ -858,32 +856,32 @@ void StelCore::loadConfig(void)
 			
 			// Store temporarily the previous observator parameters
 			Observator tempobs;
-			tempobs.load(ConfigDir + config_file, "init_location");
+			tempobs.load(configDir + config_file, "init_location");
 			
 			// Set the new landscape though
 			tempobs.set_landscape_name("Guereins");
 			
-			loadConfigFrom(ConfigDir + config_file);			
+			loadConfigFrom(configDir + config_file);			
 			// We just imported previous parameters (from >=0.6.0)
-			saveConfigTo(ConfigDir + config_file);
-			tempobs.save(ConfigDir + config_file, "init_location");
+			saveConfigTo(configDir + config_file);
+			tempobs.save(configDir + config_file, "init_location");
 
-			loadConfigFrom(ConfigDir + config_file);
+			loadConfigFrom(configDir + config_file);
 		}
 		else
 		{
 			// The config file is too old to try an importation
 			printf("The current config file is from a version too old for parameters to be imported (%s).\nIt will be replaced by the default config file.\n", version.empty() ? "<0.6.0" : version.c_str());
-			system( (string("cp -f ") + DataRoot + "/config/default_config.ini " + ConfigDir + config_file).c_str() );
+			system( (string("cp -f ") + dataRoot + "/config/default_config.ini " + configDir + config_file).c_str() );
 			
 			// Actually load the config file
-			loadConfigFrom(ConfigDir + config_file);
+			loadConfigFrom(configDir + config_file);
 			return;
 		}
 	}
 	
 	// Versions match, there was no pblms
-	loadConfigFrom(ConfigDir + config_file);
+	loadConfigFrom(configDir + config_file);
 	
 }
 
@@ -891,7 +889,7 @@ void StelCore::saveConfig(void)
 {
 	// The config file is supposed to be valid and from the correct stellarium version.
 	// This is normally the case if the program is running.
-	saveConfigTo(ConfigDir + config_file);
+	saveConfigTo(configDir + config_file);
 }
 
 void StelCore::loadConfigFrom(const string& confFile)

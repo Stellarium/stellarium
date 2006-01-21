@@ -128,9 +128,9 @@ wstring StelObject::get_short_info_string(const Navigator * nav) const
 
 void StelObject::init_textures(void)
 {
-	pointer_star = new s_texture("pointeur2");
-	pointer_planet = new s_texture("pointeur4");
-	pointer_nebula = new s_texture("pointeur5");
+	pointer_star = new s_texture("pointeur2.png");
+	pointer_planet = new s_texture("pointeur4.png");
+	pointer_nebula = new s_texture("pointeur5.png");
 }
 
 void StelObject::delete_textures(void)

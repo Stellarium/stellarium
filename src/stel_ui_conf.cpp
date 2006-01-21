@@ -40,7 +40,7 @@ Component* StelUI::createConfigWindow(void)
 	FilledContainer* tab_render = new FilledContainer();
 	tab_render->setSize(config_tab_ctr->getSize());
 
-	s_texture* starp = new s_texture("halo");
+	s_texture* starp = new s_texture("halo.png");
 	Picture* pstar = new Picture(starp, x-50, y+5, 32, 32);
 	tab_render->addComponent(pstar);
 
@@ -73,7 +73,7 @@ Component* StelUI::createConfigWindow(void)
 
 	y+=30;
 
-	s_texture* constellp = new s_texture("bt_constellations");
+	s_texture* constellp = new s_texture("bt_constellations.png");
 	Picture* pconstell = new Picture(constellp, x-50, y+5, 32, 32);
 	tab_render->addComponent(pconstell);
 
@@ -94,7 +94,7 @@ Component* StelUI::createConfigWindow(void)
 
 	y+=25;
 
-	s_texture* nebp = new s_texture("bt_nebula");
+	s_texture* nebp = new s_texture("bt_nebula.png");
 	Picture* pneb = new Picture(nebp, x-50, y, 32, 32);
 	tab_render->addComponent(pneb);
 
@@ -113,7 +113,7 @@ Component* StelUI::createConfigWindow(void)
 
 	y+=30;
 
-	s_texture* planp = new s_texture("bt_planet");
+	s_texture* planp = new s_texture("bt_planet.png");
 	Picture* pplan = new Picture(planp, x-50, y, 32, 32);
 	tab_render->addComponent(pplan);
 
@@ -136,7 +136,7 @@ Component* StelUI::createConfigWindow(void)
 
 	y+=25;
 
-	s_texture* gridp = new s_texture("bt_grid");
+	s_texture* gridp = new s_texture("bt_grid.png");
 	Picture* pgrid = new Picture(gridp, x-50, y, 32, 32);
 	tab_render->addComponent(pgrid);
 
@@ -162,7 +162,7 @@ Component* StelUI::createConfigWindow(void)
 
 	y+=25;
 
-	s_texture* groundp = new s_texture("bt_ground");
+	s_texture* groundp = new s_texture("bt_ground.png");
 	Picture* pground = new Picture(groundp, x-50, y, 32, 32);
 	tab_render->addComponent(pground);
 
@@ -238,16 +238,16 @@ Component* StelUI::createConfigWindow(void)
 
 	x=5; y=5;
 	// TODO: specify the earthmap in the ini
-	s_texture *earth = new s_texture("earthmap");
-	s_texture *pointertex = new s_texture("pointeur1");
-	s_texture *citytex = new s_texture("city");
+	s_texture *earth = new s_texture("earthmap.png");
+	s_texture *pointertex = new s_texture("pointeur1.png");
+	s_texture *citytex = new s_texture("city.png");
 	earth_map = new MapPicture(earth, pointertex, citytex, x,y,tab_location->getSizex()-10, 250);
 	earth_map->setOnPressCallback(callback<void>(this, &StelUI::setObserverPositionFromMap));
 	earth_map->setOnNearestCityCallback(callback<void>(this, &StelUI::setCityFromMap));
 	tab_location->addComponent(earth_map);
 	y+=earth_map->getSizey();
-	earth_map->set_font(core->MapFontSize, core->DataDir + core->BaseFontName);
-	load_cities(core->DataDir + "cities.fab");
+	earth_map->set_font(core->MapFontSize, core->getDataDir() + core->BaseFontName);
+	load_cities(core->getDataDir() + "cities.fab");
 	
 	y += 5;
 	Label * lblcursor = new Label(_("Cursor : "));
@@ -349,7 +349,7 @@ Component* StelUI::createConfigWindow(void)
 
 	y+=100;
 
-	snprintf(vs, 999, "%sconfig.ini", core->ConfigDir.c_str());
+	snprintf(vs, 999, "%sconfig.ini", core->getConfigDir().c_str());
 	Label * lblvideo5 = new Label(_("For unlisted screen resolution, edit the file :"));
 	Label * lblvideo6 = new Label(StelUtility::stringToWstring(string(vs)));
 	lblvideo5->setPos(30, y+25);
@@ -378,7 +378,7 @@ Component* StelUI::createConfigWindow(void)
 
 	landscape_sl = new StringList();
 	landscape_sl->setPos(x,y);
-	landscape_sl->addItemList(Landscape::get_file_content(core->DataDir + "landscapes.ini"));
+	landscape_sl->addItemList(Landscape::get_file_content(core->getDataDir() + "landscapes.ini"));
 	landscape_sl->adjustSize();
 	sprintf(vs, "%s", core->observatory->get_landscape_name().c_str());
 	landscape_sl->setValue(vs);
@@ -429,8 +429,6 @@ void StelUI::load_cities(const string & fileName)
 	// determine total number to be loaded for percent complete display
 	while (fgets(tmpstr, 2000, fic)) {++total;}
 	rewind(fic);
-
-//	LoadingBar lb(core->projection, core->LoadingBarSize, core->BaseFontPngName, core->BaseFontTxtName, "logo24bits", core->screen_W, core->screen_H);
 
 	int line = 0;
 	while (!feof(fic))
@@ -521,7 +519,7 @@ Component* StelUI::createSearchWindow(void)
 	FilledContainer* tab_stars = new FilledContainer();
 	tab_stars->setSize(search_tab_ctr->getSize());
 
-	s_texture* starp = new s_texture("halo");
+	s_texture* starp = new s_texture("halo.png");
 	Picture* pstar = new Picture(starp, xi, yi, 32, 32);
 	tab_stars->addComponent(pstar);
 
@@ -547,7 +545,7 @@ Component* StelUI::createSearchWindow(void)
 	FilledContainer* tab_constellations = new FilledContainer();
 	tab_constellations->setSize(search_tab_ctr->getSize());
 
-	s_texture* constellp = new s_texture("bt_constellations");
+	s_texture* constellp = new s_texture("bt_constellations.png");
 	Picture* pconstell = new Picture(constellp, xi, yi, 32, 32);
 	tab_constellations->addComponent(pconstell);
 
@@ -570,7 +568,7 @@ Component* StelUI::createSearchWindow(void)
 	FilledContainer* tab_nebula = new FilledContainer();
 	tab_nebula->setSize(search_tab_ctr->getSize());
  
-	s_texture* nebp = new s_texture("bt_nebula");
+	s_texture* nebp = new s_texture("bt_nebula.png");
 	Picture* pneb = new Picture(nebp, xi, yi, 32, 32);
 	tab_nebula->addComponent(pneb);
 
@@ -660,7 +658,7 @@ Component* StelUI::createSearchWindow(void)
 	FilledContainer* tab_planets = new FilledContainer();
 	tab_planets->setSize(search_tab_ctr->getSize());
 
-	s_texture* planp = new s_texture("bt_planet");
+	s_texture* planp = new s_texture("bt_planet.png");
 	Picture* pplan = new Picture(planp, xi, yi, 32, 32);
 	tab_planets->addComponent(pplan);
 
@@ -946,7 +944,7 @@ void StelUI::doSaveObserverPosition(const string& name)
 		<< " name " << location;
 	core->commander->execute_command(oss.str());
 
-	core->observatory->save(core->ConfigDir + core->config_file, "init_location");
+	core->observatory->save(core->getConfigDir() + core->config_file, "init_location");
 	core->ui->setTitleObservatoryName(core->ui->getTitleWithAltitude());
 }
 
@@ -963,10 +961,10 @@ void StelUI::saveObserverPosition(void)
 
 void StelUI::saveRenderOptions(void)
 {
-	cout << "Saving rendering options in file " << core->ConfigDir + core->config_file << endl;
+	cout << "Saving rendering options in file " << core->getConfigDir() + core->config_file << endl;
 
 	InitParser conf;
-	conf.load(core->ConfigDir + core->config_file);
+	conf.load(core->getConfigDir() + core->config_file);
 
 	conf.set_boolean("astro:flag_stars", core->getFlagStars());
 	conf.set_boolean("astro:flag_star_name", core->getFlagStarName());
@@ -995,7 +993,7 @@ void StelUI::saveRenderOptions(void)
 	conf.set_boolean("landscape:flag_atmosphere", core->FlagAtmosphere);
 	conf.set_boolean("landscape:flag_fog", core->FlagFog);
 
-	conf.save(core->ConfigDir + core->config_file);
+	conf.save(core->getConfigDir() + core->config_file);
 }
 
 void StelUI::setTimeZone(void)
@@ -1010,10 +1008,10 @@ void StelUI::setVideoOption(void)
 	int w = atoi(s.substr(0,i).c_str());
 	int h = atoi(s.substr(i+1,s.size()).c_str());
 
-	cout << "Saving video size " << w << "x" << h << " in file " << core->ConfigDir + core->config_file << endl;
+	cout << "Saving video size " << w << "x" << h << " in file " << core->getConfigDir() + core->config_file << endl;
 
 	InitParser conf;
-	conf.load(core->ConfigDir + core->config_file);
+	conf.load(core->getConfigDir() + core->config_file);
 
 	switch (core->projection->get_type())
 	{
@@ -1034,7 +1032,7 @@ void StelUI::setVideoOption(void)
 
 	conf.set_int("video:screen_w", w);
 	conf.set_int("video:screen_h", h);
-	conf.save(core->ConfigDir + core->config_file);
+	conf.save(core->getConfigDir() + core->config_file);
 }
 
 void StelUI::setLandscape(void)

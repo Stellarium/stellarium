@@ -103,7 +103,7 @@ StelUI::~StelUI()
 void StelUI::init(void)
 {
 	// Load standard font
-	baseFont = new s_font(core->BaseFontSize, core->DataDir + core->BaseFontName);
+	baseFont = new s_font(core->BaseFontSize, core->getDataDir() + core->BaseFontName);
 	if (!baseFont)
 	{
 		printf("ERROR WHILE CREATING FONT\n");
@@ -121,11 +121,11 @@ void StelUI::init(void)
 	MouseTimeLeft = core->MouseCursorTimeout*1000;
 
 	// Create standard texture
-	baseTex = new s_texture("backmenu", TEX_LOAD_TYPE_PNG_ALPHA);
-	flipBaseTex = new s_texture("backmenu_flip", TEX_LOAD_TYPE_PNG_ALPHA);
+	baseTex = new s_texture("backmenu.png", TEX_LOAD_TYPE_PNG_ALPHA);
+	flipBaseTex = new s_texture("backmenu_flip.png", TEX_LOAD_TYPE_PNG_ALPHA);
 
-	tex_up = new s_texture("up");
-	tex_down = new s_texture("down");
+	tex_up = new s_texture("up.png");
+	tex_down = new s_texture("down.png");
 
 	// Set default Painter
 	Painter p(baseTex, baseFont, core->GuiBaseColor, core->GuiTextColor);
@@ -284,67 +284,67 @@ Component* StelUI::createFlagButtons(void)
 {
     int x = 0;
     
-	bt_flag_constellation_draw = new FlagButton(false, NULL, "bt_constellations");
+	bt_flag_constellation_draw = new FlagButton(false, NULL, "bt_constellations.png");
 	bt_flag_constellation_draw->setOnPressCallback(callback<void>(this, &StelUI::cb));
 	bt_flag_constellation_draw->setOnMouseInOutCallback(callback<void>(this, &StelUI::cbr));
 
-	bt_flag_constellation_name = new FlagButton(false, NULL, "bt_const_names");
+	bt_flag_constellation_name = new FlagButton(false, NULL, "bt_const_names.png");
 	bt_flag_constellation_name->setOnPressCallback(callback<void>(this, &StelUI::cb));
 	bt_flag_constellation_name->setOnMouseInOutCallback(callback<void>(this, &StelUI::cbr));
 
-	bt_flag_constellation_art = new FlagButton(false, NULL, "bt_constart");
+	bt_flag_constellation_art = new FlagButton(false, NULL, "bt_constart.png");
 	bt_flag_constellation_art->setOnPressCallback(callback<void>(this, &StelUI::cb));
 	bt_flag_constellation_art->setOnMouseInOutCallback(callback<void>(this, &StelUI::cbr));
 
-	bt_flag_azimuth_grid = new FlagButton(false, NULL, "bt_grid");
+	bt_flag_azimuth_grid = new FlagButton(false, NULL, "bt_grid.png");
 	bt_flag_azimuth_grid->setOnPressCallback(callback<void>(this, &StelUI::cb));
 	bt_flag_azimuth_grid->setOnMouseInOutCallback(callback<void>(this, &StelUI::cbr));
 
-	bt_flag_equator_grid = new FlagButton(false, NULL, "bt_grid");
+	bt_flag_equator_grid = new FlagButton(false, NULL, "bt_grid.png");
 	bt_flag_equator_grid->setOnPressCallback(callback<void>(this, &StelUI::cb));
 	bt_flag_equator_grid->setOnMouseInOutCallback(callback<void>(this, &StelUI::cbr));
 
-	bt_flag_ground = new FlagButton(false, NULL, "bt_ground");
+	bt_flag_ground = new FlagButton(false, NULL, "bt_ground.png");
 	bt_flag_ground->setOnPressCallback(callback<void>(this, &StelUI::cb));
 	bt_flag_ground->setOnMouseInOutCallback(callback<void>(this, &StelUI::cbr));
 
-	bt_flag_cardinals = new FlagButton(false, NULL, "bt_cardinal");
+	bt_flag_cardinals = new FlagButton(false, NULL, "bt_cardinal.png");
 	bt_flag_cardinals->setOnPressCallback(callback<void>(this, &StelUI::cb));
 	bt_flag_cardinals->setOnMouseInOutCallback(callback<void>(this, &StelUI::cbr));
 
-	bt_flag_atmosphere = new FlagButton(false, NULL, "bt_atmosphere");
+	bt_flag_atmosphere = new FlagButton(false, NULL, "bt_atmosphere.png");
 	bt_flag_atmosphere->setOnPressCallback(callback<void>(this, &StelUI::cb));
 	bt_flag_atmosphere->setOnMouseInOutCallback(callback<void>(this, &StelUI::cbr));
 
-	bt_flag_nebula_name = new FlagButton(false, NULL, "bt_nebula");
+	bt_flag_nebula_name = new FlagButton(false, NULL, "bt_nebula.png");
 	bt_flag_nebula_name->setOnPressCallback(callback<void>(this, &StelUI::cb));
 	bt_flag_nebula_name->setOnMouseInOutCallback(callback<void>(this, &StelUI::cbr));
 
-	bt_flag_help = new FlagButton(false, NULL, "bt_help");
+	bt_flag_help = new FlagButton(false, NULL, "bt_help.png");
 	bt_flag_help->setOnPressCallback(callback<void>(this, &StelUI::cb));
 	bt_flag_help->setOnMouseInOutCallback(callback<void>(this, &StelUI::cbr));
 
-	bt_flag_equatorial_mode = new FlagButton(false, NULL, "bt_follow");
+	bt_flag_equatorial_mode = new FlagButton(false, NULL, "bt_follow.png");
 	bt_flag_equatorial_mode->setOnPressCallback(callback<void>(this, &StelUI::cb));
 	bt_flag_equatorial_mode->setOnMouseInOutCallback(callback<void>(this, &StelUI::cbr));
 
-	bt_flag_config = new FlagButton(false, NULL, "bt_config");
+	bt_flag_config = new FlagButton(false, NULL, "bt_config.png");
 	bt_flag_config->setOnPressCallback(callback<void>(this, &StelUI::cb));
 	bt_flag_config->setOnMouseInOutCallback(callback<void>(this, &StelUI::cbr));
 
-	bt_flag_chart = new FlagButton(false, NULL, "bt_chart");
+	bt_flag_chart = new FlagButton(false, NULL, "bt_chart.png");
 	bt_flag_chart->setOnPressCallback(callback<void>(this, &StelUI::cb));
 	bt_flag_chart->setOnMouseInOutCallback(callback<void>(this, &StelUI::cbr));
 
-	bt_flag_night = new FlagButton(false, NULL, "bt_nightview");
+	bt_flag_night = new FlagButton(false, NULL, "bt_nightview.png");
 	bt_flag_night->setOnPressCallback(callback<void>(this, &StelUI::cb));
 	bt_flag_night->setOnMouseInOutCallback(callback<void>(this, &StelUI::cbr));
 
-	bt_flag_quit = new FlagButton(true, NULL, "bt_quit");
+	bt_flag_quit = new FlagButton(true, NULL, "bt_quit.png");
 	bt_flag_quit->setOnPressCallback(callback<void>(this, &StelUI::cb));
 	bt_flag_quit->setOnMouseInOutCallback(callback<void>(this, &StelUI::cbr));
 
-	bt_flag_search = new FlagButton(true, NULL, "bt_search");
+	bt_flag_search = new FlagButton(true, NULL, "bt_search.png");
 	bt_flag_search->setOnPressCallback(callback<void>(this, &StelUI::cb));
 	bt_flag_search->setOnMouseInOutCallback(callback<void>(this, &StelUI::cbr));
 
@@ -355,7 +355,7 @@ Component* StelUI::createFlagButtons(void)
 	bt_script->setOnReturnKeyCallback(callback<void>(this, &StelUI::cbEditScriptExecute));
 	bt_script->setOnMouseInOutCallback(callback<void>(this, &StelUI::cbr));
 
-	bt_flag_goto = new FlagButton(true, NULL, "bt_goto");
+	bt_flag_goto = new FlagButton(true, NULL, "bt_goto.png");
 	bt_flag_goto->setOnPressCallback(callback<void>(this, &StelUI::cb));
 	bt_flag_goto->setOnMouseInOutCallback(callback<void>(this, &StelUI::cbr));
 

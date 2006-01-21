@@ -3,47 +3,24 @@
 # Traduction anglaise du package stellarium.
 # Copyright (C) 2004, 2005, 2006 Free Software Foundation, Inc.
 # This file is distributed under the same license as the stellarium package.
-# Fabien Chéreau, 2005.
-# Fabien Chéreau, 2005.
-# Fabien Chéreau, 2005.
-# Fabien Chéreau, 2005.
-# Fabien Chéreau, 2005.
-# Fabien Chéreau, 2005.
-# Fabien Chéreau, 2005.
-# Fabien Chéreau, 2005.
-# Fabien Chéreau, 2005.
-# Fabien Chéreau, 2005.
-# Fabien Chéreau, 2005.
-# Fabien Chéreau, 2005.
-# Fabien Chéreau, 2005.
-# Fabien Chéreau, 2005.
-# Fabien Chéreau, 2005.
-# Fabien Chéreau, 2005.
-# Fabien Chéreau, 2006.
-# Fabien Chéreau, 2006.
-# Fabien Chéreau, 2006.
-# Fabien Chéreau, 2006.
-# Fabien Chéreau, 2006.
-# Fabien Chéreau, 2006.
-# Fabien Chéreau, 2006.
-#  <stellarium@free.fr>, 2004.
-# Fabien Chéreau, 2006.
+# Fabien ChÃ©reau, 2006.
+# Fabien ChÃ©reau, 2006.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: stellarium@free.fr\n"
-"POT-Creation-Date: 2006-01-20 17:48+0100\n"
-"PO-Revision-Date: 2006-01-20 17:49+0100\n"
-"Last-Translator: Fabien Chéreau\n"
+"POT-Creation-Date: 2006-01-21 22:59+0100\n"
+"PO-Revision-Date: 2006-01-21 23:00+0100\n"
+"Last-Translator: Fabien ChÃ©reau\n"
 "Language-Team:  <fr@li.org>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=ISO-8859-1\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: KBabel 1.10.2\n"
 
-#: src/main.cpp:54
+#: src/main.cpp:53
 #, c-format
 msgid ""
 "Usage: %s [OPTION] ...\n"
@@ -54,12 +31,12 @@ msgstr ""
 " -v, --version          Affiche les informations de version et quitte.\n"
 " -h, --help             Affiche cette aide et quitte.\n"
 
-#: src/main.cpp:78
+#: src/main.cpp:77
 #, c-format
 msgid "%s: Bad command line argument(s)\n"
 msgstr "%s: Mauvais argument(s) sur la ligne de commande\n"
 
-#: src/main.cpp:79
+#: src/main.cpp:78
 #, c-format
 msgid "Try `%s --help' for more information.\n"
 msgstr "Essayez `%s --help' pour plus d'information.\n"
@@ -102,7 +79,7 @@ msgstr "Distance : "
 
 #: src/hip_star.cpp:115
 msgid " Light Years"
-msgstr " Années Lumière"
+msgstr " AnnÃ©es LumiÃ¨re"
 
 #: src/hip_star.cpp:123 src/nebula.cpp:93 src/planet.cpp:115
 msgid "Az  : "
@@ -122,7 +99,7 @@ msgstr "al"
 
 #: src/hip_star_mgr.cpp:176
 msgid "Loading Hipparcos catalog:"
-msgstr "Chargement du catalogue d'étoiles Hipparcos :"
+msgstr "Chargement du catalogue d'Ã©toiles Hipparcos :"
 
 #: src/hip_star_mgr.cpp:853 src/hip_star_mgr.cpp:1520
 #, c-format
@@ -165,7 +142,7 @@ msgstr "Chargement du catalogue Cadwell:"
 
 #: src/nebula_mgr.cpp:661
 msgid "Loading Nebula Textures:"
-msgstr "Chargement des textures des Nébuleuses :"
+msgstr "Chargement des textures des NÃ©buleuses :"
 
 #: src/planet.cpp:107
 msgid "AU"
@@ -217,11 +194,11 @@ msgstr "Points Cardinaux [Q]"
 
 #: src/stel_ui.cpp:567
 msgid "Atmosphere [A]"
-msgstr "Atmosphère [A]"
+msgstr "AtmosphÃ¨re [A]"
 
 #: src/stel_ui.cpp:569
 msgid "Nebulas [N]"
-msgstr "Nébuleuses [N]"
+msgstr "NÃ©buleuses [N]"
 
 #: src/stel_ui.cpp:571
 msgid "Help [H]"
@@ -233,7 +210,7 @@ msgstr "Monture Equatorial/Altazimutale [ENTER]"
 
 #: src/stel_ui.cpp:575
 msgid "Configuration window"
-msgstr "Fenêtre de configuration"
+msgstr "FenÃªtre de configuration"
 
 #: src/stel_ui.cpp:577
 msgid "Chart mode"
@@ -257,7 +234,7 @@ msgstr "Chercher un objet"
 
 #: src/stel_ui.cpp:591
 msgid "Goto selected object [SPACE]"
-msgstr "Va à l'objet sélectionné [ESPACE]"
+msgstr "Va Ã  l'objet sÃ©lectionnÃ© [ESPACE]"
 
 #: src/stel_ui.cpp:597
 msgid "Decrease Time Speed [J]"
@@ -265,11 +242,11 @@ msgstr "Ralenti le Temps [J]"
 
 #: src/stel_ui.cpp:599
 msgid "Real Time Speed [K]"
-msgstr "Vitesse Temps Réel [K]"
+msgstr "Vitesse Temps RÃ©el [K]"
 
 #: src/stel_ui.cpp:601
 msgid "Increase Time Speed [L]"
-msgstr "Accélère le Temps [L]"
+msgstr "AccÃ©lÃ¨re le Temps [L]"
 
 #: src/stel_ui.cpp:603
 msgid "Return to Current Time"
@@ -281,7 +258,7 @@ msgid ""
 "and comments to us at: http://stellarium.sourceforge.net\n"
 "\n"
 msgstr ""
-"Téléchargez les mise à jour et envoyez vos rapports de \n"
+"TÃ©lÃ©chargez les mise Ã  jour et envoyez vos rapports de \n"
 "bogues sur : http://stellarium.sourceforge.net\n"
 "\n"
 
@@ -303,16 +280,16 @@ msgid ""
 "SPACE            : Center on selected object\n"
 "\n"
 msgstr ""
-"Mouvement & sélection:\n"
-"Flèches          : Change vue AD/DE\n"
+"Mouvement & sÃ©lection:\n"
+"FlÃ¨ches          : Change vue AD/DE\n"
 "Page Up/Down     : Zoom\n"
 "CTRL+Up/Down     : Zoom\n"
-"Clic gauche      : Sélectionne objet\n"
-"Clic droit       : Désélectionne\n"
-"CTRL+Clic gauche : Désélectionne\n"
-"\\                : Zoom arrière (planète + lunes si possible)\n"
-"/                : Zoom sur l'objet sélectionné\n"
-"ESPACE           : Centre sur l'objet sélectionné\n"
+"Clic gauche      : SÃ©lectionne objet\n"
+"Clic droit       : DÃ©sÃ©lectionne\n"
+"CTRL+Clic gauche : DÃ©sÃ©lectionne\n"
+"\\                : Zoom arriÃ¨re (planÃ¨te + lunes si possible)\n"
+"/                : Zoom sur l'objet sÃ©lectionnÃ©\n"
+"ESPACE           : Centre sur l'objet sÃ©lectionnÃ©\n"
 "\n"
 
 #: src/stel_ui.cpp:654
@@ -335,12 +312,12 @@ msgstr ""
 "F1  : Alterne Plein Ecran si possible.\n"
 "C   : Lignes des Constellations V   : Labels des Constellations\n"
 "R   : Images des Constellations E   : Grille Equatoriale\n"
-"Z   : Grille Azimuthale         N   : Lebels des Nébuleuses\n"
-"P   : Labels des Planètes       G   : Sol\n"
-"A   : Atmosphère                F   : Brume\n"
+"Z   : Grille Azimuthale         N   : Lebels des NÃ©buleuses\n"
+"P   : Labels des PlanÃ¨tes       G   : Sol\n"
+"A   : AtmosphÃ¨re                F   : Brume\n"
 "Q   : Points Cardinaux          O   : Alterne Grossissement de la lune\n"
 "T   : Suivi des objets          S   : Etoiles\n"
-"4 , : Ligne de l'Ecliptique     5 . : Ligne de l'Equateur Céleste\n"
+"4 , : Ligne de l'Ecliptique     5 . : Ligne de l'Equateur CÃ©leste\n"
 "\n"
 
 #: src/stel_ui.cpp:666
@@ -356,7 +333,7 @@ msgstr ""
 "Dialogues & autres controles:\n"
 "H   : Aide                      I   : A propos de Stellarium\n"
 "M   : Menu textuel              1 (one)  : Configuration\n"
-"CTRL + S : Prend une capture d'écran\n"
+"CTRL + S : Prend une capture d'Ã©cran\n"
 "CTRL + R : Alterne l'enregistrement du script\n"
 "CTRL + F : Alterne l'affichage du chercheur d object\n"
 "\n"
@@ -372,11 +349,11 @@ msgid ""
 "\n"
 msgstr ""
 "Temps & Date:\n"
-"6   : Arrête le temps           7   : Vitesse du Temps 0\n"
+"6   : ArrÃªte le temps           7   : Vitesse du Temps 0\n"
 "8   : Va au temps actuel        J   : Ralenti le temps\n"
-"K   : Vitesse temps réel        L   : Accélère le temps\n"
-"-   : 24 heures en arrière      =   : 24 heures en avant\n"
-"[   : 7 jours en arrière        ]   : 7 jours en avant\n"
+"K   : Vitesse temps rÃ©el        L   : AccÃ©lÃ¨re le temps\n"
+"-   : 24 heures en arriÃ¨re      =   : 24 heures en avant\n"
+"[   : 7 jours en arriÃ¨re        ]   : 7 jours en avant\n"
 "\n"
 
 #: src/stel_ui.cpp:680
@@ -387,7 +364,7 @@ msgid ""
 "\n"
 msgstr ""
 "Pendant la lecture d'un script:\n"
-"CTRL + C : Arrête le script\n"
+"CTRL + C : ArrÃªte le script\n"
 "6   : Met le script en pause    K   : Relance le script\n"
 "\n"
 
@@ -397,7 +374,7 @@ msgid ""
 "9   : Toggle meteor shower rates\n"
 msgstr ""
 "Autres:\n"
-"9   : Alterne la fréquence des pluies d'étoiles filantes\n"
+"9   : Alterne la frÃ©quence des pluies d'Ã©toiles filantes\n"
 
 #: src/stel_ui.cpp:687
 msgid "CTRL + Q : Quit\n"
@@ -413,7 +390,7 @@ msgstr "Aide"
 
 #: src/stel_ui.cpp:1040
 msgid "Command recording stopped."
-msgstr "Enregistrement des commandes arrêté."
+msgstr "Enregistrement des commandes arrÃªtÃ©."
 
 #: src/stel_ui.cpp:1048
 msgid "Recording commands to script file:\n"
@@ -421,7 +398,7 @@ msgstr "Enregistre les commandes sur le fichier script:\n"
 
 #: src/stel_ui.cpp:1050
 msgid "Hit CTRL-R again to stop.\n"
-msgstr "Appuyez sur CTRL-R à nouveau pour arrêter.\n"
+msgstr "Appuyez sur CTRL-R Ã  nouveau pour arrÃªter.\n"
 
 #: src/stel_ui.cpp:1054
 msgid "Error: Unable to open script file to record commands."
@@ -432,13 +409,13 @@ msgstr ""
 msgid "Configuration"
 msgstr "Configuration"
 
-#: src/stel_ui_conf.cpp:47 src/stel_ui_conf.cpp:684
+#: src/stel_ui_conf.cpp:47 src/stel_ui_conf.cpp:682
 msgid "Stars"
 msgstr "Etoiles"
 
 #: src/stel_ui_conf.cpp:52
 msgid "Star Names. Up to mag :"
-msgstr "Noms des étoiles. +- :"
+msgstr "Noms des Ã©toiles. +- :"
 
 #: src/stel_ui_conf.cpp:64
 msgid "Star Twinkle. Amount :"
@@ -454,15 +431,15 @@ msgstr "Noms des Constellations"
 
 #: src/stel_ui_conf.cpp:90
 msgid "Selected Constellation Only"
-msgstr "Constellation sélectionnée seulement"
+msgstr "Constellation sÃ©lectionnÃ©e seulement"
 
 #: src/stel_ui_conf.cpp:103
 msgid "Nebulas Names. Up to mag :"
-msgstr "Noms des nébuleuses. +- :"
+msgstr "Noms des nÃ©buleuses. +- :"
 
 #: src/stel_ui_conf.cpp:120
 msgid "Planets"
-msgstr "Planètes"
+msgstr "PlanÃ¨tes"
 
 #: src/stel_ui_conf.cpp:125
 msgid "Moon Scale"
@@ -470,7 +447,7 @@ msgstr "Grossissement de la lune"
 
 #: src/stel_ui_conf.cpp:132
 msgid "Planets Hints"
-msgstr "Infos Planètes"
+msgstr "Infos PlanÃ¨tes"
 
 #: src/stel_ui_conf.cpp:143
 msgid "Equatorial Grid"
@@ -482,7 +459,7 @@ msgstr "Grille Azimutale"
 
 #: src/stel_ui_conf.cpp:153
 msgid "Equator Line"
-msgstr "Equateur Céleste"
+msgstr "Equateur CÃ©leste"
 
 #: src/stel_ui_conf.cpp:158
 msgid "Ecliptic Line"
@@ -498,7 +475,7 @@ msgstr "Points Cardinaux"
 
 #: src/stel_ui_conf.cpp:179
 msgid "Atmosphere"
-msgstr "Atmosphère"
+msgstr "AtmosphÃ¨re"
 
 #: src/stel_ui_conf.cpp:184
 msgid "Fog"
@@ -506,7 +483,7 @@ msgstr "Brume"
 
 #: src/stel_ui_conf.cpp:189 src/stel_ui_conf.cpp:362
 msgid "Save as default"
-msgstr "Enregistre comme défaut"
+msgstr "Enregistre comme dÃ©faut"
 
 #: src/stel_ui_conf.cpp:201
 msgid " Current Time :"
@@ -518,7 +495,7 @@ msgstr "  Zone horaire :"
 
 #: src/stel_ui_conf.cpp:214
 msgid " Using System Default Time Zone"
-msgstr "  Utilise la zone horaire par défaut"
+msgstr "  Utilise la zone horaire par dÃ©faut"
 
 #: src/stel_ui_conf.cpp:223
 msgid " Time speed : "
@@ -532,7 +509,7 @@ msgid ""
 msgstr ""
 "Les touches J et L augmentent et diminuent\n"
 "   la vitesse du temps.\n"
-"touche K pour revenir en vitesse temps réelle."
+"touche K pour revenir en vitesse temps rÃ©elle."
 
 #: src/stel_ui_conf.cpp:253
 msgid "Cursor : "
@@ -540,7 +517,7 @@ msgstr "Curseur : "
 
 #: src/stel_ui_conf.cpp:258
 msgid "Selected : "
-msgstr "Sélectionné : "
+msgstr "SÃ©lectionnÃ© : "
 
 #: src/stel_ui_conf.cpp:263
 msgid "Longitude : "
@@ -572,7 +549,7 @@ msgstr "Mode de vue disque"
 
 #: src/stel_ui_conf.cpp:324
 msgid " Screen Resolution :"
-msgstr " Resolution écran  :"
+msgstr " Resolution Ã©cran  :"
 
 #: src/stel_ui_conf.cpp:328
 msgid "Restart program for"
@@ -584,7 +561,7 @@ msgstr "pour activer le changement."
 
 #: src/stel_ui_conf.cpp:353
 msgid "For unlisted screen resolution, edit the file :"
-msgstr "Pour d'autres résolutions, éditer le fichier :"
+msgstr "Pour d'autres rÃ©solutions, Ã©diter le fichier :"
 
 #: src/stel_ui_conf.cpp:373
 msgid " Choose landscapes :"
@@ -596,7 +573,7 @@ msgstr "Sauvez les options dans l'onglet \"Position\""
 
 #: src/stel_ui_conf.cpp:391
 msgid "to save current landscape as the default landscape."
-msgstr "pour enregistrer le paysage courant comme défaut."
+msgstr "pour enregistrer le paysage courant comme dÃ©faut."
 
 #: src/stel_ui_conf.cpp:399
 msgid "Date & Time"
@@ -612,65 +589,65 @@ msgstr "Paysages"
 
 #: src/stel_ui_conf.cpp:402
 msgid "Video"
-msgstr "Vidéo"
+msgstr "VidÃ©o"
 
 #: src/stel_ui_conf.cpp:403
 msgid "Rendering"
 msgstr "Rendu"
 
-#: src/stel_ui_conf.cpp:509
+#: src/stel_ui_conf.cpp:507
 msgid "Object Search"
 msgstr "Recherche d'objet"
 
-#: src/stel_ui_conf.cpp:528
+#: src/stel_ui_conf.cpp:526
 msgid "Star No./Name"
-msgstr "No/Nom se l'étoile"
+msgstr "No/Nom se l'Ã©toile"
 
-#: src/stel_ui_conf.cpp:532
+#: src/stel_ui_conf.cpp:530
 msgid "eg. 60718 (aCrux) or Canopus"
 msgstr "ex. 60718 (aCrux) ou Canopus"
 
-#: src/stel_ui_conf.cpp:533
+#: src/stel_ui_conf.cpp:531
 msgid "HP 60718, HD 108248, SAO 251904"
 msgstr "HP 60718, HD 108248, SAO 251904"
 
-#: src/stel_ui_conf.cpp:554 src/stel_ui_conf.cpp:685
+#: src/stel_ui_conf.cpp:552 src/stel_ui_conf.cpp:683
 msgid "Constellation"
 msgstr "Constellation"
 
-#: src/stel_ui_conf.cpp:558
+#: src/stel_ui_conf.cpp:556
 msgid "eg. Crux"
 msgstr "ex. Croix du Sud"
 
-#: src/stel_ui_conf.cpp:577 src/stel_ui_conf.cpp:686
+#: src/stel_ui_conf.cpp:575 src/stel_ui_conf.cpp:684
 msgid "Nebula"
-msgstr "Nébuleuse"
+msgstr "NÃ©buleuse"
 
-#: src/stel_ui_conf.cpp:581
+#: src/stel_ui_conf.cpp:579
 msgid "eg. M83, NGC 7009, IC 2118"
 msgstr "ex. M83, NGC 7009, IC 2118"
 
-#: src/stel_ui_conf.cpp:582
+#: src/stel_ui_conf.cpp:580
 msgid "CW 113, SH 40"
 msgstr "CW 113, SH 40"
 
-#: src/stel_ui_conf.cpp:667
+#: src/stel_ui_conf.cpp:665
 msgid "Planet/Moon"
-msgstr "Planète/Lune"
+msgstr "PlanÃ¨te/Lune"
 
-#: src/stel_ui_conf.cpp:671
+#: src/stel_ui_conf.cpp:669
 msgid "eg. Pluto or Io"
 msgstr "ex. Pluton ou Io"
 
-#: src/stel_ui_conf.cpp:687
+#: src/stel_ui_conf.cpp:685
 msgid "Planets & Moons"
-msgstr "Planètes & Lunes"
+msgstr "PlanÃ¨tes & Lunes"
 
-#: src/stel_ui_conf.cpp:958
+#: src/stel_ui_conf.cpp:956
 msgid "Enter observatory name"
 msgstr "Entrez le nom de l'observatoire"
 
-#: src/stel_ui_conf.cpp:1121
+#: src/stel_ui_conf.cpp:1119
 msgid " Current Time Speed is x"
 msgstr " La vistesse du temps actuelle est x"
 
@@ -684,7 +661,7 @@ msgstr "Enregistre le Temps "
 
 #: src/stel_ui_tuiconf.cpp:87
 msgid "General "
-msgstr "Général "
+msgstr "GÃ©nÃ©ral "
 
 #: src/stel_ui_tuiconf.cpp:88
 msgid "Stars "
@@ -728,11 +705,11 @@ msgstr "Zone Horaire: "
 
 #: src/stel_ui_tuiconf.cpp:119
 msgid "Preset Sky Time: "
-msgstr "Temps du Ciel prédéfini: "
+msgstr "Temps du Ciel prÃ©dÃ©fini: "
 
 #: src/stel_ui_tuiconf.cpp:121
 msgid "Sky Time At Start-up: "
-msgstr "Temps du Ciel au démarrage: "
+msgstr "Temps du Ciel au dÃ©marrage: "
 
 #: src/stel_ui_tuiconf.cpp:125
 msgid "Time Display Format: "
@@ -764,11 +741,11 @@ msgstr "Non"
 
 #: src/stel_ui_tuiconf.cpp:162
 msgid "Star Magnitude Multiplier: "
-msgstr "Multiplieur de Magnitude des Étoiles: "
+msgstr "Multiplieur de Magnitude des Ã‰toiles: "
 
 #: src/stel_ui_tuiconf.cpp:164
 msgid "Maximum Magnitude to Label: "
-msgstr "Magnitude Maximum à Labelliser: "
+msgstr "Magnitude Maximum Ã  Labelliser: "
 
 #: src/stel_ui_tuiconf.cpp:166
 msgid "Twinkling: "
@@ -796,7 +773,7 @@ msgstr "Zoom Manuel: "
 
 #: src/stel_ui_tuiconf.cpp:202
 msgid "Object Sizing Rule: "
-msgstr "Règle de Taille des Objets: "
+msgstr "RÃ¨gle de Taille des Objets: "
 
 #: src/stel_ui_tuiconf.cpp:202
 msgid "Point"
@@ -812,15 +789,15 @@ msgstr "Ratio taille/magnitude: "
 
 #: src/stel_ui_tuiconf.cpp:210
 msgid "Milky Way intensity: "
-msgstr "Luminosité de la Voie Lactée"
+msgstr "LuminositÃ© de la Voie LactÃ©e"
 
 #: src/stel_ui_tuiconf.cpp:214
 msgid "Maximum Nebula Magnitude to Label: "
-msgstr "Magnitude maximum des nébuleuse à Labelliser: "
+msgstr "Magnitude maximum des nÃ©buleuse Ã  Labelliser: "
 
 #: src/stel_ui_tuiconf.cpp:218
 msgid "Zoom Duration: "
-msgstr "Durée du zoom: "
+msgstr "DurÃ©e du zoom: "
 
 #: src/stel_ui_tuiconf.cpp:222
 msgid "Cursor Timeout: "
@@ -836,23 +813,23 @@ msgstr "Scripts CD/DVD:"
 
 #: src/stel_ui_tuiconf.cpp:242
 msgid "Load Default Configuration: "
-msgstr "Chargement de la configuration par défaut: "
+msgstr "Chargement de la configuration par dÃ©faut: "
 
 #: src/stel_ui_tuiconf.cpp:244
 msgid "Save Current Configuration as Default: "
-msgstr "Utilise la configuration courante par défaut"
+msgstr "Utilise la configuration courante par dÃ©faut"
 
 #: src/stel_ui_tuiconf.cpp:246
 msgid "Update me via Internet: "
-msgstr "Mise à jour via Internet"
+msgstr "Mise Ã  jour via Internet"
 
 #: src/stel_ui_tuiconf.cpp:262
 msgid "N-S Centering Offset: "
-msgstr "Décalage du centrage N-S"
+msgstr "DÃ©calage du centrage N-S"
 
 #: src/stel_ui_tuiconf.cpp:266
 msgid "E-W Centering Offset: "
-msgstr "Décalage du centrage E-O"
+msgstr "DÃ©calage du centrage E-O"
 
 #: src/translations.h:33
 msgid "Sun"
@@ -864,7 +841,7 @@ msgstr "Mercure"
 
 #: src/translations.h:35
 msgid "Venus"
-msgstr "Vénus"
+msgstr "VÃ©nus"
 
 #: src/translations.h:36
 msgid "Earth"
@@ -900,7 +877,7 @@ msgstr "Europe"
 
 #: src/translations.h:44
 msgid "Ganymede"
-msgstr "Ganymède"
+msgstr "GanymÃ¨de"
 
 #: src/translations.h:45
 msgid "Callisto"
@@ -920,15 +897,15 @@ msgstr "Encelade"
 
 #: src/translations.h:49
 msgid "Tethys"
-msgstr "Téthys"
+msgstr "TÃ©thys"
 
 #: src/translations.h:50
 msgid "Dione"
-msgstr "Dioné"
+msgstr "DionÃ©"
 
 #: src/translations.h:51
 msgid "Rhea"
-msgstr "Rhéa"
+msgstr "RhÃ©a"
 
 #: src/translations.h:52
 msgid "Titan"
@@ -936,7 +913,7 @@ msgstr "Titan"
 
 #: src/translations.h:53
 msgid "Hyperion"
-msgstr "Hypérion"
+msgstr "HypÃ©rion"
 
 #: src/translations.h:54
 msgid "Iapetus"
@@ -944,7 +921,7 @@ msgstr "Japet"
 
 #: src/translations.h:55
 msgid "Phoebe"
-msgstr "Phoebé"
+msgstr "PhoebÃ©"
 
 #: src/translations.h:56
 msgid "Neptune"
@@ -984,7 +961,7 @@ msgstr "Aigle"
 
 #: src/translations.h:69
 msgid "Andromeda"
-msgstr "Andromède"
+msgstr "AndromÃ¨de"
 
 #: src/translations.h:70
 msgid "Sculptor"
@@ -1024,7 +1001,7 @@ msgstr "Burin"
 
 #: src/translations.h:79
 msgid "Chamaeleon"
-msgstr "Caméléon"
+msgstr "CamÃ©lÃ©on"
 
 #: src/translations.h:80
 msgid "Cancer"
@@ -1036,11 +1013,11 @@ msgstr "Capricorne"
 
 #: src/translations.h:82
 msgid "Carina"
-msgstr "Carène"
+msgstr "CarÃ¨ne"
 
 #: src/translations.h:83
 msgid "Cassiopeia"
-msgstr "Cassiopé"
+msgstr "CassiopÃ©"
 
 #: src/translations.h:84
 msgid "Centaurus"
@@ -1048,11 +1025,11 @@ msgstr "Centaure"
 
 #: src/translations.h:85
 msgid "Cepheus"
-msgstr "Céphée"
+msgstr "CÃ©phÃ©e"
 
 #: src/translations.h:86
 msgid "Coma Berenices"
-msgstr "Chevelure de Bérénice"
+msgstr "Chevelure de BÃ©rÃ©nice"
 
 #: src/translations.h:87
 msgid "Canes Venatici"
@@ -1080,7 +1057,7 @@ msgstr "Couronne Australe"
 
 #: src/translations.h:93
 msgid "Corona Borealis"
-msgstr "Couronne Boréale"
+msgstr "Couronne BorÃ©ale"
 
 #: src/translations.h:94
 msgid "Corvus"
@@ -1124,7 +1101,7 @@ msgstr "Fourneau"
 
 #: src/translations.h:104
 msgid "Gemini"
-msgstr "Gémeaux"
+msgstr "GÃ©meaux"
 
 #: src/translations.h:105
 msgid "Camelopardalis"
@@ -1156,7 +1133,7 @@ msgstr "Hydre Femelle"
 
 #: src/translations.h:112
 msgid "Hydrus"
-msgstr "Hydre Mâle"
+msgstr "Hydre MÃ¢le"
 
 #: src/translations.h:113
 msgid "Indus"
@@ -1164,7 +1141,7 @@ msgstr "Indien"
 
 #: src/translations.h:114
 msgid "Lacerta"
-msgstr "Lézard"
+msgstr "LÃ©zard"
 
 #: src/translations.h:115
 msgid "Monoceros"
@@ -1172,7 +1149,7 @@ msgstr "Licorne"
 
 #: src/translations.h:116
 msgid "Lepus"
-msgstr "Lièvre"
+msgstr "LiÃ¨vre"
 
 #: src/translations.h:117
 msgid "Leo"
@@ -1224,7 +1201,7 @@ msgstr "Paon"
 
 #: src/translations.h:129
 msgid "Pegasus"
-msgstr "Pégase"
+msgstr "PÃ©gase"
 
 #: src/translations.h:130
 msgid "Pictor"
@@ -1232,7 +1209,7 @@ msgstr "Peintre"
 
 #: src/translations.h:131
 msgid "Perseus"
-msgstr "Persée"
+msgstr "PersÃ©e"
 
 #: src/translations.h:132
 msgid "Equuleus"
@@ -1256,14 +1233,14 @@ msgstr "Petite Ourse"
 
 #: src/translations.h:137
 msgid "Phoenix"
-msgstr "Phénix"
+msgstr "PhÃ©nix"
 
 #: src/translations.h:138
-msgid "Pisces Austrinus"
+msgid "Piscis Austrinus"
 msgstr "Poisson Austral"
 
 #: src/translations.h:139
-msgid "Piscis"
+msgid "Pisces"
 msgstr "Poissons"
 
 #: src/translations.h:140
@@ -1276,7 +1253,7 @@ msgstr "Poupe"
 
 #: src/translations.h:142
 msgid "Reticulum"
-msgstr "Réticule"
+msgstr "RÃ©ticule"
 
 #: src/translations.h:143
 msgid "Sagittarius"
@@ -1304,7 +1281,7 @@ msgstr "Taureau"
 
 #: src/translations.h:150
 msgid "Telescopium"
-msgstr "Télescope"
+msgstr "TÃ©lescope"
 
 #: src/translations.h:151
 msgid "Tucana"

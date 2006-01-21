@@ -2122,9 +2122,9 @@ StdDlgWin::StdDlgWin(const wstring& _title, s_texture* _header_tex, s_font * _wi
 	secondBt->setOnPressCallback(callback<void>(this, &StdDlgWin::onSecondBt));
 	addComponent(secondBt);
 
-	blankIcon = new s_texture("bt_blank");
-	questionIcon = new s_texture("bt_question");
-	alertIcon = new s_texture("bt_alert");
+	blankIcon = new s_texture("bt_blank.png");
+	questionIcon = new s_texture("bt_question.png");
+	alertIcon = new s_texture("bt_alert.png");
 	picture = new Picture(questionIcon, STDDLGWIN_BT_ICON_LEFT, STDDLGWIN_BT_ICON_TOP, 32, 32);
 	addComponent(picture);
 

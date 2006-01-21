@@ -135,8 +135,8 @@ class Translations
 		N_("Vulpecula");			// vul
 		N_("Ursa Minor");			// umi
 		N_("Phoenix");			// phe
-		N_("Pisces Austrinus");	// psc
-		N_("Piscis");				// psa
+		N_("Piscis Austrinus");	// psc
+		N_("Pisces");				// psa
 		N_("Volans");				// vol
 		N_("Puppis");				// pup
 		N_("Reticulum");			// ret
