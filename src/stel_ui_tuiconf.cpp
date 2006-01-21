@@ -113,7 +113,7 @@ void StelUI::init_tui(void)
 	// 2. Time
 	tui_time_skytime = new s_tui::Time_item(wstring(L"2.1 ") + _("Sky Time: "));
 	tui_time_skytime->set_OnChangeCallback(callback<void>(this, &StelUI::tui_cb_sky_time));
-	tui_time_settmz = new s_tui::Time_zone_item(core->DataDir + "zone.tab", wstring(L"2.2 ") + _("Set Time Zone: "));
+	tui_time_settmz = new s_tui::Time_zone_item(core->getDataDir() + "zone.tab", wstring(L"2.2 ") + _("Set Time Zone: "));
 	tui_time_settmz->set_OnChangeCallback(callback<void>(this, &StelUI::tui_cb_settimezone));
 	tui_time_settmz->settz(core->observatory->get_custom_tz_name());
 	tui_time_presetskytime = new s_tui::Time_item(wstring(L"2.3 ") + _("Preset Sky Time: "));
@@ -190,7 +190,7 @@ void StelUI::init_tui(void)
 
 	// 5. Effects
 	tui_effect_landscape = new s_tui::MultiSet_item<wstring>(wstring(L"5.1 ") + _("Landscape: "));
-	tui_effect_landscape->addItemList(StelUtility::stringToWstring(Landscape::get_file_content(core->DataDir + "landscapes.ini")));
+	tui_effect_landscape->addItemList(StelUtility::stringToWstring(Landscape::get_file_content(core->getDataDir() + "landscapes.ini")));
 
 	tui_effect_landscape->set_OnChangeCallback(callback<void>(this, &StelUI::tui_cb_tui_effect_change_landscape));
 	tui_menu_effects->addComponent(tui_effect_landscape);
@@ -227,7 +227,7 @@ void StelUI::init_tui(void)
 	// 6. Scripts
 	tui_scripts_local = new s_tui::MultiSet_item<wstring>(wstring(L"6.1 ") + _("Local Script: "));
 	tui_scripts_local->addItemList(TUI_SCRIPT_MSG + wstring(L"\n") 
-				       + StelUtility::stringToWstring(core->scripts->get_script_list(core->DataDir + "scripts/"))); 
+				       + StelUtility::stringToWstring(core->scripts->get_script_list(core->getDataDir() + "scripts/"))); 
 	tui_scripts_local->set_OnChangeCallback(callback<void>(this, &StelUI::tui_cb_scripts_local));
 	tui_menu_scripts->addComponent(tui_scripts_local);
 
@@ -399,7 +399,7 @@ void StelUI::tui_update_widgets(void)
 void StelUI::tui_cb_settimezone(void)
 {
 	// Don't call the script anymore coz it's pointless
-	// system( ( core->DataDir + "script_set_time_zone " + tui_time_settmz->getCurrent() ).c_str() );
+	// system( ( core->getDataDir() + "script_set_time_zone " + tui_time_settmz->getCurrent() ).c_str() );
 	core->observatory->set_custom_tz_name(tui_time_settmz->gettz());
 }
 
@@ -424,14 +424,14 @@ void StelUI::tui_cb_admin_load_default(void)
 void StelUI::tui_cb_admin_save_default(void)
 {
 	core->saveConfig();
-	core->observatory->save(core->ConfigDir + core->config_file, "init_location");
-	system( ( core->DataDir + "script_save_config " ).c_str() );
+	core->observatory->save(core->getConfigDir() + core->config_file, "init_location");
+	system( ( core->getDataDir() + "script_save_config " ).c_str() );
 }
 
 // Launch script for internet update
 void StelUI::tui_cb_admin_updateme(void)
 {
-	system( ( core->DataDir + "script_internet_update" ).c_str() );
+	system( ( core->getDataDir() + "script_internet_update" ).c_str() );
 }
 
 // Set a new landscape skin
@@ -497,7 +497,7 @@ void StelUI::tui_cb_scripts_local() {
   
   if(tui_scripts_local->getCurrent()!=TUI_SCRIPT_MSG){
     core->SelectedScript = StelUtility::wstringToString(tui_scripts_local->getCurrent());
-    core->SelectedScriptDirectory = core->DataDir + "scripts/";
+    core->SelectedScriptDirectory = core->getDataDir() + "scripts/";
     // to reduce confusion for user, clear out removeable script selection as well
     if(ScriptDirectoryRead) tui_scripts_removeable->setCurrent(TUI_SCRIPT_MSG);
   } else {

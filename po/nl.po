@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: stellarium@free.fr\n"
-"POT-Creation-Date: 2006-01-20 17:48+0100\n"
+"POT-Creation-Date: 2006-01-21 22:59+0100\n"
 "PO-Revision-Date: 2005-07-26 21:42+0100\n"
 "Last-Translator: Johan Meuris <johanmeuris@antwerpen.be>\n"
 "Language-Team: \n"
@@ -20,7 +20,7 @@ msgstr ""
 "X-Poedit-Language: Dutch\n"
 "X-Poedit-Country: NETHERLANDS\n"
 
-#: src/main.cpp:54
+#: src/main.cpp:53
 #, c-format
 msgid ""
 "Usage: %s [OPTION] ...\n"
@@ -31,12 +31,12 @@ msgstr ""
 " -v, --version          Output versie informatie en afsluiten.\n"
 " -h, --help             Toon help en afsluiten.\n"
 
-#: src/main.cpp:78
+#: src/main.cpp:77
 #, c-format
 msgid "%s: Bad command line argument(s)\n"
 msgstr "%s: Foutieve command line optieparameter \n"
 
-#: src/main.cpp:79
+#: src/main.cpp:78
 #, c-format
 msgid "Try `%s --help' for more information.\n"
 msgstr "Typ `%s --help' voor meer informatie.\n"
@@ -383,7 +383,7 @@ msgstr "Error: Geen toegang tot een script om commands te registreren."
 msgid "Configuration"
 msgstr "Instellingen"
 
-#: src/stel_ui_conf.cpp:47 src/stel_ui_conf.cpp:684
+#: src/stel_ui_conf.cpp:47 src/stel_ui_conf.cpp:682
 msgid "Stars"
 msgstr "Sterren"
 
@@ -571,63 +571,63 @@ msgstr "Video"
 msgid "Rendering"
 msgstr "Rendering"
 
-#: src/stel_ui_conf.cpp:509
+#: src/stel_ui_conf.cpp:507
 msgid "Object Search"
 msgstr ""
 
-#: src/stel_ui_conf.cpp:528
+#: src/stel_ui_conf.cpp:526
 msgid "Star No./Name"
 msgstr ""
 
-#: src/stel_ui_conf.cpp:532
+#: src/stel_ui_conf.cpp:530
 msgid "eg. 60718 (aCrux) or Canopus"
 msgstr ""
 
-#: src/stel_ui_conf.cpp:533
+#: src/stel_ui_conf.cpp:531
 msgid "HP 60718, HD 108248, SAO 251904"
 msgstr ""
 
-#: src/stel_ui_conf.cpp:554 src/stel_ui_conf.cpp:685
+#: src/stel_ui_conf.cpp:552 src/stel_ui_conf.cpp:683
 #, fuzzy
 msgid "Constellation"
 msgstr "Sterrenbeelden"
 
-#: src/stel_ui_conf.cpp:558
+#: src/stel_ui_conf.cpp:556
 msgid "eg. Crux"
 msgstr ""
 
-#: src/stel_ui_conf.cpp:577 src/stel_ui_conf.cpp:686
+#: src/stel_ui_conf.cpp:575 src/stel_ui_conf.cpp:684
 #, fuzzy
 msgid "Nebula"
 msgstr "Nevels"
 
-#: src/stel_ui_conf.cpp:581
+#: src/stel_ui_conf.cpp:579
 msgid "eg. M83, NGC 7009, IC 2118"
 msgstr ""
 
-#: src/stel_ui_conf.cpp:582
+#: src/stel_ui_conf.cpp:580
 msgid "CW 113, SH 40"
 msgstr ""
 
-#: src/stel_ui_conf.cpp:667
+#: src/stel_ui_conf.cpp:665
 #, fuzzy
 msgid "Planet/Moon"
 msgstr "Planeten"
 
-#: src/stel_ui_conf.cpp:671
+#: src/stel_ui_conf.cpp:669
 msgid "eg. Pluto or Io"
 msgstr ""
 
-#: src/stel_ui_conf.cpp:687
+#: src/stel_ui_conf.cpp:685
 #, fuzzy
 msgid "Planets & Moons"
 msgstr "Labels planeten"
 
-#: src/stel_ui_conf.cpp:958
+#: src/stel_ui_conf.cpp:956
 msgid "Enter observatory name"
 msgstr ""
 
-#: src/stel_ui_conf.cpp:1121
+#: src/stel_ui_conf.cpp:1119
 #, fuzzy
 msgid " Current Time Speed is x"
 msgstr " Huidige tijd :"
@@ -1231,11 +1231,11 @@ msgid "Phoenix"
 msgstr ""
 
 #: src/translations.h:138
-msgid "Pisces Austrinus"
+msgid "Piscis Austrinus"
 msgstr ""
 
 #: src/translations.h:139
-msgid "Piscis"
+msgid "Pisces"
 msgstr ""
 
 #: src/translations.h:140

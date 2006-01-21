@@ -55,7 +55,6 @@ public:
     int getSize(void) const;
     void getDimensions(int &width, int &height) const;
     static void set_texDir(const string& _texDir) {s_texture::texDir = _texDir;}
-    static void set_suffix(const string& _suffix) {s_texture::suffix = _suffix;}
 
 private:
     string textureName;
@@ -63,7 +62,6 @@ private:
     int loadType;
     int loadType2;
 	static string texDir;
-	static string suffix;
 	bool whole_path;
 };
 

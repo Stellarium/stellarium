@@ -24,12 +24,11 @@
 #include "stellarium.h"
 
 string s_texture::texDir = "./";
-string s_texture::suffix = "";
 
 s_texture::s_texture(const string& _textureName) : textureName(_textureName), texID(0),
 	loadType(PNG_BLEND1), loadType2(GL_CLAMP)
 {
-    load( texDir + textureName + suffix );
+    load( texDir + textureName );
 }
 
 
@@ -52,7 +51,7 @@ s_texture::s_texture(bool full_path, const string& _textureName, int _loadType) 
     texID=0;
 	whole_path = full_path;
 	if(full_path) load(textureName);
-	else load( texDir + textureName + suffix );
+	else load( texDir + textureName );
 }
 
 
@@ -72,7 +71,7 @@ s_texture::s_texture(const string& _textureName, int _loadType) : textureName(_t
         default : loadType=PNG_BLEND3;
     }
     texID=0;
-    load( texDir + textureName + suffix );
+    load( texDir + textureName );
 }
 
 s_texture::~s_texture()
@@ -107,7 +106,7 @@ int s_texture::reload()
 {
     unload();
 	if(whole_path) return load(textureName);
-	else return load( texDir + textureName + suffix );
+	else return load( texDir + textureName );
 }
 
 // Return the texture size in pixels
