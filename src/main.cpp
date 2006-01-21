@@ -33,9 +33,8 @@
 
 using namespace std;
 
-string DDIR;	// Data Directory
-string TDIR;	// Textures Directory
 string CDIR;	// Config Directory
+string LDIR;	// Locale dir for PO translation files
 string DATA_ROOT;	// Data Root Directory
 
 // Print a beautiful console logo !!
@@ -138,13 +137,13 @@ void setDirectories(const char* executableName)
 #endif
 
 	// We now have a valid dataRoot directory, we can then set the data and textures dir
-	DDIR = DATA_ROOT + "/data/";
-	TDIR = DATA_ROOT + "/textures/";
+	LDIR = LOCALEDIR;
 
 	// If the system is non unix (windows) or if it's macosx the config file is in the
 	// config/ directory of the dataRoot directory
 #if defined(WIN32) || defined(CYGWIN) || defined(__MINGW32__) || defined(MACOSX)
 	CDIR = DATA_ROOT + "/config/";
+	LDIR = DATA_ROOT + "/locale/";
 
 	if ((tempFile = fopen((CDIR + "config.ini").c_str(),"r")))
 	{
@@ -207,16 +206,12 @@ void setDirectories(const char* executableName)
 #endif	// Unix system
 
 #else   // Mac OS X
-    const char *ddir = NULL;
-    const char *tdir = NULL;
     const char *cdir = NULL;
     const char *data_root = NULL;
 
-    if (!setDirectories(&ddir, &tdir, &cdir, &data_root))
+    if (!setDirectories(&cdir, &data_root))
         exit(-1);
 
-    DDIR = ddir;
-    TDIR = tdir;
     CDIR = cdir;
     DATA_ROOT = data_root;
 #endif
@@ -244,7 +239,7 @@ int main(int argc, char **argv)
     setDirectories(argv[0]);
 
 	// Create the core of stellarium, it has to be initialized
-	StelCore* core = new StelCore(DDIR, TDIR, CDIR, DATA_ROOT);
+	StelCore* core = new StelCore(CDIR, LDIR, DATA_ROOT);
 
 	// Give the config file parameters which has to be given "hard coded"
 #if !defined(MACOSX) && !defined(XCODE)

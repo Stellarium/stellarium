@@ -397,7 +397,7 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 			  if(stcore->scripts->is_playing()) 
 				  image_filename = stcore->scripts->get_script_path() + args["filename"];
 			  else 
-				  image_filename = stcore->DataRoot + "/" + args["filename"];
+				  image_filename = stcore->getDataRoot() + "/" + args["filename"];
 				  
 			  status = stcore->script_images->load_image(image_filename, args["name"], img_pos);
 
@@ -599,7 +599,7 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 		  if (!stcore->FlagAtmosphere && stcore->tone_converter)
 			  stcore->tone_converter->set_world_adaptation_luminance(3.75f);
 		  if (stcore->atmosphere) stcore->atmosphere->set_fade_duration(stcore->AtmosphereFadeDuration);
-		  stcore->observatory->load(stcore->ConfigDir + stcore->config_file, "init_location");
+		  stcore->observatory->load(stcore->getConfigDir() + stcore->config_file, "init_location");
 		  stcore->setLandscape(stcore->observatory->get_landscape_name());
 		  
 		  if (stcore->StartupTimeMode=="preset" || stcore->StartupTimeMode=="Preset")
@@ -618,7 +618,7 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 		  stcore->SkyCulture = "";
 		  stcore->setSkyCulture(temp);
 		  
-		  system( ( stcore->DataDir + "script_loadConfig " ).c_str() );
+		  system( ( stcore->getDataDir() + "script_loadConfig " ).c_str() );
 
 	  } else status = 0;
 

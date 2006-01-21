@@ -68,7 +68,7 @@ friend class StelCommandInterface;
 public:
 	// Inputs are the main data, textures, configuration directories relatively to the DATA_ROOT directory
 	// TODO : StelCore should not handle any directory
-    StelCore(const string& DDIR, const string& TDIR, const string& CDIR, const string& DATA_ROOT);
+    StelCore(const string& CDIR, const string& LDIR, const string& DATA_ROOT);
     virtual ~StelCore();
 	
 	//! @brief Init and load all main core components.
@@ -181,7 +181,7 @@ public:
 	bool getFlagConstellationIsolateSelected(void) {return asterisms->getFlagIsolateSelected();}
 	
 	/** Set constellation font size */
-	void setConstellationFontSize(float f) {asterisms->setFont(f, DataDir + BaseFontName);}
+	void setConstellationFontSize(float f) {asterisms->setFont(f, getDataDir() + BaseFontName);}
 	
 	// Stars methods
 	/** Set display flag for Stars */
@@ -258,7 +258,9 @@ public:
 	// Handle key press and release
 	int handleKeys(Uint16 key, s_gui::S_GUI_VALUE state);
 
-	const string& getDataDir(void) const {return DataDir;}
+	const string getDataDir(void) const {return dataRoot + "/data/";}
+	const string getConfigDir(void) const {return configDir;}
+	const string& getDataRoot() const {return dataRoot;}
 	
 	const float getMaxFPS(void) const {return maxfps;}
 
@@ -280,6 +282,11 @@ public:
 	 */
 	void setAppLanguage(const std::string& newAppLocaleName);
 private:
+    //Files location
+	string configDir;
+	string localeDir;
+	string dataRoot;
+	
 	TypeFace* UTFfont;
 
 	wstring get_cursor_pos(int x, int y);
@@ -329,12 +336,6 @@ private:
 	int Fullscreen;
 	int verticalOffset;
 	int horizontalOffset;
-
-    //Files location
-	string TextureDir;
-	string ConfigDir;
-	string DataDir;
-	string DataRoot;
 
 	string config_file;
 

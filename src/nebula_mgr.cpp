@@ -110,7 +110,7 @@ bool NebulaMgr::read(float font_size, const string& font_name, const string& fil
 	}
 	
 	if (!Nebula::tex_circle) 
-		Nebula::tex_circle = new s_texture("neb");   // Load circle texture
+		Nebula::tex_circle = new s_texture("neb.png");   // Load circle texture
 	
 	return true;
 }
@@ -378,7 +378,7 @@ bool NebulaMgr::read_NGC_catalog(const string& fileName, LoadingBar& lb)
     fclose(ngcFile);
 
 	printf("(%d items loaded [%d dropped])\n", i, data_drop);
-    cout << "Loading NGC name data..." << endl;
+    cout << "Loading NGC name data...";
 	string ngcNameData = dataDir + "ngc2000names.dat";
     FILE * ngcNameFile = fopen(ngcNameData.c_str(),"rb");
     if (!ngcNameFile)

@@ -23,10 +23,17 @@
 
 #include "translator.h"
 
-// Use system locale language by default
-Translator Translator::globalTranslator = Translator(PACKAGE, LOCALEDIR, "");
 Translator* Translator::lastUsed = NULL;
+
+#ifndef MINGW32
+// This crashes the application on windows..
 const string Translator::systemLangName = (getenv("LANGUAGE")!=NULL) ? getenv("LANGUAGE") : getenv("LANG");
+#else
+const string Translator::systemLangName = "en";
+#endif
+
+// Use system locale language by default
+Translator Translator::globalTranslator = Translator(PACKAGE, LOCALEDIR, "system");
 
 void Translator::reload()
 {

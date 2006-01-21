@@ -279,7 +279,7 @@ void SolarSystem::load(const string& planetfile)
 	}
 
 	// special case: load earth shadow texture
-	tex_earth_shadow = new s_texture("earth-shadow", TEX_LOAD_TYPE_PNG_ALPHA);
+	tex_earth_shadow = new s_texture("earth-shadow.png", TEX_LOAD_TYPE_PNG_ALPHA);
 
 	cout << "(loaded)" << endl;
 }
