@@ -386,9 +386,8 @@ void StelUI::tui_update_widgets(void)
 
 	// 7. admin
 	//tui_admin_setlocale->setValue(core->UILocale);
-	tui_admin_voffset->setValue(core->verticalOffset);
-	tui_admin_hoffset->setValue(core->horizontalOffset);
-
+	tui_admin_voffset->setValue(core->getViewportVerticalOffset());
+	tui_admin_hoffset->setValue(core->getViewportHorizontalOffset());
 
 }
 
@@ -461,14 +460,8 @@ void StelUI::tui_cb_tui_general_change_sky_locale(void) {
 // callback for viewport centering
 void StelUI::tui_cb_tui_admin_change_viewport(void)
 {
-
-  core->verticalOffset            = tui_admin_voffset->getValue();
-  core->horizontalOffset          = tui_admin_hoffset->getValue();
-
-
-  core->projection->set_viewport_offset( core->horizontalOffset, core->verticalOffset);
-  core->projection->set_viewport_type( core->ViewportType );
-
+	core->setViewportVerticalOffset(tui_admin_voffset->getValue());
+	core->setViewportHorizontalOffset(tui_admin_hoffset->getValue());
 }
 
 // callback for changing scripts from removeable media

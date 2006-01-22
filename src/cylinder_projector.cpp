@@ -22,34 +22,23 @@
 #include "cylinder_projector.h"
 
 
-CylinderProjector::CylinderProjector(int _screenW, int _screenH, double _fov,
-	double _min_fov, double _max_fov) : 
-	Projector(_screenW, _screenH, _fov, _min_fov, _max_fov)
+CylinderProjector::CylinderProjector(int _screenW, int _screenH, double _fov) : 
+	Projector(_screenW, _screenH, _fov)
 {
-
 	set_fov(_fov);
 	set_screen_size(_screenW,_screenH);
 	mat_projection.set(1., 0., 0., 0.,
 							0., 1., 0., 0.,
 							0., 0., -1, 0.,
 							0., 0., 0., 1.);
-}
-
-CylinderProjector::CylinderProjector(const Projector& p) : Projector(800, 600, 350.f, 0.001, 350.00001)
-{
-	set_fov(p.get_fov());
-	set_screen_size(p.get_screenW(),p.get_screenH());
-	mat_projection.set(1., 0., 0., 0.,
-							0., 1., 0., 0.,
-							0., 0., -1, 0.,
-							0., 0., 0., 1.);
-	set_viewport_type(p.get_viewport_type());
+	min_fov = 0.001;
+	max_fov = 350.00001;
 }
 
 // For a fisheye, ratio is alway = 1
-void CylinderProjector::set_viewport(int x, int y, int w, int h)
+void CylinderProjector::setViewport(int x, int y, int w, int h)
 {
-	Projector::set_viewport(x, y, w, h);
+	Projector::setViewport(x, y, w, h);
 	center.set(vec_viewport[0]+vec_viewport[2]/2,vec_viewport[1]+vec_viewport[3]/2,0);
 }
 

@@ -34,29 +34,30 @@ class Projector
 public:
 	enum PROJECTOR_TYPE
 	{
-		PERSPECTIVE_PROJECTOR,
-		FISHEYE_PROJECTOR,
-		CYLINDER_PROJECTOR
+		PERSPECTIVE_PROJECTOR=0,
+		FISHEYE_PROJECTOR=1,
+		CYLINDER_PROJECTOR=2
 	};
 
 	enum VIEWPORT_TYPE
 	{
-		MAXIMIZED,
-		SQUARE,
-		DISK,
-		UNKNOWN
+		MAXIMIZED=1,
+		SQUARE=2,
+		DISK=3,
+		UNKNOWN=4
 	};
 
-	Projector(int _screenW = 800, int _screenH = 600, double _fov = 60.,
-		double _min_fov = 0.001, double _max_fov = 100);
+	Projector(int _screenW = 800, int _screenH = 600, double _fov = 60.);
 	virtual ~Projector();
 
-	virtual PROJECTOR_TYPE get_type(void) const {return PERSPECTIVE_PROJECTOR;}
-	VIEWPORT_TYPE get_viewport_type(void) const {return viewport_type;}
-	void set_viewport_type(VIEWPORT_TYPE);
-	void set_viewport_offset(int _xoff, int _yoff);
-	void get_viewport_offset(int &_xoff, int &_yoff);
-
+	virtual PROJECTOR_TYPE getType(void) const {return PERSPECTIVE_PROJECTOR;}
+	VIEWPORT_TYPE getViewportType(void) const {return viewport_type;}
+	void setViewportType(VIEWPORT_TYPE);
+	void setViewportHorizontalOffset(int hoff) {hoffset=hoff;}
+	void setViewportVerticalOffset(int voff) {voffset=voff;}
+	int getViewportVerticalOffset(void) const {return hoffset;}
+	int getViewportHorizontalOffset(void) const {return hoffset;}
+	
 	virtual void set_fov(double f);
 	double get_fov(void) const {return fov;}
 	virtual double get_visible_fov(void) const {return fov;}
@@ -72,10 +73,10 @@ public:
 	void set_screen_size(int w, int h);
 	int get_screenW(void) const {return screenW;}
 	int get_screenH(void) const {return screenH;}
-	void maximize_viewport(void) {set_viewport(0,0,screenW,screenH); viewport_type = MAXIMIZED;}
+	void maximize_viewport(void) {setViewport(0,0,screenW,screenH); viewport_type = MAXIMIZED;}
 	void set_square_viewport(void);
 	void set_disk_viewport(void);
-	virtual void set_viewport(int x, int y, int w, int h);
+	virtual void setViewport(int x, int y, int w, int h);
 
 	// Fill with black around the circle
 	void Projector::draw_viewport_shape(void);
