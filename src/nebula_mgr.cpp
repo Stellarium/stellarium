@@ -356,7 +356,7 @@ bool NebulaMgr::read_NGC_catalog(const string& fileName, LoadingBar& lb)
 		{
 			// Draw loading bar
 			wostringstream os;
-			os << _("Loading NGC catalog: ") << (i == catalogSize-1 ? catalogSize : i) << catalogSize;
+			os << _("Loading NGC catalog: ") << (i == catalogSize-1 ? catalogSize : i) << L"/" << catalogSize;
 			lb.SetMessage(os.str());
 			lb.Draw((float)i/catalogSize);
 		}
@@ -491,7 +491,7 @@ bool NebulaMgr::read_Sharpless_catalog(const string& fileName, LoadingBar& lb)
 		{
 			// Draw loading bar
 			wostringstream os;
-			os << _("Loading Sharpless catalog:") << (i == catalogSize-1 ? catalogSize : i) << catalogSize;
+			os << _("Loading Sharpless catalog:") << (i == catalogSize-1 ? catalogSize : i) << L"/" << catalogSize;
 			lb.SetMessage(os.str());
 			lb.Draw((float)i/catalogSize);
 		}
@@ -556,7 +556,7 @@ bool NebulaMgr::read_Cadwell_catalog(const string& fileName, LoadingBar& lb)
 		{
 			// Draw loading bar
 			wostringstream os;
-			os << _("Loading Cadwell catalog:") <<  (i == catalogSize-1 ? catalogSize : i) << catalogSize;
+			os << _("Loading Cadwell catalog:") <<  (i == catalogSize-1 ? catalogSize : i) << L"/" << catalogSize;
 			lb.SetMessage(os.str());
 			lb.Draw((float)i/catalogSize);
 		}
@@ -658,7 +658,7 @@ bool NebulaMgr::read_messier_textures(const string& fileName, LoadingBar& lb)
 		// Draw loading bar
 		++current;
 		wostringstream os;
-		os << _("Loading Nebula Textures:") << current << total;
+		os << _("Loading Nebula Textures:") << current << L"/" << total;
 		lb.SetMessage(os.str());
 		lb.Draw((float)current/total);
 		
