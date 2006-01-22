@@ -428,10 +428,6 @@ void Component::draw(void)
 {
 }
 
-void Component::changeLocale(void)
-{
-}
-
 void Component::setVisible(bool _visible)
 {
 	visible = _visible;
@@ -615,18 +611,6 @@ void Component::setColorScheme(void)
 	if (!GUIColorSchemeMember) return;
 	painter.setTextColor(guiTextColor);
 	painter.setBaseColor(guiBaseColor);
-}
-
-void Container::changeLocale(void)
-{
-#ifdef ENABLE_NLS
-    list<Component*>::iterator iter = childs.begin();
-	while (iter != childs.end())
-	{
-		(*iter)->changeLocale();
-		iter++;
-	}
-#endif
 }
 
 void Container::draw(void)
@@ -2363,19 +2347,6 @@ void TabContainer::draw(void)
     }
 
 	Container::draw();
-}
-
-void TabContainer::changeLocale(void)
-{
-#ifdef ENABLE_NLS
-	list<TabHeader*>::iterator iter = headers.begin();
-	while (iter != headers.end())
-	{
-		(*iter)->changeLocale();
-		iter++;
-	}
-	Container::changeLocale();
-#endif
 }
 
 void TabContainer::setColorScheme(void)
