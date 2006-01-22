@@ -173,7 +173,7 @@ void HipStarMgr::load_data(const string& hipCatFile, LoadingBar& lb)
 		{
 			// Draw loading bar
 			wostringstream os;
-			os << _("Loading Hipparcos catalog:") << (i == starArraySize-1 ? starArraySize: i) << starArraySize;
+			os << _("Loading Hipparcos catalog:") << (i == starArraySize-1 ? starArraySize: i) << L"/" << starArraySize;
 			lb.SetMessage(os.str());
 			lb.Draw((float)i/starArraySize);
 		}

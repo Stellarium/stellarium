@@ -180,7 +180,6 @@ namespace s_gui
         Component();
 		virtual ~Component();
         virtual void draw(void);
-        virtual void changeLocale(void);
         virtual void reshape(const s_vec2i& _pos, const s_vec2i& _size);
         virtual void reshape(int x, int y, int w, int h);
         virtual int getPosx() const {return pos[0];}
@@ -270,7 +269,6 @@ namespace s_gui
         virtual void removeComponent(Component*);
 		virtual void removeAllComponents(void);
         virtual void draw(void);
-        virtual void changeLocale(void);
 		virtual bool onClic(int, int, S_GUI_VALUE, S_GUI_VALUE);
 		virtual bool onMove(int, int);
 		virtual bool onKey(Uint16, S_GUI_VALUE);
@@ -776,7 +774,6 @@ namespace s_gui
 		virtual void draw(void);
 		virtual bool onClic(int, int, S_GUI_VALUE, S_GUI_VALUE);
 		virtual void setColorScheme(void);
-		virtual void changeLocale(void);
 	protected:
 		int getHeadersSize(void);
 		void select(TabHeader*);

@@ -198,7 +198,7 @@ Component* StelUI::createConfigWindow(void)
 
 	x=10; y=10;
 
-	Label* tclbl = new Label(_("\1 Current Time :"));
+	Label* tclbl = new Label(wstring(L"\u2022 ")+_("Current Time :"));
 	tclbl->setPos(x,y); y+=20;
 	tab_time->addComponent(tclbl);
 
@@ -207,11 +207,11 @@ Component* StelUI::createConfigWindow(void)
 	tab_time->addComponent(time_current);
 	time_current->setPos(50,y); y+=80;
 
-	Label* tzbl = new Label(_("\1 Time Zone :"));
+	Label* tzbl = new Label(wstring(L"\u2022 ")+_("Time Zone :"));
 	tzbl->setPos(x,y); y+=20;
 	tab_time->addComponent(tzbl);
 
-	Label* system_tz_lbl = new Label(_("\1 Using System Default Time Zone"));
+	Label* system_tz_lbl = new Label(wstring(L"\u2022 ")+_("Using System Default Time Zone"));
 	tab_time->addComponent(system_tz_lbl);
 	system_tz_lbl->setPos(50 ,y); y+=20;
 	wstring tmpl(L"(" + core->observatory->get_time_zone_name_from_system(core->navigation->get_JDay()) + L")");
@@ -220,7 +220,7 @@ Component* StelUI::createConfigWindow(void)
 	
 	system_tz_lbl2->setPos(70 ,y); y+=30;
 
-	Label* time_speed_lbl = new Label(_("\1 Time speed : "));
+	Label* time_speed_lbl = new Label(wstring(L"\u2022 ")+_("Time speed : "));
 	tab_time->addComponent(time_speed_lbl);
 	time_speed_lbl->setPos(x ,y); y+=20;
 
@@ -305,7 +305,7 @@ Component* StelUI::createConfigWindow(void)
 	tab_video->setSize(config_tab_ctr->getSize());
 
 	x=10; y=10;
-	Label * lblvideo1 = new Label(_("\1 Projection :"));
+	Label * lblvideo1 = new Label(wstring(L"\u2022 ")+_("Projection :"));
 	lblvideo1->setPos(x, y);
 	tab_video->addComponent(lblvideo1);
 
@@ -321,7 +321,7 @@ Component* StelUI::createConfigWindow(void)
 	tab_video->addComponent(disk_viewport_cbx);
 	disk_viewport_cbx->setPos(x,y); y+=35;
 
-	Label * lblvideo2 = new Label(_("\1 Screen Resolution :"));
+	Label * lblvideo2 = new Label(wstring(L"\u2022 ")+_("Screen Resolution :"));
 	lblvideo2->setPos(10, y);
 	tab_video->addComponent(lblvideo2); y+=20;
 
@@ -370,7 +370,7 @@ Component* StelUI::createConfigWindow(void)
 	tab_landscapes->setSize(config_tab_ctr->getSize());
 
 	x=10; y=10;
-	Label * lbllandscapes1 = new Label(_("\1 Choose landscapes :"));
+	Label * lbllandscapes1 = new Label(wstring(L"\u2022 ")+_("Choose landscapes :"));
 	lbllandscapes1->setPos(x, y);
 	tab_landscapes->addComponent(lbllandscapes1);
 
@@ -1116,7 +1116,7 @@ void StelUI::updateConfigForm(void)
 
 	wostringstream os;
     os << core->navigation->get_time_speed()/JD_SECOND;
-	time_speed_lbl2->setLabel(_("\1 Current Time Speed is x") + os.str());
+	time_speed_lbl2->setLabel(wstring(L"\u2022 ")+_("Current Time Speed is x") + os.str());
 
 	fisheye_projection_cbx->setState(core->projection->get_type()==Projector::FISHEYE_PROJECTOR);
 	disk_viewport_cbx->setState(core->projection->get_viewport_type()==Projector::DISK);
