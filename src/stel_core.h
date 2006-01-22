@@ -81,11 +81,6 @@ public:
 	//! @brief Execute all the drawing functions
 	//! @param delta_time the time increment in ms.
 	void draw(int delta_time);
-
-	// TODO : only viewport size is managed by the projection class
-	// Actual screen size should be managed by the stel_app class
-	int get_screen_W(void) const {return screen_W;}
-	int get_screen_H(void) const {return screen_H;}
 		
 	// find and select the "nearest" object and retrieve his informations
 	StelObject * find_stel_object(int x, int y) const;
@@ -239,10 +234,36 @@ public:
 	/** Get stars limiting display magnitude */
 	float getStarLimitingMag(void) const {return hip_stars->getStarLimitingMag();}
 	
+	// Projection	
+	/** Set the horizontal viewport offset in pixels */
+	void setViewportHorizontalOffset(int hoff) const {projection->setViewportHorizontalOffset(hoff);}	
+	/** Get the horizontal viewport offset in pixels */
+	int getViewportHorizontalOffset(void) const {return projection->getViewportHorizontalOffset();}
+	
+	/** Set the vertical viewport offset in pixels */
+	void setViewportVerticalOffset(int voff) const {projection->setViewportVerticalOffset(voff);}
+	/** Get the vertical viewport offset in pixels */
+	int getViewportVerticalOffset(void) const {return projection->getViewportVerticalOffset();}
+	
+	//! Set the viewport type
+	void setViewportType(Projector::VIEWPORT_TYPE vType) {projection->setViewportType(vType);}
+	//! Get the viewport type
+	Projector::VIEWPORT_TYPE getViewportType(void) {return projection->getViewportType();}
+	
+	//! Set the projection type
+	void setProjectionType(Projector::PROJECTOR_TYPE pType);
+	//! Get the projection type
+	Projector::PROJECTOR_TYPE getProjectionType(void) {return projection->getType();}
+	
 	////////////////////////////////////////////////
 	// TODO move to STELAPP
 	////////////////////////////////////////////////
 
+	// TODO : only viewport size is managed by the projection class
+	// Actual screen size should be managed by the stel_app class
+	int get_screen_W(void) const {return screen_W;}
+	int get_screen_H(void) const {return screen_H;}
+	
 	void loadConfig(void);
 	void saveConfig(void);
 	// Set the config file names.
@@ -281,18 +302,16 @@ public:
 	 * @param newAppLocaleName The name of the locale (e.g fr_FR) to use for GUI, TUI and console messages etc..
 	 */
 	void setAppLanguage(const std::string& newAppLocaleName);
+	
 private:
-    //Files location
-	string configDir;
-	string localeDir;
-	string dataRoot;
 	
 	TypeFace* UTFfont;
 
 	wstring get_cursor_pos(int x, int y);
 
 	static Translator skyTranslator;			// The translator used for astronomical object naming
-
+	string dataRoot;
+	
 	// Main elements of the program
 	Navigator * navigation;				// Manage all navigation parameters, coordinate transformations etc..
 	Observator * observatory;			// Manage observer position
@@ -317,14 +336,15 @@ private:
 	Planet* selected_planet;
 
 	// Projector
-	Projector::PROJECTOR_TYPE ProjectorType;
-	Projector::VIEWPORT_TYPE ViewportType;
 	int DistortionFunction;
 	
 		
 	///////////////////////////////////////////////////////////////////////////////
 	// Below this limit, all the attributes will end up in the stel_app class
 	///////////////////////////////////////////////////////////////////////////////
+	//Files location
+	string configDir;
+	string localeDir;
 	
 	void loadConfigFrom(const string& confFile);
 	void saveConfigTo(const string& confFile);
@@ -334,12 +354,8 @@ private:
 	int screen_H;
 	int bppMode;
 	int Fullscreen;
-	int verticalOffset;
-	int horizontalOffset;
 
 	string config_file;
-
-
 	
 	// localization
 	string SkyCulture;  // the culture used for constellations

@@ -36,9 +36,9 @@ StelCore::StelCore(const string& CDIR, const string& LDIR, const string& DATA_RO
 	localeDir = LDIR;
 	dataRoot = DATA_ROOT;
 	
-	ProjectorType = Projector::PERSPECTIVE_PROJECTOR;
 	SelectedScript = SelectedScriptDirectory = "";
 	
+	projection = new Projector(800, 600, 60);
 	tone_converter = new ToneReproductor();		
 	atmosphere = new Atmosphere();	
 	hip_stars = new HipStarMgr();
@@ -100,16 +100,6 @@ StelCore::~StelCore()
 
 void StelCore::init(void)
 {
-	// read current ui locale
-	// char *tmp = setlocale(LC_MESSAGES, "");
-	
-// 	cout << "Locale is ";
-// 	if (!tmp) cout << "(Default)";
-// 	cout << endl;
-// 
-// 	if(tmp == NULL) UILocale = "";
-// 	else UILocale = tmp;
-
 	// Warning: These values are not overriden by the config!
 	BaseCFontSize = 12.5;
 	BaseCFontName = getDataDir() + "DejaVuSansMono-Roman.ttf";
@@ -132,28 +122,6 @@ void StelCore::init(void)
 		navigation->set_JDay(PresetSkyTime - observatory->get_GMT_shift(PresetSkyTime) * JD_HOUR);
 	else navigation->set_JDay(get_julian_from_sys());
 	navigation->set_local_vision(InitViewPos);
-
-	switch (ProjectorType)
-	{
-	case Projector::PERSPECTIVE_PROJECTOR :
-		projection = new Projector(screen_W, screen_H, InitFov);
-		break;
-	case Projector::FISHEYE_PROJECTOR :
-		projection = new FisheyeProjector(screen_W, screen_H, InitFov, .001, 180.00001, DistortionFunction);
-		break;
-	case Projector::CYLINDER_PROJECTOR :
-		projection = new CylinderProjector(screen_W, screen_H, InitFov, .001, 180.00001);
-		break;
-	default :
-		projection = new Projector(screen_W, screen_H, InitFov);
-		break;
-	}
-
-	// Make the viewport as big as possible
-	projection->set_screen_size(screen_W, screen_H);
-	projection->set_fov(InitFov);
-	projection->set_viewport_offset(horizontalOffset, verticalOffset);
-	projection->set_viewport_type(ViewportType);
 
 	// Load hipparcos stars & names
 	LoadingBar lb(projection, LoadingBarFontSize, getDataDir() + BaseFontName, "logo24bits.png", screen_W, screen_H);
@@ -252,7 +220,7 @@ void StelCore::init(void)
 	asterisms->setBoundaryColor(ConstBoundaryColor[draw_mode]);
 	asterisms->setLabelColor(ConstNamesColor[draw_mode]);
 	
-	selected_planet=NULL;	// Fix a bug on macosX! Thanks Fumio!
+	selected_planet=NULL;	// Fix a bug on macosX! Thanks Fumio!	
 }
 
 void StelCore::quit(void)
@@ -840,6 +808,30 @@ wstring StelCore::get_cursor_pos(int x, int y)
 	return oss.str();
 }
 
+void StelCore::setProjectionType(Projector::PROJECTOR_TYPE pType)
+{
+	if (getProjectionType()==pType) return;
+	Projector* ptemp;
+	switch (pType)
+	{
+	case Projector::PERSPECTIVE_PROJECTOR :
+		ptemp = new Projector(projection->get_screenW(), projection->get_screenH(), projection->get_fov());
+		break;
+	case Projector::FISHEYE_PROJECTOR :
+		ptemp = new FisheyeProjector(projection->get_screenW(), projection->get_screenH(), projection->get_fov());
+		break;
+	case Projector::CYLINDER_PROJECTOR :
+		ptemp = new CylinderProjector(projection->get_screenW(), projection->get_screenH(), projection->get_fov());
+		break;
+	default :
+		assert(0);	// This should never happen
+	}
+	ptemp->setViewportType(projection->getViewportType());
+	ptemp->setViewportHorizontalOffset(projection->getViewportHorizontalOffset());
+	ptemp->setViewportVerticalOffset(projection->getViewportVerticalOffset());
+	delete projection;
+	projection = ptemp;
+}
 
 void StelCore::loadConfig(void)
 {
@@ -909,22 +901,22 @@ void StelCore::loadConfigFrom(const string& confFile)
 
 	// Video Section
 	Fullscreen			= conf.get_boolean("video:fullscreen");
-	screen_W			= conf.get_int	  ("video:screen_w");
-	screen_H			= conf.get_int	  ("video:screen_h");
+	setScreenSize(conf.get_int("video:screen_w"), conf.get_int("video:screen_h"));
 	bppMode				= conf.get_int    ("video:bbp_mode");
-	horizontalOffset	= conf.get_int    ("video:horizontal_offset");
-	verticalOffset		= conf.get_int    ("video:vertical_offset");
+	setViewportHorizontalOffset(conf.get_int    ("video:horizontal_offset"));
+	setViewportVerticalOffset(conf.get_int    ("video:vertical_offset"));
 	maxfps 				= conf.get_double ("video","maximum_fps",10000);
 
 	// Projector
 	string tmpstr = conf.get_str("projection:type");
-	if (tmpstr=="perspective") ProjectorType = Projector::PERSPECTIVE_PROJECTOR;
+	Projector::PROJECTOR_TYPE projType;
+	if (tmpstr=="perspective") projType = Projector::PERSPECTIVE_PROJECTOR;
 	else
 	{
-		if (tmpstr=="fisheye") ProjectorType = Projector::FISHEYE_PROJECTOR;
+		if (tmpstr=="fisheye") projType = Projector::FISHEYE_PROJECTOR;
 		else
 		{
-			if (tmpstr=="cylinder") ProjectorType = Projector::CYLINDER_PROJECTOR;
+			if (tmpstr=="cylinder") projType = Projector::CYLINDER_PROJECTOR;
 			else
 			{
 				cerr << "ERROR : Unknown projector type : " << tmpstr << endl;
@@ -932,23 +924,23 @@ void StelCore::loadConfigFrom(const string& confFile)
 			}
 		}
 	}
+	setProjectionType(projType);
 
 	tmpstr = conf.get_str("projection:viewport");
-	if (tmpstr=="maximized") ViewportType = Projector::MAXIMIZED;
+	Projector::VIEWPORT_TYPE viewType;
+	if (tmpstr=="maximized") viewType = Projector::MAXIMIZED;
 	else
-	if (tmpstr=="square") ViewportType = Projector::SQUARE;
+	if (tmpstr=="square") viewType = Projector::SQUARE;
 	else
 	{
-		if (tmpstr=="disk") ViewportType = Projector::DISK;
+		if (tmpstr=="disk") viewType = Projector::DISK;
 		else
 		{
 			cerr << "ERROR : Unknown viewport type : " << tmpstr << endl;
 			exit(-1);
 		}
 	}
-
-	// -1 is default fisheye linear distortion
-	DistortionFunction 	= conf.get_int("projection", "distortion_function", -1);
+	setViewportType(viewType);
 
 	// localization section
 	SkyCulture = conf.get_str("localization", "sky_culture", "western");
@@ -1144,13 +1136,13 @@ void StelCore::saveConfigTo(const string& confFile)
 	conf.set_int	("video:screen_w", screen_W);
 	conf.set_int	("video:screen_h", screen_H);
 	conf.set_int	("video:bbp_mode", bppMode);
-	conf.set_int    ("video:horizontal_offset", horizontalOffset);
-	conf.set_int    ("video:vertical_offset", verticalOffset);
+	conf.set_int    ("video:horizontal_offset", getViewportHorizontalOffset());
+	conf.set_int    ("video:vertical_offset", getViewportVerticalOffset());
 	conf.set_double ("video:maximum_fps", maxfps);
 	
 	// Projector
 	string tmpstr;
-	switch (ProjectorType)
+	switch (getProjectionType())
 	{
 		case Projector::PERSPECTIVE_PROJECTOR : tmpstr="perspective";	break;
 		case Projector::FISHEYE_PROJECTOR : tmpstr="fisheye";		break;
@@ -1159,7 +1151,7 @@ void StelCore::saveConfigTo(const string& confFile)
 	}
 	conf.set_str	("projection:type",tmpstr);
 
-	switch (ViewportType)
+	switch (getViewportType())
 	{
 		case Projector::MAXIMIZED : tmpstr="maximized";	break;
 		case Projector::SQUARE : tmpstr="square";	break;
@@ -1167,7 +1159,6 @@ void StelCore::saveConfigTo(const string& confFile)
 		default : tmpstr="maximized";
 	}
 	conf.set_str	("projection:viewport", tmpstr);
-	conf.set_int    ("projection:distortion_function", DistortionFunction);
 
 	// localization section
 	conf.set_str    ("localization:sky_culture", SkyCulture);

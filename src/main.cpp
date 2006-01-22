@@ -261,7 +261,7 @@ int main(int argc, char **argv)
 	core->init();
 
     // Re-load of config to re-enable flags available once the core has loaded 
-	core->loadConfig();
+	//core->loadConfig(); -> This is silly!!
 
 	// play startup script, if available
 	core->playStartupScript();

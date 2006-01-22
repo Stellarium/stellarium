@@ -22,14 +22,14 @@
 #include "projector.h"
 
 
-Projector::Projector(int _screenW, int _screenH, double _fov, double _min_fov, double _max_fov) :
-	min_fov(_min_fov), max_fov(_max_fov), zNear(0.1), zFar(10000), flag_auto_zoom(0), hoffset(0), voffset(0)
+Projector::Projector(int _screenW, int _screenH, double _fov) :
+	min_fov(0.001), max_fov(100), zNear(0.1), zFar(10000), flag_auto_zoom(0), hoffset(0), voffset(0)
 {
 	fov = _fov;
-	if (_fov>max_fov) fov = max_fov;
-	if (_fov<min_fov) fov = min_fov;
-	set_viewport(_screenW, _screenH, 0, 0);
-	set_fov(_fov);
+	if (fov>max_fov) fov = max_fov;
+	if (fov<min_fov) fov = min_fov;
+	//set_viewport(_screenW, _screenH, 0, 0);
+	set_fov(fov);
 	set_screen_size(_screenW,_screenH);
 	maximize_viewport();
 }
@@ -46,26 +46,11 @@ void Projector::set_fov(double f)
 	init_project_matrix();
 }
 
-
-void Projector::set_viewport_offset(int _xoff, int _yoff)
-{
-  hoffset = _xoff;
-  voffset = _yoff;
-}
-
-void Projector:: get_viewport_offset(int &_xoff, int &_yoff)
-{
-  _xoff = hoffset;
-  _yoff = voffset;
-
-}
-
-
 void Projector::set_square_viewport(void)
 {
 	glDisable(GL_STENCIL_TEST);
 	int mind = MY_MIN(screenW,screenH);
-	set_viewport(hoffset + (screenW-mind)/2, voffset + (screenH-mind)/2, mind, mind);
+	setViewport(hoffset + (screenW-mind)/2, voffset + (screenH-mind)/2, mind, mind);
 	viewport_type = SQUARE;
 }
 
@@ -80,7 +65,7 @@ void Projector::set_disk_viewport(void)
   viewport_type = DISK;
 }
 
-void Projector::set_viewport_type(VIEWPORT_TYPE t)
+void Projector::setViewportType(VIEWPORT_TYPE t)
 {
 	switch (t)
 	{
@@ -109,7 +94,7 @@ void Projector::draw_viewport_shape(void)
 	restore_from_2Dfullscreen_projection();
 }
 
-void Projector::set_viewport(int x, int y, int w, int h)
+void Projector::setViewport(int x, int y, int w, int h)
 {
 	glDisable(GL_STENCIL_TEST);
 	vec_viewport[0] = x;

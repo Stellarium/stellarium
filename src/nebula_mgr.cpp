@@ -19,13 +19,14 @@
 
 // class used to manage groups of Nebulas
 
+#include <fstream>
 #include "nebula_mgr.h"
 #include "stellarium.h"
 #include "s_texture.h"
 #include "s_font.h"
 #include "navigator.h"
-#include "stel_sdl.h"
-#include <locale>
+#include "translator.h"
+
 #define RADIUS_NEB 1.
 
 NebulaMgr::NebulaMgr() :
