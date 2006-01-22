@@ -22,34 +22,22 @@
 #include "fisheye_projector.h"
 
 
-FisheyeProjector::FisheyeProjector(int _screenW, int _screenH, double _fov,
-	double _min_fov, double _max_fov, int _distortion_function) : 
-	Projector(_screenW, _screenH, _fov, _min_fov, _max_fov)
+FisheyeProjector::FisheyeProjector(int _screenW, int _screenH, double _fov) : Projector(_screenW, _screenH, _fov)
 {
-
+	min_fov = 0.001;
+	max_fov = 180.00001;	
 	set_fov(_fov);
 	set_screen_size(_screenW,_screenH);
 	mat_projection.set(1., 0., 0., 0.,
 							0., 1., 0., 0.,
 							0., 0., -1, 0.,
-							0., 0., 0., 1.);
-}
-
-FisheyeProjector::FisheyeProjector(const Projector& p) : Projector(800, 600, 180.f, 0.001, 180.00001)
-{
-	set_fov(p.get_fov());
-	set_screen_size(p.get_screenW(),p.get_screenH());
-	mat_projection.set(1., 0., 0., 0.,
-							0., 1., 0., 0.,
-							0., 0., -1, 0.,
-							0., 0., 0., 1.);
-	set_viewport_type(p.get_viewport_type());
+							0., 0., 0., 1.);				
 }
 
 // For a fisheye, ratio is alway = 1
-void FisheyeProjector::set_viewport(int x, int y, int w, int h)
+void FisheyeProjector::setViewport(int x, int y, int w, int h)
 {
-	Projector::set_viewport(x, y, w, h);
+	Projector::setViewport(x, y, w, h);
 	center.set(vec_viewport[0]+vec_viewport[2]/2,vec_viewport[1]+vec_viewport[3]/2,0);
 }
 

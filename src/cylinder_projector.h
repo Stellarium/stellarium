@@ -27,17 +27,11 @@
 class CylinderProjector : public Projector
 {
 public:
-    CylinderProjector(int _screenW = 800, int _screenH = 600, double _fov = 175., 
-		    double _min_fov = 0.001, double _max_fov = 300.);
+    CylinderProjector(int _screenW = 800, int _screenH = 600, double _fov = 175.);
 
-                    // distortion_function can be used to select between different projection distortions
-                    // currently not used by standard stellarium version, but needed by Digitalis
+	virtual PROJECTOR_TYPE getType(void) const {return FISHEYE_PROJECTOR;}
 
-	CylinderProjector(const Projector&);
-
-	virtual PROJECTOR_TYPE get_type(void) const {return FISHEYE_PROJECTOR;}
-
-	virtual void set_viewport(int x, int y, int w, int h);
+	virtual void setViewport(int x, int y, int w, int h);
 
 	// Same function but using a custom modelview matrix
 	virtual bool project_custom(const Vec3d& v, Vec3d& win, const Mat4d& mat) const;
