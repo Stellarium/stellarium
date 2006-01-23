@@ -119,7 +119,7 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
     else if(args["moon_scale"]!="") {
       stcore->MoonScale = str_to_double(args["moon_scale"]);
       if(stcore->MoonScale<0) stcore->MoonScale=1;  // negative numbers reverse drawing!
-      if (stcore->FlagMoonScaled) stcore->ssystem->get_moon()->set_sphere_scale(stcore->MoonScale);
+      if (stcore->FlagMoonScaled) stcore->ssystem->getMoon()->set_sphere_scale(stcore->MoonScale);
     }
     else if(args["sky_culture"]!="") status = stcore->setSkyCulture(args["sky_culture"]);
 //    else if(args["sky_locale"]!="") stcore->set_sky_locale(args["sky_locale"]); // Tony NOT SURE
@@ -128,7 +128,7 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
     else if(args["star_scale"]!="") {
 		float scale = str_to_double(args["star_scale"]);
 		stcore->setStarScale(scale);
-		stcore->ssystem->set_object_scale(scale);
+		stcore->setPlanetsScale(scale);
 	} 
 	else if(args["nebula_scale"]!="")
 	{
@@ -179,19 +179,20 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
       istr >> hpnum;
       stcore->selected_object = stcore->hip_stars->searchHP(hpnum);
       stcore->asterisms->setSelected((HipStar*)stcore->selected_object);
-      stcore->selected_planet=NULL;
+      stcore->ssystem->setSelected(NULL);
 	}
 	else if(args["star"]!="")
 	{
       stcore->selected_object = stcore->hip_stars->search(args["star"]);
       stcore->asterisms->setSelected((HipStar*)stcore->selected_object);
-      stcore->selected_planet=NULL;
+      stcore->setPlanetsSelected("");
     } else if(args["planet"]!=""){
-      stcore->selected_object = stcore->selected_planet = stcore->ssystem->searchByEnglishName(args["planet"]);
+      stcore->setPlanetsSelected(args["planet"]);
+      stcore->selected_object = stcore->ssystem->getSelected();
       stcore->asterisms->setSelected(NULL);
     } else if(args["nebula"]!=""){
       stcore->selected_object = stcore->nebulas->search(args["nebula"]);
-      stcore->selected_planet=NULL;
+      stcore->setPlanetsSelected("");
       stcore->asterisms->setSelected(NULL);
     } else if(args["constellation"]!=""){
 
@@ -199,7 +200,7 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 		stcore->asterisms->setSelected(args["constellation"]); 
 
 		stcore->selected_object = NULL;
-		stcore->selected_planet=NULL;
+		stcore->setPlanetsSelected("");
 
     } else if(args["constellation_star"]!=""){
 
@@ -210,7 +211,7 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 		hpnum = stcore->asterisms->getFirstSelectedHP();
 		stcore->selected_object = stcore->hip_stars->searchHP(hpnum); 	 
 		stcore->asterisms->setSelected((HipStar*)stcore->selected_object); 	 
-		stcore->selected_planet=NULL;
+		stcore->setPlanetsSelected("");
 
 		// Some stars are shared, so now force constellation
 		stcore->asterisms->setSelected(args["constellation_star"]);
@@ -229,7 +230,7 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 
   } else if (command == "deselect") {
     stcore->selected_object = NULL;
-    stcore->selected_planet = NULL;
+	stcore->setPlanetsSelected("");
     stcore->asterisms->setSelected(NULL);
 
   } else if(command == "look") {  // change direction of view
@@ -611,11 +612,11 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 			  {
 				  stcore->navigation->set_JDay(get_julian_from_sys());
 			  }
-		  if(stcore->FlagObjectTrails && stcore->ssystem) stcore->ssystem->start_trails();
-		  else  stcore->ssystem->end_trails();
+		  if(stcore->getFlagPlanetsTrails() && stcore->ssystem) stcore->startPlanetsTrails(true);
+		  else stcore->startPlanetsTrails(false);
 
-		  string temp = stcore->SkyCulture;  // fool caching in below method
-		  stcore->SkyCulture = "";
+		  string temp = stcore->skyCulture;  // fool caching in below method
+		  stcore->skyCulture = "";
 		  stcore->setSkyCulture(temp);
 		  
 		  system( ( stcore->getDataDir() + "script_loadConfig " ).c_str() );
@@ -730,19 +731,34 @@ int StelCommandInterface::set_flag(string name, string value, bool &newval, bool
 			stcore->SetDrawMode();
 		}
 		//else if(name=="use_common_names") newval = (stcore->FlagUseCommonNames = !stcore->FlagUseCommonNames);
-		else if(name=="azimuthal_grid") newval = (stcore->FlagAzimutalGrid = !stcore->FlagAzimutalGrid);
-		else if(name=="equatorial_grid") newval = (stcore->FlagEquatorialGrid = !stcore->FlagEquatorialGrid);
-		else if(name=="equator_line") newval = (stcore->FlagEquatorLine = !stcore->FlagEquatorLine);
-		else if(name=="ecliptic_line") newval = (stcore->FlagEclipticLine = !stcore->FlagEclipticLine);
-		else if(name=="meridian_line") newval = (stcore->FlagMeridianLine = !stcore->FlagMeridianLine);
+		else if(name=="azimuthal_grid") {
+		newval = !stcore->getFlagAzimutalGrid();
+		stcore->setFlagAzimutalGrid(newval);
+		}
+		else if(name=="equatorial_grid") {
+		newval = !stcore->getFlagEquatorGrid();
+		stcore->setFlagEquatorGrid(newval);
+		}
+		else if(name=="equator_line") {
+		newval = !stcore->getFlagEquatorLine();
+		stcore->setFlagEquatorLine(newval);
+		}
+		else if(name=="ecliptic_line") {
+		newval = !stcore->getFlagEclipticLine();
+		stcore->setFlagEclipticLine(newval);
+		}
+		else if(name=="meridian_line") {
+		newval = !stcore->getFlagMeridianLine();
+		 stcore->setFlagMeridianLine(newval);
+		}
 		else if(name=="cardinal_points") {
-			newval = !stcore->cardinals_points->get_flag_show();
-			stcore->cardinals_points->set_flag_show(newval);
+			newval = !stcore->cardinals_points->getFlagShow();
+			stcore->cardinals_points->setFlagShow(newval);
 		}
 		else if(name=="moon_scaled") {
 			newval = (stcore->FlagMoonScaled = !stcore->FlagMoonScaled);
-			if (newval)	stcore->ssystem->get_moon()->set_sphere_scale(stcore->MoonScale);
-			else stcore->ssystem->get_moon()->set_sphere_scale(1.);
+			if (newval)	stcore->ssystem->getMoon()->set_sphere_scale(stcore->MoonScale);
+			else stcore->ssystem->getMoon()->set_sphere_scale(1.);
 		}
 		else if(name=="landscape") newval = (stcore->FlagLandscape = !stcore->FlagLandscape);
 		else if(name=="stars") {
@@ -754,14 +770,19 @@ int StelCommandInterface::set_flag(string name, string value, bool &newval, bool
 			stcore->setFlagStarName(newval);
 		}
 		else if(name=="planets") {
-			newval = (stcore->FlagPlanets = !stcore->FlagPlanets);
-			if (!stcore->FlagPlanets) stcore->FlagPlanetsHints = 0;
+			newval = !stcore->getFlagPlanets();
+			stcore->setFlagPlanets(newval);
+			if (!stcore->getFlagPlanets()) stcore->setFlagPlanetsHints(false);
 		}
 		else if(name=="planet_names") {
-			newval = (stcore->FlagPlanetsHints = !stcore->FlagPlanetsHints);
-			if(stcore->FlagPlanetsHints) stcore->FlagPlanets = 1;  // for safety if script turns planets off
+			newval = !stcore->getFlagPlanetsHints();
+			stcore->setFlagPlanetsHints(newval);
+			if(stcore->getFlagPlanetsHints()) stcore->setFlagPlanets(true);  // for safety if script turns planets off
 		}
-		else if(name=="planet_orbits") newval = (stcore->FlagPlanetsOrbits = !stcore->FlagPlanetsOrbits);
+		else if(name=="planet_orbits") {
+		newval = !stcore->getFlagPlanetsOrbits();
+		stcore->setFlagPlanetsOrbits(newval);
+		}
 		else if(name=="nebulae") newval = (stcore->FlagNebula = !stcore->FlagNebula);
 		else if(name=="nebula_names") {
 			newval = !stcore->nebulas->get_flag_hints();
@@ -776,7 +797,11 @@ int StelCommandInterface::set_flag(string name, string value, bool &newval, bool
 		}
 		else if(name=="milky_way") newval = (stcore->FlagMilkyWay = !stcore->FlagMilkyWay);
 		else if(name=="bright_nebulae") newval = (stcore->FlagBrightNebulae = !stcore->FlagBrightNebulae);
-		else if(name=="object_trails") newval = (stcore->FlagObjectTrails = !stcore->FlagObjectTrails);
+		else if(name=="object_trails")
+		{
+		newval = !stcore->getFlagPlanetsTrails();
+		stcore->setFlagPlanetsTrails(newval);
+		}
 		else if(name=="track_object") {
 			if(stcore->navigation->get_flag_traking() || !stcore->selected_object) {
 				newval = 0;
@@ -847,29 +872,29 @@ int StelCommandInterface::set_flag(string name, string value, bool &newval, bool
 		}
 		else if(name=="chart") stcore->FlagChart = newval;
 //		else if(name=="use_common_names") stcore->FlagUseCommonNames = newval;
-		else if(name=="azimuthal_grid") stcore->FlagAzimutalGrid = newval;
-		else if(name=="equatorial_grid") stcore->FlagEquatorialGrid = newval;
-		else if(name=="equator_line") stcore->FlagEquatorLine = newval;
-		else if(name=="ecliptic_line") stcore->FlagEclipticLine = newval;
-		else if(name=="meridian_line") stcore->FlagMeridianLine = newval;
-		else if(name=="cardinal_points") stcore->cardinals_points->set_flag_show(newval);
+		else if(name=="azimuthal_grid") stcore->setFlagAzimutalGrid(newval);
+		else if(name=="equatorial_grid") stcore->setFlagEquatorGrid(newval);
+		else if(name=="equator_line") stcore->setFlagEquatorLine(newval);
+		else if(name=="ecliptic_line") stcore->setFlagEclipticLine(newval);
+		else if(name=="meridian_line") stcore->setFlagMeridianLine(newval);
+		else if(name=="cardinal_points") stcore->cardinals_points->setFlagShow(newval);
 		else if(name=="moon_scaled") {
 			if((stcore->FlagMoonScaled = newval)) 
-				stcore->ssystem->get_moon()->set_sphere_scale(stcore->MoonScale);
-			else stcore->ssystem->get_moon()->set_sphere_scale(1.);
+				stcore->ssystem->getMoon()->set_sphere_scale(stcore->MoonScale);
+			else stcore->ssystem->getMoon()->set_sphere_scale(1.);
 		}
 		else if(name=="landscape") stcore->FlagLandscape = newval;
 		else if(name=="stars") stcore->setFlagStars(newval);
 		else if(name=="star_names") stcore->setFlagStarName(newval);
 		else if(name=="planets") {
-			stcore->FlagPlanets = newval;
-			if (!stcore->FlagPlanets) stcore->FlagPlanetsHints = 0;
+			stcore->setFlagPlanets(newval);
+			if (!stcore->getFlagPlanets()) stcore->setFlagPlanetsHints(false);
 		}
 		else if(name=="planet_names") {
-			stcore->FlagPlanetsHints = newval;
-			if(stcore->FlagPlanetsHints) stcore->FlagPlanets = 1;  // for safety if script turns planets off
+			stcore->setFlagPlanetsHints(newval);
+			if(stcore->getFlagPlanetsHints()) stcore->setFlagPlanets(true);  // for safety if script turns planets off
 		}
-		else if(name=="planet_orbits") stcore->FlagPlanetsOrbits = newval;
+		else if(name=="planet_orbits") stcore->setFlagPlanetsOrbits(newval);
 		else if(name=="nebulae") stcore->FlagNebula = newval;
 		else if(name=="nebula_names") {
 			stcore->FlagNebula = 1;  // make sure visible
@@ -882,7 +907,7 @@ int StelCommandInterface::set_flag(string name, string value, bool &newval, bool
 		}
 		else if(name=="milky_way") stcore->FlagMilkyWay = newval;
 		else if(name=="bright_nebulae") stcore->FlagBrightNebulae = newval;
-		else if(name=="object_trails") stcore->FlagObjectTrails = newval;
+		else if(name=="object_trails") stcore->setFlagPlanetsTrails(newval);
 		else if(name=="track_object") {
 			if(newval && stcore->selected_object) {
 				stcore->navigation->move_to(stcore->selected_object->get_earth_equ_pos(stcore->navigation),

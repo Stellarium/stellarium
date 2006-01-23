@@ -54,13 +54,13 @@ class ScriptMgr;
 class StelUI;
 
 
-/**
- *  @brief Main class for stellarium core processing. 
- *  
- * Manage all the objects to be used in the program. 
- * This class will be the main API of the program after the currently planned 
- * reorganization of the source code. It must be documented using doxygen.
- */
+
+//!  @brief Main class for stellarium core processing. 
+//!  
+//! Manage all the objects to be used in the program. 
+//! This class will be the main API of the program after the currently planned 
+//! reorganization of the source code. It must be documented using doxygen.
+ 
 class StelCore
 {
 friend class StelUI;
@@ -124,11 +124,9 @@ public:
 	double getJDay(void) const {return navigation->get_JDay();}
 		
 
-	/** 
-	 * @brief Set the sky language and reload the sky objects names with the new translation
-	 * This function has no permanent effect on the global locale
-	 * @param newSkyLocaleName The name of the locale (e.g fr_FR) to use for sky object labels
-	 */
+	//! @brief Set the sky language and reload the sky objects names with the new translation
+	//! This function has no permanent effect on the global locale
+	//!@param newSkyLocaleName The name of the locale (e.g fr_FR) to use for sky object labels
 	void setSkyLanguage(const std::string& newSkyLocaleName);
 
 	void setObjectPointerVisibility(bool _newval) { object_pointer_visibility = _newval; }
@@ -160,89 +158,148 @@ public:
 	//! Get display flag of constellation boundaries
 	bool getFlagConstellationBoundaries(void) {return asterisms->getFlagBoundaries();}
 	
-	/** Set constellation art intensity */
+	//! Set constellation art intensity
 	void setConstellationArtIntensity(float f) {asterisms->setArtIntensity(f);}
-	/** Get constellation art intensity */
+	//! Get constellation art intensity
 	float getConstellationArtIntensity(void) const {return asterisms->getArtIntensity();}	
 	
-	/** Set constellation art intensity */
+	//! Set constellation art intensity
 	void setConstellationArtFadeDuration(float f) {asterisms->setArtFadeDuration(f);}
-	/** Get constellation art intensity */
+	//! Get constellation art intensity
 	float getConstellationArtFadeDuration(void) const {return asterisms->getArtFadeDuration();}		
 	
-	/** Set whether selected constellation is drawn alone */
+	//! Set whether selected constellation is drawn alone
 	void setFlagConstellationIsolateSelected(bool b) {asterisms->setFlagIsolateSelected(b);}
-	/** Get whether selected constellation is drawn alone */
+	//! Get whether selected constellation is drawn alone 
 	bool getFlagConstellationIsolateSelected(void) {return asterisms->getFlagIsolateSelected();}
 	
-	/** Set constellation font size */
+	//! Set constellation font size 
 	void setConstellationFontSize(float f) {asterisms->setFont(f, getDataDir() + BaseFontName);}
 	
 	// Stars methods
-	/** Set display flag for Stars */
+	//! Set display flag for Stars 
 	void setFlagStars(bool b) {hip_stars->setFlagStars(b);}
-	/** Get display flag for Stars */
+	//! Get display flag for Stars 
 	bool getFlagStars(void) const {return hip_stars->getFlagStars();}
 		
-	/** Set display flag for Star names. Also make sure that stars are on if want labels */
+	//! Set display flag for Star names. Also make sure that stars are on if want labels 
 	void setFlagStarName(bool b) {hip_stars->setFlagStarName(b);}
-	/** Get display flag for Star names */
+	//! Get display flag for Star names 
 	bool getFlagStarName(void) const {return hip_stars->getFlagStarName();}
 	
-	/** Set display flag for Star Scientific names */
+	//! Set display flag for Star Scientific names 
 	void setFlagStarSciName(bool b) {hip_stars->setFlagStarSciName(b);}
-	/** Get display flag for Star Scientific names */
+	//! Get display flag for Star Scientific names 
 	bool getFlagStarSciName(void) const {return hip_stars->getFlagStarSciName();}	
 	
-	/** Set flag for Star twinkling */
+	//! Set flag for Star twinkling 
 	void setFlagStarTwinkle(bool b) {hip_stars->setFlagStarTwinkle(b);}
-	/** Get flag for Star twinkling */
+	//! Get flag for Star twinkling 
 	bool getFlagStarTwinkle(void) const {return hip_stars->getFlagStarTwinkle();}	
 		
-	/** Set flag for displaying Star as GLpoints (faster but not so nice) */
+	//! Set flag for displaying Star as GLpoints (faster but not so nice) 
 	void setFlagPointStar(bool b) {hip_stars->setFlagPointStar(b);}
-	/** Get flag for displaying Star as GLpoints (faster but not so nice) */
+	//! Get flag for displaying Star as GLpoints (faster but not so nice) 
 	bool getFlagPointStar(void) const {return hip_stars->getFlagPointStar();}	
 	
-	/** Set maximum magnitude at which stars names are displayed */
+	//! Set maximum magnitude at which stars names are displayed 
 	void setMaxMagStarName(float f) {hip_stars->setMaxMagStarName(f);}
-	/** Get maximum magnitude at which stars names are displayed */
+	//! Get maximum magnitude at which stars names are displayed 
 	float getMaxMagStarName(void) const {return hip_stars->getMaxMagStarName();}	
 	
-	/** Set maximum magnitude at which stars scientific names are displayed */
+	//! Set maximum magnitude at which stars scientific names are displayed 
 	void setMaxMagStarSciName(float f) {hip_stars->setMaxMagStarSciName(f);}
-	/** Get maximum magnitude at which stars scientific names are displayed */
+	//! Get maximum magnitude at which stars scientific names are displayed 
 	float getMaxMagStarSciName(void) const {return hip_stars->getMaxMagStarSciName();}	
 		
-	/** Set base stars display scaling factor */
+	//! Set base stars display scaling factor 
 	void setStarScale(float f) {hip_stars->setStarScale(f);}
-	/** Get base stars display scaling factor */
+	//! Get base stars display scaling factor 
 	float getStarScale(void) const {return hip_stars->getStarScale();}			
 	
-	/** Set stars display scaling factor wrt magnitude */
+	//! Set stars display scaling factor wrt magnitude 
 	void setStarMagScale(float f) {hip_stars->setStarMagScale(f);}
-	/** Get base stars display scaling factor wrt magnitude */
+	//! Get base stars display scaling factor wrt magnitude 
 	float getStarMagScale(void) const {return hip_stars->getStarMagScale();}
 
-	/** Set stars twinkle amount */
+	//! Set stars twinkle amount 
 	void setStarTwinkleAmount(float f) {hip_stars->setStarTwinkleAmount(f);}
-	/** Get stars twinkle amount */
+	//! Get stars twinkle amount 
 	float getStarTwinkleAmount(void) const {return hip_stars->getStarTwinkleAmount();}
 	
-	/** Set stars limiting display magnitude */
+	//! Set stars limiting display magnitude 
 	void setStarLimitingMag(float f) {hip_stars->setStarLimitingMag(f);}
-	/** Get stars limiting display magnitude */
+	//! Get stars limiting display magnitude 
 	float getStarLimitingMag(void) const {return hip_stars->getStarLimitingMag();}
 	
+	// Planets flags
+	//! Set flag for displaying Planets
+	void setFlagPlanets(bool b) {ssystem->setFlagPlanets(b);}
+	//! Get flag for displaying Planets
+	bool getFlagPlanets(void) const {return ssystem->getFlagPlanets();}		
+	
+	//! Set flag for displaying Planets Trails
+	void setFlagPlanetsTrails(bool b) {ssystem->setFlagTrails(b);}
+	//! Get flag for displaying Planets Trails
+	bool getFlagPlanetsTrails(void) const {return ssystem->getFlagTrails();}	
+	
+	//! Set flag for displaying Planets Hints
+	void setFlagPlanetsHints(bool b) {ssystem->setFlagHints(b);}
+	//! Get flag for displaying Planets Hints
+	bool getFlagPlanetsHints(void) const {return ssystem->getFlagHints();}	
+		
+	//! Set flag for displaying Planets Orbits
+	void setFlagPlanetsOrbits(bool b) {ssystem->setFlagOrbits(b);}
+	//! Get flag for displaying Planets Orbits
+	bool getFlagPlanetsOrbits(void) const {return ssystem->getFlagOrbits();}			
+	
+	//! Start/stop displaying planets Trails
+	void startPlanetsTrails(bool b) {ssystem->startTrails(b);}
+
+	//! Set base planets display scaling factor 
+	void setPlanetsScale(float f) {ssystem->setScale(f);}
+	//! Get base planets display scaling factor 
+	float getPlanetsScale(void) const {return ssystem->getScale();}	
+	
+	//! Set selected planets by englishName
+	//! @param englishName The planet name or "" to select no planet
+	void setPlanetsSelected(const string& englishName) {ssystem->setSelected(englishName);}
+	
+	// Grid and lines
+	//! Set flag for displaying Azimutal Grid
+	void setFlagAzimutalGrid(bool b) {azi_grid->setFlagshow(b);}
+	//! Get flag for displaying Azimutal Grid
+	bool getFlagAzimutalGrid(void) const {return azi_grid->getFlagshow();}
+
+	//! Set flag for displaying Equatorial Grid
+	void setFlagEquatorGrid(bool b) {equ_grid->setFlagshow(b);}
+	//! Get flag for displaying Equatorial Grid
+	bool getFlagEquatorGrid(void) const {return equ_grid->getFlagshow();}
+	
+	//! Set flag for displaying Equatorial Line
+	void setFlagEquatorLine(bool b) {equator_line->setFlagshow(b);}
+	//! Get flag for displaying Equatorial Line
+	bool getFlagEquatorLine(void) const {return equator_line->getFlagshow();}	
+	
+	//! Set flag for displaying Ecliptic Line
+	void setFlagEclipticLine(bool b) {ecliptic_line->setFlagshow(b);}
+	//! Get flag for displaying Ecliptic Line
+	bool getFlagEclipticLine(void) const {return ecliptic_line->getFlagshow();}	
+		
+	//! Set flag for displaying Meridian Line
+	void setFlagMeridianLine(bool b) {meridian_line->setFlagshow(b);}
+	//! Get flag for displaying Meridian Line
+	bool getFlagMeridianLine(void) const {return meridian_line->getFlagshow();}	
+	
 	// Projection	
-	/** Set the horizontal viewport offset in pixels */
+	//! Set the horizontal viewport offset in pixels 
 	void setViewportHorizontalOffset(int hoff) const {projection->setViewportHorizontalOffset(hoff);}	
-	/** Get the horizontal viewport offset in pixels */
+	//! Get the horizontal viewport offset in pixels 
 	int getViewportHorizontalOffset(void) const {return projection->getViewportHorizontalOffset();}
 	
-	/** Set the vertical viewport offset in pixels */
+	//! Set the vertical viewport offset in pixels 
 	void setViewportVerticalOffset(int voff) const {projection->setViewportVerticalOffset(voff);}
-	/** Get the vertical viewport offset in pixels */
+	//! Get the vertical viewport offset in pixels 
 	int getViewportVerticalOffset(void) const {return projection->getViewportVerticalOffset();}
 	
 	//! Set the viewport type
@@ -254,6 +311,9 @@ public:
 	void setProjectionType(Projector::PROJECTOR_TYPE pType);
 	//! Get the projection type
 	Projector::PROJECTOR_TYPE getProjectionType(void) {return projection->getType();}
+	
+	const string getDataDir(void) const {return dataRoot + "/data/";}
+	const string& getDataRoot() const {return dataRoot;}
 	
 	////////////////////////////////////////////////
 	// TODO move to STELAPP
@@ -279,9 +339,7 @@ public:
 	// Handle key press and release
 	int handleKeys(Uint16 key, s_gui::S_GUI_VALUE state);
 
-	const string getDataDir(void) const {return dataRoot + "/data/";}
 	const string getConfigDir(void) const {return configDir;}
-	const string& getDataRoot() const {return dataRoot;}
 	
 	const float getMaxFPS(void) const {return maxfps;}
 
@@ -295,13 +353,11 @@ public:
 
 	void playStartupScript();
 
-	/**
-	 * @brief Set the application language
-	 * This apply to GUI, console messages etc..
-	 * This function has no permanent effect on the global locale
-	 * @param newAppLocaleName The name of the locale (e.g fr_FR) to use for GUI, TUI and console messages etc..
-	 */
-	void setAppLanguage(const std::string& newAppLocaleName);
+	//! @brief Set the application language
+	//! This applies to GUI, console messages etc..
+	//! This function has no permanent effect on the global locale
+	//! @param newAppLocaleName The name of the language (e.g fr) to use for GUI, TUI and console messages etc..
+	void setAppLanguage(const std::string& newAppLangName);
 	
 private:
 	
@@ -309,8 +365,13 @@ private:
 
 	wstring get_cursor_pos(int x, int y);
 
-	static Translator skyTranslator;			// The translator used for astronomical object naming
 	string dataRoot;
+	string localeDir;
+	
+	// The translator used for astronomical object naming
+	Translator skyTranslator;	
+	// the culture used for constellations, etc.. It is also the name of the directory
+	string skyCulture;
 	
 	// Main elements of the program
 	Navigator * navigation;				// Manage all navigation parameters, coordinate transformations etc..
@@ -333,18 +394,33 @@ private:
 	Landscape * landscape;				// The landscape ie the fog, the ground and "decor"
 	ToneReproductor * tone_converter;	// Tones conversion between stellarium world and display device
 
-	Planet* selected_planet;
-
-	// Projector
-	int DistortionFunction;
+	// Astro
+    bool FlagNebula;
+    bool FlagNebulaLongName;
+    float MaxMagNebulaName;
+    bool FlagNebulaCircle;
+    bool FlagMilkyWay;
+    float MilkyWayIntensity;
+    bool FlagBrightNebulae;
 	
-		
+	// Landscape
+	bool FlagLandscape;
+    bool FlagFog;
+    bool FlagAtmosphere;
+	float sky_brightness;
+	float AtmosphereFadeDuration;
+
+	// Viewing
+	bool FlagGravityLabels;
+	float NebulaScale;
+	float MoonScale;
+	bool FlagMoonScaled;
+
 	///////////////////////////////////////////////////////////////////////////////
 	// Below this limit, all the attributes will end up in the stel_app class
 	///////////////////////////////////////////////////////////////////////////////
 	//Files location
 	string configDir;
-	string localeDir;
 	
 	void loadConfigFrom(const string& confFile);
 	void saveConfigTo(const string& confFile);
@@ -356,10 +432,6 @@ private:
 	int Fullscreen;
 
 	string config_file;
-	
-	// localization
-	string SkyCulture;  // the culture used for constellations
-
 	// Script related
 	string SelectedScript;  // script filename (without directory) selected in a UI to run when exit UI
 	string SelectedScriptDirectory;  // script directory for same
@@ -392,14 +464,6 @@ private:
 
 	float BaseCFontSize;
 	string BaseCFontName;
-	
-	float MapFontSize;
-	float StarFontSize;
-	float PlanetFontSize;
-	float NebulaFontSize;
-	float GridFontSize;
-	float CardinalsFontSize;
-	float LoadingBarFontSize;
 
 	Vec3f AzimuthalColor[3];
 	Vec3f EquatorialColor[3];
@@ -429,36 +493,7 @@ private:
 	bool FlagShowTuiDateTime;
 	bool FlagShowTuiShortObjInfo;
 
-	// Astro
-    bool FlagPlanets;
-    bool FlagPlanetsHints;
-    bool FlagPlanetsOrbits;
-    bool FlagObjectTrails;
-    bool FlagNebula;
-    bool FlagNebulaLongName;
-    float MaxMagNebulaName;
-    bool FlagNebulaCircle;
-    bool FlagMilkyWay;
-    float MilkyWayIntensity;
-    bool FlagBrightNebulae;
-	
-	// Landscape
-	bool FlagLandscape;
-    bool FlagFog;
-    bool FlagAtmosphere;
-	float sky_brightness;
-	float AtmosphereFadeDuration;
 
-	// Viewing
-    bool FlagAzimutalGrid;
-    bool FlagEquatorialGrid;
-    bool FlagEquatorLine;
-    bool FlagEclipticLine;
-    bool FlagMeridianLine;
-	bool FlagGravityLabels;
-	float NebulaScale;
-	float MoonScale;
-	bool FlagMoonScaled;
 
 	//bool FlagUseCommonNames;
 	bool FlagChart;
