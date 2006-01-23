@@ -116,12 +116,12 @@ public:
 	float compute_magnitude(const Navigator * nav) const;
 
 	// Draw the Planet, if hint_ON is != 0 draw a circle and the name as well
-	void draw(int hint_ON, Projector* prj, const Navigator* nav, const ToneReproductor* eye, 
-		  int flag_point, int flag_trails, bool stencil);
+	void draw(Projector* prj, const Navigator* nav, const ToneReproductor* eye, 
+		  int flag_point, bool stencil);
 
 	// Set the orbital elements
 	void set_rotation_elements(float _period, float _offset, double _epoch,
-		float _obliquity, float _ascendingNode, float _precessionRate, double _sidereal_period);
+	float _obliquity, float _ascendingNode, float _precessionRate, double _sidereal_period);
     double getRotAscendingnode(void) const {return re.ascendingNode;}
     double getRotObliquity(void) const {return re.obliquity;}
 
@@ -158,7 +158,10 @@ public:
 	void set_halo_size(float s) {big_halo_size = s;}
 
 	static void set_font(s_font* f) {planet_name_font = f;}
-	static void set_object_scale(float s) {object_scale = s;}
+	
+	static void setScale(float s) {object_scale = s;}
+	static float getScale(void) {return object_scale;}
+	
 	static void set_gravity_label_flag(bool gl) {gravity_label = gl;}
 	static void set_label_color(const Vec3f& lc) {label_color = lc;}
 	static void set_orbit_color(const Vec3f& oc) {orbit_color = oc;}
@@ -169,14 +172,24 @@ public:
 	void update_trail(const Navigator* nav);
 	void draw_trail(const Navigator * nav, const Projector* prj);
 	static void set_trail_color(const Vec3f& c) { trail_color = c; }
-	void start_trail(void);
-	void end_trail(void);
+	
+	//! Start/stop accumulating new trail data (clear old data)
+	void startTrail(bool b);
 
 	void update(int delta_time);
-	void show_hint(bool b){hint_fader = b;}
-	void show_orbit(bool b){orbit_fader = b;}
-	void show_trail(bool b){trail_fader = b;}
-
+	
+	void setFlagHints(bool b){hint_fader = b;}
+	bool getFlagHints(void) const {return hint_fader;}
+	
+	void setFlagOrbits(bool b){orbit_fader = b;}
+	bool getFlagOrbits(void) const {return orbit_fader;}	
+	
+	void setFlagTrail(bool b){trail_fader = b;}
+	bool getFlagTrail(void) const {return trail_fader;}
+	
+	static void setflagShow(bool b) {Planet::flagShow = b;}
+	static bool getflagShow(void) {return Planet::flagShow;}
+	
 protected:
 	// Return the radius of a circle containing the object on screen
 	float get_on_screen_size(const Projector* prj, const Navigator * nav);
@@ -252,7 +265,11 @@ protected:
 	double last_trailJD;
 	bool first_point;  // if need to take first point of trail still
 
-	LinearFader hint_fader, orbit_fader, trail_fader;
+	static LinearFader flagShow;
+	
+	LinearFader hint_fader;
+	LinearFader orbit_fader;
+	LinearFader trail_fader;
 
 };
 

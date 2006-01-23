@@ -37,27 +37,26 @@ public:
 	void update(int delta_time, Navigator* nav);
 	
 	// Draw all the elements of the solar system
-    void draw(Planet *selected, bool hint_ON, Projector * du, const Navigator * nav, 
+    void draw(Projector * du, const Navigator * nav, 
 			  const ToneReproductor* eye, bool _gravity_label, 
-			  bool flag_point, bool flag_orbits, bool flag_trails);
+			  bool flag_point);
 	
 	// Load the bodies data from a file
 	void load(const string& planetfile);
-	void load_names(const string& names_file);
 
 	//! @brief Update i18 names from english names according to current locale
 	//! The translation is done using gettext with translated strings defined in translations.h
 	void SolarSystem::translateNames(Translator& trans);
 
-	void set_font(float font_size, const string& font_name);
-	void set_label_color(const Vec3f& c) {Planet::set_label_color(c);}
-	void set_orbit_color(const Vec3f& c) {Planet::set_orbit_color(c);}
+	void setFont(float font_size, const string& font_name);
+	void setLabelColor(const Vec3f& c) {Planet::set_label_color(c);}
+	void setOrbitColor(const Vec3f& c) {Planet::set_orbit_color(c);}
   
 	// Compute the position for every elements of the solar system.
-	void compute_positions(double date);
+	void computePositions(double date);
 
 	// Compute the transformation matrix for every elements of the solar system.
-    void compute_trans_matrices(double date);
+    void computeTransMatrices(double date);
 
 	// Search if any Planet is close to position given in earth equatorial position.
 	Planet* search(Vec3d, const Navigator * nav, const Projector * prj);
@@ -65,23 +64,61 @@ public:
 	// Return a stl vector containing the planets located inside the lim_fov circle around position v
 	vector<StelObject*> search_around(Vec3d v, double lim_fov, const Navigator * nav, const Projector * prj);
 
+	//! Return the matching planet pointer if exists or NULL
 	Planet* searchByEnglishName(string planetEnglishName);
+	
+	//! Return the matching planet pointer if exists or NULL
 	Planet* searchByNamesI18(wstring planetNameI18);
-	Planet* get_sun(void) {return sun;}
-	Planet* get_earth(void) {return earth;}
-	Planet* get_moon(void) {return moon;}
+	
+	Planet* getSun(void) {return sun;}
+	Planet* getEarth(void) {return earth;}
+	Planet* getMoon(void) {return moon;}
 
-	void start_trails(void);
-	void end_trails(void);
-	void set_trail_color(const Vec3f& c)  {Planet::set_trail_color(c);}
-	void update_trails(const Navigator* nav);
-	void set_object_scale(float scale);
+	//! Activate/Deactivate planets display
+	void setFlagPlanets(bool b) {Planet::setflagShow(b);}
+	bool getFlagPlanets(void) {return Planet::getflagShow();}
 
+	//! Activate/Deactivate planets trails display
+	void setFlagTrails(bool b);
+	bool getFlagTrails(void);
+	
+	//! Activate/Deactivate planets hints display
+	void setFlagHints(bool b);
+	bool getFlagHints(void);	
+	
+	//! Activate/Deactivate planets hints display
+	void setFlagOrbits(bool b);
+	bool getFlagOrbits(void);	
+	
+	//! Start/stop accumulating new trail data (clear old data)
+	void startTrails(bool b);
+	
+	void setTrailColor(const Vec3f& c)  {Planet::set_trail_color(c);}
+	void updateTrails(const Navigator* nav);
+	
+	//! Set/Get base planets display scaling factor 
+	void setScale(float scale) {Planet::setScale(scale);}
+	float getScale(void) const {return Planet::getScale();};
+	
+	//! Get list of all the translated planets name
 	vector<wstring> getNamesI18(void);
+	
+	//! Set selected planet by english name or "" to select none
+	void setSelected(const string& englishName) {setSelected(searchByEnglishName(englishName));}
+	
+	//! Set selected object from its pointer
+	void setSelected(Planet * p);
+	
+	//! Get selected object's pointer
+	Planet* getSelected(void) const {return selected;}
+	
 private:
 	Planet* sun;
 	Planet* moon;
 	Planet* earth;
+	
+	//! The currently selected planet
+	Planet* selected;
 
 	// solar system related settings
 	float object_scale;  // should be kept synchronized with star scale...

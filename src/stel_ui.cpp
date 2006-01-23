@@ -506,10 +506,10 @@ void StelUI::cb(void)
 	core->setFlagConstellationLines(bt_flag_constellation_draw->getState());
 	core->setFlagConstellationNames(bt_flag_constellation_name->getState());
 	core->setFlagConstellationArt(bt_flag_constellation_art->getState());
-	core->FlagAzimutalGrid 		= bt_flag_azimuth_grid->getState();
-	core->FlagEquatorialGrid 	= bt_flag_equator_grid->getState();
+	core->setFlagAzimutalGrid(bt_flag_azimuth_grid->getState());
+	core->setFlagEquatorGrid(bt_flag_equator_grid->getState());
 	core->FlagLandscape	 		= bt_flag_ground->getState();
-	core->cardinals_points->set_flag_show(bt_flag_cardinals->getState());
+	core->cardinals_points->setFlagShow(bt_flag_cardinals->getState());
 	core->FlagAtmosphere 		= bt_flag_atmosphere->getState();
 	core->nebulas->set_flag_hints( bt_flag_nebula_name->getState() );
 	core->FlagHelp 				= bt_flag_help->getState();
@@ -887,7 +887,7 @@ int StelUI::handle_clic(Uint16 x, Uint16 y, S_GUI_VALUE button, S_GUI_VALUE stat
 
 				if (core->selected_object->get_type()==StelObject::STEL_OBJECT_PLANET)
 				{
-					core->selected_planet=(Planet*)core->selected_object;
+					core->ssystem->setSelected((Planet*)core->selected_object);
 
 					// potentially record this action
 					core->scripts->record_command("select planet " + ((Planet *)core->selected_object)->getEnglishName());
@@ -895,7 +895,7 @@ int StelUI::handle_clic(Uint16 x, Uint16 y, S_GUI_VALUE button, S_GUI_VALUE stat
 				}
 				else
 				{
-					core->selected_planet=NULL;
+					core->ssystem->setSelected(NULL);
 				}
 
 				if (core->selected_object->get_type()==StelObject::STEL_OBJECT_NEBULA)
@@ -910,7 +910,7 @@ int StelUI::handle_clic(Uint16 x, Uint16 y, S_GUI_VALUE button, S_GUI_VALUE stat
 			else
 			{
 				core->asterisms->setSelected(NULL);
-				core->selected_planet=NULL;
+				core->ssystem->setSelected(NULL);
 			}
 		}
 	}
@@ -1103,11 +1103,11 @@ int StelUI::handle_keys(Uint16 key, S_GUI_VALUE state)
 		}
 		if(key==SDLK_p)
 		{
-			if(!core->FlagPlanetsHints)
+			if(!core->getFlagPlanetsHints())
 			{
 				core->commander->execute_command("flag planet_names on");
 			}
-			else if( !core->FlagPlanetsOrbits)
+			else if( !core->getFlagPlanetsOrbits())
 			{
 				core->commander->execute_command("flag planet_orbits on");
 			}
@@ -1119,8 +1119,8 @@ int StelUI::handle_keys(Uint16 key, S_GUI_VALUE state)
 		}
 		if(key==SDLK_v) core->commander->execute_command( "flag constellation_names toggle");
 		if(key==SDLK_z) {
-			if(!core->FlagMeridianLine) {
-				if(core->FlagAzimutalGrid) core->commander->execute_command( "flag azimuthal_grid 0");
+			if(!core->getFlagMeridianLine()) {
+				if(core->getFlagAzimutalGrid()) core->commander->execute_command( "flag azimuthal_grid 0");
 				else core->commander->execute_command( "flag meridian_line 1");
 			} else {
 				core->commander->execute_command( "flag meridian_line 0");
@@ -1173,19 +1173,19 @@ int StelUI::handle_keys(Uint16 key, S_GUI_VALUE state)
 		}
 		if(key==SDLK_COMMA || key==SDLK_4)
 		{
-			if(!core->FlagEclipticLine)
+			if(!core->getFlagEclipticLine())
 			{
 				core->commander->execute_command( "flag ecliptic_line on");
 			}
-			else if( !core->FlagObjectTrails)
+			else if( !core->getFlagPlanetsTrails())
 			{
 				core->commander->execute_command( "flag object_trails on");
-				core->ssystem->start_trails();
+				core->startPlanetsTrails(true);
 			}
 			else
 			{
 				core->commander->execute_command( "flag object_trails off");
-				core->ssystem->end_trails();
+				core->startPlanetsTrails(false);
 				core->commander->execute_command( "flag ecliptic_line off");
 			}
 		}
@@ -1303,10 +1303,10 @@ void StelUI::gui_update_widgets(int delta_time)
 	bt_flag_constellation_draw->setState(core->getFlagConstellationLines());
 	bt_flag_constellation_name->setState(core->getFlagConstellationNames());
 	bt_flag_constellation_art->setState(core->getFlagConstellationArt());
-	bt_flag_azimuth_grid->setState(core->FlagAzimutalGrid);
-	bt_flag_equator_grid->setState(core->FlagEquatorialGrid);
+	bt_flag_azimuth_grid->setState(core->getFlagAzimutalGrid());
+	bt_flag_equator_grid->setState(core->getFlagEquatorGrid());
 	bt_flag_ground->setState(core->FlagLandscape);
-	bt_flag_cardinals->setState(core->cardinals_points->get_flag_show());
+	bt_flag_cardinals->setState(core->cardinals_points->getFlagShow());
 	bt_flag_atmosphere->setState(core->FlagAtmosphere);
 	bt_flag_nebula_name->setState(core->nebulas->get_flag_hints());
 	bt_flag_help->setState(help_win->getVisible());
