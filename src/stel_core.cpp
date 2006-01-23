@@ -23,24 +23,23 @@
 #include "stellastro.h"
 #include "stel_utility.h"
 
-Translator StelCore::skyTranslator(APP_NAME, LOCALEDIR, "");
-
-StelCore::StelCore(const string& CDIR, const string& LDIR, const string& DATA_ROOT) : 
-	projection(NULL), selected_object(NULL), hip_stars(NULL),
-	nebulas(NULL), ssystem(NULL), milky_way(NULL), screen_W(800), screen_H(600), bppMode(16), Fullscreen(0),
-	FlagHelp(false), FlagInfos(false), FlagConfig(false), FlagSearch(false), FlagShowTuiMenu(0), 
-	frame(0), timefr(0), timeBase(0), fps(0), maxfps(10000.f), deltaFov(0.), deltaAlt(0.), deltaAz(0.),
-	move_speed(0.00025), FlagTimePause(0), is_mouse_moving_horiz(false), is_mouse_moving_vert(false)
-{	
+StelCore::StelCore(const string& CDIR, const string& LDIR, const string& DATA_ROOT) :
+		skyTranslator(APP_NAME, LOCALEDIR, ""),
+		projection(NULL), selected_object(NULL), hip_stars(NULL),
+		nebulas(NULL), ssystem(NULL), milky_way(NULL), screen_W(800), screen_H(600), bppMode(16), Fullscreen(0),
+		FlagHelp(false), FlagInfos(false), FlagConfig(false), FlagSearch(false), FlagShowTuiMenu(0),
+		frame(0), timefr(0), timeBase(0), fps(0), maxfps(10000.f), deltaFov(0.), deltaAlt(0.), deltaAz(0.),
+		move_speed(0.00025), FlagTimePause(0), is_mouse_moving_horiz(false), is_mouse_moving_vert(false)
+{
 	configDir = CDIR;
 	localeDir = LDIR;
 	dataRoot = DATA_ROOT;
-	
+
 	SelectedScript = SelectedScriptDirectory = "";
-	
+
 	projection = new Projector(800, 600, 60);
-	tone_converter = new ToneReproductor();		
-	atmosphere = new Atmosphere();	
+	tone_converter = new ToneReproductor();
+	atmosphere = new Atmosphere();
 	hip_stars = new HipStarMgr();
 	asterisms = new ConstellationMgr(hip_stars);
 	observatory = new Observator();
@@ -55,7 +54,7 @@ StelCore::StelCore(const string& CDIR, const string& LDIR, const string& DATA_RO
 	meridian_line = new SkyLine(SkyLine::MERIDIAN, 1, 36);
 	cardinals_points = new Cardinals();
 	skyloc = new SkyLocalizer(getDataDir());
-	
+
 	ui = new StelUI(this);
 	commander = new StelCommandInterface(this);
 	scripts = new ScriptMgr(commander, getDataDir());
@@ -95,7 +94,7 @@ StelCore::~StelCore()
 	delete commander;
 	delete script_images;
 
-	StelObject::delete_textures(); // Unload the pointer textures 
+	StelObject::delete_textures(); // Unload the pointer textures
 }
 
 void StelCore::init(void)
@@ -103,16 +102,9 @@ void StelCore::init(void)
 	// Warning: These values are not overriden by the config!
 	BaseCFontSize = 12.5;
 	BaseCFontName = getDataDir() + "DejaVuSansMono-Roman.ttf";
-	MapFontSize = 9.5f;
-	StarFontSize = 12.f;
-	PlanetFontSize = 14.f;
-	NebulaFontSize = 12.0f;
-	GridFontSize = 12.f;
-	CardinalsFontSize = 30.f;
-	LoadingBarFontSize = 12.f;
-	
+
 	// glEnable(GL_LINE_SMOOTH);
-	
+
 	// Set textures directory and suffix
 	s_texture::set_texDir(getDataRoot() + "/textures/");
 
@@ -124,40 +116,40 @@ void StelCore::init(void)
 	navigation->set_local_vision(InitViewPos);
 
 	// Load hipparcos stars & names
-	LoadingBar lb(projection, LoadingBarFontSize, getDataDir() + BaseFontName, "logo24bits.png", screen_W, screen_H);
+	LoadingBar lb(projection, 12., getDataDir() + BaseFontName, "logo24bits.png", screen_W, screen_H);
 	hip_stars->init(
-		StarFontSize, getDataDir() + BaseFontName, 
-		getDataDir() + "hipparcos.fab",
-		getDataDir() + "star_names.fab",
-		getDataDir() + "name.fab",
-		lb);
-	
+	    12.f, getDataDir() + BaseFontName,
+	    getDataDir() + "hipparcos.fab",
+	    getDataDir() + "star_names.fab",
+	    getDataDir() + "name.fab",
+	    lb);
+
 	// Init nebulas
 	nebulas->set_label_color(NebulaLabelColor[draw_mode]);
 	nebulas->set_circle_color(NebulaCircleColor[draw_mode]);
 	nebulas->set_nebula_scale(NebulaScale);
-	nebulas->read(NebulaFontSize, getDataDir() + BaseFontName, getDataDir() + "messier.fab", lb);
-		
+	nebulas->read(12., getDataDir() + BaseFontName, getDataDir() + "messier.fab", lb);
+
 	// Init stars
 	hip_stars->set_label_color(StarLabelColor[draw_mode]);
 	hip_stars->set_circle_color(StarCircleColor[draw_mode]);
 
 	// Init the solar system
 	ssystem->load(getDataDir() + "ssystem.ini");
-	ssystem->set_label_color(PlanetNamesColor[draw_mode]);
-	ssystem->set_orbit_color(PlanetOrbitsColor[draw_mode]);
-	ssystem->set_font(PlanetFontSize, getDataDir() + BaseFontName);
-	ssystem->set_object_scale(getStarScale());
-	ssystem->set_trail_color(ObjectTrailsColor[draw_mode]);
-	if(FlagObjectTrails) ssystem->start_trails();
+	ssystem->setLabelColor(PlanetNamesColor[draw_mode]);
+	ssystem->setOrbitColor(PlanetOrbitsColor[draw_mode]);
+	ssystem->setFont(14.f, getDataDir() + BaseFontName);
+	setPlanetsScale(getStarScale());
+	ssystem->setTrailColor(ObjectTrailsColor[draw_mode]);
+
 
 	atmosphere->set_fade_duration(AtmosphereFadeDuration);
 
 	// Init grids, lines and cardinal points
-	equ_grid->set_font(GridFontSize, getDataDir() + BaseFontName);
+	equ_grid->set_font(12., getDataDir() + BaseFontName);
 	equ_grid->set_color(EquatorialColor[draw_mode]);
 
-	azi_grid->set_font(GridFontSize, getDataDir() + BaseFontName);
+	azi_grid->set_font(12., getDataDir() + BaseFontName);
 	azi_grid->set_color(AzimuthalColor[draw_mode]);
 
 	equator_line->set_color(EquatorColor[draw_mode]);
@@ -169,7 +161,7 @@ void StelCore::init(void)
 	meridian_line->set_color(AzimuthalColor[draw_mode]);
 	meridian_line->set_font(12, getDataDir() + BaseFontName);
 
-	cardinals_points->set_font(CardinalsFontSize, getDataDir() + BaseFontName);
+	cardinals_points->set_font(30., getDataDir() + BaseFontName);
 	cardinals_points->set_color(CardinalColor[draw_mode]);
 
 	// Init milky way
@@ -178,7 +170,7 @@ void StelCore::init(void)
 
 	milky_way->set_color(MilkyWayColor[draw_mode]);
 	milky_way->set_intensity(MilkyWayIntensity);
-		
+
 	meteors = new MeteorMgr(10, 60);
 
 	landscape = Landscape::create_from_file(getDataDir() + "landscapes.ini", observatory->get_landscape_name());
@@ -190,7 +182,7 @@ void StelCore::init(void)
 	ui->init();
 	ui->setTitleObservatoryName(ui->getTitleWithAltitude());
 	ui->init_tui();
-	
+
 	if (!FlagNight) ui->desktop->setColorScheme(GuiBaseColor, GuiTextColor);
 	else ui->desktop->setColorScheme(GuiBaseColorr, GuiTextColorr);
 
@@ -200,27 +192,27 @@ void StelCore::init(void)
 	tone_converter->set_world_adaptation_luminance(3.75f + atmosphere->get_intensity()*40000.f);
 
 	// Set the default moon scaling
-	if (FlagMoonScaled) ssystem->get_moon()->set_sphere_scale(MoonScale);
+	if (FlagMoonScaled) ssystem->getMoon()->set_sphere_scale(MoonScale);
 
 	// Compute planets data and init viewing position
 	// Position of sun and all the satellites (ie planets)
-	ssystem->compute_positions(navigation->get_JDay());
+	ssystem->computePositions(navigation->get_JDay());
 	// Matrix for sun and all the satellites (ie planets)
-	ssystem->compute_trans_matrices(navigation->get_JDay());
+	ssystem->computeTransMatrices(navigation->get_JDay());
 
 	// Compute transform matrices between coordinates systems
-	navigation->update_transform_matrices((ssystem->get_earth())->get_ecliptic_pos());
+	navigation->update_transform_matrices((ssystem->getEarth())->get_ecliptic_pos());
 	navigation->update_model_view_mat();
-	
+
 	// Load constellations
-	string tmpstring=SkyCulture; SkyCulture=""; // Temporary trick
+	string tmpstring=skyCulture; skyCulture=""; // Temporary trick
 	setSkyCulture(tmpstring);
-	
+
 	asterisms->setLineColor(ConstLinesColor[draw_mode]);
 	asterisms->setBoundaryColor(ConstBoundaryColor[draw_mode]);
 	asterisms->setLabelColor(ConstNamesColor[draw_mode]);
-	
-	selected_planet=NULL;	// Fix a bug on macosX! Thanks Fumio!	
+
+	setPlanetsSelected("");	// Fix a bug on macosX! Thanks Fumio!
 }
 
 void StelCore::quit(void)
@@ -238,13 +230,13 @@ void StelCore::quit(void)
 void StelCore::update(int delta_time)
 {
 	++frame;
-    timefr+=delta_time;
-    if (timefr-timeBase > 1000)
-    {
+	timefr+=delta_time;
+	if (timefr-timeBase > 1000)
+	{
 		fps=frame*1000.0/(timefr-timeBase);				// Calc the FPS rate
-        frame = 0;
-        timeBase+=1000;
-    }
+		frame = 0;
+		timeBase+=1000;
+	}
 
 	// change time rate if needed to fast forward scripts
 	delta_time *= time_multiplier;
@@ -253,24 +245,21 @@ void StelCore::update(int delta_time)
 	// keep audio position updated if changing time multiplier
 	if(!scripts->is_paused()) commander->update(delta_time);
 
-    // run command from a running script
-    scripts->update(delta_time);
+	// run command from a running script
+	scripts->update(delta_time);
 
-    // Update the position of observation and time etc...
-    observatory->update(delta_time);
-    navigation->update_time(delta_time);
-
-	// TODO: for efficiency, if FlagPlanets is false don't run calculations for any 
-	// except sun, earth, moon (affect atmosphere)
+	// Update the position of observation and time etc...
+	observatory->update(delta_time);
+	navigation->update_time(delta_time);
 
 	// Position of sun and all the satellites (ie planets)
-	ssystem->compute_positions(navigation->get_JDay());
+	ssystem->computePositions(navigation->get_JDay());
 	// Matrix for sun and all the satellites (ie planets)
-	ssystem->compute_trans_matrices(navigation->get_JDay());
+	ssystem->computeTransMatrices(navigation->get_JDay());
 
 
 	// Transform matrices between coordinates systems
-	navigation->update_transform_matrices((ssystem->get_earth())->get_ecliptic_pos());
+	navigation->update_transform_matrices((ssystem->getEarth())->get_ecliptic_pos());
 	// Direction of vision
 	navigation->update_vision_vector(delta_time, selected_object);
 	// Field of view
@@ -304,24 +293,27 @@ void StelCore::update(int delta_time)
 
 
 	// Compute the moon position in local coordinate
-	temp = ssystem->get_moon()->get_heliocentric_ecliptic_pos();
+	temp = ssystem->getMoon()->get_heliocentric_ecliptic_pos();
 	Vec3d moonPos = navigation->helio_to_local(temp);
 
-	// Compute the atmosphere color and intensity 
+	// Compute the atmosphere color and intensity
 	atmosphere->compute_color(navigation->get_JDay(), sunPos, moonPos,
-				  ssystem->get_moon()->get_phase(ssystem->get_earth()->get_heliocentric_ecliptic_pos()),
-				  tone_converter, projection, observatory->get_latitude(), observatory->get_altitude(),
-				  15.f, 40.f);	// Temperature = 15c, relative humidity = 40%
+	                          ssystem->getMoon()->get_phase(ssystem->getEarth()->get_heliocentric_ecliptic_pos()),
+	                          tone_converter, projection, observatory->get_latitude(), observatory->get_altitude(),
+	                          15.f, 40.f);	// Temperature = 15c, relative humidity = 40%
 	tone_converter->set_world_adaptation_luminance(atmosphere->get_world_adaptation_luminance());
 
-	sunPos.normalize();	
+	sunPos.normalize();
 	moonPos.normalize();
 	// compute global sky brightness TODO : make this more "scientifically"
 	// TODO: also add moonlight illumination
 
-	if(sunPos[2] < -0.1/1.5 ) {
+	if(sunPos[2] < -0.1/1.5 )
+	{
 		sky_brightness = 0;
-	} else {
+	}
+	else
+	{
 		sky_brightness = (0.1 + 1.5*sunPos[2]) * atmosphere->get_intensity();
 	}
 
@@ -339,15 +331,15 @@ void StelCore::update(int delta_time)
 void StelCore::draw(int delta_time)
 {
 	if (ColorSchemeChanged) ChangeColorScheme();
-	
+
 	// Init openGL viewing with fov, screen size and clip planes
 	projection->set_clipping_planes(0.0005 ,50);
 
 	// Give the updated standard projection matrices to the projector
 	projection->set_modelview_matrices(	navigation->get_earth_equ_to_eye_mat(),
-						navigation->get_helio_to_eye_mat(),
-						navigation->get_local_to_eye_mat(),
-						navigation->get_prec_earth_equ_to_eye_mat());
+	                                    navigation->get_helio_to_eye_mat(),
+	                                    navigation->get_local_to_eye_mat(),
+	                                    navigation->get_prec_earth_equ_to_eye_mat());
 
 	// Set openGL drawings in equatorial coordinates
 	navigation->switch_to_earth_equatorial();
@@ -369,7 +361,7 @@ void StelCore::draw(int delta_time)
 	}
 	else
 	{
-	  glClear(GL_COLOR_BUFFER_BIT);
+		glClear(GL_COLOR_BUFFER_BIT);
 	}
 
 	// Draw all the constellations
@@ -377,7 +369,7 @@ void StelCore::draw(int delta_time)
 
 	// Draw the nebula if they are visible
 	if (FlagNebula) nebulas->draw(FlagNebulaLongName, projection, navigation, tone_converter, (sky_brightness<0.11),
-								  FlagGravityLabels, MaxMagNebulaName, FlagBrightNebulae);
+		                              FlagGravityLabels, MaxMagNebulaName, FlagBrightNebulae);
 
 	// Draw the hipparcos stars
 	Vec3d tempv = navigation->get_prec_equ_vision();
@@ -388,34 +380,25 @@ void StelCore::draw(int delta_time)
 	}
 
 	// Draw the equatorial grid
-	equ_grid->show(FlagEquatorialGrid);
 	equ_grid->draw(projection);
 
 	// Draw the altazimutal grid
-	azi_grid->show(FlagAzimutalGrid);
 	azi_grid->draw(projection);
 
 	// Draw the celestial equator line
-	equator_line->show(FlagEquatorLine);
 	equator_line->draw(projection);
 
 	// Draw the ecliptic line
-	ecliptic_line->show(FlagEclipticLine);
 	ecliptic_line->draw(projection);
-	
+
 	// Draw the meridian line
-	meridian_line->show(FlagMeridianLine);
 	meridian_line->draw(projection);
 
 	// Draw the pointer on the currently selected object
 	if (selected_object && object_pointer_visibility) selected_object->draw_pointer(delta_time, projection, navigation);
 
 	// Draw the planets
-	if (FlagPlanets)
-	{
-		ssystem->draw(selected_planet, FlagPlanetsHints, projection, navigation, tone_converter,
-			FlagGravityLabels, getFlagPointStar(), FlagPlanetsOrbits, FlagObjectTrails);
-	}
+	ssystem->draw(projection, navigation, tone_converter, FlagGravityLabels, getFlagPointStar());
 
 	// Set openGL drawings in local coordinates i.e. generally altazimuthal coordinates
 	navigation->switch_to_local();
@@ -423,10 +406,11 @@ void StelCore::draw(int delta_time)
 	// Draw meteors
 	meteors->update(projection, navigation, tone_converter, delta_time);
 
-	if(!FlagAtmosphere || sky_brightness<0.01) {
-	  projection->set_orthographic_projection(); 
-	  meteors->draw(projection, navigation);
-	  projection->reset_perspective_projection(); 
+	if(!FlagAtmosphere || sky_brightness<0.01)
+	{
+		projection->set_orthographic_projection();
+		meteors->draw(projection, navigation);
+		projection->reset_perspective_projection();
 	}
 
 	// Draw the atmosphere
@@ -439,14 +423,14 @@ void StelCore::draw(int delta_time)
 	landscape->draw(tone_converter, projection, navigation);
 
 	// Draw the cardinal points
-	//if (FlagCardinalPoints) 
+	//if (FlagCardinalPoints)
 	cardinals_points->draw(projection, observatory->get_latitude(), FlagGravityLabels );
 
 	// draw images loaded by a script
-	projection->set_orthographic_projection(); 
+	projection->set_orthographic_projection();
 	script_images->draw(screen_W, screen_H, navigation, projection);
-	
-	projection->reset_perspective_projection(); 
+
+	projection->reset_perspective_projection();
 
 	projection->draw_viewport_shape();
 
@@ -468,11 +452,11 @@ void StelCore::setConfigFiles(const string& _config_file)
 
 void StelCore::setLandscape(const string& new_landscape_name)
 {
-    if (new_landscape_name.empty()) return;
-    if (landscape) delete landscape;
-    landscape = NULL;
-    landscape = Landscape::create_from_file(getDataDir() + "landscapes.ini", new_landscape_name);
-    observatory->set_landscape_name(new_landscape_name);
+	if (new_landscape_name.empty()) return;
+	if (landscape) delete landscape;
+	landscape = NULL;
+	landscape = Landscape::create_from_file(getDataDir() + "landscapes.ini", new_landscape_name);
+	observatory->set_landscape_name(new_landscape_name);
 }
 
 
@@ -480,8 +464,8 @@ void StelCore::setLandscape(const string& new_landscape_name)
 void StelCore::setScreenSize(int w, int h)
 {
 	if (w==screen_W && h==screen_H) return;
-    screen_W = w;
-    screen_H = h;
+	screen_W = w;
+	screen_H = h;
 
 	projection->set_screen_size(screen_W, screen_H);
 }
@@ -491,7 +475,7 @@ StelObject * StelCore::find_stel_object(const Vec3d& v) const
 {
 	StelObject * sobj = NULL;
 
-	if (FlagPlanets) sobj = ssystem->search(v, navigation, projection);
+	if (getFlagPlanets()) sobj = ssystem->search(v, navigation, projection);
 	if (sobj) return sobj;
 
 	Vec3f u = navigation->earth_equ_to_prec_earth_equ(v);
@@ -532,7 +516,7 @@ StelObject * StelCore::clever_find(const Vec3d& v) const
 	ypos = winpos[1];
 
 	// Collect the planets inside the range
-	if (FlagPlanets)
+	if (getFlagPlanets())
 	{
 		temp = ssystem->search_around(v, fov_around, navigation, projection);
 		candidates.insert(candidates.begin(), temp.begin(), temp.end());
@@ -559,33 +543,39 @@ StelObject * StelCore::clever_find(const Vec3d& v) const
 	float best_object_value;
 	best_object_value = 100000.f;
 	vector<StelObject*>::iterator iter = candidates.begin();
-    while (iter != candidates.end())
-    {
-                projection->project_earth_equ((*iter)->get_earth_equ_pos(navigation), winpos);
+	while (iter != candidates.end())
+	{
+		projection->project_earth_equ((*iter)->get_earth_equ_pos(navigation), winpos);
 
 		float distance = sqrt((xpos-winpos[0])*(xpos-winpos[0]) + (ypos-winpos[1])*(ypos-winpos[1]));
 		float mag = (*iter)->get_mag(navigation);
-		if ((*iter)->get_type()==StelObject::STEL_OBJECT_NEBULA) {
-		  if( nebulas->get_flag_hints() ) {
-		    // make very easy to select if labeled
-		    mag = -1;
-		  }
+		if ((*iter)->get_type()==StelObject::STEL_OBJECT_NEBULA)
+		{
+			if( nebulas->get_flag_hints() )
+			{
+				// make very easy to select if labeled
+				mag = -1;
+			}
 		}
-		if ((*iter)->get_type()==StelObject::STEL_OBJECT_PLANET) {
-		  if( FlagPlanetsHints ) {
-		    // easy to select, especially pluto
-		    mag -= 15.f;
-		  } else {
-			mag -= 8.f;
-		  }
+		if ((*iter)->get_type()==StelObject::STEL_OBJECT_PLANET)
+		{
+			if( getFlagPlanetsHints() )
+			{
+				// easy to select, especially pluto
+				mag -= 15.f;
+			}
+			else
+			{
+				mag -= 8.f;
+			}
 		}
 		if (distance + mag < best_object_value)
 		{
 			best_object_value = distance + mag;
 			sobj = *iter;
 		}
-        iter++;
-    }
+		iter++;
+	}
 
 	return sobj;
 }
@@ -603,27 +593,33 @@ void StelCore::autoZoomIn(float move_duration, bool allow_manual_zoom)
 	float manual_move_duration;
 
 	if (!selected_object) return;
-  
-	if (!navigation->get_flag_traking()) {
-	  navigation->set_flag_traking(true);
-	  navigation->move_to(selected_object->get_earth_equ_pos(navigation), move_duration, false, 1);
-	  manual_move_duration = move_duration;
-	} else {
-	  // faster zoom in manual zoom mode once object is centered
-	  manual_move_duration = move_duration*.66f;
+
+	if (!navigation->get_flag_traking())
+	{
+		navigation->set_flag_traking(true);
+		navigation->move_to(selected_object->get_earth_equ_pos(navigation), move_duration, false, 1);
+		manual_move_duration = move_duration;
+	}
+	else
+	{
+		// faster zoom in manual zoom mode once object is centered
+		manual_move_duration = move_duration*.66f;
 	}
 
-	if( allow_manual_zoom && FlagManualZoom ) {
-	  // if manual zoom mode, user can zoom in incrementally
-	  float newfov = projection->get_fov()*0.5f;
-	  projection->zoom_to(newfov, manual_move_duration);
+	if( allow_manual_zoom && FlagManualZoom )
+	{
+		// if manual zoom mode, user can zoom in incrementally
+		float newfov = projection->get_fov()*0.5f;
+		projection->zoom_to(newfov, manual_move_duration);
 
-	} else {
-	  float satfov = selected_object->get_satellites_fov(navigation);
-	  float closefov = selected_object->get_close_fov(navigation);
+	}
+	else
+	{
+		float satfov = selected_object->get_satellites_fov(navigation);
+		float closefov = selected_object->get_close_fov(navigation);
 
-	  if (satfov>0. && projection->get_fov()*0.9>satfov) projection->zoom_to(satfov, move_duration);
-	  else if (projection->get_fov()>closefov) projection->zoom_to(closefov, move_duration);
+		if (satfov>0. && projection->get_fov()*0.9>satfov) projection->zoom_to(satfov, move_duration);
+		else if (projection->get_fov()>closefov) projection->zoom_to(closefov, move_duration);
 	}
 }
 
@@ -640,25 +636,26 @@ void StelCore::autoZoomOut(float move_duration, bool full)
 	}
 
 	// If the selected object has satellites, unzoom to satellites view unless specified otherwise
-	if(!full) {
+	if(!full)
+	{
 		float satfov = selected_object->get_satellites_fov(navigation);
 		if (projection->get_fov()<=satfov*0.9 && satfov>0.)
+		{
+			projection->zoom_to(satfov, move_duration);
+			return;
+		}
+
+		// If the selected object is part of a Planet subsystem (other than sun),
+		// unzoom to subsystem view
+		if (selected_object->get_type() == StelObject::STEL_OBJECT_PLANET && selected_object!=ssystem->getSun() && ((Planet*)selected_object)->get_parent()!=ssystem->getSun())
+		{
+			float satfov = ((Planet*)selected_object)->get_parent()->get_satellites_fov(navigation);
+			if (projection->get_fov()<=satfov*0.9 && satfov>0.)
 			{
 				projection->zoom_to(satfov, move_duration);
 				return;
 			}
-
-		// If the selected object is part of a Planet subsystem (other than sun),
-		// unzoom to subsystem view
-		if (selected_object->get_type() == StelObject::STEL_OBJECT_PLANET && selected_object!=ssystem->get_sun() && ((Planet*)selected_object)->get_parent()!=ssystem->get_sun())
-			{
-				float satfov = ((Planet*)selected_object)->get_parent()->get_satellites_fov(navigation);
-				if (projection->get_fov()<=satfov*0.9 && satfov>0.)
-					{
-						projection->zoom_to(satfov, move_duration);
-						return;
-					}
-			}
+		}
 	}
 
 	projection->zoom_to(InitFov, move_duration);
@@ -670,27 +667,28 @@ void StelCore::autoZoomOut(float move_duration, bool full)
 // this really belongs elsewhere
 int StelCore::setSkyCulture(string _culture_dir)
 {
-	if(SkyCulture == _culture_dir) return 2;
+	if(skyCulture == _culture_dir) return 2;
 
 	// make sure culture definition exists before attempting
-	if( !skyloc->test_sky_culture_directory(_culture_dir) ) {
+	if( !skyloc->test_sky_culture_directory(_culture_dir) )
+	{
 		cerr << "Invalid sky culture directory: " << _culture_dir << endl;
 		return 0;
 	}
 
-	SkyCulture = _culture_dir;
+	skyCulture = _culture_dir;
 
 	if(!asterisms) return 3;
 
-	LoadingBar lb(projection, LoadingBarFontSize, getDataDir() + BaseFontName, "logo24bits.png", screen_W, screen_H);
+	LoadingBar lb(projection, 12., getDataDir() + BaseFontName, "logo24bits.png", screen_W, screen_H);
 
-	asterisms->loadLinesAndArt(getDataDir() + "sky_cultures/" + SkyCulture + "/constellationship.fab",
-		getDataDir() + "sky_cultures/" + SkyCulture + "/constellationsart.fab", getDataDir() + "sky_cultures/" + SkyCulture + "/boundaries.dat", lb);
-	asterisms->loadNames(getDataDir() + "sky_cultures/" + SkyCulture + "/constellation_names.eng.fab");
-	
+	asterisms->loadLinesAndArt(getDataDir() + "sky_cultures/" + skyCulture + "/constellationship.fab",
+	                           getDataDir() + "sky_cultures/" + skyCulture + "/constellationsart.fab", getDataDir() + "sky_cultures/" + skyCulture + "/boundaries.dat", lb);
+	asterisms->loadNames(getDataDir() + "sky_cultures/" + skyCulture + "/constellation_names.eng.fab");
+
 	// Re-translated constellation names
 	asterisms->translateNames(skyTranslator);
-	
+
 	// as constellations have changed, clear out any selection and retest for match!
 	if (selected_object && selected_object->get_type()==StelObject::STEL_OBJECT_STAR)
 	{
@@ -700,9 +698,9 @@ int StelCore::setSkyCulture(string _culture_dir)
 	{
 		asterisms->setSelected(NULL);
 	}
-	
+
 	// update autocomplete with new names
-    ui->setConstellationAutoComplete(asterisms->getNames());
+	ui->setConstellationAutoComplete(asterisms->getNames());
 
 	return 1;
 
@@ -722,24 +720,25 @@ void StelCore::setAppLanguage(const std::string& newAppLocaleName)
 void StelCore::setSkyLanguage(const std::string& newSkyLocaleName)
 {
 	if( !hip_stars || !cardinals_points || !asterisms) return; // objects not initialized yet
-	
+
 	// Update the translator with new locale name
 	skyTranslator = Translator(PACKAGE, LOCALEDIR, newSkyLocaleName);
 	cout << "Sky locale is " << skyTranslator.getLocaleName() << endl;
-	
+
 	// Translate all labels with the new language
 	cardinals_points->translateLabels(skyTranslator);
 	asterisms->translateNames(skyTranslator);
 	ssystem->translateNames(skyTranslator);
 
 	// refresh EditBox with new names
-    //ui->setStarAutoComplete(hip_stars->getNames());
-    //ui->setConstellationAutoComplete(asterisms->getNames());
-    //ui->setPlanetAutoComplete(ssystem->getNamesI18());
-    //ui->setListNames(ssystem->getNamesI18());
+	//ui->setStarAutoComplete(hip_stars->getNames());
+	//ui->setConstellationAutoComplete(asterisms->getNames());
+	//ui->setPlanetAutoComplete(ssystem->getNamesI18());
+	//ui->setListNames(ssystem->getNamesI18());
 }
 
-void StelCore::playStartupScript() {
+void StelCore::playStartupScript()
+{
 	if(scripts) scripts->play_startup_script();
 }
 
@@ -749,9 +748,9 @@ void StelCore::ChangeColorScheme(void)
 	nebulas->set_circle_color(NebulaCircleColor[draw_mode]);
 	hip_stars->set_label_color(StarLabelColor[draw_mode]);
 	hip_stars->set_circle_color(StarCircleColor[draw_mode]);
-	ssystem->set_label_color(PlanetNamesColor[draw_mode]);
-	ssystem->set_orbit_color(PlanetOrbitsColor[draw_mode]);
-	ssystem->set_trail_color(ObjectTrailsColor[draw_mode]);
+	ssystem->setLabelColor(PlanetNamesColor[draw_mode]);
+	ssystem->setOrbitColor(PlanetOrbitsColor[draw_mode]);
+	ssystem->setTrailColor(ObjectTrailsColor[draw_mode]);
 	equ_grid->set_color(EquatorialColor[draw_mode]);
 	equ_grid->set_top_transparancy(draw_mode==DM_NORMAL);
 	azi_grid->set_color(AzimuthalColor[draw_mode]);
@@ -785,10 +784,10 @@ void StelCore::draw_chart_background(void)
 	glColor3fv(ChartColor[draw_mode]);
 	projection->set_orthographic_projection();	// set 2D coordinate
 	glBegin(GL_QUADS);
-	   	glTexCoord2s(0, 0); glVertex2i(viewport_left, view_bottom);	// Bottom Left
-    	glTexCoord2s(1, 0); glVertex2i(viewport_left+stepX, view_bottom);	// Bottom Right
-       	glTexCoord2s(1, 1); glVertex2i(viewport_left+stepX,view_bottom+stepY);	// Top Right
-        glTexCoord2s(0, 1); glVertex2i(viewport_left,view_bottom+stepY);	// Top Left
+	glTexCoord2s(0, 0); glVertex2i(viewport_left, view_bottom);	// Bottom Left
+	glTexCoord2s(1, 0); glVertex2i(viewport_left+stepX, view_bottom);	// Bottom Right
+	glTexCoord2s(1, 1); glVertex2i(viewport_left+stepX,view_bottom+stepY);	// Top Right
+	glTexCoord2s(0, 1); glVertex2i(viewport_left,view_bottom+stepY);	// Top Left
 	glEnd();
 	projection->reset_perspective_projection();
 }
@@ -798,13 +797,13 @@ wstring StelCore::get_cursor_pos(int x, int y)
 	Vec3d v;
 	projection->unproject_earth_equ(x,y,v);
 
-	wostringstream oss; 
-	
+	wostringstream oss;
+
 	float tempDE, tempRA;
 	rect_to_sphe(&tempRA,&tempDE,v);
 	oss << "RA : " << StelUtility::printAngleHMS(tempRA) << endl;
 	oss << "DE : " << StelUtility::printAngleDMS(tempDE);
-	
+
 	return oss.str();
 }
 
@@ -845,15 +844,15 @@ void StelCore::loadConfig(void)
 		if (version>="0.6.0" && version != string(VERSION))
 		{
 			cout << "The current config file is from a previous version (>=0.6.0).\nPrevious options will be imported in the new config file." << endl;
-			
+
 			// Store temporarily the previous observator parameters
 			Observator tempobs;
 			tempobs.load(configDir + config_file, "init_location");
-			
+
 			// Set the new landscape though
 			tempobs.set_landscape_name("Guereins");
-			
-			loadConfigFrom(configDir + config_file);			
+
+			loadConfigFrom(configDir + config_file);
 			// We just imported previous parameters (from >=0.6.0)
 			saveConfigTo(configDir + config_file);
 			tempobs.save(configDir + config_file, "init_location");
@@ -865,16 +864,16 @@ void StelCore::loadConfig(void)
 			// The config file is too old to try an importation
 			printf("The current config file is from a version too old for parameters to be imported (%s).\nIt will be replaced by the default config file.\n", version.empty() ? "<0.6.0" : version.c_str());
 			system( (string("cp -f ") + dataRoot + "/config/default_config.ini " + configDir + config_file).c_str() );
-			
+
 			// Actually load the config file
 			loadConfigFrom(configDir + config_file);
 			return;
 		}
 	}
-	
+
 	// Versions match, there was no pblms
 	loadConfigFrom(configDir + config_file);
-	
+
 }
 
 void StelCore::saveConfig(void)
@@ -886,7 +885,7 @@ void StelCore::saveConfig(void)
 
 void StelCore::loadConfigFrom(const string& confFile)
 {
-    cout << "Loading configuration file " << confFile << " ..." << endl;
+	cout << "Loading configuration file " << confFile << " ..." << endl;
 	InitParser conf;
 	conf.load(confFile);
 
@@ -895,7 +894,7 @@ void StelCore::loadConfigFrom(const string& confFile)
 	if (version!=string(VERSION) && version<"0.6.0")
 	{
 		cerr << "ERROR : The current config file is from a different version (" <<
-			(version.empty() ? "<0.6.0" : version) << ")." << endl;
+		(version.empty() ? "<0.6.0" : version) << ")." << endl;
 		exit(-1);
 	}
 
@@ -930,20 +929,20 @@ void StelCore::loadConfigFrom(const string& confFile)
 	Projector::VIEWPORT_TYPE viewType;
 	if (tmpstr=="maximized") viewType = Projector::MAXIMIZED;
 	else
-	if (tmpstr=="square") viewType = Projector::SQUARE;
-	else
-	{
-		if (tmpstr=="disk") viewType = Projector::DISK;
+		if (tmpstr=="square") viewType = Projector::SQUARE;
 		else
 		{
-			cerr << "ERROR : Unknown viewport type : " << tmpstr << endl;
-			exit(-1);
+			if (tmpstr=="disk") viewType = Projector::DISK;
+			else
+			{
+				cerr << "ERROR : Unknown viewport type : " << tmpstr << endl;
+				exit(-1);
+			}
 		}
-	}
 	setViewportType(viewType);
 
 	// localization section
-	SkyCulture = conf.get_str("localization", "sky_culture", "western");
+	skyCulture = conf.get_str("localization", "sky_culture", "western");
 
 	string skyLocaleName = conf.get_str("localization", "sky_locale", "system");
 	string appLocaleName = conf.get_str("localization", "app_locale", "system");
@@ -952,7 +951,7 @@ void StelCore::loadConfigFrom(const string& confFile)
 
 	// Star section
 	setStarScale(conf.get_double ("stars:star_scale"));
-	if(ssystem) ssystem->set_object_scale(conf.get_double ("stars:star_scale"));  // if reload config
+	setPlanetsScale(conf.get_double ("stars:star_scale"));  // if reload config
 
 	setStarMagScale(conf.get_double ("stars:star_mag_scale"));
 	setStarTwinkleAmount(conf.get_double ("stars:star_twinkle_amount"));
@@ -1072,8 +1071,8 @@ void StelCore::loadConfigFrom(const string& confFile)
 	}
 
 	// Landscape section
-	FlagLandscape			= conf.get_boolean("landscape", "flag_landscape", 
-										   conf.get_boolean("landscape", "flag_ground", 1));  // name change
+	FlagLandscape			= conf.get_boolean("landscape", "flag_landscape",
+	                                   conf.get_boolean("landscape", "flag_ground", 1));  // name change
 	FlagFog					= conf.get_boolean("landscape:flag_fog");
 	FlagAtmosphere			= conf.get_boolean("landscape:flag_atmosphere");
 	AtmosphereFadeDuration  = conf.get_double("landscape","atmosphere_fade_duration",1.5);
@@ -1086,17 +1085,17 @@ void StelCore::loadConfigFrom(const string& confFile)
 	setFlagConstellationIsolateSelected(conf.get_boolean("viewing", "flag_constellation_isolate_selected",conf.get_boolean("viewing", "flag_constellation_pick", 0)));
 	setConstellationArtIntensity(conf.get_double("viewing","constellation_art_intensity", 0.5));
 	setConstellationArtFadeDuration(conf.get_double("viewing","constellation_art_fade_duration",2.));
-	setConstellationFontSize(conf.get_double("viewing","constellation_font_size",16.));											  
-			  
-	FlagAzimutalGrid		= conf.get_boolean("viewing:flag_azimutal_grid");
-	FlagEquatorialGrid		= conf.get_boolean("viewing:flag_equatorial_grid");
-	FlagEquatorLine			= conf.get_boolean("viewing:flag_equator_line");
-	FlagEclipticLine		= conf.get_boolean("viewing:flag_ecliptic_line");
-	FlagMeridianLine		= conf.get_boolean("viewing:flag_meridian_line");
-	cardinals_points->set_flag_show(conf.get_boolean("viewing:flag_cardinal_points"));
+	setConstellationFontSize(conf.get_double("viewing","constellation_font_size",16.));
+
+	setFlagAzimutalGrid(conf.get_boolean("viewing:flag_azimutal_grid"));
+	setFlagEquatorGrid(conf.get_boolean("viewing:flag_equatorial_grid"));
+	setFlagEquatorLine(conf.get_boolean("viewing:flag_equator_line"));
+	setFlagEclipticLine(conf.get_boolean("viewing:flag_ecliptic_line"));
+	setFlagMeridianLine(conf.get_boolean("viewing:flag_meridian_line"));
+	cardinals_points->setFlagShow(conf.get_boolean("viewing:flag_cardinal_points"));
 	FlagGravityLabels		= conf.get_boolean("viewing:flag_gravity_labels");
 	FlagMoonScaled			= conf.get_boolean("viewing", "flag_moon_scaled",
-											   conf.get_boolean("viewing", "flag_init_moon_scaled", 0));  // name change
+	                                    conf.get_boolean("viewing", "flag_init_moon_scaled", 0));  // name change
 	MoonScale				= conf.get_double ("viewing","moon_scale",5.);
 	FlagChart    			= conf.get_boolean("viewing:flag_chart");
 	FlagNight    			= conf.get_boolean("viewing:flag_night");
@@ -1105,17 +1104,18 @@ void StelCore::loadConfigFrom(const string& confFile)
 	// Astro section
 	setFlagStars(conf.get_boolean("astro:flag_stars"));
 	setFlagStarName(conf.get_boolean("astro:flag_star_name"));
-	FlagPlanets				= conf.get_boolean("astro:flag_planets");
-	FlagPlanetsHints		= conf.get_boolean("astro:flag_planets_hints");
-	FlagPlanetsOrbits		= conf.get_boolean("astro:flag_planets_orbits");
-	FlagObjectTrails		= conf.get_boolean("astro", "flag_object_trails", 0);
+	setFlagPlanets(conf.get_boolean("astro:flag_planets"));
+	setFlagPlanetsHints(conf.get_boolean("astro:flag_planets_hints"));
+	setFlagPlanetsOrbits(conf.get_boolean("astro:flag_planets_orbits"));
+	setFlagPlanetsTrails(conf.get_boolean("astro", "flag_object_trails", 0));
+	startPlanetsTrails(conf.get_boolean("astro", "flag_object_trails", 0));
 	FlagNebula				= conf.get_boolean("astro:flag_nebula");
 	nebulas->set_flag_hints(conf.get_boolean("astro:flag_nebula_name"));
-    FlagNebulaLongName      = conf.get_boolean("astro:flag_nebula_long_name"); 
+	FlagNebulaLongName      = conf.get_boolean("astro:flag_nebula_long_name");
 	MaxMagNebulaName		= conf.get_double("astro", "max_mag_nebula_name", 99);
 	NebulaScale				= conf.get_double("astro", "nebula_scale",1.0f);
-	nebulas->set_show_ngc(conf.get_boolean("astro", "flag_nebula_ngc",false)); 
-	nebulas->set_show_messier(conf.get_boolean("astro", "flag_nebula_messier",true)); 
+	nebulas->set_show_ngc(conf.get_boolean("astro", "flag_nebula_ngc",false));
+	nebulas->set_show_messier(conf.get_boolean("astro", "flag_nebula_messier",true));
 	FlagMilkyWay			= conf.get_boolean("astro:flag_milky_way");
 	MilkyWayIntensity       = conf.get_double("astro","milky_way_intensity",1.);
 	milky_way->set_intensity(MilkyWayIntensity);
@@ -1125,7 +1125,7 @@ void StelCore::loadConfigFrom(const string& confFile)
 
 void StelCore::saveConfigTo(const string& confFile)
 {
-    cout << "Saving configuration file " << confFile << " ..." << endl;
+	cout << "Saving configuration file " << confFile << " ..." << endl;
 	InitParser conf;
 
 	// Main section
@@ -1139,29 +1139,29 @@ void StelCore::saveConfigTo(const string& confFile)
 	conf.set_int    ("video:horizontal_offset", getViewportHorizontalOffset());
 	conf.set_int    ("video:vertical_offset", getViewportVerticalOffset());
 	conf.set_double ("video:maximum_fps", maxfps);
-	
+
 	// Projector
 	string tmpstr;
 	switch (getProjectionType())
 	{
-		case Projector::PERSPECTIVE_PROJECTOR : tmpstr="perspective";	break;
-		case Projector::FISHEYE_PROJECTOR : tmpstr="fisheye";		break;
-		case Projector::CYLINDER_PROJECTOR : tmpstr="cylinder";		break;
-		default : tmpstr="perspective";
+	case Projector::PERSPECTIVE_PROJECTOR : tmpstr="perspective";	break;
+	case Projector::FISHEYE_PROJECTOR : tmpstr="fisheye";		break;
+	case Projector::CYLINDER_PROJECTOR : tmpstr="cylinder";		break;
+	default : tmpstr="perspective";
 	}
 	conf.set_str	("projection:type",tmpstr);
 
 	switch (getViewportType())
 	{
-		case Projector::MAXIMIZED : tmpstr="maximized";	break;
-		case Projector::SQUARE : tmpstr="square";	break;
-		case Projector::DISK : tmpstr="disk";		break;
-		default : tmpstr="maximized";
+	case Projector::MAXIMIZED : tmpstr="maximized";	break;
+	case Projector::SQUARE : tmpstr="square";	break;
+	case Projector::DISK : tmpstr="disk";		break;
+	default : tmpstr="maximized";
 	}
 	conf.set_str	("projection:viewport", tmpstr);
 
 	// localization section
-	conf.set_str    ("localization:sky_culture", SkyCulture);
+	conf.set_str    ("localization:sky_culture", skyCulture);
 	conf.set_str    ("localization:app_locale", Translator::globalTranslator.getLocaleName());
 	conf.set_str    ("localization:sky_locale", skyTranslator.getLocaleName());
 
@@ -1270,9 +1270,9 @@ void StelCore::saveConfigTo(const string& confFile)
 
 	switch (navigation->get_viewing_mode())
 	{
-		case Navigator::VIEW_HORIZON : tmpstr="horizon";	break;
-		case Navigator::VIEW_EQUATOR : tmpstr="equator";		break;
-		default : tmpstr="horizon";
+	case Navigator::VIEW_HORIZON : tmpstr="horizon";	break;
+	case Navigator::VIEW_EQUATOR : tmpstr="equator";		break;
+	default : tmpstr="horizon";
 	}
 	conf.set_str	("navigation:viewing_mode",tmpstr);
 
@@ -1289,12 +1289,12 @@ void StelCore::saveConfigTo(const string& confFile)
 	conf.set_boolean("viewing:flag_constellation_boundaries", getFlagConstellationBoundaries());
 	conf.set_boolean("viewing:flag_constellation_isolate_selected", getFlagConstellationIsolateSelected());
 
-	conf.set_boolean("viewing:flag_azimutal_grid", FlagAzimutalGrid);
-	conf.set_boolean("viewing:flag_equatorial_grid", FlagEquatorialGrid);
-	conf.set_boolean("viewing:flag_equator_line", FlagEquatorLine);
-	conf.set_boolean("viewing:flag_ecliptic_line", FlagEclipticLine);
-	conf.set_boolean("viewing:flag_meridian_line", FlagMeridianLine);
-	conf.set_boolean("viewing:flag_cardinal_points", cardinals_points->get_flag_show());
+	conf.set_boolean("viewing:flag_azimutal_grid", getFlagAzimutalGrid());
+	conf.set_boolean("viewing:flag_equatorial_grid", getFlagEquatorGrid());
+	conf.set_boolean("viewing:flag_equator_line", getFlagEquatorLine());
+	conf.set_boolean("viewing:flag_ecliptic_line", getFlagEclipticLine());
+	conf.set_boolean("viewing:flag_meridian_line", getFlagMeridianLine());
+	conf.set_boolean("viewing:flag_cardinal_points", cardinals_points->getFlagShow());
 	conf.set_boolean("viewing:flag_gravity_labels", FlagGravityLabels);
 	conf.set_boolean("viewing:flag_moon_scaled", FlagMoonScaled);
 	conf.set_double ("viewing:moon_scale", MoonScale);
@@ -1307,10 +1307,10 @@ void StelCore::saveConfigTo(const string& confFile)
 	// Astro section
 	conf.set_boolean("astro:flag_stars", getFlagStars());
 	conf.set_boolean("astro:flag_star_name", getFlagStarName());
-	conf.set_boolean("astro:flag_planets", FlagPlanets);
-	conf.set_boolean("astro:flag_planets_hints", FlagPlanetsHints);
-	conf.set_boolean("astro:flag_planets_orbits", FlagPlanetsOrbits);
-	conf.set_boolean("astro:flag_object_trails", FlagObjectTrails);
+	conf.set_boolean("astro:flag_planets", getFlagPlanets());
+	conf.set_boolean("astro:flag_planets_hints", getFlagPlanetsHints());
+	conf.set_boolean("astro:flag_planets_orbits", getFlagPlanetsOrbits());
+	conf.set_boolean("astro:flag_object_trails", getFlagPlanetsTrails());
 	conf.set_boolean("astro:flag_nebula", FlagNebula);
 	conf.set_boolean("astro:flag_nebula_name", nebulas->get_flag_hints());
 	conf.set_boolean("astro:flag_nebula_long_name", FlagNebulaLongName); // Tony - added long name
@@ -1334,43 +1334,44 @@ int StelCore::handleClick(Uint16 x, Uint16 y, S_GUI_VALUE button, S_GUI_VALUE st
 // Handle mouse move
 int StelCore::handleMove(int x, int y)
 {
-  // Turn if the mouse is at the edge of the screen.
-  // unless config asks otherwise
-  if(FlagEnableMoveMouse) {
-    if (x == 0)
-      {
-	turn_left(1);
-	is_mouse_moving_horiz = true;
-      }
-    else if (x == screen_W - 1)
-      {
-	turn_right(1);
-	is_mouse_moving_horiz = true;
-      }
-    else if (is_mouse_moving_horiz)
-      {
-	turn_left(0);
-	is_mouse_moving_horiz = false;
-      }
+	// Turn if the mouse is at the edge of the screen.
+	// unless config asks otherwise
+	if(FlagEnableMoveMouse)
+	{
+		if (x == 0)
+		{
+			turn_left(1);
+			is_mouse_moving_horiz = true;
+		}
+		else if (x == screen_W - 1)
+		{
+			turn_right(1);
+			is_mouse_moving_horiz = true;
+		}
+		else if (is_mouse_moving_horiz)
+		{
+			turn_left(0);
+			is_mouse_moving_horiz = false;
+		}
 
-    if (y == 0)
-      {
-	turn_up(1);
-	is_mouse_moving_vert = true;
-      }
-    else if (y == screen_H - 1)
-      {	
-	turn_down(1);
-	is_mouse_moving_vert = true;
-      }
-    else if (is_mouse_moving_vert)
-      {
-	turn_up(0);
-	is_mouse_moving_vert = false;
-      }
-  }
+		if (y == 0)
+		{
+			turn_up(1);
+			is_mouse_moving_vert = true;
+		}
+		else if (y == screen_H - 1)
+		{
+			turn_down(1);
+			is_mouse_moving_vert = true;
+		}
+		else if (is_mouse_moving_vert)
+		{
+			turn_up(0);
+			is_mouse_moving_vert = false;
+		}
+	}
 
-  return ui->handle_move(x, y);
+	return ui->handle_move(x, y);
 
 }
 
@@ -1385,17 +1386,17 @@ int StelCore::handleKeys(Uint16 key, s_gui::S_GUI_VALUE state)
 
 		if (state==S_GUI_PRESSED && key==SDLK_m)
 		{
-		  // leave tui menu
-		  FlagShowTuiMenu = false;
+			// leave tui menu
+			FlagShowTuiMenu = false;
 
-		  // If selected a script in tui, run that now
-		  if(SelectedScript!="") 
-			  commander->execute_command("script action play filename " +  SelectedScript  
-										 + " path " + SelectedScriptDirectory);
-		  
-		  // clear out now
-		  SelectedScriptDirectory = SelectedScript = "";
-		  return 1;
+			// If selected a script in tui, run that now
+			if(SelectedScript!="")
+				commander->execute_command("script action play filename " +  SelectedScript
+				                           + " path " + SelectedScriptDirectory);
+
+			// clear out now
+			SelectedScriptDirectory = SelectedScript = "";
+			return 1;
 		}
 		if (ui->handle_keys_tui(key, tuiv)) return 1;
 		return 1;
@@ -1405,26 +1406,26 @@ int StelCore::handleKeys(Uint16 key, s_gui::S_GUI_VALUE state)
 
 	if (state == S_GUI_PRESSED)
 	{
-   		// Direction and zoom deplacements
-   		if (key==SDLK_LEFT) turn_left(1);
-   		if (key==SDLK_RIGHT) turn_right(1);
-   		if (key==SDLK_UP)
+		// Direction and zoom deplacements
+		if (key==SDLK_LEFT) turn_left(1);
+		if (key==SDLK_RIGHT) turn_right(1);
+		if (key==SDLK_UP)
 		{
 			if (SDL_GetModState() & KMOD_CTRL) zoom_in(1);
 			else turn_up(1);
 		}
-   		if (key==SDLK_DOWN)
+		if (key==SDLK_DOWN)
 		{
 			if (SDL_GetModState() & KMOD_CTRL) zoom_out(1);
 			else turn_down(1);
 		}
-   		if (key==SDLK_PAGEUP) zoom_in(1);
-   		if (key==SDLK_PAGEDOWN) zoom_out(1);
+		if (key==SDLK_PAGEUP) zoom_in(1);
+		if (key==SDLK_PAGEDOWN) zoom_out(1);
 	}
 	else
-	{	
-	    // When a deplacement key is released stop mooving
-   		if (key==SDLK_LEFT) turn_left(0);
+	{
+		// When a deplacement key is released stop mooving
+		if (key==SDLK_LEFT) turn_left(0);
 		if (key==SDLK_RIGHT) turn_right(0);
 		if (SDL_GetModState() & KMOD_CTRL)
 		{
@@ -1460,7 +1461,7 @@ void StelCore::turn_left(int s)
 		deltaAz = -1;
 		navigation->set_flag_traking(0);
 		navigation->set_flag_lock_equ_pos(0);
-		
+
 	}
 	else deltaAz = 0;
 }
@@ -1501,52 +1502,52 @@ void StelCore::zoom_out(int s)
 void StelCore::updateMove(int delta_time)
 {
 	// the more it is zoomed, the more the mooving speed is low (in angle)
-    double depl=move_speed*delta_time*projection->get_fov();
+	double depl=move_speed*delta_time*projection->get_fov();
 	double deplzoom=zoom_speed*delta_time*projection->get_fov();
-    if (deltaAz<0)
-    {
+	if (deltaAz<0)
+	{
 		deltaAz = -depl/30;
 		if (deltaAz<-0.2) deltaAz = -0.2;
-    }
-    else
-    {
+	}
+	else
+	{
 		if (deltaAz>0)
-        {
+		{
 			deltaAz = (depl/30);
 			if (deltaAz>0.2) deltaAz = 0.2;
-        }
-    }
-    if (deltaAlt<0)
-    {
+		}
+	}
+	if (deltaAlt<0)
+	{
 		deltaAlt = -depl/30;
 		if (deltaAlt<-0.2) deltaAlt = -0.2;
-    }
-    else
-    {
+	}
+	else
+	{
 		if (deltaAlt>0)
-        {
+		{
 			deltaAlt = depl/30;
 			if (deltaAlt>0.2) deltaAlt = 0.2;
-        }
-    }
+		}
+	}
 
-    if (deltaFov<0)
-    {
+	if (deltaFov<0)
+	{
 		deltaFov = -deplzoom*5;
 		if (deltaFov<-0.15*projection->get_fov()) deltaFov = -0.15*projection->get_fov();
-    }
-    else
-    {
+	}
+	else
+	{
 		if (deltaFov>0)
-        {
+		{
 			deltaFov = deplzoom*5;
 			if (deltaFov>20) deltaFov = 20;
-        }
-    }
+		}
+	}
 
 	//	projection->change_fov(deltaFov);
 	//	navigation->update_move(deltaAz, deltaAlt);
-	
+
 	if(deltaFov != 0 )
 	{
 		std::ostringstream oss;
@@ -1559,7 +1560,8 @@ void StelCore::updateMove(int delta_time)
 		std::ostringstream oss;
 		oss << "look delta_az " << deltaAz << " delta_alt " << deltaAlt;
 		commander->execute_command(oss.str());
-	} else
+	}
+	else
 	{
 		// must perform call anyway, but don't record!
 		navigation->update_move(deltaAz, deltaAlt);

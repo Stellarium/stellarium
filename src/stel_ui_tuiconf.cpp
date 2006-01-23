@@ -346,7 +346,7 @@ void StelUI::tui_update_widgets(void)
 	tui_time_dateformat->setCurrent(StelUtility::stringToWstring(core->observatory->get_date_format_str()));
 
 	// 3. general
-	tui_general_sky_culture->setValue(core->skyloc->convert_directory_to_sky_culture(core->SkyCulture));
+	tui_general_sky_culture->setValue(core->skyloc->convert_directory_to_sky_culture(core->skyCulture));
 	tui_general_sky_locale->setValue(StelUtility::stringToWstring(core->skyTranslator.getLocaleName()));
 
 	// 4. Stars

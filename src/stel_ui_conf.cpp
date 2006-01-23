@@ -246,7 +246,7 @@ Component* StelUI::createConfigWindow(void)
 	earth_map->setOnNearestCityCallback(callback<void>(this, &StelUI::setCityFromMap));
 	tab_location->addComponent(earth_map);
 	y+=earth_map->getSizey();
-	earth_map->set_font(core->MapFontSize, core->getDataDir() + core->BaseFontName);
+	earth_map->set_font(9.5f, core->getDataDir() + core->BaseFontName);
 	load_cities(core->getDataDir() + "cities.fab");
 	
 	y += 5;
@@ -978,18 +978,18 @@ void StelUI::saveRenderOptions(void)
 	conf.set_boolean("astro:flag_nebula", core->FlagNebula);
 	conf.set_boolean("astro:flag_nebula_name", core->nebulas->get_flag_hints());
 	conf.set_double("astro:max_mag_nebula_name", core->MaxMagNebulaName);
-	conf.set_boolean("astro:flag_planets", core->FlagPlanets);
-	conf.set_boolean("astro:flag_planets_hints", core->FlagPlanetsHints);
-	conf.set_double("viewing:moon_scale", core->ssystem->get_moon()->get_sphere_scale());
+	conf.set_boolean("astro:flag_planets", core->getFlagPlanets());
+	conf.set_boolean("astro:flag_planets_hints", core->getFlagPlanetsHints());
+	conf.set_double("viewing:moon_scale", core->ssystem->getMoon()->get_sphere_scale());
 	conf.set_boolean("viewing:flag_chart", core->FlagChart);
 	conf.set_boolean("viewing:flag_night", core->FlagNight);
 	//conf.set_boolean("viewing:use_common_names", core->FlagUseCommonNames);
-	conf.set_boolean("viewing:flag_equatorial_grid", core->FlagEquatorialGrid);
-	conf.set_boolean("viewing:flag_azimutal_grid", core->FlagAzimutalGrid);
-	conf.set_boolean("viewing:flag_equator_line", core->FlagEquatorLine);
-	conf.set_boolean("viewing:flag_ecliptic_line", core->FlagEclipticLine);
+	conf.set_boolean("viewing:flag_equatorial_grid", core->getFlagEquatorGrid());
+	conf.set_boolean("viewing:flag_azimutal_grid", core->getFlagAzimutalGrid());
+	conf.set_boolean("viewing:flag_equator_line", core->getFlagEquatorLine());
+	conf.set_boolean("viewing:flag_ecliptic_line", core->getFlagEclipticLine());
 	conf.set_boolean("landscape:flag_landscape", core->FlagLandscape);
-	conf.set_boolean("viewing:flag_cardinal_points", core->cardinals_points->get_flag_show());
+	conf.set_boolean("viewing:flag_cardinal_points", core->cardinals_points->getFlagShow());
 	conf.set_boolean("landscape:flag_atmosphere", core->FlagAtmosphere);
 	conf.set_boolean("landscape:flag_fog", core->FlagFog);
 
@@ -1075,16 +1075,15 @@ void StelUI::updateConfigForm(void)
 	sel_constellation_cbx->setState(core->getFlagConstellationIsolateSelected());
 	nebulas_names_cbx->setState(core->nebulas->get_flag_hints());
 	max_mag_nebula_name->setValue(core->MaxMagNebulaName);
-	planets_cbx->setState(core->FlagPlanets);
-	planets_hints_cbx->setState(core->FlagPlanetsHints);
+	planets_cbx->setState(core->getFlagPlanets());
+	planets_hints_cbx->setState(core->getFlagPlanetsHints());
 	moon_x4_cbx->setState(core->FlagMoonScaled);
-	// TODO: add charting button
-	equator_grid_cbx->setState(core->FlagEquatorialGrid);
-	azimuth_grid_cbx->setState(core->FlagAzimutalGrid);
-	equator_cbx->setState(core->FlagEquatorLine);
-	ecliptic_cbx->setState(core->FlagEclipticLine);
+	equator_grid_cbx->setState(core->getFlagEquatorGrid());
+	azimuth_grid_cbx->setState(core->getFlagAzimutalGrid());
+	equator_cbx->setState(core->getFlagEquatorLine());
+	ecliptic_cbx->setState(core->getFlagEclipticLine());
 	ground_cbx->setState(core->FlagLandscape);
-	cardinal_cbx->setState(core->cardinals_points->get_flag_show());
+	cardinal_cbx->setState(core->cardinals_points->getFlagShow());
 	atmosphere_cbx->setState(core->FlagAtmosphere);
 	fog_cbx->setState(core->FlagFog);
 

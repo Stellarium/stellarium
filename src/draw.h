@@ -48,7 +48,8 @@ public:
 	void set_color(const Vec3f& c) {color = c;}
 	void update(int delta_time) {fader.update(delta_time);}
 	void set_fade_duration(float duration) {fader.set_duration((int)(duration*1000.f));}
-	void show(bool b){fader = b;}
+	void setFlagshow(bool b){fader = b;}
+	bool getFlagshow(void) const {return fader;}
 	void set_top_transparancy(bool b) { transparent_top= b; }
 private:
 	unsigned int nb_meridian;
@@ -85,7 +86,8 @@ public:
 	void set_color(const Vec3f& c) {color = c;}
 	void update(int delta_time) {fader.update(delta_time);}
 	void set_fade_duration(float duration) {fader.set_duration((int)(duration*1000.f));}
-	void show(bool b){fader = b;}
+	void setFlagshow(bool b){fader = b;}
+	bool getFlagshow(void) const {return fader;}
 	void set_font(float font_size, const string& font_name);
 
 private:
@@ -112,8 +114,8 @@ public:
 	void translateLabels(Translator& trans);  // for i18n
 	void update(int delta_time) {fader.update(delta_time);}
 	void set_fade_duration(float duration) {fader.set_duration((int)(duration*1000.f));}
-	void set_flag_show(bool b){fader = b;}
-	bool get_flag_show(){return fader;}
+	void setFlagShow(bool b){fader = b;}
+	bool getFlagShow(void) const {return fader;}
 
 private:
 	float radius;
