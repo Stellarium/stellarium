@@ -44,8 +44,13 @@ My modifications are:
 6) use a rotation matrix for Transformation to J2000
    instead of AIA, OMA and inclination of earth axis
 7) exchange indices of hyperion and iapetus
+8) calculate the orbital elements not for every new jd but rather reuse
+   the previousely calculated elements if possible
 
 ****************************************************************/
+
+#include "tass17.h"
+#include "elliptic_to_rectangular.h"
 
 #include <math.h>
 
@@ -66,10 +71,9 @@ struct Tass17Series {
 
 struct Tass17Body {
   const char *name;
-  double rmu;
+  double mu;
   double aam;
   double s0[6];
-  double s1_1;
   struct Tass17Series series[4];
 };
 
@@ -2900,17 +2904,17 @@ static const struct Tass17MultiTerm HYPERION_3[1] = {
   {{ 0, 0, 0, 0, 0, 0, 0, 0}, 58,HYPERION_3_0},
 };
 
-static const struct Tass17Body tass17bodies[8] = {
+const int nr_of_tass17bodies = 8;
+const struct Tass17Body tass17bodies[8] = {
   { "MIMAS",
-     1.128302325209862e-02,
-     2.435144296437626e+03,
-     {-5.196910356411064e-03,
-       1.822484926062486e-01,
-       0.000000000000000e+00,
-       0.000000000000000e+00,
-       0.000000000000000e+00,
-       0.000000000000000e+00},
-     6.667061728781588e+00,
+    8.457558957423141e-08,
+    6.667061728781588e+00,
+    {-5.196910356411064e-03,
+      1.822484926062486e-01,
+      0.000000000000000e+00,
+      0.000000000000000e+00,
+      0.000000000000000e+00,
+      0.000000000000000e+00},
     {
       {2,MIMAS_0},
       {3,MIMAS_1},
@@ -2919,15 +2923,14 @@ static const struct Tass17Body tass17bodies[8] = {
     }
   },
   { "ENCELADUS",
-     1.128302422920838e-02,
-     1.674867298497793e+03,
-     {-3.147075653259473e-03,
-       7.997716657090215e-01,
-       0.000000000000000e+00,
-       0.000000000000000e+00,
-      -4.817894243161427e-06,
-      -3.858288993746540e-07},
-     4.585536751533733e+00,
+    8.457559689847700e-08,
+    4.585536751533733e+00,
+    {-3.147075653259473e-03,
+      7.997716657090215e-01,
+      0.000000000000000e+00,
+      0.000000000000000e+00,
+     -4.817894243161427e-06,
+     -3.858288993746540e-07},
     {
       {2,ENCELADUS_0},
       {10,ENCELADUS_1},
@@ -2936,15 +2939,14 @@ static const struct Tass17Body tass17bodies[8] = {
     }
   },
   { "TETHYS",
-     1.128303449675889e-02,
-     1.215663929056339e+03,
-     {-2.047958691903563e-03,
-       5.239109365414447e+00,
-       0.000000000000000e+00,
-       0.000000000000000e+00,
-      -1.603681402396474e-05,
-      -1.284293647967145e-06},
-     3.328306445054557e+00,
+    8.457567386225863e-08,
+    3.328306445054557e+00,
+    {-2.047958691903563e-03,
+      5.239109365414447e+00,
+      0.000000000000000e+00,
+      0.000000000000000e+00,
+     -1.603681402396474e-05,
+     -1.284293647967145e-06},
     {
       {3,TETHYS_0},
       {13,TETHYS_1},
@@ -2953,15 +2955,14 @@ static const struct Tass17Body tass17bodies[8] = {
     }
   },
   { "DIONE",
-     1.128304468532824e-02,
-     8.385108703596533e+02,
-     {-1.245046723085128e-03,
-       1.994592585279060e+00,
-       0.000000000000000e+00,
-       0.000000000000000e+00,
-      -5.892691888978987e-05,
-      -4.719091057203836e-06},
-     2.295717646432711e+00,
+    8.457575023401118e-08,
+    2.295717646432711e+00,
+    {-1.245046723085128e-03,
+      1.994592585279060e+00,
+      0.000000000000000e+00,
+      0.000000000000000e+00,
+     -5.892691888978987e-05,
+     -4.719091057203836e-06},
     {
       {9,DIONE_0},
       {17,DIONE_1},
@@ -2970,15 +2971,14 @@ static const struct Tass17Body tass17bodies[8] = {
     }
   },
   { "RHEA",
-     1.128307127941235e-02,
-     5.080093197532942e+02,
-     {-6.263338154589970e-04,
-       6.221340947932125e+00,
-       0.000000000000000e+00,
-       0.000000000000000e+00,
-      -4.193141432895800e-04,
-      -3.357667186781713e-05},
-     1.390853715957114e+00,
+    8.457594957866317e-08,
+    1.390853715957114e+00,
+    {-6.263338154589970e-04,
+      6.221340947932125e+00,
+      0.000000000000000e+00,
+      0.000000000000000e+00,
+     -4.193141432895800e-04,
+     -3.357667186781713e-05},
     {
       {10,RHEA_0},
       {17,RHEA_1},
@@ -2987,15 +2987,14 @@ static const struct Tass17Body tass17bodies[8] = {
     }
   },
   { "TITAN",
-     1.128569252864205e-02,
-     1.439240478491377e+02,
-     {-1.348089930929860e-04,
-       4.936792168079816e+00,
-      -1.249553518183080e-06,
-       2.792373338061224e-06,
-      -5.584488311754492e-03,
-      -4.471842487301890e-04},
-     3.940425676910059e-01,
+    8.459559800923616e-08,
+    3.940425676910059e-01,
+    {-1.348089930929860e-04,
+      4.936792168079816e+00,
+     -1.249553518183080e-06,
+      2.792373338061224e-06,
+     -5.584488311754492e-03,
+     -4.471842487301890e-04},
     {
       {6,TITAN_0},
       {9,TITAN_1},
@@ -3004,15 +3003,14 @@ static const struct Tass17Body tass17bodies[8] = {
     }
   },
   { "IAPETUS",
-     1.128305751412486e-02,
-     2.892852233006243e+01,
-     {-4.931880677088688e-04,
-       1.661250302251527e-01,
-       3.904890046320212e-04,
-      -9.380651872794318e-04,
-      -1.315950341063651e-01,
-      -1.054097030879299e-02},
-     7.920197763192791e-02,
+    8.457584639645043e-08,
+    7.920197763192791e-02,
+    {-4.931880677088688e-04,
+      1.661250302251527e-01,
+      3.904890046320212e-04,
+     -9.380651872794318e-04,
+     -1.315950341063651e-01,
+     -1.054097030879299e-02},
     {
       {26,IAPETUS_0},
       {29,IAPETUS_1},
@@ -3021,15 +3019,14 @@ static const struct Tass17Body tass17bodies[8] = {
     }
   },
   { "HYPERION",
-     1.128302287524567e-02,
-     1.078615442658349e+02,
-     {-1.574686065780747e-03,
-       2.250358656361423e+00,
-       0.000000000000000e+00,
-       0.000000000000000e+00,
-      -4.939409467982673e-03,
-      -3.958228521883369e-04},
-     2.953088138695055e-01,
+    8.457558674940690e-08,
+    2.953088138695055e-01,
+    {-1.574686065780747e-03,
+      2.250358656361423e+00,
+      0.000000000000000e+00,
+      0.000000000000000e+00,
+     -4.939409467982673e-03,
+     -3.958228521883369e-04},
     {
       {1,HYPERION_0},
       {1,HYPERION_1},
@@ -3055,7 +3052,7 @@ CalcLon(double t,double lon[7]) {
 }
 
 static void
-CalcElem(double t,const double lon[7],int body,double elem[6]) {
+CalcTass17Elem(double t,const double lon[7],int body,double elem[6]) {
   const struct Tass17MultiTerm *tmt_begin,*tmt;
   int i;
   for (i=0;i<6;i++) elem[i] = tass17bodies[body].s0[i];
@@ -3069,6 +3066,7 @@ CalcElem(double t,const double lon[7],int body,double elem[6]) {
     for (i=0;i<7;i++) arg += tmt->i[i]*lon[i];
     while (--tt >= tt_begin) elem[0] += tt->s[0]*cos(tt->s[1]+tt->s[2]*t+arg);
   }
+  elem[0] = tass17bodies[body].aam * (1.0 + elem[0]);
   
   tmt_begin = tass17bodies[body].series[1].multi_terms;
   tmt = tmt_begin + tass17bodies[body].series[1].nr_of_multi_terms;
@@ -3083,7 +3081,7 @@ CalcElem(double t,const double lon[7],int body,double elem[6]) {
     for (i=0;i<7;i++) arg += tmt->i[i]*lon[i];
     while (--tt >= tt_begin) elem[1] += tt->s[0]*sin(tt->s[1]+tt->s[2]*t+arg);
   }
-  elem[1] += tass17bodies[body].s1_1*t;
+  elem[1] += tass17bodies[body].aam * t;
   elem[1] = fmod(elem[1],2*M_PI);
   
   tmt_begin = tass17bodies[body].series[2].multi_terms;
@@ -3115,95 +3113,50 @@ CalcElem(double t,const double lon[7],int body,double elem[6]) {
   }
 }
 
+
 static
-const double Tass17ToJ2000[9] = {
-  -9.833473364922412e-01,-1.603871593615650e-01, 8.546329577978411e-02,
-   1.667396263601733e-01,-9.832784702007392e-01, 7.322121988169769e-02,
-   7.229047527084537e-02, 8.625200955121034e-02, 9.936471597269794e-01};
+const double TASS17toVSOP87[9] = {
+  -9.833473364922412278e-01,-1.603871593615649693e-01, 8.546329577978411975e-02,
+   1.817361158757799129e-01,-8.678312794665074866e-01, 4.624292968291581735e-01,
+   0.000000000000000000e+00, 4.702603847778936010e-01, 8.825277165667645230e-01
+};
 
-static void
-CalcCoor(double rmu,double aam,const double elem[6],double xyz[]) {
-  const double amo = aam * (1 + elem[0]);
-  const double dga = cbrt(rmu/(amo*amo));
-  const double rl = elem[1];
-  const double rk = elem[2];
-  const double rh = elem[3];
-
-  double fle = rl - rk * sin(rl) + rh * cos(rl);
-  double corf;
-  do {
-    const double cf = cos(fle);
-    const double sf = sin(fle);
-    corf = (rl - fle + rk*sf - rh*cf) / (1 - rk*cf - rh*sf);
-    fle += corf;
-  } while (fabs(corf) > 1e-14);
-
-  const double cf = cos(fle);
-  const double sf = sin(fle);
-
-  const double dlf = -rk * sf + rh * cf;
-  const double phi = sqrt(1 - rk*rk - rh*rh);
-  const double psi = 1 / (1 + phi);
-
-  const double x1 = dga * (cf - rk - psi * rh * dlf);
-  const double y1 = dga * (sf - rh + psi * rk * dlf);
-
-  const double elem_4q = elem[4] * elem[4];
-  const double elem_5q = elem[5] * elem[5];
-  const double dwho = 2 * sqrt(1 - elem_4q - elem_5q);
-  const double rtp = 1 - elem_5q - elem_5q;
-  const double rtq = 1 - elem_4q - elem_4q;
-  const double rdg = 2 * elem[5] * elem[4];
-
-  const double X1 = x1 * rtp + y1 * rdg;
-  const double Y1 = x1 * rdg + y1 * rtq;
-  const double Z1 = (-x1 * elem[5] + y1 * elem[4]) * dwho;
-
-  xyz[0] = X1 * Tass17ToJ2000[0]
-         + Y1 * Tass17ToJ2000[1]
-         + Z1 * Tass17ToJ2000[2];
-  xyz[1] = X1 * Tass17ToJ2000[3]
-         + Y1 * Tass17ToJ2000[4]
-         + Z1 * Tass17ToJ2000[5];
-  xyz[2] = X1 * Tass17ToJ2000[6]
-         + Y1 * Tass17ToJ2000[7]
-         + Z1 * Tass17ToJ2000[8];
-
-  xyz[0] = X1;
-  xyz[1] = Y1;
-  xyz[2] = Z1;
-
-//  const double rsam1 = -rk * cf - rh * sf;
-//  const double h = (amo*dga)/(1 + rsam1);
-//  const double vx1 = h * (-sf - psi * rh * rsam1);
-//  const double vy1 = h * ( cf + psi * rk * rsam1);
-//
-//  const double VX1 = vx1 * rtp + vy1 * rdg;
-//  const double VY1 = vx1 * rdg + vy1 * rtq;
-//  const double VZ1 = (-vx1 * elem[5] + vy1 * elem[4]) * dwho;
-//
-//  xyz[4] = VX1 * Tass17ToJ2000[0]
-//         + VY1 * Tass17ToJ2000[1]
-//         + VZ1 * Tass17ToJ2000[2];
-//  xyz[5] = VX1 * Tass17ToJ2000[3]
-//         + VY1 * Tass17ToJ2000[4]
-//         + VZ1 * Tass17ToJ2000[5];
-//  xyz[6] = VX1 * Tass17ToJ2000[6]
-//         + VY1 * Tass17ToJ2000[7]
-//         + VZ1 * Tass17ToJ2000[8];
-//
-}
+/*
+static
+const double TASS17toJ2000[9] = {
+  -9.833472564628459035e-01,-1.603876313013248428e-01, 8.546333092352678089e-02,
+   1.667401119524148001e-01,-9.832783769705406668e-01, 7.322136606398094752e-02,
+   7.229044385733251626e-02, 8.625219479949252372e-02, 9.936471459321866589e-01
+};
+*/
 
 void GetTass17Coor(double jd,int body,double *xyz) {
-    /* dirty caching of lon[7] (static variables) */
-  static double t_old = -1e99;
+    /* dirty caching in static variables */
+  static double t_old[8] = {-1e99,-1e99,-1e99,-1e99,-1e99,-1e99,-1e99,-1e99};
   static double lon[7];
+  static double t_lon = -1e99;
+  static double elem[8*6];
   const double t = (jd - 2444240);
-  double elem[6];
-  if (t_old != t) {
-    t_old = t;
-    CalcLon(t,lon);
+  if (fabs(t-t_old[body]) > 0.5/24.0) {
+    t_old[body] = (floor(t*24.0)+0.5)/24.0;
+    if (t_lon != t_old[body]) {
+      t_lon = t_old[body];
+      CalcLon(t_lon,lon);
+    }
+    CalcTass17Elem(t_lon,lon,body,elem+(body*6));
+/*
+    printf("GetTass17Coor(%d): %f %f  %f %f  %f %f\n",
+           body,
+           elem[body*6+0],elem[body*6+1],elem[body*6+2],
+           elem[body*6+3],elem[body*6+4],elem[body*6+5]);
+*/
   }
-  CalcElem(t,lon,body,elem);
-  CalcCoor(tass17bodies[body].rmu,tass17bodies[body].aam,elem,xyz);
+  double x[3];
+  EllipticToRectangularN(tass17bodies[body].mu,elem+(body*6),t-t_lon,x);
+  xyz[0] = TASS17toVSOP87[0]*x[0]+TASS17toVSOP87[1]*x[1]+TASS17toVSOP87[2]*x[2];
+  xyz[1] = TASS17toVSOP87[3]*x[0]+TASS17toVSOP87[4]*x[1]+TASS17toVSOP87[5]*x[2];
+  xyz[2] = TASS17toVSOP87[6]*x[0]+TASS17toVSOP87[7]*x[1]+TASS17toVSOP87[8]*x[2];
 }
+
+
+
