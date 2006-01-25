@@ -44,6 +44,8 @@ My modifications are:
 6) use a rotation matrix for Transformation to J2000
    instead of AIA, OMA and inclination of earth axis
 7) exchange indices of hyperion and iapetus
+8) calculate the orbital elements not for every new jd but rather reuse
+   the previousely calculated elements if possible
 
 ****************************************************************/
 
