@@ -451,7 +451,7 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 		  // if from script, local to that path
 		  string path;
 		  if(stcore->scripts->is_playing()) path = stcore->scripts->get_script_path();
-		  else path = stcore->DataRoot + "/";
+		  else path = stcore->getDataRoot() + "/";
 		  
 		  //		  cout << "audio path = " << path << endl;
 		  
@@ -459,7 +459,7 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 		  audio->play(args["loop"]=="on");
 
 		  // if fast forwarding mute (pause) audio
-		  if(stcore->get_time_multiplier()!=1) audio->pause();
+		  if(stcore->getTimeMultiplier()!=1) audio->pause();
 
 	  } else if(args["volume"]!="") {
 
