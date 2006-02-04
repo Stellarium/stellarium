@@ -1,25 +1,24 @@
-# Spanish translations for stellarium package
-# Traducci� espa�la de stellarium.
+# Norwegian translations for stellarium package
 # Copyright (C) 2004, 2005 Free Software Foundation, Inc.
 # This file is distributed under the same license as the stellarium package.
-# Sergio Trujillo, 2005.
-# <sergiotrujillo@telefonica.net>
-# 
+# Geir Håkon Eikland
+# <eikland at users.sourceforge.net>
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: stellarium@free.fr\n"
 "POT-Creation-Date: 2006-01-25 21:50+0100\n"
-"PO-Revision-Date: 2005-07-25 18:00+0100\n"
-"Last-Translator: Sergio Trujillo <sergiotrujillo@telefonica.net>\n"
+"PO-Revision-Date: 2005-10-12 03:24+0100\n"
+"Last-Translator: Geir Håkon Eikland\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: KBabel 1.10\n"
-"X-Poedit-Language: Spanish\n"
-"X-Poedit-Country: SPAIN\n"
+"X-Poedit-Language: Norwegian\n"
+"X-Poedit-Country: NORWAY\n"
 
 #: src/main.cpp:53
 #, c-format
@@ -28,24 +27,24 @@ msgid ""
 " -v, --version          Output version information and exit.\n"
 " -h, --help             Display this help and exit.\n"
 msgstr ""
-"Uso: %s [OPCIÓN] ...\n"
-" -v, --version          Muestra información de la versión y sale.\n"
-" -h, --help             Muestra esta ayuda y sale.\n"
+"Bruk: %s [VALG] ...\n"
+" -v, --version          Viser informasjon om versjon og avslutter.\n"
+" -h, --help             Viser hjelp og avslutter.\n"
 
 #: src/main.cpp:77
 #, c-format
 msgid "%s: Bad command line argument(s)\n"
-msgstr "%s: Error en argumento(s) de la línea de comandos\n"
+msgstr "%s: Ugyldig kommandolinje argument \n"
 
 #: src/main.cpp:78
 #, c-format
 msgid "Try `%s --help' for more information.\n"
-msgstr "Intenta `%s --help' para más información.\n"
+msgstr "Prøv `%s --help' for mer informasjon.\n"
 
 #: src/constellation_mgr.cpp:155
 #, fuzzy
 msgid "Loading Constellation Art: "
-msgstr "Cargando imágenes de las Constelaciones : %d/%d"
+msgstr "Henter stjernebildene %d/%d"
 
 #: src/hip_star.cpp:77 src/nebula.cpp:71 src/planet.cpp:91
 msgid "Name : "
@@ -74,7 +73,7 @@ msgstr ""
 #: src/hip_star.cpp:110 src/nebula.cpp:83 src/planet.cpp:105
 #, fuzzy
 msgid "Magnitude : "
-msgstr "Magnitud"
+msgstr "Lysstyrke"
 
 #: src/hip_star.cpp:111 src/planet.cpp:107
 msgid "Distance : "
@@ -91,12 +90,12 @@ msgstr ""
 #: src/hip_star.cpp:124 src/nebula.cpp:94 src/planet.cpp:116
 #, fuzzy
 msgid "Alt : "
-msgstr "Altitud (m): "
+msgstr "Høyde (m): "
 
 #: src/hip_star.cpp:142 src/nebula.cpp:111 src/planet.cpp:131
 #, fuzzy
 msgid ": mag "
-msgstr "%s: mag %.1f"
+msgstr "%s: forsterket %.1f"
 
 #: src/hip_star.cpp:143
 msgid "ly"
@@ -106,25 +105,25 @@ msgstr ""
 #: src/hip_star_mgr.cpp:176
 #, fuzzy
 msgid "Loading Hipparcos catalog:"
-msgstr "Cargando Catálogo Hiparcos : %d/%d"
+msgstr "Henter Hipparcos stjernekatalog: %d/%d"
 
 # Dibuja barra de carga
 #: src/hip_star_mgr.cpp:853 src/hip_star_mgr.cpp:1520
 #, fuzzy, c-format
 msgid "Loading HIP/SAO catalogs: %d/%d"
-msgstr "Cargando Catálogo Hiparcos : %d/%d"
+msgstr "Henter Hipparcos stjernekatalog: %d/%d"
 
 # Dibuja barra de carga
 #: src/hip_star_mgr.cpp:1196
 #, fuzzy, c-format
 msgid "Loading HIP catalog: %d/%d"
-msgstr "Cargando Catálogo Hiparcos : %d/%d"
+msgstr "Henter Hipparcos stjernekatalog: %d/%d"
 
 # Dibuja barra de carga
 #: src/hip_star_mgr.cpp:1291
 #, fuzzy, c-format
 msgid "Loading SAO catalog: %d/%d"
-msgstr "Cargando Catálogo Hiparcos : %d/%d"
+msgstr "Henter Hipparcos stjernekatalog: %d/%d"
 
 #: src/nebula.cpp:72
 msgid "Cat: NGC "
@@ -142,24 +141,24 @@ msgstr ""
 #: src/nebula_mgr.cpp:360
 #, fuzzy
 msgid "Loading NGC catalog: "
-msgstr "Cargando Catálogo Hiparcos : %d/%d"
+msgstr "Henter Hipparcos stjernekatalog: %d/%d"
 
 # Dibuja barra de carga
 #: src/nebula_mgr.cpp:495
 #, fuzzy
 msgid "Loading Sharpless catalog:"
-msgstr "Cargando Catálogo Hiparcos : %d/%d"
+msgstr "Henter Hipparcos stjernekatalog: %d/%d"
 
 # Dibuja barra de carga
 #: src/nebula_mgr.cpp:560
 #, fuzzy
 msgid "Loading Cadwell catalog:"
-msgstr "Cargando Catálogo Hiparcos : %d/%d"
+msgstr "Henter Hipparcos stjernekatalog: %d/%d"
 
 #: src/nebula_mgr.cpp:662
 #, fuzzy
 msgid "Loading Nebula Textures:"
-msgstr "Cargando datos de Nebulosa: %d/%d"
+msgstr "Henter data om tåker: %d/%d"
 
 #: src/planet.cpp:107
 msgid "AU"
@@ -167,7 +166,7 @@ msgstr ""
 
 #: src/stel_ui.cpp:161
 msgid "Message"
-msgstr "Mensaje"
+msgstr "Beskjed"
 
 #: src/stel_ui.cpp:251
 msgid " (UTC)"
@@ -175,59 +174,59 @@ msgstr ""
 
 #: src/stel_ui.cpp:473 src/stel_ui.cpp:589
 msgid "Script commander"
-msgstr ""
+msgstr "Skript-kommandoer"
 
 #: src/stel_ui.cpp:500
 msgid "Invalid Script command"
-msgstr ""
+msgstr "Ugyldig skript-kommando"
 
 #: src/stel_ui.cpp:553
 msgid "Drawing of the Constellations [C]"
-msgstr "Dibujo de las Constelaciones [C]"
+msgstr "Strek opp stjernebilder [C]"
 
 #: src/stel_ui.cpp:555
 msgid "Names of the Constellations [V]"
-msgstr "Nombres de las Constelaciones [V]"
+msgstr "Navn på stjernebilder [V]"
 
 #: src/stel_ui.cpp:557
 msgid "Constellations Art [R]"
-msgstr "Imágenes de las Constelaciones [R]"
+msgstr "Stjernebilder [R]"
 
 #: src/stel_ui.cpp:559
 msgid "Azimuthal Grid [Z]"
-msgstr "Cuadrícula Azimutal [Z]"
+msgstr "Planprojesert rutenett (azimutial) [Z]"
 
 #: src/stel_ui.cpp:561
 msgid "Equatorial Grid [E]"
-msgstr "Cuadrícula Ecuatorial [E]"
+msgstr "Sylinderprojesert rutenett (ekvatorial) [E]"
 
 #: src/stel_ui.cpp:563
 msgid "Ground [G]"
-msgstr "Suelo [G]"
+msgstr "Horisont [G]"
 
 #: src/stel_ui.cpp:565
 msgid "Cardinal Points [Q]"
-msgstr "Puntos Cardinales [Q]"
+msgstr "Kardinalpunkter [Q]"
 
 #: src/stel_ui.cpp:567
 msgid "Atmosphere [A]"
-msgstr "Atmósfera [A]"
+msgstr "Atmosfære [A]"
 
 #: src/stel_ui.cpp:569
 msgid "Nebulas [N]"
-msgstr "Nebulosas [N]"
+msgstr "Skyer [N]"
 
 #: src/stel_ui.cpp:571
 msgid "Help [H]"
-msgstr "Ayuda [H]"
+msgstr "Hjelp [H]"
 
 #: src/stel_ui.cpp:573
 msgid "Equatorial/Altazimuthal Mount [ENTER]"
-msgstr "Montura Ecuatorial/Altazimutal [ENTER]"
+msgstr "Sylinder-/planprojesert visning [ENTER]"
 
 #: src/stel_ui.cpp:575
 msgid "Configuration window"
-msgstr "Ventana de configuración"
+msgstr "Oppsett"
 
 #: src/stel_ui.cpp:577
 msgid "Chart mode"
@@ -239,35 +238,35 @@ msgstr ""
 
 #: src/stel_ui.cpp:582
 msgid "Quit [CTRL + Q]"
-msgstr "Quitar [CTRL + Q]"
+msgstr "Avslutt [CTRL + Q]"
 
 #: src/stel_ui.cpp:584
 msgid "Quit [CMD + Q]"
-msgstr "Quitar [CMD + Q]"
+msgstr "Avslutt [CMD + Q]"
 
 #: src/stel_ui.cpp:587
 msgid "Search for object"
-msgstr ""
+msgstr "Søk etter et objekt"
 
 #: src/stel_ui.cpp:591
 msgid "Goto selected object [SPACE]"
-msgstr ""
+msgstr "Vis valgt objekt [mellomrom]"
 
 #: src/stel_ui.cpp:597
 msgid "Decrease Time Speed [J]"
-msgstr "Ralentizar velocidad del tiempo [J]"
+msgstr "Reduser klokkehastighet [J]"
 
 #: src/stel_ui.cpp:599
 msgid "Real Time Speed [K]"
-msgstr "Velocidad normal del tiempo [K]"
+msgstr "Normal klokkehastighet [K]"
 
 #: src/stel_ui.cpp:601
 msgid "Increase Time Speed [L]"
-msgstr "Acelerar velocidad del tiempo [L]"
+msgstr "Øk klokkehastighet [L]"
 
 #: src/stel_ui.cpp:603
 msgid "Return to Current Time"
-msgstr "Volver a la hora y fecha actual"
+msgstr "Retur til dagens tidspunkt"
 
 #: src/stel_ui.cpp:612
 #, fuzzy
@@ -276,15 +275,13 @@ msgid ""
 "and comments to us at: http://stellarium.sourceforge.net\n"
 "\n"
 msgstr ""
-"Por favor comprueba si tienes la última versión y envía un informe de error "
-"y tus comentarios \n"
-"desde la página web de stellarium : http://stellarium.sourceforge.net\n"
+"  Vennligst sjekk siste versjon av Stellarium før du rapporterer \n"
+"problemer til nettstedet http://stellarium.sourceforge.net\n"
 "\n"
 
 #: src/stel_ui.cpp:631
-#, fuzzy
 msgid "Information"
-msgstr "Configuración"
+msgstr "Informasjon"
 
 #: src/stel_ui.cpp:643
 msgid ""
@@ -355,131 +352,131 @@ msgstr ""
 
 #: src/stel_ui.cpp:687
 msgid "CTRL + Q : Quit\n"
-msgstr "CTRL+Q : Quitar\n"
+msgstr "CTRL+Q : Avslutt\n"
 
 #: src/stel_ui.cpp:689
 msgid "CMD + Q  : Quit\n"
-msgstr "CMD+Q : Quitar\n"
+msgstr "CMD+Q : Avslutt\n"
 
 #: src/stel_ui.cpp:695
 msgid "Help"
-msgstr "Ayuda"
+msgstr "Hjelp"
 
 #: src/stel_ui.cpp:1040
 msgid "Command recording stopped."
-msgstr "Comando de grabación parado."
+msgstr "Registrering av kommandoer stoppet."
 
 #: src/stel_ui.cpp:1048
 msgid "Recording commands to script file:\n"
-msgstr "Grabando comandos en el archivo de script:\n"
+msgstr "Registrering av kommandoer til skriptfilen:\n"
 
 #: src/stel_ui.cpp:1050
 msgid "Hit CTRL-R again to stop.\n"
-msgstr "Presiona CTRL-R otra vez para parar.\n"
+msgstr "Trykk på CTRL+R en gang til for å stoppe.\n"
 
 #: src/stel_ui.cpp:1054
 msgid "Error: Unable to open script file to record commands."
-msgstr "Error: Imposible abrir archivo de script para grabar los comandos."
+msgstr "Feil: Klarte ikke å åpne skriptfilen for å registrere kommandoer."
 
 #: src/stel_ui_conf.cpp:27
 msgid "Configuration"
-msgstr "Configuración"
+msgstr "Innstillinger"
 
 #: src/stel_ui_conf.cpp:47 src/stel_ui_conf.cpp:682
 msgid "Stars"
-msgstr "Estrellas"
+msgstr "Stjerner"
 
 #: src/stel_ui_conf.cpp:52
 msgid "Star Names. Up to mag :"
-msgstr "Nombre de las estrellas. Por encima de magnitud :"
+msgstr "Stjernenavn. Opp for å forsterke :"
 
 #: src/stel_ui_conf.cpp:64
 msgid "Star Twinkle. Amount :"
-msgstr "Centelleo de las estrellas. Cantidad :"
+msgstr "Funkling av stjernene. Intensitet :"
 
 #: src/stel_ui_conf.cpp:80
 msgid "Constellations"
-msgstr "Constelaciones"
+msgstr "Stjernebilder"
 
 #: src/stel_ui_conf.cpp:85
 msgid "Constellations Names"
-msgstr "Nombres de las Constelaciones"
+msgstr "Navn på stjernebilder"
 
 #: src/stel_ui_conf.cpp:90
 msgid "Selected Constellation Only"
-msgstr "Solo la Constelación seleccionada"
+msgstr "Vis bare valgt stjernebilde"
 
 #: src/stel_ui_conf.cpp:103
 msgid "Nebulas Names. Up to mag :"
-msgstr "Nombre de las Nebulosas. Por encima de mag :"
+msgstr "Navn på tåker. Opp for å forsterke :"
 
 #: src/stel_ui_conf.cpp:120
 msgid "Planets"
-msgstr "Planetas"
+msgstr "Planeter"
 
 #: src/stel_ui_conf.cpp:125
 msgid "Moon Scale"
-msgstr "Escala de la Luna"
+msgstr "Skaler månen"
 
 #: src/stel_ui_conf.cpp:132
 msgid "Planets Hints"
-msgstr "Info Planetas"
+msgstr "Marker planeter"
 
 #: src/stel_ui_conf.cpp:143
 msgid "Equatorial Grid"
-msgstr "Cuadrícula Ecuatorial"
+msgstr "Sylinderprojesert rutenett (ekvatorial)"
 
 #: src/stel_ui_conf.cpp:148
 msgid "Azimuthal Grid"
-msgstr "Cuadrícula Azimutal"
+msgstr "Planprojesert rutenett (azimutial)"
 
 #: src/stel_ui_conf.cpp:153
 msgid "Equator Line"
-msgstr "Ecuador Celeste"
+msgstr "Ekvatorlinje"
 
 #: src/stel_ui_conf.cpp:158
 msgid "Ecliptic Line"
-msgstr "Eclíptica"
+msgstr "Ekliptisk linje"
 
 #: src/stel_ui_conf.cpp:169
 msgid "Ground"
-msgstr "Suelo"
+msgstr "Horisont"
 
 #: src/stel_ui_conf.cpp:174
 msgid "Cardinal Points"
-msgstr "Puntos Cardinales"
+msgstr "Kardinalpunkter"
 
 #: src/stel_ui_conf.cpp:179
 msgid "Atmosphere"
-msgstr "Atmósfera"
+msgstr "Atmosfære"
 
 #: src/stel_ui_conf.cpp:184
 msgid "Fog"
-msgstr "Niebla"
+msgstr "Tåke"
 
 #: src/stel_ui_conf.cpp:189 src/stel_ui_conf.cpp:362
 msgid "Save as default"
-msgstr "Grabar por defecto"
+msgstr "Lagre som standard"
 
 #: src/stel_ui_conf.cpp:201
 #, fuzzy
 msgid "Current Time :"
-msgstr " Hora-Fecha actual :"
+msgstr " Gjeldende tid :"
 
 #: src/stel_ui_conf.cpp:210
 #, fuzzy
 msgid "Time Zone :"
-msgstr " Zona horaria :"
+msgstr " Tidssone :"
 
 #: src/stel_ui_conf.cpp:214
 #, fuzzy
 msgid "Using System Default Time Zone"
-msgstr " Usando la zona horaria por defecto del sistema"
+msgstr " Bruker tidssonen angitt i OS"
 
 #: src/stel_ui_conf.cpp:223
 #, fuzzy
 msgid "Time speed : "
-msgstr " Velocidad del tiempo : "
+msgstr " Hastighet tid : "
 
 #: src/stel_ui_conf.cpp:231
 msgid ""
@@ -487,9 +484,9 @@ msgid ""
 "   time speed.\n"
 "Use key K to return to real time speed."
 msgstr ""
-"Usa las teclas J y L para decrementar o incrementar\n"
-"   la velocidad del tiempo.\n"
-"Usa la tecla K para volver a la velocidad normal."
+"Bruk tasten J for å senke klokkehastigheten\n"
+"   - tasten L for å øke klokkehastigheten\n"
+"   - tasten K for å normal hastighet."
 
 #: src/stel_ui_conf.cpp:253
 msgid "Cursor : "
@@ -501,76 +498,75 @@ msgstr ""
 
 #: src/stel_ui_conf.cpp:263
 msgid "Longitude : "
-msgstr "Longitud : "
+msgstr "Lengdegrad: "
 
 #: src/stel_ui_conf.cpp:271
 msgid "Latitude : "
-msgstr "Latitud : "
+msgstr "Breddegrad: "
 
 #: src/stel_ui_conf.cpp:279
 #, fuzzy
 msgid "Altitude : "
-msgstr "Altitud (m): "
+msgstr "Høyde (m): "
 
 #: src/stel_ui_conf.cpp:286
 msgid "Save location"
-msgstr "Grabar posición"
+msgstr "Lagre hjemsted"
 
 #: src/stel_ui_conf.cpp:308
 #, fuzzy
 msgid "Projection :"
-msgstr " Proyección :"
+msgstr " Projeksjon:"
 
 #: src/stel_ui_conf.cpp:314
 msgid "Fisheye Projection Mode"
-msgstr "Modo de Proyección de Ángulo Plano"
+msgstr "Fiskeøye-projeksjon"
 
 #: src/stel_ui_conf.cpp:319
 msgid "Disk Viewport"
-msgstr "Disco de la Ventana de Navegación"
+msgstr "Linseformet visning."
 
 #: src/stel_ui_conf.cpp:324
 #, fuzzy
 msgid "Screen Resolution :"
-msgstr " Resolución de pantalla  :"
+msgstr " Skjermoppløsning:"
 
 #: src/stel_ui_conf.cpp:328
 msgid "Restart program for"
-msgstr "Reiniciar el programa para"
+msgstr "Start programmet på nytt"
 
 #: src/stel_ui_conf.cpp:329
 msgid "change to apply."
-msgstr "activar los cambios."
+msgstr "for å vise endringene."
 
 #: src/stel_ui_conf.cpp:353
 msgid "For unlisted screen resolution, edit the file :"
-msgstr ""
+msgstr "For oppløsninger som ikke vises, må du endre filen :"
 
 #: src/stel_ui_conf.cpp:373
 #, fuzzy
 msgid "Choose landscapes :"
-msgstr "Paisaje: "
+msgstr " Velg landskap :"
 
 #: src/stel_ui_conf.cpp:390
 msgid "Please save option in tab \"Location\""
-msgstr ""
+msgstr "Endringer lagres under arkfanen \"Hjemsted\""
 
 #: src/stel_ui_conf.cpp:391
 msgid "to save current landscape as the default landscape."
-msgstr ""
+msgstr "for å lagre aktivt landskap som standard landskap."
 
 #: src/stel_ui_conf.cpp:399
 msgid "Date & Time"
-msgstr "Fecha & Hora"
+msgstr "Dato & Tid"
 
 #: src/stel_ui_conf.cpp:400
 msgid "Location"
-msgstr "Posición"
+msgstr "Hjemsted"
 
 #: src/stel_ui_conf.cpp:401
-#, fuzzy
 msgid "Landscapes"
-msgstr "Paisaje: "
+msgstr "Landskap"
 
 #: src/stel_ui_conf.cpp:402
 msgid "Video"
@@ -578,37 +574,37 @@ msgstr "Video"
 
 #: src/stel_ui_conf.cpp:403
 msgid "Rendering"
-msgstr "Renderizado"
+msgstr "Tilpassing"
 
 #: src/stel_ui_conf.cpp:507
 msgid "Object Search"
-msgstr ""
+msgstr "Søke etter objekt"
 
 #: src/stel_ui_conf.cpp:526
+#, fuzzy
 msgid "Star No./Name"
-msgstr ""
+msgstr "HP nr./navn"
 
 #: src/stel_ui_conf.cpp:530
 msgid "eg. 60718 (aCrux) or Canopus"
-msgstr ""
+msgstr "eks. 60718 (aCrux) eller Canopus"
 
 #: src/stel_ui_conf.cpp:531
 msgid "HP 60718, HD 108248, SAO 251904"
 msgstr ""
 
 #: src/stel_ui_conf.cpp:552 src/stel_ui_conf.cpp:683
-#, fuzzy
 msgid "Constellation"
-msgstr "Constelaciones"
+msgstr "Stjernebilder"
 
 #: src/stel_ui_conf.cpp:556
 msgid "eg. Crux"
-msgstr ""
+msgstr "eks. Crux"
 
 #: src/stel_ui_conf.cpp:575 src/stel_ui_conf.cpp:684
 #, fuzzy
 msgid "Nebula"
-msgstr "Nebulosas"
+msgstr "Tåke"
 
 #: src/stel_ui_conf.cpp:579
 msgid "eg. M83, NGC 7009, IC 2118"
@@ -621,16 +617,16 @@ msgstr ""
 #: src/stel_ui_conf.cpp:665
 #, fuzzy
 msgid "Planet/Moon"
-msgstr "Planetas"
+msgstr "Planet/måne"
 
 #: src/stel_ui_conf.cpp:669
 msgid "eg. Pluto or Io"
-msgstr ""
+msgstr "eks. Pluto eller Io"
 
 #: src/stel_ui_conf.cpp:685
 #, fuzzy
 msgid "Planets & Moons"
-msgstr "Info Planetas"
+msgstr "Planeter & måner"
 
 #: src/stel_ui_conf.cpp:956
 msgid "Enter observatory name"
@@ -639,23 +635,23 @@ msgstr ""
 #: src/stel_ui_conf.cpp:1111
 #, fuzzy
 msgid "Current Time Speed is x"
-msgstr " Hora-Fecha actual :"
+msgstr " Gjeldende tid :"
 
 #: src/stel_ui_tuiconf.cpp:85
 msgid "Set Location "
-msgstr "Establece la posición "
+msgstr "Angi hjemsted "
 
 #: src/stel_ui_tuiconf.cpp:86
 msgid "Set Time "
-msgstr "Establece el tiempo "
+msgstr "Angi tid "
 
 #: src/stel_ui_tuiconf.cpp:87
 msgid "General "
-msgstr "General "
+msgstr "Generelt "
 
 #: src/stel_ui_tuiconf.cpp:88
 msgid "Stars "
-msgstr "Estrellas "
+msgstr "Stjerner "
 
 #: src/stel_ui_tuiconf.cpp:89
 msgid "Colors "
@@ -663,169 +659,171 @@ msgstr ""
 
 #: src/stel_ui_tuiconf.cpp:90
 msgid "Effects "
-msgstr "Efectos "
+msgstr "Effekter "
 
 #: src/stel_ui_tuiconf.cpp:91
 msgid "Scripts "
-msgstr "Scripts "
+msgstr "Skript "
 
 #: src/stel_ui_tuiconf.cpp:92
 msgid "Administration "
-msgstr "Administración "
+msgstr "Administrasjon "
 
 #: src/stel_ui_tuiconf.cpp:103
 msgid "Latitude: "
-msgstr "Latitud: "
+msgstr "Breddegrad: "
 
 #: src/stel_ui_tuiconf.cpp:105
 msgid "Longitude: "
-msgstr "Longitud: "
+msgstr "Lengdegrad: "
 
 #: src/stel_ui_tuiconf.cpp:107
 msgid "Altitude (m): "
-msgstr "Altitud (m): "
+msgstr "Høyde (m): "
 
 #: src/stel_ui_tuiconf.cpp:114
 msgid "Sky Time: "
-msgstr "Tiempo del cielo: "
+msgstr "Himmeltid: "
 
 #: src/stel_ui_tuiconf.cpp:116
 msgid "Set Time Zone: "
-msgstr "Establece Zona Horaria: "
+msgstr "Angi tidssone: "
 
 #: src/stel_ui_tuiconf.cpp:119
 msgid "Preset Sky Time: "
-msgstr "Tiempo del cielo predefinido: "
+msgstr "Forhåndsvalgt himmeltid: "
 
 #: src/stel_ui_tuiconf.cpp:121
 msgid "Sky Time At Start-up: "
-msgstr "Tiempo del cielo al inicio: "
+msgstr "Himmeltid ved oppstart: "
 
 #: src/stel_ui_tuiconf.cpp:125
 msgid "Time Display Format: "
-msgstr "Formato de Hora: "
+msgstr "Visning av tid: "
 
 #: src/stel_ui_tuiconf.cpp:130
 msgid "Date Display Format: "
-msgstr "Formato de Fecha: "
+msgstr "Visning av dato: "
 
 #: src/stel_ui_tuiconf.cpp:147
 msgid "Sky Culture: "
-msgstr "Cultura del Cielo: "
+msgstr "Kultur på himmelen: "
 
 #: src/stel_ui_tuiconf.cpp:152
 msgid "Sky Language: "
-msgstr "Lenguaje del Cielo: "
+msgstr "Språk på himmelen: "
 
 #: src/stel_ui_tuiconf.cpp:160
 msgid "Show: "
-msgstr "Muestra: "
+msgstr "Vis: "
 
 #: src/stel_ui_tuiconf.cpp:160 src/stel_ui_tuiconf.cpp:198
 msgid "Yes"
-msgstr "Si"
+msgstr "Ja"
 
 #: src/stel_ui_tuiconf.cpp:160 src/stel_ui_tuiconf.cpp:198
 msgid "No"
-msgstr "No"
+msgstr "Nei"
 
 #: src/stel_ui_tuiconf.cpp:162
 msgid "Star Magnitude Multiplier: "
-msgstr "Multiplicador de Magnitud de las Estrellas: "
+msgstr "Forsterking av stjerner: "
 
 #: src/stel_ui_tuiconf.cpp:164
 msgid "Maximum Magnitude to Label: "
-msgstr "Magnitud Máxima de etiquetas: "
+msgstr "Maks forsterking av navn: "
 
 #: src/stel_ui_tuiconf.cpp:166
 msgid "Twinkling: "
-msgstr "Centelleo: "
+msgstr "Funkling: "
 
 #: src/stel_ui_tuiconf.cpp:175
 #, fuzzy
 msgid "Constellation lines: "
-msgstr "Constelaciones"
+msgstr "Stjernebilder"
 
 #: src/stel_ui_tuiconf.cpp:179
 #, fuzzy
 msgid "Constellation labels: "
-msgstr "Nombres de las Constelaciones"
+msgstr "Navn på stjernebilder"
 
 #: src/stel_ui_tuiconf.cpp:183
 #, fuzzy
 msgid "Cardinal points: "
-msgstr "Puntos Cardinales"
+msgstr "Kardinalpunkter"
 
 #: src/stel_ui_tuiconf.cpp:192
 msgid "Landscape: "
-msgstr "Paisaje: "
+msgstr "Landskap: "
 
 #: src/stel_ui_tuiconf.cpp:198
 msgid "Manual zoom: "
-msgstr "Zoom manual: "
+msgstr "Manuell zoom: "
 
 #: src/stel_ui_tuiconf.cpp:202
+#, fuzzy
 msgid "Object Sizing Rule: "
-msgstr "Regla de tamaño de los objetos: "
+msgstr "Regel for størrelse på objekt: "
 
 #: src/stel_ui_tuiconf.cpp:202
 msgid "Point"
-msgstr "Punto"
+msgstr "Punkt"
 
 #: src/stel_ui_tuiconf.cpp:202
 msgid "Magnitude"
-msgstr "Magnitud"
+msgstr "Lysstyrke"
 
 #: src/stel_ui_tuiconf.cpp:206
+#, fuzzy
 msgid "Magnitude Sizing Multiplier: "
-msgstr "Multiplicador de tamaño de magnitud: "
+msgstr "Multiplikator for lysstyrke: "
 
 #: src/stel_ui_tuiconf.cpp:210
 msgid "Milky Way intensity: "
-msgstr "Luminosidad de la Vía Láctea: "
+msgstr "Intensitet Melkeveien: "
 
 #: src/stel_ui_tuiconf.cpp:214
 #, fuzzy
 msgid "Maximum Nebula Magnitude to Label: "
-msgstr "Magnitud Máxima de etiquetas: "
+msgstr "Maks forsterking av navn: "
 
 #: src/stel_ui_tuiconf.cpp:218
 #, fuzzy
 msgid "Zoom Duration: "
-msgstr "Duración del zoom: "
+msgstr "Trinn for zoom : "
 
 #: src/stel_ui_tuiconf.cpp:222
 #, fuzzy
 msgid "Cursor Timeout: "
-msgstr " Hora-Fecha actual :"
+msgstr " Gjeldende tid :"
 
 #: src/stel_ui_tuiconf.cpp:228
 msgid "Local Script: "
-msgstr "Script Local: "
+msgstr "Lokalt skript: "
 
 #: src/stel_ui_tuiconf.cpp:234
 msgid "CD/DVD Script: "
-msgstr "Script CD/DVD:"
+msgstr "CD/DVD skript:"
 
 #: src/stel_ui_tuiconf.cpp:242
 msgid "Load Default Configuration: "
-msgstr "Carga la Configuración por Defecto: "
+msgstr "Hent standard oppsett: "
 
 #: src/stel_ui_tuiconf.cpp:244
 msgid "Save Current Configuration as Default: "
-msgstr "Graba la Configuración Actual por Defecto: "
+msgstr "Lagre dette oppsettet som standard: "
 
 #: src/stel_ui_tuiconf.cpp:246
 msgid "Update me via Internet: "
-msgstr "Actualizame a través de Internet"
+msgstr "Oppdater programmet via internett:"
 
 #: src/stel_ui_tuiconf.cpp:262
 msgid "N-S Centering Offset: "
-msgstr "Compensación del centrado N-S"
+msgstr "Sentrer visning N-S:"
 
 #: src/stel_ui_tuiconf.cpp:266
 msgid "E-W Centering Offset: "
-msgstr "Compensación del centrado E-O"
+msgstr "Sentrer visning Ø-V:"
 
 #: src/translations.h:33
 msgid "Sun"
@@ -850,7 +848,7 @@ msgstr ""
 #: src/translations.h:38
 #, fuzzy
 msgid "Mars"
-msgstr "Estrellas"
+msgstr "Stjerner"
 
 #: src/translations.h:39
 msgid "Deimos"
@@ -936,25 +934,25 @@ msgstr ""
 msgid "Charon"
 msgstr ""
 
-# Norte
+# Noorden
 #: src/translations.h:62
 msgid "N"
 msgstr "N"
 
-# Sur
+# Zuiden
 #: src/translations.h:63
 msgid "S"
 msgstr "S"
 
-# Este
+# Oosten
 #: src/translations.h:64
 msgid "E"
-msgstr "E"
+msgstr "Ø"
 
-# Oeste
+# Westen
 #: src/translations.h:65
 msgid "W"
-msgstr "O"
+msgstr "V"
 
 #: src/translations.h:68
 msgid "Aquila"
@@ -1065,8 +1063,9 @@ msgid "Corvus"
 msgstr ""
 
 #: src/translations.h:95
+#, fuzzy
 msgid "Crux"
-msgstr ""
+msgstr "eks. Crux"
 
 #: src/translations.h:96
 msgid "Cygnus"
@@ -1119,7 +1118,7 @@ msgstr ""
 #: src/translations.h:108
 #, fuzzy
 msgid "Grus"
-msgstr "Suelo"
+msgstr "Horisont"
 
 #: src/translations.h:109
 msgid "Hercules"
@@ -1248,7 +1247,7 @@ msgstr ""
 #: src/translations.h:140
 #, fuzzy
 msgid "Volans"
-msgstr "Planetas"
+msgstr "Planeter"
 
 #: src/translations.h:141
 msgid "Puppis"
@@ -1261,12 +1260,12 @@ msgstr ""
 #: src/translations.h:143
 #, fuzzy
 msgid "Sagittarius"
-msgstr "Estrellas"
+msgstr "Stjerner"
 
 #: src/translations.h:144
 #, fuzzy
 msgid "Scorpius"
-msgstr "Scripts "
+msgstr "Skript "
 
 #: src/translations.h:146
 msgid "Serpens"
@@ -1275,17 +1274,16 @@ msgstr ""
 #: src/translations.h:147
 #, fuzzy
 msgid "Sextans"
-msgstr "Estrellas"
+msgstr "Stjerner"
 
 #: src/translations.h:148
 #, fuzzy
 msgid "Mensa"
-msgstr "Mensaje"
+msgstr "Beskjed"
 
 #: src/translations.h:149
-#, fuzzy
 msgid "Taurus"
-msgstr "Estrellas"
+msgstr ""
 
 #: src/translations.h:150
 msgid "Telescopium"
@@ -1315,7 +1313,17 @@ msgstr "Video"
 #: src/translations.h:156
 #, fuzzy
 msgid "Vela"
-msgstr "Nebulosas"
+msgstr "Tåke"
+
+#, fuzzy
+#~ msgid ""
+#~ "Please check last version and send bug report & comments \n"
+#~ "on stellarium web page : http://www.stellarium.org\n"
+#~ "\n"
+#~ msgstr ""
+#~ "Vennligst sjekk siste versjon av Stellarium før du rapporterer \n"
+#~ "problemer til nettstedet http://stellarium.sourceforge.net\n"
+#~ "\n"
 
 #~ msgid ""
 #~ "ERROR : I can't find the datas directories in :\n"
@@ -1324,145 +1332,34 @@ msgstr "Nebulosas"
 #~ "systems)\n"
 #~ "or launch the application from the stellarium package directory.\n"
 #~ msgstr ""
-#~ "ERROR : No se puede encontrar el directorio de datos en :\n"
-#~ "%s/ ni en ./ ni en ../\n"
-#~ "Usted puede instalar el software completo (teclee \"make install\" en un "
-#~ "sistema POSIX)\n"
-#~ "o lance la aplicación desde el directorio de stellarium.\n"
+#~ "ERROR : Kan ikke finne datamappen i :\n"
+#~ "%s/ , ./ eller i ../\n"
+#~ "Du må kanskje installere programmet på nytt (skriv \"make install\" på "
+#~ "POSIX systemer)\n"
+#~ "eller starte programmet fra pakemappen til Stellarium. \n"
 
 #~ msgid "> Found data files in %s : local version.\n"
-#~ msgstr "> Encontrados los archivos de datos en %s : versión local.\n"
+#~ msgstr "> Datafiler funnet i %s : lokal versjon.\n"
 
 #~ msgid "Will create config files in %s\n"
-#~ msgstr "Se crearán los archivos de configuración en %s\n"
+#~ msgstr "Vil lage oppsettsfiler i %s\n"
 
 # Quizás el directorio no está creado así que se intenta crear
 #~ msgid "Try to create directory %s\n"
-#~ msgstr "Intento de crear el directorio %s\n"
+#~ msgstr "Prøv å lage mappen %s\n"
 
 #~ msgid ""
 #~ "Can't create the file %sconfig.ini\n"
 #~ "If the directory %s is missing please create it by hand.\n"
 #~ "If not, check that you have access to %s\n"
 #~ msgstr ""
-#~ "No se puede crear el archivo %sconfig.ini\n"
-#~ "Si el directorio %s no se encuentra por favor creelo manualmente.\n"
-#~ "Si no, compruebe que tiene acceso a %s\n"
+#~ "Klarte ikke å lage filen %sconfig.ini\n"
+#~ "Dersom mappen %s ikke finnes, må du lage den selv.\n"
+#~ "Dersom mappe %s finnes, sjekk lese-/skriverettighetene dine\n"
 
-#, fuzzy
-#~ msgid "Loading Constellation boundary data..."
-#~ msgstr "Cargando imágenes de las Constelaciones : %d/%d"
+#~ msgid "ERROR on line %d of %s\n"
+#~ msgstr "FEIL i linje %d i %s\n"
 
-#, fuzzy
-#~ msgid "Loading Hipparcos double stars..."
-#~ msgstr "Cargando datos de estrellas del Catálogo Hiparcos "
-
-#, fuzzy
-#~ msgid "Loading Hipparcos periodic variable stars..."
-#~ msgstr "Cargando datos de estrellas del Catálogo Hiparcos "
-
-#, fuzzy
-#~ msgid "Loading Hipparcos/SAO star data..."
-#~ msgstr "Cargando datos de estrellas del Catálogo Hiparcos "
-
-#, fuzzy
-#~ msgid "Loading Hipparcos star data..."
-#~ msgstr "Cargando datos de estrellas del Catálogo Hiparcos "
-
-#, fuzzy
-#~ msgid "Loading SAO star data "
-#~ msgstr "Cargando datos de Nebulosas "
-
-#, fuzzy
-#~ msgid "Loading star name data "
-#~ msgstr "Cargando datos del Sistema Solar...\n"
-
-#, fuzzy
-#~ msgid "Loading NGC data..."
-#~ msgstr "Cargando datos del Sistema Solar...\n"
-
-#, fuzzy
-#~ msgid "Loading NGC name data..."
-#~ msgstr "Cargando datos del Sistema Solar...\n"
-
-#, fuzzy
-#~ msgid "Loading Sharpless data..."
-#~ msgstr "Cargando datos del Sistema Solar...\n"
-
-#, fuzzy
-#~ msgid "Loading Cadwell reference data..."
-#~ msgstr "Cargando datos del Sistema Solar...\n"
-
-#, fuzzy
-#~ msgid "(%d deep space objects)\n"
-#~ msgstr "(%d objetos del cielo profundo)...\n"
-
-#~ msgid "Loading location: \"%s\", "
-#~ msgstr "Cargando posición: \"%s\", "
-
-#~ msgid "(landscape is: \"%s\")\n"
-#~ msgstr "(el paisaje es: \"%s\")\n"
-
-#~ msgid "Saving location %s to file %s\n"
-#~ msgstr "Grabando posición %s en el archivo %s\n"
-
-#, fuzzy
-#~ msgid "Loading Cities data..."
-#~ msgstr "Cargando datos del Sistema Solar...\n"
-
-#~ msgid "Saving rendering options in file "
-#~ msgstr "Grabando opciones de renderizado en archivo "
-
-#~ msgid "Saving video size "
-#~ msgstr "Grabando el tamaño de video "
-
-#~ msgid " in file "
-#~ msgstr " en el archivo "
-
-#~ msgid ""
-#~ "The current config file is from a previous version (>=0.6.0).\n"
-#~ "Previous options will be imported in the new config file.\n"
-#~ msgstr ""
-#~ "El archivo de configuración actual es de una versión anterior (>=0.6.0).\n"
-#~ "Las anteriores opciones serán importadas en el nuevo archivo de "
-#~ "configuración.\n"
-
-#~ msgid ""
-#~ "The current config file is from a version too old for parameters to be "
-#~ "imported (%s).\n"
-#~ "It will be replaced by the default config file.\n"
-#~ msgstr ""
-#~ "El archivo de configuración actual es de una versión demasiado antigua "
-#~ "como para poder importar sus parámetros (%s).\n"
-#~ "Será reemplazado por el archivo de configuración por defecto.\n"
-
-#~ msgid "Loading configuration file "
-#~ msgstr "Cargando el archivo de configuración "
-
-#~ msgid "ERROR : The current config file is from a different version ("
-#~ msgstr ""
-#~ "ERROR : El archivo de configuración actual es de una versión diferente ("
-
-#, fuzzy
-#~ msgid ""
-#~ "Please check last version and send bug report & comments \n"
-#~ "on stellarium web page : http://www.stellarium.org\n"
-#~ "\n"
-#~ msgstr ""
-#~ "Por favor comprueba si tienes la última versión y envía un informe de "
-#~ "error y tus comentarios \n"
-#~ "desde la página web de stellarium : http://stellarium.sourceforge.net\n"
-#~ "\n"
-
-#, fuzzy
-#~ msgid "Loading Solar System data..."
-#~ msgstr "Cargando datos del Sistema Solar...\n"
-
-#, fuzzy
-#~ msgid "Canes"
-#~ msgstr "Planetas"
-
-#, fuzzy
 #~ msgid ""
 #~ "Name : %s%s%s\n"
 #~ "RA : %s\n"
@@ -1471,17 +1368,20 @@ msgstr "Nebulosas"
 #~ "Distance : %s Light Years\n"
 #~ "Hip : %.4d\n"
 #~ msgstr ""
-#~ "Nombre :%s%s\n"
-#~ "AD : %s\n"
-#~ "DE : %s\n"
-#~ "Distancia : %.8f UA\n"
-#~ "Magnitud : %.2f"
+#~ "Navn : %s%s%s\n"
+#~ "Lengdegrad (RE) : %s\n"
+#~ "Breddegrad (DE) : %s\n"
+#~ "Lysstyrke : %.2f\n"
+#~ "Avstand : %s lysår\n"
+#~ "Hip : %.4d\n"
 
-#, fuzzy
 #~ msgid "%s: mag %.1f %s"
-#~ msgstr "%s: mag %.1f"
+#~ msgstr "%s: lysstyrke %.1f %s"
 
-# AD=Ascensión Derecha, DE=Declinación, Mag=Magnitud
+#~ msgid "Loading Hipparcos star data "
+#~ msgstr "Henter Hipparcos stjernedata"
+
+# RE=Rektasensjon, DE=Deklinasjon
 #, fuzzy
 #~ msgid ""
 #~ "Name : %s (NGC %u)\n"
@@ -1489,12 +1389,26 @@ msgstr "Nebulosas"
 #~ "DE : %s\n"
 #~ "Magnitude : %.2f"
 #~ msgstr ""
-#~ "Nombre : %s (NGC %u)\n"
-#~ "AD : %s\n"
-#~ "DE : %s\n"
-#~ "Mag : %.2f"
+#~ "Navn: %s (NGC %u)\n"
+#~ "Lengdegrad (RE) : %s\n"
+#~ "Breddegrad (DE) : %s\n"
+#~ "Lysstyrke: %.2f"
 
-#, fuzzy
+#~ msgid "Loading nebulas data "
+#~ msgstr "Henter data om tåker"
+
+#~ msgid "(%d deep space objects)...\n"
+#~ msgstr "(%d objekt veldig langt ute)...\n"
+
+#~ msgid "Loading location: \"%s\", "
+#~ msgstr "Henter hjemsted: \"%s\", "
+
+#~ msgid "(landscape is: \"%s\")\n"
+#~ msgstr "(landskap er: \"%s\")\n"
+
+#~ msgid "Saving location %s to file %s\n"
+#~ msgstr "Lagrer hjemstedet %s i filen %s\n"
+
 #~ msgid ""
 #~ "Name :%s%s\n"
 #~ "RA : %s\n"
@@ -1502,14 +1416,23 @@ msgstr "Nebulosas"
 #~ "Magnitude : %.2f\n"
 #~ "Distance : %.8f AU"
 #~ msgstr ""
-#~ "Nombre :%s%s\n"
-#~ "AD : %s\n"
-#~ "DE : %s\n"
-#~ "Distancia : %.8f UA\n"
-#~ "Magnitud : %.2f"
+#~ "Navn :%s%s\n"
+#~ "Lengdegrad (RE) : %s\n"
+#~ "Breddegrad (DE) : %s\n"
+#~ "Lysstyrke : %.2f\n"
+#~ "Avstand : %.8f AE"
 
 #~ msgid "%s%s: mag %.1f"
-#~ msgstr "%s%s: mag %.1f"
+#~ msgstr "%s%s: lysstyrke %.1f"
+
+#~ msgid "Using sky language from environment locale: "
+#~ msgstr "Bruker språk fra lokal mappe: "
+
+#~ msgid "Did not recognize locale language code "
+#~ msgstr "Gjenkjente ikke valgte språkkode "
+
+#~ msgid ". Defaulting to english sky labels\n"
+#~ msgstr ". Bruker derfor engelske navn\n"
 
 #~ msgid ""
 #~ "Arrow Keys       : Change viewing RA/DE\n"
@@ -1544,49 +1467,94 @@ msgstr "Nebulosas"
 #~ "CTRL + S : Take a screenshot\n"
 #~ "CTRL + R : Toggle script recording\n"
 #~ msgstr ""
-#~ "Flechas             : Desplazamiento AD/DE\n"
-#~ "Pagina Up/Down   : Zoom\n"
-#~ "CTRL+Up/Down     : Zoom\n"
-#~ "Clic Gauche      : Seleccionar objeto\n"
-#~ "Clic Droit       : Deseleccionar objeto\n"
-#~ "CTRL+Clic Gauche : Deseleccionar\n"
-#~ "ESPACE : Centrar sobre el objeto seleccionado\n"
-#~ "ENTER : Montura Ecuatorial/Altazimutal\n"
-#~ "CTRL + S : Toma una imagen instantánea\n"
-#~ "C   : Líneas de Constelaciones\n"
-#~ "V   : Nombres de Constelaciones\n"
-#~ "R   : Imágenes de Constelaciones\n"
-#~ "E   : Cuadrícula Ecuatorial\n"
-#~ "Z   : Cuadrícula Azimutal\n"
-#~ "N   : Nombre de Nebulosas\n"
-#~ "P   : Nombre de Planetas\n"
-#~ "G   : Suelo\n"
-#~ "F   : Niebla\n"
-#~ "Q   : Puntos Cardinales\n"
-#~ "A   : Atmósfera\n"
-#~ "H   : Ayuda\n"
-#~ "4   : Eclíptica\n"
-#~ "5   : Ecuador celeste\n"
-#~ "T   : Seguimiento del objeto\n"
-#~ "S   : Estrellas\n"
-#~ "8   : Ajustar a la hora-fecha actual\n"
-#~ "9   : Activa el control de estrellas fugaces\n"
-#~ "I   : Sobre Stellarium\n"
-#~ "M   : Menú textual\n"
-#~ "F1  : Modo Pantalla Completa, si es posible.\n"
-#~ "CTRL + S : Tomar una captura de pantalla\n"
-#~ "CTRL + R : Activar registro de scripts\n"
+#~ "Piltaster          : Bytt visning RA/DE\n"
+#~ "Page Up/Down       : Zoom\n"
+#~ "CTRL+Up/Down       : Zoom\n"
+#~ "Venstre-klikk      : Velg objekt\n"
+#~ "Høyre-klikk        : Opphev valg\n"
+#~ "CTRL+Venstre-klikk : Opphev valg\n"
+#~ "MELLOMROM          : Sentrer valgt objekt\n"
+#~ "ENTER  : Sylinder-/planprojesert visning\n"
+#~ "CTRL + S : Kopier skjermbildet\n"
+#~ "C: Strektegning av stjernebildene\n"
+#~ "V: Navn på stjernebildene\n"
+#~ "R: Stjernebilder\n"
+#~ "E: Sylinderprojesert rutenett (ekvatorial)\n"
+#~ "Z: Planprojesert rutenett (azimutial)\n"
+#~ "N: Navn på skyer\n"
+#~ "P: Navn på planeter\n"
+#~ "G: Horisont\n"
+#~ "F: Tåke\n"
+#~ "Q: Kardinalpunkter\n"
+#~ "A: Atmosfære\n"
+#~ "H: Hjelp\n"
+#~ "4: Ecliptisk linje\n"
+#~ "5: Ekvatorlinje\n"
+#~ "T: Følge objekt\n"
+#~ "S: Stjerner\n"
+#~ "8: Sett tid til Terug naar de huidige tijd\n"
+#~ "9: Bytt mellom 3 intensitet av meteorregn\n"
+#~ "I: Info om Stellarium\n"
+#~ "M: Tekstmeny\n"
+#~ "F1: Vi i full skjerm om mulig\n"
+#~ "CTRL + S : Kopier stjernebildet\n"
+#~ "CTRL + R : Start registrering av skript\n"
+
+#~ msgid "Messier No."
+#~ msgstr "Messier-nr."
+
+#~ msgid "eg. M83"
+#~ msgstr "eks. M83"
+
+#~ msgid "Saving rendering options in file "
+#~ msgstr "Lagre valgene i fil"
+
+#~ msgid "Saving video size "
+#~ msgstr "Lagre video-størrelse"
+
+#~ msgid " in file "
+#~ msgstr " i fil "
+
+#~ msgid "Loading Solar System data...\n"
+#~ msgstr "Henter data om solsystem...\n"
+
+#~ msgid ""
+#~ "The current config file is from a previous version (>=0.6.0).\n"
+#~ "Previous options will be imported in the new config file.\n"
+#~ msgstr ""
+#~ "Nåværende oppsettsfil er fra en tidligere versjon (>=0.6.0).\n"
+#~ "Oppsettet vil nå bli importert til den nye oppsettsfilen.\n"
+
+#~ msgid ""
+#~ "The current config file is from a version too old for parameters to be "
+#~ "imported (%s).\n"
+#~ "It will be replaced by the default config file.\n"
+#~ msgstr ""
+#~ "Nåværende oppsettsfil tilhører en versjon som ikke støttesfor å bli "
+#~ "importert (%s).\n"
+#~ "Den vil nå bli erstattet med en standard oppsettsfil.\n"
+
+#~ msgid "Loading configuration file "
+#~ msgstr "Henter laget oppsett "
+
+#~ msgid "ERROR : The current config file is from a different version ("
+#~ msgstr "FEIL : Aktiv oppsettsfil er fra en annen versjon av programmet ("
+
+#~ msgid "Invalid sky culture directory: "
+#~ msgstr "Ugyldig mappe for himmelkultur: "
 
 # Hip = Hiparcos, AD=Ascensión Derecha, DE=Declinación, Mag=Magnitud
+#, fuzzy
 #~ msgid ""
-#~ "Name :%s%s%s\n"
+#~ "Name : %s%s%s\n"
 #~ "Hip : %.4d\n"
 #~ "RA : %s\n"
 #~ "DE : %s\n"
-#~ "Mag : %.2f"
+#~ "Mag : %.2f\n"
+#~ "%s"
 #~ msgstr ""
-#~ "Nombre :%s%s%s\n"
+#~ "Navn :%s%s%s\n"
 #~ "Hip : %.4d\n"
-#~ "AD : %s\n"
+#~ "RA : %s\n"
 #~ "DE : %s\n"
-#~ "Mag : %.2f"
+#~ "Lysstyrke : %.2f"
