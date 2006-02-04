@@ -218,6 +218,9 @@ public:
 	   	print_gravity180(font, x, y, StelUtility::stringToWstring(str), speed_optimize, xshift, yshift);
 	}
 
+	void setGravityLabels(bool gravity) { gravityLabels = gravity; }
+	bool getGravityLabels() const { return gravityLabels; }
+
 protected:
 
 	// Struct used to store data for auto mov
@@ -267,6 +270,8 @@ protected:
 	int flag_auto_zoom;				// Define if autozoom is on or off
 	int hoffset, voffset;                           // for tweaking viewport centering
 
+	bool gravityLabels;            // should label text align with the horizon?
+	
 
 };
 

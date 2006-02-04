@@ -462,7 +462,7 @@ void Nebula::draw_name(int hint_ON, const Projector* prj)
 		if (nType != Nebula::NEB_UNKNOWN) nebulaname += L" (" + getTypeString() + L")";
 	}
 
-    if (gravity_label)
+    if (prj->getGravityLabels())
 		prj->print_gravity180(nebula_font, XY[0]+shift, XY[1]+shift, nebulaname, 1, 0, 0);
 	else
     	nebula_font->print(XY[0]+shift, XY[1]+shift, nebulaname);
@@ -470,7 +470,7 @@ void Nebula::draw_name(int hint_ON, const Projector* prj)
     // draw image credit, if it fits easily
     if(credit != "" && size > nebula_font->getStrLen(credit))
 	{
-		if (gravity_label)
+		if (prj->getGravityLabels())
 			prj->print_gravity180(nebula_font, XY[0]-shift-40, XY[1]+-shift-40, credit, 1, 0, 0);
 		else
 			nebula_font->print(XY[0]-shift, XY[1]-shift-60, credit);

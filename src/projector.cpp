@@ -23,7 +23,7 @@
 
 
 Projector::Projector(int _screenW, int _screenH, double _fov) :
-	min_fov(0.001), max_fov(100), zNear(0.1), zFar(10000), flag_auto_zoom(0), hoffset(0), voffset(0)
+	min_fov(0.001), max_fov(100), zNear(0.1), zFar(10000), flag_auto_zoom(0), hoffset(0), voffset(0), gravityLabels(0)
 {
 	fov = _fov;
 	if (fov>max_fov) fov = max_fov;

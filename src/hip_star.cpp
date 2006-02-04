@@ -297,7 +297,7 @@ bool HipStar::draw_name(void)
 	}
 	else glColor3fv(label_color);
 
-	gravity_label ? proj->print_gravity180(starFont, XY[0],XY[1], starname, 1, 6, -4) :
+	proj->getGravityLabels() ? proj->print_gravity180(starFont, XY[0],XY[1], starname, 1, 6, -4) :
 	starFont->print(XY[0]+6,XY[1]-4, starname);
 	
 	return true;
