@@ -15,7 +15,7 @@ stellarium_SOURCES = main.cpp stel_sdl.h stel_sdl.cpp stel_core.h stel_core.cpp 
 			command_interface.cpp stel_command_interface.h stel_command_interface.cpp script_mgr.h \
 			script_mgr.cpp script.h script.cpp image_mgr.h image_mgr.cpp image.h image.cpp audio.h \
 			audio.cpp loadingbar.h loadingbar.cpp fader.h gettext.h cylinder_projector.cpp \
-			cylinder_projector.h typeface.h typeface.cpp translator.cpp stelapp.cpp
+			cylinder_projector.h typeface.h typeface.cpp translator.cpp
 
 
 stellarium_LDADD = $(top_builddir)/src/glpng/libglpng.a \
@@ -27,4 +27,4 @@ $(top_builddir)/src/iniparser/libiniparser.a \
 INCLUDES = -I$(top_srcdir)/src/glpng -I$(top_srcdir)/src/stellplanet -I$(top_srcdir)/src/stellastro -I$(top_srcdir)/src/iniparser -I$(top_srcdir)/intl
 
 SUBDIRS = glpng stellplanet stellastro iniparser
-noinst_HEADERS = translations.h translator.h stelapp.h
+noinst_HEADERS = translations.h translator.h
