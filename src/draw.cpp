@@ -477,7 +477,7 @@ void Cardinals::draw(const Projector* prj, double latitude, bool gravityON) cons
 
 	float shift = font->getStrLen(sNorth)/2;
 
-	if (gravityON)
+	if (prj->getGravityLabels())
 	{
 		// N for North
 		pos.set(-1.f, 0.f, 0.22f);
