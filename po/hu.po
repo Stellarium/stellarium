@@ -1,0 +1,1375 @@
+# Hungarian translation for Stellarium.
+# Copyright (C) 2005 Free Software Foundation, Inc.
+# This file is distributed under the same license as the Stellarium package.
+# Andras Mohari <mayday@mailpont.hu>, 2005.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Stellarium 0.7.1\n"
+"Report-Msgid-Bugs-To: stellarium@free.fr\n"
+"POT-Creation-Date: 2006-01-25 21:50+0100\n"
+"PO-Revision-Date: 2006-01-19 10:48+0100\n"
+"Last-Translator: Andras Mohari <mayday@mailpont.hu>\n"
+"Language-Team: Hungarian\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Hungarian\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: src/main.cpp:53
+#, c-format
+msgid ""
+"Usage: %s [OPTION] ...\n"
+" -v, --version          Output version information and exit.\n"
+" -h, --help             Display this help and exit.\n"
+msgstr ""
+"Használat: %s [OPCIÓ] ...\n"
+" -v, --version          Kiírja a verziót és kilép.\n"
+" -h, --help             Kiírja ezt a segítséget és kilép.\n"
+
+#: src/main.cpp:77
+#, c-format
+msgid "%s: Bad command line argument(s)\n"
+msgstr "%s: Rossz parancssori argumentum(ok)\n"
+
+# XXX
+#: src/main.cpp:78
+#, c-format
+msgid "Try `%s --help' for more information.\n"
+msgstr "Add ki a \"%s --help\" parancsot további információkért.\n"
+
+#: src/constellation_mgr.cpp:155
+#, fuzzy
+msgid "Loading Constellation Art: "
+msgstr "Csillagképek ábráinak betöltése: %d/%d"
+
+#: src/hip_star.cpp:77 src/nebula.cpp:71 src/planet.cpp:91
+msgid "Name : "
+msgstr "Név: "
+
+# XXX kettőscsillag
+#: src/hip_star.cpp:88
+msgid "(Dbl)"
+msgstr "(kett)"
+
+# XXX változócsillag
+#: src/hip_star.cpp:89
+msgid "(Var)"
+msgstr "(vált)"
+
+#: src/hip_star.cpp:104 src/nebula.cpp:78 src/planet.cpp:101
+msgid "RA : "
+msgstr "RA: "
+
+#: src/hip_star.cpp:105 src/nebula.cpp:79 src/planet.cpp:102
+msgid "DE : "
+msgstr "DE: "
+
+# XXX
+#: src/hip_star.cpp:107
+msgid "Spectral : "
+msgstr "Színkép: "
+
+#: src/hip_star.cpp:110 src/nebula.cpp:83 src/planet.cpp:105
+msgid "Magnitude : "
+msgstr "Fényesség: "
+
+#: src/hip_star.cpp:111 src/planet.cpp:107
+msgid "Distance : "
+msgstr "Távolság: "
+
+#: src/hip_star.cpp:115
+msgid " Light Years"
+msgstr " fényév"
+
+#: src/hip_star.cpp:123 src/nebula.cpp:93 src/planet.cpp:115
+msgid "Az  : "
+msgstr "Az  : "
+
+#: src/hip_star.cpp:124 src/nebula.cpp:94 src/planet.cpp:116
+msgid "Alt : "
+msgstr "Mag.: "
+
+#: src/hip_star.cpp:142 src/nebula.cpp:111 src/planet.cpp:131
+msgid ": mag "
+msgstr ": mag "
+
+# XXX fényév
+#: src/hip_star.cpp:143
+msgid "ly"
+msgstr "fé"
+
+#: src/hip_star_mgr.cpp:176
+#, fuzzy
+msgid "Loading Hipparcos catalog:"
+msgstr "Hipparcos-katalógus betöltése: %d/%d"
+
+#: src/hip_star_mgr.cpp:853 src/hip_star_mgr.cpp:1520
+#, c-format
+msgid "Loading HIP/SAO catalogs: %d/%d"
+msgstr "HIP/SAO katalógusok betöltése: %d/%d"
+
+#: src/hip_star_mgr.cpp:1196
+#, c-format
+msgid "Loading HIP catalog: %d/%d"
+msgstr "HIP-katalógus betöltése: %d/%d"
+
+#: src/hip_star_mgr.cpp:1291
+#, c-format
+msgid "Loading SAO catalog: %d/%d"
+msgstr "SAO-katalógus betöltése: %d/%d"
+
+# XXX Katalógus???
+#: src/nebula.cpp:72
+msgid "Cat: NGC "
+msgstr "Kat.: NGC "
+
+#: src/nebula.cpp:84
+msgid "Type : "
+msgstr "Típus: "
+
+#: src/nebula.cpp:85
+msgid "Size : "
+msgstr "Méret: "
+
+#: src/nebula_mgr.cpp:360
+#, fuzzy
+msgid "Loading NGC catalog: "
+msgstr "NGC-katalógus betöltése: %d/%d"
+
+#: src/nebula_mgr.cpp:495
+#, fuzzy
+msgid "Loading Sharpless catalog:"
+msgstr "Sharpless-katalógus betöltése: %d/%d"
+
+#: src/nebula_mgr.cpp:560
+#, fuzzy
+msgid "Loading Cadwell catalog:"
+msgstr "Cadwell-katalógus betöltése: %d/%d"
+
+#: src/nebula_mgr.cpp:662
+#, fuzzy
+msgid "Loading Nebula Textures:"
+msgstr "Csillagköd-textúrák betöltése: %d/%d"
+
+#: src/planet.cpp:107
+msgid "AU"
+msgstr "CSE"
+
+#: src/stel_ui.cpp:161
+msgid "Message"
+msgstr "Üzenet"
+
+#: src/stel_ui.cpp:251
+msgid " (UTC)"
+msgstr " (UTC)"
+
+# XXX
+#: src/stel_ui.cpp:473 src/stel_ui.cpp:589
+msgid "Script commander"
+msgstr "Parancsfájl kezelő"
+
+#: src/stel_ui.cpp:500
+msgid "Invalid Script command"
+msgstr "Érvénytelen parancs"
+
+#: src/stel_ui.cpp:553
+msgid "Drawing of the Constellations [C]"
+msgstr "Csillagképek rajzolása [C]"
+
+#: src/stel_ui.cpp:555
+msgid "Names of the Constellations [V]"
+msgstr "Csillagképek nevei [V]"
+
+#: src/stel_ui.cpp:557
+msgid "Constellations Art [R]"
+msgstr "Csillagképek ábrái [R]"
+
+#: src/stel_ui.cpp:559
+msgid "Azimuthal Grid [Z]"
+msgstr "Horizontális rács [Z]"
+
+#: src/stel_ui.cpp:561
+msgid "Equatorial Grid [E]"
+msgstr "Egyenlítői rács [E]"
+
+#: src/stel_ui.cpp:563
+msgid "Ground [G]"
+msgstr "Terep [G]"
+
+#: src/stel_ui.cpp:565
+msgid "Cardinal Points [Q]"
+msgstr "Égtájak [Q]"
+
+#: src/stel_ui.cpp:567
+msgid "Atmosphere [A]"
+msgstr "Légkör [A]"
+
+#: src/stel_ui.cpp:569
+msgid "Nebulas [N]"
+msgstr "Ködök [N]"
+
+#: src/stel_ui.cpp:571
+msgid "Help [H]"
+msgstr "Súgó [H]"
+
+# XXX mount
+#: src/stel_ui.cpp:573
+msgid "Equatorial/Altazimuthal Mount [ENTER]"
+msgstr "Egyenlítői/horizontális koordináta-rendszer [ENTER]"
+
+#: src/stel_ui.cpp:575
+msgid "Configuration window"
+msgstr "Beállítások"
+
+# XXX
+#: src/stel_ui.cpp:577
+msgid "Chart mode"
+msgstr "Térkép mód"
+
+#: src/stel_ui.cpp:579
+msgid "Night (red) mode"
+msgstr "Éjjeli (vörös) mód"
+
+#: src/stel_ui.cpp:582
+msgid "Quit [CTRL + Q]"
+msgstr "Kilépés [CTRL+Q]"
+
+#: src/stel_ui.cpp:584
+msgid "Quit [CMD + Q]"
+msgstr "Kilépés [CMD+Q]"
+
+#: src/stel_ui.cpp:587
+msgid "Search for object"
+msgstr "Égitest keresése"
+
+#: src/stel_ui.cpp:591
+msgid "Goto selected object [SPACE]"
+msgstr "Kijelölt égitestre ugrás [SPACE]"
+
+#: src/stel_ui.cpp:597
+msgid "Decrease Time Speed [J]"
+msgstr "Idő lassítása [J]"
+
+#: src/stel_ui.cpp:599
+msgid "Real Time Speed [K]"
+msgstr "Valós idő [K]"
+
+#: src/stel_ui.cpp:601
+msgid "Increase Time Speed [L]"
+msgstr "Idő gyorsítása [L]"
+
+#: src/stel_ui.cpp:603
+msgid "Return to Current Time"
+msgstr "Vissza a jelenbe"
+
+#: src/stel_ui.cpp:612
+#, fuzzy
+msgid ""
+"   Please check for newer versions and send bug reports\n"
+"and comments to us at: http://stellarium.sourceforge.net\n"
+"\n"
+msgstr ""
+"   Friss verziót keresel, hibát találtál, megjegyzésed\n"
+"van? Lásd a honlapot: http://stellarium.sourceforge.net\n"
+"\n"
+
+#: src/stel_ui.cpp:631
+msgid "Information"
+msgstr "Információ"
+
+#: src/stel_ui.cpp:643
+msgid ""
+"Movement & selection:\n"
+"Arrow Keys       : Change viewing RA/DE\n"
+"Page Up/Down     : Zoom\n"
+"CTRL+Up/Down     : Zoom\n"
+"Left Click       : Select object\n"
+"Right Click      : Unselect\n"
+"CTRL+Left Click  : Unselect\n"
+"\\                : Zoom out (planet + moons if applicable)\n"
+"/                : Zoom to selected object\n"
+"SPACE            : Center on selected object\n"
+"\n"
+msgstr ""
+"Mozgás és kijelölés:\n"
+"Nyílbillentyűk   : Nézegelődés\n"
+"Page Up/Down     : Nagyítás/kicsinyítés\n"
+"CTRL+Up/Down     : Nagyítás/kicsinyítés\n"
+"Bal kattintás    : Égitest kijelölése\n"
+"Jobb kattintás   : Kijelölés megszüntetése\n"
+"CTRL+bal katt.   : Kijelölés megszüntetése\n"
+"\\                : Kicsinyítés (bolygó + holdak, ha lehet)\n"
+"/                : Kijelölt égitest nagyítása\n"
+"SPACE            : Kijelölt égitest középre igazítása\n"
+"\n"
+
+#: src/stel_ui.cpp:654
+msgid ""
+"Display options:\n"
+"ENTER : Equatorial/altazimuthal mount\n"
+"F1  : Toggle fullscreen if possible.\n"
+"C   : Constellation lines       V   : Constellation labels\n"
+"R   : Constellation art         E   : Equatorial grid\n"
+"Z   : Azimuthal grid            N   : Nebula labels\n"
+"P   : Planet labels             G   : Ground\n"
+"A   : Atmosphere                F   : Fog\n"
+"Q   : Cardinal points           O   : Toggle moon scaling\n"
+"T   : Object tracking           S   : Stars\n"
+"4 , : Ecliptic line             5 . : Equator line\n"
+"\n"
+msgstr ""
+"Megjelenítés:\n"
+"ENTER : Egyenlítői/horizontális koordináta-rendszer\n"
+"F1  : Teljes képernyő ki/be, ha lehetséges.\n"
+"C   : Csillagképek vonalai      V   : Csillagképek nevei\n"
+"R   : Csillagképek ábrái        E   : Egyenlítői rács\n"
+"Z   : Horizontális rács         N   : Ködök nevei\n"
+"P   : Bolygók nevei             G   : Terep\n"
+"A   : Légkör                    F   : Légköri köd\n"
+"Q   : Égtájak                   O   : Hold nagyítása ki/be\n"
+"T   : Égitest követése          S   : Csillagok\n"
+"4 , : Ekliptika vonala          5 . : Egyenlítő vonala\n"
+"\n"
+
+#: src/stel_ui.cpp:666
+msgid ""
+"Dialogs & other controls:\n"
+"H   : Help                      I   : About Stellarium\n"
+"M   : Text menu                 1 (one)  : Configuration\n"
+"CTRL + S : Take a screenshot\n"
+"CTRL + R : Toggle script recording\n"
+"CTRL + F : Toggle object finder\n"
+"\n"
+msgstr ""
+"Párbeszédablakok és egyebek:\n"
+"H   : Súgó                      I   : Stellarium névjegye\n"
+"M   : Szöveges menü             1 (egy)  : Beállítások\n"
+"CTRL + S : Képernyőmentés\n"
+"CTRL + R : Parancsfájl rögzítés ki/be\n"
+"CTRL + F : Égitestkereső ki/be\n"
+"\n"
+
+#: src/stel_ui.cpp:673
+msgid ""
+"Time & Date:\n"
+"6   : Time rate pause           7   : Time rate 0\n"
+"8   : Set current time          J   : Decrease time rate\n"
+"K   : Normal time rate          L   : Increase time rate\n"
+"-   : Back 24 hours             =   : Forward 24 hours\n"
+"[   : Back 7 days               ]   : Forward 7 days\n"
+"\n"
+msgstr ""
+"Idő és dátum:\n"
+"6   : Idő megállítása           7   : Idő múlása 0-ra\n"
+"8   : Vissza a jelenbe          J   : Idő lassítása\n"
+"K   : Valós idő                 L   : Idő gyorsítása\n"
+"-   : 24 órát vissza            =   : 24 órát előre\n"
+"[   : 7 napot vissza            ]   : 7 napot előre\n"
+"\n"
+
+#: src/stel_ui.cpp:680
+msgid ""
+"During Script Playback:\n"
+"CTRL + C : End Script\n"
+"6   : pause script              K   : resume script\n"
+"\n"
+msgstr ""
+"Parancsfájl visszajátszásakor:\n"
+"CTRL + C : Leállítás\n"
+"6   : Szünet                    K   : Folytatás\n"
+"\n"
+
+#: src/stel_ui.cpp:684
+msgid ""
+"Misc:\n"
+"9   : Toggle meteor shower rates\n"
+msgstr ""
+"Egyebek:\n"
+"9   : Meteorzápor gyakoriságának váltása\n"
+
+#: src/stel_ui.cpp:687
+msgid "CTRL + Q : Quit\n"
+msgstr "CTRL + Q: Kilépés\n"
+
+#: src/stel_ui.cpp:689
+msgid "CMD + Q  : Quit\n"
+msgstr "CMD + Q : Kilépés\n"
+
+#: src/stel_ui.cpp:695
+msgid "Help"
+msgstr "Súgó"
+
+#: src/stel_ui.cpp:1040
+msgid "Command recording stopped."
+msgstr "Parancsrögzítés leállítva."
+
+#: src/stel_ui.cpp:1048
+msgid "Recording commands to script file:\n"
+msgstr "Parancsok rögzítése parancsfájlba:\n"
+
+#: src/stel_ui.cpp:1050
+msgid "Hit CTRL-R again to stop.\n"
+msgstr "A CTRL-R újabb leütésével állítsd le.\n"
+
+#: src/stel_ui.cpp:1054
+msgid "Error: Unable to open script file to record commands."
+msgstr "Hiba: Nem lehet megnyitni a parancsfájlt parancsrögzítéshez."
+
+#: src/stel_ui_conf.cpp:27
+msgid "Configuration"
+msgstr "Beállítások"
+
+#: src/stel_ui_conf.cpp:47 src/stel_ui_conf.cpp:682
+msgid "Stars"
+msgstr "Csillagok"
+
+#: src/stel_ui_conf.cpp:52
+msgid "Star Names. Up to mag :"
+msgstr "Csillagnevek. Max. mag.:"
+
+#: src/stel_ui_conf.cpp:64
+msgid "Star Twinkle. Amount :"
+msgstr "Csillagok vibrálása. Érték: "
+
+#: src/stel_ui_conf.cpp:80
+msgid "Constellations"
+msgstr "Csillagképek"
+
+#: src/stel_ui_conf.cpp:85
+msgid "Constellations Names"
+msgstr "Csillagképek nevei"
+
+#: src/stel_ui_conf.cpp:90
+msgid "Selected Constellation Only"
+msgstr "Csak a kijelölt csillagkép"
+
+#: src/stel_ui_conf.cpp:103
+msgid "Nebulas Names. Up to mag :"
+msgstr "Ködök nevei. Max. mag.:"
+
+#: src/stel_ui_conf.cpp:120
+msgid "Planets"
+msgstr "Bolygók"
+
+#: src/stel_ui_conf.cpp:125
+msgid "Moon Scale"
+msgstr "Hold nagyítása"
+
+#: src/stel_ui_conf.cpp:132
+msgid "Planets Hints"
+msgstr "Bolygók jelölése"
+
+#: src/stel_ui_conf.cpp:143
+msgid "Equatorial Grid"
+msgstr "Egyenlítői rács"
+
+#: src/stel_ui_conf.cpp:148
+msgid "Azimuthal Grid"
+msgstr "Horizontális rács"
+
+#: src/stel_ui_conf.cpp:153
+msgid "Equator Line"
+msgstr "Egyenlítő vonala"
+
+#: src/stel_ui_conf.cpp:158
+msgid "Ecliptic Line"
+msgstr "Ekliptika vonala"
+
+#: src/stel_ui_conf.cpp:169
+msgid "Ground"
+msgstr "Terep"
+
+#: src/stel_ui_conf.cpp:174
+msgid "Cardinal Points"
+msgstr "Égtájak"
+
+#: src/stel_ui_conf.cpp:179
+msgid "Atmosphere"
+msgstr "Légkör"
+
+#: src/stel_ui_conf.cpp:184
+msgid "Fog"
+msgstr "Köd"
+
+#: src/stel_ui_conf.cpp:189 src/stel_ui_conf.cpp:362
+msgid "Save as default"
+msgstr "Mentés"
+
+#: src/stel_ui_conf.cpp:201
+#, fuzzy
+msgid "Current Time :"
+msgstr " Jelenlegi idő:"
+
+#: src/stel_ui_conf.cpp:210
+#, fuzzy
+msgid "Time Zone :"
+msgstr " Időzóna:"
+
+#: src/stel_ui_conf.cpp:214
+#, fuzzy
+msgid "Using System Default Time Zone"
+msgstr " A rendszer időzónáját használom"
+
+#: src/stel_ui_conf.cpp:223
+#, fuzzy
+msgid "Time speed : "
+msgstr " Idő múlása: "
+
+#: src/stel_ui_conf.cpp:231
+msgid ""
+"Use key J and L to decrease and increase\n"
+"   time speed.\n"
+"Use key K to return to real time speed."
+msgstr ""
+"Az idő a J és L billentyűkkel lassítható\n"
+"   és gyorsítható.\n"
+"K-val állítható vissza a valós sebesség."
+
+#: src/stel_ui_conf.cpp:253
+msgid "Cursor : "
+msgstr "Kurzor: "
+
+#: src/stel_ui_conf.cpp:258
+msgid "Selected : "
+msgstr "Kijelölve: "
+
+#: src/stel_ui_conf.cpp:263
+msgid "Longitude : "
+msgstr "Hosszúság: "
+
+#: src/stel_ui_conf.cpp:271
+msgid "Latitude : "
+msgstr "Szélesség: "
+
+#: src/stel_ui_conf.cpp:279
+msgid "Altitude : "
+msgstr "Magasság: "
+
+#: src/stel_ui_conf.cpp:286
+msgid "Save location"
+msgstr "Hely mentése"
+
+#: src/stel_ui_conf.cpp:308
+#, fuzzy
+msgid "Projection :"
+msgstr " Vetület:"
+
+# XXX
+#: src/stel_ui_conf.cpp:314
+msgid "Fisheye Projection Mode"
+msgstr "Halszem vetület"
+
+# XXX
+#: src/stel_ui_conf.cpp:319
+msgid "Disk Viewport"
+msgstr "Kör alakú látótér"
+
+#: src/stel_ui_conf.cpp:324
+#, fuzzy
+msgid "Screen Resolution :"
+msgstr " Képernyő felbontása:"
+
+#: src/stel_ui_conf.cpp:328
+msgid "Restart program for"
+msgstr "Indítsd újra a programot"
+
+#: src/stel_ui_conf.cpp:329
+msgid "change to apply."
+msgstr "a változások alkalmazásához."
+
+#: src/stel_ui_conf.cpp:353
+msgid "For unlisted screen resolution, edit the file :"
+msgstr "További felbontásokért szerkeszd ezt a fájlt:"
+
+#: src/stel_ui_conf.cpp:373
+#, fuzzy
+msgid "Choose landscapes :"
+msgstr " Válassz tájképet:"
+
+#: src/stel_ui_conf.cpp:390
+msgid "Please save option in tab \"Location\""
+msgstr "A \"Hely\" fülön mentsd el a beállításokat "
+
+#: src/stel_ui_conf.cpp:391
+msgid "to save current landscape as the default landscape."
+msgstr "a jelenlegi tájkép elmentéséhez."
+
+#: src/stel_ui_conf.cpp:399
+msgid "Date & Time"
+msgstr "Dátum és idő"
+
+#: src/stel_ui_conf.cpp:400
+msgid "Location"
+msgstr "Hely"
+
+#: src/stel_ui_conf.cpp:401
+msgid "Landscapes"
+msgstr "Tájképek"
+
+#: src/stel_ui_conf.cpp:402
+msgid "Video"
+msgstr "Video"
+
+#: src/stel_ui_conf.cpp:403
+msgid "Rendering"
+msgstr "Megjelenítés"
+
+#: src/stel_ui_conf.cpp:507
+msgid "Object Search"
+msgstr "Égitest keresése"
+
+#: src/stel_ui_conf.cpp:526
+msgid "Star No./Name"
+msgstr "Csillag száma/neve"
+
+# XXX
+#: src/stel_ui_conf.cpp:530
+msgid "eg. 60718 (aCrux) or Canopus"
+msgstr "pl. 60718 (aCrux) vagy Canopus"
+
+#: src/stel_ui_conf.cpp:531
+msgid "HP 60718, HD 108248, SAO 251904"
+msgstr "HP 60718, HD 108248, SAO 251904"
+
+#: src/stel_ui_conf.cpp:552 src/stel_ui_conf.cpp:683
+msgid "Constellation"
+msgstr "Csillagkép"
+
+#: src/stel_ui_conf.cpp:556
+msgid "eg. Crux"
+msgstr "pl. Déli Kereszt"
+
+#: src/stel_ui_conf.cpp:575 src/stel_ui_conf.cpp:684
+msgid "Nebula"
+msgstr "Csillagköd"
+
+#: src/stel_ui_conf.cpp:579
+msgid "eg. M83, NGC 7009, IC 2118"
+msgstr "pl. M83, NGC 7009, IC 2118"
+
+#: src/stel_ui_conf.cpp:580
+msgid "CW 113, SH 40"
+msgstr "CW 113, SH 40"
+
+#: src/stel_ui_conf.cpp:665
+msgid "Planet/Moon"
+msgstr "Bolygó/hold"
+
+# XXX
+#: src/stel_ui_conf.cpp:669
+msgid "eg. Pluto or Io"
+msgstr "pl. Plútó vagy Io"
+
+#: src/stel_ui_conf.cpp:685
+msgid "Planets & Moons"
+msgstr "Bolygók és holdak"
+
+# XXX vagy csak megfigyelőhely?
+#: src/stel_ui_conf.cpp:956
+msgid "Enter observatory name"
+msgstr "Írd be a csillagvizsgáló nevét"
+
+# XXX
+#: src/stel_ui_conf.cpp:1111
+#, fuzzy
+msgid "Current Time Speed is x"
+msgstr " Az idő múlása jelenleg: x"
+
+#: src/stel_ui_tuiconf.cpp:85
+msgid "Set Location "
+msgstr "Hely beállítása "
+
+#: src/stel_ui_tuiconf.cpp:86
+msgid "Set Time "
+msgstr "Idő beállítása "
+
+#: src/stel_ui_tuiconf.cpp:87
+msgid "General "
+msgstr "Általános "
+
+#: src/stel_ui_tuiconf.cpp:88
+msgid "Stars "
+msgstr "Csillagok "
+
+#: src/stel_ui_tuiconf.cpp:89
+msgid "Colors "
+msgstr "Színek "
+
+#: src/stel_ui_tuiconf.cpp:90
+msgid "Effects "
+msgstr "Effektusok "
+
+#: src/stel_ui_tuiconf.cpp:91
+msgid "Scripts "
+msgstr "Parancsfájlok "
+
+#: src/stel_ui_tuiconf.cpp:92
+msgid "Administration "
+msgstr "Adminisztráció "
+
+#: src/stel_ui_tuiconf.cpp:103
+msgid "Latitude: "
+msgstr "Szélesség: "
+
+#: src/stel_ui_tuiconf.cpp:105
+msgid "Longitude: "
+msgstr "Hosszúság: "
+
+#: src/stel_ui_tuiconf.cpp:107
+msgid "Altitude (m): "
+msgstr "Magasság (m): "
+
+# XXX
+#: src/stel_ui_tuiconf.cpp:114
+msgid "Sky Time: "
+msgstr "Idő: "
+
+#: src/stel_ui_tuiconf.cpp:116
+msgid "Set Time Zone: "
+msgstr "Időzóna beállítása: "
+
+# XXX
+#: src/stel_ui_tuiconf.cpp:119
+msgid "Preset Sky Time: "
+msgstr "Előre beállított idő: "
+
+# XXX
+#: src/stel_ui_tuiconf.cpp:121
+msgid "Sky Time At Start-up: "
+msgstr "Idő az induláskor: "
+
+#: src/stel_ui_tuiconf.cpp:125
+msgid "Time Display Format: "
+msgstr "Időformátum: "
+
+#: src/stel_ui_tuiconf.cpp:130
+msgid "Date Display Format: "
+msgstr "Dátumformátum: "
+
+# XXX
+#: src/stel_ui_tuiconf.cpp:147
+msgid "Sky Culture: "
+msgstr "Kultúrkör: "
+
+# XXX
+#: src/stel_ui_tuiconf.cpp:152
+msgid "Sky Language: "
+msgstr "Égbolt nyelve: "
+
+#: src/stel_ui_tuiconf.cpp:160
+msgid "Show: "
+msgstr "Megjelenítés: "
+
+#: src/stel_ui_tuiconf.cpp:160 src/stel_ui_tuiconf.cpp:198
+msgid "Yes"
+msgstr "Igen"
+
+#: src/stel_ui_tuiconf.cpp:160 src/stel_ui_tuiconf.cpp:198
+msgid "No"
+msgstr "Nem"
+
+#: src/stel_ui_tuiconf.cpp:162
+msgid "Star Magnitude Multiplier: "
+msgstr "Csillagfényesség szorzója: "
+
+#: src/stel_ui_tuiconf.cpp:164
+msgid "Maximum Magnitude to Label: "
+msgstr "Maximális magnitúdó a címkézéshez: "
+
+#: src/stel_ui_tuiconf.cpp:166
+msgid "Twinkling: "
+msgstr "Vibrálás: "
+
+#: src/stel_ui_tuiconf.cpp:175
+msgid "Constellation lines: "
+msgstr "Csillagképek vonalai: "
+
+#: src/stel_ui_tuiconf.cpp:179
+msgid "Constellation labels: "
+msgstr "Csillagképek címkéi: "
+
+#: src/stel_ui_tuiconf.cpp:183
+msgid "Cardinal points: "
+msgstr "Égtájak: "
+
+#: src/stel_ui_tuiconf.cpp:192
+msgid "Landscape: "
+msgstr "Tájkép: "
+
+#: src/stel_ui_tuiconf.cpp:198
+msgid "Manual zoom: "
+msgstr "Kézi zoomolás: "
+
+# XXX A csillagok méretét vagy a fényességük alapján állítja be, vagy mindegyik csak egy pont.
+#: src/stel_ui_tuiconf.cpp:202
+msgid "Object Sizing Rule: "
+msgstr "Égitestek méretezésének szabálya: "
+
+#: src/stel_ui_tuiconf.cpp:202
+msgid "Point"
+msgstr "Pont"
+
+#: src/stel_ui_tuiconf.cpp:202
+msgid "Magnitude"
+msgstr "Magnitúdó"
+
+# XXX
+#: src/stel_ui_tuiconf.cpp:206
+msgid "Magnitude Sizing Multiplier: "
+msgstr "Fényességalapú méretezés szorzója: "
+
+#: src/stel_ui_tuiconf.cpp:210
+msgid "Milky Way intensity: "
+msgstr "Tejút intenzitása: "
+
+#: src/stel_ui_tuiconf.cpp:214
+msgid "Maximum Nebula Magnitude to Label: "
+msgstr "Maximális magnitúdó a ködök címkézéséhez: "
+
+#: src/stel_ui_tuiconf.cpp:218
+msgid "Zoom Duration: "
+msgstr "Zoomolás időtartama: "
+
+# XXX
+#: src/stel_ui_tuiconf.cpp:222
+msgid "Cursor Timeout: "
+msgstr "Egérmutató elrejtési ideje: "
+
+#: src/stel_ui_tuiconf.cpp:228
+msgid "Local Script: "
+msgstr "Helyi parancsfájl: "
+
+#: src/stel_ui_tuiconf.cpp:234
+msgid "CD/DVD Script: "
+msgstr "CD/DVD parancsfájl: "
+
+# XXX
+#: src/stel_ui_tuiconf.cpp:242
+msgid "Load Default Configuration: "
+msgstr "Alapbeállítások betöltése: "
+
+# XXX as default
+#: src/stel_ui_tuiconf.cpp:244
+msgid "Save Current Configuration as Default: "
+msgstr "Jelenlegi beállítások mentése: "
+
+#: src/stel_ui_tuiconf.cpp:246
+msgid "Update me via Internet: "
+msgstr "Frissítés az Internetről: "
+
+# XXX
+#: src/stel_ui_tuiconf.cpp:262
+msgid "N-S Centering Offset: "
+msgstr "É-D középvonal eltolása: "
+
+# XXX
+#: src/stel_ui_tuiconf.cpp:266
+msgid "E-W Centering Offset: "
+msgstr "K-Ny középvonal eltolása: "
+
+#: src/translations.h:33
+msgid "Sun"
+msgstr "Nap"
+
+#: src/translations.h:34
+msgid "Mercury"
+msgstr "Merkúr"
+
+#: src/translations.h:35
+msgid "Venus"
+msgstr "Vénusz"
+
+#: src/translations.h:36
+msgid "Earth"
+msgstr "Föld"
+
+#: src/translations.h:37
+msgid "Moon"
+msgstr "Hold"
+
+#: src/translations.h:38
+msgid "Mars"
+msgstr "Mars"
+
+#: src/translations.h:39
+msgid "Deimos"
+msgstr "Deimos"
+
+#: src/translations.h:40
+msgid "Phobos"
+msgstr "Phobos"
+
+#: src/translations.h:41
+msgid "Jupiter"
+msgstr "Jupiter"
+
+#: src/translations.h:42
+msgid "Io"
+msgstr "Io"
+
+#: src/translations.h:43
+msgid "Europa"
+msgstr "Europa"
+
+#: src/translations.h:44
+msgid "Ganymede"
+msgstr "Ganymede"
+
+#: src/translations.h:45
+msgid "Callisto"
+msgstr "Callisto"
+
+#: src/translations.h:46
+msgid "Saturn"
+msgstr "Szaturnusz"
+
+#: src/translations.h:47
+msgid "Mimas"
+msgstr "Mimas"
+
+#: src/translations.h:48
+msgid "Enceladus"
+msgstr "Enceladus"
+
+#: src/translations.h:49
+msgid "Tethys"
+msgstr "Tethys"
+
+#: src/translations.h:50
+msgid "Dione"
+msgstr "Dione"
+
+#: src/translations.h:51
+msgid "Rhea"
+msgstr "Rhea"
+
+#: src/translations.h:52
+msgid "Titan"
+msgstr "Titan"
+
+#: src/translations.h:53
+msgid "Hyperion"
+msgstr "Hyperion"
+
+#: src/translations.h:54
+msgid "Iapetus"
+msgstr "Iapetus"
+
+#: src/translations.h:55
+msgid "Phoebe"
+msgstr "Phoebe"
+
+#: src/translations.h:56
+msgid "Neptune"
+msgstr "Neptunusz"
+
+#: src/translations.h:57
+msgid "Uranus"
+msgstr "Uránusz"
+
+#: src/translations.h:58
+msgid "Pluto"
+msgstr "Plútó"
+
+#: src/translations.h:59
+msgid "Charon"
+msgstr "Charon"
+
+#: src/translations.h:62
+msgid "N"
+msgstr "É"
+
+#: src/translations.h:63
+msgid "S"
+msgstr "D"
+
+#: src/translations.h:64
+msgid "E"
+msgstr "K"
+
+#: src/translations.h:65
+msgid "W"
+msgstr "Ny"
+
+#: src/translations.h:68
+msgid "Aquila"
+msgstr "Sas"
+
+#: src/translations.h:69
+msgid "Andromeda"
+msgstr "Andromeda"
+
+#: src/translations.h:70
+msgid "Sculptor"
+msgstr "Szobrász"
+
+#: src/translations.h:71
+msgid "Ara"
+msgstr "Oltár"
+
+#: src/translations.h:72
+msgid "Libra"
+msgstr "Mérleg"
+
+#: src/translations.h:73
+msgid "Cetus"
+msgstr "Cet"
+
+#: src/translations.h:74
+msgid "Aries"
+msgstr "Kos"
+
+#: src/translations.h:75 src/translations.h:145
+msgid "Scutum"
+msgstr "Pajzs"
+
+#: src/translations.h:76
+msgid "Pyxis"
+msgstr "Tájoló"
+
+#: src/translations.h:77
+msgid "Bootes"
+msgstr "Ökörhajcsár"
+
+#: src/translations.h:78
+msgid "Caelum"
+msgstr "Véső"
+
+#: src/translations.h:79
+msgid "Chamaeleon"
+msgstr "Kaméleon"
+
+#: src/translations.h:80
+msgid "Cancer"
+msgstr "Rák"
+
+#: src/translations.h:81
+msgid "Capricornus"
+msgstr "Bak"
+
+#: src/translations.h:82
+msgid "Carina"
+msgstr "Hajógerinc"
+
+#: src/translations.h:83
+msgid "Cassiopeia"
+msgstr "Cassiopeia"
+
+#: src/translations.h:84
+msgid "Centaurus"
+msgstr "Kentaur"
+
+#: src/translations.h:85
+msgid "Cepheus"
+msgstr "Cefeusz"
+
+#: src/translations.h:86
+msgid "Coma Berenices"
+msgstr "Bereniké Haja"
+
+#: src/translations.h:87
+msgid "Canes Venatici"
+msgstr "Vadászebek"
+
+#: src/translations.h:88
+msgid "Auriga"
+msgstr "Szekeres"
+
+#: src/translations.h:89
+msgid "Columba"
+msgstr "Galamb"
+
+#: src/translations.h:90
+msgid "Circinus"
+msgstr "Körző"
+
+#: src/translations.h:91
+msgid "Crater"
+msgstr "Serleg"
+
+#: src/translations.h:92
+msgid "Corona Australis"
+msgstr "Déli Korona"
+
+#: src/translations.h:93
+msgid "Corona Borealis"
+msgstr "Északi Korona"
+
+#: src/translations.h:94
+msgid "Corvus"
+msgstr "Holló"
+
+#: src/translations.h:95
+msgid "Crux"
+msgstr "Déli Kereszt"
+
+#: src/translations.h:96
+msgid "Cygnus"
+msgstr "Holló"
+
+#: src/translations.h:97
+msgid "Delphinus"
+msgstr "Delfin"
+
+#: src/translations.h:98
+msgid "Dorado"
+msgstr "Aranyhal"
+
+#: src/translations.h:99
+msgid "Draco"
+msgstr "Sárkány"
+
+#: src/translations.h:100
+msgid "Norma"
+msgstr "Szögmérő"
+
+#: src/translations.h:101
+msgid "Eridanus"
+msgstr "Eridanusz"
+
+#: src/translations.h:102
+msgid "Sagitta"
+msgstr "Nyíl"
+
+#: src/translations.h:103
+msgid "Fornax"
+msgstr "Kemence"
+
+#: src/translations.h:104
+msgid "Gemini"
+msgstr "Ikrek"
+
+#: src/translations.h:105
+msgid "Camelopardalis"
+msgstr "Zsiráf"
+
+#: src/translations.h:106
+msgid "Canis Major"
+msgstr "Nagy Kutya"
+
+#: src/translations.h:107
+msgid "Ursa Major"
+msgstr "Nagy Medve"
+
+#: src/translations.h:108
+msgid "Grus"
+msgstr "Daru"
+
+#: src/translations.h:109
+msgid "Hercules"
+msgstr "Herkules"
+
+#: src/translations.h:110
+msgid "Horologium"
+msgstr "Ingaóra"
+
+#: src/translations.h:111
+msgid "Hydra"
+msgstr "Északi Vízikígyó"
+
+#: src/translations.h:112
+msgid "Hydrus"
+msgstr "Déli Vízikígyó"
+
+#: src/translations.h:113
+msgid "Indus"
+msgstr "Indus"
+
+#: src/translations.h:114
+msgid "Lacerta"
+msgstr "Gyík"
+
+#: src/translations.h:115
+msgid "Monoceros"
+msgstr "Egyszarvú"
+
+#: src/translations.h:116
+msgid "Lepus"
+msgstr "Nyúl"
+
+#: src/translations.h:117
+msgid "Leo"
+msgstr "Oroszlán"
+
+#: src/translations.h:118
+msgid "Lupus"
+msgstr "Farkas"
+
+#: src/translations.h:119
+msgid "Lynx"
+msgstr "Hiúz"
+
+#: src/translations.h:120
+msgid "Lyra"
+msgstr "Lant"
+
+#: src/translations.h:121
+msgid "Antlia"
+msgstr "Légszivattyú"
+
+#: src/translations.h:122
+msgid "Microscopium"
+msgstr "Mikroszkóp"
+
+#: src/translations.h:123
+msgid "Musca"
+msgstr "Légy"
+
+#: src/translations.h:124
+msgid "Octans"
+msgstr "Oktáns"
+
+#: src/translations.h:125
+msgid "Apus"
+msgstr "Paradicsommadár"
+
+#: src/translations.h:126
+msgid "Ophiuchus"
+msgstr "Kígyótartó"
+
+#: src/translations.h:127
+msgid "Orion"
+msgstr "Orion"
+
+#: src/translations.h:128
+msgid "Pavo"
+msgstr "Páva"
+
+#: src/translations.h:129
+msgid "Pegasus"
+msgstr "Pegazus"
+
+#: src/translations.h:130
+msgid "Pictor"
+msgstr "Festő"
+
+#: src/translations.h:131
+msgid "Perseus"
+msgstr "Perszeusz"
+
+#: src/translations.h:132
+msgid "Equuleus"
+msgstr "Csikó"
+
+#: src/translations.h:133
+msgid "Canis Minor"
+msgstr "Kis Kutya"
+
+#: src/translations.h:134
+msgid "Leo Minor"
+msgstr "Kis Oroszlán"
+
+#: src/translations.h:135
+msgid "Vulpecula"
+msgstr "Róka"
+
+#: src/translations.h:136
+msgid "Ursa Minor"
+msgstr "Kis Medve"
+
+#: src/translations.h:137
+msgid "Phoenix"
+msgstr "Főnix"
+
+#: src/translations.h:138
+#, fuzzy
+msgid "Piscis Austrinus"
+msgstr "Déli Hal"
+
+#: src/translations.h:139
+#, fuzzy
+msgid "Pisces"
+msgstr "Halak"
+
+#: src/translations.h:140
+msgid "Volans"
+msgstr "Repülőhal"
+
+#: src/translations.h:141
+msgid "Puppis"
+msgstr "Hajófar"
+
+#: src/translations.h:142
+msgid "Reticulum"
+msgstr "Háló"
+
+#: src/translations.h:143
+msgid "Sagittarius"
+msgstr "Nyilas"
+
+#: src/translations.h:144
+msgid "Scorpius"
+msgstr "Skorpió"
+
+#: src/translations.h:146
+msgid "Serpens"
+msgstr "Kígyó"
+
+#: src/translations.h:147
+msgid "Sextans"
+msgstr "Szextáns"
+
+#: src/translations.h:148
+msgid "Mensa"
+msgstr "Táblahegy"
+
+#: src/translations.h:149
+msgid "Taurus"
+msgstr "Bika"
+
+#: src/translations.h:150
+msgid "Telescopium"
+msgstr "Távcső"
+
+#: src/translations.h:151
+msgid "Tucana"
+msgstr "Tukán"
+
+#: src/translations.h:152
+msgid "Triangulum"
+msgstr "Háromszög"
+
+#: src/translations.h:153
+msgid "Triangulum Australe"
+msgstr "Déli Háromszög"
+
+#: src/translations.h:154
+msgid "Aquarius"
+msgstr "Vízöntő"
+
+#: src/translations.h:155
+msgid "Virgo"
+msgstr "Szűz"
+
+#: src/translations.h:156
+msgid "Vela"
+msgstr "Vitorla"
+
+#~ msgid ""
+#~ "Please check last version and send bug report & comments \n"
+#~ "on stellarium web page : http://www.stellarium.org\n"
+#~ "\n"
+#~ msgstr ""
+#~ "Friss verziót keresel, hibát találtál, megjegyzésed\n"
+#~ "van? Lásd a honlapot: http://www.stellarium.org\n"
+#~ "\n"
+
+#~ msgid ""
+#~ "ERROR : I can't find the datas directories in :\n"
+#~ "%s/ nor in ./ nor in ../\n"
+#~ "You may fully install the software (type \"make install\" on POSIX "
+#~ "systems)\n"
+#~ "or launch the application from the stellarium package directory.\n"
+#~ msgstr ""
+#~ "HIBA: Nem találom az adatkönyvtárakat a következő helyeken:\n"
+#~ "%s/, ./ és ../\n"
+#~ "Telepítsd rendesen a programot (POSIX rendszereken a \"make install\"\n"
+#~ "kiadásával), vagy pedig futtasd a stellarium csomag könyvtárából.\n"
+
+#~ msgid "> Found data files in %s : local version.\n"
+#~ msgstr "> Adatfájlok a(z) %s könyvtárban: helyi változat.\n"
+
+#~ msgid "Will create config files in %s\n"
+#~ msgstr "Ide kerülnek a konfigurációs fájlok: %s\n"
