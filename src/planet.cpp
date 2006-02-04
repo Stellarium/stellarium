@@ -508,8 +508,9 @@ void Planet::draw_hints(const Navigator* nav, const Projector* prj)
 	//	glColor4f(label_color[0], label_color[1], label_color[2],1.f);
 	//	glColor4f(label_color[0], label_color[1], label_color[2],hint_fader.getInterstate());
 	glColor3fv(label_color*hint_fader.getInterstate());
-	gravity_label ? prj->print_gravity180(planet_name_font, screenPos[0],screenPos[1], wos.str(), 1, tmp, tmp) :
-	planet_name_font->print(screenPos[0]+tmp,screenPos[1]+tmp, wos.str());
+	prj->getGravityLabels() ? 
+		prj->print_gravity180(planet_name_font, screenPos[0],screenPos[1], wos.str(), 1, tmp, tmp) :
+		planet_name_font->print(screenPos[0]+tmp,screenPos[1]+tmp, wos.str());
 
 	// hint disapears smoothly on close view
 	tmp -= 10.f;

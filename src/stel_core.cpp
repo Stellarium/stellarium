@@ -811,6 +811,7 @@ void StelCore::setProjectionType(Projector::PROJECTOR_TYPE pType)
 {
 	if (getProjectionType()==pType) return;
 	Projector* ptemp;
+
 	switch (pType)
 	{
 	case Projector::PERSPECTIVE_PROJECTOR :
@@ -828,6 +829,7 @@ void StelCore::setProjectionType(Projector::PROJECTOR_TYPE pType)
 	ptemp->setViewportType(projection->getViewportType());
 	ptemp->setViewportHorizontalOffset(projection->getViewportHorizontalOffset());
 	ptemp->setViewportVerticalOffset(projection->getViewportVerticalOffset());
+	ptemp->setGravityLabels(projection->getGravityLabels());
 	delete projection;
 	projection = ptemp;
 }
@@ -1093,7 +1095,8 @@ void StelCore::loadConfigFrom(const string& confFile)
 	setFlagEclipticLine(conf.get_boolean("viewing:flag_ecliptic_line"));
 	setFlagMeridianLine(conf.get_boolean("viewing:flag_meridian_line"));
 	cardinals_points->setFlagShow(conf.get_boolean("viewing:flag_cardinal_points"));
-	FlagGravityLabels		= conf.get_boolean("viewing:flag_gravity_labels");
+	//	FlagGravityLabels		= conf.get_boolean("viewing:flag_gravity_labels");
+	projection->setGravityLabels( conf.get_boolean("viewing:flag_gravity_labels") );
 	FlagMoonScaled			= conf.get_boolean("viewing", "flag_moon_scaled",
 	                                    conf.get_boolean("viewing", "flag_init_moon_scaled", 0));  // name change
 	MoonScale				= conf.get_double ("viewing","moon_scale",5.);
@@ -1295,7 +1298,7 @@ void StelCore::saveConfigTo(const string& confFile)
 	conf.set_boolean("viewing:flag_ecliptic_line", getFlagEclipticLine());
 	conf.set_boolean("viewing:flag_meridian_line", getFlagMeridianLine());
 	conf.set_boolean("viewing:flag_cardinal_points", cardinals_points->getFlagShow());
-	conf.set_boolean("viewing:flag_gravity_labels", FlagGravityLabels);
+	conf.set_boolean("viewing:flag_gravity_labels", projection->getGravityLabels());
 	conf.set_boolean("viewing:flag_moon_scaled", FlagMoonScaled);
 	conf.set_double ("viewing:moon_scale", MoonScale);
 	conf.set_double ("viewing:constellation_art_intensity", getConstellationArtIntensity());
