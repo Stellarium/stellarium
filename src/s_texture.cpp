@@ -92,7 +92,19 @@ int s_texture::load(string fullName)
 
     pngInfo info;
     pngSetStandardOrientation(1);
-    texID = pngBind(fullName.c_str(), PNG_BUILDMIPMAPS, loadType, &info, loadType2, GL_LINEAR, GL_LINEAR);
+
+	// TODO: make mipmap use an argument to this method so not hard coded here
+	// frans van hoesel: hack to filter textures, except stars
+	if (strstr(fullName.c_str(),"star16x16.png") == NULL) {
+		texID = pngBind(fullName.c_str(), PNG_BUILDMIPMAPS,
+						loadType, &info, loadType2,
+						GL_LINEAR_MIPMAP_NEAREST, GL_LINEAR);
+	} else {
+		texID = pngBind(fullName.c_str(), PNG_BUILDMIPMAPS,
+						loadType, &info, loadType2,
+						GL_NEAREST, GL_LINEAR);
+	}
+		
 
 	return (texID!=0);
 }
