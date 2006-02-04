@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: stellarium@free.fr\n"
-"POT-Creation-Date: 2006-01-21 22:59+0100\n"
+"POT-Creation-Date: 2006-01-25 21:50+0100\n"
 "PO-Revision-Date: 2005-07-26 21:42+0100\n"
 "Last-Translator: Johan Meuris <johanmeuris@antwerpen.be>\n"
 "Language-Team: \n"
@@ -138,24 +138,24 @@ msgid "Size : "
 msgstr ""
 
 # Dibuja barra de carga
-#: src/nebula_mgr.cpp:359
+#: src/nebula_mgr.cpp:360
 #, fuzzy
 msgid "Loading NGC catalog: "
 msgstr "Laden Hipparcos sterrencataloog: %d/%d"
 
 # Dibuja barra de carga
-#: src/nebula_mgr.cpp:494
+#: src/nebula_mgr.cpp:495
 #, fuzzy
 msgid "Loading Sharpless catalog:"
 msgstr "Laden Hipparcos sterrencataloog: %d/%d"
 
 # Dibuja barra de carga
-#: src/nebula_mgr.cpp:559
+#: src/nebula_mgr.cpp:560
 #, fuzzy
 msgid "Loading Cadwell catalog:"
 msgstr "Laden Hipparcos sterrencataloog: %d/%d"
 
-#: src/nebula_mgr.cpp:661
+#: src/nebula_mgr.cpp:662
 #, fuzzy
 msgid "Loading Nebula Textures:"
 msgstr "Laden neveldata: %d/%d"
@@ -271,7 +271,7 @@ msgstr "Terug naar huidige tijd"
 #: src/stel_ui.cpp:612
 #, fuzzy
 msgid ""
-"   Please check for newer versions and send bug reports\n"
+"   Please check for newer versions and send bug reports\n"
 "and comments to us at: http://stellarium.sourceforge.net\n"
 "\n"
 msgstr ""
@@ -460,19 +460,23 @@ msgid "Save as default"
 msgstr "Opslaan als standaard"
 
 #: src/stel_ui_conf.cpp:201
-msgid " Current Time :"
+#, fuzzy
+msgid "Current Time :"
 msgstr " Huidige tijd :"
 
 #: src/stel_ui_conf.cpp:210
-msgid " Time Zone :"
+#, fuzzy
+msgid "Time Zone :"
 msgstr " Tijdzone :"
 
 #: src/stel_ui_conf.cpp:214
-msgid " Using System Default Time Zone"
+#, fuzzy
+msgid "Using System Default Time Zone"
 msgstr " Standaard tijdzone"
 
 #: src/stel_ui_conf.cpp:223
-msgid " Time speed : "
+#, fuzzy
+msgid "Time speed : "
 msgstr " Snelheid tijd : "
 
 #: src/stel_ui_conf.cpp:231
@@ -511,7 +515,8 @@ msgid "Save location"
 msgstr "Positie opslaan"
 
 #: src/stel_ui_conf.cpp:308
-msgid " Projection :"
+#, fuzzy
+msgid "Projection :"
 msgstr " Projectie:"
 
 #: src/stel_ui_conf.cpp:314
@@ -523,7 +528,8 @@ msgid "Disk Viewport"
 msgstr "Schijfvormig venster."
 
 #: src/stel_ui_conf.cpp:324
-msgid " Screen Resolution :"
+#, fuzzy
+msgid "Screen Resolution :"
 msgstr " Schermresolutie:"
 
 #: src/stel_ui_conf.cpp:328
@@ -539,8 +545,9 @@ msgid "For unlisted screen resolution, edit the file :"
 msgstr ""
 
 #: src/stel_ui_conf.cpp:373
-msgid " Choose landscapes :"
-msgstr ""
+#, fuzzy
+msgid "Choose landscapes :"
+msgstr "Landschap: "
 
 #: src/stel_ui_conf.cpp:390
 msgid "Please save option in tab \"Location\""
@@ -627,9 +634,9 @@ msgstr "Labels planeten"
 msgid "Enter observatory name"
 msgstr ""
 
-#: src/stel_ui_conf.cpp:1119
+#: src/stel_ui_conf.cpp:1111
 #, fuzzy
-msgid " Current Time Speed is x"
+msgid "Current Time Speed is x"
 msgstr " Huidige tijd :"
 
 #: src/stel_ui_tuiconf.cpp:85
