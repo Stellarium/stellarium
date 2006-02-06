@@ -355,7 +355,7 @@ private:
 	void tui_cb_change_color();        // change colors
 
 	// Parse a file of type /usr/share/zoneinfo/zone.tab
-	s_tui::MultiSet_item<wstring>* StelUI::create_tree_from_time_zone_file(const string& zonetab);
+	s_tui::MultiSet_item<wstring>* create_tree_from_time_zone_file(const string& zonetab);
 
 	bool ScriptDirectoryRead;
 	double MouseTimeLeft;  // for cursor timeout (seconds)
