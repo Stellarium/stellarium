@@ -43,9 +43,9 @@ class StelCommandInterface : CommandInterface
  public:
   StelCommandInterface(StelCore * core);
   virtual ~StelCommandInterface();
-  virtual int StelCommandInterface::execute_command(string commandline);
-  virtual int StelCommandInterface::execute_command(string command, double arg);
-  virtual int StelCommandInterface::execute_command(string command, int arg);
+  virtual int execute_command(string commandline);
+  virtual int execute_command(string command, double arg);
+  virtual int execute_command(string command, int arg);
   virtual int execute_command(string command, unsigned long int &wait, bool trusted);
   virtual int set_flag(string name, string value, bool &newval, bool trusted);
   void update(int delta_time);
