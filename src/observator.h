@@ -114,8 +114,8 @@ private:
 	string s_time_format_to_string(S_TIME_FORMAT) const;
 
 	// Convert the date format enum to its associated string and reverse
-	S_DATE_FORMAT Observator::string_to_s_date_format(const string& df) const;
-	string Observator::s_date_format_to_string(S_DATE_FORMAT df) const;
+	S_DATE_FORMAT string_to_s_date_format(const string& df) const;
+	string s_date_format_to_string(S_DATE_FORMAT df) const;
 
 	// for changing position
 	bool flag_move_to;

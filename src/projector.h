@@ -79,7 +79,7 @@ public:
 	virtual void setViewport(int x, int y, int w, int h);
 
 	// Fill with black around the circle
-	void Projector::draw_viewport_shape(void);
+	void draw_viewport_shape(void);
 
 	int viewW(void) const {return vec_viewport[2];}
 	int viewH(void) const {return vec_viewport[3];}
