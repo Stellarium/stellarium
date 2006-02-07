@@ -66,6 +66,7 @@ StelCore::StelCore(const string& CDIR, const string& LDIR, const string& DATA_RO
 	draw_mode = DM_NORMAL;
 	ColorSchemeChanged = true;
 
+	landscape = new LandscapeOldStyle();
 }
 
 StelCore::~StelCore()
@@ -142,9 +143,6 @@ void StelCore::init(void)
 	setPlanetsScale(getStarScale());
 	ssystem->setTrailColor(ObjectTrailsColor[draw_mode]);
 
-
-	atmosphere->set_fade_duration(AtmosphereFadeDuration);
-
 	// Init grids, lines and cardinal points
 	equ_grid->set_font(12., getDataDir() + BaseFontName);
 	equ_grid->set_color(EquatorialColor[draw_mode]);
@@ -169,11 +167,10 @@ void StelCore::init(void)
 	else milky_way->set_texture("milkyway_chart.png",true);
 
 	milky_way->set_color(MilkyWayColor[draw_mode]);
-	milky_way->set_intensity(MilkyWayIntensity);
 
 	meteors = new MeteorMgr(10, 60);
 
-	landscape = Landscape::create_from_file(getDataDir() + "landscapes.ini", observatory->get_landscape_name());
+	setLandscape(observatory->get_landscape_name());
 
 	// Load the pointer textures
 	StelObject::init_textures();
@@ -349,20 +346,13 @@ void StelCore::draw(int delta_time)
 	if (draw_mode != DM_NORMAL)
 		draw_chart_background();
 
-	// Draw the milky way. If not activated, need at least to clear the color buffer
-	if (FlagMilkyWay)
-	{
-		tone_converter->set_world_adaptation_luminance(atmosphere->get_milkyway_adaptation_luminance());
-		if (draw_mode == DM_NORMAL)
-			milky_way->draw(tone_converter, projection, navigation);
-		else
-			milky_way->draw_chart(tone_converter, projection, navigation);
-		tone_converter->set_world_adaptation_luminance(atmosphere->get_world_adaptation_luminance());
-	}
+	// Draw the milky way.
+	tone_converter->set_world_adaptation_luminance(atmosphere->get_milkyway_adaptation_luminance());
+	if (draw_mode == DM_NORMAL)
+		milky_way->draw(tone_converter, projection, navigation);
 	else
-	{
-		glClear(GL_COLOR_BUFFER_BIT);
-	}
+		milky_way->draw_chart(tone_converter, projection, navigation);
+	tone_converter->set_world_adaptation_luminance(atmosphere->get_world_adaptation_luminance());
 
 	// Draw all the constellations
 	asterisms->draw(projection, navigation);
@@ -406,7 +396,7 @@ void StelCore::draw(int delta_time)
 	// Draw meteors
 	meteors->update(projection, navigation, tone_converter, delta_time);
 
-	if(!FlagAtmosphere || sky_brightness<0.01)
+	if(!getFlagAtmosphere() || sky_brightness<0.01)
 	{
 		projection->set_orthographic_projection();
 		meteors->draw(projection, navigation);
@@ -414,12 +404,9 @@ void StelCore::draw(int delta_time)
 	}
 
 	// Draw the atmosphere
-	atmosphere->show(FlagAtmosphere);
 	atmosphere->draw(projection, delta_time);
 
 	// Draw the landscape
-	landscape->show_landscape(FlagLandscape);
-	landscape->show_fog(FlagFog);
 	landscape->draw(tone_converter, projection, navigation);
 
 	// Draw the cardinal points
@@ -453,9 +440,15 @@ void StelCore::setConfigFiles(const string& _config_file)
 void StelCore::setLandscape(const string& new_landscape_name)
 {
 	if (new_landscape_name.empty()) return;
-	if (landscape) delete landscape;
-	landscape = NULL;
-	landscape = Landscape::create_from_file(getDataDir() + "landscapes.ini", new_landscape_name);
+	Landscape* newLandscape = Landscape::create_from_file(getDataDir() + "landscapes.ini", new_landscape_name);
+	if (landscape)
+	{
+		delete landscape;
+		// Copy parameters from previous landscape to new one
+		newLandscape->setFlagShow(landscape->getFlagShow());
+		newLandscape->setFlagShowFog(landscape->getFlagShowFog());
+		landscape = newLandscape;
+	}
 	observatory->set_landscape_name(new_landscape_name);
 }
 
@@ -1073,11 +1066,10 @@ void StelCore::loadConfigFrom(const string& confFile)
 	}
 
 	// Landscape section
-	FlagLandscape			= conf.get_boolean("landscape", "flag_landscape",
-	                                   conf.get_boolean("landscape", "flag_ground", 1));  // name change
-	FlagFog					= conf.get_boolean("landscape:flag_fog");
-	FlagAtmosphere			= conf.get_boolean("landscape:flag_atmosphere");
-	AtmosphereFadeDuration  = conf.get_double("landscape","atmosphere_fade_duration",1.5);
+	setFlagLandscape(conf.get_boolean("landscape", "flag_landscape", conf.get_boolean("landscape", "flag_ground", 1)));  // name change
+	setFlagFog(conf.get_boolean("landscape:flag_fog"));
+	setFlagAtmosphere(conf.get_boolean("landscape:flag_atmosphere"));
+	setAtmosphereFadeDuration(conf.get_double("landscape","atmosphere_fade_duration",1.5));
 
 	// Viewing section
 	setFlagConstellationLines(		conf.get_boolean("viewing:flag_constellation_drawing"));
@@ -1119,9 +1111,8 @@ void StelCore::loadConfigFrom(const string& confFile)
 	NebulaScale				= conf.get_double("astro", "nebula_scale",1.0f);
 	nebulas->set_show_ngc(conf.get_boolean("astro", "flag_nebula_ngc",false));
 	nebulas->set_show_messier(conf.get_boolean("astro", "flag_nebula_messier",true));
-	FlagMilkyWay			= conf.get_boolean("astro:flag_milky_way");
-	MilkyWayIntensity       = conf.get_double("astro","milky_way_intensity",1.);
-	milky_way->set_intensity(MilkyWayIntensity);
+	setFlagMilkyWay(conf.get_boolean("astro:flag_milky_way"));
+	setMilkyWayIntensity(conf.get_double("astro","milky_way_intensity",1.));
 
 	FlagBrightNebulae		= conf.get_boolean("astro:flag_bright_nebulae");
 }
@@ -1280,10 +1271,10 @@ void StelCore::saveConfigTo(const string& confFile)
 	conf.set_str	("navigation:viewing_mode",tmpstr);
 
 	// Landscape section
-	conf.set_boolean("landscape:flag_landscape", FlagLandscape);
-	conf.set_boolean("landscape:flag_fog", FlagFog);
-	conf.set_boolean("landscape:flag_atmosphere", FlagAtmosphere);
-	conf.set_double ("viewing:atmosphere_fade_duration", AtmosphereFadeDuration);
+	conf.set_boolean("landscape:flag_landscape", getFlagLandscape());
+	conf.set_boolean("landscape:flag_fog", getFlagFog());
+	conf.set_boolean("landscape:flag_atmosphere", getFlagAtmosphere());
+	conf.set_double ("viewing:atmosphere_fade_duration", getAtmosphereFadeDuration());
 
 	// Viewing section
 	conf.set_boolean("viewing:flag_constellation_drawing", getFlagConstellationLines());
@@ -1319,8 +1310,8 @@ void StelCore::saveConfigTo(const string& confFile)
 	conf.set_boolean("astro:flag_nebula_long_name", FlagNebulaLongName); // Tony - added long name
 	conf.set_double("astro:max_mag_nebula_name", MaxMagNebulaName);
 	conf.set_double("astro:nebula_scale", NebulaScale);
-	conf.set_boolean("astro:flag_milky_way", FlagMilkyWay);
-	conf.set_double("astro:milky_way_intensity", MilkyWayIntensity);
+	conf.set_boolean("astro:flag_milky_way", getFlagMilkyWay());
+	conf.set_double("astro:milky_way_intensity", getMilkyWayIntensity());
 	conf.set_boolean("astro:flag_bright_nebulae", FlagBrightNebulae);
 	conf.set_boolean("astro:flag_nebula_ngc", nebulas->get_show_ngc());
 

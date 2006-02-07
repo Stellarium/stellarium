@@ -464,6 +464,8 @@ void StelUI::tui_cb_tui_admin_change_viewport(void)
 	core->setViewportHorizontalOffset(tui_admin_hoffset->getValue());
 }
 
+#define SCRIPT_REMOVEABLE_DISK "/tmp/scripts/"
+
 // callback for changing scripts from removeable media
 void StelUI::tui_cb_scripts_removeable() {
   

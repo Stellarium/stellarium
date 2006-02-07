@@ -44,8 +44,17 @@ public:
 		float temperature = 15.f, float relative_humidity = 40.f);
 	void draw(Projector* prj, int delta_time);
 	void update(int delta_time) {fader.update(delta_time);}
-	void set_fade_duration(float duration) {fader.set_duration((int)(duration*1000.f));}
-	void show(bool b){fader = b;}
+	
+	//! Set fade in/out duration in seconds
+	void setFadeDuration(float duration) {fader.set_duration((int)(duration*1000.f));}
+	//! Get fade in/out duration in seconds
+	float getFadeDuration() {return fader.get_duration()/1000.f;}
+	
+	//! Define whether to display atmosphere
+	void setFlagShow(bool b){fader = b;}
+	//! Get whether atmosphere is displayed
+	bool getFlagShow() const {return fader;}
+	
 	float get_intensity(void) {return atm_intensity; }  // tells you actual atm intensity due to eclipses + fader
 	float get_fade_intensity(void) {return fader.getInterstate();}  // let's you know how far faded in or out the atm is (0-1)
 	float get_world_adaptation_luminance(void) const {return world_adaptation_luminance;}
