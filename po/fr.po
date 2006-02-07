@@ -5,13 +5,14 @@
 # This file is distributed under the same license as the stellarium package.
 # Fabien Chéreau, 2006.
 # Fabien Chéreau, 2006.
+# Fabien Chéreau, 2006.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: stellarium@free.fr\n"
 "POT-Creation-Date: 2006-01-25 21:50+0100\n"
-"PO-Revision-Date: 2006-01-21 23:00+0100\n"
+"PO-Revision-Date: 2006-02-07 16:54+0100\n"
 "Last-Translator: Fabien Chéreau\n"
 "Language-Team:  <fr@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -253,13 +254,12 @@ msgid "Return to Current Time"
 msgstr "Revient au Temps Actuel"
 
 #: src/stel_ui.cpp:612
-#, fuzzy
 msgid ""
 "   Please check for newer versions and send bug reports\n"
 "and comments to us at: http://stellarium.sourceforge.net\n"
 "\n"
 msgstr ""
-"Téléchargez les mise à jour et envoyez vos rapports de \n"
+"   Téléchargez les mise à jour et envoyez vos rapports de \n"
 "bogues sur : http://stellarium.sourceforge.net\n"
 "\n"
 
@@ -403,8 +403,7 @@ msgstr "Appuyez sur CTRL-R à nouveau pour arrêter.\n"
 
 #: src/stel_ui.cpp:1054
 msgid "Error: Unable to open script file to record commands."
-msgstr ""
-"Erreur: Impossible d'ouvrir le fichier script pour enregistrer les commandes."
+msgstr "Erreur: Impossible d'ouvrir le fichier script pour enregistrer les commandes."
 
 #: src/stel_ui_conf.cpp:27
 msgid "Configuration"
@@ -487,24 +486,20 @@ msgid "Save as default"
 msgstr "Enregistre comme défaut"
 
 #: src/stel_ui_conf.cpp:201
-#, fuzzy
 msgid "Current Time :"
-msgstr "  Temps Actuel :"
+msgstr "Temps Actuel :"
 
 #: src/stel_ui_conf.cpp:210
-#, fuzzy
 msgid "Time Zone :"
-msgstr "  Zone horaire :"
+msgstr "Zone horaire :"
 
 #: src/stel_ui_conf.cpp:214
-#, fuzzy
 msgid "Using System Default Time Zone"
-msgstr "  Utilise la zone horaire par défaut"
+msgstr "Utilise la zone horaire par défaut"
 
 #: src/stel_ui_conf.cpp:223
-#, fuzzy
 msgid "Time speed : "
-msgstr "  Vitesse du Temps : "
+msgstr "Vitesse du Temps : "
 
 #: src/stel_ui_conf.cpp:231
 msgid ""
@@ -541,9 +536,8 @@ msgid "Save location"
 msgstr "Enregistre la position"
 
 #: src/stel_ui_conf.cpp:308
-#, fuzzy
 msgid "Projection :"
-msgstr " Projection :"
+msgstr "Projection :"
 
 #: src/stel_ui_conf.cpp:314
 msgid "Fisheye Projection Mode"
@@ -554,9 +548,8 @@ msgid "Disk Viewport"
 msgstr "Mode de vue disque"
 
 #: src/stel_ui_conf.cpp:324
-#, fuzzy
 msgid "Screen Resolution :"
-msgstr " Resolution écran  :"
+msgstr "Resolution écran  :"
 
 #: src/stel_ui_conf.cpp:328
 msgid "Restart program for"
@@ -571,9 +564,8 @@ msgid "For unlisted screen resolution, edit the file :"
 msgstr "Pour d'autres résolutions, éditer le fichier :"
 
 #: src/stel_ui_conf.cpp:373
-#, fuzzy
 msgid "Choose landscapes :"
-msgstr " Choix du paysage :"
+msgstr "Choix du paysage :"
 
 #: src/stel_ui_conf.cpp:390
 msgid "Please save option in tab \"Location\""
@@ -656,9 +648,8 @@ msgid "Enter observatory name"
 msgstr "Entrez le nom de l'observatoire"
 
 #: src/stel_ui_conf.cpp:1111
-#, fuzzy
 msgid "Current Time Speed is x"
-msgstr " La vistesse du temps actuelle est x"
+msgstr "La vistesse du temps actuelle est x"
 
 #: src/stel_ui_tuiconf.cpp:85
 msgid "Set Location "
@@ -1315,3 +1306,4 @@ msgstr "Vierge"
 #: src/translations.h:156
 msgid "Vela"
 msgstr "Voiles"
+

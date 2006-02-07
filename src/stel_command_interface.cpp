@@ -109,7 +109,7 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 
     // TODO: some bounds/error checking here
 
-    if(args["atmosphere_fade_duration"]!="") stcore->AtmosphereFadeDuration = str_to_double(args["atmosphere_fade_duration"]);
+    if(args["atmosphere_fade_duration"]!="") stcore->setAtmosphereFadeDuration(str_to_double(args["atmosphere_fade_duration"]));
     else if(args["auto_move_duration"]!="") stcore->auto_move_duration = str_to_double(args["auto_move_duration"]);
     else if(args["constellation_art_fade_duration"]!="") stcore->setConstellationArtFadeDuration(str_to_double(args["constellation_art_fade_duration"]));
     else if(args["constellation_art_intensity"]!="") stcore->setConstellationArtIntensity(str_to_double(args["constellation_art_intensity"]));
@@ -138,11 +138,9 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 	else if(args["star_twinkle_amount"]!="") stcore->setStarTwinkleAmount(str_to_double(args["star_twinkle_amount"]));
     else if(args["time_zone"]!="") stcore->observatory->set_custom_tz_name(args["time_zone"]);
     else if(args["milky_way_intensity"]!="") {
-		stcore->MilkyWayIntensity = str_to_double(args["milky_way_intensity"]);
-		stcore->milky_way->set_intensity(stcore->MilkyWayIntensity);
-
+		stcore->setMilkyWayIntensity(str_to_double(args["milky_way_intensity"]));
 		// safety feature to be able to turn back on
-		if(stcore->MilkyWayIntensity) stcore->FlagMilkyWay = 1;
+		if(stcore->getMilkyWayIntensity()) stcore->setFlagMilkyWay(true);
 
 	} else status = 0;
 
@@ -597,9 +595,9 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 			  stcore->setConstellationArtIntensity(stcore->getConstellationArtIntensity());
 			  stcore->setConstellationArtFadeDuration(stcore->getConstellationArtFadeDuration());
 		  }
-		  if (!stcore->FlagAtmosphere && stcore->tone_converter)
+		  if (!stcore->getFlagAtmosphere() && stcore->tone_converter)
 			  stcore->tone_converter->set_world_adaptation_luminance(3.75f);
-		  if (stcore->atmosphere) stcore->atmosphere->set_fade_duration(stcore->AtmosphereFadeDuration);
+		  //if (stcore->getFlagAtmosphere()) stcore->atmosphere->set_fade_duration(stcore->AtmosphereFadeDuration);
 		  stcore->observatory->load(stcore->getConfigDir() + stcore->config_file, "init_location");
 		  stcore->setLandscape(stcore->observatory->get_landscape_name());
 		  
@@ -717,10 +715,14 @@ int StelCommandInterface::set_flag(string name, string value, bool &newval, bool
 		else if(name=="show_tui_short_obj_info") newval = (stcore->FlagShowTuiShortObjInfo = !stcore->FlagShowTuiShortObjInfo);
 		else if(name=="manual_zoom") newval = (stcore->FlagManualZoom = !stcore->FlagManualZoom);
 		else if(name=="show_script_bar") newval = (stcore->FlagShowScriptBar = !stcore->FlagShowScriptBar);
-		else if(name=="fog") newval = (stcore->FlagFog = !stcore->FlagFog);
+		else if(name=="fog") {
+			newval = !stcore->getFlagFog();
+			stcore->setFlagFog(newval); 
+		}
 		else if(name=="atmosphere") {
-			newval = (stcore->FlagAtmosphere = !stcore->FlagAtmosphere);
-			if(!newval) stcore->FlagFog = 0;  // turn off fog with atmosphere
+			newval = !stcore->getFlagAtmosphere();
+			stcore->setFlagAtmosphere(newval);
+			if(!newval) stcore->setFlagFog(false);  // turn off fog with atmosphere
 		}
 		else if(name=="chart") {
 			newval = stcore->FlagChart = !stcore->FlagChart;
@@ -760,7 +762,10 @@ int StelCommandInterface::set_flag(string name, string value, bool &newval, bool
 			if (newval)	stcore->ssystem->getMoon()->set_sphere_scale(stcore->MoonScale);
 			else stcore->ssystem->getMoon()->set_sphere_scale(1.);
 		}
-		else if(name=="landscape") newval = (stcore->FlagLandscape = !stcore->FlagLandscape);
+		else if(name=="landscape") {
+			newval = !stcore->getFlagLandscape();
+			stcore->setFlagLandscape(newval);
+			}
 		else if(name=="stars") {
 			newval = !stcore->getFlagStars();
 			stcore->setFlagStars(newval);
@@ -795,7 +800,10 @@ int StelCommandInterface::set_flag(string name, string value, bool &newval, bool
 			stcore->nebulas->set_flag_hints(newval);
 			stcore->FlagNebulaLongName = newval;
 		}
-		else if(name=="milky_way") newval = (stcore->FlagMilkyWay = !stcore->FlagMilkyWay);
+		else if(name=="milky_way") {
+			newval = !stcore->getFlagMilkyWay();
+			stcore->setFlagMilkyWay(newval);
+		}
 		else if(name=="bright_nebulae") newval = (stcore->FlagBrightNebulae = !stcore->FlagBrightNebulae);
 		else if(name=="object_trails")
 		{
@@ -857,10 +865,10 @@ int StelCommandInterface::set_flag(string name, string value, bool &newval, bool
 		else if(name=="show_tui_short_obj_info") stcore->FlagShowTuiShortObjInfo = newval;
 		else if(name=="manual_zoom") stcore->FlagManualZoom = newval;
 		else if(name=="show_script_bar") stcore->FlagShowScriptBar = newval;
-		else if(name=="fog") stcore->FlagFog = newval;
+		else if(name=="fog") stcore->setFlagFog(newval);
 		else if(name=="atmosphere") { 
-			stcore->FlagAtmosphere = newval;
-			if(!newval) stcore->FlagFog = 0;  // turn off fog with atmosphere
+			stcore->setFlagAtmosphere ( newval);
+			if(!newval) stcore->setFlagFog(false);  // turn off fog with atmosphere
 		}
 		else if(name=="chart") {
 			stcore->FlagChart = newval;
@@ -883,7 +891,7 @@ int StelCommandInterface::set_flag(string name, string value, bool &newval, bool
 				stcore->ssystem->getMoon()->set_sphere_scale(stcore->MoonScale);
 			else stcore->ssystem->getMoon()->set_sphere_scale(1.);
 		}
-		else if(name=="landscape") stcore->FlagLandscape = newval;
+		else if(name=="landscape") stcore->setFlagLandscape(newval);
 		else if(name=="stars") stcore->setFlagStars(newval);
 		else if(name=="star_names") stcore->setFlagStarName(newval);
 		else if(name=="planets") {
@@ -905,7 +913,7 @@ int StelCommandInterface::set_flag(string name, string value, bool &newval, bool
 			stcore->nebulas->set_flag_hints(newval); // make sure visible
 			stcore->FlagNebulaLongName = newval;
 		}
-		else if(name=="milky_way") stcore->FlagMilkyWay = newval;
+		else if(name=="milky_way") stcore->setFlagMilkyWay(newval);
 		else if(name=="bright_nebulae") stcore->FlagBrightNebulae = newval;
 		else if(name=="object_trails") stcore->setFlagPlanetsTrails(newval);
 		else if(name=="track_object") {

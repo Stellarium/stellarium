@@ -45,10 +45,19 @@ public:
 	virtual void load(const string& file_name, const string& section_name) = 0;
 	void set_parameters(const Vec3f& sun_pos);
 	void set_sky_brightness(float b) {sky_brightness = b;}
-	void show_landscape(bool b) {land_fader=b; }
-	void show_fog(bool b) {fog_fader=b; }
+	
+	//! Set whether landscape is displayed (does not concern fog)
+	void setFlagShow(bool b) {land_fader=b;}
+	//! Get whether landscape is displayed (does not concern fog)
+	bool getFlagShow() {return land_fader;}
+	//! Set whether fog is displayed
+	void setFlagShowFog(bool b) {fog_fader=b;}
+	//! Get whether fog is displayed
+	bool getFlagShowFog() {return fog_fader;}
+	
 	void update(int delta_time) {land_fader.update(delta_time); fog_fader.update(delta_time);}
 	virtual void draw(ToneReproductor * eye, const Projector* prj, const Navigator* nav) = 0;
+	
 	static Landscape* create_from_file(const string& landscape_file, const string& section_name);
 	static Landscape* create_from_hash(stringHash_t param);
 	static string get_file_content(const string& landscape_file);

@@ -137,12 +137,16 @@ public:
 	void set_texture(const string& tex_file, bool blend = false);
 	void set_color(const Vec3f& c) { color=c;}
 	void draw_chart(ToneReproductor * eye, const Projector* prj, const Navigator* nav);
+	void setFlagShow(bool b){fader = b;}
+	bool getFlagShow(void) const {return fader;}
+	
 private:
 	float radius;
 	s_texture* tex;
 	Vec3f color;
 	float intensity;
 	float tex_avg_luminance;
+	LinearFader fader;
 };
 
 void DrawPoint(float X,float Y,float Z);
