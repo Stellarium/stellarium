@@ -19,8 +19,6 @@
 #ifndef _STEL_CORE_H_
 #define _STEL_CORE_H_
 
-#define SCRIPT_REMOVEABLE_DISK "/tmp/scripts/"
-
 #include <string>
 
 #include "navigator.h"
@@ -49,6 +47,7 @@
 #include "loadingbar.h"
 
 // Predeclaration of the StelCommandInterface class
+// TODO : Those will be removed once reorganisation is achieved.
 class StelCommandInterface;
 class ScriptMgr;
 class StelUI;
@@ -63,6 +62,7 @@ class StelUI;
  
 class StelCore
 {
+// TODO : Those 2 will be removed once reorganisation is achieved.
 friend class StelUI;
 friend class StelCommandInterface;
 public:
@@ -137,6 +137,7 @@ public:
 	int getBppMode(void) const {return bppMode;}
 	int getFullscreen(void) const {return Fullscreen;}
 	
+	///////////////////////////////////////////////////////////////////////////////////////
 	// Constellations methods
 	//! Set display flag of constellation lines
 	void setFlagConstellationLines(bool b) {asterisms->setFlagLines(b);}
@@ -176,6 +177,7 @@ public:
 	//! Set constellation font size 
 	void setConstellationFontSize(float f) {asterisms->setFont(f, getDataDir() + BaseFontName);}
 	
+	///////////////////////////////////////////////////////////////////////////////////////
 	// Stars methods
 	//! Set display flag for Stars 
 	void setFlagStars(bool b) {hip_stars->setFlagStars(b);}
@@ -232,6 +234,7 @@ public:
 	//! Get stars limiting display magnitude 
 	float getStarLimitingMag(void) const {return hip_stars->getStarLimitingMag();}
 	
+	///////////////////////////////////////////////////////////////////////////////////////
 	// Planets flags
 	//! Set flag for displaying Planets
 	void setFlagPlanets(bool b) {ssystem->setFlagPlanets(b);}
@@ -265,6 +268,7 @@ public:
 	//! @param englishName The planet name or "" to select no planet
 	void setPlanetsSelected(const string& englishName) {ssystem->setSelected(englishName);}
 	
+	///////////////////////////////////////////////////////////////////////////////////////
 	// Grid and lines
 	//! Set flag for displaying Azimutal Grid
 	void setFlagAzimutalGrid(bool b) {azi_grid->setFlagshow(b);}
@@ -291,6 +295,7 @@ public:
 	//! Get flag for displaying Meridian Line
 	bool getFlagMeridianLine(void) const {return meridian_line->getFlagshow();}	
 	
+	///////////////////////////////////////////////////////////////////////////////////////
 	// Projection	
 	//! Set the horizontal viewport offset in pixels 
 	void setViewportHorizontalOffset(int hoff) const {projection->setViewportHorizontalOffset(hoff);}	
@@ -311,6 +316,40 @@ public:
 	void setProjectionType(Projector::PROJECTOR_TYPE pType);
 	//! Get the projection type
 	Projector::PROJECTOR_TYPE getProjectionType(void) {return projection->getType();}
+	
+	///////////////////////////////////////////////////////////////////////////////////////
+	// Landscape
+	//! Set flag for displaying Landscape
+	void setFlagLandscape(bool b) {landscape->setFlagShow(b);}
+	//! Get flag for displaying Landscape
+	bool getFlagLandscape(void) const {return landscape->getFlagShow();}	
+		
+	//! Set flag for displaying Fog
+	void setFlagFog(bool b) {landscape->setFlagShowFog(b);}
+	//! Get flag for displaying Fog
+	bool getFlagFog(void) const {return landscape->getFlagShowFog();}
+	
+	///////////////////////////////////////////////////////////////////////////////////////
+	// Atmosphere
+	//! Set flag for displaying Atmosphere
+	void setFlagAtmosphere(bool b) {atmosphere->setFlagShow(b);}
+	//! Get flag for displaying Atmosphere
+	bool getFlagAtmosphere(void) const {return atmosphere->getFlagShow();}	
+	
+	//! Set atmosphere fade duration in s
+	void setAtmosphereFadeDuration(float f) {atmosphere->setFadeDuration(f);}
+	//! Get atmosphere fade duration in s
+	float getAtmosphereFadeDuration(void) const {return atmosphere->getFadeDuration();}	
+	
+	//! Set flag for displaying Milky Way
+	void setFlagMilkyWay(bool b) {milky_way->setFlagShow(b);}
+	//! Get flag for displaying Milky Way
+	bool getFlagMilkyWay(void) const {return milky_way->getFlagShow();}
+	
+	//! Set Milky Way intensity
+	void setMilkyWayIntensity(float f) {milky_way->set_intensity(f);}
+	//! Get Milky Way intensity
+	float getMilkyWayIntensity(void) const {return milky_way->get_intensity();}
 	
 	const string getDataDir(void) const {return dataRoot + "/data/";}
 	const string& getDataRoot() const {return dataRoot;}
@@ -394,21 +433,15 @@ private:
 	Landscape * landscape;				// The landscape ie the fog, the ground and "decor"
 	ToneReproductor * tone_converter;	// Tones conversion between stellarium world and display device
 
+	// Current sky Brightness
+	float sky_brightness;
+
 	// Astro
     bool FlagNebula;
     bool FlagNebulaLongName;
     float MaxMagNebulaName;
     bool FlagNebulaCircle;
-    bool FlagMilkyWay;
-    float MilkyWayIntensity;
     bool FlagBrightNebulae;
-	
-	// Landscape
-	bool FlagLandscape;
-    bool FlagFog;
-    bool FlagAtmosphere;
-	float sky_brightness;
-	float AtmosphereFadeDuration;
 
 	// Viewing
 	bool FlagGravityLabels;
@@ -465,6 +498,16 @@ private:
 	float BaseCFontSize;
 	string BaseCFontName;
 
+	double MouseCursorTimeout;  // seconds to hide cursor when not used.  0 means no timeout
+
+	// Text UI
+	bool FlagEnableTuiMenu;
+	bool FlagShowGravityUi;
+	bool FlagShowTuiMenu;
+	bool FlagShowTuiDateTime;
+	bool FlagShowTuiShortObjInfo;
+
+	//// Those are related to ColorScheme and will be isolated in a dedicated class.
 	Vec3f AzimuthalColor[3];
 	Vec3f EquatorialColor[3];
 	Vec3f EquatorColor[3];
@@ -483,19 +526,7 @@ private:
 	Vec3f ObjectTrailsColor[3];
 	Vec3f ChartColor[3];
 	Vec3f MilkyWayColor[3];
-
-	double MouseCursorTimeout;  // seconds to hide cursor when not used.  0 means no timeout
-
-	// Text UI
-	bool FlagEnableTuiMenu;
-	bool FlagShowGravityUi;
-	bool FlagShowTuiMenu;
-	bool FlagShowTuiDateTime;
-	bool FlagShowTuiShortObjInfo;
-
-
-
-	//bool FlagUseCommonNames;
+	
 	bool FlagChart;
 	bool FlagNight;
 	bool ColorSchemeChanged;

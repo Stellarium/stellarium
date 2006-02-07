@@ -988,10 +988,10 @@ void StelUI::saveRenderOptions(void)
 	conf.set_boolean("viewing:flag_azimutal_grid", core->getFlagAzimutalGrid());
 	conf.set_boolean("viewing:flag_equator_line", core->getFlagEquatorLine());
 	conf.set_boolean("viewing:flag_ecliptic_line", core->getFlagEclipticLine());
-	conf.set_boolean("landscape:flag_landscape", core->FlagLandscape);
+	conf.set_boolean("landscape:flag_landscape", core->getFlagLandscape());
 	conf.set_boolean("viewing:flag_cardinal_points", core->cardinals_points->getFlagShow());
-	conf.set_boolean("landscape:flag_atmosphere", core->FlagAtmosphere);
-	conf.set_boolean("landscape:flag_fog", core->FlagFog);
+	conf.set_boolean("landscape:flag_atmosphere", core->getFlagAtmosphere());
+	conf.set_boolean("landscape:flag_fog", core->getFlagFog());
 
 	conf.save(core->getConfigDir() + core->config_file);
 }
@@ -1082,10 +1082,10 @@ void StelUI::updateConfigForm(void)
 	azimuth_grid_cbx->setState(core->getFlagAzimutalGrid());
 	equator_cbx->setState(core->getFlagEquatorLine());
 	ecliptic_cbx->setState(core->getFlagEclipticLine());
-	ground_cbx->setState(core->FlagLandscape);
+	ground_cbx->setState(core->getFlagLandscape());
 	cardinal_cbx->setState(core->cardinals_points->getFlagShow());
-	atmosphere_cbx->setState(core->FlagAtmosphere);
-	fog_cbx->setState(core->FlagFog);
+	atmosphere_cbx->setState(core->getFlagAtmosphere());
+	fog_cbx->setState(core->getFlagFog());
 
 	earth_map->setPointerLongitude(core->observatory->get_longitude());
 	earth_map->setPointerLatitude(core->observatory->get_latitude());

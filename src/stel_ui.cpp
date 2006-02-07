@@ -508,9 +508,9 @@ void StelUI::cb(void)
 	core->setFlagConstellationArt(bt_flag_constellation_art->getState());
 	core->setFlagAzimutalGrid(bt_flag_azimuth_grid->getState());
 	core->setFlagEquatorGrid(bt_flag_equator_grid->getState());
-	core->FlagLandscape	 		= bt_flag_ground->getState();
+	core->setFlagLandscape(bt_flag_ground->getState());
 	core->cardinals_points->setFlagShow(bt_flag_cardinals->getState());
-	core->FlagAtmosphere 		= bt_flag_atmosphere->getState();
+	core->setFlagAtmosphere(bt_flag_atmosphere->getState());
 	core->nebulas->set_flag_hints( bt_flag_nebula_name->getState() );
 	core->FlagHelp 				= bt_flag_help->getState();
 	help_win->setVisible(core->FlagHelp);
@@ -610,7 +610,7 @@ Component* StelUI::createLicenceWindow(void)
 wstring(L"                 \u2022   " APP_NAME "  August 2005  \u2022\n\n") +
 L"\u2022   Copyright (c) 2000-2005 Fabien Chereau et al.\n\n" +
 L"\u2022" + _("   Please check for newer versions and send bug reports\n\
-and comments to us at: http://stellarium.sourceforge.net\n\n") +
+and comments to us at: http://www.stellarium.org\n\n") +
 L"\u2022   This program is free software; you can redistribute it and/or\n\
 modify it under the terms of the GNU General Public License\n\
 as published by the Free Software Foundation; either version 2\n\
@@ -1305,9 +1305,9 @@ void StelUI::gui_update_widgets(int delta_time)
 	bt_flag_constellation_art->setState(core->getFlagConstellationArt());
 	bt_flag_azimuth_grid->setState(core->getFlagAzimutalGrid());
 	bt_flag_equator_grid->setState(core->getFlagEquatorGrid());
-	bt_flag_ground->setState(core->FlagLandscape);
+	bt_flag_ground->setState(core->getFlagLandscape());
 	bt_flag_cardinals->setState(core->cardinals_points->getFlagShow());
-	bt_flag_atmosphere->setState(core->FlagAtmosphere);
+	bt_flag_atmosphere->setState(core->getFlagAtmosphere());
 	bt_flag_nebula_name->setState(core->nebulas->get_flag_hints());
 	bt_flag_help->setState(help_win->getVisible());
 	bt_flag_equatorial_mode->setState(core->navigation->get_viewing_mode()==Navigator::VIEW_EQUATOR);

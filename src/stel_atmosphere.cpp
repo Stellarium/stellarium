@@ -35,7 +35,7 @@ Atmosphere::Atmosphere() : sky_resolution(48), tab_sky(NULL), world_adaptation_l
 	{
 		tab_sky[k] = new Vec3f[sky_resolution+1];
 	}
-	set_fade_duration(3.f);
+	setFadeDuration(3.f);
 }
 
 Atmosphere::~Atmosphere()
