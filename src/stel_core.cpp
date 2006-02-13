@@ -42,10 +42,10 @@ StelCore::StelCore(const string& CDIR, const string& LDIR, const string& DATA_RO
 	atmosphere = new Atmosphere();
 	hip_stars = new HipStarMgr();
 	asterisms = new ConstellationMgr(hip_stars);
-	observatory = new Observator();
+	ssystem = new SolarSystem();
+	observatory = new Observator(*ssystem);
 	navigation = new Navigator(observatory);
 	nebulas = new NebulaMgr();
-	ssystem = new SolarSystem();
 	milky_way = new MilkyWay();
 	equ_grid = new SkyGrid(SkyGrid::EQUATORIAL);
 	azi_grid = new SkyGrid(SkyGrid::ALTAZIMUTAL);
@@ -109,6 +109,15 @@ void StelCore::init(void)
 	// Set textures directory and suffix
 	s_texture::set_texDir(getDataRoot() + "/textures/");
 
+      // Init the solar system before the observer because the observer
+      // resides on a planet
+	ssystem->load(getDataDir() + "ssystem.ini");
+	ssystem->setLabelColor(PlanetNamesColor[draw_mode]);
+	ssystem->setOrbitColor(PlanetOrbitsColor[draw_mode]);
+	ssystem->setFont(14.f, getDataDir() + BaseFontName);
+	setPlanetsScale(getStarScale());
+	ssystem->setTrailColor(ObjectTrailsColor[draw_mode]);
+
 	observatory->load(configDir + config_file, "init_location");
 
 	if (StartupTimeMode=="preset" || StartupTimeMode=="Preset")
@@ -134,14 +143,6 @@ void StelCore::init(void)
 	// Init stars
 	hip_stars->set_label_color(StarLabelColor[draw_mode]);
 	hip_stars->set_circle_color(StarCircleColor[draw_mode]);
-
-	// Init the solar system
-	ssystem->load(getDataDir() + "ssystem.ini");
-	ssystem->setLabelColor(PlanetNamesColor[draw_mode]);
-	ssystem->setOrbitColor(PlanetOrbitsColor[draw_mode]);
-	ssystem->setFont(14.f, getDataDir() + BaseFontName);
-	setPlanetsScale(getStarScale());
-	ssystem->setTrailColor(ObjectTrailsColor[draw_mode]);
 
 	// Init grids, lines and cardinal points
 	equ_grid->set_font(12., getDataDir() + BaseFontName);
@@ -198,7 +199,7 @@ void StelCore::init(void)
 	ssystem->computeTransMatrices(navigation->get_JDay());
 
 	// Compute transform matrices between coordinates systems
-	navigation->update_transform_matrices((ssystem->getEarth())->get_ecliptic_pos());
+	navigation->update_transform_matrices();
 	navigation->update_model_view_mat();
 
 	// Load constellations
@@ -256,7 +257,7 @@ void StelCore::update(int delta_time)
 
 
 	// Transform matrices between coordinates systems
-	navigation->update_transform_matrices((ssystem->getEarth())->get_ecliptic_pos());
+	navigation->update_transform_matrices();
 	// Direction of vision
 	navigation->update_vision_vector(delta_time, selected_object);
 	// Field of view
@@ -336,7 +337,7 @@ void StelCore::draw(int delta_time)
 	projection->set_modelview_matrices(	navigation->get_earth_equ_to_eye_mat(),
 	                                    navigation->get_helio_to_eye_mat(),
 	                                    navigation->get_local_to_eye_mat(),
-	                                    navigation->get_prec_earth_equ_to_eye_mat());
+	                                    navigation->get_j2000_to_eye_mat());
 
 	// Set openGL drawings in equatorial coordinates
 	navigation->switch_to_earth_equatorial();
@@ -471,7 +472,7 @@ StelObject * StelCore::find_stel_object(const Vec3d& v) const
 	if (getFlagPlanets()) sobj = ssystem->search(v, navigation, projection);
 	if (sobj) return sobj;
 
-	Vec3f u = navigation->earth_equ_to_prec_earth_equ(v);
+	Vec3f u = navigation->earth_equ_to_j2000(v);
 
 	//	Vec3f u=Vec3f(v[0],v[1],v[2]);
 
@@ -516,7 +517,7 @@ StelObject * StelCore::clever_find(const Vec3d& v) const
 	}
 
 	// nebulas and stars used precessed equ coords
-	Vec3d p = navigation->earth_equ_to_prec_earth_equ(v);
+	Vec3d p = navigation->earth_equ_to_j2000(v);
 
 	// The nebulas inside the range
 	if (FlagNebula)
@@ -841,7 +842,7 @@ void StelCore::loadConfig(void)
 			cout << "The current config file is from a previous version (>=0.6.0).\nPrevious options will be imported in the new config file." << endl;
 
 			// Store temporarily the previous observator parameters
-			Observator tempobs;
+			Observator tempobs(*ssystem);
 			tempobs.load(configDir + config_file, "init_location");
 
 			// Set the new landscape though

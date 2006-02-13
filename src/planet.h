@@ -92,6 +92,8 @@ public:
 
     virtual ~Planet();
 
+    double getRadius(void) const {return radius;}
+
 	// Return the information string "ready to print" :)
 	wstring get_info_string(const Navigator * nav) const;
 	wstring get_short_info_string(const Navigator * nav) const;
@@ -102,6 +104,10 @@ public:
 	/** Translate planet name using the passed translator */
 	void translateName(Translator& trans) {nameI18 = trans.translate(englishName);}
 	
+    // Compute the z rotation to use from equatorial to geographic coordinates
+    double getSiderealTime(double jd) const;
+    Mat4d getRotEquatorialToVsop87(void) const;
+
 	// Compute the position in the parent Planet coordinate system
 	void compute_position(double date);
 
@@ -137,7 +143,7 @@ public:
 	double get_distance(void) const {return distance;}
 
 	// Get a matrix which converts from heliocentric ecliptic coordinate to local geographic coordinate
-	Mat4d get_helio_to_geo_matrix();
+//	Mat4d get_helio_to_geo_matrix();
 
 	STEL_OBJECT_TYPE get_type(void) const {return STEL_OBJECT_PLANET;}
 
@@ -194,9 +200,6 @@ protected:
 	// Return the radius of a circle containing the object on screen
 	float get_on_screen_size(const Projector* prj, const Navigator * nav);
 
-	// Compute the z rotation to use from equatorial to geographic coordinates
-	void compute_geographic_rotation(double date);
-
 	// Draw the 3D sphere
 	void draw_sphere(const Projector* prj, const Mat4d& mat, float screen_sz);
 
@@ -225,6 +228,7 @@ protected:
 	Vec3d screenPos;				// Used to store temporarily the 2D position on screen
 	Vec3f color;
 	float albedo;					// Planet albedo
+	Mat4d rot_local_to_parent;
 	Mat4d mat_local_to_parent;		// Transfo matrix from local ecliptique to parent ecliptic
 	float axis_rotation;			// Rotation angle of the Planet on it's axis
     s_texture * tex_map;			// Planet map texture

@@ -28,6 +28,8 @@
 #include "stellastro.h"
 #include "init_parser.h"
 #include "observator.h"
+#include "solarsystem.h"
+#include "planet.h"
 #include "translator.h"
 
 // Use to remove a boring warning
@@ -36,7 +38,9 @@ size_t my_strftime(char *s, size_t max, const char *fmt, const struct tm *tm)
 	return strftime(s, max, fmt, tm);
 }
 
-Observator::Observator() : longitude(0.), latitude(0.), altitude(0), GMT_shift(0), planet(3)
+Observator::Observator(const SolarSystem &ssystem)
+           :ssystem(ssystem), planet(0),
+            longitude(0.), latitude(0.), altitude(0), GMT_shift(0)
 {
 	name = L"Anonymous_Location";
 	flag_move_to = 0;
@@ -44,6 +48,29 @@ Observator::Observator() : longitude(0.), latitude(0.), altitude(0), GMT_shift(0
 
 Observator::~Observator()
 {
+}
+
+Vec3d Observator::getCenterVsop87Pos(void) const {
+  return planet->get_heliocentric_ecliptic_pos();
+}
+
+double Observator::getDistanceFromCenter(void) const {
+  return planet->getRadius() + (altitude/(1000*AU));
+}
+
+Mat4d Observator::getRotLocalToEquatorial(double jd) const {
+  double lat = latitude;
+  // TODO: Figure out how to keep continuity in sky as reach poles
+  // otherwise sky jumps in rotation when reach poles
+  // This is a kludge
+  if( lat > 89.9 )  lat = 89.9;
+  if( lat < -89.9 ) lat = -89.9;
+  return Mat4d::zrotation((planet->getSiderealTime(jd)+longitude)*(M_PI/180.))
+       * Mat4d::yrotation((90.-lat)*(M_PI/180.));
+}
+
+Mat4d Observator::getRotEquatorialToVsop87(void) const {
+  return planet->getRotEquatorialToVsop87();
 }
 
 void Observator::load(const string& file, const string& section)
@@ -66,6 +93,13 @@ void Observator::load(const string& file, const string& section)
 		if (name[i]=='_') name[i]=' ';
 	}
 
+    planet = ssystem.searchByEnglishName(conf.get_str(section, "home_planet"));
+    if (planet == 0) {
+      planet = ssystem.getEarth();
+    }
+    printf("(home_planet should be: \"%s\" is: \"%s\") ",
+           conf.get_str(section, "home_planet").c_str(),
+           planet->getEnglishName().c_str());
 	latitude  = get_dec_angle(conf.get_str(section, "latitude"));
 	longitude = get_dec_angle(conf.get_str(section, "longitude"));
 	altitude = conf.get_int(section, "altitude");
@@ -114,6 +148,7 @@ void Observator::save(const string& file, const string& section)
 	conf.load(file);
 
 	conf.set_str(section + ":name", StelUtility::wstringToString(name));
+	conf.set_str(section + ":home_planet", planet->getEnglishName());
 	conf.set_str(section + ":latitude", StelUtility::wstringToString(StelUtility::printAngleDMS(latitude, true, true)));
     conf.set_str(section + ":longitude", StelUtility::wstringToString(StelUtility::printAngleDMS(longitude, true, true)));
 
