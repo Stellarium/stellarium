@@ -149,7 +149,7 @@ void NebulaMgr::draw(int hint_ON, Projector* prj, const Navigator * nav, ToneRep
 				|| (*iter)->get_on_screen_size(prj, nav)>5) {
 				
 				// correct for precession
-				pXYZ = nav->prec_earth_equ_to_earth_equ((*iter)->XYZ);
+				pXYZ = nav->j2000_to_earth_equ((*iter)->XYZ);
 				
 				// project in 2D to check if the nebula is in screen
 				if ( !prj->project_earth_equ_check(pXYZ,(*iter)->XY) ) continue;

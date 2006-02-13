@@ -63,7 +63,7 @@ wstring Nebula::get_info_string(const Navigator* nav) const
 {
 	float tempDE, tempRA;
 
-	Vec3d equPos = nav->prec_earth_equ_to_earth_equ(XYZ);
+	Vec3d equPos = nav->j2000_to_earth_equ(XYZ);
 	rect_to_sphe(&tempRA,&tempDE,equPos);
 
 	wostringstream oss;
@@ -354,13 +354,13 @@ void Nebula::draw_tex(const Projector* prj, ToneReproductor* eye, bool bright_ne
 
     glBegin(GL_TRIANGLE_STRIP);
         glTexCoord2i(1,0);              // Bottom Right
-		prj->project_prec_earth_equ(tex_quad_vertex[0],v); glVertex3dv(v);
+		prj->project_j2000(tex_quad_vertex[0],v); glVertex3dv(v);
         glTexCoord2i(0,0);              // Bottom Left
-		prj->project_prec_earth_equ(tex_quad_vertex[1],v); glVertex3dv(v);
+		prj->project_j2000(tex_quad_vertex[1],v); glVertex3dv(v);
         glTexCoord2i(1,1);              // Top Right
-		prj->project_prec_earth_equ(tex_quad_vertex[2],v); glVertex3dv(v);
+		prj->project_j2000(tex_quad_vertex[2],v); glVertex3dv(v);
         glTexCoord2i(0,1);              // Top Left
-		prj->project_prec_earth_equ(tex_quad_vertex[3],v); glVertex3dv(v);
+		prj->project_j2000(tex_quad_vertex[3],v); glVertex3dv(v);
     glEnd();
 }
 

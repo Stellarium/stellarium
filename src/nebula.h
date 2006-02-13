@@ -56,7 +56,7 @@ public:
 	virtual wstring get_info_string(const Navigator * nav) const;
 	virtual wstring get_short_info_string(const Navigator * nav = NULL) const;
 	virtual STEL_OBJECT_TYPE get_type(void) const {return STEL_OBJECT_NEBULA;}
-	virtual Vec3d get_earth_equ_pos(const Navigator * nav = NULL) const {return nav->prec_earth_equ_to_earth_equ(XYZ);}
+	virtual Vec3d get_earth_equ_pos(const Navigator * nav = NULL) const {return nav->j2000_to_earth_equ(XYZ);}
 	virtual double get_close_fov(const Navigator * nav = NULL) const;
 	virtual float get_mag(const Navigator * nav = NULL) const {return mag;}
 
