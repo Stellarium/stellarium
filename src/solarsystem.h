@@ -59,28 +59,31 @@ public:
     void computeTransMatrices(double date);
 
 	// Search if any Planet is close to position given in earth equatorial position.
-	Planet* search(Vec3d, const Navigator * nav, const Projector * prj);
+	Planet* search(Vec3d, const Navigator * nav, const Projector * prj) const;
 
 	// Return a stl vector containing the planets located inside the lim_fov circle around position v
-	vector<StelObject*> search_around(Vec3d v, double lim_fov, const Navigator * nav, const Projector * prj);
+	vector<StelObject*> search_around(Vec3d v,
+                                      double lim_fov,
+                                      const Navigator * nav,
+                                      const Projector * prj) const;
 
 	//! Return the matching planet pointer if exists or NULL
-	Planet* searchByEnglishName(string planetEnglishName);
+	Planet* searchByEnglishName(string planetEnglishName) const;
 	
 	//! Return the matching planet pointer if exists or NULL
-	Planet* searchByNamesI18(wstring planetNameI18);
+	Planet* searchByNamesI18(wstring planetNameI18) const;
 	
-	Planet* getSun(void) {return sun;}
-	Planet* getEarth(void) {return earth;}
-	Planet* getMoon(void) {return moon;}
+	Planet* getSun(void) const {return sun;}
+	Planet* getEarth(void) const {return earth;}
+	Planet* getMoon(void) const {return moon;}
 
 	//! Activate/Deactivate planets display
 	void setFlagPlanets(bool b) {Planet::setflagShow(b);}
-	bool getFlagPlanets(void) {return Planet::getflagShow();}
+	bool getFlagPlanets(void) const {return Planet::getflagShow();}
 
 	//! Activate/Deactivate planets trails display
 	void setFlagTrails(bool b);
-	bool getFlagTrails(void);
+	bool getFlagTrails(void) const;
 	
 	//! Activate/Deactivate planets hints display
 	void setFlagHints(bool b);
