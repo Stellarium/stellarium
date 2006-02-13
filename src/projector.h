@@ -98,7 +98,7 @@ public:
 	void set_modelview_matrices(const Mat4d& _mat_earth_equ_to_eye,
 				    const Mat4d& _mat_helio_to_eye,
 				    const Mat4d& _mat_local_to_eye,
-				    const Mat4d& _mat_prec_earth_equ_to_eye);
+				    const Mat4d& _mat_j2000_to_eye);
 
 	// Return in vector "win" the projection on the screen of point v in earth equatorial coordinate
 	// according to the current modelview and projection matrices (reimplementation of gluProject)
@@ -117,14 +117,14 @@ public:
 		{unproject(x, y, inv_mat_earth_equ_to_eye, v);}
 
 	// taking account of precession
-	inline bool project_prec_earth_equ(const Vec3d& v, Vec3d& win) const
-		{return project_custom(v, win, mat_prec_earth_equ_to_eye);}
+	inline bool project_j2000(const Vec3d& v, Vec3d& win) const
+		{return project_custom(v, win, mat_j2000_to_eye);}
 
-	inline bool project_prec_earth_equ_check(const Vec3d& v, Vec3d& win) const
-		{return project_custom_check(v, win, mat_prec_earth_equ_to_eye);}
+	inline bool project_j2000_check(const Vec3d& v, Vec3d& win) const
+		{return project_custom_check(v, win, mat_j2000_to_eye);}
 
-	inline bool project_prec_earth_equ_line_check(const Vec3d& v1, Vec3d& win1, const Vec3d& v2, Vec3d& win2) const
-		{return project_custom_line_check(v1, win1, v2, win2, mat_prec_earth_equ_to_eye);}
+	inline bool project_j2000_line_check(const Vec3d& v1, Vec3d& win1, const Vec3d& v2, Vec3d& win2) const
+		{return project_custom_line_check(v1, win1, v2, win2, mat_j2000_to_eye);}
 
 	// Same function with input vector v in heliocentric coordinate
 	inline bool project_helio_check(const Vec3d& v, Vec3d& win) const
@@ -248,7 +248,7 @@ protected:
 	Mat4d mat_projection;		// Projection matrix
 
 	Mat4d mat_earth_equ_to_eye;		// Modelview Matrix for earth equatorial projection
-	Mat4d mat_prec_earth_equ_to_eye;        // for precessed equ coords
+	Mat4d mat_j2000_to_eye;         // for precessed equ coords
 	Mat4d mat_helio_to_eye;			// Modelview Matrix for earth equatorial projection
 	Mat4d mat_local_to_eye;			// Modelview Matrix for earth equatorial projection
 	Mat4d inv_mat_earth_equ_to_eye;	// Inverse of mat_projection*mat_earth_equ_to_eye

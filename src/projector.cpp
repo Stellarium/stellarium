@@ -151,10 +151,10 @@ void Projector::update_openGL(void) const
 void Projector::set_modelview_matrices(	const Mat4d& _mat_earth_equ_to_eye,
 					const Mat4d& _mat_helio_to_eye,
 					const Mat4d& _mat_local_to_eye,
-					const Mat4d& _mat_prec_earth_equ_to_eye)
+					const Mat4d& _mat_j2000_to_eye)
 {
 	mat_earth_equ_to_eye = _mat_earth_equ_to_eye;
-	mat_prec_earth_equ_to_eye = _mat_prec_earth_equ_to_eye;
+	mat_j2000_to_eye = _mat_j2000_to_eye;
 	mat_helio_to_eye = _mat_helio_to_eye;
 	mat_local_to_eye = _mat_local_to_eye;
 
