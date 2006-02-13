@@ -46,8 +46,13 @@ public:
 		S_TZ_SYSTEM_DEFAULT
 	};
 
-	Observator();
+	Observator(const class SolarSystem &ssystem);
 	~Observator();
+    const class Planet *getHomePlanet(void) const {return planet;}
+    Vec3d getCenterVsop87Pos(void) const;
+    double getDistanceFromCenter(void) const;
+    Mat4d getRotLocalToEquatorial(double jd) const;
+    Mat4d getRotEquatorialToVsop87(void) const;
 
 	void save(const string& file, const string& section);
 	void load(const string& file, const string& section);
@@ -91,7 +96,9 @@ public:
 	void update(int delta_time);  // for moving observing position 
 
 private:
+    const class SolarSystem &ssystem;
 	wstring name;			// Position name
+	const class Planet *planet;
 	double longitude;		// Longitude in degree
 	double latitude;		// Latitude in degree
 	int altitude;			// Altitude in meter
@@ -101,8 +108,6 @@ private:
 	S_TZ_FORMAT time_zone_mode;		// Can be the system default or a user defined value
 	string custom_tz_name;			// Something like "Europe/Paris"
 	float GMT_shift;				// Time shift between GMT time and local time in hour. (positive for Est of GMT)
-
-	unsigned int planet;	// Planet number : 0 floating, 1 Mercure - 9 pluton
 
 	// Return the number of hours to add to gmt time to get the local time at tim JD
 	// taking the parameters from system. This takes into account the daylight saving
