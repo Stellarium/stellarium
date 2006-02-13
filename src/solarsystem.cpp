@@ -257,7 +257,7 @@ void SolarSystem::load(const string& planetfile)
 		    pd.get_double(secname, "rot_epoch", J2000),
 		    pd.get_double(secname, "rot_obliquity",0.)*M_PI/180.,
 		    pd.get_double(secname, "rot_equator_ascending_node",0.)*M_PI/180.,
-		    pd.get_double(secname, "rot_precession_rate",0.),
+		    pd.get_double(secname, "rot_precession_rate",0.)*M_PI/(180*36525),
 		    pd.get_double(secname, "sidereal_period",0.) );
 
 
@@ -367,7 +367,7 @@ void SolarSystem::draw(Projector * prj, const Navigator * nav, const ToneReprodu
 			(*iter)->draw(prj, nav, eye, flag_point, 1);
 
 		}
-		else if (*iter!=earth) (*iter)->draw(prj, nav, eye, flag_point, 0);
+		else if (*iter!=nav->getHomePlanet()) (*iter)->draw(prj, nav, eye, flag_point, 0);
 
 		++iter;
 	}
@@ -381,29 +381,34 @@ void SolarSystem::draw(Projector * prj, const Navigator * nav, const ToneReprodu
 
 }
 
-Planet* SolarSystem::searchByEnglishName(string planetEnglishName)
+Planet* SolarSystem::searchByEnglishName(string planetEnglishName) const
 {
-
+//printf("SolarSystem::searchByEnglishName(\"%s\"): start\n",
+//       planetEnglishName.c_str());
 	// side effect - bad?
-	transform(planetEnglishName.begin(), planetEnglishName.end(), planetEnglishName.begin(), ::tolower);
+//	transform(planetEnglishName.begin(), planetEnglishName.end(), planetEnglishName.begin(), ::tolower);
 
-	vector<Planet*>::iterator iter = system_planets.begin();
+	vector<Planet*>::const_iterator iter = system_planets.begin();
 	while (iter != system_planets.end())
 	{
-
+//printf("SolarSystem::searchByEnglishName(\"%s\"): %s\n",
+//       planetEnglishName.c_str(),
+//       (*iter)->getEnglishName().c_str());
 		if( (*iter)->getEnglishName() == planetEnglishName ) return (*iter);  // also check standard ini file names
 		++iter;
 	}
+//printf("SolarSystem::searchByEnglishName(\"%s\"): not found\n",
+//       planetEnglishName.c_str());
 	return NULL;
 }
 
-Planet* SolarSystem::searchByNamesI18(wstring planetNameI18)
+Planet* SolarSystem::searchByNamesI18(wstring planetNameI18) const
 {
 
 	// side effect - bad?
 	transform(planetNameI18.begin(), planetNameI18.end(), planetNameI18.begin(), ::tolower);
 
-	vector<Planet*>::iterator iter = system_planets.begin();
+	vector<Planet*>::const_iterator iter = system_planets.begin();
 	while (iter != system_planets.end())
 	{
 
@@ -414,14 +419,15 @@ Planet* SolarSystem::searchByNamesI18(wstring planetNameI18)
 }
 
 // Search if any Planet is close to position given in earth equatorial position and return the distance
-Planet* SolarSystem::search(Vec3d pos, const Navigator * nav, const Projector * prj)
+Planet* SolarSystem::search(Vec3d pos, const Navigator * nav,
+                            const Projector * prj) const
 {
 	pos.normalize();
 	Planet * closest = NULL;
 	double cos_angle_closest = 0.;
 	static Vec3d equPos;
 
-	vector<Planet*>::iterator iter = system_planets.begin();
+	vector<Planet*>::const_iterator iter = system_planets.begin();
 	while (iter != system_planets.end())
 	{
 		equPos = (*iter)->get_earth_equ_pos(nav);
@@ -444,14 +450,17 @@ Planet* SolarSystem::search(Vec3d pos, const Navigator * nav, const Projector * 
 }
 
 // Return a stl vector containing the planets located inside the lim_fov circle around position v
-vector<StelObject*> SolarSystem::search_around(Vec3d v, double lim_fov, const Navigator * nav, const Projector * prj)
+vector<StelObject*> SolarSystem::search_around(Vec3d v,
+                                               double lim_fov,
+                                               const Navigator * nav,
+                                               const Projector * prj) const
 {
 	vector<StelObject*> result;
 	v.normalize();
 	double cos_lim_fov = cos(lim_fov * M_PI/180.);
 	static Vec3d equPos;
 
-	vector<Planet*>::iterator iter = system_planets.begin();
+	vector<Planet*>::const_iterator iter = system_planets.begin();
 	while (iter != system_planets.end())
 	{
 		equPos = (*iter)->get_earth_equ_pos(nav);
@@ -513,10 +522,10 @@ void SolarSystem::setFlagTrails(bool b)
 	}
 }
 
-bool SolarSystem::getFlagTrails(void)
+bool SolarSystem::getFlagTrails(void) const
 {
-	vector<Planet*>::iterator iter;
-	for( iter = system_planets.begin(); iter < system_planets.end(); iter++ )
+	for (vector<Planet*>::const_iterator iter = system_planets.begin();
+         iter < system_planets.end(); iter++ )
 	{
 		if ((*iter)->getFlagTrail()) return true;
 	}
