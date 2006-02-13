@@ -53,7 +53,7 @@ public:
 	void init_project_matrix(int w, int h, double near, double far);
 
 	void update_time(int delta_time);
-	void update_transform_matrices(Vec3d earth_ecliptic_pos);
+	void update_transform_matrices(void);
 	void update_vision_vector(int delta_time, StelObject* selected);
 
 	// Update the modelview matrices
@@ -85,7 +85,9 @@ public:
 
 	void set_local_vision(const Vec3d& _pos);
 
-	// Return the observer heliocentric position
+	const Planet *getHomePlanet(void) const
+                      {return position->getHomePlanet();}
+                    // Return the observer heliocentric position
 	Vec3d get_observer_helio_pos(void) const;
 
 	// Place openGL in earth equatorial coordinates
@@ -104,13 +106,14 @@ public:
 	// Transform vector from equatorial coordinate to local
 	Vec3d earth_equ_to_local(const Vec3d& v) const { return mat_earth_equ_to_local*v; }
 
-	Vec3d earth_equ_to_prec_earth_equ(const Vec3d& v) const { return mat_earth_equ_to_prec_earth_equ*v; }
-	Vec3d prec_earth_equ_to_earth_equ(const Vec3d& v) const { return mat_prec_earth_equ_to_earth_equ*v; }
+	Vec3d earth_equ_to_j2000(const Vec3d& v) const { return mat_earth_equ_to_j2000*v; }
+	Vec3d j2000_to_earth_equ(const Vec3d& v) const { return mat_j2000_to_earth_equ*v; }
 
 	// Transform vector from heliocentric coordinate to local
 	Vec3d helio_to_local(const Vec3d& v) const { return mat_helio_to_local*v; }
 
-	// Transform vector from heliocentric coordinate to earth equatorial
+	// Transform vector from heliocentric coordinate to earth equatorial,
+    // only needed in meteor.cpp
 	Vec3d helio_to_earth_equ(const Vec3d& v) const { return mat_helio_to_earth_equ*v; }
 
 	// Transform vector from heliocentric coordinate to false equatorial : equatorial
@@ -122,7 +125,7 @@ public:
 	const Mat4d& get_helio_to_eye_mat(void) const {return mat_helio_to_eye;}
 	const Mat4d& get_earth_equ_to_eye_mat(void) const {return mat_earth_equ_to_eye;}
 	const Mat4d& get_local_to_eye_mat(void) const {return mat_local_to_eye;}
-	const Mat4d& get_prec_earth_equ_to_eye_mat(void) const {return mat_prec_earth_equ_to_eye;}
+	const Mat4d& get_j2000_to_eye_mat(void) const {return mat_j2000_to_eye;}
 
 	void update_move(double deltaAz, double deltaAlt);
 
@@ -149,12 +152,12 @@ private:
 	Mat4d mat_local_to_earth_equ;	// Transform from Observator local coordinate to Earth Equatorial
 	Mat4d mat_earth_equ_to_local;	// Transform from Observator local coordinate to Earth Equatorial
 	Mat4d mat_helio_to_earth_equ;	// Transform from Heliocentric to earth equatorial coordinate
-	Mat4d mat_earth_equ_to_prec_earth_equ;
-	Mat4d mat_prec_earth_equ_to_earth_equ;
+	Mat4d mat_earth_equ_to_j2000;
+	Mat4d mat_j2000_to_earth_equ;
 
 	Mat4d mat_local_to_eye;			// Modelview matrix for observer local drawing
 	Mat4d mat_earth_equ_to_eye;		// Modelview matrix for geocentric equatorial drawing
-	Mat4d mat_prec_earth_equ_to_eye;	// precessed version
+	Mat4d mat_j2000_to_eye;	// precessed version
 	Mat4d mat_helio_to_eye;			// Modelview matrix for heliocentric equatorial drawing
 
 	// Vision variables
@@ -175,7 +178,6 @@ private:
 	Observator* position;
 
 	VIEWING_MODE_TYPE viewing_mode;   // defines if view corrects for horizon, or uses equatorial coordinates
-	double precession;                // precession angle in radians since J2000.0  
 };
 
 #endif //_NAVIGATOR_H_

@@ -21,7 +21,6 @@
 #include "stellarium.h"
 #include "stel_utility.h"
 #include "stel_object.h"
-#include "stellastro.h"
 #include "solarsystem.h"
 
 
@@ -38,8 +37,6 @@ Navigator::Navigator(Observator* obs) : flag_traking(0), flag_lock_equ_pos(0), f
 	equ_vision=Vec3d(1.,0.,0.);
 	prec_equ_vision=Vec3d(1.,0.,0.);  // not correct yet...
 	viewing_mode = VIEW_HORIZON;  // default
-
-	precession = 0;
 
 }
 
@@ -170,7 +167,7 @@ void Navigator::update_vision_vector(int delta_time, StelObject* selected)
 		}
 	}
 
-	prec_equ_vision = mat_earth_equ_to_prec_earth_equ*equ_vision;
+	prec_equ_vision = mat_earth_equ_to_j2000*equ_vision;
 
 
 }
@@ -180,7 +177,7 @@ void Navigator::set_local_vision(const Vec3d& _pos)
 {
 	local_vision = _pos;
 	equ_vision=local_to_earth_equ(local_vision);
-	prec_equ_vision = mat_earth_equ_to_prec_earth_equ*equ_vision;
+	prec_equ_vision = mat_earth_equ_to_j2000*equ_vision;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -213,7 +210,7 @@ void Navigator::update_move(double deltaAz, double deltaAlt)
 			sphe_to_rect(azVision, altVision, local_vision);
 			// Calc the equatorial coordinate of the direction of vision wich was in Altazimuthal coordinate
 			equ_vision=local_to_earth_equ(local_vision);
-			prec_equ_vision = mat_earth_equ_to_prec_earth_equ*equ_vision;
+			prec_equ_vision = mat_earth_equ_to_j2000*equ_vision;
 		}
 	}
 
@@ -231,63 +228,49 @@ void Navigator::update_time(int delta_time)
 	// Fix time limits to -100000 to +100000 to prevent bugs
 	if (JDay>38245309.499988) JDay = 38245309.499988;
 	if (JDay<-34803211.500012) JDay = -34803211.500012;
-
-	// precession since epoch
-	// using annual rate of 50.27 arcseconds
-	precession = 0.000243716*(JDay-J2000)/365.25;
-
-	//precession += 0.01;  // for quick testing
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // The non optimized (more clear version is available on the CVS : before date 25/07/2003)
-void Navigator::update_transform_matrices(Vec3d earth_ecliptic_pos)
+
+  // see vsop87.doc:
+static
+const Mat4d mat_j2000_to_vsop87(
+              Mat4d::xrotation(-23.4392803055555555556*(M_PI/180)) *
+              Mat4d::zrotation(0.0000275*(M_PI/180)));
+
+static
+const Mat4d mat_vsop87_to_j2000(mat_j2000_to_vsop87.transpose());
+
+
+void Navigator::update_transform_matrices(void)
 {
-
-	double lat = position->get_latitude();
-	// TODO: Figure out how to keep continuity in sky as reach poles
-	// otherwise sky jumps in rotation when reach poles
-
-	// This is a kludge
-	if( lat > 89 )  lat = 89.5;
-	if( lat < -89 ) lat = -89.5;
-
-	// axis of precession
-	Vec3d axis = Vec3d(0,-0.3977702,0.9174851);
-
-	mat_local_to_earth_equ =
-	    Mat4d::zrotation((get_apparent_sidereal_time(JDay)+position->get_longitude())*M_PI/180.) *
-	    Mat4d::yrotation((90.-lat)*M_PI/180.);
-
+	mat_local_to_earth_equ = position->getRotLocalToEquatorial(JDay);
 	mat_earth_equ_to_local = mat_local_to_earth_equ.transpose();
 
-
-	// for precession
-	mat_earth_equ_to_prec_earth_equ = Mat4d::rotation(axis, precession);
-	mat_prec_earth_equ_to_earth_equ = mat_earth_equ_to_prec_earth_equ.transpose();
+	mat_earth_equ_to_j2000 = mat_vsop87_to_j2000
+                           * position->getRotEquatorialToVsop87();
+	mat_j2000_to_earth_equ = mat_earth_equ_to_j2000.transpose();
 
 	mat_helio_to_earth_equ =
-	    Mat4d::rotation( axis, -precession) *
-	    Mat4d::xrotation(23.438855*M_PI/180.) *
-	    Mat4d::translation(-earth_ecliptic_pos);
+	    mat_j2000_to_earth_equ *
+        mat_vsop87_to_j2000 *
+	    Mat4d::translation(-position->getCenterVsop87Pos());
 
 
 	// These two next have to take into account the position of the observer on the earth
 	Mat4d tmp =
-	    Mat4d::xrotation(-23.438855*M_PI/180.) *
-	    Mat4d::rotation( axis, precession) *
-	    Mat4d::zrotation((position->get_longitude()+get_mean_sidereal_time(JDay))*M_PI/180.) *
-	    Mat4d::yrotation((90.-lat)*M_PI/180.);
+	    mat_j2000_to_vsop87 *
+	    mat_earth_equ_to_j2000 *
+        mat_local_to_earth_equ;
 
-
-	mat_local_to_helio = 	Mat4d::translation(earth_ecliptic_pos) *
+	mat_local_to_helio =  Mat4d::translation(position->getCenterVsop87Pos()) *
 	                      tmp *
-	                      Mat4d::translation(Vec3d(0.,0., 6378.1/AU+(double)position->get_altitude()/AU/1000));
+	                      Mat4d::translation(Vec3d(0.,0., position->getDistanceFromCenter()));
 
-	mat_helio_to_local = 	Mat4d::translation(Vec3d(0.,0.,-6378.1/AU-(double)position->get_altitude()/AU/1000)) *
+	mat_helio_to_local =  Mat4d::translation(Vec3d(0.,0.,-position->getDistanceFromCenter())) *
 	                      tmp.transpose() *
-	                      Mat4d::translation(-earth_ecliptic_pos);
-
+	                      Mat4d::translation(-position->getCenterVsop87Pos());
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -332,7 +315,7 @@ void Navigator::update_model_view_mat(void)
 
 	mat_earth_equ_to_eye = mat_local_to_eye*mat_earth_equ_to_local;
 	mat_helio_to_eye = mat_local_to_eye*mat_helio_to_local;
-	mat_prec_earth_equ_to_eye = mat_local_to_eye*mat_earth_equ_to_local*mat_prec_earth_equ_to_earth_equ;
+	mat_j2000_to_eye = mat_earth_equ_to_eye*mat_j2000_to_earth_equ;
 }
 
 ////////////////////////////////////////////////////////////////////////////////

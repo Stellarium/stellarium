@@ -24,6 +24,7 @@
 #include "navigator.h"
 #include "s_font.h"
 #include "s_gui.h"
+#include "stellastro.h" // just for get_apparent_sidereal_time
 
 s_font* Planet::planet_name_font = NULL;
 float Planet::object_scale = 1.f;
@@ -54,6 +55,7 @@ Planet::Planet(Planet *parent,
 {
 	if (parent) parent->satellites.push_back(this);
 	ecliptic_pos=Vec3d(0.,0.,0.);
+    rot_local_to_parent = Mat4d::identity();
 	mat_local_to_parent = Mat4d::identity();
 	tex_map = new s_texture(tex_map_name, TEX_LOAD_TYPE_PNG_SOLID_REPEAT);
 	if (flagHalo) tex_halo = new s_texture(tex_halo_name);
@@ -278,33 +280,28 @@ void Planet::compute_position(double date)
 }
 
 // Compute the transformation matrix from the local Planet coordinate to the parent Planet coordinate
-void Planet::compute_trans_matrix(double date)
+void Planet::compute_trans_matrix(double jd)
 {
+	axis_rotation = getSiderealTime(jd);
 
-	compute_geographic_rotation(date);
-
-	//	mat_local_to_parent = Mat4d::translation(ecliptic_pos) // * Mat4d::zrotation(-re.ascendingNode)
-	//	* Mat4d::xrotation(-re.obliquity);
-
-	// re.ascendingNode is needed for correct Galilean moon positions viewed from Earth, for example
-	// However, most values grabbed from celestia are incorrect, at least for stellarium
-	// TODO: Figure out the discrepancy
-
-	// Special case - heliocentric coordinates are on ecliptic, not solar equator...
-	if(englishName=="Sun" )
-	{
-		mat_local_to_parent = Mat4d::translation(ecliptic_pos);
+	// Special case - heliocentric coordinates are on ecliptic,
+    // not solar equator...
+	if (parent) {
+      rot_local_to_parent = Mat4d::zrotation(re.ascendingNode
+                                            -re.precessionRate*(jd-re.epoch))
+                          * Mat4d::xrotation(re.obliquity);
 	}
-	else
-	{
-		mat_local_to_parent =
-		    Mat4d::translation(ecliptic_pos)
-		    * Mat4d::zrotation(re.ascendingNode)
-		    * Mat4d::xrotation(re.obliquity);
-	}
-
+    mat_local_to_parent = Mat4d::translation(ecliptic_pos)
+                        * rot_local_to_parent;
 }
 
+Mat4d Planet::getRotEquatorialToVsop87(void) const {
+  Mat4d rval = rot_local_to_parent;
+  if (parent) for (const Planet *p=parent;p->parent;p=p->parent) {
+    rval = p->rot_local_to_parent * rval;
+  }
+  return rval;
+}
 
 // Get a matrix which converts from heliocentric ecliptic coordinate to local geographic coordinate
 //Mat4d Planet::get_helio_to_geo_matrix()
@@ -323,15 +320,16 @@ void Planet::compute_trans_matrix(double date)
 //}
 
 // Compute the z rotation to use from equatorial to geographic coordinates
-void Planet::compute_geographic_rotation(double date)
+double Planet::getSiderealTime(double jd) const
 {
-	double t = date - re.epoch;
+	if (englishName=="Earth") return get_apparent_sidereal_time(jd);
+
+	double t = jd - re.epoch;
 	double rotations = t / (double) re.period;
 	double wholeRotations = floor(rotations);
 	double remainder = rotations - wholeRotations;
 
-	axis_rotation = remainder * 360. + re.offset;
-
+	return remainder * 360. + re.offset;
 }
 
 // Get the Planet position in the parent Planet ecliptic coordinate
@@ -543,9 +541,10 @@ void Planet::draw_sphere(const Projector* prj, const Mat4d& mat, float screen_sz
 	glBindTexture(GL_TEXTURE_2D, tex_map->getID());
 
 
-	// Rotate and add an extra half rotation because of the convention in all
-	// Planet texture maps where zero deg long. is in the middle of the texture.
-	prj->sSphere(radius*sphere_scale, nb_facet, nb_facet, mat * Mat4d::zrotation(M_PI/180*(axis_rotation + 180.)));
+    // Rotate and add an extra half rotation because of the convention in all
+    // Planet texture maps where zero deg long. is in the middle of the texture.
+    prj->sSphere(radius*sphere_scale, nb_facet, nb_facet,
+                 mat * Mat4d::zrotation(M_PI/180*(axis_rotation + 180.)));
 
 	glDisable(GL_CULL_FACE);
 	glDisable(GL_LIGHTING);
