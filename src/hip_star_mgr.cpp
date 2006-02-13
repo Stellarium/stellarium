@@ -372,7 +372,7 @@ void HipStarMgr::draw(Vec3f equ_vision, ToneReproductor* eye, Projector* prj)
 			h=*iter;
 			// If too small, skip and Compute the 2D position and check if in screen
 			if(h->Mag > maxMag) break;
-			if(!prj->project_prec_earth_equ_check(h->XYZ, h->XY)) continue;
+			if(!prj->project_j2000_check(h->XYZ, h->XY)) continue;
 
 			if (draw_mode == DM_NORMAL)	
 			{
@@ -428,7 +428,7 @@ void HipStarMgr::drawPoint(Vec3f equ_vision, ToneReproductor* _eye, Projector* p
 			h=*iter;
 			// If too small, skip and Compute the 2D position and check if in screen
 			if(h->Mag>maxMag) break;
-			if(!prj->project_prec_earth_equ_check(h->XYZ, h->XY)) continue;
+			if(!prj->project_j2000_check(h->XYZ, h->XY)) continue;
 			h->draw_point();
 			if (!h->commonNameI18.empty() && names_fader.getInterstate() && h->Mag<maxMagStarName)
 			{

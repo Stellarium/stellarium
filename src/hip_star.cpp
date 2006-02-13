@@ -67,7 +67,7 @@ wstring HipStar::get_info_string(const Navigator * nav) const
 {
 	float tempDE, tempRA;
 
-	Vec3d equatorial_pos = nav->prec_earth_equ_to_earth_equ(XYZ);
+	Vec3d equatorial_pos = nav->j2000_to_earth_equ(XYZ);
 	
 	rect_to_sphe(&tempRA,&tempDE,equatorial_pos);
 

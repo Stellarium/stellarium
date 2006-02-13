@@ -167,9 +167,9 @@ void ConstellationMgr::loadLinesAndArt(const string &fileName, const string &art
 			cons->art_tex = new s_texture(texfile);
 			texSize = cons->art_tex->getSize();
 
-			Vec3f s1 = hipStarMgr->searchHP(hp1)->get_prec_earth_equ_pos();
-			Vec3f s2 = hipStarMgr->searchHP(hp2)->get_prec_earth_equ_pos();
-			Vec3f s3 = hipStarMgr->searchHP(hp3)->get_prec_earth_equ_pos();
+			Vec3f s1 = hipStarMgr->searchHP(hp1)->get_j2000_pos();
+			Vec3f s2 = hipStarMgr->searchHP(hp2)->get_j2000_pos();
+			Vec3f s3 = hipStarMgr->searchHP(hp3)->get_j2000_pos();
 
 			// To transform from texture coordinate to 2d coordinate we need to find X with XA = B
 			// A formed of 4 points in texture coordinate, B formed with 4 points in 3d coordinate
@@ -255,7 +255,7 @@ void ConstellationMgr::draw_names(Projector * prj) const
 	for (iter = asterisms.begin(); iter != asterisms.end(); iter++)
 	{
 		// Check if in the field of view
-		if (prj->project_prec_earth_equ_check((*iter)->XYZname, (*iter)->XYname))
+		if (prj->project_j2000_check((*iter)->XYZname, (*iter)->XYname))
 			(*iter)->draw_name(asterFont, prj);
 	}
 }
