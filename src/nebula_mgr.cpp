@@ -29,9 +29,7 @@
 
 #define RADIUS_NEB 1.
 
-NebulaMgr::NebulaMgr() :
-	showNGC(false),
-	showMessier(false)
+NebulaMgr::NebulaMgr()
 {
 }
 
@@ -51,57 +49,11 @@ NebulaMgr::~NebulaMgr()
 }
 
 // read from stream
-bool NebulaMgr::read(float font_size, const string& font_name, const string& fileName, LoadingBar& lb)
+bool NebulaMgr::read(float font_size, const string& font_name, const string& catNGC, const string& catNGCNames, const string& catTextures, LoadingBar& lb)
 {
-	read_NGC_catalog(fileName, lb);
-	read_Sharpless_catalog(fileName, lb);
-	read_Cadwell_catalog(fileName, lb);
-	read_messier_textures(fileName, lb);
-/*	
-	printf(_("Loading messier nebulas data "));
-	
-	std::ifstream inf(fileName.c_str());
-	if (!inf.is_open())
-	{
-		printf("Can't open nebula catalog %s\n", fileName.c_str());
-		assert(0);
-	}
-	
-	// determine total number to be loaded for percent complete display
-	string record;
-	int total=0;
-	while(!std::getline(inf, record).eof())
-	{
-		++total;
-	}
-	inf.clear();
-	inf.seekg(0);
-	
-	printf(_("(%d deep space objects)...\n"), total);
-	
-	int current = 0;
-	char tmpstr[512];
-	while(!std::getline(inf, record).eof())
-	{
-		// Draw loading bar
-		++current;
-		snprintf(tmpstr, 512, _("Loading Nebula Data: %d/%d"), current, total);
-		lb.SetMessage(tmpstr);
-		lb.Draw((float)current/total);
-		
-		Nebula *e = new Nebula;
-		if (!e->read(record)) // reading error
-		{
-			printf("Error while parsing nebula %s\n", e->name.c_str());
-			delete e;
-			e = NULL;
-		} 
-		else
-		{
-			neb_array.push_back(e);
-		}
-	}
-*/
+	loadNGC(catNGC, lb);
+	loadNGCNames(catNGCNames);
+	loadTextures(catTextures, lb);
 
 	if (!Nebula::nebula_font) Nebula::nebula_font = new s_font(font_size, font_name); // load Font
 	if (!Nebula::nebula_font)
@@ -117,10 +69,9 @@ bool NebulaMgr::read(float font_size, const string& font_name, const string& fil
 }
 
 // Draw all the Nebulaes
-void NebulaMgr::draw(int hint_ON, Projector* prj, const Navigator * nav, ToneReproductor* eye, bool draw_tex, bool _gravity_label, float max_mag_name, bool bright_nebulae)
+void NebulaMgr::draw(Projector* prj, const Navigator * nav, ToneReproductor* eye, float max_mag_name, bool bright_nebulae)
 {
-	Nebula::gravity_label = _gravity_label;
-	Nebula::hints_brightness = hints_fader.getInterstate();
+	Nebula::hints_brightness = hintsFader.getInterstate();
 
 	glEnable(GL_TEXTURE_2D);
     glEnable(GL_BLEND);
@@ -131,7 +82,7 @@ void NebulaMgr::draw(int hint_ON, Projector* prj, const Navigator * nav, ToneRep
 
 	prj->set_orthographic_projection();
 
-	bool hints = (hints_fader.getInterstate() != 0);
+	bool hints = (hintsFader.getInterstate() != 0);
 
     vector<Nebula *>::iterator iter;
     for(iter=neb_array.begin();iter!=neb_array.end();iter++) 
@@ -141,7 +92,7 @@ void NebulaMgr::draw(int hint_ON, Projector* prj, const Navigator * nav, ToneRep
 		//	(showNGC && ((*iter)->NGC_nb != 0 || (*iter)->IC_nb != 0)))
 
 		// TODO correct the names, make just one variable
-		if (showNGC || (showMessier && (*iter)->hasTex()))
+		if ((*iter)->hasTex())
 		{
 
 			// improve performance by skipping if too small to see
@@ -156,7 +107,7 @@ void NebulaMgr::draw(int hint_ON, Projector* prj, const Navigator * nav, ToneRep
 				
 				if (draw_mode == DM_NORMAL)
 				{
-					if (draw_tex && (*iter)->get_on_screen_size(prj, nav)>5) 
+					if ((*iter)->get_on_screen_size(prj, nav)>5) 
 					{
 						if ((*iter)->hasTex())
 							(*iter)->draw_tex(prj, eye, bright_nebulae && (*iter)->get_on_screen_size(prj, nav)>15 );
@@ -167,7 +118,7 @@ void NebulaMgr::draw(int hint_ON, Projector* prj, const Navigator * nav, ToneRep
 				else
 					(*iter)->draw_chart(prj, nav, bright_nebulae);	// charting
 
-				if (hints) (*iter)->draw_name(hint_ON, prj);
+				if (hints) (*iter)->draw_name(prj);
 				if (hints && !draw_mode) (*iter)->draw_circle(prj, nav);
 			}
 		}
@@ -211,10 +162,7 @@ StelObject * NebulaMgr::search(const string& name)
 		if (ss.fail()) return NULL;
 	}
 	
-	if (cat == "M") return searchMessier(num);
 	if (cat == "NGC") return searchNGC(num);
-	if (cat == "SH") return searchSharpless(num);
-	if (cat == "CW") return searchCadwell(num);
 	return searchIC(num);
 }
 
@@ -274,28 +222,6 @@ StelObject * NebulaMgr::searchNGC(unsigned int NGC)
     return NULL;
 }
 
-StelObject * NebulaMgr::searchSharpless(unsigned int Sharpless)
-{
-    vector<Nebula *>::iterator iter;
-    for(iter=neb_array.begin();iter!=neb_array.end();iter++) 
-	{
-		if ((*iter)->Sharpless_nb == Sharpless) return (*iter);
-    }
-
-    return NULL;
-}
-
-StelObject * NebulaMgr::searchCadwell(unsigned int Cadwell)
-{
-    vector<Nebula *>::iterator iter;
-    for(iter=neb_array.begin();iter!=neb_array.end();iter++) 
-	{
-		if ((*iter)->Cadwell_nb == Cadwell) return (*iter);
-    }
-
-    return NULL;
-}
-
 StelObject * NebulaMgr::searchIC(unsigned int IC)
 {
     vector<Nebula *>::iterator iter;
@@ -307,44 +233,24 @@ StelObject * NebulaMgr::searchIC(unsigned int IC)
     return NULL;
 }
 
-// search by name
-StelObject * NebulaMgr::searchMessier(unsigned int M)
-{
-    vector<Nebula *>::iterator iter;
-    for(iter=neb_array.begin();iter!=neb_array.end();iter++) 
-	{
-		if ((*iter)->Messier_nb == M) return (*iter);
-    }
-
-    return NULL;
-}
-
 
 // read from stream
-bool NebulaMgr::read_NGC_catalog(const string& fileName, LoadingBar& lb)
+bool NebulaMgr::loadNGC(const string& catNGC, LoadingBar& lb)
 {
 	char recordstr[512];
-	string dataDir = fileName;
-	unsigned int catalogSize, i;
+	unsigned int i;
 	unsigned int data_drop;
 
-	// create the texture string (no path or extension)
-	unsigned int loc = dataDir.rfind("/");
-	
-	if (loc != string::npos)
-		dataDir = dataDir.substr(0,loc+1);
-
     cout << "Loading NGC data... ";
-	string ngcData = dataDir + "ngc2000.dat";
-    FILE * ngcFile = fopen(ngcData.c_str(),"rb");
+    FILE * ngcFile = fopen(catNGC.c_str(),"rb");
     if (!ngcFile)
     {
-        cerr << "NGC data file " << ngcData << " not found" << endl;
+        cerr << "NGC data file " << catNGC << " not found" << endl;
 		return false;
     }
 
 	// read the number of lines
-    catalogSize=0;
+    unsigned int catalogSize = 0;
 	while (fgets(recordstr,512,ngcFile)) catalogSize++;
 	rewind(ngcFile);
 
@@ -377,261 +283,85 @@ bool NebulaMgr::read_NGC_catalog(const string& fileName, LoadingBar& lb)
 		i++;
 	}
     fclose(ngcFile);
+    printf("(%d items loaded [%d dropped])\n", i, data_drop);
+    
+    return true;
+}
 
-	printf("(%d items loaded [%d dropped])\n", i, data_drop);
+
+bool NebulaMgr::loadNGCNames(const string& catNGCNames)
+{
+	char recordstr[512];
     cout << "Loading NGC name data...";
-	string ngcNameData = dataDir + "ngc2000names.dat";
-    FILE * ngcNameFile = fopen(ngcNameData.c_str(),"rb");
+    FILE * ngcNameFile = fopen(catNGCNames.c_str(),"rb");
     if (!ngcNameFile)
     {
-        cerr << "NGC name data file " << ngcNameData << " not found." << endl;
+        cerr << "NGC name data file " << catNGCNames << " not found." << endl;
 		return false;
     }
     
     // Read the names of the NGC objects
-	i = 0;
+	int i = 0;
 	char n[40];
 	int nb, k;
-	string name;
 	Nebula *e;
 	
 	while (fgets(recordstr,512,ngcNameFile))
 	{
-		ostringstream oss;
+		
 		sscanf(&recordstr[38],"%d",&nb);
 		if (recordstr[37] == 'I')
 		{
-			oss << "IC " << nb;
 			e = (Nebula*)searchIC(nb);
 		}
 		else
 		{
-			oss << "NGC " << nb;
 			e = (Nebula*)searchNGC(nb);
 		}
-		name = oss.str();
 		
 		if (e)
 		{
 			strncpy(n, recordstr, 36);
 			// trim the white spaces at the back
-			n[36] = 0;
+			n[36] = '\0';
 			k = 36;
-			while (n[--k] == ' ' && k > 0);
-			n[k+1] = 0;
+			while (n[--k] == ' ' && k > 0)
+			{
+				n[k+1] = '\0';
+			}
+			// If the name is not a messier number set it without care
+			if (strncmp(n, "M ",2)) e->englishName = n;
 			
-			// also a messier - we will call it a messier then
+			// If it's a messiernumber, we will call it a messier if there is no better name
 			if (!strncmp(n, "M ",2))
 			{
 				istringstream iss(string(n).substr(1));  // remove the 'M'
 				ostringstream oss;
 
 				int num;
-				string old = name;
 				
 				iss >> num;
 				oss << "M" << num;
+				
+				if (e->englishName!="") oss << " - " << e->englishName;
 				e->englishName = oss.str();
-
-				oss << "-" << old;
-				string check = oss.str();
-				e->englishLongName = oss.str();
-				e->Messier_nb = num;
-			}
-			else
-			{
-				ostringstream oss;
-				oss << name << "-" << string(n);
-				e->englishLongName = oss.str();
+				
+				
 			}
 		}
 		else
-			cerr << endl << "...no position data for " << name;
+			cerr << endl << "...no position data for " << n;
 		i++;
 	}
     fclose(ngcNameFile);
-	cout << "( " << i << "items loaded)" << endl;
+	cout << "( " << i << " names loaded)" << endl;
 
 	return true;
 }
 
-// read from stream
-bool NebulaMgr::read_Sharpless_catalog(const string& fileName, LoadingBar& lb)
-{
-	char recordstr[512];
-	string dataDir = fileName;
-	unsigned int catalogSize, i;
-	unsigned int data_drop;
-
-	// create the texture string (no path or extension)
-	unsigned int loc = dataDir.rfind("/");
-	
-	if (loc != string::npos)
-		dataDir = dataDir.substr(0,loc+1);
-
-    cout << "Loading Sharpless data...";
-	string SharplessData = dataDir + "sharpless.dat";
-    FILE * SharplessFile = fopen(SharplessData.c_str(),"rb");
-    if (!SharplessFile)
-    {
-        cerr << "Sharpless data file " << SharplessData << " not found" << endl;
-		return false;
-    }
-
-	// read the number of lines
-    catalogSize=0;
-	while (fgets(recordstr,512,SharplessFile)) catalogSize++;
-	rewind(SharplessFile);
-
-	// Read the Sharpless entries
-	i = 0;
-	data_drop = 0;
-	while (fgets(recordstr,512,SharplessFile)) // temporary for testing
-	{
-		if (!(i%200) || (i == catalogSize-1))
-		{
-			// Draw loading bar
-			wostringstream os;
-			os << _("Loading Sharpless catalog:") << (i == catalogSize-1 ? catalogSize : i) << L"/" << catalogSize;
-			lb.SetMessage(os.str());
-			lb.Draw((float)i/catalogSize);
-		}
-		Nebula *e = new Nebula;
-		int temp = e->read_Sharpless(recordstr);
-		if (!temp) // reading error
-		{
-			cerr << "Error while parsing Sharpless nebula " << e->englishName << endl;
-			delete e;
-			e = NULL;
-			data_drop++;
-		} 
-		else
-		{
-			neb_array.push_back(e);
-		}
-		i++;
-	}
-    fclose(SharplessFile);
-	printf("(%d items loaded [%d dropped])\n", i, data_drop);
-
-	return true;
-}
-
-// read from stream
-bool NebulaMgr::read_Cadwell_catalog(const string& fileName, LoadingBar& lb)
-{
-	char recordstr[512];
-	string dataDir = fileName;
-	unsigned int catalogSize, i;
-	unsigned int data_drop;
-	int nb, ref_nb;
-	char ref_type;
-
-	// create the texture string (no path or extension)
-	unsigned int loc = dataDir.rfind("/");
-	
-	if (loc != string::npos)
-		dataDir = dataDir.substr(0,loc+1);
-
-    cout << "Loading Cadwell reference data...";
-	string CadwellData = dataDir + "cadwell.dat";
-    FILE * CadwellFile = fopen(CadwellData.c_str(),"rb");
-    if (!CadwellFile)
-    {
-        cerr << "Cadwell data file " << CadwellData << " not found" << endl;
-		return false;
-    }
-
-	// read the number of lines
-    catalogSize=0;
-	while (fgets(recordstr,512,CadwellFile)) catalogSize++;
-	rewind(CadwellFile);
-
-	// Read the Cadwell entries
-	i = 0;
-	data_drop = 0;
-	Nebula *e;
-	while (fgets(recordstr,512,CadwellFile)) // temporary for testing
-	{
-		if (!(i%200) || (i == catalogSize-1))
-		{
-			// Draw loading bar
-			wostringstream os;
-			os << _("Loading Cadwell catalog:") <<  (i == catalogSize-1 ? catalogSize : i) << L"/" << catalogSize;
-			lb.SetMessage(os.str());
-			lb.Draw((float)i/catalogSize);
-		}
-		istringstream ss(recordstr);
-		ss >> nb >> ref_type >> ref_nb;
-		
-		if (ref_type == 'N')
-			e = (Nebula *)searchNGC(nb);
-		else if (ref_type == 'I')
-			e = (Nebula *)searchIC(nb);
-		else if (ref_type == 'S')
-			e = (Nebula *)searchSharpless(nb);
-		else if (ref_type == 'R')
-			e = new Nebula;
-		else
-			e = NULL;
-			
-		if (!e)
-		{
-			cerr << "Error reading line " << i << ":" << recordstr << endl;
-		} 
-		else
-		{
-			e->Cadwell_nb = nb;
-			if (ref_type == 'R')
-			{
-				int rahr;
-		    	float ramin;
-			    int dedeg;
-			    float demin;
-			    char sign;
-			    string name;
-
-				ss >> rahr >> ramin;
-				ss >> sign;
-				ss >> dedeg >> demin;
-				float RaRad = (double)rahr+ramin/60;
-				float DecRad = (float)dedeg+demin/60;
-				if (sign == '-') DecRad *= -1.;
-
-				RaRad*=M_PI/12.;     // Convert from hours 	to rad
-				DecRad*=M_PI/180.;    // Convert from deg to rad
-
-	    		// Calc the Cartesian coord with RA and DE
-		    	sphe_to_rect(RaRad,DecRad,e->XYZ);
-			    e->XYZ*=RADIUS_NEB;
-				e->mag = 4;
-				e->angular_size = (50)/2/60*M_PI/180;
-				e->luminance = mag_to_luminance(e->mag, e->angular_size*e->angular_size*3600);
-				if (e->luminance < 0) e->luminance = .0075;
-
-				ss >> name;
-				e->englishName = name;
-				e->englishLongName = name;
-				
-				string typeDesc;
-				ss >> typeDesc;
-				
-				if (typeDesc == "Oc") { e->nType = Nebula::NEB_OC;}
-				else { e->nType = Nebula::NEB_UNKNOWN; }
-
-				neb_array.push_back(e);
-			}
-		}
-	}
-    fclose(CadwellFile);
-	printf("(%d items loaded [%d dropped])\n", i, data_drop);
-
-	return true;
-}
-
-bool NebulaMgr::read_messier_textures(const string& fileName, LoadingBar& lb)
+bool NebulaMgr::loadTextures(const string& fileName, LoadingBar& lb)
 {	
-	cout << "Loading Messier textures...";
+	cout << "Loading Nebula Textures...";
 	
 	std::ifstream inf(fileName.c_str());
 	if (!inf.is_open())
@@ -650,7 +380,7 @@ bool NebulaMgr::read_messier_textures(const string& fileName, LoadingBar& lb)
 	inf.clear();
 	inf.seekg(0);
 	
-	printf("(%d deep space objects)\n", total);
+	printf("(%d textures loaded)\n", total);
 	
 	int current = 0;
 	int NGC;
@@ -674,4 +404,16 @@ bool NebulaMgr::read_messier_textures(const string& fileName, LoadingBar& lb)
 		}
 	}
 	return true;
+}
+
+//! @brief Update i18 names from english names according to passed translator
+//! The translation is done using gettext with translated strings defined in translations.h
+void NebulaMgr::translateNames(Translator& trans)
+{
+	cout << "( translate nebula names)" << endl;
+	vector<Nebula*>::iterator iter;
+	for( iter = neb_array.begin(); iter < neb_array.end(); iter++ )
+	{
+		(*iter)->translateName(trans);
+	}
 }

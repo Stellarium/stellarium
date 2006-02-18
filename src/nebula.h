@@ -26,6 +26,7 @@
 #include "stel_object.h"
 #include "s_font.h"
 #include "tone_reproductor.h"
+#include "translator.h"
 
 /*   Gx    Galaxy
      OC    Open star cluster
@@ -66,19 +67,16 @@ public:
 	// Read the Nebula data from a file
     bool read(const string&);
     bool read_NGC(char *record);
-    bool read_Sharpless(char *record);
     bool read_messier_texture(const string&);
 	void draw_chart(const Projector* prj, const Navigator * nav, bool bright_nebulae);
 	void draw_tex(const Projector* prj, ToneReproductor* eye, bool bright_nebulae);
 	void draw_no_tex(const Projector* prj, const Navigator * nav, ToneReproductor* eye);
-    void draw_name(int hint_ON, const Projector* prj);
+    void draw_name(const Projector* prj);
     void draw_circle(const Projector* prj, const Navigator * nav);
-    wstring get_name() { return nameI18; };
+    wstring getNameI18() { return nameI18; };
     string getEnglishName() { return englishName; };
     bool hasTex(void) { return (neb_tex != NULL); }
     static void set_nebula_scale(float scale) {nebula_scale = scale; }
-	static void set_nebulaname_format(int _format) { nameFormat = _format; }
-	static int get_nebulaname_format(void) { return nameFormat; }
 	
 	/**
 	 * @brief Get the printable nebula Type
@@ -86,6 +84,9 @@ public:
 	 */
 	wstring getTypeString(void) const {return L"TODO";}
 
+	/** Translate nebula name using the passed translator */
+	void translateName(Translator& trans) {nameI18 = trans.translate(englishName);}
+	
 protected:
 	// Return the radius of a circle containing the object on screen
 	virtual float get_on_screen_size(const Projector* prj, const Navigator * nav = NULL);
@@ -93,19 +94,13 @@ protected:
 private:
 	unsigned int NGC_nb;			// NGC catalog number
 	unsigned int IC_nb;				// IC catalog number
-	unsigned int Messier_nb;		// messier
-	unsigned int Cadwell_nb;		// NGC catalog number
-	unsigned int Sharpless_nb;		// NGC catalog number
 	string englishName;				// English name
-	string englishLongName;			// English name & description
 	wstring nameI18;				// Nebula name
-	wstring longnameI18;			// Nebula name & description
 	string credit;					// Nebula image credit
 	float mag;						// Apparent magnitude
 	float angular_size;				// Angular size in radians
 	Vec3f XYZ;						// Cartesian equatorial position
 	Vec3d XY;						// Store temporary 2D position
-	char type[4];					// Nebulae type
 	nebula_type nType;
 
 	s_texture * neb_tex;			// Texture
@@ -114,6 +109,7 @@ private:
 									// the texture avergae luminosity)
 	float tex_avg_luminance;        // avg luminance of the texture (saved here for performance)
 	float inc_lum;					// Local counter for symbol animation
+	
 	static s_texture * tex_circle;	// The symbolic circle texture
 	static s_font* nebula_font;		// Font used for names printing
 	static float hints_brightness;
@@ -121,10 +117,6 @@ private:
 
 	static Vec3f label_color, circle_color;
 	static float nebula_scale;
-	static int nameFormat;		// 0 - standard (M83, 1234, I1234), 
-								// 1 - M83, NGC 1234, IC 1234
-								// 2 - 1 + name
-								// 3 - 1 + name + (type)
 };
 
 #endif // _NEBULA_H_
