@@ -788,16 +788,19 @@ int StelCommandInterface::set_flag(string name, string value, bool &newval, bool
 		newval = !stcore->getFlagPlanetsOrbits();
 		stcore->setFlagPlanetsOrbits(newval);
 		}
-		else if(name=="nebulae") newval = (stcore->FlagNebula = !stcore->FlagNebula);
+		else if(name=="nebulae") {
+			newval = !stcore->getFlagNebula();
+			stcore->setFlagNebula(newval);
+			}
 		else if(name=="nebula_names") {
-			newval = !stcore->nebulas->get_flag_hints();
-			if(newval) stcore->FlagNebula = 1;  // make sure visible
-			stcore->nebulas->set_flag_hints(newval);
+			newval = !stcore->nebulas->getFlagHints();
+			if(newval) stcore->setFlagNebula(true);  // make sure visible
+			stcore->setFlagNebulaHints(newval);
 		}
         else if(name=="nebula_long_names") {  // Tony - added long names
 			newval = !stcore->FlagNebulaLongName;
-			if(newval) stcore->FlagNebula = 1;  // make sure visible
-			stcore->nebulas->set_flag_hints(newval);
+			if(newval) stcore->setFlagNebula(true);  // make sure visible
+			stcore->setFlagNebulaHints(newval);
 			stcore->FlagNebulaLongName = newval;
 		}
 		else if(name=="milky_way") {
@@ -903,14 +906,14 @@ int StelCommandInterface::set_flag(string name, string value, bool &newval, bool
 			if(stcore->getFlagPlanetsHints()) stcore->setFlagPlanets(true);  // for safety if script turns planets off
 		}
 		else if(name=="planet_orbits") stcore->setFlagPlanetsOrbits(newval);
-		else if(name=="nebulae") stcore->FlagNebula = newval;
+		else if(name=="nebulae") stcore->setFlagNebula(newval);
 		else if(name=="nebula_names") {
-			stcore->FlagNebula = 1;  // make sure visible
-			stcore->nebulas->set_flag_hints(newval);
+			stcore->setFlagNebula(true);  // make sure visible
+			stcore->setFlagNebulaHints(newval);
 		}
 		else if(name=="nebula_long_names") {         //Tony - added long names
-			stcore->FlagNebula = 1;  // make sure visible
-			stcore->nebulas->set_flag_hints(newval); // make sure visible
+			stcore->setFlagNebula(true);  // make sure visible
+			stcore->setFlagNebulaHints(newval); // make sure visible
 			stcore->FlagNebulaLongName = newval;
 		}
 		else if(name=="milky_way") stcore->setFlagMilkyWay(newval);

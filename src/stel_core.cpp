@@ -138,7 +138,8 @@ void StelCore::init(void)
 	nebulas->set_label_color(NebulaLabelColor[draw_mode]);
 	nebulas->set_circle_color(NebulaCircleColor[draw_mode]);
 	nebulas->set_nebula_scale(NebulaScale);
-	nebulas->read(12., getDataDir() + BaseFontName, getDataDir() + "messier.fab", lb);
+	nebulas->read(12., getDataDir() + BaseFontName, getDataDir() + "ngc2000.dat", getDataDir() + "ngc2000names.dat", getDataDir() + "nebula_textures.fab", lb);
+	nebulas->translateNames(skyTranslator);
 
 	// Init stars
 	hip_stars->set_label_color(StarLabelColor[draw_mode]);
@@ -358,9 +359,8 @@ void StelCore::draw(int delta_time)
 	// Draw all the constellations
 	asterisms->draw(projection, navigation);
 
-	// Draw the nebula if they are visible
-	if (FlagNebula) nebulas->draw(FlagNebulaLongName, projection, navigation, tone_converter, (sky_brightness<0.11),
-		                              FlagGravityLabels, MaxMagNebulaName, FlagBrightNebulae);
+	// Draw the nebula
+	nebulas->draw(projection, navigation, tone_converter, MaxMagNebulaName, FlagBrightNebulae);
 
 	// Draw the hipparcos stars
 	Vec3d tempv = navigation->get_prec_equ_vision();
@@ -520,7 +520,7 @@ StelObject * StelCore::clever_find(const Vec3d& v) const
 	Vec3d p = navigation->earth_equ_to_j2000(v);
 
 	// The nebulas inside the range
-	if (FlagNebula)
+	if (getFlagNebula())
 	{
 		temp = nebulas->search_around(p, fov_around);
 		candidates.insert(candidates.begin(), temp.begin(), temp.end());
@@ -545,7 +545,7 @@ StelObject * StelCore::clever_find(const Vec3d& v) const
 		float mag = (*iter)->get_mag(navigation);
 		if ((*iter)->get_type()==StelObject::STEL_OBJECT_NEBULA)
 		{
-			if( nebulas->get_flag_hints() )
+			if( nebulas->getFlagHints() )
 			{
 				// make very easy to select if labeled
 				mag = -1;
@@ -723,7 +723,8 @@ void StelCore::setSkyLanguage(const std::string& newSkyLocaleName)
 	cardinals_points->translateLabels(skyTranslator);
 	asterisms->translateNames(skyTranslator);
 	ssystem->translateNames(skyTranslator);
-
+	nebulas->translateNames(skyTranslator);
+	
 	// refresh EditBox with new names
 	//ui->setStarAutoComplete(hip_stars->getNames());
 	//ui->setConstellationAutoComplete(asterisms->getNames());
@@ -1105,13 +1106,11 @@ void StelCore::loadConfigFrom(const string& confFile)
 	setFlagPlanetsOrbits(conf.get_boolean("astro:flag_planets_orbits"));
 	setFlagPlanetsTrails(conf.get_boolean("astro", "flag_object_trails", 0));
 	startPlanetsTrails(conf.get_boolean("astro", "flag_object_trails", 0));
-	FlagNebula				= conf.get_boolean("astro:flag_nebula");
-	nebulas->set_flag_hints(conf.get_boolean("astro:flag_nebula_name"));
+	setFlagNebula(conf.get_boolean("astro:flag_nebula"));
+	nebulas->setFlagHints(conf.get_boolean("astro:flag_nebula_name"));
 	FlagNebulaLongName      = conf.get_boolean("astro:flag_nebula_long_name");
 	MaxMagNebulaName		= conf.get_double("astro", "max_mag_nebula_name", 99);
 	NebulaScale				= conf.get_double("astro", "nebula_scale",1.0f);
-	nebulas->set_show_ngc(conf.get_boolean("astro", "flag_nebula_ngc",false));
-	nebulas->set_show_messier(conf.get_boolean("astro", "flag_nebula_messier",true));
 	setFlagMilkyWay(conf.get_boolean("astro:flag_milky_way"));
 	setMilkyWayIntensity(conf.get_double("astro","milky_way_intensity",1.));
 
@@ -1306,15 +1305,14 @@ void StelCore::saveConfigTo(const string& confFile)
 	conf.set_boolean("astro:flag_planets_hints", getFlagPlanetsHints());
 	conf.set_boolean("astro:flag_planets_orbits", getFlagPlanetsOrbits());
 	conf.set_boolean("astro:flag_object_trails", getFlagPlanetsTrails());
-	conf.set_boolean("astro:flag_nebula", FlagNebula);
-	conf.set_boolean("astro:flag_nebula_name", nebulas->get_flag_hints());
+	conf.set_boolean("astro:flag_nebula", getFlagNebula());
+	conf.set_boolean("astro:flag_nebula_name", getFlagNebulaHints());
 	conf.set_boolean("astro:flag_nebula_long_name", FlagNebulaLongName); // Tony - added long name
 	conf.set_double("astro:max_mag_nebula_name", MaxMagNebulaName);
 	conf.set_double("astro:nebula_scale", NebulaScale);
 	conf.set_boolean("astro:flag_milky_way", getFlagMilkyWay());
 	conf.set_double("astro:milky_way_intensity", getMilkyWayIntensity());
 	conf.set_boolean("astro:flag_bright_nebulae", FlagBrightNebulae);
-	conf.set_boolean("astro:flag_nebula_ngc", nebulas->get_show_ngc());
 
 	conf.save(confFile);
 }

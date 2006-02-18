@@ -975,8 +975,8 @@ void StelUI::saveRenderOptions(void)
 	conf.set_boolean("viewing:flag_constellation_name", core->getFlagConstellationNames());
 	conf.set_boolean("viewing:flag_constellation_boundaries", core->getFlagConstellationBoundaries());
 	conf.set_boolean("viewing:flag_constellation_pick", core->getFlagConstellationIsolateSelected());
-	conf.set_boolean("astro:flag_nebula", core->FlagNebula);
-	conf.set_boolean("astro:flag_nebula_name", core->nebulas->get_flag_hints());
+	conf.set_boolean("astro:flag_nebula", core->getFlagNebula());
+	conf.set_boolean("astro:flag_nebula_name", core->nebulas->getFlagHints());
 	conf.set_double("astro:max_mag_nebula_name", core->MaxMagNebulaName);
 	conf.set_boolean("astro:flag_planets", core->getFlagPlanets());
 	conf.set_boolean("astro:flag_planets_hints", core->getFlagPlanetsHints());
@@ -1073,7 +1073,7 @@ void StelUI::updateConfigForm(void)
 	constellation_cbx->setState(core->getFlagConstellationLines());
 	constellation_name_cbx->setState(core->getFlagConstellationNames());
 	sel_constellation_cbx->setState(core->getFlagConstellationIsolateSelected());
-	nebulas_names_cbx->setState(core->nebulas->get_flag_hints());
+	nebulas_names_cbx->setState(core->nebulas->getFlagHints());
 	max_mag_nebula_name->setValue(core->MaxMagNebulaName);
 	planets_cbx->setState(core->getFlagPlanets());
 	planets_hints_cbx->setState(core->getFlagPlanetsHints());

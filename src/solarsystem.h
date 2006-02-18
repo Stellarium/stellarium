@@ -44,9 +44,9 @@ public:
 	// Load the bodies data from a file
 	void load(const string& planetfile);
 
-	//! @brief Update i18 names from english names according to current locale
+	//! @brief Update i18 names from english names according to passed translator
 	//! The translation is done using gettext with translated strings defined in translations.h
-	void SolarSystem::translateNames(Translator& trans);
+	void translateNames(Translator& trans);
 
 	void setFont(float font_size, const string& font_name);
 	void setLabelColor(const Vec3f& c) {Planet::set_label_color(c);}

@@ -25,6 +25,7 @@
 #include "s_font.h"
 #include "loadingbar.h"
 #include "fader.h"
+#include "translator.h"
 
 using namespace std;
 
@@ -34,48 +35,47 @@ public:
 	NebulaMgr();
 	virtual ~NebulaMgr();
 	
-	// Read the Nebulas data from a file
-	bool read(float font_size, const string& font_name, const string& fileName, LoadingBar& lb);
+	// Read the Nebulas data from files
+	bool read(float font_size, const string& font_name, const string& catNGC, const string& catNGCnames, const string& catTextures, LoadingBar& lb);
 	
 	// Draw all the Nebulas
-	void draw(int hint_ON,Projector *prj, const Navigator *nav, ToneReproductor *eye, bool draw_tex, // Tony
-		bool _gravity_label, float max_mag_name, bool bright_nebulae); 
+	void draw(Projector *prj, const Navigator *nav, ToneReproductor *eye, float max_mag_name, bool bright_nebulae); 
+	void update(int delta_time) {hintsFader.update(delta_time); flagShow.update(delta_time);}
 	
 	StelObject *search(const string& name);  // search by name M83, NGC 1123, IC 1234
 	StelObject *search(Vec3f Pos);    // Search the Nebulae by position
 	
+	void set_nebula_scale(float scale) {Nebula::set_nebula_scale(scale);} 	
+	
+	void setHintsFadeDuration(float duration) {hintsFader.set_duration((int) (duration * 1000.f));}
+	
+	void setFlagHints(bool b) {hintsFader=b;}
+	bool getFlagHints() {return hintsFader;}
+	
+	void setFlagShow(bool b) { flagShow = b; }
+	bool getFlagShow() { return flagShow; }
+
 	void set_label_color(const Vec3f& c) {Nebula::label_color = c;}
 	void set_circle_color(const Vec3f& c) {Nebula::circle_color = c;}
-	void set_nebula_scale(float scale) {Nebula::set_nebula_scale(scale);} 	
-	void update(int delta_time) {hints_fader.update(delta_time);}
-	void set_hints_fade_duration(float duration) {hints_fader.set_duration((int) (duration * 1000.f));}
-	void set_flag_hints(bool b) {hints_fader=b;}
-	bool get_flag_hints() {return hints_fader;}
-	void set_show_ngc(bool b) { showNGC = b; }
-	bool get_show_ngc() { return showNGC; }
-	void set_show_messier(bool b) { showMessier = b; }
-	bool get_show_messier() { return showMessier; }
 
 	// Return a stl vector containing the nebulas located inside the lim_fov circle around position v
 	vector<StelObject*> search_around(Vec3d v, double lim_fov);
-	void set_nebulaname_format(int format) { Nebula::set_nebulaname_format(format); }
-	int get_nebulaname_format(void) { return Nebula::get_nebulaname_format(); }
+	
+	//! @brief Update i18 names from english names according to passed translator
+	//! The translation is done using gettext with translated strings defined in translations.h
+	void translateNames(Translator& trans);
+	
 private:
 	StelObject *searchNGC(unsigned int NGC);
 	StelObject *searchIC(unsigned int NGC);
-	StelObject *searchSharpless(unsigned int Sharpless);
-	StelObject *searchCadwell(unsigned int Sharpless);
-	StelObject *searchMessier(unsigned int M);
-	bool read_NGC_catalog(const string& fileName, LoadingBar& lb);
-	bool read_Sharpless_catalog(const string& fileName, LoadingBar& lb);
-	bool read_Cadwell_catalog(const string& fileName, LoadingBar& lb);
-	bool read_messier_textures(const string& fileName, LoadingBar& lb);
+	bool loadNGC(const string& fileName, LoadingBar& lb);
+	bool loadNGCNames(const string& fileName);
+	bool loadTextures(const string& fileName, LoadingBar& lb);
 
 	FILE *nebula_fic;
 	vector<Nebula*> neb_array;	// The nebulas list
-	LinearFader hints_fader;
-	bool showNGC;
-	bool showMessier;
+	LinearFader hintsFader;
+	LinearFader flagShow;
 };
 
 #endif // _NEBULA_MGR_H_
