@@ -341,6 +341,8 @@ public:
 	//! Get atmosphere fade duration in s
 	float getAtmosphereFadeDuration(void) const {return atmosphere->getFadeDuration();}	
 	
+	///////////////////////////////////////////////////////////////////////////////////////
+	// Milky Way
 	//! Set flag for displaying Milky Way
 	void setFlagMilkyWay(bool b) {milky_way->setFlagShow(b);}
 	//! Get flag for displaying Milky Way
@@ -350,6 +352,22 @@ public:
 	void setMilkyWayIntensity(float f) {milky_way->set_intensity(f);}
 	//! Get Milky Way intensity
 	float getMilkyWayIntensity(void) const {return milky_way->get_intensity();}
+	
+	//! Set flag for displaying Nebulae
+	void setFlagNebula(bool b) {nebulas->setFlagShow(b);}
+	//! Get flag for displaying Nebulae
+	bool getFlagNebula(void) const {return nebulas->getFlagShow();}
+	
+	//! Set flag for displaying Nebulae Hints
+	void setFlagNebulaHints(bool b) {nebulas->setFlagHints(b);}
+	//! Get flag for displaying Nebulae Hints
+	bool getFlagNebulaHints(void) const {return nebulas->getFlagHints();}	
+	
+    bool FlagNebulaLongName;
+    float MaxMagNebulaName;
+    bool FlagNebulaCircle;
+    bool FlagBrightNebulae;
+	float NebulaScale;
 	
 	const string getDataDir(void) const {return dataRoot + "/data/";}
 	const string& getDataRoot() const {return dataRoot;}
@@ -436,16 +454,9 @@ private:
 	// Current sky Brightness
 	float sky_brightness;
 
-	// Astro
-    bool FlagNebula;
-    bool FlagNebulaLongName;
-    float MaxMagNebulaName;
-    bool FlagNebulaCircle;
-    bool FlagBrightNebulae;
-
+	
 	// Viewing
 	bool FlagGravityLabels;
-	float NebulaScale;
 	float MoonScale;
 	bool FlagMoonScaled;
 

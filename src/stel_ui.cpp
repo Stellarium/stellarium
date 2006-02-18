@@ -511,7 +511,7 @@ void StelUI::cb(void)
 	core->setFlagLandscape(bt_flag_ground->getState());
 	core->cardinals_points->setFlagShow(bt_flag_cardinals->getState());
 	core->setFlagAtmosphere(bt_flag_atmosphere->getState());
-	core->nebulas->set_flag_hints( bt_flag_nebula_name->getState() );
+	core->nebulas->setFlagHints( bt_flag_nebula_name->getState() );
 	core->FlagHelp 				= bt_flag_help->getState();
 	help_win->setVisible(core->FlagHelp);
 	core->navigation->set_viewing_mode(bt_flag_equatorial_mode->getState() ? Navigator::VIEW_EQUATOR : Navigator::VIEW_HORIZON);
@@ -1131,23 +1131,11 @@ int StelUI::handle_keys(Uint16 key, S_GUI_VALUE state)
 
   		if(key==SDLK_n) core->commander->execute_command( "flag nebula_names toggle");
 		if(key=='N') {
-			// TODO this should be recordable via an execute_command
-			// TODO should toggle between just nebulas with images and all nebulas
-			// TODO when these are turned off, should not be selectable either!
-			core->nebulas->set_show_ngc(!core->nebulas->get_show_ngc());
-
-			/* TODO: move into nebula - pick based on screen size
-			// Tony for long nebula names - toggles between no name, shortname and longname
-	
-
-			if (core->nebulas->get_nebulaname_format() < 3)
-				core->nebulas->set_nebulaname_format(core->nebulas->get_nebulaname_format()+1);
-			else core->nebulas->set_nebulaname_format(0);
-			*/
+			core->setFlagNebula(!core->getFlagNebula());
 		}
 
 /*
-            if (!core->nebulas->get_flag_hints())
+            if (!core->nebulas->getFlagHints())
             {
                core->commander->execute_command( "flag nebula_names on");
             }
@@ -1308,7 +1296,7 @@ void StelUI::gui_update_widgets(int delta_time)
 	bt_flag_ground->setState(core->getFlagLandscape());
 	bt_flag_cardinals->setState(core->cardinals_points->getFlagShow());
 	bt_flag_atmosphere->setState(core->getFlagAtmosphere());
-	bt_flag_nebula_name->setState(core->nebulas->get_flag_hints());
+	bt_flag_nebula_name->setState(core->nebulas->getFlagHints());
 	bt_flag_help->setState(help_win->getVisible());
 	bt_flag_equatorial_mode->setState(core->navigation->get_viewing_mode()==Navigator::VIEW_EQUATOR);
 	bt_flag_config->setState(config_win->getVisible());

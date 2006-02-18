@@ -16,8 +16,8 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
-		
-#include <iostream>	
+
+#include <iostream>
 #include "nebula.h"
 #include "s_texture.h"
 #include "stellarium.h"
@@ -35,27 +35,22 @@ bool Nebula::gravity_label = false;
 float Nebula::hints_brightness = 0;
 Vec3f Nebula::label_color = Vec3f(0.4,0.3,0.5);
 Vec3f Nebula::circle_color = Vec3f(0.8,0.8,0.1);
-int Nebula::nameFormat = 0;
 
-Nebula::Nebula() : 
-	NGC_nb(0), 
-	IC_nb(0), 
-	Messier_nb(0),
-	Cadwell_nb(0),
-	Sharpless_nb(0),
-	neb_tex(NULL)
+Nebula::Nebula() :
+		NGC_nb(0),
+		IC_nb(0),
+		neb_tex(NULL)
 {
-	inc_lum = rand()/RAND_MAX*M_PI;	
-	longnameI18 = L"";
+	inc_lum = rand()/RAND_MAX*M_PI;
 	nameI18 = L"";
 }
 
 Nebula::~Nebula()
 {
-    delete neb_tex;
+	delete neb_tex;
 	neb_tex = NULL;
 
-    delete tex_circle;
+	delete tex_circle;
 	tex_circle = NULL;
 }
 
@@ -68,11 +63,25 @@ wstring Nebula::get_info_string(const Navigator* nav) const
 
 	wostringstream oss;
 
-	oss << _("Name : ") << nameI18 << endl;
-	oss << _("Cat: NGC ");
-	if (NGC_nb > 0) oss << NGC_nb; else oss << L"-";
-	oss << L"  IC ";
-	if (IC_nb > 0) oss << IC_nb; else oss << L"-";
+	if (nameI18!=L"")
+	{
+		oss << nameI18 << L" (";
+	}
+	
+	if (NGC_nb > 0)
+	{
+		oss << L"NGC " << NGC_nb;
+	}
+	if (IC_nb > 0)
+	{
+		oss << L"IC " << IC_nb;
+	}
+	
+	if (nameI18!=L"")
+	{
+		oss << L")";
+	}
+		
 	oss << endl;
 	
 	oss << _("RA : ") << StelUtility::printAngleHMS(tempRA) << endl;
@@ -82,8 +91,8 @@ wstring Nebula::get_info_string(const Navigator* nav) const
 	oss.precision(2);
 	oss << _("Magnitude : ") << mag << endl;
 	oss << _("Type : ") << getTypeString() << endl;
-	oss << _("Size : ") << StelUtility::printAngleDMS(angular_size*M_PI/180.) << endl; 
-	
+	oss << _("Size : ") << StelUtility::printAngleDMS(angular_size*M_PI/180.) << endl;
+
 	// calculate alt az
 	Vec3d localPos = nav->earth_equ_to_local(equPos);
 	rect_to_sphe(&tempRA,&tempDE,localPos);
@@ -99,19 +108,26 @@ wstring Nebula::get_info_string(const Navigator* nav) const
 
 wstring Nebula::get_short_info_string(const Navigator*) const
 {
-	wostringstream oss;
-	
-	if(mag == 99 || mag < 4)
-		oss << nameI18;	
+	if (nameI18!=L"")
+	{
+		return nameI18;
+	}
 	else
 	{
-		oss << nameI18 << mag;
-		oss.setf(ios::fixed);
-		oss.precision(1);
-		oss << _(": mag ") << mag;
+		wostringstream oss;
+		if (NGC_nb > 0)
+		{
+			oss << L"NGC " << NGC_nb;
+		}
+		else if (IC_nb > 0)
+		{
+			oss << L"IC " << IC_nb;
+		}
+		return oss.str();
 	}
 	
-	return oss.str();
+	// All nebula have at least an NGC or IC number
+	assert(false);
 }
 
 double Nebula::get_close_fov(const Navigator*) const
@@ -124,50 +140,37 @@ double Nebula::get_close_fov(const Navigator*) const
 bool Nebula::read(const string& record)
 {
 	string tex_name;
-	int rahr;
-    float ramin;
-    int dedeg;
-    float demin;
+	float ra;
+	float de;
 	float tex_angular_size;
 	float tex_rotation;
 	
 	std::istringstream istr(record);
 
-	if (!(istr >> NGC_nb >> type >> rahr >> ramin >> dedeg >> demin >> mag >> tex_angular_size >> tex_rotation >> englishName >> englishLongName >> tex_name >> credit)) return false ;
-
-    // Replace the "_" with " "
-    for (string::size_type i=0;i<englishName.length();++i)
-	{
-		if (englishName[i]=='_') englishName[i]=' ';
-	}
-
-    for (string::size_type i=0;i<englishLongName.length();++i)
-	{
-		if (englishLongName[i]=='_') englishLongName[i]=' ';
-	}
+	if (!(istr >> NGC_nb >> ra >> de >> mag >> tex_angular_size >> tex_rotation >> tex_name >> credit)) return false ;
 
 	if (credit  == "none")
 		credit = "";
 	else
-		credit = string("Credit: ") + credit;	
-		
-    for (string::size_type i=0;i<credit.length();++i)
+		credit = string("Credit: ") + credit;
+
+	for (string::size_type i=0;i<credit.length();++i)
 	{
 		if (credit[i]=='_') credit[i]=' ';
 	}
-	
-    // Calc the RA and DE from the datas
-    float RaRad = hms_to_rad(rahr, (double)ramin);
-    float DecRad = dms_to_rad(dedeg, (double)demin);
 
-    // Calc the Cartesian coord with RA and DE
-    sphe_to_rect(RaRad,DecRad,XYZ);
-    XYZ*=RADIUS_NEB;
+	// Calc the RA and DE from the datas
+	float RaRad = ra*M_PI/180.;
+	float DecRad = de*M_PI/180.;
+
+	// Calc the Cartesian coord with RA and DE
+	sphe_to_rect(RaRad,DecRad,XYZ);
+	XYZ*=RADIUS_NEB;
 
 	// Calc the angular size in radian : TODO this should be independant of tex_angular_size
 	angular_size = tex_angular_size/2/60*M_PI/180;
 
-    neb_tex = new s_texture(tex_name);
+	neb_tex = new s_texture(tex_name);
 
 	//tex_angular_size*tex_angular_size*3600/4*M_PI
 	//	luminance = mag_to_luminance(mag, tex_angular_size*tex_angular_size*3600) /	neb_tex->get_average_luminance() * 50;
@@ -178,52 +181,18 @@ bool Nebula::read(const string& record)
 
 	float tex_size = RADIUS_NEB * sin(tex_angular_size/2/60*M_PI/180);
 
-    // Precomputation of the rotation/translation matrix
+	// Precomputation of the rotation/translation matrix
 	Mat4f mat_precomp = Mat4f::translation(XYZ) *
-						Mat4f::zrotation(RaRad) *
-						Mat4f::yrotation(-DecRad) *
-						Mat4f::xrotation(tex_rotation*M_PI/180.);
+	                    Mat4f::zrotation(RaRad) *
+	                    Mat4f::yrotation(-DecRad) *
+	                    Mat4f::xrotation(tex_rotation*M_PI/180.);
 
 	tex_quad_vertex[0] = mat_precomp * Vec3f(0.,-tex_size,-tex_size); // Bottom Right
 	tex_quad_vertex[1] = mat_precomp * Vec3f(0., tex_size,-tex_size); // Bottom Right
 	tex_quad_vertex[2] = mat_precomp * Vec3f(0.,-tex_size, tex_size); // Bottom Right
 	tex_quad_vertex[3] = mat_precomp * Vec3f(0., tex_size, tex_size); // Bottom Right
-	
-	if (!strcmp(type,"N")) { nType = NEB_N;} // supernova remnant
-	else if (!strcmp(type,"SG")) { nType = NEB_SG;}
-	else if (!strcmp(type,"PN")) { nType = NEB_PN;}
-	else if (!strcmp(type,"LG")) { nType = NEB_LG;}
-	else if (!strcmp(type,"EG")) { nType = NEB_EG;}
-	else if (!strcmp(type,"OC")) { nType = NEB_OC;}
-	else if (!strcmp(type,"GC")) { nType = NEB_GC;}
-	else if (!strcmp(type,"DN")) { nType = NEB_DN;}
-	else if (!strcmp(type,"IG")) { nType = NEB_IG;}
-	else { nType = NEB_UNKNOWN;}
 
-
-// 	if (!strcmp(type,"N")) { nType = NEB_N; typeDesc = "Ne"; } // supernova remnant
-// 	else if (!strcmp(type,"SG")) { nType = NEB_SG; typeDesc = "Sg"; }
-// 	else if (!strcmp(type,"PN")) { nType = NEB_PN; typeDesc = "Pl"; }
-// 	else if (!strcmp(type,"LG")) { nType = NEB_LG; typeDesc = "Lg"; }
-// 	else if (!strcmp(type,"EG")) { nType = NEB_EG; typeDesc = "Eg"; }
-// 	else if (!strcmp(type,"OC")) { nType = NEB_OC; typeDesc = "Oc"; }
-// 	else if (!strcmp(type,"GC")) { nType = NEB_GC; typeDesc = "Gc"; }
-// 	else if (!strcmp(type,"DN")) { nType = NEB_DN; typeDesc = "Gc"; }
-// 	else if (!strcmp(type,"IG")) { nType = NEB_IG; typeDesc = "Ig"; }
-// 	else { nType = NEB_UNKNOWN; typeDesc = ""; }
-/*
-	if (!strcmp(type,"N")) { nType = NEB_N; typeDesc = "Nebula"; } // supernova remnant
-	else if (!strcmp(type,"SG")) { nType = NEB_SG; typeDesc = "Spiral galaxy"; }
-	else if (!strcmp(type,"PN")) { nType = NEB_PN; typeDesc = "Planetary nebula"; }
-	else if (!strcmp(type,"LG")) { nType = NEB_LG; typeDesc = "Lenticular galaxy"; }
-	else if (!strcmp(type,"EG")) { nType = NEB_EG; typeDesc = "Elliptical galaxy"; }
-	else if (!strcmp(type,"OC")) { nType = NEB_OC; typeDesc = "Open cluster"; }
-	else if (!strcmp(type,"GC")) { nType = NEB_GC; typeDesc = "Globular cluster"; }
-	else if (!strcmp(type,"DN")) { nType = NEB_DN; typeDesc = "Diffuse Nebula"; }
-	else if (!strcmp(type,"IG")) { nType = NEB_IG; typeDesc = "Irregular galaxy"; }
-	else { nType = NEB_UNKNOWN; typeDesc = "Unknown type"; }
-*/
-    return true;
+	return true;
 }
 
 void Nebula::draw_chart(const Projector* prj, const Navigator * nav, bool bright_nebulae)
@@ -236,7 +205,7 @@ void Nebula::draw_chart(const Projector* prj, const Navigator * nav, bool bright
 	glDisable(GL_TEXTURE_2D);
 	glLineWidth(1.0f);
 
-   	glColor3fv(circle_color);
+	glColor3fv(circle_color);
 	if (nType == NEB_UNKNOWN)
 	{
 		glCircle(XY,r);
@@ -257,7 +226,7 @@ void Nebula::draw_chart(const Projector* prj, const Navigator * nav, bool bright
 		glVertex3f(XY[0]-r, XY[1],0.f);
 		glVertex3f(XY[0]-0.4*r, XY[1],0.f);
 		glEnd();
-					
+
 		glBegin(GL_LINE_LOOP);
 		glVertex3f(XY[0]+r, XY[1],0.f);
 		glVertex3f(XY[0]+0.4*r, XY[1],0.f);
@@ -296,12 +265,12 @@ void Nebula::draw_chart(const Projector* prj, const Navigator * nav, bool bright
 		glVertex3f(XY[0]-r, XY[1],0.f);
 		glVertex3f(XY[0]+r, XY[1],0.f);
 		glEnd();
-					
+
 		glBegin(GL_LINE_LOOP);
 		glVertex3f(XY[0], XY[1]-r,0.f);
 		glVertex3f(XY[0], XY[1]+r,0.f);
 		glEnd();
-	}				
+	}
 	else if (nType == NEB_DN) // Diffuse Nebula
 	{
 		glLineStipple(1, 0xAAAA);
@@ -318,17 +287,17 @@ void Nebula::draw_chart(const Projector* prj, const Navigator * nav, bool bright
 		glCircle(XY,r);
 	}
 	glLineWidth(1.0f);
-	
+
 	if (lastState) glEnable(GL_TEXTURE_2D);
 }
 
 void Nebula::draw_tex(const Projector* prj, ToneReproductor* eye, bool bright_nebulae)
 {
-    glEnable(GL_TEXTURE_2D);
-    glEnable(GL_BLEND);
+	glEnable(GL_TEXTURE_2D);
+	glEnable(GL_BLEND);
 
 	if (!neb_tex) return;
-	
+
 	// if start zooming in, turn up brightness to full for DSO images
 	// gradual change might be better
 
@@ -367,40 +336,40 @@ void Nebula::draw_tex(const Projector* prj, ToneReproductor* eye, bool bright_ne
 void Nebula::draw_circle(const Projector* prj, const Navigator * nav)
 {
 	if (2.f/get_on_screen_size(prj, nav)<0.1) return;
-    inc_lum++;
+	inc_lum++;
 	float lum = MY_MIN(1,2.f/get_on_screen_size(prj, nav))*(0.8+0.2*sinf(inc_lum/10));
-    glColor3fv(circle_color*lum*hints_brightness);
-    glBindTexture (GL_TEXTURE_2D, Nebula::tex_circle->getID());
-    glBegin(GL_TRIANGLE_STRIP);
-        glTexCoord2i(1,0);              // Bottom Right
-        glVertex3f(XY[0] + 4, XY[1] - 4, 0.0f);
-        glTexCoord2i(0,0);              // Bottom Left
-        glVertex3f(XY[0] - 4, XY[1] - 4, 0.0f);
-        glTexCoord2i(1,1);              // Top Right
-        glVertex3f(XY[0] + 4, XY[1] + 4,0.0f);
-        glTexCoord2i(0,1);              // Top Left
-        glVertex3f(XY[0] - 4, XY[1] + 4,0.0f);
-    glEnd ();
+	glColor3fv(circle_color*lum*hints_brightness);
+	glBindTexture (GL_TEXTURE_2D, Nebula::tex_circle->getID());
+	glBegin(GL_TRIANGLE_STRIP);
+	glTexCoord2i(1,0);              // Bottom Right
+	glVertex3f(XY[0] + 4, XY[1] - 4, 0.0f);
+	glTexCoord2i(0,0);              // Bottom Left
+	glVertex3f(XY[0] - 4, XY[1] - 4, 0.0f);
+	glTexCoord2i(1,1);              // Top Right
+	glVertex3f(XY[0] + 4, XY[1] + 4,0.0f);
+	glTexCoord2i(0,1);              // Top Left
+	glVertex3f(XY[0] - 4, XY[1] + 4,0.0f);
+	glEnd ();
 }
 
 void Nebula::draw_no_tex(const Projector* prj, const Navigator * nav,ToneReproductor* eye)
 {
 	float r = (get_on_screen_size(prj, nav)/2);
-//	if (r < 5) r = 5;
-//	r *= Nebula::nebula_scale;
-//	float ad_lum=eye->adapt_luminance(luminance);
+	//	if (r < 5) r = 5;
+	//	r *= Nebula::nebula_scale;
+	//	float ad_lum=eye->adapt_luminance(luminance);
 
-//	float cmag = 6 * ad_lum / tex_avg_luminance; // Tony changed from 3
+	//	float cmag = 6 * ad_lum / tex_avg_luminance; // Tony changed from 3
 	float cmag = 0.20;
-	
+
 	glColor3f(cmag,cmag,cmag);
 	glBindTexture(GL_TEXTURE_2D, tex_circle->getID());
-   	glBegin(GL_QUADS);
-        glTexCoord2i(0,0);    glVertex2f(XY[0]-r,XY[1]-r);	// Bottom left
-   	    glTexCoord2i(1,0);    glVertex2f(XY[0]+r,XY[1]-r);	// Bottom right
-       	glTexCoord2i(1,1);    glVertex2f(XY[0]+r,XY[1]+r);	// Top right
-        glTexCoord2i(0,1);    glVertex2f(XY[0]-r,XY[1]+r);	// Top left
-    glEnd();
+	glBegin(GL_QUADS);
+	glTexCoord2i(0,0);    glVertex2f(XY[0]-r,XY[1]-r);	// Bottom left
+	glTexCoord2i(1,0);    glVertex2f(XY[0]+r,XY[1]-r);	// Bottom right
+	glTexCoord2i(1,1);    glVertex2f(XY[0]+r,XY[1]+r);	// Top right
+	glTexCoord2i(0,1);    glVertex2f(XY[0]-r,XY[1]+r);	// Top left
+	glEnd();
 }
 
 // Return the radius of a circle containing the object on screen
@@ -409,99 +378,49 @@ float Nebula::get_on_screen_size(const Projector* prj, const Navigator * nav)
 	return angular_size*180./M_PI/prj->get_fov()*prj->viewH();
 }
 
-void Nebula::draw_name(int hint_ON, const Projector* prj)
+void Nebula::draw_name(const Projector* prj)
 {
-	wstring nebulaname;
-	
-    glColor3fv(label_color*hints_brightness);
-    float size = get_on_screen_size(prj);
-    float shift = 8.f + size/2.f;
+	glColor3fv(label_color*hints_brightness);
+	float size = get_on_screen_size(prj);
+	float shift = 8.f + size/2.f;
 
-	if (nameI18 == L"") return;
-	if (nameFormat == 0) // M83, 1234, I1234
-	{
-		if (nameI18.c_str()[0] == L'M') nebulaname = nameI18;
-		else if (NGC_nb) nebulaname = nameI18.substr(4);
-		else if (IC_nb) nebulaname = L"I." + nameI18.substr(3);
-		else if (Sharpless_nb) nebulaname = L"S." + nameI18.substr(3);
-		else if (Cadwell_nb)
-		{
-			wostringstream ss(nebulaname);
-			if (nameI18 != L"")	ss << nameI18 << L" (";
-			ss << "C." << Cadwell_nb;
-			if (nameI18 != L"")	ss <<  L")";
-			nebulaname = ss.str();
-		}
-		else return;
-		if ((IC_nb || NGC_nb) && Cadwell_nb)
-		{
-			wostringstream ss(nebulaname);
-			ss << L"(C." << Cadwell_nb << L")";
-			nebulaname = ss.str();
-		}
-	}
-	else if (nameFormat == 1)
-	{
-		nebulaname = nameI18;
-		if ((IC_nb || NGC_nb) && Cadwell_nb)
-		{
-			wostringstream ss(nameI18);
-			ss << L"(C." << Cadwell_nb << L")";
-			nameI18 = ss.str();
-		}
-	}
-	else if (nameFormat == 2)
-	{
-		if (longnameI18 != L"")	nebulaname = longnameI18;
-		else nebulaname = nameI18;
-	}
-	else if (nameFormat == 3)
-	{
-		if (longnameI18 != L"")	nebulaname = longnameI18;
-		else nebulaname = nameI18;
-		if (nType != Nebula::NEB_UNKNOWN) nebulaname += L" (" + getTypeString() + L")";
-	}
+	wstring nebulaname = get_short_info_string();
 
-    if (prj->getGravityLabels())
+	if (prj->getGravityLabels())
 		prj->print_gravity180(nebula_font, XY[0]+shift, XY[1]+shift, nebulaname, 1, 0, 0);
 	else
-    	nebula_font->print(XY[0]+shift, XY[1]+shift, nebulaname);
+		nebula_font->print(XY[0]+shift, XY[1]+shift, nebulaname);
 
-    // draw image credit, if it fits easily
-    if(credit != "" && size > nebula_font->getStrLen(credit))
+	// draw image credit, if it fits easily
+	if(credit != "" && size > nebula_font->getStrLen(credit))
 	{
 		if (prj->getGravityLabels())
 			prj->print_gravity180(nebula_font, XY[0]-shift-40, XY[1]+-shift-40, credit, 1, 0, 0);
 		else
 			nebula_font->print(XY[0]-shift, XY[1]-shift-60, credit);
-    }
+	}
 }
 
 bool Nebula::read_NGC(char *recordstr)
 {
 	int rahr;
-    float ramin;
-    int dedeg;
-    float demin;
+	float ramin;
+	int dedeg;
+	float demin;
 	float tex_angular_size;
 	int nb;
 
 	sscanf(&recordstr[1],"%d",&nb);
-	wostringstream oss;
-	
+
 	if (recordstr[0] == 'I')
 	{
 		IC_nb = nb;
-		oss << "IC " << nb;
 	}
 	else
 	{
 		NGC_nb = nb;
-		oss << "NGC " << nb;
 	}
-	nameI18 = oss.str();
-	longnameI18 = nameI18;
-	
+
 	sscanf(&recordstr[12],"%d %f",&rahr, &ramin);
 	sscanf(&recordstr[22],"%d %f",&dedeg, &demin);
 	float RaRad = (double)rahr+ramin/60;
@@ -511,9 +430,9 @@ bool Nebula::read_NGC(char *recordstr)
 	RaRad*=M_PI/12.;     // Convert from hours to rad
 	DecRad*=M_PI/180.;    // Convert from deg to rad
 
-    // Calc the Cartesian coord with RA and DE
-    sphe_to_rect(RaRad,DecRad,XYZ);
-    XYZ*=RADIUS_NEB;
+	// Calc the Cartesian coord with RA and DE
+	sphe_to_rect(RaRad,DecRad,XYZ);
+	XYZ*=RADIUS_NEB;
 
 	// Calc the angular size in radian : TODO this should be independant of tex_angular_size
 	sscanf(&recordstr[47],"%f",&mag);
@@ -523,12 +442,12 @@ bool Nebula::read_NGC(char *recordstr)
 	//	luminance = mag_to_luminance(mag, tex_angular_size*tex_angular_size*3600) /	neb_tex->get_average_luminance() * 50;
 	sscanf(&recordstr[40],"%f",&tex_angular_size);
 	if (tex_angular_size < 0)
-		 tex_angular_size = 1;
+		tex_angular_size = 1;
 	if (tex_angular_size > 150)
-		 tex_angular_size = 150;
-	
+		tex_angular_size = 150;
+
 	angular_size = tex_angular_size/2/60*M_PI/180;
-	
+
 	luminance = mag_to_luminance(mag, tex_angular_size*tex_angular_size*3600);
 	if (luminance < 0)
 		luminance = .0075;
@@ -536,138 +455,25 @@ bool Nebula::read_NGC(char *recordstr)
 	// this is a huge performance drag if called every frame, so cache here
 	neb_tex = NULL;
 
-	if (!strncmp(&recordstr[8],"Gx",2)) { nType = NEB_GX;}
+if (!strncmp(&recordstr[8],"Gx",2)) { nType = NEB_GX;}
 	else if (!strncmp(&recordstr[8],"OC",2))  { nType = NEB_OC;}
 	else if (!strncmp(&recordstr[8],"Gb",2))  { nType = NEB_GC;}
 	else if (!strncmp(&recordstr[8],"Nb",2)) { nType = NEB_N;}
 	else if (!strncmp(&recordstr[8],"Pl",2))  { nType = NEB_PN;}
 	else { nType = NEB_UNKNOWN;}
 
-/*	if (!strncmp(&recordstr[8],"Gx",2)) strcpy(type,"Galaxy");
-	else if (!strncmp(&recordstr[8],"OC",2))  { nType = NEB_OC; typeDesc = "Open cluster"; }
-	else if (!strncmp(&recordstr[8],"Gb",2))  { nType = NEB_GC; typeDesc = "Globular cluster"; }
-	else if (!strncmp(&recordstr[8],"Nb",2)) { nType = NEB_N; typeDesc = "Nebula"; }
-	else if (!strncmp(&recordstr[8],"Pl",2))  { nType = NEB_PN; typeDesc = "Planetary nebula"; }
-//	else if (!strcmp(t,"C+N")) strcpy(type,"");
-//	else if (!strcmp(t,"Ast")) strcpy(type,"");
-//	else if (!strcmp(t,"***")) strcpy(type,"");
-//	else if (!strcmp(t," Gx")) strcpy(type,"");
-	else { nType = NEB_UNKNOWN; typeDesc = "Unknown type"; }
-*/
-   	
-    return true;
+	/*	if (!strncmp(&recordstr[8],"Gx",2)) strcpy(type,"Galaxy");
+		else if (!strncmp(&recordstr[8],"OC",2))  { nType = NEB_OC; typeDesc = "Open cluster"; }
+		else if (!strncmp(&recordstr[8],"Gb",2))  { nType = NEB_GC; typeDesc = "Globular cluster"; }
+		else if (!strncmp(&recordstr[8],"Nb",2)) { nType = NEB_N; typeDesc = "Nebula"; }
+		else if (!strncmp(&recordstr[8],"Pl",2))  { nType = NEB_PN; typeDesc = "Planetary nebula"; }
+	//	else if (!strcmp(t,"C+N")) strcpy(type,"");
+	//	else if (!strcmp(t,"Ast")) strcpy(type,"");
+	//	else if (!strcmp(t,"***")) strcpy(type,"");
+	//	else if (!strcmp(t," Gx")) strcpy(type,"");
+		else { nType = NEB_UNKNOWN; typeDesc = "Unknown type"; }
+	*/
+
+	return true;
 }
 
-
-bool Nebula::read_Sharpless(char *recordstr)
-{
-	int rahr;
-    int ramin;
-    int rasec;
-    int dedeg;
-    int demin;
-    int desec;
-	float tex_angular_size;
-	int nb;
-
-	sscanf(&recordstr[1],"%d",&nb);
-	wostringstream oss;
-	
-	Sharpless_nb = nb;
-	oss << "Sh " << nb;
-	nameI18 = oss.str();
-	longnameI18 = nameI18;
-
-	sscanf(&recordstr[53],"%d %d %d",&rahr, &ramin, &rasec);
-	sscanf(&recordstr[22],"%d %d %d",&dedeg, &demin, &desec);
-	float RaRad = (float)rahr+(float)ramin/60+(float)rasec/1000;
-	float DecRad = (float)dedeg+(float)demin/60+(float)desec/3600;
-	if (recordstr[65] == '-') DecRad *= -1.;
-
-	RaRad*=M_PI/12.;     // Convert from hours to rad
-	DecRad*=M_PI/180.;    // Convert from deg to rad
-
-    // Calc the Cartesian coord with RA and DE
-    sphe_to_rect(RaRad,DecRad,XYZ);
-    XYZ*=RADIUS_NEB;
-
-	// Calc the angular size in radian : TODO this should be independant of tex_angular_size
-//	sscanf(&recordstr[47],"%f",&mag);
-	mag = 4;
-
-	//tex_angular_size*tex_angular_size*3600/4*M_PI
-	//	luminance = mag_to_luminance(mag, tex_angular_size*tex_angular_size*3600) /	neb_tex->get_average_luminance() * 50;
-	sscanf(&recordstr[77],"%f",&tex_angular_size);
-	if (tex_angular_size < 0) tex_angular_size = 1;
-	else if (tex_angular_size > 150) tex_angular_size = 150;
-	
-	angular_size = tex_angular_size/2/60*M_PI/180;
-	
-	luminance = mag_to_luminance(mag, tex_angular_size*tex_angular_size*3600);
-	if (luminance < 0) luminance = .0075;
-
-	// this is a huge performance drag if called every frame, so cache here
-	neb_tex = NULL;
-   	
-    return true;
-}
-
-// Read nebula data from file and compute x,y and z;
-// returns false if can't parse record
-bool Nebula::read_messier_texture(const string& record)
-{
-	string tex_name;
-	int rahr;
-    float ramin;
-    int dedeg;
-    float demin;
-	float tex_angular_size;
-	float tex_rotation;
-	float _mag;
-	string _NGC_nb, _type, _name, _longname;
-	
-	std::istringstream istr(record);
-
-	if (!(istr >> _NGC_nb >> _type >> rahr >> ramin >> dedeg >> demin >> _mag >> 
-			tex_angular_size >> tex_rotation >> _name >> _longname >> 
-			tex_name >> credit)) return false ;
-
-	if (credit  == "none") credit = "";
-	else credit = string("Credit: ") + credit;	
-		
-    for (string::size_type i=0;i<credit.length();++i)
-	{
-		if (credit[i]=='_') credit[i]=' ';
-	}
-	
-    // Calc the RA and DE from the datas
-    float RaRad = hms_to_rad(rahr, (double)ramin);
-    float DecRad = dms_to_rad(dedeg, (double)demin);
-
-	// Calc the angular size in radian : TODO this should be independant of tex_angular_size
-	angular_size = tex_angular_size/2/60*M_PI/180;
-
-    neb_tex = new s_texture(tex_name);
-
-	//tex_angular_size*tex_angular_size*3600/4*M_PI
-	//	luminance = mag_to_luminance(mag, tex_angular_size*tex_angular_size*3600) /	neb_tex->get_average_luminance() * 50;
-	luminance = mag_to_luminance(mag, tex_angular_size*tex_angular_size*3600);
-
-	// this is a huge performance drag if called every frame, so cache here
-	tex_avg_luminance = neb_tex->get_average_luminance();
-
-	float tex_size = RADIUS_NEB * sin(tex_angular_size/2/60*M_PI/180);
-
-    // Precomputation of the rotation/translation matrix
-	Mat4f mat_precomp = Mat4f::translation(XYZ) *
-						Mat4f::zrotation(RaRad) *
-						Mat4f::yrotation(-DecRad) *
-						Mat4f::xrotation(tex_rotation*M_PI/180.);
-
-	tex_quad_vertex[0] = mat_precomp * Vec3f(0.,-tex_size,-tex_size); // Bottom Right
-	tex_quad_vertex[1] = mat_precomp * Vec3f(0., tex_size,-tex_size); // Bottom Right
-	tex_quad_vertex[2] = mat_precomp * Vec3f(0.,-tex_size, tex_size); // Bottom Right
-	tex_quad_vertex[3] = mat_precomp * Vec3f(0., tex_size, tex_size); // Bottom Right
-
-    return true;
-}

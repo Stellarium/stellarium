@@ -474,7 +474,7 @@ vector<StelObject*> SolarSystem::search_around(Vec3d v,
 	return result;
 }
 
-//! @brief Update i18 names from english names according to current locale
+//! @brief Update i18 names from english names according to passed translator
 //! The translation is done using gettext with translated strings defined in translations.h
 void SolarSystem::translateNames(Translator& trans)
 {
