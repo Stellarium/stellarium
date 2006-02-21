@@ -26,15 +26,14 @@
 #include "stel_utility.h"
 #include "s_gui.h"
 
-#define RADIUS_NEB 1.
-
 s_texture * Nebula::tex_circle = NULL;
 s_font* Nebula::nebula_font = NULL;
-float Nebula::nebula_scale = 1.f;
-bool Nebula::gravity_label = false;
+float Nebula::circleScale = 1.f;
 float Nebula::hints_brightness = 0;
 Vec3f Nebula::label_color = Vec3f(0.4,0.3,0.5);
 Vec3f Nebula::circle_color = Vec3f(0.8,0.8,0.1);
+bool Nebula::flagBright = false;
+const float Nebula::RADIUS_NEB = 1.f;
 
 Nebula::Nebula() :
 		NGC_nb(0),
@@ -62,12 +61,10 @@ wstring Nebula::get_info_string(const Navigator* nav) const
 	rect_to_sphe(&tempRA,&tempDE,equPos);
 
 	wostringstream oss;
-
 	if (nameI18!=L"")
 	{
 		oss << nameI18 << L" (";
 	}
-	
 	if (NGC_nb > 0)
 	{
 		oss << L"NGC " << NGC_nb;
@@ -76,32 +73,26 @@ wstring Nebula::get_info_string(const Navigator* nav) const
 	{
 		oss << L"IC " << IC_nb;
 	}
-	
 	if (nameI18!=L"")
 	{
 		oss << L")";
 	}
-		
 	oss << endl;
 	
-	oss << _("RA : ") << StelUtility::printAngleHMS(tempRA) << endl;
-	oss << _("DE : ") << StelUtility::printAngleDMS(tempDE) << endl;
-
-	oss.setf(ios::fixed);
-	oss.precision(2);
-	oss << _("Magnitude : ") << mag << endl;
-	oss << _("Type : ") << getTypeString() << endl;
-	oss << _("Size : ") << StelUtility::printAngleDMS(angular_size*M_PI/180.) << endl;
+	oss << _("RA/DE: ") << StelUtility::printAngleHMS(tempRA) << L"/" << StelUtility::printAngleDMS(tempDE) << endl;
 
 	// calculate alt az
 	Vec3d localPos = nav->earth_equ_to_local(equPos);
 	rect_to_sphe(&tempRA,&tempDE,localPos);
 	tempRA = 3*M_PI - tempRA;  // N is zero, E is 90 degrees
-	if(tempRA > M_PI*2) tempRA -= M_PI*2;
-
-	oss << _("Az  : ") << StelUtility::printAngleDMS(tempRA) << endl;
-	oss << _("Alt : ") << StelUtility::printAngleDMS(tempDE) << endl;
-
+	if(tempRA > M_PI*2) tempRA -= M_PI*2;	
+	oss << _("Az/Alt: ") << StelUtility::printAngleDMS(tempRA) << L"/" << StelUtility::printAngleDMS(tempDE) << endl;
+	
+	oss.setf(ios::fixed);
+	oss.precision(2);
+	oss << _("Magnitude : ") << mag << endl;
+	oss << _("Type : ") << getTypeString() << endl;
+	oss << _("Size : ") << StelUtility::printAngleDMS(angular_size*M_PI/180.) << endl;
 
 	return oss.str();
 }
@@ -137,7 +128,7 @@ double Nebula::get_close_fov(const Navigator*) const
 
 // Read nebula data from file and compute x,y and z;
 // returns false if can't parse record
-bool Nebula::read(const string& record)
+bool Nebula::readTexture(const string& record)
 {
 	string tex_name;
 	float ra;
@@ -195,12 +186,12 @@ bool Nebula::read(const string& record)
 	return true;
 }
 
-void Nebula::draw_chart(const Projector* prj, const Navigator * nav, bool bright_nebulae)
+void Nebula::draw_chart(const Projector* prj, const Navigator * nav)
 {
 	bool lastState = glIsEnabled(GL_TEXTURE_2D);
 	float r = (get_on_screen_size(prj, nav)/2)* 1.2; // slightly bigger than actual!
 	if (r < 5) r = 5;
-	r *= nebula_scale;
+	r *= circleScale;
 
 	glDisable(GL_TEXTURE_2D);
 	glLineWidth(1.0f);
@@ -213,10 +204,6 @@ void Nebula::draw_chart(const Projector* prj, const Navigator * nav, bool bright
 	else if (nType == NEB_N) // supernova reemnant
 	{
 		glCircle(XY,r);
-	}
-	else if (nType == NEB_SG) // Sipral galaxy
-	{
-		glEllipse(XY,r,0.6);
 	}
 	else if (nType == NEB_PN) // planetary nebula
 	{
@@ -241,14 +228,6 @@ void Nebula::draw_chart(const Projector* prj, const Navigator * nav, bool bright
 		glVertex3f(XY[0], XY[1]-r,0.f);
 		glVertex3f(XY[0], XY[1]-0.4*r,0.f);
 		glEnd();
-	}
-	else if (nType == NEB_LG)  //lenticular galaxy
-	{
-		glEllipse(XY,r,0.5);
-	}
-	else if (nType == NEB_EG) // elliptical galacy
-	{
-		glEllipse(XY,r,0.4);
 	}
 	else if (nType == NEB_OC) // open cluster
 	{
@@ -291,7 +270,7 @@ void Nebula::draw_chart(const Projector* prj, const Navigator * nav, bool bright
 	if (lastState) glEnable(GL_TEXTURE_2D);
 }
 
-void Nebula::draw_tex(const Projector* prj, ToneReproductor* eye, bool bright_nebulae)
+void Nebula::draw_tex(const Projector* prj, const Navigator* nav, ToneReproductor* eye)
 {
 	glEnable(GL_TEXTURE_2D);
 	glEnable(GL_BLEND);
@@ -301,7 +280,7 @@ void Nebula::draw_tex(const Projector* prj, ToneReproductor* eye, bool bright_ne
 	// if start zooming in, turn up brightness to full for DSO images
 	// gradual change might be better
 
-	if(bright_nebulae)
+	if(flagBright && get_on_screen_size(prj, nav)>12.)
 	{
 		glColor3f(1.0,1.0,1.0);
 	}
@@ -319,8 +298,7 @@ void Nebula::draw_tex(const Projector* prj, ToneReproductor* eye, bool bright_ne
 
 	glBindTexture(GL_TEXTURE_2D, neb_tex->getID());
 
-	static Vec3d v;
-
+	Vec3d v;
     glBegin(GL_TRIANGLE_STRIP);
         glTexCoord2i(1,0);              // Bottom Right
 		prj->project_j2000(tex_quad_vertex[0],v); glVertex3dv(v);
@@ -355,12 +333,7 @@ void Nebula::draw_circle(const Projector* prj, const Navigator * nav)
 void Nebula::draw_no_tex(const Projector* prj, const Navigator * nav,ToneReproductor* eye)
 {
 	float r = (get_on_screen_size(prj, nav)/2);
-	//	if (r < 5) r = 5;
-	//	r *= Nebula::nebula_scale;
-	//	float ad_lum=eye->adapt_luminance(luminance);
-
-	//	float cmag = 6 * ad_lum / tex_avg_luminance; // Tony changed from 3
-	float cmag = 0.20;
+	float cmag = 0.20 * hints_brightness;
 
 	glColor3f(cmag,cmag,cmag);
 	glBindTexture(GL_TEXTURE_2D, tex_circle->getID());
@@ -372,12 +345,6 @@ void Nebula::draw_no_tex(const Projector* prj, const Navigator * nav,ToneReprodu
 	glEnd();
 }
 
-// Return the radius of a circle containing the object on screen
-float Nebula::get_on_screen_size(const Projector* prj, const Navigator * nav)
-{
-	return angular_size*180./M_PI/prj->get_fov()*prj->viewH();
-}
-
 void Nebula::draw_name(const Projector* prj)
 {
 	glColor3fv(label_color*hints_brightness);
@@ -386,7 +353,7 @@ void Nebula::draw_name(const Projector* prj)
 
 	wstring nebulaname = get_short_info_string();
 
-	if (prj->getGravityLabels())
+	if (prj->getFlagGravityLabels())
 		prj->print_gravity180(nebula_font, XY[0]+shift, XY[1]+shift, nebulaname, 1, 0, 0);
 	else
 		nebula_font->print(XY[0]+shift, XY[1]+shift, nebulaname);
@@ -394,14 +361,14 @@ void Nebula::draw_name(const Projector* prj)
 	// draw image credit, if it fits easily
 	if(credit != "" && size > nebula_font->getStrLen(credit))
 	{
-		if (prj->getGravityLabels())
+		if (prj->getFlagGravityLabels())
 			prj->print_gravity180(nebula_font, XY[0]-shift-40, XY[1]+-shift-40, credit, 1, 0, 0);
 		else
 			nebula_font->print(XY[0]-shift, XY[1]-shift-60, credit);
 	}
 }
 
-bool Nebula::read_NGC(char *recordstr)
+bool Nebula::readNGC(char *recordstr)
 {
 	int rahr;
 	float ramin;
@@ -432,14 +399,12 @@ bool Nebula::read_NGC(char *recordstr)
 
 	// Calc the Cartesian coord with RA and DE
 	sphe_to_rect(RaRad,DecRad,XYZ);
-	XYZ*=RADIUS_NEB;
+	XYZ*=Nebula::RADIUS_NEB;
 
 	// Calc the angular size in radian : TODO this should be independant of tex_angular_size
 	sscanf(&recordstr[47],"%f",&mag);
-	if (mag < 1) mag = 10;
+	if (mag < 1) mag = 99;
 
-	//tex_angular_size*tex_angular_size*3600/4*M_PI
-	//	luminance = mag_to_luminance(mag, tex_angular_size*tex_angular_size*3600) /	neb_tex->get_average_luminance() * 50;
 	sscanf(&recordstr[40],"%f",&tex_angular_size);
 	if (tex_angular_size < 0)
 		tex_angular_size = 1;
@@ -455,24 +420,19 @@ bool Nebula::read_NGC(char *recordstr)
 	// this is a huge performance drag if called every frame, so cache here
 	neb_tex = NULL;
 
-if (!strncmp(&recordstr[8],"Gx",2)) { nType = NEB_GX;}
-	else if (!strncmp(&recordstr[8],"OC",2))  { nType = NEB_OC;}
-	else if (!strncmp(&recordstr[8],"Gb",2))  { nType = NEB_GC;}
+	if (!strncmp(&recordstr[8],"Gx",2)) { nType = NEB_GX;}
+	else if (!strncmp(&recordstr[8],"OC",2)) { nType = NEB_OC;}
+	else if (!strncmp(&recordstr[8],"Gb",2)) { nType = NEB_GC;}
 	else if (!strncmp(&recordstr[8],"Nb",2)) { nType = NEB_N;}
-	else if (!strncmp(&recordstr[8],"Pl",2))  { nType = NEB_PN;}
+	else if (!strncmp(&recordstr[8],"Pl",2)) { nType = NEB_PN;}
+	else if (!strncmp(&recordstr[8],"  ",2)) { return false;}
+	else if (!strncmp(&recordstr[8]," -",2)) { return false;}
+	else if (!strncmp(&recordstr[8]," *",2)) { return false;}
+	else if (!strncmp(&recordstr[8],"D*",2)) { return false;}
+	else if (!strncmp(&recordstr[7],"***",3)) { return false;}
+	else if (!strncmp(&recordstr[7],"C+N",3)) { nType = NEB_CN;}
+	else if (!strncmp(&recordstr[8]," ?",2)) { nType = NEB_UNKNOWN;}
 	else { nType = NEB_UNKNOWN;}
-
-	/*	if (!strncmp(&recordstr[8],"Gx",2)) strcpy(type,"Galaxy");
-		else if (!strncmp(&recordstr[8],"OC",2))  { nType = NEB_OC; typeDesc = "Open cluster"; }
-		else if (!strncmp(&recordstr[8],"Gb",2))  { nType = NEB_GC; typeDesc = "Globular cluster"; }
-		else if (!strncmp(&recordstr[8],"Nb",2)) { nType = NEB_N; typeDesc = "Nebula"; }
-		else if (!strncmp(&recordstr[8],"Pl",2))  { nType = NEB_PN; typeDesc = "Planetary nebula"; }
-	//	else if (!strcmp(t,"C+N")) strcpy(type,"");
-	//	else if (!strcmp(t,"Ast")) strcpy(type,"");
-	//	else if (!strcmp(t,"***")) strcpy(type,"");
-	//	else if (!strcmp(t," Gx")) strcpy(type,"");
-		else { nType = NEB_UNKNOWN; typeDesc = "Unknown type"; }
-	*/
 
 	return true;
 }

@@ -28,7 +28,6 @@
 
 s_font* Planet::planet_name_font = NULL;
 float Planet::object_scale = 1.f;
-bool Planet::gravity_label = false;
 Vec3f Planet::label_color = Vec3f(.4,.4,.8);
 Vec3f Planet::orbit_color = Vec3f(1,.6,1);
 Vec3f Planet::trail_color = Vec3f(1,.7,.7);
@@ -506,7 +505,7 @@ void Planet::draw_hints(const Navigator* nav, const Projector* prj)
 	//	glColor4f(label_color[0], label_color[1], label_color[2],1.f);
 	//	glColor4f(label_color[0], label_color[1], label_color[2],hint_fader.getInterstate());
 	glColor3fv(label_color*hint_fader.getInterstate());
-	prj->getGravityLabels() ? 
+	prj->getFlagGravityLabels() ? 
 		prj->print_gravity180(planet_name_font, screenPos[0],screenPos[1], wos.str(), 1, tmp, tmp) :
 		planet_name_font->print(screenPos[0]+tmp,screenPos[1]+tmp, wos.str());
 

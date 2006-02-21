@@ -67,6 +67,10 @@ StelCore::StelCore(const string& CDIR, const string& LDIR, const string& DATA_RO
 	ColorSchemeChanged = true;
 
 	landscape = new LandscapeOldStyle();
+	
+	// Set textures directory and suffix
+	s_texture::set_texDir(getDataRoot() + "/textures/");
+	
 }
 
 StelCore::~StelCore()
@@ -104,13 +108,7 @@ void StelCore::init(void)
 	BaseCFontSize = 12.5;
 	BaseCFontName = getDataDir() + "DejaVuSansMono-Roman.ttf";
 
-	// glEnable(GL_LINE_SMOOTH);
-
-	// Set textures directory and suffix
-	s_texture::set_texDir(getDataRoot() + "/textures/");
-
-      // Init the solar system before the observer because the observer
-      // resides on a planet
+	// Init the solar system first
 	ssystem->load(getDataDir() + "ssystem.ini");
 	ssystem->setLabelColor(PlanetNamesColor[draw_mode]);
 	ssystem->setOrbitColor(PlanetOrbitsColor[draw_mode]);
@@ -137,7 +135,6 @@ void StelCore::init(void)
 	// Init nebulas
 	nebulas->set_label_color(NebulaLabelColor[draw_mode]);
 	nebulas->set_circle_color(NebulaCircleColor[draw_mode]);
-	nebulas->set_nebula_scale(NebulaScale);
 	nebulas->read(12., getDataDir() + BaseFontName, getDataDir() + "ngc2000.dat", getDataDir() + "ngc2000names.dat", getDataDir() + "nebula_textures.fab", lb);
 	nebulas->translateNames(skyTranslator);
 
@@ -189,9 +186,6 @@ void StelCore::init(void)
 	// set_system_locale_by_name(SkyLocale); // and UILocale are the same but different format fra vs fr_FR!!!! TONY
 
 	tone_converter->set_world_adaptation_luminance(3.75f + atmosphere->get_intensity()*40000.f);
-
-	// Set the default moon scaling
-	if (FlagMoonScaled) ssystem->getMoon()->set_sphere_scale(MoonScale);
 
 	// Compute planets data and init viewing position
 	// Position of sun and all the satellites (ie planets)
@@ -360,7 +354,7 @@ void StelCore::draw(int delta_time)
 	asterisms->draw(projection, navigation);
 
 	// Draw the nebula
-	nebulas->draw(projection, navigation, tone_converter, MaxMagNebulaName, FlagBrightNebulae);
+	nebulas->draw(projection, navigation, tone_converter);
 
 	// Draw the hipparcos stars
 	Vec3d tempv = navigation->get_prec_equ_vision();
@@ -389,7 +383,7 @@ void StelCore::draw(int delta_time)
 	if (selected_object && object_pointer_visibility) selected_object->draw_pointer(delta_time, projection, navigation);
 
 	// Draw the planets
-	ssystem->draw(projection, navigation, tone_converter, FlagGravityLabels, getFlagPointStar());
+	ssystem->draw(projection, navigation, tone_converter, getFlagPointStar());
 
 	// Set openGL drawings in local coordinates i.e. generally altazimuthal coordinates
 	navigation->switch_to_local();
@@ -412,7 +406,7 @@ void StelCore::draw(int delta_time)
 
 	// Draw the cardinal points
 	//if (FlagCardinalPoints)
-	cardinals_points->draw(projection, observatory->get_latitude(), FlagGravityLabels );
+	cardinals_points->draw(projection, observatory->get_latitude());
 
 	// draw images loaded by a script
 	projection->set_orthographic_projection();
@@ -824,7 +818,7 @@ void StelCore::setProjectionType(Projector::PROJECTOR_TYPE pType)
 	ptemp->setViewportType(projection->getViewportType());
 	ptemp->setViewportHorizontalOffset(projection->getViewportHorizontalOffset());
 	ptemp->setViewportVerticalOffset(projection->getViewportVerticalOffset());
-	ptemp->setGravityLabels(projection->getGravityLabels());
+	ptemp->setFlagGravityLabels(projection->getFlagGravityLabels());
 	delete projection;
 	projection = ptemp;
 }
@@ -1089,11 +1083,11 @@ void StelCore::loadConfigFrom(const string& confFile)
 	setFlagEclipticLine(conf.get_boolean("viewing:flag_ecliptic_line"));
 	setFlagMeridianLine(conf.get_boolean("viewing:flag_meridian_line"));
 	cardinals_points->setFlagShow(conf.get_boolean("viewing:flag_cardinal_points"));
-	//	FlagGravityLabels		= conf.get_boolean("viewing:flag_gravity_labels");
-	projection->setGravityLabels( conf.get_boolean("viewing:flag_gravity_labels") );
-	FlagMoonScaled			= conf.get_boolean("viewing", "flag_moon_scaled",
-	                                    conf.get_boolean("viewing", "flag_init_moon_scaled", 0));  // name change
-	MoonScale				= conf.get_double ("viewing","moon_scale",5.);
+	setFlagGravityLabels( conf.get_boolean("viewing:flag_gravity_labels") );
+	// TODO uncomment when the main initialization is cleaned
+	//setFlagMoonScaled(conf.get_boolean("viewing", "flag_moon_scaled",
+	 //                                   conf.get_boolean("viewing", "flag_init_moon_scaled", 0)));  // name change
+	setMoonScale(conf.get_double ("viewing","moon_scale",5.));
 	FlagChart    			= conf.get_boolean("viewing:flag_chart");
 	FlagNight    			= conf.get_boolean("viewing:flag_night");
 	SetDrawMode();
@@ -1107,14 +1101,12 @@ void StelCore::loadConfigFrom(const string& confFile)
 	setFlagPlanetsTrails(conf.get_boolean("astro", "flag_object_trails", 0));
 	startPlanetsTrails(conf.get_boolean("astro", "flag_object_trails", 0));
 	setFlagNebula(conf.get_boolean("astro:flag_nebula"));
-	nebulas->setFlagHints(conf.get_boolean("astro:flag_nebula_name"));
-	FlagNebulaLongName      = conf.get_boolean("astro:flag_nebula_long_name");
-	MaxMagNebulaName		= conf.get_double("astro", "max_mag_nebula_name", 99);
-	NebulaScale				= conf.get_double("astro", "nebula_scale",1.0f);
+	setFlagNebulaHints(conf.get_boolean("astro:flag_nebula_name"));
+	setNebulaMaxMagHints(conf.get_double("astro", "max_mag_nebula_name", 99));
+	setNebulaCircleScale(conf.get_double("astro", "nebula_scale",1.0f));
 	setFlagMilkyWay(conf.get_boolean("astro:flag_milky_way"));
 	setMilkyWayIntensity(conf.get_double("astro","milky_way_intensity",1.));
-
-	FlagBrightNebulae		= conf.get_boolean("astro:flag_bright_nebulae");
+	setFlagNebulaBright(conf.get_boolean("astro:flag_bright_nebulae"));
 }
 
 void StelCore::saveConfigTo(const string& confFile)
@@ -1289,14 +1281,13 @@ void StelCore::saveConfigTo(const string& confFile)
 	conf.set_boolean("viewing:flag_ecliptic_line", getFlagEclipticLine());
 	conf.set_boolean("viewing:flag_meridian_line", getFlagMeridianLine());
 	conf.set_boolean("viewing:flag_cardinal_points", cardinals_points->getFlagShow());
-	conf.set_boolean("viewing:flag_gravity_labels", projection->getGravityLabels());
-	conf.set_boolean("viewing:flag_moon_scaled", FlagMoonScaled);
-	conf.set_double ("viewing:moon_scale", MoonScale);
+	conf.set_boolean("viewing:flag_gravity_labels", projection->getFlagGravityLabels());
+	conf.set_boolean("viewing:flag_moon_scaled", getFlagMoonScaled());
+	conf.set_double ("viewing:moon_scale", getMoonScale());
 	conf.set_double ("viewing:constellation_art_intensity", getConstellationArtIntensity());
 	conf.set_double ("viewing:constellation_art_fade_duration", getConstellationArtFadeDuration());
 	conf.set_boolean("viewing:flag_chart", FlagChart);
 	conf.set_boolean("viewing:flag_night", FlagNight);
-	//conf.set_boolean("viewing:flag_use_common_names", FlagUseCommonNames);
 
 	// Astro section
 	conf.set_boolean("astro:flag_stars", getFlagStars());
@@ -1307,12 +1298,11 @@ void StelCore::saveConfigTo(const string& confFile)
 	conf.set_boolean("astro:flag_object_trails", getFlagPlanetsTrails());
 	conf.set_boolean("astro:flag_nebula", getFlagNebula());
 	conf.set_boolean("astro:flag_nebula_name", getFlagNebulaHints());
-	conf.set_boolean("astro:flag_nebula_long_name", FlagNebulaLongName); // Tony - added long name
-	conf.set_double("astro:max_mag_nebula_name", MaxMagNebulaName);
-	conf.set_double("astro:nebula_scale", NebulaScale);
+	conf.set_double("astro:max_mag_nebula_name", getNebulaMaxMagHints());
+	conf.set_double("astro:nebula_scale", getNebulaCircleScale());
 	conf.set_boolean("astro:flag_milky_way", getFlagMilkyWay());
 	conf.set_double("astro:milky_way_intensity", getMilkyWayIntensity());
-	conf.set_boolean("astro:flag_bright_nebulae", FlagBrightNebulae);
+	conf.set_boolean("astro:flag_bright_nebulae", getFlagNebulaBright());
 
 	conf.save(confFile);
 }
