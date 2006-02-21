@@ -317,6 +317,11 @@ public:
 	//! Get the projection type
 	Projector::PROJECTOR_TYPE getProjectionType(void) {return projection->getType();}
 	
+	//! Set flag for enabling gravity labels
+	void setFlagGravityLabels(bool b) {projection->setFlagGravityLabels(b);}
+	//! Get flag for enabling gravity labels
+	bool getFlagGravityLabels(void) const {return projection->getFlagGravityLabels();}	
+	
 	///////////////////////////////////////////////////////////////////////////////////////
 	// Landscape
 	//! Set flag for displaying Landscape
@@ -353,6 +358,8 @@ public:
 	//! Get Milky Way intensity
 	float getMilkyWayIntensity(void) const {return milky_way->get_intensity();}
 	
+	///////////////////////////////////////////////////////////////////////////////////////
+	// Nebulae
 	//! Set flag for displaying Nebulae
 	void setFlagNebula(bool b) {nebulas->setFlagShow(b);}
 	//! Get flag for displaying Nebulae
@@ -363,11 +370,34 @@ public:
 	//! Get flag for displaying Nebulae Hints
 	bool getFlagNebulaHints(void) const {return nebulas->getFlagHints();}	
 	
-    bool FlagNebulaLongName;
-    float MaxMagNebulaName;
-    bool FlagNebulaCircle;
-    bool FlagBrightNebulae;
-	float NebulaScale;
+	//! Set Nebulae Hints circle scale
+	void setNebulaCircleScale(float f) {nebulas->setNebulaCircleScale(f);}
+	//! Get Nebulae Hints circle scale
+	float getNebulaCircleScale(void) const {return nebulas->getNebulaCircleScale();}
+	
+	//! Set flag for displaying Nebulae as bright
+	void setFlagNebulaBright(bool b) {nebulas->setFlagBright(b);}
+	//! Get flag for displaying Nebulae as brigth
+	bool getFlagNebulaBright(void) const {return nebulas->getFlagBright();}	
+	
+	//! Set maximum magnitude at which nebulae hints are displayed
+	void setNebulaMaxMagHints(float f) {nebulas->setMaxMagHints(f);}
+	//! Get maximum magnitude at which nebulae hints are displayed
+	float getNebulaMaxMagHints(void) const {return nebulas->getMaxMagHints();}
+	
+	///////////////////////////////////////////////////////////////////////////////////////
+	// Solar System
+	//! Set flag for displaying a scaled Moon
+	void setFlagMoonScaled(bool b) {ssystem->setFlagMoonScale(b);}
+	//! Get flag for displaying a scaled Moon
+	bool getFlagMoonScaled(void) const {return ssystem->getFlagMoonScale();}
+	
+	//! Set Moon scale
+	void setMoonScale(float f) { if (f<0) ssystem->setMoonScale(1.); // negative numbers reverse drawing!
+									else ssystem->setMoonScale(f);}
+	//! Get Moon scale
+	float getMoonScale(void) const {return ssystem->getMoonScale();}
+	
 	
 	const string getDataDir(void) const {return dataRoot + "/data/";}
 	const string& getDataRoot() const {return dataRoot;}
@@ -454,11 +484,6 @@ private:
 	// Current sky Brightness
 	float sky_brightness;
 
-	
-	// Viewing
-	bool FlagGravityLabels;
-	float MoonScale;
-	bool FlagMoonScaled;
 
 	///////////////////////////////////////////////////////////////////////////////
 	// Below this limit, all the attributes will end up in the stel_app class

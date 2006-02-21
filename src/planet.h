@@ -168,7 +168,6 @@ public:
 	static void setScale(float s) {object_scale = s;}
 	static float getScale(void) {return object_scale;}
 	
-	static void set_gravity_label_flag(bool gl) {gravity_label = gl;}
 	static void set_label_color(const Vec3f& lc) {label_color = lc;}
 	static void set_orbit_color(const Vec3f& oc) {orbit_color = oc;}
 
@@ -257,7 +256,6 @@ protected:
 
 	static s_font* planet_name_font;// Font for names
 	static float object_scale;
-	static bool gravity_label;
 	static Vec3f label_color;
 	static Vec3f orbit_color;
 	static Vec3f trail_color;

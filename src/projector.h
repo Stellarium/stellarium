@@ -218,8 +218,8 @@ public:
 	   	print_gravity180(font, x, y, StelUtility::stringToWstring(str), speed_optimize, xshift, yshift);
 	}
 
-	void setGravityLabels(bool gravity) { gravityLabels = gravity; }
-	bool getGravityLabels() const { return gravityLabels; }
+	void setFlagGravityLabels(bool gravity) { gravityLabels = gravity; }
+	bool getFlagGravityLabels() const { return gravityLabels; }
 
 protected:
 

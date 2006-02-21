@@ -106,7 +106,7 @@ Component* StelUI::createConfigWindow(void)
 	nebulas_names_cbx->setPos(x,y);
 
 	max_mag_nebula_name = new FloatIncDec(courierFont, tex_up, tex_down, 0, 12,
-		core->MaxMagNebulaName, 0.5);
+		core->getNebulaMaxMagHints(), 0.5);
 	max_mag_nebula_name->setOnPressCallback(callback<void>(this, &StelUI::updateConfigVariables));
 	tab_render->addComponent(max_mag_nebula_name);
 	max_mag_nebula_name->setPos(x + 220,y);
@@ -976,8 +976,8 @@ void StelUI::saveRenderOptions(void)
 	conf.set_boolean("viewing:flag_constellation_boundaries", core->getFlagConstellationBoundaries());
 	conf.set_boolean("viewing:flag_constellation_pick", core->getFlagConstellationIsolateSelected());
 	conf.set_boolean("astro:flag_nebula", core->getFlagNebula());
-	conf.set_boolean("astro:flag_nebula_name", core->nebulas->getFlagHints());
-	conf.set_double("astro:max_mag_nebula_name", core->MaxMagNebulaName);
+	conf.set_boolean("astro:flag_nebula_name", core->getFlagNebulaHints());
+	conf.set_double("astro:max_mag_nebula_name", core->getNebulaMaxMagHints());
 	conf.set_boolean("astro:flag_planets", core->getFlagPlanets());
 	conf.set_boolean("astro:flag_planets_hints", core->getFlagPlanetsHints());
 	conf.set_double("viewing:moon_scale", core->ssystem->getMoon()->get_sphere_scale());
@@ -1074,10 +1074,10 @@ void StelUI::updateConfigForm(void)
 	constellation_name_cbx->setState(core->getFlagConstellationNames());
 	sel_constellation_cbx->setState(core->getFlagConstellationIsolateSelected());
 	nebulas_names_cbx->setState(core->nebulas->getFlagHints());
-	max_mag_nebula_name->setValue(core->MaxMagNebulaName);
+	max_mag_nebula_name->setValue(core->getNebulaMaxMagHints());
 	planets_cbx->setState(core->getFlagPlanets());
 	planets_hints_cbx->setState(core->getFlagPlanetsHints());
-	moon_x4_cbx->setState(core->FlagMoonScaled);
+	moon_x4_cbx->setState(core->getFlagMoonScaled());
 	equator_grid_cbx->setState(core->getFlagEquatorGrid());
 	azimuth_grid_cbx->setState(core->getFlagAzimutalGrid());
 	equator_cbx->setState(core->getFlagEquatorLine());

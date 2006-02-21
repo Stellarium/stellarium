@@ -101,8 +101,13 @@ wstring HipStar::get_info_string(const Navigator * nav) const
 #endif
 	oss << endl;
 
-	oss << _("RA : ") << StelUtility::printAngleHMS(tempRA) << endl;
-	oss << _("DE : ") << StelUtility::printAngleDMS(tempDE) << endl;
+	oss << _("RA/DE: ") << StelUtility::printAngleHMS(tempRA) << L"/" << StelUtility::printAngleDMS(tempDE) << endl;
+	// calculate alt az
+	Vec3d local_pos = nav->earth_equ_to_local(equatorial_pos);
+	rect_to_sphe(&tempRA,&tempDE,local_pos);
+	tempRA = 3*M_PI - tempRA;  // N is zero, E is 90 degrees
+	if(tempRA > M_PI*2) tempRA -= M_PI*2;	
+	oss << _("Az/Alt: ") << StelUtility::printAngleDMS(tempRA) << L"/" << StelUtility::printAngleDMS(tempDE) << endl;
 
 	oss << _("Spectral : ") << SpType << endl;
 	oss.setf(ios::fixed);
@@ -114,16 +119,6 @@ wstring HipStar::get_info_string(const Navigator * nav) const
 	if(Distance) oss << Distance; else oss << "-";
 	oss << _(" Light Years") << endl;
 
-	// calculate alt az
-	Vec3d local_pos = nav->earth_equ_to_local(equatorial_pos);
-	rect_to_sphe(&tempRA,&tempDE,local_pos);
-	tempRA = 3*M_PI - tempRA;  // N is zero, E is 90 degrees
-	if(tempRA > M_PI*2) tempRA -= M_PI*2;
-
-	oss << _("Az  : ") << StelUtility::printAngleDMS(tempRA) << endl;
-	oss << _("Alt : ") << StelUtility::printAngleDMS(tempDE) << endl;
-
-	
 	return oss.str();
 }
 
@@ -297,7 +292,7 @@ bool HipStar::draw_name(void)
 	}
 	else glColor3fv(label_color);
 
-	proj->getGravityLabels() ? proj->print_gravity180(starFont, XY[0],XY[1], starname, 1, 6, -4) :
+	proj->getFlagGravityLabels() ? proj->print_gravity180(starFont, XY[0],XY[1], starname, 1, 6, -4) :
 	starFont->print(XY[0]+6,XY[1]-4, starname);
 	
 	return true;

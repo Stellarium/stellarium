@@ -28,28 +28,30 @@
 #include "tone_reproductor.h"
 #include "translator.h"
 
-/*   Gx    Galaxy
-     OC    Open star cluster
-     Gb    Globular star cluster, usually in the Milky Way Galaxy
-     Nb    Bright emission or reflection nebula
-     Pl    Planetary nebula
-     C+N   Cluster associated with nebulosity
-     Ast   Asterism or group of a few stars
-     Kt    Knot  or  nebulous  region  in  an  external galaxy
-     ***   Triple star
-     D*    Double star
-     *     Single star
-     ?     Uncertain type or may not exist
-     blank Unidentified at the place given, or type unknown
-     -     Object called nonexistent in the RNGC (Sulentic and Tifft 1973)
-     PD    Photographic plate defect */
+/*
+Gx Galaxy
+OC Open star cluster
+Gb Globular star cluster, usually in the Milky Way Galaxy
+Nb Bright emission or reflection nebula
+Pl Planetary nebula
+C+N Cluster associated with nebulosity
+Ast Asterism or group of a few stars
+Kt Knot or nebulous region in an external galaxy
+*** Triple star
+D* Double star
+* Single star
+? Uncertain type or may not exist
+blank Unidentified at the place given, or type unknown
+- Object called nonexistent in the RNGC (Sulentic and Tifft 1973)
+PD Photographic plate defect
+*/
 
 
 class Nebula : public StelObject
 {
 friend class NebulaMgr;
 public:
-	enum nebula_type { NEB_N, NEB_SG, NEB_PN, NEB_LG, NEB_EG, NEB_OC, NEB_GC, NEB_DN, NEB_IG, NEB_GX, NEB_UNKNOWN };
+	enum nebula_type { NEB_GX, NEB_OC, NEB_GC, NEB_N, NEB_PN, NEB_DN, NEB_IG, NEB_CN, NEB_UNKNOWN };
 
     Nebula();
     virtual ~Nebula();
@@ -61,37 +63,35 @@ public:
 	virtual double get_close_fov(const Navigator * nav = NULL) const;
 	virtual float get_mag(const Navigator * nav = NULL) const {return mag;}
 
-	void set_label_color(Vec3f& v) {label_color = v;}
-	void set_circle_color(Vec3f& v) {circle_color = v;}
+	void setLabelColor(const Vec3f& v) {label_color = v;}
+	void setCircleColor(const Vec3f& v) {circle_color = v;}
 
 	// Read the Nebula data from a file
-    bool read(const string&);
-    bool read_NGC(char *record);
-    bool read_messier_texture(const string&);
-	void draw_chart(const Projector* prj, const Navigator * nav, bool bright_nebulae);
-	void draw_tex(const Projector* prj, ToneReproductor* eye, bool bright_nebulae);
-	void draw_no_tex(const Projector* prj, const Navigator * nav, ToneReproductor* eye);
-    void draw_name(const Projector* prj);
-    void draw_circle(const Projector* prj, const Navigator * nav);
+    bool readTexture(const string&);
+    bool readNGC(char *record);
+
     wstring getNameI18() { return nameI18; };
     string getEnglishName() { return englishName; };
-    bool hasTex(void) { return (neb_tex != NULL); }
-    static void set_nebula_scale(float scale) {nebula_scale = scale; }
-	
-	/**
-	 * @brief Get the printable nebula Type
-	 * @return the nebula type code.
-	 */
+    
+	//! @brief Get the printable nebula Type
+	//! @return the nebula type code.
 	wstring getTypeString(void) const {return L"TODO";}
 
-	/** Translate nebula name using the passed translator */
+	//! Translate nebula name using the passed translator
 	void translateName(Translator& trans) {nameI18 = trans.translate(englishName);}
 	
 protected:
 	// Return the radius of a circle containing the object on screen
-	virtual float get_on_screen_size(const Projector* prj, const Navigator * nav = NULL);
+	virtual float get_on_screen_size(const Projector* prj, const Navigator * nav = NULL) {return angular_size*180./M_PI/prj->get_fov()*prj->viewH();}
 
 private:
+	void draw_chart(const Projector* prj, const Navigator * nav);
+	void draw_tex(const Projector* prj, const Navigator * nav, ToneReproductor* eye);
+	void draw_no_tex(const Projector* prj, const Navigator * nav, ToneReproductor* eye);
+    void draw_name(const Projector* prj);
+    void draw_circle(const Projector* prj, const Navigator * nav);
+    bool hasTex(void) { return (neb_tex != NULL); }
+    
 	unsigned int NGC_nb;			// NGC catalog number
 	unsigned int IC_nb;				// IC catalog number
 	string englishName;				// English name
@@ -113,10 +113,12 @@ private:
 	static s_texture * tex_circle;	// The symbolic circle texture
 	static s_font* nebula_font;		// Font used for names printing
 	static float hints_brightness;
-	static bool gravity_label;
 
 	static Vec3f label_color, circle_color;
-	static float nebula_scale;
+	static float circleScale;		// Define the sclaing of the hints circle
+	static bool flagBright;			// Define if nebulae must be drawn in bright mode
+	
+	static const float RADIUS_NEB;
 };
 
 #endif // _NEBULA_H_
