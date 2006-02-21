@@ -314,19 +314,18 @@ void SolarSystem::draw(Projector * prj, const Navigator * nav, const ToneReprodu
 	Planet::set_gravity_label_flag(_gravity_label);
 
 	// Set the light parameters taking sun as the light source
-	float tmp[4] = {0,0,0,0};
-	float tmp2[4] = {0.03,0.03,0.03,0.03};
-	float tmp3[4] = {5,5,5,1};
-	float tmp4[4] = {1,1,1,1};
-	glLightfv(GL_LIGHT0,GL_AMBIENT,tmp2);
-	glLightfv(GL_LIGHT0,GL_DIFFUSE,tmp3);
-	glLightfv(GL_LIGHT0,GL_SPECULAR,tmp);
+	const float zero[4] = {0,0,0,0};
+	const float ambient[4] = {0.03,0.03,0.03,0.03};
+	const float diffuse[4] = {1,1,1,1};
+	glLightfv(GL_LIGHT0,GL_AMBIENT, ambient);
+	glLightfv(GL_LIGHT0,GL_DIFFUSE, diffuse);
+	glLightfv(GL_LIGHT0,GL_SPECULAR,zero);
 
-	glMaterialfv(GL_FRONT,GL_AMBIENT ,tmp2);
-	glMaterialfv(GL_FRONT,GL_DIFFUSE ,tmp4);
-	glMaterialfv(GL_FRONT,GL_EMISSION ,tmp);
-	glMaterialfv(GL_FRONT,GL_SHININESS ,tmp);
-	glMaterialfv(GL_FRONT,GL_SPECULAR ,tmp);
+	glMaterialfv(GL_FRONT,GL_AMBIENT,  ambient);
+	glMaterialfv(GL_FRONT,GL_DIFFUSE,  diffuse);
+	glMaterialfv(GL_FRONT,GL_EMISSION, zero);
+	glMaterialfv(GL_FRONT,GL_SHININESS,zero);
+	glMaterialfv(GL_FRONT,GL_SPECULAR, zero);
 
 	// Light pos in zero (sun)
 	nav->switch_to_heliocentric();
