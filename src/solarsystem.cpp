@@ -31,7 +31,7 @@ using namespace std;
 
 #include "draw.h"
 
-SolarSystem::SolarSystem() : sun(NULL), moon(NULL), earth(NULL), tex_earth_shadow(NULL)
+SolarSystem::SolarSystem() : sun(NULL), moon(NULL), earth(NULL), moonScale(1.), tex_earth_shadow(NULL)
 {}
 
 void SolarSystem::setFont(float font_size, const string& font_name)
@@ -309,10 +309,8 @@ void SolarSystem::computeTransMatrices(double date)
 
 // Draw all the elements of the solar system
 // We are supposed to be in heliocentric coordinate
-void SolarSystem::draw(Projector * prj, const Navigator * nav, const ToneReproductor* eye, bool _gravity_label, bool flag_point)
+void SolarSystem::draw(Projector * prj, const Navigator * nav, const ToneReproductor* eye, bool flag_point)
 {
-	Planet::set_gravity_label_flag(_gravity_label);
-
 	// Set the light parameters taking sun as the light source
 	const float zero[4] = {0,0,0,0};
 	const float ambient[4] = {0.03,0.03,0.03,0.03};

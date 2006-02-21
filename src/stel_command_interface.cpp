@@ -114,12 +114,10 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
     else if(args["constellation_art_fade_duration"]!="") stcore->setConstellationArtFadeDuration(str_to_double(args["constellation_art_fade_duration"]));
     else if(args["constellation_art_intensity"]!="") stcore->setConstellationArtIntensity(str_to_double(args["constellation_art_intensity"]));
     else if(args["landscape_name"]!="") stcore->setLandscape(args["landscape_name"]);
-    else if(args["max_mag_nebula_name"]!="") stcore->MaxMagNebulaName = str_to_double(args["max_mag_nebula_name"]);
+    else if(args["max_mag_nebula_name"]!="") stcore->setNebulaMaxMagHints(str_to_double(args["max_mag_nebula_name"]));
     else if(args["max_mag_star_name"]!="") stcore->setMaxMagStarName(str_to_double(args["max_mag_star_name"]));
     else if(args["moon_scale"]!="") {
-      stcore->MoonScale = str_to_double(args["moon_scale"]);
-      if(stcore->MoonScale<0) stcore->MoonScale=1;  // negative numbers reverse drawing!
-      if (stcore->FlagMoonScaled) stcore->ssystem->getMoon()->set_sphere_scale(stcore->MoonScale);
+      stcore->setMoonScale(str_to_double(args["moon_scale"]));
     }
     else if(args["sky_culture"]!="") status = stcore->setSkyCulture(args["sky_culture"]);
 //    else if(args["sky_locale"]!="") stcore->set_sky_locale(args["sky_locale"]); // Tony NOT SURE
@@ -133,7 +131,7 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 	else if(args["nebula_scale"]!="")
 	{
 		float scale = str_to_double(args["nebula_scale"]);
-		stcore->NebulaScale = scale;
+		stcore->setNebulaCircleScale(scale);
 	} 
 	else if(args["star_twinkle_amount"]!="") stcore->setStarTwinkleAmount(str_to_double(args["star_twinkle_amount"]));
     else if(args["time_zone"]!="") stcore->observatory->set_custom_tz_name(args["time_zone"]);
@@ -676,7 +674,10 @@ int StelCommandInterface::set_flag(string name, string value, bool &newval, bool
 			else if(name=="enable_tui_menu") newval = (stcore->FlagEnableTuiMenu = !stcore->FlagEnableTuiMenu);
 			else if(name=="show_gravity_ui") newval = (stcore->FlagShowGravityUi = !stcore->FlagShowGravityUi);
 			else if(name=="utc_time") newval = (stcore->FlagUTC_Time = !stcore->FlagUTC_Time);
-			else if(name=="gravity_labels") newval = (stcore->FlagGravityLabels = !stcore->FlagGravityLabels);
+			else if(name=="gravity_labels") {
+				newval = !stcore->getFlagGravityLabels();
+				stcore->setFlagGravityLabels(newval);
+				}
 			else status = 0;  // no match here, anyway
 
 		} else status = 0;
@@ -758,9 +759,8 @@ int StelCommandInterface::set_flag(string name, string value, bool &newval, bool
 			stcore->cardinals_points->setFlagShow(newval);
 		}
 		else if(name=="moon_scaled") {
-			newval = (stcore->FlagMoonScaled = !stcore->FlagMoonScaled);
-			if (newval)	stcore->ssystem->getMoon()->set_sphere_scale(stcore->MoonScale);
-			else stcore->ssystem->getMoon()->set_sphere_scale(1.);
+			newval = !stcore->getFlagMoonScaled();
+			stcore->setFlagMoonScaled(newval);
 		}
 		else if(name=="landscape") {
 			newval = !stcore->getFlagLandscape();
@@ -797,17 +797,14 @@ int StelCommandInterface::set_flag(string name, string value, bool &newval, bool
 			if(newval) stcore->setFlagNebula(true);  // make sure visible
 			stcore->setFlagNebulaHints(newval);
 		}
-        else if(name=="nebula_long_names") {  // Tony - added long names
-			newval = !stcore->FlagNebulaLongName;
-			if(newval) stcore->setFlagNebula(true);  // make sure visible
-			stcore->setFlagNebulaHints(newval);
-			stcore->FlagNebulaLongName = newval;
-		}
 		else if(name=="milky_way") {
 			newval = !stcore->getFlagMilkyWay();
 			stcore->setFlagMilkyWay(newval);
 		}
-		else if(name=="bright_nebulae") newval = (stcore->FlagBrightNebulae = !stcore->FlagBrightNebulae);
+		else if(name=="bright_nebulae") {
+			newval = !stcore->getFlagNebulaBright();
+			stcore->setFlagNebulaBright(newval);
+			}
 		else if(name=="object_trails")
 		{
 		newval = !stcore->getFlagPlanetsTrails();
@@ -851,7 +848,7 @@ int StelCommandInterface::set_flag(string name, string value, bool &newval, bool
 			else if(name=="enable_tui_menu") stcore->FlagEnableTuiMenu = newval;
 			else if(name=="show_gravity_ui") stcore->FlagShowGravityUi = newval;
 			else if(name=="utc_time") stcore->FlagUTC_Time = newval;
-			else if(name=="gravity_labels") stcore->FlagGravityLabels = newval;
+			else if(name=="gravity_labels") stcore->setFlagGravityLabels(newval);
 			else status = 0;
 		
 		} else status = 0;
@@ -889,11 +886,7 @@ int StelCommandInterface::set_flag(string name, string value, bool &newval, bool
 		else if(name=="ecliptic_line") stcore->setFlagEclipticLine(newval);
 		else if(name=="meridian_line") stcore->setFlagMeridianLine(newval);
 		else if(name=="cardinal_points") stcore->cardinals_points->setFlagShow(newval);
-		else if(name=="moon_scaled") {
-			if((stcore->FlagMoonScaled = newval)) 
-				stcore->ssystem->getMoon()->set_sphere_scale(stcore->MoonScale);
-			else stcore->ssystem->getMoon()->set_sphere_scale(1.);
-		}
+		else if(name=="moon_scaled") stcore->setFlagMoonScaled(newval);
 		else if(name=="landscape") stcore->setFlagLandscape(newval);
 		else if(name=="stars") stcore->setFlagStars(newval);
 		else if(name=="star_names") stcore->setFlagStarName(newval);
@@ -911,13 +904,8 @@ int StelCommandInterface::set_flag(string name, string value, bool &newval, bool
 			stcore->setFlagNebula(true);  // make sure visible
 			stcore->setFlagNebulaHints(newval);
 		}
-		else if(name=="nebula_long_names") {         //Tony - added long names
-			stcore->setFlagNebula(true);  // make sure visible
-			stcore->setFlagNebulaHints(newval); // make sure visible
-			stcore->FlagNebulaLongName = newval;
-		}
 		else if(name=="milky_way") stcore->setFlagMilkyWay(newval);
-		else if(name=="bright_nebulae") stcore->FlagBrightNebulae = newval;
+		else if(name=="bright_nebulae") stcore->setFlagNebulaBright(newval);
 		else if(name=="object_trails") stcore->setFlagPlanetsTrails(newval);
 		else if(name=="track_object") {
 			if(newval && stcore->selected_object) {

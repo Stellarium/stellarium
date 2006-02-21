@@ -38,7 +38,7 @@ public:
 	
 	// Draw all the elements of the solar system
     void draw(Projector * du, const Navigator * nav, 
-			  const ToneReproductor* eye, bool _gravity_label, 
+			  const ToneReproductor* eye, 
 			  bool flag_point);
 	
 	// Load the bodies data from a file
@@ -103,6 +103,14 @@ public:
 	void setScale(float scale) {Planet::setScale(scale);}
 	float getScale(void) const {return Planet::getScale();};
 	
+	//! Set/Get if Moon display is scaled
+	void setFlagMoonScale(bool b) {if(!b) getMoon()->set_sphere_scale(1); else getMoon()->set_sphere_scale(moonScale);}
+	bool getFlagMoonScale(void) const {return (getMoon()->get_sphere_scale()-1.<0.0000000001);}	
+	
+	//! Set/Get Moon display scaling factor 
+	void setMoonScale(float f) {moonScale = f;}
+	float getMoonScale(void) const {return moonScale;}		
+	
 	//! Get list of all the translated planets name
 	vector<wstring> getNamesI18(void);
 	
@@ -125,6 +133,8 @@ private:
 
 	// solar system related settings
 	float object_scale;  // should be kept synchronized with star scale...
+
+	float moonScale;	// Moon scale value
 
 	s_font* planet_name_font;
 	vector<Planet*> system_planets;		// Vector containing all the bodies of the system

@@ -39,13 +39,14 @@ public:
 	bool read(float font_size, const string& font_name, const string& catNGC, const string& catNGCnames, const string& catTextures, LoadingBar& lb);
 	
 	// Draw all the Nebulas
-	void draw(Projector *prj, const Navigator *nav, ToneReproductor *eye, float max_mag_name, bool bright_nebulae); 
+	void draw(Projector *prj, const Navigator *nav, ToneReproductor *eye); 
 	void update(int delta_time) {hintsFader.update(delta_time); flagShow.update(delta_time);}
 	
 	StelObject *search(const string& name);  // search by name M83, NGC 1123, IC 1234
 	StelObject *search(Vec3f Pos);    // Search the Nebulae by position
 	
-	void set_nebula_scale(float scale) {Nebula::set_nebula_scale(scale);} 	
+	void setNebulaCircleScale(float scale) {Nebula::circleScale = scale;} 	
+	float getNebulaCircleScale(void) {return Nebula::circleScale;} 
 	
 	void setHintsFadeDuration(float duration) {hintsFader.set_duration((int) (duration * 1000.f));}
 	
@@ -65,6 +66,16 @@ public:
 	//! The translation is done using gettext with translated strings defined in translations.h
 	void translateNames(Translator& trans);
 	
+	//! Set flag for displaying Nebulae as bright
+	void setFlagBright(bool b) {Nebula::flagBright = b;}
+	//! Get flag for displaying Nebulae as bright
+	bool getFlagBright(void) const {return Nebula::flagBright;}	
+	
+	//! Set maximum magnitude at which nebulae hints are displayed
+	void setMaxMagHints(float f) {maxMagHints = f;}
+	//! Get maximum magnitude at which nebulae hints are displayed
+	float getMaxMagHints(void) {return maxMagHints;}
+	
 private:
 	StelObject *searchNGC(unsigned int NGC);
 	StelObject *searchIC(unsigned int NGC);
@@ -76,6 +87,8 @@ private:
 	vector<Nebula*> neb_array;	// The nebulas list
 	LinearFader hintsFader;
 	LinearFader flagShow;
+	
+	float maxMagHints;		// Define maximum magnitude at which nebulae hints are displayed
 };
 
 #endif // _NEBULA_MGR_H_

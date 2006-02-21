@@ -368,7 +368,7 @@ void StelUI::tui_update_widgets(void)
 	tui_effect_object_scale->setValue(core->getStarScale());
 	tui_effect_milkyway_intensity->setValue(core->milky_way->get_intensity());
 	tui_effect_cursor_timeout->setValue(core->MouseCursorTimeout);
-	tui_effect_nebulae_label_magnitude->setValue(core->MaxMagNebulaName);
+	tui_effect_nebulae_label_magnitude->setValue(core->getNebulaMaxMagHints());
 
 
 	// 6. Scripts
