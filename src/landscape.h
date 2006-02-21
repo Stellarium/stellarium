@@ -37,11 +37,12 @@ public:
 	enum LANDSCAPE_TYPE
 	{
 		OLD_STYLE,
-		FISHEYE
+		FISHEYE,
+		SPHERICAL
 	};
 
 	Landscape(float _radius = 2.);
-    virtual ~Landscape();
+	virtual ~Landscape();
 	virtual void load(const string& file_name, const string& section_name) = 0;
 	void set_parameters(const Vec3f& sun_pos);
 	void set_sky_brightness(float b) {sky_brightness = b;}
@@ -111,7 +112,22 @@ class LandscapeFisheye : public Landscape
 {
 public:
 	LandscapeFisheye(float _radius = 1.);
-    virtual ~LandscapeFisheye();
+	virtual ~LandscapeFisheye();
+	virtual void load(const string& fileName, const string& section_name);
+	virtual void draw(ToneReproductor * eye, const Projector* prj, const Navigator* nav);
+	void create(const string _name, bool _fullpath, const string _maptex, double _texturefov);
+private:
+
+	s_texture* map_tex;
+	float tex_fov;
+};
+
+
+class LandscapeSpherical : public Landscape
+{
+public:
+	LandscapeSpherical(float _radius = 1.);
+	virtual ~LandscapeSpherical();
 	virtual void load(const string& fileName, const string& section_name);
 	virtual void draw(ToneReproductor * eye, const Projector* prj, const Navigator* nav);
 	void create(const string _name, bool _fullpath, const string _maptex, double _texturefov);
