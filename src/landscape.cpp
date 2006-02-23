@@ -65,7 +65,7 @@ Landscape* Landscape::create_from_hash(stringHash_t param)
 		return ldscp;
 	} else if (param["type"]=="spherical") {
 		LandscapeSpherical* ldscp = new LandscapeSpherical();
-		ldscp->create(param["name"], 1, param["path"] + param["maptex"], str_to_double(param["texturefov"]));
+		ldscp->create(param["name"], 1, param["path"] + param["maptex"]);
 		return ldscp;
 	} else {   //	if (s=="fisheye")
 		LandscapeFisheye* ldscp = new LandscapeFisheye();
@@ -445,19 +445,18 @@ void LandscapeSpherical::load(const string& landscape_file, const string& sectio
 	  return;
 	}
 
-	create(name, 0, pd.get_str(section_name, "maptex"), pd.get_double(section_name, "texturefov", 360));
+	create(name, 0, pd.get_str(section_name, "maptex"));
 
 }
 
 
 // create a spherical landscape from basic parameters (no ini file needed)
-void LandscapeSpherical::create(const string _name, bool _fullpath, const string _maptex, double _texturefov)
+void LandscapeSpherical::create(const string _name, bool _fullpath, const string _maptex)
 {
 	//	cout << _name << " " << _fullpath << " " << _maptex << " " << _texturefov << "\n";
 	valid_landscape = 1;  // assume ok...
 	name = _name;
 	map_tex = new s_texture(_fullpath,_maptex,TEX_LOAD_TYPE_PNG_ALPHA);
-	tex_fov = _texturefov*M_PI/180.;
 }
 
 
@@ -476,9 +475,8 @@ void LandscapeSpherical::draw(ToneReproductor * eye, const Projector* prj, const
 	glEnable(GL_BLEND);
 	glBindTexture(GL_TEXTURE_2D, map_tex->getID());
 
-	// TODO: use tex_fov if want to support less than 180 degree vertical panoramas
-
 	// TODO: verify that this works correctly for custom projections
+	// seam is at East
 	prj->sSphere(radius,40,20, nav->get_local_to_eye_mat(), 1);
 
 	glDisable(GL_CULL_FACE);
