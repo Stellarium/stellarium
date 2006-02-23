@@ -93,13 +93,13 @@ void Observator::load(const string& file, const string& section)
 		if (name[i]=='_') name[i]=' ';
 	}
 
-    planet = ssystem.searchByEnglishName(conf.get_str(section, "home_planet"));
+    planet = ssystem.searchByEnglishName(conf.get_str(section, "home_planet", "Earth"));
     if (planet == 0) {
       planet = ssystem.getEarth();
     }
-    printf("(home_planet should be: \"%s\" is: \"%s\") ",
-           conf.get_str(section, "home_planet").c_str(),
-           planet->getEnglishName().c_str());
+    //    printf("(home_planet should be: \"%s\" is: \"%s\") ",
+    //       conf.get_str(section, "home_planet").c_str(),
+    //       planet->getEnglishName().c_str());
 	latitude  = get_dec_angle(conf.get_str(section, "latitude"));
 	longitude = get_dec_angle(conf.get_str(section, "longitude"));
 	altitude = conf.get_int(section, "altitude");
