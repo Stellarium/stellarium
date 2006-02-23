@@ -108,6 +108,8 @@ void StelCore::init(void)
 	BaseCFontSize = 12.5;
 	BaseCFontName = getDataDir() + "DejaVuSansMono-Roman.ttf";
 
+	projection->set_fov(InitFov);
+
 	// Init the solar system first
 	ssystem->load(getDataDir() + "ssystem.ini");
 	ssystem->setLabelColor(PlanetNamesColor[draw_mode]);
