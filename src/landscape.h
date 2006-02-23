@@ -130,11 +130,10 @@ public:
 	virtual ~LandscapeSpherical();
 	virtual void load(const string& fileName, const string& section_name);
 	virtual void draw(ToneReproductor * eye, const Projector* prj, const Navigator* nav);
-	void create(const string _name, bool _fullpath, const string _maptex, double _texturefov);
+	void create(const string _name, bool _fullpath, const string _maptex);
 private:
 
 	s_texture* map_tex;
-	float tex_fov;
 };
 
 #endif // _LANDSCAPE_H_
