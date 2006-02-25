@@ -15,7 +15,9 @@ Changed font rendering system with new TTF compliant font adapted from the glGoo
 Integrated the use of wide characters for all translatable string and UI.
 Added a Translator class managing all translation in an Object Oriented way over gettext.
 Included many increadible patches from Johannes Gajdosik : Reimplemented faster and more accurate solutions for all planet computation (VSOP87A), moon (ELP82B), added Saturnian satellites (TASS17), added Uranus satellites (GUST86), Mars satellites (ESAPHODEI).
-	
+Planet twilight zones are darker than bright zones of a planet (as it was already in 0.5.1)
+new projection types: stereographic (quite ok), spheric_mirror (just early alpha)
+
 0.7.1 [2005-09-17]
 Fixed location saving bug.
 Fixed date before 1970 crash on windows
