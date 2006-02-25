@@ -34,9 +34,11 @@ class Projector
 public:
 	enum PROJECTOR_TYPE
 	{
-		PERSPECTIVE_PROJECTOR=0,
-		FISHEYE_PROJECTOR=1,
-		CYLINDER_PROJECTOR=2
+		PERSPECTIVE_PROJECTOR    = 0,
+		FISHEYE_PROJECTOR        = 1,
+		CYLINDER_PROJECTOR       = 2,
+        STEREOGRAPHIC_PROJECTOR  = 3,
+        SPHERIC_MIRROR_PROJECTOR = 4
 	};
 
 	enum VIEWPORT_TYPE
@@ -46,8 +48,12 @@ public:
 		DISK=3,
 		UNKNOWN=4
 	};
-
-	Projector(int _screenW = 800, int _screenH = 600, double _fov = 60.);
+    static const char *typeToString(PROJECTOR_TYPE type);
+    static PROJECTOR_TYPE stringToType(const string &s);
+    static Projector *create(PROJECTOR_TYPE type,
+                             int _screenW = 800,
+                             int _screenH = 600,
+                             double _fov = 60.);
 	virtual ~Projector();
 
 	virtual PROJECTOR_TYPE getType(void) const {return PERSPECTIVE_PROJECTOR;}
@@ -58,11 +64,14 @@ public:
 	int getViewportVerticalOffset(void) const {return hoffset;}
 	int getViewportHorizontalOffset(void) const {return hoffset;}
 	
-	virtual void set_fov(double f);
+///	virtual
+    void set_fov(double f);
 	double get_fov(void) const {return fov;}
-	virtual double get_visible_fov(void) const {return fov;}
-	virtual void change_fov(double deltaFov);
-	void set_minmaxfov(double min, double max) {min_fov = min; max_fov = max; set_fov(fov);}
+///	virtual
+    double get_visible_fov(void) const {return fov;}
+///	virtual
+    void change_fov(double deltaFov);
+///	void set_minmaxfov(double min, double max) {min_fov = min; max_fov = max; set_fov(fov);}
 
 	// Update auto_zoom if activated
 	void update_auto_zoom(int delta_time);
@@ -155,10 +164,12 @@ public:
 		gluProject(v[0],v[1],v[2],mat,mat_projection,vec_viewport,&win[0],&win[1],&win[2]);
 		return (win[2]<1.);
 	}
-	virtual bool project_custom_check(const Vec3f& v, Vec3d& win, const Mat4d& mat) const
+///	virtual
+    bool project_custom_check(const Vec3f& v, Vec3d& win, const Mat4d& mat) const
 		{return (project_custom(v, win, mat) && check_in_viewport(win));}
 	// project two points and make sure both are in front of viewer and that at least one is on screen
-	virtual inline bool project_custom_line_check(const Vec3f& v1, Vec3d& win1, 
+///	virtual inline
+    bool project_custom_line_check(const Vec3f& v1, Vec3d& win1, 
 					       const Vec3f& v2, Vec3d& win2, const Mat4d& mat) const
 		{return project_custom(v1, win1, mat) && project_custom(v2, win2, mat) && 
 		   (check_in_viewport(win1) || check_in_viewport(win2));}
@@ -205,7 +216,7 @@ public:
 
 	void update_openGL(void) const;
 
-	const Vec3d convert_pos(const Vec3d& v, const Mat4d& mat) const {return v;}
+///	const Vec3d convert_pos(const Vec3d& v, const Mat4d& mat) const {return v;}
 
 	//void print_gravity(const s_font* font, float x, float y, const string& str,
 	//	float xshift = 0, float yshift = 0) const;
@@ -222,6 +233,7 @@ public:
 	bool getFlagGravityLabels() const { return gravityLabels; }
 
 protected:
+	Projector(int _screenW = 800, int _screenH = 600, double _fov = 60.);
 
 	// Struct used to store data for auto mov
 	typedef struct
@@ -257,7 +269,9 @@ protected:
 	
 	// transformation from screen 2D point x,y to object
 	// m is here the already inverted full tranfo matrix
-	virtual inline void unproject(double x, double y, const Mat4d& m, Vec3d& v) const
+	virtual
+///     inline
+    void unproject(double x, double y, const Mat4d& m, Vec3d& v) const
 	{
 		v.set(	(x - vec_viewport[0]) * 2. / vec_viewport[2] - 1.0,
 				(y - vec_viewport[1]) * 2. / vec_viewport[3] - 1.0,
@@ -271,8 +285,9 @@ protected:
 	int hoffset, voffset;                           // for tweaking viewport centering
 
 	bool gravityLabels;            // should label text align with the horizon?
-	
 
+    double view_scaling_factor;
+      // 1/fov*180./M_PI*MY_MIN(vec_viewport[2],vec_viewport[3]
 };
 
 #endif // _PROJECTOR_H_

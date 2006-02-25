@@ -20,51 +20,16 @@
 #ifndef _CYLINDER_PROJECTOR_H_
 #define _CYLINDER_PROJECTOR_H_
 
-#include "projector.h"
+#include "custom_projector.h"
 
-// Class which handle projection modes and projection matrix
-// Overide some function usually handled by glu
-class CylinderProjector : public Projector
-{
+class CylinderProjector : public CustomProjector {
 public:
-    CylinderProjector(int _screenW = 800, int _screenH = 600, double _fov = 175.);
-
-	virtual PROJECTOR_TYPE getType(void) const {return FISHEYE_PROJECTOR;}
-
-	virtual void setViewport(int x, int y, int w, int h);
-
-	// Same function but using a custom modelview matrix
-	virtual bool project_custom(const Vec3d& v, Vec3d& win, const Mat4d& mat) const;
-	virtual void unproject_custom(double x, double y, Vec3d& v, const Mat4d& mat) const;
-
-	// Reimplementation of gluSphere : glu is overrided for non standard projection
-	void sSphere(GLdouble radius, GLint slices, GLint stacks,
-		const Mat4d& mat, int orient_inside = 0) const;
-
-	// Reimplementation of gluCylinder : glu is overrided for non standard projection
-	virtual void sCylinder(GLdouble radius, GLdouble height, GLint slices, GLint stacks,
-		const Mat4d& mat, int orient_inside = 0) const;
-
-	void update_openGL(void) const;
-
-	// Override glVertex3f and glVertex3d
-	void sVertex3(double x, double y, double z, const Mat4d& mat) const;
-
-	const Vec3d convert_pos(const Vec3d& v, const Mat4d& mat) const;
-protected:
-
-	Vec3d center;
-
-	// Init the viewing matrix from the fov, the clipping planes and screen ratio
-	// The function is a reimplementation of gluPerspective
-	virtual void init_project_matrix(void);
-
-	// transformation from screen 2D point x,y to object
-	// m is here the already inverted full tranfo matrix
-	virtual void unproject(double x, double y, const Mat4d& m, Vec3d& v) const;
-	void unproject(const Vec3d& u, const Mat4d& m, Vec3d& v) const;
-
+  CylinderProjector(int _screenW,int _screenH,double _fov);
+private:
+  PROJECTOR_TYPE getType(void) const {return CYLINDER_PROJECTOR;}
+  bool project_custom(const Vec3d &v, Vec3d &win, const Mat4d &mat) const;
+  void unproject(double x, double y, const Mat4d& m, Vec3d& v) const;
 };
 
 
-#endif // _FISHEYE_PROJECTOR_H_
+#endif
