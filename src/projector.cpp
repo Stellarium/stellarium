@@ -20,10 +20,71 @@
 #include <iostream>
 #include <cstdio>
 #include "projector.h"
+#include "fisheye_projector.h"
+#include "cylinder_projector.h"
+#include "stereographic_projector.h"
+#include "spheric_mirror_projector.h"
 
+const char *Projector::typeToString(PROJECTOR_TYPE type) {
+  switch (type) {
+    case PERSPECTIVE_PROJECTOR:    return "perspective";
+    case FISHEYE_PROJECTOR:        return "fisheye";
+    case CYLINDER_PROJECTOR:       return "cylinder";
+    case STEREOGRAPHIC_PROJECTOR:  return "stereographic";
+    case SPHERIC_MIRROR_PROJECTOR: return "spheric_mirror";
+  }
+  cerr << "fatal: Projector::typeToString(" << type << ") failed" << endl;
+  exit(1);
+    // just shutup the compiler, this point will never be reached
+  return 0;
+}
 
-Projector::Projector(int _screenW, int _screenH, double _fov) :
-	min_fov(0.001), max_fov(100), zNear(0.1), zFar(10000), flag_auto_zoom(0), hoffset(0), voffset(0), gravityLabels(0)
+Projector::PROJECTOR_TYPE Projector::stringToType(const string &s) {
+  if (s=="perspective")    return PERSPECTIVE_PROJECTOR;
+  if (s=="fisheye")        return FISHEYE_PROJECTOR;
+  if (s=="cylinder")       return CYLINDER_PROJECTOR;
+  if (s=="stereographic")  return STEREOGRAPHIC_PROJECTOR;
+  if (s=="spheric_mirror") return SPHERIC_MIRROR_PROJECTOR;
+  cerr << "fatal: Projector::stringToType(" << s << ") failed" << endl;
+  exit(1);
+    // just shutup the compiler, this point will never be reached
+  return PERSPECTIVE_PROJECTOR;
+}
+
+Projector *Projector::create(PROJECTOR_TYPE type,
+                             int _screenW,
+                             int _screenH,
+                             double _fov) {
+  Projector *rval = 0;
+  switch (type) {
+    case PERSPECTIVE_PROJECTOR:
+      rval = new Projector(_screenW,_screenH,_fov);
+      break;
+    case FISHEYE_PROJECTOR:
+      rval = new FisheyeProjector(_screenW,_screenH,_fov);
+      break;
+    case CYLINDER_PROJECTOR:
+      rval = new CylinderProjector(_screenW,_screenH,_fov);
+      break;
+    case STEREOGRAPHIC_PROJECTOR:
+      rval = new StereographicProjector(_screenW,_screenH,_fov);
+      break;
+    case SPHERIC_MIRROR_PROJECTOR:
+      rval = new SphericMirrorProjector(_screenW,_screenH,_fov);
+      break;
+  }
+  if (rval == 0) {
+    cerr << "fatal: Projector::create(" << type << ") failed" << endl;
+    exit(1);
+  }
+    // just shutup the compiler, this point will never be reached
+  return rval;
+}
+
+Projector::Projector(int _screenW, int _screenH, double _fov)
+          :min_fov(0.0001), max_fov(100),
+           zNear(0.1), zFar(10000),
+           flag_auto_zoom(0), hoffset(0), voffset(0), gravityLabels(0)
 {
 	fov = _fov;
 	if (fov>max_fov) fov = max_fov;
@@ -44,6 +105,7 @@ void Projector::set_fov(double f)
 	if (f>max_fov) fov = max_fov;
 	if (f<min_fov) fov = min_fov;
 	init_project_matrix();
+    view_scaling_factor = 1.0/fov*180./M_PI*MY_MIN(vec_viewport[2],vec_viewport[3]);
 }
 
 void Projector::set_square_viewport(void)
@@ -101,6 +163,7 @@ void Projector::setViewport(int x, int y, int w, int h)
 	vec_viewport[1] = y;
 	vec_viewport[2] = w;
 	vec_viewport[3] = h;
+    view_scaling_factor = 1.0/fov*180./M_PI*MY_MIN(vec_viewport[2],vec_viewport[3]);
 	glViewport(x, y, w, h);
 	ratio = (float)h/w;
 	init_project_matrix();
