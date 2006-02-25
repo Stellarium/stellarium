@@ -24,8 +24,6 @@
 #include "navigator.h"
 #include "observator.h"
 #include "projector.h"
-#include "fisheye_projector.h"
-#include "cylinder_projector.h"
 #include "stel_object.h"
 #include "hip_star_mgr.h"
 #include "constellation_mgr.h"
