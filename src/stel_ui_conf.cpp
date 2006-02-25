@@ -1013,13 +1013,8 @@ void StelUI::setVideoOption(void)
 	InitParser conf;
 	conf.load(core->getConfigDir() + core->config_file);
 
-	switch (core->getProjectionType())
-	{
-		case Projector::FISHEYE_PROJECTOR : conf.set_str("projection:type", "fisheye"); break;
-		case Projector::PERSPECTIVE_PROJECTOR :
-		default :
-			conf.set_str("projection:type", "perspective"); break;
-	}
+    conf.set_str("projection:type",
+                 Projector::typeToString(core->getProjectionType()));
 
 	switch (core->getViewportType())
 	{

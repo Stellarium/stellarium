@@ -37,7 +37,8 @@ StelCore::StelCore(const string& CDIR, const string& LDIR, const string& DATA_RO
 
 	SelectedScript = SelectedScriptDirectory = "";
 
-	projection = new Projector(800, 600, 60);
+	projection = Projector::create(Projector::PERSPECTIVE_PROJECTOR,
+                                   800, 600, 60);
 	tone_converter = new ToneReproductor();
 	atmosphere = new Atmosphere();
 	hip_stars = new HipStarMgr();
@@ -801,22 +802,10 @@ wstring StelCore::get_cursor_pos(int x, int y)
 void StelCore::setProjectionType(Projector::PROJECTOR_TYPE pType)
 {
 	if (getProjectionType()==pType) return;
-	Projector* ptemp;
-
-	switch (pType)
-	{
-	case Projector::PERSPECTIVE_PROJECTOR :
-		ptemp = new Projector(projection->get_screenW(), projection->get_screenH(), projection->get_fov());
-		break;
-	case Projector::FISHEYE_PROJECTOR :
-		ptemp = new FisheyeProjector(projection->get_screenW(), projection->get_screenH(), projection->get_fov());
-		break;
-	case Projector::CYLINDER_PROJECTOR :
-		ptemp = new CylinderProjector(projection->get_screenW(), projection->get_screenH(), projection->get_fov());
-		break;
-	default :
-		assert(0);	// This should never happen
-	}
+	Projector *const ptemp = Projector::create(pType,
+                                               projection->get_screenW(),
+                                               projection->get_screenH(),
+                                               projection->get_fov());
 	ptemp->setViewportType(projection->getViewportType());
 	ptemp->setViewportHorizontalOffset(projection->getViewportHorizontalOffset());
 	ptemp->setViewportVerticalOffset(projection->getViewportVerticalOffset());
@@ -901,21 +890,7 @@ void StelCore::loadConfigFrom(const string& confFile)
 
 	// Projector
 	string tmpstr = conf.get_str("projection:type");
-	Projector::PROJECTOR_TYPE projType;
-	if (tmpstr=="perspective") projType = Projector::PERSPECTIVE_PROJECTOR;
-	else
-	{
-		if (tmpstr=="fisheye") projType = Projector::FISHEYE_PROJECTOR;
-		else
-		{
-			if (tmpstr=="cylinder") projType = Projector::CYLINDER_PROJECTOR;
-			else
-			{
-				cerr << "ERROR : Unknown projector type : " << tmpstr << endl;
-				exit(-1);
-			}
-		}
-	}
+	const Projector::PROJECTOR_TYPE projType = Projector::stringToType(tmpstr);
 	setProjectionType(projType);
 
 	tmpstr = conf.get_str("projection:viewport");
@@ -1129,16 +1104,10 @@ void StelCore::saveConfigTo(const string& confFile)
 	conf.set_double ("video:maximum_fps", maxfps);
 
 	// Projector
-	string tmpstr;
-	switch (getProjectionType())
-	{
-	case Projector::PERSPECTIVE_PROJECTOR : tmpstr="perspective";	break;
-	case Projector::FISHEYE_PROJECTOR : tmpstr="fisheye";		break;
-	case Projector::CYLINDER_PROJECTOR : tmpstr="cylinder";		break;
-	default : tmpstr="perspective";
-	}
-	conf.set_str	("projection:type",tmpstr);
+	conf.set_str("projection:type",
+                 Projector::typeToString(getProjectionType()));
 
+	string tmpstr;
 	switch (getViewportType())
 	{
 	case Projector::MAXIMIZED : tmpstr="maximized";	break;
