@@ -42,15 +42,20 @@ Planet::Planet(Planet *parent,
                int _flagHalo,
                int _flag_lighting,
                double _radius,
+               double _oblateness,
                Vec3f _color,
                float _albedo,
                const string& tex_map_name,
                const string& tex_halo_name,
                pos_func_type _coord_func) :
-		englishName(_englishName), flagHalo(_flagHalo), flag_lighting(_flag_lighting), radius(_radius), color(_color),
-		albedo(_albedo), axis_rotation(0.),	tex_map(NULL), tex_halo(NULL), tex_big_halo(NULL), rings(NULL),
-		sphere_scale(1.f), lastJD(J2000), last_orbitJD(0), deltaJD(JD_SECOND), orbit_cached(0),
-		coord_func(_coord_func), parent(parent)
+		englishName(_englishName), flagHalo(_flagHalo),
+        flag_lighting(_flag_lighting),
+        radius(_radius), oblateness(_oblateness),
+        color(_color), albedo(_albedo), axis_rotation(0.),
+        tex_map(NULL), tex_halo(NULL), tex_big_halo(NULL), rings(NULL),
+        sphere_scale(1.f),
+        lastJD(J2000), last_orbitJD(0), deltaJD(JD_SECOND), orbit_cached(0),
+        coord_func(_coord_func), parent(parent)
 {
 	if (parent) parent->satellites.push_back(this);
 	ecliptic_pos=Vec3d(0.,0.,0.);
@@ -542,7 +547,7 @@ void Planet::draw_sphere(const Projector* prj, const Mat4d& mat, float screen_sz
 
     // Rotate and add an extra half rotation because of the convention in all
     // Planet texture maps where zero deg long. is in the middle of the texture.
-    prj->sSphere(radius*sphere_scale, nb_facet, nb_facet,
+    prj->sSphere(radius*sphere_scale, oblateness, nb_facet, nb_facet,
                  mat * Mat4d::zrotation(M_PI/180*(axis_rotation + 180.)));
 
 	glDisable(GL_CULL_FACE);
