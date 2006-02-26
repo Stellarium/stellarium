@@ -477,7 +477,7 @@ void LandscapeSpherical::draw(ToneReproductor * eye, const Projector* prj, const
 
 	// TODO: verify that this works correctly for custom projections
 	// seam is at East
-	prj->sSphere(radius,40,20, nav->get_local_to_eye_mat(), 1);
+	prj->sSphere(radius,1.0,40,20, nav->get_local_to_eye_mat(), 1);
 
 	glDisable(GL_CULL_FACE);
 }
