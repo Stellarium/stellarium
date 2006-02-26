@@ -75,22 +75,24 @@ void CustomProjector::sVertex3(double x, double y, double z, const Mat4d& mat) c
 	glVertex3dv(v);
 }
 
-void CustomProjector::sSphere(GLdouble radius, GLint slices, GLint stacks, const Mat4d& mat, int orient_inside) const
+void CustomProjector::sSphere(GLdouble radius, GLdouble oblateness,
+                              GLint slices, GLint stacks,
+                              const Mat4d& mat, int orient_inside) const
 {
 	glPushMatrix();
 	glLoadMatrixd(mat);
 
+      // It is really good for performance to have Vec4f,Vec3f objects
+      // static rather than on the stack. But why?
+      // Is the constructor/destructor so expensive?
 	static Vec4f lightPos4;
 	static Vec3f lightPos3;
-	static GLboolean isLightOn;
+	GLboolean isLightOn;
 	static Vec3f transNorm;
-	static float c;
+	float c;
 
 	static Vec4f ambientLight;
 	static Vec4f diffuseLight;
-
-	static Vec3d posCenterEye;
-	posCenterEye = mat * Vec3d(0.,0.,0.);
 
 	glGetBooleanv(GL_LIGHTING, &isLightOn);
 
@@ -98,18 +100,17 @@ void CustomProjector::sSphere(GLdouble radius, GLint slices, GLint stacks, const
 	{
 		glGetLightfv(GL_LIGHT0, GL_POSITION, lightPos4);
 		lightPos3 = lightPos4;
-		lightPos3-=posCenterEye;
+		lightPos3 -= mat * Vec3d(0.,0.,0.); // -posCenterEye
 		lightPos3.normalize();
 		glGetLightfv(GL_LIGHT0, GL_AMBIENT, ambientLight);
 		glGetLightfv(GL_LIGHT0, GL_DIFFUSE, diffuseLight);
 		glDisable(GL_LIGHTING);
 	}
 
-	static GLfloat rho, drho, theta, dtheta;
-	static GLfloat x, y, z;
-	static GLfloat s, t, ds, dt;
-	static GLint i, j, imin, imax;
-	static GLfloat nsign;
+	GLfloat x, y, z;
+	GLfloat s, t;
+	GLint i, j;
+	GLfloat nsign;
 
 	if (orient_inside) {
 	  nsign = -1.0;
@@ -119,36 +120,47 @@ void CustomProjector::sSphere(GLdouble radius, GLint slices, GLint stacks, const
 	  t=1.0;
 	}
 
-	drho = M_PI / (GLfloat) stacks;
-	dtheta = 2.0 * M_PI / (GLfloat) slices;
+	const GLfloat drho = M_PI / (GLfloat) stacks;
+    double cos_sin_rho[2*(stacks+1)];
+    double *cos_sin_rho_p = cos_sin_rho;
+    for (i = 0; i <= stacks; i++) {
+      double rho = i * drho;
+      *cos_sin_rho_p++ = cos(rho);
+      *cos_sin_rho_p++ = sin(rho);
+    }
+
+	const GLfloat dtheta = 2.0 * M_PI / (GLfloat) slices;
+    double cos_sin_theta[2*(slices+1)];
+    double *cos_sin_theta_p = cos_sin_theta;
+    for (i = 0; i <= slices; i++) {
+      double theta = (i == slices) ? 0.0 : i * dtheta;
+      *cos_sin_theta_p++ = cos(theta);
+      *cos_sin_theta_p++ = sin(theta);
+    }
 
 	// texturing: s goes from 0.0/0.25/0.5/0.75/1.0 at +y/+x/-y/-x/+y axis
 	// t goes from -1.0/+1.0 at z = -radius/+radius (linear along longitudes)
 	// cannot use triangle fan on texturing (s coord. at top/bottom tip varies)
-	ds = 1.0 / slices;
-	dt = nsign / stacks; // from inside texture is reversed
+	const GLfloat ds = 1.0 / slices;
+	const GLfloat dt = nsign / stacks; // from inside texture is reversed
 
-	imin = 0;
-	imax = stacks;
 
-	// draw intermediate stacks as quad strips
-	for (i = imin; i < imax; i++)
+	// draw intermediate  as quad strips
+	for (i = 0,cos_sin_rho_p = cos_sin_rho; i < stacks;
+         i++,cos_sin_rho_p+=2)
 	{
-		rho = i * drho;
 		glBegin(GL_QUAD_STRIP);
 		s = 0.0;
-		for (j = 0; j <= slices; j++)
+		for (j = 0,cos_sin_theta_p = cos_sin_theta; j <= slices;
+             j++,cos_sin_theta_p+=2)
 		{
-			theta = (j == slices) ? 0.0 : j * dtheta;
-			x = -sin(theta) * sin(rho);
-			y = cos(theta) * sin(rho);
-			z = nsign * cos(rho);
-			//glNormal3f(x * nsign, y * nsign, z * nsign);
+			x = -cos_sin_theta_p[1] * cos_sin_rho_p[1];
+			y = cos_sin_theta_p[0] * cos_sin_rho_p[1];
+			z = nsign * (oblateness * cos_sin_rho_p[0]);
 			glTexCoord2f(s, t);
 			if (isLightOn)
 			{
-				transNorm = mat*Vec3d(x * nsign, y * nsign, z * nsign) - posCenterEye;
-				transNorm.normalize();
+				transNorm = mat.multiplyWithoutTranslation(Vec3d(x * nsign, y * nsign, z * nsign));
 				c = lightPos3.dot(transNorm);
 				if (c<0) c=0;
 				glColor3f(c*diffuseLight[0] + ambientLight[0],
@@ -156,15 +168,13 @@ void CustomProjector::sSphere(GLdouble radius, GLint slices, GLint stacks, const
 					c*diffuseLight[2] + ambientLight[2]);
 			}
 			sVertex3(x * radius, y * radius, z * radius, mat);
-			x = -sin(theta) * sin(rho + drho);
-			y = cos(theta) * sin(rho + drho);
-			z = nsign * cos(rho + drho);
-			//glNormal3f(x * nsign, y * nsign, z * nsign);
+			x = -cos_sin_theta_p[1] * cos_sin_rho_p[3];
+			y = cos_sin_theta_p[0] * cos_sin_rho_p[3];
+			z = nsign * (oblateness * cos_sin_rho_p[2]);
 			glTexCoord2f(s, t - dt);
 			if (isLightOn)
 			{
-				transNorm = mat*Vec3d(x * nsign, y * nsign, z * nsign) - posCenterEye;
-				transNorm.normalize();
+				transNorm = mat.multiplyWithoutTranslation(Vec3d(x * nsign, y * nsign, z * nsign));
 				c = lightPos3.dot(transNorm);
 				if (c<0) c=0;
 				glColor3f(c*diffuseLight[0] + ambientLight[0],
