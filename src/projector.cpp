@@ -331,7 +331,9 @@ void Projector::reset_perspective_projection(void) const
 
 
 // Reimplementation of gluSphere : glu is overrided for non standard projection
-void Projector::sSphere(GLdouble radius, GLint slices, GLint stacks, const Mat4d& mat, int orient_inside) const
+void Projector::sSphere(GLdouble radius, GLdouble oblateness,
+                        GLint slices, GLint stacks,
+                        const Mat4d& mat, int orient_inside) const
 {
 	glPushMatrix();
 	glLoadMatrixd(mat);
