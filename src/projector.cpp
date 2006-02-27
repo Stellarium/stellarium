@@ -331,6 +331,8 @@ void Projector::reset_perspective_projection(void) const
 
 
 // Reimplementation of gluSphere : glu is overrided for non standard projection
+
+/*
 void Projector::sSphere(GLdouble radius, GLdouble oblateness,
                         GLint slices, GLint stacks,
                         const Mat4d& mat, int orient_inside) const
@@ -344,6 +346,86 @@ void Projector::sSphere(GLdouble radius, GLdouble oblateness,
 	gluDeleteQuadric(p);
 	glPopMatrix();
 }
+*/
+
+void Projector::sSphere(GLdouble radius, GLdouble oblateness,
+                        GLint slices, GLint stacks,
+                        const Mat4d& mat, int orient_inside) const {
+  glPushMatrix();
+  glLoadMatrixd(mat);
+
+  if (oblateness == 1.0) { // gluSphere seems to have hardware acceleration
+    GLUquadricObj * p = gluNewQuadric();
+    gluQuadricTexture(p,GL_TRUE);
+    if (orient_inside) gluQuadricOrientation(p, GLU_INSIDE);
+    gluSphere(p, radius, slices, stacks);
+    gluDeleteQuadric(p);
+  } else {
+    GLfloat rho, theta;
+    GLfloat x, y, z;
+    GLfloat s, t, ds, dt;
+    GLint i, j;
+    GLfloat nsign;
+
+    if (orient_inside) nsign = -1.0;
+    else nsign = 1.0;
+
+    const GLfloat drho = M_PI / (GLfloat) stacks;
+    double cos_sin_rho[2*(stacks+1)];
+    double *cos_sin_rho_p = cos_sin_rho;
+    for (i = 0; i <= stacks; i++) {
+      double rho = i * drho;
+      *cos_sin_rho_p++ = cos(rho);
+      *cos_sin_rho_p++ = sin(rho);
+    }
+
+    const GLfloat dtheta = 2.0 * M_PI / (GLfloat) slices;
+    double cos_sin_theta[2*(slices+1)];
+    double *cos_sin_theta_p = cos_sin_theta;
+    for (i = 0; i <= slices; i++) {
+      double theta = (i == slices) ? 0.0 : i * dtheta;
+      *cos_sin_theta_p++ = cos(theta);
+      *cos_sin_theta_p++ = sin(theta);
+    }
+
+    // texturing: s goes from 0.0/0.25/0.5/0.75/1.0 at +y/+x/-y/-x/+y axis
+    // t goes from -1.0/+1.0 at z = -radius/+radius (linear along longitudes)
+    // cannot use triangle fan on texturing (s coord. at top/bottom tip varies)
+    ds = 1.0 / slices;
+    dt = 1.0 / stacks;
+    t = 1.0;            // because loop now runs from 0
+
+    // draw intermediate stacks as quad strips
+    for (i = 0,cos_sin_rho_p = cos_sin_rho; i < stacks;
+         i++,cos_sin_rho_p+=2)
+    {
+        glBegin(GL_QUAD_STRIP);
+        s = 0.0;
+        for (j = 0,cos_sin_theta_p = cos_sin_theta; j <= slices;
+             j++,cos_sin_theta_p+=2)
+        {
+            x = -cos_sin_theta_p[1] * cos_sin_rho_p[1];
+            y = cos_sin_theta_p[0] * cos_sin_rho_p[1];
+            z = nsign * cos_sin_rho_p[0];
+            glNormal3f(x * oblateness * nsign, y * oblateness * nsign, z * nsign);
+            glTexCoord2f(s, t);
+            sVertex3(x * radius, y * radius, oblateness * z * radius, mat);
+            x = -cos_sin_theta_p[1] * cos_sin_rho_p[3];
+            y = cos_sin_theta_p[0] * cos_sin_rho_p[3];
+            z = nsign * cos_sin_rho_p[2];
+            glNormal3f(x * oblateness * nsign, y * oblateness * nsign, z * nsign);
+            glTexCoord2f(s, t - dt);
+            s += ds;
+            sVertex3(x * radius, y * radius, oblateness * z * radius, mat);
+        }
+        glEnd();
+        t -= dt;
+    }
+  }
+
+  glPopMatrix();
+}
+
 
 // Draw a half sphere
 void Projector::sHalfSphere(GLdouble radius, GLint slices, GLint stacks,
