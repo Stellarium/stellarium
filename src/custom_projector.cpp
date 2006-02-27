@@ -79,48 +79,48 @@ void CustomProjector::sSphere(GLdouble radius, GLdouble oblateness,
                               GLint slices, GLint stacks,
                               const Mat4d& mat, int orient_inside) const
 {
-	glPushMatrix();
-	glLoadMatrixd(mat);
+    glPushMatrix();
+    glLoadMatrixd(mat);
 
       // It is really good for performance to have Vec4f,Vec3f objects
       // static rather than on the stack. But why?
       // Is the constructor/destructor so expensive?
-	static Vec4f lightPos4;
-	static Vec3f lightPos3;
-	GLboolean isLightOn;
-	static Vec3f transNorm;
-	float c;
+    static Vec4f lightPos4;
+    static Vec3f lightPos3;
+    GLboolean isLightOn;
+    static Vec3f transNorm;
+    float c;
 
-	static Vec4f ambientLight;
-	static Vec4f diffuseLight;
+    static Vec4f ambientLight;
+    static Vec4f diffuseLight;
 
-	glGetBooleanv(GL_LIGHTING, &isLightOn);
+    glGetBooleanv(GL_LIGHTING, &isLightOn);
 
-	if (isLightOn)
-	{
-		glGetLightfv(GL_LIGHT0, GL_POSITION, lightPos4);
-		lightPos3 = lightPos4;
-		lightPos3 -= mat * Vec3d(0.,0.,0.); // -posCenterEye
-		lightPos3.normalize();
-		glGetLightfv(GL_LIGHT0, GL_AMBIENT, ambientLight);
-		glGetLightfv(GL_LIGHT0, GL_DIFFUSE, diffuseLight);
-		glDisable(GL_LIGHTING);
-	}
+    if (isLightOn)
+    {
+        glGetLightfv(GL_LIGHT0, GL_POSITION, lightPos4);
+        lightPos3 = lightPos4;
+        lightPos3 -= mat * Vec3d(0.,0.,0.); // -posCenterEye
+        lightPos3.normalize();
+        glGetLightfv(GL_LIGHT0, GL_AMBIENT, ambientLight);
+        glGetLightfv(GL_LIGHT0, GL_DIFFUSE, diffuseLight);
+        glDisable(GL_LIGHTING);
+    }
 
-	GLfloat x, y, z;
-	GLfloat s, t;
-	GLint i, j;
-	GLfloat nsign;
+    GLfloat x, y, z;
+    GLfloat s, t;
+    GLint i, j;
+    GLfloat nsign;
 
-	if (orient_inside) {
-	  nsign = -1.0;
-	  t=0.0; // from inside texture is reversed
-	} else {
-	  nsign = 1.0;
-	  t=1.0;
-	}
+    if (orient_inside) {
+      nsign = -1.0;
+      t=0.0; // from inside texture is reversed
+    } else {
+      nsign = 1.0;
+      t=1.0;
+    }
 
-	const GLfloat drho = M_PI / (GLfloat) stacks;
+    const GLfloat drho = M_PI / (GLfloat) stacks;
     double cos_sin_rho[2*(stacks+1)];
     double *cos_sin_rho_p = cos_sin_rho;
     for (i = 0; i <= stacks; i++) {
@@ -129,7 +129,7 @@ void CustomProjector::sSphere(GLdouble radius, GLdouble oblateness,
       *cos_sin_rho_p++ = sin(rho);
     }
 
-	const GLfloat dtheta = 2.0 * M_PI / (GLfloat) slices;
+    const GLfloat dtheta = 2.0 * M_PI / (GLfloat) slices;
     double cos_sin_theta[2*(slices+1)];
     double *cos_sin_theta_p = cos_sin_theta;
     for (i = 0; i <= slices; i++) {
@@ -138,57 +138,63 @@ void CustomProjector::sSphere(GLdouble radius, GLdouble oblateness,
       *cos_sin_theta_p++ = sin(theta);
     }
 
-	// texturing: s goes from 0.0/0.25/0.5/0.75/1.0 at +y/+x/-y/-x/+y axis
-	// t goes from -1.0/+1.0 at z = -radius/+radius (linear along longitudes)
-	// cannot use triangle fan on texturing (s coord. at top/bottom tip varies)
-	const GLfloat ds = 1.0 / slices;
-	const GLfloat dt = nsign / stacks; // from inside texture is reversed
+    // texturing: s goes from 0.0/0.25/0.5/0.75/1.0 at +y/+x/-y/-x/+y axis
+    // t goes from -1.0/+1.0 at z = -radius/+radius (linear along longitudes)
+    // cannot use triangle fan on texturing (s coord. at top/bottom tip varies)
+    const GLfloat ds = 1.0 / slices;
+    const GLfloat dt = nsign / stacks; // from inside texture is reversed
 
 
-	// draw intermediate  as quad strips
-	for (i = 0,cos_sin_rho_p = cos_sin_rho; i < stacks;
+    // draw intermediate  as quad strips
+    for (i = 0,cos_sin_rho_p = cos_sin_rho; i < stacks;
          i++,cos_sin_rho_p+=2)
-	{
-		glBegin(GL_QUAD_STRIP);
-		s = 0.0;
-		for (j = 0,cos_sin_theta_p = cos_sin_theta; j <= slices;
+    {
+        glBegin(GL_QUAD_STRIP);
+        s = 0.0;
+        for (j = 0,cos_sin_theta_p = cos_sin_theta; j <= slices;
              j++,cos_sin_theta_p+=2)
-		{
-			x = -cos_sin_theta_p[1] * cos_sin_rho_p[1];
-			y = cos_sin_theta_p[0] * cos_sin_rho_p[1];
-			z = nsign * (oblateness * cos_sin_rho_p[0]);
-			glTexCoord2f(s, t);
-			if (isLightOn)
-			{
-				transNorm = mat.multiplyWithoutTranslation(Vec3d(x * nsign, y * nsign, z * nsign));
-				c = lightPos3.dot(transNorm);
-				if (c<0) c=0;
-				glColor3f(c*diffuseLight[0] + ambientLight[0],
-					c*diffuseLight[1] + ambientLight[1],
-					c*diffuseLight[2] + ambientLight[2]);
-			}
-			sVertex3(x * radius, y * radius, z * radius, mat);
-			x = -cos_sin_theta_p[1] * cos_sin_rho_p[3];
-			y = cos_sin_theta_p[0] * cos_sin_rho_p[3];
-			z = nsign * (oblateness * cos_sin_rho_p[2]);
-			glTexCoord2f(s, t - dt);
-			if (isLightOn)
-			{
-				transNorm = mat.multiplyWithoutTranslation(Vec3d(x * nsign, y * nsign, z * nsign));
-				c = lightPos3.dot(transNorm);
-				if (c<0) c=0;
-				glColor3f(c*diffuseLight[0] + ambientLight[0],
-					c*diffuseLight[1] + ambientLight[1],
-					c*diffuseLight[2] + ambientLight[2]);
-			}
-			sVertex3(x * radius, y * radius, z * radius, mat);
-			s += ds;
-		}
-		glEnd();
-		t -= dt;
-	}
-	glPopMatrix();
-	if (isLightOn) glEnable(GL_LIGHTING);
+        {
+            x = -cos_sin_theta_p[1] * cos_sin_rho_p[1];
+            y = cos_sin_theta_p[0] * cos_sin_rho_p[1];
+            z = nsign * cos_sin_rho_p[0];
+            glTexCoord2f(s, t);
+            if (isLightOn)
+            {
+                transNorm = mat.multiplyWithoutTranslation(
+                                  Vec3d(x * oblateness * nsign,
+                                        y * oblateness * nsign,
+                                        z * nsign));
+                c = lightPos3.dot(transNorm);
+                if (c<0) c=0;
+                glColor3f(c*diffuseLight[0] + ambientLight[0],
+                    c*diffuseLight[1] + ambientLight[1],
+                    c*diffuseLight[2] + ambientLight[2]);
+            }
+            sVertex3(x * radius, y * radius, z * oblateness * radius, mat);
+            x = -cos_sin_theta_p[1] * cos_sin_rho_p[3];
+            y = cos_sin_theta_p[0] * cos_sin_rho_p[3];
+            z = nsign * cos_sin_rho_p[2];
+            glTexCoord2f(s, t - dt);
+            if (isLightOn)
+            {
+                transNorm = mat.multiplyWithoutTranslation(
+                                  Vec3d(x * oblateness * nsign,
+                                        y * oblateness * nsign,
+                                        z * nsign));
+                c = lightPos3.dot(transNorm);
+                if (c<0) c=0;
+                glColor3f(c*diffuseLight[0] + ambientLight[0],
+                    c*diffuseLight[1] + ambientLight[1],
+                    c*diffuseLight[2] + ambientLight[2]);
+            }
+            sVertex3(x * radius, y * radius, z * oblateness * radius, mat);
+            s += ds;
+        }
+        glEnd();
+        t -= dt;
+    }
+    glPopMatrix();
+    if (isLightOn) glEnable(GL_LIGHTING);
 }
 
 // Reimplementation of gluCylinder : glu is overrided for non standard projection
