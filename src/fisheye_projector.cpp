@@ -48,6 +48,7 @@ bool FisheyeProjector::project_custom(const Vec3d &v,Vec3d &win,
 }
 */
 
+/*
 bool FisheyeProjector::project_custom(const Vec3d &v,Vec3d &win,
                                       const Mat4d &mat) const {
   win = v;
@@ -58,6 +59,28 @@ bool FisheyeProjector::project_custom(const Vec3d &v,Vec3d &win,
   win[0] = center[0] + win[0] * f;
   win[1] = center[1] + win[1] * f;
   win[2] = (win_length - zNear) / (zFar-zNear);
+  return (a<0.9*M_PI) ? true : false;
+}
+*/
+
+bool FisheyeProjector::project_custom(const Vec3d &v,Vec3d &win,
+                                      const Mat4d &mat) const {
+    // optimization by
+    // 1) calling atan instead of asin (very good on Intel CPUs)
+    // 2) calling sqrt only once
+    // Interestingly on my Amd64 asin works slightly faster than atan
+    // (although it is done in software!),
+    // but the omitted sqrt is still worth it.
+    // I think that for calculating win[2] we need no sqrt.
+    // Johannes.
+  win = v;
+  win.transfo4d(mat);
+  const double h = sqrt(win[0]*win[0]+win[1]*win[1]);
+  const double a = M_PI_2 + atan(win[2]/h);
+  const double f = (a*view_scaling_factor) / h;
+  win[0] = center[0] + win[0] * f;
+  win[1] = center[1] + win[1] * f;
+  win[2] = (fabs(win[2]) - zNear) / (zFar-zNear);
   return (a<0.9*M_PI) ? true : false;
 }
 
