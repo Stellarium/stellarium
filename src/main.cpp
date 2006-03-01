@@ -24,8 +24,7 @@
 #include "SDL.h"
 
 #include "stellarium.h"
-#include "stel_core.h"
-#include "stel_sdl.h"
+#include "stelapp.h"
 
 #if defined(MACOSX) && defined(XCODE)
 #include "StelConfig.h"
@@ -152,7 +151,7 @@ void setDirectories(const char* executableName)
 	else
 	{
 		// First launch for that user : set default options by copying the default files
-		system( (string("cp ") + CDIR + "default_config.ini " + CDIR + "config.ini").c_str() );
+		system( (string("cp ") + DATA_ROOT + "/data/default_config.ini " + CDIR + "config.ini").c_str() );
 	}
 #else
 
@@ -222,13 +221,6 @@ void setDirectories(const char* executableName)
 // Main stellarium procedure
 int main(int argc, char **argv)
 {
-#if !defined(MACOSX)
-	// Init gettext things
-	//setlocale(LC_CTYPE, "");				// Use default system char type : used for proper console output
-	//bindtextdomain (PACKAGE, LOCALEDIR);	
-	//textdomain (PACKAGE);
-#endif
-	
 	// Check the command line
 	check_command_line(argc, argv);
 
@@ -238,39 +230,14 @@ int main(int argc, char **argv)
 	// Find what are the main Data, Textures and Config directories
     setDirectories(argv[0]);
 
-	// Create the core of stellarium, it has to be initialized
-	StelCore* core = new StelCore(CDIR, LDIR, DATA_ROOT);
+	StelApp* app = new StelApp(CDIR, LDIR, DATA_ROOT);
 
-	// Give the config file parameters which has to be given "hard coded"
-#if !defined(MACOSX) && !defined(XCODE)
-	core->setConfigFiles("config.ini");
-#else
-    core->setConfigFiles(STELLARIUM_CONF_FILE);
-#endif
+	app->init();
 
-	// Load the configuration options from the given file names
-	// This includes the video parameters & the system locale
-	core->loadConfig();
-
-	// Create a stellarium sdl manager
-	StelSdl sdl_mgr(core);
-
-	// Initialize video device and other sdl parameters
-	sdl_mgr.init();
-
-	core->init();
-
-    // Re-load of config to re-enable flags available once the core has loaded 
-	//core->loadConfig(); -> This is silly!!
-
-	// play startup script, if available
-	core->playStartupScript();
-
-	// Start the main loop until the end of the execution
-	sdl_mgr.start_main_loop();
+	app->startMainLoop();
 
 	// Clean memory
-	delete core;
+	delete app;
 
 	return 0;
 }

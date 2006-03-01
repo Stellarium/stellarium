@@ -26,6 +26,7 @@
 
 #include "command_interface.h"
 #include "stel_core.h"
+#include "stelapp.h"
 #include "stel_utility.h"
 #include "script_mgr.h"
 #include "audio.h"
@@ -34,14 +35,13 @@ using namespace std;
 
 // Predeclaration of the StelCore class
 class StelCore;
-
-
+class StelApp;
 
 class StelCommandInterface : CommandInterface
 {
 
  public:
-  StelCommandInterface(StelCore * core);
+  StelCommandInterface(StelCore * core, StelApp * app);
   virtual ~StelCommandInterface();
   virtual int execute_command(string commandline);
   virtual int execute_command(string command, double arg);
@@ -52,6 +52,7 @@ class StelCommandInterface : CommandInterface
 
  private:
   StelCore * stcore;
+  StelApp * stapp;
   Audio * audio;  // for audio track from script
 };
 

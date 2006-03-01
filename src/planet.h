@@ -170,6 +170,8 @@ public:
 	static float getScale(void) {return object_scale;}
 	
 	static void set_label_color(const Vec3f& lc) {label_color = lc;}
+	static const Vec3f& getLabelColor(void) {return label_color;}
+	
 	static void set_orbit_color(const Vec3f& oc) {orbit_color = oc;}
 
 	// draw orbital path of Planet

@@ -17,9 +17,6 @@
 * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 
-// TODO: time_zone_item char* removal
-// DONE: change char* to string typically
-
 #include <iostream>
 #include <sstream>
 #include <fstream>
@@ -27,7 +24,12 @@
 #include "s_gui.h"
 #include "stel_utility.h"
 
+using namespace std;
+using namespace s_gui;
 
+bool EditBox::cursorVisible = false;
+EditBox * EditBox::activeEditBox = NULL;
+		
 void glCircle(const Vec3d& pos, float radius, float line_width)
 {
 	float angle, facets;
@@ -74,7 +76,6 @@ void glEllipse(const Vec3d& pos, float radius, float y_ratio, float line_width)
 	glLineWidth(1.0f);
 }
 
-using namespace std;
 
 void *lastCallback;
 #define RUNCALLBACK(c) doCallback((c), (void*)this)
@@ -90,10 +91,6 @@ inline void doCallback(const callback<void>& c, void *_component)
 	c();
 }
 
-using namespace s_gui;
-
-bool cursorVisible = false;
-EditBox *activeEditBox = NULL;
 
 // A float to nearest int conversion routine for the systems which
 // are not C99 conformant
@@ -635,7 +632,7 @@ void Container::draw(void)
 	{
 		if ((*iter)->inFront() == true)
 		{
-			activeEditBox = NULL;
+			EditBox::activeEditBox = NULL;
 			(*iter)->setInFront(false);
 			childs.push_front(*iter);
 			childs.erase(iter);
@@ -1223,12 +1220,12 @@ Uint32 toggleBlink(Uint32 interval)
 {
      SDL_SetTimer(0, NULL);
 
-     if (cursorVisible == true)
+     if (EditBox::cursorVisible == true)
         SDL_SetTimer(400, (SDL_TimerCallback)toggleBlink);
      else
         SDL_SetTimer(600, (SDL_TimerCallback)toggleBlink);
      
-     cursorVisible = !cursorVisible;
+     EditBox::cursorVisible = !EditBox::cursorVisible;
      return interval;
 }
 

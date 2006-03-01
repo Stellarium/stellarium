@@ -195,7 +195,7 @@ void HipStarMgr::load_data(const string& hipCatFile, LoadingBar& lb)
 
     // sort stars by magnitude for faster rendering
     for(int i=0;i < HipGrid.getNbPoints();i++) {
-      std::sort( starZones[i].begin(), starZones[i].end(), std::not2(Hip_Star_Mag_Comparer()));
+      std::sort( starZones[i].begin(), starZones[i].end(), std::not2(HipStarMagComparer()));
     }
 }
 
@@ -356,12 +356,14 @@ void HipStarMgr::draw(Vec3f equ_vision, ToneReproductor* eye, Projector* prj)
 	HipStar* h;
 
 	// Bind the star texture
-	if (draw_mode == DM_NORMAL) glBindTexture (GL_TEXTURE_2D, starTexture->getID());
-	else glBindTexture (GL_TEXTURE_2D, starcTexture->getID());
+	//if (draw_mode == DM_NORMAL) 
+	glBindTexture (GL_TEXTURE_2D, starTexture->getID());
+	//else glBindTexture (GL_TEXTURE_2D, starcTexture->getID());
 
 	// Set the draw mode
-	if (draw_mode == DM_NORMAL) glBlendFunc(GL_ONE, GL_ONE);
-	else glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // charting
+	//if (draw_mode == DM_NORMAL) 
+	glBlendFunc(GL_ONE, GL_ONE);
+	//else glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // charting
 
 
 	for(int i=0;i<nbZones;++i)
@@ -374,25 +376,25 @@ void HipStarMgr::draw(Vec3f equ_vision, ToneReproductor* eye, Projector* prj)
 			if(h->Mag > maxMag) break;
 			if(!prj->project_j2000_check(h->XYZ, h->XY)) continue;
 
-			if (draw_mode == DM_NORMAL)	
-			{
+			// if (draw_mode == DM_NORMAL)	
+			//{
 				h->draw();
 				if (names_fader.getInterstate() && h->Mag < maxMagStarName)
 				{
 					if (h->draw_name())
 						glBindTexture (GL_TEXTURE_2D, starTexture->getID());
 				}
-			}
-			else
-			{
-				h->draw_chart();
-				if (names_fader.getInterstate() && h->Mag < maxMagStarName)
-				{
-					// need to rebind the star texture after font printing
-					if (h->draw_name())
-						glBindTexture (GL_TEXTURE_2D, starcTexture->getID());
-				}
-			}
+			//}
+			//else
+// 			{
+// 				h->draw_chart();
+// 				if (names_fader.getInterstate() && h->Mag < maxMagStarName)
+// 				{
+// 					// need to rebind the star texture after font printing
+// 					if (h->draw_name())
+// 						glBindTexture (GL_TEXTURE_2D, starcTexture->getID());
+// 				}
+// 			}
 
 		}
 	}

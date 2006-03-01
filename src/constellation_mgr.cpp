@@ -248,8 +248,10 @@ void ConstellationMgr::draw_names(Projector * prj) const
 {
 	glEnable(GL_BLEND);
 	glEnable(GL_TEXTURE_2D);
-	if (draw_mode == DM_NORMAL) glBlendFunc(GL_ONE, GL_ONE);
-	else glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // charting
+	
+	glBlendFunc(GL_ONE, GL_ONE);
+	// if (draw_mode == DM_NORMAL) glBlendFunc(GL_ONE, GL_ONE);
+	// else glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // charting
 	
 	vector < Constellation * >::const_iterator iter;
 	for (iter = asterisms.begin(); iter != asterisms.end(); iter++)

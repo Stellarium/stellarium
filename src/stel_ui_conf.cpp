@@ -27,7 +27,7 @@ Component* StelUI::createConfigWindow(void)
 	config_win = new StdBtWin(_("Configuration"));
 	config_win->setOpaque(opaqueGUI);
 	config_win->reshape(300,200,400,390);
-	config_win->setVisible(core->FlagConfig);
+	config_win->setVisible(FlagConfig);
 
 	config_tab_ctr = new TabContainer();
 	config_tab_ctr->setSize(config_win->getSize());
@@ -246,7 +246,7 @@ Component* StelUI::createConfigWindow(void)
 	earth_map->setOnNearestCityCallback(callback<void>(this, &StelUI::setCityFromMap));
 	tab_location->addComponent(earth_map);
 	y+=earth_map->getSizey();
-	earth_map->set_font(9.5f, core->getDataDir() + core->BaseFontName);
+	earth_map->set_font(9.5f, BaseFontName);
 	load_cities(core->getDataDir() + "cities.fab");
 	
 	y += 5;
@@ -343,13 +343,13 @@ Component* StelUI::createConfigWindow(void)
 	screen_size_sl->addItem("1600x1200");
 	screen_size_sl->adjustSize();
 	char vs[1000];
-	sprintf(vs, "%dx%d", core->screen_W, core->screen_H);
+	sprintf(vs, "%dx%d", core->getViewportW(), core->getViewportH());
 	screen_size_sl->setValue(vs);
 	tab_video->addComponent(screen_size_sl);
 
 	y+=100;
 
-	snprintf(vs, 999, "%sconfig.ini", core->getConfigDir().c_str());
+	snprintf(vs, 999, "%sconfig.ini", app->getConfigDir().c_str());
 	Label * lblvideo5 = new Label(_("For unlisted screen resolution, edit the file :"));
 	Label * lblvideo6 = new Label(StelUtility::stringToWstring(string(vs)));
 	lblvideo5->setPos(30, y+25);
@@ -507,7 +507,7 @@ Component* StelUI::createSearchWindow(void)
 	search_win = new StdBtWin(_("Object Search"));
 	search_win->setOpaque(opaqueGUI);
 	search_win->reshape(300,200,400,h);
-	search_win->setVisible(core->FlagSearch);
+	search_win->setVisible(FlagSearch);
 
 	search_tab_ctr = new TabContainer();
 	search_tab_ctr->setSize(search_win->getSizex(),search_win->getSizey()- 20);
@@ -770,12 +770,12 @@ void StelUI::showSearchMessage(wstring _message)
 
 void StelUI::doSearchCommand(string _command, wstring _error)
 {
-	if(!core->commander->execute_command(_command))
+	if(!app->commander->execute_command(_command))
         return;
 
     if (core->selected_object)
     {
-        gotoObject();
+    	core->gotoSelectedObject();
         hideSearchMessage();
     }    
     else
@@ -875,37 +875,37 @@ void StelUI::showPlanetAutoComplete(void)
 
 void StelUI::updateConfigVariables(void)
 {
-	core->commander->execute_command("flag stars ", stars_cbx->getState());
-	core->commander->execute_command("flag star_names ", star_names_cbx->getState());
-	core->commander->execute_command("set max_mag_star_name ", max_mag_star_name->getValue());
-	core->commander->execute_command("flag star_twinkle ", star_twinkle_cbx->getState());
-	core->commander->execute_command("set star_twinkle_amount ", star_twinkle_amount->getValue());
-	core->commander->execute_command("flag constellation_drawing ", constellation_cbx->getState());
-	core->commander->execute_command("flag constellation_names ", constellation_name_cbx->getState());
-	core->commander->execute_command("flag constellation_pick ", sel_constellation_cbx->getState());
-	core->commander->execute_command("flag nebula_names ", nebulas_names_cbx->getState());
-	core->commander->execute_command("set max_mag_nebula_name ", max_mag_nebula_name->getValue());
-	core->commander->execute_command("flag planet_names ", planets_hints_cbx->getState());
-	core->commander->execute_command("flag moon_scaled ", moon_x4_cbx->getState());
-	core->commander->execute_command("flag equatorial_grid ", equator_grid_cbx->getState());
-	core->commander->execute_command("flag azimuthal_grid ", azimuth_grid_cbx->getState());
-	core->commander->execute_command("flag equator_line ", equator_cbx->getState());
-	core->commander->execute_command("flag ecliptic_line ", ecliptic_cbx->getState());
-	core->commander->execute_command("flag landscape ", ground_cbx->getState());
-	core->commander->execute_command("flag cardinal_points ", cardinal_cbx->getState());
-	core->commander->execute_command("flag atmosphere ", atmosphere_cbx->getState());
-	core->commander->execute_command("flag fog ", fog_cbx->getState());
+	app->commander->execute_command("flag stars ", stars_cbx->getState());
+	app->commander->execute_command("flag star_names ", star_names_cbx->getState());
+	app->commander->execute_command("set max_mag_star_name ", max_mag_star_name->getValue());
+	app->commander->execute_command("flag star_twinkle ", star_twinkle_cbx->getState());
+	app->commander->execute_command("set star_twinkle_amount ", star_twinkle_amount->getValue());
+	app->commander->execute_command("flag constellation_drawing ", constellation_cbx->getState());
+	app->commander->execute_command("flag constellation_names ", constellation_name_cbx->getState());
+	app->commander->execute_command("flag constellation_pick ", sel_constellation_cbx->getState());
+	app->commander->execute_command("flag nebula_names ", nebulas_names_cbx->getState());
+	app->commander->execute_command("set max_mag_nebula_name ", max_mag_nebula_name->getValue());
+	app->commander->execute_command("flag planet_names ", planets_hints_cbx->getState());
+	app->commander->execute_command("flag moon_scaled ", moon_x4_cbx->getState());
+	app->commander->execute_command("flag equatorial_grid ", equator_grid_cbx->getState());
+	app->commander->execute_command("flag azimuthal_grid ", azimuth_grid_cbx->getState());
+	app->commander->execute_command("flag equator_line ", equator_cbx->getState());
+	app->commander->execute_command("flag ecliptic_line ", ecliptic_cbx->getState());
+	app->commander->execute_command("flag landscape ", ground_cbx->getState());
+	app->commander->execute_command("flag cardinal_points ", cardinal_cbx->getState());
+	app->commander->execute_command("flag atmosphere ", atmosphere_cbx->getState());
+	app->commander->execute_command("flag fog ", fog_cbx->getState());
 }
 
 void StelUI::updateConfigVariables2(void)
 {
-	core->commander->execute_command("flag planets ", planets_cbx->getState());
+	app->commander->execute_command("flag planets ", planets_cbx->getState());
 }
 
 void StelUI::setCurrentTimeFromConfig(void)
 {
 	//	core->navigation->set_JDay(time_current->getJDay() - core->observatory->get_GMT_shift()*JD_HOUR);
-	core->commander->execute_command(string("date local " + time_current->getDateString()));
+	app->commander->execute_command(string("date local " + time_current->getDateString()));
 }
 
 void StelUI::setObserverPositionFromMap(void)
@@ -913,7 +913,7 @@ void StelUI::setObserverPositionFromMap(void)
 	std::ostringstream oss;
 	oss << "moveto lat " << earth_map->getPointerLatitude() << " lon " << earth_map->getPointerLongitude()
 		<< " alt " << earth_map->getPointerAltitude();
-	core->commander->execute_command(oss.str());
+	app->commander->execute_command(oss.str());
 }
 
 void StelUI::setCityFromMap(void)
@@ -928,7 +928,7 @@ void StelUI::setObserverPositionFromIncDec(void)
 	std::ostringstream oss;
 	oss << "moveto lat " << lat_incdec->getValue() << " lon " << long_incdec->getValue()
 		<< " alt " << alt_incdec->getValue();
-	core->commander->execute_command(oss.str());
+	app->commander->execute_command(oss.str());
 }
 
 void StelUI::doSaveObserverPosition(const string& name)
@@ -942,10 +942,10 @@ void StelUI::doSaveObserverPosition(const string& name)
 	std::ostringstream oss;
 	oss << "moveto lat " << lat_incdec->getValue() << " lon " << long_incdec->getValue()
 		<< " name " << location;
-	core->commander->execute_command(oss.str());
+	app->commander->execute_command(oss.str());
 
-	core->observatory->save(core->getConfigDir() + core->config_file, "init_location");
-	core->ui->setTitleObservatoryName(core->ui->getTitleWithAltitude());
+	core->observatory->save(app->getConfigDir() + app->config_file, "init_location");
+	app->ui->setTitleObservatoryName(app->ui->getTitleWithAltitude());
 }
 
 void StelUI::saveObserverPosition(void)
@@ -961,10 +961,10 @@ void StelUI::saveObserverPosition(void)
 
 void StelUI::saveRenderOptions(void)
 {
-	cout << "Saving rendering options in file " << core->getConfigDir() + core->config_file << endl;
+	cout << "Saving rendering options in file " << app->getConfigDir() + app->config_file << endl;
 
 	InitParser conf;
-	conf.load(core->getConfigDir() + core->config_file);
+	conf.load(app->getConfigDir() + app->config_file);
 
 	conf.set_boolean("astro:flag_stars", core->getFlagStars());
 	conf.set_boolean("astro:flag_star_name", core->getFlagStarName());
@@ -981,8 +981,8 @@ void StelUI::saveRenderOptions(void)
 	conf.set_boolean("astro:flag_planets", core->getFlagPlanets());
 	conf.set_boolean("astro:flag_planets_hints", core->getFlagPlanetsHints());
 	conf.set_double("viewing:moon_scale", core->ssystem->getMoon()->get_sphere_scale());
-	conf.set_boolean("viewing:flag_chart", core->FlagChart);
-	conf.set_boolean("viewing:flag_night", core->FlagNight);
+	conf.set_boolean("viewing:flag_chart", core->getVisionModeChart());
+	conf.set_boolean("viewing:flag_night", core->getVisionModeNight());
 	//conf.set_boolean("viewing:use_common_names", core->FlagUseCommonNames);
 	conf.set_boolean("viewing:flag_equatorial_grid", core->getFlagEquatorGrid());
 	conf.set_boolean("viewing:flag_azimutal_grid", core->getFlagAzimutalGrid());
@@ -993,7 +993,7 @@ void StelUI::saveRenderOptions(void)
 	conf.set_boolean("landscape:flag_atmosphere", core->getFlagAtmosphere());
 	conf.set_boolean("landscape:flag_fog", core->getFlagFog());
 
-	conf.save(core->getConfigDir() + core->config_file);
+	conf.save(app->getConfigDir() + app->config_file);
 }
 
 void StelUI::setTimeZone(void)
@@ -1008,10 +1008,10 @@ void StelUI::setVideoOption(void)
 	int w = atoi(s.substr(0,i).c_str());
 	int h = atoi(s.substr(i+1,s.size()).c_str());
 
-	cout << "Saving video size " << w << "x" << h << " in file " << core->getConfigDir() + core->config_file << endl;
+	cout << "Saving video size " << w << "x" << h << " in file " << app->getConfigDir() + app->config_file << endl;
 
 	InitParser conf;
-	conf.load(core->getConfigDir() + core->config_file);
+	conf.load(app->getConfigDir() + app->config_file);
 
     conf.set_str("projection:type",
                  Projector::typeToString(core->getProjectionType()));
@@ -1027,7 +1027,7 @@ void StelUI::setVideoOption(void)
 
 	conf.set_int("video:screen_w", w);
 	conf.set_int("video:screen_h", h);
-	conf.save(core->getConfigDir() + core->config_file);
+	conf.save(app->getConfigDir() + app->config_file);
 }
 
 void StelUI::setLandscape(void)
@@ -1111,7 +1111,7 @@ void StelUI::updateConfigForm(void)
 
 void StelUI::config_win_hideBtCallback(void)
 {
-	core->FlagConfig = false;
+	FlagConfig = false;
 	config_win->setVisible(false);
 	// for MapPicture - when the dialog appears, this tells the system
 	// not to show the city until MapPicture has located the name
@@ -1122,7 +1122,7 @@ void StelUI::config_win_hideBtCallback(void)
 
 void StelUI::search_win_hideBtCallback(void)
 {
-	core->FlagSearch = false;
+	FlagSearch = false;
 	search_win->setVisible(false);
 	bt_flag_search->setState(0);
 }

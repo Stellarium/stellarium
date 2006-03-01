@@ -30,8 +30,9 @@
 using namespace std;
 
 
-StelCommandInterface::StelCommandInterface(StelCore * core) {
+StelCommandInterface::StelCommandInterface(StelCore * core, StelApp * app) {
   stcore = core;
+  stapp = app;
   audio = NULL;
 }
 
@@ -121,7 +122,7 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
     }
     else if(args["sky_culture"]!="") status = stcore->setSkyCulture(args["sky_culture"]);
 //    else if(args["sky_locale"]!="") stcore->set_sky_locale(args["sky_locale"]); // Tony NOT SURE
-    else if(args["sky_locale"]!="") stcore->setAppLanguage(args["sky_locale"]);
+    else if(args["sky_locale"]!="") stapp->setAppLanguage(args["sky_locale"]);
     else if(args["star_mag_scale"]!="") stcore->setStarMagScale(str_to_double(args["star_mag_scale"]));
     else if(args["star_scale"]!="") {
 		float scale = str_to_double(args["star_scale"]);
@@ -151,10 +152,10 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
     //	else if(args["fullscreen"]!="") stcore->Fullscreen = args["fullscreen"];
     //	else if(args["horizontal_offset"]!="") stcore->HorizontalOffset = str_to_double(args["horizontal_offset"]);
     //	else if(args["init_fov"]!="") stcore->InitFov = str_to_double(args["init_fov"]);
-    //	else if(args["preset_sky_time"]!="") stcore->PresetSkyTime = str_to_double(args["preset_sky_time"]);
+    //	else if(args["preset_sky_time"]!="") stapp->PresetSkyTime = str_to_double(args["preset_sky_time"]);
     //	else if(args["screen_h"]!="") stcore->ScreenH = str_to_double(args["screen_h"]);
     //	else if(args["screen_w"]!="") stcore->ScreenW = str_to_double(args["screen_w"]);
-    //    else if(args["startup_time_mode"]!="") stcore->StartupTimeMode = args["startup_time_mode"];
+    //    else if(args["startup_time_mode"]!="") stapp->StartupTimeMode = args["startup_time_mode"];
     // else if(args["time_display_format"]!="") stcore->TimeDisplayFormat = args["time_display_format"];
       //else if(args["type"]!="") stcore->Type = args["type"];
       //else if(args["version"]!="") stcore->Version = str_to_double(args["version"]);
@@ -272,17 +273,17 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
       stcore->navigation->set_time_speed(str_to_double(args["rate"])*JD_SECOND);
 
     } else if(args["action"]=="pause") {
-      stcore->FlagTimePause = !stcore->FlagTimePause;
-      if(stcore->FlagTimePause) {
-	stcore->temp_time_velocity = stcore->navigation->get_time_speed();
+      stapp->FlagTimePause = !stapp->FlagTimePause;
+      if(stapp->FlagTimePause) {
+	stapp->temp_time_velocity = stcore->navigation->get_time_speed();
 	stcore->navigation->set_time_speed(0);
       } else {
-	stcore->navigation->set_time_speed(stcore->temp_time_velocity);
+	stcore->navigation->set_time_speed(stapp->temp_time_velocity);
       }
 
     } else if(args["action"]=="resume") {
-      stcore->FlagTimePause = 0;
-      stcore->navigation->set_time_speed(stcore->temp_time_velocity);
+      stapp->FlagTimePause = 0;
+      stcore->navigation->set_time_speed(stapp->temp_time_velocity);
 
     } else if(args["action"]=="increment") {
       // speed up time rate
@@ -346,9 +347,9 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 	  } else if(args["load"]=="preset") {
 		  // set date to preset (or current) date, based on user setup
 		  // TODO: should this record as the actual date used?
-		  if (stcore->StartupTimeMode=="preset" || stcore->StartupTimeMode=="Preset")
-			  stcore->navigation->set_JDay(stcore->PresetSkyTime -
-										 stcore->observatory->get_GMT_shift(stcore->PresetSkyTime) * JD_HOUR);
+		  if (stapp->StartupTimeMode=="preset" || stapp->StartupTimeMode=="Preset")
+			  stcore->navigation->set_JDay(stapp->PresetSkyTime -
+										 stcore->observatory->get_GMT_shift(stapp->PresetSkyTime) * JD_HOUR);
 		  else stcore->navigation->set_JDay(get_julian_from_sys());
 
 	  } else status=0;
@@ -391,8 +392,8 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 			  */
 
 			  string image_filename;
-			  if(stcore->scripts->is_playing()) 
-				  image_filename = stcore->scripts->get_script_path() + args["filename"];
+			  if(stapp->scripts->is_playing()) 
+				  image_filename = stapp->scripts->get_script_path() + args["filename"];
 			  else 
 				  image_filename = stcore->getDataRoot() + "/" + args["filename"];
 				  
@@ -446,7 +447,7 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 		  
 		  // if from script, local to that path
 		  string path;
-		  if(stcore->scripts->is_playing()) path = stcore->scripts->get_script_path();
+		  if(stapp->scripts->is_playing()) path = stapp->scripts->get_script_path();
 		  else path = stcore->getDataRoot() + "/";
 		  
 		  //		  cout << "audio path = " << path << endl;
@@ -478,40 +479,40 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 		  delete audio;
 		  audio = NULL;
       }
-      stcore->scripts->cancel_script();
+      stapp->scripts->cancel_script();
       stcore->script_images->drop_all_images();
 
     } else if(args["action"]=="play" && args["filename"]!="") {
-		if(stcore->scripts->is_playing()) {
+		if(stapp->scripts->is_playing()) {
 
-			string script_path = stcore->scripts->get_script_path();
+			string script_path = stapp->scripts->get_script_path();
 
 			// stop script, audio, and unload any loaded images
 			if(audio) {
 				delete audio;
 				audio = NULL;
 			}
-			stcore->scripts->cancel_script();
+			stapp->scripts->cancel_script();
 			stcore->script_images->drop_all_images();
 
 			// keep same script path 
-			stcore->scripts->play_script(script_path + args["filename"], script_path);
+			stapp->scripts->play_script(script_path + args["filename"], script_path);
 		} else {
-			stcore->scripts->play_script(args["path"] + args["filename"], args["path"]);
+			stapp->scripts->play_script(args["path"] + args["filename"], args["path"]);
 		}
 
     } else if(args["action"]=="record") {
-      stcore->scripts->record_script(args["filename"]);
+      stapp->scripts->record_script(args["filename"]);
       recordable = 0;  // don't record this command!
     } else if(args["action"]=="cancelrecord") {
-      stcore->scripts->cancel_record_script();
+      stapp->scripts->cancel_record_script();
       recordable = 0;  // don't record this command!
-    } else if(args["action"]=="pause" && !stcore->scripts->is_paused()) {
+    } else if(args["action"]=="pause" && !stapp->scripts->is_paused()) {
       // n.b. action=pause TOGGLES pause
       if(audio) audio->pause();
-      stcore->scripts->pause_script();
+      stapp->scripts->pause_script();
     } else if (args["action"]=="pause" || args["action"]=="resume") {
-      stcore->scripts->resume_script();
+      stapp->scripts->resume_script();
 #ifdef HAVE_SDL_MIXER_H
       if(audio) audio->sync();
 #endif
@@ -563,7 +564,7 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
   } else if(command=="landscape" && args["action"] == "load") {
 
 	  // textures are relative to script
-	  args["path"] = stcore->scripts->get_script_path();
+	  args["path"] = stapp->scripts->get_script_path();
 	  if (stcore->landscape) delete stcore->landscape;
 	  stcore->landscape = NULL;
 	  stcore->landscape = Landscape::create_from_hash(args);
@@ -578,46 +579,48 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 
   } else if(command=="configuration") {
 
-	  if(args["action"]=="load" && trusted) {
-		  // eventually load/reload are not both needed, but for now this is called at startup, reload later
-		  stcore->loadConfig();
-		  recordable = 0;  // don't record as scripts can not run this
+// Fabien : this should be useless. If you need to reset an initial state after running a script, just run a reinit script.
 
-	  } else if(args["action"]=="reload") {
-
-		  // on reload, be sure to reconfigure as necessary since StelCore::init isn't called
-
-		  stcore->loadConfig();
-
-		  if(stcore->asterisms) {
-			  stcore->setConstellationArtIntensity(stcore->getConstellationArtIntensity());
-			  stcore->setConstellationArtFadeDuration(stcore->getConstellationArtFadeDuration());
-		  }
-		  if (!stcore->getFlagAtmosphere() && stcore->tone_converter)
-			  stcore->tone_converter->set_world_adaptation_luminance(3.75f);
-		  //if (stcore->getFlagAtmosphere()) stcore->atmosphere->set_fade_duration(stcore->AtmosphereFadeDuration);
-		  stcore->observatory->load(stcore->getConfigDir() + stcore->config_file, "init_location");
-		  stcore->setLandscape(stcore->observatory->get_landscape_name());
-		  
-		  if (stcore->StartupTimeMode=="preset" || stcore->StartupTimeMode=="Preset")
-			  {
-				  stcore->navigation->set_JDay(stcore->PresetSkyTime -
-											 stcore->observatory->get_GMT_shift(stcore->PresetSkyTime) * JD_HOUR);
-			  }
-		  else
-			  {
-				  stcore->navigation->set_JDay(get_julian_from_sys());
-			  }
-		  if(stcore->getFlagPlanetsTrails() && stcore->ssystem) stcore->startPlanetsTrails(true);
-		  else stcore->startPlanetsTrails(false);
-
-		  string temp = stcore->skyCulture;  // fool caching in below method
-		  stcore->skyCulture = "";
-		  stcore->setSkyCulture(temp);
-		  
-		  system( ( stcore->getDataDir() + "script_loadConfig " ).c_str() );
-
-	  } else status = 0;
+// 	  if(args["action"]=="load" && trusted) {
+// 		  // eventually load/reload are not both needed, but for now this is called at startup, reload later
+// 		  // stapp->loadConfigFrom(stapp->getConfigDir()+stapp->config_file);
+// 		  recordable = 0;  // don't record as scripts can not run this
+// 
+// 	  } else if(args["action"]=="reload") {
+// 
+// 		  // on reload, be sure to reconfigure as necessary since StelCore::init isn't called
+// 
+// 		  stapp->loadConfigFrom(stapp->getConfigDir()+stapp->config_file);
+// 
+// 		  if(stcore->asterisms) {
+// 			  stcore->setConstellationArtIntensity(stcore->getConstellationArtIntensity());
+// 			  stcore->setConstellationArtFadeDuration(stcore->getConstellationArtFadeDuration());
+// 		  }
+// 		  if (!stcore->getFlagAtmosphere() && stcore->tone_converter)
+// 			  stcore->tone_converter->set_world_adaptation_luminance(3.75f);
+// 		  //if (stcore->getFlagAtmosphere()) stcore->atmosphere->set_fade_duration(stcore->AtmosphereFadeDuration);
+// 		  stcore->observatory->load(stapp->getConfigDir() + stapp->config_file, "init_location");
+// 		  stcore->setLandscape(stcore->observatory->get_landscape_name());
+// 		  
+// 		  if (stapp->StartupTimeMode=="preset" || stapp->StartupTimeMode=="Preset")
+// 			  {
+// 				  stcore->navigation->set_JDay(stapp->PresetSkyTime -
+// 											 stcore->observatory->get_GMT_shift(stapp->PresetSkyTime) * JD_HOUR);
+// 			  }
+// 		  else
+// 			  {
+// 				  stcore->navigation->set_JDay(get_julian_from_sys());
+// 			  }
+// 		  if(stcore->getFlagPlanetsTrails() && stcore->ssystem) stcore->startPlanetsTrails(true);
+// 		  else stcore->startPlanetsTrails(false);
+// 
+// 		  string temp = stcore->skyCulture;  // fool caching in below method
+// 		  stcore->skyCulture = "";
+// 		  stcore->setSkyCulture(temp);
+// 		  
+// 		  system( ( stcore->getDataDir() + "script_loadConfig " ).c_str() );
+// 
+// 	  } else status = 0;
 
   } else {
     debug_message = _("Unrecognized or malformed command name.");
@@ -627,15 +630,15 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
   if(status ) {
 
     // if recording commands, do that now
-    if(recordable) stcore->scripts->record_command(commandline);
+    if(recordable) stapp->scripts->record_command(commandline);
 
     //    cout << commandline << endl;
 
   } else {
 
 	  // Show gui error window only if script asked for gui debugging
-	  if(stcore->scripts->is_playing() && stcore->scripts->get_gui_debug()) 
-		  stcore->ui->show_message(_("Could not execute command:") + wstring(L"\n\"") + 
+	  if(stapp->scripts->is_playing() && stapp->scripts->get_gui_debug()) 
+		  stapp->ui->show_message(_("Could not execute command:") + wstring(L"\n\"") + 
 		   StelUtility::stringToWstring(commandline) + wstring(L"\"\n\n") + debug_message, 7000);
 			
 	  cerr << "Could not execute: " << commandline << endl << StelUtility::wstringToString(debug_message) << endl;
@@ -661,19 +664,19 @@ int StelCommandInterface::set_flag(string name, string value, bool &newval, bool
 			// normal scripts shouldn't be able to change these user settings
 			if(name=="enable_zoom_keys") newval = (stcore->FlagEnableZoomKeys = !stcore->FlagEnableZoomKeys);
 			else if(name=="enable_move_keys") newval = (stcore->FlagEnableMoveKeys = !stcore->FlagEnableMoveKeys);
-			else if(name=="enable_move_mouse") newval = (stcore->FlagEnableMoveMouse = !stcore->FlagEnableMoveMouse);
-			else if(name=="menu") newval = (stcore->FlagMenu = !stcore->FlagMenu);
-			else if(name=="help") newval = (stcore->FlagHelp = !stcore->FlagHelp);
-			else if(name=="infos") newval = (stcore->FlagInfos = !stcore->FlagInfos);
-			else if(name=="show_topbar") newval = (stcore->FlagShowTopBar = !stcore->FlagShowTopBar);
-			else if(name=="show_time") newval = (stcore->FlagShowTime = !stcore->FlagShowTime);
-			else if(name=="show_date") newval = (stcore->FlagShowDate = !stcore->FlagShowDate);
-			else if(name=="show_appname") newval = (stcore->FlagShowAppName = !stcore->FlagShowAppName);
-			else if(name=="show_fps") newval = (stcore->FlagShowFps = !stcore->FlagShowFps);
-			else if(name=="show_fov") newval = (stcore->FlagShowFov = !stcore->FlagShowFov);
-			else if(name=="enable_tui_menu") newval = (stcore->FlagEnableTuiMenu = !stcore->FlagEnableTuiMenu);
-			else if(name=="show_gravity_ui") newval = (stcore->FlagShowGravityUi = !stcore->FlagShowGravityUi);
-			else if(name=="utc_time") newval = (stcore->FlagUTC_Time = !stcore->FlagUTC_Time);
+			else if(name=="enable_move_mouse") newval = (stapp->FlagEnableMoveMouse = !stapp->FlagEnableMoveMouse);
+			else if(name=="menu") newval = (stapp->ui->FlagMenu = !stapp->ui->FlagMenu);
+			else if(name=="help") newval = (stapp->ui->FlagHelp = !stapp->ui->FlagHelp);
+			else if(name=="infos") newval = (stapp->ui->FlagInfos = !stapp->ui->FlagInfos);
+			else if(name=="show_topbar") newval = (stapp->ui->FlagShowTopBar = !stapp->ui->FlagShowTopBar);
+			else if(name=="show_time") newval = (stapp->ui->FlagShowTime = !stapp->ui->FlagShowTime);
+			else if(name=="show_date") newval = (stapp->ui->FlagShowDate = !stapp->ui->FlagShowDate);
+			else if(name=="show_appname") newval = (stapp->ui->FlagShowAppName = !stapp->ui->FlagShowAppName);
+			else if(name=="show_fps") newval = (stapp->ui->FlagShowFps = !stapp->ui->FlagShowFps);
+			else if(name=="show_fov") newval = (stapp->ui->FlagShowFov = !stapp->ui->FlagShowFov);
+			else if(name=="enable_tui_menu") newval = (stapp->ui->FlagEnableTuiMenu = !stapp->ui->FlagEnableTuiMenu);
+			else if(name=="show_gravity_ui") newval = (stapp->ui->FlagShowGravityUi = !stapp->ui->FlagShowGravityUi);
+			else if(name=="utc_time") newval = (stapp->ui->FlagUTC_Time = !stapp->ui->FlagUTC_Time);
 			else if(name=="gravity_labels") {
 				newval = !stcore->getFlagGravityLabels();
 				stcore->setFlagGravityLabels(newval);
@@ -711,11 +714,11 @@ int StelCommandInterface::set_flag(string name, string value, bool &newval, bool
 			newval = !stcore->getFlagPointStar();
 			stcore->setFlagPointStar(newval);
 		}
-		else if(name=="show_selected_object_info") newval = (stcore->FlagShowSelectedObjectInfo = !stcore->FlagShowSelectedObjectInfo);
-		else if(name=="show_tui_datetime") newval = (stcore->FlagShowTuiDateTime = !stcore->FlagShowTuiDateTime);
-		else if(name=="show_tui_short_obj_info") newval = (stcore->FlagShowTuiShortObjInfo = !stcore->FlagShowTuiShortObjInfo);
+		else if(name=="show_selected_object_info") newval = (stapp->ui->FlagShowSelectedObjectInfo = !stapp->ui->FlagShowSelectedObjectInfo);
+		else if(name=="show_tui_datetime") newval = (stapp->ui->FlagShowTuiDateTime = !stapp->ui->FlagShowTuiDateTime);
+		else if(name=="show_tui_short_obj_info") newval = (stapp->ui->FlagShowTuiShortObjInfo = !stapp->ui->FlagShowTuiShortObjInfo);
 		else if(name=="manual_zoom") newval = (stcore->FlagManualZoom = !stcore->FlagManualZoom);
-		else if(name=="show_script_bar") newval = (stcore->FlagShowScriptBar = !stcore->FlagShowScriptBar);
+		else if(name=="show_script_bar") newval = (stapp->ui->FlagShowScriptBar = !stapp->ui->FlagShowScriptBar);
 		else if(name=="fog") {
 			newval = !stcore->getFlagFog();
 			stcore->setFlagFog(newval); 
@@ -726,12 +729,12 @@ int StelCommandInterface::set_flag(string name, string value, bool &newval, bool
 			if(!newval) stcore->setFlagFog(false);  // turn off fog with atmosphere
 		}
 		else if(name=="chart") {
-			newval = stcore->FlagChart = !stcore->FlagChart;
-			stcore->SetDrawMode();
+			newval = !stcore->getVisionModeChart();
+			if (newval) stcore->setVisionModeChart();
 		}
 		else if(name=="night") {
-			newval = stcore->FlagNight = !stcore->FlagNight;
-			stcore->SetDrawMode();
+			newval = !stcore->getVisionModeNight();
+			if (newval) stcore->setVisionModeNight();
 		}
 		//else if(name=="use_common_names") newval = (stcore->FlagUseCommonNames = !stcore->FlagUseCommonNames);
 		else if(name=="azimuthal_grid") {
@@ -822,8 +825,8 @@ int StelCommandInterface::set_flag(string name, string value, bool &newval, bool
 			}
 		}
 		else if(name=="script_gui_debug") {  // Not written to config - script specific
-			newval = !stcore->scripts->get_gui_debug();
-			stcore->scripts->set_gui_debug(newval);
+			newval = !stapp->scripts->get_gui_debug();
+			stapp->scripts->set_gui_debug(newval);
 		}
 		else return(status);  // no matching flag found untrusted, but maybe trusted matched
 
@@ -835,19 +838,19 @@ int StelCommandInterface::set_flag(string name, string value, bool &newval, bool
 			// normal scripts shouldn't be able to change these user settings
 			if(name=="enable_zoom_keys") stcore->FlagEnableZoomKeys = newval;
 			else if(name=="enable_move_keys") stcore->FlagEnableMoveKeys = newval;
-			else if(name=="enable_move_mouse") stcore->FlagEnableMoveMouse = newval;
-			else if(name=="menu") stcore->FlagMenu = newval;
-			else if(name=="help") stcore->FlagHelp = newval;
-			else if(name=="infos") stcore->FlagInfos = newval;
-			else if(name=="show_topbar") stcore->FlagShowTopBar = newval;
-			else if(name=="show_time") stcore->FlagShowTime = newval;
-			else if(name=="show_date") stcore->FlagShowDate = newval;
-			else if(name=="show_appname") stcore->FlagShowAppName = newval;
-			else if(name=="show_fps") stcore->FlagShowFps = newval;
-			else if(name=="show_fov") stcore->FlagShowFov = newval;
-			else if(name=="enable_tui_menu") stcore->FlagEnableTuiMenu = newval;
-			else if(name=="show_gravity_ui") stcore->FlagShowGravityUi = newval;
-			else if(name=="utc_time") stcore->FlagUTC_Time = newval;
+			else if(name=="enable_move_mouse") stapp->FlagEnableMoveMouse = newval;
+			else if(name=="menu") stapp->ui->FlagMenu = newval;
+			else if(name=="help") stapp->ui->FlagHelp = newval;
+			else if(name=="infos") stapp->ui->FlagInfos = newval;
+			else if(name=="show_topbar") stapp->ui->FlagShowTopBar = newval;
+			else if(name=="show_time") stapp->ui->FlagShowTime = newval;
+			else if(name=="show_date") stapp->ui->FlagShowDate = newval;
+			else if(name=="show_appname") stapp->ui->FlagShowAppName = newval;
+			else if(name=="show_fps") stapp->ui->FlagShowFps = newval;
+			else if(name=="show_fov") stapp->ui->FlagShowFov = newval;
+			else if(name=="enable_tui_menu") stapp->ui->FlagEnableTuiMenu = newval;
+			else if(name=="show_gravity_ui") stapp->ui->FlagShowGravityUi = newval;
+			else if(name=="utc_time") stapp->ui->FlagUTC_Time = newval;
 			else if(name=="gravity_labels") stcore->setFlagGravityLabels(newval);
 			else status = 0;
 		
@@ -860,26 +863,23 @@ int StelCommandInterface::set_flag(string name, string value, bool &newval, bool
      	else if(name=="constellation_pick") stcore->setFlagConstellationIsolateSelected(newval);
 		else if(name=="star_twinkle") stcore->setFlagStarTwinkle(newval);
 		else if(name=="point_star") stcore->setFlagPointStar(newval);
-		else if(name=="show_selected_object_info") stcore->FlagShowSelectedObjectInfo = newval;
-		else if(name=="show_tui_datetime") stcore->FlagShowTuiDateTime = newval;
-		else if(name=="show_tui_short_obj_info") stcore->FlagShowTuiShortObjInfo = newval;
+		else if(name=="show_selected_object_info") stapp->ui->FlagShowSelectedObjectInfo = newval;
+		else if(name=="show_tui_datetime") stapp->ui->FlagShowTuiDateTime = newval;
+		else if(name=="show_tui_short_obj_info") stapp->ui->FlagShowTuiShortObjInfo = newval;
 		else if(name=="manual_zoom") stcore->FlagManualZoom = newval;
-		else if(name=="show_script_bar") stcore->FlagShowScriptBar = newval;
+		else if(name=="show_script_bar") stapp->ui->FlagShowScriptBar = newval;
 		else if(name=="fog") stcore->setFlagFog(newval);
 		else if(name=="atmosphere") { 
 			stcore->setFlagAtmosphere ( newval);
 			if(!newval) stcore->setFlagFog(false);  // turn off fog with atmosphere
 		}
 		else if(name=="chart") {
-			stcore->FlagChart = newval;
-			stcore->SetDrawMode();
+			if (newval) stcore->setVisionModeChart();
 		}
 		else if(name=="night") {
-			stcore->FlagNight = newval;
-			stcore->SetDrawMode();
+			if (newval) stcore->setVisionModeNight();
 		}
-		else if(name=="chart") stcore->FlagChart = newval;
-//		else if(name=="use_common_names") stcore->FlagUseCommonNames = newval;
+		else if(name=="chart" && newval) stcore->setVisionModeChart();
 		else if(name=="azimuthal_grid") stcore->setFlagAzimutalGrid(newval);
 		else if(name=="equatorial_grid") stcore->setFlagEquatorGrid(newval);
 		else if(name=="equator_line") stcore->setFlagEquatorLine(newval);
@@ -916,7 +916,7 @@ int StelCommandInterface::set_flag(string name, string value, bool &newval, bool
 				stcore->navigation->set_flag_traking(0);
 			}
 		}
-		else if(name=="script_gui_debug") stcore->scripts->set_gui_debug(newval); // Not written to config - script specific
+		else if(name=="script_gui_debug") stapp->scripts->set_gui_debug(newval); // Not written to config - script specific
 		else return(status);
 
 	}

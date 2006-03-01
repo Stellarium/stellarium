@@ -23,14 +23,17 @@
 #include <iomanip>
 #include "stel_ui.h"
 #include "stellastro.h"
+#include "stelapp.h"
 
 ////////////////////////////////////////////////////////////////////////////////
 //								CLASS FUNCTIONS
 ////////////////////////////////////////////////////////////////////////////////
 
-StelUI::StelUI(StelCore * _core) :
+StelUI::StelUI(StelCore * _core, StelApp * _app) :
 		baseFont(NULL),
 		courierFont(NULL),
+
+		FlagHelp(false), FlagInfos(false), FlagConfig(false), FlagSearch(false), FlagShowTuiMenu(0),
 
 		top_bar_ctr(NULL),
 		top_bar_date_lbl(NULL),
@@ -79,6 +82,7 @@ StelUI::StelUI(StelCore * _core) :
 		exit(-1);
 	}
 	core = _core;
+	app = _app;
 	is_dragging = false;
 	waitOnLocation = true;
 	opaqueGUI = true;
@@ -100,25 +104,56 @@ StelUI::~StelUI()
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-void StelUI::init(void)
+void StelUI::init(const InitParser& conf)
 {
+	// Ui section
+	FlagShowFps			= conf.get_boolean("gui:flag_show_fps");
+	FlagMenu			= conf.get_boolean("gui:flag_menu");
+	FlagHelp			= conf.get_boolean("gui:flag_help");
+	FlagInfos			= conf.get_boolean("gui:flag_infos");
+	FlagShowTopBar		= conf.get_boolean("gui:flag_show_topbar");
+	FlagShowTime		= conf.get_boolean("gui:flag_show_time");
+	FlagShowDate		= conf.get_boolean("gui:flag_show_date");
+	FlagShowAppName		= conf.get_boolean("gui:flag_show_appname");
+	FlagShowFov			= conf.get_boolean("gui:flag_show_fov");
+	FlagShowSelectedObjectInfo = conf.get_boolean("gui:flag_show_selected_object_info");
+	GuiBaseColor		= StelUtility::str_to_vec3f(conf.get_str("color", "gui:gui_base_color", "0.3,0.4,0.7").c_str());
+	GuiTextColor		= StelUtility::str_to_vec3f(conf.get_str("color", "gui:gui_text_color", "0.7,0.8,0.9").c_str());
+	GuiBaseColorr		= StelUtility::str_to_vec3f(conf.get_str("color", "gui:gui_base_colorr", "0.7,0.2,0.1").c_str());
+	GuiTextColorr		= StelUtility::str_to_vec3f(conf.get_str("color", "gui:gui_text_colorr", "0.9,0.4,0.2").c_str());
+	BaseFontSize		= conf.get_double ("gui","base_font_size",15);
+	BaseFontName        = conf.get_str("gui", "base_font_name", "DejaVuSans.ttf");
+	FlagShowScriptBar	= conf.get_boolean("gui","flag_show_script_bar",false);
+	MouseCursorTimeout  = conf.get_double("gui","mouse_cursor_timeout",0);
+	FlagUTC_Time		= conf.get_boolean("navigation:flag_utc_time");
+	
+	// Text ui section
+	FlagEnableTuiMenu = conf.get_boolean("tui:flag_enable_tui_menu");
+	FlagShowGravityUi = conf.get_boolean("tui:flag_show_gravity_ui");
+	FlagShowTuiDateTime = conf.get_boolean("tui:flag_show_tui_datetime");
+	FlagShowTuiShortObjInfo = conf.get_boolean("tui:flag_show_tui_short_obj_info");
+	
+	BaseFontName = core->getDataDir() + BaseFontName;
+	BaseCFontSize = 12.5;
+	BaseCFontName = core->getDataDir() + "DejaVuSansMono-Roman.ttf";
+	
 	// Load standard font
-	baseFont = new s_font(core->BaseFontSize, core->getDataDir() + core->BaseFontName);
+	baseFont = new s_font(BaseFontSize, BaseFontName);
 	if (!baseFont)
 	{
 		printf("ERROR WHILE CREATING FONT\n");
 		exit(-1);
 	}
 
-	courierFont = new s_font(core->BaseCFontSize, core->BaseCFontName);
+	courierFont = new s_font(BaseCFontSize, BaseCFontName);
 	if (!courierFont)
 	{
 		printf("ERROR WHILE CREATING FONT\n");
 		exit(-1);
 	}
-
+	
 	// set up mouse cursor timeout
-	MouseTimeLeft = core->MouseCursorTimeout*1000;
+	MouseTimeLeft = MouseCursorTimeout*1000;
 
 	// Create standard texture
 	baseTex = new s_texture("backmenu.png", TEX_LOAD_TYPE_PNG_ALPHA);
@@ -128,20 +163,20 @@ void StelUI::init(void)
 	tex_down = new s_texture("down.png");
 
 	// Set default Painter
-	Painter p(baseTex, baseFont, core->GuiBaseColor, core->GuiTextColor);
+	Painter p(baseTex, baseFont, GuiBaseColor, GuiTextColor);
 	Component::setDefaultPainter(p);
 
-	Component::initScissor(core->screen_W, core->screen_H);
+	Component::initScissor(core->getViewportW(), core->getViewportH());
 
 	desktop = new Container(true);
-	desktop->reshape(0,0,core->screen_W,core->screen_H);
+	desktop->reshape(0,0,core->getViewportW(),core->getViewportH());
 
 	bt_flag_help_lbl = new Label(L"ERROR...");
-	bt_flag_help_lbl->setPos(3,core->screen_H-41-(int)baseFont->getDescent());
+	bt_flag_help_lbl->setPos(3,core->getViewportH()-41-(int)baseFont->getDescent());
 	bt_flag_help_lbl->setVisible(0);
 
 	bt_flag_time_control_lbl = new Label(L"ERROR...");
-	bt_flag_time_control_lbl->setPos(core->screen_W-180,core->screen_H-41-(int)baseFont->getDescent());
+	bt_flag_time_control_lbl->setPos(core->getViewportW()-180,core->getViewportH()-41-(int)baseFont->getDescent());
 	bt_flag_time_control_lbl->setVisible(0);
 
 	// Info on selected object
@@ -182,6 +217,11 @@ void StelUI::init(void)
 	desktop->addComponent(createSearchWindow());
 
 	initialised = true;
+	
+	setTitleObservatoryName(getTitleWithAltitude());	
+	
+	if (core->getVisionModeNight()) desktop->setColorScheme(GuiBaseColorr, GuiTextColorr);
+	else desktop->setColorScheme(GuiBaseColor, GuiTextColor);
 }
 
 
@@ -201,24 +241,16 @@ void StelUI::show_message(wstring _message, int _time_out)
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-// Tony
-void StelUI::gotoObject(void)
-{
-    core->navigation->move_to(core->selected_object->get_earth_equ_pos(core->navigation),
-	                      core->auto_move_duration);
-}
-
-////////////////////////////////////////////////////////////////////////////////
 Component* StelUI::createTopBar(void)
 {
 	top_bar_date_lbl = new Label(L"-", baseFont);	top_bar_date_lbl->setPos(2,2);
 	top_bar_hour_lbl = new Label(L"-", baseFont);	top_bar_hour_lbl->setPos(110,2);
-	top_bar_fps_lbl = new Label(L"-", baseFont);	top_bar_fps_lbl->setPos(core->screen_W-100,2);
-	top_bar_fov_lbl = new Label(L"-", baseFont);	top_bar_fov_lbl->setPos(core->screen_W-220,2);
+	top_bar_fps_lbl = new Label(L"-", baseFont);	top_bar_fps_lbl->setPos(core->getViewportW()-100,2);
+	top_bar_fov_lbl = new Label(L"-", baseFont);	top_bar_fov_lbl->setPos(core->getViewportW()-220,2);
 	top_bar_appName_lbl = new Label(StelUtility::stringToWstring(APP_NAME), baseFont);
-	top_bar_appName_lbl->setPos(core->screen_W/2-top_bar_appName_lbl->getSizex()/2,2);
+	top_bar_appName_lbl->setPos(core->getViewportW()/2-top_bar_appName_lbl->getSizex()/2,2);
 	top_bar_ctr = new FilledContainer();
-	top_bar_ctr->reshape(0,0,core->screen_W,(int)(baseFont->getLineHeight()+0.5)+5);
+	top_bar_ctr->reshape(0,0,core->getViewportW(),(int)(baseFont->getLineHeight()+0.5)+5);
 	top_bar_ctr->addComponent(top_bar_date_lbl);
 	top_bar_ctr->addComponent(top_bar_hour_lbl);
 	top_bar_ctr->addComponent(top_bar_fps_lbl);
@@ -230,50 +262,50 @@ Component* StelUI::createTopBar(void)
 ////////////////////////////////////////////////////////////////////////////////
 void StelUI::updateTopBar(void)
 {
-	top_bar_ctr->setVisible(core->FlagShowTopBar);
-	if (!core->FlagShowTopBar) return;
+	top_bar_ctr->setVisible(FlagShowTopBar);
+	if (!FlagShowTopBar) return;
 
-	double jd = core->navigation->get_JDay();
+	double jd = core->getJDay();
 
-	if (core->FlagShowDate)
+	if (FlagShowDate)
 	{
-		if (core->FlagUTC_Time)
+		if (FlagUTC_Time)
 			top_bar_date_lbl->setLabel(core->observatory->get_printable_date_UTC(jd));
 		else
 			top_bar_date_lbl->setLabel(core->observatory->get_printable_date_local(jd));
 		top_bar_date_lbl->adjustSize();
 	}
-	top_bar_date_lbl->setVisible(core->FlagShowDate);
+	top_bar_date_lbl->setVisible(FlagShowDate);
 
-	if (core->FlagShowTime)
+	if (FlagShowTime)
 	{
-		if (core->FlagUTC_Time)
+		if (FlagUTC_Time)
 			top_bar_hour_lbl->setLabel(core->observatory->get_printable_time_UTC(jd) + _(" (UTC)"));
 		else
 			top_bar_hour_lbl->setLabel(core->observatory->get_printable_time_local(jd));
 		top_bar_hour_lbl->adjustSize();
 	}
-	top_bar_hour_lbl->setVisible(core->FlagShowTime);
+	top_bar_hour_lbl->setVisible(FlagShowTime);
 
-	top_bar_appName_lbl->setVisible(core->FlagShowAppName);
+	top_bar_appName_lbl->setVisible(FlagShowAppName);
 
-	if (core->FlagShowFov)
+	if (FlagShowFov)
 	{
 		wstringstream wos;
 		wos << L"FOV=" << setprecision(3) << core->projection->get_visible_fov() << L"°";
 		top_bar_fov_lbl->setLabel(wos.str());
 		top_bar_fov_lbl->adjustSize();
 	}
-	top_bar_fov_lbl->setVisible(core->FlagShowFov);
+	top_bar_fov_lbl->setVisible(FlagShowFov);
 
-	if (core->FlagShowFps)
+	if (FlagShowFps)
 	{
 		wstringstream wos;
-		wos << L"FPS=" << /* setw(7) << */setprecision(4) << core->fps;
+		wos << L"FPS=" << setprecision(4) << app->fps;
 		top_bar_fps_lbl->setLabel(wos.str());
 		top_bar_fps_lbl->adjustSize();
 	}
-	top_bar_fps_lbl->setVisible(core->FlagShowFps);
+	top_bar_fps_lbl->setVisible(FlagShowFps);
 }
 
 // Create the button panel in the lower left corner
@@ -374,7 +406,7 @@ Component* StelUI::createFlagButtons(void)
 
     x+= UI_PADDING;
     bt_flag_ctr->addComponent(bt_script);			bt_script->setPos(x,0);
-	if (!core->FlagShowScriptBar)
+	if (!FlagShowScriptBar)
     {
 		bt_script->setVisible(false);
     }
@@ -392,7 +424,7 @@ Component* StelUI::createFlagButtons(void)
 	bt_flag_ctr->addComponent(bt_flag_quit);			bt_flag_quit->setPos(x,0); x+=UI_BT;
 
 	bt_flag_ctr->setOnMouseInOutCallback(callback<void>(this, &StelUI::bt_flag_ctrOnMouseInOut));
-	bt_flag_ctr->reshape(0, core->screen_H-25, x-1, 25);
+	bt_flag_ctr->reshape(0, core->getViewportH()-25, x-1, 25);
 
 	return bt_flag_ctr;
 
@@ -428,7 +460,7 @@ Component* StelUI::createTimeControlButtons(void)
 	bt_time_control_ctr->addComponent(bt_time_now);			bt_time_now->setPos(75,0);
 
 	bt_time_control_ctr->setOnMouseInOutCallback(callback<void>(this, &StelUI::bt_time_control_ctrOnMouseInOut));
-	bt_time_control_ctr->reshape(core->screen_W-4*25-1, core->screen_H-25, 4*25, 25);
+	bt_time_control_ctr->reshape(core->getViewportW()-4*25-1, core->getViewportH()-25, 4*25, 25);
 
 	return bt_time_control_ctr;
 }
@@ -496,7 +528,7 @@ void StelUI::cbEditScriptExecute(void)
 	bt_script->clearText();
 	bt_script->setEditing(false);
      
-    if (!core->commander->execute_command(command_string))
+    if (!app->commander->execute_command(command_string))
     	bt_flag_help_lbl->setLabel(_("Invalid Script command"));
 }
 
@@ -511,28 +543,45 @@ void StelUI::cb(void)
 	core->setFlagLandscape(bt_flag_ground->getState());
 	core->cardinals_points->setFlagShow(bt_flag_cardinals->getState());
 	core->setFlagAtmosphere(bt_flag_atmosphere->getState());
-	core->nebulas->setFlagHints( bt_flag_nebula_name->getState() );
-	core->FlagHelp 				= bt_flag_help->getState();
-	help_win->setVisible(core->FlagHelp);
+	core->setFlagNebulaHints( bt_flag_nebula_name->getState() );
+	FlagHelp 				= bt_flag_help->getState();
+	help_win->setVisible(FlagHelp);
 	core->navigation->set_viewing_mode(bt_flag_equatorial_mode->getState() ? Navigator::VIEW_EQUATOR : Navigator::VIEW_HORIZON);
-	core->FlagConfig			= bt_flag_config->getState();
-	core->FlagChart				= bt_flag_chart->getState();
-	if  (core->FlagNight != bt_flag_night->getState())
+	FlagConfig			= bt_flag_config->getState();
+	if  (core->getVisionModeChart() != bt_flag_chart->getState())
 	{
-		core->FlagNight				= bt_flag_night->getState();
-		if (!core->FlagNight) desktop->setColorScheme(core->GuiBaseColor, core->GuiTextColor);
-		else desktop->setColorScheme(core->GuiBaseColorr, core->GuiTextColorr);
+		if (bt_flag_night->getState())
+		{
+			desktop->setColorScheme(GuiBaseColor, GuiTextColor);
+			core->setVisionModeChart();
+		}
+		else
+		{
+			desktop->setColorScheme(GuiBaseColor, GuiTextColor);
+			core->setVisionModeNormal();
+		}
+	}	
+	if  (core->getVisionModeNight() != bt_flag_night->getState())
+	{
+		if (bt_flag_night->getState())
+		{
+			core->setVisionModeNight();
+			desktop->setColorScheme(GuiBaseColorr, GuiTextColorr);
+		}
+		else
+		{
+			desktop->setColorScheme(GuiBaseColor, GuiTextColor);
+			core->setVisionModeNormal();
+		}
 	}
-	core->SetDrawMode();
-	config_win->setVisible(core->FlagConfig);
+	config_win->setVisible(FlagConfig);
 
-	core->FlagSearch			= bt_flag_search->getState();
-	search_win->setVisible(core->FlagSearch);
-	if (bt_flag_goto->getState() && core->selected_object)
-        gotoObject();
+	FlagSearch			= bt_flag_search->getState();
+	search_win->setVisible(FlagSearch);
+	if (bt_flag_goto->getState()) core->gotoSelectedObject();
 	bt_flag_goto->setState(false);
 
-	if (!bt_flag_quit->getState()) core->quit();
+	if (!bt_flag_quit->getState()) app->quit();
 }
 
 void StelUI::bt_flag_ctrOnMouseInOut(void)
@@ -632,7 +681,7 @@ http://www.fsf.org");
 	licence_win->setOpaque(opaqueGUI);
 	licence_win->reshape(275,175,450,400);
 	licence_win->addComponent(licence_txtlbl);
-	licence_win->setVisible(core->FlagInfos);
+	licence_win->setVisible(FlagInfos);
 
 	return licence_win;
 }
@@ -696,7 +745,7 @@ wstring(_("Misc:\n\
 	help_win->setOpaque(opaqueGUI);
 	help_win->reshape(215,70,580,600);
 	help_win->addComponent(help_txtlbl);
-	help_win->setVisible(core->FlagHelp);
+	help_win->setVisible(FlagHelp);
 	help_win->setOnHideBtCallback(callback<void>(this, &StelUI::help_win_hideBtCallback));
 	return help_win;
 }
@@ -719,12 +768,15 @@ void StelUI::draw(void)
 	Component::enableScissor();
 
 	glScalef(1, -1, 1);						// invert the y axis, down is positive
-	glTranslatef(0, -core->screen_H, 0);	// move the origin from the bottom left corner to the upper left corner
+	glTranslatef(0, -core->getViewportH(), 0);	// move the origin from the bottom left corner to the upper left corner
 
 	desktop->draw();
 
 	Component::disableScissor();
 	core->projection->restore_from_2Dfullscreen_projection();	// Restore the other coordinate
+	
+	if (FlagShowGravityUi) draw_gravity_ui();
+	if (FlagShowTuiMenu) draw_tui();	
 }
 
 /*******************************************************************************/
@@ -732,11 +784,11 @@ int StelUI::handle_move(int x, int y)
 {
 	// Do not allow use of mouse while script is playing
 	// otherwise script can get confused
-	if(core->scripts->is_playing()) return 0;
+	if(app->scripts->is_playing()) return 0;
 
 	// Show cursor
 	SDL_ShowCursor(1);
-	MouseTimeLeft = core->MouseCursorTimeout*1000; 
+	MouseTimeLeft = MouseCursorTimeout*1000; 
 
 	if (desktop->onMove(x, y)) return 1;
 	if (is_dragging)
@@ -749,13 +801,13 @@ int StelUI::handle_move(int x, int y)
 			double az1, alt1, az2, alt2;
 			if (core->navigation->get_viewing_mode()==Navigator::VIEW_HORIZON)
 			{
-				core->projection->unproject_local(x,core->screen_H-y, tempvec2);
-				core->projection->unproject_local(previous_x,core->screen_H-previous_y, tempvec1);
+				core->projection->unproject_local(x,core->getViewportH()-y, tempvec2);
+				core->projection->unproject_local(previous_x,core->getViewportH()-previous_y, tempvec1);
 			}
 			else
 			{
-				core->projection->unproject_earth_equ(x,core->screen_H-y, tempvec2);
-				core->projection->unproject_earth_equ(previous_x,core->screen_H-previous_y, tempvec1);
+				core->projection->unproject_earth_equ(x,core->getViewportH()-y, tempvec2);
+				core->projection->unproject_earth_equ(previous_x,core->getViewportH()-previous_y, tempvec1);
 			}
 			rect_to_sphe(&az1, &alt1, tempvec1);
 			rect_to_sphe(&az2, &alt2, tempvec2);
@@ -773,11 +825,11 @@ int StelUI::handle_clic(Uint16 x, Uint16 y, S_GUI_VALUE button, S_GUI_VALUE stat
 {
 	// Do not allow use of mouse while script is playing
 	// otherwise script can get confused
-	if(core->scripts->is_playing()) return 0;
+	if(app->scripts->is_playing()) return 0;
 
 	// Show cursor
 	SDL_ShowCursor(1);
-	MouseTimeLeft = core->MouseCursorTimeout*1000; 
+	MouseTimeLeft = MouseCursorTimeout*1000; 
 
 	if (desktop->onClic((int)x, (int)y, button, state))
     {
@@ -804,11 +856,11 @@ int StelUI::handle_clic(Uint16 x, Uint16 y, S_GUI_VALUE button, S_GUI_VALUE stat
 	case S_GUI_MOUSE_MIDDLE : break;
 	case S_GUI_MOUSE_WHEELUP :
 		core->zoom_in(state==S_GUI_PRESSED);
-		core->updateMove( core->getMouseZoom());
+		core->updateMove( app->getMouseZoom());
 		return 1;
 	case S_GUI_MOUSE_WHEELDOWN :
 		core->zoom_out(state==S_GUI_PRESSED);
-		core->updateMove( core->getMouseZoom());
+		core->updateMove( app->getMouseZoom());
 		return 1;
 	default: break;
 	}
@@ -826,7 +878,7 @@ int StelUI::handle_clic(Uint16 x, Uint16 y, S_GUI_VALUE button, S_GUI_VALUE stat
 		// Deselect the selected object
 		if (button==S_GUI_MOUSE_RIGHT)
 		{
-			core->commander->execute_command("select");
+			app->commander->execute_command("select");
 			return 1;
 		}
 		if (button==S_GUI_MOUSE_MIDDLE)
@@ -843,21 +895,21 @@ int StelUI::handle_clic(Uint16 x, Uint16 y, S_GUI_VALUE button, S_GUI_VALUE stat
 			// CTRL + left clic = right clic for 1 button mouse
 			if (SDL_GetModState() & KMOD_CTRL)
 			{
-				core->commander->execute_command("select");
+				app->commander->execute_command("select");
 				return 1;
 			}
 
 			// Left clic -> selection of an object
-			StelObject* tempselect= core->clever_find((int)x, core->screen_H-(int)y);
+			StelObject* tempselect= core->clever_find((int)x, core->getViewportH()-(int)y);
 
 			// Unselect on second clic on the same object
 			if (core->selected_object!=NULL && core->selected_object==tempselect)
 			{
-				core->commander->execute_command("select");
+				app->commander->execute_command("select");
 			}
 			else
 			{
-				core->selected_object = core->clever_find((int)x, core->screen_H-(int)y);
+				core->selected_object = core->clever_find((int)x, core->getViewportH()-(int)y);
 			}
 
 			// If an object has been found
@@ -877,7 +929,7 @@ int StelUI::handle_clic(Uint16 x, Uint16 y, S_GUI_VALUE button, S_GUI_VALUE stat
 					// potentially record this action
 					std::ostringstream oss;
 					oss << ((HipStar *)core->selected_object)->get_hp_number();
-					core->scripts->record_command("select hp " + oss.str());
+					app->scripts->record_command("select hp " + oss.str());
 
 				}
 				else
@@ -890,7 +942,7 @@ int StelUI::handle_clic(Uint16 x, Uint16 y, S_GUI_VALUE button, S_GUI_VALUE stat
 					core->ssystem->setSelected((Planet*)core->selected_object);
 
 					// potentially record this action
-					core->scripts->record_command("select planet " + ((Planet *)core->selected_object)->getEnglishName());
+					app->scripts->record_command("select planet " + ((Planet *)core->selected_object)->getEnglishName());
 
 				}
 				else
@@ -902,7 +954,7 @@ int StelUI::handle_clic(Uint16 x, Uint16 y, S_GUI_VALUE button, S_GUI_VALUE stat
 				{
 
 					// potentially record this action
-					core->scripts->record_command("select nebula " + ((Nebula *)core->selected_object)->getEnglishName());
+					app->scripts->record_command("select nebula " + ((Nebula *)core->selected_object)->getEnglishName());
 
 				}
 
@@ -936,7 +988,7 @@ int StelUI::handle_keys(Uint16 key, S_GUI_VALUE state)
 		if (key == SDLK_q && SDL_GetModState() & KMOD_META)
 		{
 #endif
-			core->quit();
+			app->quit();
 		}
 
 #ifndef MACOSX
@@ -948,8 +1000,8 @@ int StelUI::handle_keys(Uint16 key, S_GUI_VALUE state)
 #endif
 
 			// first clear out audio and images kept in core
-			core->commander->execute_command( "script action end");
-			core->scripts->play_startup_script();
+			app->commander->execute_command( "script action end");
+			app->scripts->play_startup_script();
 			return 1;
 		}
 
@@ -957,73 +1009,73 @@ int StelUI::handle_keys(Uint16 key, S_GUI_VALUE state)
 		// if script is running, only script control keys are accessible
 		// to pause/resume/cancel the script
 		// (otherwise script could get very confused by user interaction)
-		if(core->scripts->is_playing())
+		if(app->scripts->is_playing())
 		{
 
 			// here reusing time control keys to control the script playback
 			if(key==SDLK_6)
 			{
 				// pause/unpause script
-				core->commander->execute_command( "script action pause");
-				core->time_multiplier = 1;  // don't allow resumption of ffwd this way (confusing for audio)
+				app->commander->execute_command( "script action pause");
+				app->time_multiplier = 1;  // don't allow resumption of ffwd this way (confusing for audio)
 			}
 			else if(key==SDLK_k)
 			{
-				core->commander->execute_command( "script action resume");
-				core->time_multiplier = 1;
+				app->commander->execute_command( "script action resume");
+				app->time_multiplier = 1;
 			}
-			else if(key==SDLK_7 || key==0x0003 || (key==SDLK_m && core->FlagEnableTuiMenu))
+			else if(key==SDLK_7 || key==0x0003 || (key==SDLK_m && FlagEnableTuiMenu))
 			{  // ctrl-c
 				// TODO: should double check with user here...
-				core->commander->execute_command( "script action end");
-				if(key==SDLK_m) core->FlagShowTuiMenu = true;
+				app->commander->execute_command( "script action end");
+				if(key==SDLK_m) FlagShowTuiMenu = true;
 			}
 			// TODO n is bad key if ui allowed
 			else if(key==SDLK_GREATER || key==SDLK_n)
 			{
-				core->commander->execute_command( "audio volume increment");
+				app->commander->execute_command( "audio volume increment");
 			}
 			// TODO d is bad key if ui allowed
 			else if(key==SDLK_LESS || key==SDLK_d)
 			{
-				core->commander->execute_command( "audio volume decrement");
+				app->commander->execute_command( "audio volume decrement");
 
 			}
 			else if(key==SDLK_j)
 			{
-				if(core->time_multiplier==2) {
-					core->time_multiplier = 1;
+				if(app->time_multiplier==2) {
+					app->time_multiplier = 1;
 
 					// restart audio in correct place
-					core->commander->execute_command( "audio action sync");
-				} else if(core->time_multiplier > 1 ) {
-					core->time_multiplier /= 2;
+					app->commander->execute_command( "audio action sync");
+				} else if(app->time_multiplier > 1 ) {
+					app->time_multiplier /= 2;
 				}
 
 			}
 			else if(key==SDLK_l)
 			{
 				// stop audio since won't play at higher speeds
-				core->commander->execute_command( "audio action pause");
-				core->time_multiplier *= 2;
-				if(core->time_multiplier>8) core->time_multiplier = 8;
+				app->commander->execute_command( "audio action pause");
+				app->time_multiplier *= 2;
+				if(app->time_multiplier>8) app->time_multiplier = 8;
 			}
-			else if(!core->scripts->get_allow_ui()) {
+			else if(!app->scripts->get_allow_ui()) {
 				cout << "Playing a script.  Press CTRL-C (or 7) to stop." << endl;
 			}
 
-			if(!core->scripts->get_allow_ui()) return 0;  // only limited user interaction allowed with script
+			if(!app->scripts->get_allow_ui()) return 0;  // only limited user interaction allowed with script
 
 		} else {
-			core->time_multiplier = 1;  // if no script in progress always real time
+			app->time_multiplier = 1;  // if no script in progress always real time
 
 			// normal time controls here (taken over for script control above if playing a script)
-			if(key==SDLK_k) core->commander->execute_command( "timerate rate 1");
-			if(key==SDLK_l) core->commander->execute_command( "timerate action increment");
-			if(key==SDLK_j) core->commander->execute_command( "timerate action decrement");
-			if(key==SDLK_6) core->commander->execute_command( "timerate action pause");
-			if(key==SDLK_7) core->commander->execute_command( "timerate rate 0");
-			if(key==SDLK_8) core->commander->execute_command( "date load preset");
+			if(key==SDLK_k) app->commander->execute_command( "timerate rate 1");
+			if(key==SDLK_l) app->commander->execute_command( "timerate action increment");
+			if(key==SDLK_j) app->commander->execute_command( "timerate action decrement");
+			if(key==SDLK_6) app->commander->execute_command( "timerate action pause");
+			if(key==SDLK_7) app->commander->execute_command( "timerate rate 0");
+			if(key==SDLK_8) app->commander->execute_command( "date load preset");
 
 		}
 
@@ -1034,19 +1086,19 @@ int StelUI::handle_keys(Uint16 key, S_GUI_VALUE state)
 		if (key == SDLK_r && SDL_GetModState() & KMOD_META)
 		{
 #endif
-			if(core->scripts->is_recording())
+			if(app->scripts->is_recording())
 			{
-				core->commander->execute_command( "script action cancelrecord");
+				app->commander->execute_command( "script action cancelrecord");
 				show_message(_("Command recording stopped."), 3000);
 			}
 			else
 			{
-				core->commander->execute_command( "script action record");
+				app->commander->execute_command( "script action record");
 
-				if(core->scripts->is_recording())
+				if(app->scripts->is_recording())
 				{
 					show_message(wstring( _("Recording commands to script file:\n")
-					                     + StelUtility::stringToWstring(core->scripts->get_record_filename()) + L"\n\n"
+					                     + StelUtility::stringToWstring(app->scripts->get_record_filename()) + L"\n\n"
 					                     + _("Hit CTRL-R again to stop.\n")), 4000);
 				}
 				else
@@ -1060,20 +1112,20 @@ int StelUI::handle_keys(Uint16 key, S_GUI_VALUE state)
 		if(key==SDLK_ESCAPE)
 		{
 			// close search mode
-			core->FlagSearch=false;
-			search_win->setVisible(core->FlagSearch);
+			FlagSearch=false;
+			search_win->setVisible(FlagSearch);
 	
 			// close config dialog
-			core->FlagConfig = false;
-			config_win->setVisible(core->FlagConfig);
+			FlagConfig = false;
+			config_win->setVisible(FlagConfig);
 	
 			// close help dialog
-			core->FlagHelp = false;
-			help_win->setVisible(core->FlagHelp);
+			FlagHelp = false;
+			help_win->setVisible(FlagHelp);
 	
 			// close information dialog
-			core->FlagInfos = false;
-			licence_win->setVisible(core->FlagInfos);
+			FlagInfos = false;
+			licence_win->setVisible(FlagInfos);
 		}
 		// END RFE 1310384
 
@@ -1084,52 +1136,52 @@ int StelUI::handle_keys(Uint16 key, S_GUI_VALUE state)
 		if (key == SDLK_f && SDL_GetModState() & KMOD_META)
 		{
 #endif
-			core->FlagSearch = !core->FlagSearch;
-			search_win->setVisible(core->FlagSearch);
+			FlagSearch = !FlagSearch;
+			search_win->setVisible(FlagSearch);
 		}
 
-		if(key==SDLK_r) core->commander->execute_command( "flag constellation_art toggle");
+		if(key==SDLK_r) app->commander->execute_command( "flag constellation_art toggle");
 
 
-		if(key=='c') core->commander->execute_command( "flag constellation_drawing toggle");
-		if(key=='C') core->commander->execute_command( "flag constellation_boundaries toggle");
+		if(key=='c') app->commander->execute_command( "flag constellation_drawing toggle");
+		if(key=='C') app->commander->execute_command( "flag constellation_boundaries toggle");
 
-		if(key=='d') core->commander->execute_command( "flag star_names toggle");
+		if(key=='d') app->commander->execute_command( "flag star_names toggle");
 
 		if(key==SDLK_1)
 		{
-			core->FlagConfig=!core->FlagConfig;
-			config_win->setVisible(core->FlagConfig);
+			FlagConfig=!FlagConfig;
+			config_win->setVisible(FlagConfig);
 		}
 		if(key==SDLK_p)
 		{
 			if(!core->getFlagPlanetsHints())
 			{
-				core->commander->execute_command("flag planet_names on");
+				app->commander->execute_command("flag planet_names on");
 			}
 			else if( !core->getFlagPlanetsOrbits())
 			{
-				core->commander->execute_command("flag planet_orbits on");
+				app->commander->execute_command("flag planet_orbits on");
 			}
 			else
 			{
-				core->commander->execute_command("flag planet_orbits off");
-				core->commander->execute_command("flag planet_names off");
+				app->commander->execute_command("flag planet_orbits off");
+				app->commander->execute_command("flag planet_names off");
 			}
 		}
-		if(key==SDLK_v) core->commander->execute_command( "flag constellation_names toggle");
+		if(key==SDLK_v) app->commander->execute_command( "flag constellation_names toggle");
 		if(key==SDLK_z) {
 			if(!core->getFlagMeridianLine()) {
-				if(core->getFlagAzimutalGrid()) core->commander->execute_command( "flag azimuthal_grid 0");
-				else core->commander->execute_command( "flag meridian_line 1");
+				if(core->getFlagAzimutalGrid()) app->commander->execute_command( "flag azimuthal_grid 0");
+				else app->commander->execute_command( "flag meridian_line 1");
 			} else {
-				core->commander->execute_command( "flag meridian_line 0");
-				core->commander->execute_command( "flag azimuthal_grid 1");
+				app->commander->execute_command( "flag meridian_line 0");
+				app->commander->execute_command( "flag azimuthal_grid 1");
 			}
 		}
-		if(key==SDLK_e) core->commander->execute_command( "flag equatorial_grid toggle");
+		if(key==SDLK_e) app->commander->execute_command( "flag equatorial_grid toggle");
 
-  		if(key==SDLK_n) core->commander->execute_command( "flag nebula_names toggle");
+  		if(key==SDLK_n) app->commander->execute_command( "flag nebula_names toggle");
 		if(key=='N') {
 			core->setFlagNebula(!core->getFlagNebula());
 		}
@@ -1137,68 +1189,68 @@ int StelUI::handle_keys(Uint16 key, S_GUI_VALUE state)
 /*
             if (!core->nebulas->getFlagHints())
             {
-               core->commander->execute_command( "flag nebula_names on");
+               app->commander->execute_command( "flag nebula_names on");
             }
             else if (!core->FlagNebulaLongName)
             {
-                 core->commander->execute_command( "flag nebula_long_names on");
+                 app->commander->execute_command( "flag nebula_long_names on");
             }
             else
             {
-                 core->commander->execute_command( "flag nebula_names off");
-                 core->commander->execute_command( "flag nebula_long_names off");
+                 app->commander->execute_command( "flag nebula_names off");
+                 app->commander->execute_command( "flag nebula_long_names off");
             }
 */
-		if(key==SDLK_g) core->commander->execute_command( "flag landscape toggle");
-		if(key==SDLK_f) core->commander->execute_command( "flag fog toggle");
-		if(key==SDLK_q) core->commander->execute_command( "flag cardinal_points toggle");
-		if(key==SDLK_a) core->commander->execute_command( "flag atmosphere toggle");
+		if(key==SDLK_g) app->commander->execute_command( "flag landscape toggle");
+		if(key==SDLK_f) app->commander->execute_command( "flag fog toggle");
+		if(key==SDLK_q) app->commander->execute_command( "flag cardinal_points toggle");
+		if(key==SDLK_a) app->commander->execute_command( "flag atmosphere toggle");
 
 		if(key==SDLK_h)
 		{
-			core->FlagHelp=!core->FlagHelp;
-			help_win->setVisible(core->FlagHelp);
+			FlagHelp=!FlagHelp;
+			help_win->setVisible(FlagHelp);
 		}
 		if(key==SDLK_COMMA || key==SDLK_4)
 		{
 			if(!core->getFlagEclipticLine())
 			{
-				core->commander->execute_command( "flag ecliptic_line on");
+				app->commander->execute_command( "flag ecliptic_line on");
 			}
 			else if( !core->getFlagPlanetsTrails())
 			{
-				core->commander->execute_command( "flag object_trails on");
+				app->commander->execute_command( "flag object_trails on");
 				core->startPlanetsTrails(true);
 			}
 			else
 			{
-				core->commander->execute_command( "flag object_trails off");
+				app->commander->execute_command( "flag object_trails off");
 				core->startPlanetsTrails(false);
-				core->commander->execute_command( "flag ecliptic_line off");
+				app->commander->execute_command( "flag ecliptic_line off");
 			}
 		}
-		if(key==SDLK_PERIOD || key==SDLK_5) core->commander->execute_command( "flag equator_line toggle");
+		if(key==SDLK_PERIOD || key==SDLK_5) app->commander->execute_command( "flag equator_line toggle");
 
 		if(key==SDLK_t)
 		{
 			core->navigation->set_flag_lock_equ_pos(!core->navigation->get_flag_lock_equ_pos());
 		}
 		if(key==SDLK_s && !(SDL_GetModState() & KMOD_CTRL))
-			core->commander->execute_command( "flag stars toggle");
+			app->commander->execute_command( "flag stars toggle");
 
-		if(key==SDLK_SPACE) core->commander->execute_command("flag track_object on");
+		if(key==SDLK_SPACE) app->commander->execute_command("flag track_object on");
 
 		if(key==SDLK_i)
 		{
-			core->FlagInfos=!core->FlagInfos;
-			licence_win->setVisible(core->FlagInfos);
+			FlagInfos=!FlagInfos;
+			licence_win->setVisible(FlagInfos);
 		}
-		if(key==SDLK_EQUALS) core->commander->execute_command( "date relative 1");
-		if(key==SDLK_MINUS) core->commander->execute_command( "date relative -1");
+		if(key==SDLK_EQUALS) app->commander->execute_command( "date relative 1");
+		if(key==SDLK_MINUS) app->commander->execute_command( "date relative -1");
 
-		if(key==SDLK_m && core->FlagEnableTuiMenu) core->FlagShowTuiMenu = true;  // not recorded
+		if(key==SDLK_m && FlagEnableTuiMenu) FlagShowTuiMenu = true;  // not recorded
 
-		if(key==SDLK_o) core->commander->execute_command( "flag moon_scaled toggle");
+		if(key==SDLK_o) app->commander->execute_command( "flag moon_scaled toggle");
 
 		if(key==SDLK_9)
 		{
@@ -1206,42 +1258,42 @@ int StelUI::handle_keys(Uint16 key, S_GUI_VALUE state)
 
 			if(zhr <= 10 )
 			{
-				core->commander->execute_command("meteors zhr 80");  // standard Perseids rate
+				app->commander->execute_command("meteors zhr 80");  // standard Perseids rate
 			}
 			else if( zhr <= 80 )
 			{
-				core->commander->execute_command("meteors zhr 10000"); // exceptional Leonid rate
+				app->commander->execute_command("meteors zhr 10000"); // exceptional Leonid rate
 			}
 			else if( zhr <= 10000 )
 			{
-				core->commander->execute_command("meteors zhr 144000");  // highest ever recorded ZHR (1966 Leonids)
+				app->commander->execute_command("meteors zhr 144000");  // highest ever recorded ZHR (1966 Leonids)
 			}
 			else
 			{
-				core->commander->execute_command("meteors zhr 10");  // set to default base rate (10 is normal, 0 would be none)
+				app->commander->execute_command("meteors zhr 10");  // set to default base rate (10 is normal, 0 would be none)
 			}
 		}
 
-		if(key==SDLK_LEFTBRACKET) core->commander->execute_command( "date relative -7");
-		if(key==SDLK_RIGHTBRACKET) core->commander->execute_command( "date relative 7");
+		if(key==SDLK_LEFTBRACKET) app->commander->execute_command( "date relative -7");
+		if(key==SDLK_RIGHTBRACKET) app->commander->execute_command( "date relative 7");
 		if(key==SDLK_SLASH)
 		{
-			if (SDL_GetModState() & KMOD_CTRL)  core->commander->execute_command( "zoom auto out");
+			if (SDL_GetModState() & KMOD_CTRL)  app->commander->execute_command( "zoom auto out");
 			else {
 				// here we help script recorders by selecting the right type of zoom option
 				// based on current settings of manual or full auto zoom
-				if(core->FlagManualZoom) core->commander->execute_command( "zoom auto in manual 1");
-				else core->commander->execute_command( "zoom auto in");
+				if(core->FlagManualZoom) app->commander->execute_command( "zoom auto in manual 1");
+				else app->commander->execute_command( "zoom auto in");
 			}
 		}
-		if(key==SDLK_BACKSLASH) core->commander->execute_command( "zoom auto out");
+		if(key==SDLK_BACKSLASH) app->commander->execute_command( "zoom auto out");
 		if(key==SDLK_x)
 		{
-			core->commander->execute_command( "flag show_tui_datetime toggle");
+			app->commander->execute_command( "flag show_tui_datetime toggle");
 
 			// keep these in sync.  Maybe this should just be one flag.
-			if(core->FlagShowTuiDateTime) core->commander->execute_command( "flag show_tui_short_obj_info on");
-			else core->commander->execute_command( "flag show_tui_short_obj_info off");
+			if(FlagShowTuiDateTime) app->commander->execute_command( "flag show_tui_short_obj_info on");
+			else app->commander->execute_command( "flag show_tui_short_obj_info off");
 		}
 		if(key==SDLK_RETURN)
 		{
@@ -1258,7 +1310,7 @@ void StelUI::gui_update_widgets(int delta_time)
 	updateTopBar();
 
 	// handle mouse cursor timeout
-	if(core->MouseCursorTimeout > 0) {
+	if(MouseCursorTimeout > 0) {
 		if(MouseTimeLeft > delta_time) MouseTimeLeft -= delta_time;
 		else {
 			// hide cursor
@@ -1282,11 +1334,11 @@ void StelUI::gui_update_widgets(int delta_time)
 	}
 */
 	// TONY
-	if (core->FlagShowSelectedObjectInfo && core->selected_object) 
+	if (FlagShowSelectedObjectInfo && core->selected_object) 
 		updateInfoSelectString();
 
-	bt_flag_ctr->setVisible(core->FlagMenu);
-	bt_time_control_ctr->setVisible(core->FlagMenu);
+	bt_flag_ctr->setVisible(FlagMenu);
+	bt_time_control_ctr->setVisible(FlagMenu);
 
 	bt_flag_constellation_draw->setState(core->getFlagConstellationLines());
 	bt_flag_constellation_name->setState(core->getFlagConstellationNames());
@@ -1300,8 +1352,8 @@ void StelUI::gui_update_widgets(int delta_time)
 	bt_flag_help->setState(help_win->getVisible());
 	bt_flag_equatorial_mode->setState(core->navigation->get_viewing_mode()==Navigator::VIEW_EQUATOR);
 	bt_flag_config->setState(config_win->getVisible());
-	bt_flag_chart->setState(core->FlagChart);
-	bt_flag_night->setState(core->FlagNight);
+	bt_flag_chart->setState(core->getVisionModeChart());
+	bt_flag_night->setState(core->getVisionModeNight());
 	bt_flag_search->setState(search_win->getVisible()); 
 	bt_flag_goto->setState(false); 
 
@@ -1311,15 +1363,12 @@ void StelUI::gui_update_widgets(int delta_time)
 // Update the infos about the selected object in the TextLabel widget
 void StelUI::updateInfoSelectString(void)
 {
-//	if (core->FlagShowSelectedObjectInfo)
-//	{
-//		info_select_ctr->setVisible(1);
-	if (draw_mode == DM_NORMAL)
+	if (core->getVisionModeNormal())
 	{
 		if (core->selected_object->get_type()==StelObject::STEL_OBJECT_NEBULA)
-			info_select_txtlbl->setTextColor(core->NebulaLabelColor[draw_mode]);
+			info_select_txtlbl->setTextColor(core->nebulas->getLabelColor());
 		else if (core->selected_object->get_type()==StelObject::STEL_OBJECT_PLANET)
-			info_select_txtlbl->setTextColor(core->PlanetNamesColor[draw_mode]);
+			info_select_txtlbl->setTextColor(core->ssystem->getLabelColor());
 		else if (core->selected_object->get_type()==StelObject::STEL_OBJECT_STAR)
 			info_select_txtlbl->setTextColor(core->selected_object->get_RGB());
 	}
@@ -1327,7 +1376,6 @@ void StelUI::updateInfoSelectString(void)
 		info_select_txtlbl->setTextColor(Vec3f(1.0,0.2,0.2));
 	
 	info_select_txtlbl->setLabel(core->selected_object->get_info_string(core->navigation));
-//	}
 }
 
 void StelUI::setTitleObservatoryName(const wstring& name)
@@ -1340,7 +1388,7 @@ void StelUI::setTitleObservatoryName(const wstring& name)
 		oss << StelUtility::stringToWstring(APP_NAME) << L" (" << name << L")";
 		top_bar_appName_lbl->setLabel(oss.str());
 	}
-	top_bar_appName_lbl->setPos(core->screen_W/2-top_bar_appName_lbl->getSizex()/2,2);
+	top_bar_appName_lbl->setPos(core->getViewportW()/2-top_bar_appName_lbl->getSizex()/2,2);
 }
 
 wstring StelUI::getTitleWithAltitude(void)

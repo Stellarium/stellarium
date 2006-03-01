@@ -70,12 +70,14 @@ bool NebulaMgr::read(float font_size, const string& font_name, const string& cat
 // Draw all the Nebulaes
 void NebulaMgr::draw(Projector* prj, const Navigator * nav, ToneReproductor* eye)
 {
-	Nebula::hints_brightness = hintsFader.getInterstate();
+	Nebula::hints_brightness = hintsFader.getInterstate()*flagShow.getInterstate();
 
 	glEnable(GL_TEXTURE_2D);
 	glEnable(GL_BLEND);
-	if (draw_mode == DM_NORMAL) glBlendFunc(GL_ONE, GL_ONE);
-	else glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // charting
+	
+	glBlendFunc(GL_ONE, GL_ONE);
+	// if (draw_mode == DM_NORMAL) glBlendFunc(GL_ONE, GL_ONE);
+	// else glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // charting
 
 	Vec3f pXYZ;
 
@@ -85,7 +87,7 @@ void NebulaMgr::draw(Projector* prj, const Navigator * nav, ToneReproductor* eye
 	for(iter=neb_array.begin();iter!=neb_array.end();iter++)
 	{
 		// improve performance by skipping if too small to see
-		if ((hintsFader  && (*iter)->mag <= getMaxMagHints()) || (*iter)->get_on_screen_size(prj, nav)>5)
+		if ((*iter)->get_on_screen_size(prj, nav)>5 || (hintsFader  && (*iter)->mag <= getMaxMagHints()))
 		{
 			// correct for precession
 			pXYZ = nav->j2000_to_earth_equ((*iter)->XYZ);
@@ -93,18 +95,18 @@ void NebulaMgr::draw(Projector* prj, const Navigator * nav, ToneReproductor* eye
 			// project in 2D to check if the nebula is in screen
 			if ( !prj->project_earth_equ_check(pXYZ,(*iter)->XY) ) continue;
 
-			if (draw_mode == DM_NORMAL)
-			{
+			// if (draw_mode == DM_NORMAL)
+			//{
 				if ((*iter)->hasTex()) (*iter)->draw_tex(prj, nav, eye);
 				else (*iter)->draw_no_tex(prj, nav, eye);
-			}
-			else
-				(*iter)->draw_chart(prj, nav);	// charting
+			//}
+			//else
+			//	(*iter)->draw_chart(prj, nav);	// charting
 
 			if (hintsFader)
 			{
 				if ((*iter)->mag <= getMaxMagHints()) (*iter)->draw_name(prj);
-				if (hintsFader && !draw_mode && (*iter)->mag <= getMaxMagHints()) (*iter)->draw_circle(prj, nav);
+				if (hintsFader && (*iter)->mag <= getMaxMagHints()) (*iter)->draw_circle(prj, nav);
 			}
 		}
 	}
@@ -393,7 +395,6 @@ bool NebulaMgr::loadTextures(const string& fileName, LoadingBar& lb)
 //! The translation is done using gettext with translated strings defined in translations.h
 void NebulaMgr::translateNames(Translator& trans)
 {
-	cout << "( translate nebula names)" << endl;
 	vector<Nebula*>::iterator iter;
 	for( iter = neb_array.begin(); iter < neb_array.end(); iter++ )
 	{
