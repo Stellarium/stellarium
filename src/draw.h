@@ -149,7 +149,12 @@ private:
 	LinearFader fader;
 };
 
-void DrawPoint(float X,float Y,float Z);
-
+// Class which manages the displaying of the Milky Way
+class Draw
+{
+public:
+	// Draw a point... (used for tests)
+	static void drawPoint(float X,float Y,float Z);
+};
 
 #endif // __DRAW_H__

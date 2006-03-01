@@ -16,28 +16,17 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#include "stel_sdl.h"
+#include "stelapp.h"
+#include "s_gui.h"
 
 #ifdef HAVE_SDL_MIXER_H
 #include "SDL_mixer.h"
 #endif
 
-StelSdl::StelSdl(StelCore * _core)
-{
-	if (!_core)
-	{
-		printf("ERROR : In stel_sdl constructor, unvalid core.");
-		exit(-1);
-	}
-	core = _core;
-}
+using namespace s_gui;
 
-StelSdl::~StelSdl()
-{
-  SDL_FreeCursor(Cursor);
-}
 
-void StelSdl::init(void)
+void StelApp::initSDL(int w, int h, int bbpMode, bool fullScreen, string iconFile)
 {
     Uint32	Vflags;		// Our Video Flags
     Screen = NULL;
@@ -49,11 +38,11 @@ void StelSdl::init(void)
     if(SDL_Init(SDL_INIT_VIDEO |  SDL_INIT_AUDIO | SDL_INIT_NOPARACHUTE | SDL_INIT_TIMER)<0)
 	{
 		// couldn't init audio, so try without
-		printf("Unable to open SDL with audio: %s\n", SDL_GetError() );
+		fprintf(stderr, "Error: unable to open SDL with audio: %s\n", SDL_GetError() );
 
 		if(SDL_Init(SDL_INIT_VIDEO | SDL_INIT_NOPARACHUTE)<0)
 		{
-			printf("Unable to open SDL: %s\n", SDL_GetError() );
+			fprintf(stderr, "Error: unable to open SDL: %s\n", SDL_GetError() );
 			exit(-1);
 		}
     } 
@@ -73,7 +62,7 @@ void StelSdl::init(void)
 	// SDL_mixer is not available - no audio
 	if(SDL_Init(SDL_INIT_VIDEO | SDL_INIT_NOPARACHUTE)<0)
 	{
-		printf("Unable to open SDL: %s\n", SDL_GetError() );
+		fprintf(stderr, "Unable to open SDL: %s\n", SDL_GetError() );
 		exit(-1);
 	}
 #endif
@@ -88,34 +77,28 @@ void StelSdl::init(void)
     Vflags = SDL_HWSURFACE|SDL_OPENGL;//|SDL_DOUBLEBUF;
 	SDL_GL_SetAttribute(SDL_GL_STENCIL_SIZE,1);
 	// If fullscreen, set the Flag
-    if (core->getFullscreen()) Vflags|=SDL_FULLSCREEN;
+    if (fullScreen) Vflags|=SDL_FULLSCREEN;
 
 	// Create the SDL screen surface
-    Screen = SDL_SetVideoMode(core->get_screen_W(), core->get_screen_H(), core->getBppMode(), Vflags);
+    Screen = SDL_SetVideoMode(w, h, bbpMode, Vflags);
 	if(!Screen)
 	{
-		printf("sdl: Couldn't set %dx%d video mode (%s), retrying with stencil size 0\n",
- 		core->get_screen_W(), core->get_screen_H(), SDL_GetError());
-
+		printf("Warning: Couldn't set %dx%d video mode (%s), retrying with stencil size 0\n", w, h, SDL_GetError());
 		SDL_GL_SetAttribute(SDL_GL_STENCIL_SIZE,0);
-		Screen = SDL_SetVideoMode(core->get_screen_W(), core->get_screen_H(), core->getBppMode(), Vflags);
+		Screen = SDL_SetVideoMode(w, h, bbpMode, Vflags);
 
 		if(!Screen)
 		{
-			printf("sdl: Couldn't set %dx%d video mode: %s!\n",
-			core->get_screen_W(), core->get_screen_H(), SDL_GetError());
+			fprintf(stderr, "Error: Couldn't set %dx%d video mode: %s!\n", w, h, SDL_GetError());
 			exit(-1);
 		}	
 	}
 
 	// Disable key repeat
     SDL_EnableKeyRepeat(0, 0);
-
 	SDL_EnableUNICODE(1);
 
-
 	// set mouse cursor 
-/* XPM */
 static const char *arrow[] = {
   /* width height num_colors chars_per_pixel */
   "    32    32        3            1",
@@ -159,14 +142,14 @@ static const char *arrow[] = {
   "15,17"
 };
 
- Cursor = create_cursor(arrow);
- SDL_SetCursor(Cursor);
+	Cursor = create_cursor(arrow);
+	SDL_SetCursor(Cursor);
 
 	// Set the window caption
 	SDL_WM_SetCaption(APP_NAME, APP_NAME);
 
 	// Set the window icon
-	SDL_Surface *icon = SDL_LoadBMP((core->getDataDir() + "icon.bmp").c_str());
+	SDL_Surface *icon = SDL_LoadBMP((iconFile).c_str());
 	SDL_WM_SetIcon(icon, NULL);
 	SDL_FreeSurface(icon);
 	
@@ -177,7 +160,7 @@ static const char *arrow[] = {
 
 
 // from an sdl wiki
-SDL_Cursor* StelSdl::create_cursor(const char *image[])
+SDL_Cursor* StelApp::create_cursor(const char *image[])
 {
   int i, row, col;
   Uint8 data[4*32];
@@ -213,7 +196,7 @@ SDL_Cursor* StelSdl::create_cursor(const char *image[])
 
 
 // Terminate the application
-void TerminateApplication(void)
+void StelApp::terminateApplication(void)
 {
 	static SDL_Event Q;						// Send a SDL_QUIT event
 	Q.type = SDL_QUIT;						// To the SDL event queue
@@ -224,7 +207,7 @@ void TerminateApplication(void)
 	}
 }
 
-void StelSdl::start_main_loop(void)
+void StelApp::start_main_loop()
 {
     bool AppVisible = true;			// At The Beginning, Our App Is Visible
     enum S_GUI_VALUE bt;
@@ -245,7 +228,7 @@ void StelSdl::start_main_loop(void)
 
 				case SDL_VIDEORESIZE:
 					// Recalculate The OpenGL Scene Data For The New Window
-					resize_GL(E.resize.w, E.resize.h);
+					if (E.resize.h && E.resize.w) core->setScreenSize(E.resize.w, E.resize.h);
 					break;
 
 				case SDL_ACTIVEEVENT:
@@ -258,7 +241,7 @@ void StelSdl::start_main_loop(void)
 					break;
 
 				case SDL_MOUSEMOTION:
-				  	core->handleMove(E.motion.x,E.motion.y);
+				  	handleMove(E.motion.x,E.motion.y);
 					break;
 				
 				case SDL_MOUSEBUTTONDOWN:
@@ -272,7 +255,7 @@ void StelSdl::start_main_loop(void)
 						case SDL_BUTTON_WHEELDOWN : bt=S_GUI_MOUSE_WHEELDOWN; break;
 						default : bt=S_GUI_MOUSE_LEFT;
 					}
-					core->handleClick(E.button.x,E.button.y,bt,S_GUI_PRESSED);
+					handleClick(E.button.x,E.button.y,bt,S_GUI_PRESSED);
 					break;
 
 				case SDL_MOUSEBUTTONUP:
@@ -286,7 +269,7 @@ void StelSdl::start_main_loop(void)
 						case SDL_BUTTON_WHEELDOWN : bt=S_GUI_MOUSE_WHEELDOWN; break;
 						default : bt=S_GUI_MOUSE_LEFT;
 					}
-					core->handleClick(E.button.x,E.button.y,bt,S_GUI_RELEASED);
+					handleClick(E.button.x,E.button.y,bt,S_GUI_RELEASED);
 					break;
 
 				case SDL_KEYDOWN:
@@ -305,8 +288,8 @@ void StelSdl::start_main_loop(void)
 
 					// use unicode translation, since not keyboard dependent
 					// however, for non-printing keys must revert to just keysym... !
-					if ((E.key.keysym.unicode && !core->handleKeys(E.key.keysym.unicode,S_GUI_PRESSED)) ||
-						(!E.key.keysym.unicode && !core->handleKeys(E.key.keysym.sym,S_GUI_PRESSED)))
+					if ((E.key.keysym.unicode && !handleKeys(E.key.keysym.unicode,S_GUI_PRESSED)) ||
+						(!E.key.keysym.unicode && !handleKeys(E.key.keysym.sym,S_GUI_PRESSED)))
 					{
 
 						/* Fumio patch... can't use because ignores unicode values and hence is US keyboard specific.
@@ -383,11 +366,11 @@ void StelSdl::start_main_loop(void)
 
 					}
 					// Rescue escape in case of lock : CTRL + ESC forces brutal quit
-					if (E.key.keysym.sym==SDLK_ESCAPE && (SDL_GetModState() & KMOD_CTRL)) TerminateApplication();
+					if (E.key.keysym.sym==SDLK_ESCAPE && (SDL_GetModState() & KMOD_CTRL)) terminateApplication();
 					break;
 
 				case SDL_KEYUP:
-					core->handleKeys(E.key.keysym.sym,S_GUI_RELEASED);
+					handleKeys(E.key.keysym.sym,S_GUI_RELEASED);
 			}
 		}
 		else  // No events to poll
@@ -403,24 +386,16 @@ void StelSdl::start_main_loop(void)
 
 				TickCount = SDL_GetTicks();			// Get present ticks
 				// This is used to constraint the maximum FPS rate
-				if (TickCount-LastCount < 1000.f/core->getMaxFPS())
+				if (TickCount-LastCount < 1000.f/getMaxFPS())
 				{
-					SDL_Delay((unsigned int)(1000.f/core->getMaxFPS())-(TickCount-LastCount));
+					SDL_Delay((unsigned int)(1000.f/getMaxFPS())-(TickCount-LastCount));
 				}
 				TickCount = SDL_GetTicks();			// Get present ticks
-				core->update(TickCount-LastCount);	// And update the motions and data
-				core->draw(TickCount-LastCount);	// Do the drawings!
+				this->update(TickCount-LastCount);	// And update the motions and data
+				this->draw(TickCount-LastCount);	// Do the drawings!
 				LastCount = TickCount;				// Save the present tick probing
 				SDL_GL_SwapBuffers();				// And swap the buffers
 			}
 		}
 	}
 }
-
-
-void StelSdl::resize_GL(int w, int h)
-{
-    if (!h || !w) return;
-	core->setScreenSize(w, h);
-}
-

@@ -96,7 +96,7 @@ private:
 	static s_font *starFont;
 };
 
-struct Hip_Star_Mag_Comparer : public std::binary_function<HipStar*,HipStar*,bool> {
+struct HipStarMagComparer : public std::binary_function<HipStar*,HipStar*,bool> {
      const bool operator()( HipStar* const & x, HipStar* const & y) const {
        return x->get_mag() >= y->get_mag(); 
      }

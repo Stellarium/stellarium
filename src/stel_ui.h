@@ -26,24 +26,27 @@
 
 #include "stellarium.h"
 #include "stel_core.h"
+#include "stelapp.h"
 #include "s_gui.h"
 #include "s_tui.h"
+#include "stel_command_interface.h"
 
 #define TUI_SCRIPT_MSG L"Select and exit to run."
-
-// Predeclaration of the StelCore class
-class StelCore;
 
 using namespace std;
 using namespace s_gui;
 
+class StelApp;
+class StelCommandInterface;
+
 class StelUI
 {
-	friend class StelCore;
+friend class StelCommandInterface;
+friend class StelApp;
 public:
-	StelUI(StelCore *);	// Create a stellarium ui. Need to call init() before use
+	StelUI(StelCore *, StelApp * _app);	// Create a stellarium ui. Need to call init() before use
     virtual ~StelUI();		// Delete the ui
-	void init(void);		// Initialize the ui.
+	void init(const InitParser& conf);		// Initialize the ui.
 	void draw(void);		// Display the ui
 	void gui_update_widgets(int delta_time);		// Update changing values
 
@@ -63,7 +66,6 @@ public:
 	// Update all the tui widgets with values taken from the core parameters
 	void tui_update_widgets(void);
 	void show_message(wstring _message, int _time_out=0);
-    void gotoObject(void);
     void setConstellationAutoComplete(vector<wstring> _autoComplete ) { constellation_edit->setAutoCompleteOptions(_autoComplete);}
     void setPlanetAutoComplete(vector<wstring> _autoComplete ) { planet_edit->setAutoCompleteOptions(_autoComplete);}
     void setStarAutoComplete(vector<wstring> _autoComplete ) { star_edit->setAutoCompleteOptions(_autoComplete);}
@@ -72,7 +74,9 @@ public:
     wstring getTitleWithAltitude(void);
     bool isInitialised(void) { return initialised; }
 private:
-	StelCore * core;		// The main core can be accessed because StelUI is a friend class
+	StelCore * core;		// The main core can be accessed because StelUI is a friend class (TODO fix that)
+	StelApp * app;			// The main application instance
+	
 	bool initialised;
 	s_font * baseFont;		// The standard font
 	s_font * courierFont;	// The standard fixed size font
@@ -80,6 +84,40 @@ private:
 	s_texture * flipBaseTex;	// The standard fill texture
 	s_texture * tex_up;		// Up arrow texture
 	s_texture * tex_down;	// Down arrow texture
+
+	// Flags and variables (moved from StelCore)
+	int FlagShowTopBar;
+    int FlagShowFps;
+	int FlagShowTime;
+	int FlagShowDate;
+	int FlagShowAppName;
+	int FlagShowFov;
+    int FlagMenu;
+    int FlagHelp;
+    int FlagInfos;
+    int FlagConfig;
+    int FlagSearch;
+	int FlagShowSelectedObjectInfo;
+	int FlagShowScriptBar;	
+	Vec3f GuiBaseColor;
+	Vec3f GuiTextColor;
+	Vec3f GuiBaseColorr;
+	Vec3f GuiTextColorr;
+	int FlagUTC_Time;					// if true display UTC time	
+	float BaseFontSize;
+	string BaseFontName;
+	float BaseCFontSize;
+	string BaseCFontName;
+	
+	// Text UI
+	bool FlagEnableTuiMenu;
+	bool FlagShowGravityUi;
+	bool FlagShowTuiMenu;
+	bool FlagShowTuiDateTime;
+	bool FlagShowTuiShortObjInfo;	
+	
+	double MouseCursorTimeout;  // seconds to hide cursor when not used.  0 means no timeout
+
 
 	Container * desktop;	// The container which contains everything
 	bool opaqueGUI;
