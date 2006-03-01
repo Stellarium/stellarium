@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Stellarium 0.7.1\n"
 "Report-Msgid-Bugs-To: stellarium@free.fr\n"
-"POT-Creation-Date: 2006-01-25 21:50+0100\n"
+"POT-Creation-Date: 2006-03-01 18:38+0100\n"
 "PO-Revision-Date: 2006-01-19 10:48+0100\n"
 "Last-Translator: Andras Mohari <mayday@mailpont.hu>\n"
 "Language-Team: Hungarian\n"
@@ -17,7 +17,7 @@ msgstr ""
 "X-Poedit-Language: Hungarian\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: src/main.cpp:53
+#: src/main.cpp:52
 #, c-format
 msgid ""
 "Usage: %s [OPTION] ...\n"
@@ -28,13 +28,13 @@ msgstr ""
 " -v, --version          Kiírja a verziót és kilép.\n"
 " -h, --help             Kiírja ezt a segítséget és kilép.\n"
 
-#: src/main.cpp:77
+#: src/main.cpp:76
 #, c-format
 msgid "%s: Bad command line argument(s)\n"
 msgstr "%s: Rossz parancssori argumentum(ok)\n"
 
 # XXX
-#: src/main.cpp:78
+#: src/main.cpp:77
 #, c-format
 msgid "Try `%s --help' for more information.\n"
 msgstr "Add ki a \"%s --help\" parancsot további információkért.\n"
@@ -44,7 +44,7 @@ msgstr "Add ki a \"%s --help\" parancsot további információkért.\n"
 msgid "Loading Constellation Art: "
 msgstr "Csillagképek ábráinak betöltése: %d/%d"
 
-#: src/hip_star.cpp:77 src/nebula.cpp:71 src/planet.cpp:91
+#: src/hip_star.cpp:77 src/planet.cpp:97
 msgid "Name : "
 msgstr "Név: "
 
@@ -58,45 +58,39 @@ msgstr "(kett)"
 msgid "(Var)"
 msgstr "(vált)"
 
-#: src/hip_star.cpp:104 src/nebula.cpp:78 src/planet.cpp:101
-msgid "RA : "
-msgstr "RA: "
-
-#: src/hip_star.cpp:105 src/nebula.cpp:79 src/planet.cpp:102
-msgid "DE : "
+#: src/hip_star.cpp:104 src/nebula.cpp:82
+#, fuzzy
+msgid "RA/DE: "
 msgstr "DE: "
 
+#: src/hip_star.cpp:110 src/nebula.cpp:89
+#, fuzzy
+msgid "Az/Alt: "
+msgstr "Mag.: "
+
 # XXX
-#: src/hip_star.cpp:107
+#: src/hip_star.cpp:112
 msgid "Spectral : "
 msgstr "Színkép: "
 
-#: src/hip_star.cpp:110 src/nebula.cpp:83 src/planet.cpp:105
+#: src/hip_star.cpp:115 src/nebula.cpp:93 src/planet.cpp:111
 msgid "Magnitude : "
 msgstr "Fényesség: "
 
-#: src/hip_star.cpp:111 src/planet.cpp:107
+#: src/hip_star.cpp:116 src/planet.cpp:113
 msgid "Distance : "
 msgstr "Távolság: "
 
-#: src/hip_star.cpp:115
+#: src/hip_star.cpp:120
 msgid " Light Years"
 msgstr " fényév"
 
-#: src/hip_star.cpp:123 src/nebula.cpp:93 src/planet.cpp:115
-msgid "Az  : "
-msgstr "Az  : "
-
-#: src/hip_star.cpp:124 src/nebula.cpp:94 src/planet.cpp:116
-msgid "Alt : "
-msgstr "Mag.: "
-
-#: src/hip_star.cpp:142 src/nebula.cpp:111 src/planet.cpp:131
+#: src/hip_star.cpp:137 src/planet.cpp:137
 msgid ": mag "
 msgstr ": mag "
 
 # XXX fényév
-#: src/hip_star.cpp:143
+#: src/hip_star.cpp:138
 msgid "ly"
 msgstr "fé"
 
@@ -105,181 +99,182 @@ msgstr "fé"
 msgid "Loading Hipparcos catalog:"
 msgstr "Hipparcos-katalógus betöltése: %d/%d"
 
-#: src/hip_star_mgr.cpp:853 src/hip_star_mgr.cpp:1520
+#: src/hip_star_mgr.cpp:855 src/hip_star_mgr.cpp:1522
 #, c-format
 msgid "Loading HIP/SAO catalogs: %d/%d"
 msgstr "HIP/SAO katalógusok betöltése: %d/%d"
 
-#: src/hip_star_mgr.cpp:1196
+#: src/hip_star_mgr.cpp:1198
 #, c-format
 msgid "Loading HIP catalog: %d/%d"
 msgstr "HIP-katalógus betöltése: %d/%d"
 
-#: src/hip_star_mgr.cpp:1291
+#: src/hip_star_mgr.cpp:1293
 #, c-format
 msgid "Loading SAO catalog: %d/%d"
 msgstr "SAO-katalógus betöltése: %d/%d"
 
-# XXX Katalógus???
-#: src/nebula.cpp:72
-msgid "Cat: NGC "
-msgstr "Kat.: NGC "
-
-#: src/nebula.cpp:84
+#: src/nebula.cpp:94
 msgid "Type : "
 msgstr "Típus: "
 
-#: src/nebula.cpp:85
+#: src/nebula.cpp:95
 msgid "Size : "
 msgstr "Méret: "
 
-#: src/nebula_mgr.cpp:360
+#: src/nebula_mgr.cpp:253
 #, fuzzy
 msgid "Loading NGC catalog: "
 msgstr "NGC-katalógus betöltése: %d/%d"
 
-#: src/nebula_mgr.cpp:495
-#, fuzzy
-msgid "Loading Sharpless catalog:"
-msgstr "Sharpless-katalógus betöltése: %d/%d"
-
-#: src/nebula_mgr.cpp:560
-#, fuzzy
-msgid "Loading Cadwell catalog:"
-msgstr "Cadwell-katalógus betöltése: %d/%d"
-
-#: src/nebula_mgr.cpp:662
+#: src/nebula_mgr.cpp:377
 #, fuzzy
 msgid "Loading Nebula Textures:"
 msgstr "Csillagköd-textúrák betöltése: %d/%d"
 
 #: src/planet.cpp:107
+msgid "RA : "
+msgstr "RA: "
+
+#: src/planet.cpp:108
+msgid "DE : "
+msgstr "DE: "
+
+#: src/planet.cpp:113
 msgid "AU"
 msgstr "CSE"
 
-#: src/stel_ui.cpp:161
+#: src/planet.cpp:121
+msgid "Az  : "
+msgstr "Az  : "
+
+#: src/planet.cpp:122
+msgid "Alt : "
+msgstr "Mag.: "
+
+#: src/stel_ui.cpp:196
 msgid "Message"
 msgstr "Üzenet"
 
-#: src/stel_ui.cpp:251
+#: src/stel_ui.cpp:283
 msgid " (UTC)"
 msgstr " (UTC)"
 
 # XXX
-#: src/stel_ui.cpp:473 src/stel_ui.cpp:589
+#: src/stel_ui.cpp:505 src/stel_ui.cpp:638
 msgid "Script commander"
 msgstr "Parancsfájl kezelő"
 
-#: src/stel_ui.cpp:500
+#: src/stel_ui.cpp:532
 msgid "Invalid Script command"
 msgstr "Érvénytelen parancs"
 
-#: src/stel_ui.cpp:553
+#: src/stel_ui.cpp:602
 msgid "Drawing of the Constellations [C]"
 msgstr "Csillagképek rajzolása [C]"
 
-#: src/stel_ui.cpp:555
+#: src/stel_ui.cpp:604
 msgid "Names of the Constellations [V]"
 msgstr "Csillagképek nevei [V]"
 
-#: src/stel_ui.cpp:557
+#: src/stel_ui.cpp:606
 msgid "Constellations Art [R]"
 msgstr "Csillagképek ábrái [R]"
 
-#: src/stel_ui.cpp:559
+#: src/stel_ui.cpp:608
 msgid "Azimuthal Grid [Z]"
 msgstr "Horizontális rács [Z]"
 
-#: src/stel_ui.cpp:561
+#: src/stel_ui.cpp:610
 msgid "Equatorial Grid [E]"
 msgstr "Egyenlítői rács [E]"
 
-#: src/stel_ui.cpp:563
+#: src/stel_ui.cpp:612
 msgid "Ground [G]"
 msgstr "Terep [G]"
 
-#: src/stel_ui.cpp:565
+#: src/stel_ui.cpp:614
 msgid "Cardinal Points [Q]"
 msgstr "Égtájak [Q]"
 
-#: src/stel_ui.cpp:567
+#: src/stel_ui.cpp:616
 msgid "Atmosphere [A]"
 msgstr "Légkör [A]"
 
-#: src/stel_ui.cpp:569
+#: src/stel_ui.cpp:618
 msgid "Nebulas [N]"
 msgstr "Ködök [N]"
 
-#: src/stel_ui.cpp:571
+#: src/stel_ui.cpp:620
 msgid "Help [H]"
 msgstr "Súgó [H]"
 
 # XXX mount
-#: src/stel_ui.cpp:573
+#: src/stel_ui.cpp:622
 msgid "Equatorial/Altazimuthal Mount [ENTER]"
 msgstr "Egyenlítői/horizontális koordináta-rendszer [ENTER]"
 
-#: src/stel_ui.cpp:575
+#: src/stel_ui.cpp:624
 msgid "Configuration window"
 msgstr "Beállítások"
 
 # XXX
-#: src/stel_ui.cpp:577
+#: src/stel_ui.cpp:626
 msgid "Chart mode"
 msgstr "Térkép mód"
 
-#: src/stel_ui.cpp:579
+#: src/stel_ui.cpp:628
 msgid "Night (red) mode"
 msgstr "Éjjeli (vörös) mód"
 
-#: src/stel_ui.cpp:582
+#: src/stel_ui.cpp:631
 msgid "Quit [CTRL + Q]"
 msgstr "Kilépés [CTRL+Q]"
 
-#: src/stel_ui.cpp:584
+#: src/stel_ui.cpp:633
 msgid "Quit [CMD + Q]"
 msgstr "Kilépés [CMD+Q]"
 
-#: src/stel_ui.cpp:587
+#: src/stel_ui.cpp:636
 msgid "Search for object"
 msgstr "Égitest keresése"
 
-#: src/stel_ui.cpp:591
+#: src/stel_ui.cpp:640
 msgid "Goto selected object [SPACE]"
 msgstr "Kijelölt égitestre ugrás [SPACE]"
 
-#: src/stel_ui.cpp:597
+#: src/stel_ui.cpp:646
 msgid "Decrease Time Speed [J]"
 msgstr "Idő lassítása [J]"
 
-#: src/stel_ui.cpp:599
+#: src/stel_ui.cpp:648
 msgid "Real Time Speed [K]"
 msgstr "Valós idő [K]"
 
-#: src/stel_ui.cpp:601
+#: src/stel_ui.cpp:650
 msgid "Increase Time Speed [L]"
 msgstr "Idő gyorsítása [L]"
 
-#: src/stel_ui.cpp:603
+#: src/stel_ui.cpp:652
 msgid "Return to Current Time"
 msgstr "Vissza a jelenbe"
 
-#: src/stel_ui.cpp:612
+#: src/stel_ui.cpp:661
 #, fuzzy
 msgid ""
 "   Please check for newer versions and send bug reports\n"
-"and comments to us at: http://stellarium.sourceforge.net\n"
+"and comments to us at: http://www.stellarium.org\n"
 "\n"
 msgstr ""
 "   Friss verziót keresel, hibát találtál, megjegyzésed\n"
 "van? Lásd a honlapot: http://stellarium.sourceforge.net\n"
 "\n"
 
-#: src/stel_ui.cpp:631
+#: src/stel_ui.cpp:680
 msgid "Information"
 msgstr "Információ"
 
-#: src/stel_ui.cpp:643
+#: src/stel_ui.cpp:692
 msgid ""
 "Movement & selection:\n"
 "Arrow Keys       : Change viewing RA/DE\n"
@@ -305,7 +300,7 @@ msgstr ""
 "SPACE            : Kijelölt égitest középre igazítása\n"
 "\n"
 
-#: src/stel_ui.cpp:654
+#: src/stel_ui.cpp:703
 msgid ""
 "Display options:\n"
 "ENTER : Equatorial/altazimuthal mount\n"
@@ -333,7 +328,7 @@ msgstr ""
 "4 , : Ekliptika vonala          5 . : Egyenlítő vonala\n"
 "\n"
 
-#: src/stel_ui.cpp:666
+#: src/stel_ui.cpp:715
 msgid ""
 "Dialogs & other controls:\n"
 "H   : Help                      I   : About Stellarium\n"
@@ -351,7 +346,7 @@ msgstr ""
 "CTRL + F : Égitestkereső ki/be\n"
 "\n"
 
-#: src/stel_ui.cpp:673
+#: src/stel_ui.cpp:722
 msgid ""
 "Time & Date:\n"
 "6   : Time rate pause           7   : Time rate 0\n"
@@ -369,7 +364,7 @@ msgstr ""
 "[   : 7 napot vissza            ]   : 7 napot előre\n"
 "\n"
 
-#: src/stel_ui.cpp:680
+#: src/stel_ui.cpp:729
 msgid ""
 "During Script Playback:\n"
 "CTRL + C : End Script\n"
@@ -381,7 +376,7 @@ msgstr ""
 "6   : Szünet                    K   : Folytatás\n"
 "\n"
 
-#: src/stel_ui.cpp:684
+#: src/stel_ui.cpp:733
 msgid ""
 "Misc:\n"
 "9   : Toggle meteor shower rates\n"
@@ -389,31 +384,31 @@ msgstr ""
 "Egyebek:\n"
 "9   : Meteorzápor gyakoriságának váltása\n"
 
-#: src/stel_ui.cpp:687
+#: src/stel_ui.cpp:736
 msgid "CTRL + Q : Quit\n"
 msgstr "CTRL + Q: Kilépés\n"
 
-#: src/stel_ui.cpp:689
+#: src/stel_ui.cpp:738
 msgid "CMD + Q  : Quit\n"
 msgstr "CMD + Q : Kilépés\n"
 
-#: src/stel_ui.cpp:695
+#: src/stel_ui.cpp:744
 msgid "Help"
 msgstr "Súgó"
 
-#: src/stel_ui.cpp:1040
+#: src/stel_ui.cpp:1092
 msgid "Command recording stopped."
 msgstr "Parancsrögzítés leállítva."
 
-#: src/stel_ui.cpp:1048
+#: src/stel_ui.cpp:1100
 msgid "Recording commands to script file:\n"
 msgstr "Parancsok rögzítése parancsfájlba:\n"
 
-#: src/stel_ui.cpp:1050
+#: src/stel_ui.cpp:1102
 msgid "Hit CTRL-R again to stop.\n"
 msgstr "A CTRL-R újabb leütésével állítsd le.\n"
 
-#: src/stel_ui.cpp:1054
+#: src/stel_ui.cpp:1106
 msgid "Error: Unable to open script file to record commands."
 msgstr "Hiba: Nem lehet megnyitni a parancsfájlt parancsrögzítéshez."
 
@@ -672,7 +667,7 @@ msgid "Enter observatory name"
 msgstr "Írd be a csillagvizsgáló nevét"
 
 # XXX
-#: src/stel_ui_conf.cpp:1111
+#: src/stel_ui_conf.cpp:1106
 #, fuzzy
 msgid "Current Time Speed is x"
 msgstr " Az idő múlása jelenleg: x"
@@ -1346,6 +1341,18 @@ msgstr "Szűz"
 #: src/translations.h:156
 msgid "Vela"
 msgstr "Vitorla"
+
+# XXX Katalógus???
+#~ msgid "Cat: NGC "
+#~ msgstr "Kat.: NGC "
+
+#, fuzzy
+#~ msgid "Loading Sharpless catalog:"
+#~ msgstr "Sharpless-katalógus betöltése: %d/%d"
+
+#, fuzzy
+#~ msgid "Loading Cadwell catalog:"
+#~ msgstr "Cadwell-katalógus betöltése: %d/%d"
 
 #~ msgid ""
 #~ "Please check last version and send bug report & comments \n"

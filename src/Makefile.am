@@ -1,5 +1,5 @@
 bin_PROGRAMS = stellarium
-stellarium_SOURCES = main.cpp stel_sdl.h stel_sdl.cpp stel_core.h stel_core.cpp \
+stellarium_SOURCES = main.cpp stel_sdl.cpp stel_core.h stel_core.cpp \
 				stel_utility.h stel_utility.cpp stel_object.h stel_object.cpp stel_atmosphere.h \
 				stel_atmosphere.cpp grid.h grid.cpp constellation.h constellation.cpp constellation_mgr.h \
 				constellation_mgr.cpp nebula.h nebula.cpp nebula_mgr.h nebula_mgr.cpp planet.h planet.cpp \
