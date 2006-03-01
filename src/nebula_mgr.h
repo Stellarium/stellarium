@@ -57,6 +57,8 @@ public:
 	bool getFlagShow() { return flagShow; }
 
 	void set_label_color(const Vec3f& c) {Nebula::label_color = c;}
+	const Vec3f& getLabelColor(void) const {return Nebula::label_color;}
+	
 	void set_circle_color(const Vec3f& c) {Nebula::circle_color = c;}
 
 	// Return a stl vector containing the nebulas located inside the lim_fov circle around position v

@@ -39,12 +39,12 @@ void StelUI::draw_gravity_ui(void)
 	int y = core->projection->view_bottom() + core->projection->viewH()/2;
 	int shift = (int)(M_SQRT2 / 2 * MY_MIN(core->projection->viewW()/2, core->projection->viewH()/2));
 
-	if (core->FlagShowTuiDateTime)
+	if (FlagShowTuiDateTime)
 	{
 		double jd = core->navigation->get_JDay();
 		wostringstream os;
 
-		if (core->FlagUTC_Time)
+		if (FlagUTC_Time)
 		{
 			os << core->observatory->get_printable_date_UTC(jd) << L" " <<
 			core->observatory->get_printable_time_UTC(jd) << L" (UTC)";
@@ -55,19 +55,19 @@ void StelUI::draw_gravity_ui(void)
 			core->observatory->get_printable_time_local(jd);
 		}
 
-		if (core->FlagShowFov) os << L" fov " << setprecision(3) << core->projection->get_visible_fov();
-		if (core->FlagShowFps) os << L"  FPS " << core->fps;
+		if (FlagShowFov) os << L" fov " << setprecision(3) << core->projection->get_visible_fov();
+		if (FlagShowFps) os << L"  FPS " << app->fps;
 
 		glColor3f(0.5,1,0.5);
 		core->projection->print_gravity180(baseFont, x-shift + 30, y-shift + 38, os.str(), 0);
 	}
 
-	if (core->selected_object && core->FlagShowTuiShortObjInfo)
+	if (core->selected_object && FlagShowTuiShortObjInfo)
 	{
 	    wstring info = L"";
 		info = core->selected_object->get_short_info_string(core->navigation);
-		if (core->selected_object->get_type()==StelObject::STEL_OBJECT_NEBULA) glColor3fv(core->NebulaLabelColor[draw_mode]);
-		if (core->selected_object->get_type()==StelObject::STEL_OBJECT_PLANET)glColor3fv(core->PlanetNamesColor[draw_mode]);
+		if (core->selected_object->get_type()==StelObject::STEL_OBJECT_NEBULA) glColor3fv(core->nebulas->getLabelColor());
+		if (core->selected_object->get_type()==StelObject::STEL_OBJECT_PLANET)glColor3fv(core->ssystem->getLabelColor());
 		if (core->selected_object->get_type()==StelObject::STEL_OBJECT_STAR) glColor3fv(core->selected_object->get_RGB());
 		core->projection->print_gravity180(baseFont, x+shift - 30, y+shift - 38, info, 0);
 	}
@@ -227,7 +227,7 @@ void StelUI::init_tui(void)
 	// 6. Scripts
 	tui_scripts_local = new s_tui::MultiSet_item<wstring>(wstring(L"6.1 ") + _("Local Script: "));
 	tui_scripts_local->addItemList(TUI_SCRIPT_MSG + wstring(L"\n") 
-				       + StelUtility::stringToWstring(core->scripts->get_script_list(core->getDataDir() + "scripts/"))); 
+				       + StelUtility::stringToWstring(app->scripts->get_script_list(core->getDataDir() + "scripts/"))); 
 	tui_scripts_local->set_OnChangeCallback(callback<void>(this, &StelUI::tui_cb_scripts_local));
 	tui_menu_scripts->addComponent(tui_scripts_local);
 
@@ -323,14 +323,16 @@ int StelUI::handle_keys_tui(Uint16 key, s_tui::S_TUI_VALUE state)
 void StelUI::tui_cb1(void)
 {
 	// 2. Date & Time
-	core->PresetSkyTime 		= tui_time_presetskytime->getJDay();
-	core->StartupTimeMode 		= StelUtility::wstringToString(tui_time_startuptime->getCurrent());
+	app->PresetSkyTime 		= tui_time_presetskytime->getJDay();
+	app->StartupTimeMode 		= StelUtility::wstringToString(tui_time_startuptime->getCurrent());
 
 }
 
 // Update all the tui widgets with values taken from the core parameters
 void StelUI::tui_update_widgets(void)
 {
+	if (!FlagShowTuiMenu) return;
+	
 	// 1. Location
 	tui_location_latitude->setValue(core->observatory->get_latitude());
 	tui_location_longitude->setValue(core->observatory->get_longitude());
@@ -340,8 +342,8 @@ void StelUI::tui_update_widgets(void)
 	tui_time_skytime->setJDay(core->navigation->get_JDay() + 
 				  core->observatory->get_GMT_shift(core->navigation->get_JDay())*JD_HOUR);
 	tui_time_settmz->settz(core->observatory->get_custom_tz_name());
-	tui_time_presetskytime->setJDay(core->PresetSkyTime);
-	tui_time_startuptime->setCurrent(StelUtility::stringToWstring(core->StartupTimeMode));
+	tui_time_presetskytime->setJDay(app->PresetSkyTime);
+	tui_time_startuptime->setCurrent(StelUtility::stringToWstring(app->StartupTimeMode));
 	tui_time_displayformat->setCurrent(StelUtility::stringToWstring(core->observatory->get_time_format_str()));
 	tui_time_dateformat->setCurrent(StelUtility::stringToWstring(core->observatory->get_date_format_str()));
 
@@ -367,13 +369,13 @@ void StelUI::tui_update_widgets(void)
 	tui_effect_manual_zoom->setValue(core->FlagManualZoom);
 	tui_effect_object_scale->setValue(core->getStarScale());
 	tui_effect_milkyway_intensity->setValue(core->milky_way->get_intensity());
-	tui_effect_cursor_timeout->setValue(core->MouseCursorTimeout);
+	tui_effect_cursor_timeout->setValue(MouseCursorTimeout);
 	tui_effect_nebulae_label_magnitude->setValue(core->getNebulaMaxMagHints());
 
 
 	// 6. Scripts
 	// each fresh time enter needs to reset to select message
-	if(core->SelectedScript=="") {
+	if(app->SelectedScript=="") {
 		tui_scripts_local->setCurrent(TUI_SCRIPT_MSG);
 		
 		if(ScriptDirectoryRead) {
@@ -415,15 +417,15 @@ void StelUI::tui_cb_settimedisplayformat(void)
 void StelUI::tui_cb_admin_load_default(void)
 {
 
-	core->commander->execute_command("configuration action reload");
+	app->commander->execute_command("configuration action reload");
 
 }
 
 // Save to default configuration
 void StelUI::tui_cb_admin_save_default(void)
 {
-	core->saveConfig();
-	core->observatory->save(core->getConfigDir() + core->config_file, "init_location");
+	//app->saveConfigTo(app->getConfigDir() + app->config_file);
+	//core->observatory->save(app->getConfigDir() + app->config_file, "init_location");
 	system( ( core->getDataDir() + "script_save_config " ).c_str() );
 }
 
@@ -437,7 +439,7 @@ void StelUI::tui_cb_admin_updateme(void)
 void StelUI::tui_cb_tui_effect_change_landscape(void)
 {
 	//	core->set_landscape(tui_effect_landscape->getCurrent());
-	core->commander->execute_command(string("set landscape_name " +  StelUtility::wstringToString(tui_effect_landscape->getCurrent())));
+	app->commander->execute_command(string("set landscape_name " +  StelUtility::wstringToString(tui_effect_landscape->getCurrent())));
 }
 
 
@@ -445,7 +447,7 @@ void StelUI::tui_cb_tui_effect_change_landscape(void)
 void StelUI::tui_cb_tui_general_change_sky_culture(void) {
 
 	//  core->set_sky_culture(core->skyloc->convert_sky_culture_to_directory(tui_general_sky_culture->getCurrent()));
-	core->commander->execute_command( string("set sky_culture " + 
+	app->commander->execute_command( string("set sky_culture " + 
 											 core->skyloc->convert_sky_culture_to_directory(tui_general_sky_culture->getCurrent())));
 }
 
@@ -453,7 +455,7 @@ void StelUI::tui_cb_tui_general_change_sky_culture(void) {
 void StelUI::tui_cb_tui_general_change_sky_locale(void) {
 
 	//	core->set_sky_locale(tui_general_sky_locale->getCurrent());
-	core->commander->execute_command( string("set sky_locale " + StelUtility::wstringToString(tui_general_sky_locale->getCurrent())));
+	app->commander->execute_command( string("set sky_locale " + StelUtility::wstringToString(tui_general_sky_locale->getCurrent())));
 }
 
 
@@ -471,16 +473,16 @@ void StelUI::tui_cb_scripts_removeable() {
   
   if(!ScriptDirectoryRead) {
 	  // read scripts from mounted disk
-	  string script_list = core->scripts->get_script_list(SCRIPT_REMOVEABLE_DISK);
+	  string script_list = app->scripts->get_script_list(SCRIPT_REMOVEABLE_DISK);
 	  tui_scripts_removeable->replaceItemList(TUI_SCRIPT_MSG + wstring(L"\n") + StelUtility::stringToWstring(script_list),0);
 	  ScriptDirectoryRead = 1;
   } 
 
   if(tui_scripts_removeable->getCurrent()==TUI_SCRIPT_MSG) {
-	  core->SelectedScript = "";
+	  app->SelectedScript = "";
   } else {
-	  core->SelectedScript = StelUtility::wstringToString(tui_scripts_removeable->getCurrent());
-	  core->SelectedScriptDirectory = SCRIPT_REMOVEABLE_DISK;
+	  app->SelectedScript = StelUtility::wstringToString(tui_scripts_removeable->getCurrent());
+	  app->SelectedScriptDirectory = SCRIPT_REMOVEABLE_DISK;
 	  // to avoid confusing user, clear out local script selection as well
 	  tui_scripts_local->setCurrent(TUI_SCRIPT_MSG);
   } 
@@ -491,12 +493,12 @@ void StelUI::tui_cb_scripts_removeable() {
 void StelUI::tui_cb_scripts_local() {
   
   if(tui_scripts_local->getCurrent()!=TUI_SCRIPT_MSG){
-    core->SelectedScript = StelUtility::wstringToString(tui_scripts_local->getCurrent());
-    core->SelectedScriptDirectory = core->getDataDir() + "scripts/";
+    app->SelectedScript = StelUtility::wstringToString(tui_scripts_local->getCurrent());
+    app->SelectedScriptDirectory = core->getDataDir() + "scripts/";
     // to reduce confusion for user, clear out removeable script selection as well
     if(ScriptDirectoryRead) tui_scripts_removeable->setCurrent(TUI_SCRIPT_MSG);
   } else {
-    core->SelectedScript = "";
+    app->SelectedScript = "";
   }
 }
 
@@ -508,7 +510,7 @@ void StelUI::tui_cb_admin_set_locale() {
 
 #if !defined(MACOSX)
 	LocaleChanged = 1;  // will reload TUI next draw.  Note that position in TUI is lost...
-	core->setAppLanguage(StelUtility::wstringToString(tui_admin_setlocale->getCurrent()));
+	app->setAppLanguage(StelUtility::wstringToString(tui_admin_setlocale->getCurrent()));
 #endif
 
 
@@ -519,7 +521,7 @@ void StelUI::tui_cb_effects_milkyway_intensity() {
 
 	std::ostringstream oss;
 	oss << "set milky_way_intensity " << tui_effect_milkyway_intensity->getValue();
-	core->commander->execute_command(oss.str());
+	app->commander->execute_command(oss.str());
 }
 
 void StelUI::tui_cb_setlocation() {
@@ -528,7 +530,7 @@ void StelUI::tui_cb_setlocation() {
 	oss << "moveto lat " << tui_location_latitude->getValue() 
 		<< " lon " <<  tui_location_longitude->getValue()
 		<< " alt " << tui_location_altitude->getValue();
-	core->commander->execute_command(oss.str());
+	app->commander->execute_command(oss.str());
 
 }
 
@@ -539,19 +541,19 @@ void StelUI::tui_cb_stars()
 	std::ostringstream oss;
 
 	oss << "flag stars " << tui_stars_show->getValue();
-	core->commander->execute_command(oss.str());
+	app->commander->execute_command(oss.str());
 
 	oss.str("");
 	oss << "set max_mag_star_name " << tui_star_labelmaxmag->getValue();
-	core->commander->execute_command(oss.str());
+	app->commander->execute_command(oss.str());
 
 	oss.str("");
 	oss << "set star_twinkle_amount " << tui_stars_twinkle->getValue();
-	core->commander->execute_command(oss.str());
+	app->commander->execute_command(oss.str());
 
 	oss.str("");
 	oss << "set star_mag_scale " << tui_star_magscale->getValue();
-	core->commander->execute_command(oss.str());
+	app->commander->execute_command(oss.str());
 
 }
 
@@ -562,21 +564,21 @@ void StelUI::tui_cb_effects()
 	std::ostringstream oss;
 
 	oss << "flag point_star " << tui_effect_pointobj->getValue();
-	core->commander->execute_command(oss.str());
+	app->commander->execute_command(oss.str());
 
 	oss.str("");
 	oss << "set auto_move_duration " << tui_effect_zoom_duration->getValue();
-	core->commander->execute_command(oss.str());
+	app->commander->execute_command(oss.str());
 
 	oss.str("");
 	oss << "flag manual_zoom " << tui_effect_manual_zoom->getValue();
-	core->commander->execute_command(oss.str());
+	app->commander->execute_command(oss.str());
 
 	oss.str("");
 	oss << "set star_scale " << tui_effect_object_scale->getValue();
-	core->commander->execute_command(oss.str());
+	app->commander->execute_command(oss.str());
 
-	core->MouseCursorTimeout = tui_effect_cursor_timeout->getValue();  // never recorded
+	MouseCursorTimeout = tui_effect_cursor_timeout->getValue();  // never recorded
 
 }
 
@@ -586,7 +588,7 @@ void StelUI::tui_cb_sky_time()
 {
 	std::ostringstream oss;
 	oss << "date local " << StelUtility::wstringToString(tui_time_skytime->getDateString());
-	core->commander->execute_command(oss.str());
+	app->commander->execute_command(oss.str());
 }
 
 
@@ -595,7 +597,7 @@ void StelUI::tui_cb_effects_nebulae_label_magnitude()
 {
 	std::ostringstream oss;
 	oss << "set max_mag_nebula_name " << tui_effect_nebulae_label_magnitude->getValue();
-	core->commander->execute_command(oss.str());
+	app->commander->execute_command(oss.str());
 }
 
 

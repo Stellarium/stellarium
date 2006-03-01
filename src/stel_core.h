@@ -30,9 +30,6 @@
 #include "nebula_mgr.h"
 #include "stel_atmosphere.h"
 #include "tone_reproductor.h"
-#include "s_gui.h"
-#include "stel_command_interface.h"
-#include "stel_ui.h"
 #include "solarsystem.h"
 #include "stel_utility.h"
 #include "init_parser.h"
@@ -40,63 +37,63 @@
 #include "landscape.h"
 #include "meteor_mgr.h"
 #include "sky_localizer.h"
-#include "script_mgr.h"
-#include "image_mgr.h"
 #include "loadingbar.h"
-
-// Predeclaration of the StelCommandInterface class
-// TODO : Those will be removed once reorganisation is achieved.
-class StelCommandInterface;
-class ScriptMgr;
-class StelUI;
-
-
+#include "image_mgr.h"
 
 //!  @brief Main class for stellarium core processing. 
 //!  
 //! Manage all the objects to be used in the program. 
-//! This class will be the main API of the program after the currently planned 
-//! reorganization of the source code. It must be documented using doxygen.
+//! This class is the main API of the program. It must be documented using doxygen.
  
+class StelUI;
+
 class StelCore
 {
-// TODO : Those 2 will be removed once reorganisation is achieved.
+// TODO : remove both
 friend class StelUI;
 friend class StelCommandInterface;
 public:
-	// Inputs are the main data, textures, configuration directories relatively to the DATA_ROOT directory
-	// TODO : StelCore should not handle any directory
-    StelCore(const string& CDIR, const string& LDIR, const string& DATA_ROOT);
+
+	//! Possible drawing modes
+	enum DRAWMODE { DM_NORMAL, DM_CHART, DM_NIGHT, DM_NIGHTCHART };
+
+	// Inputs are the locale directory and root directory
+    StelCore(const string& LDIR, const string& DATA_ROOT);
     virtual ~StelCore();
 	
-	//! @brief Init and load all main core components.
-	void init(void);
+	//! Init and load all main core components from the passed config file.
+	void init(const InitParser& conf);
 
-	//! @brief Update all the objects with respect to the time.
+	//! Update all the objects with respect to the time.
 	//! @param delta_time the time increment in ms.
 	void update(int delta_time);
 
-	//! @brief Execute all the drawing functions
+	//! Execute all the drawing functions
 	//! @param delta_time the time increment in ms.
 	void draw(int delta_time);
 		
-	// find and select the "nearest" object and retrieve his informations
+	//! find and select the "nearest" object from screen coordinates
 	StelObject * find_stel_object(int x, int y) const;
+	//! find and select the "nearest" object from earth equatorial coordinates
 	StelObject * find_stel_object(const Vec3d& pos) const;
 
-	// Find and select in a "clever" way an object
+	//! Find and select in a "clever" way an object from its equatorial position
 	StelObject * clever_find(const Vec3d& pos) const;
+	
+	//! Find and select in a "clever" way an object from its screen position
 	StelObject * clever_find(int x, int y) const;
 	
-	// ---------------------------------------------------------------
-	// Interfaces for external controls (gui, tui or script facility)
-	// Only the function listed here should be called by them
-	// ---------------------------------------------------------------
+	//! Get the name of the directory containing the data
+	const string getDataDir(void) const {return dataRoot + "/data/";}
+	
+	//! Get the name of the root directory i.e the one containing the other main directories
+	const string& getDataRoot() const {return dataRoot;}
+	
 	
 	//! Zoom to the given FOV
 	void zoomTo(double aim_fov, float move_duration = 1.) {projection->zoom_to(aim_fov, move_duration);}
 	
-	//! Go and zoom temporary to the selected object.
+	//! Go and zoom temporarily to the selected object.
 	void autoZoomIn(float move_duration = 1.f, bool allow_manual_zoom = 1);
 	
 	//! Unzoom to the previous position
@@ -105,12 +102,18 @@ public:
 	//! Set the sky culture
 	int setSkyCulture(string _culture_dir);
 	
-	//! Set the screen size
-	void setScreenSize(int w, int h);
-	
 	//! Set the landscape
 	void setLandscape(const string& new_landscape_name);
+
+	//! @brief Set the sky language and reload the sky objects names with the new translation
+	//! This function has no permanent effect on the global locale
+	//!@param newSkyLocaleName The name of the locale (e.g fr) to use for sky object labels
+	void setSkyLanguage(const std::string& newSkyLocaleName);
+
+	void setObjectPointerVisibility(bool b) { object_pointer_visibility = b; }
 	
+	///////////////////////////////////////////////////////////////////////////////////////
+	// Navigation
 	//! Set time speed in JDay/sec
 	void setTimeSpeed(double ts) {navigation->set_time_speed(ts);}
 	//! Get time speed in JDay/sec
@@ -119,21 +122,21 @@ public:
 	//! Set the current date in Julian Day
 	void setJDay(double JD) {navigation->set_JDay(JD);}
 	//! Get the current date in Julian Day
-	double getJDay(void) const {return navigation->get_JDay();}
-		
-
-	//! @brief Set the sky language and reload the sky objects names with the new translation
-	//! This function has no permanent effect on the global locale
-	//!@param newSkyLocaleName The name of the locale (e.g fr_FR) to use for sky object labels
-	void setSkyLanguage(const std::string& newSkyLocaleName);
-
-	void setObjectPointerVisibility(bool _newval) { object_pointer_visibility = _newval; }
-
-	// n.b. - do not confuse this with sky time rate
-	int getTimeMultiplier() { return time_multiplier; };
-
-	int getBppMode(void) const {return bppMode;}
-	int getFullscreen(void) const {return Fullscreen;}
+	double getJDay(void) const {return navigation->get_JDay();}	
+	
+	// TODO!
+	void loadObservatory();
+	
+	//! Go to the selected object
+	void gotoSelectedObject(void) {if (selected_object) navigation->move_to(selected_object->get_earth_equ_pos(navigation), auto_move_duration);}
+	
+	// Viewing direction function : 1 move, 0 stop.
+	void turn_right(int);
+	void turn_left(int);
+	void turn_up(int);
+	void turn_down(int);
+	void zoom_in(int);
+	void zoom_out(int);	
 	
 	///////////////////////////////////////////////////////////////////////////////////////
 	// Constellations methods
@@ -173,7 +176,7 @@ public:
 	bool getFlagConstellationIsolateSelected(void) {return asterisms->getFlagIsolateSelected();}
 	
 	//! Set constellation font size 
-	void setConstellationFontSize(float f) {asterisms->setFont(f, getDataDir() + BaseFontName);}
+	void setConstellationFontSize(float f) {asterisms->setFont(f, baseFontFile);}
 	
 	///////////////////////////////////////////////////////////////////////////////////////
 	// Stars methods
@@ -320,6 +323,15 @@ public:
 	//! Get flag for enabling gravity labels
 	bool getFlagGravityLabels(void) const {return projection->getFlagGravityLabels();}	
 	
+	//! Get viewport width
+	int getViewportW(void) const {return projection->get_screenW();}
+	
+	//! Get viewport height
+	int getViewportH(void) const {return projection->get_screenH();}
+	
+	//! Set the viewport width and height
+	void setScreenSize(int w, int h);
+	
 	///////////////////////////////////////////////////////////////////////////////////////
 	// Landscape
 	//! Set flag for displaying Landscape
@@ -391,73 +403,47 @@ public:
 	bool getFlagMoonScaled(void) const {return ssystem->getFlagMoonScale();}
 	
 	//! Set Moon scale
-	void setMoonScale(float f) { if (f<0) ssystem->setMoonScale(1.); // negative numbers reverse drawing!
-									else ssystem->setMoonScale(f);}
+	void setMoonScale(float f) { if (f<0) ssystem->setMoonScale(1.); else ssystem->setMoonScale(f);}
 	//! Get Moon scale
 	float getMoonScale(void) const {return ssystem->getMoonScale();}
 	
 	
-	const string getDataDir(void) const {return dataRoot + "/data/";}
-	const string& getDataRoot() const {return dataRoot;}
+	///////////////////////////////////////////////////////////////////////////////////////
+	// Observator
 	
-	////////////////////////////////////////////////
-	// TODO move to STELAPP
-	////////////////////////////////////////////////
-
-	// TODO : only viewport size is managed by the projection class
-	// Actual screen size should be managed by the stel_app class
-	int get_screen_W(void) const {return screen_W;}
-	int get_screen_H(void) const {return screen_H;}
 	
-	void loadConfig(void);
-	void saveConfig(void);
-	// Set the config file names.
-	void setConfigFiles(const string& _config_file);	
 	
-	// Increment/decrement smoothly the vision field and position
-	void updateMove(int delta_time);
-
-	// Handle mouse clics
-	int handleClick(Uint16 x, Uint16 y, s_gui::S_GUI_VALUE button, s_gui::S_GUI_VALUE state);
-	// Handle mouse move
-	int handleMove(int x, int y);
-	// Handle key press and release
-	int handleKeys(Uint16 key, s_gui::S_GUI_VALUE state);
-
-	const string getConfigDir(void) const {return configDir;}
+	///////////////////////////////////////////////////////////////////////////////////////
+	// Others
+	//! Load color scheme from the given ini file and section name
+	void setColorScheme(const string& skinFile, const string& section);
 	
-	const float getMaxFPS(void) const {return maxfps;}
+	//! Set flag for activating night vision mode
+	void setVisionModeNight(void) {if (!getVisionModeNight()) setColorScheme(getDataDir() + "default_config.ini", "colorr");draw_mode=DM_NIGHT;}
+	//! Get flag for activating night vision mode
+	bool getVisionModeNight(void) const {return draw_mode==DM_NIGHT;}
+	
+	//! Set flag for activating chart vision mode
+	void setVisionModeChart(void){if (!getVisionModeChart()) setColorScheme(getDataDir() + "default_config.ini", "colorc");draw_mode=DM_CHART; }
+	//! Get flag for activating chart vision mode
+	bool getVisionModeChart(void) const {return draw_mode==DM_CHART;}
+	
+	//! Set flag for activating chart vision mode
+	void setVisionModeNormal(void){if (!getVisionModeNormal()) setColorScheme(getDataDir() + "default_config.ini", "color");draw_mode=DM_NORMAL;}	
+	//! Get flag for activating chart vision mode
+	bool getVisionModeNormal(void) const {return draw_mode==DM_NORMAL;}
 
-	int getMouseZoom(void) const {return MouseZoom;}
-
-	// TODO move to stel_command_interface or get rid of this method
-	void setParam(string& key, float value);
-
-	//! Quit the application
-	void quit(void);
-
-	void playStartupScript();
-
-	//! @brief Set the application language
-	//! This applies to GUI, console messages etc..
-	//! This function has no permanent effect on the global locale
-	//! @param newAppLocaleName The name of the language (e.g fr) to use for GUI, TUI and console messages etc..
-	void setAppLanguage(const std::string& newAppLangName);
+	//! Return the current image manager which display users images
+	ImageMgr* getImageMgr(void) const {return script_images;}
 	
 private:
-	
-	TypeFace* UTFfont;
+	string baseFontFile;				// The font file used by default during initialization
 
-	wstring get_cursor_pos(int x, int y);
-
-	string dataRoot;
-	string localeDir;
-	
-	// The translator used for astronomical object naming
-	Translator skyTranslator;	
-	// the culture used for constellations, etc.. It is also the name of the directory
-	string skyCulture;
-	
+	string dataRoot;					// The root directory where the data is
+	string localeDir;					// The directory containing the translation .mo file
+	string skyCulture;					// the culture used for constellations, etc.. It is also the name of the directory
+	Translator skyTranslator;			// The translator used for astronomical object naming
+		
 	// Main elements of the program
 	Navigator * navigation;				// Manage all navigation parameters, coordinate transformations etc..
 	Observator * observatory;			// Manage observer position
@@ -478,147 +464,30 @@ private:
 	MeteorMgr * meteors;				// Manage meteor showers
 	Landscape * landscape;				// The landscape ie the fog, the ground and "decor"
 	ToneReproductor * tone_converter;	// Tones conversion between stellarium world and display device
-
-	// Current sky Brightness
-	float sky_brightness;
-
-
-	///////////////////////////////////////////////////////////////////////////////
-	// Below this limit, all the attributes will end up in the stel_app class
-	///////////////////////////////////////////////////////////////////////////////
-	//Files location
-	string configDir;
-	
-	void loadConfigFrom(const string& confFile);
-	void saveConfigTo(const string& confFile);
-
-	// Big options
-	int screen_W;
-	int screen_H;
-	int bppMode;
-	int Fullscreen;
-
-	string config_file;
-	// Script related
-	string SelectedScript;  // script filename (without directory) selected in a UI to run when exit UI
-	string SelectedScriptDirectory;  // script directory for same
-
-
-	///////////////////////////////////////////////////////////////////////////////
-	// Below this limit, all the attributes will be removed from the program and 
-	// handled by the sub classes themselve
-	///////////////////////////////////////////////////////////////////////////////
-
-	// Gui
-	int FlagShowTopBar;
-    int FlagShowFps;
-	int FlagShowTime;
-	int FlagShowDate;
-	int FlagShowAppName;
-	int FlagShowFov;
-    int FlagMenu;
-    int FlagHelp;
-    int FlagInfos;
-    int FlagConfig;
-    int FlagSearch;
-	int FlagShowSelectedObjectInfo;
-	Vec3f GuiBaseColor;
-	Vec3f GuiTextColor;
-	Vec3f GuiBaseColorr;
-	Vec3f GuiTextColorr;
-	float BaseFontSize;
-	string BaseFontName;
-
-	float BaseCFontSize;
-	string BaseCFontName;
-
-	double MouseCursorTimeout;  // seconds to hide cursor when not used.  0 means no timeout
-
-	// Text UI
-	bool FlagEnableTuiMenu;
-	bool FlagShowGravityUi;
-	bool FlagShowTuiMenu;
-	bool FlagShowTuiDateTime;
-	bool FlagShowTuiShortObjInfo;
-
-	//// Those are related to ColorScheme and will be isolated in a dedicated class.
-	Vec3f AzimuthalColor[3];
-	Vec3f EquatorialColor[3];
-	Vec3f EquatorColor[3];
-	Vec3f EclipticColor[3];
-
-	Vec3f ConstLinesColor[3];
-	Vec3f ConstBoundaryColor[3];
-	Vec3f ConstNamesColor[3];
-	Vec3f NebulaLabelColor[3];
-	Vec3f NebulaCircleColor[3];
-	Vec3f StarLabelColor[3];
-	Vec3f StarCircleColor[3];
-	Vec3f CardinalColor[3];
-	Vec3f PlanetNamesColor[3];
-	Vec3f PlanetOrbitsColor[3];
-	Vec3f ObjectTrailsColor[3];
-	Vec3f ChartColor[3];
-	Vec3f MilkyWayColor[3];
-	
-	bool FlagChart;
-	bool FlagNight;
-	bool ColorSchemeChanged;
-	inline void SetDrawMode(void) { draw_mode = (int)FlagChart;	if (FlagChart) draw_mode += (int)FlagNight; ColorSchemeChanged = true;}
-	void ChangeColorScheme(void);
+	SkyLocalizer *skyloc;				// for sky cultures and locales
+	ImageMgr * script_images;           // for script loaded image display
+		
+	float sky_brightness;				// Current sky Brightness in ?
+	bool object_pointer_visibility;		// Should selected object pointer be drawn
 	void draw_chart_background(void);
-
-	// Navigation
-	string PositionFile;
+	wstring get_cursor_pos(int x, int y);
+		
+	// Increment/decrement smoothly the vision field and position
+	void updateMove(int delta_time);		
 	int FlagEnableZoomKeys;
-	int FlagManualZoom;
-	int FlagShowScriptBar;
 	int FlagEnableMoveKeys;
-	int FlagEnableMoveMouse;  // allow mouse at edge of screen to move view
-	float InitFov;
-	double PresetSkyTime;
-	string StartupTimeMode;
-	Vec3d InitViewPos;
-	int MouseZoom;
-
-	// Locale
-	int FlagUTC_Time;					// if true display UTC time
-
-	int frame, timefr, timeBase;		// Used for fps counter
-	float fps;
-	float maxfps;
 	
 	double deltaFov,deltaAlt,deltaAz;	// View movement
 	double move_speed, zoom_speed;		// Speed of movement and zooming
+	
+	float InitFov;						// Default viewing FOV
+	Vec3d InitViewPos;					// Default viewing direction
+	int FlagManualZoom;					// ?	
+	Vec3f chartColor;					// ?
 	float auto_move_duration;			// Duration of movement for the auto move to a selected object
-
-	int FlagTimePause;
-	double temp_time_velocity;			// Used to store time speed while in pause
-
-	// Viewing direction function : 1 move, 0 stop.
-	void turn_right(int);
-	void turn_left(int);
-	void turn_up(int);
-	void turn_down(int);
-	void zoom_in(int);
-	void zoom_out(int);
-	// Flags for mouse movements
-	bool is_mouse_moving_horiz;
-	bool is_mouse_moving_vert;
-	int time_multiplier;  // used for adjusting delta_time for script speeds
-
-	bool object_pointer_visibility;  // should selected object pointer be drawn
 	
-	////////////////////////////////////////////////
-	// TODO move to STELAPP
-	////////////////////////////////////////////////
-	
-		// Main elements of the stel_app
-	StelCommandInterface * commander;       // interface to perform all UI and scripting actions
-	ScriptMgr * scripts;                    // manage playing and recording scripts
-	StelUI * ui;							// The main User Interface
-	ImageMgr * script_images;               // for script loaded image display
-	SkyLocalizer *skyloc;					// for sky cultures and locales
+
+	DRAWMODE draw_mode;					
 };
 
 #endif // _STEL_CORE_H_

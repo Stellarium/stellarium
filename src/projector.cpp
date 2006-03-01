@@ -361,7 +361,7 @@ void Projector::sSphere(GLdouble radius, GLdouble oblateness,
     gluSphere(p, radius, slices, stacks);
     gluDeleteQuadric(p);
   } else {
-    GLfloat rho, theta;
+    //GLfloat rho, theta;
     GLfloat x, y, z;
     GLfloat s, t, ds, dt;
     GLint i, j;

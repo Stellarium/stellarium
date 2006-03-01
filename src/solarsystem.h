@@ -50,6 +50,7 @@ public:
 
 	void setFont(float font_size, const string& font_name);
 	void setLabelColor(const Vec3f& c) {Planet::set_label_color(c);}
+	const Vec3f& getLabelColor(void) const {return Planet::getLabelColor();}
 	void setOrbitColor(const Vec3f& c) {Planet::set_orbit_color(c);}
   
 	// Compute the position for every elements of the solar system.

@@ -774,7 +774,7 @@ void Grid::Draw(void)
 {
 	for(int i=0;i<NbPoints;++i)
     {
-    	DrawPoint(Points[i][0],Points[i][1],Points[i][2]);
+    	Draw::drawPoint(Points[i][0],Points[i][1],Points[i][2]);
 	}
 }
 

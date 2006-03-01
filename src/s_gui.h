@@ -95,7 +95,7 @@ void* getLastCallbackObject(void);
 ////////////////////////////////////////////////////////////////////////////////
 
 namespace s_gui
-{	
+{
 	// gui Return Values:
 	enum S_GUI_VALUE
 	{
@@ -473,6 +473,9 @@ namespace s_gui
 		Uint16 getLastKey(void) { return lastKey;}
 		void setAutoFocus(bool _b) {autoFocus = _b; }
 		bool getAutoFocus(void) { return autoFocus; }
+		
+		static bool cursorVisible;
+		static EditBox *activeEditBox;
 	protected:
 		callback<void> onReturnKeyCallback;
 		callback<void> onKeyCallback;

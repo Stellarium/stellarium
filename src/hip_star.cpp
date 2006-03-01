@@ -287,10 +287,10 @@ bool HipStar::draw_name(void)
 	if (commonNameI18 == L"") return false;
 	starname = commonNameI18;
 	
-	if (draw_mode == DM_NORMAL) {
+	// if (draw_mode == DM_NORMAL) {
 		glColor4f(RGB[0]*0.75, RGB[1]*0.75, RGB[2]*0.75, names_brightness);
-	}
-	else glColor3fv(label_color);
+	// }
+	//else glColor3fv(label_color);
 
 	proj->getFlagGravityLabels() ? proj->print_gravity180(starFont, XY[0],XY[1], starname, 1, 6, -4) :
 	starFont->print(XY[0]+6,XY[1]-4, starname);

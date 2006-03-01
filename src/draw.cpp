@@ -596,7 +596,7 @@ void MilkyWay::draw_chart(ToneReproductor * eye, const Projector* prj, const Nav
 }
 
 // Draw a point... (used for tests)
-void DrawPoint(float X,float Y,float Z)
+void Draw::drawPoint(float X,float Y,float Z)
 {       
 	glColor3f(0.8, 1.0, 0.8);
 	glDisable(GL_TEXTURE_2D);
