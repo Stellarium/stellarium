@@ -702,6 +702,7 @@ namespace s_gui
 	{
 	public:
 		StdDlgWin(const wstring& _title = NULL, s_texture* _header_tex = NULL , s_font * _winfont = NULL, int headerSize = 18);
+		~StdDlgWin();
 		virtual void setDialogCallback(const callback<void>& c) {onCompleteCallback = c;}
 		void MessageBox(const wstring &_title, const wstring &_prompt, int _buttons, const string &_ID = "");
 		void InputBox(const wstring &_title, const wstring &_prompt, const string &_ID = "");
@@ -856,6 +857,7 @@ namespace s_gui
 	{
 	public:
 		City_Mgr(double _proximity = CITIES_PROXIMITY);
+		~City_Mgr();
 		void addCity(const string& _name, const string& _state, const string& _country, 
 			double _longitude, double _latitude, float _zone, int _showatzoom, int _altitude = 0);
 		int getNearest(double _longitude, double _latitude);

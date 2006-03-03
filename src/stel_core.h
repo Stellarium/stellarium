@@ -55,7 +55,7 @@ friend class StelCommandInterface;
 public:
 
 	//! Possible drawing modes
-	enum DRAWMODE { DM_NORMAL, DM_CHART, DM_NIGHT, DM_NIGHTCHART };
+	enum DRAWMODE { DM_NORMAL=0, DM_CHART, DM_NIGHT, DM_NIGHTCHART };
 
 	// Inputs are the locale directory and root directory
     StelCore(const string& LDIR, const string& DATA_ROOT);
@@ -71,11 +71,6 @@ public:
 	//! Execute all the drawing functions
 	//! @param delta_time the time increment in ms.
 	void draw(int delta_time);
-		
-	//! find and select the "nearest" object from screen coordinates
-	StelObject * find_stel_object(int x, int y) const;
-	//! find and select the "nearest" object from earth equatorial coordinates
-	StelObject * find_stel_object(const Vec3d& pos) const;
 
 	//! Find and select in a "clever" way an object from its equatorial position
 	StelObject * clever_find(const Vec3d& pos) const;
