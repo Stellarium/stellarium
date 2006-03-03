@@ -607,6 +607,7 @@ bool ConstellationMgr::loadBoundaries(const string& boundaryFile)
 	}
     dataFile.close();
 	cout << "(" << i << " segments loaded)" << endl;
+    delete points;
     
     return true;
 }

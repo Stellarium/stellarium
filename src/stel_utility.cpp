@@ -37,6 +37,7 @@ wstring StelUtility::stringToWstring(const string& s)
 {
 	// Get wide string length
 	size_t len = mbstowcs(NULL, s.c_str(), 0)+1;
+	if (len==0) return wstring();
 	// Create wide string
 	wchar_t* ws = new wchar_t[len];
 	mbstowcs(ws, s.c_str(), len);

@@ -2127,6 +2127,12 @@ StdDlgWin::StdDlgWin(const wstring& _title, s_texture* _header_tex, s_font * _wi
 	resetResponse();
 }
 
+StdDlgWin::~StdDlgWin()
+{
+	delete blankIcon;
+	delete alertIcon;
+}
+
 void StdDlgWin::resetResponse(void)
 {
 	lastButton = BT_NOTSET;
@@ -2885,6 +2891,14 @@ City_Mgr::City_Mgr(double _proximity) : proximity(_proximity)
 {
 }
 
+City_Mgr::~City_Mgr()
+{
+	vector<City*>::iterator iter;
+	for (iter = cities.begin();iter!=cities.end();iter++)
+	{
+		delete (*iter);
+	}
+}
 
 void City_Mgr::addCity(const string& _name, const string& _state, 
 	const string& _country, double _longitude, double _latitude, float _zone, int _showatzoom, int _altitude)
@@ -2978,6 +2992,8 @@ MapPicture::~MapPicture()
 
 	if (city_name_font) delete city_name_font;
 	city_name_font = NULL;
+	
+	delete cityPointer;
 }
 
 void MapPicture::set_font(float font_size, const string& font_name)

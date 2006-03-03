@@ -30,6 +30,7 @@ StelApp::~StelApp()
 	delete ui;
 	delete scripts;
 	delete commander;
+	delete core;
 }
 
 void StelApp::quit(void)

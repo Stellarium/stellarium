@@ -278,6 +278,8 @@ SkyLine::~SkyLine()
 {
 	delete [] points;
 	points = NULL;
+	if (font) delete font;
+	font = NULL;
 }
 
 void SkyLine::set_font(float font_size, const string& font_name)

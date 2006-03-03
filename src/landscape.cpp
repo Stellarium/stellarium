@@ -22,12 +22,11 @@
 
 Landscape::Landscape(float _radius) : radius(_radius), sky_brightness(1.)
 {
-  valid_landscape = 0;
+	valid_landscape = 0;
 }
 
 Landscape::~Landscape()
-{
-}
+{}
 
 Landscape* Landscape::create_from_file(const string& landscape_file, const string& section_name)
 {
@@ -40,11 +39,15 @@ Landscape* Landscape::create_from_file(const string& landscape_file, const strin
 		LandscapeOldStyle* ldscp = new LandscapeOldStyle();
 		ldscp->load(landscape_file, section_name);
 		return ldscp;
-	} else if (s=="spherical") {
+	}
+	else if (s=="spherical")
+	{
 		LandscapeSpherical* ldscp = new LandscapeSpherical();
 		ldscp->load(landscape_file, section_name);
 		return ldscp;
-	} else {   //	if (s=="fisheye")
+	}
+	else
+	{   //	if (s=="fisheye")
 		LandscapeFisheye* ldscp = new LandscapeFisheye();
 		ldscp->load(landscape_file, section_name);
 		return ldscp;
@@ -57,17 +60,21 @@ Landscape* Landscape::create_from_file(const string& landscape_file, const strin
 Landscape* Landscape::create_from_hash(stringHash_t param)
 {
 
-	// NOTE: textures should be full filename (and path) 
+	// NOTE: textures should be full filename (and path)
 	if (param["type"]=="old_style")
 	{
 		LandscapeOldStyle* ldscp = new LandscapeOldStyle();
 		ldscp->create(1, param);
 		return ldscp;
-	} else if (param["type"]=="spherical") {
+	}
+	else if (param["type"]=="spherical")
+	{
 		LandscapeSpherical* ldscp = new LandscapeSpherical();
 		ldscp->create(param["name"], 1, param["path"] + param["maptex"]);
 		return ldscp;
-	} else {   //	if (s=="fisheye")
+	}
+	else
+	{   //	if (s=="fisheye")
 		LandscapeFisheye* ldscp = new LandscapeFisheye();
 		ldscp->create(param["name"], 1, param["path"] + param["maptex"], str_to_double(param["texturefov"]));
 		return ldscp;
@@ -89,13 +96,13 @@ string Landscape::get_file_content(const string& landscape_file)
 	return result;
 }
 
-LandscapeOldStyle::LandscapeOldStyle(float _radius) : Landscape(_radius), side_texs(NULL), sides(NULL)
-{
-}
+LandscapeOldStyle::LandscapeOldStyle(float _radius) : Landscape(_radius), side_texs(NULL), sides(NULL), fog_tex(NULL), ground_tex(NULL)
+{}
 
 LandscapeOldStyle::~LandscapeOldStyle()
 {
-        if (side_texs) {
+	if (side_texs)
+	{
 		for (int i=0;i<nb_side_texs;++i)
 		{
 			if (side_texs[i]) delete side_texs[i];
@@ -119,12 +126,15 @@ void LandscapeOldStyle::load(const string& landscape_file, const string& section
 	pd.load(landscape_file);
 
 	name = pd.get_str(section_name, "name");
-	if(name == "" ) {
-	  printf("ERROR : No valid landscape definition found for %s.  No landscape in use.\n", section_name.c_str());
-	  valid_landscape = 0;
-	  return;
-	} else {
-	  valid_landscape = 1;
+	if(name == "" )
+	{
+		printf("ERROR : No valid landscape definition found for %s.  No landscape in use.\n", section_name.c_str());
+		valid_landscape = 0;
+		return;
+	}
+	else
+	{
+		valid_landscape = 1;
 	}
 
 	// Load sides textures
@@ -284,7 +294,7 @@ void LandscapeOldStyle::draw_fog(ToneReproductor * eye, const Projector* prj, co
 	glEnable(GL_CULL_FACE);
 	glBindTexture(GL_TEXTURE_2D, fog_tex->getID());
 	prj->sCylinder(radius, radius*sinf(fog_alt_angle*M_PI/180.), 128, 1, nav->get_local_to_eye_mat() *
-		Mat4d::translation(Vec3d(0.,0.,radius*sinf(fog_angle_shift*M_PI/180.))), 1);
+	               Mat4d::translation(Vec3d(0.,0.,radius*sinf(fog_angle_shift*M_PI/180.))), 1);
 	glDisable(GL_CULL_FACE);
 	glPopMatrix();
 }
@@ -310,11 +320,11 @@ void LandscapeOldStyle::draw_decor(ToneReproductor * eye, const Projector* prj, 
 	Mat4d mat = nav->get_local_to_eye_mat();
 	glPushMatrix();
 	glLoadMatrixd(mat);
-	
+
 	z=radius*sinf(decor_angle_shift*M_PI/180.);
 	glEnable(GL_BLEND);
-	glEnable(GL_CULL_FACE);	
-	
+	glEnable(GL_CULL_FACE);
+
 	for (int n=0;n<nb_decor_repeat;++n)
 	{
 		a = 2.f*M_PI*n/nb_decor_repeat;
@@ -328,10 +338,10 @@ void LandscapeOldStyle::draw_decor(ToneReproductor * eye, const Projector* prj, 
 				y = radius * cosf(a + da * j + da * subdiv * i + decor_angle_rotatez*M_PI/180);
 				glNormal3f(-x, -y, 0);
 				glTexCoord2f(sides[i].tex_coords[0] + (float)j/subdiv * (sides[i].tex_coords[2]-sides[i].tex_coords[0]),
-					sides[i].tex_coords[3]);
+				             sides[i].tex_coords[3]);
 				prj->sVertex3(x, y, z + dz * (sides[i].tex_coords[3]-sides[i].tex_coords[1]), mat);
 				glTexCoord2f(sides[i].tex_coords[0] + (float)j/subdiv * (sides[i].tex_coords[2]-sides[i].tex_coords[0]),
-					sides[i].tex_coords[1]);
+				             sides[i].tex_coords[1]);
 				prj->sVertex3(x, y, z , mat);
 			}
 			glEnd();
@@ -360,8 +370,7 @@ void LandscapeOldStyle::draw_ground(ToneReproductor * eye, const Projector* prj,
 }
 
 LandscapeFisheye::LandscapeFisheye(float _radius) : Landscape(_radius), map_tex(NULL)
-{
-}
+{}
 
 LandscapeFisheye::~LandscapeFisheye()
 {
@@ -377,10 +386,11 @@ void LandscapeFisheye::load(const string& landscape_file, const string& section_
 	string type;
 	type = pd.get_str(section_name, "type");
 	name = pd.get_str(section_name, "name");
-	if(type != "fisheye" || name == "" ) {
-	  printf("ERROR : No valid landscape definition found for %s.  No landscape in use.\n", section_name.c_str());
-	  valid_landscape = 0;
-	  return;
+	if(type != "fisheye" || name == "" )
+	{
+		printf("ERROR : No valid landscape definition found for %s.  No landscape in use.\n", section_name.c_str());
+		valid_landscape = 0;
+		return;
 	}
 
 	create(name, 0, pd.get_str(section_name, "maptex"), pd.get_double(section_name, "texturefov", 360));
@@ -422,8 +432,7 @@ void LandscapeFisheye::draw(ToneReproductor * eye, const Projector* prj, const N
 // spherical panoramas
 
 LandscapeSpherical::LandscapeSpherical(float _radius) : Landscape(_radius), map_tex(NULL)
-{
-}
+{}
 
 LandscapeSpherical::~LandscapeSpherical()
 {
@@ -439,10 +448,11 @@ void LandscapeSpherical::load(const string& landscape_file, const string& sectio
 	string type;
 	type = pd.get_str(section_name, "type");
 	name = pd.get_str(section_name, "name");
-	if(type != "spherical" ) {
-	  printf("ERROR : No valid landscape definition found for %s.  No landscape in use.\n", section_name.c_str());
-	  valid_landscape = 0;
-	  return;
+	if(type != "spherical" )
+	{
+		printf("ERROR : No valid landscape definition found for %s.  No landscape in use.\n", section_name.c_str());
+		valid_landscape = 0;
+		return;
 	}
 
 	create(name, 0, pd.get_str(section_name, "maptex"));

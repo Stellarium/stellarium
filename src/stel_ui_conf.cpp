@@ -590,69 +590,69 @@ Component* StelUI::createSearchWindow(void)
 	nebula_edit->setSize(170,25);
 
     // controls
-	FilledContainer* tab_example = new FilledContainer();
-	tab_example->setSize(search_tab_ctr->getSize());
-
-	// example horizontal cursorbar
-	CursorBar *chbar = new CursorBar(false, -.6,1.7);
-	tab_example->addComponent(chbar);
-	chbar->setPos(60,10);
-	chbar->setSize(150,20);
-	
-	// example horizontal cursorbar
-    CursorBar *cvbar = new CursorBar(true, 5,15);
-	cvbar->setPos(30,30);
-	cvbar->setSize(20,120);
-	tab_example->addComponent(cvbar);
-
-	// example vscrollbar
-	ScrollBar *vbar = new ScrollBar(true, 5,1);
-	vbar->setPos(320,20);
-	vbar->setSize(20,140);
-	tab_example->addComponent(vbar);
-
-	// example hscrollbar
-	ScrollBar *hbar = new ScrollBar(false,12,3);
-	hbar->setPos(80,160);
-	hbar->setSize(240,20);
-	tab_example->addComponent(hbar);
-
-	listBox = new ListBox(6);
-	listBox->setPos(60,40);
-	listBox->setSizex(200);
-	listBox->setOnChangeCallback(callback<void>(this, &StelUI::listBoxChanged));
-	tab_example->addComponent(listBox);
-
-	// example editbox
-	EditBox *editbox = new EditBox();
-	editbox->setPos(20,180);
-	editbox->setSize(250,25);
-	tab_example->addComponent(editbox);
-
-	// example messageboxes and inputboxes
-	LabeledButton *button1 = new LabeledButton(L"MsgBox 1");
-	button1->setPos(20,220);
-	button1->setSize(80,25);
-	button1->setOnPressCallback(callback<void>(this, &StelUI::msgbox1));
-	tab_example->addComponent(button1);
-
-	LabeledButton *button2 = new LabeledButton(L"MsgBox 2");
-	button2->setPos(115,220);
-	button2->setSize(80,25);
-	button2->setOnPressCallback(callback<void>(this, &StelUI::msgbox2));
-	tab_example->addComponent(button2);
-
-	LabeledButton *button3 = new LabeledButton(L"MsgBox 3");
-	button3->setPos(205,220);
-	button3->setSize(80,25);
-	button3->setOnPressCallback(callback<void>(this, &StelUI::msgbox3));
-	tab_example->addComponent(button3);
-
-	LabeledButton *button4 = new LabeledButton(L"Inputbox");
-	button4->setPos(300,220);
-	button4->setSize(80,25);
-	button4->setOnPressCallback(callback<void>(this, &StelUI::inputbox1));
-	tab_example->addComponent(button4);
+// 	FilledContainer* tab_example = new FilledContainer();
+// 	tab_example->setSize(search_tab_ctr->getSize());
+// 
+// 	// example horizontal cursorbar
+// 	CursorBar *chbar = new CursorBar(false, -.6,1.7);
+// 	tab_example->addComponent(chbar);
+// 	chbar->setPos(60,10);
+// 	chbar->setSize(150,20);
+// 	
+// 	// example horizontal cursorbar
+//     CursorBar *cvbar = new CursorBar(true, 5,15);
+// 	cvbar->setPos(30,30);
+// 	cvbar->setSize(20,120);
+// 	tab_example->addComponent(cvbar);
+// 
+// 	// example vscrollbar
+// 	ScrollBar *vbar = new ScrollBar(true, 5,1);
+// 	vbar->setPos(320,20);
+// 	vbar->setSize(20,140);
+// 	tab_example->addComponent(vbar);
+// 
+// 	// example hscrollbar
+// 	ScrollBar *hbar = new ScrollBar(false,12,3);
+// 	hbar->setPos(80,160);
+// 	hbar->setSize(240,20);
+// 	tab_example->addComponent(hbar);
+// 
+// 	listBox = new ListBox(6);
+// 	listBox->setPos(60,40);
+// 	listBox->setSizex(200);
+// 	listBox->setOnChangeCallback(callback<void>(this, &StelUI::listBoxChanged));
+// 	tab_example->addComponent(listBox);
+// 
+// 	// example editbox
+// 	EditBox *editbox = new EditBox();
+// 	editbox->setPos(20,180);
+// 	editbox->setSize(250,25);
+// 	tab_example->addComponent(editbox);
+// 
+// 	// example messageboxes and inputboxes
+// 	LabeledButton *button1 = new LabeledButton(L"MsgBox 1");
+// 	button1->setPos(20,220);
+// 	button1->setSize(80,25);
+// 	button1->setOnPressCallback(callback<void>(this, &StelUI::msgbox1));
+// 	tab_example->addComponent(button1);
+// 
+// 	LabeledButton *button2 = new LabeledButton(L"MsgBox 2");
+// 	button2->setPos(115,220);
+// 	button2->setSize(80,25);
+// 	button2->setOnPressCallback(callback<void>(this, &StelUI::msgbox2));
+// 	tab_example->addComponent(button2);
+// 
+// 	LabeledButton *button3 = new LabeledButton(L"MsgBox 3");
+// 	button3->setPos(205,220);
+// 	button3->setSize(80,25);
+// 	button3->setOnPressCallback(callback<void>(this, &StelUI::msgbox3));
+// 	tab_example->addComponent(button3);
+// 
+// 	LabeledButton *button4 = new LabeledButton(L"Inputbox");
+// 	button4->setPos(300,220);
+// 	button4->setSize(80,25);
+// 	button4->setOnPressCallback(callback<void>(this, &StelUI::inputbox1));
+// 	tab_example->addComponent(button4);
 
     // Planets
 	FilledContainer* tab_planets = new FilledContainer();
