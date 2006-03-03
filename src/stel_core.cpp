@@ -27,7 +27,7 @@ StelCore::StelCore(const string& LDIR, const string& DATA_ROOT) :
 		skyTranslator(APP_NAME, LOCALEDIR, ""),
 		projection(NULL), selected_object(NULL), hip_stars(NULL),
 		nebulas(NULL), ssystem(NULL), milky_way(NULL),deltaFov(0.), 
-		deltaAlt(0.), deltaAz(0.), move_speed(0.00025)
+		deltaAlt(0.), deltaAz(0.), move_speed(0.00025), draw_mode(StelCore::DM_NORMAL)
 {
 	localeDir = LDIR;
 	dataRoot = DATA_ROOT;
@@ -158,8 +158,7 @@ void StelCore::init(const InitParser& conf)
 	cardinals_points->set_font(30., baseFontFile);
 
 	// Init milky way
-	if (draw_mode == DM_NORMAL)	milky_way->set_texture("milkyway.png");
-	else milky_way->set_texture("milkyway_chart.png",true);
+	milky_way->set_texture("milkyway.png");
 
 	setLandscape(observatory->get_landscape_name());
 
@@ -462,33 +461,6 @@ void StelCore::setScreenSize(int w, int h)
 {
 	if (w==getViewportW() && h==getViewportH()) return;
 	projection->set_screen_size(w, h);
-}
-
-// find and select the "nearest" object from earth equatorial position
-StelObject * StelCore::find_stel_object(const Vec3d& v) const
-{
-	StelObject * sobj = NULL;
-
-	if (getFlagPlanets()) sobj = ssystem->search(v, navigation, projection);
-	if (sobj) return sobj;
-
-	Vec3f u = navigation->earth_equ_to_j2000(v);
-
-	sobj = nebulas->search(u);
-	if (sobj) return sobj;
-
-	if (getFlagStars()) sobj = hip_stars->search(u);
-
-	return sobj;
-}
-
-
-// find and select the "nearest" object from screen position
-StelObject * StelCore::find_stel_object(int x, int y) const
-{
-	Vec3d v;
-	projection->unproject_earth_equ(x,y,v);
-	return find_stel_object(v);
 }
 
 // Find and select in a "clever" way an object
