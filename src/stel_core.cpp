@@ -97,21 +97,7 @@ void StelCore::init(const InitParser& conf)
 	
 	// Projector
 	string tmpstr = conf.get_str("projection:type");
-	Projector::PROJECTOR_TYPE projType;
-	if (tmpstr=="perspective") projType = Projector::PERSPECTIVE_PROJECTOR;
-	else
-	{
-		if (tmpstr=="fisheye") projType = Projector::FISHEYE_PROJECTOR;
-		else
-		{
-			if (tmpstr=="cylinder") projType = Projector::CYLINDER_PROJECTOR;
-			else
-			{
-				cerr << "ERROR : Unknown projector type : " << tmpstr << endl;
-				exit(-1);
-			}
-		}
-	}
+	const Projector::PROJECTOR_TYPE projType = Projector::stringToType(tmpstr);
 	setProjectionType(projType);
 
 	tmpstr = conf.get_str("projection:viewport");
