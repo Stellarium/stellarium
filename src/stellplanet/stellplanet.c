@@ -2,7 +2,7 @@
 #include "esaphodei.h"
 #include "l1.h"
 #include "tass17.h"
-#include "tass17gust86.h"
+#include "gust86.h"
 
 /* Chapter 31 Pg 206-207 Equ 31.1 31.2 , 31.3 using VSOP 87
  * Calculate planets rectangular heliocentric ecliptical coordinates
