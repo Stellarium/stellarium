@@ -67,10 +67,7 @@ private:
 	int startY;			// intern variable used to store the Horizon Y screen value
 	float world_adaptation_luminance;
 	float milkyway_adaptation_luminance;
-// 	bool atm_on;
 	float atm_intensity;
-// 	float ai;               // used to calculate atm_intensity via curve function
-// 	float fade_duration;    // length of time, in miliseconds, for fade in and out
 	ParabolicFader fader;
 };
 

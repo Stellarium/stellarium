@@ -22,7 +22,7 @@
 #include "tone_reproductor.h"
 
 // Set some values to prevent bugs in case of bad use
-ToneReproductor::ToneReproductor() : Lda(50.f), Lwa(40000.f), MaxdL(100.f), gamma(2.3f)
+ToneReproductor::ToneReproductor() : Lda(50.f), Lwa(40000.f), one_over_maxdL(1.f/100.f), one_over_gamma(1.f/2.3f)
 {
 	// Update alpha_da and beta_da values
 	float log10Lwa = log10f(Lwa);
@@ -100,7 +100,7 @@ void ToneReproductor::xyY_to_RGB(float* color)
 	}
 
 	// 2. Adapt the luminance value and scale it to fit in the RGB range [2]
-	color[2] = powf(adapt_luminance(color[2]) / MaxdL,1.f/gamma);
+	color[2] = powf(adapt_luminance(color[2]) * one_over_maxdL, one_over_gamma);
 
 	// Convert from xyY to XZY
 	float X = color[0] * color[2] / color[1];
