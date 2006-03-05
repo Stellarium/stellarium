@@ -17,19 +17,19 @@
     </ignoreparts>
     <projectdirectory>.</projectdirectory>
     <absoluteprojectpath>false</absoluteprojectpath>
-    <description></description>
+    <description/>
     <versioncontrol>kdevcvsservice</versioncontrol>
   </general>
   <kdevautoproject>
     <general>
       <activetarget>src/stellarium</activetarget>
-      <useconfiguration>optimized</useconfiguration>
+      <useconfiguration>debug</useconfiguration>
     </general>
     <run>
       <mainprogram>/home/fabien/prog/stellarium/debug/src/stellarium</mainprogram>
       <directoryradio>custom</directoryradio>
       <customdirectory>/home/fabien/prog/stellarium/</customdirectory>
-      <programargs></programargs>
+      <programargs/>
       <terminal>false</terminal>
       <autocompile>true</autocompile>
       <envvars/>
@@ -42,15 +42,15 @@
         <f77compiler>kdevpgf77options</f77compiler>
         <cxxflags>-O3 -g0 -march=i686</cxxflags>
         <envvars/>
-        <configargs></configargs>
-        <topsourcedir></topsourcedir>
+        <configargs/>
+        <topsourcedir/>
         <cppflags>-ffast-math -s -fomit-frame-pointer</cppflags>
-        <ldflags></ldflags>
-        <ccompilerbinary></ccompilerbinary>
-        <cxxcompilerbinary></cxxcompilerbinary>
-        <f77compilerbinary></f77compilerbinary>
+        <ldflags/>
+        <ccompilerbinary/>
+        <cxxcompilerbinary/>
+        <f77compilerbinary/>
         <cflags>-O3 -g0 -march=i686</cflags>
-        <f77flags></f77flags>
+        <f77flags/>
       </optimized>
       <debug>
         <configargs>--enable-debug=full </configargs>
@@ -61,7 +61,7 @@
         <cxxflags>-O0 -g3</cxxflags>
         <envvars/>
         <topsourcedir/>
-        <cppflags/>
+        <cppflags>-pipe</cppflags>
         <ldflags/>
         <ccompilerbinary/>
         <cxxcompilerbinary/>
@@ -84,12 +84,12 @@
   </kdevautoproject>
   <kdevdebugger>
     <general>
-      <dbgshell></dbgshell>
-      <programargs></programargs>
-      <gdbpath></gdbpath>
-      <configGdbScript></configGdbScript>
-      <runShellScript></runShellScript>
-      <runGdbScript></runGdbScript>
+      <dbgshell/>
+      <programargs/>
+      <gdbpath/>
+      <configGdbScript/>
+      <runShellScript/>
+      <runGdbScript/>
       <breakonloadinglibs>true</breakonloadinglibs>
       <separatetty>false</separatetty>
       <floatingtoolbar>false</floatingtoolbar>
@@ -174,7 +174,7 @@
       <headerCompletionDelay>250</headerCompletionDelay>
     </codecompletion>
     <creategettersetter>
-      <prefixGet></prefixGet>
+      <prefixGet/>
       <prefixSet>set</prefixSet>
       <prefixVariable>m_,_</prefixVariable>
       <parameterName>theValue</parameterName>
@@ -234,8 +234,8 @@
   </dist>
   <kdevvisualadvance>
     <emulator>VisualBoyAdvance</emulator>
-    <binary></binary>
-    <addOptions></addOptions>
+    <binary/>
+    <addOptions/>
     <terminal>false</terminal>
     <fullscreen>false</fullscreen>
     <graphicFilter>-f0</graphicFilter>

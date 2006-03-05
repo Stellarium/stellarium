@@ -50,7 +50,7 @@ public:
 	// Same functions but in vector mode : faster because prevents extra cosine calculations
 	// The position vectors MUST be normalized, and the vertical z component is the third one
 	void set_paramsv(const float * sun_pos, float turbidity);
-	void get_xyY_valuev(skylight_struct2 * position);
+	void get_xyY_valuev(skylight_struct2& position);
 
 private:
 	float thetas;			// angular distance between the zenith and the sun in radian

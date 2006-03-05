@@ -71,15 +71,15 @@ public:
 
 	// Set the maximum display luminance : default value = 100 cd/m^2
 	// This value is used to scale the RGB range
-	void set_max_display_luminance(float _MaxdL) {MaxdL = MaxdL;}
+	void set_max_display_luminance(float maxdL) {one_over_maxdL = 1.f/maxdL;}
 
 	// Set the display gamma : default value = 2.3
-	void set_display_gamma(float _gamma) {gamma = _gamma;}
+	void set_display_gamma(float gamma) {one_over_gamma = 1.f/gamma;}
 
 	// Return adapted luminance from world to display
 	float adapt_luminance(float world_luminance) const
 	{
-		return powf((float)(world_luminance*M_PI*0.0001f),alpha_wa_over_alpha_da) * term2;
+		return powf(world_luminance*M_PI*0.0001f,alpha_wa_over_alpha_da) * term2;
 	}
 
 	// Convert from xyY color system to RGB
@@ -88,8 +88,8 @@ public:
 private:
 	float Lda;		// Display luminance adaptation (in cd/m^2)
 	float Lwa;		// World   luminance adaptation (in cd/m^2)
-	float MaxdL;	// Display maximum luminance (in cd/m^2)
-	float gamma;	// Screen gamma value
+	float one_over_maxdL;	// 1 / Display maximum luminance (in cd/m^2)
+	float one_over_gamma;	// 1 / Screen gamma value
 
 	// Precomputed variables
 	float alpha_da;

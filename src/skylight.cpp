@@ -155,32 +155,24 @@ void Skylight::get_xyY_value(skylight_struct * p)
 // p.color[0] is CIE x color component
 // p.color[1] is CIE y color component
 // p.color[2] is CIE Y color component (luminance)
-void Skylight::get_xyY_valuev(skylight_struct2 * p)
+void Skylight::get_xyY_valuev(skylight_struct2& p)
 {
-//	if (p->pos[2]<0.)
-//	{
-//		p->color[0] = 0.25;
-//		p->color[1] = 0.25;
-//		p->color[2] = 0;
-//		return;
-//	}
-	
-	float cos_dist_sun = sun_pos[0]*(p->pos[0]) + sun_pos[1]*(p->pos[1]) + sun_pos[2]*(p->pos[2]) - 0.0000001;
-	float one_over_cos_zenith_angle = 1.f/p->pos[2];
+	float cos_dist_sun = sun_pos[0]*p.pos[0] + sun_pos[1]*p.pos[1] + sun_pos[2]*p.pos[2] - 0.0000001;
+	float one_over_cos_zenith_angle = 1.f/p.pos[2];
 	float dist_sun = acosf(cos_dist_sun);
 
-	p->color[0] = term_x * (1.f + Ax * expf(Bx*one_over_cos_zenith_angle)) * (1.f + Cx * expf(Dx*dist_sun) +
+	p.color[0] = term_x * (1.f + Ax * expf(Bx*one_over_cos_zenith_angle)) * (1.f + Cx * expf(Dx*dist_sun) +
 		Ex * cos_dist_sun * cos_dist_sun);
-	p->color[1] = term_y * (1.f + Ay * expf(By*one_over_cos_zenith_angle)) * (1.f + Cy * expf(Dy*dist_sun) +
+	p.color[1] = term_y * (1.f + Ay * expf(By*one_over_cos_zenith_angle)) * (1.f + Cy * expf(Dy*dist_sun) +
 		Ey * cos_dist_sun * cos_dist_sun);
-	p->color[2] = term_Y * (1.f + AY * expf(BY*one_over_cos_zenith_angle)) * (1.f + CY * expf(DY*dist_sun) +
+	p.color[2] = term_Y * (1.f + AY * expf(BY*one_over_cos_zenith_angle)) * (1.f + CY * expf(DY*dist_sun) +
 		EY * cos_dist_sun * cos_dist_sun);
 
-	if (p->color[2] < 0 || p->color[0] < 0 || p->color[1] < 0)
+	if (p.color[2] < 0 || p.color[0] < 0 || p.color[1] < 0)
 	{
-		p->color[0] = 0.25;
-		p->color[1] = 0.25;
-		p->color[2] = 0;
+		p.color[0] = 0.25;
+		p.color[1] = 0.25;
+		p.color[2] = 0;
 	}
 }
 
