@@ -35,7 +35,7 @@ private:
 	void unproject_custom(double x, double y, Vec3d& v, const Mat4d& mat) const;
 
 	// Reimplementation of gluSphere : glu is overrided for non standard projection
-	void sSphere(GLdouble radius, GLdouble oblateness,
+	void sSphere(GLdouble radius, GLdouble one_minus_oblateness,
 		GLint slices, GLint stacks,
 		const Mat4d& mat, int orient_inside = 0) const;
 
