@@ -332,29 +332,13 @@ void Projector::reset_perspective_projection(void) const
 
 // Reimplementation of gluSphere : glu is overrided for non standard projection
 
-/*
-void Projector::sSphere(GLdouble radius, GLdouble oblateness,
-                        GLint slices, GLint stacks,
-                        const Mat4d& mat, int orient_inside) const
-{
-	glPushMatrix();
-	glLoadMatrixd(mat);
-	GLUquadricObj * p = gluNewQuadric();
-	gluQuadricTexture(p,GL_TRUE);
-	if (orient_inside) gluQuadricOrientation(p, GLU_INSIDE);
-	gluSphere(p, radius, slices, stacks);
-	gluDeleteQuadric(p);
-	glPopMatrix();
-}
-*/
-
-void Projector::sSphere(GLdouble radius, GLdouble oblateness,
+void Projector::sSphere(GLdouble radius, GLdouble one_minus_oblateness,
                         GLint slices, GLint stacks,
                         const Mat4d& mat, int orient_inside) const {
   glPushMatrix();
   glLoadMatrixd(mat);
 
-  if (oblateness == 1.0) { // gluSphere seems to have hardware acceleration
+  if (one_minus_oblateness == 1.0) { // gluSphere seems to have hardware acceleration
     GLUquadricObj * p = gluNewQuadric();
     gluQuadricTexture(p,GL_TRUE);
     if (orient_inside) gluQuadricOrientation(p, GLU_INSIDE);
@@ -407,16 +391,24 @@ void Projector::sSphere(GLdouble radius, GLdouble oblateness,
             x = -cos_sin_theta_p[1] * cos_sin_rho_p[1];
             y = cos_sin_theta_p[0] * cos_sin_rho_p[1];
             z = nsign * cos_sin_rho_p[0];
-            glNormal3f(x * oblateness * nsign, y * oblateness * nsign, z * nsign);
+            glNormal3f(x * one_minus_oblateness * nsign,
+                       y * one_minus_oblateness * nsign,
+                       z * nsign);
             glTexCoord2f(s, t);
-            sVertex3(x * radius, y * radius, oblateness * z * radius, mat);
+            sVertex3(x * radius,
+                     y * radius,
+                     one_minus_oblateness * z * radius, mat);
             x = -cos_sin_theta_p[1] * cos_sin_rho_p[3];
             y = cos_sin_theta_p[0] * cos_sin_rho_p[3];
             z = nsign * cos_sin_rho_p[2];
-            glNormal3f(x * oblateness * nsign, y * oblateness * nsign, z * nsign);
+            glNormal3f(x * one_minus_oblateness * nsign,
+                       y * one_minus_oblateness * nsign,
+                       z * nsign);
             glTexCoord2f(s, t - dt);
             s += ds;
-            sVertex3(x * radius, y * radius, oblateness * z * radius, mat);
+            sVertex3(x * radius,
+                     y * radius,
+                     one_minus_oblateness * z * radius, mat);
         }
         glEnd();
         t -= dt;

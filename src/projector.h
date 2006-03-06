@@ -192,7 +192,7 @@ public:
 	void reset_perspective_projection(void) const;
 
 	// Reimplementation of gluSphere : glu is overrided for non standard projection
-	virtual void sSphere(GLdouble radius, GLdouble oblateness,
+	virtual void sSphere(GLdouble radius, GLdouble one_minus_oblateness,
 		GLint slices, GLint stacks,
 		const Mat4d& mat, int orient_inside = 0) const;
 
