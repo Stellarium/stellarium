@@ -84,7 +84,7 @@ public:
            int _flagHalo,
            int _flag_lighting,
            double _radius,
-           double _oblateness,
+           double oblateness,
            Vec3f _color,
            float _albedo,
            const string& tex_map_name,
@@ -224,8 +224,8 @@ protected:
 	int flag_lighting;				// Set wether light computation has to be proceed
 	RotationElements re;			// Rotation param
 	double radius;					// Planet radius in UA
-	double oblateness;              // (polar radius)/(equatorial radius)
-	Vec3d orbit[ORBIT_SEGMENTS];                        // store heliocentric coordinates for drawing the orbit
+	double one_minus_oblateness;    // (polar radius)/(equatorial radius)
+	Vec3d orbit[ORBIT_SEGMENTS];    // store heliocentric coordinates for drawing the orbit
 	Vec3d ecliptic_pos; 			// Position in UA in the rectangular ecliptic coordinate system
 									// centered on the parent Planet
 	Vec3d screenPos;				// Used to store temporarily the 2D position on screen

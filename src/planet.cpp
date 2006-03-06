@@ -42,7 +42,7 @@ Planet::Planet(Planet *parent,
                int _flagHalo,
                int _flag_lighting,
                double _radius,
-               double _oblateness,
+               double oblateness,
                Vec3f _color,
                float _albedo,
                const string& tex_map_name,
@@ -50,7 +50,7 @@ Planet::Planet(Planet *parent,
                pos_func_type _coord_func) :
 		englishName(_englishName), flagHalo(_flagHalo),
         flag_lighting(_flag_lighting),
-        radius(_radius), oblateness(_oblateness),
+        radius(_radius), one_minus_oblateness(1.0-oblateness),
         color(_color), albedo(_albedo), axis_rotation(0.),
         tex_map(NULL), tex_halo(NULL), tex_big_halo(NULL), rings(NULL),
         sphere_scale(1.f),
@@ -547,7 +547,7 @@ void Planet::draw_sphere(const Projector* prj, const Mat4d& mat, float screen_sz
 
     // Rotate and add an extra half rotation because of the convention in all
     // Planet texture maps where zero deg long. is in the middle of the texture.
-    prj->sSphere(radius*sphere_scale, oblateness, nb_facet, nb_facet,
+    prj->sSphere(radius*sphere_scale, one_minus_oblateness, nb_facet, nb_facet,
                  mat * Mat4d::zrotation(M_PI/180*(axis_rotation + 180.)));
 
 	glDisable(GL_CULL_FACE);

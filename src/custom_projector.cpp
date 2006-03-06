@@ -75,7 +75,7 @@ void CustomProjector::sVertex3(double x, double y, double z, const Mat4d& mat) c
 	glVertex3dv(v);
 }
 
-void CustomProjector::sSphere(GLdouble radius, GLdouble oblateness,
+void CustomProjector::sSphere(GLdouble radius, GLdouble one_minus_oblateness,
                               GLint slices, GLint stacks,
                               const Mat4d& mat, int orient_inside) const
 {
@@ -161,8 +161,8 @@ void CustomProjector::sSphere(GLdouble radius, GLdouble oblateness,
             if (isLightOn)
             {
                 transNorm = mat.multiplyWithoutTranslation(
-                                  Vec3d(x * oblateness * nsign,
-                                        y * oblateness * nsign,
+                                  Vec3d(x * one_minus_oblateness * nsign,
+                                        y * one_minus_oblateness * nsign,
                                         z * nsign));
                 c = lightPos3.dot(transNorm);
                 if (c<0) c=0;
@@ -170,7 +170,7 @@ void CustomProjector::sSphere(GLdouble radius, GLdouble oblateness,
                     c*diffuseLight[1] + ambientLight[1],
                     c*diffuseLight[2] + ambientLight[2]);
             }
-            sVertex3(x * radius, y * radius, z * oblateness * radius, mat);
+            sVertex3(x * radius, y * radius, z * one_minus_oblateness * radius, mat);
             x = -cos_sin_theta_p[1] * cos_sin_rho_p[3];
             y = cos_sin_theta_p[0] * cos_sin_rho_p[3];
             z = nsign * cos_sin_rho_p[2];
@@ -178,8 +178,8 @@ void CustomProjector::sSphere(GLdouble radius, GLdouble oblateness,
             if (isLightOn)
             {
                 transNorm = mat.multiplyWithoutTranslation(
-                                  Vec3d(x * oblateness * nsign,
-                                        y * oblateness * nsign,
+                                  Vec3d(x * one_minus_oblateness * nsign,
+                                        y * one_minus_oblateness * nsign,
                                         z * nsign));
                 c = lightPos3.dot(transNorm);
                 if (c<0) c=0;
@@ -187,7 +187,7 @@ void CustomProjector::sSphere(GLdouble radius, GLdouble oblateness,
                     c*diffuseLight[1] + ambientLight[1],
                     c*diffuseLight[2] + ambientLight[2]);
             }
-            sVertex3(x * radius, y * radius, z * oblateness * radius, mat);
+            sVertex3(x * radius, y * radius, z * one_minus_oblateness * radius, mat);
             s += ds;
         }
         glEnd();
