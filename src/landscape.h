@@ -50,11 +50,11 @@ public:
 	//! Set whether landscape is displayed (does not concern fog)
 	void setFlagShow(bool b) {land_fader=b;}
 	//! Get whether landscape is displayed (does not concern fog)
-	bool getFlagShow() {return land_fader;}
+	bool getFlagShow() const {return (bool)land_fader;}
 	//! Set whether fog is displayed
 	void setFlagShowFog(bool b) {fog_fader=b;}
 	//! Get whether fog is displayed
-	bool getFlagShowFog() {return fog_fader;}
+	bool getFlagShowFog() const {return (bool)fog_fader;}
 	
 	void update(int delta_time) {land_fader.update(delta_time); fog_fader.update(delta_time);}
 	virtual void draw(ToneReproductor * eye, const Projector* prj, const Navigator* nav) = 0;
