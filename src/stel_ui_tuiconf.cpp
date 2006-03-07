@@ -44,18 +44,10 @@ void StelUI::draw_gravity_ui(void)
 		double jd = core->navigation->get_JDay();
 		wostringstream os;
 
-		if (FlagUTC_Time)
-		{
-			os << core->observatory->get_printable_date_UTC(jd) << L" " <<
-			core->observatory->get_printable_time_UTC(jd) << L" (UTC)";
-		}
-		else
-		{
-			os << core->observatory->get_printable_date_local(jd) << L" " <<
-			core->observatory->get_printable_time_local(jd);
-		}
+		os << core->observatory->get_printable_date_local(jd) << L" " <<
+		core->observatory->get_printable_time_local(jd);
 
-		if (FlagShowFov) os << L" fov " << setprecision(3) << core->projection->get_visible_fov();
+		if (FlagShowFov) os << L" fov " << setprecision(3) << core->getFov();
 		if (FlagShowFps) os << L"  FPS " << app->fps;
 
 		glColor3f(0.5,1,0.5);
