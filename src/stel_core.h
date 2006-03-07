@@ -71,28 +71,12 @@ public:
 	//! Execute all the drawing functions
 	//! @param delta_time the time increment in ms.
 	void draw(int delta_time);
-
-	//! Find and select in a "clever" way an object from its equatorial position
-	StelObject * clever_find(const Vec3d& pos) const;
-	
-	//! Find and select in a "clever" way an object from its screen position
-	StelObject * clever_find(int x, int y) const;
 	
 	//! Get the name of the directory containing the data
 	const string getDataDir(void) const {return dataRoot + "/data/";}
 	
 	//! Get the name of the root directory i.e the one containing the other main directories
 	const string& getDataRoot() const {return dataRoot;}
-	
-	
-	//! Zoom to the given FOV
-	void zoomTo(double aim_fov, float move_duration = 1.) {projection->zoom_to(aim_fov, move_duration);}
-	
-	//! Go and zoom temporarily to the selected object.
-	void autoZoomIn(float move_duration = 1.f, bool allow_manual_zoom = 1);
-	
-	//! Unzoom to the previous position
-	void autoZoomOut(float move_duration = 1.f, bool full = 0);
 	
 	//! Set the sky culture
 	int setSkyCulture(string _culture_dir);
@@ -119,11 +103,28 @@ public:
 	//! Get the current date in Julian Day
 	double getJDay(void) const {return navigation->get_JDay();}	
 	
+	//! Set object tracking
+	void setFlagTraking(bool b) {navigation->set_flag_traking(b);}
+	//! Get object tracking
+	bool getFlagTraking(void) {return navigation->get_flag_traking();}
+	
 	// TODO!
 	void loadObservatory();
 	
 	//! Go to the selected object
 	void gotoSelectedObject(void) {if (selected_object) navigation->move_to(selected_object->get_earth_equ_pos(navigation), auto_move_duration);}
+	
+	//! Zoom to the given FOV
+	void zoomTo(double aim_fov, float move_duration = 1.) {projection->zoom_to(aim_fov, move_duration);}
+	
+	//! Get current FOV
+	float getFov(void) const {return projection->get_fov();}
+	
+	//! Go and zoom temporarily to the selected object.
+	void autoZoomIn(float move_duration = 1.f, bool allow_manual_zoom = 1);
+	
+	//! Unzoom to the previous position
+	void autoZoomOut(float move_duration = 1.f, bool full = 0);
 	
 	// Viewing direction function : 1 move, 0 stop.
 	void turn_right(int);
@@ -132,6 +133,14 @@ public:
 	void turn_down(int);
 	void zoom_in(int);
 	void zoom_out(int);	
+	
+	
+	
+	//! Find in a "clever" way an object from its equatorial position
+	StelObject * clever_find(const Vec3d& pos) const;
+	
+	//! Find in a "clever" way an object from its screen position
+	StelObject * clever_find(int x, int y) const;	
 	
 	///////////////////////////////////////////////////////////////////////////////////////
 	// Constellations methods
@@ -290,6 +299,11 @@ public:
 	void setFlagMeridianLine(bool b) {meridian_line->setFlagshow(b);}
 	//! Get flag for displaying Meridian Line
 	bool getFlagMeridianLine(void) const {return meridian_line->getFlagshow();}	
+	
+	//! Set flag for displaying Cardinals Points
+	void setFlagCardinalsPoints(bool b) {cardinals_points->setFlagShow(b);}
+	//! Get flag for displaying Cardinals Points
+	bool getFlagCardinalsPoints(void) const {return cardinals_points->getFlagShow();}
 	
 	///////////////////////////////////////////////////////////////////////////////////////
 	// Projection	

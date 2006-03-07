@@ -676,7 +676,6 @@ int StelCommandInterface::set_flag(string name, string value, bool &newval, bool
 			else if(name=="show_fov") newval = (stapp->ui->FlagShowFov = !stapp->ui->FlagShowFov);
 			else if(name=="enable_tui_menu") newval = (stapp->ui->FlagEnableTuiMenu = !stapp->ui->FlagEnableTuiMenu);
 			else if(name=="show_gravity_ui") newval = (stapp->ui->FlagShowGravityUi = !stapp->ui->FlagShowGravityUi);
-			else if(name=="utc_time") newval = (stapp->ui->FlagUTC_Time = !stapp->ui->FlagUTC_Time);
 			else if(name=="gravity_labels") {
 				newval = !stcore->getFlagGravityLabels();
 				stcore->setFlagGravityLabels(newval);
@@ -850,7 +849,6 @@ int StelCommandInterface::set_flag(string name, string value, bool &newval, bool
 			else if(name=="show_fov") stapp->ui->FlagShowFov = newval;
 			else if(name=="enable_tui_menu") stapp->ui->FlagEnableTuiMenu = newval;
 			else if(name=="show_gravity_ui") stapp->ui->FlagShowGravityUi = newval;
-			else if(name=="utc_time") stapp->ui->FlagUTC_Time = newval;
 			else if(name=="gravity_labels") stcore->setFlagGravityLabels(newval);
 			else status = 0;
 		

@@ -125,7 +125,6 @@ void StelUI::init(const InitParser& conf)
 	BaseFontName        = conf.get_str("gui", "base_font_name", "DejaVuSans.ttf");
 	FlagShowScriptBar	= conf.get_boolean("gui","flag_show_script_bar",false);
 	MouseCursorTimeout  = conf.get_double("gui","mouse_cursor_timeout",0);
-	FlagUTC_Time		= conf.get_boolean("navigation:flag_utc_time");
 	
 	// Text ui section
 	FlagEnableTuiMenu = conf.get_boolean("tui:flag_enable_tui_menu");
@@ -269,20 +268,14 @@ void StelUI::updateTopBar(void)
 
 	if (FlagShowDate)
 	{
-		if (FlagUTC_Time)
-			top_bar_date_lbl->setLabel(core->observatory->get_printable_date_UTC(jd));
-		else
-			top_bar_date_lbl->setLabel(core->observatory->get_printable_date_local(jd));
+		top_bar_date_lbl->setLabel(core->observatory->get_printable_date_local(jd));
 		top_bar_date_lbl->adjustSize();
 	}
 	top_bar_date_lbl->setVisible(FlagShowDate);
 
 	if (FlagShowTime)
 	{
-		if (FlagUTC_Time)
-			top_bar_hour_lbl->setLabel(core->observatory->get_printable_time_UTC(jd) + _(" (UTC)"));
-		else
-			top_bar_hour_lbl->setLabel(core->observatory->get_printable_time_local(jd));
+		top_bar_hour_lbl->setLabel(core->observatory->get_printable_time_local(jd));
 		top_bar_hour_lbl->adjustSize();
 	}
 	top_bar_hour_lbl->setVisible(FlagShowTime);
@@ -292,7 +285,7 @@ void StelUI::updateTopBar(void)
 	if (FlagShowFov)
 	{
 		wstringstream wos;
-		wos << L"FOV=" << setprecision(3) << core->projection->get_visible_fov() << L"°";
+		wos << L"FOV=" << setprecision(3) << core->getFov() << L"°";
 		top_bar_fov_lbl->setLabel(wos.str());
 		top_bar_fov_lbl->adjustSize();
 	}
@@ -541,7 +534,7 @@ void StelUI::cb(void)
 	core->setFlagAzimutalGrid(bt_flag_azimuth_grid->getState());
 	core->setFlagEquatorGrid(bt_flag_equator_grid->getState());
 	core->setFlagLandscape(bt_flag_ground->getState());
-	core->cardinals_points->setFlagShow(bt_flag_cardinals->getState());
+	core->setFlagCardinalsPoints(bt_flag_cardinals->getState());
 	core->setFlagAtmosphere(bt_flag_atmosphere->getState());
 	core->setFlagNebulaHints( bt_flag_nebula_name->getState() );
 	FlagHelp 				= bt_flag_help->getState();
@@ -796,7 +789,7 @@ int StelUI::handle_move(int x, int y)
 		if ((has_dragged || sqrtf((x-previous_x)*(x-previous_x)+(y-previous_y)*(y-previous_y))>4.))
 		{
 			has_dragged = true;
-			core->navigation->set_flag_traking(0);
+			core->setFlagTraking(false);
 			Vec3d tempvec1, tempvec2;
 			double az1, alt1, az2, alt2;
 			if (core->navigation->get_viewing_mode()==Navigator::VIEW_HORIZON)
@@ -919,8 +912,8 @@ int StelUI::handle_clic(Uint16 x, Uint16 y, S_GUI_VALUE button, S_GUI_VALUE stat
 				core->setObjectPointerVisibility(1);  // by default draw pointer around object
 				updateInfoSelectString();
 				// If an object was selected keep the earth following
-				if (core->navigation->get_flag_traking()) core->navigation->set_flag_lock_equ_pos(1);
-				core->navigation->set_flag_traking(0);
+				if (core->getFlagTraking()) core->navigation->set_flag_lock_equ_pos(1);
+				core->setFlagTraking(false);
 
 				if (core->selected_object->get_type()==StelObject::STEL_OBJECT_STAR)
 				{
