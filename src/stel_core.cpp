@@ -270,9 +270,6 @@ void StelCore::update(int delta_time)
 	// Matrix for sun and all the satellites (ie planets)
 	ssystem->computeTransMatrices(navigation->get_JDay());
 
-	// Move the view direction and/or fov
-	updateMove(delta_time);
-
 	// Transform matrices between coordinates systems
 	navigation->update_transform_matrices();
 	// Direction of vision
@@ -282,6 +279,9 @@ void StelCore::update(int delta_time)
 
 	// update faders and Planet trails (call after nav is updated)
 	ssystem->update(delta_time, navigation);
+
+	// Move the view direction and/or fov
+	updateMove(delta_time);
 
 	// Update info about selected object
 	if (selected_object) selected_object->update();
@@ -449,7 +449,7 @@ void StelCore::setScreenSize(int w, int h)
 	projection->set_screen_size(w, h);
 }
 
-// Find and select in a "clever" way an object
+// Find an object in a "clever" way 
 StelObject * StelCore::clever_find(const Vec3d& v) const
 {
 	StelObject * sobj = NULL;

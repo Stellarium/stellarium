@@ -103,7 +103,6 @@ private:
 	Vec3f GuiTextColor;
 	Vec3f GuiBaseColorr;
 	Vec3f GuiTextColorr;
-	int FlagUTC_Time;					// if true display UTC time	
 	float BaseFontSize;
 	string BaseFontName;
 	float BaseCFontSize;
