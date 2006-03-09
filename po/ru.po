@@ -1,57 +1,56 @@
-# Russian translations for stellarium package.
-# Copyright (C) 2004 Free Software Foundation, Inc.
+# Russian translation for stellarium
+# Copyright (c) (c) 2006 Canonical Ltd, and Rosetta Contributors 2006
 # This file is distributed under the same license as the stellarium package.
-#  <fazylova_genia@mail.ru>, 2004.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2006.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: stellarium 0.7.0\n"
+"Project-Id-Version: ru\n"
 "Report-Msgid-Bugs-To: stellarium@free.fr\n"
-"POT-Creation-Date: 2006-03-01 18:38+0100\n"
-"PO-Revision-Date: 2004-12-22 00:25+0100\n"
-"Last-Translator:  <fazylova_genia@mail.ru>\n"
+"POT-Creation-Date: 2006-03-09 10:23+0100\n"
+"PO-Revision-Date: 2006-03-09 10:23+0100\n"
+"Last-Translator: Sandu\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
-"10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
 #: src/main.cpp:52
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Usage: %s [OPTION] ...\n"
 " -v, --version          Output version information and exit.\n"
 " -h, --help             Display this help and exit.\n"
 msgstr ""
-" -v, --version          output version information and exit\n"
-" -h, --help             display this help and exit\n"
+"Использование: %s [ОПЦИИ] ...\n"
+" -v, --version Выводит информацию о версии и завершает работу.\n"
+" -h, --help Отображает эту справочную информацию и завершает работу.\n"
 
 #: src/main.cpp:76
 #, c-format
 msgid "%s: Bad command line argument(s)\n"
-msgstr "%s: \n"
+msgstr "%s: Неверный(е) аргумент(ы) коммандной строки.\n"
 
 #: src/main.cpp:77
 #, c-format
 msgid "Try `%s --help' for more information.\n"
-msgstr "попытaйтесь `%s --help' чтобы получить больше информации.\n"
+msgstr "Попробуйте '%s --help' для дополнительной информации.\n"
 
 #: src/constellation_mgr.cpp:155
 msgid "Loading Constellation Art: "
-msgstr ""
+msgstr "Загрузка рисунков созвездий: "
 
 #: src/hip_star.cpp:77 src/planet.cpp:97
 msgid "Name : "
-msgstr ""
+msgstr "Имя : "
 
 #: src/hip_star.cpp:88
 msgid "(Dbl)"
-msgstr ""
+msgstr "(Двойная)"
 
 #: src/hip_star.cpp:89
 msgid "(Var)"
-msgstr ""
+msgstr "(Переменная)"
 
 #: src/hip_star.cpp:104 src/nebula.cpp:82
 msgid "RA/DE: "
@@ -63,199 +62,199 @@ msgstr ""
 
 #: src/hip_star.cpp:112
 msgid "Spectral : "
-msgstr ""
+msgstr "Спектральный : "
 
 #: src/hip_star.cpp:115 src/nebula.cpp:93 src/planet.cpp:111
 msgid "Magnitude : "
-msgstr ""
+msgstr "Звездная величина : "
 
 #: src/hip_star.cpp:116 src/planet.cpp:113
 msgid "Distance : "
-msgstr ""
+msgstr "Расстояние: "
 
 #: src/hip_star.cpp:120
 msgid " Light Years"
-msgstr ""
+msgstr " Световых лет"
 
 #: src/hip_star.cpp:137 src/planet.cpp:137
 msgid ": mag "
-msgstr ""
+msgstr ": вел. "
 
 #: src/hip_star.cpp:138
 msgid "ly"
-msgstr ""
+msgstr "св. лет"
 
 #: src/hip_star_mgr.cpp:176
 msgid "Loading Hipparcos catalog:"
-msgstr ""
+msgstr "Загружается каталог Hipparcos:"
 
 #: src/hip_star_mgr.cpp:855 src/hip_star_mgr.cpp:1522
 #, c-format
 msgid "Loading HIP/SAO catalogs: %d/%d"
-msgstr ""
+msgstr "Загружается каталог HIP/SAO: %d/%d"
 
 #: src/hip_star_mgr.cpp:1198
 #, c-format
 msgid "Loading HIP catalog: %d/%d"
-msgstr ""
+msgstr "Загружается каталог HIP: %d/%d"
 
 #: src/hip_star_mgr.cpp:1293
 #, c-format
 msgid "Loading SAO catalog: %d/%d"
-msgstr ""
+msgstr "Загружается каталог SAO: %d/%d"
 
 #: src/nebula.cpp:94
 msgid "Type : "
-msgstr ""
+msgstr "Тип : "
 
 #: src/nebula.cpp:95
 msgid "Size : "
-msgstr ""
+msgstr "Размер : "
 
 #: src/nebula_mgr.cpp:253
 msgid "Loading NGC catalog: "
-msgstr ""
+msgstr "Загружается каталог NGC: "
 
 #: src/nebula_mgr.cpp:377
 msgid "Loading Nebula Textures:"
-msgstr ""
+msgstr "Загружаются текстуры туманностей:"
 
 #: src/planet.cpp:107
 msgid "RA : "
-msgstr ""
+msgstr "Пр. восх. : "
 
 #: src/planet.cpp:108
 msgid "DE : "
-msgstr ""
+msgstr "Скл. : "
 
 #: src/planet.cpp:113
 msgid "AU"
-msgstr ""
+msgstr "АЕ"
 
 #: src/planet.cpp:121
 msgid "Az  : "
-msgstr ""
+msgstr "Аз. : "
 
 #: src/planet.cpp:122
 msgid "Alt : "
-msgstr ""
+msgstr "Выс. : "
 
-#: src/stel_ui.cpp:196
+#: src/stel_ui.cpp:195
 msgid "Message"
-msgstr ""
+msgstr "Сообщение"
 
-#: src/stel_ui.cpp:283
-msgid " (UTC)"
-msgstr ""
-
-#: src/stel_ui.cpp:505 src/stel_ui.cpp:638
+#: src/stel_ui.cpp:498 src/stel_ui.cpp:631
 msgid "Script commander"
-msgstr ""
+msgstr "Редактор сценария"
 
-#: src/stel_ui.cpp:532
+#: src/stel_ui.cpp:525
 msgid "Invalid Script command"
-msgstr ""
+msgstr "Неверная команда сценария"
 
-#: src/stel_ui.cpp:602
+#: src/stel_ui.cpp:595
 msgid "Drawing of the Constellations [C]"
-msgstr ""
+msgstr "Линии созвездий [C]"
 
-#: src/stel_ui.cpp:604
+#: src/stel_ui.cpp:597
 msgid "Names of the Constellations [V]"
-msgstr ""
+msgstr "Названия созвездий [V]"
 
-#: src/stel_ui.cpp:606
+#: src/stel_ui.cpp:599
 msgid "Constellations Art [R]"
-msgstr ""
+msgstr "Изображения созвездий [R]"
 
-#: src/stel_ui.cpp:608
+#: src/stel_ui.cpp:601
 msgid "Azimuthal Grid [Z]"
-msgstr ""
+msgstr "Азимутальная сетка [Z]"
 
-#: src/stel_ui.cpp:610
+#: src/stel_ui.cpp:603
 msgid "Equatorial Grid [E]"
-msgstr ""
+msgstr "Экваториальная сетка [E]"
 
-#: src/stel_ui.cpp:612
+#: src/stel_ui.cpp:605
 msgid "Ground [G]"
-msgstr ""
+msgstr "Земля [G]"
 
-#: src/stel_ui.cpp:614
+#: src/stel_ui.cpp:607
 msgid "Cardinal Points [Q]"
-msgstr ""
+msgstr "Страны Света [Q]"
 
-#: src/stel_ui.cpp:616
+#: src/stel_ui.cpp:609
 msgid "Atmosphere [A]"
-msgstr ""
+msgstr "Атмосфера [A]"
 
-#: src/stel_ui.cpp:618
+#: src/stel_ui.cpp:611
 msgid "Nebulas [N]"
-msgstr ""
+msgstr "Туманности [N]"
 
-#: src/stel_ui.cpp:620
+#: src/stel_ui.cpp:613
 msgid "Help [H]"
-msgstr ""
+msgstr "Помощь [H]"
 
-#: src/stel_ui.cpp:622
+#: src/stel_ui.cpp:615
 msgid "Equatorial/Altazimuthal Mount [ENTER]"
-msgstr ""
+msgstr "Экваториальная/Азимутальная установка [ENTER]"
+
+#: src/stel_ui.cpp:617
+msgid "Configuration window"
+msgstr "Окно настройки"
+
+#: src/stel_ui.cpp:619
+msgid "Chart mode"
+msgstr "Режим диаграммы"
+
+#: src/stel_ui.cpp:621
+msgid "Night (red) mode"
+msgstr "Ночной (красный) режим"
 
 #: src/stel_ui.cpp:624
-msgid "Configuration window"
-msgstr ""
+msgid "Quit [CTRL + Q]"
+msgstr "Выйти [CTRL + Q]"
 
 #: src/stel_ui.cpp:626
-msgid "Chart mode"
-msgstr ""
+msgid "Quit [CMD + Q]"
+msgstr "Выйти [CTRL + Q]"
 
-#: src/stel_ui.cpp:628
-msgid "Night (red) mode"
-msgstr ""
-
-#: src/stel_ui.cpp:631
-msgid "Quit [CTRL + Q]"
-msgstr ""
+#: src/stel_ui.cpp:629
+msgid "Search for object"
+msgstr "Найти объект"
 
 #: src/stel_ui.cpp:633
-msgid "Quit [CMD + Q]"
-msgstr ""
-
-#: src/stel_ui.cpp:636
-msgid "Search for object"
-msgstr ""
-
-#: src/stel_ui.cpp:640
 msgid "Goto selected object [SPACE]"
-msgstr ""
+msgstr "Перейти к выбранному объекту [SPACE]"
 
-#: src/stel_ui.cpp:646
+#: src/stel_ui.cpp:639
 msgid "Decrease Time Speed [J]"
-msgstr ""
+msgstr "Уменьшить коэффициент времени [J]"
 
-#: src/stel_ui.cpp:648
+#: src/stel_ui.cpp:641
 msgid "Real Time Speed [K]"
-msgstr ""
+msgstr "Нормальный ход времени [K]"
 
-#: src/stel_ui.cpp:650
+#: src/stel_ui.cpp:643
 msgid "Increase Time Speed [L]"
-msgstr ""
+msgstr "Увеличить коэффициент времени [L]"
 
-#: src/stel_ui.cpp:652
+#: src/stel_ui.cpp:645
 msgid "Return to Current Time"
-msgstr ""
+msgstr "Вернуться в настоящее время"
 
-#: src/stel_ui.cpp:661
+#: src/stel_ui.cpp:654
 msgid ""
 "   Please check for newer versions and send bug reports\n"
 "and comments to us at: http://www.stellarium.org\n"
 "\n"
 msgstr ""
+"   Пожалуйста, проверяйте наличие новых версий, а также присылайте нам "
+"отчеты об ошибках и комментарии\n"
+"по адресу: http://www.stellarium.org\n"
+"\n"
 
-#: src/stel_ui.cpp:680
+#: src/stel_ui.cpp:673
 msgid "Information"
-msgstr ""
+msgstr "Информация"
 
-#: src/stel_ui.cpp:692
+#: src/stel_ui.cpp:685
 msgid ""
 "Movement & selection:\n"
 "Arrow Keys       : Change viewing RA/DE\n"
@@ -269,8 +268,19 @@ msgid ""
 "SPACE            : Center on selected object\n"
 "\n"
 msgstr ""
+"Движение и выбор:\n"
+"Стрелки курсора : Переключить просмотр Пр. восх./Скл.\n"
+"Page Up/Down : Масштаб\n"
+"CTRL+Стрелки Вверх/Вниз : Масштаб\n"
+"Левый клик : Выбрать объект\n"
+"Правый клик : Отменить выбор\n"
+"CTRL+Левый клик : Отменить выбор\n"
+"\\ : Уменьшить масштаб (планеты + луны, если применимо)\n"
+"/ : Увеличить масштаб выбранного объекта\n"
+"ПРОБЕЛ : Центрировать выбранный объект\n"
+"\n"
 
-#: src/stel_ui.cpp:703
+#: src/stel_ui.cpp:696
 msgid ""
 "Display options:\n"
 "ENTER : Equatorial/altazimuthal mount\n"
@@ -285,8 +295,20 @@ msgid ""
 "4 , : Ecliptic line             5 . : Equator line\n"
 "\n"
 msgstr ""
+"Настройки дисплея:\n"
+"ENTER : Экаториальная/Азимутальная установка\n"
+"F1 : Переключить полноэкранный режим\n"
+"C : Линии созвездий V : Названия созвездий\n"
+"R : Рисунки созвездий E : Экваториальная сетка\n"
+"Z : Азимутальная сетка N : Названия туманностей\n"
+"P : Названия планет G : Земля\n"
+"A : Атмосфера F : Туман\n"
+"Q : Страны Света O : Переключить масштабирование луны\n"
+"T : Отслеживание объекта S : Звезды\n"
+"4 , : Линия эклиптики 5 . : Линия экватора\n"
+"\n"
 
-#: src/stel_ui.cpp:715
+#: src/stel_ui.cpp:708
 msgid ""
 "Dialogs & other controls:\n"
 "H   : Help                      I   : About Stellarium\n"
@@ -296,8 +318,16 @@ msgid ""
 "CTRL + F : Toggle object finder\n"
 "\n"
 msgstr ""
+"Диалоги и другие элементы управления:\n"
+"H : Помощь\n"
+"I : О программе Stellarium\n"
+"M : Text menu 1 (one) : Настройки\n"
+"CTRL + S : Сделать снимок экрана\n"
+"CTRL + R : Переключить режим записи сценария\n"
+"CTRL + F : Переключить режим поиск объекта\n"
+"\n"
 
-#: src/stel_ui.cpp:722
+#: src/stel_ui.cpp:715
 msgid ""
 "Time & Date:\n"
 "6   : Time rate pause           7   : Time rate 0\n"
@@ -307,144 +337,157 @@ msgid ""
 "[   : Back 7 days               ]   : Forward 7 days\n"
 "\n"
 msgstr ""
+"Время и дата:\n"
+"6 : Пауза коэффициента времени 7 : Коэффициент времени 0\n"
+"8 : Установить текущее время J : Уменьшить коэффициент времени\n"
+"K : Нормальный коэффициент времени L : Увеличить коэффициент времени\n"
+"- : Назад 24 часа = : Вперед 24 часа\n"
+"[ : Назад 7 дней ] : Вперед 7 дней\n"
+"\n"
 
-#: src/stel_ui.cpp:729
+#: src/stel_ui.cpp:722
 msgid ""
 "During Script Playback:\n"
 "CTRL + C : End Script\n"
 "6   : pause script              K   : resume script\n"
 "\n"
 msgstr ""
+"При выполнении сценария:\n"
+"CTRL + C : Завершить сценарий\n"
+"6 : приостановить сценарий K : продолжить сценарий\n"
+"\n"
 
-#: src/stel_ui.cpp:733
+#: src/stel_ui.cpp:726
 msgid ""
 "Misc:\n"
 "9   : Toggle meteor shower rates\n"
 msgstr ""
+"Прочее:\n"
+"9 : Изменить коэффициенты метеоритного дождя\n"
 
-#: src/stel_ui.cpp:736
+#: src/stel_ui.cpp:729
 msgid "CTRL + Q : Quit\n"
-msgstr ""
+msgstr "CTRL + Q : Выйти\n"
 
-#: src/stel_ui.cpp:738
+#: src/stel_ui.cpp:731
 msgid "CMD + Q  : Quit\n"
-msgstr ""
+msgstr "CMD + Q : Выйти\n"
 
-#: src/stel_ui.cpp:744
+#: src/stel_ui.cpp:737
 msgid "Help"
-msgstr ""
+msgstr "Помощь"
 
-#: src/stel_ui.cpp:1092
+#: src/stel_ui.cpp:1085
 msgid "Command recording stopped."
-msgstr ""
+msgstr "Запись команд прекращена."
 
-#: src/stel_ui.cpp:1100
+#: src/stel_ui.cpp:1093
 msgid "Recording commands to script file:\n"
-msgstr ""
+msgstr "Записываются команды в файл сценария:\n"
 
-#: src/stel_ui.cpp:1102
+#: src/stel_ui.cpp:1095
 msgid "Hit CTRL-R again to stop.\n"
-msgstr ""
+msgstr "Нажмите снова CTRL+R чтобы остановить.\n"
 
-#: src/stel_ui.cpp:1106
+#: src/stel_ui.cpp:1099
 msgid "Error: Unable to open script file to record commands."
-msgstr ""
+msgstr "Ошибка: Невозможно открыть файл сценария для записи команд."
 
 #: src/stel_ui_conf.cpp:27
 msgid "Configuration"
-msgstr ""
+msgstr "Настройка"
 
 #: src/stel_ui_conf.cpp:47 src/stel_ui_conf.cpp:682
 msgid "Stars"
-msgstr ""
+msgstr "Звезды"
 
 #: src/stel_ui_conf.cpp:52
 msgid "Star Names. Up to mag :"
-msgstr ""
+msgstr "Названия звезд. До величины :"
 
 #: src/stel_ui_conf.cpp:64
 msgid "Star Twinkle. Amount :"
-msgstr ""
+msgstr "Мерцание звезды. Величина:"
 
 #: src/stel_ui_conf.cpp:80
 msgid "Constellations"
-msgstr ""
+msgstr "Созвездия"
 
 #: src/stel_ui_conf.cpp:85
 msgid "Constellations Names"
-msgstr ""
+msgstr "Названия созвездий"
 
 #: src/stel_ui_conf.cpp:90
 msgid "Selected Constellation Only"
-msgstr ""
+msgstr "Только выбранные созвездия"
 
 #: src/stel_ui_conf.cpp:103
 msgid "Nebulas Names. Up to mag :"
-msgstr ""
+msgstr "Названия туманностей. До величины :"
 
 #: src/stel_ui_conf.cpp:120
 msgid "Planets"
-msgstr ""
+msgstr "Планеты"
 
 #: src/stel_ui_conf.cpp:125
 msgid "Moon Scale"
-msgstr ""
+msgstr "Масштаб луны"
 
 #: src/stel_ui_conf.cpp:132
 msgid "Planets Hints"
-msgstr ""
+msgstr "Названия планет"
 
 #: src/stel_ui_conf.cpp:143
 msgid "Equatorial Grid"
-msgstr ""
+msgstr "Экваториальная сетка"
 
 #: src/stel_ui_conf.cpp:148
 msgid "Azimuthal Grid"
-msgstr ""
+msgstr "Азимутальная сетка"
 
 #: src/stel_ui_conf.cpp:153
 msgid "Equator Line"
-msgstr ""
+msgstr "Линия экватора"
 
 #: src/stel_ui_conf.cpp:158
 msgid "Ecliptic Line"
-msgstr ""
+msgstr "Линия эклиптики"
 
 #: src/stel_ui_conf.cpp:169
 msgid "Ground"
-msgstr ""
+msgstr "Земля"
 
 #: src/stel_ui_conf.cpp:174
 msgid "Cardinal Points"
-msgstr ""
+msgstr "Страны света"
 
 #: src/stel_ui_conf.cpp:179
 msgid "Atmosphere"
-msgstr ""
+msgstr "Атмосфера"
 
 #: src/stel_ui_conf.cpp:184
 msgid "Fog"
-msgstr ""
+msgstr "Туман"
 
 #: src/stel_ui_conf.cpp:189 src/stel_ui_conf.cpp:362
 msgid "Save as default"
-msgstr ""
+msgstr "Сделать настройками по умолчанию"
 
 #: src/stel_ui_conf.cpp:201
 msgid "Current Time :"
-msgstr ""
+msgstr "Текущее время"
 
 #: src/stel_ui_conf.cpp:210
 msgid "Time Zone :"
-msgstr ""
+msgstr "Часовой пояс :"
 
 #: src/stel_ui_conf.cpp:214
 msgid "Using System Default Time Zone"
-msgstr ""
+msgstr "Используется системный часовой пояс по умолчанию"
 
 #: src/stel_ui_conf.cpp:223
 msgid "Time speed : "
-msgstr ""
+msgstr "Скорость времени: "
 
 #: src/stel_ui_conf.cpp:231
 msgid ""
@@ -452,799 +495,805 @@ msgid ""
 "   time speed.\n"
 "Use key K to return to real time speed."
 msgstr ""
+"Используйте клавиши J и L для уменьшения и увеличения\n"
+"   скорости течения времени.\n"
+"Используйте клавишу K для возврата к нормальной скорости времени."
 
 #: src/stel_ui_conf.cpp:253
 msgid "Cursor : "
-msgstr ""
+msgstr "Курсор : "
 
 #: src/stel_ui_conf.cpp:258
 msgid "Selected : "
-msgstr ""
+msgstr "Выбрано: "
 
 #: src/stel_ui_conf.cpp:263
 msgid "Longitude : "
-msgstr ""
+msgstr "Долгота : "
 
 #: src/stel_ui_conf.cpp:271
 msgid "Latitude : "
-msgstr ""
+msgstr "Широта : "
 
 #: src/stel_ui_conf.cpp:279
 msgid "Altitude : "
-msgstr ""
+msgstr "Высота : "
 
 #: src/stel_ui_conf.cpp:286
 msgid "Save location"
-msgstr ""
+msgstr "Сохранить местоположение"
 
 #: src/stel_ui_conf.cpp:308
 msgid "Projection :"
-msgstr ""
+msgstr "Проекция :"
 
 #: src/stel_ui_conf.cpp:314
 msgid "Fisheye Projection Mode"
-msgstr ""
+msgstr "Режим проекции \"рыбий глаз\""
 
 #: src/stel_ui_conf.cpp:319
 msgid "Disk Viewport"
-msgstr ""
+msgstr "Дисковая проекция"
 
 #: src/stel_ui_conf.cpp:324
 msgid "Screen Resolution :"
-msgstr ""
+msgstr "Разрешение экрана :"
 
 #: src/stel_ui_conf.cpp:328
 msgid "Restart program for"
-msgstr ""
+msgstr "Перезапустите программу для"
 
 #: src/stel_ui_conf.cpp:329
 msgid "change to apply."
-msgstr ""
+msgstr "применения изменений."
 
 #: src/stel_ui_conf.cpp:353
 msgid "For unlisted screen resolution, edit the file :"
-msgstr ""
+msgstr "Для прочих разрешений экрана редактируйте файл :"
 
 #: src/stel_ui_conf.cpp:373
 msgid "Choose landscapes :"
-msgstr ""
+msgstr "Выберите ландшафт :"
 
 #: src/stel_ui_conf.cpp:390
 msgid "Please save option in tab \"Location\""
-msgstr ""
+msgstr "Пожалуйста, сохраните выбор на закладке \"Местоположение\""
 
 #: src/stel_ui_conf.cpp:391
 msgid "to save current landscape as the default landscape."
-msgstr ""
+msgstr "для сохранения текущего ландшафта в качестве ландшафта по умолчанию."
 
 #: src/stel_ui_conf.cpp:399
 msgid "Date & Time"
-msgstr ""
+msgstr "Дата и время"
 
 #: src/stel_ui_conf.cpp:400
 msgid "Location"
-msgstr ""
+msgstr "Местоположение"
 
 #: src/stel_ui_conf.cpp:401
 msgid "Landscapes"
-msgstr ""
+msgstr "Ландшафты"
 
 #: src/stel_ui_conf.cpp:402
 msgid "Video"
-msgstr ""
+msgstr "Видео"
 
 #: src/stel_ui_conf.cpp:403
 msgid "Rendering"
-msgstr ""
+msgstr "Визуализация"
 
 #: src/stel_ui_conf.cpp:507
 msgid "Object Search"
-msgstr ""
+msgstr "Поиск объекта"
 
 #: src/stel_ui_conf.cpp:526
 msgid "Star No./Name"
-msgstr ""
+msgstr "№ звезды/Название"
 
 #: src/stel_ui_conf.cpp:530
 msgid "eg. 60718 (aCrux) or Canopus"
-msgstr ""
+msgstr "напр. 60718 (a Южного Креста) или Канопус"
 
 #: src/stel_ui_conf.cpp:531
 msgid "HP 60718, HD 108248, SAO 251904"
-msgstr ""
+msgstr "HP 60718, HD 108248, SAO 251904"
 
 #: src/stel_ui_conf.cpp:552 src/stel_ui_conf.cpp:683
 msgid "Constellation"
-msgstr ""
+msgstr "Созвездие"
 
 #: src/stel_ui_conf.cpp:556
 msgid "eg. Crux"
-msgstr ""
+msgstr "напр. Южный Крест"
 
 #: src/stel_ui_conf.cpp:575 src/stel_ui_conf.cpp:684
 msgid "Nebula"
-msgstr ""
+msgstr "Туманность"
 
 #: src/stel_ui_conf.cpp:579
 msgid "eg. M83, NGC 7009, IC 2118"
-msgstr ""
+msgstr "напр. M83, NGC 7009, IC 2118"
 
 #: src/stel_ui_conf.cpp:580
 msgid "CW 113, SH 40"
-msgstr ""
+msgstr "CW 113, SH 40"
 
 #: src/stel_ui_conf.cpp:665
 msgid "Planet/Moon"
-msgstr ""
+msgstr "Планета/Луна"
 
 #: src/stel_ui_conf.cpp:669
 msgid "eg. Pluto or Io"
-msgstr ""
+msgstr "например Плутон или Ио"
 
 #: src/stel_ui_conf.cpp:685
 msgid "Planets & Moons"
-msgstr ""
+msgstr "Планеты и Луны"
 
 #: src/stel_ui_conf.cpp:956
 msgid "Enter observatory name"
-msgstr ""
+msgstr "Введите название обсерватории"
 
 #: src/stel_ui_conf.cpp:1106
 msgid "Current Time Speed is x"
-msgstr ""
+msgstr "Текущий коэффициент времени : x"
 
-#: src/stel_ui_tuiconf.cpp:85
+#: src/stel_ui_tuiconf.cpp:77
 msgid "Set Location "
-msgstr ""
+msgstr "Установить местоположение "
 
-#: src/stel_ui_tuiconf.cpp:86
+#: src/stel_ui_tuiconf.cpp:78
 msgid "Set Time "
-msgstr ""
+msgstr "Установить время "
 
-#: src/stel_ui_tuiconf.cpp:87
+#: src/stel_ui_tuiconf.cpp:79
 msgid "General "
-msgstr ""
+msgstr "Общие "
 
-#: src/stel_ui_tuiconf.cpp:88
+#: src/stel_ui_tuiconf.cpp:80
 msgid "Stars "
-msgstr ""
+msgstr "Звезды "
 
-#: src/stel_ui_tuiconf.cpp:89
+#: src/stel_ui_tuiconf.cpp:81
 msgid "Colors "
-msgstr ""
+msgstr "Цвета "
 
-#: src/stel_ui_tuiconf.cpp:90
+#: src/stel_ui_tuiconf.cpp:82
 msgid "Effects "
-msgstr ""
+msgstr "Эффекты "
 
-#: src/stel_ui_tuiconf.cpp:91
+#: src/stel_ui_tuiconf.cpp:83
 msgid "Scripts "
-msgstr ""
+msgstr "Сценарии "
 
-#: src/stel_ui_tuiconf.cpp:92
+#: src/stel_ui_tuiconf.cpp:84
 msgid "Administration "
-msgstr ""
+msgstr "Администрирование "
 
-#: src/stel_ui_tuiconf.cpp:103
+#: src/stel_ui_tuiconf.cpp:95
 msgid "Latitude: "
-msgstr ""
+msgstr "Широта: "
 
-#: src/stel_ui_tuiconf.cpp:105
+#: src/stel_ui_tuiconf.cpp:97
 msgid "Longitude: "
-msgstr ""
+msgstr "Долгота: "
 
-#: src/stel_ui_tuiconf.cpp:107
+#: src/stel_ui_tuiconf.cpp:99
 msgid "Altitude (m): "
-msgstr ""
+msgstr "Высота (м): "
 
-#: src/stel_ui_tuiconf.cpp:114
+#: src/stel_ui_tuiconf.cpp:106
 msgid "Sky Time: "
-msgstr ""
+msgstr "Астрономическое время: "
 
-#: src/stel_ui_tuiconf.cpp:116
+#: src/stel_ui_tuiconf.cpp:108
 msgid "Set Time Zone: "
-msgstr ""
+msgstr "Установить часовой пояс: "
 
-#: src/stel_ui_tuiconf.cpp:119
+#: src/stel_ui_tuiconf.cpp:111
 msgid "Preset Sky Time: "
-msgstr ""
+msgstr "Заданное астрономческое время: "
 
-#: src/stel_ui_tuiconf.cpp:121
+#: src/stel_ui_tuiconf.cpp:113
 msgid "Sky Time At Start-up: "
-msgstr ""
+msgstr "Астрономическое время при загрузке: "
 
-#: src/stel_ui_tuiconf.cpp:125
+#: src/stel_ui_tuiconf.cpp:117
 msgid "Time Display Format: "
-msgstr ""
+msgstr "Формат отображения времени: "
 
-#: src/stel_ui_tuiconf.cpp:130
+#: src/stel_ui_tuiconf.cpp:122
 msgid "Date Display Format: "
-msgstr ""
+msgstr "Формат отображения даты: "
 
-#: src/stel_ui_tuiconf.cpp:147
+#: src/stel_ui_tuiconf.cpp:139
 msgid "Sky Culture: "
-msgstr ""
+msgstr "Культура неба: "
+
+#: src/stel_ui_tuiconf.cpp:144
+msgid "Sky Language: "
+msgstr "Язык неба: "
 
 #: src/stel_ui_tuiconf.cpp:152
-msgid "Sky Language: "
-msgstr ""
-
-#: src/stel_ui_tuiconf.cpp:160
 msgid "Show: "
-msgstr ""
+msgstr "Показать: "
 
-#: src/stel_ui_tuiconf.cpp:160 src/stel_ui_tuiconf.cpp:198
+#: src/stel_ui_tuiconf.cpp:152 src/stel_ui_tuiconf.cpp:190
 msgid "Yes"
-msgstr ""
+msgstr "Да"
 
-#: src/stel_ui_tuiconf.cpp:160 src/stel_ui_tuiconf.cpp:198
+#: src/stel_ui_tuiconf.cpp:152 src/stel_ui_tuiconf.cpp:190
 msgid "No"
-msgstr ""
+msgstr "Нет"
 
-#: src/stel_ui_tuiconf.cpp:162
+#: src/stel_ui_tuiconf.cpp:154
 msgid "Star Magnitude Multiplier: "
-msgstr ""
+msgstr "Множитель звездной величины: "
 
-#: src/stel_ui_tuiconf.cpp:164
+#: src/stel_ui_tuiconf.cpp:156
 msgid "Maximum Magnitude to Label: "
-msgstr ""
+msgstr "Максимальная величина для надписи: "
 
-#: src/stel_ui_tuiconf.cpp:166
+#: src/stel_ui_tuiconf.cpp:158
 msgid "Twinkling: "
-msgstr ""
+msgstr "Мерцание: "
+
+#: src/stel_ui_tuiconf.cpp:167
+msgid "Constellation lines: "
+msgstr "Линии созвездий: "
+
+#: src/stel_ui_tuiconf.cpp:171
+msgid "Constellation labels: "
+msgstr "Названия созвездий: "
 
 #: src/stel_ui_tuiconf.cpp:175
-msgid "Constellation lines: "
-msgstr ""
-
-#: src/stel_ui_tuiconf.cpp:179
-msgid "Constellation labels: "
-msgstr ""
-
-#: src/stel_ui_tuiconf.cpp:183
 msgid "Cardinal points: "
-msgstr ""
+msgstr "Страны Света: "
 
-#: src/stel_ui_tuiconf.cpp:192
+#: src/stel_ui_tuiconf.cpp:184
 msgid "Landscape: "
-msgstr ""
+msgstr "Ландшафт: "
+
+#: src/stel_ui_tuiconf.cpp:190
+msgid "Manual zoom: "
+msgstr "Масштаб вручную: "
+
+#: src/stel_ui_tuiconf.cpp:194
+msgid "Object Sizing Rule: "
+msgstr "Правило изменения размера объекта: "
+
+#: src/stel_ui_tuiconf.cpp:194
+msgid "Point"
+msgstr "Точка"
+
+#: src/stel_ui_tuiconf.cpp:194
+msgid "Magnitude"
+msgstr "Величина"
 
 #: src/stel_ui_tuiconf.cpp:198
-msgid "Manual zoom: "
-msgstr ""
+msgid "Magnitude Sizing Multiplier: "
+msgstr "Множитель изменения величины: "
 
 #: src/stel_ui_tuiconf.cpp:202
-msgid "Object Sizing Rule: "
-msgstr ""
-
-#: src/stel_ui_tuiconf.cpp:202
-msgid "Point"
-msgstr ""
-
-#: src/stel_ui_tuiconf.cpp:202
-msgid "Magnitude"
-msgstr ""
+msgid "Milky Way intensity: "
+msgstr "Интенсивность Млечного Пути: "
 
 #: src/stel_ui_tuiconf.cpp:206
-msgid "Magnitude Sizing Multiplier: "
-msgstr ""
+msgid "Maximum Nebula Magnitude to Label: "
+msgstr "Максимальная величина туманности для надписи: "
 
 #: src/stel_ui_tuiconf.cpp:210
-msgid "Milky Way intensity: "
-msgstr ""
+msgid "Zoom Duration: "
+msgstr "Длительность масштабирования: "
 
 #: src/stel_ui_tuiconf.cpp:214
-msgid "Maximum Nebula Magnitude to Label: "
-msgstr ""
-
-#: src/stel_ui_tuiconf.cpp:218
-msgid "Zoom Duration: "
-msgstr ""
-
-#: src/stel_ui_tuiconf.cpp:222
 msgid "Cursor Timeout: "
-msgstr ""
+msgstr "Таймаут курсора: "
 
-#: src/stel_ui_tuiconf.cpp:228
+#: src/stel_ui_tuiconf.cpp:220
 msgid "Local Script: "
-msgstr ""
+msgstr "Локальный сценарий: "
+
+#: src/stel_ui_tuiconf.cpp:226
+msgid "CD/DVD Script: "
+msgstr "CD/DVD сценарий: "
 
 #: src/stel_ui_tuiconf.cpp:234
-msgid "CD/DVD Script: "
-msgstr ""
-
-#: src/stel_ui_tuiconf.cpp:242
 msgid "Load Default Configuration: "
-msgstr ""
+msgstr "Загрузить настройки по умолчанию: "
 
-#: src/stel_ui_tuiconf.cpp:244
+#: src/stel_ui_tuiconf.cpp:236
 msgid "Save Current Configuration as Default: "
-msgstr ""
+msgstr "Сохранить текущие настройки как \"по умолчанию\": "
 
-#: src/stel_ui_tuiconf.cpp:246
+#: src/stel_ui_tuiconf.cpp:238
 msgid "Update me via Internet: "
-msgstr ""
+msgstr "Обновить через Интернет: "
 
-#: src/stel_ui_tuiconf.cpp:262
+#: src/stel_ui_tuiconf.cpp:254
 msgid "N-S Centering Offset: "
-msgstr ""
+msgstr "С-Ю смещение центрирования: "
 
-#: src/stel_ui_tuiconf.cpp:266
+#: src/stel_ui_tuiconf.cpp:258
 msgid "E-W Centering Offset: "
-msgstr ""
+msgstr "В-З смещение центрирования: "
 
 #: src/translations.h:33
 msgid "Sun"
-msgstr ""
+msgstr "Солнце"
 
 #: src/translations.h:34
 msgid "Mercury"
-msgstr ""
+msgstr "Меркурий"
 
 #: src/translations.h:35
 msgid "Venus"
-msgstr ""
+msgstr "Венера"
 
 #: src/translations.h:36
 msgid "Earth"
-msgstr ""
+msgstr "Земля"
 
 #: src/translations.h:37
 msgid "Moon"
-msgstr ""
+msgstr "Луна"
 
 #: src/translations.h:38
 msgid "Mars"
-msgstr ""
+msgstr "Марс"
 
 #: src/translations.h:39
 msgid "Deimos"
-msgstr ""
+msgstr "Деймос"
 
 #: src/translations.h:40
 msgid "Phobos"
-msgstr ""
+msgstr "Фобос"
 
 #: src/translations.h:41
 msgid "Jupiter"
-msgstr ""
+msgstr "Юпитер"
 
 #: src/translations.h:42
 msgid "Io"
-msgstr ""
+msgstr "Ио"
 
 #: src/translations.h:43
 msgid "Europa"
-msgstr ""
+msgstr "Европа"
 
 #: src/translations.h:44
 msgid "Ganymede"
-msgstr ""
+msgstr "Ганимед"
 
 #: src/translations.h:45
 msgid "Callisto"
-msgstr ""
+msgstr "Каллисто"
 
 #: src/translations.h:46
 msgid "Saturn"
-msgstr ""
+msgstr "Сатурн"
 
 #: src/translations.h:47
 msgid "Mimas"
-msgstr ""
+msgstr "Мимас"
 
 #: src/translations.h:48
 msgid "Enceladus"
-msgstr ""
+msgstr "Энцелад"
 
 #: src/translations.h:49
 msgid "Tethys"
-msgstr ""
+msgstr "Тефия"
 
 #: src/translations.h:50
 msgid "Dione"
-msgstr ""
+msgstr "Диона"
 
 #: src/translations.h:51
 msgid "Rhea"
-msgstr ""
+msgstr "Рея"
 
 #: src/translations.h:52
 msgid "Titan"
-msgstr ""
+msgstr "Титан"
 
 #: src/translations.h:53
 msgid "Hyperion"
-msgstr ""
+msgstr "Гиперион"
 
 #: src/translations.h:54
 msgid "Iapetus"
-msgstr ""
+msgstr "Япет"
 
 #: src/translations.h:55
 msgid "Phoebe"
-msgstr ""
+msgstr "Феба"
 
 #: src/translations.h:56
 msgid "Neptune"
-msgstr ""
+msgstr "Нептун"
 
 #: src/translations.h:57
 msgid "Uranus"
-msgstr ""
+msgstr "Уран"
 
 #: src/translations.h:58
 msgid "Pluto"
-msgstr ""
+msgstr "Плутон"
 
 #: src/translations.h:59
 msgid "Charon"
-msgstr ""
+msgstr "Харон"
 
 #: src/translations.h:62
 msgid "N"
-msgstr ""
+msgstr "С"
 
 #: src/translations.h:63
 msgid "S"
-msgstr ""
+msgstr "Ю"
 
 #: src/translations.h:64
 msgid "E"
-msgstr ""
+msgstr "В"
 
 #: src/translations.h:65
 msgid "W"
-msgstr ""
+msgstr "З"
 
 #: src/translations.h:68
 msgid "Aquila"
-msgstr ""
+msgstr "Орёл"
 
 #: src/translations.h:69
 msgid "Andromeda"
-msgstr ""
+msgstr "Андромеда"
 
 #: src/translations.h:70
 msgid "Sculptor"
-msgstr ""
+msgstr "Скульптор"
 
 #: src/translations.h:71
 msgid "Ara"
-msgstr ""
+msgstr "Жертвенник"
 
 #: src/translations.h:72
 msgid "Libra"
-msgstr ""
+msgstr "Весы"
 
 #: src/translations.h:73
 msgid "Cetus"
-msgstr ""
+msgstr "Кит"
 
 #: src/translations.h:74
 msgid "Aries"
-msgstr ""
+msgstr "Овен"
 
 #: src/translations.h:75 src/translations.h:145
 msgid "Scutum"
-msgstr ""
+msgstr "Щит"
 
 #: src/translations.h:76
 msgid "Pyxis"
-msgstr ""
+msgstr "Компас"
 
 #: src/translations.h:77
 msgid "Bootes"
-msgstr ""
+msgstr "Волопас"
 
 #: src/translations.h:78
 msgid "Caelum"
-msgstr ""
+msgstr "Резец"
 
 #: src/translations.h:79
 msgid "Chamaeleon"
-msgstr ""
+msgstr "Хамелеон"
 
 #: src/translations.h:80
 msgid "Cancer"
-msgstr ""
+msgstr "Рак"
 
 #: src/translations.h:81
 msgid "Capricornus"
-msgstr ""
+msgstr "Козерог"
 
 #: src/translations.h:82
 msgid "Carina"
-msgstr ""
+msgstr "Киль"
 
 #: src/translations.h:83
 msgid "Cassiopeia"
-msgstr ""
+msgstr "Кассиопея"
 
 #: src/translations.h:84
 msgid "Centaurus"
-msgstr ""
+msgstr "Центавр"
 
 #: src/translations.h:85
 msgid "Cepheus"
-msgstr ""
+msgstr "Цефей"
 
 #: src/translations.h:86
 msgid "Coma Berenices"
-msgstr ""
+msgstr "Волосы Вероники"
 
 #: src/translations.h:87
 msgid "Canes Venatici"
-msgstr ""
+msgstr "Гончие Псы"
 
 #: src/translations.h:88
 msgid "Auriga"
-msgstr ""
+msgstr "Возничий"
 
 #: src/translations.h:89
 msgid "Columba"
-msgstr ""
+msgstr "Голубь"
 
 #: src/translations.h:90
 msgid "Circinus"
-msgstr ""
+msgstr "Циркуль"
 
 #: src/translations.h:91
 msgid "Crater"
-msgstr ""
+msgstr "Чаша"
 
 #: src/translations.h:92
 msgid "Corona Australis"
-msgstr ""
+msgstr "Южная Корона"
 
 #: src/translations.h:93
 msgid "Corona Borealis"
-msgstr ""
+msgstr "Северная корона"
 
 #: src/translations.h:94
 msgid "Corvus"
-msgstr ""
+msgstr "Ворон"
 
 #: src/translations.h:95
 msgid "Crux"
-msgstr ""
+msgstr "Южный Крест"
 
 #: src/translations.h:96
 msgid "Cygnus"
-msgstr ""
+msgstr "Лебедь"
 
 #: src/translations.h:97
 msgid "Delphinus"
-msgstr ""
+msgstr "Дельфин"
 
 #: src/translations.h:98
 msgid "Dorado"
-msgstr ""
+msgstr "Золотая рыба"
 
 #: src/translations.h:99
 msgid "Draco"
-msgstr ""
+msgstr "Дракон"
 
 #: src/translations.h:100
 msgid "Norma"
-msgstr ""
+msgstr "Наугольник"
 
 #: src/translations.h:101
 msgid "Eridanus"
-msgstr ""
+msgstr "Эридан"
 
 #: src/translations.h:102
 msgid "Sagitta"
-msgstr ""
+msgstr "Стрела"
 
 #: src/translations.h:103
 msgid "Fornax"
-msgstr ""
+msgstr "Печь"
 
 #: src/translations.h:104
 msgid "Gemini"
-msgstr ""
+msgstr "Близнецы"
 
 #: src/translations.h:105
 msgid "Camelopardalis"
-msgstr ""
+msgstr "Жираф"
 
 #: src/translations.h:106
 msgid "Canis Major"
-msgstr ""
+msgstr "Большой Пес"
 
 #: src/translations.h:107
 msgid "Ursa Major"
-msgstr ""
+msgstr "Большая Медведица"
 
 #: src/translations.h:108
 msgid "Grus"
-msgstr ""
+msgstr "Журавль"
 
 #: src/translations.h:109
 msgid "Hercules"
-msgstr ""
+msgstr "Геркулес"
 
 #: src/translations.h:110
 msgid "Horologium"
-msgstr ""
+msgstr "Часы"
 
 #: src/translations.h:111
 msgid "Hydra"
-msgstr ""
+msgstr "Гидра"
 
 #: src/translations.h:112
 msgid "Hydrus"
-msgstr ""
+msgstr "Южная Гидра"
 
 #: src/translations.h:113
 msgid "Indus"
-msgstr ""
+msgstr "Индеец"
 
 #: src/translations.h:114
 msgid "Lacerta"
-msgstr ""
+msgstr "Ящерица"
 
 #: src/translations.h:115
 msgid "Monoceros"
-msgstr ""
+msgstr "Единорог"
 
 #: src/translations.h:116
 msgid "Lepus"
-msgstr ""
+msgstr "Заяц"
 
 #: src/translations.h:117
 msgid "Leo"
-msgstr ""
+msgstr "Лев"
 
 #: src/translations.h:118
 msgid "Lupus"
-msgstr ""
+msgstr "Волк"
 
 #: src/translations.h:119
 msgid "Lynx"
-msgstr ""
+msgstr "Рысь"
 
 #: src/translations.h:120
 msgid "Lyra"
-msgstr ""
+msgstr "Лира"
 
 #: src/translations.h:121
 msgid "Antlia"
-msgstr ""
+msgstr "Насос"
 
 #: src/translations.h:122
 msgid "Microscopium"
-msgstr ""
+msgstr "Микроскоп"
 
 #: src/translations.h:123
 msgid "Musca"
-msgstr ""
+msgstr "Муха"
 
 #: src/translations.h:124
 msgid "Octans"
-msgstr ""
+msgstr "Октант"
 
 #: src/translations.h:125
 msgid "Apus"
-msgstr ""
+msgstr "Райская птица"
 
 #: src/translations.h:126
 msgid "Ophiuchus"
-msgstr ""
+msgstr "Змееносец"
 
 #: src/translations.h:127
 msgid "Orion"
-msgstr ""
+msgstr "Орион"
 
 #: src/translations.h:128
 msgid "Pavo"
-msgstr ""
+msgstr "Павлин"
 
 #: src/translations.h:129
 msgid "Pegasus"
-msgstr ""
+msgstr "Пегас"
 
 #: src/translations.h:130
 msgid "Pictor"
-msgstr ""
+msgstr "Живописец"
 
 #: src/translations.h:131
 msgid "Perseus"
-msgstr ""
+msgstr "Персей"
 
 #: src/translations.h:132
 msgid "Equuleus"
-msgstr ""
+msgstr "Малый Конь"
 
 #: src/translations.h:133
 msgid "Canis Minor"
-msgstr ""
+msgstr "Малый Пес"
 
 #: src/translations.h:134
 msgid "Leo Minor"
-msgstr ""
+msgstr "Малый Лев"
 
 #: src/translations.h:135
 msgid "Vulpecula"
-msgstr ""
+msgstr "Лисичка"
 
 #: src/translations.h:136
 msgid "Ursa Minor"
-msgstr ""
+msgstr "Малая Медведица"
 
 #: src/translations.h:137
 msgid "Phoenix"
-msgstr ""
+msgstr "Феникс"
 
 #: src/translations.h:138
 msgid "Piscis Austrinus"
-msgstr ""
+msgstr "Южная Рыба"
 
 #: src/translations.h:139
 msgid "Pisces"
-msgstr ""
+msgstr "Рыба"
 
 #: src/translations.h:140
 msgid "Volans"
-msgstr ""
+msgstr "Летучая Рыба"
 
 #: src/translations.h:141
 msgid "Puppis"
-msgstr ""
+msgstr "Корма"
 
 #: src/translations.h:142
 msgid "Reticulum"
-msgstr ""
+msgstr "Сетка"
 
 #: src/translations.h:143
 msgid "Sagittarius"
-msgstr ""
+msgstr "Стрелец"
 
 #: src/translations.h:144
 msgid "Scorpius"
-msgstr ""
+msgstr "Скорпион"
 
 #: src/translations.h:146
 msgid "Serpens"
-msgstr ""
+msgstr "Змея"
 
 #: src/translations.h:147
 msgid "Sextans"
-msgstr ""
+msgstr "Секстант"
 
 #: src/translations.h:148
 msgid "Mensa"
-msgstr ""
+msgstr "Столовая Гора"
 
 #: src/translations.h:149
 msgid "Taurus"
-msgstr ""
+msgstr "Телец"
 
 #: src/translations.h:150
 msgid "Telescopium"
-msgstr ""
+msgstr "Телескоп"
 
 #: src/translations.h:151
 msgid "Tucana"
-msgstr ""
+msgstr "Тукан"
 
 #: src/translations.h:152
 msgid "Triangulum"
-msgstr ""
+msgstr "Треугольник"
 
 #: src/translations.h:153
 msgid "Triangulum Australe"
-msgstr ""
+msgstr "Южный Треугольник"
 
 #: src/translations.h:154
 msgid "Aquarius"
-msgstr ""
+msgstr "Водолей"
 
 #: src/translations.h:155
 msgid "Virgo"
-msgstr ""
+msgstr "Дева"
 
 #: src/translations.h:156
 msgid "Vela"
-msgstr ""
+msgstr "Паруса"
+
+#~ msgid " (UTC)"
+#~ msgstr " (UTC)"
