@@ -93,6 +93,9 @@ Projector::Projector(int _screenW, int _screenH, double _fov)
 	set_fov(fov);
 	set_screen_size(_screenW,_screenH);
 	maximize_viewport();
+
+	  // we have no mirrored image:
+	glFrontFace(GL_CCW);
 }
 
 Projector::~Projector()
