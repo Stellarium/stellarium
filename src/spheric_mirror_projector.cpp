@@ -29,10 +29,11 @@
   // assume 1 = radius of mirror
   //       (0,0,0) = center of mirror
 static const Vec3d P(0,-2,-5);          // center projector
-static const double alpha = 24.045*M_PI/180;
+static const double alpha = 28.74373*M_PI/180; // 24.045*M_PI/180;
 static const Vec3d DomeCenter(0,0,-20);
 static const double DomeRadius = 25.0;
 
+static const double PP = P.dot(P);
 static const double lP = P.length();
 static const Vec3d p(P/lP);
 
@@ -48,13 +49,16 @@ SphericMirrorProjector::SphericMirrorProjector(int _screenW,
   
   cos_alpha = cos(alpha);
   sin_alpha = sin(alpha);
+
+    // we have a mirrored image:
+  glFrontFace(GL_CW);
 }
 
 void SphericMirrorProjector::setViewport(int x, int y, int w, int h)
 {
 	Projector::setViewport(x, y, w, h);
 	center.set(vec_viewport[0]+vec_viewport[2]/2,
-               vec_viewport[1]+vec_viewport[3]/8,0);
+               vec_viewport[1]+5*vec_viewport[3]/8,0);
 }
 
 bool SphericMirrorProjector::project_custom(const Vec3d &v,
@@ -62,9 +66,19 @@ bool SphericMirrorProjector::project_custom(const Vec3d &v,
                                             const Mat4d &mat) const {
   Vec3d S = v;
   S.transfo4d(mat);
+
+  const double z = S[2];
+  S[2] = S[1];
+  S[1] = -z;
+
   const double R = S.length();
   S *= (DomeRadius/R);
   S += DomeCenter;
+  
+  const Vec3d SmP = S - P;
+  const double P_SmP = P.dot(SmP);
+  const bool rval = ( (PP-1.0)*SmP.dot(SmP) > P_SmP*P_SmP );
+  
   const double lS = S.length();
   const Vec3d s(S/lS);
   double t_min = 0;
@@ -92,16 +106,16 @@ bool SphericMirrorProjector::project_custom(const Vec3d &v,
   // x[2] does not matter:
   // x[2] = sin_alpha*x[1] + cos_alpha*x[2];
 
-  x[0] = center[0] + x[0] * (view_scaling_factor*20);
+  x[0] = center[0] - x[0] * (view_scaling_factor*20);
   x[1] = center[1] + x[1] * (view_scaling_factor*20);
-  x[2] = (R - zNear) / (zFar-zNear);
-  return true;
+  x[2] = rval ? ((-z - zNear) / (zFar-zNear)) : -1000;
+  return rval;
 }
 
 
 void SphericMirrorProjector::unproject(double x, double y,
                                        const Mat4d& m, Vec3d& v) const {
-  x = (x - center[0]) / (view_scaling_factor*20);
+  x = - (x - center[0]) / (view_scaling_factor*20);
   y = (y - center[1]) / (view_scaling_factor*20);
 
   v[0] = x;
@@ -124,6 +138,10 @@ void SphericMirrorProjector::unproject(double x, double y,
 
     v[2] = -v[2]; // why
     v *= (1.0/DomeRadius);
+
+    x = v[1];
+    v[1] = -v[2];
+    v[2] = x;
 //cout << "SphericMirrorProjector::unproject: before("
 //     << v[0] << ',' << v[1] << ',' << v[2] << ')' << endl;
     v.transfo4d(m);
