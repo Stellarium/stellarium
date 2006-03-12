@@ -297,21 +297,17 @@ void HipStarMgr::load_sci_names(const string& sciNameFile)
 	{
 		sscanf(line,"%u",&tmp);
 		star = searchHP(tmp);
-		if (star)
+		if (star && star->sciName==L"")
 		{
 			char c=line[0];
 			int i=0;
 			while(c!='|' && i<256){c=line[i];++i;}
-			string sciName = &(line[i]);
+			char* tempc = &(line[i]);
+			while(c!='_' && i<256){c=line[i];++i;}
+			line[i-1]=' ';
+			string sciName = tempc;
 			sciName.erase(sciName.length()-1, 1);
-
-			// remove underscores
-			for (string::size_type j=0;j<star->sciName.length();++j) 
-			{
-				if (star->sciName[j]=='_') star->sciName[j]=' ';
-			}
-			sciName = stripConstellation(sciName);
-			star->sciName = translateGreek(sciName);
+			star->sciName = Translator::UTF8stringToWstring(sciName);
 		}
 	} while(fgets(line, 256, snFile));
 
@@ -341,7 +337,7 @@ void HipStarMgr::draw(Vec3f equ_vision, ToneReproductor* eye, Projector* prj)
 
 	// FOV is currently measured vertically, so need to adjust for wide screens
 	// TODO: projector should probably use largest measurement itself
-	float max_fov = MY_MAX( prj->get_fov(), prj->get_fov()*prj->viewW()/prj->viewH());
+	float max_fov = MY_MAX( prj->get_fov(), prj->get_fov()*prj->getViewportWidth()/prj->getViewportHeight());
 
 	nbZones = HipGrid.Intersect(equ_vision, max_fov*M_PI/180.f*1.2f);
 	static int * zoneList = HipGrid.getResult();

@@ -27,10 +27,8 @@
 class CustomProjector : public Projector
 {
 protected:
-    CustomProjector(int _screenW = 800, int _screenH = 600, double _fov = 175.);
+    CustomProjector(const Vec4i& viewport, double _fov = 175.);
 private:
-	void setViewport(int x, int y, int w, int h);
-
 	// Same function but using a custom modelview matrix
 	void unproject_custom(double x, double y, Vec3d& v, const Mat4d& mat) const;
 
@@ -43,21 +41,18 @@ private:
 	void sCylinder(GLdouble radius, GLdouble height, GLint slices, GLint stacks,
 		const Mat4d& mat, int orient_inside = 0) const;
 
-	void update_openGL(void) const;
-
 	// Override glVertex3f and glVertex3d
 	void sVertex3(double x, double y, double z, const Mat4d& mat) const;
 
 	const Vec3d convert_pos(const Vec3d& v, const Mat4d& mat) const;
 protected:
+	Vec3d center;					// Viewport center in screen pixel
 
-	Vec3d center;
-
+	double view_scaling_factor;		// ??
+	
 	// Init the viewing matrix from the fov, the clipping planes and screen ratio
 	// The function is a reimplementation of gluPerspective
 	void init_project_matrix(void);
-
 };
-
 
 #endif // _FISHEYE_PROJECTOR_H_

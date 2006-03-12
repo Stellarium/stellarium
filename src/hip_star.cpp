@@ -63,20 +63,18 @@ HipStar::~HipStar()
 { 
 }
 
-wstring HipStar::get_info_string(const Navigator * nav) const
+wstring HipStar::getInfoString(const Navigator * nav) const
 {
 	float tempDE, tempRA;
-
 	Vec3d equatorial_pos = nav->j2000_to_earth_equ(XYZ);
-	
 	rect_to_sphe(&tempRA,&tempDE,equatorial_pos);
-
 	wostringstream oss;
 	if (commonNameI18!=L"" || sciName!=L"")
 	{
-		oss << _("Name : ") << commonNameI18 << wstring(commonNameI18 == L"" ? L"" : L" ");
-		oss << wstring (sciName==L"" ? L"" : sciName);
-			//translateGreek(SciName,false)); 
+		oss << commonNameI18 << wstring(commonNameI18 == L"" ? L"" : L" ");
+		if (commonNameI18!=L"" && sciName!=L"") oss << wstring(L"(");
+		oss << wstring(sciName==L"" ? L"" : sciName);
+		if (commonNameI18!=L"" && sciName!=L"") oss << wstring(L")");
 	}
 	else 
 	{
@@ -85,11 +83,27 @@ wstring HipStar::get_info_string(const Navigator * nav) const
 		else oss << L"SAO" << SAO;
 #endif
 	}
-	if (doubleStar) oss << _("(Dbl)");
-	else if (variableStar) oss << _("(Var)");
+	if (doubleStar) oss << L" **";
 	oss << endl;
-	
-	oss << L"Cat : HP:";
+
+	oss.setf(ios::fixed);
+	oss.precision(2);
+	oss << _("Magnitude: ") << Mag;
+	if (variableStar) oss << _(" (Variable)");
+	oss << endl;
+	oss << _("RA/DE: ") << StelUtility::printAngleHMS(tempRA) << L"/" << StelUtility::printAngleDMS(tempDE) << endl;
+	// calculate alt az
+	Vec3d local_pos = nav->earth_equ_to_local(equatorial_pos);
+	rect_to_sphe(&tempRA,&tempDE,local_pos);
+	tempRA = 3*M_PI - tempRA;  // N is zero, E is 90 degrees
+	if(tempRA > M_PI*2) tempRA -= M_PI*2;	
+	oss << _("Az/Alt: ") << StelUtility::printAngleDMS(tempRA) << L"/" << StelUtility::printAngleDMS(tempDE) << endl;
+
+	oss << _("Distance: ");
+	if(Distance) oss << Distance; else oss << "-";
+	oss << _(" Light Years") << endl;
+
+	oss << L"Cat: HP ";
 	if (HP > 0)	oss << HP; else oss << "-";
 
 #ifdef DATA_FILES_USE_SAO
@@ -101,28 +115,13 @@ wstring HipStar::get_info_string(const Navigator * nav) const
 #endif
 	oss << endl;
 
-	oss << _("RA/DE: ") << StelUtility::printAngleHMS(tempRA) << L"/" << StelUtility::printAngleDMS(tempDE) << endl;
-	// calculate alt az
-	Vec3d local_pos = nav->earth_equ_to_local(equatorial_pos);
-	rect_to_sphe(&tempRA,&tempDE,local_pos);
-	tempRA = 3*M_PI - tempRA;  // N is zero, E is 90 degrees
-	if(tempRA > M_PI*2) tempRA -= M_PI*2;	
-	oss << _("Az/Alt: ") << StelUtility::printAngleDMS(tempRA) << L"/" << StelUtility::printAngleDMS(tempDE) << endl;
-
-	oss << _("Spectral : ") << SpType << endl;
-	oss.setf(ios::fixed);
+	oss << _("Spectral Type: ") << SpType << endl;
 	oss.precision(2);
-	oss << _("Magnitude : ") << Mag << endl;
-	oss << _("Distance : ");
-	
-	oss.precision(1);
-	if(Distance) oss << Distance; else oss << "-";
-	oss << _(" Light Years") << endl;
 
 	return oss.str();
 }
 
-wstring HipStar::get_short_info_string(const Navigator * nav) const
+wstring HipStar::getShortInfoString(const Navigator * nav) const
 {
 	wostringstream oss;
 	if (commonNameI18!=L"" || sciName!=L"")
@@ -132,10 +131,10 @@ wstring HipStar::get_short_info_string(const Navigator * nav) const
 	else 
 		oss << L"HP " << HP;
 
-	oss.setf(ios::fixed);
-	oss.precision(1);
-	oss << _(": mag ") << Mag;
-	if(Distance) oss << L"  " << Distance << _("ly");
+// 	oss.setf(ios::fixed);
+// 	oss.precision(1);
+// 	oss << _(": mag ") << Mag;
+// 	if(Distance) oss << L"  " << Distance << _("ly");
 
 	return oss.str();
 }
@@ -283,10 +282,9 @@ void HipStar::draw_point(void)
 bool HipStar::draw_name(void)
 {   
 	wstring starname;
-	
-	if (commonNameI18 == L"") return false;
-	starname = commonNameI18;
-	
+
+	starname = getShortInfoString();
+	if (starname==L"") return false;
 	// if (draw_mode == DM_NORMAL) {
 		glColor4f(RGB[0]*0.75, RGB[1]*0.75, RGB[2]*0.75, names_brightness);
 	// }

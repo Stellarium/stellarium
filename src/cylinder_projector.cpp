@@ -20,10 +20,9 @@
 #include "cylinder_projector.h"
 
 
-CylinderProjector::CylinderProjector(int _screenW,
-                                     int _screenH,
+CylinderProjector::CylinderProjector(const Vec4i& viewport,
                                      double _fov)
-                  :CustomProjector(_screenW, _screenH, _fov) {
+                  :CustomProjector(viewport, _fov) {
   min_fov = 0.001;
   max_fov = 500.00001;
   set_fov(_fov);

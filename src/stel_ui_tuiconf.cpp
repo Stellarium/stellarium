@@ -35,17 +35,17 @@ void StelUI::draw_gravity_ui(void)
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glEnable(GL_BLEND);
 
-	int x = core->projection->view_left() + core->projection->viewW()/2;
-	int y = core->projection->view_bottom() + core->projection->viewH()/2;
-	int shift = (int)(M_SQRT2 / 2 * MY_MIN(core->projection->viewW()/2, core->projection->viewH()/2));
+	int x = core->getViewportPosX() + core->getViewportWidth()/2;
+	int y = core->getViewportPosY() + core->getViewportHeight()/2;
+	int shift = (int)(M_SQRT2 / 2 * MY_MIN(core->getViewportWidth()/2, core->getViewportHeight()/2));
 
 	if (FlagShowTuiDateTime)
 	{
-		double jd = core->navigation->get_JDay();
+		double jd = core->getJDay();
 		wostringstream os;
 
-		os << core->observatory->get_printable_date_local(jd) << L" " <<
-		core->observatory->get_printable_time_local(jd);
+		os << core->getObservatory().get_printable_date_local(jd) << L" " <<
+		core->getObservatory().get_printable_time_local(jd);
 
 		if (FlagShowFov) os << L" fov " << setprecision(3) << core->getFov();
 		if (FlagShowFps) os << L"  FPS " << app->fps;
@@ -54,13 +54,10 @@ void StelUI::draw_gravity_ui(void)
 		core->projection->print_gravity180(baseFont, x-shift + 30, y-shift + 38, os.str(), 0);
 	}
 
-	if (core->selected_object && FlagShowTuiShortObjInfo)
+	if (core->hasSelected() && FlagShowTuiShortObjInfo)
 	{
-	    wstring info = L"";
-		info = core->selected_object->get_short_info_string(core->navigation);
-		if (core->selected_object->get_type()==StelObject::STEL_OBJECT_NEBULA) glColor3fv(core->nebulas->getLabelColor());
-		if (core->selected_object->get_type()==StelObject::STEL_OBJECT_PLANET)glColor3fv(core->ssystem->getLabelColor());
-		if (core->selected_object->get_type()==StelObject::STEL_OBJECT_STAR) glColor3fv(core->selected_object->get_RGB());
+	    wstring info = core->selected_object->getShortInfoString(core->navigation);
+		glColor3fv(core->getSelectedObjectInfoColor());
 		core->projection->print_gravity180(baseFont, x+shift - 30, y+shift - 38, info, 0);
 	}
 }
@@ -142,7 +139,7 @@ void StelUI::init_tui(void)
 	tui_menu_general->addComponent(tui_general_sky_culture);
 
 	tui_general_sky_locale = new s_tui::MultiSet2_item<wstring>(wstring(L"3.2 ") + _("Sky Language: "));
-	//tui_general_sky_locale->addItemList(core->skyloc->get_sky_locale_list());
+	tui_general_sky_locale->addItemList(StelUtility::stringToWstring(Translator::getAvailableLanguagesCodes(LOCALEDIR)));
 
 	tui_general_sky_locale->set_OnChangeCallback(callback<void>(this, &StelUI::tui_cb_tui_general_change_sky_locale));
 	tui_menu_general->addComponent(tui_general_sky_locale);
@@ -293,10 +290,11 @@ void StelUI::draw_tui(void)
 	// Normal transparency mode
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glEnable(GL_BLEND);
-	int x = core->projection->view_left() + core->projection->viewW()/2;
-	int y = core->projection->view_bottom() + core->projection->viewH()/2;
-	int shift = (int)(M_SQRT2 / 2 * MY_MIN(core->projection->viewW()/2, core->projection->viewH()/2));
-
+	
+	int x = core->getViewportPosX() + core->getViewportWidth()/2;
+	int y = core->getViewportPosY() + core->getViewportHeight()/2;
+	int shift = (int)(M_SQRT2 / 2 * MY_MIN(core->getViewportWidth()/2, core->getViewportHeight()/2));
+	
 	if (tui_root)
 	{
 		glColor3f(0.5,1,0.5);
@@ -326,18 +324,18 @@ void StelUI::tui_update_widgets(void)
 	if (!FlagShowTuiMenu) return;
 	
 	// 1. Location
-	tui_location_latitude->setValue(core->observatory->get_latitude());
-	tui_location_longitude->setValue(core->observatory->get_longitude());
-	tui_location_altitude->setValue(core->observatory->get_altitude());
+	tui_location_latitude->setValue(core->getObservatory().get_latitude());
+	tui_location_longitude->setValue(core->getObservatory().get_longitude());
+	tui_location_altitude->setValue(core->getObservatory().get_altitude());
 
 	// 2. Date & Time
-	tui_time_skytime->setJDay(core->navigation->get_JDay() + 
-				  core->observatory->get_GMT_shift(core->navigation->get_JDay())*JD_HOUR);
-	tui_time_settmz->settz(core->observatory->get_custom_tz_name());
+	tui_time_skytime->setJDay(core->getJDay() + 
+				  core->getObservatory().get_GMT_shift(core->getJDay())*JD_HOUR);
+	tui_time_settmz->settz(core->getObservatory().get_custom_tz_name());
 	tui_time_presetskytime->setJDay(app->PresetSkyTime);
 	tui_time_startuptime->setCurrent(StelUtility::stringToWstring(app->StartupTimeMode));
-	tui_time_displayformat->setCurrent(StelUtility::stringToWstring(core->observatory->get_time_format_str()));
-	tui_time_dateformat->setCurrent(StelUtility::stringToWstring(core->observatory->get_date_format_str()));
+	tui_time_displayformat->setCurrent(StelUtility::stringToWstring(core->getObservatory().get_time_format_str()));
+	tui_time_dateformat->setCurrent(StelUtility::stringToWstring(core->getObservatory().get_date_format_str()));
 
 	// 3. general
 	tui_general_sky_culture->setValue(core->skyloc->convert_directory_to_sky_culture(core->skyCulture));
@@ -358,7 +356,7 @@ void StelUI::tui_update_widgets(void)
 	tui_effect_landscape->setValue(StelUtility::stringToWstring(core->observatory->get_landscape_name()));
 	tui_effect_pointobj->setValue(core->getFlagPointStar());
 	tui_effect_zoom_duration->setValue(core->auto_move_duration);
-	tui_effect_manual_zoom->setValue(core->FlagManualZoom);
+	tui_effect_manual_zoom->setValue(core->getFlagManualAutoZoom());
 	tui_effect_object_scale->setValue(core->getStarScale());
 	tui_effect_milkyway_intensity->setValue(core->milky_way->get_intensity());
 	tui_effect_cursor_timeout->setValue(MouseCursorTimeout);
@@ -445,9 +443,9 @@ void StelUI::tui_cb_tui_general_change_sky_culture(void) {
 
 // Set a new sky locale
 void StelUI::tui_cb_tui_general_change_sky_locale(void) {
-
-	//	core->set_sky_locale(tui_general_sky_locale->getCurrent());
-	app->commander->execute_command( string("set sky_locale " + StelUtility::wstringToString(tui_general_sky_locale->getCurrent())));
+	wcout << tui_general_sky_locale->getCurrent() << endl;
+	core->setSkyLanguage(StelUtility::wstringToString(tui_general_sky_locale->getCurrent()));
+	//app->commander->execute_command( string("set sky_locale " + StelUtility::wstringToString(tui_general_sky_locale->getCurrent())));
 }
 
 

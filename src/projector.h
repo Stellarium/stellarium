@@ -41,57 +41,61 @@ public:
         SPHERIC_MIRROR_PROJECTOR = 4
 	};
 
-	enum VIEWPORT_TYPE
+	enum PROJECTOR_MASK_TYPE
 	{
-		MAXIMIZED=1,
-		SQUARE=2,
-		DISK=3,
-		UNKNOWN=4
+		DISK,
+		NONE
 	};
+	
     static const char *typeToString(PROJECTOR_TYPE type);
     static PROJECTOR_TYPE stringToType(const string &s);
+    
+    // Main factory constructor
     static Projector *create(PROJECTOR_TYPE type,
-                             int _screenW = 800,
-                             int _screenH = 600,
+                             const Vec4i& viewport,
                              double _fov = 60.);
 	virtual ~Projector();
 
 	virtual PROJECTOR_TYPE getType(void) const {return PERSPECTIVE_PROJECTOR;}
-	VIEWPORT_TYPE getViewportType(void) const {return viewport_type;}
-	void setViewportType(VIEWPORT_TYPE);
-	void setViewportHorizontalOffset(int hoff) {hoffset=hoff;}
-	void setViewportVerticalOffset(int voff) {voffset=voff;}
-	int getViewportVerticalOffset(void) const {return hoffset;}
-	int getViewportHorizontalOffset(void) const {return hoffset;}
 	
-///	virtual
+	//! Get the type of the mask if any
+	PROJECTOR_MASK_TYPE getMaskType(void) const {return maskType;}
+	void setMaskType(PROJECTOR_MASK_TYPE m) {maskType = m; }
+	
+	//! Get and set to define and get viewport size
+	virtual void setViewport(int x, int y, int w, int h);
+	void setViewport(const Vec4i& v) {setViewport(v[0], v[1], v[2], v[3]);}
+	void setViewportPosX(int x) {setViewport(x, vec_viewport[1], vec_viewport[2], vec_viewport[3]);}
+	void setViewportPosY(int y) {setViewport(vec_viewport[0], y, vec_viewport[2], vec_viewport[3]);}
+	void setViewportWidth(int width) {setViewport(vec_viewport[0], vec_viewport[1], width, vec_viewport[3]);}
+	void setViewportHeight(int height) {setViewport(vec_viewport[0], vec_viewport[1], vec_viewport[2], height);}
+	int getViewportPosX(void) const {return vec_viewport[0];}
+	int getViewportPosY(void) const {return vec_viewport[1];}
+	int getViewportWidth(void) const {return vec_viewport[2];}
+	int getViewportHeight(void) const {return vec_viewport[3];}
+	const Vec4i& getViewport(void) const {return vec_viewport;}
+	
+	//! Set the current openGL viewport to projector's viewport
+	void applyViewport(void) const {glViewport(vec_viewport[0], vec_viewport[1], vec_viewport[2], vec_viewport[3]);}	
+	
+	//! Set the Field of View in degree
     void set_fov(double f);
+    //! Get the Field of View in degree
 	double get_fov(void) const {return fov;}
-///	virtual
+    
+    //! If is currently zooming, return the target FOV, otherwise return current FOV
+    double getAimFov(void) {if (flag_auto_zoom) return zoom_move.aim; else return fov;}
+    
     void change_fov(double deltaFov);
-///	void set_minmaxfov(double min, double max) {min_fov = min; max_fov = max; set_fov(fov);}
 
 	// Update auto_zoom if activated
 	void update_auto_zoom(int delta_time);
 
-	// Zoom to the given field of view
+	// Zoom to the given field of view in degree
 	void zoom_to(double aim_fov, float move_duration = 1.);
-
-	void set_screen_size(int w, int h);
-	int get_screenW(void) const {return screenW;}
-	int get_screenH(void) const {return screenH;}
-	void maximize_viewport(void) {setViewport(0,0,screenW,screenH); viewport_type = MAXIMIZED;}
-	void set_square_viewport(void);
-	void set_disk_viewport(void);
-	virtual void setViewport(int x, int y, int w, int h);
 
 	// Fill with black around the circle
 	void draw_viewport_shape(void);
-
-	int viewW(void) const {return vec_viewport[2];}
-	int viewH(void) const {return vec_viewport[3];}
-	int view_left(void) const {return vec_viewport[0];}
-	int view_bottom(void) const {return vec_viewport[1];}
 
 	void set_clipping_planes(double znear, double zfar);
 	void get_clipping_planes(double* zn, double* zf) const {*zn = zNear; *zf = zFar;}
@@ -162,11 +166,11 @@ public:
 		gluProject(v[0],v[1],v[2],mat,mat_projection,vec_viewport,&win[0],&win[1],&win[2]);
 		return (win[2]<1.);
 	}
-///	virtual
+
     bool project_custom_check(const Vec3f& v, Vec3d& win, const Mat4d& mat) const
 		{return (project_custom(v, win, mat) && check_in_viewport(win));}
 	// project two points and make sure both are in front of viewer and that at least one is on screen
-///	virtual inline
+
     bool project_custom_line_check(const Vec3f& v1, Vec3d& win1, 
 					       const Vec3f& v2, Vec3d& win2, const Mat4d& mat) const
 		{return project_custom(v1, win1, mat) && project_custom(v2, win2, mat) && 
@@ -175,12 +179,6 @@ public:
 
 	virtual void unproject_custom(double x, double y, Vec3d& v, const Mat4d& mat) const
 	{gluUnProject(x,y,1.,mat,mat_projection,vec_viewport,&v[0],&v[1],&v[2]);}
-	
-
-	// Set the drawing mode in 2D for drawing in the full screen
-	// Use restore_from_2Dfullscreen_projection() to restore previous projection mode
-	void set_2Dfullscreen_projection(void) const;
-	void restore_from_2Dfullscreen_projection(void) const;
 
 	// Set the drawing mode in 2D for drawing inside the viewport only.
 	// Use reset_perspective_projection() to restore previous projection mode
@@ -213,13 +211,6 @@ public:
 	virtual void sVertex3(double x, double y, double z, const Mat4d& mat) const
 	{glVertex3d(x,y,z);}
 
-	void update_openGL(void) const;
-
-///	const Vec3d convert_pos(const Vec3d& v, const Mat4d& mat) const {return v;}
-
-	//void print_gravity(const s_font* font, float x, float y, const string& str,
-	//	float xshift = 0, float yshift = 0) const;
-
 	void print_gravity180(s_font* font, float x, float y, const wstring& str, 
 			      bool speed_optimize = 1, float xshift = 0, float yshift = 0) const;
 	void print_gravity180(s_font* font, float x, float y, const string& str, 
@@ -232,7 +223,7 @@ public:
 	bool getFlagGravityLabels() const { return gravityLabels; }
 
 protected:
-	Projector(int _screenW = 800, int _screenH = 600, double _fov = 60.);
+	Projector(const Vec4i& viewport, double _fov = 60.);
 
 	// Struct used to store data for auto mov
 	typedef struct
@@ -247,13 +238,12 @@ protected:
 	// The function is a reimplementation of gluPerspective
 	virtual void init_project_matrix(void);
 
-	VIEWPORT_TYPE viewport_type;
+	//! The current projector mask
+	PROJECTOR_MASK_TYPE maskType;
 
-	int screenW, screenH;
-	double fov;					// Field of view
-	double min_fov;				// Minimum fov
-	double max_fov;				// Maximum fov
-	float ratio;				// Screen ratio = screenW/screenH
+	double fov;					// Field of view in degree
+	double min_fov;				// Minimum fov in degree
+	double max_fov;				// Maximum fov in degree
 	double zNear, zFar;			// Near and far clipping planes
 	Vec4i vec_viewport;			// Viewport parameters
 	Mat4d mat_projection;		// Projection matrix
@@ -269,7 +259,6 @@ protected:
 	// transformation from screen 2D point x,y to object
 	// m is here the already inverted full tranfo matrix
 	virtual
-///     inline
     void unproject(double x, double y, const Mat4d& m, Vec3d& v) const
 	{
 		v.set(	(x - vec_viewport[0]) * 2. / vec_viewport[2] - 1.0,
@@ -279,14 +268,9 @@ protected:
 	}
 	
 	// Automove
-	auto_zoom zoom_move;					// Current auto movement
-	int flag_auto_zoom;				// Define if autozoom is on or off
-	int hoffset, voffset;                           // for tweaking viewport centering
-
-	bool gravityLabels;            // should label text align with the horizon?
-
-    double view_scaling_factor;
-      // 1/fov*180./M_PI*MY_MIN(vec_viewport[2],vec_viewport[3]
+	auto_zoom zoom_move;		// Current auto movement
+	bool flag_auto_zoom;		// Define if autozoom is on or off
+	bool gravityLabels;			// should label text align with the horizon?
 };
 
 #endif // _PROJECTOR_H_

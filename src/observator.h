@@ -54,7 +54,7 @@ public:
     Mat4d getRotLocalToEquatorial(double jd) const;
     Mat4d getRotEquatorialToVsop87(void) const;
 
-	void save(const string& file, const string& section);
+	void save(const string& file, const string& section) const;
 	void load(const string& file, const string& section);
 
 	wstring get_printable_date_UTC(double JD) const;
@@ -69,6 +69,7 @@ public:
 	// Return the time zone name taken from system locale
 	wstring get_time_zone_name_from_system(double JD) const;
 
+	//! Return the current time shift at observator time zone with respect to GMT time
 	void set_GMT_shift(int t) {GMT_shift=t;}
 	float get_GMT_shift(double JD = 0, bool _local=0) const;
 
@@ -77,7 +78,7 @@ public:
 
 	S_TZ_FORMAT get_tz_format(void) const {return time_zone_mode;}
 
-	wstring get_name(void);
+	wstring get_name(void) const;
 	void set_latitude(double l) {latitude=l;}
 	double get_latitude(void) const {return latitude;}
 	void set_longitude(double l) {longitude=l;}

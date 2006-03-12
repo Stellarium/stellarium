@@ -60,8 +60,6 @@ public:
 	
 	const float getMaxFPS(void) const {return maxfps;}
 
-	int getMouseZoom(void) const {return MouseZoom;}
-
 	//! Quit the application
 	void quit(void);
 
@@ -74,6 +72,9 @@ public:
 	void setAppLanguage(const std::string& newAppLangName);
 
 private:
+	//! Screen size
+	int screenW, screenH;
+
     //! Initialize openGL screen with SDL
 	void initSDL(int w, int h, int bbpMode, bool fullScreen, string iconFile);
 	
@@ -82,6 +83,11 @@ private:
 
 	//! Terminate the application with SDL
 	void terminateApplication(void);
+
+	//! Set the drawing mode in 2D for drawing in the full screen
+	void set2DfullscreenProjection(void) const;
+	//! Restore previous projection mode
+	void restoreFrom2DfullscreenProjection(void) const;
 
 	StelCore* core;
 

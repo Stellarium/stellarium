@@ -24,7 +24,7 @@
 
 class FisheyeProjector : public CustomProjector {
 public:
-  FisheyeProjector(int _screenW = 800, int _screenH = 600, double _fov = 175.);
+  FisheyeProjector(const Vec4i & viewport, double _fov = 175.);
 private:
   PROJECTOR_TYPE getType(void) const {return FISHEYE_PROJECTOR;}
   bool project_custom(const Vec3d &v, Vec3d &win, const Mat4d &mat) const;

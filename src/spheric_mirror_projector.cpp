@@ -39,10 +39,9 @@ static const Vec3d p(P/lP);
 
 static double cos_alpha,sin_alpha;
 
-SphericMirrorProjector::SphericMirrorProjector(int _screenW,
-                                               int _screenH,
+SphericMirrorProjector::SphericMirrorProjector(const Vec4i& viewport,
                                                double _fov)
-                       :CustomProjector(_screenW, _screenH, _fov) {
+                       :CustomProjector(viewport, _fov) {
   min_fov = 0.001;
   max_fov = 180.00001;
   set_fov(_fov);
