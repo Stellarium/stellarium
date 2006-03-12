@@ -46,7 +46,7 @@ void StelApp::quit(void)
 
 void StelApp::init(void)
 {
-	cout << Translator::getAvailableLanguagesCodes(LOCALEDIR) << endl;
+	//cout << Translator::getAvailableLanguagesCodes(LOCALEDIR) << endl;
 
 	// Initialize video device and other sdl parameters
 	InitParser conf;
