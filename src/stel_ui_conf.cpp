@@ -214,7 +214,7 @@ Component* StelUI::createConfigWindow(void)
 	Label* system_tz_lbl = new Label(wstring(L"\u2022 ")+_("Using System Default Time Zone"));
 	tab_time->addComponent(system_tz_lbl);
 	system_tz_lbl->setPos(50 ,y); y+=20;
-	wstring tmpl(L"(" + core->observatory->get_time_zone_name_from_system(core->navigation->get_JDay()) + L")");
+	wstring tmpl(L"(ERROR)");
 	system_tz_lbl2 = new Label(tmpl);
 	tab_time->addComponent(system_tz_lbl2);
 	
@@ -257,7 +257,7 @@ Component* StelUI::createConfigWindow(void)
 	
 	Label * lblloc = new Label(_("Selected : "));
 	lblloc->setPos(20, y+21);
-	lblMapPointer = new Label(core->observatory->get_name());
+	lblMapPointer = new Label(L"ERROR");
 	lblMapPointer->setPos(100, y+21);
 	
 	Label * lbllong = new Label(_("Longitude : "));
@@ -311,12 +311,12 @@ Component* StelUI::createConfigWindow(void)
 
 	x=50; y+=20;
 
-	fisheye_projection_cbx = new LabeledCheckBox(core->getProjectionType()==Projector::FISHEYE_PROJECTOR, _("Fisheye Projection Mode"));
+	fisheye_projection_cbx = new LabeledCheckBox(false, _("Fisheye Projection Mode"));
 	fisheye_projection_cbx->setOnPressCallback(callback<void>(this, &StelUI::updateVideoVariables));
 	tab_video->addComponent(fisheye_projection_cbx);
 	fisheye_projection_cbx->setPos(x,y); y+=15;
 
-	disk_viewport_cbx = new LabeledCheckBox(core->projection->getViewportType()==Projector::DISK, _("Disk Viewport"));
+	disk_viewport_cbx = new LabeledCheckBox(false, _("Disk Viewport"));
 	disk_viewport_cbx->setOnPressCallback(callback<void>(this, &StelUI::updateVideoVariables));
 	tab_video->addComponent(disk_viewport_cbx);
 	disk_viewport_cbx->setPos(x,y); y+=35;
@@ -343,7 +343,7 @@ Component* StelUI::createConfigWindow(void)
 	screen_size_sl->addItem("1600x1200");
 	screen_size_sl->adjustSize();
 	char vs[1000];
-	sprintf(vs, "%dx%d", core->getViewportW(), core->getViewportH());
+	sprintf(vs, "%dx%d", core->getViewportWidth(), core->getViewportHeight());
 	screen_size_sl->setValue(vs);
 	tab_video->addComponent(screen_size_sl);
 
@@ -380,7 +380,7 @@ Component* StelUI::createConfigWindow(void)
 	landscape_sl->setPos(x,y);
 	landscape_sl->addItemList(Landscape::get_file_content(core->getDataDir() + "landscapes.ini"));
 	landscape_sl->adjustSize();
-	sprintf(vs, "%s", core->observatory->get_landscape_name().c_str());
+	sprintf(vs, "%s", core->getObservatory().get_landscape_name().c_str());
 	landscape_sl->setValue(vs);
 	landscape_sl->setOnPressCallback(callback<void>(this, &StelUI::setLandscape));
 	tab_landscapes->addComponent(landscape_sl);
@@ -746,11 +746,11 @@ void StelUI::dialogCallback(void)
 
 void StelUI::listBoxChanged(void)
 {
-	int value = listBox->getValue();
-	Planet* object = core->ssystem->searchByNamesI18(listBox->getItem(value));
-    string command = string("select planet " + object->getEnglishName());
-    wstring error = wstring(L"Planet '" + listBox->getItem(value) + L"' not found");
-	doSearchCommand(command, error);
+// 	int value = listBox->getValue();
+// 	Planet* object = core->ssystem->searchByNamesI18(listBox->getItem(value));
+//     string command = string("select planet " + object->getEnglishName());
+//     wstring error = wstring(L"Planet '" + listBox->getItem(value) + L"' not found");
+// 	doSearchCommand(command, error);
 }
 
 void StelUI::hideSearchMessage(void)
@@ -773,7 +773,7 @@ void StelUI::doSearchCommand(string _command, wstring _error)
 	if(!app->commander->execute_command(_command))
         return;
 
-    if (core->selected_object)
+    if (core->hasSelected())
     {
     	core->gotoSelectedObject();
         hideSearchMessage();
@@ -802,21 +802,21 @@ void StelUI::doNebulaSearch(void)
 
 void StelUI::doConstellationSearch(void)
 {
-    wstring rawObjectName = constellation_edit->getText();
-
-    string objectName = core->asterisms->getShortNameByNameI18(rawObjectName);
-
-    if (objectName != "")
-    {
-		string command = string("select constellation_star " + objectName);
-		wstring error = wstring(L"Constellation '" + rawObjectName + L"' not found");
-
-		doSearchCommand(command, error);
-    }
-    else
-        showSearchMessage(wstring(L"Constellation " + rawObjectName + L" not found"));
-
-	constellation_edit->clearText();
+//     wstring rawObjectName = constellation_edit->getText();
+// 
+//     string objectName = core->asterisms->getShortNameByNameI18(rawObjectName);
+// 
+//     if (objectName != "")
+//     {
+// 		string command = string("select constellation_star " + objectName);
+// 		wstring error = wstring(L"Constellation '" + rawObjectName + L"' not found");
+// 
+// 		doSearchCommand(command, error);
+//     }
+//     else
+//         showSearchMessage(wstring(L"Constellation " + rawObjectName + L" not found"));
+// 
+// 	constellation_edit->clearText();
 }
 
 void StelUI::showConstellationAutoComplete(void)
@@ -944,7 +944,7 @@ void StelUI::doSaveObserverPosition(const string& name)
 		<< " name " << location;
 	app->commander->execute_command(oss.str());
 
-	core->observatory->save(app->getConfigDir() + app->config_file, "init_location");
+	core->getObservatory().save(app->getConfigDir() + app->config_file, "init_location");
 	app->ui->setTitleObservatoryName(app->ui->getTitleWithAltitude());
 }
 
@@ -980,7 +980,7 @@ void StelUI::saveRenderOptions(void)
 	conf.set_double("astro:max_mag_nebula_name", core->getNebulaMaxMagHints());
 	conf.set_boolean("astro:flag_planets", core->getFlagPlanets());
 	conf.set_boolean("astro:flag_planets_hints", core->getFlagPlanetsHints());
-	conf.set_double("viewing:moon_scale", core->ssystem->getMoon()->get_sphere_scale());
+	conf.set_double("viewing:moon_scale", core->getMoonScale());
 	conf.set_boolean("viewing:flag_chart", core->getVisionModeChart());
 	conf.set_boolean("viewing:flag_night", core->getVisionModeNight());
 	//conf.set_boolean("viewing:use_common_names", core->FlagUseCommonNames);
@@ -989,16 +989,11 @@ void StelUI::saveRenderOptions(void)
 	conf.set_boolean("viewing:flag_equator_line", core->getFlagEquatorLine());
 	conf.set_boolean("viewing:flag_ecliptic_line", core->getFlagEclipticLine());
 	conf.set_boolean("landscape:flag_landscape", core->getFlagLandscape());
-	conf.set_boolean("viewing:flag_cardinal_points", core->cardinals_points->getFlagShow());
+	conf.set_boolean("viewing:flag_cardinal_points", core->getFlagCardinalsPoints());
 	conf.set_boolean("landscape:flag_atmosphere", core->getFlagAtmosphere());
 	conf.set_boolean("landscape:flag_fog", core->getFlagFog());
 
 	conf.save(app->getConfigDir() + app->config_file);
-}
-
-void StelUI::setTimeZone(void)
-{
-	core->observatory->set_custom_tz_name(tzselector->gettz());
 }
 
 void StelUI::setVideoOption(void)
@@ -1016,14 +1011,8 @@ void StelUI::setVideoOption(void)
     conf.set_str("projection:type",
                  Projector::typeToString(core->getProjectionType()));
 
-	switch (core->getViewportType())
-	{
-		case Projector::SQUARE : conf.set_str("projection:viewport", "square"); break;
-		case Projector::DISK : conf.set_str("projection:viewport", "disk"); break;
-		case Projector::MAXIMIZED :
-		default :
-			conf.set_str("projection:viewport", "maximized"); break;
-	}
+	if (core->getViewportMaskDisk()) conf.set_str("projection:viewport", "disk");
+	else conf.set_str("projection:viewport", "maximized");
 
 	conf.set_int("video:screen_w", w);
 	conf.set_int("video:screen_h", h);
@@ -1046,16 +1035,14 @@ void StelUI::updateVideoVariables(void)
 		core->setProjectionType(Projector::PERSPECTIVE_PROJECTOR);
 	}
 
-
-	if (disk_viewport_cbx->getState() && core->getViewportType()!=Projector::DISK)
+	if (disk_viewport_cbx->getState() && !core->getViewportMaskDisk())
 	{
-		core->projection->set_disk_viewport();
+		core->setViewportMaskDisk();
 	}
-	if (!disk_viewport_cbx->getState() && core->getViewportType()==Projector::DISK)
+	if (!disk_viewport_cbx->getState() && core->getViewportMaskDisk())
 	{
-		core->projection->maximize_viewport();
+		core->setViewportMaskNone();
 	}
-
 }
 
 void StelUI::updateConfigForm(void)
@@ -1068,7 +1055,7 @@ void StelUI::updateConfigForm(void)
 	constellation_cbx->setState(core->getFlagConstellationLines());
 	constellation_name_cbx->setState(core->getFlagConstellationNames());
 	sel_constellation_cbx->setState(core->getFlagConstellationIsolateSelected());
-	nebulas_names_cbx->setState(core->nebulas->getFlagHints());
+	nebulas_names_cbx->setState(core->getFlagNebulaHints());
 	max_mag_nebula_name->setValue(core->getNebulaMaxMagHints());
 	planets_cbx->setState(core->getFlagPlanets());
 	planets_hints_cbx->setState(core->getFlagPlanetsHints());
@@ -1078,35 +1065,35 @@ void StelUI::updateConfigForm(void)
 	equator_cbx->setState(core->getFlagEquatorLine());
 	ecliptic_cbx->setState(core->getFlagEclipticLine());
 	ground_cbx->setState(core->getFlagLandscape());
-	cardinal_cbx->setState(core->cardinals_points->getFlagShow());
+	cardinal_cbx->setState(core->getFlagCardinalsPoints());
 	atmosphere_cbx->setState(core->getFlagAtmosphere());
 	fog_cbx->setState(core->getFlagFog());
 
-	earth_map->setPointerLongitude(core->observatory->get_longitude());
-	earth_map->setPointerLatitude(core->observatory->get_latitude());
-	long_incdec->setValue(core->observatory->get_longitude());
-	lat_incdec->setValue(core->observatory->get_latitude());
-	alt_incdec->setValue(core->observatory->get_altitude());
+	earth_map->setPointerLongitude(core->getObservatory().get_longitude());
+	earth_map->setPointerLatitude(core->getObservatory().get_latitude());
+	long_incdec->setValue(core->getObservatory().get_longitude());
+	lat_incdec->setValue(core->getObservatory().get_latitude());
+	alt_incdec->setValue(core->getObservatory().get_altitude());
 	lblMapLocation->setLabel(StelUtility::stringToWstring(earth_map->getCursorString()));
 	if (!waitOnLocation)
 		lblMapPointer->setLabel(StelUtility::stringToWstring(earth_map->getPositionString()));
 	else
 	{
-		earth_map->findPosition(core->observatory->get_longitude(),core->observatory->get_latitude());
+		earth_map->findPosition(core->getObservatory().get_longitude(),core->getObservatory().get_latitude());
 		lblMapPointer->setLabel(StelUtility::stringToWstring(earth_map->getPositionString()));
 		waitOnLocation = false;
 	}
 
-	time_current->setJDay(core->navigation->get_JDay() + core->observatory->get_GMT_shift(core->navigation->get_JDay())*JD_HOUR);
+	time_current->setJDay(core->getJDay() + core->getObservatory().get_GMT_shift(core->getJDay())*JD_HOUR);
 	system_tz_lbl2->setLabel(L"(" +
-		 core->observatory->get_time_zone_name_from_system(core->navigation->get_JDay()) + L")");
+		 core->getObservatory().get_time_zone_name_from_system(core->getJDay()) + L")");
 
 	wostringstream os;
-    os << core->navigation->get_time_speed()/JD_SECOND;
+    os << core->getTimeSpeed()/JD_SECOND;
 	time_speed_lbl2->setLabel(wstring(L"\u2022 ")+_("Current Time Speed is x") + os.str());
 
 	fisheye_projection_cbx->setState(core->getProjectionType()==Projector::FISHEYE_PROJECTOR);
-	disk_viewport_cbx->setState(core->getViewportType()==Projector::DISK);
+	disk_viewport_cbx->setState(core->getViewportMaskDisk());
 }
 
 void StelUI::config_win_hideBtCallback(void)

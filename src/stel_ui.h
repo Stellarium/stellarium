@@ -268,7 +268,6 @@ private:
 	Time_zone_item* tzselector;
 	Label* system_tz_lbl2;
 	Label* time_speed_lbl2;
-	void setTimeZone(void);
 
 	// Video Options
 	LabeledCheckBox* fisheye_projection_cbx;

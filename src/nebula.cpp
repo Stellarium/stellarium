@@ -53,7 +53,7 @@ Nebula::~Nebula()
 	tex_circle = NULL;
 }
 
-wstring Nebula::get_info_string(const Navigator* nav) const
+wstring Nebula::getInfoString(const Navigator* nav) const
 {
 	float tempDE, tempRA;
 
@@ -79,8 +79,11 @@ wstring Nebula::get_info_string(const Navigator* nav) const
 	}
 	oss << endl;
 	
+	oss.setf(ios::fixed);
+	oss.precision(2);
+	oss << _("Magnitude: ") << mag << endl;	
+	
 	oss << _("RA/DE: ") << StelUtility::printAngleHMS(tempRA) << L"/" << StelUtility::printAngleDMS(tempDE) << endl;
-
 	// calculate alt az
 	Vec3d localPos = nav->earth_equ_to_local(equPos);
 	rect_to_sphe(&tempRA,&tempDE,localPos);
@@ -88,16 +91,13 @@ wstring Nebula::get_info_string(const Navigator* nav) const
 	if(tempRA > M_PI*2) tempRA -= M_PI*2;	
 	oss << _("Az/Alt: ") << StelUtility::printAngleDMS(tempRA) << L"/" << StelUtility::printAngleDMS(tempDE) << endl;
 	
-	oss.setf(ios::fixed);
-	oss.precision(2);
-	oss << _("Magnitude : ") << mag << endl;
-	oss << _("Type : ") << getTypeString() << endl;
-	oss << _("Size : ") << StelUtility::printAngleDMS(angular_size*M_PI/180.) << endl;
+	oss << _("Type: ") << getTypeString() << endl;
+	oss << _("Size: ") << StelUtility::printAngleDMS(angular_size*M_PI/180.) << endl;
 
 	return oss.str();
 }
 
-wstring Nebula::get_short_info_string(const Navigator*) const
+wstring Nebula::getShortInfoString(const Navigator*) const
 {
 	if (nameI18!=L"")
 	{
@@ -351,7 +351,7 @@ void Nebula::draw_name(const Projector* prj)
 	float size = get_on_screen_size(prj);
 	float shift = 8.f + size/2.f;
 
-	wstring nebulaname = get_short_info_string();
+	wstring nebulaname = getShortInfoString();
 
 	if (prj->getFlagGravityLabels())
 		prj->print_gravity180(nebula_font, XY[0]+shift, XY[1]+shift, nebulaname, 1, 0, 0);

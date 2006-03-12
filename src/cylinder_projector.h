@@ -24,7 +24,7 @@
 
 class CylinderProjector : public CustomProjector {
 public:
-  CylinderProjector(int _screenW,int _screenH,double _fov);
+  CylinderProjector(const Vec4i& viewport ,double _fov);
 private:
   PROJECTOR_TYPE getType(void) const {return CYLINDER_PROJECTOR;}
   bool project_custom(const Vec3d &v, Vec3d &win, const Mat4d &mat) const;

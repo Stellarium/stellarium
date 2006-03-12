@@ -21,10 +21,9 @@
 #include "stereographic_projector.h"
 
 
-StereographicProjector::StereographicProjector(int _screenW,
-                                               int _screenH,
+StereographicProjector::StereographicProjector(const Vec4i& viewport,
                                                double _fov)
-                       :CustomProjector(_screenW, _screenH, _fov) {
+                       :CustomProjector(viewport, _fov) {
   min_fov = 0.001;
   max_fov = 270.00001;
   set_fov(_fov);

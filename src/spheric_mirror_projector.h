@@ -25,7 +25,7 @@
 
 class SphericMirrorProjector : public CustomProjector {
 public:
-  SphericMirrorProjector(int _screenW,int _screenH,double _fov);
+  SphericMirrorProjector(const Vec4i & viewport, double _fov);
 private:
   PROJECTOR_TYPE getType(void) const {return SPHERIC_MIRROR_PROJECTOR;}
   void setViewport(int x, int y, int w, int h);

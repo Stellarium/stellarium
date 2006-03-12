@@ -22,21 +22,13 @@
 #include "custom_projector.h"
 
 
-CustomProjector::CustomProjector(int _screenW, int _screenH, double _fov)
-                :Projector(_screenW, _screenH, _fov)
+CustomProjector::CustomProjector(const Vec4i& viewport, double _fov)
+                :Projector(viewport, _fov)
 {
-	set_screen_size(_screenW,_screenH);
 	mat_projection.set(1., 0., 0., 0.,
 							0., 1., 0., 0.,
 							0., 0., -1, 0.,
 							0., 0., 0., 1.);				
-}
-
-// For a fisheye, ratio is alway = 1
-void CustomProjector::setViewport(int x, int y, int w, int h)
-{
-	Projector::setViewport(x, y, w, h);
-	center.set(vec_viewport[0]+vec_viewport[2]/2,vec_viewport[1]+vec_viewport[3]/2,0);
 }
 
 // Init the viewing matrix, setting the field of view, the clipping planes, and screen ratio
@@ -46,14 +38,8 @@ void CustomProjector::init_project_matrix(void)
 	glMatrixMode(GL_PROJECTION);
 	glLoadMatrixd(mat_projection);
     glMatrixMode(GL_MODELVIEW);
-}
-
-void CustomProjector::update_openGL(void) const
-{
-	glMatrixMode(GL_PROJECTION);
-	glLoadMatrixd(mat_projection);
-    glMatrixMode(GL_MODELVIEW);
-	glViewport(vec_viewport[0], vec_viewport[1], vec_viewport[2], vec_viewport[3]);
+    view_scaling_factor = 1.0/fov*180./M_PI*MY_MIN(getViewportWidth(),getViewportHeight());
+    center.set(vec_viewport[0]+vec_viewport[2]/2,vec_viewport[1]+vec_viewport[3]/2,0);
 }
 
 void CustomProjector::unproject_custom(double x ,double y, Vec3d& v, const Mat4d& mat) const

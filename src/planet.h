@@ -96,8 +96,8 @@ public:
     double getRadius(void) const {return radius;}
 
 	// Return the information string "ready to print" :)
-	wstring get_info_string(const Navigator * nav) const;
-	wstring get_short_info_string(const Navigator * nav) const;
+	wstring getInfoString(const Navigator * nav) const;
+	wstring getShortInfoString(const Navigator * nav) const;
 	virtual double get_close_fov(const Navigator * nav) const;
 	virtual double get_satellites_fov(const Navigator * nav) const;
 	virtual float get_mag(const Navigator * nav) const {return compute_magnitude(nav);}
