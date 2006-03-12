@@ -46,6 +46,8 @@ void StelApp::quit(void)
 
 void StelApp::init(void)
 {
+	cout << Translator::getAvailableLanguagesCodes(LOCALEDIR) << endl;
+
 	// Initialize video device and other sdl parameters
 	InitParser conf;
 	conf.load(configDir + "config.ini");
@@ -56,10 +58,12 @@ void StelApp::init(void)
 	{
 		// The config file is too old to try an importation
 		printf("The current config file is from a version too old for parameters to be imported (%s).\nIt will be replaced by the default config file.\n", version.empty() ? "<0.6.0" : version.c_str());
-		system( (string("cp -f ") + core->getDataRoot() + "/config/default_config.ini " + getConfigDir() + config_file).c_str() );
+		system( (string("cp -f ") + core->getDataRoot() + "/data/default_config.ini " + getConfigDir() + config_file).c_str() );
 	}
-		
-	initSDL(conf.get_int("video:screen_w"), conf.get_int("video:screen_h"), conf.get_int("video:bbp_mode"), conf.get_boolean("video:fullscreen"), core->getDataDir() + "/icon.bmp");	
+	
+	screenW = conf.get_int("video:screen_w");
+	screenH = conf.get_int("video:screen_h");
+	initSDL(screenW, screenH, conf.get_int("video:bbp_mode"), conf.get_boolean("video:fullscreen"), core->getDataDir() + "/icon.bmp");	
 	
 	core->init(conf);
 	
@@ -68,6 +72,20 @@ void StelApp::init(void)
 	setAppLanguage(appLocaleName);
 	scripts->set_allow_ui( conf.get_boolean("gui","flag_script_allow_ui",0) );
 
+	string tmpstr = conf.get_str("projection:viewport");
+	if (tmpstr=="maximized") core->setMaximizedViewport(screenW, screenH);
+	else
+		if (tmpstr=="square") core->setSquareViewport(screenW, screenH, conf.get_int("video:horizontal_offset"), conf.get_int("video:horizontal_offset"));
+		else
+		{
+			if (tmpstr=="disk") core->getViewportMaskDisk();
+			else
+			{
+				cerr << "ERROR : Unknown viewport type : " << tmpstr << endl;
+				exit(-1);
+			}
+		}	
+
 	// Navigation section
 	PresetSkyTime 		= conf.get_double ("navigation","preset_sky_time",2451545.);
 	StartupTimeMode 	= conf.get_str("navigation:startup_time_mode");	// Can be "now" or "preset"
@@ -75,7 +93,7 @@ void StelApp::init(void)
 	MouseZoom			= conf.get_int("navigation","mouse_zoom",30);
 	
 	if (StartupTimeMode=="preset" || StartupTimeMode=="Preset")
-		core->setJDay(PresetSkyTime/* - core->observatory->get_GMT_shift(PresetSkyTime) * JD_HOUR*/);
+		core->setJDay(PresetSkyTime - core->getObservatory().get_GMT_shift(PresetSkyTime) * JD_HOUR);
 	
 	// initialisation of the User Interface
 	ui->init(conf);
@@ -151,7 +169,7 @@ int StelApp::handleMove(int x, int y)
 			core->turn_left(1);
 			is_mouse_moving_horiz = true;
 		}
-		else if (x == core->getViewportW() - 1)
+		else if (x == core->getViewportWidth() - 1)
 		{
 			core->turn_right(1);
 			is_mouse_moving_horiz = true;
@@ -167,7 +185,7 @@ int StelApp::handleMove(int x, int y)
 			core->turn_up(1);
 			is_mouse_moving_vert = true;
 		}
-		else if (y == core->getViewportH() - 1)
+		else if (y == core->getViewportHeight() - 1)
 		{
 			core->turn_down(1);
 			is_mouse_moving_vert = true;
@@ -249,4 +267,28 @@ int StelApp::handleKeys(Uint16 key, s_gui::S_GUI_VALUE state)
 		if (key==SDLK_PAGEDOWN) core->zoom_out(0);
 	}
 	return 0;
+}
+
+
+//! Set the drawing mode in 2D for drawing in the full screen
+void StelApp::set2DfullscreenProjection(void) const
+{
+	glViewport(0, 0, screenW, screenH);
+	glMatrixMode(GL_PROJECTION);		// projection matrix mode
+    glPushMatrix();						// store previous matrix
+    glLoadIdentity();
+    gluOrtho2D(	0, screenW,
+				0, screenH);			// set a 2D orthographic projection
+	glMatrixMode(GL_MODELVIEW);			// modelview matrix mode
+    glPushMatrix();
+    glLoadIdentity();	
+}
+	
+//! Restore previous projection mode
+void StelApp::restoreFrom2DfullscreenProjection(void) const
+{
+    glMatrixMode(GL_PROJECTION);		// Restore previous matrix
+    glPopMatrix();
+    glMatrixMode(GL_MODELVIEW);
+    glPopMatrix();	
 }

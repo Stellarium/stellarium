@@ -140,7 +140,7 @@ void Observator::set_landscape_name(string s) {
 	landscape_name = s;
 }
 
-void Observator::save(const string& file, const string& section)
+void Observator::save(const string& file, const string& section) const
 {
 	printf("Saving location %s to file %s\n",StelUtility::wstringToString(name).c_str(), file.c_str());
 
@@ -463,7 +463,7 @@ void Observator::move_to(double lat, double lon, double alt, int duration, const
   //  printf("coef = %f\n", move_to_coef);
 }
 
-wstring Observator::get_name(void)
+wstring Observator::get_name(void) const
 {
 	return name;
 }

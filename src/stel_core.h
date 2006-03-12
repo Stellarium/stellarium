@@ -40,13 +40,12 @@
 #include "loadingbar.h"
 #include "image_mgr.h"
 
+class StelUI;
+
 //!  @brief Main class for stellarium core processing. 
 //!  
 //! Manage all the objects to be used in the program. 
 //! This class is the main API of the program. It must be documented using doxygen.
- 
-class StelUI;
-
 class StelCore
 {
 // TODO : remove both
@@ -55,7 +54,10 @@ friend class StelCommandInterface;
 public:
 
 	//! Possible drawing modes
-	enum DRAWMODE { DM_NORMAL=0, DM_CHART, DM_NIGHT, DM_NIGHTCHART };
+	enum DRAWMODE { DM_NORMAL=0, DM_CHART, DM_NIGHT, DM_NIGHTCHART, DM_NONE };
+
+	//! Possible mount modes
+	enum MOUNT_MODE { MOUNT_ALTAZIMUTAL, MOUNT_EQUATORIAL };
 
 	// Inputs are the locale directory and root directory
     StelCore(const string& LDIR, const string& DATA_ROOT);
@@ -88,8 +90,6 @@ public:
 	//! This function has no permanent effect on the global locale
 	//!@param newSkyLocaleName The name of the locale (e.g fr) to use for sky object labels
 	void setSkyLanguage(const std::string& newSkyLocaleName);
-
-	void setObjectPointerVisibility(bool b) { object_pointer_visibility = b; }
 	
 	///////////////////////////////////////////////////////////////////////////////////////
 	// Navigation
@@ -108,23 +108,46 @@ public:
 	//! Get object tracking
 	bool getFlagTraking(void) {return navigation->get_flag_traking();}
 	
+	//! Set whether sky position is to be locked
+	void setFlagLockSkyPosition(bool b) {navigation->set_flag_lock_equ_pos(b);}
+	//! Set whether sky position is locked
+	bool getFlagLockSkyPosition(void) {return navigation->get_flag_lock_equ_pos();}
+	
+	//! Set current mount type
+	void setMountMode(MOUNT_MODE m) {navigation->set_viewing_mode((m==MOUNT_ALTAZIMUTAL) ? Navigator::VIEW_HORIZON : Navigator::VIEW_EQUATOR);}
+	//! Get current mount type
+	MOUNT_MODE getMountMode(void) {return ((navigation->get_viewing_mode()==Navigator::VIEW_HORIZON) ? MOUNT_ALTAZIMUTAL : MOUNT_EQUATORIAL);}
+	//! Toggle current mount mode between equatorial and altazimutal
+	void toggleMountMode(void) {if (getMountMode()==MOUNT_ALTAZIMUTAL) setMountMode(MOUNT_EQUATORIAL); else setMountMode(MOUNT_ALTAZIMUTAL);}
+	
 	// TODO!
 	void loadObservatory();
 	
 	//! Go to the selected object
 	void gotoSelectedObject(void) {if (selected_object) navigation->move_to(selected_object->get_earth_equ_pos(navigation), auto_move_duration);}
 	
-	//! Zoom to the given FOV
+	//! Zoom to the given FOV (in degree)
 	void zoomTo(double aim_fov, float move_duration = 1.) {projection->zoom_to(aim_fov, move_duration);}
 	
-	//! Get current FOV
+	//! Get current FOV (in degree)
 	float getFov(void) const {return projection->get_fov();}
+	
+    //! If is currently zooming, return the target FOV, otherwise return current FOV
+    double getAimFov(void) {return projection->getAimFov();}	
+	
+	//! Set the current FOV (in degree)
+	void setFov(double f) {projection->set_fov(f);}
 	
 	//! Go and zoom temporarily to the selected object.
 	void autoZoomIn(float move_duration = 1.f, bool allow_manual_zoom = 1);
 	
 	//! Unzoom to the previous position
 	void autoZoomOut(float move_duration = 1.f, bool full = 0);
+	
+	//! Set whether auto zoom can go further than normal
+	void setFlagManualAutoZoom(bool b) {FlagManualZoom = b;}
+	//! Get whether auto zoom can go further than normal
+	bool getFlagManualAutoZoom(void) {return FlagManualZoom;}	
 	
 	// Viewing direction function : 1 move, 0 stop.
 	void turn_right(int);
@@ -134,13 +157,31 @@ public:
 	void zoom_in(int);
 	void zoom_out(int);	
 	
+	//! Make the first screen position correspond to the second (useful for mouse dragging)
+	void dragView(int x1, int y1, int x2, int y2);
 	
+	//! Find and select an object near given equatorial position
+	//! @return true if a object was found at position (this does not necessarily means it is selected)
+	bool findAndSelect(const Vec3d& pos);
 	
-	//! Find in a "clever" way an object from its equatorial position
-	StelObject * clever_find(const Vec3d& pos) const;
+	//! Find and select an object near given screen position
+	//! @return true if a object was found at position (this does not necessarily means it is selected)
+	bool findAndSelect(int x, int y);
 	
-	//! Find in a "clever" way an object from its screen position
-	StelObject * clever_find(int x, int y) const;	
+	//! Return whether an object is currently selected
+	bool hasSelected(void) {return selected_object!=NULL;}
+	
+	//! Deselect selected object if any
+	void unSelect(void) {selected_object=NULL; asterisms->setSelected(NULL); ssystem->setSelected(NULL);}
+	
+	//! Set whether a pointer is to be drawn over selected object
+	void setFlagSelectedObjectPointer(bool b) { object_pointer_visibility = b; }
+	
+	//! Get a multiline string describing the currently selected object
+	wstring getSelectedObjectInfo(void) const {return selected_object->getInfoString(navigation);}
+
+	//! Get a color used to display info about the currently selected object
+	Vec3f getSelectedObjectInfoColor(void) const;
 	
 	///////////////////////////////////////////////////////////////////////////////////////
 	// Constellations methods
@@ -308,19 +349,32 @@ public:
 	///////////////////////////////////////////////////////////////////////////////////////
 	// Projection	
 	//! Set the horizontal viewport offset in pixels 
-	void setViewportHorizontalOffset(int hoff) const {projection->setViewportHorizontalOffset(hoff);}	
+	void setViewportHorizontalOffset(int hoff) const {projection->setViewportPosX(hoff);}	
 	//! Get the horizontal viewport offset in pixels 
-	int getViewportHorizontalOffset(void) const {return projection->getViewportHorizontalOffset();}
+	int getViewportHorizontalOffset(void) const {return projection->getViewportPosX();}
 	
 	//! Set the vertical viewport offset in pixels 
-	void setViewportVerticalOffset(int voff) const {projection->setViewportVerticalOffset(voff);}
+	void setViewportVerticalOffset(int voff) const {projection->setViewportPosY(voff);}
 	//! Get the vertical viewport offset in pixels 
-	int getViewportVerticalOffset(void) const {return projection->getViewportVerticalOffset();}
+	int getViewportVerticalOffset(void) const {return projection->getViewportPosY();}
 	
-	//! Set the viewport type
-	void setViewportType(Projector::VIEWPORT_TYPE vType) {projection->setViewportType(vType);}
-	//! Get the viewport type
-	Projector::VIEWPORT_TYPE getViewportType(void) {return projection->getViewportType();}
+	//! Maximize viewport according to passed screen values
+	void setMaximizedViewport(int screenW, int screenH) {projection->setViewport(0, 0, screenW, screenH);}
+	
+	//! Set a centered squared viewport with passed vertical and horizontal offset
+	void setSquareViewport(int screenW, int screenH, int hoffset, int voffset)
+	{
+		int m = MY_MIN(screenW, screenH);
+		projection->setViewport((screenW-m)/2+hoffset, (screenH-m)/2+voffset, m, m);
+	}
+
+	//! Set whether a disk mask must be drawn over the viewport
+	void setViewportMaskDisk(void) {projection->setMaskType(Projector::DISK);}
+	//! Get whether a disk mask must be drawn over the viewport
+	bool getViewportMaskDisk(void) {return projection->getMaskType()==Projector::DISK;}
+	
+	//! Set whether no mask must be drawn over the viewport
+	void setViewportMaskNone(void) {projection->setMaskType(Projector::NONE);}
 	
 	//! Set the projection type
 	void setProjectionType(Projector::PROJECTOR_TYPE pType);
@@ -333,13 +387,19 @@ public:
 	bool getFlagGravityLabels(void) const {return projection->getFlagGravityLabels();}	
 	
 	//! Get viewport width
-	int getViewportW(void) const {return projection->get_screenW();}
+	int getViewportWidth(void) const {return projection->getViewportWidth();}
 	
 	//! Get viewport height
-	int getViewportH(void) const {return projection->get_screenH();}
+	int getViewportHeight(void) const {return projection->getViewportHeight();}
+	
+	//! Get viewport X position
+	int getViewportPosX(void) const {return projection->getViewportPosX();}
+	
+	//! Get viewport Y position
+	int getViewportPosY(void) const {return projection->getViewportPosY();}
 	
 	//! Set the viewport width and height
-	void setScreenSize(int w, int h);
+	void setViewportSize(int w, int h);
 	
 	///////////////////////////////////////////////////////////////////////////////////////
 	// Landscape
@@ -419,26 +479,31 @@ public:
 	
 	///////////////////////////////////////////////////////////////////////////////////////
 	// Observator
+	//! Return the current observatory (as a const object)
+	const Observator& getObservatory(void) const {return *observatory;}
 	
-	
-	
+	//! Set Meteor Rate in number per hour
+	void setMeteorsRate(int f) {meteors->set_ZHR(f);}
+	//! Get Meteor Rate in number per hour
+	int getMeteorsRate(void) const {return meteors->get_ZHR();}
+		
 	///////////////////////////////////////////////////////////////////////////////////////
 	// Others
 	//! Load color scheme from the given ini file and section name
 	void setColorScheme(const string& skinFile, const string& section);
 	
 	//! Set flag for activating night vision mode
-	void setVisionModeNight(void) {if (!getVisionModeNight()) setColorScheme(getDataDir() + "default_config.ini", "colorr");draw_mode=DM_NIGHT;}
+	void setVisionModeNight(void) {if (!getVisionModeNight()) setColorScheme(getDataDir() + "default_config.ini", "night_color");draw_mode=DM_NIGHT;}
 	//! Get flag for activating night vision mode
 	bool getVisionModeNight(void) const {return draw_mode==DM_NIGHT;}
 	
 	//! Set flag for activating chart vision mode
-	void setVisionModeChart(void){if (!getVisionModeChart()) setColorScheme(getDataDir() + "default_config.ini", "colorc");draw_mode=DM_CHART; }
+	void setVisionModeChart(void){if (!getVisionModeChart()) setColorScheme(getDataDir() + "default_config.ini", "chart_color");draw_mode=DM_CHART; }
 	//! Get flag for activating chart vision mode
 	bool getVisionModeChart(void) const {return draw_mode==DM_CHART;}
 	
 	//! Set flag for activating chart vision mode
-	void setVisionModeNormal(void){if (!getVisionModeNormal()) setColorScheme(getDataDir() + "default_config.ini", "color");draw_mode=DM_NORMAL;}	
+	void setVisionModeNormal(void){if (!getVisionModeNormal()) setColorScheme(getDataDir() + "default_config.ini", "standard_color");draw_mode=DM_NORMAL;}	
 	//! Get flag for activating chart vision mode
 	bool getVisionModeNormal(void) const {return draw_mode==DM_NORMAL;}
 
@@ -446,6 +511,12 @@ public:
 	ImageMgr* getImageMgr(void) const {return script_images;}
 	
 private:
+	//! Find in a "clever" way an object from its equatorial position
+	StelObject * clever_find(const Vec3d& pos) const;
+	
+	//! Find in a "clever" way an object from its screen position
+	StelObject * clever_find(int x, int y) const;	
+	
 	string baseFontFile;				// The font file used by default during initialization
 
 	string dataRoot;					// The root directory where the data is
@@ -491,12 +562,11 @@ private:
 	
 	float InitFov;						// Default viewing FOV
 	Vec3d InitViewPos;					// Default viewing direction
-	int FlagManualZoom;					// ?	
+	int FlagManualZoom;					// Define whether auto zoom can go further
 	Vec3f chartColor;					// ?
-	float auto_move_duration;			// Duration of movement for the auto move to a selected object
-	
+	float auto_move_duration;			// Duration of movement for the auto move to a selected object	
 
-	DRAWMODE draw_mode;					
+	DRAWMODE draw_mode;					// Current draw mode
 };
 
 #endif // _STEL_CORE_H_

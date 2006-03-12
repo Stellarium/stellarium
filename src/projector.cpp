@@ -34,7 +34,7 @@ const char *Projector::typeToString(PROJECTOR_TYPE type) {
     case SPHERIC_MIRROR_PROJECTOR: return "spheric_mirror";
   }
   cerr << "fatal: Projector::typeToString(" << type << ") failed" << endl;
-  exit(1);
+  assert(0);
     // just shutup the compiler, this point will never be reached
   return 0;
 }
@@ -46,31 +46,30 @@ Projector::PROJECTOR_TYPE Projector::stringToType(const string &s) {
   if (s=="stereographic")  return STEREOGRAPHIC_PROJECTOR;
   if (s=="spheric_mirror") return SPHERIC_MIRROR_PROJECTOR;
   cerr << "fatal: Projector::stringToType(" << s << ") failed" << endl;
-  exit(1);
+  assert(0);
     // just shutup the compiler, this point will never be reached
   return PERSPECTIVE_PROJECTOR;
 }
 
 Projector *Projector::create(PROJECTOR_TYPE type,
-                             int _screenW,
-                             int _screenH,
+                             const Vec4i& viewport,
                              double _fov) {
   Projector *rval = 0;
   switch (type) {
     case PERSPECTIVE_PROJECTOR:
-      rval = new Projector(_screenW,_screenH,_fov);
+      rval = new Projector(viewport,_fov);
       break;
     case FISHEYE_PROJECTOR:
-      rval = new FisheyeProjector(_screenW,_screenH,_fov);
+      rval = new FisheyeProjector(viewport,_fov);
       break;
     case CYLINDER_PROJECTOR:
-      rval = new CylinderProjector(_screenW,_screenH,_fov);
+      rval = new CylinderProjector(viewport,_fov);
       break;
     case STEREOGRAPHIC_PROJECTOR:
-      rval = new StereographicProjector(_screenW,_screenH,_fov);
+      rval = new StereographicProjector(viewport,_fov);
       break;
     case SPHERIC_MIRROR_PROJECTOR:
-      rval = new SphericMirrorProjector(_screenW,_screenH,_fov);
+      rval = new SphericMirrorProjector(viewport,_fov);
       break;
   }
   if (rval == 0) {
@@ -81,18 +80,14 @@ Projector *Projector::create(PROJECTOR_TYPE type,
   return rval;
 }
 
-Projector::Projector(int _screenW, int _screenH, double _fov)
-          :min_fov(0.0001), max_fov(100),
+Projector::Projector(const Vec4i& viewport, double _fov)
+          :maskType(NONE), fov(_fov), min_fov(0.0001), max_fov(100),
            zNear(0.1), zFar(10000),
-           flag_auto_zoom(0), hoffset(0), voffset(0), gravityLabels(0)
+           vec_viewport(viewport),
+           flag_auto_zoom(0), gravityLabels(0)
 {
-	fov = _fov;
-	if (fov>max_fov) fov = max_fov;
-	if (fov<min_fov) fov = min_fov;
-	//set_viewport(_screenW, _screenH, 0, 0);
-	set_fov(fov);
-	set_screen_size(_screenW,_screenH);
-	maximize_viewport();
+	setViewport(viewport);
+	set_fov(_fov);
 
 	  // we have no mirrored image:
 	glFrontFace(GL_CCW);
@@ -102,80 +97,52 @@ Projector::~Projector()
 {
 }
 
+// Init the viewing matrix, setting the field of view, the clipping planes, and screen ratio
+// The function is a reimplementation of gluPerspective
+void Projector::init_project_matrix(void)
+{
+	double f = 1./tan(fov*M_PI/360.);
+	double ratio = (double)getViewportHeight()/getViewportWidth();
+	mat_projection = Mat4d(	f*ratio, 0., 0., 0.,
+							0., f, 0., 0.,
+							0., 0., (zFar + zNear)/(zNear - zFar), -1.,
+							0., 0., (2.*zFar*zNear)/(zNear - zFar), 0.);
+	glMatrixMode(GL_PROJECTION);
+	glLoadMatrixd(mat_projection);
+    glMatrixMode(GL_MODELVIEW);
+}
+
+void Projector::setViewport(int x, int y, int w, int h)
+{
+	vec_viewport[0] = x;
+	vec_viewport[1] = y;
+	vec_viewport[2] = w;
+	vec_viewport[3] = h;
+	glViewport(x, y, w, h);
+	init_project_matrix();
+}
+
 void Projector::set_fov(double f)
 {
 	fov = f;
 	if (f>max_fov) fov = max_fov;
 	if (f<min_fov) fov = min_fov;
 	init_project_matrix();
-    view_scaling_factor = 1.0/fov*180./M_PI*MY_MIN(vec_viewport[2],vec_viewport[3]);
-}
-
-void Projector::set_square_viewport(void)
-{
-	glDisable(GL_STENCIL_TEST);
-	int mind = MY_MIN(screenW,screenH);
-	setViewport(hoffset + (screenW-mind)/2, voffset + (screenH-mind)/2, mind, mind);
-	viewport_type = SQUARE;
-}
-
-void Projector::set_disk_viewport(void)
-{
-  set_square_viewport();
-
-  // NOTE - no longer use stencil buffer (needed for other purposes)
-
-  glClear(GL_COLOR_BUFFER_BIT);
-
-  viewport_type = DISK;
-}
-
-void Projector::setViewportType(VIEWPORT_TYPE t)
-{
-	switch (t)
-	{
-		case SQUARE :
-			set_square_viewport(); break;
-		case DISK :
-			set_disk_viewport(); break;
-		case MAXIMIZED :
-		default :
-			maximize_viewport(); break;
-	}
 }
 
 // Fill with black around the circle
 void Projector::draw_viewport_shape(void)
 {
-	if (viewport_type != DISK) return;
+	if (maskType != DISK) return;
 
 	glDisable(GL_BLEND);
 	glColor3f(0.f,0.f,0.f);
-	set_2Dfullscreen_projection();
-	glTranslatef(hoffset+screenW/2,voffset+screenH/2,0.f);
+	set_orthographic_projection();
+	glTranslatef(getViewportPosX()+getViewportWidth()/2,getViewportPosY()+getViewportHeight()/2,0.f);
 	GLUquadricObj * p = gluNewQuadric();
-	gluDisk(p, MY_MIN(screenW,screenH)/2, screenW+screenH, 256, 1);  // should always cover whole screen
+	gluDisk(p, MY_MIN(getViewportWidth(),getViewportHeight())/2, getViewportWidth()+getViewportHeight(), 256, 1);  // should always cover whole screen
 	gluDeleteQuadric(p);
-	restore_from_2Dfullscreen_projection();
-}
-
-void Projector::setViewport(int x, int y, int w, int h)
-{
-	glDisable(GL_STENCIL_TEST);
-	vec_viewport[0] = x;
-	vec_viewport[1] = y;
-	vec_viewport[2] = w;
-	vec_viewport[3] = h;
-    view_scaling_factor = 1.0/fov*180./M_PI*MY_MIN(vec_viewport[2],vec_viewport[3]);
-	glViewport(x, y, w, h);
-	ratio = (float)h/w;
-	init_project_matrix();
-}
-
-void Projector::set_screen_size(int w, int h)
-{
-	screenW = w;
-	screenH = h;
+	reset_perspective_projection();
 }
 
 void Projector::set_clipping_planes(double znear, double zfar)
@@ -191,27 +158,6 @@ void Projector::change_fov(double deltaFov)
   if (deltaFov) set_fov(fov+deltaFov);
 }
 
-// Init the viewing matrix, setting the field of view, the clipping planes, and screen ratio
-// The function is a reimplementation of gluPerspective
-void Projector::init_project_matrix(void)
-{
-	double f = 1./tan(fov*M_PI/360.);
-	mat_projection = Mat4d(	f*ratio, 0., 0., 0.,
-							0., f, 0., 0.,
-							0., 0., (zFar + zNear)/(zNear - zFar), -1.,
-							0., 0., (2.*zFar*zNear)/(zNear - zFar), 0.);
-	glMatrixMode(GL_PROJECTION);
-	glLoadMatrixd(mat_projection);
-    glMatrixMode(GL_MODELVIEW);
-}
-
-void Projector::update_openGL(void) const
-{
-	glMatrixMode(GL_PROJECTION);
-	glLoadMatrixd(mat_projection);
-    glMatrixMode(GL_MODELVIEW);
-	glViewport(vec_viewport[0], vec_viewport[1], vec_viewport[2], vec_viewport[3]);
-}
 
 // Set the standard modelview matrices used for projection
 void Projector::set_modelview_matrices(	const Mat4d& _mat_earth_equ_to_eye,
@@ -282,31 +228,6 @@ void Projector::zoom_to(double aim_fov, float move_duration)
     flag_auto_zoom = true;
 }
 
-// Set the drawing mode in 2D for drawing in the full screen
-// Use reset_perspective_projection() to restore previous projection mode
-void Projector::set_2Dfullscreen_projection(void) const
-{
-	glViewport(0, 0, screenW, screenH);
-	glMatrixMode(GL_PROJECTION);		// projection matrix mode
-    glPushMatrix();						// store previous matrix
-    glLoadIdentity();
-    gluOrtho2D(	0, screenW,
-				0, screenH);			// set a 2D orthographic projection
-	glMatrixMode(GL_MODELVIEW);			// modelview matrix mode
-
-    glPushMatrix();
-    glLoadIdentity();
-}
-
-// Reset the previous projection mode after a call to set_orthographic_projection()
-void Projector::restore_from_2Dfullscreen_projection(void) const
-{
-    glMatrixMode(GL_PROJECTION);		// Restore previous matrix
-    glPopMatrix();
-    glMatrixMode(GL_MODELVIEW);
-	glViewport(vec_viewport[0], vec_viewport[1], vec_viewport[2], vec_viewport[3]);
-    glPopMatrix();
-}
 
 // Set the drawing mode in 2D. Use reset_perspective_projection() to reset
 // previous projection mode

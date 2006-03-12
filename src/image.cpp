@@ -179,8 +179,8 @@ void Image::draw(int screenw, int screenh, const Navigator * nav, Projector * pr
 
   //  printf("draw image %s alpha %f\n", image_name.c_str(), image_alpha);
 
-  int vieww = prj->viewW();
-  int viewh = prj->viewH();  
+  int vieww = prj->getViewportWidth();
+  int viewh = prj->getViewportHeight();  
 
   glEnable(GL_TEXTURE_2D);
   glEnable(GL_BLEND);

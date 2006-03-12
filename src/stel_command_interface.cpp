@@ -221,14 +221,12 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
       stcore->navigation->set_flag_traking(0);
 
 	  // determine if selected object pointer should be displayed
-	  if(args["pointer"]=="off" || args["pointer"]=="0") stcore->setObjectPointerVisibility(0);
-	  else stcore->setObjectPointerVisibility(1);
+	  if(args["pointer"]=="off" || args["pointer"]=="0") stcore->setFlagSelectedObjectPointer(false);
+	  else stcore->setFlagSelectedObjectPointer(true);
     }
 
   } else if (command == "deselect") {
-    stcore->selected_object = NULL;
-	stcore->setPlanetsSelected("");
-    stcore->asterisms->setSelected(NULL);
+    stcore->unSelect();
 
   } else if(command == "look") {  // change direction of view
 	  //	  double duration = str_to_pos_double(args["duration"]);

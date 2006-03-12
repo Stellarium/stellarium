@@ -344,6 +344,7 @@ void ConstellationMgr::translateNames(Translator& trans)
 	for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
 	{
 		(*iter)->nameI18 = trans.translate((*iter)->englishName.c_str());
+		//cout << (*iter)->englishName.c_str() << " -> " << StelUtility::wstringToString((*iter)->nameI18) << endl;
 	}
 }
 

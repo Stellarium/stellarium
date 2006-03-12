@@ -115,16 +115,6 @@ void StelObject::draw_pointer(int delta_time, const Projector* prj, const Naviga
     prj->reset_perspective_projection();
 }
 
-//! Write information about the object in char* s 
-wstring StelObject::get_info_string(const Navigator * nav) const
-{
-	return L"No info for this object...";
-}
-
-wstring StelObject::get_short_info_string(const Navigator * nav) const
-{
-	return L"No info";
-}
 
 void StelObject::init_textures(void)
 {

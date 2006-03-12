@@ -129,10 +129,10 @@ void Atmosphere::compute_color(double JD, Vec3d sunPos, Vec3d moonPos, float moo
 
 	skyb.set_date(date.years, date.months, moon_phase);
 
-	float stepX = (float)prj->viewW() / sky_resolution;
-	float stepY = (float)prj->viewH() / sky_resolution;
-	float viewport_left = (float)prj->view_left();
-	float viewport_bottom = (float)prj->view_bottom();
+	float stepX = (float)prj->getViewportWidth() / sky_resolution;
+	float stepY = (float)prj->getViewportHeight() / sky_resolution;
+	float viewport_left = (float)prj->getViewportPosX();
+	float viewport_bottom = (float)prj->getViewportPosY();
 
 	Vec3d point(1., 0., 0.);
 
@@ -192,10 +192,10 @@ void Atmosphere::draw(Projector* prj, int delta_time)
 		// printf("Atm int: %f\n", atm_intensity);
 		glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_COLOR);
 
-		float stepX = (float)prj->viewW() / sky_resolution;
-		float stepY = (float)prj->viewH() / sky_resolution;
-		float viewport_left = (float)prj->view_left();
-		float view_bottom = (float)prj->view_bottom();
+		float stepX = (float)prj->getViewportWidth() / sky_resolution;
+		float stepY = (float)prj->getViewportHeight() / sky_resolution;
+		float viewport_left = (float)prj->getViewportPosX();
+		float view_bottom = (float)prj->getViewportPosY();
 
 		glDisable(GL_TEXTURE_2D);
 		glEnable(GL_BLEND);

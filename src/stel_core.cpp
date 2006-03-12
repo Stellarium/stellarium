@@ -27,12 +27,12 @@ StelCore::StelCore(const string& LDIR, const string& DATA_ROOT) :
 		skyTranslator(APP_NAME, LOCALEDIR, ""),
 		projection(NULL), selected_object(NULL), hip_stars(NULL),
 		nebulas(NULL), ssystem(NULL), milky_way(NULL),deltaFov(0.), 
-		deltaAlt(0.), deltaAz(0.), move_speed(0.00025), draw_mode(StelCore::DM_NORMAL)
+		deltaAlt(0.), deltaAz(0.), move_speed(0.00025), draw_mode(StelCore::DM_NONE)
 {
 	localeDir = LDIR;
 	dataRoot = DATA_ROOT;
 
-	projection = Projector::create(Projector::PERSPECTIVE_PROJECTOR, 800, 600, 60);
+	projection = Projector::create(Projector::PERSPECTIVE_PROJECTOR, Vec4i(0,0,800,600), 60);
                                    
 	tone_converter = new ToneReproductor();
 	atmosphere = new Atmosphere();
@@ -91,7 +91,7 @@ void StelCore::init(const InitParser& conf)
 	baseFontFile = getDataDir() + "DejaVuSans.ttf";
 	
 	// Video Section
-	setScreenSize(conf.get_int("video:screen_w"), conf.get_int("video:screen_h"));
+	setViewportSize(conf.get_int("video:screen_w"), conf.get_int("video:screen_h"));
 	setViewportHorizontalOffset(conf.get_int    ("video:horizontal_offset"));
 	setViewportVerticalOffset(conf.get_int    ("video:vertical_offset"));
 	
@@ -99,22 +99,6 @@ void StelCore::init(const InitParser& conf)
 	string tmpstr = conf.get_str("projection:type");
 	const Projector::PROJECTOR_TYPE projType = Projector::stringToType(tmpstr);
 	setProjectionType(projType);
-
-	tmpstr = conf.get_str("projection:viewport");
-	Projector::VIEWPORT_TYPE viewType;
-	if (tmpstr=="maximized") viewType = Projector::MAXIMIZED;
-	else
-		if (tmpstr=="square") viewType = Projector::SQUARE;
-		else
-		{
-			if (tmpstr=="disk") viewType = Projector::DISK;
-			else
-			{
-				cerr << "ERROR : Unknown viewport type : " << tmpstr << endl;
-				exit(-1);
-			}
-		}
-	setViewportType(viewType);	
 	
 	// Init the solar system first
 	ssystem->load(getDataDir() + "ssystem.ini");
@@ -128,12 +112,11 @@ void StelCore::init(const InitParser& conf)
 	navigation->set_local_vision(Vec3f(1,1e-05,0.2));
 
 	// Load hipparcos stars & names
-	LoadingBar lb(projection, 12., baseFontFile, "logo24bits.png", getViewportW(), getViewportH());
+	LoadingBar lb(projection, 12., baseFontFile, "logo24bits.png", getViewportWidth(), getViewportHeight());
 	hip_stars->init(12.f, baseFontFile, getDataDir() + "hipparcos.fab", getDataDir() + "star_names.fab", getDataDir() + "name.fab", lb);
 
 	// Init nebulas
 	nebulas->read(12., baseFontFile, getDataDir() + "ngc2000.dat", getDataDir() + "ngc2000names.dat", getDataDir() + "nebula_textures.fab", lb);
-	nebulas->translateNames(skyTranslator);
 
 	// Init fonts : should be moved into the constructor
 	equ_grid->set_font(12., baseFontFile);
@@ -298,7 +281,8 @@ void StelCore::update(int delta_time)
 	hip_stars->update(delta_time);
 	nebulas->update(delta_time);
 	cardinals_points->update(delta_time);
-
+	milky_way->update(delta_time);
+	
 	// Compute the sun position in local coordinate
 	Vec3d temp(0.,0.,0.);
 	Vec3d sunPos = navigation->helio_to_local(temp);
@@ -337,6 +321,9 @@ void StelCore::draw(int delta_time)
 {
 	// Init openGL viewing with fov, screen size and clip planes
 	projection->set_clipping_planes(0.0005 ,50);
+
+	// Init viewport to current projector values
+	projection->applyViewport();
 
 	// Give the updated standard projection matrices to the projector
 	projection->set_modelview_matrices(	navigation->get_earth_equ_to_eye_mat(),
@@ -420,7 +407,7 @@ void StelCore::draw(int delta_time)
 
 	// draw images loaded by a script
 	projection->set_orthographic_projection();
-	script_images->draw(getViewportW(), getViewportH(), navigation, projection);
+	script_images->draw(getViewportWidth(), getViewportHeight(), navigation, projection);
 
 	projection->reset_perspective_projection();
 
@@ -443,10 +430,80 @@ void StelCore::setLandscape(const string& new_landscape_name)
 }
 
 
-void StelCore::setScreenSize(int w, int h)
+void StelCore::setViewportSize(int w, int h)
 {
-	if (w==getViewportW() && h==getViewportH()) return;
-	projection->set_screen_size(w, h);
+	if (w==getViewportWidth() && h==getViewportHeight()) return;
+	projection->setViewportWidth(w);
+	projection->setViewportHeight(h);
+}
+
+//! Find and select an object near given equatorial position
+bool StelCore::findAndSelect(const Vec3d& pos)
+{
+	StelObject* tempselect = clever_find(pos);
+	
+	// Unselect if it is the same object
+	if (tempselect!=NULL && selected_object==tempselect)
+	{
+		unSelect();
+		return true;
+	}
+
+	selected_object = tempselect;
+
+	// If an object has been found
+	if (selected_object)
+	{	
+		// If an object was selected keep the earth following
+		if (getFlagTraking()) navigation->set_flag_lock_equ_pos(1);
+		setFlagTraking(false);
+
+		if (selected_object->get_type()==StelObject::STEL_OBJECT_STAR)
+		{
+			asterisms->setSelected((HipStar*)selected_object);
+// 			// potentially record this action
+// 			std::ostringstream oss;
+// 			oss << ((HipStar *)core->selected_object)->get_hp_number();
+// 			app->scripts->record_command("select hp " + oss.str());
+		}
+		else
+		{
+			asterisms->setSelected(NULL);
+		}
+
+		if (selected_object->get_type()==StelObject::STEL_OBJECT_PLANET)
+		{
+			ssystem->setSelected((Planet*)selected_object);
+// 			// potentially record this action
+// 			app->scripts->record_command("select planet " + ((Planet *)core->selected_object)->getEnglishName());
+		}
+		else
+		{
+			ssystem->setSelected(NULL);
+		}
+
+		if (selected_object->get_type()==StelObject::STEL_OBJECT_NEBULA)
+		{
+// 			// potentially record this action
+// 			app->scripts->record_command("select nebula " + ((Nebula *)core->selected_object)->getEnglishName());
+		}
+		return true;
+	}
+	else
+	{
+		unSelect();
+		return false;
+	}
+	assert(0);	// Non reachable code
+	return false;
+}
+	
+//! Find and select an object near given screen position
+bool StelCore::findAndSelect(int x, int y)
+{
+	Vec3d v;
+	projection->unproject_earth_equ(x,getViewportHeight()-y,v);
+	return findAndSelect(v);
 }
 
 // Find an object in a "clever" way 
@@ -458,7 +515,7 @@ StelObject * StelCore::clever_find(const Vec3d& v) const
 	Vec3d winpos;
 
 	// Field of view for a 30 pixel diameter circle on screen
-	float fov_around = projection->get_fov()/MY_MIN(projection->viewW(), projection->viewH()) * 30.f;
+	float fov_around = projection->get_fov()/MY_MIN(projection->getViewportWidth(), projection->getViewportHeight()) * 30.f;
 
 	float xpos, ypos;
 	projection->project_earth_equ(v, winpos);
@@ -613,17 +670,17 @@ int StelCore::setSkyCulture(string _culture_dir)
 	if(skyCulture == _culture_dir) return 2;
 
 	// make sure culture definition exists before attempting
-	if( !skyloc->test_sky_culture_directory(_culture_dir) )
-	{
-		cerr << "Invalid sky culture directory: " << _culture_dir << endl;
-		return 0;
-	}
+// 	if( !skyloc->test_sky_culture_directory(_culture_dir) )
+// 	{
+// 		cerr << "Invalid sky culture directory: " << _culture_dir << endl;
+// 		return 0;
+// 	}
 
 	skyCulture = _culture_dir;
 
 	if(!asterisms) return 3;
 
-	LoadingBar lb(projection, 12., baseFontFile, "logo24bits.png", getViewportW(), getViewportH());
+	LoadingBar lb(projection, 12., baseFontFile, "logo24bits.png", getViewportWidth(), getViewportHeight());
 
 	asterisms->loadLinesAndArt(getDataDir() + "sky_cultures/" + skyCulture + "/constellationship.fab",
 	                           getDataDir() + "sky_cultures/" + skyCulture + "/constellationsart.fab", getDataDir() + "sky_cultures/" + skyCulture + "/boundaries.dat", lb);
@@ -707,12 +764,30 @@ void StelCore::setColorScheme(const string& skinFile, const string& section)
 	chartColor = StelUtility::str_to_vec3f(conf.get_str("color:chart_color"));
 }
 
+//! Get a color used to display info about the currently selected object
+Vec3f StelCore::getSelectedObjectInfoColor(void) const
+{
+	if (!selected_object)
+	{
+		cerr << "WARNING: StelCore::getSelectedObjectInfoColor was called while no object is currently selected!!" << endl;
+		return Vec3f(1, 1, 1);
+	}
+	if (getVisionModeNight()) return Vec3f(1.0,0.2,0.2);
+	else
+	{
+		if (selected_object->get_type()==StelObject::STEL_OBJECT_NEBULA) return nebulas->getLabelColor();
+		if (selected_object->get_type()==StelObject::STEL_OBJECT_PLANET) return ssystem->getLabelColor();
+		if (selected_object->get_type()==StelObject::STEL_OBJECT_STAR) return selected_object->get_RGB();
+	}
+	return Vec3f(1, 1, 1);
+}
+
 void StelCore::draw_chart_background(void)
 {
-	int stepX = projection->viewW();
-	int stepY = projection->viewH();
-	int viewport_left = projection->view_left();
-	int view_bottom = projection->view_bottom();
+	int stepX = projection->getViewportWidth();
+	int stepY = projection->getViewportHeight();
+	int viewport_left = projection->getViewportPosX();
+	int view_bottom = projection->getViewportPosY();
 
 	glDisable(GL_TEXTURE_2D);
 	glDisable(GL_BLEND);
@@ -746,12 +821,9 @@ void StelCore::setProjectionType(Projector::PROJECTOR_TYPE pType)
 {
 	if (getProjectionType()==pType) return;
 	Projector *const ptemp = Projector::create(pType,
-                                               projection->get_screenW(),
-                                               projection->get_screenH(),
+                                               projection->getViewport(),
                                                projection->get_fov());
-	ptemp->setViewportType(projection->getViewportType());
-	ptemp->setViewportHorizontalOffset(projection->getViewportHorizontalOffset());
-	ptemp->setViewportVerticalOffset(projection->getViewportVerticalOffset());
+	ptemp->setMaskType(projection->getMaskType());
 	ptemp->setFlagGravityLabels(projection->getFlagGravityLabels());
 	delete projection;
 	projection = ptemp;
@@ -811,6 +883,26 @@ void StelCore::zoom_in(int s)
 void StelCore::zoom_out(int s)
 {
 	if (FlagEnableZoomKeys) deltaFov = (s!=0);
+}
+
+//! Make the first screen position correspond to the second (useful for mouse dragging)
+void StelCore::dragView(int x1, int y1, int x2, int y2)
+{
+	Vec3d tempvec1, tempvec2;
+	double az1, alt1, az2, alt2;
+	if (navigation->get_viewing_mode()==Navigator::VIEW_HORIZON)
+	{
+		projection->unproject_local(x2,getViewportHeight()-y2, tempvec2);
+		projection->unproject_local(x1,getViewportHeight()-y1, tempvec1);
+	}
+	else
+	{
+		projection->unproject_earth_equ(x2,getViewportHeight()-y2, tempvec2);
+		projection->unproject_earth_equ(x1,getViewportHeight()-y1, tempvec1);
+	}
+	rect_to_sphe(&az1, &alt1, tempvec1);
+	rect_to_sphe(&az2, &alt2, tempvec2);
+	navigation->update_move(az2-az1, alt1-alt2);
 }
 
 // Increment/decrement smoothly the vision field and position

@@ -89,44 +89,38 @@ Planet::~Planet()
 }
 
 // Return the information string "ready to print" :)
-wstring Planet::get_info_string(const Navigator * nav) const
+wstring Planet::getInfoString(const Navigator * nav) const
 {
 	double tempDE, tempRA;
 	wostringstream oss;
 
-	oss << _("Name : ") << nameI18;
-
+	oss << nameI18;
 	oss.setf(ios::fixed);
 	oss.precision(1);
 	if (sphere_scale != 1.f) oss << sphere_scale;
 	oss << endl;
 
+	oss.precision(2);
+	oss << _("Magnitude: ") << compute_magnitude(nav->get_observer_helio_pos()) << endl;
+
 	Vec3d equPos = get_earth_equ_pos(nav);
 	rect_to_sphe(&tempRA,&tempDE,equPos);
-
-	oss << _("RA : ") << StelUtility::printAngleHMS(tempRA) << endl;
-	oss << _("DE : ") << StelUtility::printAngleDMS(tempDE) << endl;
-
-	oss.precision(2);
-	oss << _("Magnitude : ") << compute_magnitude(nav->get_observer_helio_pos()) << endl;
-	oss.precision(8);
-	oss << _("Distance : ") << equPos.length() << _("AU") << endl;
-
-	// calculate alt az
+	oss << _("RA/DE: ") << StelUtility::printAngleHMS(tempRA) << L"/" << StelUtility::printAngleDMS(tempDE) << endl;
+	// calculate alt az position
 	Vec3d localPos = nav->earth_equ_to_local(equPos);
 	rect_to_sphe(&tempRA,&tempDE,localPos);
 	tempRA = 3*M_PI - tempRA;  // N is zero, E is 90 degrees
 	if(tempRA > M_PI*2) tempRA -= M_PI*2;
+	oss << _("Az/Alt: ") << StelUtility::printAngleDMS(tempRA) << L"/" << StelUtility::printAngleDMS(tempDE) << endl;
 
-	oss << _("Az  : ") << StelUtility::printAngleDMS(tempRA) << endl;
-	oss << _("Alt : ") << StelUtility::printAngleDMS(tempDE) << endl;
-
+	oss.precision(8);
+	oss << _("Distance: ") << equPos.length() << _("AU") << endl;
 
 	return oss.str();
 }
 
 // Return the information string "ready to print" :)
-wstring Planet::get_short_info_string(const Navigator * nav) const
+wstring Planet::getShortInfoString(const Navigator * nav) const
 {
 	wostringstream oss;
 
@@ -410,7 +404,7 @@ void Planet::set_big_halo(const string& halotexfile)
 // Return the radius of a circle containing the object on screen
 float Planet::get_on_screen_size(const Projector* prj, const Navigator * nav)
 {
-	return atanf(radius*sphere_scale*2.f/get_earth_equ_pos(nav).length())*180./M_PI/prj->get_fov()*prj->viewH();
+	return atanf(radius*sphere_scale*2.f/get_earth_equ_pos(nav).length())*180./M_PI/prj->get_fov()*prj->getViewportHeight();
 }
 
 // Draw the Planet and all the related infos : name, circle etc..
@@ -435,11 +429,11 @@ void Planet::draw(Projector* prj, const Navigator * nav, const ToneReproductor* 
 
 	// Compute the 2D position and check if in the screen
 	float screen_sz = get_on_screen_size(prj, nav);
-	float viewport_left = prj->view_left();
-	float viewport_bottom = prj->view_bottom();
+	float viewport_left = prj->getViewportPosX();
+	float viewport_bottom = prj->getViewportPosY();
 	if (prj->project_custom(Vec3f(0,0,0), screenPos, mat) &&
-	        screenPos[1]>viewport_bottom - screen_sz && screenPos[1]<viewport_bottom + prj->viewH()+screen_sz &&
-	        screenPos[0]>viewport_left - screen_sz && screenPos[0]<viewport_left + prj->viewW() + screen_sz)
+	        screenPos[1]>viewport_bottom - screen_sz && screenPos[1]<viewport_bottom + prj->getViewportHeight()+screen_sz &&
+	        screenPos[0]>viewport_left - screen_sz && screenPos[0]<viewport_left + prj->getViewportWidth() + screen_sz)
 	{
 		// Draw the name, and the circle if it's not too close from the body it's turning around
 		// this prevents name overlaping (ie for jupiter satellites)

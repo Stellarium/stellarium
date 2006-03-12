@@ -20,6 +20,7 @@
 #include <config.h>
 #include <cassert>
 #include <locale>
+#include <dirent.h>
 
 #include "translator.h"
 
@@ -40,7 +41,7 @@ void Translator::reload()
 	if (Translator::lastUsed == this) return;
 	// This needs to be static as it is used a each gettext call... It tooks me quite a while before I got that :(
 	static char envstr[25];
-	if (langName=="system" || langName=="system_default") 
+	if (langName=="system" || langName=="system_default")
 	{
 		snprintf(envstr, 25, "LANGUAGE=%s", Translator::systemLangName.c_str());
 	}
@@ -51,50 +52,56 @@ void Translator::reload()
 	//printf("Setting locale: %s\n", envstr);
 	putenv(envstr);
 	setlocale(LC_MESSAGES, "");
-	
+
 	std::string result = bind_textdomain_codeset(domain.c_str(), "UTF-8");
 	assert(result=="UTF-8");
-	bindtextdomain (domain.c_str(), moDirectory.c_str());	
+	bindtextdomain (domain.c_str(), moDirectory.c_str());
 	textdomain (domain.c_str());
 	Translator::lastUsed = this;
 }
 
-/** Convert from ASCII to wchar_t */
+//! Convert from ASCII to wchar_t
 // static wchar_t *ASCII_to_UNICODE(wchar_t *unicode, const char *text, int len)
 // {
 // 	int i;
-// 
+//
 // 	for ( i=0; i < len; ++i ) {
 // 		unicode[i] = ((const unsigned char *)text)[i];
 // 	}
 // 	unicode[i] = 0;
-// 
+//
 // 	return unicode;
 // }
 
-/** Convert from char* UTF-8 to wchar_t UCS4 - stolen from SDL_ttf library */
+//! Convert from char* UTF-8 to wchar_t UCS4 - stolen from SDL_ttf library
 static wchar_t *UTF8_to_UNICODE(wchar_t *unicode, const char *utf8, int len)
 {
 	int i, j;
 	wchar_t ch;
 
-	for ( i=0, j=0; i < len; ++i, ++j ) {
+	for ( i=0, j=0; i < len; ++i, ++j )
+	{
 		ch = ((const unsigned char *)utf8)[i];
-		if ( ch >= 0xF0 ) {
+		if ( ch >= 0xF0 )
+		{
 			ch  =  (wchar_t)(utf8[i]&0x07) << 18;
 			ch |=  (wchar_t)(utf8[++i]&0x3F) << 12;
 			ch |=  (wchar_t)(utf8[++i]&0x3F) << 6;
 			ch |=  (wchar_t)(utf8[++i]&0x3F);
-		} else
-		if ( ch >= 0xE0 ) {
-			ch  =  (wchar_t)(utf8[i]&0x3F) << 12;
-			ch |=  (wchar_t)(utf8[++i]&0x3F) << 6;
-			ch |=  (wchar_t)(utf8[++i]&0x3F);
-		} else
-		if ( ch >= 0xC0 ) {
-			ch  =  (wchar_t)(utf8[i]&0x3F) << 6;
-			ch |=  (wchar_t)(utf8[++i]&0x3F);
 		}
+		else
+			if ( ch >= 0xE0 )
+			{
+				ch  =  (wchar_t)(utf8[i]&0x3F) << 12;
+				ch |=  (wchar_t)(utf8[++i]&0x3F) << 6;
+				ch |=  (wchar_t)(utf8[++i]&0x3F);
+			}
+			else
+				if ( ch >= 0xC0 )
+				{
+					ch  =  (wchar_t)(utf8[i]&0x3F) << 6;
+					ch |=  (wchar_t)(utf8[++i]&0x3F);
+				}
 		unicode[j] = ch;
 	}
 	unicode[j] = 0;
@@ -102,10 +109,8 @@ static wchar_t *UTF8_to_UNICODE(wchar_t *unicode, const char *utf8, int len)
 	return unicode;
 }
 
-/** 
- * Convert from UTF-8 to wchar_t 
- * Warning this is likely to be not very portable
- */
+//! Convert from UTF-8 to wchar_t
+//! Warning this is likely to be not very portable
 std::wstring Translator::UTF8stringToWstring(const string& s)
 {
 	wchar_t* outbuf = new wchar_t[s.length()+1];
@@ -115,27 +120,35 @@ std::wstring Translator::UTF8stringToWstring(const string& s)
 	return ws;
 }
 
+//! Ge available language codes from directory tree
+std::string Translator::getAvailableLanguagesCodes(const string& localeDir)
+{
+	struct dirent *entryp;
+	DIR *dp;
+	string result="";
+	
+	cout << "Reading stellarium translations in directory: " << localeDir << endl;
 
-//! @brief Create a locale matching with a locale name
-// std::locale Translator::tryLocale(const string& localeName)
-// {
-// 	std::locale loc;
-// 	if (localeName=="system_default" || localeName=="system")
-// 	{
-// 		return std::locale("");
-// 	}
-// 	else
-// 	{
-// 		try
-// 		{
-// 			loc = std::locale(localeName.c_str());
-// 		}
-// 		catch (const std::exception& e)
-// 		{
-// 			cout << e.what() << " \"" << localeName << "\" : revert to default locale \"" << std::locale("").name() << "\"" << endl;
-// 			// Fallback with current locale
-// 			loc = std::locale("");
-// 		}
-// 	}
-// 	return loc;
-// }
+	if ((dp = opendir(localeDir.c_str())) == NULL)
+	{
+		cerr << "Unable to find locale directory containing translations:" << localeDir << endl;
+		return "";
+	}
+
+	while ((entryp = readdir(dp)) != NULL)
+	{
+		string tmp = entryp->d_name;
+		string tmpdir = localeDir+"/"+tmp+"/LC_MESSAGES/stellarium.mo";
+		FILE* fic = fopen(tmpdir.c_str(), "r");
+		if (fic)
+		{
+			if (result!="") result+="\n"; 
+			result += tmp;
+			fclose(fic);
+		}
+	}
+	closedir(dp);
+	
+	return result;
+}
+

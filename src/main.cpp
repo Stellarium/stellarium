@@ -200,7 +200,7 @@ void setDirectories(const char* executableName)
 		}
 
 		// First launch for that user : set default options by copying the default files
-		system( (string("cp ") + DATA_ROOT + "/config/default_config.ini " + CDIR + "config.ini").c_str() );
+		system( (string("cp ") + DATA_ROOT + "/data/default_config.ini " + CDIR + "config.ini").c_str() );
 	}
 #endif	// Unix system
 
