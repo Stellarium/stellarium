@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: stellarium@free.fr\n"
-"POT-Creation-Date: 2006-03-09 10:23+0100\n"
+"POT-Creation-Date: 2006-03-12 04:29+0100\n"
 "PO-Revision-Date: 2005-04-21 03:27+0100\n"
 "Last-Translator: Tomasz Adam <topthrilldragster@op.pl>\n"
 "Language-Team:\n"
@@ -45,75 +45,65 @@ msgstr "Spróbuj `%s --pomoc' po więcej informacji.\n"
 msgid "Loading Constellation Art: "
 msgstr "Ładowanie obrazów gwiazdozbiorów : "
 
-#: src/hip_star.cpp:77 src/planet.cpp:97
-msgid "Name : "
-msgstr "Nazwa : "
+#: src/hip_star.cpp:91 src/nebula.cpp:84 src/planet.cpp:104
+#, fuzzy
+msgid "Magnitude: "
+msgstr "Jasność : "
 
-#: src/hip_star.cpp:88
-msgid "(Dbl)"
-msgstr "(podwójna)"
-
-#: src/hip_star.cpp:89
-msgid "(Var)"
+#: src/hip_star.cpp:92
+#, fuzzy
+msgid " (Variable)"
 msgstr "(zmienna)"
 
-#: src/hip_star.cpp:104 src/nebula.cpp:82
+#: src/hip_star.cpp:94 src/nebula.cpp:86 src/planet.cpp:108
 msgid "RA/DE: "
 msgstr ""
 
-#: src/hip_star.cpp:110 src/nebula.cpp:89
+#: src/hip_star.cpp:100 src/nebula.cpp:92 src/planet.cpp:114
 msgid "Az/Alt: "
 msgstr ""
 
-#: src/hip_star.cpp:112
-msgid "Spectral : "
-msgstr "Typ widmowy : "
-
-#: src/hip_star.cpp:115 src/nebula.cpp:93 src/planet.cpp:111
-msgid "Magnitude : "
-msgstr "Jasność : "
-
-#: src/hip_star.cpp:116 src/planet.cpp:113
-msgid "Distance : "
+#: src/hip_star.cpp:102 src/planet.cpp:117
+#, fuzzy
+msgid "Distance: "
 msgstr "Odległość : "
 
-#: src/hip_star.cpp:120
+#: src/hip_star.cpp:104
 msgid " Light Years"
 msgstr " Lata świetlne"
 
-#: src/hip_star.cpp:137 src/planet.cpp:137
-msgid ": mag "
-msgstr ": mag "
-
-#: src/hip_star.cpp:138
-msgid "ly"
-msgstr "l.św."
+#: src/hip_star.cpp:118
+#, fuzzy
+msgid "Spectral Type: "
+msgstr "Typ widmowy : "
 
 #: src/hip_star_mgr.cpp:176
 msgid "Loading Hipparcos catalog:"
 msgstr "Ładowanie katalogu Hipparcosa :"
 
-#: src/hip_star_mgr.cpp:855 src/hip_star_mgr.cpp:1522
+#: src/hip_star_mgr.cpp:851 src/hip_star_mgr.cpp:1518
 #, c-format
 msgid "Loading HIP/SAO catalogs: %d/%d"
 msgstr "Ładowanie katalogu HIP/SAO : %d/%d"
 
-#: src/hip_star_mgr.cpp:1198
+#: src/hip_star_mgr.cpp:1194
 #, c-format
 msgid "Loading HIP catalog: %d/%d"
 msgstr "Ładowanie katalogu Hipparcosa : %d/%d"
 
-#: src/hip_star_mgr.cpp:1293
+#: src/hip_star_mgr.cpp:1289
 #, c-format
 msgid "Loading SAO catalog: %d/%d"
 msgstr "Ładowanie katalogu SAO : %d/%d"
 
 #: src/nebula.cpp:94
-msgid "Type : "
+#, fuzzy
+msgid "Type: "
 msgstr "Typ : "
 
 #: src/nebula.cpp:95
-msgid "Size : "
+#, fuzzy
+msgid "Size: "
 msgstr "Rozmiar : "
 
 #: src/nebula_mgr.cpp:253
@@ -124,25 +114,13 @@ msgstr "Ładowanie katalogu NGC: "
 msgid "Loading Nebula Textures:"
 msgstr "Ładowanie tekstur mgławic:"
 
-#: src/planet.cpp:107
-msgid "RA : "
-msgstr "RA : "
-
-#: src/planet.cpp:108
-msgid "DE : "
-msgstr "DE : "
-
-#: src/planet.cpp:113
+#: src/planet.cpp:117
 msgid "AU"
 msgstr "AU"
 
-#: src/planet.cpp:121
-msgid "Az  : "
-msgstr "Azymut "
-
-#: src/planet.cpp:122
-msgid "Alt : "
-msgstr "Wysokość "
+#: src/planet.cpp:131
+msgid ": mag "
+msgstr ": mag "
 
 #: src/stel_ui.cpp:195
 msgid "Message"
@@ -245,29 +223,37 @@ msgid "Return to Current Time"
 msgstr "Przywróć aktualny czas"
 
 #: src/stel_ui.cpp:654
+#, fuzzy
 msgid ""
 "   Please check for newer versions and send bug reports\n"
-"and comments to us at: http://www.stellarium.org\n"
+"\t                                   and comments to us at: http://www."
+"stellarium.org\n"
 "\n"
 msgstr ""
+"   Proszę sprawdzić ostatnią wersję programu i zostawić zgłoszenie o błędzie "
+"i komentarz\n"
+"na stronie programu http://stellarium.sourceforge.net\n"
+"\n"
 
 #: src/stel_ui.cpp:673
 msgid "Information"
 msgstr "Informacja"
 
 #: src/stel_ui.cpp:685
+#, fuzzy
 msgid ""
 "Movement & selection:\n"
-"Arrow Keys       : Change viewing RA/DE\n"
-"Page Up/Down     : Zoom\n"
-"CTRL+Up/Down     : Zoom\n"
-"Left Click       : Select object\n"
-"Right Click      : Unselect\n"
-"CTRL+Left Click  : Unselect\n"
-"\\                : Zoom out (planet + moons if applicable)\n"
-"/                : Zoom to selected object\n"
-"SPACE            : Center on selected object\n"
-"\n"
+"\t                            Arrow Keys       : Change viewing RA/DE\n"
+"\t                            Page Up/Down     : Zoom\n"
+"\t                            CTRL+Up/Down     : Zoom\n"
+"\t                            Left Click       : Select object\n"
+"\t                            Right Click      : Unselect\n"
+"\t                            CTRL+Left Click  : Unselect\n"
+"\t                            \\                : Zoom out (planet + moons "
+"if applicable)\n"
+"\t                            /                : Zoom to selected object\n"
+"\t                            SPACE            : Center on selected object\n"
+"\t                            \n"
 msgstr ""
 "Przesuwanie i wybieranie:\n"
 "Klawisze kursora: Zmień RA/DE\n"
@@ -282,19 +268,25 @@ msgstr ""
 "\n"
 
 #: src/stel_ui.cpp:696
+#, fuzzy
 msgid ""
 "Display options:\n"
-"ENTER : Equatorial/altazimuthal mount\n"
-"F1  : Toggle fullscreen if possible.\n"
-"C   : Constellation lines       V   : Constellation labels\n"
-"R   : Constellation art         E   : Equatorial grid\n"
-"Z   : Azimuthal grid            N   : Nebula labels\n"
-"P   : Planet labels             G   : Ground\n"
-"A   : Atmosphere                F   : Fog\n"
-"Q   : Cardinal points           O   : Toggle moon scaling\n"
-"T   : Object tracking           S   : Stars\n"
-"4 , : Ecliptic line             5 . : Equator line\n"
-"\n"
+"\t                            ENTER : Equatorial/altazimuthal mount\n"
+"\t                            F1  : Toggle fullscreen if possible.\n"
+"\t                            C   : Constellation lines       V   : "
+"Constellation labels\n"
+"\t                            R   : Constellation art         E   : "
+"Equatorial grid\n"
+"\t                            Z   : Azimuthal grid            N   : Nebula "
+"labels\n"
+"\t                            P   : Planet labels             G   : Ground\n"
+"\t                            A   : Atmosphere                F   : Fog\n"
+"\t                            Q   : Cardinal points           O   : Toggle "
+"moon scaling\n"
+"\t                            T   : Object tracking           S   : Stars\n"
+"\t                            4 , : Ecliptic line             5 . : Equator "
+"line\n"
+"\t                            \n"
 msgstr ""
 "Opcje wyświetlania:\n"
 "Enter: Montaż Paralaktyczny/Azymutalny\n"
@@ -310,14 +302,17 @@ msgstr ""
 "\n"
 
 #: src/stel_ui.cpp:708
+#, fuzzy
 msgid ""
 "Dialogs & other controls:\n"
-"H   : Help                      I   : About Stellarium\n"
-"M   : Text menu                 1 (one)  : Configuration\n"
-"CTRL + S : Take a screenshot\n"
-"CTRL + R : Toggle script recording\n"
-"CTRL + F : Toggle object finder\n"
-"\n"
+"\t                            H   : Help                      I   : About "
+"Stellarium\n"
+"\t                            M   : Text menu                 1 (one)  : "
+"Configuration\n"
+"\t                            CTRL + S : Take a screenshot\n"
+"\t                            CTRL + R : Toggle script recording\n"
+"\t                            CTRL + F : Toggle object finder\n"
+"\t                            \n"
 msgstr ""
 "Dialogi i inne:\n"
 "H: Pomoc| :O Stellarium\n"
@@ -328,14 +323,20 @@ msgstr ""
 "\n"
 
 #: src/stel_ui.cpp:715
+#, fuzzy
 msgid ""
 "Time & Date:\n"
-"6   : Time rate pause           7   : Time rate 0\n"
-"8   : Set current time          J   : Decrease time rate\n"
-"K   : Normal time rate          L   : Increase time rate\n"
-"-   : Back 24 hours             =   : Forward 24 hours\n"
-"[   : Back 7 days               ]   : Forward 7 days\n"
-"\n"
+"\t                            6   : Time rate pause           7   : Time "
+"rate 0\n"
+"\t                            8   : Set current time          J   : Decrease "
+"time rate\n"
+"\t                            K   : Normal time rate          L   : Increase "
+"time rate\n"
+"\t                            -   : Back 24 hours             =   : Forward "
+"24 hours\n"
+"\t                            [   : Back 7 days               ]   : Forward "
+"7 days\n"
+"\t                            \n"
 msgstr ""
 "Data i czas:\n"
 "6 : Pauza 7 : Zerowy upływ czasu\n"
@@ -346,11 +347,13 @@ msgstr ""
 "\n"
 
 #: src/stel_ui.cpp:722
+#, fuzzy
 msgid ""
 "During Script Playback:\n"
-"CTRL + C : End Script\n"
-"6   : pause script              K   : resume script\n"
-"\n"
+"\t                            CTRL + C : End Script\n"
+"\t                            6   : pause script              K   : resume "
+"script\n"
+"\t                            \n"
 msgstr ""
 "Podczas działania skryptu:\n"
 "CTRL + C : Zakończ skrypt\n"
@@ -358,9 +361,10 @@ msgstr ""
 "\n"
 
 #: src/stel_ui.cpp:726
+#, fuzzy
 msgid ""
 "Misc:\n"
-"9   : Toggle meteor shower rates\n"
+"\t                            9   : Toggle meteor shower rates\n"
 msgstr "9: Intensywność deszczu meteorytów\n"
 
 #: src/stel_ui.cpp:729
@@ -375,19 +379,19 @@ msgstr "CMD+Q : Wyjście\n"
 msgid "Help"
 msgstr "Pomoc"
 
-#: src/stel_ui.cpp:1085
+#: src/stel_ui.cpp:1014
 msgid "Command recording stopped."
 msgstr "Wpisywanie komend zatrzymane"
 
-#: src/stel_ui.cpp:1093
+#: src/stel_ui.cpp:1022
 msgid "Recording commands to script file:\n"
 msgstr "Zapisywanie komand do pliku:\n"
 
-#: src/stel_ui.cpp:1095
+#: src/stel_ui.cpp:1024
 msgid "Hit CTRL-R again to stop.\n"
 msgstr "Wciśnij CTRL+R jeszcze raz by zatrzymać.\n"
 
-#: src/stel_ui.cpp:1099
+#: src/stel_ui.cpp:1028
 msgid "Error: Unable to open script file to record commands."
 msgstr "Błąd: Nie można było otworzyć pliku skryptu do komand."
 
@@ -633,187 +637,187 @@ msgstr "Planety i księżyce"
 msgid "Enter observatory name"
 msgstr "Wpisz nazwę obserwatorium"
 
-#: src/stel_ui_conf.cpp:1106
+#: src/stel_ui_conf.cpp:1093
 msgid "Current Time Speed is x"
 msgstr "Aktualnie prędkość upływu czasu wynosi x"
 
-#: src/stel_ui_tuiconf.cpp:77
+#: src/stel_ui_tuiconf.cpp:74
 msgid "Set Location "
 msgstr "Ustaw lokalizację "
 
-#: src/stel_ui_tuiconf.cpp:78
+#: src/stel_ui_tuiconf.cpp:75
 msgid "Set Time "
 msgstr "Ustaw czas "
 
-#: src/stel_ui_tuiconf.cpp:79
+#: src/stel_ui_tuiconf.cpp:76
 msgid "General "
 msgstr "Podstawowe "
 
-#: src/stel_ui_tuiconf.cpp:80
+#: src/stel_ui_tuiconf.cpp:77
 msgid "Stars "
 msgstr "Gwiazdy "
 
-#: src/stel_ui_tuiconf.cpp:81
+#: src/stel_ui_tuiconf.cpp:78
 msgid "Colors "
 msgstr "Kolory "
 
-#: src/stel_ui_tuiconf.cpp:82
+#: src/stel_ui_tuiconf.cpp:79
 msgid "Effects "
 msgstr "Efekty "
 
-#: src/stel_ui_tuiconf.cpp:83
+#: src/stel_ui_tuiconf.cpp:80
 msgid "Scripts "
 msgstr "Skrypty "
 
-#: src/stel_ui_tuiconf.cpp:84
+#: src/stel_ui_tuiconf.cpp:81
 msgid "Administration "
 msgstr "Administracja "
 
-#: src/stel_ui_tuiconf.cpp:95
+#: src/stel_ui_tuiconf.cpp:92
 msgid "Latitude: "
 msgstr "Długość: "
 
-#: src/stel_ui_tuiconf.cpp:97
+#: src/stel_ui_tuiconf.cpp:94
 msgid "Longitude: "
 msgstr "Szerokość: "
 
-#: src/stel_ui_tuiconf.cpp:99
+#: src/stel_ui_tuiconf.cpp:96
 msgid "Altitude (m): "
 msgstr "Wysokość n.p.m. (m): "
 
-#: src/stel_ui_tuiconf.cpp:106
+#: src/stel_ui_tuiconf.cpp:103
 msgid "Sky Time: "
 msgstr "Czas gwiazdowy: "
 
-#: src/stel_ui_tuiconf.cpp:108
+#: src/stel_ui_tuiconf.cpp:105
 msgid "Set Time Zone: "
 msgstr "Ustaw strefę czasową: "
 
-#: src/stel_ui_tuiconf.cpp:111
+#: src/stel_ui_tuiconf.cpp:108
 msgid "Preset Sky Time: "
 msgstr "Domyślny czas gwiazdowy: "
 
-#: src/stel_ui_tuiconf.cpp:113
+#: src/stel_ui_tuiconf.cpp:110
 msgid "Sky Time At Start-up: "
 msgstr "Czas gwiazdowy po uruchomieniu programu: "
 
-#: src/stel_ui_tuiconf.cpp:117
+#: src/stel_ui_tuiconf.cpp:114
 msgid "Time Display Format: "
 msgstr "Format wyświetlania czasu: "
 
-#: src/stel_ui_tuiconf.cpp:122
+#: src/stel_ui_tuiconf.cpp:119
 msgid "Date Display Format: "
 msgstr "Format wyświetlania daty: "
 
-#: src/stel_ui_tuiconf.cpp:139
+#: src/stel_ui_tuiconf.cpp:136
 msgid "Sky Culture: "
 msgstr "Kultura nieba: "
 
-#: src/stel_ui_tuiconf.cpp:144
+#: src/stel_ui_tuiconf.cpp:141
 msgid "Sky Language: "
 msgstr "Język: "
 
-#: src/stel_ui_tuiconf.cpp:152
+#: src/stel_ui_tuiconf.cpp:149
 msgid "Show: "
 msgstr "Pokaż: "
 
-#: src/stel_ui_tuiconf.cpp:152 src/stel_ui_tuiconf.cpp:190
+#: src/stel_ui_tuiconf.cpp:149 src/stel_ui_tuiconf.cpp:187
 msgid "Yes"
 msgstr "Tak"
 
-#: src/stel_ui_tuiconf.cpp:152 src/stel_ui_tuiconf.cpp:190
+#: src/stel_ui_tuiconf.cpp:149 src/stel_ui_tuiconf.cpp:187
 msgid "No"
 msgstr "Nie"
 
-#: src/stel_ui_tuiconf.cpp:154
+#: src/stel_ui_tuiconf.cpp:151
 msgid "Star Magnitude Multiplier: "
 msgstr "Mnożnik jasności gwiazd: "
 
-#: src/stel_ui_tuiconf.cpp:156
+#: src/stel_ui_tuiconf.cpp:153
 msgid "Maximum Magnitude to Label: "
 msgstr "Podpisy maksymalnie do jasności: "
 
-#: src/stel_ui_tuiconf.cpp:158
+#: src/stel_ui_tuiconf.cpp:155
 msgid "Twinkling: "
 msgstr "Mruganie: "
 
-#: src/stel_ui_tuiconf.cpp:167
+#: src/stel_ui_tuiconf.cpp:164
 msgid "Constellation lines: "
 msgstr "Linie gwiazdozbiorów: "
 
-#: src/stel_ui_tuiconf.cpp:171
+#: src/stel_ui_tuiconf.cpp:168
 msgid "Constellation labels: "
 msgstr "Podpisy gwiazdozbiorów: "
 
-#: src/stel_ui_tuiconf.cpp:175
+#: src/stel_ui_tuiconf.cpp:172
 msgid "Cardinal points: "
 msgstr "Punkty kardynalne: "
 
-#: src/stel_ui_tuiconf.cpp:184
+#: src/stel_ui_tuiconf.cpp:181
 msgid "Landscape: "
 msgstr "krajobraz: "
 
-#: src/stel_ui_tuiconf.cpp:190
+#: src/stel_ui_tuiconf.cpp:187
 msgid "Manual zoom: "
 msgstr "przbliżanie i oddalanie ręczne: "
 
-#: src/stel_ui_tuiconf.cpp:194
+#: src/stel_ui_tuiconf.cpp:191
 msgid "Object Sizing Rule: "
 msgstr "Miara skalowania obiektów: "
 
-#: src/stel_ui_tuiconf.cpp:194
+#: src/stel_ui_tuiconf.cpp:191
 msgid "Point"
 msgstr "Punkt"
 
-#: src/stel_ui_tuiconf.cpp:194
+#: src/stel_ui_tuiconf.cpp:191
 msgid "Magnitude"
 msgstr "Jasność"
 
-#: src/stel_ui_tuiconf.cpp:198
+#: src/stel_ui_tuiconf.cpp:195
 msgid "Magnitude Sizing Multiplier: "
 msgstr "Mnożnik zwiększania jasności: "
 
-#: src/stel_ui_tuiconf.cpp:202
+#: src/stel_ui_tuiconf.cpp:199
 msgid "Milky Way intensity: "
 msgstr "Jasność drogi mlecznej: "
 
-#: src/stel_ui_tuiconf.cpp:206
+#: src/stel_ui_tuiconf.cpp:203
 msgid "Maximum Nebula Magnitude to Label: "
 msgstr "Podpisy Mgławic maksymalnie do jasności: "
 
-#: src/stel_ui_tuiconf.cpp:210
+#: src/stel_ui_tuiconf.cpp:207
 msgid "Zoom Duration: "
 msgstr "Trwanie przybliżenia: "
 
-#: src/stel_ui_tuiconf.cpp:214
+#: src/stel_ui_tuiconf.cpp:211
 msgid "Cursor Timeout: "
 msgstr "Czas kursora: "
 
-#: src/stel_ui_tuiconf.cpp:220
+#: src/stel_ui_tuiconf.cpp:217
 msgid "Local Script: "
 msgstr "Skrypt lokalny: "
 
-#: src/stel_ui_tuiconf.cpp:226
+#: src/stel_ui_tuiconf.cpp:223
 msgid "CD/DVD Script: "
 msgstr "Skrypt CD/DVD: "
 
-#: src/stel_ui_tuiconf.cpp:234
+#: src/stel_ui_tuiconf.cpp:231
 msgid "Load Default Configuration: "
 msgstr "Lokalne ustawienia domyślne: "
 
-#: src/stel_ui_tuiconf.cpp:236
+#: src/stel_ui_tuiconf.cpp:233
 msgid "Save Current Configuration as Default: "
 msgstr "Ustal ustawienia jako domyślne: "
 
-#: src/stel_ui_tuiconf.cpp:238
+#: src/stel_ui_tuiconf.cpp:235
 msgid "Update me via Internet: "
 msgstr "Aktualizacja przez internet "
 
-#: src/stel_ui_tuiconf.cpp:254
+#: src/stel_ui_tuiconf.cpp:251
 msgid "N-S Centering Offset: "
 msgstr "środkowanie N-S "
 
-#: src/stel_ui_tuiconf.cpp:258
+#: src/stel_ui_tuiconf.cpp:255
 msgid "E-W Centering Offset: "
 msgstr "środkowanie E-W "
 
@@ -1293,6 +1297,27 @@ msgstr "Panna"
 msgid "Vela"
 msgstr "Żagiel"
 
+#~ msgid "ly"
+#~ msgstr "l.św."
+
+#~ msgid "Name : "
+#~ msgstr "Nazwa : "
+
+#~ msgid "(Dbl)"
+#~ msgstr "(podwójna)"
+
+#~ msgid "RA : "
+#~ msgstr "RA : "
+
+#~ msgid "DE : "
+#~ msgstr "DE : "
+
+#~ msgid "Az  : "
+#~ msgstr "Azymut "
+
+#~ msgid "Alt : "
+#~ msgstr "Wysokość "
+
 #~ msgid " (UTC)"
 #~ msgstr " (UTC)"
 
@@ -1304,16 +1329,6 @@ msgstr "Żagiel"
 
 #~ msgid "Loading Cadwell catalog:"
 #~ msgstr "Ładowanie katalogu Cadwella:"
-
-#~ msgid ""
-#~ "   Please check for newer versions and send bug reports\n"
-#~ "and comments to us at: http://stellarium.sourceforge.net\n"
-#~ "\n"
-#~ msgstr ""
-#~ "   Proszę sprawdzić ostatnią wersję programu i zostawić zgłoszenie o "
-#~ "błędzie i komentarz\n"
-#~ "na stronie programu http://stellarium.sourceforge.net\n"
-#~ "\n"
 
 #~ msgid ""
 #~ "ERROR : I can't find the datas directories in :\n"
