@@ -106,7 +106,7 @@ void StelCore::init(const InitParser& conf)
  	ssystem->setFont(14.f, baseFontFile);
 	setPlanetsScale(getStarScale());
 
-	observatory->load(getDataDir()+"/default_config.ini", "init_location");
+	observatory->load(conf, "init_location");
 
 	navigation->set_JDay(get_julian_from_sys());
 	navigation->set_local_vision(Vec3f(1,1e-05,0.2));
