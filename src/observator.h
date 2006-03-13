@@ -20,6 +20,7 @@
 #ifndef _OBSERVATOR_H_
 #define _OBSERVATOR_H_
 
+#include "init_parser.h"
 
 class Observator
 {
@@ -56,6 +57,7 @@ public:
 
 	void save(const string& file, const string& section) const;
 	void load(const string& file, const string& section);
+	void load(const InitParser& conf, const string& section);
 
 	wstring get_printable_date_UTC(double JD) const;
 	wstring get_printable_date_local(double JD) const;

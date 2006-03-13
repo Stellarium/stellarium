@@ -77,16 +77,17 @@ void Observator::load(const string& file, const string& section)
 {
 	InitParser conf;
 	conf.load(file);
-
 	if (!conf.find_entry(section))
 	{
 		cerr << "ERROR : Can't find observator section " << section << " in file " << file << endl;
-		exit(-1);
+		assert(0);
 	}
+	load(conf, section);
+}
 
+void Observator::load(const InitParser& conf, const string& section)
+{
 	name = _(conf.get_str(section, "name").c_str());
-
-	printf("Loading location: \"%s\", ", StelUtility::wstringToString(name).c_str());
 
 	for (string::size_type i=0;i<name.length();++i)
 	{
@@ -97,6 +98,9 @@ void Observator::load(const string& file, const string& section)
     if (planet == 0) {
       planet = ssystem.getEarth();
     }
+    
+    cout << "Loading location: \"" << StelUtility::wstringToString(name) <<"\", on " << planet->getEnglishName();
+    
     //    printf("(home_planet should be: \"%s\" is: \"%s\") ",
     //       conf.get_str(section, "home_planet").c_str(),
     //       planet->getEnglishName().c_str());
@@ -105,7 +109,7 @@ void Observator::load(const string& file, const string& section)
 	altitude = conf.get_int(section, "altitude");
 	set_landscape_name(conf.get_str(section, "landscape_name", "sea"));
 
-	printf("(landscape is: \"%s\")\n", landscape_name.c_str());
+	printf(" (landscape is: \"%s\")\n", landscape_name.c_str());
 
 	string tzstr = conf.get_str(section, "time_zone");
 	if (tzstr == "system_default")
