@@ -19,6 +19,10 @@ The observer may be located on any planet (or satellite)
 Planet twilight zones are darker than bright zones of a planet (as it was already in 0.5.1)
 new projection types: stereographic (quite ok), spheric_mirror (just early alpha)
 Planet oblateness
+Splitted StelCore class into two separated classes : StelCore and StelApp.
+Added many new .po files for translation in more languages.
+Auto-scan available translations.
+Improved mouse zoom control.
 
 0.7.1 [2005-09-17]
 Fixed location saving bug.
