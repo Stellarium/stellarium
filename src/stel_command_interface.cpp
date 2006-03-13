@@ -454,7 +454,7 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 		  audio->play(args["loop"]=="on");
 
 		  // if fast forwarding mute (pause) audio
-		  if(stcore->getTimeMultiplier()!=1) audio->pause();
+		  if(stapp->getTimeMultiplier()!=1) audio->pause();
 
 	  } else if(args["volume"]!="") {
 
