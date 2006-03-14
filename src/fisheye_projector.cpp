@@ -73,14 +73,16 @@ bool FisheyeProjector::project_custom(const Vec3d &v,Vec3d &win,
     // but the omitted sqrt is still worth it.
     // I think that for calculating win[2] we need no sqrt.
     // Johannes.
-  win = v;
-  win.transfo4d(mat);
-  const double h = sqrt(win[0]*win[0]+win[1]*win[1]);
-  const double a = M_PI_2 + atan(win[2]/h);
-  const double f = (a*view_scaling_factor) / h;
+	// Fab) Removed one division
+  win[0] = mat.r[0]*v[0] + mat.r[4]*v[1] +  mat.r[8]*v[2] + mat.r[12];
+  win[1] = mat.r[1]*v[0] + mat.r[5]*v[1] +  mat.r[9]*v[2] + mat.r[13];
+  win[2] = mat.r[2]*v[0] + mat.r[6]*v[1] + mat.r[10]*v[2] + mat.r[14];
+  const double oneoverh = 1./sqrt(win[0]*win[0]+win[1]*win[1]);
+  const double a = M_PI_2 + atan(win[2]*oneoverh);
+  const double f = (a*view_scaling_factor) * oneoverh;
   win[0] = center[0] + win[0] * f;
   win[1] = center[1] + win[1] * f;
-  win[2] = (fabs(win[2]) - zNear) / (zFar-zNear);
+  win[2] = (win[2] - zNear) / (zFar-zNear);
   return (a<0.9*M_PI) ? true : false;
 }
 
