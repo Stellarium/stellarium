@@ -320,7 +320,7 @@ void StelCore::update(int delta_time)
 void StelCore::draw(int delta_time)
 {
 	// Init openGL viewing with fov, screen size and clip planes
-	projection->set_clipping_planes(0.0005 ,50);
+	projection->set_clipping_planes(0.000001 ,50);
 
 	// Init viewport to current projector values
 	projection->applyViewport();
