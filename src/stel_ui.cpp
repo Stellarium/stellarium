@@ -649,25 +649,25 @@ void StelUI::tcbr(void)
 Component* StelUI::createLicenceWindow(void)
 {
 	licence_txtlbl = new TextLabel(
-	                     wstring(L"                 \u2022   " APP_NAME "  August 2005  \u2022\n\n") +
-	                     L"\u2022   Copyright (c) 2000-2005 Fabien Chereau et al.\n\n" +
-	                     L"\u2022" + _("   Please check for newer versions and send bug reports\n\
-	                                   and comments to us at: http://www.stellarium.org\n\n") +
-	                     L"\u2022   This program is free software; you can redistribute it and/or\n\
-	                     modify it under the terms of the GNU General Public License\n\
-	                     as published by the Free Software Foundation; either version 2\n\
-	                     of the License, or (at your option) any later version.\n\n" +
-	                     L"This program is distributed in the hope that it will be useful, but\n\
-	                     WITHOUT ANY WARRANTY; without even the implied\n\
-	                     warranty of MERCHANTABILITY or FITNESS FOR A\n\
-	                     PARTICULAR PURPOSE.  See the GNU General Public\n\
-	                     License for more details.\n\n" +
-	                     L"You should have received a copy of the GNU General Public\n\
-	                     License along with this program; if not, write to:\n" +
-	                     L"Free Software Foundation, Inc.\n\
-	                     59 Temple Place - Suite 330\n\
-	                     Boston, MA  02111-1307, USA.\n\
-	                     http://www.fsf.org");
+wstring(L"                 \u2022   " APP_NAME "  August 2005  \u2022\n\n") +
+L"\u2022   Copyright (c) 2000-2005 Fabien Chereau et al.\n\n" +
+L"\u2022" + _("   Please check for newer versions and send bug reports\n\
+			and comments to us at: http://www.stellarium.org\n\n") +
+L"\u2022   This program is free software; you can redistribute it and/or\n\
+modify it under the terms of the GNU General Public License\n\
+as published by the Free Software Foundation; either version 2\n\
+of the License, or (at your option) any later version.\n\n" +
+L"This program is distributed in the hope that it will be useful, but\n\
+WITHOUT ANY WARRANTY; without even the implied\n\
+warranty of MERCHANTABILITY or FITNESS FOR A\n\
+PARTICULAR PURPOSE.  See the GNU General Public\n\
+License for more details.\n\n" +
+L"You should have received a copy of the GNU General Public\n\
+License along with this program; if not, write to:\n" +
+L"Free Software Foundation, Inc.\n\
+59 Temple Place - Suite 330\n\
+Boston, MA  02111-1307, USA.\n\
+http://www.fsf.org");
 	licence_txtlbl->adjustSize();
 	licence_txtlbl->setPos(10,10);
 	licence_win = new StdBtWin(_("Information"));
@@ -682,49 +682,49 @@ Component* StelUI::createLicenceWindow(void)
 Component* StelUI::createHelpWindow(void)
 {
 	help_txtlbl = new TextLabel(
-	                  wstring(_("Movement & selection:\n\
-	                            Arrow Keys       : Change viewing RA/DE\n\
-	                            Page Up/Down     : Zoom\n\
-	                            CTRL+Up/Down     : Zoom\n\
-	                            Left Click       : Select object\n\
-	                            Right Click      : Unselect\n\
-	                            CTRL+Left Click  : Unselect\n\
-	                            \\                : Zoom out (planet + moons if applicable)\n\
-	                            /                : Zoom to selected object\n\
-	                            SPACE            : Center on selected object\n\
-	                            \n"))+
-	                  wstring(_("Display options:\n\
-	                            ENTER : Equatorial/altazimuthal mount\n\
-	                            F1  : Toggle fullscreen if possible.\n\
-	                            C   : Constellation lines       V   : Constellation labels\n\
-	                            R   : Constellation art         E   : Equatorial grid\n\
-	                            Z   : Azimuthal grid            N   : Nebula labels\n\
-	                            P   : Planet labels             G   : Ground\n\
-	                            A   : Atmosphere                F   : Fog\n\
-	                            Q   : Cardinal points           O   : Toggle moon scaling\n\
-	                            T   : Object tracking           S   : Stars\n\
-	                            4 , : Ecliptic line             5 . : Equator line\n\
-	                            \n")) +
-	                  wstring(_("Dialogs & other controls:\n\
-	                            H   : Help                      I   : About Stellarium\n\
-	                            M   : Text menu                 1 (one)  : Configuration\n\
-	                            CTRL + S : Take a screenshot\n\
-	                            CTRL + R : Toggle script recording\n\
-	                            CTRL + F : Toggle object finder\n\
-	                            \n")) +
-	                  wstring(_("Time & Date:\n\
-	                            6   : Time rate pause           7   : Time rate 0\n\
-	                            8   : Set current time          J   : Decrease time rate\n\
-	                            K   : Normal time rate          L   : Increase time rate\n\
-	                            -   : Back 24 hours             =   : Forward 24 hours\n\
-	                            [   : Back 7 days               ]   : Forward 7 days\n\
-	                            \n")) +
-	                  wstring(_("During Script Playback:\n\
-	                            CTRL + C : End Script\n\
-	                            6   : pause script              K   : resume script\n\
-	                            \n")) +
-	                  wstring(_("Misc:\n\
-	                            9   : Toggle meteor shower rates\n")) + wstring(
+wstring(_("Movement & selection:\n\
+Arrow Keys       : Change viewing RA/DE\n\
+Page Up/Down     : Zoom\n\
+CTRL+Up/Down     : Zoom\n\
+Left Click       : Select object\n\
+Right Click      : Unselect\n\
+CTRL+Left Click  : Unselect\n\
+\\                : Zoom out (planet + moons if applicable)\n\
+/                : Zoom to selected object\n\
+SPACE            : Center on selected object\n\
+\n"))+
+wstring(_("Display options:\n\
+ENTER : Equatorial/altazimuthal mount\n\
+F1  : Toggle fullscreen if possible.\n\
+C   : Constellation lines       V   : Constellation labels\n\
+R   : Constellation art         E   : Equatorial grid\n\
+Z   : Azimuthal grid            N   : Nebula labels\n\
+P   : Planet labels             G   : Ground\n\
+A   : Atmosphere                F   : Fog\n\
+Q   : Cardinal points           O   : Toggle moon scaling\n\
+T   : Object tracking           S   : Stars\n\
+4 , : Ecliptic line             5 . : Equator line\n\
+\n")) +
+wstring(_("Dialogs & other controls:\n\
+H   : Help                      I   : About Stellarium\n\
+M   : Text menu                 1 (one)  : Configuration\n\
+CTRL + S : Take a screenshot\n\
+CTRL + R : Toggle script recording\n\
+CTRL + F : Toggle object finder\n\
+\n")) + 
+wstring(_("Time & Date:\n\
+6   : Time rate pause           7   : Time rate 0\n\
+8   : Set current time          J   : Decrease time rate\n\
+K   : Normal time rate          L   : Increase time rate\n\
+-   : Back 24 hours             =   : Forward 24 hours\n\
+[   : Back 7 days               ]   : Forward 7 days\n\
+\n")) + 
+wstring(_("During Script Playback:\n\
+CTRL + C : End Script\n\
+6   : pause script              K   : resume script\n\
+\n")) + 
+wstring(_("Misc:\n\
+9   : Toggle meteor shower rates\n")) + wstring(
 #ifndef MACOSX
 	                      _("CTRL + Q : Quit\n")
 #else
