@@ -378,16 +378,18 @@ double Planet::get_phase(Vec3d obs_pos) const
 
 float Planet::compute_magnitude(Vec3d obs_pos) const
 {
+    const double sq = obs_pos.dot(obs_pos);
+    if (parent == 0) {
+        // sun
+      return -26.73f + 2.5f*log10f(sq);
+    }
 	Vec3d heliopos = get_heliocentric_ecliptic_pos();
 	double R = heliopos.length();
-	// Fix bug for sun
-	if (R<0.0000000000000001) return -26.73f;
 	double p = (obs_pos - heliopos).length();
-	double s = obs_pos.length();
-	double cos_chi = (p*p + R*R - s*s)/(2.f*p*R);
+	double cos_chi = (p*p + R*R - sq)/(2.f*p*R);
 
-	float phase = (1.f - acosf(cos_chi)/M_PI) * cos_chi + sqrt(1.f - cos_chi*cos_chi) / M_PI;
-	float F = 0.666666667f * albedo * (radius*s/(R*p)) * (radius*s/(R*p)) * phase;
+	float phase = (1.f - acosf(cos_chi)/M_PI) * cos_chi + sqrt(1.0 - cos_chi*cos_chi) / M_PI;
+	float F = 0.666666667f * albedo * sq * (radius/(R*p)) * (radius/(R*p)) * phase;
 	return -26.73f - 2.5f * log10f(F);
 }
 
