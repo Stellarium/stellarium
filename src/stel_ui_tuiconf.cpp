@@ -51,14 +51,14 @@ void StelUI::draw_gravity_ui(void)
 		if (FlagShowFps) os << L"  FPS " << app->fps;
 
 		glColor3f(0.5,1,0.5);
-		core->projection->print_gravity180(baseFont, x-shift + 30, y-shift + 38, os.str(), 0);
+		core->printGravity(baseFont, x-shift + 30, y-shift + 38, os.str(), 0);
 	}
 
 	if (core->hasSelected() && FlagShowTuiShortObjInfo)
 	{
-	    wstring info = core->selected_object->getShortInfoString(core->navigation);
+	    wstring info = core->getSelectedObjectShortInfo();
 		glColor3fv(core->getSelectedObjectInfoColor());
-		core->projection->print_gravity180(baseFont, x+shift - 30, y+shift - 38, info, 0);
+		core->printGravity(baseFont, x+shift - 30, y+shift - 38, info, 0);
 	}
 }
 
@@ -104,7 +104,7 @@ void StelUI::init_tui(void)
 	tui_time_skytime->set_OnChangeCallback(callback<void>(this, &StelUI::tui_cb_sky_time));
 	tui_time_settmz = new s_tui::Time_zone_item(core->getDataDir() + "zone.tab", wstring(L"2.2 ") + _("Set Time Zone: "));
 	tui_time_settmz->set_OnChangeCallback(callback<void>(this, &StelUI::tui_cb_settimezone));
-	tui_time_settmz->settz(core->observatory->get_custom_tz_name());
+	tui_time_settmz->settz(core->getObservatory().get_custom_tz_name());
 	tui_time_presetskytime = new s_tui::Time_item(wstring(L"2.3 ") + _("Preset Sky Time: "));
 	tui_time_presetskytime->set_OnChangeCallback(callback<void>(this, &StelUI::tui_cb1));
 	tui_time_startuptime = new s_tui::MultiSet_item<wstring>(wstring(L"2.4 ") + _("Sky Time At Start-up: "));
@@ -134,7 +134,7 @@ void StelUI::init_tui(void)
 
 	// sky culture goes here
 	tui_general_sky_culture = new s_tui::MultiSet_item<wstring>(wstring(L"3.1 ") + _("Sky Culture: "));
-	tui_general_sky_culture->addItemList(core->skyloc->get_sky_culture_list());  // human readable names
+	tui_general_sky_culture->addItemList(core->getSkyCultureListI18());  // human readable names
 	tui_general_sky_culture->set_OnChangeCallback(callback<void>(this, &StelUI::tui_cb_tui_general_change_sky_culture));
 	tui_menu_general->addComponent(tui_general_sky_culture);
 
@@ -298,9 +298,7 @@ void StelUI::draw_tui(void)
 	if (tui_root)
 	{
 		glColor3f(0.5,1,0.5);
-		core->projection->print_gravity180(baseFont, x+shift - 30, y-shift + 38,
-						   s_tui::stop_active + tui_root->getString(), 0);
-
+		core->printGravity(baseFont, x+shift - 30, y-shift + 38, s_tui::stop_active + tui_root->getString(), 0);
 	}
 }
 
@@ -338,8 +336,8 @@ void StelUI::tui_update_widgets(void)
 	tui_time_dateformat->setCurrent(StelUtility::stringToWstring(core->getObservatory().get_date_format_str()));
 
 	// 3. general
-	tui_general_sky_culture->setValue(core->skyloc->convert_directory_to_sky_culture(core->skyCulture));
-	tui_general_sky_locale->setValue(StelUtility::stringToWstring(core->skyTranslator.getLocaleName()));
+	tui_general_sky_culture->setValue(StelUtility::stringToWstring(core->getSkyCulture()));
+	tui_general_sky_locale->setValue(StelUtility::stringToWstring(core->getSkyLanguage()));
 
 	// 4. Stars
 	tui_stars_show->setValue(core->getFlagStars());
@@ -348,17 +346,17 @@ void StelUI::tui_update_widgets(void)
 	tui_star_magscale->setValue(core->getStarMagScale());
 
 	// 5. Colors
-	tui_colors_const_line_color->setVector(core->asterisms->getLineColor());
-	tui_colors_const_label_color->setVector(core->asterisms->getLabelColor());
-	tui_colors_cardinal_color->setVector(core->cardinals_points->get_color());
+	tui_colors_const_line_color->setVector(core->getColorConstellationLine());
+	tui_colors_const_label_color->setVector(core->getColorConstellationNames());
+	tui_colors_cardinal_color->setVector(core->getColorCardinalPoints());
 
 	// 5. effects
-	tui_effect_landscape->setValue(StelUtility::stringToWstring(core->observatory->get_landscape_name()));
+	tui_effect_landscape->setValue(StelUtility::stringToWstring(core->getObservatory().get_landscape_name()));
 	tui_effect_pointobj->setValue(core->getFlagPointStar());
-	tui_effect_zoom_duration->setValue(core->auto_move_duration);
+	tui_effect_zoom_duration->setValue(core->getAutomoveDuration());
 	tui_effect_manual_zoom->setValue(core->getFlagManualAutoZoom());
 	tui_effect_object_scale->setValue(core->getStarScale());
-	tui_effect_milkyway_intensity->setValue(core->milky_way->get_intensity());
+	tui_effect_milkyway_intensity->setValue(core->getMilkyWayIntensity());
 	tui_effect_cursor_timeout->setValue(MouseCursorTimeout);
 	tui_effect_nebulae_label_magnitude->setValue(core->getNebulaMaxMagHints());
 
@@ -391,14 +389,14 @@ void StelUI::tui_cb_settimezone(void)
 {
 	// Don't call the script anymore coz it's pointless
 	// system( ( core->getDataDir() + "script_set_time_zone " + tui_time_settmz->getCurrent() ).c_str() );
-	core->observatory->set_custom_tz_name(tui_time_settmz->gettz());
+	core->getObservatory().set_custom_tz_name(tui_time_settmz->gettz());
 }
 
 // Set time format mode
 void StelUI::tui_cb_settimedisplayformat(void)
 {
-	core->observatory->set_time_format_str(StelUtility::wstringToString(tui_time_displayformat->getCurrent()));
-	core->observatory->set_date_format_str(StelUtility::wstringToString(tui_time_dateformat->getCurrent()));
+	core->getObservatory().set_time_format_str(StelUtility::wstringToString(tui_time_displayformat->getCurrent()));
+	core->getObservatory().set_date_format_str(StelUtility::wstringToString(tui_time_dateformat->getCurrent()));
 }
 
 // 7. Administration actions functions
@@ -406,9 +404,7 @@ void StelUI::tui_cb_settimedisplayformat(void)
 // Load default configuration
 void StelUI::tui_cb_admin_load_default(void)
 {
-
 	app->commander->execute_command("configuration action reload");
-
 }
 
 // Save to default configuration
@@ -437,8 +433,7 @@ void StelUI::tui_cb_tui_effect_change_landscape(void)
 void StelUI::tui_cb_tui_general_change_sky_culture(void) {
 
 	//  core->set_sky_culture(core->skyloc->convert_sky_culture_to_directory(tui_general_sky_culture->getCurrent()));
-	app->commander->execute_command( string("set sky_culture " + 
-											 core->skyloc->convert_sky_culture_to_directory(tui_general_sky_culture->getCurrent())));
+	app->commander->execute_command( string("set sky_culture ") + StelUtility::wstringToString(tui_general_sky_culture->getCurrent()));
 }
 
 // Set a new sky locale
@@ -593,7 +588,7 @@ void StelUI::tui_cb_effects_nebulae_label_magnitude()
 
 void StelUI::tui_cb_change_color()
 {
-	core->asterisms->setLineColor( tui_colors_const_line_color->getVector() );
-	core->asterisms->setLabelColor( tui_colors_const_label_color->getVector() );
-	core->cardinals_points->set_color( tui_colors_cardinal_color->getVector() );
+	core->setColorConstellationLine( tui_colors_const_line_color->getVector() );
+	core->setColorConstellationNames( tui_colors_const_label_color->getVector() );
+	core->setColorCardinalPoints( tui_colors_cardinal_color->getVector() );
 }

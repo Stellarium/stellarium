@@ -82,7 +82,7 @@ bool FisheyeProjector::project_custom(const Vec3d &v,Vec3d &win,
   const double f = (a*view_scaling_factor) * oneoverh;
   win[0] = center[0] + win[0] * f;
   win[1] = center[1] + win[1] * f;
-  win[2] = (win[2] - zNear) / (zFar-zNear);
+  win[2] = (fabs(win[2]) - zNear) / (zFar-zNear);
   return (a<0.9*M_PI) ? true : false;
 }
 

@@ -120,7 +120,7 @@ std::wstring Translator::UTF8stringToWstring(const string& s)
 	return ws;
 }
 
-//! Ge available language codes from directory tree
+//! Get available language codes from directory tree
 std::string Translator::getAvailableLanguagesCodes(const string& localeDir)
 {
 	struct dirent *entryp;
