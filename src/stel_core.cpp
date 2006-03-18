@@ -51,7 +51,7 @@ StelCore::StelCore(const string& LDIR, const string& DATA_ROOT) :
 	cardinals_points = new Cardinals();
 	meteors = new MeteorMgr(10, 60);
 	landscape = new LandscapeOldStyle();
-	skyloc = new SkyLocalizer(getDataDir());
+	skyloc = new SkyLocalizer(getDataDir()+ "sky_cultures");
 	script_images = new ImageMgr();
 		
 	// Set textures directory and suffix

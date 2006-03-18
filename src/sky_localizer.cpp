@@ -19,76 +19,79 @@
 
 #include <iostream>
 #include <fstream>
+#include <dirent.h>
 #include "sky_localizer.h"
-#include "stellarium.h"
 #include "translator.h"
+#include "init_parser.h"
 
-SkyLocalizer::SkyLocalizer(string _data_dir)
+SkyLocalizer::SkyLocalizer(const string& cultureDir)
 {
+	struct dirent *entryp;
+	DIR *dp;
 
-	// load list of sky cultures from disk
-  char culture_name[100];
-  char culture_directory[100];
-
-  string fileName = _data_dir + "skycultures.fab";
-
-  FILE * fic = fopen(fileName.c_str(),"r");
-  if (!fic) {
-    printf("Can't open %s\n",fileName.c_str());
-    fclose(fic);
-    return;
-  }
-
-  char line[256];
-  char* s;
-  while(!feof(fic)) {
-    while (fgets(line, 255, fic)) {
-      line[strlen(line)-1] = 0;     // strip LF
-      s = strtok(line, "\t");
-      strcpy(culture_name, s);
-
-      s = strtok(NULL, "\t");
-      strcpy(culture_directory, s);
-
-      //      printf("Name: %s\tDir: %s\n", culture_name, culture_directory);
-      dir_to_name[string(culture_directory)] = _(culture_name);
-    }
-
-  }
-  fclose(fic);
-}
-
-SkyLocalizer::~SkyLocalizer(void) {
-}
-
-
-// is this a valid culture directory?
-bool SkyLocalizer::test_sky_culture_directory(string _culture_dir) {
-	return (dir_to_name[_culture_dir] != L"");
-}
-
-// returns newline delimited list of human readable culture names
-wstring SkyLocalizer::get_sky_culture_list(void){
-
-	wstring cultures;
-	for ( wstringHashIter_t iter = dir_to_name.begin(); iter != dir_to_name.end(); ++iter ) {
-		cultures += iter->second + L"\n";
+	if ((dp = opendir(cultureDir.c_str())) == NULL)
+	{
+		cerr << "Unable to find culture directory:" << cultureDir << endl;
+		assert(0);
 	}
 
+	while ((entryp = readdir(dp)) != NULL)
+	{
+		string tmp = entryp->d_name;
+		string tmpfic = cultureDir+"/"+tmp+"/info.ini";
+		FILE* fic = fopen(tmpfic.c_str(), "r");
+		if (fic)
+		{
+			InitParser conf;
+			conf.load(tmpfic);
+			dirToNameEnglish[tmp] = conf.get_str("info:name");
+			cout << tmp << " : " << dirToNameEnglish[tmp] << endl;
+			fclose(fic);
+		}
+	}
+}
+
+SkyLocalizer::~SkyLocalizer(void)
+{}
+
+//! returns newline delimited list of human readable culture names in english
+string SkyLocalizer::getSkyCultureListEnglish(void)
+{
+	string cultures;
+	for ( stringHashIter_t iter = dirToNameEnglish.begin(); iter != dirToNameEnglish.end(); ++iter )
+	{
+		cultures += iter->second + "\n";
+	}
 	return cultures;
 }
 
-wstring SkyLocalizer::convert_directory_to_sky_culture(string _directory)
+//! returns newline delimited list of human readable culture names translated to current locale
+wstring SkyLocalizer::getSkyCultureListI18(void)
 {
-	return dir_to_name[_directory];
+	wstring cultures;
+	for ( stringHashIter_t iter = dirToNameEnglish.begin(); iter != dirToNameEnglish.end(); ++iter )
+	{
+		cultures += _(iter->second);
+		cultures += L"\n";
+	}
+	return cultures;
 }
 
-
-string SkyLocalizer::convert_sky_culture_to_directory(wstring _name)
+string SkyLocalizer::directoryToSkyCultureEnglish(const string& directory)
 {
-	for ( wstringHashIter_t iter = dir_to_name.begin(); iter != dir_to_name.end(); ++iter )
+	return dirToNameEnglish[directory];
+}
+
+wstring SkyLocalizer::directoryToSkyCultureI18(const string& directory)
+{
+	return _(dirToNameEnglish[directory]);
+}
+
+string SkyLocalizer::skyCultureToDirectory(const wstring& cultureName)
+{
+	for ( stringHashIter_t iter = dirToNameEnglish.begin(); iter != dirToNameEnglish.end(); ++iter )
 	{
-		if (iter->second == _name) return iter->first;
+		if (_(iter->second) == cultureName) return iter->first;
 	}
 	return "";
 }

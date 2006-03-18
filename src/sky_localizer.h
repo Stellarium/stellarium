@@ -1,6 +1,6 @@
 /*
  * Stellarium
- * This file Copyright (C) 2004 Robert Spearman
+ * This file Copyright (C) 2004 Robert Spearman, 2005 Fabien Chereau
  * 
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -29,18 +29,27 @@ using namespace std;
 class SkyLocalizer
 {
 
- public:
-  SkyLocalizer(string _data_dir);
-  virtual ~SkyLocalizer();
+public:
+	SkyLocalizer(const string& cultureDir);
+	virtual ~SkyLocalizer();
 
-  wstring get_sky_culture_list(void);
-  wstring convert_directory_to_sky_culture(string _directory);
-  string convert_sky_culture_to_directory(wstring _name);
-  bool test_sky_culture_directory(string _culture_dir);
+	//! returns newline delimited list of human readable culture names in english
+	string getSkyCultureListEnglish(void);
+	
+	//! returns newline delimited list of human readable culture names translated to current language
+	wstring getSkyCultureListI18(void);
+	
+	//! Get the culture name in english associated to the passed directory
+	string directoryToSkyCultureEnglish(const string& directory);
+	
+	//! Get the culture name translated to current language associated to the passed directory
+	wstring directoryToSkyCultureI18(const string& directory);
+	
+	//! Get the directory associated to the passed translated culture name
+	string skyCultureToDirectory(const wstring& cultureName);
 
- private:
-  wstringHash_t dir_to_name;
-
+private:
+	stringHash_t dirToNameEnglish;
 };
 
 

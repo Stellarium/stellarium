@@ -40,8 +40,6 @@
 #include "loadingbar.h"
 #include "image_mgr.h"
 
-class StelUI;
-
 //!  @brief Main class for stellarium core processing. 
 //!  
 //! Manage all the objects to be used in the program. 
@@ -49,7 +47,6 @@ class StelUI;
 class StelCore
 {
 // TODO : remove both
-friend class StelUI;
 friend class StelCommandInterface;
 public:
 
@@ -83,13 +80,22 @@ public:
 	//! Set the sky culture
 	int setSkyCulture(string _culture_dir);
 	
+	//! Get the current sky culture name
+	string getSkyCulture() {return skyCulture;}
+	
+	wstring getSkyCultureListI18() const {return skyloc->getSkyCultureListI18();}
+	
 	//! Set the landscape
 	void setLandscape(const string& new_landscape_name);
 
 	//! @brief Set the sky language and reload the sky objects names with the new translation
 	//! This function has no permanent effect on the global locale
 	//!@param newSkyLocaleName The name of the locale (e.g fr) to use for sky object labels
-	void setSkyLanguage(const std::string& newSkyLocaleName);
+	void setSkyLanguage(const string& newSkyLocaleName);
+	
+	//! Get the current sky language used for sky object labels
+	//! @return The name of the locale (e.g fr)
+	string getSkyLanguage() {return skyTranslator.getLocaleName();}
 	
 	///////////////////////////////////////////////////////////////////////////////////////
 	// Navigation
@@ -125,6 +131,11 @@ public:
 	
 	//! Go to the selected object
 	void gotoSelectedObject(void) {if (selected_object) navigation->move_to(selected_object->get_earth_equ_pos(navigation), auto_move_duration);}
+	
+	//! Set automove duration in seconds
+	void setAutomoveDuration(float f) {auto_move_duration = f;}
+	//! Get automove duration in seconds
+	float getAutomoveDuration(void) {return auto_move_duration;}
 	
 	//! Zoom to the given FOV (in degree)
 	void zoomTo(double aim_fov, float move_duration = 1.) {projection->zoom_to(aim_fov, move_duration);}
@@ -180,6 +191,9 @@ public:
 	//! Get a multiline string describing the currently selected object
 	wstring getSelectedObjectInfo(void) const {return selected_object->getInfoString(navigation);}
 
+	//! Get a 1 line string briefly describing the currently selected object
+	wstring getSelectedObjectShortInfo(void) const {return selected_object->getShortInfoString(navigation);}
+
 	//! Get a color used to display info about the currently selected object
 	Vec3f getSelectedObjectInfoColor(void) const;
 	
@@ -222,6 +236,16 @@ public:
 	
 	//! Set constellation font size 
 	void setConstellationFontSize(float f) {asterisms->setFont(f, baseFontFile);}
+	
+	//! Get constellation line color
+	Vec3f getColorConstellationLine() const {return asterisms->getLineColor();}
+	//! Set constellation line color
+	void setColorConstellationLine(const Vec3f& v) {asterisms->setLineColor(v);}
+	
+	//! Get constellation names color
+	Vec3f getColorConstellationNames() const {return asterisms->getLabelColor();}
+	//! Set constellation names color
+	void setColorConstellationNames(const Vec3f& v) {asterisms->setLabelColor(v);}
 	
 	///////////////////////////////////////////////////////////////////////////////////////
 	// Stars methods
@@ -346,6 +370,11 @@ public:
 	//! Get flag for displaying Cardinals Points
 	bool getFlagCardinalsPoints(void) const {return cardinals_points->getFlagShow();}
 	
+	//! Set Cardinals Points color
+	void setColorCardinalPoints(const Vec3f& v) {cardinals_points->set_color(v);}
+	//! Get Cardinals Points color
+	Vec3f getColorCardinalPoints(void) const {return cardinals_points->get_color();}
+	
 	///////////////////////////////////////////////////////////////////////////////////////
 	// Projection	
 	//! Set the horizontal viewport offset in pixels 
@@ -400,6 +429,11 @@ public:
 	
 	//! Set the viewport width and height
 	void setViewportSize(int w, int h);
+	
+	//! Print the passed wstring so that it is oriented in the drection of the gravity
+	void printGravity(s_font* font, float x, float y, const wstring& str, bool speedOptimize = 1, 
+			float xshift = 0, float yshift = 0) const
+		{projection->print_gravity180(font, x, y, str, speedOptimize, xshift, yshift);}
 	
 	///////////////////////////////////////////////////////////////////////////////////////
 	// Landscape
@@ -480,7 +514,7 @@ public:
 	///////////////////////////////////////////////////////////////////////////////////////
 	// Observator
 	//! Return the current observatory (as a const object)
-	const Observator& getObservatory(void) const {return *observatory;}
+	Observator& getObservatory(void) {return *observatory;}
 	
 	//! Set Meteor Rate in number per hour
 	void setMeteorsRate(int f) {meteors->set_ZHR(f);}
@@ -564,7 +598,7 @@ private:
 	Vec3d InitViewPos;					// Default viewing direction
 	int FlagManualZoom;					// Define whether auto zoom can go further
 	Vec3f chartColor;					// ?
-	float auto_move_duration;			// Duration of movement for the auto move to a selected object	
+	float auto_move_duration;			// Duration of movement for the auto move to a selected objectin seconds
 
 	DRAWMODE draw_mode;					// Current draw mode
 };
