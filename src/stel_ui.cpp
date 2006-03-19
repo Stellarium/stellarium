@@ -285,7 +285,7 @@ void StelUI::updateTopBar(void)
 	if (FlagShowFov)
 	{
 		wstringstream wos;
-		wos << L"FOV=" << setprecision(3) << core->getFov() << L"°";
+		wos << L"FOV=" << setprecision(3) << core->getFov() << L"�";//L"°";
 		top_bar_fov_lbl->setLabel(wos.str());
 		top_bar_fov_lbl->adjustSize();
 	}
@@ -1313,7 +1313,9 @@ void StelUI::setTitleObservatoryName(const wstring& name)
 wstring StelUI::getTitleWithAltitude(void)
 {
 	std::wostringstream oss;
-	oss << core->getObservatory().get_name() << L" @ " << core->getObservatory().get_altitude() << L"m";
+	oss << core->getObservatory().getHomePlanetNameI18()
+        << ", " << core->getObservatory().get_name()
+        << L" @ " << core->getObservatory().get_altitude() << L"m";
 
 	return oss.str();
 }
