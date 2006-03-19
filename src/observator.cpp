@@ -85,6 +85,16 @@ void Observator::load(const string& file, const string& section)
 	load(conf, section);
 }
 
+bool Observator::setHomePlanet(const string &english_name) {
+  Planet *p = ssystem.searchByEnglishName(english_name);
+  if (p) {
+    planet = p;
+    return true;
+  }
+  return false;
+}
+
+
 void Observator::load(const InitParser& conf, const string& section)
 {
 	name = _(conf.get_str(section, "name").c_str());
@@ -94,16 +104,15 @@ void Observator::load(const InitParser& conf, const string& section)
 		if (name[i]=='_') name[i]=' ';
 	}
 
-    planet = ssystem.searchByEnglishName(conf.get_str(section, "home_planet", "Earth"));
-    if (planet == 0) {
+    if (!setHomePlanet(conf.get_str(section, "home_planet", "Earth"))) {
       planet = ssystem.getEarth();
     }
     
     cout << "Loading location: \"" << StelUtility::wstringToString(name) <<"\", on " << planet->getEnglishName();
     
-    //    printf("(home_planet should be: \"%s\" is: \"%s\") ",
-    //       conf.get_str(section, "home_planet").c_str(),
-    //       planet->getEnglishName().c_str());
+//    printf("(home_planet should be: \"%s\" is: \"%s\") ",
+//           conf.get_str(section, "home_planet").c_str(),
+//           planet->getEnglishName().c_str());
 	latitude  = get_dec_angle(conf.get_str(section, "latitude"));
 	longitude = get_dec_angle(conf.get_str(section, "longitude"));
 	altitude = conf.get_int(section, "altitude");
@@ -470,6 +479,14 @@ void Observator::move_to(double lat, double lon, double alt, int duration, const
 wstring Observator::get_name(void) const
 {
 	return name;
+}
+
+string Observator::getHomePlanetEnglishName(void) const {
+  return planet ? planet->getEnglishName() : "";
+}
+
+wstring Observator::getHomePlanetNameI18(void) const {
+  return planet ? planet->getNameI18() : L"";
 }
 
 // for moving observator position gradually
