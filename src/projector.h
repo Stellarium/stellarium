@@ -49,6 +49,10 @@ public:
 	
     static const char *typeToString(PROJECTOR_TYPE type);
     static PROJECTOR_TYPE stringToType(const string &s);
+
+    static const char *maskTypeToString(PROJECTOR_MASK_TYPE type);
+    static PROJECTOR_MASK_TYPE stringToMaskType(const string &s);
+
     
     // Main factory constructor
     static Projector *create(PROJECTOR_TYPE type,

@@ -51,6 +51,17 @@ Projector::PROJECTOR_TYPE Projector::stringToType(const string &s) {
   return PERSPECTIVE_PROJECTOR;
 }
 
+const char *Projector::maskTypeToString(PROJECTOR_MASK_TYPE type) {
+  if(type == DISK ) return "disk";
+  else return "none";
+}
+
+Projector::PROJECTOR_MASK_TYPE Projector::stringToMaskType(const string &s) {
+  if (s=="disk")    return DISK;
+  return NONE;
+}
+
+
 Projector *Projector::create(PROJECTOR_TYPE type,
                              const Vec4i& viewport,
                              double _fov) {
