@@ -99,6 +99,10 @@ void StelCore::init(const InitParser& conf)
 	string tmpstr = conf.get_str("projection:type");
 	const Projector::PROJECTOR_TYPE projType = Projector::stringToType(tmpstr);
 	setProjectionType(projType);
+
+	tmpstr = conf.get_str("projection:viewport");
+	const Projector::PROJECTOR_MASK_TYPE projMaskType = Projector::stringToMaskType(tmpstr);
+	projection->setMaskType(projMaskType);
 	
 	// Init the solar system first
 	ssystem->load(getDataDir() + "ssystem.ini");
@@ -193,7 +197,11 @@ void StelCore::init(const InitParser& conf)
 	}
 
 	InitFov				= conf.get_double ("navigation","init_fov",60.);
-	InitViewPos 		= StelUtility::str_to_vec3f(conf.get_str("navigation:init_view_pos").c_str());
+	projection->set_fov(InitFov);
+
+	InitViewPos = StelUtility::str_to_vec3f(conf.get_str("navigation:init_view_pos").c_str());
+	navigation->set_local_vision(InitViewPos);
+
 
 	// Landscape section
 	setFlagLandscape(conf.get_boolean("landscape", "flag_landscape", conf.get_boolean("landscape", "flag_ground", 1)));  // name change
