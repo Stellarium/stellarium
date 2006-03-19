@@ -49,7 +49,11 @@ public:
 
 	Observator(const class SolarSystem &ssystem);
 	~Observator();
+    bool setHomePlanet(const string &english_name);
     const class Planet *getHomePlanet(void) const {return planet;}
+    string getHomePlanetEnglishName(void) const;
+    wstring getHomePlanetNameI18(void) const;
+
     Vec3d getCenterVsop87Pos(void) const;
     double getDistanceFromCenter(void) const;
     Mat4d getRotLocalToEquatorial(double jd) const;
@@ -81,6 +85,7 @@ public:
 	S_TZ_FORMAT get_tz_format(void) const {return time_zone_mode;}
 
 	wstring get_name(void) const;
+
 	void set_latitude(double l) {latitude=l;}
 	double get_latitude(void) const {return latitude;}
 	void set_longitude(double l) {longitude=l;}
