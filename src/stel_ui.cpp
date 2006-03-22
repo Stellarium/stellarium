@@ -285,7 +285,7 @@ void StelUI::updateTopBar(void)
 	if (FlagShowFov)
 	{
 		wstringstream wos;
-		wos << L"FOV=" << setprecision(3) << core->getFov() << L"°";//L"Â°";
+		wos << L"FOV=" << setprecision(3) << core->getFov() << L"\u00B0";
 		top_bar_fov_lbl->setLabel(wos.str());
 		top_bar_fov_lbl->adjustSize();
 	}
