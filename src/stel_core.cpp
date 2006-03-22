@@ -312,16 +312,15 @@ void StelCore::update(int delta_time)
 	// compute global sky brightness TODO : make this more "scientifically"
 	// TODO: also add moonlight illumination
 
-	if(sunPos[2] < -0.1/1.5 )
-	{
-		sky_brightness = 0;
-	}
-	else
-	{
-		sky_brightness = (0.1 + 1.5*sunPos[2]) * atmosphere->get_intensity();
-	}
+	if(sunPos[2] < -0.1/1.5 ) sky_brightness = 0;
+	else sky_brightness = (0.1 + 1.5*sunPos[2]);
 
+	// Landscape is lit even if atmosphere off
 	landscape->set_sky_brightness(sky_brightness);
+
+	// TODO eventually make this more generic for non-atmosphere planets
+	sky_brightness *= atmosphere->get_intensity();
+	
 }
 
 // Execute all the drawing functions
