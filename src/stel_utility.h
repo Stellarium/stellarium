@@ -120,7 +120,4 @@ long int str_to_long(string str);
 int fcompare(const string& _base, const string& _sub);
 int fcompare(const wstring& _base, const wstring& _sub);
 
-wstring translateGreek(const string& s);
-string stripConstellation(const string& s);
-
 #endif
