@@ -56,7 +56,21 @@ string StelUtility::wstringToString(const wstring& ws)
 	wcstombs(s, ws.c_str(), len);
 	string ss(s);
 	delete [] s;
-	return ss;	
+	return ss;
+}
+
+wstring StelUtility::doubleToWstring(double d)
+{
+	std::wostringstream woss;
+	woss << d;
+	return woss.str();
+}
+
+wstring StelUtility::intToWstring(int i)
+{
+	std::wostringstream woss;
+	woss << i;
+	return woss.str();
 }
 
 double StelUtility::hms_to_rad( unsigned int h, unsigned int m, double s )
@@ -84,33 +98,33 @@ double dms_to_rad(int d, double m)
 void sphe_to_rect(double lng, double lat, Vec3d& v)
 {
 	const double cosLat = cos(lat);
-    v.set(cos(lng) * cosLat, sin(lng) * cosLat, sin(lat));
+	v.set(cos(lng) * cosLat, sin(lng) * cosLat, sin(lat));
 }
 
 void sphe_to_rect(double lng, double lat, double r, Vec3d& v)
 {
 	const double cosLat = cos(lat);
-    v.set(cos(lng) * cosLat * r, sin(lng) * cosLat * r, sin(lat) * r);
+	v.set(cos(lng) * cosLat * r, sin(lng) * cosLat * r, sin(lat) * r);
 }
 
 void sphe_to_rect(float lng, float lat, Vec3f& v)
 {
 	const double cosLat = cos(lat);
-    v.set(cos(lng) * cosLat, sin(lng) * cosLat, sin(lat));
+	v.set(cos(lng) * cosLat, sin(lng) * cosLat, sin(lat));
 }
 
 void rect_to_sphe(double *lng, double *lat, const Vec3d& v)
 {
 	double r = v.length();
-    *lat = asin(v[2]/r);
-    *lng = atan2(v[1],v[0]);
+	*lat = asin(v[2]/r);
+	*lng = atan2(v[1],v[0]);
 }
 
 void rect_to_sphe(float *lng, float *lat, const Vec3f& v)
 {
 	double r = v.length();
-    *lat = asin(v[2]/r);
-    *lng = atan2(v[1],v[0]);
+	*lat = asin(v[2]/r);
+	*lng = atan2(v[1],v[0]);
 }
 
 
@@ -140,14 +154,14 @@ float mag_to_luminance(float mag, float surface)
 #define iswhite(c)  ((c)== ' ' || (c)=='\t')
 static char *trim(char *x)
 {
-    char *y;
+	char *y;
 
-    if(!x)
-        return(x);
-    y = x + strlen(x)-1;
-    while (y >= x && iswhite(*y))
-        *y-- = 0; /* skip white space */
-    return x;
+	if(!x)
+		return(x);
+	y = x + strlen(x)-1;
+	while (y >= x && iswhite(*y))
+		*y-- = 0; /* skip white space */
+	return x;
 }
 
 
@@ -155,8 +169,8 @@ static char *trim(char *x)
 // salta espacios en blanco
 static void skipwhite(char **s)
 {
-   while(iswhite(**s))
-        ++(*s);
+	while(iswhite(**s))
+		++(*s);
 }
 
 
@@ -169,10 +183,10 @@ double get_dec_angle(const string& str)
 	char delim2[] = " NSEWnsew\"\n\t";
 	int dghh = 0, minutes = 0;
 	double seconds = 0.0, pos;
-        short count;
+	short count;
 
 	enum _type{
-    	    HOURS, DEGREES, LAT, LONG
+	    HOURS, DEGREES, LAT, LONG
 	}type;
 
 	if (s == NULL || !*s)
@@ -184,21 +198,21 @@ double get_dec_angle(const string& str)
 	memcpy(ptr, s, count);
 	trim(ptr);
 	skipwhite(&ptr);
-        
-        /* the last letter has precedence over the sign */
-	if (strpbrk(ptr,"SsWw") != NULL) 
+
+	/* the last letter has precedence over the sign */
+	if (strpbrk(ptr,"SsWw") != NULL)
 		negative = 1;
 
 	if (*ptr == '+' || *ptr == '-')
 		negative = (char) (*ptr++ == '-' ? 1 : negative);
 	skipwhite(&ptr);
 	if ((hh = strpbrk(ptr,"Hh")) != NULL && hh < ptr + 3)
-            type = HOURS;
-        else 
-            if (strpbrk(ptr,"SsNn") != NULL)
-		type = LAT;
-	    else 
- 	        type = DEGREES; /* unspecified, the caller must control it */
+		type = HOURS;
+	else
+		if (strpbrk(ptr,"SsNn") != NULL)
+			type = LAT;
+		else
+			type = DEGREES; /* unspecified, the caller must control it */
 
 	if ((ptr = strtok(ptr,delim1)) != NULL)
 		dghh = atoi (ptr);
@@ -208,20 +222,23 @@ double get_dec_angle(const string& str)
 		return (-0.0);
 	}
 
-	if ((ptr = strtok(NULL,delim1)) != NULL) {
+	if ((ptr = strtok(NULL,delim1)) != NULL)
+	{
 		minutes = atoi (ptr);
 		if (minutes > 59)
 		{
 			free(mptr);
 			return (-0.0);
 		}
-	}else
+	}
+	else
 	{
 		free(mptr);
 		return (-0.0);
 	}
 
-	if ((ptr = strtok(NULL,delim2)) != NULL) {
+	if ((ptr = strtok(NULL,delim2)) != NULL)
+	{
 		if ((dec = strchr(ptr,',')) != NULL)
 			*dec = '.';
 		seconds = strtod (ptr, NULL);
@@ -230,8 +247,8 @@ double get_dec_angle(const string& str)
 			free(mptr);
 			return (-0.0);
 		}
-	} 
-	
+	}
+
 	if ((ptr = strtok(NULL," \n\t")) != NULL)
 	{
 		skipwhite(&ptr);
@@ -246,8 +263,8 @@ double get_dec_angle(const string& str)
 	if (type == LAT && pos > 90.0)
 		return (-0.0);
 	else
-	    if (pos > 180.0)
-		return (-0.0);
+		if (pos > 180.0)
+			return (-0.0);
 
 	if (negative)
 		pos = 0.0 - pos;
@@ -266,11 +283,11 @@ double get_dec_angle(const string& str)
 //! @return The corresponding string
 wstring StelUtility::printAngleDMS(double angle, bool decimals, bool useD)
 {
-    wchar_t buf[32];
-    buf[31]=L'\0';
-    double deg = 0.0;
-    double min = 0.0;
-    double sec = 0.0;
+	wchar_t buf[32];
+	buf[31]=L'\0';
+	double deg = 0.0;
+	double min = 0.0;
+	double sec = 0.0;
 	wchar_t sign = L'+';
 	int d, m, s;
 	wchar_t degsign = L'°';
@@ -278,20 +295,21 @@ wstring StelUtility::printAngleDMS(double angle, bool decimals, bool useD)
 
 	angle *= 180./M_PI;
 
-	if(angle<0) {
+	if(angle<0)
+	{
 		angle *= -1;
 		sign = '-';
 	}
 
-    sec = 60.0 * (modf(angle, &deg));
-    sec = 60.0 * (modf(sec, &min));
-    
-    d = (int)deg;
-    m = (int)min;
-    s = (int)sec;
-    
-    if (decimals)
-	    swprintf(buf,sizeof(buf),L"%lc%.2d%lc%.2d'%.2f\"", sign, d, degsign, m, sec);
+	sec = 60.0 * (modf(angle, &deg));
+	sec = 60.0 * (modf(sec, &min));
+
+	d = (int)deg;
+	m = (int)min;
+	s = (int)sec;
+
+	if (decimals)
+		swprintf(buf,sizeof(buf),L"%lc%.2d%lc%.2d'%.2f\"", sign, d, degsign, m, sec);
 	else
 	{
 		double sf = sec - s;
@@ -302,16 +320,16 @@ wstring StelUtility::printAngleDMS(double angle, bool decimals, bool useD)
 			{
 				s = 0;
 				m += 1;
-				if (m == 60) 
+				if (m == 60)
 				{
 					m = 0;
 					d += 1;
 				}
 			}
 		}
-	    swprintf(buf,sizeof(buf), L"%lc%.2d%lc%.2d'%.2d\"", sign, d, degsign, m, s);
+		swprintf(buf,sizeof(buf), L"%lc%.2d%lc%.2d'%.2d\"", sign, d, degsign, m, s);
 	}
-    return buf;
+	return buf;
 }
 
 //! @brief Print the passed angle with the format +hhhmmmss(.ss)"
@@ -320,150 +338,159 @@ wstring StelUtility::printAngleDMS(double angle, bool decimals, bool useD)
 //! @return The corresponding string
 wstring StelUtility::printAngleHMS(double angle, bool decimals)
 {
-    static wchar_t buf[16];
-    buf[15] = L'\0';
-    double hr = 0.0;
-    double min = 0.0;
-    double sec = 0.0;
-    angle *= 180./M_PI;
+	static wchar_t buf[16];
+	buf[15] = L'\0';
+	double hr = 0.0;
+	double min = 0.0;
+	double sec = 0.0;
+	angle *= 180./M_PI;
 	while (angle<0) angle+=360;
 	angle/=15.;
-    min = 60.0 * (modf(angle, &hr));
-    sec = 60.0 * (modf(min, &min));
-    if (decimals) swprintf(buf,sizeof(buf),L"%.2dh%.2dm%.2fs",(int)hr, (int) min, sec);
-    else swprintf(buf,sizeof(buf),L"%.2dh%.2dm%.0fs",(int)hr, (int) min, sec);
-    return buf;
+	min = 60.0 * (modf(angle, &hr));
+	sec = 60.0 * (modf(min, &min));
+	if (decimals) swprintf(buf,sizeof(buf),L"%.2dh%.2dm%.2fs",(int)hr, (int) min, sec);
+	else swprintf(buf,sizeof(buf),L"%.2dh%.2dm%.0fs",(int)hr, (int) min, sec);
+	return buf;
 }
 
 
 // convert string int ISO 8601-like format [+/-]YYYY-MM-DDThh:mm:ss (no timzone offset)
 // to julian day
 
-int string_to_jday(string date, double &jd) {
+int string_to_jday(string date, double &jd)
+{
 
-    char tmp;
-    int year, month, day, hour, minute, second;
-    year = month = day = hour = minute = second = 0;
+	char tmp;
+	int year, month, day, hour, minute, second;
+	year = month = day = hour = minute = second = 0;
 
-    std::istringstream dstr( date );
+	std::istringstream dstr( date );
 
 	// TODO better error checking
-    dstr >> year >> tmp >> month >> tmp >> day >> tmp >> hour >> tmp >> minute >> tmp >> second;
-    
-    // cout << year << " " << month << " " << day << " " << hour << " " << minute << " " << second << endl;
+	dstr >> year >> tmp >> month >> tmp >> day >> tmp >> hour >> tmp >> minute >> tmp >> second;
 
-    // bounds checking (per s_tui time object)
-    if( year > 100000 || year < -100000 || 
-	month < 1 || month > 12 ||
-	day < 1 || day > 31 ||
-	hour < 0 || hour > 23 ||
-	minute < 0 || minute > 59 ||
-	second < 0 || second > 59) return 0;
+	// cout << year << " " << month << " " << day << " " << hour << " " << minute << " " << second << endl;
+
+	// bounds checking (per s_tui time object)
+	if( year > 100000 || year < -100000 ||
+	        month < 1 || month > 12 ||
+	        day < 1 || day > 31 ||
+	        hour < 0 || hour > 23 ||
+	        minute < 0 || minute > 59 ||
+	        second < 0 || second > 59) return 0;
 
 
-    // code taken from s_tui.cpp
-    if (month <= 2) {
-        year--;
-        month += 12;
-    }
+	// code taken from s_tui.cpp
+	if (month <= 2)
+	{
+		year--;
+		month += 12;
+	}
 
-    // Correct for the lost days in Oct 1582 when the Gregorian calendar
-    // replaced the Julian calendar.
-    int B = -2;
-    if (year > 1582 || (year == 1582 && (month > 10 || (month == 10 && day >= 15)))) {
-      B = year / 400 - year / 100;
-    }
+	// Correct for the lost days in Oct 1582 when the Gregorian calendar
+	// replaced the Julian calendar.
+	int B = -2;
+	if (year > 1582 || (year == 1582 && (month > 10 || (month == 10 && day >= 15))))
+	{
+		B = year / 400 - year / 100;
+	}
 
-    jd = ((floor(365.25 * year) +
-            floor(30.6001 * (month + 1)) + B + 1720996.5 +
-            day + hour / 24.0 + minute / 1440.0 + second / 86400.0));
+	jd = ((floor(365.25 * year) +
+	       floor(30.6001 * (month + 1)) + B + 1720996.5 +
+	       day + hour / 24.0 + minute / 1440.0 + second / 86400.0));
 
-    return 1;
+	return 1;
 
 }
 
 
-double str_to_double(string str) {
+double str_to_double(string str)
+{
 
 	if(str=="") return 0;
 	double dbl;
 	std::istringstream dstr( str );
-    
+
 	dstr >> dbl;
 	return dbl;
 }
 
 // always positive
-double str_to_pos_double(string str) {
+double str_to_pos_double(string str)
+{
 
 	if(str=="") return 0;
-    double dbl;
-    std::istringstream dstr( str );
+	double dbl;
+	std::istringstream dstr( str );
 
-    dstr >> dbl;
-    if(dbl < 0 ) dbl *= -1;
-    return dbl;
+	dstr >> dbl;
+	if(dbl < 0 ) dbl *= -1;
+	return dbl;
 }
 
 
-int str_to_int(string str) {
+int str_to_int(string str)
+{
 
 	if(str=="") return 0;
 	int integer;
 	std::istringstream istr( str );
-    
+
 	istr >> integer;
 	return integer;
 }
 
 
-int str_to_int(string str, int default_value) {
+int str_to_int(string str, int default_value)
+{
 
 	if(str=="") return default_value;
 	int integer;
 	std::istringstream istr( str );
-    
+
 	istr >> integer;
 	return integer;
 }
 
-string double_to_str(double dbl) {
+string double_to_str(double dbl)
+{
 
-  std::ostringstream oss;
-  oss << dbl;
-  return oss.str();
+	std::ostringstream oss;
+	oss << dbl;
+	return oss.str();
 
 }
 
-long int str_to_long(string str) {
+long int str_to_long(string str)
+{
 
 	if(str=="") return 0;
 	long int integer;
 	std::istringstream istr( str );
-    
+
 	istr >> integer;
 	return integer;
 }
 
 int fcompare(const string& _base, const string& _sub)
 {
-     unsigned int i = 0; 
-     while (i < _sub.length())
-     { 
-         if (toupper(_base[i]) == toupper(_sub[i])) i++;
-         else return -1;  
-     }
-     return 0;
+	unsigned int i = 0;
+	while (i < _sub.length())
+	{
+		if (toupper(_base[i]) == toupper(_sub[i])) i++;
+		else return -1;
+	}
+	return 0;
 }
 
 int fcompare(const wstring& _base, const wstring& _sub)
 {
-     unsigned int i = 0; 
-     while (i < _sub.length())
-     { 
-         if (toupper(_base[i]) == toupper(_sub[i])) i++;
-         else return -1;  
-     }
-     return 0;
+	unsigned int i = 0;
+	while (i < _sub.length())
+	{
+		if (toupper(_base[i]) == toupper(_sub[i])) i++;
+		else return -1;
+	}
+	return 0;
 }
 

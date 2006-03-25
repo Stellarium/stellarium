@@ -249,9 +249,8 @@ bool NebulaMgr::loadNGC(const string& catNGC, LoadingBar& lb)
 		if (!(i%200) || (i == catalogSize-1))
 		{
 			// Draw loading bar
-			wostringstream os;
-			os << _("Loading NGC catalog: ") << (i == catalogSize-1 ? catalogSize : i) << L"/" << catalogSize;
-			lb.SetMessage(os.str());
+			lb.SetMessage(_("Loading NGC catalog: ") + StelUtility::intToWstring((i == catalogSize-1 ? catalogSize : i)) + 
+				L"/" + StelUtility::intToWstring(catalogSize));
 			lb.Draw((float)i/catalogSize);
 		}
 		Nebula *e = new Nebula;

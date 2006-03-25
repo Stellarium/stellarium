@@ -123,9 +123,8 @@ void HipStarMgr::load_data(const string& hipCatFile, LoadingBar& lb)
 		if (!(i%2000) || (i == starArraySize-1))
 		{
 			// Draw loading bar
-			wostringstream os;
-			os << _("Loading Hipparcos catalog:") << (i == starArraySize-1 ? starArraySize: i) << L"/" << starArraySize;
-			lb.SetMessage(os.str());
+			lb.SetMessage(_("Loading Hipparcos catalog:") + StelUtility::intToWstring((i == starArraySize-1 ? starArraySize: i)) + 
+				L"/" + StelUtility::intToWstring(starArraySize));
 			lb.Draw((float)i/starArraySize);
 		}
 		

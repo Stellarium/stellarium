@@ -1303,19 +1303,14 @@ void StelUI::setTitleObservatoryName(const wstring& name)
 		top_bar_appName_lbl->setLabel(StelUtility::stringToWstring(APP_NAME));
 	else
 	{
-		std::wostringstream oss;
-		oss << StelUtility::stringToWstring(APP_NAME) << L" (" << name << L")";
-		top_bar_appName_lbl->setLabel(oss.str());
+		top_bar_appName_lbl->setLabel(StelUtility::stringToWstring(APP_NAME) + L" (" + name + L")");
 	}
 	top_bar_appName_lbl->setPos(core->getViewportWidth()/2-top_bar_appName_lbl->getSizex()/2,2);
 }
 
 wstring StelUI::getTitleWithAltitude(void)
 {
-	std::wostringstream oss;
-	oss << core->getObservatory().getHomePlanetNameI18()
-        << L", " << core->getObservatory().get_name()
-        << L" @ " << core->getObservatory().get_altitude() << L"m";
-
-	return oss.str();
+	return core->getObservatory().getHomePlanetNameI18() +
+        L", " + core->getObservatory().get_name() +
+        L" @ " + StelUtility::doubleToWstring(core->getObservatory().get_altitude()) + L"m";
 }

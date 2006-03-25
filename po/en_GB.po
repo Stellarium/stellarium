@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: stellarium@free.fr\n"
-"POT-Creation-Date: 2006-03-18 22:05+0100\n"
+"POT-Creation-Date: 2006-03-25 12:48+0100\n"
 "PO-Revision-Date: 2006-03-09 10:23+0100\n"
 "Last-Translator:  Matthew Gates\n"
 "Language-Team: English (United Kingdom) <en_GB@li.org>\n"
@@ -72,24 +72,9 @@ msgstr " Light Years"
 msgid "Spectral Type: "
 msgstr "Spectral : "
 
-#: src/hip_star_mgr.cpp:176
+#: src/hip_star_mgr.cpp:127
 msgid "Loading Hipparcos catalog:"
 msgstr "Loading Hipparcos catalogue:"
-
-#: src/hip_star_mgr.cpp:851 src/hip_star_mgr.cpp:1518
-#, c-format
-msgid "Loading HIP/SAO catalogs: %d/%d"
-msgstr "Loading HIP/SAO catalogues: %d/%d"
-
-#: src/hip_star_mgr.cpp:1194
-#, c-format
-msgid "Loading HIP catalog: %d/%d"
-msgstr "Loading HIP catalogues: %d/%d"
-
-#: src/hip_star_mgr.cpp:1289
-#, c-format
-msgid "Loading SAO catalog: %d/%d"
-msgstr "Loading SAO catalogue: %d/%d"
 
 #: src/nebula.cpp:94
 #, fuzzy
@@ -1283,6 +1268,15 @@ msgstr "Virgo"
 #: src/translations.h:156
 msgid "Vela"
 msgstr "Vela"
+
+#~ msgid "Loading HIP/SAO catalogs: %d/%d"
+#~ msgstr "Loading HIP/SAO catalogues: %d/%d"
+
+#~ msgid "Loading HIP catalog: %d/%d"
+#~ msgstr "Loading HIP catalogues: %d/%d"
+
+#~ msgid "Loading SAO catalog: %d/%d"
+#~ msgstr "Loading SAO catalogue: %d/%d"
 
 #~ msgid "ly"
 #~ msgstr "ly"

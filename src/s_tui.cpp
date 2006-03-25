@@ -324,16 +324,12 @@ wstring Boolean_item::getString(void)
 
 wstring Integer::getString(void)
 {
-	wostringstream os;
-	os << (active ? start_active : L"") << value << (active ? stop_active : L"");
-	return os.str();
+	return (active ? start_active : L"") + StelUtility::doubleToWstring(value) + (active ? stop_active : L"");
 }
 
 wstring Decimal::getString(void)
 {
-	wostringstream os;
-	os << (active ? start_active : L"") << value << (active ? stop_active : L"");
-	return os.str();
+	return (active ? start_active : L"") + StelUtility::doubleToWstring(value) + (active ? stop_active : L"");
 }
 
 bool Integer_item::onKey(Uint16 k, S_TUI_VALUE v)
@@ -398,9 +394,7 @@ bool Integer_item::onKey(Uint16 k, S_TUI_VALUE v)
 			++value;
 			if (value>mmax) value = mmax;
 			if (value<mmin) value = mmin;
-			wostringstream os;
-			os << value;
-			strInput = os.str();
+			strInput = StelUtility::doubleToWstring(value);
 			return true;
 		}
 		if (k==SDLK_DOWN)
@@ -410,9 +404,7 @@ bool Integer_item::onKey(Uint16 k, S_TUI_VALUE v)
 			--value;
 			if (value>mmax) value = mmax;
 			if (value<mmin) value = mmin;
-			wostringstream os;
-			os << value;
-			strInput = os.str();
+			strInput = StelUtility::doubleToWstring(value);
 			return true;
 		}
 
@@ -438,11 +430,8 @@ bool Integer_item::onKey(Uint16 k, S_TUI_VALUE v)
 
 wstring Integer_item::getString(void)
 {
-	wostringstream os;
-
-	if (numInput) os << label << (active ? start_active : L"") << strInput << (active ? stop_active : L"");
-	else os << label << (active ? start_active : L"") << value << (active ? stop_active : L"");
-	return os.str();
+	if (numInput) return label + (active ? start_active : L"") + strInput + (active ? stop_active : L"");
+	else return label + (active ? start_active : L"") + StelUtility::doubleToWstring(value) + (active ? stop_active : L"");
 }
 
 bool Decimal_item::onKey(Uint16 k, S_TUI_VALUE v)
@@ -506,9 +495,7 @@ bool Decimal_item::onKey(Uint16 k, S_TUI_VALUE v)
 			value+=delta;
 			if (value>mmax) value = mmax;
 			if (value<mmin) value = mmin;
-			wostringstream os;
-			os << value;
-			strInput = os.str();
+			strInput = StelUtility::doubleToWstring(value);
 			return true;
 		}
 		if (k==SDLK_DOWN)
@@ -518,9 +505,7 @@ bool Decimal_item::onKey(Uint16 k, S_TUI_VALUE v)
 			value-=delta;
 			if (value>mmax) value = mmax;
 			if (value<mmin) value = mmin;
-			wostringstream os;
-			os << value;
-			strInput = os.str();
+			strInput = StelUtility::doubleToWstring(value);
 			return true;
 		}
 
@@ -546,8 +531,6 @@ bool Decimal_item::onKey(Uint16 k, S_TUI_VALUE v)
 
 wstring Decimal_item::getString(void)
 {
-	wostringstream os;
-
 	// Can't directly write value in os because there is a float precision limit bug..
 	static wchar_t tempstr[16];
 #ifndef MINGW32
@@ -557,9 +540,8 @@ wstring Decimal_item::getString(void)
 #endif
 	wstring vstr(tempstr);
 
-	if (numInput) os << label << (active ? start_active : L"") << strInput << (active ? stop_active : L"");
-	else os << label << (active ? start_active : L"") << vstr << (active ? stop_active : L"");
-	return os.str();
+	if (numInput) return label + (active ? start_active : L"") + strInput + (active ? stop_active : L"");
+	else return label + (active ? start_active : L"") + vstr + (active ? stop_active : L"");
 }
 
 
@@ -645,15 +627,13 @@ wstring Time_item::getString(void)
 	if (current_edit==mn && active){s1[4] = start_active; s2[4] = stop_active;}
 	if (current_edit==s && active){s1[5] = start_active; s2[5] = stop_active;}
 
-	wostringstream os;
-	os 	<< label <<
-	s1[0] << y->getString() << s2[0] << L"/" <<
-	s1[1] << m->getString() << s2[1] << L"/" <<
-	s1[2] << d->getString() << s2[2] << L" " <<
-	s1[3] << h->getString() << s2[3] << L":" <<
-	s1[4] << mn->getString() << s2[4] << L":" <<
-	s1[5] << s->getString() << s2[5];
-	return os.str();
+	return label +
+	s1[0] + y->getString() + s2[0] + L"/" +
+	s1[1] + m->getString() + s2[1] + L"/" +
+	s1[2] + d->getString() + s2[2] + L" " +
+	s1[3] + h->getString() + s2[3] + L":" +
+	s1[4] + mn->getString() + s2[4] + L":" +
+	s1[5] + s->getString() + s2[5];
 }
 
 
@@ -662,14 +642,12 @@ wstring Time_item::getDateString(void)
 {
 	compute_ymdhms();  // possibly redundant
 
-	wostringstream os;
-	os << y->getString() << L":"
-	   << m->getString() << L":"
-	   << d->getString() << L"T"
-	   << h->getString() << L":"
-	   << mn->getString() << L":"
-	   << s->getString();
-	return os.str();
+	return y->getString() + L":" +
+	   m->getString() + L":" +
+	   d->getString() + L"T" +
+	   h->getString() + L":" +
+	   mn->getString() + L":" +
+	   s->getString();
 }
 
 
@@ -982,12 +960,10 @@ wstring Vector_item::getString(void)
 	if (current_edit==b && active){s1[1] = start_active; s2[1] = stop_active;}
 	if (current_edit==c && active){s1[2] = start_active; s2[2] = stop_active;}
 
-	wostringstream os;
-	os 	<< label <<
-	s1[0] << a->getString() << s2[0] << L" " <<
-	s1[1] << b->getString() << s2[1] << L" " <<
-	s1[2] << c->getString() << s2[2] << L" ";
-	return os.str();
+	return label +
+	s1[0] + a->getString() + s2[0] + L" " +
+	s1[1] + b->getString() + s2[1] + L" " +
+	s1[2] + c->getString() + s2[2] + L" ";
 }
 
 // Specialization for strings because operator wstream << string does not exists..
@@ -995,7 +971,5 @@ wstring Vector_item::getString(void)
 	wstring MultiSet_item<string>::getString(void)
 	{
 		if (current==items.end()) return label;
-		wostringstream os;
-		os << label << (active ? start_active : L"") << StelUtility::stringToWstring(*current) << (active ? stop_active : L"");
-		return os.str();
+		return label + (active ? start_active : L"") + StelUtility::stringToWstring(*current) + (active ? stop_active : L"");
 	}

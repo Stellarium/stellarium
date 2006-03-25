@@ -151,9 +151,7 @@ void ConstellationMgr::loadLinesAndArt(const string &fileName, const string &art
 		}
 
 		// Draw loading bar
-        wostringstream os;
-		os << _("Loading Constellation Art: ") << current+1 << L"/" << total;
-		lb.SetMessage(os.str());
+		lb.SetMessage(_("Loading Constellation Art: ") + StelUtility::intToWstring(current+1) + L"/" + StelUtility::intToWstring(total));
 		lb.Draw((float)(current+1)/total);
 		
 		cons = NULL;

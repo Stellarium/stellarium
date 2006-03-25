@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: stellarium@free.fr\n"
-"POT-Creation-Date: 2006-03-18 22:05+0100\n"
+"POT-Creation-Date: 2006-03-25 12:48+0100\n"
 "PO-Revision-Date: 2005-04-21 03:27+0100\n"
 "Last-Translator: Tomasz Adam <topthrilldragster@op.pl>\n"
 "Language-Team:\n"
@@ -77,24 +77,9 @@ msgstr " Lata świetlne"
 msgid "Spectral Type: "
 msgstr "Typ widmowy : "
 
-#: src/hip_star_mgr.cpp:176
+#: src/hip_star_mgr.cpp:127
 msgid "Loading Hipparcos catalog:"
 msgstr "Ładowanie katalogu Hipparcosa :"
-
-#: src/hip_star_mgr.cpp:851 src/hip_star_mgr.cpp:1518
-#, c-format
-msgid "Loading HIP/SAO catalogs: %d/%d"
-msgstr "Ładowanie katalogu HIP/SAO : %d/%d"
-
-#: src/hip_star_mgr.cpp:1194
-#, c-format
-msgid "Loading HIP catalog: %d/%d"
-msgstr "Ładowanie katalogu Hipparcosa : %d/%d"
-
-#: src/hip_star_mgr.cpp:1289
-#, c-format
-msgid "Loading SAO catalog: %d/%d"
-msgstr "Ładowanie katalogu SAO : %d/%d"
 
 #: src/nebula.cpp:94
 #, fuzzy
@@ -1281,6 +1266,15 @@ msgstr "Panna"
 #: src/translations.h:156
 msgid "Vela"
 msgstr "Żagiel"
+
+#~ msgid "Loading HIP/SAO catalogs: %d/%d"
+#~ msgstr "Ładowanie katalogu HIP/SAO : %d/%d"
+
+#~ msgid "Loading HIP catalog: %d/%d"
+#~ msgstr "Ładowanie katalogu Hipparcosa : %d/%d"
+
+#~ msgid "Loading SAO catalog: %d/%d"
+#~ msgstr "Ładowanie katalogu SAO : %d/%d"
 
 #~ msgid "ly"
 #~ msgstr "l.św."

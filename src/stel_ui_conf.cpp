@@ -1088,9 +1088,7 @@ void StelUI::updateConfigForm(void)
 	system_tz_lbl2->setLabel(L"(" +
 		 core->getObservatory().get_time_zone_name_from_system(core->getJDay()) + L")");
 
-	wostringstream os;
-    os << core->getTimeSpeed()/JD_SECOND;
-	time_speed_lbl2->setLabel(wstring(L"\u2022 ")+_("Current Time Speed is x") + os.str());
+	time_speed_lbl2->setLabel(wstring(L"\u2022 ")+_("Current Time Speed is x") + StelUtility::doubleToWstring(core->getTimeSpeed()/JD_SECOND));
 
 	fisheye_projection_cbx->setState(core->getProjectionType()==Projector::FISHEYE_PROJECTOR);
 	disk_viewport_cbx->setState(core->getViewportMaskDisk());

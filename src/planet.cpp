@@ -122,15 +122,16 @@ wstring Planet::getInfoString(const Navigator * nav) const
 // Return the information string "ready to print" :)
 wstring Planet::getShortInfoString(const Navigator * nav) const
 {
-	wostringstream oss;
-
-	oss << nameI18;
+	wstring ws = nameI18;
+	ostringstream oss;
 	oss.setf(ios::fixed);
 	oss.precision(1);
-	if (sphere_scale != 1.f) oss << sphere_scale;
-	oss << _(": mag ") << compute_magnitude(nav->get_observer_helio_pos());
-
-	return oss.str();
+	if (sphere_scale != 1.f)
+	{
+		oss << " (x" << sphere_scale << ")";
+		ws += StelUtility::stringToWstring(oss.str());
+	}
+	return ws;
 }
 
 double Planet::get_close_fov(const Navigator* nav) const
@@ -497,18 +498,14 @@ void Planet::draw_hints(const Navigator* nav, const Projector* prj)
 	glEnable(GL_TEXTURE_2D);
 
 	// Draw nameI18 + scaling if it's not == 1.
-	wostringstream wos;
-	if (sphere_scale == 1.f) wos << nameI18;
-	else wos << nameI18 << "(x" << setprecision(1) << sphere_scale << ")";
-
 	float tmp = 10.f + get_on_screen_size(prj, nav)/sphere_scale/2.f; // Shift for nameI18 printing
 
 	//	glColor4f(label_color[0], label_color[1], label_color[2],1.f);
 	//	glColor4f(label_color[0], label_color[1], label_color[2],hint_fader.getInterstate());
 	glColor3fv(label_color*hint_fader.getInterstate());
 	prj->getFlagGravityLabels() ? 
-		prj->print_gravity180(planet_name_font, screenPos[0],screenPos[1], wos.str(), 1, tmp, tmp) :
-		planet_name_font->print(screenPos[0]+tmp,screenPos[1]+tmp, wos.str());
+		prj->print_gravity180(planet_name_font, screenPos[0],screenPos[1], getShortInfoString(nav), 1, tmp, tmp) :
+		planet_name_font->print(screenPos[0]+tmp,screenPos[1]+tmp, getShortInfoString(nav));
 
 	// hint disapears smoothly on close view
 	tmp -= 10.f;

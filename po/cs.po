@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cs\n"
 "Report-Msgid-Bugs-To: stellarium@free.fr\n"
-"POT-Creation-Date: 2006-03-18 22:05+0100\n"
+"POT-Creation-Date: 2006-03-25 12:48+0100\n"
 "PO-Revision-Date: 2006-03-09 10:23+0100\n"
 "Last-Translator: kubikovski\n"
 "Language-Team: Czech <cs@li.org>\n"
@@ -70,24 +70,9 @@ msgstr " Světelné roky"
 msgid "Spectral Type: "
 msgstr ""
 
-#: src/hip_star_mgr.cpp:176
+#: src/hip_star_mgr.cpp:127
 msgid "Loading Hipparcos catalog:"
 msgstr ""
-
-#: src/hip_star_mgr.cpp:851 src/hip_star_mgr.cpp:1518
-#, c-format
-msgid "Loading HIP/SAO catalogs: %d/%d"
-msgstr ""
-
-#: src/hip_star_mgr.cpp:1194
-#, c-format
-msgid "Loading HIP catalog: %d/%d"
-msgstr ""
-
-#: src/hip_star_mgr.cpp:1289
-#, c-format
-msgid "Loading SAO catalog: %d/%d"
-msgstr "Načítám SAO katalog: %d/%d"
 
 #: src/nebula.cpp:94
 #, fuzzy
@@ -1219,6 +1204,9 @@ msgstr ""
 #: src/translations.h:156
 msgid "Vela"
 msgstr ""
+
+#~ msgid "Loading SAO catalog: %d/%d"
+#~ msgstr "Načítám SAO katalog: %d/%d"
 
 #~ msgid "Name : "
 #~ msgstr "Název: "

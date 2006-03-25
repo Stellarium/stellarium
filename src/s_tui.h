@@ -310,9 +310,7 @@ namespace s_tui
 		virtual wstring getString(void)
 		{
 			if (current==items.end()) return label;
-			wostringstream os;
-			os << label << (active ? start_active : L"") << *current << (active ? stop_active : L"");
-			return os.str();
+			return label + (active ? start_active : L"") + *current + (active ? stop_active : L"");
 		}
 		virtual bool isEditable(void) const {return true;}
 		virtual bool onKey(Uint16 k, S_TUI_VALUE v)
@@ -407,9 +405,7 @@ namespace s_tui
 		virtual wstring getString(void)
 		{
 			if (current==items.end()) return label;
-			wostringstream os;
-			os << label << (active ? start_active : L"") << *current << (active ? stop_active : L"");
-			return os.str();
+			return label + (active ? start_active : L"") + *current + (active ? stop_active : L"");
 		}
 		virtual bool isEditable(void) const {return true;}
 		virtual bool onKey(Uint16 k, S_TUI_VALUE v)

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: stellarium@free.fr\n"
-"POT-Creation-Date: 2006-03-18 22:05+0100\n"
+"POT-Creation-Date: 2006-03-25 12:48+0100\n"
 "PO-Revision-Date: 2006-01-22 16:23+0200\n"
 "Last-Translator: Ali Işıngör <isingor@gmail.com>\n"
 "Language-Team:  <tr@li.org>\n"
@@ -68,24 +68,9 @@ msgstr ""
 msgid "Spectral Type: "
 msgstr ""
 
-#: src/hip_star_mgr.cpp:176
+#: src/hip_star_mgr.cpp:127
 #, fuzzy
 msgid "Loading Hipparcos catalog:"
-msgstr "Hipparcos Kataloğu yükleniyor: %d/%d"
-
-#: src/hip_star_mgr.cpp:851 src/hip_star_mgr.cpp:1518
-#, fuzzy, c-format
-msgid "Loading HIP/SAO catalogs: %d/%d"
-msgstr "Hipparcos Kataloğu yükleniyor: %d/%d"
-
-#: src/hip_star_mgr.cpp:1194
-#, fuzzy, c-format
-msgid "Loading HIP catalog: %d/%d"
-msgstr "Hipparcos Kataloğu yükleniyor: %d/%d"
-
-#: src/hip_star_mgr.cpp:1289
-#, fuzzy, c-format
-msgid "Loading SAO catalog: %d/%d"
 msgstr "Hipparcos Kataloğu yükleniyor: %d/%d"
 
 #: src/nebula.cpp:94
@@ -1252,6 +1237,18 @@ msgstr "Video"
 #, fuzzy
 msgid "Vela"
 msgstr "Nebula"
+
+#, fuzzy
+#~ msgid "Loading HIP/SAO catalogs: %d/%d"
+#~ msgstr "Hipparcos Kataloğu yükleniyor: %d/%d"
+
+#, fuzzy
+#~ msgid "Loading HIP catalog: %d/%d"
+#~ msgstr "Hipparcos Kataloğu yükleniyor: %d/%d"
+
+#, fuzzy
+#~ msgid "Loading SAO catalog: %d/%d"
+#~ msgstr "Hipparcos Kataloğu yükleniyor: %d/%d"
 
 #, fuzzy
 #~ msgid "Alt : "
