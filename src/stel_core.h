@@ -583,7 +583,7 @@ private:
 		
 	float sky_brightness;				// Current sky Brightness in ?
 	bool object_pointer_visibility;		// Should selected object pointer be drawn
-	void draw_chart_background(void);
+	void drawChartBackground(void);
 	wstring get_cursor_pos(int x, int y);
 		
 	// Increment/decrement smoothly the vision field and position

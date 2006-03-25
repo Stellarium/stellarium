@@ -343,8 +343,7 @@ void StelCore::draw(int delta_time)
 
 	glBlendFunc(GL_ONE, GL_ONE);
 
-	if (draw_mode != DM_NORMAL)
-		draw_chart_background();
+	if (draw_mode != DM_NORMAL) drawChartBackground();
 
 	// Draw the milky way.
 	tone_converter->set_world_adaptation_luminance(atmosphere->get_milkyway_adaptation_luminance());
@@ -427,10 +426,10 @@ void StelCore::setLandscape(const string& new_landscape_name)
 	Landscape* newLandscape = Landscape::create_from_file(getDataDir() + "landscapes.ini", new_landscape_name);
 	if (landscape)
 	{
-		delete landscape;
 		// Copy parameters from previous landscape to new one
 		newLandscape->setFlagShow(landscape->getFlagShow());
 		newLandscape->setFlagShowFog(landscape->getFlagShowFog());
+		delete landscape;
 		landscape = newLandscape;
 	}
 	observatory->set_landscape_name(new_landscape_name);
@@ -759,16 +758,18 @@ void StelCore::setColorScheme(const string& skinFile, const string& section)
 	meridian_line->set_font(12, baseFontFile);
 	meridian_line->set_color(StelUtility::str_to_vec3f(conf.get_str(section,"meridian_color")));
 	cardinals_points->set_color(StelUtility::str_to_vec3f(conf.get_str(section,"cardinal_color")));
-	milky_way->set_color(StelUtility::str_to_vec3f(conf.get_str(section,"milky_way_color")));
 	asterisms->setLineColor(StelUtility::str_to_vec3f(conf.get_str(section,"const_lines_color")));
 	asterisms->setBoundaryColor(StelUtility::str_to_vec3f(conf.get_str(section,"const_boundary_color", "0.8,0.3,0.3")));
 	asterisms->setLabelColor(StelUtility::str_to_vec3f(conf.get_str(section,"const_names_color")));
 	
 	// Init milky way
 	if (draw_mode == DM_NORMAL)	milky_way->set_texture("milkyway.png");
-	else milky_way->set_texture("milkyway_chart.png",true);
+	else 
+	{
+		milky_way->set_texture("milkyway_chart.png",true);
+	}
 	
-	chartColor = StelUtility::str_to_vec3f(conf.get_str("color:chart_color"));
+	chartColor = StelUtility::str_to_vec3f(conf.get_str(section,"chart_color"));
 }
 
 //! Get a color used to display info about the currently selected object
@@ -789,7 +790,7 @@ Vec3f StelCore::getSelectedObjectInfoColor(void) const
 	return Vec3f(1, 1, 1);
 }
 
-void StelCore::draw_chart_background(void)
+void StelCore::drawChartBackground(void)
 {
 	int stepX = projection->getViewportWidth();
 	int stepY = projection->getViewportHeight();

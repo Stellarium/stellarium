@@ -45,10 +45,12 @@ SkyLocalizer::SkyLocalizer(const string& cultureDir)
 			InitParser conf;
 			conf.load(tmpfic);
 			dirToNameEnglish[tmp] = conf.get_str("info:name");
-			cout << tmp << " : " << dirToNameEnglish[tmp] << endl;
+			//cout << tmp << " : " << dirToNameEnglish[tmp] << endl;
 			fclose(fic);
 		}
 	}
+	
+	closedir(dp);
 }
 
 SkyLocalizer::~SkyLocalizer(void)
