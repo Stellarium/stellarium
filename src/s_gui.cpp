@@ -2581,10 +2581,7 @@ IntIncDec::~IntIncDec()
 void IntIncDec::draw()
 {
 	if (!visible) return;
-
-	wostringstream os;
-	os << value;
-	label->setLabel(os.str());
+	label->setLabel(StelUtility::doubleToWstring(value));
 	Container::draw();
 }
 
@@ -2635,9 +2632,7 @@ void FloatIncDec::draw()
 	
 	if (format == FORMAT_DEFAULT)
 	{
-		wostringstream os;
-		os << value;
-		label->setLabel(os.str());
+		label->setLabel(StelUtility::doubleToWstring(value));
 	}
 	else if (format == FORMAT_LONGITUDE || format == FORMAT_LATITUDE)
 	{

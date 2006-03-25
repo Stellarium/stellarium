@@ -105,16 +105,14 @@ wstring Nebula::getShortInfoString(const Navigator*) const
 	}
 	else
 	{
-		wostringstream oss;
 		if (NGC_nb > 0)
 		{
-			oss << L"NGC " << NGC_nb;
+			return L"NGC " + StelUtility::intToWstring(NGC_nb);
 		}
 		else if (IC_nb > 0)
 		{
-			oss << L"IC " << IC_nb;
+			return L"IC " + StelUtility::intToWstring(IC_nb);
 		}
-		return oss.str();
 	}
 	
 	// All nebula have at least an NGC or IC number

@@ -83,6 +83,17 @@ public:
 	//! @return The matching string in UTF-8 format
 	static string wstringToString(const wstring& ws);
 	
+	//! @brief Format the double value to a wstring (with current locale)
+	//! Can't use directly wostringstream because it is not portable to MinGW32/STLPort..
+	//! @param d The input double value
+	//! @return The matching wstring
+	static wstring doubleToWstring(double d);
+	
+	//! @brief Format the int value to a wstring (with current locale)
+	//! Can't use directly wostringstream because it is not portable to MinGW32/STLPort..
+	//! @param i The input int value
+	//! @return The matching wstring
+	static wstring intToWstring(int i);
 };
 
 double hms_to_rad(unsigned int h, double m);
