@@ -814,15 +814,10 @@ wstring StelCore::get_cursor_pos(int x, int y)
 {
 	Vec3d v;
 	projection->unproject_earth_equ(x,y,v);
-
-	wostringstream oss;
-
 	float tempDE, tempRA;
 	rect_to_sphe(&tempRA,&tempDE,v);
-	oss << "RA : " << StelUtility::printAngleHMS(tempRA) << endl;
-	oss << "DE : " << StelUtility::printAngleDMS(tempDE);
-
-	return oss.str();
+	return L"RA : " + StelUtility::printAngleHMS(tempRA) + L"\n" +
+	L"DE : " + StelUtility::printAngleDMS(tempDE);
 }
 
 void StelCore::setProjectionType(Projector::PROJECTOR_TYPE pType)

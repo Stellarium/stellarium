@@ -79,9 +79,6 @@ wstring HipStar::getInfoString(const Navigator * nav) const
 	else 
 	{
 		if (HP) oss << L"HP " << HP;
-#ifdef DATA_FILES_USE_SAO
-		else oss << L"SAO" << SAO;
-#endif
 	}
 	if (doubleStar) oss << L" **";
 	oss << endl;
@@ -106,13 +103,6 @@ wstring HipStar::getInfoString(const Navigator * nav) const
 	oss << L"Cat: HP ";
 	if (HP > 0)	oss << HP; else oss << "-";
 
-#ifdef DATA_FILES_USE_SAO
-	oss << L"  HD:";
-	if (HD > 0)	oss << HD; else oss << "-";
-
-	oss << L"  SAO:";
-	if (SAO > 0)	oss << SAO; else oss << "-";
-#endif
 	oss << endl;
 
 	oss << _("Spectral Type: ") << SpType << endl;
@@ -123,20 +113,12 @@ wstring HipStar::getInfoString(const Navigator * nav) const
 
 wstring HipStar::getShortInfoString(const Navigator * nav) const
 {
-	wostringstream oss;
 	if (commonNameI18!=L"" || sciName!=L"")
 	{
-		if (commonNameI18 == L"") oss << sciName; else oss << commonNameI18; 
+		if (commonNameI18 == L"") return sciName; else return commonNameI18; 
 	}
 	else 
-		oss << L"HP " << HP;
-
-// 	oss.setf(ios::fixed);
-// 	oss.precision(1);
-// 	oss << _(": mag ") << Mag;
-// 	if(Distance) oss << L"  " << Distance << _("ly");
-
-	return oss.str();
+		return L"HP " + StelUtility::intToWstring(HP);
 }
 
 // Read datas in binary catalog and compute x,y,z;

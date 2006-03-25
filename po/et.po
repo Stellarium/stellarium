@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: et\n"
 "Report-Msgid-Bugs-To: stellarium@free.fr\n"
-"POT-Creation-Date: 2006-03-18 22:05+0100\n"
+"POT-Creation-Date: 2006-03-25 12:48+0100\n"
 "PO-Revision-Date: 2006-03-09 10:23+0100\n"
 "Last-Translator: H_M_Murdock_EST\n"
 "Language-Team: Estonian <et@li.org>\n"
@@ -67,24 +67,9 @@ msgstr " Valgusaasta"
 msgid "Spectral Type: "
 msgstr ""
 
-#: src/hip_star_mgr.cpp:176
+#: src/hip_star_mgr.cpp:127
 msgid "Loading Hipparcos catalog:"
 msgstr "Hipparcose kataloogi laadimine:"
-
-#: src/hip_star_mgr.cpp:851 src/hip_star_mgr.cpp:1518
-#, c-format
-msgid "Loading HIP/SAO catalogs: %d/%d"
-msgstr "Laadin HIP/SAO katalooge: %d/%d"
-
-#: src/hip_star_mgr.cpp:1194
-#, c-format
-msgid "Loading HIP catalog: %d/%d"
-msgstr "Laadin HIP katalooge: %d/%d"
-
-#: src/hip_star_mgr.cpp:1289
-#, c-format
-msgid "Loading SAO catalog: %d/%d"
-msgstr ""
 
 #: src/nebula.cpp:94
 msgid "Type: "
@@ -1216,6 +1201,12 @@ msgstr ""
 #: src/translations.h:156
 msgid "Vela"
 msgstr ""
+
+#~ msgid "Loading HIP/SAO catalogs: %d/%d"
+#~ msgstr "Laadin HIP/SAO katalooge: %d/%d"
+
+#~ msgid "Loading HIP catalog: %d/%d"
+#~ msgstr "Laadin HIP katalooge: %d/%d"
 
 #~ msgid "ly"
 #~ msgstr "va"

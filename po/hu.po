@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Stellarium 0.7.1\n"
 "Report-Msgid-Bugs-To: stellarium@free.fr\n"
-"POT-Creation-Date: 2006-03-18 22:05+0100\n"
+"POT-Creation-Date: 2006-03-25 12:48+0100\n"
 "PO-Revision-Date: 2006-02-22 09:54+0100\n"
 "Last-Translator: Andras Mohari <mayday@mailpont.hu>\n"
 "Language-Team: Hungarian\n"
@@ -73,24 +73,9 @@ msgstr " fényév"
 msgid "Spectral Type: "
 msgstr "Színképtípus: "
 
-#: src/hip_star_mgr.cpp:176
+#: src/hip_star_mgr.cpp:127
 msgid "Loading Hipparcos catalog:"
 msgstr "Hipparcos-katalógus betöltése:"
-
-#: src/hip_star_mgr.cpp:851 src/hip_star_mgr.cpp:1518
-#, c-format
-msgid "Loading HIP/SAO catalogs: %d/%d"
-msgstr "HIP/SAO katalógusok betöltése: %d/%d"
-
-#: src/hip_star_mgr.cpp:1194
-#, c-format
-msgid "Loading HIP catalog: %d/%d"
-msgstr "HIP-katalógus betöltése: %d/%d"
-
-#: src/hip_star_mgr.cpp:1289
-#, c-format
-msgid "Loading SAO catalog: %d/%d"
-msgstr "SAO-katalógus betöltése: %d/%d"
 
 #: src/nebula.cpp:94
 #, fuzzy
@@ -1278,6 +1263,15 @@ msgstr "Szűz"
 #: src/translations.h:156
 msgid "Vela"
 msgstr "Vitorla"
+
+#~ msgid "Loading HIP/SAO catalogs: %d/%d"
+#~ msgstr "HIP/SAO katalógusok betöltése: %d/%d"
+
+#~ msgid "Loading HIP catalog: %d/%d"
+#~ msgstr "HIP-katalógus betöltése: %d/%d"
+
+#~ msgid "Loading SAO catalog: %d/%d"
+#~ msgstr "SAO-katalógus betöltése: %d/%d"
 
 #~ msgid "ly"
 #~ msgstr "fé"

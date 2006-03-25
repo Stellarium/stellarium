@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: stellarium@free.fr\n"
-"POT-Creation-Date: 2006-03-18 22:05+0100\n"
+"POT-Creation-Date: 2006-03-25 12:48+0100\n"
 "PO-Revision-Date: 2005-10-12 03:24+0100\n"
 "Last-Translator: Henrik Johansen\n"
 "Language-Team:\n"
@@ -75,24 +75,9 @@ msgstr " Lysår"
 msgid "Spectral Type: "
 msgstr "Spektral : "
 
-#: src/hip_star_mgr.cpp:176
+#: src/hip_star_mgr.cpp:127
 msgid "Loading Hipparcos catalog:"
 msgstr "Henter Hipparcos katalog:"
-
-#: src/hip_star_mgr.cpp:851 src/hip_star_mgr.cpp:1518
-#, c-format
-msgid "Loading HIP/SAO catalogs: %d/%d"
-msgstr "Henter HIP/SAO kataloger: %d/%d"
-
-#: src/hip_star_mgr.cpp:1194
-#, c-format
-msgid "Loading HIP catalog: %d/%d"
-msgstr "Henter HIP katalog: %d/%d"
-
-#: src/hip_star_mgr.cpp:1289
-#, c-format
-msgid "Loading SAO catalog: %d/%d"
-msgstr "Henter SAO katalog: %d/%d"
 
 #: src/nebula.cpp:94
 #, fuzzy
@@ -1280,6 +1265,15 @@ msgstr "Jomfruen"
 #: src/translations.h:156
 msgid "Vela"
 msgstr "Sejlet"
+
+#~ msgid "Loading HIP/SAO catalogs: %d/%d"
+#~ msgstr "Henter HIP/SAO kataloger: %d/%d"
+
+#~ msgid "Loading HIP catalog: %d/%d"
+#~ msgstr "Henter HIP katalog: %d/%d"
+
+#~ msgid "Loading SAO catalog: %d/%d"
+#~ msgstr "Henter SAO katalog: %d/%d"
 
 #, fuzzy
 #~ msgid ""
