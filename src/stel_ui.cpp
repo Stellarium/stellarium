@@ -1314,7 +1314,7 @@ wstring StelUI::getTitleWithAltitude(void)
 {
 	std::wostringstream oss;
 	oss << core->getObservatory().getHomePlanetNameI18()
-        << ", " << core->getObservatory().get_name()
+        << L", " << core->getObservatory().get_name()
         << L" @ " << core->getObservatory().get_altitude() << L"m";
 
 	return oss.str();

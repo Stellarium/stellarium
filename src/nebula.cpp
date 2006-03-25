@@ -418,6 +418,7 @@ bool Nebula::readNGC(char *recordstr)
 		luminance = .0075;
 
 	// this is a huge performance drag if called every frame, so cache here
+	if (neb_tex) delete neb_tex;
 	neb_tex = NULL;
 
 	if (!strncmp(&recordstr[8],"Gx",2)) { nType = NEB_GX;}
