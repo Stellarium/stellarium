@@ -36,17 +36,15 @@ public:
     virtual ~HipStarMgr();
 	void init(float font_size, const string& font_name, const string& hipCatFile, const string& commonNameFile, const string& sciNameFile, LoadingBar& lb);
 	void update(int delta_time) {names_fader.update(delta_time); starsFader.update(delta_time);}
-	void set_names_fade_duration(float duration) {names_fader.set_duration((int) (duration * 1000.f));}
-	int load_common_names(const string& commonNameFile);
-	void load_sci_names(const string& sciNameFile);
     void draw(Vec3f equ_vision, ToneReproductor* _eye, Projector* prj);	// Draw all the stars
    
-    void save(void);                    	// Debug function
+  	void set_names_fade_duration(float duration) {names_fader.set_duration((int) (duration * 1000.f));}
+	int load_common_names(const string& commonNameFile);
+	void load_sci_names(const string& sciNameFile);
+	 
     HipStar *search(Vec3f Pos);  		// Search the star by position
 	HipStar *search(const string&);	// Search the star by string (incl catalog prefix)
 	HipStar *searchHP(unsigned int);	// Search the star by HP number
-	HipStar *searchSAO(unsigned int);	// Search the star by SAO number
-	HipStar *searchHD(unsigned int);	// Search the star by HD number
 	// Return a stl vector containing the stars located inside the lim_fov circle around position v
 	vector<StelObject*> search_around(Vec3d v, double lim_fov);
 	vector<wstring> getNames(void) { return lstCommonNames; }
@@ -110,28 +108,12 @@ public:
 	float getStarLimitingMag(void) const {return limitingMag;}
 		
 private:
-	void saveData(void);
-
-	/** Draw the stars rendered as GLpoint. This may be faster but it is not so nice */
+	//! Draw the stars rendered as GLpoint. This may be faster but it is not so nice
 	void drawPoint(Vec3f equ_vision, ToneReproductor* _eye, Projector* prj);	// Draw all the stars as points
  
 	// Load all the stars from the files
-	bool load_SAO_HIP_NAME_data(const string& hipCatFile, LoadingBar& lb, float maxmag);
-	bool load_combined(const string& hipCatFile, LoadingBar& lb);
-	bool load_combined_bin(const string& hipCatFile, LoadingBar& lb);
-
-	bool load_doubleraw(const string& hipCatFile);
 	bool load_double(const string& hipCatFile);
 	bool load_variable(const string& hipCatFile);
-	bool save_double(void);
-	bool save_variable(void);
-
-	bool save_combined(void);
-	bool save_combined_bin(void);
-	bool save_record(FILE *dataFile, HipStar *e);
-	bool save_name_record(FILE *dataFile, unsigned int HP, string name);
-	bool save_record_bin(FILE *dataFile, HipStar *e);
-
 	void load_data(const string& hipCatFile, LoadingBar& lb);
 
 	LinearFader names_fader;
@@ -154,19 +136,6 @@ private:
 	HipStar * StarArray;  				// Sequential Array of the star for memory allocation optimization
 	HipStar ** StarFlatArray; 			// The simple array of the star for sequential research
 	int starArraySize;                  // Number of star in the array
-
-	int CombinedTotal;
-	// TEMP for building data
-	HipStar *SAOStarArray;  			// Sequential Array of the star for memory allocation optimization
-
-	HipStar **HPStarFlatArray; 		// The simple array of the star for sequential research
-	int HPStarArraySize;               // Number of star in the array
-
-	HipStar **HDStarFlatArray; 		// The simple array of the star for sequential research
-	int HDStarArraySize;               // Number of star in the array
-
-	HipStar **SAOStarFlatArray; 		// The simple array of the star for sequential research
-	int SAOStarArraySize;                  // Number of star in the array
 
 	s_texture *starTexture;			// star texture
 	s_texture *starcTexture;			// charted interior disc

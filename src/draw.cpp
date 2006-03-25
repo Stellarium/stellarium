@@ -284,6 +284,7 @@ SkyLine::~SkyLine()
 
 void SkyLine::set_font(float font_size, const string& font_name)
 {
+	if (font) delete font;
 	font = new s_font(font_size, font_name);
 	assert(font);
 }
