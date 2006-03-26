@@ -317,14 +317,14 @@ void Nebula::draw_circle(const Projector* prj, const Navigator * nav)
 	glColor3fv(circle_color*lum*hints_brightness);
 	glBindTexture (GL_TEXTURE_2D, Nebula::tex_circle->getID());
 	glBegin(GL_TRIANGLE_STRIP);
-	glTexCoord2i(1,0);              // Bottom Right
-	glVertex3f(XY[0] + 4, XY[1] - 4, 0.0f);
-	glTexCoord2i(0,0);              // Bottom Left
-	glVertex3f(XY[0] - 4, XY[1] - 4, 0.0f);
-	glTexCoord2i(1,1);              // Top Right
-	glVertex3f(XY[0] + 4, XY[1] + 4,0.0f);
-	glTexCoord2i(0,1);              // Top Left
-	glVertex3f(XY[0] - 4, XY[1] + 4,0.0f);
+		glTexCoord2i(1,0);              // Bottom Right
+		glVertex3f(XY[0] + 4, XY[1] - 4, 0.0f);
+		glTexCoord2i(0,0);              // Bottom Left
+		glVertex3f(XY[0] - 4, XY[1] - 4, 0.0f);
+		glTexCoord2i(1,1);              // Top Right
+		glVertex3f(XY[0] + 4, XY[1] + 4,0.0f);
+		glTexCoord2i(0,1);              // Top Left
+		glVertex3f(XY[0] - 4, XY[1] + 4,0.0f);
 	glEnd ();
 }
 
@@ -336,10 +336,10 @@ void Nebula::draw_no_tex(const Projector* prj, const Navigator * nav,ToneReprodu
 	glColor3f(cmag,cmag,cmag);
 	glBindTexture(GL_TEXTURE_2D, tex_circle->getID());
 	glBegin(GL_QUADS);
-	glTexCoord2i(0,0);    glVertex2f(XY[0]-r,XY[1]-r);	// Bottom left
-	glTexCoord2i(1,0);    glVertex2f(XY[0]+r,XY[1]-r);	// Bottom right
-	glTexCoord2i(1,1);    glVertex2f(XY[0]+r,XY[1]+r);	// Top right
-	glTexCoord2i(0,1);    glVertex2f(XY[0]-r,XY[1]+r);	// Top left
+		glTexCoord2i(0,0);    glVertex2f(XY[0]-r,XY[1]-r);	// Bottom left
+		glTexCoord2i(1,0);    glVertex2f(XY[0]+r,XY[1]-r);	// Bottom right
+		glTexCoord2i(1,1);    glVertex2f(XY[0]+r,XY[1]+r);	// Top right
+		glTexCoord2i(0,1);    glVertex2f(XY[0]-r,XY[1]+r);	// Top left
 	glEnd();
 }
 

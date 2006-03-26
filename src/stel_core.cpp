@@ -312,15 +312,14 @@ void StelCore::update(int delta_time)
 	// compute global sky brightness TODO : make this more "scientifically"
 	// TODO: also add moonlight illumination
 
-	if(sunPos[2] < -0.1/1.5 ) sky_brightness = 0;
+	if(sunPos[2] < -0.1/1.5 ) sky_brightness = 0.01;
 	else sky_brightness = (0.1 + 1.5*sunPos[2]);
 
+	// TODO eventually make this more generic for non-atmosphere planets
+	sky_brightness *= (atmosphere->get_intensity()+0.3);
+	
 	// Landscape is lit even if atmosphere off
 	landscape->set_sky_brightness(sky_brightness);
-
-	// TODO eventually make this more generic for non-atmosphere planets
-	sky_brightness *= atmosphere->get_intensity();
-	
 }
 
 // Execute all the drawing functions
@@ -346,12 +345,10 @@ void StelCore::draw(int delta_time)
 	if (draw_mode != DM_NORMAL) drawChartBackground();
 
 	// Draw the milky way.
-	tone_converter->set_world_adaptation_luminance(atmosphere->get_milkyway_adaptation_luminance());
 	if (draw_mode == DM_NORMAL)
 		milky_way->draw(tone_converter, projection, navigation);
 	else
 		milky_way->draw_chart(tone_converter, projection, navigation);
-	tone_converter->set_world_adaptation_luminance(atmosphere->get_world_adaptation_luminance());
 
 	// Draw all the constellations
 	asterisms->draw(projection, navigation);
@@ -362,10 +359,7 @@ void StelCore::draw(int delta_time)
 	// Draw the hipparcos stars
 	Vec3d tempv = navigation->get_prec_equ_vision();
 	Vec3f temp(tempv[0],tempv[1],tempv[2]);
-	if (sky_brightness<=0.11)
-	{
-		hip_stars->draw(temp, tone_converter, projection);
-	}
+	hip_stars->draw(temp, tone_converter, projection);
 
 	// Draw the equatorial grid
 	equ_grid->draw(projection);
