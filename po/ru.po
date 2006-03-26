@@ -3,13 +3,14 @@
 # This file is distributed under the same license as the stellarium package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2006.
 #
+#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: ru\n"
+"Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: stellarium@free.fr\n"
 "POT-Creation-Date: 2006-03-26 15:18+0200\n"
-"PO-Revision-Date: 2006-03-09 10:23+0100\n"
-"Last-Translator: Sandu\n"
+"PO-Revision-Date: 2006-02-20 22:41+0000\n"
+"Last-Translator: Sandu <xsandu@gmail.com>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -41,14 +42,12 @@ msgid "Loading Constellation Art: "
 msgstr "Загрузка рисунков созвездий: "
 
 #: src/hip_star.cpp:88 src/nebula.cpp:84 src/planet.cpp:104
-#, fuzzy
 msgid "Magnitude: "
-msgstr "Звездная величина : "
+msgstr ""
 
 #: src/hip_star.cpp:89
-#, fuzzy
 msgid " (Variable)"
-msgstr "(Переменная)"
+msgstr ""
 
 #: src/hip_star.cpp:91 src/nebula.cpp:86 src/planet.cpp:108
 msgid "RA/DE: "
@@ -59,32 +58,28 @@ msgid "Az/Alt: "
 msgstr ""
 
 #: src/hip_star.cpp:99 src/planet.cpp:117
-#, fuzzy
 msgid "Distance: "
-msgstr "Расстояние: "
+msgstr ""
 
 #: src/hip_star.cpp:101
 msgid " Light Years"
 msgstr " Световых лет"
 
 #: src/hip_star.cpp:108
-#, fuzzy
 msgid "Spectral Type: "
-msgstr "Спектральный : "
+msgstr ""
 
 #: src/hip_star_mgr.cpp:126
 msgid "Loading Hipparcos catalog:"
 msgstr "Загружается каталог Hipparcos:"
 
 #: src/nebula.cpp:94
-#, fuzzy
 msgid "Type: "
-msgstr "Тип : "
+msgstr ""
 
 #: src/nebula.cpp:95
-#, fuzzy
 msgid "Size: "
-msgstr "Размер : "
+msgstr ""
 
 #: src/nebula_mgr.cpp:269
 msgid "Loading NGC catalog: "
@@ -199,23 +194,17 @@ msgid "Return to Current Time"
 msgstr "Вернуться в настоящее время"
 
 #: src/stel_ui.cpp:654
-#, fuzzy
 msgid ""
 "   Please check for newer versions and send bug reports\n"
 "    and comments to us at: http://www.stellarium.org\n"
 "\n"
 msgstr ""
-"   Пожалуйста, проверяйте наличие новых версий, а также присылайте нам "
-"отчеты об ошибках и комментарии\n"
-"по адресу: http://www.stellarium.org\n"
-"\n"
 
 #: src/stel_ui.cpp:673
 msgid "Information"
 msgstr "Информация"
 
 #: src/stel_ui.cpp:685
-#, fuzzy
 msgid ""
 "Movement & selection:\n"
 "Arrow Keys       : Change viewing RA/DE\n"
@@ -242,7 +231,6 @@ msgstr ""
 "\n"
 
 #: src/stel_ui.cpp:696
-#, fuzzy
 msgid ""
 "Display options:\n"
 "ENTER : Equatorial/altazimuthal mount\n"
@@ -271,7 +259,6 @@ msgstr ""
 "\n"
 
 #: src/stel_ui.cpp:708
-#, fuzzy
 msgid ""
 "Dialogs & other controls:\n"
 "H   : Help                      I   : About Stellarium\n"
@@ -291,7 +278,6 @@ msgstr ""
 "\n"
 
 #: src/stel_ui.cpp:715
-#, fuzzy
 msgid ""
 "Time & Date:\n"
 "6   : Time rate pause           7   : Time rate 0\n"
@@ -310,7 +296,6 @@ msgstr ""
 "\n"
 
 #: src/stel_ui.cpp:722
-#, fuzzy
 msgid ""
 "During Script Playback:\n"
 "CTRL + C : End Script\n"
@@ -323,7 +308,6 @@ msgstr ""
 "\n"
 
 #: src/stel_ui.cpp:726
-#, fuzzy
 msgid ""
 "Misc:\n"
 "9   : Toggle meteor shower rates\n"
@@ -1295,9 +1279,6 @@ msgstr ""
 msgid "Seconds"
 msgstr ""
 
-#~ msgid ": mag "
-#~ msgstr ": вел. "
-
 #~ msgid "Loading HIP/SAO catalogs: %d/%d"
 #~ msgstr "Загружается каталог HIP/SAO: %d/%d"
 
@@ -1307,26 +1288,5 @@ msgstr ""
 #~ msgid "Loading SAO catalog: %d/%d"
 #~ msgstr "Загружается каталог SAO: %d/%d"
 
-#~ msgid "ly"
-#~ msgstr "св. лет"
-
-#~ msgid "Name : "
-#~ msgstr "Имя : "
-
-#~ msgid "(Dbl)"
-#~ msgstr "(Двойная)"
-
-#~ msgid "RA : "
-#~ msgstr "Пр. восх. : "
-
-#~ msgid "DE : "
-#~ msgstr "Скл. : "
-
-#~ msgid "Az  : "
-#~ msgstr "Аз. : "
-
-#~ msgid "Alt : "
-#~ msgstr "Выс. : "
-
-#~ msgid " (UTC)"
-#~ msgstr " (UTC)"
+#~ msgid ": mag "
+#~ msgstr ": вел. "

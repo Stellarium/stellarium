@@ -3,13 +3,14 @@
 # This file is distributed under the same license as the stellarium package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2006.
 #
+#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: stellarium@free.fr\n"
 "POT-Creation-Date: 2006-03-26 15:18+0200\n"
-"PO-Revision-Date: 2006-03-09 10:23+0100\n"
-"Last-Translator: Raivis Dejus\n"
+"PO-Revision-Date: 2006-02-02 19:20+0000\n"
+"Last-Translator: Raivis Dejus <orvils@gmail.com>\n"
 "Language-Team: Latvian <lv@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -42,14 +43,12 @@ msgid "Loading Constellation Art: "
 msgstr "Ielādēju zvaigznāju zīmējumus: "
 
 #: src/hip_star.cpp:88 src/nebula.cpp:84 src/planet.cpp:104
-#, fuzzy
 msgid "Magnitude: "
-msgstr "Svarīgums : "
+msgstr ""
 
 #: src/hip_star.cpp:89
-#, fuzzy
 msgid " (Variable)"
-msgstr "(Var)"
+msgstr ""
 
 #: src/hip_star.cpp:91 src/nebula.cpp:86 src/planet.cpp:108
 msgid "RA/DE: "
@@ -60,18 +59,16 @@ msgid "Az/Alt: "
 msgstr ""
 
 #: src/hip_star.cpp:99 src/planet.cpp:117
-#, fuzzy
 msgid "Distance: "
-msgstr "Attālums : "
+msgstr ""
 
 #: src/hip_star.cpp:101
 msgid " Light Years"
 msgstr " Gaismas gadi"
 
 #: src/hip_star.cpp:108
-#, fuzzy
 msgid "Spectral Type: "
-msgstr "Spektrālais : "
+msgstr ""
 
 #: src/hip_star_mgr.cpp:126
 msgid "Loading Hipparcos catalog:"
@@ -1233,9 +1230,3 @@ msgstr ""
 #: src/s_gui.cpp:2729
 msgid "Seconds"
 msgstr ""
-
-#~ msgid "Name : "
-#~ msgstr "Nosaukums : "
-
-#~ msgid "(Dbl)"
-#~ msgstr "(Dbl)"

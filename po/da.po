@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: stellarium@free.fr\n"
 "POT-Creation-Date: 2006-03-26 15:18+0200\n"
-"PO-Revision-Date: 2005-10-12 03:24+0100\n"
-"Last-Translator: Henrik Johansen\n"
+"PO-Revision-Date: 2006-02-13 21:19+0000\n"
+"Last-Translator: hj_kid <hjkiddk@yahoo.dk>\n"
 "Language-Team:\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -44,14 +44,12 @@ msgid "Loading Constellation Art: "
 msgstr "Henter stjernebillede illustrationer: "
 
 #: src/hip_star.cpp:88 src/nebula.cpp:84 src/planet.cpp:104
-#, fuzzy
 msgid "Magnitude: "
-msgstr "Lysstyrke : "
+msgstr ""
 
 #: src/hip_star.cpp:89
-#, fuzzy
 msgid " (Variable)"
-msgstr "(Var)"
+msgstr ""
 
 #: src/hip_star.cpp:91 src/nebula.cpp:86 src/planet.cpp:108
 msgid "RA/DE: "
@@ -62,32 +60,28 @@ msgid "Az/Alt: "
 msgstr ""
 
 #: src/hip_star.cpp:99 src/planet.cpp:117
-#, fuzzy
 msgid "Distance: "
-msgstr "Afstand : "
+msgstr ""
 
 #: src/hip_star.cpp:101
 msgid " Light Years"
 msgstr " Lysår"
 
 #: src/hip_star.cpp:108
-#, fuzzy
 msgid "Spectral Type: "
-msgstr "Spektral : "
+msgstr ""
 
 #: src/hip_star_mgr.cpp:126
 msgid "Loading Hipparcos catalog:"
 msgstr "Henter Hipparcos katalog:"
 
 #: src/nebula.cpp:94
-#, fuzzy
 msgid "Type: "
-msgstr "Type : "
+msgstr ""
 
 #: src/nebula.cpp:95
-#, fuzzy
 msgid "Size: "
-msgstr "Størrelse : "
+msgstr ""
 
 #: src/nebula_mgr.cpp:269
 msgid "Loading NGC catalog: "
@@ -217,7 +211,6 @@ msgid "Information"
 msgstr "Information"
 
 #: src/stel_ui.cpp:685
-#, fuzzy
 msgid ""
 "Movement & selection:\n"
 "Arrow Keys       : Change viewing RA/DE\n"
@@ -244,7 +237,6 @@ msgstr ""
 "\n"
 
 #: src/stel_ui.cpp:696
-#, fuzzy
 msgid ""
 "Display options:\n"
 "ENTER : Equatorial/altazimuthal mount\n"
@@ -273,7 +265,6 @@ msgstr ""
 "\n"
 
 #: src/stel_ui.cpp:708
-#, fuzzy
 msgid ""
 "Dialogs & other controls:\n"
 "H   : Help                      I   : About Stellarium\n"
@@ -292,7 +283,6 @@ msgstr ""
 "\n"
 
 #: src/stel_ui.cpp:715
-#, fuzzy
 msgid ""
 "Time & Date:\n"
 "6   : Time rate pause           7   : Time rate 0\n"
@@ -311,7 +301,6 @@ msgstr ""
 "\n"
 
 #: src/stel_ui.cpp:722
-#, fuzzy
 msgid ""
 "During Script Playback:\n"
 "CTRL + C : End Script\n"
@@ -324,7 +313,6 @@ msgstr ""
 "\n"
 
 #: src/stel_ui.cpp:726
-#, fuzzy
 msgid ""
 "Misc:\n"
 "9   : Toggle meteor shower rates\n"
@@ -1296,9 +1284,6 @@ msgstr ""
 msgid "Seconds"
 msgstr ""
 
-#~ msgid ": mag "
-#~ msgstr ": forstørrelse "
-
 #~ msgid "Loading HIP/SAO catalogs: %d/%d"
 #~ msgstr "Henter HIP/SAO kataloger: %d/%d"
 
@@ -1308,20 +1293,8 @@ msgstr ""
 #~ msgid "Loading SAO catalog: %d/%d"
 #~ msgstr "Henter SAO katalog: %d/%d"
 
-#, fuzzy
-#~ msgid ""
-#~ "   Please check for newer versions and send bug reports\n"
-#~ "\t                                   and comments to us at: http://www."
-#~ "stellarium.org\n"
-#~ "\n"
-#~ msgstr ""
-#~ "   Venligst check om en nyere version er tilgængelig og send "
-#~ "fejlrapporter \n"
-#~ "og kommentarer til os på http://www.stellarium.org\n"
-#~ "\n"
-
-#~ msgid "ly"
-#~ msgstr "lysår"
+#~ msgid ": mag "
+#~ msgstr ": forstørrelse "
 
 #~ msgid "Name : "
 #~ msgstr "Navn : "
@@ -1329,11 +1302,23 @@ msgstr ""
 #~ msgid "(Dbl)"
 #~ msgstr "(Dbl)"
 
+#~ msgid "(Var)"
+#~ msgstr "(Var)"
+
 #~ msgid "RA : "
 #~ msgstr "RA : "
 
 #~ msgid "DE : "
 #~ msgstr "DE : "
+
+#~ msgid "Spectral : "
+#~ msgstr "Spektral : "
+
+#~ msgid "Magnitude : "
+#~ msgstr "Lysstyrke : "
+
+#~ msgid "Distance : "
+#~ msgstr "Afstand : "
 
 #~ msgid "Az  : "
 #~ msgstr "Az : "
@@ -1341,17 +1326,26 @@ msgstr ""
 #~ msgid "Alt : "
 #~ msgstr "Højde : "
 
-#~ msgid " (UTC)"
-#~ msgstr " (UTC)"
+#~ msgid "ly"
+#~ msgstr "lysår"
 
 #~ msgid "Cat: NGC "
 #~ msgstr "Katalog: NGC "
+
+#~ msgid "Type : "
+#~ msgstr "Type : "
+
+#~ msgid "Size : "
+#~ msgstr "Størrelse : "
 
 #~ msgid "Loading Sharpless catalog:"
 #~ msgstr "Henter Sharpless katalog:"
 
 #~ msgid "Loading Cadwell catalog:"
 #~ msgstr "Henter Cadwell katalog:"
+
+#~ msgid " (UTC)"
+#~ msgstr " (UTC)"
 
 #, fuzzy
 #~ msgid ""

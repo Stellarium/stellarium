@@ -10,8 +10,8 @@ msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: stellarium@free.fr\n"
 "POT-Creation-Date: 2006-03-26 15:18+0200\n"
-"PO-Revision-Date: 2005-04-21 03:27+0100\n"
-"Last-Translator: Tomasz Adam <topthrilldragster@op.pl>\n"
+"PO-Revision-Date: 2006-03-21 18:35+0000\n"
+"Last-Translator: Wojto <wojto23@interia.pl>\n"
 "Language-Team:\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -46,14 +46,12 @@ msgid "Loading Constellation Art: "
 msgstr "Ładowanie obrazów gwiazdozbiorów : "
 
 #: src/hip_star.cpp:88 src/nebula.cpp:84 src/planet.cpp:104
-#, fuzzy
 msgid "Magnitude: "
-msgstr "Jasność : "
+msgstr ""
 
 #: src/hip_star.cpp:89
-#, fuzzy
 msgid " (Variable)"
-msgstr "(zmienna)"
+msgstr ""
 
 #: src/hip_star.cpp:91 src/nebula.cpp:86 src/planet.cpp:108
 msgid "RA/DE: "
@@ -64,32 +62,28 @@ msgid "Az/Alt: "
 msgstr ""
 
 #: src/hip_star.cpp:99 src/planet.cpp:117
-#, fuzzy
 msgid "Distance: "
-msgstr "Odległość : "
+msgstr "Dystans: "
 
 #: src/hip_star.cpp:101
 msgid " Light Years"
 msgstr " Lata świetlne"
 
 #: src/hip_star.cpp:108
-#, fuzzy
 msgid "Spectral Type: "
-msgstr "Typ widmowy : "
+msgstr ""
 
 #: src/hip_star_mgr.cpp:126
 msgid "Loading Hipparcos catalog:"
 msgstr "Ładowanie katalogu Hipparcosa :"
 
 #: src/nebula.cpp:94
-#, fuzzy
 msgid "Type: "
-msgstr "Typ : "
+msgstr ""
 
 #: src/nebula.cpp:95
-#, fuzzy
 msgid "Size: "
-msgstr "Rozmiar : "
+msgstr ""
 
 #: src/nebula_mgr.cpp:269
 msgid "Loading NGC catalog: "
@@ -220,7 +214,6 @@ msgid "Information"
 msgstr "Informacja"
 
 #: src/stel_ui.cpp:685
-#, fuzzy
 msgid ""
 "Movement & selection:\n"
 "Arrow Keys       : Change viewing RA/DE\n"
@@ -247,7 +240,6 @@ msgstr ""
 "\n"
 
 #: src/stel_ui.cpp:696
-#, fuzzy
 msgid ""
 "Display options:\n"
 "ENTER : Equatorial/altazimuthal mount\n"
@@ -276,7 +268,6 @@ msgstr ""
 "\n"
 
 #: src/stel_ui.cpp:708
-#, fuzzy
 msgid ""
 "Dialogs & other controls:\n"
 "H   : Help                      I   : About Stellarium\n"
@@ -295,7 +286,6 @@ msgstr ""
 "\n"
 
 #: src/stel_ui.cpp:715
-#, fuzzy
 msgid ""
 "Time & Date:\n"
 "6   : Time rate pause           7   : Time rate 0\n"
@@ -314,7 +304,6 @@ msgstr ""
 "\n"
 
 #: src/stel_ui.cpp:722
-#, fuzzy
 msgid ""
 "During Script Playback:\n"
 "CTRL + C : End Script\n"
@@ -327,7 +316,6 @@ msgstr ""
 "\n"
 
 #: src/stel_ui.cpp:726
-#, fuzzy
 msgid ""
 "Misc:\n"
 "9   : Toggle meteor shower rates\n"
@@ -1297,9 +1285,6 @@ msgstr ""
 msgid "Seconds"
 msgstr ""
 
-#~ msgid ": mag "
-#~ msgstr ": mag "
-
 #~ msgid "Loading HIP/SAO catalogs: %d/%d"
 #~ msgstr "Ładowanie katalogu HIP/SAO : %d/%d"
 
@@ -1309,8 +1294,8 @@ msgstr ""
 #~ msgid "Loading SAO catalog: %d/%d"
 #~ msgstr "Ładowanie katalogu SAO : %d/%d"
 
-#~ msgid "ly"
-#~ msgstr "l.św."
+#~ msgid ": mag "
+#~ msgstr ": mag "
 
 #~ msgid "Name : "
 #~ msgstr "Nazwa : "
@@ -1318,11 +1303,23 @@ msgstr ""
 #~ msgid "(Dbl)"
 #~ msgstr "(podwójna)"
 
+#~ msgid "(Var)"
+#~ msgstr "(zmienna)"
+
 #~ msgid "RA : "
 #~ msgstr "RA : "
 
 #~ msgid "DE : "
 #~ msgstr "DE : "
+
+#~ msgid "Spectral : "
+#~ msgstr "Typ widmowy : "
+
+#~ msgid "Magnitude : "
+#~ msgstr "Jasność : "
+
+#~ msgid "Distance : "
+#~ msgstr "Odległość : "
 
 #~ msgid "Az  : "
 #~ msgstr "Azymut "
@@ -1330,17 +1327,26 @@ msgstr ""
 #~ msgid "Alt : "
 #~ msgstr "Wysokość "
 
-#~ msgid " (UTC)"
-#~ msgstr " (UTC)"
+#~ msgid "ly"
+#~ msgstr "l.św."
 
 #~ msgid "Cat: NGC "
 #~ msgstr "Katalog: NGC "
+
+#~ msgid "Type : "
+#~ msgstr "Typ : "
+
+#~ msgid "Size : "
+#~ msgstr "Rozmiar : "
 
 #~ msgid "Loading Sharpless catalog:"
 #~ msgstr "Ładowanie katalogu Sharplessa:"
 
 #~ msgid "Loading Cadwell catalog:"
 #~ msgstr "Ładowanie katalogu Cadwella:"
+
+#~ msgid " (UTC)"
+#~ msgstr " (UTC)"
 
 #~ msgid ""
 #~ "ERROR : I can't find the datas directories in :\n"
