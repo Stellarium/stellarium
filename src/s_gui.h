@@ -338,7 +338,7 @@ namespace s_gui
 		CheckBox(bool state = false);
         virtual void draw();
 		virtual int getState(void) const {return isChecked;}
-		virtual void setState(int s) {isChecked = s;}
+		virtual void setState(bool s) {isChecked = s;}
 		virtual bool onClic(int, int, S_GUI_VALUE, S_GUI_VALUE);
     protected:
 		bool isChecked;
@@ -640,7 +640,7 @@ namespace s_gui
 		~LabeledCheckBox();
         virtual void draw(void);
 		virtual int getState(void) const {return checkbox->getState();}
-		virtual void setState(int s) {checkbox->setState(s);}
+		virtual void setState(bool s) {checkbox->setState(s);}
         virtual void setOnPressCallback(const callback<void>& c) {checkbox->setOnPressCallback(c);}
     protected:
 		CheckBox* checkbox;

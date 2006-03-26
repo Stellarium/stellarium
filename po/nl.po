@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: stellarium@free.fr\n"
-"POT-Creation-Date: 2006-03-25 12:48+0100\n"
+"POT-Creation-Date: 2006-03-26 15:18+0200\n"
 "PO-Revision-Date: 2005-07-26 21:42+0100\n"
 "Last-Translator: Johan Meuris <johanmeuris@antwerpen.be>\n"
 "Language-Team:\n"
@@ -40,43 +40,43 @@ msgstr "%s: Foutieve parameter(s) voor opdrachtregel\n"
 msgid "Try `%s --help' for more information.\n"
 msgstr "Typ `%s --help' voor meer informatie.\n"
 
-#: src/constellation_mgr.cpp:155
+#: src/constellation_mgr.cpp:154
 msgid "Loading Constellation Art: "
 msgstr "Inlezen afbeeldingen sterrenbeelden: "
 
-#: src/hip_star.cpp:91 src/nebula.cpp:84 src/planet.cpp:104
+#: src/hip_star.cpp:88 src/nebula.cpp:84 src/planet.cpp:104
 #, fuzzy
 msgid "Magnitude: "
 msgstr "Magnitude : "
 
-#: src/hip_star.cpp:92
+#: src/hip_star.cpp:89
 #, fuzzy
 msgid " (Variable)"
 msgstr "(Var)"
 
-#: src/hip_star.cpp:94 src/nebula.cpp:86 src/planet.cpp:108
+#: src/hip_star.cpp:91 src/nebula.cpp:86 src/planet.cpp:108
 msgid "RA/DE: "
 msgstr "RK/DE: "
 
-#: src/hip_star.cpp:100 src/nebula.cpp:92 src/planet.cpp:114
+#: src/hip_star.cpp:97 src/nebula.cpp:92 src/planet.cpp:114
 msgid "Az/Alt: "
 msgstr "Az/Hgte: "
 
-#: src/hip_star.cpp:102 src/planet.cpp:117
+#: src/hip_star.cpp:99 src/planet.cpp:117
 #, fuzzy
 msgid "Distance: "
 msgstr "Afstand : "
 
-#: src/hip_star.cpp:104
+#: src/hip_star.cpp:101
 msgid " Light Years"
 msgstr " Lichtjaar"
 
-#: src/hip_star.cpp:118
+#: src/hip_star.cpp:108
 #, fuzzy
 msgid "Spectral Type: "
 msgstr "Spectrumtype : "
 
-#: src/hip_star_mgr.cpp:127
+#: src/hip_star_mgr.cpp:126
 msgid "Loading Hipparcos catalog:"
 msgstr "Inlezen Hipparcos sterrencatalogus:"
 
@@ -90,21 +90,17 @@ msgstr "Type : "
 msgid "Size: "
 msgstr "Grootte : "
 
-#: src/nebula_mgr.cpp:253
+#: src/nebula_mgr.cpp:269
 msgid "Loading NGC catalog: "
 msgstr "Inlezen NGC sterrencatalogus: %d/%d "
 
-#: src/nebula_mgr.cpp:377
+#: src/nebula_mgr.cpp:394
 msgid "Loading Nebula Textures:"
 msgstr "Inlezen afbeeldingen van nevels:"
 
 #: src/planet.cpp:117
 msgid "AU"
 msgstr "AE"
-
-#: src/planet.cpp:131
-msgid ": mag "
-msgstr ": mag "
 
 #: src/stel_ui.cpp:195
 msgid "Message"
@@ -210,7 +206,7 @@ msgstr "Terug naar huidige tijd"
 #, fuzzy
 msgid ""
 "   Please check for newer versions and send bug reports\n"
-"\t\t\tand comments to us at: http://www.stellarium.org\n"
+"    and comments to us at: http://www.stellarium.org\n"
 "\n"
 msgstr ""
 "Kijk na of je de laatste versie van Stellarium hebt en meld \n"
@@ -608,7 +604,7 @@ msgstr "Planeten & Manen"
 msgid "Enter observatory name"
 msgstr "Voer naam in van sterrenwacht"
 
-#: src/stel_ui_conf.cpp:1093
+#: src/stel_ui_conf.cpp:1091
 msgid "Current Time Speed is x"
 msgstr "Huidige tijdsnelheid is x"
 
@@ -694,11 +690,11 @@ msgstr "Hemeltaal: "
 msgid "Show: "
 msgstr "Toon: "
 
-#: src/stel_ui_tuiconf.cpp:149 src/stel_ui_tuiconf.cpp:187
+#: src/stel_ui_tuiconf.cpp:149 src/stel_ui_tuiconf.cpp:187 src/s_gui.cpp:2208
 msgid "Yes"
 msgstr "Ja"
 
-#: src/stel_ui_tuiconf.cpp:149 src/stel_ui_tuiconf.cpp:187
+#: src/stel_ui_tuiconf.cpp:149 src/stel_ui_tuiconf.cpp:187 src/s_gui.cpp:2189
 msgid "No"
 msgstr "Nee"
 
@@ -904,19 +900,19 @@ msgstr "Pluto"
 msgid "Charon"
 msgstr "Charon"
 
-#: src/translations.h:62
+#: src/translations.h:62 src/s_gui.cpp:2643
 msgid "N"
 msgstr "N"
 
-#: src/translations.h:63
+#: src/translations.h:63 src/s_gui.cpp:2644
 msgid "S"
 msgstr "Z"
 
-#: src/translations.h:64
+#: src/translations.h:64 src/s_gui.cpp:2648
 msgid "E"
 msgstr "O"
 
-#: src/translations.h:65
+#: src/translations.h:65 src/s_gui.cpp:2649
 msgid "W"
 msgstr "W"
 
@@ -1271,6 +1267,43 @@ msgstr "Maagd"
 #: src/translations.h:156
 msgid "Vela"
 msgstr "Zeilen"
+
+#: src/s_gui.cpp:2195 src/s_gui.cpp:2241
+#, fuzzy
+msgid "Cancel"
+msgstr "Kreeft"
+
+#: src/s_gui.cpp:2213 src/s_gui.cpp:2239
+msgid "OK"
+msgstr ""
+
+#: src/s_gui.cpp:2714
+msgid "Year"
+msgstr ""
+
+#: src/s_gui.cpp:2717
+#, fuzzy
+msgid "Month"
+msgstr "Maan"
+
+#: src/s_gui.cpp:2720
+msgid "Day"
+msgstr ""
+
+#: src/s_gui.cpp:2723
+msgid "Hour"
+msgstr ""
+
+#: src/s_gui.cpp:2726
+msgid "Minutes"
+msgstr ""
+
+#: src/s_gui.cpp:2729
+msgid "Seconds"
+msgstr ""
+
+#~ msgid ": mag "
+#~ msgstr ": mag "
 
 #~ msgid "Loading HIP/SAO catalogs: %d/%d"
 #~ msgstr "Inlezen HIP/SAO sterrencatalogi: %d/%d"
