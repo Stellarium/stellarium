@@ -106,7 +106,7 @@ public:
 	
 	//! Set/Get if Moon display is scaled
 	void setFlagMoonScale(bool b) {if(!b) getMoon()->set_sphere_scale(1); else getMoon()->set_sphere_scale(moonScale);}
-	bool getFlagMoonScale(void) const {return (getMoon()->get_sphere_scale()-1.<0.0000000001);}	
+	bool getFlagMoonScale(void) const {return (fabs(getMoon()->get_sphere_scale()-1.)>0.0001);}	
 	
 	//! Set/Get Moon display scaling factor 
 	void setMoonScale(float f) {moonScale = f;}

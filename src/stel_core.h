@@ -338,6 +338,16 @@ public:
 	//! @param englishName The planet name or "" to select no planet
 	void setPlanetsSelected(const string& englishName) {ssystem->setSelected(englishName);}
 	
+	//! Set flag for displaying a scaled Moon
+	void setFlagMoonScaled(bool b) {ssystem->setFlagMoonScale(b);}
+	//! Get flag for displaying a scaled Moon
+	bool getFlagMoonScaled(void) const {return ssystem->getFlagMoonScale();}
+	
+	//! Set Moon scale
+	void setMoonScale(float f) { if (f<0) ssystem->setMoonScale(1.); else ssystem->setMoonScale(f);}
+	//! Get Moon scale
+	float getMoonScale(void) const {return ssystem->getMoonScale();}	
+	
 	///////////////////////////////////////////////////////////////////////////////////////
 	// Grid and lines
 	//! Set flag for displaying Azimutal Grid
@@ -497,18 +507,6 @@ public:
 	void setNebulaMaxMagHints(float f) {nebulas->setMaxMagHints(f);}
 	//! Get maximum magnitude at which nebulae hints are displayed
 	float getNebulaMaxMagHints(void) const {return nebulas->getMaxMagHints();}
-	
-	///////////////////////////////////////////////////////////////////////////////////////
-	// Solar System
-	//! Set flag for displaying a scaled Moon
-	void setFlagMoonScaled(bool b) {ssystem->setFlagMoonScale(b);}
-	//! Get flag for displaying a scaled Moon
-	bool getFlagMoonScaled(void) const {return ssystem->getFlagMoonScale();}
-	
-	//! Set Moon scale
-	void setMoonScale(float f) { if (f<0) ssystem->setMoonScale(1.); else ssystem->setMoonScale(f);}
-	//! Get Moon scale
-	float getMoonScale(void) const {return ssystem->getMoonScale();}
 	
 	
 	///////////////////////////////////////////////////////////////////////////////////////
