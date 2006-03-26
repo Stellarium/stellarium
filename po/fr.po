@@ -7,13 +7,14 @@
 # Fabien Chéreau, 2006.
 # Fabien Chéreau, 2006.
 # Fabien Chéreau, 2006.
+# Fabien Chéreau, 2006.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: stellarium@free.fr\n"
-"POT-Creation-Date: 2006-03-25 12:48+0100\n"
-"PO-Revision-Date: 2006-03-18 22:03+0100\n"
+"POT-Creation-Date: 2006-03-26 15:18+0200\n"
+"PO-Revision-Date: 2006-03-26 15:22+0200\n"
 "Last-Translator: Fabien Chéreau\n"
 "Language-Team:  <fr@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -42,71 +43,61 @@ msgstr "%s: Mauvais argument(s) sur la ligne de commande\n"
 msgid "Try `%s --help' for more information.\n"
 msgstr "Essayez `%s --help' pour plus d'information.\n"
 
-#: src/constellation_mgr.cpp:155
+#: src/constellation_mgr.cpp:154
 msgid "Loading Constellation Art: "
 msgstr "Chargement des Images Constellations : "
 
-#: src/hip_star.cpp:91 src/nebula.cpp:84 src/planet.cpp:104
-#, fuzzy
+#: src/hip_star.cpp:88 src/nebula.cpp:84 src/planet.cpp:104
 msgid "Magnitude: "
-msgstr "Magnitude : "
+msgstr "Magnitude: "
 
-#: src/hip_star.cpp:92
-#, fuzzy
+#: src/hip_star.cpp:89
 msgid " (Variable)"
-msgstr "(Var)"
+msgstr " (Variable)"
 
-#: src/hip_star.cpp:94 src/nebula.cpp:86 src/planet.cpp:108
+#: src/hip_star.cpp:91 src/nebula.cpp:86 src/planet.cpp:108
 msgid "RA/DE: "
 msgstr "AD/DE: "
 
-#: src/hip_star.cpp:100 src/nebula.cpp:92 src/planet.cpp:114
+#: src/hip_star.cpp:97 src/nebula.cpp:92 src/planet.cpp:114
 msgid "Az/Alt: "
 msgstr "As/Alt: "
 
-#: src/hip_star.cpp:102 src/planet.cpp:117
-#, fuzzy
+#: src/hip_star.cpp:99 src/planet.cpp:117
 msgid "Distance: "
-msgstr "Distance : "
+msgstr "Distance: "
 
-#: src/hip_star.cpp:104
+#: src/hip_star.cpp:101
 msgid " Light Years"
 msgstr " Années Lumière"
 
-#: src/hip_star.cpp:118
-#, fuzzy
+#: src/hip_star.cpp:108
 msgid "Spectral Type: "
-msgstr "Spectral : "
+msgstr "Type Spectral: "
 
-#: src/hip_star_mgr.cpp:127
+#: src/hip_star_mgr.cpp:126
 msgid "Loading Hipparcos catalog:"
 msgstr "Chargement du catalogue d'étoiles Hipparcos :"
 
 #: src/nebula.cpp:94
-#, fuzzy
 msgid "Type: "
-msgstr "Type : "
+msgstr "Type: "
 
 #: src/nebula.cpp:95
-#, fuzzy
 msgid "Size: "
-msgstr "Taille : "
+msgstr "Taille: "
 
-#: src/nebula_mgr.cpp:253
+#: src/nebula_mgr.cpp:269
 msgid "Loading NGC catalog: "
 msgstr "Chargement du catalogue NGC: "
 
-#: src/nebula_mgr.cpp:377
+#: src/nebula_mgr.cpp:394
 msgid "Loading Nebula Textures:"
 msgstr "Chargement des textures des Nébuleuses :"
 
 #: src/planet.cpp:117
 msgid "AU"
 msgstr "UA"
-
-#: src/planet.cpp:131
-msgid ": mag "
-msgstr ": mag "
 
 #: src/stel_ui.cpp:195
 msgid "Message"
@@ -209,10 +200,9 @@ msgid "Return to Current Time"
 msgstr "Revient au Temps Actuel"
 
 #: src/stel_ui.cpp:654
-#, fuzzy
 msgid ""
 "   Please check for newer versions and send bug reports\n"
-"\t\t\tand comments to us at: http://www.stellarium.org\n"
+"    and comments to us at: http://www.stellarium.org\n"
 "\n"
 msgstr ""
 "   Merci d'essayer une version plus récente.\n"
@@ -226,7 +216,6 @@ msgid "Information"
 msgstr "Information"
 
 #: src/stel_ui.cpp:685
-#, fuzzy
 msgid ""
 "Movement & selection:\n"
 "Arrow Keys       : Change viewing RA/DE\n"
@@ -253,7 +242,6 @@ msgstr ""
 "\n"
 
 #: src/stel_ui.cpp:696
-#, fuzzy
 msgid ""
 "Display options:\n"
 "ENTER : Equatorial/altazimuthal mount\n"
@@ -282,7 +270,6 @@ msgstr ""
 "\n"
 
 #: src/stel_ui.cpp:708
-#, fuzzy
 msgid ""
 "Dialogs & other controls:\n"
 "H   : Help                      I   : About Stellarium\n"
@@ -301,7 +288,6 @@ msgstr ""
 "\n"
 
 #: src/stel_ui.cpp:715
-#, fuzzy
 msgid ""
 "Time & Date:\n"
 "6   : Time rate pause           7   : Time rate 0\n"
@@ -320,7 +306,6 @@ msgstr ""
 "\n"
 
 #: src/stel_ui.cpp:722
-#, fuzzy
 msgid ""
 "During Script Playback:\n"
 "CTRL + C : End Script\n"
@@ -333,7 +318,6 @@ msgstr ""
 "\n"
 
 #: src/stel_ui.cpp:726
-#, fuzzy
 msgid ""
 "Misc:\n"
 "9   : Toggle meteor shower rates\n"
@@ -612,7 +596,7 @@ msgstr "Planètes & Lunes"
 msgid "Enter observatory name"
 msgstr "Entrez le nom de l'observatoire"
 
-#: src/stel_ui_conf.cpp:1093
+#: src/stel_ui_conf.cpp:1091
 msgid "Current Time Speed is x"
 msgstr "La vistesse du temps actuelle est x"
 
@@ -696,11 +680,11 @@ msgstr "Language du Ciel: "
 msgid "Show: "
 msgstr "Affiche: "
 
-#: src/stel_ui_tuiconf.cpp:149 src/stel_ui_tuiconf.cpp:187
+#: src/stel_ui_tuiconf.cpp:149 src/stel_ui_tuiconf.cpp:187 src/s_gui.cpp:2208
 msgid "Yes"
 msgstr "Oui"
 
-#: src/stel_ui_tuiconf.cpp:149 src/stel_ui_tuiconf.cpp:187
+#: src/stel_ui_tuiconf.cpp:149 src/stel_ui_tuiconf.cpp:187 src/s_gui.cpp:2189
 msgid "No"
 msgstr "Non"
 
@@ -904,19 +888,19 @@ msgstr "Pluton"
 msgid "Charon"
 msgstr "Charon"
 
-#: src/translations.h:62
+#: src/translations.h:62 src/s_gui.cpp:2643
 msgid "N"
 msgstr "N"
 
-#: src/translations.h:63
+#: src/translations.h:63 src/s_gui.cpp:2644
 msgid "S"
 msgstr "S"
 
-#: src/translations.h:64
+#: src/translations.h:64 src/s_gui.cpp:2648
 msgid "E"
 msgstr "E"
 
-#: src/translations.h:65
+#: src/translations.h:65 src/s_gui.cpp:2649
 msgid "W"
 msgstr "O"
 
@@ -1272,11 +1256,34 @@ msgstr "Vierge"
 msgid "Vela"
 msgstr "Voiles"
 
-#~ msgid "Loading HIP/SAO catalogs: %d/%d"
-#~ msgstr "Loading des catalogues HIP/SAO: %d/%d"
+#: src/s_gui.cpp:2195 src/s_gui.cpp:2241
+msgid "Cancel"
+msgstr "Annuler"
 
-#~ msgid "Loading HIP catalog: %d/%d"
-#~ msgstr "Chargement du catalogue HIP: %d/%d"
+#: src/s_gui.cpp:2213 src/s_gui.cpp:2239
+msgid "OK"
+msgstr "OK"
 
-#~ msgid "Loading SAO catalog: %d/%d"
-#~ msgstr "Chargement du catalogue NGC: %d/%d"
+#: src/s_gui.cpp:2714
+msgid "Year"
+msgstr "Année"
+
+#: src/s_gui.cpp:2717
+msgid "Month"
+msgstr "Mois"
+
+#: src/s_gui.cpp:2720
+msgid "Day"
+msgstr "Jour"
+
+#: src/s_gui.cpp:2723
+msgid "Hour"
+msgstr "Heure"
+
+#: src/s_gui.cpp:2726
+msgid "Minutes"
+msgstr "Minutes"
+
+#: src/s_gui.cpp:2729
+msgid "Seconds"
+msgstr "Secondes"

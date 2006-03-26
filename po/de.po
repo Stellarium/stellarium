@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: de\n"
 "Report-Msgid-Bugs-To: stellarium@free.fr\n"
-"POT-Creation-Date: 2006-03-25 12:48+0100\n"
+"POT-Creation-Date: 2006-03-26 15:18+0200\n"
 "PO-Revision-Date: 2006-01-18 00:07+0100\n"
 "Last-Translator: Antje Buchholz\n"
 "Language-Team: <de@li.org>\n"
@@ -39,43 +39,43 @@ msgstr ""
 msgid "Try `%s --help' for more information.\n"
 msgstr "Versuchen Sie `%s --help' für weitere Informationen\n"
 
-#: src/constellation_mgr.cpp:155
+#: src/constellation_mgr.cpp:154
 #, fuzzy
 msgid "Loading Constellation Art: "
 msgstr "Sternbilder "
 
-#: src/hip_star.cpp:91 src/nebula.cpp:84 src/planet.cpp:104
+#: src/hip_star.cpp:88 src/nebula.cpp:84 src/planet.cpp:104
 #, fuzzy
 msgid "Magnitude: "
 msgstr "Menge : "
 
-#: src/hip_star.cpp:92
+#: src/hip_star.cpp:89
 msgid " (Variable)"
 msgstr ""
 
-#: src/hip_star.cpp:94 src/nebula.cpp:86 src/planet.cpp:108
+#: src/hip_star.cpp:91 src/nebula.cpp:86 src/planet.cpp:108
 msgid "RA/DE: "
 msgstr ""
 
-#: src/hip_star.cpp:100 src/nebula.cpp:92 src/planet.cpp:114
+#: src/hip_star.cpp:97 src/nebula.cpp:92 src/planet.cpp:114
 msgid "Az/Alt: "
 msgstr ""
 
-#: src/hip_star.cpp:102 src/planet.cpp:117
+#: src/hip_star.cpp:99 src/planet.cpp:117
 #, fuzzy
 msgid "Distance: "
 msgstr "Entfernung : "
 
-#: src/hip_star.cpp:104
+#: src/hip_star.cpp:101
 msgid " Light Years"
 msgstr " Lichtjahre"
 
-#: src/hip_star.cpp:118
+#: src/hip_star.cpp:108
 #, fuzzy
 msgid "Spectral Type: "
 msgstr "spektral : "
 
-#: src/hip_star_mgr.cpp:127
+#: src/hip_star_mgr.cpp:126
 msgid "Loading Hipparcos catalog:"
 msgstr ""
 
@@ -89,20 +89,16 @@ msgstr "Typ : "
 msgid "Size: "
 msgstr "Grösse : "
 
-#: src/nebula_mgr.cpp:253
+#: src/nebula_mgr.cpp:269
 msgid "Loading NGC catalog: "
 msgstr ""
 
-#: src/nebula_mgr.cpp:377
+#: src/nebula_mgr.cpp:394
 msgid "Loading Nebula Textures:"
 msgstr ""
 
 #: src/planet.cpp:117
 msgid "AU"
-msgstr ""
-
-#: src/planet.cpp:131
-msgid ": mag "
 msgstr ""
 
 #: src/stel_ui.cpp:195
@@ -209,7 +205,7 @@ msgstr "zurück zur Laufzeit"
 #, fuzzy
 msgid ""
 "   Please check for newer versions and send bug reports\n"
-"\t\t\tand comments to us at: http://www.stellarium.org\n"
+"    and comments to us at: http://www.stellarium.org\n"
 "\n"
 msgstr ""
 "   Please check for newer versions and send bug reports\n"
@@ -558,7 +554,7 @@ msgstr "Planeten & Monde"
 msgid "Enter observatory name"
 msgstr "Name der Sternenwarte eingeben"
 
-#: src/stel_ui_conf.cpp:1093
+#: src/stel_ui_conf.cpp:1091
 msgid "Current Time Speed is x"
 msgstr "aktuelle Zeitgeschwindigkeit ist x"
 
@@ -642,11 +638,11 @@ msgstr "Himmelssprache: "
 msgid "Show: "
 msgstr "anzeigen: "
 
-#: src/stel_ui_tuiconf.cpp:149 src/stel_ui_tuiconf.cpp:187
+#: src/stel_ui_tuiconf.cpp:149 src/stel_ui_tuiconf.cpp:187 src/s_gui.cpp:2208
 msgid "Yes"
 msgstr "Ja"
 
-#: src/stel_ui_tuiconf.cpp:149 src/stel_ui_tuiconf.cpp:187
+#: src/stel_ui_tuiconf.cpp:149 src/stel_ui_tuiconf.cpp:187 src/s_gui.cpp:2189
 msgid "No"
 msgstr "Nein"
 
@@ -850,19 +846,19 @@ msgstr "Pluto"
 msgid "Charon"
 msgstr "Charon"
 
-#: src/translations.h:62
+#: src/translations.h:62 src/s_gui.cpp:2643
 msgid "N"
 msgstr "N"
 
-#: src/translations.h:63
+#: src/translations.h:63 src/s_gui.cpp:2644
 msgid "S"
 msgstr "S"
 
-#: src/translations.h:64
+#: src/translations.h:64 src/s_gui.cpp:2648
 msgid "E"
 msgstr "O"
 
-#: src/translations.h:65
+#: src/translations.h:65 src/s_gui.cpp:2649
 msgid "W"
 msgstr "W"
 
@@ -1219,6 +1215,40 @@ msgstr "Jungfrau"
 #: src/translations.h:156
 msgid "Vela"
 msgstr "Segel des Schiffs"
+
+#: src/s_gui.cpp:2195 src/s_gui.cpp:2241
+#, fuzzy
+msgid "Cancel"
+msgstr "Krebs"
+
+#: src/s_gui.cpp:2213 src/s_gui.cpp:2239
+msgid "OK"
+msgstr ""
+
+#: src/s_gui.cpp:2714
+msgid "Year"
+msgstr ""
+
+#: src/s_gui.cpp:2717
+#, fuzzy
+msgid "Month"
+msgstr "Mond"
+
+#: src/s_gui.cpp:2720
+msgid "Day"
+msgstr ""
+
+#: src/s_gui.cpp:2723
+msgid "Hour"
+msgstr ""
+
+#: src/s_gui.cpp:2726
+msgid "Minutes"
+msgstr ""
+
+#: src/s_gui.cpp:2729
+msgid "Seconds"
+msgstr ""
 
 #~ msgid "Name : "
 #~ msgstr "Name : "
