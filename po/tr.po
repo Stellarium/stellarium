@@ -8,9 +8,9 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: stellarium@free.fr\n"
 "POT-Creation-Date: 2006-03-26 15:18+0200\n"
-"PO-Revision-Date: 2006-01-22 16:23+0200\n"
-"Last-Translator: Ali Işıngör <isingor@gmail.com>\n"
-"Language-Team:  <tr@li.org>\n"
+"PO-Revision-Date: 2006-03-24 06:21+0000\n"
+"Last-Translator: Ali Isingor <isingor@gmail.com>\n"
+"Language-Team: <tr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -23,6 +23,9 @@ msgid ""
 " -v, --version          Output version information and exit.\n"
 " -h, --help             Display this help and exit.\n"
 msgstr ""
+"Kullanım: %s [OPTION] ...\n"
+" -v, --sürüm   Kullanılan sürüm bilgisi ve çık.\n"
+" -h, --yardım   Bu yardımı göster ve çık.\n"
 
 #: src/main.cpp:76
 #, c-format
@@ -32,69 +35,63 @@ msgstr "%s: Yanlış komut satırı parametresi\n"
 #: src/main.cpp:77
 #, c-format
 msgid "Try `%s --help' for more information.\n"
-msgstr "Daha fazla bilgi için %s --yardımını kullanmayı deneyin.\n"
+msgstr "Daha fazla bilgilendirilmek için `%s --help' yazınız.\n"
 
 #: src/constellation_mgr.cpp:154
-#, fuzzy
 msgid "Loading Constellation Art: "
-msgstr "Takımyıldızı Göstergesi Yükleniyor: %d/%d"
+msgstr "Takımyıldızı Göstergesi Yükleniyor: "
 
 #: src/hip_star.cpp:88 src/nebula.cpp:84 src/planet.cpp:104
-#, fuzzy
 msgid "Magnitude: "
-msgstr "Parlaklık"
+msgstr "Parlaklık: "
 
 #: src/hip_star.cpp:89
 msgid " (Variable)"
-msgstr ""
+msgstr " (Değişken)"
 
 #: src/hip_star.cpp:91 src/nebula.cpp:86 src/planet.cpp:108
 msgid "RA/DE: "
-msgstr ""
+msgstr "RA/DE: "
 
 #: src/hip_star.cpp:97 src/nebula.cpp:92 src/planet.cpp:114
 msgid "Az/Alt: "
-msgstr ""
+msgstr "Az/Alt: "
 
 #: src/hip_star.cpp:99 src/planet.cpp:117
 msgid "Distance: "
-msgstr ""
+msgstr "Uzaklık: "
 
 #: src/hip_star.cpp:101
 msgid " Light Years"
-msgstr ""
+msgstr " Işık Yılı"
 
 #: src/hip_star.cpp:108
 msgid "Spectral Type: "
-msgstr ""
+msgstr "Yüzey Sıcaklığı: "
 
 #: src/hip_star_mgr.cpp:126
-#, fuzzy
 msgid "Loading Hipparcos catalog:"
-msgstr "Hipparcos Kataloğu yükleniyor: %d/%d"
+msgstr "Hipparcos Kataloğu yükleniyor:"
 
 #: src/nebula.cpp:94
 msgid "Type: "
-msgstr ""
+msgstr "Türü: "
 
 #: src/nebula.cpp:95
-#, fuzzy
 msgid "Size: "
-msgstr "Gök Zamanı:"
+msgstr "Büyüklük: "
 
 #: src/nebula_mgr.cpp:269
-#, fuzzy
 msgid "Loading NGC catalog: "
-msgstr "Hipparcos Kataloğu yükleniyor: %d/%d"
+msgstr "NGC kataloğu yükleniyor: "
 
 #: src/nebula_mgr.cpp:394
-#, fuzzy
 msgid "Loading Nebula Textures:"
-msgstr " Nebula Verisi Yükleniyor: %d/%d"
+msgstr "Bulutsu Dokuları Yükleniyor:"
 
 #: src/planet.cpp:117
 msgid "AU"
-msgstr ""
+msgstr "AU"
 
 #: src/stel_ui.cpp:195
 msgid "Message"
@@ -142,7 +139,7 @@ msgstr "Atmosfer [A]"
 
 #: src/stel_ui.cpp:611
 msgid "Nebulas [N]"
-msgstr "Nebulalar [N]"
+msgstr "Bulutsular [N]"
 
 #: src/stel_ui.cpp:613
 msgid "Help [H]"
@@ -158,11 +155,11 @@ msgstr "Yapılandırma Penceresi"
 
 #: src/stel_ui.cpp:619
 msgid "Chart mode"
-msgstr ""
+msgstr "Harita kipi"
 
 #: src/stel_ui.cpp:621
 msgid "Night (red) mode"
-msgstr ""
+msgstr "Gece (kırmızı) modu"
 
 #: src/stel_ui.cpp:624
 msgid "Quit [CTRL + Q]"
@@ -203,9 +200,9 @@ msgid ""
 "    and comments to us at: http://www.stellarium.org\n"
 "\n"
 msgstr ""
-"    Lütfen güncel sürümü kullandığınızdan emin olun ve \n"
-" http://www.stellarium.org sitesine önerilerinizi  bildirin.\n"
-" \n"
+"   Lütfen en yeni sürümleri kullanın ve hata raporlamalarında bulunun\n"
+"\t\t\tve http://www.stellarium.org'a yorumlarınızı yazın\n"
+"\n"
 
 #: src/stel_ui.cpp:673
 msgid "Information"
@@ -225,6 +222,17 @@ msgid ""
 "SPACE            : Center on selected object\n"
 "\n"
 msgstr ""
+"Hareket ve Seçilenler:\n"
+"Yön Tuşları : Sağ Açıklık/Dik Açıklık (RA/DE)\n"
+"Page Up/Down : Büyütme/Küçültme\n"
+"CTRL+Up/Down : Büyütme/Küçültme\n"
+"Sol Tık : Cismi seç\n"
+"Sağ Tık : Seçili cismi bırak\n"
+"CTRL+Sol Tık : Seçili cismi bırak\n"
+"\\ : Küçült (Gezegen ve ayları için)\n"
+"/ : Seçili cismi büyüt\n"
+"Boşluk tuşu (SPACE) : Seçili cismi ortala\n"
+"\n"
 
 #: src/stel_ui.cpp:696
 msgid ""
@@ -241,6 +249,17 @@ msgid ""
 "4 , : Ecliptic line             5 . : Equator line\n"
 "\n"
 msgstr ""
+"Gösterim seçenekleri:\n"
+"ENTER : Ekvatoral/Altazimutal eksen\n"
+"F1 : Tam ekran boyutuna geçmeyi dene.\n"
+"C: Takımyıldızı çizgileri  V : Takımyıldızı adları\n"
+"Z : Azimutal İzdüşüm  N : Bulutsu adları\n"
+"P : Gezegen adları  G : Yeryüzü\n"
+"A : Atmosfer  F : Pus\n"
+"Q : Ana Yönler  O : Ay ölçekleme modu\n"
+"T : Gök cismi takibi  S : Yıldızlar\n"
+"4 : Yörünge Çizgisi  5 : Ekvator Çizgisi\n"
+"\n"
 
 #: src/stel_ui.cpp:708
 msgid ""
@@ -252,6 +271,13 @@ msgid ""
 "CTRL + F : Toggle object finder\n"
 "\n"
 msgstr ""
+"Kısayollar & diğer komutlar: \n"
+"H : Yardım    I : Stellarium Hakkında\n"
+"M : Text menu    1 : Yapılandırma\n"
+"CTRL + S : Ekran görüntüsü al\n"
+"CTRL + R : Betik kayıt modu\n"
+"CTRL + F : Gök Cismi arama modu\n"
+"\n"
 
 #: src/stel_ui.cpp:715
 msgid ""
@@ -263,6 +289,13 @@ msgid ""
 "[   : Back 7 days               ]   : Forward 7 days\n"
 "\n"
 msgstr ""
+"Saat & Tarih:\n"
+"6 : Zaman akışına ara ver   7 : Zaman akışı 0\n"
+"8 : Şu anki saate ayarla   J : Zaman akışını yavaşlat\n"
+"K : Normal zaman akışı   L : Zaman akışını hızlandır\n"
+"- : 24 saat geri git   = : 24 saat ileri git\n"
+"[ : 7 gün geri git   ] : 7 gün ileri git\n"
+"\n"
 
 #: src/stel_ui.cpp:722
 msgid ""
@@ -271,12 +304,18 @@ msgid ""
 "6   : pause script              K   : resume script\n"
 "\n"
 msgstr ""
+"Betik Çalışması Sırasında:\n"
+"CTRL + C : Betiği sona erdir\n"
+"6 :  Betiği beklet   K : Betiği tekrar çalıştır\n"
+"\n"
 
 #: src/stel_ui.cpp:726
 msgid ""
 "Misc:\n"
 "9   : Toggle meteor shower rates\n"
 msgstr ""
+"Karışık:\n"
+"9 : Meteor yağmuru yoğunluğunu değiştir\n"
 
 #: src/stel_ui.cpp:729
 msgid "CTRL + Q : Quit\n"
@@ -336,7 +375,7 @@ msgstr "Sadece Seçili Takımyıldızları"
 
 #: src/stel_ui_conf.cpp:103
 msgid "Nebulas Names. Up to mag :"
-msgstr "Şu parlaklıktan fazla Nebula İsimleri:"
+msgstr "Şu parlaklıktan fazla Bulutsu İsimleri:"
 
 #: src/stel_ui_conf.cpp:120
 msgid "Planets"
@@ -387,24 +426,20 @@ msgid "Save as default"
 msgstr "Öntanımlı olarak kaydet"
 
 #: src/stel_ui_conf.cpp:201
-#, fuzzy
 msgid "Current Time :"
-msgstr "  Şu Anki Saat:"
+msgstr "Şu Anki Saat :"
 
 #: src/stel_ui_conf.cpp:210
-#, fuzzy
 msgid "Time Zone :"
-msgstr "  Zaman Dilimi:"
+msgstr "Zaman Dilimi :"
 
 #: src/stel_ui_conf.cpp:214
-#, fuzzy
 msgid "Using System Default Time Zone"
-msgstr "  Öntanımlı Sistem Saatini Kullanımı"
+msgstr "Öntanımlı Sistem Saat Dilimi Kullanılıyor"
 
 #: src/stel_ui_conf.cpp:223
-#, fuzzy
 msgid "Time speed : "
-msgstr "  Zaman Akış Hızı: "
+msgstr "Zaman akış hızı : "
 
 #: src/stel_ui_conf.cpp:231
 msgid ""
@@ -418,33 +453,31 @@ msgstr ""
 
 #: src/stel_ui_conf.cpp:253
 msgid "Cursor : "
-msgstr ""
+msgstr "İmleç : "
 
 #: src/stel_ui_conf.cpp:258
 msgid "Selected : "
-msgstr ""
+msgstr "Seçili : "
 
 #: src/stel_ui_conf.cpp:263
 msgid "Longitude : "
-msgstr "Boylam:"
+msgstr "Boylam: "
 
 #: src/stel_ui_conf.cpp:271
 msgid "Latitude : "
-msgstr "Enlem:"
+msgstr "Enlem: "
 
 #: src/stel_ui_conf.cpp:279
-#, fuzzy
 msgid "Altitude : "
-msgstr "Rakım (m):"
+msgstr "Rakım : "
 
 #: src/stel_ui_conf.cpp:286
 msgid "Save location"
 msgstr "Konumu Kaydet"
 
 #: src/stel_ui_conf.cpp:308
-#, fuzzy
 msgid "Projection :"
-msgstr "  Projeksiyon:"
+msgstr "Projeksiyon :"
 
 #: src/stel_ui_conf.cpp:314
 msgid "Fisheye Projection Mode"
@@ -455,9 +488,8 @@ msgid "Disk Viewport"
 msgstr "Disk Görünümü"
 
 #: src/stel_ui_conf.cpp:324
-#, fuzzy
 msgid "Screen Resolution :"
-msgstr "  Ekran Çözünürlüğü:"
+msgstr "Ekran Çözünürlüğü :"
 
 #: src/stel_ui_conf.cpp:328
 msgid "Restart program for"
@@ -465,16 +497,15 @@ msgstr "Programı yeniden başlat"
 
 #: src/stel_ui_conf.cpp:329
 msgid "change to apply."
-msgstr "Değişiklik uygulanıyor."
+msgstr "değişiklik uygulanıyor."
 
 #: src/stel_ui_conf.cpp:353
 msgid "For unlisted screen resolution, edit the file :"
 msgstr "Listelenmemiş ekran çözünürlükleri için dosyayı düzenleyin:"
 
 #: src/stel_ui_conf.cpp:373
-#, fuzzy
 msgid "Choose landscapes :"
-msgstr "Yeryüzü Şeklini Seç:"
+msgstr "Yeryüzü Şeklini seç:"
 
 #: src/stel_ui_conf.cpp:390
 msgid "Please save option in tab \"Location\""
@@ -509,9 +540,8 @@ msgid "Object Search"
 msgstr "Gök Cismi Arama"
 
 #: src/stel_ui_conf.cpp:526
-#, fuzzy
 msgid "Star No./Name"
-msgstr "HP No./Adı"
+msgstr "Yıldız No./Adı"
 
 #: src/stel_ui_conf.cpp:530
 msgid "eg. 60718 (aCrux) or Canopus"
@@ -519,7 +549,7 @@ msgstr "Örn. 60718 (aCrux) ya da Canopus"
 
 #: src/stel_ui_conf.cpp:531
 msgid "HP 60718, HD 108248, SAO 251904"
-msgstr ""
+msgstr "HP 60718, HD 108248, SAO 251904"
 
 #: src/stel_ui_conf.cpp:552 src/stel_ui_conf.cpp:683
 msgid "Constellation"
@@ -531,15 +561,15 @@ msgstr "Örn. Crux"
 
 #: src/stel_ui_conf.cpp:575 src/stel_ui_conf.cpp:684
 msgid "Nebula"
-msgstr "Nebula"
+msgstr "Bulutsu"
 
 #: src/stel_ui_conf.cpp:579
 msgid "eg. M83, NGC 7009, IC 2118"
-msgstr ""
+msgstr "Örn. M83, NGC 7009, IC 2118"
 
 #: src/stel_ui_conf.cpp:580
 msgid "CW 113, SH 40"
-msgstr ""
+msgstr "CW 113, SH 40"
 
 #: src/stel_ui_conf.cpp:665
 msgid "Planet/Moon"
@@ -555,92 +585,91 @@ msgstr "Gezegenler ve Ayları"
 
 #: src/stel_ui_conf.cpp:956
 msgid "Enter observatory name"
-msgstr ""
+msgstr "Gözlemci adını girin"
 
 #: src/stel_ui_conf.cpp:1091
-#, fuzzy
 msgid "Current Time Speed is x"
-msgstr "  Şu Anki Saat:"
+msgstr "Şu anki zaman akış hızı x"
 
 #: src/stel_ui_tuiconf.cpp:74
 msgid "Set Location "
-msgstr "Konumu Ayarla"
+msgstr "Konumu Ayarla "
 
 #: src/stel_ui_tuiconf.cpp:75
 msgid "Set Time "
-msgstr "Saati Ayarla"
+msgstr "Saati Ayarla "
 
 #: src/stel_ui_tuiconf.cpp:76
 msgid "General "
-msgstr "Genel"
+msgstr "Genel "
 
 #: src/stel_ui_tuiconf.cpp:77
 msgid "Stars "
-msgstr "Yıldızlar"
+msgstr "Yıldızlar "
 
 #: src/stel_ui_tuiconf.cpp:78
 msgid "Colors "
-msgstr ""
+msgstr "Rankler "
 
 #: src/stel_ui_tuiconf.cpp:79
 msgid "Effects "
-msgstr "Efektler"
+msgstr "Efektler "
 
 #: src/stel_ui_tuiconf.cpp:80
 msgid "Scripts "
-msgstr "Betikler"
+msgstr "Betikler "
 
 #: src/stel_ui_tuiconf.cpp:81
 msgid "Administration "
-msgstr "Yönetim"
+msgstr "Yönetim "
 
 #: src/stel_ui_tuiconf.cpp:92
 msgid "Latitude: "
-msgstr "Enlem:"
+msgstr "Enlem: "
 
 #: src/stel_ui_tuiconf.cpp:94
 msgid "Longitude: "
-msgstr "Boylam:"
+msgstr "Boylam: "
 
 #: src/stel_ui_tuiconf.cpp:96
 msgid "Altitude (m): "
-msgstr "Rakım (m):"
+msgstr "Rakım (m): "
 
 #: src/stel_ui_tuiconf.cpp:103
 msgid "Sky Time: "
-msgstr "Gök Zamanı:"
+msgstr "Gök Zamanı: "
 
 #: src/stel_ui_tuiconf.cpp:105
 msgid "Set Time Zone: "
-msgstr "Zaman Dilimini Ayarla:"
+msgstr "Zaman Dilimini Ayarla: "
 
 #: src/stel_ui_tuiconf.cpp:108
 msgid "Preset Sky Time: "
-msgstr "Gök Zamanını Ayarla:"
+msgstr "Gök Zamanını Ayarla: "
 
 #: src/stel_ui_tuiconf.cpp:110
 msgid "Sky Time At Start-up: "
-msgstr "Açılışta Gök Zamanı:"
+msgstr "Açılışta Gök Zamanı: "
 
 #: src/stel_ui_tuiconf.cpp:114
 msgid "Time Display Format: "
-msgstr "Zaman Gösterim Biçimi:"
+msgstr "Zaman Gösterim Biçimi: "
 
 #: src/stel_ui_tuiconf.cpp:119
 msgid "Date Display Format: "
-msgstr "Tarih Gösterim Biçimi:"
+msgstr "Tarih Gösterim Biçimi: "
 
 #: src/stel_ui_tuiconf.cpp:136
 msgid "Sky Culture: "
-msgstr "Gök Kültü:"
+msgstr "Gök Kültü: "
 
 #: src/stel_ui_tuiconf.cpp:141
 msgid "Sky Language: "
-msgstr "Gök Dili:"
+msgstr "Gök Dili: "
 
 #: src/stel_ui_tuiconf.cpp:149
 msgid "Show: "
-msgstr "Göster:"
+msgstr "Göster: "
 
 #: src/stel_ui_tuiconf.cpp:149 src/stel_ui_tuiconf.cpp:187 src/s_gui.cpp:2208
 msgid "Yes"
@@ -652,42 +681,39 @@ msgstr "Hayır"
 
 #: src/stel_ui_tuiconf.cpp:151
 msgid "Star Magnitude Multiplier: "
-msgstr "Yıldız Parlaklığı Çarpanı:"
+msgstr "Yıldız Parlaklığı Çarpanı: "
 
 #: src/stel_ui_tuiconf.cpp:153
 msgid "Maximum Magnitude to Label: "
-msgstr "Maksimum Parlaklık Oranı:"
+msgstr "Maksimum Parlaklık Oranı: "
 
 #: src/stel_ui_tuiconf.cpp:155
 msgid "Twinkling: "
-msgstr "Pırıldama:"
+msgstr "Pırıldama: "
 
 #: src/stel_ui_tuiconf.cpp:164
-#, fuzzy
 msgid "Constellation lines: "
-msgstr "Takımyıldızları"
+msgstr "Takımyıldızı çizgileri: "
 
 #: src/stel_ui_tuiconf.cpp:168
-#, fuzzy
 msgid "Constellation labels: "
-msgstr "Takımyıldızlarının Adları"
+msgstr "Takımyıldızı etiketleri: "
 
 #: src/stel_ui_tuiconf.cpp:172
-#, fuzzy
 msgid "Cardinal points: "
-msgstr "Ana Yönler"
+msgstr "Ana Yönler: "
 
 #: src/stel_ui_tuiconf.cpp:181
 msgid "Landscape: "
-msgstr "Yeryüzü Şekli:"
+msgstr "Yeryüzü Şekli: "
 
 #: src/stel_ui_tuiconf.cpp:187
 msgid "Manual zoom: "
-msgstr "Elle büyütme:"
+msgstr "Elle büyütme: "
 
 #: src/stel_ui_tuiconf.cpp:191
 msgid "Object Sizing Rule: "
-msgstr "Cisim Boyutlama Kuralı:"
+msgstr "Cisim Boyutlama Kuralı: "
 
 #: src/stel_ui_tuiconf.cpp:191
 msgid "Point"
@@ -699,163 +725,159 @@ msgstr "Parlaklık"
 
 #: src/stel_ui_tuiconf.cpp:195
 msgid "Magnitude Sizing Multiplier: "
-msgstr "Parlaklık Boyutu Çarpanı:"
+msgstr "Parlaklık Boyutu Çarpanı: "
 
 #: src/stel_ui_tuiconf.cpp:199
 msgid "Milky Way intensity: "
-msgstr "Samanyolu Yoğunluğu:"
+msgstr "Samanyolu Yoğunluğu: "
 
 #: src/stel_ui_tuiconf.cpp:203
-#, fuzzy
 msgid "Maximum Nebula Magnitude to Label: "
-msgstr "Maksimum Parlaklık Oranı:"
+msgstr "Maksimum Bulutsu Parlaklık Oranı: "
 
 #: src/stel_ui_tuiconf.cpp:207
-#, fuzzy
 msgid "Zoom Duration: "
-msgstr "Büyütme süresi:"
+msgstr "Büyütme Süresi: "
 
 #: src/stel_ui_tuiconf.cpp:211
-#, fuzzy
 msgid "Cursor Timeout: "
-msgstr "  Şu Anki Saat:"
+msgstr "İmleç Gecikmesi: "
 
 #: src/stel_ui_tuiconf.cpp:217
 msgid "Local Script: "
-msgstr "Yerel Betik:"
+msgstr "Yerel Betik: "
 
 #: src/stel_ui_tuiconf.cpp:223
 msgid "CD/DVD Script: "
-msgstr "CD/DVD Betikleri:"
+msgstr "CD/DVD Betikleri: "
 
 #: src/stel_ui_tuiconf.cpp:231
 msgid "Load Default Configuration: "
-msgstr "Öntanımlı Yapılandırmayı Yükle:"
+msgstr "Öntanımlı Yapılandırmayı Yükle: "
 
 #: src/stel_ui_tuiconf.cpp:233
 msgid "Save Current Configuration as Default: "
-msgstr "Mevcut Yapılandırmayı Öntanımlı Olarak Ata:"
+msgstr "Mevcut Yapılandırmayı Öntanımlı Olarak Ata: "
 
 #: src/stel_ui_tuiconf.cpp:235
 msgid "Update me via Internet: "
-msgstr "İnternet aracılığı ile güncelle:"
+msgstr "İnternet aracılığı ile güncelle: "
 
 #: src/stel_ui_tuiconf.cpp:251
 msgid "N-S Centering Offset: "
-msgstr "K-G Merkezli Konumlandırma:"
+msgstr "K-G Merkezli Konumlandırma: "
 
 #: src/stel_ui_tuiconf.cpp:255
 msgid "E-W Centering Offset: "
-msgstr "D-B Merkezli Konumlandırma:"
+msgstr "D-B Merkezli Konumlandırma: "
 
 #: src/translations.h:33
 msgid "Sun"
-msgstr ""
+msgstr "Güneş"
 
 #: src/translations.h:34
 msgid "Mercury"
-msgstr ""
+msgstr "Merkür"
 
 #: src/translations.h:35
 msgid "Venus"
-msgstr ""
+msgstr "Venüs"
 
 #: src/translations.h:36
 msgid "Earth"
-msgstr ""
+msgstr "Yeryüzü"
 
 #: src/translations.h:37
 msgid "Moon"
-msgstr ""
+msgstr "Ay"
 
 #: src/translations.h:38
-#, fuzzy
 msgid "Mars"
-msgstr "Yıldızlar"
+msgstr "Mars"
 
 #: src/translations.h:39
 msgid "Deimos"
-msgstr ""
+msgstr "Deimos"
 
 #: src/translations.h:40
 msgid "Phobos"
-msgstr ""
+msgstr "Phobos"
 
 #: src/translations.h:41
 msgid "Jupiter"
-msgstr ""
+msgstr "Jüpiter"
 
 #: src/translations.h:42
 msgid "Io"
-msgstr ""
+msgstr "Io"
 
 #: src/translations.h:43
 msgid "Europa"
-msgstr ""
+msgstr "Europa"
 
 #: src/translations.h:44
 msgid "Ganymede"
-msgstr ""
+msgstr "Ganymede"
 
 #: src/translations.h:45
 msgid "Callisto"
-msgstr ""
+msgstr "Callisto"
 
 #: src/translations.h:46
 msgid "Saturn"
-msgstr ""
+msgstr "Satürn"
 
 #: src/translations.h:47
 msgid "Mimas"
-msgstr ""
+msgstr "Mimas"
 
 #: src/translations.h:48
 msgid "Enceladus"
-msgstr ""
+msgstr "Enceladus"
 
 #: src/translations.h:49
 msgid "Tethys"
-msgstr ""
+msgstr "Tethys"
 
 #: src/translations.h:50
 msgid "Dione"
-msgstr ""
+msgstr "Dione"
 
 #: src/translations.h:51
 msgid "Rhea"
-msgstr ""
+msgstr "Rhea"
 
 #: src/translations.h:52
 msgid "Titan"
-msgstr ""
+msgstr "Titan"
 
 #: src/translations.h:53
 msgid "Hyperion"
-msgstr ""
+msgstr "Hyperion"
 
 #: src/translations.h:54
 msgid "Iapetus"
-msgstr ""
+msgstr "Iapetus"
 
 #: src/translations.h:55
 msgid "Phoebe"
-msgstr ""
+msgstr "Phoebe"
 
 #: src/translations.h:56
 msgid "Neptune"
-msgstr ""
+msgstr "Neptün"
 
 #: src/translations.h:57
 msgid "Uranus"
-msgstr ""
+msgstr "Uranüs"
 
 #: src/translations.h:58
 msgid "Pluto"
-msgstr ""
+msgstr "Plüton"
 
 #: src/translations.h:59
 msgid "Charon"
-msgstr ""
+msgstr "Kharon"
 
 #: src/translations.h:62 src/s_gui.cpp:2643
 msgid "N"
@@ -875,368 +897,360 @@ msgstr "B"
 
 #: src/translations.h:68
 msgid "Aquila"
-msgstr ""
+msgstr "Kartal"
 
 #: src/translations.h:69
 msgid "Andromeda"
-msgstr ""
+msgstr "Andromeda"
 
 #: src/translations.h:70
 msgid "Sculptor"
-msgstr ""
+msgstr "Heykeltraş"
 
 #: src/translations.h:71
 msgid "Ara"
-msgstr ""
+msgstr "Sunak"
 
 #: src/translations.h:72
 msgid "Libra"
-msgstr ""
+msgstr "Terazi"
 
 #: src/translations.h:73
 msgid "Cetus"
-msgstr ""
+msgstr "Balina"
 
 #: src/translations.h:74
 msgid "Aries"
-msgstr ""
+msgstr "Koç"
 
 #: src/translations.h:75 src/translations.h:145
 msgid "Scutum"
-msgstr ""
+msgstr "Kalkan"
 
 #: src/translations.h:76
 msgid "Pyxis"
-msgstr ""
+msgstr "Kumpas"
 
 #: src/translations.h:77
 msgid "Bootes"
-msgstr ""
+msgstr "Çoban"
 
 #: src/translations.h:78
 msgid "Caelum"
-msgstr ""
+msgstr "Çelikkalem"
 
 #: src/translations.h:79
 msgid "Chamaeleon"
-msgstr ""
+msgstr "Bukalemun"
 
 #: src/translations.h:80
 msgid "Cancer"
-msgstr ""
+msgstr "Yengeç"
 
 #: src/translations.h:81
 msgid "Capricornus"
-msgstr ""
+msgstr "Oğlak"
 
 #: src/translations.h:82
 msgid "Carina"
-msgstr ""
+msgstr "Karina"
 
 #: src/translations.h:83
 msgid "Cassiopeia"
-msgstr ""
+msgstr "Kraliçe"
 
 #: src/translations.h:84
 msgid "Centaurus"
-msgstr ""
+msgstr "Erboğa"
 
 #: src/translations.h:85
 msgid "Cepheus"
-msgstr ""
+msgstr "Kral"
 
 #: src/translations.h:86
 msgid "Coma Berenices"
-msgstr ""
+msgstr "Berenis'in Saçı"
 
 #: src/translations.h:87
 msgid "Canes Venatici"
-msgstr ""
+msgstr "Av Köpekleri"
 
 #: src/translations.h:88
 msgid "Auriga"
-msgstr ""
+msgstr "Arabacı"
 
 #: src/translations.h:89
 msgid "Columba"
-msgstr ""
+msgstr "Güvercin"
 
 #: src/translations.h:90
 msgid "Circinus"
-msgstr ""
+msgstr "Pergel"
 
 #: src/translations.h:91
 msgid "Crater"
-msgstr ""
+msgstr "Kupa"
 
 #: src/translations.h:92
 msgid "Corona Australis"
-msgstr ""
+msgstr "Güney Tacı"
 
 #: src/translations.h:93
 msgid "Corona Borealis"
-msgstr ""
+msgstr "Kuzey Tacı"
 
 #: src/translations.h:94
 msgid "Corvus"
-msgstr ""
+msgstr "Karga"
 
 #: src/translations.h:95
-#, fuzzy
 msgid "Crux"
-msgstr "Örn. Crux"
+msgstr "Güney Haçı"
 
 #: src/translations.h:96
 msgid "Cygnus"
-msgstr ""
+msgstr "Kuğu"
 
 #: src/translations.h:97
 msgid "Delphinus"
-msgstr ""
+msgstr "Yunus"
 
 #: src/translations.h:98
 msgid "Dorado"
-msgstr ""
+msgstr "Kılıç Balığı"
 
 #: src/translations.h:99
 msgid "Draco"
-msgstr ""
+msgstr "Ejderha"
 
 #: src/translations.h:100
 msgid "Norma"
-msgstr ""
+msgstr "Cetvel"
 
 #: src/translations.h:101
 msgid "Eridanus"
-msgstr ""
+msgstr "Irmak"
 
 #: src/translations.h:102
 msgid "Sagitta"
-msgstr ""
+msgstr "Ok"
 
 #: src/translations.h:103
 msgid "Fornax"
-msgstr ""
+msgstr "Ocak"
 
 #: src/translations.h:104
 msgid "Gemini"
-msgstr ""
+msgstr "İkizler"
 
 #: src/translations.h:105
 msgid "Camelopardalis"
-msgstr ""
+msgstr "Zürafa"
 
 #: src/translations.h:106
 msgid "Canis Major"
-msgstr ""
+msgstr "Büyük Köpek"
 
 #: src/translations.h:107
 msgid "Ursa Major"
-msgstr ""
+msgstr "Büyük Ayı"
 
 #: src/translations.h:108
-#, fuzzy
 msgid "Grus"
-msgstr "Yeryüzü"
+msgstr "Turna"
 
 #: src/translations.h:109
 msgid "Hercules"
-msgstr ""
+msgstr "Herkül"
 
 #: src/translations.h:110
 msgid "Horologium"
-msgstr ""
+msgstr "Saat"
 
 #: src/translations.h:111
 msgid "Hydra"
-msgstr ""
+msgstr "Su Yılanı"
 
 #: src/translations.h:112
 msgid "Hydrus"
-msgstr ""
+msgstr "Küçük Su Yılanı"
 
 #: src/translations.h:113
 msgid "Indus"
-msgstr ""
+msgstr "Kızılderili"
 
 #: src/translations.h:114
 msgid "Lacerta"
-msgstr ""
+msgstr "Kertenkele"
 
 #: src/translations.h:115
 msgid "Monoceros"
-msgstr ""
+msgstr "Tekboynuz"
 
 #: src/translations.h:116
 msgid "Lepus"
-msgstr ""
+msgstr "Tavşan"
 
 #: src/translations.h:117
 msgid "Leo"
-msgstr ""
+msgstr "Aslan"
 
 #: src/translations.h:118
 msgid "Lupus"
-msgstr ""
+msgstr "Kurt"
 
 #: src/translations.h:119
 msgid "Lynx"
-msgstr ""
+msgstr "Vaşak"
 
 #: src/translations.h:120
 msgid "Lyra"
-msgstr ""
+msgstr "Çalgı"
 
 #: src/translations.h:121
 msgid "Antlia"
-msgstr ""
+msgstr "Pompa"
 
 #: src/translations.h:122
 msgid "Microscopium"
-msgstr ""
+msgstr "Mikroskop"
 
 #: src/translations.h:123
 msgid "Musca"
-msgstr ""
+msgstr "Sinek"
 
 #: src/translations.h:124
 msgid "Octans"
-msgstr ""
+msgstr "Oktant"
 
 #: src/translations.h:125
 msgid "Apus"
-msgstr ""
+msgstr "Cennet Kuşu"
 
 #: src/translations.h:126
 msgid "Ophiuchus"
-msgstr ""
+msgstr "Yılancı"
 
 #: src/translations.h:127
 msgid "Orion"
-msgstr ""
+msgstr "Avcı"
 
 #: src/translations.h:128
 msgid "Pavo"
-msgstr ""
+msgstr "Tavus Kuşu"
 
 #: src/translations.h:129
 msgid "Pegasus"
-msgstr ""
+msgstr "Kanatlı At"
 
 #: src/translations.h:130
 msgid "Pictor"
-msgstr ""
+msgstr "Ressam"
 
 #: src/translations.h:131
 msgid "Perseus"
-msgstr ""
+msgstr "Kahraman"
 
 #: src/translations.h:132
 msgid "Equuleus"
-msgstr ""
+msgstr "Tay"
 
 #: src/translations.h:133
 msgid "Canis Minor"
-msgstr ""
+msgstr "Küçük Köpek"
 
 #: src/translations.h:134
 msgid "Leo Minor"
-msgstr ""
+msgstr "Küçük Aslan"
 
 #: src/translations.h:135
 msgid "Vulpecula"
-msgstr ""
+msgstr "Tilki"
 
 #: src/translations.h:136
 msgid "Ursa Minor"
-msgstr ""
+msgstr "Küçük Ayı"
 
 #: src/translations.h:137
 msgid "Phoenix"
-msgstr ""
+msgstr "Anka Kuşu"
 
 #: src/translations.h:138
 msgid "Piscis Austrinus"
-msgstr ""
+msgstr "Güney Balığı"
 
 #: src/translations.h:139
 msgid "Pisces"
-msgstr ""
+msgstr "Balık"
 
 #: src/translations.h:140
-#, fuzzy
 msgid "Volans"
-msgstr "Gezegenler"
+msgstr "Uçan Balık"
 
 #: src/translations.h:141
 msgid "Puppis"
-msgstr ""
+msgstr "Pupa"
 
 #: src/translations.h:142
 msgid "Reticulum"
-msgstr ""
+msgstr "Ağ"
 
 #: src/translations.h:143
-#, fuzzy
 msgid "Sagittarius"
-msgstr "Yıldızlar"
+msgstr "Yay"
 
 #: src/translations.h:144
-#, fuzzy
 msgid "Scorpius"
-msgstr "Betikler"
+msgstr "Akrep"
 
 #: src/translations.h:146
 msgid "Serpens"
-msgstr ""
+msgstr "Yılan"
 
 #: src/translations.h:147
-#, fuzzy
 msgid "Sextans"
-msgstr "Yıldızlar"
+msgstr "Sekstant"
 
 #: src/translations.h:148
-#, fuzzy
 msgid "Mensa"
-msgstr "İleti"
+msgstr "Masa"
 
 #: src/translations.h:149
 msgid "Taurus"
-msgstr ""
+msgstr "Boğa"
 
 #: src/translations.h:150
 msgid "Telescopium"
-msgstr ""
+msgstr "Teleskop"
 
 #: src/translations.h:151
 msgid "Tucana"
-msgstr ""
+msgstr "Tukan"
 
 #: src/translations.h:152
 msgid "Triangulum"
-msgstr ""
+msgstr "Üçgen"
 
 #: src/translations.h:153
 msgid "Triangulum Australe"
-msgstr ""
+msgstr "Güney Üçgeni"
 
 #: src/translations.h:154
 msgid "Aquarius"
-msgstr ""
+msgstr "Kova"
 
 #: src/translations.h:155
-#, fuzzy
 msgid "Virgo"
-msgstr "Video"
+msgstr "Başak"
 
 #: src/translations.h:156
-#, fuzzy
 msgid "Vela"
-msgstr "Nebula"
+msgstr "Yelken"
 
 #: src/s_gui.cpp:2195 src/s_gui.cpp:2241
+#, fuzzy
 msgid "Cancel"
-msgstr ""
+msgstr "Yengeç"
 
 #: src/s_gui.cpp:2213 src/s_gui.cpp:2239
 msgid "OK"
@@ -1249,7 +1263,7 @@ msgstr ""
 #: src/s_gui.cpp:2717
 #, fuzzy
 msgid "Month"
-msgstr "Nokta"
+msgstr "Ay"
 
 #: src/s_gui.cpp:2720
 msgid "Day"
@@ -1267,21 +1281,17 @@ msgstr ""
 msgid "Seconds"
 msgstr ""
 
-#, fuzzy
 #~ msgid "Loading HIP/SAO catalogs: %d/%d"
-#~ msgstr "Hipparcos Kataloğu yükleniyor: %d/%d"
+#~ msgstr "HIP/SAO katalogları yükleniyor: %d/%d"
 
-#, fuzzy
 #~ msgid "Loading HIP catalog: %d/%d"
-#~ msgstr "Hipparcos Kataloğu yükleniyor: %d/%d"
+#~ msgstr "HIP kataloğu yükleniyor: %d/%d"
 
-#, fuzzy
 #~ msgid "Loading SAO catalog: %d/%d"
-#~ msgstr "Hipparcos Kataloğu yükleniyor: %d/%d"
+#~ msgstr "SAO kataloğu yükleniyor: %d/%d"
 
-#, fuzzy
-#~ msgid "Alt : "
-#~ msgstr "Rakım (m):"
+#~ msgid ": mag "
+#~ msgstr ": mag "
 
 #~ msgid ""
 #~ "Please check last version and send bug report & comments \n"
@@ -1290,7 +1300,7 @@ msgstr ""
 #~ msgstr ""
 #~ "Lütfen güncel sürümü kullandığınızdan emin olun ve \n"
 #~ " http://www.stellarium.org sitesine önerilerinizi  bildirin.\n"
-#~ " \n"
+#~ "\n"
 
 #~ msgid ""
 #~ "ERROR : I can't find the datas directories in :\n"
@@ -1312,19 +1322,22 @@ msgstr ""
 #~ msgstr "Yapılandırma dosyası  %s dizininde yaratılacak\n"
 
 #~ msgid "Try to create directory %s\n"
-#~ msgstr " %s dizini yaratılıyor\n"
+#~ msgstr "%s dizini yaratılıyor\n"
 
 #~ msgid ""
 #~ "Can't create the file %sconfig.ini\n"
 #~ "If the directory %s is missing please create it by hand.\n"
 #~ "If not, check that you have access to %s\n"
 #~ msgstr ""
-#~ " %sconfig.ini dosyası yaratılamıyor\n"
+#~ "%sconfig.ini dosyası yaratılamıyor\n"
 #~ "Eğer  %s  dizini kaybolmuşsa lütfen onu elle oluşturun.\n"
 #~ "Aksi takdirde %s dizinine erişim hakkınız olmayacaktır.\n"
 
 #~ msgid "ERROR on line %d of %s\n"
 #~ msgstr "%d satırında %s hatası\n"
+
+#~ msgid "Loading Constellation Art: %d/%d"
+#~ msgstr "Takımyıldızı Göstergesi Yükleniyor: %d/%d"
 
 #~ msgid ""
 #~ "Name : %s%s%s\n"
@@ -1342,7 +1355,10 @@ msgstr ""
 #~ "Hip: %.4d\n"
 
 #~ msgid "Loading Hipparcos star data "
-#~ msgstr "Hipparcos Kataloğu'ndan yıldız verileri yükleniyor"
+#~ msgstr "Hipparcos Kataloğu'ndan yıldız verileri yükleniyor "
+
+#~ msgid "Loading Hipparcos catalog: %d/%d"
+#~ msgstr "Hipparcos Kataloğu yükleniyor: %d/%d"
 
 #~ msgid ""
 #~ "Name : %s (NGC %u)\n"
@@ -1356,10 +1372,13 @@ msgstr ""
 #~ "Parlaklık: %.2f"
 
 #~ msgid "Loading nebulas data "
-#~ msgstr "Nebula Verileri Yükleniyor"
+#~ msgstr "Nebula Verileri Yükleniyor "
 
 #~ msgid "(%d deep space objects)...\n"
 #~ msgstr "(%d derin gök cisimleri)...\n"
+
+#~ msgid "Loading Nebula Data: %d/%d"
+#~ msgstr "Nebula Verisi Yükleniyor: %d/%d"
 
 #~ msgid "Loading location: \"%s\", "
 #~ msgstr "Konum Yükleniyor: \"%s\", "
@@ -1384,10 +1403,19 @@ msgstr ""
 #~ "Uzaklık: %.8f AU"
 
 #~ msgid "Did not recognize locale language code "
-#~ msgstr "Yerel dil kodu tanımlanamadı"
+#~ msgstr "Yerel dil kodu tanımlanamadı "
 
 #~ msgid ". Defaulting to english sky labels\n"
 #~ msgstr "Gök isimleri İngilizce öntanımlı yapılıyor\n"
+
+#~ msgid ""
+#~ "   Please check for newer versions and send bug reports\n"
+#~ "and comments to us at: http://stellarium.sourceforge.net\n"
+#~ "\n"
+#~ msgstr ""
+#~ "Lütfen güncel sürümü kullandığınızdan emin olun ve \n"
+#~ " http://www.stellarium.org sitesine önerilerinizi  bildirin.\n"
+#~ "\n"
 
 #~ msgid ""
 #~ "Arrow Keys       : Change viewing RA/DE\n"
@@ -1454,6 +1482,30 @@ msgstr ""
 #~ "CTRL + S : Ekran görüntüsü al\n"
 #~ "CTRL + R : Betik kayıt  modu\n"
 
+#~ msgid " Current Time :"
+#~ msgstr "Şu Anki Saat:"
+
+#~ msgid " Time Zone :"
+#~ msgstr "Zaman Dilimi:"
+
+#~ msgid " Using System Default Time Zone"
+#~ msgstr "Öntanımlı Sistem Saatini Kullanımı"
+
+#~ msgid " Time speed : "
+#~ msgstr "Zaman Akış Hızı: "
+
+#~ msgid " Projection :"
+#~ msgstr "Projeksiyon:"
+
+#~ msgid " Screen Resolution :"
+#~ msgstr "Ekran Çözünürlüğü:"
+
+#~ msgid " Choose landscapes :"
+#~ msgstr "Yeryüzü Şeklini Seç:"
+
+#~ msgid "HP No./Name"
+#~ msgstr "HP No./Adı"
+
 #~ msgid "Messier No."
 #~ msgstr "Messier Kataloğu No:"
 
@@ -1461,13 +1513,13 @@ msgstr ""
 #~ msgstr "Örn. M83"
 
 #~ msgid "Saving rendering options in file "
-#~ msgstr "Kaplama özellikleri dosyaya kaydediliyor"
+#~ msgstr "Kaplama özellikleri dosyaya kaydediliyor "
 
 #~ msgid "Saving video size "
-#~ msgstr "Video boyutunu kaydediyor"
+#~ msgstr "Video boyutunu kaydediyor "
 
 #~ msgid " in file "
-#~ msgstr "dosyasında"
+#~ msgstr " dosyasında "
 
 #~ msgid "Loading Solar System data...\n"
 #~ msgstr "Güneş Sistemi Verileri yükleniyor..\n"
@@ -1489,10 +1541,13 @@ msgstr ""
 #~ "Bu dosya öntanımlı yapılandırma dosyası ile değiştirilecek.\n"
 
 #~ msgid "Loading configuration file "
-#~ msgstr "Yapılandırma dosyası yükleniyor"
+#~ msgstr "Yapılandırma dosyası yükleniyor "
 
 #~ msgid "ERROR : The current config file is from a different version ("
 #~ msgstr "HATA: Mevcut yapılandırma dosyası farklı bir sürüme ait ("
 
 #~ msgid "Invalid sky culture directory: "
-#~ msgstr "Geçersiz Gök Kültü dizini:"
+#~ msgstr "Geçersiz Gök Kültü dizini: "
+
+#~ msgid "Zoom duration: "
+#~ msgstr "Büyütme süresi: "

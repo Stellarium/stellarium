@@ -1,15 +1,16 @@
 # Romanian translation for stellarium
 # Copyright (c) (c) 2006 Canonical Ltd, and Rosetta Contributors 2006
 # This file is distributed under the same license as the stellarium package.
-# Marius Stanuta, 2006.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2006.
 #
+#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: stellarium@free.fr\n"
 "POT-Creation-Date: 2006-03-26 15:18+0200\n"
-"PO-Revision-Date: 2006-03-09 10:23+0100\n"
-"Last-Translator:  Marius Stanuta\n"
+"PO-Revision-Date: 2006-03-26 01:53+0000\n"
+"Last-Translator: Polaris <blind_savatage@yahoo.com>\n"
 "Language-Team: Romanian <ro@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -23,77 +24,71 @@ msgid ""
 " -v, --version          Output version information and exit.\n"
 " -h, --help             Display this help and exit.\n"
 msgstr ""
-"Utilizare:%s [OPTIUNE]...\n"
-"-v,--versiune ; afiseaza versiunea si inchide programul.\n"
-"-h,--ajutor ; afiseaza comenzile de ajutor si inchide programul.\n"
+"Utilizare:%s [OPŢIUNE]...\n"
+"-v,--versiune ; afişează versiunea şi închide programul.\n"
+"-h,--ajutor ; afişează comenzile de ajutor şi închide programul.\n"
 
 #: src/main.cpp:76
 #, c-format
 msgid "%s: Bad command line argument(s)\n"
-msgstr "%s: Linia de comanda contine comenzi gresite.\n"
+msgstr "%s: Linia de comanda conţine comenzi greşite.\n"
 
 #: src/main.cpp:77
 #, c-format
 msgid "Try `%s --help' for more information.\n"
-msgstr "Incercati '%s--ajutor' pentru informatii suplimentare.\n"
+msgstr "Încercaţi '%s--ajutor' pentru informaţii suplimentare.\n"
 
 #: src/constellation_mgr.cpp:154
 msgid "Loading Constellation Art: "
-msgstr "Incarc imaginile constelatiilor: "
+msgstr "Încarc imaginile constelaţiilor: "
 
 #: src/hip_star.cpp:88 src/nebula.cpp:84 src/planet.cpp:104
-#, fuzzy
 msgid "Magnitude: "
-msgstr "Magnitudinea: "
+msgstr "Magnitudine : "
 
 #: src/hip_star.cpp:89
-#, fuzzy
 msgid " (Variable)"
-msgstr "(Var)"
+msgstr " (Variabilă)"
 
 #: src/hip_star.cpp:91 src/nebula.cpp:86 src/planet.cpp:108
 msgid "RA/DE: "
-msgstr ""
+msgstr "AD/DE: "
 
 #: src/hip_star.cpp:97 src/nebula.cpp:92 src/planet.cpp:114
 msgid "Az/Alt: "
-msgstr ""
+msgstr "Az/Alt: "
 
 #: src/hip_star.cpp:99 src/planet.cpp:117
-#, fuzzy
 msgid "Distance: "
-msgstr "Distanta: "
+msgstr "Distanţă: "
 
 #: src/hip_star.cpp:101
 msgid " Light Years"
 msgstr " Ani lumina"
 
 #: src/hip_star.cpp:108
-#, fuzzy
 msgid "Spectral Type: "
-msgstr "Spectral: "
+msgstr "Tipul Spectral: "
 
 #: src/hip_star_mgr.cpp:126
 msgid "Loading Hipparcos catalog:"
-msgstr "Incarc catalogul Hipparcos:"
+msgstr "Încarc catalogul Hipparcos:"
 
 #: src/nebula.cpp:94
-#, fuzzy
 msgid "Type: "
-msgstr "Tipul : "
+msgstr "Tipul: "
 
 #: src/nebula.cpp:95
-#, fuzzy
 msgid "Size: "
-msgstr "Marimea : "
+msgstr "Mărime: "
 
 #: src/nebula_mgr.cpp:269
 msgid "Loading NGC catalog: "
-msgstr "Incarc catalogul NGC: "
+msgstr "Încarc catalogul NGC: "
 
 #: src/nebula_mgr.cpp:394
 msgid "Loading Nebula Textures:"
-msgstr "Se incarca texturile pentru nebuloase:"
+msgstr "Încarc texturile pentru nebuloase:"
 
 #: src/planet.cpp:117
 msgid "AU"
@@ -109,19 +104,19 @@ msgstr "Editor scripturi"
 
 #: src/stel_ui.cpp:525
 msgid "Invalid Script command"
-msgstr "Comanda gresita in script"
+msgstr "Comandă greşită în script"
 
 #: src/stel_ui.cpp:595
 msgid "Drawing of the Constellations [C]"
-msgstr "Trasarea constelatiilor [C]"
+msgstr "Trasarea constelaţiilor [C]"
 
 #: src/stel_ui.cpp:597
 msgid "Names of the Constellations [V]"
-msgstr "Numele constelatiilor [V]"
+msgstr "Numele constelaţiilor [V]"
 
 #: src/stel_ui.cpp:599
 msgid "Constellations Art [R]"
-msgstr "Imaginile constelatiilor [R]"
+msgstr "Imaginile constelaţiilor [R]"
 
 #: src/stel_ui.cpp:601
 msgid "Azimuthal Grid [Z]"
@@ -137,11 +132,11 @@ msgstr "Teren [G]"
 
 #: src/stel_ui.cpp:607
 msgid "Cardinal Points [Q]"
-msgstr "Punctele cardinale [Q]"
+msgstr "Puncte cardinale [Q]"
 
 #: src/stel_ui.cpp:609
 msgid "Atmosphere [A]"
-msgstr "Atmosfera [A]"
+msgstr "Atmosferă [A]"
 
 #: src/stel_ui.cpp:611
 msgid "Nebulas [N]"
@@ -152,63 +147,68 @@ msgid "Help [H]"
 msgstr "Ajutor [H]"
 
 #: src/stel_ui.cpp:615
+#, fuzzy
 msgid "Equatorial/Altazimuthal Mount [ENTER]"
-msgstr "Punct Ecuatorial/Azimutal [ENTER]"
+msgstr "Montură Ecuatorială/Altazimutală [ENTER]"
 
 #: src/stel_ui.cpp:617
 msgid "Configuration window"
-msgstr "Fereastra de configurare"
+msgstr "Fereastră de configurare"
 
 #: src/stel_ui.cpp:619
 msgid "Chart mode"
-msgstr "Vizualizare in mod harta"
+msgstr "Vizualizare în mod hartă"
 
 #: src/stel_ui.cpp:621
 msgid "Night (red) mode"
-msgstr "Vizualizare in mod noapte"
+msgstr "Vizualizare în mod noapte"
 
 #: src/stel_ui.cpp:624
 msgid "Quit [CTRL + Q]"
-msgstr "Inchide [CTRL + Q]"
+msgstr "Închide [CTRL + Q]"
 
 #: src/stel_ui.cpp:626
 msgid "Quit [CMD + Q]"
-msgstr "Inchide [CMD + Q]"
+msgstr "Închide [CMD + Q]"
 
 #: src/stel_ui.cpp:629
 msgid "Search for object"
-msgstr "Cauta un obiect"
+msgstr "Caută un obiect"
 
 #: src/stel_ui.cpp:633
 msgid "Goto selected object [SPACE]"
-msgstr "Deplasare la obiectul selectat [SPATIU]"
+msgstr "Deplasare la obiectul selectat [SPAŢIU]"
 
 #: src/stel_ui.cpp:639
 msgid "Decrease Time Speed [J]"
-msgstr "Micsoreaza viteza de rulare [J]"
+msgstr "Micşorează viteza de rulare [J]"
 
 #: src/stel_ui.cpp:641
 msgid "Real Time Speed [K]"
-msgstr "Rulare in timp real [K]"
+msgstr "Rulare în timp real [K]"
 
 #: src/stel_ui.cpp:643
 msgid "Increase Time Speed [L]"
-msgstr "Mareste viteza de rulare [L]"
+msgstr "Măreşte viteza de rulare [L]"
 
 #: src/stel_ui.cpp:645
 msgid "Return to Current Time"
-msgstr "Rulare in timp normal (curent)"
+msgstr "Rulare în timp normal (curent)"
 
 #: src/stel_ui.cpp:654
+#, fuzzy
 msgid ""
 "   Please check for newer versions and send bug reports\n"
 "    and comments to us at: http://www.stellarium.org\n"
 "\n"
 msgstr ""
+"   Pentru versiuni noi, defecte de program\n"
+"\t\t\t\tşi comentarii accesaţi: http://www.stellarium.org\n"
+"\n"
 
 #: src/stel_ui.cpp:673
 msgid "Information"
-msgstr "Informatii"
+msgstr "Informaţii"
 
 #: src/stel_ui.cpp:685
 msgid ""
@@ -224,6 +224,16 @@ msgid ""
 "SPACE            : Center on selected object\n"
 "\n"
 msgstr ""
+"Mişcare & selecţie:\n"
+"Tastele cu săgeţi: Schimbă vizualizarea AD/DE\n"
+"Page Up/Down : Zoom\n"
+"CTRL+Sus/Jos: Zoom \n"
+"Click Dreapta: Deselectează\n"
+"CTRL+Click Stânga: Deselectează\n"
+"\\ : Zoom micşorare (planetă + satelit dacă este posibil)\n"
+"/ : Zoom către obiectul selectat\n"
+"SPAŢIU : Centrează obiectul selectat\n"
+"\n"
 
 #: src/stel_ui.cpp:696
 msgid ""
@@ -240,6 +250,18 @@ msgid ""
 "4 , : Ecliptic line             5 . : Equator line\n"
 "\n"
 msgstr ""
+"Afişează opţiuni:\n"
+"ENTER : Montură Ecuatorială/altazimutală\n"
+"F1 : Schimbă imaginea pe tot ecranul daca este posibil.\n"
+"C : Liniile constelaţiilor V : Numele constelaţiilor\n"
+"R : Imaginile constelaţiilor E: Grid ecuatorial\n"
+"Z : Grid azimutal N : Numele nebuloaselor\n"
+"P : Numele planetelor G : Teren\n"
+"A : Atmosferă F : Ceaţă\n"
+"Q : Puncte cardinale O : Schimbă marimea lunii\n"
+"T : Urmarire obiect S : Stele\n"
+"4, : Linia eclipticii 5. : Linia ecuatorului\n"
+"\n"
 
 #: src/stel_ui.cpp:708
 msgid ""
@@ -251,6 +273,13 @@ msgid ""
 "CTRL + F : Toggle object finder\n"
 "\n"
 msgstr ""
+"Dialoguri & alte opţiuni\n"
+"H : Ajutor I : Despre Stellarium\n"
+"M : Meniu text 1 (unu) : Configuraţie\n"
+"CTRL + S : Fă o captură de monitor\n"
+"CTRL + R : Schimbă înregistrarea scriptului\n"
+"CTRL + F : Schimbă motorul de cautare a obiectelor\n"
+"\n"
 
 #: src/stel_ui.cpp:715
 msgid ""
@@ -262,6 +291,13 @@ msgid ""
 "[   : Back 7 days               ]   : Forward 7 days\n"
 "\n"
 msgstr ""
+"Ora & data:\n"
+"6 : Rata de pauză a timpului 7 : Rata de timp 0\n"
+"8 : Setează ora actuală J: Micşorează rata de timp\n"
+"K : Rata normală de timp L : Măreşte rata de timp\n"
+"- : Înapoi cu 24 ore = : Înainte cu 24 de ore\n"
+"[ : Înapoi cu 7 zile ] : Înainte cu 7 zile\n"
+"\n"
 
 #: src/stel_ui.cpp:722
 msgid ""
@@ -270,20 +306,24 @@ msgid ""
 "6   : pause script              K   : resume script\n"
 "\n"
 msgstr ""
+"În Timpul Redării Scriptului\n"
+"CTRL + C : Încheie Scriptul\n"
+"6 : fă pauză de script K : reîncepe scriptul\n"
+"\n"
 
 #: src/stel_ui.cpp:726
 msgid ""
 "Misc:\n"
 "9   : Toggle meteor shower rates\n"
-msgstr ""
+msgstr "9 : Schimbă rata de cădere a meteoriţilor\n"
 
 #: src/stel_ui.cpp:729
 msgid "CTRL + Q : Quit\n"
-msgstr "CTRL + Q : Iesire\n"
+msgstr "CTRL + Q : Ieşire\n"
 
 #: src/stel_ui.cpp:731
 msgid "CMD + Q  : Quit\n"
-msgstr ""
+msgstr "CMD + Q : Ieşire\n"
 
 #: src/stel_ui.cpp:737
 msgid "Help"
@@ -291,20 +331,20 @@ msgstr "Ajutor"
 
 #: src/stel_ui.cpp:1014
 msgid "Command recording stopped."
-msgstr "Inregristrarea comenzii a fost oprita."
+msgstr "Înregistrarea comenzii a fost oprită."
 
 #: src/stel_ui.cpp:1022
 msgid "Recording commands to script file:\n"
-msgstr "Inregistreaza comenzile intr-un fisier script:\n"
+msgstr "Înregistrează comenzile într-un fişier script:\n"
 
 #: src/stel_ui.cpp:1024
 msgid "Hit CTRL-R again to stop.\n"
-msgstr "Apasa CRTL-R inca o data pentru oprire.\n"
+msgstr "Apasă CRTL-R înca o data pentru oprire.\n"
 
 #: src/stel_ui.cpp:1028
 msgid "Error: Unable to open script file to record commands."
 msgstr ""
-"Eroare:Nu se poate deschide fisierul script pentru a inregistra comenzile."
+"Eroare: Nu se poate deschide fişierul script pentru a înregistra comenzile."
 
 #: src/stel_ui_conf.cpp:27
 msgid "Configuration"
@@ -320,19 +360,19 @@ msgstr "Numele stelelor. De la magnitudinea :"
 
 #: src/stel_ui_conf.cpp:64
 msgid "Star Twinkle. Amount :"
-msgstr "Numarul de stele ce stralucesc :"
+msgstr "Stele ce clipesc. Numarul lor :"
 
 #: src/stel_ui_conf.cpp:80
 msgid "Constellations"
-msgstr "Constelatii"
+msgstr "Constelaţii"
 
 #: src/stel_ui_conf.cpp:85
 msgid "Constellations Names"
-msgstr "Numele constelatiilor"
+msgstr "Numele constelaţiilor"
 
 #: src/stel_ui_conf.cpp:90
 msgid "Selected Constellation Only"
-msgstr "Numai constelatia selectata"
+msgstr "Numai constelaţia selectată"
 
 #: src/stel_ui_conf.cpp:103
 msgid "Nebulas Names. Up to mag :"
@@ -344,11 +384,11 @@ msgstr "Planete"
 
 #: src/stel_ui_conf.cpp:125
 msgid "Moon Scale"
-msgstr "Marimea Lunii"
+msgstr "Mărimea Lunii"
 
 #: src/stel_ui_conf.cpp:132
 msgid "Planets Hints"
-msgstr ""
+msgstr "Indicii despre Planete"
 
 #: src/stel_ui_conf.cpp:143
 msgid "Equatorial Grid"
@@ -372,19 +412,19 @@ msgstr "Teren"
 
 #: src/stel_ui_conf.cpp:174
 msgid "Cardinal Points"
-msgstr "Punctele cardinale"
+msgstr "Puncte cardinale"
 
 #: src/stel_ui_conf.cpp:179
 msgid "Atmosphere"
-msgstr "Atmosfera"
+msgstr "Atmosferă"
 
 #: src/stel_ui_conf.cpp:184
 msgid "Fog"
-msgstr "Ceata"
+msgstr "Ceaţă"
 
 #: src/stel_ui_conf.cpp:189 src/stel_ui_conf.cpp:362
 msgid "Save as default"
-msgstr "Salveaza ca implicite"
+msgstr "Salvează ca implicite"
 
 #: src/stel_ui_conf.cpp:201
 msgid "Current Time :"
@@ -392,7 +432,7 @@ msgstr "Timpul curent :"
 
 #: src/stel_ui_conf.cpp:210
 msgid "Time Zone :"
-msgstr "Timpul local :"
+msgstr "Diferenţă de fus orar:"
 
 #: src/stel_ui_conf.cpp:214
 msgid "Using System Default Time Zone"
@@ -400,7 +440,7 @@ msgstr "Utilizare timp local implicit"
 
 #: src/stel_ui_conf.cpp:223
 msgid "Time speed : "
-msgstr "Viteza simularii : "
+msgstr "Viteza simulării : "
 
 #: src/stel_ui_conf.cpp:231
 msgid ""
@@ -408,12 +448,12 @@ msgid ""
 "   time speed.\n"
 "Use key K to return to real time speed."
 msgstr ""
-"Utilizati tastele J si L pentru a micsora sau creste viteza simularii.\n"
-"Apasati tasta K pentru a rula la viteza in timp real."
+"Utilizaţi tastele J si L pentru a micşora sau creşte viteza simulării.\n"
+"Apăsaţi tasta K pentru a rula la viteza in timp real."
 
 #: src/stel_ui_conf.cpp:253
 msgid "Cursor : "
-msgstr ""
+msgstr "Cursor : "
 
 #: src/stel_ui_conf.cpp:258
 msgid "Selected : "
@@ -433,15 +473,15 @@ msgstr "Altitudine : "
 
 #: src/stel_ui_conf.cpp:286
 msgid "Save location"
-msgstr "Salveaza locatia"
+msgstr "Salvează locaţia"
 
 #: src/stel_ui_conf.cpp:308
 msgid "Projection :"
-msgstr "Proiectie :"
+msgstr "Proiecţie :"
 
 #: src/stel_ui_conf.cpp:314
 msgid "Fisheye Projection Mode"
-msgstr "Mod de proiectie sferic"
+msgstr "Mod de proiecţie sferic"
 
 #: src/stel_ui_conf.cpp:319
 msgid "Disk Viewport"
@@ -449,27 +489,27 @@ msgstr "Vizualizare mod disc"
 
 #: src/stel_ui_conf.cpp:324
 msgid "Screen Resolution :"
-msgstr "Rezolutie ecran :"
+msgstr "Rezoluţie ecran :"
 
 #: src/stel_ui_conf.cpp:328
 msgid "Restart program for"
-msgstr "Restarteaza aplicatia pentru"
+msgstr "Restartează aplicaţia pentru"
 
 #: src/stel_ui_conf.cpp:329
 msgid "change to apply."
-msgstr ""
+msgstr "shimbă la \"apply\"."
 
 #: src/stel_ui_conf.cpp:353
 msgid "For unlisted screen resolution, edit the file :"
-msgstr "Pentru rezolutii neafisate in lista, editati fisierul:"
+msgstr "Pentru rezoluţii neafişate în listă, editaţi fişierul:"
 
 #: src/stel_ui_conf.cpp:373
 msgid "Choose landscapes :"
-msgstr "Selecteaza peisajul :"
+msgstr "Selectează peisajul :"
 
 #: src/stel_ui_conf.cpp:390
 msgid "Please save option in tab \"Location\""
-msgstr "Va rugam salvati optiunea in sectiunea \"Locatie\""
+msgstr "Vă rugăm salvaţi opţiunea în secţiunea \"Locaţie\""
 
 #: src/stel_ui_conf.cpp:391
 msgid "to save current landscape as the default landscape."
@@ -481,7 +521,7 @@ msgstr "Data & Ora"
 
 #: src/stel_ui_conf.cpp:400
 msgid "Location"
-msgstr "Locatia"
+msgstr "Locaţia"
 
 #: src/stel_ui_conf.cpp:401
 msgid "Landscapes"
@@ -493,11 +533,11 @@ msgstr "Video"
 
 #: src/stel_ui_conf.cpp:403
 msgid "Rendering"
-msgstr "Procesare"
+msgstr "Redare"
 
 #: src/stel_ui_conf.cpp:507
 msgid "Object Search"
-msgstr "Cautare obiect"
+msgstr "Căutare obiect"
 
 #: src/stel_ui_conf.cpp:526
 msgid "Star No./Name"
@@ -513,7 +553,7 @@ msgstr "HP 60718, HD 108248, SAO 251904"
 
 #: src/stel_ui_conf.cpp:552 src/stel_ui_conf.cpp:683
 msgid "Constellation"
-msgstr "Constelatia"
+msgstr "Constelaţia"
 
 #: src/stel_ui_conf.cpp:556
 msgid "eg. Crux"
@@ -521,7 +561,7 @@ msgstr "exemplu: Crux"
 
 #: src/stel_ui_conf.cpp:575 src/stel_ui_conf.cpp:684
 msgid "Nebula"
-msgstr "Nebuloasa"
+msgstr "Nebuloasă"
 
 #: src/stel_ui_conf.cpp:579
 msgid "eg. M83, NGC 7009, IC 2118"
@@ -533,7 +573,7 @@ msgstr "CW 113, SH 40"
 
 #: src/stel_ui_conf.cpp:665
 msgid "Planet/Moon"
-msgstr "Planeta/Satelit"
+msgstr "Planetă/Satelit"
 
 #: src/stel_ui_conf.cpp:669
 msgid "eg. Pluto or Io"
@@ -541,23 +581,23 @@ msgstr "exemplu: Pluto sau Io"
 
 #: src/stel_ui_conf.cpp:685
 msgid "Planets & Moons"
-msgstr "Planete & Sateliti"
+msgstr "Planete & Sateliţi"
 
 #: src/stel_ui_conf.cpp:956
 msgid "Enter observatory name"
-msgstr "Introduceti numele observatorului"
+msgstr "Introduceţi numele observatorului"
 
 #: src/stel_ui_conf.cpp:1091
 msgid "Current Time Speed is x"
-msgstr "Viteza de rulare a timpului este x"
+msgstr "Viteza de rulare este x"
 
 #: src/stel_ui_tuiconf.cpp:74
 msgid "Set Location "
-msgstr "Seteaza locatia "
+msgstr "Setează locaţia "
 
 #: src/stel_ui_tuiconf.cpp:75
 msgid "Set Time "
-msgstr "Seteaza timpul "
+msgstr "Setează ora "
 
 #: src/stel_ui_tuiconf.cpp:76
 msgid "General "
@@ -601,7 +641,7 @@ msgstr "Cerul la ora : "
 
 #: src/stel_ui_tuiconf.cpp:105
 msgid "Set Time Zone: "
-msgstr "Seteaza timpul local: "
+msgstr "Setează timpul local: "
 
 #: src/stel_ui_tuiconf.cpp:108
 msgid "Preset Sky Time: "
@@ -609,27 +649,27 @@ msgstr "Preset pentru cer la ora : "
 
 #: src/stel_ui_tuiconf.cpp:110
 msgid "Sky Time At Start-up: "
-msgstr ""
+msgstr "Ora de vizualizare a cerului la pornire "
 
 #: src/stel_ui_tuiconf.cpp:114
 msgid "Time Display Format: "
-msgstr "Mod de afisare ora: "
+msgstr "Mod de afişare ora: "
 
 #: src/stel_ui_tuiconf.cpp:119
 msgid "Date Display Format: "
-msgstr "Format afisare data: "
+msgstr "Format afişare dată: "
 
 #: src/stel_ui_tuiconf.cpp:136
 msgid "Sky Culture: "
-msgstr ""
+msgstr "Mitologia autohtonă a cerului: "
 
 #: src/stel_ui_tuiconf.cpp:141
 msgid "Sky Language: "
-msgstr ""
+msgstr "Limbaj autohton astronomic: "
 
 #: src/stel_ui_tuiconf.cpp:149
 msgid "Show: "
-msgstr "Arata: "
+msgstr "Arată: "
 
 #: src/stel_ui_tuiconf.cpp:149 src/stel_ui_tuiconf.cpp:187 src/s_gui.cpp:2208
 msgid "Yes"
@@ -645,23 +685,23 @@ msgstr "Multiplicator pentru magnitudinea stelelor : "
 
 #: src/stel_ui_tuiconf.cpp:153
 msgid "Maximum Magnitude to Label: "
-msgstr "Magnitudinea maxima pentru etichetare : "
+msgstr "Magnitudinea maximă pentru etichetare : "
 
 #: src/stel_ui_tuiconf.cpp:155
 msgid "Twinkling: "
-msgstr "Stralucire stele: "
+msgstr "Clipire stele: "
 
 #: src/stel_ui_tuiconf.cpp:164
 msgid "Constellation lines: "
-msgstr "Schita constelatii: "
+msgstr "Schiţă constelaţii: "
 
 #: src/stel_ui_tuiconf.cpp:168
 msgid "Constellation labels: "
-msgstr "Denumire constelatii: "
+msgstr "Denumire constelaţii: "
 
 #: src/stel_ui_tuiconf.cpp:172
 msgid "Cardinal points: "
-msgstr "Punctele cardinale: "
+msgstr "Puncte cardinale: "
 
 #: src/stel_ui_tuiconf.cpp:181
 msgid "Landscape: "
@@ -673,7 +713,7 @@ msgstr "Zoom manual: "
 
 #: src/stel_ui_tuiconf.cpp:191
 msgid "Object Sizing Rule: "
-msgstr ""
+msgstr "Regula Dimensionării Obiectului "
 
 #: src/stel_ui_tuiconf.cpp:191
 msgid "Point"
@@ -689,19 +729,20 @@ msgstr "Multiplicator dimensiune magnitudine: "
 
 #: src/stel_ui_tuiconf.cpp:199
 msgid "Milky Way intensity: "
-msgstr "Intensitatea Caii Lactee : "
+msgstr "Intensitatea Căii Lactee : "
 
 #: src/stel_ui_tuiconf.cpp:203
+#, fuzzy
 msgid "Maximum Nebula Magnitude to Label: "
-msgstr ""
+msgstr "Magnitudinea Maximă a Nebuloaselor pentru Denumire: "
 
 #: src/stel_ui_tuiconf.cpp:207
 msgid "Zoom Duration: "
-msgstr ""
+msgstr "Durata zoomului: "
 
 #: src/stel_ui_tuiconf.cpp:211
 msgid "Cursor Timeout: "
-msgstr ""
+msgstr "Terminat din cursor: "
 
 #: src/stel_ui_tuiconf.cpp:217
 msgid "Local Script: "
@@ -713,23 +754,25 @@ msgstr "Scriptul pentru CD/DVD: "
 
 #: src/stel_ui_tuiconf.cpp:231
 msgid "Load Default Configuration: "
-msgstr "Incarcare a configuratiei implicite : "
+msgstr "Încărcare a configuraţiei implicite : "
 
 #: src/stel_ui_tuiconf.cpp:233
 msgid "Save Current Configuration as Default: "
-msgstr "Salveaza configuratia curenta ca implicita : "
+msgstr "Salvează configuraţia curentă ca implicită : "
 
 #: src/stel_ui_tuiconf.cpp:235
 msgid "Update me via Internet: "
-msgstr "Actualizeaza via Internet : "
+msgstr "Actualizează via Internet : "
 
 #: src/stel_ui_tuiconf.cpp:251
+#, fuzzy
 msgid "N-S Centering Offset: "
-msgstr ""
+msgstr "Devierea de la Centrajul N-S: "
 
 #: src/stel_ui_tuiconf.cpp:255
+#, fuzzy
 msgid "E-W Centering Offset: "
-msgstr ""
+msgstr "Devierea de la Centrajul E-V "
 
 #: src/translations.h:33
 msgid "Sun"
@@ -857,27 +900,27 @@ msgstr "W"
 
 #: src/translations.h:68
 msgid "Aquila"
-msgstr ""
+msgstr "Vulturul"
 
 #: src/translations.h:69
 msgid "Andromeda"
-msgstr ""
+msgstr "Andromeda"
 
 #: src/translations.h:70
 msgid "Sculptor"
-msgstr ""
+msgstr "Atelierul Sculptorului"
 
 #: src/translations.h:71
 msgid "Ara"
-msgstr ""
+msgstr "Altarul"
 
 #: src/translations.h:72
 msgid "Libra"
-msgstr ""
+msgstr "Balanţa"
 
 #: src/translations.h:73
 msgid "Cetus"
-msgstr ""
+msgstr "Balena"
 
 #: src/translations.h:74
 msgid "Aries"
@@ -885,19 +928,19 @@ msgstr "Berbec"
 
 #: src/translations.h:75 src/translations.h:145
 msgid "Scutum"
-msgstr ""
+msgstr "Scutul"
 
 #: src/translations.h:76
 msgid "Pyxis"
-msgstr ""
+msgstr "Busola"
 
 #: src/translations.h:77
 msgid "Bootes"
-msgstr ""
+msgstr "Boarul"
 
 #: src/translations.h:78
 msgid "Caelum"
-msgstr ""
+msgstr "Cerul"
 
 #: src/translations.h:79
 msgid "Chamaeleon"
@@ -913,299 +956,299 @@ msgstr "Capricorn"
 
 #: src/translations.h:82
 msgid "Carina"
-msgstr ""
+msgstr "Carena"
 
 #: src/translations.h:83
 msgid "Cassiopeia"
-msgstr ""
+msgstr "Casiopeia"
 
 #: src/translations.h:84
 msgid "Centaurus"
-msgstr ""
+msgstr "Centaurul"
 
 #: src/translations.h:85
 msgid "Cepheus"
-msgstr ""
+msgstr "Cefeu"
 
 #: src/translations.h:86
 msgid "Coma Berenices"
-msgstr ""
+msgstr "Părul Berenicei"
 
 #: src/translations.h:87
 msgid "Canes Venatici"
-msgstr ""
+msgstr "Câinii de Vânătoare"
 
 #: src/translations.h:88
 msgid "Auriga"
-msgstr ""
+msgstr "Vizitiul"
 
 #: src/translations.h:89
 msgid "Columba"
-msgstr ""
+msgstr "Porumbelul"
 
 #: src/translations.h:90
 msgid "Circinus"
-msgstr ""
+msgstr "Compasul"
 
 #: src/translations.h:91
 msgid "Crater"
-msgstr ""
+msgstr "Cupa"
 
 #: src/translations.h:92
 msgid "Corona Australis"
-msgstr ""
+msgstr "Coroana Australă"
 
 #: src/translations.h:93
 msgid "Corona Borealis"
-msgstr ""
+msgstr "Coroana Boreală"
 
 #: src/translations.h:94
 msgid "Corvus"
-msgstr ""
+msgstr "Corbul"
 
 #: src/translations.h:95
 msgid "Crux"
-msgstr ""
+msgstr "Crucea"
 
 #: src/translations.h:96
 msgid "Cygnus"
-msgstr ""
+msgstr "Lebăda"
 
 #: src/translations.h:97
 msgid "Delphinus"
-msgstr ""
+msgstr "Delfinul"
 
 #: src/translations.h:98
 msgid "Dorado"
-msgstr ""
+msgstr "Peştele de Aur"
 
 #: src/translations.h:99
 msgid "Draco"
-msgstr ""
+msgstr "Dragonul"
 
 #: src/translations.h:100
 msgid "Norma"
-msgstr ""
+msgstr "Echerul"
 
 #: src/translations.h:101
 msgid "Eridanus"
-msgstr ""
+msgstr "Eridan"
 
 #: src/translations.h:102
 msgid "Sagitta"
-msgstr ""
+msgstr "Săgeata"
 
 #: src/translations.h:103
 msgid "Fornax"
-msgstr ""
+msgstr "Cuptorul"
 
 #: src/translations.h:104
 msgid "Gemini"
-msgstr ""
+msgstr "Gemenii"
 
 #: src/translations.h:105
 msgid "Camelopardalis"
-msgstr ""
+msgstr "Girafa"
 
 #: src/translations.h:106
 msgid "Canis Major"
-msgstr ""
+msgstr "Câinele Mare"
 
 #: src/translations.h:107
 msgid "Ursa Major"
-msgstr ""
+msgstr "Ursa Mare"
 
 #: src/translations.h:108
 msgid "Grus"
-msgstr ""
+msgstr "Cocorul"
 
 #: src/translations.h:109
 msgid "Hercules"
-msgstr ""
+msgstr "Hercule"
 
 #: src/translations.h:110
 msgid "Horologium"
-msgstr ""
+msgstr "Orologiu"
 
 #: src/translations.h:111
 msgid "Hydra"
-msgstr ""
+msgstr "Hidra"
 
 #: src/translations.h:112
 msgid "Hydrus"
-msgstr ""
+msgstr "Hidra Australă"
 
 #: src/translations.h:113
 msgid "Indus"
-msgstr ""
+msgstr "Indianul"
 
 #: src/translations.h:114
 msgid "Lacerta"
-msgstr ""
+msgstr "Şopârla"
 
 #: src/translations.h:115
 msgid "Monoceros"
-msgstr ""
+msgstr "Unicornul"
 
 #: src/translations.h:116
 msgid "Lepus"
-msgstr ""
+msgstr "Iepurele"
 
 #: src/translations.h:117
 msgid "Leo"
-msgstr ""
+msgstr "Leul"
 
 #: src/translations.h:118
 msgid "Lupus"
-msgstr ""
+msgstr "Lupul"
 
 #: src/translations.h:119
 msgid "Lynx"
-msgstr ""
+msgstr "Linxul"
 
 #: src/translations.h:120
 msgid "Lyra"
-msgstr ""
+msgstr "Lira"
 
 #: src/translations.h:121
 msgid "Antlia"
-msgstr ""
+msgstr "Maşina Pneumatică"
 
 #: src/translations.h:122
 msgid "Microscopium"
-msgstr ""
+msgstr "Microscopul"
 
 #: src/translations.h:123
 msgid "Musca"
-msgstr ""
+msgstr "Musca"
 
 #: src/translations.h:124
 msgid "Octans"
-msgstr ""
+msgstr "Octantul"
 
 #: src/translations.h:125
 msgid "Apus"
-msgstr ""
+msgstr "Pasărea Paradisului"
 
 #: src/translations.h:126
 msgid "Ophiuchus"
-msgstr ""
+msgstr "Ofiucus"
 
 #: src/translations.h:127
 msgid "Orion"
-msgstr ""
+msgstr "Orion"
 
 #: src/translations.h:128
 msgid "Pavo"
-msgstr ""
+msgstr "Păunul"
 
 #: src/translations.h:129
 msgid "Pegasus"
-msgstr ""
+msgstr "Pegas"
 
 #: src/translations.h:130
 msgid "Pictor"
-msgstr ""
+msgstr "Pictorul"
 
 #: src/translations.h:131
 msgid "Perseus"
-msgstr ""
+msgstr "Perseu"
 
 #: src/translations.h:132
 msgid "Equuleus"
-msgstr ""
+msgstr "Mânzul"
 
 #: src/translations.h:133
 msgid "Canis Minor"
-msgstr ""
+msgstr "Câinele Mic"
 
 #: src/translations.h:134
 msgid "Leo Minor"
-msgstr ""
+msgstr "Leul Mic"
 
 #: src/translations.h:135
 msgid "Vulpecula"
-msgstr ""
+msgstr "Vulpea"
 
 #: src/translations.h:136
 msgid "Ursa Minor"
-msgstr ""
+msgstr "Ursa Mică"
 
 #: src/translations.h:137
 msgid "Phoenix"
-msgstr ""
+msgstr "Phoenix"
 
 #: src/translations.h:138
 msgid "Piscis Austrinus"
-msgstr ""
+msgstr "Peştele Austral"
 
 #: src/translations.h:139
 msgid "Pisces"
-msgstr ""
+msgstr "Peştii"
 
 #: src/translations.h:140
 msgid "Volans"
-msgstr ""
+msgstr "Peştele Zburător"
 
 #: src/translations.h:141
 msgid "Puppis"
-msgstr ""
+msgstr "Pupa"
 
 #: src/translations.h:142
 msgid "Reticulum"
-msgstr ""
+msgstr "Reticulul"
 
 #: src/translations.h:143
 msgid "Sagittarius"
-msgstr ""
+msgstr "Săgetător"
 
 #: src/translations.h:144
 msgid "Scorpius"
-msgstr ""
+msgstr "Scorpion"
 
 #: src/translations.h:146
 msgid "Serpens"
-msgstr ""
+msgstr "Şarpele"
 
 #: src/translations.h:147
 msgid "Sextans"
-msgstr ""
+msgstr "Sextantul"
 
 #: src/translations.h:148
 msgid "Mensa"
-msgstr ""
+msgstr "Platoul"
 
 #: src/translations.h:149
 msgid "Taurus"
-msgstr ""
+msgstr "Taur"
 
 #: src/translations.h:150
 msgid "Telescopium"
-msgstr ""
+msgstr "Telescopul"
 
 #: src/translations.h:151
 msgid "Tucana"
-msgstr ""
+msgstr "Tucanul"
 
 #: src/translations.h:152
 msgid "Triangulum"
-msgstr ""
+msgstr "Triunghiul"
 
 #: src/translations.h:153
 msgid "Triangulum Australe"
-msgstr ""
+msgstr "Triunghiul Austral"
 
 #: src/translations.h:154
 msgid "Aquarius"
-msgstr ""
+msgstr "Vărsătorul"
 
 #: src/translations.h:155
 msgid "Virgo"
-msgstr ""
+msgstr "Fecioară"
 
 #: src/translations.h:156
 msgid "Vela"
-msgstr ""
+msgstr "Pânza"
 
 #: src/s_gui.cpp:2195 src/s_gui.cpp:2241
 #, fuzzy
@@ -1241,38 +1284,14 @@ msgstr ""
 msgid "Seconds"
 msgstr ""
 
-#~ msgid ": mag "
-#~ msgstr ": mag "
-
 #~ msgid "Loading HIP/SAO catalogs: %d/%d"
-#~ msgstr "Incarc cataloagele HIP/SAO:%d/%d"
+#~ msgstr "Încarc cataloagele HIP/SAO:%d/%d"
 
 #~ msgid "Loading HIP catalog: %d/%d"
-#~ msgstr "Incarc catalogul HIP:%d/%d"
+#~ msgstr "Încarc catalogul HIP:%d/%d"
 
 #~ msgid "Loading SAO catalog: %d/%d"
-#~ msgstr "Incarc catalogul SAO:%d/%d"
+#~ msgstr "Încarc catalogul SAO:%d/%d"
 
-#~ msgid "ly"
-#~ msgstr "al"
-
-#~ msgid "Name : "
-#~ msgstr "Numele: "
-
-#~ msgid "(Dbl)"
-#~ msgstr "(Dbl)"
-
-#~ msgid "RA : "
-#~ msgstr "RA : "
-
-#~ msgid "DE : "
-#~ msgstr "DE : "
-
-#~ msgid "Az  : "
-#~ msgstr "Az : "
-
-#~ msgid "Alt : "
-#~ msgstr "Alt : "
-
-#~ msgid " (UTC)"
-#~ msgstr " (UTC)"
+#~ msgid ": mag "
+#~ msgstr ": mag "

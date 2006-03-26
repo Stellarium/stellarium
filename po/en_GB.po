@@ -1,15 +1,16 @@
 # English (United Kingdom) translation for stellarium
 # Copyright (c) (c) 2006 Canonical Ltd, and Rosetta Contributors 2006
 # This file is distributed under the same license as the stellarium package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2006.
+# Matthew Gates <matthew@porpoisehead.net>, 2006.
 #
+#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: stellarium@free.fr\n"
 "POT-Creation-Date: 2006-03-26 15:18+0200\n"
-"PO-Revision-Date: 2006-03-09 10:23+0100\n"
-"Last-Translator:  Matthew Gates\n"
+"PO-Revision-Date: 2006-03-22 11:09+0000\n"
+"Last-Translator: Bruce Cowan <bruce.cowan@dsl.pipex.com>\n"
 "Language-Team: English (United Kingdom) <en_GB@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -23,68 +24,62 @@ msgid ""
 " -h, --help             Display this help and exit.\n"
 msgstr ""
 "Usage: %s [OPTION] ...\n"
-"  -v, --version Output version information and exit.\n"
-"  -h, --help Display this help and exit.\n"
+" -v, --version          Output version information and exit.\n"
+" -h, --help             Display this help and exit.\n"
 
 #: src/main.cpp:76
 #, c-format
 msgid "%s: Bad command line argument(s)\n"
-msgstr "%s: Bad command line argument(s)\n"
+msgstr "%s: Bad command line argument(s)↵\n"
 
 #: src/main.cpp:77
 #, c-format
 msgid "Try `%s --help' for more information.\n"
-msgstr "Try `%s --help' for more information.\n"
+msgstr "Try `%s --help' for more information.↵\n"
 
 #: src/constellation_mgr.cpp:154
 msgid "Loading Constellation Art: "
 msgstr "Loading Constellation Art: "
 
 #: src/hip_star.cpp:88 src/nebula.cpp:84 src/planet.cpp:104
-#, fuzzy
 msgid "Magnitude: "
-msgstr "Magnitude : "
+msgstr "Magnitude: "
 
 #: src/hip_star.cpp:89
-#, fuzzy
 msgid " (Variable)"
-msgstr "(Var)"
+msgstr " (Variable)"
 
 #: src/hip_star.cpp:91 src/nebula.cpp:86 src/planet.cpp:108
 msgid "RA/DE: "
-msgstr ""
+msgstr "RA/DE: "
 
 #: src/hip_star.cpp:97 src/nebula.cpp:92 src/planet.cpp:114
 msgid "Az/Alt: "
-msgstr ""
+msgstr "Az/Alt: "
 
 #: src/hip_star.cpp:99 src/planet.cpp:117
-#, fuzzy
 msgid "Distance: "
-msgstr "Distance : "
+msgstr "Distance: "
 
 #: src/hip_star.cpp:101
 msgid " Light Years"
 msgstr " Light Years"
 
 #: src/hip_star.cpp:108
-#, fuzzy
 msgid "Spectral Type: "
-msgstr "Spectral : "
+msgstr "Spectral Type: "
 
 #: src/hip_star_mgr.cpp:126
 msgid "Loading Hipparcos catalog:"
 msgstr "Loading Hipparcos catalogue:"
 
 #: src/nebula.cpp:94
-#, fuzzy
 msgid "Type: "
-msgstr "Type : "
+msgstr "Type: "
 
 #: src/nebula.cpp:95
-#, fuzzy
 msgid "Size: "
-msgstr "Size : "
+msgstr "Size: "
 
 #: src/nebula_mgr.cpp:269
 msgid "Loading NGC catalog: "
@@ -205,9 +200,8 @@ msgid ""
 "    and comments to us at: http://www.stellarium.org\n"
 "\n"
 msgstr ""
-"   Please check for newer versions and send bug reports↵\n"
-" and comments to us at: http://www.stellarium.org↵\n"
-" ↵\n"
+"   Please check for newer verisons and send bug reports\n"
+"\t\t\tand comments to us at: http://www.stellarium.org\n"
 "\n"
 
 #: src/stel_ui.cpp:673
@@ -215,7 +209,6 @@ msgid "Information"
 msgstr "Information"
 
 #: src/stel_ui.cpp:685
-#, fuzzy
 msgid ""
 "Movement & selection:\n"
 "Arrow Keys       : Change viewing RA/DE\n"
@@ -243,7 +236,6 @@ msgstr ""
 "\n"
 
 #: src/stel_ui.cpp:696
-#, fuzzy
 msgid ""
 "Display options:\n"
 "ENTER : Equatorial/altazimuthal mount\n"
@@ -273,7 +265,6 @@ msgstr ""
 "\n"
 
 #: src/stel_ui.cpp:708
-#, fuzzy
 msgid ""
 "Dialogs & other controls:\n"
 "H   : Help                      I   : About Stellarium\n"
@@ -293,7 +284,6 @@ msgstr ""
 "\n"
 
 #: src/stel_ui.cpp:715
-#, fuzzy
 msgid ""
 "Time & Date:\n"
 "6   : Time rate pause           7   : Time rate 0\n"
@@ -313,7 +303,6 @@ msgstr ""
 "\n"
 
 #: src/stel_ui.cpp:722
-#, fuzzy
 msgid ""
 "During Script Playback:\n"
 "CTRL + C : End Script\n"
@@ -327,7 +316,6 @@ msgstr ""
 "\n"
 
 #: src/stel_ui.cpp:726
-#, fuzzy
 msgid ""
 "Misc:\n"
 "9   : Toggle meteor shower rates\n"
@@ -1299,9 +1287,6 @@ msgstr ""
 msgid "Seconds"
 msgstr ""
 
-#~ msgid ": mag "
-#~ msgstr ": mag "
-
 #~ msgid "Loading HIP/SAO catalogs: %d/%d"
 #~ msgstr "Loading HIP/SAO catalogues: %d/%d"
 
@@ -1311,26 +1296,154 @@ msgstr ""
 #~ msgid "Loading SAO catalog: %d/%d"
 #~ msgstr "Loading SAO catalogue: %d/%d"
 
-#~ msgid "ly"
-#~ msgstr "ly"
+#~ msgid ": mag "
+#~ msgstr ": mag "
 
-#~ msgid "Name : "
-#~ msgstr "Name : "
+#~ msgid ""
+#~ "   Please check for newer versions and send bug reports\n"
+#~ "\t                                   and comments to us at: http://www."
+#~ "stellarium.org\n"
+#~ "\n"
+#~ msgstr ""
+#~ "   Please check for newer versions and send bug reports\n"
+#~ "\t                                   and comments to us at: http://www."
+#~ "stellarium.org\n"
+#~ "\n"
 
-#~ msgid "(Dbl)"
-#~ msgstr "(Dbl)"
+#~ msgid ""
+#~ "Movement & selection:\n"
+#~ "\t                            Arrow Keys       : Change viewing RA/DE\n"
+#~ "\t                            Page Up/Down     : Zoom\n"
+#~ "\t                            CTRL+Up/Down     : Zoom\n"
+#~ "\t                            Left Click       : Select object\n"
+#~ "\t                            Right Click      : Unselect\n"
+#~ "\t                            CTRL+Left Click  : Unselect\n"
+#~ "\t                            \\                : Zoom out (planet + "
+#~ "moons if applicable)\n"
+#~ "\t                            /                : Zoom to selected object\n"
+#~ "\t                            SPACE            : Center on selected "
+#~ "object\n"
+#~ "\t                            \n"
+#~ msgstr ""
+#~ "Movement & selection:\n"
+#~ "\t                            Arrow Keys       : Change viewing RA/DE\n"
+#~ "\t                            Page Up/Down     : Zoom\n"
+#~ "\t                            CTRL+Up/Down     : Zoom\n"
+#~ "\t                            Left Click       : Select object\n"
+#~ "\t                            Right Click      : Unselect\n"
+#~ "\t                            CTRL+Left Click  : Unselect\n"
+#~ "\t                            \\                : Zoom out (planet + "
+#~ "moons if applicable)\n"
+#~ "\t                            /                : Zoom to selected object\n"
+#~ "\t                            SPACE            : Centre on selected "
+#~ "object\n"
+#~ "\t                            \n"
 
-#~ msgid "RA : "
-#~ msgstr "RA : "
+#~ msgid ""
+#~ "Display options:\n"
+#~ "\t                            ENTER : Equatorial/altazimuthal mount\n"
+#~ "\t                            F1  : Toggle fullscreen if possible.\n"
+#~ "\t                            C   : Constellation lines       V   : "
+#~ "Constellation labels\n"
+#~ "\t                            R   : Constellation art         E   : "
+#~ "Equatorial grid\n"
+#~ "\t                            Z   : Azimuthal grid            N   : "
+#~ "Nebula labels\n"
+#~ "\t                            P   : Planet labels             G   : "
+#~ "Ground\n"
+#~ "\t                            A   : Atmosphere                F   : Fog\n"
+#~ "\t                            Q   : Cardinal points           O   : "
+#~ "Toggle moon scaling\n"
+#~ "\t                            T   : Object tracking           S   : "
+#~ "Stars\n"
+#~ "\t                            4 , : Ecliptic line             5 . : "
+#~ "Equator line\n"
+#~ "\t                            \n"
+#~ msgstr ""
+#~ "Display options:\n"
+#~ "\t                            ENTER : Equatorial/altazimuthal mount\n"
+#~ "\t                            F1  : Toggle fullscreen if possible.\n"
+#~ "\t                            C   : Constellation lines       V   : "
+#~ "Constellation labels\n"
+#~ "\t                            R   : Constellation art         E   : "
+#~ "Equatorial grid\n"
+#~ "\t                            Z   : Azimuthal grid            N   : "
+#~ "Nebula labels\n"
+#~ "\t                            P   : Planet labels             G   : "
+#~ "Ground\n"
+#~ "\t                            A   : Atmosphere                F   : Fog\n"
+#~ "\t                            Q   : Cardinal points           O   : "
+#~ "Toggle moon scaling\n"
+#~ "\t                            T   : Object tracking           S   : "
+#~ "Stars\n"
+#~ "\t                            4 , : Ecliptic line             5 . : "
+#~ "Equator line\n"
+#~ "\t                            \n"
 
-#~ msgid "DE : "
-#~ msgstr "DE : "
+#~ msgid ""
+#~ "Dialogs & other controls:\n"
+#~ "\t                            H   : Help                      I   : About "
+#~ "Stellarium\n"
+#~ "\t                            M   : Text menu                 1 (one)  : "
+#~ "Configuration\n"
+#~ "\t                            CTRL + S : Take a screenshot\n"
+#~ "\t                            CTRL + R : Toggle script recording\n"
+#~ "\t                            CTRL + F : Toggle object finder\n"
+#~ "\t                            \n"
+#~ msgstr ""
+#~ "Dialogs & other controls:\n"
+#~ "\t                            H   : Help                      I   : About "
+#~ "Stellarium\n"
+#~ "\t                            M   : Text menu                 1 (one)  : "
+#~ "Configuration\n"
+#~ "\t                            CTRL + S : Take a screenshot\n"
+#~ "\t                            CTRL + R : Toggle script recording\n"
+#~ "\t                            CTRL + F : Toggle object finder\n"
+#~ "\t                            \n"
 
-#~ msgid "Az  : "
-#~ msgstr "Az : "
+#~ msgid ""
+#~ "Time & Date:\n"
+#~ "\t                            6   : Time rate pause           7   : Time "
+#~ "rate 0\n"
+#~ "\t                            8   : Set current time          J   : "
+#~ "Decrease time rate\n"
+#~ "\t                            K   : Normal time rate          L   : "
+#~ "Increase time rate\n"
+#~ "\t                            -   : Back 24 hours             =   : "
+#~ "Forward 24 hours\n"
+#~ "\t                            [   : Back 7 days               ]   : "
+#~ "Forward 7 days\n"
+#~ "\t                            \n"
+#~ msgstr ""
+#~ "Time & Date:\n"
+#~ "\t                            6   : Time rate pause           7   : Time "
+#~ "rate 0\n"
+#~ "\t                            8   : Set current time          J   : "
+#~ "Decrease time rate\n"
+#~ "\t                            K   : Normal time rate          L   : "
+#~ "Increase time rate\n"
+#~ "\t                            -   : Back 24 hours             =   : "
+#~ "Forward 24 hours\n"
+#~ "\t                            [   : Back 7 days               ]   : "
+#~ "Forward 7 days\n"
+#~ "\t                            \n"
 
-#~ msgid "Alt : "
-#~ msgstr "Alt : "
+#~ msgid ""
+#~ "During Script Playback:\n"
+#~ "\t                            CTRL + C : End Script\n"
+#~ "\t                            6   : pause script              K   : "
+#~ "resume script\n"
+#~ "\t                            \n"
+#~ msgstr ""
+#~ "During Script Playback:\n"
+#~ "\t                            CTRL + C : End Script\n"
+#~ "\t                            6   : pause script              K   : "
+#~ "resume script\n"
+#~ "\t                            \n"
 
-#~ msgid " (UTC)"
-#~ msgstr " (UTC)"
+#~ msgid ""
+#~ "Misc:\n"
+#~ "\t                            9   : Toggle meteor shower rates\n"
+#~ msgstr ""
+#~ "Misc:\n"
+#~ "\t                            9   : Toggle meteor shower rates\n"
