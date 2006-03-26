@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: stellarium 0.7.0\n"
 "Report-Msgid-Bugs-To: stellarium@free.fr\n"
 "POT-Creation-Date: 2006-03-26 15:18+0200\n"
-"PO-Revision-Date: 2005-12-28 04:10+0200\n"
+"PO-Revision-Date: 2006-01-27 00:27+0000\n"
 "Last-Translator: Serhij Dubyk <dubyk@lsl.lviv.ua>\n"
 "Language-Team:\n"
 "MIME-Version: 1.0\n"
@@ -45,9 +45,8 @@ msgid "Loading Constellation Art: "
 msgstr "Мистецтво сузір'їв [R] "
 
 #: src/hip_star.cpp:88 src/nebula.cpp:84 src/planet.cpp:104
-#, fuzzy
 msgid "Magnitude: "
-msgstr "Величина "
+msgstr ""
 
 #: src/hip_star.cpp:89
 msgid " (Variable)"
@@ -1253,6 +1252,10 @@ msgstr ""
 #: src/s_gui.cpp:2729
 msgid "Seconds"
 msgstr ""
+
+#, fuzzy
+#~ msgid "Magnitude : "
+#~ msgstr "Величина "
 
 #, fuzzy
 #~ msgid "Alt : "
