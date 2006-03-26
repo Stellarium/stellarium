@@ -26,6 +26,7 @@
 #include "loadingbar.h"
 #include "fader.h"
 #include "translator.h"
+#include "grid.h"
 
 using namespace std;
 
@@ -86,11 +87,14 @@ private:
 	bool loadTextures(const string& fileName, LoadingBar& lb);
 
 	FILE *nebula_fic;
-	vector<Nebula*> neb_array;	// The nebulas list
+	vector<Nebula*> neb_array;		// The nebulas list
 	LinearFader hintsFader;
 	LinearFader flagShow;
 	
-	float maxMagHints;		// Define maximum magnitude at which nebulae hints are displayed
+	vector<Nebula*>* nebZones;		// array of nebula vector with the grid id as array rank
+	Grid nebGrid;					// Grid for opimisation
+	
+	float maxMagHints;				// Define maximum magnitude at which nebulae hints are displayed
 };
 
 #endif // _NEBULA_MGR_H_
