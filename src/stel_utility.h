@@ -52,7 +52,7 @@ public:
 
 	//! @brief Obtains a Vec3f from a string
 	//! @param s the string describing the Vector with the form "x,y,z"
-	//! @return The correspondong vector
+	//! @return The corresponding vector
 	static Vec3f str_to_vec3f(const string& s);
 	
 	//! @brief Obtains a string from a Vec3f 

@@ -30,7 +30,9 @@
 #define RADIUS_NEB 1.
 
 NebulaMgr::NebulaMgr()
-{}
+{
+	nebZones = new vector<Nebula*>[nebGrid.getNbPoints()];
+}
 
 NebulaMgr::~NebulaMgr()
 {
@@ -81,36 +83,51 @@ void NebulaMgr::draw(Projector* prj, const Navigator * nav, ToneReproductor* eye
 
 	Vec3f pXYZ;
 
-	prj->set_orthographic_projection();
 
-	vector<Nebula *>::iterator iter;
-	for(iter=neb_array.begin();iter!=neb_array.end();iter++)
+// 	vector<Nebula *>::iterator iter;
+// 	for(iter=neb_array.begin();iter!=neb_array.end();iter++)
+
+	// Find the star zones which are in the screen
+	int nbZones=0;
+	// FOV is currently measured vertically, so need to adjust for wide screens
+	// TODO: projector should probably use largest measurement itself
+	float max_fov = MY_MAX( prj->get_fov(), prj->get_fov()*prj->getViewportWidth()/prj->getViewportHeight());
+	nbZones = nebGrid.Intersect(nav->get_equ_vision(), max_fov*M_PI/180.f*1.2f);
+	static int * zoneList = nebGrid.getResult();
+	
+    prj->set_orthographic_projection();	// set 2D coordinate
+
+	// Print all the stars of all the selected zones
+	static vector<Nebula *>::iterator end;
+	static vector<Nebula *>::iterator iter;
+	Nebula* n;
+
+	for(int i=0;i<nbZones;++i)
 	{
-		// improve performance by skipping if too small to see
-		if ((*iter)->get_on_screen_size(prj, nav)>5 || (hintsFader  && (*iter)->mag <= getMaxMagHints()))
+		end = nebZones[zoneList[i]].end();
+	    for(iter = nebZones[zoneList[i]].begin(); iter!=end; ++iter)
 		{
-			// correct for precession
-			pXYZ = nav->j2000_to_earth_equ((*iter)->XYZ);
-
-			// project in 2D to check if the nebula is in screen
-			if ( !prj->project_earth_equ_check(pXYZ,(*iter)->XY) ) continue;
-
-			// if (draw_mode == DM_NORMAL)
-			//{
-				if ((*iter)->hasTex()) (*iter)->draw_tex(prj, nav, eye);
-				else (*iter)->draw_no_tex(prj, nav, eye);
-			//}
-			//else
-			//	(*iter)->draw_chart(prj, nav);	// charting
-
-			if (hintsFader)
+			n = *iter;
+			// improve performance by skipping if too small to see
+			if (n->get_on_screen_size(prj, nav)>5 || (hintsFader.getInterstate()>0.0001  && n->mag <= getMaxMagHints()))
 			{
-				if ((*iter)->mag <= getMaxMagHints()) (*iter)->draw_name(prj);
-				if (hintsFader && (*iter)->mag <= getMaxMagHints()) (*iter)->draw_circle(prj, nav);
+				// correct for precession
+				pXYZ = nav->j2000_to_earth_equ(n->XYZ);
+	
+				// project in 2D to check if the nebula is in screen
+				if ( !prj->project_earth_equ_check(pXYZ,n->XY) ) continue;
+	
+				if (n->hasTex()) n->draw_tex(prj, nav, eye);
+				else n->draw_no_tex(prj, nav, eye);
+	
+				if (hintsFader.getInterstate()>0.00001 && n->mag <= getMaxMagHints())
+				{
+					n->draw_name(prj);
+					n->draw_circle(prj, nav);
+				}
 			}
 		}
 	}
-
 	prj->reset_perspective_projection();
 }
 
@@ -263,6 +280,7 @@ bool NebulaMgr::loadNGC(const string& catNGC, LoadingBar& lb)
 		else
 		{
 			neb_array.push_back(e);
+			nebZones[nebGrid.GetNearest(e->XYZ)].push_back(e);
 		}
 		i++;
 	}
