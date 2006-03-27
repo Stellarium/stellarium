@@ -23,6 +23,7 @@
 #include "sky_localizer.h"
 #include "translator.h"
 #include "init_parser.h"
+#include <cassert>
 
 SkyLocalizer::SkyLocalizer(const string& cultureDir)
 {

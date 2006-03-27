@@ -390,9 +390,7 @@ bool NebulaMgr::loadTextures(const string& fileName, LoadingBar& lb)
 	{
 		// Draw loading bar
 		++current;
-		wostringstream os;
-		os << _("Loading Nebula Textures:") << current << L"/" << total;
-		lb.SetMessage(os.str());
+		lb.SetMessage(_("Loading Nebula Textures:") + StelUtility::intToWstring(current) + L"/" + StelUtility::intToWstring(total));
 		lb.Draw((float)current/total);
 
 		istringstream istr(record);
@@ -402,7 +400,7 @@ bool NebulaMgr::loadTextures(const string& fileName, LoadingBar& lb)
 		if (e)
 		{
 			if (!e->readTexture(record)) // reading error
-				cerr << "Error while parsing messier nebula " << e->englishName << endl;
+				cerr << "Error while reading texture for nebula " << e->englishName << endl;
 		}
 	}
 	return true;

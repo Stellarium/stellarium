@@ -25,10 +25,6 @@
  #include <malloc.h>
 #endif
 
-#ifdef MINGW32
-#define swprintf snwprintf
-#endif
-
 #include "stel_utility.h"
 #include "stellarium.h"
 
@@ -309,7 +305,11 @@ wstring StelUtility::printAngleDMS(double angle, bool decimals, bool useD)
 	s = (int)sec;
 
 	if (decimals)
-		swprintf(buf,sizeof(buf),L"%lc%.2d%lc%.2d'%.2f\"", sign, d, degsign, m, sec);
+#ifdef MINGW32
+	swprintf(buf,L"%lc%.2d%lc%.2d'%.2f\"", sign, d, degsign, m, sec);
+#else
+	swprintf(buf,sizeof(buf),L"%lc%.2d%lc%.2d'%.2f\"", sign, d, degsign, m, sec);
+#endif
 	else
 	{
 		double sf = sec - s;
@@ -327,7 +327,11 @@ wstring StelUtility::printAngleDMS(double angle, bool decimals, bool useD)
 				}
 			}
 		}
+#ifdef MINGW32
+		swprintf(buf, L"%lc%.2d%lc%.2d'%.2d\"", sign, d, degsign, m, s);
+#else
 		swprintf(buf,sizeof(buf), L"%lc%.2d%lc%.2d'%.2d\"", sign, d, degsign, m, s);
+#endif
 	}
 	return buf;
 }
@@ -348,8 +352,13 @@ wstring StelUtility::printAngleHMS(double angle, bool decimals)
 	angle/=15.;
 	min = 60.0 * (modf(angle, &hr));
 	sec = 60.0 * (modf(min, &min));
+#ifdef MINGW32
+	if (decimals) swprintf(buf,L"%.2dh%.2dm%.2fs",(int)hr, (int) min, sec);
+	else swprintf(buf,L"%.2dh%.2dm%.0fs",(int)hr, (int) min, sec);
+#else
 	if (decimals) swprintf(buf,sizeof(buf),L"%.2dh%.2dm%.2fs",(int)hr, (int) min, sec);
 	else swprintf(buf,sizeof(buf),L"%.2dh%.2dm%.0fs",(int)hr, (int) min, sec);
+#endif
 	return buf;
 }
 
