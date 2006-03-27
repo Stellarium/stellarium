@@ -860,7 +860,7 @@ int StelUI::handle_clic(Uint16 x, Uint16 y, S_GUI_VALUE button, S_GUI_VALUE stat
 		}
 		if (button==S_GUI_MOUSE_MIDDLE)
 		{
-			if (core->hasSelected())
+			if (core->getFlagHasSelected())
 			{
 				core->gotoSelectedObject();
 				core->setFlagTraking(true);
@@ -879,7 +879,7 @@ int StelUI::handle_clic(Uint16 x, Uint16 y, S_GUI_VALUE button, S_GUI_VALUE stat
 			core->findAndSelect(x, y);
 
 			// If an object was selected update informations
-			if (core->hasSelected()) updateInfoSelectString();
+			if (core->getFlagHasSelected()) updateInfoSelectString();
 		}
 	}
 	return 0;
@@ -1264,7 +1264,7 @@ void StelUI::gui_update_widgets(int delta_time)
 		}
 	*/
 	// TONY
-	if (FlagShowSelectedObjectInfo && core->hasSelected())
+	if (FlagShowSelectedObjectInfo && core->getFlagHasSelected())
 		updateInfoSelectString();
 
 	bt_flag_ctr->setVisible(FlagMenu);

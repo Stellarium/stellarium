@@ -345,10 +345,7 @@ void StelCore::draw(int delta_time)
 	if (draw_mode != DM_NORMAL) drawChartBackground();
 
 	// Draw the milky way.
-	if (draw_mode == DM_NORMAL)
-		milky_way->draw(tone_converter, projection, navigation);
-	else
-		milky_way->draw_chart(tone_converter, projection, navigation);
+	milky_way->draw(tone_converter, projection, navigation);
 
 	// Draw all the constellations
 	asterisms->draw(projection, navigation);
@@ -757,11 +754,11 @@ void StelCore::setColorScheme(const string& skinFile, const string& section)
 	asterisms->setLabelColor(StelUtility::str_to_vec3f(conf.get_str(section,"const_names_color")));
 	
 	// Init milky way
-	if (draw_mode == DM_NORMAL)	milky_way->set_texture("milkyway.png");
-	else 
-	{
-		milky_way->set_texture("milkyway_chart.png",true);
-	}
+// 	if (draw_mode == DM_NORMAL)	milky_way->set_texture("milkyway.png");
+// 	else 
+// 	{
+// 		milky_way->set_texture("milkyway_chart.png",true);
+// 	}
 	
 	chartColor = StelUtility::str_to_vec3f(conf.get_str(section,"chart_color"));
 }
