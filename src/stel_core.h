@@ -180,7 +180,7 @@ public:
 	bool findAndSelect(int x, int y);
 	
 	//! Return whether an object is currently selected
-	bool hasSelected(void) {return selected_object!=NULL;}
+	bool getFlagHasSelected(void) {return selected_object!=NULL;}
 	
 	//! Deselect selected object if any
 	void unSelect(void) {selected_object=NULL; asterisms->setSelected(NULL); ssystem->setSelected(NULL);}

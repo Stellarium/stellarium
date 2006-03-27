@@ -1778,7 +1778,7 @@ void LabeledButton::draw(void)
     if (!visible) return;
 	
 	if (!hideTexture)
-		painter.drawSquareFill(pos, size, painter.getBaseColor() * 1.f);
+		painter.drawSquareFill(pos, size, painter.getBaseColor());
 	Button::draw();
 
     glPushMatrix();
@@ -1786,14 +1786,14 @@ void LabeledButton::draw(void)
     Component::scissor->push(pos, size);
     
     if (justification == JUSTIFY_CENTER)
-		label.setPos((size[0]-label.getSizex())/2,(size[1]-label.getSizey())/2+2);
+		label.setPos((size[0]-label.getSizex())/2,(size[1]-label.getSizey())/2);
 	else if (justification == JUSTIFY_LEFT)
-		label.setPos(0 + LABEL_PAD,(size[1]-label.getSizey())/2+2);
+		label.setPos(0 + LABEL_PAD,(size[1]-label.getSizey())/2);
 	else if (justification == JUSTIFY_RIGHT)
-		label.setPos(size[0]-label.getSizex() - LABEL_PAD,(size[1]-label.getSizey())/2+2);
+		label.setPos(size[0]-label.getSizex() - LABEL_PAD,(size[1]-label.getSizey())/2);
 	
-	if (pressed || isBright) label.draw();
-    else label.draw(.3);   // faded
+	if (pressed || isBright) label.draw(1.5);
+    else label.draw();   // faded
 
     Component::scissor->pop();
 	glPopMatrix();
@@ -3378,7 +3378,7 @@ StringList::StringList()
 {
 	elemsSize = 0;
 	current = items.end();
-	itemSize = (int)painter.getFont()->getLineHeight() + 1;
+	itemSize = (int)painter.getFont()->getLineHeight() + (int)painter.getFont()->getDescent();
 	size[0] = 100;
 	size[1] = 100;
 }
@@ -3393,11 +3393,12 @@ void StringList::draw(void)
 
 	int y = 0;
 	int x = pos[0];
+	int descent = (int)painter.getFont()->getDescent();
 
 	while(iter!=items.end())
 	{
-		if (iter==current) painter.print(x + 3, pos[1] + y + 2, *iter, painter.getTextColor() * 2);
-		else painter.print(x + 2, pos[1] + y + 2,*iter);
+		if (iter==current) painter.print(x + 3, pos[1] + y + itemSize - descent, *iter, painter.getTextColor() * 2);
+		else painter.print(x + 2, pos[1] + y + itemSize - descent,*iter);
 		painter.drawLine(s_vec2i(x, pos[1]+y), s_vec2i(x+size[0], pos[1]+(int)y));
 		y += itemSize;
 		if (elemsSize > size[1] && y + 2*itemSize > size[1])

@@ -773,7 +773,7 @@ void StelUI::doSearchCommand(string _command, wstring _error)
 	if(!app->commander->execute_command(_command))
         return;
 
-    if (core->hasSelected())
+    if (core->getFlagHasSelected())
     {
     	core->gotoSelectedObject();
         hideSearchMessage();

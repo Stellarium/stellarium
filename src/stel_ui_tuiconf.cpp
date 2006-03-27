@@ -54,7 +54,7 @@ void StelUI::draw_gravity_ui(void)
 		core->printGravity(baseFont, x-shift + 30, y-shift + 38, os.str(), 0);
 	}
 
-	if (core->hasSelected() && FlagShowTuiShortObjInfo)
+	if (core->getFlagHasSelected() && FlagShowTuiShortObjInfo)
 	{
 	    wstring info = core->getSelectedObjectShortInfo();
 		glColor3fv(core->getSelectedObjectInfoColor());
