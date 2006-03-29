@@ -30,6 +30,9 @@ class StelApp{
 friend class StelUI;
 friend class StelCommandInterface;
 public:
+	//! Possible drawing modes
+	enum DRAWMODE { DM_NORMAL=0, DM_CHART, DM_NIGHT, DM_NIGHTCHART, DM_NONE };
+
     StelApp(const string& CDIR, const string& LDIR, const string& DATA_ROOT);
 
     ~StelApp();
@@ -71,6 +74,24 @@ public:
 	//! @param newAppLocaleName The name of the language (e.g fr) to use for GUI, TUI and console messages etc..
 	void setAppLanguage(const std::string& newAppLangName);
 
+	//! Set flag for activating night vision mode
+	void setVisionModeNight(void) {if (!getVisionModeNight()) core->setColorScheme(getConfigFile(), "night_color");draw_mode=DM_NIGHT;}
+	//! Get flag for activating night vision mode
+	bool getVisionModeNight(void) const {return draw_mode==DM_NIGHT;}
+	
+	//! Set flag for activating chart vision mode
+	void setVisionModeChart(void){if (!getVisionModeChart()) core->setColorScheme(getConfigFile(), "chart_color");draw_mode=DM_CHART; }
+	//! Get flag for activating chart vision mode
+	bool getVisionModeChart(void) const {return draw_mode==DM_CHART;}
+	
+	//! Set flag for activating chart vision mode
+	void setVisionModeNormal(void){if (!getVisionModeNormal()) core->setColorScheme(getConfigFile(), "standard_color");draw_mode=DM_NORMAL;}	
+	//! Get flag for activating chart vision mode
+	bool getVisionModeNormal(void) const {return draw_mode==DM_NORMAL;}
+	
+	//! Return full path to config file
+	const string getConfigFile(void) const {return getConfigDir() + "config.ini";}
+	
 private:
 	//! Screen size
 	int screenW, screenH;
@@ -89,14 +110,11 @@ private:
 	//! Restore previous projection mode
 	void restoreFrom2DfullscreenProjection(void) const;
 
+	//! The assicated StelCore instance
 	StelCore* core;
 
 	//Files location
 	string configDir;
-	
-	void loadConfigFrom(const string& confFile);
-
-	string config_file;
 	
 	// Script related
 	string SelectedScript;  // script filename (without directory) selected in a UI to run when exit UI
@@ -140,6 +158,8 @@ private:
     Uint32	TickCount;	// Used For The Tick Counter
     Uint32	LastCount;	// Used For The Tick Counter
     SDL_Cursor *Cursor;
+    
+    DRAWMODE draw_mode;					// Current draw mode
 };
 
 #endif

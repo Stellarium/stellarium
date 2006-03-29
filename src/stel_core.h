@@ -49,10 +49,6 @@ class StelCore
 // TODO : remove both
 friend class StelCommandInterface;
 public:
-
-	//! Possible drawing modes
-	enum DRAWMODE { DM_NORMAL=0, DM_CHART, DM_NIGHT, DM_NIGHTCHART, DM_NONE };
-
 	//! Possible mount modes
 	enum MOUNT_MODE { MOUNT_ALTAZIMUTAL, MOUNT_EQUATORIAL };
 
@@ -523,21 +519,6 @@ public:
 	// Others
 	//! Load color scheme from the given ini file and section name
 	void setColorScheme(const string& skinFile, const string& section);
-	
-	//! Set flag for activating night vision mode
-	void setVisionModeNight(void) {if (!getVisionModeNight()) setColorScheme(getDataDir() + "default_config.ini", "night_color");draw_mode=DM_NIGHT;}
-	//! Get flag for activating night vision mode
-	bool getVisionModeNight(void) const {return draw_mode==DM_NIGHT;}
-	
-	//! Set flag for activating chart vision mode
-	void setVisionModeChart(void){if (!getVisionModeChart()) setColorScheme(getDataDir() + "default_config.ini", "chart_color");draw_mode=DM_CHART; }
-	//! Get flag for activating chart vision mode
-	bool getVisionModeChart(void) const {return draw_mode==DM_CHART;}
-	
-	//! Set flag for activating chart vision mode
-	void setVisionModeNormal(void){if (!getVisionModeNormal()) setColorScheme(getDataDir() + "default_config.ini", "standard_color");draw_mode=DM_NORMAL;}	
-	//! Get flag for activating chart vision mode
-	bool getVisionModeNormal(void) const {return draw_mode==DM_NORMAL;}
 
 	//! Return the current image manager which display users images
 	ImageMgr* getImageMgr(void) const {return script_images;}
@@ -597,8 +578,6 @@ private:
 	int FlagManualZoom;					// Define whether auto zoom can go further
 	Vec3f chartColor;					// ?
 	float auto_move_duration;			// Duration of movement for the auto move to a selected objectin seconds
-
-	DRAWMODE draw_mode;					// Current draw mode
 };
 
 #endif // _STEL_CORE_H_

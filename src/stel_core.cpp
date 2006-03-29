@@ -27,11 +27,11 @@ StelCore::StelCore(const string& LDIR, const string& DATA_ROOT) :
 		skyTranslator(APP_NAME, LOCALEDIR, ""),
 		projection(NULL), selected_object(NULL), hip_stars(NULL),
 		nebulas(NULL), ssystem(NULL), milky_way(NULL),deltaFov(0.), 
-		deltaAlt(0.), deltaAz(0.), move_speed(0.00025), draw_mode(StelCore::DM_NONE)
+		deltaAlt(0.), deltaAz(0.), move_speed(0.00025)
 {
 	localeDir = LDIR;
 	dataRoot = DATA_ROOT;
-
+	
 	projection = Projector::create(Projector::PERSPECTIVE_PROJECTOR, Vec4i(0,0,800,600), 60);
                                    
 	tone_converter = new ToneReproductor();
@@ -228,9 +228,6 @@ void StelCore::init(const InitParser& conf)
 	setFlagGravityLabels( conf.get_boolean("viewing:flag_gravity_labels") );
 	setFlagMoonScaled(conf.get_boolean("viewing", "flag_moon_scaled", conf.get_boolean("viewing", "flag_init_moon_scaled", 0)));  // name change
 	setMoonScale(conf.get_double ("viewing","moon_scale",5.));
-	setVisionModeNormal();
-	if (conf.get_boolean("viewing:flag_chart")) setVisionModeChart();
-	if (conf.get_boolean("viewing:flag_night")) setVisionModeNight();
 
 	// Astro section
 	setFlagStars(conf.get_boolean("astro:flag_stars"));
@@ -341,8 +338,6 @@ void StelCore::draw(int delta_time)
 	navigation->switch_to_earth_equatorial();
 
 	glBlendFunc(GL_ONE, GL_ONE);
-
-	if (draw_mode != DM_NORMAL) drawChartBackground();
 
 	// Draw the milky way.
 	milky_way->draw(tone_converter, projection, navigation);
@@ -741,9 +736,9 @@ void StelCore::setColorScheme(const string& skinFile, const string& section)
 	ssystem->setOrbitColor(StelUtility::str_to_vec3f(conf.get_str(section,"planet_orbits_color")));
 	ssystem->setTrailColor(StelUtility::str_to_vec3f(conf.get_str(section,"object_trails_color")));
 	equ_grid->set_color(StelUtility::str_to_vec3f(conf.get_str(section,"equatorial_color")));
-	equ_grid->set_top_transparancy(draw_mode==DM_NORMAL);
+	//equ_grid->set_top_transparancy(draw_mode==DM_NORMAL);
 	azi_grid->set_color(StelUtility::str_to_vec3f(conf.get_str(section,"azimuthal_color")));
-	azi_grid->set_top_transparancy(draw_mode==DM_NORMAL);
+	//azi_grid->set_top_transparancy(draw_mode==DM_NORMAL);
 	equator_line->set_color(StelUtility::str_to_vec3f(conf.get_str(section,"equator_color")));
 	ecliptic_line->set_color(StelUtility::str_to_vec3f(conf.get_str(section,"ecliptic_color")));
 	meridian_line->set_font(12, baseFontFile);
@@ -771,13 +766,9 @@ Vec3f StelCore::getSelectedObjectInfoColor(void) const
 		cerr << "WARNING: StelCore::getSelectedObjectInfoColor was called while no object is currently selected!!" << endl;
 		return Vec3f(1, 1, 1);
 	}
-	if (getVisionModeNight()) return Vec3f(1.0,0.2,0.2);
-	else
-	{
-		if (selected_object->get_type()==StelObject::STEL_OBJECT_NEBULA) return nebulas->getLabelColor();
-		if (selected_object->get_type()==StelObject::STEL_OBJECT_PLANET) return ssystem->getLabelColor();
-		if (selected_object->get_type()==StelObject::STEL_OBJECT_STAR) return selected_object->get_RGB();
-	}
+	if (selected_object->get_type()==StelObject::STEL_OBJECT_NEBULA) return nebulas->getLabelColor();
+	if (selected_object->get_type()==StelObject::STEL_OBJECT_PLANET) return ssystem->getLabelColor();
+	if (selected_object->get_type()==StelObject::STEL_OBJECT_STAR) return selected_object->get_RGB();
 	return Vec3f(1, 1, 1);
 }
 
