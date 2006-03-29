@@ -30,6 +30,9 @@
 #ifndef HAVE_POW10
 # define pow10(x) pow(10,(x))
 #endif
+
+#ifndef CYGWIN
+
 #ifndef HAVE_ACOSF
 # define acosf(x) (float)(acos(x))
 #endif
@@ -63,5 +66,7 @@
 #ifndef HAVE_SQRTF
 # define sqrtf(x) (float)(sqrt(x))
 #endif
+
+#endif /* CYGWIN */
 
 #endif /*_FMATH_H_*/

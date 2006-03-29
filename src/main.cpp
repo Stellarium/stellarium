@@ -49,7 +49,7 @@ void drawIntro(void)
 // Display stellarium usage in the console
 void usage(char **argv)
 {
-	wprintf(_("Usage: %s [OPTION] ...\n -v, --version          Output version information and exit.\n -h, --help             Display this help and exit.\n"), argv[0]);
+	wcout << _("Usage: %s [OPTION] ...\n -v, --version          Output version information and exit.\n -h, --help             Display this help and exit.\n");
 }
 
 
@@ -61,7 +61,7 @@ void check_command_line(int argc, char **argv)
     {
         if (!(strcmp(argv[1],"--version") && strcmp(argv[1],"-v")))
         {
-            wprintf(L"%s\n", APP_NAME);
+            wcout << APP_NAME << endl;
             exit(0);
         }
         if (!(strcmp(argv[1],"--help") && strcmp(argv[1],"-h")))
@@ -73,8 +73,8 @@ void check_command_line(int argc, char **argv)
 
     if (argc > 1)
     {
-        wprintf(_("%s: Bad command line argument(s)\n"), argv[0]);
-        wprintf(_("Try `%s --help' for more information.\n"), argv[0]);
+        wcout << _("%s: Bad command line argument(s)\n");
+        wcout << _("Try `%s --help' for more information.\n");
         exit(1);
     }
 }

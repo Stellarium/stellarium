@@ -242,7 +242,7 @@ float Observator::get_GMT_shift_from_system(double JD, bool _local) const
 	return (float)timeinfo->tm_gmtoff/3600 + (timeinfo->tm_isdst!=0); 
 	#else */
 
-#if !defined(WIN32)
+#if !defined(MINGW32)
 
 	struct tm * timeinfo;
 
@@ -280,13 +280,12 @@ float Observator::get_GMT_shift_from_system(double JD, bool _local) const
 	return min + atoi(heure);
 #else
      struct tm *timeinfo;
-     time_t rawtime; time(&rawtime);
+     time_t rawtime;
+     time(&rawtime);
      timeinfo = localtime(&rawtime);
      return -(float)timezone/3600 + (timeinfo->tm_isdst!=0);
 #endif
 
-	 //#endif
-	
 }
 
 // for platforms without built in timegm function
