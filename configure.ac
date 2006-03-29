@@ -41,6 +41,7 @@ dnl Can't find later libGLU if -lm not set here!?!??!
 AC_CHECK_LIB(m,fabs,LIBS="$LIBS -lm",AC_MSG_RESULT(math library not found))
 
 AC_C_BIGENDIAN
+AC_HEADER_DIRENT
 
 dnl Check for X11.
 AC_PATH_XTRA
@@ -48,17 +49,6 @@ LIBS="$LIBS $X_LIBS"
 CFLAGS="$CFLAGS $X_CFLAGS"
 
 dnl Check for SDL
-case "$host" in
-*-*-darwin*)
-SDL_VERSION=1.2.0
-dnl AM_PATH_SDL($SDL_VERSION,
-dnl            	:,
-dnl            	AC_MSG_ERROR([*** SDL version $SDL_VERSION not found!])
-dnl )
-;;
-
-dnl Other systems
-*)
 SDL_VERSION=1.2.0
 AM_PATH_SDL($SDL_VERSION,
            	:,
@@ -67,8 +57,6 @@ AM_PATH_SDL($SDL_VERSION,
 CFLAGS="$CFLAGS $SDL_CFLAGS"
 CXXFLAGS="$CXXFLAGS $SDL_CFLAGS"
 LIBS="$LIBS $SDL_LIBS"
-;;
-esac
 
 # Check for libpng
 AC_CHECK_LIB(png, png_read_info,[AC_CHECK_HEADER(png.h,LIBS="$LIBS -lpng -lz",)], AC_MSG_ERROR(*** PNG library not found ***), -lz -lm)
@@ -121,12 +109,6 @@ dnl MINGW32
 	CXXFLAGS="$CXXFLAGS `sdl-config --cflags` -I/mingw/include/SDL/"
 ;;
 
-dnl Cross-compiling MINGW32
-i386-pc-mingw32msvc)
-	AC_DEFINE_UNQUOTED(MINGW32,1, [If we are on mingw32 plateform.])
-	LIBS="$LIBS -lopengl32 -lglu32"
-;;
-
 dnl OTHER SYSTEMS
 *)
 	AC_CHECK_LIB(GL,glEnable)
@@ -141,22 +123,6 @@ dnl OTHER SYSTEMS
 
 ;;
 esac
-
-dnl AC_CACHE_CHECK(
-dnl 	[whether libglgooey is available],
-dnl 	[my_cv_glgooey_avail],
-dnl 	[my_ac_save_libs=$LIBS
-dnl 	LIBS="-lglgooey $LIBS"
-dnl 	AC_LANG_PUSH(C++)
-dnl 	AC_TRY_LINK(
-dnl 	[#include <glgooey/WindowManager.h>],
-dnl 	[Gooey::WindowManager();],
-dnl 	[my_cv_glgooey_avail=true],
-dnl 	[AC_MSG_ERROR(GLGOOEY not found - please install glgooey)])
-dnl 	AC_LANG_POP
-dnl 	LIBS=$my_ac_save_libs
-dnl ])
-
 
 dnl Checks for library functions.
 AC_CHECK_FUNCS(toupper strcasecmp strdup sinf cosf tanf asinf acosf atanf expf logf log10f atan2f sqrtf powf modf putenv setlocale tzset strchr pow10 timegm)
