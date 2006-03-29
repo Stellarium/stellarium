@@ -49,14 +49,19 @@ LIBS="$LIBS $X_LIBS"
 CFLAGS="$CFLAGS $X_CFLAGS"
 
 dnl Check for SDL
+case "$host" in
+*-*-mingw32)
+;;
+*-*-cygwin)
+;;
+*)
 SDL_VERSION=1.2.0
-AM_PATH_SDL($SDL_VERSION,
-           	:,
-           	AC_MSG_ERROR([*** SDL version $SDL_VERSION not found!])
-)
-CFLAGS="$CFLAGS $SDL_CFLAGS"
-CXXFLAGS="$CXXFLAGS $SDL_CFLAGS"
-LIBS="$LIBS $SDL_LIBS"
+	AM_PATH_SDL($SDL_VERSION,:,AC_MSG_ERROR([*** SDL version $SDL_VERSION not found!]))
+	CFLAGS="$CFLAGS $SDL_CFLAGS"
+	CXXFLAGS="$CXXFLAGS $SDL_CFLAGS"
+	LIBS="$LIBS $SDL_LIBS"
+;;
+esac
 
 # Check for libpng
 AC_CHECK_LIB(png, png_read_info,[AC_CHECK_HEADER(png.h,LIBS="$LIBS -lpng -lz",)], AC_MSG_ERROR(*** PNG library not found ***), -lz -lm)
@@ -95,7 +100,9 @@ case "$host" in
 dnl CYGWIN
 *-*-cygwin*)
 	AC_DEFINE_UNQUOTED(CYGWIN,1, [If we are on cygwin plateform.])
-	LIBS="$LIBS -lopengl32 -lglu32"
+	LIBS="$LIBS -lopengl32 -lglu32 -lSDLmain -lSDL -mwindows -mthreads "
+	CFLAGS="$CFLAGS -I/usr/local/include/SDL -Dmain=SDL_main -DWIN32 -Uunix -mthreads"
+	CXXFLAGS="$CXXFLAGS -I/usr/local/include/SDL -Dmain=SDL_main -DWIN32 -Uunix -mthreads"
 ;;
 
 dnl MINGW32
@@ -126,7 +133,6 @@ esac
 
 dnl Checks for library functions.
 AC_CHECK_FUNCS(toupper strcasecmp strdup sinf cosf tanf asinf acosf atanf expf logf log10f atan2f sqrtf powf modf putenv setlocale tzset strchr pow10 timegm)
-
 
 AC_CONFIG_FILES([Makefile stellarium.spec src/Makefile src/iniparser/Makefile src/glpng/Makefile src/stellplanet/Makefile src/stellastro/Makefile config/Makefile data/Makefile doc/Makefile textures/Makefile textures/landscapes/Makefile textures/constellation-art/Makefile data/scripts/Makefile data/sky_cultures/Makefile  data/sky_cultures/polynesian/Makefile data/sky_cultures/western/Makefile data/sky_cultures/chinese/Makefile data/sky_cultures/egyptian/Makefile intl/Makefile po/Makefile.in m4/Makefile])
 

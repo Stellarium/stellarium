@@ -19,8 +19,8 @@
 
 #include <config.h>
 #include <cassert>
-#include <locale>
 #include <dirent.h>
+#include <cstdio>
 
 #include "translator.h"
 
