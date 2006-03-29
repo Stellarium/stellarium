@@ -117,6 +117,7 @@ wstring Nebula::getShortInfoString(const Navigator*) const
 	
 	// All nebula have at least an NGC or IC number
 	assert(false);
+	return L"";
 }
 
 double Nebula::get_close_fov(const Navigator*) const

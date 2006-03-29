@@ -23,7 +23,6 @@
 #include <config.h>
 
 #include <string>
-#include <locale>
 #include <iostream>
 #include <cerrno>
 

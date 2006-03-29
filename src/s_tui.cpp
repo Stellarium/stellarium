@@ -532,13 +532,9 @@ bool Decimal_item::onKey(Uint16 k, S_TUI_VALUE v)
 wstring Decimal_item::getString(void)
 {
 	// Can't directly write value in os because there is a float precision limit bug..
-	static wchar_t tempstr[16];
-#ifndef MINGW32
-	swprintf(tempstr, 15, L"%.2f", value);
-#else
-    swprintf(tempstr, L"%.2f", value);
-#endif
-	wstring vstr(tempstr);
+	static char tempstr[16];
+	sprintf(tempstr,"%.2f", value);
+	wstring vstr = StelUtility::stringToWstring(tempstr);
 
 	if (numInput) return label + (active ? start_active : L"") + strInput + (active ? stop_active : L"");
 	else return label + (active ? start_active : L"") + vstr + (active ? stop_active : L"");
