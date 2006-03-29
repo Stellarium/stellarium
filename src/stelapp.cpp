@@ -12,7 +12,8 @@
 #include "stelapp.h"
 
 StelApp::StelApp(const string& CDIR, const string& LDIR, const string& DATA_ROOT) : 
-		frame(0), timefr(0), timeBase(0), fps(0), maxfps(10000.f),  FlagTimePause(0), is_mouse_moving_horiz(false), is_mouse_moving_vert(false)
+		frame(0), timefr(0), timeBase(0), fps(0), maxfps(10000.f),  FlagTimePause(0), 
+		is_mouse_moving_horiz(false), is_mouse_moving_vert(false), draw_mode(StelApp::DM_NONE)
 {
 	configDir = CDIR;
 	SelectedScript = SelectedScriptDirectory = "";
@@ -58,7 +59,7 @@ void StelApp::init(void)
 	{
 		// The config file is too old to try an importation
 		printf("The current config file is from a version too old for parameters to be imported (%s).\nIt will be replaced by the default config file.\n", version.empty() ? "<0.6.0" : version.c_str());
-		system( (string("cp -f ") + core->getDataRoot() + "/data/default_config.ini " + getConfigDir() + config_file).c_str() );
+		system( (string("cp -f ") + core->getDataRoot() + "/data/default_config.ini " + getConfigFile()).c_str() );
 	}
 	
 	screenW = conf.get_int("video:screen_w");
@@ -66,6 +67,10 @@ void StelApp::init(void)
 	initSDL(screenW, screenH, conf.get_int("video:bbp_mode"), conf.get_boolean("video:fullscreen"), core->getDataDir() + "/icon.bmp");	
 	
 	core->init(conf);
+	
+	setVisionModeNormal();
+	if (conf.get_boolean("viewing:flag_chart")) setVisionModeChart();
+	if (conf.get_boolean("viewing:flag_night")) setVisionModeNight();
 	
 	maxfps 				= conf.get_double ("video","maximum_fps",10000);
 	string appLocaleName = conf.get_str("localization", "app_locale", "system");

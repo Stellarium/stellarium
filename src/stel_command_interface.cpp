@@ -581,14 +581,14 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 
 // 	  if(args["action"]=="load" && trusted) {
 // 		  // eventually load/reload are not both needed, but for now this is called at startup, reload later
-// 		  // stapp->loadConfigFrom(stapp->getConfigDir()+stapp->config_file);
+// 		  // stapp->loadConfigFrom(stapp->getConfigFile());
 // 		  recordable = 0;  // don't record as scripts can not run this
 // 
 // 	  } else if(args["action"]=="reload") {
 // 
 // 		  // on reload, be sure to reconfigure as necessary since StelCore::init isn't called
 // 
-// 		  stapp->loadConfigFrom(stapp->getConfigDir()+stapp->config_file);
+// 		  stapp->loadConfigFrom(stapp->getConfigFile());
 // 
 // 		  if(stcore->asterisms) {
 // 			  stcore->setConstellationArtIntensity(stcore->getConstellationArtIntensity());
@@ -597,7 +597,7 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 // 		  if (!stcore->getFlagAtmosphere() && stcore->tone_converter)
 // 			  stcore->tone_converter->set_world_adaptation_luminance(3.75f);
 // 		  //if (stcore->getFlagAtmosphere()) stcore->atmosphere->set_fade_duration(stcore->AtmosphereFadeDuration);
-// 		  stcore->observatory->load(stapp->getConfigDir() + stapp->config_file, "init_location");
+// 		  stcore->observatory->load(stapp->getConfigFile(), "init_location");
 // 		  stcore->setLandscape(stcore->observatory->get_landscape_name());
 // 		  
 // 		  if (stapp->StartupTimeMode=="preset" || stapp->StartupTimeMode=="Preset")
@@ -726,12 +726,12 @@ int StelCommandInterface::set_flag(string name, string value, bool &newval, bool
 			if(!newval) stcore->setFlagFog(false);  // turn off fog with atmosphere
 		}
 		else if(name=="chart") {
-			newval = !stcore->getVisionModeChart();
-			if (newval) stcore->setVisionModeChart();
+			newval = !stapp->getVisionModeChart();
+			if (newval) stapp->setVisionModeChart();
 		}
 		else if(name=="night") {
-			newval = !stcore->getVisionModeNight();
-			if (newval) stcore->setVisionModeNight();
+			newval = !stapp->getVisionModeNight();
+			if (newval) stapp->setVisionModeNight();
 		}
 		//else if(name=="use_common_names") newval = (stcore->FlagUseCommonNames = !stcore->FlagUseCommonNames);
 		else if(name=="azimuthal_grid") {
@@ -870,12 +870,12 @@ int StelCommandInterface::set_flag(string name, string value, bool &newval, bool
 			if(!newval) stcore->setFlagFog(false);  // turn off fog with atmosphere
 		}
 		else if(name=="chart") {
-			if (newval) stcore->setVisionModeChart();
+			if (newval) stapp->setVisionModeChart();
 		}
 		else if(name=="night") {
-			if (newval) stcore->setVisionModeNight();
+			if (newval) stapp->setVisionModeNight();
 		}
-		else if(name=="chart" && newval) stcore->setVisionModeChart();
+		else if(name=="chart" && newval) stapp->setVisionModeChart();
 		else if(name=="azimuthal_grid") stcore->setFlagAzimutalGrid(newval);
 		else if(name=="equatorial_grid") stcore->setFlagEquatorGrid(newval);
 		else if(name=="equator_line") stcore->setFlagEquatorLine(newval);
