@@ -944,7 +944,7 @@ void StelUI::doSaveObserverPosition(const string& name)
 		<< " name " << location;
 	app->commander->execute_command(oss.str());
 
-	core->getObservatory().save(app->getConfigDir() + app->config_file, "init_location");
+	core->getObservatory().save(app->getConfigFile(), "init_location");
 	app->ui->setTitleObservatoryName(app->ui->getTitleWithAltitude());
 }
 
@@ -961,10 +961,10 @@ void StelUI::saveObserverPosition(void)
 
 void StelUI::saveRenderOptions(void)
 {
-	cout << "Saving rendering options in file " << app->getConfigDir() + app->config_file << endl;
+	cout << "Saving rendering options in file " << app->getConfigFile() << endl;
 
 	InitParser conf;
-	conf.load(app->getConfigDir() + app->config_file);
+	conf.load(app->getConfigFile());
 
 	conf.set_boolean("astro:flag_stars", core->getFlagStars());
 	conf.set_boolean("astro:flag_star_name", core->getFlagStarName());
@@ -981,8 +981,8 @@ void StelUI::saveRenderOptions(void)
 	conf.set_boolean("astro:flag_planets", core->getFlagPlanets());
 	conf.set_boolean("astro:flag_planets_hints", core->getFlagPlanetsHints());
 	conf.set_double("viewing:moon_scale", core->getMoonScale());
-	conf.set_boolean("viewing:flag_chart", core->getVisionModeChart());
-	conf.set_boolean("viewing:flag_night", core->getVisionModeNight());
+	conf.set_boolean("viewing:flag_chart", app->getVisionModeChart());
+	conf.set_boolean("viewing:flag_night", app->getVisionModeNight());
 	//conf.set_boolean("viewing:use_common_names", core->FlagUseCommonNames);
 	conf.set_boolean("viewing:flag_equatorial_grid", core->getFlagEquatorGrid());
 	conf.set_boolean("viewing:flag_azimutal_grid", core->getFlagAzimutalGrid());
@@ -993,7 +993,7 @@ void StelUI::saveRenderOptions(void)
 	conf.set_boolean("landscape:flag_atmosphere", core->getFlagAtmosphere());
 	conf.set_boolean("landscape:flag_fog", core->getFlagFog());
 
-	conf.save(app->getConfigDir() + app->config_file);
+	conf.save(app->getConfigFile());
 }
 
 void StelUI::setVideoOption(void)
@@ -1003,10 +1003,10 @@ void StelUI::setVideoOption(void)
 	int w = atoi(s.substr(0,i).c_str());
 	int h = atoi(s.substr(i+1,s.size()).c_str());
 
-	cout << "Saving video size " << w << "x" << h << " in file " << app->getConfigDir() + app->config_file << endl;
+	cout << "Saving video size " << w << "x" << h << " in file " << app->getConfigFile() << endl;
 
 	InitParser conf;
-	conf.load(app->getConfigDir() + app->config_file);
+	conf.load(app->getConfigFile());
 
     conf.set_str("projection:type",
                  Projector::typeToString(core->getProjectionType()));
@@ -1016,7 +1016,7 @@ void StelUI::setVideoOption(void)
 
 	conf.set_int("video:screen_w", w);
 	conf.set_int("video:screen_h", h);
-	conf.save(app->getConfigDir() + app->config_file);
+	conf.save(app->getConfigFile());
 }
 
 void StelUI::setLandscape(void)

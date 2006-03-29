@@ -219,7 +219,7 @@ void StelUI::init(const InitParser& conf)
 
 	setTitleObservatoryName(getTitleWithAltitude());
 
-	if (core->getVisionModeNight()) desktop->setColorScheme(GuiBaseColorr, GuiTextColorr);
+	if (app->getVisionModeNight()) desktop->setColorScheme(GuiBaseColorr, GuiTextColorr);
 	else desktop->setColorScheme(GuiBaseColor, GuiTextColor);
 }
 
@@ -541,30 +541,30 @@ void StelUI::cb(void)
 	help_win->setVisible(FlagHelp);
 	core->setMountMode(bt_flag_equatorial_mode->getState() ? StelCore::MOUNT_EQUATORIAL : StelCore::MOUNT_ALTAZIMUTAL);
 	FlagConfig			= bt_flag_config->getState();
-	if  (core->getVisionModeChart() != bt_flag_chart->getState())
+	if  (app->getVisionModeChart() != bt_flag_chart->getState())
 	{
 		if (bt_flag_night->getState())
 		{
 			desktop->setColorScheme(GuiBaseColor, GuiTextColor);
-			core->setVisionModeChart();
+			app->setVisionModeChart();
 		}
 		else
 		{
 			desktop->setColorScheme(GuiBaseColor, GuiTextColor);
-			core->setVisionModeNormal();
+			app->setVisionModeNormal();
 		}
 	}
-	if  (core->getVisionModeNight() != bt_flag_night->getState())
+	if  (app->getVisionModeNight() != bt_flag_night->getState())
 	{
 		if (bt_flag_night->getState())
 		{
-			core->setVisionModeNight();
+			app->setVisionModeNight();
 			desktop->setColorScheme(GuiBaseColorr, GuiTextColorr);
 		}
 		else
 		{
 			desktop->setColorScheme(GuiBaseColor, GuiTextColor);
-			core->setVisionModeNormal();
+			app->setVisionModeNormal();
 		}
 	}
 	config_win->setVisible(FlagConfig);
@@ -1282,8 +1282,8 @@ void StelUI::gui_update_widgets(int delta_time)
 	bt_flag_help->setState(help_win->getVisible());
 	bt_flag_equatorial_mode->setState(core->getMountMode()==StelCore::MOUNT_EQUATORIAL);
 	bt_flag_config->setState(config_win->getVisible());
-	bt_flag_chart->setState(core->getVisionModeChart());
-	bt_flag_night->setState(core->getVisionModeNight());
+	bt_flag_chart->setState(app->getVisionModeChart());
+	bt_flag_night->setState(app->getVisionModeNight());
 	bt_flag_search->setState(search_win->getVisible());
 	bt_flag_goto->setState(false);
 
@@ -1293,7 +1293,14 @@ void StelUI::gui_update_widgets(int delta_time)
 // Update the infos about the selected object in the TextLabel widget
 void StelUI::updateInfoSelectString(void)
 {
-	info_select_txtlbl->setTextColor(core->getSelectedObjectInfoColor());
+	if (app->getVisionModeNight())
+	{
+		info_select_txtlbl->setTextColor(Vec3f(1.0,0.2,0.2));
+	}
+	else
+	{
+		info_select_txtlbl->setTextColor(core->getSelectedObjectInfoColor());
+	}
 	info_select_txtlbl->setLabel(core->getSelectedObjectInfo());
 }
 
