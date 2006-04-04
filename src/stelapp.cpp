@@ -11,6 +11,9 @@
 //
 #include "stelapp.h"
 
+#include "viewport_distorter.h"
+
+
 StelApp::StelApp(const string& CDIR, const string& LDIR, const string& DATA_ROOT) : 
 		frame(0), timefr(0), timeBase(0), fps(0), maxfps(10000.f),  FlagTimePause(0), 
 		is_mouse_moving_horiz(false), is_mouse_moving_vert(false), draw_mode(StelApp::DM_NONE)
@@ -22,6 +25,7 @@ StelApp::StelApp(const string& CDIR, const string& LDIR, const string& DATA_ROOT
 	commander = new StelCommandInterface(core, this);
 	scripts = new ScriptMgr(commander, core->getDataDir());
 	time_multiplier = 1;
+    distorter = 0;
 }
 
 
@@ -32,6 +36,7 @@ StelApp::~StelApp()
 	delete scripts;
 	delete commander;
 	delete core;
+    if (distorter) delete distorter;
 }
 
 void StelApp::quit(void)
@@ -107,7 +112,14 @@ void StelApp::init(void)
 	
 	// play startup script, if available
 	if(scripts) scripts->play_startup_script();
-	
+    
+    if (distorter == 0) {
+      distorter = ViewportDistorter::create(
+                                       conf.get_str("video",
+                                                    "distorter","dummy"),
+                                       screenW,screenH);
+      distorter->init(conf);
+    }
 }
 
 void StelApp::update(int delta_time)
@@ -146,6 +158,8 @@ void StelApp::draw(int delta_time)
 
 	// Draw the Graphical ui and the Text ui
 	ui->draw();
+
+    distorter->distort();
 }
 
 //! @brief Set the application locale. This apply to GUI, console messages etc..
@@ -157,14 +171,16 @@ void StelApp::setAppLanguage(const std::string& newAppLocaleName)
 }
 
 // Handle mouse clics
-int StelApp::handleClick(Uint16 x, Uint16 y, S_GUI_VALUE button, S_GUI_VALUE state)
+int StelApp::handleClick(int x, int y, S_GUI_VALUE button, S_GUI_VALUE state)
 {
+    distorter->distortXY(x,y);
 	return ui->handle_clic(x, y, button, state);
 }
 
 // Handle mouse move
 int StelApp::handleMove(int x, int y)
 {
+    distorter->distortXY(x,y);
 	// Turn if the mouse is at the edge of the screen.
 	// unless config asks otherwise
 	if(FlagEnableMoveMouse)

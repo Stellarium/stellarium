@@ -22,6 +22,7 @@
 class StelCommandInterface;
 class ScriptMgr;
 class StelUI;
+class ViewportDistorter;
 
 /**
 @author Fabien Chereau
@@ -53,7 +54,7 @@ public:
 	int getTimeMultiplier() { return time_multiplier; };
 
 	// Handle mouse clics
-	int handleClick(Uint16 x, Uint16 y, s_gui::S_GUI_VALUE button, s_gui::S_GUI_VALUE state);
+	int handleClick(int x, int y, s_gui::S_GUI_VALUE button, s_gui::S_GUI_VALUE state);
 	// Handle mouse move
 	int handleMove(int x, int y);
 	// Handle key press and release
@@ -147,7 +148,8 @@ private:
 	StelCommandInterface * commander;       // interface to perform all UI and scripting actions
 	ScriptMgr * scripts;                    // manage playing and recording scripts
 	StelUI * ui;							// The main User Interface
-		
+	ViewportDistorter *distorter;
+
 	///////////////////////////////////////////////////////////////////////////////////////////////////
 	// SDL related function and variables
 	static SDL_Cursor *create_cursor(const char *image[]);
