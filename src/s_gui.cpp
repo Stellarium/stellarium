@@ -900,9 +900,9 @@ LabeledCheckBox::LabeledCheckBox(bool state, const wstring& _label) :
 	checkbox = new CheckBox(state);
 	addComponent(checkbox);
 	label = new Label(_label);
-	label->setPos(checkbox->getSizex()+4, 0);
+	label->setPos(checkbox->getSizex()+4, -(int)label->getFont()->getDescent());
 	addComponent(label);
-	setSize(checkbox->getSizex() + label->getSizex() + 2,
+	setSize(checkbox->getSizex() + label->getSizex() + 4,
 		checkbox->getSizey()>label->getSizey() ? checkbox->getSizey() : label->getSizey());
 }
 
@@ -914,7 +914,7 @@ void LabeledCheckBox::draw(void)
 {
 	if (!visible) return;
 	
-	setSize(checkbox->getSizex() + label->getSizex() + 2,
+	setSize(checkbox->getSizex() + label->getSizex() + 4,
 		checkbox->getSizey()>label->getSizey() ? checkbox->getSizey() : label->getSizey());
 
 	Container::draw();
@@ -1759,7 +1759,13 @@ wstring ListBox::getItem(int value)
 LabeledButton::LabeledButton(const wstring& _label, s_font* font, Justification _j, bool _bright) 
 	: Button(), label(_label, font), justification(_j), isBright(_bright)
 {
-	Component::setSize(label.getSize()+s_vec2i(4,2));
+	Component::setSize(label.getSize()+s_vec2i(14,12+(int)label.getFont()->getDescent()));
+    if (justification == JUSTIFY_CENTER)
+		label.setPos((size[0]-label.getSizex())/2,(size[1]-label.getSizey())/2);
+	else if (justification == JUSTIFY_LEFT)
+		label.setPos(0 + LABEL_PAD,(size[1]-label.getSizey())/2);
+	else if (justification == JUSTIFY_RIGHT)
+		label.setPos(size[0]-label.getSizex() - LABEL_PAD,(size[1]-label.getSizey())/2);	
 }
 
 LabeledButton::~LabeledButton()
@@ -1784,13 +1790,6 @@ void LabeledButton::draw(void)
     glPushMatrix();
     glTranslatef(pos[0], pos[1], 0.f);
     Component::scissor->push(pos, size);
-    
-    if (justification == JUSTIFY_CENTER)
-		label.setPos((size[0]-label.getSizex())/2,(size[1]-label.getSizey())/2);
-	else if (justification == JUSTIFY_LEFT)
-		label.setPos(0 + LABEL_PAD,(size[1]-label.getSizey())/2);
-	else if (justification == JUSTIFY_RIGHT)
-		label.setPos(size[0]-label.getSizex() - LABEL_PAD,(size[1]-label.getSizey())/2);
 	
 	if (pressed || isBright) label.draw(1.5);
     else label.draw();   // faded
@@ -1963,7 +1962,7 @@ void StdWin::draw()
 {
 	if (!visible) return;
 
-	titleLabel->setPos((size[0] - titleLabel->getSizex())/2, (frameSize[3]-titleLabel->getSizey())/2 + 1);
+	titleLabel->setPos((size[0] - titleLabel->getSizex())/2, (frameSize[3]-titleLabel->getSizey())/2 - 1);
 	painter.drawSquareFill(pos, size);
 	painter.drawSquareFill(pos, s_vec2i(size[0], frameSize[3]));
 	FramedContainer::draw();
@@ -2297,7 +2296,7 @@ void TabHeader::draw(void)
     glTranslatef(pos[0], pos[1], 0.f);
     Component::scissor->push(pos, size);
 	
-	label.setPos((size-label.getSize())/2 + s_vec2i(1,0));
+	label.setPos((size-label.getSize())/2 + s_vec2i(-1,-1));
 	label.draw(0.7f + 0.3 * active);
 
     Component::scissor->pop();
@@ -2323,7 +2322,7 @@ void TabContainer::addTab(Component* c, const wstring& name)
 
 	TabHeader* tempHead = new TabHeader(tempInside, name);
 	tempHead->setPainter(painter);
-	tempHead->reshape(getHeadersSize(),0,tempHead->getSizex()+4,headerHeight);
+	tempHead->reshape(getHeadersSize(),0,tempHead->getSizex(),headerHeight);
 	headers.push_front(tempHead);
 
 	addComponent(tempInside);
@@ -2338,16 +2337,6 @@ void TabContainer::draw(void)
 	painter.drawSquareFill(pos, size, painter.getBaseColor()/3);
 	painter.drawLine(s_vec2i(pos[0]+getHeadersSize(), pos[1]+headerHeight-1),
 		s_vec2i(pos[0]+size[0], pos[1]+headerHeight-1));
-
-	int s = 0;
-	list<TabHeader*>::iterator iter = headers.begin();
-	while (iter != headers.end())
-	{
-		(*iter)->setPosx(s);
-		(*iter)->setSizex((*iter)->label.getSizex()+4);
-		s+=(*iter)->getSizex();
-        iter++;
-    }
 
 	Container::draw();
 }

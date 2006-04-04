@@ -189,8 +189,8 @@ Component* StelUI::createConfigWindow(void)
 	LabeledButton* render_save_bt = new LabeledButton(_("Save as default"));
 	render_save_bt->setOnPressCallback(callback<void>(this, &StelUI::saveRenderOptions));
 	tab_render->addComponent(render_save_bt);
-	render_save_bt->setPos(120,y+22);
-	render_save_bt->setSize(170,25); y+=20;
+	render_save_bt->setPos(120,tab_render->getSizey()-70);
+	y+=20;
 
 	// Date & Time options
 	FilledContainer* tab_time = new FilledContainer();
@@ -285,8 +285,8 @@ Component* StelUI::createConfigWindow(void)
 
 	LabeledButton* location_save_bt = new LabeledButton(_("Save location"));
 	location_save_bt->setOnPressCallback(callback<void>(this, &StelUI::saveObserverPosition));
-	location_save_bt->setPos(250,y+70);
-	location_save_bt->setSize(120,25);
+	location_save_bt->setPos(230,y+70);
+	//location_save_bt->setSize(120,25);
 
 	tab_location->addComponent(lblcursor);
 	tab_location->addComponent(lblloc);
@@ -323,12 +323,12 @@ Component* StelUI::createConfigWindow(void)
 
 	Label * lblvideo2 = new Label(wstring(L"\u2022 ")+_("Screen Resolution :"));
 	lblvideo2->setPos(10, y);
-	tab_video->addComponent(lblvideo2); y+=20;
+	tab_video->addComponent(lblvideo2); y+=24;
 
 	Label * lblvideo3 = new Label(_("Restart program for"));
 	Label * lblvideo4 = new Label(_("change to apply."));
-	lblvideo3->setPos(200, y+25);
-	lblvideo4->setPos(200, y+40);
+	lblvideo3->setPos(180, y+45);
+	lblvideo4->setPos(180, y+60);
 	tab_video->addComponent(lblvideo3);
 	tab_video->addComponent(lblvideo4);
 
@@ -352,8 +352,8 @@ Component* StelUI::createConfigWindow(void)
 	snprintf(vs, 999, "%sconfig.ini", app->getConfigDir().c_str());
 	Label * lblvideo5 = new Label(_("For unlisted screen resolution, edit the file :"));
 	Label * lblvideo6 = new Label(StelUtility::stringToWstring(string(vs)));
-	lblvideo5->setPos(30, y+25);
-	lblvideo6->setPos(30, y+40);
+	lblvideo5->setPos(30, tab_video->getSizey()-110);
+	lblvideo6->setPos(30, tab_video->getSizey()-94);
 	tab_video->addComponent(lblvideo5);
 	tab_video->addComponent(lblvideo6);
 
@@ -362,8 +362,8 @@ Component* StelUI::createConfigWindow(void)
 	LabeledButton* video_save_bt = new LabeledButton(_("Save as default"));
 	video_save_bt->setOnPressCallback(callback<void>(this, &StelUI::setVideoOption));
 	tab_video->addComponent(video_save_bt);
-	video_save_bt->setPos(120,y+22);
-	video_save_bt->setSize(170,25); y+=20;
+	video_save_bt->setPos(120,tab_video->getSizey()-70);
+	y+=20;
 
 	// Landscapes option
 	FilledContainer* tab_landscapes = new FilledContainer();
@@ -374,7 +374,7 @@ Component* StelUI::createConfigWindow(void)
 	lbllandscapes1->setPos(x, y);
 	tab_landscapes->addComponent(lbllandscapes1);
 
-	x=50; y+=20;
+	x=50; y+=24;
 
 	landscape_sl = new StringList();
 	landscape_sl->setPos(x,y);
@@ -389,8 +389,8 @@ Component* StelUI::createConfigWindow(void)
 
 	Label * lbllandscape1 = new Label(_("Please save option in tab \"Location\""));
 	Label * lbllandscape2 = new Label(_("to save current landscape as the default landscape."));
-	lbllandscape1->setPos(30, y+25);
-	lbllandscape2->setPos(30, y+40);
+	lbllandscape1->setPos(30, tab_landscapes->getSizey()-70);
+	lbllandscape2->setPos(30, tab_landscapes->getSizey()-54);
 	tab_landscapes->addComponent(lbllandscape1);
 	tab_landscapes->addComponent(lbllandscape2);
 
@@ -572,18 +572,40 @@ Component* StelUI::createSearchWindow(void)
 	Picture* pneb = new Picture(nebp, xi, yi, 32, 32);
 	tab_nebula->addComponent(pneb);
 
-	Label * lblnebula1 = new Label(_("Nebula"));
+	Label * lblnebula1 = new Label(_("Object No :"));
 	lblnebula1->setPos(x, y+5);
 	tab_nebula->addComponent(lblnebula1);
 
-	Label * lblnebula2 = new Label(_("eg. M83, NGC 7009, IC 2118" ));
-	Label * lblnebula3 = new Label(_("CW 113, SH 40" ));
+	Label * lblnebula2 = new Label(_("e.g. : 1432, 83" ));
+	Label * lblnebula3 = new Label(_("Choose a catalog :" ));
 	lblnebula2->setPos(x+100, y+35);
-	lblnebula3->setPos(x+100, y+51);
+	lblnebula3->setPos(x, y+60);
 	tab_nebula->addComponent(lblnebula2);
 	tab_nebula->addComponent(lblnebula3);
 
-	nebula_edit = new EditBox();
+	nebula_cat = new StringList();
+	nebula_cat->setPos(x+170,y+60);
+	nebula_cat->addItem("M");
+	nebula_cat->addItem("NGC");
+	nebula_cat->addItem("IC");
+	/*nebula_cat->addItem("UGC");*/
+	nebula_cat->adjustSize();
+	char nebc[10000];
+	sprintf(nebc, "M");
+	nebula_cat->setValue(nebc);
+	tab_nebula->addComponent(nebula_cat);
+	
+	/*nebula_cat = new ListBox(6);
+	nebula_cat->addItem(_("NGC" ));
+	nebula_cat->addItem(_("IC" ));
+	nebula_cat->addItem(_("UGC" ));
+	nebula_cat->setVisible(true);
+	nebula_cat->setOnChangeCallback(callback<void>(this, &StelUI::listBoxChanged));
+	tab_nebula->addComponent(nebula_cat);
+	nebula_cat->setPos(x+100,y+70);
+	nebula_cat->setSize(170,25);*/
+
+	nebula_edit = new EditBox(_(""));
 	nebula_edit->setOnReturnKeyCallback(callback<void>(this, &StelUI::doNebulaSearch));
 	tab_nebula->addComponent(nebula_edit);
 	nebula_edit->setPos(x+100,y);
@@ -784,20 +806,17 @@ void StelUI::doSearchCommand(string _command, wstring _error)
 
 void StelUI::doNebulaSearch(void)
 {
-//     wstring objectName = nebula_edit->getText();
-//     wstring originalName = objectName;
-//     
-//     transform(objectName.begin(), objectName.end(), objectName.begin(), ::toupper);
-//     for (string::size_type i=0;i<objectName.length();++i)
-// 	{
-// 		if (objectName[i]==' ') objectName[i]='_';
-// 	}
-// 
-//     string command = string("select nebula " + objectName);
-//     string error = string("Nebula '" + originalName + "' not found");
-//     
-//     doSearchCommand(command, error);
-//     nebula_edit->clearText();
+     /*int value = nebula_cat->getValue();*/
+     wstring objectName = nebula_edit->getText();
+     /*wstring catalogName = nebula_cat->getItem(value);*/
+     wstring catalogName = StelUtility::stringToWstring(nebula_cat->getValue());
+     wstring originalName = catalogName + objectName;
+ 
+     string command = string("select nebula " + StelUtility::wstringToString(catalogName) + "_" + StelUtility::wstringToString(objectName));
+     wstring error = StelUtility::stringToWstring(string("Nebula '" + StelUtility::wstringToString(originalName) + "' not found"));
+     
+     doSearchCommand(command, error);
+     nebula_edit->clearText();
 }
 
 void StelUI::doConstellationSearch(void)

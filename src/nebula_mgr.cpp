@@ -134,7 +134,8 @@ void NebulaMgr::draw(Projector* prj, const Navigator * nav, ToneReproductor* eye
 // search by name
 StelObject * NebulaMgr::search(const string& name)
 {
-	const string catalogs("NGC IC CW SH");
+	/*const string catalogs("NGC IC CW SH");*/
+	const string catalogs("M NGC IC UGC");
 	string cat;
 	unsigned int num;
 
@@ -144,30 +145,19 @@ StelObject * NebulaMgr::search(const string& name)
 		if (n[i]=='_') n[i]=' ';
 	}
 
-	if (name.c_str()[0] == 'M')
-	{
-		n = n.substr(1);
-		istringstream ss(n);
-		ss >> num;
-		if (ss.fail()) return NULL;
-		cat = "M";
-	}
-	else
-	{
-		istringstream ss(n);
-
-		ss >> cat;
-
-		// check if a valid catalog reference
-		if (catalogs.find(cat,0) == string::npos)
-			return NULL;
-
-		ss >> num;
-		if (ss.fail()) return NULL;
-	}
-
+	istringstream ss(n);
+	ss >> cat;
+	// check if a valid catalog reference
+	if (catalogs.find(cat,0) == string::npos)
+		return NULL;
+	ss >> num;
+	if (ss.fail()) return NULL;
+	
+	if (cat == "M") return searchM(num);
 	if (cat == "NGC") return searchNGC(num);
-	return searchIC(num);
+	if (cat == "IC") return searchIC(num);
+	/*if (cat == "UGC") return searchUGC(num);*/
+	return NULL;
 }
 
 
@@ -215,6 +205,17 @@ vector<StelObject*> NebulaMgr::search_around(Vec3d v, double lim_fov)
 	return result;
 }
 
+StelObject * NebulaMgr::searchM(unsigned int M)
+{
+	vector<Nebula *>::iterator iter;
+	for(iter=neb_array.begin();iter!=neb_array.end();iter++)
+	{
+		if ((*iter)->M_nb == M) return (*iter);
+	}
+
+	return NULL;
+}
+
 StelObject * NebulaMgr::searchNGC(unsigned int NGC)
 {
 	vector<Nebula *>::iterator iter;
@@ -237,6 +238,16 @@ StelObject * NebulaMgr::searchIC(unsigned int IC)
 	return NULL;
 }
 
+/*StelObject * NebulaMgr::searchUGC(unsigned int UGC)
+{
+	vector<Nebula *>::iterator iter;
+	for(iter=neb_array.begin();iter!=neb_array.end();iter++)
+	{
+		if ((*iter)->UGC_nb == UGC) return (*iter);
+	}
+
+	return NULL;
+}*/
 
 // read from stream
 bool NebulaMgr::loadNGC(const string& catNGC, LoadingBar& lb)
@@ -331,8 +342,19 @@ bool NebulaMgr::loadNGCNames(const string& catNGCNames)
 			{
 				n[k+1] = '\0';
 			}
-			// If the name is not a messier number set it without care
-			if (strncmp(n, "M ",2)) e->englishName = n;
+			// If the name is not a messier number perhaps one is already
+			// defined for this object
+			if (strncmp(n, "M ",2))
+			{
+				if (e->englishName!="")
+				{
+					ostringstream oss;
+					oss << e->englishName << " - " << n;
+					e->englishName = oss.str();
+				} else {
+					e->englishName = n;
+				}
+			}
 
 			// If it's a messiernumber, we will call it a messier if there is no better name
 			if (!strncmp(n, "M ",2))
@@ -342,7 +364,9 @@ bool NebulaMgr::loadNGCNames(const string& catNGCNames)
 
 				int num;
 
+				// Let us keep the right number in the Messier catalog
 				iss >> num;
+				e->M_nb=(unsigned int)(num);
 				oss << "M" << num;
 
 				if (e->englishName!="") oss << " - " << e->englishName;

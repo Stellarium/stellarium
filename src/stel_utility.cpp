@@ -272,26 +272,22 @@ double get_dec_angle(const string& str)
 
 
 
-//! @brief Print the passed angle with the format ddÃÂ°mm'ss(.ss)"
+//! @brief Print the passed angle with the format ddÃƒÂ‚Ã‚Â°mm'ss(.ss)"
 //! @param angle Angle in radian
 //! @param decimal Define if 2 decimal must also be printed
-//! @param useD Define if letter "d" must be used instead of °
+//! @param useD Define if letter "d" must be used instead of Â°
 //! @return The corresponding string
 wstring StelUtility::printAngleDMS(double angle, bool decimals, bool useD)
 {
-	char buf[32];
-	buf[31]='\0';
+	wchar_t buf[32];
+	buf[31]=L'\0';
 	double deg = 0.0;
 	double min = 0.0;
 	double sec = 0.0;
-	char sign = '+';
+	wchar_t sign = L'+';
 	int d, m, s;
-	char degsign[] = "°";
-	if (useD)
-    {
-             degsign[0] = 'd';
-             degsign[1] = '\0';
-    }
+	wchar_t degsign = L'Â°';
+	if (useD) degsign = L'd';
 
 	angle *= 180./M_PI;
 
@@ -309,7 +305,11 @@ wstring StelUtility::printAngleDMS(double angle, bool decimals, bool useD)
 	s = (int)sec;
 
 	if (decimals)
-	sprintf(buf,"%c%.2d%s%.2d'%.2f\"", sign, d, degsign, m, sec);
+#ifdef MINGW32
+	swprintf(buf,L"%lc%.2d%lc%.2d'%.2f\"", sign, d, degsign, m, sec);
+#else
+	swprintf(buf,sizeof(buf),L"%lc%.2d%lc%.2d'%.2f\"", sign, d, degsign, m, sec);
+#endif
 	else
 	{
 		double sf = sec - s;
@@ -327,9 +327,13 @@ wstring StelUtility::printAngleDMS(double angle, bool decimals, bool useD)
 				}
 			}
 		}
-		sprintf(buf, "%c%.2d%s%.2d'%.2d\"", sign, d, degsign, m, s);
+#ifdef MINGW32
+		swprintf(buf, L"%lc%.2d%lc%.2d'%.2d\"", sign, d, degsign, m, s);
+#else
+		swprintf(buf,sizeof(buf), L"%lc%.2d%lc%.2d'%.2d\"", sign, d, degsign, m, s);
+#endif
 	}
-	return StelUtility::stringToWstring(buf);
+	return buf;
 }
 
 //! @brief Print the passed angle with the format +hhhmmmss(.ss)"
@@ -338,8 +342,8 @@ wstring StelUtility::printAngleDMS(double angle, bool decimals, bool useD)
 //! @return The corresponding string
 wstring StelUtility::printAngleHMS(double angle, bool decimals)
 {
-	static char buf[16];
-	buf[15] = '\0';
+	static wchar_t buf[16];
+	buf[15] = L'\0';
 	double hr = 0.0;
 	double min = 0.0;
 	double sec = 0.0;
@@ -348,9 +352,14 @@ wstring StelUtility::printAngleHMS(double angle, bool decimals)
 	angle/=15.;
 	min = 60.0 * (modf(angle, &hr));
 	sec = 60.0 * (modf(min, &min));
-	if (decimals) sprintf(buf,"%.2dh%.2dm%.2fs",(int)hr, (int) min, sec);
-	else sprintf(buf,"%.2dh%.2dm%.0fs",(int)hr, (int) min, sec);
-	return StelUtility::stringToWstring(buf);
+#ifdef MINGW32
+	if (decimals) swprintf(buf,L"%.2dh%.2dm%.2fs",(int)hr, (int) min, sec);
+	else swprintf(buf,L"%.2dh%.2dm%.0fs",(int)hr, (int) min, sec);
+#else
+	if (decimals) swprintf(buf,sizeof(buf),L"%.2dh%.2dm%.2fs",(int)hr, (int) min, sec);
+	else swprintf(buf,sizeof(buf),L"%.2dh%.2dm%.0fs",(int)hr, (int) min, sec);
+#endif
+	return buf;
 }
 
 

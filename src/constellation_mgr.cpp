@@ -309,7 +309,7 @@ void ConstellationMgr::loadNames(const string& namesFile)
 	ifstream commonNameFile(namesFile.c_str());
 	if (!commonNameFile.is_open())
 	{
-		cout << "Can't open file" << namesFile << endl;
+		cerr << "Can't open file" << namesFile << endl;
 		return;
 	}
 	

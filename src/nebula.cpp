@@ -36,8 +36,10 @@ bool Nebula::flagBright = false;
 const float Nebula::RADIUS_NEB = 1.f;
 
 Nebula::Nebula() :
+		M_nb(0),
 		NGC_nb(0),
 		IC_nb(0),
+		/*UGC_nb(0),*/
 		neb_tex(NULL)
 {
 	inc_lum = rand()/RAND_MAX*M_PI;
@@ -65,6 +67,10 @@ wstring Nebula::getInfoString(const Navigator* nav) const
 	{
 		oss << nameI18 << L" (";
 	}
+	if ((M_nb > 0) && (M_nb < 111))
+	{
+		oss << L"M " << M_nb << L" - ";
+	}
 	if (NGC_nb > 0)
 	{
 		oss << L"NGC " << NGC_nb;
@@ -73,6 +79,10 @@ wstring Nebula::getInfoString(const Navigator* nav) const
 	{
 		oss << L"IC " << IC_nb;
 	}
+	/*if (UGC_nb > 0)
+	{
+		oss << L"UGC " << UGC_nb;
+	}*/
 	if (nameI18!=L"")
 	{
 		oss << L")";
@@ -105,7 +115,11 @@ wstring Nebula::getShortInfoString(const Navigator*) const
 	}
 	else
 	{
-		if (NGC_nb > 0)
+		if (M_nb > 0)
+		{
+			return L"M " + StelUtility::intToWstring(M_nb);
+		}
+		else if (NGC_nb > 0)
 		{
 			return L"NGC " + StelUtility::intToWstring(NGC_nb);
 		}
@@ -435,5 +449,39 @@ bool Nebula::readNGC(char *recordstr)
 	else { nType = NEB_UNKNOWN;}
 
 	return true;
+}
+
+wstring Nebula::getTypeString(void) const
+{
+	wstring wsType;
+
+	switch(nType)
+	   {
+		case NEB_GX:
+			wsType = L"Galaxy";
+			break;
+		case NEB_OC:
+			wsType = L"Open cluster";
+			break;
+		case NEB_GC:
+			wsType = L"Globular cluster";
+			break;
+		case NEB_N:
+			wsType = L"Nebula";
+			break;
+		case NEB_PN:
+			wsType = L"Planetary nebula";
+			break;
+		case NEB_CN:
+			wsType = L"Cluster associated with nebulosity";
+			break;
+		case NEB_UNKNOWN:
+			wsType = L"Unknown";
+			break;
+		default:
+			wsType = L"Undocumented type";
+			break;
+	}
+	return wsType;
 }
 

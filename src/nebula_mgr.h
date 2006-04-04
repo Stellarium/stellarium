@@ -80,8 +80,10 @@ public:
 	float getMaxMagHints(void) {return maxMagHints;}
 	
 private:
+	StelObject *searchM(unsigned int M);
 	StelObject *searchNGC(unsigned int NGC);
-	StelObject *searchIC(unsigned int NGC);
+	StelObject *searchIC(unsigned int IC);
+	/*StelObject *searchUGC(unsigned int UGC);*/
 	bool loadNGC(const string& fileName, LoadingBar& lb);
 	bool loadNGCNames(const string& fileName);
 	bool loadTextures(const string& fileName, LoadingBar& lb);
