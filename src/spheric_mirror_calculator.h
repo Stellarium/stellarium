@@ -1,6 +1,6 @@
 /*
  * Stellarium
- * Copyright (C) 2002 Fabien Chereau
+ * Copyright (C) Fabien Chereau
  * Author 2006 Johannes Gajdosik
  *
  * This program is free software; you can redistribute it and/or
@@ -18,23 +18,34 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#ifndef _SPHERIC_MIRROR_PROJECTOR_H_
-#define _SPHERIC_MIRROR_PROJECTOR_H_
+#ifndef _SPHERIC_MIRROR_CALCULATOR_H_
+#define _SPHERIC_MIRROR_CALCULATOR_H_
 
-#include "custom_projector.h"
-#include "spheric_mirror_calculator.h"
+#include "vecmath.h"
 
-class SphericMirrorProjector : public CustomProjector {
+class InitParser;
+
+class SpericMirrorCalculator {
 public:
-  SphericMirrorProjector(const Vec4i &viewport,double _fov);
+  SpericMirrorCalculator(void);
+  void init(const InitParser &conf);
+  void setParams(const Vec3d &projector_position,
+                 const Vec3d &mirror_position,
+                 double mirror_radius,
+                 double dome_radius,
+                 double zenith_y,
+                 double scaling_factor);
+  bool transform(const Vec3d &v,double &x,double &y) const;
+  bool retransform(double x,double y,Vec3d &v) const;
 private:
-  PROJECTOR_TYPE getType(void) const {return SPHERIC_MIRROR_PROJECTOR;}
-  void setViewport(int x, int y, int w, int h);
-  bool project_custom(const Vec3d &v, Vec3d &win, const Mat4d &mat) const;
-  void unproject(double x, double y, const Mat4d& m, Vec3d& v) const;
-private:
-  SpericMirrorCalculator calc;
+  Vec3d P;          // projector
+  Vec3d DomeCenter;
+  double DomeRadius;
+  double PP;
+  double lP;
+  Vec3d p;
+  double cos_alpha,sin_alpha;
+  double zoom_factor;
 };
-
 
 #endif
