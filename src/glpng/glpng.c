@@ -29,7 +29,7 @@
 	#include <windows.h>
 #endif
 
-/* Fabien Chéreau 3-03-2004 */
+/* Fabien Chereau 3-03-2004 */
 #include "SDL_opengl.h"
 
 #include "glpng.h"
@@ -582,10 +582,17 @@ int APIENTRY pngLoadF(FILE *fp, int mipmap, int trans, pngInfo *pinfo) {
 					break;
 
 				case PNG_BLEND1:
-					FORSTART
+					do { 
+						r = *p++; /*red  */ 
+						g = *p++; /*green*/ 
+						b = *p++; /*blue */ 
+						*q++ = r; 
+						*q++ = g; 
+						*q++ = b;
 						a = r+g+b;
 						if (a > 255) ALPHA = 255; else ALPHA = a;
-					FOREND
+						q++;
+					} while (p != endp);
 					break;
 
 				case PNG_BLEND2:

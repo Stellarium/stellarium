@@ -73,12 +73,16 @@ public:
 	//! Get the name of the root directory i.e the one containing the other main directories
 	const string& getDataRoot() const {return dataRoot;}
 	
-	//! Set the sky culture
-	int setSkyCulture(string _culture_dir);
+	//! Set the sky culture from I18 name
+	void setSkyCulture(const wstring& cultureName);
 	
-	//! Get the current sky culture name
-	string getSkyCulture() {return skyCulture;}
+	//! Set the current sky culture from the passed directory
+	void setSkyCultureDir(const string& culturedir);
+		
+	//! Get the current sky culture I18 name
+	wstring getSkyCulture() const {return skyloc->directoryToSkyCultureI18(skyCultureDir);}
 	
+	//! Get the I18 available sky culture names
 	wstring getSkyCultureListI18() const {return skyloc->getSkyCultureListI18();}
 	
 	//! Set the landscape
@@ -534,7 +538,7 @@ private:
 
 	string dataRoot;					// The root directory where the data is
 	string localeDir;					// The directory containing the translation .mo file
-	string skyCulture;					// the culture used for constellations, etc.. It is also the name of the directory
+	string skyCultureDir;				// The directory containing data for the culture used for constellations, etc.. 
 	Translator skyTranslator;			// The translator used for astronomical object naming
 		
 	// Main elements of the program

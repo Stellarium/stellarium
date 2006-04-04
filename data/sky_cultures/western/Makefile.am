@@ -1,4 +1,4 @@
 pkgdatadir = $(datadir)/@PACKAGE@/data/sky_cultures/western
 pkgdata_DATA = constellation_names.eng.fab constellationship.fab \
-	constellationsart.fab boundaries.dat
+		constellationsart.fab boundaries.dat info.ini
 EXTRA_DIST = $(pkgdata_DATA)

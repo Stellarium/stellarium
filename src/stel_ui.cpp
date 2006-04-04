@@ -812,7 +812,8 @@ int StelUI::handle_clic(Uint16 x, Uint16 y, S_GUI_VALUE button, S_GUI_VALUE stat
 
 	if (desktop->onClic((int)x, (int)y, button, state))
 	{
-		has_dragged = true;
+		has_dragged = false;
+		is_dragging = false;
 		return 1;
 	}
 

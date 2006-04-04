@@ -174,9 +174,6 @@ void StelUI::init_tui(void)
 	tui_menu_colors->addComponent(tui_colors_cardinal_color);
 
 
-	
-
-
 	// 5. Effects
 	tui_effect_landscape = new s_tui::MultiSet_item<wstring>(wstring(L"5.1 ") + _("Landscape: "));
 	tui_effect_landscape->addItemList(StelUtility::stringToWstring(Landscape::get_file_content(core->getDataDir() + "landscapes.ini")));
@@ -336,7 +333,7 @@ void StelUI::tui_update_widgets(void)
 	tui_time_dateformat->setCurrent(StelUtility::stringToWstring(core->getObservatory().get_date_format_str()));
 
 	// 3. general
-	tui_general_sky_culture->setValue(StelUtility::stringToWstring(core->getSkyCulture()));
+	tui_general_sky_culture->setValue(core->getSkyCulture());
 	tui_general_sky_locale->setValue(StelUtility::stringToWstring(core->getSkyLanguage()));
 
 	// 4. Stars
@@ -432,13 +429,13 @@ void StelUI::tui_cb_tui_effect_change_landscape(void)
 // Set a new sky culture
 void StelUI::tui_cb_tui_general_change_sky_culture(void) {
 
-	//  core->set_sky_culture(core->skyloc->convert_sky_culture_to_directory(tui_general_sky_culture->getCurrent()));
-	app->commander->execute_command( string("set sky_culture ") + StelUtility::wstringToString(tui_general_sky_culture->getCurrent()));
+	core->setSkyCulture(tui_general_sky_culture->getCurrent());
+	//app->commander->execute_command( string("set sky_culture ") + StelUtility::wstringToString(tui_general_sky_culture->getCurrent()));
 }
 
 // Set a new sky locale
 void StelUI::tui_cb_tui_general_change_sky_locale(void) {
-	wcout << tui_general_sky_locale->getCurrent() << endl;
+	//wcout << tui_general_sky_locale->getCurrent() << endl;
 	core->setSkyLanguage(StelUtility::wstringToString(tui_general_sky_locale->getCurrent()));
 	//app->commander->execute_command( string("set sky_locale " + StelUtility::wstringToString(tui_general_sky_locale->getCurrent())));
 }
