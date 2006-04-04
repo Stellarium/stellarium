@@ -9,7 +9,10 @@ stellarium_SOURCES = main.cpp stel_sdl.cpp stel_core.h stel_core.cpp \
 					tone_reproductor.h tone_reproductor.cpp init_parser.h init_parser.cpp s_gui.h s_gui.cpp \
 					stel_ui.h stel_ui.cpp stel_ui_conf.cpp stel_ui_tuiconf.cpp projector.h \
 					projector.cpp custom_projector.cpp custom_projector.h stereographic_projector.cpp \
-	spheric_mirror_projector.cpp stereographic_projector.h spheric_mirror_projector.h observator.h \
+    spheric_mirror_projector.cpp stereographic_projector.h spheric_mirror_projector.h \
+    spheric_mirror_calculator.cpp spheric_mirror_calculator.h \
+    viewport_distorter.cpp viewport_distorter.h \
+    observator.h \
 	observator.cpp fisheye_projector.h fisheye_projector.cpp 				landscape.h landscape.cpp \
 	callbacks.hpp callback_helpers.hpp s_tui.h s_tui.cpp 				stellarium.h fmath.h \
 	vecmath.h bytes.h meteor.h meteor.cpp meteor_mgr.h 				meteor_mgr.cpp \
