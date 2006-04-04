@@ -74,9 +74,10 @@ wstring SkyLocalizer::getSkyCultureListI18(void)
 	wstring cultures;
 	for ( stringHashIter_t iter = dirToNameEnglish.begin(); iter != dirToNameEnglish.end(); ++iter )
 	{
+		if (iter != dirToNameEnglish.begin()) cultures += L"\n";
 		cultures += _(iter->second);
-		cultures += L"\n";
 	}
+	//wcout << cultures << endl;
 	return cultures;
 }
 

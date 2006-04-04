@@ -75,7 +75,8 @@ public:
     
 	//! @brief Get the printable nebula Type
 	//! @return the nebula type code.
-	wstring getTypeString(void) const {return L"TODO";}
+	//wstring getTypeString(void) const {return L"TODO";}
+	wstring getTypeString(void) const;
 
 	//! Translate nebula name using the passed translator
 	void translateName(Translator& trans) {nameI18 = trans.translate(englishName);}
@@ -92,8 +93,10 @@ private:
     void draw_circle(const Projector* prj, const Navigator * nav);
     bool hasTex(void) { return (neb_tex != NULL); }
     
-	unsigned int NGC_nb;			// NGC catalog number
-	unsigned int IC_nb;				// IC catalog number
+	unsigned int M_nb;			// Messier Catalog number
+	unsigned int NGC_nb;			// New General Catalog number
+	unsigned int IC_nb;			// Index Catalog number
+	/*unsigned int UGC_nb;			// Uppsala General  Catalog number*/
 	string englishName;				// English name
 	wstring nameI18;				// Nebula name
 	string credit;					// Nebula image credit
@@ -105,8 +108,8 @@ private:
 
 	s_texture * neb_tex;			// Texture
 	Vec3f tex_quad_vertex[4];		// The 4 vertex used to draw the nebula texture
-	float luminance;				// Object luminance to use (value computed to compensate
-									// the texture avergae luminosity)
+	float luminance;			// Object luminance to use (value computed to compensate
+						// the texture avergae luminosity)
 	float tex_avg_luminance;        // avg luminance of the texture (saved here for performance)
 	float inc_lum;					// Local counter for symbol animation
 	

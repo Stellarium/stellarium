@@ -293,6 +293,8 @@ private:
 	
     // Search options
     EditBox* nebula_edit;
+    /*ListBox* nebula_cat;*/
+    StringList* nebula_cat;
     void doNebulaSearch(void);
     EditBox* star_edit;
     void showStarAutoComplete(void);

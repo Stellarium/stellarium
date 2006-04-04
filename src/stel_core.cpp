@@ -155,8 +155,8 @@ void StelCore::init(const InitParser& conf)
 
 	// Load constellations from the correct sky culture
 	string tmp = conf.get_str("localization", "sky_culture", "western");
-	setSkyCulture(tmp);
-	skyCulture = tmp;
+	setSkyCultureDir(tmp);
+	skyCultureDir = tmp;
 
 	setPlanetsSelected("");	// Fix a bug on macosX! Thanks Fumio!
 
@@ -656,10 +656,16 @@ void StelCore::autoZoomOut(float move_duration, bool full)
 	
 }
 
-// this really belongs elsewhere
-int StelCore::setSkyCulture(string _culture_dir)
+// Set the current sky culture according to apssed name
+void StelCore::setSkyCulture(const wstring& cultureName)
 {
-	if(skyCulture == _culture_dir) return 2;
+	setSkyCultureDir(skyloc->skyCultureToDirectory(cultureName));
+}
+
+// Set the current sky culture from the passed directory
+void StelCore::setSkyCultureDir(const string& cultureDir)
+{
+	if(skyCultureDir == cultureDir) return;
 
 	// make sure culture definition exists before attempting
 // 	if( !skyloc->test_sky_culture_directory(_culture_dir) )
@@ -668,15 +674,15 @@ int StelCore::setSkyCulture(string _culture_dir)
 // 		return 0;
 // 	}
 
-	skyCulture = _culture_dir;
+	skyCultureDir = cultureDir;
 
-	if(!asterisms) return 3;
+	if(!asterisms) return;
 
 	LoadingBar lb(projection, 12., baseFontFile, "logo24bits.png", getViewportWidth(), getViewportHeight());
 
-	asterisms->loadLinesAndArt(getDataDir() + "sky_cultures/" + skyCulture + "/constellationship.fab",
-	                           getDataDir() + "sky_cultures/" + skyCulture + "/constellationsart.fab", getDataDir() + "sky_cultures/" + skyCulture + "/boundaries.dat", lb);
-	asterisms->loadNames(getDataDir() + "sky_cultures/" + skyCulture + "/constellation_names.eng.fab");
+	asterisms->loadLinesAndArt(getDataDir() + "sky_cultures/" + skyCultureDir + "/constellationship.fab",
+	                           getDataDir() + "sky_cultures/" + skyCultureDir + "/constellationsart.fab", getDataDir() + "sky_cultures/" + skyCultureDir + "/boundaries.dat", lb);
+	asterisms->loadNames(getDataDir() + "sky_cultures/" + skyCultureDir + "/constellation_names.eng.fab");
 
 	// Re-translated constellation names
 	asterisms->translateNames(skyTranslator);
@@ -694,8 +700,7 @@ int StelCore::setSkyCulture(string _culture_dir)
 	// update autocomplete with new names - TODO move that to StelApp
 	// ui->setConstellationAutoComplete(asterisms->getNames());
 
-	return 1;
-
+	return;
 }
 
 
