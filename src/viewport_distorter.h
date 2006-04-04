@@ -1,6 +1,6 @@
 /*
  * Stellarium
- * Copyright (C) 2002 Fabien Chereau
+ * Copyright (C) Fabien Chereau
  * Author 2006 Johannes Gajdosik
  *
  * This program is free software; you can redistribute it and/or
@@ -18,23 +18,28 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#ifndef _SPHERIC_MIRROR_PROJECTOR_H_
-#define _SPHERIC_MIRROR_PROJECTOR_H_
+#ifndef _VIEWPORT_DISTORTER_H_
+#define _VIEWPORT_DISTORTER_H_
 
-#include "custom_projector.h"
-#include "spheric_mirror_calculator.h"
+#include <string>
 
-class SphericMirrorProjector : public CustomProjector {
+using namespace std;
+
+class InitParser;
+
+class ViewportDistorter {
 public:
-  SphericMirrorProjector(const Vec4i &viewport,double _fov);
+  static ViewportDistorter *create(const string &type,int width,int height);
+  virtual ~ViewportDistorter(void) {}
+  virtual void init(const InitParser &conf) = 0;
+  virtual void distort(void) const = 0;
+  virtual bool distortXY(int &x,int &y) = 0;
+protected:
+  ViewportDistorter(void) {}
 private:
-  PROJECTOR_TYPE getType(void) const {return SPHERIC_MIRROR_PROJECTOR;}
-  void setViewport(int x, int y, int w, int h);
-  bool project_custom(const Vec3d &v, Vec3d &win, const Mat4d &mat) const;
-  void unproject(double x, double y, const Mat4d& m, Vec3d& v) const;
-private:
-  SpericMirrorCalculator calc;
+    // no copying:
+  ViewportDistorter(const ViewportDistorter&);
+  const ViewportDistorter &operator=(const ViewportDistorter&);
 };
-
 
 #endif
