@@ -97,8 +97,7 @@ void StelCore::init(const InitParser& conf)
 	
 	// Projector
 	string tmpstr = conf.get_str("projection:type");
-	const Projector::PROJECTOR_TYPE projType = Projector::stringToType(tmpstr);
-	setProjectionType(projType);
+	setProjectionType(tmpstr);
 
 	tmpstr = conf.get_str("projection:viewport");
 	const Projector::PROJECTOR_MASK_TYPE projMaskType = Projector::stringToMaskType(tmpstr);
@@ -807,9 +806,10 @@ wstring StelCore::get_cursor_pos(int x, int y)
 	L"DE : " + StelUtility::printAngleDMS(tempDE);
 }
 
-void StelCore::setProjectionType(Projector::PROJECTOR_TYPE pType)
+void StelCore::setProjectionType(const string& sptype)
 {
-	if (getProjectionType()==pType) return;
+	Projector::PROJECTOR_TYPE pType = Projector::stringToType(sptype);
+	if (projection->getType()==pType) return;
 	Projector *const ptemp = Projector::create(pType,
                                                projection->getViewport(),
                                                projection->get_fov());
