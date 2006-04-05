@@ -309,31 +309,38 @@ Component* StelUI::createConfigWindow(void)
 	lblvideo1->setPos(x, y);
 	tab_video->addComponent(lblvideo1);
 
-	x=50; y+=20;
-
-	fisheye_projection_cbx = new LabeledCheckBox(false, _("Fisheye Projection Mode"));
-	fisheye_projection_cbx->setOnPressCallback(callback<void>(this, &StelUI::updateVideoVariables));
-	tab_video->addComponent(fisheye_projection_cbx);
-	fisheye_projection_cbx->setPos(x,y); y+=15;
-
+	x=30; y+=20;
+	
+	projection_sl = new StringList();
+	projection_sl->addItem("perspective");
+	projection_sl->addItem("fisheye");
+	projection_sl->addItem("stereographic");
+	projection_sl->addItem("spheric_mirror");
+	projection_sl->adjustSize();
+	projection_sl->setValue(core->getProjectionType());
+	projection_sl->setOnPressCallback(callback<void>(this, &StelUI::updateVideoVariables));
+	tab_video->addComponent(projection_sl);
+	projection_sl->setPos(x,y); y+=85;
+	
 	disk_viewport_cbx = new LabeledCheckBox(false, _("Disk Viewport"));
 	disk_viewport_cbx->setOnPressCallback(callback<void>(this, &StelUI::updateVideoVariables));
 	tab_video->addComponent(disk_viewport_cbx);
 	disk_viewport_cbx->setPos(x,y); y+=35;
 
+	x=180; y=10;
 	Label * lblvideo2 = new Label(wstring(L"\u2022 ")+_("Screen Resolution :"));
-	lblvideo2->setPos(10, y);
+	lblvideo2->setPos(x+10, y);
 	tab_video->addComponent(lblvideo2); y+=24;
 
 	Label * lblvideo3 = new Label(_("Restart program for"));
 	Label * lblvideo4 = new Label(_("change to apply."));
-	lblvideo3->setPos(180, y+45);
-	lblvideo4->setPos(180, y+60);
+	lblvideo3->setPos(x+10, y+145);
+	lblvideo4->setPos(x+10, y+160);
 	tab_video->addComponent(lblvideo3);
 	tab_video->addComponent(lblvideo4);
 
 	screen_size_sl = new StringList();
-	screen_size_sl->setPos(x,y);
+	screen_size_sl->setPos(x+20,y);
 	screen_size_sl->addItem("640x480");
 	screen_size_sl->addItem("800x600");
 	screen_size_sl->addItem("1024x768");
@@ -347,8 +354,6 @@ Component* StelUI::createConfigWindow(void)
 	screen_size_sl->setValue(vs);
 	tab_video->addComponent(screen_size_sl);
 
-	y+=100;
-
 	snprintf(vs, 999, "%sconfig.ini", app->getConfigDir().c_str());
 	Label * lblvideo5 = new Label(_("For unlisted screen resolution, edit the file :"));
 	Label * lblvideo6 = new Label(StelUtility::stringToWstring(string(vs)));
@@ -357,13 +362,10 @@ Component* StelUI::createConfigWindow(void)
 	tab_video->addComponent(lblvideo5);
 	tab_video->addComponent(lblvideo6);
 
-	y+=80;
-
 	LabeledButton* video_save_bt = new LabeledButton(_("Save as default"));
 	video_save_bt->setOnPressCallback(callback<void>(this, &StelUI::setVideoOption));
 	tab_video->addComponent(video_save_bt);
 	video_save_bt->setPos(120,tab_video->getSizey()-70);
-	y+=20;
 
 	// Landscapes option
 	FilledContainer* tab_landscapes = new FilledContainer();
@@ -1027,8 +1029,7 @@ void StelUI::setVideoOption(void)
 	InitParser conf;
 	conf.load(app->getConfigFile());
 
-    conf.set_str("projection:type",
-                 Projector::typeToString(core->getProjectionType()));
+    conf.set_str("projection:type", core->getProjectionType());
 
 	if (core->getViewportMaskDisk()) conf.set_str("projection:viewport", "disk");
 	else conf.set_str("projection:viewport", "maximized");
@@ -1045,14 +1046,7 @@ void StelUI::setLandscape(void)
 
 void StelUI::updateVideoVariables(void)
 {
-	if (fisheye_projection_cbx->getState() && core->getProjectionType()!=Projector::FISHEYE_PROJECTOR)
-	{
-		core->setProjectionType(Projector::FISHEYE_PROJECTOR);
-	}
-	if (!fisheye_projection_cbx->getState() && core->getProjectionType()==Projector::FISHEYE_PROJECTOR)
-	{
-		core->setProjectionType(Projector::PERSPECTIVE_PROJECTOR);
-	}
+	core->setProjectionType(projection_sl->getValue());
 
 	if (disk_viewport_cbx->getState() && !core->getViewportMaskDisk())
 	{
@@ -1109,7 +1103,7 @@ void StelUI::updateConfigForm(void)
 
 	time_speed_lbl2->setLabel(wstring(L"\u2022 ")+_("Current Time Speed is x") + StelUtility::doubleToWstring(core->getTimeSpeed()/JD_SECOND));
 
-	fisheye_projection_cbx->setState(core->getProjectionType()==Projector::FISHEYE_PROJECTOR);
+	projection_sl->setValue(core->getProjectionType());
 	disk_viewport_cbx->setState(core->getViewportMaskDisk());
 }
 

@@ -416,9 +416,9 @@ public:
 	void setViewportMaskNone(void) {projection->setMaskType(Projector::NONE);}
 	
 	//! Set the projection type
-	void setProjectionType(Projector::PROJECTOR_TYPE pType);
+	void setProjectionType(const string& ptype);
 	//! Get the projection type
-	Projector::PROJECTOR_TYPE getProjectionType(void) {return projection->getType();}
+	string getProjectionType(void) {return Projector::typeToString(projection->getType());}
 	
 	//! Set flag for enabling gravity labels
 	void setFlagGravityLabels(bool b) {projection->setFlagGravityLabels(b);}
