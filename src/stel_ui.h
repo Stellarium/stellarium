@@ -270,7 +270,7 @@ private:
 	Label* time_speed_lbl2;
 
 	// Video Options
-	LabeledCheckBox* fisheye_projection_cbx;
+	StringList* projection_sl;
 	LabeledCheckBox* disk_viewport_cbx;
 	StringList* screen_size_sl;
 	void setVideoOption(void);
