@@ -48,6 +48,7 @@ private:
   struct VertexData {
     float color[4];
     float xy[2];
+    double h;
   };
   VertexData *trans_array;
   int trans_width,trans_height;
@@ -76,20 +77,27 @@ ViewportDistorterFisheyeToSphericMirror
 //  calc.setParams(Vec3d(0,-2,15),Vec3d(0,0,20),1,25,0.125);
 }
 
+static double DeGamma(double x) {
+  if (x > 0.0) return exp(0.45*log(x));
+  return 0.0;
+}
+
 void ViewportDistorterFisheyeToSphericMirror::init(const InitParser &conf) {
   calc.init(conf);
     // init transformation
   trans_width = screenW / 16;
   trans_height = screenH / 16;
   trans_array = new VertexData[(trans_width+1)*(trans_height+1)];
+  double max_h = 0;
   for (int j=0;j<=trans_height;j++) {
     for (int i=0;i<=trans_width;i++) {
       VertexData &data(trans_array[(j*(trans_width+1)+i)]);
-      Vec3d v;
+      Vec3d v,v_x,v_y;
       bool rc = calc.retransform(
                         (i-(trans_width>>1))/(double)trans_height,
-                        (j-(trans_height>>1))/(double)trans_height-0.0,
-                        v);
+                        (j-(trans_height>>1))/(double)trans_height,
+                        v,v_x,v_y);
+      data.h = rc ? (v_x^v_y).length() : 0.0;
       v[0] = -v[0];
       const double h = v[1];
       v[1] = v[2];
@@ -100,11 +108,17 @@ void ViewportDistorterFisheyeToSphericMirror::init(const InitParser &conf) {
       f *= oneoverh;
       double x = (0.5 + v[0] * f);
       double y = (0.5 + v[1] * f);
-      if (x < 0.0) {x=0.0;rc=false;} else if (x > 1.0) {x=1.0;rc=false;}
-      if (y < 0.0) {y=0.0;rc=false;} else if (y > 1.0) {y=1.0;rc=false;}
+      if (x < 0.0) {x=0.0;data.h=0;} else if (x > 1.0) {x=1.0;data.h=0;}
+      if (y < 0.0) {y=0.0;data.h=0;} else if (y > 1.0) {y=1.0;data.h=0;}
       data.xy[0] = x*texture_used;
       data.xy[1] = y*texture_used;
-      data.color[0] = data.color[1] = data.color[2] = (rc?1:0);
+      if (data.h > max_h) max_h = data.h;
+    }
+  }
+  for (int j=0;j<=trans_height;j++) {
+    for (int i=0;i<=trans_width;i++) {
+      VertexData &data(trans_array[(j*(trans_width+1)+i)]);
+      data.color[0] = data.color[1] = data.color[2] = DeGamma(data.h/max_h);
       data.color[3] = 1.0f;
     }
   }
