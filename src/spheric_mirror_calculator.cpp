@@ -130,3 +130,80 @@ bool SpericMirrorCalculator::retransform(double x,double y,Vec3d &v) const {
   return true;
 }
 
+bool SpericMirrorCalculator::retransform(double x,double y,
+                                         Vec3d &v,Vec3d &v_x,Vec3d &v_y) const {
+  x /= zoom_factor;
+  const double dx = 1.0/zoom_factor;
+  y /= zoom_factor;
+  const double dy = 1.0/zoom_factor;
+
+  v[0] = x;
+  v[1] =   y*cos_alpha + sin_alpha;
+  v[2] =  -y*sin_alpha + cos_alpha;
+
+  v_x[0] = dx;
+  v_x[1] = 0;
+  v_x[2] = 0;
+
+  v_y[0] = 0;
+  v_y[1] =  dy*cos_alpha;
+  v_y[2] = -dy*sin_alpha;
+
+  const double vv = v.dot(v);
+  const double vv_x = 2.0*v.dot(v_x);
+  const double vv_y = 2.0*v.dot(v_y);
+  
+  const double Pv = P.dot(v);
+  const double Pv_x = P.dot(v_x);
+  const double Pv_y = P.dot(v_y);
+
+  const double discr = Pv*Pv-(P.dot(P)-1.0)*vv;
+  const double discr_x = 2.0*Pv*Pv_x-(P.dot(P)-1.0)*vv_x;
+  const double discr_y = 2.0*Pv*Pv_y-(P.dot(P)-1.0)*vv_y;
+  
+  if (discr < 0) {
+    return false;
+  }
+  const Vec3d Q = P + v*((-Pv-sqrt(discr))/vv);
+  const Vec3d Q_x = v_x*((-Pv-sqrt(discr))/vv)
+                  + v*( (vv*(-Pv_x-0.5*discr_x/sqrt(discr))
+                        -vv_x*(-Pv-sqrt(discr))) /(vv*vv));
+  const Vec3d Q_y = v_y*((-Pv-sqrt(discr))/vv)
+                  + v*( (vv*(-Pv_y-0.5*discr_y/sqrt(discr))
+                        -vv_y*(-Pv-sqrt(discr))) /(vv*vv));
+
+  const Vec3d w = v - Q*(2*v.dot(Q));
+  const Vec3d w_x = v_x - Q_x*(2*v.dot(Q)) - Q*(2*(v_x.dot(Q)+v.dot(Q_x)));
+  const Vec3d w_y = v_y - Q_y*(2*v.dot(Q)) - Q*(2*(v_y.dot(Q)+v.dot(Q_y)));
+
+
+  const Vec3d MQ = Q - DomeCenter;
+  // MQ_x = Q_x
+  // MQ_y = Q_y
+
+  double f = -MQ.dot(w);
+  double f_x = -Q_x.dot(w)-MQ.dot(w_x);
+  double f_y = -Q_y.dot(w)-MQ.dot(w_y);
+
+  double f1 = f + sqrt(f*f - (MQ.dot(MQ)-DomeRadius*DomeRadius)*vv);
+  double f1_x = f_x + 0.5*(2*f*f_x - (MQ.dot(MQ)-DomeRadius*DomeRadius)*vv_x
+                                   - 2*MQ.dot(Q_x)*vv )
+              / sqrt(f*f - (MQ.dot(MQ)-DomeRadius*DomeRadius)*vv);
+  double f1_y = f_y + 0.5*(2*f*f_y - (MQ.dot(MQ)-DomeRadius*DomeRadius)*vv_y
+                                   - 2*MQ.dot(Q_y)*vv )
+              / sqrt(f*f - (MQ.dot(MQ)-DomeRadius*DomeRadius)*vv);
+
+  const Vec3d S = Q + w*(f1/vv);
+  const Vec3d S_x = Q_x + w*((vv*f1_x-vv_x*f1)/(vv*vv)) + w_x*(f1/vv);
+  const Vec3d S_y = Q_y + w*((vv*f1_y-vv_y*f1)/(vv*vv)) + w_y*(f1/vv);
+
+  v = S - DomeCenter;
+  v_x = S_x;
+  v_y = S_y;
+  
+  v *= (1.0/DomeRadius);
+  v_x *= (1.0/DomeRadius);
+  v_y *= (1.0/DomeRadius);
+  return true;
+}
+

@@ -37,6 +37,8 @@ public:
                  double scaling_factor);
   bool transform(const Vec3d &v,double &x,double &y) const;
   bool retransform(double x,double y,Vec3d &v) const;
+    // for calculating partial derivatives:
+  bool retransform(double x,double y,Vec3d &v,Vec3d &v_x,Vec3d &v_y) const;
 private:
   Vec3d P;          // projector
   Vec3d DomeCenter;
