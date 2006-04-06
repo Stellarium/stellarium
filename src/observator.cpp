@@ -162,8 +162,14 @@ void Observator::save(const string& file, const string& section) const
 
 	conf.set_str(section + ":name", StelUtility::wstringToString(name));
 	conf.set_str(section + ":home_planet", planet->getEnglishName());
-	conf.set_str(section + ":latitude", StelUtility::wstringToString(StelUtility::printAngleDMS(latitude, true, true)));
-    conf.set_str(section + ":longitude", StelUtility::wstringToString(StelUtility::printAngleDMS(longitude, true, true)));
+	conf.set_str(section + ":latitude",
+	             StelUtility::wstringToString(
+	               StelUtility::printAngleDMS(latitude*M_PI/180.0,
+	                                          true, true)));
+	conf.set_str(section + ":longitude",
+	             StelUtility::wstringToString(
+	               StelUtility::printAngleDMS(longitude*M_PI/180.0,
+	                                          true, true)));
 
 	conf.set_int(section + ":altitude", altitude);
 	conf.set_str(section + ":landscape_name", landscape_name);
