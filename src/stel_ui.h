@@ -367,8 +367,6 @@ private:
 	s_tui::ActionConfirm_item* tui_admin_savedefault;
 	s_tui::Action_item* tui_admin_updateme;
 	s_tui::MultiSet_item<wstring>* tui_admin_setlocale;
-	s_tui::Integer_item* tui_admin_voffset;
-	s_tui::Integer_item* tui_admin_hoffset;
 
 	// Tui Callbacks
 	void tui_cb1(void);						// Update all the core flags and params from the tui
@@ -381,7 +379,6 @@ private:
 	void tui_cb_tui_effect_change_landscape(void);	// Select a new landscape skin
 	void tui_cb_tui_general_change_sky_culture(void);  // select new sky culture
 	void tui_cb_tui_general_change_sky_locale(void);  // select new sky locale
-	void tui_cb_tui_admin_change_viewport(void);    // Set viewport offset
 	void tui_cb_scripts_removeable(void);    // changed removeable disk script selection
 	void tui_cb_scripts_local();             // changed local script selection
 	void tui_cb_effects_milkyway_intensity();        // change milky way intensity
