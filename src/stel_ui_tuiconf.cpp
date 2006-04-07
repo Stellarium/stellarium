@@ -244,16 +244,6 @@ void StelUI::init_tui(void)
 	tui_admin_setlocale->set_OnChangeCallback(callback<void>(this, &StelUI::tui_cb_admin_set_locale));
 	tui_menu_administration->addComponent(tui_admin_setlocale);
 
-
-	tui_admin_voffset = new s_tui::Integer_item(-10,10,0, wstring(L"7.4 ") + _("N-S Centering Offset: "));
-	tui_admin_voffset->set_OnChangeCallback(callback<void>(this, &StelUI::tui_cb_tui_admin_change_viewport));
-	tui_menu_administration->addComponent(tui_admin_voffset);
-
-	tui_admin_hoffset = new s_tui::Integer_item(-10,10,0, wstring(L"7.5 ") + _("E-W Centering Offset: "));
-	tui_admin_hoffset->set_OnChangeCallback(callback<void>(this, &StelUI::tui_cb_tui_admin_change_viewport));
-	tui_menu_administration->addComponent(tui_admin_hoffset);
-
-
 }
 
 // Display the tui
@@ -373,8 +363,6 @@ void StelUI::tui_update_widgets(void)
 
 	// 7. admin
 	//tui_admin_setlocale->setValue(core->UILocale);
-	tui_admin_voffset->setValue(core->getViewportVerticalOffset());
-	tui_admin_hoffset->setValue(core->getViewportHorizontalOffset());
 
 }
 
@@ -440,13 +428,6 @@ void StelUI::tui_cb_tui_general_change_sky_locale(void) {
 	//app->commander->execute_command( string("set sky_locale " + StelUtility::wstringToString(tui_general_sky_locale->getCurrent())));
 }
 
-
-// callback for viewport centering
-void StelUI::tui_cb_tui_admin_change_viewport(void)
-{
-	core->setViewportVerticalOffset(tui_admin_voffset->getValue());
-	core->setViewportHorizontalOffset(tui_admin_hoffset->getValue());
-}
 
 #define SCRIPT_REMOVEABLE_DISK "/tmp/scripts/"
 

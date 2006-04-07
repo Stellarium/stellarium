@@ -624,38 +624,44 @@ void StelCore::autoZoomIn(float move_duration, bool allow_manual_zoom)
 // Unzoom and go to the init position
 void StelCore::autoZoomOut(float move_duration, bool full)
 {
-	if (!selected_object || full)
-	{
-		projection->zoom_to(InitFov, move_duration);
-		navigation->move_to(InitViewPos, move_duration, true, -1);
-		navigation->set_flag_traking(false);
-		navigation->set_flag_lock_equ_pos(0);
-		return;
-	}
 
-	// If the selected object has satellites, unzoom to satellites view unless specified otherwise
-	float satfov = selected_object->get_satellites_fov(navigation);
-	if (projection->get_fov()<=satfov*0.9 && satfov>0.)
-	{
-		projection->zoom_to(satfov, move_duration);
-		return;
-	}
+  // I will come back and fix indenting - Rob
 
-	// If the selected object is part of a Planet subsystem (other than sun),
-	// unzoom to subsystem view
-	if (selected_object->get_type() == StelObject::STEL_OBJECT_PLANET && selected_object!=ssystem->getSun() && ((Planet*)selected_object)->get_parent()!=ssystem->getSun())
+	if (selected_object && !full)
 	{
-		float satfov = ((Planet*)selected_object)->get_parent()->get_satellites_fov(navigation);
-		if (projection->get_fov()<=satfov*0.9 && satfov>0.)
+
+	  // If the selected object has satellites, unzoom to satellites view unless specified otherwise
+	  float satfov = selected_object->get_satellites_fov(navigation);
+
+	  if (projection->get_fov()<=satfov*0.9 && satfov>0.)
+	    {
+	      projection->zoom_to(satfov, move_duration);
+	      return;
+	    }
+
+	  // If the selected object is part of a Planet subsystem (other than sun),
+	  // unzoom to subsystem view
+	  if (selected_object->get_type() == StelObject::STEL_OBJECT_PLANET 
+	      && selected_object!=ssystem->getSun() 
+	      && ((Planet*)selected_object)->get_parent()!=ssystem->getSun())
+	    {
+	      float satfov = ((Planet*)selected_object)->get_parent()->get_satellites_fov(navigation);
+	      if (projection->get_fov()<=satfov*0.9 && satfov>0.)
 		{
-			projection->zoom_to(satfov, move_duration);
-			return;
+		  projection->zoom_to(satfov, move_duration);
+		  return;
 		}
-	}
+	    }
+	}	
+  
+	projection->zoom_to(InitFov, move_duration);
+	navigation->move_to(InitViewPos, move_duration, true, -1);
+	navigation->set_flag_traking(false);
+	navigation->set_flag_lock_equ_pos(0);
 	
 }
 
-// Set the current sky culture according to apssed name
+// Set the current sky culture according to passed name
 void StelCore::setSkyCulture(const wstring& cultureName)
 {
 	setSkyCultureDir(skyloc->skyCultureToDirectory(cultureName));
