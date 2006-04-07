@@ -39,6 +39,24 @@ StelApp::~StelApp()
     if (distorter) delete distorter;
 }
 
+void StelApp::setViewPortDistorterType(const string &type) {
+  if (distorter) {
+    if (distorter->getType() == type) return;
+    delete distorter;
+    distorter = 0;
+  }
+  distorter = ViewportDistorter::create(type,screenW,screenH);
+  InitParser conf;
+  conf.load(configDir + "config.ini");
+  distorter->init(conf);
+}
+
+string StelApp::getViewPortDistorterType(void) const {
+  if (distorter) return distorter->getType();
+  return "none";
+}
+
+
 void StelApp::quit(void)
 {
 	static SDL_Event Q;						// Send a SDL_QUIT event
@@ -114,11 +132,7 @@ void StelApp::init(void)
 	if(scripts) scripts->play_startup_script();
     
     if (distorter == 0) {
-      distorter = ViewportDistorter::create(
-                                       conf.get_str("video",
-                                                    "distorter","dummy"),
-                                       screenW,screenH);
-      distorter->init(conf);
+      setViewPortDistorterType(conf.get_str("video","distorter","none"));
     }
 }
 
