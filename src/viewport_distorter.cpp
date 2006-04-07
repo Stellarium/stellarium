@@ -27,6 +27,7 @@
 class ViewportDistorterDummy : public ViewportDistorter {
 private:
   friend class ViewportDistorter;
+  string getType(void) const {return "none";}
   void init(const InitParser &conf) {}
   void distort(void) const {}
   bool distortXY(int &x,int &y) {return true;}
@@ -38,6 +39,7 @@ private:
   friend class ViewportDistorter;
   ViewportDistorterFisheyeToSphericMirror(int screenW,int screenH);
   ~ViewportDistorterFisheyeToSphericMirror(void);
+  string getType(void) const {return "fisheye_to_spheric_mirror";}
   void init(const InitParser &conf);
   void distort(void) const;
   bool distortXY(int &x,int &y);
