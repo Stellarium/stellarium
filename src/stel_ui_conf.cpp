@@ -19,8 +19,18 @@
 
 #include "stel_ui.h"
 #include "stel_utility.h"
+#include "stelapp.h"
+#include "stel_core.h"
 
 using namespace s_gui;
+
+static string CalculateProjectionSlValue(
+                const string &projection_type,
+                const string &viewport_distorter_type) {
+  if (viewport_distorter_type == "fisheye_to_spheric_mirror")
+    return "spheric_mirror";
+  return projection_type;
+}
 
 Component* StelUI::createConfigWindow(void)
 {
@@ -317,7 +327,9 @@ Component* StelUI::createConfigWindow(void)
 	projection_sl->addItem("stereographic");
 	projection_sl->addItem("spheric_mirror");
 	projection_sl->adjustSize();
-	projection_sl->setValue(core->getProjectionType());
+	projection_sl->setValue(CalculateProjectionSlValue(
+                              core->getProjectionType(),
+                              app->getViewPortDistorterType()));
 	projection_sl->setOnPressCallback(callback<void>(this, &StelUI::updateVideoVariables));
 	tab_video->addComponent(projection_sl);
 	projection_sl->setPos(x,y); y+=85;
@@ -1030,6 +1042,7 @@ void StelUI::setVideoOption(void)
 	conf.load(app->getConfigFile());
 
     conf.set_str("projection:type", core->getProjectionType());
+    conf.set_str("video:distorter", app->getViewPortDistorterType());
 
 	if (core->getViewportMaskDisk()) conf.set_str("projection:viewport", "disk");
 	else conf.set_str("projection:viewport", "maximized");
@@ -1046,8 +1059,14 @@ void StelUI::setLandscape(void)
 
 void StelUI::updateVideoVariables(void)
 {
-	core->setProjectionType(projection_sl->getValue());
-
+	if (projection_sl->getValue() == "spheric_mirror") {
+		core->setProjectionType("fisheye");
+        app->setViewPortDistorterType("fisheye_to_spheric_mirror");
+	} else {
+		core->setProjectionType(projection_sl->getValue());
+        app->setViewPortDistorterType("none");
+	}
+    
 	if (disk_viewport_cbx->getState() && !core->getViewportMaskDisk())
 	{
 		core->setViewportMaskDisk();
@@ -1103,7 +1122,9 @@ void StelUI::updateConfigForm(void)
 
 	time_speed_lbl2->setLabel(wstring(L"\u2022 ")+_("Current Time Speed is x") + StelUtility::doubleToWstring(core->getTimeSpeed()/JD_SECOND));
 
-	projection_sl->setValue(core->getProjectionType());
+	projection_sl->setValue(CalculateProjectionSlValue(
+                              core->getProjectionType(),
+                              app->getViewPortDistorterType()));
 	disk_viewport_cbx->setState(core->getViewportMaskDisk());
 }
 

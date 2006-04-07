@@ -25,8 +25,6 @@
 #define _STEL_UI_H
 
 #include "stellarium.h"
-#include "stel_core.h"
-#include "stelapp.h"
 #include "s_gui.h"
 #include "s_tui.h"
 #include "stel_command_interface.h"
@@ -37,6 +35,7 @@ using namespace std;
 using namespace s_gui;
 
 class StelApp;
+class StelCore;
 class StelCommandInterface;
 
 class StelUI
