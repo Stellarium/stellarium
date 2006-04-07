@@ -89,7 +89,10 @@ public:
 	void setVisionModeNormal(void){if (!getVisionModeNormal()) core->setColorScheme(getConfigFile(), "standard_color");draw_mode=DM_NORMAL;}	
 	//! Get flag for activating chart vision mode
 	bool getVisionModeNormal(void) const {return draw_mode==DM_NORMAL;}
-	
+
+	void setViewPortDistorterType(const string &type);
+	string getViewPortDistorterType(void) const;
+
 	//! Return full path to config file
 	const string getConfigFile(void) const {return getConfigDir() + "config.ini";}
 	
