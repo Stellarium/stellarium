@@ -20,6 +20,7 @@
 
 #include "viewport_distorter.h"
 #include "spheric_mirror_calculator.h"
+#include "init_parser.h"
 
 #include "SDL_opengl.h"
 
@@ -77,13 +78,9 @@ ViewportDistorterFisheyeToSphericMirror
 //  calc.setParams(Vec3d(0,-2,15),Vec3d(0,0,20),1,25,0.125);
 }
 
-static double DeGamma(double x) {
-  if (x > 0.0) return exp(0.45*log(x));
-  return 0.0;
-}
-
 void ViewportDistorterFisheyeToSphericMirror::init(const InitParser &conf) {
   calc.init(conf);
+  const double gamma = conf.get_double("spheric_mirror","projector_gamma",0.45);
     // init transformation
   trans_width = screenW / 16;
   trans_height = screenH / 16;
@@ -118,7 +115,8 @@ void ViewportDistorterFisheyeToSphericMirror::init(const InitParser &conf) {
   for (int j=0;j<=trans_height;j++) {
     for (int i=0;i<=trans_width;i++) {
       VertexData &data(trans_array[(j*(trans_width+1)+i)]);
-      data.color[0] = data.color[1] = data.color[2] = DeGamma(data.h/max_h);
+      data.color[0] = data.color[1] = data.color[2] =
+        (data.h<=0.0) ? 0.0 : exp(gamma*log(data.h/max_h));
       data.color[3] = 1.0f;
     }
   }
