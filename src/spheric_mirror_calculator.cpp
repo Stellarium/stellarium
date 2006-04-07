@@ -30,17 +30,21 @@ SpericMirrorCalculator::SpericMirrorCalculator(void) {
 
 void SpericMirrorCalculator::init(const InitParser &conf) {
   const Vec3d projector_position(
-                conf.get_double("spheric_mirror","projector_position_x"),
-                conf.get_double("spheric_mirror","projector_position_z"),
-                conf.get_double("spheric_mirror","projector_position_y"));
+                conf.get_double("spheric_mirror","projector_position_x",0.0),
+                conf.get_double("spheric_mirror","projector_position_z",-0.2),
+                conf.get_double("spheric_mirror","projector_position_y",1.0));
   const Vec3d mirror_position(
-                conf.get_double("spheric_mirror","mirror_position_x"),
-                conf.get_double("spheric_mirror","mirror_position_z"),
-                conf.get_double("spheric_mirror","mirror_position_y"));
-  const double mirror_radius(conf.get_double("spheric_mirror","mirror_radius"));
-  const double dome_radius(conf.get_double("spheric_mirror","dome_radius"));
-  const double zenith_y(conf.get_double("spheric_mirror","zenith_y"));
-  const double scaling_factor(conf.get_double("spheric_mirror","scaling_factor"));
+                conf.get_double("spheric_mirror","mirror_position_x",0.0),
+                conf.get_double("spheric_mirror","mirror_position_z",0.0),
+                conf.get_double("spheric_mirror","mirror_position_y",2.0));
+  const double mirror_radius(conf.get_double("spheric_mirror",
+                                             "mirror_radius",0.25));
+  const double dome_radius(conf.get_double("spheric_mirror",
+                                           "dome_radius",2.5));
+  const double zenith_y(conf.get_double("spheric_mirror",
+                                        "zenith_y",0.125));
+  const double scaling_factor(conf.get_double("spheric_mirror",
+                                              "scaling_factor",0.8));
   setParams(projector_position,
             mirror_position,
             mirror_radius,
