@@ -127,6 +127,7 @@ void ViewportDistorterFisheyeToSphericMirror::init(const InitParser &conf) {
 ViewportDistorterFisheyeToSphericMirror
     ::~ViewportDistorterFisheyeToSphericMirror(void) {
   if (trans_array) delete[] trans_array;
+  glDeleteTextures(1,&mirror_texture);
 }
 
 bool ViewportDistorterFisheyeToSphericMirror::distortXY(int &x,int &y) {
