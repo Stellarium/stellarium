@@ -33,7 +33,7 @@ private:
   bool project_custom(const Vec3d &v, Vec3d &win, const Mat4d &mat) const;
   void unproject(double x, double y, const Mat4d& m, Vec3d& v) const;
 private:
-  SpericMirrorCalculator calc;
+  SphericMirrorCalculator calc;
 };
 
 

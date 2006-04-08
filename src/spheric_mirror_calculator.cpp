@@ -24,11 +24,11 @@
 // This code slow and ugly and I know it.
 // Yet it might be useful for playing around.
 
-SpericMirrorCalculator::SpericMirrorCalculator(void) {
+SphericMirrorCalculator::SphericMirrorCalculator(void) {
   setParams(Vec3d(0,-2,15),Vec3d(0,0,20),1,25,0.0/8.0,1.0);
 }
 
-void SpericMirrorCalculator::init(const InitParser &conf) {
+void SphericMirrorCalculator::init(const InitParser &conf) {
   const Vec3d projector_position(
                 conf.get_double("spheric_mirror","projector_position_x",0.0),
                 conf.get_double("spheric_mirror","projector_position_z",-0.2),
@@ -53,7 +53,7 @@ void SpericMirrorCalculator::init(const InitParser &conf) {
             scaling_factor);
 }
 
-void SpericMirrorCalculator::setParams(const Vec3d &projector_position,
+void SphericMirrorCalculator::setParams(const Vec3d &projector_position,
                const Vec3d &mirror_position,
                double mirror_radius,
                double dome_radius,
@@ -75,7 +75,7 @@ void SpericMirrorCalculator::setParams(const Vec3d &projector_position,
   sin_alpha = sin(alpha);
 }
 
-bool SpericMirrorCalculator::transform(const Vec3d &v,
+bool SphericMirrorCalculator::transform(const Vec3d &v,
                                        double &xb,double &yb) const {
   const Vec3d S = DomeCenter + (v * (DomeRadius/v.length()));
   const Vec3d SmP = S - P;
@@ -111,7 +111,7 @@ bool SpericMirrorCalculator::transform(const Vec3d &v,
 }
 
 
-bool SpericMirrorCalculator::retransform(double x,double y,Vec3d &v) const {
+bool SphericMirrorCalculator::retransform(double x,double y,Vec3d &v) const {
   x /= zoom_factor;
   y /= zoom_factor;
   v[0] = x;
@@ -134,8 +134,9 @@ bool SpericMirrorCalculator::retransform(double x,double y,Vec3d &v) const {
   return true;
 }
 
-bool SpericMirrorCalculator::retransform(double x,double y,
-                                         Vec3d &v,Vec3d &v_x,Vec3d &v_y) const {
+bool SphericMirrorCalculator::retransform(double x,double y,
+                                          Vec3d &v,
+                                          Vec3d &v_x,Vec3d &v_y) const {
   x /= zoom_factor;
   const double dx = 1.0/zoom_factor;
   y /= zoom_factor;

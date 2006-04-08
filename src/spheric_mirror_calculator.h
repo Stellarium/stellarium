@@ -25,9 +25,9 @@
 
 class InitParser;
 
-class SpericMirrorCalculator {
+class SphericMirrorCalculator {
 public:
-  SpericMirrorCalculator(void);
+  SphericMirrorCalculator(void);
   void init(const InitParser &conf);
   void setParams(const Vec3d &projector_position,
                  const Vec3d &mirror_position,
