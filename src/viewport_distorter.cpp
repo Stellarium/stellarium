@@ -55,7 +55,7 @@ private:
   };
   VertexData *trans_array;
   int trans_width,trans_height;
-  SpericMirrorCalculator calc;
+  SphericMirrorCalculator calc;
 };
 
 
