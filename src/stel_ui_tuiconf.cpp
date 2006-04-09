@@ -135,6 +135,8 @@ void StelUI::init_tui(void)
 	// sky culture goes here
 	tui_general_sky_culture = new s_tui::MultiSet_item<wstring>(wstring(L"3.1 ") + _("Sky Culture: "));
 	tui_general_sky_culture->addItemList(core->getSkyCultureListI18());  // human readable names
+	// wcout << "sky culture list is: " << core->getSkyCultureListI18() << endl;
+
 	tui_general_sky_culture->set_OnChangeCallback(callback<void>(this, &StelUI::tui_cb_tui_general_change_sky_culture));
 	tui_menu_general->addComponent(tui_general_sky_culture);
 
