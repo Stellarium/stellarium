@@ -684,10 +684,13 @@ void StelCore::setSkyCultureDir(const string& cultureDir)
 
 	asterisms->loadLinesAndArt(getDataDir() + "sky_cultures/" + skyCultureDir + "/constellationship.fab",
 	                           getDataDir() + "sky_cultures/" + skyCultureDir + "/constellationsart.fab", getDataDir() + "sky_cultures/" + skyCultureDir + "/boundaries.dat", lb);
+	cout << "lines loaded\n";
 	asterisms->loadNames(getDataDir() + "sky_cultures/" + skyCultureDir + "/constellation_names.eng.fab");
 
+	cout << "eng names loaded\n";
 	// Re-translated constellation names
 	asterisms->translateNames(skyTranslator);
+	cout << "eng names translated\n";
 
 	// as constellations have changed, clear out any selection and retest for match!
 	if (selected_object && selected_object->get_type()==StelObject::STEL_OBJECT_STAR)
@@ -713,7 +716,7 @@ void StelCore::setSkyLanguage(const std::string& newSkyLocaleName)
 
 	// Update the translator with new locale name
 	skyTranslator = Translator(PACKAGE, LOCALEDIR, newSkyLocaleName);
-	cout << "Sky locale is " << skyTranslator.getLocaleName() << endl;
+	// cout << "Sky locale is " << skyTranslator.getLocaleName() << endl;
 
 	// Translate all labels with the new language
 	cardinals_points->translateLabels(skyTranslator);
