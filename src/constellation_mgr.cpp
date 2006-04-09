@@ -319,13 +319,19 @@ void ConstellationMgr::loadNames(const string& namesFile)
 	Constellation *aster;
 	while (!std::getline(commonNameFile, record).eof())
 	{
-		istringstream in(record); 
-		in >> tmpShortName;
-		aster = findFromAbbreviation(tmpShortName);
-		if (aster != NULL)
-		{
-			// Read the names in english
-			aster->englishName = record.substr(tmpShortName.length()+1,record.length()).c_str();
+
+		if( record != "") {
+			istringstream in(record); 
+			in >> tmpShortName;
+
+			//	cout << "working on short name " << tmpShortName << endl;
+
+			aster = findFromAbbreviation(tmpShortName);
+			if (aster != NULL)
+				{
+					// Read the names in english
+					aster->englishName = record.substr(tmpShortName.length()+1,record.length()).c_str();
+				}
 		}
 	}
 	commonNameFile.close();
