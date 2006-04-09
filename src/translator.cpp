@@ -22,6 +22,7 @@
 #include <dirent.h>
 #include <cstdio>
 
+#include "bytes.h"
 #include "translator.h"
 
 Translator* Translator::lastUsed = NULL;
@@ -77,32 +78,38 @@ void Translator::reload()
 static wchar_t *UTF8_to_UNICODE(wchar_t *unicode, const char *utf8, int len)
 {
 	int i, j;
-	wchar_t ch;
+	unsigned short ch;  // 16 bits
 
 	for ( i=0, j=0; i < len; ++i, ++j )
 	{
 		ch = ((const unsigned char *)utf8)[i];
 		if ( ch >= 0xF0 )
 		{
-			ch  =  (wchar_t)(utf8[i]&0x07) << 18;
-			ch |=  (wchar_t)(utf8[++i]&0x3F) << 12;
-			ch |=  (wchar_t)(utf8[++i]&0x3F) << 6;
-			ch |=  (wchar_t)(utf8[++i]&0x3F);
+			ch  =  (unsigned short)(utf8[i]&0x07) << 18;
+			ch |=  (unsigned short)(utf8[++i]&0x3F) << 12;
+			ch |=  (unsigned short)(utf8[++i]&0x3F) << 6;
+			ch |=  (unsigned short)(utf8[++i]&0x3F);
 		}
 		else
 			if ( ch >= 0xE0 )
 			{
-				ch  =  (wchar_t)(utf8[i]&0x3F) << 12;
-				ch |=  (wchar_t)(utf8[++i]&0x3F) << 6;
-				ch |=  (wchar_t)(utf8[++i]&0x3F);
+				ch  =  (unsigned short)(utf8[i]&0x3F) << 12;
+				ch |=  (unsigned short)(utf8[++i]&0x3F) << 6;
+				ch |=  (unsigned short)(utf8[++i]&0x3F);
 			}
 			else
 				if ( ch >= 0xC0 )
 				{
-					ch  =  (wchar_t)(utf8[i]&0x3F) << 6;
-					ch |=  (wchar_t)(utf8[++i]&0x3F);
+					ch  =  (unsigned short)(utf8[i]&0x3F) << 6;
+					ch |=  (unsigned short)(utf8[++i]&0x3F);
 				}
+
+#ifdef WORDS_BIGENDIAN
+		unicode[j] = bswap_16(ch);
+#else
 		unicode[j] = ch;
+#endif
+
 	}
 	unicode[j] = 0;
 

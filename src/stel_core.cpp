@@ -88,8 +88,9 @@ StelCore::~StelCore()
 // Load core data and initialize with default values
 void StelCore::init(const InitParser& conf)
 {
-	baseFontFile = getDataDir() + "DejaVuSans.ttf";
-	
+  
+	baseFontFile = getDataDir() + conf.get_str("gui", "base_font_name", "DejaVuSans.ttf");
+
 	// Video Section
 	setViewportSize(conf.get_int("video:screen_w"), conf.get_int("video:screen_h"));
 	setViewportHorizontalOffset(conf.get_int    ("video:horizontal_offset"));
@@ -625,33 +626,29 @@ void StelCore::autoZoomIn(float move_duration, bool allow_manual_zoom)
 void StelCore::autoZoomOut(float move_duration, bool full)
 {
 
-  // I will come back and fix indenting - Rob
+	if (selected_object && !full) {
 
-	if (selected_object && !full)
-	{
+		// If the selected object has satellites, unzoom to satellites view unless specified otherwise
+		float satfov = selected_object->get_satellites_fov(navigation);
 
-	  // If the selected object has satellites, unzoom to satellites view unless specified otherwise
-	  float satfov = selected_object->get_satellites_fov(navigation);
-
-	  if (projection->get_fov()<=satfov*0.9 && satfov>0.)
-	    {
-	      projection->zoom_to(satfov, move_duration);
-	      return;
+		if (projection->get_fov()<=satfov*0.9 && satfov>0.) {
+			projection->zoom_to(satfov, move_duration);
+			return;
 	    }
 
-	  // If the selected object is part of a Planet subsystem (other than sun),
-	  // unzoom to subsystem view
-	  if (selected_object->get_type() == StelObject::STEL_OBJECT_PLANET 
-	      && selected_object!=ssystem->getSun() 
-	      && ((Planet*)selected_object)->get_parent()!=ssystem->getSun())
-	    {
-	      float satfov = ((Planet*)selected_object)->get_parent()->get_satellites_fov(navigation);
-	      if (projection->get_fov()<=satfov*0.9 && satfov>0.)
-		{
-		  projection->zoom_to(satfov, move_duration);
-		  return;
-		}
-	    }
+		// If the selected object is part of a Planet subsystem (other than sun),
+		// unzoom to subsystem view
+		if (selected_object->get_type() == StelObject::STEL_OBJECT_PLANET 
+			&& selected_object!=ssystem->getSun() 
+			&& ((Planet*)selected_object)->get_parent()!=ssystem->getSun())
+			{
+				float satfov = ((Planet*)selected_object)->get_parent()->get_satellites_fov(navigation);
+				if (projection->get_fov()<=satfov*0.9 && satfov>0.)
+					{
+						projection->zoom_to(satfov, move_duration);
+						return;
+					}
+			}
 	}	
   
 	projection->zoom_to(InitFov, move_duration);
