@@ -101,6 +101,7 @@ public:
 	virtual double get_close_fov(const Navigator * nav) const;
 	virtual double get_satellites_fov(const Navigator * nav) const;
 	virtual float get_mag(const Navigator * nav) const {return compute_magnitude(nav);}
+    const s_texture *getMapTexture(void) const {return tex_map;}
 
 	/** Translate planet name using the passed translator */
 	void translateName(Translator& trans) {nameI18 = trans.translate(englishName);}
