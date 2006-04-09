@@ -156,6 +156,8 @@ std::string Translator::getAvailableLanguagesCodes(const string& localeDir)
 	}
 	closedir(dp);
 	
+	// cout << "Found translations for locales: " << result << endl;
+
 	return result;
 }
 
