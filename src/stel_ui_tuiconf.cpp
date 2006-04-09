@@ -138,7 +138,7 @@ void StelUI::init_tui(void)
 	tui_general_sky_culture->set_OnChangeCallback(callback<void>(this, &StelUI::tui_cb_tui_general_change_sky_culture));
 	tui_menu_general->addComponent(tui_general_sky_culture);
 
-	tui_general_sky_locale = new s_tui::MultiSet2_item<wstring>(wstring(L"3.2 ") + _("Sky Language: "));
+	tui_general_sky_locale = new s_tui::MultiSet_item<wstring>(wstring(L"3.2 ") + _("Sky Language: "));
 	tui_general_sky_locale->addItemList(StelUtility::stringToWstring(Translator::getAvailableLanguagesCodes(LOCALEDIR)));
 
 	tui_general_sky_locale->set_OnChangeCallback(callback<void>(this, &StelUI::tui_cb_tui_general_change_sky_locale));
@@ -423,9 +423,8 @@ void StelUI::tui_cb_tui_general_change_sky_culture(void) {
 
 // Set a new sky locale
 void StelUI::tui_cb_tui_general_change_sky_locale(void) {
-	//wcout << tui_general_sky_locale->getCurrent() << endl;
-	core->setSkyLanguage(StelUtility::wstringToString(tui_general_sky_locale->getCurrent()));
-	//app->commander->execute_command( string("set sky_locale " + StelUtility::wstringToString(tui_general_sky_locale->getCurrent())));
+	// wcout << "set sky locale to " << tui_general_sky_locale->getCurrent() << endl;
+	app->commander->execute_command( string("set sky_locale " + StelUtility::wstringToString(tui_general_sky_locale->getCurrent())));
 }
 
 
