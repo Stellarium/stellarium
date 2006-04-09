@@ -78,11 +78,23 @@ void StelApp::init(void)
 	
 	// Main section
 	string version = conf.get_str("main:version");
-	if (version!=string(VERSION))
-	{
-		// The config file is too old to try an importation
-		printf("The current config file is from a version too old for parameters to be imported (%s).\nIt will be replaced by the default config file.\n", version.empty() ? "<0.6.0" : version.c_str());
-		system( (string("cp -f ") + core->getDataRoot() + "/data/default_config.ini " + getConfigFile()).c_str() );
+
+	if (version!=string(VERSION)) {
+
+		std::istringstream istr(version);
+		char tmp;
+		int v1, v2;
+		istr >> v1 >> tmp >> v2;
+
+		// Config versions less than 0.6.0 are not supported, otherwise we will try to use it
+		if( v1 == 0 && v2 < 6 ) {
+
+			// The config file is too old to try an importation
+			printf("The current config file is from a version too old for parameters to be imported (%s).\nIt will be replaced by the default config file.\n", version.empty() ? "<0.6.0" : version.c_str());
+			system( (string("cp -f ") + core->getDataRoot() + "/data/default_config.ini " + getConfigFile()).c_str() );
+		} else {
+			cout << _("Attempting to use an existing older config file: ") << version << endl;
+		}	
 	}
 	
 	screenW = conf.get_int("video:screen_w");

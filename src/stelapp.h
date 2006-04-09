@@ -85,8 +85,9 @@ public:
 	//! Get flag for activating chart vision mode
 	bool getVisionModeChart(void) const {return draw_mode==DM_CHART;}
 	
-	//! Set flag for activating chart vision mode
-	void setVisionModeNormal(void){if (!getVisionModeNormal()) core->setColorScheme(getConfigFile(), "standard_color");draw_mode=DM_NORMAL;}	
+	//! Set flag for activating chart vision mode 
+	// ["color" section name used for easier backward compatibility for older configs - Rob]
+	void setVisionModeNormal(void){if (!getVisionModeNormal()) core->setColorScheme(getConfigFile(), "color");draw_mode=DM_NORMAL;}	
 	//! Get flag for activating chart vision mode
 	bool getVisionModeNormal(void) const {return draw_mode==DM_NORMAL;}
 
