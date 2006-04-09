@@ -121,8 +121,7 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
       stcore->setMoonScale(str_to_double(args["moon_scale"]));
     }
     else if(args["sky_culture"]!="") stcore->setSkyCultureDir(args["sky_culture"]);
-//    else if(args["sky_locale"]!="") stcore->set_sky_locale(args["sky_locale"]); // Tony NOT SURE
-    else if(args["sky_locale"]!="") stapp->setAppLanguage(args["sky_locale"]);
+    else if(args["sky_locale"]!="") stcore->setSkyLanguage(args["sky_locale"]);
     else if(args["star_mag_scale"]!="") stcore->setStarMagScale(str_to_double(args["star_mag_scale"]));
     else if(args["star_scale"]!="") {
 		float scale = str_to_double(args["star_scale"]);
