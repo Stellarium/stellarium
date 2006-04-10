@@ -155,7 +155,7 @@ class Translations
 		N_("Virgo");				// vir
 		N_("Vela");				// vel
 
-		// Egyptian constellations
+		// Egyptian Constellations
         N_("Bull's Foreleg");   // 001
         N_("Two Poles");        // 002
         N_("Lion");     // 003
@@ -278,6 +278,17 @@ class Translations
         N_("Market Officer");   // 092
         N_("Banner of Three Stars");    // 093
 
+		// Polynesian Constellations
+        N_("Bailer");   // 001
+        N_("Cat's Cradle");     // 002
+        N_("Voice of Joy");     // 004
+        N_("The Seven");        // 005
+        N_("Maui's Fishhook");  // 006
+        N_("Navigator's Triangle");     // 007
+        N_("Kite of Kawelo");   // 008
+        N_("Frigate Bird");     // 009
+        N_("Cared for by Moon");        // 010
+        N_("Dolphin");  // 011
 		
 	}
 }
