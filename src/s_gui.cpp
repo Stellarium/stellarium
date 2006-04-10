@@ -307,7 +307,8 @@ void Painter::drawSquareFill(const s_vec2i& pos, const s_vec2i& sz, const s_colo
 }
 
 // Fill the defined square with the given texture and given color
-void Painter::drawSquareFill(const s_vec2i& pos, const s_vec2i& sz, const s_color& c, const s_texture * t) const
+void Painter::drawSquareFill(const s_vec2i& pos, const s_vec2i& sz,
+                             const s_color& c, const s_texture * t) const
 {
     glColor4fv(c);
     glEnable(GL_TEXTURE_2D);
@@ -920,7 +921,8 @@ void LabeledCheckBox::draw(void)
 	Container::draw();
 }
 
-FlagButton::FlagButton(int state, const s_texture* tex, const string& specificTexName) : CheckBox(state)
+FlagButton::FlagButton(int state, const s_texture* tex,
+                       const string& specificTexName) : CheckBox(state)
 {
 	if (tex) setTexture(tex);
 	if (!specificTexName.empty()) specific_tex = new s_texture(specificTexName);
@@ -1940,7 +1942,8 @@ void FramedContainer::setFrameSize(int left, int right, int bottom, int top)
 // Standard window widget
 ////////////////////////////////////////////////////////////////////////////////
 
-StdWin::StdWin(const wstring& _title, s_texture* _header_tex, s_font * _winfont, int headerSize) :
+StdWin::StdWin(const wstring& _title, const s_texture* _header_tex,
+               s_font * _winfont, int headerSize) :
 	FramedContainer(), titleLabel(NULL), header_tex(NULL), dragging(false)
 {
 	if (_header_tex) header_tex = _header_tex;
@@ -2012,7 +2015,8 @@ void StdWin::setVisible(bool _visible)
 // Standard Button Window - StdWin with a close button in the title bar
 ////////////////////////////////////////////////////////////////////////////////
 
-StdBtWin::StdBtWin(const wstring& _title, s_texture* _header_tex, s_font * _winfont, int headerSize) :
+StdBtWin::StdBtWin(const wstring& _title, const s_texture* _header_tex,
+                   s_font * _winfont, int headerSize) :
 	StdWin(_title, _header_tex, _winfont, headerSize), hideBt(NULL)
 {
 	hideBt = new Button();
@@ -2036,7 +2040,9 @@ void StdBtWin::onHideBt(void)
 }
 
 
-StdTransBtWin::StdTransBtWin(const wstring& _title, int _time_out, s_texture* _header_tex, s_font * _winfont, int headerSize) :
+StdTransBtWin::StdTransBtWin(const wstring& _title, int _time_out,
+                             const s_texture* _header_tex, s_font * _winfont,
+                             int headerSize) :
 	StdBtWin(_title, _header_tex, _winfont, headerSize)
 {
 
@@ -2084,7 +2090,8 @@ void StdTransBtWin::set_timeout(int _time_out)
 #define STDDLGWIN_BT_ICON_LEFT 20
 #define STDDLGWIN_BT_ICON_TOP 20
 
-StdDlgWin::StdDlgWin(const wstring& _title, s_texture* _header_tex, s_font * _winfont, int headerSize) :
+StdDlgWin::StdDlgWin(const wstring& _title, const s_texture* _header_tex,
+                     s_font * _winfont, int headerSize) :
 	StdWin(_title, _header_tex, _winfont, headerSize), firstBt(NULL), secondBt(NULL), messageLabel(NULL), 
 	inputEdit(NULL), hasIcon(false)
 {
@@ -2837,7 +2844,8 @@ void Time_item::onTimeChange(void)
 // 
 ////////////////////////////////////////////////////////////////////////////////
 
-Picture::Picture(s_texture * _imageTex, int xpos, int ypos, int xsize, int ysize) :
+Picture::Picture(const s_texture * _imageTex,
+                 int xpos, int ypos, int xsize, int ysize) :
 	imageTex(_imageTex), imgcolor(s_color(1,1,1))
 {
 	setPos(xpos, ypos);
@@ -2952,7 +2960,10 @@ void City_Mgr::setProximity(double _proximity)
 #define CITY_WITH_NAME s_color(1,.4,0)
 #define CITY_WITHOUT_NAME s_color(.8,.6,0)
 
-MapPicture::MapPicture(s_texture * _imageTex, s_texture * _pointerTex, s_texture *_cityTex, int xpos, int ypos, int xsize, int ysize) :
+MapPicture::MapPicture(const s_texture *_imageTex,
+                       const s_texture *_pointerTex,
+                       const s_texture *_cityTex,
+                       int xpos, int ypos, int xsize, int ysize) :
 	Picture(_imageTex, xpos, ypos, xsize, ysize), pointer(NULL), panning(false), 
 	dragging(false), zoom(1.f), sized(false), exact(false)
 {
