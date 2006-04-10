@@ -237,7 +237,7 @@ void StelUI::init_tui(void)
 	tui_menu_administration->addComponent(tui_admin_savedefault);
 	tui_menu_administration->addComponent(tui_admin_updateme);
 
-	tui_admin_setlocale = new s_tui::MultiSet_item<wstring>(L"7.3 Set Locale: ");
+	tui_admin_setlocale = new s_tui::MultiSet_item<wstring>(L"7.4 Set Locale: ");
 	// Should be defined elsewhere...
 	tui_admin_setlocale->addItem(L"en_US");
 	tui_admin_setlocale->addItem(L"fr_FR");
