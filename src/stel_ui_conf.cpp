@@ -247,8 +247,9 @@ Component* StelUI::createConfigWindow(void)
 	tab_location->setSize(config_tab_ctr->getSize());
 
 	x=5; y=5;
-	const s_texture *earth = core->getObservatory().getHomePlanet()
-	                             ->getMapTexture();
+	const s_texture *earth = new s_texture(
+                                   *(core->getObservatory().getHomePlanet()
+	                                     ->getMapTexture()));
 	const s_texture *pointertex = new s_texture("pointeur1.png");
 	const s_texture *citytex = new s_texture("city.png");
 	earth_map = new MapPicture(earth, pointertex, citytex, x,y,tab_location->getSizex()-10, 250);
