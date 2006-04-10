@@ -18,6 +18,7 @@
  */
 
 
+#include <math.h> // fmod
 #include <sstream>
 #include <cstdlib>
 
@@ -281,57 +282,43 @@ wstring StelUtility::printAngleDMS(double angle, bool decimals, bool useD)
 {
 	wchar_t buf[32];
 	buf[31]=L'\0';
-	double deg = 0.0;
-	double min = 0.0;
-	double sec = 0.0;
 	wchar_t sign = L'+';
-	int d, m, s;
 	wchar_t degsign = L'Â°';
 	if (useD) degsign = L'd';
 
 	angle *= 180./M_PI;
 
-	if(angle<0)
-	{
+	if (angle<0) {
 		angle *= -1;
 		sign = '-';
 	}
 
-	sec = 60.0 * (modf(angle, &deg));
-	sec = 60.0 * (modf(sec, &min));
-
-	d = (int)deg;
-	m = (int)min;
-	s = (int)sec;
-
-	if (decimals)
-#ifdef MINGW32
-	swprintf(buf,L"%lc%.2d%lc%.2d'%.2f\"", sign, d, degsign, m, sec);
-#else
-	swprintf(buf,sizeof(buf),L"%lc%.2d%lc%.2d'%.2f\"", sign, d, degsign, m, sec);
+	if (decimals) {
+		int d = (int)(angle*(60*60*100));
+		const int centi = d % 100;
+		d /= 100;
+		const int s = d % 60;
+		d /= 60;
+		const int m = d % 60;
+		d /= 60;
+		swprintf(buf,
+#ifndef MINGW32
+			     sizeof(buf),
 #endif
-	else
-	{
-		double sf = sec - s;
-		if (sf > 0.5f)
-		{
-			s += 1;
-			if (s == 60)
-			{
-				s = 0;
-				m += 1;
-				if (m == 60)
-				{
-					m = 0;
-					d += 1;
-				}
-			}
-		}
-#ifdef MINGW32
-		swprintf(buf, L"%lc%.2d%lc%.2d'%.2d\"", sign, d, degsign, m, s);
-#else
-		swprintf(buf,sizeof(buf), L"%lc%.2d%lc%.2d'%.2d\"", sign, d, degsign, m, s);
+			     L"%lc%.2d%lc%.2d'%.2d.%02d\"",
+			     sign, d, degsign, m, s, centi);
+	} else {
+		int d = (int)(angle*(60*60));
+		const int s = d % 60;
+		d /= 60;
+		const int m = d % 60;
+		d /= 60;
+		swprintf(buf,
+#ifndef MINGW32
+		         sizeof(buf),
 #endif
+		         L"%lc%.2d%lc%.2d'%.2d\"",
+		         sign, d, degsign, m, s);
 	}
 	return buf;
 }
@@ -342,23 +329,36 @@ wstring StelUtility::printAngleDMS(double angle, bool decimals, bool useD)
 //! @return The corresponding string
 wstring StelUtility::printAngleHMS(double angle, bool decimals)
 {
-	static wchar_t buf[16];
+	wchar_t buf[16];
 	buf[15] = L'\0';
-	double hr = 0.0;
-	double min = 0.0;
-	double sec = 0.0;
-	angle *= 180./M_PI;
-	while (angle<0) angle+=360;
-	angle/=15.;
-	min = 60.0 * (modf(angle, &hr));
-	sec = 60.0 * (modf(min, &min));
-#ifdef MINGW32
-	if (decimals) swprintf(buf,L"%.2dh%.2dm%.2fs",(int)hr, (int) min, sec);
-	else swprintf(buf,L"%.2dh%.2dm%.0fs",(int)hr, (int) min, sec);
-#else
-	if (decimals) swprintf(buf,sizeof(buf),L"%.2dh%.2dm%.2fs",(int)hr, (int) min, sec);
-	else swprintf(buf,sizeof(buf),L"%.2dh%.2dm%.0fs",(int)hr, (int) min, sec);
+    angle = fmod(angle,2.0*M_PI);
+    if (angle < 0.0) angle += 2.0*M_PI;
+	angle *= 12./M_PI;
+	if (decimals) {
+    	int h = (int)(angle*60*60*100);
+		const int centi = h % 100;
+		h /= 100;
+		const int s = h % 60;
+		h /= 60;
+		const int m = h % 60;
+		h /= 60;
+		swprintf(buf,
+#ifndef MINGW32
+                 sizeof(buf),
 #endif
+                 L"%.2dh%.2dm%.2d.%02ds",h,m,s,centi);
+	} else {
+    	int h = (int)(angle*60*60);
+		const int s = h % 60;
+		h /= 60;
+		const int m = h % 60;
+		h /= 60;
+		swprintf(buf,
+#ifndef MINGW32
+                 sizeof(buf),
+#endif
+                 L"%.2dh%.2dm%.2ds",h,m,s);
+	}
 	return buf;
 }
 
