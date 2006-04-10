@@ -50,7 +50,7 @@ Component* StelUI::createConfigWindow(void)
 	FilledContainer* tab_render = new FilledContainer();
 	tab_render->setSize(config_tab_ctr->getSize());
 
-	s_texture* starp = new s_texture("halo.png");
+	const s_texture* starp = new s_texture("halo.png");
 	Picture* pstar = new Picture(starp, x-50, y+5, 32, 32);
 	tab_render->addComponent(pstar);
 
@@ -83,7 +83,7 @@ Component* StelUI::createConfigWindow(void)
 
 	y+=30;
 
-	s_texture* constellp = new s_texture("bt_constellations.png");
+	const s_texture* constellp = new s_texture("bt_constellations.png");
 	Picture* pconstell = new Picture(constellp, x-50, y+5, 32, 32);
 	tab_render->addComponent(pconstell);
 
@@ -104,7 +104,7 @@ Component* StelUI::createConfigWindow(void)
 
 	y+=25;
 
-	s_texture* nebp = new s_texture("bt_nebula.png");
+	const s_texture* nebp = new s_texture("bt_nebula.png");
 	Picture* pneb = new Picture(nebp, x-50, y, 32, 32);
 	tab_render->addComponent(pneb);
 
@@ -123,7 +123,7 @@ Component* StelUI::createConfigWindow(void)
 
 	y+=30;
 
-	s_texture* planp = new s_texture("bt_planet.png");
+	const s_texture* planp = new s_texture("bt_planet.png");
 	Picture* pplan = new Picture(planp, x-50, y, 32, 32);
 	tab_render->addComponent(pplan);
 
@@ -146,7 +146,7 @@ Component* StelUI::createConfigWindow(void)
 
 	y+=25;
 
-	s_texture* gridp = new s_texture("bt_grid.png");
+	const s_texture* gridp = new s_texture("bt_grid.png");
 	Picture* pgrid = new Picture(gridp, x-50, y, 32, 32);
 	tab_render->addComponent(pgrid);
 
@@ -172,7 +172,7 @@ Component* StelUI::createConfigWindow(void)
 
 	y+=25;
 
-	s_texture* groundp = new s_texture("bt_ground.png");
+	const s_texture* groundp = new s_texture("bt_ground.png");
 	Picture* pground = new Picture(groundp, x-50, y, 32, 32);
 	tab_render->addComponent(pground);
 
@@ -247,10 +247,10 @@ Component* StelUI::createConfigWindow(void)
 	tab_location->setSize(config_tab_ctr->getSize());
 
 	x=5; y=5;
-	// TODO: specify the earthmap in the ini
-	s_texture *earth = new s_texture("earthmap.png");
-	s_texture *pointertex = new s_texture("pointeur1.png");
-	s_texture *citytex = new s_texture("city.png");
+	const s_texture *earth = core->getObservatory().getHomePlanet()
+	                             ->getMapTexture();
+	const s_texture *pointertex = new s_texture("pointeur1.png");
+	const s_texture *citytex = new s_texture("city.png");
 	earth_map = new MapPicture(earth, pointertex, citytex, x,y,tab_location->getSizex()-10, 250);
 	earth_map->setOnPressCallback(callback<void>(this, &StelUI::setObserverPositionFromMap));
 	earth_map->setOnNearestCityCallback(callback<void>(this, &StelUI::setCityFromMap));
@@ -533,7 +533,7 @@ Component* StelUI::createSearchWindow(void)
 	FilledContainer* tab_stars = new FilledContainer();
 	tab_stars->setSize(search_tab_ctr->getSize());
 
-	s_texture* starp = new s_texture("halo.png");
+	const s_texture* starp = new s_texture("halo.png");
 	Picture* pstar = new Picture(starp, xi, yi, 32, 32);
 	tab_stars->addComponent(pstar);
 
@@ -559,7 +559,7 @@ Component* StelUI::createSearchWindow(void)
 	FilledContainer* tab_constellations = new FilledContainer();
 	tab_constellations->setSize(search_tab_ctr->getSize());
 
-	s_texture* constellp = new s_texture("bt_constellations.png");
+	const s_texture* constellp = new s_texture("bt_constellations.png");
 	Picture* pconstell = new Picture(constellp, xi, yi, 32, 32);
 	tab_constellations->addComponent(pconstell);
 
@@ -582,7 +582,7 @@ Component* StelUI::createSearchWindow(void)
 	FilledContainer* tab_nebula = new FilledContainer();
 	tab_nebula->setSize(search_tab_ctr->getSize());
  
-	s_texture* nebp = new s_texture("bt_nebula.png");
+	const s_texture* nebp = new s_texture("bt_nebula.png");
 	Picture* pneb = new Picture(nebp, xi, yi, 32, 32);
 	tab_nebula->addComponent(pneb);
 
@@ -694,7 +694,7 @@ Component* StelUI::createSearchWindow(void)
 	FilledContainer* tab_planets = new FilledContainer();
 	tab_planets->setSize(search_tab_ctr->getSize());
 
-	s_texture* planp = new s_texture("bt_planet.png");
+	const s_texture* planp = new s_texture("bt_planet.png");
 	Picture* pplan = new Picture(planp, xi, yi, 32, 32);
 	tab_planets->addComponent(pplan);
 
