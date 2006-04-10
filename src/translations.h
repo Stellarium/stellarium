@@ -155,6 +155,129 @@ class Translations
 		N_("Virgo");				// vir
 		N_("Vela");				// vel
 
+		// Egyptian constellations
+        N_("Bull's Foreleg");   // 001
+        N_("Two Poles");        // 002
+        N_("Lion");     // 003
+        N_("Two Jaws"); // 004
+        N_("Sah");      // 005
+        N_("Bird");     // 006
+        N_("Sek");      // 007
+        N_("Triangle"); // 008
+        N_("Ferry Boat");       // 009
+        N_("Boat");     // 010
+        N_("Crocodile");        // 011
+        N_("Selkis");   // 012
+        N_("Prow");     // 013
+        N_("Horus");    // 014
+        N_("Sheepfold");        // 015
+        N_("Giant");    // 016
+        N_("Hippopotamus");     // 017
+        N_("Flock");    // 018
+        N_("Pair of Stars");    // 019
+        N_("Khanuwy Fish");     // 020
+        N_("Net");      // 021
+        N_("Jaw");      // 022
+        N_("Mooring Post");     // 023
+        N_("Kenemet");  // 024
+        N_("Chematy");  // 025
+        N_("Waty Bekety");      // 026
+        N_("Sheep");    // 027
+        N_("Stars of Water");   // 028
+
+		// Chinese Constellations
+        N_("Northern Dipper");  // 001
+        N_("Curved Array");     // 002
+        N_("Coiled Thong");     // 003
+        N_("Wings");    // 004
+        N_("Chariot");  // 005
+        N_("Tail");     // 006
+        N_("Winnowing Basket"); // 007
+        N_("Dipper");   // 008
+        N_("Drum");     // 009
+        N_("Three Steps");      // 010
+        N_("Imperial Guards");  // 011
+        N_("Horn");     // 012
+        N_("Willow");   // 013
+        N_("Imperial Passageway");      // 014
+        N_("Kitchen");  // 015
+        N_("River Turtle");     // 016
+        N_("Stomach");  // 017
+        N_("Great General");    // 018
+        N_("Wall");     // 019
+        N_("Legs");     // 020
+        N_("Root");     // 021
+        N_("Ramparts"); // 022
+        N_("Flying Corridor");  // 023
+        N_("Outer Fence");      // 024
+        N_("Ford");     // 025
+        N_("Seven Excellencies");       // 026
+        N_("Market");   // 028
+        N_("Five Chariots");    // 030
+        N_("Rolled Tongue");    // 031
+        N_("Net");      // 032
+        N_("Toilet");   // 033
+        N_("Screen");   // 034
+        N_("Soldiers Market");  // 035
+        N_("Square Granary");   // 036
+        N_("Three Stars");      // 037
+        N_("Four Channels");    // 038
+        N_("Well");     // 039
+        N_("South River");      // 040
+        N_("North River");      // 041
+        N_("Five Feudal Kings");        // 042
+        N_("Orchard");  // 043
+        N_("Meadows");  // 044
+        N_("Circular Granary"); // 045
+        N_("Purple Palace");    // 046
+        N_("Extended Net");     // 047
+        N_("Arsenal");  // 048
+        N_("Hook");     // 049
+        N_("Supreme Palace");   // 050
+        N_("Jade Well");        // 051
+        N_("Lance");    // 052
+        N_("Boat");     // 053
+        N_("Mausoleum");        // 054
+        N_("Dog");      // 055
+        N_("Earth God's Temple");       // 056
+        N_("Bow and Arrow");    // 057
+        N_("Pestle");   // 058
+        N_("Mortar");   // 059
+        N_("Rooftop");  // 060
+        N_("Thunderbolt");      // 061
+        N_("Chariot Yard");     // 062
+        N_("Good Gourd");       // 063
+        N_("Rotten Gourd");     // 064
+        N_("Encampment");       // 065
+        N_("Thunder and Lightning");    // 066
+        N_("Palace Gate");      // 067
+        N_("Emptiness");        // 068
+        N_("Weaving Girl");     // 069
+        N_("Girl");     // 070
+        N_("Ox");       // 071
+        N_("Heart");    // 072
+        N_("Room");     // 073
+        N_("Spring");   // 074
+        N_("Establishment");    // 075
+        N_("Flail");    // 076
+        N_("Spear");    // 077
+        N_("Right Flag");       // 078
+        N_("Left Flag");        // 079
+        N_("Drumstick");        // 080
+        N_("Bond");     // 081
+        N_("Woman's Bed");      // 082
+        N_("Western Door");     // 083
+        N_("Eastern Door");     // 084
+        N_("Farmland"); // 085
+        N_("Star");     // 086
+        N_("Ghosts");   // 087
+        N_("Xuanyuan"); // 088
+        N_("Tripod");   // 089
+        N_("Neck");     // 090
+        N_("Zaofu");    // 091
+        N_("Market Officer");   // 092
+        N_("Banner of Three Stars");    // 093
+
 		
 	}
 }

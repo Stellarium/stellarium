@@ -1113,10 +1113,13 @@ int StelUI::handle_keys(Uint16 key, S_GUI_VALUE state)
 		if(key==SDLK_e) app->commander->execute_command( "flag equatorial_grid toggle");
 
 		if(key==SDLK_n) app->commander->execute_command( "flag nebula_names toggle");
+
+		/*
 		if(key=='N')
 		{
 			core->setFlagNebula(!core->getFlagNebula());
 		}
+		*/
 
 		/*
 		            if (!core->nebulas->getFlagHints())
