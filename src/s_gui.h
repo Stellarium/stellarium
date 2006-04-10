@@ -351,7 +351,7 @@ namespace s_gui
         virtual ~FlagButton();
 		virtual void draw();
     protected:
-		s_texture* specific_tex;
+		const s_texture* specific_tex;
     };
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -669,7 +669,7 @@ namespace s_gui
 	class StdWin : public FramedContainer
 	{
 	public:
-	    StdWin(const wstring& _title = L"", s_texture* _header_tex = NULL,
+	    StdWin(const wstring& _title = L"", const s_texture* _header_tex = NULL,
 			s_font * _winfont = NULL, int headerSize = 18);
 	   	virtual void draw();
 	    virtual wstring getTitle() const {return titleLabel->getLabel();}
@@ -679,7 +679,7 @@ namespace s_gui
 		virtual void setVisible(bool _visible);
 	protected:
 	    Label* titleLabel;
-		s_texture* header_tex;
+		const s_texture* header_tex;
 		int dragging;
 		s_vec2i oldPos;
 	};
@@ -701,7 +701,9 @@ namespace s_gui
 	class StdDlgWin : public StdWin
 	{
 	public:
-		StdDlgWin(const wstring& _title = NULL, s_texture* _header_tex = NULL , s_font * _winfont = NULL, int headerSize = 18);
+		StdDlgWin(const wstring& _title = NULL,
+                  const s_texture* _header_tex = NULL,
+                  s_font * _winfont = NULL, int headerSize = 18);
 		~StdDlgWin();
 		virtual void setDialogCallback(const callback<void>& c) {onCompleteCallback = c;}
 		void MessageBox(const wstring &_title, const wstring &_prompt, int _buttons, const string &_ID = "");
@@ -721,7 +723,9 @@ namespace s_gui
 		LabeledButton *firstBt, *secondBt;
 		TextLabel *messageLabel;
 		EditBox *inputEdit;
-		s_texture *blankIcon, *questionIcon, *alertIcon;
+		const s_texture *blankIcon;
+		const s_texture *questionIcon;
+		const s_texture *alertIcon;
 		Picture *picture;
 		wstring originalTitle;
 		bool hasIcon;
@@ -736,7 +740,8 @@ namespace s_gui
 	class StdBtWin : public StdWin
 	{
 	public:
-	    StdBtWin(const wstring& _title = NULL, s_texture* _header_tex = NULL,
+	    StdBtWin(const wstring& _title = NULL,
+                 const s_texture* _header_tex = NULL,
 			s_font * _winfont = NULL, int headerSize = 18);
 		virtual void draw();
 		virtual void setOnHideBtCallback(const callback<void>& c) {onHideBtCallback = c;}
@@ -750,7 +755,8 @@ namespace s_gui
 	class StdTransBtWin : public StdBtWin
 	{
 	public:
-	    StdTransBtWin(const wstring& _title = L"", int _time_out =0, s_texture* _header_tex = NULL,
+	    StdTransBtWin(const wstring& _title = L"", int _time_out =0,
+                      const s_texture* _header_tex = NULL,
 			s_font * _winfont = NULL, int headerSize = 18);
 		virtual void update(int _delta_time);
 		virtual void set_timeout(int _time_out=0);
@@ -813,13 +819,14 @@ namespace s_gui
     class Picture : public CallbackComponent
 	{
 	public:
-	    Picture(s_texture * _imageTex, int xpos = 0, int ypos = 0, int xsize = 32, int ysize = 32);
+	    Picture(const s_texture * _imageTex,
+                int xpos = 0, int ypos = 0, int xsize = 32, int ysize = 32);
 		~Picture();
 		virtual void draw(void);
 		void setShowEdge(bool v) {showedges = v;}
 		void setImgColor(const s_color &c) {imgcolor = c;}
 	private:
-	    s_texture * imageTex;
+	    const s_texture * imageTex;
 		bool showedges;
 		s_color imgcolor;
 	};
@@ -874,8 +881,10 @@ namespace s_gui
     class MapPicture : public Picture
 	{
 	public:
-	    MapPicture(s_texture *_imageTex, s_texture *_pointerTex, s_texture *_cityTex, int xpos = 0,
-			int ypos = 0, int xsize = 32, int ysize = 32);
+	    MapPicture(const s_texture *_imageTex,
+                   const s_texture *_pointerTex,
+                   const s_texture *_cityTex,
+                   int xpos = 0, int ypos = 0, int xsize = 32, int ysize = 32);
 		~MapPicture();
 		virtual void setOnNearestCityCallback(const callback<void>& c) {onNearestCityCallback = c;}
 		virtual void draw(void);
