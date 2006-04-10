@@ -54,6 +54,25 @@ s_texture::s_texture(bool full_path, const string& _textureName, int _loadType) 
 	else load( texDir + textureName );
 }
 
+s_texture::s_texture(const s_texture &t) {
+  textureName = t.textureName;
+  loadType = t.loadType;
+  loadType2 = t.loadType2;
+  whole_path = t.whole_path;
+  texID=0;
+  load(texDir + textureName);
+}
+
+const s_texture &s_texture::operator=(const s_texture &t) {
+  unload();
+  textureName = t.textureName;
+  loadType = t.loadType;
+  loadType2 = t.loadType2;
+  whole_path = t.whole_path;
+  texID=0;
+  load(texDir + textureName);
+  return *this;
+}
 
 s_texture::s_texture(const string& _textureName, int _loadType) : textureName(_textureName),
 	texID(0), loadType(PNG_BLEND1), loadType2(GL_CLAMP_TO_EDGE)

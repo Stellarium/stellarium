@@ -46,6 +46,8 @@ public:
     s_texture(bool full_path, const string& _textureName, int _loadType);
     s_texture(const string& _textureName, int _loadType);
     virtual ~s_texture();
+    s_texture(const s_texture &t);
+    const s_texture &operator=(const s_texture &t);
     int load(string fullName);
     void unload();
     int reload();
