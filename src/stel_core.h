@@ -338,6 +338,10 @@ public:
 	//! @param englishName The planet name or "" to select no planet
 	void setPlanetsSelected(const string& englishName) {ssystem->setSelected(englishName);}
 	
+	wstring getPlanetHashString(void) {return ssystem->getPlanetHashString();}
+
+	bool setHomePlanet(string planet) {return observatory->setHomePlanet(planet);}
+
 	//! Set flag for displaying a scaled Moon
 	void setFlagMoonScaled(bool b) {ssystem->setFlagMoonScale(b);}
 	//! Get flag for displaying a scaled Moon
