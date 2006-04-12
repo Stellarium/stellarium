@@ -1,5 +1,5 @@
 #include "elp82b.h"
-#include "esaphodei.h"
+#include "marssat.h"
 #include "l1.h"
 #include "tass17.h"
 #include "gust86.h"
@@ -42,9 +42,9 @@ void get_lunar_parent_coordsv(double JD, double* XYZ)
   {GetElp82bCoor(JD,XYZ);}
 
 void get_phobos_parent_coordsv(double JD, double* XYZ)
-  {GetEsaPhoDeiCoor(JD,ESAPHODEI_PHOBOS,XYZ);}
+  {GetMarsSatCoor(JD,MARS_SAT_PHOBOS,XYZ);}
 void get_deimos_parent_coordsv(double JD, double* XYZ)
-  {GetEsaPhoDeiCoor(JD,ESAPHODEI_DEIMOS,XYZ);}
+  {GetMarsSatCoor(JD,MARS_SAT_DEIMOS,XYZ);}
 
 void get_io_parent_coordsv(double JD, double* XYZ)
   {GetL1Coor(JD,L1_IO,XYZ);}
