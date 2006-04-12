@@ -684,13 +684,10 @@ void StelCore::setSkyCultureDir(const string& cultureDir)
 
 	asterisms->loadLinesAndArt(getDataDir() + "sky_cultures/" + skyCultureDir + "/constellationship.fab",
 	                           getDataDir() + "sky_cultures/" + skyCultureDir + "/constellationsart.fab", getDataDir() + "sky_cultures/" + skyCultureDir + "/boundaries.dat", lb);
-	cout << "lines loaded\n";
 	asterisms->loadNames(getDataDir() + "sky_cultures/" + skyCultureDir + "/constellation_names.eng.fab");
 
-	cout << "eng names loaded\n";
 	// Re-translated constellation names
 	asterisms->translateNames(skyTranslator);
-	cout << "eng names translated\n";
 
 	// as constellations have changed, clear out any selection and retest for match!
 	if (selected_object && selected_object->get_type()==StelObject::STEL_OBJECT_STAR)

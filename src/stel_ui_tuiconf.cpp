@@ -95,9 +95,16 @@ void StelUI::init_tui(void)
 	tui_location_longitude->set_OnChangeCallback(callback<void>(this, &StelUI::tui_cb_setlocation));
 	tui_location_altitude = new s_tui::Integer_item(-500, 10000, 0,wstring(L"1.3 ") + _("Altitude (m): "));
 	tui_location_altitude->set_OnChangeCallback(callback<void>(this, &StelUI::tui_cb_setlocation));
+
+	// experimental
+	tui_location_planet = new s_tui::MultiSet2_item<wstring>(wstring(L"1.4 ") + _("Solar System Body: "));
+	tui_location_planet->addItemList(core->getPlanetHashString());
+	tui_location_planet->set_OnChangeCallback(callback<void>(this, &StelUI::tui_cb_location_change_planet));
+
 	tui_menu_location->addComponent(tui_location_latitude);
 	tui_menu_location->addComponent(tui_location_longitude);
 	tui_menu_location->addComponent(tui_location_altitude);
+	tui_menu_location->addComponent(tui_location_planet);
 
 	// 2. Time
 	tui_time_skytime = new s_tui::Time_item(wstring(L"2.1 ") + _("Sky Time: "));
@@ -570,4 +577,11 @@ void StelUI::tui_cb_change_color()
 	core->setColorConstellationLine( tui_colors_const_line_color->getVector() );
 	core->setColorConstellationNames( tui_colors_const_label_color->getVector() );
 	core->setColorCardinalPoints( tui_colors_cardinal_color->getVector() );
+}
+
+
+void StelUI::tui_cb_location_change_planet()
+{
+	core->setHomePlanet( StelUtility::wstringToString( tui_location_planet->getCurrent() ) );
+
 }

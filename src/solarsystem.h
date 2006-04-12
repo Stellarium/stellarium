@@ -48,6 +48,8 @@ public:
 	//! The translation is done using gettext with translated strings defined in translations.h
 	void translateNames(Translator& trans);
 
+	wstring getPlanetHashString();  // locale and ssystem.ini names, newline delimiter, for tui
+
 	void setFont(float font_size, const string& font_name);
 	void setLabelColor(const Vec3f& c) {Planet::set_label_color(c);}
 	const Vec3f& getLabelColor(void) const {return Planet::getLabelColor();}

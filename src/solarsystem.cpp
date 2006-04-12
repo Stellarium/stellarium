@@ -493,6 +493,22 @@ vector<wstring> SolarSystem::getNamesI18(void)
 	return names;
 }
 
+
+// returns a newline delimited hash of localized:standard planet names for tui
+wstring SolarSystem::getPlanetHashString(void)
+{
+	wostringstream oss;
+	vector < Planet * >::iterator iter;
+
+	for (iter = system_planets.begin(); iter != system_planets.end(); ++iter) {
+		oss << (*iter)->getNameI18() << "\n" <<  StelUtility::stringToWstring((*iter)->getEnglishName()) << "\n";
+	}
+
+	return oss.str();
+
+}
+
+
 void SolarSystem::updateTrails(const Navigator* nav)
 {
 	vector<Planet*>::iterator iter;

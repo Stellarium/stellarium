@@ -283,7 +283,8 @@ wstring StelUtility::printAngleDMS(double angle, bool decimals, bool useD)
 	wchar_t buf[32];
 	buf[31]=L'\0';
 	wchar_t sign = L'+';
-	wchar_t degsign = L'Â°';
+	// wchar_t degsign = L'Â°'; ???
+	wchar_t degsign = L'\u00B0';
 	if (useD) degsign = L'd';
 
 	angle *= 180./M_PI;
