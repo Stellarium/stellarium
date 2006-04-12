@@ -322,6 +322,7 @@ private:
 	s_tui::Decimal_item* tui_location_latitude;
 	s_tui::Decimal_item* tui_location_longitude;
 	s_tui::Integer_item* tui_location_altitude;
+	s_tui::MultiSet2_item<wstring>* tui_location_planet;
 
 	// 2. Time & Date
 	s_tui::Time_zone_item* tui_time_settmz;
@@ -388,6 +389,7 @@ private:
 	void tui_cb_effects();        // change effect parameters
 	void tui_cb_sky_time();        // change effect parameters
 	void tui_cb_change_color();        // change colors
+	void tui_cb_location_change_planet();  // change planet of observer
 
 	// Parse a file of type /usr/share/zoneinfo/zone.tab
 	s_tui::MultiSet_item<wstring>* create_tree_from_time_zone_file(const string& zonetab);
