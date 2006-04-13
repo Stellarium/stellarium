@@ -31,7 +31,7 @@ using namespace std;
 
 #include "draw.h"
 
-SolarSystem::SolarSystem() : sun(NULL), moon(NULL), earth(NULL), moonScale(1.), tex_earth_shadow(NULL)
+SolarSystem::SolarSystem() : sun(NULL), moon(NULL), earth(NULL), moonScale(1.), tex_earth_shadow(NULL), flagOrbits(0)
 {}
 
 void SolarSystem::setFont(float font_size, const string& font_name)
@@ -567,6 +567,7 @@ bool SolarSystem::getFlagHints(void)
 
 void SolarSystem::setFlagOrbits(bool b)
 {
+	flagOrbits = b;
 	if (!b || selected == NULL || selected->getEnglishName() == "Sun")
 	{
 		vector<Planet*>::iterator iter;
@@ -582,18 +583,9 @@ void SolarSystem::setFlagOrbits(bool b)
 		for( iter = system_planets.begin(); iter < system_planets.end(); iter++ )
 		{
 			if((*iter)!=selected) (*iter)->setFlagOrbits(false);
+			else (*iter)->setFlagOrbits(b);
 		}		
 	}
-}
-
-bool SolarSystem::getFlagOrbits(void)
-{
-	vector<Planet*>::iterator iter;
-	for( iter = system_planets.begin(); iter < system_planets.end(); iter++ )
-	{
-		if ((*iter)->getFlagOrbits()) return true;
-	}
-	return false;
 }
 
 
