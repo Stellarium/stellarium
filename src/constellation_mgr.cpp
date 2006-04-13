@@ -31,7 +31,11 @@
 ConstellationMgr::ConstellationMgr(HipStarMgr *_hip_stars) : 
 	asterFont(NULL),
 	hipStarMgr(_hip_stars),
-	selected(NULL)
+	selected(NULL),
+	flagNames(0),
+	flagLines(0),
+	flagArt(0),
+	flagBoundaries(0)
 {
 	assert(hipStarMgr);
 	isolateSelected = false;
@@ -66,10 +70,6 @@ void ConstellationMgr::setFont(float font_size, const string& ttfFileName)
 // Load line and art data from files
 void ConstellationMgr::loadLinesAndArt(const string &fileName, const string &artfileName, const string &boundaryfileName, LoadingBar& lb)
 {
-	// Store state
-	bool flagArt = getFlagArt();
-	bool flagLines = getFlagLines();
-	bool flagNames = getFlagNames();
 	
 	std::ifstream inf(fileName.c_str());
 
@@ -106,6 +106,13 @@ void ConstellationMgr::loadLinesAndArt(const string &fileName, const string &art
 		}
 	}
 	inf.close();
+
+	// Set current states
+	setFlagArt(flagArt);
+	setFlagLines(flagLines);
+	setFlagNames(flagNames);	
+	setFlagBoundaries(flagBoundaries);	
+
 
 	FILE *fic = fopen(artfileName.c_str(), "r");
 	if (!fic)
@@ -195,10 +202,6 @@ void ConstellationMgr::loadLinesAndArt(const string &fileName, const string &art
 	
 	loadBoundaries(boundaryfileName);
 	
-	// Restore state
-	setFlagArt(flagArt);
-	setFlagLines(flagLines);
-	setFlagNames(flagNames);	
 }
 
 void ConstellationMgr::draw(Projector * prj, Navigator * nav) const
@@ -418,6 +421,7 @@ void ConstellationMgr::setArtFadeDuration(float duration)
 
 void ConstellationMgr::setFlagLines(bool b)
 {
+	flagLines = b;
 	if (selected && isolateSelected)
 	{
 		selected->setFlagLines(b);
@@ -432,6 +436,7 @@ void ConstellationMgr::setFlagLines(bool b)
 
 void ConstellationMgr::setFlagBoundaries(bool b)
 {
+	flagBoundaries = b;
 	if (selected && isolateSelected)
 	{
 		selected->setFlagBoundaries(b);
@@ -446,6 +451,7 @@ void ConstellationMgr::setFlagBoundaries(bool b)
 
 void ConstellationMgr::setFlagArt(bool b)
 {
+	flagArt = b;
 	if (selected && isolateSelected)
 	{
 		selected->setFlagArt(b);
@@ -461,6 +467,7 @@ void ConstellationMgr::setFlagArt(bool b)
 
 void ConstellationMgr::setFlagNames(bool b)
 {
+	flagNames = b;
 	if (selected && isolateSelected)
 	{
 		selected->setFlagName(b);

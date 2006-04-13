@@ -67,22 +67,22 @@ public:
 	/** Set whether constellation art will be displayed */
 	void setFlagArt(bool b);
 	/** Get whether constellation art is displayed */
-	bool getFlagArt(void) const {return (!asterisms.empty() && (*(asterisms.begin()))->getFlagArt() || (selected && selected->getFlagArt()));}
+	bool getFlagArt(void) const {return flagArt;}
 	
 	/** Set whether constellation path lines will be displayed */
 	void setFlagLines(bool b);
 	/** Get whether constellation path lines are displayed */
-	bool getFlagLines(void) const {return (!asterisms.empty() && (*(asterisms.begin()))->getFlagLines() || (selected && selected->getFlagLines()));}
+	bool getFlagLines(void) const {return flagLines;}
 	
 	/** Set whether constellation boundaries lines will be displayed */
 	void setFlagBoundaries(bool b);
 	/** Get whether constellation boundaries lines are displayed */
-	bool getFlagBoundaries(void) const {return (!asterisms.empty() && (*(asterisms.begin()))->getFlagBoundaries() || (selected && selected->getFlagBoundaries()));}
+	bool getFlagBoundaries(void) const {return flagBoundaries;}
 	
 	/** Set whether constellation names will be displayed */
 	void setFlagNames(bool b);
 	/** Set whether constellation names are displayed */
-	bool getFlagNames(void) const {return (!asterisms.empty() && (*(asterisms.begin()))->getFlagName() || (selected && selected->getFlagName()));}
+	bool getFlagNames(void) const {return flagNames;}
 	
 	/** Set whether selected constellation must be displayed alone */
 	void setFlagIsolateSelected(bool s) { isolateSelected = s; setSelectedConst(selected);}
@@ -137,6 +137,12 @@ private:
 	Constellation* selected;
 	bool isolateSelected;
 	vector<vector<Vec3f> *> allBoundarySegments;
+
+	// These are THE master settings - individual constellation settings can vary based on selection status
+	bool flagNames;
+	bool flagLines;
+	bool flagArt;
+	bool flagBoundaries;
 };
 
 #endif // _CONSTELLATION_MGR_H_
