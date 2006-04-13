@@ -94,7 +94,7 @@ public:
 	
 	//! Activate/Deactivate planets hints display
 	void setFlagOrbits(bool b);
-	bool getFlagOrbits(void);	
+	bool getFlagOrbits() {return flagOrbits;};	
 	
 	//! Start/stop accumulating new trail data (clear old data)
 	void startTrails(bool b);
@@ -154,6 +154,10 @@ private:
 	};
 
 	s_texture *tex_earth_shadow;  // for lunar eclipses
+
+	// Master settings
+	bool flagOrbits;
+
 };
 
 
