@@ -39,6 +39,8 @@ My modifications are:
 2) unite terms with the same frequencies
 3) rearrange the terms so that calculation of the argument becomes easier
 4) substitute so that the independent variable becomes T=jd-2433282.5
+5) artificially blend out the usage of polynomials outside [-695+t0,695+t0]
+   in order to avoid a discontinuity
 
 ****************************************************************/
 
