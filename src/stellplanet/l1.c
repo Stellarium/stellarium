@@ -39,6 +39,8 @@ My modifications are:
 2) unite terms with the same frequencies
 3) rearrange the terms so that calculation of the argument becomes easier
 4) substitute so that the independent variable becomes T=jd-2433282.5
+5) artificially blend out the usage of polynomials outside [-695+t0,695+t0]
+   in order to avoid a discontinuity
 
 ****************************************************************/
 
@@ -61,8 +63,8 @@ struct L1TermList {
 struct L1Body {
   const char *name;
   double mu,l;
-  double cheb_coef[9*5];
-  double constants[6];
+  const double cheb_coef[9*5];
+  const double constants[6];
   const struct L1TermList lists[4];
 };
 
@@ -923,26 +925,37 @@ static void CalcL1Elem(double t,int body,double elem[6]) {
     }
   }
 
-  const double a = -819.727638594856;
-  const double b = 812.72180699036;
-  const double x = (t / (0.5*365.25) - (b + a)) / (b - a);
-  double ti2 = 1.0;
-  double ti1 = x;
-  double *cheb = bp->cheb_coef;
+  const double *cheb = bp->cheb_coef;
   elem++;
   for (j=0;j<5;j++) {
     elem[j] += (*cheb++);
   }
-  for (j=0;j<5;j++) {
-    elem[j] += (*cheb++) * x;
-  }
-  int i;
-  for (i=2;i<9;i++) {
-    const double ti = 2.0 * x * ti1 - ti2;
-    ti2 = ti1;
-    ti1 = ti;
+  
+    /* This is an artificial hack. Valery Lainey recommends
+       not using polynoials outside of [-700,700].
+       I do the following:
+       inside  [-695,695] use polynomials
+       outside [-705,705] do not use polynomials
+       inbetween avoid jumping moons by partly using polynomials */
+  double use_polynomials = (705*365.25 - fabs(t)) / (10*365.25);
+  if (use_polynomials > 0) {
+    if (use_polynomials >= 1.0) use_polynomials = 1.0;
+    const double a = -819.727638594856;
+    const double b = 812.72180699036;
+    const double x = (t / (0.5*365.25) - (b + a)) / (b - a);
+    double ti2 = 1.0;
+    double ti1 = x;
     for (j=0;j<5;j++) {
-      elem[j] += (*cheb++) * ti;
+      elem[j] += use_polynomials * ((*cheb++) * x);
+    }
+    int i;
+    for (i=2;i<9;i++) {
+      const double ti = 2.0 * x * ti1 - ti2;
+      ti2 = ti1;
+      ti1 = ti;
+      for (j=0;j<5;j++) {
+        elem[j] += use_polynomials * ((*cheb++) * ti);
+      }
     }
   }
 
