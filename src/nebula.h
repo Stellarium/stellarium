@@ -83,7 +83,10 @@ public:
 	
 protected:
 	// Return the radius of a circle containing the object on screen
-	virtual float get_on_screen_size(const Projector* prj, const Navigator * nav = NULL) {return angular_size*180./M_PI/prj->get_fov()*prj->getViewportHeight();}
+	virtual float get_on_screen_size(const Projector* prj,
+	                                 const Navigator * nav = NULL)
+	  {return angular_size * (180./M_PI)
+	                       * (prj->getViewportHeight()/prj->get_fov());}
 
 private:
 	void draw_chart(const Projector* prj, const Navigator * nav);
