@@ -974,3 +974,12 @@ void StelCore::updateMove(int delta_time)
 		navigation->update_move(deltaAz, deltaAlt);
 	}
 }
+
+
+bool StelCore::setHomePlanet(string planet) {
+
+	// reset planet trails due to changed perspective
+	ssystem->startTrails( ssystem->getFlagTrails() );
+
+	return observatory->setHomePlanet(planet);
+}

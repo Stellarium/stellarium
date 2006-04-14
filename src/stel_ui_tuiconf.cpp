@@ -47,6 +47,11 @@ void StelUI::draw_gravity_ui(void)
 		os << core->getObservatory().get_printable_date_local(jd) << L" " <<
 		core->getObservatory().get_printable_time_local(jd);
 
+		// label location if not on earth
+		if(core->getObservatory().getHomePlanetEnglishName() != "Earth") {
+			os << L" " << core->getObservatory().getHomePlanetNameI18();
+		}
+
 		if (FlagShowFov) os << L" fov " << setprecision(3) << core->getFov();
 		if (FlagShowFps) os << L"  FPS " << app->fps;
 
