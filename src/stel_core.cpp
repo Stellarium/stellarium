@@ -294,8 +294,8 @@ void StelCore::update(int delta_time)
 
 
 	// Compute the moon position in local coordinate
-	temp = ssystem->getMoon()->get_heliocentric_ecliptic_pos();
-	Vec3d moonPos = navigation->helio_to_local(temp);
+	Vec3d moon = ssystem->getMoon()->get_heliocentric_ecliptic_pos();
+	Vec3d moonPos = navigation->helio_to_local(moon);
 
 	// Compute the atmosphere color and intensity
 	atmosphere->compute_color(navigation->get_JDay(), sunPos, moonPos,
@@ -312,11 +312,12 @@ void StelCore::update(int delta_time)
 	if(sunPos[2] < -0.1/1.5 ) sky_brightness = 0.01;
 	else sky_brightness = (0.1 + 1.5*sunPos[2]);
 
+	// Landscape is lit even if atmosphere off
+	landscape->set_sky_brightness(sky_brightness);
+
 	// TODO eventually make this more generic for non-atmosphere planets
 	sky_brightness *= (atmosphere->get_intensity()+0.3);
 	
-	// Landscape is lit even if atmosphere off
-	landscape->set_sky_brightness(sky_brightness);
 }
 
 // Execute all the drawing functions
