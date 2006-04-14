@@ -27,6 +27,7 @@
 #include <cmath>
 #include <cstring>
 #include <cstdio>
+#include <iostream>
 
 template<class T> class Vector2;
 template<class T> class Vector3;
@@ -544,6 +545,12 @@ template<class T> void Vector3<T>::transfo4d(const Mat4f& m)
 	(*this)=m*(*this);
 }
 
+template<class T> 
+std::ostream& operator<<(std::ostream &o,const Vector3<T> &v) {
+  return o << '[' << v[0] << ',' << v[1] << ',' << v[2] << ']';
+}
+
+
 ////////////////////////// Vector4 class methods ///////////////////////////////
 
 template<class T> Vector4<T>::Vector4()
@@ -694,6 +701,11 @@ template<class T> void Vector4<T>::normalize()
 template<class T> void Vector4<T>::transfo4d(const Mat4d& m)
 {
 	(*this)=m*(*this);
+}
+
+template<class T> 
+std::ostream& operator<<(std::ostream &o,const Vector4<T> &v) {
+  return o << '[' << v[0] << ',' << v[1] << ',' << v[2] << ',' << v[3] << ']';
 }
 
 
