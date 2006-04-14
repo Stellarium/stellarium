@@ -322,6 +322,7 @@ void StelUI::tui_update_widgets(void)
 	tui_location_latitude->setValue(core->getObservatory().get_latitude());
 	tui_location_longitude->setValue(core->getObservatory().get_longitude());
 	tui_location_altitude->setValue(core->getObservatory().get_altitude());
+	tui_location_planet->setValue(StelUtility::stringToWstring(core->getObservatory().getHomePlanetEnglishName()));
 
 	// 2. Date & Time
 	tui_time_skytime->setJDay(core->getJDay() + 

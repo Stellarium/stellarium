@@ -338,7 +338,7 @@ public:
 	//! @param englishName The planet name or "" to select no planet
 	void setPlanetsSelected(const string& englishName) {ssystem->setSelected(englishName);}
 	
-	wstring getPlanetHashString(void) {return ssystem->getPlanetHashString();}
+	wstring getPlanetHashString(void);
 
 	bool setHomePlanet(string planet);
 
