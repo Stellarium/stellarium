@@ -102,6 +102,10 @@ void NebulaMgr::draw(Projector* prj, const Navigator * nav, ToneReproductor* eye
 	static vector<Nebula *>::iterator iter;
 	Nebula* n;
 
+	  // speed up the computation of n->get_on_screen_size(prj, nav)>5:
+	const float size_limit = 5.0 * (M_PI/180.0)
+	                             * (prj->get_fov()/prj->getViewportHeight());
+
 	for(int i=0;i<nbZones;++i)
 	{
 		end = nebZones[zoneList[i]].end();
@@ -109,7 +113,10 @@ void NebulaMgr::draw(Projector* prj, const Navigator * nav, ToneReproductor* eye
 		{
 			n = *iter;
 			// improve performance by skipping if too small to see
-			if (n->get_on_screen_size(prj, nav)>5 || (hintsFader.getInterstate()>0.0001  && n->mag <= getMaxMagHints()))
+			// TODO: skip if too faint to see
+			if (n->angular_size>size_limit ||
+			    (hintsFader.getInterstate()>0.0001 &&
+			     n->mag <= getMaxMagHints()))
 			{
 				// correct for precession
 				pXYZ = nav->j2000_to_earth_equ(n->XYZ);
