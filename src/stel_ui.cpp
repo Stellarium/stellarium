@@ -912,20 +912,6 @@ int StelUI::handle_keys(Uint16 key, S_GUI_VALUE state)
 			app->quit();
 		}
 
-#ifndef MACOSX
-		if(key==0x0010)
-		{ // CTRL-P  Play startup script, NOW!
-#else
-		if (key == SDLK_p && SDL_GetModState() & KMOD_META)
-		{
-#endif
-
-			// first clear out audio and images kept in core
-			app->commander->execute_command( "script action end");
-			app->scripts->play_startup_script();
-			return 1;
-		}
-
 
 		// if script is running, only script control keys are accessible
 		// to pause/resume/cancel the script

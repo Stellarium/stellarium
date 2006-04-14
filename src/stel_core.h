@@ -340,7 +340,7 @@ public:
 	
 	wstring getPlanetHashString(void) {return ssystem->getPlanetHashString();}
 
-	bool setHomePlanet(string planet) {return observatory->setHomePlanet(planet);}
+	bool setHomePlanet(string planet);
 
 	//! Set flag for displaying a scaled Moon
 	void setFlagMoonScaled(bool b) {ssystem->setFlagMoonScale(b);}
