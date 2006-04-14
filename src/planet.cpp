@@ -366,32 +366,37 @@ double Planet::compute_distance(const Vec3d& obs_helio_pos)
 }
 
 // Get the phase angle for an observer at pos obs_pos in the heliocentric coordinate (dist in AU)
-double Planet::get_phase(Vec3d obs_pos) const
-{
-	Vec3d heliopos = get_heliocentric_ecliptic_pos();
-	double R = heliopos.length();
-	double p = (obs_pos - heliopos).length();
-	double s = obs_pos.length();
-	double cos_chi = (p*p + R*R - s*s)/(2.f*p*R);
-
-	return (1.f - acosf(cos_chi)/M_PI) * cos_chi + sqrt(1.f - cos_chi*cos_chi) / M_PI;
+double Planet::get_phase(Vec3d obs_pos) const {
+  const double sq = obs_pos.lengthSquared();
+  const Vec3d heliopos = get_heliocentric_ecliptic_pos();
+  const double Rq = heliopos.lengthSquared();
+  const double pq = (obs_pos - heliopos).lengthSquared();
+  const double cos_chi = (pq + Rq - sq)/(2.0*sqrt(pq*Rq));
+  return (1.0 - acos(cos_chi)/M_PI) * cos_chi
+         + sqrt(1.0 - cos_chi*cos_chi) / M_PI;
 }
 
-float Planet::compute_magnitude(Vec3d obs_pos) const
-{
-    const double sq = obs_pos.dot(obs_pos);
-    if (parent == 0) {
-        // sun
-      return -26.73f + 2.5f*log10f(sq);
-    }
-	Vec3d heliopos = get_heliocentric_ecliptic_pos();
-	double R = heliopos.length();
-	double p = (obs_pos - heliopos).length();
-	double cos_chi = (p*p + R*R - sq)/(2.f*p*R);
-
-	float phase = (1.f - acosf(cos_chi)/M_PI) * cos_chi + sqrt(1.0 - cos_chi*cos_chi) / M_PI;
-	float F = 0.666666667f * albedo * sq * (radius/(R*p)) * (radius/(R*p)) * phase;
-	return -26.73f - 2.5f * log10f(F);
+float Planet::compute_magnitude(Vec3d obs_pos) const {
+  const double sq = obs_pos.lengthSquared();
+  if (parent == 0) {
+      // sun
+    return -26.73f + 2.5f*log10f(sq);
+  }
+  const Vec3d heliopos = get_heliocentric_ecliptic_pos();
+  const double Rq = heliopos.lengthSquared();
+  const double pq = (obs_pos - heliopos).lengthSquared();
+  const double cos_chi = (pq + Rq - sq)/(2.0*sqrt(pq*Rq));
+  const double phase = (1.0 - acos(cos_chi)/M_PI) * cos_chi
+                       + sqrt(1.0 - cos_chi*cos_chi) / M_PI;
+  const float F = 2.0 * albedo * radius * radius * phase / (3.0*pq*Rq);
+  const float rval = -26.73f - 2.5f * log10f(F);
+//cout << "Planet(" << getEnglishName()
+//     << ")::compute_magnitude(" << obs_pos << "): "
+//        "phase: " << phase
+//     << ",F: " << F
+//     << ",rval: " << rval
+//     << endl;
+  return rval;
 }
 
 float Planet::compute_magnitude(const Navigator * nav) const
