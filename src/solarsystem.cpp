@@ -501,7 +501,8 @@ wstring SolarSystem::getPlanetHashString(void)
 	vector < Planet * >::iterator iter;
 
 	for (iter = system_planets.begin(); iter != system_planets.end(); ++iter) {
-		oss << (*iter)->getNameI18() << "\n" <<  StelUtility::stringToWstring((*iter)->getEnglishName()) << "\n";
+		oss << Translator::globalTranslator.translate((*iter)->getEnglishName()) << "\n";
+		oss << StelUtility::stringToWstring((*iter)->getEnglishName()) << "\n";
 	}
 
 	return oss.str();
