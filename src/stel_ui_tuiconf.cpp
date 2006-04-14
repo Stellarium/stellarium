@@ -250,11 +250,7 @@ void StelUI::init_tui(void)
 	tui_menu_administration->addComponent(tui_admin_updateme);
 
 	tui_admin_setlocale = new s_tui::MultiSet_item<wstring>(L"7.4 Set Locale: ");
-	// Should be defined elsewhere...
-	tui_admin_setlocale->addItem(L"en_US");
-	tui_admin_setlocale->addItem(L"fr_FR");
-	tui_admin_setlocale->addItem(L"nl_NL");
-	tui_admin_setlocale->addItem(L"es_ES");
+	tui_admin_setlocale->addItemList(StelUtility::stringToWstring(Translator::getAvailableLanguagesCodes(LOCALEDIR)));
 	tui_admin_setlocale->set_OnChangeCallback(callback<void>(this, &StelUI::tui_cb_admin_set_locale));
 	tui_menu_administration->addComponent(tui_admin_setlocale);
 
@@ -376,7 +372,7 @@ void StelUI::tui_update_widgets(void)
 	}
 
 	// 7. admin
-	//tui_admin_setlocale->setValue(core->UILocale);
+	tui_admin_setlocale->setValue( StelUtility::stringToWstring(app->getAppLanguage()) );
 
 }
 
@@ -484,12 +480,12 @@ void StelUI::tui_cb_admin_set_locale() {
 
 	// Right now just set for the current session
 
-#if !defined(MACOSX)
+	//#if !defined(MACOSX)  Why was this here?
+
 	LocaleChanged = 1;  // will reload TUI next draw.  Note that position in TUI is lost...
 	app->setAppLanguage(StelUtility::wstringToString(tui_admin_setlocale->getCurrent()));
-#endif
 
-
+	//#endif
 }
 
 

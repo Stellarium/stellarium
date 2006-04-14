@@ -74,6 +74,7 @@ public:
 	//! This function has no permanent effect on the global locale
 	//! @param newAppLocaleName The name of the language (e.g fr) to use for GUI, TUI and console messages etc..
 	void setAppLanguage(const std::string& newAppLangName);
+	string getAppLanguage() { return Translator::globalTranslator.getLocaleName(); }
 
 	//! Set flag for activating night vision mode
 	void setVisionModeNight(void) {if (!getVisionModeNight()) core->setColorScheme(getConfigFile(), "night_color");draw_mode=DM_NIGHT;}
