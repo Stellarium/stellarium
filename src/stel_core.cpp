@@ -983,3 +983,11 @@ bool StelCore::setHomePlanet(string planet) {
 
 	return observatory->setHomePlanet(planet);
 }
+
+
+// For use by TUI
+wstring StelCore::getPlanetHashString() {
+	
+	return ssystem->getPlanetHashString();
+
+}
