@@ -555,8 +555,8 @@ void Planet::draw_sphere(const Projector* prj, const Mat4d& mat, float screen_sz
 
 void Planet::draw_halo(const Navigator* nav, const Projector* prj, const ToneReproductor* eye)
 {
-	static float cmag;
-	static float rmag;
+	float cmag;
+	float rmag;
 
 	rmag = eye->adapt_luminance(expf(-0.92103f*(compute_magnitude(nav->get_observer_helio_pos()) +
 	                                            12.12331f)) * 108064.73f);
@@ -619,8 +619,8 @@ void Planet::draw_halo(const Navigator* nav, const Projector* prj, const ToneRep
 
 void Planet::draw_point_halo(const Navigator* nav, const Projector* prj, const ToneReproductor* eye)
 {
-	static float cmag;
-	static float rmag;
+	float cmag;
+	float rmag;
 
 	rmag = eye->adapt_luminance(expf(-0.92103f*(compute_magnitude(nav->get_observer_helio_pos()) +
 	                                            12.12331f)) * 108064.73f);
