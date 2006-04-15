@@ -47,7 +47,8 @@ Planet::Planet(Planet *parent,
                float _albedo,
                const string& tex_map_name,
                const string& tex_halo_name,
-               pos_func_type _coord_func) :
+               pos_func_type _coord_func,
+			   bool _hidden) :
 		englishName(_englishName), flagHalo(_flagHalo),
         flag_lighting(_flag_lighting),
         radius(_radius), one_minus_oblateness(1.0-oblateness),
@@ -55,7 +56,7 @@ Planet::Planet(Planet *parent,
         tex_map(NULL), tex_halo(NULL), tex_big_halo(NULL), rings(NULL),
         sphere_scale(1.f),
         lastJD(J2000), last_orbitJD(0), deltaJD(JD_SECOND), orbit_cached(0),
-        coord_func(_coord_func), parent(parent)
+        coord_func(_coord_func), parent(parent), hidden(_hidden)
 {
 	if (parent) parent->satellites.push_back(this);
 	ecliptic_pos=Vec3d(0.,0.,0.);
@@ -418,6 +419,8 @@ float Planet::get_on_screen_size(const Projector* prj, const Navigator * nav)
 // Draw the Planet and all the related infos : name, circle etc..
 void Planet::draw(Projector* prj, const Navigator * nav, const ToneReproductor* eye, int flag_point, bool stencil)
 {
+	if(hidden) return;
+
 	Mat4d mat = mat_local_to_parent;
 	const Planet *p = parent;
 	while (p!=NULL && p->parent!=NULL)
