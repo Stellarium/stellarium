@@ -246,7 +246,8 @@ void SolarSystem::load(const string& planetfile)
                                pd.get_double(secname, "albedo"),
                                pd.get_str(secname, "tex_map"),
                                pd.get_str(secname, "tex_halo"),
-                               posfunc);
+                               posfunc,
+                               pd.get_boolean(secname, "hidden", 0));
 
 		if (secname=="earth") earth = p;
 		if (secname=="sun") sun = p;

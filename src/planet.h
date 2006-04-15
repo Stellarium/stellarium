@@ -89,7 +89,8 @@ public:
            float _albedo,
            const string& tex_map_name,
            const string& tex_halo_name,
-           pos_func_type _coord_func);
+           pos_func_type _coord_func,
+		   bool _hidden);
 
     virtual ~Planet();
 
@@ -277,6 +278,8 @@ protected:
 	LinearFader hint_fader;
 	LinearFader orbit_fader;
 	LinearFader trail_fader;
+	
+	bool hidden;  // useful for fake planets used as observation positions - not drawn or labeled
 
 };
 
