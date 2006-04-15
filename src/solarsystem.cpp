@@ -122,6 +122,13 @@ void SolarSystem::load(const string& planetfile)
 			double anomaly_at_epoch = mean_longitude - (arg_of_pericenter + ascending_node);
 			double pericenter_distance = semi_major_axis * (1.0 - eccentricity);
 
+			  // when the parent is the sun use ecliptic rathe than sun equator:
+			const double parent_rot_obliquity = parent->get_parent()
+			                                  ? parent->getRotObliquity()
+			                                  : 0.0;
+			const double parent_rot_asc_node = parent->get_parent()
+			                                  ? parent->getRotAscendingnode()
+			                                  : 0.0;
 			// Create an elliptical orbit
 			orb = new EllipticalOrbit(pericenter_distance,
 			                          eccentricity,
@@ -131,8 +138,8 @@ void SolarSystem::load(const string& planetfile)
 			                          anomaly_at_epoch,
 			                          period,
 			                          epoch,
-			                          parent->getRotObliquity(),
-			                          parent->getRotAscendingnode());
+			                          parent_rot_obliquity,
+			                          parent_rot_asc_node);
 			ell_orbits.push_back(orb);
 
 			posfunc = pos_func_type(orb, &EllipticalOrbit::positionAtTimevInVSOP87Coordinates);
