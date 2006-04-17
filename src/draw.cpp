@@ -560,10 +560,10 @@ void MilkyWay::draw(ToneReproductor * eye, const Projector* prj, const Navigator
 {
 	assert(tex);	// A texture must be loaded before calling this
 	// Scotopic color = 0.25, 0.25 in xyY mode. Global stars luminance ~= 0.001 cd/m^2
-	Vec3f c = Vec3f(0.25f*fader.getInterstate(), 0.25f*fader.getInterstate(), intensity*0.002f*fader.getInterstate());
+	Vec3f c = Vec3f(0.25f*fader.getInterstate(), 0.25f*fader.getInterstate(),
+                    intensity*0.002f*fader.getInterstate()/tex_avg_luminance);
 	eye->xyY_to_RGB(c);
 	glColor3fv(c);
-	c[2]/=tex_avg_luminance;
 	glEnable(GL_CULL_FACE);
 	glEnable(GL_TEXTURE_2D);
 	glDisable(GL_BLEND);
