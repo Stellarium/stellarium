@@ -37,7 +37,8 @@ void StelUI::draw_gravity_ui(void)
 
 	int x = core->getViewportPosX() + core->getViewportWidth()/2;
 	int y = core->getViewportPosY() + core->getViewportHeight()/2;
-	int shift = (int)(M_SQRT2 / 2 * MY_MIN(core->getViewportWidth()/2, core->getViewportHeight()/2));
+	//	int shift = (int)(M_SQRT2 / 2 * MY_MIN(core->getViewportWidth()/2, core->getViewportHeight()/2));
+	int shift = (int) MY_MIN(core->getViewportWidth()/2, core->getViewportHeight()/2);
 
 	if (FlagShowTuiDateTime)
 	{
@@ -56,14 +57,14 @@ void StelUI::draw_gravity_ui(void)
 		if (FlagShowFps) os << L"  FPS " << app->fps;
 
 		glColor3f(0.5,1,0.5);
-		core->printGravity(baseFont, x-shift + 30, y-shift + 38, os.str(), 0);
+		core->printGravity(baseFont, x-shift + 38, y - 38, os.str(), 0);
 	}
 
 	if (core->getFlagHasSelected() && FlagShowTuiShortObjInfo)
 	{
 	    wstring info = core->getSelectedObjectShortInfo();
 		glColor3fv(core->getSelectedObjectInfoColor());
-		core->printGravity(baseFont, x+shift - 30, y+shift - 38, info, 0);
+		core->printGravity(baseFont, x - 38, y+shift - 38, info, 0);
 	}
 }
 

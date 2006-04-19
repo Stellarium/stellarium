@@ -93,7 +93,7 @@ void StelApp::init(void)
 			printf("The current config file is from a version too old for parameters to be imported (%s).\nIt will be replaced by the default config file.\n", version.empty() ? "<0.6.0" : version.c_str());
 			system( (string("cp -f ") + core->getDataRoot() + "/data/default_config.ini " + getConfigFile()).c_str() );
 		} else {
-			cout << _("Attempting to use an existing older config file: ") << version << endl;
+			wcout << _("Attempting to use an existing older config file.") << endl;
 		}	
 	}
 	
