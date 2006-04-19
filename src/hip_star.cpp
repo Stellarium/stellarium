@@ -111,14 +111,34 @@ wstring HipStar::getInfoString(const Navigator * nav) const
 	return oss.str();
 }
 
-wstring HipStar::getShortInfoString(const Navigator * nav) const
+wstring HipStar::getNameI18() const 
 {
+
 	if (commonNameI18!=L"" || sciName!=L"")
 	{
-		if (commonNameI18 == L"") return sciName; else return commonNameI18; 
+		if (commonNameI18 == L"") return sciName; 
+		else return commonNameI18; 
 	}
 	else 
 		return L"HP " + StelUtility::intToWstring(HP);
+}
+
+wstring HipStar::getShortInfoString(const Navigator * nav) const
+{
+	wostringstream oss;
+	
+	oss << getNameI18() << L"  ";
+
+	oss.setf(ios::fixed);
+	oss.precision(1);
+	oss << _("Magnitude ") << Mag;
+	if (variableStar) oss << _(" (Variable)");
+
+	if(Distance) {
+		oss << L"  " << Distance << _(" Light Years");
+	}
+
+	return oss.str();
 }
 
 // Read datas in binary catalog and compute x,y,z;
@@ -221,7 +241,10 @@ void HipStar::draw(void)
 	rmag*=star_scale;
 	cmag*=star_mag_scale;
 
-    glColor3fv(RGB*(cmag/MaxColorValue));
+	glColor3fv(RGB*(cmag/MaxColorValue));
+
+	glBlendFunc(GL_ONE, GL_ONE);
+
     glBegin(GL_QUADS );
         glTexCoord2i(0,0);    glVertex2f(XY[0]-rmag,XY[1]-rmag);	// Bottom left
         glTexCoord2i(1,0);    glVertex2f(XY[0]+rmag,XY[1]-rmag);	// Bottom right
@@ -252,6 +275,8 @@ void HipStar::draw_point(void)
 	cmag*=star_mag_scale;
     glColor3fv(RGB*(cmag/MaxColorValue));
 
+	glBlendFunc(GL_ONE, GL_ONE);
+
 	// rms - one pixel stars
 	glDisable(GL_TEXTURE_2D);
 	glPointSize(0.1);
@@ -265,7 +290,7 @@ bool HipStar::draw_name(void)
 {   
 	wstring starname;
 
-	starname = getShortInfoString();
+	starname = getNameI18();
 	if (starname==L"") return false;
 	// if (draw_mode == DM_NORMAL) {
 		glColor4f(RGB[0]*0.75, RGB[1]*0.75, RGB[2]*0.75, names_brightness);
@@ -273,7 +298,7 @@ bool HipStar::draw_name(void)
 	//else glColor3fv(label_color);
 
 	proj->getFlagGravityLabels() ? proj->print_gravity180(starFont, XY[0],XY[1], starname, 1, 6, -4) :
-	starFont->print(XY[0]+6,XY[1]-4, starname);
+		starFont->print(XY[0]+6,XY[1]-4, starname);
 	
 	return true;
 }
