@@ -167,7 +167,7 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
   } else if (command == "select") {
 
     // default is to deselect current object
-    stcore->selected_object=NULL;
+    stcore->unSelect();
 
     if(args["hp"]!=""){
       unsigned int hpnum;
