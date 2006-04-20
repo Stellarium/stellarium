@@ -836,13 +836,6 @@ int StelUI::handle_clic(Uint16 x, Uint16 y, S_GUI_VALUE button, S_GUI_VALUE stat
 	default: break;
 	}
 
-	// Send the mouse event to the User Interface
-	//	if (desktop->onClic((int)x, (int)y, button, state))
-	//    {
-	//        has_dragged = true;
-	//		return 1;
-	//	}
-	//	else
 	// Manage the event for the main window
 	{
 		if (state==S_GUI_PRESSED) return 1;
@@ -1089,28 +1082,6 @@ int StelUI::handle_keys(Uint16 key, S_GUI_VALUE state)
 
 		if(key==SDLK_n) app->commander->execute_command( "flag nebula_names toggle");
 
-		/*
-		if(key=='N')
-		{
-			core->setFlagNebula(!core->getFlagNebula());
-		}
-		*/
-
-		/*
-		            if (!core->nebulas->getFlagHints())
-		            {
-		               app->commander->execute_command( "flag nebula_names on");
-		            }
-		            else if (!core->FlagNebulaLongName)
-		            {
-		                 app->commander->execute_command( "flag nebula_long_names on");
-		            }
-		            else
-		            {
-		                 app->commander->execute_command( "flag nebula_names off");
-		                 app->commander->execute_command( "flag nebula_long_names off");
-		            }
-		*/
 		if(key==SDLK_g) app->commander->execute_command( "flag landscape toggle");
 		if(key==SDLK_f) app->commander->execute_command( "flag fog toggle");
 		if(key==SDLK_q) app->commander->execute_command( "flag cardinal_points toggle");
@@ -1235,20 +1206,14 @@ void StelUI::gui_update_widgets(int delta_time)
 	// update message win
 	message_win->update(delta_time);
 
-	/*
-		// To prevent a minor bug
-		if (!core->FlagShowSelectedObjectInfo || !core->selected_object) 
-			info_select_ctr->setVisible(0);
-		else 
-		if (core->selected_object)
-		{
-			info_select_ctr->setVisible(1);
-			if(core->FlagShowSelectedObjectInfo) updateInfoSelectString();
-		}
-	*/
-	// TONY
+
 	if (FlagShowSelectedObjectInfo && core->getFlagHasSelected())
+	{
+		info_select_ctr->setVisible(true);
 		updateInfoSelectString();
+	}
+	else
+		info_select_ctr->setVisible(false);
 
 	bt_flag_ctr->setVisible(FlagMenu);
 	bt_time_control_ctr->setVisible(FlagMenu);

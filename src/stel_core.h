@@ -189,10 +189,10 @@ public:
 	void setFlagSelectedObjectPointer(bool b) { object_pointer_visibility = b; }
 	
 	//! Get a multiline string describing the currently selected object
-	wstring getSelectedObjectInfo(void) const {return selected_object->getInfoString(navigation);}
+	wstring getSelectedObjectInfo(void) const {if (selected_object==NULL) return L""; else return selected_object->getInfoString(navigation);}
 
 	//! Get a 1 line string briefly describing the currently selected object
-	wstring getSelectedObjectShortInfo(void) const {return selected_object->getShortInfoString(navigation);}
+	wstring getSelectedObjectShortInfo(void) const {if (selected_object==NULL) return L""; else return selected_object->getShortInfoString(navigation);}
 
 	//! Get a color used to display info about the currently selected object
 	Vec3f getSelectedObjectInfoColor(void) const;
