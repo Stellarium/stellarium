@@ -72,6 +72,9 @@ public:
     void setTitleObservatoryName(const wstring& name);
     wstring getTitleWithAltitude(void);
     bool isInitialised(void) { return initialised; }
+    
+    void setColorScheme(const string& skinFile, const string& section);
+    
 private:
 	StelCore * core;		// The main core can be accessed because StelUI is a friend class (TODO fix that)
 	StelApp * app;			// The main application instance
@@ -98,10 +101,6 @@ private:
     int FlagSearch;
 	int FlagShowSelectedObjectInfo;
 	int FlagShowScriptBar;	
-	Vec3f GuiBaseColor;
-	Vec3f GuiTextColor;
-	Vec3f GuiBaseColorr;
-	Vec3f GuiTextColorr;
 	float BaseFontSize;
 	string BaseFontName;
 	float BaseCFontSize;

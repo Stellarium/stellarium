@@ -77,18 +77,18 @@ public:
 	string getAppLanguage() { return Translator::globalTranslator.getLocaleName(); }
 
 	//! Set flag for activating night vision mode
-	void setVisionModeNight(void) {if (!getVisionModeNight()) core->setColorScheme(getConfigFile(), "night_color");draw_mode=DM_NIGHT;}
+	void setVisionModeNight(void);
 	//! Get flag for activating night vision mode
 	bool getVisionModeNight(void) const {return draw_mode==DM_NIGHT;}
 	
 	//! Set flag for activating chart vision mode
-	void setVisionModeChart(void){if (!getVisionModeChart()) core->setColorScheme(getConfigFile(), "chart_color");draw_mode=DM_CHART; }
+	void setVisionModeChart(void);
 	//! Get flag for activating chart vision mode
 	bool getVisionModeChart(void) const {return draw_mode==DM_CHART;}
 	
 	//! Set flag for activating chart vision mode 
 	// ["color" section name used for easier backward compatibility for older configs - Rob]
-	void setVisionModeNormal(void){if (!getVisionModeNormal()) core->setColorScheme(getConfigFile(), "color");draw_mode=DM_NORMAL;}	
+	void setVisionModeNormal(void);
 	//! Get flag for activating chart vision mode
 	bool getVisionModeNormal(void) const {return draw_mode==DM_NORMAL;}
 
