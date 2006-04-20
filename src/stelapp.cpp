@@ -103,10 +103,6 @@ void StelApp::init(void)
 	
 	core->init(conf);
 	
-	setVisionModeNormal();
-	if (conf.get_boolean("viewing:flag_chart")) setVisionModeChart();
-	if (conf.get_boolean("viewing:flag_night")) setVisionModeNight();
-	
 	maxfps 				= conf.get_double ("video","maximum_fps",10000);
 	string appLocaleName = conf.get_str("localization", "app_locale", "system");
 	setAppLanguage(appLocaleName);
@@ -137,8 +133,12 @@ void StelApp::init(void)
 	
 	// initialisation of the User Interface
 	ui->init(conf);
-
 	ui->init_tui();
+	
+	// Initialisation of the color scheme
+	setVisionModeNormal();
+	if (conf.get_boolean("viewing:flag_chart")) setVisionModeChart();
+	if (conf.get_boolean("viewing:flag_night")) setVisionModeNight();
 	
 	// play startup script, if available
 	if(scripts) scripts->play_startup_script();
@@ -339,3 +339,37 @@ void StelApp::restoreFrom2DfullscreenProjection(void) const
     glMatrixMode(GL_MODELVIEW);
     glPopMatrix();	
 }
+
+//! Set flag for activating night vision mode
+void StelApp::setVisionModeNight(void)
+{
+	if (!getVisionModeNight())
+	{
+		core->setColorScheme(getConfigFile(), "night_color");
+		ui->setColorScheme(getConfigFile(), "night_color");
+	}
+	draw_mode=DM_NIGHT;
+}
+
+//! Set flag for activating chart vision mode
+void StelApp::setVisionModeChart(void)
+{
+	if (!getVisionModeChart())
+	{
+		core->setColorScheme(getConfigFile(), "chart_color");
+		ui->setColorScheme(getConfigFile(), "chart_color");
+	}
+	draw_mode=DM_CHART;
+}
+
+//! Set flag for activating chart vision mode 
+// ["color" section name used for easier backward compatibility for older configs - Rob]
+void StelApp::setVisionModeNormal(void)
+{
+	if (!getVisionModeNormal())
+	{
+		core->setColorScheme(getConfigFile(), "color");
+		ui->setColorScheme(getConfigFile(), "color");
+	}
+	draw_mode=DM_NORMAL;
+}	

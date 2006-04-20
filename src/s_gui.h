@@ -221,7 +221,7 @@ namespace s_gui
 		void setInFront(bool b) { moveToFront = b; } // signals this component to move to front
 		void setOpaque(bool b) { painter.setOpaque(b); }
 		unsigned int getType(void) { return type; }
-		virtual void setColorScheme(void);
+		virtual void setColorScheme(const s_color& baseColor, const s_color& textColor);
    		virtual void setGUIColorSchemeMember(bool _b) {GUIColorSchemeMember = _b;}
     protected:
         s_vec2i pos;
@@ -275,7 +275,6 @@ namespace s_gui
         virtual void setFocus(bool _focus);
    		void setGUIColorSchemeMember(bool _b);
 		void setColorScheme(const s_color& _baseColor, const s_color& _textColor);
-		virtual void setColorScheme(void);
     protected:
         std::list<Component*> childs;
     };
@@ -387,7 +386,7 @@ namespace s_gui
 			Justification _j = JUSTIFY_CENTER, bool _bright = false);
 		virtual ~LabeledButton();
         virtual void draw(void);
-		virtual void setColorScheme(void);
+		virtual void setColorScheme(const s_color& baseColor, const s_color& textColor);
 		virtual void setVisible(bool _visible);
 		virtual void setFont(s_font* f) {Button::setFont(f); label.setFont(f);}
 		virtual void setTextColor(const s_color& c) {Button::setTextColor(c); label.setTextColor(c);}
@@ -453,7 +452,7 @@ namespace s_gui
 		virtual void setOnKeyCallback(const callback<void>& c) {onKeyCallback = c;}
 		virtual void setOnAutoCompleteCallback(const callback<void>& c) {onAutoCompleteCallback = c;}
         virtual void draw(void);
-		virtual void setColorScheme(void);
+		virtual void setColorScheme(const s_color& baseColor, const s_color& textColor);
 		virtual void setFont(s_font* f) {Button::setFont(f); label.setFont(f);}
 		virtual void setTextColor(const s_color& c) {Button::setTextColor(c); label.setTextColor(c);}
 		virtual void setPainter(const Painter& p) {Button::setPainter(p); label.setPainter(p);}
@@ -783,7 +782,7 @@ namespace s_gui
 		void addTab(Component* c, const wstring& name);
 		virtual void draw(void);
 		virtual bool onClic(int, int, S_GUI_VALUE, S_GUI_VALUE);
-		virtual void setColorScheme(void);
+		virtual void setColorScheme(const s_color& baseColor, const s_color& textColor);
 	protected:
 		int getHeadersSize(void);
 		void select(TabHeader*);

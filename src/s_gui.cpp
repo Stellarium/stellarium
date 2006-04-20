@@ -400,8 +400,6 @@ void Painter::drawLine(const s_vec2i& pos1, const s_vec2i& pos2, const s_color& 
 // Mother class for every s_gui object.
 ////////////////////////////////////////////////////////////////////////////////
 
-s_color Component::guiBaseColor = s_color(0.3,0.4,0.7);
-s_color Component::guiTextColor = s_color(0.7,0.8,0.9);
 bool Component::focusing = false;
 
 Component::Component() :
@@ -576,39 +574,25 @@ void Container::setFocus(bool _focus)
 	focusing = _focus;
 }
 
-void Container::setColorScheme(const s_color& _baseColor, const s_color& _textColor)
-{
-	if (!desktop || !GUIColorSchemeMember) return;
-
-	guiBaseColor = _baseColor;
-	guiTextColor = _textColor;
-	defaultPainter.setTextColor(guiTextColor);
-	defaultPainter.setBaseColor(guiBaseColor);
-	painter.setTextColor(guiTextColor);
-	painter.setBaseColor(guiBaseColor);
-
-	setColorScheme();
-}
-
-void Container::setColorScheme(void)
+void Container::setColorScheme(const s_color& baseColor, const s_color& textColor)
 {
 	if (!GUIColorSchemeMember) return;
 
     list<Component*>::iterator iter = childs.begin();
 	while (iter != childs.end())
 	{
-		(*iter)->setColorScheme();
+		(*iter)->setColorScheme(baseColor, textColor);
 		iter++;
 	}
-	painter.setTextColor(guiTextColor);
-	painter.setBaseColor(guiBaseColor);
+	painter.setTextColor(textColor);
+	painter.setBaseColor(baseColor);
 }
 
-void Component::setColorScheme(void)
+void Component::setColorScheme(const s_color& baseColor, const s_color& textColor)
 {
 	if (!GUIColorSchemeMember) return;
-	painter.setTextColor(guiTextColor);
-	painter.setBaseColor(guiBaseColor);
+	painter.setTextColor(textColor);
+	painter.setBaseColor(baseColor);
 }
 
 void Container::draw(void)
@@ -1156,11 +1140,11 @@ bool EditBox::onClic(int x, int y, S_GUI_VALUE bt, S_GUI_VALUE state)
 	return Button::onClic(x,y,bt,state);
 }
 
-void EditBox::setColorScheme(void)
+void EditBox::setColorScheme(const s_color& baseColor, const s_color& textColor)
 {
 	if (!GUIColorSchemeMember) return;
-	label.setColorScheme();
-	Component::setColorScheme();
+	label.setColorScheme(baseColor, textColor);
+	Component::setColorScheme(baseColor, textColor);
 }
 
 void EditBox::draw(void)
@@ -1774,11 +1758,11 @@ LabeledButton::~LabeledButton()
 {
 }
 
-void LabeledButton::setColorScheme(void)
+void LabeledButton::setColorScheme(const s_color& baseColor, const s_color& textColor)
 {
 	if (!GUIColorSchemeMember) return;
-	label.setColorScheme();
-	Component::setColorScheme();
+	label.setColorScheme(baseColor, textColor);
+	Component::setColorScheme(baseColor, textColor);
 }
 
 void LabeledButton::draw(void)
@@ -2348,17 +2332,17 @@ void TabContainer::draw(void)
 	Container::draw();
 }
 
-void TabContainer::setColorScheme(void)
+void TabContainer::setColorScheme(const s_color& baseColor, const s_color& textColor)
 {
 	if (!GUIColorSchemeMember) return;
 
 	list<TabHeader*>::iterator iter = headers.begin();
 	while (iter != headers.end())
 	{
-		(*iter)->setColorScheme();
+		(*iter)->setColorScheme(baseColor, textColor);
 		iter++;
 	}
-	Container::setColorScheme();
+	Container::setColorScheme(baseColor, textColor);
 }
 
 int TabContainer::getHeadersSize(void)

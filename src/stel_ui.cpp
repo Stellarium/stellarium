@@ -117,10 +117,6 @@ void StelUI::init(const InitParser& conf)
 	FlagShowAppName		= conf.get_boolean("gui:flag_show_appname");
 	FlagShowFov			= conf.get_boolean("gui:flag_show_fov");
 	FlagShowSelectedObjectInfo = conf.get_boolean("gui:flag_show_selected_object_info");
-	GuiBaseColor		= StelUtility::str_to_vec3f(conf.get_str("color", "gui:gui_base_color", "0.3,0.4,0.7").c_str());
-	GuiTextColor		= StelUtility::str_to_vec3f(conf.get_str("color", "gui:gui_text_color", "0.7,0.8,0.9").c_str());
-	GuiBaseColorr		= StelUtility::str_to_vec3f(conf.get_str("color", "gui:gui_base_colorr", "0.7,0.2,0.1").c_str());
-	GuiTextColorr		= StelUtility::str_to_vec3f(conf.get_str("color", "gui:gui_text_colorr", "0.9,0.4,0.2").c_str());
 	BaseFontSize		= conf.get_double ("gui","base_font_size",15);
 	BaseFontName        = conf.get_str("gui", "base_font_name", "DejaVuSans.ttf");
 	FlagShowScriptBar	= conf.get_boolean("gui","flag_show_script_bar",false);
@@ -166,7 +162,7 @@ void StelUI::init(const InitParser& conf)
 	tex_down = new s_texture("down.png");
 
 	// Set default Painter
-	Painter p(baseTex, baseFont, GuiBaseColor, GuiTextColor);
+	Painter p(baseTex, baseFont, s_color(0.5, 0.5, 0.5), s_color(1., 1., 1.));
 	Component::setDefaultPainter(p);
 
 	Component::initScissor(core->getViewportWidth(), core->getViewportHeight());
@@ -222,9 +218,6 @@ void StelUI::init(const InitParser& conf)
 	initialised = true;
 
 	setTitleObservatoryName(getTitleWithAltitude());
-
-	if (app->getVisionModeNight()) desktop->setColorScheme(GuiBaseColorr, GuiTextColorr);
-	else desktop->setColorScheme(GuiBaseColor, GuiTextColor);
 }
 
 
@@ -549,12 +542,10 @@ void StelUI::cb(void)
 	{
 		if (bt_flag_night->getState())
 		{
-			desktop->setColorScheme(GuiBaseColor, GuiTextColor);
 			app->setVisionModeChart();
 		}
 		else
 		{
-			desktop->setColorScheme(GuiBaseColor, GuiTextColor);
 			app->setVisionModeNormal();
 		}
 	}
@@ -563,11 +554,9 @@ void StelUI::cb(void)
 		if (bt_flag_night->getState())
 		{
 			app->setVisionModeNight();
-			desktop->setColorScheme(GuiBaseColorr, GuiTextColorr);
 		}
 		else
 		{
-			desktop->setColorScheme(GuiBaseColor, GuiTextColor);
 			app->setVisionModeNormal();
 		}
 	}
@@ -1314,4 +1303,17 @@ wstring StelUI::getTitleWithAltitude(void)
 	return core->getObservatory().getHomePlanetNameI18() +
         L", " + core->getObservatory().get_name() +
         L" @ " + StelUtility::doubleToWstring(core->getObservatory().get_altitude()) + L"m";
+}
+
+void StelUI::setColorScheme(const string& skinFile, const string& section)
+{
+	if (!desktop) return;
+
+	InitParser conf;
+	conf.load(skinFile);
+	
+	s_color GuiBaseColor		= StelUtility::str_to_vec3f(conf.get_str(section, "gui_base_color", "0.3,0.4,0.7"));
+	s_color GuiTextColor		= StelUtility::str_to_vec3f(conf.get_str(section, "gui_text_color", "0.7,0.8,0.9"));
+	
+	desktop->setColorScheme(GuiBaseColor, GuiTextColor);
 }
