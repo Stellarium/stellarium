@@ -50,7 +50,10 @@ public:
 	vector<wstring> getNames(void) { return lstCommonNames; }
 	unsigned int getCommonNameHP(wstring _commonname);
 	void set_label_color(const Vec3f& c) {HipStar::label_color = c;}
+	Vec3f getLabelColor() {return HipStar::label_color;}
+
 	void set_circle_color(const Vec3f& c) {HipStar::circle_color = c;}
+	Vec3f getCircleColor() {return HipStar::circle_color;}
 	
 	/** Set display flag for Stars */
 	void setFlagStars(bool b) {starsFader=b;}

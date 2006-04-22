@@ -59,7 +59,8 @@ public:
     Mat4d getRotLocalToEquatorial(double jd) const;
     Mat4d getRotEquatorialToVsop87(void) const;
 
-	void save(const string& file, const string& section) const;
+	void save(const string& file, const string& section);
+	void setConf(InitParser &conf, const string& section);
 	void load(const string& file, const string& section);
 	void load(const InitParser& conf, const string& section);
 

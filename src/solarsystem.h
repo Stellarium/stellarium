@@ -54,7 +54,8 @@ public:
 	void setLabelColor(const Vec3f& c) {Planet::set_label_color(c);}
 	const Vec3f& getLabelColor(void) const {return Planet::getLabelColor();}
 	void setOrbitColor(const Vec3f& c) {Planet::set_orbit_color(c);}
-  
+	Vec3f getOrbitColor() {return Planet::getOrbitColor();}
+ 
 	// Compute the position for every elements of the solar system.
 	void computePositions(double date);
 
@@ -100,6 +101,7 @@ public:
 	void startTrails(bool b);
 	
 	void setTrailColor(const Vec3f& c)  {Planet::set_trail_color(c);}
+	Vec3f getTrailColor()  {return Planet::getTrailColor();}
 	void updateTrails(const Navigator* nav);
 	
 	//! Set/Get base planets display scaling factor 

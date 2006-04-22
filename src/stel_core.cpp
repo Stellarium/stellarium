@@ -743,6 +743,7 @@ void StelCore::setSkyLanguage(const std::string& newSkyLocaleName)
 }
 
 
+// Please keep saveCurrentSettings up to date with any new color settings added here
 void StelCore::setColorScheme(const string& skinFile, const string& section)
 {
 	InitParser conf;
@@ -1059,31 +1060,34 @@ void StelCore::saveCurrentConfig(const string& confFile)
 	conf.set_double("stars:star_twinkle_amount", getStarTwinkleAmount());
 	//	conf.set_double("stars:star_limiting_mag", hip_stars->get_limiting_mag());
 
+	// Color section
+	conf.set_str    ("color:azimuthal_color", StelUtility::vec3f_to_str(azi_grid->getColor()));
+	conf.set_str    ("color:equatorial_color", StelUtility::vec3f_to_str(equ_grid->getColor()));
+	conf.set_str    ("color:equator_color", StelUtility::vec3f_to_str(equator_line->getColor()));
+	conf.set_str    ("color:ecliptic_color", StelUtility::vec3f_to_str(ecliptic_line->getColor()));
+	conf.set_str    ("color:meridian_color", StelUtility::vec3f_to_str(meridian_line->getColor()));
+	conf.set_str    ("color:const_lines_color", StelUtility::vec3f_to_str(asterisms->getLineColor()));
+	conf.set_str    ("color:const_names_color", StelUtility::vec3f_to_str(asterisms->getLabelColor()));
+	conf.set_str    ("color:const_boundary_color", StelUtility::vec3f_to_str(asterisms->getBoundaryColor()));
+	conf.set_str	("color:nebula_label_color", StelUtility::vec3f_to_str(nebulas->getLabelColor()));
+	conf.set_str	("color:nebula_circle_color", StelUtility::vec3f_to_str(nebulas->getCircleColor()));
+	conf.set_str    ("color:cardinal_color", StelUtility::vec3f_to_str(getColorCardinalPoints()));
+	conf.set_str    ("color:planet_names_color", StelUtility::vec3f_to_str(ssystem->getLabelColor()));
+	conf.set_str    ("color:planet_orbits_color", StelUtility::vec3f_to_str(ssystem->getOrbitColor()));
+	conf.set_str    ("color:object_trails_color", StelUtility::vec3f_to_str(ssystem->getTrailColor()));
+	// NEW - are these used?
+	conf.set_str    ("color:star_label_color", StelUtility::vec3f_to_str(hip_stars->getLabelColor()));
+	conf.set_str    ("color:star_circle_color", StelUtility::vec3f_to_str(hip_stars->getCircleColor()));
+
+
 	/*  TODO STILL
 
-	conf.set_boolean("gui:flag_show_selected_object_info", FlagShowSelectedObjectInfo);
-	conf.set_str	("gui:gui_base_color", vec3f_to_str(GuiBaseColor));
-	conf.set_str	("gui:gui_text_color", vec3f_to_str(GuiTextColor));
+	conf.set_str	("gui:gui_base_color", StelUtility::vec3f_to_str(GuiBaseColor));
+	conf.set_str	("gui:gui_text_color", StelUtility::vec3f_to_str(GuiTextColor));
 	conf.set_double ("gui:base_font_size", BaseFontSize);
-	conf.set_boolean("gui:flag_show_script_bar",FlagShowScriptBar);
 	conf.set_double("gui:mouse_cursor_timeout",MouseCursorTimeout);
 	
-	// Colors
-	conf.set_str    ("color:azimuthal_color", vec3f_to_str(AzimuthalColor));
-	conf.set_str    ("color:equatorial_color", vec3f_to_str(EquatorialColor));
-	conf.set_str    ("color:equator_color", vec3f_to_str(EquatorColor));
-	conf.set_str    ("color:ecliptic_color", vec3f_to_str(EclipticColor));
-	conf.set_str    ("color:const_lines_color", vec3f_to_str(ConstLinesColor));
-	conf.set_str    ("color:const_names_color", vec3f_to_str(ConstNamesColor));
-	conf.set_str	("color:nebula_label_color", vec3f_to_str(NebulaLabelColor));
-	conf.set_str	("color:nebula_circle_color", vec3f_to_str(NebulaCircleColor));
-	conf.set_str    ("color:cardinal_color", vec3f_to_str(CardinalColor));
-	conf.set_str    ("color:planet_names_color", vec3f_to_str(PlanetNamesColor));
-	conf.set_str    ("color:planet_orbits_color", vec3f_to_str(PlanetOrbitsColor));
-	conf.set_str    ("color:object_trails_color", vec3f_to_str(ObjectTrailsColor));
-
 	// Text ui section
-	conf.set_boolean("tui:flag_enable_tui_menu", FlagEnableTuiMenu);
 	conf.set_boolean("tui:flag_show_gravity_ui", FlagShowGravityUi);
 	conf.set_boolean("tui:flag_show_tui_datetime", FlagShowTuiDateTime);
 	conf.set_boolean("tui:flag_show_tui_short_obj_info", FlagShowTuiShortObjInfo);
@@ -1091,25 +1095,10 @@ void StelCore::saveCurrentConfig(const string& confFile)
 	// Navigation section
 	conf.set_double ("navigation:preset_sky_time", PresetSkyTime);
 	conf.set_str	("navigation:startup_time_mode", StartupTimeMode);
-	conf.set_boolean("navigation:flag_enable_zoom_keys", FlagEnableZoomKeys);
 	conf.set_boolean("navigation:flag_manual_zoom", FlagManualZoom);
-	conf.set_boolean("navigation:flag_enable_move_keys", FlagEnableMoveKeys);
-	conf.set_boolean("navigation:flag_enable_move_mouse", FlagEnableMoveMouse);
-	conf.set_double ("navigation:init_fov", InitFov);
-	conf.set_str	("navigation:init_view_pos", vec3f_to_str(InitViewPos));
 	conf.set_double ("navigation:auto_move_duration", auto_move_duration);
-	conf.set_boolean("navigation:flag_utc_time", FlagUTC_Time);
-	conf.set_int    ("navigation:mouse_zoom", MouseZoom);
 	conf.set_double ("navigation:move_speed", move_speed);
 	conf.set_double ("navigation:zoom_speed", zoom_speed);
-
-	switch (navigation->get_viewing_mode())
-	{
-		case VIEW_HORIZON : tmpstr="horizon";	break;
-		case VIEW_EQUATOR : tmpstr="equator";		break;
-		default : tmpstr="horizon";
-	}
-	conf.set_str	("navigation:viewing_mode",tmpstr);
 
 	conf.set_boolean("astro:flag_bright_nebulae", getFlagBrightNebulae());
 	conf.set_boolean("astro:flag_object_trails", getFlagObjectTrails());
@@ -1129,7 +1118,11 @@ void StelCore::saveCurrentConfig(const string& confFile)
 	conf.set_boolean("astro:flag_milky_way", getFlagMilkyWay());
 	conf.set_double("astro:milky_way_intensity", getMilkyWayIntensity());
 
+	// Get landscape and other observatory info
+	// TODO: observator should already know what section to save in
+	observatory->setConf(conf, "init_location");
 
 	conf.save(confFile);
+
 }
 
