@@ -83,7 +83,8 @@ void StelApp::init(void)
 
 		std::istringstream istr(version);
 		char tmp;
-		int v1, v2;
+		int v1 =0;
+		int v2 =0;
 		istr >> v1 >> tmp >> v2;
 
 		// Config versions less than 0.6.0 are not supported, otherwise we will try to use it
@@ -92,6 +93,8 @@ void StelApp::init(void)
 			// The config file is too old to try an importation
 			printf("The current config file is from a version too old for parameters to be imported (%s).\nIt will be replaced by the default config file.\n", version.empty() ? "<0.6.0" : version.c_str());
 			system( (string("cp -f ") + core->getDataRoot() + "/data/default_config.ini " + getConfigFile()).c_str() );
+			conf.load(configDir + "config.ini");  // Read new config!
+
 		} else {
 			wcout << _("Attempting to use an existing older config file.") << endl;
 		}	
