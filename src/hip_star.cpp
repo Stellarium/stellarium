@@ -116,7 +116,9 @@ wstring HipStar::getNameI18() const
 
 	if (commonNameI18!=L"" || sciName!=L"")
 	{
-		if (commonNameI18 == L"") return sciName; 
+		// TODO: ISSUE Sci name shouldn't show with other cultures
+		// Tie to culture or make option? Rob
+		if (commonNameI18 == L"") return L""; // return sciName; 
 		else return commonNameI18; 
 	}
 	else 
