@@ -78,6 +78,8 @@ public:
 	
 	//! Set the current sky culture from the passed directory
 	void setSkyCultureDir(const string& culturedir);
+
+	string getSkyCultureDir() {return skyCultureDir;}
 		
 	//! Get the current sky culture I18 name
 	wstring getSkyCulture() const {return skyloc->directoryToSkyCultureI18(skyCultureDir);}
@@ -530,6 +532,10 @@ public:
 
 	//! Return the current image manager which display users images
 	ImageMgr* getImageMgr(void) const {return script_images;}
+
+	//! Save all current settings to config
+	void saveCurrentConfig(const string& confFile);
+
 	
 private:
 	//! Find in a "clever" way an object from its equatorial position
@@ -586,6 +592,8 @@ private:
 	int FlagManualZoom;					// Define whether auto zoom can go further
 	Vec3f chartColor;					// ?
 	float auto_move_duration;			// Duration of movement for the auto move to a selected objectin seconds
+
+	bool firstTime;                     // For init to track if reload or first time setup
 };
 
 #endif // _STEL_CORE_H_
