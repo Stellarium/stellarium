@@ -153,12 +153,23 @@ void Observator::set_landscape_name(string s) {
 	landscape_name = s;
 }
 
-void Observator::save(const string& file, const string& section) const
+void Observator::save(const string& file, const string& section)
 {
 	printf("Saving location %s to file %s\n",StelUtility::wstringToString(name).c_str(), file.c_str());
 
 	InitParser conf;
 	conf.load(file);
+
+	setConf(conf,section);
+
+	conf.save(file);
+
+}
+
+
+// change settings but don't write to files
+void Observator::setConf(InitParser & conf, const string& section) 
+{
 
 	conf.set_str(section + ":name", StelUtility::wstringToString(name));
 	conf.set_str(section + ":home_planet", planet->getEnglishName());
@@ -190,7 +201,6 @@ void Observator::save(const string& file, const string& section) const
 	conf.set_str(section + ":time_display_format", get_time_format_str());
 	conf.set_str(section + ":date_display_format", get_date_format_str());
 
-	conf.save(file);
 }
 
 void Observator::set_custom_tz_name(const string& tzname)

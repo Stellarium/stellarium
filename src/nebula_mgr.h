@@ -61,6 +61,7 @@ public:
 	const Vec3f& getLabelColor(void) const {return Nebula::label_color;}
 	
 	void set_circle_color(const Vec3f& c) {Nebula::circle_color = c;}
+	const Vec3f& getCircleColor(void) const {return Nebula::circle_color;}
 
 	// Return a stl vector containing the nebulas located inside the lim_fov circle around position v
 	vector<StelObject*> search_around(Vec3d v, double lim_fov);

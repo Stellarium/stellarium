@@ -46,6 +46,7 @@ public:
 	void draw(const Projector* prj) const;
 	void set_font(float font_size, const string& font_name);
 	void set_color(const Vec3f& c) {color = c;}
+	const Vec3f& getColor() {return color;}
 	void update(int delta_time) {fader.update(delta_time);}
 	void set_fade_duration(float duration) {fader.set_duration((int)(duration*1000.f));}
 	void setFlagshow(bool b){fader = b;}
@@ -84,6 +85,7 @@ public:
     virtual ~SkyLine();
 	void draw(const Projector* prj) const;
 	void set_color(const Vec3f& c) {color = c;}
+	const Vec3f& getColor() {return color;}
 	void update(int delta_time) {fader.update(delta_time);}
 	void set_fade_duration(float duration) {fader.set_duration((int)(duration*1000.f));}
 	void setFlagshow(bool b){fader = b;}

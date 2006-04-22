@@ -175,6 +175,7 @@ public:
 	static const Vec3f& getLabelColor(void) {return label_color;}
 	
 	static void set_orbit_color(const Vec3f& oc) {orbit_color = oc;}
+	static const Vec3f& getOrbitColor() {return orbit_color;}
 
 	// draw orbital path of Planet
 	void draw_orbit(const Navigator * nav, const Projector* prj);
@@ -182,6 +183,7 @@ public:
 	void update_trail(const Navigator* nav);
 	void draw_trail(const Navigator * nav, const Projector* prj);
 	static void set_trail_color(const Vec3f& c) { trail_color = c; }
+	static const Vec3f& getTrailColor() { return trail_color; }
 	
 	//! Start/stop accumulating new trail data (clear old data)
 	void startTrail(bool b);
