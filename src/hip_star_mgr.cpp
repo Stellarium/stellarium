@@ -151,11 +151,14 @@ void HipStarMgr::load_data(const string& hipCatFile, LoadingBar& lb)
 // Load common names from file 
 int HipStarMgr::load_common_names(const string& commonNameFile)
 {
+	cout << "Load star names from " << commonNameFile << endl;
+
 	// clear existing names (would be faster if they were in separate array
 	// since relatively few are named)
     for (int i=0; i<starArraySize; ++i)
     {
 		StarArray[i].englishCommonName = "";
+		StarArray[i].commonNameI18 = L"";
     }
 	
     FILE *cnFile;

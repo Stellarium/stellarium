@@ -723,6 +723,14 @@ void StelCore::setSkyLanguage(const std::string& newSkyLocaleName)
 	ssystem->translateNames(skyTranslator);
 	nebulas->translateNames(skyTranslator);
 	
+	// NOTE: hip_stars uses files instead of translator to default empty
+	if( newSkyLocaleName == "system_default" ) {
+		hip_stars->load_common_names( getDataDir() + "star_names.fab");
+	} else {
+		hip_stars->load_common_names( getDataDir() + "star_names." + newSkyLocaleName + ".fab");
+	}
+
+
 	// refresh EditBox with new names
 	//ui->setStarAutoComplete(hip_stars->getNames());
 	//ui->setConstellationAutoComplete(asterisms->getNames());
