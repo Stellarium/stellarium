@@ -402,9 +402,13 @@ void StelUI::tui_cb_settimedisplayformat(void)
 void StelUI::tui_cb_admin_load_default(void)
 {
 	//	app->commander->execute_command("configuration action reload");
-	InitParser conf;
-	conf.load(app->getConfigFile());
-	core->init(conf);
+
+	//InitParser conf;
+	//conf.load(app->getConfigFile());
+	//core->init(conf);
+
+	// is this kosher?
+	app->init();
 }
 
 // Save to default configuration
@@ -415,7 +419,7 @@ void StelUI::tui_cb_admin_save_default(void)
 	// TODO:
 	//core->observatory->save(app->getConfigFile(), "init_location");
 
-	core->saveCurrentConfig(app->getConfigFile());
+	app->saveCurrentConfig(app->getConfigFile());
 
 	system( ( core->getDataDir() + "script_save_config " ).c_str() );
 }

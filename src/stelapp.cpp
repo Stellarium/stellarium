@@ -376,3 +376,131 @@ void StelApp::setVisionModeNormal(void)
 	}
 	draw_mode=DM_NORMAL;
 }	
+
+double StelApp::getMouseCursorTimeout() 
+{
+	return ui->getMouseCursorTimeout(); 
+}
+
+// For use by TUI - saves all current settings
+void StelApp::saveCurrentConfig(const string& confFile)
+{
+
+	// TODO: Review for new config settings and correct master setting locations
+
+	// No longer resaves everything, just the most use settable options
+
+    cout << "Saving configuration file " << confFile << " ..." << endl;
+	InitParser conf;
+	conf.load(confFile);
+
+	// Main section
+	conf.set_str	("main:version", string(VERSION));
+
+	conf.set_int    ("video:horizontal_offset", core->getViewportHorizontalOffset());
+	conf.set_int    ("video:vertical_offset", core->getViewportVerticalOffset());
+
+	// localization section
+	conf.set_str    ("localization:sky_culture", core->getSkyCultureDir());
+	conf.set_str    ("localization:sky_locale", core->getSkyLanguage());
+
+	// viewing section
+	conf.set_boolean("viewing:flag_constellation_drawing", core->getFlagConstellationLines());
+	conf.set_boolean("viewing:flag_constellation_name", core->getFlagConstellationNames());
+	conf.set_boolean("viewing:flag_constellation_art", core->getFlagConstellationArt());
+	conf.set_boolean("viewing:flag_constellation_boundaries", core->getFlagConstellationBoundaries());
+	conf.set_boolean("viewing:flag_constellation_pick", core->getFlagConstellationIsolateSelected());
+	conf.set_double("viewing:moon_scale", core->getMoonScale());
+	//conf.set_boolean("viewing:use_common_names", FlagUseCommonNames);
+	conf.set_boolean("viewing:flag_equatorial_grid", core->getFlagEquatorGrid());
+	conf.set_boolean("viewing:flag_azimutal_grid", core->getFlagAzimutalGrid());
+	conf.set_boolean("viewing:flag_equator_line", core->getFlagEquatorLine());
+	conf.set_boolean("viewing:flag_ecliptic_line", core->getFlagEclipticLine());
+	conf.set_boolean("viewing:flag_cardinal_points", core->getFlagCardinalsPoints());
+	conf.set_boolean("viewing:flag_meridian_line", core->getFlagMeridianLine());
+	conf.set_boolean("viewing:flag_moon_scaled", core->getFlagMoonScaled());
+	conf.set_double ("viewing:constellation_art_intensity", core->getConstellationArtIntensity());
+	conf.set_double ("viewing:constellation_art_fade_duration", core->getConstellationArtFadeDuration());
+
+	// Landscape section
+	conf.set_boolean("landscape:flag_landscape", core->getFlagLandscape());
+	conf.set_boolean("landscape:flag_atmosphere", core->getFlagAtmosphere());
+	conf.set_boolean("landscape:flag_fog", core->getFlagFog());
+	//	conf.set_double ("viewing:atmosphere_fade_duration", core->getAtmosphereFadeDuration());
+
+	// Star section
+	conf.set_double ("stars:star_scale", core->getStarScale());
+	conf.set_double ("stars:star_mag_scale", core->getStarMagScale());
+	conf.set_boolean("stars:flag_point_star", core->getFlagPointStar());
+	conf.set_double("stars:max_mag_star_name", core->getMaxMagStarName());
+	conf.set_boolean("stars:flag_star_twinkle", core->getFlagStarTwinkle());
+	conf.set_double("stars:star_twinkle_amount", core->getStarTwinkleAmount());
+	//	conf.set_double("stars:star_limiting_mag", hip_stars->core->get_limiting_mag());
+
+	// Color section
+	conf.set_str    ("color:azimuthal_color", StelUtility::vec3f_to_str(core->getColorAzimutalGrid()));
+	conf.set_str    ("color:equatorial_color", StelUtility::vec3f_to_str(core->getColorEquatorGrid()));
+	conf.set_str    ("color:equator_color", StelUtility::vec3f_to_str(core->getColorEquatorLine()));
+	conf.set_str    ("color:ecliptic_color", StelUtility::vec3f_to_str(core->getColorEclipticLine()));
+	conf.set_str    ("color:meridian_color", StelUtility::vec3f_to_str(core->getColorMeridianLine()));
+	conf.set_str    ("color:const_lines_color", StelUtility::vec3f_to_str(core->getColorConstellationLine()));
+	conf.set_str    ("color:const_names_color", StelUtility::vec3f_to_str(core->getColorConstellationNames()));
+	conf.set_str    ("color:const_boundary_color", StelUtility::vec3f_to_str(core->getColorConstellationBoundaries()));
+	conf.set_str	("color:nebula_label_color", StelUtility::vec3f_to_str(core->getColorNebulaLabels()));
+	conf.set_str	("color:nebula_circle_color", StelUtility::vec3f_to_str(core->getColorNebulaCircle()));
+	conf.set_str    ("color:cardinal_color", StelUtility::vec3f_to_str(core->getColorCardinalPoints()));
+	conf.set_str    ("color:planet_names_color", StelUtility::vec3f_to_str(core->getColorPlanetsNames()));
+	conf.set_str    ("color:planet_orbits_color", StelUtility::vec3f_to_str(core->getColorPlanetsOrbits()));
+	conf.set_str    ("color:object_trails_color", StelUtility::vec3f_to_str(core->getColorPlanetsTrails()));
+	// NEW - are these used?
+	conf.set_str    ("color:star_label_color", StelUtility::vec3f_to_str(core->getColorStarNames()));
+	conf.set_str    ("color:star_circle_color", StelUtility::vec3f_to_str(core->getColorStarCircles()));
+
+	// gui section
+	conf.set_double("gui:mouse_cursor_timeout",getMouseCursorTimeout());
+
+	/*  TODO STILL
+
+	// conf.set_str	("gui:gui_base_color", StelUtility::vec3f_to_str(GuiBaseColor));
+	// conf.set_str	("gui:gui_text_color", StelUtility::vec3f_to_str(GuiTextColor));
+	// conf.set_double ("gui:base_font_size", BaseFontSize);
+
+	
+	// Text ui section
+	conf.set_boolean("tui:flag_show_gravity_ui", FlagShowGravityUi);
+	conf.set_boolean("tui:flag_show_tui_datetime", FlagShowTuiDateTime);
+	conf.set_boolean("tui:flag_show_tui_short_obj_info", FlagShowTuiShortObjInfo);
+
+	// Navigation section
+	conf.set_double ("navigation:preset_sky_time", PresetSkyTime);
+	conf.set_str	("navigation:startup_time_mode", StartupTimeMode);
+	conf.set_boolean("navigation:flag_manual_zoom", FlagManualZoom);
+	conf.set_double ("navigation:auto_move_duration", auto_move_duration);
+	conf.set_double ("navigation:zoom_speed", zoom_speed);
+
+
+	conf.set_boolean("astro:flag_object_trails", core->getFlagObjectTrails());
+
+	*/
+
+	// Astro section
+	conf.set_boolean("astro:flag_bright_nebulae", core->getFlagBrightNebulae());
+	conf.set_boolean("astro:flag_stars", core->getFlagStars());
+	conf.set_boolean("astro:flag_star_name", core->getFlagStarName());
+	conf.set_boolean("astro:flag_nebula", core->getFlagNebula());
+	conf.set_boolean("astro:flag_nebula_name", core->getFlagNebulaHints());
+	conf.set_double("astro:max_mag_nebula_name", core->getNebulaMaxMagHints());
+	conf.set_boolean("astro:flag_planets", core->getFlagPlanets());
+	conf.set_boolean("astro:flag_planets_hints", core->getFlagPlanetsHints());
+	conf.set_boolean("astro:flag_planets_orbits", core->getFlagPlanetsOrbits());
+
+	conf.set_boolean("astro:flag_milky_way", core->getFlagMilkyWay());
+	conf.set_double("astro:milky_way_intensity", core->getMilkyWayIntensity());
+
+	// Get landscape and other observatory info
+	// TODO: observator should already know what section to save in
+	(core->getObservatory()).setConf(conf, "init_location");
+
+	conf.save(confFile);
+
+}

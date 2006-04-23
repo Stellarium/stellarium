@@ -220,6 +220,7 @@ public:
 	void setFlagConstellationBoundaries(bool b) {asterisms->setFlagBoundaries(b);}
 	//! Get display flag of constellation boundaries
 	bool getFlagConstellationBoundaries(void) {return asterisms->getFlagBoundaries();}
+	Vec3f getColorConstellationBoundaries(void) const {return asterisms->getBoundaryColor();}
 	
 	//! Set constellation art intensity
 	void setConstellationArtIntensity(float f) {asterisms->setArtIntensity(f);}
@@ -306,6 +307,10 @@ public:
 	//! Get stars limiting display magnitude 
 	float getStarLimitingMag(void) const {return hip_stars->getStarLimitingMag();}
 	
+
+	Vec3f getColorStarNames(void) const {return hip_stars->getLabelColor();}			
+	Vec3f getColorStarCircles(void) const {return hip_stars->getCircleColor();}			
+
 	///////////////////////////////////////////////////////////////////////////////////////
 	// Planets flags
 	//! Set flag for displaying Planets
@@ -327,9 +332,13 @@ public:
 	void setFlagPlanetsOrbits(bool b) {ssystem->setFlagOrbits(b);}
 	//! Get flag for displaying Planets Orbits
 	bool getFlagPlanetsOrbits(void) const {return ssystem->getFlagOrbits();}			
+
+	Vec3f getColorPlanetsOrbits(void) const {return ssystem->getOrbitColor();}			
+	Vec3f getColorPlanetsNames(void) const {return ssystem->getLabelColor();}			
 	
 	//! Start/stop displaying planets Trails
 	void startPlanetsTrails(bool b) {ssystem->startTrails(b);}
+	Vec3f getColorPlanetsTrails(void) const {return ssystem->getTrailColor();}			
 
 	//! Set base planets display scaling factor 
 	void setPlanetsScale(float f) {ssystem->setScale(f);}
@@ -360,26 +369,32 @@ public:
 	void setFlagAzimutalGrid(bool b) {azi_grid->setFlagshow(b);}
 	//! Get flag for displaying Azimutal Grid
 	bool getFlagAzimutalGrid(void) const {return azi_grid->getFlagshow();}
+	Vec3f getColorAzimutalGrid(void) const {return azi_grid->getColor();}
 
 	//! Set flag for displaying Equatorial Grid
 	void setFlagEquatorGrid(bool b) {equ_grid->setFlagshow(b);}
 	//! Get flag for displaying Equatorial Grid
 	bool getFlagEquatorGrid(void) const {return equ_grid->getFlagshow();}
-	
+	Vec3f getColorEquatorGrid(void) const {return equ_grid->getColor();}
+
 	//! Set flag for displaying Equatorial Line
 	void setFlagEquatorLine(bool b) {equator_line->setFlagshow(b);}
 	//! Get flag for displaying Equatorial Line
 	bool getFlagEquatorLine(void) const {return equator_line->getFlagshow();}	
-	
+	Vec3f getColorEquatorLine(void) const {return equator_line->getColor();}
+
 	//! Set flag for displaying Ecliptic Line
 	void setFlagEclipticLine(bool b) {ecliptic_line->setFlagshow(b);}
 	//! Get flag for displaying Ecliptic Line
 	bool getFlagEclipticLine(void) const {return ecliptic_line->getFlagshow();}	
+	Vec3f getColorEclipticLine(void) const {return ecliptic_line->getColor();}
+
 		
 	//! Set flag for displaying Meridian Line
 	void setFlagMeridianLine(bool b) {meridian_line->setFlagshow(b);}
 	//! Get flag for displaying Meridian Line
 	bool getFlagMeridianLine(void) const {return meridian_line->getFlagshow();}	
+	Vec3f getColorMeridianLine(void) const {return meridian_line->getColor();}
 	
 	//! Set flag for displaying Cardinals Points
 	void setFlagCardinalsPoints(bool b) {cardinals_points->setFlagShow(b);}
@@ -505,15 +520,17 @@ public:
 	float getNebulaCircleScale(void) const {return nebulas->getNebulaCircleScale();}
 	
 	//! Set flag for displaying Nebulae as bright
-	void setFlagNebulaBright(bool b) {nebulas->setFlagBright(b);}
+	void setFlagBrightNebulae(bool b) {nebulas->setFlagBright(b);}
 	//! Get flag for displaying Nebulae as brigth
-	bool getFlagNebulaBright(void) const {return nebulas->getFlagBright();}	
+	bool getFlagBrightNebulae(void) const {return nebulas->getFlagBright();}	
 	
 	//! Set maximum magnitude at which nebulae hints are displayed
 	void setNebulaMaxMagHints(float f) {nebulas->setMaxMagHints(f);}
 	//! Get maximum magnitude at which nebulae hints are displayed
 	float getNebulaMaxMagHints(void) const {return nebulas->getMaxMagHints();}
 	
+	Vec3f getColorNebulaLabels(void) const {return nebulas->getLabelColor();}
+	Vec3f getColorNebulaCircle(void) const {return nebulas->getCircleColor();}
 	
 	///////////////////////////////////////////////////////////////////////////////////////
 	// Observator
@@ -533,10 +550,7 @@ public:
 	//! Return the current image manager which display users images
 	ImageMgr* getImageMgr(void) const {return script_images;}
 
-	//! Save all current settings to config
-	void saveCurrentConfig(const string& confFile);
 
-	
 private:
 	//! Find in a "clever" way an object from its equatorial position
 	StelObject * clever_find(const Vec3d& pos) const;

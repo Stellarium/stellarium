@@ -74,6 +74,8 @@ public:
     bool isInitialised(void) { return initialised; }
     
     void setColorScheme(const string& skinFile, const string& section);
+	double getMouseCursorTimeout() { return MouseCursorTimeout; }
+
     
 private:
 	StelCore * core;		// The main core can be accessed because StelUI is a friend class (TODO fix that)
