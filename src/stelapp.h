@@ -97,6 +97,11 @@ public:
 
 	//! Return full path to config file
 	const string getConfigFile(void) const {return getConfigDir() + "config.ini";}
+
+	// for use by TUI
+	void saveCurrentConfig(const string& confFile);
+
+	double getMouseCursorTimeout();
 	
 private:
 	//! Screen size
