@@ -38,25 +38,27 @@ RotationElements::RotationElements() : period(1.), offset(0.), epoch(J2000),
 {}
 
 Planet::Planet(Planet *parent,
-               const string& _englishName,
-               int _flagHalo,
-               int _flag_lighting,
-               double _radius,
+               const string& englishName,
+               int flagHalo,
+               int flag_lighting,
+               double radius,
                double oblateness,
-               Vec3f _color,
-               float _albedo,
+               Vec3f color,
+               float albedo,
                const string& tex_map_name,
                const string& tex_halo_name,
-               pos_func_type _coord_func,
-			   bool _hidden) :
-		englishName(_englishName), flagHalo(_flagHalo),
-        flag_lighting(_flag_lighting),
-        radius(_radius), one_minus_oblateness(1.0-oblateness),
-        color(_color), albedo(_albedo), axis_rotation(0.),
+               pos_func_type coord_func,
+               OsulatingFunctType *osculating_func,
+			   bool hidden) :
+		englishName(englishName), flagHalo(flagHalo),
+        flag_lighting(flag_lighting),
+        radius(radius), one_minus_oblateness(1.0-oblateness),
+        color(color), albedo(albedo), axis_rotation(0.),
         tex_map(NULL), tex_halo(NULL), tex_big_halo(NULL), rings(NULL),
         sphere_scale(1.f),
         lastJD(J2000), last_orbitJD(0), deltaJD(JD_SECOND), orbit_cached(0),
-        coord_func(_coord_func), parent(parent), hidden(_hidden)
+        coord_func(coord_func), osculating_func(osculating_func),
+        parent(parent), hidden(hidden)
 {
 	if (parent) parent->satellites.push_back(this);
 	ecliptic_pos=Vec3d(0.,0.,0.);
@@ -173,7 +175,7 @@ Vec3d Planet::get_earth_equ_pos(const Navigator * nav) const
 
 // Compute the position in the parent Planet coordinate system
 // Actually call the provided function to compute the ecliptical position
-void Planet::compute_position(double date)
+void Planet::compute_position(const double date)
 {
 
 	if (delta_orbitJD > 0 && (fabs(last_orbitJD-date)>delta_orbitJD || !orbit_cached))
@@ -210,7 +212,11 @@ void Planet::compute_position(double date)
 					// date increments between points will not be completely constant though
 
 					compute_trans_matrix(calc_date);
-					coord_func(calc_date, ecliptic_pos);
+                    if (osculating_func) {
+                      (*osculating_func)(date,calc_date,ecliptic_pos);
+                    } else {
+                      coord_func(calc_date, ecliptic_pos);
+                    }
 					orbit[d] = get_heliocentric_ecliptic_pos();
 				}
 				else
@@ -233,7 +239,11 @@ void Planet::compute_position(double date)
 					calc_date = new_date + (d-ORBIT_SEGMENTS/2)*date_increment;
 
 					compute_trans_matrix(calc_date);
-					coord_func(calc_date, ecliptic_pos);
+                    if (osculating_func) {
+                      (*osculating_func)(date,calc_date,ecliptic_pos);
+                    } else {
+                      coord_func(calc_date, ecliptic_pos);
+                    }
 					orbit[d] = get_heliocentric_ecliptic_pos();
 				}
 				else
@@ -254,12 +264,16 @@ void Planet::compute_position(double date)
 			{
 				calc_date = date + (d-ORBIT_SEGMENTS/2)*date_increment;
 				compute_trans_matrix(calc_date);
-				coord_func(calc_date, ecliptic_pos);
+                if (osculating_func) {
+                  (*osculating_func)(date,calc_date,ecliptic_pos);
+                } else {
+                  coord_func(calc_date, ecliptic_pos);
+                }
 				orbit[d] = get_heliocentric_ecliptic_pos();
 			}
 
 			last_orbitJD = date;
-			orbit_cached = 1;
+			if (!osculating_func) orbit_cached = 1;
 		}
 
 
@@ -577,6 +591,13 @@ void Planet::draw_halo(const Navigator* nav, const Projector* prj, const ToneRep
 	}
 	else
 	{
+//  try this one if you want to see a bright moon:
+//if (rmag>4.f) {
+//  rmag=4.f+2.f*sqrtf(1.f+rmag-4.f)-2.f;
+//  if (rmag>8.f) {
+//    rmag=8.f+2.f*sqrtf(1.f+rmag-8.f)-2.f;
+//  }
+//}
 		if (rmag>5.f)
 		{
 			rmag=5.f+sqrt(rmag-5)/6;

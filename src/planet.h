@@ -35,6 +35,8 @@
 // The callback type for the external position computation function
 typedef boost::callback<void, double, double*> pos_func_type;
 
+typedef void (OsulatingFunctType)(double jd0,double jd,double xyz[3]);
+
 // epoch J2000: 12 UT on 1 Jan 2000
 #define J2000 2451545.0
 #define ORBIT_SEGMENTS 72
@@ -81,16 +83,17 @@ class Planet : public StelObject
 public:
 	Planet(Planet *parent,
            const string& englishName,
-           int _flagHalo,
-           int _flag_lighting,
-           double _radius,
+           int flagHalo,
+           int flag_lighting,
+           double radius,
            double oblateness,
-           Vec3f _color,
-           float _albedo,
+           Vec3f color,
+           float albedo,
            const string& tex_map_name,
            const string& tex_halo_name,
            pos_func_type _coord_func,
-		   bool _hidden);
+           OsulatingFunctType *osculating_func,
+		   bool hidden);
 
     virtual ~Planet();
 
@@ -259,6 +262,8 @@ protected:
 
 	// The callback for the calculation of the equatorial rect heliocentric position at time JD.
 	pos_func_type coord_func;
+	OsulatingFunctType *const osculating_func;
+
 	const Planet *const parent;				// Planet parent i.e. sun for earth
 	list<Planet *> satellites;		// satellites of the Planet
 
