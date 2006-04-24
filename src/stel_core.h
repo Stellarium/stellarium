@@ -550,6 +550,9 @@ public:
 	//! Return the current image manager which display users images
 	ImageMgr* getImageMgr(void) const {return script_images;}
 
+	double getZoomSpeed() { return zoom_speed; }
+	float getAutoMoveDuration() { return auto_move_duration; }
+
 
 private:
 	//! Find in a "clever" way an object from its equatorial position
