@@ -827,7 +827,7 @@ bool Button::onClic(int x, int y, S_GUI_VALUE bt, S_GUI_VALUE state)
 	if (!visible) return false;
 
 	CallbackComponent::onClic(x,y,bt,state);
-	if (state==S_GUI_PRESSED && bt==S_GUI_MOUSE_LEFT && isIn(x, y)) return 1;
+	if (bt==S_GUI_MOUSE_LEFT && isIn(x, y)) return 1;
 	return 0;
 }
 

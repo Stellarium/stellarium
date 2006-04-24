@@ -167,10 +167,10 @@ private:
 
 	// Tile control buttons
 	FilledContainer * bt_time_control_ctr;
-	LabeledButton * bt_dec_time_speed;
-	LabeledButton * bt_real_time_speed;
-	LabeledButton * bt_inc_time_speed;
-	LabeledButton * bt_time_now;
+	FlagButton * bt_dec_time_speed;
+	FlagButton * bt_real_time_speed;
+	FlagButton * bt_inc_time_speed;
+	FlagButton * bt_time_now;
 	Component* createTimeControlButtons(void);
 	void bt_time_control_ctrOnMouseInOut(void);
 	void bt_dec_time_speed_cb(void);
