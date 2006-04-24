@@ -13,7 +13,6 @@
 
 #include "viewport_distorter.h"
 
-
 StelApp::StelApp(const string& CDIR, const string& LDIR, const string& DATA_ROOT) : 
 		frame(0), timefr(0), timeBase(0), fps(0), maxfps(10000.f),  FlagTimePause(0), 
 		is_mouse_moving_horiz(false), is_mouse_moving_vert(false), draw_mode(StelApp::DM_NONE)
@@ -149,6 +148,8 @@ void StelApp::init(void)
     if (distorter == 0) {
       setViewPortDistorterType(conf.get_str("video","distorter","none"));
     }
+    
+    core->setTimeNow();
 }
 
 void StelApp::update(int delta_time)

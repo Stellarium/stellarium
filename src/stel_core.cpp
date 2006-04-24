@@ -999,9 +999,27 @@ bool StelCore::setHomePlanet(string planet) {
 
 
 // For use by TUI
-wstring StelCore::getPlanetHashString() {
-	
+wstring StelCore::getPlanetHashString()
+{
 	return ssystem->getPlanetHashString();
-
 }
 
+//! Set stellarium time to current real world time
+void StelCore::setTimeNow()
+{
+	navigation->set_JDay(get_julian_from_sys());
+}
+
+//! Get wether the current stellarium time is the real world time
+bool StelCore::getIsTimeNow(void) const
+{
+	// cache last time to prevent to much slow system call
+	static double lastJD = getJDay();
+	static bool previousResult = (fabs(getJDay()-get_julian_from_sys())<JD_SECOND);
+	if (fabs(lastJD-getJDay())>JD_SECOND/4)
+	{
+		lastJD = getJDay();
+		previousResult = (fabs(getJDay()-get_julian_from_sys())<JD_SECOND);
+	}
+	return previousResult;
+}
