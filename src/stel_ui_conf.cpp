@@ -36,7 +36,7 @@ Component* StelUI::createConfigWindow(void)
 {
 	config_win = new StdBtWin(_("Configuration"));
 	config_win->setOpaque(opaqueGUI);
-	config_win->reshape(300,200,400,390);
+	config_win->reshape(300,200,500,450);
 	config_win->setVisible(FlagConfig);
 
 	config_tab_ctr = new TabContainer();
@@ -409,6 +409,42 @@ Component* StelUI::createConfigWindow(void)
 	tab_landscapes->addComponent(lbllandscape1);
 	tab_landscapes->addComponent(lbllandscape2);
 
+
+
+
+	// Landscapes option
+	FilledContainer* tab_language = new FilledContainer();
+	tab_language->setSize(config_tab_ctr->getSize());
+
+	x=10; y=10;
+	Label * lbllanguage = new Label(wstring(L"\u2022 ")+_("Choose application language :"));
+	lbllanguage->setPos(x, y);
+	tab_language->addComponent(lbllanguage);
+
+	x=50; y+=24;
+
+	language_lb = new ListBox(6);
+	language_lb->setPos(x,y);
+	language_lb->setSizex(200);
+	language_lb->addItemList(StelUtility::stringToWstring(Translator::getAvailableLanguagesCodes(LOCALEDIR)));
+	language_lb->setOnChangeCallback(callback<void>(this, &StelUI::setAppLanguage));
+	tab_language->addComponent(language_lb);
+	
+	x=10; y+=language_lb->getSizey() + 24;
+	
+	Label * lbllanguage2 = new Label(wstring(L"\u2022 ")+_("Choose sky language :"));
+	lbllanguage2->setPos(x, y);
+	tab_language->addComponent(lbllanguage2);
+
+	x=50; y+=24;
+
+	languageSky_lb = new ListBox(6);
+	languageSky_lb->setPos(x,y);
+	languageSky_lb->setSizex(200);
+	languageSky_lb->addItemList(StelUtility::stringToWstring(Translator::getAvailableLanguagesCodes(LOCALEDIR)));
+	languageSky_lb->setOnChangeCallback(callback<void>(this, &StelUI::setSkyLanguage));
+	tab_language->addComponent(languageSky_lb);
+
 	// Global window
 	config_tab_ctr->setTexture(flipBaseTex);
 	config_tab_ctr->addTab(tab_time, _("Date & Time"));
@@ -416,10 +452,21 @@ Component* StelUI::createConfigWindow(void)
 	config_tab_ctr->addTab(tab_landscapes, _("Landscapes"));
 	config_tab_ctr->addTab(tab_video, _("Video"));
 	config_tab_ctr->addTab(tab_render, _("Rendering"));
+	config_tab_ctr->addTab(tab_language, _("Language"));
 	config_win->addComponent(config_tab_ctr);
 	config_win->setOnHideBtCallback(callback<void>(this, &StelUI::config_win_hideBtCallback));
 
 	return config_win;
+}
+
+void StelUI::setSkyLanguage(void)
+{
+	core->setSkyLanguage(StelUtility::wstringToString(languageSky_lb->getCurrent()));
+}
+
+void StelUI::setAppLanguage(void)
+{
+	app->setAppLanguage(StelUtility::wstringToString(language_lb->getCurrent()));
 }
 
 void StelUI::load_cities(const string & fileName)
