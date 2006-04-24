@@ -239,12 +239,12 @@ void StelUI::show_message(wstring _message, int _time_out)
 ////////////////////////////////////////////////////////////////////////////////
 Component* StelUI::createTopBar(void)
 {
-	top_bar_date_lbl = new Label(L"-", baseFont);	top_bar_date_lbl->setPos(2,2);
-	top_bar_hour_lbl = new Label(L"-", baseFont);	top_bar_hour_lbl->setPos(110,2);
-	top_bar_fps_lbl = new Label(L"-", baseFont);	top_bar_fps_lbl->setPos(core->getViewportWidth()-100,2);
-	top_bar_fov_lbl = new Label(L"-", baseFont);	top_bar_fov_lbl->setPos(core->getViewportWidth()-220,2);
+	top_bar_date_lbl = new Label(L"-", baseFont);	top_bar_date_lbl->setPos(2,1);
+	top_bar_hour_lbl = new Label(L"-", baseFont);	top_bar_hour_lbl->setPos(110,1);
+	top_bar_fps_lbl = new Label(L"-", baseFont);	top_bar_fps_lbl->setPos(core->getViewportWidth()-100,1);
+	top_bar_fov_lbl = new Label(L"-", baseFont);	top_bar_fov_lbl->setPos(core->getViewportWidth()-220,1);
 	top_bar_appName_lbl = new Label(StelUtility::stringToWstring(APP_NAME), baseFont);
-	top_bar_appName_lbl->setPos(core->getViewportWidth()/2-top_bar_appName_lbl->getSizex()/2,2);
+	top_bar_appName_lbl->setPos(core->getViewportWidth()/2-top_bar_appName_lbl->getSizex()/2,1);
 	top_bar_ctr = new FilledContainer();
 	top_bar_ctr->reshape(0,0,core->getViewportWidth(),(int)(baseFont->getLineHeight()+0.5)+5);
 	top_bar_ctr->addComponent(top_bar_date_lbl);
@@ -1264,7 +1264,7 @@ void StelUI::setTitleObservatoryName(const wstring& name)
 	{
 		top_bar_appName_lbl->setLabel(StelUtility::stringToWstring(APP_NAME) + L" (" + name + L")");
 	}
-	top_bar_appName_lbl->setPos(core->getViewportWidth()/2-top_bar_appName_lbl->getSizex()/2,2);
+	top_bar_appName_lbl->setPos(core->getViewportWidth()/2-top_bar_appName_lbl->getSizex()/2,1);
 }
 
 wstring StelUI::getTitleWithAltitude(void)
