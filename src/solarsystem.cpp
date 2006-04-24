@@ -390,7 +390,7 @@ void SolarSystem::draw(Projector * prj, const Navigator * nav, const ToneReprodu
 			(*iter)->draw(prj, nav, eye, flag_point, 1);
 
 		}
-		else if (*iter!=nav->getHomePlanet()) (*iter)->draw(prj, nav, eye, flag_point, 0);
+		else (*iter)->draw(prj, nav, eye, flag_point, 0);
 
 		++iter;
 	}

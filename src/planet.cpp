@@ -452,6 +452,14 @@ void Planet::draw(Projector* prj, const Navigator * nav, const ToneReproductor* 
 	// This removed totally the Planet shaking bug!!!
 	mat = nav->get_helio_to_eye_mat() * mat;
 
+	if(this == nav->getHomePlanet()) {
+
+		// TODO: visual problems with this
+		if(rings) rings->draw(prj, mat);
+		return;
+	}
+
+
 	// Compute the 2D position and check if in the screen
 	float screen_sz = get_on_screen_size(prj, nav);
 	float viewport_left = prj->getViewportPosX();
@@ -747,6 +755,11 @@ void Ring::draw(const Projector* prj, const Mat4d& mat)
 	glEnable(GL_BLEND);
 
 	glBindTexture (GL_TEXTURE_2D, tex->getID());
+
+	// TODO: radial texture would look much better
+	prj->sDisk(radius, 100, 20, mat, 0);	
+
+	/* old way
 	double r=radius;
 	glBegin(GL_QUADS);
 	glTexCoord2f(0,0); prj->sVertex3( -r,-r, 0., mat);	// Bottom left
@@ -754,6 +767,8 @@ void Ring::draw(const Projector* prj, const Mat4d& mat)
 	glTexCoord2f(1,1); prj->sVertex3(r, r, 0., mat);	// Top right
 	glTexCoord2f(0,1); prj->sVertex3(-r,r, 0., mat);	// Top left
 	glEnd ();
+	*/
+
 	glPopMatrix();
 }
 
