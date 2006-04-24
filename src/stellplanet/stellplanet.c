@@ -1,3 +1,4 @@
+#include "vsop87.h"
 #include "elp82b.h"
 #include "marssat.h"
 #include "l1.h"
@@ -8,28 +9,49 @@
  * Calculate planets rectangular heliocentric ecliptical coordinates
  * for given julian day. Values are in UA.
  * params : Julian day, rect coords */
-void get_mercury_helio_coords(double JD, double * X, double * Y, double * Z);
-void get_venus_helio_coords(double JD, double * X, double * Y, double * Z);
-void get_earth_helio_coords(double JD, double * X, double * Y, double * Z);
-void get_mars_helio_coords(double JD, double * X, double * Y, double * Z);
-void get_jupiter_helio_coords(double JD, double * X, double * Y, double * Z);
-void get_saturn_helio_coords(double JD, double * X, double * Y, double * Z);
-void get_uranus_helio_coords(double JD, double * X, double * Y, double * Z);
-void get_neptune_helio_coords(double JD, double * X, double * Y, double * Z);
-void get_pluto_helio_coords(double JD, double * X, double * Y, double * Z);
+void get_pluto_helio_coords(double jd, double * X, double * Y, double * Z);
+
+void get_pluto_helio_coordsv(double jd,double xyz[3])
+  {get_pluto_helio_coords(jd, &xyz[0], &xyz[1], &xyz[2]);}
+
 
 // Return 0 of course...
+void get_sun_helio_coordsv(double jd,double xyz[3])
+  {xyz[0]=0.; xyz[1]=0.; xyz[2]=0.;}
 
-void get_sun_helio_coordsv(double JD, double* XYZ) {XYZ[0]=0.; XYZ[1]=0.; XYZ[2]=0.;}
-void get_mercury_helio_coordsv(double JD, double* XYZ) {get_mercury_helio_coords(JD, &XYZ[0], &XYZ[1], &XYZ[2]);}
-void get_venus_helio_coordsv(double JD, double* XYZ) {get_venus_helio_coords(JD, &XYZ[0], &XYZ[1], &XYZ[2]);}
-void get_earth_helio_coordsv(double JD, double* XYZ) {get_earth_helio_coords(JD, &XYZ[0], &XYZ[1], &XYZ[2]);}
-void get_mars_helio_coordsv(double JD, double* XYZ) {get_mars_helio_coords(JD, &XYZ[0], &XYZ[1], &XYZ[2]);}
-void get_jupiter_helio_coordsv(double JD, double* XYZ) {get_jupiter_helio_coords(JD, &XYZ[0], &XYZ[1], &XYZ[2]);}
-void get_saturn_helio_coordsv(double JD, double* XYZ) {get_saturn_helio_coords(JD, &XYZ[0], &XYZ[1], &XYZ[2]);}
-void get_uranus_helio_coordsv(double JD, double* XYZ) {get_uranus_helio_coords(JD, &XYZ[0], &XYZ[1], &XYZ[2]);}
-void get_neptune_helio_coordsv(double JD, double* XYZ) {get_neptune_helio_coords(JD, &XYZ[0], &XYZ[1], &XYZ[2]);}
-void get_pluto_helio_coordsv(double JD, double* XYZ) {get_pluto_helio_coords(JD, &XYZ[0], &XYZ[1], &XYZ[2]);}
+void get_mercury_helio_coordsv(double jd,double xyz[3])
+  {GetVsop87Coor(jd,VSOP87_MERCURY,xyz);}
+void get_venus_helio_coordsv(double jd,double xyz[3])
+  {GetVsop87Coor(jd,VSOP87_VENUS,xyz);}
+void get_earth_helio_coordsv(double jd,double xyz[3])
+  {GetVsop87Coor(jd,VSOP87_EMB,xyz);}
+void get_mars_helio_coordsv(double jd,double xyz[3])
+  {GetVsop87Coor(jd,VSOP87_MARS,xyz);}
+void get_jupiter_helio_coordsv(double jd,double xyz[3])
+  {GetVsop87Coor(jd,VSOP87_JUPITER,xyz);}
+void get_saturn_helio_coordsv(double jd,double xyz[3])
+  {GetVsop87Coor(jd,VSOP87_SATURN,xyz);}
+void get_uranus_helio_coordsv(double jd,double xyz[3])
+  {GetVsop87Coor(jd,VSOP87_URANUS,xyz);}
+void get_neptune_helio_coordsv(double jd,double xyz[3])
+  {GetVsop87Coor(jd,VSOP87_NEPTUNE,xyz);}
+
+void get_mercury_helio_osculating_coords(double jd0,double jd,double xyz[3])
+  {GetVsop87OsculatingCoor(jd0,jd,VSOP87_MERCURY,xyz);}
+void get_venus_helio_osculating_coords(double jd0,double jd,double xyz[3])
+  {GetVsop87OsculatingCoor(jd0,jd,VSOP87_VENUS,xyz);}
+void get_earth_helio_osculating_coords(double jd0,double jd,double xyz[3])
+  {GetVsop87OsculatingCoor(jd0,jd,VSOP87_EMB,xyz);}
+void get_mars_helio_osculating_coords(double jd0,double jd,double xyz[3])
+  {GetVsop87OsculatingCoor(jd0,jd,VSOP87_MARS,xyz);}
+void get_jupiter_helio_osculating_coords(double jd0,double jd,double xyz[3])
+  {GetVsop87OsculatingCoor(jd0,jd,VSOP87_JUPITER,xyz);}
+void get_saturn_helio_osculating_coords(double jd0,double jd,double xyz[3])
+  {GetVsop87OsculatingCoor(jd0,jd,VSOP87_SATURN,xyz);}
+void get_uranus_helio_osculating_coords(double jd0,double jd,double xyz[3])
+  {GetVsop87OsculatingCoor(jd0,jd,VSOP87_URANUS,xyz);}
+void get_neptune_helio_osculating_coords(double jd0,double jd,double xyz[3])
+  {GetVsop87OsculatingCoor(jd0,jd,VSOP87_NEPTUNE,xyz);}
 
 /* Calculate the rectangular geocentric lunar coordinates to the inertial mean
  * ecliptic and equinox of J2000.
@@ -37,49 +59,49 @@ void get_pluto_helio_coordsv(double JD, double* XYZ) {get_pluto_helio_coords(JD,
  * This function is based upon the Lunar Solution ELP2000-82B by
  * Michelle Chapront-Touze and Jean Chapront of the Bureau des Longitudes,
  * Paris. ELP 2000-82B theory
- * param JD Julian day, rect pos */
-void get_lunar_parent_coordsv(double JD, double* XYZ)
-  {GetElp82bCoor(JD,XYZ);}
+ * param jd Julian day, rect pos */
+void get_lunar_parent_coordsv(double jd,double xyz[3])
+  {GetElp82bCoor(jd,xyz);}
 
-void get_phobos_parent_coordsv(double JD, double* XYZ)
-  {GetMarsSatCoor(JD,MARS_SAT_PHOBOS,XYZ);}
-void get_deimos_parent_coordsv(double JD, double* XYZ)
-  {GetMarsSatCoor(JD,MARS_SAT_DEIMOS,XYZ);}
+void get_phobos_parent_coordsv(double jd,double xyz[3])
+  {GetMarsSatCoor(jd,MARS_SAT_PHOBOS,xyz);}
+void get_deimos_parent_coordsv(double jd,double xyz[3])
+  {GetMarsSatCoor(jd,MARS_SAT_DEIMOS,xyz);}
 
-void get_io_parent_coordsv(double JD, double* XYZ)
-  {GetL1Coor(JD,L1_IO,XYZ);}
-void get_europa_parent_coordsv(double JD, double* XYZ)
-  {GetL1Coor(JD,L1_EUROPA,XYZ);}
-void get_ganymede_parent_coordsv(double JD, double* XYZ)
-  {GetL1Coor(JD,L1_GANYMEDE,XYZ);}
-void get_callisto_parent_coordsv(double JD, double* XYZ)
-  {GetL1Coor(JD,L1_CALLISTO,XYZ);}
+void get_io_parent_coordsv(double jd,double xyz[3])
+  {GetL1Coor(jd,L1_IO,xyz);}
+void get_europa_parent_coordsv(double jd,double xyz[3])
+  {GetL1Coor(jd,L1_EUROPA,xyz);}
+void get_ganymede_parent_coordsv(double jd,double xyz[3])
+  {GetL1Coor(jd,L1_GANYMEDE,xyz);}
+void get_callisto_parent_coordsv(double jd,double xyz[3])
+  {GetL1Coor(jd,L1_CALLISTO,xyz);}
 
-void get_mimas_parent_coordsv(double JD, double* XYZ)
-  {GetTass17Coor(JD,TASS17_MIMAS,XYZ);}
-void get_enceladus_parent_coordsv(double JD, double* XYZ)
-  {GetTass17Coor(JD,TASS17_ENCELADUS,XYZ);}
-void get_tethys_parent_coordsv(double JD, double* XYZ)
-  {GetTass17Coor(JD,TASS17_TETHYS,XYZ);}
-void get_dione_parent_coordsv(double JD, double* XYZ)
-  {GetTass17Coor(JD,TASS17_DIONE,XYZ);}
-void get_rhea_parent_coordsv(double JD, double* XYZ)
-  {GetTass17Coor(JD,TASS17_RHEA,XYZ);}
-void get_titan_parent_coordsv(double JD, double* XYZ)
-  {GetTass17Coor(JD,TASS17_TITAN,XYZ);}
-void get_hyperion_parent_coordsv(double JD, double* XYZ)
-  {GetTass17Coor(JD,TASS17_HYPERION,XYZ);}
-void get_iapetus_parent_coordsv(double JD, double* XYZ)
-  {GetTass17Coor(JD,TASS17_IAPETUS,XYZ);}
+void get_mimas_parent_coordsv(double jd,double xyz[3])
+  {GetTass17Coor(jd,TASS17_MIMAS,xyz);}
+void get_enceladus_parent_coordsv(double jd,double xyz[3])
+  {GetTass17Coor(jd,TASS17_ENCELADUS,xyz);}
+void get_tethys_parent_coordsv(double jd,double xyz[3])
+  {GetTass17Coor(jd,TASS17_TETHYS,xyz);}
+void get_dione_parent_coordsv(double jd,double xyz[3])
+  {GetTass17Coor(jd,TASS17_DIONE,xyz);}
+void get_rhea_parent_coordsv(double jd,double xyz[3])
+  {GetTass17Coor(jd,TASS17_RHEA,xyz);}
+void get_titan_parent_coordsv(double jd,double xyz[3])
+  {GetTass17Coor(jd,TASS17_TITAN,xyz);}
+void get_hyperion_parent_coordsv(double jd,double xyz[3])
+  {GetTass17Coor(jd,TASS17_HYPERION,xyz);}
+void get_iapetus_parent_coordsv(double jd,double xyz[3])
+  {GetTass17Coor(jd,TASS17_IAPETUS,xyz);}
 
-void get_miranda_parent_coordsv(double JD, double* XYZ)
-  {GetGust86Coor(JD,GUST86_MIRANDA,XYZ);}
-void get_ariel_parent_coordsv(double JD, double* XYZ)
-  {GetGust86Coor(JD,GUST86_ARIEL,XYZ);}
-void get_umbriel_parent_coordsv(double JD, double* XYZ)
-  {GetGust86Coor(JD,GUST86_UMBRIEL,XYZ);}
-void get_titania_parent_coordsv(double JD, double* XYZ)
-  {GetGust86Coor(JD,GUST86_TITANIA,XYZ);}
-void get_oberon_parent_coordsv(double JD, double* XYZ)
-  {GetGust86Coor(JD,GUST86_OBERON,XYZ);}
+void get_miranda_parent_coordsv(double jd,double xyz[3])
+  {GetGust86Coor(jd,GUST86_MIRANDA,xyz);}
+void get_ariel_parent_coordsv(double jd,double xyz[3])
+  {GetGust86Coor(jd,GUST86_ARIEL,xyz);}
+void get_umbriel_parent_coordsv(double jd,double xyz[3])
+  {GetGust86Coor(jd,GUST86_UMBRIEL,xyz);}
+void get_titania_parent_coordsv(double jd,double xyz[3])
+  {GetGust86Coor(jd,GUST86_TITANIA,xyz);}
+void get_oberon_parent_coordsv(double jd,double xyz[3])
+  {GetGust86Coor(jd,GUST86_OBERON,xyz);}
 
