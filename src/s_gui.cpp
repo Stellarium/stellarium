@@ -474,6 +474,9 @@ bool CallbackComponent::onClic(int x, int y, S_GUI_VALUE bt, S_GUI_VALUE state)
 	if (state==S_GUI_PRESSED && bt==S_GUI_MOUSE_LEFT && isIn(x, y))
 	{
 		pressed = true;
+	}
+	if (state==S_GUI_RELEASED && bt==S_GUI_MOUSE_LEFT && isIn(x, y))
+	{
 		if (!onPressCallback.empty()) RUNCALLBACK(onPressCallback);
 	}
 	return false;
@@ -872,7 +875,7 @@ void CheckBox::draw()
 bool CheckBox::onClic(int x, int y, S_GUI_VALUE bt, S_GUI_VALUE state)
 {
 	if (!visible) return false;
-	if (state==S_GUI_PRESSED && bt==S_GUI_MOUSE_LEFT && isIn(x, y))
+	if (state==S_GUI_RELEASED && bt==S_GUI_MOUSE_LEFT && isIn(x, y))
 		isChecked = !isChecked;
 	return Button::onClic(x,y,bt,state);
 }
@@ -921,7 +924,7 @@ FlagButton::~FlagButton()
 void FlagButton::draw()
 {
 	if (!visible) return;
-	if (isChecked)
+	if (isChecked || pressed)
 	{
 		if (specific_tex) painter.drawSquareFill(pos, size, painter.getBaseColor()*2, specific_tex);
 		else painter.drawSquareFill(pos, size, painter.getBaseColor()*1.5);

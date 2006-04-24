@@ -835,14 +835,14 @@ int StelUI::handle_clic(Uint16 x, Uint16 y, S_GUI_VALUE button, S_GUI_VALUE stat
 
 	// Manage the event for the main window
 	{
-		if (state==S_GUI_PRESSED) return 1;
+		//if (state==S_GUI_PRESSED) return 1;
 		// Deselect the selected object
-		if (button==S_GUI_MOUSE_RIGHT)
+		if (button==S_GUI_MOUSE_RIGHT && state==S_GUI_RELEASED)
 		{
 			app->commander->execute_command("select");
 			return 1;
 		}
-		if (button==S_GUI_MOUSE_MIDDLE)
+		if (button==S_GUI_MOUSE_MIDDLE && state==S_GUI_RELEASED)
 		{
 			if (core->getFlagHasSelected())
 			{
@@ -850,7 +850,7 @@ int StelUI::handle_clic(Uint16 x, Uint16 y, S_GUI_VALUE button, S_GUI_VALUE stat
 				core->setFlagTraking(true);
 			}
 		}
-		if (button==S_GUI_MOUSE_LEFT && !has_dragged)
+		if (button==S_GUI_MOUSE_LEFT && state==S_GUI_RELEASED && !has_dragged)
 		{
 			// CTRL + left clic = right clic for 1 button mouse
 			if (SDL_GetModState() & KMOD_CTRL)
