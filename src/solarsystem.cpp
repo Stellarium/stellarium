@@ -104,6 +104,7 @@ void SolarSystem::load(const string& planetfile)
 		const string funcname = pd.get_str(secname, "coord_func");
 
 		pos_func_type posfunc;
+		OsulatingFunctType *osculating_func = 0;
 		EllipticalOrbit* orb = NULL;
 
 		if (funcname=="ell_orbit")
@@ -148,20 +149,28 @@ void SolarSystem::load(const string& planetfile)
 		if (funcname=="sun_special")
 			posfunc = pos_func_type(get_sun_helio_coordsv);
 
-		if (funcname=="mercury_special")
+		if (funcname=="mercury_special") {
 			posfunc = pos_func_type(get_mercury_helio_coordsv);
-
-		if (funcname=="venus_special")
+			osculating_func = &get_mercury_helio_osculating_coords;
+		}
+        
+		if (funcname=="venus_special") {
 			posfunc = pos_func_type(get_venus_helio_coordsv);
+			osculating_func = &get_venus_helio_osculating_coords;
+		}
 
-		if (funcname=="earth_special")
+		if (funcname=="earth_special") {
 			posfunc = pos_func_type(get_earth_helio_coordsv);
+			osculating_func = &get_earth_helio_osculating_coords;
+		}
 
 		if (funcname=="lunar_special")
 			posfunc = pos_func_type(get_lunar_parent_coordsv);
 
-		if (funcname=="mars_special")
+		if (funcname=="mars_special") {
 			posfunc = pos_func_type(get_mars_helio_coordsv);
+			osculating_func = &get_mars_helio_osculating_coords;
+		}
 
 		if (funcname=="phobos_special")
 			posfunc = pos_func_type(get_phobos_parent_coordsv);
@@ -169,8 +178,10 @@ void SolarSystem::load(const string& planetfile)
 		if (funcname=="deimos_special")
 			posfunc = pos_func_type(get_deimos_parent_coordsv);
 
-		if (funcname=="jupiter_special")
+		if (funcname=="jupiter_special") {
 			posfunc = pos_func_type(get_jupiter_helio_coordsv);
+			osculating_func = &get_jupiter_helio_osculating_coords;
+		}
 
 		if (funcname=="europa_special")
 			posfunc = pos_func_type(get_europa_parent_coordsv);
@@ -184,8 +195,10 @@ void SolarSystem::load(const string& planetfile)
 		if (funcname=="ganymede_special")
 			posfunc = pos_func_type(get_ganymede_parent_coordsv);
 
-		if (funcname=="saturn_special")
+		if (funcname=="saturn_special") {
 			posfunc = pos_func_type(get_saturn_helio_coordsv);
+			osculating_func = &get_saturn_helio_osculating_coords;
+		}
 
 		if (funcname=="mimas_special")
 			posfunc = pos_func_type(get_mimas_parent_coordsv);
@@ -211,8 +224,10 @@ void SolarSystem::load(const string& planetfile)
 		if (funcname=="hyperion_special")
 			posfunc = pos_func_type(get_hyperion_parent_coordsv);
 
-		if (funcname=="uranus_special")
+		if (funcname=="uranus_special") {
 			posfunc = pos_func_type(get_uranus_helio_coordsv);
+			osculating_func = &get_uranus_helio_osculating_coords;
+		}
 
 		if (funcname=="miranda_special")
 			posfunc = pos_func_type(get_miranda_parent_coordsv);
@@ -229,8 +244,10 @@ void SolarSystem::load(const string& planetfile)
 		if (funcname=="oberon_special")
 			posfunc = pos_func_type(get_oberon_parent_coordsv);
 
-		if (funcname=="neptune_special")
+		if (funcname=="neptune_special") {
 			posfunc = pos_func_type(get_neptune_helio_coordsv);
+			osculating_func = &get_neptune_helio_osculating_coords;
+		}
 
 		if (funcname=="pluto_special")
 			posfunc = pos_func_type(get_pluto_helio_coordsv);
@@ -253,7 +270,7 @@ void SolarSystem::load(const string& planetfile)
                                pd.get_double(secname, "albedo"),
                                pd.get_str(secname, "tex_map"),
                                pd.get_str(secname, "tex_halo"),
-                               posfunc,
+                               posfunc,osculating_func,
                                pd.get_boolean(secname, "hidden", 0));
 
 		if (secname=="earth") earth = p;
