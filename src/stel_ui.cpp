@@ -55,7 +55,7 @@ StelUI::StelUI(StelCore * _core, StelApp * _app) :
 		bt_flag_help(NULL),
 		bt_flag_equatorial_mode(NULL),
 		bt_flag_config(NULL),
-		bt_flag_chart(NULL),
+//		bt_flag_chart(NULL),
 		bt_flag_night(NULL),
 		bt_flag_search(NULL),
 		bt_script(NULL),
@@ -354,9 +354,7 @@ Component* StelUI::createFlagButtons(void)
 	bt_flag_config->setOnPressCallback(callback<void>(this, &StelUI::cb));
 	bt_flag_config->setOnMouseInOutCallback(callback<void>(this, &StelUI::cbr));
 
-	bt_flag_chart = new FlagButton(false, NULL, "bt_chart.png");
-	bt_flag_chart->setOnPressCallback(callback<void>(this, &StelUI::cb));
-	bt_flag_chart->setOnMouseInOutCallback(callback<void>(this, &StelUI::cbr));
+
 
 	bt_flag_night = new FlagButton(false, NULL, "bt_nightview.png");
 	bt_flag_night->setOnPressCallback(callback<void>(this, &StelUI::cb));
@@ -408,7 +406,7 @@ Component* StelUI::createFlagButtons(void)
 
 	bt_flag_ctr->addComponent(bt_flag_search);			bt_flag_search->setPos(x,0); x+=UI_BT;
 	bt_flag_ctr->addComponent(bt_flag_config);			bt_flag_config->setPos(x,0); x+=UI_BT;
-	bt_flag_ctr->addComponent(bt_flag_chart);			bt_flag_chart->setPos(x,0); x+=UI_BT;
+//	bt_flag_ctr->addComponent(bt_flag_chart);			bt_flag_chart->setPos(x,0); x+=UI_BT;
 	bt_flag_ctr->addComponent(bt_flag_night);			bt_flag_night->setPos(x,0); x+=UI_BT;
 	bt_flag_ctr->addComponent(bt_flag_help);			bt_flag_help->setPos(x,0); x+=UI_BT;
 	bt_flag_ctr->addComponent(bt_flag_quit);			bt_flag_quit->setPos(x,0); x+=UI_BT;
@@ -535,17 +533,17 @@ void StelUI::cb(void)
 	help_win->setVisible(FlagHelp);
 	core->setMountMode(bt_flag_equatorial_mode->getState() ? StelCore::MOUNT_EQUATORIAL : StelCore::MOUNT_ALTAZIMUTAL);
 	FlagConfig			= bt_flag_config->getState();
-	if  (app->getVisionModeChart() != bt_flag_chart->getState())
-	{
-		if (bt_flag_night->getState())
-		{
-			app->setVisionModeChart();
-		}
-		else
-		{
-			app->setVisionModeNormal();
-		}
-	}
+// 	if  (app->getVisionModeChart() != bt_flag_chart->getState())
+// 	{
+// 		if (bt_flag_night->getState())
+// 		{
+// 			app->setVisionModeChart();
+// 		}
+// 		else
+// 		{
+// 			app->setVisionModeNormal();
+// 		}
+// 	}
 	if  (app->getVisionModeNight() != bt_flag_night->getState())
 	{
 		if (bt_flag_night->getState())
@@ -605,8 +603,7 @@ void StelUI::cbr(void)
 		bt_flag_help_lbl->setLabel(_("Equatorial/Altazimuthal Mount [ENTER]"));
 	if (bt_flag_config->getIsMouseOver())
 		bt_flag_help_lbl->setLabel(_("Configuration window"));
-	if (bt_flag_chart->getIsMouseOver())
-		bt_flag_help_lbl->setLabel(_("Chart mode"));
+
 	if (bt_flag_night->getIsMouseOver())
 		bt_flag_help_lbl->setLabel(_("Night (red) mode"));
 	if (bt_flag_quit->getIsMouseOver())
@@ -662,7 +659,7 @@ http://www.fsf.org");
 	licence_txtlbl->setPos(10,10);
 	licence_win = new StdBtWin(_("Information"));
 	licence_win->setOpaque(opaqueGUI);
-	licence_win->reshape(275,175,450,400);
+	licence_win->reshape(275,175,435,400);
 	licence_win->addComponent(licence_txtlbl);
 	licence_win->setVisible(FlagInfos);
 
@@ -1227,11 +1224,21 @@ void StelUI::gui_update_widgets(int delta_time)
 	bt_flag_help->setState(help_win->getVisible());
 	bt_flag_equatorial_mode->setState(core->getMountMode()==StelCore::MOUNT_EQUATORIAL);
 	bt_flag_config->setState(config_win->getVisible());
-	bt_flag_chart->setState(app->getVisionModeChart());
+//	bt_flag_chart->setState(app->getVisionModeChart());
 	bt_flag_night->setState(app->getVisionModeNight());
 	bt_flag_search->setState(search_win->getVisible());
 	bt_flag_goto->setState(false);
 
+	bt_real_time_speed->setState(fabs(core->getTimeSpeed()-JD_SECOND)<0.00000001);
+	bt_inc_time_speed->setState((core->getTimeSpeed()-JD_SECOND)>0.00000001);
+	bt_dec_time_speed->setState((core->getTimeSpeed()-JD_SECOND)<-0.00000001);
+	// cache last time to prevent to much slow system call
+	static double lastJD = 0;
+	if (fabs(lastJD-core->getJDay())>JD_SECOND/4)
+	{
+		bt_time_now->setState(fabs(core->getJDay()-get_julian_from_sys())<JD_SECOND);
+		lastJD = core->getJDay();
+	}
 	if (config_win->getVisible()) updateConfigForm();
 }
 

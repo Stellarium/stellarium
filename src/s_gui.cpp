@@ -1579,9 +1579,10 @@ void ListBox::createLines(void)
 	{
 		bt = new LabeledButton(wstring()); 
 		bt->setHideBorder(true);
-		bt->setHideBorderMouseOver(true);
+		bt->setHideBorderMouseOver(false);
 		bt->setHideTexture(true);
 		bt->setJustification(JUSTIFY_LEFT);
+		bt->adjustSize();
 		bt->setVisible(visible);
 		itemBt.push_back(bt);
 	}
@@ -1598,7 +1599,6 @@ void ListBox::draw(void)
     glTranslatef(pos[0], pos[1], 0.f);
     Component::scissor->push(pos, size);
 
-	scrollBar.setVisible(items.size() > displayLines);
 	if (scrollBar.getVisible()) scrollBar.draw();
 
 	i = firstItemIndex;
@@ -1691,9 +1691,19 @@ void ListBox::addItems(const vector<wstring> _items)
 	adjustAfterItemsAdded();
 }
 
+void ListBox::addItemList(const wstring& s)
+{
+	wistringstream is(s);
+	wstring elem;
+	while(getline(is, elem))
+	{
+		addItem(elem);
+	}
+}
+
 void ListBox::addItem(const wstring& _text)
 {
-	if (!items.empty())	items.push_back(_text);
+	if (!_text.empty())	items.push_back(_text);
 	adjustAfterItemsAdded();
 }
 
@@ -1701,6 +1711,7 @@ void ListBox::adjustAfterItemsAdded(void)
 {
 	createLines();
 	setSize(getSizex(),LISTBOX_ITEM_HEIGHT * displayLines);
+	scrollBar.setVisible(items.size() > displayLines);
 	scrollBar.setOnChangeCallback(callback<void>(this, &ListBox::scrollChanged));
 	scrollBar.setSize(SCROLL_SIZE,getSizey());
 	scrollBar.setPos(getSizex()-SCROLL_SIZE,0);
@@ -1749,12 +1760,23 @@ LabeledButton::LabeledButton(const wstring& _label, s_font* font, Justification 
 	: Button(), label(_label, font), justification(_j), isBright(_bright)
 {
 	Component::setSize(label.getSize()+s_vec2i(14,12+(int)label.getFont()->getDescent()));
+	justify();
+}
+
+void LabeledButton::justify(void)
+{
     if (justification == JUSTIFY_CENTER)
-		label.setPos((size[0]-label.getSizex())/2,(size[1]-label.getSizey())/2);
+		label.setPos((size[0]-label.getSizex())/2,(size[1]-label.getSizey())/2-(int)label.getFont()->getDescent());
 	else if (justification == JUSTIFY_LEFT)
-		label.setPos(0 + LABEL_PAD,(size[1]-label.getSizey())/2);
+		label.setPos(0 + LABEL_PAD,(size[1]-label.getSizey())/2-(int)label.getFont()->getDescent());
 	else if (justification == JUSTIFY_RIGHT)
-		label.setPos(size[0]-label.getSizex() - LABEL_PAD,(size[1]-label.getSizey())/2);	
+		label.setPos(size[0]-label.getSizex() - LABEL_PAD,(size[1]-label.getSizey())/2-(int)label.getFont()->getDescent());	
+}
+
+void LabeledButton::adjustSize(void)
+{
+	Component::setSize(label.getSize()+s_vec2i(0,(int)label.getFont()->getDescent()));
+	justify();
 }
 
 LabeledButton::~LabeledButton()
@@ -1852,7 +1874,7 @@ void TextLabel::adjustSize(void)
 			maxX = linelen;
         iter++;
     }
-	setSize(maxX,childs.size()*((int)painter.getFont()->getLineHeight()+1));
+	setSize(maxX,childs.size()*((int)painter.getFont()->getLineHeight()+1)+2);
 }
 
 void TextLabel::setTextColor(const s_color& c)
@@ -2534,13 +2556,13 @@ bool CursorBar::onMove(int x, int y)
 
 IntIncDec::IntIncDec(s_font* _font, const s_texture* tex_up,
 		const s_texture* tex_down, int _min, int _max,
-		int _init_value, int _inc) :
-	Container(), value(_init_value), min(_min), max(_max), inc(_inc), btmore(NULL), btless(NULL), label(NULL)
+		int _init_value, int _inc, bool _loop) :
+	Container(), value(_init_value), min(_min), max(_max), inc(_inc), btmore(NULL), btless(NULL), label(NULL), loop(_loop)
 {
 	label = new Label();
 	if (_font) label->setFont(_font);
 	label->setSize(30,10);
-	label->setPos(9,2);
+	label->setPos(9,0);
 	btmore = new TexturedButton(tex_up);
 	btmore->setSize(8,8);
 	btmore->setPos(0,0);
@@ -2568,10 +2590,31 @@ void IntIncDec::draw()
 	Container::draw();
 }
 
+void IntIncDec::inc_value()
+{
+	value+=inc;
+	if(value>max)
+	{
+		if (loop) value=min;
+		else value=max;
+	}
+	if (!onPressCallback.empty()) onPressCallback();
+}
 
+void IntIncDec::dec_value()
+{
+	value-=inc;
+	if(value<min)
+	{
+		if (loop) value=max;
+		else value=min;
+	} 
+	if (!onPressCallback.empty()) onPressCallback();
+}
+		
 IntIncDecVert::IntIncDecVert(s_font* _font, const s_texture* tex_up,
 		const s_texture* tex_down, int _min, int _max,
-		int _init_value, int _inc) : IntIncDec(_font, tex_up, tex_down, _min, _max, _init_value, _inc)
+		int _init_value, int _inc, bool _loop) : IntIncDec(_font, tex_up, tex_down, _min, _max, _init_value, _inc, loop)
 {
 	label->setPos(0,3);
 	btmore->setPos(_max/10 * 8 + 8, 0);
@@ -2588,7 +2631,7 @@ FloatIncDec::FloatIncDec(s_font* _font, const s_texture* tex_up,
 	label = new Label;
 	if (_font) label->setFont(_font);
 	label->setSize(30,10);
-	label->setPos(9,2);
+	label->setPos(9,0);
 	btless = new TexturedButton(tex_up);
 	btless->setSize(8,8);
 	btless->setPos(0,0);
@@ -2681,11 +2724,11 @@ Time_item::Time_item(s_font* _font, const s_texture* tex_up,
 
 	// ranges are +1 and -1 from normal to allow rollover
 	y = new IntIncDec(getFont(), tex_up, tex_down, -9999, 99999, 1930, 1);
-	m = new IntIncDec(getFont(), tex_up, tex_down, 0, 13, 12, 1);
-	d = new IntIncDec(getFont(), tex_up, tex_down, 0, 32, 11, 1);
-	h = new IntIncDec(getFont(), tex_up, tex_down, -1, 24, 16, 1);
-	mn= new IntIncDec(getFont(), tex_up, tex_down, -1, 60, 35, 1);
-	s = new IntIncDec(getFont(), tex_up, tex_down, -1, 60, 23, 1);
+	m = new IntIncDec(getFont(), tex_up, tex_down, 1, 12, 12, 1, true);
+	d = new IntIncDec(getFont(), tex_up, tex_down, 1, 31, 11, 1, true);
+	h = new IntIncDec(getFont(), tex_up, tex_down, 0, 23, 16, 1, true);
+	mn= new IntIncDec(getFont(), tex_up, tex_down, 0, 59, 35, 1, true);
+	s = new IntIncDec(getFont(), tex_up, tex_down, 0, 59, 23, 1, true);
 
 	y->setOnPressCallback(callback<void>(this, &Time_item::onTimeChange));
 	m->setOnPressCallback(callback<void>(this, &Time_item::onTimeChange));
@@ -2695,22 +2738,22 @@ Time_item::Time_item(s_font* _font, const s_texture* tex_up,
 	s->setOnPressCallback(callback<void>(this, &Time_item::onTimeChange));
 
 	Label* l1 = new Label(_("Year")); l1->setPos(5,5);
-	y->setPos(50,5); y->setSize(50, 32);
+	y->setPos(50,6); y->setSize(50, 32);
 
 	Label* l2 = new Label(_("Month")); l2->setPos(5,25);
-	m->setPos(50,25); m->setSize(50, 32);
+	m->setPos(50,26); m->setSize(50, 32);
 
 	Label* l3 = new Label(_("Day")); l3->setPos(5,45);
-	d->setPos(50,45); d->setSize(50, 32);
+	d->setPos(50,44); d->setSize(50, 32);
 
 	Label* l4 = new Label(_("Hour")); l4->setPos(130,5);
-	h->setPos(190,5); h->setSize(50, 32);
+	h->setPos(190,6); h->setSize(50, 32);
 
 	Label* l5 = new Label(_("Minutes")); l5->setPos(130,25);
-	mn->setPos(190,25);mn->setSize(50, 32);
+	mn->setPos(190,26);mn->setSize(50, 32);
 
 	Label* l6 = new Label(_("Seconds")); l6->setPos(130,45);
-	s->setPos(190,45); s->setSize(50, 32);
+	s->setPos(190,46); s->setSize(50, 32);
 
 	setSize(230, 65);
 

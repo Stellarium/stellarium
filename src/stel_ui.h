@@ -147,7 +147,7 @@ private:
 	FlagButton * bt_flag_help;
 	FlagButton * bt_flag_equatorial_mode;
 	FlagButton * bt_flag_config;
-	FlagButton * bt_flag_chart;
+	//FlagButton * bt_flag_chart;
 	FlagButton * bt_flag_night;
 	FlagButton * bt_flag_search;
 	EditBox * bt_script;
@@ -289,6 +289,12 @@ private:
 	StringList* landscape_sl;
 	void setLandscape(void);
 	void saveLandscapeOption(void);
+
+	// Language options
+	ListBox* language_lb;
+	ListBox* languageSky_lb;
+	void setAppLanguage(void);
+	void setSkyLanguage(void);
 
 	// Mouse control options
 	bool is_dragging, has_dragged;

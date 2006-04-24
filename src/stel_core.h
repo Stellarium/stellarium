@@ -106,6 +106,12 @@ public:
 	//! Get time speed in JDay/sec
 	double getTimeSpeed(void) const {return navigation->get_time_speed();}
 	
+	//! Set stellarium time to current real world time
+	void setTimeNow();
+	//! Get wether the current stellarium time is the real world time
+	bool getIsTimeNow(void) const;
+	
+	
 	//! Set the current date in Julian Day
 	void setJDay(double JD) {navigation->set_JDay(JD);}
 	//! Get the current date in Julian Day

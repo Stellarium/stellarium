@@ -392,9 +392,11 @@ namespace s_gui
 		virtual void setTextColor(const s_color& c) {Button::setTextColor(c); label.setTextColor(c);}
 		virtual void setPainter(const Painter& p) {Button::setPainter(p); label.setPainter(p);}
 		virtual void setJustification(Justification _j) { justification = _j; }
+		virtual void adjustSize(void);
         void setLabel(const wstring& _label) { label.setLabel(_label); };
         void setBright(bool _b) { isBright = _b; };
     protected:
+    	void justify(void);
 		Label label;
 		Justification justification;
 		bool isBright;
@@ -534,7 +536,9 @@ namespace s_gui
         virtual void draw(void);
    		virtual void setVisible(bool _visible);
 		wstring getItem(int value);
+		wstring getCurrent(void) {return getItem(getValue());}
 		void addItems(const vector<wstring> _items);
+		void addItemList(const wstring& _text);
 		void addItem(const wstring& _text);
 		void clear(void);
 		int getValue(void) { return value;}
@@ -571,18 +575,19 @@ namespace s_gui
 	public:
 	    IntIncDec(s_font* _font = NULL, const s_texture* tex_up = NULL,
 			const s_texture* tex_down = NULL, int min = 0, int max = 9,
-			int init_value = 0, int inc = 1);
+			int init_value = 0, int inc = 1, bool _loop = false);
 	    virtual ~IntIncDec();
 		virtual void draw();
         virtual const float getValue() const {return value;}
 		virtual void setValue(int v) {value=v; if(value>max) value=max; if(value<min) value=min;}
 	protected:
-		void inc_value() {value+=inc; if(value>max) value=max; if (!onPressCallback.empty()) onPressCallback();}
-		void dec_value() {value-=inc; if(value<min) value=min; if (!onPressCallback.empty()) onPressCallback();}
+		void inc_value();
+		void dec_value();
         int value, min, max, inc;
 		TexturedButton* btmore;
 		TexturedButton* btless;
 		Label * label;
+		bool loop;
 	};
 
 	class IntIncDecVert : public IntIncDec
@@ -590,7 +595,7 @@ namespace s_gui
 	public:
 	    IntIncDecVert(s_font* _font = NULL, const s_texture* tex_up = NULL,
 			const s_texture* tex_down = NULL, int min = 0, int max = 9,
-			int init_value = 0, int inc = 1);
+			int init_value = 0, int inc = 1, bool _loop = false);
 	};
 
 	enum Format { FORMAT_DEFAULT, FORMAT_LATITUDE, FORMAT_LONGITUDE };
