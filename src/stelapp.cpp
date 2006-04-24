@@ -459,31 +459,31 @@ void StelApp::saveCurrentConfig(const string& confFile)
 	// gui section
 	conf.set_double("gui:mouse_cursor_timeout",getMouseCursorTimeout());
 
+
 	/*  TODO STILL
 
 	// conf.set_str	("gui:gui_base_color", StelUtility::vec3f_to_str(GuiBaseColor));
 	// conf.set_str	("gui:gui_text_color", StelUtility::vec3f_to_str(GuiTextColor));
 	// conf.set_double ("gui:base_font_size", BaseFontSize);
 
-	
-	// Text ui section
-	conf.set_boolean("tui:flag_show_gravity_ui", FlagShowGravityUi);
-	conf.set_boolean("tui:flag_show_tui_datetime", FlagShowTuiDateTime);
-	conf.set_boolean("tui:flag_show_tui_short_obj_info", FlagShowTuiShortObjInfo);
-
 	// Navigation section
 	conf.set_double ("navigation:preset_sky_time", PresetSkyTime);
 	conf.set_str	("navigation:startup_time_mode", StartupTimeMode);
 	conf.set_boolean("navigation:flag_manual_zoom", FlagManualZoom);
-	conf.set_double ("navigation:auto_move_duration", auto_move_duration);
-	conf.set_double ("navigation:zoom_speed", zoom_speed);
-
-
-	conf.set_boolean("astro:flag_object_trails", core->getFlagObjectTrails());
 
 	*/
 
+	// Text ui section
+	conf.set_boolean("tui:flag_show_gravity_ui", ui->getFlagShowGravityUi());
+	conf.set_boolean("tui:flag_show_tui_datetime", ui->getFlagShowTuiDateTime());
+	conf.set_boolean("tui:flag_show_tui_short_obj_info", ui->getFlagShowTuiShortObjInfo());
+
+	// Navigation section
+	conf.set_double ("navigation:auto_move_duration", core->getAutoMoveDuration());
+	conf.set_double ("navigation:zoom_speed", core->getZoomSpeed());
+
 	// Astro section
+	conf.set_boolean("astro:flag_object_trails", core->getFlagPlanetsTrails());
 	conf.set_boolean("astro:flag_bright_nebulae", core->getFlagBrightNebulae());
 	conf.set_boolean("astro:flag_stars", core->getFlagStars());
 	conf.set_boolean("astro:flag_star_name", core->getFlagStarName());
