@@ -192,7 +192,7 @@ void StelUI::init(const InitParser& conf)
 	message_txtlbl = new TextLabel();
 	message_txtlbl->adjustSize();
 	message_txtlbl->setPos(10,10);
-	message_win = new StdTransBtWin(_("Message"), 5000);
+	message_win = new StdTransBtWin(L"Message", 5000);
 	message_win->setOpaque(opaqueGUI);
 	message_win->reshape(300,200,400,100);
 	message_win->addComponent(message_txtlbl);
@@ -423,23 +423,20 @@ Component* StelUI::createFlagButtons(void)
 // Create the button panel in the lower right corner
 Component* StelUI::createTimeControlButtons(void)
 {
-	bt_dec_time_speed = new LabeledButton(L"<<");
-	bt_dec_time_speed->setSize(24,24);
+	bt_dec_time_speed = new FlagButton(false, NULL, "bt_rwd.png");
 	bt_dec_time_speed->setOnPressCallback(callback<void>(this, &StelUI::bt_dec_time_speed_cb));
 	bt_dec_time_speed->setOnMouseInOutCallback(callback<void>(this, &StelUI::tcbr));
 
-	bt_real_time_speed = new LabeledButton(L"R");
+	bt_real_time_speed = new FlagButton(false, NULL, "bt_realtime.png");
 	bt_real_time_speed->setSize(24,24);
 	bt_real_time_speed->setOnPressCallback(callback<void>(this, &StelUI::bt_real_time_speed_cb));
 	bt_real_time_speed->setOnMouseInOutCallback(callback<void>(this, &StelUI::tcbr));
 
-	bt_inc_time_speed = new LabeledButton(L">>");
-	bt_inc_time_speed->setSize(24,24);
+	bt_inc_time_speed = new FlagButton(false, NULL, "bt_fwd.png");
 	bt_inc_time_speed->setOnPressCallback(callback<void>(this, &StelUI::bt_inc_time_speed_cb));
 	bt_inc_time_speed->setOnMouseInOutCallback(callback<void>(this, &StelUI::tcbr));
 
-	bt_time_now = new LabeledButton(L"|");
-	bt_time_now->setSize(24,24);
+	bt_time_now = new FlagButton(false, NULL, "bt_now.png");
 	bt_time_now->setOnPressCallback(callback<void>(this, &StelUI::bt_time_now_cb));
 	bt_time_now->setOnMouseInOutCallback(callback<void>(this, &StelUI::tcbr));
 
