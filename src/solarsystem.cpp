@@ -31,8 +31,11 @@ using namespace std;
 
 #include "draw.h"
 
-SolarSystem::SolarSystem() : sun(NULL), moon(NULL), earth(NULL), moonScale(1.), tex_earth_shadow(NULL), flagOrbits(0)
-{}
+SolarSystem::SolarSystem()
+            :sun(NULL),moon(NULL),earth(NULL),
+             moonScale(1.),tex_earth_shadow(NULL),
+             flagOrbits(false),flag_light_travel_time(false) {
+}
 
 void SolarSystem::setFont(float font_size, const string& font_name)
 {
@@ -311,26 +314,48 @@ void SolarSystem::load(const string& planetfile)
 
 // Compute the position for every elements of the solar system.
 // The order is not important since the position is computed relatively to the mother body
-void SolarSystem::computePositions(double date)
-{
-	vector<Planet*>::iterator iter = system_planets.begin();
-	while (iter != system_planets.end())
-	{
-		(*iter)->compute_position(date);
-		iter++;
-	}
+void SolarSystem::computePositions(double date,const Planet *home_planet) {
+  if (flag_light_travel_time) {
+    for (vector<Planet*>::const_iterator iter(system_planets.begin());
+         iter!=system_planets.end();iter++) {
+      (*iter)->computePositionWithoutOrbits(date);
+    }
+    const Vec3d home_pos(home_planet->get_heliocentric_ecliptic_pos());
+    for (vector<Planet*>::const_iterator iter(system_planets.begin());
+         iter!=system_planets.end();iter++) {
+      const double light_speed_correction =
+        ((*iter)->get_heliocentric_ecliptic_pos()-home_pos).length()
+        * (149597870000.0 / (299792458.0 * 86400));
+//cout << "SolarSystem::computePositions: " << (*iter)->getEnglishName()
+//     << ": " << (86400*light_speed_correction) << endl;
+      (*iter)->compute_position(date-light_speed_correction);
+    }
+  } else {
+    for (vector<Planet*>::const_iterator iter(system_planets.begin());
+         iter!=system_planets.end();iter++) {
+      (*iter)->compute_position(date);
+    }
+  }
 }
 
 // Compute the transformation matrix for every elements of the solar system.
 // The elements have to be ordered hierarchically, eg. it's important to compute earth before moon.
-void SolarSystem::computeTransMatrices(double date)
-{
-	vector<Planet*>::iterator iter = system_planets.begin();
-	while (iter != system_planets.end())
-	{
-		(*iter)->compute_trans_matrix(date);
-		iter++;
-	}
+void SolarSystem::computeTransMatrices(double date,const Planet *home_planet) {
+  if (flag_light_travel_time) {
+    const Vec3d home_pos(home_planet->get_heliocentric_ecliptic_pos());
+    for (vector<Planet*>::const_iterator iter(system_planets.begin());
+         iter!=system_planets.end();iter++) {
+      const double light_speed_correction =
+        ((*iter)->get_heliocentric_ecliptic_pos()-home_pos).length()
+        * (149597870000.0 / (299792458.0 * 86400));
+      (*iter)->compute_trans_matrix(date-light_speed_correction);
+    }
+  } else {
+    for (vector<Planet*>::const_iterator iter(system_planets.begin());
+         iter!=system_planets.end();iter++) {
+      (*iter)->compute_trans_matrix(date);
+    }
+  }
 }
 
 // Draw all the elements of the solar system
@@ -565,8 +590,7 @@ void SolarSystem::setFlagTrails(bool b)
 bool SolarSystem::getFlagTrails(void) const
 {
 	for (vector<Planet*>::const_iterator iter = system_planets.begin();
-         iter < system_planets.end(); iter++ )
-	{
+	     iter != system_planets.end(); iter++ ) {
 		if ((*iter)->getFlagTrail()) return true;
 	}
 	return false;
@@ -581,11 +605,10 @@ void SolarSystem::setFlagHints(bool b)
 	}
 }
 
-bool SolarSystem::getFlagHints(void)
+bool SolarSystem::getFlagHints(void) const
 {
-	vector<Planet*>::iterator iter;
-	for( iter = system_planets.begin(); iter < system_planets.end(); iter++ )
-	{
+	for (vector<Planet*>::const_iterator iter = system_planets.begin();
+        iter != system_planets.end(); iter++ ) {
 		if ((*iter)->getFlagHints()) return true;
 	}
 	return false;
