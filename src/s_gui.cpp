@@ -1414,11 +1414,6 @@ void ScrollBar::draw(void)
 	scrollBt.draw();
     Component::scissor->pop();
 	glPopMatrix();
-
-	ostringstream oss;
-	oss.precision(0);
-	oss << value;
-	painter.print(pos[0]+2, pos[1]+2, oss.str());
 }
 
 bool ScrollBar::onClic(int x, int y, S_GUI_VALUE bt, S_GUI_VALUE state)
@@ -1549,7 +1544,7 @@ void ScrollBar::setValue(int _value)
 // ListBox
 ////////////////////////////////////////////////////////////////////////////////
 
-#define LISTBOX_ITEM_HEIGHT (BUTTON_HEIGHT - 8)
+#define LISTBOX_ITEM_HEIGHT (BUTTON_HEIGHT - 6)
 
 ListBox::ListBox(int _displayLines) : 
 	scrollBar(true), 
@@ -1579,7 +1574,7 @@ void ListBox::createLines(void)
 	{
 		bt = new LabeledButton(wstring()); 
 		bt->setHideBorder(true);
-		bt->setHideBorderMouseOver(false);
+		bt->setHideBorderMouseOver(true);
 		bt->setHideTexture(true);
 		bt->setJustification(JUSTIFY_LEFT);
 		bt->adjustSize();
@@ -1606,14 +1601,35 @@ void ListBox::draw(void)
 	while (i < firstItemIndex + displayLines && i < items.size())
 	{
 		if (value != -1 && value == (int)i)
-			itemBt[j]->setBright(true);
+		{
+			itemBt[j]->setHideBorder(false);
+			itemBt[j]->setHideBorderMouseOver(false);
+		}
 		else
-			itemBt[j]->setBright(false);
+		{
+			itemBt[j]->setHideBorder(true);
+			itemBt[j]->setHideBorderMouseOver(true);
+		}
 		itemBt[j++]->draw();
 		i++;
 	}
     Component::scissor->pop();
 	glPopMatrix();
+}
+
+void ListBox::setCurrent(const wstring& ws)
+{
+	int i = firstItemIndex;
+	vector<LabeledButton*>::iterator iter = itemBt.begin();
+	while (iter != itemBt.end())
+	{
+		if ((*iter)->getLabel()==ws) 
+		{
+			value = i;
+		}
+		iter++;
+		i++;
+	}
 }
 
 bool ListBox::onClic(int x, int y, S_GUI_VALUE button, S_GUI_VALUE state)
@@ -1766,11 +1782,11 @@ LabeledButton::LabeledButton(const wstring& _label, s_font* font, Justification 
 void LabeledButton::justify(void)
 {
     if (justification == JUSTIFY_CENTER)
-		label.setPos((size[0]-label.getSizex())/2,(size[1]-label.getSizey())/2-(int)label.getFont()->getDescent());
+		label.setPos((size[0]-label.getSizex())/2,(size[1]-label.getSizey())/2-(int)label.getFont()->getDescent()+1);
 	else if (justification == JUSTIFY_LEFT)
-		label.setPos(0 + LABEL_PAD,(size[1]-label.getSizey())/2-(int)label.getFont()->getDescent());
+		label.setPos(0 + LABEL_PAD,(size[1]-label.getSizey())/2-(int)label.getFont()->getDescent()+1);
 	else if (justification == JUSTIFY_RIGHT)
-		label.setPos(size[0]-label.getSizex() - LABEL_PAD,(size[1]-label.getSizey())/2-(int)label.getFont()->getDescent());	
+		label.setPos(size[0]-label.getSizex() - LABEL_PAD,(size[1]-label.getSizey())/2-(int)label.getFont()->getDescent()+1);	
 }
 
 void LabeledButton::adjustSize(void)
@@ -1802,7 +1818,7 @@ void LabeledButton::draw(void)
     glTranslatef(pos[0], pos[1], 0.f);
     Component::scissor->push(pos, size);
 	
-	if (pressed || isBright) label.draw(1.5);
+	if (pressed || isBright) label.draw(2.);
     else label.draw();   // faded
 
     Component::scissor->pop();

@@ -234,12 +234,19 @@ private:
 	FloatIncDec* star_twinkle_amount;
 	LabeledCheckBox* constellation_cbx;
 	LabeledCheckBox* constellation_name_cbx;
+	LabeledCheckBox* constellation_boundaries_cbx;
 	LabeledCheckBox* sel_constellation_cbx;
 	LabeledCheckBox* nebulas_names_cbx;
 	FloatIncDec* max_mag_nebula_name;
 	LabeledCheckBox* planets_cbx;
 	LabeledCheckBox* planets_hints_cbx;
 	LabeledCheckBox* moon_x4_cbx;
+	Label* meteorlbl;
+	LabeledCheckBox* meteor_rate_10;
+	LabeledCheckBox* meteor_rate_80;
+	LabeledCheckBox* meteor_rate_10000;
+	LabeledCheckBox* meteor_rate_144000;
+	LabeledCheckBox* meteor_rate_perseids;
 	LabeledCheckBox* equator_grid_cbx;
 	LabeledCheckBox* azimuth_grid_cbx;
 	LabeledCheckBox* equator_cbx;
@@ -249,6 +256,8 @@ private:
 	LabeledCheckBox* atmosphere_cbx;
 	LabeledCheckBox* fog_cbx;
 	void saveRenderOptions(void);
+	void saveLandscapeOptions(void);
+	void saveLanguageOptions(void);
 
 	// Location options
 	bool waitOnLocation;
@@ -293,8 +302,10 @@ private:
 	// Language options
 	ListBox* language_lb;
 	ListBox* languageSky_lb;
+	ListBox* skyculture_lb;
 	void setAppLanguage(void);
 	void setSkyLanguage(void);
+	void setSkyCulture(void);
 
 	// Mouse control options
 	bool is_dragging, has_dragged;
