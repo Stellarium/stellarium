@@ -337,10 +337,15 @@ public:
 	//! Set flag for displaying Planets Orbits
 	void setFlagPlanetsOrbits(bool b) {ssystem->setFlagOrbits(b);}
 	//! Get flag for displaying Planets Orbits
-	bool getFlagPlanetsOrbits(void) const {return ssystem->getFlagOrbits();}			
+	bool getFlagPlanetsOrbits(void) const {return ssystem->getFlagOrbits();}
 
-	Vec3f getColorPlanetsOrbits(void) const {return ssystem->getOrbitColor();}			
-	Vec3f getColorPlanetsNames(void) const {return ssystem->getLabelColor();}			
+	void setFlagLightTravelTime(bool b)
+	  {ssystem->setFlagLightTravelTime(b);}
+	bool getFlagLightTravelTime(void) const
+	  {return ssystem->getFlagLightTravelTime();}
+
+	Vec3f getColorPlanetsOrbits(void) const {return ssystem->getOrbitColor();}
+	Vec3f getColorPlanetsNames(void) const {return ssystem->getLabelColor();}
 	
 	//! Start/stop displaying planets Trails
 	void startPlanetsTrails(bool b) {ssystem->startTrails(b);}
