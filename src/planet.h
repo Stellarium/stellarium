@@ -115,6 +115,7 @@ public:
     Mat4d getRotEquatorialToVsop87(void) const;
 
 	// Compute the position in the parent Planet coordinate system
+	void computePositionWithoutOrbits(double date);
 	void compute_position(double date);
 
 	// Compute the transformation matrix from the local Planet coordinate to the parent Planet coordinate
