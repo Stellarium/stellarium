@@ -394,6 +394,7 @@ namespace s_gui
 		virtual void setJustification(Justification _j) { justification = _j; }
 		virtual void adjustSize(void);
         void setLabel(const wstring& _label) { label.setLabel(_label); };
+        const wstring& getLabel(void) {return label.getLabel();}
         void setBright(bool _b) { isBright = _b; };
     protected:
     	void justify(void);
@@ -542,6 +543,7 @@ namespace s_gui
 		void addItem(const wstring& _text);
 		void clear(void);
 		int getValue(void) { return value;}
+		void setCurrent(const wstring& ws);
 	private:
 		callback<void> onChangeCallback;
 		ScrollBar scrollBar;
