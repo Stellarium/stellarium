@@ -103,6 +103,9 @@ public:
 
 	double getMouseCursorTimeout();
 	
+	//! Return a list of working fullscreen hardware video modes (one per line)
+	string getVideoModeList(void) const;
+	
 private:
 	//! Screen size
 	int screenW, screenH;

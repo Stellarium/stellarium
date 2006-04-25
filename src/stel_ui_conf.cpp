@@ -344,12 +344,12 @@ Component* StelUI::createConfigWindow(void)
 	FilledContainer* tab_video = new FilledContainer();
 	tab_video->setSize(config_tab_ctr->getSize());
 
-	x=10; y=10;
+	x=30; y=10;
 	Label * lblvideo1 = new Label(wstring(L"\u2022 ")+_("Projection :"));
 	lblvideo1->setPos(x, y);
 	tab_video->addComponent(lblvideo1);
 
-	x=60; y+=20;
+	y+=20;
 	
 	projection_sl = new StringList();
 	projection_sl->addItem("perspective");
@@ -362,14 +362,14 @@ Component* StelUI::createConfigWindow(void)
                               app->getViewPortDistorterType()));
 	projection_sl->setOnPressCallback(callback<void>(this, &StelUI::updateVideoVariables));
 	tab_video->addComponent(projection_sl);
-	projection_sl->setPos(x,y); y+=85;
+	projection_sl->setPos(x+20,y); y+=85;
 	
 	disk_viewport_cbx = new LabeledCheckBox(false, _("Disk Viewport"));
 	disk_viewport_cbx->setOnPressCallback(callback<void>(this, &StelUI::updateVideoVariables));
 	tab_video->addComponent(disk_viewport_cbx);
 	disk_viewport_cbx->setPos(x,y); y+=35;
 
-	x=250; y=10;
+	x=220; y=10;
 	Label * lblvideo2 = new Label(wstring(L"\u2022 ")+_("Screen Resolution :"));
 	lblvideo2->setPos(x+10, y);
 	tab_video->addComponent(lblvideo2); y+=24;
@@ -381,19 +381,13 @@ Component* StelUI::createConfigWindow(void)
 	tab_video->addComponent(lblvideo3);
 	tab_video->addComponent(lblvideo4);
 
-	screen_size_sl = new StringList();
+	screen_size_sl = new ListBox(6);
 	screen_size_sl->setPos(x+20,y);
-	screen_size_sl->addItem("640x480");
-	screen_size_sl->addItem("800x600");
-	screen_size_sl->addItem("1024x768");
-	screen_size_sl->addItem("1280x800");
-	screen_size_sl->addItem("1280x1024");
-	screen_size_sl->addItem("1400x1050");
-	screen_size_sl->addItem("1600x1200");
-	screen_size_sl->adjustSize();
+	screen_size_sl->setSizex(200);
+	screen_size_sl->addItemList(StelUtility::stringToWstring(app->getVideoModeList()));
 	char vs[1000];
 	sprintf(vs, "%dx%d", core->getViewportWidth(), core->getViewportHeight());
-	screen_size_sl->setValue(vs);
+	screen_size_sl->setCurrent(StelUtility::stringToWstring(vs));
 	tab_video->addComponent(screen_size_sl);
 
 	snprintf(vs, 999, "%sconfig.ini", app->getConfigDir().c_str());
@@ -1038,6 +1032,7 @@ void StelUI::saveLanguageOptions(void)
 	conf.load(app->getConfigFile());
 	conf.set_str("localization:sky_locale", core->getSkyLanguage());
 	conf.set_str("localization:app_locale", app->getAppLanguage());
+	conf.set_str("localization:sky_culture", core->getSkyCultureDir());
 	conf.save(app->getConfigFile());
 }
 
@@ -1079,7 +1074,7 @@ void StelUI::saveRenderOptions(void)
 
 void StelUI::setVideoOption(void)
 {
-	string s = screen_size_sl->getValue();
+	string s = StelUtility::wstringToString(screen_size_sl->getCurrent());
 	int i = s.find("x");
 	int w = atoi(s.substr(0,i).c_str());
 	int h = atoi(s.substr(i+1,s.size()).c_str());
