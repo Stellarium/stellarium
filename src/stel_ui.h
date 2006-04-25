@@ -284,7 +284,7 @@ private:
 	// Video Options
 	StringList* projection_sl;
 	LabeledCheckBox* disk_viewport_cbx;
-	StringList* screen_size_sl;
+	ListBox* screen_size_sl;
 	void setVideoOption(void);
 	void updateVideoVariables(void);
 

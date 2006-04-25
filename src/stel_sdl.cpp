@@ -158,6 +158,31 @@ static const char *arrow[] = {
 	glClear(GL_COLOR_BUFFER_BIT);	
 }
 
+string StelApp::getVideoModeList(void) const
+{
+    SDL_Rect **modes;
+	int i;
+	/* Get available fullscreen/hardware modes */
+	modes=SDL_ListModes(NULL, SDL_FULLSCREEN|SDL_HWSURFACE);
+	/* Check is there are any modes available */
+	if(modes == (SDL_Rect **)0)
+	{
+		return "No modes available!\n";
+	}
+	/* Check if our resolution is restricted */
+	if(modes == (SDL_Rect **)-1)
+	{
+		return "All resolutions available.\n";
+	}
+	else
+	{
+		/* Print valid modes */
+		ostringstream modesstr;
+		for(i=0;modes[i];++i)
+			modesstr << modes[i]->w << "x" << modes[i]->h << endl;
+		return modesstr.str();
+	}
+}
 
 // from an sdl wiki
 SDL_Cursor* StelApp::create_cursor(const char *image[])
