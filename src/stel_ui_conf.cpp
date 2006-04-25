@@ -84,10 +84,10 @@ Component* StelUI::createConfigWindow(void)
 	y+=30;
 
 	const s_texture* constellp = new s_texture("bt_constellations.png");
-	Picture* pconstell = new Picture(constellp, x-50, y+5, 32, 32);
+	Picture* pconstell = new Picture(constellp, x-50, y+10, 32, 32);
 	tab_render->addComponent(pconstell);
 
-	constellation_cbx = new LabeledCheckBox(false, _("Constellations"));
+	constellation_cbx = new LabeledCheckBox(false, _("Constellations Lines"));
 	constellation_cbx->setOnPressCallback(callback<void>(this, &StelUI::updateConfigVariables));
 	tab_render->addComponent(constellation_cbx);
 	constellation_cbx->setPos(x,y); y+=15;
@@ -97,18 +97,21 @@ Component* StelUI::createConfigWindow(void)
 	tab_render->addComponent(constellation_name_cbx);
 	constellation_name_cbx->setPos(x,y); y+=15;
 
+	constellation_boundaries_cbx = new LabeledCheckBox(false, _("Constellations Boundaries"));
+	constellation_boundaries_cbx->setOnPressCallback(callback<void>(this, &StelUI::updateConfigVariables));
+	tab_render->addComponent(constellation_boundaries_cbx);
+	constellation_boundaries_cbx->setPos(x,y); y+=15;
+
 	sel_constellation_cbx = new LabeledCheckBox(false, _("Selected Constellation Only"));
 	sel_constellation_cbx->setOnPressCallback(callback<void>(this, &StelUI::updateConfigVariables));
 	tab_render->addComponent(sel_constellation_cbx);
 	sel_constellation_cbx->setPos(x,y);
 
-	y+=25;
+	y+=30;
 
 	const s_texture* nebp = new s_texture("bt_nebula.png");
-	Picture* pneb = new Picture(nebp, x-50, y, 32, 32);
+	Picture* pneb = new Picture(nebp, x-50, y-13, 32, 32);
 	tab_render->addComponent(pneb);
-
-	y+=15;
 
 	nebulas_names_cbx = new LabeledCheckBox(false, _("Nebulas Names. Up to mag :"));
 	nebulas_names_cbx->setOnPressCallback(callback<void>(this, &StelUI::updateConfigVariables));
@@ -124,7 +127,7 @@ Component* StelUI::createConfigWindow(void)
 	y+=30;
 
 	const s_texture* planp = new s_texture("bt_planet.png");
-	Picture* pplan = new Picture(planp, x-50, y, 32, 32);
+	Picture* pplan = new Picture(planp, x-50, y-7, 32, 32);
 	tab_render->addComponent(pplan);
 
 	planets_cbx = new LabeledCheckBox(false, _("Planets"));
@@ -143,11 +146,12 @@ Component* StelUI::createConfigWindow(void)
 	planets_hints_cbx->setOnPressCallback(callback<void>(this, &StelUI::updateConfigVariables));
 	tab_render->addComponent(planets_hints_cbx);
 	planets_hints_cbx->setPos(x,y);
-
-	y+=25;
+	
+	
+	y+=30;
 
 	const s_texture* gridp = new s_texture("bt_grid.png");
-	Picture* pgrid = new Picture(gridp, x-50, y, 32, 32);
+	Picture* pgrid = new Picture(gridp, x-50, y-4, 32, 32);
 	tab_render->addComponent(pgrid);
 
 	equator_grid_cbx = new LabeledCheckBox(false, _("Equatorial Grid"));
@@ -170,10 +174,10 @@ Component* StelUI::createConfigWindow(void)
 	tab_render->addComponent(ecliptic_cbx);
 	ecliptic_cbx->setPos(x + 150,y);
 
-	y+=25;
+	y+=30;
 
 	const s_texture* groundp = new s_texture("bt_ground.png");
-	Picture* pground = new Picture(groundp, x-50, y, 32, 32);
+	Picture* pground = new Picture(groundp, x-50, y-4, 32, 32);
 	tab_render->addComponent(pground);
 
 	ground_cbx = new LabeledCheckBox(false, _("Ground"));
@@ -194,12 +198,37 @@ Component* StelUI::createConfigWindow(void)
 	fog_cbx = new LabeledCheckBox(false, _("Fog"));
 	fog_cbx->setOnPressCallback(callback<void>(this, &StelUI::updateConfigVariables));
 	tab_render->addComponent(fog_cbx);
-	fog_cbx->setPos(x + 150,y); y+=22;
+	fog_cbx->setPos(x + 150,y);
+
+	y+=30;
+	
+	meteorlbl = new Label(L"-");
+	meteorlbl->setPos(x,y);
+	tab_render->addComponent(meteorlbl);
+
+	y+=20;
+	
+	meteor_rate_10 = new LabeledCheckBox(false, L"10");
+	meteor_rate_10->setOnPressCallback(callback<void>(this, &StelUI::updateConfigVariables));
+	tab_render->addComponent(meteor_rate_10);
+	meteor_rate_10->setPos(x,y);
+	meteor_rate_80 = new LabeledCheckBox(false, L"80");
+	meteor_rate_80->setOnPressCallback(callback<void>(this, &StelUI::updateConfigVariables));
+	tab_render->addComponent(meteor_rate_80);
+	meteor_rate_80->setPos(x+40,y);
+	meteor_rate_10000 = new LabeledCheckBox(false, L"10000");
+	meteor_rate_10000->setOnPressCallback(callback<void>(this, &StelUI::updateConfigVariables));
+	tab_render->addComponent(meteor_rate_10000);
+	meteor_rate_10000->setPos(x+80,y);
+	meteor_rate_144000 = new LabeledCheckBox(false, L"144000");
+	meteor_rate_144000->setOnPressCallback(callback<void>(this, &StelUI::updateConfigVariables));
+	tab_render->addComponent(meteor_rate_144000);
+	meteor_rate_144000->setPos(x+144,y);
 
 	LabeledButton* render_save_bt = new LabeledButton(_("Save as default"));
 	render_save_bt->setOnPressCallback(callback<void>(this, &StelUI::saveRenderOptions));
 	tab_render->addComponent(render_save_bt);
-	render_save_bt->setPos(120,tab_render->getSizey()-70);
+	render_save_bt->setPos(tab_render->getSizex()/2-render_save_bt->getSizex()/2,tab_render->getSizey()-70);
 	y+=20;
 
 	// Date & Time options
@@ -320,7 +349,7 @@ Component* StelUI::createConfigWindow(void)
 	lblvideo1->setPos(x, y);
 	tab_video->addComponent(lblvideo1);
 
-	x=30; y+=20;
+	x=60; y+=20;
 	
 	projection_sl = new StringList();
 	projection_sl->addItem("perspective");
@@ -340,7 +369,7 @@ Component* StelUI::createConfigWindow(void)
 	tab_video->addComponent(disk_viewport_cbx);
 	disk_viewport_cbx->setPos(x,y); y+=35;
 
-	x=180; y=10;
+	x=250; y=10;
 	Label * lblvideo2 = new Label(wstring(L"\u2022 ")+_("Screen Resolution :"));
 	lblvideo2->setPos(x+10, y);
 	tab_video->addComponent(lblvideo2); y+=24;
@@ -370,15 +399,15 @@ Component* StelUI::createConfigWindow(void)
 	snprintf(vs, 999, "%sconfig.ini", app->getConfigDir().c_str());
 	Label * lblvideo5 = new Label(_("For unlisted screen resolution, edit the file :"));
 	Label * lblvideo6 = new Label(StelUtility::stringToWstring(string(vs)));
-	lblvideo5->setPos(30, tab_video->getSizey()-110);
-	lblvideo6->setPos(30, tab_video->getSizey()-94);
+	lblvideo5->setPos(30, tab_video->getSizey()-125);
+	lblvideo6->setPos(30, tab_video->getSizey()-110);
 	tab_video->addComponent(lblvideo5);
 	tab_video->addComponent(lblvideo6);
 
 	LabeledButton* video_save_bt = new LabeledButton(_("Save as default"));
 	video_save_bt->setOnPressCallback(callback<void>(this, &StelUI::setVideoOption));
 	tab_video->addComponent(video_save_bt);
-	video_save_bt->setPos(120,tab_video->getSizey()-70);
+	video_save_bt->setPos(tab_video->getSizex()/2-video_save_bt->getSizex()/2,tab_video->getSizey()-70);
 
 	// Landscapes option
 	FilledContainer* tab_landscapes = new FilledContainer();
@@ -402,48 +431,69 @@ Component* StelUI::createConfigWindow(void)
 
 	y+=150;	
 
-	Label * lbllandscape1 = new Label(_("Please save option in tab \"Location\""));
-	Label * lbllandscape2 = new Label(_("to save current landscape as the default landscape."));
-	lbllandscape1->setPos(30, tab_landscapes->getSizey()-70);
-	lbllandscape2->setPos(30, tab_landscapes->getSizey()-54);
-	tab_landscapes->addComponent(lbllandscape1);
-	tab_landscapes->addComponent(lbllandscape2);
+	LabeledButton* landscape_save_bt = new LabeledButton(_("Save as default"));
+	landscape_save_bt->setOnPressCallback(callback<void>(this, &StelUI::saveLandscapeOptions));
+	tab_landscapes->addComponent(landscape_save_bt);
+	landscape_save_bt->setPos(tab_landscapes->getSizex()/2-landscape_save_bt->getSizex()/2,tab_landscapes->getSizey()-70);
 
 
-
-
-	// Landscapes option
+	// Language options
 	FilledContainer* tab_language = new FilledContainer();
 	tab_language->setSize(config_tab_ctr->getSize());
 
 	x=10; y=10;
-	Label * lbllanguage = new Label(wstring(L"\u2022 ")+_("Choose application language :"));
+	Label * lbllanguage = new Label(wstring(L"\u2022 ")+_("Application language :"));
 	lbllanguage->setPos(x, y);
 	tab_language->addComponent(lbllanguage);
 
-	x=50; y+=24;
+	y+=25;
 
 	language_lb = new ListBox(6);
-	language_lb->setPos(x,y);
+	language_lb->setPos(x+10,y);
 	language_lb->setSizex(200);
 	language_lb->addItemList(StelUtility::stringToWstring(Translator::getAvailableLanguagesCodes(LOCALEDIR)));
 	language_lb->setOnChangeCallback(callback<void>(this, &StelUI::setAppLanguage));
+	language_lb->setCurrent(StelUtility::stringToWstring(app->getAppLanguage()));
 	tab_language->addComponent(language_lb);
 	
-	x=10; y+=language_lb->getSizey() + 24;
+	x=260; y=10;
 	
-	Label * lbllanguage2 = new Label(wstring(L"\u2022 ")+_("Choose sky language :"));
+	Label * lbllanguage2 = new Label(wstring(L"\u2022 ")+_("Sky language :"));
 	lbllanguage2->setPos(x, y);
 	tab_language->addComponent(lbllanguage2);
 
-	x=50; y+=24;
+	y+=25;
 
 	languageSky_lb = new ListBox(6);
-	languageSky_lb->setPos(x,y);
+	languageSky_lb->setPos(x+10,y);
 	languageSky_lb->setSizex(200);
 	languageSky_lb->addItemList(StelUtility::stringToWstring(Translator::getAvailableLanguagesCodes(LOCALEDIR)));
 	languageSky_lb->setOnChangeCallback(callback<void>(this, &StelUI::setSkyLanguage));
+	languageSky_lb->setCurrent(StelUtility::stringToWstring(core->getSkyLanguage()));
 	tab_language->addComponent(languageSky_lb);
+
+	x=150;
+	y+=languageSky_lb->getSizey();
+	y+=30;
+	
+	Label * lbllanguage3 = new Label(wstring(L"\u2022 ")+_("Sky culture :"));
+	lbllanguage3->setPos(x, y);
+	tab_language->addComponent(lbllanguage3);
+	
+	y+=25;
+	
+	skyculture_lb = new ListBox(5);
+	skyculture_lb->setSizex(200);
+	skyculture_lb->setPos(x,y);
+	skyculture_lb->addItemList(core->getSkyCultureListI18());
+	skyculture_lb->setOnChangeCallback(callback<void>(this, &StelUI::setSkyCulture));
+	skyculture_lb->setCurrent(core->getSkyCulture());
+	tab_language->addComponent(skyculture_lb);
+
+	LabeledButton* language_save_bt = new LabeledButton(_("Save as default"));
+	language_save_bt->setOnPressCallback(callback<void>(this, &StelUI::saveLanguageOptions));
+	tab_language->addComponent(language_save_bt);
+	language_save_bt->setPos(tab_language->getSizex()/2-language_save_bt->getSizex()/2,tab_language->getSizey()-70);
 
 	// Global window
 	config_tab_ctr->setTexture(flipBaseTex);
@@ -467,6 +517,11 @@ void StelUI::setSkyLanguage(void)
 void StelUI::setAppLanguage(void)
 {
 	app->setAppLanguage(StelUtility::wstringToString(language_lb->getCurrent()));
+}
+
+void StelUI::setSkyCulture(void)
+{
+	core->setSkyCulture(skyculture_lb->getCurrent());
 }
 
 void StelUI::load_cities(const string & fileName)
@@ -495,14 +550,6 @@ void StelUI::load_cities(const string & fileName)
 	int line = 0;
 	while (!feof(fic))
 	{
-/*
-		if (!(line%100) || (line == total-1))
-		{
-			sprintf(tmpstr, _("Loading city data: %d/%d"), line+1, total);
-			lb.SetMessage(tmpstr);
-			lb.Draw((float)(line+1)/total);
-		}
-*/
 		fgets(linetmp, 100, fic);
 		if (linetmp[0] != '#')
 		{
@@ -656,16 +703,6 @@ Component* StelUI::createSearchWindow(void)
 	sprintf(nebc, "M");
 	nebula_cat->setValue(nebc);
 	tab_nebula->addComponent(nebula_cat);
-	
-	/*nebula_cat = new ListBox(6);
-	nebula_cat->addItem(_("NGC" ));
-	nebula_cat->addItem(_("IC" ));
-	nebula_cat->addItem(_("UGC" ));
-	nebula_cat->setVisible(true);
-	nebula_cat->setOnChangeCallback(callback<void>(this, &StelUI::listBoxChanged));
-	tab_nebula->addComponent(nebula_cat);
-	nebula_cat->setPos(x+100,y+70);
-	nebula_cat->setSize(170,25);*/
 
 	nebula_edit = new EditBox(_(""));
 	nebula_edit->setOnReturnKeyCallback(callback<void>(this, &StelUI::doNebulaSearch));
@@ -673,70 +710,6 @@ Component* StelUI::createSearchWindow(void)
 	nebula_edit->setPos(x+100,y);
 	nebula_edit->setSize(170,25);
 
-    // controls
-// 	FilledContainer* tab_example = new FilledContainer();
-// 	tab_example->setSize(search_tab_ctr->getSize());
-// 
-// 	// example horizontal cursorbar
-// 	CursorBar *chbar = new CursorBar(false, -.6,1.7);
-// 	tab_example->addComponent(chbar);
-// 	chbar->setPos(60,10);
-// 	chbar->setSize(150,20);
-// 	
-// 	// example horizontal cursorbar
-//     CursorBar *cvbar = new CursorBar(true, 5,15);
-// 	cvbar->setPos(30,30);
-// 	cvbar->setSize(20,120);
-// 	tab_example->addComponent(cvbar);
-// 
-// 	// example vscrollbar
-// 	ScrollBar *vbar = new ScrollBar(true, 5,1);
-// 	vbar->setPos(320,20);
-// 	vbar->setSize(20,140);
-// 	tab_example->addComponent(vbar);
-// 
-// 	// example hscrollbar
-// 	ScrollBar *hbar = new ScrollBar(false,12,3);
-// 	hbar->setPos(80,160);
-// 	hbar->setSize(240,20);
-// 	tab_example->addComponent(hbar);
-// 
-// 	listBox = new ListBox(6);
-// 	listBox->setPos(60,40);
-// 	listBox->setSizex(200);
-// 	listBox->setOnChangeCallback(callback<void>(this, &StelUI::listBoxChanged));
-// 	tab_example->addComponent(listBox);
-// 
-// 	// example editbox
-// 	EditBox *editbox = new EditBox();
-// 	editbox->setPos(20,180);
-// 	editbox->setSize(250,25);
-// 	tab_example->addComponent(editbox);
-// 
-// 	// example messageboxes and inputboxes
-// 	LabeledButton *button1 = new LabeledButton(L"MsgBox 1");
-// 	button1->setPos(20,220);
-// 	button1->setSize(80,25);
-// 	button1->setOnPressCallback(callback<void>(this, &StelUI::msgbox1));
-// 	tab_example->addComponent(button1);
-// 
-// 	LabeledButton *button2 = new LabeledButton(L"MsgBox 2");
-// 	button2->setPos(115,220);
-// 	button2->setSize(80,25);
-// 	button2->setOnPressCallback(callback<void>(this, &StelUI::msgbox2));
-// 	tab_example->addComponent(button2);
-// 
-// 	LabeledButton *button3 = new LabeledButton(L"MsgBox 3");
-// 	button3->setPos(205,220);
-// 	button3->setSize(80,25);
-// 	button3->setOnPressCallback(callback<void>(this, &StelUI::msgbox3));
-// 	tab_example->addComponent(button3);
-// 
-// 	LabeledButton *button4 = new LabeledButton(L"Inputbox");
-// 	button4->setPos(300,220);
-// 	button4->setSize(80,25);
-// 	button4->setOnPressCallback(callback<void>(this, &StelUI::inputbox1));
-// 	tab_example->addComponent(button4);
 
     // Planets
 	FilledContainer* tab_planets = new FilledContainer();
@@ -963,6 +936,7 @@ void StelUI::updateConfigVariables(void)
 	app->commander->execute_command("set star_twinkle_amount ", star_twinkle_amount->getValue());
 	app->commander->execute_command("flag constellation_drawing ", constellation_cbx->getState());
 	app->commander->execute_command("flag constellation_names ", constellation_name_cbx->getState());
+	app->commander->execute_command("flag constellation_boundaries ", constellation_boundaries_cbx->getState());
 	app->commander->execute_command("flag constellation_pick ", sel_constellation_cbx->getState());
 	app->commander->execute_command("flag nebula_names ", nebulas_names_cbx->getState());
 	app->commander->execute_command("set max_mag_nebula_name ", max_mag_nebula_name->getValue());
@@ -976,6 +950,14 @@ void StelUI::updateConfigVariables(void)
 	app->commander->execute_command("flag cardinal_points ", cardinal_cbx->getState());
 	app->commander->execute_command("flag atmosphere ", atmosphere_cbx->getState());
 	app->commander->execute_command("flag fog ", fog_cbx->getState());
+	if (meteor_rate_10->getState() && core->getMeteorsRate()!=10)
+		app->commander->execute_command("meteors zhr 10");
+	else if (meteor_rate_80->getState() && core->getMeteorsRate()!=80)
+		app->commander->execute_command("meteors zhr 80");
+	else if (meteor_rate_10000->getState() && core->getMeteorsRate()!=10000)
+		app->commander->execute_command("meteors zhr 10000");
+	else if (meteor_rate_144000->getState() && core->getMeteorsRate()!=144000)
+		app->commander->execute_command("meteors zhr 144000");
 }
 
 void StelUI::updateConfigVariables2(void)
@@ -1040,6 +1022,25 @@ void StelUI::saveObserverPosition(void)
 
 }
 
+void StelUI::saveLandscapeOptions(void)
+{
+	cout << "Saving landscape name in file " << app->getConfigFile() << endl;
+	InitParser conf;
+	conf.load(app->getConfigFile());
+	conf.set_str("init_location:landscape_name", core->getObservatory().get_landscape_name());
+	conf.save(app->getConfigFile());
+}
+
+void StelUI::saveLanguageOptions(void)
+{
+	cout << "Saving language in file " << app->getConfigFile() << endl;
+	InitParser conf;
+	conf.load(app->getConfigFile());
+	conf.set_str("localization:sky_locale", core->getSkyLanguage());
+	conf.set_str("localization:app_locale", app->getAppLanguage());
+	conf.save(app->getConfigFile());
+}
+
 void StelUI::saveRenderOptions(void)
 {
 	cout << "Saving rendering options in file " << app->getConfigFile() << endl;
@@ -1064,7 +1065,6 @@ void StelUI::saveRenderOptions(void)
 	conf.set_double("viewing:moon_scale", core->getMoonScale());
 	conf.set_boolean("viewing:flag_chart", app->getVisionModeChart());
 	conf.set_boolean("viewing:flag_night", app->getVisionModeNight());
-	//conf.set_boolean("viewing:use_common_names", core->FlagUseCommonNames);
 	conf.set_boolean("viewing:flag_equatorial_grid", core->getFlagEquatorGrid());
 	conf.set_boolean("viewing:flag_azimutal_grid", core->getFlagAzimutalGrid());
 	conf.set_boolean("viewing:flag_equator_line", core->getFlagEquatorLine());
@@ -1134,6 +1134,7 @@ void StelUI::updateConfigForm(void)
 	star_twinkle_amount->setValue(core->getStarTwinkleAmount());
 	constellation_cbx->setState(core->getFlagConstellationLines());
 	constellation_name_cbx->setState(core->getFlagConstellationNames());
+	constellation_boundaries_cbx->setState(core->getFlagConstellationBoundaries());
 	sel_constellation_cbx->setState(core->getFlagConstellationIsolateSelected());
 	nebulas_names_cbx->setState(core->getFlagNebulaHints());
 	max_mag_nebula_name->setValue(core->getNebulaMaxMagHints());
@@ -1148,6 +1149,37 @@ void StelUI::updateConfigForm(void)
 	cardinal_cbx->setState(core->getFlagCardinalsPoints());
 	atmosphere_cbx->setState(core->getFlagAtmosphere());
 	fog_cbx->setState(core->getFlagFog());
+
+	wstring meteorRate;
+	if (core->getMeteorsRate()==10)
+	{
+		meteorRate = _(": Normal rate");
+		meteor_rate_10->setState(true);
+	}
+	else
+		meteor_rate_10->setState(false);
+	if (core->getMeteorsRate()==80)
+	{
+		meteorRate = _(": Standard Perseids rate");
+		meteor_rate_80->setState(true);
+	}
+	else
+		meteor_rate_80->setState(false);
+	if (core->getMeteorsRate()==10000)
+	{
+		meteorRate = _(": Exceptional Leonid rate");
+		meteor_rate_10000->setState(true);
+	}
+	else
+		meteor_rate_10000->setState(false);
+	if (core->getMeteorsRate()==144000)
+	{
+		meteorRate = _(": Highest rate ever (1966 Leonids)");
+		meteor_rate_144000->setState(true);
+	}
+	else
+		meteor_rate_144000->setState(false);
+	meteorlbl->setLabel(_("Meteor Rate per minute")+meteorRate);
 
 	earth_map->setPointerLongitude(core->getObservatory().get_longitude());
 	earth_map->setPointerLatitude(core->getObservatory().get_latitude());

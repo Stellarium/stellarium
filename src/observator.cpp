@@ -163,7 +163,6 @@ void Observator::save(const string& file, const string& section)
 	setConf(conf,section);
 
 	conf.save(file);
-
 }
 
 
