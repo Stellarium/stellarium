@@ -23,6 +23,11 @@ Splitted StelCore class into two separated classes : StelCore and StelApp.
 Added many new .po files for translation in more languages.
 Auto-scan available translations.
 Improved mouse zoom control.
+Viewport distortion for spheric mirror projection
+Replaced calculation of galilean and mars satellites with newer and better calculations made by V.Lainey
+Replaced current implementation of VSOP87B with faster and more accurate implementation of VSOP87
+When displaying Mercury-Neptune orbits, the osculating orbits are shown
+Light travel time compensation for solar system objects
 
 0.7.1 [2005-09-17]
 Fixed location saving bug.
