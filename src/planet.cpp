@@ -175,6 +175,13 @@ Vec3d Planet::get_earth_equ_pos(const Navigator * nav) const
 
 // Compute the position in the parent Planet coordinate system
 // Actually call the provided function to compute the ecliptical position
+void Planet::computePositionWithoutOrbits(const double date) {
+  if (fabs(lastJD-date)>deltaJD) {
+    coord_func(date, ecliptic_pos);
+    lastJD = date;
+  }
+}
+
 void Planet::compute_position(const double date)
 {
 
