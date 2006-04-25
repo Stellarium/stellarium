@@ -54,13 +54,15 @@ public:
 	void setLabelColor(const Vec3f& c) {Planet::set_label_color(c);}
 	const Vec3f& getLabelColor(void) const {return Planet::getLabelColor();}
 	void setOrbitColor(const Vec3f& c) {Planet::set_orbit_color(c);}
-	Vec3f getOrbitColor() {return Planet::getOrbitColor();}
+	Vec3f getOrbitColor(void) const {return Planet::getOrbitColor();}
  
 	// Compute the position for every elements of the solar system.
-	void computePositions(double date);
+    // home_planet is needed for light travel time computation
+	void computePositions(double date,const Planet *home_planet);
 
 	// Compute the transformation matrix for every elements of the solar system.
-    void computeTransMatrices(double date);
+    // home_planet is needed for light travel time computation
+    void computeTransMatrices(double date,const Planet *home_planet);
 
 	// Search if any Planet is close to position given in earth equatorial position.
 	Planet* search(Vec3d, const Navigator * nav, const Projector * prj) const;
@@ -91,26 +93,32 @@ public:
 	
 	//! Activate/Deactivate planets hints display
 	void setFlagHints(bool b);
-	bool getFlagHints(void);	
+	bool getFlagHints(void) const;	
 	
 	//! Activate/Deactivate planets hints display
 	void setFlagOrbits(bool b);
-	bool getFlagOrbits() {return flagOrbits;};	
+	bool getFlagOrbits(void) const {return flagOrbits;}
+
+	void setFlagLightTravelTime(bool b) {flag_light_travel_time = b;}
+	bool getFlagLightTravelTime(void) const {return flag_light_travel_time;}	
 	
 	//! Start/stop accumulating new trail data (clear old data)
 	void startTrails(bool b);
 	
 	void setTrailColor(const Vec3f& c)  {Planet::set_trail_color(c);}
-	Vec3f getTrailColor()  {return Planet::getTrailColor();}
+	Vec3f getTrailColor(void) const {return Planet::getTrailColor();}
 	void updateTrails(const Navigator* nav);
 	
 	//! Set/Get base planets display scaling factor 
 	void setScale(float scale) {Planet::setScale(scale);}
-	float getScale(void) const {return Planet::getScale();};
+	float getScale(void) const {return Planet::getScale();}
 	
 	//! Set/Get if Moon display is scaled
-	void setFlagMoonScale(bool b) {if(!b) getMoon()->set_sphere_scale(1); else getMoon()->set_sphere_scale(moonScale);}
-	bool getFlagMoonScale(void) const {return (fabs(getMoon()->get_sphere_scale()-1.)>0.0001);}	
+	void setFlagMoonScale(bool b)
+      {if (!b) getMoon()->set_sphere_scale(1);
+       else getMoon()->set_sphere_scale(moonScale);}
+	bool getFlagMoonScale(void) const
+      {return (fabs(getMoon()->get_sphere_scale()-1.)>0.0001);}
 	
 	//! Set/Get Moon display scaling factor 
 	void setMoonScale(float f) {moonScale = f;}
@@ -159,7 +167,7 @@ private:
 
 	// Master settings
 	bool flagOrbits;
-
+	bool flag_light_travel_time;
 };
 
 

@@ -147,9 +147,11 @@ void StelCore::init(const InitParser& conf)
 
 	// Compute planets data and init viewing position
 	// Position of sun and all the satellites (ie planets)
-	ssystem->computePositions(navigation->get_JDay());
+	ssystem->computePositions(navigation->get_JDay(),
+	                          navigation->getHomePlanet());
 	// Matrix for sun and all the satellites (ie planets)
-	ssystem->computeTransMatrices(navigation->get_JDay());
+	ssystem->computeTransMatrices(navigation->get_JDay(),
+	                              navigation->getHomePlanet());
 
 	// Compute transform matrices between coordinates systems
 	navigation->update_transform_matrices();
@@ -237,6 +239,7 @@ void StelCore::init(const InitParser& conf)
 	setFlagPlanets(conf.get_boolean("astro:flag_planets"));
 	setFlagPlanetsHints(conf.get_boolean("astro:flag_planets_hints"));
 	setFlagPlanetsOrbits(conf.get_boolean("astro:flag_planets_orbits"));
+	setFlagLightTravelTime(conf.get_boolean("astro:flag_light_travel_time"));
 	setFlagPlanetsTrails(conf.get_boolean("astro", "flag_object_trails", 0));
 	startPlanetsTrails(conf.get_boolean("astro", "flag_object_trails", 0));
 	setFlagNebula(conf.get_boolean("astro:flag_nebula"));
@@ -258,9 +261,11 @@ void StelCore::update(int delta_time)
 	navigation->update_time(delta_time);
 
 	// Position of sun and all the satellites (ie planets)
-	ssystem->computePositions(navigation->get_JDay());
+	ssystem->computePositions(navigation->get_JDay(),
+	                          navigation->getHomePlanet());
 	// Matrix for sun and all the satellites (ie planets)
-	ssystem->computeTransMatrices(navigation->get_JDay());
+	ssystem->computeTransMatrices(navigation->get_JDay(),
+	                              navigation->getHomePlanet());
 
 	// Transform matrices between coordinates systems
 	navigation->update_transform_matrices();
