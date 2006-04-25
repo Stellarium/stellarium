@@ -845,8 +845,8 @@ void StelCore::turn_right(int s)
 	if (s && FlagEnableMoveKeys)
 	{
 		deltaAz = 1;
-		navigation->set_flag_traking(0);
-		navigation->set_flag_lock_equ_pos(0);
+		setFlagTraking(false);
+		setFlagLockSkyPosition(false);
 	}
 	else deltaAz = 0;
 }
@@ -856,8 +856,8 @@ void StelCore::turn_left(int s)
 	if (s && FlagEnableMoveKeys)
 	{
 		deltaAz = -1;
-		navigation->set_flag_traking(0);
-		navigation->set_flag_lock_equ_pos(0);
+		setFlagTraking(false);
+		setFlagLockSkyPosition(false);
 
 	}
 	else deltaAz = 0;
@@ -868,8 +868,8 @@ void StelCore::turn_up(int s)
 	if (s && FlagEnableMoveKeys)
 	{
 		deltaAlt = 1;
-		navigation->set_flag_traking(0);
-		navigation->set_flag_lock_equ_pos(0);
+		setFlagTraking(false);
+		setFlagLockSkyPosition(false);
 	}
 	else deltaAlt = 0;
 }
@@ -879,8 +879,8 @@ void StelCore::turn_down(int s)
 	if (s && FlagEnableMoveKeys)
 	{
 		deltaAlt = -1;
-		navigation->set_flag_traking(0);
-		navigation->set_flag_lock_equ_pos(0);
+		setFlagTraking(false);
+		setFlagLockSkyPosition(false);
 	}
 	else deltaAlt = 0;
 }
@@ -914,6 +914,8 @@ void StelCore::dragView(int x1, int y1, int x2, int y2)
 	rect_to_sphe(&az1, &alt1, tempvec1);
 	rect_to_sphe(&az2, &alt2, tempvec2);
 	navigation->update_move(az2-az1, alt1-alt2);
+	setFlagTraking(false);
+	setFlagLockSkyPosition(false);
 }
 
 // Increment/decrement smoothly the vision field and position
