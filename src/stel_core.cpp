@@ -388,10 +388,10 @@ void StelCore::draw(int delta_time)
 	// Set openGL drawings in local coordinates i.e. generally altazimuthal coordinates
 	navigation->switch_to_local();
 
-	// Draw meteors
+	// Upade meteors
 	meteors->update(projection, navigation, tone_converter, delta_time);
 
-	if(!getFlagAtmosphere() || sky_brightness<0.01)
+	if(!getFlagAtmosphere() || sky_brightness<0.1)
 	{
 		projection->set_orthographic_projection();
 		meteors->draw(projection, navigation);
