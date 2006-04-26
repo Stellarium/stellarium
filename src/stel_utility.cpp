@@ -239,7 +239,7 @@ double get_dec_angle(const string& str)
 		if ((dec = strchr(ptr,',')) != NULL)
 			*dec = '.';
 		seconds = strtod (ptr, NULL);
-		if (seconds > 59)
+		if (seconds >= 60.0)
 		{
 			free(mptr);
 			return (-0.0);
@@ -254,7 +254,7 @@ double get_dec_angle(const string& str)
 
 	free(mptr);
 
-	pos = dghh + minutes /60.0 + seconds / 3600.0;
+	pos = ((dghh*60+minutes)*60 + seconds) / 3600.0;
 	if (type == HOURS && pos > 24.0)
 		return (-0.0);
 	if (type == LAT && pos > 90.0)
@@ -264,7 +264,7 @@ double get_dec_angle(const string& str)
 			return (-0.0);
 
 	if (negative)
-		pos = 0.0 - pos;
+		pos = -pos;
 
 	return (pos);
 
@@ -280,48 +280,48 @@ double get_dec_angle(const string& str)
 //! @return The corresponding string
 wstring StelUtility::printAngleDMS(double angle, bool decimals, bool useD)
 {
-	wchar_t buf[32];
-	buf[31]=L'\0';
-	wchar_t sign = L'+';
-	// wchar_t degsign = L'Â°'; ???
-	wchar_t degsign = L'\u00B0';
-	if (useD) degsign = L'd';
+    wchar_t buf[32];
+    buf[31]=L'\0';
+    wchar_t sign = L'+';
+    // wchar_t degsign = L'Â°'; ???
+    wchar_t degsign = L'\u00B0';
+    if (useD) degsign = L'd';
 
-	angle *= 180./M_PI;
+    angle *= 180./M_PI;
 
-	if (angle<0) {
-		angle *= -1;
-		sign = '-';
-	}
+    if (angle<0) {
+        angle *= -1;
+        sign = '-';
+    }
 
-	if (decimals) {
-		int d = (int)(angle*(60*60*100));
-		const int centi = d % 100;
-		d /= 100;
-		const int s = d % 60;
-		d /= 60;
-		const int m = d % 60;
-		d /= 60;
-		swprintf(buf,
+    if (decimals) {
+        int d = (int)(0.5+angle*(60*60*100));
+        const int centi = d % 100;
+        d /= 100;
+        const int s = d % 60;
+        d /= 60;
+        const int m = d % 60;
+        d /= 60;
+        swprintf(buf,
 #ifndef MINGW32
-			     sizeof(buf),
+                 sizeof(buf),
 #endif
-			     L"%lc%.2d%lc%.2d'%.2d.%02d\"",
-			     sign, d, degsign, m, s, centi);
-	} else {
-		int d = (int)(angle*(60*60));
-		const int s = d % 60;
-		d /= 60;
-		const int m = d % 60;
-		d /= 60;
-		swprintf(buf,
+                 L"%lc%.2d%lc%.2d'%.2d.%02d\"",
+                 sign, d, degsign, m, s, centi);
+    } else {
+        int d = (int)(0.5+angle*(60*60));
+        const int s = d % 60;
+        d /= 60;
+        const int m = d % 60;
+        d /= 60;
+        swprintf(buf,
 #ifndef MINGW32
-		         sizeof(buf),
+                 sizeof(buf),
 #endif
-		         L"%lc%.2d%lc%.2d'%.2d\"",
-		         sign, d, degsign, m, s);
-	}
-	return buf;
+                 L"%lc%.2d%lc%.2d'%.2d\"",
+                 sign, d, degsign, m, s);
+    }
+    return buf;
 }
 
 //! @brief Print the passed angle with the format +hhhmmmss(.ss)"
@@ -330,37 +330,41 @@ wstring StelUtility::printAngleDMS(double angle, bool decimals, bool useD)
 //! @return The corresponding string
 wstring StelUtility::printAngleHMS(double angle, bool decimals)
 {
-	wchar_t buf[16];
-	buf[15] = L'\0';
+    wchar_t buf[16];
+    buf[15] = L'\0';
     angle = fmod(angle,2.0*M_PI);
-    if (angle < 0.0) angle += 2.0*M_PI;
-	angle *= 12./M_PI;
-	if (decimals) {
-    	int h = (int)(angle*60*60*100);
-		const int centi = h % 100;
-		h /= 100;
-		const int s = h % 60;
-		h /= 60;
-		const int m = h % 60;
-		h /= 60;
-		swprintf(buf,
+    if (angle < 0.0) angle += 2.0*M_PI; // range: [0..2.0*M_PI)
+    angle *= 12./M_PI; // range: [0..24)
+    if (decimals) {
+        angle = 0.5+angle*(60*60*100); // range:[0.5,24*60*60*100+0.5)
+        if (angle >= (24*60*60*100)) angle -= (24*60*60*100);
+        int h = (int)angle;
+        const int centi = h % 100;
+        h /= 100;
+        const int s = h % 60;
+        h /= 60;
+        const int m = h % 60;
+        h /= 60;
+        swprintf(buf,
 #ifndef MINGW32
                  sizeof(buf),
 #endif
                  L"%.2dh%.2dm%.2d.%02ds",h,m,s,centi);
-	} else {
-    	int h = (int)(angle*60*60);
-		const int s = h % 60;
-		h /= 60;
-		const int m = h % 60;
-		h /= 60;
-		swprintf(buf,
+    } else {
+        angle = 0.5+angle*(60*60); // range:[0.5,24*60*60+0.5)
+        if (angle >= (24*60*60)) angle -= (24*60*60);
+        int h = (int)angle;
+        const int s = h % 60;
+        h /= 60;
+        const int m = h % 60;
+        h /= 60;
+        swprintf(buf,
 #ifndef MINGW32
                  sizeof(buf),
 #endif
                  L"%.2dh%.2dm%.2ds",h,m,s);
-	}
-	return buf;
+    }
+    return buf;
 }
 
 
@@ -369,7 +373,6 @@ wstring StelUtility::printAngleHMS(double angle, bool decimals)
 
 int string_to_jday(string date, double &jd)
 {
-
 	char tmp;
 	int year, month, day, hour, minute, second;
 	year = month = day = hour = minute = second = 0;
