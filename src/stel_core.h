@@ -540,6 +540,11 @@ public:
 	//! Get maximum magnitude at which nebulae hints are displayed
 	float getNebulaMaxMagHints(void) const {return nebulas->getMaxMagHints();}
 	
+	//! Set flag for displaying Nebulae even without textures
+	void setFlagNebulaDisplayNoTexture(bool b) {nebulas->setFlagDisplayNoTexture(b);}
+	//! Get flag for displaying Nebulae without textures
+	bool getFlagNebulaDisplayNoTexture(void) const {return nebulas->getFlagDisplayNoTexture();}	
+	
 	Vec3f getColorNebulaLabels(void) const {return nebulas->getLabelColor();}
 	Vec3f getColorNebulaCircle(void) const {return nebulas->getCircleColor();}
 	

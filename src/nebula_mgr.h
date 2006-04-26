@@ -75,6 +75,11 @@ public:
 	//! Get flag for displaying Nebulae as bright
 	bool getFlagBright(void) const {return Nebula::flagBright;}	
 	
+	//! Set flag for displaying Nebulae even without textures
+	void setFlagDisplayNoTexture(bool b) {displayNoTexture = b;}
+	//! Get flag for displaying Nebulae without textures
+	bool getFlagDisplayNoTexture(void) const {return displayNoTexture;}	
+	
 	//! Set maximum magnitude at which nebulae hints are displayed
 	void setMaxMagHints(float f) {maxMagHints = f;}
 	//! Get maximum magnitude at which nebulae hints are displayed
@@ -98,6 +103,7 @@ private:
 	Grid nebGrid;					// Grid for opimisation
 	
 	float maxMagHints;				// Define maximum magnitude at which nebulae hints are displayed
+	bool displayNoTexture;			// Define if nebulas without textures are to be displayed
 };
 
 #endif // _NEBULA_MGR_H_

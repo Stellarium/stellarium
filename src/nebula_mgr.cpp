@@ -29,7 +29,7 @@
 
 #define RADIUS_NEB 1.
 
-NebulaMgr::NebulaMgr()
+NebulaMgr::NebulaMgr() : displayNoTexture(false)
 {
 	nebZones = new vector<Nebula*>[nebGrid.getNbPoints()];
 }
@@ -112,6 +112,8 @@ void NebulaMgr::draw(Projector* prj, const Navigator * nav, ToneReproductor* eye
 	    for(iter = nebZones[zoneList[i]].begin(); iter!=end; ++iter)
 		{
 			n = *iter;
+			if (!displayNoTexture && !n->hasTex()) continue;
+			
 			// improve performance by skipping if too small to see
 			// TODO: skip if too faint to see
 			if (n->angular_size>size_limit ||
