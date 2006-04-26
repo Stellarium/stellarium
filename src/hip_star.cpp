@@ -133,7 +133,7 @@ wstring HipStar::getShortInfoString(const Navigator * nav) const
 
 	oss.setf(ios::fixed);
 	oss.precision(1);
-	oss << _("Magnitude ") << Mag;
+	oss << _("Magnitude: ") << Mag;
 	if (variableStar) oss << _(" (Variable)");
 
 	if(Distance) {

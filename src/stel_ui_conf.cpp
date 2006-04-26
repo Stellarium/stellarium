@@ -408,7 +408,7 @@ Component* StelUI::createConfigWindow(void)
 	tab_landscapes->setSize(config_tab_ctr->getSize());
 
 	x=10; y=10;
-	Label * lbllandscapes1 = new Label(wstring(L"\u2022 ")+_("Choose landscapes :"));
+	Label * lbllandscapes1 = new Label(wstring(L"\u2022 ")+_("Choose landscapes:"));
 	lbllandscapes1->setPos(x, y);
 	tab_landscapes->addComponent(lbllandscapes1);
 
@@ -436,7 +436,7 @@ Component* StelUI::createConfigWindow(void)
 	tab_language->setSize(config_tab_ctr->getSize());
 
 	x=10; y=10;
-	Label * lbllanguage = new Label(wstring(L"\u2022 ")+_("Application language :"));
+	Label * lbllanguage = new Label(wstring(L"\u2022 ")+_("Program language:"));
 	lbllanguage->setPos(x, y);
 	tab_language->addComponent(lbllanguage);
 
@@ -452,7 +452,7 @@ Component* StelUI::createConfigWindow(void)
 	
 	x=260; y=10;
 	
-	Label * lbllanguage2 = new Label(wstring(L"\u2022 ")+_("Sky language :"));
+	Label * lbllanguage2 = new Label(wstring(L"\u2022 ")+_("Sky language:"));
 	lbllanguage2->setPos(x, y);
 	tab_language->addComponent(lbllanguage2);
 
@@ -470,7 +470,7 @@ Component* StelUI::createConfigWindow(void)
 	y+=languageSky_lb->getSizey();
 	y+=30;
 	
-	Label * lbllanguage3 = new Label(wstring(L"\u2022 ")+_("Sky culture :"));
+	Label * lbllanguage3 = new Label(wstring(L"\u2022 ")+_("Sky culture:"));
 	lbllanguage3->setPos(x, y);
 	tab_language->addComponent(lbllanguage3);
 	
