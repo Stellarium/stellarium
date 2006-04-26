@@ -793,6 +793,9 @@ int StelUI::handle_clic(Uint16 x, Uint16 y, S_GUI_VALUE button, S_GUI_VALUE stat
 	// otherwise script can get confused
 	if(app->scripts->is_playing()) return 0;
 
+	// Make sure object pointer is turned on (script may have turned off)
+	core->setFlagSelectedObjectPointer(true);
+
 	// Show cursor
 	SDL_ShowCursor(1);
 	MouseTimeLeft = MouseCursorTimeout*1000;
