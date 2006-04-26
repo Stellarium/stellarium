@@ -26,6 +26,7 @@
 #include "grid.h"
 #include "fader.h"
 #include "loadingbar.h"
+#include "translator.h"
 
 using namespace std ;
 
@@ -41,6 +42,7 @@ public:
   	void set_names_fade_duration(float duration) {names_fader.set_duration((int) (duration * 1000.f));}
 	int load_common_names(const string& commonNameFile);
 	void load_sci_names(const string& sciNameFile);
+	void translateNames(Translator& trans);
 	 
     HipStar *search(Vec3f Pos);  		// Search the star by position
 	HipStar *search(const string&);	// Search the star by string (incl catalog prefix)
