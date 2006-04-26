@@ -558,3 +558,16 @@ bool HipStarMgr::load_variable(const string& hipCatFile)
 	cout << "(" << i << " stars loaded)" << endl;
 	return true;
 }
+
+//! @brief Update i18 names from english names according to passed translator
+//! The translation is done using gettext with translated strings defined in translations.h
+void HipStarMgr::translateNames(Translator& trans)
+{
+
+	// TODO: separate common names vector would be more efficient
+    for (int i=0; i<starArraySize; ++i)
+    {
+		StarArray[i].commonNameI18 = trans.translate(StarArray[i].englishCommonName);
+    }
+
+}
