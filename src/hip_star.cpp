@@ -204,6 +204,9 @@ int HipStar::read(FILE * catalog)
 
 	if (mag==0 && type==0) return 0;
 
+	// Hardcoded fix for bad data (because hp catalog isn't in cvs control)
+	if(HP==120412) { mag  = type = 0; return 0; }
+
 	//	printf("%d\t%d\t%.4f\t%.4f\t%c\n", HP, mag, rao, deo, SpType);
 
     return 1;
