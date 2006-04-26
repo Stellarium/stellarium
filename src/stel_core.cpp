@@ -246,6 +246,7 @@ void StelCore::init(const InitParser& conf)
 	setFlagNebulaHints(conf.get_boolean("astro:flag_nebula_name"));
 	setNebulaMaxMagHints(conf.get_double("astro", "max_mag_nebula_name", 99));
 	setNebulaCircleScale(conf.get_double("astro", "nebula_scale",1.0f));
+	setFlagNebulaDisplayNoTexture(conf.get_boolean("astro", "flag_nebula_display_no_texture", false));
 	setFlagMilkyWay(conf.get_boolean("astro:flag_milky_way"));
 	setMilkyWayIntensity(conf.get_double("astro","milky_way_intensity",1.));
 	setFlagBrightNebulae(conf.get_boolean("astro:flag_bright_nebulae"));	
