@@ -237,6 +237,7 @@ private:
 	LabeledCheckBox* constellation_boundaries_cbx;
 	LabeledCheckBox* sel_constellation_cbx;
 	LabeledCheckBox* nebulas_names_cbx;
+	LabeledCheckBox* nebulas_no_texture_cbx;
 	FloatIncDec* max_mag_nebula_name;
 	LabeledCheckBox* planets_cbx;
 	LabeledCheckBox* planets_hints_cbx;

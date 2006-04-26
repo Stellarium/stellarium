@@ -124,6 +124,13 @@ Component* StelUI::createConfigWindow(void)
 	tab_render->addComponent(max_mag_nebula_name);
 	max_mag_nebula_name->setPos(x + 220,y);
 
+	y+=15;
+	
+	nebulas_no_texture_cbx = new LabeledCheckBox(false, _("Also display Nebulas without textures"));
+	nebulas_no_texture_cbx->setOnPressCallback(callback<void>(this, &StelUI::updateConfigVariables));
+	tab_render->addComponent(nebulas_no_texture_cbx);
+	nebulas_no_texture_cbx->setPos(x,y);
+
 	y+=30;
 
 	const s_texture* planp = new s_texture("bt_planet.png");
@@ -934,6 +941,7 @@ void StelUI::updateConfigVariables(void)
 	app->commander->execute_command("flag constellation_pick ", sel_constellation_cbx->getState());
 	app->commander->execute_command("flag nebula_names ", nebulas_names_cbx->getState());
 	app->commander->execute_command("set max_mag_nebula_name ", max_mag_nebula_name->getValue());
+	core->setFlagNebulaDisplayNoTexture(nebulas_no_texture_cbx->getState());
 	app->commander->execute_command("flag planet_names ", planets_hints_cbx->getState());
 	app->commander->execute_command("flag moon_scaled ", moon_x4_cbx->getState());
 	app->commander->execute_command("flag equatorial_grid ", equator_grid_cbx->getState());
@@ -1055,6 +1063,7 @@ void StelUI::saveRenderOptions(void)
 	conf.set_boolean("astro:flag_nebula", core->getFlagNebula());
 	conf.set_boolean("astro:flag_nebula_name", core->getFlagNebulaHints());
 	conf.set_double("astro:max_mag_nebula_name", core->getNebulaMaxMagHints());
+	conf.set_boolean("astro:flag_nebula_display_no_texture", core->getFlagNebulaDisplayNoTexture());
 	conf.set_boolean("astro:flag_planets", core->getFlagPlanets());
 	conf.set_boolean("astro:flag_planets_hints", core->getFlagPlanetsHints());
 	conf.set_double("viewing:moon_scale", core->getMoonScale());
@@ -1133,6 +1142,7 @@ void StelUI::updateConfigForm(void)
 	sel_constellation_cbx->setState(core->getFlagConstellationIsolateSelected());
 	nebulas_names_cbx->setState(core->getFlagNebulaHints());
 	max_mag_nebula_name->setValue(core->getNebulaMaxMagHints());
+	nebulas_no_texture_cbx->setState(core->getFlagNebulaDisplayNoTexture());
 	planets_cbx->setState(core->getFlagPlanets());
 	planets_hints_cbx->setState(core->getFlagPlanetsHints());
 	moon_x4_cbx->setState(core->getFlagMoonScaled());
