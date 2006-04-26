@@ -244,7 +244,7 @@ bool Meteor::draw(Projector *proj, Navigator* nav)
 		glVertex3f(start[0],start[1],0);
 		glEnd();
 	} else {
-		glPointSize(1);
+		//glPointSize(1); // glpoint is not portable...
 		glBegin(GL_POINTS);
 		glVertex3f(start[0],start[1],0);
 		glEnd();
