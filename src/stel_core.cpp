@@ -710,6 +710,11 @@ void StelCore::setSkyCultureDir(const string& cultureDir)
 		asterisms->setSelected(NULL);
 	}
 
+	// Load culture star names in english
+	hip_stars->load_common_names(getDataDir() + "sky_cultures/" + skyCultureDir + "/star_names.fab");
+	// translate
+	hip_stars->translateNames(skyTranslator);
+
 	// update autocomplete with new names - TODO move that to StelApp
 	// ui->setConstellationAutoComplete(asterisms->getNames());
 
@@ -731,14 +736,7 @@ void StelCore::setSkyLanguage(const std::string& newSkyLocaleName)
 	asterisms->translateNames(skyTranslator);
 	ssystem->translateNames(skyTranslator);
 	nebulas->translateNames(skyTranslator);
-	
-	// NOTE: hip_stars uses files instead of translator to default empty
-	if( newSkyLocaleName == "system_default" ) {
-		hip_stars->load_common_names( getDataDir() + "star_names.fab");
-	} else {
-		hip_stars->load_common_names( getDataDir() + "star_names." + newSkyLocaleName + ".fab");
-	}
-
+	hip_stars->translateNames(skyTranslator);
 
 	// refresh EditBox with new names
 	//ui->setStarAutoComplete(hip_stars->getNames());

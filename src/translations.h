@@ -57,6 +57,7 @@ class Translations
 		N_("Uranus");
 		N_("Pluto");
 		N_("Charon");
+		N_("Solar System Observer");
 		
 		// Cardinals names
 		N_("N");	// North
