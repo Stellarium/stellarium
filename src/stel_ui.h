@@ -65,10 +65,7 @@ public:
 	// Update all the tui widgets with values taken from the core parameters
 	void tui_update_widgets(void);
 	void show_message(wstring _message, int _time_out=0);
-    void setConstellationAutoComplete(vector<wstring> _autoComplete ) { constellation_edit->setAutoCompleteOptions(_autoComplete);}
-    void setPlanetAutoComplete(vector<wstring> _autoComplete ) { planet_edit->setAutoCompleteOptions(_autoComplete);}
     void setStarAutoComplete(vector<wstring> _autoComplete ) { star_edit->setAutoCompleteOptions(_autoComplete);}
-    void setListNames(vector<wstring> _names ) { listBox->addItems(_names);}
     void setTitleObservatoryName(const wstring& name);
     wstring getTitleWithAltitude(void);
     bool isInitialised(void) { return initialised; }
@@ -215,13 +212,17 @@ private:
 
 	// The window managing the search - Tony
 	StdBtWin* search_win;
-	TabContainer * search_tab_ctr;
 	Component* createSearchWindow(void);
 	void search_win_hideBtCallback(void);
     void showSearchMessage(wstring _error); 
     void hideSearchMessage(void); 
     void doSearchCommand(string _command, wstring _error);
-
+    // Search options
+    EditBox* star_edit;
+    void showStarAutoComplete(void);
+    void doStarSearch(void);
+    Label *lblSearchMessage;
+    
 	// standard dialogs
 	StdDlgWin* dialog_win;
 	void dialogCallback(void);
@@ -311,31 +312,7 @@ private:
 	// Mouse control options
 	bool is_dragging, has_dragged;
 	int previous_x, previous_y;
-	
-    // Search options
-    EditBox* nebula_edit;
-    /*ListBox* nebula_cat;*/
-    StringList* nebula_cat;
-    void doNebulaSearch(void);
-    EditBox* star_edit;
-    void showStarAutoComplete(void);
-    void doStarSearch(void);
-    EditBox* constellation_edit;
-    void doConstellationSearch(void);
-    void showConstellationAutoComplete(void);
-    EditBox* planet_edit;
-    void doPlanetSearch(void);
-    void showPlanetAutoComplete(void);
-    Label *lblSearchMessage;
-	
-	// Example tab of widgets
-	ListBox *listBox;
-	void msgbox1(void);
-	void msgbox2(void);
-	void msgbox3(void);
-	void inputbox1(void);
-	void listBoxChanged(void);
-	
+
 	////////////////////////////////////////////////////////////////////////////
 	// Text UI components
 	s_tui::Branch* tui_root;

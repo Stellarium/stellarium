@@ -1162,18 +1162,18 @@ void EditBox::draw(void)
     glPushMatrix();
     glTranslatef(pos[0], pos[1], 0.f);
     Component::scissor->push(pos, size);
-	label.setPos(6, (size[1]-label.getSizey())/2+1);
+	label.setPos(6, (size[1]-label.getSizey())/2-1);
 
     refreshLabel();
-	if (isEditing) label.draw();
-    else label.draw(.3);   // faded
+	if (isEditing) label.draw(1.2);
+    else label.draw();
 
     Component::scissor->pop();
 	glPopMatrix();
 }
 
-#define EDITBOX_CURSOR L"\7"
-#define EDITBOX_DEFAULT_PROMPT L"> "
+#define EDITBOX_CURSOR L"|"
+#define EDITBOX_DEFAULT_PROMPT L"\u00bb "
 void EditBox::refreshLabel(void)
 {
      if (!isEditing) label.setLabel(prompt + text);

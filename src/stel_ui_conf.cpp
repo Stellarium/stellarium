@@ -599,178 +599,46 @@ void StelUI::load_cities(const string & fileName)
 	cout << "(" << line << " cities loaded)" << endl;
 }
 
-// Search window
-
+// Create Search window widgets
 Component* StelUI::createSearchWindow(void)
 {
-	// The current drawing position
-	int xi,yi;
-	xi=20; yi=15;
-
-	int x,y;
-	x=70; y=yi+5;
-	
-//	int h = 120;
-	int h = 300;
+	int x=10; 
+	int y=10;
 
      // Bring up dialog
 	search_win = new StdBtWin(_("Object Search"));
-	search_win->setOpaque(opaqueGUI);
-	search_win->reshape(300,200,400,h);
+	search_win->reshape(300,200,400,100);
 	search_win->setVisible(FlagSearch);
 
-	search_tab_ctr = new TabContainer();
-	search_tab_ctr->setSize(search_win->getSizex(),search_win->getSizey()- 20);
+	lblSearchMessage = new Label(L"Coucou");
+	lblSearchMessage->setPos(15, search_win->getSizey()-25);
 
-	lblSearchMessage = new Label();
-	lblSearchMessage->setPos(10, search_win->getSizey()-15);
+	Label * lblstars1 = new Label(_("Search for (eg. Saturn, Polaris, HP6218, Orion, M31):"));
+	lblstars1->setPos(x, y);
+	search_win->addComponent(lblstars1);
 
-	// stars
-	FilledContainer* tab_stars = new FilledContainer();
-	tab_stars->setSize(search_tab_ctr->getSize());
+	y+=30;
 
-	const s_texture* starp = new s_texture("halo.png");
-	Picture* pstar = new Picture(starp, xi, yi, 32, 32);
-	tab_stars->addComponent(pstar);
-
-	Label * lblstars1 = new Label(_("Star No./Name"));
-	lblstars1->setPos(x, y+5);
-	tab_stars->addComponent(lblstars1);
-
-	Label * lblstars2 = new Label(_("eg. 60718 (aCrux) or Canopus"));
-	Label * lblstars3 = new Label(_("HP 60718, HD 108248, SAO 251904"));
-	lblstars2->setPos(x+100, y+35);
-	lblstars3->setPos(x+100, y+51);
-	tab_stars->addComponent(lblstars2);
-	tab_stars->addComponent(lblstars3);
-
+	const s_texture* searchp = new s_texture("bt_search.png");
+	Picture* psearch = new Picture(searchp, x, y+1, 24, 24);
+	search_win->addComponent(psearch);
+	
 	star_edit = new EditBox();
 	star_edit->setOnReturnKeyCallback(callback<void>(this, &StelUI::doStarSearch));
 	star_edit->setOnAutoCompleteCallback(callback<void>(this, &StelUI::showStarAutoComplete));
-	tab_stars->addComponent(star_edit);
-	star_edit->setPos(x+100,y);
-	star_edit->setSize(170,25);
-
-    // constellation
-	FilledContainer* tab_constellations = new FilledContainer();
-	tab_constellations->setSize(search_tab_ctr->getSize());
-
-	const s_texture* constellp = new s_texture("bt_constellations.png");
-	Picture* pconstell = new Picture(constellp, xi, yi, 32, 32);
-	tab_constellations->addComponent(pconstell);
-
-	Label * lblconst1 = new Label(_("Constellation"));
-	lblconst1->setPos(x, y+5);
-	tab_constellations->addComponent(lblconst1);
-
-	Label * lblconst2 = new Label(_("eg. Crux"));
-	lblconst2->setPos(x+100, y+35);
-	tab_constellations->addComponent(lblconst2);
-
-	constellation_edit = new EditBox();
-	constellation_edit->setOnReturnKeyCallback(callback<void>(this, &StelUI::doConstellationSearch));
-	constellation_edit->setOnAutoCompleteCallback(callback<void>(this, &StelUI::showConstellationAutoComplete));
-	tab_constellations->addComponent(constellation_edit);
-	constellation_edit->setPos(x+100,y);
-	constellation_edit->setSize(170,25);
+	search_win->addComponent(star_edit);
+	star_edit->setPos(x+30,y);
+	star_edit->setSize(230,25);
 	
-    // nebula
-	FilledContainer* tab_nebula = new FilledContainer();
-	tab_nebula->setSize(search_tab_ctr->getSize());
- 
-	const s_texture* nebp = new s_texture("bt_nebula.png");
-	Picture* pneb = new Picture(nebp, xi, yi, 32, 32);
-	tab_nebula->addComponent(pneb);
-
-	Label * lblnebula1 = new Label(_("Object No :"));
-	lblnebula1->setPos(x, y+5);
-	tab_nebula->addComponent(lblnebula1);
-
-	Label * lblnebula2 = new Label(_("e.g. : 1432, 83" ));
-	Label * lblnebula3 = new Label(_("Choose a catalog :" ));
-	lblnebula2->setPos(x+100, y+35);
-	lblnebula3->setPos(x, y+60);
-	tab_nebula->addComponent(lblnebula2);
-	tab_nebula->addComponent(lblnebula3);
-
-	nebula_cat = new StringList();
-	nebula_cat->setPos(x+170,y+60);
-	nebula_cat->addItem("M");
-	nebula_cat->addItem("NGC");
-	nebula_cat->addItem("IC");
-	/*nebula_cat->addItem("UGC");*/
-	nebula_cat->adjustSize();
-	char nebc[10000];
-	sprintf(nebc, "M");
-	nebula_cat->setValue(nebc);
-	tab_nebula->addComponent(nebula_cat);
-
-	nebula_edit = new EditBox(_(""));
-	nebula_edit->setOnReturnKeyCallback(callback<void>(this, &StelUI::doNebulaSearch));
-	tab_nebula->addComponent(nebula_edit);
-	nebula_edit->setPos(x+100,y);
-	nebula_edit->setSize(170,25);
-
-
-    // Planets
-	FilledContainer* tab_planets = new FilledContainer();
-	tab_planets->setSize(search_tab_ctr->getSize());
-
-	const s_texture* planp = new s_texture("bt_planet.png");
-	Picture* pplan = new Picture(planp, xi, yi, 32, 32);
-	tab_planets->addComponent(pplan);
-
-	Label * lblplanet1 = new Label(_("Planet/Moon"));
-	lblplanet1->setPos(x, y+5);
-	tab_planets->addComponent(lblplanet1);
-
-	Label * lblplanet2 = new Label(_("eg. Pluto or Io"));
-	lblplanet2->setPos(x+100, y+35);
-	tab_planets->addComponent(lblplanet2);
-
-	planet_edit = new EditBox();
-	planet_edit->setOnReturnKeyCallback(callback<void>(this, &StelUI::doPlanetSearch));
-	planet_edit->setOnAutoCompleteCallback(callback<void>(this, &StelUI::showPlanetAutoComplete));
-	tab_planets->addComponent(planet_edit);
-	planet_edit->setPos(x+100,y);
-	planet_edit->setSize(170,25);
+	LabeledButton* gobutton = new LabeledButton(_("GO"));
+	gobutton->setPos(300, y-2);
+	gobutton->setJustification(JUSTIFY_CENTER);
+	search_win->addComponent(gobutton);
 	
-	// Search tab
-	search_tab_ctr->setTexture(flipBaseTex);
-	search_tab_ctr->addTab(tab_stars, _("Stars"));
-	search_tab_ctr->addTab(tab_constellations, _("Constellation"));
-	search_tab_ctr->addTab(tab_nebula, _("Nebula"));
-	search_tab_ctr->addTab(tab_planets, _("Planets & Moons"));
-	//search_tab_ctr->addTab(tab_example, _("Widgets"));
-    search_win->addComponent(search_tab_ctr);
 	search_win->addComponent(lblSearchMessage);
 	search_win->setOnHideBtCallback(callback<void>(this, &StelUI::search_win_hideBtCallback));
 
 	return search_win;
-
-}
-
-void StelUI::msgbox1(void)
-{
-	dialog_win->MessageBox(L"Stellarium",wstring(L"This is a 1 button message (OK only)\nWith an Alert Icon\nAnd an extra line"), 
-		BT_OK + BT_ICON_ALERT, "1 button test");
-}
-
-void StelUI::msgbox2(void)
-{
-	dialog_win->MessageBox(L"Stellarium",L"This is a 2 button message (OK & CANCEL)\nWith a Question Icon", 
-		BT_OK + BT_CANCEL + BT_ICON_QUESTION, "2 button test");
-}
-
-void StelUI::msgbox3(void)
-{
-	dialog_win->MessageBox(L"Stellarium",L"This is a 2 button message (OK & CANCEL)\nWith a Blank Icon", 
-		BT_OK + BT_CANCEL + BT_ICON_BLANK, "2 button test");
-}
-
-void StelUI::inputbox1(void)
-{
-	dialog_win->InputBox(L"Stellarium",L"Input a string into the EditBox class below.", "input test");
 }
 
 void StelUI::dialogCallback(void)
@@ -802,14 +670,6 @@ void StelUI::dialogCallback(void)
 	}		
 }
 
-void StelUI::listBoxChanged(void)
-{
-// 	int value = listBox->getValue();
-// 	Planet* object = core->ssystem->searchByNamesI18(listBox->getItem(value));
-//     string command = string("select planet " + object->getEnglishName());
-//     wstring error = wstring(L"Planet '" + listBox->getItem(value) + L"' not found");
-// 	doSearchCommand(command, error);
-}
 
 void StelUI::hideSearchMessage(void)
 {
@@ -840,44 +700,6 @@ void StelUI::doSearchCommand(string _command, wstring _error)
         showSearchMessage(_error);
 }
 
-void StelUI::doNebulaSearch(void)
-{
-     /*int value = nebula_cat->getValue();*/
-     wstring objectName = nebula_edit->getText();
-     /*wstring catalogName = nebula_cat->getItem(value);*/
-     wstring catalogName = StelUtility::stringToWstring(nebula_cat->getValue());
-     wstring originalName = catalogName + objectName;
- 
-     string command = string("select nebula " + StelUtility::wstringToString(catalogName) + "_" + StelUtility::wstringToString(objectName));
-     wstring error = StelUtility::stringToWstring(string("Nebula '" + StelUtility::wstringToString(originalName) + "' not found"));
-     
-     doSearchCommand(command, error);
-     nebula_edit->clearText();
-}
-
-void StelUI::doConstellationSearch(void)
-{
-//     wstring rawObjectName = constellation_edit->getText();
-// 
-//     string objectName = core->asterisms->getShortNameByNameI18(rawObjectName);
-// 
-//     if (objectName != "")
-//     {
-// 		string command = string("select constellation_star " + objectName);
-// 		wstring error = wstring(L"Constellation '" + rawObjectName + L"' not found");
-// 
-// 		doSearchCommand(command, error);
-//     }
-//     else
-//         showSearchMessage(wstring(L"Constellation " + rawObjectName + L" not found"));
-// 
-// 	constellation_edit->clearText();
-}
-
-void StelUI::showConstellationAutoComplete(void)
-{
-    showSearchMessage(constellation_edit->getAutoCompleteOptions());
-}
 
 void StelUI::doStarSearch(void)
 {
@@ -910,22 +732,6 @@ void StelUI::doStarSearch(void)
 void StelUI::showStarAutoComplete(void)
 {
     showSearchMessage(star_edit->getAutoCompleteOptions());
-}
-
-void StelUI::doPlanetSearch(void)
-{
-//     string objectName = planet_edit->getText();
-//     string command = string("select planet " + objectName);
-//     string error = string("Planet '" + objectName + "' not found");
-// 
-//     planet_edit->clearText();
-//     
-// 	doSearchCommand(command, error);
-}
-
-void StelUI::showPlanetAutoComplete(void)
-{
-    showSearchMessage(planet_edit->getAutoCompleteOptions());
 }
 
 void StelUI::updateConfigVariables(void)
