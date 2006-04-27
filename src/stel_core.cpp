@@ -441,6 +441,41 @@ void StelCore::setViewportSize(int w, int h)
 	projection->setViewportHeight(h);
 }
 
+StelObject *StelCore::searchByNameI18n(const wstring &name) const {
+  StelObject *rval = 0;
+  rval = ssystem->searchByNamesI18(name);
+  if (rval) return rval;
+  rval = hip_stars->searchHP(hip_stars->getCommonNameHP(name));
+  if (rval) return rval;
+
+//does not work because a constellation is no StelObject (why?)
+//  rval = asterisms->findFromAbbreviation(
+//                      asterisms->getShortNameByNameI18(name));
+//  if (rval) return rval;
+  
+  return 0;
+}
+
+bool StelCore::findAndSelectI18n(const wstring &name) {
+  unSelect();
+  selected_object = searchByNameI18n(name);
+  if (selected_object) {
+    switch (selected_object->get_type()) {
+      case StelObject::STEL_OBJECT_STAR:
+        asterisms->setSelected(static_cast<HipStar*>(selected_object));
+        return true;
+      case StelObject::STEL_OBJECT_PLANET:
+        ssystem->setSelected(static_cast<Planet*>(selected_object));
+        return true;
+      case StelObject::STEL_OBJECT_NEBULA:
+        return true;
+    }
+    return true;
+  }
+  return false;
+}
+
+
 //! Find and select an object near given equatorial position
 bool StelCore::findAndSelect(const Vec3d& pos)
 {

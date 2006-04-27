@@ -183,6 +183,9 @@ public:
 	//! @return true if a object was found at position (this does not necessarily means it is selected)
 	bool findAndSelect(const Vec3d& pos);
 	
+	//! select given object, if possible. If not, call unSelect()
+	bool findAndSelectI18n(const wstring &name);
+	
 	//! Find and select an object near given screen position
 	//! @return true if a object was found at position (this does not necessarily means it is selected)
 	bool findAndSelect(int x, int y);
@@ -571,6 +574,9 @@ public:
 
 
 private:
+	//! Find any kind of object by the name
+	StelObject *searchByNameI18n(const wstring &name) const;
+
 	//! Find in a "clever" way an object from its equatorial position
 	StelObject * clever_find(const Vec3d& pos) const;
 	
