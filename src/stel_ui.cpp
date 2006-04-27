@@ -205,11 +205,6 @@ void StelUI::init(const InitParser& conf)
 	desktop->addComponent(bt_flag_help_lbl);
 	desktop->addComponent(bt_flag_time_control_lbl);
 
-	dialog_win = new StdDlgWin(L"Stellarium");
-	dialog_win->setOpaque(opaqueGUI);
-	dialog_win->setDialogCallback(callback<void>(this, &StelUI::dialogCallback));
-	desktop->addComponent(dialog_win);
-
 	desktop->addComponent(createLicenceWindow());
 	desktop->addComponent(createHelpWindow());
 	desktop->addComponent(createConfigWindow());
