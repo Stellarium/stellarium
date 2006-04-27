@@ -183,12 +183,20 @@ public:
 	//! @return true if a object was found at position (this does not necessarily means it is selected)
 	bool findAndSelect(const Vec3d& pos);
 	
-	//! select given object, if possible. If not, call unSelect()
-	bool findAndSelectI18n(const wstring &name);
-	
 	//! Find and select an object near given screen position
 	//! @return true if a object was found at position (this does not necessarily means it is selected)
 	bool findAndSelect(int x, int y);
+	
+	//! Find and select an object from its translated name
+	//! @param nameI18n the case sensitive object translated name
+	//! @return true if a object was found with the passed name	
+	bool findAndSelectI18n(const wstring &nameI18n);
+		
+	//! Find and return the list of at most maxNbItem objects auto-completing name passed object I18 name
+	//! @param objPrefix the case insensitive first letters of the searched object
+	//! @param maxNbItem the maximum number of returned object names
+	//! @return a vector of matching object name by order of relevance, or an empty vector if nothing match
+	vector<wstring> listMatchingObjectsI18n(const wstring& objPrefix, int maxNbItem=5);
 	
 	//! Return whether an object is currently selected
 	bool getFlagHasSelected(void) {return selected_object!=NULL;}
@@ -574,6 +582,10 @@ public:
 
 
 private:
+	//! Select passed object
+	//! @return true if the object was selected (false if the same was already selected)
+	bool selectObject(StelObject* obj);
+
 	//! Find any kind of object by the name
 	StelObject *searchByNameI18n(const wstring &name) const;
 

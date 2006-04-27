@@ -610,7 +610,7 @@ Component* StelUI::createSearchWindow(void)
 	search_win->reshape(300,200,400,100);
 	search_win->setVisible(FlagSearch);
 
-	lblSearchMessage = new Label(L"Coucou");
+	lblSearchMessage = new Label(L"Autocompletion is TODO");
 	lblSearchMessage->setPos(15, search_win->getSizey()-25);
 
 	Label * lblstars1 = new Label(_("Search for (eg. Saturn, Polaris, HP6218, Orion, M31):"));
@@ -624,8 +624,8 @@ Component* StelUI::createSearchWindow(void)
 	search_win->addComponent(psearch);
 	
 	star_edit = new EditBox();
-	star_edit->setOnReturnKeyCallback(callback<void>(this, &StelUI::doStarSearch));
-	star_edit->setOnAutoCompleteCallback(callback<void>(this, &StelUI::showStarAutoComplete));
+	star_edit->setOnReturnKeyCallback(callback<void>(this, &StelUI::gotoSearchedObject));
+	star_edit->setOnAutoCompleteCallback(callback<void>(this, &StelUI::autoCompleteSearchedObject));
 	search_win->addComponent(star_edit);
 	star_edit->setPos(x+30,y);
 	star_edit->setSize(230,25);
@@ -633,115 +633,30 @@ Component* StelUI::createSearchWindow(void)
 	LabeledButton* gobutton = new LabeledButton(_("GO"));
 	gobutton->setPos(300, y-2);
 	gobutton->setJustification(JUSTIFY_CENTER);
-	search_win->addComponent(gobutton);
+	gobutton->setOnPressCallback(callback<void>(this, &StelUI::gotoSearchedObject));
 	
+	search_win->addComponent(gobutton);
 	search_win->addComponent(lblSearchMessage);
 	search_win->setOnHideBtCallback(callback<void>(this, &StelUI::search_win_hideBtCallback));
 
 	return search_win;
 }
 
-void StelUI::dialogCallback(void)
-{
-	string lastID = dialog_win->getLastID();
-	int lastButton = dialog_win->getLastButton();
-	string lastInput = StelUtility::wstringToString(dialog_win->getLastInput());
-	int lastType = dialog_win->getLastType();
 
-	if (lastID == "observatory name")
+void StelUI::autoCompleteSearchedObject(void)
+{
+    wstring objectName = star_edit->getText();
+    star_edit->setAutoCompleteOptions(core->listMatchingObjectsI18n(objectName, 5));
+    lblSearchMessage->setLabel(objectName+L"Auto Complete still TODO");
+}
+
+void StelUI::gotoSearchedObject(void)
+{
+	if (core->findAndSelectI18n(star_edit->getText()));
 	{
-		if (lastButton != BT_OK || lastInput == "")
-			lastInput = UNKNOWN_OBSERVATORY;
-		doSaveObserverPosition(lastInput);
-		setCityFromMap();
+		core->gotoSelectedObject();
 	}
-	else if (lastID != "")
-	{
-		string msg = lastID;
-		msg += " returned btn: ";
-	
-		if (lastButton == BT_OK) msg += "BT_OK";
-		else if (lastButton == BT_YES) msg += "BT_YES";
-		else if (lastButton == BT_NO) msg += "BT_NO";
-		else if (lastButton == BT_CANCEL) msg += "BT_CANCEL";
-	
-		if (lastType == STDDLGWIN_MSG) dialog_win->MessageBox(L"Stellarium",StelUtility::stringToWstring(msg), BT_OK);
-		else if (lastType == STDDLGWIN_INPUT) dialog_win->MessageBox(L"Stellarium",StelUtility::stringToWstring(msg) + L" inp: " + StelUtility::stringToWstring(lastInput), BT_OK);
-	}		
-}
-
-
-void StelUI::hideSearchMessage(void)
-{
-       lblSearchMessage->setLabel(L"");
-       lblSearchMessage->adjustSize();
-}
-
-void StelUI::showSearchMessage(wstring _message)
-{
-       lblSearchMessage->setLabel(_message);
-       lblSearchMessage->adjustSize();
-       int x1 = search_win->getSizex();
-       int x2 = lblSearchMessage->getSizex();
-       lblSearchMessage->setPos((x1-x2)/2,search_win->getSizey()-17);
-}
-
-void StelUI::doSearchCommand(string _command, wstring _error)
-{
-	if(!app->commander->execute_command(_command))
-        return;
-
-    if (core->getFlagHasSelected())
-    {
-    	core->gotoSelectedObject();
-        hideSearchMessage();
-    }    
-    else
-        showSearchMessage(_error);
-}
-
-
-void StelUI::doStarSearch(void)
-{
-  const wstring object_name(star_edit->getText());
-  core->findAndSelectI18n(object_name);
-  if (core->getFlagHasSelected()) {
-    core->gotoSelectedObject();
-    hideSearchMessage();
-  } else {
-    showSearchMessage(object_name + L" not found");
-  }
-  
-
-//     string objectName = star_edit->getText();
-//     string originalName = objectName;
-//     unsigned int HP = core->hip_stars->getCommonNameHP(objectName);
-// 
-//     if (HP > 0)
-//     {
-// 		ostringstream oss;
-// 		oss << "HP_" << HP;
-// 		objectName	= oss.str();
-// 	}
-// 	else
-// 	{
-// 	    transform(objectName.begin(), objectName.end(), objectName.begin(), (int(*)(int))toupper);
-//     	for (string::size_type i=0;i<objectName.length();++i)
-// 		{
-// 			if (objectName[i]==' ') objectName[i]='_';
-// 		}
-// 	}
-//     
-// 	string command = string("select star " + objectName);
-//     string error = string("Star '" + originalName + "' not found");
-//     
-//     doSearchCommand(command, error);
-//     star_edit->clearText();
-}
-
-void StelUI::showStarAutoComplete(void)
-{
-    showSearchMessage(star_edit->getAutoCompleteOptions());
+	star_edit->clearText();
 }
 
 void StelUI::updateConfigVariables(void)

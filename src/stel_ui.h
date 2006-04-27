@@ -214,13 +214,9 @@ private:
 	StdBtWin* search_win;
 	Component* createSearchWindow(void);
 	void search_win_hideBtCallback(void);
-    void showSearchMessage(wstring _error); 
-    void hideSearchMessage(void); 
-    void doSearchCommand(string _command, wstring _error);
-    // Search options
     EditBox* star_edit;
-    void showStarAutoComplete(void);
-    void doStarSearch(void);
+    void autoCompleteSearchedObject(void);
+    void gotoSearchedObject(void);
     Label *lblSearchMessage;
     
 	// standard dialogs

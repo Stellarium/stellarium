@@ -456,23 +456,14 @@ StelObject *StelCore::searchByNameI18n(const wstring &name) const {
   return 0;
 }
 
-bool StelCore::findAndSelectI18n(const wstring &name) {
-  unSelect();
-  selected_object = searchByNameI18n(name);
-  if (selected_object) {
-    switch (selected_object->get_type()) {
-      case StelObject::STEL_OBJECT_STAR:
-        asterisms->setSelected(static_cast<HipStar*>(selected_object));
-        return true;
-      case StelObject::STEL_OBJECT_PLANET:
-        ssystem->setSelected(static_cast<Planet*>(selected_object));
-        return true;
-      case StelObject::STEL_OBJECT_NEBULA:
-        return true;
-    }
-    return true;
-  }
-  return false;
+//! Find and select an object from its translated name
+//! @param nameI18n the case sensitive object translated name
+//! @return true if a object was found with the passed name	
+bool StelCore::findAndSelectI18n(const wstring &nameI18n)
+{
+	StelObject* obj = ssystem->searchByNamesI18(nameI18n);
+	if (!obj) return false;
+	else return selectObject(obj);
 }
 
 
@@ -480,63 +471,9 @@ bool StelCore::findAndSelectI18n(const wstring &name) {
 bool StelCore::findAndSelect(const Vec3d& pos)
 {
 	StelObject* tempselect = clever_find(pos);
-	
-	// Unselect if it is the same object
-	if (tempselect!=NULL && selected_object==tempselect)
-	{
-		unSelect();
-		return true;
-	}
-
-	selected_object = tempselect;
-
-	// If an object has been found
-	if (selected_object)
-	{	
-		// If an object was selected keep the earth following
-		if (getFlagTraking()) navigation->set_flag_lock_equ_pos(1);
-		setFlagTraking(false);
-
-		if (selected_object->get_type()==StelObject::STEL_OBJECT_STAR)
-		{
-			asterisms->setSelected((HipStar*)selected_object);
-// 			// potentially record this action
-// 			std::ostringstream oss;
-// 			oss << ((HipStar *)core->selected_object)->get_hp_number();
-// 			app->scripts->record_command("select hp " + oss.str());
-		}
-		else
-		{
-			asterisms->setSelected(NULL);
-		}
-
-		if (selected_object->get_type()==StelObject::STEL_OBJECT_PLANET)
-		{
-			ssystem->setSelected((Planet*)selected_object);
-// 			// potentially record this action
-// 			app->scripts->record_command("select planet " + ((Planet *)core->selected_object)->getEnglishName());
-		}
-		else
-		{
-			ssystem->setSelected(NULL);
-		}
-
-		if (selected_object->get_type()==StelObject::STEL_OBJECT_NEBULA)
-		{
-// 			// potentially record this action
-// 			app->scripts->record_command("select nebula " + ((Nebula *)core->selected_object)->getEnglishName());
-		}
-		return true;
-	}
-	else
-	{
-		unSelect();
-		return false;
-	}
-	assert(0);	// Non reachable code
-	return false;
+	return selectObject(tempselect);
 }
-	
+
 //! Find and select an object near given screen position
 bool StelCore::findAndSelect(int x, int y)
 {
@@ -1063,4 +1000,75 @@ bool StelCore::getIsTimeNow(void) const
 		previousResult = (fabs(getJDay()-get_julian_from_sys())<JD_SECOND);
 	}
 	return previousResult;
+}
+
+//! Select passed object
+//! @return true if the object was selected (false if the same was already selected)
+bool StelCore::selectObject(StelObject* obj)
+{
+	// Unselect if it is the same object
+	if (obj!=NULL && selected_object==obj)
+	{
+		unSelect();
+		return true;
+	}
+
+	selected_object = obj;
+
+	// If an object has been found
+	if (selected_object)
+	{	
+		// If an object was selected keep the earth following
+		if (getFlagTraking()) navigation->set_flag_lock_equ_pos(1);
+		setFlagTraking(false);
+
+		if (selected_object->get_type()==StelObject::STEL_OBJECT_STAR)
+		{
+			asterisms->setSelected((HipStar*)selected_object);
+// 			// potentially record this action
+// 			std::ostringstream oss;
+// 			oss << ((HipStar *)core->selected_object)->get_hp_number();
+// 			app->scripts->record_command("select hp " + oss.str());
+		}
+		else
+		{
+			asterisms->setSelected(NULL);
+		}
+
+		if (selected_object->get_type()==StelObject::STEL_OBJECT_PLANET)
+		{
+			ssystem->setSelected((Planet*)selected_object);
+// 			// potentially record this action
+// 			app->scripts->record_command("select planet " + ((Planet *)core->selected_object)->getEnglishName());
+		}
+		else
+		{
+			ssystem->setSelected(NULL);
+		}
+
+		if (selected_object->get_type()==StelObject::STEL_OBJECT_NEBULA)
+		{
+// 			// potentially record this action
+// 			app->scripts->record_command("select nebula " + ((Nebula *)core->selected_object)->getEnglishName());
+		}
+		return true;
+	}
+	else
+	{
+		unSelect();
+		return false;
+	}
+	assert(0);	// Non reachable code
+}
+
+
+//! Find and return the list of at most maxNbItem objects auto-completing passed object I18 name
+//! @param objPrefix the first letters of the searched object
+//! @param maxNbItem the maximum number of returned object names
+//! @return a vector of matching object name by order of relevance, or an empty vector if nothing match
+vector<wstring> StelCore::listMatchingObjectsI18n(const wstring& objPrefix, int maxNbItem)
+{
+	vector<wstring> result;
+	//result.add(ssystem->listMatchingObjectsI18(objPrefix, maxNbItem-result.size()));
+	return result;
 }
