@@ -125,7 +125,7 @@ void Constellation::draw_optim(Projector* prj) const
 void Constellation::draw_name(s_font *constfont, Projector* prj) const
 {
 	if(!name_fader.getInterstate()) return;
-	glColor3fv(labelColor*name_fader.getInterstate());
+	glColor4f(labelColor[0], labelColor[1], labelColor[2], name_fader.getInterstate());
 	prj->getFlagGravityLabels() ?
 		prj->print_gravity180(constfont, XYname[0], XYname[1], nameI18, 1, -constfont->getStrLen(nameI18)/2) :
 		constfont->print(XYname[0]-constfont->getStrLen(nameI18)/2, XYname[1], nameI18);
