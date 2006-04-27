@@ -145,22 +145,24 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 
     if(trusted) {
 
-    //    else if(args["base_font_size"]!="") stcore->BaseFontSize = str_to_double(args["base_font_size"]);
-    //	else if(args["bbp_mode"]!="") stcore->BbpMode = str_to_double(args["bbp_mode"]);
-    //    else if(args["date_display_format"]!="") stcore->DateDisplayFormat = args["date_display_format"];
-    //	else if(args["fullscreen"]!="") stcore->Fullscreen = args["fullscreen"];
-    //	else if(args["horizontal_offset"]!="") stcore->HorizontalOffset = str_to_double(args["horizontal_offset"]);
-    //	else if(args["init_fov"]!="") stcore->InitFov = str_to_double(args["init_fov"]);
-    //	else if(args["preset_sky_time"]!="") stapp->PresetSkyTime = str_to_double(args["preset_sky_time"]);
-    //	else if(args["screen_h"]!="") stcore->ScreenH = str_to_double(args["screen_h"]);
-    //	else if(args["screen_w"]!="") stcore->ScreenW = str_to_double(args["screen_w"]);
-    //    else if(args["startup_time_mode"]!="") stapp->StartupTimeMode = args["startup_time_mode"];
-    // else if(args["time_display_format"]!="") stcore->TimeDisplayFormat = args["time_display_format"];
-      //else if(args["type"]!="") stcore->Type = args["type"];
-      //else if(args["version"]!="") stcore->Version = str_to_double(args["version"]);
-      //      else if(args["vertical_offset"]!="") stcore->VerticalOffset = str_to_double(args["vertical_offset"]);
-      //else if(args["viewing_mode"]!="") stcore->ViewingMode = args["viewing_mode"];
-      //else if(args["viewport"]!="") stcore->Viewport = args["viewport"];
+		// trusted commands disabled due to code reorg
+
+		//    else if(args["base_font_size"]!="") stcore->BaseFontSize = str_to_double(args["base_font_size"]);
+		//	else if(args["bbp_mode"]!="") stcore->BbpMode = str_to_double(args["bbp_mode"]);
+		//    else if(args["date_display_format"]!="") stcore->DateDisplayFormat = args["date_display_format"];
+		//	else if(args["fullscreen"]!="") stcore->Fullscreen = args["fullscreen"];
+		//	else if(args["horizontal_offset"]!="") stcore->HorizontalOffset = str_to_double(args["horizontal_offset"]);
+		//	else if(args["init_fov"]!="") stcore->InitFov = str_to_double(args["init_fov"]);
+		//	else if(args["preset_sky_time"]!="") stapp->PresetSkyTime = str_to_double(args["preset_sky_time"]);
+		//	else if(args["screen_h"]!="") stcore->ScreenH = str_to_double(args["screen_h"]);
+		//	else if(args["screen_w"]!="") stcore->ScreenW = str_to_double(args["screen_w"]);
+		//    else if(args["startup_time_mode"]!="") stapp->StartupTimeMode = args["startup_time_mode"];
+		// else if(args["time_display_format"]!="") stcore->TimeDisplayFormat = args["time_display_format"];
+		//else if(args["type"]!="") stcore->Type = args["type"];
+		//else if(args["version"]!="") stcore->Version = str_to_double(args["version"]);
+		//      else if(args["vertical_offset"]!="") stcore->VerticalOffset = str_to_double(args["vertical_offset"]);
+		//else if(args["viewing_mode"]!="") stcore->ViewingMode = args["viewing_mode"];
+		//else if(args["viewport"]!="") stcore->Viewport = args["viewport"];
 
     }
 
@@ -575,6 +577,9 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 	  } else status =0;
 
   } else if(command=="configuration") {
+
+	  cout << "\"configuration\" command no longer supported.\n";
+	  status = 0;
 
 // Fabien : this should be useless. If you need to reset an initial state after running a script, just run a reinit script.
 
