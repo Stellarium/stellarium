@@ -407,8 +407,9 @@ void StelUI::tui_cb_admin_load_default(void)
 	//conf.load(app->getConfigFile());
 	//core->init(conf);
 
-	// is this kosher?
-	app->init();
+	// TODO: modify init functions so they can be called multiple times and not leak memory
+	// app->init();
+	cout << "Load configuration not implemented.\n";
 }
 
 // Save to default configuration
