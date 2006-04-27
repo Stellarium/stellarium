@@ -454,7 +454,7 @@ Planet* SolarSystem::searchByNamesI18(wstring planetNameI18) const
 {
 
 	// side effect - bad?
-	transform(planetNameI18.begin(), planetNameI18.end(), planetNameI18.begin(), ::tolower);
+//	transform(planetNameI18.begin(), planetNameI18.end(), planetNameI18.begin(), ::tolower);
 
 	vector<Planet*>::const_iterator iter = system_planets.begin();
 	while (iter != system_planets.end())
