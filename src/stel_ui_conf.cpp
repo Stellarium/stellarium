@@ -703,6 +703,16 @@ void StelUI::doSearchCommand(string _command, wstring _error)
 
 void StelUI::doStarSearch(void)
 {
+  const wstring object_name(star_edit->getText());
+  core->findAndSelectI18n(object_name);
+  if (core->getFlagHasSelected()) {
+    core->gotoSelectedObject();
+    hideSearchMessage();
+  } else {
+    showSearchMessage(object_name + L" not found");
+  }
+  
+
 //     string objectName = star_edit->getText();
 //     string originalName = objectName;
 //     unsigned int HP = core->hip_stars->getCommonNameHP(objectName);
