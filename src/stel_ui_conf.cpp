@@ -652,11 +652,16 @@ void StelUI::autoCompleteSearchedObject(void)
 
 void StelUI::gotoSearchedObject(void)
 {
-	if (core->findAndSelectI18n(star_edit->getText()));
+	if (core->findAndSelectI18n(star_edit->getText()))
 	{
+		star_edit->clearText();
 		core->gotoSelectedObject();
+		lblSearchMessage->setLabel(L"");
 	}
-	star_edit->clearText();
+	else
+	{
+		lblSearchMessage->setLabel(star_edit->getText()+L" is unknown!");
+	}
 }
 
 void StelUI::updateConfigVariables(void)

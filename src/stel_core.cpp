@@ -453,7 +453,7 @@ StelObject *StelCore::searchByNameI18n(const wstring &name) const {
 //                      asterisms->getShortNameByNameI18(name));
 //  if (rval) return rval;
   
-  return 0;
+  return NULL;
 }
 
 //! Find and select an object from its translated name
@@ -461,7 +461,7 @@ StelObject *StelCore::searchByNameI18n(const wstring &name) const {
 //! @return true if a object was found with the passed name	
 bool StelCore::findAndSelectI18n(const wstring &nameI18n)
 {
-	StelObject* obj = ssystem->searchByNamesI18(nameI18n);
+	StelObject* obj = searchByNameI18n(nameI18n);
 	if (!obj) return false;
 	else return selectObject(obj);
 }
