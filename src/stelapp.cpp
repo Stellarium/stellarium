@@ -142,14 +142,15 @@ void StelApp::init(void)
 	if (conf.get_boolean("viewing:flag_chart")) setVisionModeChart();
 	if (conf.get_boolean("viewing:flag_night")) setVisionModeNight();
 	
-	// play startup script, if available
-	if(scripts) scripts->play_startup_script();
-    
     if (distorter == 0) {
       setViewPortDistorterType(conf.get_str("video","distorter","none"));
     }
     
     core->setTimeNow();
+
+	// play startup script, if available
+	if(scripts) scripts->play_startup_script();
+
 }
 
 void StelApp::update(int delta_time)
