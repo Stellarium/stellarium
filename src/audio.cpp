@@ -44,7 +44,7 @@ Audio::Audio(std::string filename, std::string name, long int output_rate) {
 	track = Mix_LoadMUS(filename.c_str());
 	if(track == NULL) {
 		is_playing = 0;
-		std::cout << _("Could not load audio file ") << filename << "\n";
+		std::cout << "Could not load audio file " << filename << "\n";
 	} else is_playing = 1;
 
 	track_name = name;
