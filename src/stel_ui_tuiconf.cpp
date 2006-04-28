@@ -176,15 +176,15 @@ void StelUI::init_tui(void)
 	tui_menu_stars->addComponent(tui_stars_twinkle);
 
 	// 5. Colors
-	tui_colors_const_line_color = new s_tui::Vector_item(wstring(L"5.1 ") + _("Constellation lines: "));
+	tui_colors_const_line_color = new s_tui::Vector_item(wstring(L"5.1 ") + _("Constellations Lines") + L": ");
 	tui_colors_const_line_color->set_OnChangeCallback(callback<void>(this, &StelUI::tui_cb_change_color));
 	tui_menu_colors->addComponent(tui_colors_const_line_color);
 
-	tui_colors_const_label_color = new s_tui::Vector_item(wstring(L"5.2 ") + _("Constellation labels: "));
+	tui_colors_const_label_color = new s_tui::Vector_item(wstring(L"5.2 ") + _("Constellations Names")+L": ");
 	tui_colors_const_label_color->set_OnChangeCallback(callback<void>(this, &StelUI::tui_cb_change_color));
 	tui_menu_colors->addComponent(tui_colors_const_label_color);
 
-	tui_colors_cardinal_color = new s_tui::Vector_item(wstring(L"5.3 ") + _("Cardinal points: "));
+	tui_colors_cardinal_color = new s_tui::Vector_item(wstring(L"5.3 ") + _("Cardinal Points")+L": ");
 	tui_colors_cardinal_color->set_OnChangeCallback(callback<void>(this, &StelUI::tui_cb_change_color));
 	tui_menu_colors->addComponent(tui_colors_cardinal_color);
 
