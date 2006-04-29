@@ -625,7 +625,7 @@ Component* StelUI::createSearchWindow(void)
 	
 	star_edit = new EditBox();
 	star_edit->setOnReturnKeyCallback(callback<void>(this, &StelUI::gotoSearchedObject));
-	star_edit->setOnAutoCompleteCallback(callback<void>(this, &StelUI::autoCompleteSearchedObject));
+	star_edit->setOnKeyCallback(callback<void>(this, &StelUI::autoCompleteSearchedObject));
 	search_win->addComponent(star_edit);
 	star_edit->setPos(x+30,y);
 	star_edit->setSize(230,25);
@@ -647,7 +647,7 @@ void StelUI::autoCompleteSearchedObject(void)
 {
     wstring objectName = star_edit->getText();
     star_edit->setAutoCompleteOptions(core->listMatchingObjectsI18n(objectName, 5));
-    lblSearchMessage->setLabel(objectName+L"Auto Complete still TODO");
+    lblSearchMessage->setLabel(star_edit->getAutoCompleteOptions());
 }
 
 void StelUI::gotoSearchedObject(void)

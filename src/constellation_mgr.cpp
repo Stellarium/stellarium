@@ -640,3 +640,27 @@ void ConstellationMgr::drawBoundaries(Projector * prj) const
 	}
 	glDisable(GL_LINE_STIPPLE);
 }
+
+//! Find and return the list of at most maxNbItem objects auto-completing the passed object I18n name
+vector<wstring> ConstellationMgr::listMatchingObjectsI18n(const wstring& objPrefix, unsigned int maxNbItem) const
+{
+	vector<wstring> result;
+	if (maxNbItem==0) return result;
+		
+	wstring objw = objPrefix;
+	transform(objw.begin(), objw.end(), objw.begin(), ::toupper);
+	
+	vector < Constellation * >::const_iterator iter;
+	for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
+	{
+		wstring constw = (*iter)->getNameI18().substr(0, objw.size());
+		transform(constw.begin(), constw.end(), constw.begin(), ::toupper);
+		if (constw==objw)
+		{
+			result.push_back((*iter)->getNameI18());
+			if (result.size()==maxNbItem)
+				return result;
+		}
+	}
+	return result;
+}

@@ -1040,63 +1040,37 @@ wstring History::next(void)
 
 AutoCompleteString::AutoCompleteString()
 {
-	maxMatches = 5;
-}
-
-wstring AutoCompleteString::test(const wstring& _text)
-{
-	matches.clear();
-
-    if (options.size() == 0) return L"";
-	
-	unsigned int i = 0;
-	while (i < options.size())
-	{
-		if (fcompare(options[i], _text) == 0) // match with item i
-       		matches.push_back(options[i]);
-		i++;
-    }
-         
-	if (matches.empty()) 
-		lastMatchPos = 0;
-	else
-    	lastMatchPos = _text.length();
-    
-	return getFirstMatch();;
 }
 
 void AutoCompleteString::reset(void)
 {
 	lastMatchPos = 0;
-	matches.clear();
+	options.clear();
 }
 
-wstring AutoCompleteString::getOptions(int _number)
+wstring AutoCompleteString::getOptions(void)
 {
-	if (_number == -1)
-		_number = maxMatches;
-		
     if (options.size() == 0) return L"";
 
 	int i = 0;
 	wstring text = L"";
 	
-	while (i < _number && i < (int)matches.size())
+	while (i < (int)options.size())
 	{
        	if (text == L"") // first match
-        	text += matches[i];
+        	text += options[i];
 		else 
-			text = text + L", " + matches[i];
+			text = text + L", " + options[i];
 		i++;
 	}
 	return text;
 }
 
 
-wstring AutoCompleteString::getFirstMatch(void)
+wstring AutoCompleteString::getFirstOption(void)
 {
-	if (matches.size() > 0)
-		return matches[0];
+	if (options.size() > 0)
+		return options[0];
 	else
 		return L"";
 }
@@ -1268,7 +1242,7 @@ bool EditBox::onKey(Uint16 k, S_GUI_VALUE s)
 		lastKey = k;
         if  (k==SDLK_RETURN)
         {
-			if (autoComplete.hasMatch()) text = autoComplete.getFirstMatch();
+			if (autoComplete.hasOption()) text = autoComplete.getFirstOption();
             history.add(text);
        		if (!onReturnKeyCallback.empty()) RUNCALLBACK(onReturnKeyCallback);
             return 1;
@@ -1276,7 +1250,7 @@ bool EditBox::onKey(Uint16 k, S_GUI_VALUE s)
 
   		if (k == SDLK_TAB)
   		{
-			if (autoComplete.hasMatch()) text = autoComplete.getFirstMatch();
+			if (autoComplete.hasOption()) text = autoComplete.getFirstOption();
 		}
   		else if (k == SDLK_UP)
   		{
@@ -1337,10 +1311,9 @@ bool EditBox::onKey(Uint16 k, S_GUI_VALUE s)
 		if (!onKeyCallback.empty()) RUNCALLBACK(onKeyCallback);
 		if (!text.empty()) 
 		{
-			autoComplete.test(text);
-			if (autoComplete.hasMatch())
+			if (autoComplete.hasOption())
 			{
-				text = autoComplete.getFirstMatch();
+				text = autoComplete.getFirstOption();
 				if (!onAutoCompleteCallback.empty()) RUNCALLBACK(onAutoCompleteCallback);
 			}
 		}
