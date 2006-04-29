@@ -77,7 +77,8 @@ public:
 	Planet* searchByEnglishName(string planetEnglishName) const;
 	
 	//! Return the matching planet pointer if exists or NULL
-	Planet* searchByNamesI18(wstring planetNameI18) const;
+	//! @param planetNameI18n The case sensistive translated planet name
+	Planet* searchByNamesI18(wstring planetNameI18n) const;
 	
 	Planet* getSun(void) const {return sun;}
 	Planet* getEarth(void) const {return earth;}
@@ -126,6 +127,9 @@ public:
 	
 	//! Get list of all the translated planets name
 	vector<wstring> getNamesI18(void);
+	
+	//! Find and return the list of at most maxNbItem objects auto-completing the passed object I18n name
+	vector<wstring> listMatchingObjectsI18n(const wstring& objPrefix, unsigned int maxNbItem) const;
 	
 	//! Set selected planet by english name or "" to select none
 	void setSelected(const string& englishName) {setSelected(searchByEnglishName(englishName));}

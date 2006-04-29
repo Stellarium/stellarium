@@ -461,6 +461,7 @@ StelObject *StelCore::searchByNameI18n(const wstring &name) const {
 //! @return true if a object was found with the passed name	
 bool StelCore::findAndSelectI18n(const wstring &nameI18n)
 {
+	// Then look for another object
 	StelObject* obj = searchByNameI18n(nameI18n);
 	if (!obj) return false;
 	else return selectObject(obj);
@@ -1066,9 +1067,22 @@ bool StelCore::selectObject(StelObject* obj)
 //! @param objPrefix the first letters of the searched object
 //! @param maxNbItem the maximum number of returned object names
 //! @return a vector of matching object name by order of relevance, or an empty vector if nothing match
-vector<wstring> StelCore::listMatchingObjectsI18n(const wstring& objPrefix, int maxNbItem)
+vector<wstring> StelCore::listMatchingObjectsI18n(const wstring& objPrefix, unsigned int maxNbItem)
 {
 	vector<wstring> result;
-	//result.add(ssystem->listMatchingObjectsI18(objPrefix, maxNbItem-result.size()));
+	vector <wstring>::const_iterator iter;
+	
+	// Get matching planets
+	vector<wstring> matchingPlanets = ssystem->listMatchingObjectsI18n(objPrefix, maxNbItem);
+	for (iter = matchingPlanets.begin(); iter != matchingPlanets.end(); ++iter)
+		result.push_back(*iter);
+	maxNbItem-=matchingPlanets.size();
+	
+	// Get matching constellations
+	vector<wstring> matchingConstellations = asterisms->listMatchingObjectsI18n(objPrefix, maxNbItem);
+	for (iter = matchingConstellations.begin(); iter != matchingConstellations.end(); ++iter)
+		result.push_back(*iter);
+	maxNbItem-=matchingConstellations.size();
+		
 	return result;
 }

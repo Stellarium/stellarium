@@ -429,17 +429,14 @@ namespace s_gui
     {
     public:
 		AutoCompleteString();
-		wstring test(const wstring& _text);
 		void setOptions(vector<wstring> _options) { options = _options; }
-		wstring getOptions(int _number = -1);
-		wstring getFirstMatch(void);
+		wstring getOptions(void);
+		wstring getFirstOption(void);
 		void reset(void);
-		bool hasMatch(void) { return matches.size() > 0; }
+		bool hasOption(void) { return options.size() > 0; }
 	private:
 		int lastMatchPos;
-		int maxMatches;
 		vector<wstring> options;
-		vector<wstring> matches;
 	};    
 
 ////////////////////////////////////////////////////////////////////////////////
