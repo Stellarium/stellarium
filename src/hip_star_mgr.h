@@ -21,6 +21,7 @@
 #define _HIP_STAR_MGR_H_
 
 #include <vector>
+#include <map>
 #include <string>
 #include "hip_star.h"
 #include "grid.h"
@@ -44,13 +45,15 @@ public:
 	void load_sci_names(const string& sciNameFile);
 	void translateNames(Translator& trans);
 	 
-    HipStar *search(Vec3f Pos);  		// Search the star by position
-	HipStar *search(const string&);	// Search the star by string (incl catalog prefix)
-	HipStar *searchHP(unsigned int);	// Search the star by HP number
+    HipStar *search(Vec3f Pos) const;  		// Search the star by position
+	HipStar *search(const string&) const;	// Search the star by string (incl catalog prefix)
+	HipStar *searchHP(unsigned int) const;	// Search the star by HP number
+	HipStar *searchByNameI18n(const wstring &name) const;
 	// Return a stl vector containing the stars located inside the lim_fov circle around position v
-	vector<StelObject*> search_around(Vec3d v, double lim_fov);
-	vector<wstring> getNames(void) { return lstCommonNames; }
-	unsigned int getCommonNameHP(wstring _commonname);
+	vector<StelObject*> search_around(Vec3d v, double lim_fov) const;
+	vector<wstring> getNames(void) const;// { return lstCommonNames; }
+	unsigned int getCommonNameHP(wstring _commonname) const;
+	unsigned int getSciNameHP(wstring _sciname) const;
 	void set_label_color(const Vec3f& c) {HipStar::label_color = c;}
 	Vec3f getLabelColor() {return HipStar::label_color;}
 
@@ -145,8 +148,10 @@ private:
 	s_texture *starTexture;			// star texture
 	s_texture *starcTexture;			// charted interior disc
 	
-	vector<wstring> lstCommonNames;
-	vector<unsigned int> lstCommonNamesHP;
+//	vector<wstring> lstCommonNames;
+//	vector<unsigned int> lstCommonNamesHP;
+	std::map<wstring,unsigned int> common_names_map;
+	std::map<wstring,unsigned int> sci_names_map;
 };
 
 

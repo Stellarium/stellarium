@@ -169,11 +169,12 @@ int HipStarMgr::load_common_names(const string& commonNameFile)
         return 0;
     }
 
-    if (!lstCommonNames.empty())
-    {
-       lstCommonNames.clear();
-       lstCommonNamesHP.clear();
-    }
+	common_names_map.clear();
+//    if (!lstCommonNames.empty())
+//    {
+//       lstCommonNames.clear();
+//       lstCommonNamesHP.clear();
+//    }
 	// Assign names to the matching stars, now support spaces in names
     unsigned int tmp;
     char line[256];
@@ -197,8 +198,9 @@ int HipStarMgr::load_common_names(const string& commonNameFile)
 				if (star->englishCommonName[j]=='_') star->englishCommonName[j]=' ';
 			}
 			star->commonNameI18 = _(star->englishCommonName.c_str());
-			lstCommonNames.push_back(star->commonNameI18);
-			lstCommonNamesHP.push_back(tmp);
+            common_names_map[star->commonNameI18] = tmp;
+//			lstCommonNames.push_back(star->commonNameI18);
+//			lstCommonNamesHP.push_back(tmp);
 		}
 	} while(fgets(line, 256, cnFile));
 
@@ -206,17 +208,20 @@ int HipStarMgr::load_common_names(const string& commonNameFile)
     return 1;
 }
 
-unsigned int HipStarMgr::getCommonNameHP(wstring _commonname)
-{
-    unsigned int i = 0;
-
-	while (i < lstCommonNames.size())
-    {
-        if (fcompare(_commonname,lstCommonNames[i]) == 0)
-           return lstCommonNamesHP[i];
-        i++;
-    }
-    return 0;
+unsigned int HipStarMgr::getCommonNameHP(wstring _commonname) const {
+  std::map<wstring,unsigned int>::const_iterator
+    it(common_names_map.find(_commonname));
+  if (it != common_names_map.end()) return it->second;
+  return 0;
+//    unsigned int i = 0;
+//
+//	while (i < lstCommonNames.size())
+//    {
+//        if (fcompare(_commonname,lstCommonNames[i]) == 0)
+//           return lstCommonNamesHP[i];
+//        i++;
+//    }
+//    return 0;
 }   
 
 
@@ -238,6 +243,8 @@ void HipStarMgr::load_sci_names(const string& sciNameFile)
         return;
     }
 
+	sci_names_map.clear();
+
 	// Assign names to the matching stars, now support spaces in names
     unsigned int tmp;
     char line[256];
@@ -258,11 +265,20 @@ void HipStarMgr::load_sci_names(const string& sciNameFile)
 			string sciName = tempc;
 			sciName.erase(sciName.length()-1, 1);
 			star->sciName = Translator::UTF8stringToWstring(sciName);
+            sci_names_map[star->sciName] = tmp;
 		}
 	} while(fgets(line, 256, snFile));
 
     fclose(snFile);
 }
+
+unsigned int HipStarMgr::getSciNameHP(wstring _sciname) const {
+  std::map<wstring,unsigned int>::const_iterator
+    it(sci_names_map.find(_sciname));
+  if (it != sci_names_map.end()) return it->second;
+  return 0;
+}   
+
 
 // Draw all the stars
 void HipStarMgr::draw(Vec3f equ_vision, ToneReproductor* eye, Projector* prj)
@@ -390,7 +406,7 @@ void HipStarMgr::drawPoint(Vec3f equ_vision, ToneReproductor* _eye, Projector* p
 }
 
 // Look for a star by XYZ coords
-HipStar * HipStarMgr::search(Vec3f Pos)
+HipStar * HipStarMgr::search(Vec3f Pos) const
 {
     Pos.normalize();
     HipStar * nearest=NULL;
@@ -415,7 +431,7 @@ HipStar * HipStarMgr::search(Vec3f Pos)
 }
 
 // Return a stl vector containing the nebulas located inside the lim_fov circle around position v
-vector<StelObject*> HipStarMgr::search_around(Vec3d v, double lim_fov)
+vector<StelObject*> HipStarMgr::search_around(Vec3d v, double lim_fov) const
 {
 	vector<StelObject*> result;
     v.normalize();
@@ -432,7 +448,7 @@ vector<StelObject*> HipStarMgr::search_around(Vec3d v, double lim_fov)
 	return result;
 }
 
-HipStar *HipStarMgr::search(const string& name)
+HipStar *HipStarMgr::search(const string& name) const
 {
 	const string catalogs("HP HD SAO");
 
@@ -467,7 +483,7 @@ HipStar *HipStarMgr::search(const string& name)
 }	
 
 // Search the star by HP number
-HipStar *HipStarMgr::searchHP(unsigned int _HP)
+HipStar *HipStarMgr::searchHP(unsigned int _HP) const
 {
 	if (_HP != 0 && _HP < (unsigned int)starArraySize && StarFlatArray[_HP] 
 		&& StarFlatArray[_HP]->HP == _HP)
@@ -475,6 +491,38 @@ HipStar *HipStarMgr::searchHP(unsigned int _HP)
     return NULL;
 }
 
+HipStar *HipStarMgr::searchByNameI18n(const wstring &name) const {
+  HipStar *rval = searchHP(getCommonNameHP(name));
+  if (rval) return rval;
+  rval = searchHP(getSciNameHP(name));
+  if (rval) return rval;
+    // parse the HP number.
+    // Please help, if you know a better way to do this:
+  if (name.length() >= 2 &&
+      (name[0]==L'H' || name[0]==L'h') &&
+      (name[1]==L'P' || name[1]==L'p')) {
+    bool hp_ok = false;
+    wstring::size_type i=2;
+      // ignore spaces
+    for (;i<name.length();i++) {
+      if (name[i] != L' ') break;
+    }
+      // parse the number
+    unsigned int nr = 0;
+    for (;i<name.length();i++) {
+      if (hp_ok = (L'0' <= name[i] && name[i] <= L'9')) {
+        nr = 10*nr+(name[i]-L'0');
+      } else {
+        break;
+      }
+    }
+    if (hp_ok) {
+      rval = searchHP(nr);
+      if (rval) return rval;
+    }
+  }
+  return NULL;
+}
 
 // Load the double stars from the double star file
 bool HipStarMgr::load_double(const string& hipCatFile)
@@ -570,4 +618,17 @@ void HipStarMgr::translateNames(Translator& trans)
 		StarArray[i].commonNameI18 = trans.translate(StarArray[i].englishCommonName);
     }
 
+}
+
+vector<wstring> HipStarMgr::getNames(void) const {
+  vector<wstring> rval;
+  for (std::map<wstring,unsigned int>::const_iterator
+       it(common_names_map.begin());it!=common_names_map.end();it++) {
+    rval.push_back(it->first);
+  }
+  for (std::map<wstring,unsigned int>::const_iterator
+       it(sci_names_map.begin());it!=sci_names_map.end();it++) {
+    rval.push_back(it->first);
+  }
+  return rval;
 }
