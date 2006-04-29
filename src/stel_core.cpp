@@ -445,7 +445,7 @@ StelObject *StelCore::searchByNameI18n(const wstring &name) const {
   StelObject *rval = 0;
   rval = ssystem->searchByNamesI18(name);
   if (rval) return rval;
-  rval = hip_stars->searchHP(hip_stars->getCommonNameHP(name));
+  rval = hip_stars->searchByNameI18n(name);
   if (rval) return rval;
 
 //does not work because a constellation is no StelObject (why?)
