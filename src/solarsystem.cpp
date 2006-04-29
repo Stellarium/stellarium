@@ -752,7 +752,6 @@ void SolarSystem::update(int delta_time, Navigator* nav)
 // is a lunar eclipse close at hand?
 bool SolarSystem::near_lunar_eclipse(const Navigator * nav, Projector *prj)
 {
-
 	// TODO: could replace with simpler test
 
 	Vec3d e = getEarth()->get_ecliptic_pos();
@@ -772,5 +771,28 @@ bool SolarSystem::near_lunar_eclipse(const Navigator * nav, Projector *prj)
 	if(mdist.length() > r_penumbra + 2000/AU) return 0;   // not visible so don't bother drawing
 
 	return 1;
+}
 
+//! Find and return the list of at most maxNbItem objects auto-completing the passed object I18n name
+vector<wstring> SolarSystem::listMatchingObjectsI18n(const wstring& objPrefix, unsigned int maxNbItem) const
+{
+	vector<wstring> result;
+	if (maxNbItem==0) return result;
+	
+	wstring objw = objPrefix;
+	transform(objw.begin(), objw.end(), objw.begin(), ::toupper);
+	
+	vector < Planet * >::const_iterator iter;
+	for (iter = system_planets.begin(); iter != system_planets.end(); ++iter)
+	{
+		wstring constw = (*iter)->getNameI18().substr(0, objw.size());
+		transform(constw.begin(), constw.end(), constw.begin(), ::toupper);
+		if (constw==objw)
+		{
+			result.push_back((*iter)->getNameI18());
+			if (result.size()==maxNbItem)
+				return result;
+		}
+	}
+	return result;
 }
