@@ -428,6 +428,7 @@ void Projector::sDisk(GLdouble radius, GLint slices, GLint stacks,
 
 	dr = radius / (GLfloat) stacks;
 	dtheta = 2.0 * M_PI / (GLfloat) slices;
+	if (slices < 0) slices = -slices;
 
 	// draw intermediate stacks as quad strips
 	for (r = 0; r < radius; r+=dr)
