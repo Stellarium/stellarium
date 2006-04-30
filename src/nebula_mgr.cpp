@@ -20,6 +20,8 @@
 // class used to manage groups of Nebulas
 
 #include <fstream>
+#include <algorithm>
+
 #include "nebula_mgr.h"
 #include "stellarium.h"
 #include "s_texture.h"

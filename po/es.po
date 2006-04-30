@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: stellarium@free.fr\n"
-"POT-Creation-Date: 2006-04-30 15:27+0200\n"
+"POT-Creation-Date: 2006-04-30 20:54+0200\n"
 "PO-Revision-Date: 2006-03-21 13:16+0000\n"
 "Last-Translator: elmadno <elmadno@gmail.com>\n"
 "Language-Team:\n"
@@ -535,31 +535,31 @@ msgid "Sky Culture: "
 msgstr "Cultura del Cielo: "
 
 #: src/stel_ui_conf.cpp:501
+#, fuzzy
+msgid "Language"
+msgstr "Idioma del Cielo: "
+
+#: src/stel_ui_conf.cpp:502
 msgid "Date & Time"
 msgstr "Fecha y Hora"
 
-#: src/stel_ui_conf.cpp:502
+#: src/stel_ui_conf.cpp:503
 msgid "Location"
 msgstr "Localización"
 
-#: src/stel_ui_conf.cpp:503
+#: src/stel_ui_conf.cpp:504
 msgid "Landscapes"
 msgstr "Paisajes"
 
-#: src/stel_ui_conf.cpp:504
+#: src/stel_ui_conf.cpp:505
 #, fuzzy
 msgid "Video"
 msgstr "Video"
 
-#: src/stel_ui_conf.cpp:505
+#: src/stel_ui_conf.cpp:506
 #, fuzzy
 msgid "Rendering"
 msgstr "Visualización"
-
-#: src/stel_ui_conf.cpp:506
-#, fuzzy
-msgid "Language"
-msgstr "Idioma del Cielo: "
 
 #: src/stel_ui_conf.cpp:609
 msgid "Object Search"

@@ -140,9 +140,9 @@ void setDirectories(const char* executableName)
 
 	// If the system is non unix (windows) or if it's macosx the config file is in the
 	// config/ directory of the dataRoot directory
-#if defined(WIN32) || defined(CYGWIN) || defined(__MINGW32__) || defined(MACOSX)
+#if defined(WIN32) || defined(CYGWIN) || defined(__MINGW32__) || defined(MINGW32) || defined(MACOSX)
 	CDIR = DATA_ROOT + "/config/";
-	LDIR = DATA_ROOT + "/locale/";
+	LDIR = DATA_ROOT + "/data/locale";
 
 	if ((tempFile = fopen((CDIR + "config.ini").c_str(),"r")))
 	{

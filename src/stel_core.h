@@ -70,6 +70,9 @@ public:
 	//! Get the name of the directory containing the data
 	const string getDataDir(void) const {return dataRoot + "/data/";}
 	
+	//! Get the name of the directory containing the data
+	const string getLocaleDir(void) const {return localeDir;}
+	
 	//! Get the name of the root directory i.e the one containing the other main directories
 	const string& getDataRoot() const {return dataRoot;}
 	
