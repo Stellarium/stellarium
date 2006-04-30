@@ -91,6 +91,8 @@ public:
 	//! @return a vector of matching object name by order of relevance, or an empty vector if nothing match
 	vector<wstring> listMatchingObjectsI18n(const wstring& objPrefix, unsigned int maxNbItem=5) const;
 	
+	//! Return the matching Nebula object's pointer if exists or NULL
+	//! @param nameI18n The case sensistive nebula name or NGC M catalog name : format can be M31, M 31, NGC31 NGC 31
 	Nebula* searchByNameI18n(const wstring& nameI18n) const;	
 private:
 	StelObject *searchM(unsigned int M);

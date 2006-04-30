@@ -198,31 +198,13 @@ int HipStarMgr::load_common_names(const string& commonNameFile)
 				if (star->englishCommonName[j]=='_') star->englishCommonName[j]=' ';
 			}
 			star->commonNameI18 = _(star->englishCommonName.c_str());
-            common_names_map[star->commonNameI18] = tmp;
-//			lstCommonNames.push_back(star->commonNameI18);
-//			lstCommonNamesHP.push_back(tmp);
+            common_names_map.push_back(star);
 		}
 	} while(fgets(line, 256, cnFile));
 
     fclose(cnFile);
     return 1;
 }
-
-unsigned int HipStarMgr::getCommonNameHP(wstring _commonname) const {
-  std::map<wstring,unsigned int>::const_iterator
-    it(common_names_map.find(_commonname));
-  if (it != common_names_map.end()) return it->second;
-  return 0;
-//    unsigned int i = 0;
-//
-//	while (i < lstCommonNames.size())
-//    {
-//        if (fcompare(_commonname,lstCommonNames[i]) == 0)
-//           return lstCommonNamesHP[i];
-//        i++;
-//    }
-//    return 0;
-}   
 
 
 // Load scientific names from file 
@@ -265,20 +247,12 @@ void HipStarMgr::load_sci_names(const string& sciNameFile)
 			string sciName = tempc;
 			sciName.erase(sciName.length()-1, 1);
 			star->sciName = Translator::UTF8stringToWstring(sciName);
-            sci_names_map[star->sciName] = tmp;
+            sci_names_map.push_back(star);
 		}
 	} while(fgets(line, 256, snFile));
 
     fclose(snFile);
 }
-
-unsigned int HipStarMgr::getSciNameHP(wstring _sciname) const {
-  std::map<wstring,unsigned int>::const_iterator
-    it(sci_names_map.find(_sciname));
-  if (it != sci_names_map.end()) return it->second;
-  return 0;
-}   
-
 
 // Draw all the stars
 void HipStarMgr::draw(Vec3f equ_vision, ToneReproductor* eye, Projector* prj)
@@ -448,89 +422,6 @@ vector<StelObject*> HipStarMgr::search_around(Vec3d v, double lim_fov) const
 	return result;
 }
 
-HipStar *HipStarMgr::search(const string& name) const
-{
-	const string catalogs("HP HD SAO");
-
-	string n = name;
-    for (string::size_type i=0;i<n.length();++i)
-	{
-		if (n[i]=='_') n[i]=' ';
-	}	
-	
-	istringstream ss(n);
-	string cat;
-	unsigned int num;
-	
-	ss >> cat;
-	
-	// check if a valid catalog reference
-	if (catalogs.find(cat,0) == string::npos)
-	{
-		// try see if the string is a HP number
-		istringstream cat_to_num(cat);
-		cat_to_num >> num;
-		if (!cat_to_num.fail()) return searchHP(num);
-		return NULL;
-	}
-
-	ss >> num;
-	if (ss.fail()) return NULL;
-
-	if (cat == "HP") return searchHP(num);
-	assert(0);
-	return NULL;
-}	
-
-// Search the star by HP number
-HipStar *HipStarMgr::searchHP(unsigned int _HP) const
-{
-	if (_HP != 0 && _HP < (unsigned int)starArraySize && StarFlatArray[_HP] 
-		&& StarFlatArray[_HP]->HP == _HP)
-		return StarFlatArray[_HP];
-    return NULL;
-}
-
-HipStar *HipStarMgr::searchByNameI18n(const wstring &name) const
-{
-	HipStar *rval = searchHP(getCommonNameHP(name));
-	if (rval) return rval;
-	rval = searchHP(getSciNameHP(name));
-	if (rval) return rval;
-	// parse the HP number.
-	// Please help, if you know a better way to do this:
-	if (name.length() >= 2 &&
-	        (name[0]==L'H' || name[0]==L'h') &&
-	        (name[1]==L'P' || name[1]==L'p'))
-	{
-		bool hp_ok = false;
-		wstring::size_type i=2;
-		// ignore spaces
-		for (;i<name.length();i++)
-		{
-			if (name[i] != L' ') break;
-		}
-		// parse the number
-		unsigned int nr = 0;
-		for (;i<name.length();i++)
-		{
-			if (hp_ok = (L'0' <= name[i] && name[i] <= L'9'))
-			{
-				nr = 10*nr+(name[i]-L'0');
-			}
-			else
-			{
-				break;
-			}
-		}
-		if (hp_ok)
-		{
-			rval = searchHP(nr);
-			if (rval) return rval;
-		}
-	}
-	return NULL;
-}
 
 // Load the double stars from the double star file
 bool HipStarMgr::load_double(const string& hipCatFile)
@@ -628,15 +519,128 @@ void HipStarMgr::translateNames(Translator& trans)
 
 }
 
-vector<wstring> HipStarMgr::getNames(void) const {
-  vector<wstring> rval;
-  for (std::map<wstring,unsigned int>::const_iterator
-       it(common_names_map.begin());it!=common_names_map.end();it++) {
-    rval.push_back(it->first);
-  }
-  for (std::map<wstring,unsigned int>::const_iterator
-       it(sci_names_map.begin());it!=sci_names_map.end();it++) {
-    rval.push_back(it->first);
-  }
-  return rval;
+
+HipStar *HipStarMgr::search(const string& name) const
+{
+	const string catalogs("HP HD SAO");
+
+	string n = name;
+    for (string::size_type i=0;i<n.length();++i)
+	{
+		if (n[i]=='_') n[i]=' ';
+	}	
+	
+	istringstream ss(n);
+	string cat;
+	unsigned int num;
+	
+	ss >> cat;
+	
+	// check if a valid catalog reference
+	if (catalogs.find(cat,0) == string::npos)
+	{
+		// try see if the string is a HP number
+		istringstream cat_to_num(cat);
+		cat_to_num >> num;
+		if (!cat_to_num.fail()) return searchHP(num);
+		return NULL;
+	}
+
+	ss >> num;
+	if (ss.fail()) return NULL;
+
+	if (cat == "HP") return searchHP(num);
+	assert(0);
+	return NULL;
+}	
+
+// Search the star by HP number
+HipStar *HipStarMgr::searchHP(unsigned int _HP) const
+{
+	if (_HP != 0 && _HP < (unsigned int)starArraySize && StarFlatArray[_HP] 
+		&& StarFlatArray[_HP]->HP == _HP)
+		return StarFlatArray[_HP];
+    return NULL;
+}
+
+HipStar* HipStarMgr::searchByNameI18n(const wstring& nameI18n) const
+{
+	wstring objw = nameI18n;
+	transform(objw.begin(), objw.end(), objw.begin(), ::toupper);
+	
+	// Search by HP number if it's an HP formated number
+	// Please help, if you know a better way to do this:
+	if (nameI18n.length() >= 2 && nameI18n[0]==L'H' && nameI18n[1]==L'P')
+	{
+		bool hp_ok = false;
+		wstring::size_type i=2;
+		// ignore spaces
+		for (;i<nameI18n.length();i++)
+		{
+			if (nameI18n[i] != L' ') break;
+		}
+		// parse the number
+		unsigned int nr = 0;
+		for (;i<nameI18n.length();i++)
+		{
+			if (hp_ok = (L'0' <= nameI18n[i] && nameI18n[i] <= L'9'))
+			{
+				nr = 10*nr+(nameI18n[i]-L'0');
+			}
+			else
+			{
+				break;
+			}
+		}
+		if (hp_ok)
+		{
+			return searchHP(nr);
+		}
+	}
+		
+	// Search by I18n common name
+	std::vector<HipStar*>::const_iterator iter;
+	for (iter=common_names_map.begin();iter!=common_names_map.end();++iter)
+	{
+		wstring objwcap = (*iter)->commonNameI18;
+		transform(objwcap.begin(), objwcap.end(), objwcap.begin(), ::toupper);
+		if (objwcap==objw) return *iter;
+	}
+	
+	// Search by sci name
+	for (iter=sci_names_map.begin();iter!=sci_names_map.end();++iter)
+	{
+		wstring objwcap = (*iter)->sciName;
+		transform(objwcap.begin(), objwcap.end(), objwcap.begin(), ::toupper);
+		if (objwcap==objw) return *iter;
+	}
+	
+	return NULL;
+}
+
+//! Find and return the list of at most maxNbItem objects auto-completing the passed object I18n name
+vector<wstring> HipStarMgr::listMatchingObjectsI18n(const wstring& objPrefix, unsigned int maxNbItem) const
+{
+	vector<wstring> result;
+	if (maxNbItem==0) return result;
+	
+	wstring objw = objPrefix;
+	transform(objw.begin(), objw.end(), objw.begin(), ::toupper);
+	
+	// Search by common names
+	std::vector<HipStar*>::const_iterator iter;
+	for (iter = common_names_map.begin(); iter != common_names_map.end(); ++iter)
+	{
+		wstring constw = (*iter)->commonNameI18.substr(0, objw.size());
+		transform(constw.begin(), constw.end(), constw.begin(), ::toupper);
+		if (constw==objw)
+		{
+			result.push_back((*iter)->commonNameI18);
+		}
+	}
+	
+	sort(result.begin(), result.end());
+	if (result.size()>maxNbItem) result.erase(result.begin()+maxNbItem, result.end());
+	
+	return result;
 }
