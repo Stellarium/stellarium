@@ -48,12 +48,17 @@ public:
     HipStar *search(Vec3f Pos) const;  		// Search the star by position
 	HipStar *search(const string&) const;	// Search the star by string (incl catalog prefix)
 	HipStar *searchHP(unsigned int) const;	// Search the star by HP number
-	HipStar *searchByNameI18n(const wstring &name) const;
+	
+	//! Return the matching Stars object's pointer if exists or NULL
+	//! @param nameI18n The case sensistive star common name or HP catalog name (format can be HP1234 or HP 1234) or sci name
+	HipStar *searchByNameI18n(const wstring &nameI18n) const;
+	
+	//! Find and return the list of at most maxNbItem objects auto-completing the passed object I18n name
+	vector<wstring> listMatchingObjectsI18n(const wstring& objPrefix, unsigned int maxNbItem) const;
+	
 	// Return a stl vector containing the stars located inside the lim_fov circle around position v
 	vector<StelObject*> search_around(Vec3d v, double lim_fov) const;
-	vector<wstring> getNames(void) const;// { return lstCommonNames; }
-	unsigned int getCommonNameHP(wstring _commonname) const;
-	unsigned int getSciNameHP(wstring _sciname) const;
+
 	void set_label_color(const Vec3f& c) {HipStar::label_color = c;}
 	Vec3f getLabelColor() {return HipStar::label_color;}
 
@@ -139,19 +144,17 @@ private:
 	bool gravityLabel;
 	float limitingMag;                  // limiting magnitude at 60 degree fov
 	
-	vector<HipStar*>* starZones;       // array of star vector with the grid id as array rank
+	vector<HipStar*>* starZones;       	// array of star vector with the grid id as array rank
 	Grid HipGrid;                       // Grid for opimisation
 	HipStar * StarArray;  				// Sequential Array of the star for memory allocation optimization
 	HipStar ** StarFlatArray; 			// The simple array of the star for sequential research
 	int starArraySize;                  // Number of star in the array
 
-	s_texture *starTexture;			// star texture
+	s_texture *starTexture;				// star texture
 	s_texture *starcTexture;			// charted interior disc
-	
-//	vector<wstring> lstCommonNames;
-//	vector<unsigned int> lstCommonNamesHP;
-	std::map<wstring,unsigned int> common_names_map;
-	std::map<wstring,unsigned int> sci_names_map;
+
+	std::vector<HipStar*> common_names_map;
+	std::vector<HipStar*> sci_names_map;
 };
 
 
