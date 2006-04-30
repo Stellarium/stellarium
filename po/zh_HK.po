@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: stellarium@free.fr\n"
-"POT-Creation-Date: 2006-04-30 20:54+0200\n"
+"POT-Creation-Date: 2006-04-30 22:57+0200\n"
 "PO-Revision-Date: 2006-03-30 14:02+0000\n"
 "Last-Translator: Kent <kent_lau@hotmail.com>\n"
 "Language-Team: Chinese (Hong Kong) <zh_HK@li.org>\n"
@@ -82,11 +82,11 @@ msgstr "類型: "
 msgid "Size: "
 msgstr "大小: "
 
-#: src/nebula_mgr.cpp:289
+#: src/nebula_mgr.cpp:291
 msgid "Loading NGC catalog: "
 msgstr "載入NGC星表: "
 
-#: src/nebula_mgr.cpp:413
+#: src/nebula_mgr.cpp:415
 msgid "Loading Nebula Textures:"
 msgstr "載入星雲插圖:"
 
@@ -361,18 +361,16 @@ msgid "Star Twinkle. Amount :"
 msgstr "星光閃爍程度:"
 
 #: src/stel_ui_conf.cpp:90 src/stel_ui_tuiconf.cpp:179
-#, fuzzy
 msgid "Constellations Lines"
-msgstr "星座連線: "
+msgstr ""
 
 #: src/stel_ui_conf.cpp:95 src/stel_ui_tuiconf.cpp:183
 msgid "Constellations Names"
 msgstr "星座名稱"
 
 #: src/stel_ui_conf.cpp:100
-#, fuzzy
 msgid "Constellations Boundaries"
-msgstr "星座名稱"
+msgstr ""
 
 #: src/stel_ui_conf.cpp:105
 msgid "Selected Constellation Only"
@@ -509,14 +507,12 @@ msgid "For unlisted screen resolution, edit the file :"
 msgstr "若要使用自訂解析度，請修改此檔案:"
 
 #: src/stel_ui_conf.cpp:418
-#, fuzzy
 msgid "Choose landscapes:"
-msgstr "選擇背景:"
+msgstr ""
 
 #: src/stel_ui_conf.cpp:446
-#, fuzzy
 msgid "Program Language: "
-msgstr "星空術語: "
+msgstr ""
 
 #: src/stel_ui_conf.cpp:462 src/stel_ui_tuiconf.cpp:156
 msgid "Sky Language: "
@@ -527,9 +523,8 @@ msgid "Sky Culture: "
 msgstr "星空文化: "
 
 #: src/stel_ui_conf.cpp:501
-#, fuzzy
 msgid "Language"
-msgstr "星空術語: "
+msgstr ""
 
 #: src/stel_ui_conf.cpp:502
 msgid "Date & Time"
@@ -1236,9 +1231,8 @@ msgid "Two Poles"
 msgstr ""
 
 #: src/translations.h:162
-#, fuzzy
 msgid "Lion"
-msgstr "獵戶座"
+msgstr ""
 
 #: src/translations.h:163
 msgid "Two Jaws"
@@ -1257,18 +1251,16 @@ msgid "Sek"
 msgstr ""
 
 #: src/translations.h:167
-#, fuzzy
 msgid "Triangle"
-msgstr "三角座"
+msgstr ""
 
 #: src/translations.h:168
 msgid "Ferry Boat"
 msgstr ""
 
 #: src/translations.h:169 src/translations.h:240
-#, fuzzy
 msgid "Boat"
-msgstr "牧夫座"
+msgstr ""
 
 #: src/translations.h:170
 msgid "Crocodile"
@@ -1283,18 +1275,16 @@ msgid "Prow"
 msgstr ""
 
 #: src/translations.h:173
-#, fuzzy
 msgid "Horus"
-msgstr "烏鴉座"
+msgstr ""
 
 #: src/translations.h:174
 msgid "Sheepfold"
 msgstr ""
 
 #: src/translations.h:175
-#, fuzzy
 msgid "Giant"
-msgstr "土衛六(泰坦)"
+msgstr ""
 
 #: src/translations.h:176
 msgid "Hippopotamus"
@@ -1313,9 +1303,8 @@ msgid "Khanuwy Fish"
 msgstr ""
 
 #: src/translations.h:180 src/translations.h:219
-#, fuzzy
 msgid "Net"
-msgstr "海王星"
+msgstr ""
 
 #: src/translations.h:181
 msgid "Jaw"
@@ -1342,9 +1331,8 @@ msgid "Sheep"
 msgstr ""
 
 #: src/translations.h:187
-#, fuzzy
 msgid "Stars of Water"
-msgstr "恆星設定 "
+msgstr ""
 
 #: src/translations.h:190
 msgid "Northern Dipper"
@@ -1363,9 +1351,8 @@ msgid "Wings"
 msgstr ""
 
 #: src/translations.h:194
-#, fuzzy
 msgid "Chariot"
-msgstr "冥衛一(夏龍)"
+msgstr ""
 
 #: src/translations.h:195
 msgid "Tail"
@@ -1392,9 +1379,8 @@ msgid "Imperial Guards"
 msgstr ""
 
 #: src/translations.h:201
-#, fuzzy
 msgid "Horn"
-msgstr "點"
+msgstr ""
 
 #: src/translations.h:202
 msgid "Willow"
@@ -1417,23 +1403,20 @@ msgid "Stomach"
 msgstr ""
 
 #: src/translations.h:207
-#, fuzzy
 msgid "Great General"
-msgstr "一般設定 "
+msgstr ""
 
 #: src/translations.h:208
 msgid "Wall"
 msgstr ""
 
 #: src/translations.h:209
-#, fuzzy
 msgid "Legs"
-msgstr "天兔座"
+msgstr ""
 
 #: src/translations.h:210
-#, fuzzy
 msgid "Root"
-msgstr "牧夫座"
+msgstr ""
 
 #: src/translations.h:211
 msgid "Ramparts"
@@ -1448,18 +1431,16 @@ msgid "Outer Fence"
 msgstr ""
 
 #: src/translations.h:214
-#, fuzzy
 msgid "Ford"
-msgstr "天爐座"
+msgstr ""
 
 #: src/translations.h:215
 msgid "Seven Excellencies"
 msgstr ""
 
 #: src/translations.h:216
-#, fuzzy
 msgid "Market"
-msgstr "火星"
+msgstr ""
 
 #: src/translations.h:217
 msgid "Five Chariots"
@@ -1474,9 +1455,8 @@ msgid "Toilet"
 msgstr ""
 
 #: src/translations.h:221
-#, fuzzy
 msgid "Screen"
-msgstr "巨蛇座"
+msgstr ""
 
 #: src/translations.h:222
 msgid "Soldiers Market"
@@ -1487,9 +1467,8 @@ msgid "Square Granary"
 msgstr ""
 
 #: src/translations.h:224
-#, fuzzy
 msgid "Three Stars"
-msgstr "恆星"
+msgstr ""
 
 #: src/translations.h:225
 msgid "Four Channels"
@@ -1532,9 +1511,8 @@ msgid "Extended Net"
 msgstr ""
 
 #: src/translations.h:235
-#, fuzzy
 msgid "Arsenal"
-msgstr "天壇座"
+msgstr ""
 
 #: src/translations.h:236
 msgid "Hook"
@@ -1549,18 +1527,16 @@ msgid "Jade Well"
 msgstr ""
 
 #: src/translations.h:239
-#, fuzzy
 msgid "Lance"
-msgstr "巨蟹座"
+msgstr ""
 
 #: src/translations.h:241
 msgid "Mausoleum"
 msgstr ""
 
 #: src/translations.h:242
-#, fuzzy
 msgid "Dog"
-msgstr "霧"
+msgstr ""
 
 #: src/translations.h:243
 msgid "Earth God's Temple"
@@ -1571,14 +1547,12 @@ msgid "Bow and Arrow"
 msgstr ""
 
 #: src/translations.h:245
-#, fuzzy
 msgid "Pestle"
-msgstr "英仙座"
+msgstr ""
 
 #: src/translations.h:246
-#, fuzzy
 msgid "Mortar"
-msgstr "火星"
+msgstr ""
 
 #: src/translations.h:247
 msgid "Rooftop"
@@ -1589,9 +1563,8 @@ msgid "Thunderbolt"
 msgstr ""
 
 #: src/translations.h:249
-#, fuzzy
 msgid "Chariot Yard"
-msgstr "星圖模式"
+msgstr ""
 
 #: src/translations.h:250
 msgid "Good Gourd"
@@ -1630,9 +1603,8 @@ msgid "Ox"
 msgstr ""
 
 #: src/translations.h:259
-#, fuzzy
 msgid "Heart"
-msgstr "年"
+msgstr ""
 
 #: src/translations.h:260
 msgid "Room"
@@ -1651,9 +1623,8 @@ msgid "Flail"
 msgstr ""
 
 #: src/translations.h:264
-#, fuzzy
 msgid "Spear"
-msgstr "年"
+msgstr ""
 
 #: src/translations.h:265
 msgid "Right Flag"
@@ -1668,9 +1639,8 @@ msgid "Drumstick"
 msgstr ""
 
 #: src/translations.h:268
-#, fuzzy
 msgid "Bond"
-msgstr "地面"
+msgstr ""
 
 #: src/translations.h:269
 msgid "Woman's Bed"
@@ -1689,9 +1659,8 @@ msgid "Farmland"
 msgstr ""
 
 #: src/translations.h:273
-#, fuzzy
 msgid "Star"
-msgstr "恆星"
+msgstr ""
 
 #: src/translations.h:274
 msgid "Ghosts"
@@ -1758,9 +1727,8 @@ msgid "Cared for by Moon"
 msgstr ""
 
 #: src/translations.h:292
-#, fuzzy
 msgid "Dolphin"
-msgstr "海豚座"
+msgstr ""
 
 #: src/s_gui.cpp:2199 src/s_gui.cpp:2245
 msgid "Cancel"
@@ -1793,89 +1761,3 @@ msgstr "分"
 #: src/s_gui.cpp:2744
 msgid "Seconds"
 msgstr "秒"
-
-#, fuzzy
-#~ msgid "Sky language:"
-#~ msgstr "星空術語: "
-
-#, fuzzy
-#~ msgid "Sky culture:"
-#~ msgstr "星空文化: "
-
-#~ msgid "Constellation lines: "
-#~ msgstr "星座連線: "
-
-#~ msgid "Constellation labels: "
-#~ msgstr "星座名稱: "
-
-#~ msgid "Cardinal points: "
-#~ msgstr "方位基點: "
-
-#~ msgid "Star No./Name"
-#~ msgstr "恆星名稱/編號"
-
-#~ msgid "eg. 60718 (aCrux) or Canopus"
-#~ msgstr "例: \"Acrux\", \"60718\""
-
-#~ msgid "HP 60718, HD 108248, SAO 251904"
-#~ msgstr "\"HP 60718\", \"HD 108248\", \"SAO 251904\""
-
-#~ msgid "Constellation"
-#~ msgstr "星座"
-
-#~ msgid "eg. Crux"
-#~ msgstr "例: \"Crux\""
-
-#, fuzzy
-#~ msgid "Object No :"
-#~ msgstr "投影模式:"
-
-#, fuzzy
-#~ msgid "Choose a catalog :"
-#~ msgstr "選擇背景:"
-
-#~ msgid "Planet/Moon"
-#~ msgstr "行星/衛星"
-
-#~ msgid "eg. Pluto or Io"
-#~ msgstr "例: \"Pluto\", \"Io\""
-
-#~ msgid "Nebula"
-#~ msgstr "星雲"
-
-#~ msgid "Planets & Moons"
-#~ msgstr "行星與衛星"
-
-#, fuzzy
-#~ msgid "Magnitude "
-#~ msgstr "視星等: "
-
-#~ msgid "Message"
-#~ msgstr "訊息"
-
-#~ msgid "Chart mode"
-#~ msgstr "星圖模式"
-
-#~ msgid "Constellations"
-#~ msgstr "星座"
-
-#~ msgid "Please save option in tab \"Location\""
-#~ msgstr "請於\"位置\"標籤列中儲存改變"
-
-#~ msgid "to save current landscape as the default landscape."
-#~ msgstr "儲存現有背景為預設值"
-
-#~ msgid "Fisheye Projection Mode"
-#~ msgstr "魚眼投影模式"
-
-#~ msgid "eg. M83, NGC 7009, IC 2118"
-#~ msgstr "例: \"M83\", \"NGC 7009\", \"IC 2118\""
-
-#~ msgid "CW 113, SH 40"
-#~ msgstr "\"CW 113\", \"SH 40\""
-
-#~ msgid "N-S Centering Offset: "
-#~ msgstr "南北中心定位修正: "
-
-#~ msgid "E-W Centering Offset: "
-#~ msgstr "東西中心定位修正: "

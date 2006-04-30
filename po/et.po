@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: stellarium@free.fr\n"
-"POT-Creation-Date: 2006-04-30 20:54+0200\n"
+"POT-Creation-Date: 2006-04-30 22:57+0200\n"
 "PO-Revision-Date: 2006-01-28 22:34+0000\n"
 "Last-Translator: H_M_Murdock_EST <eerove@gmail.com>\n"
 "Language-Team: Estonian <et@li.org>\n"
@@ -79,11 +79,11 @@ msgstr ""
 msgid "Size: "
 msgstr ""
 
-#: src/nebula_mgr.cpp:289
+#: src/nebula_mgr.cpp:291
 msgid "Loading NGC catalog: "
 msgstr ""
 
-#: src/nebula_mgr.cpp:413
+#: src/nebula_mgr.cpp:415
 msgid "Loading Nebula Textures:"
 msgstr ""
 
@@ -451,14 +451,12 @@ msgid "For unlisted screen resolution, edit the file :"
 msgstr ""
 
 #: src/stel_ui_conf.cpp:418
-#, fuzzy
 msgid "Choose landscapes:"
-msgstr "Maastikud"
+msgstr ""
 
 #: src/stel_ui_conf.cpp:446
-#, fuzzy
 msgid "Program Language: "
-msgstr "Maastikud"
+msgstr ""
 
 #: src/stel_ui_conf.cpp:462 src/stel_ui_tuiconf.cpp:156
 msgid "Sky Language: "
@@ -469,9 +467,8 @@ msgid "Sky Culture: "
 msgstr ""
 
 #: src/stel_ui_conf.cpp:501
-#, fuzzy
 msgid "Language"
-msgstr "Maastikud"
+msgstr ""
 
 #: src/stel_ui_conf.cpp:502
 msgid "Date & Time"
@@ -1178,9 +1175,8 @@ msgid "Two Poles"
 msgstr ""
 
 #: src/translations.h:162
-#, fuzzy
 msgid "Lion"
-msgstr "Asukoht"
+msgstr ""
 
 #: src/translations.h:163
 msgid "Two Jaws"
@@ -1279,9 +1275,8 @@ msgid "Sheep"
 msgstr ""
 
 #: src/translations.h:187
-#, fuzzy
 msgid "Stars of Water"
-msgstr "Tähed "
+msgstr ""
 
 #: src/translations.h:190
 msgid "Northern Dipper"
@@ -1352,9 +1347,8 @@ msgid "Stomach"
 msgstr ""
 
 #: src/translations.h:207
-#, fuzzy
 msgid "Great General"
-msgstr "Üldine "
+msgstr ""
 
 #: src/translations.h:208
 msgid "Wall"
@@ -1417,9 +1411,8 @@ msgid "Square Granary"
 msgstr ""
 
 #: src/translations.h:224
-#, fuzzy
 msgid "Three Stars"
-msgstr "Tähed"
+msgstr ""
 
 #: src/translations.h:225
 msgid "Four Channels"
@@ -1478,18 +1471,16 @@ msgid "Jade Well"
 msgstr ""
 
 #: src/translations.h:239
-#, fuzzy
 msgid "Lance"
-msgstr "Maastikud"
+msgstr ""
 
 #: src/translations.h:241
 msgid "Mausoleum"
 msgstr ""
 
 #: src/translations.h:242
-#, fuzzy
 msgid "Dog"
-msgstr "Udu"
+msgstr ""
 
 #: src/translations.h:243
 msgid "Earth God's Temple"
@@ -1576,9 +1567,8 @@ msgid "Flail"
 msgstr ""
 
 #: src/translations.h:264
-#, fuzzy
 msgid "Spear"
-msgstr "Tähed"
+msgstr ""
 
 #: src/translations.h:265
 msgid "Right Flag"
@@ -1593,9 +1583,8 @@ msgid "Drumstick"
 msgstr ""
 
 #: src/translations.h:268
-#, fuzzy
 msgid "Bond"
-msgstr "Maapind"
+msgstr ""
 
 #: src/translations.h:269
 msgid "Woman's Bed"
@@ -1614,9 +1603,8 @@ msgid "Farmland"
 msgstr ""
 
 #: src/translations.h:273
-#, fuzzy
 msgid "Star"
-msgstr "Tähed"
+msgstr ""
 
 #: src/translations.h:274
 msgid "Ghosts"
@@ -1717,25 +1705,3 @@ msgstr ""
 #: src/s_gui.cpp:2744
 msgid "Seconds"
 msgstr ""
-
-#, fuzzy
-#~ msgid "Sky language:"
-#~ msgstr "Maastikud"
-
-#~ msgid "Star No./Name"
-#~ msgstr "Tähe nr/nimi"
-
-#~ msgid "Planet/Moon"
-#~ msgstr "Palneet/Kuu"
-
-#~ msgid "Planets & Moons"
-#~ msgstr "Planeedid & Kuud"
-
-#~ msgid "Message"
-#~ msgstr "Teade:"
-
-#~ msgid "Loading HIP/SAO catalogs: %d/%d"
-#~ msgstr "Laadin HIP/SAO katalooge: %d/%d"
-
-#~ msgid "Loading HIP catalog: %d/%d"
-#~ msgstr "Laadin HIP katalooge: %d/%d"
