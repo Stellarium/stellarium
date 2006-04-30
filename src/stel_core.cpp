@@ -691,9 +691,6 @@ void StelCore::setSkyCultureDir(const string& cultureDir)
 	// translate
 	hip_stars->translateNames(skyTranslator);
 
-	// update autocomplete with new names - TODO move that to StelApp
-	// ui->setConstellationAutoComplete(asterisms->getNames());
-
 	return;
 }
 
@@ -713,12 +710,6 @@ void StelCore::setSkyLanguage(const std::string& newSkyLocaleName)
 	ssystem->translateNames(skyTranslator);
 	nebulas->translateNames(skyTranslator);
 	hip_stars->translateNames(skyTranslator);
-
-	// refresh EditBox with new names
-	//ui->setStarAutoComplete(hip_stars->getNames());
-	//ui->setConstellationAutoComplete(asterisms->getNames());
-	//ui->setPlanetAutoComplete(ssystem->getNamesI18());
-	//ui->setListNames(ssystem->getNamesI18());
 }
 
 
@@ -1091,6 +1082,14 @@ vector<wstring> StelCore::listMatchingObjectsI18n(const wstring& objPrefix, unsi
 	for (iter = matchingNebulae.begin(); iter != matchingNebulae.end(); ++iter)
 		result.push_back(*iter);
 	maxNbItem-=matchingNebulae.size();
+	
+	// Get matching stars
+	vector<wstring> matchingStars = hip_stars->listMatchingObjectsI18n(objPrefix, maxNbItem);
+	for (iter = matchingStars.begin(); iter != matchingStars.end(); ++iter)
+		result.push_back(*iter);
+	maxNbItem-=matchingStars.size();
+	
+	sort(result.begin(), result.end());
 	
 	return result;
 }

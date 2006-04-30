@@ -438,6 +438,7 @@ void NebulaMgr::translateNames(Translator& trans)
 }
 
 
+//! Return the matching Nebula object's pointer if exists or NULL
 Nebula* NebulaMgr::searchByNameI18n(const wstring& nameI18n) const
 {
 	wstring objw = nameI18n;
