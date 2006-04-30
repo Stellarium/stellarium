@@ -452,7 +452,7 @@ Component* StelUI::createConfigWindow(void)
 	language_lb = new ListBox(6);
 	language_lb->setPos(x+10,y);
 	language_lb->setSizex(200);
-	language_lb->addItemList(StelUtility::stringToWstring(Translator::getAvailableLanguagesCodes(LOCALEDIR)));
+	language_lb->addItemList(StelUtility::stringToWstring(Translator::getAvailableLanguagesCodes(core->getLocaleDir())));
 	language_lb->setOnChangeCallback(callback<void>(this, &StelUI::setAppLanguage));
 	language_lb->setCurrent(StelUtility::stringToWstring(app->getAppLanguage()));
 	tab_language->addComponent(language_lb);
@@ -468,7 +468,7 @@ Component* StelUI::createConfigWindow(void)
 	languageSky_lb = new ListBox(6);
 	languageSky_lb->setPos(x+10,y);
 	languageSky_lb->setSizex(200);
-	languageSky_lb->addItemList(StelUtility::stringToWstring(Translator::getAvailableLanguagesCodes(LOCALEDIR)));
+	languageSky_lb->addItemList(StelUtility::stringToWstring(Translator::getAvailableLanguagesCodes(core->getLocaleDir())));
 	languageSky_lb->setOnChangeCallback(callback<void>(this, &StelUI::setSkyLanguage));
 	languageSky_lb->setCurrent(StelUtility::stringToWstring(core->getSkyLanguage()));
 	tab_language->addComponent(languageSky_lb);

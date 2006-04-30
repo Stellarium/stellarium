@@ -197,7 +197,7 @@ void StelApp::draw(int delta_time)
 void StelApp::setAppLanguage(const std::string& newAppLocaleName)
 {
 	// Update the translator with new locale name
-	Translator::globalTranslator = Translator(PACKAGE, LOCALEDIR, newAppLocaleName);
+	Translator::globalTranslator = Translator(PACKAGE, core->getLocaleDir(), newAppLocaleName);
 	cout << "Application locale is " << Translator::globalTranslator.getLocaleName() << endl;
 }
 

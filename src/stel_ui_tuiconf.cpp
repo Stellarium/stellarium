@@ -154,7 +154,7 @@ void StelUI::init_tui(void)
 	tui_menu_general->addComponent(tui_general_sky_culture);
 
 	tui_general_sky_locale = new s_tui::MultiSet_item<wstring>(wstring(L"3.2 ") + _("Sky Language: "));
-	tui_general_sky_locale->addItemList(StelUtility::stringToWstring(Translator::getAvailableLanguagesCodes(LOCALEDIR)));
+	tui_general_sky_locale->addItemList(StelUtility::stringToWstring(Translator::getAvailableLanguagesCodes(core->getLocaleDir())));
 
 	tui_general_sky_locale->set_OnChangeCallback(callback<void>(this, &StelUI::tui_cb_tui_general_change_sky_locale));
 	tui_menu_general->addComponent(tui_general_sky_locale);
@@ -251,7 +251,7 @@ void StelUI::init_tui(void)
 	tui_menu_administration->addComponent(tui_admin_updateme);
 
 	tui_admin_setlocale = new s_tui::MultiSet_item<wstring>(L"7.4 Set Locale: ");
-	tui_admin_setlocale->addItemList(StelUtility::stringToWstring(Translator::getAvailableLanguagesCodes(LOCALEDIR)));
+	tui_admin_setlocale->addItemList(StelUtility::stringToWstring(Translator::getAvailableLanguagesCodes(core->getLocaleDir())));
 	tui_admin_setlocale->set_OnChangeCallback(callback<void>(this, &StelUI::tui_cb_admin_set_locale));
 	tui_menu_administration->addComponent(tui_admin_setlocale);
 
