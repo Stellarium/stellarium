@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: stellarium@free.fr\n"
-"POT-Creation-Date: 2006-04-30 22:57+0200\n"
+"POT-Creation-Date: 2006-05-01 00:39+0200\n"
 "PO-Revision-Date: 2006-03-29 23:50+0000\n"
 "Last-Translator: SillyDizzy <cdissing@gmail.com>\n"
 "Language-Team:\n"
@@ -103,120 +103,120 @@ msgstr "Henter teksturer til tåger:"
 msgid "AU"
 msgstr "AE"
 
-#: src/stel_ui.cpp:485 src/stel_ui.cpp:613
+#: src/stel_ui.cpp:490 src/stel_ui.cpp:618
 #, fuzzy
 msgid "Script commander"
 msgstr "Skript-kommandoer"
 
-#: src/stel_ui.cpp:512
+#: src/stel_ui.cpp:517
 #, fuzzy
 msgid "Invalid Script command"
 msgstr "Ugyldig skript-kommando"
 
-#: src/stel_ui.cpp:578
+#: src/stel_ui.cpp:583
 #, fuzzy
 msgid "Drawing of the Constellations [C]"
 msgstr "Tegning af stjernebilleder [C]"
 
-#: src/stel_ui.cpp:580
+#: src/stel_ui.cpp:585
 #, fuzzy
 msgid "Names of the Constellations [V]"
 msgstr "Navne på stjernebilleder [V]"
 
-#: src/stel_ui.cpp:582
+#: src/stel_ui.cpp:587
 #, fuzzy
 msgid "Constellations Art [R]"
 msgstr "Stjernebillede illustrationer [R]"
 
-#: src/stel_ui.cpp:584
+#: src/stel_ui.cpp:589
 #, fuzzy
 msgid "Azimuthal Grid [Z]"
 msgstr "Azimuthal net [Z]"
 
-#: src/stel_ui.cpp:586
+#: src/stel_ui.cpp:591
 #, fuzzy
 msgid "Equatorial Grid [E]"
 msgstr "Ækvatorial net [E]"
 
-#: src/stel_ui.cpp:588
+#: src/stel_ui.cpp:593
 #, fuzzy
 msgid "Ground [G]"
 msgstr "Horisont [G]"
 
-#: src/stel_ui.cpp:590
+#: src/stel_ui.cpp:595
 #, fuzzy
 msgid "Cardinal Points [Q]"
 msgstr "Verdenshjørner [Q]"
 
-#: src/stel_ui.cpp:592
+#: src/stel_ui.cpp:597
 #, fuzzy
 msgid "Atmosphere [A]"
 msgstr "Atmosfære [A]"
 
-#: src/stel_ui.cpp:594
+#: src/stel_ui.cpp:599
 #, fuzzy
 msgid "Nebulas [N]"
 msgstr "Tåger [N]"
 
-#: src/stel_ui.cpp:596
+#: src/stel_ui.cpp:601
 #, fuzzy
 msgid "Help [H]"
 msgstr "Hjælp [H]"
 
-#: src/stel_ui.cpp:598
+#: src/stel_ui.cpp:603
 #, fuzzy
 msgid "Equatorial/Altazimuthal Mount [ENTER]"
 msgstr "Ækvatorial/Azimuthal visning [ENTER]"
 
-#: src/stel_ui.cpp:600
+#: src/stel_ui.cpp:605
 #, fuzzy
 msgid "Configuration window"
 msgstr "Opsætning"
 
-#: src/stel_ui.cpp:603
+#: src/stel_ui.cpp:608
 #, fuzzy
 msgid "Night (red) mode"
 msgstr "Nat (rød) tilstand"
 
-#: src/stel_ui.cpp:606
+#: src/stel_ui.cpp:611
 #, fuzzy
 msgid "Quit [CTRL + Q]"
 msgstr "Afslut [CTRL + Q]"
 
-#: src/stel_ui.cpp:608
+#: src/stel_ui.cpp:613
 #, fuzzy
 msgid "Quit [CMD + Q]"
 msgstr "Afslut [CMD + Q]"
 
-#: src/stel_ui.cpp:611
+#: src/stel_ui.cpp:616
 #, fuzzy
 msgid "Search for object"
 msgstr "Søg efter et objekt"
 
-#: src/stel_ui.cpp:615
+#: src/stel_ui.cpp:620
 #, fuzzy
 msgid "Goto selected object [SPACE]"
 msgstr "Gå til valgt objekt [mellemrum]"
 
-#: src/stel_ui.cpp:621
+#: src/stel_ui.cpp:626
 msgid "Decrease Time Speed [J]"
 msgstr ""
 
-#: src/stel_ui.cpp:623
+#: src/stel_ui.cpp:628
 #, fuzzy
 msgid "Real Time Speed [K]"
 msgstr "Normal tid [K]"
 
-#: src/stel_ui.cpp:625
+#: src/stel_ui.cpp:630
 msgid "Increase Time Speed [L]"
 msgstr "Accelerer tid [L]"
 
-#: src/stel_ui.cpp:627
+#: src/stel_ui.cpp:632
 #, fuzzy
 msgid "Return to Current Time"
 msgstr "Retur til aktuel tid"
 
-#: src/stel_ui.cpp:636
+#: src/stel_ui.cpp:641
 #, fuzzy
 msgid ""
 "   Please check for newer versions and send bug reports\n"
@@ -227,12 +227,12 @@ msgstr ""
 "og kommentarer til os på: http://www.stellarium.org\n"
 "\n"
 
-#: src/stel_ui.cpp:655
+#: src/stel_ui.cpp:660
 #, fuzzy
 msgid "Information"
 msgstr "Information"
 
-#: src/stel_ui.cpp:667
+#: src/stel_ui.cpp:672
 msgid ""
 "Movement & selection:\n"
 "Arrow Keys       : Change viewing RA/DE\n"
@@ -258,7 +258,7 @@ msgstr ""
 "Mellemrum : Centrer på valgt objekt\n"
 "\n"
 
-#: src/stel_ui.cpp:678
+#: src/stel_ui.cpp:683
 msgid ""
 "Display options:\n"
 "ENTER : Equatorial/altazimuthal mount\n"
@@ -286,7 +286,7 @@ msgstr ""
 "4 : Ekliptisk line 5 : Ækvator line\n"
 "\n"
 
-#: src/stel_ui.cpp:690
+#: src/stel_ui.cpp:695
 msgid ""
 "Dialogs & other controls:\n"
 "H   : Help                      I   : About Stellarium\n"
@@ -304,7 +304,7 @@ msgstr ""
 "CTRL + F : Skift mellem objekt finder\n"
 "\n"
 
-#: src/stel_ui.cpp:697
+#: src/stel_ui.cpp:702
 msgid ""
 "Time & Date:\n"
 "6   : Time rate pause           7   : Time rate 0\n"
@@ -322,7 +322,7 @@ msgstr ""
 "[ : 7 dage tilbage ] : 7 dage frem\n"
 "\n"
 
-#: src/stel_ui.cpp:704
+#: src/stel_ui.cpp:709
 msgid ""
 "During Script Playback:\n"
 "CTRL + C : End Script\n"
@@ -334,7 +334,7 @@ msgstr ""
 "6 : pause skript K : genoptag skript\n"
 "\n"
 
-#: src/stel_ui.cpp:708
+#: src/stel_ui.cpp:713
 msgid ""
 "Misc:\n"
 "9   : Toggle meteor shower rates\n"
@@ -342,31 +342,31 @@ msgstr ""
 "Diverse:\n"
 "9 : Skift synlighed på meteor regn\n"
 
-#: src/stel_ui.cpp:711
+#: src/stel_ui.cpp:716
 msgid "CTRL + Q : Quit\n"
 msgstr "CTRL+Q : Afslut\n"
 
-#: src/stel_ui.cpp:713
+#: src/stel_ui.cpp:718
 msgid "CMD + Q  : Quit\n"
 msgstr "CMD+Q : Afslut\n"
 
-#: src/stel_ui.cpp:719
+#: src/stel_ui.cpp:724
 msgid "Help"
 msgstr "Hjælp"
 
-#: src/stel_ui.cpp:979
+#: src/stel_ui.cpp:984
 msgid "Command recording stopped."
 msgstr "Registrering af kommandoer stoppet."
 
-#: src/stel_ui.cpp:987
+#: src/stel_ui.cpp:992
 msgid "Recording commands to script file:\n"
 msgstr "Registrering af kommandoer til skriptfilen:\n"
 
-#: src/stel_ui.cpp:989
+#: src/stel_ui.cpp:994
 msgid "Hit CTRL-R again to stop.\n"
 msgstr "Tryk på CTRL+R en gang til for at stoppe.\n"
 
-#: src/stel_ui.cpp:993
+#: src/stel_ui.cpp:998
 msgid "Error: Unable to open script file to record commands."
 msgstr "Fejl: Kunne ikke åbne skriptfilen for at registrere kommandoer."
 
@@ -573,43 +573,43 @@ msgstr "Video"
 msgid "Rendering"
 msgstr "Tilpasing"
 
-#: src/stel_ui_conf.cpp:609
+#: src/stel_ui_conf.cpp:638
 msgid "Object Search"
 msgstr "Søg efter objekt"
 
-#: src/stel_ui_conf.cpp:616
+#: src/stel_ui_conf.cpp:645
 msgid "Search for (eg. Saturn, Polaris, HP6218, Orion, M31):"
 msgstr ""
 
-#: src/stel_ui_conf.cpp:633
+#: src/stel_ui_conf.cpp:662
 msgid "GO"
 msgstr ""
 
-#: src/stel_ui_conf.cpp:757
+#: src/stel_ui_conf.cpp:786
 msgid "Enter observatory name"
 msgstr "Skriv navn på observatorium"
 
-#: src/stel_ui_conf.cpp:897
+#: src/stel_ui_conf.cpp:926
 msgid ": Normal rate"
 msgstr ""
 
-#: src/stel_ui_conf.cpp:904
+#: src/stel_ui_conf.cpp:933
 msgid ": Standard Perseids rate"
 msgstr ""
 
-#: src/stel_ui_conf.cpp:911
+#: src/stel_ui_conf.cpp:940
 msgid ": Exceptional Leonid rate"
 msgstr ""
 
-#: src/stel_ui_conf.cpp:918
+#: src/stel_ui_conf.cpp:947
 msgid ": Highest rate ever (1966 Leonids)"
 msgstr ""
 
-#: src/stel_ui_conf.cpp:923
+#: src/stel_ui_conf.cpp:952
 msgid "Meteor Rate per minute"
 msgstr ""
 
-#: src/stel_ui_conf.cpp:944
+#: src/stel_ui_conf.cpp:973
 msgid "Current Time Speed is x"
 msgstr "Gældende tid :"
 

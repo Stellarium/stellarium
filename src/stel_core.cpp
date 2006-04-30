@@ -373,9 +373,8 @@ void StelCore::draw(int delta_time)
 	// Draw the celestial equator line
 	equator_line->draw(projection);
 
-	// Draw the ecliptic line (only makes sense on Earth)
-	if(observatory->getHomePlanetEnglishName() == "Earth")
-		ecliptic_line->draw(projection);
+	// Draw the ecliptic line
+	ecliptic_line->draw(projection);
 
 	// Draw the meridian line
 	meridian_line->draw(projection);
