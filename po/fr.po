@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: stellarium@free.fr\n"
-"POT-Creation-Date: 2006-04-30 22:57+0200\n"
+"POT-Creation-Date: 2006-05-01 00:39+0200\n"
 "PO-Revision-Date: 2006-04-30 23:41+0200\n"
 "Last-Translator: Fabien Chéreau\n"
 "Language-Team:  <fr@li.org>\n"
@@ -104,99 +104,99 @@ msgstr "Chargement des textures des Nébuleuses :"
 msgid "AU"
 msgstr "UA"
 
-#: src/stel_ui.cpp:485 src/stel_ui.cpp:613
+#: src/stel_ui.cpp:490 src/stel_ui.cpp:618
 msgid "Script commander"
 msgstr "Commandes de script"
 
-#: src/stel_ui.cpp:512
+#: src/stel_ui.cpp:517
 msgid "Invalid Script command"
 msgstr "Commande de script invalide"
 
-#: src/stel_ui.cpp:578
+#: src/stel_ui.cpp:583
 msgid "Drawing of the Constellations [C]"
 msgstr "Dessin des Constellations [C]"
 
-#: src/stel_ui.cpp:580
+#: src/stel_ui.cpp:585
 msgid "Names of the Constellations [V]"
 msgstr "Noms des Constellations [V]"
 
-#: src/stel_ui.cpp:582
+#: src/stel_ui.cpp:587
 msgid "Constellations Art [R]"
 msgstr "Images des Constellations [R]"
 
-#: src/stel_ui.cpp:584
+#: src/stel_ui.cpp:589
 msgid "Azimuthal Grid [Z]"
 msgstr "Grille Azimutale [Z]"
 
-#: src/stel_ui.cpp:586
+#: src/stel_ui.cpp:591
 msgid "Equatorial Grid [E]"
 msgstr "Grille Equatoriale [E]"
 
-#: src/stel_ui.cpp:588
+#: src/stel_ui.cpp:593
 msgid "Ground [G]"
 msgstr "Sol [G]"
 
-#: src/stel_ui.cpp:590
+#: src/stel_ui.cpp:595
 msgid "Cardinal Points [Q]"
 msgstr "Points Cardinaux [Q]"
 
-#: src/stel_ui.cpp:592
+#: src/stel_ui.cpp:597
 msgid "Atmosphere [A]"
 msgstr "Atmosphère [A]"
 
-#: src/stel_ui.cpp:594
+#: src/stel_ui.cpp:599
 msgid "Nebulas [N]"
 msgstr "Nébuleuses [N]"
 
-#: src/stel_ui.cpp:596
+#: src/stel_ui.cpp:601
 msgid "Help [H]"
 msgstr "Aide [H]"
 
-#: src/stel_ui.cpp:598
+#: src/stel_ui.cpp:603
 msgid "Equatorial/Altazimuthal Mount [ENTER]"
 msgstr "Monture Equatorial/Altazimutale [ENTER]"
 
-#: src/stel_ui.cpp:600
+#: src/stel_ui.cpp:605
 msgid "Configuration window"
 msgstr "Fenêtre de configuration"
 
-#: src/stel_ui.cpp:603
+#: src/stel_ui.cpp:608
 msgid "Night (red) mode"
 msgstr "Mode vision de nuit (rouge)"
 
-#: src/stel_ui.cpp:606
+#: src/stel_ui.cpp:611
 msgid "Quit [CTRL + Q]"
 msgstr "Quitte [CTRL + Q]"
 
-#: src/stel_ui.cpp:608
+#: src/stel_ui.cpp:613
 msgid "Quit [CMD + Q]"
 msgstr "Quitte [CMD + Q]"
 
-#: src/stel_ui.cpp:611
+#: src/stel_ui.cpp:616
 msgid "Search for object"
 msgstr "Chercher un objet"
 
-#: src/stel_ui.cpp:615
+#: src/stel_ui.cpp:620
 msgid "Goto selected object [SPACE]"
 msgstr "Va à l'objet sélectionné [ESPACE]"
 
-#: src/stel_ui.cpp:621
+#: src/stel_ui.cpp:626
 msgid "Decrease Time Speed [J]"
 msgstr "Ralenti le Temps [J]"
 
-#: src/stel_ui.cpp:623
+#: src/stel_ui.cpp:628
 msgid "Real Time Speed [K]"
 msgstr "Vitesse Temps Réel [K]"
 
-#: src/stel_ui.cpp:625
+#: src/stel_ui.cpp:630
 msgid "Increase Time Speed [L]"
 msgstr "Accélère le Temps [L]"
 
-#: src/stel_ui.cpp:627
+#: src/stel_ui.cpp:632
 msgid "Return to Current Time"
 msgstr "Revient au Temps Actuel"
 
-#: src/stel_ui.cpp:636
+#: src/stel_ui.cpp:641
 msgid ""
 "   Please check for newer versions and send bug reports\n"
 "    and comments to us at: http://www.stellarium.org\n"
@@ -208,11 +208,11 @@ msgstr ""
 "http://www.stellarium.org\n"
 "\n"
 
-#: src/stel_ui.cpp:655
+#: src/stel_ui.cpp:660
 msgid "Information"
 msgstr "Information"
 
-#: src/stel_ui.cpp:667
+#: src/stel_ui.cpp:672
 msgid ""
 "Movement & selection:\n"
 "Arrow Keys       : Change viewing RA/DE\n"
@@ -238,7 +238,7 @@ msgstr ""
 "ESPACE           : Centre sur l'objet sélectionné\n"
 "\n"
 
-#: src/stel_ui.cpp:678
+#: src/stel_ui.cpp:683
 msgid ""
 "Display options:\n"
 "ENTER : Equatorial/altazimuthal mount\n"
@@ -266,7 +266,7 @@ msgstr ""
 "4 , : Ligne de l'Ecliptique     5 . : Ligne de l'Equateur Céleste\n"
 "\n"
 
-#: src/stel_ui.cpp:690
+#: src/stel_ui.cpp:695
 msgid ""
 "Dialogs & other controls:\n"
 "H   : Help                      I   : About Stellarium\n"
@@ -284,7 +284,7 @@ msgstr ""
 "CTRL + F : Alterne l'affichage du chercheur d object\n"
 "\n"
 
-#: src/stel_ui.cpp:697
+#: src/stel_ui.cpp:702
 msgid ""
 "Time & Date:\n"
 "6   : Time rate pause           7   : Time rate 0\n"
@@ -302,7 +302,7 @@ msgstr ""
 "[   : 7 jours en arrière        ]   : 7 jours en avant\n"
 "\n"
 
-#: src/stel_ui.cpp:704
+#: src/stel_ui.cpp:709
 msgid ""
 "During Script Playback:\n"
 "CTRL + C : End Script\n"
@@ -314,7 +314,7 @@ msgstr ""
 "6   : Met le script en pause    K   : Relance le script\n"
 "\n"
 
-#: src/stel_ui.cpp:708
+#: src/stel_ui.cpp:713
 msgid ""
 "Misc:\n"
 "9   : Toggle meteor shower rates\n"
@@ -322,31 +322,31 @@ msgstr ""
 "Autres:\n"
 "9   : Alterne la fréquence des pluies d'étoiles filantes\n"
 
-#: src/stel_ui.cpp:711
+#: src/stel_ui.cpp:716
 msgid "CTRL + Q : Quit\n"
 msgstr "CTRL+Q : Quitte\n"
 
-#: src/stel_ui.cpp:713
+#: src/stel_ui.cpp:718
 msgid "CMD + Q  : Quit\n"
 msgstr "CMD+Q : Quitte\n"
 
-#: src/stel_ui.cpp:719
+#: src/stel_ui.cpp:724
 msgid "Help"
 msgstr "Aide"
 
-#: src/stel_ui.cpp:979
+#: src/stel_ui.cpp:984
 msgid "Command recording stopped."
 msgstr "Enregistrement des commandes arrêté."
 
-#: src/stel_ui.cpp:987
+#: src/stel_ui.cpp:992
 msgid "Recording commands to script file:\n"
 msgstr "Enregistre les commandes sur le fichier script:\n"
 
-#: src/stel_ui.cpp:989
+#: src/stel_ui.cpp:994
 msgid "Hit CTRL-R again to stop.\n"
 msgstr "Appuyer sur CTRL-R à nouveau pour arrêter.\n"
 
-#: src/stel_ui.cpp:993
+#: src/stel_ui.cpp:998
 msgid "Error: Unable to open script file to record commands."
 msgstr ""
 "Erreur: Impossible d'ouvrir le fichier script pour enregistrer les commandes."
@@ -554,43 +554,43 @@ msgstr "Vidéo"
 msgid "Rendering"
 msgstr "Rendu"
 
-#: src/stel_ui_conf.cpp:609
+#: src/stel_ui_conf.cpp:638
 msgid "Object Search"
 msgstr "Recherche d'objet"
 
-#: src/stel_ui_conf.cpp:616
+#: src/stel_ui_conf.cpp:645
 msgid "Search for (eg. Saturn, Polaris, HP6218, Orion, M31):"
 msgstr "Chercher (ex: Saturne, Polaris, HP6218, Orion, M13):"
 
-#: src/stel_ui_conf.cpp:633
+#: src/stel_ui_conf.cpp:662
 msgid "GO"
 msgstr "GO"
 
-#: src/stel_ui_conf.cpp:757
+#: src/stel_ui_conf.cpp:786
 msgid "Enter observatory name"
 msgstr "Entrez le nom de l'observatoire"
 
-#: src/stel_ui_conf.cpp:897
+#: src/stel_ui_conf.cpp:926
 msgid ": Normal rate"
 msgstr ": Fréquence normale"
 
-#: src/stel_ui_conf.cpp:904
+#: src/stel_ui_conf.cpp:933
 msgid ": Standard Perseids rate"
 msgstr ": Fréquence standard Perséides"
 
-#: src/stel_ui_conf.cpp:911
+#: src/stel_ui_conf.cpp:940
 msgid ": Exceptional Leonid rate"
 msgstr ": Fréquence de Léonides exceptionnelle"
 
-#: src/stel_ui_conf.cpp:918
+#: src/stel_ui_conf.cpp:947
 msgid ": Highest rate ever (1966 Leonids)"
 msgstr ": Fréquence record (Léonides 1966)"
 
-#: src/stel_ui_conf.cpp:923
+#: src/stel_ui_conf.cpp:952
 msgid "Meteor Rate per minute"
 msgstr "Fréquence des Météors par minutes"
 
-#: src/stel_ui_conf.cpp:944
+#: src/stel_ui_conf.cpp:973
 msgid "Current Time Speed is x"
 msgstr "La vistesse du temps actuelle est x"
 
