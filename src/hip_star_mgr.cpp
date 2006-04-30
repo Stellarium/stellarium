@@ -639,6 +639,17 @@ vector<wstring> HipStarMgr::listMatchingObjectsI18n(const wstring& objPrefix, un
 		}
 	}
 	
+	// Search by sci names
+	for (iter = sci_names_map.begin(); iter != sci_names_map.end(); ++iter)
+	{
+		wstring constw = (*iter)->sciName.substr(0, objw.size());
+		transform(constw.begin(), constw.end(), constw.begin(), ::toupper);
+		if (constw==objw)
+		{
+			result.push_back((*iter)->sciName);
+		}
+	}
+	
 	sort(result.begin(), result.end());
 	if (result.size()>maxNbItem) result.erase(result.begin()+maxNbItem, result.end());
 	
