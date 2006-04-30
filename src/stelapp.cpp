@@ -69,7 +69,7 @@ void StelApp::quit(void)
 
 void StelApp::init(void)
 {
-	//cout << Translator::getAvailableLanguagesCodes(LOCALEDIR) << endl;
+	Translator::initSystemLanguage();
 
 	// Initialize video device and other sdl parameters
 	InitParser conf;
@@ -96,19 +96,19 @@ void StelApp::init(void)
 
 		} else {
 			wcout << _("Attempting to use an existing older config file.") << endl;
-		}	
+		}
 	}
 	
 	screenW = conf.get_int("video:screen_w");
 	screenH = conf.get_int("video:screen_h");
 	initSDL(screenW, screenH, conf.get_int("video:bbp_mode"), conf.get_boolean("video:fullscreen"), core->getDataDir() + "/icon.bmp");	
 	
-	core->init(conf);
-	
 	maxfps 				= conf.get_double ("video","maximum_fps",10000);
 	string appLocaleName = conf.get_str("localization", "app_locale", "system");
 	setAppLanguage(appLocaleName);
 	scripts->set_allow_ui( conf.get_boolean("gui","flag_script_allow_ui",0) );
+
+	core->init(conf);
 
 	string tmpstr = conf.get_str("projection:viewport");
 	if (tmpstr=="maximized") core->setMaximizedViewport(screenW, screenH);

@@ -21,21 +21,30 @@
 #include <cassert>
 #include <dirent.h>
 #include <cstdio>
+#include <vector>
 
 #include "bytes.h"
 #include "translator.h"
 
 Translator* Translator::lastUsed = NULL;
 
-#ifndef MINGW32
-// This crashes the application on windows..
-const string Translator::systemLangName = (getenv("LANGUAGE")!=NULL) ? getenv("LANGUAGE") : getenv("LANG");
-#else
-const string Translator::systemLangName = "en";
-#endif
+string Translator::systemLangName = "C";
 
 // Use system locale language by default
 Translator Translator::globalTranslator = Translator(PACKAGE, LOCALEDIR, "system");
+
+//! Try to determine system language from system configuration
+void Translator::initSystemLanguage(void)
+{
+	char* lang = getenv("LANGUAGE");
+	if (lang) Translator::systemLangName = lang;
+	else
+	{
+		lang = getenv("LANG");
+		if (lang) Translator::systemLangName = lang;
+		else Translator::systemLangName = "C";
+	}
+}
 
 void Translator::reload()
 {
@@ -132,9 +141,9 @@ std::string Translator::getAvailableLanguagesCodes(const string& localeDir)
 {
 	struct dirent *entryp;
 	DIR *dp;
-	string result="";
+	std::vector<string> result;
 	
-	cout << "Reading stellarium translations in directory: " << localeDir << endl;
+	//cout << "Reading stellarium translations in directory: " << localeDir << endl;
 
 	if ((dp = opendir(localeDir.c_str())) == NULL)
 	{
@@ -149,15 +158,23 @@ std::string Translator::getAvailableLanguagesCodes(const string& localeDir)
 		FILE* fic = fopen(tmpdir.c_str(), "r");
 		if (fic)
 		{
-			if (result!="") result+="\n"; 
-			result += tmp;
+			result.push_back(tmp);
 			fclose(fic);
 		}
 	}
 	closedir(dp);
 	
-	// cout << "Found translations for locales: " << result << endl;
+	// Sort the language names by alphabetic order
+	std::sort(result.begin(), result.end());
 
-	return result;
+	string output;
+	std::vector<string>::iterator iter;
+	for (iter=result.begin();iter!=result.end();++iter)
+	{
+		if (iter!=result.begin()) output+="\n";
+		output+=*iter;
+	}
+
+	return output;
 }
 
