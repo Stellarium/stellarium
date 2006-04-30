@@ -749,22 +749,29 @@ Ring::~Ring()
 
 void Ring::draw(const Projector* prj, const Mat4d& mat)
 {
-	glPushMatrix();
-	glLoadMatrixd(mat);
 	// Normal transparency mode
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	//glRotatef(axis_rotation + 180.,0.,0.,1.);
 	glColor3f(1.0f, 0.88f, 0.82f); // For saturn only..
 	glEnable(GL_TEXTURE_2D);
-	glDisable(GL_CULL_FACE);
+	glEnable(GL_CULL_FACE);
 	glEnable(GL_BLEND);
 
 	glBindTexture (GL_TEXTURE_2D, tex->getID());
 
 	// TODO: radial texture would look much better
-	prj->sDisk(radius, 100, 20, mat, 0);	
+
+	  // solve the ring wraparound by culling:
+	  // decide if we are above or below the ring plane
+	const double h = mat.r[ 8]*mat.r[12]
+	               + mat.r[ 9]*mat.r[13]
+	               + mat.r[10]*mat.r[14];
+	prj->sDisk(radius,(h<0.0)?100:-100, 20, mat, 0);
+	glDisable(GL_CULL_FACE);
 
 	/* old way
+	glPushMatrix();
+	glLoadMatrixd(mat);
 	double r=radius;
 	glBegin(GL_QUADS);
 	glTexCoord2f(0,0); prj->sVertex3( -r,-r, 0., mat);	// Bottom left
@@ -772,9 +779,8 @@ void Ring::draw(const Projector* prj, const Mat4d& mat)
 	glTexCoord2f(1,1); prj->sVertex3(r, r, 0., mat);	// Top right
 	glTexCoord2f(0,1); prj->sVertex3(-r,r, 0., mat);	// Top left
 	glEnd ();
-	*/
-
 	glPopMatrix();
+	*/
 }
 
 
