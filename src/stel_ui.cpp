@@ -134,7 +134,7 @@ void StelUI::init(const InitParser& conf)
 	// TODO: can we get rid of this second font requirement?
 	// TODO: this is not saved in save config yet
 	BaseCFontSize		= conf.get_double ("gui","base_cfont_size",12.5);
-	BaseCFontName = core->getDataDir() + conf.get_str("gui", "base_cfont_name", "DejaVuSansMono-Roman.ttf");
+	BaseCFontName = core->getDataDir() + conf.get_str("gui", "base_cfont_name", "DejaVuSansMono.ttf");
 
 	// Load standard font
 	baseFont = new s_font(BaseFontSize, BaseFontName);
