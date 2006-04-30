@@ -1,8 +1,9 @@
-0.8.0 [in progress]
+0.8.0 [2006-04-30]
 BaseFont selectable in config 
 Constellation select from script fixed
 TUI editing of some colors
-Constellation boundaries
+Added constellation boundaries
+Added full NGC nebula catalog.
 Mouse cursor optional timeout
 RA/DE displays corrected for precession
 Option to allow UI use during scripts (flag_script_allow_ui)
@@ -22,12 +23,18 @@ Planet oblateness
 Splitted StelCore class into two separated classes : StelCore and StelApp.
 Added many new .po files for translation in more languages.
 Auto-scan available translations.
+Auto-scan available sku cultures.
 Improved mouse zoom control.
 Viewport distortion for spheric mirror projection
 Replaced calculation of galilean and mars satellites with newer and better calculations made by V.Lainey
 Replaced current implementation of VSOP87B with faster and more accurate implementation of VSOP87
 When displaying Mercury-Neptune orbits, the osculating orbits are shown
 Light travel time compensation for solar system objects
+Added Language section in the GUI.
+Added meteor control and other things in the GUI
+Re-made and improved object search feature.
+Updated GUI button graphics.
+Fixed many bugs.
 
 0.7.1 [2005-09-17]
 Fixed location saving bug.
