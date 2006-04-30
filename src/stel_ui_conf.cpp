@@ -510,6 +510,35 @@ Component* StelUI::createConfigWindow(void)
 	return config_win;
 }
 
+void StelUI::dialogCallback(void)
+{
+	string lastID = dialog_win->getLastID();
+	int lastButton = dialog_win->getLastButton();
+	string lastInput = StelUtility::wstringToString(dialog_win->getLastInput());
+	int lastType = dialog_win->getLastType();
+
+	if (lastID == "observatory name")
+	{
+		if (lastButton != BT_OK || lastInput == "")
+			lastInput = UNKNOWN_OBSERVATORY;
+		doSaveObserverPosition(lastInput);
+		setCityFromMap();
+	}
+	else if (lastID != "")
+	{
+		string msg = lastID;
+		msg += " returned btn: ";
+	
+		if (lastButton == BT_OK) msg += "BT_OK";
+		else if (lastButton == BT_YES) msg += "BT_YES";
+		else if (lastButton == BT_NO) msg += "BT_NO";
+		else if (lastButton == BT_CANCEL) msg += "BT_CANCEL";
+	
+		if (lastType == STDDLGWIN_MSG) dialog_win->MessageBox(L"Stellarium",StelUtility::stringToWstring(msg), BT_OK);
+		else if (lastType == STDDLGWIN_INPUT) dialog_win->MessageBox(L"Stellarium",StelUtility::stringToWstring(msg) + L" inp: " + StelUtility::stringToWstring(lastInput), BT_OK);
+	}		
+}
+
 void StelUI::setSkyLanguage(void)
 {
 	core->setSkyLanguage(StelUtility::wstringToString(languageSky_lb->getCurrent()));
