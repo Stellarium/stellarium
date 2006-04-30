@@ -109,6 +109,10 @@ void SkyGrid::draw(const Projector* prj) const
 			if ((prj->*proj_func)(alt_points[nm][0], pt1) &&
 				(prj->*proj_func)(alt_points[nm][1], pt2) )
 			{
+              const double dx = pt1[0]-pt2[0];
+              const double dy = pt1[1]-pt2[1];
+              const double dq = dx*dx+dy*dy;
+              if (dq < 1024*1024) {
 				glColor4f(color[0],color[1],color[2],0.f);
 
 				glBegin (GL_LINES);
@@ -116,6 +120,7 @@ void SkyGrid::draw(const Projector* prj) const
 					glColor4f(color[0],color[1],color[2],fader.getInterstate());
 					glVertex2f(pt2[0],pt2[1]);
         		glEnd();
+              }
 			}
 
 			glColor4f(color[0],color[1],color[2],fader.getInterstate());
@@ -125,67 +130,70 @@ void SkyGrid::draw(const Projector* prj) const
 				if ((prj->*proj_func)(alt_points[nm][i], pt1) &&
 					(prj->*proj_func)(alt_points[nm][i+1], pt2) )
 				{
-				  glBegin(GL_LINES);
-				  glVertex2f(pt1[0],pt1[1]);
-				  glVertex2f(pt2[0],pt2[1]);
-				  glEnd();
-				  
-				  static char str[255];	// TODO use c++ string 
-				  
-				  glEnable(GL_TEXTURE_2D);
+                  const double dx = pt1[0]-pt2[0];
+                  const double dy = pt1[1]-pt2[1];
+                  const double dq = dx*dx+dy*dy;
+                  if (dq < 1024*1024) {
+				    glBegin(GL_LINES);
+				    glVertex2f(pt1[0],pt1[1]);
+				    glVertex2f(pt2[0],pt2[1]);
+				    glEnd();
 
-				  double angle;
-				  double d;
+				    static char str[255];	// TODO use c++ string 
 
-				  // TODO: allow for other numbers of meridians and parallels without
-				  // screwing up labels?
-				  if( gtype == EQUATORIAL && i == 8 ) {
+				    glEnable(GL_TEXTURE_2D);
 
-				    // draw labels along equator for RA
-				    d = sqrt( (pt1[0]-pt2[0])*(pt1[0]-pt2[0]) + (pt1[1]-pt2[1])*(pt1[1]-pt2[1]) );
-				  
-				    angle = acos((pt1[1]-pt2[1])/d);
-				    if( pt1[0] < pt2[0] ) {
-				      angle *= -1;
+				    double angle;
+
+				    // TODO: allow for other numbers of meridians and parallels without
+				    // screwing up labels?
+				    if( gtype == EQUATORIAL && i == 8 ) {
+
+				      // draw labels along equator for RA
+				      const double d = sqrt(dq);
+
+				      angle = acos((pt1[1]-pt2[1])/d);
+				      if( pt1[0] < pt2[0] ) {
+				        angle *= -1;
+				      }
+
+				      sprintf( str, "%dh", nm);
+
+				      prj->set_orthographic_projection();
+
+				      glTranslatef(pt2[0],pt2[1],0);
+				      glRotatef(90+angle*180./M_PI,0,0,-1);
+				      font->print(2,-2,str);
+
+				      prj->reset_perspective_projection();
+
+
+				    } else if (nm % 8 == 0 && i != 16) {
+
+				      const double d = sqrt(dq);
+
+				      angle = acos((pt1[1]-pt2[1])/d);
+				      if( pt1[0] < pt2[0] ) {
+				        angle *= -1;
+				      }
+
+				      sprintf( str, "%d", (i-8)*10);
+
+				      if( gtype == ALTAZIMUTAL || 
+					  (gtype == EQUATORIAL && i > 8)) {
+				        angle += M_PI;
+				      }
+
+				      prj->set_orthographic_projection();
+
+				      glTranslatef(pt2[0],pt2[1],0);
+				      glRotatef(angle*180./M_PI,0,0,-1);
+				      font->print(2,-2,str);
+				      prj->reset_perspective_projection();
+
 				    }
-
-				    sprintf( str, "%dh", nm);
-
-				    prj->set_orthographic_projection();
-				  
-				    glTranslatef(pt2[0],pt2[1],0);
-				    glRotatef(90+angle*180./M_PI,0,0,-1);
-				    font->print(2,-2,str);
-
-				    prj->reset_perspective_projection();
-
-
-				  } else if (nm % 8 == 0 && i != 16) {
-					  
-				    d = sqrt( (pt1[0]-pt2[0])*(pt1[0]-pt2[0]) + (pt1[1]-pt2[1])*(pt1[1]-pt2[1]) );
-				  
-				    angle = acos((pt1[1]-pt2[1])/d);
-				    if( pt1[0] < pt2[0] ) {
-				      angle *= -1;
-				    }
-
-				    sprintf( str, "%d", (i-8)*10);
-					    
-				    if( gtype == ALTAZIMUTAL || 
-					(gtype == EQUATORIAL && i > 8)) {
-				      angle += M_PI;
-				    }
-
-				    prj->set_orthographic_projection();
-
-				    glTranslatef(pt2[0],pt2[1],0);
-				    glRotatef(angle*180./M_PI,0,0,-1);
-				    font->print(2,-2,str);
-				    prj->reset_perspective_projection();
-
+				    glDisable(GL_TEXTURE_2D);
 				  }
-				  glDisable(GL_TEXTURE_2D);
-				  
 				}
 
 
@@ -194,12 +202,17 @@ void SkyGrid::draw(const Projector* prj) const
 			if ((prj->*proj_func)(alt_points[nm][nb_alt_segment-1], pt1) &&
 				(prj->*proj_func)(alt_points[nm][nb_alt_segment], pt2) )
 			{
+              const double dx = pt1[0]-pt2[0];
+              const double dy = pt1[1]-pt2[1];
+              const double dq = dx*dx+dy*dy;
+              if (dq < 1024*1024) {
 				glColor4f(color[0],color[1],color[2],fader.getInterstate());
 				glBegin (GL_LINES);
 					glVertex2f(pt1[0],pt1[1]);
 					glColor4f(color[0],color[1],color[2],0.f);
 					glVertex2f(pt2[0],pt2[1]);
         		glEnd();
+              }
 			}
 
 		}
@@ -211,10 +224,15 @@ void SkyGrid::draw(const Projector* prj) const
 				if ((prj->*proj_func)(alt_points[nm][i], pt1) &&
 					(prj->*proj_func)(alt_points[nm][i+1], pt2) )
 				{
+                  const double dx = pt1[0]-pt2[0];
+                  const double dy = pt1[1]-pt2[1];
+                  const double dq = dx*dx+dy*dy;
+                  if (dq < 1024*1024) {
 					glBegin (GL_LINES);
 						glVertex2f(pt1[0],pt1[1]);
 						glVertex2f(pt2[0],pt2[1]);
         			glEnd();
+                  }
 				}
 			}
 		}
@@ -229,10 +247,15 @@ void SkyGrid::draw(const Projector* prj) const
 			if ((prj->*proj_func)(azi_points[np][i], pt1) &&
 				(prj->*proj_func)(azi_points[np][i+1], pt2) )
 			{
+              const double dx = pt1[0]-pt2[0];
+              const double dy = pt1[1]-pt2[1];
+              const double dq = dx*dx+dy*dy;
+              if (dq < 1024*1024) {
 				glBegin (GL_LINES);
 					glVertex2f(pt1[0],pt1[1]);
 					glVertex2f(pt2[0],pt2[1]);
         		glEnd();
+              }
 			}
 		}
 	}
@@ -308,9 +331,12 @@ void SkyLine::draw(const Projector* prj) const
 		if ((prj->*proj_func)(points[i], pt1) &&
 			(prj->*proj_func)(points[i+1], pt2) )
 		{
+          const double dx = pt1[0]-pt2[0];
+          const double dy = pt1[1]-pt2[1];
+          const double dq = dx*dx+dy*dy;
+          if (dq < 1024*1024) {
 
 			double angle;
-			double d;
 
 			// TODO: allow for other numbers of meridians and parallels without
 			// screwing up labels?
@@ -322,7 +348,7 @@ void SkyLine::draw(const Projector* prj) const
 
 
 			if(line_type == MERIDIAN) {
-				d = sqrt( (pt1[0]-pt2[0])*(pt1[0]-pt2[0]) + (pt1[1]-pt2[1])*(pt1[1]-pt2[1]) );
+				const double d = sqrt(dq);
 				  
 				angle = acos((pt1[1]-pt2[1])/d);
 				if( pt1[0] < pt2[0] ) {
@@ -358,7 +384,7 @@ void SkyLine::draw(const Projector* prj) const
 				  
 			if(line_type == EQUATOR && (i+1) % 2 == 0) {
 
-				d = sqrt( (pt1[0]-pt2[0])*(pt1[0]-pt2[0]) + (pt1[1]-pt2[1])*(pt1[1]-pt2[1]) );
+				const double d = sqrt(dq);
 				  
 				angle = acos((pt1[1]-pt2[1])/d);
 				if( pt1[0] < pt2[0] ) {
@@ -390,7 +416,7 @@ void SkyLine::draw(const Projector* prj) const
 			// Draw months on ecliptic
 			if(line_type == ECLIPTIC && (i+3) % 4 == 0) {
 
-				d = sqrt( (pt1[0]-pt2[0])*(pt1[0]-pt2[0]) + (pt1[1]-pt2[1])*(pt1[1]-pt2[1]) );
+				const double d = sqrt(dq);
 				  
 				angle = acos((pt1[1]-pt2[1])/d);
 				if( pt1[0] < pt2[0] ) {
@@ -413,7 +439,7 @@ void SkyLine::draw(const Projector* prj) const
 				glDisable(GL_TEXTURE_2D);
 
 			}
-
+		  }
 		}
 	}
 
