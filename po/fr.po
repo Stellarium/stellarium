@@ -10,13 +10,15 @@
 # Fabien Chéreau, 2006.
 # Fabien Chéreau, 2006.
 # Fabien Chéreau, 2006.
+# Fabien Chéreau, 2006.
+# Fabien Chéreau, 2006.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: stellarium@free.fr\n"
-"POT-Creation-Date: 2006-04-30 20:54+0200\n"
-"PO-Revision-Date: 2006-04-26 16:55+0200\n"
+"POT-Creation-Date: 2006-04-30 22:57+0200\n"
+"PO-Revision-Date: 2006-04-30 23:41+0200\n"
 "Last-Translator: Fabien Chéreau\n"
 "Language-Team:  <fr@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -43,7 +45,7 @@ msgstr "%s: Mauvais argument(s) sur la ligne de commande\n"
 #: src/main.cpp:77
 #, c-format
 msgid "Try `%s --help' for more information.\n"
-msgstr "Essayez `%s --help' pour plus d'information.\n"
+msgstr "Essayer `%s --help' pour plus d'information.\n"
 
 #: src/constellation_mgr.cpp:161
 msgid "Loading Constellation Art: "
@@ -90,11 +92,11 @@ msgstr "Type: "
 msgid "Size: "
 msgstr "Taille: "
 
-#: src/nebula_mgr.cpp:289
+#: src/nebula_mgr.cpp:291
 msgid "Loading NGC catalog: "
 msgstr "Chargement du catalogue NGC: "
 
-#: src/nebula_mgr.cpp:413
+#: src/nebula_mgr.cpp:415
 msgid "Loading Nebula Textures:"
 msgstr "Chargement des textures des Nébuleuses :"
 
@@ -256,7 +258,7 @@ msgstr ""
 "F1  : Alterne Plein Ecran si possible.\n"
 "C   : Lignes des Constellations V   : Labels des Constellations\n"
 "R   : Images des Constellations E   : Grille Equatoriale\n"
-"Z   : Grille Azimuthale         N   : Lebels des Nébuleuses\n"
+"Z   : Grille Azimuthale         N   : Labels des Nébuleuses\n"
 "P   : Labels des Planètes       G   : Sol\n"
 "A   : Atmosphère                F   : Brume\n"
 "Q   : Points Cardinaux          O   : Alterne Grossissement de la lune\n"
@@ -274,9 +276,9 @@ msgid ""
 "CTRL + F : Toggle object finder\n"
 "\n"
 msgstr ""
-"Dialogues & autres controles:\n"
+"Dialogues & autres contrôles:\n"
 "H   : Aide                      I   : A propos de Stellarium\n"
-"M   : Menu textuel              1 (one)  : Configuration\n"
+"M   : Menu textuel              1 (un)   : Configuration\n"
 "CTRL + S : Prend une capture d'écran\n"
 "CTRL + R : Alterne l'enregistrement du script\n"
 "CTRL + F : Alterne l'affichage du chercheur d object\n"
@@ -342,12 +344,11 @@ msgstr "Enregistre les commandes sur le fichier script:\n"
 
 #: src/stel_ui.cpp:989
 msgid "Hit CTRL-R again to stop.\n"
-msgstr "Appuyez sur CTRL-R à nouveau pour arrêter.\n"
+msgstr "Appuyer sur CTRL-R à nouveau pour arrêter.\n"
 
 #: src/stel_ui.cpp:993
 msgid "Error: Unable to open script file to record commands."
-msgstr ""
-"Erreur: Impossible d'ouvrir le fichier script pour enregistrer les commandes."
+msgstr "Erreur: Impossible d'ouvrir le fichier script pour enregistrer les commandes."
 
 #: src/stel_ui_conf.cpp:37
 msgid "Configuration"
@@ -387,7 +388,7 @@ msgstr "Noms des nébuleuses. +- :"
 
 #: src/stel_ui_conf.cpp:129
 msgid "Also display Nebulas without textures"
-msgstr ""
+msgstr "Affiche aussi les nébuleuses sans textures"
 
 #: src/stel_ui_conf.cpp:140
 msgid "Planets"
@@ -502,11 +503,11 @@ msgstr "Resolution écran  :"
 
 #: src/stel_ui_conf.cpp:384
 msgid "Restart program for"
-msgstr "Relancer le programme"
+msgstr "Relancer le programme pour"
 
 #: src/stel_ui_conf.cpp:385
 msgid "change to apply."
-msgstr "pour activer le changement."
+msgstr "activer le changement."
 
 #: src/stel_ui_conf.cpp:401
 msgid "For unlisted screen resolution, edit the file :"
@@ -517,9 +518,8 @@ msgid "Choose landscapes:"
 msgstr "Choix du paysage:"
 
 #: src/stel_ui_conf.cpp:446
-#, fuzzy
 msgid "Program Language: "
-msgstr "Language du programme:"
+msgstr "Language du programme : "
 
 #: src/stel_ui_conf.cpp:462 src/stel_ui_tuiconf.cpp:156
 msgid "Sky Language: "
@@ -559,11 +559,11 @@ msgstr "Recherche d'objet"
 
 #: src/stel_ui_conf.cpp:616
 msgid "Search for (eg. Saturn, Polaris, HP6218, Orion, M31):"
-msgstr ""
+msgstr "Chercher (ex: Saturne, Polaris, HP6218, Orion, M13):"
 
 #: src/stel_ui_conf.cpp:633
 msgid "GO"
-msgstr ""
+msgstr "GO"
 
 #: src/stel_ui_conf.cpp:757
 msgid "Enter observatory name"
@@ -571,7 +571,7 @@ msgstr "Entrez le nom de l'observatoire"
 
 #: src/stel_ui_conf.cpp:897
 msgid ": Normal rate"
-msgstr ": frequence normale"
+msgstr ": Fréquence normale"
 
 #: src/stel_ui_conf.cpp:904
 msgid ": Standard Perseids rate"
@@ -743,11 +743,11 @@ msgstr "Chargement de la configuration par défaut: "
 
 #: src/stel_ui_tuiconf.cpp:245
 msgid "Save Current Configuration as Default: "
-msgstr "Utilise la configuration courante par défaut "
+msgstr "Utilise la configuration courante par défaut : "
 
 #: src/stel_ui_tuiconf.cpp:247
 msgid "Update me via Internet: "
-msgstr "Mise à jour via Internet "
+msgstr "Mise à jour via Internet: "
 
 #: src/translations.h:33
 msgid "Sun"
@@ -1231,255 +1231,255 @@ msgstr "Voiles"
 
 #: src/translations.h:160
 msgid "Bull's Foreleg"
-msgstr ""
+msgstr "Patte Avant du Taureau"
 
 #: src/translations.h:161
 msgid "Two Poles"
-msgstr ""
+msgstr "Deux Poteaux"
 
 #: src/translations.h:162
 msgid "Lion"
-msgstr ""
+msgstr "Lion"
 
 #: src/translations.h:163
 msgid "Two Jaws"
-msgstr ""
+msgstr "Deux Mâchoires"
 
 #: src/translations.h:164
 msgid "Sah"
-msgstr ""
+msgstr "Sah"
 
 #: src/translations.h:165
 msgid "Bird"
-msgstr ""
+msgstr "Oiseau"
 
 #: src/translations.h:166
 msgid "Sek"
-msgstr ""
+msgstr "Sek"
 
 #: src/translations.h:167
 msgid "Triangle"
-msgstr ""
+msgstr "Triangle"
 
 #: src/translations.h:168
 msgid "Ferry Boat"
-msgstr ""
+msgstr "Ferry"
 
 #: src/translations.h:169 src/translations.h:240
 msgid "Boat"
-msgstr ""
+msgstr "Bateau"
 
 #: src/translations.h:170
 msgid "Crocodile"
-msgstr ""
+msgstr "Crocodile"
 
 #: src/translations.h:171
 msgid "Selkis"
-msgstr ""
+msgstr "Selkis"
 
 #: src/translations.h:172
 msgid "Prow"
-msgstr ""
+msgstr "Prow"
 
 #: src/translations.h:173
 msgid "Horus"
-msgstr ""
+msgstr "Horus"
 
 #: src/translations.h:174
 msgid "Sheepfold"
-msgstr ""
+msgstr "Bergerie"
 
 #: src/translations.h:175
 msgid "Giant"
-msgstr ""
+msgstr "Géant"
 
 #: src/translations.h:176
 msgid "Hippopotamus"
-msgstr ""
+msgstr "Hippopotame"
 
 #: src/translations.h:177
 msgid "Flock"
-msgstr ""
+msgstr "Troupeau"
 
 #: src/translations.h:178
 msgid "Pair of Stars"
-msgstr ""
+msgstr "Couple d'Etoiles"
 
 #: src/translations.h:179
 msgid "Khanuwy Fish"
-msgstr ""
+msgstr "Poisson Khanuwy"
 
 #: src/translations.h:180 src/translations.h:219
 msgid "Net"
-msgstr ""
+msgstr "Filet"
 
 #: src/translations.h:181
 msgid "Jaw"
-msgstr ""
+msgstr "Mâchoire"
 
 #: src/translations.h:182
 msgid "Mooring Post"
-msgstr ""
+msgstr "Point de Mouillage"
 
 #: src/translations.h:183
 msgid "Kenemet"
-msgstr ""
+msgstr "Kenemet"
 
 #: src/translations.h:184
 msgid "Chematy"
-msgstr ""
+msgstr "Chematy"
 
 #: src/translations.h:185
 msgid "Waty Bekety"
-msgstr ""
+msgstr "Waty Bekety"
 
 #: src/translations.h:186
 msgid "Sheep"
-msgstr ""
+msgstr "Mouton"
 
 #: src/translations.h:187
 msgid "Stars of Water"
-msgstr ""
+msgstr "Etoiles de l'eau"
 
 #: src/translations.h:190
 msgid "Northern Dipper"
-msgstr ""
+msgstr "Louche du Nord"
 
 #: src/translations.h:191
 msgid "Curved Array"
-msgstr ""
+msgstr "Ensemble Incurvé"
 
 #: src/translations.h:192
 msgid "Coiled Thong"
-msgstr ""
+msgstr "Lanière Enroulée"
 
 #: src/translations.h:193
 msgid "Wings"
-msgstr ""
+msgstr "Ailes"
 
 #: src/translations.h:194
 msgid "Chariot"
-msgstr ""
+msgstr "Chariot"
 
 #: src/translations.h:195
 msgid "Tail"
-msgstr ""
+msgstr "Queue"
 
 #: src/translations.h:196
 msgid "Winnowing Basket"
-msgstr ""
+msgstr "Panier à Vannage"
 
 #: src/translations.h:197
 msgid "Dipper"
-msgstr ""
+msgstr "Louche"
 
 #: src/translations.h:198
 msgid "Drum"
-msgstr ""
+msgstr "Percussion"
 
 #: src/translations.h:199
 msgid "Three Steps"
-msgstr ""
+msgstr "Trois Marches"
 
 #: src/translations.h:200
 msgid "Imperial Guards"
-msgstr ""
+msgstr "Guardes Impériaux"
 
 #: src/translations.h:201
 msgid "Horn"
-msgstr ""
+msgstr "Corne"
 
 #: src/translations.h:202
 msgid "Willow"
-msgstr ""
+msgstr "Saule"
 
 #: src/translations.h:203
 msgid "Imperial Passageway"
-msgstr ""
+msgstr "Passage Impérial"
 
 #: src/translations.h:204
 msgid "Kitchen"
-msgstr ""
+msgstr "Cuisine"
 
 #: src/translations.h:205
 msgid "River Turtle"
-msgstr ""
+msgstr "Rivière Tortue"
 
 #: src/translations.h:206
 msgid "Stomach"
-msgstr ""
+msgstr "Estomac"
 
 #: src/translations.h:207
 msgid "Great General"
-msgstr ""
+msgstr "Grand Général"
 
 #: src/translations.h:208
 msgid "Wall"
-msgstr ""
+msgstr "Mur"
 
 #: src/translations.h:209
 msgid "Legs"
-msgstr ""
+msgstr "Jambe"
 
 #: src/translations.h:210
 msgid "Root"
-msgstr ""
+msgstr "Racine"
 
 #: src/translations.h:211
 msgid "Ramparts"
-msgstr ""
+msgstr "Remparts"
 
 #: src/translations.h:212
 msgid "Flying Corridor"
-msgstr ""
+msgstr "Couloir Volant"
 
 #: src/translations.h:213
 msgid "Outer Fence"
-msgstr ""
+msgstr "Enceinte Externe"
 
 #: src/translations.h:214
 msgid "Ford"
-msgstr ""
+msgstr "Gué"
 
 #: src/translations.h:215
 msgid "Seven Excellencies"
-msgstr ""
+msgstr "Sept Excellences"
 
 #: src/translations.h:216
 msgid "Market"
-msgstr ""
+msgstr "Marché"
 
 #: src/translations.h:217
 msgid "Five Chariots"
-msgstr ""
+msgstr "Cinqs Chariots"
 
 #: src/translations.h:218
 msgid "Rolled Tongue"
-msgstr ""
+msgstr "Langue Enroulée"
 
 #: src/translations.h:220
 msgid "Toilet"
-msgstr ""
+msgstr "Toilette"
 
 #: src/translations.h:221
 msgid "Screen"
-msgstr ""
+msgstr "Paravent"
 
 #: src/translations.h:222
 msgid "Soldiers Market"
-msgstr ""
+msgstr "Marché aux Soldats"
 
 #: src/translations.h:223
 msgid "Square Granary"
-msgstr ""
+msgstr "Grenier Carré"
 
 #: src/translations.h:224
 msgid "Three Stars"
-msgstr ""
+msgstr "Trois Etoiles"
 
 #: src/translations.h:225
 msgid "Four Channels"
-msgstr ""
+msgstr "Quatre "
 
 #: src/translations.h:226
 msgid "Well"
@@ -1699,31 +1699,31 @@ msgstr ""
 
 #: src/translations.h:283
 msgid "Bailer"
-msgstr ""
+msgstr "Ecope"
 
 #: src/translations.h:284
 msgid "Cat's Cradle"
-msgstr ""
+msgstr "Naissance du Chat"
 
 #: src/translations.h:285
 msgid "Voice of Joy"
-msgstr ""
+msgstr "Voix de Joie"
 
 #: src/translations.h:286
 msgid "The Seven"
-msgstr ""
+msgstr "Les Septs"
 
 #: src/translations.h:287
 msgid "Maui's Fishhook"
-msgstr ""
+msgstr "Hameçon Maui"
 
 #: src/translations.h:288
 msgid "Navigator's Triangle"
-msgstr ""
+msgstr "Triangle du Navigateur"
 
 #: src/translations.h:289
 msgid "Kite of Kawelo"
-msgstr ""
+msgstr "Cerf-volant de Kawelo"
 
 #: src/translations.h:290
 msgid "Frigate Bird"
@@ -1770,53 +1770,3 @@ msgstr "Minutes"
 msgid "Seconds"
 msgstr "Secondes"
 
-#~ msgid "Sky language:"
-#~ msgstr "Language du Ciel:"
-
-#~ msgid "Sky culture:"
-#~ msgstr "Civilisation du Ciel:"
-
-#~ msgid "Constellation lines: "
-#~ msgstr "Lignes des Constellations: "
-
-#~ msgid "Constellation labels: "
-#~ msgstr "Noms des Constellations: "
-
-#~ msgid "Cardinal points: "
-#~ msgstr "Points Cardinaux: "
-
-#~ msgid "Star No./Name"
-#~ msgstr "No/Nom se l'étoile"
-
-#~ msgid "eg. 60718 (aCrux) or Canopus"
-#~ msgstr "ex. 60718 (aCrux) ou Canopus"
-
-#~ msgid "HP 60718, HD 108248, SAO 251904"
-#~ msgstr "HP 60718, HD 108248, SAO 251904"
-
-#~ msgid "Constellation"
-#~ msgstr "Constellation"
-
-#~ msgid "eg. Crux"
-#~ msgstr "ex. Croix du Sud"
-
-#~ msgid "Object No :"
-#~ msgstr "Num Objet :"
-
-#~ msgid "e.g. : 1432, 83"
-#~ msgstr "p.e. : 1432, 83"
-
-#~ msgid "Choose a catalog :"
-#~ msgstr "Choix d'un catalogue :"
-
-#~ msgid "Planet/Moon"
-#~ msgstr "Planète/Lune"
-
-#~ msgid "eg. Pluto or Io"
-#~ msgstr "ex. Pluton ou Io"
-
-#~ msgid "Nebula"
-#~ msgstr "Nébuleuse"
-
-#~ msgid "Planets & Moons"
-#~ msgstr "Planètes & Lunes"
