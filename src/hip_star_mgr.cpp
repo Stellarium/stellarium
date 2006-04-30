@@ -491,37 +491,45 @@ HipStar *HipStarMgr::searchHP(unsigned int _HP) const
     return NULL;
 }
 
-HipStar *HipStarMgr::searchByNameI18n(const wstring &name) const {
-  HipStar *rval = searchHP(getCommonNameHP(name));
-  if (rval) return rval;
-  rval = searchHP(getSciNameHP(name));
-  if (rval) return rval;
-    // parse the HP number.
-    // Please help, if you know a better way to do this:
-  if (name.length() >= 2 &&
-      (name[0]==L'H' || name[0]==L'h') &&
-      (name[1]==L'P' || name[1]==L'p')) {
-    bool hp_ok = false;
-    wstring::size_type i=2;
-      // ignore spaces
-    for (;i<name.length();i++) {
-      if (name[i] != L' ') break;
-    }
-      // parse the number
-    unsigned int nr = 0;
-    for (;i<name.length();i++) {
-      if (hp_ok = (L'0' <= name[i] && name[i] <= L'9')) {
-        nr = 10*nr+(name[i]-L'0');
-      } else {
-        break;
-      }
-    }
-    if (hp_ok) {
-      rval = searchHP(nr);
-      if (rval) return rval;
-    }
-  }
-  return NULL;
+HipStar *HipStarMgr::searchByNameI18n(const wstring &name) const
+{
+	HipStar *rval = searchHP(getCommonNameHP(name));
+	if (rval) return rval;
+	rval = searchHP(getSciNameHP(name));
+	if (rval) return rval;
+	// parse the HP number.
+	// Please help, if you know a better way to do this:
+	if (name.length() >= 2 &&
+	        (name[0]==L'H' || name[0]==L'h') &&
+	        (name[1]==L'P' || name[1]==L'p'))
+	{
+		bool hp_ok = false;
+		wstring::size_type i=2;
+		// ignore spaces
+		for (;i<name.length();i++)
+		{
+			if (name[i] != L' ') break;
+		}
+		// parse the number
+		unsigned int nr = 0;
+		for (;i<name.length();i++)
+		{
+			if (hp_ok = (L'0' <= name[i] && name[i] <= L'9'))
+			{
+				nr = 10*nr+(name[i]-L'0');
+			}
+			else
+			{
+				break;
+			}
+		}
+		if (hp_ok)
+		{
+			rval = searchHP(nr);
+			if (rval) return rval;
+		}
+	}
+	return NULL;
 }
 
 // Load the double stars from the double star file
