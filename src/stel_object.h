@@ -35,23 +35,37 @@ public:
 	{
 		STEL_OBJECT_STAR,
 		STEL_OBJECT_PLANET,
-		STEL_OBJECT_NEBULA
+		STEL_OBJECT_NEBULA,
+		STEL_OBJECT_CONSTELLATION
 	};
 
 	virtual ~StelObject() {;}
 	virtual void update(void) {return;}
 	void draw_pointer(int delta_time, const Projector* prj, const Navigator * nav);
 
-	//! Write information about the object in wchar* s 
+	//! Write I18n information about the object in wstring. 
 	virtual wstring getInfoString(const Navigator * nav) const = 0;
+	
+	//! The returned wstring can typically be used for object labeling in the sky
 	virtual wstring getShortInfoString(const Navigator * nav) const = 0;
-
+	
+	//! Return object's type
 	virtual STEL_OBJECT_TYPE get_type(void) const = 0;
+	
+	//! Get position in earth equatorial frame
 	virtual Vec3d get_earth_equ_pos(const Navigator * nav) const = 0;
-	virtual Vec3f get_RGB(void) const {return Vec3f(0.,0.,0.);}
-	virtual double get_close_fov(const Navigator * nav) const {return 10.;}
-	virtual double get_satellites_fov(const Navigator * nav) const {return -1.;}
+	
+	//! Return object's magnitude
 	virtual float get_mag(const Navigator * nav) const = 0;
+	
+	//! Get object main color, used to display infos
+	virtual Vec3f get_RGB(void) const {return Vec3f(1.,1.,1.);}
+	
+	//! Return the best FOV in degree to use for a close view of the object
+	virtual double get_close_fov(const Navigator * nav) const {return 10.;}
+	
+	//! Return the best FOV in degree to use for a global view of the object satellite system (if there are satellites)
+	virtual double get_satellites_fov(const Navigator * nav) const {return -1.;}
 
 	static void init_textures(void);
 	static void delete_textures(void);
