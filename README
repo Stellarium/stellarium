@@ -70,6 +70,9 @@ Windows/MacOSX and in $HOME/.stellarium/ on a unix system.
 	
 	Tony Furr for his work on the Graphical User Interface.
 
+    Valery Lainey for his L1 and MarsSat ephemeris and his prompt an kind help
+    with any question concerning planetary/satellite ephemeris.
+
 	++ Thanks to ++
 	
 	Axel Mellinger who gave me the authorisation to use his impressive
@@ -146,12 +149,15 @@ Windows/MacOSX and in $HOME/.stellarium/ on a unix system.
 		Celestia (Chris Laurel). (GPL license)
 	2.5 Other pieces of code and ideas are from Celestia too (GPL license).
     2.6 Callback library by Jess Jones, see section 10.4 for full license.
-	
+    2.7 Several implementations of IMCCE theories for planet and satellite
+        movement by Johannes Gajdosik (MIT-style license,
+        see the corresponding files for the license text)
+
 3. Data
 	3.1 The Hipparcos star catalog
 		From ESA (European Space Agency) and the Hipparcos mission.
 		ref. ESA, 1997, The Hipparcos and Tycho Catalogues, ESA SP-1200
-	3.2 The solar system data mainly comes from Celestia.
+	3.2 The solar system data mainly comes from IMCCE and partly from Celestia.
 	3.3 Polynesian constellations are based on diagrams from the Polynesian 
         Voyaging Society
 	3.4 Chinese constellations are based on diagrams from the Hong Kong Space Museum
