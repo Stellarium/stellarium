@@ -355,14 +355,7 @@ bool NebulaMgr::loadNGCNames(const string& catNGCNames)
 			// defined for this object
 			if (strncmp(n, "M ",2))
 			{
-				if (e->englishName!="")
-				{
-					ostringstream oss;
-					oss << e->englishName << " - " << n;
-					e->englishName = oss.str();
-				} else {
-					e->englishName = n;
-				}
+				e->englishName = n;
 			}
 
 			// If it's a messiernumber, we will call it a messier if there is no better name
@@ -376,12 +369,6 @@ bool NebulaMgr::loadNGCNames(const string& catNGCNames)
 				// Let us keep the right number in the Messier catalog
 				iss >> num;
 				e->M_nb=(unsigned int)(num);
-				oss << "M" << num;
-
-				if (e->englishName!="") oss << " - " << e->englishName;
-				e->englishName = oss.str();
-
-
 			}
 		}
 		else
@@ -449,3 +436,113 @@ void NebulaMgr::translateNames(Translator& trans)
 		(*iter)->translateName(trans);
 	}
 }
+
+
+Nebula* NebulaMgr::searchByNameI18n(const wstring& nameI18n) const
+{
+	wstring objw = nameI18n;
+	transform(objw.begin(), objw.end(), objw.begin(), ::toupper);
+	vector <Nebula*>::const_iterator iter;
+	
+	// Search by NGC numbers (possible formats are "NGC31" or "NGC 31")
+	if (objw.substr(0, 3) == L"NGC")
+	{
+		for (iter = neb_array.begin(); iter != neb_array.end(); ++iter)
+		{
+			if ((L"NGC" + StelUtility::intToWstring((*iter)->NGC_nb)) == objw ||
+			 (L"NGC " + StelUtility::intToWstring((*iter)->NGC_nb)) == objw)
+			 return *iter;
+		}
+	}
+	
+	// Search by common names
+	for (iter = neb_array.begin(); iter != neb_array.end(); ++iter)
+	{
+		wstring objwcap = (*iter)->nameI18;
+		transform(objwcap.begin(), objwcap.end(), objwcap.begin(), ::toupper);
+		if (objwcap==objw) return *iter;
+	}
+	
+	// Search by Messier numbers (possible formats are "M31" or "M 31")
+	if (objw.substr(0, 1) == L"M")
+	{
+		for (iter = neb_array.begin(); iter != neb_array.end(); ++iter)
+		{
+			if ((L"M" + StelUtility::intToWstring((*iter)->M_nb)) == objw ||
+			 (L"M " + StelUtility::intToWstring((*iter)->M_nb)) == objw)
+			 return *iter;
+		}
+	}
+	
+	return NULL;
+}
+
+//! Find and return the list of at most maxNbItem objects auto-completing the passed object I18n name
+vector<wstring> NebulaMgr::listMatchingObjectsI18n(const wstring& objPrefix, unsigned int maxNbItem) const
+{
+	vector<wstring> result;
+	if (maxNbItem==0) return result;
+		
+	wstring objw = objPrefix;
+	transform(objw.begin(), objw.end(), objw.begin(), ::toupper);
+	
+	vector <Nebula*>::const_iterator iter;
+	
+	// Search by messier objects number (possible formats are "M31" or "M 31")
+	if (objw.size() >= 1 && objw[0]==L'M')
+	{
+		for (iter = neb_array.begin(); iter != neb_array.end(); ++iter)
+		{
+			if ((*iter)->M_nb==0) continue;
+			wstring constw = L"M" + StelUtility::intToWstring((*iter)->M_nb);
+			wstring constws = constw.substr(0, objw.size());
+			if (constws==objw)
+			{
+				result.push_back(constw);
+				continue;	// Prevent adding both forms for name
+			}
+			constw = L"M " + StelUtility::intToWstring((*iter)->M_nb);
+			constws = constw.substr(0, objw.size());
+			if (constws==objw)
+			{
+				result.push_back(constw);
+			}
+		}
+	}
+	
+	// Search by NGC numbers (possible formats are "NGC31" or "NGC 31")
+	for (iter = neb_array.begin(); iter != neb_array.end(); ++iter)
+	{
+		if ((*iter)->NGC_nb==0) continue;
+		wstring constw = L"NGC" + StelUtility::intToWstring((*iter)->NGC_nb);
+		wstring constws = constw.substr(0, objw.size());
+		if (constws==objw)
+		{
+			result.push_back(constw);
+			continue;
+		}
+		constw = L"NGC " + StelUtility::intToWstring((*iter)->NGC_nb);
+		constws = constw.substr(0, objw.size());
+		if (constws==objw)
+		{
+			result.push_back(constw);
+		}
+	}
+	
+	// Search by common names
+	for (iter = neb_array.begin(); iter != neb_array.end(); ++iter)
+	{
+		wstring constw = (*iter)->nameI18.substr(0, objw.size());
+		transform(constw.begin(), constw.end(), constw.begin(), ::toupper);
+		if (constw==objw)
+		{
+			result.push_back((*iter)->nameI18);
+		}
+	}
+	
+	sort(result.begin(), result.end());
+	if (result.size()>maxNbItem) result.erase(result.begin()+maxNbItem, result.end());
+	
+	return result;
+}
+

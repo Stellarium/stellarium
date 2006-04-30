@@ -445,6 +445,8 @@ StelObject *StelCore::searchByNameI18n(const wstring &name) const {
   StelObject *rval = 0;
   rval = ssystem->searchByNamesI18(name);
   if (rval) return rval;
+  rval = nebulas->searchByNameI18n(name);
+  if (rval) return rval;
   rval = hip_stars->searchByNameI18n(name);
   if (rval) return rval;
 
@@ -1083,6 +1085,12 @@ vector<wstring> StelCore::listMatchingObjectsI18n(const wstring& objPrefix, unsi
 	for (iter = matchingConstellations.begin(); iter != matchingConstellations.end(); ++iter)
 		result.push_back(*iter);
 	maxNbItem-=matchingConstellations.size();
-		
+
+	// Get matching nebulae
+	vector<wstring> matchingNebulae = nebulas->listMatchingObjectsI18n(objPrefix, maxNbItem);
+	for (iter = matchingNebulae.begin(); iter != matchingNebulae.end(); ++iter)
+		result.push_back(*iter);
+	maxNbItem-=matchingNebulae.size();
+	
 	return result;
 }
