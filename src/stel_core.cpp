@@ -117,7 +117,7 @@ void StelCore::init(const InitParser& conf)
 
 	// Load hipparcos stars & names
 	if(firstTime) {
-		LoadingBar lb(projection, 12., baseFontFile, "logo24bits.png", getViewportWidth(), getViewportHeight());
+		LoadingBar lb(projection, 12., baseFontFile, "logo24bits.png", getViewportWidth(), getViewportHeight(), StelUtility::stringToWstring(VERSION), 45, 320, 121);
 		hip_stars->init(12.f, baseFontFile, getDataDir() + "hipparcos.fab", getDataDir() + "sky_cultures/western/star_names.fab", getDataDir() + "name.fab", lb);
 
 		// Init nebulas
@@ -667,7 +667,7 @@ void StelCore::setSkyCultureDir(const string& cultureDir)
 
 	if(!asterisms) return;
 
-	LoadingBar lb(projection, 12., baseFontFile, "logo24bits.png", getViewportWidth(), getViewportHeight());
+	LoadingBar lb(projection, 12., baseFontFile, "logo24bits.png", getViewportWidth(), getViewportHeight(), StelUtility::stringToWstring(VERSION), 45, 320, 121);
 
 	asterisms->loadLinesAndArt(getDataDir() + "sky_cultures/" + skyCultureDir + "/constellationship.fab",
 	                           getDataDir() + "sky_cultures/" + skyCultureDir + "/constellationsart.fab", getDataDir() + "constellations_boundaries.dat", lb);

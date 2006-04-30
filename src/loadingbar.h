@@ -28,7 +28,9 @@ class LoadingBar
 {
 public:
 	// Create and initialise
-	LoadingBar(Projector* prj, float font_size, const string& font_name, const string&  splash_tex, int barx, int bary);
+	LoadingBar(Projector* prj, float font_size, const string& font_name, const string&  splash_tex, 
+		int screenw, int screenh, const wstring& extraTextString=L"", float extraTextSize = 30.f, 
+		float extraTextPosx = 0.f, float extraTextPosy = 0.f);
 	virtual ~LoadingBar();
 	void SetMessage(wstring m) {message=m;}
 	void Draw(float val);
@@ -38,6 +40,9 @@ private:
 	int splashx, splashy, barx, bary, width, height, barwidth, barheight;
 	s_font* barfont;
 	s_texture* splash;
+	wstring extraText;
+	Vec2f extraTextPos;
+	s_font* extraTextFont;
 };
 
 #endif //_LOADINGBAR_H_
