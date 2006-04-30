@@ -1,24 +1,20 @@
-# Spanish translations for stellarium package
-# Traducci� espa�la de stellarium.
-# Copyright (C) 2004, 2005 Free Software Foundation, Inc.
+# English translations for stellarium package.
+# Copyright (C) 2006 Fabien Chereau (c) 2005
 # This file is distributed under the same license as the stellarium package.
-# Sergio Trujillo, 2005.
-# <sergiotrujillo@telefonica.net>
+# Fabien Chéreau <stellarium@free.fr>, 2006.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: es\n"
+"Project-Id-Version: stellarium 0.8.0\n"
 "Report-Msgid-Bugs-To: stellarium@free.fr\n"
 "POT-Creation-Date: 2006-04-30 15:27+0200\n"
-"PO-Revision-Date: 2006-03-21 13:16+0000\n"
-"Last-Translator: elmadno <elmadno@gmail.com>\n"
-"Language-Team:\n"
+"PO-Revision-Date: 2006-04-30 15:26+0200\n"
+"Last-Translator: Fabien Chreau <stellarium@free.fr>\n"
+"Language-Team: English <en@translate.freefriends.org>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=ASCII\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.10\n"
-"X-Poedit-Language: Spanish\n"
-"X-Poedit-Country: SPAIN\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: src/main.cpp:52
 #, c-format
@@ -27,28 +23,28 @@ msgid ""
 " -v, --version          Output version information and exit.\n"
 " -h, --help             Display this help and exit.\n"
 msgstr ""
-"Uso: %s [OPCIÓN] ...\n"
-" -v, --version          Muestra información de la versión y sale.\n"
-" -h, --help             Muestra esta ayuda y sale.\n"
+"Usage: %s [OPTION] ...\n"
+" -v, --version          Output version information and exit.\n"
+" -h, --help             Display this help and exit.\n"
 
 #: src/main.cpp:76
 #, c-format
 msgid "%s: Bad command line argument(s)\n"
-msgstr "%s: Error en argumento(s) de la línea de comandos\n"
+msgstr "%s: Bad command line argument(s)\n"
 
 #: src/main.cpp:77
 #, c-format
 msgid "Try `%s --help' for more information.\n"
-msgstr "Intenta `%s --help' para más información.\n"
+msgstr "Try `%s --help' for more information.\n"
 
 #: src/constellation_mgr.cpp:161
 msgid "Loading Constellation Art: "
-msgstr "Cargando Figuras de Constelaciones: "
+msgstr "Loading Constellation Art: "
 
 #: src/hip_star.cpp:88 src/hip_star.cpp:136 src/nebula.cpp:94
 #: src/planet.cpp:107
 msgid "Magnitude: "
-msgstr "Magnitud: "
+msgstr "Magnitude: "
 
 #: src/hip_star.cpp:89 src/hip_star.cpp:137
 msgid " (Variable)"
@@ -56,47 +52,47 @@ msgstr " (Variable)"
 
 #: src/hip_star.cpp:91 src/nebula.cpp:96 src/planet.cpp:111
 msgid "RA/DE: "
-msgstr "AR/DEC: "
+msgstr "RA/DE: "
 
 #: src/hip_star.cpp:97 src/nebula.cpp:102 src/planet.cpp:117
 msgid "Az/Alt: "
-msgstr "Az/lt: "
+msgstr "Az/Alt: "
 
 #: src/hip_star.cpp:99 src/planet.cpp:120
 msgid "Distance: "
-msgstr "Distancia: "
+msgstr "Distance: "
 
 #: src/hip_star.cpp:101 src/hip_star.cpp:140
 msgid " Light Years"
-msgstr " Años Luz"
+msgstr " Light Years"
 
 #: src/hip_star.cpp:108
 msgid "Spectral Type: "
-msgstr "Tipo Espectral "
+msgstr "Spectral Type: "
 
 #: src/hip_star_mgr.cpp:126
 msgid "Loading Hipparcos catalog:"
-msgstr "Cargando Catálogo Hipparcos:"
+msgstr "Loading Hipparcos catalog:"
 
 #: src/nebula.cpp:104
 msgid "Type: "
-msgstr "Tipo: "
+msgstr "Type: "
 
 #: src/nebula.cpp:105
 msgid "Size: "
-msgstr "Tamaño: "
+msgstr "Size: "
 
 #: src/nebula_mgr.cpp:289
 msgid "Loading NGC catalog: "
-msgstr "Cargando Catálogo NGC: "
+msgstr "Loading NGC catalog: "
 
 #: src/nebula_mgr.cpp:413
 msgid "Loading Nebula Textures:"
-msgstr "Cargando Texturas de Nebulosas:"
+msgstr "Loading Nebula Textures:"
 
 #: src/planet.cpp:120
 msgid "AU"
-msgstr "U.A."
+msgstr "AU"
 
 #: src/stel_ui.cpp:485 src/stel_ui.cpp:613
 msgid "Script commander"
@@ -104,112 +100,105 @@ msgstr "Script commander"
 
 #: src/stel_ui.cpp:512
 msgid "Invalid Script command"
-msgstr "Comando Script No Válido"
+msgstr "Invalid Script command"
 
 #: src/stel_ui.cpp:578
-#, fuzzy
 msgid "Drawing of the Constellations [C]"
-msgstr "Asterismos [C]"
+msgstr "Drawing of the Constellations [C]"
 
 #: src/stel_ui.cpp:580
 msgid "Names of the Constellations [V]"
-msgstr "Nombres de las Constelaciones [V]"
+msgstr "Names of the Constellations [V]"
 
 #: src/stel_ui.cpp:582
 msgid "Constellations Art [R]"
-msgstr "Figuras de las Constelaciones [R]"
+msgstr "Constellations Art [R]"
 
 #: src/stel_ui.cpp:584
 msgid "Azimuthal Grid [Z]"
-msgstr "Cuadrícula Acimutal [Z]"
+msgstr "Azimuthal Grid [Z]"
 
 #: src/stel_ui.cpp:586
 msgid "Equatorial Grid [E]"
-msgstr "Cuadrícula Ecuatorial [E]"
+msgstr "Equatorial Grid [E]"
 
 #: src/stel_ui.cpp:588
 msgid "Ground [G]"
-msgstr "Suelo [G]"
+msgstr "Ground [G]"
 
 #: src/stel_ui.cpp:590
 msgid "Cardinal Points [Q]"
-msgstr "Puntos Cardinales [Q]"
+msgstr "Cardinal Points [Q]"
 
 #: src/stel_ui.cpp:592
 msgid "Atmosphere [A]"
-msgstr "Atmósfera [A]"
+msgstr "Atmosphere [A]"
 
 #: src/stel_ui.cpp:594
 msgid "Nebulas [N]"
-msgstr "Nebulosas [N]"
+msgstr "Nebulas [N]"
 
 #: src/stel_ui.cpp:596
 msgid "Help [H]"
-msgstr "Ayuda [H]"
+msgstr "Help [H]"
 
 #: src/stel_ui.cpp:598
 msgid "Equatorial/Altazimuthal Mount [ENTER]"
-msgstr "Montura Ecuatorial/Altacimutal [ENTER]"
+msgstr "Equatorial/Altazimuthal Mount [ENTER]"
 
 #: src/stel_ui.cpp:600
 msgid "Configuration window"
-msgstr "Ventana de configuración"
+msgstr "Configuration window"
 
 #: src/stel_ui.cpp:603
 msgid "Night (red) mode"
-msgstr "Modo nocturno (rojo)"
+msgstr "Night (red) mode"
 
 #: src/stel_ui.cpp:606
 msgid "Quit [CTRL + Q]"
-msgstr "Salir [CTRL + Q]"
+msgstr "Quit [CTRL + Q]"
 
 #: src/stel_ui.cpp:608
 msgid "Quit [CMD + Q]"
-msgstr "Salir [CMD + Q]"
+msgstr "Quit [CMD + Q]"
 
 #: src/stel_ui.cpp:611
 msgid "Search for object"
-msgstr "Buscar un objeto"
+msgstr "Search for object"
 
 #: src/stel_ui.cpp:615
 msgid "Goto selected object [SPACE]"
-msgstr "Ir al objeto seleccionado[ESPACIO]"
+msgstr "Goto selected object [SPACE]"
 
 #: src/stel_ui.cpp:621
-#, fuzzy
 msgid "Decrease Time Speed [J]"
-msgstr "Disminuir velocidad del tiempo [J]"
+msgstr "Decrease Time Speed [J]"
 
 #: src/stel_ui.cpp:623
-#, fuzzy
 msgid "Real Time Speed [K]"
-msgstr "Velocidad en tiempo real [K]"
+msgstr "Real Time Speed [K]"
 
 #: src/stel_ui.cpp:625
-#, fuzzy
 msgid "Increase Time Speed [L]"
-msgstr "Incrementar velocidad del tiempo [L]"
+msgstr "Increase Time Speed [L]"
 
 #: src/stel_ui.cpp:627
-#, fuzzy
 msgid "Return to Current Time"
-msgstr "Volver a la hora y fecha actuales"
+msgstr "Return to Current Time"
 
 #: src/stel_ui.cpp:636
-#, fuzzy
 msgid ""
 "   Please check for newer versions and send bug reports\n"
 "    and comments to us at: http://www.stellarium.org\n"
 "\n"
 msgstr ""
-"Por favor comprueba si tienes la última versión y envía un informe de error "
-"y tus comentarios \n"
-"desde la página web de stellarium : http://stellarium.sourceforge.net\n"
+"   Please check for newer versions and send bug reports\n"
+"    and comments to us at: http://www.stellarium.org\n"
 "\n"
 
 #: src/stel_ui.cpp:655
 msgid "Information"
-msgstr "Información"
+msgstr "Information"
 
 #: src/stel_ui.cpp:667
 msgid ""
@@ -225,16 +214,16 @@ msgid ""
 "SPACE            : Center on selected object\n"
 "\n"
 msgstr ""
-"Movimientos y selecciones:\n"
-"Teclas de flecha : Cambiar vista AR/DEC\n"
-"RePág/AvPág : Zoom\n"
-"CTRL + Arriba/Abajo : Zoom\n"
-"Click Izquierdo : Seleccionar objeto\n"
-"Click Derecho : Deseleccionar\n"
-"CTRL+Click Izquierdo : Deseleccionar\n"
-"\\ : Zoom out (planetas + lunas si corresponde)\n"
-"/ : Zoom en objeto seleccionado\n"
-"ESPACIO : Centrar en objeto seleccionado\n"
+"Movement & selection:\n"
+"Arrow Keys       : Change viewing RA/DE\n"
+"Page Up/Down     : Zoom\n"
+"CTRL+Up/Down     : Zoom\n"
+"Left Click       : Select object\n"
+"Right Click      : Unselect\n"
+"CTRL+Left Click  : Unselect\n"
+"\\                : Zoom out (planet + moons if applicable)\n"
+"/                : Zoom to selected object\n"
+"SPACE            : Center on selected object\n"
 "\n"
 
 #: src/stel_ui.cpp:678
@@ -252,17 +241,17 @@ msgid ""
 "4 , : Ecliptic line             5 . : Equator line\n"
 "\n"
 msgstr ""
-"Opciones de despliegue:\n"
-"ENTER : Montura Ecuatorial/altacimutal\n"
-"F1 : Cambiar a pantalla completa si es posible.\n"
-"C : Asterismos V : Nombres de Constelaciones\n"
-"R : Figuras de constelaciones E : Cuadrícula Ecuatorial\n"
-"Z : Cuadrícula Acimutal N : Nombres de Nebulosas\n"
-"P : Nombres de Planetas G :Suelo\n"
-"A : Atmósfera F : Niebla\n"
-"Q : Puntos cardinales O : Cambiar escala de la Luna\n"
-"T : Seguimiento de objeto S : Estrellas\n"
-"4 , : Eclíptica 5 . : Ecuador\n"
+"Display options:\n"
+"ENTER : Equatorial/altazimuthal mount\n"
+"F1  : Toggle fullscreen if possible.\n"
+"C   : Constellation lines       V   : Constellation labels\n"
+"R   : Constellation art         E   : Equatorial grid\n"
+"Z   : Azimuthal grid            N   : Nebula labels\n"
+"P   : Planet labels             G   : Ground\n"
+"A   : Atmosphere                F   : Fog\n"
+"Q   : Cardinal points           O   : Toggle moon scaling\n"
+"T   : Object tracking           S   : Stars\n"
+"4 , : Ecliptic line             5 . : Equator line\n"
 "\n"
 
 #: src/stel_ui.cpp:690
@@ -275,12 +264,12 @@ msgid ""
 "CTRL + F : Toggle object finder\n"
 "\n"
 msgstr ""
-"Diálogos y otros controles:\n"
-"H : Ayuda I : Acerca de Stellarium\n"
-"M : Menú de texto 1(uno) : Configuración\n"
-"CTRL + S : Captura de pantalla\n"
-"CTRL + R : Inicia/detiene grabación de script\n"
-"CTRL + F : Buscador de objetos\n"
+"Dialogs & other controls:\n"
+"H   : Help                      I   : About Stellarium\n"
+"M   : Text menu                 1 (one)  : Configuration\n"
+"CTRL + S : Take a screenshot\n"
+"CTRL + R : Toggle script recording\n"
+"CTRL + F : Toggle object finder\n"
 "\n"
 
 #: src/stel_ui.cpp:697
@@ -293,12 +282,12 @@ msgid ""
 "[   : Back 7 days               ]   : Forward 7 days\n"
 "\n"
 msgstr ""
-"Hora y fecha:\n"
-"6 : Pausa 7 : Rapidez del tiempo a 0↵\n"
-"8 : Cambiar a hora actual J : Disminuir rapidez del tiempo\n"
-"K : Rapidez del tiempo normal L : Aumentar rapidez del tiempo\n"
-"- : Retroceder 24 horas = : Adelantar 24 horas\n"
-"[ : Retroceder 7 días ] : Adelantar 7 días\n"
+"Time & Date:\n"
+"6   : Time rate pause           7   : Time rate 0\n"
+"8   : Set current time          J   : Decrease time rate\n"
+"K   : Normal time rate          L   : Increase time rate\n"
+"-   : Back 24 hours             =   : Forward 24 hours\n"
+"[   : Back 7 days               ]   : Forward 7 days\n"
 "\n"
 
 #: src/stel_ui.cpp:704
@@ -308,9 +297,9 @@ msgid ""
 "6   : pause script              K   : resume script\n"
 "\n"
 msgstr ""
-"Durante la Ejecución del Sripct:\n"
-"CTRL + C : Termina el Script\n"
-"6 : pausa el script K : reanuda el script\n"
+"During Script Playback:\n"
+"CTRL + C : End Script\n"
+"6   : pause script              K   : resume script\n"
 "\n"
 
 #: src/stel_ui.cpp:708
@@ -319,154 +308,150 @@ msgid ""
 "9   : Toggle meteor shower rates\n"
 msgstr ""
 "Misc:\n"
-"9 : Cambiar frecuencia de lluvia de meteoros\n"
+"9   : Toggle meteor shower rates\n"
 
 #: src/stel_ui.cpp:711
 msgid "CTRL + Q : Quit\n"
-msgstr "CTRL+Q : Salir\n"
+msgstr "CTRL + Q : Quit\n"
 
 #: src/stel_ui.cpp:713
 msgid "CMD + Q  : Quit\n"
-msgstr "CMD+Q : Salir\n"
+msgstr "CMD + Q  : Quit\n"
 
 #: src/stel_ui.cpp:719
 msgid "Help"
-msgstr "Ayuda"
+msgstr "Help"
 
 #: src/stel_ui.cpp:979
 msgid "Command recording stopped."
-msgstr "Comando de grabación detenido."
+msgstr "Command recording stopped."
 
 #: src/stel_ui.cpp:987
 msgid "Recording commands to script file:\n"
-msgstr "Grabando comandos en el archivo de script:\n"
+msgstr "Recording commands to script file:\n"
 
 #: src/stel_ui.cpp:989
 msgid "Hit CTRL-R again to stop.\n"
-msgstr "Presiona CTRL-R otra vez para parar.\n"
+msgstr "Hit CTRL-R again to stop.\n"
 
 #: src/stel_ui.cpp:993
 msgid "Error: Unable to open script file to record commands."
-msgstr "Error: Imposible abrir archivo de script para grabar los comandos."
+msgstr "Error: Unable to open script file to record commands."
 
 #: src/stel_ui_conf.cpp:37
 msgid "Configuration"
-msgstr "Configuración"
+msgstr "Configuration"
 
 #: src/stel_ui_conf.cpp:57
 msgid "Stars"
-msgstr "Estrellas"
+msgstr "Stars"
 
 #: src/stel_ui_conf.cpp:62
 msgid "Star Names. Up to mag :"
-msgstr "Nombre de las estrellas. Por encima de magnitud :"
+msgstr "Star Names. Up to mag :"
 
 #: src/stel_ui_conf.cpp:74
 msgid "Star Twinkle. Amount :"
-msgstr "Centelleo de las estrellas. Intensidad :"
+msgstr "Star Twinkle. Amount :"
 
 #: src/stel_ui_conf.cpp:90 src/stel_ui_tuiconf.cpp:179
-#, fuzzy
 msgid "Constellations Lines"
-msgstr "Asterismos: "
+msgstr "Constellations Lines"
 
 #: src/stel_ui_conf.cpp:95 src/stel_ui_tuiconf.cpp:183
 msgid "Constellations Names"
-msgstr "Nombres de las Constelaciones"
+msgstr "Constellations Names"
 
 #: src/stel_ui_conf.cpp:100
-#, fuzzy
 msgid "Constellations Boundaries"
-msgstr "Nombres de las Constelaciones"
+msgstr "Constellations Boundaries"
 
 #: src/stel_ui_conf.cpp:105
 msgid "Selected Constellation Only"
-msgstr "Sólo la Constelación seleccionada"
+msgstr "Selected Constellation Only"
 
 #: src/stel_ui_conf.cpp:116
 msgid "Nebulas Names. Up to mag :"
-msgstr "Nombre de las Nebulosas. Por encima de mag :"
+msgstr "Nebulas Names. Up to mag :"
 
 #: src/stel_ui_conf.cpp:129
 msgid "Also display Nebulas without textures"
-msgstr ""
+msgstr "Also display Nebulas without textures"
 
 #: src/stel_ui_conf.cpp:140
 msgid "Planets"
-msgstr "Planetas"
+msgstr "Planets"
 
 #: src/stel_ui_conf.cpp:145
 msgid "Moon Scale"
-msgstr "Escala de la Luna"
+msgstr "Moon Scale"
 
 #: src/stel_ui_conf.cpp:152
 msgid "Planets Hints"
-msgstr "Info Planetas"
+msgstr "Planets Hints"
 
 #: src/stel_ui_conf.cpp:164
 msgid "Equatorial Grid"
-msgstr "Cuadrícula Ecuatorial"
+msgstr "Equatorial Grid"
 
 #: src/stel_ui_conf.cpp:169
 msgid "Azimuthal Grid"
-msgstr "Cuadrícula Azimutal"
+msgstr "Azimuthal Grid"
 
 #: src/stel_ui_conf.cpp:174
 msgid "Equator Line"
-msgstr "Ecuador Celeste"
+msgstr "Equator Line"
 
 #: src/stel_ui_conf.cpp:179
 msgid "Ecliptic Line"
-msgstr "Eclíptica"
+msgstr "Ecliptic Line"
 
 #: src/stel_ui_conf.cpp:190
 msgid "Ground"
-msgstr "Suelo"
+msgstr "Ground"
 
 #: src/stel_ui_conf.cpp:195 src/stel_ui_tuiconf.cpp:187
 msgid "Cardinal Points"
-msgstr "Puntos Cardinales"
+msgstr "Cardinal Points"
 
 #: src/stel_ui_conf.cpp:200
 msgid "Atmosphere"
-msgstr "Atmósfera"
+msgstr "Atmosphere"
 
 #: src/stel_ui_conf.cpp:205
 msgid "Fog"
-msgstr "Niebla"
+msgstr "Fog"
 
 #: src/stel_ui_conf.cpp:235 src/stel_ui_conf.cpp:408 src/stel_ui_conf.cpp:435
 #: src/stel_ui_conf.cpp:494
 msgid "Save as default"
-msgstr "Guardar como predeterminado"
+msgstr "Save as default"
 
 #: src/stel_ui_conf.cpp:247
 msgid "Current Time :"
-msgstr "Hora Actual :"
+msgstr "Current Time :"
 
 #: src/stel_ui_conf.cpp:256
 msgid "Time Zone :"
-msgstr "Zona horaria :"
+msgstr "Time Zone :"
 
 #: src/stel_ui_conf.cpp:260
 msgid "Using System Default Time Zone"
-msgstr "Usando Zona Horaria Por Defecto del Sistema :"
+msgstr "Using System Default Time Zone"
 
 #: src/stel_ui_conf.cpp:269
-#, fuzzy
 msgid "Time speed : "
-msgstr "Rapidez del tiempo : "
+msgstr "Time speed : "
 
 #: src/stel_ui_conf.cpp:277
-#, fuzzy
 msgid ""
 "Use key J and L to decrease and increase\n"
 "   time speed.\n"
 "Use key K to return to real time speed."
 msgstr ""
-"Usa las teclas J y L para disminuir y aumentar\n"
-"   la rapidez del tiempo.\n"
-"Usa la tecla K para volver a tiempo real."
+"Use key J and L to decrease and increase\n"
+"   time speed.\n"
+"Use key K to return to real time speed."
 
 #: src/stel_ui_conf.cpp:300
 msgid "Cursor : "
@@ -474,143 +459,135 @@ msgstr "Cursor : "
 
 #: src/stel_ui_conf.cpp:305
 msgid "Selected : "
-msgstr "Seleccionado : "
+msgstr "Selected : "
 
 #: src/stel_ui_conf.cpp:310
 msgid "Longitude : "
-msgstr "Longitud : "
+msgstr "Longitude : "
 
 #: src/stel_ui_conf.cpp:318
 msgid "Latitude : "
-msgstr "Latitud : "
+msgstr "Latitude : "
 
 #: src/stel_ui_conf.cpp:326
 msgid "Altitude : "
-msgstr "Altitud : "
+msgstr "Altitude : "
 
 #: src/stel_ui_conf.cpp:333
 msgid "Save location"
-msgstr "Guardar localización"
+msgstr "Save location"
 
 #: src/stel_ui_conf.cpp:355
 msgid "Projection :"
-msgstr "Proyección :"
+msgstr "Projection :"
 
 #: src/stel_ui_conf.cpp:374
 msgid "Disk Viewport"
-msgstr "Vista circular"
+msgstr "Disk Viewport"
 
 #: src/stel_ui_conf.cpp:380
 msgid "Screen Resolution :"
-msgstr "Resolución de pantalla :"
+msgstr "Screen Resolution :"
 
 #: src/stel_ui_conf.cpp:384
 msgid "Restart program for"
-msgstr "Reiniciar el programa para"
+msgstr "Restart program for"
 
 #: src/stel_ui_conf.cpp:385
 msgid "change to apply."
-msgstr "cambiar para aplicar."
+msgstr "change to apply."
 
 #: src/stel_ui_conf.cpp:401
 msgid "For unlisted screen resolution, edit the file :"
-msgstr "Para otras resoluciones de pantalla, editar el archivo :"
+msgstr "For unlisted screen resolution, edit the file :"
 
 #: src/stel_ui_conf.cpp:418
-#, fuzzy
 msgid "Choose landscapes:"
-msgstr "Elegir paisajes :"
+msgstr "Choose landscapes:"
 
 #: src/stel_ui_conf.cpp:446
-#, fuzzy
 msgid "Program Language: "
-msgstr "Idioma del Cielo: "
+msgstr "Program Language: "
 
 #: src/stel_ui_conf.cpp:462 src/stel_ui_tuiconf.cpp:156
 msgid "Sky Language: "
-msgstr "Idioma del Cielo: "
+msgstr "Sky Language: "
 
 #: src/stel_ui_conf.cpp:480 src/stel_ui_tuiconf.cpp:149
 msgid "Sky Culture: "
-msgstr "Cultura del Cielo: "
+msgstr "Sky Culture: "
 
 #: src/stel_ui_conf.cpp:501
 msgid "Date & Time"
-msgstr "Fecha y Hora"
+msgstr "Date & Time"
 
 #: src/stel_ui_conf.cpp:502
 msgid "Location"
-msgstr "Localización"
+msgstr "Location"
 
 #: src/stel_ui_conf.cpp:503
 msgid "Landscapes"
-msgstr "Paisajes"
+msgstr "Landscapes"
 
 #: src/stel_ui_conf.cpp:504
-#, fuzzy
 msgid "Video"
 msgstr "Video"
 
 #: src/stel_ui_conf.cpp:505
-#, fuzzy
 msgid "Rendering"
-msgstr "Visualización"
+msgstr "Rendering"
 
 #: src/stel_ui_conf.cpp:506
-#, fuzzy
 msgid "Language"
-msgstr "Idioma del Cielo: "
+msgstr "Language"
 
 #: src/stel_ui_conf.cpp:609
 msgid "Object Search"
-msgstr "Búsqueda de Objeto"
+msgstr "Object Search"
 
 #: src/stel_ui_conf.cpp:616
 msgid "Search for (eg. Saturn, Polaris, HP6218, Orion, M31):"
-msgstr ""
+msgstr "Search for (eg. Saturn, Polaris, HP6218, Orion, M31):"
 
 #: src/stel_ui_conf.cpp:633
 msgid "GO"
-msgstr ""
+msgstr "GO"
 
 #: src/stel_ui_conf.cpp:757
-#, fuzzy
 msgid "Enter observatory name"
-msgstr "Ingresar nombre del observatorio"
+msgstr "Enter observatory name"
 
 #: src/stel_ui_conf.cpp:897
 msgid ": Normal rate"
-msgstr ""
+msgstr ": Normal rate"
 
 #: src/stel_ui_conf.cpp:904
 msgid ": Standard Perseids rate"
-msgstr ""
+msgstr ": Standard Perseids rate"
 
 #: src/stel_ui_conf.cpp:911
 msgid ": Exceptional Leonid rate"
-msgstr ""
+msgstr ": Exceptional Leonid rate"
 
 #: src/stel_ui_conf.cpp:918
 msgid ": Highest rate ever (1966 Leonids)"
-msgstr ""
+msgstr ": Highest rate ever (1966 Leonids)"
 
 #: src/stel_ui_conf.cpp:923
 msgid "Meteor Rate per minute"
-msgstr ""
+msgstr "Meteor Rate per minute"
 
 #: src/stel_ui_conf.cpp:944
-#, fuzzy
 msgid "Current Time Speed is x"
-msgstr "Rapidez del tiempo actual es x"
+msgstr "Current Time Speed is x"
 
 #: src/stel_ui_tuiconf.cpp:80
 msgid "Set Location "
-msgstr "Establecer localización "
+msgstr "Set Location "
 
 #: src/stel_ui_tuiconf.cpp:81
-#, fuzzy
 msgid "Set Time "
-msgstr "Establecer el tiempo "
+msgstr "Set Time "
 
 #: src/stel_ui_tuiconf.cpp:82
 msgid "General "
@@ -618,15 +595,15 @@ msgstr "General "
 
 #: src/stel_ui_tuiconf.cpp:83
 msgid "Stars "
-msgstr "Estrellas "
+msgstr "Stars "
 
 #: src/stel_ui_tuiconf.cpp:84
 msgid "Colors "
-msgstr "Colores "
+msgstr "Colors "
 
 #: src/stel_ui_tuiconf.cpp:85
 msgid "Effects "
-msgstr "Efectos "
+msgstr "Effects "
 
 #: src/stel_ui_tuiconf.cpp:86
 msgid "Scripts "
@@ -634,55 +611,55 @@ msgstr "Scripts "
 
 #: src/stel_ui_tuiconf.cpp:87
 msgid "Administration "
-msgstr "Administración "
+msgstr "Administration "
 
 #: src/stel_ui_tuiconf.cpp:98
 msgid "Latitude: "
-msgstr "Latitud: "
+msgstr "Latitude: "
 
 #: src/stel_ui_tuiconf.cpp:100
 msgid "Longitude: "
-msgstr "Longitud: "
+msgstr "Longitude: "
 
 #: src/stel_ui_tuiconf.cpp:102
 msgid "Altitude (m): "
-msgstr "Altitud (m): "
+msgstr "Altitude (m): "
 
 #: src/stel_ui_tuiconf.cpp:106
 msgid "Solar System Body: "
-msgstr ""
+msgstr "Solar System Body: "
 
 #: src/stel_ui_tuiconf.cpp:116
 msgid "Sky Time: "
-msgstr "Hora del cielo: "
+msgstr "Sky Time: "
 
 #: src/stel_ui_tuiconf.cpp:118
 msgid "Set Time Zone: "
-msgstr "Establecer Zona Horaria: "
+msgstr "Set Time Zone: "
 
 #: src/stel_ui_tuiconf.cpp:121
 msgid "Preset Sky Time: "
-msgstr "Hora del cielo preterminado: "
+msgstr "Preset Sky Time: "
 
 #: src/stel_ui_tuiconf.cpp:123
 msgid "Sky Time At Start-up: "
-msgstr "Hora del cielo al inicio: "
+msgstr "Sky Time At Start-up: "
 
 #: src/stel_ui_tuiconf.cpp:127
 msgid "Time Display Format: "
-msgstr "Formato de Hora: "
+msgstr "Time Display Format: "
 
 #: src/stel_ui_tuiconf.cpp:132
 msgid "Date Display Format: "
-msgstr "Formato de Fecha: "
+msgstr "Date Display Format: "
 
 #: src/stel_ui_tuiconf.cpp:164
 msgid "Show: "
-msgstr "Mostrar: "
+msgstr "Show: "
 
 #: src/stel_ui_tuiconf.cpp:164 src/stel_ui_tuiconf.cpp:199 src/s_gui.cpp:2212
 msgid "Yes"
-msgstr "Sí"
+msgstr "Yes"
 
 #: src/stel_ui_tuiconf.cpp:164 src/stel_ui_tuiconf.cpp:199 src/s_gui.cpp:2193
 msgid "No"
@@ -690,83 +667,83 @@ msgstr "No"
 
 #: src/stel_ui_tuiconf.cpp:166
 msgid "Star Magnitude Multiplier: "
-msgstr "Multiplicador de Magnitud de Estrellas: "
+msgstr "Star Magnitude Multiplier: "
 
 #: src/stel_ui_tuiconf.cpp:168
 msgid "Maximum Magnitude to Label: "
-msgstr "Magnitud Máxima para mostrar nombre: "
+msgstr "Maximum Magnitude to Label: "
 
 #: src/stel_ui_tuiconf.cpp:170
 msgid "Twinkling: "
-msgstr "Centelleo: "
+msgstr "Twinkling: "
 
 #: src/stel_ui_tuiconf.cpp:193
 msgid "Landscape: "
-msgstr "Paisaje: "
+msgstr "Landscape: "
 
 #: src/stel_ui_tuiconf.cpp:199
 msgid "Manual zoom: "
-msgstr "Zoom manual: "
+msgstr "Manual zoom: "
 
 #: src/stel_ui_tuiconf.cpp:203
 msgid "Object Sizing Rule: "
-msgstr "Regla de tamaño de los objetos: "
+msgstr "Object Sizing Rule: "
 
 #: src/stel_ui_tuiconf.cpp:203
 msgid "Point"
-msgstr "Punto"
+msgstr "Point"
 
 #: src/stel_ui_tuiconf.cpp:203
 msgid "Magnitude"
-msgstr "Magnitud"
+msgstr "Magnitude"
 
 #: src/stel_ui_tuiconf.cpp:207
 msgid "Magnitude Sizing Multiplier: "
-msgstr "Multiplicador de tamaño de magnitud: "
+msgstr "Magnitude Sizing Multiplier: "
 
 #: src/stel_ui_tuiconf.cpp:211
 msgid "Milky Way intensity: "
-msgstr "Luminosidad de la Vía Láctea: "
+msgstr "Milky Way intensity: "
 
 #: src/stel_ui_tuiconf.cpp:215
 msgid "Maximum Nebula Magnitude to Label: "
-msgstr "Máxima magnitud de Nebulosa para mostrar nombre: "
+msgstr "Maximum Nebula Magnitude to Label: "
 
 #: src/stel_ui_tuiconf.cpp:219
 msgid "Zoom Duration: "
-msgstr "Duración del zoom: "
+msgstr "Zoom Duration: "
 
 #: src/stel_ui_tuiconf.cpp:223
 msgid "Cursor Timeout: "
-msgstr "Cursor(timeout): "
+msgstr "Cursor Timeout: "
 
 #: src/stel_ui_tuiconf.cpp:229
 msgid "Local Script: "
-msgstr "Script Local: "
+msgstr "Local Script: "
 
 #: src/stel_ui_tuiconf.cpp:235
 msgid "CD/DVD Script: "
-msgstr "Script CD/DVD: "
+msgstr "CD/DVD Script: "
 
 #: src/stel_ui_tuiconf.cpp:243
 msgid "Load Default Configuration: "
-msgstr "Cargar la Configuración por Defecto: "
+msgstr "Load Default Configuration: "
 
 #: src/stel_ui_tuiconf.cpp:245
 msgid "Save Current Configuration as Default: "
-msgstr "Guardar la Configuración Actual como predeterminada: "
+msgstr "Save Current Configuration as Default: "
 
 #: src/stel_ui_tuiconf.cpp:247
 msgid "Update me via Internet: "
-msgstr "Actualízame a través de Internet: "
+msgstr "Update me via Internet: "
 
 #: src/translations.h:33
 msgid "Sun"
-msgstr "Sol"
+msgstr "Sun"
 
 #: src/translations.h:34
 msgid "Mercury"
-msgstr "Mercurio"
+msgstr "Mercury"
 
 #: src/translations.h:35
 msgid "Venus"
@@ -774,15 +751,15 @@ msgstr "Venus"
 
 #: src/translations.h:36
 msgid "Earth"
-msgstr "Tierra"
+msgstr "Earth"
 
 #: src/translations.h:37
 msgid "Moon"
-msgstr "Luna"
+msgstr "Moon"
 
 #: src/translations.h:38
 msgid "Mars"
-msgstr "Marte"
+msgstr "Mars"
 
 #: src/translations.h:39
 msgid "Deimos"
@@ -790,11 +767,11 @@ msgstr "Deimos"
 
 #: src/translations.h:40
 msgid "Phobos"
-msgstr "Fobos"
+msgstr "Phobos"
 
 #: src/translations.h:41
 msgid "Jupiter"
-msgstr "Júpiter"
+msgstr "Jupiter"
 
 #: src/translations.h:42
 msgid "Io"
@@ -806,15 +783,15 @@ msgstr "Europa"
 
 #: src/translations.h:44
 msgid "Ganymede"
-msgstr "Ganímedes"
+msgstr "Ganymede"
 
 #: src/translations.h:45
 msgid "Callisto"
-msgstr "Calisto"
+msgstr "Callisto"
 
 #: src/translations.h:46
 msgid "Saturn"
-msgstr "Saturno"
+msgstr "Saturn"
 
 #: src/translations.h:47
 msgid "Mimas"
@@ -822,11 +799,11 @@ msgstr "Mimas"
 
 #: src/translations.h:48
 msgid "Enceladus"
-msgstr "Encélado"
+msgstr "Enceladus"
 
 #: src/translations.h:49
 msgid "Tethys"
-msgstr "Tetis"
+msgstr "Tethys"
 
 #: src/translations.h:50
 msgid "Dione"
@@ -834,43 +811,43 @@ msgstr "Dione"
 
 #: src/translations.h:51
 msgid "Rhea"
-msgstr "Rea"
+msgstr "Rhea"
 
 #: src/translations.h:52
 msgid "Titan"
-msgstr "Titán"
+msgstr "Titan"
 
 #: src/translations.h:53
 msgid "Hyperion"
-msgstr "Hiperión"
+msgstr "Hyperion"
 
 #: src/translations.h:54
 msgid "Iapetus"
-msgstr "Japeto"
+msgstr "Iapetus"
 
 #: src/translations.h:55
 msgid "Phoebe"
-msgstr "Fobos"
+msgstr "Phoebe"
 
 #: src/translations.h:56
 msgid "Neptune"
-msgstr "Neptuno"
+msgstr "Neptune"
 
 #: src/translations.h:57
 msgid "Uranus"
-msgstr "Urano"
+msgstr "Uranus"
 
 #: src/translations.h:58
 msgid "Pluto"
-msgstr "Plutón"
+msgstr "Pluto"
 
 #: src/translations.h:59
 msgid "Charon"
-msgstr "Caronte"
+msgstr "Charon"
 
 #: src/translations.h:60
 msgid "Solar System Observer"
-msgstr ""
+msgstr "Solar System Observer"
 
 #: src/translations.h:63 src/s_gui.cpp:2658
 msgid "N"
@@ -886,7 +863,7 @@ msgstr "E"
 
 #: src/translations.h:66 src/s_gui.cpp:2664
 msgid "W"
-msgstr "O"
+msgstr "W"
 
 #: src/translations.h:69
 msgid "Aquila"
@@ -894,7 +871,7 @@ msgstr "Aquila"
 
 #: src/translations.h:70
 msgid "Andromeda"
-msgstr "Andrómeda"
+msgstr "Andromeda"
 
 #: src/translations.h:71
 msgid "Sculptor"
@@ -917,7 +894,6 @@ msgid "Aries"
 msgstr "Aries"
 
 #: src/translations.h:76 src/translations.h:146
-#, fuzzy
 msgid "Scutum"
 msgstr "Scutum"
 
@@ -934,18 +910,16 @@ msgid "Caelum"
 msgstr "Caelum"
 
 #: src/translations.h:80
-#, fuzzy
 msgid "Chamaeleon"
-msgstr "Camaleón"
+msgstr "Chamaeleon"
 
 #: src/translations.h:81
 msgid "Cancer"
-msgstr "Cáncer"
+msgstr "Cancer"
 
 #: src/translations.h:82
-#, fuzzy
 msgid "Capricornus"
-msgstr "Capricornio"
+msgstr "Capricornus"
 
 #: src/translations.h:83
 msgid "Carina"
@@ -953,11 +927,11 @@ msgstr "Carina"
 
 #: src/translations.h:84
 msgid "Cassiopeia"
-msgstr "Casiopea"
+msgstr "Cassiopeia"
 
 #: src/translations.h:85
 msgid "Centaurus"
-msgstr "Centauro"
+msgstr "Centaurus"
 
 #: src/translations.h:86
 msgid "Cepheus"
@@ -965,7 +939,7 @@ msgstr "Cepheus"
 
 #: src/translations.h:87
 msgid "Coma Berenices"
-msgstr "Cabellera de Berenice"
+msgstr "Coma Berenices"
 
 #: src/translations.h:88
 msgid "Canes Venatici"
@@ -989,51 +963,51 @@ msgstr "Crater"
 
 #: src/translations.h:93
 msgid "Corona Australis"
-msgstr "Corona Austral"
+msgstr "Corona Australis"
 
 #: src/translations.h:94
 msgid "Corona Borealis"
-msgstr "Corona Boreal"
+msgstr "Corona Borealis"
 
 #: src/translations.h:95
 msgid "Corvus"
-msgstr "Cuervo"
+msgstr "Corvus"
 
 #: src/translations.h:96
 msgid "Crux"
-msgstr "Cruz del Sur"
+msgstr "Crux"
 
 #: src/translations.h:97
 msgid "Cygnus"
-msgstr "Cisne"
+msgstr "Cygnus"
 
 #: src/translations.h:98
 msgid "Delphinus"
-msgstr "Delfín"
+msgstr "Delphinus"
 
 #: src/translations.h:99
 msgid "Dorado"
-msgstr "Pez Espada"
+msgstr "Dorado"
 
 #: src/translations.h:100
 msgid "Draco"
-msgstr "Dragón"
+msgstr "Draco"
 
 #: src/translations.h:101
 msgid "Norma"
-msgstr "Escuadra"
+msgstr "Norma"
 
 #: src/translations.h:102
 msgid "Eridanus"
-msgstr "Eridano"
+msgstr "Eridanus"
 
 #: src/translations.h:103
 msgid "Sagitta"
-msgstr "Flecha"
+msgstr "Sagitta"
 
 #: src/translations.h:104
 msgid "Fornax"
-msgstr "Horno"
+msgstr "Fornax"
 
 #: src/translations.h:105
 msgid "Gemini"
@@ -1041,51 +1015,51 @@ msgstr "Gemini"
 
 #: src/translations.h:106
 msgid "Camelopardalis"
-msgstr "Jirafa"
+msgstr "Camelopardalis"
 
 #: src/translations.h:107
 msgid "Canis Major"
-msgstr "Can Mayor"
+msgstr "Canis Major"
 
 #: src/translations.h:108
 msgid "Ursa Major"
-msgstr "Osa Mayor"
+msgstr "Ursa Major"
 
 #: src/translations.h:109
 msgid "Grus"
-msgstr "Grulla"
+msgstr "Grus"
 
 #: src/translations.h:110
 msgid "Hercules"
-msgstr "Hércules"
+msgstr "Hercules"
 
 #: src/translations.h:111
 msgid "Horologium"
-msgstr "Reloj"
+msgstr "Horologium"
 
 #: src/translations.h:112
 msgid "Hydra"
-msgstr "Hidra"
+msgstr "Hydra"
 
 #: src/translations.h:113
 msgid "Hydrus"
-msgstr "Hidra Macho"
+msgstr "Hydrus"
 
 #: src/translations.h:114
 msgid "Indus"
-msgstr "Indio"
+msgstr "Indus"
 
 #: src/translations.h:115
 msgid "Lacerta"
-msgstr "Lagarto"
+msgstr "Lacerta"
 
 #: src/translations.h:116
 msgid "Monoceros"
-msgstr "Unicornio"
+msgstr "Monoceros"
 
 #: src/translations.h:117
 msgid "Lepus"
-msgstr "Liebre"
+msgstr "Lepus"
 
 #: src/translations.h:118
 msgid "Leo"
@@ -1093,15 +1067,15 @@ msgstr "Leo"
 
 #: src/translations.h:119
 msgid "Lupus"
-msgstr "Lobo"
+msgstr "Lupus"
 
 #: src/translations.h:120
 msgid "Lynx"
-msgstr "Lince"
+msgstr "Lynx"
 
 #: src/translations.h:121
 msgid "Lyra"
-msgstr "Lira"
+msgstr "Lyra"
 
 #: src/translations.h:122
 msgid "Antlia"
@@ -1109,11 +1083,11 @@ msgstr "Antlia"
 
 #: src/translations.h:123
 msgid "Microscopium"
-msgstr "Microscopio"
+msgstr "Microscopium"
 
 #: src/translations.h:124
 msgid "Musca"
-msgstr "Mosca"
+msgstr "Musca"
 
 #: src/translations.h:125
 msgid "Octans"
@@ -1245,1012 +1219,540 @@ msgstr "Vela"
 
 #: src/translations.h:160
 msgid "Bull's Foreleg"
-msgstr ""
+msgstr "Bull's Foreleg"
 
 #: src/translations.h:161
 msgid "Two Poles"
-msgstr ""
+msgstr "Two Poles"
 
 #: src/translations.h:162
-#, fuzzy
 msgid "Lion"
-msgstr "Orion"
+msgstr "Lion"
 
 #: src/translations.h:163
 msgid "Two Jaws"
-msgstr ""
+msgstr "Two Jaws"
 
 #: src/translations.h:164
 msgid "Sah"
-msgstr ""
+msgstr "Sah"
 
 #: src/translations.h:165
 msgid "Bird"
-msgstr ""
+msgstr "Bird"
 
 #: src/translations.h:166
 msgid "Sek"
-msgstr ""
+msgstr "Sek"
 
 #: src/translations.h:167
-#, fuzzy
 msgid "Triangle"
-msgstr "Triangulum"
+msgstr "Triangle"
 
 #: src/translations.h:168
 msgid "Ferry Boat"
-msgstr ""
+msgstr "Ferry Boat"
 
 #: src/translations.h:169 src/translations.h:240
-#, fuzzy
 msgid "Boat"
-msgstr "Bootes"
+msgstr "Boat"
 
 #: src/translations.h:170
 msgid "Crocodile"
-msgstr ""
+msgstr "Crocodile"
 
 #: src/translations.h:171
 msgid "Selkis"
-msgstr ""
+msgstr "Selkis"
 
 #: src/translations.h:172
 msgid "Prow"
-msgstr ""
+msgstr "Prow"
 
 #: src/translations.h:173
-#, fuzzy
 msgid "Horus"
-msgstr "Cuervo"
+msgstr "Horus"
 
 #: src/translations.h:174
 msgid "Sheepfold"
-msgstr ""
+msgstr "Sheepfold"
 
 #: src/translations.h:175
-#, fuzzy
 msgid "Giant"
-msgstr "Titán"
+msgstr "Giant"
 
 #: src/translations.h:176
 msgid "Hippopotamus"
-msgstr ""
+msgstr "Hippopotamus"
 
 #: src/translations.h:177
 msgid "Flock"
-msgstr ""
+msgstr "Flock"
 
 #: src/translations.h:178
 msgid "Pair of Stars"
-msgstr ""
+msgstr "Pair of Stars"
 
 #: src/translations.h:179
 msgid "Khanuwy Fish"
-msgstr ""
+msgstr "Khanuwy Fish"
 
 #: src/translations.h:180 src/translations.h:219
-#, fuzzy
 msgid "Net"
-msgstr "Neptuno"
+msgstr "Net"
 
 #: src/translations.h:181
 msgid "Jaw"
-msgstr ""
+msgstr "Jaw"
 
 #: src/translations.h:182
 msgid "Mooring Post"
-msgstr ""
+msgstr "Mooring Post"
 
 #: src/translations.h:183
 msgid "Kenemet"
-msgstr ""
+msgstr "Kenemet"
 
 #: src/translations.h:184
 msgid "Chematy"
-msgstr ""
+msgstr "Chematy"
 
 #: src/translations.h:185
 msgid "Waty Bekety"
-msgstr ""
+msgstr "Waty Bekety"
 
 #: src/translations.h:186
 msgid "Sheep"
-msgstr ""
+msgstr "Sheep"
 
 #: src/translations.h:187
-#, fuzzy
 msgid "Stars of Water"
-msgstr "Estrellas "
+msgstr "Stars of Water"
 
 #: src/translations.h:190
 msgid "Northern Dipper"
-msgstr ""
+msgstr "Northern Dipper"
 
 #: src/translations.h:191
 msgid "Curved Array"
-msgstr ""
+msgstr "Curved Array"
 
 #: src/translations.h:192
 msgid "Coiled Thong"
-msgstr ""
+msgstr "Coiled Thong"
 
 #: src/translations.h:193
 msgid "Wings"
-msgstr ""
+msgstr "Wings"
 
 #: src/translations.h:194
-#, fuzzy
 msgid "Chariot"
-msgstr "Caronte"
+msgstr "Chariot"
 
 #: src/translations.h:195
 msgid "Tail"
-msgstr ""
+msgstr "Tail"
 
 #: src/translations.h:196
 msgid "Winnowing Basket"
-msgstr ""
+msgstr "Winnowing Basket"
 
 #: src/translations.h:197
 msgid "Dipper"
-msgstr ""
+msgstr "Dipper"
 
 #: src/translations.h:198
 msgid "Drum"
-msgstr ""
+msgstr "Drum"
 
 #: src/translations.h:199
 msgid "Three Steps"
-msgstr ""
+msgstr "Three Steps"
 
 #: src/translations.h:200
 msgid "Imperial Guards"
-msgstr ""
+msgstr "Imperial Guards"
 
 #: src/translations.h:201
-#, fuzzy
 msgid "Horn"
-msgstr "Horno"
+msgstr "Horn"
 
 #: src/translations.h:202
 msgid "Willow"
-msgstr ""
+msgstr "Willow"
 
 #: src/translations.h:203
 msgid "Imperial Passageway"
-msgstr ""
+msgstr "Imperial Passageway"
 
 #: src/translations.h:204
 msgid "Kitchen"
-msgstr ""
+msgstr "Kitchen"
 
 #: src/translations.h:205
 msgid "River Turtle"
-msgstr ""
+msgstr "River Turtle"
 
 #: src/translations.h:206
 msgid "Stomach"
-msgstr ""
+msgstr "Stomach"
 
 #: src/translations.h:207
-#, fuzzy
 msgid "Great General"
-msgstr "General "
+msgstr "Great General"
 
 #: src/translations.h:208
 msgid "Wall"
-msgstr ""
+msgstr "Wall"
 
 #: src/translations.h:209
-#, fuzzy
 msgid "Legs"
-msgstr "Liebre"
+msgstr "Legs"
 
 #: src/translations.h:210
-#, fuzzy
 msgid "Root"
-msgstr "Bootes"
+msgstr "Root"
 
 #: src/translations.h:211
 msgid "Ramparts"
-msgstr ""
+msgstr "Ramparts"
 
 #: src/translations.h:212
 msgid "Flying Corridor"
-msgstr ""
+msgstr "Flying Corridor"
 
 #: src/translations.h:213
 msgid "Outer Fence"
-msgstr ""
+msgstr "Outer Fence"
 
 #: src/translations.h:214
-#, fuzzy
 msgid "Ford"
-msgstr "Horno"
+msgstr "Ford"
 
 #: src/translations.h:215
 msgid "Seven Excellencies"
-msgstr ""
+msgstr "Seven Excellencies"
 
 #: src/translations.h:216
-#, fuzzy
 msgid "Market"
-msgstr "Marte"
+msgstr "Market"
 
 #: src/translations.h:217
 msgid "Five Chariots"
-msgstr ""
+msgstr "Five Chariots"
 
 #: src/translations.h:218
 msgid "Rolled Tongue"
-msgstr ""
+msgstr "Rolled Tongue"
 
 #: src/translations.h:220
 msgid "Toilet"
-msgstr ""
+msgstr "Toilet"
 
 #: src/translations.h:221
-#, fuzzy
 msgid "Screen"
-msgstr "Serpens"
+msgstr "Screen"
 
 #: src/translations.h:222
 msgid "Soldiers Market"
-msgstr ""
+msgstr "Soldiers Market"
 
 #: src/translations.h:223
 msgid "Square Granary"
-msgstr ""
+msgstr "Square Granary"
 
 #: src/translations.h:224
-#, fuzzy
 msgid "Three Stars"
-msgstr "Estrellas"
+msgstr "Three Stars"
 
 #: src/translations.h:225
 msgid "Four Channels"
-msgstr ""
+msgstr "Four Channels"
 
 #: src/translations.h:226
 msgid "Well"
-msgstr ""
+msgstr "Well"
 
 #: src/translations.h:227
 msgid "South River"
-msgstr ""
+msgstr "South River"
 
 #: src/translations.h:228
 msgid "North River"
-msgstr ""
+msgstr "North River"
 
 #: src/translations.h:229
 msgid "Five Feudal Kings"
-msgstr ""
+msgstr "Five Feudal Kings"
 
 #: src/translations.h:230
 msgid "Orchard"
-msgstr ""
+msgstr "Orchard"
 
 #: src/translations.h:231
 msgid "Meadows"
-msgstr ""
+msgstr "Meadows"
 
 #: src/translations.h:232
 msgid "Circular Granary"
-msgstr ""
+msgstr "Circular Granary"
 
 #: src/translations.h:233
 msgid "Purple Palace"
-msgstr ""
+msgstr "Purple Palace"
 
 #: src/translations.h:234
 msgid "Extended Net"
-msgstr ""
+msgstr "Extended Net"
 
 #: src/translations.h:235
-#, fuzzy
 msgid "Arsenal"
-msgstr "Ara"
+msgstr "Arsenal"
 
 #: src/translations.h:236
 msgid "Hook"
-msgstr ""
+msgstr "Hook"
 
 #: src/translations.h:237
 msgid "Supreme Palace"
-msgstr ""
+msgstr "Supreme Palace"
 
 #: src/translations.h:238
 msgid "Jade Well"
-msgstr ""
+msgstr "Jade Well"
 
 #: src/translations.h:239
-#, fuzzy
 msgid "Lance"
-msgstr "Cáncer"
+msgstr "Lance"
 
 #: src/translations.h:241
 msgid "Mausoleum"
-msgstr ""
+msgstr "Mausoleum"
 
 #: src/translations.h:242
-#, fuzzy
 msgid "Dog"
-msgstr "Niebla"
+msgstr "Dog"
 
 #: src/translations.h:243
 msgid "Earth God's Temple"
-msgstr ""
+msgstr "Earth God's Temple"
 
 #: src/translations.h:244
 msgid "Bow and Arrow"
-msgstr ""
+msgstr "Bow and Arrow"
 
 #: src/translations.h:245
-#, fuzzy
 msgid "Pestle"
-msgstr "Perseus"
+msgstr "Pestle"
 
 #: src/translations.h:246
-#, fuzzy
 msgid "Mortar"
-msgstr "Marte"
+msgstr "Mortar"
 
 #: src/translations.h:247
 msgid "Rooftop"
-msgstr ""
+msgstr "Rooftop"
 
 #: src/translations.h:248
 msgid "Thunderbolt"
-msgstr ""
+msgstr "Thunderbolt"
 
 #: src/translations.h:249
-#, fuzzy
 msgid "Chariot Yard"
-msgstr "Modo carta"
+msgstr "Chariot Yard"
 
 #: src/translations.h:250
 msgid "Good Gourd"
-msgstr ""
+msgstr "Good Gourd"
 
 #: src/translations.h:251
 msgid "Rotten Gourd"
-msgstr ""
+msgstr "Rotten Gourd"
 
 #: src/translations.h:252
 msgid "Encampment"
-msgstr ""
+msgstr "Encampment"
 
 #: src/translations.h:253
 msgid "Thunder and Lightning"
-msgstr ""
+msgstr "Thunder and Lightning"
 
 #: src/translations.h:254
 msgid "Palace Gate"
-msgstr ""
+msgstr "Palace Gate"
 
 #: src/translations.h:255
 msgid "Emptiness"
-msgstr ""
+msgstr "Emptiness"
 
 #: src/translations.h:256
 msgid "Weaving Girl"
-msgstr ""
+msgstr "Weaving Girl"
 
 #: src/translations.h:257
 msgid "Girl"
-msgstr ""
+msgstr "Girl"
 
 #: src/translations.h:258
 msgid "Ox"
-msgstr ""
+msgstr "Ox"
 
 #: src/translations.h:259
-#, fuzzy
 msgid "Heart"
-msgstr "Tierra"
+msgstr "Heart"
 
 #: src/translations.h:260
 msgid "Room"
-msgstr ""
+msgstr "Room"
 
 #: src/translations.h:261
 msgid "Spring"
-msgstr ""
+msgstr "Spring"
 
 #: src/translations.h:262
 msgid "Establishment"
-msgstr ""
+msgstr "Establishment"
 
 #: src/translations.h:263
 msgid "Flail"
-msgstr ""
+msgstr "Flail"
 
 #: src/translations.h:264
-#, fuzzy
 msgid "Spear"
-msgstr "Estrellas"
+msgstr "Spear"
 
 #: src/translations.h:265
 msgid "Right Flag"
-msgstr ""
+msgstr "Right Flag"
 
 #: src/translations.h:266
 msgid "Left Flag"
-msgstr ""
+msgstr "Left Flag"
 
 #: src/translations.h:267
 msgid "Drumstick"
-msgstr ""
+msgstr "Drumstick"
 
 #: src/translations.h:268
-#, fuzzy
 msgid "Bond"
-msgstr "Suelo"
+msgstr "Bond"
 
 #: src/translations.h:269
 msgid "Woman's Bed"
-msgstr ""
+msgstr "Woman's Bed"
 
 #: src/translations.h:270
 msgid "Western Door"
-msgstr ""
+msgstr "Western Door"
 
 #: src/translations.h:271
 msgid "Eastern Door"
-msgstr ""
+msgstr "Eastern Door"
 
 #: src/translations.h:272
 msgid "Farmland"
-msgstr ""
+msgstr "Farmland"
 
 #: src/translations.h:273
-#, fuzzy
 msgid "Star"
-msgstr "Estrellas"
+msgstr "Star"
 
 #: src/translations.h:274
 msgid "Ghosts"
-msgstr ""
+msgstr "Ghosts"
 
 #: src/translations.h:275
 msgid "Xuanyuan"
-msgstr ""
+msgstr "Xuanyuan"
 
 #: src/translations.h:276
 msgid "Tripod"
-msgstr ""
+msgstr "Tripod"
 
 #: src/translations.h:277
 msgid "Neck"
-msgstr ""
+msgstr "Neck"
 
 #: src/translations.h:278
 msgid "Zaofu"
-msgstr ""
+msgstr "Zaofu"
 
 #: src/translations.h:279
 msgid "Market Officer"
-msgstr ""
+msgstr "Market Officer"
 
 #: src/translations.h:280
 msgid "Banner of Three Stars"
-msgstr ""
+msgstr "Banner of Three Stars"
 
 #: src/translations.h:283
 msgid "Bailer"
-msgstr ""
+msgstr "Bailer"
 
 #: src/translations.h:284
 msgid "Cat's Cradle"
-msgstr ""
+msgstr "Cat's Cradle"
 
 #: src/translations.h:285
 msgid "Voice of Joy"
-msgstr ""
+msgstr "Voice of Joy"
 
 #: src/translations.h:286
 msgid "The Seven"
-msgstr ""
+msgstr "The Seven"
 
 #: src/translations.h:287
 msgid "Maui's Fishhook"
-msgstr ""
+msgstr "Maui's Fishhook"
 
 #: src/translations.h:288
 msgid "Navigator's Triangle"
-msgstr ""
+msgstr "Navigator's Triangle"
 
 #: src/translations.h:289
 msgid "Kite of Kawelo"
-msgstr ""
+msgstr "Kite of Kawelo"
 
 #: src/translations.h:290
 msgid "Frigate Bird"
-msgstr ""
+msgstr "Frigate Bird"
 
 #: src/translations.h:291
 msgid "Cared for by Moon"
-msgstr ""
+msgstr "Cared for by Moon"
 
 #: src/translations.h:292
-#, fuzzy
 msgid "Dolphin"
-msgstr "Delfín"
+msgstr "Dolphin"
 
 #: src/s_gui.cpp:2199 src/s_gui.cpp:2245
-#, fuzzy
 msgid "Cancel"
-msgstr "Cáncer"
+msgstr "Cancel"
 
 #: src/s_gui.cpp:2217 src/s_gui.cpp:2243
 msgid "OK"
-msgstr ""
+msgstr "OK"
 
 #: src/s_gui.cpp:2729
 msgid "Year"
-msgstr ""
+msgstr "Year"
 
 #: src/s_gui.cpp:2732
-#, fuzzy
 msgid "Month"
-msgstr "Luna"
+msgstr "Month"
 
 #: src/s_gui.cpp:2735
 msgid "Day"
-msgstr ""
+msgstr "Day"
 
 #: src/s_gui.cpp:2738
 msgid "Hour"
-msgstr ""
+msgstr "Hour"
 
 #: src/s_gui.cpp:2741
 msgid "Minutes"
-msgstr ""
+msgstr "Minutes"
 
 #: src/s_gui.cpp:2744
 msgid "Seconds"
-msgstr ""
-
-#, fuzzy
-#~ msgid "Sky language:"
-#~ msgstr "Idioma del Cielo: "
-
-#, fuzzy
-#~ msgid "Sky culture:"
-#~ msgstr "Cultura del Cielo: "
-
-#~ msgid "Constellation lines: "
-#~ msgstr "Asterismos: "
-
-#~ msgid "Constellation labels: "
-#~ msgstr "Nombres de las Constelaciones: "
-
-#~ msgid "Cardinal points: "
-#~ msgstr "Puntos Cardinales: "
-
-#~ msgid "Star No./Name"
-#~ msgstr "No./Nombre de estrella"
-
-#~ msgid "eg. 60718 (aCrux) or Canopus"
-#~ msgstr "ej. 60718 (aCrux) o Canopus"
-
-#~ msgid "HP 60718, HD 108248, SAO 251904"
-#~ msgstr "HP 60718, HD 108248, SAO 25190"
-
-#~ msgid "Constellation"
-#~ msgstr "Constelación"
-
-#~ msgid "eg. Crux"
-#~ msgstr "ej. Crux"
-
-#, fuzzy
-#~ msgid "Object No :"
-#~ msgstr "Proyección :"
-
-#, fuzzy
-#~ msgid "Choose a catalog :"
-#~ msgstr "Elegir paisajes :"
-
-#~ msgid "Planet/Moon"
-#~ msgstr "Planeta/Luna"
-
-#~ msgid "eg. Pluto or Io"
-#~ msgstr "ej. Plutón o Io"
-
-#~ msgid "Nebula"
-#~ msgstr "Nebulosa"
-
-#~ msgid "Planets & Moons"
-#~ msgstr "Planetas y Lunas"
-
-#, fuzzy
-#~ msgid "Magnitude "
-#~ msgstr "Magnitud: "
-
-#~ msgid "Message"
-#~ msgstr "Mensaje"
-
-#, fuzzy
-#~ msgid "Chart mode"
-#~ msgstr "Modo carta"
-
-#~ msgid "Constellations"
-#~ msgstr "Constelaciones"
-
-#~ msgid "Please save option in tab \"Location\""
-#~ msgstr "Guardar la opción en \"Localización\""
-
-#~ msgid "to save current landscape as the default landscape."
-#~ msgstr "para guardar paisaje actual como predeterminado."
-
-#~ msgid "Fisheye Projection Mode"
-#~ msgstr "Modo de Proyección Ojo de Buey"
-
-#~ msgid "eg. M83, NGC 7009, IC 2118"
-#~ msgstr "ej. M83, NGC 7009, IC 2118"
-
-#~ msgid "CW 113, SH 40"
-#~ msgstr "CW 113, SH 40"
-
-#~ msgid "N-S Centering Offset: "
-#~ msgstr "Compensación del centrado N-S: "
-
-#~ msgid "E-W Centering Offset: "
-#~ msgstr "Compensación del centrado E-O: "
-
-#~ msgid "Loading HIP/SAO catalogs: %d/%d"
-#~ msgstr "Cargando Catálogos HIP/SAO : %d/%d"
-
-#~ msgid "Loading HIP catalog: %d/%d"
-#~ msgstr "Cargando Catálogo HIP: %d/%d"
-
-#~ msgid "Loading SAO catalog: %d/%d"
-#~ msgstr "Cargando Catálogo SAO: %d/%d"
-
-#~ msgid ": mag "
-#~ msgstr ": mag "
-
-#~ msgid "Name : "
-#~ msgstr "Nombre : "
-
-#~ msgid "(Dbl)"
-#~ msgstr "(Dbl)"
-
-#~ msgid "(Var)"
-#~ msgstr "(Var)"
-
-#~ msgid "RA : "
-#~ msgstr "AR : "
-
-#~ msgid "DE : "
-#~ msgstr "DEC : "
-
-#~ msgid "Spectral : "
-#~ msgstr "Espectral : "
-
-#~ msgid "Magnitude : "
-#~ msgstr "Magnitud : "
-
-#~ msgid "Distance : "
-#~ msgstr "Distancia : "
-
-#~ msgid "Az  : "
-#~ msgstr "Az : "
-
-#~ msgid "Alt : "
-#~ msgstr "Alt : "
-
-#~ msgid "ly"
-#~ msgstr "al"
-
-#~ msgid "Cat: NGC "
-#~ msgstr "Catálogo: NGC "
-
-#~ msgid "Type : "
-#~ msgstr "Tipo : "
-
-#~ msgid "Size : "
-#~ msgstr "Tamaño : "
-
-#~ msgid "Loading Sharpless catalog:"
-#~ msgstr "Cargando Catálogo Sharpless:"
-
-#~ msgid "Loading Cadwell catalog:"
-#~ msgstr "Cargando Catálogo Caldwell:"
-
-#~ msgid " (UTC)"
-#~ msgstr " (UTC)"
-
-#~ msgid " Current Time :"
-#~ msgstr " Hora-Fecha actual :"
-
-#~ msgid " Time Zone :"
-#~ msgstr " Zona horaria :"
-
-#~ msgid " Using System Default Time Zone"
-#~ msgstr " Usando la zona horaria por defecto del sistema"
-
-#~ msgid " Time speed : "
-#~ msgstr " Velocidad del tiempo : "
-
-#~ msgid " Projection :"
-#~ msgstr " Proyección :"
-
-#~ msgid " Screen Resolution :"
-#~ msgstr " Resolución de pantalla  :"
-
-#, fuzzy
-#~ msgid " Current Time Speed is x"
-#~ msgstr " Hora-Fecha actual :"
-
-#~ msgid ""
-#~ "ERROR : I can't find the datas directories in :\n"
-#~ "%s/ nor in ./ nor in ../\n"
-#~ "You may fully install the software (type \"make install\" on POSIX "
-#~ "systems)\n"
-#~ "or launch the application from the stellarium package directory.\n"
-#~ msgstr ""
-#~ "ERROR : No se puede encontrar el directorio de datos en :\n"
-#~ "%s/ ni en ./ ni en ../\n"
-#~ "Usted puede instalar el software completo (teclee \"make install\" en un "
-#~ "sistema POSIX)\n"
-#~ "o lance la aplicación desde el directorio de stellarium.\n"
-
-#~ msgid "> Found data files in %s : local version.\n"
-#~ msgstr "> Encontrados los archivos de datos en %s : versión local.\n"
-
-#~ msgid "Will create config files in %s\n"
-#~ msgstr "Se crearán los archivos de configuración en %s\n"
-
-#~ msgid "Try to create directory %s\n"
-#~ msgstr "Intento de crear el directorio %s\n"
-
-#~ msgid ""
-#~ "Can't create the file %sconfig.ini\n"
-#~ "If the directory %s is missing please create it by hand.\n"
-#~ "If not, check that you have access to %s\n"
-#~ msgstr ""
-#~ "No se puede crear el archivo %sconfig.ini\n"
-#~ "Si el directorio %s no se encuentra por favor creelo manualmente.\n"
-#~ "Si no, compruebe que tiene acceso a %s\n"
-
-#, fuzzy
-#~ msgid "Loading Constellation boundary data..."
-#~ msgstr "Cargando imágenes de las Constelaciones : %d/%d"
-
-#, fuzzy
-#~ msgid "Loading Hipparcos double stars..."
-#~ msgstr "Cargando datos de estrellas del Catálogo Hiparcos"
-
-#, fuzzy
-#~ msgid "Loading Hipparcos periodic variable stars..."
-#~ msgstr "Cargando datos de estrellas del Catálogo Hiparcos"
-
-#, fuzzy
-#~ msgid "Loading Hipparcos/SAO star data..."
-#~ msgstr "Cargando datos de estrellas del Catálogo Hiparcos"
-
-#, fuzzy
-#~ msgid "Loading Hipparcos star data..."
-#~ msgstr "Cargando datos de estrellas del Catálogo Hiparcos"
-
-#, fuzzy
-#~ msgid "Loading SAO star data "
-#~ msgstr "Cargando datos de Nebulosas "
-
-#, fuzzy
-#~ msgid "Loading star name data "
-#~ msgstr "Cargando datos del Sistema Solar... "
-
-#, fuzzy
-#~ msgid "Loading NGC data..."
-#~ msgstr "Cargando datos del Sistema Solar..."
-
-#, fuzzy
-#~ msgid "Loading NGC name data..."
-#~ msgstr "Cargando datos del Sistema Solar..."
-
-#, fuzzy
-#~ msgid "Loading Sharpless data..."
-#~ msgstr "Cargando datos del Sistema Solar..."
-
-#, fuzzy
-#~ msgid "Loading Cadwell reference data..."
-#~ msgstr "Cargando datos del Sistema Solar..."
-
-#, fuzzy
-#~ msgid "(%d deep space objects)\n"
-#~ msgstr "(%d objetos del cielo profundo)...\n"
-
-#~ msgid "Loading location: \"%s\", "
-#~ msgstr "Cargando posición: \"%s\", "
-
-#~ msgid "(landscape is: \"%s\")\n"
-#~ msgstr "(el paisaje es: \"%s\")\n"
-
-#~ msgid "Saving location %s to file %s\n"
-#~ msgstr "Grabando posición %s en el archivo %s\n"
-
-#, fuzzy
-#~ msgid "Loading Cities data..."
-#~ msgstr "Cargando datos del Sistema Solar..."
-
-#~ msgid "Saving rendering options in file "
-#~ msgstr "Grabando opciones de renderizado en archivo "
-
-#~ msgid "Saving video size "
-#~ msgstr "Grabando el tamaño de video "
-
-#~ msgid " in file "
-#~ msgstr " en el archivo "
-
-#~ msgid ""
-#~ "The current config file is from a previous version (>=0.6.0).\n"
-#~ "Previous options will be imported in the new config file.\n"
-#~ msgstr ""
-#~ "El archivo de configuración actual es de una versión anterior (>=0.6.0).\n"
-#~ "Las anteriores opciones serán importadas en el nuevo archivo de "
-#~ "configuración.\n"
-
-#~ msgid ""
-#~ "The current config file is from a version too old for parameters to be "
-#~ "imported (%s).\n"
-#~ "It will be replaced by the default config file.\n"
-#~ msgstr ""
-#~ "El archivo de configuración actual es de una versión demasiado antigua "
-#~ "como para poder importar sus parámetros (%s).\n"
-#~ "Será reemplazado por el archivo de configuración por defecto.\n"
-
-#~ msgid "Loading configuration file "
-#~ msgstr "Cargando el archivo de configuración "
-
-#~ msgid "ERROR : The current config file is from a different version ("
-#~ msgstr ""
-#~ "ERROR : El archivo de configuración actual es de una versión diferente ("
-
-#, fuzzy
-#~ msgid ""
-#~ "Please check last version and send bug report & comments \n"
-#~ "on stellarium web page : http://www.stellarium.org\n"
-#~ "\n"
-#~ msgstr ""
-#~ "Por favor comprueba si tienes la última versión y envía un informe de "
-#~ "error y tus comentarios \n"
-#~ "desde la página web de stellarium : http://stellarium.sourceforge.net\n"
-#~ "\n"
-
-#, fuzzy
-#~ msgid "Loading Solar System data..."
-#~ msgstr "Cargando datos del Sistema Solar..."
-
-#, fuzzy
-#~ msgid "Canes"
-#~ msgstr "Planetas"
-
-#, fuzzy
-#~ msgid ""
-#~ "Name : %s%s%s\n"
-#~ "RA : %s\n"
-#~ "DE : %s\n"
-#~ "Magnitude : %.2f\n"
-#~ "Distance : %s Light Years\n"
-#~ "Hip : %.4d\n"
-#~ msgstr ""
-#~ "Nombre :%s%s\n"
-#~ "AD : %s\n"
-#~ "DE : %s\n"
-#~ "Distancia : %.8f UA\n"
-#~ "Magnitud : %.2f\n"
-
-#, fuzzy
-#~ msgid "%s: mag %.1f %s"
-#~ msgstr "%s: mag %.1f"
-
-#, fuzzy
-#~ msgid ""
-#~ "Name : %s (NGC %u)\n"
-#~ "RA : %s\n"
-#~ "DE : %s\n"
-#~ "Magnitude : %.2f"
-#~ msgstr ""
-#~ "Nombre : %s (NGC %u)\n"
-#~ "AD : %s\n"
-#~ "DE : %s\n"
-#~ "Mag : %.2f"
-
-#, fuzzy
-#~ msgid ""
-#~ "Name :%s%s\n"
-#~ "RA : %s\n"
-#~ "DE : %s\n"
-#~ "Magnitude : %.2f\n"
-#~ "Distance : %.8f AU"
-#~ msgstr ""
-#~ "Nombre :%s%s\n"
-#~ "AD : %s\n"
-#~ "DE : %s\n"
-#~ "Distancia : %.8f UA\n"
-#~ "Magnitud : %.2f"
-
-#~ msgid "%s%s: mag %.1f"
-#~ msgstr "%s%s: mag %.1f"
-
-#~ msgid ""
-#~ "Arrow Keys       : Change viewing RA/DE\n"
-#~ "Page Up/Down     : Zoom\n"
-#~ "CTRL+Up/Down     : Zoom\n"
-#~ "Left Click       : Select object\n"
-#~ "Right Click      : Unselect\n"
-#~ "CTRL+Left Click  : Unselect\n"
-#~ "SPACE : Center on selected object\n"
-#~ "ENTER : Equatorial/altazimuthal mount\n"
-#~ "C   : Constellation lines\n"
-#~ "V   : Constellation labels\n"
-#~ "R   : Constellation art\n"
-#~ "E   : Equatorial grid\n"
-#~ "Z   : Azimuthal grid\n"
-#~ "N   : Nebula labels\n"
-#~ "P   : Planet labels\n"
-#~ "G   : Ground\n"
-#~ "F   : Fog\n"
-#~ "Q   : Cardinal points\n"
-#~ "A   : Atmosphere\n"
-#~ "H   : Help\n"
-#~ "4   : Ecliptic line\n"
-#~ "5   : Equator line\n"
-#~ "T   : Object tracking\n"
-#~ "S   : Stars\n"
-#~ "8   : Set time to current time\n"
-#~ "9   : Toggle meteor shower rates\n"
-#~ "I   : About Stellarium\n"
-#~ "M   : Text menu\n"
-#~ "F1  : Toggle fullscreen if possible.\n"
-#~ "CTRL + S : Take a screenshot\n"
-#~ "CTRL + R : Toggle script recording\n"
-#~ msgstr ""
-#~ "Flechas             : Desplazamiento AD/DE\n"
-#~ "Pagina Up/Down   : Zoom\n"
-#~ "CTRL+Up/Down     : Zoom\n"
-#~ "Clic Gauche      : Seleccionar objeto\n"
-#~ "Clic Droit       : Deseleccionar objeto\n"
-#~ "CTRL+Clic Gauche : Deseleccionar\n"
-#~ "ESPACE : Centrar sobre el objeto seleccionado\n"
-#~ "ENTER : Montura Ecuatorial/Altazimutal\n"
-#~ "CTRL + S : Toma una imagen instantánea\n"
-#~ "C   : Líneas de Constelaciones\n"
-#~ "V   : Nombres de Constelaciones\n"
-#~ "R   : Imágenes de Constelaciones\n"
-#~ "E   : Cuadrícula Ecuatorial\n"
-#~ "Z   : Cuadrícula Azimutal\n"
-#~ "N   : Nombre de Nebulosas\n"
-#~ "P   : Nombre de Planetas\n"
-#~ "G   : Suelo\n"
-#~ "F   : Niebla\n"
-#~ "Q   : Puntos Cardinales\n"
-#~ "A   : Atmósfera\n"
-#~ "H   : Ayuda\n"
-#~ "4   : Eclíptica\n"
-#~ "5   : Ecuador celeste\n"
-#~ "T   : Seguimiento del objeto\n"
-#~ "S   : Estrellas\n"
-#~ "8   : Ajustar a la hora-fecha actual\n"
-#~ "9   : Activa el control de estrellas fugaces\n"
-#~ "I   : Sobre Stellarium\n"
-#~ "M   : Menú textual\n"
-#~ "F1  : Modo Pantalla Completa, si es posible.\n"
-#~ "CTRL + S : Tomar una captura de pantalla\n"
-#~ "CTRL + R : Activar registro de scripts\n"
-
-#~ msgid ""
-#~ "Name :%s%s%s\n"
-#~ "Hip : %.4d\n"
-#~ "RA : %s\n"
-#~ "DE : %s\n"
-#~ "Mag : %.2f"
-#~ msgstr ""
-#~ "Nombre :%s%s%s\n"
-#~ "Hip : %.4d\n"
-#~ "AD : %s\n"
-#~ "DE : %s\n"
-#~ "Mag : %.2f"
+msgstr "Seconds"
