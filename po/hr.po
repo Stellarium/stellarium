@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: stellarium@free.fr\n"
-"POT-Creation-Date: 2006-04-30 20:54+0200\n"
-"PO-Revision-Date: 2006-01-28 08:58+0000\n"
-"Last-Translator: Igor Malner <apricot@email.t-com.hr>\n"
+"POT-Creation-Date: 2006-04-30 22:57+0200\n"
+"PO-Revision-Date: 2006-04-18 19:09+0000\n"
+"Last-Translator: Mario <matovina.mario@gmail.com>\n"
 "Language-Team: Croatian <hr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -36,152 +36,152 @@ msgstr ""
 
 #: src/constellation_mgr.cpp:161
 msgid "Loading Constellation Art: "
-msgstr ""
+msgstr "Učitavam Zviježđa "
 
 #: src/hip_star.cpp:88 src/hip_star.cpp:136 src/nebula.cpp:94
 #: src/planet.cpp:107
 msgid "Magnitude: "
-msgstr ""
+msgstr "Magnituda "
 
 #: src/hip_star.cpp:89 src/hip_star.cpp:137
 msgid " (Variable)"
-msgstr ""
+msgstr " Promjenjivo"
 
 #: src/hip_star.cpp:91 src/nebula.cpp:96 src/planet.cpp:111
 msgid "RA/DE: "
-msgstr ""
+msgstr "RA/DE "
 
 #: src/hip_star.cpp:97 src/nebula.cpp:102 src/planet.cpp:117
 msgid "Az/Alt: "
-msgstr ""
+msgstr "Az/Alt "
 
 #: src/hip_star.cpp:99 src/planet.cpp:120
 msgid "Distance: "
-msgstr ""
+msgstr "Udaljenost "
 
 #: src/hip_star.cpp:101 src/hip_star.cpp:140
 msgid " Light Years"
-msgstr ""
+msgstr " Svjetlosna godina"
 
 #: src/hip_star.cpp:108
 msgid "Spectral Type: "
-msgstr ""
+msgstr "Spektralni tip "
 
 #: src/hip_star_mgr.cpp:126
 msgid "Loading Hipparcos catalog:"
-msgstr ""
+msgstr "Učitavam katalog Hipparcos"
 
 #: src/nebula.cpp:104
 msgid "Type: "
-msgstr ""
+msgstr "Tip "
 
 #: src/nebula.cpp:105
 msgid "Size: "
-msgstr ""
+msgstr "Veličina "
 
-#: src/nebula_mgr.cpp:289
+#: src/nebula_mgr.cpp:291
 msgid "Loading NGC catalog: "
-msgstr ""
+msgstr "Učitavam NGC katalog "
 
-#: src/nebula_mgr.cpp:413
+#: src/nebula_mgr.cpp:415
 msgid "Loading Nebula Textures:"
-msgstr ""
+msgstr "Učitavam teksture maglica"
 
 #: src/planet.cpp:120
 msgid "AU"
-msgstr ""
+msgstr "AJ"
 
 #: src/stel_ui.cpp:485 src/stel_ui.cpp:613
 msgid "Script commander"
-msgstr ""
+msgstr "Upravljač Skripti"
 
 #: src/stel_ui.cpp:512
 msgid "Invalid Script command"
-msgstr ""
+msgstr "Nevažeća zapovjed skripti"
 
 #: src/stel_ui.cpp:578
 msgid "Drawing of the Constellations [C]"
-msgstr ""
+msgstr "Izgled Zviježđa [C]"
 
 #: src/stel_ui.cpp:580
 msgid "Names of the Constellations [V]"
-msgstr ""
+msgstr "Imena zviježđa [v]"
 
 #: src/stel_ui.cpp:582
 msgid "Constellations Art [R]"
-msgstr ""
+msgstr "Slike zviježđa [R]"
 
 #: src/stel_ui.cpp:584
 msgid "Azimuthal Grid [Z]"
-msgstr ""
+msgstr "Azimutalna mreža [Z]"
 
 #: src/stel_ui.cpp:586
 msgid "Equatorial Grid [E]"
-msgstr ""
+msgstr "ekvatorijalna mreža [E]"
 
 #: src/stel_ui.cpp:588
 msgid "Ground [G]"
-msgstr ""
+msgstr "tlo [G]"
 
 #: src/stel_ui.cpp:590
 msgid "Cardinal Points [Q]"
-msgstr ""
+msgstr "Strane svijeta [Q]"
 
 #: src/stel_ui.cpp:592
 msgid "Atmosphere [A]"
-msgstr ""
+msgstr "Atmosfera [a]"
 
 #: src/stel_ui.cpp:594
 msgid "Nebulas [N]"
-msgstr ""
+msgstr "Maglice [n]"
 
 #: src/stel_ui.cpp:596
 msgid "Help [H]"
-msgstr ""
+msgstr "pomoć [h]"
 
 #: src/stel_ui.cpp:598
 msgid "Equatorial/Altazimuthal Mount [ENTER]"
-msgstr ""
+msgstr "Ekvatorijalna/altazimutalna montaža [enter]"
 
 #: src/stel_ui.cpp:600
 msgid "Configuration window"
-msgstr ""
+msgstr "Podešavanje"
 
 #: src/stel_ui.cpp:603
 msgid "Night (red) mode"
-msgstr ""
+msgstr "noćni mod"
 
 #: src/stel_ui.cpp:606
 msgid "Quit [CTRL + Q]"
-msgstr ""
+msgstr "izlaz"
 
 #: src/stel_ui.cpp:608
 msgid "Quit [CMD + Q]"
-msgstr ""
+msgstr "izlaz"
 
 #: src/stel_ui.cpp:611
 msgid "Search for object"
-msgstr ""
+msgstr "potraga za objektom"
 
 #: src/stel_ui.cpp:615
 msgid "Goto selected object [SPACE]"
-msgstr ""
+msgstr "prati određeni objekt"
 
 #: src/stel_ui.cpp:621
 msgid "Decrease Time Speed [J]"
-msgstr ""
+msgstr "smanji brzinu vremena"
 
 #: src/stel_ui.cpp:623
 msgid "Real Time Speed [K]"
-msgstr ""
+msgstr "realna brzina vremena"
 
 #: src/stel_ui.cpp:625
 msgid "Increase Time Speed [L]"
-msgstr ""
+msgstr "povećaj brzinu vremena"
 
 #: src/stel_ui.cpp:627
 msgid "Return to Current Time"
-msgstr ""
+msgstr "povratak na trenutno vrijeme"
 
 #: src/stel_ui.cpp:636
 msgid ""
@@ -189,10 +189,13 @@ msgid ""
 "    and comments to us at: http://www.stellarium.org\n"
 "\n"
 msgstr ""
+"   molimo provjerite za nove verzije i šaljite bug reporte\n"
+"i prijedloge na http://www.stellarium.org\n"
+"\n"
 
 #: src/stel_ui.cpp:655
 msgid "Information"
-msgstr ""
+msgstr "informacije"
 
 #: src/stel_ui.cpp:667
 msgid ""
@@ -291,19 +294,19 @@ msgstr ""
 
 #: src/stel_ui_conf.cpp:37
 msgid "Configuration"
-msgstr ""
+msgstr "Podešavanja"
 
 #: src/stel_ui_conf.cpp:57
 msgid "Stars"
-msgstr ""
+msgstr "Zvijezde"
 
 #: src/stel_ui_conf.cpp:62
 msgid "Star Names. Up to mag :"
-msgstr ""
+msgstr "Imena zvijezda do magnitude"
 
 #: src/stel_ui_conf.cpp:74
 msgid "Star Twinkle. Amount :"
-msgstr ""
+msgstr "svjetlucanje zvijezda"
 
 #: src/stel_ui_conf.cpp:90 src/stel_ui_tuiconf.cpp:179
 msgid "Constellations Lines"
@@ -311,7 +314,7 @@ msgstr ""
 
 #: src/stel_ui_conf.cpp:95 src/stel_ui_tuiconf.cpp:183
 msgid "Constellations Names"
-msgstr ""
+msgstr "imena zviježđa"
 
 #: src/stel_ui_conf.cpp:100
 msgid "Constellations Boundaries"
@@ -319,11 +322,11 @@ msgstr ""
 
 #: src/stel_ui_conf.cpp:105
 msgid "Selected Constellation Only"
-msgstr ""
+msgstr "samo odabrana zviježđa"
 
 #: src/stel_ui_conf.cpp:116
 msgid "Nebulas Names. Up to mag :"
-msgstr ""
+msgstr "imena maglica do mag."
 
 #: src/stel_ui_conf.cpp:129
 msgid "Also display Nebulas without textures"
@@ -331,7 +334,7 @@ msgstr ""
 
 #: src/stel_ui_conf.cpp:140
 msgid "Planets"
-msgstr ""
+msgstr "planeti"
 
 #: src/stel_ui_conf.cpp:145
 msgid "Moon Scale"
@@ -343,15 +346,15 @@ msgstr ""
 
 #: src/stel_ui_conf.cpp:164
 msgid "Equatorial Grid"
-msgstr ""
+msgstr "ekvatorijalna mreža"
 
 #: src/stel_ui_conf.cpp:169
 msgid "Azimuthal Grid"
-msgstr ""
+msgstr "azimutalna mreža"
 
 #: src/stel_ui_conf.cpp:174
 msgid "Equator Line"
-msgstr ""
+msgstr "ekvator"
 
 #: src/stel_ui_conf.cpp:179
 msgid "Ecliptic Line"
@@ -359,40 +362,40 @@ msgstr ""
 
 #: src/stel_ui_conf.cpp:190
 msgid "Ground"
-msgstr ""
+msgstr "tlo"
 
 #: src/stel_ui_conf.cpp:195 src/stel_ui_tuiconf.cpp:187
 msgid "Cardinal Points"
-msgstr ""
+msgstr "strane svijeta"
 
 #: src/stel_ui_conf.cpp:200
 msgid "Atmosphere"
-msgstr ""
+msgstr "atmosfera"
 
 #: src/stel_ui_conf.cpp:205
 msgid "Fog"
-msgstr ""
+msgstr "magla"
 
 #: src/stel_ui_conf.cpp:235 src/stel_ui_conf.cpp:408 src/stel_ui_conf.cpp:435
 #: src/stel_ui_conf.cpp:494
 msgid "Save as default"
-msgstr ""
+msgstr "spremi kao defaultno"
 
 #: src/stel_ui_conf.cpp:247
 msgid "Current Time :"
-msgstr ""
+msgstr "trenutno vrijeme"
 
 #: src/stel_ui_conf.cpp:256
 msgid "Time Zone :"
-msgstr ""
+msgstr "vremenska zona"
 
 #: src/stel_ui_conf.cpp:260
 msgid "Using System Default Time Zone"
-msgstr ""
+msgstr "korišteći defaultno vrijeme"
 
 #: src/stel_ui_conf.cpp:269
 msgid "Time speed : "
-msgstr ""
+msgstr "brzina vremena "
 
 #: src/stel_ui_conf.cpp:277
 msgid ""
@@ -403,31 +406,33 @@ msgstr ""
 
 #: src/stel_ui_conf.cpp:300
 msgid "Cursor : "
-msgstr ""
+msgstr "kursor "
 
 #: src/stel_ui_conf.cpp:305
 msgid "Selected : "
-msgstr ""
+msgstr "odabrano "
 
 #: src/stel_ui_conf.cpp:310
+#, fuzzy
 msgid "Longitude : "
-msgstr ""
+msgstr "širina "
 
 #: src/stel_ui_conf.cpp:318
+#, fuzzy
 msgid "Latitude : "
-msgstr ""
+msgstr "dužina "
 
 #: src/stel_ui_conf.cpp:326
 msgid "Altitude : "
-msgstr ""
+msgstr "visina "
 
 #: src/stel_ui_conf.cpp:333
 msgid "Save location"
-msgstr ""
+msgstr "spremi poziciju"
 
 #: src/stel_ui_conf.cpp:355
 msgid "Projection :"
-msgstr ""
+msgstr "projekcija"
 
 #: src/stel_ui_conf.cpp:374
 msgid "Disk Viewport"
@@ -435,11 +440,11 @@ msgstr ""
 
 #: src/stel_ui_conf.cpp:380
 msgid "Screen Resolution :"
-msgstr ""
+msgstr "rezolucija ekrana"
 
 #: src/stel_ui_conf.cpp:384
 msgid "Restart program for"
-msgstr ""
+msgstr "restartiraj program za"
 
 #: src/stel_ui_conf.cpp:385
 msgid "change to apply."

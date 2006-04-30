@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: stellarium@free.fr\n"
-"POT-Creation-Date: 2006-04-30 20:54+0200\n"
-"PO-Revision-Date: 2006-02-22 15:54+0000\n"
+"POT-Creation-Date: 2006-04-30 22:57+0200\n"
+"PO-Revision-Date: 2006-04-29 11:30+0000\n"
 "Last-Translator: eikland <eikland@users.sourceforge.net>\n"
 "Language-Team:\n"
 "MIME-Version: 1.0\n"
@@ -47,11 +47,11 @@ msgstr "Henter stjernebildene: "
 #: src/hip_star.cpp:88 src/hip_star.cpp:136 src/nebula.cpp:94
 #: src/planet.cpp:107
 msgid "Magnitude: "
-msgstr ""
+msgstr "Forstørrelse: "
 
 #: src/hip_star.cpp:89 src/hip_star.cpp:137
 msgid " (Variable)"
-msgstr ""
+msgstr " (Variabel)"
 
 #: src/hip_star.cpp:91 src/nebula.cpp:96 src/planet.cpp:111
 msgid "RA/DE: "
@@ -63,7 +63,7 @@ msgstr "Az/Alt: "
 
 #: src/hip_star.cpp:99 src/planet.cpp:120
 msgid "Distance: "
-msgstr ""
+msgstr "Avstand: "
 
 #: src/hip_star.cpp:101 src/hip_star.cpp:140
 msgid " Light Years"
@@ -71,7 +71,7 @@ msgstr " Lysår"
 
 #: src/hip_star.cpp:108
 msgid "Spectral Type: "
-msgstr ""
+msgstr "Spektraltype: "
 
 #: src/hip_star_mgr.cpp:126
 msgid "Loading Hipparcos catalog:"
@@ -79,17 +79,17 @@ msgstr "Henter Hipparcos stjernekatalog:"
 
 #: src/nebula.cpp:104
 msgid "Type: "
-msgstr ""
+msgstr "Type: "
 
 #: src/nebula.cpp:105
 msgid "Size: "
-msgstr ""
+msgstr "Størrelse: "
 
-#: src/nebula_mgr.cpp:289
+#: src/nebula_mgr.cpp:291
 msgid "Loading NGC catalog: "
 msgstr "Henter NGC-katalog: "
 
-#: src/nebula_mgr.cpp:413
+#: src/nebula_mgr.cpp:415
 msgid "Loading Nebula Textures:"
 msgstr "Henter data om tåker:"
 
@@ -190,14 +190,14 @@ msgid "Return to Current Time"
 msgstr "Tilbake til dagens tidspunkt"
 
 #: src/stel_ui.cpp:636
-#, fuzzy
 msgid ""
 "   Please check for newer versions and send bug reports\n"
 "    and comments to us at: http://www.stellarium.org\n"
 "\n"
 msgstr ""
-"     Vennligst sjekk siste versjon av Stellarium før du rapporterer \n"
-"problemer til nettstedet http://stellarium.sourceforge.net\n"
+"   Vennligst sjekk om det finnes en nyere versjon↵\n"
+"    før du melder feil/kommentar til oss på: http://www.stellarium.org↵\n"
+"↵\n"
 "\n"
 
 #: src/stel_ui.cpp:655
@@ -364,18 +364,16 @@ msgid "Star Twinkle. Amount :"
 msgstr "Funkling av stjernene. Intensitet :"
 
 #: src/stel_ui_conf.cpp:90 src/stel_ui_tuiconf.cpp:179
-#, fuzzy
 msgid "Constellations Lines"
-msgstr "Stjernebilder: "
+msgstr "Linjer i stjernebilder"
 
 #: src/stel_ui_conf.cpp:95 src/stel_ui_tuiconf.cpp:183
 msgid "Constellations Names"
 msgstr "Navn på stjernebilder"
 
 #: src/stel_ui_conf.cpp:100
-#, fuzzy
 msgid "Constellations Boundaries"
-msgstr "Navn på stjernebilder"
+msgstr "Grenser til stjernebilder"
 
 #: src/stel_ui_conf.cpp:105
 msgid "Selected Constellation Only"
@@ -387,7 +385,7 @@ msgstr "Navn på tåker. Opp for å forsterke :"
 
 #: src/stel_ui_conf.cpp:129
 msgid "Also display Nebulas without textures"
-msgstr ""
+msgstr "Vis også tåker tilhørende tekst"
 
 #: src/stel_ui_conf.cpp:140
 msgid "Planets"
@@ -513,14 +511,12 @@ msgid "For unlisted screen resolution, edit the file :"
 msgstr "For oppløsninger som ikke vises, må du endre filen :"
 
 #: src/stel_ui_conf.cpp:418
-#, fuzzy
 msgid "Choose landscapes:"
-msgstr "Velg landskap :"
+msgstr ""
 
 #: src/stel_ui_conf.cpp:446
-#, fuzzy
 msgid "Program Language: "
-msgstr "Språk på himmelen: "
+msgstr ""
 
 #: src/stel_ui_conf.cpp:462 src/stel_ui_tuiconf.cpp:156
 msgid "Sky Language: "
@@ -531,9 +527,8 @@ msgid "Sky Culture: "
 msgstr "Kultur på himmelen: "
 
 #: src/stel_ui_conf.cpp:501
-#, fuzzy
 msgid "Language"
-msgstr "Språk på himmelen: "
+msgstr ""
 
 #: src/stel_ui_conf.cpp:502
 msgid "Date & Time"
@@ -1240,9 +1235,8 @@ msgid "Two Poles"
 msgstr ""
 
 #: src/translations.h:162
-#, fuzzy
 msgid "Lion"
-msgstr "Orion"
+msgstr ""
 
 #: src/translations.h:163
 msgid "Two Jaws"
@@ -1261,18 +1255,16 @@ msgid "Sek"
 msgstr ""
 
 #: src/translations.h:167
-#, fuzzy
 msgid "Triangle"
-msgstr "Triangelet"
+msgstr ""
 
 #: src/translations.h:168
 msgid "Ferry Boat"
 msgstr ""
 
 #: src/translations.h:169 src/translations.h:240
-#, fuzzy
 msgid "Boat"
-msgstr "Bjørnevokteren"
+msgstr ""
 
 #: src/translations.h:170
 msgid "Crocodile"
@@ -1287,18 +1279,16 @@ msgid "Prow"
 msgstr ""
 
 #: src/translations.h:173
-#, fuzzy
 msgid "Horus"
-msgstr "Ravnen"
+msgstr ""
 
 #: src/translations.h:174
 msgid "Sheepfold"
 msgstr ""
 
 #: src/translations.h:175
-#, fuzzy
 msgid "Giant"
-msgstr "Titan"
+msgstr ""
 
 #: src/translations.h:176
 msgid "Hippopotamus"
@@ -1317,9 +1307,8 @@ msgid "Khanuwy Fish"
 msgstr ""
 
 #: src/translations.h:180 src/translations.h:219
-#, fuzzy
 msgid "Net"
-msgstr "Neptun"
+msgstr ""
 
 #: src/translations.h:181
 msgid "Jaw"
@@ -1346,9 +1335,8 @@ msgid "Sheep"
 msgstr ""
 
 #: src/translations.h:187
-#, fuzzy
 msgid "Stars of Water"
-msgstr "Stjerner "
+msgstr ""
 
 #: src/translations.h:190
 msgid "Northern Dipper"
@@ -1367,9 +1355,8 @@ msgid "Wings"
 msgstr ""
 
 #: src/translations.h:194
-#, fuzzy
 msgid "Chariot"
-msgstr "Charon"
+msgstr ""
 
 #: src/translations.h:195
 msgid "Tail"
@@ -1396,9 +1383,8 @@ msgid "Imperial Guards"
 msgstr ""
 
 #: src/translations.h:201
-#, fuzzy
 msgid "Horn"
-msgstr "Smelteovnen"
+msgstr ""
 
 #: src/translations.h:202
 msgid "Willow"
@@ -1421,23 +1407,20 @@ msgid "Stomach"
 msgstr ""
 
 #: src/translations.h:207
-#, fuzzy
 msgid "Great General"
-msgstr "Generelt "
+msgstr ""
 
 #: src/translations.h:208
 msgid "Wall"
 msgstr ""
 
 #: src/translations.h:209
-#, fuzzy
 msgid "Legs"
-msgstr "Haren"
+msgstr ""
 
 #: src/translations.h:210
-#, fuzzy
 msgid "Root"
-msgstr "Bjørnevokteren"
+msgstr ""
 
 #: src/translations.h:211
 msgid "Ramparts"
@@ -1452,18 +1435,16 @@ msgid "Outer Fence"
 msgstr ""
 
 #: src/translations.h:214
-#, fuzzy
 msgid "Ford"
-msgstr "Smelteovnen"
+msgstr ""
 
 #: src/translations.h:215
 msgid "Seven Excellencies"
 msgstr ""
 
 #: src/translations.h:216
-#, fuzzy
 msgid "Market"
-msgstr "Mars"
+msgstr ""
 
 #: src/translations.h:217
 msgid "Five Chariots"
@@ -1478,9 +1459,8 @@ msgid "Toilet"
 msgstr ""
 
 #: src/translations.h:221
-#, fuzzy
 msgid "Screen"
-msgstr "Slangen"
+msgstr ""
 
 #: src/translations.h:222
 msgid "Soldiers Market"
@@ -1491,9 +1471,8 @@ msgid "Square Granary"
 msgstr ""
 
 #: src/translations.h:224
-#, fuzzy
 msgid "Three Stars"
-msgstr "Stjerner"
+msgstr ""
 
 #: src/translations.h:225
 msgid "Four Channels"
@@ -1536,9 +1515,8 @@ msgid "Extended Net"
 msgstr ""
 
 #: src/translations.h:235
-#, fuzzy
 msgid "Arsenal"
-msgstr "Alteret"
+msgstr ""
 
 #: src/translations.h:236
 msgid "Hook"
@@ -1553,18 +1531,16 @@ msgid "Jade Well"
 msgstr ""
 
 #: src/translations.h:239
-#, fuzzy
 msgid "Lance"
-msgstr "Krepsen"
+msgstr ""
 
 #: src/translations.h:241
 msgid "Mausoleum"
 msgstr ""
 
 #: src/translations.h:242
-#, fuzzy
 msgid "Dog"
-msgstr "Tåke"
+msgstr ""
 
 #: src/translations.h:243
 msgid "Earth God's Temple"
@@ -1575,14 +1551,12 @@ msgid "Bow and Arrow"
 msgstr ""
 
 #: src/translations.h:245
-#, fuzzy
 msgid "Pestle"
-msgstr "Persevs"
+msgstr ""
 
 #: src/translations.h:246
-#, fuzzy
 msgid "Mortar"
-msgstr "Mars"
+msgstr ""
 
 #: src/translations.h:247
 msgid "Rooftop"
@@ -1593,9 +1567,8 @@ msgid "Thunderbolt"
 msgstr ""
 
 #: src/translations.h:249
-#, fuzzy
 msgid "Chariot Yard"
-msgstr "Diagram-modus"
+msgstr ""
 
 #: src/translations.h:250
 msgid "Good Gourd"
@@ -1634,9 +1607,8 @@ msgid "Ox"
 msgstr ""
 
 #: src/translations.h:259
-#, fuzzy
 msgid "Heart"
-msgstr "Jorda"
+msgstr ""
 
 #: src/translations.h:260
 msgid "Room"
@@ -1655,9 +1627,8 @@ msgid "Flail"
 msgstr ""
 
 #: src/translations.h:264
-#, fuzzy
 msgid "Spear"
-msgstr "Stjerner"
+msgstr ""
 
 #: src/translations.h:265
 msgid "Right Flag"
@@ -1672,9 +1643,8 @@ msgid "Drumstick"
 msgstr ""
 
 #: src/translations.h:268
-#, fuzzy
 msgid "Bond"
-msgstr "Horisont"
+msgstr ""
 
 #: src/translations.h:269
 msgid "Woman's Bed"
@@ -1693,9 +1663,8 @@ msgid "Farmland"
 msgstr ""
 
 #: src/translations.h:273
-#, fuzzy
 msgid "Star"
-msgstr "Stjerner"
+msgstr ""
 
 #: src/translations.h:274
 msgid "Ghosts"
@@ -1762,14 +1731,12 @@ msgid "Cared for by Moon"
 msgstr ""
 
 #: src/translations.h:292
-#, fuzzy
 msgid "Dolphin"
-msgstr "Delfinen"
+msgstr ""
 
 #: src/s_gui.cpp:2199 src/s_gui.cpp:2245
-#, fuzzy
 msgid "Cancel"
-msgstr "Krepsen"
+msgstr ""
 
 #: src/s_gui.cpp:2217 src/s_gui.cpp:2243
 msgid "OK"
@@ -1780,9 +1747,8 @@ msgid "Year"
 msgstr ""
 
 #: src/s_gui.cpp:2732
-#, fuzzy
 msgid "Month"
-msgstr "Månen"
+msgstr ""
 
 #: src/s_gui.cpp:2735
 msgid "Day"
@@ -1799,104 +1765,6 @@ msgstr ""
 #: src/s_gui.cpp:2744
 msgid "Seconds"
 msgstr ""
-
-#, fuzzy
-#~ msgid "Sky language:"
-#~ msgstr "Språk på himmelen: "
-
-#, fuzzy
-#~ msgid "Sky culture:"
-#~ msgstr "Kultur på himmelen: "
-
-#~ msgid "Constellation lines: "
-#~ msgstr "Stjernebilder: "
-
-#~ msgid "Constellation labels: "
-#~ msgstr "Navn på stjernebilder "
-
-#~ msgid "Cardinal points: "
-#~ msgstr "Kardinalpunkter "
-
-#~ msgid "Star No./Name"
-#~ msgstr "Stjernenr./-navn"
-
-#~ msgid "eg. 60718 (aCrux) or Canopus"
-#~ msgstr "eks. 60718 (aCrux) eller Canopus"
-
-#~ msgid "HP 60718, HD 108248, SAO 251904"
-#~ msgstr "HP 60718, HD 108248, SAO 251904"
-
-#~ msgid "Constellation"
-#~ msgstr "Stjernebilder"
-
-#~ msgid "eg. Crux"
-#~ msgstr "eks. Sydkorset"
-
-#, fuzzy
-#~ msgid "Object No :"
-#~ msgstr "Projeksjon :"
-
-#, fuzzy
-#~ msgid "Choose a catalog :"
-#~ msgstr "Velg landskap :"
-
-#~ msgid "Planet/Moon"
-#~ msgstr "Planet/måne"
-
-#~ msgid "eg. Pluto or Io"
-#~ msgstr "f.eks. Pluto eller Io"
-
-#~ msgid "Nebula"
-#~ msgstr "Tåke"
-
-#~ msgid "Planets & Moons"
-#~ msgstr "Planeter & måner"
-
-#, fuzzy
-#~ msgid "Magnitude "
-#~ msgstr "Lysstyrke"
-
-#~ msgid "Message"
-#~ msgstr "Beskjed"
-
-#~ msgid "Chart mode"
-#~ msgstr "Diagram-modus"
-
-#~ msgid "Constellations"
-#~ msgstr "Stjernebilder"
-
-#~ msgid "Please save option in tab \"Location\""
-#~ msgstr "Endringer lagres under arkfanen \"Hjemsted\""
-
-#~ msgid "to save current landscape as the default landscape."
-#~ msgstr "å lagre aktivt landskap som standard landskap."
-
-#~ msgid "Fisheye Projection Mode"
-#~ msgstr "Fiskeøye-projeksjon"
-
-#~ msgid "eg. M83, NGC 7009, IC 2118"
-#~ msgstr "f.eks M83, NGC 7009, IC 2118"
-
-#~ msgid "CW 113, SH 40"
-#~ msgstr "CW 113, SH 40"
-
-#~ msgid "N-S Centering Offset: "
-#~ msgstr "Sentrer visning N-S: "
-
-#~ msgid "E-W Centering Offset: "
-#~ msgstr "Sentrer visning Ø-V: "
-
-#~ msgid "Loading HIP/SAO catalogs: %d/%d"
-#~ msgstr "Henter Hip/Sao stjernekatalog: %d/%d"
-
-#~ msgid "Loading HIP catalog: %d/%d"
-#~ msgstr "Henter Hipparcos stjernekatalog: %d/%d"
-
-#~ msgid "Loading SAO catalog: %d/%d"
-#~ msgstr "Henter Sao-katalog: %d/%d"
-
-#~ msgid ": mag "
-#~ msgstr ":forsterket "
 
 #~ msgid "Name : "
 #~ msgstr "Navn : "
@@ -1928,8 +1796,20 @@ msgstr ""
 #~ msgid "Alt : "
 #~ msgstr "Høyde (m): "
 
+#~ msgid ": mag "
+#~ msgstr ":forsterket "
+
 #~ msgid "ly"
 #~ msgstr "ly"
+
+#~ msgid "Loading HIP/SAO catalogs: %d/%d"
+#~ msgstr "Henter Hip/Sao stjernekatalog: %d/%d"
+
+#~ msgid "Loading HIP catalog: %d/%d"
+#~ msgstr "Henter Hipparcos stjernekatalog: %d/%d"
+
+#~ msgid "Loading SAO catalog: %d/%d"
+#~ msgstr "Henter Sao-katalog: %d/%d"
 
 #~ msgid "Cat: NGC "
 #~ msgstr "Kat: NGC "
@@ -1948,8 +1828,87 @@ msgstr ""
 #~ msgid "Loading Cadwell catalog:"
 #~ msgstr "Henter Cadwell-katalog: %d/%d"
 
+#~ msgid "Message"
+#~ msgstr "Beskjed"
+
 #~ msgid " (UTC)"
 #~ msgstr " (UTC)"
+
+#~ msgid "Chart mode"
+#~ msgstr "Diagram-modus"
+
+#, fuzzy
+#~ msgid ""
+#~ "   Please check for newer versions and send bug reports\n"
+#~ "and comments to us at: http://stellarium.sourceforge.net\n"
+#~ "\n"
+#~ msgstr ""
+#~ "     Vennligst sjekk siste versjon av Stellarium før du rapporterer \n"
+#~ "problemer til nettstedet http://stellarium.sourceforge.net\n"
+#~ "\n"
+
+#~ msgid "Constellations"
+#~ msgstr "Stjernebilder"
+
+#~ msgid "Fisheye Projection Mode"
+#~ msgstr "Fiskeøye-projeksjon"
+
+#~ msgid "Choose landscapes :"
+#~ msgstr "Velg landskap :"
+
+#~ msgid "Please save option in tab \"Location\""
+#~ msgstr "Endringer lagres under arkfanen \"Hjemsted\""
+
+#~ msgid "to save current landscape as the default landscape."
+#~ msgstr "å lagre aktivt landskap som standard landskap."
+
+#~ msgid "Star No./Name"
+#~ msgstr "Stjernenr./-navn"
+
+#~ msgid "eg. 60718 (aCrux) or Canopus"
+#~ msgstr "eks. 60718 (aCrux) eller Canopus"
+
+#~ msgid "HP 60718, HD 108248, SAO 251904"
+#~ msgstr "HP 60718, HD 108248, SAO 251904"
+
+#~ msgid "Constellation"
+#~ msgstr "Stjernebilder"
+
+#~ msgid "eg. Crux"
+#~ msgstr "eks. Sydkorset"
+
+#~ msgid "Nebula"
+#~ msgstr "Tåke"
+
+#~ msgid "eg. M83, NGC 7009, IC 2118"
+#~ msgstr "f.eks M83, NGC 7009, IC 2118"
+
+#~ msgid "CW 113, SH 40"
+#~ msgstr "CW 113, SH 40"
+
+#~ msgid "Planet/Moon"
+#~ msgstr "Planet/måne"
+
+#~ msgid "eg. Pluto or Io"
+#~ msgstr "f.eks. Pluto eller Io"
+
+#~ msgid "Planets & Moons"
+#~ msgstr "Planeter & måner"
+
+#~ msgid "Constellation lines: "
+#~ msgstr "Stjernebilder: "
+
+#~ msgid "Constellation labels: "
+#~ msgstr "Navn på stjernebilder "
+
+#~ msgid "Cardinal points: "
+#~ msgstr "Kardinalpunkter "
+
+#~ msgid "N-S Centering Offset: "
+#~ msgstr "Sentrer visning N-S: "
+
+#~ msgid "E-W Centering Offset: "
+#~ msgstr "Sentrer visning Ø-V: "
 
 #, fuzzy
 #~ msgid ""
