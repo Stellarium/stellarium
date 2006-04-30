@@ -698,7 +698,7 @@ void StelCore::setSkyLanguage(const std::string& newSkyLocaleName)
 	if( !hip_stars || !cardinals_points || !asterisms) return; // objects not initialized yet
 
 	// Update the translator with new locale name
-	skyTranslator = Translator(PACKAGE, LOCALEDIR, newSkyLocaleName);
+	skyTranslator = Translator(PACKAGE, getLocaleDir(), newSkyLocaleName);
 	// cout << "Sky locale is " << skyTranslator.getLocaleName() << endl;
 
 	// Translate all labels with the new language

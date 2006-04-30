@@ -22,6 +22,7 @@
 #include <dirent.h>
 #include <cstdio>
 #include <vector>
+#include <algorithm>
 
 #include "bytes.h"
 #include "translator.h"
