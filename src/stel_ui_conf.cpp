@@ -498,12 +498,12 @@ Component* StelUI::createConfigWindow(void)
 
 	// Global window
 	config_tab_ctr->setTexture(flipBaseTex);
+	config_tab_ctr->addTab(tab_language, _("Language"));	
 	config_tab_ctr->addTab(tab_time, _("Date & Time"));
 	config_tab_ctr->addTab(tab_location, _("Location"));
 	config_tab_ctr->addTab(tab_landscapes, _("Landscapes"));
 	config_tab_ctr->addTab(tab_video, _("Video"));
 	config_tab_ctr->addTab(tab_render, _("Rendering"));
-	config_tab_ctr->addTab(tab_language, _("Language"));
 	config_win->addComponent(config_tab_ctr);
 	config_win->setOnHideBtCallback(callback<void>(this, &StelUI::config_win_hideBtCallback));
 
