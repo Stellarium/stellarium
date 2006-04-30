@@ -27,19 +27,35 @@
 #include "fader.h"
 #include <vector>
 
-class Constellation
+class Constellation : public StelObject
 {
     friend class ConstellationMgr;
+public:
+	HipStar* getBrightestStar(void) const;
 private:
     Constellation();
     ~Constellation();
+    
+    // StelObject method to override
+   	//! Write I18n information about the object in wstring. 
+	virtual wstring getInfoString(const Navigator * nav) const {return getNameI18() + L"(" + StelUtility::stringToWstring(getShortName()) + L"°";}
+	//! The returned wstring can typically be used for object labeling in the sky
+	virtual wstring getShortInfoString(const Navigator * nav) const {return getNameI18();}
+	//! Return object's type
+	virtual STEL_OBJECT_TYPE get_type(void) const {return STEL_OBJECT_CONSTELLATION;}
+	//! Get position in earth equatorial frame
+	virtual Vec3d get_earth_equ_pos(const Navigator * nav) const {return XYZname;}
+	//! Return object's magnitude
+	virtual float get_mag(const Navigator * nav) const {return 0.;} 
+    
     bool read(const string& record, HipStarMgr * _VouteCeleste);
     void draw_name(s_font * constfont, Projector* prj) const;
     void draw_art(Projector* prj, Navigator* nav) const;
     void draw_boundary_optim(Projector* prj) const;
     const Constellation* is_star_in(const HipStar *) const;
-    wstring getNameI18(void) { return nameI18; };
-    string getShortName(void) { return abbreviation; };
+    
+    wstring getNameI18(void) const { return nameI18; };
+    string getShortName(void) const { return abbreviation; };
 
     void draw_optim(Projector* prj) const;
     void draw_art_optim(Projector* prj, Navigator* nav) const;

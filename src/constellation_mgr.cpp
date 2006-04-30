@@ -341,10 +341,8 @@ void ConstellationMgr::loadNames(const string& namesFile)
 
 }
 
-/** 
- * @brief Update i18 names from english names according to current locale
- * The translation is done using gettext with translated strings defined in translations.h
- */
+//! @brief Update i18 names from english names according to current locale
+//! The translation is done using gettext with translated strings defined in translations.h
 void ConstellationMgr::translateNames(Translator& trans)
 {
 	vector < Constellation * >::const_iterator iter;
@@ -354,45 +352,6 @@ void ConstellationMgr::translateNames(Translator& trans)
 		//cout << (*iter)->englishName.c_str() << " -> " << StelUtility::wstringToString((*iter)->nameI18) << endl;
 	}
 }
-
-vector <wstring> ConstellationMgr::getNames(void) 
-{
-     vector<wstring> names;
-  	 vector < Constellation * >::const_iterator iter;
-     wstring name;
-
-	for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
-	{
-		name = (*iter)->getNameI18();
-		transform(name.begin(), name.end(), name.begin(), ::tolower);
-		transform(name.begin(), name.begin()+1, name.begin(), ::toupper);
-        names.push_back(name);
-     }
-     return names;
-}
-
-vector<string> ConstellationMgr::getShortNames(void)
-{
-    vector<string> names;
-	vector < Constellation * >::const_iterator iter;
-
-	for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
-        names.push_back((*iter)->getShortName());
-    return names;
-}
-
-string ConstellationMgr::getShortNameByNameI18(wstring _name) {
-
-	vector < Constellation * >::const_iterator iter;
-
-	for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
-	{
-		if( _name==(*iter)->getNameI18()) return (*iter)->getShortName();
-	}
-	return "";
-
-}
-
 
 // update faders
 void ConstellationMgr::update(int delta_time)
@@ -639,6 +598,23 @@ void ConstellationMgr::drawBoundaries(Projector * prj) const
 		(*iter)->draw_boundary_optim(prj);
 	}
 	glDisable(GL_LINE_STIPPLE);
+}
+
+//! Return the matching constellation object's pointer if exists or NULL
+//! @param nameI18n The case sensistive constellation name
+Constellation* ConstellationMgr::searchByNameI18n(const wstring& nameI18n) const
+{
+	wstring objw = nameI18n;
+	transform(objw.begin(), objw.end(), objw.begin(), ::toupper);
+	
+	vector <Constellation*>::const_iterator iter;
+	for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
+	{
+		wstring objwcap = (*iter)->nameI18;
+		transform(objwcap.begin(), objwcap.end(), objwcap.begin(), ::toupper);
+		if (objwcap==objw) return *iter;
+	}
+	return NULL;
 }
 
 //! Find and return the list of at most maxNbItem objects auto-completing the passed object I18n name

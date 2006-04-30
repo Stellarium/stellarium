@@ -33,93 +33,90 @@ public:
     ConstellationMgr(HipStarMgr *_hip_stars);
     ~ConstellationMgr();
     
-    /** Draw constellation lines, art, names and boundaries if activated */
+    //! Draw constellation lines, art, names and boundaries if activated
     void draw(Projector* prj, Navigator* nav) const;
     
-    /** Update faders */
+    //! Update faders
 	void update(int delta_time);
 	
-	/** 
-	 * @brief Read constellation names from the given file
-	 * @param namesFile Name of the file containing the constellation names in english
-	 */
+	//! @brief Read constellation names from the given file
+	//! @param namesFile Name of the file containing the constellation names in english
 	void loadNames(const string& names_file);
 	
-	/**
-	 * @brief Update i18 names from english names according to current locale
-	 * The translation is done using gettext with translated strings defined in translations.h
-	 */
+	//! @brief Update i18 names from english names according to current locale
+	//! The translation is done using gettext with translated strings defined in translations.h
 	void translateNames(Translator& trans);
 		   
-	/** @brief Load constellation line shapes, art textures and boundaries shapes from data files*/
+	//! @brief Load constellation line shapes, art textures and boundaries shapes from data files*/
 	void loadLinesAndArt(const string& lines_file, const string& art_file, const string &boundaryfileName, LoadingBar& lb);
 	
-	/** Set constellation art fade duration */
+	//! Set constellation art fade duration
 	void setArtFadeDuration(float duration);
-	/** Set constellation art intensity */
+	//! Set constellation art intensity
 	float getArtFadeDuration() const {return (!asterisms.empty() && (*(asterisms.begin()))->art_fader.get_duration() || (selected && selected->art_fader.get_duration()));}
 		
-	/** Set constellation art intensity */
+	//! Set constellation art intensity
 	void setArtIntensity(float f);
-	/** Set constellation art intensity */
+	//! Set constellation art intensity
 	float getArtIntensity() const {return (!asterisms.empty() && (*(asterisms.begin()))->art_fader.get_max_value() || (selected && selected->art_fader.get_max_value()));}
 	
-	/** Set whether constellation art will be displayed */
+	//! Set whether constellation art will be displayed
 	void setFlagArt(bool b);
-	/** Get whether constellation art is displayed */
+	//! Get whether constellation art is displayed
 	bool getFlagArt(void) const {return flagArt;}
 	
-	/** Set whether constellation path lines will be displayed */
+	//! Set whether constellation path lines will be displayed
 	void setFlagLines(bool b);
-	/** Get whether constellation path lines are displayed */
+	//! Get whether constellation path lines are displayed
 	bool getFlagLines(void) const {return flagLines;}
 	
-	/** Set whether constellation boundaries lines will be displayed */
+	//! Set whether constellation boundaries lines will be displayed
 	void setFlagBoundaries(bool b);
-	/** Get whether constellation boundaries lines are displayed */
+	//! Get whether constellation boundaries lines are displayed
 	bool getFlagBoundaries(void) const {return flagBoundaries;}
 	
-	/** Set whether constellation names will be displayed */
+	//! Set whether constellation names will be displayed
 	void setFlagNames(bool b);
-	/** Set whether constellation names are displayed */
+	//! Set whether constellation names are displayed
 	bool getFlagNames(void) const {return flagNames;}
 	
-	/** Set whether selected constellation must be displayed alone */
+	//! Set whether selected constellation must be displayed alone
 	void setFlagIsolateSelected(bool s) { isolateSelected = s; setSelectedConst(selected);}
-	/** Get whether selected constellation is displayed alone */
+	//! Get whether selected constellation is displayed alone
 	bool getFlagIsolateSelected(void) const { return isolateSelected;}
 	
-	/** Define wehther lable are print with gravity effect */
+	//! Define wehther lable are print with gravity effect
 	void setFlagGravityLabel(bool g) {Constellation::gravityLabel = g;}
 	
-	/** Define line color */
+	//! Define line color
 	void setLineColor(const Vec3f& c) {Constellation::lineColor = c;}
-	/** Get line color */
+	//! Get line color
 	Vec3f getLineColor() const {return Constellation::lineColor;}
 	
-	/** Define boundary color */
+	//! Define boundary color
 	void setBoundaryColor(const Vec3f& c) {Constellation::boundaryColor = c;}
-	/** Get current boundary color */
+	//! Get current boundary color
 	Vec3f getBoundaryColor() const {return Constellation::boundaryColor;}
 		
-	/** Set label color for names */
+	//! Set label color for names
 	void setLabelColor(const Vec3f& c) {Constellation::labelColor = c;}
-	/** Get label color for names */
+	//! Get label color for names
 	Vec3f getLabelColor() const {return Constellation::labelColor;}
 	
-	/** Define font file name and size to use for constellation names display */
+	//! Define font file name and size to use for constellation names display
 	void setFont(float font_size, const string& font_name);
 	
-	/** Define which constellation is selected from its abbreviation */
+	//! Define which constellation is selected from its abbreviation
 	void setSelected(const string& abbreviation) {setSelectedConst(findFromAbbreviation(abbreviation));}
 	
-	/** Define which constellation is selected from a star number */
+	//! Define which constellation is selected from a star number
 	void setSelected(const HipStar * s) {if (!s) setSelectedConst(NULL); else setSelectedConst(is_star_in(s));}
 	
 	unsigned int getFirstSelectedHP(void) {if (selected != NULL) return selected->asterism[0]->get_hp_number(); else return 0;}  //Tony
-	vector<wstring> getNames(void);
-	vector<string> getShortNames(void);
-	string getShortNameByNameI18(wstring _name);  // return short name from long common name
+
+	//! Return the matching constellation object's pointer if exists or NULL
+	//! @param nameI18n The case sensistive constellation name
+	Constellation* searchByNameI18n(const wstring& nameI18n) const;	
 
 	//! Find and return the list of at most maxNbItem objects auto-completing the passed object I18n name
 	//! @param objPrefix the case insensitive first letters of the searched object

@@ -441,21 +441,18 @@ void StelCore::setViewportSize(int w, int h)
 	projection->setViewportHeight(h);
 }
 
-StelObject *StelCore::searchByNameI18n(const wstring &name) const {
-  StelObject *rval = 0;
-  rval = ssystem->searchByNamesI18(name);
-  if (rval) return rval;
-  rval = nebulas->searchByNameI18n(name);
-  if (rval) return rval;
-  rval = hip_stars->searchByNameI18n(name);
-  if (rval) return rval;
-
-//does not work because a constellation is no StelObject (why?)
-//  rval = asterisms->findFromAbbreviation(
-//                      asterisms->getShortNameByNameI18(name));
-//  if (rval) return rval;
-  
-  return NULL;
+StelObject *StelCore::searchByNameI18n(const wstring &name) const
+{
+	StelObject *rval = 0;
+	rval = ssystem->searchByNamesI18(name);
+	if (rval) return rval;
+	rval = nebulas->searchByNameI18n(name);
+	if (rval) return rval;
+	rval = hip_stars->searchByNameI18n(name);
+	if (rval) return rval;
+	rval = asterisms->searchByNameI18n(name);
+	if (rval) return rval;
+	return NULL;
 }
 
 //! Find and select an object from its translated name
@@ -1007,50 +1004,58 @@ bool StelCore::selectObject(StelObject* obj)
 		return true;
 	}
 
-	selected_object = obj;
-
-	// If an object has been found
-	if (selected_object)
-	{	
-		// If an object was selected keep the earth following
-		if (getFlagTraking()) navigation->set_flag_lock_equ_pos(1);
-		setFlagTraking(false);
-
-		if (selected_object->get_type()==StelObject::STEL_OBJECT_STAR)
-		{
-			asterisms->setSelected((HipStar*)selected_object);
-// 			// potentially record this action
-// 			std::ostringstream oss;
-// 			oss << ((HipStar *)core->selected_object)->get_hp_number();
-// 			app->scripts->record_command("select hp " + oss.str());
-		}
-		else
-		{
-			asterisms->setSelected(NULL);
-		}
-
-		if (selected_object->get_type()==StelObject::STEL_OBJECT_PLANET)
-		{
-			ssystem->setSelected((Planet*)selected_object);
-// 			// potentially record this action
-// 			app->scripts->record_command("select planet " + ((Planet *)core->selected_object)->getEnglishName());
-		}
-		else
-		{
-			ssystem->setSelected(NULL);
-		}
-
-		if (selected_object->get_type()==StelObject::STEL_OBJECT_NEBULA)
-		{
-// 			// potentially record this action
-// 			app->scripts->record_command("select nebula " + ((Nebula *)core->selected_object)->getEnglishName());
-		}
-		return true;
+	if (obj!=NULL && obj->get_type()==StelObject::STEL_OBJECT_CONSTELLATION)
+	{
+		return selectObject(((Constellation*)obj)->getBrightestStar());
 	}
 	else
 	{
-		unSelect();
-		return false;
+		selected_object = obj;
+	
+		// If an object has been found
+		if (selected_object)
+		{	
+			// If an object was selected keep the earth following
+			if (getFlagTraking()) navigation->set_flag_lock_equ_pos(1);
+			setFlagTraking(false);
+	
+			if (selected_object->get_type()==StelObject::STEL_OBJECT_STAR)
+			{
+				asterisms->setSelected((HipStar*)selected_object);
+	// 			// potentially record this action
+	// 			std::ostringstream oss;
+	// 			oss << ((HipStar *)core->selected_object)->get_hp_number();
+	// 			app->scripts->record_command("select hp " + oss.str());
+			}
+			else
+			{
+				asterisms->setSelected(NULL);
+			}
+	
+			if (selected_object->get_type()==StelObject::STEL_OBJECT_PLANET)
+			{
+				ssystem->setSelected((Planet*)selected_object);
+	// 			// potentially record this action
+	// 			app->scripts->record_command("select planet " + ((Planet *)core->selected_object)->getEnglishName());
+			}
+			else
+			{
+				ssystem->setSelected(NULL);
+			}
+	
+			if (selected_object->get_type()==StelObject::STEL_OBJECT_NEBULA)
+			{
+	// 			// potentially record this action
+	// 			app->scripts->record_command("select nebula " + ((Nebula *)core->selected_object)->getEnglishName());
+			}
+			
+			return true;
+		}
+		else
+		{
+			unSelect();
+			return false;
+		}
 	}
 	assert(0);	// Non reachable code
 }
@@ -1060,7 +1065,7 @@ bool StelCore::selectObject(StelObject* obj)
 //! @param objPrefix the first letters of the searched object
 //! @param maxNbItem the maximum number of returned object names
 //! @return a vector of matching object name by order of relevance, or an empty vector if nothing match
-vector<wstring> StelCore::listMatchingObjectsI18n(const wstring& objPrefix, unsigned int maxNbItem)
+vector<wstring> StelCore::listMatchingObjectsI18n(const wstring& objPrefix, unsigned int maxNbItem) const
 {
 	vector<wstring> result;
 	vector <wstring>::const_iterator iter;

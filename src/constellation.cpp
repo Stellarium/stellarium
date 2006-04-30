@@ -85,15 +85,6 @@ bool Constellation::read(const string& record, HipStarMgr * _VouteCeleste)
 	return true;
 }
 
-// Draw the Constellation lines
-/*
-void Constellation::draw(Projector* prj) const
-{
-    prj->set_orthographic_projection();	// set 2D coordinate
-	draw_optim(prj);
-	prj->reset_perspective_projection();
-}
-*/
 
 // Draw the lines for the Constellation using the coords of the stars
 // (optimized for use thru the class ConstellationMgr only)
@@ -236,9 +227,6 @@ void Constellation::draw_boundary_optim(Projector* prj) const
 {
 	if(!boundary_fader.getInterstate()) return;
 
-//    if (boundaryXYZ.size() <= 2) return;
-//    if (!isolatedBoundarySegments.size()) return;
-
 	glDisable(GL_TEXTURE_2D);
 	glEnable(GL_BLEND);	
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
@@ -249,22 +237,6 @@ void Constellation::draw_boundary_optim(Projector* prj) const
 	else
 		glColor4f(boundaryColor[0], boundaryColor[1], boundaryColor[2], boundary_fader.getInterstate());
 
-/* drawing for original bound_20 data
-	i = 0;
-	Vec3d pt1;
-	Vec3d pt2;
-    do
-    {
-		if(prj->project_j2000_line_check(boundaryXYZ[i],pt1,boundaryXYZ[i+1],pt2) ) 
-		{
-			glBegin(GL_LINES);
-				glVertex2f(pt1[0],pt1[1]);
-				glVertex2f(pt2[0],pt2[1]);
-			glEnd();
-		}
-		i++;
-	} while ( k < boundaryXYZ.size());
-*/
 	unsigned int i, j, size;
 	Vec3d pt1, pt2;
 	vector<Vec3f> *points;
@@ -288,4 +260,19 @@ void Constellation::draw_boundary_optim(Projector* prj) const
 			}
 		}			
 	}
+}
+
+HipStar* Constellation::getBrightestStar(void) const
+{
+	float maxMag = 99.f;
+	HipStar * brightest = NULL;
+	for(unsigned int i=0;i<nb_segments;++i)
+    {
+		if (asterism[2*i]->Mag < maxMag)
+		{
+			brightest = asterism[2*i];
+			maxMag = brightest->Mag;
+		}
+	}
+	return brightest;
 }

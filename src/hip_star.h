@@ -31,10 +31,6 @@
 #include "projector.h"
 #include "stel_utility.h"
 
-//#define DATA_FILES_USE_SAO
-//#define BUILDING_DATA_FILES_SAO
-//#define BUILDING_DATA_FILES_DOUBLE
-//#define BUILDING_DATA_FILES_VARIABLE
 
 class HipStar : public StelObject
 {
