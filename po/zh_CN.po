@@ -1,0 +1,1763 @@
+# Chinese (China) translation for stellarium
+# Copyright (c) (c) 2006 Canonical Ltd, and Rosetta Contributors 2006
+# This file is distributed under the same license as the stellarium package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2006.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: stellarium\n"
+"Report-Msgid-Bugs-To: stellarium@free.fr\n"
+"POT-Creation-Date: 2006-05-01 03:03+0200\n"
+"PO-Revision-Date: 2006-04-26 16:07+0000\n"
+"Last-Translator: Norman Prescott <norman@nexint.info>\n"
+"Language-Team: Chinese (China) <zh_CN@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: src/main.cpp:52
+#, c-format
+msgid ""
+"Usage: %s [OPTION] ...\n"
+" -v, --version          Output version information and exit.\n"
+" -h, --help             Display this help and exit.\n"
+msgstr ""
+"Usage: %s [OPTION] ...↵\n"
+" -v, --version 显示版本信息并退出↵\n"
+" -h, --help 显示帮助并退出↵\n"
+
+#: src/main.cpp:76
+#, c-format
+msgid "%s: Bad command line argument(s)\n"
+msgstr "%s: 命令语法错误↵\n"
+
+#: src/main.cpp:77
+#, c-format
+msgid "Try `%s --help' for more information.\n"
+msgstr "点击 `%s --help' 获取更多信息↵\n"
+
+#: src/constellation_mgr.cpp:161
+msgid "Loading Constellation Art: "
+msgstr "载入星座图象: "
+
+#: src/hip_star.cpp:88 src/hip_star.cpp:136 src/nebula.cpp:94
+#: src/planet.cpp:107
+msgid "Magnitude: "
+msgstr "星等: "
+
+#: src/hip_star.cpp:89 src/hip_star.cpp:137
+msgid " (Variable)"
+msgstr " (变星)"
+
+#: src/hip_star.cpp:91 src/nebula.cpp:96 src/planet.cpp:111
+msgid "RA/DE: "
+msgstr "赤经/赤纬: "
+
+#: src/hip_star.cpp:97 src/nebula.cpp:102 src/planet.cpp:117
+msgid "Az/Alt: "
+msgstr "方位角/高度: "
+
+#: src/hip_star.cpp:99 src/planet.cpp:120
+msgid "Distance: "
+msgstr "距离: "
+
+#: src/hip_star.cpp:101 src/hip_star.cpp:140
+msgid " Light Years"
+msgstr " 光年"
+
+#: src/hip_star.cpp:108
+msgid "Spectral Type: "
+msgstr "光谱型: "
+
+#: src/hip_star_mgr.cpp:126
+msgid "Loading Hipparcos catalog:"
+msgstr "载入Hipparcos星表:"
+
+#: src/nebula.cpp:104
+msgid "Type: "
+msgstr "类型: "
+
+#: src/nebula.cpp:105
+msgid "Size: "
+msgstr "大小: "
+
+#: src/nebula_mgr.cpp:291
+msgid "Loading NGC catalog: "
+msgstr "载入NGC星表: "
+
+#: src/nebula_mgr.cpp:415
+msgid "Loading Nebula Textures:"
+msgstr "载入星云图像:"
+
+#: src/planet.cpp:120
+msgid "AU"
+msgstr "天文单位"
+
+#: src/stel_ui.cpp:490 src/stel_ui.cpp:618
+msgid "Script commander"
+msgstr "脚本命令控制器"
+
+#: src/stel_ui.cpp:517
+msgid "Invalid Script command"
+msgstr "无效的脚本命令"
+
+#: src/stel_ui.cpp:583
+msgid "Drawing of the Constellations [C]"
+msgstr "星座连线 [C]"
+
+#: src/stel_ui.cpp:585
+msgid "Names of the Constellations [V]"
+msgstr "星座名称 [V]"
+
+#: src/stel_ui.cpp:587
+msgid "Constellations Art [R]"
+msgstr "星座图像 [R]"
+
+#: src/stel_ui.cpp:589
+msgid "Azimuthal Grid [Z]"
+msgstr "地平坐标网格 [Z]"
+
+#: src/stel_ui.cpp:591
+msgid "Equatorial Grid [E]"
+msgstr "赤道坐标网格 [E]"
+
+#: src/stel_ui.cpp:593
+msgid "Ground [G]"
+msgstr "地面 [G]"
+
+#: src/stel_ui.cpp:595
+msgid "Cardinal Points [Q]"
+msgstr "方位基点 [Q]"
+
+#: src/stel_ui.cpp:597
+msgid "Atmosphere [A]"
+msgstr "大气 [A]"
+
+#: src/stel_ui.cpp:599
+msgid "Nebulas [N]"
+msgstr "星云 [N]"
+
+#: src/stel_ui.cpp:601
+msgid "Help [H]"
+msgstr "帮助 [H]"
+
+#: src/stel_ui.cpp:603
+msgid "Equatorial/Altazimuthal Mount [ENTER]"
+msgstr "赤道仪/经纬仪 [ENTER]"
+
+#: src/stel_ui.cpp:605
+msgid "Configuration window"
+msgstr "设置窗口"
+
+#: src/stel_ui.cpp:608
+msgid "Night (red) mode"
+msgstr "夜视(红色)模式"
+
+#: src/stel_ui.cpp:611
+msgid "Quit [CTRL + Q]"
+msgstr "退出 [CTRL + Q]"
+
+#: src/stel_ui.cpp:613
+msgid "Quit [CMD + Q]"
+msgstr "退出 [CMD + Q]"
+
+#: src/stel_ui.cpp:616
+msgid "Search for object"
+msgstr "搜索天体"
+
+#: src/stel_ui.cpp:620
+msgid "Goto selected object [SPACE]"
+msgstr "转到所选天体 [SPACE]"
+
+#: src/stel_ui.cpp:626
+msgid "Decrease Time Speed [J]"
+msgstr "减慢时间速度 [J]"
+
+#: src/stel_ui.cpp:628
+msgid "Real Time Speed [K]"
+msgstr "实际时间速度 [K]"
+
+#: src/stel_ui.cpp:630
+msgid "Increase Time Speed [L]"
+msgstr "增加时间速度 [L]"
+
+#: src/stel_ui.cpp:632
+msgid "Return to Current Time"
+msgstr "回到现在时间"
+
+#: src/stel_ui.cpp:641
+msgid ""
+"   Please check for newer versions and send bug reports\n"
+"    and comments to us at: http://www.stellarium.org\n"
+"\n"
+msgstr ""
+"   如需检查最新版本、报告程序错误以及给我们提意见，请到↵\n"
+"    http://www.stellarium.org↵\n"
+"↵\n"
+"\n"
+
+#: src/stel_ui.cpp:660
+msgid "Information"
+msgstr "信息"
+
+#: src/stel_ui.cpp:672
+msgid ""
+"Movement & selection:\n"
+"Arrow Keys       : Change viewing RA/DE\n"
+"Page Up/Down     : Zoom\n"
+"CTRL+Up/Down     : Zoom\n"
+"Left Click       : Select object\n"
+"Right Click      : Unselect\n"
+"CTRL+Left Click  : Unselect\n"
+"\\                : Zoom out (planet + moons if applicable)\n"
+"/                : Zoom to selected object\n"
+"SPACE            : Center on selected object\n"
+"\n"
+msgstr ""
+"移动与选定:↵\n"
+"方向键:移动视野↵\n"
+"Page Up/Down : 放缩↵\n"
+"CTRL+Up/Down : 放缩↵\n"
+"鼠标左键:选定天体↵\n"
+"鼠标右键:取消选定↵\n"
+"CTRL+鼠标左键:取消选定↵\n"
+"\\ : 自动缩小(适用于某些行星+卫星)↵\n"
+"/ : 放大并移至所选天体↵\n"
+"SPACE : 置所选天体于中心↵\n"
+"↵\n"
+"\n"
+
+#: src/stel_ui.cpp:683
+msgid ""
+"Display options:\n"
+"ENTER : Equatorial/altazimuthal mount\n"
+"F1  : Toggle fullscreen if possible.\n"
+"C   : Constellation lines       V   : Constellation labels\n"
+"R   : Constellation art         E   : Equatorial grid\n"
+"Z   : Azimuthal grid            N   : Nebula labels\n"
+"P   : Planet labels             G   : Ground\n"
+"A   : Atmosphere                F   : Fog\n"
+"Q   : Cardinal points           O   : Toggle moon scaling\n"
+"T   : Object tracking           S   : Stars\n"
+"4 , : Ecliptic line             5 . : Equator line\n"
+"\n"
+msgstr ""
+"显示选项: ↵\n"
+"ENTER : 赤道仪/经纬仪↵\n"
+"F1 : 全屏显示↵\n"
+"C : 星座连线 V : 星座名称↵\n"
+"R : 星座图像 E : 赤道坐标网格↵\n"
+"Z : 地平坐标网格 N : 星云名称↵\n"
+"P : 行星名称 G : 地面↵\n"
+"A : 大气 F : 雾↵\n"
+"Q : 方位基点 O : 月球缩放↵\n"
+"T : 跟踪天体 S : 恒星↵\n"
+"4 , : 黄道 5 . : 赤道↵\n"
+"↵\n"
+"\n"
+
+#: src/stel_ui.cpp:695
+msgid ""
+"Dialogs & other controls:\n"
+"H   : Help                      I   : About Stellarium\n"
+"M   : Text menu                 1 (one)  : Configuration\n"
+"CTRL + S : Take a screenshot\n"
+"CTRL + R : Toggle script recording\n"
+"CTRL + F : Toggle object finder\n"
+"\n"
+msgstr ""
+"对话与其它控制: ↵\n"
+"H : 帮助 I : 关于Stellarium↵\n"
+"M : 文字菜单 1 (数字) : 设置↵\n"
+"CTRL + S : 屏幕截图↵\n"
+"CTRL + R : 记录脚本↵\n"
+"CTRL + F : 天体搜索↵\n"
+"↵\n"
+"\n"
+
+#: src/stel_ui.cpp:702
+msgid ""
+"Time & Date:\n"
+"6   : Time rate pause           7   : Time rate 0\n"
+"8   : Set current time          J   : Decrease time rate\n"
+"K   : Normal time rate          L   : Increase time rate\n"
+"-   : Back 24 hours             =   : Forward 24 hours\n"
+"[   : Back 7 days               ]   : Forward 7 days\n"
+"\n"
+msgstr ""
+"时间与日期: ↵\n"
+"6 : 暂停时间 7 : 停止时间↵\n"
+"8 : 回到现在时间 J : 减慢时间速度↵\n"
+"K : 正常时间速度 L : 增加时间速度↵\n"
+"- : 后退24小时 = : 前进24小時↵\n"
+"[ : 后退7天 ] : 前进7天↵\n"
+"↵\n"
+"\n"
+
+#: src/stel_ui.cpp:709
+msgid ""
+"During Script Playback:\n"
+"CTRL + C : End Script\n"
+"6   : pause script              K   : resume script\n"
+"\n"
+msgstr ""
+"脚本回放: ↵\n"
+"CTRL + C : 结束脚本↵\n"
+"6 : 暂停脚本 K : 继续脚本↵\n"
+"↵\n"
+"\n"
+
+#: src/stel_ui.cpp:713
+msgid ""
+"Misc:\n"
+"9   : Toggle meteor shower rates\n"
+msgstr ""
+"杂项: ↵\n"
+"9 : 流星出现率↵\n"
+
+#: src/stel_ui.cpp:716
+msgid "CTRL + Q : Quit\n"
+msgstr "CTRL + Q : 退出↵\n"
+
+#: src/stel_ui.cpp:718
+msgid "CMD + Q  : Quit\n"
+msgstr "CMD + Q : 退出↵\n"
+
+#: src/stel_ui.cpp:724
+msgid "Help"
+msgstr "帮助"
+
+#: src/stel_ui.cpp:984
+msgid "Command recording stopped."
+msgstr "命令记录停止."
+
+#: src/stel_ui.cpp:992
+msgid "Recording commands to script file:\n"
+msgstr "记录命令到脚本文件:↵\n"
+
+#: src/stel_ui.cpp:994
+msgid "Hit CTRL-R again to stop.\n"
+msgstr "再次CTRL+R以停止记录.↵\n"
+
+#: src/stel_ui.cpp:998
+msgid "Error: Unable to open script file to record commands."
+msgstr "错误: 无法打开脚本文件以记录命令."
+
+#: src/stel_ui_conf.cpp:37
+msgid "Configuration"
+msgstr "设置"
+
+#: src/stel_ui_conf.cpp:57
+msgid "Stars"
+msgstr "恒星"
+
+#: src/stel_ui_conf.cpp:62
+msgid "Star Names. Up to mag :"
+msgstr "显示恒星名. 最暗星等:"
+
+#: src/stel_ui_conf.cpp:74
+msgid "Star Twinkle. Amount :"
+msgstr "恒星闪烁度:"
+
+#: src/stel_ui_conf.cpp:90 src/stel_ui_tuiconf.cpp:179
+msgid "Constellations Lines"
+msgstr "星座连线"
+
+#: src/stel_ui_conf.cpp:95 src/stel_ui_tuiconf.cpp:183
+msgid "Constellations Names"
+msgstr "星座名称"
+
+#: src/stel_ui_conf.cpp:100
+msgid "Constellations Boundaries"
+msgstr "星座边界"
+
+#: src/stel_ui_conf.cpp:105
+msgid "Selected Constellation Only"
+msgstr "仅选定星座"
+
+#: src/stel_ui_conf.cpp:116
+msgid "Nebulas Names. Up to mag :"
+msgstr "星云名称. 最暗星等:"
+
+#: src/stel_ui_conf.cpp:129
+msgid "Also display Nebulas without textures"
+msgstr ""
+
+#: src/stel_ui_conf.cpp:140
+msgid "Planets"
+msgstr "行星"
+
+#: src/stel_ui_conf.cpp:145
+msgid "Moon Scale"
+msgstr "月球缩放"
+
+#: src/stel_ui_conf.cpp:152
+msgid "Planets Hints"
+msgstr "行星位置提示"
+
+#: src/stel_ui_conf.cpp:164
+msgid "Equatorial Grid"
+msgstr "赤道坐标网格"
+
+#: src/stel_ui_conf.cpp:169
+msgid "Azimuthal Grid"
+msgstr "地平坐标网格"
+
+#: src/stel_ui_conf.cpp:174
+msgid "Equator Line"
+msgstr "天赤道"
+
+#: src/stel_ui_conf.cpp:179
+msgid "Ecliptic Line"
+msgstr "黄道"
+
+#: src/stel_ui_conf.cpp:190
+msgid "Ground"
+msgstr "地面"
+
+#: src/stel_ui_conf.cpp:195 src/stel_ui_tuiconf.cpp:187
+msgid "Cardinal Points"
+msgstr "方位基点"
+
+#: src/stel_ui_conf.cpp:200
+msgid "Atmosphere"
+msgstr "大气"
+
+#: src/stel_ui_conf.cpp:205
+msgid "Fog"
+msgstr "雾"
+
+#: src/stel_ui_conf.cpp:235 src/stel_ui_conf.cpp:408 src/stel_ui_conf.cpp:435
+#: src/stel_ui_conf.cpp:494
+msgid "Save as default"
+msgstr "保存为默认值"
+
+#: src/stel_ui_conf.cpp:247
+msgid "Current Time :"
+msgstr "现在时间:"
+
+#: src/stel_ui_conf.cpp:256
+msgid "Time Zone :"
+msgstr "时区:"
+
+#: src/stel_ui_conf.cpp:260
+msgid "Using System Default Time Zone"
+msgstr "使用系统默认时区"
+
+#: src/stel_ui_conf.cpp:269
+msgid "Time speed : "
+msgstr "时间速度: "
+
+#: src/stel_ui_conf.cpp:277
+msgid ""
+"Use key J and L to decrease and increase\n"
+"   time speed.\n"
+"Use key K to return to real time speed."
+msgstr ""
+"按J和L键来减慢和加快时间速度.↵\n"
+"按K键回到实际速度."
+
+#: src/stel_ui_conf.cpp:300
+msgid "Cursor : "
+msgstr "光标: "
+
+#: src/stel_ui_conf.cpp:305
+msgid "Selected : "
+msgstr "选定: "
+
+#: src/stel_ui_conf.cpp:310
+msgid "Longitude : "
+msgstr "经度: "
+
+#: src/stel_ui_conf.cpp:318
+msgid "Latitude : "
+msgstr "纬度: "
+
+#: src/stel_ui_conf.cpp:326
+msgid "Altitude : "
+msgstr "高度: "
+
+#: src/stel_ui_conf.cpp:333
+msgid "Save location"
+msgstr "保存位置"
+
+#: src/stel_ui_conf.cpp:355
+msgid "Projection :"
+msgstr "投影模式:"
+
+#: src/stel_ui_conf.cpp:374
+msgid "Disk Viewport"
+msgstr "圆形视野"
+
+#: src/stel_ui_conf.cpp:380
+msgid "Screen Resolution :"
+msgstr "屏幕分辨率:"
+
+#: src/stel_ui_conf.cpp:384
+msgid "Restart program for"
+msgstr "重新启动程序"
+
+#: src/stel_ui_conf.cpp:385
+msgid "change to apply."
+msgstr "以便改动生效."
+
+#: src/stel_ui_conf.cpp:401
+msgid "For unlisted screen resolution, edit the file :"
+msgstr "如需自定分辨率，请编辑此文件:"
+
+#: src/stel_ui_conf.cpp:418
+msgid "Choose landscapes:"
+msgstr "选择地景:"
+
+#: src/stel_ui_conf.cpp:446
+msgid "Program Language: "
+msgstr ""
+
+#: src/stel_ui_conf.cpp:462 src/stel_ui_tuiconf.cpp:156
+msgid "Sky Language: "
+msgstr "星空语言: "
+
+#: src/stel_ui_conf.cpp:480 src/stel_ui_tuiconf.cpp:149
+msgid "Sky Culture: "
+msgstr "星空文化: "
+
+#: src/stel_ui_conf.cpp:501
+msgid "Language"
+msgstr "语言"
+
+#: src/stel_ui_conf.cpp:502
+msgid "Date & Time"
+msgstr "日期和时间"
+
+#: src/stel_ui_conf.cpp:503
+msgid "Location"
+msgstr "位置"
+
+#: src/stel_ui_conf.cpp:504
+msgid "Landscapes"
+msgstr "地景"
+
+#: src/stel_ui_conf.cpp:505
+msgid "Video"
+msgstr "影像"
+
+#: src/stel_ui_conf.cpp:506
+msgid "Rendering"
+msgstr "显示"
+
+#: src/stel_ui_conf.cpp:638
+msgid "Object Search"
+msgstr "天体搜索"
+
+#: src/stel_ui_conf.cpp:645
+msgid "Search for (eg. Saturn, Polaris, HP6218, Orion, M31):"
+msgstr ""
+
+#: src/stel_ui_conf.cpp:662
+msgid "GO"
+msgstr ""
+
+#: src/stel_ui_conf.cpp:787
+msgid "Enter observatory name"
+msgstr "输入天文台名称"
+
+#: src/stel_ui_conf.cpp:927
+msgid ": Normal rate"
+msgstr ":正常流量"
+
+#: src/stel_ui_conf.cpp:934
+msgid ": Standard Perseids rate"
+msgstr ":标准英仙座流星雨流量"
+
+#: src/stel_ui_conf.cpp:941
+msgid ": Exceptional Leonid rate"
+msgstr ":异常狮子座流星雨流量"
+
+#: src/stel_ui_conf.cpp:948
+msgid ": Highest rate ever (1966 Leonids)"
+msgstr ":曾经出现的最高流量(1966年狮子座流星雨)"
+
+#: src/stel_ui_conf.cpp:953
+msgid "Meteor Rate per minute"
+msgstr "每分钟流星流量"
+
+#: src/stel_ui_conf.cpp:974
+msgid "Current Time Speed is x"
+msgstr "目前时间速度为x"
+
+#: src/stel_ui_tuiconf.cpp:80
+msgid "Set Location "
+msgstr "设置位置 "
+
+#: src/stel_ui_tuiconf.cpp:81
+msgid "Set Time "
+msgstr "设置时间 "
+
+#: src/stel_ui_tuiconf.cpp:82
+msgid "General "
+msgstr "一般设置 "
+
+#: src/stel_ui_tuiconf.cpp:83
+msgid "Stars "
+msgstr "恒星 "
+
+#: src/stel_ui_tuiconf.cpp:84
+msgid "Colors "
+msgstr "颜色 "
+
+#: src/stel_ui_tuiconf.cpp:85
+msgid "Effects "
+msgstr "效果 "
+
+#: src/stel_ui_tuiconf.cpp:86
+msgid "Scripts "
+msgstr "脚本 "
+
+#: src/stel_ui_tuiconf.cpp:87
+msgid "Administration "
+msgstr "管理 "
+
+#: src/stel_ui_tuiconf.cpp:98
+msgid "Latitude: "
+msgstr "纬度: "
+
+#: src/stel_ui_tuiconf.cpp:100
+msgid "Longitude: "
+msgstr "经度: "
+
+#: src/stel_ui_tuiconf.cpp:102
+msgid "Altitude (m): "
+msgstr "海拔(m): "
+
+#: src/stel_ui_tuiconf.cpp:106
+msgid "Solar System Body: "
+msgstr "太阳系成员: "
+
+#: src/stel_ui_tuiconf.cpp:116
+msgid "Sky Time: "
+msgstr "星空时间: "
+
+#: src/stel_ui_tuiconf.cpp:118
+msgid "Set Time Zone: "
+msgstr "设置时区: "
+
+#: src/stel_ui_tuiconf.cpp:121
+msgid "Preset Sky Time: "
+msgstr "预设星空时间: "
+
+#: src/stel_ui_tuiconf.cpp:123
+msgid "Sky Time At Start-up: "
+msgstr "启动时的星空时间: "
+
+#: src/stel_ui_tuiconf.cpp:127
+msgid "Time Display Format: "
+msgstr "时间显示格式: "
+
+#: src/stel_ui_tuiconf.cpp:132
+msgid "Date Display Format: "
+msgstr "日期显示格式: "
+
+#: src/stel_ui_tuiconf.cpp:164
+msgid "Show: "
+msgstr "显示: "
+
+#: src/stel_ui_tuiconf.cpp:164 src/stel_ui_tuiconf.cpp:199 src/s_gui.cpp:2212
+msgid "Yes"
+msgstr "是"
+
+#: src/stel_ui_tuiconf.cpp:164 src/stel_ui_tuiconf.cpp:199 src/s_gui.cpp:2193
+msgid "No"
+msgstr "否"
+
+#: src/stel_ui_tuiconf.cpp:166
+msgid "Star Magnitude Multiplier: "
+msgstr "等倍增亮恒星: "
+
+#: src/stel_ui_tuiconf.cpp:168
+msgid "Maximum Magnitude to Label: "
+msgstr "星名显示的最暗星等: "
+
+#: src/stel_ui_tuiconf.cpp:170
+msgid "Twinkling: "
+msgstr "闪烁: "
+
+#: src/stel_ui_tuiconf.cpp:193
+msgid "Landscape: "
+msgstr "地景: "
+
+#: src/stel_ui_tuiconf.cpp:199
+msgid "Manual zoom: "
+msgstr "手动缩放: "
+
+#: src/stel_ui_tuiconf.cpp:203
+msgid "Object Sizing Rule: "
+msgstr "天体大小规则: "
+
+#: src/stel_ui_tuiconf.cpp:203
+msgid "Point"
+msgstr "点"
+
+#: src/stel_ui_tuiconf.cpp:203
+msgid "Magnitude"
+msgstr "星等"
+
+#: src/stel_ui_tuiconf.cpp:207
+msgid "Magnitude Sizing Multiplier: "
+msgstr "等倍增大视面: "
+
+#: src/stel_ui_tuiconf.cpp:211
+msgid "Milky Way intensity: "
+msgstr "银河亮度: "
+
+#: src/stel_ui_tuiconf.cpp:215
+msgid "Maximum Nebula Magnitude to Label: "
+msgstr "星云名称显示的最暗星等: "
+
+#: src/stel_ui_tuiconf.cpp:219
+msgid "Zoom Duration: "
+msgstr "缩放持续时间: "
+
+#: src/stel_ui_tuiconf.cpp:223
+msgid "Cursor Timeout: "
+msgstr "光标自动隐藏: "
+
+#: src/stel_ui_tuiconf.cpp:229
+msgid "Local Script: "
+msgstr "本地脚本: "
+
+#: src/stel_ui_tuiconf.cpp:235
+msgid "CD/DVD Script: "
+msgstr "CD/DVD脚本: "
+
+#: src/stel_ui_tuiconf.cpp:243
+msgid "Load Default Configuration: "
+msgstr "载入默认设置: "
+
+#: src/stel_ui_tuiconf.cpp:245
+msgid "Save Current Configuration as Default: "
+msgstr "保存目前设置为默认: "
+
+#: src/stel_ui_tuiconf.cpp:247
+msgid "Update me via Internet: "
+msgstr "网上更新: "
+
+#: src/translations.h:33
+msgid "Sun"
+msgstr "太阳"
+
+#: src/translations.h:34
+msgid "Mercury"
+msgstr "水星"
+
+#: src/translations.h:35
+msgid "Venus"
+msgstr "金星"
+
+#: src/translations.h:36
+msgid "Earth"
+msgstr "地球"
+
+#: src/translations.h:37
+msgid "Moon"
+msgstr "月球"
+
+#: src/translations.h:38
+msgid "Mars"
+msgstr "火星"
+
+#: src/translations.h:39
+msgid "Deimos"
+msgstr "火卫二"
+
+#: src/translations.h:40
+msgid "Phobos"
+msgstr "火卫一"
+
+#: src/translations.h:41
+msgid "Jupiter"
+msgstr "木星"
+
+#: src/translations.h:42
+msgid "Io"
+msgstr "木卫一"
+
+#: src/translations.h:43
+msgid "Europa"
+msgstr "木卫二"
+
+#: src/translations.h:44
+msgid "Ganymede"
+msgstr "木卫三"
+
+#: src/translations.h:45
+msgid "Callisto"
+msgstr "木卫四"
+
+#: src/translations.h:46
+msgid "Saturn"
+msgstr "土星"
+
+#: src/translations.h:47
+msgid "Mimas"
+msgstr "土卫一"
+
+#: src/translations.h:48
+msgid "Enceladus"
+msgstr "土卫二"
+
+#: src/translations.h:49
+msgid "Tethys"
+msgstr "土卫三"
+
+#: src/translations.h:50
+msgid "Dione"
+msgstr "土卫四"
+
+#: src/translations.h:51
+msgid "Rhea"
+msgstr "土卫五"
+
+#: src/translations.h:52
+msgid "Titan"
+msgstr "土卫六"
+
+#: src/translations.h:53
+msgid "Hyperion"
+msgstr "土卫七"
+
+#: src/translations.h:54
+msgid "Iapetus"
+msgstr "土卫八"
+
+#: src/translations.h:55
+msgid "Phoebe"
+msgstr "土卫九"
+
+#: src/translations.h:56
+msgid "Neptune"
+msgstr "海王星"
+
+#: src/translations.h:57
+msgid "Uranus"
+msgstr "天王星"
+
+#: src/translations.h:58
+msgid "Pluto"
+msgstr "冥王星"
+
+#: src/translations.h:59
+msgid "Charon"
+msgstr "冥卫一"
+
+#: src/translations.h:60
+msgid "Solar System Observer"
+msgstr "太阳系观测者"
+
+#: src/translations.h:63 src/s_gui.cpp:2658
+msgid "N"
+msgstr "北"
+
+#: src/translations.h:64 src/s_gui.cpp:2659
+msgid "S"
+msgstr "南"
+
+#: src/translations.h:65 src/s_gui.cpp:2663
+msgid "E"
+msgstr "东"
+
+#: src/translations.h:66 src/s_gui.cpp:2664
+msgid "W"
+msgstr "西"
+
+#: src/translations.h:69
+msgid "Aquila"
+msgstr "天鹰座"
+
+#: src/translations.h:70
+msgid "Andromeda"
+msgstr "仙女座"
+
+#: src/translations.h:71
+msgid "Sculptor"
+msgstr "玉夫座"
+
+#: src/translations.h:72
+msgid "Ara"
+msgstr "天坛座"
+
+#: src/translations.h:73
+msgid "Libra"
+msgstr "天秤座"
+
+#: src/translations.h:74
+msgid "Cetus"
+msgstr "鲸鱼座"
+
+#: src/translations.h:75
+msgid "Aries"
+msgstr "白羊座"
+
+#: src/translations.h:76 src/translations.h:146
+msgid "Scutum"
+msgstr "盾牌座"
+
+#: src/translations.h:77
+msgid "Pyxis"
+msgstr "罗盘座"
+
+#: src/translations.h:78
+msgid "Bootes"
+msgstr "牧夫座"
+
+#: src/translations.h:79
+msgid "Caelum"
+msgstr "雕具座"
+
+#: src/translations.h:80
+msgid "Chamaeleon"
+msgstr "蝘蜓座"
+
+#: src/translations.h:81
+msgid "Cancer"
+msgstr "巨蟹座"
+
+#: src/translations.h:82
+msgid "Capricornus"
+msgstr "摩羯座"
+
+#: src/translations.h:83
+msgid "Carina"
+msgstr "船底座"
+
+#: src/translations.h:84
+msgid "Cassiopeia"
+msgstr "仙后座"
+
+#: src/translations.h:85
+msgid "Centaurus"
+msgstr "半人马座"
+
+#: src/translations.h:86
+msgid "Cepheus"
+msgstr "仙王座"
+
+#: src/translations.h:87
+msgid "Coma Berenices"
+msgstr "后发座"
+
+#: src/translations.h:88
+msgid "Canes Venatici"
+msgstr "猎犬座"
+
+#: src/translations.h:89
+msgid "Auriga"
+msgstr "御夫座"
+
+#: src/translations.h:90
+msgid "Columba"
+msgstr "天鸽座"
+
+#: src/translations.h:91
+msgid "Circinus"
+msgstr "圆规座"
+
+#: src/translations.h:92
+msgid "Crater"
+msgstr "巨爵座"
+
+#: src/translations.h:93
+msgid "Corona Australis"
+msgstr "南冕座"
+
+#: src/translations.h:94
+msgid "Corona Borealis"
+msgstr "北冕座"
+
+#: src/translations.h:95
+msgid "Corvus"
+msgstr "乌鸦座"
+
+#: src/translations.h:96
+msgid "Crux"
+msgstr "南十字座"
+
+#: src/translations.h:97
+msgid "Cygnus"
+msgstr "天鹅座"
+
+#: src/translations.h:98
+msgid "Delphinus"
+msgstr "海豚座"
+
+#: src/translations.h:99
+msgid "Dorado"
+msgstr "剑鱼座"
+
+#: src/translations.h:100
+msgid "Draco"
+msgstr "天龙座"
+
+#: src/translations.h:101
+msgid "Norma"
+msgstr "矩尺座"
+
+#: src/translations.h:102
+msgid "Eridanus"
+msgstr "波江座"
+
+#: src/translations.h:103
+msgid "Sagitta"
+msgstr "天箭座"
+
+#: src/translations.h:104
+msgid "Fornax"
+msgstr "天炉座"
+
+#: src/translations.h:105
+msgid "Gemini"
+msgstr "双子座"
+
+#: src/translations.h:106
+msgid "Camelopardalis"
+msgstr "鹿豹座"
+
+#: src/translations.h:107
+msgid "Canis Major"
+msgstr "大犬座"
+
+#: src/translations.h:108
+msgid "Ursa Major"
+msgstr "大熊座"
+
+#: src/translations.h:109
+msgid "Grus"
+msgstr "天鹤座"
+
+#: src/translations.h:110
+msgid "Hercules"
+msgstr "武仙座"
+
+#: src/translations.h:111
+msgid "Horologium"
+msgstr "时钟座"
+
+#: src/translations.h:112
+msgid "Hydra"
+msgstr "长蛇座"
+
+#: src/translations.h:113
+msgid "Hydrus"
+msgstr "水蛇座"
+
+#: src/translations.h:114
+msgid "Indus"
+msgstr "印第安座"
+
+#: src/translations.h:115
+msgid "Lacerta"
+msgstr "蝎虎座"
+
+#: src/translations.h:116
+msgid "Monoceros"
+msgstr "麒麟座"
+
+#: src/translations.h:117
+msgid "Lepus"
+msgstr "天兔座"
+
+#: src/translations.h:118
+msgid "Leo"
+msgstr "狮子座"
+
+#: src/translations.h:119
+msgid "Lupus"
+msgstr "豺狼座"
+
+#: src/translations.h:120
+msgid "Lynx"
+msgstr "天猫座"
+
+#: src/translations.h:121
+msgid "Lyra"
+msgstr "天琴座"
+
+#: src/translations.h:122
+msgid "Antlia"
+msgstr "唧筒座"
+
+#: src/translations.h:123
+msgid "Microscopium"
+msgstr "显微镜座"
+
+#: src/translations.h:124
+msgid "Musca"
+msgstr "苍蝇座"
+
+#: src/translations.h:125
+msgid "Octans"
+msgstr "南极座"
+
+#: src/translations.h:126
+msgid "Apus"
+msgstr "天燕座"
+
+#: src/translations.h:127
+msgid "Ophiuchus"
+msgstr "蛇夫座"
+
+#: src/translations.h:128
+msgid "Orion"
+msgstr "猎户座"
+
+#: src/translations.h:129
+msgid "Pavo"
+msgstr "孔雀座"
+
+#: src/translations.h:130
+msgid "Pegasus"
+msgstr "飞马座"
+
+#: src/translations.h:131
+msgid "Pictor"
+msgstr "绘架座"
+
+#: src/translations.h:132
+msgid "Perseus"
+msgstr "英仙座"
+
+#: src/translations.h:133
+msgid "Equuleus"
+msgstr "小马座"
+
+#: src/translations.h:134
+msgid "Canis Minor"
+msgstr "小犬座"
+
+#: src/translations.h:135
+msgid "Leo Minor"
+msgstr "小狮座"
+
+#: src/translations.h:136
+msgid "Vulpecula"
+msgstr "狐狸座"
+
+#: src/translations.h:137
+msgid "Ursa Minor"
+msgstr "大熊座"
+
+#: src/translations.h:138
+msgid "Phoenix"
+msgstr "凤凰座"
+
+#: src/translations.h:139
+msgid "Piscis Austrinus"
+msgstr "南鱼座"
+
+#: src/translations.h:140
+msgid "Pisces"
+msgstr "双鱼座"
+
+#: src/translations.h:141
+msgid "Volans"
+msgstr "飞鱼座"
+
+#: src/translations.h:142
+msgid "Puppis"
+msgstr "船尾座"
+
+#: src/translations.h:143
+msgid "Reticulum"
+msgstr "网罟座"
+
+#: src/translations.h:144
+msgid "Sagittarius"
+msgstr "人马座"
+
+#: src/translations.h:145
+msgid "Scorpius"
+msgstr "天蝎座"
+
+#: src/translations.h:147
+msgid "Serpens"
+msgstr "巨蛇座"
+
+#: src/translations.h:148
+msgid "Sextans"
+msgstr "六分仪座"
+
+#: src/translations.h:149
+msgid "Mensa"
+msgstr "山案座"
+
+#: src/translations.h:150
+msgid "Taurus"
+msgstr "金牛座"
+
+#: src/translations.h:151
+msgid "Telescopium"
+msgstr "望远镜座"
+
+#: src/translations.h:152
+msgid "Tucana"
+msgstr "杜鹃座"
+
+#: src/translations.h:153
+msgid "Triangulum"
+msgstr "三角座"
+
+#: src/translations.h:154
+msgid "Triangulum Australe"
+msgstr "南三角座"
+
+#: src/translations.h:155
+msgid "Aquarius"
+msgstr "宝瓶座"
+
+#: src/translations.h:156
+msgid "Virgo"
+msgstr "室女座"
+
+#: src/translations.h:157
+msgid "Vela"
+msgstr "船帆座"
+
+#: src/translations.h:160
+msgid "Bull's Foreleg"
+msgstr ""
+
+#: src/translations.h:161
+msgid "Two Poles"
+msgstr ""
+
+#: src/translations.h:162
+msgid "Lion"
+msgstr ""
+
+#: src/translations.h:163
+msgid "Two Jaws"
+msgstr ""
+
+#: src/translations.h:164
+msgid "Sah"
+msgstr ""
+
+#: src/translations.h:165
+msgid "Bird"
+msgstr ""
+
+#: src/translations.h:166
+msgid "Sek"
+msgstr ""
+
+#: src/translations.h:167
+msgid "Triangle"
+msgstr ""
+
+#: src/translations.h:168
+msgid "Ferry Boat"
+msgstr ""
+
+#: src/translations.h:169 src/translations.h:240
+msgid "Boat"
+msgstr ""
+
+#: src/translations.h:170
+msgid "Crocodile"
+msgstr "鳄鱼"
+
+#: src/translations.h:171
+msgid "Selkis"
+msgstr ""
+
+#: src/translations.h:172
+msgid "Prow"
+msgstr ""
+
+#: src/translations.h:173
+msgid "Horus"
+msgstr ""
+
+#: src/translations.h:174
+msgid "Sheepfold"
+msgstr "羊圈"
+
+#: src/translations.h:175
+msgid "Giant"
+msgstr ""
+
+#: src/translations.h:176
+msgid "Hippopotamus"
+msgstr "河马"
+
+#: src/translations.h:177
+msgid "Flock"
+msgstr ""
+
+#: src/translations.h:178
+msgid "Pair of Stars"
+msgstr ""
+
+#: src/translations.h:179
+msgid "Khanuwy Fish"
+msgstr ""
+
+#: src/translations.h:180 src/translations.h:219
+msgid "Net"
+msgstr ""
+
+#: src/translations.h:181
+msgid "Jaw"
+msgstr ""
+
+#: src/translations.h:182
+msgid "Mooring Post"
+msgstr ""
+
+#: src/translations.h:183
+msgid "Kenemet"
+msgstr ""
+
+#: src/translations.h:184
+msgid "Chematy"
+msgstr ""
+
+#: src/translations.h:185
+msgid "Waty Bekety"
+msgstr ""
+
+#: src/translations.h:186
+msgid "Sheep"
+msgstr ""
+
+#: src/translations.h:187
+msgid "Stars of Water"
+msgstr ""
+
+#: src/translations.h:190
+msgid "Northern Dipper"
+msgstr "北斗"
+
+#: src/translations.h:191
+msgid "Curved Array"
+msgstr ""
+
+#: src/translations.h:192
+msgid "Coiled Thong"
+msgstr ""
+
+#: src/translations.h:193
+msgid "Wings"
+msgstr "翼"
+
+#: src/translations.h:194
+msgid "Chariot"
+msgstr ""
+
+#: src/translations.h:195
+msgid "Tail"
+msgstr "尾"
+
+#: src/translations.h:196
+msgid "Winnowing Basket"
+msgstr ""
+
+#: src/translations.h:197
+msgid "Dipper"
+msgstr "斗"
+
+#: src/translations.h:198
+msgid "Drum"
+msgstr ""
+
+#: src/translations.h:199
+msgid "Three Steps"
+msgstr ""
+
+#: src/translations.h:200
+msgid "Imperial Guards"
+msgstr ""
+
+#: src/translations.h:201
+msgid "Horn"
+msgstr "角"
+
+#: src/translations.h:202
+msgid "Willow"
+msgstr "柳"
+
+#: src/translations.h:203
+msgid "Imperial Passageway"
+msgstr ""
+
+#: src/translations.h:204
+msgid "Kitchen"
+msgstr ""
+
+#: src/translations.h:205
+msgid "River Turtle"
+msgstr ""
+
+#: src/translations.h:206
+msgid "Stomach"
+msgstr "胃"
+
+#: src/translations.h:207
+msgid "Great General"
+msgstr "天大将军"
+
+#: src/translations.h:208
+msgid "Wall"
+msgstr ""
+
+#: src/translations.h:209
+msgid "Legs"
+msgstr ""
+
+#: src/translations.h:210
+msgid "Root"
+msgstr ""
+
+#: src/translations.h:211
+msgid "Ramparts"
+msgstr "壁"
+
+#: src/translations.h:212
+msgid "Flying Corridor"
+msgstr "阁道"
+
+#: src/translations.h:213
+msgid "Outer Fence"
+msgstr ""
+
+#: src/translations.h:214
+msgid "Ford"
+msgstr ""
+
+#: src/translations.h:215
+msgid "Seven Excellencies"
+msgstr ""
+
+#: src/translations.h:216
+msgid "Market"
+msgstr ""
+
+#: src/translations.h:217
+msgid "Five Chariots"
+msgstr "五车"
+
+#: src/translations.h:218
+msgid "Rolled Tongue"
+msgstr "卷舌"
+
+#: src/translations.h:220
+msgid "Toilet"
+msgstr ""
+
+#: src/translations.h:221
+msgid "Screen"
+msgstr ""
+
+#: src/translations.h:222
+msgid "Soldiers Market"
+msgstr ""
+
+#: src/translations.h:223
+msgid "Square Granary"
+msgstr ""
+
+#: src/translations.h:224
+msgid "Three Stars"
+msgstr ""
+
+#: src/translations.h:225
+msgid "Four Channels"
+msgstr ""
+
+#: src/translations.h:226
+msgid "Well"
+msgstr "井"
+
+#: src/translations.h:227
+msgid "South River"
+msgstr "南河"
+
+#: src/translations.h:228
+msgid "North River"
+msgstr "北河"
+
+#: src/translations.h:229
+msgid "Five Feudal Kings"
+msgstr ""
+
+#: src/translations.h:230
+msgid "Orchard"
+msgstr ""
+
+#: src/translations.h:231
+msgid "Meadows"
+msgstr ""
+
+#: src/translations.h:232
+msgid "Circular Granary"
+msgstr ""
+
+#: src/translations.h:233
+msgid "Purple Palace"
+msgstr "紫微"
+
+#: src/translations.h:234
+msgid "Extended Net"
+msgstr ""
+
+#: src/translations.h:235
+msgid "Arsenal"
+msgstr ""
+
+#: src/translations.h:236
+msgid "Hook"
+msgstr ""
+
+#: src/translations.h:237
+msgid "Supreme Palace"
+msgstr "太微"
+
+#: src/translations.h:238
+msgid "Jade Well"
+msgstr ""
+
+#: src/translations.h:239
+msgid "Lance"
+msgstr ""
+
+#: src/translations.h:241
+msgid "Mausoleum"
+msgstr "大陵"
+
+#: src/translations.h:242
+msgid "Dog"
+msgstr ""
+
+#: src/translations.h:243
+msgid "Earth God's Temple"
+msgstr ""
+
+#: src/translations.h:244
+msgid "Bow and Arrow"
+msgstr "弓和箭"
+
+#: src/translations.h:245
+msgid "Pestle"
+msgstr ""
+
+#: src/translations.h:246
+msgid "Mortar"
+msgstr ""
+
+#: src/translations.h:247
+msgid "Rooftop"
+msgstr ""
+
+#: src/translations.h:248
+msgid "Thunderbolt"
+msgstr ""
+
+#: src/translations.h:249
+msgid "Chariot Yard"
+msgstr ""
+
+#: src/translations.h:250
+msgid "Good Gourd"
+msgstr ""
+
+#: src/translations.h:251
+msgid "Rotten Gourd"
+msgstr ""
+
+#: src/translations.h:252
+msgid "Encampment"
+msgstr ""
+
+#: src/translations.h:253
+msgid "Thunder and Lightning"
+msgstr ""
+
+#: src/translations.h:254
+msgid "Palace Gate"
+msgstr ""
+
+#: src/translations.h:255
+msgid "Emptiness"
+msgstr "虚"
+
+#: src/translations.h:256
+msgid "Weaving Girl"
+msgstr "织女"
+
+#: src/translations.h:257
+msgid "Girl"
+msgstr "女"
+
+#: src/translations.h:258
+msgid "Ox"
+msgstr "牛"
+
+#: src/translations.h:259
+msgid "Heart"
+msgstr "心"
+
+#: src/translations.h:260
+msgid "Room"
+msgstr "室"
+
+#: src/translations.h:261
+msgid "Spring"
+msgstr ""
+
+#: src/translations.h:262
+msgid "Establishment"
+msgstr ""
+
+#: src/translations.h:263
+msgid "Flail"
+msgstr ""
+
+#: src/translations.h:264
+msgid "Spear"
+msgstr ""
+
+#: src/translations.h:265
+msgid "Right Flag"
+msgstr ""
+
+#: src/translations.h:266
+msgid "Left Flag"
+msgstr ""
+
+#: src/translations.h:267
+msgid "Drumstick"
+msgstr ""
+
+#: src/translations.h:268
+msgid "Bond"
+msgstr ""
+
+#: src/translations.h:269
+msgid "Woman's Bed"
+msgstr ""
+
+#: src/translations.h:270
+msgid "Western Door"
+msgstr ""
+
+#: src/translations.h:271
+msgid "Eastern Door"
+msgstr ""
+
+#: src/translations.h:272
+msgid "Farmland"
+msgstr ""
+
+#: src/translations.h:273
+msgid "Star"
+msgstr "恒星"
+
+#: src/translations.h:274
+msgid "Ghosts"
+msgstr "鬼"
+
+#: src/translations.h:275
+msgid "Xuanyuan"
+msgstr "轩辕"
+
+#: src/translations.h:276
+msgid "Tripod"
+msgstr ""
+
+#: src/translations.h:277
+msgid "Neck"
+msgstr ""
+
+#: src/translations.h:278
+msgid "Zaofu"
+msgstr "造父"
+
+#: src/translations.h:279
+msgid "Market Officer"
+msgstr ""
+
+#: src/translations.h:280
+msgid "Banner of Three Stars"
+msgstr ""
+
+#: src/translations.h:283
+msgid "Bailer"
+msgstr ""
+
+#: src/translations.h:284
+msgid "Cat's Cradle"
+msgstr ""
+
+#: src/translations.h:285
+msgid "Voice of Joy"
+msgstr ""
+
+#: src/translations.h:286
+msgid "The Seven"
+msgstr ""
+
+#: src/translations.h:287
+msgid "Maui's Fishhook"
+msgstr ""
+
+#: src/translations.h:288
+msgid "Navigator's Triangle"
+msgstr ""
+
+#: src/translations.h:289
+msgid "Kite of Kawelo"
+msgstr ""
+
+#: src/translations.h:290
+msgid "Frigate Bird"
+msgstr ""
+
+#: src/translations.h:291
+msgid "Cared for by Moon"
+msgstr ""
+
+#: src/translations.h:292
+msgid "Dolphin"
+msgstr "海豚"
+
+#: src/s_gui.cpp:2199 src/s_gui.cpp:2245
+msgid "Cancel"
+msgstr "取消"
+
+#: src/s_gui.cpp:2217 src/s_gui.cpp:2243
+msgid "OK"
+msgstr "确定"
+
+#: src/s_gui.cpp:2729
+msgid "Year"
+msgstr "年"
+
+#: src/s_gui.cpp:2732
+msgid "Month"
+msgstr "月"
+
+#: src/s_gui.cpp:2735
+msgid "Day"
+msgstr "日"
+
+#: src/s_gui.cpp:2738
+msgid "Hour"
+msgstr "时"
+
+#: src/s_gui.cpp:2741
+msgid "Minutes"
+msgstr "分"
+
+#: src/s_gui.cpp:2744
+msgid "Seconds"
+msgstr "秒"
