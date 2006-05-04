@@ -175,6 +175,7 @@ private:
     SDL_Cursor *Cursor;
     
     DRAWMODE draw_mode;					// Current draw mode
+	bool initialized;  // has the init method been called yet?
 };
 
 #endif

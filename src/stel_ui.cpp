@@ -106,6 +106,19 @@ StelUI::~StelUI()
 ////////////////////////////////////////////////////////////////////////////////
 void StelUI::init(const InitParser& conf)
 {
+
+	if(initialised) {
+
+		// delete existing objects before recreating
+		if(baseFont) delete baseFont;
+		if(courierFont) delete courierFont;
+		if(baseTex) delete baseTex;
+		if(flipBaseTex) delete flipBaseTex;
+		if(tex_up) delete tex_up;
+		if(tex_down) delete tex_down;
+		if(desktop) delete desktop;
+	}
+
 	// Ui section
 	FlagShowFps			= conf.get_boolean("gui:flag_show_fps");
 	FlagMenu			= conf.get_boolean("gui:flag_menu");
