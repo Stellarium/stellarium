@@ -385,12 +385,12 @@ double StelApp::getMouseCursorTimeout()
 }
 
 // For use by TUI - saves all current settings
+// TODO: Put in stel_core?
+
 void StelApp::saveCurrentConfig(const string& confFile)
 {
 
-	// TODO: Review for new config settings and correct master setting locations
-
-	// No longer resaves everything, just the most use settable options
+	// No longer resaves everything, just settings user can change through UI
 
     cout << "Saving configuration file " << confFile << " ..." << endl;
 	InitParser conf;
@@ -454,26 +454,17 @@ void StelApp::saveCurrentConfig(const string& confFile)
 	conf.set_str    ("color:planet_names_color", StelUtility::vec3f_to_str(core->getColorPlanetsNames()));
 	conf.set_str    ("color:planet_orbits_color", StelUtility::vec3f_to_str(core->getColorPlanetsOrbits()));
 	conf.set_str    ("color:object_trails_color", StelUtility::vec3f_to_str(core->getColorPlanetsTrails()));
-	// NEW - are these used?
-	conf.set_str    ("color:star_label_color", StelUtility::vec3f_to_str(core->getColorStarNames()));
-	conf.set_str    ("color:star_circle_color", StelUtility::vec3f_to_str(core->getColorStarCircles()));
+	//  Are these used?
+	//	conf.set_str    ("color:star_label_color", StelUtility::vec3f_to_str(core->getColorStarNames()));
+	//  conf.set_str    ("color:star_circle_color", StelUtility::vec3f_to_str(core->getColorStarCircles()));
 
 	// gui section
 	conf.set_double("gui:mouse_cursor_timeout",getMouseCursorTimeout());
 
-
-	/*  TODO STILL
-
+	// not user settable yet
 	// conf.set_str	("gui:gui_base_color", StelUtility::vec3f_to_str(GuiBaseColor));
 	// conf.set_str	("gui:gui_text_color", StelUtility::vec3f_to_str(GuiTextColor));
 	// conf.set_double ("gui:base_font_size", BaseFontSize);
-
-	// Navigation section
-	conf.set_double ("navigation:preset_sky_time", PresetSkyTime);
-	conf.set_str	("navigation:startup_time_mode", StartupTimeMode);
-	conf.set_boolean("navigation:flag_manual_zoom", FlagManualZoom);
-
-	*/
 
 	// Text ui section
 	conf.set_boolean("tui:flag_show_gravity_ui", ui->getFlagShowGravityUi());
@@ -481,8 +472,11 @@ void StelApp::saveCurrentConfig(const string& confFile)
 	conf.set_boolean("tui:flag_show_tui_short_obj_info", ui->getFlagShowTuiShortObjInfo());
 
 	// Navigation section
+	conf.set_boolean("navigation:flag_manual_zoom", core->getFlagManualAutoZoom());
 	conf.set_double ("navigation:auto_move_duration", core->getAutoMoveDuration());
 	conf.set_double ("navigation:zoom_speed", core->getZoomSpeed());
+	conf.set_double ("navigation:preset_sky_time", PresetSkyTime);
+	conf.set_str	("navigation:startup_time_mode", StartupTimeMode);
 
 	// Astro section
 	conf.set_boolean("astro:flag_object_trails", core->getFlagPlanetsTrails());
@@ -500,7 +494,7 @@ void StelApp::saveCurrentConfig(const string& confFile)
 	conf.set_double("astro:milky_way_intensity", core->getMilkyWayIntensity());
 
 	// Get landscape and other observatory info
-	// TODO: observator should already know what section to save in
+	// TODO: shouldn't observator already know what section to save in?
 	(core->getObservatory()).setConf(conf, "init_location");
 
 	conf.save(confFile);
