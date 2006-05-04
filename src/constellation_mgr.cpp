@@ -366,6 +366,7 @@ void ConstellationMgr::update(int delta_time)
 
 void ConstellationMgr::setArtIntensity(float _max)
 {
+	artMaxIntensity = _max;
 	vector < Constellation * >::const_iterator iter;
 	for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
 		(*iter)->art_fader.set_max_value(_max);
@@ -373,6 +374,7 @@ void ConstellationMgr::setArtIntensity(float _max)
 
 void ConstellationMgr::setArtFadeDuration(float duration)
 {
+	artFadeDuration = duration;
 	vector < Constellation * >::const_iterator iter;
 	for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
 		(*iter)->art_fader.set_duration((int) (duration * 1000.f));
