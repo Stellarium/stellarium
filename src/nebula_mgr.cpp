@@ -371,6 +371,9 @@ bool NebulaMgr::loadNGCNames(const string& catNGCNames)
 				// Let us keep the right number in the Messier catalog
 				iss >> num;
 				e->M_nb=(unsigned int)(num);
+				
+				oss << "M" << num;
+				e->englishName = oss.str();
 			}
 		}
 		else
@@ -423,7 +426,22 @@ bool NebulaMgr::loadTextures(const string& fileName, LoadingBar& lb)
 		{
 			if (!e->readTexture(record)) // reading error
 				cerr << "Error while reading texture for nebula " << e->englishName << endl;
+		} else {
+			// Allow non NGC nebulas/textures!
+
+			// cout << "Nebula with unrecognized NGC number " << NGC << endl;
+			e = new Nebula;
+			if (!e->readTexture(record)) { // reading error
+				cerr << "Error while reading texture for nebula " << e->englishName << endl;
+				delete e;
+
+			} else {
+
+				neb_array.push_back(e);
+				nebZones[nebGrid.GetNearest(e->XYZ)].push_back(e);
+			}
 		}
+	
 	}
 	return true;
 }

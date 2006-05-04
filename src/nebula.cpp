@@ -144,14 +144,16 @@ double Nebula::get_close_fov(const Navigator*) const
 bool Nebula::readTexture(const string& record)
 {
 	string tex_name;
+	string name;
 	float ra;
 	float de;
 	float tex_angular_size;
 	float tex_rotation;
+	int ngc;
 	
 	std::istringstream istr(record);
 
-	if (!(istr >> NGC_nb >> ra >> de >> mag >> tex_angular_size >> tex_rotation >> tex_name >> credit)) return false ;
+	if (!(istr >> ngc >> ra >> de >> mag >> tex_angular_size >> tex_rotation >> name >> tex_name >> credit)) return false ;
 
 	if (credit  == "none")
 		credit = "";
@@ -161,6 +163,15 @@ bool Nebula::readTexture(const string& record)
 	for (string::size_type i=0;i<credit.length();++i)
 	{
 		if (credit[i]=='_') credit[i]=' ';
+	}
+
+	// Only set name if not already set from NGC data
+	if(englishName == "") {
+		for (string::size_type i=0;i<name.length();++i)
+			{
+				if (name[i]=='_') name[i]=' ';
+			}
+		englishName = name;
 	}
 
 	// Calc the RA and DE from the datas
@@ -329,7 +340,7 @@ void Nebula::draw_circle(const Projector* prj, const Navigator * nav)
 	if (2.f/get_on_screen_size(prj, nav)<0.1) return;
 	inc_lum++;
 	float lum = MY_MIN(1,2.f/get_on_screen_size(prj, nav))*(0.8+0.2*sinf(inc_lum/10));
-	glColor3fv(circle_color*lum*hints_brightness);
+	glColor4f(circle_color[0], circle_color[1], circle_color[2], lum*hints_brightness);
 	glBindTexture (GL_TEXTURE_2D, Nebula::tex_circle->getID());
 	glBegin(GL_TRIANGLE_STRIP);
 		glTexCoord2i(1,0);              // Bottom Right
