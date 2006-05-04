@@ -15,7 +15,8 @@
 
 StelApp::StelApp(const string& CDIR, const string& LDIR, const string& DATA_ROOT) : 
 		frame(0), timefr(0), timeBase(0), fps(0), maxfps(10000.f),  FlagTimePause(0), 
-		is_mouse_moving_horiz(false), is_mouse_moving_vert(false), draw_mode(StelApp::DM_NONE)
+		is_mouse_moving_horiz(false), is_mouse_moving_vert(false), draw_mode(StelApp::DM_NONE),
+		initialized(0)
 {
 	configDir = CDIR;
 	SelectedScript = SelectedScriptDirectory = "";
@@ -98,11 +99,14 @@ void StelApp::init(void)
 			wcout << _("Attempting to use an existing older config file.") << endl;
 		}
 	}
-	
-	screenW = conf.get_int("video:screen_w");
-	screenH = conf.get_int("video:screen_h");
-	initSDL(screenW, screenH, conf.get_int("video:bbp_mode"), conf.get_boolean("video:fullscreen"), core->getDataDir() + "/icon.bmp");	
-	
+
+	// don't mess with SDL init if already initialized earlier
+	if(!initialized) {
+		screenW = conf.get_int("video:screen_w");
+		screenH = conf.get_int("video:screen_h");
+		initSDL(screenW, screenH, conf.get_int("video:bbp_mode"), conf.get_boolean("video:fullscreen"), core->getDataDir() + "/icon.bmp");	
+	}
+
 	maxfps 				= conf.get_double ("video","maximum_fps",10000);
 	string appLocaleName = conf.get_str("localization", "app_locale", "system");
 	setAppLanguage(appLocaleName);
