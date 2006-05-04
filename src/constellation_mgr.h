@@ -52,13 +52,13 @@ public:
 	
 	//! Set constellation art fade duration
 	void setArtFadeDuration(float duration);
-	//! Set constellation art intensity
-	float getArtFadeDuration() const {return (!asterisms.empty() && (*(asterisms.begin()))->art_fader.get_duration() || (selected && selected->art_fader.get_duration()));}
+	//! Get constellation art fade duration
+	float getArtFadeDuration() const {return artFadeDuration;}
 		
-	//! Set constellation art intensity
+	//! Set constellation maximum art intensity
 	void setArtIntensity(float f);
-	//! Set constellation art intensity
-	float getArtIntensity() const {return (!asterisms.empty() && (*(asterisms.begin()))->art_fader.get_max_value() || (selected && selected->art_fader.get_max_value()));}
+	//! Set constellation maximum art intensity
+	float getArtIntensity() const {return artMaxIntensity;}
 	
 	//! Set whether constellation art will be displayed
 	void setFlagArt(bool b);
@@ -145,6 +145,8 @@ private:
 	bool flagLines;
 	bool flagArt;
 	bool flagBoundaries;
+	float artFadeDuration;
+	float artMaxIntensity;
 };
 
 #endif // _CONSTELLATION_MGR_H_
