@@ -142,6 +142,7 @@ void StelApp::init(void)
 	ui->init_tui();
 	
 	// Initialisation of the color scheme
+	draw_mode = StelApp::DM_NONE;  // fool caching
 	setVisionModeNormal();
 	if (conf.get_boolean("viewing:flag_chart")) setVisionModeChart();
 	if (conf.get_boolean("viewing:flag_night")) setVisionModeNight();
