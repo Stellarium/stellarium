@@ -69,11 +69,17 @@ void StelUI::draw_gravity_ui(void)
 }
 
 // Create all the components of the text user interface
+// should be safe to call more than once
+// (although ideally this wouldn't be necessary)
 void StelUI::init_tui(void)
 {
 	// Menu root branch
 	LocaleChanged=0;
 	ScriptDirectoryRead = 0;
+
+	// If already initialized before, delete existing objects
+	if(tui_root) delete tui_root;
+
 	tui_root = new s_tui::Branch();
 
 	// Submenus
@@ -265,7 +271,6 @@ void StelUI::draw_tui(void)
 	// If locale has changed, rebuild TUI with new translated text
 	if(LocaleChanged) {
 		cout << "Reloading TUI due to locale change\n";
-		if(tui_root) delete tui_root;
 		init_tui();
 
 		// THIS IS A HACK, but lacking time for a better solution:
@@ -407,9 +412,9 @@ void StelUI::tui_cb_admin_load_default(void)
 	//conf.load(app->getConfigFile());
 	//core->init(conf);
 
-	// TODO: modify init functions so they can be called multiple times and not leak memory
-	// app->init();
-	cout << "Load configuration not implemented.\n";
+	// TESTING: modify init functions so they can be called multiple times and not leak memory
+	app->init();
+	// cout << "Load configuration not implemented.\n";
 }
 
 // Save to default configuration
