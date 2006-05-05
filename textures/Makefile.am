@@ -1,6 +1,6 @@
 pkgdatadir = $(datadir)/@PACKAGE@/textures
 pkgdata_DATA = mercury.png venus.png earthmap.png mars.png 	jupiter.png \
-		saturn.png uranus.png neptune.png earth-shadow.png saturn_rings.png 	lune.png \
+		saturn.png uranus.png neptune.png earth-shadow.png saturn_rings_radial.png 	lune.png \
 		phobos.png deimos.png 	io.png europa.png ganymede.png callisto.png 	mimas.png \
 		enceladus.png tethys.png dione.png rhea.png titan.png hyperion.png iapetus.png \
 			miranda.png ariel.png umbriel.png titania.png oberon.png 	backmenu_flip.png m11.png \
