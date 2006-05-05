@@ -773,11 +773,11 @@ Ring::~Ring(void) {
 void Ring::draw(const Projector* prj,const Mat4d& mat,double screen_sz)
 {
 	screen_sz -= 50;
-	screen_sz /= 500.0;
+	screen_sz /= 250.0;
 	if (screen_sz < 0.0) screen_sz = 0.0;
 	else if (screen_sz > 1.0) screen_sz = 1.0;
-	const int slices = 64+(int)((256-64)*screen_sz);
-	const int stacks = 16+(int)((128-16)*screen_sz);
+	const int slices = 64+(int)((128-64)*screen_sz);
+	const int stacks = 16+(int)((64-16)*screen_sz);
 
 	// Normal transparency mode
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
