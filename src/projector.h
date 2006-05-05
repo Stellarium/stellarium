@@ -204,6 +204,11 @@ public:
 	virtual void sDisk(GLdouble radius, GLint slices, GLint stacks,
 		const Mat4d& mat, int orient_inside = 0) const;	
 		
+	// Draw a ring with a radial texturing
+	virtual void sRing(GLdouble r_min, GLdouble r_max,
+	                   GLint slices, GLint stacks,
+	                   const Mat4d& mat, int orient_inside) const;
+
 	// Draw a fisheye texture in a sphere
 	virtual void sSphere_map(GLdouble radius, GLint slices, GLint stacks,
 		const Mat4d& mat, double texture_fov = 2.*M_PI, int orient_inside = 0) const;

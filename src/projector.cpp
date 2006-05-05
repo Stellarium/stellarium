@@ -453,6 +453,53 @@ void Projector::sDisk(GLdouble radius, GLint slices, GLint stacks,
 	glPopMatrix();
 }
 
+void Projector::sRing(GLdouble r_min, GLdouble r_max,
+                      GLint slices, GLint stacks,
+                      const Mat4d& mat, int orient_inside) const {
+  glPushMatrix();
+  glLoadMatrixd(mat);
+
+  double theta;
+  float x,y;
+  int j;
+
+  const float nsign = (orient_inside)?-1.0:1.0;
+
+  const double dr = (r_max-r_min) / stacks;
+  const double dtheta = 2.0 * M_PI / slices;
+  if (slices < 0) slices = -slices;
+  double cos_sin_theta[2*(slices+1)];
+  double *cos_sin_theta_p = cos_sin_theta;
+  for (j = 0; j <= slices; j++) {
+    const double theta = (j == slices) ? 0.0 : j * dtheta;
+    *cos_sin_theta_p++ = cos(theta);
+    *cos_sin_theta_p++ = sin(theta);
+  }
+
+  // draw intermediate stacks as quad strips
+  for (double r = r_min; r <= r_max; r+=dr) {
+    const float tex_r = (r-r_min)/(r_max-r_min);
+    glBegin(GL_TRIANGLE_STRIP);
+    for (j=0,cos_sin_theta_p=cos_sin_theta;
+         j<=slices;
+         j++,cos_sin_theta_p+=2) {
+      theta = (j == slices) ? 0.0 : j * dtheta;
+      x = r*cos_sin_theta_p[0];
+      y = r*cos_sin_theta_p[1];
+      glNormal3f(0, 0, nsign);
+      glTexCoord2f(tex_r, 0.5);
+      sVertex3(x, y, 0, mat);
+      x = (r+dr)*cos_sin_theta_p[0];
+      y = (r+dr)*cos_sin_theta_p[1];
+      glNormal3f(0, 0, nsign);
+      glTexCoord2f(tex_r, 0.5);
+      sVertex3(x, y, 0, mat);
+    }
+    glEnd();
+  }
+  glPopMatrix();
+}
+
 inline void sSphereMapTexCoord(double rho, double theta, double texture_fov)
 {
 	if (rho>texture_fov/2.)
