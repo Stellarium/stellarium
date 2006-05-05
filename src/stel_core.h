@@ -19,6 +19,7 @@
 #ifndef _STEL_CORE_H_
 #define _STEL_CORE_H_
 
+// default font sizes
 #define FontSizeCardinalPoints 30.
 #define FontSizeSolarSystem 14.
 #define FontSizeGeneral 12.
@@ -261,9 +262,6 @@ public:
 	void setFlagConstellationIsolateSelected(bool b) {asterisms->setFlagIsolateSelected(b);}
 	//! Get whether selected constellation is drawn alone 
 	bool getFlagConstellationIsolateSelected(void) {return asterisms->getFlagIsolateSelected();}
-	
-	//! Set constellation font size 
-	void setConstellationFontSize(float f) {asterisms->setFont(f, baseFontFile);}
 	
 	//! Get constellation line color
 	Vec3f getColorConstellationLine() const {return asterisms->getLineColor();}
@@ -654,6 +652,7 @@ private:
 	float auto_move_duration;			// Duration of movement for the auto move to a selected objectin seconds
 
 	bool firstTime;                     // For init to track if reload or first time setup
+	float constellationFontSize;        // size for constellation labels
 };
 
 #endif // _STEL_CORE_H_

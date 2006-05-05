@@ -1305,6 +1305,11 @@ void StelUI::setColorScheme(const string& skinFile, const string& section)
 //! Scale is applied to config basefontsize, basecfontsize
 void StelUI::setFonts(float _baseScale, string &_baseFile, float _fixedScale, string &_fixedFile) {
 
+	cerr << "ERROR: UI fonts can't be changed on the fly yet\n";
+	return;
+
+
+	// causes segfaults due to dangling references to old font object from ui objects
 	if (baseFont) delete baseFont;
 	baseFont = new s_font(BaseFontSize*_baseScale, _baseFile);
 	assert(baseFont);

@@ -50,7 +50,7 @@ void StelUI::draw_gravity_ui(void)
 
 		// label location if not on earth
 		if(core->getObservatory().getHomePlanetEnglishName() != "Earth") {
-			os << L" " << core->getObservatory().getHomePlanetNameI18();
+			os << L" " << _(core->getObservatory().getHomePlanetEnglishName());
 		}
 
 		if (FlagShowFov) os << L" fov " << setprecision(3) << core->getFov();

@@ -100,6 +100,7 @@ public:
     double getRadius(void) const {return radius;}
 
 	// Return the information string "ready to print" :)
+	wstring getSkyLabel(const Navigator * nav) const;
 	wstring getInfoString(const Navigator * nav) const;
 	wstring getShortInfoString(const Navigator * nav) const;
 	virtual double get_close_fov(const Navigator * nav) const;
