@@ -141,11 +141,9 @@ void StelUI::init(const InitParser& conf)
 	FlagShowTuiDateTime = conf.get_boolean("tui:flag_show_tui_datetime");
 	FlagShowTuiShortObjInfo = conf.get_boolean("tui:flag_show_tui_short_obj_info");
 
-	// TODO: Why does this duplicate baseFontFile in stelcore?
 	BaseFontName = core->getDataDir() + BaseFontName;
 
 	// TODO: can we get rid of this second font requirement?
-	// TODO: this is not saved in save config yet
 	BaseCFontSize		= conf.get_double ("gui","base_cfont_size",12.5);
 	BaseCFontName = core->getDataDir() + conf.get_str("gui", "base_cfont_name", "DejaVuSansMono.ttf");
 
@@ -1302,3 +1300,18 @@ void StelUI::setColorScheme(const string& skinFile, const string& section)
 	
 	desktop->setColorScheme(GuiBaseColor, GuiTextColor);
 }
+
+//! Set the fonts used 
+//! Scale is applied to config basefontsize, basecfontsize
+void StelUI::setFonts(float _baseScale, string &_baseFile, float _fixedScale, string &_fixedFile) {
+
+	if (baseFont) delete baseFont;
+	baseFont = new s_font(BaseFontSize*_baseScale, _baseFile);
+	assert(baseFont);
+
+	if (courierFont) delete courierFont;
+	courierFont = new s_font(BaseCFontSize*_fixedScale, _fixedFile);
+	assert(courierFont);
+
+}
+
