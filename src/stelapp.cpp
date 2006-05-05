@@ -201,9 +201,22 @@ void StelApp::draw(int delta_time)
 //! @brief Set the application locale. This apply to GUI, console messages etc..
 void StelApp::setAppLanguage(const std::string& newAppLocaleName)
 {
+	string oldFontFile, newFontFile;
+	float oldFontScale, newFontScale;
+	string oldLocale = getAppLanguage();
+
 	// Update the translator with new locale name
 	Translator::globalTranslator = Translator(PACKAGE, core->getLocaleDir(), newAppLocaleName);
 	cout << "Application locale is " << Translator::globalTranslator.getLocaleName() << endl;
+
+	// Update application fonts if needed for new locale (not sky fonts)
+	core->getFontForLocale(oldLocale, oldFontFile, oldFontScale);
+	core->getFontForLocale(newAppLocaleName, newFontFile, newFontScale);
+
+	if(oldFontFile != newFontFile || oldFontScale != newFontScale) {
+		ui->setFonts(newFontScale, newFontFile, newFontScale, newFontFile);
+	}
+
 }
 
 // Handle mouse clics
