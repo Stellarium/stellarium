@@ -68,13 +68,14 @@ class RotationElements
 class Ring
 {
 public:
-	Ring(float _radius, const string& _texname);
-	virtual ~Ring();
-	void draw(const Projector* prj, const Mat4d& mat);
-	double get_size(void) const {return radius;}
+	Ring(double radius_min,double radius_max,const string &texname);
+	~Ring(void);
+	void draw(const Projector* prj,const Mat4d& mat,double screen_sz);
+	double get_size(void) const {return radius_max;}
 private:
-	float radius;
-	s_texture * tex;
+	const double radius_min;
+	const double radius_max;
+	const s_texture *tex;
 };
 
 

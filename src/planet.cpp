@@ -462,29 +462,22 @@ float Planet::get_on_screen_size(const Projector* prj, const Navigator * nav)
 // Draw the Planet and all the related infos : name, circle etc..
 void Planet::draw(Projector* prj, const Navigator * nav, const ToneReproductor* eye, int flag_point, bool stencil)
 {
-	if(hidden) return;
+	if (hidden) return;
 
 	Mat4d mat = mat_local_to_parent;
 	const Planet *p = parent;
-	while (p!=NULL && p->parent!=NULL)
+	while (p && p->parent)
 	{
 		//johannes			mat = p->mat_local_to_parent * mat;
 		mat = Mat4d::translation(p->ecliptic_pos) * mat;
 		p = p->parent;
-		if (p->parent)
-		{
-			// a satellite has no satellites
-			exit(128);
-		}
 	}
 
 	// This removed totally the Planet shaking bug!!!
 	mat = nav->get_helio_to_eye_mat() * mat;
 
-	if(this == nav->getHomePlanet()) {
-
-		// TODO: visual problems with this
-		if(rings) rings->draw(prj, mat);
+	if (this == nav->getHomePlanet()) {
+		if (rings) rings->draw(prj,mat,1000.0);
 		return;
 	}
 
@@ -516,16 +509,25 @@ void Planet::draw(Projector* prj, const Navigator * nav, const ToneReproductor* 
 
 		if (rings && screen_sz>1)
 		{
-			double dist = get_earth_equ_pos(nav).length();
+			const double dist = get_earth_equ_pos(nav).length();
 			double n,f;
-			prj->get_clipping_planes(&n, &f);	// Copy clipping planes
-			prj->set_clipping_planes(dist-rings->get_size()*2, dist+rings->get_size()*2);
+			prj->get_clipping_planes(&n,&f); // Save clipping planes
+			  // If z_near is too big, then Saturn and the rings are clipped
+			  // in perspective projection
+			  // when near the edge of the screen (home_planet=Hyperion).
+			  // If z_near is too small, the depth test does not work properly
+			  // when seen from great distance.
+			double z_near = dist-rings->get_size()*2;
+			if (z_near < 0.001) z_near = 0.0000001;
+			else if (z_near < 0.05) z_near *= 0.1;
+			else if (z_near < 0.5) z_near *= 0.5;
+			prj->set_clipping_planes(z_near, dist+rings->get_size()*10);
 			glClear(GL_DEPTH_BUFFER_BIT);
 			glEnable(GL_DEPTH_TEST);
-			draw_sphere(prj, mat, screen_sz);
-			rings->draw(prj, mat);
+			draw_sphere(prj,mat,screen_sz);
+			rings->draw(prj,mat,screen_sz);
 			glDisable(GL_DEPTH_TEST);
-			prj->set_clipping_planes(n ,f);	// Release old clipping planes
+			prj->set_clipping_planes(n,f);  // Restore old clipping planes
 		}
 		else
 		{
@@ -534,7 +536,7 @@ void Planet::draw(Projector* prj, const Navigator * nav, const ToneReproductor* 
 			if(stencil) glDisable(GL_STENCIL_TEST);
 		}
 
-		if(tex_halo)
+		if (tex_halo)
 		{
 			if (flag_point) draw_point_halo(nav, prj, eye);
 			else draw_halo(nav, prj, eye);
@@ -758,19 +760,25 @@ void Planet::draw_big_halo(const Navigator* nav, const Projector* prj, const Ton
 	prj->reset_perspective_projection();		// Restore the other coordinate
 }
 
-Ring::Ring(float _radius, const string& _texname) : radius(_radius), tex(NULL)
-{
-	tex = new s_texture(_texname,TEX_LOAD_TYPE_PNG_ALPHA);
+Ring::Ring(double radius_min,double radius_max,const string &texname)
+     :radius_min(radius_min),radius_max(radius_max) {
+	tex = new s_texture(texname,TEX_LOAD_TYPE_PNG_ALPHA);
 }
 
-Ring::~Ring()
-{
+Ring::~Ring(void) {
 	if (tex) delete tex;
 	tex = NULL;
 }
 
-void Ring::draw(const Projector* prj, const Mat4d& mat)
+void Ring::draw(const Projector* prj,const Mat4d& mat,double screen_sz)
 {
+	screen_sz -= 50;
+	screen_sz /= 500.0;
+	if (screen_sz < 0.0) screen_sz = 0.0;
+	else if (screen_sz > 1.0) screen_sz = 1.0;
+	const int slices = 64+(int)((256-64)*screen_sz);
+	const int stacks = 16+(int)((128-16)*screen_sz);
+
 	// Normal transparency mode
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	//glRotatef(axis_rotation + 180.,0.,0.,1.);
@@ -788,7 +796,7 @@ void Ring::draw(const Projector* prj, const Mat4d& mat)
 	const double h = mat.r[ 8]*mat.r[12]
 	               + mat.r[ 9]*mat.r[13]
 	               + mat.r[10]*mat.r[14];
-	prj->sDisk(radius,(h<0.0)?100:-100, 20, mat, 0);
+	prj->sRing(radius_min,radius_max,(h<0.0)?slices:-slices,stacks, mat, 0);
 	glDisable(GL_CULL_FACE);
 
 	/* old way
