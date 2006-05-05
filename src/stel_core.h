@@ -19,6 +19,10 @@
 #ifndef _STEL_CORE_H_
 #define _STEL_CORE_H_
 
+#define FontSizeCardinalPoints 30.
+#define FontSizeSolarSystem 14.
+#define FontSizeGeneral 12.
+
 #include <string>
 
 #include "navigator.h"

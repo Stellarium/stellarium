@@ -120,6 +120,10 @@ public:
 	/** Get stars limiting display magnitude */
 	float getStarLimitingMag(void) const {return limitingMag;}
 		
+	//! Define font file name and size to use for star names display
+	void setFont(float font_size, const string& font_name);
+
+
 private:
 	//! Draw the stars rendered as GLpoint. This may be faster but it is not so nice
 	void drawPoint(Vec3f equ_vision, ToneReproductor* _eye, Projector* prj);	// Draw all the stars as points
