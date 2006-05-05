@@ -136,11 +136,11 @@ void StelApp::init(void)
 	
 	if (StartupTimeMode=="preset" || StartupTimeMode=="Preset")
 		core->setJDay(PresetSkyTime - core->getObservatory().get_GMT_shift(PresetSkyTime) * JD_HOUR);
-	
+
 	// initialisation of the User Interface
 	ui->init(conf);
 	ui->init_tui();
-	
+
 	// Initialisation of the color scheme
 	draw_mode = StelApp::DM_NONE;  // fool caching
 	setVisionModeNormal();
@@ -150,12 +150,13 @@ void StelApp::init(void)
     if (distorter == 0) {
       setViewPortDistorterType(conf.get_str("video","distorter","none"));
     }
-    
+
     core->setTimeNow();
 
 	// play startup script, if available
 	if(scripts) scripts->play_startup_script();
 
+	initialized = 1;
 }
 
 void StelApp::update(int delta_time)

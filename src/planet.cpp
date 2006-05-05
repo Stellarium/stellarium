@@ -97,10 +97,10 @@ wstring Planet::getInfoString(const Navigator * nav) const
 	double tempDE, tempRA;
 	wostringstream oss;
 
-	oss << nameI18;
+	oss << _(englishName);  // UI translation can differ from sky translation
 	oss.setf(ios::fixed);
 	oss.precision(1);
-	if (sphere_scale != 1.f) oss << sphere_scale;
+	if (sphere_scale != 1.f) oss << L" (x" << sphere_scale << L")";
 	oss << endl;
 
 	oss.precision(2);
@@ -122,8 +122,8 @@ wstring Planet::getInfoString(const Navigator * nav) const
 	return oss.str();
 }
 
-// Return the information string "ready to print" :)
-wstring Planet::getShortInfoString(const Navigator * nav) const
+//! Get sky label (sky translation)
+wstring Planet::getSkyLabel(const Navigator * nav) const
 {
 	wstring ws = nameI18;
 	ostringstream oss;
@@ -135,6 +135,28 @@ wstring Planet::getShortInfoString(const Navigator * nav) const
 		ws += StelUtility::stringToWstring(oss.str());
 	}
 	return ws;
+}
+
+
+// Return the information string "ready to print" :)
+wstring Planet::getShortInfoString(const Navigator * nav) const
+{
+	wostringstream oss;
+
+	oss << _(englishName);  // UI translation can differ from sky translation
+
+	oss.setf(ios::fixed);
+	oss.precision(1);
+	if (sphere_scale != 1.f) oss << L" (x" << sphere_scale << L")";
+
+	oss.precision(2);
+	oss << L"  " << _("Magnitude: ") << compute_magnitude(nav->get_observer_helio_pos());
+
+	Vec3d equPos = get_earth_equ_pos(nav);
+	oss.precision(5);
+	oss << L"  " <<  _("Distance: ") << equPos.length() << _("AU");
+
+	return oss.str();
 }
 
 double Planet::get_close_fov(const Navigator* nav) const
@@ -540,8 +562,8 @@ void Planet::draw_hints(const Navigator* nav, const Projector* prj)
 	glColor4f(label_color[0], label_color[1], label_color[2],hint_fader.getInterstate());
 
 	prj->getFlagGravityLabels() ? 
-		prj->print_gravity180(planet_name_font, screenPos[0],screenPos[1], getShortInfoString(nav), 1, tmp, tmp) :
-		planet_name_font->print(screenPos[0]+tmp,screenPos[1]+tmp, getShortInfoString(nav));
+		prj->print_gravity180(planet_name_font, screenPos[0],screenPos[1], getSkyLabel(nav), 1, tmp, tmp) :
+		planet_name_font->print(screenPos[0]+tmp,screenPos[1]+tmp, getSkyLabel(nav));
 
 	// hint disapears smoothly on close view
 	tmp -= 10.f;

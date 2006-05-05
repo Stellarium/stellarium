@@ -165,6 +165,7 @@ void StelCore::init(const InitParser& conf)
 	setPlanetsSelected("");	// Fix a bug on macosX! Thanks Fumio!
 
 	string skyLocaleName = conf.get_str("localization", "sky_locale", "system");
+	constellationFontSize = conf.get_double("viewing","constellation_font_size",FontSizeConstellations);
 	setSkyLanguage(skyLocaleName);	
 	
 	// Star section
@@ -221,7 +222,6 @@ void StelCore::init(const InitParser& conf)
 	setFlagConstellationIsolateSelected(conf.get_boolean("viewing", "flag_constellation_isolate_selected",conf.get_boolean("viewing", "flag_constellation_pick", 0)));
 	setConstellationArtIntensity(conf.get_double("viewing","constellation_art_intensity", 0.5));
 	setConstellationArtFadeDuration(conf.get_double("viewing","constellation_art_fade_duration",2.));
-	setConstellationFontSize(conf.get_double("viewing","constellation_font_size",16.));
 
 	setFlagAzimutalGrid(conf.get_boolean("viewing:flag_azimutal_grid"));
 	setFlagEquatorGrid(conf.get_boolean("viewing:flag_equatorial_grid"));
@@ -710,10 +710,11 @@ void StelCore::setSkyLanguage(const std::string& newSkyLocaleName)
 	getFontForLocale(oldLocale, oldFontFile, oldFontScale);
 	getFontForLocale(newSkyLocaleName, newFontFile, newFontScale);
 
-	if(oldFontFile != newFontFile || oldFontScale != newFontScale) {
-
+	// If font has changed or init is being called for first time...
+	if(oldFontFile != newFontFile || oldFontScale != newFontScale || firstTime) {
+		
 		cardinals_points->set_font(FontSizeCardinalPoints*newFontScale, newFontFile);
-		asterisms->setFont(FontSizeConstellations*newFontScale, newFontFile);
+		asterisms->setFont(constellationFontSize*newFontScale, newFontFile);  // size is read from config
 		ssystem->setFont(FontSizeSolarSystem*newFontScale, newFontFile);
 		// not translating yet
 		//		nebulas->setFont(FontSizeGeneral, font);
