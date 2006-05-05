@@ -290,9 +290,10 @@ void SolarSystem::load(const string& planetfile)
 		    pd.get_double(secname, "sidereal_period",0.) );
 
 
-		if (pd.get_boolean(secname, "rings", 0))
-		{
-			Ring* r = new Ring(pd.get_double(secname, "ring_size")/AU, pd.get_str(secname, "tex_ring"));
+		if (pd.get_boolean(secname, "rings", 0)) {
+			const double r_min = pd.get_double(secname, "ring_inner_size")/AU;
+			const double r_max = pd.get_double(secname, "ring_outer_size")/AU;
+			Ring *r = new Ring(r_min,r_max,pd.get_str(secname, "tex_ring"));
 			p->set_rings(r);
 		}
 
