@@ -697,9 +697,33 @@ void StelCore::setSkyLanguage(const std::string& newSkyLocaleName)
 {
 	if( !hip_stars || !cardinals_points || !asterisms) return; // objects not initialized yet
 
+	string oldLocale = getSkyLanguage();
+
 	// Update the translator with new locale name
 	skyTranslator = Translator(PACKAGE, getLocaleDir(), newSkyLocaleName);
 	// cout << "Sky locale is " << skyTranslator.getLocaleName() << endl;
+
+	// see if fonts need to change
+	string oldFontFile, newFontFile;
+	float oldFontScale, newFontScale;
+
+	getFontForLocale(oldLocale, oldFontFile, oldFontScale);
+	getFontForLocale(newSkyLocaleName, newFontFile, newFontScale);
+
+	if(oldFontFile != newFontFile || oldFontScale != newFontScale) {
+
+		cardinals_points->set_font(FontSizeCardinalPoints*newFontScale, newFontFile);
+		asterisms->setFont(FontSizeConstellations*newFontScale, newFontFile);
+		ssystem->setFont(FontSizeSolarSystem*newFontScale, newFontFile);
+		// not translating yet
+		//		nebulas->setFont(FontSizeGeneral, font);
+		hip_stars->setFont(FontSizeGeneral*newFontScale, newFontFile);
+
+		// TODO: TUI short info font needs updating also
+		// TEST - need different fixed font
+		// ui->setFonts(newFontScale, newFontFile, newFontScale, newFontFile);
+
+	}
 
 	// Translate all labels with the new language
 	cardinals_points->translateLabels(skyTranslator);
@@ -707,23 +731,6 @@ void StelCore::setSkyLanguage(const std::string& newSkyLocaleName)
 	ssystem->translateNames(skyTranslator);
 	nebulas->translateNames(skyTranslator);
 	hip_stars->translateNames(skyTranslator);
-
-	return;
-
-	// TEMPORARY FOR TESTING  
-	// TODO: Create locale to font/font size mapping table/code
-	if(newSkyLocaleName == "zh_HK") {
-		float scale = 1.4;
-		string font = getDataDir() + "ukai.ttf";
-		cardinals_points->set_font(FontSizeCardinalPoints*scale, font);
-		asterisms->setFont(FontSizeGeneral*scale, font);
-		ssystem->setFont(FontSizeSolarSystem*scale, font);
-		// not translating yet
-		//		nebulas->setFont(FontSizeGeneral, font);
-		hip_stars->setFont(FontSizeGeneral*scale, font);
-
-		// TODO: TUI short info font needs updating also
-	}
 
 }
 
@@ -1116,3 +1123,22 @@ vector<wstring> StelCore::listMatchingObjectsI18n(const wstring& objPrefix, unsi
 	
 	return result;
 }
+
+
+//! TESTING
+//! font file and scaling to use for a given locale
+// TODO: Need a fixed font version too
+void StelCore::getFontForLocale(const string &_locale, string &_FontFile, float &_fontScale) {
+
+	// TODO: Retrieve from file
+	if(_locale.substr(0,2) == "zh") {
+		_FontFile = getDataDir() + "ukai.ttf";
+		_fontScale = 1.2;
+	} else {
+		_FontFile = baseFontFile;
+		_fontScale = 1.;
+	}
+
+}
+
+

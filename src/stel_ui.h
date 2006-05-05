@@ -77,6 +77,8 @@ public:
 	bool getFlagShowTuiDateTime() { return FlagShowTuiDateTime; }
 	bool getFlagShowTuiShortObjInfo() { return FlagShowTuiShortObjInfo; }
 
+	void setFonts(float _baseSize, string &_baseFile, float _fixedSize, string &_fixedFile);
+
 private:
 	StelCore * core;		// The main core can be accessed because StelUI is a friend class (TODO fix that)
 	StelApp * app;			// The main application instance

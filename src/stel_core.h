@@ -22,6 +22,7 @@
 #define FontSizeCardinalPoints 30.
 #define FontSizeSolarSystem 14.
 #define FontSizeGeneral 12.
+#define FontSizeConstellations 16.
 
 #include <string>
 
@@ -587,6 +588,7 @@ public:
 	double getZoomSpeed() { return zoom_speed; }
 	float getAutoMoveDuration() { return auto_move_duration; }
 
+	void getFontForLocale(const string &_locale, string &_FontFile, float &_fontScale);
 
 private:
 	//! Select passed object
