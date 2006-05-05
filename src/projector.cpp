@@ -477,8 +477,9 @@ void Projector::sRing(GLdouble r_min, GLdouble r_max,
   }
 
   // draw intermediate stacks as quad strips
-  for (double r = r_min; r <= r_max; r+=dr) {
-    const float tex_r = (r-r_min)/(r_max-r_min);
+  for (double r = r_min; r < r_max; r+=dr) {
+    const float tex_r0 = (r-r_min)/(r_max-r_min);
+    const float tex_r1 = (r+dr-r_min)/(r_max-r_min);
     glBegin(GL_TRIANGLE_STRIP);
     for (j=0,cos_sin_theta_p=cos_sin_theta;
          j<=slices;
@@ -487,12 +488,12 @@ void Projector::sRing(GLdouble r_min, GLdouble r_max,
       x = r*cos_sin_theta_p[0];
       y = r*cos_sin_theta_p[1];
       glNormal3f(0, 0, nsign);
-      glTexCoord2f(tex_r, 0.5);
+      glTexCoord2f(tex_r0, 0.5);
       sVertex3(x, y, 0, mat);
       x = (r+dr)*cos_sin_theta_p[0];
       y = (r+dr)*cos_sin_theta_p[1];
       glNormal3f(0, 0, nsign);
-      glTexCoord2f(tex_r, 0.5);
+      glTexCoord2f(tex_r1, 0.5);
       sVertex3(x, y, 0, mat);
     }
     glEnd();
