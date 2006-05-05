@@ -655,3 +655,13 @@ vector<wstring> HipStarMgr::listMatchingObjectsI18n(const wstring& objPrefix, un
 	
 	return result;
 }
+
+
+//! Define font file name and size to use for star names display
+void HipStarMgr::setFont(float font_size, const string& font_name) {
+
+	if (HipStar::starFont) delete HipStar::starFont;
+	HipStar::starFont = new s_font(font_size, font_name);
+	assert(HipStar::starFont);
+
+}

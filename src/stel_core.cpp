@@ -107,7 +107,7 @@ void StelCore::init(const InitParser& conf)
 	// Init the solar system first
 	if(firstTime) ssystem->load(getDataDir() + "ssystem.ini");
 	
- 	ssystem->setFont(14.f, baseFontFile);
+ 	ssystem->setFont(FontSizeSolarSystem, baseFontFile);
 	setPlanetsScale(getStarScale());
 
 	observatory->load(conf, "init_location");
@@ -117,20 +117,20 @@ void StelCore::init(const InitParser& conf)
 
 	// Load hipparcos stars & names
 	if(firstTime) {
-		LoadingBar lb(projection, 12., baseFontFile, "logo24bits.png", getViewportWidth(), getViewportHeight(), StelUtility::stringToWstring(VERSION), 45, 320, 121);
-		hip_stars->init(12.f, baseFontFile, getDataDir() + "hipparcos.fab", getDataDir() + "sky_cultures/western/star_names.fab", getDataDir() + "name.fab", lb);
+		LoadingBar lb(projection, FontSizeGeneral, baseFontFile, "logo24bits.png", getViewportWidth(), getViewportHeight(), StelUtility::stringToWstring(VERSION), 45, 320, 121);
+		hip_stars->init(FontSizeGeneral, baseFontFile, getDataDir() + "hipparcos.fab", getDataDir() + "sky_cultures/western/star_names.fab", getDataDir() + "name.fab", lb);
 
 		// Init nebulas
-		if(firstTime) nebulas->read(12., baseFontFile, getDataDir() + "ngc2000.dat", getDataDir() + "ngc2000names.dat", getDataDir() + "nebula_textures.fab", lb);
+		if(firstTime) nebulas->read(FontSizeGeneral, baseFontFile, getDataDir() + "ngc2000.dat", getDataDir() + "ngc2000names.dat", getDataDir() + "nebula_textures.fab", lb);
 	}
 
 	// Init fonts : should be moved into the constructor
-	equ_grid->set_font(12., baseFontFile);
-	azi_grid->set_font(12., baseFontFile);
-	equator_line->set_font(12, baseFontFile);
-	ecliptic_line->set_font(12, baseFontFile);
-	meridian_line->set_font(12, baseFontFile);
-	cardinals_points->set_font(30., baseFontFile);
+	equ_grid->set_font(FontSizeGeneral, baseFontFile);
+	azi_grid->set_font(FontSizeGeneral, baseFontFile);
+	equator_line->set_font(FontSizeGeneral, baseFontFile);
+	ecliptic_line->set_font(FontSizeGeneral, baseFontFile);
+	meridian_line->set_font(FontSizeGeneral, baseFontFile);
+	cardinals_points->set_font(FontSizeCardinalPoints, baseFontFile);
 
 	// Init milky way
 	if(firstTime) milky_way->set_texture("milkyway.png");
@@ -664,7 +664,7 @@ void StelCore::setSkyCultureDir(const string& cultureDir)
 
 	if(!asterisms) return;
 
-	LoadingBar lb(projection, 12., baseFontFile, "logo24bits.png", getViewportWidth(), getViewportHeight(), StelUtility::stringToWstring(VERSION), 45, 320, 121);
+	LoadingBar lb(projection, FontSizeGeneral, baseFontFile, "logo24bits.png", getViewportWidth(), getViewportHeight(), StelUtility::stringToWstring(VERSION), 45, 320, 121);
 
 	asterisms->loadLinesAndArt(getDataDir() + "sky_cultures/" + skyCultureDir + "/constellationship.fab",
 	                           getDataDir() + "sky_cultures/" + skyCultureDir + "/constellationsart.fab", getDataDir() + "constellations_boundaries.dat", lb);
@@ -707,6 +707,24 @@ void StelCore::setSkyLanguage(const std::string& newSkyLocaleName)
 	ssystem->translateNames(skyTranslator);
 	nebulas->translateNames(skyTranslator);
 	hip_stars->translateNames(skyTranslator);
+
+	return;
+
+	// TEMPORARY FOR TESTING  
+	// TODO: Create locale to font/font size mapping table/code
+	if(newSkyLocaleName == "zh_HK") {
+		float scale = 1.4;
+		string font = getDataDir() + "ukai.ttf";
+		cardinals_points->set_font(FontSizeCardinalPoints*scale, font);
+		asterisms->setFont(FontSizeGeneral*scale, font);
+		ssystem->setFont(FontSizeSolarSystem*scale, font);
+		// not translating yet
+		//		nebulas->setFont(FontSizeGeneral, font);
+		hip_stars->setFont(FontSizeGeneral*scale, font);
+
+		// TODO: TUI short info font needs updating also
+	}
+
 }
 
 
@@ -733,7 +751,7 @@ void StelCore::setColorScheme(const string& skinFile, const string& section)
 	//azi_grid->set_top_transparancy(draw_mode==DM_NORMAL);
 	equator_line->set_color(StelUtility::str_to_vec3f(conf.get_str(section,"equator_color", defaultColor)));
 	ecliptic_line->set_color(StelUtility::str_to_vec3f(conf.get_str(section,"ecliptic_color", defaultColor)));
-	meridian_line->set_font(12, baseFontFile);
+	meridian_line->set_font(FontSizeGeneral, baseFontFile);
 	meridian_line->set_color(StelUtility::str_to_vec3f(conf.get_str(section,"meridian_color", defaultColor)));
 	cardinals_points->set_color(StelUtility::str_to_vec3f(conf.get_str(section,"cardinal_color", defaultColor)));
 	asterisms->setLineColor(StelUtility::str_to_vec3f(conf.get_str(section,"const_lines_color", defaultColor)));
