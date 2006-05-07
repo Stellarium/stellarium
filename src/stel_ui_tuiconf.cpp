@@ -57,14 +57,14 @@ void StelUI::draw_gravity_ui(void)
 		if (FlagShowFps) os << L"  FPS " << app->fps;
 
 		glColor3f(0.5,1,0.5);
-		core->printGravity(baseFont, x-shift + 38, y - 38, os.str(), 0);
+		core->printGravity(tuiFont, x-shift + 38, y - 38, os.str(), 0);
 	}
 
 	if (core->getFlagHasSelected() && FlagShowTuiShortObjInfo)
 	{
 	    wstring info = core->getSelectedObjectShortInfo();
 		glColor3fv(core->getSelectedObjectInfoColor());
-		core->printGravity(baseFont, x - 38, y+shift - 38, info, 0);
+		core->printGravity(tuiFont, x - 38, y+shift - 38, info, 0);
 	}
 }
 
@@ -79,6 +79,20 @@ void StelUI::init_tui(void)
 
 	// If already initialized before, delete existing objects
 	if(tui_root) delete tui_root;
+	if(tuiFont) delete tuiFont;
+
+	// Load standard font based on app locale
+	string fontFile = BaseFontName;
+	float fontScale;
+
+	core->getFontForLocale(app->getAppLanguage(), fontFile, fontScale);
+
+	tuiFont = new s_font(BaseFontSize*fontScale, fontFile);
+	if (!tuiFont)
+	{
+		printf("ERROR WHILE CREATING FONT\n");
+		exit(-1);
+	}
 
 	tui_root = new s_tui::Branch();
 
@@ -271,7 +285,7 @@ void StelUI::draw_tui(void)
 	// If locale has changed, rebuild TUI with new translated text
 	if(LocaleChanged) {
 		cout << "Reloading TUI due to locale change\n";
-		init_tui();
+		init_tui(); 
 
 		// THIS IS A HACK, but lacking time for a better solution:
 		// go back to the locale menu, where user left off
@@ -288,6 +302,8 @@ void StelUI::draw_tui(void)
 		handle_keys_tui(SDLK_RIGHT, s_tui::S_TUI_PRESSED);
 		handle_keys_tui(SDLK_RIGHT, s_tui::S_TUI_RELEASED);
 
+		// TODO: need way to reinit and preserve tui state
+		
 	}
 
 	// Normal transparency mode
@@ -301,7 +317,7 @@ void StelUI::draw_tui(void)
 	if (tui_root)
 	{
 		glColor3f(0.5,1,0.5);
-		core->printGravity(baseFont, x+shift - 30, y-shift + 38, s_tui::stop_active + tui_root->getString(), 0);
+		core->printGravity(tuiFont, x+shift - 30, y-shift + 38, s_tui::stop_active + tui_root->getString(), 0);
 	}
 }
 
