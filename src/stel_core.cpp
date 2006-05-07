@@ -1136,7 +1136,7 @@ void StelCore::getFontForLocale(const string &_locale, string &_FontFile, float 
 		_FontFile = getDataDir() + "ukai.ttf";
 		_fontScale = 1.2;
 	} else {
-		_FontFile = baseFontFile;
+		_FontFile = getDataDir() + "DejaVuSans.ttf";
 		_fontScale = 1.;
 	}
 
