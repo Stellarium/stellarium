@@ -32,6 +32,7 @@
 StelUI::StelUI(StelCore * _core, StelApp * _app) :
 		baseFont(NULL),
 		courierFont(NULL),
+		tuiFont(NULL),
 
 		FlagHelp(false), FlagInfos(false), FlagConfig(false), FlagSearch(false), FlagShowTuiMenu(0),
 
@@ -97,6 +98,7 @@ StelUI::~StelUI()
 	delete baseTex; 	baseTex = NULL;
 	delete flipBaseTex; flipBaseTex = NULL;
 	delete courierFont; courierFont = NULL;
+	delete tuiFont; tuiFont = NULL;
 	delete tex_up; tex_up = NULL;
 	delete tex_down; tex_down = NULL;
 	if (tui_root) delete tui_root; tui_root=NULL;
@@ -1299,24 +1301,5 @@ void StelUI::setColorScheme(const string& skinFile, const string& section)
 	s_color GuiTextColor		= StelUtility::str_to_vec3f(conf.get_str(section, "gui_text_color", "0.7,0.8,0.9"));
 	
 	desktop->setColorScheme(GuiBaseColor, GuiTextColor);
-}
-
-//! Set the fonts used 
-//! Scale is applied to config basefontsize, basecfontsize
-void StelUI::setFonts(float _baseScale, string &_baseFile, float _fixedScale, string &_fixedFile) {
-
-	cerr << "ERROR: UI fonts can't be changed on the fly yet\n";
-	return;
-
-
-	// causes segfaults due to dangling references to old font object from ui objects
-	if (baseFont) delete baseFont;
-	baseFont = new s_font(BaseFontSize*_baseScale, _baseFile);
-	assert(baseFont);
-
-	if (courierFont) delete courierFont;
-	courierFont = new s_font(BaseCFontSize*_fixedScale, _fixedFile);
-	assert(courierFont);
-
 }
 

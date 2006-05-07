@@ -77,8 +77,6 @@ public:
 	bool getFlagShowTuiDateTime() { return FlagShowTuiDateTime; }
 	bool getFlagShowTuiShortObjInfo() { return FlagShowTuiShortObjInfo; }
 
-	void setFonts(float _baseSize, string &_baseFile, float _fixedSize, string &_fixedFile);
-
 private:
 	StelCore * core;		// The main core can be accessed because StelUI is a friend class (TODO fix that)
 	StelApp * app;			// The main application instance
@@ -86,6 +84,7 @@ private:
 	bool initialised;
 	s_font * baseFont;		// The standard font
 	s_font * courierFont;	// The standard fixed size font
+	s_font * tuiFont;		// The standard tui font - separate from gui so can reload on the fly
 	s_texture * baseTex;	// The standard fill texture
 	s_texture * flipBaseTex;	// The standard fill texture
 	s_texture * tex_up;		// Up arrow texture
