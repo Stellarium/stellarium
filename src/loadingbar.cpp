@@ -24,9 +24,9 @@ LoadingBar::LoadingBar(Projector* _prj, float font_size, const string& font_name
 	float extraTextPosx, float extraTextPosy) :
 	prj(_prj), width(512), height(512), barwidth(400), barheight(10), extraText(extraTextString)
 {
-	splashx = (screenw - width)/2;
-	splashy = (screenh - height)/2;
-	barx = (screenw - barwidth)/2;
+	splashx = prj->getViewportPosX() + (screenw - width)/2;
+	splashy = prj->getViewportPosY() + (screenh - height)/2;
+	barx = prj->getViewportPosX() + (screenw - barwidth)/2;
 	bary = splashy + 34;
 	barfont = new s_font(font_size, font_name);
 	extraTextFont = new s_font(extraTextSize, font_name);

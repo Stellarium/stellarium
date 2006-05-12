@@ -173,7 +173,7 @@ bool Image::update(int delta_time) {
 
 }
 
-void Image::draw(int screenw, int screenh, const Navigator * nav, Projector * prj) {
+void Image::draw(const Navigator * nav, Projector * prj) {
 
   if(image_ratio < 0 || image_alpha == 0) return;
 
@@ -190,8 +190,8 @@ void Image::draw(int screenw, int screenh, const Navigator * nav, Projector * pr
   glBindTexture(GL_TEXTURE_2D, image_tex->getID());
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-  float cx = screenw/2.f;
-  float cy = screenh/2.f;
+  float cx = vieww/2.f + prj->getViewportPosX();
+  float cy = viewh/2.f + prj->getViewportPosY();
 
   // calculations to keep image proportions when scale up to fit view
   float prj_ratio = (float)vieww/viewh;   

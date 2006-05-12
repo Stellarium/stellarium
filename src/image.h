@@ -47,7 +47,7 @@ class Image
   void set_rotation(float rotation, float duration);
   void set_location(float xpos, bool deltax, float ypos, bool deltay, float duration);
   bool update(int delta_time);  // update properties
-  void draw(int screenw, int screenh, const Navigator * nav, Projector * prj);
+  void draw(const Navigator * nav, Projector * prj);
   string get_name() { return image_name; };
   bool image_loaded() { return (image_ratio != -1); }  // was texture loaded from disk?
 

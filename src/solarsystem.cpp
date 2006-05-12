@@ -426,7 +426,9 @@ void SolarSystem::draw(Projector * prj, const Navigator * nav, const ToneReprodu
 
 	// special case: draw earth shadow over moon if appropriate
 	// stencil buffer is set up in moon drawing above
-	draw_earth_shadow(nav, prj);
+	// This effect curently only looks right from earth viewpoint
+	if(nav->getHomePlanet()->getEnglishName() == "Earth") 
+		draw_earth_shadow(nav, prj);
 
 }
 

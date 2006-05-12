@@ -1,0 +1,17 @@
+# This file defines what font Stellarium should use for a given locale
+# 
+# Format is: locale font_file font_scale fixed_width_font_file fixed_width_font_scale
+# Font files must be ttf format, located in the data directory
+#
+# Default font
+#
+default	DejaVuSans.ttf	1	DejaVuSansMono.ttf	1
+#
+# Overrides per locale
+#
+zh_HK	ukai.ttf	1.2	ukai.ttf	1.2
+zh_TW	ukai.ttf	1.2	ukai.ttf	1.2
+zh_CN	ukai.ttf	1.2	ukai.ttf	1.2
+ja	ukai.ttf	1.2	ukai.ttf	1.2
+
+

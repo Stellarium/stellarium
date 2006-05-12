@@ -19,6 +19,7 @@
  */
 
 #include "viewport_distorter.h"
+#include "stel_core.h"
 #include "spheric_mirror_calculator.h"
 #include "init_parser.h"
 
@@ -37,7 +38,8 @@ private:
 class ViewportDistorterFisheyeToSphericMirror : public ViewportDistorter {
 private:
   friend class ViewportDistorter;
-  ViewportDistorterFisheyeToSphericMirror(int screenW,int screenH);
+  ViewportDistorterFisheyeToSphericMirror(int screenW,int screenH,
+                                          StelCore *core);
   ~ViewportDistorterFisheyeToSphericMirror(void);
   string getType(void) const {return "fisheye_to_spheric_mirror";}
   void init(const InitParser &conf);
@@ -60,8 +62,16 @@ private:
 
 
 ViewportDistorterFisheyeToSphericMirror
-   ::ViewportDistorterFisheyeToSphericMirror(int screenW,int screenH)
+   ::ViewportDistorterFisheyeToSphericMirror(int screenW,int screenH,
+                                             StelCore *core)
     :screenW(screenW),screenH(screenH),trans_array(0) {
+  if (core->getProjectionType() == "fisheye") {
+    core->setMaxFov(175.0);
+  } else {
+    cerr << "ViewportDistorterFisheyeToSphericMirror: "
+         << "what are you doing? the projection type should be fisheye."
+         << endl;
+  }
   viewport_wh = (screenW < screenH) ? screenW : screenH;
   int texture_wh = 1;
   while (texture_wh < viewport_wh) texture_wh <<= 1;
@@ -103,7 +113,7 @@ void ViewportDistorterFisheyeToSphericMirror::init(const InitParser &conf) {
       v[2] = -h;
       const double oneoverh = 1./sqrt(v[0]*v[0]+v[1]*v[1]);
       const double a = 0.5 + atan(v[2]*oneoverh)/M_PI; // range: [0..1]
-      double f = a* 180.0/175.0; // MAX_FOV=175 for fisheye
+      double f = a* 180.0/175.0; // MAX_FOV=175.0 for fisheye
       f *= oneoverh;
       double x = (0.5 + v[0] * f);
       double y = (0.5 + v[1] * f);
@@ -214,9 +224,10 @@ void ViewportDistorterFisheyeToSphericMirror::distort(void) const {
 }
 
 ViewportDistorter *ViewportDistorter::create(const string &type,
-                                             int width,int height) {
+                                             int width,int height,
+                                             StelCore *core) {
   if (type == "fisheye_to_spheric_mirror") {
-    return new ViewportDistorterFisheyeToSphericMirror(width,height);
+    return new ViewportDistorterFisheyeToSphericMirror(width,height,core);
   }
   return new ViewportDistorterDummy;
 }

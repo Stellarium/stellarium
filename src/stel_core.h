@@ -46,6 +46,8 @@
 #include "loadingbar.h"
 #include "image_mgr.h"
 
+class StelApp;
+
 //!  @brief Main class for stellarium core processing. 
 //!  
 //! Manage all the objects to be used in the program. 
@@ -59,7 +61,7 @@ public:
 	enum MOUNT_MODE { MOUNT_ALTAZIMUTAL, MOUNT_EQUATORIAL };
 
 	// Inputs are the locale directory and root directory
-    StelCore(const string& LDIR, const string& DATA_ROOT);
+    StelCore(const string& LDIR, const string& DATA_ROOT, StelApp * _app);
     virtual ~StelCore();
 	
 	//! Init and load all main core components from the passed config file.
@@ -95,6 +97,8 @@ public:
 	
 	//! Get the I18 available sky culture names
 	wstring getSkyCultureListI18() const {return skyloc->getSkyCultureListI18();}
+
+	wstring getSkyCultureHash() const {return skyloc->getSkyCultureHash();}
 	
 	//! Set the landscape
 	void setLandscape(const string& new_landscape_name);
@@ -165,6 +169,9 @@ public:
 	
 	//! Set the current FOV (in degree)
 	void setFov(double f) {projection->set_fov(f);}
+	
+	//! Set the maximum FOV (in degree)
+	void setMaxFov(double f) {projection->setMaxFov(f);}
 	
 	//! Go and zoom temporarily to the selected object.
 	void autoZoomIn(float move_duration = 1.f, bool allow_manual_zoom = 1);
@@ -430,9 +437,27 @@ public:
 	bool getFlagCardinalsPoints(void) const {return cardinals_points->getFlagShow();}
 	
 	//! Set Cardinals Points color
-	void setColorCardinalPoints(const Vec3f& v) {cardinals_points->set_color(v);}
+	void setColorCardinalPoints(const Vec3f& v) {cardinals_points->setColor(v);}
 	//! Get Cardinals Points color
 	Vec3f getColorCardinalPoints(void) const {return cardinals_points->get_color();}
+
+	///////////////////////////////////////////////////////////////////////////////////////
+	// Colors
+
+	void setColorConstellationBoundaries(const Vec3f& v) { asterisms->setBoundaryColor(v);}
+	// void setColorStarNames(const Vec3f& v) { hip_stars->setLabelColor(v);}			
+	// void setColorStarCircles(const Vec3f& v) { hip_stars->setCircleColor(v);}			
+	void setColorPlanetsOrbits(const Vec3f& v) { ssystem->setOrbitColor(v);}
+	void setColorPlanetsNames(const Vec3f& v) { ssystem->setLabelColor(v);}
+	void setColorPlanetsTrails(const Vec3f& v) { ssystem->setTrailColor(v);}			
+	void setColorAzimutalGrid(const Vec3f& v) { azi_grid->setColor(v);}
+	void setColorEquatorGrid(const Vec3f& v) { equ_grid->setColor(v);}
+	void setColorEquatorLine(const Vec3f& v) { equator_line->setColor(v);}
+	void setColorEclipticLine(const Vec3f& v) { ecliptic_line->setColor(v);}
+	void setColorMeridianLine(const Vec3f& v) { meridian_line->setColor(v);}
+	void setColorNebulaLabels(const Vec3f& v) { nebulas->setLabelColor(v);}
+	void setColorNebulaCircle(const Vec3f& v) { nebulas->setCircleColor(v);}
+
 	
 	///////////////////////////////////////////////////////////////////////////////////////
 	// Projection	
@@ -586,7 +611,8 @@ public:
 	double getZoomSpeed() { return zoom_speed; }
 	float getAutoMoveDuration() { return auto_move_duration; }
 
-	void getFontForLocale(const string &_locale, string &_FontFile, float &_fontScale);
+	void getFontForLocale(const string &_locale, string &_fontFile, float &_fontScale,
+						  string &_fixedFontFile, float &_fixedFontScale);
 
 private:
 	//! Select passed object
@@ -608,7 +634,9 @@ private:
 	string localeDir;					// The directory containing the translation .mo file
 	string skyCultureDir;				// The directory containing data for the culture used for constellations, etc.. 
 	Translator skyTranslator;			// The translator used for astronomical object naming
-		
+
+	StelApp *app;                       // Required for command recording and other methods currently in stelapp
+
 	// Main elements of the program
 	Navigator * navigation;				// Manage all navigation parameters, coordinate transformations etc..
 	Observator * observatory;			// Manage observer position

@@ -25,11 +25,15 @@
 
 using namespace std;
 
+class StelCore;
 class InitParser;
 
 class ViewportDistorter {
 public:
-  static ViewportDistorter *create(const string &type,int width,int height);
+  static ViewportDistorter *create(const string &type,
+                                   int width,int height,
+                                   StelCore *core);
+    // StelCore is needed for getProjectionType and setMaxFov
   virtual ~ViewportDistorter(void) {}
   virtual string getType(void) const = 0;
   virtual void init(const InitParser &conf) = 0;

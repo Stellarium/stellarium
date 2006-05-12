@@ -1,6 +1,6 @@
 /*
  * Stellarium
- * This file Copyright (C) 2004 Robert Spearman
+ * This file Copyright (C) 2004-2006 Robert Spearman
  * 
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -80,6 +80,21 @@ wstring SkyLocalizer::getSkyCultureListI18(void)
 	//wcout << cultures << endl;
 	return cultures;
 }
+
+//! returns newline delimited hash of human readable culture names translated to current locale
+//! and the directory names
+wstring SkyLocalizer::getSkyCultureHash(void)
+{
+	wstring cultures;
+	for ( stringHashIter_t iter = dirToNameEnglish.begin(); iter != dirToNameEnglish.end(); ++iter )
+	{
+		cultures += _(iter->second);
+		cultures += wstring(L"\n") + StelUtility::stringToWstring(iter->first) + L"\n";
+	}
+	//wcout << cultures << endl;
+	return cultures;
+}
+
 
 string SkyLocalizer::directoryToSkyCultureEnglish(const string& directory)
 {
