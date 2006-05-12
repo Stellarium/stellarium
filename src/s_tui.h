@@ -137,6 +137,8 @@ namespace s_tui
 		virtual bool onKey(Uint16, S_TUI_VALUE);
 		virtual wstring getString(void);
 		virtual bool isEditable(void) const {return true;}
+		void setLabel(const wstring& _label, const wstring& _active, const wstring& _disabled) 
+		{label = _label; string_activated=_active; string_disabled=_disabled;}
     protected:
 		wstring label;
     };
@@ -162,6 +164,7 @@ namespace s_tui
 		virtual wstring getString(void);
 		virtual bool isEditable(void) const {return true;}
 		virtual bool onKey(Uint16, S_TUI_VALUE);
+		void setLabel(const wstring& _label) {label = _label;}
     protected:
 		bool numInput;
 		wstring strInput;
@@ -178,6 +181,7 @@ namespace s_tui
 		virtual wstring getString(void);
 		virtual bool isEditable(void) const {return true;}
 		virtual bool onKey(Uint16, S_TUI_VALUE);
+		void setLabel(const wstring& _label) {label = _label;}
     protected:
 		bool numInput;
 		wstring strInput;
@@ -223,6 +227,7 @@ namespace s_tui
 		virtual wstring getString(void);
 		virtual bool isEditable(void) const {return true;}
 		wstring getLabel(void) const {return label;}
+		void setLabel(const wstring& _label) {label = _label;}
     protected:
 		wstring label;
 		bool isNavigating;
@@ -256,6 +261,7 @@ namespace s_tui
 		virtual bool isEditable(void) const {return true;}
 		double getJDay(void) const {return JD;}
 		void setJDay(double jd) {JD = jd;}
+		void setLabel(const wstring& _label) {label = _label;}
     protected:
 		void compute_ymdhms(void);
 		void compute_JD(void);
@@ -277,6 +283,7 @@ namespace s_tui
 		virtual bool onKey(Uint16, S_TUI_VALUE);
 		virtual wstring getString(void);
 		virtual bool isEditable(void) const {return true;}
+		void setLabel(const wstring& _label) {label = _label;}
     protected:
 		wstring label;
 		wstring string_prompt1;
@@ -377,6 +384,7 @@ namespace s_tui
 		}
 		wstring getLabel(void) const {return label;}
 		virtual void set_OnTriggerCallback(const callback<void>& c) {onTriggerCallback = c;}
+		void setLabel(const wstring& _label) {label = _label;}
     protected:
 		T emptyT;
 		multiset<T> items;
@@ -492,6 +500,7 @@ namespace s_tui
 		}
 		wstring getLabel(void) const {return label;}
 		virtual void set_OnTriggerCallback(const callback<void>& c) {onTriggerCallback = c;}
+		void setLabel(const wstring& _label) {label = _label;}
     protected:
 		T emptyT;
 		multiset<T> items;
@@ -512,6 +521,7 @@ namespace s_tui
 		virtual bool isEditable(void) const {return true;}
 		string gettz(void); // should be const but gives a boring error...
 		void settz(const string& tz);
+		void setLabel(const wstring& _label) {label = _label;}
     protected:
 		MultiSet_item<string> continents_names;
 		map<string, MultiSet_item<string> > continents;
@@ -531,7 +541,7 @@ namespace s_tui
 		virtual bool isEditable(void) const {return true;}
 		Vec3d getVector(void) const { return Vec3d( a->getValue(), b->getValue(), c->getValue()); }
 		void setVector(Vec3d _vector) { a->setValue(_vector[0]); b->setValue(_vector[1]); c->setValue(_vector[2]); }
-
+		void setLabel(const wstring& _label) {label = _label;}
     protected:
 		Decimal_item* current_edit;	// 0 to 2
 		wstring label;

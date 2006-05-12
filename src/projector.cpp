@@ -141,6 +141,11 @@ void Projector::set_fov(double f)
 	init_project_matrix();
 }
 
+void Projector::setMaxFov(double max) {
+  if (fov > max) set_fov(max);
+  max_fov = max;
+}
+
 // Fill with black around the circle
 void Projector::draw_viewport_shape(void)
 {
@@ -654,7 +659,7 @@ void Projector::print_gravity180(s_font* font, float x, float y, const wstring& 
 	dx = x - (vec_viewport[0] + vec_viewport[2]/2);
 	dy = y - (vec_viewport[1] + vec_viewport[3]/2);
 	d = sqrt(dx*dx + dy*dy);
-
+	
 	// If the text is too far away to be visible in the screen return
 	if (d>MY_MAX(vec_viewport[3], vec_viewport[2])*2) return;
 

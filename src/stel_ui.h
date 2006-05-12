@@ -29,7 +29,7 @@
 #include "s_tui.h"
 #include "stel_command_interface.h"
 
-#define TUI_SCRIPT_MSG L"Select and exit to run."
+#define TUI_SCRIPT_MSG "Select and exit to run."
 
 using namespace std;
 using namespace s_gui;
@@ -60,6 +60,7 @@ public:
 
 	// Text UI
 	void init_tui(void);
+	void localizeTui(void);
 	void draw_tui(void);		// Display the tui
 	int handle_keys_tui(Uint16 key, s_tui::S_TUI_VALUE state);
 	// Update all the tui widgets with values taken from the core parameters
@@ -291,8 +292,6 @@ private:
 	void updateConfigVariables2(void);
 	void updateConfigForm(void);
 
-	bool LocaleChanged;  // flag to watch for need to rebuild TUI
-
 	// Landscape options
 	StringList* landscape_sl;
 	void setLandscape(void);
@@ -314,6 +313,16 @@ private:
 	// Text UI components
 	s_tui::Branch* tui_root;
 
+	// Menu branches
+	s_tui::MenuBranch* tui_menu_location;
+	s_tui::MenuBranch* tui_menu_time;
+	s_tui::MenuBranch* tui_menu_general;
+	s_tui::MenuBranch* tui_menu_stars;
+	s_tui::MenuBranch* tui_menu_colors;
+	s_tui::MenuBranch* tui_menu_effects;
+	s_tui::MenuBranch* tui_menu_scripts;
+	s_tui::MenuBranch* tui_menu_administration;
+
 	// 1. Location
 	s_tui::Decimal_item* tui_location_latitude;
 	s_tui::Decimal_item* tui_location_longitude;
@@ -324,12 +333,12 @@ private:
 	s_tui::Time_zone_item* tui_time_settmz;
 	s_tui::Time_item* tui_time_skytime;
 	s_tui::Time_item* tui_time_presetskytime;
-	s_tui::MultiSet_item<wstring>* tui_time_startuptime;
+	s_tui::MultiSet2_item<wstring>* tui_time_startuptime;
 	s_tui::MultiSet_item<wstring>* tui_time_displayformat;
 	s_tui::MultiSet_item<wstring>* tui_time_dateformat;
 
 	// 3. General
-	s_tui::MultiSet_item<wstring>* tui_general_sky_culture;
+	s_tui::MultiSet2_item<wstring>* tui_general_sky_culture;
 	s_tui::MultiSet_item<wstring>* tui_general_sky_locale;
 	//	s_tui::MultiSet2_item<wstring>* tui_general_sky_locale; (if translate locales to names)
 
@@ -343,6 +352,18 @@ private:
 	s_tui::Vector_item* tui_colors_const_line_color;
 	s_tui::Vector_item* tui_colors_const_label_color;
 	s_tui::Vector_item* tui_colors_cardinal_color;
+	s_tui::Vector_item* tui_colors_const_boundary_color;
+	s_tui::Vector_item* tui_colors_planet_names_color;
+	s_tui::Vector_item* tui_colors_planet_orbits_color;
+	s_tui::Vector_item* tui_colors_object_trails_color;
+	s_tui::Vector_item* tui_colors_meridian_color;
+	s_tui::Vector_item* tui_colors_azimuthal_color;
+	s_tui::Vector_item* tui_colors_equatorial_color;
+	s_tui::Vector_item* tui_colors_equator_color;
+	s_tui::Vector_item* tui_colors_ecliptic_color;
+	s_tui::Vector_item* tui_colors_nebula_label_color;
+	s_tui::Vector_item* tui_colors_nebula_circle_color;
+	s_tui::Decimal_item* tui_colors_const_art_intensity;
 
 	// 5. Effects
 	s_tui::MultiSet_item<wstring>* tui_effect_landscape;

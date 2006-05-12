@@ -456,7 +456,11 @@ void Planet::set_big_halo(const string& halotexfile)
 // Return the radius of a circle containing the object on screen
 float Planet::get_on_screen_size(const Projector* prj, const Navigator * nav)
 {
-	return atanf(radius*sphere_scale*2.f/get_earth_equ_pos(nav).length())*180./M_PI/prj->get_fov()*prj->getViewportHeight();
+	double rad;
+	if(rings) rad = rings->get_size();
+	else rad = radius;
+
+	return atanf(rad*sphere_scale*2.f/get_earth_equ_pos(nav).length())*180./M_PI/prj->get_fov()*prj->getViewportHeight();
 }
 
 // Draw the Planet and all the related infos : name, circle etc..

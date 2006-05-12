@@ -83,9 +83,14 @@ public:
 	void applyViewport(void) const {glViewport(vec_viewport[0], vec_viewport[1], vec_viewport[2], vec_viewport[3]);}	
 	
 	//! Set the Field of View in degree
-    void set_fov(double f);
-    //! Get the Field of View in degree
+	void set_fov(double f);
+	//! Get the Field of View in degree
 	double get_fov(void) const {return fov;}
+    
+	//! Set the maximum Field of View in degree
+	void setMaxFov(double max);
+	//! Get the maximum Field of View in degree
+	double getMaxFov(void) const {return max_fov;}
     
     //! If is currently zooming, return the target FOV, otherwise return current FOV
     double getAimFov(void) {if (flag_auto_zoom) return zoom_move.aim; else return fov;}

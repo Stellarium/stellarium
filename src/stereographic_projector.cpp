@@ -30,17 +30,18 @@ StereographicProjector::StereographicProjector(const Vec4i& viewport,
 }
 
 bool StereographicProjector::project_custom(const Vec3d &v,
-                                            Vec3d &x,
+                                            Vec3d &win,
                                             const Mat4d &mat) const {
-  x = v;
-  x.transfo4d(mat);
-  const double r = x.length();
-  const double h = r-x[2];
+  const double x = mat.r[0]*v[0] + mat.r[4]*v[1] +  mat.r[8]*v[2] + mat.r[12];
+  const double y = mat.r[1]*v[0] + mat.r[5]*v[1] +  mat.r[9]*v[2] + mat.r[13];
+  const double z = mat.r[2]*v[0] + mat.r[6]*v[1] + mat.r[10]*v[2] + mat.r[14];
+  const double r = sqrt(x*x+y*y+z*z);
+  const double h = 0.5*(r-z);
   if (h <= 0.0) return false;
-  const double f = (view_scaling_factor*2)/h;
-  x[0] = center[0] + x[0] * f;
-  x[1] = center[1] + x[1] * f;
-  x[2] = (r - zNear) / (zFar-zNear);
+  const double f = view_scaling_factor / h;
+  win[0] = center[0] + x * f;
+  win[1] = center[1] + y * f;
+  win[2] = (r - zNear) / (zFar-zNear);
   return true;
 }
 

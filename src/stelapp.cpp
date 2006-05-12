@@ -20,7 +20,7 @@ StelApp::StelApp(const string& CDIR, const string& LDIR, const string& DATA_ROOT
 {
 	configDir = CDIR;
 	SelectedScript = SelectedScriptDirectory = "";
-	core = new StelCore(LDIR, DATA_ROOT);
+	core = new StelCore(LDIR, DATA_ROOT, this);
 	ui = new StelUI(core, this);
 	commander = new StelCommandInterface(core, this);
 	scripts = new ScriptMgr(commander, core->getDataDir());
@@ -45,7 +45,7 @@ void StelApp::setViewPortDistorterType(const string &type) {
     delete distorter;
     distorter = 0;
   }
-  distorter = ViewportDistorter::create(type,screenW,screenH);
+  distorter = ViewportDistorter::create(type,screenW,screenH,core);
   InitParser conf;
   conf.load(configDir + "config.ini");
   distorter->init(conf);
@@ -117,15 +117,15 @@ void StelApp::init(void)
 	string tmpstr = conf.get_str("projection:viewport");
 	if (tmpstr=="maximized") core->setMaximizedViewport(screenW, screenH);
 	else
-		if (tmpstr=="square") core->setSquareViewport(screenW, screenH, conf.get_int("video:horizontal_offset"), conf.get_int("video:horizontal_offset"));
-		else
-		{
-			if (tmpstr=="disk") core->getViewportMaskDisk();
-			else
-			{
-				cerr << "ERROR : Unknown viewport type : " << tmpstr << endl;
-				exit(-1);
-			}
+		if (tmpstr=="square" || tmpstr=="disk") {
+			core->setSquareViewport(screenW, screenH, 
+									conf.get_int("video:horizontal_offset"), conf.get_int("video:horizontal_offset"));
+			if (tmpstr=="disk") core->setViewportMaskDisk();
+
+		} else {
+
+			cerr << "ERROR : Unknown viewport type : " << tmpstr << endl;
+			exit(-1);
 		}	
 
 	// Navigation section
@@ -138,8 +138,12 @@ void StelApp::init(void)
 		core->setJDay(PresetSkyTime - core->getObservatory().get_GMT_shift(PresetSkyTime) * JD_HOUR);
 
 	// initialisation of the User Interface
+
+	// TODO: Need way to update settings from config without reinitializing whole gui
 	ui->init(conf);
-	ui->init_tui();
+	
+	if(!initialized) ui->init_tui();  // don't reinit tui since probably called from there
+	else ui->localizeTui();  // update translations/fonts as needed
 
 	// Initialisation of the color scheme
 	draw_mode = StelApp::DM_NONE;  // fool caching
@@ -206,12 +210,10 @@ void StelApp::setAppLanguage(const std::string& newAppLocaleName)
 	Translator::globalTranslator = Translator(PACKAGE, core->getLocaleDir(), newAppLocaleName);
 	cout << "Application locale is " << Translator::globalTranslator.getLocaleName() << endl;
 
-	// TODO: UI needs to be reinitialized to load new translations and/or fonts
+	// update translations and font in tui
+	ui->localizeTui();
 
-	// Note: TUI reloads itself if applocale is changed using tui
-	// so that a preserve state kludge works, so don't call here for now
-	// ui->init_tui();
-
+	// TODO: GUI needs to be reinitialized to load new translations and/or fonts
 }
 
 // Handle mouse clics
@@ -412,12 +414,10 @@ void StelApp::saveCurrentConfig(const string& confFile)
 	// Main section
 	conf.set_str	("main:version", string(VERSION));
 
-	conf.set_int    ("video:horizontal_offset", core->getViewportHorizontalOffset());
-	conf.set_int    ("video:vertical_offset", core->getViewportVerticalOffset());
-
 	// localization section
 	conf.set_str    ("localization:sky_culture", core->getSkyCultureDir());
 	conf.set_str    ("localization:sky_locale", core->getSkyLanguage());
+	conf.set_str    ("localization:app_locale", getAppLanguage());
 
 	// viewing section
 	conf.set_boolean("viewing:flag_constellation_drawing", core->getFlagConstellationLines());
@@ -512,4 +512,9 @@ void StelApp::saveCurrentConfig(const string& confFile)
 
 	conf.save(confFile);
 
+}
+
+
+void StelApp::recordCommand(string commandline) {
+	scripts->record_command(commandline);
 }

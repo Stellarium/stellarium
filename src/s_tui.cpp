@@ -485,7 +485,8 @@ bool Decimal_item::onKey(Uint16 k, S_TUI_VALUE v)
 			if (value>mmax) value = mmax;
 			if (value<mmin) value = mmin;
 			if (!onChangeCallback.empty()) onChangeCallback();
-			return false;
+			//return false;
+			return true;
 		}
 
 		if (k==SDLK_UP)

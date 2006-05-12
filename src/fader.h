@@ -43,8 +43,8 @@ public:
 	operator bool() const {return state;}
 	virtual void set_duration(int _duration) {;}
 	virtual float get_duration(void) = 0;
-	void set_min_value(float _min) {min_value = _min;}
-	void set_max_value(float _max) {max_value = _max;}
+	virtual void set_min_value(float _min) {min_value = _min;}
+	virtual void set_max_value(float _max) {max_value = _max;}
 	float get_min_value(void) {return min_value;}
 	float get_max_value(void) {return max_value;}
 protected:
@@ -140,6 +140,11 @@ public:
 	
 	void set_duration(int _duration) {duration = _duration;}
 	virtual float get_duration(void) {return duration;}
+	void set_max_value(float _max) {
+		if(interstate >=  max_value) interstate =_max;
+		max_value = _max;
+	}
+
 protected:
 	bool is_transiting;
 	int duration;
