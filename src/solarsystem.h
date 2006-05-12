@@ -117,12 +117,12 @@ public:
 	//! Set/Get if Moon display is scaled
 	void setFlagMoonScale(bool b)
       {if (!b) getMoon()->set_sphere_scale(1);
-       else getMoon()->set_sphere_scale(moonScale);}
-	bool getFlagMoonScale(void) const
-      {return (fabs(getMoon()->get_sphere_scale()-1.)>0.0001);}
+       else getMoon()->set_sphere_scale(moonScale);
+       flagMoonScale = b;}
+	bool getFlagMoonScale(void) const {return flagMoonScale;}
 	
 	//! Set/Get Moon display scaling factor 
-	void setMoonScale(float f) {moonScale = f;}
+	void setMoonScale(float f) {moonScale = f; if (flagMoonScale) getMoon()->set_sphere_scale(moonScale);}
 	float getMoonScale(void) const {return moonScale;}		
 	
 	//! Get list of all the translated planets name
@@ -151,6 +151,7 @@ private:
 	// solar system related settings
 	float object_scale;  // should be kept synchronized with star scale...
 
+	bool flagMoonScale;
 	float moonScale;	// Moon scale value
 
 	s_font* planet_name_font;

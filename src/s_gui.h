@@ -510,7 +510,7 @@ namespace s_gui
 		
 	private:
 		callback<void> onChangeCallback;
-		void ScrollBar::adjustSize(void);
+		void adjustSize(void);
 		Button scrollBt;
 		bool vertical;
 		unsigned int scrollOffset, scrollSize;
@@ -837,7 +837,7 @@ namespace s_gui
 	class City 
 	{
 	public:
-		City::City(const string& _name = "", const string& _state = "", const string& _country = "", 
+		City(const string& _name = "", const string& _state = "", const string& _country = "", 
 			double _longitude = 0.f, double _latitude = 0.f, float zone = 0, int _showatzoom = 0, int _altitude = 0);
 		void addCity(const string& _name = "", const string& _state = "", const string& _country = "", 
 			double _longitude = 0.f, double _latitude = 0.f, float zone = 0, int _showatzoom = 0, int _altitude = 0);

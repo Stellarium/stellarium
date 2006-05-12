@@ -300,12 +300,12 @@ Component* StelUI::createConfigWindow(void)
 	Label * lblcursor = new Label(_("Cursor : "));
 	lblcursor->setPos(20, y+1);
 	lblMapLocation = new Label();
-	lblMapLocation->setPos(100, y+1);
+	lblMapLocation->setPos(130, y+1);
 	
 	Label * lblloc = new Label(_("Selected : "));
 	lblloc->setPos(20, y+21);
 	lblMapPointer = new Label(L"ERROR");
-	lblMapPointer->setPos(100, y+21);
+	lblMapPointer->setPos(130, y+21);
 	
 	Label * lbllong = new Label(_("Longitude : "));
 	lbllong->setPos(20, y+41);
@@ -313,7 +313,7 @@ Component* StelUI::createConfigWindow(void)
 	long_incdec->setSizex(135);
 	long_incdec->setFormat(FORMAT_LONGITUDE);
 	long_incdec->setOnPressCallback(callback<void>(this, &StelUI::setObserverPositionFromIncDec));
-	long_incdec->setPos(100,y+40);
+	long_incdec->setPos(130,y+40);
 
 	Label * lbllat = new Label(_("Latitude : "));
 	lbllat->setPos(20, y+61);
@@ -321,18 +321,18 @@ Component* StelUI::createConfigWindow(void)
 	lat_incdec->setFormat(FORMAT_LATITUDE);
 	lat_incdec->setSizex(135);
 	lat_incdec->setOnPressCallback(callback<void>(this, &StelUI::setObserverPositionFromIncDec));
-	lat_incdec->setPos(100,y+60);
+	lat_incdec->setPos(130,y+60);
 
 	Label * lblalt = new Label(_("Altitude : "));
 	lblalt->setPos(20, y+81);
 	alt_incdec	= new IntIncDec(courierFont, tex_up, tex_down, 0, 2000, 0, 10);
 	alt_incdec->setSizex(135);
 	alt_incdec->setOnPressCallback(callback<void>(this, &StelUI::setObserverPositionFromIncDec));
-	alt_incdec->setPos(100,y+80);
+	alt_incdec->setPos(130,y+80);
 
 	LabeledButton* location_save_bt = new LabeledButton(_("Save location"));
 	location_save_bt->setOnPressCallback(callback<void>(this, &StelUI::saveObserverPosition));
-	location_save_bt->setPos(230,y+70);
+	location_save_bt->setPos(280,y+70);
 	//location_save_bt->setSize(120,25);
 
 	tab_location->addComponent(lblcursor);
@@ -639,7 +639,7 @@ Component* StelUI::createSearchWindow(void)
 	search_win->reshape(300,200,400,100);
 	search_win->setVisible(FlagSearch);
 
-	lblSearchMessage = new Label(L"Autocompletion is TODO");
+	lblSearchMessage = new Label(L"");
 	lblSearchMessage->setPos(15, search_win->getSizey()-25);
 
 	Label * lblstars1 = new Label(_("Search for (eg. Saturn, Polaris, HP6218, Orion, M31):"));
@@ -757,6 +757,8 @@ void StelUI::setCityFromMap(void)
 void StelUI::setObserverPositionFromIncDec(void)
 {
 	std::ostringstream oss;
+	oss.setf(ios::fixed);
+	oss.precision(10);
 	oss << "moveto lat " << lat_incdec->getValue() << " lon " << long_incdec->getValue()
 		<< " alt " << alt_incdec->getValue();
 	app->commander->execute_command(oss.str());
