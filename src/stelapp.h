@@ -105,6 +105,10 @@ public:
 	
 	//! Return a list of working fullscreen hardware video modes (one per line)
 	string getVideoModeList(void) const;
+
+	//! Required because stelcore doesn't have access to the script manager anymore!
+	//! Record a command if script recording is on
+	void recordCommand(string commandline);
 	
 private:
 	//! Screen size

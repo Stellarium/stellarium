@@ -114,6 +114,7 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
     else if(args["auto_move_duration"]!="") stcore->auto_move_duration = str_to_double(args["auto_move_duration"]);
     else if(args["constellation_art_fade_duration"]!="") stcore->setConstellationArtFadeDuration(str_to_double(args["constellation_art_fade_duration"]));
     else if(args["constellation_art_intensity"]!="") stcore->setConstellationArtIntensity(str_to_double(args["constellation_art_intensity"]));
+    else if(args["home_planet"]!="") stcore->setHomePlanet(args["home_planet"]);
     else if(args["landscape_name"]!="") stcore->setLandscape(args["landscape_name"]);
     else if(args["max_mag_nebula_name"]!="") stcore->setNebulaMaxMagHints(str_to_double(args["max_mag_nebula_name"]));
     else if(args["max_mag_star_name"]!="") stcore->setMaxMagStarName(str_to_double(args["max_mag_star_name"]));
@@ -520,6 +521,7 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
   } else if(command=="clear") {
 
 	  // set sky to known, standard states (used by scripts for simplicity)
+	  execute_command("set home_planet Earth");
 
 	  if(args["state"] == "natural") {
 		  execute_command("flag atmosphere on");

@@ -45,7 +45,7 @@ public:
     virtual ~SkyGrid();
 	void draw(const Projector* prj) const;
 	void set_font(float font_size, const string& font_name);
-	void set_color(const Vec3f& c) {color = c;}
+	void setColor(const Vec3f& c) {color = c;}
 	const Vec3f& getColor() {return color;}
 	void update(int delta_time) {fader.update(delta_time);}
 	void set_fade_duration(float duration) {fader.set_duration((int)(duration*1000.f));}
@@ -84,7 +84,7 @@ public:
 	SkyLine(SKY_LINE_TYPE _line_type = EQUATOR, double _radius = 1., unsigned int _nb_segment = 48);
     virtual ~SkyLine();
 	void draw(const Projector* prj) const;
-	void set_color(const Vec3f& c) {color = c;}
+	void setColor(const Vec3f& c) {color = c;}
 	const Vec3f& getColor() {return color;}
 	void update(int delta_time) {fader.update(delta_time);}
 	void set_fade_duration(float duration) {fader.set_duration((int)(duration*1000.f));}
@@ -110,7 +110,7 @@ public:
 	Cardinals(float _radius = 1.);
     virtual ~Cardinals();
 	void draw(const Projector* prj, double latitude, bool gravityON = false) const;
-	void set_color(const Vec3f& c) {color = c;}
+	void setColor(const Vec3f& c) {color = c;}
 	Vec3f get_color() {return color;}
 	void set_font(float font_size, const string& font_name);
 	void translateLabels(Translator& trans);  // for i18n
@@ -138,7 +138,7 @@ public:
 	void set_intensity(float _intensity);
 	float get_intensity() { return intensity; };
 	void set_texture(const string& tex_file, bool blend = false);
-	void set_color(const Vec3f& c) { color=c;}
+	void setColor(const Vec3f& c) { color=c;}
 	void draw_chart(ToneReproductor * eye, const Projector* prj, const Navigator* nav);
 	void setFlagShow(bool b){fader = b;}
 	bool getFlagShow(void) const {return fader;}

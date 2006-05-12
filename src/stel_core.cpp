@@ -22,8 +22,9 @@
 #include "stel_core.h"
 #include "stellastro.h"
 #include "stel_utility.h"
+#include "stelapp.h"
 
-StelCore::StelCore(const string& LDIR, const string& DATA_ROOT) :
+StelCore::StelCore(const string& LDIR, const string& DATA_ROOT, StelApp * _app) :
 		skyTranslator(APP_NAME, LOCALEDIR, ""),
 		projection(NULL), selected_object(NULL), hip_stars(NULL),
 		nebulas(NULL), ssystem(NULL), milky_way(NULL),deltaFov(0.), 
@@ -58,6 +59,8 @@ StelCore::StelCore(const string& LDIR, const string& DATA_ROOT) :
 	s_texture::set_texDir(getDataRoot() + "/textures/");
 	
 	object_pointer_visibility = 1;
+
+	app = _app;  
 }
 
 StelCore::~StelCore()
@@ -410,7 +413,7 @@ void StelCore::draw(int delta_time)
 
 	// draw images loaded by a script
 	projection->set_orthographic_projection();
-	script_images->draw(getViewportWidth(), getViewportHeight(), navigation, projection);
+	script_images->draw(navigation, projection);
 
 	projection->reset_perspective_projection();
 
@@ -704,11 +707,11 @@ void StelCore::setSkyLanguage(const std::string& newSkyLocaleName)
 	// cout << "Sky locale is " << skyTranslator.getLocaleName() << endl;
 
 	// see if fonts need to change
-	string oldFontFile, newFontFile;
-	float oldFontScale, newFontScale;
+	string oldFontFile, newFontFile, tmpstr;
+	float oldFontScale, newFontScale, tmpfloat;
 
-	getFontForLocale(oldLocale, oldFontFile, oldFontScale);
-	getFontForLocale(newSkyLocaleName, newFontFile, newFontScale);
+	getFontForLocale(oldLocale, oldFontFile, oldFontScale, tmpstr, tmpfloat);
+	getFontForLocale(newSkyLocaleName, newFontFile, newFontScale, tmpstr, tmpfloat);
 
 	// If font has changed or init is being called for first time...
 	if(oldFontFile != newFontFile || oldFontScale != newFontScale || firstTime) {
@@ -746,22 +749,22 @@ void StelCore::setColorScheme(const string& skinFile, const string& section)
 	string defaultColor = "0.6,0.4,0";
 
 	// Load colors from config file
-	nebulas->set_label_color(StelUtility::str_to_vec3f(conf.get_str(section,"nebula_label_color", defaultColor)));
-	nebulas->set_circle_color(StelUtility::str_to_vec3f(conf.get_str(section,"nebula_circle_color", defaultColor)));
+	nebulas->setLabelColor(StelUtility::str_to_vec3f(conf.get_str(section,"nebula_label_color", defaultColor)));
+	nebulas->setCircleColor(StelUtility::str_to_vec3f(conf.get_str(section,"nebula_circle_color", defaultColor)));
 	hip_stars->set_label_color(StelUtility::str_to_vec3f(conf.get_str(section,"star_label_color", defaultColor)));
 	hip_stars->set_circle_color(StelUtility::str_to_vec3f(conf.get_str(section,"star_circle_color", defaultColor)));
 	ssystem->setLabelColor(StelUtility::str_to_vec3f(conf.get_str(section,"planet_names_color", defaultColor)));
 	ssystem->setOrbitColor(StelUtility::str_to_vec3f(conf.get_str(section,"planet_orbits_color", defaultColor)));
 	ssystem->setTrailColor(StelUtility::str_to_vec3f(conf.get_str(section,"object_trails_color", defaultColor)));
-	equ_grid->set_color(StelUtility::str_to_vec3f(conf.get_str(section,"equatorial_color", defaultColor)));
+	equ_grid->setColor(StelUtility::str_to_vec3f(conf.get_str(section,"equatorial_color", defaultColor)));
 	//equ_grid->set_top_transparancy(draw_mode==DM_NORMAL);
-	azi_grid->set_color(StelUtility::str_to_vec3f(conf.get_str(section,"azimuthal_color", defaultColor)));
+	azi_grid->setColor(StelUtility::str_to_vec3f(conf.get_str(section,"azimuthal_color", defaultColor)));
 	//azi_grid->set_top_transparancy(draw_mode==DM_NORMAL);
-	equator_line->set_color(StelUtility::str_to_vec3f(conf.get_str(section,"equator_color", defaultColor)));
-	ecliptic_line->set_color(StelUtility::str_to_vec3f(conf.get_str(section,"ecliptic_color", defaultColor)));
+	equator_line->setColor(StelUtility::str_to_vec3f(conf.get_str(section,"equator_color", defaultColor)));
+	ecliptic_line->setColor(StelUtility::str_to_vec3f(conf.get_str(section,"ecliptic_color", defaultColor)));
 	meridian_line->set_font(FontSizeGeneral, baseFontFile);
-	meridian_line->set_color(StelUtility::str_to_vec3f(conf.get_str(section,"meridian_color", defaultColor)));
-	cardinals_points->set_color(StelUtility::str_to_vec3f(conf.get_str(section,"cardinal_color", defaultColor)));
+	meridian_line->setColor(StelUtility::str_to_vec3f(conf.get_str(section,"meridian_color", defaultColor)));
+	cardinals_points->setColor(StelUtility::str_to_vec3f(conf.get_str(section,"cardinal_color", defaultColor)));
 	asterisms->setLineColor(StelUtility::str_to_vec3f(conf.get_str(section,"const_lines_color", defaultColor)));
 	asterisms->setBoundaryColor(StelUtility::str_to_vec3f(conf.get_str(section,"const_boundary_color", "0.8,0.3,0.3")));
 	asterisms->setLabelColor(StelUtility::str_to_vec3f(conf.get_str(section,"const_names_color", defaultColor)));
@@ -964,17 +967,17 @@ void StelCore::updateMove(int delta_time)
 	if(deltaFov != 0 )
 	{
 		projection->change_fov(deltaFov);
-// 		std::ostringstream oss;
-// 		oss << "zoom delta_fov " << deltaFov;
-// 		commander->execute_command(oss.str());
+ 		std::ostringstream oss;
+ 		oss << "zoom delta_fov " << deltaFov;
+ 		app->recordCommand(oss.str());
 	}
 
 	if(deltaAz != 0 || deltaAlt != 0)
 	{
 		navigation->update_move(deltaAz, deltaAlt);
-// 		std::ostringstream oss;
-// 		oss << "look delta_az " << deltaAz << " delta_alt " << deltaAlt;
-// 		commander->execute_command(oss.str());
+ 		std::ostringstream oss;
+ 		oss << "look delta_az " << deltaAz << " delta_alt " << deltaAlt;
+ 		app->recordCommand(oss.str());
 	}
 	else
 	{
@@ -1048,10 +1051,10 @@ bool StelCore::selectObject(StelObject* obj)
 			if (selected_object->get_type()==StelObject::STEL_OBJECT_STAR)
 			{
 				asterisms->setSelected((HipStar*)selected_object);
-	// 			// potentially record this action
-	// 			std::ostringstream oss;
-	// 			oss << ((HipStar *)core->selected_object)->get_hp_number();
-	// 			app->scripts->record_command("select hp " + oss.str());
+	 			// potentially record this action
+	 			std::ostringstream oss;
+	 			oss << ((HipStar *)selected_object)->get_hp_number();
+	 			app->recordCommand("select hp " + oss.str());
 			}
 			else
 			{
@@ -1061,8 +1064,8 @@ bool StelCore::selectObject(StelObject* obj)
 			if (selected_object->get_type()==StelObject::STEL_OBJECT_PLANET)
 			{
 				ssystem->setSelected((Planet*)selected_object);
-	// 			// potentially record this action
-	// 			app->scripts->record_command("select planet " + ((Planet *)core->selected_object)->getEnglishName());
+				// potentially record this action
+				app->recordCommand("select planet " + ((Planet *)selected_object)->getEnglishName());
 			}
 			else
 			{
@@ -1071,8 +1074,8 @@ bool StelCore::selectObject(StelObject* obj)
 	
 			if (selected_object->get_type()==StelObject::STEL_OBJECT_NEBULA)
 			{
-	// 			// potentially record this action
-	// 			app->scripts->record_command("select nebula " + ((Nebula *)core->selected_object)->getEnglishName());
+				// potentially record this action
+				app->recordCommand("select nebula " + ((Nebula *)selected_object)->getEnglishName());
 			}
 			
 			return true;
@@ -1129,16 +1132,57 @@ vector<wstring> StelCore::listMatchingObjectsI18n(const wstring& objPrefix, unsi
 //! TESTING
 //! font file and scaling to use for a given locale
 // TODO: Need a fixed font version too
-void StelCore::getFontForLocale(const string &_locale, string &_FontFile, float &_fontScale) {
+void StelCore::getFontForLocale(const string &_locale, string &_fontFile, float &_fontScale,
+								string &_fixedFontFile, float &_fixedFontScale) {
 
-	// TODO: Retrieve from file
-	if(_locale.substr(0,2) == "zh") {
-		_FontFile = getDataDir() + "ukai.ttf";
-		_fontScale = 1.2;
-	} else {
-		_FontFile = getDataDir() + "DejaVuSans.ttf";
-		_fontScale = 1.;
+	// TODO: Cache in data structure and check that font files exist
+	// Move to translation or font class
+
+	// Hardcoded default fonts here (override in fontmap.dat file)
+	_fontFile = getDataDir() + "DejaVuSans.ttf";
+	_fontScale = _fixedFontScale = 1.;
+	_fixedFontFile = getDataDir() + "DejaVuSansMono.ttf";
+
+	// Now see if another font should be used as default or for locale
+	string file = getDataDir() + "fontmap.dat";
+	ifstream *input_file = new ifstream(file.c_str());
+
+	if (! input_file->is_open())
+	{
+		cout << "WARNING: Unable to open " << file << " resorting to default fonts." << endl;
+		return;
 	}
+
+	char buffer[1000];
+	string locale, font, fixedFont;
+	float scale, fixedScale;
+
+	while (input_file->getline (buffer,999) && !input_file->eof())
+	{
+
+		if( buffer[0] != '#' && buffer[0] != 0)
+		{
+
+			//			printf("Buffer is: %s\n", buffer);
+			istringstream record(buffer);
+
+			record >> locale >> font >> scale >> fixedFont >> fixedScale;
+
+			if(locale == _locale || locale == "default") {
+				_fontFile = getDataDir() + font;
+				_fontScale = scale;
+				_fixedFontFile = getDataDir() + fixedFont;
+				_fixedFontScale = fixedScale;
+
+				if(locale == _locale) {
+					break;
+				}
+			}
+		}
+	}
+
+	delete input_file;
+	return;
 
 }
 

@@ -752,6 +752,12 @@ void StelUI::help_win_hideBtCallback(void)
 /*******************************************************************/
 void StelUI::draw(void)
 {
+
+	// draw first as windows should cover these up
+	// also problem after 2dfullscreen with square viewport
+	if (FlagShowGravityUi) draw_gravity_ui();
+	if (FlagShowTuiMenu) draw_tui();
+
 	// Special cool text transparency mode
 	glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
 
@@ -768,8 +774,6 @@ void StelUI::draw(void)
 	Component::disableScissor();
 	app->restoreFrom2DfullscreenProjection();	// Restore the other coordinate
 
-	if (FlagShowGravityUi) draw_gravity_ui();
-	if (FlagShowTuiMenu) draw_tui();
 }
 
 /*******************************************************************************/

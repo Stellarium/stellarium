@@ -64,6 +64,12 @@ class Translations
 		N_("S");	// South
 		N_("E");	// East
 		N_("W");	// West
+
+		// Constellation cultures
+		N_("Chinese");
+		N_("Western");
+		N_("Polynesian");
+		N_("Egyptian");
 		
 		// Western Constellations
 		N_("Aquila");				// aql
@@ -290,6 +296,9 @@ class Translations
         N_("Frigate Bird");     // 009
         N_("Cared for by Moon");        // 010
         N_("Dolphin");  // 011
+
+		// TUI script message
+		N_("Select and exit to run.");
 		
 	}
 }

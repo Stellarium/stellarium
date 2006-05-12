@@ -39,6 +39,9 @@ public:
 	//! returns newline delimited list of human readable culture names translated to current language
 	wstring getSkyCultureListI18(void);
 	
+	//! returns newline delimited hash of translated culture names and directories
+	wstring getSkyCultureHash(void);
+	
 	//! Get the culture name in english associated to the passed directory
 	string directoryToSkyCultureEnglish(const string& directory);
 	
