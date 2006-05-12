@@ -20,7 +20,7 @@ stellarium_SOURCES = main.cpp stel_sdl.cpp stel_core.h stel_core.cpp \
 	stel_command_interface.h stel_command_interface.cpp script_mgr.h 				script_mgr.cpp script.h \
 	script.cpp image_mgr.h image_mgr.cpp image.h image.cpp audio.h 				audio.cpp \
 	loadingbar.h loadingbar.cpp fader.h gettext.h cylinder_projector.cpp \
-					cylinder_projector.h typeface.h typeface.cpp translator.cpp stelapp.cpp info.ini
+	cylinder_projector.h typeface.h typeface.cpp translator.cpp stelapp.cpp
 
 
 stellarium_LDADD = $(top_builddir)/src/glpng/libglpng.a \

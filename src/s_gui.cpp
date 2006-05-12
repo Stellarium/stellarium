@@ -2671,14 +2671,6 @@ void FloatIncDec::draw()
 
 void FloatIncDec::inc_value() 
 {
-	float v = value;
-	
-	if (format == FORMAT_LONGITUDE || format == FORMAT_LATITUDE)
-	{
-		v = (int)(v * 60);
-		v = v / 60;
-	}
-	value = v;
 	value += inc; 
 	if(value > max) 
 		value = max; 
@@ -2687,14 +2679,6 @@ void FloatIncDec::inc_value()
 
 void FloatIncDec::dec_value() 
 {
-	float v = value;
-	
-	if (format == FORMAT_LONGITUDE || format == FORMAT_LATITUDE)
-	{
-		v = (int)(v * 60);
-		v = v / 60;
-	}
-	value = v;
 	value -= inc; 
 	if(value < min) 
 		value = min; 

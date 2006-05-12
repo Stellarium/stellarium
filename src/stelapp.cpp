@@ -20,7 +20,7 @@ StelApp::StelApp(const string& CDIR, const string& LDIR, const string& DATA_ROOT
 {
 	configDir = CDIR;
 	SelectedScript = SelectedScriptDirectory = "";
-	core = new StelCore(LDIR, DATA_ROOT, this);
+	core = new StelCore(LDIR, DATA_ROOT);
 	ui = new StelUI(core, this);
 	commander = new StelCommandInterface(core, this);
 	scripts = new ScriptMgr(commander, core->getDataDir());
