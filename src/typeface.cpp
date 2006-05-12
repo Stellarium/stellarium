@@ -503,7 +503,7 @@ TypeFace::addNewTexture(const Vec2size_t& aGlyphSize)
 void
 TypeFace::render(const std::wstring& aString, const Vec2f& aPosition, bool upsideDown)
 {
-    glPushAttrib(GL_ENABLE_BIT | GL_COLOR_BUFFER_BIT | GL_HINT_BIT | GL_LINE_BIT | GL_PIXEL_MODE_BIT);
+    glPushAttrib(GL_ALL_ATTRIB_BITS);
     glEnable(GL_TEXTURE_2D);
 
     glEnable(GL_BLEND);

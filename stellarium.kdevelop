@@ -46,8 +46,8 @@
         <topsourcedir/>
         <cppflags>-ffast-math -s -fomit-frame-pointer</cppflags>
         <ldflags/>
-        <ccompilerbinary/>
-        <cxxcompilerbinary/>
+        <ccompilerbinary>gcc-4.0</ccompilerbinary>
+        <cxxcompilerbinary>g++-4.0</cxxcompilerbinary>
         <f77compilerbinary/>
         <cflags>-O3 -g0</cflags>
         <f77flags/>
@@ -58,7 +58,7 @@
         <ccompiler>kdevgccoptions</ccompiler>
         <cxxcompiler>kdevgppoptions</cxxcompiler>
         <f77compiler>kdevpgf77options</f77compiler>
-        <cxxflags>-O0 -g3</cxxflags>
+        <cxxflags>-O0 -g</cxxflags>
         <envvars/>
         <topsourcedir/>
         <cppflags>-pipe -Wall</cppflags>

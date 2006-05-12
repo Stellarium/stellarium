@@ -46,8 +46,6 @@
 #include "loadingbar.h"
 #include "image_mgr.h"
 
-class StelApp;
-
 //!  @brief Main class for stellarium core processing. 
 //!  
 //! Manage all the objects to be used in the program. 
@@ -61,7 +59,7 @@ public:
 	enum MOUNT_MODE { MOUNT_ALTAZIMUTAL, MOUNT_EQUATORIAL };
 
 	// Inputs are the locale directory and root directory
-    StelCore(const string& LDIR, const string& DATA_ROOT, StelApp * _app);
+    StelCore(const string& LDIR, const string& DATA_ROOT);
     virtual ~StelCore();
 	
 	//! Init and load all main core components from the passed config file.
@@ -634,9 +632,7 @@ private:
 	string localeDir;					// The directory containing the translation .mo file
 	string skyCultureDir;				// The directory containing data for the culture used for constellations, etc.. 
 	Translator skyTranslator;			// The translator used for astronomical object naming
-
-	StelApp *app;                       // Required for command recording and other methods currently in stelapp
-
+		
 	// Main elements of the program
 	Navigator * navigation;				// Manage all navigation parameters, coordinate transformations etc..
 	Observator * observatory;			// Manage observer position

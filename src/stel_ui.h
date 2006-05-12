@@ -292,6 +292,8 @@ private:
 	void updateConfigVariables2(void);
 	void updateConfigForm(void);
 
+	bool LocaleChanged;  // flag to watch for need to rebuild TUI
+
 	// Landscape options
 	StringList* landscape_sl;
 	void setLandscape(void);

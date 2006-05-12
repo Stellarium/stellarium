@@ -22,9 +22,8 @@
 #include "stel_core.h"
 #include "stellastro.h"
 #include "stel_utility.h"
-#include "stelapp.h"
 
-StelCore::StelCore(const string& LDIR, const string& DATA_ROOT, StelApp * _app) :
+StelCore::StelCore(const string& LDIR, const string& DATA_ROOT) :
 		skyTranslator(APP_NAME, LOCALEDIR, ""),
 		projection(NULL), selected_object(NULL), hip_stars(NULL),
 		nebulas(NULL), ssystem(NULL), milky_way(NULL),deltaFov(0.), 
@@ -59,8 +58,6 @@ StelCore::StelCore(const string& LDIR, const string& DATA_ROOT, StelApp * _app) 
 	s_texture::set_texDir(getDataRoot() + "/textures/");
 	
 	object_pointer_visibility = 1;
-
-	app = _app;  
 }
 
 StelCore::~StelCore()
@@ -233,7 +230,7 @@ void StelCore::init(const InitParser& conf)
 	setFlagMeridianLine(conf.get_boolean("viewing:flag_meridian_line"));
 	cardinals_points->setFlagShow(conf.get_boolean("viewing:flag_cardinal_points"));
 	setFlagGravityLabels( conf.get_boolean("viewing:flag_gravity_labels") );
-	setFlagMoonScaled(conf.get_boolean("viewing", "flag_moon_scaled", conf.get_boolean("viewing", "flag_init_moon_scaled", 0)));  // name change
+	setFlagMoonScaled(conf.get_boolean("viewing", "flag_moon_scaled", conf.get_boolean("viewing", "flag_init_moon_scaled", false)));  // name change
 	setMoonScale(conf.get_double ("viewing","moon_scale",5.));
 
 	// Astro section
@@ -243,8 +240,8 @@ void StelCore::init(const InitParser& conf)
 	setFlagPlanetsHints(conf.get_boolean("astro:flag_planets_hints"));
 	setFlagPlanetsOrbits(conf.get_boolean("astro:flag_planets_orbits"));
 	setFlagLightTravelTime(conf.get_boolean("astro:flag_light_travel_time"));
-	setFlagPlanetsTrails(conf.get_boolean("astro", "flag_object_trails", 0));
-	startPlanetsTrails(conf.get_boolean("astro", "flag_object_trails", 0));
+	setFlagPlanetsTrails(conf.get_boolean("astro", "flag_object_trails", false));
+	startPlanetsTrails(conf.get_boolean("astro", "flag_object_trails", false));
 	setFlagNebula(conf.get_boolean("astro:flag_nebula"));
 	setFlagNebulaHints(conf.get_boolean("astro:flag_nebula_name"));
 	setNebulaMaxMagHints(conf.get_double("astro", "max_mag_nebula_name", 99));
@@ -735,7 +732,6 @@ void StelCore::setSkyLanguage(const std::string& newSkyLocaleName)
 	ssystem->translateNames(skyTranslator);
 	nebulas->translateNames(skyTranslator);
 	hip_stars->translateNames(skyTranslator);
-
 }
 
 
@@ -967,17 +963,17 @@ void StelCore::updateMove(int delta_time)
 	if(deltaFov != 0 )
 	{
 		projection->change_fov(deltaFov);
- 		std::ostringstream oss;
- 		oss << "zoom delta_fov " << deltaFov;
- 		app->recordCommand(oss.str());
+//  		std::ostringstream oss;
+//  		oss << "zoom delta_fov " << deltaFov;
+//  		app->recordCommand(oss.str());
 	}
 
 	if(deltaAz != 0 || deltaAlt != 0)
 	{
 		navigation->update_move(deltaAz, deltaAlt);
- 		std::ostringstream oss;
- 		oss << "look delta_az " << deltaAz << " delta_alt " << deltaAlt;
- 		app->recordCommand(oss.str());
+//  		std::ostringstream oss;
+//  		oss << "look delta_az " << deltaAz << " delta_alt " << deltaAlt;
+//  		app->recordCommand(oss.str());
 	}
 	else
 	{
@@ -1052,9 +1048,9 @@ bool StelCore::selectObject(StelObject* obj)
 			{
 				asterisms->setSelected((HipStar*)selected_object);
 	 			// potentially record this action
-	 			std::ostringstream oss;
-	 			oss << ((HipStar *)selected_object)->get_hp_number();
-	 			app->recordCommand("select hp " + oss.str());
+// 	 			std::ostringstream oss;
+// 	 			oss << ((HipStar *)selected_object)->get_hp_number();
+// 	 			app->recordCommand("select hp " + oss.str());
 			}
 			else
 			{
@@ -1065,7 +1061,7 @@ bool StelCore::selectObject(StelObject* obj)
 			{
 				ssystem->setSelected((Planet*)selected_object);
 				// potentially record this action
-				app->recordCommand("select planet " + ((Planet *)selected_object)->getEnglishName());
+// 				app->recordCommand("select planet " + ((Planet *)selected_object)->getEnglishName());
 			}
 			else
 			{
@@ -1075,7 +1071,7 @@ bool StelCore::selectObject(StelObject* obj)
 			if (selected_object->get_type()==StelObject::STEL_OBJECT_NEBULA)
 			{
 				// potentially record this action
-				app->recordCommand("select nebula " + ((Nebula *)selected_object)->getEnglishName());
+// 				app->recordCommand("select nebula " + ((Nebula *)selected_object)->getEnglishName());
 			}
 			
 			return true;

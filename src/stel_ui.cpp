@@ -649,7 +649,7 @@ void StelUI::tcbr(void)
 Component* StelUI::createLicenceWindow(void)
 {
 	licence_txtlbl = new TextLabel(
-wstring(L"                 \u2022   " APP_NAME "  August 2005  \u2022\n\n") +
+wstring(L"                 \u2022   " APP_NAME "  May 2006  \u2022\n\n") +
 L"\u2022   Copyright (c) 2000-2005 Fabien Chereau et al.\n\n" +
 L"\u2022" + _("   Please check for newer versions and send bug reports\n\
     and comments to us at: http://www.stellarium.org\n\n") +
@@ -1306,4 +1306,3 @@ void StelUI::setColorScheme(const string& skinFile, const string& section)
 	
 	desktop->setColorScheme(GuiBaseColor, GuiTextColor);
 }
-
