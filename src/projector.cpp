@@ -506,128 +506,116 @@ void Projector::sRing(GLdouble r_min, GLdouble r_max,
   glPopMatrix();
 }
 
-inline void sSphereMapTexCoord(double rho, double theta, double texture_fov)
+static
+inline void sSphereMapTexCoordFast(double rho_div_fov,
+                                   double costheta, double sintheta)
 {
-	if (rho>texture_fov/2.)
-	{
-		rho=texture_fov/2.;
-	}
-	glTexCoord2f(0.5f + rho/texture_fov * cosf(theta), 0.5f + rho/texture_fov * sinf(theta));
+	if (rho_div_fov>0.5) rho_div_fov=0.5;
+	glTexCoord2d(0.5 + rho_div_fov * costheta,
+                 0.5 + rho_div_fov * sintheta);
 }
 
-inline void sSphereMapTexCoordFast(float rho, float costheta, float sintheta, float texture_fov)
+void Projector::sSphere_map(GLdouble radius, GLint slices, GLint stacks,
+                            const Mat4d& mat, double texture_fov,
+                            int orient_inside) const
 {
-	if (rho>texture_fov/2.)
-	{
-		rho=texture_fov/2.;
-	}
-	glTexCoord2f(0.5f + rho/texture_fov * costheta, 0.5f + rho/texture_fov * sintheta);
-}
+    glPushMatrix();
+    glLoadMatrixd(mat);
 
-void Projector::sSphere_map(GLdouble radius, GLint slices, GLint stacks, const Mat4d& mat, double texture_fov, int orient_inside) const
-{
-	glPushMatrix();
-	glLoadMatrixd(mat);
+    double rho,x,y,z;
+    int i, j;
+    const double nsign = orient_inside?-1:1;
 
-	GLfloat rho, drho, theta, dtheta;
-	GLfloat x, y, z;
-	GLint i, j, imin, imax;
-	GLfloat nsign;
+    const double drho = M_PI / stacks;
+    double cos_sin_rho[2*(stacks+1)];
+    double *cos_sin_rho_p = cos_sin_rho;
+    for (i = 0; i <= stacks; i++) {
+      const double rho = i * drho;
+      *cos_sin_rho_p++ = cos(rho);
+      *cos_sin_rho_p++ = sin(rho);
+    }
 
-	if (orient_inside) nsign = -1.0;
-	else nsign = 1.0;
+    const double dtheta = 2.0 * M_PI / slices;
+    double cos_sin_theta[2*(slices+1)];
+    double *cos_sin_theta_p = cos_sin_theta;
+    for (i = 0; i <= slices; i++) {
+      const double theta = (i == slices) ? 0.0 : i * dtheta;
+      *cos_sin_theta_p++ = cos(theta);
+      *cos_sin_theta_p++ = sin(theta);
+    }
 
-	drho = M_PI / (GLfloat) stacks;
-	dtheta = 2.0 * M_PI / (GLfloat) slices;
+    // texturing: s goes from 0.0/0.25/0.5/0.75/1.0 at +y/+x/-y/-x/+y axis
+    // t goes from -1.0/+1.0 at z = -radius/+radius (linear along longitudes)
+    // cannot use triangle fan on texturing (s coord. at top/bottom tip varies)
 
-	// texturing: s goes from 0.0/0.25/0.5/0.75/1.0 at +y/+x/-y/-x/+y axis
-	// t goes from -1.0/+1.0 at z = -radius/+radius (linear along longitudes)
-	// cannot use triangle fan on texturing (s coord. at top/bottom tip varies)
-	imin = 0;
+//#ifdef NVIDIA  what is this foolishness good for?
+//    const int imax = stacks/1.8;
+//#else
+    const int imax = stacks;
+//#endif
 
-#ifdef NVIDIA
-	imax = stacks/1.8;
-#else
-	imax = stacks;
-#endif
+    // draw intermediate stacks as quad strips
+    if (!orient_inside) // nsign==1
+    {
+        for (i = 0,cos_sin_rho_p=cos_sin_rho,rho=0.0;
+             i < imax; ++i,cos_sin_rho_p+=2,rho+=drho)
+        {
+            glBegin(GL_QUAD_STRIP);
+            for (j=0,cos_sin_theta_p=cos_sin_theta;
+                 j<=slices;++j,cos_sin_theta_p+=2)
+            {
+                x = -cos_sin_theta_p[1] * cos_sin_rho_p[1];
+                y = cos_sin_theta_p[0] * cos_sin_rho_p[1];
+                z = cos_sin_rho_p[0];
+                glNormal3d(x * nsign, y * nsign, z * nsign);
+                sSphereMapTexCoordFast(rho/texture_fov,
+                                       cos_sin_theta_p[0],
+                                       cos_sin_theta_p[1]);
+                sVertex3(x * radius, y * radius, z * radius, mat);
 
-	static float sinrho;
-	static float cosrho;
-	static float sintheta;
-	static float costheta;
-	static float sinrho_plus_drho;
-	static float cosrho_plus_drho;
+                x = -cos_sin_theta_p[1] * cos_sin_rho_p[3];
+                y = cos_sin_theta_p[0] * cos_sin_rho_p[3];
+                z = cos_sin_rho_p[2];
+                glNormal3d(x * nsign, y * nsign, z * nsign);
+                sSphereMapTexCoordFast((rho + drho)/texture_fov,
+                                       cos_sin_theta_p[0],
+                                       cos_sin_theta_p[1]);
+                sVertex3(x * radius, y * radius, z * radius, mat);
+            }
+            glEnd();
+        }
+    }
+    else
+    {
+        for (i = 0,cos_sin_rho_p=cos_sin_rho,rho=0.0;
+             i < imax; ++i,cos_sin_rho_p+=2,rho+=drho)
+        {
+            glBegin(GL_QUAD_STRIP);
+            for (j=0,cos_sin_theta_p=cos_sin_theta;
+                 j<=slices;++j,cos_sin_theta_p+=2)
+            {
+                x = -cos_sin_theta_p[1] * cos_sin_rho_p[3];
+                y = cos_sin_theta_p[0] * cos_sin_rho_p[3];
+                z = cos_sin_rho_p[2];
+                glNormal3d(x * nsign, y * nsign, z * nsign);
+                sSphereMapTexCoordFast((rho + drho)/texture_fov,
+                                       cos_sin_theta_p[0],
+                                       -cos_sin_theta_p[1]);
+                sVertex3(x * radius, y * radius, z * radius, mat);
 
-	// draw intermediate stacks as quad strips
-	if (nsign==1)
-	{
-		for (i = imin; i < imax; ++i)
-		{
-			rho = drho * i;
-			sinrho = sinf(rho);
-			cosrho = cosf(rho);
-			sinrho_plus_drho = sinf(rho + drho);
-			cosrho_plus_drho = cosf(rho + drho);
-
-			glBegin(GL_QUAD_STRIP);
-			for (j = 0; j <= slices; ++j)
-			{
-				theta = (j == slices) ? 0.0 : dtheta * j;
-				sintheta = sinf(theta);
-				costheta = cosf(theta);
-
-				x = -sintheta * sinrho;
-				y = costheta * sinrho;
-				z = cosrho;
-				glNormal3f(x * nsign, y * nsign, z * nsign);
-				sSphereMapTexCoordFast(rho, costheta, sintheta, texture_fov);
-				sVertex3(x * radius, y * radius, z * radius, mat);
-
-				x = -sintheta * sinrho_plus_drho;
-				y = costheta * sinrho_plus_drho;
-				z = cosrho_plus_drho;
-				glNormal3f(x * nsign, y * nsign, z * nsign);
-				sSphereMapTexCoordFast(rho + drho, costheta, sintheta, texture_fov);
-				sVertex3(x * radius, y * radius, z * radius, mat);
-			}
-			glEnd();
-		}
-	}
-	else
-	{
-		for (i = imin; i < imax; ++i)
-		{
-			rho = drho * i;
-			sinrho = sinf(rho);
-			cosrho = cosf(rho);
-			sinrho_plus_drho = sinf(rho + drho);
-			cosrho_plus_drho = cosf(rho + drho);
-
-			glBegin(GL_QUAD_STRIP);
-			for (j = 0; j <= slices; ++j)
-			{
-				theta = (j == slices) ? 0.0 : dtheta * j;
-				sintheta = sinf(theta);
-				costheta = cosf(theta);
-
-				x = -sintheta * sinrho_plus_drho;
-				y = costheta * sinrho_plus_drho;
-				z = cosrho_plus_drho;
-				glNormal3f(x * nsign, y * nsign, z * nsign);
-				sSphereMapTexCoordFast(rho + drho, costheta, -sintheta, texture_fov);
-				sVertex3(x * radius, y * radius, z * radius, mat);
-
-				x = -sintheta * sinrho;
-				y = costheta * sinrho;
-				z = cosrho;
-				glNormal3f(x * nsign, y * nsign, z * nsign);
-				sSphereMapTexCoordFast(rho, costheta, -sintheta, texture_fov);
-				sVertex3(x * radius, y * radius, z * radius, mat);
-			}
-			glEnd();
-		}
-	}
-	glPopMatrix();
+                x = -cos_sin_theta_p[1] * cos_sin_rho_p[1];
+                y = cos_sin_theta_p[0] * cos_sin_rho_p[1];
+                z = cos_sin_rho_p[0];
+                glNormal3d(x * nsign, y * nsign, z * nsign);
+                sSphereMapTexCoordFast(rho/texture_fov,
+                                       cos_sin_theta_p[0],
+                                       -cos_sin_theta_p[1]);
+                sVertex3(x * radius, y * radius, z * radius, mat);
+            }
+            glEnd();
+        }
+    }
+    glPopMatrix();
 }
 
 
