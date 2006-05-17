@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium 0.7.0\n"
 "Report-Msgid-Bugs-To: stellarium@free.fr\n"
-"POT-Creation-Date: 2006-04-30 22:57+0200\n"
-"PO-Revision-Date: 2006-04-25 13:00+0000\n"
-"Last-Translator: Сергій Дубик <dubyk@library.lviv.ua>\n"
+"POT-Creation-Date: 2006-05-01 03:03+0200\n"
+"PO-Revision-Date: 2006-05-07 11:51+0000\n"
+"Last-Translator: Akkerman <akkerman.linuxoid@gmail.com>\n"
 "Language-Team:\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -97,110 +97,120 @@ msgstr ""
 msgid "AU"
 msgstr ""
 
-#: src/stel_ui.cpp:485 src/stel_ui.cpp:613
+#: src/stel_ui.cpp:490 src/stel_ui.cpp:618
 msgid "Script commander"
 msgstr "Командир сценарію"
 
-#: src/stel_ui.cpp:512
+#: src/stel_ui.cpp:517
 msgid "Invalid Script command"
 msgstr "Непрацездатна команда сценарію"
 
-#: src/stel_ui.cpp:578
+#: src/stel_ui.cpp:583
 msgid "Drawing of the Constellations [C]"
 msgstr "Малюнок сузір'їв [C]"
 
-#: src/stel_ui.cpp:580
+#: src/stel_ui.cpp:585
 msgid "Names of the Constellations [V]"
 msgstr "Імена сузір'їв [V]"
 
-#: src/stel_ui.cpp:582
+#: src/stel_ui.cpp:587
 msgid "Constellations Art [R]"
 msgstr "Мистецтво сузір'їв [R]"
 
-#: src/stel_ui.cpp:584
+#: src/stel_ui.cpp:589
 msgid "Azimuthal Grid [Z]"
 msgstr "Азимутна сітка [Z]"
 
-#: src/stel_ui.cpp:586
+#: src/stel_ui.cpp:591
 msgid "Equatorial Grid [E]"
 msgstr "Екваторіальна сітка [E]"
 
-#: src/stel_ui.cpp:588
+#: src/stel_ui.cpp:593
 msgid "Ground [G]"
 msgstr "Земля [G]"
 
-#: src/stel_ui.cpp:590
+#: src/stel_ui.cpp:595
+#, fuzzy
 msgid "Cardinal Points [Q]"
-msgstr ""
+msgstr "Головні точки [Q]"
 
-#: src/stel_ui.cpp:592
+#: src/stel_ui.cpp:597
 msgid "Atmosphere [A]"
 msgstr "Атмосфера [A]"
 
-#: src/stel_ui.cpp:594
+#: src/stel_ui.cpp:599
 msgid "Nebulas [N]"
 msgstr "Туманності [N]"
 
-#: src/stel_ui.cpp:596
+#: src/stel_ui.cpp:601
 msgid "Help [H]"
 msgstr "Допомога [H]"
 
-#: src/stel_ui.cpp:598
+#: src/stel_ui.cpp:603
+#, fuzzy
 msgid "Equatorial/Altazimuthal Mount [ENTER]"
-msgstr ""
+msgstr "Екваторіальне/Азімутальне положення"
 
-#: src/stel_ui.cpp:600
+#: src/stel_ui.cpp:605
 msgid "Configuration window"
 msgstr "Конфігураційне вікно"
 
-#: src/stel_ui.cpp:603
+#: src/stel_ui.cpp:608
+#, fuzzy
 msgid "Night (red) mode"
-msgstr ""
+msgstr "Нічний режим"
 
-#: src/stel_ui.cpp:606
+#: src/stel_ui.cpp:611
 msgid "Quit [CTRL + Q]"
 msgstr "Вихід [CTRL + Q]"
 
-#: src/stel_ui.cpp:608
+#: src/stel_ui.cpp:613
 msgid "Quit [CMD + Q]"
 msgstr "Вихід [CMD + Q]"
 
-#: src/stel_ui.cpp:611
+#: src/stel_ui.cpp:616
 msgid "Search for object"
 msgstr "Пошук об'єкту"
 
-#: src/stel_ui.cpp:615
+#: src/stel_ui.cpp:620
+#, fuzzy
 msgid "Goto selected object [SPACE]"
-msgstr ""
+msgstr "Слідувати за виділеним об'єктом [SPACE]"
 
-#: src/stel_ui.cpp:621
+#: src/stel_ui.cpp:626
+#, fuzzy
 msgid "Decrease Time Speed [J]"
-msgstr ""
+msgstr "Загальмувати час"
 
-#: src/stel_ui.cpp:623
+#: src/stel_ui.cpp:628
+#, fuzzy
 msgid "Real Time Speed [K]"
-msgstr ""
+msgstr "Реальний час"
 
-#: src/stel_ui.cpp:625
+#: src/stel_ui.cpp:630
 msgid "Increase Time Speed [L]"
-msgstr ""
+msgstr "Прискорити час [L]"
 
-#: src/stel_ui.cpp:627
+#: src/stel_ui.cpp:632
 msgid "Return to Current Time"
 msgstr "Повернення до поточного часу"
 
-#: src/stel_ui.cpp:636
+#: src/stel_ui.cpp:641
+#, fuzzy
 msgid ""
 "   Please check for newer versions and send bug reports\n"
 "    and comments to us at: http://www.stellarium.org\n"
 "\n"
 msgstr ""
+"   Будьласка перевірте нову версію і відішліть повідомлення про помилки в "
+"програмі на http://www.stellarium.org\n"
+"\n"
 
-#: src/stel_ui.cpp:655
+#: src/stel_ui.cpp:660
 msgid "Information"
 msgstr "Інформація"
 
-#: src/stel_ui.cpp:667
+#: src/stel_ui.cpp:672
 msgid ""
 "Movement & selection:\n"
 "Arrow Keys       : Change viewing RA/DE\n"
@@ -215,7 +225,8 @@ msgid ""
 "\n"
 msgstr ""
 
-#: src/stel_ui.cpp:678
+#: src/stel_ui.cpp:683
+#, fuzzy
 msgid ""
 "Display options:\n"
 "ENTER : Equatorial/altazimuthal mount\n"
@@ -230,8 +241,21 @@ msgid ""
 "4 , : Ecliptic line             5 . : Equator line\n"
 "\n"
 msgstr ""
+"Параметри відображення:\n"
+"ENTER : Екваторіальне/азимутальне положення\n"
+"F1 : Повноекранний режим, якщо можливо\n"
+"C : Лінії сузір'їв V : Назви сузір'їв\n"
+"R : Художні сузір'я E : Екваторіальна сітка\n"
+"Z : Азімутальна сітка N : Назви томанностей\n"
+"P : Назви планет G : Земля\n"
+"A : Атмосфера F : Туман\n"
+"Q : Основні точки O : Увімкнути масштабування місяця\n"
+"T : Сліди об'єктів S : Зірки\n"
+"4 , : Лінія екліптики 5 . : Лінія екватора\n"
+"\n"
 
-#: src/stel_ui.cpp:690
+#: src/stel_ui.cpp:695
+#, fuzzy
 msgid ""
 "Dialogs & other controls:\n"
 "H   : Help                      I   : About Stellarium\n"
@@ -241,8 +265,15 @@ msgid ""
 "CTRL + F : Toggle object finder\n"
 "\n"
 msgstr ""
+"Діалоги і інше управління:\n"
+"H : Допомога I : Про Stellarium\n"
+"M : Текстове меню 1 (одиниця) : Конфігурація\n"
+"CTRL + S : Зробити знімок екрана\n"
+"CTRL + R : Увімкнути запис сценарія\n"
+"CTRL + F : Увімкнути пошук об'єкта\n"
+"\n"
 
-#: src/stel_ui.cpp:697
+#: src/stel_ui.cpp:702
 msgid ""
 "Time & Date:\n"
 "6   : Time rate pause           7   : Time rate 0\n"
@@ -253,47 +284,59 @@ msgid ""
 "\n"
 msgstr ""
 
-#: src/stel_ui.cpp:704
+#: src/stel_ui.cpp:709
+#, fuzzy
 msgid ""
 "During Script Playback:\n"
 "CTRL + C : End Script\n"
 "6   : pause script              K   : resume script\n"
 "\n"
 msgstr ""
+"Під час відтворення сценарію:\n"
+"CTRL + C : Закінчити сценарій\n"
+"6 : Зупинити сценарій K : продовжити сценарій\n"
+"\n"
 
-#: src/stel_ui.cpp:708
+#: src/stel_ui.cpp:713
+#, fuzzy
 msgid ""
 "Misc:\n"
 "9   : Toggle meteor shower rates\n"
 msgstr ""
+"Інше:\n"
+"9 : Увімкнути метеорний дощ\n"
 
-#: src/stel_ui.cpp:711
+#: src/stel_ui.cpp:716
 msgid "CTRL + Q : Quit\n"
 msgstr "CTRL + Q : Вихід\n"
 
-#: src/stel_ui.cpp:713
+#: src/stel_ui.cpp:718
 msgid "CMD + Q  : Quit\n"
 msgstr "CMD + Q  : Вихід\n"
 
-#: src/stel_ui.cpp:719
+#: src/stel_ui.cpp:724
 msgid "Help"
 msgstr "Допомога"
 
-#: src/stel_ui.cpp:979
+#: src/stel_ui.cpp:984
+#, fuzzy
 msgid "Command recording stopped."
-msgstr ""
+msgstr "Запис команди зупинено"
 
-#: src/stel_ui.cpp:987
+#: src/stel_ui.cpp:992
+#, fuzzy
 msgid "Recording commands to script file:\n"
-msgstr ""
+msgstr "Записати команди до сценарію\n"
 
-#: src/stel_ui.cpp:989
+#: src/stel_ui.cpp:994
+#, fuzzy
 msgid "Hit CTRL-R again to stop.\n"
-msgstr ""
+msgstr "Знову натисніть CTRL-R, щоб зупинити.\n"
 
-#: src/stel_ui.cpp:993
+#: src/stel_ui.cpp:998
+#, fuzzy
 msgid "Error: Unable to open script file to record commands."
-msgstr ""
+msgstr "Помилка: Не можу відкрити файл сценарію для запису команд."
 
 #: src/stel_ui_conf.cpp:37
 msgid "Configuration"
@@ -312,20 +355,23 @@ msgid "Star Twinkle. Amount :"
 msgstr "Зоряне мерехтіння. Величина :"
 
 #: src/stel_ui_conf.cpp:90 src/stel_ui_tuiconf.cpp:179
+#, fuzzy
 msgid "Constellations Lines"
-msgstr ""
+msgstr "Лінії сузірь"
 
 #: src/stel_ui_conf.cpp:95 src/stel_ui_tuiconf.cpp:183
 msgid "Constellations Names"
 msgstr "Імена сузір'їв"
 
 #: src/stel_ui_conf.cpp:100
+#, fuzzy
 msgid "Constellations Boundaries"
-msgstr ""
+msgstr "Кордони сузірь"
 
 #: src/stel_ui_conf.cpp:105
+#, fuzzy
 msgid "Selected Constellation Only"
-msgstr ""
+msgstr "Обирати тільки сузір'я"
 
 #: src/stel_ui_conf.cpp:116
 msgid "Nebulas Names. Up to mag :"
@@ -340,8 +386,9 @@ msgid "Planets"
 msgstr "Планети"
 
 #: src/stel_ui_conf.cpp:145
+#, fuzzy
 msgid "Moon Scale"
-msgstr ""
+msgstr "Масштабування місяця"
 
 #: src/stel_ui_conf.cpp:152
 msgid "Planets Hints"
@@ -410,14 +457,16 @@ msgid ""
 "   time speed.\n"
 "Use key K to return to real time speed."
 msgstr ""
+"Використовуйте J та L для збільшення та зменшення\n"
+"   швидкісті часу."
 
 #: src/stel_ui_conf.cpp:300
 msgid "Cursor : "
-msgstr ""
+msgstr "Курсор : "
 
 #: src/stel_ui_conf.cpp:305
 msgid "Selected : "
-msgstr ""
+msgstr "Вибране : "
 
 #: src/stel_ui_conf.cpp:310
 msgid "Longitude : "
@@ -434,7 +483,7 @@ msgstr "Висота (m): "
 
 #: src/stel_ui_conf.cpp:333
 msgid "Save location"
-msgstr ""
+msgstr "Зберегти положення"
 
 #: src/stel_ui_conf.cpp:355
 #, fuzzy
@@ -501,43 +550,43 @@ msgstr "Відео"
 msgid "Rendering"
 msgstr ""
 
-#: src/stel_ui_conf.cpp:609
+#: src/stel_ui_conf.cpp:638
 msgid "Object Search"
 msgstr ""
 
-#: src/stel_ui_conf.cpp:616
+#: src/stel_ui_conf.cpp:645
 msgid "Search for (eg. Saturn, Polaris, HP6218, Orion, M31):"
 msgstr ""
 
-#: src/stel_ui_conf.cpp:633
+#: src/stel_ui_conf.cpp:662
 msgid "GO"
 msgstr ""
 
-#: src/stel_ui_conf.cpp:757
+#: src/stel_ui_conf.cpp:787
 msgid "Enter observatory name"
 msgstr ""
 
-#: src/stel_ui_conf.cpp:897
+#: src/stel_ui_conf.cpp:927
 msgid ": Normal rate"
 msgstr ""
 
-#: src/stel_ui_conf.cpp:904
+#: src/stel_ui_conf.cpp:934
 msgid ": Standard Perseids rate"
 msgstr ""
 
-#: src/stel_ui_conf.cpp:911
+#: src/stel_ui_conf.cpp:941
 msgid ": Exceptional Leonid rate"
 msgstr ""
 
-#: src/stel_ui_conf.cpp:918
+#: src/stel_ui_conf.cpp:948
 msgid ": Highest rate ever (1966 Leonids)"
 msgstr ""
 
-#: src/stel_ui_conf.cpp:923
+#: src/stel_ui_conf.cpp:953
 msgid "Meteor Rate per minute"
 msgstr ""
 
-#: src/stel_ui_conf.cpp:944
+#: src/stel_ui_conf.cpp:974
 #, fuzzy
 msgid "Current Time Speed is x"
 msgstr " Поточний час :"
