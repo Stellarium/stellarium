@@ -7,10 +7,10 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
-"Report-Msgid-Bugs-To: stellarium@free.fr\n"
-"POT-Creation-Date: 2006-05-12 13:50-0700\n"
-"PO-Revision-Date: 2006-04-20 14:27+0000\n"
-"Last-Translator: Eric <jongrae_kim@yahoo.com>\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2006-05-01 03:03+0200\n"
+"PO-Revision-Date: 2006-05-17 14:07+0000\n"
+"Last-Translator: Jeong, Tae-Min <jtm71@chollian.net>\n"
 "Language-Team: Korean <ko@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -28,7 +28,7 @@ msgstr ""
 " -h, --help 이와 같은 설명을 보여주고 종료합니다.\n"
 
 #: src/main.cpp:76
-#, fuzzy, c-format
+#, fuzzy
 msgid "%s: Bad command line argument(s)\n"
 msgstr "%s: 명령어의 인자값이 잘못되었습니다.\n"
 
@@ -42,7 +42,7 @@ msgid "Loading Constellation Art: "
 msgstr "별자리 그림을 불러옵니다. "
 
 #: src/hip_star.cpp:88 src/hip_star.cpp:136 src/nebula.cpp:94
-#: src/planet.cpp:107 src/planet.cpp:153
+#: src/planet.cpp:107
 msgid "Magnitude: "
 msgstr "등급: "
 
@@ -58,7 +58,7 @@ msgstr "적경/적위 : "
 msgid "Az/Alt: "
 msgstr "방위/고도: "
 
-#: src/hip_star.cpp:99 src/planet.cpp:120 src/planet.cpp:157
+#: src/hip_star.cpp:99 src/planet.cpp:120
 msgid "Distance: "
 msgstr "거리: "
 
@@ -86,107 +86,107 @@ msgstr "크기: "
 msgid "Loading NGC catalog: "
 msgstr "NGC 목록을 불러옵니다: "
 
-#: src/nebula_mgr.cpp:418
+#: src/nebula_mgr.cpp:415
 msgid "Loading Nebula Textures:"
 msgstr "성운의 색조를 불러옵니다:"
 
-#: src/planet.cpp:120 src/planet.cpp:157
+#: src/planet.cpp:120
 msgid "AU"
 msgstr "천문단위"
 
-#: src/stel_ui.cpp:503 src/stel_ui.cpp:631
+#: src/stel_ui.cpp:490 src/stel_ui.cpp:618
 msgid "Script commander"
 msgstr "스크립트 명령어"
 
-#: src/stel_ui.cpp:530
+#: src/stel_ui.cpp:517
 msgid "Invalid Script command"
 msgstr "실효성이 없는 스크립트 명령어"
 
-#: src/stel_ui.cpp:596
+#: src/stel_ui.cpp:583
 msgid "Drawing of the Constellations [C]"
 msgstr "별자리 모양 [C]"
 
-#: src/stel_ui.cpp:598
+#: src/stel_ui.cpp:585
 msgid "Names of the Constellations [V]"
 msgstr "별자리 명칭 [V]"
 
-#: src/stel_ui.cpp:600
+#: src/stel_ui.cpp:587
 msgid "Constellations Art [R]"
 msgstr "별자리 그림 [R]"
 
-#: src/stel_ui.cpp:602
+#: src/stel_ui.cpp:589
 msgid "Azimuthal Grid [Z]"
 msgstr "방위격자 [Z]"
 
-#: src/stel_ui.cpp:604
+#: src/stel_ui.cpp:591
 msgid "Equatorial Grid [E]"
 msgstr "적도격자 [E]"
 
-#: src/stel_ui.cpp:606
+#: src/stel_ui.cpp:593
 msgid "Ground [G]"
 msgstr "지면 [G]"
 
-#: src/stel_ui.cpp:608
+#: src/stel_ui.cpp:595
 msgid "Cardinal Points [Q]"
 msgstr "방위기점 [Q]"
 
-#: src/stel_ui.cpp:610
+#: src/stel_ui.cpp:597
 msgid "Atmosphere [A]"
 msgstr "대기 [A]"
 
-#: src/stel_ui.cpp:612
+#: src/stel_ui.cpp:599
 msgid "Nebulas [N]"
 msgstr "성운들 [N]"
 
-#: src/stel_ui.cpp:614
+#: src/stel_ui.cpp:601
 msgid "Help [H]"
 msgstr "도움말 [H]"
 
-#: src/stel_ui.cpp:616
+#: src/stel_ui.cpp:603
 msgid "Equatorial/Altazimuthal Mount [ENTER]"
 msgstr "적위/경위대 [Enter]"
 
-#: src/stel_ui.cpp:618
+#: src/stel_ui.cpp:605
 msgid "Configuration window"
 msgstr "설정창"
 
-#: src/stel_ui.cpp:621
+#: src/stel_ui.cpp:608
 msgid "Night (red) mode"
 msgstr "야간관측(적색) 모드"
 
-#: src/stel_ui.cpp:624
+#: src/stel_ui.cpp:611
 msgid "Quit [CTRL + Q]"
 msgstr "종료 [CTRL + Q]"
 
-#: src/stel_ui.cpp:626
+#: src/stel_ui.cpp:613
 msgid "Quit [CMD + Q]"
 msgstr "종료 [CMD + Q]"
 
-#: src/stel_ui.cpp:629
+#: src/stel_ui.cpp:616
 msgid "Search for object"
 msgstr "천체 찾기"
 
-#: src/stel_ui.cpp:633
+#: src/stel_ui.cpp:620
 msgid "Goto selected object [SPACE]"
 msgstr "선택한 천체로 이동 [스페이스]"
 
-#: src/stel_ui.cpp:639
+#: src/stel_ui.cpp:626
 msgid "Decrease Time Speed [J]"
 msgstr "시간 더 느리게 [J]"
 
-#: src/stel_ui.cpp:641
+#: src/stel_ui.cpp:628
 msgid "Real Time Speed [K]"
 msgstr "실시간 속도 [K]"
 
-#: src/stel_ui.cpp:643
+#: src/stel_ui.cpp:630
 msgid "Increase Time Speed [L]"
 msgstr "시간 더 빠르게 [L]"
 
-#: src/stel_ui.cpp:645
+#: src/stel_ui.cpp:632
 msgid "Return to Current Time"
 msgstr "현재 시간으로 되돌아오기"
 
-#: src/stel_ui.cpp:654
+#: src/stel_ui.cpp:641
 msgid ""
 "   Please check for newer versions and send bug reports\n"
 "    and comments to us at: http://www.stellarium.org\n"
@@ -197,11 +197,11 @@ msgstr ""
 "    http://www.stellarium.org\n"
 "\n"
 
-#: src/stel_ui.cpp:673
+#: src/stel_ui.cpp:660
 msgid "Information"
 msgstr "정보"
 
-#: src/stel_ui.cpp:685
+#: src/stel_ui.cpp:672
 msgid ""
 "Movement & selection:\n"
 "Arrow Keys       : Change viewing RA/DE\n"
@@ -215,19 +215,19 @@ msgid ""
 "SPACE            : Center on selected object\n"
 "\n"
 msgstr ""
-"이동 & 선택: \n"
-"방향키 : 시야변경 적경/적위 \n"
-"Page Up/Down : 확대 \n"
-"CTRL+Up/Down : 확대 \n"
-"좌측 클릭 : 천체 선택 \n"
+"이동 & 선택:\n"
+"방향키 : 시야변경 적경/적위\n"
+"Page Up/Down : 확대\n"
+"CTRL+Up/Down : 확대\n"
+"좌측 클릭 : 천체 선택\n"
 "우측 클릭 : 선택취소\n"
 "CTRL+좌측 클릭 : 선택취소\n"
-"\\ : 축소 (적용 가능할 경우 행성+달) \n"
-"/ : 선택한 천체 확대 \n"
+"\\ : 축소 (적용 가능할 경우 행성+달)\n"
+"/ : 선택한 천체 확대\n"
 "스페이스키 : 선택한 천체를 중심에 놓기\n"
 "\n"
 
-#: src/stel_ui.cpp:696
+#: src/stel_ui.cpp:683
 msgid ""
 "Display options:\n"
 "ENTER : Equatorial/altazimuthal mount\n"
@@ -242,20 +242,20 @@ msgid ""
 "4 , : Ecliptic line             5 . : Equator line\n"
 "\n"
 msgstr ""
-"화면표시 옵션: \n"
+"화면표시 옵션:\n"
 "엔터키 : 적도의/경위대\n"
 "F1 : 가능한 경우 전체화면 표시 토글\n"
-"C : 별자리 선 V : 별자리 이름표 \n"
+"C : 별자리 선 V : 별자리 이름표\n"
 "R : 별자리 그림 E : 적도 격자\n"
-"Z : 방위각 격자 N : 성운 이름표 \n"
-"P : 행성 이름표 G : 지면 \n"
-"A : 대기 F : 안개 \n"
-"Q : 방위기점 O : 달 확대 토글 \n"
+"Z : 방위각 격자 N : 성운 이름표\n"
+"P : 행성 이름표 G : 지면\n"
+"A : 대기 F : 안개\n"
+"Q : 방위기점 O : 달 확대 토글\n"
 "T : 천체 추적 S : 별\n"
 "4 , : 황도 5 . : 천구의 적도\n"
 "\n"
 
-#: src/stel_ui.cpp:708
+#: src/stel_ui.cpp:695
 msgid ""
 "Dialogs & other controls:\n"
 "H   : Help                      I   : About Stellarium\n"
@@ -265,15 +265,15 @@ msgid ""
 "CTRL + F : Toggle object finder\n"
 "\n"
 msgstr ""
-"대화창 & 기타 콘트롤: \n"
-"H : 도움말 I : 스텔라리움은 ... \n"
-"M : 텍스트 메뉴 1 (one) : 설정 \n"
-"CTRL + S : 스크린 캡쳐 \n"
-"CTRL + R : 스크립트 저장 토글 \n"
+"대화창 & 기타 콘트롤:\n"
+"H : 도움말 I : 스텔라리움은 ...\n"
+"M : 텍스트 메뉴 1 (one) : 설정\n"
+"CTRL + S : 스크린 캡쳐\n"
+"CTRL + R : 스크립트 저장 토글\n"
 "CTRL + F : 천체 파인더 토글\n"
 "\n"
 
-#: src/stel_ui.cpp:715
+#: src/stel_ui.cpp:702
 msgid ""
 "Time & Date:\n"
 "6   : Time rate pause           7   : Time rate 0\n"
@@ -283,59 +283,59 @@ msgid ""
 "[   : Back 7 days               ]   : Forward 7 days\n"
 "\n"
 msgstr ""
-"시간 & 날짜: \n"
-"6 : 시간 빠르기 중단 7 : 시간 속도 0 \n"
-"8 : 현재시간 설정 J : 시간 속도 감소 \n"
-"K : 시간 보통 속도 L : 시간 속도 증가 \n"
-"- : 24시간 전으로 = : 24시간 후로 \n"
+"시간 & 날짜:\n"
+"6 : 시간 빠르기 중단 7 : 시간 속도 0\n"
+"8 : 현재시간 설정 J : 시간 속도 감소\n"
+"K : 시간 보통 속도 L : 시간 속도 증가\n"
+"- : 24시간 전으로 = : 24시간 후로\n"
 "[ : 7일 전으로 ] : 7일 후로\n"
 "\n"
 
-#: src/stel_ui.cpp:722
+#: src/stel_ui.cpp:709
 msgid ""
 "During Script Playback:\n"
 "CTRL + C : End Script\n"
 "6   : pause script              K   : resume script\n"
 "\n"
 msgstr ""
-"스크립트 재생 중: \n"
-"CTRL + C : 스크립트 종료 \n"
+"스크립트 재생 중:\n"
+"CTRL + C : 스크립트 종료\n"
 "6 : 스크립트 중지 K : 스크립트 계속\n"
 "\n"
 
-#: src/stel_ui.cpp:726
+#: src/stel_ui.cpp:713
 msgid ""
 "Misc:\n"
 "9   : Toggle meteor shower rates\n"
 msgstr ""
-"기타: \n"
+"기타:\n"
 "9 : 유성우 빈도 토글\n"
 
-#: src/stel_ui.cpp:729
+#: src/stel_ui.cpp:716
 msgid "CTRL + Q : Quit\n"
 msgstr "CTRL + Q : 종료\n"
 
-#: src/stel_ui.cpp:731
+#: src/stel_ui.cpp:718
 msgid "CMD + Q  : Quit\n"
 msgstr "CMD + Q : 종료\n"
 
-#: src/stel_ui.cpp:737
+#: src/stel_ui.cpp:724
 msgid "Help"
 msgstr "도움말"
 
-#: src/stel_ui.cpp:1001
+#: src/stel_ui.cpp:984
 msgid "Command recording stopped."
 msgstr "명령 저장이 중단되었습니다."
 
-#: src/stel_ui.cpp:1009
+#: src/stel_ui.cpp:992
 msgid "Recording commands to script file:\n"
 msgstr "명령들을 스크립트 파일로 저장합니다:\n"
 
-#: src/stel_ui.cpp:1011
+#: src/stel_ui.cpp:994
 msgid "Hit CTRL-R again to stop.\n"
 msgstr "멈추려면 CTRL-R 키를 치세요.\n"
 
-#: src/stel_ui.cpp:1015
+#: src/stel_ui.cpp:998
 msgid "Error: Unable to open script file to record commands."
 msgstr "오류: 명령들을 저장하기 위한 스크립트 파일을 열 수 없습니다."
 
@@ -355,17 +355,17 @@ msgstr "별 이름표 달아주는 등급 한계 :"
 msgid "Star Twinkle. Amount :"
 msgstr "별 반짝거림 정도 :"
 
-#: src/stel_ui_conf.cpp:90
+#: src/stel_ui_conf.cpp:90 src/stel_ui_tuiconf.cpp:179
 msgid "Constellations Lines"
-msgstr ""
+msgstr "별자리 윤곽"
 
-#: src/stel_ui_conf.cpp:95
+#: src/stel_ui_conf.cpp:95 src/stel_ui_tuiconf.cpp:183
 msgid "Constellations Names"
 msgstr "별자리 이름"
 
 #: src/stel_ui_conf.cpp:100
 msgid "Constellations Boundaries"
-msgstr ""
+msgstr "별자리 경계"
 
 #: src/stel_ui_conf.cpp:105
 msgid "Selected Constellation Only"
@@ -377,7 +377,7 @@ msgstr "성운 이름 표시하는 등급 한계 :"
 
 #: src/stel_ui_conf.cpp:129
 msgid "Also display Nebulas without textures"
-msgstr ""
+msgstr "또한, 텍스쳐 없이 성운 표시합니다."
 
 #: src/stel_ui_conf.cpp:140
 msgid "Planets"
@@ -391,19 +391,19 @@ msgstr "달 확대"
 msgid "Planets Hints"
 msgstr "행성에 대한 힌트"
 
-#: src/stel_ui_conf.cpp:164 src/stel_ui_tuiconf.cpp:400
+#: src/stel_ui_conf.cpp:164
 msgid "Equatorial Grid"
 msgstr "적위 격자"
 
-#: src/stel_ui_conf.cpp:169 src/stel_ui_tuiconf.cpp:399
+#: src/stel_ui_conf.cpp:169
 msgid "Azimuthal Grid"
 msgstr "방위 격자"
 
-#: src/stel_ui_conf.cpp:174 src/stel_ui_tuiconf.cpp:401
+#: src/stel_ui_conf.cpp:174
 msgid "Equator Line"
 msgstr "적도"
 
-#: src/stel_ui_conf.cpp:179 src/stel_ui_tuiconf.cpp:402
+#: src/stel_ui_conf.cpp:179
 msgid "Ecliptic Line"
 msgstr "황도"
 
@@ -411,7 +411,7 @@ msgstr "황도"
 msgid "Ground"
 msgstr "지면"
 
-#: src/stel_ui_conf.cpp:195 src/stel_ui_tuiconf.cpp:394
+#: src/stel_ui_conf.cpp:195 src/stel_ui_tuiconf.cpp:187
 msgid "Cardinal Points"
 msgstr "방위기점"
 
@@ -504,24 +504,23 @@ msgstr "스크린 해상도가 목록에 없으면 파일을 편집하세요 :"
 
 #: src/stel_ui_conf.cpp:418
 msgid "Choose landscapes:"
-msgstr ""
+msgstr "풍경을 선택하십시오."
 
 #: src/stel_ui_conf.cpp:446
 msgid "Program Language: "
-msgstr ""
+msgstr "프로그램 언어: "
 
-#: src/stel_ui_conf.cpp:462 src/stel_ui_tuiconf.cpp:381
+#: src/stel_ui_conf.cpp:462 src/stel_ui_tuiconf.cpp:156
 msgid "Sky Language: "
 msgstr "하늘 언어: "
 
-#: src/stel_ui_conf.cpp:480 src/stel_ui_tuiconf.cpp:377
-#, fuzzy
+#: src/stel_ui_conf.cpp:480 src/stel_ui_tuiconf.cpp:149
 msgid "Sky Culture: "
-msgstr "하늘 문명: "
+msgstr "하늘 문화: "
 
 #: src/stel_ui_conf.cpp:501
 msgid "Language"
-msgstr ""
+msgstr "언어"
 
 #: src/stel_ui_conf.cpp:502
 msgid "Date & Time"
@@ -549,11 +548,11 @@ msgstr "천체 찾기"
 
 #: src/stel_ui_conf.cpp:645
 msgid "Search for (eg. Saturn, Polaris, HP6218, Orion, M31):"
-msgstr ""
+msgstr "찾기 (예를 들면, Saturn, Polaris, HP 6128, Orion, M31):"
 
 #: src/stel_ui_conf.cpp:662
 msgid "GO"
-msgstr ""
+msgstr "가기"
 
 #: src/stel_ui_conf.cpp:787
 msgid "Enter observatory name"
@@ -561,250 +560,183 @@ msgstr "관측소 위치를 입력하세요."
 
 #: src/stel_ui_conf.cpp:927
 msgid ": Normal rate"
-msgstr ""
+msgstr ": 평상 속도"
 
 #: src/stel_ui_conf.cpp:934
 msgid ": Standard Perseids rate"
-msgstr ""
+msgstr ": 표준 페르세우스 유성우 빈도수"
 
 #: src/stel_ui_conf.cpp:941
 msgid ": Exceptional Leonid rate"
-msgstr ""
+msgstr ": 예외적인 사자자리 유성우 빈도수"
 
 #: src/stel_ui_conf.cpp:948
 msgid ": Highest rate ever (1966 Leonids)"
-msgstr ""
+msgstr ": 가장 높은 빈도수 (1966년 사자자리 유성우)"
 
 #: src/stel_ui_conf.cpp:953
 msgid "Meteor Rate per minute"
-msgstr ""
+msgstr "분당 유성 빈도수"
 
 #: src/stel_ui_conf.cpp:974
 msgid "Current Time Speed is x"
 msgstr "현재 시간 속도는 x"
 
-#: src/stel_ui_tuiconf.cpp:271 src/stel_ui_tuiconf.cpp:411
-msgid "Magnitude Sizing Multiplier: "
-msgstr "별 크기 증가: "
-
-#: src/stel_ui_tuiconf.cpp:348
+#: src/stel_ui_tuiconf.cpp:80
 msgid "Set Location "
 msgstr "위치 설정 "
 
-#: src/stel_ui_tuiconf.cpp:349
+#: src/stel_ui_tuiconf.cpp:81
 msgid "Set Time "
 msgstr "시간 설정 "
 
-#: src/stel_ui_tuiconf.cpp:350
+#: src/stel_ui_tuiconf.cpp:82
 msgid "General "
 msgstr "일반 "
 
-#: src/stel_ui_tuiconf.cpp:351
+#: src/stel_ui_tuiconf.cpp:83
 msgid "Stars "
 msgstr "별 "
 
-#: src/stel_ui_tuiconf.cpp:352
+#: src/stel_ui_tuiconf.cpp:84
 msgid "Colors "
 msgstr "색깔 "
 
-#: src/stel_ui_tuiconf.cpp:353
+#: src/stel_ui_tuiconf.cpp:85
 msgid "Effects "
 msgstr "효과 "
 
-#: src/stel_ui_tuiconf.cpp:354
+#: src/stel_ui_tuiconf.cpp:86
 msgid "Scripts "
 msgstr "스크립트 "
 
-#: src/stel_ui_tuiconf.cpp:355
+#: src/stel_ui_tuiconf.cpp:87
 msgid "Administration "
 msgstr "관리 "
 
-#: src/stel_ui_tuiconf.cpp:358
+#: src/stel_ui_tuiconf.cpp:98
 msgid "Latitude: "
 msgstr "위도 "
 
-#: src/stel_ui_tuiconf.cpp:359
+#: src/stel_ui_tuiconf.cpp:100
 msgid "Longitude: "
 msgstr "경도 "
 
-#: src/stel_ui_tuiconf.cpp:360
+#: src/stel_ui_tuiconf.cpp:102
 msgid "Altitude (m): "
 msgstr "고도 (m): "
 
-#: src/stel_ui_tuiconf.cpp:361
+#: src/stel_ui_tuiconf.cpp:106
 msgid "Solar System Body: "
-msgstr ""
+msgstr "태양계 천체: "
 
-#: src/stel_ui_tuiconf.cpp:365
+#: src/stel_ui_tuiconf.cpp:116
 msgid "Sky Time: "
 msgstr "하늘 시간: "
 
-#: src/stel_ui_tuiconf.cpp:366
+#: src/stel_ui_tuiconf.cpp:118
 msgid "Set Time Zone: "
 msgstr "시간대 설정 "
 
-#: src/stel_ui_tuiconf.cpp:367
+#: src/stel_ui_tuiconf.cpp:121
 msgid "Preset Sky Time: "
 msgstr "하늘 시간 미리 설정: "
 
-#: src/stel_ui_tuiconf.cpp:368
+#: src/stel_ui_tuiconf.cpp:123
 msgid "Sky Time At Start-up: "
 msgstr "시작시 하늘 시간 적용: "
 
-#: src/stel_ui_tuiconf.cpp:369
-#, fuzzy
-msgid "Actual Time"
-msgstr "시간 설정 "
-
-#: src/stel_ui_tuiconf.cpp:370
-#, fuzzy
-msgid "Preset Time"
-msgstr "하늘 시간 미리 설정: "
-
-#: src/stel_ui_tuiconf.cpp:371
+#: src/stel_ui_tuiconf.cpp:127
 msgid "Time Display Format: "
 msgstr "시간 표시 형식: "
 
-#: src/stel_ui_tuiconf.cpp:372
+#: src/stel_ui_tuiconf.cpp:132
 msgid "Date Display Format: "
 msgstr "날짜 표시 형식: "
 
-#: src/stel_ui_tuiconf.cpp:384
+#: src/stel_ui_tuiconf.cpp:164
 msgid "Show: "
 msgstr "보이기: "
 
-#: src/stel_ui_tuiconf.cpp:384 src/stel_ui_tuiconf.cpp:409 src/s_gui.cpp:2212
+#: src/stel_ui_tuiconf.cpp:164 src/stel_ui_tuiconf.cpp:199 src/s_gui.cpp:2212
 msgid "Yes"
 msgstr "예"
 
-#: src/stel_ui_tuiconf.cpp:384 src/stel_ui_tuiconf.cpp:409 src/s_gui.cpp:2193
+#: src/stel_ui_tuiconf.cpp:164 src/stel_ui_tuiconf.cpp:199 src/s_gui.cpp:2193
 msgid "No"
 msgstr "아니오"
 
-#: src/stel_ui_tuiconf.cpp:385
+#: src/stel_ui_tuiconf.cpp:166
 msgid "Star Magnitude Multiplier: "
 msgstr "별 크기 증가: "
 
-#: src/stel_ui_tuiconf.cpp:386
+#: src/stel_ui_tuiconf.cpp:168
 msgid "Maximum Magnitude to Label: "
 msgstr "이름표가 붙는 최대 등급: "
 
-#: src/stel_ui_tuiconf.cpp:387
+#: src/stel_ui_tuiconf.cpp:170
 msgid "Twinkling: "
 msgstr "깜박임: "
 
-#: src/stel_ui_tuiconf.cpp:390
-#, fuzzy
-msgid "Constellation Lines"
-msgstr "별자리 이름"
-
-#: src/stel_ui_tuiconf.cpp:391
-#, fuzzy
-msgid "Constellation Names"
-msgstr "별자리 이름"
-
-#: src/stel_ui_tuiconf.cpp:392
-#, fuzzy
-msgid "Constellation Art Intensity"
-msgstr "별자리 그림 [R]"
-
-#: src/stel_ui_tuiconf.cpp:393
-#, fuzzy
-msgid "Constellation Boundaries"
-msgstr "별자리 이름"
-
-#: src/stel_ui_tuiconf.cpp:395
-#, fuzzy
-msgid "Planet Names"
-msgstr "행성들"
-
-#: src/stel_ui_tuiconf.cpp:396
-#, fuzzy
-msgid "Planet Orbits"
-msgstr "행성에 대한 힌트"
-
-#: src/stel_ui_tuiconf.cpp:397
-#, fuzzy
-msgid "Planet Trails"
-msgstr "행성들"
-
-#: src/stel_ui_tuiconf.cpp:398
-msgid "Meridian Line"
-msgstr ""
-
-#: src/stel_ui_tuiconf.cpp:403
-#, fuzzy
-msgid "Nebula Names"
-msgstr "성운들 [N]"
-
-#: src/stel_ui_tuiconf.cpp:404
-msgid "Nebula Circles"
-msgstr ""
-
-#: src/stel_ui_tuiconf.cpp:408
+#: src/stel_ui_tuiconf.cpp:193
 msgid "Landscape: "
 msgstr "경치: "
 
-#: src/stel_ui_tuiconf.cpp:409
+#: src/stel_ui_tuiconf.cpp:199
 msgid "Manual zoom: "
 msgstr "수동 확대: "
 
-#: src/stel_ui_tuiconf.cpp:410
+#: src/stel_ui_tuiconf.cpp:203
 msgid "Object Sizing Rule: "
 msgstr "천체 크기 자(尺): "
 
-#: src/stel_ui_tuiconf.cpp:410
+#: src/stel_ui_tuiconf.cpp:203
 msgid "Point"
 msgstr "기점"
 
-#: src/stel_ui_tuiconf.cpp:410
+#: src/stel_ui_tuiconf.cpp:203
 msgid "Magnitude"
 msgstr "등급"
 
-#: src/stel_ui_tuiconf.cpp:412
+#: src/stel_ui_tuiconf.cpp:207
+msgid "Magnitude Sizing Multiplier: "
+msgstr "별 크기 증가: "
+
+#: src/stel_ui_tuiconf.cpp:211
 msgid "Milky Way intensity: "
 msgstr "은하수 농도: "
 
-#: src/stel_ui_tuiconf.cpp:413
+#: src/stel_ui_tuiconf.cpp:215
 msgid "Maximum Nebula Magnitude to Label: "
 msgstr "성운에 이름표 붙는 최대 등급: "
 
-#: src/stel_ui_tuiconf.cpp:414
+#: src/stel_ui_tuiconf.cpp:219
 msgid "Zoom Duration: "
 msgstr "확대 지속: "
 
-#: src/stel_ui_tuiconf.cpp:415
+#: src/stel_ui_tuiconf.cpp:223
 msgid "Cursor Timeout: "
 msgstr "커서 타임아웃: "
 
-#: src/stel_ui_tuiconf.cpp:418
+#: src/stel_ui_tuiconf.cpp:229
 msgid "Local Script: "
 msgstr "로컬 스크립트: "
 
-#: src/stel_ui_tuiconf.cpp:421
+#: src/stel_ui_tuiconf.cpp:235
 msgid "CD/DVD Script: "
 msgstr "CD/DVD 스크립트: "
 
-#: src/stel_ui_tuiconf.cpp:425
+#: src/stel_ui_tuiconf.cpp:243
 msgid "Load Default Configuration: "
 msgstr "기본설정 불러오기: "
 
-#: src/stel_ui_tuiconf.cpp:426
+#: src/stel_ui_tuiconf.cpp:245
 msgid "Save Current Configuration as Default: "
 msgstr "현재 설정을 기본설정으로 저장: "
 
-#: src/stel_ui_tuiconf.cpp:427
+#: src/stel_ui_tuiconf.cpp:247
 msgid "Update me via Internet: "
 msgstr "이 프로그램 인터넷으로 업데이트: "
-
-#: src/stel_ui_tuiconf.cpp:428
-#, fuzzy
-msgid "Set UI Locale: "
-msgstr "위치 설정 "
-
-#: src/stel_ui_tuiconf.cpp:534
-msgid "Arrow down to load list."
-msgstr ""
 
 #: src/translations.h:33
 msgid "Sun"
@@ -916,7 +848,7 @@ msgstr "케이론"
 
 #: src/translations.h:60
 msgid "Solar System Observer"
-msgstr ""
+msgstr "태양계 관측자"
 
 #: src/translations.h:63 src/s_gui.cpp:2658
 msgid "N"
@@ -935,885 +867,864 @@ msgid "W"
 msgstr "서"
 
 #: src/translations.h:69
-msgid "Chinese"
-msgstr ""
-
-#: src/translations.h:70
-msgid "Western"
-msgstr ""
-
-#: src/translations.h:71
-#, fuzzy
-msgid "Polynesian"
-msgstr "행성에 대한 힌트"
-
-#: src/translations.h:72
-msgid "Egyptian"
-msgstr ""
-
-#: src/translations.h:75
 msgid "Aquila"
 msgstr "독수리"
 
-#: src/translations.h:76
+#: src/translations.h:70
 msgid "Andromeda"
 msgstr "안드로메다"
 
-#: src/translations.h:77
+#: src/translations.h:71
 msgid "Sculptor"
 msgstr "조각가"
 
-#: src/translations.h:78
+#: src/translations.h:72
 msgid "Ara"
 msgstr "제단"
 
-#: src/translations.h:79
+#: src/translations.h:73
 msgid "Libra"
 msgstr "천칭"
 
-#: src/translations.h:80
+#: src/translations.h:74
 msgid "Cetus"
 msgstr "고래"
 
-#: src/translations.h:81
+#: src/translations.h:75
 msgid "Aries"
 msgstr "양"
 
-#: src/translations.h:82 src/translations.h:152
+#: src/translations.h:76 src/translations.h:146
 msgid "Scutum"
 msgstr "방패"
 
-#: src/translations.h:83
+#: src/translations.h:77
 msgid "Pyxis"
 msgstr "나침반"
 
-#: src/translations.h:84
+#: src/translations.h:78
 msgid "Bootes"
 msgstr "목동"
 
-#: src/translations.h:85
+#: src/translations.h:79
 msgid "Caelum"
 msgstr "조각칼"
 
-#: src/translations.h:86
+#: src/translations.h:80
 msgid "Chamaeleon"
 msgstr "카멜레온"
 
-#: src/translations.h:87
+#: src/translations.h:81
 msgid "Cancer"
 msgstr "게"
 
-#: src/translations.h:88
+#: src/translations.h:82
 msgid "Capricornus"
 msgstr "바다염소"
 
-#: src/translations.h:89
+#: src/translations.h:83
 msgid "Carina"
 msgstr "용골"
 
-#: src/translations.h:90
+#: src/translations.h:84
 msgid "Cassiopeia"
 msgstr "카시오페이아"
 
-#: src/translations.h:91
+#: src/translations.h:85
 msgid "Centaurus"
 msgstr "센타우루스"
 
-#: src/translations.h:92
+#: src/translations.h:86
 msgid "Cepheus"
 msgstr "케페우스"
 
-#: src/translations.h:93
+#: src/translations.h:87
 msgid "Coma Berenices"
 msgstr "머리털"
 
-#: src/translations.h:94
+#: src/translations.h:88
 msgid "Canes Venatici"
 msgstr "사냥개"
 
-#: src/translations.h:95
+#: src/translations.h:89
 msgid "Auriga"
 msgstr "마차부"
 
-#: src/translations.h:96
+#: src/translations.h:90
 msgid "Columba"
 msgstr "비둘기"
 
-#: src/translations.h:97
+#: src/translations.h:91
 msgid "Circinus"
 msgstr "컴퍼스"
 
-#: src/translations.h:98
+#: src/translations.h:92
 msgid "Crater"
 msgstr "컵"
 
-#: src/translations.h:99
+#: src/translations.h:93
 msgid "Corona Australis"
 msgstr "남쪽왕관"
 
-#: src/translations.h:100
+#: src/translations.h:94
 msgid "Corona Borealis"
 msgstr "북쪽왕관"
 
-#: src/translations.h:101
+#: src/translations.h:95
 msgid "Corvus"
 msgstr "까마귀"
 
-#: src/translations.h:102
+#: src/translations.h:96
 msgid "Crux"
 msgstr "남십자"
 
-#: src/translations.h:103
+#: src/translations.h:97
 msgid "Cygnus"
 msgstr "백조"
 
-#: src/translations.h:104
+#: src/translations.h:98
 msgid "Delphinus"
 msgstr "돌고래"
 
-#: src/translations.h:105
+#: src/translations.h:99
 msgid "Dorado"
 msgstr "황새치"
 
-#: src/translations.h:106
+#: src/translations.h:100
 msgid "Draco"
 msgstr "용"
 
-#: src/translations.h:107
+#: src/translations.h:101
 msgid "Norma"
 msgstr "직각자"
 
-#: src/translations.h:108
+#: src/translations.h:102
 msgid "Eridanus"
 msgstr "에리다누스"
 
-#: src/translations.h:109
+#: src/translations.h:103
 msgid "Sagitta"
 msgstr "화살"
 
-#: src/translations.h:110
+#: src/translations.h:104
 msgid "Fornax"
 msgstr "화로"
 
-#: src/translations.h:111
+#: src/translations.h:105
 msgid "Gemini"
 msgstr "쌍동이"
 
-#: src/translations.h:112
+#: src/translations.h:106
 msgid "Camelopardalis"
 msgstr "기린"
 
-#: src/translations.h:113
+#: src/translations.h:107
 msgid "Canis Major"
 msgstr "큰개"
 
-#: src/translations.h:114
+#: src/translations.h:108
 msgid "Ursa Major"
 msgstr "큰곰"
 
-#: src/translations.h:115
+#: src/translations.h:109
 msgid "Grus"
 msgstr "두루미"
 
-#: src/translations.h:116
+#: src/translations.h:110
 msgid "Hercules"
 msgstr "헤라클레스"
 
-#: src/translations.h:117
+#: src/translations.h:111
 msgid "Horologium"
 msgstr "시계자리"
 
-#: src/translations.h:118
+#: src/translations.h:112
 msgid "Hydra"
 msgstr "큰물뱀"
 
-#: src/translations.h:119
+#: src/translations.h:113
 msgid "Hydrus"
 msgstr "물뱀"
 
-#: src/translations.h:120
+#: src/translations.h:114
 msgid "Indus"
 msgstr "인디언"
 
-#: src/translations.h:121
+#: src/translations.h:115
 msgid "Lacerta"
 msgstr "도마뱀"
 
-#: src/translations.h:122
+#: src/translations.h:116
 msgid "Monoceros"
 msgstr "외뿔소"
 
-#: src/translations.h:123
+#: src/translations.h:117
 msgid "Lepus"
 msgstr "토끼"
 
-#: src/translations.h:124
+#: src/translations.h:118
 msgid "Leo"
 msgstr "사자"
 
-#: src/translations.h:125
+#: src/translations.h:119
 msgid "Lupus"
 msgstr "이리"
 
-#: src/translations.h:126
+#: src/translations.h:120
 msgid "Lynx"
 msgstr "살쾡이"
 
-#: src/translations.h:127
+#: src/translations.h:121
 msgid "Lyra"
 msgstr "거문고"
 
-#: src/translations.h:128
+#: src/translations.h:122
 msgid "Antlia"
 msgstr "공기펌프"
 
-#: src/translations.h:129
+#: src/translations.h:123
 msgid "Microscopium"
 msgstr "현미경"
 
-#: src/translations.h:130
+#: src/translations.h:124
 msgid "Musca"
 msgstr "파리"
 
-#: src/translations.h:131
+#: src/translations.h:125
 msgid "Octans"
 msgstr "팔분의"
 
-#: src/translations.h:132
+#: src/translations.h:126
 msgid "Apus"
 msgstr "극락조"
 
-#: src/translations.h:133
+#: src/translations.h:127
 msgid "Ophiuchus"
 msgstr "땅군자리"
 
-#: src/translations.h:134
+#: src/translations.h:128
 msgid "Orion"
 msgstr "오리온"
 
-#: src/translations.h:135
+#: src/translations.h:129
 msgid "Pavo"
 msgstr "공작"
 
-#: src/translations.h:136
+#: src/translations.h:130
 msgid "Pegasus"
 msgstr "페가수스"
 
-#: src/translations.h:137
+#: src/translations.h:131
 msgid "Pictor"
 msgstr "화가"
 
-#: src/translations.h:138
+#: src/translations.h:132
 msgid "Perseus"
 msgstr "페르세우스"
 
-#: src/translations.h:139
+#: src/translations.h:133
 msgid "Equuleus"
 msgstr "조랑말"
 
-#: src/translations.h:140
+#: src/translations.h:134
 msgid "Canis Minor"
 msgstr "작은개"
 
-#: src/translations.h:141
+#: src/translations.h:135
 msgid "Leo Minor"
 msgstr "작은사자"
 
-#: src/translations.h:142
+#: src/translations.h:136
 msgid "Vulpecula"
 msgstr "여우"
 
-#: src/translations.h:143
+#: src/translations.h:137
 msgid "Ursa Minor"
 msgstr "작음곰"
 
-#: src/translations.h:144
+#: src/translations.h:138
 msgid "Phoenix"
 msgstr "봉황"
 
-#: src/translations.h:145
+#: src/translations.h:139
 msgid "Piscis Austrinus"
 msgstr "남쪽물고기"
 
-#: src/translations.h:146
+#: src/translations.h:140
 msgid "Pisces"
 msgstr "물고기"
 
-#: src/translations.h:147
+#: src/translations.h:141
 msgid "Volans"
 msgstr "날치"
 
-#: src/translations.h:148
+#: src/translations.h:142
 msgid "Puppis"
 msgstr "고물"
 
-#: src/translations.h:149
+#: src/translations.h:143
 msgid "Reticulum"
 msgstr "그물"
 
-#: src/translations.h:150
+#: src/translations.h:144
 msgid "Sagittarius"
 msgstr "궁수"
 
-#: src/translations.h:151
+#: src/translations.h:145
 msgid "Scorpius"
 msgstr "전갈"
 
-#: src/translations.h:153
+#: src/translations.h:147
 msgid "Serpens"
 msgstr "뱀"
 
-#: src/translations.h:154
+#: src/translations.h:148
 msgid "Sextans"
 msgstr "육분의"
 
-#: src/translations.h:155
+#: src/translations.h:149
 msgid "Mensa"
 msgstr "테이블산"
 
-#: src/translations.h:156
+#: src/translations.h:150
 msgid "Taurus"
 msgstr "황소"
 
-#: src/translations.h:157
+#: src/translations.h:151
 msgid "Telescopium"
 msgstr "망원경"
 
-#: src/translations.h:158
+#: src/translations.h:152
 msgid "Tucana"
 msgstr "큰부리새"
 
-#: src/translations.h:159
+#: src/translations.h:153
 msgid "Triangulum"
 msgstr "삼각형"
 
-#: src/translations.h:160
+#: src/translations.h:154
 msgid "Triangulum Australe"
 msgstr "남쪽삼각형"
 
-#: src/translations.h:161
+#: src/translations.h:155
 msgid "Aquarius"
 msgstr "물병"
 
-#: src/translations.h:162
+#: src/translations.h:156
 msgid "Virgo"
 msgstr "처녀"
 
-#: src/translations.h:163
+#: src/translations.h:157
 msgid "Vela"
 msgstr "돛"
 
-#: src/translations.h:166
+#: src/translations.h:160
 msgid "Bull's Foreleg"
-msgstr ""
+msgstr "황소의 앞다리"
 
-#: src/translations.h:167
+#: src/translations.h:161
 msgid "Two Poles"
 msgstr ""
 
-#: src/translations.h:168
+#: src/translations.h:162
 msgid "Lion"
-msgstr ""
+msgstr "사자"
 
-#: src/translations.h:169
+#: src/translations.h:163
 msgid "Two Jaws"
-msgstr ""
+msgstr "두 개의 턱"
 
-#: src/translations.h:170
+#: src/translations.h:164
 msgid "Sah"
 msgstr ""
 
-#: src/translations.h:171
+#: src/translations.h:165
 msgid "Bird"
-msgstr ""
+msgstr "새"
 
-#: src/translations.h:172
+#: src/translations.h:166
 msgid "Sek"
 msgstr ""
 
-#: src/translations.h:173
+#: src/translations.h:167
 msgid "Triangle"
-msgstr ""
+msgstr "삼각형"
 
-#: src/translations.h:174
+#: src/translations.h:168
 msgid "Ferry Boat"
-msgstr ""
+msgstr "나룻배"
 
-#: src/translations.h:175 src/translations.h:246
+#: src/translations.h:169 src/translations.h:240
 msgid "Boat"
-msgstr ""
+msgstr "배"
 
-#: src/translations.h:176
+#: src/translations.h:170
 msgid "Crocodile"
-msgstr ""
+msgstr "악어"
 
-#: src/translations.h:177
+#: src/translations.h:171
 msgid "Selkis"
 msgstr ""
 
-#: src/translations.h:178
+#: src/translations.h:172
 msgid "Prow"
 msgstr ""
 
-#: src/translations.h:179
+#: src/translations.h:173
 msgid "Horus"
 msgstr ""
 
-#: src/translations.h:180
+#: src/translations.h:174
 msgid "Sheepfold"
 msgstr ""
 
-#: src/translations.h:181
+#: src/translations.h:175
 msgid "Giant"
-msgstr ""
+msgstr "거인"
 
-#: src/translations.h:182
+#: src/translations.h:176
 msgid "Hippopotamus"
 msgstr ""
 
-#: src/translations.h:183
+#: src/translations.h:177
 msgid "Flock"
 msgstr ""
 
-#: src/translations.h:184
+#: src/translations.h:178
 msgid "Pair of Stars"
-msgstr ""
+msgstr "한 쌍의 별"
 
-#: src/translations.h:185
+#: src/translations.h:179
 msgid "Khanuwy Fish"
 msgstr ""
 
-#: src/translations.h:186 src/translations.h:225
+#: src/translations.h:180 src/translations.h:219
 msgid "Net"
 msgstr ""
 
-#: src/translations.h:187
+#: src/translations.h:181
 msgid "Jaw"
 msgstr ""
 
-#: src/translations.h:188
+#: src/translations.h:182
 msgid "Mooring Post"
 msgstr ""
 
-#: src/translations.h:189
+#: src/translations.h:183
 msgid "Kenemet"
 msgstr ""
 
-#: src/translations.h:190
+#: src/translations.h:184
 msgid "Chematy"
 msgstr ""
 
-#: src/translations.h:191
+#: src/translations.h:185
 msgid "Waty Bekety"
 msgstr ""
 
-#: src/translations.h:192
+#: src/translations.h:186
 msgid "Sheep"
-msgstr ""
+msgstr "양"
 
-#: src/translations.h:193
+#: src/translations.h:187
 msgid "Stars of Water"
 msgstr ""
 
-#: src/translations.h:196
+#: src/translations.h:190
 msgid "Northern Dipper"
-msgstr ""
+msgstr "북두"
+
+#: src/translations.h:191
+msgid "Curved Array"
+msgstr "구진"
+
+#: src/translations.h:192
+msgid "Coiled Thong"
+msgstr "관삭"
+
+#: src/translations.h:193
+msgid "Wings"
+msgstr "익"
+
+#: src/translations.h:194
+msgid "Chariot"
+msgstr "진"
+
+#: src/translations.h:195
+msgid "Tail"
+msgstr "미"
+
+#: src/translations.h:196
+msgid "Winnowing Basket"
+msgstr "키"
 
 #: src/translations.h:197
-msgid "Curved Array"
-msgstr ""
+msgid "Dipper"
+msgstr "남두"
 
 #: src/translations.h:198
-msgid "Coiled Thong"
-msgstr ""
+msgid "Drum"
+msgstr "하고"
 
 #: src/translations.h:199
-msgid "Wings"
-msgstr ""
+msgid "Three Steps"
+msgstr "삼태"
 
 #: src/translations.h:200
-msgid "Chariot"
-msgstr ""
+msgid "Imperial Guards"
+msgstr "거기"
 
 #: src/translations.h:201
-msgid "Tail"
-msgstr ""
+msgid "Horn"
+msgstr "각"
 
 #: src/translations.h:202
-msgid "Winnowing Basket"
-msgstr ""
+msgid "Willow"
+msgstr "류"
 
 #: src/translations.h:203
-msgid "Dipper"
-msgstr ""
+msgid "Imperial Passageway"
+msgstr "연도"
 
 #: src/translations.h:204
-msgid "Drum"
-msgstr ""
+msgid "Kitchen"
+msgstr "천주"
 
 #: src/translations.h:205
-msgid "Three Steps"
-msgstr ""
+msgid "River Turtle"
+msgstr "별"
 
 #: src/translations.h:206
-msgid "Imperial Guards"
-msgstr ""
+msgid "Stomach"
+msgstr "위"
 
 #: src/translations.h:207
-msgid "Horn"
-msgstr ""
+msgid "Great General"
+msgstr "천장군"
 
 #: src/translations.h:208
-msgid "Willow"
-msgstr ""
+msgid "Wall"
+msgstr "동벽"
 
 #: src/translations.h:209
-msgid "Imperial Passageway"
-msgstr ""
+msgid "Legs"
+msgstr "규"
 
 #: src/translations.h:210
-msgid "Kitchen"
-msgstr ""
+msgid "Root"
+msgstr "저"
 
 #: src/translations.h:211
-msgid "River Turtle"
-msgstr ""
+msgid "Ramparts"
+msgstr "천루성"
 
 #: src/translations.h:212
-msgid "Stomach"
-msgstr ""
+msgid "Flying Corridor"
+msgstr "각도"
 
 #: src/translations.h:213
-msgid "Great General"
-msgstr ""
+msgid "Outer Fence"
+msgstr "천병"
 
 #: src/translations.h:214
-msgid "Wall"
-msgstr ""
+msgid "Ford"
+msgstr "천진"
 
 #: src/translations.h:215
-msgid "Legs"
-msgstr ""
+msgid "Seven Excellencies"
+msgstr "칠공"
 
 #: src/translations.h:216
-msgid "Root"
-msgstr ""
+msgid "Market"
+msgstr "천시"
 
 #: src/translations.h:217
-msgid "Ramparts"
-msgstr ""
+msgid "Five Chariots"
+msgstr "오거"
 
 #: src/translations.h:218
-msgid "Flying Corridor"
-msgstr ""
-
-#: src/translations.h:219
-msgid "Outer Fence"
-msgstr ""
+msgid "Rolled Tongue"
+msgstr "권설"
 
 #: src/translations.h:220
-msgid "Ford"
-msgstr ""
+msgid "Toilet"
+msgstr "측"
 
 #: src/translations.h:221
-msgid "Seven Excellencies"
-msgstr ""
+msgid "Screen"
+msgstr "병"
 
 #: src/translations.h:222
-msgid "Market"
-msgstr ""
+msgid "Soldiers Market"
+msgstr "군시"
 
 #: src/translations.h:223
-msgid "Five Chariots"
-msgstr ""
+msgid "Square Granary"
+msgstr "천창"
 
 #: src/translations.h:224
-msgid "Rolled Tongue"
-msgstr ""
+msgid "Three Stars"
+msgstr "삼"
+
+#: src/translations.h:225
+msgid "Four Channels"
+msgstr "사독"
 
 #: src/translations.h:226
-msgid "Toilet"
-msgstr ""
+msgid "Well"
+msgstr "정"
 
 #: src/translations.h:227
-msgid "Screen"
-msgstr ""
+msgid "South River"
+msgstr "남하"
 
 #: src/translations.h:228
-msgid "Soldiers Market"
-msgstr ""
+msgid "North River"
+msgstr "북하"
 
 #: src/translations.h:229
-msgid "Square Granary"
-msgstr ""
+msgid "Five Feudal Kings"
+msgstr "오제후"
 
 #: src/translations.h:230
-msgid "Three Stars"
-msgstr ""
+msgid "Orchard"
+msgstr "천원"
 
 #: src/translations.h:231
-msgid "Four Channels"
-msgstr ""
+msgid "Meadows"
+msgstr "천균"
 
 #: src/translations.h:232
-msgid "Well"
-msgstr ""
+msgid "Circular Granary"
+msgstr "천균"
 
 #: src/translations.h:233
-msgid "South River"
-msgstr ""
+msgid "Purple Palace"
+msgstr "자미"
 
 #: src/translations.h:234
-msgid "North River"
-msgstr ""
+msgid "Extended Net"
+msgstr "장"
 
 #: src/translations.h:235
-msgid "Five Feudal Kings"
-msgstr ""
+msgid "Arsenal"
+msgstr "고루"
 
 #: src/translations.h:236
-msgid "Orchard"
-msgstr ""
+msgid "Hook"
+msgstr "구"
 
 #: src/translations.h:237
-msgid "Meadows"
-msgstr ""
+msgid "Supreme Palace"
+msgstr "태미"
 
 #: src/translations.h:238
-msgid "Circular Granary"
-msgstr ""
+msgid "Jade Well"
+msgstr "옥정"
 
 #: src/translations.h:239
-msgid "Purple Palace"
-msgstr ""
-
-#: src/translations.h:240
-msgid "Extended Net"
-msgstr ""
+msgid "Lance"
+msgstr "경하"
 
 #: src/translations.h:241
-msgid "Arsenal"
-msgstr ""
+msgid "Mausoleum"
+msgstr "대릉"
 
 #: src/translations.h:242
-msgid "Hook"
-msgstr ""
+msgid "Dog"
+msgstr "천구"
 
 #: src/translations.h:243
-msgid "Supreme Palace"
-msgstr ""
+msgid "Earth God's Temple"
+msgstr "천사"
 
 #: src/translations.h:244
-msgid "Jade Well"
-msgstr ""
+msgid "Bow and Arrow"
+msgstr "호"
 
 #: src/translations.h:245
-msgid "Lance"
-msgstr ""
+msgid "Pestle"
+msgstr "구"
+
+#: src/translations.h:246
+msgid "Mortar"
+msgstr "내저"
 
 #: src/translations.h:247
-msgid "Mausoleum"
-msgstr ""
+msgid "Rooftop"
+msgstr "위"
 
 #: src/translations.h:248
-msgid "Dog"
-msgstr ""
+msgid "Thunderbolt"
+msgstr "뇌전"
 
 #: src/translations.h:249
-msgid "Earth God's Temple"
-msgstr ""
+msgid "Chariot Yard"
+msgstr "거부"
 
 #: src/translations.h:250
-msgid "Bow and Arrow"
-msgstr ""
+msgid "Good Gourd"
+msgstr "과"
 
 #: src/translations.h:251
-msgid "Pestle"
-msgstr ""
+msgid "Rotten Gourd"
+msgstr "패과"
 
 #: src/translations.h:252
-msgid "Mortar"
-msgstr ""
+msgid "Encampment"
+msgstr "실"
 
 #: src/translations.h:253
-msgid "Rooftop"
-msgstr ""
+msgid "Thunder and Lightning"
+msgstr "뇌전"
 
 #: src/translations.h:254
-msgid "Thunderbolt"
-msgstr ""
+msgid "Palace Gate"
+msgstr "궐구"
 
 #: src/translations.h:255
-msgid "Chariot Yard"
-msgstr ""
+msgid "Emptiness"
+msgstr "허"
 
 #: src/translations.h:256
-msgid "Good Gourd"
-msgstr ""
+msgid "Weaving Girl"
+msgstr "직녀"
 
 #: src/translations.h:257
-msgid "Rotten Gourd"
-msgstr ""
+msgid "Girl"
+msgstr "수녀"
 
 #: src/translations.h:258
-msgid "Encampment"
-msgstr ""
+msgid "Ox"
+msgstr "견우"
 
 #: src/translations.h:259
-msgid "Thunder and Lightning"
-msgstr ""
+msgid "Heart"
+msgstr "심"
 
 #: src/translations.h:260
-msgid "Palace Gate"
-msgstr ""
+msgid "Room"
+msgstr "방"
 
 #: src/translations.h:261
-msgid "Emptiness"
-msgstr ""
+msgid "Spring"
+msgstr "천연"
 
 #: src/translations.h:262
-msgid "Weaving Girl"
-msgstr ""
+msgid "Establishment"
+msgstr "건"
 
 #: src/translations.h:263
-msgid "Girl"
-msgstr ""
+msgid "Flail"
+msgstr "천배"
 
 #: src/translations.h:264
-msgid "Ox"
-msgstr ""
+msgid "Spear"
+msgstr "천창"
 
 #: src/translations.h:265
-msgid "Heart"
-msgstr ""
+msgid "Right Flag"
+msgstr "우기"
 
 #: src/translations.h:266
-msgid "Room"
-msgstr ""
+msgid "Left Flag"
+msgstr "좌기"
 
 #: src/translations.h:267
-msgid "Spring"
-msgstr ""
+msgid "Drumstick"
+msgstr "천부"
 
 #: src/translations.h:268
-msgid "Establishment"
-msgstr ""
+msgid "Bond"
+msgstr "루"
 
 #: src/translations.h:269
-msgid "Flail"
-msgstr ""
+msgid "Woman's Bed"
+msgstr "천기"
 
 #: src/translations.h:270
-msgid "Spear"
-msgstr ""
+msgid "Western Door"
+msgstr "서함"
 
 #: src/translations.h:271
-msgid "Right Flag"
-msgstr ""
+msgid "Eastern Door"
+msgstr "동함"
 
 #: src/translations.h:272
-msgid "Left Flag"
-msgstr ""
+msgid "Farmland"
+msgstr "천전"
 
 #: src/translations.h:273
-msgid "Drumstick"
-msgstr ""
+msgid "Star"
+msgstr "성"
 
 #: src/translations.h:274
-msgid "Bond"
-msgstr ""
+msgid "Ghosts"
+msgstr "귀"
 
 #: src/translations.h:275
-msgid "Woman's Bed"
-msgstr ""
+msgid "Xuanyuan"
+msgstr "헌원"
 
 #: src/translations.h:276
-msgid "Western Door"
-msgstr ""
+msgid "Tripod"
+msgstr "삼공"
 
 #: src/translations.h:277
-msgid "Eastern Door"
-msgstr ""
+msgid "Neck"
+msgstr "항"
 
 #: src/translations.h:278
-msgid "Farmland"
-msgstr ""
+msgid "Zaofu"
+msgstr "조보"
 
 #: src/translations.h:279
-msgid "Star"
-msgstr ""
+msgid "Market Officer"
+msgstr "천변"
 
 #: src/translations.h:280
-msgid "Ghosts"
-msgstr ""
-
-#: src/translations.h:281
-msgid "Xuanyuan"
-msgstr ""
-
-#: src/translations.h:282
-msgid "Tripod"
-msgstr ""
+msgid "Banner of Three Stars"
+msgstr "갈석"
 
 #: src/translations.h:283
-msgid "Neck"
-msgstr ""
-
-#: src/translations.h:284
-msgid "Zaofu"
-msgstr ""
-
-#: src/translations.h:285
-msgid "Market Officer"
-msgstr ""
-
-#: src/translations.h:286
-msgid "Banner of Three Stars"
-msgstr ""
-
-#: src/translations.h:289
 msgid "Bailer"
 msgstr ""
 
-#: src/translations.h:290
+#: src/translations.h:284
 msgid "Cat's Cradle"
-msgstr ""
+msgstr "고양이의 요람"
 
-#: src/translations.h:291
+#: src/translations.h:285
 msgid "Voice of Joy"
-msgstr ""
+msgstr "즐거운 소리"
 
-#: src/translations.h:292
+#: src/translations.h:286
 msgid "The Seven"
 msgstr ""
 
-#: src/translations.h:293
+#: src/translations.h:287
 msgid "Maui's Fishhook"
 msgstr ""
 
-#: src/translations.h:294
+#: src/translations.h:288
 msgid "Navigator's Triangle"
 msgstr ""
 
-#: src/translations.h:295
+#: src/translations.h:289
 msgid "Kite of Kawelo"
-msgstr ""
+msgstr "Kawelo의 연"
 
-#: src/translations.h:296
+#: src/translations.h:290
 msgid "Frigate Bird"
-msgstr ""
+msgstr "군함새"
 
-#: src/translations.h:297
+#: src/translations.h:291
 msgid "Cared for by Moon"
 msgstr ""
 
-#: src/translations.h:298
+#: src/translations.h:292
 msgid "Dolphin"
-msgstr ""
-
-#: src/translations.h:301
-msgid "Select and exit to run."
-msgstr ""
+msgstr "돌고래"
 
 #: src/s_gui.cpp:2199 src/s_gui.cpp:2245
 msgid "Cancel"
