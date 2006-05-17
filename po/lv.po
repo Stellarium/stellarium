@@ -7,9 +7,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
-"Report-Msgid-Bugs-To: stellarium@free.fr\n"
-"POT-Creation-Date: 2006-05-12 13:50-0700\n"
-"PO-Revision-Date: 2006-04-30 16:35+0000\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2006-05-01 03:03+0200\n"
+"PO-Revision-Date: 2006-05-01 20:18+0000\n"
 "Last-Translator: Delta <deruta@gmx.net>\n"
 "Language-Team: Latvian <lv@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -43,13 +43,13 @@ msgid "Loading Constellation Art: "
 msgstr "Ielādē zvaigznāju zīmējumus: "
 
 #: src/hip_star.cpp:88 src/hip_star.cpp:136 src/nebula.cpp:94
-#: src/planet.cpp:107 src/planet.cpp:153
+#: src/planet.cpp:107
 msgid "Magnitude: "
-msgstr "Zvaigžņlielums "
+msgstr "Zvaigžņlielums: "
 
 #: src/hip_star.cpp:89 src/hip_star.cpp:137
 msgid " (Variable)"
-msgstr " Maiņzvaigzne"
+msgstr " (maiņzvaigzne)"
 
 #: src/hip_star.cpp:91 src/nebula.cpp:96 src/planet.cpp:111
 msgid "RA/DE: "
@@ -59,13 +59,13 @@ msgstr "RA/DE: "
 msgid "Az/Alt: "
 msgstr "Az/Augst: "
 
-#: src/hip_star.cpp:99 src/planet.cpp:120 src/planet.cpp:157
+#: src/hip_star.cpp:99 src/planet.cpp:120
 msgid "Distance: "
 msgstr "Attālums: "
 
 #: src/hip_star.cpp:101 src/hip_star.cpp:140
 msgid " Light Years"
-msgstr " Gaismas gadi"
+msgstr " gaismas gadi"
 
 #: src/hip_star.cpp:108
 msgid "Spectral Type: "
@@ -81,113 +81,113 @@ msgstr "Tips: "
 
 #: src/nebula.cpp:105
 msgid "Size: "
-msgstr "Lielums: "
+msgstr "Izmērs: "
 
 #: src/nebula_mgr.cpp:291
 msgid "Loading NGC catalog: "
 msgstr "Ielādē NGC katalogu: "
 
-#: src/nebula_mgr.cpp:418
+#: src/nebula_mgr.cpp:415
 msgid "Loading Nebula Textures:"
 msgstr "Ielādē miglāju tekstūras:"
 
-#: src/planet.cpp:120 src/planet.cpp:157
+#: src/planet.cpp:120
 msgid "AU"
-msgstr "AU"
+msgstr "AU (astr.vien.)"
 
-#: src/stel_ui.cpp:503 src/stel_ui.cpp:631
+#: src/stel_ui.cpp:490 src/stel_ui.cpp:618
 msgid "Script commander"
 msgstr "Skriptu pavēlnieks"
 
-#: src/stel_ui.cpp:530
+#: src/stel_ui.cpp:517
 msgid "Invalid Script command"
 msgstr "Nepareiza skripta komanda"
 
-#: src/stel_ui.cpp:596
+#: src/stel_ui.cpp:583
 msgid "Drawing of the Constellations [C]"
-msgstr "Zvaigznāju līniju izzīmēšana [C]"
+msgstr "Zvaigznāju apveidu izzīmēšana [C]"
 
-#: src/stel_ui.cpp:598
+#: src/stel_ui.cpp:585
 msgid "Names of the Constellations [V]"
 msgstr "Zvaigznāju nosaukumi [V]"
 
-#: src/stel_ui.cpp:600
+#: src/stel_ui.cpp:587
 msgid "Constellations Art [R]"
 msgstr "Zvaigznāju zīmējumi [R]"
 
-#: src/stel_ui.cpp:602
+#: src/stel_ui.cpp:589
 msgid "Azimuthal Grid [Z]"
 msgstr "Azimutālais tīkls [Z]"
 
-#: src/stel_ui.cpp:604
+#: src/stel_ui.cpp:591
 msgid "Equatorial Grid [E]"
 msgstr "Ekvatoriālais tīkls [E]"
 
-#: src/stel_ui.cpp:606
+#: src/stel_ui.cpp:593
 msgid "Ground [G]"
 msgstr "Apvārsnis [G]"
 
-#: src/stel_ui.cpp:608
+#: src/stel_ui.cpp:595
 msgid "Cardinal Points [Q]"
 msgstr "Debess puses [Q]"
 
-#: src/stel_ui.cpp:610
+#: src/stel_ui.cpp:597
 msgid "Atmosphere [A]"
 msgstr "Atmosfēra [A]"
 
-#: src/stel_ui.cpp:612
+#: src/stel_ui.cpp:599
 msgid "Nebulas [N]"
 msgstr "Miglāji [N]"
 
-#: src/stel_ui.cpp:614
+#: src/stel_ui.cpp:601
 msgid "Help [H]"
 msgstr "Palīdzība [H]"
 
-#: src/stel_ui.cpp:616
+#: src/stel_ui.cpp:603
 msgid "Equatorial/Altazimuthal Mount [ENTER]"
 msgstr "Ekvatoriālais/Azimutālais montējums [ENTER]"
 
-#: src/stel_ui.cpp:618
+#: src/stel_ui.cpp:605
 msgid "Configuration window"
 msgstr "Konfigurācijas logs"
 
-#: src/stel_ui.cpp:621
+#: src/stel_ui.cpp:608
 msgid "Night (red) mode"
 msgstr "Nakts (sarkanais) režīms"
 
-#: src/stel_ui.cpp:624
+#: src/stel_ui.cpp:611
 msgid "Quit [CTRL + Q]"
 msgstr "Beigt [CTRL + Q]"
 
-#: src/stel_ui.cpp:626
+#: src/stel_ui.cpp:613
 msgid "Quit [CMD + Q]"
 msgstr "Beigt [CMD + Q]"
 
-#: src/stel_ui.cpp:629
+#: src/stel_ui.cpp:616
 msgid "Search for object"
 msgstr "Meklēt objektu"
 
-#: src/stel_ui.cpp:633
+#: src/stel_ui.cpp:620
 msgid "Goto selected object [SPACE]"
 msgstr "Parādīt izvēlēto objektu [SPACE]"
 
-#: src/stel_ui.cpp:639
+#: src/stel_ui.cpp:626
 msgid "Decrease Time Speed [J]"
 msgstr "Palēnināt laiku [J]"
 
-#: src/stel_ui.cpp:641
+#: src/stel_ui.cpp:628
 msgid "Real Time Speed [K]"
 msgstr "Normāls laika ātrums [K]"
 
-#: src/stel_ui.cpp:643
+#: src/stel_ui.cpp:630
 msgid "Increase Time Speed [L]"
 msgstr "Paātrināt laiku [L]"
 
-#: src/stel_ui.cpp:645
+#: src/stel_ui.cpp:632
 msgid "Return to Current Time"
 msgstr "Atgriezties šobrīdējā laikā"
 
-#: src/stel_ui.cpp:654
+#: src/stel_ui.cpp:641
 msgid ""
 "   Please check for newer versions and send bug reports\n"
 "    and comments to us at: http://www.stellarium.org\n"
@@ -197,11 +197,11 @@ msgstr ""
 "     ziņotu par kļūdām un izmēģinātu jaunākās versijas.\n"
 "\n"
 
-#: src/stel_ui.cpp:673
+#: src/stel_ui.cpp:660
 msgid "Information"
 msgstr "Informācija"
 
-#: src/stel_ui.cpp:685
+#: src/stel_ui.cpp:672
 msgid ""
 "Movement & selection:\n"
 "Arrow Keys       : Change viewing RA/DE\n"
@@ -216,7 +216,7 @@ msgid ""
 "\n"
 msgstr ""
 "Pārvietošanās un objektu izvēle:\n"
-"Bultiņas : maina virzienu (RA/DE koordinātās)\n"
+"Bultiņas : maina virzienu (RA - rektascensija/DE - deklinācija)\n"
 "Page Up/Down : Maina tuvinājumu (Zoom)\n"
 "CTRL+Up/Down : Maina tuvinājumu (Zoom)\n"
 "Kreisais peles klikšķis : Izvēlas objektu\n"
@@ -227,7 +227,7 @@ msgstr ""
 "SPACE : Iecentrē izvēlēto objektu\n"
 "\n"
 
-#: src/stel_ui.cpp:696
+#: src/stel_ui.cpp:683
 msgid ""
 "Display options:\n"
 "ENTER : Equatorial/altazimuthal mount\n"
@@ -252,10 +252,10 @@ msgstr ""
 "A : Atmosfēra F : Dūmaka\n"
 "Q : Debess puses O : Pārslēdz Mēness mērogus\n"
 "T : Sekošana objektam S : Zvaigznes\n"
-"4 , : Ekliptika 5 . : Ekvatora līnija\n"
+"4 un , : Ekliptika 5 un . : Ekvatora līnija\n"
 "\n"
 
-#: src/stel_ui.cpp:708
+#: src/stel_ui.cpp:695
 msgid ""
 "Dialogs & other controls:\n"
 "H   : Help                      I   : About Stellarium\n"
@@ -273,7 +273,7 @@ msgstr ""
 "CTRL + F : Ieslēgt/izlēgt objektu meklētāju\n"
 "\n"
 
-#: src/stel_ui.cpp:715
+#: src/stel_ui.cpp:702
 msgid ""
 "Time & Date:\n"
 "6   : Time rate pause           7   : Time rate 0\n"
@@ -291,7 +291,7 @@ msgstr ""
 "[ : 7 dienas atpakaļ ] : 7 dienas uz priekšu\n"
 "\n"
 
-#: src/stel_ui.cpp:722
+#: src/stel_ui.cpp:709
 msgid ""
 "During Script Playback:\n"
 "CTRL + C : End Script\n"
@@ -303,7 +303,7 @@ msgstr ""
 "6 : Pauze skripta izpildei K : Turpināt skripta izpildi\n"
 "\n"
 
-#: src/stel_ui.cpp:726
+#: src/stel_ui.cpp:713
 msgid ""
 "Misc:\n"
 "9   : Toggle meteor shower rates\n"
@@ -311,31 +311,31 @@ msgstr ""
 "Dažādi:\n"
 "9 : Pārslēgt meteoru lietus intensitāti\n"
 
-#: src/stel_ui.cpp:729
+#: src/stel_ui.cpp:716
 msgid "CTRL + Q : Quit\n"
 msgstr "CTRL + Q : Beigt\n"
 
-#: src/stel_ui.cpp:731
+#: src/stel_ui.cpp:718
 msgid "CMD + Q  : Quit\n"
 msgstr "CMD + Q : Beigt\n"
 
-#: src/stel_ui.cpp:737
+#: src/stel_ui.cpp:724
 msgid "Help"
 msgstr "Palīdzība"
 
-#: src/stel_ui.cpp:1001
+#: src/stel_ui.cpp:984
 msgid "Command recording stopped."
 msgstr "Komandu ierakstīšana pārtraukta."
 
-#: src/stel_ui.cpp:1009
+#: src/stel_ui.cpp:992
 msgid "Recording commands to script file:\n"
 msgstr "Komandas tiek ierakstītas skripta failā:\n"
 
-#: src/stel_ui.cpp:1011
+#: src/stel_ui.cpp:994
 msgid "Hit CTRL-R again to stop.\n"
 msgstr "Nospiediet CTRL-R vēlreiz lai apturētu.\n"
 
-#: src/stel_ui.cpp:1015
+#: src/stel_ui.cpp:998
 msgid "Error: Unable to open script file to record commands."
 msgstr "Kļūda: Nevarēja atvērt skripta failu komandu ierakstīšanai."
 
@@ -349,18 +349,17 @@ msgstr "Zvaigznes"
 
 #: src/stel_ui_conf.cpp:62
 msgid "Star Names. Up to mag :"
-msgstr "Nosaukt zvaigznes līdz zvaigžņlielumam:"
+msgstr "Nosaukt līdz zvaigžņlielumam :"
 
 #: src/stel_ui_conf.cpp:74
 msgid "Star Twinkle. Amount :"
 msgstr "Zvaigžņu mirgošanas apmērs :"
 
-#: src/stel_ui_conf.cpp:90
-#, fuzzy
+#: src/stel_ui_conf.cpp:90 src/stel_ui_tuiconf.cpp:179
 msgid "Constellations Lines"
-msgstr "Zvaigznāji"
+msgstr "Zvaigznāju kontūras"
 
-#: src/stel_ui_conf.cpp:95
+#: src/stel_ui_conf.cpp:95 src/stel_ui_tuiconf.cpp:183
 msgid "Constellations Names"
 msgstr "Zvaigznāju nosaukumi"
 
@@ -374,7 +373,7 @@ msgstr "Tikai izvēlētajiem zvaigznājiem"
 
 #: src/stel_ui_conf.cpp:116
 msgid "Nebulas Names. Up to mag :"
-msgstr "Nosaukt miglājus līdz zvaigžņlielumam :"
+msgstr "Miglāju nosauk. līdz zvaigžņl.:"
 
 #: src/stel_ui_conf.cpp:129
 msgid "Also display Nebulas without textures"
@@ -386,25 +385,25 @@ msgstr "Planētas"
 
 #: src/stel_ui_conf.cpp:145
 msgid "Moon Scale"
-msgstr "Mēness mērogā"
+msgstr "Rādīt Mēnesi redzamajā izmērā"
 
 #: src/stel_ui_conf.cpp:152
 msgid "Planets Hints"
 msgstr "Izcelt planētas"
 
-#: src/stel_ui_conf.cpp:164 src/stel_ui_tuiconf.cpp:400
+#: src/stel_ui_conf.cpp:164
 msgid "Equatorial Grid"
 msgstr "Ekvatoriālais tīkls"
 
-#: src/stel_ui_conf.cpp:169 src/stel_ui_tuiconf.cpp:399
+#: src/stel_ui_conf.cpp:169
 msgid "Azimuthal Grid"
 msgstr "Azimutālais tīkls"
 
-#: src/stel_ui_conf.cpp:174 src/stel_ui_tuiconf.cpp:401
+#: src/stel_ui_conf.cpp:174
 msgid "Equator Line"
 msgstr "Ekvatora līnija"
 
-#: src/stel_ui_conf.cpp:179 src/stel_ui_tuiconf.cpp:402
+#: src/stel_ui_conf.cpp:179
 msgid "Ecliptic Line"
 msgstr "Ekliptikas līnija"
 
@@ -412,7 +411,7 @@ msgstr "Ekliptikas līnija"
 msgid "Ground"
 msgstr "Apvārsnis"
 
-#: src/stel_ui_conf.cpp:195 src/stel_ui_tuiconf.cpp:394
+#: src/stel_ui_conf.cpp:195 src/stel_ui_tuiconf.cpp:187
 msgid "Cardinal Points"
 msgstr "Debess puses"
 
@@ -427,7 +426,7 @@ msgstr "Dūmaka"
 #: src/stel_ui_conf.cpp:235 src/stel_ui_conf.cpp:408 src/stel_ui_conf.cpp:435
 #: src/stel_ui_conf.cpp:494
 msgid "Save as default"
-msgstr "Saglabāt kā noklusēto"
+msgstr "Saglabāt kā noklusējumu"
 
 #: src/stel_ui_conf.cpp:247
 msgid "Current Time :"
@@ -435,7 +434,7 @@ msgstr "Laiks šobrīd :"
 
 #: src/stel_ui_conf.cpp:256
 msgid "Time Zone :"
-msgstr "Laika zona:"
+msgstr "Laika zona :"
 
 #: src/stel_ui_conf.cpp:260
 msgid "Using System Default Time Zone"
@@ -451,9 +450,9 @@ msgid ""
 "   time speed.\n"
 "Use key K to return to real time speed."
 msgstr ""
-"Ar J un L taustiņiem var paātrināt un palēnināt\n"
-"   laika ātrumu\n"
-"Ar K var atjaunot normālo laika ātrumu."
+"Ar taustiņiem J un L var paātrināt un palēnināt\n"
+"   laika ātrumu.\n"
+"Ar taustiņu K var atjaunot normālu laika ātrumu."
 
 #: src/stel_ui_conf.cpp:300
 msgid "Cursor : "
@@ -465,19 +464,19 @@ msgstr "Izvēlēts : "
 
 #: src/stel_ui_conf.cpp:310
 msgid "Longitude : "
-msgstr "Ģeog.garums : "
+msgstr "Ģeog.gar.: "
 
 #: src/stel_ui_conf.cpp:318
 msgid "Latitude : "
-msgstr "Ģeog.platums : "
+msgstr "Ģeog.plat.: "
 
 #: src/stel_ui_conf.cpp:326
 msgid "Altitude : "
-msgstr "Augstums vjl.: "
+msgstr "Augst.vjl.: "
 
 #: src/stel_ui_conf.cpp:333
 msgid "Save location"
-msgstr "Saglabāt"
+msgstr "Saglabāt vietu"
 
 #: src/stel_ui_conf.cpp:355
 msgid "Projection :"
@@ -493,15 +492,15 @@ msgstr "Ekrāna izšķirtspēja :"
 
 #: src/stel_ui_conf.cpp:384
 msgid "Restart program for"
-msgstr "Pārstartējiet programmu"
+msgstr "Lai izmaiņas stātos spēkā"
 
 #: src/stel_ui_conf.cpp:385
 msgid "change to apply."
-msgstr "lai izmaiņas stātos spēkā."
+msgstr "ir nepieciešams pārstartēt programmu."
 
 #: src/stel_ui_conf.cpp:401
 msgid "For unlisted screen resolution, edit the file :"
-msgstr "Lai iegūtu citu izšķirtspēju rediģējiet :"
+msgstr "Lai iegūtu citu izšķirtspēju rediģējiet failu :"
 
 #: src/stel_ui_conf.cpp:418
 msgid "Choose landscapes:"
@@ -511,11 +510,11 @@ msgstr "Izvēlieties ainavu:"
 msgid "Program Language: "
 msgstr "Programmas valoda: "
 
-#: src/stel_ui_conf.cpp:462 src/stel_ui_tuiconf.cpp:381
+#: src/stel_ui_conf.cpp:462 src/stel_ui_tuiconf.cpp:156
 msgid "Sky Language: "
 msgstr "Debesu valoda: "
 
-#: src/stel_ui_conf.cpp:480 src/stel_ui_tuiconf.cpp:377
+#: src/stel_ui_conf.cpp:480 src/stel_ui_tuiconf.cpp:149
 msgid "Sky Culture: "
 msgstr "Debesu kultūra: "
 
@@ -537,7 +536,7 @@ msgstr "Ainavas"
 
 #: src/stel_ui_conf.cpp:505
 msgid "Video"
-msgstr "Video"
+msgstr "Videorežīmi"
 
 #: src/stel_ui_conf.cpp:506
 msgid "Rendering"
@@ -552,260 +551,192 @@ msgid "Search for (eg. Saturn, Polaris, HP6218, Orion, M31):"
 msgstr "Meklēt (piem. Saturns, Polaris, HP6218, Orions, M31):"
 
 #: src/stel_ui_conf.cpp:662
-#, fuzzy
 msgid "GO"
-msgstr "Aiziet"
+msgstr "Izpildīt"
 
 #: src/stel_ui_conf.cpp:787
 msgid "Enter observatory name"
-msgstr "Ievadiet observatoriju"
+msgstr "Ievadiet novērojumu vietas nosaukumu"
 
 #: src/stel_ui_conf.cpp:927
 msgid ": Normal rate"
-msgstr ""
+msgstr ": Normāls daudzums"
 
 #: src/stel_ui_conf.cpp:934
 msgid ": Standard Perseids rate"
-msgstr ""
+msgstr ": Standarta daudzums Perseīdiem"
 
 #: src/stel_ui_conf.cpp:941
 msgid ": Exceptional Leonid rate"
-msgstr ""
+msgstr ": Liels daudzums Leonīdiem"
 
 #: src/stel_ui_conf.cpp:948
 msgid ": Highest rate ever (1966 Leonids)"
-msgstr ""
+msgstr ": Augstākais Leonīdiem (1966.g)"
 
 #: src/stel_ui_conf.cpp:953
 msgid "Meteor Rate per minute"
-msgstr ""
+msgstr "Meteoru daudzums minūtē"
 
 #: src/stel_ui_conf.cpp:974
 msgid "Current Time Speed is x"
 msgstr "Šobrīd laika ātrums ir x"
 
-#: src/stel_ui_tuiconf.cpp:271 src/stel_ui_tuiconf.cpp:411
-msgid "Magnitude Sizing Multiplier: "
-msgstr "Zvaigžņlieluma mērogošanas reizinātājs: "
-
-#: src/stel_ui_tuiconf.cpp:348
+#: src/stel_ui_tuiconf.cpp:80
 msgid "Set Location "
 msgstr "Iestatīt vietu "
 
-#: src/stel_ui_tuiconf.cpp:349
+#: src/stel_ui_tuiconf.cpp:81
 msgid "Set Time "
 msgstr "Iestatīt laiku "
 
-#: src/stel_ui_tuiconf.cpp:350
+#: src/stel_ui_tuiconf.cpp:82
 msgid "General "
 msgstr "Vispārīgi "
 
-#: src/stel_ui_tuiconf.cpp:351
+#: src/stel_ui_tuiconf.cpp:83
 msgid "Stars "
 msgstr "Zvaigznes "
 
-#: src/stel_ui_tuiconf.cpp:352
+#: src/stel_ui_tuiconf.cpp:84
 msgid "Colors "
 msgstr "Krāsas "
 
-#: src/stel_ui_tuiconf.cpp:353
+#: src/stel_ui_tuiconf.cpp:85
 msgid "Effects "
 msgstr "Efekti "
 
-#: src/stel_ui_tuiconf.cpp:354
+#: src/stel_ui_tuiconf.cpp:86
 msgid "Scripts "
 msgstr "Skripti "
 
-#: src/stel_ui_tuiconf.cpp:355
+#: src/stel_ui_tuiconf.cpp:87
 msgid "Administration "
 msgstr "Administrācija "
 
-#: src/stel_ui_tuiconf.cpp:358
+#: src/stel_ui_tuiconf.cpp:98
 msgid "Latitude: "
-msgstr "Ģeog.platums: "
+msgstr "Ģeog.plat.: "
 
-#: src/stel_ui_tuiconf.cpp:359
+#: src/stel_ui_tuiconf.cpp:100
 msgid "Longitude: "
-msgstr "Ģeog.garums: "
+msgstr "Ģeog.gar.: "
 
-#: src/stel_ui_tuiconf.cpp:360
+#: src/stel_ui_tuiconf.cpp:102
 msgid "Altitude (m): "
 msgstr "Augst.vjl.(m): "
 
-#: src/stel_ui_tuiconf.cpp:361
+#: src/stel_ui_tuiconf.cpp:106
 msgid "Solar System Body: "
-msgstr ""
+msgstr "Saules sistēmas objekts: "
 
-#: src/stel_ui_tuiconf.cpp:365
+#: src/stel_ui_tuiconf.cpp:116
 msgid "Sky Time: "
 msgstr "Debesu laiks: "
 
-#: src/stel_ui_tuiconf.cpp:366
+#: src/stel_ui_tuiconf.cpp:118
 msgid "Set Time Zone: "
 msgstr "Iestatīt laika zonu: "
 
-#: src/stel_ui_tuiconf.cpp:367
+#: src/stel_ui_tuiconf.cpp:121
 msgid "Preset Sky Time: "
 msgstr "Šobrīdējais debess laiks: "
 
-#: src/stel_ui_tuiconf.cpp:368
+#: src/stel_ui_tuiconf.cpp:123
 msgid "Sky Time At Start-up: "
 msgstr "Debess laiks sākumā: "
 
-#: src/stel_ui_tuiconf.cpp:369
-#, fuzzy
-msgid "Actual Time"
-msgstr "Iestatīt laiku "
-
-#: src/stel_ui_tuiconf.cpp:370
-#, fuzzy
-msgid "Preset Time"
-msgstr "Šobrīdējais debess laiks: "
-
-#: src/stel_ui_tuiconf.cpp:371
+#: src/stel_ui_tuiconf.cpp:127
 msgid "Time Display Format: "
 msgstr "Laika formāts: "
 
-#: src/stel_ui_tuiconf.cpp:372
+#: src/stel_ui_tuiconf.cpp:132
 msgid "Date Display Format: "
 msgstr "Datuma formāts: "
 
-#: src/stel_ui_tuiconf.cpp:384
+#: src/stel_ui_tuiconf.cpp:164
 msgid "Show: "
 msgstr "Parādīt: "
 
-#: src/stel_ui_tuiconf.cpp:384 src/stel_ui_tuiconf.cpp:409 src/s_gui.cpp:2212
+#: src/stel_ui_tuiconf.cpp:164 src/stel_ui_tuiconf.cpp:199 src/s_gui.cpp:2212
 msgid "Yes"
 msgstr "Jā"
 
-#: src/stel_ui_tuiconf.cpp:384 src/stel_ui_tuiconf.cpp:409 src/s_gui.cpp:2193
+#: src/stel_ui_tuiconf.cpp:164 src/stel_ui_tuiconf.cpp:199 src/s_gui.cpp:2193
 msgid "No"
 msgstr "Nē"
 
-#: src/stel_ui_tuiconf.cpp:385
+#: src/stel_ui_tuiconf.cpp:166
 msgid "Star Magnitude Multiplier: "
 msgstr "Zvaigžņlieluma reizinātājs: "
 
-#: src/stel_ui_tuiconf.cpp:386
+#: src/stel_ui_tuiconf.cpp:168
 msgid "Maximum Magnitude to Label: "
-msgstr "Nosaukumi līdz šādam zvaigžņlielumam: "
+msgstr "Nosaukumi līdz zvaigžņlielumam: "
 
-#: src/stel_ui_tuiconf.cpp:387
+#: src/stel_ui_tuiconf.cpp:170
 msgid "Twinkling: "
 msgstr "Mirgošana: "
 
-#: src/stel_ui_tuiconf.cpp:390
-#, fuzzy
-msgid "Constellation Lines"
-msgstr "Zvaigznāji"
-
-#: src/stel_ui_tuiconf.cpp:391
-#, fuzzy
-msgid "Constellation Names"
-msgstr "Zvaigznāju nosaukumi"
-
-#: src/stel_ui_tuiconf.cpp:392
-#, fuzzy
-msgid "Constellation Art Intensity"
-msgstr "Zvaigznāju zīmējumi [R]"
-
-#: src/stel_ui_tuiconf.cpp:393
-#, fuzzy
-msgid "Constellation Boundaries"
-msgstr "Zvaigznāju robežas"
-
-#: src/stel_ui_tuiconf.cpp:395
-#, fuzzy
-msgid "Planet Names"
-msgstr "Planētas"
-
-#: src/stel_ui_tuiconf.cpp:396
-#, fuzzy
-msgid "Planet Orbits"
-msgstr "Izcelt planētas"
-
-#: src/stel_ui_tuiconf.cpp:397
-#, fuzzy
-msgid "Planet Trails"
-msgstr "Planētas"
-
-#: src/stel_ui_tuiconf.cpp:398
-msgid "Meridian Line"
-msgstr ""
-
-#: src/stel_ui_tuiconf.cpp:403
-#, fuzzy
-msgid "Nebula Names"
-msgstr "Miglāji [N]"
-
-#: src/stel_ui_tuiconf.cpp:404
-msgid "Nebula Circles"
-msgstr ""
-
-#: src/stel_ui_tuiconf.cpp:408
+#: src/stel_ui_tuiconf.cpp:193
 msgid "Landscape: "
 msgstr "Ainava: "
 
-#: src/stel_ui_tuiconf.cpp:409
+#: src/stel_ui_tuiconf.cpp:199
 msgid "Manual zoom: "
 msgstr "Manuālā tuvināšana: "
 
-#: src/stel_ui_tuiconf.cpp:410
+#: src/stel_ui_tuiconf.cpp:203
 msgid "Object Sizing Rule: "
 msgstr "Objekta izmēri pēc: "
 
-#: src/stel_ui_tuiconf.cpp:410
+#: src/stel_ui_tuiconf.cpp:203
 msgid "Point"
 msgstr "Punkta"
 
-#: src/stel_ui_tuiconf.cpp:410
+#: src/stel_ui_tuiconf.cpp:203
 msgid "Magnitude"
 msgstr "Zvaigžņlieluma"
 
-#: src/stel_ui_tuiconf.cpp:412
+#: src/stel_ui_tuiconf.cpp:207
+msgid "Magnitude Sizing Multiplier: "
+msgstr "Zvaigžņlieluma mērogošanas reizinātājs: "
+
+#: src/stel_ui_tuiconf.cpp:211
 msgid "Milky Way intensity: "
 msgstr "Piena Ceļa intensitāte: "
 
-#: src/stel_ui_tuiconf.cpp:413
+#: src/stel_ui_tuiconf.cpp:215
 msgid "Maximum Nebula Magnitude to Label: "
-msgstr "Nosaukumi miglājiem līdz zvaigžņlielumam: "
+msgstr "Nosaukt miglājus līdz zvaigžņliel.: "
 
-#: src/stel_ui_tuiconf.cpp:414
+#: src/stel_ui_tuiconf.cpp:219
 msgid "Zoom Duration: "
 msgstr "Tuvinājuma ilgums: "
 
-#: src/stel_ui_tuiconf.cpp:415
+#: src/stel_ui_tuiconf.cpp:223
 msgid "Cursor Timeout: "
 msgstr "Kursora taimauts: "
 
-#: src/stel_ui_tuiconf.cpp:418
+#: src/stel_ui_tuiconf.cpp:229
 msgid "Local Script: "
 msgstr "Lokālais skripts: "
 
-#: src/stel_ui_tuiconf.cpp:421
+#: src/stel_ui_tuiconf.cpp:235
 msgid "CD/DVD Script: "
 msgstr "CD/DVD skripts: "
 
-#: src/stel_ui_tuiconf.cpp:425
+#: src/stel_ui_tuiconf.cpp:243
 msgid "Load Default Configuration: "
 msgstr "Ielādēt noklusējuma konfigurāciju: "
 
-#: src/stel_ui_tuiconf.cpp:426
+#: src/stel_ui_tuiconf.cpp:245
 msgid "Save Current Configuration as Default: "
 msgstr "Saglabāt šo konfigurāciju kā noklusējuma: "
 
-#: src/stel_ui_tuiconf.cpp:427
+#: src/stel_ui_tuiconf.cpp:247
 msgid "Update me via Internet: "
 msgstr "Atjaunot no interneta: "
-
-#: src/stel_ui_tuiconf.cpp:428
-#, fuzzy
-msgid "Set UI Locale: "
-msgstr "Iestatīt vietu "
-
-#: src/stel_ui_tuiconf.cpp:534
-msgid "Arrow down to load list."
-msgstr ""
 
 #: src/translations.h:33
 msgid "Sun"
@@ -917,7 +848,7 @@ msgstr "Šarons"
 
 #: src/translations.h:60
 msgid "Solar System Observer"
-msgstr ""
+msgstr "Saules sistēmas novērtotājs"
 
 #: src/translations.h:63 src/s_gui.cpp:2658
 msgid "N"
@@ -936,885 +867,864 @@ msgid "W"
 msgstr "R"
 
 #: src/translations.h:69
-msgid "Chinese"
-msgstr ""
-
-#: src/translations.h:70
-msgid "Western"
-msgstr ""
-
-#: src/translations.h:71
-#, fuzzy
-msgid "Polynesian"
-msgstr "Izcelt planētas"
-
-#: src/translations.h:72
-msgid "Egyptian"
-msgstr ""
-
-#: src/translations.h:75
 msgid "Aquila"
 msgstr "Ērglis"
 
-#: src/translations.h:76
+#: src/translations.h:70
 msgid "Andromeda"
 msgstr "Andromēda"
 
-#: src/translations.h:77
+#: src/translations.h:71
 msgid "Sculptor"
 msgstr "Tēlnieks"
 
-#: src/translations.h:78
+#: src/translations.h:72
 msgid "Ara"
 msgstr "Altāris"
 
-#: src/translations.h:79
+#: src/translations.h:73
 msgid "Libra"
 msgstr "Svari"
 
-#: src/translations.h:80
+#: src/translations.h:74
 msgid "Cetus"
 msgstr "Valis"
 
-#: src/translations.h:81
+#: src/translations.h:75
 msgid "Aries"
 msgstr "Auns"
 
-#: src/translations.h:82 src/translations.h:152
+#: src/translations.h:76 src/translations.h:146
 msgid "Scutum"
 msgstr "Vairogs"
 
-#: src/translations.h:83
+#: src/translations.h:77
 msgid "Pyxis"
 msgstr "Kompass"
 
-#: src/translations.h:84
+#: src/translations.h:78
 msgid "Bootes"
 msgstr "Vēršu Dzinējs"
 
-#: src/translations.h:85
+#: src/translations.h:79
 msgid "Caelum"
 msgstr "Greblis"
 
-#: src/translations.h:86
+#: src/translations.h:80
 msgid "Chamaeleon"
 msgstr "Hameleons"
 
-#: src/translations.h:87
+#: src/translations.h:81
 msgid "Cancer"
 msgstr "Vēzis"
 
-#: src/translations.h:88
+#: src/translations.h:82
 msgid "Capricornus"
 msgstr "Mežāzis"
 
-#: src/translations.h:89
+#: src/translations.h:83
 msgid "Carina"
 msgstr "Kuģa Ķīlis"
 
-#: src/translations.h:90
+#: src/translations.h:84
 msgid "Cassiopeia"
 msgstr "Kasiopeja"
 
-#: src/translations.h:91
+#: src/translations.h:85
 msgid "Centaurus"
 msgstr "Kentaurs"
 
-#: src/translations.h:92
+#: src/translations.h:86
 msgid "Cepheus"
 msgstr "Cefejs"
 
-#: src/translations.h:93
+#: src/translations.h:87
 msgid "Coma Berenices"
 msgstr "Berenikes Mati"
 
-#: src/translations.h:94
+#: src/translations.h:88
 msgid "Canes Venatici"
 msgstr "Medību Suņi"
 
-#: src/translations.h:95
+#: src/translations.h:89
 msgid "Auriga"
 msgstr "Vedējs"
 
-#: src/translations.h:96
+#: src/translations.h:90
 msgid "Columba"
 msgstr "Balodis"
 
-#: src/translations.h:97
+#: src/translations.h:91
 msgid "Circinus"
 msgstr "Cirkulis"
 
-#: src/translations.h:98
+#: src/translations.h:92
 msgid "Crater"
 msgstr "Kauss"
 
-#: src/translations.h:99
+#: src/translations.h:93
 msgid "Corona Australis"
 msgstr "Dienvidu Vainags"
 
-#: src/translations.h:100
+#: src/translations.h:94
 msgid "Corona Borealis"
 msgstr "Ziemeļu Vainags"
 
-#: src/translations.h:101
+#: src/translations.h:95
 msgid "Corvus"
 msgstr "Krauklis"
 
-#: src/translations.h:102
+#: src/translations.h:96
 msgid "Crux"
 msgstr "Krusts"
 
-#: src/translations.h:103
+#: src/translations.h:97
 msgid "Cygnus"
 msgstr "Gulbis"
 
-#: src/translations.h:104
+#: src/translations.h:98
 msgid "Delphinus"
 msgstr "Delfīns"
 
-#: src/translations.h:105
+#: src/translations.h:99
 msgid "Dorado"
 msgstr "Zelta Zivs"
 
-#: src/translations.h:106
+#: src/translations.h:100
 msgid "Draco"
 msgstr "Pūķis"
 
-#: src/translations.h:107
+#: src/translations.h:101
 msgid "Norma"
 msgstr "Leņķmērs"
 
-#: src/translations.h:108
+#: src/translations.h:102
 msgid "Eridanus"
 msgstr "Eridāna"
 
-#: src/translations.h:109
+#: src/translations.h:103
 msgid "Sagitta"
 msgstr "Bulta"
 
-#: src/translations.h:110
+#: src/translations.h:104
 msgid "Fornax"
 msgstr "Krāsns"
 
-#: src/translations.h:111
+#: src/translations.h:105
 msgid "Gemini"
 msgstr "Dvīņi"
 
-#: src/translations.h:112
+#: src/translations.h:106
 msgid "Camelopardalis"
 msgstr "Žirafe"
 
-#: src/translations.h:113
+#: src/translations.h:107
 msgid "Canis Major"
 msgstr "Lielā dzērve"
 
-#: src/translations.h:114
+#: src/translations.h:108
 msgid "Ursa Major"
 msgstr "Lielais lācis"
 
-#: src/translations.h:115
+#: src/translations.h:109
 msgid "Grus"
 msgstr "Dzērve"
 
-#: src/translations.h:116
+#: src/translations.h:110
 msgid "Hercules"
 msgstr "Herkuless"
 
-#: src/translations.h:117
+#: src/translations.h:111
 msgid "Horologium"
 msgstr "Pulkstenis"
 
-#: src/translations.h:118
+#: src/translations.h:112
 msgid "Hydra"
 msgstr "Hidra"
 
-#: src/translations.h:119
+#: src/translations.h:113
 msgid "Hydrus"
 msgstr "Dienvidu Hidra"
 
-#: src/translations.h:120
+#: src/translations.h:114
 msgid "Indus"
 msgstr "Indiānis"
 
-#: src/translations.h:121
+#: src/translations.h:115
 msgid "Lacerta"
 msgstr "Ķirzaka"
 
-#: src/translations.h:122
+#: src/translations.h:116
 msgid "Monoceros"
 msgstr "Vienradzis"
 
-#: src/translations.h:123
+#: src/translations.h:117
 msgid "Lepus"
 msgstr "Zaķis"
 
-#: src/translations.h:124
+#: src/translations.h:118
 msgid "Leo"
 msgstr "Lauva"
 
-#: src/translations.h:125
+#: src/translations.h:119
 msgid "Lupus"
 msgstr "Vilks"
 
-#: src/translations.h:126
+#: src/translations.h:120
 msgid "Lynx"
 msgstr "Lūsis"
 
-#: src/translations.h:127
+#: src/translations.h:121
 msgid "Lyra"
 msgstr "Lira"
 
-#: src/translations.h:128
+#: src/translations.h:122
 msgid "Antlia"
 msgstr "Sūknis"
 
-#: src/translations.h:129
+#: src/translations.h:123
 msgid "Microscopium"
 msgstr "Mikroskops"
 
-#: src/translations.h:130
+#: src/translations.h:124
 msgid "Musca"
 msgstr "Muša"
 
-#: src/translations.h:131
+#: src/translations.h:125
 msgid "Octans"
 msgstr "Oktants"
 
-#: src/translations.h:132
+#: src/translations.h:126
 msgid "Apus"
 msgstr "Paradīzes putns"
 
-#: src/translations.h:133
+#: src/translations.h:127
 msgid "Ophiuchus"
 msgstr "Čūsknesis"
 
-#: src/translations.h:134
+#: src/translations.h:128
 msgid "Orion"
 msgstr "Orions"
 
-#: src/translations.h:135
+#: src/translations.h:129
 msgid "Pavo"
 msgstr "Pāvs"
 
-#: src/translations.h:136
+#: src/translations.h:130
 msgid "Pegasus"
 msgstr "Pegazs"
 
-#: src/translations.h:137
+#: src/translations.h:131
 msgid "Pictor"
 msgstr "Gleznotājs"
 
-#: src/translations.h:138
+#: src/translations.h:132
 msgid "Perseus"
 msgstr "Persejs"
 
-#: src/translations.h:139
+#: src/translations.h:133
 msgid "Equuleus"
 msgstr "Mazais Zirgs"
 
-#: src/translations.h:140
+#: src/translations.h:134
 msgid "Canis Minor"
 msgstr "Mazais Suns"
 
-#: src/translations.h:141
+#: src/translations.h:135
 msgid "Leo Minor"
 msgstr "Mazais Lauva"
 
-#: src/translations.h:142
+#: src/translations.h:136
 msgid "Vulpecula"
 msgstr "Lapsiņa"
 
-#: src/translations.h:143
+#: src/translations.h:137
 msgid "Ursa Minor"
 msgstr "Mazais Lācis"
 
-#: src/translations.h:144
+#: src/translations.h:138
 msgid "Phoenix"
 msgstr "Fenikss"
 
-#: src/translations.h:145
+#: src/translations.h:139
 msgid "Piscis Austrinus"
 msgstr "Dienvidu Zivs"
 
-#: src/translations.h:146
+#: src/translations.h:140
 msgid "Pisces"
 msgstr "Zivis"
 
-#: src/translations.h:147
+#: src/translations.h:141
 msgid "Volans"
 msgstr "Lidojošā Zivs"
 
-#: src/translations.h:148
+#: src/translations.h:142
 msgid "Puppis"
 msgstr "Kuģa Gals"
 
-#: src/translations.h:149
+#: src/translations.h:143
 msgid "Reticulum"
 msgstr "Tīkliņš"
 
-#: src/translations.h:150
+#: src/translations.h:144
 msgid "Sagittarius"
 msgstr "Strēlnieks"
 
-#: src/translations.h:151
+#: src/translations.h:145
 msgid "Scorpius"
 msgstr "Skorpions"
 
-#: src/translations.h:153
+#: src/translations.h:147
 msgid "Serpens"
 msgstr "Čūska"
 
-#: src/translations.h:154
+#: src/translations.h:148
 msgid "Sextans"
 msgstr "Sekstants"
 
-#: src/translations.h:155
+#: src/translations.h:149
 msgid "Mensa"
 msgstr "Galds"
 
-#: src/translations.h:156
+#: src/translations.h:150
 msgid "Taurus"
 msgstr "Vērsis"
 
-#: src/translations.h:157
+#: src/translations.h:151
 msgid "Telescopium"
 msgstr "Teleskops"
 
-#: src/translations.h:158
+#: src/translations.h:152
 msgid "Tucana"
 msgstr "Tukans"
 
-#: src/translations.h:159
+#: src/translations.h:153
 msgid "Triangulum"
 msgstr "Trīsstūris"
 
-#: src/translations.h:160
+#: src/translations.h:154
 msgid "Triangulum Australe"
 msgstr "Dienvidu Trīsstūris"
 
-#: src/translations.h:161
+#: src/translations.h:155
 msgid "Aquarius"
 msgstr "Ūdensvīrs"
 
-#: src/translations.h:162
+#: src/translations.h:156
 msgid "Virgo"
 msgstr "Jaunava"
 
-#: src/translations.h:163
+#: src/translations.h:157
 msgid "Vela"
 msgstr "Buras"
 
-#: src/translations.h:166
+#: src/translations.h:160
 msgid "Bull's Foreleg"
-msgstr ""
+msgstr "Buļļa priekškāja"
+
+#: src/translations.h:161
+msgid "Two Poles"
+msgstr "Divas Kārtis"
+
+#: src/translations.h:162
+msgid "Lion"
+msgstr "Lauva"
+
+#: src/translations.h:163
+msgid "Two Jaws"
+msgstr "Divi Žokļi"
+
+#: src/translations.h:164
+msgid "Sah"
+msgstr "Sahs"
+
+#: src/translations.h:165
+msgid "Bird"
+msgstr "Putns"
+
+#: src/translations.h:166
+msgid "Sek"
+msgstr "Seks"
 
 #: src/translations.h:167
-msgid "Two Poles"
-msgstr ""
+msgid "Triangle"
+msgstr "Trijstūris"
 
 #: src/translations.h:168
-msgid "Lion"
-msgstr ""
+msgid "Ferry Boat"
+msgstr "Pārcēlājs"
 
-#: src/translations.h:169
-msgid "Two Jaws"
-msgstr ""
+#: src/translations.h:169 src/translations.h:240
+msgid "Boat"
+msgstr "Laiva"
 
 #: src/translations.h:170
-msgid "Sah"
-msgstr ""
+msgid "Crocodile"
+msgstr "Krokodils"
 
 #: src/translations.h:171
-msgid "Bird"
-msgstr ""
+msgid "Selkis"
+msgstr "Selkisa"
 
 #: src/translations.h:172
-msgid "Sek"
-msgstr ""
+msgid "Prow"
+msgstr "Kuģa Gals"
 
 #: src/translations.h:173
-msgid "Triangle"
-msgstr ""
+msgid "Horus"
+msgstr "Hors"
 
 #: src/translations.h:174
-msgid "Ferry Boat"
-msgstr ""
+msgid "Sheepfold"
+msgstr "Aitu aploks"
 
-#: src/translations.h:175 src/translations.h:246
-msgid "Boat"
-msgstr ""
+#: src/translations.h:175
+msgid "Giant"
+msgstr "Milzis"
 
 #: src/translations.h:176
-msgid "Crocodile"
-msgstr ""
+msgid "Hippopotamus"
+msgstr "Nīlzirgs"
 
 #: src/translations.h:177
-msgid "Selkis"
-msgstr ""
+msgid "Flock"
+msgstr "Ganāmpulks"
 
 #: src/translations.h:178
-msgid "Prow"
-msgstr ""
+msgid "Pair of Stars"
+msgstr "Zvaigžņu Pāris"
 
 #: src/translations.h:179
-msgid "Horus"
-msgstr ""
+msgid "Khanuwy Fish"
+msgstr "Kanuvī Zivs"
 
-#: src/translations.h:180
-msgid "Sheepfold"
-msgstr ""
+#: src/translations.h:180 src/translations.h:219
+msgid "Net"
+msgstr "Tīkls"
 
 #: src/translations.h:181
-msgid "Giant"
-msgstr ""
+msgid "Jaw"
+msgstr "Žoklis"
 
 #: src/translations.h:182
-msgid "Hippopotamus"
-msgstr ""
+msgid "Mooring Post"
+msgstr "Enkura Vieta"
 
 #: src/translations.h:183
-msgid "Flock"
-msgstr ""
+msgid "Kenemet"
+msgstr "Kenemeta"
 
 #: src/translations.h:184
-msgid "Pair of Stars"
-msgstr ""
+msgid "Chematy"
+msgstr "Krāpnieks"
 
 #: src/translations.h:185
-msgid "Khanuwy Fish"
-msgstr ""
+msgid "Waty Bekety"
+msgstr "Waty Bekety"
 
-#: src/translations.h:186 src/translations.h:225
-msgid "Net"
-msgstr ""
+#: src/translations.h:186
+msgid "Sheep"
+msgstr "Aita"
 
 #: src/translations.h:187
-msgid "Jaw"
-msgstr ""
-
-#: src/translations.h:188
-msgid "Mooring Post"
-msgstr ""
-
-#: src/translations.h:189
-msgid "Kenemet"
-msgstr ""
+msgid "Stars of Water"
+msgstr "Ūdens Zvaigznes"
 
 #: src/translations.h:190
-msgid "Chematy"
-msgstr ""
+msgid "Northern Dipper"
+msgstr "Ziemeļu Kauss"
 
 #: src/translations.h:191
-msgid "Waty Bekety"
-msgstr ""
+msgid "Curved Array"
+msgstr "Līkumotā Rinda"
 
 #: src/translations.h:192
-msgid "Sheep"
-msgstr ""
+msgid "Coiled Thong"
+msgstr "Satītā Pātaga"
 
 #: src/translations.h:193
-msgid "Stars of Water"
-msgstr ""
+msgid "Wings"
+msgstr "Spārni"
+
+#: src/translations.h:194
+msgid "Chariot"
+msgstr "Kariete"
+
+#: src/translations.h:195
+msgid "Tail"
+msgstr "Aste"
 
 #: src/translations.h:196
-msgid "Northern Dipper"
-msgstr ""
+msgid "Winnowing Basket"
+msgstr "Vētījamais Grozs"
 
 #: src/translations.h:197
-msgid "Curved Array"
-msgstr ""
+msgid "Dipper"
+msgstr "Smeļamais"
 
 #: src/translations.h:198
-msgid "Coiled Thong"
-msgstr ""
+msgid "Drum"
+msgstr "Bungas"
 
 #: src/translations.h:199
-msgid "Wings"
-msgstr ""
+msgid "Three Steps"
+msgstr "Trīs soļi"
 
 #: src/translations.h:200
-msgid "Chariot"
-msgstr ""
+msgid "Imperial Guards"
+msgstr "Imperiālie sargi"
 
 #: src/translations.h:201
-msgid "Tail"
-msgstr ""
+msgid "Horn"
+msgstr "Rags"
 
 #: src/translations.h:202
-msgid "Winnowing Basket"
-msgstr ""
+msgid "Willow"
+msgstr "Vītols"
 
 #: src/translations.h:203
-msgid "Dipper"
-msgstr ""
+msgid "Imperial Passageway"
+msgstr "Imperatora Eja"
 
 #: src/translations.h:204
-msgid "Drum"
-msgstr ""
+msgid "Kitchen"
+msgstr "Virtuve"
 
 #: src/translations.h:205
-msgid "Three Steps"
-msgstr ""
+msgid "River Turtle"
+msgstr "Upes Bruņurupucis"
 
 #: src/translations.h:206
-msgid "Imperial Guards"
-msgstr ""
+msgid "Stomach"
+msgstr "Vēders"
 
 #: src/translations.h:207
-msgid "Horn"
-msgstr ""
+msgid "Great General"
+msgstr "Lielais Ģenerālis"
 
 #: src/translations.h:208
-msgid "Willow"
-msgstr ""
+msgid "Wall"
+msgstr "Siena"
 
 #: src/translations.h:209
-msgid "Imperial Passageway"
-msgstr ""
+msgid "Legs"
+msgstr "Kājas"
 
 #: src/translations.h:210
-msgid "Kitchen"
-msgstr ""
+msgid "Root"
+msgstr "Sakne"
 
 #: src/translations.h:211
-msgid "River Turtle"
-msgstr ""
+msgid "Ramparts"
+msgstr "Vaļņi"
 
 #: src/translations.h:212
-msgid "Stomach"
-msgstr ""
+msgid "Flying Corridor"
+msgstr "Lidojošais gaitenis"
 
 #: src/translations.h:213
-msgid "Great General"
-msgstr ""
+msgid "Outer Fence"
+msgstr "Ārējais Žogs"
 
 #: src/translations.h:214
-msgid "Wall"
-msgstr ""
+msgid "Ford"
+msgstr "Brasls"
 
 #: src/translations.h:215
-msgid "Legs"
-msgstr ""
+msgid "Seven Excellencies"
+msgstr "Septiņi Augstmaņi"
 
 #: src/translations.h:216
-msgid "Root"
-msgstr ""
+msgid "Market"
+msgstr "Tirgus"
 
 #: src/translations.h:217
-msgid "Ramparts"
-msgstr ""
+msgid "Five Chariots"
+msgstr "Piecas Karietes"
 
 #: src/translations.h:218
-msgid "Flying Corridor"
-msgstr ""
-
-#: src/translations.h:219
-msgid "Outer Fence"
-msgstr ""
+msgid "Rolled Tongue"
+msgstr "Sarullēta Mēle"
 
 #: src/translations.h:220
-msgid "Ford"
-msgstr ""
+msgid "Toilet"
+msgstr "Tualete"
 
 #: src/translations.h:221
-msgid "Seven Excellencies"
-msgstr ""
+msgid "Screen"
+msgstr "Aizslietnis"
 
 #: src/translations.h:222
-msgid "Market"
-msgstr ""
+msgid "Soldiers Market"
+msgstr "Karavīru Tirgus"
 
 #: src/translations.h:223
-msgid "Five Chariots"
-msgstr ""
+msgid "Square Granary"
+msgstr "Klēts"
 
 #: src/translations.h:224
-msgid "Rolled Tongue"
-msgstr ""
+msgid "Three Stars"
+msgstr "Trīs Zvaigznes"
+
+#: src/translations.h:225
+msgid "Four Channels"
+msgstr "Četri Kanāli"
 
 #: src/translations.h:226
-msgid "Toilet"
-msgstr ""
+msgid "Well"
+msgstr "Aka"
 
 #: src/translations.h:227
-msgid "Screen"
-msgstr ""
+msgid "South River"
+msgstr "Dienvidu Upe"
 
 #: src/translations.h:228
-msgid "Soldiers Market"
-msgstr ""
+msgid "North River"
+msgstr "Ziemeļu Upe"
 
 #: src/translations.h:229
-msgid "Square Granary"
-msgstr ""
+msgid "Five Feudal Kings"
+msgstr "Pieci Karaļi"
 
 #: src/translations.h:230
-msgid "Three Stars"
-msgstr ""
+msgid "Orchard"
+msgstr "Augļudārzs"
 
 #: src/translations.h:231
-msgid "Four Channels"
-msgstr ""
+msgid "Meadows"
+msgstr "Ganības"
 
 #: src/translations.h:232
-msgid "Well"
-msgstr ""
+msgid "Circular Granary"
+msgstr "Apaļā Klēts"
 
 #: src/translations.h:233
-msgid "South River"
-msgstr ""
+msgid "Purple Palace"
+msgstr "Purpurkrāsas Pils"
 
 #: src/translations.h:234
-msgid "North River"
-msgstr ""
+msgid "Extended Net"
+msgstr "Pagarināts Tīkls"
 
 #: src/translations.h:235
-msgid "Five Feudal Kings"
-msgstr ""
+msgid "Arsenal"
+msgstr "Arsenāls"
 
 #: src/translations.h:236
-msgid "Orchard"
-msgstr ""
+msgid "Hook"
+msgstr "Āķis"
 
 #: src/translations.h:237
-msgid "Meadows"
-msgstr ""
+msgid "Supreme Palace"
+msgstr "Augstā Pils"
 
 #: src/translations.h:238
-msgid "Circular Granary"
-msgstr ""
+msgid "Jade Well"
+msgstr "Nefrīta Aka"
 
 #: src/translations.h:239
-msgid "Purple Palace"
-msgstr ""
-
-#: src/translations.h:240
-msgid "Extended Net"
-msgstr ""
+msgid "Lance"
+msgstr "Pīķis"
 
 #: src/translations.h:241
-msgid "Arsenal"
-msgstr ""
+msgid "Mausoleum"
+msgstr "Mauzalejs"
 
 #: src/translations.h:242
-msgid "Hook"
-msgstr ""
+msgid "Dog"
+msgstr "Suns"
 
 #: src/translations.h:243
-msgid "Supreme Palace"
-msgstr ""
+msgid "Earth God's Temple"
+msgstr "Zemes Dieva Templis"
 
 #: src/translations.h:244
-msgid "Jade Well"
-msgstr ""
+msgid "Bow and Arrow"
+msgstr "Loks un Bulta"
 
 #: src/translations.h:245
-msgid "Lance"
-msgstr ""
+msgid "Pestle"
+msgstr "Piesta"
+
+#: src/translations.h:246
+msgid "Mortar"
+msgstr "Java"
 
 #: src/translations.h:247
-msgid "Mausoleum"
-msgstr ""
+msgid "Rooftop"
+msgstr "Jumta Kore"
 
 #: src/translations.h:248
-msgid "Dog"
-msgstr ""
+msgid "Thunderbolt"
+msgstr "Zibens"
 
 #: src/translations.h:249
-msgid "Earth God's Temple"
-msgstr ""
+msgid "Chariot Yard"
+msgstr "Kariešu Parks"
 
 #: src/translations.h:250
-msgid "Bow and Arrow"
-msgstr ""
+msgid "Good Gourd"
+msgstr "Svaigais Ķirbis"
 
 #: src/translations.h:251
-msgid "Pestle"
-msgstr ""
+msgid "Rotten Gourd"
+msgstr "Spuvušais Ķirbis"
 
 #: src/translations.h:252
-msgid "Mortar"
-msgstr ""
+msgid "Encampment"
+msgstr "Apmentne"
 
 #: src/translations.h:253
-msgid "Rooftop"
-msgstr ""
+msgid "Thunder and Lightning"
+msgstr "Zibens un Pērkons"
 
 #: src/translations.h:254
-msgid "Thunderbolt"
-msgstr ""
+msgid "Palace Gate"
+msgstr "Pils Vārti"
 
 #: src/translations.h:255
-msgid "Chariot Yard"
-msgstr ""
+msgid "Emptiness"
+msgstr "Tukšums"
 
 #: src/translations.h:256
-msgid "Good Gourd"
-msgstr ""
+msgid "Weaving Girl"
+msgstr "Audēja"
 
 #: src/translations.h:257
-msgid "Rotten Gourd"
-msgstr ""
+msgid "Girl"
+msgstr "Meitene"
 
 #: src/translations.h:258
-msgid "Encampment"
-msgstr ""
+msgid "Ox"
+msgstr "Vērsis"
 
 #: src/translations.h:259
-msgid "Thunder and Lightning"
-msgstr ""
+msgid "Heart"
+msgstr "Sirds"
 
 #: src/translations.h:260
-msgid "Palace Gate"
-msgstr ""
+msgid "Room"
+msgstr "Istaba"
 
 #: src/translations.h:261
-msgid "Emptiness"
-msgstr ""
+msgid "Spring"
+msgstr "Spirāle"
 
 #: src/translations.h:262
-msgid "Weaving Girl"
-msgstr ""
+msgid "Establishment"
+msgstr "Uzņēmums"
 
 #: src/translations.h:263
-msgid "Girl"
-msgstr ""
+msgid "Flail"
+msgstr "Sprigulis"
 
 #: src/translations.h:264
-msgid "Ox"
-msgstr ""
+msgid "Spear"
+msgstr "Šķēps"
 
 #: src/translations.h:265
-msgid "Heart"
-msgstr ""
+msgid "Right Flag"
+msgstr "Labais Karogs"
 
 #: src/translations.h:266
-msgid "Room"
-msgstr ""
+msgid "Left Flag"
+msgstr "Kreisais Karogs"
 
 #: src/translations.h:267
-msgid "Spring"
-msgstr ""
+msgid "Drumstick"
+msgstr "Bungu vālīte"
 
 #: src/translations.h:268
-msgid "Establishment"
-msgstr ""
+msgid "Bond"
+msgstr "Saites"
 
 #: src/translations.h:269
-msgid "Flail"
-msgstr ""
+msgid "Woman's Bed"
+msgstr "Sievietes Gulta"
 
 #: src/translations.h:270
-msgid "Spear"
-msgstr ""
+msgid "Western Door"
+msgstr "Rietumu Durvis"
 
 #: src/translations.h:271
-msgid "Right Flag"
-msgstr ""
+msgid "Eastern Door"
+msgstr "Austrumu Durvis"
 
 #: src/translations.h:272
-msgid "Left Flag"
-msgstr ""
+msgid "Farmland"
+msgstr "Aramzeme"
 
 #: src/translations.h:273
-msgid "Drumstick"
-msgstr ""
+msgid "Star"
+msgstr "Zvaigzne"
 
 #: src/translations.h:274
-msgid "Bond"
-msgstr ""
+msgid "Ghosts"
+msgstr "Spoki"
 
 #: src/translations.h:275
-msgid "Woman's Bed"
-msgstr ""
+msgid "Xuanyuan"
+msgstr "Suanjuanas pilsēta"
 
 #: src/translations.h:276
-msgid "Western Door"
-msgstr ""
+msgid "Tripod"
+msgstr "Trijkājis"
 
 #: src/translations.h:277
-msgid "Eastern Door"
-msgstr ""
+msgid "Neck"
+msgstr "Kakls"
 
 #: src/translations.h:278
-msgid "Farmland"
-msgstr ""
+msgid "Zaofu"
+msgstr "Dzaofu"
 
 #: src/translations.h:279
-msgid "Star"
-msgstr ""
+msgid "Market Officer"
+msgstr "Tirgus Virsnieks"
 
 #: src/translations.h:280
-msgid "Ghosts"
-msgstr ""
-
-#: src/translations.h:281
-msgid "Xuanyuan"
-msgstr ""
-
-#: src/translations.h:282
-msgid "Tripod"
-msgstr ""
+msgid "Banner of Three Stars"
+msgstr "Trīszvaigžņu Karogs"
 
 #: src/translations.h:283
-msgid "Neck"
-msgstr ""
+msgid "Bailer"
+msgstr "Smeļamais"
 
 #: src/translations.h:284
-msgid "Zaofu"
-msgstr ""
+msgid "Cat's Cradle"
+msgstr "Kaķa Šūpulis"
 
 #: src/translations.h:285
-msgid "Market Officer"
-msgstr ""
+msgid "Voice of Joy"
+msgstr "Prieka Balss"
 
 #: src/translations.h:286
-msgid "Banner of Three Stars"
-msgstr ""
+msgid "The Seven"
+msgstr "Septiņi"
+
+#: src/translations.h:287
+msgid "Maui's Fishhook"
+msgstr "Maui Makšķerāķis"
+
+#: src/translations.h:288
+msgid "Navigator's Triangle"
+msgstr "Stūrmaņa Trijstūris"
 
 #: src/translations.h:289
-msgid "Bailer"
-msgstr ""
+msgid "Kite of Kawelo"
+msgstr "Kawelo Pūķis"
 
 #: src/translations.h:290
-msgid "Cat's Cradle"
-msgstr ""
+msgid "Frigate Bird"
+msgstr "Fregatputns"
 
 #: src/translations.h:291
-msgid "Voice of Joy"
-msgstr ""
+msgid "Cared for by Moon"
+msgstr "Mēness Aprūpētais"
 
 #: src/translations.h:292
-msgid "The Seven"
-msgstr ""
-
-#: src/translations.h:293
-msgid "Maui's Fishhook"
-msgstr ""
-
-#: src/translations.h:294
-msgid "Navigator's Triangle"
-msgstr ""
-
-#: src/translations.h:295
-msgid "Kite of Kawelo"
-msgstr ""
-
-#: src/translations.h:296
-msgid "Frigate Bird"
-msgstr ""
-
-#: src/translations.h:297
-msgid "Cared for by Moon"
-msgstr ""
-
-#: src/translations.h:298
 msgid "Dolphin"
-msgstr ""
-
-#: src/translations.h:301
-msgid "Select and exit to run."
-msgstr ""
+msgstr "Delfīns"
 
 #: src/s_gui.cpp:2199 src/s_gui.cpp:2245
 msgid "Cancel"
@@ -1830,20 +1740,20 @@ msgstr "Gads"
 
 #: src/s_gui.cpp:2732
 msgid "Month"
-msgstr "Mēnesis"
+msgstr "Mēn."
 
 #: src/s_gui.cpp:2735
 msgid "Day"
-msgstr "Dienas"
+msgstr "Diena"
 
 #: src/s_gui.cpp:2738
 msgid "Hour"
-msgstr "Stundas"
+msgstr "Stunda"
 
 #: src/s_gui.cpp:2741
 msgid "Minutes"
-msgstr "Minūtes"
+msgstr "Minūte"
 
 #: src/s_gui.cpp:2744
 msgid "Seconds"
-msgstr "Sekundes"
+msgstr "Sekunde"
