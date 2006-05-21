@@ -685,7 +685,7 @@ void StelUI::gotoSearchedObject(void)
 	{
 		star_edit->clearText();
 		core->gotoSelectedObject();
-		core->setFlagTraking(true);
+		core->setFlagTracking(true);
 		lblSearchMessage->setLabel(L"");
 	}
 	else

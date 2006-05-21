@@ -57,7 +57,7 @@ Landscape* Landscape::create_from_file(const string& landscape_file, const strin
 
 // create landscape from parameters passed in a hash (same keys as with ini file)
 // NOTE: maptex must be full path and filename
-Landscape* Landscape::create_from_hash(stringHash_t param)
+Landscape* Landscape::create_from_hash(stringHash_t & param)
 {
 
 	// NOTE: textures should be full filename (and path)

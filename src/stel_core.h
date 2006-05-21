@@ -99,7 +99,11 @@ public:
 	wstring getSkyCultureHash() const {return skyloc->getSkyCultureHash();}
 	
 	//! Set the landscape
-	void setLandscape(const string& new_landscape_name);
+	bool setLandscape(const string& new_landscape_name);
+
+	//! Load a landscape based on a hash of parameters mirroring the landscape.ini file
+	//! and make it the current landscape
+	bool loadLandscape(stringHash_t& param);
 
 	//! @brief Set the sky language and reload the sky objects names with the new translation
 	//! This function has no permanent effect on the global locale
@@ -129,9 +133,9 @@ public:
 	double getJDay(void) const {return navigation->get_JDay();}	
 	
 	//! Set object tracking
-	void setFlagTraking(bool b) {navigation->set_flag_traking(b);}
+	void setFlagTracking(bool b) {navigation->set_flag_traking(b);}
 	//! Get object tracking
-	bool getFlagTraking(void) {return navigation->get_flag_traking();}
+	bool getFlagTracking(void) {return navigation->get_flag_traking();}
 	
 	//! Set whether sky position is to be locked
 	void setFlagLockSkyPosition(bool b) {navigation->set_flag_lock_equ_pos(b);}
@@ -151,6 +155,12 @@ public:
 	//! Go to the selected object
 	void gotoSelectedObject(void) {if (selected_object) navigation->move_to(selected_object->get_earth_equ_pos(navigation), auto_move_duration);}
 	
+	//! Move view in alt/az (or equatorial if in that mode) coordinates
+	void panView(double delta_az, double delta_alt)	{
+		setFlagTracking(0);
+		navigation->update_move(delta_az, delta_alt);
+	}
+
 	//! Set automove duration in seconds
 	void setAutomoveDuration(float f) {auto_move_duration = f;}
 	//! Get automove duration in seconds
@@ -205,6 +215,11 @@ public:
 	//! @param nameI18n the case sensitive object translated name
 	//! @return true if a object was found with the passed name	
 	bool findAndSelectI18n(const wstring &nameI18n);
+
+	//! Find and select an object based on selection type and standard name or number
+	//! @return true if an object was selected
+	bool selectObject(const string &type, const string &id);
+
 		
 	//! Find and return the list of at most maxNbItem objects auto-completing the passed object I18n name
 	//! @param objPrefix the case insensitive first letters of the searched object
@@ -592,6 +607,13 @@ public:
 	// Observator
 	//! Return the current observatory (as a const object)
 	Observator& getObservatory(void) {return *observatory;}
+
+	//! Move to a new latitude and longitude on home planet
+	void moveObserver(double lat, double lon, double alt, int delay, const wstring& name) {
+		observatory->move_to(lat, lon, alt, delay, name);
+	}
+
+	void setCustomTimezone(string _time_zone) { observatory->set_custom_tz_name(_time_zone); }
 	
 	//! Set Meteor Rate in number per hour
 	void setMeteorsRate(int f) {meteors->set_ZHR(f);}
@@ -606,9 +628,12 @@ public:
 	//! Return the current image manager which display users images
 	ImageMgr* getImageMgr(void) const {return script_images;}
 
+	
+
 	double getZoomSpeed() { return zoom_speed; }
 	float getAutoMoveDuration() { return auto_move_duration; }
 
+	
 	void getFontForLocale(const string &_locale, string &_fontFile, float &_fontScale,
 						  string &_fixedFontFile, float &_fixedFontScale);
 
