@@ -793,7 +793,7 @@ int StelUI::handle_move(int x, int y)
 		if ((has_dragged || sqrtf((x-previous_x)*(x-previous_x)+(y-previous_y)*(y-previous_y))>4.))
 		{
 			has_dragged = true;
-			core->setFlagTraking(false);
+			core->setFlagTracking(false);
 			core->dragView(previous_x, previous_y, x, y);
 			previous_x = x;
 			previous_y = y;
@@ -864,7 +864,7 @@ int StelUI::handle_clic(Uint16 x, Uint16 y, S_GUI_VALUE button, S_GUI_VALUE stat
 			if (core->getFlagHasSelected())
 			{
 				core->gotoSelectedObject();
-				core->setFlagTraking(true);
+				core->setFlagTracking(true);
 			}
 		}
 		if (button==S_GUI_MOUSE_LEFT && state==S_GUI_RELEASED && !has_dragged)

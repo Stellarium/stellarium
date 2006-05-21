@@ -417,10 +417,13 @@ void StelCore::draw(int delta_time)
 	projection->draw_viewport_shape();
 }
 
-void StelCore::setLandscape(const string& new_landscape_name)
+bool StelCore::setLandscape(const string& new_landscape_name)
 {
-	if (new_landscape_name.empty()) return;
+	if (new_landscape_name.empty()) return 0;
 	Landscape* newLandscape = Landscape::create_from_file(getDataDir() + "landscapes.ini", new_landscape_name);
+
+	if(!newLandscape) return 0;
+
 	if (landscape)
 	{
 		// Copy parameters from previous landscape to new one
@@ -430,6 +433,29 @@ void StelCore::setLandscape(const string& new_landscape_name)
 		landscape = newLandscape;
 	}
 	observatory->set_landscape_name(new_landscape_name);
+	return 1;
+}
+
+
+//! Load a landscape based on a hash of parameters mirroring the landscape.ini file
+//! and make it the current landscape
+bool StelCore::loadLandscape(stringHash_t& param) {
+
+	Landscape* newLandscape = Landscape::create_from_hash(param);
+	if(!newLandscape) return 0;
+
+	if (landscape)
+	{
+		// Copy parameters from previous landscape to new one
+		newLandscape->setFlagShow(landscape->getFlagShow());
+		newLandscape->setFlagShowFog(landscape->getFlagShowFog());
+		delete landscape;
+		landscape = newLandscape;
+	}
+	observatory->set_landscape_name(param["name"]);
+	// probably not particularly useful, as not in landscape.ini file
+
+	return 1;
 }
 
 
@@ -456,13 +482,78 @@ StelObject *StelCore::searchByNameI18n(const wstring &name) const
 
 //! Find and select an object from its translated name
 //! @param nameI18n the case sensitive object translated name
-//! @return true if a object was found with the passed name	
+//! @return true if an object was found with the passed name	
 bool StelCore::findAndSelectI18n(const wstring &nameI18n)
 {
 	// Then look for another object
 	StelObject* obj = searchByNameI18n(nameI18n);
 	if (!obj) return false;
 	else return selectObject(obj);
+}
+
+
+//! Find and select an object based on selection type and standard name or number
+//! @return true if an object was selected
+bool StelCore::selectObject(const string &type, const string &id) {
+
+    if(type=="hp") {
+      unsigned int hpnum;
+      std::istringstream istr(id);
+      istr >> hpnum;
+      selected_object = hip_stars->searchHP(hpnum);
+      asterisms->setSelected((HipStar*)selected_object);
+      setPlanetsSelected("");
+
+	} else if(type=="star") {
+      selected_object = hip_stars->search(id);
+      asterisms->setSelected((HipStar*)selected_object);
+      setPlanetsSelected("");
+
+    } else if(type=="planet"){
+      setPlanetsSelected(id);
+      selected_object = ssystem->getSelected();
+      asterisms->setSelected(NULL);
+
+    } else if(type=="nebula"){
+      selected_object = nebulas->search(id);
+      setPlanetsSelected("");
+      asterisms->setSelected(NULL);
+	 
+    } else if(type=="constellation"){
+
+		// Select only constellation, nothing else 	 
+		asterisms->setSelected(id); 
+
+		selected_object = NULL;
+		setPlanetsSelected("");
+
+    } else if(type=="constellation_star") {
+	
+		// For Find capability, select a star in constellation so can center view on constellation 	 
+		unsigned int hpnum; 
+		asterisms->setSelected(id); 
+
+		hpnum = asterisms->getFirstSelectedHP();
+		selected_object = hip_stars->searchHP(hpnum); 	 
+		asterisms->setSelected((HipStar*)selected_object); 	 
+		setPlanetsSelected("");
+
+		// Some stars are shared, so now force constellation
+		asterisms->setSelected(id);
+	} else {
+		cerr << "Invalid selection type specified: " << type << endl;
+		return 0;
+	}
+
+
+    if (selected_object) {
+      if (navigation->get_flag_traking()) navigation->set_flag_lock_equ_pos(1);
+      navigation->set_flag_traking(0);
+
+	  return 1;
+    }
+
+	return 0;
 }
 
 
@@ -837,7 +928,7 @@ void StelCore::turn_right(int s)
 	if (s && FlagEnableMoveKeys)
 	{
 		deltaAz = 1;
-		setFlagTraking(false);
+		setFlagTracking(false);
 		setFlagLockSkyPosition(false);
 	}
 	else deltaAz = 0;
@@ -848,7 +939,7 @@ void StelCore::turn_left(int s)
 	if (s && FlagEnableMoveKeys)
 	{
 		deltaAz = -1;
-		setFlagTraking(false);
+		setFlagTracking(false);
 		setFlagLockSkyPosition(false);
 
 	}
@@ -860,7 +951,7 @@ void StelCore::turn_up(int s)
 	if (s && FlagEnableMoveKeys)
 	{
 		deltaAlt = 1;
-		setFlagTraking(false);
+		setFlagTracking(false);
 		setFlagLockSkyPosition(false);
 	}
 	else deltaAlt = 0;
@@ -871,7 +962,7 @@ void StelCore::turn_down(int s)
 	if (s && FlagEnableMoveKeys)
 	{
 		deltaAlt = -1;
-		setFlagTraking(false);
+		setFlagTracking(false);
 		setFlagLockSkyPosition(false);
 	}
 	else deltaAlt = 0;
@@ -906,7 +997,7 @@ void StelCore::dragView(int x1, int y1, int x2, int y2)
 	rect_to_sphe(&az1, &alt1, tempvec1);
 	rect_to_sphe(&az2, &alt2, tempvec2);
 	navigation->update_move(az2-az1, alt1-alt2);
-	setFlagTraking(false);
+	setFlagTracking(false);
 	setFlagLockSkyPosition(false);
 }
 
@@ -1041,8 +1132,8 @@ bool StelCore::selectObject(StelObject* obj)
 		if (selected_object)
 		{	
 			// If an object was selected keep the earth following
-			if (getFlagTraking()) navigation->set_flag_lock_equ_pos(1);
-			setFlagTraking(false);
+			if (getFlagTracking()) navigation->set_flag_lock_equ_pos(1);
+			setFlagTracking(false);
 	
 			if (selected_object->get_type()==StelObject::STEL_OBJECT_STAR)
 			{
