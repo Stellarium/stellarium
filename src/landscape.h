@@ -60,7 +60,7 @@ public:
 	virtual void draw(ToneReproductor * eye, const Projector* prj, const Navigator* nav) = 0;
 	
 	static Landscape* create_from_file(const string& landscape_file, const string& section_name);
-	static Landscape* create_from_hash(stringHash_t param);
+	static Landscape* create_from_hash(stringHash_t & param);
 	static string get_file_content(const string& landscape_file);
 protected:
 	float radius;

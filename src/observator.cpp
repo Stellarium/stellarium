@@ -146,11 +146,12 @@ void Observator::load(const InitParser& conf, const string& section)
 	date_format = string_to_s_date_format(conf.get_str(section, "date_display_format"));
 }
 
-void Observator::set_landscape_name(string s) {
+void Observator::set_landscape_name(const string s) {
 
 	// need to lower case name because config file parser lowercases section names
-	transform(s.begin(), s.end(), s.begin(), ::tolower);
-	landscape_name = s;
+	string x = s;
+	transform(x.begin(), x.end(), x.begin(), ::tolower);
+	landscape_name = x;
 }
 
 void Observator::save(const string& file, const string& section)
