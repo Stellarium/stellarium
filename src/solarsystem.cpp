@@ -560,6 +560,8 @@ wstring SolarSystem::getPlanetHashString(void)
 		oss << StelUtility::stringToWstring((*iter)->getEnglishName()) << "\n";
 	}
 
+	// wcout <<  oss.str();
+
 	return oss.str();
 
 }
