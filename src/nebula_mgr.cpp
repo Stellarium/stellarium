@@ -71,7 +71,7 @@ bool NebulaMgr::read(float font_size, const string& font_name, const string& cat
 	return true;
 }
 
-// Draw all the Nebulaes
+// Draw all the Nebulae
 void NebulaMgr::draw(Projector* prj, const Navigator * nav, ToneReproductor* eye)
 {
 	Nebula::hints_brightness = hintsFader.getInterstate()*flagShow.getInterstate();
@@ -94,7 +94,7 @@ void NebulaMgr::draw(Projector* prj, const Navigator * nav, ToneReproductor* eye
 	// FOV is currently measured vertically, so need to adjust for wide screens
 	// TODO: projector should probably use largest measurement itself
 	float max_fov = MY_MAX( prj->get_fov(), prj->get_fov()*prj->getViewportWidth()/prj->getViewportHeight());
-	nbZones = nebGrid.Intersect(nav->get_equ_vision(), max_fov*M_PI/180.f*1.2f);
+	nbZones = nebGrid.Intersect(nav->get_prec_equ_vision(), max_fov*M_PI/180.f*1.2f);
 	static int * zoneList = nebGrid.getResult();
 	
     prj->set_orthographic_projection();	// set 2D coordinate
@@ -115,18 +115,15 @@ void NebulaMgr::draw(Projector* prj, const Navigator * nav, ToneReproductor* eye
 		{
 			n = *iter;
 			if (!displayNoTexture && !n->hasTex()) continue;
-			
+
 			// improve performance by skipping if too small to see
 			// TODO: skip if too faint to see
 			if (n->angular_size>size_limit ||
 			    (hintsFader.getInterstate()>0.0001 &&
 			     n->mag <= getMaxMagHints()))
 			{
-				// correct for precession
-				pXYZ = nav->j2000_to_earth_equ(n->XYZ);
-	
-				// project in 2D to check if the nebula is in screen
-				if ( !prj->project_earth_equ_check(pXYZ,n->XY) ) continue;
+
+				if ( !prj->project_j2000_check(n->XYZ,n->XY) ) continue;
 	
 				if (n->hasTex()) n->draw_tex(prj, nav, eye);
 				else n->draw_no_tex(prj, nav, eye);
@@ -135,7 +132,7 @@ void NebulaMgr::draw(Projector* prj, const Navigator * nav, ToneReproductor* eye
 				{
 					n->draw_name(prj);
 					n->draw_circle(prj, nav);
-				}
+				} 
 			}
 		}
 	}
