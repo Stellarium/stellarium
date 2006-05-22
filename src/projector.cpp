@@ -658,7 +658,7 @@ void Projector::print_gravity180(s_font* font, float x, float y, const wstring& 
 	if (psi>5) psi = 5;
 	set_orthographic_projection();
 	glTranslatef(x,y,0);
-	glRotatef(theta*180./M_PI,0,0,-1);
+	if(gravityLabels) glRotatef(theta*180./M_PI,0,0,-1);
 	glTranslatef(xshift, -yshift, 0);
 	glScalef(1, -1, 1);
 	
@@ -693,7 +693,9 @@ void Projector::print_gravity180(s_font* font, float x, float y, const wstring& 
 				psi = atan2f((float)font->getStrLen(ws.substr(i,1))*1.05,d) * 180./M_PI;
 				if (psi>5) psi = 5;
 			}
-			glRotatef(psi,0,0,-1);
+
+			// keep text horizontal if gravity labels off
+			if(gravityLabels) glRotatef(psi,0,0,-1);
 			
 		}
 
