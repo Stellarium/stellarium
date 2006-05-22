@@ -81,10 +81,11 @@ public:
 	const string& getDataRoot() const {return dataRoot;}
 	
 	//! Set the sky culture from I18 name
-	void setSkyCulture(const wstring& cultureName);
+	//! Returns false and doesn't change if skyculture is invalid
+	bool setSkyCulture(const wstring& cultureName);
 	
 	//! Set the current sky culture from the passed directory
-	void setSkyCultureDir(const string& culturedir);
+	bool setSkyCultureDir(const string& culturedir);
 
 	string getSkyCultureDir() {return skyCultureDir;}
 		
