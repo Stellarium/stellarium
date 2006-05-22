@@ -61,10 +61,10 @@ double Observator::getDistanceFromCenter(void) const {
 Mat4d Observator::getRotLocalToEquatorial(double jd) const {
   double lat = latitude;
   // TODO: Figure out how to keep continuity in sky as reach poles
-  // otherwise sky jumps in rotation when reach poles
+  // otherwise sky jumps in rotation when reach poles in equatorial mode
   // This is a kludge
-  if( lat > 89.9 )  lat = 89.9;
-  if( lat < -89.9 ) lat = -89.9;
+  if( lat > 89.5 )  lat = 89.5;
+  if( lat < -89.5 ) lat = -89.5;
   return Mat4d::zrotation((planet->getSiderealTime(jd)+longitude)*(M_PI/180.))
        * Mat4d::yrotation((90.-lat)*(M_PI/180.));
 }

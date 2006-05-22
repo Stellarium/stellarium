@@ -298,6 +298,8 @@ void Nebula::draw_tex(const Projector* prj, const Navigator* nav, ToneReproducto
 {
 	glEnable(GL_TEXTURE_2D);
 	glEnable(GL_BLEND);
+	glBlendFunc(GL_ONE, GL_ONE);
+
 
 	if (!neb_tex) return;
 
@@ -306,7 +308,7 @@ void Nebula::draw_tex(const Projector* prj, const Navigator* nav, ToneReproducto
 
 	if(flagBright && get_on_screen_size(prj, nav)>12.)
 	{
-		glColor3f(1.0,1.0,1.0);
+		glColor4f(1.0,1.0,1.0,1.0);
 	}
 	else
 	{
@@ -315,7 +317,7 @@ void Nebula::draw_tex(const Projector* prj, const Navigator* nav, ToneReproducto
 		// TODO this should be revisited to be less ad hoc
 		// 3 is a fudge factor since only about 1/3 of a texture is not black background
 		float cmag = 3 * ad_lum / tex_avg_luminance;
-		glColor3f(cmag,cmag,cmag);
+		glColor4f(cmag,cmag,cmag,1.0);
 
 		//		printf("%s: lum %f ad_lum %f cmag %f angle %f\n", name.c_str(), luminance, ad_lum, cmag, angular_size);
 	}
@@ -371,7 +373,7 @@ void Nebula::draw_no_tex(const Projector* prj, const Navigator * nav,ToneReprodu
 
 void Nebula::draw_name(const Projector* prj)
 {
-	glColor3fv(label_color*hints_brightness);
+	glColor4f(label_color[0], label_color[1], label_color[2], hints_brightness);
 	float size = get_on_screen_size(prj);
 	float shift = 8.f + size/2.f;
 
