@@ -86,7 +86,7 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 
 	if(command == "flag") {
 
-		// TODO: loop if want to allow that syntax
+		// could loop if want to allow that syntax
 		if(args.begin() != args.end()) {  
 	  
 			bool val;
@@ -221,7 +221,7 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 							str_to_double(args["delta_alt"]));
 		}	else status = 0;
 
-		// TODO, absolute settings (see RFE 1311031)
+		// TODO absolute settings (see RFE 1311031)
 
 
 	  
@@ -253,7 +253,7 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 			stcore->setTimeSpeed(str_to_double(args["rate"])*JD_SECOND);
 		  
 		} else if(args["action"]=="pause") {
-			// TODO why is this in stelapp?  should be in stelcore
+			// TODO why is this in stelapp?  should be in stelcore - Rob
 			stapp->FlagTimePause = !stapp->FlagTimePause;
 			if(stapp->FlagTimePause) {
 				// TODO pause should be all handled in core methods
@@ -361,11 +361,13 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 
 	} else if(command=="image") {
 
+		ImageMgr* script_images = stcore->getImageMgr();
+
 		if(args["name"]=="") {
 			debug_message = _("Image name required.");
 			status = 0;
 		} else if(args["action"]=="drop") {
-			stcore->script_images->drop_image(args["name"]);
+			script_images->drop_image(args["name"]);
 		} else {
 			if(args["action"]=="load" && args["filename"]!="") {
 
@@ -383,13 +385,13 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 				else 
 					image_filename = stcore->getDataRoot() + "/" + args["filename"];
 				  
-				status = stcore->script_images->load_image(image_filename, args["name"], img_pos);
+				status = script_images->load_image(image_filename, args["name"], img_pos);
 
 				if(status==0) debug_message = _("Unable to open file: ") + StelUtility::stringToWstring(image_filename);
 			}
 
 			if( status ) {
-				Image * img = stcore->script_images->get_image(args["name"]);
+				Image * img = script_images->get_image(args["name"]);
 			  
 				if(img != NULL) {
 					if(args["alpha"]!="") img->set_alpha(str_to_double(args["alpha"]), 
@@ -459,6 +461,8 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 	}
 	else if(command=="script") {
 
+		ImageMgr* script_images = stcore->getImageMgr();
+
 		if(args["action"]=="end") {
 			// stop script, audio, and unload any loaded images
 			if(audio) {
@@ -466,7 +470,7 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 				audio = NULL;
 			}
 			stapp->scripts->cancel_script();
-			stcore->script_images->drop_all_images();
+			script_images->drop_all_images();
 
 		} else if(args["action"]=="play" && args["filename"]!="") {
 			if(stapp->scripts->is_playing()) {
@@ -479,7 +483,7 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 					audio = NULL;
 				}
 				stapp->scripts->cancel_script();
-				stcore->script_images->drop_all_images();
+				script_images->drop_all_images();
 
 				// keep same script path 
 				stapp->scripts->play_script(script_path + args["filename"], script_path);
@@ -636,7 +640,7 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 }
 
 
-// set flags - TODO: StelCore flag variables will be replaced with object attributes
+// set flags
 // if caller is not trusted, some flags can't be changed 
 // newval is new value of flag changed
 
