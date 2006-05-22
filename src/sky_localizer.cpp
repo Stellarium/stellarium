@@ -46,7 +46,7 @@ SkyLocalizer::SkyLocalizer(const string& cultureDir)
 			InitParser conf;
 			conf.load(tmpfic);
 			dirToNameEnglish[tmp] = conf.get_str("info:name");
-			//cout << tmp << " : " << dirToNameEnglish[tmp] << endl;
+			// cout << tmp << " : " << dirToNameEnglish[tmp] << endl;
 			fclose(fic);
 		}
 	}
@@ -88,10 +88,15 @@ wstring SkyLocalizer::getSkyCultureHash(void)
 	wstring cultures;
 	for ( stringHashIter_t iter = dirToNameEnglish.begin(); iter != dirToNameEnglish.end(); ++iter )
 	{
+
+		// weed out invalid hash entries from invalid culture lookups in hash
+		// TODO how to keep hash clean in the first place
+		if(iter->second == "") continue;
+
 		cultures += _(iter->second);
 		cultures += wstring(L"\n") + StelUtility::stringToWstring(iter->first) + L"\n";
 	}
-	//wcout << cultures << endl;
+	// wcout << cultures << endl;
 	return cultures;
 }
 

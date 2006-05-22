@@ -734,26 +734,27 @@ void StelCore::autoZoomOut(float move_duration, bool full)
 }
 
 // Set the current sky culture according to passed name
-void StelCore::setSkyCulture(const wstring& cultureName)
+bool StelCore::setSkyCulture(const wstring& cultureName)
 {
-	setSkyCultureDir(skyloc->skyCultureToDirectory(cultureName));
+	return setSkyCultureDir(skyloc->skyCultureToDirectory(cultureName));
 }
 
 // Set the current sky culture from the passed directory
-void StelCore::setSkyCultureDir(const string& cultureDir)
+bool StelCore::setSkyCultureDir(const string& cultureDir)
 {
-	if(skyCultureDir == cultureDir) return;
+	if(skyCultureDir == cultureDir) return 1;
 
-	// make sure culture definition exists before attempting
-// 	if( !skyloc->test_sky_culture_directory(_culture_dir) )
-// 	{
-// 		cerr << "Invalid sky culture directory: " << _culture_dir << endl;
-// 		return 0;
-// 	}
+	// make sure culture definition exists before attempting or will die
+	// Do not comment this out! Rob
+	if(skyloc->directoryToSkyCultureEnglish(cultureDir) == "")
+ 	{
+ 		cerr << "Invalid sky culture directory: " << cultureDir << endl;
+ 		return 0;
+ 	}
 
 	skyCultureDir = cultureDir;
 
-	if(!asterisms) return;
+	if(!asterisms) return 1;
 
 	LoadingBar lb(projection, FontSizeGeneral, baseFontFile, "logo24bits.png", getViewportWidth(), getViewportHeight(), StelUtility::stringToWstring(VERSION), 45, 320, 121);
 
@@ -779,7 +780,7 @@ void StelCore::setSkyCultureDir(const string& cultureDir)
 	// translate
 	hip_stars->translateNames(skyTranslator);
 
-	return;
+	return 1;
 }
 
 
