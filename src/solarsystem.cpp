@@ -39,6 +39,8 @@ SolarSystem::SolarSystem()
 
 void SolarSystem::setFont(float font_size, const string& font_name)
 {
+	if(planet_name_font) delete planet_name_font;
+
 	planet_name_font = new s_font(font_size, font_name);
 	if (!planet_name_font)
 	{
