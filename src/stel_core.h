@@ -52,8 +52,6 @@
 //! This class is the main API of the program. It must be documented using doxygen.
 class StelCore
 {
-// TODO : remove both
-friend class StelCommandInterface;
 public:
 	//! Possible mount modes
 	enum MOUNT_MODE { MOUNT_ALTAZIMUTAL, MOUNT_EQUATORIAL };
