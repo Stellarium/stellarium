@@ -756,6 +756,7 @@ void StelUI::tui_cb_change_color()
 void StelUI::tui_cb_location_change_planet()
 {
 	//	core->setHomePlanet( StelUtility::wstringToString( tui_location_planet->getCurrent() ) );
-	app->commander->execute_command(string("set home_planet ") + 
-									StelUtility::wstringToString( tui_location_planet->getCurrent() ));
+	app->commander->execute_command(string("set home_planet \"") + 
+									StelUtility::wstringToString( tui_location_planet->getCurrent() ) +
+									"\"");
 }
