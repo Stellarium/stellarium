@@ -331,11 +331,11 @@ Component* StelUI::createFlagButtons(void)
 	bt_flag_constellation_art->setOnPressCallback(callback<void>(this, &StelUI::cb));
 	bt_flag_constellation_art->setOnMouseInOutCallback(callback<void>(this, &StelUI::cbr));
 
-	bt_flag_azimuth_grid = new FlagButton(false, NULL, "bt_grid.png");
+	bt_flag_azimuth_grid = new FlagButton(false, NULL, "bt_azgrid.png");
 	bt_flag_azimuth_grid->setOnPressCallback(callback<void>(this, &StelUI::cb));
 	bt_flag_azimuth_grid->setOnMouseInOutCallback(callback<void>(this, &StelUI::cbr));
 
-	bt_flag_equator_grid = new FlagButton(false, NULL, "bt_grid.png");
+	bt_flag_equator_grid = new FlagButton(false, NULL, "bt_eqgrid.png");
 	bt_flag_equator_grid->setOnPressCallback(callback<void>(this, &StelUI::cb));
 	bt_flag_equator_grid->setOnMouseInOutCallback(callback<void>(this, &StelUI::cbr));
 
