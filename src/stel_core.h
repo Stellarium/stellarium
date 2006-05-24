@@ -230,7 +230,9 @@ public:
 	bool getFlagHasSelected(void) {return selected_object!=NULL;}
 	
 	//! Deselect selected object if any
-	void unSelect(void) {selected_object=NULL; asterisms->setSelected(NULL); ssystem->setSelected(NULL);}
+	//! Does not deselect selected constellation
+	void unSelect(void) {selected_object=NULL; //asterisms->setSelected(NULL); 
+		ssystem->setSelected(NULL);}
 	
 	//! Set whether a pointer is to be drawn over selected object
 	void setFlagSelectedObjectPointer(bool b) { object_pointer_visibility = b; }

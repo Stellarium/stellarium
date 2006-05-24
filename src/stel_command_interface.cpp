@@ -371,13 +371,10 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 		} else {
 			if(args["action"]=="load" && args["filename"]!="") {
 
-				// TODO: more image positioning coordinates
 				Image::IMAGE_POSITIONING img_pos = Image::POS_VIEWPORT;
 				if(args["coordinate_system"] == "horizontal") img_pos = Image::POS_HORIZONTAL;
-				/*
-				  else if(args["coordinates"] == "rade") img_pos = POS_EQUATORIAL;
-				  else img_pos = POS_VIEWPORT;
-				*/
+				else if(args["coordinate_system"] == "equatorial") img_pos = Image::POS_EQUATORIAL;
+				else if(args["coordinate_system"] == "j2000") img_pos = Image::POS_J2000;
 
 				string image_filename;
 				if(stapp->scripts->is_playing()) 

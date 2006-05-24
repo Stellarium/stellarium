@@ -211,6 +211,8 @@ void Image::draw(const Navigator * nav, Projector * prj) {
 
   if(image_pos_type == POS_VIEWPORT ) {
 
+	  //	  cout << "drawing image viewport " << image_name << endl;
+
 	  // at x or y = 1, image is centered on projection edge
 	  // centered in viewport at 0,0
 
@@ -233,6 +235,8 @@ void Image::draw(const Navigator * nav, Projector * prj) {
 	  prj->reset_perspective_projection();
 
   } else if(image_pos_type == POS_HORIZONTAL ) {
+
+	  //	  cout << "drawing image horizontal " << image_name << endl;
 
 	  // alt az coords
 	  prj->reset_perspective_projection();
@@ -286,13 +290,68 @@ void Image::draw(const Navigator * nav, Projector * prj) {
 	  }
 	 
 
+  } else if(image_pos_type == POS_J2000 || image_pos_type == POS_EQUATORIAL) {
 
-  } else {
-	  // earth equatorial positioning
-	  printf("Earth equatorial script image positioning not implemented yet\n");
+	  // equatorial is in current equatorial coordinates (takes account of precession)
+	  // j2000 is in J2000 epoch equatorial coordinates (no precession)
 
+	  prj->set_orthographic_projection();    // 2D coordinate
+
+	  Vec3d gridpt, onscreen;
+
+	  // ypos is right ascension, xpos is declination
+	  Vec3d imagev = Mat4d::zrotation((image_ypos-90)*M_PI/180.) 
+		  * Mat4d::xrotation((image_xpos)*M_PI/180.) * Vec3d(0,1,0); 
+
+	  Vec3d ortho1 = Mat4d::zrotation(((image_ypos-90))*M_PI/180.) * Vec3d(1,0,0);
+	  Vec3d ortho2 = imagev^ortho1;
+
+	  int grid_size = int(image_scale/5.);  // divisions per row, column
+	  if(grid_size < 5) grid_size = 5;
+
+	  for (int i=0; i<grid_size; i++) {
+
+		  glBegin(GL_QUAD_STRIP);
+
+		  for (int j=0; j<=grid_size; j++) {
+
+			  for(int k=0; k<=1; k++) {
+
+				  // TODO: separate x, y scales?
+				  if(image_ratio<1) {
+					  // image height is maximum angular dimension
+					  gridpt = Mat4d::rotation( imagev, (image_rotation+180)*M_PI/180.) *
+						  Mat4d::rotation( ortho1, image_scale*(j-grid_size/2.)/(float)grid_size*M_PI/180.) *
+						  Mat4d::rotation( ortho2, image_scale/image_ratio*(i+k-grid_size/2.)/(float)grid_size*M_PI/180.) *
+						  imagev;
+
+				  } else {
+					  // image width is maximum angular dimension
+					  gridpt = Mat4d::rotation( imagev, (image_rotation+180)*M_PI/180.) *
+						  Mat4d::rotation( ortho1, image_scale/image_ratio*(j-grid_size/2.)/(float)grid_size*M_PI/180.) *
+						  Mat4d::rotation( ortho2, image_scale*(i+k-grid_size/2.)/(float)grid_size*M_PI/180.) *
+						  imagev;
+				  }
+
+				  if((image_pos_type == POS_J2000 && prj->project_j2000(gridpt, onscreen)) ||
+					 (image_pos_type == POS_EQUATORIAL && prj->project_earth_equ(gridpt, onscreen))) {
+
+					  glTexCoord2f((i+k)/(float)grid_size,j/(float)grid_size);
+			  
+					  glVertex3d(onscreen[0], onscreen[1], 0);
+
+				  }
+			  }
+		  }
+
+		  glEnd();  
+	  }
+	
+	  prj->reset_perspective_projection();
+	  
+	  
   }
-  
+
 
 }
 
