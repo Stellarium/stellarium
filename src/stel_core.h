@@ -638,6 +638,7 @@ public:
 	void getFontForLocale(const string &_locale, string &_fontFile, float &_fontScale,
 						  string &_fixedFontFile, float &_fixedFontScale);
 
+    string getLandscapeName(void) {return landscape->getName();}
 private:
 	//! Select passed object
 	//! @return true if the object was selected (false if the same was already selected)

@@ -96,6 +96,33 @@ string Landscape::get_file_content(const string& landscape_file)
 	return result;
 }
 
+string Landscape::getLandscapeNames(const string& landscape_file)
+{
+    InitParser pd;	// The landscape data ini file parser
+	pd.load(landscape_file);
+
+	string result;
+
+	for (int i=0; i<pd.get_nsec();i++)
+	{
+        result += pd.get_str(pd.get_secname(i), "name") + '\n';
+	}
+	return result;
+}
+
+string Landscape::nameToKey(const string& landscape_file, const string & name)
+{
+    InitParser pd;	// The landscape data ini file parser
+	pd.load(landscape_file);
+
+	for (int i=0; i<pd.get_nsec();i++)
+	{
+        if (name==pd.get_str(pd.get_secname(i), "name")) return pd.get_secname(i);
+	}
+	assert(0);
+	return "error";
+}
+
 LandscapeOldStyle::LandscapeOldStyle(float _radius) : Landscape(_radius), side_texs(NULL), sides(NULL), fog_tex(NULL), ground_tex(NULL)
 {}
 
