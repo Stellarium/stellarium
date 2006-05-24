@@ -1249,9 +1249,9 @@ void StelUI::gui_update_widgets(int delta_time)
 	bt_flag_search->setState(search_win->getVisible());
 	bt_flag_goto->setState(false);
 
-	bt_real_time_speed->setState(fabs(core->getTimeSpeed()-JD_SECOND)<0.00000001);
-	bt_inc_time_speed->setState((core->getTimeSpeed()-JD_SECOND)>0.00000001);
-	bt_dec_time_speed->setState((core->getTimeSpeed()-JD_SECOND)<-0.00000001);
+	bt_real_time_speed->setState(fabs(core->getTimeSpeed()-JD_SECOND)<0.000001);
+	bt_inc_time_speed->setState((core->getTimeSpeed()-JD_SECOND)>0.0001);
+	bt_dec_time_speed->setState((core->getTimeSpeed()-JD_SECOND)<-0.0001);
 	// cache last time to prevent to much slow system call
 	static double lastJD = 0;
 	if (fabs(lastJD-core->getJDay())>JD_SECOND/4)
