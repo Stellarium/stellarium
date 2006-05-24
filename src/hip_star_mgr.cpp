@@ -267,7 +267,10 @@ void HipStarMgr::draw(Vec3f equ_vision, ToneReproductor* eye, Projector* prj)
 	HipStar::eye = eye;
 	HipStar::proj = prj;
 	
-	if (flagPointStar) drawPoint(equ_vision, eye, prj);
+	if (flagPointStar) {
+		drawPoint(equ_vision, eye, prj);
+		return;
+	}
 	
 	glEnable(GL_TEXTURE_2D);
     glEnable(GL_BLEND);
@@ -371,7 +374,7 @@ void HipStarMgr::drawPoint(Vec3f equ_vision, ToneReproductor* _eye, Projector* p
 			if (!h->commonNameI18.empty() && names_fader.getInterstate() && h->Mag<maxMagStarName)
 			{
 				h->draw_name();
-				glBindTexture (GL_TEXTURE_2D, starTexture->getID());
+				//				glBindTexture (GL_TEXTURE_2D, starTexture->getID());
 			}
 		}
 	}
