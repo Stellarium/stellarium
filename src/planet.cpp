@@ -834,7 +834,7 @@ void Planet::draw_orbit(const Navigator * nav, const Projector* prj)
 	glDisable(GL_LIGHTING);
 	glDisable(GL_TEXTURE_2D);
 
-	glColor3fv(orbit_color*orbit_fader.getInterstate());
+	glColor4f(orbit_color[0], orbit_color[1], orbit_color[2], orbit_fader.getInterstate());
 
 	int on=0;
 	int d;
