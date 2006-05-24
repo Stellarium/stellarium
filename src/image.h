@@ -36,7 +36,8 @@ class Image
 	{
 		POS_VIEWPORT,
 		POS_HORIZONTAL,
-		POS_EQUATORIAL
+		POS_EQUATORIAL,
+		POS_J2000
 	};
 
   Image(string filename, string name, IMAGE_POSITIONING pos_type);
