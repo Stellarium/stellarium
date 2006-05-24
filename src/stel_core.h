@@ -132,7 +132,7 @@ public:
 	double getJDay(void) const {return navigation->get_JDay();}	
 	
 	//! Set object tracking
-	void setFlagTracking(bool b) {navigation->set_flag_traking(b);}
+	void setFlagTracking(bool b); 
 	//! Get object tracking
 	bool getFlagTracking(void) {return navigation->get_flag_traking();}
 	
