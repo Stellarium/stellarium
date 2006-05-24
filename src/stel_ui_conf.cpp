@@ -157,7 +157,7 @@ Component* StelUI::createConfigWindow(void)
 	
 	y+=30;
 
-	const s_texture* gridp = new s_texture("bt_grid.png");
+	const s_texture* gridp = new s_texture("bt_eqgrid.png");
 	Picture* pgrid = new Picture(gridp, x-50, y-4, 32, 32);
 	tab_render->addComponent(pgrid);
 
@@ -423,9 +423,9 @@ Component* StelUI::createConfigWindow(void)
 
 	landscape_sl = new StringList();
 	landscape_sl->setPos(x,y);
-	landscape_sl->addItemList(Landscape::get_file_content(core->getDataDir() + "landscapes.ini"));
+	landscape_sl->addItemList(Landscape::getLandscapeNames(core->getDataDir() + "landscapes.ini"));
 	landscape_sl->adjustSize();
-	sprintf(vs, "%s", core->getObservatory().get_landscape_name().c_str());
+	sprintf(vs, "%s", core->getLandscapeName().c_str());
 	landscape_sl->setValue(vs);
 	landscape_sl->setOnPressCallback(callback<void>(this, &StelUI::setLandscape));
 	tab_landscapes->addComponent(landscape_sl);
@@ -874,7 +874,7 @@ void StelUI::setVideoOption(void)
 
 void StelUI::setLandscape(void)
 {
-	core->setLandscape(landscape_sl->getValue());
+	core->setLandscape(Landscape::nameToKey(core->getDataDir() + "landscapes.ini", landscape_sl->getValue()));
 }
 
 void StelUI::updateVideoVariables(void)

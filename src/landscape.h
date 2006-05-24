@@ -56,12 +56,16 @@ public:
 	//! Get whether fog is displayed
 	bool getFlagShowFog() const {return (bool)fog_fader;}
 	
+	string getName() const {return name;}
+	
 	void update(int delta_time) {land_fader.update(delta_time); fog_fader.update(delta_time);}
 	virtual void draw(ToneReproductor * eye, const Projector* prj, const Navigator* nav) = 0;
 	
 	static Landscape* create_from_file(const string& landscape_file, const string& section_name);
 	static Landscape* create_from_hash(stringHash_t & param);
 	static string get_file_content(const string& landscape_file);
+	static string getLandscapeNames(const string& landscape_file);
+	static string nameToKey(const string& landscape_file, const string & name);
 protected:
 	float radius;
 	string name;
