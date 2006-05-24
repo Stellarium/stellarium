@@ -1275,3 +1275,15 @@ void StelCore::getFontForLocale(const string &_locale, string &_fontFile, float 
 }
 
 
+
+void StelCore::setFlagTracking(bool b) {
+
+	if(!b || !selected_object) {
+		navigation->set_flag_traking(0);
+	} else {
+		navigation->move_to(selected_object->get_earth_equ_pos(navigation),
+							getAutomoveDuration());
+		navigation->set_flag_traking(1);
+	}
+
+}

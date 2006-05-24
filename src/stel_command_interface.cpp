@@ -815,18 +815,6 @@ int StelCommandInterface::set_flag(string name, string value, bool &newval, bool
 		else if(name=="track_object") {
 			newval = !stcore->getFlagTracking();
 			stcore->setFlagTracking(newval);
-
-			/*
-			if(stcore->getFlagTracking() || !stcore->selected_object) {
-				newval = 0;
-				stcore->navigation->set_flag_traking(0);
-			} else {
-				stcore->navigation->move_to(stcore->selected_object->get_earth_equ_pos(stcore->navigation),
-									stcore->auto_move_duration);
-				stcore->navigation->set_flag_traking(1);
-				newval = 1;
-			}
-			*/
 		}
 		else if(name=="script_gui_debug") {  // Not written to config - script specific
 			newval = !stapp->scripts->get_gui_debug();
@@ -915,19 +903,7 @@ int StelCommandInterface::set_flag(string name, string value, bool &newval, bool
 		else if(name=="milky_way") stcore->setFlagMilkyWay(newval);
 		else if(name=="bright_nebulae") stcore->setFlagBrightNebulae(newval);
 		else if(name=="object_trails") stcore->setFlagPlanetsTrails(newval);
-		else if(name=="track_object") {
-
-			stcore->setFlagTracking(newval);
-			/*
-			if(newval && stcore->selected_object) {
-				stcore->navigation->move_to(stcore->selected_object->get_earth_equ_pos(stcore->navigation),
-									stcore->auto_move_duration);
-				stcore->navigation->set_flag_traking(1);
-			} else {
-				stcore->navigation->set_flag_traking(0);
-			}
-			*/
-		}
+		else if(name=="track_object") stcore->setFlagTracking(newval);
 		else if(name=="script_gui_debug") stapp->scripts->set_gui_debug(newval); // Not written to config - script specific
 		else return(status);
 
