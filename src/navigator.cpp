@@ -234,12 +234,11 @@ void Navigator::update_time(int delta_time)
 // The non optimized (more clear version is available on the CVS : before date 25/07/2003)
 
   // see vsop87.doc:
-static
+
 const Mat4d mat_j2000_to_vsop87(
               Mat4d::xrotation(-23.4392803055555555556*(M_PI/180)) *
               Mat4d::zrotation(0.0000275*(M_PI/180)));
 
-static
 const Mat4d mat_vsop87_to_j2000(mat_j2000_to_vsop87.transpose());
 
 
@@ -312,6 +311,9 @@ void Navigator::update_model_view_mat(void)
 	                     s[1],u[1],-f[1],0.,
 	                     s[2],u[2],-f[2],0.,
 	                     0.,0.,0.,1.);
+
+//johannes
+//    mat_local_to_eye =  Mat4d::zrotation(0.5*M_PI) * mat_local_to_eye;
 
 	mat_earth_equ_to_eye = mat_local_to_eye*mat_earth_equ_to_local;
 	mat_helio_to_eye = mat_local_to_eye*mat_helio_to_local;
