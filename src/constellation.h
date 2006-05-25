@@ -44,7 +44,9 @@ private:
 	//! Return object's type
 	virtual STEL_OBJECT_TYPE get_type(void) const {return STEL_OBJECT_CONSTELLATION;}
 	//! Get position in earth equatorial frame
-	virtual Vec3d get_earth_equ_pos(const Navigator * nav) const {return XYZname;}
+	Vec3d get_earth_equ_pos(const Navigator *nav) const {return XYZname;}
+	//! observer centered J2000 coordinates
+	Vec3d getObsJ2000Pos(const Navigator *nav) const {return XYZname;}
 	//! Return object's magnitude
 	virtual float get_mag(const Navigator * nav) const {return 0.;} 
     

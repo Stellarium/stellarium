@@ -195,6 +195,13 @@ Vec3d Planet::get_earth_equ_pos(const Navigator * nav) const
 	//return navigation.helio_to_earth_equ(&v); this is the real equatorial centered on earth center
 }
 
+Vec3d Planet::getObsJ2000Pos(const Navigator *nav) const {
+  return mat_vsop87_to_j2000.multiplyWithoutTranslation(
+                               get_heliocentric_ecliptic_pos()
+                               - nav->get_observer_helio_pos());
+}
+
+
 // Compute the position in the parent Planet coordinate system
 // Actually call the provided function to compute the ecliptical position
 void Planet::computePositionWithoutOrbits(const double date) {
@@ -780,8 +787,8 @@ void Ring::draw(const Projector* prj,const Mat4d& mat,double screen_sz)
 	screen_sz /= 250.0;
 	if (screen_sz < 0.0) screen_sz = 0.0;
 	else if (screen_sz > 1.0) screen_sz = 1.0;
-	const int slices = 64+(int)((128-64)*screen_sz);
-	const int stacks = 16+(int)((64-16)*screen_sz);
+	const int slices = 128+(int)((256-128)*screen_sz);
+	const int stacks = 8+(int)((32-8)*screen_sz);
 
 	// Normal transparency mode
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);

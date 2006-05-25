@@ -52,7 +52,7 @@ public:
 	virtual wstring getShortInfoString(const Navigator * nav = NULL) const;
 	virtual STEL_OBJECT_TYPE get_type(void) const {return STEL_OBJECT_STAR;}
 	virtual Vec3d get_earth_equ_pos(const Navigator * nav = NULL) const {return nav->j2000_to_earth_equ(XYZ);}
-	virtual Vec3d get_j2000_pos(void) const {return XYZ;}
+	virtual Vec3d getObsJ2000Pos(const Navigator *nav=0) const {return XYZ;}
 	virtual double get_best_fov(const Navigator * nav = NULL) const {return (13.f - 2.f * Mag > 1.f) ? (13.f - Mag) : 1.f;}
 	virtual float get_mag(const Navigator * nav = NULL) const {return Mag;}
 	virtual unsigned int get_hp_number() { return HP; };
