@@ -23,10 +23,37 @@
 #include "stellastro.h"
 #include "stel_utility.h"
 
+#include "telescope_mgr.h"
+
+void StelCore::setFlagTelescopes(bool b) {
+  telescope_mgr->setFlagTelescopes(b);
+}
+
+bool StelCore::getFlagTelescopes(void) const {
+  return telescope_mgr->getFlagTelescopes();
+}
+
+void StelCore::setFlagTelescopeName(bool b) {
+  telescope_mgr->setFlagTelescopeName(b);
+}
+
+bool StelCore::getFlagTelescopeName(void) const {
+  return telescope_mgr->getFlagTelescopeName();
+}
+
+void StelCore::telescopeGoto(int nr) {
+  if (selected_object) {
+    telescope_mgr->telescopeGoto(nr,
+                                 selected_object->getObsJ2000Pos(navigation));
+  }
+}
+
+
 StelCore::StelCore(const string& LDIR, const string& DATA_ROOT) :
 		skyTranslator(APP_NAME, LOCALEDIR, ""),
 		projection(NULL), selected_object(NULL), hip_stars(NULL),
-		nebulas(NULL), ssystem(NULL), milky_way(NULL),deltaFov(0.), 
+		nebulas(NULL), ssystem(NULL), milky_way(NULL), telescope_mgr(NULL),
+		deltaFov(0.), 
 		deltaAlt(0.), deltaAz(0.), move_speed(0.00025), firstTime(1)
 {
 	localeDir = LDIR;
@@ -53,6 +80,7 @@ StelCore::StelCore(const string& LDIR, const string& DATA_ROOT) :
 	landscape = new LandscapeOldStyle();
 	skyloc = new SkyLocalizer(getDataDir()+ "sky_cultures");
 	script_images = new ImageMgr();
+    telescope_mgr = new TelescopeMgr;
 		
 	// Set textures directory and suffix
 	s_texture::set_texDir(getDataRoot() + "/textures/");
@@ -82,6 +110,7 @@ StelCore::~StelCore()
 	delete ssystem;
 	delete skyloc; skyloc = NULL;
 	delete script_images;
+	delete telescope_mgr;
 	StelObject::delete_textures(); // Unload the pointer textures
 }
 
@@ -121,7 +150,7 @@ void StelCore::init(const InitParser& conf)
 		hip_stars->init(FontSizeGeneral, baseFontFile, getDataDir() + "hipparcos.fab", getDataDir() + "sky_cultures/western/star_names.fab", getDataDir() + "name.fab", lb);
 
 		// Init nebulas
-		if(firstTime) nebulas->read(FontSizeGeneral, baseFontFile, getDataDir() + "ngc2000.dat", getDataDir() + "ngc2000names.dat", getDataDir() + "nebula_textures.fab", lb);
+		nebulas->read(FontSizeGeneral, baseFontFile, getDataDir() + "ngc2000.dat", getDataDir() + "ngc2000names.dat", getDataDir() + "nebula_textures.fab", lb);
 	}
 
 	// Init fonts : should be moved into the constructor
@@ -136,6 +165,8 @@ void StelCore::init(const InitParser& conf)
 	if(firstTime) milky_way->set_texture("milkyway.png");
 
 	setLandscape(observatory->get_landscape_name());
+
+	if(firstTime) telescope_mgr->init(conf);
 
 	// Load the pointer textures
 	StelObject::init_textures();
@@ -236,6 +267,8 @@ void StelCore::init(const InitParser& conf)
 	// Astro section
 	setFlagStars(conf.get_boolean("astro:flag_stars"));
 	setFlagStarName(conf.get_boolean("astro:flag_star_name"));
+	setFlagTelescopes(conf.get_boolean("astro:flag_telescopes"));
+	setFlagTelescopeName(conf.get_boolean("astro:flag_telescope_name"));
 	setFlagPlanets(conf.get_boolean("astro:flag_planets"));
 	setFlagPlanetsHints(conf.get_boolean("astro:flag_planets_hints"));
 	setFlagPlanetsOrbits(conf.get_boolean("astro:flag_planets_orbits"));
@@ -267,6 +300,8 @@ void StelCore::update(int delta_time)
 	// Matrix for sun and all the satellites (ie planets)
 	ssystem->computeTransMatrices(navigation->get_JDay(),
 	                              navigation->getHomePlanet());
+	// communicate with the telescopes:
+	telescope_mgr->communicate();
 
 	// Transform matrices between coordinates systems
 	navigation->update_transform_matrices();
@@ -297,6 +332,7 @@ void StelCore::update(int delta_time)
 	nebulas->update(delta_time);
 	cardinals_points->update(delta_time);
 	milky_way->update(delta_time);
+	telescope_mgr->update(delta_time);
 	
 	// Compute the sun position in local coordinate
 	Vec3d temp(0.,0.,0.);
@@ -408,6 +444,8 @@ void StelCore::draw(int delta_time)
 	//if (FlagCardinalPoints)
 	cardinals_points->draw(projection, observatory->get_latitude());
 
+	telescope_mgr->draw(projection,navigation);
+
 	// draw images loaded by a script
 	projection->set_orthographic_projection();
 	script_images->draw(navigation, projection);
@@ -476,6 +514,8 @@ StelObject *StelCore::searchByNameI18n(const wstring &name) const
 	rval = hip_stars->searchByNameI18n(name);
 	if (rval) return rval;
 	rval = asterisms->searchByNameI18n(name);
+	if (rval) return rval;
+	rval = telescope_mgr->searchByNameI18n(name);
 	if (rval) return rval;
 	return NULL;
 }
@@ -609,6 +649,12 @@ StelObject * StelCore::clever_find(const Vec3d& v) const
 	if (getFlagStars())
 	{
 		temp = hip_stars->search_around(p, fov_around);
+		candidates.insert(candidates.begin(), temp.begin(), temp.end());
+	}
+
+	if (getFlagTelescopes())
+	{
+		temp = telescope_mgr->search_around(p, fov_around);
 		candidates.insert(candidates.begin(), temp.begin(), temp.end());
 	}
 
@@ -811,6 +857,7 @@ void StelCore::setSkyLanguage(const std::string& newSkyLocaleName)
 		// not translating yet
 		//		nebulas->setFont(FontSizeGeneral, font);
 		hip_stars->setFont(FontSizeGeneral*newFontScale, newFontFile);
+		telescope_mgr->setFont(FontSizeGeneral*newFontScale, newFontFile);
 
 		// TODO: TUI short info font needs updating also
 		// TEST - need different fixed font
@@ -841,6 +888,8 @@ void StelCore::setColorScheme(const string& skinFile, const string& section)
 	nebulas->setCircleColor(StelUtility::str_to_vec3f(conf.get_str(section,"nebula_circle_color", defaultColor)));
 	hip_stars->set_label_color(StelUtility::str_to_vec3f(conf.get_str(section,"star_label_color", defaultColor)));
 	hip_stars->set_circle_color(StelUtility::str_to_vec3f(conf.get_str(section,"star_circle_color", defaultColor)));
+	telescope_mgr->set_label_color(StelUtility::str_to_vec3f(conf.get_str(section,"telescope_label_color", defaultColor)));
+	telescope_mgr->set_circle_color(StelUtility::str_to_vec3f(conf.get_str(section,"telescope_circle_color", defaultColor)));
 	ssystem->setLabelColor(StelUtility::str_to_vec3f(conf.get_str(section,"planet_names_color", defaultColor)));
 	ssystem->setOrbitColor(StelUtility::str_to_vec3f(conf.get_str(section,"planet_orbits_color", defaultColor)));
 	ssystem->setTrailColor(StelUtility::str_to_vec3f(conf.get_str(section,"object_trails_color", defaultColor)));
@@ -1208,6 +1257,12 @@ vector<wstring> StelCore::listMatchingObjectsI18n(const wstring& objPrefix, unsi
 	// Get matching stars
 	vector<wstring> matchingStars = hip_stars->listMatchingObjectsI18n(objPrefix, maxNbItem);
 	for (iter = matchingStars.begin(); iter != matchingStars.end(); ++iter)
+		result.push_back(*iter);
+	maxNbItem-=matchingStars.size();
+	
+	// Get matching telescopes
+	vector<wstring> matchingTelescopes = telescope_mgr->listMatchingObjectsI18n(objPrefix, maxNbItem);
+	for (iter = matchingTelescopes.begin(); iter != matchingTelescopes.end(); ++iter)
 		result.push_back(*iter);
 	maxNbItem-=matchingStars.size();
 	

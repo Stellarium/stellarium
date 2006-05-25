@@ -293,7 +293,21 @@ public:
 	Vec3f getColorConstellationNames() const {return asterisms->getLabelColor();}
 	//! Set constellation names color
 	void setColorConstellationNames(const Vec3f& v) {asterisms->setLabelColor(v);}
-	
+
+	//! Set display flag of telescopes
+	void setFlagTelescopes(bool b);
+	//! Get display flag of telescopes
+	bool getFlagTelescopes(void) const;
+
+	//! Set display flag of telescope names
+	void setFlagTelescopeName(bool b);
+	//! Get display flag of telescope names
+	bool getFlagTelescopeName(void) const;
+
+
+	//! the telescope with the given number shall go to the selected object
+	void telescopeGoto(int nr);
+
 	///////////////////////////////////////////////////////////////////////////////////////
 	// Stars methods
 	//! Set display flag for Stars 
@@ -682,7 +696,8 @@ private:
 	ToneReproductor * tone_converter;	// Tones conversion between stellarium world and display device
 	SkyLocalizer *skyloc;				// for sky cultures and locales
 	ImageMgr * script_images;           // for script loaded image display
-		
+	class TelescopeMgr *telescope_mgr;
+    
 	float sky_brightness;				// Current sky Brightness in ?
 	bool object_pointer_visibility;		// Should selected object pointer be drawn
 	void drawChartBackground(void);
