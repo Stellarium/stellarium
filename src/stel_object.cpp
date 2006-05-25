@@ -27,6 +27,7 @@
 s_texture * StelObject::pointer_star = NULL;
 s_texture * StelObject::pointer_planet = NULL;
 s_texture * StelObject::pointer_nebula = NULL;
+s_texture * StelObject::pointer_telescope = NULL;
 
 int StelObject::local_time = 0;
 
@@ -43,19 +44,26 @@ void StelObject::draw_pointer(int delta_time, const Projector* prj, const Naviga
 	if (get_type()==STEL_OBJECT_NEBULA) glColor3f(0.4f,0.5f,0.8f);
 	if (get_type()==STEL_OBJECT_PLANET) glColor3f(1.0f,0.3f,0.3f);
 
-    if (get_type()==STEL_OBJECT_STAR)
+    if (get_type()==STEL_OBJECT_STAR||get_type()==STEL_OBJECT_TELESCOPE)
     {
 		glColor3fv(get_RGB());
-		glBindTexture (GL_TEXTURE_2D, pointer_star->getID());
+		float radius;
+		if (get_type()==STEL_OBJECT_STAR) {
+			radius = 13.f;
+			glBindTexture (GL_TEXTURE_2D, pointer_star->getID());
+		} else {
+			radius = 25.f;
+			glBindTexture (GL_TEXTURE_2D, pointer_telescope->getID());
+		}
         glEnable(GL_TEXTURE_2D);
         glEnable(GL_BLEND);
         glTranslatef(screenpos[0], screenpos[1], 0.0f);
         glRotatef((float)local_time/20.,0.,0.,1.);
         glBegin(GL_QUADS );
-            glTexCoord2f(0.0f,0.0f);    glVertex3f(-13.,-13.,0.);      //Bas Gauche
-            glTexCoord2f(1.0f,0.0f);    glVertex3f(13.,-13.,0.);       //Bas Droite
-            glTexCoord2f(1.0f,1.0f);    glVertex3f(13.,13.,0.);        //Haut Droit
-            glTexCoord2f(0.0f,1.0f);    glVertex3f(-13.,13.,0.);       //Haut Gauche
+            glTexCoord2f(0.0f,0.0f);    glVertex3f(-radius,-radius,0.);      //Bas Gauche
+            glTexCoord2f(1.0f,0.0f);    glVertex3f(radius,-radius,0.);       //Bas Droite
+            glTexCoord2f(1.0f,1.0f);    glVertex3f(radius,radius,0.);        //Haut Droit
+            glTexCoord2f(0.0f,1.0f);    glVertex3f(-radius,radius,0.);       //Haut Gauche
         glEnd ();
     }
 
@@ -121,6 +129,7 @@ void StelObject::init_textures(void)
 	pointer_star = new s_texture("pointeur2.png");
 	pointer_planet = new s_texture("pointeur4.png");
 	pointer_nebula = new s_texture("pointeur5.png");
+	pointer_telescope = new s_texture("pointeur2.png");
 }
 
 void StelObject::delete_textures(void)
@@ -128,4 +137,5 @@ void StelObject::delete_textures(void)
 	delete pointer_star; pointer_star = NULL;
 	delete pointer_planet; pointer_planet = NULL;
 	delete pointer_nebula; pointer_nebula = NULL;
+	delete pointer_telescope; pointer_telescope = NULL;
 }

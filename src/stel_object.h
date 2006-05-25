@@ -36,7 +36,8 @@ public:
 		STEL_OBJECT_STAR,
 		STEL_OBJECT_PLANET,
 		STEL_OBJECT_NEBULA,
-		STEL_OBJECT_CONSTELLATION
+		STEL_OBJECT_CONSTELLATION,
+		STEL_OBJECT_TELESCOPE
 	};
 
 	virtual ~StelObject() {;}
@@ -53,8 +54,11 @@ public:
 	virtual STEL_OBJECT_TYPE get_type(void) const = 0;
 	
 	//! Get position in earth equatorial frame
-	virtual Vec3d get_earth_equ_pos(const Navigator * nav) const = 0;
-	
+	virtual Vec3d get_earth_equ_pos(const Navigator *nav) const = 0;
+
+	//! observer centered J2000 coordinates
+	virtual Vec3d getObsJ2000Pos(const Navigator *nav) const = 0;
+
 	//! Return object's magnitude
 	virtual float get_mag(const Navigator * nav) const = 0;
 	
@@ -76,6 +80,7 @@ private:
 	static s_texture * pointer_star;
 	static s_texture * pointer_planet;
 	static s_texture * pointer_nebula;
+	static s_texture * pointer_telescope;
 
 };
 
