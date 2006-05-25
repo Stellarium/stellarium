@@ -12,13 +12,14 @@ stellarium_SOURCES = main.cpp stel_sdl.cpp stel_core.h stel_core.cpp \
     spheric_mirror_projector.cpp stereographic_projector.h spheric_mirror_projector.h \
     spheric_mirror_calculator.cpp spheric_mirror_calculator.h \
     viewport_distorter.cpp viewport_distorter.h \
+    telescope_mgr.cpp telescope_mgr.h telescope.cpp telescope.h \
     observator.h \
-	observator.cpp fisheye_projector.h fisheye_projector.cpp 				landscape.h landscape.cpp \
-	callbacks.hpp callback_helpers.hpp s_tui.h s_tui.cpp 				stellarium.h fmath.h \
-	vecmath.h bytes.h meteor.h meteor.cpp meteor_mgr.h 				meteor_mgr.cpp \
-	sky_localizer.h sky_localizer.cpp command_interface.h 				command_interface.cpp \
-	stel_command_interface.h stel_command_interface.cpp script_mgr.h 				script_mgr.cpp script.h \
-	script.cpp image_mgr.h image_mgr.cpp image.h image.cpp audio.h 				audio.cpp \
+	observator.cpp fisheye_projector.h fisheye_projector.cpp landscape.h landscape.cpp \
+	callbacks.hpp callback_helpers.hpp s_tui.h s_tui.cpp stellarium.h fmath.h \
+	vecmath.h bytes.h meteor.h meteor.cpp meteor_mgr.h meteor_mgr.cpp \
+	sky_localizer.h sky_localizer.cpp command_interface.h command_interface.cpp \
+	stel_command_interface.h stel_command_interface.cpp script_mgr.h script_mgr.cpp script.h \
+	script.cpp image_mgr.h image_mgr.cpp image.h image.cpp audio.h audio.cpp \
 	loadingbar.h loadingbar.cpp fader.h gettext.h cylinder_projector.cpp \
 	cylinder_projector.h typeface.h typeface.cpp translator.cpp stelapp.cpp
 
