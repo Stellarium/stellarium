@@ -157,7 +157,9 @@ public:
 	STEL_OBJECT_TYPE get_type(void) const {return STEL_OBJECT_PLANET;}
 
 	// Return the Planet position in rectangular earth equatorial coordinate
-	Vec3d get_earth_equ_pos(const Navigator * nav) const;
+	Vec3d get_earth_equ_pos(const Navigator *nav) const;
+	// observer centered J2000 coordinates
+	Vec3d getObsJ2000Pos(const Navigator *nav) const;
 
 	string getEnglishName(void) const {return englishName;}
 	wstring getNameI18(void) const {return nameI18;}

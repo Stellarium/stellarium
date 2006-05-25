@@ -172,9 +172,9 @@ void ConstellationMgr::loadLinesAndArt(const string &fileName, const string &art
 			cons->art_tex = new s_texture(texfile);
 			texSize = cons->art_tex->getSize();
 
-			Vec3f s1 = hipStarMgr->searchHP(hp1)->get_j2000_pos();
-			Vec3f s2 = hipStarMgr->searchHP(hp2)->get_j2000_pos();
-			Vec3f s3 = hipStarMgr->searchHP(hp3)->get_j2000_pos();
+			Vec3f s1 = hipStarMgr->searchHP(hp1)->getObsJ2000Pos();
+			Vec3f s2 = hipStarMgr->searchHP(hp2)->getObsJ2000Pos();
+			Vec3f s3 = hipStarMgr->searchHP(hp3)->getObsJ2000Pos();
 
 			// To transform from texture coordinate to 2d coordinate we need to find X with XA = B
 			// A formed of 4 points in texture coordinate, B formed with 4 points in 3d coordinate
