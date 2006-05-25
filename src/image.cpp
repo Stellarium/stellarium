@@ -292,8 +292,8 @@ void Image::draw(const Navigator * nav, Projector * prj) {
 
   } else if(image_pos_type == POS_J2000 || image_pos_type == POS_EQUATORIAL) {
 
-	  // equatorial is in current equatorial coordinates (takes account of precession)
-	  // j2000 is in J2000 epoch equatorial coordinates (no precession)
+	  // equatorial is in current equatorial coordinates
+	  // j2000 is in J2000 epoch equatorial coordinates (precessed)
 
 	  prj->set_orthographic_projection();    // 2D coordinate
 

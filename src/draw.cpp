@@ -275,7 +275,7 @@ SkyLine::SkyLine(SKY_LINE_TYPE _line_type, double _radius, unsigned int _nb_segm
 		case LOCAL : proj_func = &Projector::project_local; break;
 		case MERIDIAN : proj_func = &Projector::project_local; 
 			inclinaison = 90; break;
-		case ECLIPTIC : proj_func = &Projector::project_j2000;
+		case ECLIPTIC : proj_func = &Projector::project_earth_equ;
 			inclinaison = 23.4392803055555555556; break;
 		case EQUATOR : proj_func = &Projector::project_earth_equ; break;
 		default : proj_func = &Projector::project_earth_equ;
