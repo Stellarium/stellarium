@@ -897,6 +897,20 @@ int StelUI::handle_keys(Uint16 key, S_GUI_VALUE state)
 	if (state==S_GUI_PRESSED)
 	{
 
+		if (SDL_GetModState() & KMOD_CTRL) { // Ctrl
+			switch (key) {
+				case SDLK_0:core->telescopeGoto(0);return 0;
+				case SDLK_1:core->telescopeGoto(1);return 0;
+				case SDLK_2:core->telescopeGoto(2);return 0;
+				case SDLK_3:core->telescopeGoto(3);return 0;
+				case SDLK_4:core->telescopeGoto(4);return 0;
+				case SDLK_5:core->telescopeGoto(5);return 0;
+				case SDLK_6:core->telescopeGoto(6);return 0;
+				case SDLK_7:core->telescopeGoto(7);return 0;
+				case SDLK_8:core->telescopeGoto(8);return 0;
+				case SDLK_9:core->telescopeGoto(9);return 0;
+			}
+		}
 
 #ifndef MACOSX
 		if(key==0x0011)
