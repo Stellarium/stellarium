@@ -27,6 +27,7 @@
   #include <winsock2.h> // select
 #else
   #include <sys/select.h> // select
+  #include <signal.h>
 #endif
 
 void TelescopeMgr::TelescopeMap::clear(void) {
@@ -35,11 +36,28 @@ void TelescopeMgr::TelescopeMap::clear(void) {
 }
 
 TelescopeMgr::TelescopeMgr(void) : telescope_font(0),telescope_texture(0) {
+#ifdef WIN32
+  WSADATA wsaData;
+  if (WSAStartup(0x202,&wsaData) == 0) {
+    wsa_ok = true;
+  } else {
+    cerr << "TelescopeMgr::TelescopeMgr: WSAStartup failed, "
+            "you will not be able to control telescopes" << endl;
+    wsa_ok = false;
+  }
+#else
+    // SIGPIPE is normal operation when we send while the other side
+    // has already closed the socket. We must ignore it:
+  signal(SIGPIPE,SIG_IGN);
+#endif
 }
 
 TelescopeMgr::~TelescopeMgr(void) {
   if (telescope_font) delete telescope_font;
   if (telescope_texture) delete telescope_texture;
+#ifdef WIN32
+  if (wsa_ok) WSACleanup();
+#endif
 }
 
 void TelescopeMgr::draw(const Projector *prj,const Navigator *nav) const {
@@ -146,6 +164,9 @@ void TelescopeMgr::init(const InitParser &conf) {
     telescope_texture = 0;
   }
   telescope_texture = new s_texture("star16x16.png",TEX_LOAD_TYPE_PNG_SOLID);
+#ifdef WIN32
+  if (!wsa_ok) return;
+#endif
   telescope_map.clear();
   for (int i=0;i<9;i++) {
     const char name[2] = {'0'+i,'\0'};

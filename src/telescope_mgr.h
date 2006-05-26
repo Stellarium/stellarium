@@ -79,6 +79,9 @@ public:
   //! send a J2000-goto-command to the specified telescope
   void telescopeGoto(int telescope_nr,const Vec3d &j2000_pos);
 private:
+#ifdef WIN32
+  bool wsa_ok;
+#endif
   LinearFader name_fader;
   LinearFader telescope_fader;
   Vec3f circle_color;
