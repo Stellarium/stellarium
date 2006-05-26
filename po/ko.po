@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: stellarium@free.fr\n"
-"POT-Creation-Date: 2006-05-17 23:42+0200\n"
+"POT-Creation-Date: 2006-05-26 17:01+0200\n"
 "PO-Revision-Date: 2006-05-17 14:07+0000\n"
 "Last-Translator: Jeong, Tae-Min <jtm71@chollian.net>\n"
 "Language-Team: Korean <ko@li.org>\n"
@@ -82,11 +82,11 @@ msgstr "형: "
 msgid "Size: "
 msgstr "크기: "
 
-#: src/nebula_mgr.cpp:291
+#: src/nebula_mgr.cpp:288
 msgid "Loading NGC catalog: "
 msgstr "NGC 목록을 불러옵니다: "
 
-#: src/nebula_mgr.cpp:418
+#: src/nebula_mgr.cpp:415
 msgid "Loading Nebula Textures:"
 msgstr "성운의 색조를 불러옵니다:"
 
@@ -323,19 +323,19 @@ msgstr "CMD + Q : 종료\n"
 msgid "Help"
 msgstr "도움말"
 
-#: src/stel_ui.cpp:1001
+#: src/stel_ui.cpp:1015
 msgid "Command recording stopped."
 msgstr "명령 저장이 중단되었습니다."
 
-#: src/stel_ui.cpp:1009
+#: src/stel_ui.cpp:1023
 msgid "Recording commands to script file:\n"
 msgstr "명령들을 스크립트 파일로 저장합니다:\n"
 
-#: src/stel_ui.cpp:1011
+#: src/stel_ui.cpp:1025
 msgid "Hit CTRL-R again to stop.\n"
 msgstr "멈추려면 CTRL-R 키를 치세요.\n"
 
-#: src/stel_ui.cpp:1015
+#: src/stel_ui.cpp:1029
 msgid "Error: Unable to open script file to record commands."
 msgstr "오류: 명령들을 저장하기 위한 스크립트 파일을 열 수 없습니다."
 

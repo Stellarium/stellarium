@@ -1,6 +1,6 @@
 dnl Process this file with autoconf to produce a configure script.
 
-AC_INIT(stellarium,0.8.0, stellarium@free.fr)
+AC_INIT(stellarium,0.8.1, stellarium@free.fr)
 AC_CONFIG_SRCDIR([src/main.cpp])
 
 AC_PREREQ(2.52)
@@ -109,9 +109,9 @@ dnl MINGW32
 *-*-mingw32)
 	AC_DEFINE_UNQUOTED(MINGW32,1, [If we are on mingw32 plateform.])
 	LIBS="$LIBS -lopengl32 -lglu32"
-	dnl Check for SDL but can't use AM_PATH_DSDL on Mingw : it crashes..
+	dnl Check for SDL but can't use AM_PATH_SDL on Mingw : it crashes..
 	dnl So directly call the utility and add an include directory by hand..
-	LIBS="$LIBS `sdl-config --libs`"
+	LIBS="$LIBS `sdl-config --libs` -lsocket32"
 	CFLAGS="$CFLAGS `sdl-config --cflags`"
 	CXXFLAGS="$CXXFLAGS `sdl-config --cflags` -I/mingw/include/SDL/"
 ;;

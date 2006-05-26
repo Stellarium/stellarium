@@ -117,7 +117,6 @@ StelCore::~StelCore()
 // Load core data and initialize with default values
 void StelCore::init(const InitParser& conf)
 {
-  
 	baseFontFile = getDataDir() + conf.get_str("gui", "base_font_name", "DejaVuSans.ttf");
 
 	// Video Section
@@ -283,6 +282,8 @@ void StelCore::init(const InitParser& conf)
 	setFlagMilkyWay(conf.get_boolean("astro:flag_milky_way"));
 	setMilkyWayIntensity(conf.get_double("astro","milky_way_intensity",1.));
 	setFlagBrightNebulae(conf.get_boolean("astro:flag_bright_nebulae"));	
+
+	setMeteorsRate(conf.get_int("astro", "meteor_rate", 10));
 
 	firstTime = 0;
 }
