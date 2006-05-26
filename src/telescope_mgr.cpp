@@ -50,29 +50,35 @@ void TelescopeMgr::draw(const Projector *prj,const Navigator *nav) const {
   glBlendFunc(GL_ONE,GL_ONE);
   for (TelescopeMap::const_iterator it(telescope_map.begin());
        it!=telescope_map.end();it++) {
-    Vec3d XY;
-    if (prj->project_j2000_check(it->second->getObsJ2000Pos(),XY)) {
-      if (telescope_fader.getInterstate() >= 0) {
-        glColor4f(circle_color[0],circle_color[1],circle_color[2],
-                  telescope_fader.getInterstate());
-        const double radius = 15.0;
-        glBegin(GL_QUADS);
-        glTexCoord2i(0,0);glVertex2d(XY[0]-radius,XY[1]-radius); // Bottom left
-        glTexCoord2i(1,0);glVertex2d(XY[0]+radius,XY[1]-radius); // Bottom right
-        glTexCoord2i(1,1);glVertex2d(XY[0]+radius,XY[1]+radius); // Top right
-        glTexCoord2i(0,1);glVertex2d(XY[0]-radius,XY[1]+radius); // Top left
-        glEnd();
-      }
-      if (name_fader.getInterstate() >= 0) {
-        glColor4f(label_color[0],label_color[1],label_color[2],
-                  name_fader.getInterstate());
-        if (prj->getFlagGravityLabels()) {
-          prj->print_gravity180(telescope_font, XY[0],XY[1],
-                                it->second->getNameI18n(), 1, 6, -4);
-        } else {
-          telescope_font->print(XY[0]+6,XY[1]-4,it->second->getNameI18n());
+    if (it->second->isConnected()) {
+      Vec3d XY;
+      if (prj->project_j2000_check(it->second->getObsJ2000Pos(),XY)) {
+        if (telescope_fader.getInterstate() >= 0) {
+          glColor4f(circle_color[0],circle_color[1],circle_color[2],
+                    telescope_fader.getInterstate());
+          const double radius = 15.0;
+          glBegin(GL_QUADS);
+          glTexCoord2i(0,0);
+          glVertex2d(XY[0]-radius,XY[1]-radius); // Bottom left
+          glTexCoord2i(1,0);
+          glVertex2d(XY[0]+radius,XY[1]-radius); // Bottom right
+          glTexCoord2i(1,1);
+          glVertex2d(XY[0]+radius,XY[1]+radius); // Top right
+          glTexCoord2i(0,1);
+          glVertex2d(XY[0]-radius,XY[1]+radius); // Top left
+          glEnd();
         }
-        glBindTexture(GL_TEXTURE_2D,telescope_texture->getID());
+        if (name_fader.getInterstate() >= 0) {
+          glColor4f(label_color[0],label_color[1],label_color[2],
+                    name_fader.getInterstate());
+          if (prj->getFlagGravityLabels()) {
+            prj->print_gravity180(telescope_font, XY[0],XY[1],
+                                  it->second->getNameI18n(), 1, 6, -4);
+          } else {
+            telescope_font->print(XY[0]+6,XY[1]-4,it->second->getNameI18n());
+          }
+          glBindTexture(GL_TEXTURE_2D,telescope_texture->getID());
+        }
       }
     }
   }
