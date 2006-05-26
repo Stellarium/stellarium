@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: stellarium@free.fr\n"
-"POT-Creation-Date: 2006-05-17 23:42+0200\n"
+"POT-Creation-Date: 2006-05-26 17:01+0200\n"
 "PO-Revision-Date: 2006-04-26 16:07+0000\n"
 "Last-Translator: Norman Prescott <norman@nexint.info>\n"
 "Language-Team: Chinese (China) <zh_CN@li.org>\n"
@@ -82,11 +82,11 @@ msgstr "类型: "
 msgid "Size: "
 msgstr "大小: "
 
-#: src/nebula_mgr.cpp:291
+#: src/nebula_mgr.cpp:288
 msgid "Loading NGC catalog: "
 msgstr "载入NGC星表: "
 
-#: src/nebula_mgr.cpp:418
+#: src/nebula_mgr.cpp:415
 msgid "Loading Nebula Textures:"
 msgstr "载入星云图像:"
 
@@ -328,19 +328,19 @@ msgstr "CMD + Q : 退出↵\n"
 msgid "Help"
 msgstr "帮助"
 
-#: src/stel_ui.cpp:1001
+#: src/stel_ui.cpp:1015
 msgid "Command recording stopped."
 msgstr "命令记录停止."
 
-#: src/stel_ui.cpp:1009
+#: src/stel_ui.cpp:1023
 msgid "Recording commands to script file:\n"
 msgstr "记录命令到脚本文件:↵\n"
 
-#: src/stel_ui.cpp:1011
+#: src/stel_ui.cpp:1025
 msgid "Hit CTRL-R again to stop.\n"
 msgstr "再次CTRL+R以停止记录.↵\n"
 
-#: src/stel_ui.cpp:1015
+#: src/stel_ui.cpp:1029
 msgid "Error: Unable to open script file to record commands."
 msgstr "错误: 无法打开脚本文件以记录命令."
 
