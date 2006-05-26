@@ -36,6 +36,7 @@ public:
   Vec3d getObsJ2000Pos(const Navigator *nav=0) const {return XYZ;}
   virtual void telescopeGoto(const Vec3d &j2000_pos) = 0;
 
+  virtual bool isConnected(void) const = 0;
     // all TCP (and all possible other style) communication shall be done in
     // these functions:
   virtual void prepareSelectFds(fd_set &read_fds,fd_set &write_fds,

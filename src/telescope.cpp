@@ -55,6 +55,7 @@ public:
     desired_pos[2] = XYZ[2] = 0.0;
   }
 private:
+  bool isConnected(void) const {return true;}
   void prepareSelectFds(fd_set&,fd_set&,int&) {
     XYZ = XYZ*31.0+desired_pos;
     const double lq = XYZ.lengthSquared();
@@ -74,6 +75,8 @@ public:
   TelescopeTcp(const string &name,const string &params);
   ~TelescopeTcp(void) {hangup();}
 private:
+  bool isConnected(void) const
+    {return (fd>=0 && !wait_for_connection_establishment);}
   void prepareSelectFds(fd_set &read_fds,fd_set &write_fds,int &fd_max);
   void handleSelectFds(const fd_set &read_fds,const fd_set &write_fds);
   void telescopeGoto(const Vec3d &j2000_pos);
@@ -210,7 +213,7 @@ void TelescopeTcp::hangup(void) {
 }
 
 void TelescopeTcp::telescopeGoto(const Vec3d &j2000_pos) {
-  if (fd >= 0) {
+  if (isConnected()) {
     if (write_buff_end-write_buff+12 < (int)sizeof(write_buff)) {
       const double ra = atan2(j2000_pos[1],j2000_pos[0]);
       const double dec = atan2(j2000_pos[2],
@@ -405,8 +408,8 @@ void TelescopeTcp::handleSelectFds(const fd_set &read_fds,
           hangup();
         } else {
           if (err != 0) {
-            cerr << "TelescopeTcp::handleSelectFds: connect failed: " << err
-                 << endl;
+//            cerr << "TelescopeTcp::handleSelectFds: connect failed: " << err
+//                 << endl;
             hangup();
           } else {
             cout << "TelescopeTcp::handleSelectFds: connection established"
