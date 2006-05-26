@@ -845,7 +845,7 @@ void StelUI::saveRenderOptions(void)
 	conf.set_boolean("viewing:flag_cardinal_points", core->getFlagCardinalsPoints());
 	conf.set_boolean("landscape:flag_atmosphere", core->getFlagAtmosphere());
 	conf.set_boolean("landscape:flag_fog", core->getFlagFog());
-
+	conf.set_int("astro:meteor_rate", core->getMeteorsRate());
 	conf.save(app->getConfigFile());
 }
 

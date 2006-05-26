@@ -107,6 +107,9 @@ void StelApp::init(void)
 		initSDL(screenW, screenH, conf.get_int("video:bbp_mode"), conf.get_boolean("video:fullscreen"), core->getDataDir() + "/icon.bmp");	
 	}
 
+	// Clear screen, this fixes a strange artifact at loading time in the upper top corner.
+	glClear(GL_COLOR_BUFFER_BIT);
+	
 	maxfps 				= conf.get_double ("video","maximum_fps",10000);
 	string appLocaleName = conf.get_str("localization", "app_locale", "system");
 	setAppLanguage(appLocaleName);
