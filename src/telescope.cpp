@@ -34,6 +34,7 @@
   #define SET_NONBLOCKING_MODE(s) ioctlsocket(s,FIONBIO,&ioctlsocket_arg)
   #define SOCKLEN_T int
   #define close closesocket
+  #define IS_INVALID_SOCKET(fd) (fd==INVALID_SOCKET)
 #else
   #include <netdb.h>
   #include <netinet/in.h>
@@ -45,6 +46,9 @@
   #define ERRNO errno
   #define SET_NONBLOCKING_MODE(s) fcntl(s,F_SETFL,O_NONBLOCK)
   #define SOCKLEN_T socklen_t
+  #define SOCKET int
+  #define IS_INVALID_SOCKET(fd) (fd<0)
+  #define INVALID_SOCKET (-1)
 #endif
 
 class TelescopeDummy : public Telescope {
@@ -76,7 +80,7 @@ public:
   ~TelescopeTcp(void) {hangup();}
 private:
   bool isConnected(void) const
-    {return (fd>=0 && !wait_for_connection_establishment);}
+    {return (!IS_INVALID_SOCKET(fd) && !wait_for_connection_establishment);}
   void prepareSelectFds(fd_set &read_fds,fd_set &write_fds,int &fd_max);
   void handleSelectFds(const fd_set &read_fds,const fd_set &write_fds);
   void telescopeGoto(const Vec3d &j2000_pos);
@@ -86,7 +90,7 @@ private:
 private:
   void hangup(void);
   struct sockaddr_in address;
-  int fd;
+  SOCKET fd;
   bool wait_for_connection_establishment;
   long long int next_connection_attempt;
   char read_buff[96];
@@ -165,7 +169,7 @@ wstring Telescope::getShortInfoString(const Navigator*) const {
 
 
 TelescopeTcp::TelescopeTcp(const string &name,const string &params)
-             :Telescope(name),fd(-1) {
+             :Telescope(name),fd(INVALID_SOCKET) {
   hangup();
   address.sin_port = htons(0);
   string::size_type i = params.find(':');
@@ -203,9 +207,9 @@ TelescopeTcp::TelescopeTcp(const string &name,const string &params)
 }
 
 void TelescopeTcp::hangup(void) {
-  if (fd >= 0) {
+  if (!IS_INVALID_SOCKET(fd)) {
     close(fd);
-    fd = -1;
+    fd = INVALID_SOCKET;
   }
   read_buff_end = read_buff;
   write_buff_end = write_buff;
@@ -355,13 +359,13 @@ static long long int GetNow(void) {
 
 void TelescopeTcp::prepareSelectFds(fd_set &read_fds,fd_set &write_fds,
                                     int &fd_max) {
-  if (fd < 0) {
+  if (IS_INVALID_SOCKET(fd)) {
       // try reconnecting
     const long long int now = GetNow();
     if (now < next_connection_attempt) return;
     next_connection_attempt = now + 5000000;
     fd = socket(AF_INET,SOCK_STREAM,0);
-    if (fd < 0) {
+    if (IS_INVALID_SOCKET(fd)) {
       cerr << "TelescopeTcp::prepareSelectFds: socket() failed" << endl;
       return;
     }
@@ -385,7 +389,7 @@ void TelescopeTcp::prepareSelectFds(fd_set &read_fds,fd_set &write_fds,
     }
   } else {
       // socked is already connected
-    if (fd_max < fd) fd_max = fd;
+    if (fd_max < (int)fd) fd_max = (int)fd;
     if (wait_for_connection_establishment) {
       FD_SET(fd,&write_fds);
     } else {
@@ -397,7 +401,7 @@ void TelescopeTcp::prepareSelectFds(fd_set &read_fds,fd_set &write_fds,
 
 void TelescopeTcp::handleSelectFds(const fd_set &read_fds,
                                    const fd_set &write_fds) {
-  if (fd >= 0) {
+  if (!IS_INVALID_SOCKET(fd)) {
     if (wait_for_connection_establishment) {
       if (FD_ISSET(fd,&write_fds)) {
         wait_for_connection_establishment = false;
@@ -421,7 +425,7 @@ void TelescopeTcp::handleSelectFds(const fd_set &read_fds,
       if (FD_ISSET(fd,&write_fds)) {
         performWriting();
       }
-      if (fd>=0 && FD_ISSET(fd,&read_fds)) {
+      if (!IS_INVALID_SOCKET(fd) && FD_ISSET(fd,&read_fds)) {
         performReading();
       }
     }
