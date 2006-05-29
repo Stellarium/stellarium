@@ -882,8 +882,6 @@ void StelUI::setLandscape(void)
 	core->setLandscape(Landscape::nameToKey(core->getDataDir() + "landscapes.ini", landscape_sl->getValue()));
 	landscape_authorlb->setLabel(_("Author: ") + Translator::UTF8stringToWstring(core->getLandscapeAuthorName()));
 	landscape_authorlb->adjustSize();
-	cout << StelUtility::wstringToString(landscape_authorlb->getLabel())<< endl;
-	cout << core->getLandscapeAuthorName() << endl;
 }
 
 void StelUI::updateVideoVariables(void)
