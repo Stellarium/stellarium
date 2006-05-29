@@ -71,18 +71,6 @@ void Translator::reload()
 	Translator::lastUsed = this;
 }
 
-//! Convert from ASCII to wchar_t
-// static wchar_t *ASCII_to_UNICODE(wchar_t *unicode, const char *text, int len)
-// {
-// 	int i;
-//
-// 	for ( i=0; i < len; ++i ) {
-// 		unicode[i] = ((const unsigned char *)text)[i];
-// 	}
-// 	unicode[i] = 0;
-//
-// 	return unicode;
-// }
 
 //! Convert from char* UTF-8 to wchar_t UCS4 - stolen from SDL_ttf library
 static wchar_t *UTF8_to_UNICODE(wchar_t *unicode, const char *utf8, int len)

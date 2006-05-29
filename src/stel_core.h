@@ -653,6 +653,8 @@ public:
 						  string &_fixedFontFile, float &_fixedFontScale);
 
     string getLandscapeName(void) {return landscape->getName();}
+    string getLandscapeAuthorName(void) {return landscape->getAuthorName();}
+    string getLandscapeDescription(void) {return landscape->getDescription();}
 private:
 	//! Select passed object
 	//! @return true if the object was selected (false if the same was already selected)

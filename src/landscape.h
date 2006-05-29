@@ -55,8 +55,12 @@ public:
 	void setFlagShowFog(bool b) {fog_fader=b;}
 	//! Get whether fog is displayed
 	bool getFlagShowFog() const {return (bool)fog_fader;}
-	
+	//! Get landscape name
 	string getName() const {return name;}
+	//! Get landscape author name
+	string getAuthorName() const {return author;}
+	//! Get landscape description
+	string getDescription() const {return description;}
 	
 	void update(int delta_time) {land_fader.update(delta_time); fog_fader.update(delta_time);}
 	virtual void draw(ToneReproductor * eye, const Projector* prj, const Navigator* nav) = 0;
@@ -67,12 +71,16 @@ public:
 	static string getLandscapeNames(const string& landscape_file);
 	static string nameToKey(const string& landscape_file, const string & name);
 protected:
+	//! Load attributes common to all landscapes
+	void loadCommon(const string& landscape_file, const string& section_name);
 	float radius;
 	string name;
 	float sky_brightness;
 	bool valid_landscape;   // was a landscape loaded properly?
 	LinearFader land_fader;
 	LinearFader fog_fader;
+	string author;
+	string description;
 };
 
 typedef struct
