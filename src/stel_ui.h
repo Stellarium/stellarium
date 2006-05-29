@@ -298,7 +298,8 @@ private:
 	StringList* landscape_sl;
 	void setLandscape(void);
 	void saveLandscapeOption(void);
-
+	Label* landscape_authorlb;
+	
 	// Language options
 	ListBox* language_lb;
 	ListBox* languageSky_lb;

@@ -34,25 +34,27 @@ Landscape* Landscape::create_from_file(const string& landscape_file, const strin
 	pd.load(landscape_file);
 	string s;
 	s = pd.get_str(section_name, "type");
+	Landscape* ldscp = NULL;
 	if (s=="old_style")
 	{
-		LandscapeOldStyle* ldscp = new LandscapeOldStyle();
-		ldscp->load(landscape_file, section_name);
-		return ldscp;
+		ldscp = new LandscapeOldStyle();
 	}
 	else if (s=="spherical")
 	{
-		LandscapeSpherical* ldscp = new LandscapeSpherical();
-		ldscp->load(landscape_file, section_name);
-		return ldscp;
+		ldscp = new LandscapeSpherical();
+	}
+	else if (s=="fisheye")
+	{
+		ldscp = new LandscapeFisheye();
 	}
 	else
-	{   //	if (s=="fisheye")
-		LandscapeFisheye* ldscp = new LandscapeFisheye();
-		ldscp->load(landscape_file, section_name);
-		return ldscp;
+	{
+		cerr << "Unknown landscape type: " << s << endl;
+		assert(0);
 	}
-
+	
+	ldscp->load(landscape_file, section_name);
+	return ldscp;
 }
 
 // create landscape from parameters passed in a hash (same keys as with ini file)
@@ -81,6 +83,25 @@ Landscape* Landscape::create_from_hash(stringHash_t & param)
 	}
 }
 
+// Load attributes common to all landscapes
+void Landscape::loadCommon(const string& landscape_file, const string& section_name)
+{
+	InitParser pd;	// The landscape data ini file parser
+	pd.load(landscape_file);
+	name = pd.get_str(section_name, "name");
+	author = pd.get_str(section_name, "author");
+	description = pd.get_str(section_name, "description");
+	if(name == "" )
+	{
+		cerr << "No valid landscape definition found for section "<< section_name << " in file " << landscape_file << ". No landscape in use." << endl;
+		valid_landscape = 0;
+		return;
+	}
+	else
+	{
+		valid_landscape = 1;
+	}
+}
 
 string Landscape::get_file_content(const string& landscape_file)
 {
@@ -147,21 +168,19 @@ LandscapeOldStyle::~LandscapeOldStyle()
 
 void LandscapeOldStyle::load(const string& landscape_file, const string& section_name)
 {
+	loadCommon(landscape_file, section_name);
+	
 	// TODO: put values into hash and call create method to consolidate code
 
 	InitParser pd;	// The landscape data ini file parser
 	pd.load(landscape_file);
 
-	name = pd.get_str(section_name, "name");
-	if(name == "" )
+	string type = pd.get_str(section_name, "type");
+	if(type != "old_style")
 	{
-		printf("ERROR : No valid landscape definition found for %s.  No landscape in use.\n", section_name.c_str());
+		cerr << "Landscape type mismatch for landscape "<< section_name << ", expected old_style, found " << type << ".  No landscape in use.\n";
 		valid_landscape = 0;
 		return;
-	}
-	else
-	{
-		valid_landscape = 1;
 	}
 
 	// Load sides textures
@@ -227,13 +246,6 @@ void LandscapeOldStyle::load(const string& landscape_file, const string& section
 // create from a hash of parameters (no ini file needed)
 void LandscapeOldStyle::create(bool _fullpath, stringHash_t param)
 {
-
-	/*
-	for ( stringHashIter_t iter = param.begin(); iter != param.end(); ++iter ) {
-		cout << iter->first << " : " << iter->second << endl;
-	}
-	*/
-
 	name = param["name"];
 	valid_landscape = 1;  // assume valid if got here
 
@@ -407,21 +419,19 @@ LandscapeFisheye::~LandscapeFisheye()
 
 void LandscapeFisheye::load(const string& landscape_file, const string& section_name)
 {
+	loadCommon(landscape_file, section_name);
+	
 	InitParser pd;	// The landscape data ini file parser
 	pd.load(landscape_file);
 
-	string type;
-	type = pd.get_str(section_name, "type");
-	name = pd.get_str(section_name, "name");
-	if(type != "fisheye" || name == "" )
+	string type = pd.get_str(section_name, "type");
+	if(type != "fisheye")
 	{
-		printf("ERROR : No valid landscape definition found for %s.  No landscape in use.\n", section_name.c_str());
+		cerr << "Landscape type mismatch for landscape "<< section_name << ", expected fisheye, found " << type << ".  No landscape in use.\n";
 		valid_landscape = 0;
 		return;
 	}
-
 	create(name, 0, pd.get_str(section_name, "maptex"), pd.get_double(section_name, "texturefov", 360));
-
 }
 
 
@@ -469,15 +479,15 @@ LandscapeSpherical::~LandscapeSpherical()
 
 void LandscapeSpherical::load(const string& landscape_file, const string& section_name)
 {
+	loadCommon(landscape_file, section_name);
+	
 	InitParser pd;	// The landscape data ini file parser
 	pd.load(landscape_file);
 
-	string type;
-	type = pd.get_str(section_name, "type");
-	name = pd.get_str(section_name, "name");
+	string type = pd.get_str(section_name, "type");
 	if(type != "spherical" )
 	{
-		printf("ERROR : No valid landscape definition found for %s.  No landscape in use.\n", section_name.c_str());
+		cerr << "Landscape type mismatch for landscape "<< section_name << ", expected spherical, found " << type << ".  No landscape in use.\n";
 		valid_landscape = 0;
 		return;
 	}

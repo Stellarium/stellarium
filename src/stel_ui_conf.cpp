@@ -430,6 +430,11 @@ Component* StelUI::createConfigWindow(void)
 	landscape_sl->setOnPressCallback(callback<void>(this, &StelUI::setLandscape));
 	tab_landscapes->addComponent(landscape_sl);
 
+	landscape_authorlb = new Label(_("Author: ") + StelUtility::stringToWstring(core->getLandscapeAuthorName()));
+	landscape_authorlb->setPos(x+landscape_sl->getSizex()+30, y); 
+	landscape_authorlb->adjustSize();
+	tab_landscapes->addComponent(landscape_authorlb);
+	
 	y+=150;	
 
 	LabeledButton* landscape_save_bt = new LabeledButton(_("Save as default"));
@@ -875,6 +880,10 @@ void StelUI::setVideoOption(void)
 void StelUI::setLandscape(void)
 {
 	core->setLandscape(Landscape::nameToKey(core->getDataDir() + "landscapes.ini", landscape_sl->getValue()));
+	landscape_authorlb->setLabel(_("Author: ") + Translator::UTF8stringToWstring(core->getLandscapeAuthorName()));
+	landscape_authorlb->adjustSize();
+	cout << StelUtility::wstringToString(landscape_authorlb->getLabel())<< endl;
+	cout << core->getLandscapeAuthorName() << endl;
 }
 
 void StelUI::updateVideoVariables(void)
