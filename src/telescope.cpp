@@ -222,8 +222,9 @@ void TelescopeTcp::telescopeGoto(const Vec3d &j2000_pos) {
       const double ra = atan2(j2000_pos[1],j2000_pos[0]);
       const double dec = atan2(j2000_pos[2],
               sqrt(j2000_pos[0]*j2000_pos[0]+j2000_pos[1]*j2000_pos[1]));
-      unsigned int ra_int = (unsigned int)floor(0.5 + ra*(0x8000000/M_PI));
-      int dec_int = (int)floor(0.5 + dec*(0x8000000/M_PI));
+      unsigned int ra_int = (unsigned int)floor(
+                               0.5 +  ra*(((unsigned int)0x80000000)/M_PI));
+      int dec_int = (int)floor(0.5 + dec*(((unsigned int)0x80000000)/M_PI));
 //      cout << "TelescopeTcp::telescopeGoto: "
 //              "queuing packet: "
 //           << (12*ra/M_PI) << ',' << (180*dec/M_PI)
@@ -320,8 +321,21 @@ void TelescopeTcp::performReading(void) {
                    (((unsigned int)(unsigned char)(p[ 9])) <<  8) |
                    (((unsigned int)(unsigned char)(p[10])) << 16) |
                    (((unsigned int)(unsigned char)(p[11])) << 24) );
-          const double ra = ra_int*(M_PI/0x8000000);
-          const double dec = dec_int*(M_PI/0x8000000);
+//          cout << "TelescopeTcp::performReading: "
+//               << ra_int << ", " << dec_int << endl;
+          const double ra = ra_int*(M_PI/(unsigned int)0x80000000);
+          const double dec = dec_int*(M_PI/(unsigned int)0x80000000);
+          
+//          int ra_sec = (int)floor(0.5+ra*12*3600/M_PI);
+//          int dec_sec = (int)floor(0.5+dec*180*3600/M_PI);
+//          cout << "TelescopeTcp::performReading: "
+//               << (ra_sec/3600) << ':' << ((ra_sec/60)%60) << ':'
+//               << (ra_sec%60)
+//               << "/" << ((dec_sec < 0)?'-':'+');
+//          dec_sec = abs(dec_sec);
+//          cout << (dec_sec/3600) << ':' << ((dec_sec/60)%60) << ':'
+//               << (dec_sec%60) << endl;
+          
           const double cdec = cos(dec);
           XYZ[0] = cos(ra)*cdec;
           XYZ[1] = sin(ra)*cdec;
