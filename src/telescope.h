@@ -23,6 +23,8 @@
 #include "stel_object.h"
 #include "navigator.h"
 
+long long int GetNow(void);
+
 class Telescope : public StelObject {
 public:
   static Telescope *create(const string &url);
@@ -32,11 +34,11 @@ public:
   wstring getShortInfoString(const Navigator * nav) const;
   STEL_OBJECT_TYPE get_type(void) const {return STEL_OBJECT_TELESCOPE;}
   Vec3d get_earth_equ_pos(const Navigator *nav) const
-    {return nav->j2000_to_earth_equ(XYZ);}
-  Vec3d getObsJ2000Pos(const Navigator *nav=0) const {return XYZ;}
+    {return nav->j2000_to_earth_equ(getObsJ2000Pos(nav));}
   virtual void telescopeGoto(const Vec3d &j2000_pos) = 0;
 
   virtual bool isConnected(void) const = 0;
+  virtual bool hasKnownPosition(void) const = 0;
     // all TCP (and all possible other style) communication shall be done in
     // these functions:
   virtual void prepareSelectFds(fd_set &read_fds,fd_set &write_fds,
@@ -45,8 +47,8 @@ public:
                                const fd_set &write_fds) {}
 protected:
   Telescope(const string &name);
-  Vec3d XYZ;  // j2000 position
   wstring nameI18n;
+  const string name;
 private:
   bool isInitialized(void) const {return true;}
 private:
