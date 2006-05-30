@@ -68,9 +68,9 @@ void TelescopeMgr::draw(const Projector *prj,const Navigator *nav) const {
   glBlendFunc(GL_ONE,GL_ONE);
   for (TelescopeMap::const_iterator it(telescope_map.begin());
        it!=telescope_map.end();it++) {
-    if (it->second->isConnected()) {
+    if (it->second->isConnected() && it->second->hasKnownPosition()) {
       Vec3d XY;
-      if (prj->project_j2000_check(it->second->getObsJ2000Pos(),XY)) {
+      if (prj->project_j2000_check(it->second->getObsJ2000Pos(0),XY)) {
         if (telescope_fader.getInterstate() >= 0) {
           glColor4f(circle_color[0],circle_color[1],circle_color[2],
                     telescope_fader.getInterstate());
@@ -115,7 +115,7 @@ vector<StelObject*> TelescopeMgr::search_around(Vec3d pos,
   double cos_lim_fov = cos(lim_fov * M_PI/180.);
   for (TelescopeMap::const_iterator it(telescope_map.begin());
        it!=telescope_map.end();it++) {
-    if (it->second->getObsJ2000Pos().dot(pos) >= cos_lim_fov) {
+    if (it->second->getObsJ2000Pos(0).dot(pos) >= cos_lim_fov) {
       result.push_back(it->second);
     }
   }
@@ -190,6 +190,7 @@ void TelescopeMgr::telescopeGoto(int telescope_nr,const Vec3d &j2000_pos) {
 
 void TelescopeMgr::communicate(void) {
   if (!telescope_map.empty()) {
+//    long long int t = GetNow();
     fd_set read_fds,write_fds;
     FD_ZERO(&read_fds);
     FD_ZERO(&write_fds);
@@ -210,5 +211,7 @@ void TelescopeMgr::communicate(void) {
         }
       }
     }
+//    t = GetNow() - t;
+//    cout << "TelescopeMgr::communicate: " << t << endl;
   }
 }
