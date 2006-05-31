@@ -837,6 +837,9 @@ void Planet::draw_orbit(const Navigator * nav, const Projector* prj)
 
 	prj->set_orthographic_projection();    // 2D coordinate
 
+	// Normal transparency mode
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
 	glEnable(GL_BLEND);
 	glDisable(GL_LIGHTING);
 	glDisable(GL_TEXTURE_2D);
