@@ -50,7 +50,10 @@ Landscape* Landscape::create_from_file(const string& landscape_file, const strin
 	else
 	{
 		cerr << "Unknown landscape type: " << s << endl;
-		assert(0);
+
+		// to avoid making this a fatal error, will load as a fisheye
+		// if this fails, it just won't draw
+		ldscp = new LandscapeFisheye();
 	}
 	
 	ldscp->load(landscape_file, section_name);
