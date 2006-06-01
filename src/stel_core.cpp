@@ -1275,12 +1275,12 @@ vector<wstring> StelCore::listMatchingObjectsI18n(const wstring& objPrefix, unsi
 
 //! TESTING
 //! font file and scaling to use for a given locale
-// TODO: Need a fixed font version too
 void StelCore::getFontForLocale(const string &_locale, string &_fontFile, float &_fontScale,
 								string &_fixedFontFile, float &_fixedFontScale) {
 
-	// TODO: Cache in data structure and check that font files exist
-	// Move to translation or font class
+	// TODO: Cache in data structure
+	// TODO: check that font files exist
+	// TODO: Move to translation or font class
 
 	// Hardcoded default fonts here (override in fontmap.dat file)
 	_fontFile = getDataDir() + "DejaVuSans.ttf";
@@ -1288,12 +1288,12 @@ void StelCore::getFontForLocale(const string &_locale, string &_fontFile, float 
 	_fixedFontFile = getDataDir() + "DejaVuSansMono.ttf";
 
 	// Now see if another font should be used as default or for locale
-	string file = getDataDir() + "fontmap.dat";
-	ifstream *input_file = new ifstream(file.c_str());
+	string mapFileName = getDataDir() + "fontmap.dat";
+	ifstream *mapFile = new ifstream(mapFileName.c_str());
 
-	if (! input_file->is_open())
+	if (! mapFile->is_open())
 	{
-		cout << "WARNING: Unable to open " << file << " resorting to default fonts." << endl;
+		cout << "WARNING: Unable to open " << mapFileName << " resorting to default fonts." << endl;
 		return;
 	}
 
@@ -1301,7 +1301,7 @@ void StelCore::getFontForLocale(const string &_locale, string &_fontFile, float 
 	string locale, font, fixedFont;
 	float scale, fixedScale;
 
-	while (input_file->getline (buffer,999) && !input_file->eof())
+	while (mapFile->getline (buffer,999) && !mapFile->eof())
 	{
 
 		if( buffer[0] != '#' && buffer[0] != 0)
@@ -1312,11 +1312,37 @@ void StelCore::getFontForLocale(const string &_locale, string &_fontFile, float 
 
 			record >> locale >> font >> scale >> fixedFont >> fixedScale;
 
+			// find matching records in map file
 			if(locale == _locale || locale == "default") {
-				_fontFile = getDataDir() + font;
-				_fontScale = scale;
-				_fixedFontFile = getDataDir() + fixedFont;
-				_fixedFontScale = fixedScale;
+
+				//				cout << "locale " << _locale << endl;
+
+				// Test that font files exist
+				string fontFileName;
+				ifstream *fontFile;
+
+				fontFileName = getDataDir() + font;
+				fontFile = new ifstream(fontFileName.c_str());
+
+				if (! fontFile->is_open()) {
+					cout << "WARNING: Unable to open " << fontFileName << " resorting to default font." << endl;
+				} else {
+					_fontFile = getDataDir() + font;
+					_fontScale = scale;
+				}
+				delete fontFile;
+
+				// normal font OK, test fixed font
+				fontFileName = getDataDir() + fixedFont;
+				fontFile = new ifstream(fontFileName.c_str());
+
+				if (! fontFile->is_open()) {
+					cout << "WARNING: Unable to open " << fontFileName << " resorting to default font." << endl;
+				} else {
+					_fixedFontFile = getDataDir() + fixedFont;
+					_fixedFontScale = fixedScale;
+				}
+				delete fontFile;
 
 				if(locale == _locale) {
 					break;
@@ -1325,7 +1351,7 @@ void StelCore::getFontForLocale(const string &_locale, string &_fontFile, float 
 		}
 	}
 
-	delete input_file;
+	delete mapFile;
 	return;
 
 }
