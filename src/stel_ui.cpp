@@ -1067,7 +1067,7 @@ int StelUI::handle_keys(Uint16 key, S_GUI_VALUE state)
 
 
 		if(key=='c') app->commander->execute_command( "flag constellation_drawing toggle");
-		if(key=='C') app->commander->execute_command( "flag constellation_boundaries toggle");
+		if(key=='b') app->commander->execute_command( "flag constellation_boundaries toggle");
 
 		if(key=='d') app->commander->execute_command( "flag star_names toggle");
 
