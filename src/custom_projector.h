@@ -45,6 +45,7 @@ private:
 	void sVertex3(double x, double y, double z, const Mat4d& mat) const;
 
 	const Vec3d convert_pos(const Vec3d& v, const Mat4d& mat) const;
+	double getRadPerPixel(void) const {return view_scaling_factor;}
 protected:
 	Vec3d center;					// Viewport center in screen pixel
 
