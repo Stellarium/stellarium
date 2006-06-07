@@ -442,6 +442,13 @@ void StelUI::draw_tui(void)
 	int y = core->getViewportPosY() + core->getViewportHeight()/2;
 	int shift = (int)(M_SQRT2 / 2 * MY_MIN(core->getViewportWidth()/2, core->getViewportHeight()/2));
 	
+	if(!core->getFlagGravityLabels()) {
+		// for horizontal tui move to left edge of screen kludge
+		shift = 0;
+		x = core->getViewportPosX() + int(0.1*core->getViewportWidth());
+		y = core->getViewportPosY() + int(0.1*core->getViewportHeight());
+	}
+
 	if (tui_root)
 	{
 		glColor3f(0.5,1,0.5);
