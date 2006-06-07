@@ -74,7 +74,13 @@ void TelescopeMgr::draw(const Projector *prj,const Navigator *nav) const {
         if (telescope_fader.getInterstate() >= 0) {
           glColor4f(circle_color[0],circle_color[1],circle_color[2],
                     telescope_fader.getInterstate());
-          const double radius = 15.0;
+          double radius = 15;
+//          double radius = 0.5*prj->getRadPerPixel()*(M_PI/180)*0.5;
+//          if (radius < 15) radius = 15;
+//          if (radius > 0.5*prj->getViewportWidth())
+//            radius = 0.5*prj->getViewportWidth();
+//          if (radius > 0.5*prj->getViewportHeight())
+//            radius = 0.5*prj->getViewportHeight();
           glBegin(GL_QUADS);
           glTexCoord2i(0,0);
           glVertex2d(XY[0]-radius,XY[1]-radius); // Bottom left
@@ -163,7 +169,7 @@ void TelescopeMgr::init(const InitParser &conf) {
     delete telescope_texture;
     telescope_texture = 0;
   }
-  telescope_texture = new s_texture("star16x16.png",TEX_LOAD_TYPE_PNG_SOLID);
+  telescope_texture = new s_texture("telescope.png",TEX_LOAD_TYPE_PNG_SOLID);
 #ifdef WIN32
   if (!wsa_ok) return;
 #endif
