@@ -257,18 +257,26 @@ void HipStarMgr::load_sci_names(const string& sciNameFile)
 // Draw all the stars
 void HipStarMgr::draw(Vec3f equ_vision, ToneReproductor* eye, Projector* prj)
 {
+
+	// If stars are turned off don't waste time below
+	// projecting all stars just to draw disembodied labels
+	if(!starsFader.getInterstate()) return;
+
 	// Set temporary static variable for optimization
 	if (flagStarTwinkle) HipStar::twinkle_amount = twinkleAmount;
 	else HipStar::twinkle_amount = 0;
 	HipStar::star_scale = starScale * starsFader.getInterstate();
 	HipStar::star_mag_scale = starMagScale;
 	HipStar::gravity_label = gravityLabel;
-	HipStar::names_brightness = names_fader.getInterstate();
+	HipStar::names_brightness = names_fader.getInterstate() 
+		* starsFader.getInterstate();
 	HipStar::eye = eye;
 	HipStar::proj = prj;
 	
 	if (flagPointStar) {
-		drawPoint(equ_vision, eye, prj);
+		// TODO: fade on/off with starsFader
+		if( starsFader.getInterstate())
+			drawPoint(equ_vision, eye, prj);
 		return;
 	}
 	
