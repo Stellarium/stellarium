@@ -81,13 +81,26 @@ public:
 	
 	//! Set the current openGL viewport to projector's viewport
 	void applyViewport(void) const {glViewport(vec_viewport[0], vec_viewport[1], vec_viewport[2], vec_viewport[3]);}	
-	
+
+
+	bool getFlipHorz(void) const {return (flip_horz < 0.0);}
+	bool getFlipVert(void) const {return (flip_vert < 0.0);}
+	void setFlipHorz(bool flip) {
+		flip_horz = flip ? -1.0 : 1.0;
+		init_project_matrix();
+	}
+	void setFlipVert(bool flip) {
+		flip_vert = flip ? -1.0 : 1.0;
+		init_project_matrix();
+	}
+	virtual bool needGlFrontFaceCW(void) const
+		{return (flip_horz*flip_vert < 0.0);}
+
 	//! Set the Field of View in degree
 	void set_fov(double f);
 	//! Get the Field of View in degree
 	double get_fov(void) const {return fov;}
-	virtual double getRadPerPixel(void) const
-	  {return 1.0/fov*180./M_PI*MY_MIN(getViewportWidth(),getViewportHeight());}
+	double getRadPerPixel(void) const {return view_scaling_factor;}
 
 	//! Set the maximum Field of View in degree
 	void setMaxFov(double max);
@@ -95,7 +108,8 @@ public:
 	double getMaxFov(void) const {return max_fov;}
     
     //! If is currently zooming, return the target FOV, otherwise return current FOV
-    double getAimFov(void) {if (flag_auto_zoom) return zoom_move.aim; else return fov;}
+    double getAimFov(void) const
+	  {return (flag_auto_zoom ? zoom_move.aim : fov);}
     
     void change_fov(double deltaFov);
 
@@ -188,9 +202,6 @@ public:
 		   (check_in_viewport(win1) || check_in_viewport(win2));}
 
 
-	virtual void unproject_custom(double x, double y, Vec3d& v, const Mat4d& mat) const
-	{gluUnProject(x,y,1.,mat,mat_projection,vec_viewport,&v[0],&v[1],&v[2]);}
-
 	// Set the drawing mode in 2D for drawing inside the viewport only.
 	// Use reset_perspective_projection() to restore previous projection mode
 	void set_orthographic_projection(void) const;
@@ -263,6 +274,10 @@ protected:
 	double zNear, zFar;			// Near and far clipping planes
 	Vec4i vec_viewport;			// Viewport parameters
 	Mat4d mat_projection;		// Projection matrix
+
+	Vec3d center;				// Viewport center in screen pixel
+	double view_scaling_factor;	// ??
+	double flip_horz,flip_vert;
 
 	Mat4d mat_earth_equ_to_eye;		// Modelview Matrix for earth equatorial projection
 	Mat4d mat_j2000_to_eye;         // for precessed equ coords

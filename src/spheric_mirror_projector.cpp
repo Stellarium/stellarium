@@ -26,9 +26,6 @@ SphericMirrorProjector::SphericMirrorProjector(const Vec4i& viewport,
   min_fov = 0.001;
   max_fov = 180.00001;
   set_fov(_fov);
-
-    // we have a mirrored image:
-  glFrontFace(GL_CW);
 }
 
 void SphericMirrorProjector::setViewport(int x, int y, int w, int h)
@@ -50,8 +47,8 @@ bool SphericMirrorProjector::project_custom(const Vec3d &v,
   
   const bool rval = calc.transform(S,x[0],x[1]);
 
-  x[0] = center[0] - x[0] * (5*view_scaling_factor);
-  x[1] = center[1] + x[1] * (5*view_scaling_factor);
+  x[0] = center[0] - flip_horz * x[0] * (5*view_scaling_factor);
+  x[1] = center[1] + flip_vert * x[1] * (5*view_scaling_factor);
   x[2] = rval ? ((-z - zNear) / (zFar-zNear)) : -1000;
   return rval;
 }
@@ -59,8 +56,8 @@ bool SphericMirrorProjector::project_custom(const Vec3d &v,
 
 void SphericMirrorProjector::unproject(double x, double y,
                                        const Mat4d& m, Vec3d& v) const {
-  x = - (x - center[0]) / (5*view_scaling_factor);
-  y = (y - center[1]) / (5*view_scaling_factor);
+  x = - flip_horz * (x - center[0]) / (5*view_scaling_factor);
+  y = flip_vert * (y - center[1]) / (5*view_scaling_factor);
 
   calc.retransform(x,y,v);
 

@@ -57,16 +57,16 @@ bool CylinderProjector::project_custom(const Vec3d &v,
   const double win_length = win.length();
   const double alpha = asin(win[1]/win_length);
   const double delta = atan2(win[2],win[0]);
-  win[0] = center[0] + delta*view_scaling_factor;
-  win[1] = center[1] + alpha*view_scaling_factor;
+  win[0] = center[0] + flip_horz * delta*view_scaling_factor;
+  win[1] = center[1] + flip_vert * alpha*view_scaling_factor;
   win[2] = (win_length - zNear) / (zFar-zNear);
   return true;
 }
 
 void CylinderProjector::unproject(double x, double y,
                                   const Mat4d& m, Vec3d& v) const {
-  const double d = (x - center[0]) / view_scaling_factor;
-  const double a = (y - center[1]) / view_scaling_factor;
+  const double d = flip_horz * (x - center[0]) / view_scaling_factor;
+  const double a = flip_vert * (y - center[1]) / view_scaling_factor;
   v[0] = cos(a) * cos(d);
   v[1] = sin(a);
   v[2] = - cos(a) * sin(d); // why minus ?
