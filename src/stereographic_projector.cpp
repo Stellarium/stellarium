@@ -39,8 +39,8 @@ bool StereographicProjector::project_custom(const Vec3d &v,
   const double h = 0.5*(r-z);
   if (h <= 0.0) return false;
   const double f = view_scaling_factor / h;
-  win[0] = center[0] + x * f;
-  win[1] = center[1] + y * f;
+  win[0] = center[0] + flip_horz * x * f;
+  win[1] = center[1] + flip_vert * y * f;
   win[2] = (r - zNear) / (zFar-zNear);
   return true;
 }
@@ -48,8 +48,8 @@ bool StereographicProjector::project_custom(const Vec3d &v,
 
 void StereographicProjector::unproject(double x, double y,
                                        const Mat4d& m, Vec3d& v) const {
-  x = (x - center[0]) / (view_scaling_factor*2);
-  y = (y - center[1]) / (view_scaling_factor*2);
+  x = flip_horz * (x - center[0]) / (view_scaling_factor*2);
+  y = flip_vert * (y - center[1]) / (view_scaling_factor*2);
   const double lq = x*x + y*y;
   v[0] = 2.0 * x;
   v[1] = 2.0 * y;

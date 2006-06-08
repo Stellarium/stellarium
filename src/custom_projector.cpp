@@ -38,13 +38,6 @@ void CustomProjector::init_project_matrix(void)
 	glMatrixMode(GL_PROJECTION);
 	glLoadMatrixd(mat_projection);
     glMatrixMode(GL_MODELVIEW);
-    view_scaling_factor = 1.0/fov*180./M_PI*MY_MIN(getViewportWidth(),getViewportHeight());
-    center.set(vec_viewport[0]+vec_viewport[2]/2,vec_viewport[1]+vec_viewport[3]/2,0);
-}
-
-void CustomProjector::unproject_custom(double x ,double y, Vec3d& v, const Mat4d& mat) const
-{
-	unproject(x, y, (mat_projection*mat).inverse(), v);
 }
 
 // Override glVertex3f

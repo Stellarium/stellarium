@@ -79,23 +79,54 @@ bool FisheyeProjector::project_custom(const Vec3d &v,Vec3d &win,
   win[2] = mat.r[2]*v[0] + mat.r[6]*v[1] + mat.r[10]*v[2] + mat.r[14];
   const double oneoverh = 1./sqrt(win[0]*win[0]+win[1]*win[1]);
   const double a = M_PI_2 + atan(win[2]*oneoverh);
+//  modified fisheye
+//  if (a > 0.5*M_PI) a = 0.25*(M_PI*M_PI)/(M_PI-a);
   const double f = (a*view_scaling_factor) * oneoverh;
-  win[0] = center[0] + win[0] * f;
-  win[1] = center[1] + win[1] * f;
+  win[0] = center[0] + flip_horz * win[0] * f;
+  win[1] = center[1] + flip_vert * win[1] * f;
   win[2] = (fabs(win[2]) - zNear) / (zFar-zNear);
   return (a<0.9*M_PI) ? true : false;
 }
+
+
+/*
+more accurate version with atan2 instead of atan
+bool FisheyeProjector::project_custom(const Vec3d &v,Vec3d &win,
+                                      const Mat4d &mat) const {
+  const double x = mat.r[0]*v[0] + mat.r[4]*v[1] +  mat.r[8]*v[2] + mat.r[12];
+  const double y = mat.r[1]*v[0] + mat.r[5]*v[1] +  mat.r[9]*v[2] + mat.r[13];
+  const double z = mat.r[2]*v[0] + mat.r[6]*v[1] + mat.r[10]*v[2] + mat.r[14];
+  const double xyq = x*x+y*y;
+  const double h = sqrt(xyq);
+  double a = atan2(h,-z);
+//  modified fisheye
+//  if (a > 0.5*M_PI) a = 0.25*(M_PI*M_PI)/(M_PI-a);
+  const double f = (a*view_scaling_factor) / h;
+  win[0] = center[0] + flip_horz * x * f;
+  win[1] = center[1] + flip_vert * y * f;
+  win[2] = (sqrt(xyq+z*z) - zNear) / (zFar-zNear);
+  return true;
+  return (a<0.9*M_PI) ? true : false;
+}
+*/
+
+
+
 
 void FisheyeProjector::unproject(double x, double y, const Mat4d& m, Vec3d& v) const
 {
 	double d = MY_MIN(vec_viewport[2],vec_viewport[3])/2;
 	static double length;
-	v[0] = x - center[0];
-	v[1] = y - center[1];
+	v[0] = flip_horz * (x - center[0]);
+	v[1] = flip_vert * (y - center[1]);
 	v[2] = 0;
 	length = v.length();
 
 	double angle_center = length/d * fov/2*M_PI/180;
+// modified fisheye
+//	if (angle_center > 0.5*M_PI) {
+//		angle_center = M_PI*(1.0-M_PI/(4.0*angle_center));
+//	}
 	double r = sin(angle_center);
 	if (length!=0)
 	{
