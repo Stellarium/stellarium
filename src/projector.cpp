@@ -92,16 +92,15 @@ Projector *Projector::create(PROJECTOR_TYPE type,
 }
 
 Projector::Projector(const Vec4i& viewport, double _fov)
-          :maskType(NONE), fov(_fov), min_fov(0.0001), max_fov(100),
+          :maskType(NONE), fov(1.0), min_fov(0.0001), max_fov(100),
            zNear(0.1), zFar(10000),
            vec_viewport(viewport),
            flag_auto_zoom(0), gravityLabels(0)
 {
+	flip_horz = 1.0;
+	flip_vert = 1.0;
 	setViewport(viewport);
 	set_fov(_fov);
-
-	  // we have no mirrored image:
-	glFrontFace(GL_CCW);
 }
 
 Projector::~Projector()
@@ -114,8 +113,8 @@ void Projector::init_project_matrix(void)
 {
 	double f = 1./tan(fov*M_PI/360.);
 	double ratio = (double)getViewportHeight()/getViewportWidth();
-	mat_projection = Mat4d(	f*ratio, 0., 0., 0.,
-							0., f, 0., 0.,
+	mat_projection.set(	flip_horz*f*ratio, 0., 0., 0.,
+							0., flip_vert*f, 0., 0.,
 							0., 0., (zFar + zNear)/(zNear - zFar), -1.,
 							0., 0., (2.*zFar*zNear)/(zNear - zFar), 0.);
 	glMatrixMode(GL_PROJECTION);
@@ -129,6 +128,8 @@ void Projector::setViewport(int x, int y, int w, int h)
 	vec_viewport[1] = y;
 	vec_viewport[2] = w;
 	vec_viewport[3] = h;
+	center.set(vec_viewport[0]+vec_viewport[2]/2,vec_viewport[1]+vec_viewport[3]/2,0);
+	view_scaling_factor = 1.0/fov*180./M_PI*MY_MIN(getViewportWidth(),getViewportHeight());
 	glViewport(x, y, w, h);
 	init_project_matrix();
 }
@@ -138,6 +139,7 @@ void Projector::set_fov(double f)
 	fov = f;
 	if (f>max_fov) fov = max_fov;
 	if (f<min_fov) fov = min_fov;
+	view_scaling_factor = 1.0/fov*180./M_PI*MY_MIN(getViewportWidth(),getViewportHeight());
 	init_project_matrix();
 }
 
@@ -465,10 +467,10 @@ void Projector::sRing(GLdouble r_min, GLdouble r_max,
   glLoadMatrixd(mat);
 
   double theta;
-  float x,y;
+  double x,y;
   int j;
 
-  const float nsign = (orient_inside)?-1.0:1.0;
+  const double nsign = (orient_inside)?-1.0:1.0;
 
   const double dr = (r_max-r_min) / stacks;
   const double dtheta = 2.0 * M_PI / slices;
@@ -483,22 +485,22 @@ void Projector::sRing(GLdouble r_min, GLdouble r_max,
 
   // draw intermediate stacks as quad strips
   for (double r = r_min; r < r_max; r+=dr) {
-    const float tex_r0 = (r-r_min)/(r_max-r_min);
-    const float tex_r1 = (r+dr-r_min)/(r_max-r_min);
-    glBegin(GL_TRIANGLE_STRIP);
+    const double tex_r0 = (r-r_min)/(r_max-r_min);
+    const double tex_r1 = (r+dr-r_min)/(r_max-r_min);
+    glBegin(GL_QUAD_STRIP /*GL_TRIANGLE_STRIP*/);
     for (j=0,cos_sin_theta_p=cos_sin_theta;
          j<=slices;
          j++,cos_sin_theta_p+=2) {
       theta = (j == slices) ? 0.0 : j * dtheta;
       x = r*cos_sin_theta_p[0];
       y = r*cos_sin_theta_p[1];
-      glNormal3f(0, 0, nsign);
-      glTexCoord2f(tex_r0, 0.5);
+      glNormal3d(0, 0, nsign);
+      glTexCoord2d(tex_r0, 0.5);
       sVertex3(x, y, 0, mat);
       x = (r+dr)*cos_sin_theta_p[0];
       y = (r+dr)*cos_sin_theta_p[1];
-      glNormal3f(0, 0, nsign);
-      glTexCoord2f(tex_r1, 0.5);
+      glNormal3d(0, 0, nsign);
+      glTexCoord2d(tex_r1, 0.5);
       sVertex3(x, y, 0, mat);
     }
     glEnd();
