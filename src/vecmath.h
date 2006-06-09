@@ -1128,8 +1128,46 @@ template<class T> Matrix4<T> Matrix4<T>::inverse() const
 
 template<class T> void Matrix4<T>::print(void) const
 {
-	printf("[%.2lf %.2lf %.2lf %.2lf]\n[%.2lf %.2lf %.2lf %.2lf]\n[%.2lf %.2lf %.2lf %.2lf]\n[%.2lf %.2lf %.2lf %.2lf]\n",
-	r[0],r[4],r[8],r[12],r[1],r[5],r[9],r[13],r[2],r[6],r[10],r[14],r[3],r[7],r[11],r[15]);
+    printf("[%5.2lf %5.2lf %5.2lf %17.12le]\n"
+           "[%5.2lf %5.2lf %5.2lf %17.12le]\n"
+           "[%5.2lf %5.2lf %5.2lf %17.12le]\n"
+           "[%5.2lf %5.2lf %5.2lf %17.12le]\n\n",
+    r[0],r[4],r[8],r[12],
+    r[1],r[5],r[9],r[13],
+    r[2],r[6],r[10],r[14],
+    r[3],r[7],r[11],r[15]);
 }
+
+
+template<class T> inline
+T operator*(const Vector2<T>&a,const Vector2<T>&b) {
+  return a.v[0] * b.v[0] + a.v[1] * b.v[1];
+}
+
+template<class T> inline
+T operator*(const Vector3<T>&a,const Vector3<T>&b) {
+  return a.v[0] * b.v[0] + a.v[1] * b.v[1] + a.v[2] * b.v[2];
+}
+
+template<class T> inline
+T operator*(const Vector4<T>&a,const Vector4<T>&b) {
+  return a.v[0]*b.v[0] + a.v[1]*b.v[1] + a.v[2]*b.v[2] + a.v[3]*b.v[3];
+}
+
+template<class T> inline
+Vector2<T> operator*(T s,const Vector2<T>&v) {
+  return Vector2<T>(s*v[0],s*v[1]);
+}
+
+template<class T> inline
+Vector3<T> operator*(T s,const Vector3<T>&v) {
+  return Vector3<T>(s*v[0],s*v[1],s*v[2]);
+}
+
+template<class T> inline
+Vector4<T> operator*(T s,const Vector4<T>&v) {
+  return Vector4<T>(s*v[0],s*v[1],s*v[2],s*v[3]);
+}
+
 
 #endif // _VECMATH_H_
