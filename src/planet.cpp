@@ -471,9 +471,9 @@ float Planet::get_on_screen_size(const Projector* prj, const Navigator * nav)
 }
 
 // Draw the Planet and all the related infos : name, circle etc..
-void Planet::draw(Projector* prj, const Navigator * nav, const ToneReproductor* eye, int flag_point, bool stencil)
+double Planet::draw(Projector* prj, const Navigator * nav, const ToneReproductor* eye, int flag_point, bool stencil)
 {
-	if (hidden) return;
+	if (hidden) return 0;
 
 	Mat4d mat = mat_local_to_parent;
 	const Planet *p = parent;
@@ -489,7 +489,7 @@ void Planet::draw(Projector* prj, const Navigator * nav, const ToneReproductor* 
 
 	if (this == nav->getHomePlanet()) {
 		if (rings) rings->draw(prj,mat,1000.0);
-		return;
+		return 0;
 	}
 
 
@@ -554,6 +554,13 @@ void Planet::draw(Projector* prj, const Navigator * nav, const ToneReproductor* 
 		}
 		if (tex_big_halo) draw_big_halo(nav, prj, eye);
 	}
+	double distanceSquared =
+		(screenPos[0] - previousScreenPos[0]) *
+		(screenPos[0] - previousScreenPos[0]) +
+		(screenPos[1] - previousScreenPos[1]) *
+		(screenPos[1] - previousScreenPos[1]);
+	previousScreenPos = screenPos;
+	return distanceSquared;
 }
 
 void Planet::draw_hints(const Navigator* nav, const Projector* prj)

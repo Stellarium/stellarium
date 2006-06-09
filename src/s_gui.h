@@ -472,8 +472,7 @@ namespace s_gui
 		Uint16 getLastKey(void) { return lastKey;}
 		void setAutoFocus(bool _b) {autoFocus = _b; }
 		bool getAutoFocus(void) { return autoFocus; }
-		
-		static bool cursorVisible;
+
 		static EditBox *activeEditBox;
 	protected:
 		callback<void> onReturnKeyCallback;
@@ -493,6 +492,9 @@ namespace s_gui
 		wstring prompt;
 		Uint16 lastKey;
 		bool autoFocus;
+		bool cursorVisible;
+		bool blinkTimerValid;
+		SDL_TimerID blinkTimer;
     };
 	
 	class ScrollBar : public CallbackComponent

@@ -232,10 +232,34 @@ void StelApp::terminateApplication(void)
 	}
 }
 
+enum {
+	USER_EVENT_TICK
+};
+static Uint32 timer_callback(Uint32 interval, void *param)
+{
+	SDL_Event event;
+	event.type = SDL_USEREVENT;
+	event.user.type = SDL_USEREVENT;
+	event.user.code = USER_EVENT_TICK;
+	event.user.data1 = NULL;
+	event.user.data2 = NULL;
+	if(SDL_PushEvent(&event) == -1)
+	{
+		printf("User tick event can't be pushed: %s\n", SDL_GetError() );
+		exit(-1);
+	}
+
+	// End this timer.
+	return 0;
+}
+
 void StelApp::start_main_loop()
 {
     bool AppVisible = true;			// At The Beginning, Our App Is Visible
     enum S_GUI_VALUE bt;
+    Uint32 last_event_time = SDL_GetTicks();
+    // How fast the objects on-screen are moving, in pixels/millisecond.
+    double animationSpeed = 0;
 
     // Hold the value of SDL_GetTicks at start of main loop (set 0 time)
     LastCount = SDL_GetTicks();
@@ -245,6 +269,10 @@ void StelApp::start_main_loop()
 	{
 		if(SDL_PollEvent(&E))	// Fetch The First Event Of The Queue
 		{
+			if (E.type != SDL_USEREVENT) {
+				last_event_time = SDL_GetTicks();
+			}
+
 			switch(E.type)		// And Processing It
 			{
 				case SDL_QUIT:
@@ -408,16 +436,43 @@ void StelApp::start_main_loop()
 			}
 			else
 			{
+				// Compute how many fps we should run at to get 1 pixel
+				// movement each frame.
+				double frameRate = 1000. * animationSpeed;
+				// If there was user action in the last 2.5 seconds, shoot for
+				// the max framerate.
+				if (SDL_GetTicks() - last_event_time < 2500 ||
+						frameRate > getMaxFPS()) {
+					frameRate = getMaxFPS();
+				}
+				if (frameRate < getMinFPS()) {
+					frameRate = getMinFPS();
+				}
 
 				TickCount = SDL_GetTicks();			// Get present ticks
-				// This is used to constraint the maximum FPS rate
-				if (TickCount-LastCount < 1000.f/getMaxFPS())
+				// Wait a while if drawing a frame right now would exceed our
+				// preferred framerate.
+				if (TickCount-LastCount < 1000./frameRate)
 				{
-					SDL_Delay((unsigned int)(1000.f/getMaxFPS())-(TickCount-LastCount));
+					unsigned int delay = (unsigned int) (1000./frameRate) -
+						(TickCount-LastCount);
+//					printf("delay=%d\n", delay);
+					if (delay < 15) {
+						// Less than 15ms, just do a dumb wait.
+						SDL_Delay(delay);
+					} else {
+						// A longer delay. Use this timer song and dance so
+						// that the app is still responsive if the user does
+						// something.
+						SDL_AddTimer(delay, timer_callback, NULL);
+						SDL_WaitEvent(NULL);
+					}
 				}
+
 				TickCount = SDL_GetTicks();			// Get present ticks
 				this->update(TickCount-LastCount);	// And update the motions and data
-				this->draw(TickCount-LastCount);	// Do the drawings!
+				double squaredDistance = this->draw(TickCount-LastCount);	// Do the drawings!
+				animationSpeed = sqrt(squaredDistance) / (TickCount-LastCount);
 				LastCount = TickCount;				// Save the present tick probing
 				SDL_GL_SwapBuffers();				// And swap the buffers
 			}

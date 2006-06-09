@@ -363,7 +363,7 @@ void SolarSystem::computeTransMatrices(double date,const Planet *home_planet) {
 
 // Draw all the elements of the solar system
 // We are supposed to be in heliocentric coordinate
-void SolarSystem::draw(Projector * prj, const Navigator * nav, const ToneReproductor* eye, bool flag_point)
+double SolarSystem::draw(Projector * prj, const Navigator * nav, const ToneReproductor* eye, bool flag_point)
 {
 	// Set the light parameters taking sun as the light source
 	const float zero[4] = {0,0,0,0};
@@ -399,10 +399,11 @@ void SolarSystem::draw(Projector * prj, const Navigator * nav, const ToneReprodu
 	sort(system_planets.begin(),system_planets.end(),bigger_distance());
 
 	// Draw the elements
+	double maxSquaredDistance = 0;
 	iter = system_planets.begin();
 	while (iter != system_planets.end())
 	{
-
+		double squaredDistance = 0;
 		if(*iter==moon && near_lunar_eclipse(nav, prj))
 		{
 
@@ -415,10 +416,15 @@ void SolarSystem::draw(Projector * prj, const Navigator * nav, const ToneReprodu
 			glStencilFunc(GL_ALWAYS, 0x1, 0x1);
 			glStencilOp(GL_ZERO, GL_REPLACE, GL_REPLACE);
 
-			(*iter)->draw(prj, nav, eye, flag_point, 1);
+			squaredDistance = (*iter)->draw(prj, nav, eye, flag_point, 1);
 
 		}
-		else (*iter)->draw(prj, nav, eye, flag_point, 0);
+		else
+		{
+			squaredDistance = (*iter)->draw(prj, nav, eye, flag_point, 0);
+		}
+		if (squaredDistance > maxSquaredDistance)
+			maxSquaredDistance = squaredDistance;
 
 		++iter;
 	}
@@ -432,6 +438,7 @@ void SolarSystem::draw(Projector * prj, const Navigator * nav, const ToneReprodu
 	if(nav->getHomePlanet()->getEnglishName() == "Earth") 
 		draw_earth_shadow(nav, prj);
 
+	return maxSquaredDistance;
 }
 
 Planet* SolarSystem::searchByEnglishName(string planetEnglishName) const
