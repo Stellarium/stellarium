@@ -22,10 +22,15 @@
 
 #include <vector>
 
-#include "constellation.h"
 #include "fader.h"
 #include "loadingbar.h"
 #include "translator.h"
+
+class HipStarMgr;
+class HipStar;
+class Constellation;
+class Projector;
+class Navigator;
 
 class ConstellationMgr  
 {
@@ -86,22 +91,22 @@ public:
 	bool getFlagIsolateSelected(void) const { return isolateSelected;}
 	
 	//! Define wehther lable are print with gravity effect
-	void setFlagGravityLabel(bool g) {Constellation::gravityLabel = g;}
+	void setFlagGravityLabel(bool g);
 	
 	//! Define line color
-	void setLineColor(const Vec3f& c) {Constellation::lineColor = c;}
+	void setLineColor(const Vec3f& c);
 	//! Get line color
-	Vec3f getLineColor() const {return Constellation::lineColor;}
+	Vec3f getLineColor() const;
 	
 	//! Define boundary color
-	void setBoundaryColor(const Vec3f& c) {Constellation::boundaryColor = c;}
+	void setBoundaryColor(const Vec3f& c);
 	//! Get current boundary color
-	Vec3f getBoundaryColor() const {return Constellation::boundaryColor;}
+	Vec3f getBoundaryColor() const;
 		
 	//! Set label color for names
-	void setLabelColor(const Vec3f& c) {Constellation::labelColor = c;}
+	void setLabelColor(const Vec3f& c);
 	//! Get label color for names
-	Vec3f getLabelColor() const {return Constellation::labelColor;}
+	Vec3f getLabelColor() const;
 	
 	//! Define font file name and size to use for constellation names display
 	void setFont(float font_size, const string& font_name);
@@ -112,7 +117,7 @@ public:
 	//! Define which constellation is selected from a star number
 	void setSelected(const HipStar * s) {if (!s) setSelectedConst(NULL); else setSelectedConst(is_star_in(s));}
 	
-	unsigned int getFirstSelectedHP(void) {if (selected != NULL) return selected->asterism[0]->get_hp_number(); else return 0;}  //Tony
+	unsigned int getFirstSelectedHP(void);  //Tony
 
 	//! Return the matching constellation object's pointer if exists or NULL
 	//! @param nameI18n The case sensistive constellation name
