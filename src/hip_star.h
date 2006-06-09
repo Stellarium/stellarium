@@ -38,47 +38,42 @@ class HipStar : public StelObject
 	friend class Constellation;  // for xyz coordinate
 
 public:
-    HipStar();
-    virtual ~HipStar();
+    HipStar(void);
     int read(FILE * pFile);	// Read the star data in the stream
-	bool readSAO(char *record, float maxmag);
-	bool readHP(char *record, float maxmag);
-    void draw(void);		// Draw the star
-	void draw_point(void);	// Draw the star as a point
-    bool draw_name(void);	// draw the name - returns true if something drawn (and texture re-assigned for fonts)
-	virtual Vec3f get_RGB(void) const {return RGB;}
-	virtual wstring getNameI18(void) const; 
-	virtual wstring getInfoString(const Navigator * nav = NULL) const;
-	virtual wstring getShortInfoString(const Navigator * nav = NULL) const;
-	virtual STEL_OBJECT_TYPE get_type(void) const {return STEL_OBJECT_STAR;}
-	virtual Vec3d get_earth_equ_pos(const Navigator * nav = NULL) const {return nav->j2000_to_earth_equ(XYZ);}
-	virtual Vec3d getObsJ2000Pos(const Navigator *nav=0) const {return XYZ;}
-	virtual double get_best_fov(const Navigator * nav = NULL) const {return (13.f - 2.f * Mag > 1.f) ? (13.f - Mag) : 1.f;}
-	virtual float get_mag(const Navigator * nav = NULL) const {return Mag;}
-	virtual unsigned int get_hp_number() { return HP; };
-    void draw_chart(void);
+///	bool readSAO(char *record, float maxmag);
+///	bool readHP(char *record, float maxmag);
+    void draw(const Vec3d &XY);		// Draw the star
+	void draw_point(const Vec3d &XY);	// Draw the star as a point
+    bool draw_name(const Vec3d &XY);	// draw the name - returns true if something drawn (and texture re-assigned for fonts)
+	Vec3f get_RGB(void) const;
+	wstring getNameI18(void) const; 
+	wstring getInfoString(const Navigator * nav = NULL) const;
+	wstring getShortInfoString(const Navigator * nav = NULL) const;
+	STEL_OBJECT_TYPE get_type(void) const {return STEL_OBJECT_STAR;}
+	Vec3d get_earth_equ_pos(const Navigator * nav = NULL) const {return nav->j2000_to_earth_equ(XYZ);}
+	Vec3d getObsJ2000Pos(const Navigator *nav=0) const {return XYZ;}
+///	double get_best_fov(const Navigator * nav = NULL) const {return (13.f - 2.f * Mag > 1.f) ? (13.f - Mag) : 1.f;}
+	float get_mag(const Navigator * nav = NULL) const {return Mag;}
+    char getSpectralType(void) const;
+	unsigned int get_hp_number() { return HP; };
+///    void draw_chart(const Vec3d &XY);
 	void set_label_color(Vec3f& v) {label_color = v;}
 	void set_circle_color(Vec3f& v) {circle_color = v;}
 private:
-	void setColor(char sp);
-
     unsigned int HP;		// Hipparcos number
-    unsigned int HD;		// HD number
-    unsigned int SAO;		// SAO number
+///    unsigned int HD;		// HD number
+///    unsigned int SAO;		// SAO number
     float Mag;				// Apparent magnitude
     bool doubleStar;		// double star flag
     bool variableStar;		// not implemented yet
     Vec3f XYZ;				// Cartesian position
-    Vec3f RGB;				// RGB colour values
-    int ChartColorIndex;
-    float MaxColorValue;	// Precalc of the max color value
-    Vec3d XY;				// 2D Position + z homogeneous value
+///    int ChartColorIndex;
 	float term1;			// Optimization term
 
 	string englishCommonName;	// English common Name of the star
     wstring commonNameI18;		// Common Name of the star
     wstring sciName;			// Scientific name incl constellation			
-    char SpType;			// Spectral type code
+    unsigned char type;			// Spectral type coded as number in [0..12]
 	float Distance;         // Distance from Earth in light years
 
 	static float twinkle_amount;

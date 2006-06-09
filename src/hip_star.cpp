@@ -50,17 +50,13 @@ Vec3f HipStar::ChartColors[20] =
 	Vec3f(0.00,0.00,0.00) /* S+*/,	Vec3f(0.50,0.50,0.50) /* Defualt */
 };
 
-HipStar::HipStar() :
+HipStar::HipStar(void) :
 	HP(0),
-	HD(0),
-	SAO(0),
+///	HD(0),
+///	SAO(0),
 	doubleStar(false),
 	variableStar(false)
 {
-}
-
-HipStar::~HipStar()
-{ 
 }
 
 wstring HipStar::getInfoString(const Navigator * nav) const
@@ -105,7 +101,7 @@ wstring HipStar::getInfoString(const Navigator * nav) const
 
 	oss << endl;
 
-	oss << _("Spectral Type: ") << SpType << endl;
+	oss << _("Spectral Type: ") << getSpectralType() << endl;
 	oss.precision(2);
 
 	return oss.str();
@@ -143,6 +139,33 @@ wstring HipStar::getShortInfoString(const Navigator * nav) const
 	return oss.str();
 }
 
+static const char spectral_type[13] = {
+  'O','B','A','F','G','K','M','R','S','N','W','X','?'
+};
+
+static Vec3f star_colors[12] = {
+  Vec3f(0.8 /1.3,  1.0 /1.3, 1.3 /1.3),
+  Vec3f(0.9 /1.2,  1.0 /1.2, 1.2 /1.2),
+  Vec3f(0.95/1.15, 1.0 /1.15,1.15/1.15),
+  Vec3f(1.05/1.05, 1.0 /1.05,1.05/1.05),
+  Vec3f(1.3 /1.3,  1.0 /1.3, 0.9 /1.3),
+  Vec3f(1.15/1.15, 0.95/1.15,0.8 /1.15),
+  Vec3f(1.15/1.15, 0.85/1.15,0.8 /1.15),
+  Vec3f(1.3 /1.3,  0.85/1.3, 0.6 /1.3),
+  Vec3f(1.5 /1.5,  0.8 /1.5, 0.2 /1.5),
+  Vec3f(1.5 /1.5,  0.8 /1.5, 0.2 /1.5),
+  Vec3f(1.5 /1.5,  0.8 /1.5, 0.2 /1.5),
+  Vec3f(1.0,  1.0, 1.0)
+};
+
+char HipStar::getSpectralType(void) const {
+  return spectral_type[type];
+}
+
+Vec3f HipStar::get_RGB(void) const {
+  return star_colors[type];
+}
+
 // Read datas in binary catalog and compute x,y,z;
 // The aliasing bug on some architecture has been fixed by Rainer Canavan on 26/11/2003
 int HipStar::read(FILE * catalog)
@@ -168,34 +191,16 @@ int HipStar::read(FILE * catalog)
 	Mag = (5. + mag) / 256.0;
 	if (Mag>250) Mag = Mag - 256;
 
-	unsigned char type;
 	fread(&type,1,1,catalog);
-	//	LE_TO_CPU_INT16(type, xtype);
+	if (type > 12) type = 12;
 
 	// Calc the Cartesian coord with RA and DE
     sphe_to_rect(RA,DE,XYZ);
 
     XYZ*=RADIUS_STAR;
 
-    switch(type)
-    {
-        case 0 : SpType = 'O'; break;
-        case 1 : SpType = 'B'; break;
-        case 2 : SpType = 'A'; break;
-        case 3 : SpType = 'F'; break;
-        case 4 : SpType = 'G'; break;
-        case 5 : SpType = 'K'; break;
-        case 6 : SpType = 'M'; break;
-        case 7 : SpType = 'R'; break;
-        case 8 : SpType = 'S'; break;
-        case 9 : SpType = 'N'; break;
-        case 10: SpType = 'W'; break; /* WC */
-        case 11: SpType = 'X'; break; /* WN */
-        case 12: SpType = '?'; break;
-        default: SpType = '?';
-    }
-
-	setColor(SpType); // Color depending on the spectral type
+	// Precomputation of a term used later
+	term1 = expf(-0.92103f*(Mag + 12.12331f)) * 108064.73f;
 
 	// distance
 	float LY;
@@ -213,13 +218,12 @@ int HipStar::read(FILE * catalog)
 
 }
 
-void HipStar::draw(void)
+void HipStar::draw(const Vec3d &XY)
 {
     // Compute the equivalent star luminance for a 5 arc min circle and convert it
 	// in function of the eye adaptation
-	float rmag = eye->adapt_luminance(term1);
-	rmag/=powf(proj->get_fov(),0.85f);
-	rmag*=70.f;
+	float rmag = eye->adapt_luminance(term1)
+               * powf(proj->get_fov(),-0.85f) * 70.f;
 	float cmag = 1.f;
 	
     // if size of star is too small (blink) we put its size to 1.2 --> no more blink
@@ -246,7 +250,7 @@ void HipStar::draw(void)
 	rmag*=star_scale;
 	cmag*=star_mag_scale;
 
-	glColor3fv(RGB*(cmag/MaxColorValue));
+	glColor3fv(star_colors[type]*cmag);
 
 	glBlendFunc(GL_ONE, GL_ONE);
 
@@ -258,7 +262,7 @@ void HipStar::draw(void)
     glEnd();
 }
 
-void HipStar::draw_point(void)
+void HipStar::draw_point(const Vec3d &XY)
 {
 	float cmag;
 	float rmag;
@@ -266,7 +270,7 @@ void HipStar::draw_point(void)
     // Compute the equivalent star luminance for a 5 arc min circle and convert it
 	// in function of the eye adaptation
 	rmag = eye->adapt_luminance(term1);
-	rmag = rmag/powf(proj->get_fov(),0.85f)*50.f;
+	rmag = rmag*powf(proj->get_fov(),-0.85f)*50.f;
 
     // if size of star is too small (blink) we put its size to 1.2 --> no more blink
     // And we compensate the difference of brighteness with cmag
@@ -278,7 +282,7 @@ void HipStar::draw_point(void)
     // Random coef for star twinkling
     cmag*=(1.-twinkle_amount*rand()/RAND_MAX);
 	cmag*=star_mag_scale;
-    glColor3fv(RGB*(cmag/MaxColorValue));
+    glColor3fv(star_colors[type]*cmag);
 
 	glBlendFunc(GL_ONE, GL_ONE);
 
@@ -291,14 +295,17 @@ void HipStar::draw_point(void)
 	glEnable(GL_TEXTURE_2D); // required for star labels to work
 }
 
-bool HipStar::draw_name(void)
+bool HipStar::draw_name(const Vec3d &XY)
 {   
 	wstring starname;
 
 	starname = getNameI18();
 	if (starname==L"") return false;
 	// if (draw_mode == DM_NORMAL) {
-		glColor4f(RGB[0]*0.75, RGB[1]*0.75, RGB[2]*0.75, names_brightness);
+		glColor4f(star_colors[type][0]*0.75,
+		          star_colors[type][1]*0.75,
+		          star_colors[type][2]*0.75,
+		          names_brightness);
 	// }
 	//else glColor3fv(label_color);
 
@@ -308,7 +315,21 @@ bool HipStar::draw_name(void)
 	return true;
 }
 
-void HipStar::draw_chart(void)
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+void HipStar::draw_chart(const Vec3d &XY)
 {
 	float r = Mag*-0.81+8.85;
 
@@ -437,47 +458,6 @@ bool HipStar::readHP(char *record, float maxmag)
 
 	return true;
 }
+*/
 
-// Color depending on the spectral type
 
-void HipStar::setColor(char sp)
-{
-	// Normal star colors
-    switch (sp)             // Color depending on the spectral type
-    {
-        case 'O':   RGB[0]=0.8f;  RGB[1]=1.0f; RGB[2]=1.3f;  break;
-        case 'B':   RGB[0]=0.9f;  RGB[1]=1.0f; RGB[2]=1.2f;  break;
-        case 'A':   RGB[0]=0.95f; RGB[1]=1.0f; RGB[2]=1.15f; break;
-        case 'F':   RGB[0]=1.05f; RGB[1]=1.0f; RGB[2]=1.05f; break;
-        case 'G':   RGB[0]=1.3f;  RGB[1]=1.0f; RGB[2]=0.9f;  break;
-        case 'K':   RGB[0]=1.15f; RGB[1]=0.95f;RGB[2]=0.8f;  break;
-        case 'M':   RGB[0]=1.15f; RGB[1]=0.85f;RGB[2]=0.8f;  break;
-        case 'C':   RGB[0]=1.3f;  RGB[1]=0.85f;RGB[2]=0.6f;  break;
-        case 'R':
-        case 'N':
-        case 'S':   RGB[0]=1.5f;  RGB[1]=0.8f; RGB[2]=0.2f;  break;
-        default :   RGB[0]=1.0f;  RGB[1]=1.0f; RGB[2]=1.0f;
-    }
-
-	// Precomputation of a term used later
-	term1 = expf(-0.92103f*(Mag + 12.12331f)) * 108064.73f;
-
-    MaxColorValue = MY_MAX(RGB[0],RGB[2]);
-
-	// chart star color
-    switch (sp)             // Color depending on the spectral type
-    {
-        case 'O':   ChartColorIndex = 14;  break;
-        case 'B':	ChartColorIndex = 1; break;
-        case 'A': 	ChartColorIndex = 0; break;
-        case 'F':	ChartColorIndex = 5; break;
-        case 'G':	ChartColorIndex = 6; break;
-        case 'K':	ChartColorIndex = 10; break;
-        case 'M':	ChartColorIndex = 12; break;
-        case 'C':	ChartColorIndex = 2; break;
-        case 'R':	ChartColorIndex = 17; break;
-        case 'N':	ChartColorIndex = 13; break;
-		case 'S':	ChartColorIndex = 18; break;
-        default :	ChartColorIndex = 20; break;
-    }
-}
