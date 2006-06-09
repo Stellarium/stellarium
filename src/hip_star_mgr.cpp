@@ -21,6 +21,7 @@
 
 #include <string>
 #include "hip_star_mgr.h"
+#include "hip_star.h"
 #include "s_texture.h"
 #include "grid.h"
 #include "bytes.h"
@@ -48,8 +49,8 @@ HipStarMgr::~HipStarMgr()
 	delete starTexture;
 	starTexture=NULL;
 
-	delete starcTexture;
-	starcTexture=NULL;
+///	delete starcTexture;
+///	starcTexture=NULL;
 	
 	delete HipStar::starFont;
 	HipStar::starFont=NULL;
@@ -64,6 +65,12 @@ HipStarMgr::~HipStarMgr()
 	StarFlatArray=NULL;
 }
 
+void HipStarMgr::setLabelColor(const Vec3f& c) {HipStar::label_color = c;}
+Vec3f HipStarMgr::getLabelColor(void) {return HipStar::label_color;}
+
+void HipStarMgr::setCircleColor(const Vec3f& c) {HipStar::circle_color = c;}
+Vec3f HipStarMgr::getCircleColor(void) {return HipStar::circle_color;}
+
 void HipStarMgr::init(float font_size, const string& font_name, const string& hipCatFile,
 	const string& commonNameFile, const string& sciNameFile, LoadingBar& lb)
 {
@@ -74,7 +81,7 @@ void HipStarMgr::init(float font_size, const string& font_name, const string& hi
     load_common_names(commonNameFile);
 	load_sci_names(sciNameFile);
 	
-	starcTexture = new s_texture("starc64x64.png",TEX_LOAD_TYPE_PNG_BLEND3);  // Load star chart texture
+///	starcTexture = new s_texture("starc64x64.png",TEX_LOAD_TYPE_PNG_BLEND3);  // Load star chart texture
 	starTexture = new s_texture("star16x16.png",TEX_LOAD_TYPE_PNG_SOLID);  // Load star texture
 
     HipStar::starFont = new s_font(font_size, font_name);
@@ -312,7 +319,7 @@ void HipStarMgr::draw(Vec3f equ_vision, ToneReproductor* eye, Projector* prj)
 	glBlendFunc(GL_ONE, GL_ONE);
 	//else glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // charting
 
-
+	Vec3d XY;
 	for(int i=0;i<nbZones;++i)
 	{
 		end = starZones[zoneList[i]].end();
@@ -321,24 +328,24 @@ void HipStarMgr::draw(Vec3f equ_vision, ToneReproductor* eye, Projector* prj)
 			h=*iter;
 			// If too small, skip and Compute the 2D position and check if in screen
 			if(h->Mag > maxMag) break;
-			if(!prj->project_j2000_check(h->XYZ, h->XY)) continue;
+			if(!prj->project_j2000_check(h->XYZ, XY)) continue;
 
 			// if (draw_mode == DM_NORMAL)	
 			//{
-				h->draw();
+				h->draw(XY);
 				if (names_fader.getInterstate() && h->Mag < maxMagStarName)
 				{
-					if (h->draw_name())
+					if (h->draw_name(XY))
 						glBindTexture (GL_TEXTURE_2D, starTexture->getID());
 				}
 			//}
 			//else
 // 			{
-// 				h->draw_chart();
+// 				h->draw_chart(XY);
 // 				if (names_fader.getInterstate() && h->Mag < maxMagStarName)
 // 				{
 // 					// need to rebind the star texture after font printing
-// 					if (h->draw_name())
+// 					if (h->draw_name(XY))
 // 						glBindTexture (GL_TEXTURE_2D, starcTexture->getID());
 // 				}
 // 			}
@@ -369,6 +376,7 @@ void HipStarMgr::drawPoint(Vec3f equ_vision, ToneReproductor* _eye, Projector* p
 	static vector<HipStar *>::iterator end;
 	static vector<HipStar *>::iterator iter;
 	HipStar* h;
+	Vec3d XY;
 	for(int i=0;i<nbZones;++i)
 	{
 		end = starZones[zoneList[i]].end();
@@ -377,11 +385,11 @@ void HipStarMgr::drawPoint(Vec3f equ_vision, ToneReproductor* _eye, Projector* p
 			h=*iter;
 			// If too small, skip and Compute the 2D position and check if in screen
 			if(h->Mag>maxMag) break;
-			if(!prj->project_j2000_check(h->XYZ, h->XY)) continue;
-			h->draw_point();
+			if(!prj->project_j2000_check(h->XYZ, XY)) continue;
+			h->draw_point(XY);
 			if (!h->commonNameI18.empty() && names_fader.getInterstate() && h->Mag<maxMagStarName)
 			{
-				h->draw_name();
+				h->draw_name(XY);
 				//				glBindTexture (GL_TEXTURE_2D, starTexture->getID());
 			}
 		}

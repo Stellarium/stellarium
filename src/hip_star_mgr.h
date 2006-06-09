@@ -23,13 +23,16 @@
 #include <vector>
 #include <map>
 #include <string>
-#include "hip_star.h"
 #include "grid.h"
 #include "fader.h"
 #include "loadingbar.h"
 #include "translator.h"
 
 using namespace std ;
+
+class StelObject;
+class HipStar;
+class ToneReproductor;
 
 class HipStarMgr  
 {
@@ -59,11 +62,11 @@ public:
 	// Return a stl vector containing the stars located inside the lim_fov circle around position v
 	vector<StelObject*> search_around(Vec3d v, double lim_fov) const;
 
-	void set_label_color(const Vec3f& c) {HipStar::label_color = c;}
-	Vec3f getLabelColor() {return HipStar::label_color;}
+	void setLabelColor(const Vec3f& c);
+	Vec3f getLabelColor(void);
 
-	void set_circle_color(const Vec3f& c) {HipStar::circle_color = c;}
-	Vec3f getCircleColor() {return HipStar::circle_color;}
+	void setCircleColor(const Vec3f& c);
+	Vec3f getCircleColor(void);
 	
 	/** Set display flag for Stars */
 	void setFlagStars(bool b) {starsFader=b;}
@@ -155,7 +158,7 @@ private:
 	int starArraySize;                  // Number of star in the array
 
 	s_texture *starTexture;				// star texture
-	s_texture *starcTexture;			// charted interior disc
+///	s_texture *starcTexture;			// charted interior disc
 
 	std::vector<HipStar*> common_names_map;
 	std::vector<HipStar*> sci_names_map;
