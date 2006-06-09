@@ -37,7 +37,9 @@ public:
 	void update(int delta_time, Navigator* nav);
 	
 	// Draw all the elements of the solar system
-    void draw(Projector * du, const Navigator * nav, 
+	// Return the maximum squared distance in pixels that any planet
+	// has travelled since the last update.
+    double draw(Projector * du, const Navigator * nav, 
 			  const ToneReproductor* eye, 
 			  bool flag_point);
 	

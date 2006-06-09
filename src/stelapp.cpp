@@ -111,6 +111,7 @@ void StelApp::init(void)
 	glClear(GL_COLOR_BUFFER_BIT);
 	
 	maxfps 				= conf.get_double ("video","maximum_fps",10000);
+	minfps 				= conf.get_double ("video","minimum_fps",10);
 	string appLocaleName = conf.get_str("localization", "app_locale", "system");
 	setAppLanguage(appLocaleName);
 	scripts->set_allow_ui( conf.get_boolean("gui","flag_script_allow_ui",0) );
@@ -195,15 +196,17 @@ void StelApp::update(int delta_time)
 }
 
 //! Main drawinf function called at each frame
-void StelApp::draw(int delta_time)
+double StelApp::draw(int delta_time)
 {
 	// Render all the main objects of stellarium
-	core->draw(delta_time);
+	double squaredDistance = core->draw(delta_time);
 
 	// Draw the Graphical ui and the Text ui
 	ui->draw();
 
     distorter->distort();
+
+    return squaredDistance;
 }
 
 //! @brief Set the application locale. This apply to GUI, console messages etc..

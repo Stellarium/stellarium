@@ -45,7 +45,9 @@ public:
 	void update(int delta_time);
 
 	//! Draw all
-	void draw(int delta_time);
+	// Return the max squared distance in pixels that any object has
+	// travelled since the last update.
+	double draw(int delta_time);
 
 	// Start the main loop until the end of the execution
 	void startMainLoop(void) {start_main_loop();}
@@ -63,6 +65,7 @@ public:
 	const string getConfigDir(void) const {return configDir;}
 	
 	const float getMaxFPS(void) const {return maxfps;}
+	const float getMinFPS(void) const {return minfps;}
 
 	//! Quit the application
 	void quit(void);
@@ -151,7 +154,7 @@ private:
 
 	int frame, timefr, timeBase;		// Used for fps counter
 	float fps;
-	float maxfps;
+	float minfps, maxfps;
 
 	int FlagTimePause;
 	double temp_time_velocity;			// Used to store time speed while in pause

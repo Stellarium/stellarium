@@ -27,7 +27,6 @@
 using namespace std;
 using namespace s_gui;
 
-bool EditBox::cursorVisible = false;
 EditBox * EditBox::activeEditBox = NULL;
 		
 void glCircle(const Vec3d& pos, float radius, float line_width)
@@ -1082,12 +1081,12 @@ wstring AutoCompleteString::getFirstOption(void)
 // we need to set this when actrivated, and only blink the active one
 
 EditBox::EditBox(const wstring& _label, s_font* font) 
-	: Button(), label(_label, font), isEditing(false), cursorPos(0)
+	: Button(), label(_label, font), isEditing(false), cursorPos(0),
+	cursorVisible(false), blinkTimerValid(false)
 {
 	Component::setSize(label.getSize()+s_vec2i(4,2));
 	text = _label;
 	lastText = text;
-    cursorVisible = false;
     setPrompt();
     type += CT_EDITBOX;
     autoFocus = true;
@@ -1095,7 +1094,10 @@ EditBox::EditBox(const wstring& _label, s_font* font)
 
 EditBox::~EditBox()
 {
-    SDL_SetTimer(0, NULL);
+	if (blinkTimerValid) {
+		SDL_RemoveTimer(blinkTimer);
+		blinkTimerValid = false;
+	}
 }
 
 bool EditBox::onClic(int x, int y, S_GUI_VALUE bt, S_GUI_VALUE state)
@@ -1179,17 +1181,14 @@ void EditBox::setVisible(bool _visible)
 }
 
 
-Uint32 toggleBlink(Uint32 interval)
+Uint32 toggleBlink(Uint32 interval, void *param)
 {
-     SDL_SetTimer(0, NULL);
-
-     if (EditBox::cursorVisible == true)
-        SDL_SetTimer(400, (SDL_TimerCallback)toggleBlink);
-     else
-        SDL_SetTimer(600, (SDL_TimerCallback)toggleBlink);
-     
-     EditBox::cursorVisible = !EditBox::cursorVisible;
-     return interval;
+	bool *cursorVisible = (bool *) param;
+	*cursorVisible = !*cursorVisible;
+	if (*cursorVisible == true)
+		return 600;
+	else
+		return 400;
 }
 
 void EditBox::setEditing(bool _editing)
@@ -1204,8 +1203,10 @@ void EditBox::setEditing(bool _editing)
 			activeEditBox->setEditing(false);
 		activeEditBox = this;
 
-//    	SDL_SetTimer(0, NULL);
-    	SDL_SetTimer(600, (SDL_TimerCallback)toggleBlink);
+		if (!blinkTimerValid) {
+			blinkTimer = SDL_AddTimer(600, toggleBlink, &cursorVisible);
+			blinkTimerValid = true;
+		}
 	}
 	else
 	{
@@ -1213,7 +1214,8 @@ void EditBox::setEditing(bool _editing)
 		cursorVisible = false;
 		autoComplete.reset();
 		activeEditBox = NULL;
-    	SDL_SetTimer(0, NULL);
+		SDL_RemoveTimer(blinkTimer);
+		blinkTimerValid = false;
 	}
 }
 
