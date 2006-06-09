@@ -23,6 +23,9 @@
 #include "stellastro.h"
 #include "stel_utility.h"
 
+#include "hip_star_mgr.h"
+#include "hip_star.h"
+#include "constellation.h"
 #include "telescope_mgr.h"
 
 void StelCore::setFlagTelescopes(bool b) {
@@ -890,8 +893,8 @@ void StelCore::setColorScheme(const string& skinFile, const string& section)
 	// Load colors from config file
 	nebulas->setLabelColor(StelUtility::str_to_vec3f(conf.get_str(section,"nebula_label_color", defaultColor)));
 	nebulas->setCircleColor(StelUtility::str_to_vec3f(conf.get_str(section,"nebula_circle_color", defaultColor)));
-	hip_stars->set_label_color(StelUtility::str_to_vec3f(conf.get_str(section,"star_label_color", defaultColor)));
-	hip_stars->set_circle_color(StelUtility::str_to_vec3f(conf.get_str(section,"star_circle_color", defaultColor)));
+	hip_stars->setLabelColor(StelUtility::str_to_vec3f(conf.get_str(section,"star_label_color", defaultColor)));
+	hip_stars->setCircleColor(StelUtility::str_to_vec3f(conf.get_str(section,"star_circle_color", defaultColor)));
 	telescope_mgr->set_label_color(StelUtility::str_to_vec3f(conf.get_str(section,"telescope_label_color", defaultColor)));
 	telescope_mgr->set_circle_color(StelUtility::str_to_vec3f(conf.get_str(section,"telescope_circle_color", defaultColor)));
 	ssystem->setLabelColor(StelUtility::str_to_vec3f(conf.get_str(section,"planet_names_color", defaultColor)));
@@ -1383,3 +1386,48 @@ void StelCore::setFlagTracking(bool b) {
 	}
 
 }
+
+
+
+
+
+
+void StelCore::setFlagStars(bool b) {hip_stars->setFlagStars(b);}
+bool StelCore::getFlagStars(void) const {return hip_stars->getFlagStars();}
+
+void StelCore::setFlagStarName(bool b) {hip_stars->setFlagStarName(b);}
+bool StelCore::getFlagStarName(void) const {return hip_stars->getFlagStarName();}
+
+void StelCore::setFlagStarSciName(bool b) {hip_stars->setFlagStarSciName(b);}
+bool StelCore::getFlagStarSciName(void) const {return hip_stars->getFlagStarSciName();}	
+
+void StelCore::setFlagStarTwinkle(bool b) {hip_stars->setFlagStarTwinkle(b);}
+bool StelCore::getFlagStarTwinkle(void) const {return hip_stars->getFlagStarTwinkle();}	
+
+void StelCore::setFlagPointStar(bool b) {hip_stars->setFlagPointStar(b);}
+bool StelCore::getFlagPointStar(void) const {return hip_stars->getFlagPointStar();}	
+
+void StelCore::setMaxMagStarName(float f) {hip_stars->setMaxMagStarName(f);}
+float StelCore::getMaxMagStarName(void) const {return hip_stars->getMaxMagStarName();}	
+
+void StelCore::setMaxMagStarSciName(float f) {hip_stars->setMaxMagStarSciName(f);}
+float StelCore::getMaxMagStarSciName(void) const {return hip_stars->getMaxMagStarSciName();}	
+
+void StelCore::setStarScale(float f) {hip_stars->setStarScale(f);}
+float StelCore::getStarScale(void) const {return hip_stars->getStarScale();}			
+
+void StelCore::setStarMagScale(float f) {hip_stars->setStarMagScale(f);}
+float StelCore::getStarMagScale(void) const {return hip_stars->getStarMagScale();}
+
+void StelCore::setStarTwinkleAmount(float f) {hip_stars->setStarTwinkleAmount(f);}
+float StelCore:: getStarTwinkleAmount(void) const {return hip_stars->getStarTwinkleAmount();}
+
+void StelCore::setStarLimitingMag(float f) {hip_stars->setStarLimitingMag(f);}
+float StelCore::getStarLimitingMag(void) const {return hip_stars->getStarLimitingMag();}
+
+
+Vec3f StelCore::getColorStarNames(void) const {return hip_stars->getLabelColor();}			
+Vec3f StelCore::getColorStarCircles(void) const {return hip_stars->getCircleColor();}			
+
+void StelCore::setColorStarNames(const Vec3f& v) {hip_stars->setLabelColor(v);}
+void StelCore::setColorStarCircles(const Vec3f& v) {hip_stars->setCircleColor(v);}

@@ -20,6 +20,8 @@
 #include <iostream>
 #include <algorithm>
 #include "constellation.h"
+#include "hip_star_mgr.h"
+#include "hip_star.h"
 
 bool Constellation::gravityLabel = false;
 
@@ -268,10 +270,11 @@ HipStar* Constellation::getBrightestStar(void) const
 	HipStar * brightest = NULL;
 	for(unsigned int i=0;i<nb_segments;++i)
     {
-		if (asterism[2*i]->Mag < maxMag)
+		const float Mag = asterism[2*i]->get_mag();
+		if (Mag < maxMag)
 		{
 			brightest = asterism[2*i];
-			maxMag = brightest->Mag;
+			maxMag = Mag;
 		}
 	}
 	return brightest;
