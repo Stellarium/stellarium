@@ -152,6 +152,9 @@ public:
 	inline void unproject_earth_equ(double x, double y, Vec3d& v) const
 		{unproject(x, y, inv_mat_earth_equ_to_eye, v);}
 
+	inline void unproject_j2000(double x, double y, Vec3d& v) const
+		{unproject(x, y, inv_mat_j2000_to_eye, v);}
+
 	// taking account of precession
 	inline bool project_j2000(const Vec3d& v, Vec3d& win) const
 		{return project_custom(v, win, mat_j2000_to_eye);}
@@ -284,6 +287,7 @@ protected:
 	Mat4d mat_helio_to_eye;			// Modelview Matrix for earth equatorial projection
 	Mat4d mat_local_to_eye;			// Modelview Matrix for earth equatorial projection
 	Mat4d inv_mat_earth_equ_to_eye;	// Inverse of mat_projection*mat_earth_equ_to_eye
+	Mat4d inv_mat_j2000_to_eye;		// Inverse of mat_projection*mat_earth_equ_to_eye
 	Mat4d inv_mat_helio_to_eye;		// Inverse of mat_projection*mat_helio_to_eye
 	Mat4d inv_mat_local_to_eye;		// Inverse of mat_projection*mat_local_to_eye
 	
