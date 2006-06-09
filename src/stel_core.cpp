@@ -60,7 +60,8 @@ StelCore::StelCore(const string& LDIR, const string& DATA_ROOT) :
 	dataRoot = DATA_ROOT;
 	
 	projection = Projector::create(Projector::PERSPECTIVE_PROJECTOR, Vec4i(0,0,800,600), 60);
-                                   
+	glFrontFace(projection->needGlFrontFaceCW()?GL_CW:GL_CCW);
+
 	tone_converter = new ToneReproductor();
 	atmosphere = new Atmosphere();
 	hip_stars = new HipStarMgr();
@@ -974,6 +975,17 @@ void StelCore::setProjectionType(const string& sptype)
 	ptemp->setFlagGravityLabels(projection->getFlagGravityLabels());
 	delete projection;
 	projection = ptemp;
+	glFrontFace(projection->needGlFrontFaceCW()?GL_CW:GL_CCW);
+}
+
+void StelCore::setFlipHorz(bool flip) {
+  projection->setFlipHorz(flip);
+  glFrontFace(projection->needGlFrontFaceCW()?GL_CW:GL_CCW);
+}
+
+void StelCore::setFlipVert(bool flip) {
+  projection->setFlipVert(flip);
+  glFrontFace(projection->needGlFrontFaceCW()?GL_CW:GL_CCW);
 }
 
 void StelCore::turn_right(int s)
