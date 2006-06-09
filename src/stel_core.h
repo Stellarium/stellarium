@@ -165,7 +165,7 @@ public:
 	//! Set automove duration in seconds
 	void setAutomoveDuration(float f) {auto_move_duration = f;}
 	//! Get automove duration in seconds
-	float getAutomoveDuration(void) {return auto_move_duration;}
+	float getAutomoveDuration(void) const {return auto_move_duration;}
 	
 	//! Zoom to the given FOV (in degree)
 	void zoomTo(double aim_fov, float move_duration = 1.) {projection->zoom_to(aim_fov, move_duration);}
@@ -174,7 +174,7 @@ public:
 	float getFov(void) const {return projection->get_fov();}
 	
     //! If is currently zooming, return the target FOV, otherwise return current FOV
-    double getAimFov(void) {return projection->getAimFov();}	
+	double getAimFov(void) const {return projection->getAimFov();}	
 	
 	//! Set the current FOV (in degree)
 	void setFov(double f) {projection->set_fov(f);}
@@ -514,7 +514,7 @@ public:
 	//! Set whether a disk mask must be drawn over the viewport
 	void setViewportMaskDisk(void) {projection->setMaskType(Projector::DISK);}
 	//! Get whether a disk mask must be drawn over the viewport
-	bool getViewportMaskDisk(void) {return projection->getMaskType()==Projector::DISK;}
+	bool getViewportMaskDisk(void) const {return projection->getMaskType()==Projector::DISK;}
 	
 	//! Set whether no mask must be drawn over the viewport
 	void setViewportMaskNone(void) {projection->setMaskType(Projector::NONE);}
@@ -522,7 +522,13 @@ public:
 	//! Set the projection type
 	void setProjectionType(const string& ptype);
 	//! Get the projection type
-	string getProjectionType(void) {return Projector::typeToString(projection->getType());}
+	string getProjectionType(void) const {return Projector::typeToString(projection->getType());}
+	
+	//! get/set horizontal/vertical image flip
+	bool getFlipHorz(void) const {return projection->getFlipHorz();}
+	bool getFlipVert(void) const {return projection->getFlipVert();}
+	void setFlipHorz(bool flip);
+	void setFlipVert(bool flip);
 	
 	//! Set flag for enabling gravity labels
 	void setFlagGravityLabels(bool b) {projection->setFlagGravityLabels(b);}
