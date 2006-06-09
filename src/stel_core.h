@@ -69,7 +69,9 @@ public:
 
 	//! Execute all the drawing functions
 	//! @param delta_time the time increment in ms.
-	void draw(int delta_time);
+	// Returns the max squared distance in pixels any single object has
+	// moved since the previous update.
+	double draw(int delta_time);
 	
 	//! Get the name of the directory containing the data
 	const string getDataDir(void) const {return dataRoot + "/data/";}

@@ -131,7 +131,9 @@ public:
 	float compute_magnitude(const Navigator * nav) const;
 
 	// Draw the Planet, if hint_ON is != 0 draw a circle and the name as well
-	void draw(Projector* prj, const Navigator* nav, const ToneReproductor* eye, 
+	// Return the squared distance in pixels between the current and the
+	// previous position this planet was drawn at.
+	double draw(Projector* prj, const Navigator* nav, const ToneReproductor* eye, 
 		  int flag_point, bool stencil);
 
 	// Set the orbital elements
@@ -241,6 +243,7 @@ protected:
 	Vec3d ecliptic_pos; 			// Position in UA in the rectangular ecliptic coordinate system
 									// centered on the parent Planet
 	Vec3d screenPos;				// Used to store temporarily the 2D position on screen
+	Vec3d previousScreenPos;			// The position of this planet in the previous frame.
 	Vec3f color;
 	float albedo;					// Planet albedo
 	Mat4d rot_local_to_parent;

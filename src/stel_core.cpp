@@ -368,7 +368,7 @@ void StelCore::update(int delta_time)
 }
 
 // Execute all the drawing functions
-void StelCore::draw(int delta_time)
+double StelCore::draw(int delta_time)
 {
 	// Init openGL viewing with fov, screen size and clip planes
 	projection->set_clipping_planes(0.000001 ,50);
@@ -420,7 +420,7 @@ void StelCore::draw(int delta_time)
 	if (selected_object && object_pointer_visibility) selected_object->draw_pointer(delta_time, projection, navigation);
 
 	// Draw the planets
-	ssystem->draw(projection, navigation, tone_converter, getFlagPointStar());
+	double squaredDistance = ssystem->draw(projection, navigation, tone_converter, getFlagPointStar());
 
 	// Set openGL drawings in local coordinates i.e. generally altazimuthal coordinates
 	navigation->switch_to_local();
@@ -454,6 +454,8 @@ void StelCore::draw(int delta_time)
 	projection->reset_perspective_projection();
 
 	projection->draw_viewport_shape();
+
+	return squaredDistance;
 }
 
 bool StelCore::setLandscape(const string& new_landscape_name)
