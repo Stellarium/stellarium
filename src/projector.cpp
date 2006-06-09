@@ -189,6 +189,7 @@ void Projector::set_modelview_matrices(	const Mat4d& _mat_earth_equ_to_eye,
 	mat_local_to_eye = _mat_local_to_eye;
 
 	inv_mat_earth_equ_to_eye = (mat_projection*mat_earth_equ_to_eye).inverse();
+	inv_mat_j2000_to_eye = (mat_projection*mat_j2000_to_eye).inverse();
 	inv_mat_helio_to_eye = (mat_projection*mat_helio_to_eye).inverse();
 	inv_mat_local_to_eye = (mat_projection*mat_local_to_eye).inverse();	
 }
