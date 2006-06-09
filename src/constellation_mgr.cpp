@@ -23,8 +23,10 @@
 #include <fstream>
 #include <vector>
 
-#include "constellation.h"
 #include "constellation_mgr.h"
+#include "constellation.h"
+#include "hip_star_mgr.h"
+#include "hip_star.h"
 #include "stel_utility.h"
 
 // constructor which loads all data from appropriate files
@@ -59,6 +61,17 @@ ConstellationMgr::~ConstellationMgr()
 	}
 	allBoundarySegments.clear();
 }
+
+void ConstellationMgr::setFlagGravityLabel(bool g) {Constellation::gravityLabel = g;}
+
+void ConstellationMgr::setLineColor(const Vec3f& c) {Constellation::lineColor = c;}
+Vec3f ConstellationMgr::getLineColor() const {return Constellation::lineColor;}
+
+void ConstellationMgr::setBoundaryColor(const Vec3f& c) {Constellation::boundaryColor = c;}
+Vec3f ConstellationMgr::getBoundaryColor() const {return Constellation::boundaryColor;}
+
+void ConstellationMgr::setLabelColor(const Vec3f& c) {Constellation::labelColor = c;}
+Vec3f ConstellationMgr::getLabelColor() const {return Constellation::labelColor;}
 
 void ConstellationMgr::setFont(float font_size, const string& ttfFileName)
 {
@@ -600,6 +613,11 @@ void ConstellationMgr::drawBoundaries(Projector * prj) const
 		(*iter)->draw_boundary_optim(prj);
 	}
 	glDisable(GL_LINE_STIPPLE);
+}
+
+unsigned int ConstellationMgr::getFirstSelectedHP(void) {
+  if (selected) return selected->asterism[0]->get_hp_number();
+  return 0;
 }
 
 //! Return the matching constellation object's pointer if exists or NULL

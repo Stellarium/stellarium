@@ -20,12 +20,15 @@
 #ifndef _CONSTELLATION_H_
 #define _CONSTELLATION_H_
 
-#include "hip_star_mgr.h"
 #include "stellarium.h"
+#include "stel_object.h"
 #include "stel_utility.h"
 #include "s_font.h"
 #include "fader.h"
 #include <vector>
+
+class HipStar;
+class HipStarMgr;
 
 class Constellation : public StelObject
 {

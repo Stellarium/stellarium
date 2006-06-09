@@ -31,7 +31,6 @@
 #include "observator.h"
 #include "projector.h"
 #include "stel_object.h"
-#include "hip_star_mgr.h"
 #include "constellation_mgr.h"
 #include "nebula_mgr.h"
 #include "stel_atmosphere.h"
@@ -313,63 +312,65 @@ public:
 	///////////////////////////////////////////////////////////////////////////////////////
 	// Stars methods
 	//! Set display flag for Stars 
-	void setFlagStars(bool b) {hip_stars->setFlagStars(b);}
+	void setFlagStars(bool b);
 	//! Get display flag for Stars 
-	bool getFlagStars(void) const {return hip_stars->getFlagStars();}
+	bool getFlagStars(void) const;
 		
 	//! Set display flag for Star names. Also make sure that stars are on if want labels 
-	void setFlagStarName(bool b) {hip_stars->setFlagStarName(b);}
+	void setFlagStarName(bool b);
 	//! Get display flag for Star names 
-	bool getFlagStarName(void) const {return hip_stars->getFlagStarName();}
+	bool getFlagStarName(void) const;
 	
 	//! Set display flag for Star Scientific names 
-	void setFlagStarSciName(bool b) {hip_stars->setFlagStarSciName(b);}
+	void setFlagStarSciName(bool b);
 	//! Get display flag for Star Scientific names 
-	bool getFlagStarSciName(void) const {return hip_stars->getFlagStarSciName();}	
+	bool getFlagStarSciName(void) const;
 	
 	//! Set flag for Star twinkling 
-	void setFlagStarTwinkle(bool b) {hip_stars->setFlagStarTwinkle(b);}
+	void setFlagStarTwinkle(bool b);
 	//! Get flag for Star twinkling 
-	bool getFlagStarTwinkle(void) const {return hip_stars->getFlagStarTwinkle();}	
+	bool getFlagStarTwinkle(void) const;
 		
 	//! Set flag for displaying Star as GLpoints (faster but not so nice) 
-	void setFlagPointStar(bool b) {hip_stars->setFlagPointStar(b);}
+	void setFlagPointStar(bool b);
 	//! Get flag for displaying Star as GLpoints (faster but not so nice) 
-	bool getFlagPointStar(void) const {return hip_stars->getFlagPointStar();}	
+	bool getFlagPointStar(void) const;
 	
 	//! Set maximum magnitude at which stars names are displayed 
-	void setMaxMagStarName(float f) {hip_stars->setMaxMagStarName(f);}
+	void setMaxMagStarName(float f);
 	//! Get maximum magnitude at which stars names are displayed 
-	float getMaxMagStarName(void) const {return hip_stars->getMaxMagStarName();}	
+	float getMaxMagStarName(void) const;
 	
 	//! Set maximum magnitude at which stars scientific names are displayed 
-	void setMaxMagStarSciName(float f) {hip_stars->setMaxMagStarSciName(f);}
+	void setMaxMagStarSciName(float f);
 	//! Get maximum magnitude at which stars scientific names are displayed 
-	float getMaxMagStarSciName(void) const {return hip_stars->getMaxMagStarSciName();}	
+	float getMaxMagStarSciName(void) const;
 		
 	//! Set base stars display scaling factor 
-	void setStarScale(float f) {hip_stars->setStarScale(f);}
+	void setStarScale(float f);
 	//! Get base stars display scaling factor 
-	float getStarScale(void) const {return hip_stars->getStarScale();}			
+	float getStarScale(void) const;
 	
 	//! Set stars display scaling factor wrt magnitude 
-	void setStarMagScale(float f) {hip_stars->setStarMagScale(f);}
+	void setStarMagScale(float f);
 	//! Get base stars display scaling factor wrt magnitude 
-	float getStarMagScale(void) const {return hip_stars->getStarMagScale();}
+	float getStarMagScale(void) const;
 
 	//! Set stars twinkle amount 
-	void setStarTwinkleAmount(float f) {hip_stars->setStarTwinkleAmount(f);}
+	void setStarTwinkleAmount(float f);
 	//! Get stars twinkle amount 
-	float getStarTwinkleAmount(void) const {return hip_stars->getStarTwinkleAmount();}
+	float getStarTwinkleAmount(void) const;
 	
 	//! Set stars limiting display magnitude 
-	void setStarLimitingMag(float f) {hip_stars->setStarLimitingMag(f);}
+	void setStarLimitingMag(float f);
 	//! Get stars limiting display magnitude 
-	float getStarLimitingMag(void) const {return hip_stars->getStarLimitingMag();}
+	float getStarLimitingMag(void) const;
 	
 
-	Vec3f getColorStarNames(void) const {return hip_stars->getLabelColor();}			
-	Vec3f getColorStarCircles(void) const {return hip_stars->getCircleColor();}			
+	Vec3f getColorStarNames(void) const;
+	Vec3f getColorStarCircles(void) const;
+	void setColorStarNames(const Vec3f &v);
+	void setColorStarCircles(const Vec3f &v);
 
 	///////////////////////////////////////////////////////////////////////////////////////
 	// Planets flags
@@ -475,8 +476,6 @@ public:
 	// Colors
 
 	void setColorConstellationBoundaries(const Vec3f& v) { asterisms->setBoundaryColor(v);}
-	// void setColorStarNames(const Vec3f& v) { hip_stars->setLabelColor(v);}			
-	// void setColorStarCircles(const Vec3f& v) { hip_stars->setCircleColor(v);}			
 	void setColorPlanetsOrbits(const Vec3f& v) { ssystem->setOrbitColor(v);}
 	void setColorPlanetsNames(const Vec3f& v) { ssystem->setLabelColor(v);}
 	void setColorPlanetsTrails(const Vec3f& v) { ssystem->setTrailColor(v);}			
@@ -689,7 +688,7 @@ private:
 	Observator * observatory;			// Manage observer position
 	Projector * projection;				// Manage the projection mode and matrix
 	StelObject * selected_object;		// The selected object in stellarium
-	HipStarMgr * hip_stars;				// Manage the hipparcos stars
+	class HipStarMgr * hip_stars;		// Manage the hipparcos stars
 	ConstellationMgr * asterisms;		// Manage constellations (boundaries, names etc..)
 	NebulaMgr * nebulas;				// Manage the nebulas
 	SolarSystem* ssystem;				// Manage the solar system
