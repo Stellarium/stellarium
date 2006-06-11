@@ -515,6 +515,15 @@ void LandscapeSpherical::draw(ToneReproductor * eye, const Projector* prj, const
 	if(!valid_landscape) return;
 	if(!land_fader.getInterstate()) return;
 
+	// Need to flip texture usage horizontally due to glusphere convention
+	// so that left-right is consistent in source texture and rendering
+	glMatrixMode(GL_TEXTURE);
+	glPushMatrix();
+	glLoadIdentity();
+	glScalef(-1,1,1);
+	glTranslatef(-1,0,0);
+	glMatrixMode(GL_MODELVIEW);
+
 	// Normal transparency mode
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
@@ -530,5 +539,9 @@ void LandscapeSpherical::draw(ToneReproductor * eye, const Projector* prj, const
 	prj->sSphere(radius,1.0,40,20, nav->get_local_to_eye_mat(), 1);
 
 	glDisable(GL_CULL_FACE);
+
+	glMatrixMode(GL_TEXTURE);
+	glPopMatrix();
+	glMatrixMode(GL_MODELVIEW);
 }
 
