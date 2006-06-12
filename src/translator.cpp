@@ -102,7 +102,7 @@ static wchar_t *UTF8_to_UNICODE(wchar_t *unicode, const char *utf8, int len)
 					ch |=  (unsigned short)(utf8[++i]&0x3F);
 				}
 
-#ifdef WORDS_BIGENDIAN
+#if 0 //def WORDS_BIGENDIAN
 		unicode[j] = bswap_16(ch);
 #else
 		unicode[j] = ch;

@@ -168,21 +168,23 @@ Vec3f HipStar::get_RGB(void) const {
 
 // Read datas in binary catalog and compute x,y,z;
 // The aliasing bug on some architecture has been fixed by Rainer Canavan on 26/11/2003
+// Really ? -- JB, 20060607
 int HipStar::read(FILE * catalog)
 {
-	float RA=0, DE=0, xDE, xRA;
-	fread(&xRA,4,1,catalog);
-	LE_TO_CPU_FLOAT(RA, xRA);
+	union { float fl; unsigned int ui; } RA, DE, LY, xRA, xDE, xLY;
 
-	fread(&xDE,4,1,catalog);
-	LE_TO_CPU_FLOAT(DE, xDE);
+	fread(&xRA.ui,4,1,catalog);
+	LE_TO_CPU_INT32(RA.ui, xRA.ui);
+
+	fread(&xDE.ui,4,1,catalog);
+	LE_TO_CPU_INT32(DE.ui, xDE.ui);
 
 	// for debug printing
-	//	float rao = RA;
-	//  float deo = DE;
+	//	float rao = RA.fl;
+	//  float deo = DE.fl;
      
-    RA*=M_PI/12.;     // Convert from hours to rad
-    DE*=M_PI/180.;    // Convert from deg to rad
+    RA.fl*=M_PI/12.;     // Convert from hours to rad
+    DE.fl*=M_PI/180.;    // Convert from deg to rad
 
 	unsigned short int mag, xmag;
 	fread(&xmag,2,1,catalog);
@@ -195,7 +197,7 @@ int HipStar::read(FILE * catalog)
 	if (type > 12) type = 12;
 
 	// Calc the Cartesian coord with RA and DE
-    sphe_to_rect(RA,DE,XYZ);
+    sphe_to_rect(RA.fl,DE.fl,XYZ);
 
     XYZ*=RADIUS_STAR;
 
@@ -203,9 +205,9 @@ int HipStar::read(FILE * catalog)
 	term1 = expf(-0.92103f*(Mag + 12.12331f)) * 108064.73f;
 
 	// distance
-	float LY;
-	fread(&LY,4,1,catalog);
-	LE_TO_CPU_FLOAT(Distance, LY);
+	fread(&xLY.ui,4,1,catalog);
+	LE_TO_CPU_INT32(LY.ui, xLY.ui);
+	Distance = LY.fl;
 
 	if (mag==0 && type==0) return 0;
 
