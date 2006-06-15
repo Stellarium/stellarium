@@ -1826,6 +1826,13 @@ TextLabel::~TextLabel()
 void TextLabel::setLabel(const wstring& _label)
 {
 	label = _label;
+	string::size_type pos;
+	while ((pos = label.find(L"\\n", 0)))
+	{
+		if (pos==string::npos) break;
+		label.replace(pos, 2, L"\n");
+	}
+	
     childs.clear();
 
     Label * tempLabel;

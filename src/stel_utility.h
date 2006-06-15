@@ -36,6 +36,13 @@ typedef wstringHash_t::const_iterator wstringHashIter_t;
 
 class StelUtility {
 public:
+
+	//! Dummy wrapper used to remove a boring warning when using strftime directly
+	static size_t my_strftime(char *s, size_t max, const char *fmt, const struct tm *tm)
+	{
+		return strftime(s, max, fmt, tm);
+	}
+
 	//! @brief Convert an angle in hms format to radian
 	//! @param h hour component
 	//! @param m minute component
@@ -94,6 +101,17 @@ public:
 	//! @param i The input int value
 	//! @return The matching wstring
 	static wstring intToWstring(int i);
+	
+	//! Return the number of hours to add to gmt time to get the local time at time JD
+	//! taking the parameters from system. This takes into account the daylight saving
+	//! time if there is. (positive for Est of GMT)
+	static float get_GMT_shift_from_system(double JD, bool _local=0);
+	
+	//! Return the time zone name taken from system locale
+	static wstring get_time_zone_name_from_system(double JD);
+	
+	//! Return the time in ISO 8601 UTC format that is : %Y-%m-%d %H:%M:%S
+	static string get_ISO8601_time_UTC(double JD);
 };
 
 double hms_to_rad(unsigned int h, double m);

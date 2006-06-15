@@ -21,6 +21,7 @@
 #include <math.h> // fmod
 #include <sstream>
 #include <cstdlib>
+#include <ctime>
 
 #if defined( CYGWIN )
  #include <malloc.h>
@@ -29,6 +30,8 @@
 #include "stel_utility.h"
 #include "stellarium.h"
 #include "translator.h"
+#include "stellastro.h"
+
 
 wstring StelUtility::stringToWstring(const string& s)
 {
@@ -499,3 +502,94 @@ int fcompare(const wstring& _base, const wstring& _sub)
 	return 0;
 }
 
+
+// Return the time zone name taken from system locale
+wstring StelUtility::get_time_zone_name_from_system(double JD)
+{
+	// Windows will crash if date before 1970
+	// And no changes on Linux before that year either
+	// TODO: ALSO, on Win XP timezone never changes anyway??? 
+	if(JD < 2440588 ) JD = 2440588;
+
+	// The timezone name depends on the day because of the summer time
+	time_t rawtime = get_time_t_from_julian(JD);
+
+	struct tm * timeinfo;
+	timeinfo = localtime(&rawtime);
+	static char timez[255];
+	timez[0] = 0;
+	StelUtility::my_strftime(timez, 254, "%Z", timeinfo);
+	return StelUtility::stringToWstring(timez);
+}
+
+
+// Return the number of hours to add to gmt time to get the local time in day JD
+// taking the parameters from system. This takes into account the daylight saving
+// time if there is. (positive for Est of GMT)
+// TODO : %z in strftime only works on GNU compiler
+// Fixed 31-05-2004 Now use the extern variables set by tzset()
+float StelUtility::get_GMT_shift_from_system(double JD, bool _local)
+{
+	/* Doesn't seem like MACOSX is a special case... ??? rob
+    #if defined( MACOSX ) || defined(WIN32)
+	struct tm *timeinfo;
+	time_t rawtime; time(&rawtime);
+	timeinfo = localtime(&rawtime);
+	return (float)timeinfo->tm_gmtoff/3600 + (timeinfo->tm_isdst!=0); 
+	#else */
+
+#if !defined(MINGW32)
+
+	struct tm * timeinfo;
+
+	if(!_local)
+	{
+		// JD is UTC
+		struct tm rawtime;
+		get_tm_from_julian(JD, &rawtime);
+		
+#ifdef HAVE_TIMEGM
+		time_t ltime = timegm(&rawtime);
+#else
+		// This does not work
+		time_t ltime = my_timegm(&rawtime);
+#endif
+		
+		timeinfo = localtime(&ltime);
+	} else {
+	  time_t rtime;
+	  rtime = get_time_t_from_julian(JD);
+	  timeinfo = localtime(&rtime);
+	}
+
+	static char heure[20];
+	heure[0] = '\0';
+
+	my_strftime(heure, 19, "%z", timeinfo);
+	//	cout << heure << endl;
+
+	//cout << timezone << endl;
+	
+	heure[5] = '\0';
+	float min = 1.f/60.f * atoi(&heure[3]);
+	heure[3] = '\0';
+	return min + atoi(heure);
+#else
+     struct tm *timeinfo;
+     time_t rawtime;
+     time(&rawtime);
+     timeinfo = localtime(&rawtime);
+     return -(float)timezone/3600 + (timeinfo->tm_isdst!=0);
+#endif
+}
+
+// Return the time in ISO 8601 format that is : %Y-%m-%d %H:%M:%S
+string StelUtility::get_ISO8601_time_UTC(double JD)
+{
+	struct tm time_utc;
+	get_tm_from_julian(JD, &time_utc);
+
+	static char isotime[255];
+	my_strftime(isotime, 254, "%Y-%m-%d %H:%M:%S", &time_utc);
+	return isotime;
+}

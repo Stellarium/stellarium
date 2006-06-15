@@ -419,7 +419,7 @@ Component* StelUI::createConfigWindow(void)
 	lbllandscapes1->setPos(x, y);
 	tab_landscapes->addComponent(lbllandscapes1);
 
-	x=50; y+=24;
+	x=30; y+=24;
 
 	landscape_sl = new StringList();
 	landscape_sl->setPos(x,y);
@@ -431,9 +431,14 @@ Component* StelUI::createConfigWindow(void)
 	tab_landscapes->addComponent(landscape_sl);
 
 	landscape_authorlb = new Label(_("Author: ") + StelUtility::stringToWstring(core->getLandscapeAuthorName()));
-	landscape_authorlb->setPos(x+landscape_sl->getSizex()+30, y); 
+	landscape_authorlb->setPos(x+landscape_sl->getSizex()+20, y); 
 	landscape_authorlb->adjustSize();
 	tab_landscapes->addComponent(landscape_authorlb);
+	
+	landscape_descriptionlb = new TextLabel(StelUtility::stringToWstring(core->getLandscapeDescription()));
+	landscape_descriptionlb->setPos(x+landscape_sl->getSizex()+20, y+25); 
+	landscape_descriptionlb->adjustSize();
+	tab_landscapes->addComponent(landscape_descriptionlb);	
 	
 	y+=150;	
 
@@ -881,7 +886,7 @@ void StelUI::setLandscape(void)
 {
 	core->setLandscape(Landscape::nameToKey(core->getDataDir() + "landscapes.ini", landscape_sl->getValue()));
 	landscape_authorlb->setLabel(_("Author: ") + Translator::UTF8stringToWstring(core->getLandscapeAuthorName()));
-	landscape_authorlb->adjustSize();
+	landscape_descriptionlb->setLabel(_("Info: ") + Translator::UTF8stringToWstring(core->getLandscapeDescription()));
 }
 
 void StelUI::updateVideoVariables(void)
@@ -976,9 +981,9 @@ void StelUI::updateConfigForm(void)
 		waitOnLocation = false;
 	}
 
-	time_current->setJDay(core->getJDay() + core->getObservatory().get_GMT_shift(core->getJDay())*JD_HOUR);
+	time_current->setJDay(core->getJDay() + app->get_GMT_shift(core->getJDay())*JD_HOUR);
 	system_tz_lbl2->setLabel(L"(" +
-		 core->getObservatory().get_time_zone_name_from_system(core->getJDay()) + L")");
+		StelUtility::get_time_zone_name_from_system(core->getJDay()) + L")");
 
 	time_speed_lbl2->setLabel(wstring(L"\u2022 ")+_("Current Time Speed is x") + StelUtility::doubleToWstring(core->getTimeSpeed()/JD_SECOND));
 
