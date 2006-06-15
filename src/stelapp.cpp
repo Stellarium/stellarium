@@ -166,6 +166,7 @@ void StelApp::init(void)
 	
 	if (StartupTimeMode=="preset" || StartupTimeMode=="Preset")
 		core->setJDay(PresetSkyTime - get_GMT_shift(PresetSkyTime) * JD_HOUR);
+	else core->setTimeNow();
 
 	// initialisation of the User Interface
 	
@@ -184,8 +185,6 @@ void StelApp::init(void)
     if (distorter == 0) {
       setViewPortDistorterType(conf.get_str("video","distorter","none"));
     }
-
-    core->setTimeNow();
 
 	// play startup script, if available
 	if(scripts) scripts->play_startup_script();
