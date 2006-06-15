@@ -299,6 +299,7 @@ private:
 	void setLandscape(void);
 	void saveLandscapeOption(void);
 	Label* landscape_authorlb;
+	TextLabel* landscape_descriptionlb;
 	
 	// Language options
 	ListBox* language_lb;

@@ -635,8 +635,6 @@ public:
 		observatory->move_to(lat, lon, alt, delay, name);
 	}
 
-	void setCustomTimezone(string _time_zone) { observatory->set_custom_tz_name(_time_zone); }
-	
 	//! Set Meteor Rate in number per hour
 	void setMeteorsRate(int f) {meteors->set_ZHR(f);}
 	//! Get Meteor Rate in number per hour

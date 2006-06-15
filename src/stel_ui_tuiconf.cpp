@@ -45,8 +45,7 @@ void StelUI::draw_gravity_ui(void)
 		double jd = core->getJDay();
 		wostringstream os;
 
-		os << core->getObservatory().get_printable_date_local(jd) << L" " <<
-		core->getObservatory().get_printable_time_local(jd);
+		os << app->get_printable_date_local(jd) << L" " << app->get_printable_time_local(jd);
 
 		// label location if not on earth
 		if(core->getObservatory().getHomePlanetEnglishName() != "Earth") {
@@ -138,7 +137,7 @@ void StelUI::init_tui(void)
 	tui_time_skytime->set_OnChangeCallback(callback<void>(this, &StelUI::tui_cb_sky_time));
 	tui_time_settmz = new s_tui::Time_zone_item(core->getDataDir() + "zone.tab", wstring(L"2.2 ") );
 	tui_time_settmz->set_OnChangeCallback(callback<void>(this, &StelUI::tui_cb_settimezone));
-	tui_time_settmz->settz(core->getObservatory().get_custom_tz_name());
+	tui_time_settmz->settz(app->get_custom_tz_name());
 	tui_time_presetskytime = new s_tui::Time_item(wstring(L"2.3 ") );
 	tui_time_presetskytime->set_OnChangeCallback(callback<void>(this, &StelUI::tui_cb1));
 	tui_time_startuptime = new s_tui::MultiSet2_item<wstring>(wstring(L"2.4 ") );
@@ -482,13 +481,12 @@ void StelUI::tui_update_widgets(void)
 	tui_location_planet->setValue(StelUtility::stringToWstring(core->getObservatory().getHomePlanetEnglishName()));
 
 	// 2. Date & Time
-	tui_time_skytime->setJDay(core->getJDay() + 
-				  core->getObservatory().get_GMT_shift(core->getJDay())*JD_HOUR);
-	tui_time_settmz->settz(core->getObservatory().get_custom_tz_name());
+	tui_time_skytime->setJDay(core->getJDay() + app->get_GMT_shift(core->getJDay())*JD_HOUR);
+	tui_time_settmz->settz(app->get_custom_tz_name());
 	tui_time_presetskytime->setJDay(app->PresetSkyTime);
 	tui_time_startuptime->setCurrent(StelUtility::stringToWstring(app->StartupTimeMode));
-	tui_time_displayformat->setCurrent(StelUtility::stringToWstring(core->getObservatory().get_time_format_str()));
-	tui_time_dateformat->setCurrent(StelUtility::stringToWstring(core->getObservatory().get_date_format_str()));
+	tui_time_displayformat->setCurrent(StelUtility::stringToWstring(app->get_time_format_str()));
+	tui_time_dateformat->setCurrent(StelUtility::stringToWstring(app->get_date_format_str()));
 
 	// 3. general
 	tui_general_sky_culture->setValue(StelUtility::stringToWstring(core->getSkyCultureDir()));
@@ -555,14 +553,14 @@ void StelUI::tui_cb_settimezone(void)
 {
 	// Don't call the script anymore coz it's pointless
 	// system( ( core->getDataDir() + "script_set_time_zone " + tui_time_settmz->getCurrent() ).c_str() );
-	core->getObservatory().set_custom_tz_name(tui_time_settmz->gettz());
+	app->set_custom_tz_name(tui_time_settmz->gettz());
 }
 
 // Set time format mode
 void StelUI::tui_cb_settimedisplayformat(void)
 {
-	core->getObservatory().set_time_format_str(StelUtility::wstringToString(tui_time_displayformat->getCurrent()));
-	core->getObservatory().set_date_format_str(StelUtility::wstringToString(tui_time_dateformat->getCurrent()));
+	app->set_time_format_str(StelUtility::wstringToString(tui_time_displayformat->getCurrent()));
+	app->set_date_format_str(StelUtility::wstringToString(tui_time_dateformat->getCurrent()));
 }
 
 // 7. Administration actions functions
