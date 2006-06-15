@@ -135,7 +135,7 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 				stcore->setNebulaCircleScale(scale);
 			} 
 		else if(args["star_twinkle_amount"]!="") stcore->setStarTwinkleAmount(str_to_double(args["star_twinkle_amount"]));
-		else if(args["time_zone"]!="") stcore->setCustomTimezone(args["time_zone"]);
+		else if(args["time_zone"]!="") stapp->setCustomTimezone(args["time_zone"]);
 		else if(args["milky_way_intensity"]!="") {
 			stcore->setMilkyWayIntensity(str_to_double(args["milky_way_intensity"]));
 			// safety feature to be able to turn back on
@@ -292,9 +292,6 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 		} else status=0;
     
 	} else if(command == "date") {
-	  
-		Observator observatory = stcore->getObservatory();
-
 		// ISO 8601-like format [[+/-]YYYY-MM-DD]Thh:mm:ss (no timzone offset, T is literal)
 		if(args["local"]!="") {
 			double jd;
@@ -302,12 +299,12 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 
 			if(args["local"][0] == 'T') {
 				// set time only (don't change day)
-				string sky_date = observatory.get_ISO8601_time_local(stcore->getJDay());
+				string sky_date = stapp->get_ISO8601_time_local(stcore->getJDay());
 				new_date = sky_date.substr(0,10) + args["local"];
 			} else new_date = args["local"];
 
 			if(string_to_jday( new_date, jd ) ) {
-				stcore->setJDay(jd - observatory.get_GMT_shift(jd) * JD_HOUR);
+				stcore->setJDay(jd - stapp->get_GMT_shift(jd) * JD_HOUR);
 			} else {
 				debug_message = _("Error parsing date.");
 				status = 0;
@@ -333,7 +330,7 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 			// TODO: should this record as the actual date used?
 			if (stapp->StartupTimeMode=="preset" || stapp->StartupTimeMode=="Preset")
 				stcore->setJDay(stapp->PresetSkyTime -
-											 observatory.get_GMT_shift(stapp->PresetSkyTime) * JD_HOUR);
+											 stapp->get_GMT_shift(stapp->PresetSkyTime) * JD_HOUR);
 			else stcore->setJDay(get_julian_from_sys());
 
 		} else status=0;

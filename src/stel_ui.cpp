@@ -278,14 +278,14 @@ void StelUI::updateTopBar(void)
 
 	if (FlagShowDate)
 	{
-		top_bar_date_lbl->setLabel(core->getObservatory().get_printable_date_local(jd));
+		top_bar_date_lbl->setLabel(app->get_printable_date_local(jd));
 		top_bar_date_lbl->adjustSize();
 	}
 	top_bar_date_lbl->setVisible(FlagShowDate);
 
 	if (FlagShowTime)
 	{
-		top_bar_hour_lbl->setLabel(core->getObservatory().get_printable_time_local(jd));
+		top_bar_hour_lbl->setLabel(app->get_printable_time_local(jd));
 		top_bar_hour_lbl->adjustSize();
 	}
 	top_bar_hour_lbl->setVisible(FlagShowTime);
