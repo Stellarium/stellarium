@@ -723,20 +723,23 @@ wstring(_("During Script Playback:\n\
 CTRL + C : End Script\n\
 6   : pause script              K   : resume script\n\
 \n")) + 
-wstring(_("Misc:\n\
-9   : Toggle meteor shower rates\n")) + wstring(
+wstring(_("Misc:\n"
+"9   : Toggle meteor shower rates\n"
+"CTRL + 0,..,9 : execute GOTO command for telescope 0,..,9\n"
+"CTRL + SHIFT + H: toggle horizontal image flipping\n"
+"CTRL + SHIFT + V: toggle vertical image flipping\n"
 #ifndef MACOSX
-	                      _("CTRL + Q : Quit\n")
+"CTRL + Q : Quit\n"
 #else
-	                      _("CMD + Q  : Quit\n")
+"CMD + Q  : Quit\n"
 #endif
-	                  ),courierFont);
+	                  )),courierFont);
 
 	//	help_txtlbl->adjustSize();
 	help_txtlbl->setPos(10,10);
 	help_win = new StdBtWin(_("Help"));
 	help_win->setOpaque(opaqueGUI);
-	help_win->reshape(215,70,580,600);
+	help_win->reshape(215,70,580,624);
 	help_win->addComponent(help_txtlbl);
 	help_win->setVisible(FlagHelp);
 	help_win->setOnHideBtCallback(callback<void>(this, &StelUI::help_win_hideBtCallback));
@@ -888,37 +891,26 @@ int StelUI::handle_clic(Uint16 x, Uint16 y, S_GUI_VALUE button, S_GUI_VALUE stat
 
 
 /*******************************************************************************/
-int StelUI::handle_keys(Uint16 key, S_GUI_VALUE state)
+
+// mac seems to use KMOD_META instead of KMOD_CTRL
+#ifdef MACOSX
+  #define COMPATIBLE_KMOD_CTRL KMOD_META
+#else
+  #define COMPATIBLE_KMOD_CTRL KMOD_CTRL
+#endif
+
+
+int StelUI::handle_keys(SDLKey key, SDLMod mod, Uint16 unicode, S_GUI_VALUE state)
 {
 
-	if (desktop->onKey(key, state))
+	if (desktop->onKey(unicode, state))
 		return 1;
 
 	if (state==S_GUI_PRESSED)
 	{
 
-		if (SDL_GetModState() & KMOD_CTRL) { // Ctrl
-			switch (key) {
-				case SDLK_0:core->telescopeGoto(0);return 0;
-				case SDLK_1:core->telescopeGoto(1);return 0;
-				case SDLK_2:core->telescopeGoto(2);return 0;
-				case SDLK_3:core->telescopeGoto(3);return 0;
-				case SDLK_4:core->telescopeGoto(4);return 0;
-				case SDLK_5:core->telescopeGoto(5);return 0;
-				case SDLK_6:core->telescopeGoto(6);return 0;
-				case SDLK_7:core->telescopeGoto(7);return 0;
-				case SDLK_8:core->telescopeGoto(8);return 0;
-				case SDLK_9:core->telescopeGoto(9);return 0;
-			}
-		}
-
-#ifndef MACOSX
-		if(key==0x0011)
-		{ // CTRL-Q
-#else
-		if (key == SDLK_q && SDL_GetModState() & KMOD_META)
+		if (key == SDLK_q && (mod & COMPATIBLE_KMOD_CTRL))
 		{
-#endif
 			app->quit();
 		}
 
@@ -941,7 +933,7 @@ int StelUI::handle_keys(Uint16 key, S_GUI_VALUE state)
 				app->commander->execute_command( "script action resume");
 				app->time_multiplier = 1;
 			}
-			else if(key==SDLK_7 || key==0x0003 || (key==SDLK_m && FlagEnableTuiMenu))
+			else if(key==SDLK_7 || unicode==0x0003 || (key==SDLK_m && FlagEnableTuiMenu))
 			{  // ctrl-c
 				// TODO: should double check with user here...
 				app->commander->execute_command( "script action end");
@@ -1002,13 +994,8 @@ int StelUI::handle_keys(Uint16 key, S_GUI_VALUE state)
 
 		}
 
-#ifndef MACOSX
-		if(key==0x0012)
-		{ // CTRL-R
-#else
-		if (key == SDLK_r && SDL_GetModState() & KMOD_META)
+		if (key == SDLK_r && (mod & COMPATIBLE_KMOD_CTRL))
 		{
-#endif
 			if(app->scripts->is_recording())
 			{
 				app->commander->execute_command( "script action cancelrecord");
@@ -1029,186 +1016,251 @@ int StelUI::handle_keys(Uint16 key, S_GUI_VALUE state)
 					show_message(_("Error: Unable to open script file to record commands."), 3000);
 				}
 			}
+            return 0;
 		}
 
-		// RFE 1310384, ESC closes dialogs
-		if(key==SDLK_ESCAPE)
-		{
-			// close search mode
-			FlagSearch=false;
-			search_win->setVisible(FlagSearch);
+        switch (key) {
+          case SDLK_ESCAPE:
+	        // RFE 1310384, ESC closes dialogs
+	        // close search mode
+	        FlagSearch=false;
+	        search_win->setVisible(FlagSearch);
 
-			// close config dialog
-			FlagConfig = false;
-			config_win->setVisible(FlagConfig);
+	        // close config dialog
+	        FlagConfig = false;
+	        config_win->setVisible(FlagConfig);
 
-			// close help dialog
-			FlagHelp = false;
-			help_win->setVisible(FlagHelp);
+	        // close help dialog
+	        FlagHelp = false;
+	        help_win->setVisible(FlagHelp);
 
-			// close information dialog
-			FlagInfos = false;
-			licence_win->setVisible(FlagInfos);
-		}
-		// END RFE 1310384
+	        // close information dialog
+	        FlagInfos = false;
+	        licence_win->setVisible(FlagInfos);
+	        // END RFE 1310384
+            break;
+		  case SDLK_0:
+            if (mod & COMPATIBLE_KMOD_CTRL)
+              core->telescopeGoto(0);
+            break;
+		  case SDLK_1:
+            if (mod & COMPATIBLE_KMOD_CTRL) {
+              core->telescopeGoto(1);
+            } else {
+              FlagConfig=!FlagConfig;
+              config_win->setVisible(FlagConfig);
+            }
+            break;
+		  case SDLK_2:
+            if (mod & COMPATIBLE_KMOD_CTRL)
+              core->telescopeGoto(2);
+            break;
+		  case SDLK_3:
+            if (mod & COMPATIBLE_KMOD_CTRL)
+              core->telescopeGoto(3);
+            break;
+		  case SDLK_4:
+            if (mod & COMPATIBLE_KMOD_CTRL) {
+              core->telescopeGoto(4);
+              break;
+            } // else fall through
+          case SDLK_COMMA:
+            if(!core->getFlagEclipticLine())
+            {
+                app->commander->execute_command( "flag ecliptic_line on");
+            }
+            else if( !core->getFlagPlanetsTrails())
+            {
+                app->commander->execute_command( "flag object_trails on");
+                core->startPlanetsTrails(true);
+            }
+            else
+            {
+                app->commander->execute_command( "flag object_trails off");
+                core->startPlanetsTrails(false);
+                app->commander->execute_command( "flag ecliptic_line off");
+            }
+            break;
+		  case SDLK_5:
+            if (mod & COMPATIBLE_KMOD_CTRL) {
+              core->telescopeGoto(5);
+              break;
+            } // else fall through
+          case SDLK_PERIOD:
+            app->commander->execute_command( "flag equator_line toggle");
+            break;
+		  case SDLK_6:
+            if (mod & COMPATIBLE_KMOD_CTRL)
+              core->telescopeGoto(6);
+            break;
+		  case SDLK_7:
+            if (mod & COMPATIBLE_KMOD_CTRL)
+              core->telescopeGoto(7);
+            break;
+		  case SDLK_8:
+            if (mod & COMPATIBLE_KMOD_CTRL)
+              core->telescopeGoto(8);
+            break;
+		  case SDLK_9:
+            if (mod & COMPATIBLE_KMOD_CTRL) {
+              core->telescopeGoto(9);
+            } else {
+              const int zhr = core->getMeteorsRate();
+              if (zhr <= 10 ) {
+                app->commander->execute_command("meteors zhr 80");  // standard Perseids rate
+              } else if( zhr <= 80 ) {
+                app->commander->execute_command("meteors zhr 10000"); // exceptional Leonid rate
+              } else if( zhr <= 10000 ) {
+                app->commander->execute_command("meteors zhr 144000");  // highest ever recorded ZHR (1966 Leonids)
+              } else {
+                app->commander->execute_command("meteors zhr 10");  // set to default base rate (10 is normal, 0 would be none)
+              }
+            }
+            break;
 
-#ifndef MACOSX
-		if(key==0x0006)
-		{ // CTRL-f
-#else
-		if (key == SDLK_f && SDL_GetModState() & KMOD_META)
-		{
-#endif
-			FlagSearch = !FlagSearch;
-			search_win->setVisible(FlagSearch);
-		}
+          case SDLK_h:
+            if (mod & COMPATIBLE_KMOD_CTRL) {
+//                Fabien wants to toggle
+//              core->setFlipHorz(mod & KMOD_SHIFT);
+              if (mod & KMOD_SHIFT) {
+                core->setFlipHorz(!core->getFlipHorz());
+              }
+            } else {
+              FlagHelp=!FlagHelp;
+              help_win->setVisible(FlagHelp);
+            }
+            break;
+          case SDLK_v:
+            if (mod & COMPATIBLE_KMOD_CTRL) {
+//                Fabien wants to toggle
+//              core->setFlipVert(mod & KMOD_SHIFT);
+              if (mod & KMOD_SHIFT) {
+                core->setFlipVert(!core->getFlipVert());
+              }
+            } else {
+              app->commander->execute_command( "flag constellation_names toggle");
+            }
+            break;
 
-		if(key==SDLK_r) app->commander->execute_command( "flag constellation_art toggle");
+          case SDLK_f:
+            if (mod & COMPATIBLE_KMOD_CTRL) {
+              FlagSearch = !FlagSearch;
+              search_win->setVisible(FlagSearch);
+            } else {
+              app->commander->execute_command( "flag fog toggle");
+            }
+          break;
 
+          case SDLK_r:
+            app->commander->execute_command( "flag constellation_art toggle");
+            break;
+          case SDLK_c:
+            app->commander->execute_command( "flag constellation_drawing toggle");
+            break;
+          case SDLK_b:
+            app->commander->execute_command( "flag constellation_boundaries toggle");
+            break;
+          case SDLK_d:
+            app->commander->execute_command( "flag star_names toggle");
+            break;
+          case SDLK_p:
+            if(!core->getFlagPlanetsHints())
+            {
+                app->commander->execute_command("flag planet_names on");
+            }
+            else if( !core->getFlagPlanetsOrbits())
+            {
+                app->commander->execute_command("flag planet_orbits on");
+            }
+            else
+            {
+                app->commander->execute_command("flag planet_orbits off");
+                app->commander->execute_command("flag planet_names off");
+            }
+            break;
+          case SDLK_z:
+            if (core->getFlagMeridianLine()) {
+              app->commander->execute_command( "flag meridian_line 0");
+              app->commander->execute_command( "flag azimuthal_grid 1");
+            } else {
+              if (core->getFlagAzimutalGrid()) app->commander->execute_command( "flag azimuthal_grid 0");
+              else app->commander->execute_command( "flag meridian_line 1");
+            }
+            break;
+          case SDLK_e:
+            app->commander->execute_command( "flag equatorial_grid toggle");
+            break;
+          case SDLK_n:
+            app->commander->execute_command( "flag nebula_names toggle");
+            break;
+          case SDLK_g:
+            app->commander->execute_command( "flag landscape toggle");
+            break;
+          case SDLK_q:
+            app->commander->execute_command( "flag cardinal_points toggle");
+            break;
+          case SDLK_a:
+            app->commander->execute_command( "flag atmosphere toggle");
+            break;
 
-		if(key=='c') app->commander->execute_command( "flag constellation_drawing toggle");
-		if(key=='b') app->commander->execute_command( "flag constellation_boundaries toggle");
+          case SDLK_t:
+            core->setFlagLockSkyPosition(!core->getFlagLockSkyPosition());
+            break;
+          case SDLK_s:
+            if (!(mod & COMPATIBLE_KMOD_CTRL))
+              app->commander->execute_command( "flag stars toggle");
+            break;
+          case SDLK_SPACE:
+            app->commander->execute_command("flag track_object on");
+            break;
+          case SDLK_i:
+            FlagInfos=!FlagInfos;
+            licence_win->setVisible(FlagInfos);
+            break;
+          case SDLK_EQUALS:
+            app->commander->execute_command( "date relative 1");
+            break;
+          case SDLK_MINUS:
+            app->commander->execute_command( "date relative -1");
+            break;
+          case SDLK_m:
+            if (FlagEnableTuiMenu) FlagShowTuiMenu = true;  // not recorded
+            break;
+          case SDLK_o:
+            app->commander->execute_command( "flag moon_scaled toggle");
+            break;
+          case SDLK_LEFTBRACKET:
+            app->commander->execute_command( "date relative -7");
+            break;
+          case SDLK_RIGHTBRACKET:
+            app->commander->execute_command( "date relative 7");
+            break;
+          case SDLK_SLASH:
+            if (mod & COMPATIBLE_KMOD_CTRL) {
+              app->commander->execute_command( "zoom auto out");
+            } else {
+              // here we help script recorders by selecting the right type of zoom option
+              // based on current settings of manual or full auto zoom
+              if(core->getFlagManualAutoZoom()) app->commander->execute_command( "zoom auto in manual 1");
+              else app->commander->execute_command( "zoom auto in");
+            }
+            break;
+          case SDLK_BACKSLASH:
+            app->commander->execute_command( "zoom auto out");
+            break;
+          case SDLK_x:
+            app->commander->execute_command( "flag show_tui_datetime toggle");
 
-		if(key=='d') app->commander->execute_command( "flag star_names toggle");
-
-		if(key==SDLK_1)
-		{
-			FlagConfig=!FlagConfig;
-			config_win->setVisible(FlagConfig);
-		}
-		if(key==SDLK_p)
-		{
-			if(!core->getFlagPlanetsHints())
-			{
-				app->commander->execute_command("flag planet_names on");
-			}
-			else if( !core->getFlagPlanetsOrbits())
-			{
-				app->commander->execute_command("flag planet_orbits on");
-			}
-			else
-			{
-				app->commander->execute_command("flag planet_orbits off");
-				app->commander->execute_command("flag planet_names off");
-			}
-		}
-		if(key==SDLK_v) app->commander->execute_command( "flag constellation_names toggle");
-		if(key==SDLK_z)
-		{
-			if(!core->getFlagMeridianLine())
-			{
-				if(core->getFlagAzimutalGrid()) app->commander->execute_command( "flag azimuthal_grid 0");
-				else app->commander->execute_command( "flag meridian_line 1");
-			}
-			else
-			{
-				app->commander->execute_command( "flag meridian_line 0");
-				app->commander->execute_command( "flag azimuthal_grid 1");
-			}
-		}
-		if(key==SDLK_e) app->commander->execute_command( "flag equatorial_grid toggle");
-
-		if(key==SDLK_n) app->commander->execute_command( "flag nebula_names toggle");
-
-		if(key==SDLK_g) app->commander->execute_command( "flag landscape toggle");
-		if(key==SDLK_f) app->commander->execute_command( "flag fog toggle");
-		if(key==SDLK_q) app->commander->execute_command( "flag cardinal_points toggle");
-		if(key==SDLK_a) app->commander->execute_command( "flag atmosphere toggle");
-
-		if(key==SDLK_h)
-		{
-			FlagHelp=!FlagHelp;
-			help_win->setVisible(FlagHelp);
-		}
-		if(key==SDLK_COMMA || key==SDLK_4)
-		{
-			if(!core->getFlagEclipticLine())
-			{
-				app->commander->execute_command( "flag ecliptic_line on");
-			}
-			else if( !core->getFlagPlanetsTrails())
-			{
-				app->commander->execute_command( "flag object_trails on");
-				core->startPlanetsTrails(true);
-			}
-			else
-			{
-				app->commander->execute_command( "flag object_trails off");
-				core->startPlanetsTrails(false);
-				app->commander->execute_command( "flag ecliptic_line off");
-			}
-		}
-		if(key==SDLK_PERIOD || key==SDLK_5) app->commander->execute_command( "flag equator_line toggle");
-
-		if(key==SDLK_t)
-		{
-			core->setFlagLockSkyPosition(!core->getFlagLockSkyPosition());
-		}
-		if(key==SDLK_s && !(SDL_GetModState() & KMOD_CTRL))
-			app->commander->execute_command( "flag stars toggle");
-
-		if(key==SDLK_SPACE) app->commander->execute_command("flag track_object on");
-
-		if(key==SDLK_i)
-		{
-			FlagInfos=!FlagInfos;
-			licence_win->setVisible(FlagInfos);
-		}
-		if(key==SDLK_EQUALS) app->commander->execute_command( "date relative 1");
-		if(key==SDLK_MINUS) app->commander->execute_command( "date relative -1");
-
-		if(key==SDLK_m && FlagEnableTuiMenu) FlagShowTuiMenu = true;  // not recorded
-
-		if(key==SDLK_o) app->commander->execute_command( "flag moon_scaled toggle");
-
-		if(key==SDLK_9)
-		{
-			int zhr = core->getMeteorsRate();
-
-			if(zhr <= 10 )
-			{
-				app->commander->execute_command("meteors zhr 80");  // standard Perseids rate
-			}
-			else if( zhr <= 80 )
-			{
-				app->commander->execute_command("meteors zhr 10000"); // exceptional Leonid rate
-			}
-			else if( zhr <= 10000 )
-			{
-				app->commander->execute_command("meteors zhr 144000");  // highest ever recorded ZHR (1966 Leonids)
-			}
-			else
-			{
-				app->commander->execute_command("meteors zhr 10");  // set to default base rate (10 is normal, 0 would be none)
-			}
-		}
-
-		if(key==SDLK_LEFTBRACKET) app->commander->execute_command( "date relative -7");
-		if(key==SDLK_RIGHTBRACKET) app->commander->execute_command( "date relative 7");
-		if(key==SDLK_SLASH)
-		{
-			if (SDL_GetModState() & KMOD_CTRL)  app->commander->execute_command( "zoom auto out");
-			else
-			{
-				// here we help script recorders by selecting the right type of zoom option
-				// based on current settings of manual or full auto zoom
-				if(core->getFlagManualAutoZoom()) app->commander->execute_command( "zoom auto in manual 1");
-				else app->commander->execute_command( "zoom auto in");
-			}
-		}
-		if(key==SDLK_BACKSLASH) app->commander->execute_command( "zoom auto out");
-		if(key==SDLK_x)
-		{
-			app->commander->execute_command( "flag show_tui_datetime toggle");
-
-			// keep these in sync.  Maybe this should just be one flag.
-			if(FlagShowTuiDateTime) app->commander->execute_command( "flag show_tui_short_obj_info on");
-			else app->commander->execute_command( "flag show_tui_short_obj_info off");
-		}
-		if(key==SDLK_RETURN)
-		{
-			core->toggleMountMode();
-		}
+              // keep these in sync.  Maybe this should just be one flag.
+            if(FlagShowTuiDateTime) app->commander->execute_command( "flag show_tui_short_obj_info on");
+            else app->commander->execute_command( "flag show_tui_short_obj_info off");
+            break;
+          case SDLK_RETURN:
+            core->toggleMountMode();
+            break;
+          default:
+            break;
+        }
 	}
 	return 0;
 }
