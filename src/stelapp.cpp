@@ -300,7 +300,8 @@ int StelApp::handleMove(int x, int y)
 }
 
 // Handle key press and release
-int StelApp::handleKeys(Uint16 key, s_gui::S_GUI_VALUE state)
+int StelApp::handleKeys(SDLKey key, SDLMod mod,
+                        Uint16 unicode, s_gui::S_GUI_VALUE state)
 {
 	s_tui::S_TUI_VALUE tuiv;
 	if (state == s_gui::S_GUI_PRESSED) tuiv = s_tui::S_TUI_PRESSED;
@@ -322,11 +323,11 @@ int StelApp::handleKeys(Uint16 key, s_gui::S_GUI_VALUE state)
 			SelectedScriptDirectory = SelectedScript = "";
 			return 1;
 		}
-		if (ui->handle_keys_tui(key, tuiv)) return 1;
+		if (ui->handle_keys_tui(unicode, tuiv)) return 1;
 		return 1;
 	}
 
-	if (ui->handle_keys(key, state)) return 1;
+	if (ui->handle_keys(key, mod, unicode, state)) return 1;
 
 	if (state == S_GUI_PRESSED)
 	{
@@ -335,12 +336,12 @@ int StelApp::handleKeys(Uint16 key, s_gui::S_GUI_VALUE state)
 		if (key==SDLK_RIGHT) core->turn_right(1);
 		if (key==SDLK_UP)
 		{
-			if (SDL_GetModState() & KMOD_CTRL) core->zoom_in(1);
+			if (mod & KMOD_CTRL) core->zoom_in(1);
 			else core->turn_up(1);
 		}
 		if (key==SDLK_DOWN)
 		{
-			if (SDL_GetModState() & KMOD_CTRL) core->zoom_out(1);
+			if (mod & KMOD_CTRL) core->zoom_out(1);
 			else core->turn_down(1);
 		}
 		if (key==SDLK_PAGEUP) core->zoom_in(1);
@@ -351,7 +352,7 @@ int StelApp::handleKeys(Uint16 key, s_gui::S_GUI_VALUE state)
 		// When a deplacement key is released stop mooving
 		if (key==SDLK_LEFT) core->turn_left(0);
 		if (key==SDLK_RIGHT) core->turn_right(0);
-		if (SDL_GetModState() & KMOD_CTRL)
+		if (mod & KMOD_CTRL)
 		{
 			if (key==SDLK_UP) core->zoom_in(0);
 			if (key==SDLK_DOWN) core->zoom_out(0);

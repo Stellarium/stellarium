@@ -56,7 +56,7 @@ public:
 	// Handle mouse move
 	int handle_move(int x, int y);
 	// Handle key press and release
-	int handle_keys(Uint16 key, S_GUI_VALUE state);
+	int handle_keys(SDLKey key, SDLMod mod, Uint16 unicode, S_GUI_VALUE state);
 
 	// Text UI
 	void init_tui(void);
