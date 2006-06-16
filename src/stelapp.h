@@ -85,7 +85,8 @@ public:
 	// Handle mouse move
 	int handleMove(int x, int y);
 	// Handle key press and release
-	int handleKeys(Uint16 key, s_gui::S_GUI_VALUE state);
+	int handleKeys(SDLKey key, SDLMod mod,
+	               Uint16 unicode, s_gui::S_GUI_VALUE state);
 
 	const string getConfigDir(void) const {return configDir;}
 	
