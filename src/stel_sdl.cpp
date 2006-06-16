@@ -329,7 +329,7 @@ void StelApp::start_main_loop()
 					// Send the event to the gui and stop if it has been intercepted
 
 					/*
-					printf("key pressed: ");
+					printf("key(%d 0x%04x) pressed: ",E.key.keysym.sym,E.key.keysym.mod);
 					if( E.key.keysym.unicode < 0x80 && E.key.keysym.unicode > 0 ){
 						printf( "%c (0x%04X)\n", (char)E.key.keysym.unicode,
 								E.key.keysym.unicode );
@@ -341,8 +341,8 @@ void StelApp::start_main_loop()
 
 					// use unicode translation, since not keyboard dependent
 					// however, for non-printing keys must revert to just keysym... !
-					if ((E.key.keysym.unicode && !handleKeys(E.key.keysym.unicode,S_GUI_PRESSED)) ||
-						(!E.key.keysym.unicode && !handleKeys(E.key.keysym.sym,S_GUI_PRESSED)))
+					if ((E.key.keysym.unicode && !handleKeys(E.key.keysym.sym,E.key.keysym.mod,E.key.keysym.unicode,S_GUI_PRESSED)) ||
+						(!E.key.keysym.unicode && !handleKeys(E.key.keysym.sym,E.key.keysym.mod,E.key.keysym.sym,S_GUI_PRESSED)))
 					{
 
 						/* Fumio patch... can't use because ignores unicode values and hence is US keyboard specific.
@@ -423,7 +423,7 @@ void StelApp::start_main_loop()
 					break;
 
 				case SDL_KEYUP:
-					handleKeys(E.key.keysym.sym,S_GUI_RELEASED);
+					handleKeys(E.key.keysym.sym,E.key.keysym.mod,E.key.keysym.sym,S_GUI_RELEASED);
 			}
 		}
 		else  // No events to poll
