@@ -61,6 +61,8 @@ StelUI::StelUI(StelCore * _core, StelApp * _app) :
 		bt_flag_search(NULL),
 		bt_script(NULL),
 		bt_flag_goto(NULL),
+		bt_flip_horz(NULL),
+		bt_flip_vert(NULL),
 		bt_flag_help_lbl(NULL),
 		info_select_ctr(NULL),
 		info_select_txtlbl(NULL),
@@ -213,7 +215,7 @@ void StelUI::init(const InitParser& conf)
 	desktop->addComponent(message_win);
 
 	desktop->addComponent(createTopBar());
-	desktop->addComponent(createFlagButtons());
+	desktop->addComponent(createFlagButtons(conf));
 	desktop->addComponent(createTimeControlButtons());
 	desktop->addComponent(bt_flag_help_lbl);
 	desktop->addComponent(bt_flag_time_control_lbl);
@@ -315,7 +317,7 @@ void StelUI::updateTopBar(void)
 #define UI_PADDING 5
 #define UI_BT 25
 #define UI_SCRIPT_BAR 300
-Component* StelUI::createFlagButtons(void)
+Component* StelUI::createFlagButtons(const InitParser &conf)
 {
 	int x = 0;
 
@@ -404,6 +406,16 @@ Component* StelUI::createFlagButtons(void)
 	bt_flag_ctr->addComponent(bt_flag_nebula_name);		bt_flag_nebula_name->setPos(x,0); x+=UI_BT;
 	bt_flag_ctr->addComponent(bt_flag_equatorial_mode);	bt_flag_equatorial_mode->setPos(x,0);x+=UI_BT;
 	bt_flag_ctr->addComponent(bt_flag_goto);			bt_flag_goto->setPos(x,0); x+=UI_BT;
+	if (conf.get_boolean("gui","flag_show_flip_buttons",false)) {
+		bt_flip_horz = new FlagButton(true, NULL, "bt_flip_horz.png");
+		bt_flip_horz->setOnPressCallback(callback<void>(this, &StelUI::cb));
+		bt_flip_horz->setOnMouseInOutCallback(callback<void>(this, &StelUI::cbr));
+		bt_flag_ctr->addComponent(bt_flip_horz);		bt_flip_horz->setPos(x,0); x+=UI_BT;
+		bt_flip_vert = new FlagButton(true, NULL, "bt_flip_vert.png");
+		bt_flip_vert->setOnPressCallback(callback<void>(this, &StelUI::cb));
+		bt_flip_vert->setOnMouseInOutCallback(callback<void>(this, &StelUI::cbr));
+		bt_flag_ctr->addComponent(bt_flip_vert);		bt_flip_vert->setPos(x,0); x+=UI_BT;
+	}
 
 	x+= UI_PADDING;
 	bt_flag_ctr->addComponent(bt_script);			bt_script->setPos(x,0);
@@ -542,6 +554,8 @@ void StelUI::cb(void)
 	core->setFlagCardinalsPoints(bt_flag_cardinals->getState());
 	core->setFlagAtmosphere(bt_flag_atmosphere->getState());
 	core->setFlagNebulaHints( bt_flag_nebula_name->getState() );
+	if (bt_flip_horz) core->setFlipHorz( bt_flip_horz->getState() );
+	if (bt_flip_vert) core->setFlipVert( bt_flip_vert->getState() );
 	FlagHelp 				= bt_flag_help->getState();
 	help_win->setVisible(FlagHelp);
 	core->setMountMode(bt_flag_equatorial_mode->getState() ? StelCore::MOUNT_EQUATORIAL : StelCore::MOUNT_ALTAZIMUTAL);
@@ -631,6 +645,10 @@ void StelUI::cbr(void)
 		bt_flag_help_lbl->setLabel(_("Script commander"));
 	if (bt_flag_goto->getIsMouseOver())
 		bt_flag_help_lbl->setLabel(_("Goto selected object [SPACE]"));
+	if (bt_flip_horz && bt_flip_horz->getIsMouseOver())
+		bt_flag_help_lbl->setLabel(_("flip horizontal"));
+	if (bt_flip_vert && bt_flip_vert->getIsMouseOver())
+		bt_flag_help_lbl->setLabel(_("flip vertical"));
 }
 
 void StelUI::tcbr(void)
@@ -1314,6 +1332,8 @@ void StelUI::gui_update_widgets(int delta_time)
 	bt_flag_night->setState(app->getVisionModeNight());
 	bt_flag_search->setState(search_win->getVisible());
 	bt_flag_goto->setState(false);
+	if (bt_flip_horz) bt_flip_horz->setState(core->getFlipHorz());
+	if (bt_flip_vert) bt_flip_vert->setState(core->getFlipVert());
 
 	bt_real_time_speed->setState(fabs(core->getTimeSpeed()-JD_SECOND)<0.000001);
 	bt_inc_time_speed->setState((core->getTimeSpeed()-JD_SECOND)>0.0001);
