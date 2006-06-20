@@ -275,7 +275,7 @@ SkyLine::SkyLine(SKY_LINE_TYPE _line_type, double _radius, unsigned int _nb_segm
 		case LOCAL : proj_func = &Projector::project_local; break;
 		case MERIDIAN : proj_func = &Projector::project_local; 
 			inclinaison = 90; break;
-		case ECLIPTIC : proj_func = &Projector::project_earth_equ;
+		case ECLIPTIC : proj_func = &Projector::project_j2000;
 			inclinaison = 23.4392803055555555556; break;
 		case EQUATOR : proj_func = &Projector::project_earth_equ; break;
 		default : proj_func = &Projector::project_earth_equ;
@@ -283,9 +283,10 @@ SkyLine::SkyLine(SKY_LINE_TYPE _line_type, double _radius, unsigned int _nb_segm
 
 	Mat4f r = Mat4f::xrotation(inclinaison*M_PI/180.f);
 
+	// Ecliptic month labels need to be redone
 	// correct for month labels
 	// TODO: can make this more accurate
-	if(line_type == ECLIPTIC ) r = r * Mat4f::zrotation(-77.9*M_PI/180.);
+	//	if(line_type == ECLIPTIC ) r = r * Mat4f::zrotation(-77.9*M_PI/180.);
 
 	// Points to draw along the circle
 	points = new Vec3f[nb_segment+1];
@@ -414,6 +415,7 @@ void SkyLine::draw(const Projector* prj) const
 			}
 
 			// Draw months on ecliptic
+			/*
 			if(line_type == ECLIPTIC && (i+3) % 4 == 0) {
 
 				const double d = sqrt(dq);
@@ -439,7 +441,10 @@ void SkyLine::draw(const Projector* prj) const
 				glDisable(GL_TEXTURE_2D);
 
 			}
+			*/
+
 		  }
+
 		}
 	}
 
