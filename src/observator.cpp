@@ -123,7 +123,7 @@ void Observator::set_landscape_name(const string s) {
 	landscape_name = x;
 }
 
-void Observator::save(const string& file, const string& section)
+void Observator::save(const string& file, const string& section) const
 {
 	printf("Saving location %s to file %s\n",StelUtility::wstringToString(name).c_str(), file.c_str());
 
@@ -137,7 +137,7 @@ void Observator::save(const string& file, const string& section)
 
 
 // change settings but don't write to files
-void Observator::setConf(InitParser & conf, const string& section) 
+void Observator::setConf(InitParser & conf, const string& section) const
 {
 
 	conf.set_str(section + ":name", StelUtility::wstringToString(name));

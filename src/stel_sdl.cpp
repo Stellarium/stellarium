@@ -386,14 +386,27 @@ void StelApp::start_main_loop()
 							free(pixels);
 
 							string shotdir;
-#if defined(WIN32) || defined(CYGWIN) || defined(__MINGW32__)
-							if(getenv("USERPROFILE")!=NULL){
-								//for Win XP etc.
-								shotdir = string(getenv("USERPROFILE")) + "\\My Documents\\";
-							}else{
-								//for Win 98 etc.
-								shotdir = "C:\\My Documents\\";
+#if defined(WIN32) || defined(CYGWIN) || defined(__MINGW32__)		
+							char* path[MAX_PATH];
+							path[MAX_PATH-1] = '\0';
+							if (SHGetSpecialFolderPath(NULL, path, CSIDL_MYDOCUMENTS, 0)==true)
+							{
+								shotdir = path;
 							}
+							else
+							{	
+								if(getenv("USERPROFILE")!=NULL)
+								{
+									//for Win XP etc.
+									shotdir = string(getenv("USERPROFILE")) + "\\My Documents\\";
+								}
+								else
+								{
+									//for Win 98 etc.
+									shotdir = "C:\\My Documents\\";
+								}
+							}
+
 #else
 							shotdir = string(getenv("HOME")) + "/";
 #endif
