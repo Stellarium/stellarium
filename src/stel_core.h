@@ -628,7 +628,7 @@ public:
 	///////////////////////////////////////////////////////////////////////////////////////
 	// Observator
 	//! Return the current observatory (as a const object)
-	Observator& getObservatory(void) {return *observatory;}
+	const Observator& getObservatory(void) {return *observatory;}
 
 	//! Move to a new latitude and longitude on home planet
 	void moveObserver(double lat, double lon, double alt, int delay, const wstring& name) {
