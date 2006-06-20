@@ -151,6 +151,8 @@ private:
 	FlagButton * bt_flag_search;
 	EditBox * bt_script;
 	FlagButton * bt_flag_goto;
+	FlagButton * bt_flip_horz;
+	FlagButton * bt_flip_vert;
 	FlagButton * bt_flag_quit;
 
     void cbEditScriptInOut(void);
@@ -159,7 +161,7 @@ private:
     void cbEditScriptKey(void);
     void cbEditScriptWordCount(void);
 
-	Component* createFlagButtons(void);
+	Component* createFlagButtons(const InitParser &conf);
 	void cb(void);
 	void bt_flag_ctrOnMouseInOut(void);
 	void cbr(void);
