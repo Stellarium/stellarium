@@ -646,9 +646,9 @@ void StelUI::cbr(void)
 	if (bt_flag_goto->getIsMouseOver())
 		bt_flag_help_lbl->setLabel(_("Goto selected object [SPACE]"));
 	if (bt_flip_horz && bt_flip_horz->getIsMouseOver())
-		bt_flag_help_lbl->setLabel(_("flip horizontal"));
+		bt_flag_help_lbl->setLabel(_("flip horizontally"));
 	if (bt_flip_vert && bt_flip_vert->getIsMouseOver())
-		bt_flag_help_lbl->setLabel(_("flip vertical"));
+		bt_flag_help_lbl->setLabel(_("flip vertically"));
 }
 
 void StelUI::tcbr(void)
