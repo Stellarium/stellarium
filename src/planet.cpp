@@ -615,10 +615,11 @@ void Planet::draw_sphere(const Projector* prj, const Mat4d& mat, float screen_sz
 	glBindTexture(GL_TEXTURE_2D, tex_map->getID());
 
 
-    // Rotate and add an extra half rotation because of the convention in all
-    // Planet texture maps where zero deg long. is in the middle of the texture.
+    // Rotate and add an extra quarter rotation so that the planet texture map
+    // fits to the observers position. No idea why this is necessary,
+    // perhaps some openGl strangeness, or confusing sin/cos.
     prj->sSphere(radius*sphere_scale, one_minus_oblateness, nb_facet, nb_facet,
-                 mat * Mat4d::zrotation(M_PI/180*(axis_rotation + 180.)));
+                 mat * Mat4d::zrotation(M_PI/180*(axis_rotation + 90.)));
 
 	glDisable(GL_CULL_FACE);
 	glDisable(GL_LIGHTING);
