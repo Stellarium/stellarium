@@ -27,15 +27,9 @@
 #include <cerrno>
 
 // These macro are used as global function replacing standard gettext operation
-#ifndef MACOSX
 #include "gettext.h"
 #define _(String) Translator::globalTranslator.translate( gettext_noop(String) ).c_str()
 #define N_(String) gettext_noop(String)
-#else
-# include "POSupport.h"
-# define _(String) localizedUTF8String(String)
-# define N_(String) (String)
-#endif
 
 using namespace std;
 

@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
-"Report-Msgid-Bugs-To: stellarium@free.fr\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2006-06-20 20:50+0200\n"
 "PO-Revision-Date: 2006-05-09 17:48+0000\n"
 "Last-Translator: Guimbra <guimbra@uol.com.br>\n"
@@ -654,14 +654,12 @@ msgid "Sky Time At Start-up: "
 msgstr "Tempo do céu ao iniciar: "
 
 #: src/stel_ui_tuiconf.cpp:368
-#, fuzzy
 msgid "Actual Time"
-msgstr "Acerte a Hora "
+msgstr ""
 
 #: src/stel_ui_tuiconf.cpp:369
-#, fuzzy
 msgid "Preset Time"
-msgstr "Tempo do céu existente: "
+msgstr ""
 
 #: src/stel_ui_tuiconf.cpp:370
 msgid "Time Display Format: "
@@ -696,48 +694,40 @@ msgid "Twinkling: "
 msgstr "Cintilação: "
 
 #: src/stel_ui_tuiconf.cpp:389
-#, fuzzy
 msgid "Constellation Lines"
-msgstr "Linhas das Constelações"
+msgstr ""
 
 #: src/stel_ui_tuiconf.cpp:390
-#, fuzzy
 msgid "Constellation Names"
-msgstr "Nomes das Constelações"
+msgstr ""
 
 #: src/stel_ui_tuiconf.cpp:391
-#, fuzzy
 msgid "Constellation Art Intensity"
-msgstr "Exibição das Constelações [R]"
+msgstr ""
 
 #: src/stel_ui_tuiconf.cpp:392
-#, fuzzy
 msgid "Constellation Boundaries"
-msgstr "Limites das Constelações"
+msgstr ""
 
 #: src/stel_ui_tuiconf.cpp:394
-#, fuzzy
 msgid "Planet Names"
-msgstr "Planetas"
+msgstr ""
 
 #: src/stel_ui_tuiconf.cpp:395
-#, fuzzy
 msgid "Planet Orbits"
-msgstr "Sugestões de Planetas"
+msgstr ""
 
 #: src/stel_ui_tuiconf.cpp:396
-#, fuzzy
 msgid "Planet Trails"
-msgstr "Planetas"
+msgstr ""
 
 #: src/stel_ui_tuiconf.cpp:397
 msgid "Meridian Line"
 msgstr ""
 
 #: src/stel_ui_tuiconf.cpp:402
-#, fuzzy
 msgid "Nebula Names"
-msgstr "Nebulosas [N]"
+msgstr ""
 
 #: src/stel_ui_tuiconf.cpp:403
 msgid "Nebula Circles"
@@ -800,9 +790,8 @@ msgid "Update me via Internet: "
 msgstr "Atualize-me via Internet: "
 
 #: src/stel_ui_tuiconf.cpp:427
-#, fuzzy
 msgid "Set UI Locale: "
-msgstr "Escolha a localização "
+msgstr ""
 
 #: src/stel_ui_tuiconf.cpp:539
 msgid "Arrow down to load list."
@@ -945,9 +934,8 @@ msgid "Western"
 msgstr ""
 
 #: src/translations.h:71
-#, fuzzy
 msgid "Polynesian"
-msgstr "Sugestões de Planetas"
+msgstr ""
 
 #: src/translations.h:72
 msgid "Egyptian"
@@ -1850,16 +1838,3 @@ msgstr "Minutos"
 #: src/s_gui.cpp:2737
 msgid "Seconds"
 msgstr "Segundos"
-
-#~ msgid ""
-#~ "Misc:\n"
-#~ "9   : Toggle meteor shower rates\n"
-#~ msgstr ""
-#~ "Outros:\n"
-#~ "9 : Muda velocidade das chuvas de meteoros.\n"
-
-#~ msgid "CTRL + Q : Quit\n"
-#~ msgstr "CTRL + Q : Sair.\n"
-
-#~ msgid "CMD + Q  : Quit\n"
-#~ msgstr "CMD + Q : Sair.\n"

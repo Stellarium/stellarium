@@ -3,13 +3,12 @@
 # This file is distributed under the same license as the stellarium package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2006.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
-"Report-Msgid-Bugs-To: stellarium@free.fr\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2006-06-20 20:50+0200\n"
-"PO-Revision-Date: 2006-05-14 00:06+0000\n"
+"PO-Revision-Date: 2006-05-18 22:09+0000\n"
 "Last-Translator: VeikkoM <veikko.makela@ursa.fi>\n"
 "Language-Team: Finnish <fi@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -215,15 +214,15 @@ msgid ""
 "\n"
 msgstr ""
 "Siirtyminen ja valinnat:\n"
-"Nuolinäppäimet: Vaihda rekt./dekl.\n"
-"Page Up/Down: Suurenna/pienennä\n"
-"CTRL+Up/Down: Suurenna/pienennä\n"
-"Napsauta vasemmalla: Valitse kohde\n"
-"Napsauta oikealla: Poista valinta\n"
-"CTRL+Napsauta vasemmalla: Poista valinta\n"
-"\\ : Pienennä (planeetta + kuut, jos sallittu)\n"
-"/ : Suurenna valittuun kohteeseen\n"
-"VÄLILYÖNTI: Keskitä valittu kohde\n"
+"Nuolinäppäimet           : Vaihda rekt./dekl.\n"
+"Page Up/Down             : Suurenna/pienennä\n"
+"CTRL+Up/Down             : Suurenna/pienennä\n"
+"Napsauta vasemmalla      : Valitse kohde\n"
+"Napsauta oikealla        : Poista valinta\n"
+"CTRL+Napsauta vasemmalla : Poista valinta\n"
+"\\                        : Pienennä (planeetta + kuut, jos sallittu)\n"
+"/                        : Suurenna valittuun kohteeseen\n"
+"VÄLILYÖNTI               : Keskitä valittu kohde\n"
 "\n"
 
 #: src/stel_ui.cpp:696
@@ -243,15 +242,15 @@ msgid ""
 msgstr ""
 "Näyttötoiminnot:\n"
 "ENTER : Ekvatoriaali/altatsimutaalijalusta\n"
-"F1 : Siirry kokonäyttöön, jos mahdollista\n"
-"C : Tähdistöviivat V : Tähdistönimet\n"
-"R : Tähdistökuvat E : Ekvatoriaaliasteikko\n"
-"Z : Atsimuuttiasteikko N : Tähtisumujen nimet\n"
-"P : Planeettojen nimet G : Maanpinta\n"
-"A : Ilmakehä F : Sumu\n"
-"Q : Ilmansuunnat O : Vaihda Kuun kokoa\n"
-"T : Kohteen seuranta S : Tähdet\n"
-"4, : Ekliptika 5. : Ekvaattori\n"
+"F1  : Siirry kokonäyttöön, jos mahdollista\n"
+"C   : Tähdistöviivat            V   : Tähdistönimet\n"
+"R   : Tähdistökuvat             E   : Ekvatoriaaliasteikko\n"
+"Z   : Atsimuuttiasteikko        N   : Tähtisumujen nimet\n"
+"P   : Planeettojen nimet        G   : Maanpinta\n"
+"A   : Ilmakehä                  F   : Sumu\n"
+"Q   : Ilmansuunnat              O   : Vaihda Kuun kokoa\n"
+"T   : Kohteen seuranta          S   : Tähdet\n"
+"4 , : Ekliptika                 5 . : Ekvaattori\n"
 "\n"
 
 #: src/stel_ui.cpp:708
@@ -265,10 +264,10 @@ msgid ""
 "\n"
 msgstr ""
 "Valintaikkunat & muut toiminnot:\n"
-"H : Apua I : Tietoa Stellariumista\n"
-"M : Tekstivalikko 1 (yksi) : Asetukset\n"
+"H   : Apua                      I : Tietoa Stellariumista\n"
+"M   : Tekstivalikko             1 (yksi) : Asetukset\n"
 "CTRL + S : Tee ruudunkaappaus\n"
-"CTRL + R : Komentojono tallennus päälle/pois\n"
+"CTRL + R : Komentojonon tallennus päälle/pois\n"
 "CTRL + F : Kohteiden etsintä päälle/pois\n"
 "\n"
 
@@ -283,11 +282,11 @@ msgid ""
 "\n"
 msgstr ""
 "Aika & päiväys:\n"
-"6 : Pysäytä aika-askel 7 : Aika-askel 0\n"
-"8 : Nykyinen aika J : Pienennä aika-askelta\n"
-"K : Normaali aika-askel L : Kasvata aika-askelta\n"
-"- : 24 tuntia taakse = : 24 tuntia eteen\n"
-"[ : 7 päivää taakse ] : 7 päivää eteen\n"
+"6   : Pysäytä aika-askel        7   : Aika-askel 0\n"
+"8   : Nykyinen aika             J   : Pienennä aika-askelta\n"
+"K   : Normaali aika-askel       L   : Kasvata aika-askelta\n"
+"-   : 24 tuntia taakse          =   : 24 tuntia eteen\n"
+"[   : 7 päivää taakse           ]   : 7 päivää eteen\n"
 "\n"
 
 #: src/stel_ui.cpp:722
@@ -299,7 +298,7 @@ msgid ""
 msgstr ""
 "Komentojonon suorituksessa:\n"
 "CTRL + C : Lopeta komentojono\n"
-"6 : Pysäytä komentojono K : jatka komentojonoa\n"
+"6   : Pysäytä komentojono       K   : jatka komentojonoa\n"
 "\n"
 
 #: src/stel_ui.cpp:726
@@ -368,7 +367,7 @@ msgstr "Vain valitut tähdistöt"
 
 #: src/stel_ui_conf.cpp:116
 msgid "Nebulas Names. Up to mag :"
-msgstr "Tähtisumujen nimet. Magnitudiin :"
+msgstr "Sumujen nimet. Magnitudiin :"
 
 #: src/stel_ui_conf.cpp:129
 msgid "Also display Nebulas without textures"
@@ -388,7 +387,7 @@ msgstr "Planeettojen osoittimet"
 
 #: src/stel_ui_conf.cpp:164 src/stel_ui_tuiconf.cpp:399
 msgid "Equatorial Grid"
-msgstr "Ekvaattoriaaliasteikko"
+msgstr "Ekvatoriaaliasteikko"
 
 #: src/stel_ui_conf.cpp:169 src/stel_ui_tuiconf.cpp:398
 msgid "Azimuthal Grid"
@@ -459,11 +458,11 @@ msgstr "Valittu : "
 
 #: src/stel_ui_conf.cpp:310
 msgid "Longitude : "
-msgstr "Pituusaste : "
+msgstr "Pituus : "
 
 #: src/stel_ui_conf.cpp:318
 msgid "Latitude : "
-msgstr "Leveysaste : "
+msgstr "Leveys : "
 
 #: src/stel_ui_conf.cpp:326
 msgid "Altitude : "
@@ -523,7 +522,7 @@ msgstr "Kieli"
 
 #: src/stel_ui_conf.cpp:512
 msgid "Date & Time"
-msgstr "Päivays & kellonaika"
+msgstr "Päivays & aika"
 
 #: src/stel_ui_conf.cpp:513
 msgid "Location"
@@ -539,7 +538,7 @@ msgstr "Video"
 
 #: src/stel_ui_conf.cpp:516
 msgid "Rendering"
-msgstr "Näyttöominaisuudet"
+msgstr "Esitysasetukset"
 
 #: src/stel_ui_conf.cpp:648
 msgid "Object Search"
@@ -547,7 +546,7 @@ msgstr "Kohteen etsintä"
 
 #: src/stel_ui_conf.cpp:655
 msgid "Search for (eg. Saturn, Polaris, HP6218, Orion, M31):"
-msgstr "Etsi kohdetta (esim. Saturnus, Pohjantähti, HP6218, Oroin, M31):"
+msgstr "Etsi kohdetta (esim. Saturnus, Altair, HP6218, Orion, M31):"
 
 #: src/stel_ui_conf.cpp:672
 msgid "GO"
@@ -579,7 +578,7 @@ msgstr ": Suurin tunnettu aktiivisuus (1966 leonidit)"
 
 #: src/stel_ui_conf.cpp:967
 msgid "Meteor Rate per minute"
-msgstr "Meteorien määrä minuutissa"
+msgstr "Meteoria minuutissa"
 
 #: src/stel_ui_conf.cpp:988
 msgid "Current Time Speed is x"
@@ -647,21 +646,19 @@ msgstr "Aseta aikavyöhyke: "
 
 #: src/stel_ui_tuiconf.cpp:366
 msgid "Preset Sky Time: "
-msgstr "Esiasetettu taivaan aika:↵ "
+msgstr "Esiasetettu taivaan aika: "
 
 #: src/stel_ui_tuiconf.cpp:367
 msgid "Sky Time At Start-up: "
-msgstr "Taivaan aika aloitettaessa:↵ "
+msgstr "Taivaan aika aloitettaessa: "
 
 #: src/stel_ui_tuiconf.cpp:368
-#, fuzzy
 msgid "Actual Time"
-msgstr "Aseta aika "
+msgstr ""
 
 #: src/stel_ui_tuiconf.cpp:369
-#, fuzzy
 msgid "Preset Time"
-msgstr "Esiasetettu taivaan aika:↵ "
+msgstr ""
 
 #: src/stel_ui_tuiconf.cpp:370
 msgid "Time Display Format: "
@@ -696,48 +693,40 @@ msgid "Twinkling: "
 msgstr "Tuikkiminen: "
 
 #: src/stel_ui_tuiconf.cpp:389
-#, fuzzy
 msgid "Constellation Lines"
-msgstr "Tähdistöviivat"
+msgstr ""
 
 #: src/stel_ui_tuiconf.cpp:390
-#, fuzzy
 msgid "Constellation Names"
-msgstr "Tähdistöjen nimet"
+msgstr ""
 
 #: src/stel_ui_tuiconf.cpp:391
-#, fuzzy
 msgid "Constellation Art Intensity"
-msgstr "Tähdistökuvat [R]"
+msgstr ""
 
 #: src/stel_ui_tuiconf.cpp:392
-#, fuzzy
 msgid "Constellation Boundaries"
-msgstr "Tähdistöjen rajat"
+msgstr ""
 
 #: src/stel_ui_tuiconf.cpp:394
-#, fuzzy
 msgid "Planet Names"
-msgstr "Planeetat"
+msgstr ""
 
 #: src/stel_ui_tuiconf.cpp:395
-#, fuzzy
 msgid "Planet Orbits"
-msgstr "Planeettojen osoittimet"
+msgstr ""
 
 #: src/stel_ui_tuiconf.cpp:396
-#, fuzzy
 msgid "Planet Trails"
-msgstr "Planeetat"
+msgstr ""
 
 #: src/stel_ui_tuiconf.cpp:397
 msgid "Meridian Line"
 msgstr ""
 
 #: src/stel_ui_tuiconf.cpp:402
-#, fuzzy
 msgid "Nebula Names"
-msgstr "Tähtisumut [N]"
+msgstr ""
 
 #: src/stel_ui_tuiconf.cpp:403
 msgid "Nebula Circles"
@@ -800,9 +789,8 @@ msgid "Update me via Internet: "
 msgstr "Päivitä Internetin kautta: "
 
 #: src/stel_ui_tuiconf.cpp:427
-#, fuzzy
 msgid "Set UI Locale: "
-msgstr "Aseta paikkakunta "
+msgstr ""
 
 #: src/stel_ui_tuiconf.cpp:539
 msgid "Arrow down to load list."
@@ -941,14 +929,12 @@ msgid "Chinese"
 msgstr ""
 
 #: src/translations.h:70
-#, fuzzy
 msgid "Western"
-msgstr "Läntinen ovi"
+msgstr ""
 
 #: src/translations.h:71
-#, fuzzy
 msgid "Polynesian"
-msgstr "Planeettojen osoittimet"
+msgstr ""
 
 #: src/translations.h:72
 msgid "Egyptian"
@@ -1832,7 +1818,7 @@ msgstr "Vuosi"
 
 #: src/s_gui.cpp:2725
 msgid "Month"
-msgstr "Kuukausi"
+msgstr "Kk"
 
 #: src/s_gui.cpp:2728
 msgid "Day"
@@ -1855,7 +1841,7 @@ msgstr "Sekunnit"
 #~ "9   : Toggle meteor shower rates\n"
 #~ msgstr ""
 #~ "Muut:\n"
-#~ "9 : Vaihda meteoriparven aktiivisuutta\n"
+#~ "9   : Vaihda meteoriparven aktiivisuutta\n"
 
 #~ msgid "CTRL + Q : Quit\n"
 #~ msgstr "CTRL + Q : Lopeta\n"

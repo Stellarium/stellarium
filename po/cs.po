@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
-"Report-Msgid-Bugs-To: stellarium@free.fr\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2006-06-20 20:50+0200\n"
 "PO-Revision-Date: 2006-05-04 10:59+0000\n"
 "Last-Translator: Zbynek Vrastil <zvrastil@seznam.cz>\n"
@@ -652,14 +652,12 @@ msgid "Sky Time At Start-up: "
 msgstr "Výchozí hvězdný čas: "
 
 #: src/stel_ui_tuiconf.cpp:368
-#, fuzzy
 msgid "Actual Time"
-msgstr "Nastavení času "
+msgstr ""
 
 #: src/stel_ui_tuiconf.cpp:369
-#, fuzzy
 msgid "Preset Time"
-msgstr "Přednastavený hvězdný čas: "
+msgstr ""
 
 #: src/stel_ui_tuiconf.cpp:370
 msgid "Time Display Format: "
@@ -694,48 +692,40 @@ msgid "Twinkling: "
 msgstr "Mihotání: "
 
 #: src/stel_ui_tuiconf.cpp:389
-#, fuzzy
 msgid "Constellation Lines"
-msgstr "Tvary souhvězdí"
+msgstr ""
 
 #: src/stel_ui_tuiconf.cpp:390
-#, fuzzy
 msgid "Constellation Names"
-msgstr "Jména souhvězdí"
+msgstr ""
 
 #: src/stel_ui_tuiconf.cpp:391
-#, fuzzy
 msgid "Constellation Art Intensity"
-msgstr "Kresby souhvězdí [R]"
+msgstr ""
 
 #: src/stel_ui_tuiconf.cpp:392
-#, fuzzy
 msgid "Constellation Boundaries"
-msgstr "Hranice souhvězdí"
+msgstr ""
 
 #: src/stel_ui_tuiconf.cpp:394
-#, fuzzy
 msgid "Planet Names"
-msgstr "Planety"
+msgstr ""
 
 #: src/stel_ui_tuiconf.cpp:395
-#, fuzzy
 msgid "Planet Orbits"
-msgstr "Jména planet"
+msgstr ""
 
 #: src/stel_ui_tuiconf.cpp:396
-#, fuzzy
 msgid "Planet Trails"
-msgstr "Planety"
+msgstr ""
 
 #: src/stel_ui_tuiconf.cpp:397
 msgid "Meridian Line"
 msgstr ""
 
 #: src/stel_ui_tuiconf.cpp:402
-#, fuzzy
 msgid "Nebula Names"
-msgstr "Mlhoviny [N]"
+msgstr ""
 
 #: src/stel_ui_tuiconf.cpp:403
 msgid "Nebula Circles"
@@ -798,9 +788,8 @@ msgid "Update me via Internet: "
 msgstr "Aktualizovat přes Internet: "
 
 #: src/stel_ui_tuiconf.cpp:427
-#, fuzzy
 msgid "Set UI Locale: "
-msgstr "Nastavení polohy "
+msgstr ""
 
 #: src/stel_ui_tuiconf.cpp:539
 msgid "Arrow down to load list."
@@ -939,14 +928,12 @@ msgid "Chinese"
 msgstr ""
 
 #: src/translations.h:70
-#, fuzzy
 msgid "Western"
-msgstr "Západní dveře"
+msgstr ""
 
 #: src/translations.h:71
-#, fuzzy
 msgid "Polynesian"
-msgstr "Jména planet"
+msgstr ""
 
 #: src/translations.h:72
 msgid "Egyptian"
@@ -1847,16 +1834,3 @@ msgstr "Minuty"
 #: src/s_gui.cpp:2737
 msgid "Seconds"
 msgstr "Sekundy"
-
-#~ msgid ""
-#~ "Misc:\n"
-#~ "9   : Toggle meteor shower rates\n"
-#~ msgstr ""
-#~ "Různé:\n"
-#~ "9 : Frekvence meteorického deště\n"
-
-#~ msgid "CTRL + Q : Quit\n"
-#~ msgstr "CTRL + Q : Konec\n"
-
-#~ msgid "CMD + Q  : Quit\n"
-#~ msgstr "CMD + Q : Konec\n"

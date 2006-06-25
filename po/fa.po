@@ -6,9 +6,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
-"Report-Msgid-Bugs-To: stellarium@free.fr\n"
+"Report-Msgid-Bugs-To: Saeed Moaddeli <s.moaddeli@gmail.com>\n"
 "POT-Creation-Date: 2006-06-20 20:50+0200\n"
-"PO-Revision-Date: 2006-05-09 07:12+0000\n"
+"PO-Revision-Date: 2006-05-29 11:50+0000\n"
 "Last-Translator: Jalal Rohani <jranilz@yahoo.com>\n"
 "Language-Team:\n"
 "MIME-Version: 1.0\n"
@@ -286,8 +286,8 @@ msgstr ""
 "صفر‌کردن نرخ گذر زمان:  ۷    توقف نرخ گذر زمان:  ۶ \n"
 "کاهش نرخ گذر زمان:  J    اِعمال زمان فعلی:  ۸ \n"
 "افزایش نرخ گذر زمان:  L    نرخ گذر زمان نرمال:  K \n"
-"۲۴ ساعت به جلو:  =    ۲۴ ساعت به عقب:  - /n۷ روز به جلو:  ]    ۷ روز به "
-"عقب:  [\n"
+"۲۴ ساعت به جلو:  =    ۲۴ ساعت به عقب:  - /n۷ روز به جلو:  ]    ۷ روز به عقب: "
+" [\n"
 "\n"
 
 #: src/stel_ui.cpp:722
@@ -655,14 +655,12 @@ msgid "Sky Time At Start-up: "
 msgstr ":زمان آسمان در ابتدا "
 
 #: src/stel_ui_tuiconf.cpp:368
-#, fuzzy
 msgid "Actual Time"
-msgstr "زمان را تنظیم کنید "
+msgstr ""
 
 #: src/stel_ui_tuiconf.cpp:369
-#, fuzzy
 msgid "Preset Time"
-msgstr ":پیش‌تنظیم زمان آسمان "
+msgstr ""
 
 #: src/stel_ui_tuiconf.cpp:370
 msgid "Time Display Format: "
@@ -697,53 +695,44 @@ msgid "Twinkling: "
 msgstr ":چشمک زدن "
 
 #: src/stel_ui_tuiconf.cpp:389
-#, fuzzy
 msgid "Constellation Lines"
-msgstr "خطوط صورت فلكي"
+msgstr ""
 
 #: src/stel_ui_tuiconf.cpp:390
-#, fuzzy
 msgid "Constellation Names"
-msgstr "نام صورتهای فلکی"
+msgstr ""
 
 #: src/stel_ui_tuiconf.cpp:391
-#, fuzzy
 msgid "Constellation Art Intensity"
-msgstr "تصاویر صورتهای فلکی [R]"
+msgstr ""
 
 #: src/stel_ui_tuiconf.cpp:392
-#, fuzzy
 msgid "Constellation Boundaries"
-msgstr "مرزهای صورتهای فلکی"
+msgstr ""
 
 #: src/stel_ui_tuiconf.cpp:394
-#, fuzzy
 msgid "Planet Names"
-msgstr "سیارات"
+msgstr ""
 
 #: src/stel_ui_tuiconf.cpp:395
-#, fuzzy
 msgid "Planet Orbits"
-msgstr "نشانه‌های سیارات"
+msgstr ""
 
 #: src/stel_ui_tuiconf.cpp:396
-#, fuzzy
 msgid "Planet Trails"
-msgstr "سیارات"
+msgstr ""
 
 #: src/stel_ui_tuiconf.cpp:397
 msgid "Meridian Line"
 msgstr ""
 
 #: src/stel_ui_tuiconf.cpp:402
-#, fuzzy
 msgid "Nebula Names"
-msgstr "سحابی‌ها[N]"
+msgstr ""
 
 #: src/stel_ui_tuiconf.cpp:403
-#, fuzzy
 msgid "Nebula Circles"
-msgstr "سحابی"
+msgstr ""
 
 #: src/stel_ui_tuiconf.cpp:407
 msgid "Landscape: "
@@ -802,9 +791,8 @@ msgid "Update me via Internet: "
 msgstr ":بروزرسانی از راه اینترنت "
 
 #: src/stel_ui_tuiconf.cpp:427
-#, fuzzy
 msgid "Set UI Locale: "
-msgstr "موقعیت را تنظیم کنید "
+msgstr ""
 
 #: src/stel_ui_tuiconf.cpp:539
 msgid "Arrow down to load list."
@@ -923,22 +911,18 @@ msgid "Solar System Observer"
 msgstr "ناظر منظومه خورشیدی"
 
 #: src/translations.h:63 src/s_gui.cpp:2667
-#, fuzzy
 msgid "N"
 msgstr "شمال"
 
 #: src/translations.h:64 src/s_gui.cpp:2668
-#, fuzzy
 msgid "S"
 msgstr "جنوب"
 
 #: src/translations.h:65 src/s_gui.cpp:2672
-#, fuzzy
 msgid "E"
 msgstr "شرق"
 
 #: src/translations.h:66 src/s_gui.cpp:2673
-#, fuzzy
 msgid "W"
 msgstr "غرب"
 
@@ -951,9 +935,8 @@ msgid "Western"
 msgstr ""
 
 #: src/translations.h:71
-#, fuzzy
 msgid "Polynesian"
-msgstr "نشانه‌های سیارات"
+msgstr ""
 
 #: src/translations.h:72
 msgid "Egyptian"
@@ -1385,7 +1368,7 @@ msgstr ""
 
 #: src/translations.h:184
 msgid "Pair of Stars"
-msgstr ""
+msgstr "ستاره های دوگانه"
 
 #: src/translations.h:185
 msgid "Khanuwy Fish"
@@ -1829,7 +1812,7 @@ msgstr ""
 
 #: src/s_gui.cpp:2226 src/s_gui.cpp:2252
 msgid "OK"
-msgstr ""
+msgstr "تأیید"
 
 #: src/s_gui.cpp:2722
 msgid "Year"
@@ -1855,19 +1838,6 @@ msgstr "دقیقه"
 msgid "Seconds"
 msgstr "ثانیه"
 
-#~ msgid ""
-#~ "Misc:\n"
-#~ "9   : Toggle meteor shower rates\n"
-#~ msgstr ""
-#~ "غیره:n\\ تغییر نرخ بارش شهابی:\n"
-#~ "  ۹\n"
-
-#~ msgid "CTRL + Q : Quit\n"
-#~ msgstr "CTRL + Q :خروج\n"
-
-#~ msgid "CMD + Q  : Quit\n"
-#~ msgstr "CMD + Q :خروج\n"
-
 #~ msgid "Name : "
 #~ msgstr "نام : "
 
@@ -1892,12 +1862,15 @@ msgstr "ثانیه"
 #~ msgid "ly"
 #~ msgstr "سال‌نوری"
 
+#, c-format
 #~ msgid "Loading HIP/SAO catalogs: %d/%d"
 #~ msgstr "بارگیری کاتالوگ HIP/SAO: %d/%d"
 
+#, c-format
 #~ msgid "Loading HIP catalog: %d/%d"
 #~ msgstr "بارگیری کاتالوگ HIP: %d/%d"
 
+#, c-format
 #~ msgid "Loading SAO catalog: %d/%d"
 #~ msgstr "بارگیری کاتالوگ SAO: %d/%d"
 
@@ -1937,6 +1910,19 @@ msgstr "ثانیه"
 #~ "نظراتتان را برایمان بفرستید:http://www.stellarium.org\n"
 #~ "\n"
 
+#~ msgid ""
+#~ "Misc:\n"
+#~ "9   : Toggle meteor shower rates\n"
+#~ msgstr ""
+#~ "غیره:n\\ تغییر نرخ بارش شهابی:\n"
+#~ "  ۹\n"
+
+#~ msgid "CTRL + Q : Quit\n"
+#~ msgstr "CTRL + Q :خروج\n"
+
+#~ msgid "CMD + Q  : Quit\n"
+#~ msgstr "CMD + Q :خروج\n"
+
 #~ msgid "Constellations"
 #~ msgstr "صورتهای فلکی"
 
@@ -1963,6 +1949,9 @@ msgstr "ثانیه"
 
 #~ msgid "eg. Crux"
 #~ msgstr "مثلاْ چلیپا"
+
+#~ msgid "Nebula"
+#~ msgstr "سحابی"
 
 #~ msgid "eg. M83, NGC 7009, IC 2118"
 #~ msgstr "M۸۳, NGC ۷۰۰۹, IC ۲۱۱۸ مثلاً"

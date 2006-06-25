@@ -107,8 +107,9 @@ void ConstellationMgr::loadLinesAndArt(const string &fileName, const string &art
 	while(!std::getline(inf, record).eof())
 	{
 		line++;
+		if (record.size()!=0 && record[0]=='#')
+			continue;
 		cons = new Constellation;
-		assert(cons);
 		if(cons->read(record, hipStarMgr))
 		{
 			asterisms.push_back(cons);

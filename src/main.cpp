@@ -41,7 +41,7 @@ void drawIntro(void)
 {
     cout << " -------------------------------------------------------" << endl;
     cout << "[ This is "<< APP_NAME << " - http://www.stellarium.org ]" << endl;
-    cout << "[ Copyright (C) 2000-2005 Fabien Chereau et al         ]" << endl;
+    cout << "[ Copyright (C) 2000-2006 Fabien Chereau et al         ]" << endl;
     cout << " -------------------------------------------------------" << endl;
 };
 
@@ -213,6 +213,7 @@ void setDirectories(const char* executableName)
 
     CDIR = cdir;
     DATA_ROOT = data_root;
+    LDIR = DATA_ROOT + "/data/locale";
 #endif
 }
 

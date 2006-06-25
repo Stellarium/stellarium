@@ -71,42 +71,52 @@ msgid " Light Years"
 msgstr " Lata świetlne"
 
 #: src/hip_star.cpp:104
+#, fuzzy
 msgid "Spectral Type: "
 msgstr "Typ spektralny: "
 
 #: src/hip_star_mgr.cpp:133
+#, fuzzy
 msgid "Loading Hipparcos catalog:"
 msgstr "Ładowanie katalogu Hipparcosa :"
 
 #: src/nebula.cpp:104
+#, fuzzy
 msgid "Type: "
 msgstr "Typ: "
 
 #: src/nebula.cpp:105
+#, fuzzy
 msgid "Size: "
 msgstr "Rozmiar: "
 
 #: src/nebula_mgr.cpp:288
+#, fuzzy
 msgid "Loading NGC catalog: "
 msgstr "Ładowanie katalogu NGC: "
 
 #: src/nebula_mgr.cpp:415
+#, fuzzy
 msgid "Loading Nebula Textures:"
 msgstr "Ładowanie tekstur mgławic:"
 
 #: src/planet.cpp:120 src/planet.cpp:157
+#, fuzzy
 msgid "AU"
 msgstr "J.A."
 
 #: src/stel_ui.cpp:503 src/stel_ui.cpp:631
+#, fuzzy
 msgid "Script commander"
 msgstr "Tworzenie skryptów"
 
 #: src/stel_ui.cpp:530
+#, fuzzy
 msgid "Invalid Script command"
 msgstr "Niepoprawne polecenie skryptu"
 
 #: src/stel_ui.cpp:596
+#, fuzzy
 msgid "Drawing of the Constellations [C]"
 msgstr "Kontury konstelacji [C]"
 
@@ -657,14 +667,12 @@ msgid "Sky Time At Start-up: "
 msgstr "Czas gwiazdowy po uruchomieniu programu: "
 
 #: src/stel_ui_tuiconf.cpp:368
-#, fuzzy
 msgid "Actual Time"
-msgstr "Ustaw czas "
+msgstr ""
 
 #: src/stel_ui_tuiconf.cpp:369
-#, fuzzy
 msgid "Preset Time"
-msgstr "Domyślny czas gwiazdowy: "
+msgstr ""
 
 #: src/stel_ui_tuiconf.cpp:370
 msgid "Time Display Format: "
@@ -699,53 +707,44 @@ msgid "Twinkling: "
 msgstr "Mruganie: "
 
 #: src/stel_ui_tuiconf.cpp:389
-#, fuzzy
 msgid "Constellation Lines"
-msgstr "Linie gwiazdozbiorów: "
+msgstr ""
 
 #: src/stel_ui_tuiconf.cpp:390
-#, fuzzy
 msgid "Constellation Names"
-msgstr "Nazwy gwiazdozbiorów"
+msgstr ""
 
 #: src/stel_ui_tuiconf.cpp:391
-#, fuzzy
 msgid "Constellation Art Intensity"
-msgstr "Obrazy kostelacji [R]"
+msgstr ""
 
 #: src/stel_ui_tuiconf.cpp:392
-#, fuzzy
 msgid "Constellation Boundaries"
-msgstr "Nazwy gwiazdozbiorów"
+msgstr ""
 
 #: src/stel_ui_tuiconf.cpp:394
-#, fuzzy
 msgid "Planet Names"
-msgstr "Planety"
+msgstr ""
 
 #: src/stel_ui_tuiconf.cpp:395
-#, fuzzy
 msgid "Planet Orbits"
-msgstr "Informacje o planetach"
+msgstr ""
 
 #: src/stel_ui_tuiconf.cpp:396
-#, fuzzy
 msgid "Planet Trails"
-msgstr "Planety"
+msgstr ""
 
 #: src/stel_ui_tuiconf.cpp:397
 msgid "Meridian Line"
 msgstr ""
 
 #: src/stel_ui_tuiconf.cpp:402
-#, fuzzy
 msgid "Nebula Names"
-msgstr "Mgławice [N]"
+msgstr ""
 
 #: src/stel_ui_tuiconf.cpp:403
-#, fuzzy
 msgid "Nebula Circles"
-msgstr "Mgławica"
+msgstr ""
 
 #: src/stel_ui_tuiconf.cpp:407
 msgid "Landscape: "
@@ -804,9 +803,8 @@ msgid "Update me via Internet: "
 msgstr "Aktualizacja przez internet "
 
 #: src/stel_ui_tuiconf.cpp:427
-#, fuzzy
 msgid "Set UI Locale: "
-msgstr "Ustaw lokalizację "
+msgstr ""
 
 #: src/stel_ui_tuiconf.cpp:539
 msgid "Arrow down to load list."
@@ -949,9 +947,8 @@ msgid "Western"
 msgstr ""
 
 #: src/translations.h:71
-#, fuzzy
 msgid "Polynesian"
-msgstr "Informacje o planetach"
+msgstr ""
 
 #: src/translations.h:72
 msgid "Egyptian"
@@ -1853,17 +1850,6 @@ msgstr "Minuty"
 msgid "Seconds"
 msgstr "Sekundy"
 
-#~ msgid ""
-#~ "Misc:\n"
-#~ "9   : Toggle meteor shower rates\n"
-#~ msgstr "9: Intensywność deszczu meteorytów\n"
-
-#~ msgid "CTRL + Q : Quit\n"
-#~ msgstr "CTRL+Q : Wyjście\n"
-
-#~ msgid "CMD + Q  : Quit\n"
-#~ msgstr "CMD+Q : Wyjście\n"
-
 #~ msgid "Name : "
 #~ msgstr "Nazwa : "
 
@@ -1900,12 +1886,15 @@ msgstr "Sekundy"
 #~ msgid "ly"
 #~ msgstr "l.św."
 
+#, c-format
 #~ msgid "Loading HIP/SAO catalogs: %d/%d"
 #~ msgstr "Ładowanie katalogu HIP/SAO : %d/%d"
 
+#, c-format
 #~ msgid "Loading HIP catalog: %d/%d"
 #~ msgstr "Ładowanie katalogu Hipparcosa : %d/%d"
 
+#, c-format
 #~ msgid "Loading SAO catalog: %d/%d"
 #~ msgstr "Ładowanie katalogu SAO : %d/%d"
 
@@ -1938,10 +1927,21 @@ msgstr "Sekundy"
 #~ "and comments to us at: http://stellarium.sourceforge.net\n"
 #~ "\n"
 #~ msgstr ""
-#~ "   Proszę sprawdzić ostatnią wersję programu i zostawić zgłoszenie o "
-#~ "błędzie i komentarz\n"
+#~ "   Proszę sprawdzić ostatnią wersję programu i zostawić zgłoszenie o błędzie "
+#~ "i komentarz\n"
 #~ "na stronie programu http://stellarium.sourceforge.net\n"
 #~ "\n"
+
+#~ msgid ""
+#~ "Misc:\n"
+#~ "9   : Toggle meteor shower rates\n"
+#~ msgstr "9: Intensywność deszczu meteorytów\n"
+
+#~ msgid "CTRL + Q : Quit\n"
+#~ msgstr "CTRL+Q : Wyjście\n"
+
+#~ msgid "CMD + Q  : Quit\n"
+#~ msgstr "CMD+Q : Wyjście\n"
 
 #~ msgid "Constellations"
 #~ msgstr "Gwiazdozbiory"
@@ -1973,6 +1973,9 @@ msgstr "Sekundy"
 #~ msgid "eg. Crux"
 #~ msgstr "np. Krzyż Południa"
 
+#~ msgid "Nebula"
+#~ msgstr "Mgławica"
+
 #~ msgid "eg. M83, NGC 7009, IC 2118"
 #~ msgstr "np. M83, NGC 7009, IC 2118"
 
@@ -1987,6 +1990,9 @@ msgstr "Sekundy"
 
 #~ msgid "Planets & Moons"
 #~ msgstr "Planety i księżyce"
+
+#~ msgid "Constellation lines: "
+#~ msgstr "Linie gwiazdozbiorów: "
 
 #~ msgid "Constellation labels: "
 #~ msgstr "Podpisy gwiazdozbiorów: "
@@ -2003,14 +2009,13 @@ msgstr "Sekundy"
 #~ msgid ""
 #~ "ERROR : I can't find the datas directories in :\n"
 #~ "%s/ nor in ./ nor in ../\n"
-#~ "You may fully install the software (type \"make install\" on POSIX "
-#~ "systems)\n"
+#~ "You may fully install the software (type \"make install\" on POSIX systems)\n"
 #~ "or launch the application from the stellarium package directory.\n"
 #~ msgstr ""
 #~ "BŁĄD : Nie mogę znaleźć danych w  :\n"
 #~ "%s/ ani w ./ ani w ../\n"
-#~ "Powinieneś ponownie zainstalować program (wpisz \"make install\" w "
-#~ "systemach POSIX)\n"
+#~ "Powinieneś ponownie zainstalować program (wpisz \"make install\" w systemach "
+#~ "POSIX)\n"
 #~ "lub uruchom program z folderu, w którym go zainstalowałeś.\n"
 
 #~ msgid "> Found data files in %s : local version.\n"

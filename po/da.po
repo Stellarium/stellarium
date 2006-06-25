@@ -19,7 +19,7 @@ msgstr ""
 "X-Poedit-Country: DENMARK\n"
 
 #: src/main.cpp:52
-#, fuzzy, c-format
+#, fuzzy
 msgid ""
 "Usage: %s [OPTION] ...\n"
 " -v, --version          Output version information and exit.\n"
@@ -30,12 +30,12 @@ msgstr ""
 " -h, --help             Viser hjælp og afslutter.\n"
 
 #: src/main.cpp:76
-#, fuzzy, c-format
+#, fuzzy
 msgid "%s: Bad command line argument(s)\n"
 msgstr "%s: Ugyldig kommandolinie argument\n"
 
 #: src/main.cpp:77
-#, fuzzy, c-format
+#, fuzzy
 msgid "Try `%s --help' for more information.\n"
 msgstr "Prøv `%s --help' for mere information.\n"
 
@@ -545,6 +545,7 @@ msgid "Sky Language: "
 msgstr "Sprog på himlen: "
 
 #: src/stel_ui_conf.cpp:490 src/stel_ui_tuiconf.cpp:376
+#, fuzzy
 msgid "Sky Culture: "
 msgstr ""
 
@@ -685,14 +686,12 @@ msgid "Sky Time At Start-up: "
 msgstr "Himmeltid ved opstart: "
 
 #: src/stel_ui_tuiconf.cpp:368
-#, fuzzy
 msgid "Actual Time"
-msgstr "Angiv tid "
+msgstr ""
 
 #: src/stel_ui_tuiconf.cpp:369
-#, fuzzy
 msgid "Preset Time"
-msgstr "Forhåndsvalgt himmeltid: "
+msgstr ""
 
 #: src/stel_ui_tuiconf.cpp:370
 msgid "Time Display Format: "
@@ -727,53 +726,44 @@ msgid "Twinkling: "
 msgstr "Funkling: "
 
 #: src/stel_ui_tuiconf.cpp:389
-#, fuzzy
 msgid "Constellation Lines"
-msgstr "Stjernebillede linier "
+msgstr ""
 
 #: src/stel_ui_tuiconf.cpp:390
-#, fuzzy
 msgid "Constellation Names"
-msgstr "Navn på stjernebilleder"
+msgstr ""
 
 #: src/stel_ui_tuiconf.cpp:391
-#, fuzzy
 msgid "Constellation Art Intensity"
-msgstr "Stjernebillede illustrationer [R]"
+msgstr ""
 
 #: src/stel_ui_tuiconf.cpp:392
-#, fuzzy
 msgid "Constellation Boundaries"
-msgstr "Navn på stjernebilleder"
+msgstr ""
 
 #: src/stel_ui_tuiconf.cpp:394
-#, fuzzy
 msgid "Planet Names"
-msgstr "Planeter"
+msgstr ""
 
 #: src/stel_ui_tuiconf.cpp:395
-#, fuzzy
 msgid "Planet Orbits"
-msgstr "Marker planeter"
+msgstr ""
 
 #: src/stel_ui_tuiconf.cpp:396
-#, fuzzy
 msgid "Planet Trails"
-msgstr "Planeter"
+msgstr ""
 
 #: src/stel_ui_tuiconf.cpp:397
 msgid "Meridian Line"
 msgstr ""
 
 #: src/stel_ui_tuiconf.cpp:402
-#, fuzzy
 msgid "Nebula Names"
-msgstr "Tåger [N]"
+msgstr ""
 
 #: src/stel_ui_tuiconf.cpp:403
-#, fuzzy
 msgid "Nebula Circles"
-msgstr "Tåge"
+msgstr ""
 
 #: src/stel_ui_tuiconf.cpp:407
 msgid "Landscape: "
@@ -808,6 +798,7 @@ msgid "Zoom Duration: "
 msgstr "Trin for zoom : "
 
 #: src/stel_ui_tuiconf.cpp:414
+#, fuzzy
 msgid "Cursor Timeout: "
 msgstr ""
 
@@ -832,9 +823,8 @@ msgid "Update me via Internet: "
 msgstr "Opdater programmet via internettet: "
 
 #: src/stel_ui_tuiconf.cpp:427
-#, fuzzy
 msgid "Set UI Locale: "
-msgstr "Angiv hjemsted "
+msgstr ""
 
 #: src/stel_ui_tuiconf.cpp:539
 msgid "Arrow down to load list."
@@ -977,9 +967,8 @@ msgid "Western"
 msgstr ""
 
 #: src/translations.h:71
-#, fuzzy
 msgid "Polynesian"
-msgstr "Marker planeter"
+msgstr ""
 
 #: src/translations.h:72
 msgid "Egyptian"
@@ -1881,19 +1870,6 @@ msgstr ""
 msgid "Seconds"
 msgstr ""
 
-#~ msgid ""
-#~ "Misc:\n"
-#~ "9   : Toggle meteor shower rates\n"
-#~ msgstr ""
-#~ "Diverse:\n"
-#~ "9 : Skift synlighed på meteor regn\n"
-
-#~ msgid "CTRL + Q : Quit\n"
-#~ msgstr "CTRL+Q : Afslut\n"
-
-#~ msgid "CMD + Q  : Quit\n"
-#~ msgstr "CMD+Q : Afslut\n"
-
 #~ msgid "Name : "
 #~ msgstr "Navn : "
 
@@ -1930,12 +1906,15 @@ msgstr ""
 #~ msgid "ly"
 #~ msgstr "lysår"
 
+#, c-format
 #~ msgid "Loading HIP/SAO catalogs: %d/%d"
 #~ msgstr "Henter HIP/SAO kataloger: %d/%d"
 
+#, c-format
 #~ msgid "Loading HIP catalog: %d/%d"
 #~ msgstr "Henter HIP katalog: %d/%d"
 
+#, c-format
 #~ msgid "Loading SAO catalog: %d/%d"
 #~ msgstr "Henter SAO katalog: %d/%d"
 
@@ -1969,10 +1948,22 @@ msgstr ""
 #~ "and comments to us at: http://stellarium.sourceforge.net\n"
 #~ "\n"
 #~ msgstr ""
-#~ "   Venligst tjek om du har seneste version af Stellarium før du "
-#~ "rapporterer\n"
+#~ "   Venligst tjek om du har seneste version af Stellarium før du rapporterer\n"
 #~ "problemer til webstedet http://stellarium.sourceforge.net\n"
 #~ "\n"
+
+#~ msgid ""
+#~ "Misc:\n"
+#~ "9   : Toggle meteor shower rates\n"
+#~ msgstr ""
+#~ "Diverse:\n"
+#~ "9 : Skift synlighed på meteor regn\n"
+
+#~ msgid "CTRL + Q : Quit\n"
+#~ msgstr "CTRL+Q : Afslut\n"
+
+#~ msgid "CMD + Q  : Quit\n"
+#~ msgstr "CMD+Q : Afslut\n"
 
 #~ msgid "Constellations"
 #~ msgstr "Stjernebilleder"
@@ -2004,6 +1995,9 @@ msgstr ""
 #~ msgid "eg. Crux"
 #~ msgstr "eks. Crux"
 
+#~ msgid "Nebula"
+#~ msgstr "Tåge"
+
 #~ msgid "eg. M83, NGC 7009, IC 2118"
 #~ msgstr "eks. M83, NGC 7009, IC 2118"
 
@@ -2018,6 +2012,9 @@ msgstr ""
 
 #~ msgid "Planets & Moons"
 #~ msgstr "Planeter & måner"
+
+#~ msgid "Constellation lines: "
+#~ msgstr "Stjernebillede linier "
 
 #~ msgid "Constellation labels: "
 #~ msgstr "Navn på stjernebilleder "
@@ -2044,14 +2041,13 @@ msgstr ""
 #~ msgid ""
 #~ "ERROR : I can't find the datas directories in :\n"
 #~ "%s/ nor in ./ nor in ../\n"
-#~ "You may fully install the software (type \"make install\" on POSIX "
-#~ "systems)\n"
+#~ "You may fully install the software (type \"make install\" on POSIX systems)\n"
 #~ "or launch the application from the stellarium package directory.\n"
 #~ msgstr ""
 #~ "ERROR : Kan ikke finde mappen i :\n"
 #~ "%s/ , ./ eller i ../\n"
-#~ "Du er måske nød til at installere programmet igen (skriv \"make install\" "
-#~ "på POSIX systemer)\n"
+#~ "Du er måske nød til at installere programmet igen (skriv \"make install\" på "
+#~ "POSIX systemer)\n"
 #~ "eller starte programmet fra Stellariums pakkemappe.\n"
 
 #~ msgid "> Found data files in %s : local version.\n"
@@ -2244,8 +2240,8 @@ msgstr ""
 #~ "imported (%s).\n"
 #~ "It will be replaced by the default config file.\n"
 #~ msgstr ""
-#~ "Nuværende opsætningsfil tilhører en gammel version som ikke kan "
-#~ "importeres  (%s).\n"
+#~ "Nuværende opsætningsfil tilhører en gammel version som ikke kan importeres  "
+#~ "(%s).\n"
 #~ "Den vil blive erstattet med en standard opsætningsfil.\n"
 
 #~ msgid "Loading configuration file "
