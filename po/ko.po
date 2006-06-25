@@ -7,10 +7,10 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
-"Report-Msgid-Bugs-To: stellarium@free.fr\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2006-06-20 20:50+0200\n"
-"PO-Revision-Date: 2006-05-17 14:07+0000\n"
-"Last-Translator: Jeong, Tae-Min <jtm71@chollian.net>\n"
+"PO-Revision-Date: 2006-06-21 12:23+0000\n"
+"Last-Translator: LEE E. S. <ngc2737@hanmail.net>\n"
 "Language-Team: Korean <ko@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -28,7 +28,7 @@ msgstr ""
 " -h, --help 이와 같은 설명을 보여주고 종료합니다.\n"
 
 #: src/main.cpp:76
-#, fuzzy, c-format
+#, fuzzy
 msgid "%s: Bad command line argument(s)\n"
 msgstr "%s: 명령어의 인자값이 잘못되었습니다.\n"
 
@@ -76,7 +76,7 @@ msgstr "히파르코스 목록을 불러옵니다:"
 
 #: src/nebula.cpp:104
 msgid "Type: "
-msgstr "형: "
+msgstr "형태: "
 
 #: src/nebula.cpp:105
 msgid "Size: "
@@ -313,6 +313,13 @@ msgid ""
 "CTRL + Q : Quit\n"
 "CMD + Q  : Quit\n"
 msgstr ""
+"기타:\n"
+"9 : 유성우 빈도 전환\n"
+"CTRL + 0,..,9 : 천체망원경 0,..,9 에 대한 이동 명령 실행\n"
+"CTRL + SHIFT + H : 수평 형상 뒤집기 전환\n"
+"CTRL + SHIFT + V : 수직 형상 뒤집기 전환\n"
+"CTRL + Q : 종료\n"
+"CMD + Q : 종료\n"
 
 #: src/stel_ui.cpp:740
 msgid "Help"
@@ -348,7 +355,7 @@ msgstr "별 이름표 달아주는 등급 한계 :"
 
 #: src/stel_ui_conf.cpp:74
 msgid "Star Twinkle. Amount :"
-msgstr "별 반짝거림 정도 :"
+msgstr "별 반짝임 정도 :"
 
 #: src/stel_ui_conf.cpp:90
 msgid "Constellations Lines"
@@ -445,8 +452,7 @@ msgid ""
 "   time speed.\n"
 "Use key K to return to real time speed."
 msgstr ""
-"시간 속도를 증가·감소시키려면 L·J 키를 \n"
-"   사용하세요. \n"
+"시간 속도를 증가·감소시키려면 L·J 키를 사용하세요. \n"
 "실시간의 속도로 돌아가려면 K 키를 사용하세요."
 
 #: src/stel_ui_conf.cpp:300
@@ -503,7 +509,7 @@ msgstr "풍경을 선택하십시오."
 
 #: src/stel_ui_conf.cpp:433 src/stel_ui_conf.cpp:888
 msgid "Author: "
-msgstr ""
+msgstr "저자: "
 
 #: src/stel_ui_conf.cpp:456
 msgid "Program Language: "
@@ -559,7 +565,7 @@ msgstr "관측소 위치를 입력하세요."
 
 #: src/stel_ui_conf.cpp:889
 msgid "Info: "
-msgstr ""
+msgstr "정보: "
 
 #: src/stel_ui_conf.cpp:941
 msgid ": Normal rate"
@@ -654,14 +660,12 @@ msgid "Sky Time At Start-up: "
 msgstr "시작시 하늘 시간 적용: "
 
 #: src/stel_ui_tuiconf.cpp:368
-#, fuzzy
 msgid "Actual Time"
-msgstr "시간 설정 "
+msgstr "실제 시간"
 
 #: src/stel_ui_tuiconf.cpp:369
-#, fuzzy
 msgid "Preset Time"
-msgstr "하늘 시간 미리 설정: "
+msgstr "예정 시간"
 
 #: src/stel_ui_tuiconf.cpp:370
 msgid "Time Display Format: "
@@ -696,52 +700,44 @@ msgid "Twinkling: "
 msgstr "깜박임: "
 
 #: src/stel_ui_tuiconf.cpp:389
-#, fuzzy
 msgid "Constellation Lines"
-msgstr "별자리 윤곽"
+msgstr "별자리 선"
 
 #: src/stel_ui_tuiconf.cpp:390
-#, fuzzy
 msgid "Constellation Names"
 msgstr "별자리 이름"
 
 #: src/stel_ui_tuiconf.cpp:391
-#, fuzzy
 msgid "Constellation Art Intensity"
-msgstr "별자리 그림 [R]"
+msgstr "별자리 그림 명암도"
 
 #: src/stel_ui_tuiconf.cpp:392
-#, fuzzy
 msgid "Constellation Boundaries"
 msgstr "별자리 경계"
 
 #: src/stel_ui_tuiconf.cpp:394
-#, fuzzy
 msgid "Planet Names"
-msgstr "행성들"
+msgstr "행성 이름"
 
 #: src/stel_ui_tuiconf.cpp:395
-#, fuzzy
 msgid "Planet Orbits"
-msgstr "행성에 대한 힌트"
+msgstr "행성 궤도"
 
 #: src/stel_ui_tuiconf.cpp:396
-#, fuzzy
 msgid "Planet Trails"
-msgstr "행성들"
+msgstr "행성 궤적"
 
 #: src/stel_ui_tuiconf.cpp:397
 msgid "Meridian Line"
-msgstr ""
+msgstr "자오선"
 
 #: src/stel_ui_tuiconf.cpp:402
-#, fuzzy
 msgid "Nebula Names"
-msgstr "성운들 [N]"
+msgstr "성운 이름"
 
 #: src/stel_ui_tuiconf.cpp:403
 msgid "Nebula Circles"
-msgstr ""
+msgstr "성운 범위"
 
 #: src/stel_ui_tuiconf.cpp:407
 msgid "Landscape: "
@@ -800,13 +796,12 @@ msgid "Update me via Internet: "
 msgstr "이 프로그램 인터넷으로 업데이트: "
 
 #: src/stel_ui_tuiconf.cpp:427
-#, fuzzy
 msgid "Set UI Locale: "
-msgstr "위치 설정 "
+msgstr "UI 위치 설정: "
 
 #: src/stel_ui_tuiconf.cpp:539
 msgid "Arrow down to load list."
-msgstr ""
+msgstr "아래 화살표로 목록을 부르세요."
 
 #: src/translations.h:33
 msgid "Sun"
@@ -938,21 +933,19 @@ msgstr "서"
 
 #: src/translations.h:69
 msgid "Chinese"
-msgstr ""
+msgstr "중국"
 
 #: src/translations.h:70
-#, fuzzy
 msgid "Western"
-msgstr "서함"
+msgstr "서양"
 
 #: src/translations.h:71
-#, fuzzy
 msgid "Polynesian"
-msgstr "행성에 대한 힌트"
+msgstr "폴리네시아"
 
 #: src/translations.h:72
 msgid "Egyptian"
-msgstr ""
+msgstr "이집트"
 
 #: src/translations.h:75
 msgid "Aquila"
@@ -1312,7 +1305,7 @@ msgstr "황소의 앞다리"
 
 #: src/translations.h:167
 msgid "Two Poles"
-msgstr ""
+msgstr "두 개의 막대"
 
 #: src/translations.h:168
 msgid "Lion"
@@ -1352,19 +1345,19 @@ msgstr "악어"
 
 #: src/translations.h:177
 msgid "Selkis"
-msgstr ""
+msgstr "셀키스"
 
 #: src/translations.h:178
 msgid "Prow"
-msgstr ""
+msgstr "이물"
 
 #: src/translations.h:179
 msgid "Horus"
-msgstr ""
+msgstr "호루스"
 
 #: src/translations.h:180
 msgid "Sheepfold"
-msgstr ""
+msgstr "양 우리"
 
 #: src/translations.h:181
 msgid "Giant"
@@ -1372,11 +1365,11 @@ msgstr "거인"
 
 #: src/translations.h:182
 msgid "Hippopotamus"
-msgstr ""
+msgstr "하마"
 
 #: src/translations.h:183
 msgid "Flock"
-msgstr ""
+msgstr "양 떼"
 
 #: src/translations.h:184
 msgid "Pair of Stars"
@@ -1384,19 +1377,19 @@ msgstr "한 쌍의 별"
 
 #: src/translations.h:185
 msgid "Khanuwy Fish"
-msgstr ""
+msgstr "카누위 물고기"
 
 #: src/translations.h:186 src/translations.h:225
 msgid "Net"
-msgstr ""
+msgstr "그물"
 
 #: src/translations.h:187
 msgid "Jaw"
-msgstr ""
+msgstr "턱"
 
 #: src/translations.h:188
 msgid "Mooring Post"
-msgstr ""
+msgstr "계선주"
 
 #: src/translations.h:189
 msgid "Kenemet"
@@ -1416,7 +1409,7 @@ msgstr "양"
 
 #: src/translations.h:193
 msgid "Stars of Water"
-msgstr ""
+msgstr "물의 별"
 
 #: src/translations.h:196
 msgid "Northern Dipper"
@@ -1788,15 +1781,15 @@ msgstr "즐거운 소리"
 
 #: src/translations.h:292
 msgid "The Seven"
-msgstr ""
+msgstr "칠공"
 
 #: src/translations.h:293
 msgid "Maui's Fishhook"
-msgstr ""
+msgstr "마우이의 낚시바늘"
 
 #: src/translations.h:294
 msgid "Navigator's Triangle"
-msgstr ""
+msgstr "항해자의 삼각자"
 
 #: src/translations.h:295
 msgid "Kite of Kawelo"
@@ -1808,7 +1801,7 @@ msgstr "군함새"
 
 #: src/translations.h:297
 msgid "Cared for by Moon"
-msgstr ""
+msgstr "달의 가호"
 
 #: src/translations.h:298
 msgid "Dolphin"
@@ -1816,7 +1809,7 @@ msgstr "돌고래"
 
 #: src/translations.h:301
 msgid "Select and exit to run."
-msgstr ""
+msgstr "운용을 위해 선택 후 종료"
 
 #: src/s_gui.cpp:2208 src/s_gui.cpp:2254
 msgid "Cancel"
@@ -1849,16 +1842,3 @@ msgstr "분"
 #: src/s_gui.cpp:2737
 msgid "Seconds"
 msgstr "초"
-
-#~ msgid ""
-#~ "Misc:\n"
-#~ "9   : Toggle meteor shower rates\n"
-#~ msgstr ""
-#~ "기타:\n"
-#~ "9 : 유성우 빈도 토글\n"
-
-#~ msgid "CTRL + Q : Quit\n"
-#~ msgstr "CTRL + Q : 종료\n"
-
-#~ msgid "CMD + Q  : Quit\n"
-#~ msgstr "CMD + Q : 종료\n"

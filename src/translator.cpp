@@ -52,6 +52,7 @@ void Translator::reload()
 	if (Translator::lastUsed == this) return;
 	// This needs to be static as it is used a each gettext call... It tooks me quite a while before I got that :(
 	static char envstr[25];
+#ifndef MACOSX	
 	if (langName=="system" || langName=="system_default")
 	{
 		snprintf(envstr, 25, "LANGUAGE=%s", Translator::systemLangName.c_str());
@@ -60,6 +61,15 @@ void Translator::reload()
 	{
 		snprintf(envstr, 25, "LANGUAGE=%s", langName.c_str());
 	}
+#else
+	if (langName=="system" || langName=="system_default")
+	{
+		snprintf(envstr, 25, "LANG=%s", Translator::systemLangName.c_str());
+	}
+	else
+	{
+		snprintf(envstr, 25, "LANG=%s", langName.c_str());	
+#endif
 	//printf("Setting locale: %s\n", envstr);
 	putenv(envstr);
 	setlocale(LC_MESSAGES, "");
@@ -102,12 +112,7 @@ static wchar_t *UTF8_to_UNICODE(wchar_t *unicode, const char *utf8, int len)
 					ch |=  (unsigned short)(utf8[++i]&0x3F);
 				}
 
-#if 0 //def WORDS_BIGENDIAN
-		unicode[j] = bswap_16(ch);
-#else
 		unicode[j] = ch;
-#endif
-
 	}
 	unicode[j] = 0;
 

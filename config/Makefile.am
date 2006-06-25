@@ -1,1 +1,0 @@
-pkgdatadir = $(datadir)/@PACKAGE@/config

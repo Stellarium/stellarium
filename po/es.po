@@ -10,8 +10,8 @@ msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: stellarium@free.fr\n"
 "POT-Creation-Date: 2006-06-20 20:50+0200\n"
-"PO-Revision-Date: 2006-05-14 22:10+0000\n"
-"Last-Translator: Manuel Fonseca <inorganiccaos@yahoo.com.mx>\n"
+"PO-Revision-Date: 2006-05-21 11:04+0000\n"
+"Last-Translator: nickito <itomail@gmail.com>\n"
 "Language-Team:\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -196,7 +196,8 @@ msgid ""
 "    and comments to us at: http://www.stellarium.org\n"
 "\n"
 msgstr ""
-"   Compruebe si hay nuevas versiones y envíenos sus informes de errores\n"
+"   por favor  Compruebe si hay nuevas versiones y envíenos sus informes de "
+"errores\n"
 "y comentarios a: http://www.stellarium.org\n"
 "\n"
 
@@ -658,14 +659,12 @@ msgid "Sky Time At Start-up: "
 msgstr "Hora sideral al inicio: "
 
 #: src/stel_ui_tuiconf.cpp:368
-#, fuzzy
 msgid "Actual Time"
-msgstr "Ajustar fecha y hora "
+msgstr ""
 
 #: src/stel_ui_tuiconf.cpp:369
-#, fuzzy
 msgid "Preset Time"
-msgstr "Hora sideral preestablecida: "
+msgstr ""
 
 #: src/stel_ui_tuiconf.cpp:370
 msgid "Time Display Format: "
@@ -700,53 +699,44 @@ msgid "Twinkling: "
 msgstr "Centelleo: "
 
 #: src/stel_ui_tuiconf.cpp:389
-#, fuzzy
 msgid "Constellation Lines"
-msgstr "Líneas de Constelaciones"
+msgstr ""
 
 #: src/stel_ui_tuiconf.cpp:390
-#, fuzzy
 msgid "Constellation Names"
-msgstr "Nombres de las constelaciones"
+msgstr ""
 
 #: src/stel_ui_tuiconf.cpp:391
-#, fuzzy
 msgid "Constellation Art Intensity"
-msgstr "Figuras de las constelaciones [R]"
+msgstr ""
 
 #: src/stel_ui_tuiconf.cpp:392
-#, fuzzy
 msgid "Constellation Boundaries"
-msgstr "Límites De las Constelaciones"
+msgstr ""
 
 #: src/stel_ui_tuiconf.cpp:394
-#, fuzzy
 msgid "Planet Names"
-msgstr "Planetas"
+msgstr ""
 
 #: src/stel_ui_tuiconf.cpp:395
-#, fuzzy
 msgid "Planet Orbits"
-msgstr "Info Planetas"
+msgstr ""
 
 #: src/stel_ui_tuiconf.cpp:396
-#, fuzzy
 msgid "Planet Trails"
-msgstr "Planetas"
+msgstr ""
 
 #: src/stel_ui_tuiconf.cpp:397
 msgid "Meridian Line"
 msgstr ""
 
 #: src/stel_ui_tuiconf.cpp:402
-#, fuzzy
 msgid "Nebula Names"
-msgstr "Nebulosas [N]"
+msgstr ""
 
 #: src/stel_ui_tuiconf.cpp:403
-#, fuzzy
 msgid "Nebula Circles"
-msgstr "Nebulosa"
+msgstr ""
 
 #: src/stel_ui_tuiconf.cpp:407
 msgid "Landscape: "
@@ -805,9 +795,8 @@ msgid "Update me via Internet: "
 msgstr "Actualízame a través de Internet: "
 
 #: src/stel_ui_tuiconf.cpp:427
-#, fuzzy
 msgid "Set UI Locale: "
-msgstr "Establecer la ubicación "
+msgstr ""
 
 #: src/stel_ui_tuiconf.cpp:539
 msgid "Arrow down to load list."
@@ -942,19 +931,16 @@ msgid "W"
 msgstr "O"
 
 #: src/translations.h:69
-#, fuzzy
 msgid "Chinese"
-msgstr "Planetas"
+msgstr ""
 
 #: src/translations.h:70
-#, fuzzy
 msgid "Western"
-msgstr "Puerta del oeste"
+msgstr ""
 
 #: src/translations.h:71
-#, fuzzy
 msgid "Polynesian"
-msgstr "Info Planetas"
+msgstr ""
 
 #: src/translations.h:72
 msgid "Egyptian"
@@ -1856,19 +1842,6 @@ msgstr "Minutos"
 msgid "Seconds"
 msgstr "Segundos"
 
-#~ msgid ""
-#~ "Misc:\n"
-#~ "9   : Toggle meteor shower rates\n"
-#~ msgstr ""
-#~ "Misc:\n"
-#~ "9 : Cambiar la tasa de meteoros\n"
-
-#~ msgid "CTRL + Q : Quit\n"
-#~ msgstr "CTRL+Q : Salir\n"
-
-#~ msgid "CMD + Q  : Quit\n"
-#~ msgstr "CMD+Q : Salir\n"
-
 #~ msgid "Name : "
 #~ msgstr "Nombre : "
 
@@ -1905,12 +1878,15 @@ msgstr "Segundos"
 #~ msgid "ly"
 #~ msgstr "al"
 
+#, c-format
 #~ msgid "Loading HIP/SAO catalogs: %d/%d"
 #~ msgstr "Cargando Catálogos HIP/SAO : %d/%d"
 
+#, c-format
 #~ msgid "Loading HIP catalog: %d/%d"
 #~ msgstr "Cargando Catálogo HIP: %d/%d"
 
+#, c-format
 #~ msgid "Loading SAO catalog: %d/%d"
 #~ msgstr "Cargando Catálogo SAO: %d/%d"
 
@@ -1944,10 +1920,23 @@ msgstr "Segundos"
 #~ "and comments to us at: http://stellarium.sourceforge.net\n"
 #~ "\n"
 #~ msgstr ""
-#~ "Por favor comprueba si tienes la última versión y envía un informe de "
-#~ "error y tus comentarios \n"
+#~ "Por favor comprueba si tienes la última versión y envía un informe de error "
+#~ "y tus comentarios \n"
 #~ "desde la página web de stellarium : http://stellarium.sourceforge.net\n"
 #~ "\n"
+
+#~ msgid ""
+#~ "Misc:\n"
+#~ "9   : Toggle meteor shower rates\n"
+#~ msgstr ""
+#~ "Misc:\n"
+#~ "9 : Cambiar la tasa de meteoros\n"
+
+#~ msgid "CTRL + Q : Quit\n"
+#~ msgstr "CTRL+Q : Salir\n"
+
+#~ msgid "CMD + Q  : Quit\n"
+#~ msgstr "CMD+Q : Salir\n"
 
 #~ msgid "Constellations"
 #~ msgstr "Constelaciones"
@@ -1994,6 +1983,9 @@ msgstr "Segundos"
 #~ msgid "eg. Crux"
 #~ msgstr "ej. Crux"
 
+#~ msgid "Nebula"
+#~ msgstr "Nebulosa"
+
 #~ msgid "eg. M83, NGC 7009, IC 2118"
 #~ msgstr "ej. M83, NGC 7009, IC 2118"
 
@@ -2031,8 +2023,7 @@ msgstr "Segundos"
 #~ msgid ""
 #~ "ERROR : I can't find the datas directories in :\n"
 #~ "%s/ nor in ./ nor in ../\n"
-#~ "You may fully install the software (type \"make install\" on POSIX "
-#~ "systems)\n"
+#~ "You may fully install the software (type \"make install\" on POSIX systems)\n"
 #~ "or launch the application from the stellarium package directory.\n"
 #~ msgstr ""
 #~ "ERROR : No se puede encontrar el directorio de datos en :\n"
@@ -2142,8 +2133,8 @@ msgstr "Segundos"
 #~ "imported (%s).\n"
 #~ "It will be replaced by the default config file.\n"
 #~ msgstr ""
-#~ "El archivo de configuración actual es de una versión demasiado antigua "
-#~ "como para poder importar sus parámetros (%s).\n"
+#~ "El archivo de configuración actual es de una versión demasiado antigua como "
+#~ "para poder importar sus parámetros (%s).\n"
 #~ "Será reemplazado por el archivo de configuración por defecto.\n"
 
 #~ msgid "Loading configuration file "
@@ -2159,14 +2150,18 @@ msgstr "Segundos"
 #~ "on stellarium web page : http://www.stellarium.org\n"
 #~ "\n"
 #~ msgstr ""
-#~ "Por favor comprueba si tienes la última versión y envía un informe de "
-#~ "error y tus comentarios \n"
+#~ "Por favor comprueba si tienes la última versión y envía un informe de error "
+#~ "y tus comentarios \n"
 #~ "desde la página web de stellarium : http://stellarium.sourceforge.net\n"
 #~ "\n"
 
 #, fuzzy
 #~ msgid "Loading Solar System data..."
 #~ msgstr "Cargando datos del Sistema Solar..."
+
+#, fuzzy
+#~ msgid "Canes"
+#~ msgstr "Planetas"
 
 #, fuzzy
 #~ msgid ""

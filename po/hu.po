@@ -1,7 +1,7 @@
 # Hungarian translation for Stellarium.
 # Copyright (C) 2005 Free Software Foundation, Inc.
 # This file is distributed under the same license as the Stellarium package.
-# Andras Mohari <mayday@mailpont.hu>, 2005-2006.
+# András Mohari <mayday@vizslamail.hu>, 2005-2006.
 # István Dudás <devereaux@freemail.hu>, 2006.
 #
 msgid ""
@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: Stellarium 0.8.0\n"
 "Report-Msgid-Bugs-To: stellarium@free.fr\n"
 "POT-Creation-Date: 2006-06-20 20:50+0200\n"
-"PO-Revision-Date: 2006-05-17 07:17+0000\n"
-"Last-Translator: András Mohari <mayday@mailpont.hu>\n"
+"PO-Revision-Date: 2006-06-21 12:09+0000\n"
+"Last-Translator: András Mohari <mayday@vizslamail.hu>\n"
 "Language-Team: Hungarian\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
@@ -125,7 +125,7 @@ msgstr "Egyenlítői rács [E]"
 
 #: src/stel_ui.cpp:606
 msgid "Ground [G]"
-msgstr "Földfelszín [G]"
+msgstr "Felszín [G]"
 
 #: src/stel_ui.cpp:608
 msgid "Cardinal Points [Q]"
@@ -248,7 +248,7 @@ msgstr ""
 "C    : Csillagképek vonalai      V   : Csillagképek nevei\n"
 "R    : Csillagképek ábrái        E   : Egyenlítői rács\n"
 "Z    : Horizontális rács         N   : Csillagködök nevei\n"
-"P    : Bolygók nevei             G   : Földfelszín\n"
+"P    : Bolygók nevei             G   : Felszín\n"
 "A    : Légkör                    F   : Köd\n"
 "Q    : Égtájak                   O   : Hold nagyítása ki/be\n"
 "T    : Égitest követése          S   : Csillagok\n"
@@ -313,6 +313,13 @@ msgid ""
 "CTRL + Q : Quit\n"
 "CMD + Q  : Quit\n"
 msgstr ""
+"Egyebek:\n"
+"9     : Meteorzápor gyakoriságának váltása\n"
+"CTRL+0...9 : GOTO parancs kiadása a 0-ás, ... 9-es távcsőnek\n"
+"CTRL+SHIFT+H: kép vízszintes tükrözése\n"
+"CTRL+SHIFT+V: kép függőleges tükrözése\n"
+"CTRL+Q: Kilépés\n"
+"CMD+Q : Kilépés\n"
 
 #: src/stel_ui.cpp:740
 msgid "Help"
@@ -404,7 +411,7 @@ msgstr "Ekliptika vonala"
 
 #: src/stel_ui_conf.cpp:190
 msgid "Ground"
-msgstr "Földfelszín"
+msgstr "Felszín"
 
 #: src/stel_ui_conf.cpp:195 src/stel_ui_tuiconf.cpp:393
 msgid "Cardinal Points"
@@ -503,7 +510,7 @@ msgstr "Tájkép:"
 
 #: src/stel_ui_conf.cpp:433 src/stel_ui_conf.cpp:888
 msgid "Author: "
-msgstr ""
+msgstr "Szerző: "
 
 #: src/stel_ui_conf.cpp:456
 msgid "Program Language: "
@@ -559,7 +566,7 @@ msgstr "A megfigyelőhely neve"
 
 #: src/stel_ui_conf.cpp:889
 msgid "Info: "
-msgstr ""
+msgstr "Információ: "
 
 #: src/stel_ui_conf.cpp:941
 msgid ": Normal rate"
@@ -654,14 +661,12 @@ msgid "Sky Time At Start-up: "
 msgstr "Idő az induláskor: "
 
 #: src/stel_ui_tuiconf.cpp:368
-#, fuzzy
 msgid "Actual Time"
-msgstr "Idő beállítása "
+msgstr "Idő"
 
 #: src/stel_ui_tuiconf.cpp:369
-#, fuzzy
 msgid "Preset Time"
-msgstr "Előre beállított idő: "
+msgstr "Előre beállított idő"
 
 #: src/stel_ui_tuiconf.cpp:370
 msgid "Time Display Format: "
@@ -696,53 +701,44 @@ msgid "Twinkling: "
 msgstr "Vibrálás: "
 
 #: src/stel_ui_tuiconf.cpp:389
-#, fuzzy
 msgid "Constellation Lines"
 msgstr "Csillagképek vonalai"
 
 #: src/stel_ui_tuiconf.cpp:390
-#, fuzzy
 msgid "Constellation Names"
 msgstr "Csillagképek nevei"
 
 #: src/stel_ui_tuiconf.cpp:391
-#, fuzzy
 msgid "Constellation Art Intensity"
-msgstr "Csillagképek ábrái [R]"
+msgstr "Csillagképek ábráinak intenzitása"
 
 #: src/stel_ui_tuiconf.cpp:392
-#, fuzzy
 msgid "Constellation Boundaries"
 msgstr "Csillagképek határai"
 
 #: src/stel_ui_tuiconf.cpp:394
-#, fuzzy
 msgid "Planet Names"
-msgstr "Bolygók"
+msgstr "Bolygók nevei"
 
 #: src/stel_ui_tuiconf.cpp:395
-#, fuzzy
 msgid "Planet Orbits"
-msgstr "Bolygók jelölése"
+msgstr "Bolygókpályák"
 
 #: src/stel_ui_tuiconf.cpp:396
-#, fuzzy
 msgid "Planet Trails"
-msgstr "Bolygók"
+msgstr "Bolygónyomok"
 
 #: src/stel_ui_tuiconf.cpp:397
 msgid "Meridian Line"
-msgstr ""
+msgstr "Meridián vonala"
 
 #: src/stel_ui_tuiconf.cpp:402
-#, fuzzy
 msgid "Nebula Names"
-msgstr "Ködök [N]"
+msgstr "Ködök nevei"
 
 #: src/stel_ui_tuiconf.cpp:403
-#, fuzzy
 msgid "Nebula Circles"
-msgstr "Csillagköd"
+msgstr "Ködök jelzőkörei"
 
 #: src/stel_ui_tuiconf.cpp:407
 msgid "Landscape: "
@@ -801,13 +797,12 @@ msgid "Update me via Internet: "
 msgstr "Frissítés az Internetről: "
 
 #: src/stel_ui_tuiconf.cpp:427
-#, fuzzy
 msgid "Set UI Locale: "
-msgstr "Hely beállítása "
+msgstr "Felhasználói felület területi beállítása: "
 
 #: src/stel_ui_tuiconf.cpp:539
 msgid "Arrow down to load list."
-msgstr ""
+msgstr "Lista betöltése a \"le\" nyílbillentyűvel."
 
 #: src/translations.h:33
 msgid "Sun"
@@ -939,21 +934,19 @@ msgstr "Ny"
 
 #: src/translations.h:69
 msgid "Chinese"
-msgstr ""
+msgstr "Kínai"
 
 #: src/translations.h:70
-#, fuzzy
 msgid "Western"
-msgstr "Nyugati Ajtó"
+msgstr "Nyugati"
 
 #: src/translations.h:71
-#, fuzzy
 msgid "Polynesian"
-msgstr "Bolygók jelölése"
+msgstr "Polinéziai"
 
 #: src/translations.h:72
 msgid "Egyptian"
-msgstr ""
+msgstr "Egyiptomi"
 
 #: src/translations.h:75
 msgid "Aquila"
@@ -1308,7 +1301,6 @@ msgid "Vela"
 msgstr "Vitorla"
 
 # XXX: egyiptomi
-# "A bika mellső lába"?
 #: src/translations.h:166
 msgid "Bull's Foreleg"
 msgstr "Ökörcomb"
@@ -1325,7 +1317,6 @@ msgstr "Oroszlán"
 msgid "Two Jaws"
 msgstr "Két Állkapocs"
 
-# XXX: egyiptomi
 #: src/translations.h:170
 msgid "Sah"
 msgstr "Sah"
@@ -1355,7 +1346,6 @@ msgid "Crocodile"
 msgstr "Krokodil"
 
 # XXX: egyiptomi
-# http://gportal.hu/gindex.php?pg=887804&PHPSESSID=8276421410dc6e0b335c57bb9acee9bc
 #: src/translations.h:177
 msgid "Selkis"
 msgstr "Szelket"
@@ -1404,7 +1394,6 @@ msgstr "Állkapocs"
 msgid "Mooring Post"
 msgstr "Kikötőoszlop"
 
-# XXX: egyiptomi
 #: src/translations.h:189
 msgid "Kenemet"
 msgstr "Kenemet"
@@ -1429,7 +1418,6 @@ msgstr "Vizek Csillagai"
 msgid "Northern Dipper"
 msgstr "Északi Merőkanál"
 
-# XXX: kínai csillagkép
 #: src/translations.h:197
 msgid "Curved Array"
 msgstr "Görbe Rend"
@@ -1786,7 +1774,6 @@ msgstr "Három Csillagos Lobogó"
 msgid "Bailer"
 msgstr "Merőkanál"
 
-# XXX: polinéziai: Ka Hei-hei o na Keiki
 #: src/translations.h:290
 msgid "Cat's Cradle"
 msgstr "Macskabölcső"
@@ -1825,7 +1812,7 @@ msgstr "Delfin"
 
 #: src/translations.h:301
 msgid "Select and exit to run."
-msgstr ""
+msgstr "Jelöld ki és lépj ki innen a futtatáshoz."
 
 #: src/s_gui.cpp:2208 src/s_gui.cpp:2254
 msgid "Cancel"
@@ -1858,6 +1845,12 @@ msgstr "Perc"
 #: src/s_gui.cpp:2737
 msgid "Seconds"
 msgstr "Másodp."
+
+#~ msgid "flip horizontal"
+#~ msgstr "vízszintes tükrözés"
+
+#~ msgid "flip vertical"
+#~ msgstr "függőleges tükrözés"
 
 #~ msgid ""
 #~ "Misc:\n"
@@ -1950,12 +1943,15 @@ msgstr "Másodp."
 #~ msgid "Choose a catalog :"
 #~ msgstr "Katalógus:"
 
+#, c-format
 #~ msgid "Loading HIP/SAO catalogs: %d/%d"
 #~ msgstr "HIP-/SAO-katalógus betöltése: %d/%d"
 
+#, c-format
 #~ msgid "Loading HIP catalog: %d/%d"
 #~ msgstr "HIP-katalógus betöltése: %d/%d"
 
+#, c-format
 #~ msgid "Loading SAO catalog: %d/%d"
 #~ msgstr "SAO-katalógus betöltése: %d/%d"
 
@@ -2007,8 +2003,7 @@ msgstr "Másodp."
 #~ msgid ""
 #~ "ERROR : I can't find the datas directories in :\n"
 #~ "%s/ nor in ./ nor in ../\n"
-#~ "You may fully install the software (type \"make install\" on POSIX "
-#~ "systems)\n"
+#~ "You may fully install the software (type \"make install\" on POSIX systems)\n"
 #~ "or launch the application from the stellarium package directory.\n"
 #~ msgstr ""
 #~ "HIBA: Nem találom az adatkönyvtárakat a következő helyeken:\n"
