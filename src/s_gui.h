@@ -530,6 +530,7 @@ namespace s_gui
     {
     public:
 		ListBox(int _displayLines = 5);
+		~ListBox();
 		virtual void setOnChangeCallback(const callback<void>& c) {onChangeCallback = c;}
 		virtual bool onClic(int, int, S_GUI_VALUE, S_GUI_VALUE);
 		virtual bool onMove(int, int);

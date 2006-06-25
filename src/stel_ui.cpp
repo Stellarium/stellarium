@@ -208,7 +208,7 @@ void StelUI::init(const InitParser& conf)
 	message_txtlbl->adjustSize();
 	message_txtlbl->setPos(10,10);
 	message_win = new StdTransBtWin(L"Message", 5000);
-	message_win->setOpaque(opaqueGUI);
+	//message_win->setOpaque(opaqueGUI);
 	message_win->reshape(300,200,400,100);
 	message_win->addComponent(message_txtlbl);
 	message_win->setVisible(false);
@@ -221,7 +221,7 @@ void StelUI::init(const InitParser& conf)
 	desktop->addComponent(bt_flag_time_control_lbl);
 
 	dialog_win = new StdDlgWin(L"Stellarium");
-	dialog_win->setOpaque(opaqueGUI);
+	//dialog_win->setOpaque(opaqueGUI);
 	dialog_win->setDialogCallback(callback<void>(this, &StelUI::dialogCallback));
 	desktop->addComponent(dialog_win);
 
@@ -667,8 +667,8 @@ void StelUI::tcbr(void)
 Component* StelUI::createLicenceWindow(void)
 {
 	licence_txtlbl = new TextLabel(
-wstring(L"                 \u2022   " APP_NAME "  May 2006  \u2022\n\n") +
-L"\u2022   Copyright (c) 2000-2005 Fabien Chereau et al.\n\n" +
+wstring(L"                 \u2022   " APP_NAME "  June 2006  \u2022\n\n") +
+L"\u2022   Copyright (c) 2000-2006 Fabien Chereau et al.\n\n" +
 L"\u2022" + _("   Please check for newer versions and send bug reports\n\
     and comments to us at: http://www.stellarium.org\n\n") +
 L"\u2022   This program is free software; you can redistribute it and/or\n\
@@ -689,7 +689,7 @@ http://www.fsf.org");
 	licence_txtlbl->adjustSize();
 	licence_txtlbl->setPos(10,10);
 	licence_win = new StdBtWin(_("Information"));
-	licence_win->setOpaque(opaqueGUI);
+	//licence_win->setOpaque(opaqueGUI);
 	licence_win->reshape(275,175,435,400);
 	licence_win->addComponent(licence_txtlbl);
 	licence_win->setVisible(FlagInfos);
@@ -756,7 +756,7 @@ wstring(_("Misc:\n"
 	//	help_txtlbl->adjustSize();
 	help_txtlbl->setPos(10,10);
 	help_win = new StdBtWin(_("Help"));
-	help_win->setOpaque(opaqueGUI);
+	//help_win->setOpaque(opaqueGUI);
 	help_win->reshape(215,70,580,624);
 	help_win->addComponent(help_txtlbl);
 	help_win->setVisible(FlagHelp);
