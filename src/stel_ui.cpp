@@ -21,6 +21,7 @@
 
 #include <iostream>
 #include <iomanip>
+#include <algorithm>
 #include "stel_ui.h"
 #include "stellastro.h"
 #include "stelapp.h"
@@ -190,7 +191,7 @@ void StelUI::init(const InitParser& conf)
 	bt_flag_help_lbl->setVisible(0);
 
 	bt_flag_time_control_lbl = new Label(L"ERROR...");
-	bt_flag_time_control_lbl->setPos(core->getViewportWidth()-180,core->getViewportHeight()-41-(int)baseFont->getDescent());
+	bt_flag_time_control_lbl->setPos(core->getViewportWidth()-210,core->getViewportHeight()-41-(int)baseFont->getDescent());
 	bt_flag_time_control_lbl->setVisible(0);
 
 	// Info on selected object
