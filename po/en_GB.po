@@ -7,8 +7,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
-"Report-Msgid-Bugs-To:\n"
-"POT-Creation-Date: 2006-06-20 20:50+0200\n"
+"Report-Msgid-Bugs-To: stellarium@free.fr\n"
+"POT-Creation-Date: 2006-06-25 21:48+0200\n"
 "PO-Revision-Date: 2006-06-21 14:27+0000\n"
 "Last-Translator: Bruce Cowan <bruce.cowan@dsl.pipex.com>\n"
 "Language-Team: English (United Kingdom) <en_GB@li.org>\n"
@@ -37,7 +37,7 @@ msgstr "%s: Bad command line argument(s)\n"
 msgid "Try `%s --help' for more information.\n"
 msgstr "Try `%s --help' for more information.\n"
 
-#: src/constellation_mgr.cpp:174
+#: src/constellation_mgr.cpp:175
 msgid "Loading Constellation Art: "
 msgstr "Loading Constellation Art: "
 
@@ -82,11 +82,11 @@ msgstr "Type: "
 msgid "Size: "
 msgstr "Size: "
 
-#: src/nebula_mgr.cpp:288
+#: src/nebula_mgr.cpp:290
 msgid "Loading NGC catalog: "
 msgstr "Loading NGC catalogue: "
 
-#: src/nebula_mgr.cpp:415
+#: src/nebula_mgr.cpp:417
 msgid "Loading Nebula Textures:"
 msgstr "Loading Nebula Textures:"
 
@@ -94,99 +94,107 @@ msgstr "Loading Nebula Textures:"
 msgid "AU"
 msgstr "AU"
 
-#: src/stel_ui.cpp:503 src/stel_ui.cpp:631
+#: src/stel_ui.cpp:515 src/stel_ui.cpp:645
 msgid "Script commander"
 msgstr "Script commander"
 
-#: src/stel_ui.cpp:530
+#: src/stel_ui.cpp:542
 msgid "Invalid Script command"
 msgstr "Invalid Script command"
 
-#: src/stel_ui.cpp:596
+#: src/stel_ui.cpp:610
 msgid "Drawing of the Constellations [C]"
 msgstr "Drawing of the Constellations [C]"
 
-#: src/stel_ui.cpp:598
+#: src/stel_ui.cpp:612
 msgid "Names of the Constellations [V]"
 msgstr "Names of the Constellations [V]"
 
-#: src/stel_ui.cpp:600
+#: src/stel_ui.cpp:614
 msgid "Constellations Art [R]"
 msgstr "Constellation Art [R]"
 
-#: src/stel_ui.cpp:602
+#: src/stel_ui.cpp:616
 msgid "Azimuthal Grid [Z]"
 msgstr "Azimuthal Grid [Z]"
 
-#: src/stel_ui.cpp:604
+#: src/stel_ui.cpp:618
 msgid "Equatorial Grid [E]"
 msgstr "Equatorial Grid [E]"
 
-#: src/stel_ui.cpp:606
+#: src/stel_ui.cpp:620
 msgid "Ground [G]"
 msgstr "Ground [G]"
 
-#: src/stel_ui.cpp:608
+#: src/stel_ui.cpp:622
 msgid "Cardinal Points [Q]"
 msgstr "Cardinal Points [Q]"
 
-#: src/stel_ui.cpp:610
+#: src/stel_ui.cpp:624
 msgid "Atmosphere [A]"
 msgstr "Atmosphere [A]"
 
-#: src/stel_ui.cpp:612
+#: src/stel_ui.cpp:626
 msgid "Nebulas [N]"
 msgstr "Nebulae [N]"
 
-#: src/stel_ui.cpp:614
+#: src/stel_ui.cpp:628
 msgid "Help [H]"
 msgstr "Help [H]"
 
-#: src/stel_ui.cpp:616
+#: src/stel_ui.cpp:630
 msgid "Equatorial/Altazimuthal Mount [ENTER]"
 msgstr "Equatorial/Altazimuthal Mount [ENTER]"
 
-#: src/stel_ui.cpp:618
+#: src/stel_ui.cpp:632
 msgid "Configuration window"
 msgstr "Configuration window"
 
-#: src/stel_ui.cpp:621
+#: src/stel_ui.cpp:635
 msgid "Night (red) mode"
 msgstr "Night (red) mode"
 
-#: src/stel_ui.cpp:624
+#: src/stel_ui.cpp:638
 msgid "Quit [CTRL + Q]"
 msgstr "Quit [CTRL + Q]"
 
-#: src/stel_ui.cpp:626
+#: src/stel_ui.cpp:640
 msgid "Quit [CMD + Q]"
 msgstr "Quit [CMD + Q]"
 
-#: src/stel_ui.cpp:629
+#: src/stel_ui.cpp:643
 msgid "Search for object"
 msgstr "Search for object"
 
-#: src/stel_ui.cpp:633
+#: src/stel_ui.cpp:647
 msgid "Goto selected object [SPACE]"
 msgstr "Go to selected object [SPACE]"
 
-#: src/stel_ui.cpp:639
+#: src/stel_ui.cpp:649
+msgid "flip horizontally"
+msgstr ""
+
+#: src/stel_ui.cpp:651
+msgid "flip vertically"
+msgstr ""
+
+#: src/stel_ui.cpp:657
 msgid "Decrease Time Speed [J]"
 msgstr "Decrease Time Speed [J]"
 
-#: src/stel_ui.cpp:641
+#: src/stel_ui.cpp:659
 msgid "Real Time Speed [K]"
 msgstr "Real Time Speed [K]"
 
-#: src/stel_ui.cpp:643
+#: src/stel_ui.cpp:661
 msgid "Increase Time Speed [L]"
 msgstr "Increase Time Speed [L]"
 
-#: src/stel_ui.cpp:645
+#: src/stel_ui.cpp:663
 msgid "Return to Current Time"
 msgstr "Return to Current Time"
 
-#: src/stel_ui.cpp:654
+#: src/stel_ui.cpp:672
 msgid ""
 "   Please check for newer versions and send bug reports\n"
 "    and comments to us at: http://www.stellarium.org\n"
@@ -196,11 +204,11 @@ msgstr ""
 "    and comments to us at: http://www.stellarium.org\n"
 "\n"
 
-#: src/stel_ui.cpp:673
+#: src/stel_ui.cpp:691
 msgid "Information"
 msgstr "Information"
 
-#: src/stel_ui.cpp:685
+#: src/stel_ui.cpp:703
 msgid ""
 "Movement & selection:\n"
 "Arrow Keys       : Change viewing RA/DE\n"
@@ -226,7 +234,7 @@ msgstr ""
 "SPACE : Centre on selected object\n"
 "\n"
 
-#: src/stel_ui.cpp:696
+#: src/stel_ui.cpp:714
 msgid ""
 "Display options:\n"
 "ENTER : Equatorial/altazimuthal mount\n"
@@ -254,7 +262,7 @@ msgstr ""
 "4 , : Ecliptic line 5 . : Equator line\n"
 "\n"
 
-#: src/stel_ui.cpp:708
+#: src/stel_ui.cpp:726
 msgid ""
 "Dialogs & other controls:\n"
 "H   : Help                      I   : About Stellarium\n"
@@ -272,7 +280,7 @@ msgstr ""
 "CTRL + F : Toggle object finder\n"
 "\n"
 
-#: src/stel_ui.cpp:715
+#: src/stel_ui.cpp:733
 msgid ""
 "Time & Date:\n"
 "6   : Time rate pause           7   : Time rate 0\n"
@@ -290,7 +298,7 @@ msgstr ""
 "[ : Back 7 days ] : Forward 7 days\n"
 "\n"
 
-#: src/stel_ui.cpp:722
+#: src/stel_ui.cpp:740
 msgid ""
 "During Script Playback:\n"
 "CTRL + C : End Script\n"
@@ -302,7 +310,7 @@ msgstr ""
 "6 : pause script K : resume script\n"
 "\n"
 
-#: src/stel_ui.cpp:726
+#: src/stel_ui.cpp:744
 msgid ""
 "Misc:\n"
 "9   : Toggle meteor shower rates\n"
@@ -320,23 +328,23 @@ msgstr ""
 "CTRL + Q : Quit\n"
 "CMD + Q : Quit\n"
 
-#: src/stel_ui.cpp:740
+#: src/stel_ui.cpp:758
 msgid "Help"
 msgstr "Help"
 
-#: src/stel_ui.cpp:1002
+#: src/stel_ui.cpp:1020
 msgid "Command recording stopped."
 msgstr "Command recording stopped."
 
-#: src/stel_ui.cpp:1010
+#: src/stel_ui.cpp:1028
 msgid "Recording commands to script file:\n"
 msgstr "Recording commands to script file:\n"
 
-#: src/stel_ui.cpp:1012
+#: src/stel_ui.cpp:1030
 msgid "Hit CTRL-R again to stop.\n"
 msgstr "Hit CTRL-R again to stop.\n"
 
-#: src/stel_ui.cpp:1016
+#: src/stel_ui.cpp:1034
 msgid "Error: Unable to open script file to record commands."
 msgstr "Error: Unable to open script file to record commands."
 
@@ -507,7 +515,7 @@ msgstr "For unlisted screen resolutions, edit the file :"
 msgid "Choose landscapes:"
 msgstr "Choose landscape:"
 
-#: src/stel_ui_conf.cpp:433 src/stel_ui_conf.cpp:888
+#: src/stel_ui_conf.cpp:433 src/stel_ui_conf.cpp:889
 msgid "Author: "
 msgstr "Author: "
 
@@ -563,31 +571,31 @@ msgstr "GO"
 msgid "Enter observatory name"
 msgstr "Enter observatory name"
 
-#: src/stel_ui_conf.cpp:889
+#: src/stel_ui_conf.cpp:890
 msgid "Info: "
 msgstr "Info: "
 
-#: src/stel_ui_conf.cpp:941
+#: src/stel_ui_conf.cpp:942
 msgid ": Normal rate"
 msgstr ": Normal rate"
 
-#: src/stel_ui_conf.cpp:948
+#: src/stel_ui_conf.cpp:949
 msgid ": Standard Perseids rate"
 msgstr ": Standard Perseids rate"
 
-#: src/stel_ui_conf.cpp:955
+#: src/stel_ui_conf.cpp:956
 msgid ": Exceptional Leonid rate"
 msgstr ": Exceptional Leonid rate"
 
-#: src/stel_ui_conf.cpp:962
+#: src/stel_ui_conf.cpp:963
 msgid ": Highest rate ever (1966 Leonids)"
 msgstr ": Highest rate ever (1966 Leonids)"
 
-#: src/stel_ui_conf.cpp:967
+#: src/stel_ui_conf.cpp:968
 msgid "Meteor Rate per minute"
 msgstr "Meteor Rate per minute"
 
-#: src/stel_ui_conf.cpp:988
+#: src/stel_ui_conf.cpp:989
 msgid "Current Time Speed is x"
 msgstr "Current Time Speed is x"
 
@@ -679,11 +687,11 @@ msgstr "Date Display Format: "
 msgid "Show: "
 msgstr "Show: "
 
-#: src/stel_ui_tuiconf.cpp:383 src/stel_ui_tuiconf.cpp:408 src/s_gui.cpp:2221
+#: src/stel_ui_tuiconf.cpp:383 src/stel_ui_tuiconf.cpp:408 src/s_gui.cpp:2232
 msgid "Yes"
 msgstr "Yes"
 
-#: src/stel_ui_tuiconf.cpp:383 src/stel_ui_tuiconf.cpp:408 src/s_gui.cpp:2202
+#: src/stel_ui_tuiconf.cpp:383 src/stel_ui_tuiconf.cpp:408 src/s_gui.cpp:2213
 msgid "No"
 msgstr "No"
 
@@ -915,19 +923,19 @@ msgstr "Charon"
 msgid "Solar System Observer"
 msgstr "Solar System Observer"
 
-#: src/translations.h:63 src/s_gui.cpp:2667
+#: src/translations.h:63 src/s_gui.cpp:2678
 msgid "N"
 msgstr "N"
 
-#: src/translations.h:64 src/s_gui.cpp:2668
+#: src/translations.h:64 src/s_gui.cpp:2679
 msgid "S"
 msgstr "S"
 
-#: src/translations.h:65 src/s_gui.cpp:2672
+#: src/translations.h:65 src/s_gui.cpp:2683
 msgid "E"
 msgstr "E"
 
-#: src/translations.h:66 src/s_gui.cpp:2673
+#: src/translations.h:66 src/s_gui.cpp:2684
 msgid "W"
 msgstr "W"
 
@@ -1811,47 +1819,44 @@ msgstr "Dolphin"
 msgid "Select and exit to run."
 msgstr "Select and exit to run."
 
-#: src/s_gui.cpp:2208 src/s_gui.cpp:2254
+#: src/s_gui.cpp:2219 src/s_gui.cpp:2265
 msgid "Cancel"
 msgstr "Cancel"
 
-#: src/s_gui.cpp:2226 src/s_gui.cpp:2252
+#: src/s_gui.cpp:2237 src/s_gui.cpp:2263
 msgid "OK"
 msgstr "OK"
 
-#: src/s_gui.cpp:2722
+#: src/s_gui.cpp:2733
 msgid "Year"
 msgstr "Year"
 
-#: src/s_gui.cpp:2725
+#: src/s_gui.cpp:2736
 msgid "Month"
 msgstr "Month"
 
-#: src/s_gui.cpp:2728
+#: src/s_gui.cpp:2739
 msgid "Day"
 msgstr "Day"
 
-#: src/s_gui.cpp:2731
+#: src/s_gui.cpp:2742
 msgid "Hour"
 msgstr "Hour"
 
-#: src/s_gui.cpp:2734
+#: src/s_gui.cpp:2745
 msgid "Minutes"
 msgstr "Minutes"
 
-#: src/s_gui.cpp:2737
+#: src/s_gui.cpp:2748
 msgid "Seconds"
 msgstr "Seconds"
 
-#, c-format
 #~ msgid "Loading HIP/SAO catalogs: %d/%d"
 #~ msgstr "Loading HIP/SAO catalogues: %d/%d"
 
-#, c-format
 #~ msgid "Loading HIP catalog: %d/%d"
 #~ msgstr "Loading HIP catalogues: %d/%d"
 
-#, c-format
 #~ msgid "Loading SAO catalog: %d/%d"
 #~ msgstr "Loading SAO catalogue: %d/%d"
 
@@ -1866,13 +1871,13 @@ msgstr "Seconds"
 
 #~ msgid ""
 #~ "   Please check for newer versions and send bug reports\n"
-#~ "\t                                   and comments to us at: "
-#~ "http://www.stellarium.org\n"
+#~ "\t                                   and comments to us at: http://www."
+#~ "stellarium.org\n"
 #~ "\n"
 #~ msgstr ""
 #~ "   Please check for newer versions and send bug reports\n"
-#~ "\t                                   and comments to us at: "
-#~ "http://www.stellarium.org\n"
+#~ "\t                                   and comments to us at: http://www."
+#~ "stellarium.org\n"
 #~ "\n"
 
 #~ msgid ""
@@ -1883,10 +1888,11 @@ msgstr "Seconds"
 #~ "\t                            Left Click       : Select object\n"
 #~ "\t                            Right Click      : Unselect\n"
 #~ "\t                            CTRL+Left Click  : Unselect\n"
-#~ "\t                            \\                : Zoom out (planet + moons "
-#~ "if applicable)\n"
+#~ "\t                            \\                : Zoom out (planet + "
+#~ "moons if applicable)\n"
 #~ "\t                            /                : Zoom to selected object\n"
-#~ "\t                            SPACE            : Center on selected object\n"
+#~ "\t                            SPACE            : Center on selected "
+#~ "object\n"
 #~ "\t                            \n"
 #~ msgstr ""
 #~ "Movement & selection:\n"
@@ -1896,10 +1902,11 @@ msgstr "Seconds"
 #~ "\t                            Left Click       : Select object\n"
 #~ "\t                            Right Click      : Unselect\n"
 #~ "\t                            CTRL+Left Click  : Unselect\n"
-#~ "\t                            \\                : Zoom out (planet + moons "
-#~ "if applicable)\n"
+#~ "\t                            \\                : Zoom out (planet + "
+#~ "moons if applicable)\n"
 #~ "\t                            /                : Zoom to selected object\n"
-#~ "\t                            SPACE            : Centre on selected object\n"
+#~ "\t                            SPACE            : Centre on selected "
+#~ "object\n"
 #~ "\t                            \n"
 
 #~ msgid ""
@@ -1910,15 +1917,17 @@ msgstr "Seconds"
 #~ "Constellation labels\n"
 #~ "\t                            R   : Constellation art         E   : "
 #~ "Equatorial grid\n"
-#~ "\t                            Z   : Azimuthal grid            N   : Nebula "
-#~ "labels\n"
-#~ "\t                            P   : Planet labels             G   : Ground\n"
+#~ "\t                            Z   : Azimuthal grid            N   : "
+#~ "Nebula labels\n"
+#~ "\t                            P   : Planet labels             G   : "
+#~ "Ground\n"
 #~ "\t                            A   : Atmosphere                F   : Fog\n"
-#~ "\t                            Q   : Cardinal points           O   : Toggle "
-#~ "moon scaling\n"
-#~ "\t                            T   : Object tracking           S   : Stars\n"
-#~ "\t                            4 , : Ecliptic line             5 . : Equator "
-#~ "line\n"
+#~ "\t                            Q   : Cardinal points           O   : "
+#~ "Toggle moon scaling\n"
+#~ "\t                            T   : Object tracking           S   : "
+#~ "Stars\n"
+#~ "\t                            4 , : Ecliptic line             5 . : "
+#~ "Equator line\n"
 #~ "\t                            \n"
 #~ msgstr ""
 #~ "Display options:\n"
@@ -1928,15 +1937,17 @@ msgstr "Seconds"
 #~ "Constellation labels\n"
 #~ "\t                            R   : Constellation art         E   : "
 #~ "Equatorial grid\n"
-#~ "\t                            Z   : Azimuthal grid            N   : Nebula "
-#~ "labels\n"
-#~ "\t                            P   : Planet labels             G   : Ground\n"
+#~ "\t                            Z   : Azimuthal grid            N   : "
+#~ "Nebula labels\n"
+#~ "\t                            P   : Planet labels             G   : "
+#~ "Ground\n"
 #~ "\t                            A   : Atmosphere                F   : Fog\n"
-#~ "\t                            Q   : Cardinal points           O   : Toggle "
-#~ "moon scaling\n"
-#~ "\t                            T   : Object tracking           S   : Stars\n"
-#~ "\t                            4 , : Ecliptic line             5 . : Equator "
-#~ "line\n"
+#~ "\t                            Q   : Cardinal points           O   : "
+#~ "Toggle moon scaling\n"
+#~ "\t                            T   : Object tracking           S   : "
+#~ "Stars\n"
+#~ "\t                            4 , : Ecliptic line             5 . : "
+#~ "Equator line\n"
 #~ "\t                            \n"
 
 #~ msgid ""
@@ -1964,40 +1975,40 @@ msgstr "Seconds"
 #~ "Time & Date:\n"
 #~ "\t                            6   : Time rate pause           7   : Time "
 #~ "rate 0\n"
-#~ "\t                            8   : Set current time          J   : Decrease "
-#~ "time rate\n"
-#~ "\t                            K   : Normal time rate          L   : Increase "
-#~ "time rate\n"
-#~ "\t                            -   : Back 24 hours             =   : Forward "
-#~ "24 hours\n"
-#~ "\t                            [   : Back 7 days               ]   : Forward "
-#~ "7 days\n"
+#~ "\t                            8   : Set current time          J   : "
+#~ "Decrease time rate\n"
+#~ "\t                            K   : Normal time rate          L   : "
+#~ "Increase time rate\n"
+#~ "\t                            -   : Back 24 hours             =   : "
+#~ "Forward 24 hours\n"
+#~ "\t                            [   : Back 7 days               ]   : "
+#~ "Forward 7 days\n"
 #~ "\t                            \n"
 #~ msgstr ""
 #~ "Time & Date:\n"
 #~ "\t                            6   : Time rate pause           7   : Time "
 #~ "rate 0\n"
-#~ "\t                            8   : Set current time          J   : Decrease "
-#~ "time rate\n"
-#~ "\t                            K   : Normal time rate          L   : Increase "
-#~ "time rate\n"
-#~ "\t                            -   : Back 24 hours             =   : Forward "
-#~ "24 hours\n"
-#~ "\t                            [   : Back 7 days               ]   : Forward "
-#~ "7 days\n"
+#~ "\t                            8   : Set current time          J   : "
+#~ "Decrease time rate\n"
+#~ "\t                            K   : Normal time rate          L   : "
+#~ "Increase time rate\n"
+#~ "\t                            -   : Back 24 hours             =   : "
+#~ "Forward 24 hours\n"
+#~ "\t                            [   : Back 7 days               ]   : "
+#~ "Forward 7 days\n"
 #~ "\t                            \n"
 
 #~ msgid ""
 #~ "During Script Playback:\n"
 #~ "\t                            CTRL + C : End Script\n"
-#~ "\t                            6   : pause script              K   : resume "
-#~ "script\n"
+#~ "\t                            6   : pause script              K   : "
+#~ "resume script\n"
 #~ "\t                            \n"
 #~ msgstr ""
 #~ "During Script Playback:\n"
 #~ "\t                            CTRL + C : End Script\n"
-#~ "\t                            6   : pause script              K   : resume "
-#~ "script\n"
+#~ "\t                            6   : pause script              K   : "
+#~ "resume script\n"
 #~ "\t                            \n"
 
 #~ msgid ""
