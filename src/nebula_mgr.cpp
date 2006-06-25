@@ -49,6 +49,8 @@ NebulaMgr::~NebulaMgr()
 
 	if (Nebula::nebula_font) delete Nebula::nebula_font;
 	Nebula::nebula_font = NULL;
+	
+	delete[] nebZones;
 }
 
 // read from stream

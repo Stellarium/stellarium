@@ -33,7 +33,7 @@ using namespace std;
 
 SolarSystem::SolarSystem()
             :sun(NULL),moon(NULL),earth(NULL),
-             moonScale(1.),tex_earth_shadow(NULL),
+             moonScale(1.), planet_name_font(NULL), tex_earth_shadow(NULL),
              flagOrbits(false),flag_light_travel_time(false) {
 }
 

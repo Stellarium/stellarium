@@ -1531,6 +1531,17 @@ ListBox::ListBox(int _displayLines) :
 	scrollBar.setElementsForBar(displayLines);
 }
 
+ListBox::~ListBox()
+{
+	vector<LabeledButton*>::iterator iter = itemBt.begin();
+	while (iter != itemBt.end())
+    {
+        delete (*iter);
+        (*iter)=NULL;
+        iter++;
+    }
+}
+
 void ListBox::createLines(void)
 {
 	unsigned int i;
