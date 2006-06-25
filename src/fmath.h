@@ -31,7 +31,7 @@
 # define pow10(x) pow(10,(x))
 #endif
 
-#ifndef CYGWIN
+#ifndef WIN32
 
 #ifndef HAVE_ACOSF
 # define acosf(x) (float)(acos(x))

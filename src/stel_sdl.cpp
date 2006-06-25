@@ -16,6 +16,10 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
+#ifdef WIN32
+#include "shlobj.h"
+#endif
+
 #include "stelapp.h"
 #include "s_gui.h"
 
@@ -329,18 +333,6 @@ void StelApp::start_main_loop()
 
 				case SDL_KEYDOWN:
 					// Send the event to the gui and stop if it has been intercepted
-
-					/*
-					printf("key(%d 0x%04x) pressed: ",E.key.keysym.sym,E.key.keysym.mod);
-					if( E.key.keysym.unicode < 0x80 && E.key.keysym.unicode > 0 ){
-						printf( "%c (0x%04X)\n", (char)E.key.keysym.unicode,
-								E.key.keysym.unicode );
-					}
-					else{
-						printf( "? (0x%04X)\n", E.key.keysym.unicode );
-					}
-					*/
-
 					// use unicode translation, since not keyboard dependent
 					// however, for non-printing keys must revert to just keysym... !
 					if ((E.key.keysym.unicode && !handleKeys(E.key.keysym.sym,E.key.keysym.mod,E.key.keysym.unicode,S_GUI_PRESSED)) ||
@@ -388,12 +380,12 @@ void StelApp::start_main_loop()
 							free(pixels);
 
 							string shotdir;
-#if defined(WIN32) || defined(CYGWIN) || defined(__MINGW32__)		
-							char* path[MAX_PATH];
+#if defined(WIN32)
+							char path[MAX_PATH];
 							path[MAX_PATH-1] = '\0';
-							if (SHGetSpecialFolderPath(NULL, path, CSIDL_MYDOCUMENTS, 0)==true)
+							if (SUCCEEDED(SHGetFolderPath(NULL, CSIDL_DESKTOPDIRECTORY, NULL, 0, path)))
 							{
-								shotdir = path;
+								shotdir = string(path)+"\\";
 							}
 							else
 							{	
