@@ -35,12 +35,12 @@ void StelApp::initSDL(int w, int h, int bbpMode, bool fullScreen, string iconFil
 
     // Init the SDL library, the VIDEO subsystem    
     // Tony - added timer
-    if(SDL_Init(SDL_INIT_VIDEO |  SDL_INIT_AUDIO | SDL_INIT_NOPARACHUTE | SDL_INIT_TIMER)<0)
+    if(SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO | SDL_INIT_NOPARACHUTE | SDL_INIT_TIMER)<0)
 	{
 		// couldn't init audio, so try without
 		fprintf(stderr, "Error: unable to open SDL with audio: %s\n", SDL_GetError() );
 
-		if(SDL_Init(SDL_INIT_VIDEO | SDL_INIT_NOPARACHUTE)<0)
+		if(SDL_Init(SDL_INIT_VIDEO | SDL_INIT_NOPARACHUTE | SDL_INIT_TIMER)<0)
 		{
 			fprintf(stderr, "Error: unable to open SDL: %s\n", SDL_GetError() );
 			exit(-1);
@@ -60,7 +60,7 @@ void StelApp::initSDL(int w, int h, int bbpMode, bool fullScreen, string iconFil
 	}
 #else
 	// SDL_mixer is not available - no audio
-	if(SDL_Init(SDL_INIT_VIDEO | SDL_INIT_NOPARACHUTE)<0)
+	if(SDL_Init(SDL_INIT_VIDEO | SDL_INIT_NOPARACHUTE | SDL_INIT_TIMER)<0)
 	{
 		fprintf(stderr, "Unable to open SDL: %s\n", SDL_GetError() );
 		exit(-1);
@@ -235,7 +235,9 @@ void StelApp::terminateApplication(void)
 enum {
 	USER_EVENT_TICK
 };
-static Uint32 timer_callback(Uint32 interval, void *param)
+
+
+Uint32 mytimer_callback(Uint32 interval, void *param)
 {
 	SDL_Event event;
 	event.type = SDL_USEREVENT;
@@ -449,35 +451,34 @@ void StelApp::start_main_loop()
 			}
 			else
 			{
-				// Compute how many fps we should run at to get 1 pixel
-				// movement each frame.
+				// Compute how many fps we should run at to get 1 pixel movement each frame.
 				double frameRate = 1000. * animationSpeed;
-				// If there was user action in the last 2.5 seconds, shoot for
-				// the max framerate.
-				if (SDL_GetTicks() - last_event_time < 2500 ||
-						frameRate > getMaxFPS()) {
-					frameRate = getMaxFPS();
+				// If there was user action in the last 2.5 seconds, shoot for the max framerate.
+				if (SDL_GetTicks() - last_event_time < 2500 || frameRate > maxfps)
+				{
+					frameRate = maxfps;
 				}
-				if (frameRate < getMinFPS()) {
-					frameRate = getMinFPS();
+				if (frameRate < minfps)
+				{
+					frameRate = minfps;
 				}
 
 				TickCount = SDL_GetTicks();			// Get present ticks
-				// Wait a while if drawing a frame right now would exceed our
-				// preferred framerate.
+				// Wait a while if drawing a frame right now would exceed our preferred framerate.
 				if (TickCount-LastCount < 1000./frameRate)
 				{
-					unsigned int delay = (unsigned int) (1000./frameRate) -
-						(TickCount-LastCount);
+					unsigned int delay = (unsigned int) (1000./frameRate) - (TickCount-LastCount);
 //					printf("delay=%d\n", delay);
 					if (delay < 15) {
 						// Less than 15ms, just do a dumb wait.
 						SDL_Delay(delay);
 					} else {
 						// A longer delay. Use this timer song and dance so
-						// that the app is still responsive if the user does
-						// something.
-						SDL_AddTimer(delay, timer_callback, NULL);
+						// that the app is still responsive if the user does something.
+						if (!SDL_AddTimer(delay, mytimer_callback, NULL))
+						{
+							cerr << "Error: couldn't create an SDL timer: " << SDL_GetError() << endl;
+						}
 						SDL_WaitEvent(NULL);
 					}
 				}
