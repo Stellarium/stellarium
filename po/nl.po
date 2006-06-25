@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: stellarium@free.fr\n"
 "POT-Creation-Date: 2006-06-20 20:50+0200\n"
-"PO-Revision-Date: 2006-04-28 21:15+0000\n"
+"PO-Revision-Date: 2006-06-24 19:45+0000\n"
 "Last-Translator: Johan Meuris <johanmeuris@antwerpen.be>\n"
 "Language-Team:\n"
 "MIME-Version: 1.0\n"
@@ -87,7 +87,7 @@ msgstr "Grootte: "
 
 #: src/nebula_mgr.cpp:288
 msgid "Loading NGC catalog: "
-msgstr "Laden NGC sterrencatalogus: %d/%d "
+msgstr "Laden NGC sterrencatalogus: "
 
 #: src/nebula_mgr.cpp:415
 msgid "Loading Nebula Textures:"
@@ -315,6 +315,13 @@ msgid ""
 "CTRL + Q : Quit\n"
 "CMD + Q  : Quit\n"
 msgstr ""
+"Allerlei:\n"
+"9: verander intensiteit meteorenregens\n"
+"CTRL+0,1,...,9 : voer een GOTO commando uit voor telescoop 0,1,...,9\n"
+"CTRL+SHIFT+H: spiegel beeld horizontaal\n"
+"CTRL+SHIFT+V: spiegel beeld verticaal\n"
+"CTRL+Q: Afsluiten\n"
+"CMD+Q: Afsluiten\n"
 
 #: src/stel_ui.cpp:740
 msgid "Help"
@@ -494,7 +501,7 @@ msgstr "Herstart programma om"
 
 #: src/stel_ui_conf.cpp:385
 msgid "change to apply."
-msgstr "Verander om toe te passen."
+msgstr "de veranderingen te zien."
 
 #: src/stel_ui_conf.cpp:401
 msgid "For unlisted screen resolution, edit the file :"
@@ -506,7 +513,7 @@ msgstr "Kies landschap:"
 
 #: src/stel_ui_conf.cpp:433 src/stel_ui_conf.cpp:888
 msgid "Author: "
-msgstr ""
+msgstr "Auteur: "
 
 #: src/stel_ui_conf.cpp:456
 msgid "Program Language: "
@@ -562,7 +569,7 @@ msgstr "Voer naam van sterrenwacht in"
 
 #: src/stel_ui_conf.cpp:889
 msgid "Info: "
-msgstr ""
+msgstr "Info: "
 
 #: src/stel_ui_conf.cpp:941
 msgid ": Normal rate"
@@ -657,14 +664,12 @@ msgid "Sky Time At Start-up: "
 msgstr "Hemeltijd bij opstarten: "
 
 #: src/stel_ui_tuiconf.cpp:368
-#, fuzzy
 msgid "Actual Time"
-msgstr "Instellen tijd "
+msgstr "Reële Tijd"
 
 #: src/stel_ui_tuiconf.cpp:369
-#, fuzzy
 msgid "Preset Time"
-msgstr "Vooraf ingestelde hemeltijd: "
+msgstr "Vooringestelde Tijd"
 
 #: src/stel_ui_tuiconf.cpp:370
 msgid "Time Display Format: "
@@ -699,53 +704,44 @@ msgid "Twinkling: "
 msgstr "Fonkelen: "
 
 #: src/stel_ui_tuiconf.cpp:389
-#, fuzzy
 msgid "Constellation Lines"
-msgstr "Lijnen sterrenbeeld"
+msgstr "Lijntekeningen Sterrenbeelden"
 
 #: src/stel_ui_tuiconf.cpp:390
-#, fuzzy
 msgid "Constellation Names"
-msgstr "Namen van sterrenbeelden"
+msgstr "Namen Sterrenbeelden"
 
 #: src/stel_ui_tuiconf.cpp:391
-#, fuzzy
 msgid "Constellation Art Intensity"
-msgstr "Afbeeldingen van de sterrenbeelden [R]"
+msgstr "Intensiteit Sterrenbeeldtekening"
 
 #: src/stel_ui_tuiconf.cpp:392
-#, fuzzy
 msgid "Constellation Boundaries"
 msgstr "Sterrenbeeldgrenzen"
 
 #: src/stel_ui_tuiconf.cpp:394
-#, fuzzy
 msgid "Planet Names"
-msgstr "Planeten"
+msgstr "Namen Planeten"
 
 #: src/stel_ui_tuiconf.cpp:395
-#, fuzzy
 msgid "Planet Orbits"
-msgstr "Hints voor planeten"
+msgstr "Omloopbanen Planeten"
 
 #: src/stel_ui_tuiconf.cpp:396
-#, fuzzy
 msgid "Planet Trails"
-msgstr "Planeten"
+msgstr "Planeetsporen"
 
 #: src/stel_ui_tuiconf.cpp:397
 msgid "Meridian Line"
-msgstr ""
+msgstr "Meridiaancirkel"
 
 #: src/stel_ui_tuiconf.cpp:402
-#, fuzzy
 msgid "Nebula Names"
-msgstr "Nevels [N]"
+msgstr "Namen Nevels"
 
 #: src/stel_ui_tuiconf.cpp:403
-#, fuzzy
 msgid "Nebula Circles"
-msgstr "Nevels"
+msgstr "Cirkels Nevels"
 
 #: src/stel_ui_tuiconf.cpp:407
 msgid "Landscape: "
@@ -804,13 +800,12 @@ msgid "Update me via Internet: "
 msgstr "Update programma via het internet: "
 
 #: src/stel_ui_tuiconf.cpp:427
-#, fuzzy
 msgid "Set UI Locale: "
-msgstr "Instellen locatie "
+msgstr "Selecteer UI locale: "
 
 #: src/stel_ui_tuiconf.cpp:539
 msgid "Arrow down to load list."
-msgstr ""
+msgstr "Neerwaartse pijl om lijst weer te geven."
 
 #: src/translations.h:33
 msgid "Sun"
@@ -941,23 +936,20 @@ msgid "W"
 msgstr "W"
 
 #: src/translations.h:69
-#, fuzzy
 msgid "Chinese"
-msgstr "Planeten"
+msgstr "Chinees"
 
 #: src/translations.h:70
-#, fuzzy
 msgid "Western"
-msgstr "Westelijke Deur"
+msgstr "Westers"
 
 #: src/translations.h:71
-#, fuzzy
 msgid "Polynesian"
-msgstr "Hints voor planeten"
+msgstr "Polynesisch"
 
 #: src/translations.h:72
 msgid "Egyptian"
-msgstr ""
+msgstr "Egyptisch"
 
 #: src/translations.h:75
 msgid "Aquila"
@@ -1821,7 +1813,7 @@ msgstr "Dolfijn"
 
 #: src/translations.h:301
 msgid "Select and exit to run."
-msgstr ""
+msgstr "Selecteer en sluit om af te spelen."
 
 #: src/s_gui.cpp:2208 src/s_gui.cpp:2254
 msgid "Cancel"
@@ -1854,19 +1846,6 @@ msgstr "Minuten"
 #: src/s_gui.cpp:2737
 msgid "Seconds"
 msgstr "Seconden"
-
-#~ msgid ""
-#~ "Misc:\n"
-#~ "9   : Toggle meteor shower rates\n"
-#~ msgstr ""
-#~ "Overige:\n"
-#~ "9 : Intensiteit meteorenregens\n"
-
-#~ msgid "CTRL + Q : Quit\n"
-#~ msgstr "CTRL+Q : Afsluiten\n"
-
-#~ msgid "CMD + Q  : Quit\n"
-#~ msgstr "CMD+Q : Afsluiten\n"
 
 #~ msgid "Name : "
 #~ msgstr "Naam : "
@@ -1904,12 +1883,15 @@ msgstr "Seconden"
 #~ msgid "ly"
 #~ msgstr "lj"
 
+#, c-format
 #~ msgid "Loading HIP/SAO catalogs: %d/%d"
 #~ msgstr "Laden HIP/SAO sterrencatalogi: %d/%d"
 
+#, c-format
 #~ msgid "Loading HIP catalog: %d/%d"
 #~ msgstr "Laden HIP sterrencatalogus: %d/%d"
 
+#, c-format
 #~ msgid "Loading SAO catalog: %d/%d"
 #~ msgstr "Laden SAO sterrencatalogus: %d/%d"
 
@@ -1945,6 +1927,19 @@ msgstr "Seconden"
 #~ "Kijk na of je de laatste versie van Stellarium hebt en meld \n"
 #~ "problemen en ervaringen op de website http://stellarium.sourceforge.net\n"
 #~ "\n"
+
+#~ msgid ""
+#~ "Misc:\n"
+#~ "9   : Toggle meteor shower rates\n"
+#~ msgstr ""
+#~ "Overige:\n"
+#~ "9 : Intensiteit meteorenregens\n"
+
+#~ msgid "CTRL + Q : Quit\n"
+#~ msgstr "CTRL+Q : Afsluiten\n"
+
+#~ msgid "CMD + Q  : Quit\n"
+#~ msgstr "CMD+Q : Afsluiten\n"
 
 #~ msgid "Constellations"
 #~ msgstr "Sterrenbeelden"
@@ -1994,6 +1989,9 @@ msgstr "Seconden"
 #~ msgid "eg. Crux"
 #~ msgstr "bijv. Crux"
 
+#~ msgid "Nebula"
+#~ msgstr "Nevels"
+
 #~ msgid "eg. M83, NGC 7009, IC 2118"
 #~ msgstr "bijv. M83, NGC 7009, IC 2118"
 
@@ -2030,14 +2028,13 @@ msgstr "Seconden"
 #~ msgid ""
 #~ "ERROR : I can't find the datas directories in :\n"
 #~ "%s/ nor in ./ nor in ../\n"
-#~ "You may fully install the software (type \"make install\" on POSIX "
-#~ "systems)\n"
+#~ "You may fully install the software (type \"make install\" on POSIX systems)\n"
 #~ "or launch the application from the stellarium package directory.\n"
 #~ msgstr ""
 #~ "ERROR : Kan de datamappen niet vinden in :\n"
 #~ "%s/ , ./ of in ../\n"
-#~ "Je kan de software volledig installeren (typ \"make install\" op een "
-#~ "POSIX systeem)\n"
+#~ "Je kan de software volledig installeren (typ \"make install\" op een POSIX "
+#~ "systeem)\n"
 #~ "of het programma starten vanuit de packagemap van Stellarium.\n"
 
 #~ msgid "> Found data files in %s : local version.\n"
@@ -2134,8 +2131,7 @@ msgstr "Seconden"
 #~ msgstr ""
 #~ "Het huidige configuratiebestand is er één van een vorige programmaversie "
 #~ "(>=0.6.0).\n"
-#~ "Eerdere instellingen worden geïmporteerd in het nieuwe "
-#~ "configuratiebestand.\n"
+#~ "Eerdere instellingen worden geïmporteerd in het nieuwe configuratiebestand.\n"
 
 #~ msgid ""
 #~ "The current config file is from a version too old for parameters to be "
@@ -2151,8 +2147,7 @@ msgstr "Seconden"
 
 #~ msgid "ERROR : The current config file is from a different version ("
 #~ msgstr ""
-#~ "ERROR : het huidige configuratiebestand is van een andere programmaversie "
-#~ "("
+#~ "ERROR : het huidige configuratiebestand is van een andere programmaversie ("
 
 #, fuzzy
 #~ msgid ""
@@ -2167,6 +2162,10 @@ msgstr "Seconden"
 #, fuzzy
 #~ msgid "Loading Solar System data..."
 #~ msgstr "Laden data zonnestelsel"
+
+#, fuzzy
+#~ msgid "Canes"
+#~ msgstr "Planeten"
 
 #, fuzzy
 #~ msgid ""

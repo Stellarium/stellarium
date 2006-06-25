@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2006-05-01 03:03+0200\n"
-"PO-Revision-Date: 2006-05-15 00:52+0000\n"
-"Last-Translator: marklar <bmarklar@gmail.com>\n"
+"POT-Creation-Date: 2006-06-20 20:50+0200\n"
+"PO-Revision-Date: 2006-06-21 16:25+0000\n"
+"Last-Translator: lmichnovic <ladislav.michnovic@gmail.com>\n"
 "Language-Team: Slovak <sk@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -37,40 +37,40 @@ msgstr "%s: Nesprávne argumenty príkazu\n"
 msgid "Try `%s --help' for more information.\n"
 msgstr "Viac informácií získate príkazom `%s --help'.\n"
 
-#: src/constellation_mgr.cpp:161
+#: src/constellation_mgr.cpp:174
 msgid "Loading Constellation Art: "
 msgstr "Nahrávam obrázky súhvezdí: "
 
-#: src/hip_star.cpp:88 src/hip_star.cpp:136 src/nebula.cpp:94
-#: src/planet.cpp:107
+#: src/hip_star.cpp:84 src/hip_star.cpp:132 src/nebula.cpp:94
+#: src/planet.cpp:107 src/planet.cpp:153
 msgid "Magnitude: "
 msgstr "Magnitúda: "
 
-#: src/hip_star.cpp:89 src/hip_star.cpp:137
+#: src/hip_star.cpp:85 src/hip_star.cpp:133
 msgid " (Variable)"
 msgstr " (Premenná)"
 
-#: src/hip_star.cpp:91 src/nebula.cpp:96 src/planet.cpp:111
+#: src/hip_star.cpp:87 src/nebula.cpp:96 src/planet.cpp:111
 msgid "RA/DE: "
 msgstr "RA/DE: "
 
-#: src/hip_star.cpp:97 src/nebula.cpp:102 src/planet.cpp:117
+#: src/hip_star.cpp:93 src/nebula.cpp:102 src/planet.cpp:117
 msgid "Az/Alt: "
 msgstr "Az/výška: "
 
-#: src/hip_star.cpp:99 src/planet.cpp:120
+#: src/hip_star.cpp:95 src/planet.cpp:120 src/planet.cpp:157
 msgid "Distance: "
 msgstr "Vzdialenosť: "
 
-#: src/hip_star.cpp:101 src/hip_star.cpp:140
+#: src/hip_star.cpp:97 src/hip_star.cpp:136
 msgid " Light Years"
 msgstr " svetelné roky(ov)"
 
-#: src/hip_star.cpp:108
+#: src/hip_star.cpp:104
 msgid "Spectral Type: "
 msgstr "Spektrálny typ: "
 
-#: src/hip_star_mgr.cpp:126
+#: src/hip_star_mgr.cpp:133
 msgid "Loading Hipparcos catalog:"
 msgstr "Nahrávam katalóg Hipparcos:"
 
@@ -82,7 +82,7 @@ msgstr "Typ: "
 msgid "Size: "
 msgstr "Veľkosť: "
 
-#: src/nebula_mgr.cpp:291
+#: src/nebula_mgr.cpp:288
 msgid "Loading NGC catalog: "
 msgstr "Nahrávam katalóg NGC: "
 
@@ -90,103 +90,103 @@ msgstr "Nahrávam katalóg NGC: "
 msgid "Loading Nebula Textures:"
 msgstr "Nahrávam textúry hmloviny:"
 
-#: src/planet.cpp:120
+#: src/planet.cpp:120 src/planet.cpp:157
 msgid "AU"
 msgstr "AU"
 
-#: src/stel_ui.cpp:490 src/stel_ui.cpp:618
+#: src/stel_ui.cpp:503 src/stel_ui.cpp:631
 msgid "Script commander"
 msgstr "Skriptovací commander"
 
-#: src/stel_ui.cpp:517
+#: src/stel_ui.cpp:530
 msgid "Invalid Script command"
 msgstr "Nesprávny skriptovací príkaz"
 
-#: src/stel_ui.cpp:583
+#: src/stel_ui.cpp:596
 msgid "Drawing of the Constellations [C]"
 msgstr "Vykresliť súhvezdia [C]"
 
-#: src/stel_ui.cpp:585
+#: src/stel_ui.cpp:598
 msgid "Names of the Constellations [V]"
 msgstr "Názvy súhvezdí [V]"
 
-#: src/stel_ui.cpp:587
+#: src/stel_ui.cpp:600
 msgid "Constellations Art [R]"
 msgstr "Kresby súhvezdí [R]"
 
-#: src/stel_ui.cpp:589
+#: src/stel_ui.cpp:602
 msgid "Azimuthal Grid [Z]"
 msgstr "Azimutálna mriežka [Z]"
 
-#: src/stel_ui.cpp:591
+#: src/stel_ui.cpp:604
 msgid "Equatorial Grid [E]"
 msgstr "Ekvatoriálna mriežka [E]"
 
-#: src/stel_ui.cpp:593
+#: src/stel_ui.cpp:606
 msgid "Ground [G]"
 msgstr "Zem [G]"
 
-#: src/stel_ui.cpp:595
+#: src/stel_ui.cpp:608
 msgid "Cardinal Points [Q]"
 msgstr "Svetové strany [Q]"
 
-#: src/stel_ui.cpp:597
+#: src/stel_ui.cpp:610
 msgid "Atmosphere [A]"
 msgstr "Atmosféra [A]"
 
-#: src/stel_ui.cpp:599
+#: src/stel_ui.cpp:612
 msgid "Nebulas [N]"
 msgstr "Hmloviny [N]"
 
-#: src/stel_ui.cpp:601
+#: src/stel_ui.cpp:614
 msgid "Help [H]"
 msgstr "Pomoc [H]"
 
-#: src/stel_ui.cpp:603
+#: src/stel_ui.cpp:616
 msgid "Equatorial/Altazimuthal Mount [ENTER]"
-msgstr "Ekvatoriálna/Paralaktická montáž [ZADAJ]"
+msgstr "Ekvatoriálna/Paralaktická montáž [ENTER]"
 
-#: src/stel_ui.cpp:605
+#: src/stel_ui.cpp:618
 msgid "Configuration window"
 msgstr "Konfiguračné okno"
 
-#: src/stel_ui.cpp:608
+#: src/stel_ui.cpp:621
 msgid "Night (red) mode"
 msgstr "Nočný (červený) mód"
 
-#: src/stel_ui.cpp:611
+#: src/stel_ui.cpp:624
 msgid "Quit [CTRL + Q]"
 msgstr "Skončiť [CTRL + Q]"
 
-#: src/stel_ui.cpp:613
+#: src/stel_ui.cpp:626
 msgid "Quit [CMD + Q]"
 msgstr "Skončiť [PRÍKAZ + Q]"
 
-#: src/stel_ui.cpp:616
+#: src/stel_ui.cpp:629
 msgid "Search for object"
 msgstr "Hľadať objekt"
 
-#: src/stel_ui.cpp:620
+#: src/stel_ui.cpp:633
 msgid "Goto selected object [SPACE]"
 msgstr "Choď na vybraný objekt [MEDZERNÍK]"
 
-#: src/stel_ui.cpp:626
+#: src/stel_ui.cpp:639
 msgid "Decrease Time Speed [J]"
 msgstr "Zníziť rýchlosť času [J]"
 
-#: src/stel_ui.cpp:628
+#: src/stel_ui.cpp:641
 msgid "Real Time Speed [K]"
 msgstr "Reálna rýchlosť času [K]"
 
-#: src/stel_ui.cpp:630
+#: src/stel_ui.cpp:643
 msgid "Increase Time Speed [L]"
 msgstr "Zvýšiť rýchlosť času [L]"
 
-#: src/stel_ui.cpp:632
+#: src/stel_ui.cpp:645
 msgid "Return to Current Time"
 msgstr "Nastaviť súčasný čas"
 
-#: src/stel_ui.cpp:641
+#: src/stel_ui.cpp:654
 msgid ""
 "   Please check for newer versions and send bug reports\n"
 "    and comments to us at: http://www.stellarium.org\n"
@@ -196,11 +196,11 @@ msgstr ""
 "    chybové hlásenia s komentárom na http://www.stellarium.org\n"
 "\n"
 
-#: src/stel_ui.cpp:660
+#: src/stel_ui.cpp:673
 msgid "Information"
 msgstr "Informácie"
 
-#: src/stel_ui.cpp:672
+#: src/stel_ui.cpp:685
 msgid ""
 "Movement & selection:\n"
 "Arrow Keys       : Change viewing RA/DE\n"
@@ -215,7 +215,7 @@ msgid ""
 "\n"
 msgstr ""
 "Ovládanie a výber:\n"
-"Šipky : Zmena RA/DE\n"
+"Šípky : Zmena RA/DE\n"
 "Page Up/Down : Zväčšenie\n"
 "CTRL+Up/Down : Zväčšenie\n"
 "Ľavý klik : Vybrať objekt\n"
@@ -226,7 +226,7 @@ msgstr ""
 "MEDZERNÍK : Vycentrovať zvolený objekt\n"
 "\n"
 
-#: src/stel_ui.cpp:683
+#: src/stel_ui.cpp:696
 msgid ""
 "Display options:\n"
 "ENTER : Equatorial/altazimuthal mount\n"
@@ -241,8 +241,19 @@ msgid ""
 "4 , : Ecliptic line             5 . : Equator line\n"
 "\n"
 msgstr ""
+"Možnosti zobrazenia:\n"
+"ENTER : ekvatoriálna/paralaktická montáž\n"
+"F1 : Prepnúť na celú obrazovku, ak je možné.\n"
+"C : čiary u súhvezdí V : názvy súhvezdí\n"
+"R : obrázky súhvezdí E : rovníková mriežka\n"
+"Z : azimutálna mriežka G : zem\n"
+"A : atmosféra F : hmla\n"
+"Q : svetové strany O : prepnúť mierku mesiaca\n"
+"T : sledovanie objektu S : hviezdy\n"
+"4, : ekliptika 5. : ekvatoriál\n"
+"\n"
 
-#: src/stel_ui.cpp:695
+#: src/stel_ui.cpp:708
 msgid ""
 "Dialogs & other controls:\n"
 "H   : Help                      I   : About Stellarium\n"
@@ -252,8 +263,15 @@ msgid ""
 "CTRL + F : Toggle object finder\n"
 "\n"
 msgstr ""
+"Dialógy a ďalšie ovládanie:\n"
+"H : Pomocník I : O programe Stellarium\n"
+"M : Textové menu 1 : Konfigurácia\n"
+"CTRL + S : urobiť snímku\n"
+"CTRL + R : prepínač zaznamenávania skriptu\n"
+"CTRL + F : prepínač vyhľadávača objektov\n"
+"\n"
 
-#: src/stel_ui.cpp:702
+#: src/stel_ui.cpp:715
 msgid ""
 "Time & Date:\n"
 "6   : Time rate pause           7   : Time rate 0\n"
@@ -263,46 +281,61 @@ msgid ""
 "[   : Back 7 days               ]   : Forward 7 days\n"
 "\n"
 msgstr ""
+"Čas a Dátum :\n"
+"6 : pozastaviť urýchlenie času 7 : rýchlosť času 0\n"
+"8 : nastaviť aktuálny čas J : znížiť rýchlosť plynutia času\n"
+"K : normálna rýchlosť času L : zvýšiť rýchlosť plynutia času\n"
+"- : späť o 24 hodín = : dopredu o 24 hodín\n"
+"[ : späť o 7 dní ] : dopredu o 7 dní\n"
+"\n"
 
-#: src/stel_ui.cpp:709
+#: src/stel_ui.cpp:722
 msgid ""
 "During Script Playback:\n"
 "CTRL + C : End Script\n"
 "6   : pause script              K   : resume script\n"
 "\n"
 msgstr ""
+"Počas vykonávania skriptu:\n"
+"CTRL + C : ukončiť skript\n"
+"6 : pozastaviť skript K : pokračovat v skripte\n"
+"\n"
 
-#: src/stel_ui.cpp:713
+#: src/stel_ui.cpp:726
 msgid ""
 "Misc:\n"
 "9   : Toggle meteor shower rates\n"
+"CTRL + 0,..,9 : execute GOTO command for telescope 0,..,9\n"
+"CTRL + SHIFT + H: toggle horizontal image flipping\n"
+"CTRL + SHIFT + V: toggle vertical image flipping\n"
+"CTRL + Q : Quit\n"
+"CMD + Q  : Quit\n"
 msgstr ""
+"Rôzne:\n"
+"9 : prepnúť intenzitu meteorických spŕšiek\n"
+"CTRL + 0,..,9 : vykonať GOTO príkaz pre teleskop 0,..,9\n"
+"CTRL + SHIFT + H: prepnúť horizontálne preklopenie obrázka\n"
+"CTRL + SHIFT + V: prepnúť vertikálne preklopenie obrázka\n"
+"CTRL + Q : Koniec\n"
+"CMD + Q : Koniec\n"
 
-#: src/stel_ui.cpp:716
-msgid "CTRL + Q : Quit\n"
-msgstr "CTRL + Q : Ukončiť\n"
-
-#: src/stel_ui.cpp:718
-msgid "CMD + Q  : Quit\n"
-msgstr "PRÍKAZ + Q : Ukončiť\n"
-
-#: src/stel_ui.cpp:724
+#: src/stel_ui.cpp:740
 msgid "Help"
-msgstr "Pomoc"
+msgstr "Nápoveda"
 
-#: src/stel_ui.cpp:984
+#: src/stel_ui.cpp:1002
 msgid "Command recording stopped."
 msgstr "Záznamenávanie príkazov ukončené."
 
-#: src/stel_ui.cpp:992
+#: src/stel_ui.cpp:1010
 msgid "Recording commands to script file:\n"
 msgstr "Zaznamenať príkazy do skriptovacieho súboru.\n"
 
-#: src/stel_ui.cpp:994
+#: src/stel_ui.cpp:1012
 msgid "Hit CTRL-R again to stop.\n"
 msgstr "Stlač CTRL-R opäť pre zastavenie.\n"
 
-#: src/stel_ui.cpp:998
+#: src/stel_ui.cpp:1016
 msgid "Error: Unable to open script file to record commands."
 msgstr "Chyba: Nie je možné otvoriť skriptovací súbor pre zanamenávanie."
 
@@ -319,16 +352,14 @@ msgid "Star Names. Up to mag :"
 msgstr "Názvy hviezd. Do magnitúdy :"
 
 #: src/stel_ui_conf.cpp:74
-#, fuzzy
 msgid "Star Twinkle. Amount :"
-msgstr "Hviezdna žiara. Celkovo:"
+msgstr "Mihotanie hviezd. Rozsah:"
 
-#: src/stel_ui_conf.cpp:90 src/stel_ui_tuiconf.cpp:179
-#, fuzzy
+#: src/stel_ui_conf.cpp:90
 msgid "Constellations Lines"
-msgstr "Dráhy súhvezdí"
+msgstr "Čiary súhvezdí"
 
-#: src/stel_ui_conf.cpp:95 src/stel_ui_tuiconf.cpp:183
+#: src/stel_ui_conf.cpp:95
 msgid "Constellations Names"
 msgstr "Názvy súhvezdí"
 
@@ -359,29 +390,29 @@ msgstr "Mesačná škála"
 #: src/stel_ui_conf.cpp:152
 #, fuzzy
 msgid "Planets Hints"
-msgstr "Azimuty planét"
+msgstr "Tipy pre planéty"
 
-#: src/stel_ui_conf.cpp:164
+#: src/stel_ui_conf.cpp:164 src/stel_ui_tuiconf.cpp:399
 msgid "Equatorial Grid"
 msgstr "Ekvatoriálna mriežka"
 
-#: src/stel_ui_conf.cpp:169
+#: src/stel_ui_conf.cpp:169 src/stel_ui_tuiconf.cpp:398
 msgid "Azimuthal Grid"
 msgstr "Azimutálna mriežka"
 
-#: src/stel_ui_conf.cpp:174
+#: src/stel_ui_conf.cpp:174 src/stel_ui_tuiconf.cpp:400
 msgid "Equator Line"
 msgstr "Rovníková čiara"
 
-#: src/stel_ui_conf.cpp:179
+#: src/stel_ui_conf.cpp:179 src/stel_ui_tuiconf.cpp:401
 msgid "Ecliptic Line"
-msgstr "Slnečná dráha"
+msgstr "Čiara ekliptiky"
 
 #: src/stel_ui_conf.cpp:190
 msgid "Ground"
-msgstr ""
+msgstr "zem"
 
-#: src/stel_ui_conf.cpp:195 src/stel_ui_tuiconf.cpp:187
+#: src/stel_ui_conf.cpp:195 src/stel_ui_tuiconf.cpp:393
 msgid "Cardinal Points"
 msgstr "Svetové strany"
 
@@ -393,8 +424,8 @@ msgstr "Atmosféra"
 msgid "Fog"
 msgstr "Hmla"
 
-#: src/stel_ui_conf.cpp:235 src/stel_ui_conf.cpp:408 src/stel_ui_conf.cpp:435
-#: src/stel_ui_conf.cpp:494
+#: src/stel_ui_conf.cpp:235 src/stel_ui_conf.cpp:408 src/stel_ui_conf.cpp:445
+#: src/stel_ui_conf.cpp:504
 msgid "Save as default"
 msgstr "Nastaviť ako predvolené"
 
@@ -420,9 +451,9 @@ msgid ""
 "   time speed.\n"
 "Use key K to return to real time speed."
 msgstr ""
-"klávesa J znižovanie, klávesa L zvyšovanie↵\n"
-"   Rýchlosť času.↵\n"
-"klávesa K návrat na reálnu rýchlosť času"
+"Klávesou J znížite, klávesou L zvýšite\n"
+"   rýchlosť času.\n"
+"Klávesou K nastavíte reálnu rýchlosť času"
 
 #: src/stel_ui_conf.cpp:300
 msgid "Cursor : "
@@ -454,11 +485,11 @@ msgstr "Projekcia"
 
 #: src/stel_ui_conf.cpp:374
 msgid "Disk Viewport"
-msgstr ""
+msgstr "Výrez disku"
 
 #: src/stel_ui_conf.cpp:380
 msgid "Screen Resolution :"
-msgstr "Rozlíšenie"
+msgstr "Rozlíšenie obrazovky :"
 
 #: src/stel_ui_conf.cpp:384
 msgid "Restart program for"
@@ -466,252 +497,316 @@ msgstr "Reštartuj program na"
 
 #: src/stel_ui_conf.cpp:385
 msgid "change to apply."
-msgstr "zmeň na použi."
+msgstr "zmeň, aby sa zmeny použili."
 
 #: src/stel_ui_conf.cpp:401
 msgid "For unlisted screen resolution, edit the file :"
-msgstr "Pre nezobrazene rozlíšenia obrazoviek, edituj subor:"
+msgstr "Pre nezobrazené rozlíšenia obrazovky edituj subor :"
 
 #: src/stel_ui_conf.cpp:418
-#, fuzzy
 msgid "Choose landscapes:"
-msgstr "Zvoľ krajiny:"
+msgstr "Zvoľ krajinu:"
 
-#: src/stel_ui_conf.cpp:446
+#: src/stel_ui_conf.cpp:433 src/stel_ui_conf.cpp:888
+msgid "Author: "
+msgstr "Autor: "
+
+#: src/stel_ui_conf.cpp:456
 msgid "Program Language: "
 msgstr "Jazyk programu: "
 
-#: src/stel_ui_conf.cpp:462 src/stel_ui_tuiconf.cpp:156
+#: src/stel_ui_conf.cpp:472 src/stel_ui_tuiconf.cpp:380
 msgid "Sky Language: "
 msgstr "Jazyk oblohy: "
 
-#: src/stel_ui_conf.cpp:480 src/stel_ui_tuiconf.cpp:149
+#: src/stel_ui_conf.cpp:490 src/stel_ui_tuiconf.cpp:376
+#, fuzzy
 msgid "Sky Culture: "
-msgstr "kultúrnosť oblohy: "
+msgstr "kultúra oblohy: "
 
-#: src/stel_ui_conf.cpp:501
+#: src/stel_ui_conf.cpp:511
 msgid "Language"
 msgstr "Jazyk"
 
-#: src/stel_ui_conf.cpp:502
+#: src/stel_ui_conf.cpp:512
 msgid "Date & Time"
 msgstr "Dátum a čas"
 
-#: src/stel_ui_conf.cpp:503
+#: src/stel_ui_conf.cpp:513
 msgid "Location"
-msgstr "Lokácia"
+msgstr "Miesto"
 
-#: src/stel_ui_conf.cpp:504
+#: src/stel_ui_conf.cpp:514
 msgid "Landscapes"
-msgstr "Krajiny"
+msgstr "Terény"
 
-#: src/stel_ui_conf.cpp:505
+#: src/stel_ui_conf.cpp:515
 msgid "Video"
 msgstr "Video"
 
-#: src/stel_ui_conf.cpp:506
+#: src/stel_ui_conf.cpp:516
 msgid "Rendering"
 msgstr "Renderovanie"
 
-#: src/stel_ui_conf.cpp:638
+#: src/stel_ui_conf.cpp:648
 msgid "Object Search"
 msgstr "Hľadanie Objektu"
 
-#: src/stel_ui_conf.cpp:645
+#: src/stel_ui_conf.cpp:655
 msgid "Search for (eg. Saturn, Polaris, HP6218, Orion, M31):"
 msgstr "Hľadať (napr.: Saturn, Polaris, HP6218, Orion, M31):"
 
-#: src/stel_ui_conf.cpp:662
+#: src/stel_ui_conf.cpp:672
 msgid "GO"
 msgstr "Choď"
 
-#: src/stel_ui_conf.cpp:787
+#: src/stel_ui_conf.cpp:799
 msgid "Enter observatory name"
-msgstr "Meno Observatória"
+msgstr "Zadaj meno observatória"
 
-#: src/stel_ui_conf.cpp:927
+#: src/stel_ui_conf.cpp:889
+msgid "Info: "
+msgstr "Info: "
+
+#: src/stel_ui_conf.cpp:941
 msgid ": Normal rate"
 msgstr ": Normálne merítko"
 
-#: src/stel_ui_conf.cpp:934
-msgid ": Standard Perseids rate"
-msgstr ": Štandardné merítko Perzeidov"
-
-#: src/stel_ui_conf.cpp:941
-#, fuzzy
-msgid ": Exceptional Leonid rate"
-msgstr ": Mimoriadne merítko Leonidy"
-
 #: src/stel_ui_conf.cpp:948
+msgid ": Standard Perseids rate"
+msgstr ": Štandardná intenzita Perzeidov"
+
+#: src/stel_ui_conf.cpp:955
+msgid ": Exceptional Leonid rate"
+msgstr ": Mimoriadna intenzita Leoníd"
+
+#: src/stel_ui_conf.cpp:962
 msgid ": Highest rate ever (1966 Leonids)"
-msgstr ": Najvyššie merítko (1966 Leoníd)"
+msgstr ": Najvyššia zaznamenaná intenzita (Leonidy 1966)"
 
-#: src/stel_ui_conf.cpp:953
+#: src/stel_ui_conf.cpp:967
 msgid "Meteor Rate per minute"
-msgstr ""
+msgstr "Počet meteorov za min."
 
-#: src/stel_ui_conf.cpp:974
+#: src/stel_ui_conf.cpp:988
 msgid "Current Time Speed is x"
 msgstr "Rýchlosť času je x"
 
-#: src/stel_ui_tuiconf.cpp:80
-msgid "Set Location "
-msgstr "Nastav lokáciu "
+#: src/stel_ui_tuiconf.cpp:270 src/stel_ui_tuiconf.cpp:410
+msgid "Magnitude Sizing Multiplier: "
+msgstr "Násobiteľ kalibrovania magnitúdy: "
 
-#: src/stel_ui_tuiconf.cpp:81
+#: src/stel_ui_tuiconf.cpp:347
+msgid "Set Location "
+msgstr "Nastav umiestnenie "
+
+#: src/stel_ui_tuiconf.cpp:348
 msgid "Set Time "
 msgstr "Nastav čas "
 
-#: src/stel_ui_tuiconf.cpp:82
+#: src/stel_ui_tuiconf.cpp:349
 msgid "General "
 msgstr "Hlavné "
 
-#: src/stel_ui_tuiconf.cpp:83
+#: src/stel_ui_tuiconf.cpp:350
 msgid "Stars "
 msgstr "Hviezdy "
 
-#: src/stel_ui_tuiconf.cpp:84
+#: src/stel_ui_tuiconf.cpp:351
 msgid "Colors "
-msgstr "Colors "
+msgstr "Farby "
 
-#: src/stel_ui_tuiconf.cpp:85
+#: src/stel_ui_tuiconf.cpp:352
 msgid "Effects "
-msgstr "Effects "
+msgstr "Efekty "
 
-#: src/stel_ui_tuiconf.cpp:86
+#: src/stel_ui_tuiconf.cpp:353
 msgid "Scripts "
-msgstr "Scripts "
+msgstr "Skripty "
 
-#: src/stel_ui_tuiconf.cpp:87
+#: src/stel_ui_tuiconf.cpp:354
 msgid "Administration "
-msgstr "Administrácie "
+msgstr "Administrácia "
 
-#: src/stel_ui_tuiconf.cpp:98
+#: src/stel_ui_tuiconf.cpp:357
 msgid "Latitude: "
 msgstr "Zemepisná šírka: "
 
-#: src/stel_ui_tuiconf.cpp:100
+#: src/stel_ui_tuiconf.cpp:358
 msgid "Longitude: "
 msgstr "Zemepisná dĺžka: "
 
-#: src/stel_ui_tuiconf.cpp:102
+#: src/stel_ui_tuiconf.cpp:359
 msgid "Altitude (m): "
 msgstr "Výška (m): "
 
-#: src/stel_ui_tuiconf.cpp:106
+#: src/stel_ui_tuiconf.cpp:360
 msgid "Solar System Body: "
 msgstr "Zloženie Slnečnej sústavy: "
 
-#: src/stel_ui_tuiconf.cpp:116
+#: src/stel_ui_tuiconf.cpp:364
 msgid "Sky Time: "
 msgstr "Čas oblohy: "
 
-#: src/stel_ui_tuiconf.cpp:118
+#: src/stel_ui_tuiconf.cpp:365
 msgid "Set Time Zone: "
 msgstr "Nastav časovú zónu: "
 
-#: src/stel_ui_tuiconf.cpp:121
+#: src/stel_ui_tuiconf.cpp:366
 msgid "Preset Sky Time: "
 msgstr "Prednastavený čas oblohy: "
 
-#: src/stel_ui_tuiconf.cpp:123
+#: src/stel_ui_tuiconf.cpp:367
 msgid "Sky Time At Start-up: "
-msgstr "čas oblohy začať na: "
+msgstr "čas oblohy na začiatku: "
 
-#: src/stel_ui_tuiconf.cpp:127
+#: src/stel_ui_tuiconf.cpp:368
+msgid "Actual Time"
+msgstr "Aktuálny čas"
+
+#: src/stel_ui_tuiconf.cpp:369
+msgid "Preset Time"
+msgstr "Prednastaviť čas"
+
+#: src/stel_ui_tuiconf.cpp:370
 msgid "Time Display Format: "
-msgstr "Formát zobrazovaného času: "
+msgstr "Formát zobrazovania času: "
 
-#: src/stel_ui_tuiconf.cpp:132
+#: src/stel_ui_tuiconf.cpp:371
 msgid "Date Display Format: "
-msgstr "Formát zobrazovaného dátumu: "
+msgstr "Formát zobrazovania dátumu: "
 
-#: src/stel_ui_tuiconf.cpp:164
+#: src/stel_ui_tuiconf.cpp:383
 msgid "Show: "
-msgstr "Zobraziť: "
+msgstr "Ukázať: "
 
-#: src/stel_ui_tuiconf.cpp:164 src/stel_ui_tuiconf.cpp:199 src/s_gui.cpp:2212
+#: src/stel_ui_tuiconf.cpp:383 src/stel_ui_tuiconf.cpp:408 src/s_gui.cpp:2221
 msgid "Yes"
 msgstr "Áno"
 
-#: src/stel_ui_tuiconf.cpp:164 src/stel_ui_tuiconf.cpp:199 src/s_gui.cpp:2193
+#: src/stel_ui_tuiconf.cpp:383 src/stel_ui_tuiconf.cpp:408 src/s_gui.cpp:2202
 msgid "No"
 msgstr "Nie"
 
-#: src/stel_ui_tuiconf.cpp:166
+#: src/stel_ui_tuiconf.cpp:384
 msgid "Star Magnitude Multiplier: "
 msgstr "Násobiteľ hviezdnej veľkosti: "
 
-#: src/stel_ui_tuiconf.cpp:168
+#: src/stel_ui_tuiconf.cpp:385
 msgid "Maximum Magnitude to Label: "
-msgstr "Maximálna veľkosť do poznámky: "
+msgstr "Popisky iba do magnitúdy: "
 
-#: src/stel_ui_tuiconf.cpp:170
+#: src/stel_ui_tuiconf.cpp:386
 msgid "Twinkling: "
-msgstr "Žiarenie: "
+msgstr "Mihotanie: "
 
-#: src/stel_ui_tuiconf.cpp:193
+#: src/stel_ui_tuiconf.cpp:389
+msgid "Constellation Lines"
+msgstr "Čiary súhvezdí"
+
+#: src/stel_ui_tuiconf.cpp:390
+msgid "Constellation Names"
+msgstr "Názvy súhvezdí"
+
+#: src/stel_ui_tuiconf.cpp:391
+#, fuzzy
+msgid "Constellation Art Intensity"
+msgstr "Intenzita obrázkov súhvezdí"
+
+#: src/stel_ui_tuiconf.cpp:392
+msgid "Constellation Boundaries"
+msgstr "Hranice súhvezdí"
+
+#: src/stel_ui_tuiconf.cpp:394
+msgid "Planet Names"
+msgstr "Názvy planét"
+
+#: src/stel_ui_tuiconf.cpp:395
+msgid "Planet Orbits"
+msgstr "Dráhy planét"
+
+#: src/stel_ui_tuiconf.cpp:396
+msgid "Planet Trails"
+msgstr "Stopy planét"
+
+#: src/stel_ui_tuiconf.cpp:397
+#, fuzzy
+msgid "Meridian Line"
+msgstr "Čiara meridiánu"
+
+#: src/stel_ui_tuiconf.cpp:402
+msgid "Nebula Names"
+msgstr "Názvy hmlovín"
+
+#: src/stel_ui_tuiconf.cpp:403
+msgid "Nebula Circles"
+msgstr "Kruhy hmlovín"
+
+#: src/stel_ui_tuiconf.cpp:407
 msgid "Landscape: "
-msgstr "Krajina: "
+msgstr "Terén: "
 
-#: src/stel_ui_tuiconf.cpp:199
+#: src/stel_ui_tuiconf.cpp:408
 msgid "Manual zoom: "
-msgstr "Manuálny zoom: "
+msgstr "Ručné zväčšenie: "
 
-#: src/stel_ui_tuiconf.cpp:203
+#: src/stel_ui_tuiconf.cpp:409
 msgid "Object Sizing Rule: "
-msgstr "Pravidlo zmeny velkosti objektu: "
+msgstr "Pravidlo zmeny veľkosti objektu: "
 
-#: src/stel_ui_tuiconf.cpp:203
+#: src/stel_ui_tuiconf.cpp:409
 msgid "Point"
 msgstr "Bod"
 
-#: src/stel_ui_tuiconf.cpp:203
+#: src/stel_ui_tuiconf.cpp:409
 msgid "Magnitude"
 msgstr "Magnitúda"
 
-#: src/stel_ui_tuiconf.cpp:207
-msgid "Magnitude Sizing Multiplier: "
-msgstr "Násobiteľ zmeny veľkosti Magnitúdy "
-
-#: src/stel_ui_tuiconf.cpp:211
+#: src/stel_ui_tuiconf.cpp:411
 msgid "Milky Way intensity: "
 msgstr "Intenzita Mliečnej dráhy "
 
-#: src/stel_ui_tuiconf.cpp:215
-#, fuzzy
+#: src/stel_ui_tuiconf.cpp:412
 msgid "Maximum Nebula Magnitude to Label: "
-msgstr "Maximálna magnitúda hmloviny na poznámku: "
+msgstr "Popisky hmlovín iba do magnitúdy: "
 
-#: src/stel_ui_tuiconf.cpp:219
-#, fuzzy
+#: src/stel_ui_tuiconf.cpp:413
 msgid "Zoom Duration: "
-msgstr "trvanie zväčšenia: "
+msgstr "Trvanie zväčšenia: "
 
-#: src/stel_ui_tuiconf.cpp:223
+#: src/stel_ui_tuiconf.cpp:414
 #, fuzzy
 msgid "Cursor Timeout: "
-msgstr "Premlčanie kurzoru: "
+msgstr "Oneskorenie kurzoru: "
 
-#: src/stel_ui_tuiconf.cpp:229
+#: src/stel_ui_tuiconf.cpp:417
 msgid "Local Script: "
-msgstr "Skript: "
+msgstr "Lokálny Skript: "
 
-#: src/stel_ui_tuiconf.cpp:235
+#: src/stel_ui_tuiconf.cpp:420
 msgid "CD/DVD Script: "
 msgstr "CD/DVD Skript: "
 
-#: src/stel_ui_tuiconf.cpp:243
+#: src/stel_ui_tuiconf.cpp:424
 msgid "Load Default Configuration: "
 msgstr "Nahraj pôvodné nastavenie: "
 
-#: src/stel_ui_tuiconf.cpp:245
+#: src/stel_ui_tuiconf.cpp:425
 msgid "Save Current Configuration as Default: "
 msgstr "Ulož aktuálne nastavenie ako štandardné: "
 
-#: src/stel_ui_tuiconf.cpp:247
+#: src/stel_ui_tuiconf.cpp:426
 msgid "Update me via Internet: "
 msgstr "Aktualizuj cez internet: "
+
+#: src/stel_ui_tuiconf.cpp:427
+msgid "Set UI Locale: "
+msgstr "Nastav jazykové nastavenia UI: "
+
+#: src/stel_ui_tuiconf.cpp:539
+#, fuzzy
+msgid "Arrow down to load list."
+msgstr "Šipka dolu pre nahratie zoznamu."
 
 #: src/translations.h:33
 msgid "Sun"
@@ -759,11 +854,11 @@ msgstr "Europa"
 
 #: src/translations.h:44
 msgid "Ganymede"
-msgstr "Ganyméd"
+msgstr "Ganymedes"
 
 #: src/translations.h:45
 msgid "Callisto"
-msgstr "Kallisto"
+msgstr "Callisto"
 
 #: src/translations.h:46
 msgid "Saturn"
@@ -825,911 +920,952 @@ msgstr "Charón"
 msgid "Solar System Observer"
 msgstr "Pozorovateľ Slnečnej sústavy"
 
-#: src/translations.h:63 src/s_gui.cpp:2658
+#: src/translations.h:63 src/s_gui.cpp:2667
 msgid "N"
 msgstr "Sever"
 
-#: src/translations.h:64 src/s_gui.cpp:2659
+#: src/translations.h:64 src/s_gui.cpp:2668
 msgid "S"
 msgstr "Juh"
 
-#: src/translations.h:65 src/s_gui.cpp:2663
+#: src/translations.h:65 src/s_gui.cpp:2672
 msgid "E"
 msgstr "Východ"
 
-#: src/translations.h:66 src/s_gui.cpp:2664
+#: src/translations.h:66 src/s_gui.cpp:2673
 msgid "W"
 msgstr "Západ"
 
 #: src/translations.h:69
-msgid "Aquila"
-msgstr "Aquila"
+msgid "Chinese"
+msgstr "Čínsky"
 
 #: src/translations.h:70
+#, fuzzy
+msgid "Western"
+msgstr "Zápdne"
+
+#: src/translations.h:71
+msgid "Polynesian"
+msgstr "Polynézsky"
+
+#: src/translations.h:72
+msgid "Egyptian"
+msgstr "Egyptsky"
+
+#: src/translations.h:75
+msgid "Aquila"
+msgstr "Orol"
+
+#: src/translations.h:76
 msgid "Andromeda"
 msgstr "Androméda"
 
-#: src/translations.h:71
+#: src/translations.h:77
 msgid "Sculptor"
-msgstr "Rydlo"
+msgstr "Sochár"
 
-#: src/translations.h:72
+#: src/translations.h:78
 msgid "Ara"
-msgstr "Ara"
+msgstr "Oltár"
 
-#: src/translations.h:73
+#: src/translations.h:79
 msgid "Libra"
 msgstr "Váhy"
 
-#: src/translations.h:74
+#: src/translations.h:80
 msgid "Cetus"
 msgstr "Veľryba"
 
-#: src/translations.h:75
+#: src/translations.h:81
 msgid "Aries"
 msgstr "Baran"
 
-#: src/translations.h:76 src/translations.h:146
+#: src/translations.h:82 src/translations.h:152
 msgid "Scutum"
 msgstr "Štít"
 
-#: src/translations.h:77
+#: src/translations.h:83
 msgid "Pyxis"
 msgstr "Kompas"
 
-#: src/translations.h:78
+#: src/translations.h:84
 msgid "Bootes"
-msgstr "Bootes"
+msgstr "Pastier"
 
-#: src/translations.h:79
+#: src/translations.h:85
 msgid "Caelum"
 msgstr "Rydlo"
 
-#: src/translations.h:80
+#: src/translations.h:86
 msgid "Chamaeleon"
 msgstr "Chameleón"
 
-#: src/translations.h:81
+#: src/translations.h:87
 msgid "Cancer"
 msgstr "Rak"
 
-#: src/translations.h:82
+#: src/translations.h:88
 msgid "Capricornus"
 msgstr "Kozorožec"
 
-#: src/translations.h:83
+#: src/translations.h:89
 msgid "Carina"
 msgstr "Kýl"
 
-#: src/translations.h:84
+#: src/translations.h:90
 msgid "Cassiopeia"
 msgstr "Kasiopeja"
 
-#: src/translations.h:85
+#: src/translations.h:91
 msgid "Centaurus"
 msgstr "Kentaur"
 
-#: src/translations.h:86
+#: src/translations.h:92
 msgid "Cepheus"
 msgstr "Cefeus"
 
-#: src/translations.h:87
+#: src/translations.h:93
 msgid "Coma Berenices"
 msgstr "Vlasy Bereniky"
 
-#: src/translations.h:88
+#: src/translations.h:94
 msgid "Canes Venatici"
 msgstr "Poľovné psy"
 
-#: src/translations.h:89
+#: src/translations.h:95
 msgid "Auriga"
 msgstr "Povozník"
 
-#: src/translations.h:90
+#: src/translations.h:96
 msgid "Columba"
 msgstr "Holubica"
 
-#: src/translations.h:91
+#: src/translations.h:97
 msgid "Circinus"
 msgstr "Kružidlo"
 
-#: src/translations.h:92
+#: src/translations.h:98
 msgid "Crater"
 msgstr "Pohár"
 
-#: src/translations.h:93
+#: src/translations.h:99
 msgid "Corona Australis"
 msgstr "Južná koruna"
 
-#: src/translations.h:94
+#: src/translations.h:100
 msgid "Corona Borealis"
 msgstr "Severná koruna"
 
-#: src/translations.h:95
+#: src/translations.h:101
 msgid "Corvus"
 msgstr "Havran"
 
-#: src/translations.h:96
+#: src/translations.h:102
 msgid "Crux"
 msgstr "Južný kríž"
 
-#: src/translations.h:97
+#: src/translations.h:103
 msgid "Cygnus"
 msgstr "Labuť"
 
-#: src/translations.h:98
+#: src/translations.h:104
 msgid "Delphinus"
 msgstr "Delfín"
 
-#: src/translations.h:99
-#, fuzzy
+#: src/translations.h:105
 msgid "Dorado"
 msgstr "Mečiar"
 
-#: src/translations.h:100
+#: src/translations.h:106
 msgid "Draco"
 msgstr "Drak"
 
-#: src/translations.h:101
+#: src/translations.h:107
 msgid "Norma"
-msgstr "Norma"
+msgstr "Pravítko"
 
-#: src/translations.h:102
+#: src/translations.h:108
 msgid "Eridanus"
 msgstr "Eridanus"
 
-#: src/translations.h:103
+#: src/translations.h:109
 msgid "Sagitta"
 msgstr "Šíp"
 
-#: src/translations.h:104
+#: src/translations.h:110
 msgid "Fornax"
 msgstr "Pec"
 
-#: src/translations.h:105
+#: src/translations.h:111
 msgid "Gemini"
 msgstr "Blíženci"
 
-#: src/translations.h:106
+#: src/translations.h:112
 msgid "Camelopardalis"
 msgstr "Žirafa"
 
-#: src/translations.h:107
+#: src/translations.h:113
 msgid "Canis Major"
 msgstr "Veľký pes"
 
-#: src/translations.h:108
+#: src/translations.h:114
 msgid "Ursa Major"
 msgstr "Veľká medvedica"
 
-#: src/translations.h:109
+#: src/translations.h:115
 msgid "Grus"
 msgstr "Žeriav"
 
-#: src/translations.h:110
+#: src/translations.h:116
 msgid "Hercules"
-msgstr ""
+msgstr "Herkules"
 
-#: src/translations.h:111
+#: src/translations.h:117
 msgid "Horologium"
-msgstr ""
+msgstr "Hodiny"
 
-#: src/translations.h:112
+#: src/translations.h:118
 msgid "Hydra"
-msgstr ""
+msgstr "Hydra"
 
-#: src/translations.h:113
+#: src/translations.h:119
 msgid "Hydrus"
 msgstr "Vodný had"
 
-#: src/translations.h:114
+#: src/translations.h:120
 msgid "Indus"
 msgstr "Indián"
 
-#: src/translations.h:115
+#: src/translations.h:121
 msgid "Lacerta"
 msgstr "Jašterica"
 
-#: src/translations.h:116
+#: src/translations.h:122
 msgid "Monoceros"
 msgstr "Jednorožec"
 
-#: src/translations.h:117
+#: src/translations.h:123
 msgid "Lepus"
 msgstr "Zajac"
 
-#: src/translations.h:118
+#: src/translations.h:124
 msgid "Leo"
 msgstr "Lev"
 
-#: src/translations.h:119
+#: src/translations.h:125
 msgid "Lupus"
 msgstr "Vlk"
 
-#: src/translations.h:120
+#: src/translations.h:126
 msgid "Lynx"
 msgstr "Rys"
 
-#: src/translations.h:121
+#: src/translations.h:127
 msgid "Lyra"
 msgstr "Lýra"
 
-#: src/translations.h:122
+#: src/translations.h:128
 msgid "Antlia"
 msgstr "Výveva"
 
-#: src/translations.h:123
+#: src/translations.h:129
 msgid "Microscopium"
 msgstr "Mikroskop"
 
-#: src/translations.h:124
+#: src/translations.h:130
 msgid "Musca"
 msgstr "Mucha"
 
-#: src/translations.h:125
+#: src/translations.h:131
 msgid "Octans"
 msgstr "Oktant"
 
-#: src/translations.h:126
+#: src/translations.h:132
 msgid "Apus"
 msgstr "Rajka"
 
-#: src/translations.h:127
+#: src/translations.h:133
 msgid "Ophiuchus"
 msgstr "Hadonos"
 
-#: src/translations.h:128
+#: src/translations.h:134
 msgid "Orion"
 msgstr "Orión"
 
-#: src/translations.h:129
+#: src/translations.h:135
 msgid "Pavo"
 msgstr "Páv"
 
-#: src/translations.h:130
+#: src/translations.h:136
 msgid "Pegasus"
 msgstr "Pegas"
 
-#: src/translations.h:131
+#: src/translations.h:137
 msgid "Pictor"
 msgstr "Maliar"
 
-#: src/translations.h:132
-msgid "Perseus"
-msgstr "Perseus"
-
-#: src/translations.h:133
-msgid "Equuleus"
-msgstr ""
-
-#: src/translations.h:134
-msgid "Canis Minor"
-msgstr ""
-
-#: src/translations.h:135
-msgid "Leo Minor"
-msgstr ""
-
-#: src/translations.h:136
-msgid "Vulpecula"
-msgstr ""
-
-#: src/translations.h:137
-msgid "Ursa Minor"
-msgstr ""
-
 #: src/translations.h:138
-msgid "Phoenix"
-msgstr ""
+msgid "Perseus"
+msgstr "Perzeus"
 
 #: src/translations.h:139
-msgid "Piscis Austrinus"
-msgstr ""
+msgid "Equuleus"
+msgstr "Koník"
 
 #: src/translations.h:140
+msgid "Canis Minor"
+msgstr "Malý pes"
+
+#: src/translations.h:141
+msgid "Leo Minor"
+msgstr "Malý lev"
+
+#: src/translations.h:142
+msgid "Vulpecula"
+msgstr "Líška"
+
+#: src/translations.h:143
+msgid "Ursa Minor"
+msgstr "Malá medvedica"
+
+#: src/translations.h:144
+msgid "Phoenix"
+msgstr "Fénix"
+
+#: src/translations.h:145
+msgid "Piscis Austrinus"
+msgstr "Južná ryba"
+
+#: src/translations.h:146
 msgid "Pisces"
 msgstr "Ryby"
 
-#: src/translations.h:141
+#: src/translations.h:147
 msgid "Volans"
 msgstr "Lietajúca ryba"
 
-#: src/translations.h:142
+#: src/translations.h:148
 msgid "Puppis"
 msgstr "Korma"
 
-#: src/translations.h:143
+#: src/translations.h:149
 msgid "Reticulum"
 msgstr "Sieť"
 
-#: src/translations.h:144
+#: src/translations.h:150
 msgid "Sagittarius"
 msgstr "Strelec"
 
-#: src/translations.h:145
+#: src/translations.h:151
 msgid "Scorpius"
 msgstr "Škorpión"
 
-#: src/translations.h:147
+#: src/translations.h:153
 msgid "Serpens"
 msgstr "Had"
 
-#: src/translations.h:148
+#: src/translations.h:154
 msgid "Sextans"
 msgstr "Sextant"
 
-#: src/translations.h:149
+#: src/translations.h:155
 msgid "Mensa"
 msgstr "Stolový vrch"
 
-#: src/translations.h:150
+#: src/translations.h:156
 msgid "Taurus"
 msgstr "Býk"
 
-#: src/translations.h:151
+#: src/translations.h:157
 msgid "Telescopium"
-msgstr ""
+msgstr "Ďalekohľad"
 
-#: src/translations.h:152
+#: src/translations.h:158
 msgid "Tucana"
-msgstr ""
+msgstr "Tukan"
 
-#: src/translations.h:153
+#: src/translations.h:159
 msgid "Triangulum"
-msgstr ""
+msgstr "Trojuholník"
 
-#: src/translations.h:154
+#: src/translations.h:160
 msgid "Triangulum Australe"
 msgstr "Južný trujuholník"
 
-#: src/translations.h:155
+#: src/translations.h:161
 msgid "Aquarius"
 msgstr "Vodnár"
 
-#: src/translations.h:156
+#: src/translations.h:162
 msgid "Virgo"
 msgstr "Panna"
 
-#: src/translations.h:157
+#: src/translations.h:163
 msgid "Vela"
 msgstr "Plachty"
 
-#: src/translations.h:160
+#: src/translations.h:166
 msgid "Bull's Foreleg"
-msgstr ""
+msgstr "Predné nohy býka"
 
-#: src/translations.h:161
+#: src/translations.h:167
 msgid "Two Poles"
-msgstr ""
+msgstr "Dva póly"
 
-#: src/translations.h:162
+#: src/translations.h:168
 msgid "Lion"
 msgstr "Lev"
 
-#: src/translations.h:163
+#: src/translations.h:169
 msgid "Two Jaws"
-msgstr ""
+msgstr "Dvoje čeľuste"
 
-#: src/translations.h:164
+#: src/translations.h:170
 msgid "Sah"
-msgstr ""
+msgstr "Sah"
 
-#: src/translations.h:165
+#: src/translations.h:171
 msgid "Bird"
-msgstr ""
+msgstr "Vták"
 
-#: src/translations.h:166
+#: src/translations.h:172
 msgid "Sek"
 msgstr ""
 
-#: src/translations.h:167
+#: src/translations.h:173
 msgid "Triangle"
-msgstr ""
+msgstr "Trojuholník"
 
-#: src/translations.h:168
+#: src/translations.h:174
 msgid "Ferry Boat"
-msgstr ""
+msgstr "Pramica"
 
-#: src/translations.h:169 src/translations.h:240
+#: src/translations.h:175 src/translations.h:246
 msgid "Boat"
-msgstr ""
+msgstr "Loď"
 
-#: src/translations.h:170
+#: src/translations.h:176
 msgid "Crocodile"
-msgstr ""
+msgstr "Krokodíl"
 
-#: src/translations.h:171
+#: src/translations.h:177
 msgid "Selkis"
 msgstr ""
 
-#: src/translations.h:172
+#: src/translations.h:178
 msgid "Prow"
-msgstr ""
+msgstr "Prova"
 
-#: src/translations.h:173
+#: src/translations.h:179
 msgid "Horus"
 msgstr ""
 
-#: src/translations.h:174
+#: src/translations.h:180
 msgid "Sheepfold"
-msgstr ""
-
-#: src/translations.h:175
-msgid "Giant"
-msgstr ""
-
-#: src/translations.h:176
-msgid "Hippopotamus"
-msgstr ""
-
-#: src/translations.h:177
-msgid "Flock"
-msgstr ""
-
-#: src/translations.h:178
-msgid "Pair of Stars"
-msgstr ""
-
-#: src/translations.h:179
-msgid "Khanuwy Fish"
-msgstr ""
-
-#: src/translations.h:180 src/translations.h:219
-msgid "Net"
-msgstr ""
+msgstr "Salaš"
 
 #: src/translations.h:181
-msgid "Jaw"
-msgstr ""
+msgid "Giant"
+msgstr "Obor"
 
 #: src/translations.h:182
-msgid "Mooring Post"
-msgstr ""
+msgid "Hippopotamus"
+msgstr "Hroch"
 
 #: src/translations.h:183
+#, fuzzy
+msgid "Flock"
+msgstr "Kŕdeľ"
+
+#: src/translations.h:184
+msgid "Pair of Stars"
+msgstr "Pár hviezd"
+
+#: src/translations.h:185
+msgid "Khanuwy Fish"
+msgstr "Ryba Khanuwy"
+
+#: src/translations.h:186 src/translations.h:225
+msgid "Net"
+msgstr "Sieť"
+
+#: src/translations.h:187
+msgid "Jaw"
+msgstr "Čelusť"
+
+#: src/translations.h:188
+msgid "Mooring Post"
+msgstr "Prístavište"
+
+#: src/translations.h:189
 msgid "Kenemet"
 msgstr ""
 
-#: src/translations.h:184
+#: src/translations.h:190
 msgid "Chematy"
 msgstr ""
 
-#: src/translations.h:185
+#: src/translations.h:191
 msgid "Waty Bekety"
 msgstr ""
 
-#: src/translations.h:186
-msgid "Sheep"
-msgstr ""
-
-#: src/translations.h:187
-msgid "Stars of Water"
-msgstr ""
-
-#: src/translations.h:190
-msgid "Northern Dipper"
-msgstr ""
-
-#: src/translations.h:191
-msgid "Curved Array"
-msgstr ""
-
 #: src/translations.h:192
-msgid "Coiled Thong"
-msgstr ""
+msgid "Sheep"
+msgstr "Ovca"
 
 #: src/translations.h:193
-msgid "Wings"
-msgstr ""
-
-#: src/translations.h:194
-msgid "Chariot"
-msgstr ""
-
-#: src/translations.h:195
-msgid "Tail"
-msgstr ""
+msgid "Stars of Water"
+msgstr "Vodné hviezdy"
 
 #: src/translations.h:196
-msgid "Winnowing Basket"
-msgstr ""
+#, fuzzy
+msgid "Northern Dipper"
+msgstr "Severná potápka"
 
 #: src/translations.h:197
-msgid "Dipper"
-msgstr ""
+#, fuzzy
+msgid "Curved Array"
+msgstr "Krivé pole"
 
 #: src/translations.h:198
-msgid "Drum"
-msgstr ""
+msgid "Coiled Thong"
+msgstr "Zvinutý remeň"
 
 #: src/translations.h:199
-msgid "Three Steps"
-msgstr ""
+msgid "Wings"
+msgstr "Krídla"
 
 #: src/translations.h:200
-msgid "Imperial Guards"
-msgstr ""
+msgid "Chariot"
+msgstr "Voz"
 
 #: src/translations.h:201
-msgid "Horn"
-msgstr ""
+msgid "Tail"
+msgstr "Chvost"
 
 #: src/translations.h:202
-msgid "Willow"
-msgstr ""
+#, fuzzy
+msgid "Winnowing Basket"
+msgstr "Preosievací kôš"
 
 #: src/translations.h:203
-msgid "Imperial Passageway"
-msgstr ""
+#, fuzzy
+msgid "Dipper"
+msgstr "Potápka"
 
 #: src/translations.h:204
-msgid "Kitchen"
-msgstr ""
+msgid "Drum"
+msgstr "Bubon"
 
 #: src/translations.h:205
-msgid "River Turtle"
-msgstr ""
+msgid "Three Steps"
+msgstr "Tri schody"
 
 #: src/translations.h:206
-msgid "Stomach"
-msgstr ""
+msgid "Imperial Guards"
+msgstr "Cisárska stráž"
 
 #: src/translations.h:207
-msgid "Great General"
-msgstr ""
+msgid "Horn"
+msgstr "Roh"
 
 #: src/translations.h:208
-msgid "Wall"
-msgstr ""
+#, fuzzy
+msgid "Willow"
+msgstr "Vŕba"
 
 #: src/translations.h:209
-msgid "Legs"
-msgstr ""
+msgid "Imperial Passageway"
+msgstr "Cisárska cestička"
 
 #: src/translations.h:210
-msgid "Root"
-msgstr ""
+msgid "Kitchen"
+msgstr "Kuchyňa"
 
 #: src/translations.h:211
-msgid "Ramparts"
-msgstr ""
+msgid "River Turtle"
+msgstr "Riečna korytnačka"
 
 #: src/translations.h:212
-msgid "Flying Corridor"
-msgstr ""
+msgid "Stomach"
+msgstr "Žalúdok"
 
 #: src/translations.h:213
-msgid "Outer Fence"
-msgstr ""
+msgid "Great General"
+msgstr "Veľký generál"
 
 #: src/translations.h:214
-msgid "Ford"
-msgstr ""
+msgid "Wall"
+msgstr "Stena"
 
 #: src/translations.h:215
-msgid "Seven Excellencies"
-msgstr ""
+msgid "Legs"
+msgstr "Nohy"
 
 #: src/translations.h:216
-msgid "Market"
-msgstr ""
+msgid "Root"
+msgstr "Koreň"
 
 #: src/translations.h:217
-msgid "Five Chariots"
-msgstr ""
+msgid "Ramparts"
+msgstr "Hradby"
 
 #: src/translations.h:218
-msgid "Rolled Tongue"
-msgstr ""
+#, fuzzy
+msgid "Flying Corridor"
+msgstr "Lietajúci koridór"
+
+#: src/translations.h:219
+msgid "Outer Fence"
+msgstr "Vonkajší plot"
 
 #: src/translations.h:220
-msgid "Toilet"
-msgstr ""
+msgid "Ford"
+msgstr "Brod"
 
 #: src/translations.h:221
-msgid "Screen"
-msgstr ""
+msgid "Seven Excellencies"
+msgstr "Sedem Excelencií"
 
 #: src/translations.h:222
-msgid "Soldiers Market"
-msgstr ""
+msgid "Market"
+msgstr "Tržnica"
 
 #: src/translations.h:223
-msgid "Square Granary"
-msgstr ""
+msgid "Five Chariots"
+msgstr "Päť vozov"
 
 #: src/translations.h:224
-msgid "Three Stars"
-msgstr ""
-
-#: src/translations.h:225
-msgid "Four Channels"
-msgstr ""
+msgid "Rolled Tongue"
+msgstr "Zrolovaný jazyk"
 
 #: src/translations.h:226
-msgid "Well"
-msgstr ""
+msgid "Toilet"
+msgstr "Záchod"
 
 #: src/translations.h:227
-msgid "South River"
-msgstr ""
+msgid "Screen"
+msgstr "Obrazovka"
 
 #: src/translations.h:228
-msgid "North River"
-msgstr ""
+#, fuzzy
+msgid "Soldiers Market"
+msgstr "Vojenská tržnica"
 
 #: src/translations.h:229
-msgid "Five Feudal Kings"
-msgstr ""
+msgid "Square Granary"
+msgstr "Štvorcová sýpka"
 
 #: src/translations.h:230
-msgid "Orchard"
-msgstr ""
+msgid "Three Stars"
+msgstr "Tri hviezdy"
 
 #: src/translations.h:231
-msgid "Meadows"
-msgstr ""
+msgid "Four Channels"
+msgstr "Štyri kanály"
 
 #: src/translations.h:232
-msgid "Circular Granary"
-msgstr ""
+#, fuzzy
+msgid "Well"
+msgstr "Jama"
 
 #: src/translations.h:233
-msgid "Purple Palace"
-msgstr ""
+msgid "South River"
+msgstr "Južná rieka"
 
 #: src/translations.h:234
-msgid "Extended Net"
-msgstr ""
+msgid "North River"
+msgstr "Severná rieka"
 
 #: src/translations.h:235
-msgid "Arsenal"
-msgstr ""
+msgid "Five Feudal Kings"
+msgstr "Päť feudálnych kráľov"
 
 #: src/translations.h:236
-msgid "Hook"
-msgstr ""
+msgid "Orchard"
+msgstr "Ovocný sad"
 
 #: src/translations.h:237
-msgid "Supreme Palace"
-msgstr ""
+msgid "Meadows"
+msgstr "Lúky"
 
 #: src/translations.h:238
-msgid "Jade Well"
-msgstr ""
+msgid "Circular Granary"
+msgstr "Okrúhla sýpka"
 
 #: src/translations.h:239
-msgid "Lance"
-msgstr ""
+msgid "Purple Palace"
+msgstr "Purpurový palác"
+
+#: src/translations.h:240
+#, fuzzy
+msgid "Extended Net"
+msgstr "Predĺženaá sieť"
 
 #: src/translations.h:241
-msgid "Mausoleum"
-msgstr ""
+msgid "Arsenal"
+msgstr "Zbrojnica"
 
 #: src/translations.h:242
-msgid "Dog"
-msgstr ""
+msgid "Hook"
+msgstr "Hák"
 
 #: src/translations.h:243
-msgid "Earth God's Temple"
-msgstr ""
+msgid "Supreme Palace"
+msgstr "Hlavný palác"
 
 #: src/translations.h:244
-msgid "Bow and Arrow"
-msgstr ""
+#, fuzzy
+msgid "Jade Well"
+msgstr "Jadeitový prameň"
 
 #: src/translations.h:245
-msgid "Pestle"
-msgstr ""
-
-#: src/translations.h:246
-msgid "Mortar"
-msgstr ""
+msgid "Lance"
+msgstr "Kopija"
 
 #: src/translations.h:247
-msgid "Rooftop"
-msgstr ""
+msgid "Mausoleum"
+msgstr "Mauzóleum"
 
 #: src/translations.h:248
-msgid "Thunderbolt"
-msgstr ""
+msgid "Dog"
+msgstr "Pes"
 
 #: src/translations.h:249
-msgid "Chariot Yard"
-msgstr ""
+msgid "Earth God's Temple"
+msgstr "Chrám Boha Zeme"
 
 #: src/translations.h:250
-msgid "Good Gourd"
-msgstr ""
+msgid "Bow and Arrow"
+msgstr "Luk a šíp"
 
 #: src/translations.h:251
-msgid "Rotten Gourd"
-msgstr ""
+#, fuzzy
+msgid "Pestle"
+msgstr "Tĺčik"
 
 #: src/translations.h:252
-msgid "Encampment"
-msgstr ""
+msgid "Mortar"
+msgstr "Mažiar"
 
 #: src/translations.h:253
-msgid "Thunder and Lightning"
-msgstr ""
+msgid "Rooftop"
+msgstr "Strecha"
 
 #: src/translations.h:254
-msgid "Palace Gate"
-msgstr ""
+msgid "Thunderbolt"
+msgstr "Blesk"
 
 #: src/translations.h:255
-msgid "Emptiness"
-msgstr ""
+#, fuzzy
+msgid "Chariot Yard"
+msgstr "Vozová dieľňa"
 
 #: src/translations.h:256
-msgid "Weaving Girl"
-msgstr ""
+msgid "Good Gourd"
+msgstr "Čerstvá tekvica"
 
 #: src/translations.h:257
-msgid "Girl"
-msgstr ""
+msgid "Rotten Gourd"
+msgstr "Prehnitá tekvica"
 
 #: src/translations.h:258
-msgid "Ox"
-msgstr ""
+msgid "Encampment"
+msgstr "Tábor"
 
 #: src/translations.h:259
-msgid "Heart"
-msgstr ""
+msgid "Thunder and Lightning"
+msgstr "Hrom a blesk"
 
 #: src/translations.h:260
-msgid "Room"
-msgstr ""
+msgid "Palace Gate"
+msgstr "Palácová brána"
 
 #: src/translations.h:261
-msgid "Spring"
-msgstr ""
+msgid "Emptiness"
+msgstr "Prázdnota"
 
 #: src/translations.h:262
-msgid "Establishment"
-msgstr ""
+msgid "Weaving Girl"
+msgstr "Tkáčka"
 
 #: src/translations.h:263
-msgid "Flail"
-msgstr ""
+msgid "Girl"
+msgstr "Dievča"
 
 #: src/translations.h:264
-msgid "Spear"
-msgstr ""
+msgid "Ox"
+msgstr "Vôl"
 
 #: src/translations.h:265
-msgid "Right Flag"
-msgstr ""
+msgid "Heart"
+msgstr "Srdce"
 
 #: src/translations.h:266
-msgid "Left Flag"
-msgstr ""
+msgid "Room"
+msgstr "Izba"
 
 #: src/translations.h:267
-msgid "Drumstick"
-msgstr ""
+#, fuzzy
+msgid "Spring"
+msgstr "Jar"
 
 #: src/translations.h:268
+msgid "Establishment"
+msgstr "Sídlo"
+
+#: src/translations.h:269
+msgid "Flail"
+msgstr "Cep"
+
+#: src/translations.h:270
+msgid "Spear"
+msgstr "Kopija"
+
+#: src/translations.h:271
+msgid "Right Flag"
+msgstr "Pravá vlajka"
+
+#: src/translations.h:272
+msgid "Left Flag"
+msgstr "Ľavá vlajka"
+
+#: src/translations.h:273
+#, fuzzy
+msgid "Drumstick"
+msgstr "Palička na bubon"
+
+#: src/translations.h:274
 msgid "Bond"
 msgstr ""
 
-#: src/translations.h:269
-msgid "Woman's Bed"
-msgstr ""
-
-#: src/translations.h:270
-msgid "Western Door"
-msgstr ""
-
-#: src/translations.h:271
-msgid "Eastern Door"
-msgstr ""
-
-#: src/translations.h:272
-msgid "Farmland"
-msgstr ""
-
-#: src/translations.h:273
-msgid "Star"
-msgstr ""
-
-#: src/translations.h:274
-msgid "Ghosts"
-msgstr ""
-
 #: src/translations.h:275
+msgid "Woman's Bed"
+msgstr "Posteľ ženy"
+
+#: src/translations.h:276
+msgid "Western Door"
+msgstr "Západné dvere"
+
+#: src/translations.h:277
+msgid "Eastern Door"
+msgstr "Východné dvere"
+
+#: src/translations.h:278
+#, fuzzy
+msgid "Farmland"
+msgstr "Úrodná pôda"
+
+#: src/translations.h:279
+msgid "Star"
+msgstr "Hviezda"
+
+#: src/translations.h:280
+msgid "Ghosts"
+msgstr "Duchovia"
+
+#: src/translations.h:281
 msgid "Xuanyuan"
 msgstr ""
 
-#: src/translations.h:276
+#: src/translations.h:282
 msgid "Tripod"
-msgstr ""
+msgstr "Trojnožka"
 
-#: src/translations.h:277
+#: src/translations.h:283
 msgid "Neck"
-msgstr ""
+msgstr "Krk"
 
-#: src/translations.h:278
+#: src/translations.h:284
 msgid "Zaofu"
 msgstr ""
 
-#: src/translations.h:279
-msgid "Market Officer"
-msgstr ""
-
-#: src/translations.h:280
-msgid "Banner of Three Stars"
-msgstr ""
-
-#: src/translations.h:283
-msgid "Bailer"
-msgstr ""
-
-#: src/translations.h:284
-msgid "Cat's Cradle"
-msgstr ""
-
 #: src/translations.h:285
-msgid "Voice of Joy"
-msgstr ""
+#, fuzzy
+msgid "Market Officer"
+msgstr "Vedúci tržnice"
 
 #: src/translations.h:286
-msgid "The Seven"
-msgstr ""
-
-#: src/translations.h:287
-msgid "Maui's Fishhook"
-msgstr ""
-
-#: src/translations.h:288
-msgid "Navigator's Triangle"
-msgstr ""
+#, fuzzy
+msgid "Banner of Three Stars"
+msgstr "Vlajka troch hviezd"
 
 #: src/translations.h:289
+#, fuzzy
+msgid "Bailer"
+msgstr "Vkladateľ"
+
+#: src/translations.h:290
+msgid "Cat's Cradle"
+msgstr "Mačacia kolíska"
+
+#: src/translations.h:291
+msgid "Voice of Joy"
+msgstr "Hlas radosti"
+
+#: src/translations.h:292
+#, fuzzy
+msgid "The Seven"
+msgstr "Sedmička"
+
+#: src/translations.h:293
+#, fuzzy
+msgid "Maui's Fishhook"
+msgstr "Mauiho udica"
+
+#: src/translations.h:294
+msgid "Navigator's Triangle"
+msgstr "Trojuholník navigátora"
+
+#: src/translations.h:295
 msgid "Kite of Kawelo"
 msgstr ""
 
-#: src/translations.h:290
+#: src/translations.h:296
 msgid "Frigate Bird"
 msgstr ""
 
-#: src/translations.h:291
+#: src/translations.h:297
 msgid "Cared for by Moon"
 msgstr ""
 
-#: src/translations.h:292
+#: src/translations.h:298
 msgid "Dolphin"
-msgstr ""
+msgstr "Delfín"
 
-#: src/s_gui.cpp:2199 src/s_gui.cpp:2245
+#: src/translations.h:301
+msgid "Select and exit to run."
+msgstr "Vybrať. Po ukončení sa spustí."
+
+#: src/s_gui.cpp:2208 src/s_gui.cpp:2254
 msgid "Cancel"
-msgstr ""
+msgstr "Zrušiť"
 
-#: src/s_gui.cpp:2217 src/s_gui.cpp:2243
+#: src/s_gui.cpp:2226 src/s_gui.cpp:2252
 msgid "OK"
-msgstr ""
+msgstr "Potvrdiť"
 
-#: src/s_gui.cpp:2729
+#: src/s_gui.cpp:2722
 msgid "Year"
-msgstr ""
+msgstr "Rok"
 
-#: src/s_gui.cpp:2732
+#: src/s_gui.cpp:2725
 msgid "Month"
-msgstr ""
+msgstr "mesiac"
 
-#: src/s_gui.cpp:2735
+#: src/s_gui.cpp:2728
 msgid "Day"
-msgstr ""
+msgstr "deň"
 
-#: src/s_gui.cpp:2738
+#: src/s_gui.cpp:2731
 msgid "Hour"
-msgstr ""
+msgstr "hodina"
 
-#: src/s_gui.cpp:2741
+#: src/s_gui.cpp:2734
 msgid "Minutes"
-msgstr ""
+msgstr "minúty"
 
-#: src/s_gui.cpp:2744
+#: src/s_gui.cpp:2737
 msgid "Seconds"
-msgstr ""
+msgstr "sekundy"
