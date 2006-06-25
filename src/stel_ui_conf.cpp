@@ -35,7 +35,7 @@ static string CalculateProjectionSlValue(
 Component* StelUI::createConfigWindow(void)
 {
 	config_win = new StdBtWin(_("Configuration"));
-	config_win->setOpaque(opaqueGUI);
+	//config_win->setOpaque(opaqueGUI);
 	config_win->reshape(300,200,500,450);
 	config_win->setVisible(FlagConfig);
 

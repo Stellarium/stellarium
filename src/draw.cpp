@@ -265,7 +265,7 @@ void SkyGrid::draw(const Projector* prj) const
 
 
 SkyLine::SkyLine(SKY_LINE_TYPE _line_type, double _radius, unsigned int _nb_segment) :
-	radius(_radius), nb_segment(_nb_segment), color(0.f, 0.f, 1.f)
+	radius(_radius), nb_segment(_nb_segment), color(0.f, 0.f, 1.f), font(NULL)
 {
 	float inclinaison = 0.f;
 	line_type = _line_type;
