@@ -7,8 +7,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
-"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2006-06-20 20:50+0200\n"
+"Report-Msgid-Bugs-To: stellarium@free.fr\n"
+"POT-Creation-Date: 2006-06-25 21:48+0200\n"
 "PO-Revision-Date: 2006-06-21 12:23+0000\n"
 "Last-Translator: LEE E. S. <ngc2737@hanmail.net>\n"
 "Language-Team: Korean <ko@li.org>\n"
@@ -28,7 +28,7 @@ msgstr ""
 " -h, --help 이와 같은 설명을 보여주고 종료합니다.\n"
 
 #: src/main.cpp:76
-#, fuzzy
+#, fuzzy, c-format
 msgid "%s: Bad command line argument(s)\n"
 msgstr "%s: 명령어의 인자값이 잘못되었습니다.\n"
 
@@ -37,7 +37,7 @@ msgstr "%s: 명령어의 인자값이 잘못되었습니다.\n"
 msgid "Try `%s --help' for more information.\n"
 msgstr "%s 더 자세한 설명을 원하시면 --help 를 입력하세요.\n"
 
-#: src/constellation_mgr.cpp:174
+#: src/constellation_mgr.cpp:175
 msgid "Loading Constellation Art: "
 msgstr "별자리 그림을 불러옵니다. "
 
@@ -82,11 +82,11 @@ msgstr "형태: "
 msgid "Size: "
 msgstr "크기: "
 
-#: src/nebula_mgr.cpp:288
+#: src/nebula_mgr.cpp:290
 msgid "Loading NGC catalog: "
 msgstr "NGC 목록을 불러옵니다: "
 
-#: src/nebula_mgr.cpp:415
+#: src/nebula_mgr.cpp:417
 msgid "Loading Nebula Textures:"
 msgstr "성운의 색조를 불러옵니다:"
 
@@ -94,99 +94,107 @@ msgstr "성운의 색조를 불러옵니다:"
 msgid "AU"
 msgstr "천문단위"
 
-#: src/stel_ui.cpp:503 src/stel_ui.cpp:631
+#: src/stel_ui.cpp:515 src/stel_ui.cpp:645
 msgid "Script commander"
 msgstr "스크립트 명령어"
 
-#: src/stel_ui.cpp:530
+#: src/stel_ui.cpp:542
 msgid "Invalid Script command"
 msgstr "실효성이 없는 스크립트 명령어"
 
-#: src/stel_ui.cpp:596
+#: src/stel_ui.cpp:610
 msgid "Drawing of the Constellations [C]"
 msgstr "별자리 모양 [C]"
 
-#: src/stel_ui.cpp:598
+#: src/stel_ui.cpp:612
 msgid "Names of the Constellations [V]"
 msgstr "별자리 명칭 [V]"
 
-#: src/stel_ui.cpp:600
+#: src/stel_ui.cpp:614
 msgid "Constellations Art [R]"
 msgstr "별자리 그림 [R]"
 
-#: src/stel_ui.cpp:602
+#: src/stel_ui.cpp:616
 msgid "Azimuthal Grid [Z]"
 msgstr "방위격자 [Z]"
 
-#: src/stel_ui.cpp:604
+#: src/stel_ui.cpp:618
 msgid "Equatorial Grid [E]"
 msgstr "적도격자 [E]"
 
-#: src/stel_ui.cpp:606
+#: src/stel_ui.cpp:620
 msgid "Ground [G]"
 msgstr "지면 [G]"
 
-#: src/stel_ui.cpp:608
+#: src/stel_ui.cpp:622
 msgid "Cardinal Points [Q]"
 msgstr "방위기점 [Q]"
 
-#: src/stel_ui.cpp:610
+#: src/stel_ui.cpp:624
 msgid "Atmosphere [A]"
 msgstr "대기 [A]"
 
-#: src/stel_ui.cpp:612
+#: src/stel_ui.cpp:626
 msgid "Nebulas [N]"
 msgstr "성운들 [N]"
 
-#: src/stel_ui.cpp:614
+#: src/stel_ui.cpp:628
 msgid "Help [H]"
 msgstr "도움말 [H]"
 
-#: src/stel_ui.cpp:616
+#: src/stel_ui.cpp:630
 msgid "Equatorial/Altazimuthal Mount [ENTER]"
 msgstr "적위/경위대 [Enter]"
 
-#: src/stel_ui.cpp:618
+#: src/stel_ui.cpp:632
 msgid "Configuration window"
 msgstr "설정창"
 
-#: src/stel_ui.cpp:621
+#: src/stel_ui.cpp:635
 msgid "Night (red) mode"
 msgstr "야간관측(적색) 모드"
 
-#: src/stel_ui.cpp:624
+#: src/stel_ui.cpp:638
 msgid "Quit [CTRL + Q]"
 msgstr "종료 [CTRL + Q]"
 
-#: src/stel_ui.cpp:626
+#: src/stel_ui.cpp:640
 msgid "Quit [CMD + Q]"
 msgstr "종료 [CMD + Q]"
 
-#: src/stel_ui.cpp:629
+#: src/stel_ui.cpp:643
 msgid "Search for object"
 msgstr "천체 찾기"
 
-#: src/stel_ui.cpp:633
+#: src/stel_ui.cpp:647
 msgid "Goto selected object [SPACE]"
 msgstr "선택한 천체로 이동 [스페이스]"
 
-#: src/stel_ui.cpp:639
+#: src/stel_ui.cpp:649
+msgid "flip horizontally"
+msgstr ""
+
+#: src/stel_ui.cpp:651
+msgid "flip vertically"
+msgstr ""
+
+#: src/stel_ui.cpp:657
 msgid "Decrease Time Speed [J]"
 msgstr "시간 더 느리게 [J]"
 
-#: src/stel_ui.cpp:641
+#: src/stel_ui.cpp:659
 msgid "Real Time Speed [K]"
 msgstr "실시간 속도 [K]"
 
-#: src/stel_ui.cpp:643
+#: src/stel_ui.cpp:661
 msgid "Increase Time Speed [L]"
 msgstr "시간 더 빠르게 [L]"
 
-#: src/stel_ui.cpp:645
+#: src/stel_ui.cpp:663
 msgid "Return to Current Time"
 msgstr "현재 시간으로 되돌아오기"
 
-#: src/stel_ui.cpp:654
+#: src/stel_ui.cpp:672
 msgid ""
 "   Please check for newer versions and send bug reports\n"
 "    and comments to us at: http://www.stellarium.org\n"
@@ -197,11 +205,11 @@ msgstr ""
 "    http://www.stellarium.org\n"
 "\n"
 
-#: src/stel_ui.cpp:673
+#: src/stel_ui.cpp:691
 msgid "Information"
 msgstr "정보"
 
-#: src/stel_ui.cpp:685
+#: src/stel_ui.cpp:703
 msgid ""
 "Movement & selection:\n"
 "Arrow Keys       : Change viewing RA/DE\n"
@@ -227,7 +235,7 @@ msgstr ""
 "스페이스키 : 선택한 천체를 중심에 놓기\n"
 "\n"
 
-#: src/stel_ui.cpp:696
+#: src/stel_ui.cpp:714
 msgid ""
 "Display options:\n"
 "ENTER : Equatorial/altazimuthal mount\n"
@@ -255,7 +263,7 @@ msgstr ""
 "4 , : 황도 5 . : 천구의 적도\n"
 "\n"
 
-#: src/stel_ui.cpp:708
+#: src/stel_ui.cpp:726
 msgid ""
 "Dialogs & other controls:\n"
 "H   : Help                      I   : About Stellarium\n"
@@ -273,7 +281,7 @@ msgstr ""
 "CTRL + F : 천체 파인더 토글\n"
 "\n"
 
-#: src/stel_ui.cpp:715
+#: src/stel_ui.cpp:733
 msgid ""
 "Time & Date:\n"
 "6   : Time rate pause           7   : Time rate 0\n"
@@ -291,7 +299,7 @@ msgstr ""
 "[ : 7일 전으로 ] : 7일 후로\n"
 "\n"
 
-#: src/stel_ui.cpp:722
+#: src/stel_ui.cpp:740
 msgid ""
 "During Script Playback:\n"
 "CTRL + C : End Script\n"
@@ -303,7 +311,7 @@ msgstr ""
 "6 : 스크립트 중지 K : 스크립트 계속\n"
 "\n"
 
-#: src/stel_ui.cpp:726
+#: src/stel_ui.cpp:744
 msgid ""
 "Misc:\n"
 "9   : Toggle meteor shower rates\n"
@@ -321,23 +329,23 @@ msgstr ""
 "CTRL + Q : 종료\n"
 "CMD + Q : 종료\n"
 
-#: src/stel_ui.cpp:740
+#: src/stel_ui.cpp:758
 msgid "Help"
 msgstr "도움말"
 
-#: src/stel_ui.cpp:1002
+#: src/stel_ui.cpp:1020
 msgid "Command recording stopped."
 msgstr "명령 저장이 중단되었습니다."
 
-#: src/stel_ui.cpp:1010
+#: src/stel_ui.cpp:1028
 msgid "Recording commands to script file:\n"
 msgstr "명령들을 스크립트 파일로 저장합니다:\n"
 
-#: src/stel_ui.cpp:1012
+#: src/stel_ui.cpp:1030
 msgid "Hit CTRL-R again to stop.\n"
 msgstr "멈추려면 CTRL-R 키를 치세요.\n"
 
-#: src/stel_ui.cpp:1016
+#: src/stel_ui.cpp:1034
 msgid "Error: Unable to open script file to record commands."
 msgstr "오류: 명령들을 저장하기 위한 스크립트 파일을 열 수 없습니다."
 
@@ -507,7 +515,7 @@ msgstr "스크린 해상도가 목록에 없으면 파일을 편집하세요 :"
 msgid "Choose landscapes:"
 msgstr "풍경을 선택하십시오."
 
-#: src/stel_ui_conf.cpp:433 src/stel_ui_conf.cpp:888
+#: src/stel_ui_conf.cpp:433 src/stel_ui_conf.cpp:889
 msgid "Author: "
 msgstr "저자: "
 
@@ -563,31 +571,31 @@ msgstr "가기"
 msgid "Enter observatory name"
 msgstr "관측소 위치를 입력하세요."
 
-#: src/stel_ui_conf.cpp:889
+#: src/stel_ui_conf.cpp:890
 msgid "Info: "
 msgstr "정보: "
 
-#: src/stel_ui_conf.cpp:941
+#: src/stel_ui_conf.cpp:942
 msgid ": Normal rate"
 msgstr ": 평상 속도"
 
-#: src/stel_ui_conf.cpp:948
+#: src/stel_ui_conf.cpp:949
 msgid ": Standard Perseids rate"
 msgstr ": 표준 페르세우스 유성우 빈도수"
 
-#: src/stel_ui_conf.cpp:955
+#: src/stel_ui_conf.cpp:956
 msgid ": Exceptional Leonid rate"
 msgstr ": 예외적인 사자자리 유성우 빈도수"
 
-#: src/stel_ui_conf.cpp:962
+#: src/stel_ui_conf.cpp:963
 msgid ": Highest rate ever (1966 Leonids)"
 msgstr ": 가장 높은 빈도수 (1966년 사자자리 유성우)"
 
-#: src/stel_ui_conf.cpp:967
+#: src/stel_ui_conf.cpp:968
 msgid "Meteor Rate per minute"
 msgstr "분당 유성 빈도수"
 
-#: src/stel_ui_conf.cpp:988
+#: src/stel_ui_conf.cpp:989
 msgid "Current Time Speed is x"
 msgstr "현재 시간 속도는 x"
 
@@ -679,11 +687,11 @@ msgstr "날짜 표시 형식: "
 msgid "Show: "
 msgstr "보이기: "
 
-#: src/stel_ui_tuiconf.cpp:383 src/stel_ui_tuiconf.cpp:408 src/s_gui.cpp:2221
+#: src/stel_ui_tuiconf.cpp:383 src/stel_ui_tuiconf.cpp:408 src/s_gui.cpp:2232
 msgid "Yes"
 msgstr "예"
 
-#: src/stel_ui_tuiconf.cpp:383 src/stel_ui_tuiconf.cpp:408 src/s_gui.cpp:2202
+#: src/stel_ui_tuiconf.cpp:383 src/stel_ui_tuiconf.cpp:408 src/s_gui.cpp:2213
 msgid "No"
 msgstr "아니오"
 
@@ -915,19 +923,19 @@ msgstr "케이론"
 msgid "Solar System Observer"
 msgstr "태양계 관측자"
 
-#: src/translations.h:63 src/s_gui.cpp:2667
+#: src/translations.h:63 src/s_gui.cpp:2678
 msgid "N"
 msgstr "북"
 
-#: src/translations.h:64 src/s_gui.cpp:2668
+#: src/translations.h:64 src/s_gui.cpp:2679
 msgid "S"
 msgstr "남"
 
-#: src/translations.h:65 src/s_gui.cpp:2672
+#: src/translations.h:65 src/s_gui.cpp:2683
 msgid "E"
 msgstr "동"
 
-#: src/translations.h:66 src/s_gui.cpp:2673
+#: src/translations.h:66 src/s_gui.cpp:2684
 msgid "W"
 msgstr "서"
 
@@ -1811,34 +1819,34 @@ msgstr "돌고래"
 msgid "Select and exit to run."
 msgstr "운용을 위해 선택 후 종료"
 
-#: src/s_gui.cpp:2208 src/s_gui.cpp:2254
+#: src/s_gui.cpp:2219 src/s_gui.cpp:2265
 msgid "Cancel"
 msgstr "취소"
 
-#: src/s_gui.cpp:2226 src/s_gui.cpp:2252
+#: src/s_gui.cpp:2237 src/s_gui.cpp:2263
 msgid "OK"
 msgstr "선택"
 
-#: src/s_gui.cpp:2722
+#: src/s_gui.cpp:2733
 msgid "Year"
 msgstr "년"
 
-#: src/s_gui.cpp:2725
+#: src/s_gui.cpp:2736
 msgid "Month"
 msgstr "월"
 
-#: src/s_gui.cpp:2728
+#: src/s_gui.cpp:2739
 msgid "Day"
 msgstr "일"
 
-#: src/s_gui.cpp:2731
+#: src/s_gui.cpp:2742
 msgid "Hour"
 msgstr "시"
 
-#: src/s_gui.cpp:2734
+#: src/s_gui.cpp:2745
 msgid "Minutes"
 msgstr "분"
 
-#: src/s_gui.cpp:2737
+#: src/s_gui.cpp:2748
 msgid "Seconds"
 msgstr "초"

@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
-"Report-Msgid-Bugs-To: Saeed Moaddeli <s.moaddeli@gmail.com>\n"
-"POT-Creation-Date: 2006-06-20 20:50+0200\n"
+"Report-Msgid-Bugs-To: stellarium@free.fr\n"
+"POT-Creation-Date: 2006-06-25 21:48+0200\n"
 "PO-Revision-Date: 2006-05-29 11:50+0000\n"
 "Last-Translator: Jalal Rohani <jranilz@yahoo.com>\n"
 "Language-Team:\n"
@@ -36,7 +36,7 @@ msgstr "%s: آرگومان(های) نامناسب برای خط فرمان\n"
 msgid "Try `%s --help' for more information.\n"
 msgstr "برای اطلاعات بیشتر `%s --help' را امتحان کنید.\n"
 
-#: src/constellation_mgr.cpp:174
+#: src/constellation_mgr.cpp:175
 msgid "Loading Constellation Art: "
 msgstr "بارگیری تصاویر صوَر فلکی: "
 
@@ -84,11 +84,11 @@ msgstr "االگو: "
 msgid "Size: "
 msgstr "اندازه: "
 
-#: src/nebula_mgr.cpp:288
+#: src/nebula_mgr.cpp:290
 msgid "Loading NGC catalog: "
 msgstr "بارگیری کاتالوگ NGC: "
 
-#: src/nebula_mgr.cpp:415
+#: src/nebula_mgr.cpp:417
 msgid "Loading Nebula Textures:"
 msgstr "بارگیری بافت سحابی‌ها:"
 
@@ -96,99 +96,107 @@ msgstr "بارگیری بافت سحابی‌ها:"
 msgid "AU"
 msgstr "واحد نجومی"
 
-#: src/stel_ui.cpp:503 src/stel_ui.cpp:631
+#: src/stel_ui.cpp:515 src/stel_ui.cpp:645
 msgid "Script commander"
 msgstr "فرمانده اسکریپت"
 
-#: src/stel_ui.cpp:530
+#: src/stel_ui.cpp:542
 msgid "Invalid Script command"
 msgstr "فرمان اشتباه"
 
-#: src/stel_ui.cpp:596
+#: src/stel_ui.cpp:610
 msgid "Drawing of the Constellations [C]"
 msgstr "نقاشیهای صورتهای فلکی [C]"
 
-#: src/stel_ui.cpp:598
+#: src/stel_ui.cpp:612
 msgid "Names of the Constellations [V]"
 msgstr "نامهای صورتهای فلکی [V]"
 
-#: src/stel_ui.cpp:600
+#: src/stel_ui.cpp:614
 msgid "Constellations Art [R]"
 msgstr "تصاویر صورتهای فلکی [R]"
 
-#: src/stel_ui.cpp:602
+#: src/stel_ui.cpp:616
 msgid "Azimuthal Grid [Z]"
 msgstr "تقسیمات سَمتی"
 
-#: src/stel_ui.cpp:604
+#: src/stel_ui.cpp:618
 msgid "Equatorial Grid [E]"
 msgstr "تقسیمات استوایی"
 
-#: src/stel_ui.cpp:606
+#: src/stel_ui.cpp:620
 msgid "Ground [G]"
 msgstr "زمین [G]"
 
-#: src/stel_ui.cpp:608
+#: src/stel_ui.cpp:622
 msgid "Cardinal Points [Q]"
 msgstr "چهارجهت اصلی"
 
-#: src/stel_ui.cpp:610
+#: src/stel_ui.cpp:624
 msgid "Atmosphere [A]"
 msgstr "جَوّ[A]"
 
-#: src/stel_ui.cpp:612
+#: src/stel_ui.cpp:626
 msgid "Nebulas [N]"
 msgstr "سحابی‌ها[N]"
 
-#: src/stel_ui.cpp:614
+#: src/stel_ui.cpp:628
 msgid "Help [H]"
 msgstr "کمک[H]"
 
-#: src/stel_ui.cpp:616
+#: src/stel_ui.cpp:630
 msgid "Equatorial/Altazimuthal Mount [ENTER]"
 msgstr "استقرار سمت‌ارتفاعی/استوایی[ENTER]"
 
-#: src/stel_ui.cpp:618
+#: src/stel_ui.cpp:632
 msgid "Configuration window"
 msgstr "پنجره پیکربندی"
 
-#: src/stel_ui.cpp:621
+#: src/stel_ui.cpp:635
 msgid "Night (red) mode"
 msgstr "حالت شبانه (نور قرمز)"
 
-#: src/stel_ui.cpp:624
+#: src/stel_ui.cpp:638
 msgid "Quit [CTRL + Q]"
 msgstr "خروج[CTRL + Q]"
 
-#: src/stel_ui.cpp:626
+#: src/stel_ui.cpp:640
 msgid "Quit [CMD + Q]"
 msgstr "خروج[CMD + Q]"
 
-#: src/stel_ui.cpp:629
+#: src/stel_ui.cpp:643
 msgid "Search for object"
 msgstr "جستجوی جرم"
 
-#: src/stel_ui.cpp:633
+#: src/stel_ui.cpp:647
 msgid "Goto selected object [SPACE]"
 msgstr "برو به جرم منتخب [SPACE]"
 
-#: src/stel_ui.cpp:639
+#: src/stel_ui.cpp:649
+msgid "flip horizontally"
+msgstr ""
+
+#: src/stel_ui.cpp:651
+msgid "flip vertically"
+msgstr ""
+
+#: src/stel_ui.cpp:657
 msgid "Decrease Time Speed [J]"
 msgstr "کاهش سرعت گذر زمان [J]"
 
-#: src/stel_ui.cpp:641
+#: src/stel_ui.cpp:659
 msgid "Real Time Speed [K]"
 msgstr "سرعت واقعی گذر زمان [K]"
 
-#: src/stel_ui.cpp:643
+#: src/stel_ui.cpp:661
 msgid "Increase Time Speed [L]"
 msgstr "افزایش سرعت گذر زمان [L]"
 
-#: src/stel_ui.cpp:645
+#: src/stel_ui.cpp:663
 msgid "Return to Current Time"
 msgstr "بازگشت به زمان فعلی"
 
-#: src/stel_ui.cpp:654
+#: src/stel_ui.cpp:672
 #, fuzzy
 msgid ""
 "   Please check for newer versions and send bug reports\n"
@@ -199,11 +207,11 @@ msgstr ""
 "    برای ارسال توضیح از این سایت استفاده کنید : http://www.stellarium.org\n"
 "\n"
 
-#: src/stel_ui.cpp:673
+#: src/stel_ui.cpp:691
 msgid "Information"
 msgstr "اطلاعات"
 
-#: src/stel_ui.cpp:685
+#: src/stel_ui.cpp:703
 msgid ""
 "Movement & selection:\n"
 "Arrow Keys       : Change viewing RA/DE\n"
@@ -229,7 +237,7 @@ msgstr ""
 "SPACE       : در مرکز نهادن جرم منتخب\n"
 "\n"
 
-#: src/stel_ui.cpp:696
+#: src/stel_ui.cpp:714
 msgid ""
 "Display options:\n"
 "ENTER : Equatorial/altazimuthal mount\n"
@@ -255,7 +263,7 @@ msgstr ""
 "خط استوای سماوی: ۵    خط دایرة‌البروج: ۴\n"
 "\n"
 
-#: src/stel_ui.cpp:708
+#: src/stel_ui.cpp:726
 msgid ""
 "Dialogs & other controls:\n"
 "H   : Help                      I   : About Stellarium\n"
@@ -272,7 +280,7 @@ msgstr ""
 "تعویض جرم‌یاب: CTRL + F\n"
 "\n"
 
-#: src/stel_ui.cpp:715
+#: src/stel_ui.cpp:733
 msgid ""
 "Time & Date:\n"
 "6   : Time rate pause           7   : Time rate 0\n"
@@ -286,11 +294,11 @@ msgstr ""
 "صفر‌کردن نرخ گذر زمان:  ۷    توقف نرخ گذر زمان:  ۶ \n"
 "کاهش نرخ گذر زمان:  J    اِعمال زمان فعلی:  ۸ \n"
 "افزایش نرخ گذر زمان:  L    نرخ گذر زمان نرمال:  K \n"
-"۲۴ ساعت به جلو:  =    ۲۴ ساعت به عقب:  - /n۷ روز به جلو:  ]    ۷ روز به عقب: "
-" [\n"
+"۲۴ ساعت به جلو:  =    ۲۴ ساعت به عقب:  - /n۷ روز به جلو:  ]    ۷ روز به "
+"عقب:  [\n"
 "\n"
 
-#: src/stel_ui.cpp:722
+#: src/stel_ui.cpp:740
 msgid ""
 "During Script Playback:\n"
 "CTRL + C : End Script\n"
@@ -302,7 +310,7 @@ msgstr ""
 "ازسرگیری اسکریپت: K  توقف اسکریپت:  ۶\n"
 "\n"
 
-#: src/stel_ui.cpp:726
+#: src/stel_ui.cpp:744
 msgid ""
 "Misc:\n"
 "9   : Toggle meteor shower rates\n"
@@ -313,23 +321,23 @@ msgid ""
 "CMD + Q  : Quit\n"
 msgstr ""
 
-#: src/stel_ui.cpp:740
+#: src/stel_ui.cpp:758
 msgid "Help"
 msgstr "راهنما"
 
-#: src/stel_ui.cpp:1002
+#: src/stel_ui.cpp:1020
 msgid "Command recording stopped."
 msgstr "ضبط فرمانها متوقف شد."
 
-#: src/stel_ui.cpp:1010
+#: src/stel_ui.cpp:1028
 msgid "Recording commands to script file:\n"
 msgstr ":در حال ضبط فرمانها در فایل اسکریپت\n"
 
-#: src/stel_ui.cpp:1012
+#: src/stel_ui.cpp:1030
 msgid "Hit CTRL-R again to stop.\n"
 msgstr ".را فشار دهیدCTRL-R برای توقف دوباره\n"
 
-#: src/stel_ui.cpp:1016
+#: src/stel_ui.cpp:1034
 msgid "Error: Unable to open script file to record commands."
 msgstr "Error: .فایل اسکریپت برای ضبط فرمانها باز نمی‌شود"
 
@@ -502,7 +510,7 @@ msgstr ":برای مقادیر تفکیک‌پذیری صفحه که در لیس
 msgid "Choose landscapes:"
 msgstr "انتخاب چشم انداز ها:"
 
-#: src/stel_ui_conf.cpp:433 src/stel_ui_conf.cpp:888
+#: src/stel_ui_conf.cpp:433 src/stel_ui_conf.cpp:889
 msgid "Author: "
 msgstr ""
 
@@ -558,31 +566,31 @@ msgstr "برو"
 msgid "Enter observatory name"
 msgstr "نام رصدخانه را وارد کنید"
 
-#: src/stel_ui_conf.cpp:889
+#: src/stel_ui_conf.cpp:890
 msgid "Info: "
 msgstr ""
 
-#: src/stel_ui_conf.cpp:941
+#: src/stel_ui_conf.cpp:942
 msgid ": Normal rate"
 msgstr ": نرخ معمول"
 
-#: src/stel_ui_conf.cpp:948
+#: src/stel_ui_conf.cpp:949
 msgid ": Standard Perseids rate"
 msgstr ""
 
-#: src/stel_ui_conf.cpp:955
+#: src/stel_ui_conf.cpp:956
 msgid ": Exceptional Leonid rate"
 msgstr ""
 
-#: src/stel_ui_conf.cpp:962
+#: src/stel_ui_conf.cpp:963
 msgid ": Highest rate ever (1966 Leonids)"
 msgstr ""
 
-#: src/stel_ui_conf.cpp:967
+#: src/stel_ui_conf.cpp:968
 msgid "Meteor Rate per minute"
 msgstr "نرخ بارش شهاب در دقیقه"
 
-#: src/stel_ui_conf.cpp:988
+#: src/stel_ui_conf.cpp:989
 msgid "Current Time Speed is x"
 msgstr ".است x سرعت فعلی گذر زمان"
 
@@ -674,11 +682,11 @@ msgstr ":قالب نمایش تاریخ "
 msgid "Show: "
 msgstr ":نمایش "
 
-#: src/stel_ui_tuiconf.cpp:383 src/stel_ui_tuiconf.cpp:408 src/s_gui.cpp:2221
+#: src/stel_ui_tuiconf.cpp:383 src/stel_ui_tuiconf.cpp:408 src/s_gui.cpp:2232
 msgid "Yes"
 msgstr "بله"
 
-#: src/stel_ui_tuiconf.cpp:383 src/stel_ui_tuiconf.cpp:408 src/s_gui.cpp:2202
+#: src/stel_ui_tuiconf.cpp:383 src/stel_ui_tuiconf.cpp:408 src/s_gui.cpp:2213
 msgid "No"
 msgstr "خیر"
 
@@ -910,19 +918,19 @@ msgstr "کایرون"
 msgid "Solar System Observer"
 msgstr "ناظر منظومه خورشیدی"
 
-#: src/translations.h:63 src/s_gui.cpp:2667
+#: src/translations.h:63 src/s_gui.cpp:2678
 msgid "N"
 msgstr "شمال"
 
-#: src/translations.h:64 src/s_gui.cpp:2668
+#: src/translations.h:64 src/s_gui.cpp:2679
 msgid "S"
 msgstr "جنوب"
 
-#: src/translations.h:65 src/s_gui.cpp:2672
+#: src/translations.h:65 src/s_gui.cpp:2683
 msgid "E"
 msgstr "شرق"
 
-#: src/translations.h:66 src/s_gui.cpp:2673
+#: src/translations.h:66 src/s_gui.cpp:2684
 msgid "W"
 msgstr "غرب"
 
@@ -1806,35 +1814,35 @@ msgstr "دلفین"
 msgid "Select and exit to run."
 msgstr ""
 
-#: src/s_gui.cpp:2208 src/s_gui.cpp:2254
+#: src/s_gui.cpp:2219 src/s_gui.cpp:2265
 msgid "Cancel"
 msgstr ""
 
-#: src/s_gui.cpp:2226 src/s_gui.cpp:2252
+#: src/s_gui.cpp:2237 src/s_gui.cpp:2263
 msgid "OK"
 msgstr "تأیید"
 
-#: src/s_gui.cpp:2722
+#: src/s_gui.cpp:2733
 msgid "Year"
 msgstr "سال"
 
-#: src/s_gui.cpp:2725
+#: src/s_gui.cpp:2736
 msgid "Month"
 msgstr "ماه"
 
-#: src/s_gui.cpp:2728
+#: src/s_gui.cpp:2739
 msgid "Day"
 msgstr "روز"
 
-#: src/s_gui.cpp:2731
+#: src/s_gui.cpp:2742
 msgid "Hour"
 msgstr "ساعت"
 
-#: src/s_gui.cpp:2734
+#: src/s_gui.cpp:2745
 msgid "Minutes"
 msgstr "دقیقه"
 
-#: src/s_gui.cpp:2737
+#: src/s_gui.cpp:2748
 msgid "Seconds"
 msgstr "ثانیه"
 
@@ -1862,15 +1870,12 @@ msgstr "ثانیه"
 #~ msgid "ly"
 #~ msgstr "سال‌نوری"
 
-#, c-format
 #~ msgid "Loading HIP/SAO catalogs: %d/%d"
 #~ msgstr "بارگیری کاتالوگ HIP/SAO: %d/%d"
 
-#, c-format
 #~ msgid "Loading HIP catalog: %d/%d"
 #~ msgstr "بارگیری کاتالوگ HIP: %d/%d"
 
-#, c-format
 #~ msgid "Loading SAO catalog: %d/%d"
 #~ msgstr "بارگیری کاتالوگ SAO: %d/%d"
 

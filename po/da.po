@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: stellarium@free.fr\n"
-"POT-Creation-Date: 2006-06-20 20:50+0200\n"
+"POT-Creation-Date: 2006-06-25 21:48+0200\n"
 "PO-Revision-Date: 2006-03-29 23:50+0000\n"
 "Last-Translator: SillyDizzy <cdissing@gmail.com>\n"
 "Language-Team:\n"
@@ -19,7 +19,7 @@ msgstr ""
 "X-Poedit-Country: DENMARK\n"
 
 #: src/main.cpp:52
-#, fuzzy
+#, fuzzy, c-format
 msgid ""
 "Usage: %s [OPTION] ...\n"
 " -v, --version          Output version information and exit.\n"
@@ -30,16 +30,16 @@ msgstr ""
 " -h, --help             Viser hjælp og afslutter.\n"
 
 #: src/main.cpp:76
-#, fuzzy
+#, fuzzy, c-format
 msgid "%s: Bad command line argument(s)\n"
 msgstr "%s: Ugyldig kommandolinie argument\n"
 
 #: src/main.cpp:77
-#, fuzzy
+#, fuzzy, c-format
 msgid "Try `%s --help' for more information.\n"
 msgstr "Prøv `%s --help' for mere information.\n"
 
-#: src/constellation_mgr.cpp:174
+#: src/constellation_mgr.cpp:175
 #, fuzzy
 msgid "Loading Constellation Art: "
 msgstr "Henter stjernebillede illustrationer: "
@@ -89,12 +89,12 @@ msgstr "Type "
 msgid "Size: "
 msgstr "Størrelse "
 
-#: src/nebula_mgr.cpp:288
+#: src/nebula_mgr.cpp:290
 #, fuzzy
 msgid "Loading NGC catalog: "
 msgstr "Henter NGC katalog: "
 
-#: src/nebula_mgr.cpp:415
+#: src/nebula_mgr.cpp:417
 #, fuzzy
 msgid "Loading Nebula Textures:"
 msgstr "Henter teksturer til tåger:"
@@ -103,120 +103,128 @@ msgstr "Henter teksturer til tåger:"
 msgid "AU"
 msgstr "AE"
 
-#: src/stel_ui.cpp:503 src/stel_ui.cpp:631
+#: src/stel_ui.cpp:515 src/stel_ui.cpp:645
 #, fuzzy
 msgid "Script commander"
 msgstr "Skript-kommandoer"
 
-#: src/stel_ui.cpp:530
+#: src/stel_ui.cpp:542
 #, fuzzy
 msgid "Invalid Script command"
 msgstr "Ugyldig skript-kommando"
 
-#: src/stel_ui.cpp:596
+#: src/stel_ui.cpp:610
 #, fuzzy
 msgid "Drawing of the Constellations [C]"
 msgstr "Tegning af stjernebilleder [C]"
 
-#: src/stel_ui.cpp:598
+#: src/stel_ui.cpp:612
 #, fuzzy
 msgid "Names of the Constellations [V]"
 msgstr "Navne på stjernebilleder [V]"
 
-#: src/stel_ui.cpp:600
+#: src/stel_ui.cpp:614
 #, fuzzy
 msgid "Constellations Art [R]"
 msgstr "Stjernebillede illustrationer [R]"
 
-#: src/stel_ui.cpp:602
+#: src/stel_ui.cpp:616
 #, fuzzy
 msgid "Azimuthal Grid [Z]"
 msgstr "Azimuthal net [Z]"
 
-#: src/stel_ui.cpp:604
+#: src/stel_ui.cpp:618
 #, fuzzy
 msgid "Equatorial Grid [E]"
 msgstr "Ækvatorial net [E]"
 
-#: src/stel_ui.cpp:606
+#: src/stel_ui.cpp:620
 #, fuzzy
 msgid "Ground [G]"
 msgstr "Horisont [G]"
 
-#: src/stel_ui.cpp:608
+#: src/stel_ui.cpp:622
 #, fuzzy
 msgid "Cardinal Points [Q]"
 msgstr "Verdenshjørner [Q]"
 
-#: src/stel_ui.cpp:610
+#: src/stel_ui.cpp:624
 #, fuzzy
 msgid "Atmosphere [A]"
 msgstr "Atmosfære [A]"
 
-#: src/stel_ui.cpp:612
+#: src/stel_ui.cpp:626
 #, fuzzy
 msgid "Nebulas [N]"
 msgstr "Tåger [N]"
 
-#: src/stel_ui.cpp:614
+#: src/stel_ui.cpp:628
 #, fuzzy
 msgid "Help [H]"
 msgstr "Hjælp [H]"
 
-#: src/stel_ui.cpp:616
+#: src/stel_ui.cpp:630
 #, fuzzy
 msgid "Equatorial/Altazimuthal Mount [ENTER]"
 msgstr "Ækvatorial/Azimuthal visning [ENTER]"
 
-#: src/stel_ui.cpp:618
+#: src/stel_ui.cpp:632
 #, fuzzy
 msgid "Configuration window"
 msgstr "Opsætning"
 
-#: src/stel_ui.cpp:621
+#: src/stel_ui.cpp:635
 #, fuzzy
 msgid "Night (red) mode"
 msgstr "Nat (rød) tilstand"
 
-#: src/stel_ui.cpp:624
+#: src/stel_ui.cpp:638
 #, fuzzy
 msgid "Quit [CTRL + Q]"
 msgstr "Afslut [CTRL + Q]"
 
-#: src/stel_ui.cpp:626
+#: src/stel_ui.cpp:640
 #, fuzzy
 msgid "Quit [CMD + Q]"
 msgstr "Afslut [CMD + Q]"
 
-#: src/stel_ui.cpp:629
+#: src/stel_ui.cpp:643
 #, fuzzy
 msgid "Search for object"
 msgstr "Søg efter et objekt"
 
-#: src/stel_ui.cpp:633
+#: src/stel_ui.cpp:647
 #, fuzzy
 msgid "Goto selected object [SPACE]"
 msgstr "Gå til valgt objekt [mellemrum]"
 
-#: src/stel_ui.cpp:639
+#: src/stel_ui.cpp:649
+msgid "flip horizontally"
+msgstr ""
+
+#: src/stel_ui.cpp:651
+msgid "flip vertically"
+msgstr ""
+
+#: src/stel_ui.cpp:657
 msgid "Decrease Time Speed [J]"
 msgstr ""
 
-#: src/stel_ui.cpp:641
+#: src/stel_ui.cpp:659
 #, fuzzy
 msgid "Real Time Speed [K]"
 msgstr "Normal tid [K]"
 
-#: src/stel_ui.cpp:643
+#: src/stel_ui.cpp:661
 msgid "Increase Time Speed [L]"
 msgstr "Accelerer tid [L]"
 
-#: src/stel_ui.cpp:645
+#: src/stel_ui.cpp:663
 #, fuzzy
 msgid "Return to Current Time"
 msgstr "Retur til aktuel tid"
 
-#: src/stel_ui.cpp:654
+#: src/stel_ui.cpp:672
 #, fuzzy
 msgid ""
 "   Please check for newer versions and send bug reports\n"
@@ -227,12 +235,12 @@ msgstr ""
 "og kommentarer til os på: http://www.stellarium.org\n"
 "\n"
 
-#: src/stel_ui.cpp:673
+#: src/stel_ui.cpp:691
 #, fuzzy
 msgid "Information"
 msgstr "Information"
 
-#: src/stel_ui.cpp:685
+#: src/stel_ui.cpp:703
 msgid ""
 "Movement & selection:\n"
 "Arrow Keys       : Change viewing RA/DE\n"
@@ -258,7 +266,7 @@ msgstr ""
 "Mellemrum : Centrer på valgt objekt\n"
 "\n"
 
-#: src/stel_ui.cpp:696
+#: src/stel_ui.cpp:714
 msgid ""
 "Display options:\n"
 "ENTER : Equatorial/altazimuthal mount\n"
@@ -286,7 +294,7 @@ msgstr ""
 "4 : Ekliptisk line 5 : Ækvator line\n"
 "\n"
 
-#: src/stel_ui.cpp:708
+#: src/stel_ui.cpp:726
 msgid ""
 "Dialogs & other controls:\n"
 "H   : Help                      I   : About Stellarium\n"
@@ -304,7 +312,7 @@ msgstr ""
 "CTRL + F : Skift mellem objekt finder\n"
 "\n"
 
-#: src/stel_ui.cpp:715
+#: src/stel_ui.cpp:733
 msgid ""
 "Time & Date:\n"
 "6   : Time rate pause           7   : Time rate 0\n"
@@ -322,7 +330,7 @@ msgstr ""
 "[ : 7 dage tilbage ] : 7 dage frem\n"
 "\n"
 
-#: src/stel_ui.cpp:722
+#: src/stel_ui.cpp:740
 msgid ""
 "During Script Playback:\n"
 "CTRL + C : End Script\n"
@@ -334,7 +342,7 @@ msgstr ""
 "6 : pause skript K : genoptag skript\n"
 "\n"
 
-#: src/stel_ui.cpp:726
+#: src/stel_ui.cpp:744
 msgid ""
 "Misc:\n"
 "9   : Toggle meteor shower rates\n"
@@ -345,23 +353,23 @@ msgid ""
 "CMD + Q  : Quit\n"
 msgstr ""
 
-#: src/stel_ui.cpp:740
+#: src/stel_ui.cpp:758
 msgid "Help"
 msgstr "Hjælp"
 
-#: src/stel_ui.cpp:1002
+#: src/stel_ui.cpp:1020
 msgid "Command recording stopped."
 msgstr "Registrering af kommandoer stoppet."
 
-#: src/stel_ui.cpp:1010
+#: src/stel_ui.cpp:1028
 msgid "Recording commands to script file:\n"
 msgstr "Registrering af kommandoer til skriptfilen:\n"
 
-#: src/stel_ui.cpp:1012
+#: src/stel_ui.cpp:1030
 msgid "Hit CTRL-R again to stop.\n"
 msgstr "Tryk på CTRL+R en gang til for at stoppe.\n"
 
-#: src/stel_ui.cpp:1016
+#: src/stel_ui.cpp:1034
 msgid "Error: Unable to open script file to record commands."
 msgstr "Fejl: Kunne ikke åbne skriptfilen for at registrere kommandoer."
 
@@ -532,7 +540,7 @@ msgstr "For opløsninger som ikke vises, må du selv ændre filen :"
 msgid "Choose landscapes:"
 msgstr ""
 
-#: src/stel_ui_conf.cpp:433 src/stel_ui_conf.cpp:888
+#: src/stel_ui_conf.cpp:433 src/stel_ui_conf.cpp:889
 msgid "Author: "
 msgstr ""
 
@@ -545,7 +553,6 @@ msgid "Sky Language: "
 msgstr "Sprog på himlen: "
 
 #: src/stel_ui_conf.cpp:490 src/stel_ui_tuiconf.cpp:376
-#, fuzzy
 msgid "Sky Culture: "
 msgstr ""
 
@@ -589,31 +596,31 @@ msgstr ""
 msgid "Enter observatory name"
 msgstr "Skriv navn på observatorium"
 
-#: src/stel_ui_conf.cpp:889
+#: src/stel_ui_conf.cpp:890
 msgid "Info: "
 msgstr ""
 
-#: src/stel_ui_conf.cpp:941
+#: src/stel_ui_conf.cpp:942
 msgid ": Normal rate"
 msgstr ""
 
-#: src/stel_ui_conf.cpp:948
+#: src/stel_ui_conf.cpp:949
 msgid ": Standard Perseids rate"
 msgstr ""
 
-#: src/stel_ui_conf.cpp:955
+#: src/stel_ui_conf.cpp:956
 msgid ": Exceptional Leonid rate"
 msgstr ""
 
-#: src/stel_ui_conf.cpp:962
+#: src/stel_ui_conf.cpp:963
 msgid ": Highest rate ever (1966 Leonids)"
 msgstr ""
 
-#: src/stel_ui_conf.cpp:967
+#: src/stel_ui_conf.cpp:968
 msgid "Meteor Rate per minute"
 msgstr ""
 
-#: src/stel_ui_conf.cpp:988
+#: src/stel_ui_conf.cpp:989
 msgid "Current Time Speed is x"
 msgstr "Gældende tid :"
 
@@ -705,11 +712,11 @@ msgstr "Format for visning af dato: "
 msgid "Show: "
 msgstr "Vis: "
 
-#: src/stel_ui_tuiconf.cpp:383 src/stel_ui_tuiconf.cpp:408 src/s_gui.cpp:2221
+#: src/stel_ui_tuiconf.cpp:383 src/stel_ui_tuiconf.cpp:408 src/s_gui.cpp:2232
 msgid "Yes"
 msgstr "Ja"
 
-#: src/stel_ui_tuiconf.cpp:383 src/stel_ui_tuiconf.cpp:408 src/s_gui.cpp:2202
+#: src/stel_ui_tuiconf.cpp:383 src/stel_ui_tuiconf.cpp:408 src/s_gui.cpp:2213
 msgid "No"
 msgstr "Nej"
 
@@ -798,7 +805,6 @@ msgid "Zoom Duration: "
 msgstr "Trin for zoom : "
 
 #: src/stel_ui_tuiconf.cpp:414
-#, fuzzy
 msgid "Cursor Timeout: "
 msgstr ""
 
@@ -942,19 +948,19 @@ msgstr "Charon"
 msgid "Solar System Observer"
 msgstr ""
 
-#: src/translations.h:63 src/s_gui.cpp:2667
+#: src/translations.h:63 src/s_gui.cpp:2678
 msgid "N"
 msgstr "N"
 
-#: src/translations.h:64 src/s_gui.cpp:2668
+#: src/translations.h:64 src/s_gui.cpp:2679
 msgid "S"
 msgstr "S"
 
-#: src/translations.h:65 src/s_gui.cpp:2672
+#: src/translations.h:65 src/s_gui.cpp:2683
 msgid "E"
 msgstr "Ø"
 
-#: src/translations.h:66 src/s_gui.cpp:2673
+#: src/translations.h:66 src/s_gui.cpp:2684
 msgid "W"
 msgstr "V"
 
@@ -1838,35 +1844,35 @@ msgstr ""
 msgid "Select and exit to run."
 msgstr ""
 
-#: src/s_gui.cpp:2208 src/s_gui.cpp:2254
+#: src/s_gui.cpp:2219 src/s_gui.cpp:2265
 msgid "Cancel"
 msgstr ""
 
-#: src/s_gui.cpp:2226 src/s_gui.cpp:2252
+#: src/s_gui.cpp:2237 src/s_gui.cpp:2263
 msgid "OK"
 msgstr ""
 
-#: src/s_gui.cpp:2722
+#: src/s_gui.cpp:2733
 msgid "Year"
 msgstr ""
 
-#: src/s_gui.cpp:2725
+#: src/s_gui.cpp:2736
 msgid "Month"
 msgstr ""
 
-#: src/s_gui.cpp:2728
+#: src/s_gui.cpp:2739
 msgid "Day"
 msgstr ""
 
-#: src/s_gui.cpp:2731
+#: src/s_gui.cpp:2742
 msgid "Hour"
 msgstr ""
 
-#: src/s_gui.cpp:2734
+#: src/s_gui.cpp:2745
 msgid "Minutes"
 msgstr ""
 
-#: src/s_gui.cpp:2737
+#: src/s_gui.cpp:2748
 msgid "Seconds"
 msgstr ""
 
@@ -1906,15 +1912,12 @@ msgstr ""
 #~ msgid "ly"
 #~ msgstr "lysår"
 
-#, c-format
 #~ msgid "Loading HIP/SAO catalogs: %d/%d"
 #~ msgstr "Henter HIP/SAO kataloger: %d/%d"
 
-#, c-format
 #~ msgid "Loading HIP catalog: %d/%d"
 #~ msgstr "Henter HIP katalog: %d/%d"
 
-#, c-format
 #~ msgid "Loading SAO catalog: %d/%d"
 #~ msgstr "Henter SAO katalog: %d/%d"
 
@@ -1948,7 +1951,8 @@ msgstr ""
 #~ "and comments to us at: http://stellarium.sourceforge.net\n"
 #~ "\n"
 #~ msgstr ""
-#~ "   Venligst tjek om du har seneste version af Stellarium før du rapporterer\n"
+#~ "   Venligst tjek om du har seneste version af Stellarium før du "
+#~ "rapporterer\n"
 #~ "problemer til webstedet http://stellarium.sourceforge.net\n"
 #~ "\n"
 
@@ -2041,13 +2045,14 @@ msgstr ""
 #~ msgid ""
 #~ "ERROR : I can't find the datas directories in :\n"
 #~ "%s/ nor in ./ nor in ../\n"
-#~ "You may fully install the software (type \"make install\" on POSIX systems)\n"
+#~ "You may fully install the software (type \"make install\" on POSIX "
+#~ "systems)\n"
 #~ "or launch the application from the stellarium package directory.\n"
 #~ msgstr ""
 #~ "ERROR : Kan ikke finde mappen i :\n"
 #~ "%s/ , ./ eller i ../\n"
-#~ "Du er måske nød til at installere programmet igen (skriv \"make install\" på "
-#~ "POSIX systemer)\n"
+#~ "Du er måske nød til at installere programmet igen (skriv \"make install\" "
+#~ "på POSIX systemer)\n"
 #~ "eller starte programmet fra Stellariums pakkemappe.\n"
 
 #~ msgid "> Found data files in %s : local version.\n"
@@ -2240,8 +2245,8 @@ msgstr ""
 #~ "imported (%s).\n"
 #~ "It will be replaced by the default config file.\n"
 #~ msgstr ""
-#~ "Nuværende opsætningsfil tilhører en gammel version som ikke kan importeres  "
-#~ "(%s).\n"
+#~ "Nuværende opsætningsfil tilhører en gammel version som ikke kan "
+#~ "importeres  (%s).\n"
 #~ "Den vil blive erstattet med en standard opsætningsfil.\n"
 
 #~ msgid "Loading configuration file "
