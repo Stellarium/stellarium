@@ -845,6 +845,7 @@ void StelUI::saveRenderOptions(void)
 	conf.set_boolean("astro:flag_planets", core->getFlagPlanets());
 	conf.set_boolean("astro:flag_planets_hints", core->getFlagPlanetsHints());
 	conf.set_double("viewing:moon_scale", core->getMoonScale());
+	conf.set_boolean("viewing:flag_moon_scaled", core->getFlagMoonScaled());
 	conf.set_boolean("viewing:flag_chart", app->getVisionModeChart());
 	conf.set_boolean("viewing:flag_night", app->getVisionModeNight());
 	conf.set_boolean("viewing:flag_equatorial_grid", core->getFlagEquatorGrid());
