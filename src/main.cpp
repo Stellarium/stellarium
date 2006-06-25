@@ -222,6 +222,9 @@ void setDirectories(const char* executableName)
 // Main stellarium procedure
 int main(int argc, char **argv)
 {
+	// Used for getting system date formatting
+	setlocale(LC_TIME, "");
+	
 	// Check the command line
 	check_command_line(argc, argv);
 
