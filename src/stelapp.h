@@ -97,9 +97,6 @@ public:
 	               Uint16 unicode, s_gui::S_GUI_VALUE state);
 
 	const string getConfigDir(void) const {return configDir;}
-	
-	const float getMaxFPS(void) const {return maxfps;}
-	const float getMinFPS(void) const {return minfps;}
 
 	//! Quit the application
 	void quit(void);
