@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: stellarium@free.fr\n"
-"POT-Creation-Date: 2006-06-20 20:50+0200\n"
+"POT-Creation-Date: 2006-06-25 21:48+0200\n"
 "PO-Revision-Date: 2006-05-21 11:04+0000\n"
 "Last-Translator: nickito <itomail@gmail.com>\n"
 "Language-Team:\n"
@@ -41,7 +41,7 @@ msgstr "%s: Argumento(s) de la línea de comandos incorrecto(s)\n"
 msgid "Try `%s --help' for more information.\n"
 msgstr "Intenta `%s --help' para más información.\n"
 
-#: src/constellation_mgr.cpp:174
+#: src/constellation_mgr.cpp:175
 msgid "Loading Constellation Art: "
 msgstr "Cargando figuras de Constelaciones: "
 
@@ -86,11 +86,11 @@ msgstr "Tipo: "
 msgid "Size: "
 msgstr "Tamaño: "
 
-#: src/nebula_mgr.cpp:288
+#: src/nebula_mgr.cpp:290
 msgid "Loading NGC catalog: "
 msgstr "Cargando catálogo NGC: "
 
-#: src/nebula_mgr.cpp:415
+#: src/nebula_mgr.cpp:417
 msgid "Loading Nebula Textures:"
 msgstr "Cargando texturas de nebulosas:"
 
@@ -98,99 +98,107 @@ msgstr "Cargando texturas de nebulosas:"
 msgid "AU"
 msgstr "U.A."
 
-#: src/stel_ui.cpp:503 src/stel_ui.cpp:631
+#: src/stel_ui.cpp:515 src/stel_ui.cpp:645
 msgid "Script commander"
 msgstr "comandos Script"
 
-#: src/stel_ui.cpp:530
+#: src/stel_ui.cpp:542
 msgid "Invalid Script command"
 msgstr "Comando script no válido"
 
-#: src/stel_ui.cpp:596
+#: src/stel_ui.cpp:610
 msgid "Drawing of the Constellations [C]"
 msgstr "Dibujando las constelaciones [C]"
 
-#: src/stel_ui.cpp:598
+#: src/stel_ui.cpp:612
 msgid "Names of the Constellations [V]"
 msgstr "Nombres de las constelaciones [V]"
 
-#: src/stel_ui.cpp:600
+#: src/stel_ui.cpp:614
 msgid "Constellations Art [R]"
 msgstr "Figuras de las constelaciones [R]"
 
-#: src/stel_ui.cpp:602
+#: src/stel_ui.cpp:616
 msgid "Azimuthal Grid [Z]"
 msgstr "Cuadrícula Azimutal [Z]"
 
-#: src/stel_ui.cpp:604
+#: src/stel_ui.cpp:618
 msgid "Equatorial Grid [E]"
 msgstr "Cuadrícula Ecuatorial [E]"
 
-#: src/stel_ui.cpp:606
+#: src/stel_ui.cpp:620
 msgid "Ground [G]"
 msgstr "Suelo [G]"
 
-#: src/stel_ui.cpp:608
+#: src/stel_ui.cpp:622
 msgid "Cardinal Points [Q]"
 msgstr "Puntos Cardinales [Q]"
 
-#: src/stel_ui.cpp:610
+#: src/stel_ui.cpp:624
 msgid "Atmosphere [A]"
 msgstr "Atmósfera [A]"
 
-#: src/stel_ui.cpp:612
+#: src/stel_ui.cpp:626
 msgid "Nebulas [N]"
 msgstr "Nebulosas [N]"
 
-#: src/stel_ui.cpp:614
+#: src/stel_ui.cpp:628
 msgid "Help [H]"
 msgstr "Ayuda [H]"
 
-#: src/stel_ui.cpp:616
+#: src/stel_ui.cpp:630
 msgid "Equatorial/Altazimuthal Mount [ENTER]"
 msgstr "Montura ecuatorial/altacimutal [ENTER]"
 
-#: src/stel_ui.cpp:618
+#: src/stel_ui.cpp:632
 msgid "Configuration window"
 msgstr "Ventana de configuración"
 
-#: src/stel_ui.cpp:621
+#: src/stel_ui.cpp:635
 msgid "Night (red) mode"
 msgstr "Modo nocturno (rojo)"
 
-#: src/stel_ui.cpp:624
+#: src/stel_ui.cpp:638
 msgid "Quit [CTRL + Q]"
 msgstr "Salir [CTRL + Q]"
 
-#: src/stel_ui.cpp:626
+#: src/stel_ui.cpp:640
 msgid "Quit [CMD + Q]"
 msgstr "Salir [CMD + Q]"
 
-#: src/stel_ui.cpp:629
+#: src/stel_ui.cpp:643
 msgid "Search for object"
 msgstr "Buscar objeto"
 
-#: src/stel_ui.cpp:633
+#: src/stel_ui.cpp:647
 msgid "Goto selected object [SPACE]"
 msgstr "Ir al objeto seleccionado [ESPACIO]"
 
-#: src/stel_ui.cpp:639
+#: src/stel_ui.cpp:649
+msgid "flip horizontally"
+msgstr ""
+
+#: src/stel_ui.cpp:651
+msgid "flip vertically"
+msgstr ""
+
+#: src/stel_ui.cpp:657
 msgid "Decrease Time Speed [J]"
 msgstr "Disminuir Velocidad del Tiempo [J]"
 
-#: src/stel_ui.cpp:641
+#: src/stel_ui.cpp:659
 msgid "Real Time Speed [K]"
 msgstr "Velocidad en Tiempo Real [K]"
 
-#: src/stel_ui.cpp:643
+#: src/stel_ui.cpp:661
 msgid "Increase Time Speed [L]"
 msgstr "Incrementar Velocidad del Tiempo [L]"
 
-#: src/stel_ui.cpp:645
+#: src/stel_ui.cpp:663
 msgid "Return to Current Time"
 msgstr "Volver a la hora y fecha actuales"
 
-#: src/stel_ui.cpp:654
+#: src/stel_ui.cpp:672
 msgid ""
 "   Please check for newer versions and send bug reports\n"
 "    and comments to us at: http://www.stellarium.org\n"
@@ -201,11 +209,11 @@ msgstr ""
 "y comentarios a: http://www.stellarium.org\n"
 "\n"
 
-#: src/stel_ui.cpp:673
+#: src/stel_ui.cpp:691
 msgid "Information"
 msgstr "Información"
 
-#: src/stel_ui.cpp:685
+#: src/stel_ui.cpp:703
 msgid ""
 "Movement & selection:\n"
 "Arrow Keys       : Change viewing RA/DE\n"
@@ -231,7 +239,7 @@ msgstr ""
 "ESPACIO : Centrar en el objeto seleccionado\n"
 "\n"
 
-#: src/stel_ui.cpp:696
+#: src/stel_ui.cpp:714
 msgid ""
 "Display options:\n"
 "ENTER : Equatorial/altazimuthal mount\n"
@@ -259,7 +267,7 @@ msgstr ""
 "4 , : Linea eclíptica 5 . : Linea ecuador↵\n"
 "\n"
 
-#: src/stel_ui.cpp:708
+#: src/stel_ui.cpp:726
 msgid ""
 "Dialogs & other controls:\n"
 "H   : Help                      I   : About Stellarium\n"
@@ -278,7 +286,7 @@ msgstr ""
 "↵\n"
 "\n"
 
-#: src/stel_ui.cpp:715
+#: src/stel_ui.cpp:733
 msgid ""
 "Time & Date:\n"
 "6   : Time rate pause           7   : Time rate 0\n"
@@ -296,7 +304,7 @@ msgstr ""
 "[ : Retroceder 7 días ] : Adelantar 7 días\n"
 "\n"
 
-#: src/stel_ui.cpp:722
+#: src/stel_ui.cpp:740
 msgid ""
 "During Script Playback:\n"
 "CTRL + C : End Script\n"
@@ -308,7 +316,7 @@ msgstr ""
 "6 : pausa el script K : reanuda el script\n"
 "\n"
 
-#: src/stel_ui.cpp:726
+#: src/stel_ui.cpp:744
 msgid ""
 "Misc:\n"
 "9   : Toggle meteor shower rates\n"
@@ -319,23 +327,23 @@ msgid ""
 "CMD + Q  : Quit\n"
 msgstr ""
 
-#: src/stel_ui.cpp:740
+#: src/stel_ui.cpp:758
 msgid "Help"
 msgstr "Ayuda"
 
-#: src/stel_ui.cpp:1002
+#: src/stel_ui.cpp:1020
 msgid "Command recording stopped."
 msgstr "Grabación de Comandos detenida."
 
-#: src/stel_ui.cpp:1010
+#: src/stel_ui.cpp:1028
 msgid "Recording commands to script file:\n"
 msgstr "Grabando Comandos en el archivo de script:\n"
 
-#: src/stel_ui.cpp:1012
+#: src/stel_ui.cpp:1030
 msgid "Hit CTRL-R again to stop.\n"
 msgstr "Presiona CTRL-R otra vez para parar.\n"
 
-#: src/stel_ui.cpp:1016
+#: src/stel_ui.cpp:1034
 msgid "Error: Unable to open script file to record commands."
 msgstr "Error: Imposible abrir archivo de script para grabar los comandos."
 
@@ -506,7 +514,7 @@ msgstr "Para otras resoluciones de pantalla, editar el archivo :"
 msgid "Choose landscapes:"
 msgstr "Elegir paisaje:"
 
-#: src/stel_ui_conf.cpp:433 src/stel_ui_conf.cpp:888
+#: src/stel_ui_conf.cpp:433 src/stel_ui_conf.cpp:889
 msgid "Author: "
 msgstr ""
 
@@ -562,31 +570,31 @@ msgstr "IR"
 msgid "Enter observatory name"
 msgstr "Introducir nombre del observatorio"
 
-#: src/stel_ui_conf.cpp:889
+#: src/stel_ui_conf.cpp:890
 msgid "Info: "
 msgstr ""
 
-#: src/stel_ui_conf.cpp:941
+#: src/stel_ui_conf.cpp:942
 msgid ": Normal rate"
 msgstr ": Ratio normal"
 
-#: src/stel_ui_conf.cpp:948
+#: src/stel_ui_conf.cpp:949
 msgid ": Standard Perseids rate"
 msgstr "Ratio Normal de las Perseidas"
 
-#: src/stel_ui_conf.cpp:955
+#: src/stel_ui_conf.cpp:956
 msgid ": Exceptional Leonid rate"
 msgstr "Tasa excepcional de las Leonidas"
 
-#: src/stel_ui_conf.cpp:962
+#: src/stel_ui_conf.cpp:963
 msgid ": Highest rate ever (1966 Leonids)"
 msgstr "La tasa más alta (Leonidas 1966)"
 
-#: src/stel_ui_conf.cpp:967
+#: src/stel_ui_conf.cpp:968
 msgid "Meteor Rate per minute"
 msgstr "Tasa de Meteoritos por minuto"
 
-#: src/stel_ui_conf.cpp:988
+#: src/stel_ui_conf.cpp:989
 msgid "Current Time Speed is x"
 msgstr "La velocidad del tiempo actual es x"
 
@@ -678,11 +686,11 @@ msgstr "Formato de fecha: "
 msgid "Show: "
 msgstr "Mostrar: "
 
-#: src/stel_ui_tuiconf.cpp:383 src/stel_ui_tuiconf.cpp:408 src/s_gui.cpp:2221
+#: src/stel_ui_tuiconf.cpp:383 src/stel_ui_tuiconf.cpp:408 src/s_gui.cpp:2232
 msgid "Yes"
 msgstr "Sí"
 
-#: src/stel_ui_tuiconf.cpp:383 src/stel_ui_tuiconf.cpp:408 src/s_gui.cpp:2202
+#: src/stel_ui_tuiconf.cpp:383 src/stel_ui_tuiconf.cpp:408 src/s_gui.cpp:2213
 msgid "No"
 msgstr "No"
 
@@ -914,19 +922,19 @@ msgstr "Caronte"
 msgid "Solar System Observer"
 msgstr "Observador del Sistema Solar"
 
-#: src/translations.h:63 src/s_gui.cpp:2667
+#: src/translations.h:63 src/s_gui.cpp:2678
 msgid "N"
 msgstr "N"
 
-#: src/translations.h:64 src/s_gui.cpp:2668
+#: src/translations.h:64 src/s_gui.cpp:2679
 msgid "S"
 msgstr "S"
 
-#: src/translations.h:65 src/s_gui.cpp:2672
+#: src/translations.h:65 src/s_gui.cpp:2683
 msgid "E"
 msgstr "E"
 
-#: src/translations.h:66 src/s_gui.cpp:2673
+#: src/translations.h:66 src/s_gui.cpp:2684
 msgid "W"
 msgstr "O"
 
@@ -1810,35 +1818,35 @@ msgstr "Delfín"
 msgid "Select and exit to run."
 msgstr ""
 
-#: src/s_gui.cpp:2208 src/s_gui.cpp:2254
+#: src/s_gui.cpp:2219 src/s_gui.cpp:2265
 msgid "Cancel"
 msgstr "Cancelar"
 
-#: src/s_gui.cpp:2226 src/s_gui.cpp:2252
+#: src/s_gui.cpp:2237 src/s_gui.cpp:2263
 msgid "OK"
 msgstr "Aceptar"
 
-#: src/s_gui.cpp:2722
+#: src/s_gui.cpp:2733
 msgid "Year"
 msgstr "Año"
 
-#: src/s_gui.cpp:2725
+#: src/s_gui.cpp:2736
 msgid "Month"
 msgstr "Mes"
 
-#: src/s_gui.cpp:2728
+#: src/s_gui.cpp:2739
 msgid "Day"
 msgstr "Día"
 
-#: src/s_gui.cpp:2731
+#: src/s_gui.cpp:2742
 msgid "Hour"
 msgstr "Hora"
 
-#: src/s_gui.cpp:2734
+#: src/s_gui.cpp:2745
 msgid "Minutes"
 msgstr "Minutos"
 
-#: src/s_gui.cpp:2737
+#: src/s_gui.cpp:2748
 msgid "Seconds"
 msgstr "Segundos"
 
@@ -1878,15 +1886,12 @@ msgstr "Segundos"
 #~ msgid "ly"
 #~ msgstr "al"
 
-#, c-format
 #~ msgid "Loading HIP/SAO catalogs: %d/%d"
 #~ msgstr "Cargando Catálogos HIP/SAO : %d/%d"
 
-#, c-format
 #~ msgid "Loading HIP catalog: %d/%d"
 #~ msgstr "Cargando Catálogo HIP: %d/%d"
 
-#, c-format
 #~ msgid "Loading SAO catalog: %d/%d"
 #~ msgstr "Cargando Catálogo SAO: %d/%d"
 
@@ -1920,8 +1925,8 @@ msgstr "Segundos"
 #~ "and comments to us at: http://stellarium.sourceforge.net\n"
 #~ "\n"
 #~ msgstr ""
-#~ "Por favor comprueba si tienes la última versión y envía un informe de error "
-#~ "y tus comentarios \n"
+#~ "Por favor comprueba si tienes la última versión y envía un informe de "
+#~ "error y tus comentarios \n"
 #~ "desde la página web de stellarium : http://stellarium.sourceforge.net\n"
 #~ "\n"
 
@@ -2023,7 +2028,8 @@ msgstr "Segundos"
 #~ msgid ""
 #~ "ERROR : I can't find the datas directories in :\n"
 #~ "%s/ nor in ./ nor in ../\n"
-#~ "You may fully install the software (type \"make install\" on POSIX systems)\n"
+#~ "You may fully install the software (type \"make install\" on POSIX "
+#~ "systems)\n"
 #~ "or launch the application from the stellarium package directory.\n"
 #~ msgstr ""
 #~ "ERROR : No se puede encontrar el directorio de datos en :\n"
@@ -2133,8 +2139,8 @@ msgstr "Segundos"
 #~ "imported (%s).\n"
 #~ "It will be replaced by the default config file.\n"
 #~ msgstr ""
-#~ "El archivo de configuración actual es de una versión demasiado antigua como "
-#~ "para poder importar sus parámetros (%s).\n"
+#~ "El archivo de configuración actual es de una versión demasiado antigua "
+#~ "como para poder importar sus parámetros (%s).\n"
 #~ "Será reemplazado por el archivo de configuración por defecto.\n"
 
 #~ msgid "Loading configuration file "
@@ -2150,8 +2156,8 @@ msgstr "Segundos"
 #~ "on stellarium web page : http://www.stellarium.org\n"
 #~ "\n"
 #~ msgstr ""
-#~ "Por favor comprueba si tienes la última versión y envía un informe de error "
-#~ "y tus comentarios \n"
+#~ "Por favor comprueba si tienes la última versión y envía un informe de "
+#~ "error y tus comentarios \n"
 #~ "desde la página web de stellarium : http://stellarium.sourceforge.net\n"
 #~ "\n"
 

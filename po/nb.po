@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: stellarium@free.fr\n"
-"POT-Creation-Date: 2006-06-20 20:50+0200\n"
+"POT-Creation-Date: 2006-06-25 21:48+0200\n"
 "PO-Revision-Date: 2006-06-23 12:08+0000\n"
 "Last-Translator: eikland <eikland@users.sourceforge.net>\n"
 "Language-Team:\n"
@@ -40,7 +40,7 @@ msgstr "%s: Ugyldig argument i kommandolinje\n"
 msgid "Try `%s --help' for more information.\n"
 msgstr "Prøv `%s --help' for mer informasjon.\n"
 
-#: src/constellation_mgr.cpp:174
+#: src/constellation_mgr.cpp:175
 msgid "Loading Constellation Art: "
 msgstr "Henter stjernebildene: "
 
@@ -85,11 +85,11 @@ msgstr "Type: "
 msgid "Size: "
 msgstr "Størrelse: "
 
-#: src/nebula_mgr.cpp:288
+#: src/nebula_mgr.cpp:290
 msgid "Loading NGC catalog: "
 msgstr "Henter NGC-katalog: "
 
-#: src/nebula_mgr.cpp:415
+#: src/nebula_mgr.cpp:417
 msgid "Loading Nebula Textures:"
 msgstr "Henter stjernetåkebilder:"
 
@@ -97,99 +97,107 @@ msgstr "Henter stjernetåkebilder:"
 msgid "AU"
 msgstr "AE"
 
-#: src/stel_ui.cpp:503 src/stel_ui.cpp:631
+#: src/stel_ui.cpp:515 src/stel_ui.cpp:645
 msgid "Script commander"
 msgstr "Skript-kommandoer"
 
-#: src/stel_ui.cpp:530
+#: src/stel_ui.cpp:542
 msgid "Invalid Script command"
 msgstr "Ugyldig skript-kommando"
 
-#: src/stel_ui.cpp:596
+#: src/stel_ui.cpp:610
 msgid "Drawing of the Constellations [C]"
 msgstr "Stjernebilder - strek [C]"
 
-#: src/stel_ui.cpp:598
+#: src/stel_ui.cpp:612
 msgid "Names of the Constellations [V]"
 msgstr "Navn på stjernebilder [V]"
 
-#: src/stel_ui.cpp:600
+#: src/stel_ui.cpp:614
 msgid "Constellations Art [R]"
 msgstr "Stjernebilder - grafikk [R]"
 
-#: src/stel_ui.cpp:602
+#: src/stel_ui.cpp:616
 msgid "Azimuthal Grid [Z]"
 msgstr "Planprojisert/asimutalt rutenett [Z]"
 
-#: src/stel_ui.cpp:604
+#: src/stel_ui.cpp:618
 msgid "Equatorial Grid [E]"
 msgstr "Sylinderprojisert/ekvatorialt rutenett [E]"
 
-#: src/stel_ui.cpp:606
+#: src/stel_ui.cpp:620
 msgid "Ground [G]"
 msgstr "Horisont [G]"
 
-#: src/stel_ui.cpp:608
+#: src/stel_ui.cpp:622
 msgid "Cardinal Points [Q]"
 msgstr "Himmelretninger [Q]"
 
-#: src/stel_ui.cpp:610
+#: src/stel_ui.cpp:624
 msgid "Atmosphere [A]"
 msgstr "Atmosfære [A]"
 
-#: src/stel_ui.cpp:612
+#: src/stel_ui.cpp:626
 msgid "Nebulas [N]"
 msgstr "Stjernetåker [N]"
 
-#: src/stel_ui.cpp:614
+#: src/stel_ui.cpp:628
 msgid "Help [H]"
 msgstr "Hjelp [H]"
 
-#: src/stel_ui.cpp:616
+#: src/stel_ui.cpp:630
 msgid "Equatorial/Altazimuthal Mount [ENTER]"
 msgstr "Sylinder-/planprojisert visning [Enter]"
 
-#: src/stel_ui.cpp:618
+#: src/stel_ui.cpp:632
 msgid "Configuration window"
 msgstr "Innstillinger"
 
-#: src/stel_ui.cpp:621
+#: src/stel_ui.cpp:635
 msgid "Night (red) mode"
 msgstr "Nattmodus (rød)"
 
-#: src/stel_ui.cpp:624
+#: src/stel_ui.cpp:638
 msgid "Quit [CTRL + Q]"
 msgstr "Avslutt [Ctrl + Q]"
 
-#: src/stel_ui.cpp:626
+#: src/stel_ui.cpp:640
 msgid "Quit [CMD + Q]"
 msgstr "Avslutt [Cmd + Q]"
 
-#: src/stel_ui.cpp:629
+#: src/stel_ui.cpp:643
 msgid "Search for object"
 msgstr "Søk etter objekt"
 
-#: src/stel_ui.cpp:633
+#: src/stel_ui.cpp:647
 msgid "Goto selected object [SPACE]"
 msgstr "Sentrer valgt objekt [Mellomrom]"
 
-#: src/stel_ui.cpp:639
+#: src/stel_ui.cpp:649
+msgid "flip horizontally"
+msgstr ""
+
+#: src/stel_ui.cpp:651
+msgid "flip vertically"
+msgstr ""
+
+#: src/stel_ui.cpp:657
 msgid "Decrease Time Speed [J]"
 msgstr "Reduser klokkehastighet [J]"
 
-#: src/stel_ui.cpp:641
+#: src/stel_ui.cpp:659
 msgid "Real Time Speed [K]"
 msgstr "Normal klokkehastighet [K]"
 
-#: src/stel_ui.cpp:643
+#: src/stel_ui.cpp:661
 msgid "Increase Time Speed [L]"
 msgstr "Øk klokkehastighet [L]"
 
-#: src/stel_ui.cpp:645
+#: src/stel_ui.cpp:663
 msgid "Return to Current Time"
 msgstr "Tilbake til dagens dato/tid"
 
-#: src/stel_ui.cpp:654
+#: src/stel_ui.cpp:672
 msgid ""
 "   Please check for newer versions and send bug reports\n"
 "    and comments to us at: http://www.stellarium.org\n"
@@ -199,11 +207,11 @@ msgstr ""
 "    feil eller kommentarer til oss på: http://www.stellarium.org\n"
 "\n"
 
-#: src/stel_ui.cpp:673
+#: src/stel_ui.cpp:691
 msgid "Information"
 msgstr "Informasjon"
 
-#: src/stel_ui.cpp:685
+#: src/stel_ui.cpp:703
 msgid ""
 "Movement & selection:\n"
 "Arrow Keys       : Change viewing RA/DE\n"
@@ -227,7 +235,7 @@ msgstr ""
 "/ : Zoom inn til valgt objekt\n"
 "\n"
 
-#: src/stel_ui.cpp:696
+#: src/stel_ui.cpp:714
 msgid ""
 "Display options:\n"
 "ENTER : Equatorial/altazimuthal mount\n"
@@ -256,7 +264,7 @@ msgstr ""
 "Enter: Sylinder-/planprojisering\n"
 "\n"
 
-#: src/stel_ui.cpp:708
+#: src/stel_ui.cpp:726
 msgid ""
 "Dialogs & other controls:\n"
 "H   : Help                      I   : About Stellarium\n"
@@ -275,7 +283,7 @@ msgstr ""
 "Ctrl+F : Søke etter objekt\n"
 "\n"
 
-#: src/stel_ui.cpp:715
+#: src/stel_ui.cpp:733
 msgid ""
 "Time & Date:\n"
 "6   : Time rate pause           7   : Time rate 0\n"
@@ -293,7 +301,7 @@ msgstr ""
 "[ : Tilbake 7 dager                  ] : Framover 7 dager\n"
 "\n"
 
-#: src/stel_ui.cpp:722
+#: src/stel_ui.cpp:740
 msgid ""
 "During Script Playback:\n"
 "CTRL + C : End Script\n"
@@ -305,7 +313,7 @@ msgstr ""
 "6 : Pause skript                     K : Fortsett skript\n"
 "\n"
 
-#: src/stel_ui.cpp:726
+#: src/stel_ui.cpp:744
 msgid ""
 "Misc:\n"
 "9   : Toggle meteor shower rates\n"
@@ -324,23 +332,23 @@ msgstr ""
 "Ctrl+Q : Avslutt\n"
 "Cmd+Q : Avslutt\n"
 
-#: src/stel_ui.cpp:740
+#: src/stel_ui.cpp:758
 msgid "Help"
 msgstr "Hjelp"
 
-#: src/stel_ui.cpp:1002
+#: src/stel_ui.cpp:1020
 msgid "Command recording stopped."
 msgstr "Registrering av kommandoer er stoppet."
 
-#: src/stel_ui.cpp:1010
+#: src/stel_ui.cpp:1028
 msgid "Recording commands to script file:\n"
 msgstr "Registrering av kommandoer til skriptfilen:\n"
 
-#: src/stel_ui.cpp:1012
+#: src/stel_ui.cpp:1030
 msgid "Hit CTRL-R again to stop.\n"
 msgstr "Trykk Ctrl+R en gang til for å stoppe.\n"
 
-#: src/stel_ui.cpp:1016
+#: src/stel_ui.cpp:1034
 msgid "Error: Unable to open script file to record commands."
 msgstr "Feil: Klarte ikke å åpne skriptfilen for å registrere kommandoer."
 
@@ -512,7 +520,7 @@ msgstr "For andre skjermoppløsninger, rediger filen :"
 msgid "Choose landscapes:"
 msgstr "Velg landskap:"
 
-#: src/stel_ui_conf.cpp:433 src/stel_ui_conf.cpp:888
+#: src/stel_ui_conf.cpp:433 src/stel_ui_conf.cpp:889
 msgid "Author: "
 msgstr "Forfatter: "
 
@@ -568,31 +576,31 @@ msgstr "Søk"
 msgid "Enter observatory name"
 msgstr "Angi navn på observatorium"
 
-#: src/stel_ui_conf.cpp:889
+#: src/stel_ui_conf.cpp:890
 msgid "Info: "
 msgstr "Info: "
 
-#: src/stel_ui_conf.cpp:941
+#: src/stel_ui_conf.cpp:942
 msgid ": Normal rate"
 msgstr ": Normalt antall"
 
-#: src/stel_ui_conf.cpp:948
+#: src/stel_ui_conf.cpp:949
 msgid ": Standard Perseids rate"
 msgstr ": Vanlig antall i perseid meteorsverm"
 
-#: src/stel_ui_conf.cpp:955
+#: src/stel_ui_conf.cpp:956
 msgid ": Exceptional Leonid rate"
 msgstr ": Uvanlig antall leonid meteorsverm"
 
-#: src/stel_ui_conf.cpp:962
+#: src/stel_ui_conf.cpp:963
 msgid ": Highest rate ever (1966 Leonids)"
 msgstr ": Høyeste antall (1966 Leonider)"
 
-#: src/stel_ui_conf.cpp:967
+#: src/stel_ui_conf.cpp:968
 msgid "Meteor Rate per minute"
 msgstr "Antall meteorer per minutt"
 
-#: src/stel_ui_conf.cpp:988
+#: src/stel_ui_conf.cpp:989
 msgid "Current Time Speed is x"
 msgstr "Klokkehastigheten er nå x"
 
@@ -684,11 +692,11 @@ msgstr "Visning av dato: "
 msgid "Show: "
 msgstr "Vis: "
 
-#: src/stel_ui_tuiconf.cpp:383 src/stel_ui_tuiconf.cpp:408 src/s_gui.cpp:2221
+#: src/stel_ui_tuiconf.cpp:383 src/stel_ui_tuiconf.cpp:408 src/s_gui.cpp:2232
 msgid "Yes"
 msgstr "Ja"
 
-#: src/stel_ui_tuiconf.cpp:383 src/stel_ui_tuiconf.cpp:408 src/s_gui.cpp:2202
+#: src/stel_ui_tuiconf.cpp:383 src/stel_ui_tuiconf.cpp:408 src/s_gui.cpp:2213
 msgid "No"
 msgstr "Nei"
 
@@ -920,19 +928,19 @@ msgstr "Charon"
 msgid "Solar System Observer"
 msgstr "Observatør av solsystem"
 
-#: src/translations.h:63 src/s_gui.cpp:2667
+#: src/translations.h:63 src/s_gui.cpp:2678
 msgid "N"
 msgstr "N"
 
-#: src/translations.h:64 src/s_gui.cpp:2668
+#: src/translations.h:64 src/s_gui.cpp:2679
 msgid "S"
 msgstr "S"
 
-#: src/translations.h:65 src/s_gui.cpp:2672
+#: src/translations.h:65 src/s_gui.cpp:2683
 msgid "E"
 msgstr "Ø"
 
-#: src/translations.h:66 src/s_gui.cpp:2673
+#: src/translations.h:66 src/s_gui.cpp:2684
 msgid "W"
 msgstr "V"
 
@@ -1816,35 +1824,35 @@ msgstr "Delfin"
 msgid "Select and exit to run."
 msgstr "Velg og lukk for å utføre."
 
-#: src/s_gui.cpp:2208 src/s_gui.cpp:2254
+#: src/s_gui.cpp:2219 src/s_gui.cpp:2265
 msgid "Cancel"
 msgstr "Avbryt"
 
-#: src/s_gui.cpp:2226 src/s_gui.cpp:2252
+#: src/s_gui.cpp:2237 src/s_gui.cpp:2263
 msgid "OK"
 msgstr "OK"
 
-#: src/s_gui.cpp:2722
+#: src/s_gui.cpp:2733
 msgid "Year"
 msgstr "År"
 
-#: src/s_gui.cpp:2725
+#: src/s_gui.cpp:2736
 msgid "Month"
 msgstr "Måned"
 
-#: src/s_gui.cpp:2728
+#: src/s_gui.cpp:2739
 msgid "Day"
 msgstr "Dag"
 
-#: src/s_gui.cpp:2731
+#: src/s_gui.cpp:2742
 msgid "Hour"
 msgstr "Time"
 
-#: src/s_gui.cpp:2734
+#: src/s_gui.cpp:2745
 msgid "Minutes"
 msgstr "Minutter"
 
-#: src/s_gui.cpp:2737
+#: src/s_gui.cpp:2748
 msgid "Seconds"
 msgstr "Sekunder"
 
@@ -1884,15 +1892,12 @@ msgstr "Sekunder"
 #~ msgid "ly"
 #~ msgstr "ly"
 
-#, c-format
 #~ msgid "Loading HIP/SAO catalogs: %d/%d"
 #~ msgstr "Henter Hip/Sao stjernekatalog: %d/%d"
 
-#, c-format
 #~ msgid "Loading HIP catalog: %d/%d"
 #~ msgstr "Henter Hipparcos stjernekatalog: %d/%d"
 
-#, c-format
 #~ msgid "Loading SAO catalog: %d/%d"
 #~ msgstr "Henter Sao-katalog: %d/%d"
 
@@ -1937,7 +1942,8 @@ msgstr "Sekunder"
 #~ "9   : Toggle meteor shower rates\n"
 #~ msgstr ""
 #~ "\"Annet:                               Definisjon:\\n\n"
-#~ "9 : Bytt antall for meteorsverm      AE: Astronomisk enhet = 149 597 871 km\n"
+#~ "9 : Bytt antall for meteorsverm      AE: Astronomisk enhet = 149 597 871 "
+#~ "km\n"
 #~ "                                     Lysstyrke: Sola -26 (lys)  Pluto +14 "
 #~ "(svak)\n"
 
@@ -2023,13 +2029,14 @@ msgstr "Sekunder"
 #~ msgid ""
 #~ "ERROR : I can't find the datas directories in :\n"
 #~ "%s/ nor in ./ nor in ../\n"
-#~ "You may fully install the software (type \"make install\" on POSIX systems)\n"
+#~ "You may fully install the software (type \"make install\" on POSIX "
+#~ "systems)\n"
 #~ "or launch the application from the stellarium package directory.\n"
 #~ msgstr ""
 #~ "ERROR : Kan ikke finne datamappen i :\n"
 #~ "%s/ , ./ eller i ../\n"
-#~ "Du må kanskje installere programmet på nytt (skriv \"make install\" på POSIX "
-#~ "systemer)\n"
+#~ "Du må kanskje installere programmet på nytt (skriv \"make install\" på "
+#~ "POSIX systemer)\n"
 #~ "eller starte programmet fra pakemappen til Stellarium.\n"
 
 #~ msgid "> Found data files in %s : local version.\n"
