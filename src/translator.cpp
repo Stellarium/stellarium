@@ -34,6 +34,11 @@ string Translator::systemLangName = "C";
 // Use system locale language by default
 Translator Translator::globalTranslator = Translator(PACKAGE, LOCALEDIR, "system");
 
+#ifdef WIN32
+# include <Windows.h>
+# include <Winnls.h>
+#endif
+
 //! Try to determine system language from system configuration
 void Translator::initSystemLanguage(void)
 {
@@ -43,7 +48,23 @@ void Translator::initSystemLanguage(void)
 	{
 		lang = getenv("LANG");
 		if (lang) Translator::systemLangName = lang;
-		else Translator::systemLangName = "C";
+		else
+		{
+#ifdef WIN32            
+            char cc[3];
+            if(GetLocaleInfo(LOCALE_USER_DEFAULT, LOCALE_SISO639LANGNAME, cc, 3))
+            {
+                cc[2] = '\0';
+                Translator::systemLangName = cc;
+            }
+            else
+            {
+                Translator::systemLangName = "C";
+            }
+#else
+     Translator::systemLangName = "C";
+#endif
+        }
 	}
 }
 
@@ -56,6 +77,7 @@ void Translator::reload()
 	if (langName=="system" || langName=="system_default")
 	{
 		snprintf(envstr, 25, "LANGUAGE=%s", Translator::systemLangName.c_str());
+//		cout << "TEST=" << envstr << " " << Translator::systemLangName << endl;
 	}
 	else
 	{
