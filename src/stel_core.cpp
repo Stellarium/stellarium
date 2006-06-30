@@ -678,9 +678,9 @@ StelObject * StelCore::clever_find(const Vec3d& v) const
 		{
 			if( nebulas->getFlagHints() )
 			{
-				// make very easy to select if labeled
-				// mag = -1;  Too easy with NGC data
-				mag -= 5;
+				// make very easy to select IF LABELED
+				mag = -1;  
+
 			}
 		}
 		if ((*iter)->get_type()==StelObject::STEL_OBJECT_PLANET)
