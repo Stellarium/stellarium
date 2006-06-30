@@ -144,30 +144,54 @@ void NebulaMgr::draw(Projector* prj, const Navigator * nav, ToneReproductor* eye
 // search by name
 StelObject * NebulaMgr::search(const string& name)
 {
-	/*const string catalogs("NGC IC CW SH");*/
-	const string catalogs("M NGC IC UGC");
-	string cat;
-	unsigned int num;
 
-	string n = name;
-	for (string::size_type i=0;i<n.length();++i)
+	string uname = name;
+	transform(uname.begin(), uname.end(), uname.begin(), ::toupper);
+	vector <Nebula*>::const_iterator iter;
+
+	for (iter = neb_array.begin(); iter != neb_array.end(); ++iter)
 	{
-		if (n[i]=='_') n[i]=' ';
+		string testName = (*iter)->getEnglishName();
+		transform(testName.begin(), testName.end(), testName.begin(), ::toupper);
+		//		if(testName != "" ) cout << ">" << testName << "< " << endl;
+		if (testName==uname) return *iter;
+	}
+	
+	// If no match found, try search by catalog reference
+
+ 	string         cat;
+	istringstream  iss_cats;
+	string         n = name;
+	int            num;
+	bool           catfound = false;
+
+	iss_cats.str("M NGC ARP TCP");
+
+	while(iss_cats >> cat) {
+		if ( ! n.find(cat, 0) ) {
+			n.replace(0, cat.length(), "");
+			catfound = true;
+			break;
+		} 
 	}
 
-	istringstream ss(n);
-	ss >> cat;
-	// check if a valid catalog reference
-	if (catalogs.find(cat,0) == string::npos)
+	if ( ! catfound ) { 
 		return NULL;
+	}
+
+	istringstream ss(n); 
 	ss >> num;
-	if (ss.fail()) return NULL;
+	if ( ss.fail() ) {
+		return NULL;
+	}
 	
 	if (cat == "M") return searchM(num);
 	if (cat == "NGC") return searchNGC(num);
 	if (cat == "IC") return searchIC(num);
-	/*if (cat == "UGC") return searchUGC(num);*/
+	// if (cat == "UGC") return searchUGC(num);
 	return NULL;
+
+
 }
 
 
@@ -208,7 +232,10 @@ vector<StelObject*> NebulaMgr::search_around(Vec3d v, double lim_fov)
 		equPos.normalize();
 		if (equPos[0]*v[0] + equPos[1]*v[1] + equPos[2]*v[2]>=cos_lim_fov)
 		{
-			result.push_back(*iter);
+
+			// NOTE: non-labeled nebulas are not returned!
+			// Otherwise cursor select gets invisible nebulas - Rob
+			if((*iter)->getNameI18() != L"") result.push_back(*iter);
 		}
 		iter++;
 	}
@@ -348,9 +375,9 @@ bool NebulaMgr::loadNGCNames(const string& catNGCNames)
 			// trim the white spaces at the back
 			n[36] = '\0';
 			k = 36;
-			while (n[--k] == ' ' && k > 0)
+			while (n[--k] == ' ' && k >= 0)
 			{
-				n[k+1] = '\0';
+				n[k] = '\0';
 			}
 			// If the name is not a messier number perhaps one is already
 			// defined for this object
@@ -428,7 +455,7 @@ bool NebulaMgr::loadTextures(const string& fileName, LoadingBar& lb)
 		} else {
 			// Allow non NGC nebulas/textures!
 
-			// cout << "Nebula with unrecognized NGC number " << NGC << endl;
+			cout << "Nebula with unrecognized NGC number " << NGC << endl;
 			e = new Nebula;
 			if (!e->readTexture(record)) { // reading error
 				cerr << "Error while reading texture for nebula " << e->englishName << endl;
