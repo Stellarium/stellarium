@@ -18,6 +18,10 @@
  */
 
 #include "telescope.h"
+#include "stel_utility.h"
+
+#include <sstream>
+
 #include <math.h>
 
 #ifdef WIN32

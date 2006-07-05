@@ -20,10 +20,11 @@
 #ifndef _NEBULA_H_
 #define _NEBULA_H_
 
+#include "stel_object.h"
 #include "stellarium.h"
 #include "projector.h"
+#include "navigator.h"
 #include "s_texture.h"
-#include "stel_object.h"
 #include "s_font.h"
 #include "tone_reproductor.h"
 #include "translator.h"

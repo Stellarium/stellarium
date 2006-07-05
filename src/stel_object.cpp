@@ -17,8 +17,9 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#include "stellarium.h"
 #include "stel_object.h"
+#include "stellarium.h"
+#include "projector.h"
 #include "navigator.h"
 #include "stel_utility.h"
 #include "s_texture.h"

@@ -22,10 +22,11 @@
 
 // TODO : Adaptative resolution for optimization
 
+#include "stel_atmosphere.h"
 #include "stellarium.h"
 #include "stel_utility.h"
 #include "stellastro.h"
-#include "stel_atmosphere.h"
+#include "projector.h"
 
 Atmosphere::Atmosphere() : sky_resolution(48), tab_sky(NULL), world_adaptation_luminance(0.f), atm_intensity(0)
 {
