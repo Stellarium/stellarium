@@ -23,12 +23,13 @@
 #include <functional>
 #include <algorithm>
 
+#include "stel_object.h"
 #include "stellarium.h"
 #include "stel_utility.h"
 #include "s_font.h"
-#include "stel_object.h"
 #include "tone_reproductor.h"
 #include "projector.h"
+#include "navigator.h"
 #include "stel_utility.h"
 
 

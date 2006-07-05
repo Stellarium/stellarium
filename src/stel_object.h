@@ -21,12 +21,14 @@
 #define _STEL_OBJECT_H_
 
 #include "vecmath.h"
-#include "projector.h"
-#include "navigator.h"
-#include "s_texture.h"
 
+#include <iostream>
+
+using namespace std;
 
 class Navigator;
+class Projector;
+class s_texture;
 
 class StelObject
 {
@@ -40,15 +42,15 @@ public:
 		STEL_OBJECT_TELESCOPE
 	};
 
-	virtual ~StelObject() {;}
-	virtual void update(void) {return;}
+	virtual ~StelObject(void) {}
+	virtual void update(void) {}
 	void draw_pointer(int delta_time, const Projector* prj, const Navigator * nav);
 
 	//! Write I18n information about the object in wstring. 
-	virtual wstring getInfoString(const Navigator * nav) const = 0;
+	virtual wstring getInfoString(const Navigator *nav) const = 0;
 	
 	//! The returned wstring can typically be used for object labeling in the sky
-	virtual wstring getShortInfoString(const Navigator * nav) const = 0;
+	virtual wstring getShortInfoString(const Navigator *nav) const = 0;
 	
 	//! Return object's type
 	virtual STEL_OBJECT_TYPE get_type(void) const = 0;
