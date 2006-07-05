@@ -19,7 +19,9 @@
 
 #include "telescope_mgr.h"
 #include "telescope.h"
+#include "projector.h"
 #include "init_parser.h"
+#include "s_font.h"
 
 #include <algorithm>
 
