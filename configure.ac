@@ -111,7 +111,7 @@ dnl MINGW32
 	LIBS="$LIBS -lopengl32 -lglu32"
 	dnl Check for SDL but can't use AM_PATH_SDL on Mingw : it crashes..
 	dnl So directly call the utility and add an include directory by hand..
-	LIBS="$LIBS `sdl-config --libs` -lsocket32"
+	LIBS="$LIBS `sdl-config --libs` -lws2_32"
 	CFLAGS="$CFLAGS `sdl-config --cflags`"
 	CXXFLAGS="$CXXFLAGS `sdl-config --cflags` -I/mingw/include/SDL/"
 ;;
