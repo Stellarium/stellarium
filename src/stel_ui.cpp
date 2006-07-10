@@ -927,6 +927,23 @@ int StelUI::handle_keys(SDLKey key, SDLMod mod, Uint16 unicode, S_GUI_VALUE stat
 
 	if (state==S_GUI_PRESSED)
 	{
+//printf("handle_keys: '%c'(%d), %d, 0x%04x\n",key,(int)key,unicode,mod);
+		if (unicode >= 128) {
+		  // the user has entered an arkane symbol which cannot
+		  // be a key shortcut.
+		  return 0;
+		}
+		if (unicode >= 32) {
+		    // the user has entered a printable ascii character
+		    // see SDL_keysyms.h: the keysyms are cleverly matched to ascii
+		  if ('A' <= unicode && unicode <='Z') unicode += ('a'-'A');
+		  key = (SDLKey)unicode;
+		    // the modifiers still contain the true modifier state
+		} else {
+		  // improper unicode translation (like Ctrl-H)
+		  // or impossible unicode translation:
+		  // forget the unicode and use keysym instead
+		}
 
 		if (key == SDLK_q && (mod & COMPATIBLE_KMOD_CTRL))
 		{
