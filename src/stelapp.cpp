@@ -317,7 +317,7 @@ int StelApp::handleKeys(SDLKey key, SDLMod mod,
 	if (ui->FlagShowTuiMenu)
 	{
 
-		if (state==S_GUI_PRESSED && key==SDLK_m)
+		if (state==S_GUI_PRESSED && unicode=='m')
 		{
 			// leave tui menu
 			ui->FlagShowTuiMenu = false;
