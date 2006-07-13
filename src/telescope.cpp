@@ -28,6 +28,7 @@
   #include <windows.h> // GetSystemTimeAsFileTime
   #include <winsock2.h>
   #define ERRNO WSAGetLastError()
+  #define STRERROR(x) x
   #undef EAGAIN
   #define EAGAIN WSAEWOULDBLOCK
   #undef EINTR
@@ -47,7 +48,9 @@
   #include <unistd.h>
   #include <fcntl.h>
   #include <errno.h>
+  #include <string.h> // strerror
   #define ERRNO errno
+  #define STRERROR(x) strerror(x)
   #define SET_NONBLOCKING_MODE(s) fcntl(s,F_SETFL,O_NONBLOCK)
   #define SOCKLEN_T socklen_t
   #define SOCKET int
@@ -100,7 +103,7 @@ private:
   struct sockaddr_in address;
   SOCKET fd;
   bool wait_for_connection_establishment;
-  long long int next_connection_attempt;
+  long long int end_of_timeout;
   char read_buff[120];
   char *read_buff_end;
   char write_buff[120];
@@ -123,25 +126,25 @@ private:
 Telescope *Telescope::create(const string &url) {
   string::size_type i = url.find(':');
   if (i == string::npos) {
-    cerr << "Telescope::create(" << url << "): bad url: \"" << url
+    cout << "Telescope::create(" << url << "): bad url: \"" << url
          << "\", ':' missing" << endl;
     return 0;
   }
   const string name = url.substr(0,i);
   if (i+2 > url.length()) {
-    cerr << "Telescope::create(" << url << "): bad url: \"" << url
+    cout << "Telescope::create(" << url << "): bad url: \"" << url
          << "\", too short" << endl;
     return 0;
   }
   string::size_type j = url.find(':',i+1);
   if (j == string::npos) {
-    cerr << "Telescope::create(" << url << "): bad url: \"" << url
+    cout << "Telescope::create(" << url << "): bad url: \"" << url
          << "\", 2nd ':' missing" << endl;
     return 0;
   }
   const string type = url.substr(i+1,j-i-1);
   if (j+2 > url.length()) {
-    cerr << "Telescope::create(" << url << "): bad url: \"" << url
+    cout << "Telescope::create(" << url << "): bad url: \"" << url
          << "\", too short" << endl;
     return 0;
   }
@@ -155,7 +158,7 @@ Telescope *Telescope::create(const string &url) {
   } else if (type == "TCP") {
     rval = new TelescopeTcp(name,params);
   } else {
-    cerr << "Telescope::create(" << url << "): unknown telescop type \""
+    cout << "Telescope::create(" << url << "): unknown telescop type \""
          << type << '"' << endl;
   }
   if (rval && !rval->isInitialized()) {
@@ -208,44 +211,44 @@ TelescopeTcp::TelescopeTcp(const string &name,const string &params)
   address.sin_port = htons(0);
   string::size_type i = params.find(':');
   if (i == string::npos) {
-    cerr << "TelescopeTcp::TelescopeTcp(" << name << ',' << params << "): "
+    cout << "TelescopeTcp::TelescopeTcp(" << name << ',' << params << "): "
             "bad params: ':' missing" << endl;
     return;
   }
   const string host = params.substr(0,i);
   if (i+2 > params.length()) {
-    cerr << "TelescopeTcp::TelescopeTcp(" << name << ',' << params << "): "
+    cout << "TelescopeTcp::TelescopeTcp(" << name << ',' << params << "): "
             "bad params: too short"
          << endl;
     return;
   }
   string::size_type j = params.find(':',i+1);
   if (j == string::npos) {
-    cerr << "TelescopeTcp::TelescopeTcp(" << name << ',' << params << "): "
+    cout << "TelescopeTcp::TelescopeTcp(" << name << ',' << params << "): "
             "bad params: ':' missing" << endl;
     return;
   }
   int port;
   if (1!=sscanf(params.substr(i+1,j-i-1).c_str(),"%d",&port) ||
       port<=0 || port>0xFFFF) {
-    cerr << "TelescopeTcp::TelescopeTcp(" << name << ',' << params << "): "
+    cout << "TelescopeTcp::TelescopeTcp(" << name << ',' << params << "): "
             "bad port" << endl;
     return;
   }
   if (1!=sscanf(params.substr(j+1).c_str(),"%Ld",&time_delay) ||
       time_delay<=0 || time_delay>10000000) {
-    cerr << "TelescopeTcp::TelescopeTcp(" << name << ',' << params << "): "
+    cout << "TelescopeTcp::TelescopeTcp(" << name << ',' << params << "): "
             "bad time_delay" << endl;
     return;
   }
   struct hostent *hep = gethostbyname(host.c_str());
   if (hep == 0) {
-    cerr << "TelescopeTcp::TelescopeTcp(" << name << ',' << params << "): "
+    cout << "TelescopeTcp::TelescopeTcp(" << name << ',' << params << "): "
             "unknown host" << endl;
     return;
   }
   if (hep->h_length != 4) {
-    cerr << "TelescopeTcp::TelescopeTcp(" << name << ',' << params << "): "
+    cout << "TelescopeTcp::TelescopeTcp(" << name << ',' << params << "): "
             "only IPv4 implemented"
          << endl;
     return;
@@ -254,7 +257,7 @@ TelescopeTcp::TelescopeTcp(const string &name,const string &params)
   memcpy(&(address.sin_addr),hep->h_addr,4);
   address.sin_port = htons(port);
   address.sin_family = AF_INET;
-  next_connection_attempt = -0x8000000000000000LL;
+  end_of_timeout = -0x8000000000000000LL;
 
   for (position_pointer = positions;
        position_pointer < end_position;
@@ -318,7 +321,7 @@ void TelescopeTcp::telescopeGoto(const Vec3d &j2000_pos) {
       *write_buff_end++ = dec_int;dec_int>>=8;
       *write_buff_end++ = dec_int;
     } else {
-      cerr << "TelescopeTcp(" << name << ")::telescopeGoto: "
+      cout << "TelescopeTcp(" << name << ")::telescopeGoto: "
               "communication is too slow, I will ignore this command" << endl;
     }
   }
@@ -329,8 +332,8 @@ void TelescopeTcp::performWriting(void) {
   const int rc = send(fd,write_buff,to_write,0);
   if (rc < 0) {
     if (ERRNO != EINTR && ERRNO != EAGAIN) {
-      cerr << "TelescopeTcp(" << name << ")::performWriting: "
-              "send failed" << endl;
+      cout << "TelescopeTcp(" << name << ")::performWriting: "
+              "send failed: " << STRERROR(ERRNO) << endl;
       hangup();
     }
   } else if (rc > 0) {
@@ -350,12 +353,12 @@ void TelescopeTcp::performReading(void) {
   const int rc = recv(fd,read_buff_end,to_read,0);
   if (rc < 0) {
     if (ERRNO != EINTR && ERRNO != EAGAIN) {
-      cerr << "TelescopeTcp(" << name << ")::performReading: "
-              "recv failed" << endl;
+      cout << "TelescopeTcp(" << name << ")::performReading: "
+              "recv failed: " << STRERROR(ERRNO) << endl;
       hangup();
     }
   } else if (rc == 0) {
-    cerr << "TelescopeTcp(" << name << ")::performReading: "
+    cout << "TelescopeTcp(" << name << ")::performReading: "
             "server has closed the connection" << endl;
     hangup();
   } else {
@@ -365,7 +368,7 @@ void TelescopeTcp::performReading(void) {
       const int size = (int)(                ((unsigned char)(p[0])) |
                               (((unsigned int)(unsigned char)(p[1])) << 8) );
       if (size > (int)sizeof(read_buff) || size < 4) {
-        cerr << "TelescopeTcp(" << name << ")::performReading: "
+        cout << "TelescopeTcp(" << name << ")::performReading: "
                 "bad packet size: " << size << endl;
         hangup();
         return;
@@ -380,7 +383,7 @@ void TelescopeTcp::performReading(void) {
       switch (type) {
         case 0: {
           if (size < 24) {
-            cerr << "TelescopeTcp(" << name << ")::performReading: "
+            cout << "TelescopeTcp(" << name << ")::performReading: "
                     "type 0: bad packet size: " << size << endl;
             hangup();
             return;
@@ -417,11 +420,11 @@ void TelescopeTcp::performReading(void) {
           position_pointer->ra_int = ra_int;
           position_pointer->dec_int = dec_int;
           position_pointer->status = status;
-//          cout << "TelescopeTcp(" << name << ")::performReading: "
+          cout << "TelescopeTcp(" << name << ")::performReading: "
 //                  "Client Time: " << position_pointer->client_micros
-//               << ", ra: " << position_pointer->ra_int
-//               << ", dec: " << position_pointer->dec_int
-//               << endl;
+               << ", ra: " << position_pointer->ra_int
+               << ", dec: " << position_pointer->dec_int
+               << endl;
         } break;
         default:
           cout << "TelescopeTcp(" << name << ")::performReading: "
@@ -495,35 +498,48 @@ void TelescopeTcp::prepareSelectFds(fd_set &read_fds,fd_set &write_fds,
   if (IS_INVALID_SOCKET(fd)) {
       // try reconnecting
     const long long int now = GetNow();
-    if (now < next_connection_attempt) return;
-    next_connection_attempt = now + 5000000;
+    if (now < end_of_timeout) return;
+    end_of_timeout = now + 5000000;
     fd = socket(AF_INET,SOCK_STREAM,0);
     if (IS_INVALID_SOCKET(fd)) {
-      cerr << "TelescopeTcp(" << name << ")::prepareSelectFds: socket() failed" << endl;
+      cout << "TelescopeTcp(" << name << ")::prepareSelectFds: "
+              "socket() failed: " << STRERROR(ERRNO) << endl;
       return;
     }
     if (SET_NONBLOCKING_MODE(fd) != 0) {
-      cerr << "TelescopeTcp(" << name << ")::prepareSelectFds: "
-              "could not set nonblocking mode" << endl;
+      cout << "TelescopeTcp(" << name << ")::prepareSelectFds: "
+              "could not set nonblocking mode: " << STRERROR(ERRNO) << endl;
       hangup();
       return;
     }
     if (connect(fd,(struct sockaddr*)(&address),sizeof(address)) != 0) {
       if (ERRNO != EINPROGRESS && ERRNO != EAGAIN) {
-        cerr << "TelescopeTcp(" << name << ")::prepareSelectFds: "
-                "connect() failed" << endl;
+        cout << "TelescopeTcp(" << name << ")::prepareSelectFds: "
+                "connect() failed: " << STRERROR(ERRNO) << endl;
         hangup();
         return;
       }
       wait_for_connection_establishment = true;
+//      cout << "TelescopeTcp(" << name << ")::prepareSelectFds: "
+//              "waiting for connection establishment" << endl;
     } else {
       wait_for_connection_establishment = false;
+      cout << "TelescopeTcp(" << name << ")::prepareSelectFds: "
+              "connection established" << endl;
         // connection established, wait for next call of prepareSelectFds
     }
   } else {
       // socked is already connected
     if (fd_max < (int)fd) fd_max = (int)fd;
     if (wait_for_connection_establishment) {
+      const long long int now = GetNow();
+      if (now > end_of_timeout) {
+        end_of_timeout = now + 1000000;
+        cout << "TelescopeTcp(" << name << ")::prepareSelectFds: "
+                "connect timeout" << endl;
+        hangup();
+        return;
+      }
       FD_SET(fd,&write_fds);
     } else {
       if (write_buff_end > write_buff) FD_SET(fd,&write_fds);
@@ -541,13 +557,13 @@ void TelescopeTcp::handleSelectFds(const fd_set &read_fds,
         int err = 0;
         SOCKLEN_T length = sizeof(err);
         if (getsockopt(fd,SOL_SOCKET,SO_ERROR,(char*)(&err),&length) != 0) {
-          cerr << "TelescopeTcp(" << name << ")::handleSelectFds: "
+          cout << "TelescopeTcp(" << name << ")::handleSelectFds: "
                   "getsockopt failed" << endl;
           hangup();
         } else {
           if (err != 0) {
-//            cerr << "TelescopeTcp(" << name << ")::handleSelectFds: "
-//                    "connect failed: " << err << endl;
+            cout << "TelescopeTcp(" << name << ")::handleSelectFds: "
+                    "connect failed: " << STRERROR(err) << endl;
             hangup();
           } else {
             cout << "TelescopeTcp(" << name << ")::handleSelectFds: "
