@@ -24,8 +24,6 @@
 #include "stel_utility.h"
 
 #include "hip_star_mgr.h"
-#include "hip_star.h"
-#include "constellation.h"
 #include "telescope_mgr.h"
 
 void StelCore::setFlagTelescopes(bool b) {
@@ -47,7 +45,7 @@ bool StelCore::getFlagTelescopeName(void) const {
 void StelCore::telescopeGoto(int nr) {
   if (selected_object) {
     telescope_mgr->telescopeGoto(nr,
-                                 selected_object->getObsJ2000Pos(navigation));
+                                 selected_object.getObsJ2000Pos(navigation));
   }
 }
 
@@ -322,7 +320,7 @@ void StelCore::update(int delta_time)
 	updateMove(delta_time);
 
 	// Update info about selected object
-	if (selected_object) selected_object->update();
+	selected_object.update();
 
 	// Update faders
 	equ_grid->update(delta_time);
@@ -420,7 +418,7 @@ double StelCore::draw(int delta_time)
 	meridian_line->draw(projection);
 
 	// Draw the pointer on the currently selected object
-	if (selected_object && object_pointer_visibility) selected_object->draw_pointer(delta_time, projection, navigation);
+	if (selected_object && object_pointer_visibility) selected_object.draw_pointer(delta_time, projection, navigation);
 
 	// Draw the planets
 	double squaredDistance = ssystem->draw(projection, navigation, tone_converter, getFlagPointStar());
@@ -510,9 +508,9 @@ void StelCore::setViewportSize(int w, int h)
 	projection->setViewportHeight(h);
 }
 
-StelObject *StelCore::searchByNameI18n(const wstring &name) const
+StelObject StelCore::searchByNameI18n(const wstring &name) const
 {
-	StelObject *rval = 0;
+	StelObject rval;
 	rval = ssystem->searchByNamesI18(name);
 	if (rval) return rval;
 	rval = nebulas->searchByNameI18n(name);
@@ -522,8 +520,7 @@ StelObject *StelCore::searchByNameI18n(const wstring &name) const
 	rval = asterisms->searchByNameI18n(name);
 	if (rval) return rval;
 	rval = telescope_mgr->searchByNameI18n(name);
-	if (rval) return rval;
-	return NULL;
+	return rval;
 }
 
 //! Find and select an object from its translated name
@@ -532,7 +529,7 @@ StelObject *StelCore::searchByNameI18n(const wstring &name) const
 bool StelCore::findAndSelectI18n(const wstring &nameI18n)
 {
 	// Then look for another object
-	StelObject* obj = searchByNameI18n(nameI18n);
+	StelObject obj = searchByNameI18n(nameI18n);
 	if (!obj) return false;
 	else return selectObject(obj);
 }
@@ -540,30 +537,35 @@ bool StelCore::findAndSelectI18n(const wstring &nameI18n)
 
 //! Find and select an object based on selection type and standard name or number
 //! @return true if an object was selected
-bool StelCore::selectObject(const string &type, const string &id) {
 
+bool StelCore::selectObject(const string &type, const string &id) {
+/*
+  std::wostringstream oss;
+  oss << id.c_str();
+  return findAndSelectI18n(oss.str());
+*/
     if(type=="hp") {
       unsigned int hpnum;
       std::istringstream istr(id);
       istr >> hpnum;
       selected_object = hip_stars->searchHP(hpnum);
-      asterisms->setSelected((HipStar*)selected_object);
+      asterisms->setSelected(selected_object);
       setPlanetsSelected("");
 
 	} else if(type=="star") {
       selected_object = hip_stars->search(id);
-      asterisms->setSelected((HipStar*)selected_object);
+      asterisms->setSelected(selected_object);
       setPlanetsSelected("");
 
     } else if(type=="planet"){
       setPlanetsSelected(id);
       selected_object = ssystem->getSelected();
-      asterisms->setSelected(NULL);
+      asterisms->setSelected(StelObject());
 
     } else if(type=="nebula"){
       selected_object = nebulas->search(id);
       setPlanetsSelected("");
-      asterisms->setSelected(NULL);
+      asterisms->setSelected(StelObject());
 	 
     } else if(type=="constellation"){
 
@@ -576,16 +578,23 @@ bool StelCore::selectObject(const string &type, const string &id) {
     } else if(type=="constellation_star") {
 	
 		// For Find capability, select a star in constellation so can center view on constellation 	 
-		unsigned int hpnum; 
 		asterisms->setSelected(id); 
 
-		hpnum = asterisms->getFirstSelectedHP();
-		selected_object = hip_stars->searchHP(hpnum); 	 
-		asterisms->setSelected((HipStar*)selected_object); 	 
+        selected_object = asterisms->getSelected()
+                           .getBrightestStarInConstellation();
+
+/// what is this?
+/// 1) Find the hp-number of the 1st star in the selected constellation,
+/// 2) find the star of this hpnumber
+/// 3) select the constellation of this star ???
+///		const unsigned int hpnum = asterisms->getFirstSelectedHP();
+///		selected_object = hip_stars->searchHP(hpnum);
+///		asterisms->setSelected(selected_object);
+
 		setPlanetsSelected("");
 
-		// Some stars are shared, so now force constellation
-		asterisms->setSelected(id);
+///		// Some stars are shared, so now force constellation
+///		asterisms->setSelected(id);
 	} else {
 		cerr << "Invalid selection type specified: " << type << endl;
 		return 0;
@@ -606,7 +615,7 @@ bool StelCore::selectObject(const string &type, const string &id) {
 //! Find and select an object near given equatorial position
 bool StelCore::findAndSelect(const Vec3d& pos)
 {
-	StelObject* tempselect = clever_find(pos);
+	StelObject tempselect = clever_find(pos);
 	return selectObject(tempselect);
 }
 
@@ -619,11 +628,11 @@ bool StelCore::findAndSelect(int x, int y)
 }
 
 // Find an object in a "clever" way 
-StelObject * StelCore::clever_find(const Vec3d& v) const
+StelObject StelCore::clever_find(const Vec3d& v) const
 {
-	StelObject * sobj = NULL;
-	vector<StelObject*> candidates;
-	vector<StelObject*> temp;
+	StelObject sobj;
+	vector<StelObject> candidates;
+	vector<StelObject> temp;
 	Vec3d winpos;
 
 	// Field of view for a 30 pixel diameter circle on screen
@@ -667,14 +676,14 @@ StelObject * StelCore::clever_find(const Vec3d& v) const
 	// Now select the object minimizing the function y = distance(in pixel) + magnitude
 	float best_object_value;
 	best_object_value = 100000.f;
-	vector<StelObject*>::iterator iter = candidates.begin();
+	vector<StelObject>::iterator iter = candidates.begin();
 	while (iter != candidates.end())
 	{
-		projection->project_earth_equ((*iter)->get_earth_equ_pos(navigation), winpos);
+		projection->project_earth_equ((*iter).get_earth_equ_pos(navigation), winpos);
 
 		float distance = sqrt((xpos-winpos[0])*(xpos-winpos[0]) + (ypos-winpos[1])*(ypos-winpos[1]));
-		float mag = (*iter)->get_mag(navigation);
-		if ((*iter)->get_type()==StelObject::STEL_OBJECT_NEBULA)
+		float mag = (*iter).get_mag(navigation);
+		if ((*iter).get_type()==STEL_OBJECT_NEBULA)
 		{
 			if( nebulas->getFlagHints() )
 			{
@@ -683,7 +692,7 @@ StelObject * StelCore::clever_find(const Vec3d& v) const
 
 			}
 		}
-		if ((*iter)->get_type()==StelObject::STEL_OBJECT_PLANET)
+		if ((*iter).get_type()==STEL_OBJECT_PLANET)
 		{
 			if( getFlagPlanetsHints() )
 			{
@@ -706,7 +715,7 @@ StelObject * StelCore::clever_find(const Vec3d& v) const
 	return sobj;
 }
 
-StelObject * StelCore::clever_find(int x, int y) const
+StelObject StelCore::clever_find(int x, int y) const
 {
 	Vec3d v;
 	projection->unproject_earth_equ(x,y,v);
@@ -723,7 +732,8 @@ void StelCore::autoZoomIn(float move_duration, bool allow_manual_zoom)
 	if (!navigation->get_flag_traking())
 	{
 		navigation->set_flag_traking(true);
-		navigation->move_to(selected_object->get_earth_equ_pos(navigation), move_duration, false, 1);
+		navigation->move_to(selected_object.get_earth_equ_pos(navigation),
+                            move_duration, false, 1);
 		manual_move_duration = move_duration;
 	}
 	else
@@ -741,13 +751,18 @@ void StelCore::autoZoomIn(float move_duration, bool allow_manual_zoom)
 	}
 	else
 	{
-		float satfov = selected_object->get_satellites_fov(navigation);
-		float closefov = selected_object->get_close_fov(navigation);
+		float satfov = selected_object.get_satellites_fov(navigation);
 
-		if (satfov>0. && projection->get_fov()*0.9>satfov) projection->zoom_to(satfov, move_duration);
-		else if (projection->get_fov()>closefov) projection->zoom_to(closefov, move_duration);
+		if (satfov>0.0 && projection->get_fov()*0.9>satfov)
+          projection->zoom_to(satfov, move_duration);
+		else {
+		  float closefov = selected_object.get_close_fov(navigation);
+          if (projection->get_fov()>closefov)
+            projection->zoom_to(closefov, move_duration);
+        }
 	}
 }
+
 
 // Unzoom and go to the init position
 void StelCore::autoZoomOut(float move_duration, bool full)
@@ -755,27 +770,22 @@ void StelCore::autoZoomOut(float move_duration, bool full)
 
 	if (selected_object && !full) {
 
-		// If the selected object has satellites, unzoom to satellites view unless specified otherwise
-		float satfov = selected_object->get_satellites_fov(navigation);
+		// If the selected object has satellites, unzoom to satellites view
+        // unless specified otherwise
+		float satfov = selected_object.get_satellites_fov(navigation);
 
-		if (projection->get_fov()<=satfov*0.9 && satfov>0.) {
-			projection->zoom_to(satfov, move_duration);
-			return;
+		if (satfov>0.0 && projection->get_fov()<=satfov*0.9) {
+          projection->zoom_to(satfov, move_duration);
+          return;
 	    }
 
 		// If the selected object is part of a Planet subsystem (other than sun),
 		// unzoom to subsystem view
-		if (selected_object->get_type() == StelObject::STEL_OBJECT_PLANET 
-			&& selected_object!=ssystem->getSun() 
-			&& ((Planet*)selected_object)->get_parent()!=ssystem->getSun())
-			{
-				float satfov = ((Planet*)selected_object)->get_parent()->get_satellites_fov(navigation);
-				if (projection->get_fov()<=satfov*0.9 && satfov>0.)
-					{
-						projection->zoom_to(satfov, move_duration);
-						return;
-					}
-			}
+        satfov = selected_object.get_parent_satellites_fov(navigation);
+        if (satfov>0.0 && projection->get_fov()<=satfov*0.9) {
+          projection->zoom_to(satfov, move_duration);
+          return;
+        }
 	}	
   
 	projection->zoom_to(InitFov, move_duration);
@@ -818,13 +828,13 @@ bool StelCore::setSkyCultureDir(const string& cultureDir)
 	asterisms->translateNames(skyTranslator);
 
 	// as constellations have changed, clear out any selection and retest for match!
-	if (selected_object && selected_object->get_type()==StelObject::STEL_OBJECT_STAR)
+	if (selected_object && selected_object.get_type()==STEL_OBJECT_STAR)
 	{
-		asterisms->setSelected((HipStar*)selected_object);
+		asterisms->setSelected(selected_object);
 	}
 	else
 	{
-		asterisms->setSelected(NULL);
+		asterisms->setSelected(StelObject());
 	}
 
 	// Load culture star names in english
@@ -930,9 +940,9 @@ Vec3f StelCore::getSelectedObjectInfoColor(void) const
 		cerr << "WARNING: StelCore::getSelectedObjectInfoColor was called while no object is currently selected!!" << endl;
 		return Vec3f(1, 1, 1);
 	}
-	if (selected_object->get_type()==StelObject::STEL_OBJECT_NEBULA) return nebulas->getLabelColor();
-	if (selected_object->get_type()==StelObject::STEL_OBJECT_PLANET) return ssystem->getLabelColor();
-	if (selected_object->get_type()==StelObject::STEL_OBJECT_STAR) return selected_object->get_RGB();
+	if (selected_object.get_type()==STEL_OBJECT_NEBULA) return nebulas->getLabelColor();
+	if (selected_object.get_type()==STEL_OBJECT_PLANET) return ssystem->getLabelColor();
+	if (selected_object.get_type()==STEL_OBJECT_STAR) return selected_object.get_RGB();
 	return Vec3f(1, 1, 1);
 }
 
@@ -1178,18 +1188,18 @@ bool StelCore::getIsTimeNow(void) const
 
 //! Select passed object
 //! @return true if the object was selected (false if the same was already selected)
-bool StelCore::selectObject(StelObject* obj)
+bool StelCore::selectObject(const StelObject &obj)
 {
 	// Unselect if it is the same object
-	if (obj!=NULL && selected_object==obj)
+	if (obj && selected_object==obj)
 	{
 		unSelect();
 		return true;
 	}
 
-	if (obj!=NULL && obj->get_type()==StelObject::STEL_OBJECT_CONSTELLATION)
+	if (obj.get_type()==STEL_OBJECT_CONSTELLATION)
 	{
-		return selectObject(((Constellation*)obj)->getBrightestStar());
+		return selectObject(obj.getBrightestStarInConstellation());
 	}
 	else
 	{
@@ -1202,9 +1212,9 @@ bool StelCore::selectObject(StelObject* obj)
 			if (getFlagTracking()) navigation->set_flag_lock_equ_pos(1);
 			setFlagTracking(false);
 	
-			if (selected_object->get_type()==StelObject::STEL_OBJECT_STAR)
+			if (selected_object.get_type()==STEL_OBJECT_STAR)
 			{
-				asterisms->setSelected((HipStar*)selected_object);
+				asterisms->setSelected(selected_object);
 	 			// potentially record this action
 // 	 			std::ostringstream oss;
 // 	 			oss << ((HipStar *)selected_object)->get_hp_number();
@@ -1212,21 +1222,14 @@ bool StelCore::selectObject(StelObject* obj)
 			}
 			else
 			{
-				asterisms->setSelected(NULL);
+				asterisms->setSelected(StelObject());
 			}
 	
-			if (selected_object->get_type()==StelObject::STEL_OBJECT_PLANET)
-			{
-				ssystem->setSelected((Planet*)selected_object);
-				// potentially record this action
-// 				app->recordCommand("select planet " + ((Planet *)selected_object)->getEnglishName());
-			}
-			else
-			{
-				ssystem->setSelected(NULL);
-			}
+			ssystem->setSelected(selected_object);
+			// potentially record this action
+//			app->recordCommand("select planet " + ((Planet *)selected_object)->getEnglishName());
 	
-			if (selected_object->get_type()==StelObject::STEL_OBJECT_NEBULA)
+			if (selected_object.get_type()==STEL_OBJECT_NEBULA)
 			{
 				// potentially record this action
 // 				app->recordCommand("select nebula " + ((Nebula *)selected_object)->getEnglishName());
@@ -1379,7 +1382,7 @@ void StelCore::setFlagTracking(bool b) {
 	if(!b || !selected_object) {
 		navigation->set_flag_traking(0);
 	} else {
-		navigation->move_to(selected_object->get_earth_equ_pos(navigation),
+		navigation->move_to(selected_object.get_earth_equ_pos(navigation),
 							getAutomoveDuration());
 		navigation->set_flag_traking(1);
 	}

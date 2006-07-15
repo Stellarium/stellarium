@@ -22,6 +22,7 @@
 #include <string>
 #include "hip_star_mgr.h"
 #include "hip_star.h"
+#include "stel_object.h"
 #include "s_texture.h"
 #include "grid.h"
 #include "bytes.h"
@@ -190,7 +191,7 @@ int HipStarMgr::load_common_names(const string& commonNameFile)
 	do
 	{
 		sscanf(line,"%u",&tmp);
-		star = searchHP(tmp);
+		star = searchHPprivate(tmp);
 		if (star)
 		{
 			char c=line[0];
@@ -242,7 +243,7 @@ void HipStarMgr::load_sci_names(const string& sciNameFile)
 	do
 	{
 		sscanf(line,"%u",&tmp);
-		star = searchHP(tmp);
+		star = searchHPprivate(tmp);
 		if (star && star->sciName==L"")
 		{
 			char c=line[0];
@@ -399,7 +400,7 @@ void HipStarMgr::drawPoint(Vec3f equ_vision, ToneReproductor* _eye, Projector* p
 }
 
 // Look for a star by XYZ coords
-HipStar * HipStarMgr::search(Vec3f Pos) const
+StelObject HipStarMgr::search(Vec3f Pos) const
 {
     Pos.normalize();
     HipStar * nearest=NULL;
@@ -424,9 +425,9 @@ HipStar * HipStarMgr::search(Vec3f Pos) const
 }
 
 // Return a stl vector containing the nebulas located inside the lim_fov circle around position v
-vector<StelObject*> HipStarMgr::search_around(Vec3d v, double lim_fov) const
+vector<StelObject> HipStarMgr::search_around(Vec3d v, double lim_fov) const
 {
-	vector<StelObject*> result;
+	vector<StelObject> result;
     v.normalize();
 	double cos_lim_fov = cos(lim_fov * M_PI/180.);
 
@@ -539,7 +540,7 @@ void HipStarMgr::translateNames(Translator& trans)
 }
 
 
-HipStar *HipStarMgr::search(const string& name) const
+StelObject HipStarMgr::search(const string& name) const
 {
 	const string catalogs("HP HD SAO");
 
@@ -574,7 +575,7 @@ HipStar *HipStarMgr::search(const string& name) const
 }	
 
 // Search the star by HP number
-HipStar *HipStarMgr::searchHP(unsigned int _HP) const
+HipStar *HipStarMgr::searchHPprivate(unsigned int _HP) const
 {
 	if (_HP != 0 && _HP < (unsigned int)starArraySize && StarFlatArray[_HP] 
 		&& StarFlatArray[_HP]->HP == _HP)
@@ -582,7 +583,11 @@ HipStar *HipStarMgr::searchHP(unsigned int _HP) const
     return NULL;
 }
 
-HipStar* HipStarMgr::searchByNameI18n(const wstring& nameI18n) const
+StelObject HipStarMgr::searchHP(unsigned int _HP) const {
+  return searchHPprivate(_HP);
+}
+
+StelObject HipStarMgr::searchByNameI18n(const wstring& nameI18n) const
 {
 	wstring objw = nameI18n;
 	transform(objw.begin(), objw.end(), objw.begin(), ::toupper);

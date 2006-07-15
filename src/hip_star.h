@@ -23,7 +23,7 @@
 #include <functional>
 #include <algorithm>
 
-#include "stel_object.h"
+#include "stel_object_base.h"
 #include "stellarium.h"
 #include "stel_utility.h"
 #include "s_font.h"
@@ -33,7 +33,7 @@
 #include "stel_utility.h"
 
 
-class HipStar : public StelObject
+class HipStar : public StelObjectBase
 {
 	friend class HipStarMgr;
 	friend class Constellation;  // for xyz coordinate
