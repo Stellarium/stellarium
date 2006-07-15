@@ -1,142 +1,113 @@
-/*
- * Stellarium
- * Copyright (C) 2002 Fabien Chereau
- *
- * This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU General Public License
- * as published by the Free Software Foundation; either version 2
- * of the License, or (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
- */
-
 #include "stel_object.h"
-#include "stellarium.h"
-#include "projector.h"
-#include "navigator.h"
-#include "stel_utility.h"
-#include "s_texture.h"
-#include "planet.h"
+#include "stel_object_base.h"
 
-s_texture * StelObject::pointer_star = NULL;
-s_texture * StelObject::pointer_planet = NULL;
-s_texture * StelObject::pointer_nebula = NULL;
-s_texture * StelObject::pointer_telescope = NULL;
+class StelObjectUninitialized : public StelObjectBase {
+public:
+  StelObjectUninitialized(void) {}
+private:
+  wstring getInfoString(const Navigator *nav) const {return L"";}
+  wstring getShortInfoString(const Navigator *nav) const {return L"";}
+  STEL_OBJECT_TYPE get_type(void) const {return STEL_OBJECT_UNINITIALIZED;}
+  Vec3d get_earth_equ_pos(const Navigator*) const {return Vec3d(1,0,0);}
+  Vec3d getObsJ2000Pos(const Navigator*) const {return Vec3d(1,0,0);}
+  float get_mag(const Navigator * nav) const {return -10;}
+};
 
-int StelObject::local_time = 0;
+static StelObjectUninitialized uninitialized_object;
 
-// Draw a nice animated pointer around the object
-void StelObject::draw_pointer(int delta_time, const Projector* prj, const Navigator * nav)
-{
-	local_time+=delta_time;
-	Vec3d pos=get_earth_equ_pos(nav);
-	Vec3d screenpos;
-	// Compute 2D pos and return if outside screen
-	if (!prj->project_earth_equ(pos, screenpos)) return;
-    prj->set_orthographic_projection();
-
-	if (get_type()==STEL_OBJECT_NEBULA) glColor3f(0.4f,0.5f,0.8f);
-	if (get_type()==STEL_OBJECT_PLANET) glColor3f(1.0f,0.3f,0.3f);
-
-    if (get_type()==STEL_OBJECT_STAR||get_type()==STEL_OBJECT_TELESCOPE)
-    {
-		glColor3fv(get_RGB());
-		float radius;
-		if (get_type()==STEL_OBJECT_STAR) {
-			radius = 13.f;
-			glBindTexture (GL_TEXTURE_2D, pointer_star->getID());
-		} else {
-			radius = 25.f;
-			glBindTexture (GL_TEXTURE_2D, pointer_telescope->getID());
-		}
-        glEnable(GL_TEXTURE_2D);
-        glEnable(GL_BLEND);
-        glTranslatef(screenpos[0], screenpos[1], 0.0f);
-        glRotatef((float)local_time/20.,0.,0.,1.);
-        glBegin(GL_QUADS );
-            glTexCoord2f(0.0f,0.0f);    glVertex3f(-radius,-radius,0.);      //Bas Gauche
-            glTexCoord2f(1.0f,0.0f);    glVertex3f(radius,-radius,0.);       //Bas Droite
-            glTexCoord2f(1.0f,1.0f);    glVertex3f(radius,radius,0.);        //Haut Droit
-            glTexCoord2f(0.0f,1.0f);    glVertex3f(-radius,radius,0.);       //Haut Gauche
-        glEnd ();
-    }
-
-	float size = get_on_screen_size(prj, nav);
-	size+=20.f;
-	size+=10.f*sin(0.002f * local_time);
-
-    if (get_type()==STEL_OBJECT_NEBULA || get_type()==STEL_OBJECT_PLANET)
-    {
-		if (get_type()==STEL_OBJECT_PLANET)
-			glBindTexture(GL_TEXTURE_2D, pointer_planet->getID());
-        if (get_type()==STEL_OBJECT_NEBULA)
-			glBindTexture(GL_TEXTURE_2D, pointer_nebula->getID());
-
-        glEnable(GL_TEXTURE_2D);
-        glEnable(GL_BLEND);
-        glTranslatef(screenpos[0], screenpos[1], 0.0f);
-        if (get_type()==STEL_OBJECT_PLANET) glRotatef((float)local_time/100,0,0,-1);
-
-        glTranslatef(-size/2, -size/2,0.0f);
-        glRotatef(90,0,0,1);
-        glBegin(GL_QUADS );
-            glTexCoord2f(0.0f,0.0f);    glVertex3f(-10,-10,0);      //Bas Gauche
-            glTexCoord2f(1.0f,0.0f);    glVertex3f(10,-10,0);       //Bas Droite
-            glTexCoord2f(1.0f,1.0f);    glVertex3f(10,10,0);        //Haut Droit
-            glTexCoord2f(0.0f,1.0f);    glVertex3f(-10,10,0);       //Haut Gauche
-        glEnd ();
-
-        glRotatef(-90,0,0,1);
-        glTranslatef(0,size,0.0f);
-        glBegin(GL_QUADS );
-            glTexCoord2f(0.0f,0.0f);    glVertex3f(-10,-10,0);      //Bas Gauche
-            glTexCoord2f(1.0f,0.0f);    glVertex3f(10,-10,0);       //Bas Droite
-            glTexCoord2f(1.0f,1.0f);    glVertex3f(10,10,0);        //Haut Droit
-            glTexCoord2f(0.0f,1.0f);    glVertex3f(-10,10,0);       //Haut Gauche
-        glEnd ();
-
-        glRotatef(-90,0,0,1);
-        glTranslatef(0, size,0.0f);
-        glBegin(GL_QUADS );
-            glTexCoord2f(0.0f,0.0f);    glVertex3f(-10,-10,0);      //Bas Gauche
-            glTexCoord2f(1.0f,0.0f);    glVertex3f(10,-10,0);       //Bas Droite
-            glTexCoord2f(1.0f,1.0f);    glVertex3f(10,10,0);        //Haut Droit
-            glTexCoord2f(0.0f,1.0f);    glVertex3f(-10,10,0);       //Haut Gauche
-        glEnd ();
-
-        glRotatef(-90,0,0,1);
-        glTranslatef(0,size,0);
-        glBegin(GL_QUADS );
-            glTexCoord2f(0.0f,0.0f);    glVertex3f(-10,-10,0);      //Bas Gauche
-            glTexCoord2f(1.0f,0.0f);    glVertex3f(10,-10,0);       //Bas Droite
-            glTexCoord2f(1.0f,1.0f);    glVertex3f(10,10,0);        //Haut Droit
-            glTexCoord2f(0.0f,1.0f);    glVertex3f(-10,10,0);       //Haut Gauche
-        glEnd ();
-    }
-
-    prj->reset_perspective_projection();
+StelObject::~StelObject(void) {
+  rep->release();
 }
 
-
-void StelObject::init_textures(void)
-{
-	pointer_star = new s_texture("pointeur2.png");
-	pointer_planet = new s_texture("pointeur4.png");
-	pointer_nebula = new s_texture("pointeur5.png");
-	pointer_telescope = new s_texture("pointeur2.png");
+StelObject::StelObject(void)
+           :rep(&uninitialized_object) {
+  rep->retain();
 }
 
-void StelObject::delete_textures(void)
-{
-	delete pointer_star; pointer_star = NULL;
-	delete pointer_planet; pointer_planet = NULL;
-	delete pointer_nebula; pointer_nebula = NULL;
-	delete pointer_telescope; pointer_telescope = NULL;
+StelObject::StelObject(StelObjectBase *r)
+           :rep(r?r:&uninitialized_object) {
+  rep->retain();
+}
+
+StelObject::StelObject(const StelObject &o)
+           :rep(o.rep) {
+  rep->retain();
+}
+
+const StelObject &StelObject::operator=(const StelObject &o) {
+  if (this != &o) {
+    rep = o.rep;
+    rep->retain();
+  }
+  return *this;
+}
+
+StelObject::operator bool(void) const {
+  return (rep != &uninitialized_object);
+}
+
+bool StelObject::operator==(const StelObject &o) const {
+  return (rep == o.rep);
+}
+
+void StelObject::update(void) {
+  rep->update();
+}
+
+void StelObject::draw_pointer(int delta_time,
+                              const Projector *prj,
+                              const Navigator *nav) {
+  rep->draw_pointer(delta_time,prj,nav);
+}
+
+wstring StelObject::getInfoString(const Navigator *nav) const {
+  return rep->getInfoString(nav);
+}
+
+wstring StelObject::getShortInfoString(const Navigator *nav) const {
+  return rep->getShortInfoString(nav);
+}
+
+STEL_OBJECT_TYPE StelObject::get_type(void) const {
+  return rep->get_type();
+}
+
+Vec3d StelObject::get_earth_equ_pos(const Navigator *nav) const {
+  return rep->get_earth_equ_pos(nav);
+}
+
+Vec3d StelObject::getObsJ2000Pos(const Navigator *nav) const {
+  return rep->getObsJ2000Pos(nav);
+}
+
+float StelObject::get_mag(const Navigator *nav) const {
+  return rep->get_mag(nav);
+}
+
+Vec3f StelObject::get_RGB(void) const {
+  return rep->get_RGB();
+}
+
+StelObject StelObject::getBrightestStarInConstellation(void) const {
+  return rep->getBrightestStarInConstellation();
+}
+
+double StelObject::get_close_fov(const Navigator *nav) const {
+  return rep->get_close_fov(nav);
+}
+
+double StelObject::get_satellites_fov(const Navigator *nav) const {
+  return rep->get_satellites_fov(nav);
+}
+
+double StelObject::get_parent_satellites_fov(const Navigator *nav) const {
+  return rep->get_parent_satellites_fov(nav);
+}
+
+void StelObject::init_textures(void) {
+  StelObjectBase::init_textures();
+}
+
+void StelObject::delete_textures(void) {
+  StelObjectBase::delete_textures();
 }

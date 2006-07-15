@@ -20,17 +20,18 @@
 #ifndef _PLANET_H_
 #define _PLANET_H_
 
-#include <list>
-#include <string>
+#include "stel_object_base.h"
 #include "stellarium.h"
 #include "stel_utility.h"
 #include "s_font.h"
 #include "tone_reproductor.h"
 #include "vecmath.h"
-#include "stel_object.h"
 #include "callbacks.hpp"
 #include "fader.h"
 #include "translator.h"
+
+#include <list>
+#include <string>
 
 // The callback type for the external position computation function
 typedef boost::callback<void, double, double*> pos_func_type;
@@ -79,7 +80,7 @@ private:
 };
 
 
-class Planet : public StelObject
+class Planet : public StelObjectBase
 {
 public:
 	Planet(Planet *parent,
@@ -96,7 +97,7 @@ public:
            OsulatingFunctType *osculating_func,
 		   bool hidden);
 
-    virtual ~Planet();
+    ~Planet();
 
     double getRadius(void) const {return radius;}
 
@@ -104,9 +105,10 @@ public:
 	wstring getSkyLabel(const Navigator * nav) const;
 	wstring getInfoString(const Navigator * nav) const;
 	wstring getShortInfoString(const Navigator * nav) const;
-	virtual double get_close_fov(const Navigator * nav) const;
-	virtual double get_satellites_fov(const Navigator * nav) const;
-	virtual float get_mag(const Navigator * nav) const {return compute_magnitude(nav);}
+	double get_close_fov(const Navigator * nav) const;
+	double get_satellites_fov(const Navigator * nav) const;
+	double get_parent_satellites_fov(const Navigator * nav) const;
+	float get_mag(const Navigator * nav) const {return compute_magnitude(nav);}
     const s_texture *getMapTexture(void) const {return tex_map;}
 
 	/** Translate planet name using the passed translator */

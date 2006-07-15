@@ -186,9 +186,9 @@ void ConstellationMgr::loadLinesAndArt(const string &fileName, const string &art
 			cons->art_tex = new s_texture(texfile);
 			texSize = cons->art_tex->getSize();
 
-			Vec3f s1 = hipStarMgr->searchHP(hp1)->getObsJ2000Pos();
-			Vec3f s2 = hipStarMgr->searchHP(hp2)->getObsJ2000Pos();
-			Vec3f s3 = hipStarMgr->searchHP(hp3)->getObsJ2000Pos();
+			Vec3f s1 = hipStarMgr->searchHP(hp1).getObsJ2000Pos(0);
+			Vec3f s2 = hipStarMgr->searchHP(hp2).getObsJ2000Pos(0);
+			Vec3f s3 = hipStarMgr->searchHP(hp3).getObsJ2000Pos(0);
 
 			// To transform from texture coordinate to 2d coordinate we need to find X with XA = B
 			// A formed of 4 points in texture coordinate, B formed with 4 points in 3d coordinate
@@ -277,7 +277,7 @@ void ConstellationMgr::draw_names(Projector * prj) const
 	}
 }
 
-Constellation *ConstellationMgr::is_star_in(const HipStar * s) const
+Constellation *ConstellationMgr::is_star_in(const StelObject &s) const
 {
 	vector < Constellation * >::const_iterator iter;
 	for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
@@ -298,8 +298,7 @@ Constellation *ConstellationMgr::findFromAbbreviation(const string & abbreviatio
 	vector < Constellation * >::const_iterator iter;
 	for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
 	{
-		// Check if the star is in one of the constellation
-		if (string((*iter)->abbreviation) == tname)
+		if ((*iter)->abbreviation == tname)
 			return (*iter);
 	}
 	return NULL;
@@ -453,6 +452,10 @@ void ConstellationMgr::setFlagNames(bool b)
 		for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
 			(*iter)->setFlagName(b);
 	}
+}
+
+StelObject ConstellationMgr::getSelected(void) const {
+  return selected;
 }
 
 void ConstellationMgr::setSelectedConst(Constellation * c)
@@ -616,14 +619,14 @@ void ConstellationMgr::drawBoundaries(Projector * prj) const
 	glDisable(GL_LINE_STIPPLE);
 }
 
-unsigned int ConstellationMgr::getFirstSelectedHP(void) {
-  if (selected) return selected->asterism[0]->get_hp_number();
-  return 0;
-}
+///unsigned int ConstellationMgr::getFirstSelectedHP(void) {
+///  if (selected) return selected->asterism[0]->get_hp_number();
+///  return 0;
+///}
 
 //! Return the matching constellation object's pointer if exists or NULL
 //! @param nameI18n The case sensistive constellation name
-Constellation* ConstellationMgr::searchByNameI18n(const wstring& nameI18n) const
+StelObject ConstellationMgr::searchByNameI18n(const wstring& nameI18n) const
 {
 	wstring objw = nameI18n;
 	transform(objw.begin(), objw.end(), objw.begin(), ::toupper);

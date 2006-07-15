@@ -19,6 +19,7 @@
 
 #include "telescope_mgr.h"
 #include "telescope.h"
+#include "stel_object.h"
 #include "projector.h"
 #include "init_parser.h"
 #include "s_font.h"
@@ -116,9 +117,9 @@ void TelescopeMgr::update(int delta_time) {
   telescope_fader.update(delta_time);
 }
 
-vector<StelObject*> TelescopeMgr::search_around(Vec3d pos,
-                                                double lim_fov) const {
-  vector<StelObject*> result;
+vector<StelObject> TelescopeMgr::search_around(Vec3d pos,
+                                               double lim_fov) const {
+  vector<StelObject> result;
   pos.normalize();
   double cos_lim_fov = cos(lim_fov * M_PI/180.);
   for (TelescopeMap::const_iterator it(telescope_map.begin());
@@ -130,7 +131,7 @@ vector<StelObject*> TelescopeMgr::search_around(Vec3d pos,
   return result;
 }
 
-StelObject *TelescopeMgr::searchByNameI18n(const wstring &nameI18n) const {
+StelObject TelescopeMgr::searchByNameI18n(const wstring &nameI18n) const {
   for (TelescopeMap::const_iterator it(telescope_map.begin());
        it!=telescope_map.end();it++) {
     if (it->second->getNameI18n() == nameI18n) return it->second;

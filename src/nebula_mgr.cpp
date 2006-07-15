@@ -23,16 +23,27 @@
 #include <algorithm>
 
 #include "nebula_mgr.h"
+#include "nebula.h"
 #include "stellarium.h"
 #include "s_texture.h"
 #include "s_font.h"
 #include "navigator.h"
 #include "translator.h"
+#include "loadingbar.h"
 
 #define RADIUS_NEB 1.
 
-NebulaMgr::NebulaMgr() : displayNoTexture(false)
-{
+void NebulaMgr::setLabelColor(const Vec3f& c) {Nebula::label_color = c;}
+const Vec3f &NebulaMgr::getLabelColor(void) const {return Nebula::label_color;}
+void NebulaMgr::setCircleColor(const Vec3f& c) {Nebula::circle_color = c;}
+const Vec3f &NebulaMgr::getCircleColor(void) const {return Nebula::circle_color;}
+void NebulaMgr::setNebulaCircleScale(float scale) {Nebula::circleScale = scale;}
+float NebulaMgr::getNebulaCircleScale(void) const {return Nebula::circleScale;}
+void NebulaMgr::setFlagBright(bool b) {Nebula::flagBright = b;}
+bool NebulaMgr::getFlagBright(void) const {return Nebula::flagBright;}
+
+
+NebulaMgr::NebulaMgr(void) : displayNoTexture(false) {
 	nebZones = new vector<Nebula*>[nebGrid.getNbPoints()];
 }
 
@@ -142,7 +153,7 @@ void NebulaMgr::draw(Projector* prj, const Navigator * nav, ToneReproductor* eye
 }
 
 // search by name
-StelObject * NebulaMgr::search(const string& name)
+StelObject NebulaMgr::search(const string& name)
 {
 
 	string uname = name;
@@ -196,7 +207,7 @@ StelObject * NebulaMgr::search(const string& name)
 
 
 // Look for a nebulae by XYZ coords
-StelObject * NebulaMgr::search(Vec3f Pos)
+StelObject NebulaMgr::search(Vec3f Pos)
 {
 	Pos.normalize();
 	vector<Nebula *>::iterator iter;
@@ -218,14 +229,14 @@ StelObject * NebulaMgr::search(Vec3f Pos)
 }
 
 // Return a stl vector containing the nebulas located inside the lim_fov circle around position v
-vector<StelObject*> NebulaMgr::search_around(Vec3d v, double lim_fov)
+vector<StelObject> NebulaMgr::search_around(Vec3d v, double lim_fov) const
 {
-	vector<StelObject*> result;
+	vector<StelObject> result;
 	v.normalize();
 	double cos_lim_fov = cos(lim_fov * M_PI/180.);
 	static Vec3d equPos;
 
-	vector<Nebula*>::iterator iter = neb_array.begin();
+	vector<Nebula*>::const_iterator iter = neb_array.begin();
 	while (iter != neb_array.end())
 	{
 		equPos = (*iter)->XYZ;
@@ -242,7 +253,7 @@ vector<StelObject*> NebulaMgr::search_around(Vec3d v, double lim_fov)
 	return result;
 }
 
-StelObject * NebulaMgr::searchM(unsigned int M)
+Nebula *NebulaMgr::searchM(unsigned int M)
 {
 	vector<Nebula *>::iterator iter;
 	for(iter=neb_array.begin();iter!=neb_array.end();iter++)
@@ -253,7 +264,7 @@ StelObject * NebulaMgr::searchM(unsigned int M)
 	return NULL;
 }
 
-StelObject * NebulaMgr::searchNGC(unsigned int NGC)
+Nebula *NebulaMgr::searchNGC(unsigned int NGC)
 {
 	vector<Nebula *>::iterator iter;
 	for(iter=neb_array.begin();iter!=neb_array.end();iter++)
@@ -264,7 +275,7 @@ StelObject * NebulaMgr::searchNGC(unsigned int NGC)
 	return NULL;
 }
 
-StelObject * NebulaMgr::searchIC(unsigned int IC)
+Nebula *NebulaMgr::searchIC(unsigned int IC)
 {
 	vector<Nebula *>::iterator iter;
 	for(iter=neb_array.begin();iter!=neb_array.end();iter++)
@@ -275,7 +286,7 @@ StelObject * NebulaMgr::searchIC(unsigned int IC)
 	return NULL;
 }
 
-/*StelObject * NebulaMgr::searchUGC(unsigned int UGC)
+/*StelObject NebulaMgr::searchUGC(unsigned int UGC)
 {
 	vector<Nebula *>::iterator iter;
 	for(iter=neb_array.begin();iter!=neb_array.end();iter++)
@@ -485,7 +496,7 @@ void NebulaMgr::translateNames(Translator& trans)
 
 
 //! Return the matching Nebula object's pointer if exists or NULL
-Nebula* NebulaMgr::searchByNameI18n(const wstring& nameI18n) const
+StelObject NebulaMgr::searchByNameI18n(const wstring& nameI18n) const
 {
 	wstring objw = nameI18n;
 	transform(objw.begin(), objw.end(), objw.begin(), ::toupper);

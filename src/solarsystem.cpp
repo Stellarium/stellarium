@@ -462,7 +462,7 @@ Planet* SolarSystem::searchByEnglishName(string planetEnglishName) const
 	return NULL;
 }
 
-Planet* SolarSystem::searchByNamesI18(wstring planetNameI18) const
+StelObject SolarSystem::searchByNamesI18(wstring planetNameI18) const
 {
 
 	// side effect - bad?
@@ -479,7 +479,7 @@ Planet* SolarSystem::searchByNamesI18(wstring planetNameI18) const
 }
 
 // Search if any Planet is close to position given in earth equatorial position and return the distance
-Planet* SolarSystem::search(Vec3d pos, const Navigator * nav,
+StelObject SolarSystem::search(Vec3d pos, const Navigator * nav,
                             const Projector * prj) const
 {
 	pos.normalize();
@@ -510,12 +510,12 @@ Planet* SolarSystem::search(Vec3d pos, const Navigator * nav,
 }
 
 // Return a stl vector containing the planets located inside the lim_fov circle around position v
-vector<StelObject*> SolarSystem::search_around(Vec3d v,
-                                               double lim_fov,
-                                               const Navigator * nav,
-                                               const Projector * prj) const
+vector<StelObject> SolarSystem::search_around(Vec3d v,
+                                              double lim_fov,
+                                              const Navigator * nav,
+                                              const Projector * prj) const
 {
-	vector<StelObject*> result;
+	vector<StelObject> result;
 	v.normalize();
 	double cos_lim_fov = cos(lim_fov * M_PI/180.);
 	static Vec3d equPos;
@@ -631,7 +631,7 @@ bool SolarSystem::getFlagHints(void) const
 void SolarSystem::setFlagOrbits(bool b)
 {
 	flagOrbits = b;
-	if (!b || selected == NULL || selected->getEnglishName() == "Sun")
+	if (!b || !selected || selected == StelObject(sun))
 	{
 		vector<Planet*>::iterator iter;
 		for( iter = system_planets.begin(); iter < system_planets.end(); iter++ )
@@ -641,20 +641,23 @@ void SolarSystem::setFlagOrbits(bool b)
 	}
 	else
 	{
-		// if a Planet is selected and orbits are on, fade out non-selected ones
+		// if a Planet is selected and orbits are on,
+        // fade out non-selected ones
 		vector<Planet*>::iterator iter;
-		for( iter = system_planets.begin(); iter < system_planets.end(); iter++ )
+		for (iter = system_planets.begin();
+             iter != system_planets.end(); iter++ )
 		{
-			if((*iter)!=selected) (*iter)->setFlagOrbits(false);
-			else (*iter)->setFlagOrbits(b);
+            if (selected == (*iter)) (*iter)->setFlagOrbits(b);
+            else (*iter)->setFlagOrbits(false);
 		}		
 	}
 }
 
 
-void SolarSystem::setSelected(Planet * p)
+void SolarSystem::setSelected(const StelObject &obj)
 {
-	selected = p;
+    if (obj.get_type() == STEL_OBJECT_PLANET) selected = obj;
+    else selected = StelObject();
 	// Undraw other objects hints, orbit, trails etc..
 	setFlagHints(getFlagHints());
 	setFlagOrbits(getFlagOrbits());

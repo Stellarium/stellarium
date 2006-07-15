@@ -172,6 +172,11 @@ double Planet::get_satellites_fov(const Navigator * nav) const
 	return -1.;
 }
 
+double Planet::get_parent_satellites_fov(const Navigator *nav) const {
+  if (parent && parent->parent) return parent->get_satellites_fov(nav);
+  return -1.0;
+}
+
 // Set the orbital elements
 void Planet::set_rotation_elements(float _period, float _offset, double _epoch, float _obliquity, float _ascendingNode, float _precessionRate, double _sidereal_period )
 {

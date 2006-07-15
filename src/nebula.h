@@ -20,7 +20,7 @@
 #ifndef _NEBULA_H_
 #define _NEBULA_H_
 
-#include "stel_object.h"
+#include "stel_object_base.h"
 #include "stellarium.h"
 #include "projector.h"
 #include "navigator.h"
@@ -48,23 +48,23 @@ PD Photographic plate defect
 */
 
 
-class Nebula : public StelObject
+class Nebula : public StelObjectBase
 {
 friend class NebulaMgr;
 public:
 	enum nebula_type { NEB_GX, NEB_OC, NEB_GC, NEB_N, NEB_PN, NEB_DN, NEB_IG, NEB_CN, NEB_UNKNOWN };
 
     Nebula();
-    virtual ~Nebula();
+    ~Nebula();
 
-	virtual wstring getInfoString(const Navigator * nav) const;
-	virtual wstring getShortInfoString(const Navigator * nav = NULL) const;
-	virtual STEL_OBJECT_TYPE get_type(void) const {return STEL_OBJECT_NEBULA;}
+	wstring getInfoString(const Navigator * nav) const;
+	wstring getShortInfoString(const Navigator * nav = NULL) const;
+	STEL_OBJECT_TYPE get_type(void) const {return STEL_OBJECT_NEBULA;}
 	Vec3d get_earth_equ_pos(const Navigator *nav) const {return nav->j2000_to_earth_equ(XYZ);}
 	// observer centered J2000 coordinates
 	Vec3d getObsJ2000Pos(const Navigator *nav) const {return XYZ;}
-	virtual double get_close_fov(const Navigator * nav = NULL) const;
-	virtual float get_mag(const Navigator * nav = NULL) const {return mag;}
+	double get_close_fov(const Navigator * nav = NULL) const;
+	float get_mag(const Navigator * nav = NULL) const {return mag;}
 
 	void setLabelColor(const Vec3f& v) {label_color = v;}
 	void setCircleColor(const Vec3f& v) {circle_color = v;}
@@ -86,8 +86,8 @@ public:
 	
 protected:
 	// Return the radius of a circle containing the object on screen
-	virtual float get_on_screen_size(const Projector* prj,
-	                                 const Navigator * nav = NULL)
+	float get_on_screen_size(const Projector* prj,
+	                         const Navigator * nav = NULL)
 	  {return angular_size * (180./M_PI)
 	                       * (prj->getViewportHeight()/prj->get_fov());}
 

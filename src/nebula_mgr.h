@@ -21,14 +21,16 @@
 #define _NEBULA_MGR_H_
 
 #include <vector>
-#include "nebula.h"
-#include "s_font.h"
-#include "loadingbar.h"
+#include "stel_object.h"
 #include "fader.h"
-#include "translator.h"
 #include "grid.h"
 
 using namespace std;
+
+class Nebula;
+class LoadingBar;
+class Translator;
+class ToneReproductor;
 
 class NebulaMgr  
 {
@@ -43,37 +45,37 @@ public:
 	void draw(Projector *prj, const Navigator *nav, ToneReproductor *eye); 
 	void update(int delta_time) {hintsFader.update(delta_time); flagShow.update(delta_time);}
 	
-	StelObject *search(const string& name);  // search by name M83, NGC 1123, IC 1234
-	StelObject *search(Vec3f Pos);    // Search the Nebulae by position
+	StelObject search(const string& name);  // search by name M83, NGC 1123, IC 1234
+	StelObject search(Vec3f Pos);    // Search the Nebulae by position
 	
-	void setNebulaCircleScale(float scale) {Nebula::circleScale = scale;} 	
-	float getNebulaCircleScale(void) {return Nebula::circleScale;} 
+	void setNebulaCircleScale(float scale);
+	float getNebulaCircleScale(void) const;
 	
 	void setHintsFadeDuration(float duration) {hintsFader.set_duration((int) (duration * 1000.f));}
 	
 	void setFlagHints(bool b) {hintsFader=b;}
-	bool getFlagHints() {return hintsFader;}
+	bool getFlagHints(void) const {return hintsFader;}
 	
 	void setFlagShow(bool b) { flagShow = b; }
-	bool getFlagShow() { return flagShow; }
+	bool getFlagShow(void) const { return flagShow; }
 
-	void setLabelColor(const Vec3f& c) {Nebula::label_color = c;}
-	const Vec3f& getLabelColor(void) const {return Nebula::label_color;}
+	void setLabelColor(const Vec3f& c);
+	const Vec3f &getLabelColor(void) const;
 	
-	void setCircleColor(const Vec3f& c) {Nebula::circle_color = c;}
-	const Vec3f& getCircleColor(void) const {return Nebula::circle_color;}
+	void setCircleColor(const Vec3f& c);
+	const Vec3f &getCircleColor(void) const;
 
 	// Return a stl vector containing the nebulas located inside the lim_fov circle around position v
-	vector<StelObject*> search_around(Vec3d v, double lim_fov);
+	vector<StelObject> search_around(Vec3d v, double lim_fov) const;
 	
 	//! @brief Update i18 names from english names according to passed translator
 	//! The translation is done using gettext with translated strings defined in translations.h
 	void translateNames(Translator& trans);
 	
 	//! Set flag for displaying Nebulae as bright
-	void setFlagBright(bool b) {Nebula::flagBright = b;}
+	void setFlagBright(bool b);
 	//! Get flag for displaying Nebulae as bright
-	bool getFlagBright(void) const {return Nebula::flagBright;}	
+	bool getFlagBright(void) const;
 	
 	//! Set flag for displaying Nebulae even without textures
 	void setFlagDisplayNoTexture(bool b) {displayNoTexture = b;}
@@ -83,7 +85,7 @@ public:
 	//! Set maximum magnitude at which nebulae hints are displayed
 	void setMaxMagHints(float f) {maxMagHints = f;}
 	//! Get maximum magnitude at which nebulae hints are displayed
-	float getMaxMagHints(void) {return maxMagHints;}
+	float getMaxMagHints(void) const {return maxMagHints;}
 	
 	//! Find and return the list of at most maxNbItem objects auto-completing the passed object I18n name
 	//! @param objPrefix the case insensitive first letters of the searched object
@@ -93,12 +95,12 @@ public:
 	
 	//! Return the matching Nebula object's pointer if exists or NULL
 	//! @param nameI18n The case sensistive nebula name or NGC M catalog name : format can be M31, M 31, NGC31 NGC 31
-	Nebula* searchByNameI18n(const wstring& nameI18n) const;	
+	StelObject searchByNameI18n(const wstring& nameI18n) const;	
 private:
-	StelObject *searchM(unsigned int M);
-	StelObject *searchNGC(unsigned int NGC);
-	StelObject *searchIC(unsigned int IC);
-	/*StelObject *searchUGC(unsigned int UGC);*/
+	Nebula *searchM(unsigned int M);
+	Nebula *searchNGC(unsigned int NGC);
+	Nebula *searchIC(unsigned int IC);
+	/*Nebula *searchUGC(unsigned int UGC);*/
 	bool loadNGC(const string& fileName, LoadingBar& lb);
 	bool loadNGCNames(const string& fileName);
 	bool loadTextures(const string& fileName, LoadingBar& lb);

@@ -25,6 +25,7 @@
 
 #include "stellarium.h"
 #include "planet.h"
+#include "stel_object.h"
 #include "orbit.h"
 #include "translator.h"
 
@@ -67,20 +68,20 @@ public:
     void computeTransMatrices(double date,const Planet *home_planet);
 
 	// Search if any Planet is close to position given in earth equatorial position.
-	Planet* search(Vec3d, const Navigator * nav, const Projector * prj) const;
+	StelObject search(Vec3d, const Navigator * nav, const Projector * prj) const;
 
 	// Return a stl vector containing the planets located inside the lim_fov circle around position v
-	vector<StelObject*> search_around(Vec3d v,
-                                      double lim_fov,
-                                      const Navigator * nav,
-                                      const Projector * prj) const;
+	vector<StelObject> search_around(Vec3d v,
+                                     double lim_fov,
+                                     const Navigator * nav,
+                                     const Projector * prj) const;
 
 	//! Return the matching planet pointer if exists or NULL
 	Planet* searchByEnglishName(string planetEnglishName) const;
 	
 	//! Return the matching planet pointer if exists or NULL
 	//! @param planetNameI18n The case sensistive translated planet name
-	Planet* searchByNamesI18(wstring planetNameI18n) const;
+	StelObject searchByNamesI18(wstring planetNameI18n) const;
 	
 	Planet* getSun(void) const {return sun;}
 	Planet* getEarth(void) const {return earth;}
@@ -137,10 +138,10 @@ public:
 	void setSelected(const string& englishName) {setSelected(searchByEnglishName(englishName));}
 	
 	//! Set selected object from its pointer
-	void setSelected(Planet * p);
+	void setSelected(const StelObject &obj);
 	
 	//! Get selected object's pointer
-	Planet* getSelected(void) const {return selected;}
+	StelObject getSelected(void) const {return selected;}
 	
 private:
 	Planet* sun;
@@ -148,7 +149,7 @@ private:
 	Planet* earth;
 	
 	//! The currently selected planet
-	Planet* selected;
+	StelObject selected;
 
 	// solar system related settings
 	float object_scale;  // should be kept synchronized with star scale...

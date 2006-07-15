@@ -17,8 +17,8 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#ifndef _STEL_OBJECT_H_
-#define _STEL_OBJECT_H_
+#ifndef _STEL_OBJECT_BASE_H_
+#define _STEL_OBJECT_BASE_H_
 
 #include "vecmath.h"
 #include "stel_object_type.h"
@@ -30,58 +30,60 @@ using namespace std;
 class Navigator;
 class Projector;
 class s_texture;
-class StelObjectBase;
 
-class StelObject {
+class StelObjectBase {
 public:
-  StelObject(void);
-  ~StelObject(void);
-  StelObject(StelObjectBase *r);
-  StelObject(const StelObject &o);
-  const StelObject &operator=(const StelObject &o);
-  operator bool(void) const;
-  bool operator==(const StelObject &o) const;
+  virtual ~StelObjectBase(void) {}
+  virtual void retain(void) {}
+  virtual void release(void) {}
 
-  void update(void);
+  virtual void update(void) {}
   void draw_pointer(int delta_time,
-                    const Projector *prj,
+                    const Projector* prj,
                     const Navigator *nav);
 
   //! Write I18n information about the object in wstring. 
-  wstring getInfoString(const Navigator *nav) const;
+  virtual wstring getInfoString(const Navigator *nav) const = 0;
 
   //! The returned wstring can typically be used for object labeling in the sky
-  wstring getShortInfoString(const Navigator *nav) const;
+  virtual wstring getShortInfoString(const Navigator *nav) const = 0;
 
   //! Return object's type
-  STEL_OBJECT_TYPE get_type(void) const;
+  virtual STEL_OBJECT_TYPE get_type(void) const = 0;
 
   //! Get position in earth equatorial frame
-  Vec3d get_earth_equ_pos(const Navigator *nav) const;
+  virtual Vec3d get_earth_equ_pos(const Navigator *nav) const = 0;
 
   //! observer centered J2000 coordinates
-  Vec3d getObsJ2000Pos(const Navigator *nav) const;
+  virtual Vec3d getObsJ2000Pos(const Navigator *nav) const = 0;
 
   //! Return object's magnitude
-  float get_mag(const Navigator *nav) const;
+  virtual float get_mag(const Navigator *nav) const = 0;
 
   //! Get object main color, used to display infos
-  Vec3f get_RGB(void) const;
+  virtual Vec3f get_RGB(void) const {return Vec3f(1.,1.,1.);}
 
-  StelObject getBrightestStarInConstellation(void) const;
+  virtual class StelObject getBrightestStarInConstellation(void) const;
 
-    // only needed for AutoZoomIn/Out, whatever this is:
   //! Return the best FOV in degree to use for a close view of the object
-  double get_close_fov(const Navigator *nav) const;
-  //! Return the best FOV in degree to use for a global view
-  //! of the object satellite system (if there are satellites)
-  double get_satellites_fov(const Navigator *nav) const;
-  double get_parent_satellites_fov(const Navigator *nav) const;
+  virtual double get_close_fov(const Navigator *nav) const {return 10.;}
+
+  //! Return the best FOV in degree to use for a global view of the object satellite system (if there are satellites)
+  virtual double get_satellites_fov(const Navigator *nav) const {return -1.;}
+  virtual double get_parent_satellites_fov(const Navigator *nav) const
+    {return -1.;}
 
   static void init_textures(void);
   static void delete_textures(void);
+protected:
+  virtual float get_on_screen_size(const Projector *prj,
+                                   const Navigator *nav = NULL) {return 0;}
 private:
-  StelObjectBase *rep;
+  static int local_time;
+  static s_texture * pointer_star;
+  static s_texture * pointer_planet;
+  static s_texture * pointer_nebula;
+  static s_texture * pointer_telescope;
 };
 
 #endif
