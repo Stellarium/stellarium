@@ -34,6 +34,8 @@
 
 using namespace std;
 
+class Projector;
+
 class Atmosphere
 {
 public:
