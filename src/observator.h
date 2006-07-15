@@ -21,6 +21,7 @@
 #define _OBSERVATOR_H_
 
 #include "init_parser.h"
+#include "vecmath.h"
 
 class Observator
 {
