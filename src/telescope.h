@@ -20,12 +20,12 @@
 #ifndef _TELESCOPE_H_
 #define _TELESCOPE_H_
 
-#include "stel_object.h"
+#include "stel_object_base.h"
 #include "navigator.h"
 
 long long int GetNow(void);
 
-class Telescope : public StelObject {
+class Telescope : public StelObjectBase {
 public:
   static Telescope *create(const string &url);
   virtual ~Telescope(void) {}

@@ -21,7 +21,7 @@
 #include <algorithm>
 #include "constellation.h"
 #include "hip_star_mgr.h"
-#include "hip_star.h"
+#include "navigator.h"
 
 bool Constellation::gravityLabel = false;
 
@@ -58,7 +58,7 @@ bool Constellation::read(const string& record, HipStarMgr * _VouteCeleste)
 	// make short_name uppercase for case insensitive searches
 	transform(abbreviation.begin(),abbreviation.end(), abbreviation.begin(), ::toupper);
 
-    asterism = new HipStar*[nb_segments*2];
+    asterism = new StelObject[nb_segments*2];
     for (unsigned int i=0;i<nb_segments*2;++i)
     {
 		HP = 0;
@@ -80,7 +80,7 @@ bool Constellation::read(const string& record, HipStarMgr * _VouteCeleste)
 
     for(unsigned int ii=0;ii<nb_segments*2;++ii)
     {
-		XYZname+=(*asterism[ii]).XYZ;
+		XYZname+= asterism[ii].getObsJ2000Pos(0);
     }
     XYZname*=1./(nb_segments*2);
 
@@ -102,9 +102,11 @@ void Constellation::draw_optim(Projector* prj) const
 
 	Vec3d star1;
 	Vec3d star2;
-    for(unsigned int i=0;i<nb_segments;++i)
+    for (unsigned int i=0;i<nb_segments;++i)
     {
-		if(prj->project_j2000_line_check(asterism[2*i]->XYZ,star1,asterism[2*i+1]->XYZ,star2) ) 
+		if (prj->project_j2000_line_check(
+                  asterism[2*i].getObsJ2000Pos(0),star1,
+                  asterism[2*i+1].getObsJ2000Pos(0),star2))
 		{
 			glBegin(GL_LINES);
 			glVertex2f(star1[0],star1[1]);
@@ -207,7 +209,7 @@ void Constellation::draw_art(Projector* prj, Navigator* nav) const
 	glDisable(GL_CULL_FACE);
 }
 
-const Constellation* Constellation::is_star_in(const HipStar * s) const
+const Constellation* Constellation::is_star_in(const StelObject &s) const
 {
     for(unsigned int i=0;i<nb_segments*2;++i)
     {
@@ -264,16 +266,18 @@ void Constellation::draw_boundary_optim(Projector* prj) const
 	}
 }
 
-HipStar* Constellation::getBrightestStar(void) const
+StelObject Constellation::getBrightestStarInConstellation(void) const
 {
 	float maxMag = 99.f;
-	HipStar * brightest = NULL;
-	for(unsigned int i=0;i<nb_segments;++i)
+	StelObject brightest;
+	  // maybe the brightest star has always odd index,
+	  // so check all segment endpoints:
+	for (int i=2*nb_segments-1;i>=0;i--)
     {
-		const float Mag = asterism[2*i]->get_mag();
+		const float Mag = asterism[i].get_mag(0);
 		if (Mag < maxMag)
 		{
-			brightest = asterism[2*i];
+			brightest = asterism[i];
 			maxMag = Mag;
 		}
 	}

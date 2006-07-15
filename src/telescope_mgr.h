@@ -50,9 +50,9 @@ public:
   void set_names_fade_duration(float duration)
     {name_fader.set_duration((int) (duration * 1000.f));}
    
-  vector<StelObject*> search_around(Vec3d v,double lim_fov) const;
+  vector<StelObject> search_around(Vec3d v,double lim_fov) const;
   
-  StelObject *searchByNameI18n(const wstring &nameI18n) const;
+  StelObject searchByNameI18n(const wstring &nameI18n) const;
   
   std::vector<wstring> listMatchingObjectsI18n(const wstring& objPrefix,
                                                unsigned int maxNbItem) const;

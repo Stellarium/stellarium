@@ -44,7 +44,7 @@ Navigator::~Navigator()
 {}
 
 ////////////////////////////////////////////////////////////////////////////////
-void Navigator::update_vision_vector(int delta_time, StelObject* selected)
+void Navigator::update_vision_vector(int delta_time,const StelObject &selected)
 {
 	if (flag_auto_move)
 	{
@@ -53,7 +53,7 @@ void Navigator::update_vision_vector(int delta_time, StelObject* selected)
 		if( zooming_mode == 1 && selected)
 		{
 			// if zooming in, object may be moving so be sure to zoom to latest position
-			move.aim=selected->get_earth_equ_pos(this);
+			move.aim = selected.get_earth_equ_pos(this);
 			move.aim.normalize();
 			move.aim*=2.;
 		}
@@ -83,9 +83,9 @@ void Navigator::update_vision_vector(int delta_time, StelObject* selected)
 				/* could track as moves too, but would need to know if start was actually
 				   a zoomed in view on the object or an extraneous zoom out command
 				   if(move.local_pos) {
-				   move.start=earth_equ_to_local(selected->get_earth_equ_pos(this));
+				   move.start=earth_equ_to_local(selected.get_earth_equ_pos(this));
 				   } else {
-				   move.start=selected->get_earth_equ_pos(this);
+				   move.start=selected.get_earth_equ_pos(this);
 				   }
 				   move.start.normalize();
 				*/
@@ -146,7 +146,7 @@ void Navigator::update_vision_vector(int delta_time, StelObject* selected)
 	{
 		if (flag_traking && selected) // Equatorial vision vector locked on selected object
 		{
-			equ_vision=selected->get_earth_equ_pos(this);
+			equ_vision=selected.get_earth_equ_pos(this);
 			// Recalc local vision vector
 
 			local_vision=earth_equ_to_local(equ_vision);

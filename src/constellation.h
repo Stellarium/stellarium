@@ -21,43 +21,42 @@
 #define _CONSTELLATION_H_
 
 #include "stellarium.h"
+#include "stel_object_base.h"
 #include "stel_object.h"
 #include "stel_utility.h"
 #include "s_font.h"
 #include "fader.h"
 #include <vector>
 
-class HipStar;
 class HipStarMgr;
 
-class Constellation : public StelObject
+class Constellation : public StelObjectBase
 {
     friend class ConstellationMgr;
-public:
-	HipStar* getBrightestStar(void) const;
 private:
     Constellation();
     ~Constellation();
     
     // StelObject method to override
    	//! Write I18n information about the object in wstring. 
-	virtual wstring getInfoString(const Navigator * nav) const {return getNameI18() + L"(" + StelUtility::stringToWstring(getShortName()) + L"°";}
+	wstring getInfoString(const Navigator * nav) const {return getNameI18() + L"(" + StelUtility::stringToWstring(getShortName()) + L"°";}
 	//! The returned wstring can typically be used for object labeling in the sky
-	virtual wstring getShortInfoString(const Navigator * nav) const {return getNameI18();}
+	wstring getShortInfoString(const Navigator * nav) const {return getNameI18();}
 	//! Return object's type
-	virtual STEL_OBJECT_TYPE get_type(void) const {return STEL_OBJECT_CONSTELLATION;}
+	STEL_OBJECT_TYPE get_type(void) const {return STEL_OBJECT_CONSTELLATION;}
 	//! Get position in earth equatorial frame
 	Vec3d get_earth_equ_pos(const Navigator *nav) const {return XYZname;}
 	//! observer centered J2000 coordinates
 	Vec3d getObsJ2000Pos(const Navigator *nav) const {return XYZname;}
 	//! Return object's magnitude
-	virtual float get_mag(const Navigator * nav) const {return 0.;} 
+	float get_mag(const Navigator * nav) const {return 0.;} 
     
     bool read(const string& record, HipStarMgr * _VouteCeleste);
     void draw_name(s_font * constfont, Projector* prj) const;
     void draw_art(Projector* prj, Navigator* nav) const;
     void draw_boundary_optim(Projector* prj) const;
-    const Constellation* is_star_in(const HipStar *) const;
+    const Constellation* is_star_in(const StelObject&) const;
+	StelObject getBrightestStarInConstellation(void) const;
     
     wstring getNameI18(void) const { return nameI18; };
     string getShortName(void) const { return abbreviation; };
@@ -92,7 +91,7 @@ private:
     unsigned int nb_segments;
     
     /** List of stars forming the segments */
-    HipStar ** asterism;
+    StelObject* asterism;
    
 	s_texture* art_tex;
 	Vec3d art_vertex[9];

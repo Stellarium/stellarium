@@ -48,19 +48,19 @@ public:
 	void load_sci_names(const string& sciNameFile);
 	void translateNames(Translator& trans);
 	 
-    HipStar *search(Vec3f Pos) const;  		// Search the star by position
-	HipStar *search(const string&) const;	// Search the star by string (incl catalog prefix)
-	HipStar *searchHP(unsigned int) const;	// Search the star by HP number
+    StelObject search(Vec3f Pos) const;  		// Search the star by position
+	StelObject search(const string&) const;	// Search the star by string (incl catalog prefix)
+	StelObject searchHP(unsigned int) const;	// Search the star by HP number
 	
 	//! Return the matching Stars object's pointer if exists or NULL
 	//! @param nameI18n The case sensistive star common name or HP catalog name (format can be HP1234 or HP 1234) or sci name
-	HipStar *searchByNameI18n(const wstring &nameI18n) const;
+	StelObject searchByNameI18n(const wstring &nameI18n) const;
 	
 	//! Find and return the list of at most maxNbItem objects auto-completing the passed object I18n name
 	vector<wstring> listMatchingObjectsI18n(const wstring& objPrefix, unsigned int maxNbItem) const;
 	
 	// Return a stl vector containing the stars located inside the lim_fov circle around position v
-	vector<StelObject*> search_around(Vec3d v, double lim_fov) const;
+	vector<StelObject> search_around(Vec3d v, double lim_fov) const;
 
 	void setLabelColor(const Vec3f& c);
 	Vec3f getLabelColor(void);
@@ -128,6 +128,7 @@ public:
 
 
 private:
+	HipStar *searchHPprivate(unsigned int) const;
 	//! Draw the stars rendered as GLpoint. This may be faster but it is not so nice
 	void drawPoint(Vec3f equ_vision, ToneReproductor* _eye, Projector* prj);	// Draw all the stars as points
  

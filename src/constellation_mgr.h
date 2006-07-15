@@ -22,12 +22,12 @@
 
 #include <vector>
 
+#include "stel_object.h"
 #include "fader.h"
 #include "loadingbar.h"
 #include "translator.h"
 
 class HipStarMgr;
-class HipStar;
 class Constellation;
 class Projector;
 class Navigator;
@@ -113,15 +113,17 @@ public:
 	
 	//! Define which constellation is selected from its abbreviation
 	void setSelected(const string& abbreviation) {setSelectedConst(findFromAbbreviation(abbreviation));}
+
+	StelObject getSelected(void) const;
 	
 	//! Define which constellation is selected from a star number
-	void setSelected(const HipStar * s) {if (!s) setSelectedConst(NULL); else setSelectedConst(is_star_in(s));}
+	void setSelected(const StelObject &s) {if (!s) setSelectedConst(NULL); else setSelectedConst(is_star_in(s));}
 	
-	unsigned int getFirstSelectedHP(void);  //Tony
+///	unsigned int getFirstSelectedHP(void);  //Tony
 
 	//! Return the matching constellation object's pointer if exists or NULL
 	//! @param nameI18n The case sensistive constellation name
-	Constellation* searchByNameI18n(const wstring& nameI18n) const;	
+	StelObject searchByNameI18n(const wstring& nameI18n) const;	
 
 	//! Find and return the list of at most maxNbItem objects auto-completing the passed object I18n name
 	//! @param objPrefix the case insensitive first letters of the searched object
@@ -136,7 +138,7 @@ private:
 	void drawBoundaries(Projector* prj) const;	
 	void setSelectedConst(Constellation* c);
 
-    Constellation* is_star_in(const HipStar *) const;
+    Constellation* is_star_in(const StelObject &s) const;
     Constellation* findFromAbbreviation(const string& abbreviation) const;		
     vector<Constellation*> asterisms;
     s_font *asterFont;

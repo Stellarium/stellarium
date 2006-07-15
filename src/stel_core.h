@@ -153,7 +153,12 @@ public:
 	void loadObservatory();
 	
 	//! Go to the selected object
-	void gotoSelectedObject(void) {if (selected_object) navigation->move_to(selected_object->get_earth_equ_pos(navigation), auto_move_duration);}
+    void gotoSelectedObject(void) {
+      if (selected_object)
+        navigation->move_to(
+          selected_object.get_earth_equ_pos(navigation),
+          auto_move_duration);
+    }
 	
 	//! Move view in alt/az (or equatorial if in that mode) coordinates
 	void panView(double delta_az, double delta_alt)	{
@@ -228,21 +233,24 @@ public:
 	vector<wstring> listMatchingObjectsI18n(const wstring& objPrefix, unsigned int maxNbItem=5) const;
 	
 	//! Return whether an object is currently selected
-	bool getFlagHasSelected(void) {return selected_object!=NULL;}
+	bool getFlagHasSelected(void) {return selected_object;}
 	
 	//! Deselect selected object if any
 	//! Does not deselect selected constellation
-	void unSelect(void) {selected_object=NULL; //asterisms->setSelected(NULL); 
-		ssystem->setSelected(NULL);}
+    void unSelect(void) {
+      selected_object=NULL;
+      //asterisms->setSelected(NULL); 
+      ssystem->setSelected(StelObject());
+    }
 	
 	//! Set whether a pointer is to be drawn over selected object
 	void setFlagSelectedObjectPointer(bool b) { object_pointer_visibility = b; }
 	
 	//! Get a multiline string describing the currently selected object
-	wstring getSelectedObjectInfo(void) const {if (selected_object==NULL) return L""; else return selected_object->getInfoString(navigation);}
+	wstring getSelectedObjectInfo(void) const {return selected_object.getInfoString(navigation);}
 
 	//! Get a 1 line string briefly describing the currently selected object
-	wstring getSelectedObjectShortInfo(void) const {if (selected_object==NULL) return L""; else return selected_object->getShortInfoString(navigation);}
+	wstring getSelectedObjectShortInfo(void) const {return selected_object.getShortInfoString(navigation);}
 
 	//! Get a color used to display info about the currently selected object
 	Vec3f getSelectedObjectInfoColor(void) const;
@@ -663,16 +671,16 @@ public:
 private:
 	//! Select passed object
 	//! @return true if the object was selected (false if the same was already selected)
-	bool selectObject(StelObject* obj);
+	bool selectObject(const StelObject &obj);
 
 	//! Find any kind of object by the name
-	StelObject *searchByNameI18n(const wstring &name) const;
+	StelObject searchByNameI18n(const wstring &name) const;
 
 	//! Find in a "clever" way an object from its equatorial position
-	StelObject * clever_find(const Vec3d& pos) const;
+	StelObject clever_find(const Vec3d& pos) const;
 	
 	//! Find in a "clever" way an object from its screen position
-	StelObject * clever_find(int x, int y) const;	
+	StelObject clever_find(int x, int y) const;	
 	
 	string baseFontFile;				// The font file used by default during initialization
 
@@ -685,7 +693,7 @@ private:
 	Navigator * navigation;				// Manage all navigation parameters, coordinate transformations etc..
 	Observator * observatory;			// Manage observer position
 	Projector * projection;				// Manage the projection mode and matrix
-	StelObject * selected_object;		// The selected object in stellarium
+	StelObject selected_object;			// The selected object in stellarium
 	class HipStarMgr * hip_stars;		// Manage the hipparcos stars
 	ConstellationMgr * asterisms;		// Manage constellations (boundaries, names etc..)
 	NebulaMgr * nebulas;				// Manage the nebulas

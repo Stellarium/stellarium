@@ -21,7 +21,6 @@
 #define _NAVIGATOR_H_
 
 #include "stellarium.h"
-#include "stel_object.h"
 #include "observator.h"
 #include "vecmath.h"
 
@@ -56,7 +55,7 @@ public:
 
 	void update_time(int delta_time);
 	void update_transform_matrices(void);
-	void update_vision_vector(int delta_time, StelObject* selected);
+	void update_vision_vector(int delta_time,const StelObject &selected);
 
 	// Update the modelview matrices
 	void update_model_view_mat(void);
