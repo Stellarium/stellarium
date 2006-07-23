@@ -395,8 +395,8 @@ private:
 	// 7. Administration
 	s_tui::ActionConfirm_item* tui_admin_loaddefault;
 	s_tui::ActionConfirm_item* tui_admin_savedefault;
-	s_tui::Action_item* tui_admin_shutdown;
-	s_tui::Action_item* tui_admin_updateme;
+	s_tui::ActionConfirm_item* tui_admin_shutdown;
+	s_tui::ActionConfirm_item* tui_admin_updateme;
 	s_tui::MultiSet_item<wstring>* tui_admin_setlocale;
 
 	// Tui Callbacks

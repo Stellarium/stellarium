@@ -308,9 +308,9 @@ void StelUI::init_tui(void)
 	tui_admin_loaddefault->set_OnChangeCallback(callback<void>(this, &StelUI::tui_cb_admin_load_default));
 	tui_admin_savedefault = new s_tui::ActionConfirm_item(wstring(L"7.2 ") );
 	tui_admin_savedefault->set_OnChangeCallback(callback<void>(this, &StelUI::tui_cb_admin_save_default));
-	tui_admin_shutdown = new s_tui::Action_item(wstring(L"7.3 ") );
+	tui_admin_shutdown = new s_tui::ActionConfirm_item(wstring(L"7.3 ") );
 	tui_admin_shutdown->set_OnChangeCallback(callback<void>(this, &StelUI::tui_cb_admin_shutdown));
-	tui_admin_updateme = new s_tui::Action_item(wstring(L"7.4 ") );
+	tui_admin_updateme = new s_tui::ActionConfirm_item(wstring(L"7.4 ") );
 	tui_admin_updateme->set_OnChangeCallback(callback<void>(this, &StelUI::tui_cb_admin_updateme));
 	tui_menu_administration->addComponent(tui_admin_loaddefault);
 	tui_menu_administration->addComponent(tui_admin_savedefault);
