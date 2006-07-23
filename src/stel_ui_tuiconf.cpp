@@ -308,13 +308,16 @@ void StelUI::init_tui(void)
 	tui_admin_loaddefault->set_OnChangeCallback(callback<void>(this, &StelUI::tui_cb_admin_load_default));
 	tui_admin_savedefault = new s_tui::ActionConfirm_item(wstring(L"7.2 ") );
 	tui_admin_savedefault->set_OnChangeCallback(callback<void>(this, &StelUI::tui_cb_admin_save_default));
-	tui_admin_updateme = new s_tui::Action_item(wstring(L"7.3 ") );
+	tui_admin_shutdown = new s_tui::Action_item(wstring(L"7.3 ") );
+	tui_admin_shutdown->set_OnChangeCallback(callback<void>(this, &StelUI::tui_cb_admin_shutdown));
+	tui_admin_updateme = new s_tui::Action_item(wstring(L"7.4 ") );
 	tui_admin_updateme->set_OnChangeCallback(callback<void>(this, &StelUI::tui_cb_admin_updateme));
 	tui_menu_administration->addComponent(tui_admin_loaddefault);
 	tui_menu_administration->addComponent(tui_admin_savedefault);
+	tui_menu_administration->addComponent(tui_admin_shutdown);
 	tui_menu_administration->addComponent(tui_admin_updateme);
 
-	tui_admin_setlocale = new s_tui::MultiSet_item<wstring>(L"7.4 ");
+	tui_admin_setlocale = new s_tui::MultiSet_item<wstring>(L"7.5 ");
 	tui_admin_setlocale->addItemList(StelUtility::stringToWstring(Translator::getAvailableLanguagesCodes(core->getLocaleDir())));
 	tui_admin_setlocale->set_OnChangeCallback(callback<void>(this, &StelUI::tui_cb_admin_set_locale));
 	tui_menu_administration->addComponent(tui_admin_setlocale);
@@ -425,8 +428,9 @@ void StelUI::localizeTui(void)
 	// 8. Administration
 	tui_admin_loaddefault->setLabel(wstring(L"8.1 ") + _("Load Default Configuration: "));
 	tui_admin_savedefault->setLabel(wstring(L"8.2 ") + _("Save Current Configuration as Default: "));
-	tui_admin_updateme->setLabel(wstring(L"8.3 ") + _("Update me via Internet: "));
-	tui_admin_setlocale->setLabel(wstring(L"8.4 ") + _("Set UI Locale: "));
+	tui_admin_shutdown->setLabel(wstring(L"8.3 ") + _("Shut Down: "));
+	tui_admin_updateme->setLabel(wstring(L"8.4 ") + _("Update me via Internet: "));
+	tui_admin_setlocale->setLabel(wstring(L"8.5 ") + _("Set UI Locale: "));
 }
 
 
@@ -586,6 +590,14 @@ void StelUI::tui_cb_admin_save_default(void)
 void StelUI::tui_cb_admin_updateme(void)
 {
 	system( ( core->getDataDir() + "script_internet_update" ).c_str() );
+}
+
+
+// Launch script for shutdown, then exit
+void StelUI::tui_cb_admin_shutdown(void)
+{
+	system( ( core->getDataDir() + "script_shutdown" ).c_str() );
+	app->quit();
 }
 
 // Set a new landscape skin
