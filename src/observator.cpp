@@ -153,6 +153,9 @@ void Observator::setConf(InitParser & conf, const string& section) const
 
 	conf.set_int(section + ":altitude", altitude);
 	conf.set_str(section + ":landscape_name", landscape_name);
+
+	// TODO: clear out old timezone settings from this section
+	// if still in loaded conf?  Potential for confusion.
 }
 
 
