@@ -235,11 +235,7 @@ void Constellation::draw_boundary_optim(Projector* prj) const
 	glEnable(GL_BLEND);	
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
 
-	// TODO - Fix this so that works like constellation art fade with selections
-	if(singleSelected) 	
-		glColor4f(boundaryColor[0], boundaryColor[1], boundaryColor[2], 1);  
-	else
-		glColor4f(boundaryColor[0], boundaryColor[1], boundaryColor[2], boundary_fader.getInterstate());
+	glColor4f(boundaryColor[0], boundaryColor[1], boundaryColor[2], boundary_fader.getInterstate());
 
 	unsigned int i, j, size;
 	Vec3d pt1, pt2;
