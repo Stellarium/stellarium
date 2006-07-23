@@ -778,7 +778,7 @@ void StelUI::draw(void)
 	// draw first as windows should cover these up
 	// also problem after 2dfullscreen with square viewport
 	if (FlagShowGravityUi) draw_gravity_ui();
-	if (FlagShowTuiMenu) draw_tui();
+	if (getFlagShowTuiMenu()) draw_tui();
 
 	// Special cool text transparency mode
 	glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
@@ -973,7 +973,7 @@ int StelUI::handle_keys(SDLKey key, SDLMod mod, Uint16 unicode, S_GUI_VALUE stat
 			{  // ctrl-c
 				// TODO: should double check with user here...
 				app->commander->execute_command( "script action end");
-				if(key==SDLK_m) FlagShowTuiMenu = true;
+				if(key==SDLK_m) setFlagShowTuiMenu(true);
 			}
 			// TODO n is bad key if ui allowed
 			else if(key==SDLK_GREATER || key==SDLK_n)
@@ -1260,7 +1260,7 @@ int StelUI::handle_keys(SDLKey key, SDLMod mod, Uint16 unicode, S_GUI_VALUE stat
             app->commander->execute_command( "date relative -1");
             break;
           case SDLK_m:
-            if (FlagEnableTuiMenu) FlagShowTuiMenu = true;  // not recorded
+            if (FlagEnableTuiMenu) setFlagShowTuiMenu(true);  // not recorded
             break;
           case SDLK_o:
             app->commander->execute_command( "flag moon_scaled toggle");
@@ -1409,4 +1409,15 @@ void StelUI::setColorScheme(const string& skinFile, const string& section)
 	s_color GuiTextColor		= StelUtility::str_to_vec3f(conf.get_str(section, "gui_text_color", "0.7,0.8,0.9"));
 	
 	desktop->setColorScheme(GuiBaseColor, GuiTextColor);
+}
+
+
+void StelUI::setFlagShowTuiMenu(const bool flag) {
+
+	if(flag && !FlagShowTuiMenu) {
+		tuiUpdateIndependentWidgets();
+	}
+
+	FlagShowTuiMenu = flag;
+
 }

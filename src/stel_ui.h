@@ -65,18 +65,24 @@ public:
 	int handle_keys_tui(Uint16 key, s_tui::S_TUI_VALUE state);
 	// Update all the tui widgets with values taken from the core parameters
 	void tui_update_widgets(void);
+	void tuiUpdateIndependentWidgets(void); // For widgets that aren't tied directly to current settings
 	void show_message(wstring _message, int _time_out=0);
     void setStarAutoComplete(vector<wstring> _autoComplete ) { star_edit->setAutoCompleteOptions(_autoComplete);}
     void setTitleObservatoryName(const wstring& name);
     wstring getTitleWithAltitude(void);
     bool isInitialised(void) { return initialised; }
-    
+
     void setColorScheme(const string& skinFile, const string& section);
 	double getMouseCursorTimeout() { return MouseCursorTimeout; }
 
 	bool getFlagShowGravityUi() { return FlagShowGravityUi; }
 	bool getFlagShowTuiDateTime() { return FlagShowTuiDateTime; }
 	bool getFlagShowTuiShortObjInfo() { return FlagShowTuiShortObjInfo; }
+
+	// Whether tui menu is currently displayed
+	void setFlagShowTuiMenu(const bool flag);
+	bool getFlagShowTuiMenu() { return FlagShowTuiMenu; }
+
 
 private:
 	StelCore * core;		// The main core can be accessed because StelUI is a friend class (TODO fix that)

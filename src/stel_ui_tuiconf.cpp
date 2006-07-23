@@ -122,10 +122,12 @@ void StelUI::init_tui(void)
 	tui_location_altitude = new s_tui::Integer_item(-500, 10000, 0,wstring(L"1.3 ") );
 	tui_location_altitude->set_OnChangeCallback(callback<void>(this, &StelUI::tui_cb_setlocation));
 
-	// experimental
+	// Home planet only changed if hit enter to accept because
+	// switching planet instantaneously as select is hard on a planetarium audience
 	tui_location_planet = new s_tui::MultiSet2_item<wstring>(wstring(L"1.4 ") );
 	tui_location_planet->addItemList(core->getPlanetHashString());
-	tui_location_planet->set_OnChangeCallback(callback<void>(this, &StelUI::tui_cb_location_change_planet));
+	//	tui_location_planet->set_OnChangeCallback(callback<void>(this, &StelUI::tui_cb_location_change_planet));
+	tui_location_planet->set_OnTriggerCallback(callback<void>(this, &StelUI::tui_cb_location_change_planet));
 
 	tui_menu_location->addComponent(tui_location_latitude);
 	tui_menu_location->addComponent(tui_location_longitude);
@@ -478,7 +480,7 @@ void StelUI::tui_update_widgets(void)
 	tui_location_latitude->setValue(core->getObservatory().get_latitude());
 	tui_location_longitude->setValue(core->getObservatory().get_longitude());
 	tui_location_altitude->setValue(core->getObservatory().get_altitude());
-	tui_location_planet->setValue(StelUtility::stringToWstring(core->getObservatory().getHomePlanetEnglishName()));
+
 
 	// 2. Date & Time
 	tui_time_skytime->setJDay(core->getJDay() + app->get_GMT_shift(core->getJDay())*JD_HOUR);
@@ -569,6 +571,7 @@ void StelUI::tui_cb_settimedisplayformat(void)
 void StelUI::tui_cb_admin_load_default(void)
 {
 	app->init();
+	tuiUpdateIndependentWidgets(); 
 }
 
 // Save to default configuration
@@ -761,7 +764,20 @@ void StelUI::tui_cb_change_color()
 void StelUI::tui_cb_location_change_planet()
 {
 	//	core->setHomePlanet( StelUtility::wstringToString( tui_location_planet->getCurrent() ) );
+	//	wcout << "set home planet " << tui_location_planet->getCurrent() << endl;
 	app->commander->execute_command(string("set home_planet \"") + 
 									StelUtility::wstringToString( tui_location_planet->getCurrent() ) +
 									"\"");
+}
+
+// Update widgets that don't always match current settings with current settings
+void StelUI::tuiUpdateIndependentWidgets(void) { 
+
+	// Since some tui options don't immediately affect actual settings
+	// reset those options to the current values now
+	// (can not do this in tui_update_widgets)
+
+	tui_location_planet->setValue(StelUtility::stringToWstring(core->getObservatory().getHomePlanetEnglishName()));
+
+
 }
