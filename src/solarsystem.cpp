@@ -557,16 +557,22 @@ vector<wstring> SolarSystem::getNamesI18(void)
 
 
 // returns a newline delimited hash of localized:standard planet names for tui
+// Planet translated name is PARENT : NAME
 wstring SolarSystem::getPlanetHashString(void)
 {
 	wostringstream oss;
 	vector < Planet * >::iterator iter;
 
 	for (iter = system_planets.begin(); iter != system_planets.end(); ++iter) {
-		oss << Translator::globalTranslator.translate((*iter)->getEnglishName()) << "\n";
-		oss << StelUtility::stringToWstring((*iter)->getEnglishName()) << "\n";
+		if((*iter)->get_parent() != NULL && (*iter)->get_parent()->getEnglishName() != "Sun") {
+			   oss << Translator::globalTranslator.translate((*iter)->get_parent()->getEnglishName()) 
+				   << L" : ";
+		}
+		
+		oss << Translator::globalTranslator.translate((*iter)->getEnglishName()) << L"\n";
+		oss << StelUtility::stringToWstring((*iter)->getEnglishName()) << L"\n";
 	}
-
+		
 	// wcout <<  oss.str();
 
 	return oss.str();
