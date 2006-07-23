@@ -128,7 +128,9 @@ void StelApp::init(void)
 	setAppLanguage(appLocaleName);
 	scripts->set_allow_ui( conf.get_boolean("gui","flag_script_allow_ui",0) );
 
-	string tzstr = conf.get_str("localization:time_zone");
+	// time_zone used to be in init_location section of config,
+	// so use that as fallback when reading config - Rob
+	string tzstr = conf.get_str("localization", "time_zone", conf.get_str("init_location", "time_zone", "system_default"));
 	if (tzstr == "system_default")
 	{
 		time_zone_mode = S_TZ_SYSTEM_DEFAULT;
