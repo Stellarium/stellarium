@@ -361,10 +361,14 @@ void StelCore::update(int delta_time)
 	if(sunPos[2] < -0.1/1.5 ) sky_brightness = 0.01;
 	else sky_brightness = (0.01 + 1.5*(sunPos[2]+0.1/1.5));
 
-	// TODO eventually make this more generic for non-atmosphere planets
-	sky_brightness *= (atmosphere->get_intensity()+0.1);
-	
-	// Landscape is lit even if atmosphere off
+	// TODO make this more generic for non-atmosphere planets
+	if(atmosphere->get_fade_intensity() == 1) {
+		// If the atmosphere is on, a solar eclipse might darken the sky
+		// otherwise we just use the sun position calculation above
+		sky_brightness *= (atmosphere->get_intensity()+0.1);
+	}
+
+	// TODO: should calculate dimming with solar eclipse even without atmosphere on
 	landscape->set_sky_brightness(sky_brightness+0.05);
 }
 
