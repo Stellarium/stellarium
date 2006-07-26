@@ -92,6 +92,8 @@ StelCore::StelCore(const string& LDIR, const string& DATA_ROOT) :
 
 StelCore::~StelCore()
 {
+	  // release the previous StelObject:
+	selected_object = StelObject();
 	delete navigation;
 	delete projection;
 	delete asterisms;
