@@ -52,6 +52,8 @@ void SolarSystem::setFont(float font_size, const string& font_name)
 
 SolarSystem::~SolarSystem()
 {
+	  // release selected:
+	selected = StelObject();
 	for(vector<Planet*>::iterator iter = system_planets.begin(); iter != system_planets.end(); ++iter)
 	{
 		if (*iter) delete *iter;
