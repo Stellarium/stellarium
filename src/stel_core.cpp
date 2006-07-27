@@ -423,12 +423,12 @@ double StelCore::draw(int delta_time)
 	// Draw the meridian line
 	meridian_line->draw(projection);
 
-	// Draw the pointer on the currently selected object
-	if (selected_object && object_pointer_visibility) selected_object.draw_pointer(delta_time, projection, navigation);
-
 	// Draw the planets
 	double squaredDistance = ssystem->draw(projection, navigation, tone_converter, getFlagPointStar());
 
+	// Draw the pointer on the currently selected object
+	// TODO: this would be improved if pointer was drawn at same time as object for correct depth in scene
+	if (selected_object && object_pointer_visibility) selected_object.draw_pointer(delta_time, projection, navigation);
 	// Set openGL drawings in local coordinates i.e. generally altazimuthal coordinates
 	navigation->switch_to_local();
 
