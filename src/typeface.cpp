@@ -19,6 +19,8 @@
 //
 // __________________________________________________________________________________________________
 
+// 20060728 Modified to not load bitmap glyphs due to improper rendering
+
 #ifdef GOOEY_MMGR
 #include "mmgr/nommgr.h"
 #endif
@@ -681,7 +683,8 @@ TypeFace::cacheGlyph(size_t aGlyphIndex)
 {
     ensureTextureIsAvailable();
 
-    const FT_Error loadError = FT_Load_Glyph(data_->face_, aGlyphIndex, FT_LOAD_NO_HINTING);
+	// 20060728 Modified to not load bitmap glyps - Stellarium patch 1519491
+    const FT_Error loadError = FT_Load_Glyph(data_->face_, aGlyphIndex, FT_LOAD_NO_HINTING | FT_LOAD_NO_BITMAP);
     assert(loadError == 0);
     if(loadError == 0)
     {
