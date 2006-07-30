@@ -395,7 +395,7 @@ void StelUI::localizeTui(void)
 	tui_colors_const_label_color->setLabel(wstring(L"5.2 ") + _("Constellation Names")+L": ");
 	tui_colors_const_art_intensity->setLabel(wstring(L"5.3 ") + _("Constellation Art Intensity") + L": ");
 	tui_colors_const_boundary_color->setLabel(wstring(L"5.4 ") + _("Constellation Boundaries") + L": ");
-	tui_colors_cardinal_color->setLabel(wstring(L"5.5 ") + _("Cardinal Points")+L": " + L": ");
+	tui_colors_cardinal_color->setLabel(wstring(L"5.5 ") + _("Cardinal Points")+ L": ");
 	tui_colors_planet_names_color->setLabel(wstring(L"5.6 ") + _("Planet Names") + L": ");
 	tui_colors_planet_orbits_color->setLabel(wstring(L"5.7 ") + _("Planet Orbits") + L": ");
 	tui_colors_object_trails_color->setLabel(wstring(L"5.8 ") + _("Planet Trails") + L": ");
