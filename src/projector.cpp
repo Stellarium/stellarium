@@ -551,11 +551,7 @@ void Projector::sSphere_map(GLdouble radius, GLint slices, GLint stacks,
     // t goes from -1.0/+1.0 at z = -radius/+radius (linear along longitudes)
     // cannot use triangle fan on texturing (s coord. at top/bottom tip varies)
 
-//#ifdef NVIDIA  what is this foolishness good for?
-//    const int imax = stacks/1.8;
-//#else
     const int imax = stacks;
-//#endif
 
     // draw intermediate stacks as quad strips
     if (!orient_inside) // nsign==1
