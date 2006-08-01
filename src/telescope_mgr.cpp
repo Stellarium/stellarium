@@ -44,7 +44,7 @@ TelescopeMgr::TelescopeMgr(void) : telescope_font(0),telescope_texture(0) {
   if (WSAStartup(0x202,&wsaData) == 0) {
     wsa_ok = true;
   } else {
-    cerr << "TelescopeMgr::TelescopeMgr: WSAStartup failed, "
+    cout << "TelescopeMgr::TelescopeMgr: WSAStartup failed, "
             "you will not be able to control telescopes" << endl;
     wsa_ok = false;
   }
