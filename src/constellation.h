@@ -39,9 +39,9 @@ private:
     
     // StelObject method to override
    	//! Write I18n information about the object in wstring. 
-	wstring getInfoString(const Navigator * nav) const {return getNameI18() + L"(" + StelUtility::stringToWstring(getShortName()) + L"°";}
+	wstring getInfoString(const Navigator * nav) const {return getNameI18n() + L"(" + StelUtility::stringToWstring(getShortName()) + L"°";}
 	//! The returned wstring can typically be used for object labeling in the sky
-	wstring getShortInfoString(const Navigator * nav) const {return getNameI18();}
+	wstring getShortInfoString(const Navigator * nav) const {return getNameI18n();}
 	//! Return object's type
 	STEL_OBJECT_TYPE get_type(void) const {return STEL_OBJECT_CONSTELLATION;}
 	//! Get position in earth equatorial frame
@@ -58,8 +58,9 @@ private:
     const Constellation* is_star_in(const StelObject&) const;
 	StelObject getBrightestStarInConstellation(void) const;
     
-    wstring getNameI18(void) const { return nameI18; };
-    string getShortName(void) const { return abbreviation; };
+    wstring getNameI18n(void) const {return nameI18;}
+    string getEnglishName(void) const {return abbreviation;}
+    string getShortName(void) const {return abbreviation;}
 
     void draw_optim(Projector* prj) const;
     void draw_art_optim(Projector* prj, Navigator* nav) const;

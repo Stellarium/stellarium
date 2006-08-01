@@ -246,7 +246,7 @@ vector<StelObject> NebulaMgr::search_around(Vec3d v, double lim_fov) const
 
 			// NOTE: non-labeled nebulas are not returned!
 			// Otherwise cursor select gets invisible nebulas - Rob
-			if((*iter)->getNameI18() != L"") result.push_back(*iter);
+			if((*iter)->getNameI18n() != L"") result.push_back(*iter);
 		}
 		iter++;
 	}
