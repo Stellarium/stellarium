@@ -166,7 +166,7 @@ public:
 	Vec3d getObsJ2000Pos(const Navigator *nav) const;
 
 	string getEnglishName(void) const {return englishName;}
-	wstring getNameI18(void) const {return nameI18;}
+	wstring getNameI18n(void) const {return nameI18;}
 
 	void set_rings(Ring* r) {rings = r;}
 

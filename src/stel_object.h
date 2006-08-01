@@ -56,6 +56,10 @@ public:
   //! Return object's type
   STEL_OBJECT_TYPE get_type(void) const;
 
+  //! Return object's name
+  string getEnglishName(void) const;
+  wstring getNameI18n(void) const;
+
   //! Get position in earth equatorial frame
   Vec3d get_earth_equ_pos(const Navigator *nav) const;
 

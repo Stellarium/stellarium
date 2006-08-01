@@ -107,7 +107,7 @@ wstring HipStar::getInfoString(const Navigator * nav) const
 	return oss.str();
 }
 
-wstring HipStar::getNameI18() const 
+wstring HipStar::getNameI18n(void) const 
 {
 
 	if (commonNameI18!=L"" || sciName!=L"")
@@ -121,11 +121,17 @@ wstring HipStar::getNameI18() const
 		return L"HP " + StelUtility::intToWstring(HP);
 }
 
+string HipStar::getEnglishName(void) const {
+  char buff[256];
+  sprintf(buff,"HP %d",HP);
+  return buff;
+}
+
 wstring HipStar::getShortInfoString(const Navigator * nav) const
 {
 	wostringstream oss;
 	
-	oss << getNameI18() << L"  ";
+	oss << getNameI18n() << L"  ";
 
 	oss.setf(ios::fixed);
 	oss.precision(1);
@@ -301,7 +307,7 @@ bool HipStar::draw_name(const Vec3d &XY)
 {   
 	wstring starname;
 
-	starname = getNameI18();
+	starname = getNameI18n();
 	if (starname==L"") return false;
 	// if (draw_mode == DM_NORMAL) {
 		glColor4f(star_colors[type][0]*0.75,

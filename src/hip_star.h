@@ -47,7 +47,8 @@ public:
 	void draw_point(const Vec3d &XY);	// Draw the star as a point
     bool draw_name(const Vec3d &XY);	// draw the name - returns true if something drawn (and texture re-assigned for fonts)
 	Vec3f get_RGB(void) const;
-	wstring getNameI18(void) const; 
+	wstring getNameI18n(void) const;
+	string getEnglishName(void) const;
 	wstring getInfoString(const Navigator * nav = NULL) const;
 	wstring getShortInfoString(const Navigator * nav = NULL) const;
 	STEL_OBJECT_TYPE get_type(void) const {return STEL_OBJECT_STAR;}
