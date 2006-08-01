@@ -212,8 +212,8 @@ string Observator::getHomePlanetEnglishName(void) const {
   return planet ? planet->getEnglishName() : "";
 }
 
-wstring Observator::getHomePlanetNameI18(void) const {
-  return planet ? planet->getNameI18() : L"";
+wstring Observator::getHomePlanetNameI18n(void) const {
+  return planet ? planet->getNameI18n() : L"";
 }
 
 // for moving observator position gradually

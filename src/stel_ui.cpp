@@ -1393,7 +1393,7 @@ void StelUI::setTitleObservatoryName(const wstring& name)
 
 wstring StelUI::getTitleWithAltitude(void)
 {
-	return core->getObservatory().getHomePlanetNameI18() +
+	return core->getObservatory().getHomePlanetNameI18n() +
         L", " + core->getObservatory().get_name() +
         L" @ " + StelUtility::doubleToWstring(core->getObservatory().get_altitude()) + L"m";
 }

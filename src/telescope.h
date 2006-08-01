@@ -29,7 +29,8 @@ class Telescope : public StelObjectBase {
 public:
   static Telescope *create(const string &url);
   virtual ~Telescope(void) {}
-  const wstring &getNameI18n(void) const {return nameI18n;}
+  string getEnglishName(void) const {return name;}
+  wstring getNameI18n(void) const {return nameI18n;}
   wstring getInfoString(const Navigator * nav) const;
   wstring getShortInfoString(const Navigator * nav) const;
   STEL_OBJECT_TYPE get_type(void) const {return STEL_OBJECT_TELESCOPE;}
