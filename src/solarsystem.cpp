@@ -474,7 +474,7 @@ StelObject SolarSystem::searchByNamesI18(wstring planetNameI18) const
 	while (iter != system_planets.end())
 	{
 
-		if( (*iter)->getNameI18() == planetNameI18 ) return (*iter);  // also check standard ini file names
+		if( (*iter)->getNameI18n() == planetNameI18 ) return (*iter);  // also check standard ini file names
 		++iter;
 	}
 	return NULL;
@@ -553,7 +553,7 @@ vector<wstring> SolarSystem::getNamesI18(void)
 	vector < Planet * >::iterator iter;
 
 	for (iter = system_planets.begin(); iter != system_planets.end(); ++iter)
-		names.push_back((*iter)->getNameI18());
+		names.push_back((*iter)->getNameI18n());
 	return names;
 }
 
@@ -810,11 +810,11 @@ vector<wstring> SolarSystem::listMatchingObjectsI18n(const wstring& objPrefix, u
 	vector < Planet * >::const_iterator iter;
 	for (iter = system_planets.begin(); iter != system_planets.end(); ++iter)
 	{
-		wstring constw = (*iter)->getNameI18().substr(0, objw.size());
+		wstring constw = (*iter)->getNameI18n().substr(0, objw.size());
 		transform(constw.begin(), constw.end(), constw.begin(), ::toupper);
 		if (constw==objw)
 		{
-			result.push_back((*iter)->getNameI18());
+			result.push_back((*iter)->getNameI18n());
 			if (result.size()==maxNbItem)
 				return result;
 		}

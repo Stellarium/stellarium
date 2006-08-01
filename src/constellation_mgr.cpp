@@ -653,11 +653,11 @@ vector<wstring> ConstellationMgr::listMatchingObjectsI18n(const wstring& objPref
 	vector < Constellation * >::const_iterator iter;
 	for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
 	{
-		wstring constw = (*iter)->getNameI18().substr(0, objw.size());
+		wstring constw = (*iter)->getNameI18n().substr(0, objw.size());
 		transform(constw.begin(), constw.end(), constw.begin(), ::toupper);
 		if (constw==objw)
 		{
-			result.push_back((*iter)->getNameI18());
+			result.push_back((*iter)->getNameI18n());
 			if (result.size()==maxNbItem)
 				return result;
 		}
