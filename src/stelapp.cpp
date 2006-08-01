@@ -22,6 +22,7 @@
 #include "viewport_distorter.h"
 #include "stellastro.h"
 #include "stel_utility.h"
+#include "callbacks.hpp"
 
 StelApp::StelApp(const string& CDIR, const string& LDIR, const string& DATA_ROOT) : 
 		frame(0), timefr(0), timeBase(0), fps(0), maxfps(10000.f),  FlagTimePause(0), 
@@ -30,7 +31,7 @@ StelApp::StelApp(const string& CDIR, const string& LDIR, const string& DATA_ROOT
 {
 	configDir = CDIR;
 	SelectedScript = SelectedScriptDirectory = "";
-	core = new StelCore(LDIR, DATA_ROOT);
+	core = new StelCore(LDIR, DATA_ROOT, boost::callback<void, string>(this, &StelApp::recordCommand));
 	ui = new StelUI(core, this);
 	commander = new StelCommandInterface(core, this);
 	scripts = new ScriptMgr(commander, core->getDataDir());
@@ -121,7 +122,7 @@ void StelApp::init(void)
 	glClear(GL_COLOR_BUFFER_BIT);
 	
 	maxfps 				= conf.get_double ("video","maximum_fps",10000);
-	minfps 				= conf.get_double ("video","minimum_fps",10);
+	minfps 				= conf.get_double ("video","minimum_fps",10000);
 	string appLocaleName = conf.get_str("localization", "app_locale", "system");
 	time_format = string_to_s_time_format(conf.get_str("localization:time_display_format"));
 	date_format = string_to_s_date_format(conf.get_str("localization:date_display_format"));	

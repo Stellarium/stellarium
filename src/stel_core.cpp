@@ -50,16 +50,17 @@ void StelCore::telescopeGoto(int nr) {
 }
 
 
-StelCore::StelCore(const string& LDIR, const string& DATA_ROOT) :
-		skyTranslator(APP_NAME, LOCALEDIR, ""),
-		projection(NULL), selected_object(NULL), hip_stars(NULL),
-		nebulas(NULL), ssystem(NULL), milky_way(NULL), telescope_mgr(NULL),
-		deltaFov(0.), 
-		deltaAlt(0.), deltaAz(0.), move_speed(0.00025), firstTime(1)
+StelCore::StelCore(const string& LDIR, const string& DATA_ROOT, const boost::callback<void, string>& recordCallback) :
+	skyTranslator(APP_NAME, LOCALEDIR, ""),
+	projection(NULL), selected_object(NULL), hip_stars(NULL),
+	nebulas(NULL), ssystem(NULL), milky_way(NULL), telescope_mgr(NULL),
+	deltaFov(0.), 
+	deltaAlt(0.), deltaAz(0.), move_speed(0.00025), firstTime(1)
 {
 	localeDir = LDIR;
 	dataRoot = DATA_ROOT;
-	
+	recordActionCallback = recordCallback;
+
 	projection = Projector::create(Projector::PERSPECTIVE_PROJECTOR, Vec4i(0,0,800,600), 60);
 	glFrontFace(projection->needGlFrontFaceCW()?GL_CW:GL_CCW);
 
@@ -1137,17 +1138,17 @@ void StelCore::updateMove(int delta_time)
 	if(deltaFov != 0 )
 	{
 		projection->change_fov(deltaFov);
-//  		std::ostringstream oss;
-//  		oss << "zoom delta_fov " << deltaFov;
-//  		app->recordCommand(oss.str());
+  		std::ostringstream oss;
+  		oss << "zoom delta_fov " << deltaFov;
+		if (!recordActionCallback.empty()) recordActionCallback(oss.str());
 	}
 
 	if(deltaAz != 0 || deltaAlt != 0)
 	{
 		navigation->update_move(deltaAz, deltaAlt);
-//  		std::ostringstream oss;
-//  		oss << "look delta_az " << deltaAz << " delta_alt " << deltaAlt;
-//  		app->recordCommand(oss.str());
+  		std::ostringstream oss;
+  		oss << "look delta_az " << deltaAz << " delta_alt " << deltaAlt;
+		if (!recordActionCallback.empty()) recordActionCallback(oss.str());
 	}
 	else
 	{
@@ -1222,23 +1223,23 @@ bool StelCore::selectObject(const StelObject &obj)
 			{
 				asterisms->setSelected(selected_object);
 	 			// potentially record this action
-// 	 			std::ostringstream oss;
-// 	 			oss << ((HipStar *)selected_object)->get_hp_number();
-// 	 			app->recordCommand("select hp " + oss.str());
+				if (!recordActionCallback.empty()) recordActionCallback("select " + selected_object.getEnglishName());
 			}
 			else
 			{
 				asterisms->setSelected(StelObject());
 			}
 	
-			ssystem->setSelected(selected_object);
-			// potentially record this action
-//			app->recordCommand("select planet " + ((Planet *)selected_object)->getEnglishName());
-	
+			if (selected_object.get_type()==STEL_OBJECT_PLANET) {
+				ssystem->setSelected(selected_object);
+				// potentially record this action
+				if (!recordActionCallback.empty()) recordActionCallback("select planet " + selected_object.getEnglishName());
+			}
+
 			if (selected_object.get_type()==STEL_OBJECT_NEBULA)
 			{
 				// potentially record this action
-// 				app->recordCommand("select nebula " + ((Nebula *)selected_object)->getEnglishName());
+				if (!recordActionCallback.empty()) recordActionCallback("select nebula \"" + selected_object.getEnglishName() + "\"");
 			}
 			
 			return true;

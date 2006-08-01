@@ -44,6 +44,7 @@
 #include "sky_localizer.h"
 #include "loadingbar.h"
 #include "image_mgr.h"
+#include "callbacks.hpp"
 
 //!  @brief Main class for stellarium core processing. 
 //!  
@@ -55,8 +56,8 @@ public:
 	//! Possible mount modes
 	enum MOUNT_MODE { MOUNT_ALTAZIMUTAL, MOUNT_EQUATORIAL };
 
-	// Inputs are the locale directory and root directory
-    StelCore(const string& LDIR, const string& DATA_ROOT);
+	// Inputs are the locale directory and root directory and callback function for recording actions
+    StelCore(const string& LDIR, const string& DATA_ROOT, const boost::callback <void, string> & recordCallback);
     virtual ~StelCore();
 	
 	//! Init and load all main core components from the passed config file.
@@ -669,6 +670,10 @@ public:
     string getLandscapeAuthorName(void) {return landscape->getAuthorName();}
     string getLandscapeDescription(void) {return landscape->getDescription();}
 private:
+
+	//! Callback to record actions
+	boost::callback<void, string> recordActionCallback;
+
 	//! Select passed object
 	//! @return true if the object was selected (false if the same was already selected)
 	bool selectObject(const StelObject &obj);
@@ -734,6 +739,7 @@ private:
 
 	bool firstTime;                     // For init to track if reload or first time setup
 	float constellationFontSize;        // size for constellation labels
+
 };
 
 #endif // _STEL_CORE_H_
