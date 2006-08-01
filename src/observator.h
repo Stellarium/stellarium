@@ -32,7 +32,7 @@ public:
     bool setHomePlanet(const string &english_name);
     const class Planet *getHomePlanet(void) const {return planet;}
     string getHomePlanetEnglishName(void) const;
-    wstring getHomePlanetNameI18(void) const;
+    wstring getHomePlanetNameI18n(void) const;
 
     Vec3d getCenterVsop87Pos(void) const;
     double getDistanceFromCenter(void) const;
