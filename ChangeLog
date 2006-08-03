@@ -1,8 +1,11 @@
-0.8.1
+0.8.2
+Re-enabled some script recording features (select, pan/tilt, zoom)
+
+0.8.1 [2006-06-26]
 radial texture for planetary rings
 telescope control using external telescope server programs
 minimum_fps patch by nuisance78
-image flipping
+viewport flipping
 
 0.8.0 [2006-04-30]
 BaseFont selectable in config 
@@ -13,7 +16,6 @@ Added full NGC nebula catalog.
 Mouse cursor optional timeout
 RA/DE displays corrected for precession
 Option to allow UI use during scripts (flag_script_allow_ui)
-CTRL-p will play the startup.sts script on demand
 Select location by city
 Meridian line (first press of 'z')
 Popup error windows as script debugging option

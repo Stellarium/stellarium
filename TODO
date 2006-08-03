@@ -1,5 +1,5 @@
 #
-# Todo list for Stellarium 0.8
+# Todo list for Stellarium
 # 
 
 ### Bugs
@@ -19,7 +19,6 @@
 - more natural satellites
 - more documentation
 - constellation art for other cultures
-- We should consider using rosetta for translators (https://launchpad.net/rosetta)
 
 ### Cleanup
 
@@ -28,8 +27,6 @@
 - stop using glpng and use SDL_image or similar.
 - Split stel_core+stel_sdl class into a real independant core managing sky rendering only and a stel_app class which manage GUI, I/O etc... This may include a reorganization of the src file structure itself.
 - Separate all s_gui code into an independant library.
-- Replace all translatable char* and c++ string by w_char* and c++ wstring for unicode support
-- Think on a way to include plug-ins for telescope control etc..
 - Why does each object have it's own font object?  What about sharing one per font to save memory?
  > because each has a different size, the openGL needs a list for each size.
 
