@@ -1108,12 +1108,10 @@ int StelUI::handle_keys(SDLKey key, SDLMod mod, Uint16 unicode, S_GUI_VALUE stat
             else if( !core->getFlagPlanetsTrails())
             {
                 app->commander->execute_command( "flag object_trails on");
-                core->startPlanetsTrails(true);
             }
             else
             {
                 app->commander->execute_command( "flag object_trails off");
-                core->startPlanetsTrails(false);
                 app->commander->execute_command( "flag ecliptic_line off");
             }
             break;
