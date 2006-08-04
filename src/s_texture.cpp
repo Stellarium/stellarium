@@ -31,7 +31,6 @@ s_texture::s_texture(const string& _textureName) : textureName(_textureName), te
     load( texDir + textureName );
 }
 
-
 // when need to load images outside texture directory
 s_texture::s_texture(bool full_path, const string& _textureName, int _loadType) : textureName(_textureName),
 	texID(0), loadType(PNG_BLEND1), loadType2(GL_CLAMP_TO_EDGE)
@@ -50,7 +49,7 @@ s_texture::s_texture(bool full_path, const string& _textureName, int _loadType) 
     }
     texID=0;
 	whole_path = full_path;
-	if(full_path) load(textureName);
+	if(full_path) load(textureName );
 	else load( texDir + textureName );
 }
 
@@ -74,6 +73,25 @@ const s_texture &s_texture::operator=(const s_texture &t) {
   return *this;
 }
 
+s_texture::s_texture(const string& _textureName, int _loadType, const bool mipmap) : textureName(_textureName),
+	texID(0), loadType(PNG_BLEND1), loadType2(GL_CLAMP_TO_EDGE)
+{
+    switch (_loadType)
+    {
+        case TEX_LOAD_TYPE_PNG_ALPHA : loadType=PNG_ALPHA;  break;
+        case TEX_LOAD_TYPE_PNG_SOLID : loadType=PNG_SOLID; break;
+        case TEX_LOAD_TYPE_PNG_BLEND3: loadType=PNG_BLEND3; break;
+        case TEX_LOAD_TYPE_PNG_BLEND4: loadType=PNG_BLEND4; break;
+        case TEX_LOAD_TYPE_PNG_BLEND1: loadType=PNG_BLEND1; break;
+		case TEX_LOAD_TYPE_PNG_BLEND8: loadType=PNG_BLEND8; break;
+        case TEX_LOAD_TYPE_PNG_REPEAT: loadType=PNG_BLEND1; loadType2=GL_REPEAT; break;
+        case TEX_LOAD_TYPE_PNG_SOLID_REPEAT: loadType=PNG_SOLID; loadType2=GL_REPEAT; break;
+        default : loadType=PNG_BLEND3;
+    }
+    texID=0;
+    load( texDir + textureName, mipmap);
+}
+
 s_texture::s_texture(const string& _textureName, int _loadType) : textureName(_textureName),
 	texID(0), loadType(PNG_BLEND1), loadType2(GL_CLAMP_TO_EDGE)
 {
@@ -90,15 +108,22 @@ s_texture::s_texture(const string& _textureName, int _loadType) : textureName(_t
         default : loadType=PNG_BLEND3;
     }
     texID=0;
-    load( texDir + textureName );
+    load( texDir + textureName);
 }
+
 
 s_texture::~s_texture()
 {
     unload();
 }
 
-int s_texture::load(string fullName)
+int s_texture::load(string fullName) {
+
+	// assume don't want mipmap (blurs)
+	return load(fullName, false);
+}
+
+int s_texture::load(string fullName, bool mipmap)
 {
 
     FILE * tempFile = fopen(fullName.c_str(),"r");
@@ -112,9 +137,8 @@ int s_texture::load(string fullName)
     pngInfo info;
     pngSetStandardOrientation(1);
 
-	// TODO: make mipmap use an argument to this method so not hard coded here
-	// frans van hoesel: hack to filter textures, except stars
-	if (strstr(fullName.c_str(),"star16x16.png") == NULL) {
+	// frans van hoesel patch - mipmaps keep nebulas from scintilating as move
+	if (mipmap) {
 		texID = pngBind(fullName.c_str(), PNG_BUILDMIPMAPS,
 						loadType, &info, loadType2,
 						GL_LINEAR_MIPMAP_NEAREST, GL_LINEAR);

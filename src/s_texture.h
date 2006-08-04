@@ -44,11 +44,13 @@ class s_texture
 public:
     s_texture(const string& _textureName);
     s_texture(bool full_path, const string& _textureName, int _loadType);
-    s_texture(const string& _textureName, int _loadType);
+	s_texture(const string& _textureName, int _loadType);
+    s_texture(const string& _textureName, int _loadType, const bool mipmap);
     virtual ~s_texture();
     s_texture(const s_texture &t);
     const s_texture &operator=(const s_texture &t);
     int load(string fullName);
+	int load(string fullName, bool mipmap);
     void unload();
     int reload();
     unsigned int getID(void) const {return texID;}
