@@ -44,6 +44,7 @@ class s_texture
 public:
     s_texture(const string& _textureName);
     s_texture(bool full_path, const string& _textureName, int _loadType);
+    s_texture(bool full_path, const string& _textureName, int _loadType, const bool mipmap);
 	s_texture(const string& _textureName, int _loadType);
     s_texture(const string& _textureName, int _loadType, const bool mipmap);
     virtual ~s_texture();
