@@ -185,7 +185,7 @@ bool Nebula::readTexture(const string& record)
 	// Calc the angular size in radian : TODO this should be independant of tex_angular_size
 	angular_size = tex_angular_size/2/60*M_PI/180;
 
-	neb_tex = new s_texture(tex_name);
+	neb_tex = new s_texture(tex_name, TEX_LOAD_TYPE_PNG_BLEND1, true);  // use mipmaps
 
 	//tex_angular_size*tex_angular_size*3600/4*M_PI
 	//	luminance = mag_to_luminance(mag, tex_angular_size*tex_angular_size*3600) /	neb_tex->get_average_luminance() * 50;
