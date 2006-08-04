@@ -74,9 +74,8 @@ bool ScriptMgr::play_script(string script_file, string script_path) {
 	return 1;
 
   } else {
-    delete script;
-	script = NULL;
-	return 0;
+	  cancel_script();
+	  return 0;
   }
 }
 
