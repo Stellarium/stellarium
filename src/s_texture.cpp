@@ -143,7 +143,7 @@ int s_texture::load(string fullName, bool mipmap)
 						loadType, &info, loadType2,
 						GL_LINEAR_MIPMAP_NEAREST, GL_LINEAR);
 	} else {
-		texID = pngBind(fullName.c_str(), PNG_BUILDMIPMAPS,
+		texID = pngBind(fullName.c_str(), PNG_NOMIPMAPS,
 						loadType, &info, loadType2,
 						GL_NEAREST, GL_LINEAR);
 	}

@@ -183,7 +183,7 @@ void ConstellationMgr::loadLinesAndArt(const string &fileName, const string &art
 		}
 		else
 		{
-			cons->art_tex = new s_texture(texfile);
+			cons->art_tex = new s_texture(texfile, TEX_LOAD_TYPE_PNG_BLEND1, true);  // use mipmaps
 			texSize = cons->art_tex->getSize();
 
 			Vec3f s1 = hipStarMgr->searchHP(hp1).getObsJ2000Pos(0);
