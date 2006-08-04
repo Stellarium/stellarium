@@ -193,7 +193,7 @@ void LandscapeOldStyle::load(const string& landscape_file, const string& section
 	for (int i=0;i<nb_side_texs;++i)
 	{
 		sprintf(tmp,"tex%d",i);
-		side_texs[i] = new s_texture(pd.get_str(section_name, tmp),TEX_LOAD_TYPE_PNG_ALPHA);
+		side_texs[i] = new s_texture(pd.get_str(section_name, tmp),TEX_LOAD_TYPE_PNG_ALPHA,false);
 	}
 
 	// Init sides parameters
@@ -217,7 +217,7 @@ void LandscapeOldStyle::load(const string& landscape_file, const string& section
 
 	nb_decor_repeat = pd.get_int(section_name, "nb_decor_repeat", 1);
 
-	ground_tex = new s_texture(pd.get_str(section_name, "groundtex"),TEX_LOAD_TYPE_PNG_SOLID);
+	ground_tex = new s_texture(pd.get_str(section_name, "groundtex"),TEX_LOAD_TYPE_PNG_SOLID,false);
 	s = pd.get_str(section_name, "ground");
 	sscanf(s.c_str(),"groundtex:%f:%f:%f:%f",&a,&b,&c,&d);
 	ground_tex_coord.tex = ground_tex;
@@ -226,7 +226,7 @@ void LandscapeOldStyle::load(const string& landscape_file, const string& section
 	ground_tex_coord.tex_coords[2] = c;
 	ground_tex_coord.tex_coords[3] = d;
 
-	fog_tex = new s_texture(pd.get_str(section_name, "fogtex"),TEX_LOAD_TYPE_PNG_SOLID_REPEAT);
+	fog_tex = new s_texture(pd.get_str(section_name, "fogtex"),TEX_LOAD_TYPE_PNG_SOLID_REPEAT,false);
 	s = pd.get_str(section_name, "fog");
 	sscanf(s.c_str(),"fogtex:%f:%f:%f:%f",&a,&b,&c,&d);
 	fog_tex_coord.tex = fog_tex;
@@ -261,7 +261,7 @@ void LandscapeOldStyle::create(bool _fullpath, stringHash_t param)
 	{
 
 		sprintf(tmp,"tex%d",i);
-		side_texs[i] = new s_texture(_fullpath, param["path"] + param[tmp],TEX_LOAD_TYPE_PNG_ALPHA);
+		side_texs[i] = new s_texture(_fullpath, param["path"] + param[tmp],TEX_LOAD_TYPE_PNG_ALPHA, false);
 
 	}
 
@@ -286,7 +286,7 @@ void LandscapeOldStyle::create(bool _fullpath, stringHash_t param)
 
 	nb_decor_repeat = str_to_int(param["nb_decor_repeat"], 1);
 
-	ground_tex = new s_texture(_fullpath, param["path"] + param["groundtex"],TEX_LOAD_TYPE_PNG_SOLID);
+	ground_tex = new s_texture(_fullpath, param["path"] + param["groundtex"],TEX_LOAD_TYPE_PNG_SOLID, false);
 	s = param["ground"];
 	sscanf(s.c_str(),"groundtex:%f:%f:%f:%f",&a,&b,&c,&d);
 	ground_tex_coord.tex = ground_tex;
@@ -295,7 +295,7 @@ void LandscapeOldStyle::create(bool _fullpath, stringHash_t param)
 	ground_tex_coord.tex_coords[2] = c;
 	ground_tex_coord.tex_coords[3] = d;
 
-	fog_tex = new s_texture(_fullpath, param["path"] + param["fogtex"],TEX_LOAD_TYPE_PNG_SOLID_REPEAT);
+	fog_tex = new s_texture(_fullpath, param["path"] + param["fogtex"],TEX_LOAD_TYPE_PNG_SOLID_REPEAT, false);
 	s = param["fog"];
 	sscanf(s.c_str(),"fogtex:%f:%f:%f:%f",&a,&b,&c,&d);
 	fog_tex_coord.tex = fog_tex;
@@ -444,7 +444,7 @@ void LandscapeFisheye::create(const string _name, bool _fullpath, const string _
 	//	cout << _name << " " << _fullpath << " " << _maptex << " " << _texturefov << "\n";
 	valid_landscape = 1;  // assume ok...
 	name = _name;
-	map_tex = new s_texture(_fullpath,_maptex,TEX_LOAD_TYPE_PNG_ALPHA);
+	map_tex = new s_texture(_fullpath,_maptex,TEX_LOAD_TYPE_PNG_ALPHA,false);
 	tex_fov = _texturefov*M_PI/180.;
 }
 
@@ -506,7 +506,7 @@ void LandscapeSpherical::create(const string _name, bool _fullpath, const string
 	//	cout << _name << " " << _fullpath << " " << _maptex << " " << _texturefov << "\n";
 	valid_landscape = 1;  // assume ok...
 	name = _name;
-	map_tex = new s_texture(_fullpath,_maptex,TEX_LOAD_TYPE_PNG_ALPHA);
+	map_tex = new s_texture(_fullpath,_maptex,TEX_LOAD_TYPE_PNG_ALPHA,false);
 }
 
 

@@ -53,6 +53,28 @@ s_texture::s_texture(bool full_path, const string& _textureName, int _loadType) 
 	else load( texDir + textureName );
 }
 
+s_texture::s_texture(bool full_path, const string& _textureName, int _loadType, const bool mipmap) : textureName(_textureName),
+	texID(0), loadType(PNG_BLEND1), loadType2(GL_CLAMP_TO_EDGE)
+{
+    switch (_loadType)
+    {
+        case TEX_LOAD_TYPE_PNG_ALPHA : loadType=PNG_ALPHA;  break;
+        case TEX_LOAD_TYPE_PNG_SOLID : loadType=PNG_SOLID; break;
+        case TEX_LOAD_TYPE_PNG_BLEND3: loadType=PNG_BLEND3; break;
+        case TEX_LOAD_TYPE_PNG_BLEND4: loadType=PNG_BLEND4; break;
+        case TEX_LOAD_TYPE_PNG_BLEND1: loadType=PNG_BLEND1; break;
+		case TEX_LOAD_TYPE_PNG_BLEND8: loadType=PNG_BLEND8; break;
+        case TEX_LOAD_TYPE_PNG_REPEAT: loadType=PNG_BLEND1; loadType2=GL_REPEAT; break;
+        case TEX_LOAD_TYPE_PNG_SOLID_REPEAT: loadType=PNG_SOLID; loadType2=GL_REPEAT; break;
+        default : loadType=PNG_BLEND3;
+    }
+    texID=0;
+	whole_path = full_path;
+	if(full_path) load(textureName, mipmap );
+	else load( texDir + textureName, mipmap );
+}
+
+
 s_texture::s_texture(const s_texture &t) {
   textureName = t.textureName;
   loadType = t.loadType;
@@ -119,8 +141,8 @@ s_texture::~s_texture()
 
 int s_texture::load(string fullName) {
 
-	// assume don't want mipmap (blurs)
-	return load(fullName, false);
+	// assume want mipmap (reduces alias artifacts)
+	return load(fullName, true);
 }
 
 int s_texture::load(string fullName, bool mipmap)
