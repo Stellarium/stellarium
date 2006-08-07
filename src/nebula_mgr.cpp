@@ -466,7 +466,7 @@ bool NebulaMgr::loadTextures(const string& fileName, LoadingBar& lb)
 		} else {
 			// Allow non NGC nebulas/textures!
 
-			cout << "Nebula with unrecognized NGC number " << NGC << endl;
+			if( NGC != -1) cout << "Nebula with unrecognized NGC number " << NGC << endl;
 			e = new Nebula;
 			if (!e->readTexture(record)) { // reading error
 				cerr << "Error while reading texture for nebula " << e->englishName << endl;
