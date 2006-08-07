@@ -111,7 +111,11 @@ wstring Nebula::getShortInfoString(const Navigator*) const
 {
 	if (nameI18!=L"")
 	{
-		return nameI18;
+		wostringstream oss;
+		oss << nameI18 << L"  ";
+		if (mag < 99) oss << _("Magnitude: ") << mag;
+		
+		return oss.str();
 	}
 	else
 	{
@@ -377,7 +381,7 @@ void Nebula::draw_name(const Projector* prj)
 	float size = get_on_screen_size(prj);
 	float shift = 8.f + size/2.f;
 
-	wstring nebulaname = getShortInfoString();
+	wstring nebulaname = getNameI18n();
 
 	if (prj->getFlagGravityLabels())
 		prj->print_gravity180(nebula_font, XY[0]+shift, XY[1]+shift, nebulaname, 1, 0, 0);
