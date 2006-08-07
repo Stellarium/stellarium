@@ -489,7 +489,9 @@ double Planet::draw(Projector* prj, const Navigator * nav, const ToneReproductor
 	while (p && p->parent)
 	{
 		//johannes			mat = p->mat_local_to_parent * mat;
-		mat = Mat4d::translation(p->ecliptic_pos) * mat;
+		mat = Mat4d::translation(p->ecliptic_pos)
+		    * mat
+		    * p->rot_local_to_parent;
 		p = p->parent;
 	}
 
