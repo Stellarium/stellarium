@@ -416,13 +416,13 @@ double StelCore::draw(int delta_time)
 	azi_grid->draw(projection);
 
 	// Draw the celestial equator line
-	equator_line->draw(projection);
+	equator_line->draw(projection,navigation);
 
 	// Draw the ecliptic line
-	ecliptic_line->draw(projection);
+	ecliptic_line->draw(projection,navigation);
 
 	// Draw the meridian line
-	meridian_line->draw(projection);
+	meridian_line->draw(projection,navigation);
 
 	// Draw the planets
 	double squaredDistance = ssystem->draw(projection, navigation, tone_converter, getFlagPointStar());
