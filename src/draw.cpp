@@ -20,6 +20,8 @@
 #include "draw.h"
 #include "s_texture.h"
 #include "stel_utility.h"
+#include "navigator.h"
+#include "planet.h"
 
 // rms added color as parameter
 SkyGrid::SkyGrid(SKY_GRID_TYPE grid_type, unsigned int _nb_meridian, unsigned int _nb_parallel, double _radius,
@@ -313,7 +315,7 @@ void SkyLine::set_font(float font_size, const string& font_name)
 	assert(font);
 }
 
-void SkyLine::draw(const Projector* prj) const
+void SkyLine::draw(const Projector *prj,const Navigator *nav) const
 {
 	if (!fader.getInterstate()) return;
 
@@ -326,6 +328,63 @@ void SkyLine::draw(const Projector* prj) const
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
 
 	prj->set_orthographic_projection();	// set 2D coordinate
+
+  if (line_type == ECLIPTIC) {
+      // special drawing of the ecliptic line
+    const Mat4d m = nav->getHomePlanet()
+                       ->getRotEquatorialToVsop87().transpose();
+    const bool draw_labels =
+      (nav->getHomePlanet()->getEnglishName()=="Earth" && font);
+       // start labeling from the vernal equinox
+    const double corr = draw_labels ? (atan2(m.r[4],m.r[0]) - 3*M_PI/6) : 0.0;
+    Vec3d point(radius*cos(corr),radius*sin(corr),0.0);
+    point.transfo4d(m);
+    bool prev_on_screen = prj->project_earth_equ(point,pt1);
+    for (unsigned int i=1;i<nb_segment+1;++i) {
+      const double phi = corr+2*i*M_PI/nb_segment;
+      Vec3d point(radius*cos(phi),radius*sin(phi),0.0);
+      point.transfo4d(m);
+      const bool on_screen = prj->project_earth_equ(point,pt2);
+      if (on_screen && prev_on_screen) {
+        const double dx = pt2[0]-pt1[0];
+        const double dy = pt2[1]-pt1[1];
+        const double dq = dx*dx+dy*dy;
+        if (dq < 1024*1024) {
+		  glBegin (GL_LINES);
+		    glVertex2f(pt2[0],pt2[1]);
+		    glVertex2f(pt1[0],pt1[1]);
+       	  glEnd();
+        }
+		if (draw_labels && (i+2) % 4 == 0) {
+
+			const double d = sqrt(dq);
+
+			double angle = acos((pt1[1]-pt2[1])/d);
+			if( pt1[0] < pt2[0] ) {
+				angle *= -1;
+			}
+
+			// draw text label
+			std::ostringstream oss;	
+
+			oss << (i+3)/4;
+
+			glPushMatrix();
+			glTranslatef(pt2[0],pt2[1],0);
+			glRotatef(-90+angle*180./M_PI,0,0,-1);
+
+			glEnable(GL_TEXTURE_2D);
+
+			font->print(0,-2,oss.str());
+			glPopMatrix();
+			glDisable(GL_TEXTURE_2D);
+
+		}
+      }
+      prev_on_screen = on_screen;
+      pt1 = pt2;
+    }
+  } else {
 
 	for (unsigned int i=0;i<nb_segment;++i)
 	{
@@ -447,7 +506,7 @@ void SkyLine::draw(const Projector* prj) const
 
 		}
 	}
-
+  }
 	prj->reset_perspective_projection();
 }
 
