@@ -127,6 +127,7 @@ void ConstellationMgr::loadLinesAndArt(const string &fileName, const string &art
 	setFlagNames(flagNames);	
 	setFlagBoundaries(flagBoundaries);	
 
+	loadBoundaries(boundaryfileName);
 
 	FILE *fic = fopen(artfileName.c_str(), "r");
 	if (!fic)
@@ -213,8 +214,6 @@ void ConstellationMgr::loadLinesAndArt(const string &fileName, const string &art
 		}
 	}
 	fclose(fic);
-	
-	loadBoundaries(boundaryfileName);
 	
 }
 
