@@ -25,10 +25,11 @@
 #include "stellarium.h"
 #include "s_font.h"
 #include "projector.h"
-#include "navigator.h"
-#include "tone_reproductor.h"
 #include "fader.h"
 #include "translator.h"
+
+class Navigator;
+class ToneReproductor;
 
 // Class which manages a grid to display in the sky
 class SkyGrid
@@ -83,7 +84,7 @@ public:
 	// Create and precompute positions of a SkyGrid
 	SkyLine(SKY_LINE_TYPE _line_type = EQUATOR, double _radius = 1., unsigned int _nb_segment = 48);
     virtual ~SkyLine();
-	void draw(const Projector* prj) const;
+	void draw(const Projector *prj,const Navigator *nav) const;
 	void setColor(const Vec3f& c) {color = c;}
 	const Vec3f& getColor() {return color;}
 	void update(int delta_time) {fader.update(delta_time);}
