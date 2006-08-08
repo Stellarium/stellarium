@@ -28,8 +28,8 @@ using namespace std;
 #include "orbit.h"
 #include "stellarium.h"
 #include "init_parser.h"
-
-#include "draw.h"
+#include "navigator.h"
+#include "projector.h"
 
 SolarSystem::SolarSystem()
             :sun(NULL),moon(NULL),earth(NULL),
