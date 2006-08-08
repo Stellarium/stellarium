@@ -21,6 +21,8 @@
 #include "stel_utility.h"
 
 #include <sstream>
+#include <iostream>
+#include <iomanip>
 
 #include <math.h>
 
@@ -57,6 +59,54 @@
   #define IS_INVALID_SOCKET(fd) (fd<0)
   #define INVALID_SOCKET (-1)
 #endif
+
+struct PrintRaDec {
+  PrintRaDec(const unsigned int ra_int,const int dec_int)
+    :ra_int(ra_int),dec_int(dec_int) {}
+  const unsigned int ra_int;
+  const int dec_int;
+};
+
+template<class T>
+T &operator<<(T &o,const PrintRaDec &x) {
+  unsigned int h = x.ra_int;
+  int d = (int)floor(0.5+x.dec_int*(360*3600*1000/4294967296.0));
+  char dec_sign;
+  if (d >= 0) {
+    if (d > 90*3600*1000) {
+      d =  180*3600*1000 - d;
+      h += 0x80000000;
+    }
+    dec_sign = '+';
+  } else {
+    if (d < -90*3600*1000) {
+      d = -180*3600*1000 - d;
+      h += 0x80000000;
+    }
+    d = -d;
+    dec_sign = '-';
+  }
+  h = (unsigned int)floor(0.5+h*(24*3600*10000/4294967296.0));
+  const int ra_ms = h % 10000; h /= 10000;
+  const int ra_s = h % 60; h /= 60;
+  const int ra_m = h % 60; h /= 60;
+  h %= 24;
+  const int dec_ms = d % 1000; d /= 1000;
+  const int dec_s = d % 60; d /= 60;
+  const int dec_m = d % 60; d /= 60;
+  o << "ra = "
+    << setfill(' ') << setw(2) << h << 'h'
+    << setfill('0') << setw(2) << ra_m << 'm'
+    << setfill('0') << setw(2) << ra_s << '.'
+    << setfill('0') << setw(4) << ra_ms
+    << " dec = "
+    << ((d<10)?" ":"") << dec_sign << d << 'd'
+    << setfill('0') << setw(2) << dec_m << 'm'
+    << setfill('0') << setw(2) << dec_s << '.'
+    << setfill('0') << setw(3) << dec_ms
+    << setfill(' ');
+  return o;
+}
 
 class TelescopeDummy : public Telescope {
 public:
@@ -112,8 +162,7 @@ private:
   struct Position {
     long long int server_micros;
     long long int client_micros;
-    unsigned int ra_int;
-    int dec_int;
+    Vec3d pos;
     int status;
   };
   Position positions[16];
@@ -264,8 +313,9 @@ TelescopeTcp::TelescopeTcp(const string &name,const string &params)
        position_pointer++) {
     position_pointer->server_micros = 0x7FFFFFFFFFFFFFFFLL;
     position_pointer->client_micros = 0x7FFFFFFFFFFFFFFFLL;
-    position_pointer->ra_int = 0;
-    position_pointer->dec_int = 0;
+    position_pointer->pos[0] = 0.0;
+    position_pointer->pos[1] = 0.0;
+    position_pointer->pos[2] = 0.0;
     position_pointer->status = 0;
   }
   position_pointer = positions;
@@ -291,9 +341,7 @@ void TelescopeTcp::telescopeGoto(const Vec3d &j2000_pos) {
                                0.5 +  ra*(((unsigned int)0x80000000)/M_PI));
       int dec_int = (int)floor(0.5 + dec*(((unsigned int)0x80000000)/M_PI));
 //      cout << "TelescopeTcp(" << name << ")::telescopeGoto: "
-//              "queuing packet: "
-//           << (12*ra/M_PI) << ',' << (180*dec/M_PI)
-//           << ";  " << ra_int << ',' << dec_int << endl;
+//              "queuing packet: " << PrintRaDec(ra_int,dec_int) << endl;
         // length of packet:
       *write_buff_end++ = 20;
       *write_buff_end++ = 0;
@@ -417,14 +465,17 @@ void TelescopeTcp::performReading(void) {
           if (position_pointer >= end_position) position_pointer = positions;
           position_pointer->server_micros = server_micros;
           position_pointer->client_micros = GetNow();
-          position_pointer->ra_int = ra_int;
-          position_pointer->dec_int = dec_int;
+          const double ra  =  ra_int * (M_PI/(unsigned int)0x80000000);
+          const double dec = dec_int * (M_PI/(unsigned int)0x80000000);
+          const double cdec = cos(dec);
+          position_pointer->pos[0] = cos(ra)*cdec;
+          position_pointer->pos[1] = sin(ra)*cdec;
+          position_pointer->pos[2] = sin(dec);
           position_pointer->status = status;
-          cout << "TelescopeTcp(" << name << ")::performReading: "
-//                  "Client Time: " << position_pointer->client_micros
-               << ", ra: " << position_pointer->ra_int
-               << ", dec: " << position_pointer->dec_int
-               << endl;
+//          cout << "TelescopeTcp(" << name << ")::performReading: "
+////                  "Server Time: " << server_micros
+//               << PrintRaDec(ra_int,dec_int)
+//               << endl;
         } break;
         default:
           cout << "TelescopeTcp(" << name << ")::performReading: "
@@ -456,41 +507,19 @@ Vec3d TelescopeTcp::getObsJ2000Pos(const Navigator*) const {
     pp--;
     if (pp->client_micros == 0x7FFFFFFFFFFFFFFFLL) break;
     if (pp->client_micros <= now && now <= p->client_micros) {
-      const double h = (M_PI/(unsigned int)0x80000000)
-                     / (p->client_micros - pp->client_micros);
-      const long long int f0 = (now - pp->client_micros);
-      const long long int f1 = (p->client_micros - now);
-
-      double ra;
-      if (pp->ra_int <= p->ra_int) {
-        if (p->ra_int - pp->ra_int <= (unsigned int)0x80000000) {
-          ra = h*(f1*pp->ra_int  + f0*p->ra_int);
-        } else {
-          ra = h*(f1*(0*0x100000000LL + pp->ra_int)  + f0*p->ra_int);
-        }
-      } else {
-        if (pp->ra_int - p->ra_int <= (unsigned int)0x80000000) {
-          ra = h*(f1*pp->ra_int  + f0*p->ra_int);
-        } else {
-          ra = h*(f1*pp->ra_int  + f0*(0*0x100000000LL + p->ra_int));
+      if (pp->client_micros != p->client_micros) {
+        Vec3d rval = p->pos * (now - pp->client_micros)
+                   + pp->pos * (p->client_micros - now);
+        double f = rval.lengthSquared();
+        if (f > 0.0) {
+          return (1.0/sqrt(f))*rval;
         }
       }
-      const double dec = h*(f1*pp->dec_int + f0*p->dec_int);
-//      cout << "TelescopeTcp(" << name << ")::getObsJ2000Pos: "
-//              "Time: " << now
-//           << ", ra: " << ra*(((unsigned int)0x80000000)/M_PI)
-//           << ", dec: " << dec*(((unsigned int)0x80000000)/M_PI)
-//           << endl;
-      const double cdec = cos(dec);
-      return Vec3d(cos(ra)*cdec,sin(ra)*cdec,sin(dec));
+      break;
     }
     p = pp;
   } while (p != position_pointer);
-  const double h = (M_PI/(unsigned int)0x80000000);
-  const double ra  = h*position_pointer->ra_int;
-  const double dec = h*position_pointer->dec_int;
-  const double cdec = cos(dec);
-  return Vec3d(cos(ra)*cdec,sin(ra)*cdec,sin(dec));
+  return p->pos;
 }
 
 void TelescopeTcp::prepareSelectFds(fd_set &read_fds,fd_set &write_fds,
