@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: stellarium@free.fr\n"
-"POT-Creation-Date: 2006-06-25 21:48+0200\n"
+"POT-Creation-Date: 2006-08-08 12:40-0700\n"
 "PO-Revision-Date: 2006-05-18 22:09+0000\n"
 "Last-Translator: VeikkoM <veikko.makela@ursa.fi>\n"
 "Language-Team: Finnish <fi@li.org>\n"
@@ -36,32 +36,32 @@ msgstr "%s: Väärä komentoriviparametri\n"
 msgid "Try `%s --help' for more information.\n"
 msgstr "Kirjoita '%s --help' saadaksesi lisätietoa.\n"
 
-#: src/constellation_mgr.cpp:175
+#: src/constellation_mgr.cpp:176
 msgid "Loading Constellation Art: "
 msgstr "Luetaan tähdistökuvia: "
 
-#: src/hip_star.cpp:84 src/hip_star.cpp:132 src/nebula.cpp:94
-#: src/planet.cpp:107 src/planet.cpp:153
+#: src/hip_star.cpp:84 src/hip_star.cpp:138 src/nebula.cpp:94
+#: src/nebula.cpp:116 src/planet.cpp:108 src/planet.cpp:154
 msgid "Magnitude: "
 msgstr "Magnitudi: "
 
-#: src/hip_star.cpp:85 src/hip_star.cpp:133
+#: src/hip_star.cpp:85 src/hip_star.cpp:139
 msgid " (Variable)"
 msgstr " (muuttuja)"
 
-#: src/hip_star.cpp:87 src/nebula.cpp:96 src/planet.cpp:111
+#: src/hip_star.cpp:87 src/nebula.cpp:96 src/planet.cpp:112
 msgid "RA/DE: "
 msgstr "Rekt./Dekl: "
 
-#: src/hip_star.cpp:93 src/nebula.cpp:102 src/planet.cpp:117
+#: src/hip_star.cpp:93 src/nebula.cpp:102 src/planet.cpp:118
 msgid "Az/Alt: "
 msgstr "Atsim./Kork.: "
 
-#: src/hip_star.cpp:95 src/planet.cpp:120 src/planet.cpp:157
+#: src/hip_star.cpp:95 src/planet.cpp:121 src/planet.cpp:158
 msgid "Distance: "
 msgstr "Etäisyys: "
 
-#: src/hip_star.cpp:97 src/hip_star.cpp:136
+#: src/hip_star.cpp:97 src/hip_star.cpp:142
 msgid " Light Years"
 msgstr " valovuotta"
 
@@ -69,7 +69,7 @@ msgstr " valovuotta"
 msgid "Spectral Type: "
 msgstr "Spektriluokka: "
 
-#: src/hip_star_mgr.cpp:133
+#: src/hip_star_mgr.cpp:134
 msgid "Loading Hipparcos catalog:"
 msgstr "Luetaan Hipparcos-luetteloa:"
 
@@ -81,119 +81,119 @@ msgstr "Tyyppi: "
 msgid "Size: "
 msgstr "Koko: "
 
-#: src/nebula_mgr.cpp:290
+#: src/nebula_mgr.cpp:328
 msgid "Loading NGC catalog: "
 msgstr "Luetaan NGC-luetteloa: "
 
-#: src/nebula_mgr.cpp:417
+#: src/nebula_mgr.cpp:455
 msgid "Loading Nebula Textures:"
 msgstr "Luetaan tähtisumujen kuvia:"
 
-#: src/planet.cpp:120 src/planet.cpp:157
+#: src/planet.cpp:121 src/planet.cpp:158
 msgid "AU"
 msgstr "AU"
 
-#: src/stel_ui.cpp:515 src/stel_ui.cpp:645
+#: src/stel_ui.cpp:516 src/stel_ui.cpp:646
 msgid "Script commander"
 msgstr "Komentosarjat"
 
-#: src/stel_ui.cpp:542
+#: src/stel_ui.cpp:543
 msgid "Invalid Script command"
 msgstr "Virheellinen komentosarjan komento"
 
-#: src/stel_ui.cpp:610
+#: src/stel_ui.cpp:611
 msgid "Drawing of the Constellations [C]"
 msgstr "Tähdistöviivat [C]"
 
-#: src/stel_ui.cpp:612
+#: src/stel_ui.cpp:613
 msgid "Names of the Constellations [V]"
 msgstr "Tähdistöjen nimet [V]"
 
-#: src/stel_ui.cpp:614
+#: src/stel_ui.cpp:615
 msgid "Constellations Art [R]"
 msgstr "Tähdistökuvat [R]"
 
-#: src/stel_ui.cpp:616
+#: src/stel_ui.cpp:617
 msgid "Azimuthal Grid [Z]"
 msgstr "Atsimuuttiasteikko [Z]"
 
-#: src/stel_ui.cpp:618
+#: src/stel_ui.cpp:619
 msgid "Equatorial Grid [E]"
 msgstr "Ekvatoriaaliasteikko [E]"
 
-#: src/stel_ui.cpp:620
+#: src/stel_ui.cpp:621
 msgid "Ground [G]"
 msgstr "Maanpinta [G]"
 
-#: src/stel_ui.cpp:622
+#: src/stel_ui.cpp:623
 msgid "Cardinal Points [Q]"
 msgstr "Ilmansuunnat [Q]"
 
-#: src/stel_ui.cpp:624
+#: src/stel_ui.cpp:625
 msgid "Atmosphere [A]"
 msgstr "Ilmakehä [A]"
 
-#: src/stel_ui.cpp:626
+#: src/stel_ui.cpp:627
 msgid "Nebulas [N]"
 msgstr "Tähtisumut [N]"
 
-#: src/stel_ui.cpp:628
+#: src/stel_ui.cpp:629
 msgid "Help [H]"
 msgstr "Apua [H]"
 
-#: src/stel_ui.cpp:630
+#: src/stel_ui.cpp:631
 msgid "Equatorial/Altazimuthal Mount [ENTER]"
 msgstr "Ekvatoriaali/atsimutaalijalusta [ENTER]"
 
-#: src/stel_ui.cpp:632
+#: src/stel_ui.cpp:633
 msgid "Configuration window"
 msgstr "Asetusikkuna"
 
-#: src/stel_ui.cpp:635
+#: src/stel_ui.cpp:636
 msgid "Night (red) mode"
 msgstr "Yötila (punainen)"
 
-#: src/stel_ui.cpp:638
+#: src/stel_ui.cpp:639
 msgid "Quit [CTRL + Q]"
 msgstr "Lopeta [CTRL + Q]"
 
-#: src/stel_ui.cpp:640
+#: src/stel_ui.cpp:641
 msgid "Quit [CMD + Q]"
 msgstr "Lopeta [CMD + Q]"
 
-#: src/stel_ui.cpp:643
+#: src/stel_ui.cpp:644
 msgid "Search for object"
 msgstr "Etsi kohdetta"
 
-#: src/stel_ui.cpp:647
+#: src/stel_ui.cpp:648
 msgid "Goto selected object [SPACE]"
 msgstr "Siirry valittuun kohteeseen [SPACE]"
 
-#: src/stel_ui.cpp:649
+#: src/stel_ui.cpp:650
 msgid "flip horizontally"
 msgstr ""
 
-#: src/stel_ui.cpp:651
+#: src/stel_ui.cpp:652
 msgid "flip vertically"
 msgstr ""
 
-#: src/stel_ui.cpp:657
+#: src/stel_ui.cpp:658
 msgid "Decrease Time Speed [J]"
 msgstr "Pienennä aika-askelta [J]"
 
-#: src/stel_ui.cpp:659
+#: src/stel_ui.cpp:660
 msgid "Real Time Speed [K]"
 msgstr "Normaali aika-askel [K]"
 
-#: src/stel_ui.cpp:661
+#: src/stel_ui.cpp:662
 msgid "Increase Time Speed [L]"
 msgstr "Kasvata aika-askelta [L]"
 
-#: src/stel_ui.cpp:663
+#: src/stel_ui.cpp:664
 msgid "Return to Current Time"
 msgstr "Palaa nykyhetkeen"
 
-#: src/stel_ui.cpp:672
+#: src/stel_ui.cpp:673
 msgid ""
 "   Please check for newer versions and send bug reports\n"
 "    and comments to us at: http://www.stellarium.org\n"
@@ -203,11 +203,11 @@ msgstr ""
 "    sekä kommentit osoitteeseen http://www.stellarium.org\n"
 "\n"
 
-#: src/stel_ui.cpp:691
+#: src/stel_ui.cpp:692
 msgid "Information"
 msgstr "Tiedot"
 
-#: src/stel_ui.cpp:703
+#: src/stel_ui.cpp:704
 msgid ""
 "Movement & selection:\n"
 "Arrow Keys       : Change viewing RA/DE\n"
@@ -233,7 +233,7 @@ msgstr ""
 "VÄLILYÖNTI               : Keskitä valittu kohde\n"
 "\n"
 
-#: src/stel_ui.cpp:714
+#: src/stel_ui.cpp:715
 msgid ""
 "Display options:\n"
 "ENTER : Equatorial/altazimuthal mount\n"
@@ -261,7 +261,7 @@ msgstr ""
 "4 , : Ekliptika                 5 . : Ekvaattori\n"
 "\n"
 
-#: src/stel_ui.cpp:726
+#: src/stel_ui.cpp:727
 msgid ""
 "Dialogs & other controls:\n"
 "H   : Help                      I   : About Stellarium\n"
@@ -279,7 +279,7 @@ msgstr ""
 "CTRL + F : Kohteiden etsintä päälle/pois\n"
 "\n"
 
-#: src/stel_ui.cpp:733
+#: src/stel_ui.cpp:734
 msgid ""
 "Time & Date:\n"
 "6   : Time rate pause           7   : Time rate 0\n"
@@ -297,7 +297,7 @@ msgstr ""
 "[   : 7 päivää taakse           ]   : 7 päivää eteen\n"
 "\n"
 
-#: src/stel_ui.cpp:740
+#: src/stel_ui.cpp:741
 msgid ""
 "During Script Playback:\n"
 "CTRL + C : End Script\n"
@@ -309,7 +309,7 @@ msgstr ""
 "6   : Pysäytä komentojono       K   : jatka komentojonoa\n"
 "\n"
 
-#: src/stel_ui.cpp:744
+#: src/stel_ui.cpp:745
 msgid ""
 "Misc:\n"
 "9   : Toggle meteor shower rates\n"
@@ -320,23 +320,23 @@ msgid ""
 "CMD + Q  : Quit\n"
 msgstr ""
 
-#: src/stel_ui.cpp:758
+#: src/stel_ui.cpp:759
 msgid "Help"
 msgstr "Apua"
 
-#: src/stel_ui.cpp:1020
+#: src/stel_ui.cpp:1038
 msgid "Command recording stopped."
 msgstr "Komentojen tallennus pysäytetty."
 
-#: src/stel_ui.cpp:1028
+#: src/stel_ui.cpp:1046
 msgid "Recording commands to script file:\n"
 msgstr "Tallennetaan toimintoja komentojonotiedostoon:\n"
 
-#: src/stel_ui.cpp:1030
+#: src/stel_ui.cpp:1048
 msgid "Hit CTRL-R again to stop.\n"
 msgstr "Anna CTRL-R uudelleen pysäyttääksesi.\n"
 
-#: src/stel_ui.cpp:1034
+#: src/stel_ui.cpp:1052
 msgid "Error: Unable to open script file to record commands."
 msgstr ""
 "Virhe: komentojonotiedostoa ei voida avata komentojen tallennusta varten."
@@ -393,19 +393,19 @@ msgstr "Kuun koko"
 msgid "Planets Hints"
 msgstr "Planeettojen osoittimet"
 
-#: src/stel_ui_conf.cpp:164 src/stel_ui_tuiconf.cpp:399
+#: src/stel_ui_conf.cpp:164 src/stel_ui_tuiconf.cpp:404
 msgid "Equatorial Grid"
 msgstr "Ekvatoriaaliasteikko"
 
-#: src/stel_ui_conf.cpp:169 src/stel_ui_tuiconf.cpp:398
+#: src/stel_ui_conf.cpp:169 src/stel_ui_tuiconf.cpp:403
 msgid "Azimuthal Grid"
 msgstr "Atsimuuttiasteikko"
 
-#: src/stel_ui_conf.cpp:174 src/stel_ui_tuiconf.cpp:400
+#: src/stel_ui_conf.cpp:174 src/stel_ui_tuiconf.cpp:405
 msgid "Equator Line"
 msgstr "Ekvaattori"
 
-#: src/stel_ui_conf.cpp:179 src/stel_ui_tuiconf.cpp:401
+#: src/stel_ui_conf.cpp:179 src/stel_ui_tuiconf.cpp:406
 msgid "Ecliptic Line"
 msgstr "Ekliptika"
 
@@ -413,7 +413,7 @@ msgstr "Ekliptika"
 msgid "Ground"
 msgstr "Maanpinta"
 
-#: src/stel_ui_conf.cpp:195 src/stel_ui_tuiconf.cpp:393
+#: src/stel_ui_conf.cpp:195 src/stel_ui_tuiconf.cpp:398
 msgid "Cardinal Points"
 msgstr "Ilmansuunnat"
 
@@ -516,11 +516,11 @@ msgstr ""
 msgid "Program Language: "
 msgstr "Ohjelma kieli: "
 
-#: src/stel_ui_conf.cpp:472 src/stel_ui_tuiconf.cpp:380
+#: src/stel_ui_conf.cpp:472 src/stel_ui_tuiconf.cpp:385
 msgid "Sky Language: "
 msgstr "Tähtitaivaskieli: "
 
-#: src/stel_ui_conf.cpp:490 src/stel_ui_tuiconf.cpp:376
+#: src/stel_ui_conf.cpp:490 src/stel_ui_tuiconf.cpp:381
 msgid "Sky Culture: "
 msgstr "Tähtitaivaskulttuuri: "
 
@@ -592,215 +592,220 @@ msgstr "Meteoria minuutissa"
 msgid "Current Time Speed is x"
 msgstr "Nykyinen aika-askel on x"
 
-#: src/stel_ui_tuiconf.cpp:270 src/stel_ui_tuiconf.cpp:410
+#: src/stel_ui_tuiconf.cpp:272 src/stel_ui_tuiconf.cpp:415
 msgid "Magnitude Sizing Multiplier: "
 msgstr "Magnitudin kokokerroin: "
 
-#: src/stel_ui_tuiconf.cpp:347
+#: src/stel_ui_tuiconf.cpp:352
 msgid "Set Location "
 msgstr "Aseta paikkakunta "
 
-#: src/stel_ui_tuiconf.cpp:348
+#: src/stel_ui_tuiconf.cpp:353
 msgid "Set Time "
 msgstr "Aseta aika "
 
-#: src/stel_ui_tuiconf.cpp:349
+#: src/stel_ui_tuiconf.cpp:354
 msgid "General "
 msgstr "Yleistä "
 
-#: src/stel_ui_tuiconf.cpp:350
+#: src/stel_ui_tuiconf.cpp:355
 msgid "Stars "
 msgstr "Tähdet "
 
-#: src/stel_ui_tuiconf.cpp:351
+#: src/stel_ui_tuiconf.cpp:356
 msgid "Colors "
 msgstr "Värit "
 
-#: src/stel_ui_tuiconf.cpp:352
+#: src/stel_ui_tuiconf.cpp:357
 msgid "Effects "
 msgstr "Tehosteet "
 
-#: src/stel_ui_tuiconf.cpp:353
+#: src/stel_ui_tuiconf.cpp:358
 msgid "Scripts "
 msgstr "Komentojonot "
 
-#: src/stel_ui_tuiconf.cpp:354
+#: src/stel_ui_tuiconf.cpp:359
 msgid "Administration "
 msgstr "Hallinta "
 
-#: src/stel_ui_tuiconf.cpp:357
+#: src/stel_ui_tuiconf.cpp:362
 msgid "Latitude: "
 msgstr "Leveysaste: "
 
-#: src/stel_ui_tuiconf.cpp:358
+#: src/stel_ui_tuiconf.cpp:363
 msgid "Longitude: "
 msgstr "Pituusaste: "
 
-#: src/stel_ui_tuiconf.cpp:359
+#: src/stel_ui_tuiconf.cpp:364
 msgid "Altitude (m): "
 msgstr "Korkeus (m): "
 
-#: src/stel_ui_tuiconf.cpp:360
+#: src/stel_ui_tuiconf.cpp:365
 msgid "Solar System Body: "
 msgstr "Aurinkokunnan kohde: "
 
-#: src/stel_ui_tuiconf.cpp:364
+#: src/stel_ui_tuiconf.cpp:369
 msgid "Sky Time: "
 msgstr "Taivaan aika: "
 
-#: src/stel_ui_tuiconf.cpp:365
+#: src/stel_ui_tuiconf.cpp:370
 msgid "Set Time Zone: "
 msgstr "Aseta aikavyöhyke: "
 
-#: src/stel_ui_tuiconf.cpp:366
+#: src/stel_ui_tuiconf.cpp:371
 msgid "Preset Sky Time: "
 msgstr "Esiasetettu taivaan aika: "
 
-#: src/stel_ui_tuiconf.cpp:367
+#: src/stel_ui_tuiconf.cpp:372
 msgid "Sky Time At Start-up: "
 msgstr "Taivaan aika aloitettaessa: "
 
-#: src/stel_ui_tuiconf.cpp:368
+#: src/stel_ui_tuiconf.cpp:373
 msgid "Actual Time"
 msgstr ""
 
-#: src/stel_ui_tuiconf.cpp:369
+#: src/stel_ui_tuiconf.cpp:374
 msgid "Preset Time"
 msgstr ""
 
-#: src/stel_ui_tuiconf.cpp:370
+#: src/stel_ui_tuiconf.cpp:375
 msgid "Time Display Format: "
 msgstr "Kellonajan muoto: "
 
-#: src/stel_ui_tuiconf.cpp:371
+#: src/stel_ui_tuiconf.cpp:376
 msgid "Date Display Format: "
 msgstr "Päiväyksen muoto: "
 
-#: src/stel_ui_tuiconf.cpp:383
+#: src/stel_ui_tuiconf.cpp:388
 msgid "Show: "
 msgstr "Näytä: "
 
-#: src/stel_ui_tuiconf.cpp:383 src/stel_ui_tuiconf.cpp:408 src/s_gui.cpp:2232
+#: src/stel_ui_tuiconf.cpp:388 src/stel_ui_tuiconf.cpp:413 src/s_gui.cpp:2232
 msgid "Yes"
 msgstr "Kyllä"
 
-#: src/stel_ui_tuiconf.cpp:383 src/stel_ui_tuiconf.cpp:408 src/s_gui.cpp:2213
+#: src/stel_ui_tuiconf.cpp:388 src/stel_ui_tuiconf.cpp:413 src/s_gui.cpp:2213
 msgid "No"
 msgstr "Ei"
 
-#: src/stel_ui_tuiconf.cpp:384
+#: src/stel_ui_tuiconf.cpp:389
 msgid "Star Magnitude Multiplier: "
 msgstr "Tähden magnitudin kerroin: "
 
-#: src/stel_ui_tuiconf.cpp:385
+#: src/stel_ui_tuiconf.cpp:390
 msgid "Maximum Magnitude to Label: "
 msgstr "Maksimimagnitudi nimelle: "
 
-#: src/stel_ui_tuiconf.cpp:386
+#: src/stel_ui_tuiconf.cpp:391
 msgid "Twinkling: "
 msgstr "Tuikkiminen: "
 
-#: src/stel_ui_tuiconf.cpp:389
+#: src/stel_ui_tuiconf.cpp:394
 msgid "Constellation Lines"
 msgstr ""
 
-#: src/stel_ui_tuiconf.cpp:390
+#: src/stel_ui_tuiconf.cpp:395
 msgid "Constellation Names"
 msgstr ""
 
-#: src/stel_ui_tuiconf.cpp:391
+#: src/stel_ui_tuiconf.cpp:396
 msgid "Constellation Art Intensity"
 msgstr ""
 
-#: src/stel_ui_tuiconf.cpp:392
+#: src/stel_ui_tuiconf.cpp:397
 msgid "Constellation Boundaries"
 msgstr ""
 
-#: src/stel_ui_tuiconf.cpp:394
+#: src/stel_ui_tuiconf.cpp:399
 msgid "Planet Names"
 msgstr ""
 
-#: src/stel_ui_tuiconf.cpp:395
+#: src/stel_ui_tuiconf.cpp:400
 msgid "Planet Orbits"
 msgstr ""
 
-#: src/stel_ui_tuiconf.cpp:396
+#: src/stel_ui_tuiconf.cpp:401
 msgid "Planet Trails"
 msgstr ""
 
-#: src/stel_ui_tuiconf.cpp:397
+#: src/stel_ui_tuiconf.cpp:402
 msgid "Meridian Line"
 msgstr ""
 
-#: src/stel_ui_tuiconf.cpp:402
+#: src/stel_ui_tuiconf.cpp:407
 msgid "Nebula Names"
 msgstr ""
 
-#: src/stel_ui_tuiconf.cpp:403
+#: src/stel_ui_tuiconf.cpp:408
 msgid "Nebula Circles"
 msgstr ""
 
-#: src/stel_ui_tuiconf.cpp:407
+#: src/stel_ui_tuiconf.cpp:412
 msgid "Landscape: "
 msgstr "Maisema: "
 
-#: src/stel_ui_tuiconf.cpp:408
+#: src/stel_ui_tuiconf.cpp:413
 msgid "Manual zoom: "
 msgstr "Käsisuurennus: "
 
-#: src/stel_ui_tuiconf.cpp:409
+#: src/stel_ui_tuiconf.cpp:414
 msgid "Object Sizing Rule: "
 msgstr "Kohteen mittakaavan sääntö: "
 
-#: src/stel_ui_tuiconf.cpp:409
+#: src/stel_ui_tuiconf.cpp:414
 msgid "Point"
 msgstr "Piste"
 
-#: src/stel_ui_tuiconf.cpp:409
+#: src/stel_ui_tuiconf.cpp:414
 msgid "Magnitude"
 msgstr "Magnitudi"
 
-#: src/stel_ui_tuiconf.cpp:411
+#: src/stel_ui_tuiconf.cpp:416
 msgid "Milky Way intensity: "
 msgstr "Linnunradan voimakkuus: "
 
-#: src/stel_ui_tuiconf.cpp:412
+#: src/stel_ui_tuiconf.cpp:417
 msgid "Maximum Nebula Magnitude to Label: "
 msgstr "Maksimimagnitudi tähtisumujen nimelle: "
 
-#: src/stel_ui_tuiconf.cpp:413
+#: src/stel_ui_tuiconf.cpp:418
 msgid "Zoom Duration: "
 msgstr "Suurennuksen kesto: "
 
-#: src/stel_ui_tuiconf.cpp:414
+#: src/stel_ui_tuiconf.cpp:419
 msgid "Cursor Timeout: "
 msgstr "Kohdistimen aikakatkaisu: "
 
-#: src/stel_ui_tuiconf.cpp:417
+#: src/stel_ui_tuiconf.cpp:422
 msgid "Local Script: "
 msgstr "Paikallinen komentojono: "
 
-#: src/stel_ui_tuiconf.cpp:420
+#: src/stel_ui_tuiconf.cpp:425
 msgid "CD/DVD Script: "
 msgstr "CD/DVD-komentojono: "
 
-#: src/stel_ui_tuiconf.cpp:424
+#: src/stel_ui_tuiconf.cpp:429
 msgid "Load Default Configuration: "
 msgstr "Hae oletusasetukset: "
 
-#: src/stel_ui_tuiconf.cpp:425
+#: src/stel_ui_tuiconf.cpp:430
 msgid "Save Current Configuration as Default: "
 msgstr "Tallenna nykyiset asetukset oletusarvoiksi: "
 
-#: src/stel_ui_tuiconf.cpp:426
+#: src/stel_ui_tuiconf.cpp:431
+#, fuzzy
+msgid "Shut Down: "
+msgstr "Näytä: "
+
+#: src/stel_ui_tuiconf.cpp:432
 msgid "Update me via Internet: "
 msgstr "Päivitä Internetin kautta: "
 
-#: src/stel_ui_tuiconf.cpp:427
+#: src/stel_ui_tuiconf.cpp:433
 msgid "Set UI Locale: "
 msgstr ""
 
-#: src/stel_ui_tuiconf.cpp:539
+#: src/stel_ui_tuiconf.cpp:545
 msgid "Arrow down to load list."
 msgstr ""
 

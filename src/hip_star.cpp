@@ -110,13 +110,15 @@ wstring HipStar::getInfoString(const Navigator * nav) const
 wstring HipStar::getNameI18n(void) const 
 {
 
-	if (commonNameI18!=L"" || sciName!=L"")
+	if(commonNameI18!=L"") return commonNameI18;
+
+	/*|| sciName!=L"")
 	{
 		// TODO: ISSUE Sci name shouldn't show with other cultures
 		// Tie to culture or make option? Rob
 		if (commonNameI18 == L"") return L""; // return sciName; 
 		else return commonNameI18; 
-	}
+		} */
 	else 
 		return L"HP " + StelUtility::intToWstring(HP);
 }
@@ -149,7 +151,7 @@ static const char spectral_type[13] = {
   'O','B','A','F','G','K','M','R','S','N','W','X','?'
 };
 
-static Vec3f star_colors[12] = {
+static Vec3f star_colors[13] = {
   Vec3f(0.8 /1.3,  1.0 /1.3, 1.3 /1.3),
   Vec3f(0.9 /1.2,  1.0 /1.2, 1.2 /1.2),
   Vec3f(0.95/1.15, 1.0 /1.15,1.15/1.15),
@@ -161,6 +163,7 @@ static Vec3f star_colors[12] = {
   Vec3f(1.5 /1.5,  0.8 /1.5, 0.2 /1.5),
   Vec3f(1.5 /1.5,  0.8 /1.5, 0.2 /1.5),
   Vec3f(1.5 /1.5,  0.8 /1.5, 0.2 /1.5),
+  Vec3f(1.0,  1.0, 1.0),
   Vec3f(1.0,  1.0, 1.0)
 };
 
