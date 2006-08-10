@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: stellarium@free.fr\n"
-"POT-Creation-Date: 2006-06-25 21:48+0200\n"
+"POT-Creation-Date: 2006-08-08 12:40-0700\n"
 "PO-Revision-Date: 2006-05-25 08:35+0000\n"
 "Last-Translator: Mark Yoseph <yoseph2001@yahoo.com>\n"
 "Language-Team: Indonesian <id@li.org>\n"
@@ -37,34 +37,34 @@ msgstr "%s: Argumen perintah buruk\n"
 msgid "Try `%s --help' for more information.\n"
 msgstr "Coba '%s --help' untuk info selanjutnya.\n"
 
-#: src/constellation_mgr.cpp:175
+#: src/constellation_mgr.cpp:176
 msgid "Loading Constellation Art: "
 msgstr "Panggil Gambar Konstelasi "
 
-#: src/hip_star.cpp:84 src/hip_star.cpp:132 src/nebula.cpp:94
-#: src/planet.cpp:107 src/planet.cpp:153
+#: src/hip_star.cpp:84 src/hip_star.cpp:138 src/nebula.cpp:94
+#: src/nebula.cpp:116 src/planet.cpp:108 src/planet.cpp:154
 msgid "Magnitude: "
 msgstr "Besar: "
 
-#: src/hip_star.cpp:85 src/hip_star.cpp:133
+#: src/hip_star.cpp:85 src/hip_star.cpp:139
 msgid " (Variable)"
 msgstr " (Variabel)"
 
-#: src/hip_star.cpp:87 src/nebula.cpp:96 src/planet.cpp:111
+#: src/hip_star.cpp:87 src/nebula.cpp:96 src/planet.cpp:112
 #, fuzzy
 msgid "RA/DE: "
 msgstr "RA/DE: "
 
-#: src/hip_star.cpp:93 src/nebula.cpp:102 src/planet.cpp:117
+#: src/hip_star.cpp:93 src/nebula.cpp:102 src/planet.cpp:118
 #, fuzzy
 msgid "Az/Alt: "
 msgstr "Az/Alt: "
 
-#: src/hip_star.cpp:95 src/planet.cpp:120 src/planet.cpp:157
+#: src/hip_star.cpp:95 src/planet.cpp:121 src/planet.cpp:158
 msgid "Distance: "
 msgstr "Jarak: "
 
-#: src/hip_star.cpp:97 src/hip_star.cpp:136
+#: src/hip_star.cpp:97 src/hip_star.cpp:142
 msgid " Light Years"
 msgstr " Tahun Cahaya"
 
@@ -73,7 +73,7 @@ msgstr " Tahun Cahaya"
 msgid "Spectral Type: "
 msgstr "Jenis Spektrum "
 
-#: src/hip_star_mgr.cpp:133
+#: src/hip_star_mgr.cpp:134
 #, fuzzy
 msgid "Loading Hipparcos catalog:"
 msgstr "Panggil Daftar Hipparcos:"
@@ -86,132 +86,132 @@ msgstr "Jenis: "
 msgid "Size: "
 msgstr "Ukuran: "
 
-#: src/nebula_mgr.cpp:290
+#: src/nebula_mgr.cpp:328
 #, fuzzy
 msgid "Loading NGC catalog: "
 msgstr "Panggil daftar NGC: "
 
-#: src/nebula_mgr.cpp:417
+#: src/nebula_mgr.cpp:455
 msgid "Loading Nebula Textures:"
 msgstr "Panggil Gambar Nebula:"
 
-#: src/planet.cpp:120 src/planet.cpp:157
+#: src/planet.cpp:121 src/planet.cpp:158
 #, fuzzy
 msgid "AU"
 msgstr "AU"
 
-#: src/stel_ui.cpp:515 src/stel_ui.cpp:645
+#: src/stel_ui.cpp:516 src/stel_ui.cpp:646
 #, fuzzy
 msgid "Script commander"
 msgstr "Pemberi perintah skrip"
 
-#: src/stel_ui.cpp:542
+#: src/stel_ui.cpp:543
 msgid "Invalid Script command"
 msgstr "Perintah skrip tak sesuai"
 
-#: src/stel_ui.cpp:610
+#: src/stel_ui.cpp:611
 msgid "Drawing of the Constellations [C]"
 msgstr "Gambar Konstelasi [C]"
 
-#: src/stel_ui.cpp:612
+#: src/stel_ui.cpp:613
 #, fuzzy
 msgid "Names of the Constellations [V]"
 msgstr "Nama Konstelasi [V]"
 
-#: src/stel_ui.cpp:614
+#: src/stel_ui.cpp:615
 #, fuzzy
 msgid "Constellations Art [R]"
 msgstr "Seni Konstelasi [R]"
 
-#: src/stel_ui.cpp:616
+#: src/stel_ui.cpp:617
 #, fuzzy
 msgid "Azimuthal Grid [Z]"
 msgstr "Grid Azimut [Z]"
 
-#: src/stel_ui.cpp:618
+#: src/stel_ui.cpp:619
 #, fuzzy
 msgid "Equatorial Grid [E]"
 msgstr "Grid Katulistiwa [E]"
 
-#: src/stel_ui.cpp:620
+#: src/stel_ui.cpp:621
 msgid "Ground [G]"
 msgstr "Permukaan Bumi [G]"
 
-#: src/stel_ui.cpp:622
+#: src/stel_ui.cpp:623
 #, fuzzy
 msgid "Cardinal Points [Q]"
 msgstr "Titik Kardinal [Q]"
 
-#: src/stel_ui.cpp:624
+#: src/stel_ui.cpp:625
 msgid "Atmosphere [A]"
 msgstr "Atmosfir [A]"
 
-#: src/stel_ui.cpp:626
+#: src/stel_ui.cpp:627
 #, fuzzy
 msgid "Nebulas [N]"
 msgstr "Nebula [N]"
 
-#: src/stel_ui.cpp:628
+#: src/stel_ui.cpp:629
 msgid "Help [H]"
 msgstr "Bantuan [H]"
 
-#: src/stel_ui.cpp:630
+#: src/stel_ui.cpp:631
 #, fuzzy
 msgid "Equatorial/Altazimuthal Mount [ENTER]"
 msgstr "Puncak Katulistiwa/Altazimut [ENTER]"
 
-#: src/stel_ui.cpp:632
+#: src/stel_ui.cpp:633
 msgid "Configuration window"
 msgstr "Jendela Konfigurasi"
 
-#: src/stel_ui.cpp:635
+#: src/stel_ui.cpp:636
 #, fuzzy
 msgid "Night (red) mode"
 msgstr "Mode Malam (merah)"
 
-#: src/stel_ui.cpp:638
+#: src/stel_ui.cpp:639
 msgid "Quit [CTRL + Q]"
 msgstr "Keluar [CTRL + Q]"
 
-#: src/stel_ui.cpp:640
+#: src/stel_ui.cpp:641
 msgid "Quit [CMD + Q]"
 msgstr "Keluar [CMD + Q]"
 
-#: src/stel_ui.cpp:643
+#: src/stel_ui.cpp:644
 msgid "Search for object"
 msgstr "Mencari objek"
 
-#: src/stel_ui.cpp:647
+#: src/stel_ui.cpp:648
 msgid "Goto selected object [SPACE]"
 msgstr "Lompat ke objek yang dipilih [SPACE]"
 
-#: src/stel_ui.cpp:649
+#: src/stel_ui.cpp:650
 msgid "flip horizontally"
 msgstr ""
 
-#: src/stel_ui.cpp:651
+#: src/stel_ui.cpp:652
 msgid "flip vertically"
 msgstr ""
 
-#: src/stel_ui.cpp:657
+#: src/stel_ui.cpp:658
 msgid "Decrease Time Speed [J]"
 msgstr "Turunkan Kecepatan Waktu [J]"
 
-#: src/stel_ui.cpp:659
+#: src/stel_ui.cpp:660
 #, fuzzy
 msgid "Real Time Speed [K]"
 msgstr "Kecepatan Waktu Nyata [K]"
 
-#: src/stel_ui.cpp:661
+#: src/stel_ui.cpp:662
 msgid "Increase Time Speed [L]"
 msgstr "Naikkan Kecepatan Waktu"
 
-#: src/stel_ui.cpp:663
+#: src/stel_ui.cpp:664
 #, fuzzy
 msgid "Return to Current Time"
 msgstr "Kembali ke Waktu Sekarang"
 
-#: src/stel_ui.cpp:672
+#: src/stel_ui.cpp:673
 msgid ""
 "   Please check for newer versions and send bug reports\n"
 "    and comments to us at: http://www.stellarium.org\n"
@@ -221,11 +221,11 @@ msgstr ""
 "    dan uraiannya kepada kami di: http://www.stellarium.org\n"
 "\n"
 
-#: src/stel_ui.cpp:691
+#: src/stel_ui.cpp:692
 msgid "Information"
 msgstr "Informasi"
 
-#: src/stel_ui.cpp:703
+#: src/stel_ui.cpp:704
 #, fuzzy
 msgid ""
 "Movement & selection:\n"
@@ -252,7 +252,7 @@ msgstr ""
 "SPACE : Tampilkan objek di tengah\n"
 "\n"
 
-#: src/stel_ui.cpp:714
+#: src/stel_ui.cpp:715
 #, fuzzy
 msgid ""
 "Display options:\n"
@@ -281,7 +281,7 @@ msgstr ""
 "4 , : Garis putar matahari 5 . : Garis Katulistiwa\n"
 "\n"
 
-#: src/stel_ui.cpp:726
+#: src/stel_ui.cpp:727
 #, fuzzy
 msgid ""
 "Dialogs & other controls:\n"
@@ -300,7 +300,7 @@ msgstr ""
 "CTRL + F : Toggle pencari objek\n"
 "\n"
 
-#: src/stel_ui.cpp:733
+#: src/stel_ui.cpp:734
 #, fuzzy
 msgid ""
 "Time & Date:\n"
@@ -319,7 +319,7 @@ msgstr ""
 "[ : Mundur 7 hari ] : Maju 7 hari\n"
 "\n"
 
-#: src/stel_ui.cpp:740
+#: src/stel_ui.cpp:741
 #, fuzzy
 msgid ""
 "During Script Playback:\n"
@@ -332,7 +332,7 @@ msgstr ""
 "6 : Interupsi skrip K : Lanjutkan skrip\n"
 "\n"
 
-#: src/stel_ui.cpp:744
+#: src/stel_ui.cpp:745
 msgid ""
 "Misc:\n"
 "9   : Toggle meteor shower rates\n"
@@ -343,23 +343,23 @@ msgid ""
 "CMD + Q  : Quit\n"
 msgstr ""
 
-#: src/stel_ui.cpp:758
+#: src/stel_ui.cpp:759
 msgid "Help"
 msgstr "Bantuan"
 
-#: src/stel_ui.cpp:1020
+#: src/stel_ui.cpp:1038
 msgid "Command recording stopped."
 msgstr "Perekaman perintah terhenti."
 
-#: src/stel_ui.cpp:1028
+#: src/stel_ui.cpp:1046
 msgid "Recording commands to script file:\n"
 msgstr "Merekam perintah ke dalam file skrip:\n"
 
-#: src/stel_ui.cpp:1030
+#: src/stel_ui.cpp:1048
 msgid "Hit CTRL-R again to stop.\n"
 msgstr "Tekan CTRL-R agar untuk menghentikan.\n"
 
-#: src/stel_ui.cpp:1034
+#: src/stel_ui.cpp:1052
 msgid "Error: Unable to open script file to record commands."
 msgstr "Error: Tak bisa membuka file skrip untuk merekam perintah."
 
@@ -420,21 +420,21 @@ msgstr "Skala Bulan"
 msgid "Planets Hints"
 msgstr "Petunjuk Planet-planet"
 
-#: src/stel_ui_conf.cpp:164 src/stel_ui_tuiconf.cpp:399
+#: src/stel_ui_conf.cpp:164 src/stel_ui_tuiconf.cpp:404
 #, fuzzy
 msgid "Equatorial Grid"
 msgstr "Grid Katulistiwa"
 
-#: src/stel_ui_conf.cpp:169 src/stel_ui_tuiconf.cpp:398
+#: src/stel_ui_conf.cpp:169 src/stel_ui_tuiconf.cpp:403
 #, fuzzy
 msgid "Azimuthal Grid"
 msgstr "Grid Azimut"
 
-#: src/stel_ui_conf.cpp:174 src/stel_ui_tuiconf.cpp:400
+#: src/stel_ui_conf.cpp:174 src/stel_ui_tuiconf.cpp:405
 msgid "Equator Line"
 msgstr "Garis Katulistiwa"
 
-#: src/stel_ui_conf.cpp:179 src/stel_ui_tuiconf.cpp:401
+#: src/stel_ui_conf.cpp:179 src/stel_ui_tuiconf.cpp:406
 #, fuzzy
 msgid "Ecliptic Line"
 msgstr "Garis Edar Matahari"
@@ -443,7 +443,7 @@ msgstr "Garis Edar Matahari"
 msgid "Ground"
 msgstr "Permukaan Bumi"
 
-#: src/stel_ui_conf.cpp:195 src/stel_ui_tuiconf.cpp:393
+#: src/stel_ui_conf.cpp:195 src/stel_ui_tuiconf.cpp:398
 #, fuzzy
 msgid "Cardinal Points"
 msgstr "Titik-titik Kardinal"
@@ -552,12 +552,12 @@ msgstr ""
 msgid "Program Language: "
 msgstr "Bahasa Program: "
 
-#: src/stel_ui_conf.cpp:472 src/stel_ui_tuiconf.cpp:380
+#: src/stel_ui_conf.cpp:472 src/stel_ui_tuiconf.cpp:385
 #, fuzzy
 msgid "Sky Language: "
 msgstr "Bahasa Langit: "
 
-#: src/stel_ui_conf.cpp:490 src/stel_ui_tuiconf.cpp:376
+#: src/stel_ui_conf.cpp:490 src/stel_ui_tuiconf.cpp:381
 #, fuzzy
 msgid "Sky Culture: "
 msgstr "Budaya Langit "
@@ -632,215 +632,220 @@ msgstr "Jumlah Meteor per menit"
 msgid "Current Time Speed is x"
 msgstr "Kecepatan Waktu saat ini adalah x"
 
-#: src/stel_ui_tuiconf.cpp:270 src/stel_ui_tuiconf.cpp:410
+#: src/stel_ui_tuiconf.cpp:272 src/stel_ui_tuiconf.cpp:415
 msgid "Magnitude Sizing Multiplier: "
 msgstr ""
 
-#: src/stel_ui_tuiconf.cpp:347
+#: src/stel_ui_tuiconf.cpp:352
 msgid "Set Location "
 msgstr "Set Lokasi "
 
-#: src/stel_ui_tuiconf.cpp:348
+#: src/stel_ui_tuiconf.cpp:353
 msgid "Set Time "
 msgstr "Set Waktu "
 
-#: src/stel_ui_tuiconf.cpp:349
+#: src/stel_ui_tuiconf.cpp:354
 msgid "General "
 msgstr "Umum "
 
-#: src/stel_ui_tuiconf.cpp:350
+#: src/stel_ui_tuiconf.cpp:355
 msgid "Stars "
 msgstr "Bintang "
 
-#: src/stel_ui_tuiconf.cpp:351
+#: src/stel_ui_tuiconf.cpp:356
 msgid "Colors "
 msgstr "Warna "
 
-#: src/stel_ui_tuiconf.cpp:352
+#: src/stel_ui_tuiconf.cpp:357
 msgid "Effects "
 msgstr "Efek "
 
-#: src/stel_ui_tuiconf.cpp:353
+#: src/stel_ui_tuiconf.cpp:358
 msgid "Scripts "
 msgstr ""
 
-#: src/stel_ui_tuiconf.cpp:354
+#: src/stel_ui_tuiconf.cpp:359
 msgid "Administration "
 msgstr ""
 
-#: src/stel_ui_tuiconf.cpp:357
+#: src/stel_ui_tuiconf.cpp:362
 msgid "Latitude: "
 msgstr ""
 
-#: src/stel_ui_tuiconf.cpp:358
+#: src/stel_ui_tuiconf.cpp:363
 msgid "Longitude: "
 msgstr ""
 
-#: src/stel_ui_tuiconf.cpp:359
+#: src/stel_ui_tuiconf.cpp:364
 msgid "Altitude (m): "
 msgstr ""
 
-#: src/stel_ui_tuiconf.cpp:360
+#: src/stel_ui_tuiconf.cpp:365
 msgid "Solar System Body: "
 msgstr ""
 
-#: src/stel_ui_tuiconf.cpp:364
+#: src/stel_ui_tuiconf.cpp:369
 msgid "Sky Time: "
 msgstr ""
 
-#: src/stel_ui_tuiconf.cpp:365
+#: src/stel_ui_tuiconf.cpp:370
 msgid "Set Time Zone: "
 msgstr ""
 
-#: src/stel_ui_tuiconf.cpp:366
+#: src/stel_ui_tuiconf.cpp:371
 msgid "Preset Sky Time: "
 msgstr ""
 
-#: src/stel_ui_tuiconf.cpp:367
+#: src/stel_ui_tuiconf.cpp:372
 msgid "Sky Time At Start-up: "
 msgstr ""
 
-#: src/stel_ui_tuiconf.cpp:368
+#: src/stel_ui_tuiconf.cpp:373
 msgid "Actual Time"
 msgstr ""
 
-#: src/stel_ui_tuiconf.cpp:369
+#: src/stel_ui_tuiconf.cpp:374
 msgid "Preset Time"
 msgstr ""
 
-#: src/stel_ui_tuiconf.cpp:370
+#: src/stel_ui_tuiconf.cpp:375
 msgid "Time Display Format: "
 msgstr "Format Tampilan Waktu: "
 
-#: src/stel_ui_tuiconf.cpp:371
+#: src/stel_ui_tuiconf.cpp:376
 msgid "Date Display Format: "
 msgstr "Format Tampilan Tanggal: "
 
-#: src/stel_ui_tuiconf.cpp:383
+#: src/stel_ui_tuiconf.cpp:388
 msgid "Show: "
 msgstr "Tampilkan: "
 
-#: src/stel_ui_tuiconf.cpp:383 src/stel_ui_tuiconf.cpp:408 src/s_gui.cpp:2232
+#: src/stel_ui_tuiconf.cpp:388 src/stel_ui_tuiconf.cpp:413 src/s_gui.cpp:2232
 msgid "Yes"
 msgstr "Ya"
 
-#: src/stel_ui_tuiconf.cpp:383 src/stel_ui_tuiconf.cpp:408 src/s_gui.cpp:2213
+#: src/stel_ui_tuiconf.cpp:388 src/stel_ui_tuiconf.cpp:413 src/s_gui.cpp:2213
 msgid "No"
 msgstr "tIDAK"
 
-#: src/stel_ui_tuiconf.cpp:384
+#: src/stel_ui_tuiconf.cpp:389
 msgid "Star Magnitude Multiplier: "
 msgstr "Pengali Magnitude Bintang: "
 
-#: src/stel_ui_tuiconf.cpp:385
+#: src/stel_ui_tuiconf.cpp:390
 msgid "Maximum Magnitude to Label: "
 msgstr ""
 
-#: src/stel_ui_tuiconf.cpp:386
+#: src/stel_ui_tuiconf.cpp:391
 msgid "Twinkling: "
 msgstr "Berkelip: "
 
-#: src/stel_ui_tuiconf.cpp:389
+#: src/stel_ui_tuiconf.cpp:394
 msgid "Constellation Lines"
 msgstr ""
 
-#: src/stel_ui_tuiconf.cpp:390
+#: src/stel_ui_tuiconf.cpp:395
 msgid "Constellation Names"
 msgstr ""
 
-#: src/stel_ui_tuiconf.cpp:391
+#: src/stel_ui_tuiconf.cpp:396
 msgid "Constellation Art Intensity"
 msgstr ""
 
-#: src/stel_ui_tuiconf.cpp:392
+#: src/stel_ui_tuiconf.cpp:397
 msgid "Constellation Boundaries"
 msgstr ""
 
-#: src/stel_ui_tuiconf.cpp:394
+#: src/stel_ui_tuiconf.cpp:399
 msgid "Planet Names"
 msgstr ""
 
-#: src/stel_ui_tuiconf.cpp:395
+#: src/stel_ui_tuiconf.cpp:400
 msgid "Planet Orbits"
 msgstr ""
 
-#: src/stel_ui_tuiconf.cpp:396
+#: src/stel_ui_tuiconf.cpp:401
 msgid "Planet Trails"
 msgstr ""
 
-#: src/stel_ui_tuiconf.cpp:397
+#: src/stel_ui_tuiconf.cpp:402
 msgid "Meridian Line"
 msgstr ""
 
-#: src/stel_ui_tuiconf.cpp:402
+#: src/stel_ui_tuiconf.cpp:407
 msgid "Nebula Names"
 msgstr ""
 
-#: src/stel_ui_tuiconf.cpp:403
+#: src/stel_ui_tuiconf.cpp:408
 msgid "Nebula Circles"
 msgstr ""
 
-#: src/stel_ui_tuiconf.cpp:407
+#: src/stel_ui_tuiconf.cpp:412
 msgid "Landscape: "
 msgstr ""
 
-#: src/stel_ui_tuiconf.cpp:408
+#: src/stel_ui_tuiconf.cpp:413
 msgid "Manual zoom: "
 msgstr ""
 
-#: src/stel_ui_tuiconf.cpp:409
+#: src/stel_ui_tuiconf.cpp:414
 msgid "Object Sizing Rule: "
 msgstr ""
 
-#: src/stel_ui_tuiconf.cpp:409
+#: src/stel_ui_tuiconf.cpp:414
 msgid "Point"
 msgstr ""
 
-#: src/stel_ui_tuiconf.cpp:409
+#: src/stel_ui_tuiconf.cpp:414
 msgid "Magnitude"
 msgstr ""
 
-#: src/stel_ui_tuiconf.cpp:411
+#: src/stel_ui_tuiconf.cpp:416
 msgid "Milky Way intensity: "
 msgstr ""
 
-#: src/stel_ui_tuiconf.cpp:412
+#: src/stel_ui_tuiconf.cpp:417
 msgid "Maximum Nebula Magnitude to Label: "
 msgstr ""
 
-#: src/stel_ui_tuiconf.cpp:413
+#: src/stel_ui_tuiconf.cpp:418
 msgid "Zoom Duration: "
 msgstr ""
 
-#: src/stel_ui_tuiconf.cpp:414
+#: src/stel_ui_tuiconf.cpp:419
 msgid "Cursor Timeout: "
 msgstr ""
 
-#: src/stel_ui_tuiconf.cpp:417
+#: src/stel_ui_tuiconf.cpp:422
 msgid "Local Script: "
 msgstr ""
 
-#: src/stel_ui_tuiconf.cpp:420
+#: src/stel_ui_tuiconf.cpp:425
 msgid "CD/DVD Script: "
 msgstr ""
 
-#: src/stel_ui_tuiconf.cpp:424
+#: src/stel_ui_tuiconf.cpp:429
 msgid "Load Default Configuration: "
 msgstr "Baca Konfigurasi Default: "
 
-#: src/stel_ui_tuiconf.cpp:425
+#: src/stel_ui_tuiconf.cpp:430
 msgid "Save Current Configuration as Default: "
 msgstr "Simpan Konfigurasi Saat Ini sebagai Default: "
 
-#: src/stel_ui_tuiconf.cpp:426
+#: src/stel_ui_tuiconf.cpp:431
+#, fuzzy
+msgid "Shut Down: "
+msgstr "Tampilkan: "
+
+#: src/stel_ui_tuiconf.cpp:432
 msgid "Update me via Internet: "
 msgstr "Update saya lewat internet: "
 
-#: src/stel_ui_tuiconf.cpp:427
+#: src/stel_ui_tuiconf.cpp:433
 msgid "Set UI Locale: "
 msgstr ""
 
-#: src/stel_ui_tuiconf.cpp:539
+#: src/stel_ui_tuiconf.cpp:545
 msgid "Arrow down to load list."
 msgstr ""
 
