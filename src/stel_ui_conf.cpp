@@ -867,19 +867,27 @@ void StelUI::setVideoOption(void)
 	int w = atoi(s.substr(0,i).c_str());
 	int h = atoi(s.substr(i+1,s.size()).c_str());
 
-	cout << "Saving video size " << w << "x" << h << " in file " << app->getConfigFile() << endl;
+        // cheap hack to prevent bug #1483662 - MNG, 20060508
+	cout << "Saving video settings: projection=" << core->getProjectionType() 
+	     << ", distorter=" << app->getViewPortDistorterType();
+	if ( w && h ) cout << ", res=" << w << "x" << h;
+   	cout << " in file " << app->getConfigFile() << endl;
 
 	InitParser conf;
 	conf.load(app->getConfigFile());
 
-    conf.set_str("projection:type", core->getProjectionType());
-    conf.set_str("video:distorter", app->getViewPortDistorterType());
+	conf.set_str("projection:type", core->getProjectionType());
+	conf.set_str("video:distorter", app->getViewPortDistorterType());
+
 
 	if (core->getViewportMaskDisk()) conf.set_str("projection:viewport", "disk");
 	else conf.set_str("projection:viewport", "maximized");
 
-	conf.set_int("video:screen_w", w);
-	conf.set_int("video:screen_h", h);
+	if ( w && h ) {   
+		conf.set_int("video:screen_w", w);
+		conf.set_int("video:screen_h", h);
+	}
+
 	conf.save(app->getConfigFile());
 }
 
