@@ -113,7 +113,7 @@ public:
 	
 	//! Get the current sky language used for sky object labels
 	//! @return The name of the locale (e.g fr)
-	string getSkyLanguage() {return skyTranslator.getLocaleName();}
+	string getSkyLanguage() {return skyTranslator.getTrueLocaleName();}
 	
 	///////////////////////////////////////////////////////////////////////////////////////
 	// Navigation

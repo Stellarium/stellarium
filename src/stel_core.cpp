@@ -862,14 +862,14 @@ void StelCore::setSkyLanguage(const std::string& newSkyLocaleName)
 
 	// Update the translator with new locale name
 	skyTranslator = Translator(PACKAGE, getLocaleDir(), newSkyLocaleName);
-	// cout << "Sky locale is " << skyTranslator.getLocaleName() << endl;
+	// cout << "Sky locale is " << skyTranslator.getTrueLocaleName() << endl;
 
 	// see if fonts need to change
 	string oldFontFile, newFontFile, tmpstr;
 	float oldFontScale, newFontScale, tmpfloat;
 
 	getFontForLocale(oldLocale, oldFontFile, oldFontScale, tmpstr, tmpfloat);
-	getFontForLocale(newSkyLocaleName, newFontFile, newFontScale, tmpstr, tmpfloat);
+	getFontForLocale(skyTranslator.getTrueLocaleName(), newFontFile, newFontScale, tmpstr, tmpfloat);
 
 	// If font has changed or init is being called for first time...
 	if(oldFontFile != newFontFile || oldFontScale != newFontScale || firstTime) {

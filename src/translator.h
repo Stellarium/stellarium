@@ -74,6 +74,7 @@ public:
 		return UTF8stringToWstring(translateUTF8(s));
 	}
 
+	/*
 	//! @brief Get translator locale name. This name can be used to create a translator.
 	//! Could be artificial "system" value for config file
 	//! @return Locale name e.g "fr_FR"
@@ -81,8 +82,8 @@ public:
 	{
 		return langName;
 	}
+	*/
 
-	/*
 	//! @brief Get true translator locale name. Actual locale, never "system" 
 	//! @return Locale name e.g "fr_FR"
 	std::string getTrueLocaleName(void)
@@ -93,7 +94,6 @@ public:
 			return langName;
 		}
 	}
-	*/
 
 	//! Used as a global translator by the whole app
 	static Translator globalTranslator;

@@ -250,7 +250,7 @@ void StelApp::setAppLanguage(const std::string& newAppLocaleName)
 {
 	// Update the translator with new locale name
 	Translator::globalTranslator = Translator(PACKAGE, core->getLocaleDir(), newAppLocaleName);
-	cout << "Application locale is " << Translator::globalTranslator.getLocaleName() << endl;
+	cout << "Application locale is " << Translator::globalTranslator.getTrueLocaleName() << endl;
 
 	// update translations and font in tui
 	ui->localizeTui();
