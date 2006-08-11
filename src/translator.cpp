@@ -66,6 +66,13 @@ void Translator::initSystemLanguage(void)
 #endif
         }
 	}
+
+	//change systemLangName to ISO 639 / ISO 3166.
+	unsigned int pos = Translator::systemLangName.find(':', 0);
+	if(pos != Translator::systemLangName.npos)
+	       Translator::systemLangName.resize(pos);
+	pos = Translator::systemLangName.find('.', 0);
+	if(pos == 5) Translator::systemLangName.resize(pos);
 }
 
 void Translator::reload()
