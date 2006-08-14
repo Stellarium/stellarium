@@ -846,6 +846,10 @@ bool StelCore::setSkyCultureDir(const string& cultureDir)
 
 	// Load culture star names in english
 	hip_stars->load_common_names(getDataDir() + "sky_cultures/" + skyCultureDir + "/star_names.fab");
+
+	// Turn on sci names/catalog names for western culture only
+	hip_stars->setFlagSciNames( skyCultureDir.compare(0, 7, "western") ==0 );
+
 	// translate
 	hip_stars->translateNames(skyTranslator);
 
