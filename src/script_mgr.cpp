@@ -244,21 +244,21 @@ string ScriptMgr::get_script_list(string directory) {
 	  RemoveableDirectoryMounted = 1;
   }
 
-  if ((dp = opendir(directory.c_str())) == NULL) {
-    cout << "Unable to read script directory" << directory << endl;
-    return "";
-  }
+  if ((dp = opendir(directory.c_str())) != NULL) {
 
-  // TODO: sort the directory
-  while ((entryp = readdir(dp)) != NULL) {
-    tmp = entryp->d_name;
-
-    if(tmp.length()>4 && tmp.find(".sts", tmp.length()-4)!=string::npos ) {
-      result += tmp + "\n";
-      //cout << entryp->d_name << endl;
-    }
+	  // TODO: sort the directory
+	  while ((entryp = readdir(dp)) != NULL) {
+		  tmp = entryp->d_name;
+		  
+		  if(tmp.length()>4 && tmp.find(".sts", tmp.length()-4)!=string::npos ) {
+			  result += tmp + "\n";
+			  //cout << entryp->d_name << endl;
+		  }
+	  }
+	  closedir(dp);
+  } else {
+	  cout << "Unable to read script directory" << directory << endl;
   }
-  closedir(dp);
 
   if(RemoveableDirectoryMounted) {
 	  // leave disk unmounted
