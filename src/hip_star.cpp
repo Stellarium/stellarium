@@ -49,6 +49,7 @@ Vec3f HipStar::ChartColors[20] =
 	Vec3f(0.00,0.00,0.00) /* Px*/,	Vec3f(0.00,0.00,0.00) /* Qx*/,	Vec3f(1.00,0.00,0.00) /* R+*/,
 	Vec3f(0.00,0.00,0.00) /* S+*/,	Vec3f(0.50,0.50,0.50) /* Defualt */
 };
+bool HipStar::flagSciNames = 0;
 
 HipStar::HipStar(void) :
 	HP(0),
@@ -109,18 +110,18 @@ wstring HipStar::getInfoString(const Navigator * nav) const
 
 wstring HipStar::getNameI18n(void) const 
 {
+ 
+	// If flagSciNames is true (set when culture is western), 
+	// fall back to scientific names and catalog numbers if no common name.  
+	// Otherwise only use common names from the culture being viewed.
 
-	if(commonNameI18!=L"") return commonNameI18;
-
-	/*|| sciName!=L"")
-	{
-		// TODO: ISSUE Sci name shouldn't show with other cultures
-		// Tie to culture or make option? Rob
-		if (commonNameI18 == L"") return L""; // return sciName; 
-		else return commonNameI18; 
-		} */
-	else 
+	if (commonNameI18!=L"") return commonNameI18; 
+	
+	if(HipStar::flagSciNames) {
+		if (sciName!=L"") return sciName;
 		return L"HP " + StelUtility::intToWstring(HP);
+	}
+	return L"";
 }
 
 string HipStar::getEnglishName(void) const {

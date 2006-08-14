@@ -125,7 +125,9 @@ public:
 		
 	//! Define font file name and size to use for star names display
 	void setFont(float font_size, const string& font_name);
-
+	
+	//! show scientific or catalog names on stars without common names
+	void setFlagSciNames(bool f);
 
 private:
 	HipStar *searchHPprivate(unsigned int) const;
