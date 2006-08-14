@@ -83,7 +83,8 @@ void ConstellationMgr::setFont(float font_size, const string& ttfFileName)
 // Load line and art data from files
 void ConstellationMgr::loadLinesAndArt(const string &fileName, const string &artfileName, const string &boundaryfileName, LoadingBar& lb)
 {
-	
+	selected = NULL;  // avoid segfault
+
 	std::ifstream inf(fileName.c_str());
 
 	if (!inf.is_open())

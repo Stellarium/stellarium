@@ -208,7 +208,7 @@ public:
 	void setFlagOrbits(bool b){orbit_fader = b;}
 	bool getFlagOrbits(void) const {return orbit_fader;}	
 	
-	void setFlagTrail(bool b){trail_fader = b; startTrail(b);}
+	void setFlagTrail(bool b){if(b == trail_fader) return; trail_fader = b; startTrail(b);}
 	bool getFlagTrail(void) const {return trail_fader;}
 	
 	static void setflagShow(bool b) {Planet::flagShow = b;}
