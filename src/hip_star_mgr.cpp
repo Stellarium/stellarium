@@ -159,7 +159,7 @@ void HipStarMgr::load_data(const string& hipCatFile, LoadingBar& lb)
 // Load common names from file 
 int HipStarMgr::load_common_names(const string& commonNameFile)
 {
-	//	cout << "Load star names from " << commonNameFile << endl;
+	cout << "Load star names from " << commonNameFile << endl;
 
 	// clear existing names (would be faster if they were in separate array
 	// since relatively few are named)
@@ -688,4 +688,8 @@ void HipStarMgr::setFont(float font_size, const string& font_name) {
 	HipStar::starFont = new s_font(font_size, font_name);
 	assert(HipStar::starFont);
 
+}
+
+void HipStarMgr::setFlagSciNames(bool f) {
+  HipStar::flagSciNames = f;
 }

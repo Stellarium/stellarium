@@ -88,6 +88,8 @@ private:
 	static Vec3f circle_color, label_color;
 	static Vec3f ChartColors[20];
 	static s_font *starFont;
+
+	static bool flagSciNames;
 };
 
 struct HipStarMagComparer : public std::binary_function<HipStar*,HipStar*,bool> {
