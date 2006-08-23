@@ -18,6 +18,7 @@
  */
 
 #include <iostream>
+#include <cassert>
 
 #include "glpng.h"
 #include "s_texture.h"
