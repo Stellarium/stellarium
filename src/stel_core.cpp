@@ -22,6 +22,7 @@
 #include "stel_core.h"
 #include "stel_utility.h"
 
+#include "geodesic_grid.h"
 #include "hip_star_mgr.h"
 #include "telescope_mgr.h"
 
@@ -116,6 +117,15 @@ StelCore::~StelCore()
 	delete script_images;
 	delete telescope_mgr;
 	StelObject::delete_textures(); // Unload the pointer textures
+
+    if (geodesic_search_result) {
+      delete geodesic_search_result;
+      geodesic_search_result = 0;
+    }
+    if (geodesic_grid) {
+      delete geodesic_grid;
+      geodesic_grid = 0;
+    }
 }
 
 // Load core data and initialize with default values
@@ -149,11 +159,23 @@ void StelCore::init(const InitParser& conf)
 
 	// Load hipparcos stars & names
 	if(firstTime) {
-		LoadingBar lb(projection, FontSizeGeneral, baseFontFile, "logo24bits.png", getViewportWidth(), getViewportHeight(), StelUtility::stringToWstring(VERSION), 45, 320, 121);
-		hip_stars->init(FontSizeGeneral, baseFontFile, getDataDir() + "hipparcos.fab", getDataDir() + "sky_cultures/western/star_names.fab", getDataDir() + "name.fab", lb);
+		LoadingBar lb(projection, FontSizeGeneral, baseFontFile,
+                      "logo24bits.png",
+                      getViewportWidth(), getViewportHeight(),
+                      StelUtility::stringToWstring(VERSION), 45, 320, 121);
+		hip_stars->init(FontSizeGeneral, baseFontFile,lb);
+        int grid_level = hip_stars->getMaxGridLevel();
 
 		// Init nebulas
-		nebulas->read(FontSizeGeneral, baseFontFile, getDataDir() + "ngc2000.dat", getDataDir() + "ngc2000names.dat", getDataDir() + "nebula_textures.fab", lb);
+		nebulas->read(FontSizeGeneral, baseFontFile,
+                      getDataDir() + "ngc2000.dat",
+                      getDataDir() + "ngc2000names.dat",
+                      getDataDir() + "nebula_textures.fab", lb);
+        //if (grid_level < nebulas->getMaxGridLevel())
+        //  grid_level = nebulas->getMaxGridLevel());
+
+        geodesic_grid = new GeodesicGrid(grid_level);
+        geodesic_search_result = new GeodesicSearchResult(*geodesic_grid);
 	}
 
 	// Init fonts : should be moved into the constructor
@@ -400,13 +422,33 @@ double StelCore::draw(int delta_time)
 	// Draw all the constellations
 	asterisms->draw(projection, navigation);
 
+
+  const Vec4i &v(projection->getViewport());
+  Vec3d e0,e1,e2,e3;
+  projection->unproject_j2000(v[0],v[1],e0);
+  projection->unproject_j2000(v[0]+v[2],v[1]+v[3],e2);
+  if (projection->needGlFrontFaceCW()) {
+    projection->unproject_j2000(v[0],v[1]+v[3],e3);
+    projection->unproject_j2000(v[0]+v[2],v[1],e1);
+  } else {
+    projection->unproject_j2000(v[0],v[1]+v[3],e1);
+    projection->unproject_j2000(v[0]+v[2],v[1],e3);
+  }
+  
+  int max_search_level = hip_stars->getMaxSearchLevel(tone_converter,
+                                                      projection);
+  // int h = nebulas->getMaxSearchLevel(tone_converter,projection);
+  // if (max_search_level < h) max_search_level = h;
+  geodesic_search_result->search(e0,e1,e2,e3,max_search_level);
+
 	// Draw the nebula
 	nebulas->draw(projection, navigation, tone_converter);
 
 	// Draw the hipparcos stars
-	Vec3d tempv = navigation->get_prec_equ_vision();
-	Vec3f temp(tempv[0],tempv[1],tempv[2]);
-	hip_stars->draw(temp, tone_converter, projection);
+	hip_stars->draw(tone_converter, projection);
+
+
+
 
 	// Draw the equatorial grid
 	equ_grid->draw(projection);
