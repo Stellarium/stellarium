@@ -24,7 +24,6 @@
 #include <iomanip>
 #include <string>
 #include "stel_ui.h"
-#include "stellastro.h"
 #include "sky_localizer.h"
 
 // Draw simple gravity text ui.
