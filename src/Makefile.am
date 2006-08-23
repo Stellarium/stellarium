@@ -28,12 +28,11 @@ stellarium_SOURCES = stel_object.h stel_object.cpp \
 
 
 stellarium_LDADD = $(top_builddir)/src/glpng/libglpng.a \
-$(top_builddir)/src/stellplanet/libstellplanet.a \
+$(top_builddir)/src/planetsephems/libplanetsephems.a \
 $(top_builddir)/src/stellastro/libstellastro.a \
 $(top_builddir)/src/iniparser/libiniparser.a \
 @LIBINTL@
 
-INCLUDES = -I$(top_srcdir)/src/glpng -I$(top_srcdir)/src/stellplanet -I$(top_srcdir)/src/stellastro -I$(top_srcdir)/src/iniparser -I$(top_srcdir)/intl
+INCLUDES = -I$(top_srcdir)/src/glpng -I$(top_srcdir)/src/planetsephems -I$(top_srcdir)/src/stellastro -I$(top_srcdir)/src/iniparser -I$(top_srcdir)/intl
 
-SUBDIRS = glpng stellplanet stellastro iniparser
-noinst_HEADERS = translations.h translator.h stelapp.h
+SUBDIRS = glpng planetsephems stellastro iniparser

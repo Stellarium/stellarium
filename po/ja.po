@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: stellarium@free.fr\n"
-"POT-Creation-Date: 2006-08-08 12:40-0700\n"
+"POT-Creation-Date: 2006-08-22 15:39+0200\n"
 "PO-Revision-Date: 2006-06-23 11:09+0000\n"
 "Last-Translator: sigma <cosmos.door@gmail.com>\n"
 "Language-Team: Japanese <ja@li.org>\n"
@@ -36,36 +36,36 @@ msgstr "%s: コマンド行の引数が違います\n"
 msgid "Try `%s --help' for more information.\n"
 msgstr "より詳しい情報は `%s --help' を試してください\n"
 
-#: src/constellation_mgr.cpp:176
+#: src/constellation_mgr.cpp:177
 msgid "Loading Constellation Art: "
 msgstr "星座絵をロード中: "
 
-#: src/hip_star.cpp:84 src/hip_star.cpp:138 src/nebula.cpp:94
+#: src/hip_star.cpp:85 src/hip_star.cpp:141 src/nebula.cpp:94
 #: src/nebula.cpp:116 src/planet.cpp:108 src/planet.cpp:154
 msgid "Magnitude: "
 msgstr "等級: "
 
-#: src/hip_star.cpp:85 src/hip_star.cpp:139
+#: src/hip_star.cpp:86 src/hip_star.cpp:142
 msgid " (Variable)"
 msgstr " （変光星）"
 
-#: src/hip_star.cpp:87 src/nebula.cpp:96 src/planet.cpp:112
+#: src/hip_star.cpp:88 src/nebula.cpp:96 src/planet.cpp:112
 msgid "RA/DE: "
 msgstr "赤経/赤緯: "
 
-#: src/hip_star.cpp:93 src/nebula.cpp:102 src/planet.cpp:118
+#: src/hip_star.cpp:94 src/nebula.cpp:102 src/planet.cpp:118
 msgid "Az/Alt: "
 msgstr "方位/高度: "
 
-#: src/hip_star.cpp:95 src/planet.cpp:121 src/planet.cpp:158
+#: src/hip_star.cpp:96 src/planet.cpp:121 src/planet.cpp:158
 msgid "Distance: "
 msgstr "距離: "
 
-#: src/hip_star.cpp:97 src/hip_star.cpp:142
+#: src/hip_star.cpp:98 src/hip_star.cpp:145
 msgid " Light Years"
 msgstr " 光年"
 
-#: src/hip_star.cpp:104
+#: src/hip_star.cpp:105
 msgid "Spectral Type: "
 msgstr "スペクトル型: "
 
@@ -513,7 +513,7 @@ msgstr "リストにない画面解像度は、次のファイルを編集して
 msgid "Choose landscapes:"
 msgstr "背景の選択:"
 
-#: src/stel_ui_conf.cpp:433 src/stel_ui_conf.cpp:889
+#: src/stel_ui_conf.cpp:433 src/stel_ui_conf.cpp:897
 msgid "Author: "
 msgstr "作者: "
 
@@ -569,31 +569,31 @@ msgstr "検索"
 msgid "Enter observatory name"
 msgstr "観測所の名前を入力"
 
-#: src/stel_ui_conf.cpp:890
+#: src/stel_ui_conf.cpp:898
 msgid "Info: "
 msgstr "情報: "
 
-#: src/stel_ui_conf.cpp:942
+#: src/stel_ui_conf.cpp:950
 msgid ": Normal rate"
 msgstr ": 一般的な数"
 
-#: src/stel_ui_conf.cpp:949
+#: src/stel_ui_conf.cpp:957
 msgid ": Standard Perseids rate"
 msgstr ": ペルセウス座流星群ぐらい"
 
-#: src/stel_ui_conf.cpp:956
+#: src/stel_ui_conf.cpp:964
 msgid ": Exceptional Leonid rate"
 msgstr ": 獅子座流星群の多いときぐらい"
 
-#: src/stel_ui_conf.cpp:963
+#: src/stel_ui_conf.cpp:971
 msgid ": Highest rate ever (1966 Leonids)"
 msgstr ": 最も多いときぐらい (1966年の獅子座流星群)"
 
-#: src/stel_ui_conf.cpp:968
+#: src/stel_ui_conf.cpp:976
 msgid "Meteor Rate per minute"
 msgstr "1分あたりの流れ星の数"
 
-#: src/stel_ui_conf.cpp:989
+#: src/stel_ui_conf.cpp:997
 msgid "Current Time Speed is x"
 msgstr "現在の時間の早さはx"
 
