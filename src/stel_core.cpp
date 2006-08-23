@@ -20,7 +20,6 @@
 // Manage all the objects to be used in the program
 
 #include "stel_core.h"
-#include "stellastro.h"
 #include "stel_utility.h"
 
 #include "hip_star_mgr.h"

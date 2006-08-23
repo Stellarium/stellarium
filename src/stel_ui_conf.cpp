@@ -991,8 +991,7 @@ void StelUI::updateConfigForm(void)
 	}
 
 	time_current->setJDay(core->getJDay() + app->get_GMT_shift(core->getJDay())*JD_HOUR);
-	system_tz_lbl2->setLabel(L"(" +
-		StelUtility::get_time_zone_name_from_system(core->getJDay()) + L")");
+	system_tz_lbl2->setLabel(L"(" + get_time_zone_name_from_system(core->getJDay()) + L")");
 
 	time_speed_lbl2->setLabel(wstring(L"\u2022 ")+_("Current Time Speed is x") + StelUtility::doubleToWstring(core->getTimeSpeed()/JD_SECOND));
 
