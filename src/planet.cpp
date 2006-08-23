@@ -24,8 +24,7 @@
 #include "navigator.h"
 #include "projector.h"
 #include "s_font.h"
-#include "s_gui.h"
-#include "stellastro.h" // just for get_apparent_sidereal_time
+#include "sideral_time.h"
 
 s_font* Planet::planet_name_font = NULL;
 float Planet::object_scale = 1.f;
@@ -573,6 +572,26 @@ double Planet::draw(Projector* prj, const Navigator * nav, const ToneReproductor
 	previousScreenPos = screenPos;
 	return distanceSquared;
 }
+
+	
+void glCircle(const Vec3d& pos, float radius)
+{
+	float angle, facets;
+	
+	glDisable(GL_TEXTURE_2D);
+	glBegin(GL_LINE_LOOP);
+
+	if (radius < 2) facets = 6;
+	else facets = (int)(radius*3);
+	
+	for (int i = 0; i < facets; i++)
+	{
+		angle = 2.0f*M_PI*i/facets;
+		glVertex3f(pos[0] + radius * sin(angle), pos[1] + radius * cos(angle), 0.0f);
+	}
+	glEnd();
+}
+
 
 void Planet::draw_hints(const Navigator* nav, const Projector* prj)
 {

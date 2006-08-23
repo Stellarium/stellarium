@@ -23,7 +23,6 @@
 #include <iomanip>
 #include <algorithm>
 #include "stel_ui.h"
-#include "stellastro.h"
 #include "stelapp.h"
 
 ////////////////////////////////////////////////////////////////////////////////

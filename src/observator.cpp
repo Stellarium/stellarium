@@ -23,7 +23,6 @@
 
 #include "stellarium.h"
 #include "stel_utility.h"
-#include "stellastro.h"
 #include "init_parser.h"
 #include "observator.h"
 #include "solarsystem.h"

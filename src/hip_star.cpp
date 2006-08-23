@@ -21,7 +21,6 @@
 #include "bytes.h"
 #include "stellarium.h"
 #include "navigator.h"
-#include "stellastro.h"
 #include "stel_utility.h"
 #include "s_gui.h"  //circle
 

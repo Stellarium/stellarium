@@ -20,7 +20,6 @@
 #include "stelapp.h"
 
 #include "viewport_distorter.h"
-#include "stellastro.h"
 #include "stel_utility.h"
 #include "callbacks.hpp"
 
@@ -618,7 +617,7 @@ string StelApp::get_ISO8601_time_local(double JD) const
 	if (time_zone_mode == S_TZ_GMT_SHIFT)
 		get_tm_from_julian(JD + GMT_shift, &time_local);
 	else
-		get_tm_from_julian(JD + StelUtility::get_GMT_shift_from_system(JD)*0.041666666666, &time_local);
+		get_tm_from_julian(JD + get_GMT_shift_from_system(JD)*0.041666666666, &time_local);
 
 	static char isotime[255];
 	StelUtility::my_strftime(isotime, 254, "%Y-%m-%d %H:%M:%S", &time_local);
@@ -634,7 +633,7 @@ wstring StelApp::get_printable_date_local(double JD) const
 	if (time_zone_mode == S_TZ_GMT_SHIFT)
 		get_tm_from_julian(JD + GMT_shift, &time_local);
 	else
-		get_tm_from_julian(JD + StelUtility::get_GMT_shift_from_system(JD)*0.041666666666, &time_local);
+		get_tm_from_julian(JD + get_GMT_shift_from_system(JD)*0.041666666666, &time_local);
 
 	static char date[255];
 	switch(date_format)
@@ -657,7 +656,7 @@ wstring StelApp::get_printable_time_local(double JD) const
 	if (time_zone_mode == S_TZ_GMT_SHIFT)
 		get_tm_from_julian(JD + GMT_shift, &time_local);
 	else
-		get_tm_from_julian(JD + StelUtility::get_GMT_shift_from_system(JD)*0.041666666666, &time_local);
+		get_tm_from_julian(JD + get_GMT_shift_from_system(JD)*0.041666666666, &time_local);
 
 	static char heure[255];
 	switch(time_format)
@@ -725,5 +724,5 @@ void StelApp::set_custom_tz_name(const string& tzname)
 float StelApp::get_GMT_shift(double JD, bool _local) const
 {
 	if (time_zone_mode == S_TZ_GMT_SHIFT) return GMT_shift;
-	else return StelUtility::get_GMT_shift_from_system(JD,_local);
+	else return get_GMT_shift_from_system(JD,_local);
 }
