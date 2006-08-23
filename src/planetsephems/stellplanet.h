@@ -1,6 +1,6 @@
 /*
 Copyright (C) 2000 Liam Girdwood <liam@nova-ioe.org>
-Copyright (C) 2003 Fabien Chéreau
+Copyright (C) 2003 Fabien Chereau
 
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU Library General Public License as published by

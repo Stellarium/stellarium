@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: stellarium@free.fr\n"
-"POT-Creation-Date: 2006-08-08 12:40-0700\n"
+"POT-Creation-Date: 2006-08-22 15:39+0200\n"
 "PO-Revision-Date: 2006-05-08 22:56+0000\n"
 "Last-Translator: Daniel Nylander <po@danielnylander.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
@@ -36,36 +36,36 @@ msgstr "%s: Felaktigt kommandoradsargument\n"
 msgid "Try `%s --help' for more information.\n"
 msgstr "Prova \"%s --help\" för mer information.\n"
 
-#: src/constellation_mgr.cpp:176
+#: src/constellation_mgr.cpp:177
 msgid "Loading Constellation Art: "
 msgstr "Läser in stjärnbildsgrafik: "
 
-#: src/hip_star.cpp:84 src/hip_star.cpp:138 src/nebula.cpp:94
+#: src/hip_star.cpp:85 src/hip_star.cpp:141 src/nebula.cpp:94
 #: src/nebula.cpp:116 src/planet.cpp:108 src/planet.cpp:154
 msgid "Magnitude: "
 msgstr "Magnitud: "
 
-#: src/hip_star.cpp:85 src/hip_star.cpp:139
+#: src/hip_star.cpp:86 src/hip_star.cpp:142
 msgid " (Variable)"
 msgstr " (Variabel)"
 
-#: src/hip_star.cpp:87 src/nebula.cpp:96 src/planet.cpp:112
+#: src/hip_star.cpp:88 src/nebula.cpp:96 src/planet.cpp:112
 msgid "RA/DE: "
 msgstr "RA/DE: "
 
-#: src/hip_star.cpp:93 src/nebula.cpp:102 src/planet.cpp:118
+#: src/hip_star.cpp:94 src/nebula.cpp:102 src/planet.cpp:118
 msgid "Az/Alt: "
 msgstr "Az/Alt: "
 
-#: src/hip_star.cpp:95 src/planet.cpp:121 src/planet.cpp:158
+#: src/hip_star.cpp:96 src/planet.cpp:121 src/planet.cpp:158
 msgid "Distance: "
 msgstr "Avstånd: "
 
-#: src/hip_star.cpp:97 src/hip_star.cpp:142
+#: src/hip_star.cpp:98 src/hip_star.cpp:145
 msgid " Light Years"
 msgstr " ljusår"
 
-#: src/hip_star.cpp:104
+#: src/hip_star.cpp:105
 msgid "Spectral Type: "
 msgstr "Spektralklass: "
 
@@ -507,7 +507,7 @@ msgstr "För ej listad skärmupplösning, redigera filen :"
 msgid "Choose landscapes:"
 msgstr "Välj landskap:"
 
-#: src/stel_ui_conf.cpp:433 src/stel_ui_conf.cpp:889
+#: src/stel_ui_conf.cpp:433 src/stel_ui_conf.cpp:897
 msgid "Author: "
 msgstr ""
 
@@ -563,31 +563,31 @@ msgstr "GÅ"
 msgid "Enter observatory name"
 msgstr "Ange observatoriets namn"
 
-#: src/stel_ui_conf.cpp:890
+#: src/stel_ui_conf.cpp:898
 msgid "Info: "
 msgstr ""
 
-#: src/stel_ui_conf.cpp:942
+#: src/stel_ui_conf.cpp:950
 msgid ": Normal rate"
 msgstr ": Normal intensitet"
 
-#: src/stel_ui_conf.cpp:949
+#: src/stel_ui_conf.cpp:957
 msgid ": Standard Perseids rate"
 msgstr ": Standard Perseid-mängd"
 
-#: src/stel_ui_conf.cpp:956
+#: src/stel_ui_conf.cpp:964
 msgid ": Exceptional Leonid rate"
 msgstr ": Extraordinär Leonid-mängd"
 
-#: src/stel_ui_conf.cpp:963
+#: src/stel_ui_conf.cpp:971
 msgid ": Highest rate ever (1966 Leonids)"
 msgstr ": Största intensiteten någonsin (1966 Leonider)"
 
-#: src/stel_ui_conf.cpp:968
+#: src/stel_ui_conf.cpp:976
 msgid "Meteor Rate per minute"
 msgstr "Meteorintensitet per minut"
 
-#: src/stel_ui_conf.cpp:989
+#: src/stel_ui_conf.cpp:997
 msgid "Current Time Speed is x"
 msgstr "Nuvarande tidshastighet är x"
 

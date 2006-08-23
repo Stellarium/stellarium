@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium 0.7.0\n"
 "Report-Msgid-Bugs-To: stellarium@free.fr\n"
-"POT-Creation-Date: 2006-08-08 12:40-0700\n"
+"POT-Creation-Date: 2006-08-22 15:39+0200\n"
 "PO-Revision-Date: 2006-06-25 09:57+0000\n"
 "Last-Translator: ISBear <isbear@ukrpost.net>\n"
 "Language-Team:\n"
@@ -39,36 +39,36 @@ msgstr "%s: Невірний(ні) аргумент(и) командного р�
 msgid "Try `%s --help' for more information.\n"
 msgstr "Cпробуйте `%s --help' щоб отримати більше інформації.\n"
 
-#: src/constellation_mgr.cpp:176
+#: src/constellation_mgr.cpp:177
 msgid "Loading Constellation Art: "
 msgstr "Завантаження малюнку сузір'я: "
 
-#: src/hip_star.cpp:84 src/hip_star.cpp:138 src/nebula.cpp:94
+#: src/hip_star.cpp:85 src/hip_star.cpp:141 src/nebula.cpp:94
 #: src/nebula.cpp:116 src/planet.cpp:108 src/planet.cpp:154
 msgid "Magnitude: "
 msgstr "Величина: "
 
-#: src/hip_star.cpp:85 src/hip_star.cpp:139
+#: src/hip_star.cpp:86 src/hip_star.cpp:142
 msgid " (Variable)"
 msgstr " (Змінна)"
 
-#: src/hip_star.cpp:87 src/nebula.cpp:96 src/planet.cpp:112
+#: src/hip_star.cpp:88 src/nebula.cpp:96 src/planet.cpp:112
 msgid "RA/DE: "
 msgstr "Радіани/Градуси: "
 
-#: src/hip_star.cpp:93 src/nebula.cpp:102 src/planet.cpp:118
+#: src/hip_star.cpp:94 src/nebula.cpp:102 src/planet.cpp:118
 msgid "Az/Alt: "
 msgstr "Азимут/Висота: "
 
-#: src/hip_star.cpp:95 src/planet.cpp:121 src/planet.cpp:158
+#: src/hip_star.cpp:96 src/planet.cpp:121 src/planet.cpp:158
 msgid "Distance: "
 msgstr "Відстань: "
 
-#: src/hip_star.cpp:97 src/hip_star.cpp:142
+#: src/hip_star.cpp:98 src/hip_star.cpp:145
 msgid " Light Years"
 msgstr " Світлові роки"
 
-#: src/hip_star.cpp:104
+#: src/hip_star.cpp:105
 msgid "Spectral Type: "
 msgstr "Спектральний тип: "
 
@@ -519,7 +519,7 @@ msgstr "Щоб використати роздільні здатності по
 msgid "Choose landscapes:"
 msgstr "Оберіть пейзажі:"
 
-#: src/stel_ui_conf.cpp:433 src/stel_ui_conf.cpp:889
+#: src/stel_ui_conf.cpp:433 src/stel_ui_conf.cpp:897
 msgid "Author: "
 msgstr "Автор: "
 
@@ -575,31 +575,31 @@ msgstr "ПЕРЕЙТИ"
 msgid "Enter observatory name"
 msgstr "Введіть ім'я обсерваторії"
 
-#: src/stel_ui_conf.cpp:890
+#: src/stel_ui_conf.cpp:898
 msgid "Info: "
 msgstr "Інформація: "
 
-#: src/stel_ui_conf.cpp:942
+#: src/stel_ui_conf.cpp:950
 msgid ": Normal rate"
 msgstr ": Нормальна"
 
-#: src/stel_ui_conf.cpp:949
+#: src/stel_ui_conf.cpp:957
 msgid ": Standard Perseids rate"
 msgstr ": Стандартна кількість Персеїд"
 
-#: src/stel_ui_conf.cpp:956
+#: src/stel_ui_conf.cpp:964
 msgid ": Exceptional Leonid rate"
 msgstr ": Виняткова кількість Леонід"
 
-#: src/stel_ui_conf.cpp:963
+#: src/stel_ui_conf.cpp:971
 msgid ": Highest rate ever (1966 Leonids)"
 msgstr ": Найбільша кількість Леонід (як у 1966)"
 
-#: src/stel_ui_conf.cpp:968
+#: src/stel_ui_conf.cpp:976
 msgid "Meteor Rate per minute"
 msgstr "Кількість метеорів за хвилину"
 
-#: src/stel_ui_conf.cpp:989
+#: src/stel_ui_conf.cpp:997
 msgid "Current Time Speed is x"
 msgstr "Поточний коефіцієнт часу: x"
 
