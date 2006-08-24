@@ -158,7 +158,7 @@ private:
   char *read_buff_end;
   char write_buff[120];
   char *write_buff_end;
-  long long int time_delay;
+  int time_delay;
   struct Position {
     long long int server_micros;
     long long int client_micros;
@@ -284,7 +284,7 @@ TelescopeTcp::TelescopeTcp(const string &name,const string &params)
             "bad port" << endl;
     return;
   }
-  if (1!=sscanf(params.substr(j+1).c_str(),"%Ld",&time_delay) ||
+  if (1!=sscanf(params.substr(j+1).c_str(),"%d",&time_delay) ||
       time_delay<=0 || time_delay>10000000) {
     cout << "TelescopeTcp::TelescopeTcp(" << name << ',' << params << "): "
             "bad time_delay" << endl;
