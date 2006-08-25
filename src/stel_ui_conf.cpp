@@ -391,15 +391,15 @@ Component* StelUI::createConfigWindow(void)
 	screen_size_sl = new ListBox(6);
 	screen_size_sl->setPos(x+20,y);
 	screen_size_sl->setSizex(200);
-	screen_size_sl->addItemList(StelUtility::stringToWstring(app->getVideoModeList()));
+	screen_size_sl->addItemList(StelUtils::stringToWstring(app->getVideoModeList()));
 	char vs[1000];
 	sprintf(vs, "%dx%d", core->getViewportWidth(), core->getViewportHeight());
-	screen_size_sl->setCurrent(StelUtility::stringToWstring(vs));
+	screen_size_sl->setCurrent(StelUtils::stringToWstring(vs));
 	tab_video->addComponent(screen_size_sl);
 
 	snprintf(vs, 999, "%sconfig.ini", app->getConfigDir().c_str());
 	Label * lblvideo5 = new Label(_("For unlisted screen resolution, edit the file :"));
-	Label * lblvideo6 = new Label(StelUtility::stringToWstring(string(vs)));
+	Label * lblvideo6 = new Label(StelUtils::stringToWstring(string(vs)));
 	lblvideo5->setPos(30, tab_video->getSizey()-125);
 	lblvideo6->setPos(30, tab_video->getSizey()-110);
 	tab_video->addComponent(lblvideo5);
@@ -430,12 +430,12 @@ Component* StelUI::createConfigWindow(void)
 	landscape_sl->setOnPressCallback(callback<void>(this, &StelUI::setLandscape));
 	tab_landscapes->addComponent(landscape_sl);
 
-	landscape_authorlb = new Label(_("Author: ") + StelUtility::stringToWstring(core->getLandscapeAuthorName()));
+	landscape_authorlb = new Label(_("Author: ") + StelUtils::stringToWstring(core->getLandscapeAuthorName()));
 	landscape_authorlb->setPos(x+landscape_sl->getSizex()+20, y); 
 	landscape_authorlb->adjustSize();
 	tab_landscapes->addComponent(landscape_authorlb);
 	
-	landscape_descriptionlb = new TextLabel(StelUtility::stringToWstring(core->getLandscapeDescription()));
+	landscape_descriptionlb = new TextLabel(StelUtils::stringToWstring(core->getLandscapeDescription()));
 	landscape_descriptionlb->setPos(x+landscape_sl->getSizex()+20, y+25); 
 	landscape_descriptionlb->adjustSize();
 	tab_landscapes->addComponent(landscape_descriptionlb);	
@@ -462,9 +462,9 @@ Component* StelUI::createConfigWindow(void)
 	language_lb = new ListBox(6);
 	language_lb->setPos(x+10,y);
 	language_lb->setSizex(200);
-	language_lb->addItemList(StelUtility::stringToWstring(Translator::getAvailableLanguagesCodes(core->getLocaleDir())));
+	language_lb->addItemList(StelUtils::stringToWstring(Translator::getAvailableLanguagesCodes(core->getLocaleDir())));
 	language_lb->setOnChangeCallback(callback<void>(this, &StelUI::setAppLanguage));
-	language_lb->setCurrent(StelUtility::stringToWstring(app->getAppLanguage()));
+	language_lb->setCurrent(StelUtils::stringToWstring(app->getAppLanguage()));
 	tab_language->addComponent(language_lb);
 	
 	x=260; y=10;
@@ -478,9 +478,9 @@ Component* StelUI::createConfigWindow(void)
 	languageSky_lb = new ListBox(6);
 	languageSky_lb->setPos(x+10,y);
 	languageSky_lb->setSizex(200);
-	languageSky_lb->addItemList(StelUtility::stringToWstring(Translator::getAvailableLanguagesCodes(core->getLocaleDir())));
+	languageSky_lb->addItemList(StelUtils::stringToWstring(Translator::getAvailableLanguagesCodes(core->getLocaleDir())));
 	languageSky_lb->setOnChangeCallback(callback<void>(this, &StelUI::setSkyLanguage));
-	languageSky_lb->setCurrent(StelUtility::stringToWstring(core->getSkyLanguage()));
+	languageSky_lb->setCurrent(StelUtils::stringToWstring(core->getSkyLanguage()));
 	tab_language->addComponent(languageSky_lb);
 
 	x=150;
@@ -524,7 +524,7 @@ void StelUI::dialogCallback(void)
 {
 	string lastID = dialog_win->getLastID();
 	int lastButton = dialog_win->getLastButton();
-	string lastInput = StelUtility::wstringToString(dialog_win->getLastInput());
+	string lastInput = StelUtils::wstringToString(dialog_win->getLastInput());
 	int lastType = dialog_win->getLastType();
 
 	if (lastID == "observatory name")
@@ -544,19 +544,19 @@ void StelUI::dialogCallback(void)
 		else if (lastButton == BT_NO) msg += "BT_NO";
 		else if (lastButton == BT_CANCEL) msg += "BT_CANCEL";
 	
-		if (lastType == STDDLGWIN_MSG) dialog_win->MessageBox(L"Stellarium",StelUtility::stringToWstring(msg), BT_OK);
-		else if (lastType == STDDLGWIN_INPUT) dialog_win->MessageBox(L"Stellarium",StelUtility::stringToWstring(msg) + L" inp: " + StelUtility::stringToWstring(lastInput), BT_OK);
+		if (lastType == STDDLGWIN_MSG) dialog_win->MessageBox(L"Stellarium",StelUtils::stringToWstring(msg), BT_OK);
+		else if (lastType == STDDLGWIN_INPUT) dialog_win->MessageBox(L"Stellarium",StelUtils::stringToWstring(msg) + L" inp: " + StelUtils::stringToWstring(lastInput), BT_OK);
 	}		
 }
 
 void StelUI::setSkyLanguage(void)
 {
-	core->setSkyLanguage(StelUtility::wstringToString(languageSky_lb->getCurrent()));
+	core->setSkyLanguage(StelUtils::wstringToString(languageSky_lb->getCurrent()));
 }
 
 void StelUI::setAppLanguage(void)
 {
-	app->setAppLanguage(StelUtility::wstringToString(language_lb->getCurrent()));
+	app->setAppLanguage(StelUtils::wstringToString(language_lb->getCurrent()));
 }
 
 void StelUI::setSkyCulture(void)
@@ -760,8 +760,8 @@ void StelUI::setObserverPositionFromMap(void)
 void StelUI::setCityFromMap(void)
 {
 	waitOnLocation = false;
-	lblMapLocation->setLabel(StelUtility::stringToWstring(earth_map->getCursorString()));
-	lblMapPointer->setLabel(StelUtility::stringToWstring(earth_map->getPositionString()));
+	lblMapLocation->setLabel(StelUtils::stringToWstring(earth_map->getCursorString()));
+	lblMapPointer->setLabel(StelUtils::stringToWstring(earth_map->getPositionString()));
 }
 
 void StelUI::setObserverPositionFromIncDec(void)
@@ -862,7 +862,7 @@ void StelUI::saveRenderOptions(void)
 
 void StelUI::setVideoOption(void)
 {
-	string s = StelUtility::wstringToString(screen_size_sl->getCurrent());
+	string s = StelUtils::wstringToString(screen_size_sl->getCurrent());
 	int i = s.find("x");
 	int w = atoi(s.substr(0,i).c_str());
 	int h = atoi(s.substr(i+1,s.size()).c_str());
@@ -980,20 +980,20 @@ void StelUI::updateConfigForm(void)
 	long_incdec->setValue(core->getObservatory().get_longitude());
 	lat_incdec->setValue(core->getObservatory().get_latitude());
 	alt_incdec->setValue(core->getObservatory().get_altitude());
-	lblMapLocation->setLabel(StelUtility::stringToWstring(earth_map->getCursorString()));
+	lblMapLocation->setLabel(StelUtils::stringToWstring(earth_map->getCursorString()));
 	if (!waitOnLocation)
-		lblMapPointer->setLabel(StelUtility::stringToWstring(earth_map->getPositionString()));
+		lblMapPointer->setLabel(StelUtils::stringToWstring(earth_map->getPositionString()));
 	else
 	{
 		earth_map->findPosition(core->getObservatory().get_longitude(),core->getObservatory().get_latitude());
-		lblMapPointer->setLabel(StelUtility::stringToWstring(earth_map->getPositionString()));
+		lblMapPointer->setLabel(StelUtils::stringToWstring(earth_map->getPositionString()));
 		waitOnLocation = false;
 	}
 
 	time_current->setJDay(core->getJDay() + app->get_GMT_shift(core->getJDay())*JD_HOUR);
 	system_tz_lbl2->setLabel(L"(" + get_time_zone_name_from_system(core->getJDay()) + L")");
 
-	time_speed_lbl2->setLabel(wstring(L"\u2022 ")+_("Current Time Speed is x") + StelUtility::doubleToWstring(core->getTimeSpeed()/JD_SECOND));
+	time_speed_lbl2->setLabel(wstring(L"\u2022 ")+_("Current Time Speed is x") + StelUtils::doubleToWstring(core->getTimeSpeed()/JD_SECOND));
 
 	projection_sl->setValue(CalculateProjectionSlValue(
                               core->getProjectionType(),

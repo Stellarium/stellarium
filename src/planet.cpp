@@ -76,7 +76,7 @@ Planet::Planet(Planet *parent,
 	trail_on = 0;
 	first_point = 1;
 
-	nameI18 = StelUtility::stringToWstring(englishName);
+	nameI18 = StelUtils::stringToWstring(englishName);
 }
 
 Planet::~Planet()
@@ -108,13 +108,13 @@ wstring Planet::getInfoString(const Navigator * nav) const
 
 	Vec3d equPos = get_earth_equ_pos(nav);
 	rect_to_sphe(&tempRA,&tempDE,equPos);
-	oss << _("RA/DE: ") << StelUtility::printAngleHMS(tempRA) << L"/" << StelUtility::printAngleDMS(tempDE) << endl;
+	oss << _("RA/DE: ") << StelUtils::printAngleHMS(tempRA) << L"/" << StelUtils::printAngleDMS(tempDE) << endl;
 	// calculate alt az position
 	Vec3d localPos = nav->earth_equ_to_local(equPos);
 	rect_to_sphe(&tempRA,&tempDE,localPos);
 	tempRA = 3*M_PI - tempRA;  // N is zero, E is 90 degrees
 	if(tempRA > M_PI*2) tempRA -= M_PI*2;
-	oss << _("Az/Alt: ") << StelUtility::printAngleDMS(tempRA) << L"/" << StelUtility::printAngleDMS(tempDE) << endl;
+	oss << _("Az/Alt: ") << StelUtils::printAngleDMS(tempRA) << L"/" << StelUtils::printAngleDMS(tempDE) << endl;
 
 	oss.precision(8);
 	oss << _("Distance: ") << equPos.length() << _("AU") << endl;
@@ -132,7 +132,7 @@ wstring Planet::getSkyLabel(const Navigator * nav) const
 	if (sphere_scale != 1.f)
 	{
 		oss << " (x" << sphere_scale << ")";
-		ws += StelUtility::stringToWstring(oss.str());
+		ws += StelUtils::stringToWstring(oss.str());
 	}
 	return ws;
 }

@@ -94,7 +94,7 @@ wstring SkyLocalizer::getSkyCultureHash(void)
 		if(iter->second == "") continue;
 
 		cultures += _(iter->second);
-		cultures += wstring(L"\n") + StelUtility::stringToWstring(iter->first) + L"\n";
+		cultures += wstring(L"\n") + StelUtils::stringToWstring(iter->first) + L"\n";
 	}
 	// wcout << cultures << endl;
 	return cultures;

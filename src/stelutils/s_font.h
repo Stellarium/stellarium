@@ -38,7 +38,7 @@ public:
     s_font(float size_i, const string& ttfFileName) : typeFace(ttfFileName, (size_t)(size_i), 72) {;}
     virtual ~s_font() {;}
     
-    void print(float x, float y, const string& s, int upsidedown = 1) {typeFace.render(StelUtility::stringToWstring(s), Vec2f(x, y), upsidedown==1);}
+    void print(float x, float y, const string& s, int upsidedown = 1) {typeFace.render(StelUtils::stringToWstring(s), Vec2f(x, y), upsidedown==1);}
 	void print(float x, float y, const wstring& ws, int upsidedown = 1) {typeFace.render(ws, Vec2f(x, y), upsidedown==1);}
 	
 	void print_char(const wchar_t c) {
@@ -102,7 +102,7 @@ public:
 	}
 
     float getStrLen(const wstring& s) {return typeFace.width(s);}
-    float getStrLen(const string& s) {return typeFace.width(StelUtility::stringToWstring(s));}
+    float getStrLen(const string& s) {return typeFace.width(StelUtils::stringToWstring(s));}
     float getLineHeight(void) {return typeFace.lineHeight();}
     float getAscent(void) {return typeFace.ascent();}
     float getDescent(void) {return typeFace.descent();}

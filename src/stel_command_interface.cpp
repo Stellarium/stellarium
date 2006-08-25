@@ -101,7 +101,7 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 
 	}  else if (command == "wait" && args["duration"]!="") {
 
-		float fdelay = str_to_double(args["duration"]);
+		float fdelay = StelUtils::str_to_double(args["duration"]);
 		if(fdelay > 0) wait = (int)(fdelay*1000);
 
 	} else if (command == "set") {
@@ -109,34 +109,34 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 
 		// TODO: some bounds/error checking here
 
-		if(args["atmosphere_fade_duration"]!="") stcore->setAtmosphereFadeDuration(str_to_double(args["atmosphere_fade_duration"]));
-		else if(args["auto_move_duration"]!="") stcore->setAutomoveDuration( str_to_double(args["auto_move_duration"]));
-		else if(args["constellation_art_fade_duration"]!="") stcore->setConstellationArtFadeDuration(str_to_double(args["constellation_art_fade_duration"]));
-		else if(args["constellation_art_intensity"]!="") stcore->setConstellationArtIntensity(str_to_double(args["constellation_art_intensity"]));
+		if(args["atmosphere_fade_duration"]!="") stcore->setAtmosphereFadeDuration(StelUtils::str_to_double(args["atmosphere_fade_duration"]));
+		else if(args["auto_move_duration"]!="") stcore->setAutomoveDuration( StelUtils::str_to_double(args["auto_move_duration"]));
+		else if(args["constellation_art_fade_duration"]!="") stcore->setConstellationArtFadeDuration(StelUtils::str_to_double(args["constellation_art_fade_duration"]));
+		else if(args["constellation_art_intensity"]!="") stcore->setConstellationArtIntensity(StelUtils::str_to_double(args["constellation_art_intensity"]));
 		else if(args["home_planet"]!="") stcore->setHomePlanet(args["home_planet"]);
 		else if(args["landscape_name"]!="") stcore->setLandscape(args["landscape_name"]);
-		else if(args["max_mag_nebula_name"]!="") stcore->setNebulaMaxMagHints(str_to_double(args["max_mag_nebula_name"]));
-		else if(args["max_mag_star_name"]!="") stcore->setMaxMagStarName(str_to_double(args["max_mag_star_name"]));
+		else if(args["max_mag_nebula_name"]!="") stcore->setNebulaMaxMagHints(StelUtils::str_to_double(args["max_mag_nebula_name"]));
+		else if(args["max_mag_star_name"]!="") stcore->setMaxMagStarName(StelUtils::str_to_double(args["max_mag_star_name"]));
 		else if(args["moon_scale"]!="") {
-			stcore->setMoonScale(str_to_double(args["moon_scale"]));
+			stcore->setMoonScale(StelUtils::str_to_double(args["moon_scale"]));
 		}
 		else if(args["sky_culture"]!="") stcore->setSkyCultureDir(args["sky_culture"]);
 		else if(args["sky_locale"]!="") stcore->setSkyLanguage(args["sky_locale"]);
-		else if(args["star_mag_scale"]!="") stcore->setStarMagScale(str_to_double(args["star_mag_scale"]));
+		else if(args["star_mag_scale"]!="") stcore->setStarMagScale(StelUtils::str_to_double(args["star_mag_scale"]));
 		else if(args["star_scale"]!="") {
-			float scale = str_to_double(args["star_scale"]);
+			float scale = StelUtils::str_to_double(args["star_scale"]);
 			stcore->setStarScale(scale);
 			stcore->setPlanetsScale(scale);
 		} 
 		else if(args["nebula_scale"]!="")
 			{
-				float scale = str_to_double(args["nebula_scale"]);
+				float scale = StelUtils::str_to_double(args["nebula_scale"]);
 				stcore->setNebulaCircleScale(scale);
 			} 
-		else if(args["star_twinkle_amount"]!="") stcore->setStarTwinkleAmount(str_to_double(args["star_twinkle_amount"]));
+		else if(args["star_twinkle_amount"]!="") stcore->setStarTwinkleAmount(StelUtils::str_to_double(args["star_twinkle_amount"]));
 		else if(args["time_zone"]!="") stapp->setCustomTimezone(args["time_zone"]);
 		else if(args["milky_way_intensity"]!="") {
-			stcore->setMilkyWayIntensity(str_to_double(args["milky_way_intensity"]));
+			stcore->setMilkyWayIntensity(StelUtils::str_to_double(args["milky_way_intensity"]));
 			// safety feature to be able to turn back on
 			if(stcore->getMilkyWayIntensity()) stcore->setFlagMilkyWay(true);
 
@@ -147,20 +147,20 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 
 			// trusted commands disabled due to code reorg
 
-			//    else if(args["base_font_size"]!="") stcore->BaseFontSize = str_to_double(args["base_font_size"]);
-			//	else if(args["bbp_mode"]!="") stcore->BbpMode = str_to_double(args["bbp_mode"]);
+			//    else if(args["base_font_size"]!="") stcore->BaseFontSize = StelUtils::str_to_double(args["base_font_size"]);
+			//	else if(args["bbp_mode"]!="") stcore->BbpMode = StelUtils::str_to_double(args["bbp_mode"]);
 			//    else if(args["date_display_format"]!="") stcore->DateDisplayFormat = args["date_display_format"];
 			//	else if(args["fullscreen"]!="") stcore->Fullscreen = args["fullscreen"];
-			//	else if(args["horizontal_offset"]!="") stcore->HorizontalOffset = str_to_double(args["horizontal_offset"]);
-			//	else if(args["init_fov"]!="") stcore->InitFov = str_to_double(args["init_fov"]);
-			//	else if(args["preset_sky_time"]!="") stapp->PresetSkyTime = str_to_double(args["preset_sky_time"]);
-			//	else if(args["screen_h"]!="") stcore->ScreenH = str_to_double(args["screen_h"]);
-			//	else if(args["screen_w"]!="") stcore->ScreenW = str_to_double(args["screen_w"]);
+			//	else if(args["horizontal_offset"]!="") stcore->HorizontalOffset = StelUtils::str_to_double(args["horizontal_offset"]);
+			//	else if(args["init_fov"]!="") stcore->InitFov = StelUtils::str_to_double(args["init_fov"]);
+			//	else if(args["preset_sky_time"]!="") stapp->PresetSkyTime = StelUtils::str_to_double(args["preset_sky_time"]);
+			//	else if(args["screen_h"]!="") stcore->ScreenH = StelUtils::str_to_double(args["screen_h"]);
+			//	else if(args["screen_w"]!="") stcore->ScreenW = StelUtils::str_to_double(args["screen_w"]);
 			//    else if(args["startup_time_mode"]!="") stapp->StartupTimeMode = args["startup_time_mode"];
 			// else if(args["time_display_format"]!="") stcore->TimeDisplayFormat = args["time_display_format"];
 			//else if(args["type"]!="") stcore->Type = args["type"];
-			//else if(args["version"]!="") stcore->Version = str_to_double(args["version"]);
-			//      else if(args["vertical_offset"]!="") stcore->VerticalOffset = str_to_double(args["vertical_offset"]);
+			//else if(args["version"]!="") stcore->Version = StelUtils::str_to_double(args["version"]);
+			//      else if(args["vertical_offset"]!="") stcore->VerticalOffset = StelUtils::str_to_double(args["vertical_offset"]);
 			//else if(args["viewing_mode"]!="") stcore->ViewingMode = args["viewing_mode"];
 			//else if(args["viewport"]!="") stcore->Viewport = args["viewport"];
 
@@ -216,8 +216,8 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 
 		if(args["delta_az"]!="" || args["delta_alt"]!="") {
 			// immediately change viewing direction
-			stcore->panView(str_to_double(args["delta_az"]),
-							str_to_double(args["delta_alt"]));
+			stcore->panView(StelUtils::str_to_double(args["delta_az"]),
+							StelUtils::str_to_double(args["delta_alt"]));
 		}	else status = 0;
 
 		// TODO absolute settings (see RFE 1311031)
@@ -226,7 +226,7 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 	  
 
 	} else if(command == "zoom") {
-		double duration = str_to_pos_double(args["duration"]);
+		double duration = StelUtils::str_to_pos_double(args["duration"]);
 
 		if(args["auto"]!="") {
 			// auto zoom using specified or default duration
@@ -240,16 +240,16 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 
 		} else if (args["fov"]!="") {
 			// zoom to specific field of view
-			stcore->zoomTo( str_to_double(args["fov"]), str_to_double(args["duration"]));
+			stcore->zoomTo( StelUtils::str_to_double(args["fov"]), StelUtils::str_to_double(args["duration"]));
 
-		} else if (args["delta_fov"]!="") stcore->setFov(stcore->getFov() + str_to_double(args["delta_fov"]));
+		} else if (args["delta_fov"]!="") stcore->setFov(stcore->getFov() + StelUtils::str_to_double(args["delta_fov"]));
 		// should we record absolute fov instead of delta? isn't usually smooth playback
 		else status = 0;
 
 	} else if(command == "timerate") {   // NOTE: accuracy issue related to frame rate
 	  
 		if(args["rate"]!="") {
-			stcore->setTimeSpeed(str_to_double(args["rate"])*JD_SECOND);
+			stcore->setTimeSpeed(StelUtils::str_to_double(args["rate"])*JD_SECOND);
 		  
 		} else if(args["action"]=="pause") {
 			// TODO why is this in stelapp?  should be in stelcore - Rob
@@ -276,7 +276,7 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 			stcore->setTimeSpeed(s);
 		  
 			// for safest script replay, record as absolute amount
-			commandline = "timerate rate " + double_to_str(s/JD_SECOND);
+			commandline = "timerate rate " + StelUtils::double_to_str(s/JD_SECOND);
 
 		} else if(args["action"]=="decrement") {
 			double s = stcore->getTimeSpeed();
@@ -287,7 +287,7 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 			stcore->setTimeSpeed(s);
 
 			// for safest script replay, record as absolute amount
-			commandline = "timerate rate " + double_to_str(s/JD_SECOND);
+			commandline = "timerate rate " + StelUtils::double_to_str(s/JD_SECOND);
 		} else status=0;
     
 	} else if(command == "date") {
@@ -319,7 +319,7 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 			}
 		  
 		} else if(args["relative"]!="") {  // value is a float number of days
-			double days = str_to_double(args["relative"]);
+			double days = StelUtils::str_to_double(args["relative"]);
 			stcore->setJDay(stcore->getJDay() + days );
 		} else if(args["load"]=="current") {
 			// set date to current date
@@ -347,12 +347,12 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 			int delay;
 		  
 			if(args["name"]!="") name = args["name"];
-			if(args["lat"]!="") lat = str_to_double(args["lat"]);
-			if(args["lon"]!="") lon = str_to_double(args["lon"]);
-			if(args["alt"]!="") alt = str_to_double(args["alt"]);
-			delay = (int)(1000.*str_to_double(args["duration"]));
+			if(args["lat"]!="") lat = StelUtils::str_to_double(args["lat"]);
+			if(args["lon"]!="") lon = StelUtils::str_to_double(args["lon"]);
+			if(args["alt"]!="") alt = StelUtils::str_to_double(args["alt"]);
+			delay = (int)(1000.*StelUtils::str_to_double(args["duration"]));
 		  
-			stcore->moveObserver(lat,lon,alt,delay,StelUtility::stringToWstring(name));
+			stcore->moveObserver(lat,lon,alt,delay,StelUtils::stringToWstring(name));
 		} else status = 0;
 
 	} else if(command=="image") {
@@ -380,30 +380,30 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 				  
 				status = script_images->load_image(image_filename, args["name"], img_pos);
 
-				if(status==0) debug_message = _("Unable to open file: ") + StelUtility::stringToWstring(image_filename);
+				if(status==0) debug_message = _("Unable to open file: ") + StelUtils::stringToWstring(image_filename);
 			}
 
 			if( status ) {
 				Image * img = script_images->get_image(args["name"]);
 			  
 				if(img != NULL) {
-					if(args["alpha"]!="") img->set_alpha(str_to_double(args["alpha"]), 
-														 str_to_double(args["duration"]));
-					if(args["scale"]!="") img->set_scale(str_to_double(args["scale"]), 
-														 str_to_double(args["duration"]));
-					if(args["rotation"]!="") img->set_rotation(str_to_double(args["rotation"]), 
-															   str_to_double(args["duration"]));
+					if(args["alpha"]!="") img->set_alpha(StelUtils::str_to_double(args["alpha"]), 
+														 StelUtils::str_to_double(args["duration"]));
+					if(args["scale"]!="") img->set_scale(StelUtils::str_to_double(args["scale"]), 
+														 StelUtils::str_to_double(args["duration"]));
+					if(args["rotation"]!="") img->set_rotation(StelUtils::str_to_double(args["rotation"]), 
+															   StelUtils::str_to_double(args["duration"]));
 					if(args["xpos"]!="" || args["ypos"]!="") 
-						img->set_location(str_to_double(args["xpos"]), args["xpos"]!="",
-										  str_to_double(args["ypos"]), args["ypos"]!="",
-										  str_to_double(args["duration"]));
+						img->set_location(StelUtils::str_to_double(args["xpos"]), args["xpos"]!="",
+										  StelUtils::str_to_double(args["ypos"]), args["ypos"]!="",
+										  StelUtils::str_to_double(args["duration"]));
 					// for more human readable scripts, as long as someone doesn't do both...
 					if(args["altitude"]!="" || args["azimuth"]!="") 
-						img->set_location(str_to_double(args["altitude"]), args["altitude"]!="",
-										  str_to_double(args["azimuth"]), args["azimuth"]!="",
-										  str_to_double(args["duration"]));
+						img->set_location(StelUtils::str_to_double(args["altitude"]), args["altitude"]!="",
+										  StelUtils::str_to_double(args["azimuth"]), args["azimuth"]!="",
+										  StelUtils::str_to_double(args["duration"]));
 				} else {
-					debug_message = _("Unable to find image: ") + StelUtility::stringToWstring(args["name"]);
+					debug_message = _("Unable to find image: ") + StelUtils::stringToWstring(args["name"]);
 					status=0;
 				}
 			}
@@ -447,7 +447,7 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 					audio->increment_volume();
 				} else if(args["volume"] == "decrement") {
 					audio->decrement_volume();
-				} else audio->set_volume( str_to_double(args["volume"]) );
+				} else audio->set_volume( StelUtils::str_to_double(args["volume"]) );
 			}
 		} else status = 0;
 #endif 
@@ -555,7 +555,7 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 	  
 	} else if(command=="meteors") {
 		if(args["zhr"]!="") {
-			stcore->setMeteorsRate(str_to_int(args["zhr"]));
+			stcore->setMeteorsRate(StelUtils::str_to_int(args["zhr"]));
 		} else status =0;
 
 	} else if(command=="configuration") {
@@ -623,9 +623,9 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 		// Show gui error window only if script asked for gui debugging
 		if(stapp->scripts->is_playing() && stapp->scripts->get_gui_debug()) 
 			stapp->ui->show_message(_("Could not execute command:") + wstring(L"\n\"") + 
-									StelUtility::stringToWstring(commandline) + wstring(L"\"\n\n") + debug_message, 7000);
+									StelUtils::stringToWstring(commandline) + wstring(L"\"\n\n") + debug_message, 7000);
 			
-		cerr << "Could not execute: " << commandline << endl << StelUtility::wstringToString(debug_message) << endl;
+		cerr << "Could not execute: " << commandline << endl << StelUtils::wstringToString(debug_message) << endl;
 	}
 
 	return(status);

@@ -100,7 +100,7 @@ void Observator::load(const InitParser& conf, const string& section)
       planet = ssystem.getEarth();
     }
     
-    cout << "Loading location: \"" << StelUtility::wstringToString(name) <<"\", on " << planet->getEnglishName();
+    cout << "Loading location: \"" << StelUtils::wstringToString(name) <<"\", on " << planet->getEnglishName();
     
 //    printf("(home_planet should be: \"%s\" is: \"%s\") ",
 //           conf.get_str(section, "home_planet").c_str(),
@@ -124,7 +124,7 @@ void Observator::set_landscape_name(const string s) {
 
 void Observator::save(const string& file, const string& section) const
 {
-	printf("Saving location %s to file %s\n",StelUtility::wstringToString(name).c_str(), file.c_str());
+	printf("Saving location %s to file %s\n",StelUtils::wstringToString(name).c_str(), file.c_str());
 
 	InitParser conf;
 	conf.load(file);
@@ -139,15 +139,15 @@ void Observator::save(const string& file, const string& section) const
 void Observator::setConf(InitParser & conf, const string& section) const
 {
 
-	conf.set_str(section + ":name", StelUtility::wstringToString(name));
+	conf.set_str(section + ":name", StelUtils::wstringToString(name));
 	conf.set_str(section + ":home_planet", planet->getEnglishName());
 	conf.set_str(section + ":latitude",
-	             StelUtility::wstringToString(
-	               StelUtility::printAngleDMS(latitude*M_PI/180.0,
+	             StelUtils::wstringToString(
+	               StelUtils::printAngleDMS(latitude*M_PI/180.0,
 	                                          true, true)));
 	conf.set_str(section + ":longitude",
-	             StelUtility::wstringToString(
-	               StelUtility::printAngleDMS(longitude*M_PI/180.0,
+	             StelUtils::wstringToString(
+	               StelUtils::printAngleDMS(longitude*M_PI/180.0,
 	                                          true, true)));
 
 	conf.set_int(section + ":altitude", altitude);

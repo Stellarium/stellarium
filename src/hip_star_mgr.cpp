@@ -421,14 +421,14 @@ wstring StarWrapper1::getNameI18n(void) const {
       const wstring sciName = HipStarMgr::getSciName(s->hip);
       if (!sciName.empty()) return sciName;
     }
-    return L"HP " + StelUtility::intToWstring(s->hip);
+    return L"HP " + StelUtils::intToWstring(s->hip);
   }
   return StarWrapperBase::getNameI18n();
 }
 
 
 wstring StarWrapper1::getInfoString(const Navigator *nav) const {
-  float tempDE, tempRA;
+  double tempDE, tempRA;
   const Vec3d equatorial_pos = get_earth_equ_pos(nav);
   rect_to_sphe(&tempRA,&tempDE,equatorial_pos);
   wostringstream oss;
@@ -454,15 +454,15 @@ wstring StarWrapper1::getInfoString(const Navigator *nav) const {
   oss.precision(2);
   oss << _("Magnitude: ") << get_mag();
   oss << endl;
-  oss << _("RA/DE: ") << StelUtility::printAngleHMS(tempRA)
-      << L"/" << StelUtility::printAngleDMS(tempDE) << endl;
+  oss << _("RA/DE: ") << StelUtils::printAngleHMS(tempRA)
+      << L"/" << StelUtils::printAngleDMS(tempDE) << endl;
   // calculate alt az
   Vec3d local_pos = nav->earth_equ_to_local(equatorial_pos);
   rect_to_sphe(&tempRA,&tempDE,local_pos);
   tempRA = 3*M_PI - tempRA;  // N is zero, E is 90 degrees
   if(tempRA > M_PI*2) tempRA -= M_PI*2;    
-  oss << _("Az/Alt: ") << StelUtility::printAngleDMS(tempRA)
-      << L"/" << StelUtility::printAngleDMS(tempDE) << endl;
+  oss << _("Az/Alt: ") << StelUtils::printAngleDMS(tempRA)
+      << L"/" << StelUtils::printAngleDMS(tempDE) << endl;
 
   if (s->plx) {
     oss.precision(5);
@@ -792,7 +792,7 @@ void HipStarMgr::load_data(LoadingBar& lb) {
 
   printf("Loading star data...");
   for (int i=0;cat_file_names[i];i++) {
-    lb.SetMessage(_("Loading catalog ") + StelUtility::intToWstring(i));
+    lb.SetMessage(_("Loading catalog ") + StelUtils::intToWstring(i));
     lb.Draw(i/8.0);
     ZoneArray *const z = ZoneArray::create(*this,cat_file_names[i]);
     if (z) {

@@ -324,12 +324,12 @@ wstring Boolean_item::getString(void)
 
 wstring Integer::getString(void)
 {
-	return (active ? start_active : L"") + StelUtility::doubleToWstring(value) + (active ? stop_active : L"");
+	return (active ? start_active : L"") + StelUtils::doubleToWstring(value) + (active ? stop_active : L"");
 }
 
 wstring Decimal::getString(void)
 {
-	return (active ? start_active : L"") + StelUtility::doubleToWstring(value) + (active ? stop_active : L"");
+	return (active ? start_active : L"") + StelUtils::doubleToWstring(value) + (active ? stop_active : L"");
 }
 
 bool Integer_item::onKey(Uint16 k, S_TUI_VALUE v)
@@ -394,7 +394,7 @@ bool Integer_item::onKey(Uint16 k, S_TUI_VALUE v)
 			++value;
 			if (value>mmax) value = mmax;
 			if (value<mmin) value = mmin;
-			strInput = StelUtility::doubleToWstring(value);
+			strInput = StelUtils::doubleToWstring(value);
 			return true;
 		}
 		if (k==SDLK_DOWN)
@@ -404,7 +404,7 @@ bool Integer_item::onKey(Uint16 k, S_TUI_VALUE v)
 			--value;
 			if (value>mmax) value = mmax;
 			if (value<mmin) value = mmin;
-			strInput = StelUtility::doubleToWstring(value);
+			strInput = StelUtils::doubleToWstring(value);
 			return true;
 		}
 
@@ -431,7 +431,7 @@ bool Integer_item::onKey(Uint16 k, S_TUI_VALUE v)
 wstring Integer_item::getString(void)
 {
 	if (numInput) return label + (active ? start_active : L"") + strInput + (active ? stop_active : L"");
-	else return label + (active ? start_active : L"") + StelUtility::doubleToWstring(value) + (active ? stop_active : L"");
+	else return label + (active ? start_active : L"") + StelUtils::doubleToWstring(value) + (active ? stop_active : L"");
 }
 
 bool Decimal_item::onKey(Uint16 k, S_TUI_VALUE v)
@@ -495,7 +495,7 @@ bool Decimal_item::onKey(Uint16 k, S_TUI_VALUE v)
 			value+=delta;
 			if (value>mmax) value = mmax;
 			if (value<mmin) value = mmin;
-			strInput = StelUtility::doubleToWstring(value);
+			strInput = StelUtils::doubleToWstring(value);
 			return true;
 		}
 		if (k==SDLK_DOWN)
@@ -505,7 +505,7 @@ bool Decimal_item::onKey(Uint16 k, S_TUI_VALUE v)
 			value-=delta;
 			if (value>mmax) value = mmax;
 			if (value<mmin) value = mmin;
-			strInput = StelUtility::doubleToWstring(value);
+			strInput = StelUtils::doubleToWstring(value);
 			return true;
 		}
 
@@ -534,7 +534,7 @@ wstring Decimal_item::getString(void)
 	// Can't directly write value in os because there is a float precision limit bug..
 	static char tempstr[16];
 	sprintf(tempstr,"%.2f", value);
-	wstring vstr = StelUtility::stringToWstring(tempstr);
+	wstring vstr = StelUtils::stringToWstring(tempstr);
 
 	if (numInput) return label + (active ? start_active : L"") + strInput + (active ? stop_active : L"");
 	else return label + (active ? start_active : L"") + vstr + (active ? stop_active : L"");
@@ -795,8 +795,8 @@ wstring Time_zone_item::getString(void)
 	if (current_edit==&continents_names && active){s1[0] = start_active; s2[0] = stop_active;}
 	if (current_edit!=&continents_names && active){s1[1] = start_active; s2[1] = stop_active;}
 
-	return label + s1[0] + StelUtility::stringToWstring(continents_names.getCurrent()) + s2[0] + L"/" + s1[1] +
-		StelUtility::stringToWstring(continents[continents_names.getCurrent()].getCurrent()) + s2[1];
+	return label + s1[0] + StelUtils::stringToWstring(continents_names.getCurrent()) + s2[0] + L"/" + s1[1] +
+		StelUtils::stringToWstring(continents[continents_names.getCurrent()].getCurrent()) + s2[1];
 }
 
 string Time_zone_item::gettz(void) // should be const but gives a boring error...
@@ -967,5 +967,5 @@ wstring Vector_item::getString(void)
 	wstring MultiSet_item<string>::getString(void)
 	{
 		if (current==items.end()) return label;
-		return label + (active ? start_active : L"") + StelUtility::stringToWstring(*current) + (active ? stop_active : L"");
+		return label + (active ? start_active : L"") + StelUtils::stringToWstring(*current) + (active ? stop_active : L"");
 	}
