@@ -174,7 +174,7 @@ void ConstellationMgr::loadLinesAndArt(const string &fileName, const string &art
 		}
 
 		// Draw loading bar
-		lb.SetMessage(_("Loading Constellation Art: ") + StelUtility::intToWstring(current+1) + L"/" + StelUtility::intToWstring(total));
+		lb.SetMessage(_("Loading Constellation Art: ") + StelUtils::intToWstring(current+1) + L"/" + StelUtils::intToWstring(total));
 		lb.Draw((float)(current+1)/total);
 		
 		cons = NULL;
@@ -362,7 +362,7 @@ void ConstellationMgr::translateNames(Translator& trans)
 	for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
 	{
 		(*iter)->nameI18 = trans.translate((*iter)->englishName.c_str());
-		//cout << (*iter)->englishName.c_str() << " -> " << StelUtility::wstringToString((*iter)->nameI18) << endl;
+		//cout << (*iter)->englishName.c_str() << " -> " << StelUtils::wstringToString((*iter)->nameI18) << endl;
 	}
 }
 

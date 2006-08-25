@@ -170,7 +170,7 @@ void StelUI::init_tui(void)
 	tui_menu_general->addComponent(tui_general_sky_culture);
 
 	tui_general_sky_locale = new s_tui::MultiSet_item<wstring>(wstring(L"3.2 ") );
-	tui_general_sky_locale->addItemList(StelUtility::stringToWstring(Translator::getAvailableLanguagesCodes(core->getLocaleDir())));
+	tui_general_sky_locale->addItemList(StelUtils::stringToWstring(Translator::getAvailableLanguagesCodes(core->getLocaleDir())));
 
 	tui_general_sky_locale->set_OnChangeCallback(callback<void>(this, &StelUI::tui_cb_tui_general_change_sky_locale));
 	tui_menu_general->addComponent(tui_general_sky_locale);
@@ -255,7 +255,7 @@ void StelUI::init_tui(void)
 
 	// 5. Effects
 	tui_effect_landscape = new s_tui::MultiSet_item<wstring>(wstring(L"5.1 ") );
-	tui_effect_landscape->addItemList(StelUtility::stringToWstring(Landscape::get_file_content(core->getDataDir() + "landscapes.ini")));
+	tui_effect_landscape->addItemList(StelUtils::stringToWstring(Landscape::get_file_content(core->getDataDir() + "landscapes.ini")));
 
 	tui_effect_landscape->set_OnChangeCallback(callback<void>(this, &StelUI::tui_cb_tui_effect_change_landscape));
 	tui_menu_effects->addComponent(tui_effect_landscape);
@@ -292,7 +292,7 @@ void StelUI::init_tui(void)
 	// 6. Scripts
 	tui_scripts_local = new s_tui::MultiSet_item<wstring>(wstring(L"6.1 ") );
 	//	tui_scripts_local->addItemList(wstring(TUI_SCRIPT_MSG) + wstring(L"\n") 
-	//			       + StelUtility::stringToWstring(app->scripts->get_script_list(core->getDataDir() + "scripts/"))); 
+	//			       + StelUtils::stringToWstring(app->scripts->get_script_list(core->getDataDir() + "scripts/"))); 
 	tui_scripts_local->set_OnChangeCallback(callback<void>(this, &StelUI::tui_cb_scripts_local));
 	tui_menu_scripts->addComponent(tui_scripts_local);
 
@@ -317,7 +317,7 @@ void StelUI::init_tui(void)
 	tui_menu_administration->addComponent(tui_admin_updateme);
 
 	tui_admin_setlocale = new s_tui::MultiSet_item<wstring>(L"7.5 ");
-	tui_admin_setlocale->addItemList(StelUtility::stringToWstring(Translator::getAvailableLanguagesCodes(core->getLocaleDir())));
+	tui_admin_setlocale->addItemList(StelUtils::stringToWstring(Translator::getAvailableLanguagesCodes(core->getLocaleDir())));
 	tui_admin_setlocale->set_OnChangeCallback(callback<void>(this, &StelUI::tui_cb_admin_set_locale));
 	tui_menu_administration->addComponent(tui_admin_setlocale);
 
@@ -420,7 +420,7 @@ void StelUI::localizeTui(void)
 	// 7. Scripts
 	tui_scripts_local->setLabel(wstring(L"7.1 ") + _("Local Script: "));
 	tui_scripts_local->replaceItemList(_(TUI_SCRIPT_MSG) + wstring(L"\n") 
-									   + StelUtility::stringToWstring(app->scripts->get_script_list(core->getDataDir() + "scripts/")), 0); 
+									   + StelUtils::stringToWstring(app->scripts->get_script_list(core->getDataDir() + "scripts/")), 0); 
 	tui_scripts_removeable->setLabel(wstring(L"7.2 ") + _("CD/DVD Script: "));
 	tui_scripts_removeable->replaceItemList(_(TUI_SCRIPT_MSG), 0);
 
@@ -470,7 +470,7 @@ void StelUI::tui_cb1(void)
 {
 	// 2. Date & Time
 	app->PresetSkyTime 		= tui_time_presetskytime->getJDay();
-	app->StartupTimeMode 		= StelUtility::wstringToString(tui_time_startuptime->getCurrent());
+	app->StartupTimeMode 		= StelUtils::wstringToString(tui_time_startuptime->getCurrent());
 
 }
 
@@ -489,13 +489,13 @@ void StelUI::tui_update_widgets(void)
 	tui_time_skytime->setJDay(core->getJDay() + app->get_GMT_shift(core->getJDay())*JD_HOUR);
 	tui_time_settmz->settz(app->get_custom_tz_name());
 	tui_time_presetskytime->setJDay(app->PresetSkyTime);
-	tui_time_startuptime->setCurrent(StelUtility::stringToWstring(app->StartupTimeMode));
-	tui_time_displayformat->setCurrent(StelUtility::stringToWstring(app->get_time_format_str()));
-	tui_time_dateformat->setCurrent(StelUtility::stringToWstring(app->get_date_format_str()));
+	tui_time_startuptime->setCurrent(StelUtils::stringToWstring(app->StartupTimeMode));
+	tui_time_displayformat->setCurrent(StelUtils::stringToWstring(app->get_time_format_str()));
+	tui_time_dateformat->setCurrent(StelUtils::stringToWstring(app->get_date_format_str()));
 
 	// 3. general
-	tui_general_sky_culture->setValue(StelUtility::stringToWstring(core->getSkyCultureDir()));
-	tui_general_sky_locale->setValue(StelUtility::stringToWstring(core->getSkyLanguage()));
+	tui_general_sky_culture->setValue(StelUtils::stringToWstring(core->getSkyCultureDir()));
+	tui_general_sky_locale->setValue(StelUtils::stringToWstring(core->getSkyLanguage()));
 
 	// 4. Stars
 	tui_stars_show->setValue(core->getFlagStars());
@@ -522,7 +522,7 @@ void StelUI::tui_update_widgets(void)
 
 
 	// 6. effects
-	tui_effect_landscape->setValue(StelUtility::stringToWstring(core->getObservatory().get_landscape_name()));
+	tui_effect_landscape->setValue(StelUtils::stringToWstring(core->getObservatory().get_landscape_name()));
 	tui_effect_pointobj->setValue(core->getFlagPointStar());
 	tui_effect_zoom_duration->setValue(core->getAutomoveDuration());
 	tui_effect_manual_zoom->setValue(core->getFlagManualAutoZoom());
@@ -546,7 +546,7 @@ void StelUI::tui_update_widgets(void)
 	}
 
 	// 8. admin
-	tui_admin_setlocale->setValue( StelUtility::stringToWstring(app->getAppLanguage()) );
+	tui_admin_setlocale->setValue( StelUtils::stringToWstring(app->getAppLanguage()) );
 
 }
 
@@ -564,8 +564,8 @@ void StelUI::tui_cb_settimezone(void)
 // Set time format mode
 void StelUI::tui_cb_settimedisplayformat(void)
 {
-	app->set_time_format_str(StelUtility::wstringToString(tui_time_displayformat->getCurrent()));
-	app->set_date_format_str(StelUtility::wstringToString(tui_time_dateformat->getCurrent()));
+	app->set_time_format_str(StelUtils::wstringToString(tui_time_displayformat->getCurrent()));
+	app->set_date_format_str(StelUtils::wstringToString(tui_time_dateformat->getCurrent()));
 }
 
 // 7. Administration actions functions
@@ -602,7 +602,7 @@ void StelUI::tui_cb_admin_shutdown(void)
 // Set a new landscape skin
 void StelUI::tui_cb_tui_effect_change_landscape(void)
 {
-	app->commander->execute_command(string("set landscape_name " +  StelUtility::wstringToString(tui_effect_landscape->getCurrent())));
+	app->commander->execute_command(string("set landscape_name " +  StelUtils::wstringToString(tui_effect_landscape->getCurrent())));
 }
 
 
@@ -610,13 +610,13 @@ void StelUI::tui_cb_tui_effect_change_landscape(void)
 void StelUI::tui_cb_tui_general_change_sky_culture(void) {
 
 	//	core->setSkyCulture(tui_general_sky_culture->getCurrent());
-	app->commander->execute_command( string("set sky_culture ") + StelUtility::wstringToString(tui_general_sky_culture->getCurrent()));
+	app->commander->execute_command( string("set sky_culture ") + StelUtils::wstringToString(tui_general_sky_culture->getCurrent()));
 }
 
 // Set a new sky locale
 void StelUI::tui_cb_tui_general_change_sky_locale(void) {
 	// wcout << "set sky locale to " << tui_general_sky_locale->getCurrent() << endl;
-	app->commander->execute_command( string("set sky_locale " + StelUtility::wstringToString(tui_general_sky_locale->getCurrent())));
+	app->commander->execute_command( string("set sky_locale " + StelUtils::wstringToString(tui_general_sky_locale->getCurrent())));
 }
 
 
@@ -628,14 +628,14 @@ void StelUI::tui_cb_scripts_removeable() {
   if(!ScriptDirectoryRead) {
 	  // read scripts from mounted disk
 	  string script_list = app->scripts->get_script_list(SCRIPT_REMOVEABLE_DISK);
-	  tui_scripts_removeable->replaceItemList(_(TUI_SCRIPT_MSG) + wstring(L"\n") + StelUtility::stringToWstring(script_list),0);
+	  tui_scripts_removeable->replaceItemList(_(TUI_SCRIPT_MSG) + wstring(L"\n") + StelUtils::stringToWstring(script_list),0);
 	  ScriptDirectoryRead = 1;
   } 
 
   if(tui_scripts_removeable->getCurrent()==_(TUI_SCRIPT_MSG)) {
 	  app->SelectedScript = "";
   } else {
-	  app->SelectedScript = StelUtility::wstringToString(tui_scripts_removeable->getCurrent());
+	  app->SelectedScript = StelUtils::wstringToString(tui_scripts_removeable->getCurrent());
 	  app->SelectedScriptDirectory = SCRIPT_REMOVEABLE_DISK;
 	  // to avoid confusing user, clear out local script selection as well
 	  tui_scripts_local->setCurrent(_(TUI_SCRIPT_MSG));
@@ -647,7 +647,7 @@ void StelUI::tui_cb_scripts_removeable() {
 void StelUI::tui_cb_scripts_local() {
   
 	if(tui_scripts_local->getCurrent()!=_(TUI_SCRIPT_MSG)){
-    app->SelectedScript = StelUtility::wstringToString(tui_scripts_local->getCurrent());
+    app->SelectedScript = StelUtils::wstringToString(tui_scripts_local->getCurrent());
     app->SelectedScriptDirectory = core->getDataDir() + "scripts/";
     // to reduce confusion for user, clear out removeable script selection as well
     if(ScriptDirectoryRead) tui_scripts_removeable->setCurrent(_(TUI_SCRIPT_MSG));
@@ -660,7 +660,7 @@ void StelUI::tui_cb_scripts_local() {
 // change UI locale
 void StelUI::tui_cb_admin_set_locale() {
 
-	app->setAppLanguage(StelUtility::wstringToString(tui_admin_setlocale->getCurrent()));
+	app->setAppLanguage(StelUtils::wstringToString(tui_admin_setlocale->getCurrent()));
 }
 
 
@@ -734,7 +734,7 @@ void StelUI::tui_cb_effects()
 void StelUI::tui_cb_sky_time()
 {
 	std::ostringstream oss;
-	oss << "date local " << StelUtility::wstringToString(tui_time_skytime->getDateString());
+	oss << "date local " << StelUtils::wstringToString(tui_time_skytime->getDateString());
 	app->commander->execute_command(oss.str());
 }
 
@@ -774,10 +774,10 @@ void StelUI::tui_cb_change_color()
 
 void StelUI::tui_cb_location_change_planet()
 {
-	//	core->setHomePlanet( StelUtility::wstringToString( tui_location_planet->getCurrent() ) );
+	//	core->setHomePlanet( StelUtils::wstringToString( tui_location_planet->getCurrent() ) );
 	//	wcout << "set home planet " << tui_location_planet->getCurrent() << endl;
 	app->commander->execute_command(string("set home_planet \"") + 
-									StelUtility::wstringToString( tui_location_planet->getCurrent() ) +
+									StelUtils::wstringToString( tui_location_planet->getCurrent() ) +
 									"\"");
 }
 
@@ -788,7 +788,7 @@ void StelUI::tuiUpdateIndependentWidgets(void) {
 	// reset those options to the current values now
 	// (can not do this in tui_update_widgets)
 
-	tui_location_planet->setValue(StelUtility::stringToWstring(core->getObservatory().getHomePlanetEnglishName()));
+	tui_location_planet->setValue(StelUtils::stringToWstring(core->getObservatory().getHomePlanetEnglishName()));
 
 
 }

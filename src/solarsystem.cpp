@@ -273,7 +273,7 @@ void SolarSystem::load(const string& planetfile)
                                pd.get_boolean(secname, "lighting"),
                                pd.get_double(secname, "radius")/AU,
                                pd.get_double(secname, "oblateness", 0.0),
-                               StelUtility::str_to_vec3f(pd.get_str(secname, "color").c_str()),
+                               StelUtils::str_to_vec3f(pd.get_str(secname, "color").c_str()),
                                pd.get_double(secname, "albedo"),
                                pd.get_str(secname, "tex_map"),
                                pd.get_str(secname, "tex_halo"),
@@ -572,7 +572,7 @@ wstring SolarSystem::getPlanetHashString(void)
 		}
 		
 		oss << Translator::globalTranslator.translate((*iter)->getEnglishName()) << L"\n";
-		oss << StelUtility::stringToWstring((*iter)->getEnglishName()) << L"\n";
+		oss << StelUtils::stringToWstring((*iter)->getEnglishName()) << L"\n";
 	}
 		
 	// wcout <<  oss.str();

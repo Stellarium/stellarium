@@ -57,7 +57,7 @@ Nebula::~Nebula()
 
 wstring Nebula::getInfoString(const Navigator* nav) const
 {
-	float tempDE, tempRA;
+	double tempDE, tempRA;
 
 	Vec3d equPos = nav->j2000_to_earth_equ(XYZ);
 	rect_to_sphe(&tempRA,&tempDE,equPos);
@@ -93,16 +93,16 @@ wstring Nebula::getInfoString(const Navigator* nav) const
 	oss.precision(2);
 	oss << _("Magnitude: ") << mag << endl;	
 	
-	oss << _("RA/DE: ") << StelUtility::printAngleHMS(tempRA) << L"/" << StelUtility::printAngleDMS(tempDE) << endl;
+	oss << _("RA/DE: ") << StelUtils::printAngleHMS(tempRA) << L"/" << StelUtils::printAngleDMS(tempDE) << endl;
 	// calculate alt az
 	Vec3d localPos = nav->earth_equ_to_local(equPos);
 	rect_to_sphe(&tempRA,&tempDE,localPos);
 	tempRA = 3*M_PI - tempRA;  // N is zero, E is 90 degrees
 	if(tempRA > M_PI*2) tempRA -= M_PI*2;	
-	oss << _("Az/Alt: ") << StelUtility::printAngleDMS(tempRA) << L"/" << StelUtility::printAngleDMS(tempDE) << endl;
+	oss << _("Az/Alt: ") << StelUtils::printAngleDMS(tempRA) << L"/" << StelUtils::printAngleDMS(tempDE) << endl;
 	
 	oss << _("Type: ") << getTypeString() << endl;
-	oss << _("Size: ") << StelUtility::printAngleDMS(angular_size*M_PI/180.) << endl;
+	oss << _("Size: ") << StelUtils::printAngleDMS(angular_size*M_PI/180.) << endl;
 
 	return oss.str();
 }
@@ -121,15 +121,15 @@ wstring Nebula::getShortInfoString(const Navigator*) const
 	{
 		if (M_nb > 0)
 		{
-			return L"M " + StelUtility::intToWstring(M_nb);
+			return L"M " + StelUtils::intToWstring(M_nb);
 		}
 		else if (NGC_nb > 0)
 		{
-			return L"NGC " + StelUtility::intToWstring(NGC_nb);
+			return L"NGC " + StelUtils::intToWstring(NGC_nb);
 		}
 		else if (IC_nb > 0)
 		{
-			return L"IC " + StelUtility::intToWstring(IC_nb);
+			return L"IC " + StelUtils::intToWstring(IC_nb);
 		}
 	}
 	

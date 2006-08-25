@@ -2595,7 +2595,7 @@ IntIncDec::~IntIncDec()
 void IntIncDec::draw()
 {
 	if (!visible) return;
-	label->setLabel(StelUtility::doubleToWstring(value));
+	label->setLabel(StelUtils::doubleToWstring(value));
 	Container::draw();
 }
 
@@ -2667,11 +2667,11 @@ void FloatIncDec::draw()
 	
 	if (format == FORMAT_DEFAULT)
 	{
-		label->setLabel(StelUtility::doubleToWstring(value));
+		label->setLabel(StelUtils::doubleToWstring(value));
 	}
 	else if (format == FORMAT_LONGITUDE || format == FORMAT_LATITUDE)
 	{
-		wstring l = StelUtility::printAngleDMS(value*M_PI/180.);
+		wstring l = StelUtils::printAngleDMS(value*M_PI/180.);
 		wstring m = l.substr(1);
 		if (format == FORMAT_LATITUDE)
 		{

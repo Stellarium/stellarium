@@ -230,8 +230,8 @@ wstring Telescope::getInfoString(const Navigator *nav) const {
   rect_to_sphe(&ra,&dec,equatorial_pos);
   std::wostringstream oss;
   oss << nameI18n << endl
-      << "RA/DE: " << StelUtility::printAngleHMS(ra)
-      << "/" << StelUtility::printAngleDMS(dec) << endl;
+      << "RA/DE: " << StelUtils::printAngleHMS(ra)
+      << "/" << StelUtils::printAngleDMS(dec) << endl;
   return oss.str();
 }
 

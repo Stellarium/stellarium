@@ -325,8 +325,8 @@ bool NebulaMgr::loadNGC(const string& catNGC, LoadingBar& lb)
 		if (!(i%200) || (i == catalogSize-1))
 		{
 			// Draw loading bar
-			lb.SetMessage(_("Loading NGC catalog: ") + StelUtility::intToWstring((i == catalogSize-1 ? catalogSize : i)) + 
-				L"/" + StelUtility::intToWstring(catalogSize));
+			lb.SetMessage(_("Loading NGC catalog: ") + StelUtils::intToWstring((i == catalogSize-1 ? catalogSize : i)) + 
+				L"/" + StelUtils::intToWstring(catalogSize));
 			lb.Draw((float)i/catalogSize);
 		}
 		Nebula *e = new Nebula;
@@ -452,7 +452,7 @@ bool NebulaMgr::loadTextures(const string& fileName, LoadingBar& lb)
 	{
 		// Draw loading bar
 		++current;
-		lb.SetMessage(_("Loading Nebula Textures:") + StelUtility::intToWstring(current) + L"/" + StelUtility::intToWstring(total));
+		lb.SetMessage(_("Loading Nebula Textures:") + StelUtils::intToWstring(current) + L"/" + StelUtils::intToWstring(total));
 		lb.Draw((float)current/total);
 
 		istringstream istr(record);
@@ -507,8 +507,8 @@ StelObject NebulaMgr::searchByNameI18n(const wstring& nameI18n) const
 	{
 		for (iter = neb_array.begin(); iter != neb_array.end(); ++iter)
 		{
-			if ((L"NGC" + StelUtility::intToWstring((*iter)->NGC_nb)) == objw ||
-			 (L"NGC " + StelUtility::intToWstring((*iter)->NGC_nb)) == objw)
+			if ((L"NGC" + StelUtils::intToWstring((*iter)->NGC_nb)) == objw ||
+			 (L"NGC " + StelUtils::intToWstring((*iter)->NGC_nb)) == objw)
 			 return *iter;
 		}
 	}
@@ -526,8 +526,8 @@ StelObject NebulaMgr::searchByNameI18n(const wstring& nameI18n) const
 	{
 		for (iter = neb_array.begin(); iter != neb_array.end(); ++iter)
 		{
-			if ((L"M" + StelUtility::intToWstring((*iter)->M_nb)) == objw ||
-			 (L"M " + StelUtility::intToWstring((*iter)->M_nb)) == objw)
+			if ((L"M" + StelUtils::intToWstring((*iter)->M_nb)) == objw ||
+			 (L"M " + StelUtils::intToWstring((*iter)->M_nb)) == objw)
 			 return *iter;
 		}
 	}
@@ -552,14 +552,14 @@ vector<wstring> NebulaMgr::listMatchingObjectsI18n(const wstring& objPrefix, uns
 		for (iter = neb_array.begin(); iter != neb_array.end(); ++iter)
 		{
 			if ((*iter)->M_nb==0) continue;
-			wstring constw = L"M" + StelUtility::intToWstring((*iter)->M_nb);
+			wstring constw = L"M" + StelUtils::intToWstring((*iter)->M_nb);
 			wstring constws = constw.substr(0, objw.size());
 			if (constws==objw)
 			{
 				result.push_back(constw);
 				continue;	// Prevent adding both forms for name
 			}
-			constw = L"M " + StelUtility::intToWstring((*iter)->M_nb);
+			constw = L"M " + StelUtils::intToWstring((*iter)->M_nb);
 			constws = constw.substr(0, objw.size());
 			if (constws==objw)
 			{
@@ -572,14 +572,14 @@ vector<wstring> NebulaMgr::listMatchingObjectsI18n(const wstring& objPrefix, uns
 	for (iter = neb_array.begin(); iter != neb_array.end(); ++iter)
 	{
 		if ((*iter)->NGC_nb==0) continue;
-		wstring constw = L"NGC" + StelUtility::intToWstring((*iter)->NGC_nb);
+		wstring constw = L"NGC" + StelUtils::intToWstring((*iter)->NGC_nb);
 		wstring constws = constw.substr(0, objw.size());
 		if (constws==objw)
 		{
 			result.push_back(constw);
 			continue;
 		}
-		constw = L"NGC " + StelUtility::intToWstring((*iter)->NGC_nb);
+		constw = L"NGC " + StelUtils::intToWstring((*iter)->NGC_nb);
 		constws = constw.substr(0, objw.size());
 		if (constws==objw)
 		{

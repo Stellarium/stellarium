@@ -509,30 +509,30 @@ void StelApp::saveCurrentConfig(const string& confFile)
 	//	conf.set_double("stars:star_limiting_mag", hip_stars->core->get_limiting_mag());
 
 	// Color section
-	conf.set_str    ("color:azimuthal_color", StelUtility::vec3f_to_str(core->getColorAzimutalGrid()));
-	conf.set_str    ("color:equatorial_color", StelUtility::vec3f_to_str(core->getColorEquatorGrid()));
-	conf.set_str    ("color:equator_color", StelUtility::vec3f_to_str(core->getColorEquatorLine()));
-	conf.set_str    ("color:ecliptic_color", StelUtility::vec3f_to_str(core->getColorEclipticLine()));
-	conf.set_str    ("color:meridian_color", StelUtility::vec3f_to_str(core->getColorMeridianLine()));
-	conf.set_str    ("color:const_lines_color", StelUtility::vec3f_to_str(core->getColorConstellationLine()));
-	conf.set_str    ("color:const_names_color", StelUtility::vec3f_to_str(core->getColorConstellationNames()));
-	conf.set_str    ("color:const_boundary_color", StelUtility::vec3f_to_str(core->getColorConstellationBoundaries()));
-	conf.set_str	("color:nebula_label_color", StelUtility::vec3f_to_str(core->getColorNebulaLabels()));
-	conf.set_str	("color:nebula_circle_color", StelUtility::vec3f_to_str(core->getColorNebulaCircle()));
-	conf.set_str    ("color:cardinal_color", StelUtility::vec3f_to_str(core->getColorCardinalPoints()));
-	conf.set_str    ("color:planet_names_color", StelUtility::vec3f_to_str(core->getColorPlanetsNames()));
-	conf.set_str    ("color:planet_orbits_color", StelUtility::vec3f_to_str(core->getColorPlanetsOrbits()));
-	conf.set_str    ("color:object_trails_color", StelUtility::vec3f_to_str(core->getColorPlanetsTrails()));
+	conf.set_str    ("color:azimuthal_color", StelUtils::vec3f_to_str(core->getColorAzimutalGrid()));
+	conf.set_str    ("color:equatorial_color", StelUtils::vec3f_to_str(core->getColorEquatorGrid()));
+	conf.set_str    ("color:equator_color", StelUtils::vec3f_to_str(core->getColorEquatorLine()));
+	conf.set_str    ("color:ecliptic_color", StelUtils::vec3f_to_str(core->getColorEclipticLine()));
+	conf.set_str    ("color:meridian_color", StelUtils::vec3f_to_str(core->getColorMeridianLine()));
+	conf.set_str    ("color:const_lines_color", StelUtils::vec3f_to_str(core->getColorConstellationLine()));
+	conf.set_str    ("color:const_names_color", StelUtils::vec3f_to_str(core->getColorConstellationNames()));
+	conf.set_str    ("color:const_boundary_color", StelUtils::vec3f_to_str(core->getColorConstellationBoundaries()));
+	conf.set_str	("color:nebula_label_color", StelUtils::vec3f_to_str(core->getColorNebulaLabels()));
+	conf.set_str	("color:nebula_circle_color", StelUtils::vec3f_to_str(core->getColorNebulaCircle()));
+	conf.set_str    ("color:cardinal_color", StelUtils::vec3f_to_str(core->getColorCardinalPoints()));
+	conf.set_str    ("color:planet_names_color", StelUtils::vec3f_to_str(core->getColorPlanetsNames()));
+	conf.set_str    ("color:planet_orbits_color", StelUtils::vec3f_to_str(core->getColorPlanetsOrbits()));
+	conf.set_str    ("color:object_trails_color", StelUtils::vec3f_to_str(core->getColorPlanetsTrails()));
 	//  Are these used?
-	//	conf.set_str    ("color:star_label_color", StelUtility::vec3f_to_str(core->getColorStarNames()));
-	//  conf.set_str    ("color:star_circle_color", StelUtility::vec3f_to_str(core->getColorStarCircles()));
+	//	conf.set_str    ("color:star_label_color", StelUtils::vec3f_to_str(core->getColorStarNames()));
+	//  conf.set_str    ("color:star_circle_color", StelUtils::vec3f_to_str(core->getColorStarCircles()));
 
 	// gui section
 	conf.set_double("gui:mouse_cursor_timeout",getMouseCursorTimeout());
 
 	// not user settable yet
-	// conf.set_str	("gui:gui_base_color", StelUtility::vec3f_to_str(GuiBaseColor));
-	// conf.set_str	("gui:gui_text_color", StelUtility::vec3f_to_str(GuiTextColor));
+	// conf.set_str	("gui:gui_base_color", StelUtils::vec3f_to_str(GuiBaseColor));
+	// conf.set_str	("gui:gui_text_color", StelUtils::vec3f_to_str(GuiTextColor));
 	// conf.set_double ("gui:base_font_size", BaseFontSize);
 
 	// Text ui section
@@ -585,12 +585,12 @@ wstring StelApp::get_printable_date_UTC(double JD) const
 	static char date[255];
 	switch(date_format)
 	{
-		case S_DATE_SYSTEM_DEFAULT : StelUtility::my_strftime(date, 254, "%x", &time_utc); break;
-		case S_DATE_MMDDYYYY : StelUtility::my_strftime(date, 254, "%m/%d/%Y", &time_utc); break;
-		case S_DATE_DDMMYYYY : StelUtility::my_strftime(date, 254, "%d/%m/%Y", &time_utc); break;
-		case S_DATE_YYYYMMDD : StelUtility::my_strftime(date, 254, "%Y-%m-%d", &time_utc); break;
+		case S_DATE_SYSTEM_DEFAULT : StelUtils::my_strftime(date, 254, "%x", &time_utc); break;
+		case S_DATE_MMDDYYYY : StelUtils::my_strftime(date, 254, "%m/%d/%Y", &time_utc); break;
+		case S_DATE_DDMMYYYY : StelUtils::my_strftime(date, 254, "%d/%m/%Y", &time_utc); break;
+		case S_DATE_YYYYMMDD : StelUtils::my_strftime(date, 254, "%Y-%m-%d", &time_utc); break;
 	}
-	return StelUtility::stringToWstring(date);
+	return StelUtils::stringToWstring(date);
 }
 
 // Return a string with the UTC time formated according to the time_format variable
@@ -603,11 +603,11 @@ wstring StelApp::get_printable_time_UTC(double JD) const
 	static char heure[255];
 	switch(time_format)
 	{
-		case S_TIME_SYSTEM_DEFAULT : StelUtility::my_strftime(heure, 254, "%X", &time_utc); break;
-		case S_TIME_24H : StelUtility::my_strftime(heure, 254, "%H:%M:%S", &time_utc); break;
-		case S_TIME_12H : StelUtility::my_strftime(heure, 254, "%I:%M:%S %p", &time_utc); break;
+		case S_TIME_SYSTEM_DEFAULT : StelUtils::my_strftime(heure, 254, "%X", &time_utc); break;
+		case S_TIME_24H : StelUtils::my_strftime(heure, 254, "%H:%M:%S", &time_utc); break;
+		case S_TIME_12H : StelUtils::my_strftime(heure, 254, "%I:%M:%S %p", &time_utc); break;
 	}
-	return StelUtility::stringToWstring(heure);
+	return StelUtils::stringToWstring(heure);
 }
 
 // Return the time in ISO 8601 format that is : %Y-%m-%d %H:%M:%S
@@ -620,7 +620,7 @@ string StelApp::get_ISO8601_time_local(double JD) const
 		get_tm_from_julian(JD + get_GMT_shift_from_system(JD)*0.041666666666, &time_local);
 
 	static char isotime[255];
-	StelUtility::my_strftime(isotime, 254, "%Y-%m-%d %H:%M:%S", &time_local);
+	StelUtils::my_strftime(isotime, 254, "%Y-%m-%d %H:%M:%S", &time_local);
 	return isotime;
 }
 
@@ -638,13 +638,13 @@ wstring StelApp::get_printable_date_local(double JD) const
 	static char date[255];
 	switch(date_format)
 	{
-		case S_DATE_SYSTEM_DEFAULT : StelUtility::my_strftime(date, 254, "%x", &time_local); break;
-		case S_DATE_MMDDYYYY : StelUtility::my_strftime(date, 254, "%m/%d/%Y", &time_local); break;
-		case S_DATE_DDMMYYYY : StelUtility::my_strftime(date, 254, "%d/%m/%Y", &time_local); break;
-		case S_DATE_YYYYMMDD : StelUtility::my_strftime(date, 254, "%Y-%m-%d", &time_local); break;
+		case S_DATE_SYSTEM_DEFAULT : StelUtils::my_strftime(date, 254, "%x", &time_local); break;
+		case S_DATE_MMDDYYYY : StelUtils::my_strftime(date, 254, "%m/%d/%Y", &time_local); break;
+		case S_DATE_DDMMYYYY : StelUtils::my_strftime(date, 254, "%d/%m/%Y", &time_local); break;
+		case S_DATE_YYYYMMDD : StelUtils::my_strftime(date, 254, "%Y-%m-%d", &time_local); break;
 	}
 
-	return StelUtility::stringToWstring(date);
+	return StelUtils::stringToWstring(date);
 }
 
 // Return a string with the local time (according to time_zone_mode variable) formated
@@ -661,11 +661,11 @@ wstring StelApp::get_printable_time_local(double JD) const
 	static char heure[255];
 	switch(time_format)
 	{
-		case S_TIME_SYSTEM_DEFAULT : StelUtility::my_strftime(heure, 254, "%X", &time_local); break;
-		case S_TIME_24H : StelUtility::my_strftime(heure, 254, "%H:%M:%S", &time_local); break;
-		case S_TIME_12H : StelUtility::my_strftime(heure, 254, "%I:%M:%S %p", &time_local); break;
+		case S_TIME_SYSTEM_DEFAULT : StelUtils::my_strftime(heure, 254, "%X", &time_local); break;
+		case S_TIME_24H : StelUtils::my_strftime(heure, 254, "%H:%M:%S", &time_local); break;
+		case S_TIME_12H : StelUtils::my_strftime(heure, 254, "%I:%M:%S %p", &time_local); break;
 	}
-	return StelUtility::stringToWstring(heure);
+	return StelUtils::stringToWstring(heure);
 }
 
 // Convert the time format enum to its associated string and reverse
