@@ -133,6 +133,7 @@ class ZoneArray {  // contains all zones of a given level
 public:
   static ZoneArray *create(const HipStarMgr &hip_star_mgr,const char *fname);
   virtual ~ZoneArray(void) {nr_of_zones = 0;}
+  int getNrOfStars(void) const {return nr_of_stars;}
   virtual void updateHipIndex(HipIndexStruct hip_index[]) const {}
   virtual void searchAround(int index,const Vec3d &v,double cos_lim_fov,
                             vector<StelObject> &result) = 0;
@@ -149,6 +150,7 @@ protected:
             int mag_min,int mag_range,int mag_steps);
   const HipStarMgr &hip_star_mgr;
   int nr_of_zones;
+  int nr_of_stars;
 };
 
 template<class Star>
@@ -160,12 +162,12 @@ public:
   ~SpecialZoneArray(void) {
     if (stars) {delete[] stars;stars = 0;}
     if (zones) {delete[] zones;zones = 0;}
+    nr_of_zones = 0;
     nr_of_stars = 0;
   }
 protected:
   SpecialZoneData<Star> *zones;
   Star *stars;
-  int nr_of_stars;
 private:
   void searchAround(int index,const Vec3d &v,double cos_lim_fov,
                     vector<StelObject> &result);
@@ -349,17 +351,47 @@ protected:
   wstring getNameI18n(void) const {
     return L"";
   }
-  wstring getInfoString(const Navigator *nav) const {
-    return L"";
-  }
-  wstring getShortInfoString(const Navigator *nav) const {
-    return L"";
-  }
+  wstring getInfoString(const Navigator *nav) const;
+  wstring getShortInfoString(const Navigator *nav) const
+    {return getInfoString(nav);}
 private:
   int ref_count;
   void retain(void) {assert(ref_count>=0);ref_count++;}
   void release(void) {assert(ref_count>0);if (--ref_count==0) delete this;}
 };
+
+wstring StarWrapperBase::getInfoString(const Navigator *nav) const {
+  const Vec3d j2000_pos = getObsJ2000Pos(nav);
+  double dec_j2000, ra_j2000;
+  rect_to_sphe(&ra_j2000,&dec_j2000,j2000_pos);
+  const Vec3d equatorial_pos = nav->j2000_to_earth_equ(j2000_pos);
+  double dec_equ, ra_equ;
+  rect_to_sphe(&ra_equ,&dec_equ,equatorial_pos);
+  wostringstream oss;
+  oss.setf(ios::fixed);
+  oss.precision(2);
+  oss << _("Magnitude: ") << get_mag(nav);
+  oss << endl;
+  oss << _("J2000") << L" " << _("RA/DE: ")
+      << StelUtils::printAngleHMS(ra_j2000)
+      << L"/" << StelUtils::printAngleDMS(dec_j2000) << endl;
+  oss << _("Equ of date") << L" " << _("RA/DE: ")
+      << StelUtils::printAngleHMS(ra_equ)
+      << L"/" << StelUtils::printAngleDMS(dec_equ) << endl;
+
+    // calculate alt az
+  double az,alt;
+  rect_to_sphe(&az,&alt,nav->earth_equ_to_local(equatorial_pos));
+  az = 3*M_PI - az;  // N is zero, E is 90 degrees
+  if(az > M_PI*2) az -= M_PI*2;    
+  oss << _("Az/Alt: ") << StelUtils::printAngleDMS(az)
+      << L"/" << StelUtils::printAngleDMS(alt) << endl;
+  oss.precision(2);
+
+  return oss.str();
+}
+
+
 
 template <class Star>
 class StarWrapper : public StarWrapperBase {
@@ -371,19 +403,13 @@ protected:
   Vec3d get_earth_equ_pos(const Navigator *nav) const
     {return nav->j2000_to_earth_equ(getObsJ2000Pos(0));}
   Vec3f get_RGB(void) const {return color_table[s->b_v];}
-  float get_mag(const Navigator *nav=0) const
+  float get_mag(const Navigator *nav) const
     {return 0.001f*a->mag_min + s->mag*(0.001f*a->mag_range)/a->mag_steps;}
 
   string getEnglishName(void) const {
     return "";
   }
   wstring getNameI18n(void) const {
-    return L"";
-  }
-  wstring getInfoString(const Navigator *nav) const {
-    return L"";
-  }
-  wstring getShortInfoString(const Navigator *nav) const {
     return L"";
   }
 protected:
@@ -398,8 +424,6 @@ public:
                const SpecialZoneData<Star1> *z,
                const Star1 *s) : StarWrapper<Star1>(a,z,s) {}
   wstring getInfoString(const Navigator *nav) const;
-  wstring getShortInfoString(const Navigator *nav) const
-    {return getInfoString(nav);}
   string getEnglishName(void) const;
   wstring getNameI18n(void) const;
 };
@@ -428,9 +452,12 @@ wstring StarWrapper1::getNameI18n(void) const {
 
 
 wstring StarWrapper1::getInfoString(const Navigator *nav) const {
-  double tempDE, tempRA;
-  const Vec3d equatorial_pos = get_earth_equ_pos(nav);
-  rect_to_sphe(&tempRA,&tempDE,equatorial_pos);
+  const Vec3d j2000_pos = getObsJ2000Pos(nav);
+  double dec_j2000, ra_j2000;
+  rect_to_sphe(&ra_j2000,&dec_j2000,j2000_pos);
+  const Vec3d equatorial_pos = nav->j2000_to_earth_equ(j2000_pos);
+  double dec_equ, ra_equ;
+  rect_to_sphe(&ra_equ,&dec_equ,equatorial_pos);
   wostringstream oss;
   if (s->hip) {
     const wstring commonNameI18 = HipStarMgr::getCommonName(s->hip);
@@ -452,17 +479,22 @@ wstring StarWrapper1::getInfoString(const Navigator *nav) const {
 
   oss.setf(ios::fixed);
   oss.precision(2);
-  oss << _("Magnitude: ") << get_mag();
+  oss << _("Magnitude: ") << get_mag(nav);
   oss << endl;
-  oss << _("RA/DE: ") << StelUtils::printAngleHMS(tempRA)
-      << L"/" << StelUtils::printAngleDMS(tempDE) << endl;
-  // calculate alt az
-  Vec3d local_pos = nav->earth_equ_to_local(equatorial_pos);
-  rect_to_sphe(&tempRA,&tempDE,local_pos);
-  tempRA = 3*M_PI - tempRA;  // N is zero, E is 90 degrees
-  if(tempRA > M_PI*2) tempRA -= M_PI*2;    
-  oss << _("Az/Alt: ") << StelUtils::printAngleDMS(tempRA)
-      << L"/" << StelUtils::printAngleDMS(tempDE) << endl;
+  oss << _("J2000") << L" " << _("RA/DE: ")
+      << StelUtils::printAngleHMS(ra_j2000)
+      << L"/" << StelUtils::printAngleDMS(dec_j2000) << endl;
+  oss << _("Equ of date") << L" " << _("RA/DE: ")
+      << StelUtils::printAngleHMS(ra_equ)
+      << L"/" << StelUtils::printAngleDMS(dec_equ) << endl;
+
+    // calculate alt az
+  double az,alt;
+  rect_to_sphe(&az,&alt,nav->earth_equ_to_local(equatorial_pos));
+  az = 3*M_PI - az;  // N is zero, E is 90 degrees
+  if(az > M_PI*2) az -= M_PI*2;    
+  oss << _("Az/Alt: ") << StelUtils::printAngleDMS(az)
+      << L"/" << StelUtils::printAngleDMS(alt) << endl;
 
   if (s->plx) {
     oss.precision(5);
@@ -569,7 +601,7 @@ ZoneArray *ZoneArray::create(const HipStarMgr &hip_star_mgr,
     } else {
       type -= FILE_MAGIC;
       printf("ZoneArray::create(%s): type: %d level: %d"
-             " mag_min: %d mag_range: %d mag_steps: %d\n",
+             " mag_min: %d mag_range: %d mag_steps: %d stars: ",
              fname,
              type,level,mag_min,mag_range,mag_steps);
       switch (type) {
@@ -608,6 +640,8 @@ ZoneArray *ZoneArray::create(const HipStarMgr &hip_star_mgr,
                          "initialization failed\n",fname);
           delete rval;
           rval = 0;
+        } else {
+          printf("%d\n",rval->getNrOfStars());
         }
       }
     }
@@ -624,6 +658,7 @@ ZoneArray::ZoneArray(const HipStarMgr &hip_star_mgr,int level,int scale_int,
            mag_min(mag_min),mag_range(mag_range),mag_steps(mag_steps),
            hip_star_mgr(hip_star_mgr) {
   nr_of_zones = GeodesicGrid::nrOfZones(level);
+  nr_of_stars = 0;
 }
 
 struct TmpZoneData {
@@ -654,7 +689,7 @@ SpecialZoneArray<Star>::SpecialZoneArray(FILE *f,
                                          int mag_steps)
                        :ZoneArray(hip_star_mgr,level,scale_int,
                                   mag_min,mag_range,mag_steps),
-                  zones(0),stars(0),nr_of_stars(0) {
+                  zones(0),stars(0) {
   if (nr_of_zones > 0) {
     zones = new SpecialZoneData<Star>[nr_of_zones];
     assert(zones!=0);
@@ -1061,7 +1096,6 @@ void HipStarMgr::draw(const ToneReproductor *eye,const Projector *prj) {
     if (fov_q > 60) fov_q = 60;
     fov_q = 1.f/(fov_q*fov_q);
 
-
     // Set temporary static variable for optimization
     if (flagStarTwinkle) twinkle_amount = twinkleAmount;
     else twinkle_amount = 0;
@@ -1092,6 +1126,7 @@ void HipStarMgr::draw(const ToneReproductor *eye,const Projector *prj) {
     float rmag_table[256];
 //static int count = 0;
 //count++;
+static bool first_time = true;
     for (ZoneArrayMap::const_iterator it(zone_arrays.begin());
          it!=zone_arrays.end();it++) {
       const float mag_min = 0.001f*it->second->mag_min;
@@ -1104,9 +1139,16 @@ void HipStarMgr::draw(const ToneReproductor *eye,const Projector *prj) {
 //        rmag_table[i] =
 //          eye->adapt_luminance(expf(-0.92103f*(mag + 12.12331f)) * 108064.73f)
 //            * powf(prj->get_fov(),-0.85f) * 70.f;
-        rmag_table[i] =
-          sqrtf(eye->adapt_luminance(
-            expf(-0.92103f*(mag + 12.12331f)) * 108064.73f * fov_q)) * 30.f;
+
+const float h0 = expf(-0.92103f*(mag + 12.12331f)) * 108064.73f * fov_q;
+const float h1 = eye->adapt_luminance(h0);
+rmag_table[i] = sqrtf(h1) * 30.f;
+//        rmag_table[i] =
+//          sqrtf(eye->adapt_luminance(
+//            expf(-0.92103f*(mag + 12.12331f)) * 108064.73f * fov_q)) * 30.f;
+if (first_time && i==0) {
+printf("level %d rmag[%f]: %f %f %f\n",it->first,mag,rmag_table[0],h1,h0);
+}
         if (i==0 && rmag_table[0]<1.2f) {
           const float cmag = rmag_table[0]*rmag_table[0]/1.44f;
           if (rmag_table[0] < 0.1f*star_scale ||
@@ -1132,7 +1174,7 @@ void HipStarMgr::draw(const ToneReproductor *eye,const Projector *prj) {
     }
     exit_loop:
 //if ((count&63)==0) cout << endl;
-
+first_time = false;
     prj->reset_perspective_projection();
 }
 

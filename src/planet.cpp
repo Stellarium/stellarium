@@ -661,9 +661,17 @@ void Planet::draw_halo(const Navigator* nav, const Projector* prj, const ToneRep
 	float cmag;
 	float rmag;
 
-	rmag = eye->adapt_luminance(expf(-0.92103f*(compute_magnitude(nav->get_observer_helio_pos()) +
-	                                            12.12331f)) * 108064.73f);
-	rmag = rmag/powf(prj->get_fov(),0.85f)*50.f;
+    float fov_q = prj->get_fov();
+    if (fov_q > 60) fov_q = 60;
+    fov_q = 1.f/(fov_q*fov_q);
+    rmag =
+      sqrtf(eye->adapt_luminance(
+        expf(-0.92103f*(compute_magnitude(nav->get_observer_helio_pos())
+                         + 12.12331f)) * 108064.73f * fov_q)) * 30.f;
+
+//	rmag = eye->adapt_luminance(expf(-0.92103f*(compute_magnitude(nav->get_observer_helio_pos()) +
+//	                                            12.12331f)) * 108064.73f);
+//	rmag = rmag/powf(prj->get_fov(),0.85f)*50.f;
 
 	cmag = 1.f;
 
@@ -678,20 +686,21 @@ void Planet::draw_halo(const Navigator* nav, const Projector* prj, const ToneRep
 	else
 	{
 //  try this one if you want to see a bright moon:
-//if (rmag>4.f) {
-//  rmag=4.f+2.f*sqrtf(1.f+rmag-4.f)-2.f;
-//  if (rmag>8.f) {
-//    rmag=8.f+2.f*sqrtf(1.f+rmag-8.f)-2.f;
-//  }
-//}
-		if (rmag>5.f)
-		{
-			rmag=5.f+sqrt(rmag-5)/6;
-			if (rmag>9.f)
-			{
-				rmag=9.f;
-			}
-		}
+if (rmag>4.f) {
+  rmag=4.f+2.f*sqrtf(1.f+rmag-4.f)-2.f;
+  if (rmag>8.f) {
+    rmag=8.f+2.f*sqrtf(1.f+rmag-8.f)-2.f;
+  }
+}
+
+//		if (rmag>5.f)
+//		{
+//			rmag=5.f+sqrt(rmag-5)/6;
+//			if (rmag>9.f)
+//			{
+//				rmag=9.f;
+//			}
+//		}
 	}
 
 
@@ -732,9 +741,17 @@ void Planet::draw_point_halo(const Navigator* nav, const Projector* prj, const T
 	float cmag;
 	float rmag;
 
-	rmag = eye->adapt_luminance(expf(-0.92103f*(compute_magnitude(nav->get_observer_helio_pos()) +
-	                                            12.12331f)) * 108064.73f);
-	rmag = rmag/powf(prj->get_fov(),0.85f)*10.f;
+    float fov_q = prj->get_fov();
+    if (fov_q > 60) fov_q = 60;
+    fov_q = 1.f/(fov_q*fov_q);
+    rmag =
+      sqrtf(eye->adapt_luminance(
+        expf(-0.92103f*(compute_magnitude(nav->get_observer_helio_pos())
+                         + 12.12331f)) * 108064.73f * fov_q)) * 6.f;
+
+//	rmag = eye->adapt_luminance(expf(-0.92103f*(compute_magnitude(nav->get_observer_helio_pos()) +
+//	                                            12.12331f)) * 108064.73f);
+//	rmag = rmag/powf(prj->get_fov(),0.85f)*10.f;
 
 	cmag = 1.f;
 
