@@ -258,7 +258,7 @@ Component* StelUI::createTopBar(void)
 	top_bar_hour_lbl = new Label(L"-", baseFont);	top_bar_hour_lbl->setPos(110,1);
 	top_bar_fps_lbl = new Label(L"-", baseFont);	top_bar_fps_lbl->setPos(core->getViewportWidth()-100,1);
 	top_bar_fov_lbl = new Label(L"-", baseFont);	top_bar_fov_lbl->setPos(core->getViewportWidth()-220,1);
-	top_bar_appName_lbl = new Label(StelUtility::stringToWstring(APP_NAME), baseFont);
+	top_bar_appName_lbl = new Label(StelUtils::stringToWstring(APP_NAME), baseFont);
 	top_bar_appName_lbl->setPos(core->getViewportWidth()/2-top_bar_appName_lbl->getSizex()/2,1);
 	top_bar_ctr = new FilledContainer();
 	top_bar_ctr->reshape(0,0,core->getViewportWidth(),(int)(baseFont->getLineHeight()+0.5)+5);
@@ -532,7 +532,7 @@ void StelUI::cbEditScriptKey(void)
 
 void StelUI::cbEditScriptExecute(void)
 {
-	string command_string = StelUtility::wstringToString(bt_script->getText());
+	string command_string = StelUtils::wstringToString(bt_script->getText());
 	cout << "Executing command: " << command_string << endl;
 
 	bt_script->clearText();
@@ -1043,7 +1043,7 @@ int StelUI::handle_keys(SDLKey key, SDLMod mod, Uint16 unicode, S_GUI_VALUE stat
 				if(app->scripts->is_recording())
 				{
 					show_message(wstring( _("Recording commands to script file:\n")
-					                      + StelUtility::stringToWstring(app->scripts->get_record_filename()) + L"\n\n"
+					                      + StelUtils::stringToWstring(app->scripts->get_record_filename()) + L"\n\n"
 					                      + _("Hit CTRL-R again to stop.\n")), 4000);
 				}
 				else
@@ -1380,10 +1380,10 @@ void StelUI::updateInfoSelectString(void)
 void StelUI::setTitleObservatoryName(const wstring& name)
 {
 	if (name == L"")
-		top_bar_appName_lbl->setLabel(StelUtility::stringToWstring(APP_NAME));
+		top_bar_appName_lbl->setLabel(StelUtils::stringToWstring(APP_NAME));
 	else
 	{
-		top_bar_appName_lbl->setLabel(StelUtility::stringToWstring(APP_NAME) + L" (" + name + L")");
+		top_bar_appName_lbl->setLabel(StelUtils::stringToWstring(APP_NAME) + L" (" + name + L")");
 	}
 	top_bar_appName_lbl->setPos(core->getViewportWidth()/2-top_bar_appName_lbl->getSizex()/2,1);
 }
@@ -1392,7 +1392,7 @@ wstring StelUI::getTitleWithAltitude(void)
 {
 	return core->getObservatory().getHomePlanetNameI18n() +
         L", " + core->getObservatory().get_name() +
-        L" @ " + StelUtility::doubleToWstring(core->getObservatory().get_altitude()) + L"m";
+        L" @ " + StelUtils::doubleToWstring(core->getObservatory().get_altitude()) + L"m";
 }
 
 void StelUI::setColorScheme(const string& skinFile, const string& section)
@@ -1402,8 +1402,8 @@ void StelUI::setColorScheme(const string& skinFile, const string& section)
 	InitParser conf;
 	conf.load(skinFile);
 	
-	s_color GuiBaseColor		= StelUtility::str_to_vec3f(conf.get_str(section, "gui_base_color", "0.3,0.4,0.7"));
-	s_color GuiTextColor		= StelUtility::str_to_vec3f(conf.get_str(section, "gui_text_color", "0.7,0.8,0.9"));
+	s_color GuiBaseColor		= StelUtils::str_to_vec3f(conf.get_str(section, "gui_base_color", "0.3,0.4,0.7"));
+	s_color GuiTextColor		= StelUtils::str_to_vec3f(conf.get_str(section, "gui_text_color", "0.7,0.8,0.9"));
 	
 	desktop->setColorScheme(GuiBaseColor, GuiTextColor);
 }

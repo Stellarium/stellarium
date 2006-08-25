@@ -162,7 +162,7 @@ void StelCore::init(const InitParser& conf)
 		LoadingBar lb(projection, FontSizeGeneral, baseFontFile,
                       "logo24bits.png",
                       getViewportWidth(), getViewportHeight(),
-                      StelUtility::stringToWstring(VERSION), 45, 320, 121);
+                      StelUtils::stringToWstring(VERSION), 45, 320, 121);
 		hip_stars->init(FontSizeGeneral, baseFontFile,lb);
         int grid_level = hip_stars->getMaxGridLevel();
 
@@ -260,7 +260,7 @@ void StelCore::init(const InitParser& conf)
 	InitFov				= conf.get_double ("navigation","init_fov",60.);
 	projection->set_fov(InitFov);
 
-	InitViewPos = StelUtility::str_to_vec3f(conf.get_str("navigation:init_view_pos").c_str());
+	InitViewPos = StelUtils::str_to_vec3f(conf.get_str("navigation:init_view_pos").c_str());
 	navigation->set_local_vision(InitViewPos);
 
 
@@ -866,7 +866,7 @@ bool StelCore::setSkyCultureDir(const string& cultureDir)
 
 	if(!asterisms) return 1;
 
-	LoadingBar lb(projection, FontSizeGeneral, baseFontFile, "logo24bits.png", getViewportWidth(), getViewportHeight(), StelUtility::stringToWstring(VERSION), 45, 320, 121);
+	LoadingBar lb(projection, FontSizeGeneral, baseFontFile, "logo24bits.png", getViewportWidth(), getViewportHeight(), StelUtils::stringToWstring(VERSION), 45, 320, 121);
 
 	asterisms->loadLinesAndArt(getDataDir() + "sky_cultures/" + skyCultureDir + "/constellationship.fab",
 	                           getDataDir() + "sky_cultures/" + skyCultureDir + "/constellationsart.fab", getDataDir() + "constellations_boundaries.dat", lb);
@@ -952,27 +952,27 @@ void StelCore::setColorScheme(const string& skinFile, const string& section)
 	string defaultColor = "0.6,0.4,0";
 
 	// Load colors from config file
-	nebulas->setLabelColor(StelUtility::str_to_vec3f(conf.get_str(section,"nebula_label_color", defaultColor)));
-	nebulas->setCircleColor(StelUtility::str_to_vec3f(conf.get_str(section,"nebula_circle_color", defaultColor)));
-	hip_stars->setLabelColor(StelUtility::str_to_vec3f(conf.get_str(section,"star_label_color", defaultColor)));
-	hip_stars->setCircleColor(StelUtility::str_to_vec3f(conf.get_str(section,"star_circle_color", defaultColor)));
-	telescope_mgr->set_label_color(StelUtility::str_to_vec3f(conf.get_str(section,"telescope_label_color", defaultColor)));
-	telescope_mgr->set_circle_color(StelUtility::str_to_vec3f(conf.get_str(section,"telescope_circle_color", defaultColor)));
-	ssystem->setLabelColor(StelUtility::str_to_vec3f(conf.get_str(section,"planet_names_color", defaultColor)));
-	ssystem->setOrbitColor(StelUtility::str_to_vec3f(conf.get_str(section,"planet_orbits_color", defaultColor)));
-	ssystem->setTrailColor(StelUtility::str_to_vec3f(conf.get_str(section,"object_trails_color", defaultColor)));
-	equ_grid->setColor(StelUtility::str_to_vec3f(conf.get_str(section,"equatorial_color", defaultColor)));
+	nebulas->setLabelColor(StelUtils::str_to_vec3f(conf.get_str(section,"nebula_label_color", defaultColor)));
+	nebulas->setCircleColor(StelUtils::str_to_vec3f(conf.get_str(section,"nebula_circle_color", defaultColor)));
+	hip_stars->setLabelColor(StelUtils::str_to_vec3f(conf.get_str(section,"star_label_color", defaultColor)));
+	hip_stars->setCircleColor(StelUtils::str_to_vec3f(conf.get_str(section,"star_circle_color", defaultColor)));
+	telescope_mgr->set_label_color(StelUtils::str_to_vec3f(conf.get_str(section,"telescope_label_color", defaultColor)));
+	telescope_mgr->set_circle_color(StelUtils::str_to_vec3f(conf.get_str(section,"telescope_circle_color", defaultColor)));
+	ssystem->setLabelColor(StelUtils::str_to_vec3f(conf.get_str(section,"planet_names_color", defaultColor)));
+	ssystem->setOrbitColor(StelUtils::str_to_vec3f(conf.get_str(section,"planet_orbits_color", defaultColor)));
+	ssystem->setTrailColor(StelUtils::str_to_vec3f(conf.get_str(section,"object_trails_color", defaultColor)));
+	equ_grid->setColor(StelUtils::str_to_vec3f(conf.get_str(section,"equatorial_color", defaultColor)));
 	//equ_grid->set_top_transparancy(draw_mode==DM_NORMAL);
-	azi_grid->setColor(StelUtility::str_to_vec3f(conf.get_str(section,"azimuthal_color", defaultColor)));
+	azi_grid->setColor(StelUtils::str_to_vec3f(conf.get_str(section,"azimuthal_color", defaultColor)));
 	//azi_grid->set_top_transparancy(draw_mode==DM_NORMAL);
-	equator_line->setColor(StelUtility::str_to_vec3f(conf.get_str(section,"equator_color", defaultColor)));
-	ecliptic_line->setColor(StelUtility::str_to_vec3f(conf.get_str(section,"ecliptic_color", defaultColor)));
+	equator_line->setColor(StelUtils::str_to_vec3f(conf.get_str(section,"equator_color", defaultColor)));
+	ecliptic_line->setColor(StelUtils::str_to_vec3f(conf.get_str(section,"ecliptic_color", defaultColor)));
 	meridian_line->set_font(FontSizeGeneral, baseFontFile);
-	meridian_line->setColor(StelUtility::str_to_vec3f(conf.get_str(section,"meridian_color", defaultColor)));
-	cardinals_points->setColor(StelUtility::str_to_vec3f(conf.get_str(section,"cardinal_color", defaultColor)));
-	asterisms->setLineColor(StelUtility::str_to_vec3f(conf.get_str(section,"const_lines_color", defaultColor)));
-	asterisms->setBoundaryColor(StelUtility::str_to_vec3f(conf.get_str(section,"const_boundary_color", "0.8,0.3,0.3")));
-	asterisms->setLabelColor(StelUtility::str_to_vec3f(conf.get_str(section,"const_names_color", defaultColor)));
+	meridian_line->setColor(StelUtils::str_to_vec3f(conf.get_str(section,"meridian_color", defaultColor)));
+	cardinals_points->setColor(StelUtils::str_to_vec3f(conf.get_str(section,"cardinal_color", defaultColor)));
+	asterisms->setLineColor(StelUtils::str_to_vec3f(conf.get_str(section,"const_lines_color", defaultColor)));
+	asterisms->setBoundaryColor(StelUtils::str_to_vec3f(conf.get_str(section,"const_boundary_color", "0.8,0.3,0.3")));
+	asterisms->setLabelColor(StelUtils::str_to_vec3f(conf.get_str(section,"const_names_color", defaultColor)));
 	
 	// Init milky way
 // 	if (draw_mode == DM_NORMAL)	milky_way->set_texture("milkyway.png");
@@ -981,7 +981,7 @@ void StelCore::setColorScheme(const string& skinFile, const string& section)
 // 		milky_way->set_texture("milkyway_chart.png",true);
 // 	}
 	
-	chartColor = StelUtility::str_to_vec3f(conf.get_str(section,"chart_color", defaultColor));
+	chartColor = StelUtils::str_to_vec3f(conf.get_str(section,"chart_color", defaultColor));
 }
 
 //! Get a color used to display info about the currently selected object
@@ -1022,10 +1022,10 @@ wstring StelCore::get_cursor_pos(int x, int y)
 {
 	Vec3d v;
 	projection->unproject_earth_equ(x,y,v);
-	float tempDE, tempRA;
+	double tempDE, tempRA;
 	rect_to_sphe(&tempRA,&tempDE,v);
-	return L"RA : " + StelUtility::printAngleHMS(tempRA) + L"\n" +
-	L"DE : " + StelUtility::printAngleDMS(tempDE);
+	return L"RA : " + StelUtils::printAngleHMS(tempRA) + L"\n" +
+	L"DE : " + StelUtils::printAngleDMS(tempDE);
 }
 
 void StelCore::setProjectionType(const string& sptype)

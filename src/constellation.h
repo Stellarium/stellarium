@@ -39,7 +39,7 @@ private:
     
     // StelObject method to override
    	//! Write I18n information about the object in wstring. 
-	wstring getInfoString(const Navigator * nav) const {return getNameI18n() + L"(" + StelUtility::stringToWstring(getShortName()) + L"°";}
+	wstring getInfoString(const Navigator * nav) const {return getNameI18n() + L"(" + StelUtils::stringToWstring(getShortName()) + L"°";}
 	//! The returned wstring can typically be used for object labeling in the sky
 	wstring getShortInfoString(const Navigator * nav) const {return getNameI18n();}
 	//! Return object's type
