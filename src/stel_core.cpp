@@ -337,6 +337,16 @@ void StelCore::update(int delta_time)
 	// Field of view
 	projection->update_auto_zoom(delta_time);
 
+	// Give the updated standard projection matrices to the projector.
+    // atmosphere->compute_color needs the projection matrices, so we must
+    // set them before calling atmosphere->compute_color, otherwise
+    // the first image will be rendered with invalid (nan)
+    // inverse projection matrices.
+	projection->set_modelview_matrices(	navigation->get_earth_equ_to_eye_mat(),
+	                                    navigation->get_helio_to_eye_mat(),
+	                                    navigation->get_local_to_eye_mat(),
+	                                    navigation->get_j2000_to_eye_mat());
+
 	// update faders and Planet trails (call after nav is updated)
 	ssystem->update(delta_time, navigation);
 
@@ -404,12 +414,6 @@ double StelCore::draw(int delta_time)
 
 	// Init viewport to current projector values
 	projection->applyViewport();
-
-	// Give the updated standard projection matrices to the projector
-	projection->set_modelview_matrices(	navigation->get_earth_equ_to_eye_mat(),
-	                                    navigation->get_helio_to_eye_mat(),
-	                                    navigation->get_local_to_eye_mat(),
-	                                    navigation->get_j2000_to_eye_mat());
 
 	// Set openGL drawings in equatorial coordinates
 	navigation->switch_to_earth_equatorial();
