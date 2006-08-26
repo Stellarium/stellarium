@@ -123,7 +123,11 @@ struct ZoneData { // a single Triangle
 
 template <class Star>
 struct SpecialZoneData : public ZoneData {
-  Vec3d getJ2000Pos(const Star *s) const;
+  Vec3d getJ2000Pos(const Star *s) const {
+    Vec3d pos = (double)(s->x0)*axis0 + (double)(s->x1)*axis1;
+    pos += sqrt(1.0-pos.lengthSquared()) * center;
+    return pos;
+  }
   StelObject createStelObject(const Star *s) const
     {return s->createStelObject(*this);}
   Star *stars; // array of stars in this zone
@@ -1027,34 +1031,23 @@ int HipStarMgr::drawStar(const Vec3d &XY,float rmag,const Vec3f &color) const {
 
 
 
-template <class Star>
-Vec3d SpecialZoneData<Star>::getJ2000Pos(const Star *s) const {
-  Vec3d pos = center + (double)(s->x0)*axis0 + (double)(s->x1)*axis1;
-  pos.normalize();
-  return pos;
-}
-
 template<class Star>
 void SpecialZoneArray<Star>::draw(int index,bool is_inside,
                                   const float *rmag_table,
                                   const Projector *prj) const {
   SpecialZoneData<Star> &zone(zones[index]);
-  Vec3d xy,pos;
+  Vec3d xy;
   const Star *const end = zone.stars + zone.size;
-  for (const Star *d=zone.stars;d<end;d++) {
-    const double f0 = d->x0;
-    const double f1 = d->x1;
-    pos = zone.center + f0*zone.axis0 + f1*zone.axis1;
-    pos.normalize();
+  for (const Star *s=zone.stars;s<end;s++) {
     if (is_inside) {
-      if (prj->project_j2000(pos,xy)) {
-        if (0 > hip_star_mgr.drawStar(xy,rmag_table[d->mag],
-                                      color_table[d->b_v])) break;
+      if (prj->project_j2000(zone.getJ2000Pos(s),xy)) {
+        if (0 > hip_star_mgr.drawStar(xy,rmag_table[s->mag],
+                                      color_table[s->b_v])) break;
       }
     } else {
-      if (prj->project_j2000_check(pos,xy)) {
-        if (0 > hip_star_mgr.drawStar(xy,rmag_table[d->mag],
-                         color_table[d->b_v])) break;
+      if (prj->project_j2000_check(zone.getJ2000Pos(s),xy)) {
+        if (0 > hip_star_mgr.drawStar(xy,rmag_table[s->mag],
+                         color_table[s->b_v])) break;
       }
     }
   }
@@ -1126,7 +1119,6 @@ void HipStarMgr::draw(const ToneReproductor *eye,const Projector *prj) {
     float rmag_table[256];
 //static int count = 0;
 //count++;
-static bool first_time = true;
     for (ZoneArrayMap::const_iterator it(zone_arrays.begin());
          it!=zone_arrays.end();it++) {
       const float mag_min = 0.001f*it->second->mag_min;
@@ -1139,16 +1131,9 @@ static bool first_time = true;
 //        rmag_table[i] =
 //          eye->adapt_luminance(expf(-0.92103f*(mag + 12.12331f)) * 108064.73f)
 //            * powf(prj->get_fov(),-0.85f) * 70.f;
-
-const float h0 = expf(-0.92103f*(mag + 12.12331f)) * 108064.73f * fov_q;
-const float h1 = eye->adapt_luminance(h0);
-rmag_table[i] = sqrtf(h1) * 30.f;
-//        rmag_table[i] =
-//          sqrtf(eye->adapt_luminance(
-//            expf(-0.92103f*(mag + 12.12331f)) * 108064.73f * fov_q)) * 30.f;
-if (first_time && i==0) {
-printf("level %d rmag[%f]: %f %f %f\n",it->first,mag,rmag_table[0],h1,h0);
-}
+        rmag_table[i] =
+          sqrtf(eye->adapt_luminance(
+            expf(-0.92103f*(mag + 12.12331f)) * 108064.73f * fov_q)) * 30.f;
         if (i==0 && rmag_table[0]<1.2f) {
           const float cmag = rmag_table[0]*rmag_table[0]/1.44f;
           if (rmag_table[0] < 0.1f*star_scale ||
@@ -1174,7 +1159,6 @@ printf("level %d rmag[%f]: %f %f %f\n",it->first,mag,rmag_table[0],h1,h0);
     }
     exit_loop:
 //if ((count&63)==0) cout << endl;
-first_time = false;
     prj->reset_perspective_projection();
 }
 
