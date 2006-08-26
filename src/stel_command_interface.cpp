@@ -433,7 +433,7 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 		  
 			//		  cout << "audio path = " << path << endl;
 		  
-			audio = new Audio(path + args["filename"], "default track", str_to_long(args["output_rate"]));
+			audio = new Audio(path + args["filename"], "default track", StelUtils::str_to_long(args["output_rate"]));
 			audio->play(args["loop"]=="on");
 
 			// if fast forwarding mute (pause) audio
