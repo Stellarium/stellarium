@@ -113,3 +113,8 @@ void ToneReproductor::xyY_to_RGB(float* color)
 	color[2] = 0.0134455f*X - 0.118373f*Y + 1.01527f  *Z;
 }
 
+// Provide the luminance in cd/m^2 from the magnitude and the surface in arcmin^2
+float ToneReproductor::mag_to_luminance(float mag, float surface)
+{
+	return expf(-0.4f * 2.3025851f * (mag - (-2.5f * log10f(surface)))) * 108064.73f;
+}

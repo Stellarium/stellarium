@@ -101,13 +101,13 @@ void Navigator::update_vision_vector(int delta_time,const StelObject &selected)
 
 		if (move.local_pos)
 		{
-			rect_to_sphe(&ra_aim, &de_aim, move.aim);
-			rect_to_sphe(&ra_start, &de_start, move.start);
+			StelUtils::rect_to_sphe(&ra_aim, &de_aim, move.aim);
+			StelUtils::rect_to_sphe(&ra_start, &de_start, move.start);
 		}
 		else
 		{
-			rect_to_sphe(&ra_aim, &de_aim, earth_equ_to_local(move.aim));
-			rect_to_sphe(&ra_start, &de_start, earth_equ_to_local(move.start));
+			StelUtils::rect_to_sphe(&ra_aim, &de_aim, earth_equ_to_local(move.aim));
+			StelUtils::rect_to_sphe(&ra_start, &de_start, earth_equ_to_local(move.start));
 		}
 		
 		// Trick to choose the good moving direction and never travel on a distance > PI
@@ -123,7 +123,7 @@ void Navigator::update_vision_vector(int delta_time,const StelObject &selected)
 		de_now = de_aim*c + de_start*(1. - c);
 		ra_now = ra_aim*c + ra_start*(1. - c);
 		
-		sphe_to_rect(ra_now, de_now, local_vision);
+		StelUtils::sphe_to_rect(ra_now, de_now, local_vision);
 		equ_vision = local_to_earth_equ(local_vision);
 
 		move.coef+=move.speed*delta_time;
@@ -185,8 +185,8 @@ void Navigator::update_move(double deltaAz, double deltaAlt)
 {
 	double azVision, altVision;
 
-	if( viewing_mode == VIEW_EQUATOR) rect_to_sphe(&azVision,&altVision,equ_vision);
-	else rect_to_sphe(&azVision,&altVision,local_vision);
+	if( viewing_mode == VIEW_EQUATOR) StelUtils::rect_to_sphe(&azVision,&altVision,equ_vision);
+	else StelUtils::rect_to_sphe(&azVision,&altVision,local_vision);
 
 	// if we are moving in the Azimuthal angle (left/right)
 	if (deltaAz) azVision-=deltaAz;
@@ -202,12 +202,12 @@ void Navigator::update_move(double deltaAz, double deltaAlt)
 	{
 		if( viewing_mode == VIEW_EQUATOR)
 		{
-			sphe_to_rect(azVision, altVision, equ_vision);
+			StelUtils::sphe_to_rect(azVision, altVision, equ_vision);
 			local_vision=earth_equ_to_local(equ_vision);
 		}
 		else
 		{
-			sphe_to_rect(azVision, altVision, local_vision);
+			StelUtils::sphe_to_rect(azVision, altVision, local_vision);
 			// Calc the equatorial coordinate of the direction of vision wich was in Altazimuthal coordinate
 			equ_vision=local_to_earth_equ(local_vision);
 			prec_equ_vision = mat_earth_equ_to_j2000*equ_vision;

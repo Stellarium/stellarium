@@ -105,8 +105,8 @@ void Observator::load(const InitParser& conf, const string& section)
 //    printf("(home_planet should be: \"%s\" is: \"%s\") ",
 //           conf.get_str(section, "home_planet").c_str(),
 //           planet->getEnglishName().c_str());
-	latitude  = get_dec_angle(conf.get_str(section, "latitude"));
-	longitude = get_dec_angle(conf.get_str(section, "longitude"));
+	latitude  = StelUtils::get_dec_angle(conf.get_str(section, "latitude"));
+	longitude = StelUtils::get_dec_angle(conf.get_str(section, "longitude"));
 	altitude = conf.get_int(section, "altitude");
 	set_landscape_name(conf.get_str(section, "landscape_name", "sea"));
 

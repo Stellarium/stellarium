@@ -227,7 +227,7 @@ Telescope::Telescope(const string &name) : name(name) {
 wstring Telescope::getInfoString(const Navigator *nav) const {
   const Vec3d equatorial_pos = get_earth_equ_pos(nav);
   double ra,dec;
-  rect_to_sphe(&ra,&dec,equatorial_pos);
+  StelUtils::rect_to_sphe(&ra,&dec,equatorial_pos);
   std::wostringstream oss;
   oss << nameI18n << endl
       << "RA/DE: " << StelUtils::printAngleHMS(ra)
