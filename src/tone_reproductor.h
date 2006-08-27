@@ -85,6 +85,9 @@ public:
 	// Convert from xyY color system to RGB
 	void xyY_to_RGB(float*);
 
+	// Provide the luminance in cd/m^2 from the magnitude and the surface in arcmin^2
+	static float mag_to_luminance(float mag, float surface);
+	
 private:
 	float Lda;		// Display luminance adaptation (in cd/m^2)
 	float Lwa;		// World   luminance adaptation (in cd/m^2)

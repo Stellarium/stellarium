@@ -60,7 +60,7 @@ wstring Nebula::getInfoString(const Navigator* nav) const
 	double tempDE, tempRA;
 
 	Vec3d equPos = nav->j2000_to_earth_equ(XYZ);
-	rect_to_sphe(&tempRA,&tempDE,equPos);
+	StelUtils::rect_to_sphe(&tempRA,&tempDE,equPos);
 
 	wostringstream oss;
 	if (nameI18!=L"")
@@ -96,7 +96,7 @@ wstring Nebula::getInfoString(const Navigator* nav) const
 	oss << _("RA/DE: ") << StelUtils::printAngleHMS(tempRA) << L"/" << StelUtils::printAngleDMS(tempDE) << endl;
 	// calculate alt az
 	Vec3d localPos = nav->earth_equ_to_local(equPos);
-	rect_to_sphe(&tempRA,&tempDE,localPos);
+	StelUtils::rect_to_sphe(&tempRA,&tempDE,localPos);
 	tempRA = 3*M_PI - tempRA;  // N is zero, E is 90 degrees
 	if(tempRA > M_PI*2) tempRA -= M_PI*2;	
 	oss << _("Az/Alt: ") << StelUtils::printAngleDMS(tempRA) << L"/" << StelUtils::printAngleDMS(tempDE) << endl;
@@ -183,7 +183,7 @@ bool Nebula::readTexture(const string& record)
 	float DecRad = de*M_PI/180.;
 
 	// Calc the Cartesian coord with RA and DE
-	sphe_to_rect(RaRad,DecRad,XYZ);
+	StelUtils::sphe_to_rect(RaRad,DecRad,XYZ);
 	XYZ*=RADIUS_NEB;
 
 	// Calc the angular size in radian : TODO this should be independant of tex_angular_size
@@ -191,9 +191,7 @@ bool Nebula::readTexture(const string& record)
 
 	neb_tex = new s_texture(tex_name, TEX_LOAD_TYPE_PNG_BLEND1, true);  // use mipmaps
 
-	//tex_angular_size*tex_angular_size*3600/4*M_PI
-	//	luminance = mag_to_luminance(mag, tex_angular_size*tex_angular_size*3600) /	neb_tex->get_average_luminance() * 50;
-	luminance = mag_to_luminance(mag, tex_angular_size*tex_angular_size*3600);
+	luminance = ToneReproductor::mag_to_luminance(mag, tex_angular_size*tex_angular_size*3600);
 
 	// this is a huge performance drag if called every frame, so cache here
 	tex_avg_luminance = neb_tex->get_average_luminance();
@@ -428,7 +426,7 @@ bool Nebula::readNGC(char *recordstr)
 	DecRad*=M_PI/180.;    // Convert from deg to rad
 
 	// Calc the Cartesian coord with RA and DE
-	sphe_to_rect(RaRad,DecRad,XYZ);
+	StelUtils::sphe_to_rect(RaRad,DecRad,XYZ);
 	XYZ*=Nebula::RADIUS_NEB;
 
 	// Calc the angular size in radian : TODO this should be independant of tex_angular_size
@@ -443,7 +441,7 @@ bool Nebula::readNGC(char *recordstr)
 
 	angular_size = tex_angular_size/2/60*M_PI/180;
 
-	luminance = mag_to_luminance(mag, tex_angular_size*tex_angular_size*3600);
+	luminance = ToneReproductor::mag_to_luminance(mag, tex_angular_size*tex_angular_size*3600);
 	if (luminance < 0)
 		luminance = .0075;
 

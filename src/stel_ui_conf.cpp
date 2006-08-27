@@ -627,10 +627,10 @@ void StelUI::load_cities(const string & fileName)
 			else 
 				sscanf(ctime,"%f",&time);
 			earth_map->addCity(name, 
-			state, 
-			country, 
-			get_dec_angle(clon), 
-				get_dec_angle(clat), time, showatzoom, alt);
+				state, 
+				country, 
+				StelUtils::get_dec_angle(clon), 
+				StelUtils::get_dec_angle(clat), time, showatzoom, alt);
 		}
 		line++;
 	}

@@ -106,23 +106,26 @@ namespace StelUtils {
 	int str_to_int(string str);
 	int str_to_int(string str, int default_value);
 	string double_to_str(double dbl);
-	long int str_to_long(string str);	
+	long int str_to_long(string str);
+	
+	//! @brief Convert from spherical coordinates to Rectangular direction
+	//! @param lng longitude in radian
+	//! @param lat latitude in radian
+	void sphe_to_rect(double lng, double lat, Vec3d& v);
+	
+	//! @brief Convert from spherical coordinates to Rectangular direction
+	//! @param lng longitude in radian
+	//! @param lat latitude in radian
+	void sphe_to_rect(float lng, float lat, Vec3f& v);
+	
+	//! @brief Convert from spherical coordinates to Rectangular direction
+	//! @param lng double* to store longitude in radian
+	//! @param lat double* to store latitude in radian
+	void rect_to_sphe(double *lng, double *lat, const Vec3d& v);
+
+	//! Obtains Latitude, Longitude, RA or Declination from a string.
+	double get_dec_angle(const string&);	
 }
-
-double hms_to_rad(unsigned int h, double m);
-double dms_to_rad(int d, double m);
-
-
-void sphe_to_rect(double lng, double lat, Vec3d& v);
-//void sphe_to_rect(double lng, double lat, double r, Vec3d& v);
-void sphe_to_rect(float lng, float lat, Vec3f& v);
-void rect_to_sphe(double *lng, double *lat, const Vec3d& v);
-
-/* Obtains Latitude, Longitude, RA or Declination from a string. */
-double get_dec_angle(const string&);
-
-// Provide the luminance in cd/m^2 from the magnitude and the surface in arcmin^2
-float mag_to_luminance(float mag, float surface);
 
 // General Calendar Functions
 
