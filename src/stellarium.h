@@ -36,7 +36,12 @@
 
 #include "fmath.h"
 
+// astonomical unit (km)
 #define AU 149597870.691
+
+// speed of light (km/sec)
+#define SPEED_OF_LIGHT 299792.458
+
 #define MY_MAX(a,b) (((a)>(b))?(a):(b))
 #define MY_MIN(a,b) (((a)<(b))?(a):(b))
 

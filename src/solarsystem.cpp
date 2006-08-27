@@ -26,7 +26,7 @@ using namespace std;
 #include "s_texture.h"
 #include "stellplanet.h"
 #include "orbit.h"
-#include "stellarium.h"
+#include "stellarium.h" // AU,SPEED_OF_LIGHT
 #include "init_parser.h"
 #include "navigator.h"
 #include "projector.h"
@@ -330,7 +330,7 @@ void SolarSystem::computePositions(double date,const Planet *home_planet) {
          iter!=system_planets.end();iter++) {
       const double light_speed_correction =
         ((*iter)->get_heliocentric_ecliptic_pos()-home_pos).length()
-        * (149597870000.0 / (299792458.0 * 86400));
+        * (AU / (SPEED_OF_LIGHT * 86400));
 //cout << "SolarSystem::computePositions: " << (*iter)->getEnglishName()
 //     << ": " << (86400*light_speed_correction) << endl;
       (*iter)->compute_position(date-light_speed_correction);
