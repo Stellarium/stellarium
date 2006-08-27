@@ -30,7 +30,7 @@
 #include "stel_object_base.h"
 #include "s_texture.h"
 #include "bytes.h"
-#include "stellarium.h"
+#include "stellarium.h" // AU,SPEED_OF_LIGHT
 #include "navigator.h"
 #include "stel_utility.h"
 #include "tone_reproductor.h"
@@ -502,9 +502,12 @@ wstring StarWrapper1::getInfoString(const Navigator *nav) const {
 
   if (s->plx) {
     oss.precision(5);
-    oss << _("parallax: ") << (0.00001*s->plx) << endl;
-    oss << _("distance: ") << ( (149.6e6/(300000.0*86400*365.25))
-                               /(M_PI/180) * (0.00001*s->plx/3600)) << endl;
+    oss << _("Parallax: ") << (0.00001*s->plx) << endl;
+    oss.precision(2);
+    oss << _("Distance: ")
+        << (AU/(SPEED_OF_LIGHT*86400*365.25))
+                       / (s->plx*((0.00001/3600)*(M_PI/180)))
+        << _(" Light Years") << endl;
   }
 
   if (s->sp_int) {
