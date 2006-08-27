@@ -194,7 +194,6 @@ namespace StelUtils {
 	
 	double str_to_double(string str)
 	{
-
 		if(str=="") return 0;
 		double dbl;
 		std::istringstream dstr( str );
@@ -206,7 +205,6 @@ namespace StelUtils {
 // always positive
 	double str_to_pos_double(string str)
 	{
-
 		if(str=="") return 0;
 		double dbl;
 		std::istringstream dstr( str );
@@ -219,7 +217,6 @@ namespace StelUtils {
 
 	int str_to_int(string str)
 	{
-
 		if(str=="") return 0;
 		int integer;
 		std::istringstream istr( str );
@@ -231,7 +228,6 @@ namespace StelUtils {
 
 	int str_to_int(string str, int default_value)
 	{
-
 		if(str=="") return default_value;
 		int integer;
 		std::istringstream istr( str );
@@ -242,16 +238,13 @@ namespace StelUtils {
 
 	string double_to_str(double dbl)
 	{
-
 		std::ostringstream oss;
 		oss << dbl;
 		return oss.str();
-
 	}
 
 	long int str_to_long(string str)
 	{
-
 		if(str=="") return 0;
 		long int integer;
 		std::istringstream istr( str );
@@ -259,181 +252,148 @@ namespace StelUtils {
 		istr >> integer;
 		return integer;
 	}
-}
 
-double hms_to_rad(unsigned int h, double m)
-{
-	return (double)M_PI/24.*h*2.+(double)M_PI/12.*m/60.;
-}
+	void sphe_to_rect(double lng, double lat, Vec3d& v)
+	{
+		const double cosLat = cos(lat);
+		v.set(cos(lng) * cosLat, sin(lng) * cosLat, sin(lat));
+	}
 
-double dms_to_rad(int d, double m)
-{
-	double t = (double)M_PI/180.*d+(double)M_PI/10800.*m;
-	return t;
-}
+	void sphe_to_rect(float lng, float lat, Vec3f& v)
+	{
+		const double cosLat = cos(lat);
+		v.set(cos(lng) * cosLat, sin(lng) * cosLat, sin(lat));
+	}
 
-
-void sphe_to_rect(double lng, double lat, Vec3d& v)
-{
-	const double cosLat = cos(lat);
-	v.set(cos(lng) * cosLat, sin(lng) * cosLat, sin(lat));
-}
-
-void sphe_to_rect(double lng, double lat, double r, Vec3d& v)
-{
-	const double cosLat = cos(lat);
-	v.set(cos(lng) * cosLat * r, sin(lng) * cosLat * r, sin(lat) * r);
-}
-
-void sphe_to_rect(float lng, float lat, Vec3f& v)
-{
-	const double cosLat = cos(lat);
-	v.set(cos(lng) * cosLat, sin(lng) * cosLat, sin(lat));
-}
-
-void rect_to_sphe(double *lng, double *lat, const Vec3d& v)
-{
-	double r = v.length();
-	*lat = asin(v[2]/r);
-	*lng = atan2(v[1],v[0]);
-}
-
-// Provide the luminance in cd/m^2 from the magnitude and the surface in arcmin^2
-float mag_to_luminance(float mag, float surface)
-{
-	return expf(-0.4f * 2.3025851f * (mag - (-2.5f * log10f(surface)))) * 108064.73f;
-}
-
-// strips trailing whitespaces from buf.
+	void rect_to_sphe(double *lng, double *lat, const Vec3d& v)
+	{
+		double r = v.length();
+		*lat = asin(v[2]/r);
+		*lng = atan2(v[1],v[0]);
+	}
+	
+	// strips trailing whitespaces from buf.
 #define iswhite(c)  ((c)== ' ' || (c)=='\t')
-static char *trim(char *x)
-{
-	char *y;
+	static char *trim(char *x)
+	{
+		char *y;
+	
+		if(!x)
+			return(x);
+		y = x + strlen(x)-1;
+		while (y >= x && iswhite(*y))
+					*y-- = 0; /* skip white space */
+		return x;
+	}
+	
+	// salta espacios en blanco
+	static void skipwhite(char **s)
+	{
+		while(iswhite(**s))
+			++(*s);
+	}	
+	
+	double get_dec_angle(const string& str)
+	{
+		const char* s = str.c_str();
+		char *mptr, *ptr, *dec, *hh;
+		int negative = 0;
+		char delim1[] = " :.,;DdHhMm'\n\t\xBA";  // 0xBA was old degree delimiter
+		char delim2[] = " NSEWnsew\"\n\t";
+		int dghh = 0, minutes = 0;
+		double seconds = 0.0, pos;
+		short count;
 
-	if(!x)
-		return(x);
-	y = x + strlen(x)-1;
-	while (y >= x && iswhite(*y))
-		*y-- = 0; /* skip white space */
-	return x;
-}
+		enum _type{
+			HOURS, DEGREES, LAT, LONG
+		}type;
 
+		if (s == NULL || !*s)
+			return(-0.0);
+		count = strlen(s) + 1;
+		if ((mptr = (char *) malloc(count)) == NULL)
+			return (-0.0);
+		ptr = mptr;
+		memcpy(ptr, s, count);
+		trim(ptr);
+		skipwhite(&ptr);
 
+		/* the last letter has precedence over the sign */
+		if (strpbrk(ptr,"SsWw") != NULL)
+			negative = 1;
 
-// salta espacios en blanco
-static void skipwhite(char **s)
-{
-	while(iswhite(**s))
-		++(*s);
-}
-
-
-double get_dec_angle(const string& str)
-{
-	const char* s = str.c_str();
-	char *mptr, *ptr, *dec, *hh;
-	int negative = 0;
-	char delim1[] = " :.,;DdHhMm'\n\t\xBA";  // 0xBA was old degree delimiter
-	char delim2[] = " NSEWnsew\"\n\t";
-	int dghh = 0, minutes = 0;
-	double seconds = 0.0, pos;
-	short count;
-
-	enum _type{
-	    HOURS, DEGREES, LAT, LONG
-	}type;
-
-	if (s == NULL || !*s)
-		return(-0.0);
-	count = strlen(s) + 1;
-	if ((mptr = (char *) malloc(count)) == NULL)
-		return (-0.0);
-	ptr = mptr;
-	memcpy(ptr, s, count);
-	trim(ptr);
-	skipwhite(&ptr);
-
-	/* the last letter has precedence over the sign */
-	if (strpbrk(ptr,"SsWw") != NULL)
-		negative = 1;
-
-	if (*ptr == '+' || *ptr == '-')
-		negative = (char) (*ptr++ == '-' ? 1 : negative);
-	skipwhite(&ptr);
-	if ((hh = strpbrk(ptr,"Hh")) != NULL && hh < ptr + 3)
-		type = HOURS;
-	else
-		if (strpbrk(ptr,"SsNn") != NULL)
-			type = LAT;
+		if (*ptr == '+' || *ptr == '-')
+			negative = (char) (*ptr++ == '-' ? 1 : negative);
+		skipwhite(&ptr);
+		if ((hh = strpbrk(ptr,"Hh")) != NULL && hh < ptr + 3)
+			type = HOURS;
+		else
+			if (strpbrk(ptr,"SsNn") != NULL)
+				type = LAT;
 		else
 			type = DEGREES; /* unspecified, the caller must control it */
 
-	if ((ptr = strtok(ptr,delim1)) != NULL)
-		dghh = atoi (ptr);
-	else
-	{
-		free(mptr);
-		return (-0.0);
-	}
-
-	if ((ptr = strtok(NULL,delim1)) != NULL)
-	{
-		minutes = atoi (ptr);
-		if (minutes > 59)
+		if ((ptr = strtok(ptr,delim1)) != NULL)
+			dghh = atoi (ptr);
+		else
 		{
 			free(mptr);
 			return (-0.0);
 		}
-	}
-	else
-	{
-		free(mptr);
-		return (-0.0);
-	}
 
-	if ((ptr = strtok(NULL,delim2)) != NULL)
-	{
-		if ((dec = strchr(ptr,',')) != NULL)
-			*dec = '.';
-		seconds = strtod (ptr, NULL);
-		if (seconds >= 60.0)
+		if ((ptr = strtok(NULL,delim1)) != NULL)
+		{
+			minutes = atoi (ptr);
+			if (minutes > 59)
+			{
+				free(mptr);
+				return (-0.0);
+			}
+		}
+		else
 		{
 			free(mptr);
 			return (-0.0);
 		}
-	}
 
-	if ((ptr = strtok(NULL," \n\t")) != NULL)
-	{
-		skipwhite(&ptr);
-		if (*ptr == 'S' || *ptr == 'W' || *ptr == 's' || *ptr == 'w') negative = 1;
-	}
+		if ((ptr = strtok(NULL,delim2)) != NULL)
+		{
+			if ((dec = strchr(ptr,',')) != NULL)
+				*dec = '.';
+			seconds = strtod (ptr, NULL);
+			if (seconds >= 60.0)
+			{
+				free(mptr);
+				return (-0.0);
+			}
+		}
 
-	free(mptr);
+		if ((ptr = strtok(NULL," \n\t")) != NULL)
+		{
+			skipwhite(&ptr);
+			if (*ptr == 'S' || *ptr == 'W' || *ptr == 's' || *ptr == 'w') negative = 1;
+		}
 
-	pos = ((dghh*60+minutes)*60 + seconds) / 3600.0;
-	if (type == HOURS && pos > 24.0)
-		return (-0.0);
-	if (type == LAT && pos > 90.0)
-		return (-0.0);
-	else
-		if (pos > 180.0)
+		free(mptr);
+
+		pos = ((dghh*60+minutes)*60 + seconds) / 3600.0;
+		if (type == HOURS && pos > 24.0)
 			return (-0.0);
+		if (type == LAT && pos > 90.0)
+			return (-0.0);
+		else
+			if (pos > 180.0)
+				return (-0.0);
 
-	if (negative)
-		pos = -pos;
+		if (negative)
+			pos = -pos;
 
-	return (pos);
-
+		return (pos);
+	}	
 }
-
-
-
-
 
 // convert string int ISO 8601-like format [+/-]YYYY-MM-DDThh:mm:ss (no timzone offset)
 // to julian day
-
 int string_to_jday(string date, double &jd)
 {
 	char tmp;
@@ -444,8 +404,6 @@ int string_to_jday(string date, double &jd)
 
 	// TODO better error checking
 	dstr >> year >> tmp >> month >> tmp >> day >> tmp >> hour >> tmp >> minute >> tmp >> second;
-
-	// cout << year << " " << month << " " << day << " " << hour << " " << minute << " " << second << endl;
 
 	// bounds checking (per s_tui time object)
 	if( year > 100000 || year < -100000 ||
@@ -476,7 +434,6 @@ int string_to_jday(string date, double &jd)
 	       day + hour / 24.0 + minute / 1440.0 + second / 86400.0));
 
 	return 1;
-
 }
 
 /* Calculate the julian day from a calendar day.
@@ -662,9 +619,6 @@ float get_GMT_shift_from_system(double JD, bool _local)
 	heure[0] = '\0';
 
 	StelUtils::my_strftime(heure, 19, "%z", timeinfo);
-	//	cout << heure << endl;
-
-	//cout << timezone << endl;
 	
 	heure[5] = '\0';
 	float min = 1.f/60.f * atoi(&heure[3]);
@@ -678,52 +632,6 @@ float get_GMT_shift_from_system(double JD, bool _local)
 	 return -(float)timezone/3600 + (timeinfo->tm_isdst!=0);
 #endif
 }
-
-// Obtains a ln_date from 2 strings s1 and s2 for date and time
-// with the form dd/mm/yyyy for s1 and hh:mm:ss.s for s2.
-// Returns NULL if s1 or s2 is not valid.
-// Uses the current date if s1 is "today" and current time if s2 is "now"
-const ln_date * str_to_date(const char * s1, const char * s2)
-{
-	static ln_date date;
-	if (s1==NULL || s2==NULL) return NULL;
-	if (!strcmp(s1,"today"))
-	{
-		ln_date tempDate;
-		get_ln_date_from_sys(&tempDate);
-		date.days = tempDate.days;
-		date.months = tempDate.months;
-		date.years = tempDate.years;
-	}
-	else
-	{
-		if (sscanf(s1,"%d/%d/%d",&(date.days),&(date.months),&(date.years))!=3)
-			return NULL;
-	}
-
-	if (!strcmp(s2,"now"))
-	{
-		ln_date tempDate2;
-		get_ln_date_from_sys(&tempDate2);
-		date.hours = tempDate2.hours;
-		date.minutes = tempDate2.minutes;
-		date.seconds = tempDate2.seconds;
-	}
-	else
-	{
-		if (sscanf(s2,"%d:%d:%lf\n",&(date.hours),&(date.minutes),&(date.seconds)) != 3)
-			return NULL;
-	}
-
-	if ( date.months>12 || date.months<1 || date.days<1 || date.days>31 ||
-			date.hours>23 || date.hours<0 || date.minutes<0 || date.minutes>59 ||
-			date.seconds<0 || date.seconds>=60 )
-	{
-		return NULL;
-	}
-	return &date;
-}
-
 
 // Return the time zone name taken from system locale
 wstring get_time_zone_name_from_system(double JD)

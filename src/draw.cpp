@@ -45,7 +45,7 @@ SkyGrid::SkyGrid(SKY_GRID_TYPE grid_type, unsigned int _nb_meridian, unsigned in
 		alt_points[nm] = new Vec3f[nb_alt_segment+1];
 		for (unsigned int i=0;i<nb_alt_segment+1;++i)
 		{
-			sphe_to_rect((float)nm/(nb_meridian)*2.f*M_PI,
+			StelUtils::sphe_to_rect((float)nm/(nb_meridian)*2.f*M_PI,
 				(float)i/nb_alt_segment*M_PI-M_PI_2, alt_points[nm][i]);
 			alt_points[nm][i] *= radius;
 		}
@@ -58,7 +58,7 @@ SkyGrid::SkyGrid(SKY_GRID_TYPE grid_type, unsigned int _nb_meridian, unsigned in
 		azi_points[np] = new Vec3f[nb_azi_segment+1];
 		for (unsigned int i=0;i<nb_azi_segment+1;++i)
 		{
-			sphe_to_rect((float)i/(nb_azi_segment)*2.f*M_PI,
+			StelUtils::sphe_to_rect((float)i/(nb_azi_segment)*2.f*M_PI,
 				(float)(np+1)/(nb_parallel+1)*M_PI-M_PI_2, azi_points[np][i]);
 			azi_points[np][i] *= radius;
 		}
@@ -294,7 +294,7 @@ SkyLine::SkyLine(SKY_LINE_TYPE _line_type, double _radius, unsigned int _nb_segm
 	points = new Vec3f[nb_segment+1];
 	for (unsigned int i=0;i<nb_segment+1;++i)
 	{
-		sphe_to_rect((float)i/(nb_segment)*2.f*M_PI, 0.f, points[i]);
+		StelUtils::sphe_to_rect((float)i/(nb_segment)*2.f*M_PI, 0.f, points[i]);
 		points[i] *= radius;
 		points[i].transfo4d(r);
 	}

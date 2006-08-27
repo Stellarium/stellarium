@@ -1027,7 +1027,7 @@ wstring StelCore::get_cursor_pos(int x, int y)
 	Vec3d v;
 	projection->unproject_earth_equ(x,y,v);
 	double tempDE, tempRA;
-	rect_to_sphe(&tempRA,&tempDE,v);
+	StelUtils::rect_to_sphe(&tempRA,&tempDE,v);
 	return L"RA : " + StelUtils::printAngleHMS(tempRA) + L"\n" +
 	L"DE : " + StelUtils::printAngleDMS(tempDE);
 }
@@ -1127,8 +1127,8 @@ void StelCore::dragView(int x1, int y1, int x2, int y2)
 		projection->unproject_earth_equ(x2,getViewportHeight()-y2, tempvec2);
 		projection->unproject_earth_equ(x1,getViewportHeight()-y1, tempvec1);
 	}
-	rect_to_sphe(&az1, &alt1, tempvec1);
-	rect_to_sphe(&az2, &alt2, tempvec2);
+	StelUtils::rect_to_sphe(&az1, &alt1, tempvec1);
+	StelUtils::rect_to_sphe(&az2, &alt2, tempvec2);
 	navigation->update_move(az2-az1, alt1-alt2);
 	setFlagTracking(false);
 	setFlagLockSkyPosition(false);

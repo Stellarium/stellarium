@@ -367,10 +367,10 @@ private:
 wstring StarWrapperBase::getInfoString(const Navigator *nav) const {
   const Vec3d j2000_pos = getObsJ2000Pos(nav);
   double dec_j2000, ra_j2000;
-  rect_to_sphe(&ra_j2000,&dec_j2000,j2000_pos);
+  StelUtils::rect_to_sphe(&ra_j2000,&dec_j2000,j2000_pos);
   const Vec3d equatorial_pos = nav->j2000_to_earth_equ(j2000_pos);
   double dec_equ, ra_equ;
-  rect_to_sphe(&ra_equ,&dec_equ,equatorial_pos);
+  StelUtils::rect_to_sphe(&ra_equ,&dec_equ,equatorial_pos);
   wostringstream oss;
   oss.setf(ios::fixed);
   oss.precision(2);
@@ -385,7 +385,7 @@ wstring StarWrapperBase::getInfoString(const Navigator *nav) const {
 
     // calculate alt az
   double az,alt;
-  rect_to_sphe(&az,&alt,nav->earth_equ_to_local(equatorial_pos));
+  StelUtils::rect_to_sphe(&az,&alt,nav->earth_equ_to_local(equatorial_pos));
   az = 3*M_PI - az;  // N is zero, E is 90 degrees
   if(az > M_PI*2) az -= M_PI*2;    
   oss << _("Az/Alt: ") << StelUtils::printAngleDMS(az)
@@ -458,10 +458,10 @@ wstring StarWrapper1::getNameI18n(void) const {
 wstring StarWrapper1::getInfoString(const Navigator *nav) const {
   const Vec3d j2000_pos = getObsJ2000Pos(nav);
   double dec_j2000, ra_j2000;
-  rect_to_sphe(&ra_j2000,&dec_j2000,j2000_pos);
+  StelUtils::rect_to_sphe(&ra_j2000,&dec_j2000,j2000_pos);
   const Vec3d equatorial_pos = nav->j2000_to_earth_equ(j2000_pos);
   double dec_equ, ra_equ;
-  rect_to_sphe(&ra_equ,&dec_equ,equatorial_pos);
+  StelUtils::rect_to_sphe(&ra_equ,&dec_equ,equatorial_pos);
   wostringstream oss;
   if (s->hip) {
     const wstring commonNameI18 = HipStarMgr::getCommonName(s->hip);
@@ -494,7 +494,7 @@ wstring StarWrapper1::getInfoString(const Navigator *nav) const {
 
     // calculate alt az
   double az,alt;
-  rect_to_sphe(&az,&alt,nav->earth_equ_to_local(equatorial_pos));
+  StelUtils::rect_to_sphe(&az,&alt,nav->earth_equ_to_local(equatorial_pos));
   az = 3*M_PI - az;  // N is zero, E is 90 degrees
   if(az > M_PI*2) az -= M_PI*2;    
   oss << _("Az/Alt: ") << StelUtils::printAngleDMS(az)

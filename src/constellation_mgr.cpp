@@ -570,7 +570,7 @@ bool ConstellationMgr::loadBoundaries(const string& boundaryFile)
 			DE*=M_PI/180.;    // Convert from deg to rad
 
 			// Calc the Cartesian coord with RA and DE
-	    	sphe_to_rect(RA,DE,XYZ);
+			StelUtils::sphe_to_rect(RA,DE,XYZ);
 			points->push_back(XYZ);
 		}
 		
