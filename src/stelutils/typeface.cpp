@@ -292,7 +292,22 @@ blitGlyphToTexture(FT_Bitmap* aBitmap, const TextureInfo& aTextureInfo,
     glTexSubImage2D(GL_TEXTURE_2D, 0, anOffset[0], anOffset[1],
         aGlyphSize[0], aGlyphSize[1], GL_ALPHA, GL_UNSIGNED_BYTE, data);
 
+	// FC: This is a workaround for buggy video cards which don't support glTexSubImage2D
+// 	GLint sizeX;
+// 	GLint sizeY;
+// 	glGetTexLevelParameteriv(GL_TEXTURE_2D, 0, GL_TEXTURE_WIDTH, &sizeX);
+// 	glGetTexLevelParameteriv(GL_TEXTURE_2D, 0, GL_TEXTURE_HEIGHT, &sizeY);
+// 	unsigned char* previousTex = new unsigned char[sizeX*sizeY];
+// 	glGetTexImage(GL_TEXTURE_2D, 0, GL_ALPHA, GL_UNSIGNED_BYTE, previousTex);
+// 	for(int y = anOffset[1]; y < anOffset[1]+(int)aGlyphSize[1]; ++y)
+// 	{
+// 		memcpy(previousTex + (y * sizeX) + anOffset[0], data + ((y-anOffset[1]) * aGlyphSize[0]), aGlyphSize[0]);
+// 	}
+// 	glTexImage2D(GL_TEXTURE_2D, 0, GL_ALPHA, sizeX, sizeY, 0, GL_ALPHA, GL_UNSIGNED_BYTE, previousTex);
+// 	delete[] previousTex;
+	
     delete[] data;
+	
 
     restorePixelStorage();
 }
