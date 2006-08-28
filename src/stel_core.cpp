@@ -337,16 +337,6 @@ void StelCore::update(int delta_time)
 	// Field of view
 	projection->update_auto_zoom(delta_time);
 
-	// Give the updated standard projection matrices to the projector.
-    // atmosphere->compute_color needs the projection matrices, so we must
-    // set them before calling atmosphere->compute_color, otherwise
-    // the first image will be rendered with invalid (nan)
-    // inverse projection matrices.
-	projection->set_modelview_matrices(	navigation->get_earth_equ_to_eye_mat(),
-	                                    navigation->get_helio_to_eye_mat(),
-	                                    navigation->get_local_to_eye_mat(),
-	                                    navigation->get_j2000_to_eye_mat());
-
 	// update faders and Planet trails (call after nav is updated)
 	ssystem->update(delta_time, navigation);
 
@@ -379,6 +369,19 @@ void StelCore::update(int delta_time)
 	// Compute the moon position in local coordinate
 	Vec3d moon = ssystem->getMoon()->get_heliocentric_ecliptic_pos();
 	Vec3d moonPos = navigation->helio_to_local(moon);
+
+	// Give the updated standard projection matrices to the projector.
+	// atmosphere->compute_color needs the projection matrices, so we must
+	// set them before calling atmosphere->compute_color, otherwise
+	// the first image will be rendered with invalid (nan)
+	// inverse projection matrices.
+	// On the other hand it must be called after ssystem->update
+	// and updateMove in order to have the new observers position
+	// and not interfere with vision vector movement.
+	projection->set_modelview_matrices(	navigation->get_earth_equ_to_eye_mat(),
+	                                    navigation->get_helio_to_eye_mat(),
+	                                    navigation->get_local_to_eye_mat(),
+	                                    navigation->get_j2000_to_eye_mat());
 
 	// Compute the atmosphere color and intensity
 	atmosphere->compute_color(navigation->get_JDay(), sunPos, moonPos,
@@ -427,23 +430,23 @@ double StelCore::draw(int delta_time)
 	asterisms->draw(projection, navigation);
 
 
-  const Vec4i &v(projection->getViewport());
-  Vec3d e0,e1,e2,e3;
-  projection->unproject_j2000(v[0],v[1],e0);
-  projection->unproject_j2000(v[0]+v[2],v[1]+v[3],e2);
-  if (projection->needGlFrontFaceCW()) {
-    projection->unproject_j2000(v[0],v[1]+v[3],e3);
-    projection->unproject_j2000(v[0]+v[2],v[1],e1);
-  } else {
-    projection->unproject_j2000(v[0],v[1]+v[3],e1);
-    projection->unproject_j2000(v[0]+v[2],v[1],e3);
-  }
-  
-  int max_search_level = hip_stars->getMaxSearchLevel(tone_converter,
-                                                      projection);
-  // int h = nebulas->getMaxSearchLevel(tone_converter,projection);
-  // if (max_search_level < h) max_search_level = h;
-  geodesic_search_result->search(e0,e1,e2,e3,max_search_level);
+	const Vec4i &v(projection->getViewport());
+	Vec3d e0,e1,e2,e3;
+	projection->unproject_j2000(v[0],v[1],e0);
+	projection->unproject_j2000(v[0]+v[2],v[1]+v[3],e2);
+	if (projection->needGlFrontFaceCW()) {
+	  projection->unproject_j2000(v[0],v[1]+v[3],e3);
+	  projection->unproject_j2000(v[0]+v[2],v[1],e1);
+	} else {
+	  projection->unproject_j2000(v[0],v[1]+v[3],e1);
+	  projection->unproject_j2000(v[0]+v[2],v[1],e3);
+	}
+
+	int max_search_level = hip_stars->getMaxSearchLevel(tone_converter,
+	                                                    projection);
+	// int h = nebulas->getMaxSearchLevel(tone_converter,projection);
+	// if (max_search_level < h) max_search_level = h;
+	geodesic_search_result->search(e0,e1,e2,e3,max_search_level);
 
 	// Draw the nebula
 	nebulas->draw(projection, navigation, tone_converter);
