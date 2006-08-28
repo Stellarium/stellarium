@@ -685,15 +685,9 @@ StelObject StelCore::clever_find(const Vec3d& v) const
 	StelObject sobj;
 	vector<StelObject> candidates;
 	vector<StelObject> temp;
-	Vec3d winpos;
 
 	// Field of view for a 30 pixel diameter circle on screen
 	float fov_around = projection->get_fov()/MY_MIN(projection->getViewportWidth(), projection->getViewportHeight()) * 30.f;
-
-	float xpos, ypos;
-	projection->project_earth_equ(v, winpos);
-	xpos = winpos[0];
-	ypos = winpos[1];
 
 	// Collect the planets inside the range
 	if (getFlagPlanets())
@@ -726,6 +720,11 @@ StelObject StelCore::clever_find(const Vec3d& v) const
 	}
 
 	// Now select the object minimizing the function y = distance(in pixel) + magnitude
+	Vec3d winpos;
+	projection->project_earth_equ(v, winpos);
+	float xpos = winpos[0];
+	float ypos = winpos[1];
+		
 	float best_object_value;
 	best_object_value = 100000.f;
 	vector<StelObject>::iterator iter = candidates.begin();
