@@ -329,6 +329,17 @@ void TelescopeTcp::hangup(void) {
   read_buff_end = read_buff;
   write_buff_end = write_buff;
   wait_for_connection_establishment = false;
+  for (position_pointer = positions;
+       position_pointer < end_position;
+       position_pointer++) {
+    position_pointer->server_micros = 0x7FFFFFFFFFFFFFFFLL;
+    position_pointer->client_micros = 0x7FFFFFFFFFFFFFFFLL;
+    position_pointer->pos[0] = 0.0;
+    position_pointer->pos[1] = 0.0;
+    position_pointer->pos[2] = 0.0;
+    position_pointer->status = 0;
+  }
+  position_pointer = positions;
 }
 
 void TelescopeTcp::telescopeGoto(const Vec3d &j2000_pos) {
