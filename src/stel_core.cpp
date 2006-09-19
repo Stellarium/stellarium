@@ -167,7 +167,7 @@ void StelCore::init(const InitParser& conf)
         int grid_level = hip_stars->getMaxGridLevel();
 
 		// Init nebulas
-		nebulas->read(FontSizeGeneral, baseFontFile,
+		nebulas->init(FontSizeGeneral, baseFontFile,
                       getDataDir() + "ngc2000.dat",
                       getDataDir() + "ngc2000names.dat",
                       getDataDir() + "nebula_textures.fab", lb);
@@ -705,7 +705,7 @@ StelObject StelCore::clever_find(const Vec3d& v) const
 	// The nebulas inside the range
 	if (getFlagNebula())
 	{
-		temp = nebulas->search_around(p, fov_around);
+		temp = nebulas->searchAround(p, fov_around, navigation, projection);
 		candidates.insert(candidates.begin(), temp.begin(), temp.end());
 	}
 
@@ -943,7 +943,7 @@ void StelCore::setSkyLanguage(const std::string& newSkyLocaleName)
 	cardinals_points->translateLabels(skyTranslator);
 	asterisms->translateNames(skyTranslator);
 	ssystem->translateNames(skyTranslator);
-	nebulas->translateNames(skyTranslator);
+	nebulas->translateSkyNames(skyTranslator);
 	hip_stars->translateNames(skyTranslator);
 }
 
