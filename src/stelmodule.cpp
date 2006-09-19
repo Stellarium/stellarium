@@ -21,8 +21,24 @@
 #include "vecmath.h"
 #include "init_parser.h"
 
+//! Init itself from a .ini file
+void StelModule::loadProperties(const string& iniFile)
+{
+	InitParser conf;
+	conf.load(iniFile);
+	
+	std::cout << "Loading properties for module " << conf.get_str(getModuleID()+":version") << std::endl;
+	
+	std::map<string, propertyAccessor>::const_iterator iter;
+	for(iter=properties.begin();iter!=properties.end();++iter)
+	{
+		conf.set_str(getModuleID()+":"+(*iter).first, getPropertyStr((*iter).first));
+	}
+	conf.save(iniFile);	
+}
+
 //! Save itself into a .ini file for subsequent reload (don't modify the other entries)
-void StelModule::save(const string& iniFile) const
+void StelModule::saveProperties(const string& iniFile) const
 {
 	InitParser conf;
 	conf.load(iniFile);
@@ -34,9 +50,10 @@ void StelModule::save(const string& iniFile) const
 	{
 		conf.set_str(getModuleID()+":"+(*iter).first, getPropertyStr((*iter).first));
 	}
+	conf.save(iniFile);
 }
 
-//! Get a property value as string: try to cast the value as a bool, int, double, string
+//! Get a property value as string: try to cast the value as a bool, int, double, string, Vec3d
 string StelModule::getPropertyStr(const string& key) const
 {
 	std::ostringstream oss;
@@ -88,7 +105,7 @@ string StelModule::getPropertyStr(const string& key) const
 	return oss.str();
 }
 
-//! Set a property value from a string
+//! Set a property value from a string: try to cast the value as a bool, int, double, string, Vec3d
 void StelModule::setPropertyStr(const string& key, const string& value)
 {
 	propertyAccessor p = getAccessor(key);

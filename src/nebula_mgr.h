@@ -24,6 +24,7 @@
 #include "stel_object.h"
 #include "fader.h"
 #include "grid.h"
+#include "stelobjectmgr.h"
 
 using namespace std;
 
@@ -32,21 +33,35 @@ class LoadingBar;
 class Translator;
 class ToneReproductor;
 
-class NebulaMgr  
+class NebulaMgr : public StelObjectMgr
 {
 public:
 	NebulaMgr();
 	virtual ~NebulaMgr();
+
+	///////////////////////////////////////////////////////////////////////////
+	// Methods defined in the StelModule class
+	virtual string getModuleID() const {return "nebula";}
+	virtual double draw(Projector *prj, const Navigator *nav, ToneReproductor *eye);
+	virtual void update(double deltaTime) {hintsFader.update((int)deltaTime); flagShow.update((int)deltaTime);}
+	virtual bool init(float font_size, const string& font_name, const string& catNGC, const string& catNGCnames, const string& catTextures, LoadingBar& lb); 
+		
+	///////////////////////////////////////////////////////////////////////////
+	// Methods defined in StelObjectManager class
+	virtual vector<StelObject> searchAround(const Vec3d& v, double limitFov, const Navigator * nav, const Projector * prj) const;
+	//! Return the matching Nebula object's pointer if exists or NULL
+	//! @param nameI18n The case sensistive nebula name or NGC M catalog name : format can be M31, M 31, NGC31 NGC 31
+	virtual StelObject searchByNameI18n(const wstring& nameI18n) const;
+	virtual void translateSkyNames(Translator& trans);
+	virtual bool setSkyCultureDir(const string& cultureDir) {return true;}
+	//! Find and return the list of at most maxNbItem objects auto-completing the passed object I18n name
+	//! @param objPrefix the case insensitive first letters of the searched object
+	//! @param maxNbItem the maximum number of returned object names
+	//! @return a vector of matching object name by order of relevance, or an empty vector if nothing match
+	virtual vector<wstring> listMatchingObjectsI18n(const wstring& objPrefix, unsigned int maxNbItem=5) const;
 	
-	// Read the Nebulas data from files
-	bool read(float font_size, const string& font_name, const string& catNGC, const string& catNGCnames, const string& catTextures, LoadingBar& lb);
-	
-	// Draw all the Nebulas
-	void draw(Projector *prj, const Navigator *nav, ToneReproductor *eye); 
-	void update(int delta_time) {hintsFader.update(delta_time); flagShow.update(delta_time);}
-	
-	StelObject search(const string& name);  // search by name M83, NGC 1123, IC 1234
-	StelObject search(Vec3f Pos);    // Search the Nebulae by position
+	///////////////////////////////////////////////////////////////////////////
+	// Properties setters and getters
 	
 	void setNebulaCircleScale(float scale);
 	float getNebulaCircleScale(void) const;
@@ -64,13 +79,6 @@ public:
 	
 	void setCircleColor(const Vec3f& c);
 	const Vec3f &getCircleColor(void) const;
-
-	// Return a stl vector containing the nebulas located inside the lim_fov circle around position v
-	vector<StelObject> search_around(Vec3d v, double lim_fov) const;
-	
-	//! @brief Update i18 names from english names according to passed translator
-	//! The translation is done using gettext with translated strings defined in translations.h
-	void translateNames(Translator& trans);
 	
 	//! Set flag for displaying Nebulae as bright
 	void setFlagBright(bool b);
@@ -86,17 +94,12 @@ public:
 	void setMaxMagHints(float f) {maxMagHints = f;}
 	//! Get maximum magnitude at which nebulae hints are displayed
 	float getMaxMagHints(void) const {return maxMagHints;}
-	
-	//! Find and return the list of at most maxNbItem objects auto-completing the passed object I18n name
-	//! @param objPrefix the case insensitive first letters of the searched object
-	//! @param maxNbItem the maximum number of returned object names
-	//! @return a vector of matching object name by order of relevance, or an empty vector if nothing match
-	vector<wstring> listMatchingObjectsI18n(const wstring& objPrefix, unsigned int maxNbItem=5) const;
-	
-	//! Return the matching Nebula object's pointer if exists or NULL
-	//! @param nameI18n The case sensistive nebula name or NGC M catalog name : format can be M31, M 31, NGC31 NGC 31
-	StelObject searchByNameI18n(const wstring& nameI18n) const;	
+
+	StelObject search(const string& name);  // search by name M83, NGC 1123, IC 1234
+		
 private:
+	StelObject search(Vec3f Pos);    // Search the Nebulae by position	
+		
 	Nebula *searchM(unsigned int M);
 	Nebula *searchNGC(unsigned int NGC);
 	Nebula *searchIC(unsigned int IC);
