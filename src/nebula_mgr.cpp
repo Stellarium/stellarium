@@ -65,7 +65,7 @@ NebulaMgr::~NebulaMgr()
 }
 
 // read from stream
-bool NebulaMgr::read(float font_size, const string& font_name, const string& catNGC, const string& catNGCNames, const string& catTextures, LoadingBar& lb)
+bool NebulaMgr::init(float font_size, const string& font_name, const string& catNGC, const string& catNGCNames, const string& catTextures, LoadingBar& lb)
 {
 	loadNGC(catNGC, lb);
 	loadNGCNames(catNGCNames);
@@ -85,7 +85,7 @@ bool NebulaMgr::read(float font_size, const string& font_name, const string& cat
 }
 
 // Draw all the Nebulae
-void NebulaMgr::draw(Projector* prj, const Navigator * nav, ToneReproductor* eye)
+double NebulaMgr::draw(Projector* prj, const Navigator * nav, ToneReproductor* eye)
 {
 	Nebula::hints_brightness = hintsFader.getInterstate()*flagShow.getInterstate();
 
@@ -150,6 +150,8 @@ void NebulaMgr::draw(Projector* prj, const Navigator * nav, ToneReproductor* eye
 		}
 	}
 	prj->reset_perspective_projection();
+
+	return 0;
 }
 
 // search by name
@@ -229,11 +231,12 @@ StelObject NebulaMgr::search(Vec3f Pos)
 }
 
 // Return a stl vector containing the nebulas located inside the lim_fov circle around position v
-vector<StelObject> NebulaMgr::search_around(Vec3d v, double lim_fov) const
+vector<StelObject> NebulaMgr::searchAround(const Vec3d& av, double limitFov, const Navigator * nav, const Projector * prj) const
 {
 	vector<StelObject> result;
+	Vec3d v(av);
 	v.normalize();
-	double cos_lim_fov = cos(lim_fov * M_PI/180.);
+	double cos_lim_fov = cos(limitFov * M_PI/180.);
 	static Vec3d equPos;
 
 	vector<Nebula*>::const_iterator iter = neb_array.begin();
@@ -485,7 +488,7 @@ bool NebulaMgr::loadTextures(const string& fileName, LoadingBar& lb)
 
 //! @brief Update i18 names from english names according to passed translator
 //! The translation is done using gettext with translated strings defined in translations.h
-void NebulaMgr::translateNames(Translator& trans)
+void NebulaMgr::translateSkyNames(Translator& trans)
 {
 	vector<Nebula*>::iterator iter;
 	for( iter = neb_array.begin(); iter < neb_array.end(); iter++ )
