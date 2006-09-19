@@ -20,6 +20,7 @@
 #ifndef STELMODULE_H
 #define STELMODULE_H
 
+#include <cassert>
 #include <cstdlib>
 #include <iostream>
 #include <string>
@@ -49,10 +50,10 @@ public:
 	virtual ~StelModule() {;}
 
 	//! Init itself from a .ini file
-	void init(const string& iniFile);
+	void loadProperties(const string& iniFile);
 	
 	//! Save itself into a .ini file for subsequent reload
-	void save(const string& iniFile) const;
+	void saveProperties(const string& iniFile) const;
 	
 	//! Execute all the openGL drawing functions for this module.
 	//! @return the max squared distance in pixels any single object has moved since the previous update.
