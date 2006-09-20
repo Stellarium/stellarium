@@ -16,7 +16,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
- 
+
 #include "stelapp.h"
 
 #include "viewport_distorter.h"
@@ -31,26 +31,26 @@ StelApp* StelApp::singleton = NULL;
 /*************************************************************************
  Create and initialize the main Stellarium application.
 *************************************************************************/
-StelApp::StelApp(const string& CDIR, const string& LDIR, const string& DATA_ROOT) : 
-		frame(0), timefr(0), timeBase(0), fps(0), maxfps(10000.f),  FlagTimePause(0), 
+StelApp::StelApp(const string& CDIR, const string& LDIR, const string& DATA_ROOT) :
+		frame(0), timefr(0), timeBase(0), fps(0), maxfps(10000.f),  FlagTimePause(0),
 		is_mouse_moving_horiz(false), is_mouse_moving_vert(false), draw_mode(StelApp::DM_NONE),
 		initialized(0), GMT_shift(0)
 {
 	// Can't create 2 StelApp instances
 	assert(!singleton);
 	singleton = this;
-	
+
 	configDir = CDIR;
 	localeDir = LDIR;
 	dataDir = DATA_ROOT+"data/";
-	
+
 	core = new StelCore(LDIR, DATA_ROOT, boost::callback<void, string>(this, &StelApp::recordCommand));
 	ui = new StelUI(core, this);
 	commander = new StelCommandInterface(core, this);
 	scripts = new ScriptMgr(commander, core->getDataDir());
 	time_multiplier = 1;
-    distorter = 0;
-	
+	distorter = 0;
+
 	init();
 }
 
@@ -64,13 +64,13 @@ StelApp::~StelApp()
 	delete scripts;
 	delete commander;
 	delete core;
-    if (distorter) delete distorter;
+	if (distorter) delete distorter;
 }
 
 /*************************************************************************
  Get the configuration file path.
 *************************************************************************/
-string StelApp::getConfigFilePath(void) const 
+string StelApp::getConfigFilePath(void) const
 {
 	return configDir + "config.ini";
 }
@@ -107,21 +107,24 @@ void StelApp::setAppLanguage(const string& newAppLocaleName)
 	// TODO: GUI needs to be reinitialized to load new translations and/or fonts
 }
 
-void StelApp::setViewPortDistorterType(const string &type) {
-  if (distorter) {
-    if (distorter->getType() == type) return;
-    delete distorter;
-    distorter = 0;
-  }
-  distorter = ViewportDistorter::create(type,screenW,screenH,core);
-  InitParser conf;
-  conf.load(configDir + "config.ini");
-  distorter->init(conf);
+void StelApp::setViewPortDistorterType(const string &type)
+{
+	if (distorter)
+	{
+		if (distorter->getType() == type) return;
+		delete distorter;
+		distorter = 0;
+	}
+	distorter = ViewportDistorter::create(type,screenW,screenH,core);
+	InitParser conf;
+	conf.load(configDir + "config.ini");
+	distorter->init(conf);
 }
 
-string StelApp::getViewPortDistorterType(void) const {
-  if (distorter) return distorter->getType();
-  return "none";
+string StelApp::getViewPortDistorterType(void) const
+{
+	if (distorter) return distorter->getType();
+	return "none";
 }
 
 
@@ -143,11 +146,12 @@ void StelApp::init(void)
 	// Initialize video device and other sdl parameters
 	InitParser conf;
 	conf.load(configDir + "config.ini");
-	
+
 	// Main section
 	string version = conf.get_str("main:version");
 
-	if (version!=string(VERSION)) {
+	if (version!=string(VERSION))
+	{
 
 		std::istringstream istr(version);
 		char tmp;
@@ -156,33 +160,37 @@ void StelApp::init(void)
 		istr >> v1 >> tmp >> v2;
 
 		// Config versions less than 0.6.0 are not supported, otherwise we will try to use it
-		if( v1 == 0 && v2 < 6 ) {
+		if( v1 == 0 && v2 < 6 )
+		{
 
 			// The config file is too old to try an importation
 			printf("The current config file is from a version too old for parameters to be imported (%s).\nIt will be replaced by the default config file.\n", version.empty() ? "<0.6.0" : version.c_str());
 			system( (string("cp -f ") + core->getDataRoot() + "/data/default_config.ini " + getConfigFilePath()).c_str() );
 			conf.load(configDir + "config.ini");  // Read new config!
 
-		} else {
+		}
+		else
+		{
 			cout << "Attempting to use an existing older config file." << endl;
 		}
 	}
 
 	// don't mess with SDL init if already initialized earlier
-	if(!initialized) {
+	if(!initialized)
+	{
 		screenW = conf.get_int("video:screen_w");
 		screenH = conf.get_int("video:screen_h");
-		initSDL(screenW, screenH, conf.get_int("video:bbp_mode"), conf.get_boolean("video:fullscreen"), core->getDataDir() + "/icon.bmp");	
+		initSDL(screenW, screenH, conf.get_int("video:bbp_mode"), conf.get_boolean("video:fullscreen"), core->getDataDir() + "/icon.bmp");
 	}
 
 	// Clear screen, this fixes a strange artifact at loading time in the upper top corner.
 	glClear(GL_COLOR_BUFFER_BIT);
-	
+
 	maxfps 				= conf.get_double ("video","maximum_fps",10000);
 	minfps 				= conf.get_double ("video","minimum_fps",10000);
 	string appLocaleName = conf.get_str("localization", "app_locale", "system");
 	time_format = string_to_s_time_format(conf.get_str("localization:time_display_format"));
-	date_format = string_to_s_date_format(conf.get_str("localization:date_display_format"));	
+	date_format = string_to_s_date_format(conf.get_str("localization:date_display_format"));
 	setAppLanguage(appLocaleName);
 	scripts->set_allow_ui( conf.get_boolean("gui","flag_script_allow_ui",0) );
 
@@ -215,32 +223,35 @@ void StelApp::init(void)
 	string tmpstr = conf.get_str("projection:viewport");
 	if (tmpstr=="maximized") core->setMaximizedViewport(screenW, screenH);
 	else
-		if (tmpstr=="square" || tmpstr=="disk") {
-			core->setSquareViewport(screenW, screenH, 
-									conf.get_int("video:horizontal_offset"), conf.get_int("video:horizontal_offset"));
+		if (tmpstr=="square" || tmpstr=="disk")
+		{
+			core->setSquareViewport(screenW, screenH,
+			                        conf.get_int("video:horizontal_offset"), conf.get_int("video:horizontal_offset"));
 			if (tmpstr=="disk") core->setViewportMaskDisk();
 
-		} else {
+		}
+		else
+		{
 
 			cerr << "ERROR : Unknown viewport type : " << tmpstr << endl;
 			exit(-1);
-		}	
+		}
 
 	// Navigation section
 	PresetSkyTime 		= conf.get_double ("navigation","preset_sky_time",2451545.);
 	StartupTimeMode 	= conf.get_str("navigation:startup_time_mode");	// Can be "now" or "preset"
 	FlagEnableMoveMouse	= conf.get_boolean("navigation","flag_enable_move_mouse",1);
-	MouseZoom			= conf.get_int("navigation","mouse_zoom",30);	
-	
+	MouseZoom			= conf.get_int("navigation","mouse_zoom",30);
+
 	if (StartupTimeMode=="preset" || StartupTimeMode=="Preset")
 		core->setJDay(PresetSkyTime - get_GMT_shift(PresetSkyTime) * JD_HOUR);
 	else core->setTimeNow();
 
 	// initialisation of the User Interface
-	
+
 	// TODO: Need way to update settings from config without reinitializing whole gui
 	ui->init(conf);
-	
+
 	if(!initialized) ui->init_tui();  // don't reinit tui since probably called from there
 	else ui->localizeTui();  // update translations/fonts as needed
 
@@ -248,10 +259,11 @@ void StelApp::init(void)
 	draw_mode = StelApp::DM_NONE;  // fool caching
 	setVisionModeNormal();
 	if (conf.get_boolean("viewing:flag_night")) setVisionModeNight();
-	
-    if (distorter == 0) {
-      setViewPortDistorterType(conf.get_str("video","distorter","none"));
-    }
+
+	if (distorter == 0)
+	{
+		setViewPortDistorterType(conf.get_str("video","distorter","none"));
+	}
 
 	// play startup script, if available
 	if(scripts) scripts->play_startup_script();
@@ -278,12 +290,12 @@ void StelApp::update(int delta_time)
 
 	// run command from a running script
 	scripts->update(delta_time);
-	
+
 	ui->gui_update_widgets(delta_time);
 	ui->tui_update_widgets();
 
 	if(!scripts->is_paused()) core->getImageMgr()->update(delta_time);
-	
+
 	core->update(delta_time);
 }
 
@@ -296,22 +308,22 @@ double StelApp::draw(int delta_time)
 	// Draw the Graphical ui and the Text ui
 	ui->draw();
 
-    distorter->distort();
+	distorter->distort();
 
-    return squaredDistance;
+	return squaredDistance;
 }
 
 // Handle mouse clics
 int StelApp::handleClick(int x, int y, S_GUI_VALUE button, S_GUI_VALUE state)
 {
-    distorter->distortXY(x,y);
+	distorter->distortXY(x,y);
 	return ui->handle_clic(x, y, button, state);
 }
 
 // Handle mouse move
 int StelApp::handleMove(int x, int y)
 {
-    distorter->distortXY(x,y);
+	distorter->distortXY(x,y);
 	// Turn if the mouse is at the edge of the screen.
 	// unless config asks otherwise
 	if(FlagEnableMoveMouse)
@@ -428,22 +440,22 @@ void StelApp::set2DfullscreenProjection(void) const
 {
 	glViewport(0, 0, screenW, screenH);
 	glMatrixMode(GL_PROJECTION);		// projection matrix mode
-    glPushMatrix();						// store previous matrix
-    glLoadIdentity();
-    gluOrtho2D(	0, screenW,
-				0, screenH);			// set a 2D orthographic projection
+	glPushMatrix();						// store previous matrix
+	glLoadIdentity();
+	gluOrtho2D(	0, screenW,
+	            0, screenH);			// set a 2D orthographic projection
 	glMatrixMode(GL_MODELVIEW);			// modelview matrix mode
-    glPushMatrix();
-    glLoadIdentity();	
+	glPushMatrix();
+	glLoadIdentity();
 }
-	
+
 //! Restore previous projection mode
 void StelApp::restoreFrom2DfullscreenProjection(void) const
 {
-    glMatrixMode(GL_PROJECTION);		// Restore previous matrix
-    glPopMatrix();
-    glMatrixMode(GL_MODELVIEW);
-    glPopMatrix();	
+	glMatrixMode(GL_PROJECTION);		// Restore previous matrix
+	glPopMatrix();
+	glMatrixMode(GL_MODELVIEW);
+	glPopMatrix();
 }
 
 //! Set flag for activating night vision mode
@@ -457,7 +469,7 @@ void StelApp::setVisionModeNight(void)
 	draw_mode=DM_NIGHT;
 }
 
-//! Set flag for activating chart vision mode 
+//! Set flag for activating chart vision mode
 // ["color" section name used for easier backward compatibility for older configs - Rob]
 void StelApp::setVisionModeNormal(void)
 {
@@ -467,7 +479,7 @@ void StelApp::setVisionModeNormal(void)
 		ui->setColorScheme(getConfigFilePath(), "color");
 	}
 	draw_mode=DM_NORMAL;
-}	
+}
 
 // For use by TUI - saves all current settings
 // TODO: Put in stel_core?
@@ -477,7 +489,7 @@ void StelApp::saveCurrentConfig(const string& confFile)
 
 	// No longer resaves everything, just settings user can change through UI
 
-    cout << "Saving configuration file " << confFile << " ..." << endl;
+	cout << "Saving configuration file " << confFile << " ..." << endl;
 	InitParser conf;
 	conf.load(confFile);
 
@@ -502,7 +514,7 @@ void StelApp::saveCurrentConfig(const string& confFile)
 	{
 		conf.set_str("localization:time_zone", "gmt+x");
 	}
-		
+
 	// viewing section
 	conf.set_boolean("viewing:flag_constellation_drawing", core->getFlagConstellationLines());
 	conf.set_boolean("viewing:flag_constellation_name", core->getFlagConstellationNames());
@@ -599,7 +611,8 @@ void StelApp::saveCurrentConfig(const string& confFile)
 }
 
 
-void StelApp::recordCommand(string commandline) {
+void StelApp::recordCommand(string commandline)
+{
 	scripts->record_command(commandline);
 }
 
@@ -613,10 +626,10 @@ wstring StelApp::get_printable_date_UTC(double JD) const
 	static char date[255];
 	switch(date_format)
 	{
-		case S_DATE_SYSTEM_DEFAULT : StelUtils::my_strftime(date, 254, "%x", &time_utc); break;
-		case S_DATE_MMDDYYYY : StelUtils::my_strftime(date, 254, "%m/%d/%Y", &time_utc); break;
-		case S_DATE_DDMMYYYY : StelUtils::my_strftime(date, 254, "%d/%m/%Y", &time_utc); break;
-		case S_DATE_YYYYMMDD : StelUtils::my_strftime(date, 254, "%Y-%m-%d", &time_utc); break;
+	case S_DATE_SYSTEM_DEFAULT : StelUtils::my_strftime(date, 254, "%x", &time_utc); break;
+	case S_DATE_MMDDYYYY : StelUtils::my_strftime(date, 254, "%m/%d/%Y", &time_utc); break;
+	case S_DATE_DDMMYYYY : StelUtils::my_strftime(date, 254, "%d/%m/%Y", &time_utc); break;
+	case S_DATE_YYYYMMDD : StelUtils::my_strftime(date, 254, "%Y-%m-%d", &time_utc); break;
 	}
 	return StelUtils::stringToWstring(date);
 }
@@ -631,9 +644,9 @@ wstring StelApp::get_printable_time_UTC(double JD) const
 	static char heure[255];
 	switch(time_format)
 	{
-		case S_TIME_SYSTEM_DEFAULT : StelUtils::my_strftime(heure, 254, "%X", &time_utc); break;
-		case S_TIME_24H : StelUtils::my_strftime(heure, 254, "%H:%M:%S", &time_utc); break;
-		case S_TIME_12H : StelUtils::my_strftime(heure, 254, "%I:%M:%S %p", &time_utc); break;
+	case S_TIME_SYSTEM_DEFAULT : StelUtils::my_strftime(heure, 254, "%X", &time_utc); break;
+	case S_TIME_24H : StelUtils::my_strftime(heure, 254, "%H:%M:%S", &time_utc); break;
+	case S_TIME_12H : StelUtils::my_strftime(heure, 254, "%I:%M:%S %p", &time_utc); break;
 	}
 	return StelUtils::stringToWstring(heure);
 }
@@ -666,10 +679,10 @@ wstring StelApp::get_printable_date_local(double JD) const
 	static char date[255];
 	switch(date_format)
 	{
-		case S_DATE_SYSTEM_DEFAULT : StelUtils::my_strftime(date, 254, "%x", &time_local); break;
-		case S_DATE_MMDDYYYY : StelUtils::my_strftime(date, 254, "%m/%d/%Y", &time_local); break;
-		case S_DATE_DDMMYYYY : StelUtils::my_strftime(date, 254, "%d/%m/%Y", &time_local); break;
-		case S_DATE_YYYYMMDD : StelUtils::my_strftime(date, 254, "%Y-%m-%d", &time_local); break;
+	case S_DATE_SYSTEM_DEFAULT : StelUtils::my_strftime(date, 254, "%x", &time_local); break;
+	case S_DATE_MMDDYYYY : StelUtils::my_strftime(date, 254, "%m/%d/%Y", &time_local); break;
+	case S_DATE_DDMMYYYY : StelUtils::my_strftime(date, 254, "%d/%m/%Y", &time_local); break;
+	case S_DATE_YYYYMMDD : StelUtils::my_strftime(date, 254, "%Y-%m-%d", &time_local); break;
 	}
 
 	return StelUtils::stringToWstring(date);
@@ -689,9 +702,9 @@ wstring StelApp::get_printable_time_local(double JD) const
 	static char heure[255];
 	switch(time_format)
 	{
-		case S_TIME_SYSTEM_DEFAULT : StelUtils::my_strftime(heure, 254, "%X", &time_local); break;
-		case S_TIME_24H : StelUtils::my_strftime(heure, 254, "%H:%M:%S", &time_local); break;
-		case S_TIME_12H : StelUtils::my_strftime(heure, 254, "%I:%M:%S %p", &time_local); break;
+	case S_TIME_SYSTEM_DEFAULT : StelUtils::my_strftime(heure, 254, "%X", &time_local); break;
+	case S_TIME_24H : StelUtils::my_strftime(heure, 254, "%H:%M:%S", &time_local); break;
+	case S_TIME_12H : StelUtils::my_strftime(heure, 254, "%I:%M:%S %p", &time_local); break;
 	}
 	return StelUtils::stringToWstring(heure);
 }
