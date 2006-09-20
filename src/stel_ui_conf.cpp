@@ -294,7 +294,7 @@ Component* StelUI::createConfigWindow(void)
 	tab_location->addComponent(earth_map);
 	y+=earth_map->getSizey();
 	earth_map->set_font(9.5f, BaseFontName);
-	load_cities(core->getDataDir() + "cities.fab");
+	load_cities(StelApp::getInstance().getDataFilePath("cities.fab"));
 	
 	y += 5;
 	Label * lblcursor = new Label(_("Cursor : "));
@@ -422,7 +422,7 @@ Component* StelUI::createConfigWindow(void)
 
 	landscape_sl = new StringList();
 	landscape_sl->setPos(x,y);
-	landscape_sl->addItemList(Landscape::getLandscapeNames(core->getDataDir() + "landscapes.ini"));
+	landscape_sl->addItemList(Landscape::getLandscapeNames(StelApp::getInstance().getDataFilePath("landscapes.ini")));
 	landscape_sl->adjustSize();
 	sprintf(vs, "%s", core->getLandscapeName().c_str());
 	landscape_sl->setValue(vs);
@@ -461,7 +461,7 @@ Component* StelUI::createConfigWindow(void)
 	language_lb = new ListBox(6);
 	language_lb->setPos(x+10,y);
 	language_lb->setSizex(200);
-	language_lb->addItemList(StelUtils::stringToWstring(Translator::getAvailableLanguagesCodes(core->getLocaleDir())));
+	language_lb->addItemList(StelUtils::stringToWstring(Translator::getAvailableLanguagesCodes(app->getLocaleDir())));
 	language_lb->setOnChangeCallback(callback<void>(this, &StelUI::setAppLanguage));
 	language_lb->setCurrent(StelUtils::stringToWstring(app->getAppLanguage()));
 	tab_language->addComponent(language_lb);
@@ -477,7 +477,7 @@ Component* StelUI::createConfigWindow(void)
 	languageSky_lb = new ListBox(6);
 	languageSky_lb->setPos(x+10,y);
 	languageSky_lb->setSizex(200);
-	languageSky_lb->addItemList(StelUtils::stringToWstring(Translator::getAvailableLanguagesCodes(core->getLocaleDir())));
+	languageSky_lb->addItemList(StelUtils::stringToWstring(Translator::getAvailableLanguagesCodes(app->getLocaleDir())));
 	languageSky_lb->setOnChangeCallback(callback<void>(this, &StelUI::setSkyLanguage));
 	languageSky_lb->setCurrent(StelUtils::stringToWstring(core->getSkyLanguage()));
 	tab_language->addComponent(languageSky_lb);
@@ -891,7 +891,7 @@ void StelUI::setVideoOption(void)
 
 void StelUI::setLandscape(void)
 {
-	core->setLandscape(Landscape::nameToKey(core->getDataDir() + "landscapes.ini", landscape_sl->getValue()));
+	core->setLandscape(Landscape::nameToKey(StelApp::getInstance().getDataFilePath("landscapes.ini"), landscape_sl->getValue()));
 	landscape_authorlb->setLabel(_("Author: ") + Translator::UTF8stringToWstring(core->getLandscapeAuthorName()));
 	landscape_descriptionlb->setLabel(_("Info: ") + Translator::UTF8stringToWstring(core->getLandscapeDescription()));
 }

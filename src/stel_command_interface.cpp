@@ -377,7 +377,7 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 				if(stapp->scripts->is_playing()) 
 					image_filename = stapp->scripts->get_script_path() + args["filename"];
 				else 
-					image_filename = stcore->getDataRoot() + "/" + args["filename"];
+					image_filename = stapp->getDataFilePath(args["filename"]);
 				  
 				status = script_images->load_image(image_filename, args["name"], img_pos);
 

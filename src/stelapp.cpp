@@ -42,12 +42,15 @@ StelApp::StelApp(const string& CDIR, const string& LDIR, const string& DATA_ROOT
 
 	configDir = CDIR;
 	localeDir = LDIR;
-	dataDir = DATA_ROOT+"data/";
+	dataDir = DATA_ROOT+"/data";
 
+	// Set textures directory
+	s_texture::set_texDir(rootDir + "textures/");
+	
 	core = new StelCore(LDIR, DATA_ROOT, boost::callback<void, string>(this, &StelApp::recordCommand));
 	ui = new StelUI(core, this);
 	commander = new StelCommandInterface(core, this);
-	scripts = new ScriptMgr(commander, core->getDataDir());
+	scripts = new ScriptMgr(commander, dataDir);
 	time_multiplier = 1;
 	distorter = 0;
 
@@ -81,7 +84,7 @@ string StelApp::getConfigFilePath(void) const
 *************************************************************************/
 string StelApp::getDataFilePath(const string& dataFileName) const
 {
-	return dataDir + dataFileName;
+	return dataDir + "/" + dataFileName;
 }
 
 /*************************************************************************
@@ -98,7 +101,7 @@ string StelApp::getTextureFilePath(const string& textureFileName) const
 void StelApp::setAppLanguage(const string& newAppLocaleName)
 {
 	// Update the translator with new locale name
-	Translator::globalTranslator = Translator(PACKAGE, core->getLocaleDir(), newAppLocaleName);
+	Translator::globalTranslator = Translator(PACKAGE, getLocaleDir(), newAppLocaleName);
 	cout << "Application locale is " << Translator::globalTranslator.getTrueLocaleName() << endl;
 
 	// update translations and font in tui
@@ -165,7 +168,7 @@ void StelApp::init(void)
 
 			// The config file is too old to try an importation
 			printf("The current config file is from a version too old for parameters to be imported (%s).\nIt will be replaced by the default config file.\n", version.empty() ? "<0.6.0" : version.c_str());
-			system( (string("cp -f ") + core->getDataRoot() + "/data/default_config.ini " + getConfigFilePath()).c_str() );
+			system( (string("cp -f ") + dataDir + "default_config.ini " + getConfigFilePath()).c_str() );
 			conf.load(configDir + "config.ini");  // Read new config!
 
 		}
@@ -180,7 +183,7 @@ void StelApp::init(void)
 	{
 		screenW = conf.get_int("video:screen_w");
 		screenH = conf.get_int("video:screen_h");
-		initSDL(screenW, screenH, conf.get_int("video:bbp_mode"), conf.get_boolean("video:fullscreen"), core->getDataDir() + "/icon.bmp");
+		initSDL(screenW, screenH, conf.get_int("video:bbp_mode"), conf.get_boolean("video:fullscreen"), getDataFilePath("icon.bmp"));
 	}
 
 	// Clear screen, this fixes a strange artifact at loading time in the upper top corner.
