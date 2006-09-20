@@ -43,7 +43,7 @@ bool StelFontMgr::FontForLanguage::operator == (const FontForLanguage & f) const
 
 
 //! Return the structure describing the fonts and scales to use for a given language
-StelFontMgr::FontForLanguage& StelFontMgr::getFontForLocale(const std::string &langageName)
+StelFontMgr::FontForLanguage& StelFontMgr::getFontForLanguage(const std::string &langageName)
 {
 	if (fontMapping.find(langageName)==fontMapping.end())
 		return fontMapping["*"];
