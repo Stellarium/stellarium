@@ -22,9 +22,9 @@
 #include <fstream>
 #include <algorithm>
 
+#include "stelapp.h"
 #include "nebula_mgr.h"
 #include "nebula.h"
-#include "stellarium.h"
 #include "s_texture.h"
 #include "s_font.h"
 #include "navigator.h"
@@ -65,16 +65,16 @@ NebulaMgr::~NebulaMgr()
 }
 
 // read from stream
-bool NebulaMgr::init(float font_size, const string& font_name, const string& catNGC, const string& catNGCNames, const string& catTextures, LoadingBar& lb)
+bool NebulaMgr::init(LoadingBar& lb, const string& font_name, float font_size)
 {
-	loadNGC(catNGC, lb);
-	loadNGCNames(catNGCNames);
-	loadTextures(catTextures, lb);
+	loadNGC(StelApp::getInstance().getDataFilePath("ngc2000.dat"), lb);
+	loadNGCNames(StelApp::getInstance().getDataFilePath("ngc2000names.dat"));
+	loadTextures(StelApp::getInstance().getDataFilePath("nebula_textures.fab"), lb);
 
 	if (!Nebula::nebula_font) Nebula::nebula_font = new s_font(font_size, font_name); // load Font
 	if (!Nebula::nebula_font)
 	{
-		printf("Can't create nebulaFont\n");
+		cerr << "Can't create nebulaFont: " << font_name << "." << endl;
 		return(1);
 	}
 
