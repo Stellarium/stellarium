@@ -22,23 +22,41 @@
 #include "viewport_distorter.h"
 #include "stel_utility.h"
 #include "callbacks.hpp"
+#include "stel_command_interface.h"
+#include "stel_ui.h"
 
+// Initialize static variables
+StelApp* StelApp::singleton = NULL;
+
+/*************************************************************************
+ Create and initialize the main Stellarium application.
+*************************************************************************/
 StelApp::StelApp(const string& CDIR, const string& LDIR, const string& DATA_ROOT) : 
 		frame(0), timefr(0), timeBase(0), fps(0), maxfps(10000.f),  FlagTimePause(0), 
 		is_mouse_moving_horiz(false), is_mouse_moving_vert(false), draw_mode(StelApp::DM_NONE),
 		initialized(0), GMT_shift(0)
 {
+	// Can't create 2 StelApp instances
+	assert(!singleton);
+	singleton = this;
+	
 	configDir = CDIR;
-	SelectedScript = SelectedScriptDirectory = "";
+	localeDir = LDIR;
+	dataDir = DATA_ROOT+"data/";
+	
 	core = new StelCore(LDIR, DATA_ROOT, boost::callback<void, string>(this, &StelApp::recordCommand));
 	ui = new StelUI(core, this);
 	commander = new StelCommandInterface(core, this);
 	scripts = new ScriptMgr(commander, core->getDataDir());
 	time_multiplier = 1;
     distorter = 0;
+	
+	init();
 }
 
-
+/*************************************************************************
+ Deinitialize and destroy the main Stellarium application.
+*************************************************************************/
 StelApp::~StelApp()
 {
 	SDL_FreeCursor(Cursor);
@@ -47,6 +65,46 @@ StelApp::~StelApp()
 	delete commander;
 	delete core;
     if (distorter) delete distorter;
+}
+
+/*************************************************************************
+ Get the configuration file path.
+*************************************************************************/
+string StelApp::getConfigFilePath(void) const 
+{
+	return configDir + "config.ini";
+}
+
+/*************************************************************************
+ Get the full path to a data file. This method will try to find the file 
+ in all valid data directories until it finds it.
+*************************************************************************/
+string StelApp::getDataFilePath(const string& dataFileName) const
+{
+	return dataDir + dataFileName;
+}
+
+/*************************************************************************
+ Get the full path to a texture file. This method will try to find the file in all valid data 
+*************************************************************************/
+string StelApp::getTextureFilePath(const string& textureFileName) const
+{
+	return rootDir + "textures/" + textureFileName;
+}
+
+/*************************************************************************
+ Set the application locale. This apply to GUI, console messages etc..
+*************************************************************************/
+void StelApp::setAppLanguage(const string& newAppLocaleName)
+{
+	// Update the translator with new locale name
+	Translator::globalTranslator = Translator(PACKAGE, core->getLocaleDir(), newAppLocaleName);
+	cout << "Application locale is " << Translator::globalTranslator.getTrueLocaleName() << endl;
+
+	// update translations and font in tui
+	ui->localizeTui();
+
+	// TODO: GUI needs to be reinitialized to load new translations and/or fonts
 }
 
 void StelApp::setViewPortDistorterType(const string &type) {
@@ -102,7 +160,7 @@ void StelApp::init(void)
 
 			// The config file is too old to try an importation
 			printf("The current config file is from a version too old for parameters to be imported (%s).\nIt will be replaced by the default config file.\n", version.empty() ? "<0.6.0" : version.c_str());
-			system( (string("cp -f ") + core->getDataRoot() + "/data/default_config.ini " + getConfigFile()).c_str() );
+			system( (string("cp -f ") + core->getDataRoot() + "/data/default_config.ini " + getConfigFilePath()).c_str() );
 			conf.load(configDir + "config.ini");  // Read new config!
 
 		} else {
@@ -189,7 +247,6 @@ void StelApp::init(void)
 	// Initialisation of the color scheme
 	draw_mode = StelApp::DM_NONE;  // fool caching
 	setVisionModeNormal();
-	if (conf.get_boolean("viewing:flag_chart")) setVisionModeChart();
 	if (conf.get_boolean("viewing:flag_night")) setVisionModeNight();
 	
     if (distorter == 0) {
@@ -242,19 +299,6 @@ double StelApp::draw(int delta_time)
     distorter->distort();
 
     return squaredDistance;
-}
-
-//! @brief Set the application locale. This apply to GUI, console messages etc..
-void StelApp::setAppLanguage(const std::string& newAppLocaleName)
-{
-	// Update the translator with new locale name
-	Translator::globalTranslator = Translator(PACKAGE, core->getLocaleDir(), newAppLocaleName);
-	cout << "Application locale is " << Translator::globalTranslator.getTrueLocaleName() << endl;
-
-	// update translations and font in tui
-	ui->localizeTui();
-
-	// TODO: GUI needs to be reinitialized to load new translations and/or fonts
 }
 
 // Handle mouse clics
@@ -407,21 +451,10 @@ void StelApp::setVisionModeNight(void)
 {
 	if (!getVisionModeNight())
 	{
-		core->setColorScheme(getConfigFile(), "night_color");
-		ui->setColorScheme(getConfigFile(), "night_color");
+		core->setColorScheme(getConfigFilePath(), "night_color");
+		ui->setColorScheme(getConfigFilePath(), "night_color");
 	}
 	draw_mode=DM_NIGHT;
-}
-
-//! Set flag for activating chart vision mode
-void StelApp::setVisionModeChart(void)
-{
-	if (!getVisionModeChart())
-	{
-		core->setColorScheme(getConfigFile(), "chart_color");
-		ui->setColorScheme(getConfigFile(), "chart_color");
-	}
-	draw_mode=DM_CHART;
 }
 
 //! Set flag for activating chart vision mode 
@@ -430,16 +463,11 @@ void StelApp::setVisionModeNormal(void)
 {
 	if (!getVisionModeNormal())
 	{
-		core->setColorScheme(getConfigFile(), "color");
-		ui->setColorScheme(getConfigFile(), "color");
+		core->setColorScheme(getConfigFilePath(), "color");
+		ui->setColorScheme(getConfigFilePath(), "color");
 	}
 	draw_mode=DM_NORMAL;
 }	
-
-double StelApp::getMouseCursorTimeout() 
-{
-	return ui->getMouseCursorTimeout(); 
-}
 
 // For use by TUI - saves all current settings
 // TODO: Put in stel_core?
@@ -528,7 +556,7 @@ void StelApp::saveCurrentConfig(const string& confFile)
 	//  conf.set_str    ("color:star_circle_color", StelUtils::vec3f_to_str(core->getColorStarCircles()));
 
 	// gui section
-	conf.set_double("gui:mouse_cursor_timeout",getMouseCursorTimeout());
+	conf.set_double("gui:mouse_cursor_timeout",ui->getMouseCursorTimeout());
 
 	// not user settable yet
 	// conf.set_str	("gui:gui_base_color", StelUtils::vec3f_to_str(GuiBaseColor));

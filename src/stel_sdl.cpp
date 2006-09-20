@@ -22,6 +22,7 @@
 
 #include "stelapp.h"
 #include "s_gui.h"
+#include "stel_core.h"
 
 #ifdef HAVE_SDL_MIXER_H
 #include "SDL_mixer.h"
@@ -231,7 +232,7 @@ void StelApp::terminateApplication(void)
 	Q.type = SDL_QUIT;						// To the SDL event queue
 	if(SDL_PushEvent(&Q) == -1)				// Try to send the event
 	{
-		printf("SDL_QUIT event can't be pushed: %s\n", SDL_GetError() );
+		cerr << "SDL_QUIT event can't be pushed: " << SDL_GetError() << endl;
 		exit(-1);
 	}
 }
@@ -259,7 +260,7 @@ Uint32 mytimer_callback(Uint32 interval, void *param)
 	return 0;
 }
 
-void StelApp::start_main_loop()
+void StelApp::startMainLoop()
 {
     bool AppVisible = true;			// At The Beginning, Our App Is Visible
     enum S_GUI_VALUE bt;

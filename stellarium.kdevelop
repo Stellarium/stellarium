@@ -8,16 +8,15 @@
     <primarylanguage>C++</primarylanguage>
     <ignoreparts>
       <part>kdevabbrev</part>
-      <part>kdevscripting</part>
       <part>kdevbookmarks</part>
-      <part>kdevdistpart</part>
       <part>kdevfilegroups</part>
-      <part>kdevrbdebugger</part>
       <part>kdevfileselector</part>
+      <part>kdevdistpart</part>
+      <part>kdevscripting</part>
     </ignoreparts>
     <projectdirectory>.</projectdirectory>
     <absoluteprojectpath>false</absoluteprojectpath>
-    <description/>
+    <description></description>
     <versioncontrol>kdevcvsservice</versioncontrol>
   </general>
   <kdevautoproject>
@@ -84,12 +83,12 @@
   </kdevautoproject>
   <kdevdebugger>
     <general>
-      <dbgshell/>
-      <programargs/>
-      <gdbpath/>
-      <configGdbScript/>
-      <runShellScript/>
-      <runGdbScript/>
+      <dbgshell></dbgshell>
+      <programargs></programargs>
+      <gdbpath></gdbpath>
+      <configGdbScript></configGdbScript>
+      <runShellScript></runShellScript>
+      <runGdbScript></runGdbScript>
       <breakonloadinglibs>true</breakonloadinglibs>
       <separatetty>false</separatetty>
       <floatingtoolbar>false</floatingtoolbar>
@@ -166,7 +165,7 @@
       <includeTypes>true</includeTypes>
       <includeEnums>true</includeEnums>
       <includeTypedefs>true</includeTypedefs>
-      <automaticCodeCompletion>true</automaticCodeCompletion>
+      <automaticCodeCompletion>false</automaticCodeCompletion>
       <automaticArgumentsHint>true</automaticArgumentsHint>
       <automaticHeaderCompletion>true</automaticHeaderCompletion>
       <codeCompletionDelay>250</codeCompletionDelay>
@@ -174,20 +173,29 @@
       <headerCompletionDelay>250</headerCompletionDelay>
     </codecompletion>
     <creategettersetter>
-      <prefixGet/>
+      <prefixGet></prefixGet>
       <prefixSet>set</prefixSet>
       <prefixVariable>m_,_</prefixVariable>
       <parameterName>theValue</parameterName>
       <inlineGet>true</inlineGet>
       <inlineSet>true</inlineSet>
     </creategettersetter>
-    <references/>
+    <references>
+      <pcs>stdc++</pcs>
+      <pcs>stdc</pcs>
+      <pcs>openGL</pcs>
+    </references>
+    <qt>
+      <used>false</used>
+      <version>3</version>
+      <root></root>
+    </qt>
   </kdevcppsupport>
   <kdevdocumentation>
     <projectdoc>
-      <docsystem/>
-      <docurl/>
-      <usermanualurl/>
+      <docsystem></docsystem>
+      <docurl></docurl>
+      <usermanualurl></usermanualurl>
     </projectdoc>
   </kdevdocumentation>
   <kdevfileview>
