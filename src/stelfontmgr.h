@@ -46,10 +46,10 @@ public:
 	};
 	
 	//! Return the structure describing the fonts and scales to use for a given language
-	FontForLanguage& getFontForLocale(const string &langageName);
+	FontForLanguage& getFontForLanguage(const string &langageName);
 	
 private:
-	//! Load the associations between langages and font file/scaling
+	// Load the associations between langages and font file/scaling
 	void loadFontForLanguage(const string &fontMapFile);
 	
 	// Contains a mapping of font/langage
