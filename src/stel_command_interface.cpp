@@ -25,6 +25,7 @@
 #include "stel_command_interface.h"
 #include "stel_core.h"
 #include "image.h"
+#include "stel_ui.h"
 
 using namespace std;
 

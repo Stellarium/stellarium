@@ -397,9 +397,8 @@ Component* StelUI::createConfigWindow(void)
 	screen_size_sl->setCurrent(StelUtils::stringToWstring(vs));
 	tab_video->addComponent(screen_size_sl);
 
-	snprintf(vs, 999, "%sconfig.ini", app->getConfigDir().c_str());
 	Label * lblvideo5 = new Label(_("For unlisted screen resolution, edit the file :"));
-	Label * lblvideo6 = new Label(StelUtils::stringToWstring(string(vs)));
+	Label * lblvideo6 = new Label(StelUtils::stringToWstring(app->getConfigFilePath()));
 	lblvideo5->setPos(30, tab_video->getSizey()-125);
 	lblvideo6->setPos(30, tab_video->getSizey()-110);
 	tab_video->addComponent(lblvideo5);
@@ -787,7 +786,7 @@ void StelUI::doSaveObserverPosition(const string& name)
 		<< " name " << location;
 	app->commander->execute_command(oss.str());
 
-	core->getObservatory().save(app->getConfigFile(), "init_location");
+	core->getObservatory().save(app->getConfigFilePath(), "init_location");
 	app->ui->setTitleObservatoryName(app->ui->getTitleWithAltitude());
 }
 
@@ -804,30 +803,30 @@ void StelUI::saveObserverPosition(void)
 
 void StelUI::saveLandscapeOptions(void)
 {
-	cout << "Saving landscape name in file " << app->getConfigFile() << endl;
+	cout << "Saving landscape name in file " << app->getConfigFilePath() << endl;
 	InitParser conf;
-	conf.load(app->getConfigFile());
+	conf.load(app->getConfigFilePath());
 	conf.set_str("init_location:landscape_name", core->getObservatory().get_landscape_name());
-	conf.save(app->getConfigFile());
+	conf.save(app->getConfigFilePath());
 }
 
 void StelUI::saveLanguageOptions(void)
 {
-	cout << "Saving language in file " << app->getConfigFile() << endl;
+	cout << "Saving language in file " << app->getConfigFilePath() << endl;
 	InitParser conf;
-	conf.load(app->getConfigFile());
+	conf.load(app->getConfigFilePath());
 	conf.set_str("localization:sky_locale", core->getSkyLanguage());
 	conf.set_str("localization:app_locale", app->getAppLanguage());
 	conf.set_str("localization:sky_culture", core->getSkyCultureDir());
-	conf.save(app->getConfigFile());
+	conf.save(app->getConfigFilePath());
 }
 
 void StelUI::saveRenderOptions(void)
 {
-	cout << "Saving rendering options in file " << app->getConfigFile() << endl;
+	cout << "Saving rendering options in file " << app->getConfigFilePath() << endl;
 
 	InitParser conf;
-	conf.load(app->getConfigFile());
+	conf.load(app->getConfigFilePath());
 
 	conf.set_boolean("astro:flag_stars", core->getFlagStars());
 	conf.set_boolean("astro:flag_star_name", core->getFlagStarName());
@@ -846,7 +845,6 @@ void StelUI::saveRenderOptions(void)
 	conf.set_boolean("astro:flag_planets_hints", core->getFlagPlanetsHints());
 	conf.set_double("viewing:moon_scale", core->getMoonScale());
 	conf.set_boolean("viewing:flag_moon_scaled", core->getFlagMoonScaled());
-	conf.set_boolean("viewing:flag_chart", app->getVisionModeChart());
 	conf.set_boolean("viewing:flag_night", app->getVisionModeNight());
 	conf.set_boolean("viewing:flag_equatorial_grid", core->getFlagEquatorGrid());
 	conf.set_boolean("viewing:flag_azimutal_grid", core->getFlagAzimutalGrid());
@@ -857,7 +855,7 @@ void StelUI::saveRenderOptions(void)
 	conf.set_boolean("landscape:flag_atmosphere", core->getFlagAtmosphere());
 	conf.set_boolean("landscape:flag_fog", core->getFlagFog());
 	conf.set_int("astro:meteor_rate", core->getMeteorsRate());
-	conf.save(app->getConfigFile());
+	conf.save(app->getConfigFilePath());
 }
 
 void StelUI::setVideoOption(void)
@@ -871,10 +869,10 @@ void StelUI::setVideoOption(void)
 	cout << "Saving video settings: projection=" << core->getProjectionType() 
 	     << ", distorter=" << app->getViewPortDistorterType();
 	if ( w && h ) cout << ", res=" << w << "x" << h;
-   	cout << " in file " << app->getConfigFile() << endl;
+   	cout << " in file " << app->getConfigFilePath() << endl;
 
 	InitParser conf;
-	conf.load(app->getConfigFile());
+	conf.load(app->getConfigFilePath());
 
 	conf.set_str("projection:type", core->getProjectionType());
 	conf.set_str("video:distorter", app->getViewPortDistorterType());
@@ -888,7 +886,7 @@ void StelUI::setVideoOption(void)
 		conf.set_int("video:screen_h", h);
 	}
 
-	conf.save(app->getConfigFile());
+	conf.save(app->getConfigFilePath());
 }
 
 void StelUI::setLandscape(void)

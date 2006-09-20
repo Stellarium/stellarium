@@ -580,7 +580,7 @@ void StelUI::tui_cb_admin_load_default(void)
 // Save to default configuration
 void StelUI::tui_cb_admin_save_default(void)
 {
-	app->saveCurrentConfig(app->getConfigFile());
+	app->saveCurrentConfig(app->getConfigFilePath());
 
 	system( ( core->getDataDir() + "script_save_config " ).c_str() );
 }
