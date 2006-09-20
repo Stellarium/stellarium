@@ -163,10 +163,7 @@ void StelCore::init(const InitParser& conf)
         int grid_level = hip_stars->getMaxGridLevel();
 
 		// Init nebulas
-		nebulas->init(FontSizeGeneral, baseFontFile,
-					  StelApp::getInstance().getDataFilePath("ngc2000.dat"),
-					  StelApp::getInstance().getDataFilePath("ngc2000names.dat"),
-					  StelApp::getInstance().getDataFilePath("nebula_textures.fab"), lb);
+		nebulas->init(lb, baseFontFile, FontSizeGeneral);
         //if (grid_level < nebulas->getMaxGridLevel())
         //  grid_level = nebulas->getMaxGridLevel());
 
