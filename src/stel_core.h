@@ -73,15 +73,6 @@ public:
 	// moved since the previous update.
 	double draw(int delta_time);
 	
-	//! Get the name of the directory containing the data
-	const string getDataDir(void) const {return dataRoot + "/data/";}
-	
-	//! Get the name of the directory containing the data
-	const string getLocaleDir(void) const {return localeDir;}
-	
-	//! Get the name of the root directory i.e the one containing the other main directories
-	const string& getDataRoot() const {return dataRoot;}
-	
 	//! Set the sky culture from I18 name
 	//! Returns false and doesn't change if skyculture is invalid
 	bool setSkyCulture(const wstring& cultureName);
@@ -689,8 +680,6 @@ private:
 	
 	string baseFontFile;				// The font file used by default during initialization
 
-	string dataRoot;					// The root directory where the data is
-	string localeDir;					// The directory containing the translation .mo file
 	string skyCultureDir;				// The directory containing data for the culture used for constellations, etc.. 
 	Translator skyTranslator;			// The translator used for astronomical object naming
 		

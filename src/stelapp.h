@@ -64,6 +64,11 @@ public:
 	//! @param dataFileName the data file path relative to the main data directory (e.g font/myFont.ttf)
 	//! @return the fullpath to the data file e.g /usr/local/share/stellarium/data/font/myFont.ttf
 	string getDataFilePath(const string& dataFileName) const;
+	
+	//! @brief Get the locale data directory path
+	//! @return the full path to the directory containing locale specific infos e.g. /usr/local/share/locale/.
+	//! This directory should e.g. contain fr/LC_MESSAGES/stellarium.mo so that french translations work.
+	const string& getLocaleDir() {return localeDir;}
 
 	//! @brief Get the full path to a texture file.
 	//! This method will try to find the file in all valid data directories until it finds it.

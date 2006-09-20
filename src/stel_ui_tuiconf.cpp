@@ -136,7 +136,7 @@ void StelUI::init_tui(void)
 	// 2. Time
 	tui_time_skytime = new s_tui::Time_item(wstring(L"2.1 ") );
 	tui_time_skytime->set_OnChangeCallback(callback<void>(this, &StelUI::tui_cb_sky_time));
-	tui_time_settmz = new s_tui::Time_zone_item(core->getDataDir() + "zone.tab", wstring(L"2.2 ") );
+	tui_time_settmz = new s_tui::Time_zone_item(StelApp::getInstance().getDataFilePath("zone.tab"), wstring(L"2.2 ") );
 	tui_time_settmz->set_OnChangeCallback(callback<void>(this, &StelUI::tui_cb_settimezone));
 	tui_time_settmz->settz(app->get_custom_tz_name());
 	tui_time_presetskytime = new s_tui::Time_item(wstring(L"2.3 ") );
@@ -170,7 +170,7 @@ void StelUI::init_tui(void)
 	tui_menu_general->addComponent(tui_general_sky_culture);
 
 	tui_general_sky_locale = new s_tui::MultiSet_item<wstring>(wstring(L"3.2 ") );
-	tui_general_sky_locale->addItemList(StelUtils::stringToWstring(Translator::getAvailableLanguagesCodes(core->getLocaleDir())));
+	tui_general_sky_locale->addItemList(StelUtils::stringToWstring(Translator::getAvailableLanguagesCodes(app->getLocaleDir())));
 
 	tui_general_sky_locale->set_OnChangeCallback(callback<void>(this, &StelUI::tui_cb_tui_general_change_sky_locale));
 	tui_menu_general->addComponent(tui_general_sky_locale);
@@ -255,7 +255,7 @@ void StelUI::init_tui(void)
 
 	// 5. Effects
 	tui_effect_landscape = new s_tui::MultiSet_item<wstring>(wstring(L"5.1 ") );
-	tui_effect_landscape->addItemList(StelUtils::stringToWstring(Landscape::get_file_content(core->getDataDir() + "landscapes.ini")));
+	tui_effect_landscape->addItemList(StelUtils::stringToWstring(Landscape::get_file_content(StelApp::getInstance().getDataFilePath( "landscapes.ini"))));
 
 	tui_effect_landscape->set_OnChangeCallback(callback<void>(this, &StelUI::tui_cb_tui_effect_change_landscape));
 	tui_menu_effects->addComponent(tui_effect_landscape);
@@ -317,7 +317,7 @@ void StelUI::init_tui(void)
 	tui_menu_administration->addComponent(tui_admin_updateme);
 
 	tui_admin_setlocale = new s_tui::MultiSet_item<wstring>(L"7.5 ");
-	tui_admin_setlocale->addItemList(StelUtils::stringToWstring(Translator::getAvailableLanguagesCodes(core->getLocaleDir())));
+	tui_admin_setlocale->addItemList(StelUtils::stringToWstring(Translator::getAvailableLanguagesCodes(app->getLocaleDir())));
 	tui_admin_setlocale->set_OnChangeCallback(callback<void>(this, &StelUI::tui_cb_admin_set_locale));
 	tui_menu_administration->addComponent(tui_admin_setlocale);
 
@@ -420,7 +420,7 @@ void StelUI::localizeTui(void)
 	// 7. Scripts
 	tui_scripts_local->setLabel(wstring(L"7.1 ") + _("Local Script: "));
 	tui_scripts_local->replaceItemList(_(TUI_SCRIPT_MSG) + wstring(L"\n") 
-									   + StelUtils::stringToWstring(app->scripts->get_script_list(core->getDataDir() + "scripts/")), 0); 
+			+ StelUtils::stringToWstring(app->scripts->get_script_list(StelApp::getInstance().getDataFilePath("scripts/"))), 0); 
 	tui_scripts_removeable->setLabel(wstring(L"7.2 ") + _("CD/DVD Script: "));
 	tui_scripts_removeable->replaceItemList(_(TUI_SCRIPT_MSG), 0);
 
@@ -582,20 +582,20 @@ void StelUI::tui_cb_admin_save_default(void)
 {
 	app->saveCurrentConfig(app->getConfigFilePath());
 
-	system( ( core->getDataDir() + "script_save_config " ).c_str() );
+	system( (StelApp::getInstance().getDataFilePath("script_save_config ") ).c_str() );
 }
 
 // Launch script for internet update
 void StelUI::tui_cb_admin_updateme(void)
 {
-	system( ( core->getDataDir() + "script_internet_update" ).c_str() );
+	system( ( StelApp::getInstance().getDataFilePath("script_internet_update" )).c_str() );
 }
 
 
 // Launch script for shutdown, then exit
 void StelUI::tui_cb_admin_shutdown(void)
 {
-	system( ( core->getDataDir() + "script_shutdown" ).c_str() );
+	system( (StelApp::getInstance().getDataFilePath("script_shutdown") ).c_str() );
 	app->quit();
 }
 
@@ -648,7 +648,7 @@ void StelUI::tui_cb_scripts_local() {
   
 	if(tui_scripts_local->getCurrent()!=_(TUI_SCRIPT_MSG)){
     app->SelectedScript = StelUtils::wstringToString(tui_scripts_local->getCurrent());
-    app->SelectedScriptDirectory = core->getDataDir() + "scripts/";
+	app->SelectedScriptDirectory = StelApp::getInstance().getDataFilePath("scripts/");
     // to reduce confusion for user, clear out removeable script selection as well
     if(ScriptDirectoryRead) tui_scripts_removeable->setCurrent(_(TUI_SCRIPT_MSG));
   } else {
