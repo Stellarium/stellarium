@@ -236,8 +236,6 @@ int main(int argc, char **argv)
 
 	StelApp* app = new StelApp(CDIR, LDIR, DATA_ROOT);
 
-	app->init();
-
 	app->startMainLoop();
 
 	// Clean memory

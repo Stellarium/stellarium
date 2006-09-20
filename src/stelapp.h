@@ -20,25 +20,96 @@
 #ifndef STELAPP_H
 #define STELAPP_H
 
+#include "stellarium.h"
 #include "s_gui.h"
-#include "stel_command_interface.h"
-#include "stel_ui.h"
-#include "script_mgr.h"
-
 
 // Predeclaration of some classes
+class StelCore;
 class StelCommandInterface;
 class ScriptMgr;
 class StelUI;
 class ViewportDistorter;
 
 /**
-@author Fabien Chereau
-*/
+ * Singleton main Stellarium application class.
+ * @author Fabien Chereau
+ */
 class StelApp{
 friend class StelUI;
 friend class StelCommandInterface;
 public:
+	//! Create and initialize the main Stellarium application.
+	//! @param configDir the full path to the directory where config.ini is stored.
+	//! @param localeDir the full path to the directory containing locale specific infos
+	//! e.g. /usr/local/share/locale/. This directory should typically contain fr/LC_MESSAGES/stellarium.mo
+	//! so that french translations work.
+	//! @param dataRootDir the root data directory.
+    StelApp(const string& configDir, const string& localeDir, const string& dataRootDir);
+
+	//! Deinitialize and destroy the main Stellarium application.
+    ~StelApp();
+	
+	//! Get the StelApp singleton instance
+	//! @return the StelApp singleton instance
+	static StelApp& getInstance(void) {assert(singleton); return *singleton;}
+
+	//! Start the main loop and return when the program ends.
+	void startMainLoop(void);	
+	
+	//! Get the configuration file path.
+	//! @return the full path to Stellarium's main config.ini file
+	string getConfigFilePath(void) const;
+	
+	//! Get the full path to a data file. This method will try to find the file in all valid data 
+	//! directories until it finds it.
+	//! @param dataFileName the data file path relative to the main data directory (e.g font/myFont.ttf)
+	//! @return the fullpath to the data file e.g /usr/local/share/stellarium/data/font/myFont.ttf
+	string getDataFilePath(const string& dataFileName) const;
+	
+	//! Get the full path to a texture file. This method will try to find the file in all valid data 
+	//! directories until it finds it.
+	//! @param textureFileName the texture file path relative to the main data directory (e.g jupiter.png)
+	//! @return the fullpath to the texture file e.g /usr/local/share/stellarium/data/texture/jupiter.png.
+	string getTextureFilePath(const string& textureFileName) const;	
+	
+	//! Set the application language. This applies to GUI etc..
+	//! This function has no permanent effect on the global locale.
+	//! @param newAppLocaleName the name of the language (e.g fr).
+	void setAppLanguage(const string& newAppLangName);
+	
+	//! Get the application language currently used for GUI etc..
+	//! This function has no permanent effect on the global locale.
+	//! @return the name of the language (e.g fr).
+	string getAppLanguage() { return Translator::globalTranslator.getTrueLocaleName(); }
+
+	//! Set flag for activating night vision mode
+	void setVisionModeNight(void);
+	//! Get flag for activating night vision mode
+	bool getVisionModeNight(void) const {return draw_mode==DM_NIGHT;}
+	
+	//! Set flag for activating chart vision mode 
+	// ["color" section name used for easier backward compatibility for older configs - Rob]
+	void setVisionModeNormal(void);
+	//! Get flag for activating chart vision mode
+	bool getVisionModeNormal(void) const {return draw_mode==DM_NORMAL;}
+
+	void setViewPortDistorterType(const string &type);
+	string getViewPortDistorterType(void) const;
+	
+	//! Return a list of working fullscreen hardware video modes (one per line)
+	string getVideoModeList(void) const;
+
+	//! Required because stelcore doesn't have access to the script manager anymore!
+	//! Record a command if script recording is on
+	void recordCommand(string commandline);
+	
+	string get_time_format_str(void) const {return s_time_format_to_string(time_format);}
+	void set_time_format_str(const string& tf) {time_format=string_to_s_time_format(tf);}
+	string get_date_format_str(void) const {return s_date_format_to_string(date_format);}
+	void set_date_format_str(const string& df) {date_format=string_to_s_date_format(df);}
+		
+	void setCustomTimezone(string _time_zone) { set_custom_tz_name(_time_zone); }
+
 	//! Possible drawing modes
 	enum DRAWMODE { DM_NORMAL=0, DM_CHART, DM_NIGHT, DM_NIGHTCHART, DM_NONE };
 
@@ -67,13 +138,10 @@ public:
 	// Return the time in ISO 8601 format that is : %Y-%m-%d %H:%M:%S
 	string get_ISO8601_time_local(double JD) const;	
 
-    StelApp(const string& CDIR, const string& LDIR, const string& DATA_ROOT);
-
-    ~StelApp();
-
+private:
 	//! Initialize application and core
 	void init(void);
-
+		
 	//! Update all object according to the delta time
 	void update(int delta_time);
 
@@ -81,85 +149,23 @@ public:
 	// Return the max squared distance in pixels that any object has
 	// travelled since the last update.
 	double draw(int delta_time);
-
-	// Start the main loop until the end of the execution
-	void startMainLoop(void) {start_main_loop();}
-
-	// n.b. - do not confuse this with sky time rate
-	int getTimeMultiplier() { return time_multiplier; };
-
+	
+	//! Quit the application
+	void quit(void);	
+	
 	// Handle mouse clics
 	int handleClick(int x, int y, s_gui::S_GUI_VALUE button, s_gui::S_GUI_VALUE state);
 	// Handle mouse move
 	int handleMove(int x, int y);
 	// Handle key press and release
 	int handleKeys(SDLKey key, SDLMod mod,
-	               Uint16 unicode, s_gui::S_GUI_VALUE state);
-
-	const string getConfigDir(void) const {return configDir;}
-
-	//! Quit the application
-	void quit(void);
-
-	void playStartupScript();
-
-	//! @brief Set the application language
-	//! This applies to GUI, console messages etc..
-	//! This function has no permanent effect on the global locale
-	//! @param newAppLocaleName The name of the language (e.g fr) to use for GUI, TUI and console messages etc..
-	void setAppLanguage(const std::string& newAppLangName);
-	string getAppLanguage() { return Translator::globalTranslator.getTrueLocaleName(); }
-
-	//! Set flag for activating night vision mode
-	void setVisionModeNight(void);
-	//! Get flag for activating night vision mode
-	bool getVisionModeNight(void) const {return draw_mode==DM_NIGHT;}
+				   Uint16 unicode, s_gui::S_GUI_VALUE state);	
 	
-	//! Set flag for activating chart vision mode
-	void setVisionModeChart(void);
-	//! Get flag for activating chart vision mode
-	bool getVisionModeChart(void) const {return draw_mode==DM_CHART;}
+	// n.b. - do not confuse this with sky time rate
+	int getTimeMultiplier() { return time_multiplier; };	
 	
-	//! Set flag for activating chart vision mode 
-	// ["color" section name used for easier backward compatibility for older configs - Rob]
-	void setVisionModeNormal(void);
-	//! Get flag for activating chart vision mode
-	bool getVisionModeNormal(void) const {return draw_mode==DM_NORMAL;}
-
-	void setViewPortDistorterType(const string &type);
-	string getViewPortDistorterType(void) const;
-
-	//! Return full path to config file
-	const string getConfigFile(void) const {return getConfigDir() + "config.ini";}
-
-	// for use by TUI
-	void saveCurrentConfig(const string& confFile);
-
-	double getMouseCursorTimeout();
-	
-	//! Return a list of working fullscreen hardware video modes (one per line)
-	string getVideoModeList(void) const;
-
-	//! Required because stelcore doesn't have access to the script manager anymore!
-	//! Record a command if script recording is on
-	void recordCommand(string commandline);
-	
-	string get_time_format_str(void) const {return s_time_format_to_string(time_format);}
-	void set_time_format_str(const string& tf) {time_format=string_to_s_time_format(tf);}
-	string get_date_format_str(void) const {return s_date_format_to_string(date_format);}
-	void set_date_format_str(const string& df) {date_format=string_to_s_date_format(df);}
-		
-	void setCustomTimezone(string _time_zone) { set_custom_tz_name(_time_zone); }
-			
-private:
-	//! Screen size
-	int screenW, screenH;
-
-    //! Initialize openGL screen with SDL
+    // Initialize openGL screen with SDL
 	void initSDL(int w, int h, int bbpMode, bool fullScreen, string iconFile);
-	
-	//! Run the main program loop
-	void start_main_loop(void);
 
 	//! Terminate the application with SDL
 	void terminateApplication(void);
@@ -167,13 +173,28 @@ private:
 	//! Set the drawing mode in 2D for drawing in the full screen
 	void set2DfullscreenProjection(void) const;
 	//! Restore previous projection mode
-	void restoreFrom2DfullscreenProjection(void) const;
+	void restoreFrom2DfullscreenProjection(void) const;	
+	
+	// for use by TUI
+	void saveCurrentConfig(const string& confFile);	
+	
+	// The StelApp singleton 
+	static StelApp* singleton;	
+	
+	// Screen size
+	int screenW, screenH;
 
-	//! The assicated StelCore instance
+	// The assicated StelCore instance
 	StelCore* core;
 
-	//Files location
+	// Full path to config dir
 	string configDir;
+	// Full path to locale dir
+	string localeDir;
+	// Full path to data dir
+	string dataDir;
+	// Full path to root dir
+	string rootDir;
 	
 	// Script related
 	string SelectedScript;  // script filename (without directory) selected in a UI to run when exit UI
