@@ -44,7 +44,7 @@ public:
 	virtual string getModuleID() const {return "nebula";}
 	virtual double draw(Projector *prj, const Navigator *nav, ToneReproductor *eye);
 	virtual void update(double deltaTime) {hintsFader.update((int)deltaTime); flagShow.update((int)deltaTime);}
-	virtual bool init(float font_size, const string& font_name, const string& catNGC, const string& catNGCnames, const string& catTextures, LoadingBar& lb); 
+	virtual bool init(LoadingBar& lb, const string& font_name, float font_size); 
 		
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in StelObjectManager class
