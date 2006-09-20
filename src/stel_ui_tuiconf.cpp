@@ -573,7 +573,7 @@ void StelUI::tui_cb_settimedisplayformat(void)
 // Load default configuration
 void StelUI::tui_cb_admin_load_default(void)
 {
-	app->init();
+	//app->init();
 	tuiUpdateIndependentWidgets(); 
 }
 

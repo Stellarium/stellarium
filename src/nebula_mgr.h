@@ -32,7 +32,10 @@ class Nebula;
 class LoadingBar;
 class Translator;
 class ToneReproductor;
+class StelObjectMgr;
 
+//! Manage a collection of nebula. It display the NGC catalog with informations 
+//! and textures for some of them.
 class NebulaMgr : public StelObjectMgr
 {
 public:
@@ -54,7 +57,8 @@ public:
 	virtual StelObject searchByNameI18n(const wstring& nameI18n) const;
 	virtual void translateSkyNames(Translator& trans);
 	virtual bool setSkyCultureDir(const string& cultureDir) {return true;}
-	//! Find and return the list of at most maxNbItem objects auto-completing the passed object I18n name
+	
+	//! @brief Find and return the list of at most maxNbItem objects auto-completing the passed object I18n name
 	//! @param objPrefix the case insensitive first letters of the searched object
 	//! @param maxNbItem the maximum number of returned object names
 	//! @return a vector of matching object name by order of relevance, or an empty vector if nothing match
@@ -80,9 +84,9 @@ public:
 	void setCircleColor(const Vec3f& c);
 	const Vec3f &getCircleColor(void) const;
 	
-	//! Set flag for displaying Nebulae as bright
+	//! Set flag for displaying nebulae as bright to show all details
 	void setFlagBright(bool b);
-	//! Get flag for displaying Nebulae as bright
+	//! Get whether we display nebulae as bright to show all details
 	bool getFlagBright(void) const;
 	
 	//! Set flag for displaying Nebulae even without textures

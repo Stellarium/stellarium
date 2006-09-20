@@ -128,7 +128,7 @@ StelCore::~StelCore()
 void StelCore::init(const InitParser& conf)
 {
 	baseFontFile = StelApp::getInstance().getDataFilePath( conf.get_str("gui", "base_font_name", "DejaVuSans.ttf") );
-
+	
 	// Video Section
 	setViewportSize(conf.get_int("video:screen_w"), conf.get_int("video:screen_h"));
 	setViewportHorizontalOffset(conf.get_int    ("video:horizontal_offset"));
@@ -142,9 +142,12 @@ void StelCore::init(const InitParser& conf)
 	const Projector::PROJECTOR_MASK_TYPE projMaskType = Projector::stringToMaskType(tmpstr);
 	projection->setMaskType(projMaskType);
 	
-	// Init the solar system first
-	if(firstTime) ssystem->load(StelApp::getInstance().getDataFilePath("ssystem.ini"));
+	LoadingBar lb(projection, FontSizeGeneral, baseFontFile, "logo24bits.png",
+				  getViewportWidth(), getViewportHeight(),
+				  StelUtils::stringToWstring(VERSION), 45, 320, 121);
 	
+	// Init the solar system first
+	ssystem->init(lb);
  	ssystem->setFont(FontSizeSolarSystem, baseFontFile);
 	setPlanetsScale(getStarScale());
 
@@ -154,22 +157,14 @@ void StelCore::init(const InitParser& conf)
 	navigation->set_local_vision(Vec3f(1,1e-05,0.2));
 
 	// Load hipparcos stars & names
-	if(firstTime) {
-		LoadingBar lb(projection, FontSizeGeneral, baseFontFile,
-                      "logo24bits.png",
-                      getViewportWidth(), getViewportHeight(),
-                      StelUtils::stringToWstring(VERSION), 45, 320, 121);
-		hip_stars->init(FontSizeGeneral, baseFontFile,lb);
-        int grid_level = hip_stars->getMaxGridLevel();
+	hip_stars->init(FontSizeGeneral, baseFontFile,lb);
+	int grid_level = hip_stars->getMaxGridLevel();
 
-		// Init nebulas
-		nebulas->init(lb, baseFontFile, FontSizeGeneral);
-        //if (grid_level < nebulas->getMaxGridLevel())
-        //  grid_level = nebulas->getMaxGridLevel());
+	// Init nebulas
+	nebulas->init(lb, baseFontFile, FontSizeGeneral);
 
-        geodesic_grid = new GeodesicGrid(grid_level);
-        geodesic_search_result = new GeodesicSearchResult(*geodesic_grid);
-	}
+	geodesic_grid = new GeodesicGrid(grid_level);
+	geodesic_search_result = new GeodesicSearchResult(*geodesic_grid);
 
 	// Init fonts : should be moved into the constructor
 	equ_grid->set_font(FontSizeGeneral, baseFontFile);

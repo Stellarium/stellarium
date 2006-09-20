@@ -29,6 +29,8 @@
 #include "orbit.h"
 #include "translator.h"
 
+class LoadingBar;
+
 class SolarSystem
 {
 public:
@@ -45,7 +47,7 @@ public:
 			  bool flag_point);
 	
 	// Load the bodies data from a file
-	void load(const string& planetfile);
+	bool init(LoadingBar& lb);
 
 	//! @brief Update i18 names from english names according to passed translator
 	//! The translation is done using gettext with translated strings defined in translations.h
