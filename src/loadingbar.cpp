@@ -46,6 +46,12 @@ LoadingBar::~LoadingBar()
 
 void LoadingBar::Draw(float val)
 {
+	// Ensure that the refresh frequency is not too high 
+	// (display may be very slow when no 3D acceleration works)
+	if (SDL_GetTicks()-timeCounter<50)
+		return;
+	timeCounter = SDL_GetTicks();
+	
 	// percent complete bar only draws in 2d mode
 	prj->set_orthographic_projection();
   

@@ -43,6 +43,7 @@ private:
 	wstring extraText;
 	Vec2f extraTextPos;
 	s_font* extraTextFont;
+	int timeCounter;
 };
 
 #endif //_LOADINGBAR_H_

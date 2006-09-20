@@ -30,6 +30,7 @@ using namespace std;
 #include "init_parser.h"
 #include "navigator.h"
 #include "projector.h"
+#include "stelapp.h"
 
 SolarSystem::SolarSystem()
             :sun(NULL),moon(NULL),earth(NULL),
@@ -74,11 +75,11 @@ SolarSystem::~SolarSystem()
 
 
 // Init and load the solar system data
-void SolarSystem::load(const string& planetfile)
+bool SolarSystem::init(LoadingBar& lb)
 {
 	cout << "Loading Solar System data...";
 	InitParser pd;	// The Planet data ini file parser
-	pd.load(planetfile);
+	pd.load(StelApp::getInstance().getDataFilePath("ssystem.ini"));
 
 	int nbSections = pd.get_nsec();
 	for (int i = 0;i<nbSections;++i)
@@ -315,6 +316,7 @@ void SolarSystem::load(const string& planetfile)
 	tex_earth_shadow = new s_texture("earth-shadow.png", TEX_LOAD_TYPE_PNG_ALPHA);
 
 	cout << "(loaded)" << endl;
+	return true;
 }
 
 // Compute the position for every elements of the solar system.
