@@ -26,13 +26,30 @@
 
 using namespace std;
 
-StelFontMgr::StelFontMgr()
-{}
+/*************************************************************************
+ Constructor for the StelFontMgr class
+*************************************************************************/
+StelFontMgr::StelFontMgr(const string& fontMapFile)
+{
+	loadFontForLanguage(fontMapFile);
+}
 
-
+/*************************************************************************
+ Dealloc memory for all loaded fonts
+*************************************************************************/
 StelFontMgr::~StelFontMgr()
-{}
+{
+	std::map<LoadedFont, s_font*, ltLoadedFont>::iterator iter;
+	for (iter=loadedFonts.begin();iter!=loadedFonts.end();++iter)
+	{
+		delete (*iter).second;
+		(*iter).second = NULL;
+	}
+}
 
+/*************************************************************************
+ Equality operator for the FontForLanguage class
+*************************************************************************/
 bool StelFontMgr::FontForLanguage::operator == (const FontForLanguage & f) const
 {
 	return (f.fixedFontFileName == fixedFontFileName &&
@@ -41,8 +58,65 @@ bool StelFontMgr::FontForLanguage::operator == (const FontForLanguage & f) const
 	        abs(f.fontScale-fontScale) < 0.01);
 }
 
+/*************************************************************************
+ Constructor for the LoadedFont class
+*************************************************************************/
+StelFontMgr::LoadedFont::LoadedFont(string afileName, int ascale) : 
+		fileName(afileName), scale(ascale)
+{
+}
 
-//! Return the structure describing the fonts and scales to use for a given language
+/*************************************************************************
+ Get the standard font associated to the given language ISO code.
+*************************************************************************/
+s_font& StelFontMgr::getStandardFont(const string &langageName, double scale)
+{
+	FontForLanguage ffl = getFontForLanguage(langageName);
+	LoadedFont lf(ffl.fontFileName, (int)(ffl.fontScale*scale*10));
+	if (loadedFonts.find(lf)!=loadedFonts.end())
+	{
+		return *(loadedFonts[lf]);
+	}
+	else
+	{
+		s_font* font = new s_font(lf.scale, StelApp::getInstance().getDataFilePath(lf.fileName));
+		loadedFonts[lf]=font;
+		return *font;
+	}
+	// Unreachable code
+	assert(false);
+	
+	s_font* dummy;
+	return *dummy;
+}
+
+/*************************************************************************
+ Get the fixed font associated to the given language ISO code.
+*************************************************************************/
+s_font& StelFontMgr::getFixedFont(const string &langageName, double scale)
+{
+	FontForLanguage ffl = getFontForLanguage(langageName);
+	LoadedFont lf(ffl.fixedFontFileName, (int)(ffl.fixedFontScale*scale*10));
+	if (loadedFonts.find(lf)!=loadedFonts.end())
+	{
+		return *(loadedFonts[lf]);
+	}
+	else
+	{
+		s_font* font = new s_font(lf.scale, StelApp::getInstance().getDataFilePath(lf.fileName));
+		loadedFonts[lf]=font;
+		return *font;
+	}
+	// Unreachable code
+	assert(false);
+	
+	s_font* dummy;
+	return *dummy;	
+}
+
+/*************************************************************************
+ Return the structure describing the fonts and scales to use for a given language
+*************************************************************************/
 StelFontMgr::FontForLanguage& StelFontMgr::getFontForLanguage(const std::string &langageName)
 {
 	if (fontMapping.find(langageName)==fontMapping.end())
@@ -50,10 +124,11 @@ StelFontMgr::FontForLanguage& StelFontMgr::getFontForLanguage(const std::string 
 	else return fontMapping[langageName];
 }
 
-
-//! Load the associations between langages and font file/scaling
+/*************************************************************************
+ Load the associations between langages and font file/scaling
+*************************************************************************/
 void StelFontMgr::loadFontForLanguage(const string &fontMapFile)
-{
+{	
 	// Add first default font
 	FontForLanguage defaultFont;
 	defaultFont.langageName = "*";
@@ -61,7 +136,8 @@ void StelFontMgr::loadFontForLanguage(const string &fontMapFile)
 	defaultFont.fixedFontScale = 1.;
 	defaultFont.fontFileName = "DejaVuSans.ttf";
 	defaultFont.fontScale = 1.;
-
+	fontMapping["*"] = defaultFont;
+	
 	// Now see if another font should be used as default or for locale
 	ifstream mapFile(fontMapFile.c_str());
 
@@ -74,7 +150,7 @@ void StelFontMgr::loadFontForLanguage(const string &fontMapFile)
 	char buffer[1000];
 	FontForLanguage readFont;
 
-	while (mapFile.getline (buffer,999) && !mapFile.eof())
+	while (mapFile.getline(buffer,999) && !mapFile.eof())
 	{
 		if( buffer[0] != '#' && buffer[0] != 0)
 		{
@@ -86,9 +162,6 @@ void StelFontMgr::loadFontForLanguage(const string &fontMapFile)
 			if (!fontFile.is_open())
 			{
 				cerr << "WARNING: Unable to open " << StelApp::getInstance().getDataFilePath(readFont.fontFileName) << " resorting to default font." << endl;
-			}
-			else
-			{
 				readFont.fontFileName = defaultFont.fontFileName;
 				readFont.fontScale = defaultFont.fontScale;
 			}
@@ -99,13 +172,13 @@ void StelFontMgr::loadFontForLanguage(const string &fontMapFile)
 			if (!fontFile.is_open())
 			{
 				cerr << "WARNING: Unable to open " << StelApp::getInstance().getDataFilePath(readFont.fontFileName) << " resorting to default font." << endl;
-			}
-			else
-			{
 				readFont.fixedFontFileName = defaultFont.fixedFontFileName;
 				readFont.fixedFontScale = defaultFont.fixedFontScale;
 			}
 			fontFile.close();
+			
+			fontMapping[readFont.langageName]=readFont;
 		}
 	}
+	mapFile.close();
 }

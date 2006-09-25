@@ -21,6 +21,7 @@
 
 #include <map>
 #include <string>
+#include "s_font.h"
 
 using namespace std;
 
@@ -29,11 +30,22 @@ using namespace std;
 class StelFontMgr
 {
 public:
-	StelFontMgr();
+	StelFontMgr(const string& fontMapFile);
 
 	~StelFontMgr();
 	
-	//! Class which describes which font to use for a given langage ISO code.
+	//! Get the standard font associated to the given language ISO code.
+	//! @param langageName the ISO language name such as "fr" or "en" or "*" for default.
+	//! @param scale the scale with respect to the default size for the language.
+	s_font& getStandardFont(const string &langageName, double scale);
+	
+	//! Get the fixed font associated to the given language ISO code.
+	//! @param langageName the ISO language name such as "fr" or "en" or "*" for default.
+	//! @param scale the scale with respect to the default size for the language.
+	s_font& getFixedFont(const string &langageName, double scale);
+	
+private:
+	// Class which describes which font to use for a given langage ISO code.
 	class FontForLanguage
 	{
 		public:
@@ -42,18 +54,38 @@ public:
 			double fontScale;
 			string fixedFontFileName;
 			double fixedFontScale;
-			bool operator == (const FontForLanguage & f) const;
+			bool operator == (const FontForLanguage& f) const;
+	};	
+	
+	// Class which describes a loaded font
+	class LoadedFont
+	{
+		public:
+			LoadedFont(string fileName, int scale);
+			string fileName;
+			int scale;	// floating point scale * 10
 	};
 	
-	//! Return the structure describing the fonts and scales to use for a given language
-	FontForLanguage& getFontForLanguage(const string &langageName);
+	// Comparator for sorting LoadedFonts
+	struct ltLoadedFont
+	{
+		bool operator()(const LoadedFont l1, const LoadedFont l2) const
+		{
+			return (l1.fileName<l2.fileName || (l1.fileName==l2.fileName && l1.scale<l2.scale));
+		}
+	};	
 	
-private:
+	// Return the structure describing the fonts and scales to use for a given language
+	FontForLanguage& getFontForLanguage(const string& langageName);	
+	
 	// Load the associations between langages and font file/scaling
-	void loadFontForLanguage(const string &fontMapFile);
+	void loadFontForLanguage(const string& fontMapFile);
 	
 	// Contains a mapping of font/langage
 	std::map<string, FontForLanguage> fontMapping;
+	
+	// Keep references on all loaded fonts
+	std::map<LoadedFont, s_font*, ltLoadedFont> loadedFonts;
 };
 
 #endif
