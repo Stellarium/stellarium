@@ -29,6 +29,7 @@ class StelCommandInterface;
 class ScriptMgr;
 class StelUI;
 class ViewportDistorter;
+class StelFontMgr;
 
 //! Singleton main Stellarium application class.
 //! @author Fabien Chereau
@@ -86,6 +87,10 @@ public:
 	//! @return the name of the language (e.g fr).
 	string getAppLanguage() { return Translator::globalTranslator.getTrueLocaleName(); }
 
+	//! @brief Get the font manager to use for loading fonts.
+	//! @return the font manager to use for loading fonts.
+	const StelFontMgr& getFontManager() { return *fontManager;}
+	
 	//! Set flag for activating night vision mode
 	void setVisionModeNight(void);
 	//! Get flag for activating night vision mode
@@ -208,7 +213,9 @@ private:
 	// Navigation
 	string PositionFile;
 
-
+	// Font manager for the application
+	StelFontMgr* fontManager;
+	
 	int FlagEnableMoveMouse;  // allow mouse at edge of screen to move view
 
 	double PresetSkyTime;

@@ -24,6 +24,7 @@
 #include "callbacks.hpp"
 #include "stel_command_interface.h"
 #include "stel_ui.h"
+#include "stelfontmgr.h"
 
 // Initialize static variables
 StelApp* StelApp::singleton = NULL;
@@ -47,6 +48,8 @@ StelApp::StelApp(const string& CDIR, const string& LDIR, const string& DATA_ROOT
 	// Set textures directory
 	s_texture::set_texDir(rootDir + "textures/");
 	
+	fontManager = new StelFontMgr(StelApp::getDataFilePath("fontmap.dat"));
+	
 	core = new StelCore(LDIR, DATA_ROOT, boost::callback<void, string>(this, &StelApp::recordCommand));
 	ui = new StelUI(core, this);
 	commander = new StelCommandInterface(core, this);
@@ -67,6 +70,7 @@ StelApp::~StelApp()
 	delete scripts;
 	delete commander;
 	delete core;
+	delete fontManager;
 	if (distorter) delete distorter;
 }
 
@@ -489,7 +493,6 @@ void StelApp::setVisionModeNormal(void)
 
 void StelApp::saveCurrentConfig(const string& confFile)
 {
-
 	// No longer resaves everything, just settings user can change through UI
 
 	cout << "Saving configuration file " << confFile << " ..." << endl;

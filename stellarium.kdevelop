@@ -9,14 +9,19 @@
     <ignoreparts>
       <part>kdevabbrev</part>
       <part>kdevbookmarks</part>
+      <part>kdevsnippet</part>
+      <part>kdevdocumentation</part>
       <part>kdevfilegroups</part>
       <part>kdevfileselector</part>
       <part>kdevdistpart</part>
+      <part>kdevquickopen</part>
       <part>kdevscripting</part>
+      <part>kdevsecurity</part>
+      <part>kdevtools</part>
     </ignoreparts>
     <projectdirectory>.</projectdirectory>
     <absoluteprojectpath>false</absoluteprojectpath>
-    <description/>
+    <description></description>
     <versioncontrol>kdevcvsservice</versioncontrol>
   </general>
   <kdevautoproject>
@@ -25,10 +30,10 @@
       <useconfiguration>debug</useconfiguration>
     </general>
     <run>
-      <mainprogram/>
+      <mainprogram></mainprogram>
       <directoryradio>custom</directoryradio>
       <customdirectory>/home/fabien/prog/stellarium/</customdirectory>
-      <programargs/>
+      <programargs></programargs>
       <terminal>false</terminal>
       <autocompile>true</autocompile>
       <envvars/>
@@ -77,18 +82,19 @@
       <abortonerror>true</abortonerror>
       <numberofjobs>1</numberofjobs>
       <dontact>false</dontact>
-      <makebin/>
+      <makebin></makebin>
       <prio>0</prio>
+      <runmultiplejobs>false</runmultiplejobs>
     </make>
   </kdevautoproject>
   <kdevdebugger>
     <general>
-      <dbgshell/>
-      <programargs/>
-      <gdbpath/>
-      <configGdbScript/>
-      <runShellScript/>
-      <runGdbScript/>
+      <dbgshell></dbgshell>
+      <programargs></programargs>
+      <gdbpath></gdbpath>
+      <configGdbScript></configGdbScript>
+      <runShellScript></runShellScript>
+      <runGdbScript></runGdbScript>
       <breakonloadinglibs>true</breakonloadinglibs>
       <separatetty>false</separatetty>
       <floatingtoolbar>false</floatingtoolbar>
@@ -173,7 +179,7 @@
       <headerCompletionDelay>250</headerCompletionDelay>
     </codecompletion>
     <creategettersetter>
-      <prefixGet/>
+      <prefixGet></prefixGet>
       <prefixSet>set</prefixSet>
       <prefixVariable>m_,_</prefixVariable>
       <parameterName>theValue</parameterName>
@@ -188,7 +194,7 @@
     <qt>
       <used>false</used>
       <version>3</version>
-      <root/>
+      <root></root>
     </qt>
   </kdevcppsupport>
   <kdevdocumentation>
@@ -210,7 +216,7 @@
     </tree>
   </kdevfileview>
   <ctagspart>
-    <customArguments/>
+    <customArguments></customArguments>
     <customTagfilePath>/home/fabien/prog/stellarium/tags</customTagfilePath>
   </ctagspart>
   <dist>
