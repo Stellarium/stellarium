@@ -43,36 +43,36 @@ Translator Translator::globalTranslator = Translator(PACKAGE, LOCALEDIR, "system
 void Translator::initSystemLanguage(void)
 {
 	char* lang = getenv("LANGUAGE");
-	if (lang) Translator::systemLangName = lang;
+	if (lang) systemLangName = lang;
 	else
 	{
 		lang = getenv("LANG");
-		if (lang) Translator::systemLangName = lang;
+		if (lang) systemLangName = lang;
 		else
 		{
-#ifdef WIN32            
-            char cc[3];
-            if(GetLocaleInfo(LOCALE_USER_DEFAULT, LOCALE_SISO639LANGNAME, cc, 3))
-            {
-                cc[2] = '\0';
-                Translator::systemLangName = cc;
-            }
-            else
-            {
-                Translator::systemLangName = "C";
-            }
+#ifdef WIN32
+			char cc[3];
+			if (GetLocaleInfo(LOCALE_USER_DEFAULT,
+			                  LOCALE_SISO639LANGNAME, cc, 3))
+			{
+				cc[2] = '\0';
+				systemLangName = cc;
+			}
+			else
+			{
+				systemLangName = "C";
+			}
 #else
-     Translator::systemLangName = "C";
+			systemLangName = "C";
 #endif
-        }
+		}
 	}
 
 	//change systemLangName to ISO 639 / ISO 3166.
-	unsigned int pos = Translator::systemLangName.find(':', 0);
-	if(pos != Translator::systemLangName.npos)
-	       Translator::systemLangName.resize(pos);
-	pos = Translator::systemLangName.find('.', 0);
-	if(pos == 5) Translator::systemLangName.resize(pos);
+	string::size_type pos = systemLangName.find(':', 0);
+	if (pos != string::npos) systemLangName.resize(pos);
+	pos = systemLangName.find('.', 0);
+	if (pos == 5) systemLangName.resize(pos);
 }
 
 void Translator::reload()
