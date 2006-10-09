@@ -696,6 +696,8 @@ void StelUI::gotoSearchedObject(void)
 		core->gotoSelectedObject();
 		core->setFlagTracking(true);
 		lblSearchMessage->setLabel(L"");
+		  // johannes
+		search_win->setVisible(false);
 	}
 	else
 	{

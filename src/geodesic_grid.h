@@ -61,6 +61,14 @@ public:
     {return (20<<(level<<1));} // 20*4^level
   int getNrOfZones(void) const {return nrOfZones(max_level);}
 
+  typedef void (VisitFunc)(int lev,int index,
+                           const Vec3d &c0,
+                           const Vec3d &c1,
+                           const Vec3d &c2,
+                           void *context);
+  void visitTriangles(int max_visit_level,
+                      VisitFunc *func,void *context) const;
+
   int searchZone(const Vec3d &v,int search_level) const;
     // find the zone number in which a given point lies.
     // prerequisite: v*v==1
@@ -92,6 +100,13 @@ private:
                     const Vec3d &c0,
                     const Vec3d &c1,
                     const Vec3d &c2);
+  void visitTriangles(int lev,int index,
+                      const Vec3d &c0,
+                      const Vec3d &c1,
+                      const Vec3d &c2,
+                      int max_visit_level,
+                      VisitFunc *func,
+                      void *context) const;
   void searchZones(int lev,int index,
                    const HalfSpace *half_spaces,
                    const int nr_of_half_spaces,

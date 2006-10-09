@@ -24,7 +24,6 @@
 
 // class used to manage groups of Stars
 
-#include <string>
 #include "hip_star_mgr.h"
 #include "stel_object.h"
 #include "stel_object_base.h"
@@ -37,6 +36,9 @@
 #include "translator.h"
 #include "geodesic_grid.h"
 #include "stelapp.h"
+
+#include <string>
+#include <list>
 
 #define RADIUS_STAR 1.
 
@@ -62,6 +64,65 @@ static const char *spectral_file
 static const char *component_file
  = "stars_hip_component_ids.cat";
 
+class StringArray {
+public:
+  StringArray(void) : array(0),size(0) {}
+  ~StringArray(void) {clear();}
+  void clear(void) {if (array) {delete[] array;array = 0;} size= 0;}
+  int getSize(void) const {return size;}
+  string operator[](int i) const {return ((0<=i && i<size) ? array[i] : "");}
+  void initFromFile(const char *file_name);
+private:
+  string *array;
+  int size;
+};
+
+void StringArray::initFromFile(const char *file_name) {
+  clear();
+  list<string> list;
+  FILE *f = fopen(file_name,"r");
+  if (f) {
+    char line[256];
+    while (fgets(line, sizeof(line), f)) {
+      string s = line;
+      // remove newline
+      s.erase(s.length()-1,1);
+      list.push_back(s);
+      size++;
+    }
+    fclose(f);
+  }
+  if (size > 0) {
+    array = new string[size];
+    assert(array!=0);
+    for (int i=0;i<size;i++) {
+      array[i] = list.front();
+      list.pop_front();
+    }
+  }
+}
+
+static StringArray spectral_array;
+static StringArray component_array;
+
+static string convertToSpectralType(int index) {
+  if (index < 0 || index >= spectral_array.getSize()) {
+    cout << "convertToSpectralType: bad index: " << index
+         << ", max: " << spectral_array.getSize() << endl;
+    return "";
+  }
+  return spectral_array[index];
+}
+
+static string convertToComponentIds(int index) {
+  if (index < 0 || index >= component_array.getSize()) {
+    cout << "convertToComponentIds: bad index: " << index
+         << ", max: " << component_array.getSize() << endl;
+    return "";
+  }
+  return component_array[index];
+}
+
 
 
 
@@ -73,6 +134,17 @@ template <class Star> struct SpecialZoneArray;
 template <class Star> struct SpecialZoneData;
 
 
+struct ZoneData { // a single Triangle
+    // no virtual functions!
+  int getNrOfStars(void) const {return size;}
+  Vec3d center;
+  Vec3d axis0;
+  Vec3d axis1;
+  int size;
+  void *stars;
+};
+
+
 struct Star3 {  // 6 byte
   int x0:18;
   int x1:18;
@@ -81,19 +153,33 @@ struct Star3 {  // 6 byte
   enum {max_pos_val=((1<<17)-1)};
   StelObject createStelObject(const SpecialZoneArray<Star3> *a,
                               const SpecialZoneData<Star3> *z) const;
+  Vec3d getJ2000Pos(const ZoneData *z,double) const {
+    Vec3d pos = z->center + (double)(x0)*z->axis0 + (double)(x1)*z->axis1;
+    pos.normalize();
+    return pos;
+  }
+  wstring getNameI18n(void) const {return L"";}
 } __attribute__ ((__packed__)) ;
 
 
 struct Star2 {  // 10 byte
   int x0:20;
   int x1:20;
-  int pma:14;
-  int pmd:14;
+  int dx0:14;
+  int dx1:14;
   unsigned int b_v:7;
   unsigned int mag:5;
   enum {max_pos_val=((1<<19)-1)};
   StelObject createStelObject(const SpecialZoneArray<Star2> *a,
                               const SpecialZoneData<Star2> *z) const;
+  Vec3d getJ2000Pos(const ZoneData *z,double movement_factor) const {
+    Vec3d pos = z->center
+              + (x0+movement_factor*dx0)*z->axis0
+              + (x1+movement_factor*dx1)*z->axis1;
+    pos.normalize();
+    return pos;
+  }
+  wstring getNameI18n(void) const {return L"";}
 } __attribute__ ((__packed__));
 
 
@@ -105,33 +191,42 @@ struct Star1 {
   unsigned char b_v;           //  7 bits needed
   unsigned char mag;           //  8 bits needed
   unsigned short sp_int;       // 14 bits needed
-  int pma,pmd,plx;
+  int dx0,dx1,plx;
   enum {max_pos_val=0x7FFFFFFF};
   StelObject createStelObject(const SpecialZoneArray<Star1> *a,
                               const SpecialZoneData<Star1> *z) const;
+  Vec3d getJ2000Pos(const ZoneData *z,double movement_factor) const {
+    Vec3d pos = z->center
+              + (x0+movement_factor*dx0)*z->axis0
+              + (x1+movement_factor*dx1)*z->axis1;
+    pos.normalize();
+//    if (hip==87937) {
+//      cout << x0 << ", " << x1 << ", " << dx0 << ", " << dx1
+//           << ", " << movement_factor << endl;
+//    }
+    return pos;
+  }
+  wstring getNameI18n(void) const {
+    if (hip) {
+      const wstring commonNameI18 = HipStarMgr::getCommonName(hip);
+      if (!commonNameI18.empty()) return commonNameI18;
+      if (HipStarMgr::getFlagSciNames()) {
+        const wstring sciName = HipStarMgr::getSciName(hip);
+        if (!sciName.empty()) return sciName;
+      }
+      return L"HP " + StelUtils::intToWstring(hip);
+    }
+    return L"";
+  }
 } __attribute__ ((__packed__));
 
 
-struct ZoneData { // a single Triangle
-    // no virtual functions!
-  int getNrOfStars(void) const {return size;}
-  void init(int c0,int c1,int c2,int nr_of_stars,double star_position_scale);
-  Vec3d center;
-  Vec3d axis0;
-  Vec3d axis1;
-  int size;
-};
-
 template <class Star>
 struct SpecialZoneData : public ZoneData {
-  Vec3d getJ2000Pos(const Star *s) const {
-    Vec3d pos = (double)(s->x0)*axis0 + (double)(s->x1)*axis1;
-    pos += sqrt(1.0-pos.lengthSquared()) * center;
-    return pos;
-  }
   StelObject createStelObject(const Star *s) const
     {return s->createStelObject(*this);}
-  Star *stars; // array of stars in this zone
+  Star *getStars(void) const {return reinterpret_cast<Star*>(stars);}
+     // array of stars in this zone
 };
 
 class ZoneArray {  // contains all zones of a given level
@@ -143,41 +238,54 @@ public:
   virtual void searchAround(int index,const Vec3d &v,double cos_lim_fov,
                             vector<StelObject> &result) = 0;
   virtual void draw(int index,bool is_inside,
-                    const float *rmag_table,const Projector *prj) const = 0;
+                    const float *rmag_table,const Projector *prj,
+                    unsigned int max_mag_star_name,float names_brightness,
+                    s_font *starFont,
+                    unsigned int star_texture_id) const = 0;
   bool isInitialized(void) const {return (nr_of_zones>0);}
+  void initTriangle(int index,
+                    const Vec3d &c0,
+                    const Vec3d &c1,
+                    const Vec3d &c2);
+  virtual void scaleAxis(void) = 0;
   const int level;
-  const int scale_int;
   const int mag_min;
   const int mag_range;
   const int mag_steps;
+  double star_position_scale;
 protected:
-  ZoneArray(const HipStarMgr &hip_star_mgr,int level,int scale_int,
+  ZoneArray(const HipStarMgr &hip_star_mgr,int level,
             int mag_min,int mag_range,int mag_steps);
   const HipStarMgr &hip_star_mgr;
   int nr_of_zones;
   int nr_of_stars;
+  ZoneData *zones;
 };
 
 template<class Star>
 class SpecialZoneArray : public ZoneArray {
 public:
   SpecialZoneArray(FILE *f,
-                   const HipStarMgr &hip_star_mgr,int level,int scale_int,
+                   const HipStarMgr &hip_star_mgr,int level,
                    int mag_min,int mag_range,int mag_steps);
   ~SpecialZoneArray(void) {
     if (stars) {delete[] stars;stars = 0;}
-    if (zones) {delete[] zones;zones = 0;}
+    if (zones) {delete[] getZones();zones = 0;}
     nr_of_zones = 0;
     nr_of_stars = 0;
   }
 protected:
-  SpecialZoneData<Star> *zones;
+  SpecialZoneData<Star> *getZones(void) const
+    {return static_cast<SpecialZoneData<Star>*>(zones);}
   Star *stars;
 private:
+  void scaleAxis(void);
   void searchAround(int index,const Vec3d &v,double cos_lim_fov,
                     vector<StelObject> &result);
   void draw(int index,bool is_inside,
-            const float *rmag_table,const Projector *prj) const;
+            const float *rmag_table,const Projector *prj,
+            unsigned int max_mag_star_name,float names_brightness,
+            s_font *starFont,unsigned int star_texture_id) const;
 };
 
 struct HipIndexStruct {
@@ -188,10 +296,10 @@ struct HipIndexStruct {
 
 class ZoneArray1 : public SpecialZoneArray<Star1> {
 public:
-  ZoneArray1(FILE *f,const HipStarMgr &hip_star_mgr,int level,int scale_int,
+  ZoneArray1(FILE *f,const HipStarMgr &hip_star_mgr,int level,
              int mag_min,int mag_range,int mag_steps)
-    : SpecialZoneArray<Star1>(f,hip_star_mgr,level,scale_int,
-                                mag_min,mag_range,mag_steps) {}
+    : SpecialZoneArray<Star1>(f,hip_star_mgr,level,
+                              mag_min,mag_range,mag_steps) {}
 private:
   void updateHipIndex(HipIndexStruct hip_index[]) const;
 };
@@ -199,12 +307,61 @@ private:
 
 
 
+void HipStarMgr::initTriangle(int lev,int index,
+                              const Vec3d &c0,
+                              const Vec3d &c1,
+                              const Vec3d &c2) {
+  ZoneArrayMap::const_iterator it(zone_arrays.find(lev));
+  if (it!=zone_arrays.end()) it->second->initTriangle(index,c0,c1,c2);
+}
 
 
+static const Vec3d north(0,0,1);
 
+void ZoneArray::initTriangle(int index,
+                             const Vec3d &c0,
+                             const Vec3d &c1,
+                             const Vec3d &c2) {
+    // initialize center,axis0,axis1:
+  ZoneData &z(zones[index]);
+  z.center = c0+c1+c2;
+  z.center.normalize();
+  z.axis0 = north ^ z.center;
+  z.axis0.normalize();
+  z.axis1 = z.center ^ z.axis0;
+    // initialize star_position_scale:
+  double mu0,mu1,f,h;
+  mu0 = (c0-z.center)*z.axis0;
+  mu1 = (c0-z.center)*z.axis1;
+  f = 1.0/sqrt(1.0-mu0*mu0-mu1*mu1);
+  h = fabs(mu0)*f;
+  if (star_position_scale < h) star_position_scale = h;
+  h = fabs(mu1)*f;
+  if (star_position_scale < h) star_position_scale = h;
+  mu0 = (c1-z.center)*z.axis0;
+  mu1 = (c1-z.center)*z.axis1;
+  f = 1.0/sqrt(1.0-mu0*mu0-mu1*mu1);
+  h = fabs(mu0)*f;
+  if (star_position_scale < h) star_position_scale = h;
+  h = fabs(mu1)*f;
+  if (star_position_scale < h) star_position_scale = h;
+  mu0 = (c2-z.center)*z.axis0;
+  mu1 = (c2-z.center)*z.axis1;
+  f = 1.0/sqrt(1.0-mu0*mu0-mu1*mu1);
+  h = fabs(mu0)*f;
+  if (star_position_scale < h) star_position_scale = h;
+  h = fabs(mu1)*f;
+  if (star_position_scale < h) star_position_scale = h;
+}
 
-
-
+template<class Star>
+void SpecialZoneArray<Star>::scaleAxis(void) {
+  star_position_scale /= Star::max_pos_val;
+  for (ZoneData *z=zones+(nr_of_zones-1);z>=zones;z--) {
+    z->axis0 *= star_position_scale;
+    z->axis1 *= star_position_scale;
+  }
+}
 
 
 
@@ -353,9 +510,7 @@ protected:
   string getEnglishName(void) const {
     return "";
   }
-  wstring getNameI18n(void) const {
-    return L"";
-  }
+  wstring getNameI18n(void) const = 0;
   wstring getInfoString(const Navigator *nav) const;
   wstring getShortInfoString(const Navigator *nav) const
     {return getInfoString(nav);}
@@ -397,6 +552,8 @@ wstring StarWrapperBase::getInfoString(const Navigator *nav) const {
 }
 
 
+static const double d2000 = 2451545.0;
+static double current_JDay = d2000;
 
 template <class Star>
 class StarWrapper : public StarWrapperBase {
@@ -404,9 +561,16 @@ protected:
   StarWrapper(const SpecialZoneArray<Star> *a,
               const SpecialZoneData<Star> *z,
               const Star *s) : a(a),z(z),s(s) {}
-  Vec3d getObsJ2000Pos(const Navigator*) const {return z->getJ2000Pos(s);}
+  Vec3d getObsJ2000Pos(const Navigator *nav) const {
+    if (nav) current_JDay = nav->get_JDay();
+    return s->getJ2000Pos(z,
+                  (M_PI/180)*(0.0001/3600)
+                   * ((current_JDay-d2000)/365.25)
+                   / a->star_position_scale
+                 );
+  }
   Vec3d get_earth_equ_pos(const Navigator *nav) const
-    {return nav->j2000_to_earth_equ(getObsJ2000Pos(0));}
+    {return nav->j2000_to_earth_equ(getObsJ2000Pos(nav));}
   Vec3f get_RGB(void) const {return color_table[s->b_v];}
   float get_mag(const Navigator *nav) const
     {return 0.001f*a->mag_min + s->mag*(0.001f*a->mag_range)/a->mag_steps;}
@@ -415,7 +579,7 @@ protected:
     return "";
   }
   wstring getNameI18n(void) const {
-    return L"";
+    return s->getNameI18n();
   }
 protected:
   const SpecialZoneArray<Star> *const a;
@@ -430,7 +594,6 @@ public:
                const Star1 *s) : StarWrapper<Star1>(a,z,s) {}
   wstring getInfoString(const Navigator *nav) const;
   string getEnglishName(void) const;
-  wstring getNameI18n(void) const;
 };
 
 string StarWrapper1::getEnglishName(void) const {
@@ -441,20 +604,6 @@ string StarWrapper1::getEnglishName(void) const {
   }
   return StarWrapperBase::getEnglishName();
 }
-
-wstring StarWrapper1::getNameI18n(void) const {
-  if (s->hip) {
-    const wstring commonNameI18 = HipStarMgr::getCommonName(s->hip);
-    if (!commonNameI18.empty()) return commonNameI18;
-    if (HipStarMgr::getFlagSciNames()) {
-      const wstring sciName = HipStarMgr::getSciName(s->hip);
-      if (!sciName.empty()) return sciName;
-    }
-    return L"HP " + StelUtils::intToWstring(s->hip);
-  }
-  return StarWrapperBase::getNameI18n();
-}
-
 
 wstring StarWrapper1::getInfoString(const Navigator *nav) const {
   const Vec3d j2000_pos = getObsJ2000Pos(nav);
@@ -477,7 +626,7 @@ wstring StarWrapper1::getInfoString(const Navigator *nav) const {
     oss << L"HP " << s->hip;
     if (s->component_ids) {
       oss << L" "
-          << HipStarMgr::convertToComponentIds(s->component_ids).c_str();
+          << convertToComponentIds(s->component_ids).c_str();
     }
     oss << endl;
   }
@@ -489,6 +638,9 @@ wstring StarWrapper1::getInfoString(const Navigator *nav) const {
   oss << _("J2000") << L" " << _("RA/DE: ")
       << StelUtils::printAngleHMS(ra_j2000)
       << L"/" << StelUtils::printAngleDMS(dec_j2000) << endl;
+///  oss << "Motion J2000: " << s->dx0 << '/' << s->dx1 << endl;
+
+
   oss << _("Equ of date") << L" " << _("RA/DE: ")
       << StelUtils::printAngleHMS(ra_equ)
       << L"/" << StelUtils::printAngleDMS(dec_equ) << endl;
@@ -513,7 +665,7 @@ wstring StarWrapper1::getInfoString(const Navigator *nav) const {
 
   if (s->sp_int) {
     oss << _("Spectral Type: ")
-        << HipStarMgr::convertToSpectralType(s->sp_int).c_str() << endl;
+        << convertToSpectralType(s->sp_int).c_str() << endl;
   }
   oss.precision(2);
 
@@ -555,22 +707,11 @@ StelObject Star3::createStelObject(const SpecialZoneArray<Star3> *a,
   return new StarWrapper3(a,z,this);
 }
 
-void ZoneData::init(int c0,int c1,int c2,int nr_of_stars,
-                    double star_position_scale) {
-  center[0] = (double)c0 / (double)0x7FFFFFFF;
-  center[1] = (double)c1 / (double)0x7FFFFFFF;
-  center[2] = (double)c2 / (double)0x7FFFFFFF;
-  size = nr_of_stars;
-  axis0 = Vec3d(0.0,0.0,1.0) ^ center;
-  axis0.normalize();
-  axis1 = center ^ axis0;
-  axis0 *= star_position_scale;
-  axis1 *= star_position_scale;
-}
 
 void ZoneArray1::updateHipIndex(HipIndexStruct hip_index[]) const {
-  for (const SpecialZoneData<Star1> *z=zones+nr_of_zones-1;z>=zones;z--) {
-    for (const Star1 *s = z->stars+z->size-1;s>=z->stars;s--) {
+  for (const SpecialZoneData<Star1> *z=getZones()+nr_of_zones-1;
+       z>=getZones();z--) {
+    for (const Star1 *s = z->getStars()+z->size-1;s>=z->getStars();s--) {
       const int hip = s->hip;
       assert(0 <= hip && hip <= NR_OF_HIP);
       if (hip != 0) {
@@ -598,10 +739,9 @@ ZoneArray *ZoneArray::create(const HipStarMgr &hip_star_mgr,
   if (f == 0) {
     fprintf(stderr,"ZoneArray::create(%s): fopen failed\n",fname);
   } else {
-    int type,level,scale_int,mag_min,mag_range,mag_steps;
+    int type,level,mag_min,mag_range,mag_steps;
     if (ReadInt(f,type) < 0 ||
         ReadInt(f,level) < 0 ||
-        ReadInt(f,scale_int) < 0 ||
         ReadInt(f,mag_min) < 0 ||
         ReadInt(f,mag_range) < 0 ||
         ReadInt(f,mag_steps) < 0) {
@@ -615,14 +755,14 @@ ZoneArray *ZoneArray::create(const HipStarMgr &hip_star_mgr,
       switch (type) {
         case 0:
           rval = new ZoneArray1(f,hip_star_mgr,level,
-                                scale_int,mag_min,mag_range,mag_steps);
+                                mag_min,mag_range,mag_steps);
           if (rval == 0) {
             fprintf(stderr,"ZoneArray::create(%s): no memory\n",
                     fname);
           }
           break;
         case 1:
-          rval = new SpecialZoneArray<Star2>(f,hip_star_mgr,level,scale_int,
+          rval = new SpecialZoneArray<Star2>(f,hip_star_mgr,level,
                                              mag_min,mag_range,mag_steps);
           if (rval == 0) {
             fprintf(stderr,"ZoneArray::create(%s): no memory\n",
@@ -630,7 +770,7 @@ ZoneArray *ZoneArray::create(const HipStarMgr &hip_star_mgr,
           }
           break;
         case 2:
-          rval = new SpecialZoneArray<Star3>(f,hip_star_mgr,level,scale_int,
+          rval = new SpecialZoneArray<Star3>(f,hip_star_mgr,level,
                                              mag_min,mag_range,mag_steps);
           if (rval == 0) {
             fprintf(stderr,"ZoneArray::create(%s): no memory\n",
@@ -660,73 +800,69 @@ ZoneArray *ZoneArray::create(const HipStarMgr &hip_star_mgr,
 
 
 
-ZoneArray::ZoneArray(const HipStarMgr &hip_star_mgr,int level,int scale_int,
+ZoneArray::ZoneArray(const HipStarMgr &hip_star_mgr,int level,
                      int mag_min,int mag_range,int mag_steps)
-          :level(level),scale_int(scale_int),
+          :level(level),
            mag_min(mag_min),mag_range(mag_range),mag_steps(mag_steps),
-           hip_star_mgr(hip_star_mgr) {
+           star_position_scale(0.0), //IntToDouble(scale_int)/Star::max_pos_val
+           hip_star_mgr(hip_star_mgr),
+           zones(0) {
   nr_of_zones = GeodesicGrid::nrOfZones(level);
   nr_of_stars = 0;
 }
 
 struct TmpZoneData {
-  int center_0;
-  int center_1;
-  int center_2;
   int size;
 };
 
-static inline
-int DoubleToInt(double x) {
-  return (int)floor(0.5+x*0x7FFFFFFF);
-}
+//static inline
+//int DoubleToInt(double x) {
+//  return (int)floor(0.5+x*0x7FFFFFFF);
+//}
 
-static inline
-double IntToDouble(int x) {
-  double rval = x;
-  rval /= 0x7FFFFFFF;
-  return rval;
-}
+//static inline
+//double IntToDouble(int x) {
+//  double rval = x;
+//  rval /= 0x7FFFFFFF;
+//  return rval;
+//}
 
 
 template<class Star>
 SpecialZoneArray<Star>::SpecialZoneArray(FILE *f,
                                          const HipStarMgr &hip_star_mgr,
-                                         int level,int scale_int,
+                                         int level,
                                          int mag_min,int mag_range,
                                          int mag_steps)
-                       :ZoneArray(hip_star_mgr,level,scale_int,
+                       :ZoneArray(hip_star_mgr,level,
                                   mag_min,mag_range,mag_steps),
-                  zones(0),stars(0) {
+                        stars(0) {
   if (nr_of_zones > 0) {
     zones = new SpecialZoneData<Star>[nr_of_zones];
     assert(zones!=0);
     {
-      TmpZoneData *const tmp_zones = new TmpZoneData[nr_of_zones];
-      assert(tmp_zones!=0);
-      if (nr_of_zones != (int)fread(tmp_zones,sizeof(TmpZoneData),
+      int *zone_size = new int[nr_of_zones];
+      assert(zone_size!=0);
+      if (nr_of_zones != (int)fread(zone_size,sizeof(int),
                                     nr_of_zones,f)) {
-        delete[] zones;
+        delete[] getZones();
         zones = 0;
         nr_of_zones = 0;
       } else {
-        TmpZoneData *tmp = tmp_zones;
-        const double star_position_scale =
-          IntToDouble(scale_int)/Star::max_pos_val;
+        const int *tmp = zone_size;
         for (int z=0;z<nr_of_zones;z++,tmp++) {
-          nr_of_stars += tmp->size;
-          zones[z].init(tmp->center_0,tmp->center_1,tmp->center_2,tmp->size,
-                        star_position_scale);
+          nr_of_stars += *tmp;
+          getZones()[z].size = *tmp;
         }
       }
-        // delete tmp_zones before allocating stars
+        // delete zone_size before allocating stars
         // in order to avoid memory fragmentation:
-      delete[] tmp_zones;
+      delete[] zone_size;
     }
     
     if (nr_of_stars <= 0) {
         // no stars ?
-      if (zones) delete[] zones;
+      if (zones) delete[] getZones();
       zones = 0;
       nr_of_zones = 0;
     } else {
@@ -736,14 +872,14 @@ SpecialZoneArray<Star>::SpecialZoneArray(FILE *f,
         delete[] stars;
         stars = 0;
         nr_of_stars = 0;
-        delete[] zones;
+        delete[] getZones();
         zones = 0;
         nr_of_zones = 0;
       } else {
         Star *s = stars;
         for (int z=0;z<nr_of_zones;z++) {
-          zones[z].stars = s;
-          s += zones[z].size;
+          getZones()[z].stars = s;
+          s += getZones()[z].size;
         }
       }
     }
@@ -766,7 +902,6 @@ SpecialZoneArray<Star>::SpecialZoneArray(FILE *f,
 
 
 
-// construct and load all data
 HipStarMgr::HipStarMgr(void) :
     limitingMag(6.5f),
     starTexture(),
@@ -800,8 +935,6 @@ map<wstring,int> HipStarMgr::common_names_index_i18n;
 
 map<int,wstring> HipStarMgr::sci_names_map_i18n;
 map<wstring,int> HipStarMgr::sci_names_index_i18n;
-vector<string> HipStarMgr::spectral_array;
-vector<string> HipStarMgr::component_array;
 
 wstring HipStarMgr::getCommonName(int hip) {
   map<int,wstring>::const_iterator it(common_names_map_i18n.find(hip));
@@ -826,6 +959,15 @@ void HipStarMgr::init(float font_size, const string& font_name,
       assert(0);
   }
 }
+
+void HipStarMgr::setGrid(void) {
+  geodesic_grid->visitTriangles(max_geodesic_grid_level,initTriangleFunc,this);
+  for (ZoneArrayMap::const_iterator it(zone_arrays.begin());
+       it!=zone_arrays.end();it++) {
+    it->second->scaleAxis();
+  }
+}
+
 
 // Load from file
 void HipStarMgr::load_data(LoadingBar& lb) {
@@ -852,6 +994,7 @@ void HipStarMgr::load_data(LoadingBar& lb) {
       }
     }
   }
+  
   for (int i=0;i<=NR_OF_HIP;i++) {
     hip_index[i].a = 0;
     hip_index[i].z = 0;
@@ -861,29 +1004,14 @@ void HipStarMgr::load_data(LoadingBar& lb) {
        it!=zone_arrays.end();it++) {
     it->second->updateHipIndex(hip_index);
   }
-  
-  FILE *f = fopen(StelApp::getInstance().getDataFilePath(spectral_file).c_str(),"r");
-  if (f) {
-    char line[256];
-    while (fgets(line, sizeof(line), f)) {
-      string s = line;
-      // remove newline
-      s.erase(s.length()-1,1);
-      spectral_array.push_back(s);
-    }
-    fclose(f);
-  }
-  f = fopen(StelApp::getInstance().getDataFilePath(component_file).c_str(),"r");
-  if (f) {
-    char line[256];
-    while (fgets(line, sizeof(line), f)) {
-      string s = line;
-      // remove newline
-      s.erase(s.length()-1,1);
-      component_array.push_back(s);
-    }
-    fclose(f);
-  }
+
+  spectral_array.initFromFile(
+                   StelApp::getInstance().getDataFilePath(
+                                            spectral_file).c_str());
+  component_array.initFromFile(
+                    StelApp::getInstance().getDataFilePath(
+                                             component_file).c_str());
+
   last_max_search_level = max_geodesic_grid_level;
   printf("finished, max_geodesic_level: %d\n",max_geodesic_grid_level);
 }
@@ -991,6 +1119,7 @@ void HipStarMgr::load_sci_names(const string& sciNameFile) {
 
 
 int HipStarMgr::drawStar(const Vec3d &XY,float rmag,const Vec3f &color) const {
+//cout << "HipStarMgr::drawStar: " << XY[0] << '/' << XY[1] << ", " << rmag << endl;
   float cmag = 1.f;
 
   // if size of star is too small (blink) we put its size to 1.2 --> no more blink
@@ -1034,24 +1163,41 @@ int HipStarMgr::drawStar(const Vec3d &XY,float rmag,const Vec3f &color) const {
 }
 
 
-
 template<class Star>
 void SpecialZoneArray<Star>::draw(int index,bool is_inside,
                                   const float *rmag_table,
-                                  const Projector *prj) const {
-  SpecialZoneData<Star> &zone(zones[index]);
+                                  const Projector *prj,
+                                  unsigned int max_mag_star_name,
+                                  float names_brightness,
+                                  s_font *starFont,
+                                  unsigned int star_texture_id) const {
+  SpecialZoneData<Star> *const z = getZones() + index;
   Vec3d xy;
-  const Star *const end = zone.stars + zone.size;
-  for (const Star *s=zone.stars;s<end;s++) {
-    if (is_inside) {
-      if (prj->project_j2000(zone.getJ2000Pos(s),xy)) {
-        if (0 > hip_star_mgr.drawStar(xy,rmag_table[s->mag],
-                                      color_table[s->b_v])) break;
-      }
-    } else {
-      if (prj->project_j2000_check(zone.getJ2000Pos(s),xy)) {
-        if (0 > hip_star_mgr.drawStar(xy,rmag_table[s->mag],
-                         color_table[s->b_v])) break;
+  const Star *const end = z->getStars() + z->size;
+  const double movement_factor = (M_PI/180)*(0.0001/3600)
+                           * ((current_JDay-d2000)/365.25)
+                           / star_position_scale;
+  for (const Star *s=z->getStars();s<end;s++) {
+    if (is_inside
+        ? prj->project_j2000(s->getJ2000Pos(z,movement_factor),xy)
+	    : prj->project_j2000_check(s->getJ2000Pos(z,movement_factor),xy)) {
+      if (0 > hip_star_mgr.drawStar(xy,rmag_table[s->mag],
+                                    color_table[s->b_v])) break;
+      if (s->mag < max_mag_star_name) {
+        const wstring starname = s->getNameI18n();
+        if (!starname.empty()) {
+          glColor4f(color_table[s->b_v][0]*0.75,
+                    color_table[s->b_v][1]*0.75,
+                    color_table[s->b_v][2]*0.75,
+                    names_brightness);
+          if (prj->getFlagGravityLabels()) {
+            prj->print_gravity180(starFont,xy[0],xy[1],
+                                  starname, 1, 6, -4);
+          } else {
+            starFont->print(xy[0]+6,xy[1]-4, starname);
+          }
+          glBindTexture(GL_TEXTURE_2D,star_texture_id);
+        }
       }
     }
   }
@@ -1065,6 +1211,7 @@ int HipStarMgr::getMaxSearchLevel(const ToneReproductor *eye,
   int rval = -1;
   float fov_q = prj->get_fov();
   if (fov_q > 60) fov_q = 60;
+  else if (fov_q < 0.1) fov_q = 0.1;
   fov_q = 1.f/(fov_q*fov_q);
   for (ZoneArrayMap::const_iterator it(zone_arrays.begin());
        it!=zone_arrays.end();it++) {
@@ -1084,21 +1231,26 @@ int HipStarMgr::getMaxSearchLevel(const ToneReproductor *eye,
 
 
 // Draw all the stars
-void HipStarMgr::draw(const ToneReproductor *eye,const Projector *prj) {
+void HipStarMgr::draw(const ToneReproductor *eye,
+                      const Projector *prj,
+                      const Navigator *nav) {
+    current_JDay = nav->get_JDay();
+
     // If stars are turned off don't waste time below
     // projecting all stars just to draw disembodied labels
     if(!starsFader.getInterstate()) return;
 
     float fov_q = prj->get_fov();
     if (fov_q > 60) fov_q = 60;
+    else if (fov_q < 0.1) fov_q = 0.1;
     fov_q = 1.f/(fov_q*fov_q);
 
     // Set temporary static variable for optimization
     if (flagStarTwinkle) twinkle_amount = twinkleAmount;
     else twinkle_amount = 0;
     star_scale = starScale * starsFader.getInterstate();
-    names_brightness = names_fader.getInterstate() 
-        * starsFader.getInterstate();
+    const float names_brightness = names_fader.getInterstate() 
+                                 * starsFader.getInterstate();
     
     glEnable(GL_TEXTURE_2D);
     glEnable(GL_BLEND);
@@ -1146,17 +1298,26 @@ void HipStarMgr::draw(const ToneReproductor *eye,const Projector *prj) {
       }
       last_max_search_level = it->first;
 
+      unsigned int max_mag_star_name = 0;
+      if (names_fader.getInterstate()) {
+        int x = (int)((maxMagStarName-mag_min)/k);
+        if (x > 0) max_mag_star_name = x;
+      }
       int zone;
 //if ((count&63)==0) cout << "inside(" << it->first << "):";
       for (GeodesicSearchInsideIterator it1(*geodesic_search_result,it->first);
            (zone = it1.next()) >= 0;) {
-        it->second->draw(zone,true,rmag_table,prj);
+        it->second->draw(zone,true,rmag_table,prj,
+                         max_mag_star_name,names_brightness,
+                         starFont,starTexture->getID());
 //if ((count&63)==0) cout << " " << zone;
       }
 //if ((count&63)==0) cout << endl << "border(" << it->first << "):";
       for (GeodesicSearchBorderIterator it1(*geodesic_search_result,it->first);
            (zone = it1.next()) >= 0;) {
-        it->second->draw(zone,false,rmag_table,prj);
+        it->second->draw(zone,false,rmag_table,prj,
+                         max_mag_star_name,names_brightness,
+                         starFont,starTexture->getID());
 //if ((count&63)==0) cout << " " << zone;
       }
 //if ((count&63)==0) cout << endl;
@@ -1173,6 +1334,7 @@ void HipStarMgr::draw(const ToneReproductor *eye,const Projector *prj) {
 
 // Look for a star by XYZ coords
 StelObject HipStarMgr::search(Vec3d pos) const {
+assert(0);
   pos.normalize();
   vector<StelObject> v = search_around(pos,
                                        0.8 // just an arbitrary number
@@ -1264,10 +1426,13 @@ template<class Star>
 void SpecialZoneArray<Star>::searchAround(int index,const Vec3d &v,
                                           double cos_lim_fov,
                                           vector<StelObject> &result) {
-  const SpecialZoneData<Star> *const zone = zones+index;
-  for (int i=0;i<zone->size;i++) {
-    if (zone->getJ2000Pos(zone->stars+i)*v >= cos_lim_fov) {
-      result.push_back(zone->stars[i].createStelObject(this,zone));
+  const double movement_factor = (M_PI/180)*(0.0001/3600)
+                           * ((current_JDay-d2000)/365.25)
+                           / star_position_scale;
+  const SpecialZoneData<Star> *const z = getZones()+index;
+  for (int i=0;i<z->size;i++) {
+    if (z->getStars()[i].getJ2000Pos(z,movement_factor)*v >= cos_lim_fov) {
+      result.push_back(z->getStars()[i].createStelObject(this,z));
     }
   }
 }

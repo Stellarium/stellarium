@@ -77,6 +77,9 @@ Planet::Planet(Planet *parent,
 	first_point = 1;
 
 	nameI18 = StelUtils::stringToWstring(englishName);
+	if (englishName!="Moon" && englishName!="Pluto") {
+	  deltaJD = 0.001*JD_SECOND;
+	}
 }
 
 Planet::~Planet()
@@ -663,6 +666,7 @@ void Planet::draw_halo(const Navigator* nav, const Projector* prj, const ToneRep
 
     float fov_q = prj->get_fov();
     if (fov_q > 60) fov_q = 60;
+    else if (fov_q < 0.1) fov_q = 0.1;
     fov_q = 1.f/(fov_q*fov_q);
     rmag =
       sqrtf(eye->adapt_luminance(
@@ -686,12 +690,12 @@ void Planet::draw_halo(const Navigator* nav, const Projector* prj, const ToneRep
 	else
 	{
 //  try this one if you want to see a bright moon:
-if (rmag>4.f) {
-  rmag=4.f+2.f*sqrtf(1.f+rmag-4.f)-2.f;
+//if (rmag>4.f) {
+//  rmag=4.f+2.f*sqrtf(1.f+rmag-4.f)-2.f;
   if (rmag>8.f) {
     rmag=8.f+2.f*sqrtf(1.f+rmag-8.f)-2.f;
   }
-}
+//}
 
 //		if (rmag>5.f)
 //		{
@@ -709,7 +713,8 @@ if (rmag>4.f) {
 
 	glBlendFunc(GL_ONE, GL_ONE);
 	float screen_r = get_on_screen_size(prj, nav);
-	cmag *= 0.5*rmag/screen_r;
+if (screen_r<1.f) screen_r=1.f;
+	cmag *= 0.5*rmag/(screen_r*screen_r*screen_r);
 	if (cmag>1.f) cmag = 1.f;
 
 	if (rmag<screen_r)
