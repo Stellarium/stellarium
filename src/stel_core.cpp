@@ -156,15 +156,21 @@ void StelCore::init(const InitParser& conf)
 	navigation->set_JDay(get_julian_from_sys());
 	navigation->set_local_vision(Vec3f(1,1e-05,0.2));
 
-	// Load hipparcos stars & names
-	hip_stars->init(FontSizeGeneral, baseFontFile,lb);
-	int grid_level = hip_stars->getMaxGridLevel();
+	if(firstTime) {
+		// Load hipparcos stars & names
+		hip_stars->init(FontSizeGeneral, baseFontFile,lb);
+		int grid_level = hip_stars->getMaxGridLevel();
 
-	// Init nebulas
-	nebulas->init(lb, baseFontFile, FontSizeGeneral);
+		// Init nebulas
+		nebulas->init(lb, baseFontFile, FontSizeGeneral);
 
-	geodesic_grid = new GeodesicGrid(grid_level);
-	geodesic_search_result = new GeodesicSearchResult(*geodesic_grid);
+		geodesic_grid = new GeodesicGrid(grid_level);
+		geodesic_search_result = new GeodesicSearchResult(*geodesic_grid);
+		hip_stars->setGrid();
+		// Init milky way
+		milky_way->set_texture("milkyway.png");
+		telescope_mgr->init(conf);
+	}
 
 	// Init fonts : should be moved into the constructor
 	equ_grid->set_font(FontSizeGeneral, baseFontFile);
@@ -174,12 +180,9 @@ void StelCore::init(const InitParser& conf)
 	meridian_line->set_font(FontSizeGeneral, baseFontFile);
 	cardinals_points->set_font(FontSizeCardinalPoints, baseFontFile);
 
-	// Init milky way
-	if(firstTime) milky_way->set_texture("milkyway.png");
 
 	setLandscape(observatory->get_landscape_name());
 
-	if(firstTime) telescope_mgr->init(conf);
 
 	// Load the pointer textures
 	StelObject::init_textures();
@@ -440,7 +443,7 @@ double StelCore::draw(int delta_time)
 	nebulas->draw(projection, navigation, tone_converter);
 
 	// Draw the hipparcos stars
-	hip_stars->draw(tone_converter, projection);
+	hip_stars->draw(tone_converter, projection, navigation);
 
 
 

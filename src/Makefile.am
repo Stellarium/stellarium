@@ -27,7 +27,7 @@ stelutils/libstelutils.a \
 planetsephems/libplanetsephems.a \
 @LIBINTL@
 
-INCLUDES = -I$(top_srcdir)/src/planetsephems -I$(top_srcdir)/src/stelutils -I$(top_srcdir)/intl
+INCLUDES = -I/usr/local/include/boost-1_33_1 -I$(top_srcdir)/src/planetsephems -I$(top_srcdir)/src/stelutils -I$(top_srcdir)/intl
 
 SUBDIRS = planetsephems stelutils
 noinst_HEADERS = stelobjectmgr.h stelfontmgr.h
