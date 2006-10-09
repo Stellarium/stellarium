@@ -16,7 +16,6 @@
       <part>kdevdistpart</part>
       <part>kdevquickopen</part>
       <part>kdevscripting</part>
-      <part>kdevsecurity</part>
       <part>kdevtools</part>
     </ignoreparts>
     <projectdirectory>.</projectdirectory>
@@ -32,7 +31,7 @@
     <run>
       <mainprogram></mainprogram>
       <directoryradio>custom</directoryradio>
-      <customdirectory>/home/fabien/prog/stellarium/</customdirectory>
+      <customdirectory>/home/fchereau/prog/stellarium/trunk/stellarium/</customdirectory>
       <programargs></programargs>
       <terminal>false</terminal>
       <autocompile>true</autocompile>
@@ -82,7 +81,7 @@
       <abortonerror>true</abortonerror>
       <numberofjobs>1</numberofjobs>
       <dontact>false</dontact>
-      <makebin></makebin>
+      <makebin/>
       <prio>0</prio>
       <runmultiplejobs>false</runmultiplejobs>
     </make>
@@ -194,7 +193,7 @@
     <qt>
       <used>false</used>
       <version>3</version>
-      <root></root>
+      <root/>
     </qt>
   </kdevcppsupport>
   <kdevdocumentation>
@@ -216,7 +215,7 @@
     </tree>
   </kdevfileview>
   <ctagspart>
-    <customArguments></customArguments>
+    <customArguments/>
     <customTagfilePath>/home/fabien/prog/stellarium/tags</customTagfilePath>
   </ctagspart>
   <dist>
