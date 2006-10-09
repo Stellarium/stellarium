@@ -36,6 +36,7 @@
 #include "tone_reproductor.h"
 #include "translator.h"
 #include "geodesic_grid.h"
+#include "stelapp.h"
 
 #define RADIUS_STAR 1.
 
@@ -44,22 +45,22 @@
 
 static
 const char *cat_file_names[] = {
-  "/usr/local/share/stellarium/data/stars0.cat",
-  "/usr/local/share/stellarium/data/stars1.cat",
-  "/usr/local/share/stellarium/data/stars2.cat",
-  "/usr/local/share/stellarium/data/stars3.cat",
-  "/usr/local/share/stellarium/data/stars4.cat",
-  "/usr/local/share/stellarium/data/stars5.cat",
-  "/usr/local/share/stellarium/data/stars6.cat",
-  "/usr/local/share/stellarium/data/stars7.cat",
+  "stars0.cat",
+  "stars1.cat",
+  "stars2.cat",
+  "stars3.cat",
+  "stars4.cat",
+  "stars5.cat",
+  "stars6.cat",
+  "stars7.cat",
   0
 };
 
 static const char *spectral_file
- = "/usr/local/share/stellarium/data/stars_hip_sp.cat";
+ = "stars_hip_sp.cat";
 
 static const char *component_file
- = "/usr/local/share/stellarium/data/stars_hip_component_ids.cat";
+ = "stars_hip_component_ids.cat";
 
 
 
@@ -836,7 +837,7 @@ void HipStarMgr::load_data(LoadingBar& lb) {
   for (int i=0;cat_file_names[i];i++) {
     lb.SetMessage(_("Loading catalog ") + StelUtils::intToWstring(i));
     lb.Draw(i/8.0);
-    ZoneArray *const z = ZoneArray::create(*this,cat_file_names[i]);
+    ZoneArray *const z = ZoneArray::create(*this,StelApp::getInstance().getDataFilePath(cat_file_names[i]).c_str());
     if (z) {
       if (max_geodesic_grid_level < z->level) {
         max_geodesic_grid_level = z->level;
@@ -861,7 +862,7 @@ void HipStarMgr::load_data(LoadingBar& lb) {
     it->second->updateHipIndex(hip_index);
   }
   
-  FILE *f = fopen(spectral_file,"r");
+  FILE *f = fopen(StelApp::getInstance().getDataFilePath(spectral_file).c_str(),"r");
   if (f) {
     char line[256];
     while (fgets(line, sizeof(line), f)) {
@@ -872,7 +873,7 @@ void HipStarMgr::load_data(LoadingBar& lb) {
     }
     fclose(f);
   }
-  f = fopen(component_file,"r");
+  f = fopen(StelApp::getInstance().getDataFilePath(component_file).c_str(),"r");
   if (f) {
     char line[256];
     while (fgets(line, sizeof(line), f)) {

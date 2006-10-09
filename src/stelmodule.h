@@ -88,7 +88,8 @@ public:
 	{
 		try
 		{
-			getAccessor(key).set<ValueType>(value);
+			const propertyAccessor& a = getAccessor(key);
+			a.set<ValueType>(value);
 		}
 		catch (boost::bad_any_cast)
 		{
@@ -101,7 +102,8 @@ public:
 	template<typename ValueType>
 	ValueType getProperty(const string& key)
 	{
-		return getAccessor(key).get<ValueType>();
+		const propertyAccessor& a = getAccessor(key);
+		return a.get<ValueType>();
 	}
 	
 	//! Get a list containing 3 strings per element : propertyKey, value, comment
