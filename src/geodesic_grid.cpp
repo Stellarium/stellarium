@@ -144,6 +144,42 @@ void GeodesicGrid::initTriangle(int lev,int index,
 }
 
 
+void GeodesicGrid::visitTriangles(int max_visit_level,
+                                  VisitFunc *func,
+                                  void *context) const {
+  if (func && max_visit_level >= 0) {
+    if (max_visit_level > max_level) max_visit_level = max_level;
+    for (int i=0;i<20;i++) {
+      const int *const corners = icosahedron_triangles[i].corners;
+      visitTriangles(0,i,
+                     icosahedron_corners[corners[0]],
+                     icosahedron_corners[corners[1]],
+                     icosahedron_corners[corners[2]],
+                     max_visit_level,func,context);
+    }
+  }
+}
+
+void GeodesicGrid::visitTriangles(int lev,int index,
+                                  const Vec3d &c0,
+                                  const Vec3d &c1,
+                                  const Vec3d &c2,
+                                  int max_visit_level,
+                                  VisitFunc *func,
+                                  void *context) const {
+  (*func)(lev,index,c0,c1,c2,context);
+  Triangle &t(triangles[lev][index]);
+  lev++;
+  if (lev <= max_visit_level) {
+    index *= 4;
+    visitTriangles(lev,index+0,c0,t.e2,t.e1,max_visit_level,func,context);
+    visitTriangles(lev,index+1,c1,t.e0,t.e2,max_visit_level,func,context);
+    visitTriangles(lev,index+2,c2,t.e1,t.e0,max_visit_level,func,context);
+    visitTriangles(lev,index+3,t.e0,t.e1,t.e2,max_visit_level,func,context);
+  }
+}
+
+
 int GeodesicGrid::searchZone(const Vec3d &v,int search_level) const {
   for (int i=0;i<20;i++) {
     const int *const corners = icosahedron_triangles[i].corners;

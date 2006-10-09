@@ -88,8 +88,8 @@ public:
 	{
 		try
 		{
-			const propertyAccessor& a = getAccessor(key);
-			a.set<ValueType>(value);
+			propertyAccessor& a = getAccessor(key);
+			a.set(value);
 		}
 		catch (boost::bad_any_cast)
 		{
@@ -103,7 +103,8 @@ public:
 	ValueType getProperty(const string& key)
 	{
 		const propertyAccessor& a = getAccessor(key);
-		return a.get<ValueType>();
+        ValueType rval = a.get();
+		return rval;
 	}
 	
 	//! Get a list containing 3 strings per element : propertyKey, value, comment
@@ -133,7 +134,7 @@ protected:
 	void registerProperty(const string& key, boost::callback<ValueType> getter, boost::callback<void, ValueType> setter, const string& comment = "")
 	{
 		propertyAccessor myAccessor;
-		myAccessor.init<ValueType>(getter, setter);
+		myAccessor.init(getter, setter);
 		myAccessor.comment = comment;
 		properties.insert(std::pair<string, propertyAccessor>(key, myAccessor));
 	}

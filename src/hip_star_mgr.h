@@ -31,6 +31,8 @@ using namespace std ;
 
 class StelObject;
 class ToneReproductor;
+class Projector;
+class Navigator;
 
 class ZoneArray;
 class HipIndexStruct;
@@ -42,11 +44,14 @@ public:
 
     void init(float font_size,const string& font_name,LoadingBar& lb);
     int getMaxGridLevel(void) const {return max_geodesic_grid_level;}
+    void setGrid(void);
 
     void update(int delta_time) {names_fader.update(delta_time); starsFader.update(delta_time);}
     int getMaxSearchLevel(const ToneReproductor *eye,
                           const Projector *prj) const;
-    void draw(const ToneReproductor *eye,const Projector *prj); // Draw all the stars
+    void draw(const ToneReproductor *eye,
+              const Projector *prj,
+              const Navigator *nav); // Draw all the stars
    
     void set_names_fade_duration(float duration) {names_fader.set_duration((int) (duration * 1000.f));}
     int load_common_names(const string& commonNameFile);
@@ -140,10 +145,6 @@ public:
     int drawStar(const Vec3d &XY,float rmag,const Vec3f &color) const;
     static wstring getCommonName(int hip);
     static wstring getSciName(int hip);
-    static string convertToSpectralType(int index)
-      {return spectral_array[index];}
-    static string convertToComponentIds(int index)
-      {return component_array[index];}
 private:
     //! Draw the stars rendered as GLpoint. This may be faster but it is not so nice
     void drawPoint(Vec3f equ_vision, ToneReproductor* _eye, Projector* prj);    // Draw all the stars as points
@@ -172,6 +173,18 @@ private:
     int last_max_search_level;
     typedef map<int,ZoneArray*> ZoneArrayMap;
     ZoneArrayMap zone_arrays; // index is the grid level
+    static void initTriangleFunc(int lev,int index,
+                                 const Vec3d &c0,
+                                 const Vec3d &c1,
+                                 const Vec3d &c2,
+                                 void *context) {
+      reinterpret_cast<HipStarMgr*>(context)
+        ->initTriangle(lev,index,c0,c1,c2);
+    }
+    void initTriangle(int lev,int index,
+                      const Vec3d &c0,
+                      const Vec3d &c1,
+                      const Vec3d &c2);
     HipIndexStruct *hip_index; // array of hiparcos stars
 
     static map<int,string> common_names_map;
@@ -182,15 +195,11 @@ private:
     static map<int,wstring> sci_names_map_i18n;
     static map<wstring,int> sci_names_index_i18n;
     
-    static vector<string> spectral_array;
-    static vector<string> component_array;
-    
     s_font *starFont;
     static bool flagSciNames;
     Vec3f label_color,circle_color;
     float twinkle_amount;
     float star_scale;
-    float names_brightness;
 };
 
 
