@@ -25,6 +25,8 @@
 #include <string>
 #include <iostream>
 #include <cerrno>
+#include <map>
+#include <vector>
 
 // These macro are used as global function replacing standard gettext operation
 #include "gettext.h"
@@ -101,12 +103,25 @@ public:
 	//! Convert from UTF-8 to wchar_t
 	static std::wstring UTF8stringToWstring(const string& s);
 
+	//! Get available language name in native language from passed locales directory
+	static std::wstring getAvailableLanguagesNamesNative(const string& localeDir);	
+	
 	//! Get available language codes from passed locales directory
-	static std::string getAvailableLanguagesCodes(const string& localeDir);
+	static std::vector<string> getAvailableLanguagesIso639_1Codes(const string& localeDir);
 
+	//! Convert from ISO639-1 2 letters langage code to native language name
+	static std::wstring iso639_1LanguageCodeToNativeName(const string& languageCode);
+	
+	//! Convert from native language name to ISO639-1 2 letters langage code 
+	static std::string nativeLanguageNameCodeToIso639_1(const wstring& languageName);
+	
 	//! Try to determine system language from system configuration
 	static void initSystemLanguage(void);
 
+	//! Initialize the languages code list from the passed file
+	//! @param fileName file containing the list of language codes
+	static void initIso639_1LanguageCodes(const string& fileName);
+	
 private:
 	//! Reload the current locale info so that gettext use them
 	void reload();
@@ -125,6 +140,9 @@ private:
 
 	//! Store the system default language name as taken from LANGUAGE environement variable
 	static string systemLangName;
+	
+	//! Contains the list of all iso639 languages codes
+	static map<string, wstring> iso639codes;
 };
 
 #endif

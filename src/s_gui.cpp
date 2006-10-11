@@ -23,7 +23,9 @@
 #include "SDL_timer.h"
 #include "s_gui.h"
 #include "stel_utility.h"
-
+#if !defined(powf)
+#include "fmath.h"
+#endif
 using namespace std;
 using namespace s_gui;
 

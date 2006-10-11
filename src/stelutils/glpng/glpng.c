@@ -688,7 +688,6 @@ unsigned int APIENTRY pngBind(const char *filename, int mipmap, int trans, pngIn
 
 unsigned int APIENTRY pngBindF(FILE *file, int mipmap, int trans, pngInfo *info, int wrapst, int minfilter, int magfilter) {
 	unsigned int id = SetParams(wrapst, magfilter, minfilter);
-	//printf("coucou %d\n", file);
 	if (id != 0 && pngLoadF(file, mipmap, trans, info))
 		return id;
 	return 0;

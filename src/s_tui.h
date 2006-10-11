@@ -367,7 +367,7 @@ namespace s_tui
 		    ++current;
 		  }
 		}
-		const T& getCurrent(void) const {if(current==items.end()) return emptyT; else return *current;}
+		const T& getCurrent(void) const {if((typename multiset<T>::const_iterator)current==items.end()) return emptyT; else return *current;}
 		void setCurrent(const T& i) {
 		  current = items.find(i);
 

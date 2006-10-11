@@ -19,6 +19,8 @@
 // Main class for stellarium
 // Manage all the objects to be used in the program
 
+#include <algorithm>
+
 #include "stel_core.h"
 #include "stelapp.h"
 #include "stel_utility.h"
@@ -27,36 +29,42 @@
 #include "hip_star_mgr.h"
 #include "telescope_mgr.h"
 
-void StelCore::setFlagTelescopes(bool b) {
-  telescope_mgr->setFlagTelescopes(b);
+void StelCore::setFlagTelescopes(bool b)
+{
+	telescope_mgr->setFlagTelescopes(b);
 }
 
-bool StelCore::getFlagTelescopes(void) const {
-  return telescope_mgr->getFlagTelescopes();
+bool StelCore::getFlagTelescopes(void) const
+{
+	return telescope_mgr->getFlagTelescopes();
 }
 
-void StelCore::setFlagTelescopeName(bool b) {
-  telescope_mgr->setFlagTelescopeName(b);
+void StelCore::setFlagTelescopeName(bool b)
+{
+	telescope_mgr->setFlagTelescopeName(b);
 }
 
-bool StelCore::getFlagTelescopeName(void) const {
-  return telescope_mgr->getFlagTelescopeName();
+bool StelCore::getFlagTelescopeName(void) const
+{
+	return telescope_mgr->getFlagTelescopeName();
 }
 
-void StelCore::telescopeGoto(int nr) {
-  if (selected_object) {
-    telescope_mgr->telescopeGoto(nr,
-                                 selected_object.getObsJ2000Pos(navigation));
-  }
+void StelCore::telescopeGoto(int nr)
+{
+	if (selected_object)
+	{
+		telescope_mgr->telescopeGoto(nr,
+		                             selected_object.getObsJ2000Pos(navigation));
+	}
 }
 
 
 StelCore::StelCore(const string& LDIR, const string& DATA_ROOT, const boost::callback<void, string>& recordCallback) :
-	skyTranslator(APP_NAME, LOCALEDIR, ""),
-	projection(NULL), selected_object(NULL), hip_stars(NULL),
-	nebulas(NULL), ssystem(NULL), milky_way(NULL), telescope_mgr(NULL),
-	deltaFov(0.), 
-	deltaAlt(0.), deltaAz(0.), move_speed(0.00025), firstTime(1)
+		skyTranslator(APP_NAME, LOCALEDIR, ""),
+		projection(NULL), selected_object(NULL), hip_stars(NULL),
+		nebulas(NULL), ssystem(NULL), milky_way(NULL), telescope_mgr(NULL),
+		deltaFov(0.),
+		deltaAlt(0.), deltaAz(0.), move_speed(0.00025), firstTime(1)
 {
 	recordActionCallback = recordCallback;
 
@@ -82,14 +90,14 @@ StelCore::StelCore(const string& LDIR, const string& DATA_ROOT, const boost::cal
 	landscape = new LandscapeOldStyle();
 	skyloc = new SkyLocalizer(StelApp::getInstance().getDataFilePath("sky_cultures"));
 	script_images = new ImageMgr();
-    telescope_mgr = new TelescopeMgr;
-	
+	telescope_mgr = new TelescopeMgr;
+
 	object_pointer_visibility = 1;
 }
 
 StelCore::~StelCore()
 {
-	  // release the previous StelObject:
+	// release the previous StelObject:
 	selected_object = StelObject();
 	delete navigation;
 	delete projection;
@@ -102,38 +110,44 @@ StelCore::~StelCore()
 	delete ecliptic_line;
 	delete meridian_line;
 	delete cardinals_points;
-	delete landscape; landscape = NULL;
-	delete observatory; observatory = NULL;
+	delete landscape;
+	landscape = NULL;
+	delete observatory;
+	observatory = NULL;
 	delete milky_way;
-	delete meteors; meteors = NULL;
+	delete meteors;
+	meteors = NULL;
 	delete atmosphere;
 	delete tone_converter;
 	delete ssystem;
-	delete skyloc; skyloc = NULL;
+	delete skyloc;
+	skyloc = NULL;
 	delete script_images;
 	delete telescope_mgr;
 	StelObject::delete_textures(); // Unload the pointer textures
 
-    if (geodesic_search_result) {
-      delete geodesic_search_result;
-      geodesic_search_result = 0;
-    }
-    if (geodesic_grid) {
-      delete geodesic_grid;
-      geodesic_grid = 0;
-    }
+	if (geodesic_search_result)
+	{
+		delete geodesic_search_result;
+		geodesic_search_result = 0;
+	}
+	if (geodesic_grid)
+	{
+		delete geodesic_grid;
+		geodesic_grid = 0;
+	}
 }
 
 // Load core data and initialize with default values
 void StelCore::init(const InitParser& conf)
 {
 	baseFontFile = StelApp::getInstance().getDataFilePath( conf.get_str("gui", "base_font_name", "DejaVuSans.ttf") );
-	
+
 	// Video Section
 	setViewportSize(conf.get_int("video:screen_w"), conf.get_int("video:screen_h"));
 	setViewportHorizontalOffset(conf.get_int    ("video:horizontal_offset"));
 	setViewportVerticalOffset(conf.get_int    ("video:vertical_offset"));
-	
+
 	// Projector
 	string tmpstr = conf.get_str("projection:type");
 	setProjectionType(tmpstr);
@@ -141,14 +155,14 @@ void StelCore::init(const InitParser& conf)
 	tmpstr = conf.get_str("projection:viewport");
 	const Projector::PROJECTOR_MASK_TYPE projMaskType = Projector::stringToMaskType(tmpstr);
 	projection->setMaskType(projMaskType);
-	
+
 	LoadingBar lb(projection, FontSizeGeneral, baseFontFile, "logo24bits.png",
-				  getViewportWidth(), getViewportHeight(),
-				  StelUtils::stringToWstring(VERSION), 45, 320, 121);
-	
+	              getViewportWidth(), getViewportHeight(),
+	              StelUtils::stringToWstring(VERSION), 45, 320, 121);
+
 	// Init the solar system first
 	ssystem->init(lb);
- 	ssystem->setFont(FontSizeSolarSystem, baseFontFile);
+	ssystem->setFont(FontSizeSolarSystem, baseFontFile);
 	setPlanetsScale(getStarScale());
 
 	observatory->load(conf, "init_location");
@@ -156,7 +170,8 @@ void StelCore::init(const InitParser& conf)
 	navigation->set_JDay(get_julian_from_sys());
 	navigation->set_local_vision(Vec3f(1,1e-05,0.2));
 
-	if(firstTime) {
+	if(firstTime)
+	{
 		// Load hipparcos stars & names
 		hip_stars->init(FontSizeGeneral, baseFontFile,lb);
 		int grid_level = hip_stars->getMaxGridLevel();
@@ -213,8 +228,8 @@ void StelCore::init(const InitParser& conf)
 
 	string skyLocaleName = conf.get_str("localization", "sky_locale", "system");
 	constellationFontSize = conf.get_double("viewing","constellation_font_size",FontSizeConstellations);
-	setSkyLanguage(skyLocaleName);	
-	
+	setSkyLanguage(skyLocaleName);
+
 	// Star section
 	setStarScale(conf.get_double ("stars:star_scale"));
 	setPlanetsScale(conf.get_double ("stars:star_scale"));  // if reload config
@@ -225,11 +240,11 @@ void StelCore::init(const InitParser& conf)
 	setFlagStarTwinkle(conf.get_boolean("stars:flag_star_twinkle"));
 	setFlagPointStar(conf.get_boolean("stars:flag_point_star"));
 	setStarLimitingMag(conf.get_double("stars", "star_limiting_mag", 6.5f));
-	
+
 	FlagEnableZoomKeys	= conf.get_boolean("navigation:flag_enable_zoom_keys");
 	FlagEnableMoveKeys  = conf.get_boolean("navigation:flag_enable_move_keys");
 	FlagManualZoom		= conf.get_boolean("navigation:flag_manual_zoom");
-	
+
 
 	auto_move_duration	= conf.get_double ("navigation","auto_move_duration",1.5);
 	move_speed			= conf.get_double("navigation","move_speed",0.0004);
@@ -237,10 +252,12 @@ void StelCore::init(const InitParser& conf)
 
 	// Viewing Mode
 	tmpstr = conf.get_str("navigation:viewing_mode");
-	if (tmpstr=="equator") 	navigation->set_viewing_mode(Navigator::VIEW_EQUATOR);
+	if (tmpstr=="equator")
+		navigation->set_viewing_mode(Navigator::VIEW_EQUATOR);
 	else
 	{
-		if (tmpstr=="horizon") navigation->set_viewing_mode(Navigator::VIEW_HORIZON);
+		if (tmpstr=="horizon")
+			navigation->set_viewing_mode(Navigator::VIEW_HORIZON);
 		else
 		{
 			cerr << "ERROR : Unknown viewing mode type : " << tmpstr << endl;
@@ -298,7 +315,7 @@ void StelCore::init(const InitParser& conf)
 	setFlagNebulaDisplayNoTexture(conf.get_boolean("astro", "flag_nebula_display_no_texture", false));
 	setFlagMilkyWay(conf.get_boolean("astro:flag_milky_way"));
 	setMilkyWayIntensity(conf.get_double("astro","milky_way_intensity",1.));
-	setFlagBrightNebulae(conf.get_boolean("astro:flag_bright_nebulae"));	
+	setFlagBrightNebulae(conf.get_boolean("astro:flag_bright_nebulae"));
 
 	setMeteorsRate(conf.get_int("astro", "meteor_rate", 10));
 
@@ -351,7 +368,7 @@ void StelCore::update(int delta_time)
 	cardinals_points->update(delta_time);
 	milky_way->update(delta_time);
 	telescope_mgr->update(delta_time);
-	
+
 	// Compute the sun position in local coordinate
 	Vec3d temp(0.,0.,0.);
 	Vec3d sunPos = navigation->helio_to_local(temp);
@@ -386,11 +403,14 @@ void StelCore::update(int delta_time)
 	// compute global sky brightness TODO : make this more "scientifically"
 	// TODO: also add moonlight illumination
 
-	if(sunPos[2] < -0.1/1.5 ) sky_brightness = 0.01;
-	else sky_brightness = (0.01 + 1.5*(sunPos[2]+0.1/1.5));
+	if(sunPos[2] < -0.1/1.5 )
+		sky_brightness = 0.01;
+	else
+		sky_brightness = (0.01 + 1.5*(sunPos[2]+0.1/1.5));
 
 	// TODO make this more generic for non-atmosphere planets
-	if(atmosphere->get_fade_intensity() == 1) {
+	if(atmosphere->get_fade_intensity() == 1)
+	{
 		// If the atmosphere is on, a solar eclipse might darken the sky
 		// otherwise we just use the sun position calculation above
 		sky_brightness *= (atmosphere->get_intensity()+0.1);
@@ -425,16 +445,19 @@ double StelCore::draw(int delta_time)
 	Vec3d e0,e1,e2,e3;
 	projection->unproject_j2000(v[0],v[1],e0);
 	projection->unproject_j2000(v[0]+v[2],v[1]+v[3],e2);
-	if (projection->needGlFrontFaceCW()) {
-	  projection->unproject_j2000(v[0],v[1]+v[3],e3);
-	  projection->unproject_j2000(v[0]+v[2],v[1],e1);
-	} else {
-	  projection->unproject_j2000(v[0],v[1]+v[3],e1);
-	  projection->unproject_j2000(v[0]+v[2],v[1],e3);
+	if (projection->needGlFrontFaceCW())
+	{
+		projection->unproject_j2000(v[0],v[1]+v[3],e3);
+		projection->unproject_j2000(v[0]+v[2],v[1],e1);
+	}
+	else
+	{
+		projection->unproject_j2000(v[0],v[1]+v[3],e1);
+		projection->unproject_j2000(v[0]+v[2],v[1],e3);
 	}
 
 	int max_search_level = hip_stars->getMaxSearchLevel(tone_converter,
-	                                                    projection);
+	                       projection);
 	// int h = nebulas->getMaxSearchLevel(tone_converter,projection);
 	// if (max_search_level < h) max_search_level = h;
 	geodesic_search_result->search(e0,e1,e2,e3,max_search_level);
@@ -468,7 +491,8 @@ double StelCore::draw(int delta_time)
 
 	// Draw the pointer on the currently selected object
 	// TODO: this would be improved if pointer was drawn at same time as object for correct depth in scene
-	if (selected_object && object_pointer_visibility) selected_object.draw_pointer(delta_time, projection, navigation);
+	if (selected_object && object_pointer_visibility)
+		selected_object.draw_pointer(delta_time, projection, navigation);
 	// Set openGL drawings in local coordinates i.e. generally altazimuthal coordinates
 	navigation->switch_to_local();
 
@@ -507,10 +531,12 @@ double StelCore::draw(int delta_time)
 
 bool StelCore::setLandscape(const string& new_landscape_name)
 {
-	if (new_landscape_name.empty()) return 0;
+	if (new_landscape_name.empty())
+		return 0;
 	Landscape* newLandscape = Landscape::create_from_file(StelApp::getInstance().getDataFilePath("landscapes.ini"), new_landscape_name);
 
-	if(!newLandscape) return 0;
+	if(!newLandscape)
+		return 0;
 
 	if (landscape)
 	{
@@ -527,10 +553,12 @@ bool StelCore::setLandscape(const string& new_landscape_name)
 
 //! Load a landscape based on a hash of parameters mirroring the landscape.ini file
 //! and make it the current landscape
-bool StelCore::loadLandscape(stringHash_t& param) {
+bool StelCore::loadLandscape(stringHash_t& param)
+{
 
 	Landscape* newLandscape = Landscape::create_from_hash(param);
-	if(!newLandscape) return 0;
+	if(!newLandscape)
+		return 0;
 
 	if (landscape)
 	{
@@ -549,7 +577,8 @@ bool StelCore::loadLandscape(stringHash_t& param) {
 
 void StelCore::setViewportSize(int w, int h)
 {
-	if (w==getViewportWidth() && h==getViewportHeight()) return;
+	if (w==getViewportWidth() && h==getViewportHeight())
+		return;
 	projection->setViewportWidth(w);
 	projection->setViewportHeight(h);
 }
@@ -558,101 +587,123 @@ StelObject StelCore::searchByNameI18n(const wstring &name) const
 {
 	StelObject rval;
 	rval = ssystem->searchByNamesI18(name);
-	if (rval) return rval;
+	if (rval)
+		return rval;
 	rval = nebulas->searchByNameI18n(name);
-	if (rval) return rval;
+	if (rval)
+		return rval;
 	rval = hip_stars->searchByNameI18n(name);
-	if (rval) return rval;
+	if (rval)
+		return rval;
 	rval = asterisms->searchByNameI18n(name);
-	if (rval) return rval;
+	if (rval)
+		return rval;
 	rval = telescope_mgr->searchByNameI18n(name);
 	return rval;
 }
 
 //! Find and select an object from its translated name
 //! @param nameI18n the case sensitive object translated name
-//! @return true if an object was found with the passed name	
+//! @return true if an object was found with the passed name
 bool StelCore::findAndSelectI18n(const wstring &nameI18n)
 {
 	// Then look for another object
 	StelObject obj = searchByNameI18n(nameI18n);
-	if (!obj) return false;
-	else return selectObject(obj);
+	if (!obj)
+		return false;
+	else
+		return selectObject(obj);
 }
 
 
 //! Find and select an object based on selection type and standard name or number
 //! @return true if an object was selected
 
-bool StelCore::selectObject(const string &type, const string &id) {
-/*
-  std::wostringstream oss;
-  oss << id.c_str();
-  return findAndSelectI18n(oss.str());
-*/
-    if(type=="hp") {
-      unsigned int hpnum;
-      std::istringstream istr(id);
-      istr >> hpnum;
-      selected_object = hip_stars->searchHP(hpnum);
-      asterisms->setSelected(selected_object);
-      setPlanetsSelected("");
+bool StelCore::selectObject(const string &type, const string &id)
+{
+	/*
+	  std::wostringstream oss;
+	  oss << id.c_str();
+	  return findAndSelectI18n(oss.str());
+	*/
+	if(type=="hp")
+	{
+		unsigned int hpnum;
+		std::istringstream istr(id);
+		istr >> hpnum;
+		selected_object = hip_stars->searchHP(hpnum);
+		asterisms->setSelected(selected_object);
+		setPlanetsSelected("");
 
-	} else if(type=="star") {
-      selected_object = hip_stars->search(id);
-      asterisms->setSelected(selected_object);
-      setPlanetsSelected("");
+	}
+	else if(type=="star")
+	{
+		selected_object = hip_stars->search(id);
+		asterisms->setSelected(selected_object);
+		setPlanetsSelected("");
 
-    } else if(type=="planet"){
-      setPlanetsSelected(id);
-      selected_object = ssystem->getSelected();
-      asterisms->setSelected(StelObject());
+	}
+	else if(type=="planet")
+	{
+		setPlanetsSelected(id);
+		selected_object = ssystem->getSelected();
+		asterisms->setSelected(StelObject());
 
-    } else if(type=="nebula"){
-      selected_object = nebulas->search(id);
-      setPlanetsSelected("");
-      asterisms->setSelected(StelObject());
-	 
-    } else if(type=="constellation"){
+	}
+	else if(type=="nebula")
+	{
+		selected_object = nebulas->search(id);
+		setPlanetsSelected("");
+		asterisms->setSelected(StelObject());
 
-		// Select only constellation, nothing else 	 
-		asterisms->setSelected(id); 
+	}
+	else if(type=="constellation")
+	{
+
+		// Select only constellation, nothing else
+		asterisms->setSelected(id);
 
 		selected_object = NULL;
 		setPlanetsSelected("");
 
-    } else if(type=="constellation_star") {
-	
-		// For Find capability, select a star in constellation so can center view on constellation 	 
-		asterisms->setSelected(id); 
+	}
+	else if(type=="constellation_star")
+	{
 
-        selected_object = asterisms->getSelected()
-                           .getBrightestStarInConstellation();
+		// For Find capability, select a star in constellation so can center view on constellation
+		asterisms->setSelected(id);
 
-/// what is this?
-/// 1) Find the hp-number of the 1st star in the selected constellation,
-/// 2) find the star of this hpnumber
-/// 3) select the constellation of this star ???
-///		const unsigned int hpnum = asterisms->getFirstSelectedHP();
-///		selected_object = hip_stars->searchHP(hpnum);
-///		asterisms->setSelected(selected_object);
+		selected_object = asterisms->getSelected()
+		                  .getBrightestStarInConstellation();
+
+		/// what is this?
+		/// 1) Find the hp-number of the 1st star in the selected constellation,
+		/// 2) find the star of this hpnumber
+		/// 3) select the constellation of this star ???
+		///		const unsigned int hpnum = asterisms->getFirstSelectedHP();
+		///		selected_object = hip_stars->searchHP(hpnum);
+		///		asterisms->setSelected(selected_object);
 
 		setPlanetsSelected("");
 
-///		// Some stars are shared, so now force constellation
-///		asterisms->setSelected(id);
-	} else {
+		///		// Some stars are shared, so now force constellation
+		///		asterisms->setSelected(id);
+	}
+	else
+	{
 		cerr << "Invalid selection type specified: " << type << endl;
 		return 0;
 	}
 
 
-    if (selected_object) {
-      if (navigation->get_flag_traking()) navigation->set_flag_lock_equ_pos(1);
-      navigation->set_flag_traking(0);
+	if (selected_object)
+	{
+		if (navigation->get_flag_traking())
+			navigation->set_flag_lock_equ_pos(1);
+		navigation->set_flag_traking(0);
 
-	  return 1;
-    }
+		return 1;
+	}
 
 	return 0;
 }
@@ -673,7 +724,7 @@ bool StelCore::findAndSelect(int x, int y)
 	return findAndSelect(v);
 }
 
-// Find an object in a "clever" way 
+// Find an object in a "clever" way
 StelObject StelCore::clever_find(const Vec3d& v) const
 {
 	StelObject sobj;
@@ -718,7 +769,7 @@ StelObject StelCore::clever_find(const Vec3d& v) const
 	projection->project_earth_equ(v, winpos);
 	float xpos = winpos[0];
 	float ypos = winpos[1];
-		
+
 	float best_object_value;
 	best_object_value = 100000.f;
 	vector<StelObject>::iterator iter = candidates.begin();
@@ -733,7 +784,7 @@ StelObject StelCore::clever_find(const Vec3d& v) const
 			if( nebulas->getFlagHints() )
 			{
 				// make very easy to select IF LABELED
-				mag = -1;  
+				mag = -1;
 
 			}
 		}
@@ -772,13 +823,14 @@ void StelCore::autoZoomIn(float move_duration, bool allow_manual_zoom)
 {
 	float manual_move_duration;
 
-	if (!selected_object) return;
+	if (!selected_object)
+		return;
 
 	if (!navigation->get_flag_traking())
 	{
 		navigation->set_flag_traking(true);
 		navigation->move_to(selected_object.get_earth_equ_pos(navigation),
-                            move_duration, false, 1);
+		                    move_duration, false, 1);
 		manual_move_duration = move_duration;
 	}
 	else
@@ -799,12 +851,13 @@ void StelCore::autoZoomIn(float move_duration, bool allow_manual_zoom)
 		float satfov = selected_object.get_satellites_fov(navigation);
 
 		if (satfov>0.0 && projection->get_fov()*0.9>satfov)
-          projection->zoom_to(satfov, move_duration);
-		else {
-		  float closefov = selected_object.get_close_fov(navigation);
-          if (projection->get_fov()>closefov)
-            projection->zoom_to(closefov, move_duration);
-        }
+			projection->zoom_to(satfov, move_duration);
+		else
+		{
+			float closefov = selected_object.get_close_fov(navigation);
+			if (projection->get_fov()>closefov)
+				projection->zoom_to(closefov, move_duration);
+		}
 	}
 }
 
@@ -813,31 +866,34 @@ void StelCore::autoZoomIn(float move_duration, bool allow_manual_zoom)
 void StelCore::autoZoomOut(float move_duration, bool full)
 {
 
-	if (selected_object && !full) {
+	if (selected_object && !full)
+	{
 
 		// If the selected object has satellites, unzoom to satellites view
-        // unless specified otherwise
+		// unless specified otherwise
 		float satfov = selected_object.get_satellites_fov(navigation);
 
-		if (satfov>0.0 && projection->get_fov()<=satfov*0.9) {
-          projection->zoom_to(satfov, move_duration);
-          return;
-	    }
+		if (satfov>0.0 && projection->get_fov()<=satfov*0.9)
+		{
+			projection->zoom_to(satfov, move_duration);
+			return;
+		}
 
 		// If the selected object is part of a Planet subsystem (other than sun),
 		// unzoom to subsystem view
-        satfov = selected_object.get_parent_satellites_fov(navigation);
-        if (satfov>0.0 && projection->get_fov()<=satfov*0.9) {
-          projection->zoom_to(satfov, move_duration);
-          return;
-        }
-	}	
-  
+		satfov = selected_object.get_parent_satellites_fov(navigation);
+		if (satfov>0.0 && projection->get_fov()<=satfov*0.9)
+		{
+			projection->zoom_to(satfov, move_duration);
+			return;
+		}
+	}
+
 	projection->zoom_to(InitFov, move_duration);
 	navigation->move_to(InitViewPos, move_duration, true, -1);
 	navigation->set_flag_traking(false);
 	navigation->set_flag_lock_equ_pos(0);
-	
+
 }
 
 // Set the current sky culture according to passed name
@@ -849,24 +905,26 @@ bool StelCore::setSkyCulture(const wstring& cultureName)
 // Set the current sky culture from the passed directory
 bool StelCore::setSkyCultureDir(const string& cultureDir)
 {
-	if(skyCultureDir == cultureDir) return 1;
+	if(skyCultureDir == cultureDir)
+		return 1;
 
 	// make sure culture definition exists before attempting or will die
 	// Do not comment this out! Rob
 	if(skyloc->directoryToSkyCultureEnglish(cultureDir) == "")
- 	{
- 		cerr << "Invalid sky culture directory: " << cultureDir << endl;
- 		return 0;
- 	}
+	{
+		cerr << "Invalid sky culture directory: " << cultureDir << endl;
+		return 0;
+	}
 
 	skyCultureDir = cultureDir;
 
-	if(!asterisms) return 1;
+	if(!asterisms)
+		return 1;
 
 	LoadingBar lb(projection, FontSizeGeneral, baseFontFile, "logo24bits.png", getViewportWidth(), getViewportHeight(), StelUtils::stringToWstring(VERSION), 45, 320, 121);
 
 	asterisms->loadLinesAndArt(StelApp::getInstance().getDataFilePath("sky_cultures/" + skyCultureDir + "/constellationship.fab"),
-							   StelApp::getInstance().getDataFilePath("sky_cultures/" + skyCultureDir + "/constellationsart.fab"), StelApp::getInstance().getDataFilePath("constellations_boundaries.dat"), lb);
+	                           StelApp::getInstance().getDataFilePath("sky_cultures/" + skyCultureDir + "/constellationsart.fab"), StelApp::getInstance().getDataFilePath("constellations_boundaries.dat"), lb);
 	asterisms->loadNames(StelApp::getInstance().getDataFilePath("sky_cultures/" + skyCultureDir + "/constellation_names.eng.fab"));
 
 	// Re-translated constellation names
@@ -898,7 +956,8 @@ bool StelCore::setSkyCultureDir(const string& cultureDir)
 //! @brief Set the sky locale and reload the sky objects names for gettext translation
 void StelCore::setSkyLanguage(const std::string& newSkyLocaleName)
 {
-	if( !hip_stars || !cardinals_points || !asterisms) return; // objects not initialized yet
+	if( !hip_stars || !cardinals_points || !asterisms)
+		return; // objects not initialized yet
 
 	string oldLocale = getSkyLanguage();
 
@@ -914,8 +973,9 @@ void StelCore::setSkyLanguage(const std::string& newSkyLocaleName)
 	getFontForLocale(skyTranslator.getTrueLocaleName(), newFontFile, newFontScale, tmpstr, tmpfloat);
 
 	// If font has changed or init is being called for first time...
-	if(oldFontFile != newFontFile || oldFontScale != newFontScale || firstTime) {
-		
+	if(oldFontFile != newFontFile || oldFontScale != newFontScale || firstTime)
+	{
+
 		cardinals_points->set_font(FontSizeCardinalPoints*newFontScale, newFontFile);
 		asterisms->setFont(constellationFontSize*newFontScale, newFontFile);  // size is read from config
 		ssystem->setFont(FontSizeSolarSystem*newFontScale, newFontFile);
@@ -944,7 +1004,7 @@ void StelCore::setColorScheme(const string& skinFile, const string& section)
 {
 	InitParser conf;
 	conf.load(skinFile);
-	
+
 	// simple default color, rather than black which doesn't show up
 	string defaultColor = "0.6,0.4,0";
 
@@ -970,14 +1030,14 @@ void StelCore::setColorScheme(const string& skinFile, const string& section)
 	asterisms->setLineColor(StelUtils::str_to_vec3f(conf.get_str(section,"const_lines_color", defaultColor)));
 	asterisms->setBoundaryColor(StelUtils::str_to_vec3f(conf.get_str(section,"const_boundary_color", "0.8,0.3,0.3")));
 	asterisms->setLabelColor(StelUtils::str_to_vec3f(conf.get_str(section,"const_names_color", defaultColor)));
-	
+
 	// Init milky way
-// 	if (draw_mode == DM_NORMAL)	milky_way->set_texture("milkyway.png");
-// 	else 
-// 	{
-// 		milky_way->set_texture("milkyway_chart.png",true);
-// 	}
-	
+	// 	if (draw_mode == DM_NORMAL)	milky_way->set_texture("milkyway.png");
+	// 	else
+	// 	{
+	// 		milky_way->set_texture("milkyway_chart.png",true);
+	// 	}
+
 	chartColor = StelUtils::str_to_vec3f(conf.get_str(section,"chart_color", defaultColor));
 }
 
@@ -989,9 +1049,12 @@ Vec3f StelCore::getSelectedObjectInfoColor(void) const
 		cerr << "WARNING: StelCore::getSelectedObjectInfoColor was called while no object is currently selected!!" << endl;
 		return Vec3f(1, 1, 1);
 	}
-	if (selected_object.get_type()==STEL_OBJECT_NEBULA) return nebulas->getLabelColor();
-	if (selected_object.get_type()==STEL_OBJECT_PLANET) return ssystem->getLabelColor();
-	if (selected_object.get_type()==STEL_OBJECT_STAR) return selected_object.get_RGB();
+	if (selected_object.get_type()==STEL_OBJECT_NEBULA)
+		return nebulas->getLabelColor();
+	if (selected_object.get_type()==STEL_OBJECT_PLANET)
+		return ssystem->getLabelColor();
+	if (selected_object.get_type()==STEL_OBJECT_STAR)
+		return selected_object.get_RGB();
 	return Vec3f(1, 1, 1);
 }
 
@@ -1007,10 +1070,14 @@ void StelCore::drawChartBackground(void)
 	glColor3fv(chartColor);
 	projection->set_orthographic_projection();	// set 2D coordinate
 	glBegin(GL_QUADS);
-	glTexCoord2s(0, 0); glVertex2i(viewport_left, view_bottom);	// Bottom Left
-	glTexCoord2s(1, 0); glVertex2i(viewport_left+stepX, view_bottom);	// Bottom Right
-	glTexCoord2s(1, 1); glVertex2i(viewport_left+stepX,view_bottom+stepY);	// Top Right
-	glTexCoord2s(0, 1); glVertex2i(viewport_left,view_bottom+stepY);	// Top Left
+	glTexCoord2s(0, 0);
+	glVertex2i(viewport_left, view_bottom);	// Bottom Left
+	glTexCoord2s(1, 0);
+	glVertex2i(viewport_left+stepX, view_bottom);	// Bottom Right
+	glTexCoord2s(1, 1);
+	glVertex2i(viewport_left+stepX,view_bottom+stepY);	// Top Right
+	glTexCoord2s(0, 1);
+	glVertex2i(viewport_left,view_bottom+stepY);	// Top Left
 	glEnd();
 	projection->reset_perspective_projection();
 }
@@ -1022,16 +1089,17 @@ wstring StelCore::get_cursor_pos(int x, int y)
 	double tempDE, tempRA;
 	StelUtils::rect_to_sphe(&tempRA,&tempDE,v);
 	return L"RA : " + StelUtils::printAngleHMS(tempRA) + L"\n" +
-	L"DE : " + StelUtils::printAngleDMS(tempDE);
+	       L"DE : " + StelUtils::printAngleDMS(tempDE);
 }
 
 void StelCore::setProjectionType(const string& sptype)
 {
 	Projector::PROJECTOR_TYPE pType = Projector::stringToType(sptype);
-	if (projection->getType()==pType) return;
+	if (projection->getType()==pType)
+		return;
 	Projector *const ptemp = Projector::create(pType,
-                                               projection->getViewport(),
-                                               projection->get_fov());
+	                         projection->getViewport(),
+	                         projection->get_fov());
 	ptemp->setMaskType(projection->getMaskType());
 	ptemp->setFlagGravityLabels(projection->getFlagGravityLabels());
 	delete projection;
@@ -1039,14 +1107,16 @@ void StelCore::setProjectionType(const string& sptype)
 	glFrontFace(projection->needGlFrontFaceCW()?GL_CW:GL_CCW);
 }
 
-void StelCore::setFlipHorz(bool flip) {
-  projection->setFlipHorz(flip);
-  glFrontFace(projection->needGlFrontFaceCW()?GL_CW:GL_CCW);
+void StelCore::setFlipHorz(bool flip)
+{
+	projection->setFlipHorz(flip);
+	glFrontFace(projection->needGlFrontFaceCW()?GL_CW:GL_CCW);
 }
 
-void StelCore::setFlipVert(bool flip) {
-  projection->setFlipVert(flip);
-  glFrontFace(projection->needGlFrontFaceCW()?GL_CW:GL_CCW);
+void StelCore::setFlipVert(bool flip)
+{
+	projection->setFlipVert(flip);
+	glFrontFace(projection->needGlFrontFaceCW()?GL_CW:GL_CCW);
 }
 
 void StelCore::turn_right(int s)
@@ -1057,7 +1127,8 @@ void StelCore::turn_right(int s)
 		setFlagTracking(false);
 		setFlagLockSkyPosition(false);
 	}
-	else deltaAz = 0;
+	else
+		deltaAz = 0;
 }
 
 void StelCore::turn_left(int s)
@@ -1069,7 +1140,8 @@ void StelCore::turn_left(int s)
 		setFlagLockSkyPosition(false);
 
 	}
-	else deltaAz = 0;
+	else
+		deltaAz = 0;
 }
 
 void StelCore::turn_up(int s)
@@ -1080,7 +1152,8 @@ void StelCore::turn_up(int s)
 		setFlagTracking(false);
 		setFlagLockSkyPosition(false);
 	}
-	else deltaAlt = 0;
+	else
+		deltaAlt = 0;
 }
 
 void StelCore::turn_down(int s)
@@ -1091,18 +1164,21 @@ void StelCore::turn_down(int s)
 		setFlagTracking(false);
 		setFlagLockSkyPosition(false);
 	}
-	else deltaAlt = 0;
+	else
+		deltaAlt = 0;
 }
 
 
 void StelCore::zoom_in(int s)
 {
-	if (FlagEnableZoomKeys) deltaFov = -1*(s!=0);
+	if (FlagEnableZoomKeys)
+		deltaFov = -1*(s!=0);
 }
 
 void StelCore::zoom_out(int s)
 {
-	if (FlagEnableZoomKeys) deltaFov = (s!=0);
+	if (FlagEnableZoomKeys)
+		deltaFov = (s!=0);
 }
 
 //! Make the first screen position correspond to the second (useful for mouse dragging)
@@ -1136,41 +1212,47 @@ void StelCore::updateMove(int delta_time)
 	if (deltaAz<0)
 	{
 		deltaAz = -depl/30;
-		if (deltaAz<-0.2) deltaAz = -0.2;
+		if (deltaAz<-0.2)
+			deltaAz = -0.2;
 	}
 	else
 	{
 		if (deltaAz>0)
 		{
 			deltaAz = (depl/30);
-			if (deltaAz>0.2) deltaAz = 0.2;
+			if (deltaAz>0.2)
+				deltaAz = 0.2;
 		}
 	}
 	if (deltaAlt<0)
 	{
 		deltaAlt = -depl/30;
-		if (deltaAlt<-0.2) deltaAlt = -0.2;
+		if (deltaAlt<-0.2)
+			deltaAlt = -0.2;
 	}
 	else
 	{
 		if (deltaAlt>0)
 		{
 			deltaAlt = depl/30;
-			if (deltaAlt>0.2) deltaAlt = 0.2;
+			if (deltaAlt>0.2)
+				deltaAlt = 0.2;
 		}
 	}
 
 	if (deltaFov<0)
 	{
 		deltaFov = -deplzoom*5;
-		if (deltaFov<-0.15*projection->get_fov()) deltaFov = -0.15*projection->get_fov();
+		if (deltaFov<-0.15*projection->get_fov())
+			deltaFov = -0.15*projection->get_fov();
 	}
 	else
 	{
 		if (deltaFov>0)
 		{
 			deltaFov = deplzoom*5;
-			if (deltaFov>20) deltaFov = 20;
+			if (deltaFov>20)
+				deltaFov = 20;
 		}
 	}
 
@@ -1180,17 +1262,19 @@ void StelCore::updateMove(int delta_time)
 	if(deltaFov != 0 )
 	{
 		projection->change_fov(deltaFov);
-  		std::ostringstream oss;
-  		oss << "zoom delta_fov " << deltaFov;
-		if (!recordActionCallback.empty()) recordActionCallback(oss.str());
+		std::ostringstream oss;
+		oss << "zoom delta_fov " << deltaFov;
+		if (!recordActionCallback.empty())
+			recordActionCallback(oss.str());
 	}
 
 	if(deltaAz != 0 || deltaAlt != 0)
 	{
 		navigation->update_move(deltaAz, deltaAlt);
-  		std::ostringstream oss;
-  		oss << "look delta_az " << deltaAz << " delta_alt " << deltaAlt;
-		if (!recordActionCallback.empty()) recordActionCallback(oss.str());
+		std::ostringstream oss;
+		oss << "look delta_az " << deltaAz << " delta_alt " << deltaAlt;
+		if (!recordActionCallback.empty())
+			recordActionCallback(oss.str());
 	}
 	else
 	{
@@ -1200,7 +1284,8 @@ void StelCore::updateMove(int delta_time)
 }
 
 
-bool StelCore::setHomePlanet(string planet) {
+bool StelCore::setHomePlanet(string planet)
+{
 
 	// reset planet trails due to changed perspective
 	ssystem->startTrails( ssystem->getFlagTrails() );
@@ -1253,37 +1338,42 @@ bool StelCore::selectObject(const StelObject &obj)
 	else
 	{
 		selected_object = obj;
-	
+
 		// If an object has been found
 		if (selected_object)
-		{	
+		{
 			// If an object was selected keep the earth following
-			if (getFlagTracking()) navigation->set_flag_lock_equ_pos(1);
+			if (getFlagTracking())
+				navigation->set_flag_lock_equ_pos(1);
 			setFlagTracking(false);
-	
+
 			if (selected_object.get_type()==STEL_OBJECT_STAR)
 			{
 				asterisms->setSelected(selected_object);
-	 			// potentially record this action
-				if (!recordActionCallback.empty()) recordActionCallback("select " + selected_object.getEnglishName());
+				// potentially record this action
+				if (!recordActionCallback.empty())
+					recordActionCallback("select " + selected_object.getEnglishName());
 			}
 			else
 			{
 				asterisms->setSelected(StelObject());
 			}
-	
-			if (selected_object.get_type()==STEL_OBJECT_PLANET) {
+
+			if (selected_object.get_type()==STEL_OBJECT_PLANET)
+			{
 				ssystem->setSelected(selected_object);
 				// potentially record this action
-				if (!recordActionCallback.empty()) recordActionCallback("select planet " + selected_object.getEnglishName());
+				if (!recordActionCallback.empty())
+					recordActionCallback("select planet " + selected_object.getEnglishName());
 			}
 
 			if (selected_object.get_type()==STEL_OBJECT_NEBULA)
 			{
 				// potentially record this action
-				if (!recordActionCallback.empty()) recordActionCallback("select nebula \"" + selected_object.getEnglishName() + "\"");
+				if (!recordActionCallback.empty())
+					recordActionCallback("select nebula \"" + selected_object.getEnglishName() + "\"");
 			}
-			
+
 			return true;
 		}
 		else
@@ -1304,13 +1394,13 @@ vector<wstring> StelCore::listMatchingObjectsI18n(const wstring& objPrefix, unsi
 {
 	vector<wstring> result;
 	vector <wstring>::const_iterator iter;
-	
+
 	// Get matching planets
 	vector<wstring> matchingPlanets = ssystem->listMatchingObjectsI18n(objPrefix, maxNbItem);
 	for (iter = matchingPlanets.begin(); iter != matchingPlanets.end(); ++iter)
 		result.push_back(*iter);
 	maxNbItem-=matchingPlanets.size();
-	
+
 	// Get matching constellations
 	vector<wstring> matchingConstellations = asterisms->listMatchingObjectsI18n(objPrefix, maxNbItem);
 	for (iter = matchingConstellations.begin(); iter != matchingConstellations.end(); ++iter)
@@ -1322,21 +1412,21 @@ vector<wstring> StelCore::listMatchingObjectsI18n(const wstring& objPrefix, unsi
 	for (iter = matchingNebulae.begin(); iter != matchingNebulae.end(); ++iter)
 		result.push_back(*iter);
 	maxNbItem-=matchingNebulae.size();
-	
+
 	// Get matching stars
 	vector<wstring> matchingStars = hip_stars->listMatchingObjectsI18n(objPrefix, maxNbItem);
 	for (iter = matchingStars.begin(); iter != matchingStars.end(); ++iter)
 		result.push_back(*iter);
 	maxNbItem-=matchingStars.size();
-	
+
 	// Get matching telescopes
 	vector<wstring> matchingTelescopes = telescope_mgr->listMatchingObjectsI18n(objPrefix, maxNbItem);
 	for (iter = matchingTelescopes.begin(); iter != matchingTelescopes.end(); ++iter)
 		result.push_back(*iter);
 	maxNbItem-=matchingStars.size();
-	
+
 	sort(result.begin(), result.end());
-	
+
 	return result;
 }
 
@@ -1344,7 +1434,8 @@ vector<wstring> StelCore::listMatchingObjectsI18n(const wstring& objPrefix, unsi
 //! TESTING
 //! font file and scaling to use for a given locale
 void StelCore::getFontForLocale(const string &_locale, string &_fontFile, float &_fontScale,
-								string &_fixedFontFile, float &_fixedFontScale) {
+                                string &_fixedFontFile, float &_fixedFontScale)
+{
 
 	// TODO: Cache in data structure
 	// TODO: check that font files exist
@@ -1381,7 +1472,8 @@ void StelCore::getFontForLocale(const string &_locale, string &_fontFile, float 
 			record >> locale >> font >> scale >> fixedFont >> fixedScale;
 
 			// find matching records in map file
-			if(locale == _locale || locale == "default") {
+			if(locale == _locale || locale == "default")
+			{
 
 				//				cout << "locale " << _locale << endl;
 
@@ -1392,9 +1484,12 @@ void StelCore::getFontForLocale(const string &_locale, string &_fontFile, float 
 				fontFileName = StelApp::getInstance().getDataFilePath(font);
 				fontFile = new ifstream(fontFileName.c_str());
 
-				if (! fontFile->is_open()) {
+				if (! fontFile->is_open())
+				{
 					cout << "WARNING: Unable to open " << fontFileName << " resorting to default font." << endl;
-				} else {
+				}
+				else
+				{
 					_fontFile = StelApp::getInstance().getDataFilePath(font);
 					_fontScale = scale;
 				}
@@ -1404,15 +1499,19 @@ void StelCore::getFontForLocale(const string &_locale, string &_fontFile, float 
 				fontFileName = StelApp::getInstance().getDataFilePath(fixedFont);
 				fontFile = new ifstream(fontFileName.c_str());
 
-				if (! fontFile->is_open()) {
+				if (! fontFile->is_open())
+				{
 					cout << "WARNING: Unable to open " << fontFileName << " resorting to default font." << endl;
-				} else {
+				}
+				else
+				{
 					_fixedFontFile = StelApp::getInstance().getDataFilePath(fixedFont);
 					_fixedFontScale = fixedScale;
 				}
 				delete fontFile;
 
-				if(locale == _locale) {
+				if(locale == _locale)
+				{
 					break;
 				}
 			}
@@ -1426,13 +1525,17 @@ void StelCore::getFontForLocale(const string &_locale, string &_fontFile, float 
 
 
 
-void StelCore::setFlagTracking(bool b) {
+void StelCore::setFlagTracking(bool b)
+{
 
-	if(!b || !selected_object) {
+	if(!b || !selected_object)
+	{
 		navigation->set_flag_traking(0);
-	} else {
+	}
+	else
+	{
 		navigation->move_to(selected_object.get_earth_equ_pos(navigation),
-							getAutomoveDuration());
+		                    getAutomoveDuration());
 		navigation->set_flag_traking(1);
 	}
 
@@ -1443,42 +1546,120 @@ void StelCore::setFlagTracking(bool b) {
 
 
 
-void StelCore::setFlagStars(bool b) {hip_stars->setFlagStars(b);}
-bool StelCore::getFlagStars(void) const {return hip_stars->getFlagStars();}
+void StelCore::setFlagStars(bool b)
+{
+	hip_stars->setFlagStars(b);
+}
+bool StelCore::getFlagStars(void) const
+{
+	return hip_stars->getFlagStars();
+}
 
-void StelCore::setFlagStarName(bool b) {hip_stars->setFlagStarName(b);}
-bool StelCore::getFlagStarName(void) const {return hip_stars->getFlagStarName();}
+void StelCore::setFlagStarName(bool b)
+{
+	hip_stars->setFlagStarName(b);
+}
+bool StelCore::getFlagStarName(void) const
+{
+	return hip_stars->getFlagStarName();
+}
 
-void StelCore::setFlagStarSciName(bool b) {hip_stars->setFlagStarSciName(b);}
-bool StelCore::getFlagStarSciName(void) const {return hip_stars->getFlagStarSciName();}	
+void StelCore::setFlagStarSciName(bool b)
+{
+	hip_stars->setFlagStarSciName(b);
+}
+bool StelCore::getFlagStarSciName(void) const
+{
+	return hip_stars->getFlagStarSciName();
+}
 
-void StelCore::setFlagStarTwinkle(bool b) {hip_stars->setFlagStarTwinkle(b);}
-bool StelCore::getFlagStarTwinkle(void) const {return hip_stars->getFlagStarTwinkle();}	
+void StelCore::setFlagStarTwinkle(bool b)
+{
+	hip_stars->setFlagStarTwinkle(b);
+}
+bool StelCore::getFlagStarTwinkle(void) const
+{
+	return hip_stars->getFlagStarTwinkle();
+}
 
-void StelCore::setFlagPointStar(bool b) {hip_stars->setFlagPointStar(b);}
-bool StelCore::getFlagPointStar(void) const {return hip_stars->getFlagPointStar();}	
+void StelCore::setFlagPointStar(bool b)
+{
+	hip_stars->setFlagPointStar(b);
+}
+bool StelCore::getFlagPointStar(void) const
+{
+	return hip_stars->getFlagPointStar();
+}
 
-void StelCore::setMaxMagStarName(float f) {hip_stars->setMaxMagStarName(f);}
-float StelCore::getMaxMagStarName(void) const {return hip_stars->getMaxMagStarName();}	
+void StelCore::setMaxMagStarName(float f)
+{
+	hip_stars->setMaxMagStarName(f);
+}
+float StelCore::getMaxMagStarName(void) const
+{
+	return hip_stars->getMaxMagStarName();
+}
 
-void StelCore::setMaxMagStarSciName(float f) {hip_stars->setMaxMagStarSciName(f);}
-float StelCore::getMaxMagStarSciName(void) const {return hip_stars->getMaxMagStarSciName();}	
+void StelCore::setMaxMagStarSciName(float f)
+{
+	hip_stars->setMaxMagStarSciName(f);
+}
+float StelCore::getMaxMagStarSciName(void) const
+{
+	return hip_stars->getMaxMagStarSciName();
+}
 
-void StelCore::setStarScale(float f) {hip_stars->setStarScale(f);}
-float StelCore::getStarScale(void) const {return hip_stars->getStarScale();}			
+void StelCore::setStarScale(float f)
+{
+	hip_stars->setStarScale(f);
+}
+float StelCore::getStarScale(void) const
+{
+	return hip_stars->getStarScale();
+}
 
-void StelCore::setStarMagScale(float f) {hip_stars->setStarMagScale(f);}
-float StelCore::getStarMagScale(void) const {return hip_stars->getStarMagScale();}
+void StelCore::setStarMagScale(float f)
+{
+	hip_stars->setStarMagScale(f);
+}
+float StelCore::getStarMagScale(void) const
+{
+	return hip_stars->getStarMagScale();
+}
 
-void StelCore::setStarTwinkleAmount(float f) {hip_stars->setStarTwinkleAmount(f);}
-float StelCore:: getStarTwinkleAmount(void) const {return hip_stars->getStarTwinkleAmount();}
+void StelCore::setStarTwinkleAmount(float f)
+{
+	hip_stars->setStarTwinkleAmount(f);
+}
+float StelCore:: getStarTwinkleAmount(void) const
+{
+	return hip_stars->getStarTwinkleAmount();
+}
 
-void StelCore::setStarLimitingMag(float f) {hip_stars->setStarLimitingMag(f);}
-float StelCore::getStarLimitingMag(void) const {return hip_stars->getStarLimitingMag();}
+void StelCore::setStarLimitingMag(float f)
+{
+	hip_stars->setStarLimitingMag(f);
+}
+float StelCore::getStarLimitingMag(void) const
+{
+	return hip_stars->getStarLimitingMag();
+}
 
 
-Vec3f StelCore::getColorStarNames(void) const {return hip_stars->getLabelColor();}			
-Vec3f StelCore::getColorStarCircles(void) const {return hip_stars->getCircleColor();}			
+Vec3f StelCore::getColorStarNames(void) const
+{
+	return hip_stars->getLabelColor();
+}
+Vec3f StelCore::getColorStarCircles(void) const
+{
+	return hip_stars->getCircleColor();
+}
 
-void StelCore::setColorStarNames(const Vec3f& v) {hip_stars->setLabelColor(v);}
-void StelCore::setColorStarCircles(const Vec3f& v) {hip_stars->setCircleColor(v);}
+void StelCore::setColorStarNames(const Vec3f& v)
+{
+	hip_stars->setLabelColor(v);
+}
+void StelCore::setColorStarCircles(const Vec3f& v)
+{
+	hip_stars->setCircleColor(v);
+}

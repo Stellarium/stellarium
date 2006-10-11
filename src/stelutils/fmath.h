@@ -31,8 +31,27 @@
 # define pow10(x) pow(10,(x))
 #endif
 
-#ifndef WIN32
-
+// math functions for SUN C++
+#ifdef __SUNPRO_CC
+#include <math.h>
+#include <sunmath.h>
+#elif defined(__sun) || defined(__sun__)
+#include <math.h>
+static inline float logf (float x) { return log (x); }
+static inline float log10f (float x) { return log10 (x); }
+static inline float sqrtf (float x) { return sqrt (x); }
+static inline float floorf (float x) { return floor (x); }
+static inline float powf (float x, float y) { return pow (x,y); }
+static inline float cosf (float x) { return cos (x); }
+static inline float acosf (float x) { return acos (x); }
+static inline float sinf (float x) { return sin (x); }
+static inline float asinf (float x) { return asin (x); }
+static inline float atan2f (float x, float y) { return atan2 (x,y); }
+static inline float tanf (float x) { return tan (x); }
+static inline float atanf (float x) { return atan (x); }
+static inline float ceilf (float x) { return ceil (x); }
+static inline float expf (float x) { return exp (x); }
+#elif !defined(WIN32)
 #ifndef HAVE_ACOSF
 # define acosf(x) (float)(acos(x))
 #endif

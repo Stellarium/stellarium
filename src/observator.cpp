@@ -29,7 +29,6 @@
 #include "planet.h"
 #include "translator.h"
 
-
 Observator::Observator(const SolarSystem &ssystem)
            :ssystem(ssystem), planet(0),
             longitude(0.), latitude(0.), altitude(0)
@@ -160,24 +159,25 @@ void Observator::setConf(InitParser & conf, const string& section) const
 
 // for platforms without built in timegm function
 // taken from the timegm man page
-time_t my_timegm (struct tm *tm) {
-	time_t ret;
-	char *tz;
-	char tmpstr[255];
-	tz = getenv("TZ");
-	putenv("TZ=");
-	tzset();
-	ret = mktime(tm);
-	if (tz)
-	{
- snprintf(tmpstr, 255, "TZ=%s", tz);
-		putenv(tmpstr);
-   }
-    else
-		putenv("");
-	tzset();
-	return ret;
-}
+//not valid on all platforms... substitute with mytimegm.h
+//time_t my_timegm (struct tm *tm) {
+//	time_t ret;
+//	char *tz;
+//	char tmpstr[255];
+//	tz = getenv("TZ");
+//	putenv("TZ=");
+//	tzset();
+//	ret = mktime(tm);
+//	if (tz)
+//	{
+ //snprintf(tmpstr, 255, "TZ=%s", tz);
+//		putenv(tmpstr);
+ //  }
+  //  else
+//		putenv("");
+//	tzset();
+//	return ret;
+//}
 
 
 

@@ -67,7 +67,7 @@ Component* StelUI::createConfigWindow(void)
 	max_mag_star_name = new FloatIncDec(courierFont, tex_up, tex_down, -1.5, 9, core->getMaxMagStarName(), 0.5);
 	max_mag_star_name->setOnPressCallback(callback<void>(this, &StelUI::updateConfigVariables));
 	tab_render->addComponent(max_mag_star_name);
-	max_mag_star_name->setPos(x + 220,y);
+	max_mag_star_name->setPos(x + 320,y);
 
 	y+=15;
 
@@ -79,7 +79,7 @@ Component* StelUI::createConfigWindow(void)
 	star_twinkle_amount = new FloatIncDec(courierFont, tex_up, tex_down, 0, 0.6, core->getStarTwinkleAmount(), 0.1);
 	star_twinkle_amount->setOnPressCallback(callback<void>(this, &StelUI::updateConfigVariables));
 	tab_render->addComponent(star_twinkle_amount);
-	star_twinkle_amount->setPos(x + 220,y);
+	star_twinkle_amount->setPos(x + 320,y);
 
 	y+=30;
 
@@ -122,7 +122,7 @@ Component* StelUI::createConfigWindow(void)
 		core->getNebulaMaxMagHints(), 0.5);
 	max_mag_nebula_name->setOnPressCallback(callback<void>(this, &StelUI::updateConfigVariables));
 	tab_render->addComponent(max_mag_nebula_name);
-	max_mag_nebula_name->setPos(x + 220,y);
+	max_mag_nebula_name->setPos(x + 320,y);
 
 	y+=15;
 	
@@ -145,7 +145,7 @@ Component* StelUI::createConfigWindow(void)
 	moon_x4_cbx = new LabeledCheckBox(false, _("Moon Scale"));
 	moon_x4_cbx->setOnPressCallback(callback<void>(this, &StelUI::updateConfigVariables));
 	tab_render->addComponent(moon_x4_cbx);
-	moon_x4_cbx->setPos(x + 150,y);
+	moon_x4_cbx->setPos(x + 220,y);
 
 	y+=15;
 
@@ -174,12 +174,12 @@ Component* StelUI::createConfigWindow(void)
 	equator_cbx = new LabeledCheckBox(false, _("Equator Line"));
 	equator_cbx->setOnPressCallback(callback<void>(this, &StelUI::updateConfigVariables));
 	tab_render->addComponent(equator_cbx);
-	equator_cbx->setPos(x + 150,y); y+=15;
+	equator_cbx->setPos(x + 220,y); y+=15;
 
 	ecliptic_cbx = new LabeledCheckBox(false, _("Ecliptic Line"));
 	ecliptic_cbx->setOnPressCallback(callback<void>(this, &StelUI::updateConfigVariables));
 	tab_render->addComponent(ecliptic_cbx);
-	ecliptic_cbx->setPos(x + 150,y);
+	ecliptic_cbx->setPos(x + 220,y);
 
 	y+=30;
 
@@ -195,7 +195,7 @@ Component* StelUI::createConfigWindow(void)
 	cardinal_cbx = new LabeledCheckBox(false, _("Cardinal Points"));
 	cardinal_cbx->setOnPressCallback(callback<void>(this, &StelUI::updateConfigVariables));
 	tab_render->addComponent(cardinal_cbx);
-	cardinal_cbx->setPos(x + 150,y); y+=15;
+	cardinal_cbx->setPos(x + 220,y); y+=15;
 
 	atmosphere_cbx = new LabeledCheckBox(false, _("Atmosphere"));
 	atmosphere_cbx->setOnPressCallback(callback<void>(this, &StelUI::updateConfigVariables));
@@ -205,7 +205,7 @@ Component* StelUI::createConfigWindow(void)
 	fog_cbx = new LabeledCheckBox(false, _("Fog"));
 	fog_cbx->setOnPressCallback(callback<void>(this, &StelUI::updateConfigVariables));
 	tab_render->addComponent(fog_cbx);
-	fog_cbx->setPos(x + 150,y);
+	fog_cbx->setPos(x + 220,y);
 
 	y+=30;
 	
@@ -461,7 +461,7 @@ Component* StelUI::createConfigWindow(void)
 	language_lb = new ListBox(6);
 	language_lb->setPos(x+10,y);
 	language_lb->setSizex(200);
-	language_lb->addItemList(StelUtils::stringToWstring(Translator::getAvailableLanguagesCodes(app->getLocaleDir())));
+	language_lb->addItemList(Translator::getAvailableLanguagesNamesNative(app->getLocaleDir()));
 	language_lb->setOnChangeCallback(callback<void>(this, &StelUI::setAppLanguage));
 	language_lb->setCurrent(StelUtils::stringToWstring(app->getAppLanguage()));
 	tab_language->addComponent(language_lb);
@@ -477,7 +477,7 @@ Component* StelUI::createConfigWindow(void)
 	languageSky_lb = new ListBox(6);
 	languageSky_lb->setPos(x+10,y);
 	languageSky_lb->setSizex(200);
-	languageSky_lb->addItemList(StelUtils::stringToWstring(Translator::getAvailableLanguagesCodes(app->getLocaleDir())));
+	languageSky_lb->addItemList(Translator::getAvailableLanguagesNamesNative(app->getLocaleDir()));
 	languageSky_lb->setOnChangeCallback(callback<void>(this, &StelUI::setSkyLanguage));
 	languageSky_lb->setCurrent(StelUtils::stringToWstring(core->getSkyLanguage()));
 	tab_language->addComponent(languageSky_lb);
@@ -550,12 +550,12 @@ void StelUI::dialogCallback(void)
 
 void StelUI::setSkyLanguage(void)
 {
-	core->setSkyLanguage(StelUtils::wstringToString(languageSky_lb->getCurrent()));
+	core->setSkyLanguage(Translator::nativeLanguageNameCodeToIso639_1(languageSky_lb->getCurrent()));
 }
 
 void StelUI::setAppLanguage(void)
 {
-	app->setAppLanguage(StelUtils::wstringToString(language_lb->getCurrent()));
+	app->setAppLanguage(Translator::nativeLanguageNameCodeToIso639_1(language_lb->getCurrent()));
 }
 
 void StelUI::setSkyCulture(void)
