@@ -384,8 +384,12 @@ void StelApp::startMainLoop()
 #if defined(WIN32)
 							char path[MAX_PATH];
 							path[MAX_PATH-1] = '\0';
-							if (SUCCEEDED(SHGetFolderPath(NULL, CSIDL_DESKTOPDIRECTORY, NULL, 0, path)))
+							// Previous version used SHGetFolderPath and made app crash on window 95/98..
+							//if (SUCCEEDED(SHGetFolderPath(NULL, CSIDL_DESKTOPDIRECTORY, NULL, 0, path)))
+							LPITEMIDLIST tmp;
+							if (SUCCEEDED(SHGetSpecialFolderLocation(NULL, CSIDL_DESKTOPDIRECTORY, &tmp)))
 							{
+                                 SHGetPathFromIDList(tmp, path);                      
 								shotdir = string(path)+"\\";
 							}
 							else

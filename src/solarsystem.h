@@ -19,7 +19,10 @@
 
 #ifndef _SOLARSYSTEM_H_
 #define _SOLARSYSTEM_H_
-
+//sun is already defined in Sun C/Solaris
+#if defined(sun)
+#undef sun
+#endif
 #include <vector>
 #include <functional>
 

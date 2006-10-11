@@ -1,11 +1,21 @@
-0.8.2
+0.8.2 [2006-10-5]
 Re-enabled some script recording features (select, pan/tilt, zoom)
+Fixed win95/98 missing .dll bug.
+Applied patch for sun C/C++ compiler to work.
+Hopefully fixed buggy text display using patch from David ZH.R. Huang
+Applied patch for MacOSX compilation.
+Display real language names instead of two letters codes in the GUI.
+Removed HR landscape and added Ocean instead.
+Many bug fixes from sf.net.
+Added new translations for af vi he mt bg th ar and updated the others.
 
 0.8.1 [2006-06-26]
 radial texture for planetary rings
 telescope control using external telescope server programs
 minimum_fps patch by nuisance78
-viewport flipping
+image flipping
+Automatically get locale codes on win32 (works sometimes)
+Many bugs fixes, thanks to bug reporters on sf.net!
 
 0.8.0 [2006-04-30]
 BaseFont selectable in config 

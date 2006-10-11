@@ -150,6 +150,9 @@ void StelApp::init(void)
 {
 	Translator::initSystemLanguage();
 
+	// Load language codes
+	Translator::initIso639_1LanguageCodes(getDataFilePath("iso639-1.utf8"));
+	
 	// Initialize video device and other sdl parameters
 	InitParser conf;
 	conf.load(configDir + "config.ini");
@@ -372,10 +375,21 @@ int StelApp::handleMove(int x, int y)
 
 }
 
+
 // Handle key press and release
 int StelApp::handleKeys(SDLKey key, SDLMod mod,
-                        Uint16 unicode, s_gui::S_GUI_VALUE state)
+						Uint16 unicode, s_gui::S_GUI_VALUE state)
 {
+#ifdef MACOSX
+		if ( key == SDLK_LEFT || 
+								key == SDLK_RIGHT || 
+								key == SDLK_UP || 
+								key == SDLK_DOWN || 
+								key == SDLK_BACKSPACE ) {
+							if (ui->handle_keys_tui(key, tuiv)) return 1;
+							if (ui->handle_keys(key, mod, key, state)) return 1;
+								}
+#endif
 	s_tui::S_TUI_VALUE tuiv;
 	if (state == s_gui::S_GUI_PRESSED) tuiv = s_tui::S_TUI_PRESSED;
 	else tuiv = s_tui::S_TUI_RELEASED;

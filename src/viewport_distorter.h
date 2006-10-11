@@ -23,6 +23,10 @@
 
 #include <string>
 
+#if defined(__sun) || defined(__sun__)
+typedef std::string string;
+#endif
+
 using namespace std;
 
 class StelCore;

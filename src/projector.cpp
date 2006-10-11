@@ -25,6 +25,7 @@
 #include "stereographic_projector.h"
 #include "spheric_mirror_projector.h"
 
+
 const char *Projector::typeToString(PROJECTOR_TYPE type) {
   switch (type) {
     case PERSPECTIVE_PROJECTOR:    return "perspective";
@@ -298,7 +299,13 @@ void Projector::sSphere(GLdouble radius, GLdouble one_minus_oblateness,
     else nsign = 1.0;
 
     const GLfloat drho = M_PI / (GLfloat) stacks;
+
+#if defined(__sun) || defined(__sun__)
+	// in Sun C/C++ on Solaris 8 VLAs are not allowed, so let's use new double[]
+    double* cos_sin_rho = new double[2 * (stacks + 1)];
+#else
     double cos_sin_rho[2*(stacks+1)];
+#endif
     double *cos_sin_rho_p = cos_sin_rho;
     for (i = 0; i <= stacks; i++) {
       double rho = i * drho;
@@ -314,7 +321,6 @@ void Projector::sSphere(GLdouble radius, GLdouble one_minus_oblateness,
       *cos_sin_theta_p++ = cos(theta);
       *cos_sin_theta_p++ = sin(theta);
     }
-
     // texturing: s goes from 0.0/0.25/0.5/0.75/1.0 at +y/+x/-y/-x/+y axis
     // t goes from -1.0/+1.0 at z = -radius/+radius (linear along longitudes)
     // cannot use triangle fan on texturing (s coord. at top/bottom tip varies)
@@ -356,6 +362,9 @@ void Projector::sSphere(GLdouble radius, GLdouble one_minus_oblateness,
         glEnd();
         t -= dt;
     }
+#if defined(__sun) || defined(__sun__)
+    delete[] cos_sin_rho;
+#endif
   }
 
   glPopMatrix();
@@ -476,13 +485,20 @@ void Projector::sRing(GLdouble r_min, GLdouble r_max,
   const double dr = (r_max-r_min) / stacks;
   const double dtheta = 2.0 * M_PI / slices;
   if (slices < 0) slices = -slices;
+
+#if defined(__sun) || defined(__sun__)
+  //in Sun C/C++ on Solaris 8 VLAs are not allowed, so let's use new double[]
+  double *cos_sin_theta = new double[2*(slices+1)];
+#else
   double cos_sin_theta[2*(slices+1)];
+#endif
   double *cos_sin_theta_p = cos_sin_theta;
   for (j = 0; j <= slices; j++) {
     const double theta = (j == slices) ? 0.0 : j * dtheta;
     *cos_sin_theta_p++ = cos(theta);
     *cos_sin_theta_p++ = sin(theta);
   }
+
 
   // draw intermediate stacks as quad strips
   for (double r = r_min; r < r_max; r+=dr) {
@@ -506,6 +522,10 @@ void Projector::sRing(GLdouble r_min, GLdouble r_max,
     }
     glEnd();
   }
+#if defined(__sun) || defined(__sun__)
+    delete[] cos_sin_theta;
+#endif  
+  
   glPopMatrix();
 }
 
@@ -530,7 +550,13 @@ void Projector::sSphere_map(GLdouble radius, GLint slices, GLint stacks,
     const double nsign = orient_inside?-1:1;
 
     const double drho = M_PI / stacks;
+
+#if defined(__sun) || defined(__sun__)
+	// in Sun C/C++ on Solaris 8 VLAs are not allowed, so let's use new double[]    
+	double *cos_sin_rho = new double[2*(stacks+1)];
+#else
     double cos_sin_rho[2*(stacks+1)];
+#endif	
     double *cos_sin_rho_p = cos_sin_rho;
     for (i = 0; i <= stacks; i++) {
       const double rho = i * drho;
@@ -546,6 +572,7 @@ void Projector::sSphere_map(GLdouble radius, GLint slices, GLint stacks,
       *cos_sin_theta_p++ = cos(theta);
       *cos_sin_theta_p++ = sin(theta);
     }
+
 
     // texturing: s goes from 0.0/0.25/0.5/0.75/1.0 at +y/+x/-y/-x/+y axis
     // t goes from -1.0/+1.0 at z = -radius/+radius (linear along longitudes)
@@ -614,6 +641,10 @@ void Projector::sSphere_map(GLdouble radius, GLint slices, GLint stacks,
             glEnd();
         }
     }
+#if defined(__sun) || defined(__sun__)
+    delete[] cos_sin_rho;
+#endif  
+	
     glPopMatrix();
 }
 
@@ -694,10 +725,8 @@ void Projector::print_gravity180(s_font* font, float x, float y, const wstring& 
 			}
 
 			// keep text horizontal if gravity labels off
-			if(gravityLabels) glRotatef(psi,0,0,-1);
-			
+			if(gravityLabels) glRotatef(psi,0,0,-1);	
 		}
-
 
 	}
 	reset_perspective_projection();
