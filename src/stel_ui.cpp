@@ -646,9 +646,9 @@ void StelUI::cbr(void)
 	if (bt_flag_goto->getIsMouseOver())
 		bt_flag_help_lbl->setLabel(_("Goto selected object [SPACE]"));
 	if (bt_flip_horz && bt_flip_horz->getIsMouseOver())
-		bt_flag_help_lbl->setLabel(_("flip horizontally"));
+		bt_flag_help_lbl->setLabel(_("Flip horizontally"));
 	if (bt_flip_vert && bt_flip_vert->getIsMouseOver())
-		bt_flag_help_lbl->setLabel(_("flip vertically"));
+		bt_flag_help_lbl->setLabel(_("Flip vertically"));
 }
 
 void StelUI::tcbr(void)
@@ -667,7 +667,7 @@ void StelUI::tcbr(void)
 Component* StelUI::createLicenceWindow(void)
 {
 	licence_txtlbl = new TextLabel(
-wstring(L"                 \u2022   " APP_NAME "  June 2006  \u2022\n\n") +
+wstring(L"                 \u2022   Stellarium  October 2006  \u2022\n\n") +
 L"\u2022   Copyright (c) 2000-2006 Fabien Chereau et al.\n\n" +
 L"\u2022" + _("   Please check for newer versions and send bug reports\n\
     and comments to us at: http://www.stellarium.org\n\n") +
@@ -743,16 +743,17 @@ CTRL + C : End Script\n\
 \n")) + 
 wstring(_("Misc:\n"
 "9   : Toggle meteor shower rates\n"
-"CTRL + 0,..,9 : execute GOTO command for telescope 0,..,9\n"
-"CTRL + SHIFT + H: toggle horizontal image flipping\n"
-"CTRL + SHIFT + V: toggle vertical image flipping\n"
+"CTRL + 0,..,9 : Execute GOTO command for telescope 0,..,9\n"
+"CTRL + SHIFT + H: Toggle horizontal image flipping\n"
+"CTRL + SHIFT + V: Toggle vertical image flipping\n"))+
 #ifndef MACOSX
-"CTRL + Q : Quit\n"
+wstring(_("CTRL + Q : Quit\n"))
 #else
-"CMD + Q  : Quit\n"
+wstring(_("CMD + Q : Quit\n"))
 #endif
-	                  )),courierFont);
-
+			,courierFont);
+	
+	
 	//	help_txtlbl->adjustSize();
 	help_txtlbl->setPos(10,10);
 	help_win = new StdBtWin(_("Help"));

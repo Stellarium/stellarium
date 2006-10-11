@@ -21,13 +21,16 @@
 #include <cassert>
 #include <dirent.h>
 #include <cstdio>
-#include <vector>
 #include <algorithm>
+#include <fstream>
 
 #include "bytes.h"
+#include "stel_utility.h"
 #include "translator.h"
 
+// Init static members
 Translator* Translator::lastUsed = NULL;
+map<string, wstring> Translator::iso639codes;
 
 string Translator::systemLangName = "C";
 
@@ -97,7 +100,8 @@ void Translator::reload()
 	}
 	else
 	{
-		snprintf(envstr, 25, "LANG=%s", langName.c_str());	
+		snprintf(envstr, 25, "LANG=%s", langName.c_str());
+	}
 #endif
 	//printf("Setting locale: %s\n", envstr);
 	putenv(envstr);
@@ -159,8 +163,44 @@ std::wstring Translator::UTF8stringToWstring(const string& s)
 	return ws;
 }
 
+//! Convert from ISO639-1 2 letters langage code to native language name
+std::wstring Translator::iso639_1LanguageCodeToNativeName(const string& languageCode)
+{
+	if (iso639codes.find(languageCode)!=iso639codes.end())
+		return iso639codes[languageCode];
+	else
+		return StelUtils::stringToWstring(languageCode);
+}
+	
+//! Convert from native language name to ISO639-1 2 letters langage code 
+std::string Translator::nativeLanguageNameCodeToIso639_1(const wstring& languageName)
+{
+	std::map<string, wstring>::iterator iter;
+	for (iter=iso639codes.begin();iter!=iso639codes.end();++iter)
+	{
+		if ((*iter).second == languageName)
+			return (*iter).first;
+	}
+	return StelUtils::wstringToString(languageName);
+}
+
 //! Get available language codes from directory tree
-std::string Translator::getAvailableLanguagesCodes(const string& localeDir)
+std::wstring Translator::getAvailableLanguagesNamesNative(const string& localeDir)
+{
+	std::vector<string> codeList = getAvailableLanguagesIso639_1Codes(localeDir);
+	
+	wstring output;
+	std::vector<string>::iterator iter;
+	for (iter=codeList.begin();iter!=codeList.end();++iter)
+	{
+		if (iter!=codeList.begin()) output+=L"\n";
+		output+=iso639_1LanguageCodeToNativeName(*iter);
+	}
+	return output;
+}
+
+//! Get available language codes from directory tree
+std::vector<string> Translator::getAvailableLanguagesIso639_1Codes(const string& localeDir)
 {
 	struct dirent *entryp;
 	DIR *dp;
@@ -171,7 +211,7 @@ std::string Translator::getAvailableLanguagesCodes(const string& localeDir)
 	if ((dp = opendir(localeDir.c_str())) == NULL)
 	{
 		cerr << "Unable to find locale directory containing translations:" << localeDir << endl;
-		return "";
+		return result;
 	}
 
 	while ((entryp = readdir(dp)) != NULL)
@@ -189,15 +229,36 @@ std::string Translator::getAvailableLanguagesCodes(const string& localeDir)
 	
 	// Sort the language names by alphabetic order
 	std::sort(result.begin(), result.end());
-
-	string output;
-	std::vector<string>::iterator iter;
-	for (iter=result.begin();iter!=result.end();++iter)
-	{
-		if (iter!=result.begin()) output+="\n";
-		output+=*iter;
-	}
-
-	return output;
+	
+	return result;
 }
 
+//! Initialize the languages code list from the passed file
+//! @param fileName file containing the list of language codes
+void Translator::initIso639_1LanguageCodes(const string& fileName)
+{
+	std::ifstream inf(fileName.c_str());
+	if (!inf.is_open())
+	{
+		cerr << "Can't open ISO639 codes file " << fileName << endl;
+		assert(0);
+	}
+	
+	if (!iso639codes.empty())
+		iso639codes.clear();
+		
+	string record;
+	
+	while(!getline(inf, record).eof())
+	{
+		string::size_type pos;
+		if ((pos = record.find('\t', 4))==string::npos)
+		{
+			cerr << "Error: invalid entry in ISO639 codes: " << fileName << endl;
+		}
+		else
+		{
+			iso639codes.insert(pair<string, wstring>(record.substr(0, 2), UTF8stringToWstring(record.substr(pos+1))));
+		}
+	}
+}

@@ -52,7 +52,7 @@ public:
 	//! The translation is done using gettext with translated strings defined in translations.h
 	void translateNames(Translator& trans);
 		   
-	//! @brief Load constellation line shapes, art textures and boundaries shapes from data files*/
+	//! @brief Load constellation line shapes, art textures and boundaries shapes from data files
 	void loadLinesAndArt(const string& lines_file, const string& art_file, const string &boundaryfileName, LoadingBar& lb);
 	
 	//! Set constellation art fade duration
@@ -90,9 +90,6 @@ public:
 	//! Get whether selected constellation is displayed alone
 	bool getFlagIsolateSelected(void) const { return isolateSelected;}
 	
-	//! Define wehther lable are print with gravity effect
-	void setFlagGravityLabel(bool g);
-	
 	//! Define line color
 	void setLineColor(const Vec3f& c);
 	//! Get line color
@@ -119,7 +116,7 @@ public:
 	//! Define which constellation is selected from a star number
 	void setSelected(const StelObject &s) {if (!s) setSelectedConst(NULL); else setSelectedConst(is_star_in(s));}
 	
-///	unsigned int getFirstSelectedHP(void);  //Tony
+	void setFlagGravityLabel(bool g);
 
 	//! Return the matching constellation object's pointer if exists or NULL
 	//! @param nameI18n The case sensistive constellation name

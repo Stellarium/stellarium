@@ -30,6 +30,7 @@
   #include <winsock2.h> // select
 #else
   #include <sys/select.h> // select
+  #include <sys/time.h>
   #include <signal.h>
 #endif
 

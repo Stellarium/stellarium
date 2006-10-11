@@ -46,9 +46,9 @@
 #include "image_mgr.h"
 #include "callbacks.hpp"
 
-//!  @brief Main class for stellarium core processing. 
-//!  
-//! Manage all the objects to be used in the program. 
+//!  @brief Main class for stellarium core processing.
+//!
+//! Manage all the objects to be used in the program.
 //! This class is the main API of the program. It must be documented using doxygen.
 class StelCore
 {
@@ -59,7 +59,7 @@ public:
 	// Inputs are the locale directory and root directory and callback function for recording actions
     StelCore(const string& LDIR, const string& DATA_ROOT, const boost::callback <void, string> & recordCallback);
     virtual ~StelCore();
-	
+
 	//! Init and load all main core components from the passed config file.
 	void init(const InitParser& conf);
 
@@ -101,49 +101,49 @@ public:
 	//! This function has no permanent effect on the global locale
 	//!@param newSkyLocaleName The name of the locale (e.g fr) to use for sky object labels
 	void setSkyLanguage(const string& newSkyLocaleName);
-	
+
 	//! Get the current sky language used for sky object labels
 	//! @return The name of the locale (e.g fr)
 	string getSkyLanguage() {return skyTranslator.getTrueLocaleName();}
-	
+
 	///////////////////////////////////////////////////////////////////////////////////////
 	// Navigation
 	//! Set time speed in JDay/sec
 	void setTimeSpeed(double ts) {navigation->set_time_speed(ts);}
 	//! Get time speed in JDay/sec
 	double getTimeSpeed(void) const {return navigation->get_time_speed();}
-	
+
 	//! Set stellarium time to current real world time
 	void setTimeNow();
 	//! Get wether the current stellarium time is the real world time
 	bool getIsTimeNow(void) const;
-	
-	
+
+
 	//! Set the current date in Julian Day
 	void setJDay(double JD) {navigation->set_JDay(JD);}
 	//! Get the current date in Julian Day
-	double getJDay(void) const {return navigation->get_JDay();}	
-	
+	double getJDay(void) const {return navigation->get_JDay();}
+
 	//! Set object tracking
-	void setFlagTracking(bool b); 
+	void setFlagTracking(bool b);
 	//! Get object tracking
 	bool getFlagTracking(void) {return navigation->get_flag_traking();}
-	
+
 	//! Set whether sky position is to be locked
 	void setFlagLockSkyPosition(bool b) {navigation->set_flag_lock_equ_pos(b);}
 	//! Set whether sky position is locked
 	bool getFlagLockSkyPosition(void) {return navigation->get_flag_lock_equ_pos();}
-	
+
 	//! Set current mount type
 	void setMountMode(MOUNT_MODE m) {navigation->set_viewing_mode((m==MOUNT_ALTAZIMUTAL) ? Navigator::VIEW_HORIZON : Navigator::VIEW_EQUATOR);}
 	//! Get current mount type
 	MOUNT_MODE getMountMode(void) {return ((navigation->get_viewing_mode()==Navigator::VIEW_HORIZON) ? MOUNT_ALTAZIMUTAL : MOUNT_EQUATORIAL);}
 	//! Toggle current mount mode between equatorial and altazimutal
 	void toggleMountMode(void) {if (getMountMode()==MOUNT_ALTAZIMUTAL) setMountMode(MOUNT_EQUATORIAL); else setMountMode(MOUNT_ALTAZIMUTAL);}
-	
+
 	// TODO!
 	void loadObservatory();
-	
+
 	//! Go to the selected object
     void gotoSelectedObject(void) {
       if (selected_object)
@@ -151,7 +151,7 @@ public:
           selected_object.get_earth_equ_pos(navigation),
           auto_move_duration);
     }
-	
+
 	//! Move view in alt/az (or equatorial if in that mode) coordinates
 	void panView(double delta_az, double delta_alt)	{
 		setFlagTracking(0);
@@ -162,82 +162,82 @@ public:
 	void setAutomoveDuration(float f) {auto_move_duration = f;}
 	//! Get automove duration in seconds
 	float getAutomoveDuration(void) const {return auto_move_duration;}
-	
+
 	//! Zoom to the given FOV (in degree)
 	void zoomTo(double aim_fov, float move_duration = 1.) {projection->zoom_to(aim_fov, move_duration);}
-	
+
 	//! Get current FOV (in degree)
 	float getFov(void) const {return projection->get_fov();}
-	
+
     //! If is currently zooming, return the target FOV, otherwise return current FOV
-	double getAimFov(void) const {return projection->getAimFov();}	
-	
+	double getAimFov(void) const {return projection->getAimFov();}
+
 	//! Set the current FOV (in degree)
 	void setFov(double f) {projection->set_fov(f);}
-	
+
 	//! Set the maximum FOV (in degree)
 	void setMaxFov(double f) {projection->setMaxFov(f);}
-	
+
 	//! Go and zoom temporarily to the selected object.
 	void autoZoomIn(float move_duration = 1.f, bool allow_manual_zoom = 1);
-	
+
 	//! Unzoom to the previous position
 	void autoZoomOut(float move_duration = 1.f, bool full = 0);
-	
+
 	//! Set whether auto zoom can go further than normal
 	void setFlagManualAutoZoom(bool b) {FlagManualZoom = b;}
 	//! Get whether auto zoom can go further than normal
-	bool getFlagManualAutoZoom(void) {return FlagManualZoom;}	
-	
+	bool getFlagManualAutoZoom(void) {return FlagManualZoom;}
+
 	// Viewing direction function : 1 move, 0 stop.
 	void turn_right(int);
 	void turn_left(int);
 	void turn_up(int);
 	void turn_down(int);
 	void zoom_in(int);
-	void zoom_out(int);	
-	
+	void zoom_out(int);
+
 	//! Make the first screen position correspond to the second (useful for mouse dragging)
 	void dragView(int x1, int y1, int x2, int y2);
-	
+
 	//! Find and select an object near given equatorial position
 	//! @return true if a object was found at position (this does not necessarily means it is selected)
 	bool findAndSelect(const Vec3d& pos);
-	
+
 	//! Find and select an object near given screen position
 	//! @return true if a object was found at position (this does not necessarily means it is selected)
 	bool findAndSelect(int x, int y);
-	
+
 	//! Find and select an object from its translated name
 	//! @param nameI18n the case sensitive object translated name
-	//! @return true if a object was found with the passed name	
+	//! @return true if a object was found with the passed name
 	bool findAndSelectI18n(const wstring &nameI18n);
 
 	//! Find and select an object based on selection type and standard name or number
 	//! @return true if an object was selected
 	bool selectObject(const string &type, const string &id);
 
-		
+
 	//! Find and return the list of at most maxNbItem objects auto-completing the passed object I18n name
 	//! @param objPrefix the case insensitive first letters of the searched object
 	//! @param maxNbItem the maximum number of returned object names
 	//! @return a vector of matching object name by order of relevance, or an empty vector if nothing match
 	vector<wstring> listMatchingObjectsI18n(const wstring& objPrefix, unsigned int maxNbItem=5) const;
-	
+
 	//! Return whether an object is currently selected
 	bool getFlagHasSelected(void) {return selected_object;}
-	
+
 	//! Deselect selected object if any
 	//! Does not deselect selected constellation
     void unSelect(void) {
       selected_object=NULL;
-      //asterisms->setSelected(NULL); 
+      //asterisms->setSelected(NULL);
       ssystem->setSelected(StelObject());
     }
-	
+
 	//! Set whether a pointer is to be drawn over selected object
 	void setFlagSelectedObjectPointer(bool b) { object_pointer_visibility = b; }
-	
+
 	//! Get a multiline string describing the currently selected object
 	wstring getSelectedObjectInfo(void) const {return selected_object.getInfoString(navigation);}
 
@@ -246,19 +246,19 @@ public:
 
 	//! Get a color used to display info about the currently selected object
 	Vec3f getSelectedObjectInfoColor(void) const;
-	
+
 	///////////////////////////////////////////////////////////////////////////////////////
 	// Constellations methods
 	//! Set display flag of constellation lines
 	void setFlagConstellationLines(bool b) {asterisms->setFlagLines(b);}
 	//! Get display flag of constellation lines
 	bool getFlagConstellationLines(void) {return asterisms->getFlagLines();}
-	
+
 	//! Set display flag of constellation art
 	void setFlagConstellationArt(bool b) {asterisms->setFlagArt(b);}
 	//! Get display flag of constellation art
 	bool getFlagConstellationArt(void) {return asterisms->getFlagArt();}
-	
+
 	//! Set display flag of constellation names
 	void setFlagConstellationNames(bool b) {asterisms->setFlagNames(b);}
 	//! Get display flag of constellation names
@@ -269,27 +269,27 @@ public:
 	//! Get display flag of constellation boundaries
 	bool getFlagConstellationBoundaries(void) {return asterisms->getFlagBoundaries();}
 	Vec3f getColorConstellationBoundaries(void) const {return asterisms->getBoundaryColor();}
-	
+
 	//! Set constellation art intensity
 	void setConstellationArtIntensity(float f) {asterisms->setArtIntensity(f);}
 	//! Get constellation art intensity
-	float getConstellationArtIntensity(void) const {return asterisms->getArtIntensity();}	
-	
+	float getConstellationArtIntensity(void) const {return asterisms->getArtIntensity();}
+
 	//! Set constellation art intensity
 	void setConstellationArtFadeDuration(float f) {asterisms->setArtFadeDuration(f);}
 	//! Get constellation art intensity
-	float getConstellationArtFadeDuration(void) const {return asterisms->getArtFadeDuration();}		
-	
+	float getConstellationArtFadeDuration(void) const {return asterisms->getArtFadeDuration();}
+
 	//! Set whether selected constellation is drawn alone
 	void setFlagConstellationIsolateSelected(bool b) {asterisms->setFlagIsolateSelected(b);}
-	//! Get whether selected constellation is drawn alone 
+	//! Get whether selected constellation is drawn alone
 	bool getFlagConstellationIsolateSelected(void) {return asterisms->getFlagIsolateSelected();}
-	
+
 	//! Get constellation line color
 	Vec3f getColorConstellationLine() const {return asterisms->getLineColor();}
 	//! Set constellation line color
 	void setColorConstellationLine(const Vec3f& v) {asterisms->setLineColor(v);}
-	
+
 	//! Get constellation names color
 	Vec3f getColorConstellationNames() const {return asterisms->getLabelColor();}
 	//! Set constellation names color
@@ -311,61 +311,61 @@ public:
 
 	///////////////////////////////////////////////////////////////////////////////////////
 	// Stars methods
-	//! Set display flag for Stars 
+	//! Set display flag for Stars
 	void setFlagStars(bool b);
-	//! Get display flag for Stars 
+	//! Get display flag for Stars
 	bool getFlagStars(void) const;
-		
-	//! Set display flag for Star names. Also make sure that stars are on if want labels 
+
+	//! Set display flag for Star names. Also make sure that stars are on if want labels
 	void setFlagStarName(bool b);
-	//! Get display flag for Star names 
+	//! Get display flag for Star names
 	bool getFlagStarName(void) const;
-	
-	//! Set display flag for Star Scientific names 
+
+	//! Set display flag for Star Scientific names
 	void setFlagStarSciName(bool b);
-	//! Get display flag for Star Scientific names 
+	//! Get display flag for Star Scientific names
 	bool getFlagStarSciName(void) const;
-	
-	//! Set flag for Star twinkling 
+
+	//! Set flag for Star twinkling
 	void setFlagStarTwinkle(bool b);
-	//! Get flag for Star twinkling 
+	//! Get flag for Star twinkling
 	bool getFlagStarTwinkle(void) const;
-		
-	//! Set flag for displaying Star as GLpoints (faster but not so nice) 
+
+	//! Set flag for displaying Star as GLpoints (faster but not so nice)
 	void setFlagPointStar(bool b);
-	//! Get flag for displaying Star as GLpoints (faster but not so nice) 
+	//! Get flag for displaying Star as GLpoints (faster but not so nice)
 	bool getFlagPointStar(void) const;
-	
-	//! Set maximum magnitude at which stars names are displayed 
+
+	//! Set maximum magnitude at which stars names are displayed
 	void setMaxMagStarName(float f);
-	//! Get maximum magnitude at which stars names are displayed 
+	//! Get maximum magnitude at which stars names are displayed
 	float getMaxMagStarName(void) const;
-	
-	//! Set maximum magnitude at which stars scientific names are displayed 
+
+	//! Set maximum magnitude at which stars scientific names are displayed
 	void setMaxMagStarSciName(float f);
-	//! Get maximum magnitude at which stars scientific names are displayed 
+	//! Get maximum magnitude at which stars scientific names are displayed
 	float getMaxMagStarSciName(void) const;
-		
-	//! Set base stars display scaling factor 
+
+	//! Set base stars display scaling factor
 	void setStarScale(float f);
-	//! Get base stars display scaling factor 
+	//! Get base stars display scaling factor
 	float getStarScale(void) const;
-	
-	//! Set stars display scaling factor wrt magnitude 
+
+	//! Set stars display scaling factor wrt magnitude
 	void setStarMagScale(float f);
-	//! Get base stars display scaling factor wrt magnitude 
+	//! Get base stars display scaling factor wrt magnitude
 	float getStarMagScale(void) const;
 
-	//! Set stars twinkle amount 
+	//! Set stars twinkle amount
 	void setStarTwinkleAmount(float f);
-	//! Get stars twinkle amount 
+	//! Get stars twinkle amount
 	float getStarTwinkleAmount(void) const;
-	
-	//! Set stars limiting display magnitude 
+
+	//! Set stars limiting display magnitude
 	void setStarLimitingMag(float f);
-	//! Get stars limiting display magnitude 
+	//! Get stars limiting display magnitude
 	float getStarLimitingMag(void) const;
-	
+
 
 	Vec3f getColorStarNames(void) const;
 	Vec3f getColorStarCircles(void) const;
@@ -377,18 +377,18 @@ public:
 	//! Set flag for displaying Planets
 	void setFlagPlanets(bool b) {ssystem->setFlagPlanets(b);}
 	//! Get flag for displaying Planets
-	bool getFlagPlanets(void) const {return ssystem->getFlagPlanets();}		
-	
+	bool getFlagPlanets(void) const {return ssystem->getFlagPlanets();}
+
 	//! Set flag for displaying Planets Trails
 	void setFlagPlanetsTrails(bool b) {ssystem->setFlagTrails(b);}
 	//! Get flag for displaying Planets Trails
-	bool getFlagPlanetsTrails(void) const {return ssystem->getFlagTrails();}	
-	
+	bool getFlagPlanetsTrails(void) const {return ssystem->getFlagTrails();}
+
 	//! Set flag for displaying Planets Hints
 	void setFlagPlanetsHints(bool b) {ssystem->setFlagHints(b);}
 	//! Get flag for displaying Planets Hints
-	bool getFlagPlanetsHints(void) const {return ssystem->getFlagHints();}	
-		
+	bool getFlagPlanetsHints(void) const {return ssystem->getFlagHints();}
+
 	//! Set flag for displaying Planets Orbits
 	void setFlagPlanetsOrbits(bool b) {ssystem->setFlagOrbits(b);}
 	//! Get flag for displaying Planets Orbits
@@ -401,20 +401,20 @@ public:
 
 	Vec3f getColorPlanetsOrbits(void) const {return ssystem->getOrbitColor();}
 	Vec3f getColorPlanetsNames(void) const {return ssystem->getLabelColor();}
-	
+
 	//! Start/stop displaying planets Trails
 	void startPlanetsTrails(bool b) {ssystem->startTrails(b);}
-	Vec3f getColorPlanetsTrails(void) const {return ssystem->getTrailColor();}			
+	Vec3f getColorPlanetsTrails(void) const {return ssystem->getTrailColor();}
 
-	//! Set base planets display scaling factor 
+	//! Set base planets display scaling factor
 	void setPlanetsScale(float f) {ssystem->setScale(f);}
-	//! Get base planets display scaling factor 
-	float getPlanetsScale(void) const {return ssystem->getScale();}	
-	
+	//! Get base planets display scaling factor
+	float getPlanetsScale(void) const {return ssystem->getScale();}
+
 	//! Set selected planets by englishName
 	//! @param englishName The planet name or "" to select no planet
 	void setPlanetsSelected(const string& englishName) {ssystem->setSelected(englishName);}
-	
+
 	wstring getPlanetHashString(void);
 
 	bool setHomePlanet(string planet);
@@ -423,12 +423,12 @@ public:
 	void setFlagMoonScaled(bool b) {ssystem->setFlagMoonScale(b);}
 	//! Get flag for displaying a scaled Moon
 	bool getFlagMoonScaled(void) const {return ssystem->getFlagMoonScale();}
-	
+
 	//! Set Moon scale
 	void setMoonScale(float f) { if (f<0) ssystem->setMoonScale(1.); else ssystem->setMoonScale(f);}
 	//! Get Moon scale
-	float getMoonScale(void) const {return ssystem->getMoonScale();}	
-	
+	float getMoonScale(void) const {return ssystem->getMoonScale();}
+
 	///////////////////////////////////////////////////////////////////////////////////////
 	// Grid and lines
 	//! Set flag for displaying Azimutal Grid
@@ -446,29 +446,29 @@ public:
 	//! Set flag for displaying Equatorial Line
 	void setFlagEquatorLine(bool b) {equator_line->setFlagshow(b);}
 	//! Get flag for displaying Equatorial Line
-	bool getFlagEquatorLine(void) const {return equator_line->getFlagshow();}	
+	bool getFlagEquatorLine(void) const {return equator_line->getFlagshow();}
 	Vec3f getColorEquatorLine(void) const {return equator_line->getColor();}
 
 	//! Set flag for displaying Ecliptic Line
 	void setFlagEclipticLine(bool b) {ecliptic_line->setFlagshow(b);}
 	//! Get flag for displaying Ecliptic Line
-	bool getFlagEclipticLine(void) const {return ecliptic_line->getFlagshow();}	
+	bool getFlagEclipticLine(void) const {return ecliptic_line->getFlagshow();}
 	Vec3f getColorEclipticLine(void) const {return ecliptic_line->getColor();}
 
-		
+
 	//! Set flag for displaying Meridian Line
 	void setFlagMeridianLine(bool b) {meridian_line->setFlagshow(b);}
 	//! Get flag for displaying Meridian Line
-	bool getFlagMeridianLine(void) const {return meridian_line->getFlagshow();}	
+	bool getFlagMeridianLine(void) const {return meridian_line->getFlagshow();}
 	Vec3f getColorMeridianLine(void) const {return meridian_line->getColor();}
-	
+
 	//! Set flag for displaying Cardinals Points
 	void setFlagCardinalsPoints(bool b) {cardinals_points->setFlagShow(b);}
 	//! Get flag for displaying Cardinals Points
 	bool getFlagCardinalsPoints(void) const {return cardinals_points->getFlagShow();}
-	
+
 	//! Set Cardinals Points color
-	void setColorCardinalPoints(const Vec3f& v) {cardinals_points->setColor(v);}
+	void setColorCardinalPoints(const Vec3f& v) {cardinals_points->setColor(v); }
 	//! Get Cardinals Points color
 	Vec3f getColorCardinalPoints(void) const {return cardinals_points->get_color();}
 
@@ -478,7 +478,7 @@ public:
 	void setColorConstellationBoundaries(const Vec3f& v) { asterisms->setBoundaryColor(v);}
 	void setColorPlanetsOrbits(const Vec3f& v) { ssystem->setOrbitColor(v);}
 	void setColorPlanetsNames(const Vec3f& v) { ssystem->setLabelColor(v);}
-	void setColorPlanetsTrails(const Vec3f& v) { ssystem->setTrailColor(v);}			
+	void setColorPlanetsTrails(const Vec3f& v) { ssystem->setTrailColor(v);}
 	void setColorAzimutalGrid(const Vec3f& v) { azi_grid->setColor(v);}
 	void setColorEquatorGrid(const Vec3f& v) { equ_grid->setColor(v);}
 	void setColorEquatorLine(const Vec3f& v) { equator_line->setColor(v);}
@@ -487,22 +487,22 @@ public:
 	void setColorNebulaLabels(const Vec3f& v) { nebulas->setLabelColor(v);}
 	void setColorNebulaCircle(const Vec3f& v) { nebulas->setCircleColor(v);}
 
-	
+
 	///////////////////////////////////////////////////////////////////////////////////////
-	// Projection	
-	//! Set the horizontal viewport offset in pixels 
-	void setViewportHorizontalOffset(int hoff) const {projection->setViewportPosX(hoff);}	
-	//! Get the horizontal viewport offset in pixels 
+	// Projection
+	//! Set the horizontal viewport offset in pixels
+	void setViewportHorizontalOffset(int hoff) const {projection->setViewportPosX(hoff);}
+	//! Get the horizontal viewport offset in pixels
 	int getViewportHorizontalOffset(void) const {return projection->getViewportPosX();}
-	
-	//! Set the vertical viewport offset in pixels 
+
+	//! Set the vertical viewport offset in pixels
 	void setViewportVerticalOffset(int voff) const {projection->setViewportPosY(voff);}
-	//! Get the vertical viewport offset in pixels 
+	//! Get the vertical viewport offset in pixels
 	int getViewportVerticalOffset(void) const {return projection->getViewportPosY();}
-	
+
 	//! Maximize viewport according to passed screen values
 	void setMaximizedViewport(int screenW, int screenH) {projection->setViewport(0, 0, screenW, screenH);}
-	
+
 	//! Set a centered squared viewport with passed vertical and horizontal offset
 	void setSquareViewport(int screenW, int screenH, int hoffset, int voffset)
 	{
@@ -514,117 +514,117 @@ public:
 	void setViewportMaskDisk(void) {projection->setMaskType(Projector::DISK);}
 	//! Get whether a disk mask must be drawn over the viewport
 	bool getViewportMaskDisk(void) const {return projection->getMaskType()==Projector::DISK;}
-	
+
 	//! Set whether no mask must be drawn over the viewport
 	void setViewportMaskNone(void) {projection->setMaskType(Projector::NONE);}
-	
+
 	//! Set the projection type
 	void setProjectionType(const string& ptype);
 	//! Get the projection type
 	string getProjectionType(void) const {return Projector::typeToString(projection->getType());}
-	
+
 	//! get/set horizontal/vertical image flip
 	bool getFlipHorz(void) const {return projection->getFlipHorz();}
 	bool getFlipVert(void) const {return projection->getFlipVert();}
 	void setFlipHorz(bool flip);
 	void setFlipVert(bool flip);
-	
+
 	//! Set flag for enabling gravity labels
 	void setFlagGravityLabels(bool b) {projection->setFlagGravityLabels(b);}
 	//! Get flag for enabling gravity labels
-	bool getFlagGravityLabels(void) const {return projection->getFlagGravityLabels();}	
-	
+	bool getFlagGravityLabels(void) const {return projection->getFlagGravityLabels();}
+
 	//! Get viewport width
 	int getViewportWidth(void) const {return projection->getViewportWidth();}
-	
+
 	//! Get viewport height
 	int getViewportHeight(void) const {return projection->getViewportHeight();}
-	
+
 	//! Get viewport X position
 	int getViewportPosX(void) const {return projection->getViewportPosX();}
-	
+
 	//! Get viewport Y position
 	int getViewportPosY(void) const {return projection->getViewportPosY();}
-	
+
 	//! Set the viewport width and height
 	void setViewportSize(int w, int h);
-	
+
 	//! Print the passed wstring so that it is oriented in the drection of the gravity
-	void printGravity(s_font* font, float x, float y, const wstring& str, bool speedOptimize = 1, 
+	void printGravity(s_font* font, float x, float y, const wstring& str, bool speedOptimize = 1,
 			float xshift = 0, float yshift = 0) const
 		{projection->print_gravity180(font, x, y, str, speedOptimize, xshift, yshift);}
-	
+
 	///////////////////////////////////////////////////////////////////////////////////////
 	// Landscape
 	//! Set flag for displaying Landscape
 	void setFlagLandscape(bool b) {landscape->setFlagShow(b);}
 	//! Get flag for displaying Landscape
-	bool getFlagLandscape(void) const {return landscape->getFlagShow();}	
-		
+	bool getFlagLandscape(void) const {return landscape->getFlagShow();}
+
 	//! Set flag for displaying Fog
 	void setFlagFog(bool b) {landscape->setFlagShowFog(b);}
 	//! Get flag for displaying Fog
 	bool getFlagFog(void) const {return landscape->getFlagShowFog();}
-	
+
 	///////////////////////////////////////////////////////////////////////////////////////
 	// Atmosphere
 	//! Set flag for displaying Atmosphere
 	void setFlagAtmosphere(bool b) {atmosphere->setFlagShow(b);}
 	//! Get flag for displaying Atmosphere
-	bool getFlagAtmosphere(void) const {return atmosphere->getFlagShow();}	
-	
+	bool getFlagAtmosphere(void) const {return atmosphere->getFlagShow();}
+
 	//! Set atmosphere fade duration in s
 	void setAtmosphereFadeDuration(float f) {atmosphere->setFadeDuration(f);}
 	//! Get atmosphere fade duration in s
-	float getAtmosphereFadeDuration(void) const {return atmosphere->getFadeDuration();}	
-	
+	float getAtmosphereFadeDuration(void) const {return atmosphere->getFadeDuration();}
+
 	///////////////////////////////////////////////////////////////////////////////////////
 	// Milky Way
 	//! Set flag for displaying Milky Way
 	void setFlagMilkyWay(bool b) {milky_way->setFlagShow(b);}
 	//! Get flag for displaying Milky Way
 	bool getFlagMilkyWay(void) const {return milky_way->getFlagShow();}
-	
+
 	//! Set Milky Way intensity
 	void setMilkyWayIntensity(float f) {milky_way->set_intensity(f);}
 	//! Get Milky Way intensity
 	float getMilkyWayIntensity(void) const {return milky_way->get_intensity();}
-	
+
 	///////////////////////////////////////////////////////////////////////////////////////
 	// Nebulae
 	//! Set flag for displaying Nebulae
 	void setFlagNebula(bool b) {nebulas->setFlagShow(b);}
 	//! Get flag for displaying Nebulae
 	bool getFlagNebula(void) const {return nebulas->getFlagShow();}
-	
+
 	//! Set flag for displaying Nebulae Hints
 	void setFlagNebulaHints(bool b) {nebulas->setFlagHints(b);}
 	//! Get flag for displaying Nebulae Hints
-	bool getFlagNebulaHints(void) const {return nebulas->getFlagHints();}	
-	
+	bool getFlagNebulaHints(void) const {return nebulas->getFlagHints();}
+
 	//! Set Nebulae Hints circle scale
 	void setNebulaCircleScale(float f) {nebulas->setNebulaCircleScale(f);}
 	//! Get Nebulae Hints circle scale
 	float getNebulaCircleScale(void) const {return nebulas->getNebulaCircleScale();}
-	
+
 	//! Set flag for displaying Nebulae as bright
 	void setFlagBrightNebulae(bool b) {nebulas->setFlagBright(b);}
 	//! Get flag for displaying Nebulae as brigth
-	bool getFlagBrightNebulae(void) const {return nebulas->getFlagBright();}	
-	
+	bool getFlagBrightNebulae(void) const {return nebulas->getFlagBright();}
+
 	//! Set maximum magnitude at which nebulae hints are displayed
 	void setNebulaMaxMagHints(float f) {nebulas->setMaxMagHints(f);}
 	//! Get maximum magnitude at which nebulae hints are displayed
 	float getNebulaMaxMagHints(void) const {return nebulas->getMaxMagHints();}
-	
+
 	//! Set flag for displaying Nebulae even without textures
 	void setFlagNebulaDisplayNoTexture(bool b) {nebulas->setFlagDisplayNoTexture(b);}
 	//! Get flag for displaying Nebulae without textures
-	bool getFlagNebulaDisplayNoTexture(void) const {return nebulas->getFlagDisplayNoTexture();}	
-	
+	bool getFlagNebulaDisplayNoTexture(void) const {return nebulas->getFlagDisplayNoTexture();}
+
 	Vec3f getColorNebulaLabels(void) const {return nebulas->getLabelColor();}
 	Vec3f getColorNebulaCircle(void) const {return nebulas->getCircleColor();}
-	
+
 	///////////////////////////////////////////////////////////////////////////////////////
 	// Observator
 	//! Return the current observatory (as a const object)
@@ -639,7 +639,7 @@ public:
 	void setMeteorsRate(int f) {meteors->set_ZHR(f);}
 	//! Get Meteor Rate in number per hour
 	int getMeteorsRate(void) const {return meteors->get_ZHR();}
-		
+
 	///////////////////////////////////////////////////////////////////////////////////////
 	// Others
 	//! Load color scheme from the given ini file and section name
@@ -648,12 +648,12 @@ public:
 	//! Return the current image manager which display users images
 	ImageMgr* getImageMgr(void) const {return script_images;}
 
-	
+
 
 	double getZoomSpeed() { return zoom_speed; }
 	float getAutoMoveDuration() { return auto_move_duration; }
 
-	
+
 	void getFontForLocale(const string &_locale, string &_fontFile, float &_fontScale,
 						  string &_fixedFontFile, float &_fixedFontScale);
 
@@ -706,20 +706,20 @@ private:
 	SkyLocalizer *skyloc;				// for sky cultures and locales
 	ImageMgr * script_images;           // for script loaded image display
 	class TelescopeMgr *telescope_mgr;
-    
+
 	float sky_brightness;				// Current sky Brightness in ?
 	bool object_pointer_visibility;		// Should selected object pointer be drawn
 	void drawChartBackground(void);
 	wstring get_cursor_pos(int x, int y);
-		
+
 	// Increment/decrement smoothly the vision field and position
-	void updateMove(int delta_time);		
+	void updateMove(int delta_time);
 	int FlagEnableZoomKeys;
 	int FlagEnableMoveKeys;
-	
+
 	double deltaFov,deltaAlt,deltaAz;	// View movement
 	double move_speed, zoom_speed;		// Speed of movement and zooming
-	
+
 	float InitFov;						// Default viewing FOV
 	Vec3d InitViewPos;					// Default viewing direction
 	int FlagManualZoom;					// Define whether auto zoom can go further

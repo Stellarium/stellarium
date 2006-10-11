@@ -100,7 +100,12 @@ void CustomProjector::sSphere(GLdouble radius, GLdouble one_minus_oblateness,
     }
 
     const GLfloat drho = M_PI / (GLfloat) stacks;
+#if defined(__sun) || defined(__sun__)
+	// in Sun C/C++ on Solaris 8 VLAs are not allowed, so let's use new double[]
+    double *cos_sin_rho = new double[2*(stacks+1)];
+#else
     double cos_sin_rho[2*(stacks+1)];
+#endif
     double *cos_sin_rho_p = cos_sin_rho;
     for (i = 0; i <= stacks; i++) {
       double rho = i * drho;
@@ -116,6 +121,10 @@ void CustomProjector::sSphere(GLdouble radius, GLdouble one_minus_oblateness,
       *cos_sin_theta_p++ = cos(theta);
       *cos_sin_theta_p++ = sin(theta);
     }
+
+#if defined(__sun) || defined(__sun__)
+    delete[] cos_sin_rho;
+#endif
 
     // texturing: s goes from 0.0/0.25/0.5/0.75/1.0 at +y/+x/-y/-x/+y axis
     // t goes from -1.0/+1.0 at z = -radius/+radius (linear along longitudes)
