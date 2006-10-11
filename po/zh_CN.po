@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: stellarium@free.fr\n"
-"POT-Creation-Date: 2006-08-22 15:39+0200\n"
+"POT-Creation-Date: 2006-10-11 08:39+0200\n"
 "PO-Revision-Date: 2006-06-22 12:58+0000\n"
 "Last-Translator: Norman Prescott <norman@nexint.info>\n"
 "Language-Team: Chinese (China) <zh_CN@li.org>\n"
@@ -41,38 +41,56 @@ msgstr "点击 `%s --help' 获取更多信息↵\n"
 msgid "Loading Constellation Art: "
 msgstr "载入星座图象: "
 
-#: src/hip_star.cpp:85 src/hip_star.cpp:141 src/nebula.cpp:94
-#: src/nebula.cpp:116 src/planet.cpp:108 src/planet.cpp:154
+#: src/hip_star.cpp:84 src/hip_star.cpp:140 src/hip_star_mgr.cpp:533
+#: src/hip_star_mgr.cpp:636 src/nebula.cpp:94 src/nebula.cpp:116
+#: src/planet.cpp:110 src/planet.cpp:156
 msgid "Magnitude: "
 msgstr "星等: "
 
-#: src/hip_star.cpp:86 src/hip_star.cpp:142
+#: src/hip_star.cpp:85 src/hip_star.cpp:141
 msgid " (Variable)"
 msgstr " (变星)"
 
-#: src/hip_star.cpp:88 src/nebula.cpp:96 src/planet.cpp:112
+#: src/hip_star.cpp:87 src/hip_star_mgr.cpp:535 src/hip_star_mgr.cpp:538
+#: src/hip_star_mgr.cpp:638 src/hip_star_mgr.cpp:644 src/nebula.cpp:96
+#: src/planet.cpp:114
 msgid "RA/DE: "
 msgstr "赤经/赤纬: "
 
-#: src/hip_star.cpp:94 src/nebula.cpp:102 src/planet.cpp:118
+#: src/hip_star.cpp:93 src/hip_star_mgr.cpp:547 src/hip_star_mgr.cpp:653
+#: src/nebula.cpp:102 src/planet.cpp:120
 msgid "Az/Alt: "
 msgstr "方位角/高度: "
 
-#: src/hip_star.cpp:96 src/planet.cpp:121 src/planet.cpp:158
+#: src/hip_star.cpp:95 src/hip_star_mgr.cpp:660 src/planet.cpp:123
+#: src/planet.cpp:160
 msgid "Distance: "
 msgstr "距离: "
 
-#: src/hip_star.cpp:98 src/hip_star.cpp:145
+#: src/hip_star.cpp:97 src/hip_star.cpp:144 src/hip_star_mgr.cpp:663
 msgid " Light Years"
 msgstr " 光年"
 
-#: src/hip_star.cpp:105
+#: src/hip_star.cpp:104 src/hip_star_mgr.cpp:667
 msgid "Spectral Type: "
 msgstr "光谱型: "
 
-#: src/hip_star_mgr.cpp:134
-msgid "Loading Hipparcos catalog:"
-msgstr "载入Hipparcos星表:"
+#: src/hip_star_mgr.cpp:535 src/hip_star_mgr.cpp:638
+msgid "J2000"
+msgstr ""
+
+#: src/hip_star_mgr.cpp:538 src/hip_star_mgr.cpp:644
+msgid "Equ of date"
+msgstr ""
+
+#: src/hip_star_mgr.cpp:658
+msgid "Parallax: "
+msgstr ""
+
+#: src/hip_star_mgr.cpp:980
+#, fuzzy
+msgid "Loading catalog "
+msgstr "载入NGC星表: "
 
 #: src/nebula.cpp:104
 msgid "Type: "
@@ -82,119 +100,119 @@ msgstr "类型: "
 msgid "Size: "
 msgstr "大小: "
 
-#: src/nebula_mgr.cpp:328
+#: src/nebula_mgr.cpp:331
 msgid "Loading NGC catalog: "
 msgstr "载入NGC星表: "
 
-#: src/nebula_mgr.cpp:455
+#: src/nebula_mgr.cpp:458
 msgid "Loading Nebula Textures:"
 msgstr "载入星云图像:"
 
-#: src/planet.cpp:121 src/planet.cpp:158
+#: src/planet.cpp:123 src/planet.cpp:160
 msgid "AU"
 msgstr "天文单位"
 
-#: src/stel_ui.cpp:516 src/stel_ui.cpp:646
+#: src/stel_ui.cpp:515 src/stel_ui.cpp:645
 msgid "Script commander"
 msgstr "脚本命令控制器"
 
-#: src/stel_ui.cpp:543
+#: src/stel_ui.cpp:542
 msgid "Invalid Script command"
 msgstr "无效的脚本命令"
 
-#: src/stel_ui.cpp:611
+#: src/stel_ui.cpp:610
 msgid "Drawing of the Constellations [C]"
 msgstr "星座简图 [C]"
 
-#: src/stel_ui.cpp:613
+#: src/stel_ui.cpp:612
 msgid "Names of the Constellations [V]"
 msgstr "星座名称 [V]"
 
-#: src/stel_ui.cpp:615
+#: src/stel_ui.cpp:614
 msgid "Constellations Art [R]"
 msgstr "星座图像 [R]"
 
-#: src/stel_ui.cpp:617
+#: src/stel_ui.cpp:616
 msgid "Azimuthal Grid [Z]"
 msgstr "地平坐标网格 [Z]"
 
-#: src/stel_ui.cpp:619
+#: src/stel_ui.cpp:618
 msgid "Equatorial Grid [E]"
 msgstr "赤道坐标网格 [E]"
 
-#: src/stel_ui.cpp:621
+#: src/stel_ui.cpp:620
 msgid "Ground [G]"
 msgstr "地面 [G]"
 
-#: src/stel_ui.cpp:623
+#: src/stel_ui.cpp:622
 msgid "Cardinal Points [Q]"
 msgstr "方位基点 [Q]"
 
-#: src/stel_ui.cpp:625
+#: src/stel_ui.cpp:624
 msgid "Atmosphere [A]"
 msgstr "大气 [A]"
 
-#: src/stel_ui.cpp:627
+#: src/stel_ui.cpp:626
 msgid "Nebulas [N]"
 msgstr "星云 [N]"
 
-#: src/stel_ui.cpp:629
+#: src/stel_ui.cpp:628
 msgid "Help [H]"
 msgstr "帮助 [H]"
 
-#: src/stel_ui.cpp:631
+#: src/stel_ui.cpp:630
 msgid "Equatorial/Altazimuthal Mount [ENTER]"
 msgstr "赤道仪/经纬仪 [回车]"
 
-#: src/stel_ui.cpp:633
+#: src/stel_ui.cpp:632
 msgid "Configuration window"
 msgstr "设置窗口"
 
-#: src/stel_ui.cpp:636
+#: src/stel_ui.cpp:635
 msgid "Night (red) mode"
 msgstr "夜视(红色)模式"
 
-#: src/stel_ui.cpp:639
+#: src/stel_ui.cpp:638
 msgid "Quit [CTRL + Q]"
 msgstr "退出 [CTRL + Q]"
 
-#: src/stel_ui.cpp:641
+#: src/stel_ui.cpp:640
 msgid "Quit [CMD + Q]"
 msgstr "退出 [CMD + Q]"
 
-#: src/stel_ui.cpp:644
+#: src/stel_ui.cpp:643
 msgid "Search for object"
 msgstr "搜索天体"
 
-#: src/stel_ui.cpp:648
+#: src/stel_ui.cpp:647
 msgid "Goto selected object [SPACE]"
 msgstr "转到所选天体 [SPACE]"
 
-#: src/stel_ui.cpp:650
+#: src/stel_ui.cpp:649
 msgid "flip horizontally"
 msgstr ""
 
-#: src/stel_ui.cpp:652
+#: src/stel_ui.cpp:651
 msgid "flip vertically"
 msgstr ""
 
-#: src/stel_ui.cpp:658
+#: src/stel_ui.cpp:657
 msgid "Decrease Time Speed [J]"
 msgstr "减慢时间速度 [J]"
 
-#: src/stel_ui.cpp:660
+#: src/stel_ui.cpp:659
 msgid "Real Time Speed [K]"
 msgstr "实际时间速度 [K]"
 
-#: src/stel_ui.cpp:662
+#: src/stel_ui.cpp:661
 msgid "Increase Time Speed [L]"
 msgstr "增加时间速度 [L]"
 
-#: src/stel_ui.cpp:664
+#: src/stel_ui.cpp:663
 msgid "Return to Current Time"
 msgstr "回到当前时间"
 
-#: src/stel_ui.cpp:673
+#: src/stel_ui.cpp:672
 #, fuzzy
 msgid ""
 "   Please check for newer versions and send bug reports\n"
@@ -205,11 +223,11 @@ msgstr ""
 "↵\n"
 "\n"
 
-#: src/stel_ui.cpp:692
+#: src/stel_ui.cpp:691
 msgid "Information"
 msgstr "信息"
 
-#: src/stel_ui.cpp:704
+#: src/stel_ui.cpp:703
 msgid ""
 "Movement & selection:\n"
 "Arrow Keys       : Change viewing RA/DE\n"
@@ -236,7 +254,7 @@ msgstr ""
 "↵\n"
 "\n"
 
-#: src/stel_ui.cpp:715
+#: src/stel_ui.cpp:714
 msgid ""
 "Display options:\n"
 "ENTER : Equatorial/altazimuthal mount\n"
@@ -265,7 +283,7 @@ msgstr ""
 "↵\n"
 "\n"
 
-#: src/stel_ui.cpp:727
+#: src/stel_ui.cpp:726
 msgid ""
 "Dialogs & other controls:\n"
 "H   : Help                      I   : About Stellarium\n"
@@ -284,7 +302,7 @@ msgstr ""
 "↵\n"
 "\n"
 
-#: src/stel_ui.cpp:734
+#: src/stel_ui.cpp:733
 #, fuzzy
 msgid ""
 "Time & Date:\n"
@@ -304,7 +322,7 @@ msgstr ""
 "↵\n"
 "\n"
 
-#: src/stel_ui.cpp:741
+#: src/stel_ui.cpp:740
 msgid ""
 "During Script Playback:\n"
 "CTRL + C : End Script\n"
@@ -317,7 +335,7 @@ msgstr ""
 "↵\n"
 "\n"
 
-#: src/stel_ui.cpp:745
+#: src/stel_ui.cpp:744
 msgid ""
 "Misc:\n"
 "9   : Toggle meteor shower rates\n"
@@ -335,24 +353,24 @@ msgstr ""
 "CTRL + Q : 退出\n"
 "CMD + Q : 退出\n"
 
-#: src/stel_ui.cpp:759
+#: src/stel_ui.cpp:758
 msgid "Help"
 msgstr "帮助"
 
-#: src/stel_ui.cpp:1038
+#: src/stel_ui.cpp:1037
 msgid "Command recording stopped."
 msgstr "命令记录停止."
 
-#: src/stel_ui.cpp:1046
+#: src/stel_ui.cpp:1045
 #, fuzzy
 msgid "Recording commands to script file:\n"
 msgstr "向脚本文件记录命令:↵\n"
 
-#: src/stel_ui.cpp:1048
+#: src/stel_ui.cpp:1047
 msgid "Hit CTRL-R again to stop.\n"
 msgstr "再击CTRL+R以中断.↵\n"
 
-#: src/stel_ui.cpp:1052
+#: src/stel_ui.cpp:1051
 msgid "Error: Unable to open script file to record commands."
 msgstr "错误: 无法打开脚本文件以记录命令."
 
@@ -413,19 +431,19 @@ msgstr "月球尺度"
 msgid "Planets Hints"
 msgstr "行星位置提示"
 
-#: src/stel_ui_conf.cpp:164 src/stel_ui_tuiconf.cpp:404
+#: src/stel_ui_conf.cpp:164 src/stel_ui_tuiconf.cpp:403
 msgid "Equatorial Grid"
 msgstr "赤道坐标网格"
 
-#: src/stel_ui_conf.cpp:169 src/stel_ui_tuiconf.cpp:403
+#: src/stel_ui_conf.cpp:169 src/stel_ui_tuiconf.cpp:402
 msgid "Azimuthal Grid"
 msgstr "地平坐标网格"
 
-#: src/stel_ui_conf.cpp:174 src/stel_ui_tuiconf.cpp:405
+#: src/stel_ui_conf.cpp:174 src/stel_ui_tuiconf.cpp:404
 msgid "Equator Line"
 msgstr "天赤道"
 
-#: src/stel_ui_conf.cpp:179 src/stel_ui_tuiconf.cpp:406
+#: src/stel_ui_conf.cpp:179 src/stel_ui_tuiconf.cpp:405
 msgid "Ecliptic Line"
 msgstr "黄道"
 
@@ -433,7 +451,7 @@ msgstr "黄道"
 msgid "Ground"
 msgstr "地面"
 
-#: src/stel_ui_conf.cpp:195 src/stel_ui_tuiconf.cpp:398
+#: src/stel_ui_conf.cpp:195 src/stel_ui_tuiconf.cpp:397
 msgid "Cardinal Points"
 msgstr "方位基点"
 
@@ -445,8 +463,8 @@ msgstr "大气"
 msgid "Fog"
 msgstr "雾"
 
-#: src/stel_ui_conf.cpp:235 src/stel_ui_conf.cpp:408 src/stel_ui_conf.cpp:445
-#: src/stel_ui_conf.cpp:504
+#: src/stel_ui_conf.cpp:235 src/stel_ui_conf.cpp:407 src/stel_ui_conf.cpp:444
+#: src/stel_ui_conf.cpp:503
 msgid "Save as default"
 msgstr "保存为默认值"
 
@@ -521,67 +539,67 @@ msgstr "重新启动程序"
 msgid "change to apply."
 msgstr "以便改动生效."
 
-#: src/stel_ui_conf.cpp:401
+#: src/stel_ui_conf.cpp:400
 msgid "For unlisted screen resolution, edit the file :"
 msgstr "如需自定分辨率，请编辑此文件:"
 
-#: src/stel_ui_conf.cpp:418
+#: src/stel_ui_conf.cpp:417
 msgid "Choose landscapes:"
 msgstr "选择地景:"
 
-#: src/stel_ui_conf.cpp:433 src/stel_ui_conf.cpp:897
+#: src/stel_ui_conf.cpp:432 src/stel_ui_conf.cpp:897
 msgid "Author: "
 msgstr "作者: "
 
-#: src/stel_ui_conf.cpp:456
+#: src/stel_ui_conf.cpp:455
 msgid "Program Language: "
 msgstr "程序语言： "
 
-#: src/stel_ui_conf.cpp:472 src/stel_ui_tuiconf.cpp:385
+#: src/stel_ui_conf.cpp:471 src/stel_ui_tuiconf.cpp:384
 msgid "Sky Language: "
 msgstr "星空语言: "
 
-#: src/stel_ui_conf.cpp:490 src/stel_ui_tuiconf.cpp:381
+#: src/stel_ui_conf.cpp:489 src/stel_ui_tuiconf.cpp:380
 msgid "Sky Culture: "
 msgstr "星空名称类型: "
 
-#: src/stel_ui_conf.cpp:511
+#: src/stel_ui_conf.cpp:510
 msgid "Language"
 msgstr "语言"
 
-#: src/stel_ui_conf.cpp:512
+#: src/stel_ui_conf.cpp:511
 msgid "Date & Time"
 msgstr "日期和时间"
 
-#: src/stel_ui_conf.cpp:513
+#: src/stel_ui_conf.cpp:512
 msgid "Location"
 msgstr "位置"
 
-#: src/stel_ui_conf.cpp:514
+#: src/stel_ui_conf.cpp:513
 msgid "Landscapes"
 msgstr "地景"
 
-#: src/stel_ui_conf.cpp:515
+#: src/stel_ui_conf.cpp:514
 msgid "Video"
 msgstr "影像"
 
-#: src/stel_ui_conf.cpp:516
+#: src/stel_ui_conf.cpp:515
 msgid "Rendering"
 msgstr "渲染"
 
-#: src/stel_ui_conf.cpp:648
+#: src/stel_ui_conf.cpp:647
 msgid "Object Search"
 msgstr "天体搜索"
 
-#: src/stel_ui_conf.cpp:655
+#: src/stel_ui_conf.cpp:654
 msgid "Search for (eg. Saturn, Polaris, HP6218, Orion, M31):"
 msgstr "搜索（比如：Saturn, Polaris, HP6218, Orion, M31)"
 
-#: src/stel_ui_conf.cpp:672
+#: src/stel_ui_conf.cpp:671
 msgid "GO"
 msgstr "去"
 
-#: src/stel_ui_conf.cpp:799
+#: src/stel_ui_conf.cpp:800
 msgid "Enter observatory name"
 msgstr "输入天文台名称"
 
@@ -609,224 +627,224 @@ msgstr ":曾经出现的最高流量(1966年狮子座流星雨)"
 msgid "Meteor Rate per minute"
 msgstr "每分钟流星流量"
 
-#: src/stel_ui_conf.cpp:997
+#: src/stel_ui_conf.cpp:996
 msgid "Current Time Speed is x"
 msgstr "目前时间速度为x"
 
-#: src/stel_ui_tuiconf.cpp:272 src/stel_ui_tuiconf.cpp:415
+#: src/stel_ui_tuiconf.cpp:271 src/stel_ui_tuiconf.cpp:414
 msgid "Magnitude Sizing Multiplier: "
 msgstr "等倍增大视面: "
 
-#: src/stel_ui_tuiconf.cpp:352
+#: src/stel_ui_tuiconf.cpp:351
 msgid "Set Location "
 msgstr "设置位置 "
 
-#: src/stel_ui_tuiconf.cpp:353
+#: src/stel_ui_tuiconf.cpp:352
 msgid "Set Time "
 msgstr "设置时间 "
 
-#: src/stel_ui_tuiconf.cpp:354
+#: src/stel_ui_tuiconf.cpp:353
 msgid "General "
 msgstr "一般设置 "
 
-#: src/stel_ui_tuiconf.cpp:355
+#: src/stel_ui_tuiconf.cpp:354
 msgid "Stars "
 msgstr "恒星 "
 
-#: src/stel_ui_tuiconf.cpp:356
+#: src/stel_ui_tuiconf.cpp:355
 msgid "Colors "
 msgstr "颜色 "
 
-#: src/stel_ui_tuiconf.cpp:357
+#: src/stel_ui_tuiconf.cpp:356
 msgid "Effects "
 msgstr "效果 "
 
-#: src/stel_ui_tuiconf.cpp:358
+#: src/stel_ui_tuiconf.cpp:357
 msgid "Scripts "
 msgstr "脚本 "
 
-#: src/stel_ui_tuiconf.cpp:359
+#: src/stel_ui_tuiconf.cpp:358
 msgid "Administration "
 msgstr "管理 "
 
-#: src/stel_ui_tuiconf.cpp:362
+#: src/stel_ui_tuiconf.cpp:361
 msgid "Latitude: "
 msgstr "纬度: "
 
-#: src/stel_ui_tuiconf.cpp:363
+#: src/stel_ui_tuiconf.cpp:362
 msgid "Longitude: "
 msgstr "经度: "
 
-#: src/stel_ui_tuiconf.cpp:364
+#: src/stel_ui_tuiconf.cpp:363
 msgid "Altitude (m): "
 msgstr "海拔(m): "
 
-#: src/stel_ui_tuiconf.cpp:365
+#: src/stel_ui_tuiconf.cpp:364
 msgid "Solar System Body: "
 msgstr "太阳系成员: "
 
-#: src/stel_ui_tuiconf.cpp:369
+#: src/stel_ui_tuiconf.cpp:368
 msgid "Sky Time: "
 msgstr "星空时间: "
 
-#: src/stel_ui_tuiconf.cpp:370
+#: src/stel_ui_tuiconf.cpp:369
 msgid "Set Time Zone: "
 msgstr "设置时区: "
 
-#: src/stel_ui_tuiconf.cpp:371
+#: src/stel_ui_tuiconf.cpp:370
 msgid "Preset Sky Time: "
 msgstr "预设星空时间: "
 
-#: src/stel_ui_tuiconf.cpp:372
+#: src/stel_ui_tuiconf.cpp:371
 msgid "Sky Time At Start-up: "
 msgstr "启动时的星空时间: "
 
-#: src/stel_ui_tuiconf.cpp:373
+#: src/stel_ui_tuiconf.cpp:372
 msgid "Actual Time"
 msgstr "实际时间"
 
-#: src/stel_ui_tuiconf.cpp:374
+#: src/stel_ui_tuiconf.cpp:373
 msgid "Preset Time"
 msgstr "预设时间"
 
-#: src/stel_ui_tuiconf.cpp:375
+#: src/stel_ui_tuiconf.cpp:374
 msgid "Time Display Format: "
 msgstr "时间显示格式: "
 
-#: src/stel_ui_tuiconf.cpp:376
+#: src/stel_ui_tuiconf.cpp:375
 msgid "Date Display Format: "
 msgstr "日期显示格式: "
 
-#: src/stel_ui_tuiconf.cpp:388
+#: src/stel_ui_tuiconf.cpp:387
 msgid "Show: "
 msgstr "显示: "
 
-#: src/stel_ui_tuiconf.cpp:388 src/stel_ui_tuiconf.cpp:413 src/s_gui.cpp:2232
+#: src/stel_ui_tuiconf.cpp:387 src/stel_ui_tuiconf.cpp:412 src/s_gui.cpp:2232
 msgid "Yes"
 msgstr "是"
 
-#: src/stel_ui_tuiconf.cpp:388 src/stel_ui_tuiconf.cpp:413 src/s_gui.cpp:2213
+#: src/stel_ui_tuiconf.cpp:387 src/stel_ui_tuiconf.cpp:412 src/s_gui.cpp:2213
 msgid "No"
 msgstr "否"
 
-#: src/stel_ui_tuiconf.cpp:389
+#: src/stel_ui_tuiconf.cpp:388
 msgid "Star Magnitude Multiplier: "
 msgstr "等倍增亮恒星: "
 
-#: src/stel_ui_tuiconf.cpp:390
+#: src/stel_ui_tuiconf.cpp:389
 msgid "Maximum Magnitude to Label: "
 msgstr "星名显示的最暗星等: "
 
-#: src/stel_ui_tuiconf.cpp:391
+#: src/stel_ui_tuiconf.cpp:390
 msgid "Twinkling: "
 msgstr "闪烁: "
 
-#: src/stel_ui_tuiconf.cpp:394
+#: src/stel_ui_tuiconf.cpp:393
 msgid "Constellation Lines"
 msgstr "星座连线"
 
-#: src/stel_ui_tuiconf.cpp:395
+#: src/stel_ui_tuiconf.cpp:394
 msgid "Constellation Names"
 msgstr "星座名称"
 
-#: src/stel_ui_tuiconf.cpp:396
+#: src/stel_ui_tuiconf.cpp:395
 msgid "Constellation Art Intensity"
 msgstr "星座图象亮度"
 
-#: src/stel_ui_tuiconf.cpp:397
+#: src/stel_ui_tuiconf.cpp:396
 msgid "Constellation Boundaries"
 msgstr "星座边界"
 
-#: src/stel_ui_tuiconf.cpp:399
+#: src/stel_ui_tuiconf.cpp:398
 msgid "Planet Names"
 msgstr "行星名称"
 
-#: src/stel_ui_tuiconf.cpp:400
+#: src/stel_ui_tuiconf.cpp:399
 msgid "Planet Orbits"
 msgstr "行星轨道"
 
-#: src/stel_ui_tuiconf.cpp:401
+#: src/stel_ui_tuiconf.cpp:400
 msgid "Planet Trails"
 msgstr "行星轨迹"
 
-#: src/stel_ui_tuiconf.cpp:402
+#: src/stel_ui_tuiconf.cpp:401
 msgid "Meridian Line"
 msgstr "子午线"
 
-#: src/stel_ui_tuiconf.cpp:407
+#: src/stel_ui_tuiconf.cpp:406
 msgid "Nebula Names"
 msgstr "星云名称"
 
-#: src/stel_ui_tuiconf.cpp:408
+#: src/stel_ui_tuiconf.cpp:407
 msgid "Nebula Circles"
 msgstr "星云圆圈"
 
-#: src/stel_ui_tuiconf.cpp:412
+#: src/stel_ui_tuiconf.cpp:411
 msgid "Landscape: "
 msgstr "地景: "
 
-#: src/stel_ui_tuiconf.cpp:413
+#: src/stel_ui_tuiconf.cpp:412
 msgid "Manual zoom: "
 msgstr "手动缩放: "
 
-#: src/stel_ui_tuiconf.cpp:414
+#: src/stel_ui_tuiconf.cpp:413
 msgid "Object Sizing Rule: "
 msgstr "天体大小规则: "
 
-#: src/stel_ui_tuiconf.cpp:414
+#: src/stel_ui_tuiconf.cpp:413
 msgid "Point"
 msgstr "点"
 
-#: src/stel_ui_tuiconf.cpp:414
+#: src/stel_ui_tuiconf.cpp:413
 msgid "Magnitude"
 msgstr "星等"
 
-#: src/stel_ui_tuiconf.cpp:416
+#: src/stel_ui_tuiconf.cpp:415
 msgid "Milky Way intensity: "
 msgstr "银河亮度: "
 
-#: src/stel_ui_tuiconf.cpp:417
+#: src/stel_ui_tuiconf.cpp:416
 msgid "Maximum Nebula Magnitude to Label: "
 msgstr "星云名称显示的最暗星等: "
 
-#: src/stel_ui_tuiconf.cpp:418
+#: src/stel_ui_tuiconf.cpp:417
 msgid "Zoom Duration: "
 msgstr "缩放持续时间: "
 
-#: src/stel_ui_tuiconf.cpp:419
+#: src/stel_ui_tuiconf.cpp:418
 msgid "Cursor Timeout: "
 msgstr "光标自动隐藏: "
 
-#: src/stel_ui_tuiconf.cpp:422
+#: src/stel_ui_tuiconf.cpp:421
 msgid "Local Script: "
 msgstr "本地脚本: "
 
-#: src/stel_ui_tuiconf.cpp:425
+#: src/stel_ui_tuiconf.cpp:424
 msgid "CD/DVD Script: "
 msgstr "CD/DVD脚本: "
 
-#: src/stel_ui_tuiconf.cpp:429
+#: src/stel_ui_tuiconf.cpp:428
 msgid "Load Default Configuration: "
 msgstr "载入默认设置: "
 
-#: src/stel_ui_tuiconf.cpp:430
+#: src/stel_ui_tuiconf.cpp:429
 msgid "Save Current Configuration as Default: "
 msgstr "保存目前设置为默认: "
 
-#: src/stel_ui_tuiconf.cpp:431
+#: src/stel_ui_tuiconf.cpp:430
 #, fuzzy
 msgid "Shut Down: "
 msgstr "显示: "
 
-#: src/stel_ui_tuiconf.cpp:432
+#: src/stel_ui_tuiconf.cpp:431
 msgid "Update me via Internet: "
 msgstr "网上更新: "
 
-#: src/stel_ui_tuiconf.cpp:433
+#: src/stel_ui_tuiconf.cpp:432
 msgid "Set UI Locale: "
 msgstr ""
 
-#: src/stel_ui_tuiconf.cpp:545
+#: src/stel_ui_tuiconf.cpp:544
 msgid "Arrow down to load list."
 msgstr "按向下的箭头以载入列表"
 
@@ -1869,3 +1887,6 @@ msgstr "分"
 #: src/s_gui.cpp:2748
 msgid "Seconds"
 msgstr "秒"
+
+#~ msgid "Loading Hipparcos catalog:"
+#~ msgstr "载入Hipparcos星表:"

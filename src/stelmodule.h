@@ -41,7 +41,7 @@ using namespace std;
 
 /**
 	@author Fabien Chereau <stellarium@free.fr>
-	Use boost::bind + boost::function instead of callback
+	TODO: Use boost::bind + boost::function instead of callback
 */
 class StelModule{
 public:
