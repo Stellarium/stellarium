@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: stellarium@free.fr\n"
-"POT-Creation-Date: 2006-08-22 15:39+0200\n"
+"POT-Creation-Date: 2006-10-11 08:39+0200\n"
 "PO-Revision-Date: 2006-06-25 12:58+0000\n"
 "Last-Translator: peamur <tristamson@yahoo.ie>\n"
 "Language-Team: Irish <ga@li.org>\n"
@@ -38,38 +38,56 @@ msgstr ""
 msgid "Loading Constellation Art: "
 msgstr ""
 
-#: src/hip_star.cpp:85 src/hip_star.cpp:141 src/nebula.cpp:94
-#: src/nebula.cpp:116 src/planet.cpp:108 src/planet.cpp:154
+#: src/hip_star.cpp:84 src/hip_star.cpp:140 src/hip_star_mgr.cpp:533
+#: src/hip_star_mgr.cpp:636 src/nebula.cpp:94 src/nebula.cpp:116
+#: src/planet.cpp:110 src/planet.cpp:156
 msgid "Magnitude: "
 msgstr "Méid: "
 
-#: src/hip_star.cpp:86 src/hip_star.cpp:142
+#: src/hip_star.cpp:85 src/hip_star.cpp:141
 msgid " (Variable)"
 msgstr " (athraitheach)"
 
-#: src/hip_star.cpp:88 src/nebula.cpp:96 src/planet.cpp:112
+#: src/hip_star.cpp:87 src/hip_star_mgr.cpp:535 src/hip_star_mgr.cpp:538
+#: src/hip_star_mgr.cpp:638 src/hip_star_mgr.cpp:644 src/nebula.cpp:96
+#: src/planet.cpp:114
 msgid "RA/DE: "
 msgstr "Radiain/Céimeanna: "
 
-#: src/hip_star.cpp:94 src/nebula.cpp:102 src/planet.cpp:118
+#: src/hip_star.cpp:93 src/hip_star_mgr.cpp:547 src/hip_star_mgr.cpp:653
+#: src/nebula.cpp:102 src/planet.cpp:120
 msgid "Az/Alt: "
 msgstr "Asamat/Airde: "
 
-#: src/hip_star.cpp:96 src/planet.cpp:121 src/planet.cpp:158
+#: src/hip_star.cpp:95 src/hip_star_mgr.cpp:660 src/planet.cpp:123
+#: src/planet.cpp:160
 msgid "Distance: "
 msgstr "Fad: "
 
-#: src/hip_star.cpp:98 src/hip_star.cpp:145
+#: src/hip_star.cpp:97 src/hip_star.cpp:144 src/hip_star_mgr.cpp:663
 msgid " Light Years"
 msgstr " Solasblianta"
 
-#: src/hip_star.cpp:105
+#: src/hip_star.cpp:104 src/hip_star_mgr.cpp:667
 msgid "Spectral Type: "
 msgstr "Aicme speictreach: "
 
-#: src/hip_star_mgr.cpp:134
-msgid "Loading Hipparcos catalog:"
-msgstr "Lódálaim an chatalog Chipparcois"
+#: src/hip_star_mgr.cpp:535 src/hip_star_mgr.cpp:638
+msgid "J2000"
+msgstr ""
+
+#: src/hip_star_mgr.cpp:538 src/hip_star_mgr.cpp:644
+msgid "Equ of date"
+msgstr ""
+
+#: src/hip_star_mgr.cpp:658
+msgid "Parallax: "
+msgstr ""
+
+#: src/hip_star_mgr.cpp:980
+#, fuzzy
+msgid "Loading catalog "
+msgstr "Lódálaim an NGC chatalóg: "
 
 #: src/nebula.cpp:104
 msgid "Type: "
@@ -79,130 +97,130 @@ msgstr "Tíopa: "
 msgid "Size: "
 msgstr "Méid: "
 
-#: src/nebula_mgr.cpp:328
+#: src/nebula_mgr.cpp:331
 msgid "Loading NGC catalog: "
 msgstr "Lódálaim an NGC chatalóg: "
 
-#: src/nebula_mgr.cpp:455
+#: src/nebula_mgr.cpp:458
 msgid "Loading Nebula Textures:"
 msgstr "Lódálaim na huigeacht na réaltnéalta:"
 
-#: src/planet.cpp:121 src/planet.cpp:158
+#: src/planet.cpp:123 src/planet.cpp:160
 msgid "AU"
 msgstr "AR"
 
-#: src/stel_ui.cpp:516 src/stel_ui.cpp:646
+#: src/stel_ui.cpp:515 src/stel_ui.cpp:645
 msgid "Script commander"
 msgstr ""
 
-#: src/stel_ui.cpp:543
+#: src/stel_ui.cpp:542
 msgid "Invalid Script command"
 msgstr ""
 
-#: src/stel_ui.cpp:611
+#: src/stel_ui.cpp:610
 msgid "Drawing of the Constellations [C]"
 msgstr "Líníocht na réalbhuíonta [C]"
 
-#: src/stel_ui.cpp:613
+#: src/stel_ui.cpp:612
 msgid "Names of the Constellations [V]"
 msgstr "Ainmneacha na réaltbhuíonta [V]"
 
-#: src/stel_ui.cpp:615
+#: src/stel_ui.cpp:614
 msgid "Constellations Art [R]"
 msgstr "Ealaín na réaltbhuíonta [R]"
 
-#: src/stel_ui.cpp:617
+#: src/stel_ui.cpp:616
 msgid "Azimuthal Grid [Z]"
 msgstr "Eangach asamatach [Z]"
 
-#: src/stel_ui.cpp:619
+#: src/stel_ui.cpp:618
 msgid "Equatorial Grid [E]"
 msgstr "Eangach mheánchriosach [E]"
 
-#: src/stel_ui.cpp:621
+#: src/stel_ui.cpp:620
 msgid "Ground [G]"
 msgstr "Talamh [G]"
 
-#: src/stel_ui.cpp:623
+#: src/stel_ui.cpp:622
 msgid "Cardinal Points [Q]"
 msgstr "Príomhairde [Q]"
 
-#: src/stel_ui.cpp:625
+#: src/stel_ui.cpp:624
 msgid "Atmosphere [A]"
 msgstr "Atmaisféar [A]"
 
-#: src/stel_ui.cpp:627
+#: src/stel_ui.cpp:626
 msgid "Nebulas [N]"
 msgstr "Réaltnéalta [N]"
 
-#: src/stel_ui.cpp:629
+#: src/stel_ui.cpp:628
 msgid "Help [H]"
 msgstr "Cabhair/Help [H]"
 
-#: src/stel_ui.cpp:631
+#: src/stel_ui.cpp:630
 msgid "Equatorial/Altazimuthal Mount [ENTER]"
 msgstr ""
 
-#: src/stel_ui.cpp:633
+#: src/stel_ui.cpp:632
 msgid "Configuration window"
 msgstr "Príomh-roghchlár"
 
-#: src/stel_ui.cpp:636
+#: src/stel_ui.cpp:635
 msgid "Night (red) mode"
 msgstr "Modh na hóiche"
 
-#: src/stel_ui.cpp:639
+#: src/stel_ui.cpp:638
 msgid "Quit [CTRL + Q]"
 msgstr "Scoir [CTRL + Q]"
 
-#: src/stel_ui.cpp:641
+#: src/stel_ui.cpp:640
 msgid "Quit [CMD + Q]"
 msgstr "Scoir [CMD + Q]"
 
-#: src/stel_ui.cpp:644
+#: src/stel_ui.cpp:643
 msgid "Search for object"
 msgstr "Cuardaigh rudaí"
 
-#: src/stel_ui.cpp:648
+#: src/stel_ui.cpp:647
 msgid "Goto selected object [SPACE]"
 msgstr ""
 
-#: src/stel_ui.cpp:650
+#: src/stel_ui.cpp:649
 msgid "flip horizontally"
 msgstr ""
 
-#: src/stel_ui.cpp:652
+#: src/stel_ui.cpp:651
 msgid "flip vertically"
 msgstr ""
 
-#: src/stel_ui.cpp:658
+#: src/stel_ui.cpp:657
 msgid "Decrease Time Speed [J]"
 msgstr ""
 
-#: src/stel_ui.cpp:660
+#: src/stel_ui.cpp:659
 msgid "Real Time Speed [K]"
 msgstr ""
 
-#: src/stel_ui.cpp:662
+#: src/stel_ui.cpp:661
 msgid "Increase Time Speed [L]"
 msgstr ""
 
-#: src/stel_ui.cpp:664
+#: src/stel_ui.cpp:663
 msgid "Return to Current Time"
 msgstr ""
 
-#: src/stel_ui.cpp:673
+#: src/stel_ui.cpp:672
 msgid ""
 "   Please check for newer versions and send bug reports\n"
 "    and comments to us at: http://www.stellarium.org\n"
 "\n"
 msgstr ""
 
-#: src/stel_ui.cpp:692
+#: src/stel_ui.cpp:691
 msgid "Information"
 msgstr "Eolas"
 
-#: src/stel_ui.cpp:704
+#: src/stel_ui.cpp:703
 msgid ""
 "Movement & selection:\n"
 "Arrow Keys       : Change viewing RA/DE\n"
@@ -228,7 +246,7 @@ msgstr ""
 "Space: Laraigh ar an oibiacht roghnaithe\n"
 "\n"
 
-#: src/stel_ui.cpp:715
+#: src/stel_ui.cpp:714
 msgid ""
 "Display options:\n"
 "ENTER : Equatorial/altazimuthal mount\n"
@@ -256,7 +274,7 @@ msgstr ""
 "4, : Líne éiclipteach 5. : Líne an mheánchiorcail\n"
 "\n"
 
-#: src/stel_ui.cpp:727
+#: src/stel_ui.cpp:726
 msgid ""
 "Dialogs & other controls:\n"
 "H   : Help                      I   : About Stellarium\n"
@@ -274,7 +292,7 @@ msgstr ""
 "CTRL + F: Scoranáigh aimsitheoir na hoibiachta\n"
 "\n"
 
-#: src/stel_ui.cpp:734
+#: src/stel_ui.cpp:733
 msgid ""
 "Time & Date:\n"
 "6   : Time rate pause           7   : Time rate 0\n"
@@ -285,7 +303,7 @@ msgid ""
 "\n"
 msgstr ""
 
-#: src/stel_ui.cpp:741
+#: src/stel_ui.cpp:740
 msgid ""
 "During Script Playback:\n"
 "CTRL + C : End Script\n"
@@ -293,7 +311,7 @@ msgid ""
 "\n"
 msgstr ""
 
-#: src/stel_ui.cpp:745
+#: src/stel_ui.cpp:744
 msgid ""
 "Misc:\n"
 "9   : Toggle meteor shower rates\n"
@@ -304,23 +322,23 @@ msgid ""
 "CMD + Q  : Quit\n"
 msgstr ""
 
-#: src/stel_ui.cpp:759
+#: src/stel_ui.cpp:758
 msgid "Help"
 msgstr "Cabhair"
 
-#: src/stel_ui.cpp:1038
+#: src/stel_ui.cpp:1037
 msgid "Command recording stopped."
 msgstr ""
 
-#: src/stel_ui.cpp:1046
+#: src/stel_ui.cpp:1045
 msgid "Recording commands to script file:\n"
 msgstr ""
 
-#: src/stel_ui.cpp:1048
+#: src/stel_ui.cpp:1047
 msgid "Hit CTRL-R again to stop.\n"
 msgstr ""
 
-#: src/stel_ui.cpp:1052
+#: src/stel_ui.cpp:1051
 msgid "Error: Unable to open script file to record commands."
 msgstr ""
 
@@ -376,19 +394,19 @@ msgstr "Scálú na gealaí"
 msgid "Planets Hints"
 msgstr ""
 
-#: src/stel_ui_conf.cpp:164 src/stel_ui_tuiconf.cpp:404
+#: src/stel_ui_conf.cpp:164 src/stel_ui_tuiconf.cpp:403
 msgid "Equatorial Grid"
 msgstr "Eangach mheánchriosach"
 
-#: src/stel_ui_conf.cpp:169 src/stel_ui_tuiconf.cpp:403
+#: src/stel_ui_conf.cpp:169 src/stel_ui_tuiconf.cpp:402
 msgid "Azimuthal Grid"
 msgstr "Eangach asamatach"
 
-#: src/stel_ui_conf.cpp:174 src/stel_ui_tuiconf.cpp:405
+#: src/stel_ui_conf.cpp:174 src/stel_ui_tuiconf.cpp:404
 msgid "Equator Line"
 msgstr "Líne an mheánchiorcail"
 
-#: src/stel_ui_conf.cpp:179 src/stel_ui_tuiconf.cpp:406
+#: src/stel_ui_conf.cpp:179 src/stel_ui_tuiconf.cpp:405
 msgid "Ecliptic Line"
 msgstr "Líne an éicliptigh"
 
@@ -396,7 +414,7 @@ msgstr "Líne an éicliptigh"
 msgid "Ground"
 msgstr "Talamh"
 
-#: src/stel_ui_conf.cpp:195 src/stel_ui_tuiconf.cpp:398
+#: src/stel_ui_conf.cpp:195 src/stel_ui_tuiconf.cpp:397
 msgid "Cardinal Points"
 msgstr "Príomhairde"
 
@@ -408,8 +426,8 @@ msgstr "Atmaisféar"
 msgid "Fog"
 msgstr "Ceo"
 
-#: src/stel_ui_conf.cpp:235 src/stel_ui_conf.cpp:408 src/stel_ui_conf.cpp:445
-#: src/stel_ui_conf.cpp:504
+#: src/stel_ui_conf.cpp:235 src/stel_ui_conf.cpp:407 src/stel_ui_conf.cpp:444
+#: src/stel_ui_conf.cpp:503
 msgid "Save as default"
 msgstr "Sábháil mar réamhshocrú"
 
@@ -480,67 +498,67 @@ msgstr ""
 msgid "change to apply."
 msgstr ""
 
-#: src/stel_ui_conf.cpp:401
+#: src/stel_ui_conf.cpp:400
 msgid "For unlisted screen resolution, edit the file :"
 msgstr ""
 
-#: src/stel_ui_conf.cpp:418
+#: src/stel_ui_conf.cpp:417
 msgid "Choose landscapes:"
 msgstr ""
 
-#: src/stel_ui_conf.cpp:433 src/stel_ui_conf.cpp:897
+#: src/stel_ui_conf.cpp:432 src/stel_ui_conf.cpp:897
 msgid "Author: "
 msgstr "Údar: "
 
-#: src/stel_ui_conf.cpp:456
+#: src/stel_ui_conf.cpp:455
 msgid "Program Language: "
 msgstr "Teanga an ríomhchláir "
 
-#: src/stel_ui_conf.cpp:472 src/stel_ui_tuiconf.cpp:385
+#: src/stel_ui_conf.cpp:471 src/stel_ui_tuiconf.cpp:384
 msgid "Sky Language: "
 msgstr "Teanga na spéir "
 
-#: src/stel_ui_conf.cpp:490 src/stel_ui_tuiconf.cpp:381
+#: src/stel_ui_conf.cpp:489 src/stel_ui_tuiconf.cpp:380
 msgid "Sky Culture: "
 msgstr ""
 
-#: src/stel_ui_conf.cpp:511
+#: src/stel_ui_conf.cpp:510
 msgid "Language"
 msgstr "Teanga"
 
-#: src/stel_ui_conf.cpp:512
+#: src/stel_ui_conf.cpp:511
 msgid "Date & Time"
 msgstr "Dáta is Am"
 
-#: src/stel_ui_conf.cpp:513
+#: src/stel_ui_conf.cpp:512
 msgid "Location"
 msgstr "Áit"
 
-#: src/stel_ui_conf.cpp:514
+#: src/stel_ui_conf.cpp:513
 msgid "Landscapes"
 msgstr "Tírdhreacha"
 
-#: src/stel_ui_conf.cpp:515
+#: src/stel_ui_conf.cpp:514
 msgid "Video"
 msgstr "Fís"
 
-#: src/stel_ui_conf.cpp:516
+#: src/stel_ui_conf.cpp:515
 msgid "Rendering"
 msgstr "Rindreáil"
 
-#: src/stel_ui_conf.cpp:648
+#: src/stel_ui_conf.cpp:647
 msgid "Object Search"
 msgstr "Cuardach na hoibiachta"
 
-#: src/stel_ui_conf.cpp:655
+#: src/stel_ui_conf.cpp:654
 msgid "Search for (eg. Saturn, Polaris, HP6218, Orion, M31):"
 msgstr "Cuardaigh (m.sh. Satarn, Polaris, HP6218, Oiríon, M31):"
 
-#: src/stel_ui_conf.cpp:672
+#: src/stel_ui_conf.cpp:671
 msgid "GO"
 msgstr "GO"
 
-#: src/stel_ui_conf.cpp:799
+#: src/stel_ui_conf.cpp:800
 msgid "Enter observatory name"
 msgstr "Iontráil ainm réadlainne"
 
@@ -568,224 +586,224 @@ msgstr ""
 msgid "Meteor Rate per minute"
 msgstr ""
 
-#: src/stel_ui_conf.cpp:997
+#: src/stel_ui_conf.cpp:996
 msgid "Current Time Speed is x"
 msgstr ""
 
-#: src/stel_ui_tuiconf.cpp:272 src/stel_ui_tuiconf.cpp:415
+#: src/stel_ui_tuiconf.cpp:271 src/stel_ui_tuiconf.cpp:414
 msgid "Magnitude Sizing Multiplier: "
 msgstr ""
 
-#: src/stel_ui_tuiconf.cpp:352
+#: src/stel_ui_tuiconf.cpp:351
 msgid "Set Location "
 msgstr ""
 
-#: src/stel_ui_tuiconf.cpp:353
+#: src/stel_ui_tuiconf.cpp:352
 msgid "Set Time "
 msgstr ""
 
-#: src/stel_ui_tuiconf.cpp:354
+#: src/stel_ui_tuiconf.cpp:353
 msgid "General "
 msgstr "Ginearálta "
 
-#: src/stel_ui_tuiconf.cpp:355
+#: src/stel_ui_tuiconf.cpp:354
 msgid "Stars "
 msgstr "Réaltaí "
 
-#: src/stel_ui_tuiconf.cpp:356
+#: src/stel_ui_tuiconf.cpp:355
 msgid "Colors "
 msgstr "Dathanna "
 
-#: src/stel_ui_tuiconf.cpp:357
+#: src/stel_ui_tuiconf.cpp:356
 msgid "Effects "
 msgstr "Éifeachtaí "
 
-#: src/stel_ui_tuiconf.cpp:358
+#: src/stel_ui_tuiconf.cpp:357
 msgid "Scripts "
 msgstr "Scripteanna "
 
-#: src/stel_ui_tuiconf.cpp:359
+#: src/stel_ui_tuiconf.cpp:358
 msgid "Administration "
 msgstr "Riarachán "
 
-#: src/stel_ui_tuiconf.cpp:362
+#: src/stel_ui_tuiconf.cpp:361
 msgid "Latitude: "
 msgstr "Leithead: "
 
-#: src/stel_ui_tuiconf.cpp:363
+#: src/stel_ui_tuiconf.cpp:362
 msgid "Longitude: "
 msgstr "Fad: "
 
-#: src/stel_ui_tuiconf.cpp:364
+#: src/stel_ui_tuiconf.cpp:363
 msgid "Altitude (m): "
 msgstr "Airde (m): "
 
-#: src/stel_ui_tuiconf.cpp:365
+#: src/stel_ui_tuiconf.cpp:364
 msgid "Solar System Body: "
 msgstr ""
 
-#: src/stel_ui_tuiconf.cpp:369
+#: src/stel_ui_tuiconf.cpp:368
 msgid "Sky Time: "
 msgstr "Am na spéir: "
 
-#: src/stel_ui_tuiconf.cpp:370
+#: src/stel_ui_tuiconf.cpp:369
 msgid "Set Time Zone: "
 msgstr ""
 
-#: src/stel_ui_tuiconf.cpp:371
+#: src/stel_ui_tuiconf.cpp:370
 msgid "Preset Sky Time: "
 msgstr ""
 
-#: src/stel_ui_tuiconf.cpp:372
+#: src/stel_ui_tuiconf.cpp:371
 msgid "Sky Time At Start-up: "
 msgstr ""
 
-#: src/stel_ui_tuiconf.cpp:373
+#: src/stel_ui_tuiconf.cpp:372
 msgid "Actual Time"
 msgstr "Am iarbhír"
 
-#: src/stel_ui_tuiconf.cpp:374
+#: src/stel_ui_tuiconf.cpp:373
 msgid "Preset Time"
 msgstr ""
 
-#: src/stel_ui_tuiconf.cpp:375
+#: src/stel_ui_tuiconf.cpp:374
 msgid "Time Display Format: "
 msgstr ""
 
-#: src/stel_ui_tuiconf.cpp:376
+#: src/stel_ui_tuiconf.cpp:375
 msgid "Date Display Format: "
 msgstr ""
 
-#: src/stel_ui_tuiconf.cpp:388
+#: src/stel_ui_tuiconf.cpp:387
 msgid "Show: "
 msgstr "Taispeáin: "
 
-#: src/stel_ui_tuiconf.cpp:388 src/stel_ui_tuiconf.cpp:413 src/s_gui.cpp:2232
+#: src/stel_ui_tuiconf.cpp:387 src/stel_ui_tuiconf.cpp:412 src/s_gui.cpp:2232
 msgid "Yes"
 msgstr "Tá"
 
-#: src/stel_ui_tuiconf.cpp:388 src/stel_ui_tuiconf.cpp:413 src/s_gui.cpp:2213
+#: src/stel_ui_tuiconf.cpp:387 src/stel_ui_tuiconf.cpp:412 src/s_gui.cpp:2213
 msgid "No"
 msgstr "Níl"
 
-#: src/stel_ui_tuiconf.cpp:389
+#: src/stel_ui_tuiconf.cpp:388
 msgid "Star Magnitude Multiplier: "
 msgstr ""
 
-#: src/stel_ui_tuiconf.cpp:390
+#: src/stel_ui_tuiconf.cpp:389
 msgid "Maximum Magnitude to Label: "
 msgstr ""
 
-#: src/stel_ui_tuiconf.cpp:391
+#: src/stel_ui_tuiconf.cpp:390
 msgid "Twinkling: "
 msgstr "Drithliú: "
 
-#: src/stel_ui_tuiconf.cpp:394
+#: src/stel_ui_tuiconf.cpp:393
 msgid "Constellation Lines"
 msgstr "Línte na realtbhuíonta"
 
-#: src/stel_ui_tuiconf.cpp:395
+#: src/stel_ui_tuiconf.cpp:394
 msgid "Constellation Names"
 msgstr "Ainmneacha na réaltbhuíonta"
 
-#: src/stel_ui_tuiconf.cpp:396
+#: src/stel_ui_tuiconf.cpp:395
 msgid "Constellation Art Intensity"
 msgstr ""
 
-#: src/stel_ui_tuiconf.cpp:397
+#: src/stel_ui_tuiconf.cpp:396
 msgid "Constellation Boundaries"
 msgstr "Fóireacha na réaltbhuíonta"
 
-#: src/stel_ui_tuiconf.cpp:399
+#: src/stel_ui_tuiconf.cpp:398
 msgid "Planet Names"
 msgstr "Ainmneacha na bpláinéad"
 
-#: src/stel_ui_tuiconf.cpp:400
+#: src/stel_ui_tuiconf.cpp:399
 msgid "Planet Orbits"
 msgstr "Fithisí na bpláinéad"
 
-#: src/stel_ui_tuiconf.cpp:401
+#: src/stel_ui_tuiconf.cpp:400
 msgid "Planet Trails"
 msgstr "Rianta na bpláinéad"
 
-#: src/stel_ui_tuiconf.cpp:402
+#: src/stel_ui_tuiconf.cpp:401
 msgid "Meridian Line"
 msgstr "Líne na fadlíne"
 
-#: src/stel_ui_tuiconf.cpp:407
+#: src/stel_ui_tuiconf.cpp:406
 msgid "Nebula Names"
 msgstr "Ainmneacha na réaltnéalta"
 
-#: src/stel_ui_tuiconf.cpp:408
+#: src/stel_ui_tuiconf.cpp:407
 msgid "Nebula Circles"
 msgstr "Ciorcail na réaltnéalta"
 
-#: src/stel_ui_tuiconf.cpp:412
+#: src/stel_ui_tuiconf.cpp:411
 msgid "Landscape: "
 msgstr "Tírdhreach: "
 
-#: src/stel_ui_tuiconf.cpp:413
+#: src/stel_ui_tuiconf.cpp:412
 msgid "Manual zoom: "
 msgstr "Súmáil láimhe: "
 
-#: src/stel_ui_tuiconf.cpp:414
+#: src/stel_ui_tuiconf.cpp:413
 msgid "Object Sizing Rule: "
 msgstr ""
 
-#: src/stel_ui_tuiconf.cpp:414
+#: src/stel_ui_tuiconf.cpp:413
 msgid "Point"
 msgstr "Pointe"
 
-#: src/stel_ui_tuiconf.cpp:414
+#: src/stel_ui_tuiconf.cpp:413
 msgid "Magnitude"
 msgstr "Méid"
 
-#: src/stel_ui_tuiconf.cpp:416
+#: src/stel_ui_tuiconf.cpp:415
 msgid "Milky Way intensity: "
 msgstr "Déine an Bhealaigh na Bó Finne "
 
-#: src/stel_ui_tuiconf.cpp:417
+#: src/stel_ui_tuiconf.cpp:416
 msgid "Maximum Nebula Magnitude to Label: "
 msgstr ""
 
-#: src/stel_ui_tuiconf.cpp:418
+#: src/stel_ui_tuiconf.cpp:417
 msgid "Zoom Duration: "
 msgstr "Aga na sumail "
 
-#: src/stel_ui_tuiconf.cpp:419
+#: src/stel_ui_tuiconf.cpp:418
 msgid "Cursor Timeout: "
 msgstr ""
 
-#: src/stel_ui_tuiconf.cpp:422
+#: src/stel_ui_tuiconf.cpp:421
 msgid "Local Script: "
 msgstr ""
 
-#: src/stel_ui_tuiconf.cpp:425
+#: src/stel_ui_tuiconf.cpp:424
 msgid "CD/DVD Script: "
 msgstr ""
 
-#: src/stel_ui_tuiconf.cpp:429
+#: src/stel_ui_tuiconf.cpp:428
 msgid "Load Default Configuration: "
 msgstr ""
 
-#: src/stel_ui_tuiconf.cpp:430
+#: src/stel_ui_tuiconf.cpp:429
 msgid "Save Current Configuration as Default: "
 msgstr ""
 
-#: src/stel_ui_tuiconf.cpp:431
+#: src/stel_ui_tuiconf.cpp:430
 #, fuzzy
 msgid "Shut Down: "
 msgstr "Taispeáin: "
 
-#: src/stel_ui_tuiconf.cpp:432
+#: src/stel_ui_tuiconf.cpp:431
 msgid "Update me via Internet: "
 msgstr ""
 
-#: src/stel_ui_tuiconf.cpp:433
+#: src/stel_ui_tuiconf.cpp:432
 msgid "Set UI Locale: "
 msgstr ""
 
-#: src/stel_ui_tuiconf.cpp:545
+#: src/stel_ui_tuiconf.cpp:544
 msgid "Arrow down to load list."
 msgstr ""
 
@@ -1828,3 +1846,6 @@ msgstr "Nóiméid"
 #: src/s_gui.cpp:2748
 msgid "Seconds"
 msgstr "soicindí"
+
+#~ msgid "Loading Hipparcos catalog:"
+#~ msgstr "Lódálaim an chatalog Chipparcois"

@@ -70,9 +70,9 @@ void Translator::initSystemLanguage(void)
 
 	//change systemLangName to ISO 639 / ISO 3166.
 	string::size_type pos = systemLangName.find(':', 0);
-	if (pos != string::npos) systemLangName.resize(pos);
+	if (pos != string::npos) systemLangName.resize(pos+1);
 	pos = systemLangName.find('.', 0);
-	if (pos == 5) systemLangName.resize(pos);
+	if (pos == 5) systemLangName.resize(pos+1);
 }
 
 void Translator::reload()
