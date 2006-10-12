@@ -143,11 +143,12 @@ public:
     static bool getFlagSciNames(void) {return flagSciNames;}
 
     int drawStar(const Vec3d &XY,float rmag,const Vec3f &color) const;
+    //! Draw the star rendered as GLpoint. This may be faster but it is not so nice
+    int drawPointStar(const Vec3d &XY,float rmag,const Vec3f &color) const;
+
     static wstring getCommonName(int hip);
     static wstring getSciName(int hip);
 private:
-    //! Draw the stars rendered as GLpoint. This may be faster but it is not so nice
-    void drawPoint(Vec3f equ_vision, ToneReproductor* _eye, Projector* prj);    // Draw all the stars as points
  
     // Load all the stars from the files
     void load_data(LoadingBar& lb);
