@@ -237,7 +237,7 @@ public:
   virtual void updateHipIndex(HipIndexStruct hip_index[]) const {}
   virtual void searchAround(int index,const Vec3d &v,double cos_lim_fov,
                             vector<StelObject> &result) = 0;
-  virtual void draw(int index,bool is_inside,
+  virtual void draw(int index,bool is_inside,bool draw_point,
                     const float *rmag_table,const Projector *prj,
                     unsigned int max_mag_star_name,float names_brightness,
                     s_font *starFont,
@@ -282,7 +282,7 @@ private:
   void scaleAxis(void);
   void searchAround(int index,const Vec3d &v,double cos_lim_fov,
                     vector<StelObject> &result);
-  void draw(int index,bool is_inside,
+  void draw(int index,bool is_inside,bool draw_point,
             const float *rmag_table,const Projector *prj,
             unsigned int max_mag_star_name,float names_brightness,
             s_font *starFont,unsigned int star_texture_id) const;
@@ -1163,14 +1163,39 @@ int HipStarMgr::drawStar(const Vec3d &XY,float rmag,const Vec3f &color) const {
 }
 
 
+int HipStarMgr::drawPointStar(const Vec3d &XY,float rmag,
+                              const Vec3f &color) const {
+  if (rmag < 0.05f*star_scale) return -1;
+  float cmag = rmag * rmag / 1.44f;
+  if (cmag*starMagScale < 0.05) return -2;
+
+  cmag *= (1.-twinkle_amount*rand()/RAND_MAX);
+  cmag *= starMagScale;
+
+  glColor3fv(color*cmag);
+
+  glBlendFunc(GL_ONE, GL_ONE);
+
+  glBegin(GL_POINTS);
+  glVertex3f(XY[0],XY[1],0);
+  glEnd();
+  return 0;
+}
+
+
 template<class Star>
 void SpecialZoneArray<Star>::draw(int index,bool is_inside,
+                                  bool draw_point,
                                   const float *rmag_table,
                                   const Projector *prj,
                                   unsigned int max_mag_star_name,
                                   float names_brightness,
                                   s_font *starFont,
                                   unsigned int star_texture_id) const {
+  if (draw_point) {
+    glDisable(GL_TEXTURE_2D);
+    glPointSize(0.1);
+  }
   SpecialZoneData<Star> *const z = getZones() + index;
   Vec3d xy;
   const Star *const end = z->getStars() + z->size;
@@ -1181,8 +1206,12 @@ void SpecialZoneArray<Star>::draw(int index,bool is_inside,
     if (is_inside
         ? prj->project_j2000(s->getJ2000Pos(z,movement_factor),xy)
 	    : prj->project_j2000_check(s->getJ2000Pos(z,movement_factor),xy)) {
-      if (0 > hip_star_mgr.drawStar(xy,rmag_table[s->mag],
-                                    color_table[s->b_v])) break;
+      if (0 > (draw_point ? hip_star_mgr.drawPointStar(xy,rmag_table[s->mag],
+                                                       color_table[s->b_v])
+                          : hip_star_mgr.drawStar(xy,rmag_table[s->mag],
+                                                  color_table[s->b_v]))) {
+        break;
+      }
       if (s->mag < max_mag_star_name) {
         const wstring starname = s->getNameI18n();
         if (!starname.empty()) {
@@ -1190,18 +1219,29 @@ void SpecialZoneArray<Star>::draw(int index,bool is_inside,
                     color_table[s->b_v][1]*0.75,
                     color_table[s->b_v][2]*0.75,
                     names_brightness);
+          if (draw_point) {
+            glEnable(GL_TEXTURE_2D);
+          }
           if (prj->getFlagGravityLabels()) {
             prj->print_gravity180(starFont,xy[0],xy[1],
                                   starname, 1, 6, -4);
           } else {
             starFont->print(xy[0]+6,xy[1]-4, starname);
           }
-          glBindTexture(GL_TEXTURE_2D,star_texture_id);
+          if (draw_point) {
+            glDisable(GL_TEXTURE_2D);
+          } else {
+            glBindTexture(GL_TEXTURE_2D,star_texture_id);
+          }
         }
       }
     }
   }
+  if (draw_point) {
+    glEnable(GL_TEXTURE_2D);
+  }
 }
+
 
 
 
@@ -1307,7 +1347,7 @@ void HipStarMgr::draw(const ToneReproductor *eye,
 //if ((count&63)==0) cout << "inside(" << it->first << "):";
       for (GeodesicSearchInsideIterator it1(*geodesic_search_result,it->first);
            (zone = it1.next()) >= 0;) {
-        it->second->draw(zone,true,rmag_table,prj,
+        it->second->draw(zone,true,flagPointStar,rmag_table,prj,
                          max_mag_star_name,names_brightness,
                          starFont,starTexture->getID());
 //if ((count&63)==0) cout << " " << zone;
@@ -1315,7 +1355,7 @@ void HipStarMgr::draw(const ToneReproductor *eye,
 //if ((count&63)==0) cout << endl << "border(" << it->first << "):";
       for (GeodesicSearchBorderIterator it1(*geodesic_search_result,it->first);
            (zone = it1.next()) >= 0;) {
-        it->second->draw(zone,false,rmag_table,prj,
+        it->second->draw(zone,false,flagPointStar,rmag_table,prj,
                          max_mag_star_name,names_brightness,
                          starFont,starTexture->getID());
 //if ((count&63)==0) cout << " " << zone;
