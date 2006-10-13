@@ -44,7 +44,8 @@ StelApp::StelApp(const string& CDIR, const string& LDIR, const string& DATA_ROOT
 	configDir = CDIR;
 	localeDir = LDIR;
 	dataDir = DATA_ROOT+"/data";
-
+	rootDir = DATA_ROOT + "/";
+	
 	// Set textures directory
 	s_texture::set_texDir(rootDir + "textures/");
 	
