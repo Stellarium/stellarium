@@ -36,12 +36,10 @@
 #include "translator.h"
 #include "geodesic_grid.h"
 #include "stelapp.h"
+#include "stelfontmgr.h"
 
 #include <string>
 #include <list>
-
-#define RADIUS_STAR 1.
-
 
 #define NR_OF_HIP 120404
 
@@ -906,6 +904,7 @@ HipStarMgr::HipStarMgr(void) :
     limitingMag(6.5f),
     starTexture(),
     hip_index(new HipIndexStruct[NR_OF_HIP+1]),
+	fontSize(13.),
     starFont(0)
 {
   assert(hip_index);
@@ -923,7 +922,6 @@ HipStarMgr::~HipStarMgr(void) {
   zone_arrays.clear();
 
   if (starTexture) {delete starTexture;starTexture = 0;}
-  if (starFont) {delete starFont;starFont = 0;}
   if (hip_index) delete hip_index;
 }
 
@@ -948,16 +946,11 @@ wstring HipStarMgr::getSciName(int hip) {
   return L"";
 }
 
-void HipStarMgr::init(float font_size, const string& font_name,
-                      LoadingBar& lb) {
+void HipStarMgr::init(LoadingBar& lb) {
   load_data(lb);
   starTexture = new s_texture("star16x16.png",TEX_LOAD_TYPE_PNG_SOLID,false);  // Load star texture no mipmap
-  starFont = new s_font(font_size, font_name);
-  if (!starFont)
-  {
-      printf("Can't create starFont\n");
-      assert(0);
-  }
+  double fontSize = 12;
+  starFont = &StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getSkyLanguage(), fontSize);
 }
 
 void HipStarMgr::setGrid(void) {
@@ -1636,9 +1629,7 @@ vector<wstring> HipStarMgr::listMatchingObjectsI18n(
 
 
 //! Define font file name and size to use for star names display
-void HipStarMgr::setFont(float font_size, const string& font_name) {
-    if (starFont) delete starFont;
-    starFont = new s_font(font_size, font_name);
-    assert(starFont);
-
+void HipStarMgr::setFontSize(double newFontSize) {
+	fontSize = newFontSize;
+	starFont = &StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getSkyLanguage(), fontSize);
 }

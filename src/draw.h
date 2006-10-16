@@ -45,7 +45,7 @@ public:
 	 double _radius = 1., unsigned int _nb_alt_segment = 18, unsigned int _nb_azi_segment = 50);
     virtual ~SkyGrid();
 	void draw(const Projector* prj) const;
-	void set_font(float font_size, const string& font_name);
+	void setFontSize(double newFontSize);
 	void setColor(const Vec3f& c) {color = c;}
 	const Vec3f& getColor() {return color;}
 	void update(int delta_time) {fader.update(delta_time);}
@@ -64,7 +64,8 @@ private:
 	Vec3f** alt_points;
 	Vec3f** azi_points;
 	bool (Projector::*proj_func)(const Vec3d&, Vec3d&) const;
-	s_font* font;
+	double fontSize;
+	s_font& font;
 	SKY_GRID_TYPE gtype;
 	LinearFader fader;
 };
@@ -91,8 +92,7 @@ public:
 	void set_fade_duration(float duration) {fader.set_duration((int)(duration*1000.f));}
 	void setFlagshow(bool b){fader = b;}
 	bool getFlagshow(void) const {return fader;}
-	void set_font(float font_size, const string& font_name);
-
+	void setFontSize(double newSize);
 private:
 	double radius;
 	unsigned int nb_segment;
@@ -101,7 +101,8 @@ private:
 	Vec3f* points;
 	bool (Projector::*proj_func)(const Vec3d&, Vec3d&) const;
 	LinearFader fader;
-	s_font * font;
+	double fontSize;
+	s_font& font;
 };
 
 // Class which manages the cardinal points displaying
@@ -113,16 +114,15 @@ public:
 	void draw(const Projector* prj, double latitude, bool gravityON = false) const;
 	void setColor(const Vec3f& c) {color = c;}
 	Vec3f get_color() {return color;}
-	void set_font(float font_size, const string& font_name);
-	void translateLabels(Translator& trans);  // for i18n
+	void updateLanguage(Translator& trans);  // for i18n
 	void update(int delta_time) {fader.update(delta_time);}
 	void set_fade_duration(float duration) {fader.set_duration((int)(duration*1000.f));}
 	void setFlagShow(bool b){fader = b;}
 	bool getFlagShow(void) const {return fader;}
-
 private:
 	float radius;
-	s_font* font;	
+	double fontSize;
+	s_font& font;
 	Vec3f color;
 	wstring sNorth, sSouth, sEast, sWest;
 	LinearFader fader;
@@ -143,7 +143,6 @@ public:
 	void draw_chart(ToneReproductor * eye, const Projector* prj, const Navigator* nav);
 	void setFlagShow(bool b){fader = b;}
 	bool getFlagShow(void) const {return fader;}
-	
 private:
 	float radius;
 	s_texture* tex;

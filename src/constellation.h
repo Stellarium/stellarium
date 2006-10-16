@@ -24,11 +24,11 @@
 #include "stel_object_base.h"
 #include "stel_object.h"
 #include "stel_utility.h"
-#include "s_font.h"
 #include "fader.h"
 #include <vector>
 
 class HipStarMgr;
+class s_font;
 
 class Constellation : public StelObjectBase
 {

@@ -42,7 +42,7 @@ public:
     HipStarMgr(void);
     ~HipStarMgr(void);
 
-    void init(float font_size,const string& font_name,LoadingBar& lb);
+    void init(LoadingBar& lb);
     int getMaxGridLevel(void) const {return max_geodesic_grid_level;}
     void setGrid(void);
 
@@ -135,8 +135,8 @@ public:
     /** Get stars limiting display magnitude */
     float getStarLimitingMag(void) const {return limitingMag;}
         
-    //! Define font file name and size to use for star names display
-    void setFont(float font_size, const string& font_name);
+    //! Define font size to use for star names display
+	void setFontSize(double newFontSize);
     
     //! show scientific or catalog names on stars without common names
     static void setFlagSciNames(bool f) {flagSciNames = f;}
@@ -196,6 +196,7 @@ private:
     static map<int,wstring> sci_names_map_i18n;
     static map<wstring,int> sci_names_index_i18n;
     
+	double fontSize;
     s_font *starFont;
     static bool flagSciNames;
     Vec3f label_color,circle_color;

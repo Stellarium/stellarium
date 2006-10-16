@@ -23,10 +23,10 @@
 #include <algorithm>
 
 #include "stelapp.h"
+#include "stelfontmgr.h"
 #include "nebula_mgr.h"
 #include "nebula.h"
 #include "s_texture.h"
-#include "s_font.h"
 #include "navigator.h"
 #include "translator.h"
 #include "loadingbar.h"
@@ -65,18 +65,14 @@ NebulaMgr::~NebulaMgr()
 }
 
 // read from stream
-bool NebulaMgr::init(LoadingBar& lb, const string& font_name, float font_size)
+bool NebulaMgr::init(LoadingBar& lb)
 {
 	loadNGC(StelApp::getInstance().getDataFilePath("ngc2000.dat"), lb);
 	loadNGCNames(StelApp::getInstance().getDataFilePath("ngc2000names.dat"));
 	loadTextures(StelApp::getInstance().getDataFilePath("nebula_textures.fab"), lb);
 
-	if (!Nebula::nebula_font) Nebula::nebula_font = new s_font(font_size, font_name); // load Font
-	if (!Nebula::nebula_font)
-	{
-		cerr << "Can't create nebulaFont: " << font_name << "." << endl;
-		return(1);
-	}
+	double fontSize = 12;
+	if (!Nebula::nebula_font) Nebula::nebula_font = &StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getSkyLanguage(), fontSize);
 
 	if (!Nebula::tex_circle)
 		Nebula::tex_circle = new s_texture("neb.png");   // Load circle texture

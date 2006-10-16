@@ -85,11 +85,16 @@ public:
 	//! @brief Get the application language currently used for GUI etc..
 	//! This function has no permanent effect on the global locale.
 	//! @return the name of the language (e.g fr).
-	string getAppLanguage() { return Translator::globalTranslator.getTrueLocaleName(); }
+	string getAppLanguage() const { return Translator::globalTranslator.getTrueLocaleName(); }
 
+	//! @brief Get the language currently used for sky objects..
+	//! This function has no permanent effect on the global locale.
+	//! @return the name of the language (e.g fr).
+	string getSkyLanguage() const;			   
+			   
 	//! @brief Get the font manager to use for loading fonts.
 	//! @return the font manager to use for loading fonts.
-	const StelFontMgr& getFontManager() { return *fontManager;}
+	StelFontMgr& getFontManager() { return *fontManager;}
 	
 	//! Set flag for activating night vision mode
 	void setVisionModeNight(void);

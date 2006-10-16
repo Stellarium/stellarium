@@ -29,10 +29,10 @@
 #include "stellarium.h"
 #include "planet.h"
 #include "stel_object.h"
-#include "orbit.h"
-#include "translator.h"
 
+class EllipticalOrbit;
 class LoadingBar;
+class Translator;
 
 class SolarSystem
 {
@@ -54,11 +54,11 @@ public:
 
 	//! @brief Update i18 names from english names according to passed translator
 	//! The translation is done using gettext with translated strings defined in translations.h
-	void translateNames(Translator& trans);
+	void updateLanguage(Translator& trans);
 
 	wstring getPlanetHashString();  // locale and ssystem.ini names, newline delimiter, for tui
 
-	void setFont(float font_size, const string& font_name);
+	void setFontSize(float newFontSize);
 	void setLabelColor(const Vec3f& c) {Planet::set_label_color(c);}
 	const Vec3f& getLabelColor(void) const {return Planet::getLabelColor();}
 	void setOrbitColor(const Vec3f& c) {Planet::set_orbit_color(c);}
@@ -162,7 +162,9 @@ private:
 	bool flagMoonScale;
 	float moonScale;	// Moon scale value
 
-	s_font* planet_name_font;
+	double fontSize;
+	s_font& planet_name_font;
+	
 	vector<Planet*> system_planets;		// Vector containing all the bodies of the system
 	vector<EllipticalOrbit*> ell_orbits;// Pointers on created elliptical orbits
 	bool near_lunar_eclipse(const Navigator * nav, Projector * prj);

@@ -26,7 +26,7 @@
 using namespace std;
 
 //! Manage font for Stellarium. Take into account special font for special language.
-//! @author Fabien Chéreau <stellarium@free.fr>
+//! @author Fabien Chereau <stellarium@free.fr>
 class StelFontMgr
 {
 public:
@@ -37,12 +37,12 @@ public:
 	//! Get the standard font associated to the given language ISO code.
 	//! @param langageName the ISO language name such as "fr" or "en" or "*" for default.
 	//! @param scale the scale with respect to the default size for the language.
-	s_font& getStandardFont(const string &langageName, double scale);
+	s_font& getStandardFont(const string &langageName, double scale=1.);
 	
 	//! Get the fixed font associated to the given language ISO code.
 	//! @param langageName the ISO language name such as "fr" or "en" or "*" for default.
 	//! @param scale the scale with respect to the default size for the language.
-	s_font& getFixedFont(const string &langageName, double scale);
+	s_font& getFixedFont(const string &langageName, double scale=1.);
 	
 private:
 	// Class which describes which font to use for a given langage ISO code.

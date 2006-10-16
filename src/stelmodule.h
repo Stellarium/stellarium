@@ -103,8 +103,7 @@ public:
 	ValueType getProperty(const string& key)
 	{
 		const propertyAccessor& a = getAccessor(key);
-        ValueType rval = a.get();
-		return rval;
+		return a.template get<ValueType>();
 	}
 	
 	//! Get a list containing 3 strings per element : propertyKey, value, comment

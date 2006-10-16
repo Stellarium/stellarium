@@ -141,8 +141,6 @@ StelCore::~StelCore()
 // Load core data and initialize with default values
 void StelCore::init(const InitParser& conf)
 {
-	baseFontFile = StelApp::getInstance().getDataFilePath( conf.get_str("gui", "base_font_name", "DejaVuSans.ttf") );
-
 	// Video Section
 	setViewportSize(conf.get_int("video:screen_w"), conf.get_int("video:screen_h"));
 	setViewportHorizontalOffset(conf.get_int    ("video:horizontal_offset"));
@@ -156,13 +154,12 @@ void StelCore::init(const InitParser& conf)
 	const Projector::PROJECTOR_MASK_TYPE projMaskType = Projector::stringToMaskType(tmpstr);
 	projection->setMaskType(projMaskType);
 
-	LoadingBar lb(projection, FontSizeGeneral, baseFontFile, "logo24bits.png",
+	LoadingBar lb(projection, FontSizeGeneral, "logo24bits.png",
 	              getViewportWidth(), getViewportHeight(),
 	              StelUtils::stringToWstring(VERSION), 45, 320, 121);
 
 	// Init the solar system first
 	ssystem->init(lb);
-	ssystem->setFont(FontSizeSolarSystem, baseFontFile);
 	setPlanetsScale(getStarScale());
 
 	observatory->load(conf, "init_location");
@@ -173,11 +170,11 @@ void StelCore::init(const InitParser& conf)
 	if(firstTime)
 	{
 		// Load hipparcos stars & names
-		hip_stars->init(FontSizeGeneral, baseFontFile,lb);
+		hip_stars->init(lb);
 		int grid_level = hip_stars->getMaxGridLevel();
 
 		// Init nebulas
-		nebulas->init(lb, baseFontFile, FontSizeGeneral);
+		nebulas->init(lb);
 
 		geodesic_grid = new GeodesicGrid(grid_level);
 		geodesic_search_result = new GeodesicSearchResult(*geodesic_grid);
@@ -187,17 +184,7 @@ void StelCore::init(const InitParser& conf)
 		telescope_mgr->init(conf);
 	}
 
-	// Init fonts : should be moved into the constructor
-	equ_grid->set_font(FontSizeGeneral, baseFontFile);
-	azi_grid->set_font(FontSizeGeneral, baseFontFile);
-	equator_line->set_font(FontSizeGeneral, baseFontFile);
-	ecliptic_line->set_font(FontSizeGeneral, baseFontFile);
-	meridian_line->set_font(FontSizeGeneral, baseFontFile);
-	cardinals_points->set_font(FontSizeCardinalPoints, baseFontFile);
-
-
 	setLandscape(observatory->get_landscape_name());
-
 
 	// Load the pointer textures
 	StelObject::init_textures();
@@ -921,14 +908,14 @@ bool StelCore::setSkyCultureDir(const string& cultureDir)
 	if(!asterisms)
 		return 1;
 
-	LoadingBar lb(projection, FontSizeGeneral, baseFontFile, "logo24bits.png", getViewportWidth(), getViewportHeight(), StelUtils::stringToWstring(VERSION), 45, 320, 121);
+	LoadingBar lb(projection, FontSizeGeneral, "logo24bits.png", getViewportWidth(), getViewportHeight(), StelUtils::stringToWstring(VERSION), 45, 320, 121);
 
 	asterisms->loadLinesAndArt(StelApp::getInstance().getDataFilePath("sky_cultures/" + skyCultureDir + "/constellationship.fab"),
 	                           StelApp::getInstance().getDataFilePath("sky_cultures/" + skyCultureDir + "/constellationsart.fab"), StelApp::getInstance().getDataFilePath("constellations_boundaries.dat"), lb);
 	asterisms->loadNames(StelApp::getInstance().getDataFilePath("sky_cultures/" + skyCultureDir + "/constellation_names.eng.fab"));
 
 	// Re-translated constellation names
-	asterisms->translateNames(skyTranslator);
+	asterisms->updateLanguage(skyTranslator);
 
 	// as constellations have changed, clear out any selection and retest for match!
 	if (selected_object && selected_object.get_type()==STEL_OBJECT_STAR)
@@ -963,37 +950,11 @@ void StelCore::setSkyLanguage(const std::string& newSkyLocaleName)
 
 	// Update the translator with new locale name
 	skyTranslator = Translator(PACKAGE, StelApp::getInstance().getLocaleDir(), newSkyLocaleName);
-	// cout << "Sky locale is " << skyTranslator.getTrueLocaleName() << endl;
-
-	// see if fonts need to change
-	string oldFontFile, newFontFile, tmpstr;
-	float oldFontScale, newFontScale, tmpfloat;
-
-	getFontForLocale(oldLocale, oldFontFile, oldFontScale, tmpstr, tmpfloat);
-	getFontForLocale(skyTranslator.getTrueLocaleName(), newFontFile, newFontScale, tmpstr, tmpfloat);
-
-	// If font has changed or init is being called for first time...
-	if(oldFontFile != newFontFile || oldFontScale != newFontScale || firstTime)
-	{
-
-		cardinals_points->set_font(FontSizeCardinalPoints*newFontScale, newFontFile);
-		asterisms->setFont(constellationFontSize*newFontScale, newFontFile);  // size is read from config
-		ssystem->setFont(FontSizeSolarSystem*newFontScale, newFontFile);
-		// not translating yet
-		//		nebulas->setFont(FontSizeGeneral, font);
-		hip_stars->setFont(FontSizeGeneral*newFontScale, newFontFile);
-		telescope_mgr->setFont(FontSizeGeneral*newFontScale, newFontFile);
-
-		// TODO: TUI short info font needs updating also
-		// TEST - need different fixed font
-		// ui->setFonts(newFontScale, newFontFile, newFontScale, newFontFile);
-
-	}
 
 	// Translate all labels with the new language
-	cardinals_points->translateLabels(skyTranslator);
-	asterisms->translateNames(skyTranslator);
-	ssystem->translateNames(skyTranslator);
+	cardinals_points->updateLanguage(skyTranslator);
+	asterisms->updateLanguage(skyTranslator);
+	ssystem->updateLanguage(skyTranslator);
 	nebulas->translateSkyNames(skyTranslator);
 	hip_stars->translateNames(skyTranslator);
 }
@@ -1024,19 +985,11 @@ void StelCore::setColorScheme(const string& skinFile, const string& section)
 	//azi_grid->set_top_transparancy(draw_mode==DM_NORMAL);
 	equator_line->setColor(StelUtils::str_to_vec3f(conf.get_str(section,"equator_color", defaultColor)));
 	ecliptic_line->setColor(StelUtils::str_to_vec3f(conf.get_str(section,"ecliptic_color", defaultColor)));
-	meridian_line->set_font(FontSizeGeneral, baseFontFile);
 	meridian_line->setColor(StelUtils::str_to_vec3f(conf.get_str(section,"meridian_color", defaultColor)));
 	cardinals_points->setColor(StelUtils::str_to_vec3f(conf.get_str(section,"cardinal_color", defaultColor)));
 	asterisms->setLineColor(StelUtils::str_to_vec3f(conf.get_str(section,"const_lines_color", defaultColor)));
 	asterisms->setBoundaryColor(StelUtils::str_to_vec3f(conf.get_str(section,"const_boundary_color", "0.8,0.3,0.3")));
 	asterisms->setLabelColor(StelUtils::str_to_vec3f(conf.get_str(section,"const_names_color", defaultColor)));
-
-	// Init milky way
-	// 	if (draw_mode == DM_NORMAL)	milky_way->set_texture("milkyway.png");
-	// 	else
-	// 	{
-	// 		milky_way->set_texture("milkyway_chart.png",true);
-	// 	}
 
 	chartColor = StelUtils::str_to_vec3f(conf.get_str(section,"chart_color", defaultColor));
 }
@@ -1431,100 +1384,6 @@ vector<wstring> StelCore::listMatchingObjectsI18n(const wstring& objPrefix, unsi
 }
 
 
-//! TESTING
-//! font file and scaling to use for a given locale
-void StelCore::getFontForLocale(const string &_locale, string &_fontFile, float &_fontScale,
-                                string &_fixedFontFile, float &_fixedFontScale)
-{
-
-	// TODO: Cache in data structure
-	// TODO: check that font files exist
-	// TODO: Move to translation or font class
-
-	// Hardcoded default fonts here (override in fontmap.dat file)
-	_fontFile = StelApp::getInstance().getDataFilePath("DejaVuSans.ttf");
-	_fontScale = _fixedFontScale = 1.;
-	_fixedFontFile = StelApp::getInstance().getDataFilePath("DejaVuSansMono.ttf");
-
-	// Now see if another font should be used as default or for locale
-	string mapFileName = StelApp::getInstance().getDataFilePath("fontmap.dat");
-	ifstream *mapFile = new ifstream(mapFileName.c_str());
-
-	if (! mapFile->is_open())
-	{
-		cout << "WARNING: Unable to open " << mapFileName << " resorting to default fonts." << endl;
-		return;
-	}
-
-	char buffer[1000];
-	string locale, font, fixedFont;
-	float scale, fixedScale;
-
-	while (mapFile->getline (buffer,999) && !mapFile->eof())
-	{
-
-		if( buffer[0] != '#' && buffer[0] != 0)
-		{
-
-			//			printf("Buffer is: %s\n", buffer);
-			istringstream record(buffer);
-
-			record >> locale >> font >> scale >> fixedFont >> fixedScale;
-
-			// find matching records in map file
-			if(locale == _locale || locale == "default")
-			{
-
-				//				cout << "locale " << _locale << endl;
-
-				// Test that font files exist
-				string fontFileName;
-				ifstream *fontFile;
-
-				fontFileName = StelApp::getInstance().getDataFilePath(font);
-				fontFile = new ifstream(fontFileName.c_str());
-
-				if (! fontFile->is_open())
-				{
-					cout << "WARNING: Unable to open " << fontFileName << " resorting to default font." << endl;
-				}
-				else
-				{
-					_fontFile = StelApp::getInstance().getDataFilePath(font);
-					_fontScale = scale;
-				}
-				delete fontFile;
-
-				// normal font OK, test fixed font
-				fontFileName = StelApp::getInstance().getDataFilePath(fixedFont);
-				fontFile = new ifstream(fontFileName.c_str());
-
-				if (! fontFile->is_open())
-				{
-					cout << "WARNING: Unable to open " << fontFileName << " resorting to default font." << endl;
-				}
-				else
-				{
-					_fixedFontFile = StelApp::getInstance().getDataFilePath(fixedFont);
-					_fixedFontScale = fixedScale;
-				}
-				delete fontFile;
-
-				if(locale == _locale)
-				{
-					break;
-				}
-			}
-		}
-	}
-
-	delete mapFile;
-	return;
-
-}
-
-
-
 void StelCore::setFlagTracking(bool b)
 {
 
@@ -1540,10 +1399,6 @@ void StelCore::setFlagTracking(bool b)
 	}
 
 }
-
-
-
-
 
 
 void StelCore::setFlagStars(bool b)
