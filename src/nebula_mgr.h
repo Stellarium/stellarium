@@ -55,7 +55,7 @@ public:
 	//! Return the matching Nebula object's pointer if exists or NULL
 	//! @param nameI18n The case sensistive nebula name or NGC M catalog name : format can be M31, M 31, NGC31 NGC 31
 	virtual StelObject searchByNameI18n(const wstring& nameI18n) const;
-	virtual void translateSkyNames(Translator& trans);
+	virtual void updateLanguage(Translator& trans);
 	virtual bool setSkyCultureDir(const string& cultureDir) {return true;}
 	
 	//! @brief Find and return the list of at most maxNbItem objects auto-completing the passed object I18n name

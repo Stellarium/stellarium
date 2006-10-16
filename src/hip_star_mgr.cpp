@@ -1472,7 +1472,7 @@ void SpecialZoneArray<Star>::searchAround(int index,const Vec3d &v,
 
 //! @brief Update i18 names from english names according to passed translator
 //! The translation is done using gettext with translated strings defined in translations.h
-void HipStarMgr::translateNames(Translator& trans) {
+void HipStarMgr::updateLanguage(Translator& trans) {
   common_names_map_i18n.clear();
   common_names_index_i18n.clear();
   for (map<int,string>::iterator it(common_names_map.begin());
@@ -1484,6 +1484,7 @@ void HipStarMgr::translateNames(Translator& trans) {
     transform(t.begin(), t.end(), t_cap.begin(), ::toupper);
     common_names_index_i18n[t_cap] = i;
   }
+  starFont = &StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getSkyLanguage(), fontSize);
 }
 
 

@@ -57,9 +57,6 @@ NebulaMgr::~NebulaMgr()
 
 	if (Nebula::tex_circle) delete Nebula::tex_circle;
 	Nebula::tex_circle = NULL;
-
-	if (Nebula::nebula_font) delete Nebula::nebula_font;
-	Nebula::nebula_font = NULL;
 	
 	delete[] nebZones;
 }
@@ -72,7 +69,7 @@ bool NebulaMgr::init(LoadingBar& lb)
 	loadTextures(StelApp::getInstance().getDataFilePath("nebula_textures.fab"), lb);
 
 	double fontSize = 12;
-	if (!Nebula::nebula_font) Nebula::nebula_font = &StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getSkyLanguage(), fontSize);
+	Nebula::nebula_font = &StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getSkyLanguage(), fontSize);
 
 	if (!Nebula::tex_circle)
 		Nebula::tex_circle = new s_texture("neb.png");   // Load circle texture
@@ -484,13 +481,15 @@ bool NebulaMgr::loadTextures(const string& fileName, LoadingBar& lb)
 
 //! @brief Update i18 names from english names according to passed translator
 //! The translation is done using gettext with translated strings defined in translations.h
-void NebulaMgr::translateSkyNames(Translator& trans)
+void NebulaMgr::updateLanguage(Translator& trans)
 {
 	vector<Nebula*>::iterator iter;
 	for( iter = neb_array.begin(); iter < neb_array.end(); iter++ )
 	{
 		(*iter)->translateName(trans);
 	}
+	double fontSize = 12;
+	Nebula::nebula_font = &StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getSkyLanguage(), fontSize);
 }
 
 
