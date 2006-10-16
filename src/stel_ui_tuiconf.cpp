@@ -25,6 +25,7 @@
 #include <string>
 #include "stel_ui.h"
 #include "sky_localizer.h"
+#include "stelfontmgr.h"
 
 // Draw simple gravity text ui.
 void StelUI::draw_gravity_ui(void)
@@ -77,21 +78,6 @@ void StelUI::init_tui(void)
 
 	// If already initialized before, delete existing objects
 	if(tui_root) delete tui_root;
-	if(tuiFont) delete tuiFont;
-
-	// Load standard font based on app locale
-	string fontFile, tmpstr;
-	float fontScale, tmpfloat;
-
-	core->getFontForLocale(app->getAppLanguage(), fontFile, fontScale, tmpstr, tmpfloat);
-
-	tuiFont = new s_font(BaseFontSize*fontScale, fontFile);
-	if (!tuiFont)
-	{
-		printf("ERROR WHILE CREATING FONT\n");
-		exit(-1);
-	}
-
 	tui_root = new s_tui::Branch();
 
 	// Submenus
@@ -331,20 +317,6 @@ void StelUI::localizeTui(void)
 {
 
 	cout << "Localizing TUI for locale: " << app->getAppLanguage() << endl;
-	if(tuiFont) delete tuiFont;
-
-	// Load standard font based on app locale
-	string fontFile, tmpstr;
-	float fontScale, tmpfloat;
-
-	core->getFontForLocale(app->getAppLanguage(), fontFile, fontScale, tmpstr, tmpfloat);
-
-	tuiFont = new s_font(BaseFontSize*fontScale, fontFile);
-	if (!tuiFont)
-	{
-		printf("ERROR WHILE CREATING FONT\n");
-		exit(-1);
-	}
 
 	if(!tui_root) return;  // not initialized yet
 

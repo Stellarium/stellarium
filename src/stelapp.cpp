@@ -89,6 +89,9 @@ string StelApp::getConfigFilePath(void) const
 *************************************************************************/
 string StelApp::getDataFilePath(const string& dataFileName) const
 {
+	// Absolute path if starts by '/'
+	if (dataFileName!="" && dataFileName[0]=='/')
+		return dataFileName;
 	return dataDir + "/" + dataFileName;
 }
 
@@ -114,6 +117,14 @@ void StelApp::setAppLanguage(const string& newAppLocaleName)
 
 	// TODO: GUI needs to be reinitialized to load new translations and/or fonts
 }
+
+/*************************************************************************
+ Get the language currently used for sky objects..
+*************************************************************************/
+string StelApp::getSkyLanguage() const
+{
+	return core->getSkyLanguage();
+}	
 
 void StelApp::setViewPortDistorterType(const string &type)
 {

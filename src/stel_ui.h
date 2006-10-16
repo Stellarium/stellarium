@@ -89,9 +89,6 @@ private:
 	StelApp * app;			// The main application instance
 	
 	bool initialised;
-	s_font * baseFont;		// The standard font
-	s_font * courierFont;	// The standard fixed size font
-	s_font * tuiFont;		// The standard tui font - separate from gui so can reload on the fly
 	s_texture * baseTex;	// The standard fill texture
 	s_texture * flipBaseTex;	// The standard fill texture
 	s_texture * tex_up;		// Up arrow texture
@@ -110,11 +107,11 @@ private:
     int FlagConfig;
     int FlagSearch;
 	int FlagShowSelectedObjectInfo;
-	int FlagShowScriptBar;	
-	float BaseFontSize;
-	string BaseFontName;
-	float BaseCFontSize;
-	string BaseCFontName;
+	int FlagShowScriptBar;
+	
+	double baseFontSize;
+	double baseCFontSize;
+	s_font* tuiFont;
 	
 	// Text UI
 	bool FlagEnableTuiMenu;
@@ -135,7 +132,7 @@ private:
 	Label * top_bar_fps_lbl;
 	Label * top_bar_appName_lbl;
 	Label * top_bar_fov_lbl;
-	Component* createTopBar(void);
+	Component* createTopBar(s_font& baseFont);
 	void updateTopBar(void);
 
 	// Flags buttons (the buttons in the bottom left corner)
@@ -203,7 +200,7 @@ private:
 	// The window containing the help info
 	StdBtWin * help_win;
 	TextLabel * help_txtlbl;
-	Component* createHelpWindow(void);
+	Component* createHelpWindow(s_font& courierFont);
 	void help_win_hideBtCallback(void);
 
 	// window for transient messages
@@ -212,7 +209,7 @@ private:
 
 	// The window managing the configuration
 	StdBtWin* config_win;
-	Component* createConfigWindow(void);
+	Component* createConfigWindow(s_font& courierFont);
 	void config_win_hideBtCallback(void);
 
 	TabContainer * config_tab_ctr;

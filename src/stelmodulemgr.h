@@ -25,7 +25,7 @@
 /**
  * Singleton instance used to manage a collection of StelModule
  * TODO : Manage drawing order, update order
- * @author Fabien Chéreau <stellarium@free.fr>
+ * @author Fabien Chereau <stellarium@free.fr>
  */
 class StelModuleMgr{
 public:
@@ -38,7 +38,7 @@ public:
 	}
 	
 	//! Add a static (no dynamic linking) module which is already initialized
-	void registerInitializedStelModule(StelModule* m)
+	void registerModule(StelModule* m)
 	{
 		if (modules.find(m->getModuleID()) != modules.end())
 		{		

@@ -48,9 +48,9 @@ public:
 	//! @param namesFile Name of the file containing the constellation names in english
 	void loadNames(const string& names_file);
 	
-	//! @brief Update i18 names from english names according to current locale
+	//! @brief Update i18 names from english names according to current locale and update font
 	//! The translation is done using gettext with translated strings defined in translations.h
-	void translateNames(Translator& trans);
+	void updateLanguage(Translator& trans);
 		   
 	//! @brief Load constellation line shapes, art textures and boundaries shapes from data files
 	void loadLinesAndArt(const string& lines_file, const string& art_file, const string &boundaryfileName, LoadingBar& lb);
@@ -105,8 +105,8 @@ public:
 	//! Get label color for names
 	Vec3f getLabelColor() const;
 	
-	//! Define font file name and size to use for constellation names display
-	void setFont(float font_size, const string& font_name);
+	//! Define font size to use for constellation names display
+	void setFontSize(double newFontSize);
 	
 	//! Define which constellation is selected from its abbreviation
 	void setSelected(const string& abbreviation) {setSelectedConst(findFromAbbreviation(abbreviation));}
@@ -138,6 +138,7 @@ private:
     Constellation* is_star_in(const StelObject &s) const;
     Constellation* findFromAbbreviation(const string& abbreviation) const;		
     vector<Constellation*> asterisms;
+	double fontSize;
     s_font *asterFont;
     HipStarMgr *hipStarMgr;
 	Constellation* selected;
