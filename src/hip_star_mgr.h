@@ -56,7 +56,7 @@ public:
     void set_names_fade_duration(float duration) {names_fader.set_duration((int) (duration * 1000.f));}
     int load_common_names(const string& commonNameFile);
     void load_sci_names(const string& sciNameFile);
-    void translateNames(Translator& trans);
+	void updateLanguage(Translator& trans);
      
     //! Find and return the list of at most maxNbItem objects
     //! auto-completing the passed object I18n name

@@ -934,7 +934,7 @@ bool StelCore::setSkyCultureDir(const string& cultureDir)
 	hip_stars->setFlagSciNames( skyCultureDir.compare(0, 7, "western") ==0 );
 
 	// translate
-	hip_stars->translateNames(skyTranslator);
+	hip_stars->updateLanguage(skyTranslator);
 
 	return 1;
 }
@@ -955,8 +955,8 @@ void StelCore::setSkyLanguage(const std::string& newSkyLocaleName)
 	cardinals_points->updateLanguage(skyTranslator);
 	asterisms->updateLanguage(skyTranslator);
 	ssystem->updateLanguage(skyTranslator);
-	nebulas->translateSkyNames(skyTranslator);
-	hip_stars->translateNames(skyTranslator);
+	nebulas->updateLanguage(skyTranslator);
+	hip_stars->updateLanguage(skyTranslator);
 }
 
 

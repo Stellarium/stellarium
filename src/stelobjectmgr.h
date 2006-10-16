@@ -54,7 +54,7 @@ public:
 	
 	//! Update i18n names of the sky objects from english names according to passed translator
 	//! The translation is done internally using gettext with translated strings defined in the .po files
-	virtual void translateSkyNames(Translator& trans) = 0;
+	virtual void updateLanguage(Translator& trans) = 0;
 	
 	//! Set the current sky culture from the passed directory
 	//! Reload and translate any data file for the given sky culture/translation if necessary
