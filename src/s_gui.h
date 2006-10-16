@@ -898,9 +898,7 @@ namespace s_gui
 		virtual bool onMove(int, int);
 		virtual bool isIn(int x, int y);
 		bool onKey(Uint16 k, S_GUI_VALUE s);
-
-		void set_font(float font_size, const string& font_name);
-
+		void set_font(s_font* newFont) {city_name_font = newFont;}
 		double getPointerLongitude(void);
 		double getPointerLatitude(void);
 		int getPointerAltitude(void);
@@ -932,7 +930,7 @@ namespace s_gui
 		void setPointerSize(void);
 		Picture *pointer;
 		Picture *cityPointer;
-		s_font *city_name_font;
+		s_font* city_name_font;
 		s_vec2i pointerPos, oldPos;
 		s_vec2i originalSize, originalPos;
 		s_vec2i cursorPos;

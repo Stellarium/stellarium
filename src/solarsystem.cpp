@@ -31,24 +31,17 @@ using namespace std;
 #include "navigator.h"
 #include "projector.h"
 #include "stelapp.h"
+#include "stelfontmgr.h"
 
 SolarSystem::SolarSystem()
-            :sun(NULL),moon(NULL),earth(NULL),
-             moonScale(1.), planet_name_font(NULL), tex_earth_shadow(NULL),
+	:sun(NULL),moon(NULL),earth(NULL), moonScale(1.), fontSize(14.),
+              planet_name_font(StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getAppLanguage(), fontSize)), tex_earth_shadow(NULL),
              flagOrbits(false),flag_light_travel_time(false) {
 }
 
-void SolarSystem::setFont(float font_size, const string& font_name)
+void SolarSystem::setFontSize(float newFontSize)
 {
-	if(planet_name_font) delete planet_name_font;
-
-	planet_name_font = new s_font(font_size, font_name);
-	if (!planet_name_font)
-	{
-		printf("Can't create planet_name_font\n");
-		exit(-1);
-	}
-	Planet::set_font(planet_name_font);
+	planet_name_font = StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getSkyLanguage(), fontSize);
 }
 
 SolarSystem::~SolarSystem()
@@ -69,7 +62,6 @@ SolarSystem::~SolarSystem()
 	moon = NULL;
 	earth = NULL;
 
-	if (planet_name_font) delete planet_name_font;
 	if(tex_earth_shadow) delete tex_earth_shadow;
 }
 
@@ -314,7 +306,7 @@ bool SolarSystem::init(LoadingBar& lb)
 
 	// special case: load earth shadow texture
 	tex_earth_shadow = new s_texture("earth-shadow.png", TEX_LOAD_TYPE_PNG_ALPHA);
-
+	
 	cout << "(loaded)" << endl;
 	return true;
 }
@@ -369,6 +361,8 @@ void SolarSystem::computeTransMatrices(double date,const Planet *home_planet) {
 // We are supposed to be in heliocentric coordinate
 double SolarSystem::draw(Projector * prj, const Navigator * nav, const ToneReproductor* eye, bool flag_point)
 {
+	Planet::set_font(&planet_name_font);
+	
 	// Set the light parameters taking sun as the light source
 	const float zero[4] = {0,0,0,0};
 	const float ambient[4] = {0.03,0.03,0.03,0.03};
@@ -540,13 +534,14 @@ vector<StelObject> SolarSystem::search_around(Vec3d v,
 
 //! @brief Update i18 names from english names according to passed translator
 //! The translation is done using gettext with translated strings defined in translations.h
-void SolarSystem::translateNames(Translator& trans)
+void SolarSystem::updateLanguage(Translator& trans)
 {
 	vector<Planet*>::iterator iter;
 	for( iter = system_planets.begin(); iter < system_planets.end(); iter++ )
 	{
 		(*iter)->translateName(trans);
 	}
+	planet_name_font = StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getSkyLanguage(), fontSize);
 }
 
 vector<wstring> SolarSystem::getNamesI18(void)

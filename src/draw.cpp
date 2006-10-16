@@ -22,12 +22,15 @@
 #include "stel_utility.h"
 #include "navigator.h"
 #include "planet.h"
+#include "stelapp.h"
+#include "stelfontmgr.h"
 
 // rms added color as parameter
 SkyGrid::SkyGrid(SKY_GRID_TYPE grid_type, unsigned int _nb_meridian, unsigned int _nb_parallel, double _radius,
 	unsigned int _nb_alt_segment, unsigned int _nb_azi_segment) :
 	nb_meridian(_nb_meridian), nb_parallel(_nb_parallel), 	radius(_radius),
-	nb_alt_segment(_nb_alt_segment), nb_azi_segment(_nb_azi_segment), color(0.2,0.2,0.2)
+	nb_alt_segment(_nb_alt_segment), nb_azi_segment(_nb_azi_segment), color(0.2,0.2,0.2), fontSize(12),
+	font(StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getAppLanguage(), fontSize))
 {
 	transparent_top = true;
 	gtype = grid_type;
@@ -78,16 +81,12 @@ SkyGrid::~SkyGrid()
 		delete [] azi_points[np];
 	}
 	delete [] azi_points;
-	
-	if (font) delete font;
-	font = NULL;
-
 }
 
-void SkyGrid::set_font(float font_size, const string& font_name)
+void SkyGrid::setFontSize(double newFontSize)
 {
-	font = new s_font(font_size, font_name);
-	assert(font);
+	fontSize = newFontSize;
+	font = StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getAppLanguage(), fontSize);
 }
 
 void SkyGrid::draw(const Projector* prj) const
@@ -165,7 +164,7 @@ void SkyGrid::draw(const Projector* prj) const
 
 				      glTranslatef(pt2[0],pt2[1],0);
 				      glRotatef(90+angle*180./M_PI,0,0,-1);
-				      font->print(2,-2,str);
+				      font.print(2,-2,str);
 
 				      prj->reset_perspective_projection();
 
@@ -190,7 +189,7 @@ void SkyGrid::draw(const Projector* prj) const
 
 				      glTranslatef(pt2[0],pt2[1],0);
 				      glRotatef(angle*180./M_PI,0,0,-1);
-				      font->print(2,-2,str);
+				      font.print(2,-2,str);
 				      prj->reset_perspective_projection();
 
 				    }
@@ -267,7 +266,8 @@ void SkyGrid::draw(const Projector* prj) const
 
 
 SkyLine::SkyLine(SKY_LINE_TYPE _line_type, double _radius, unsigned int _nb_segment) :
-	radius(_radius), nb_segment(_nb_segment), color(0.f, 0.f, 1.f), font(NULL)
+		radius(_radius), nb_segment(_nb_segment), color(0.f, 0.f, 1.f), fontSize(1.),
+	font(StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getAppLanguage(), fontSize))
 {
 	float inclinaison = 0.f;
 	line_type = _line_type;
@@ -304,15 +304,12 @@ SkyLine::~SkyLine()
 {
 	delete [] points;
 	points = NULL;
-	if (font) delete font;
-	font = NULL;
 }
 
-void SkyLine::set_font(float font_size, const string& font_name)
+void SkyLine::setFontSize(double newFontSize)
 {
-	if (font) delete font;
-	font = new s_font(font_size, font_name);
-	assert(font);
+	fontSize = newFontSize;
+	font = StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getAppLanguage(), fontSize);
 }
 
 void SkyLine::draw(const Projector *prj,const Navigator *nav) const
@@ -331,10 +328,8 @@ void SkyLine::draw(const Projector *prj,const Navigator *nav) const
 
   if (line_type == ECLIPTIC) {
       // special drawing of the ecliptic line
-    const Mat4d m = nav->getHomePlanet()
-                       ->getRotEquatorialToVsop87().transpose();
-    const bool draw_labels =
-      (nav->getHomePlanet()->getEnglishName()=="Earth" && font);
+    const Mat4d m = nav->getHomePlanet()->getRotEquatorialToVsop87().transpose();
+    const bool draw_labels = nav->getHomePlanet()->getEnglishName()=="Earth";
        // start labeling from the vernal equinox
     const double corr = draw_labels ? (atan2(m.r[4],m.r[0]) - 3*M_PI/6) : 0.0;
     Vec3d point(radius*cos(corr),radius*sin(corr),0.0);
@@ -375,7 +370,7 @@ void SkyLine::draw(const Projector *prj,const Navigator *nav) const
 
 			glEnable(GL_TEXTURE_2D);
 
-			font->print(0,-2,oss.str());
+			font.print(0,-2,oss.str());
 			glPopMatrix();
 			glDisable(GL_TEXTURE_2D);
 
@@ -435,7 +430,7 @@ void SkyLine::draw(const Projector *prj,const Navigator *nav) const
 				glEnd();
 				glEnable(GL_TEXTURE_2D);
 
-				if(font) font->print(2,-2,oss.str());
+				font.print(2,-2,oss.str());
 				glPopMatrix();
 				glDisable(GL_TEXTURE_2D);
 
@@ -467,7 +462,7 @@ void SkyLine::draw(const Projector *prj,const Navigator *nav) const
 				glEnd();
 				glEnable(GL_TEXTURE_2D);
 
-				if(font) font->print(2,-2,oss.str());
+				font.print(2,-2,oss.str());
 				glPopMatrix();
 				glDisable(GL_TEXTURE_2D);
 
@@ -495,7 +490,7 @@ void SkyLine::draw(const Projector *prj,const Navigator *nav) const
 				
 				glEnable(GL_TEXTURE_2D);
 
-				if(font) font->print(0,-2,oss.str());
+				font.print(0,-2,oss.str());
 				glPopMatrix();
 				glDisable(GL_TEXTURE_2D);
 
@@ -511,7 +506,8 @@ void SkyLine::draw(const Projector *prj,const Navigator *nav) const
 }
 
 
-Cardinals::Cardinals(float _radius) : radius(_radius), font(NULL), color(0.6,0.2,0.2)
+Cardinals::Cardinals(float _radius) : radius(_radius), fontSize(30),
+		font(StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getAppLanguage(), fontSize)), color(0.6,0.2,0.2)
 {
 	// Default labels - if sky locale specified, loaded later
 	// Improvement for gettext translation
@@ -523,26 +519,12 @@ Cardinals::Cardinals(float _radius) : radius(_radius), font(NULL), color(0.6,0.2
 
 Cardinals::~Cardinals()
 {
-    if (font) delete font;
-	font = NULL;
-}
-
-/**
- * Set the font for cardinal points
- * @param font_size size in pixel
- * @param font_name name of the font
- */
-void Cardinals::set_font(float font_size, const string& font_name)
-{
-	font = new s_font(font_size, font_name);
-	assert(font);
 }
 
 // Draw the cardinals points : N S E W
 // handles special cases at poles
 void Cardinals::draw(const Projector* prj, double latitude, bool gravityON) const
 {
-
 	if (!fader.getInterstate()) return;
 
 	// direction text
@@ -568,55 +550,57 @@ void Cardinals::draw(const Projector* prj, double latitude, bool gravityON) cons
 
 	prj->set_orthographic_projection();
 
-	float shift = font->getStrLen(sNorth)/2;
+	float shift = font.getStrLen(sNorth)/2;
 
 	if (prj->getFlagGravityLabels())
 	{
 		// N for North
 		pos.set(-1.f, 0.f, 0.22f);
-		if (prj->project_local(pos,xy)) prj->print_gravity180(font, xy[0], xy[1], d[0], -shift, -shift);
+		if (prj->project_local(pos,xy)) prj->print_gravity180(&font, xy[0], xy[1], d[0], -shift, -shift);
 
 		// S for South
 		pos.set(1.f, 0.f, 0.22f);
-		if (prj->project_local(pos,xy)) prj->print_gravity180(font, xy[0], xy[1], d[1], -shift, -shift);
+		if (prj->project_local(pos,xy)) prj->print_gravity180(&font, xy[0], xy[1], d[1], -shift, -shift);
 
 		// E for East
 		pos.set(0.f, 1.f, 0.22f);
-		if (prj->project_local(pos,xy)) prj->print_gravity180(font, xy[0], xy[1], d[2], -shift, -shift);
+		if (prj->project_local(pos,xy)) prj->print_gravity180(&font, xy[0], xy[1], d[2], -shift, -shift);
 
 		// W for West
 		pos.set(0.f, -1.f, 0.22f);
-		if (prj->project_local(pos,xy)) prj->print_gravity180(font, xy[0], xy[1], d[3], -shift, -shift);
+		if (prj->project_local(pos,xy)) prj->print_gravity180(&font, xy[0], xy[1], d[3], -shift, -shift);
 	}
 	else
 	{
 		// N for North
 		pos.set(-1.f, 0.f, 0.f);
-		if (prj->project_local(pos,xy)) font->print(xy[0]-shift, xy[1]-shift, d[0]);
+		if (prj->project_local(pos,xy)) font.print(xy[0]-shift, xy[1]-shift, d[0]);
 
 		// S for South
 		pos.set(1.f, 0.f, 0.f);
-		if (prj->project_local(pos,xy)) font->print(xy[0]-shift, xy[1]-shift, d[1]);
+		if (prj->project_local(pos,xy)) font.print(xy[0]-shift, xy[1]-shift, d[1]);
 
 		// E for East
 		pos.set(0.f, 1.f, 0.f);
-		if (prj->project_local(pos,xy)) font->print(xy[0]-shift, xy[1]-shift, d[2]);
+		if (prj->project_local(pos,xy)) font.print(xy[0]-shift, xy[1]-shift, d[2]);
 
 		// W for West
 		pos.set(0.f, -1.f, 0.f);
-		if (prj->project_local(pos,xy)) font->print(xy[0]-shift, xy[1]-shift, d[3]);
+		if (prj->project_local(pos,xy)) font.print(xy[0]-shift, xy[1]-shift, d[3]);
 	}
 
 	prj->reset_perspective_projection();
 }
 
-// Translate cardinal labels with gettext to current sky language
-void Cardinals::translateLabels(Translator& trans)
+// Translate cardinal labels with gettext to current sky language and update font for the language
+void Cardinals::updateLanguage(Translator& trans)
 {
 		sNorth = trans.translate("N");
 		sSouth = trans.translate("S");
 		sEast = trans.translate("E");
 		sWest = trans.translate("W");
+		
+		font = StelApp::getInstance().getFontManager().getStandardFont(trans.getTrueLocaleName(), fontSize);
 }
 
 // Class which manages the displaying of the Milky Way

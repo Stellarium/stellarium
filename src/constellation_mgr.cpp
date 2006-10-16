@@ -28,9 +28,12 @@
 #include "hip_star_mgr.h"
 #include "hip_star.h"
 #include "stel_utility.h"
+#include "stelapp.h"
+#include "stelfontmgr.h"
 
 // constructor which loads all data from appropriate files
 ConstellationMgr::ConstellationMgr(HipStarMgr *_hip_stars) : 
+	fontSize(15),
 	asterFont(NULL),
 	hipStarMgr(_hip_stars),
 	selected(NULL),
@@ -73,11 +76,9 @@ Vec3f ConstellationMgr::getBoundaryColor() const {return Constellation::boundary
 void ConstellationMgr::setLabelColor(const Vec3f& c) {Constellation::labelColor = c;}
 Vec3f ConstellationMgr::getLabelColor() const {return Constellation::labelColor;}
 
-void ConstellationMgr::setFont(float font_size, const string& ttfFileName)
+void ConstellationMgr::setFontSize(double newFontSize)
 {
-	if (asterFont) delete asterFont;
-	asterFont = new s_font(font_size, ttfFileName);
-	assert(asterFont);
+	asterFont = &StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getSkyLanguage(), fontSize);
 }
 
 // Load line and art data from files
@@ -354,16 +355,16 @@ void ConstellationMgr::loadNames(const string& namesFile)
 
 }
 
-//! @brief Update i18 names from english names according to current locale
+//! @brief Update i18 names from english names according to current locale, and update font for locale
 //! The translation is done using gettext with translated strings defined in translations.h
-void ConstellationMgr::translateNames(Translator& trans)
+void ConstellationMgr::updateLanguage(Translator& trans)
 {
 	vector < Constellation * >::const_iterator iter;
 	for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
 	{
 		(*iter)->nameI18 = trans.translate((*iter)->englishName.c_str());
-		//cout << (*iter)->englishName.c_str() << " -> " << StelUtils::wstringToString((*iter)->nameI18) << endl;
 	}
+	asterFont = &StelApp::getInstance().getFontManager().getStandardFont(trans.getTrueLocaleName(), fontSize);
 }
 
 // update faders

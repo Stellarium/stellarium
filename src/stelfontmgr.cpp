@@ -79,7 +79,7 @@ s_font& StelFontMgr::getStandardFont(const string &langageName, double scale)
 	}
 	else
 	{
-		s_font* font = new s_font(lf.scale, StelApp::getInstance().getDataFilePath(lf.fileName));
+		s_font* font = new s_font((double)lf.scale/10, StelApp::getInstance().getDataFilePath(lf.fileName));
 		loadedFonts[lf]=font;
 		return *font;
 	}
@@ -103,7 +103,7 @@ s_font& StelFontMgr::getFixedFont(const string &langageName, double scale)
 	}
 	else
 	{
-		s_font* font = new s_font(lf.scale, StelApp::getInstance().getDataFilePath(lf.fileName));
+		s_font* font = new s_font((double)lf.scale/10, StelApp::getInstance().getDataFilePath(lf.fileName));
 		loadedFonts[lf]=font;
 		return *font;
 	}
@@ -143,7 +143,7 @@ void StelFontMgr::loadFontForLanguage(const string &fontMapFile)
 
 	if (!mapFile.is_open())
 	{
-		cerr << "WARNING: Unable to open " << fontMapFile << " resorting to default fonts." << endl;
+		cerr << "WARNING: Unable to open font map file " << fontMapFile << " resorting to default fonts." << endl;
 		return;
 	}
 
@@ -171,12 +171,14 @@ void StelFontMgr::loadFontForLanguage(const string &fontMapFile)
 			fontFile.open(StelApp::getInstance().getDataFilePath(readFont.fixedFontFileName).c_str());
 			if (!fontFile.is_open())
 			{
-				cerr << "WARNING: Unable to open " << StelApp::getInstance().getDataFilePath(readFont.fontFileName) << " resorting to default font." << endl;
+				cerr << "WARNING: Unable to open " << StelApp::getInstance().getDataFilePath(readFont.fixedFontFileName) << " resorting to default font." << endl;
 				readFont.fixedFontFileName = defaultFont.fixedFontFileName;
 				readFont.fixedFontScale = defaultFont.fixedFontScale;
 			}
 			fontFile.close();
 			
+			if (readFont.langageName=="default")
+				readFont.langageName="*";
 			fontMapping[readFont.langageName]=readFont;
 		}
 	}

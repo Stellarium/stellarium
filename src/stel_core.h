@@ -20,7 +20,6 @@
 #define _STEL_CORE_H_
 
 // default font sizes
-#define FontSizeCardinalPoints 30.
 #define FontSizeSolarSystem 14.
 #define FontSizeGeneral 12.
 #define FontSizeConstellations 16.
@@ -678,8 +677,6 @@ private:
 	//! Find in a "clever" way an object from its screen position
 	StelObject clever_find(int x, int y) const;	
 	
-	string baseFontFile;				// The font file used by default during initialization
-
 	string skyCultureDir;				// The directory containing data for the culture used for constellations, etc.. 
 	Translator skyTranslator;			// The translator used for astronomical object naming
 		

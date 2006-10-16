@@ -3009,23 +3009,10 @@ MapPicture::~MapPicture()
 {
 	delete pointer;
 	pointer = NULL;
-
-	if (city_name_font) delete city_name_font;
-	city_name_font = NULL;
 	
 	delete cityPointer;
 }
 
-void MapPicture::set_font(float font_size, const string& font_name)
-{
-	city_name_font = new s_font(font_size, font_name);
-	if (!city_name_font)
-	{
-		printf("Can't create city_name_font\n");
-		exit(-1);
-	}
-	fontsize = font_size;
-}
 
 #define CITY_TYPE_NAMED 1
 #define CITY_TYPE_UNNAMED 2

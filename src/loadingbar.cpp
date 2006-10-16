@@ -18,30 +18,28 @@
  */
 
 #include "loadingbar.h"
+#include "stelapp.h"
+#include "stelfontmgr.h"
 
-LoadingBar::LoadingBar(Projector* _prj, float font_size, const string& font_name, const string&  splash_tex, 
+LoadingBar::LoadingBar(Projector* _prj, float font_size, const string&  splash_tex, 
 	int screenw, int screenh, const wstring& extraTextString, float extraTextSize, 
 	float extraTextPosx, float extraTextPosy) :
-	prj(_prj), width(512), height(512), barwidth(400), barheight(10), extraText(extraTextString)
+	prj(_prj), width(512), height(512), barwidth(400), barheight(10),
+	barfont(StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getAppLanguage(), font_size)),
+	extraTextFont(StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getAppLanguage(), extraTextSize)),
+	extraText(extraTextString)
 {
 	splashx = prj->getViewportPosX() + (screenw - width)/2;
 	splashy = prj->getViewportPosY() + (screenh - height)/2;
 	barx = prj->getViewportPosX() + (screenw - barwidth)/2;
 	bary = splashy + 34;
-	barfont = new s_font(font_size, font_name);
-	extraTextFont = new s_font(extraTextSize, font_name);
-	assert(barfont);
-	assert(extraTextFont);
 	if (!splash_tex.empty()) splash = new s_texture(splash_tex, TEX_LOAD_TYPE_PNG_ALPHA);
 	extraTextPos.set(extraTextPosx, extraTextPosy);
 }
 	
 LoadingBar::~LoadingBar()
 {
-	delete barfont;
-	delete extraTextFont;
 	if (splash) delete splash;
-	barfont = NULL;
 }
 
 void LoadingBar::Draw(float val)
@@ -116,8 +114,8 @@ void LoadingBar::Draw(float val)
 	
 	glColor3f(1, 1, 1);
 	glEnable(GL_TEXTURE_2D);
-	barfont->print(barx, bary-5, message);
-	extraTextFont->print(splashx + extraTextPos[0], splashy + extraTextPos[1], extraText);
+	barfont.print(barx, bary-5, message);
+	extraTextFont.print(splashx + extraTextPos[0], splashy + extraTextPos[1], extraText);
 	
 	SDL_GL_SwapBuffers();	// And swap the buffers
 	

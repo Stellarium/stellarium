@@ -1,7 +1,8 @@
 # This file defines what font Stellarium should use for a given locale
 # 
 # Format is: locale font_file font_scale fixed_width_font_file fixed_width_font_scale
-# Font files must be ttf format, located in the data directory
+# Font files must be ttf format, located in the data directory.
+# Absolute path can be given by starting file adress with a '/'
 #
 # Default font
 #

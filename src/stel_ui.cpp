@@ -24,16 +24,14 @@
 #include <algorithm>
 #include "stel_ui.h"
 #include "stelapp.h"
+#include "stelfontmgr.h"
+
 
 ////////////////////////////////////////////////////////////////////////////////
 //								CLASS FUNCTIONS
 ////////////////////////////////////////////////////////////////////////////////
 
 StelUI::StelUI(StelCore * _core, StelApp * _app) :
-		baseFont(NULL),
-		courierFont(NULL),
-		tuiFont(NULL),
-
 		FlagHelp(false), FlagInfos(false), FlagConfig(false), FlagSearch(false), FlagShowTuiMenu(0),
 
 		top_bar_ctr(NULL),
@@ -96,11 +94,8 @@ StelUI::StelUI(StelCore * _core, StelApp * _app) :
 StelUI::~StelUI()
 {
 	delete desktop; 	desktop = NULL;
-	delete baseFont; 	baseFont = NULL;
 	delete baseTex; 	baseTex = NULL;
 	delete flipBaseTex; flipBaseTex = NULL;
-	delete courierFont; courierFont = NULL;
-	delete tuiFont; tuiFont = NULL;
 	delete tex_up; tex_up = NULL;
 	delete tex_down; tex_down = NULL;
 	if (tui_root) delete tui_root; tui_root=NULL;
@@ -110,12 +105,9 @@ StelUI::~StelUI()
 ////////////////////////////////////////////////////////////////////////////////
 void StelUI::init(const InitParser& conf)
 {
-
-	if(initialised) {
-
+	if(initialised)
+	{
 		// delete existing objects before recreating
-		if(baseFont) delete baseFont;
-		if(courierFont) delete courierFont;
 		if(baseTex) delete baseTex;
 		if(flipBaseTex) delete flipBaseTex;
 		if(tex_up) delete tex_up;
@@ -134,8 +126,8 @@ void StelUI::init(const InitParser& conf)
 	FlagShowAppName		= conf.get_boolean("gui:flag_show_appname");
 	FlagShowFov			= conf.get_boolean("gui:flag_show_fov");
 	FlagShowSelectedObjectInfo = conf.get_boolean("gui:flag_show_selected_object_info");
-	BaseFontSize		= conf.get_double ("gui","base_font_size",15);
-	BaseFontName        = conf.get_str("gui", "base_font_name", "DejaVuSans.ttf");
+	baseFontSize		= conf.get_double ("gui","base_font_size",15);
+	baseCFontSize		= conf.get_double ("gui","base_cfont_size",12.5);
 	FlagShowScriptBar	= conf.get_boolean("gui","flag_show_script_bar",false);
 	MouseCursorTimeout  = conf.get_double("gui","mouse_cursor_timeout",0);
 
@@ -145,26 +137,9 @@ void StelUI::init(const InitParser& conf)
 	FlagShowTuiDateTime = conf.get_boolean("tui:flag_show_tui_datetime");
 	FlagShowTuiShortObjInfo = conf.get_boolean("tui:flag_show_tui_short_obj_info");
 
-	BaseFontName = StelApp::getInstance().getDataFilePath(BaseFontName);
-
-	// TODO: can we get rid of this second font requirement?
-	BaseCFontSize		= conf.get_double ("gui","base_cfont_size",12.5);
-	BaseCFontName = StelApp::getInstance().getDataFilePath(conf.get_str("gui", "base_cfont_name", "DejaVuSansMono.ttf"));
-
-	// Load standard font
-	baseFont = new s_font(BaseFontSize, BaseFontName);
-	if (!baseFont)
-	{
-		printf("ERROR WHILE CREATING FONT\n");
-		exit(-1);
-	}
-
-	courierFont = new s_font(BaseCFontSize, BaseCFontName);
-	if (!courierFont)
-	{
-		printf("ERROR WHILE CREATING FONT\n");
-		exit(-1);
-	}
+	s_font& baseFont = StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getAppLanguage(), baseFontSize);
+	tuiFont = &(StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getAppLanguage(), baseFontSize));
+	s_font& courierFont = StelApp::getInstance().getFontManager().getFixedFont(StelApp::getInstance().getAppLanguage(), baseCFontSize);
 
 	// set up mouse cursor timeout
 	MouseTimeLeft = MouseCursorTimeout*1000;
@@ -175,9 +150,9 @@ void StelUI::init(const InitParser& conf)
 
 	tex_up = new s_texture("up.png");
 	tex_down = new s_texture("down.png");
-
+	
 	// Set default Painter
-	Painter p(baseTex, baseFont, s_color(0.5, 0.5, 0.5), s_color(1., 1., 1.));
+	Painter p(baseTex, &baseFont, s_color(0.5, 0.5, 0.5), s_color(1., 1., 1.));
 	Component::setDefaultPainter(p);
 
 	Component::initScissor(core->getViewportWidth(), core->getViewportHeight());
@@ -186,11 +161,11 @@ void StelUI::init(const InitParser& conf)
 	desktop->reshape(0,0,core->getViewportWidth(),core->getViewportHeight());
 
 	bt_flag_help_lbl = new Label(L"ERROR...");
-	bt_flag_help_lbl->setPos(3,core->getViewportHeight()-41-(int)baseFont->getDescent());
+	bt_flag_help_lbl->setPos(3,core->getViewportHeight()-41-(int)baseFont.getDescent());
 	bt_flag_help_lbl->setVisible(0);
 
 	bt_flag_time_control_lbl = new Label(L"ERROR...");
-	bt_flag_time_control_lbl->setPos(core->getViewportWidth()-210,core->getViewportHeight()-41-(int)baseFont->getDescent());
+	bt_flag_time_control_lbl->setPos(core->getViewportWidth()-210,core->getViewportHeight()-41-(int)baseFont.getDescent());
 	bt_flag_time_control_lbl->setVisible(0);
 
 	// Info on selected object
@@ -214,7 +189,7 @@ void StelUI::init(const InitParser& conf)
 	message_win->setVisible(false);
 	desktop->addComponent(message_win);
 
-	desktop->addComponent(createTopBar());
+	desktop->addComponent(createTopBar(baseFont));
 	desktop->addComponent(createFlagButtons(conf));
 	desktop->addComponent(createTimeControlButtons());
 	desktop->addComponent(bt_flag_help_lbl);
@@ -226,8 +201,8 @@ void StelUI::init(const InitParser& conf)
 	desktop->addComponent(dialog_win);
 
 	desktop->addComponent(createLicenceWindow());
-	desktop->addComponent(createHelpWindow());
-	desktop->addComponent(createConfigWindow());
+	desktop->addComponent(createHelpWindow(courierFont));
+	desktop->addComponent(createConfigWindow(courierFont));
 	desktop->addComponent(createSearchWindow());
 
 	initialised = true;
@@ -252,16 +227,16 @@ void StelUI::show_message(wstring _message, int _time_out)
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-Component* StelUI::createTopBar(void)
+Component* StelUI::createTopBar(s_font& baseFont)
 {
-	top_bar_date_lbl = new Label(L"-", baseFont);	top_bar_date_lbl->setPos(2,1);
-	top_bar_hour_lbl = new Label(L"-", baseFont);	top_bar_hour_lbl->setPos(110,1);
-	top_bar_fps_lbl = new Label(L"-", baseFont);	top_bar_fps_lbl->setPos(core->getViewportWidth()-100,1);
-	top_bar_fov_lbl = new Label(L"-", baseFont);	top_bar_fov_lbl->setPos(core->getViewportWidth()-220,1);
-	top_bar_appName_lbl = new Label(StelUtils::stringToWstring(APP_NAME), baseFont);
+	top_bar_date_lbl = new Label(L"-", &baseFont);	top_bar_date_lbl->setPos(2,1);
+	top_bar_hour_lbl = new Label(L"-", &baseFont);	top_bar_hour_lbl->setPos(110,1);
+	top_bar_fps_lbl = new Label(L"-", &baseFont);	top_bar_fps_lbl->setPos(core->getViewportWidth()-100,1);
+	top_bar_fov_lbl = new Label(L"-", &baseFont);	top_bar_fov_lbl->setPos(core->getViewportWidth()-220,1);
+	top_bar_appName_lbl = new Label(StelUtils::stringToWstring(APP_NAME), &baseFont);
 	top_bar_appName_lbl->setPos(core->getViewportWidth()/2-top_bar_appName_lbl->getSizex()/2,1);
 	top_bar_ctr = new FilledContainer();
-	top_bar_ctr->reshape(0,0,core->getViewportWidth(),(int)(baseFont->getLineHeight()+0.5)+5);
+	top_bar_ctr->reshape(0,0,core->getViewportWidth(),(int)(baseFont.getLineHeight()+0.5)+5);
 	top_bar_ctr->addComponent(top_bar_date_lbl);
 	top_bar_ctr->addComponent(top_bar_hour_lbl);
 	top_bar_ctr->addComponent(top_bar_fps_lbl);
@@ -697,7 +672,7 @@ http://www.fsf.org");
 	return licence_win;
 }
 
-Component* StelUI::createHelpWindow(void)
+Component* StelUI::createHelpWindow(s_font& courierFont)
 {
 	help_txtlbl = new TextLabel(
 wstring(_("Movement & selection:\n\
@@ -751,7 +726,7 @@ wstring(_("CTRL + Q : Quit\n"))
 #else
 wstring(_("CMD + Q : Quit\n"))
 #endif
-			,courierFont);
+			,&courierFont);
 	
 	
 	//	help_txtlbl->adjustSize();

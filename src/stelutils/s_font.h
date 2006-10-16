@@ -106,6 +106,8 @@ public:
     float getLineHeight(void) {return typeFace.lineHeight();}
     float getAscent(void) {return typeFace.ascent();}
     float getDescent(void) {return typeFace.descent();}
+	
+	static s_font nullFont;
 protected:
 	TypeFace typeFace;
 };

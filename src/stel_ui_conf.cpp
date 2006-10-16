@@ -21,6 +21,7 @@
 #include "stel_utility.h"
 #include "stelapp.h"
 #include "stel_core.h"
+#include "stelfontmgr.h"
 
 using namespace s_gui;
 
@@ -32,7 +33,7 @@ static string CalculateProjectionSlValue(
   return projection_type;
 }
 
-Component* StelUI::createConfigWindow(void)
+Component* StelUI::createConfigWindow(s_font& courierFont)
 {
 	config_win = new StdBtWin(_("Configuration"));
 	//config_win->setOpaque(opaqueGUI);
@@ -64,7 +65,7 @@ Component* StelUI::createConfigWindow(void)
 	tab_render->addComponent(star_names_cbx);
 	star_names_cbx->setPos(x,y);
 
-	max_mag_star_name = new FloatIncDec(courierFont, tex_up, tex_down, -1.5, 9, core->getMaxMagStarName(), 0.5);
+	max_mag_star_name = new FloatIncDec(&courierFont, tex_up, tex_down, -1.5, 9, core->getMaxMagStarName(), 0.5);
 	max_mag_star_name->setOnPressCallback(callback<void>(this, &StelUI::updateConfigVariables));
 	tab_render->addComponent(max_mag_star_name);
 	max_mag_star_name->setPos(x + 320,y);
@@ -76,7 +77,7 @@ Component* StelUI::createConfigWindow(void)
 	tab_render->addComponent(star_twinkle_cbx);
 	star_twinkle_cbx->setPos(x,y);
 
-	star_twinkle_amount = new FloatIncDec(courierFont, tex_up, tex_down, 0, 0.6, core->getStarTwinkleAmount(), 0.1);
+	star_twinkle_amount = new FloatIncDec(&courierFont, tex_up, tex_down, 0, 0.6, core->getStarTwinkleAmount(), 0.1);
 	star_twinkle_amount->setOnPressCallback(callback<void>(this, &StelUI::updateConfigVariables));
 	tab_render->addComponent(star_twinkle_amount);
 	star_twinkle_amount->setPos(x + 320,y);
@@ -118,7 +119,7 @@ Component* StelUI::createConfigWindow(void)
 	tab_render->addComponent(nebulas_names_cbx);
 	nebulas_names_cbx->setPos(x,y);
 
-	max_mag_nebula_name = new FloatIncDec(courierFont, tex_up, tex_down, 0, 12,
+	max_mag_nebula_name = new FloatIncDec(&courierFont, tex_up, tex_down, 0, 12,
 		core->getNebulaMaxMagHints(), 0.5);
 	max_mag_nebula_name->setOnPressCallback(callback<void>(this, &StelUI::updateConfigVariables));
 	tab_render->addComponent(max_mag_nebula_name);
@@ -248,7 +249,7 @@ Component* StelUI::createConfigWindow(void)
 	tclbl->setPos(x,y); y+=20;
 	tab_time->addComponent(tclbl);
 
-	time_current = new Time_item(courierFont, tex_up, tex_down);
+	time_current = new Time_item(&courierFont, tex_up, tex_down);
 	time_current->setOnChangeTimeCallback(callback<void>(this, &StelUI::setCurrentTimeFromConfig));
 	tab_time->addComponent(time_current);
 	time_current->setPos(50,y); y+=80;
@@ -284,8 +285,7 @@ Component* StelUI::createConfigWindow(void)
 
 	x=5; y=5;
 	const s_texture *earth = new s_texture(
-                                   *(core->getObservatory().getHomePlanet()
-	                                     ->getMapTexture()));
+                                   *(core->getObservatory().getHomePlanet()->getMapTexture()));
 	const s_texture *pointertex = new s_texture("pointeur1.png");
 	const s_texture *citytex = new s_texture("city.png");
 	earth_map = new MapPicture(earth, pointertex, citytex, x,y,tab_location->getSizex()-10, 250);
@@ -293,7 +293,7 @@ Component* StelUI::createConfigWindow(void)
 	earth_map->setOnNearestCityCallback(callback<void>(this, &StelUI::setCityFromMap));
 	tab_location->addComponent(earth_map);
 	y+=earth_map->getSizey();
-	earth_map->set_font(9.5f, BaseFontName);
+	earth_map->set_font(&(StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getAppLanguage(), 9.5)));
 	load_cities(StelApp::getInstance().getDataFilePath("cities.fab"));
 	
 	y += 5;
@@ -309,7 +309,7 @@ Component* StelUI::createConfigWindow(void)
 	
 	Label * lbllong = new Label(_("Longitude : "));
 	lbllong->setPos(20, y+41);
-	long_incdec	= new FloatIncDec(courierFont, tex_up, tex_down, -180, 180, 0, 1.f/60);
+	long_incdec	= new FloatIncDec(&courierFont, tex_up, tex_down, -180, 180, 0, 1.f/60);
 	long_incdec->setSizex(135);
 	long_incdec->setFormat(FORMAT_LONGITUDE);
 	long_incdec->setOnPressCallback(callback<void>(this, &StelUI::setObserverPositionFromIncDec));
@@ -317,7 +317,7 @@ Component* StelUI::createConfigWindow(void)
 
 	Label * lbllat = new Label(_("Latitude : "));
 	lbllat->setPos(20, y+61);
-	lat_incdec	= new FloatIncDec(courierFont, tex_up, tex_down, -90, 90, 0, 1.f/60);
+	lat_incdec	= new FloatIncDec(&courierFont, tex_up, tex_down, -90, 90, 0, 1.f/60);
 	lat_incdec->setFormat(FORMAT_LATITUDE);
 	lat_incdec->setSizex(135);
 	lat_incdec->setOnPressCallback(callback<void>(this, &StelUI::setObserverPositionFromIncDec));
@@ -325,7 +325,7 @@ Component* StelUI::createConfigWindow(void)
 
 	Label * lblalt = new Label(_("Altitude : "));
 	lblalt->setPos(20, y+81);
-	alt_incdec	= new IntIncDec(courierFont, tex_up, tex_down, 0, 2000, 0, 10);
+	alt_incdec	= new IntIncDec(&courierFont, tex_up, tex_down, 0, 2000, 0, 10);
 	alt_incdec->setSizex(135);
 	alt_incdec->setOnPressCallback(callback<void>(this, &StelUI::setObserverPositionFromIncDec));
 	alt_incdec->setPos(130,y+80);
