@@ -29,6 +29,7 @@
 
 #include "stel_utility.h"
 #include "translator.h"
+#include "vecmath.h"
 
 namespace StelUtils {
 	
