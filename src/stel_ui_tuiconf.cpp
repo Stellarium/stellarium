@@ -24,7 +24,6 @@
 #include <iomanip>
 #include <string>
 #include "stel_ui.h"
-#include "sky_localizer.h"
 #include "stelfontmgr.h"
 #include "stellocalemgr.h"
 #include "stelskyculturemgr.h"
