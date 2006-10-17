@@ -25,7 +25,7 @@
 #include "stel_ui.h"
 #include "stelapp.h"
 #include "stelfontmgr.h"
-
+#include "stellocalemgr.h"
 
 ////////////////////////////////////////////////////////////////////////////////
 //								CLASS FUNCTIONS
@@ -137,9 +137,9 @@ void StelUI::init(const InitParser& conf)
 	FlagShowTuiDateTime = conf.get_boolean("tui:flag_show_tui_datetime");
 	FlagShowTuiShortObjInfo = conf.get_boolean("tui:flag_show_tui_short_obj_info");
 
-	s_font& baseFont = StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getAppLanguage(), baseFontSize);
-	tuiFont = &(StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getAppLanguage(), baseFontSize));
-	s_font& courierFont = StelApp::getInstance().getFontManager().getFixedFont(StelApp::getInstance().getAppLanguage(), baseCFontSize);
+	s_font& baseFont = StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getLocaleMgr().getAppLanguage(), baseFontSize);
+	tuiFont = &(StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getLocaleMgr().getAppLanguage(), baseFontSize));
+	s_font& courierFont = StelApp::getInstance().getFontManager().getFixedFont(StelApp::getInstance().getLocaleMgr().getAppLanguage(), baseCFontSize);
 
 	// set up mouse cursor timeout
 	MouseTimeLeft = MouseCursorTimeout*1000;
@@ -255,14 +255,14 @@ void StelUI::updateTopBar(void)
 
 	if (FlagShowDate)
 	{
-		top_bar_date_lbl->setLabel(app->get_printable_date_local(jd));
+		top_bar_date_lbl->setLabel(app->getLocaleMgr().get_printable_date_local(jd));
 		top_bar_date_lbl->adjustSize();
 	}
 	top_bar_date_lbl->setVisible(FlagShowDate);
 
 	if (FlagShowTime)
 	{
-		top_bar_hour_lbl->setLabel(app->get_printable_time_local(jd));
+		top_bar_hour_lbl->setLabel(app->getLocaleMgr().get_printable_time_local(jd));
 		top_bar_hour_lbl->adjustSize();
 	}
 	top_bar_hour_lbl->setVisible(FlagShowTime);

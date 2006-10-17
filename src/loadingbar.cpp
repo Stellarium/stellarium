@@ -20,13 +20,14 @@
 #include "loadingbar.h"
 #include "stelapp.h"
 #include "stelfontmgr.h"
+#include "stellocalemgr.h"
 
 LoadingBar::LoadingBar(Projector* _prj, float font_size, const string&  splash_tex, 
 	int screenw, int screenh, const wstring& extraTextString, float extraTextSize, 
 	float extraTextPosx, float extraTextPosy) :
 	prj(_prj), width(512), height(512), barwidth(400), barheight(10),
-	barfont(StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getAppLanguage(), font_size)),
-	extraTextFont(StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getAppLanguage(), extraTextSize)),
+barfont(StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getLocaleMgr().getAppLanguage(), font_size)),
+extraTextFont(StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getLocaleMgr().getAppLanguage(), extraTextSize)),
 	extraText(extraTextString)
 {
 	splashx = prj->getViewportPosX() + (screenw - width)/2;

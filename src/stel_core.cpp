@@ -60,7 +60,6 @@ void StelCore::telescopeGoto(int nr)
 
 
 StelCore::StelCore(const string& LDIR, const string& DATA_ROOT, const boost::callback<void, string>& recordCallback) :
-		skyTranslator(APP_NAME, LOCALEDIR, ""),
 		projection(NULL), selected_object(NULL), hip_stars(NULL),
 		nebulas(NULL), ssystem(NULL), milky_way(NULL), telescope_mgr(NULL),
 		deltaFov(0.),
@@ -88,7 +87,6 @@ StelCore::StelCore(const string& LDIR, const string& DATA_ROOT, const boost::cal
 	cardinals_points = new Cardinals();
 	meteors = new MeteorMgr(10, 60);
 	landscape = new LandscapeOldStyle();
-	skyloc = new SkyLocalizer(StelApp::getInstance().getDataFilePath("sky_cultures"));
 	script_images = new ImageMgr();
 	telescope_mgr = new TelescopeMgr;
 
@@ -120,8 +118,6 @@ StelCore::~StelCore()
 	delete atmosphere;
 	delete tone_converter;
 	delete ssystem;
-	delete skyloc;
-	skyloc = NULL;
 	delete script_images;
 	delete telescope_mgr;
 	StelObject::delete_textures(); // Unload the pointer textures
@@ -170,11 +166,11 @@ void StelCore::init(const InitParser& conf)
 	if(firstTime)
 	{
 		// Load hipparcos stars & names
-		hip_stars->init(lb);
+		hip_stars->init(conf, lb);
 		int grid_level = hip_stars->getMaxGridLevel();
 
 		// Init nebulas
-		nebulas->init(lb);
+		nebulas->init(conf, lb);
 
 		geodesic_grid = new GeodesicGrid(grid_level);
 		geodesic_search_result = new GeodesicSearchResult(*geodesic_grid);
@@ -182,6 +178,8 @@ void StelCore::init(const InitParser& conf)
 		// Init milky way
 		milky_way->set_texture("milkyway.png");
 		telescope_mgr->init(conf);
+		
+		asterisms->init(conf, lb);
 	}
 
 	setLandscape(observatory->get_landscape_name());
@@ -201,26 +199,19 @@ void StelCore::init(const InitParser& conf)
 	// Matrix for sun and all the satellites (ie planets)
 	ssystem->computeTransMatrices(navigation->get_JDay(),
 	                              navigation->getHomePlanet());
-
+	setPlanetsSelected("");	// Fix a bug on macosX! Thanks Fumio!
+	
 	// Compute transform matrices between coordinates systems
 	navigation->update_transform_matrices();
 	navigation->update_model_view_mat();
 
 	// Load constellations from the correct sky culture
-	string tmp = conf.get_str("localization", "sky_culture", "western");
-	setSkyCultureDir(tmp);
-	skyCultureDir = tmp;
+	
 
-	setPlanetsSelected("");	// Fix a bug on macosX! Thanks Fumio!
-
-	string skyLocaleName = conf.get_str("localization", "sky_locale", "system");
-	constellationFontSize = conf.get_double("viewing","constellation_font_size",FontSizeConstellations);
-	setSkyLanguage(skyLocaleName);
 
 	// Star section
 	setStarScale(conf.get_double ("stars:star_scale"));
 	setPlanetsScale(conf.get_double ("stars:star_scale"));  // if reload config
-
 	setStarMagScale(conf.get_double ("stars:star_mag_scale"));
 	setStarTwinkleAmount(conf.get_double ("stars:star_twinkle_amount"));
 	setMaxMagStarName(conf.get_double ("stars:max_mag_star_name"));
@@ -228,16 +219,13 @@ void StelCore::init(const InitParser& conf)
 	setFlagPointStar(conf.get_boolean("stars:flag_point_star"));
 	setStarLimitingMag(conf.get_double("stars", "star_limiting_mag", 6.5f));
 
+	// Navigation
 	FlagEnableZoomKeys	= conf.get_boolean("navigation:flag_enable_zoom_keys");
 	FlagEnableMoveKeys  = conf.get_boolean("navigation:flag_enable_move_keys");
 	FlagManualZoom		= conf.get_boolean("navigation:flag_manual_zoom");
-
-
 	auto_move_duration	= conf.get_double ("navigation","auto_move_duration",1.5);
 	move_speed			= conf.get_double("navigation","move_speed",0.0004);
 	zoom_speed			= conf.get_double("navigation","zoom_speed", 0.0004);
-
-	// Viewing Mode
 	tmpstr = conf.get_str("navigation:viewing_mode");
 	if (tmpstr=="equator")
 		navigation->set_viewing_mode(Navigator::VIEW_EQUATOR);
@@ -266,6 +254,7 @@ void StelCore::init(const InitParser& conf)
 	setAtmosphereFadeDuration(conf.get_double("landscape","atmosphere_fade_duration",1.5));
 
 	// Viewing section
+	constellationFontSize = conf.get_double("viewing","constellation_font_size",FontSizeConstellations);
 	setFlagConstellationLines(		conf.get_boolean("viewing:flag_constellation_drawing"));
 	setFlagConstellationNames(		conf.get_boolean("viewing:flag_constellation_name"));
 	setFlagConstellationBoundaries(	conf.get_boolean("viewing","flag_constellation_boundaries",false));
@@ -425,7 +414,7 @@ double StelCore::draw(int delta_time)
 	milky_way->draw(tone_converter, projection, navigation);
 
 	// Draw all the constellations
-	asterisms->draw(projection, navigation);
+	asterisms->draw(projection, navigation, tone_converter);
 
 
 	const Vec4i &v(projection->getViewport());
@@ -452,10 +441,8 @@ double StelCore::draw(int delta_time)
 	// Draw the nebula
 	nebulas->draw(projection, navigation, tone_converter);
 
-	// Draw the hipparcos stars
-	hip_stars->draw(tone_converter, projection, navigation);
-
-
+	// Draw the stars
+	hip_stars->draw(projection, navigation, tone_converter);
 
 
 	// Draw the equatorial grid
@@ -741,7 +728,7 @@ StelObject StelCore::clever_find(const Vec3d& v) const
 	// And the stars inside the range
 	if (getFlagStars())
 	{
-		temp = hip_stars->search_around(p, fov_around);
+		temp = hip_stars->searchAround(p, fov_around, NULL, NULL);
 		candidates.insert(candidates.begin(), temp.begin(), temp.end());
 	}
 
@@ -883,40 +870,13 @@ void StelCore::autoZoomOut(float move_duration, bool full)
 
 }
 
-// Set the current sky culture according to passed name
-bool StelCore::setSkyCulture(const wstring& cultureName)
+// Update the sky culture for all the modules
+// TODO make generic
+void StelCore::updateSkyCulture()
 {
-	return setSkyCultureDir(skyloc->skyCultureToDirectory(cultureName));
-}
-
-// Set the current sky culture from the passed directory
-bool StelCore::setSkyCultureDir(const string& cultureDir)
-{
-	if(skyCultureDir == cultureDir)
-		return 1;
-
-	// make sure culture definition exists before attempting or will die
-	// Do not comment this out! Rob
-	if(skyloc->directoryToSkyCultureEnglish(cultureDir) == "")
-	{
-		cerr << "Invalid sky culture directory: " << cultureDir << endl;
-		return 0;
-	}
-
-	skyCultureDir = cultureDir;
-
-	if(!asterisms)
-		return 1;
-
 	LoadingBar lb(projection, FontSizeGeneral, "logo24bits.png", getViewportWidth(), getViewportHeight(), StelUtils::stringToWstring(VERSION), 45, 320, 121);
-
-	asterisms->loadLinesAndArt(StelApp::getInstance().getDataFilePath("sky_cultures/" + skyCultureDir + "/constellationship.fab"),
-	                           StelApp::getInstance().getDataFilePath("sky_cultures/" + skyCultureDir + "/constellationsart.fab"), StelApp::getInstance().getDataFilePath("constellations_boundaries.dat"), lb);
-	asterisms->loadNames(StelApp::getInstance().getDataFilePath("sky_cultures/" + skyCultureDir + "/constellation_names.eng.fab"));
-
-	// Re-translated constellation names
-	asterisms->updateLanguage(skyTranslator);
-
+	if (asterisms) asterisms->updateSkyCulture(lb);
+	
 	// as constellations have changed, clear out any selection and retest for match!
 	if (selected_object && selected_object.get_type()==STEL_OBJECT_STAR)
 	{
@@ -926,37 +886,23 @@ bool StelCore::setSkyCultureDir(const string& cultureDir)
 	{
 		asterisms->setSelected(StelObject());
 	}
-
-	// Load culture star names in english
-	hip_stars->load_common_names(StelApp::getInstance().getDataFilePath("sky_cultures/" + skyCultureDir + "/star_names.fab"));
-
-	// Turn on sci names/catalog names for western culture only
-	hip_stars->setFlagSciNames( skyCultureDir.compare(0, 7, "western") ==0 );
-
-	// translate
-	hip_stars->updateLanguage(skyTranslator);
-
-	return 1;
+	
+	if (hip_stars) hip_stars->updateSkyCulture(lb);
 }
 
 
-//! @brief Set the sky locale and reload the sky objects names for gettext translation
-void StelCore::setSkyLanguage(const std::string& newSkyLocaleName)
+// Set the sky locale and update the sky objects names for all the modules
+void StelCore::updateSkyLanguage()
 {
 	if( !hip_stars || !cardinals_points || !asterisms)
 		return; // objects not initialized yet
 
-	string oldLocale = getSkyLanguage();
-
-	// Update the translator with new locale name
-	skyTranslator = Translator(PACKAGE, StelApp::getInstance().getLocaleDir(), newSkyLocaleName);
-
 	// Translate all labels with the new language
-	cardinals_points->updateLanguage(skyTranslator);
-	asterisms->updateLanguage(skyTranslator);
-	ssystem->updateLanguage(skyTranslator);
-	nebulas->updateLanguage(skyTranslator);
-	hip_stars->updateLanguage(skyTranslator);
+	if (cardinals_points) cardinals_points->updateI18n();
+	if (asterisms) asterisms->updateI18n();
+	if (ssystem) ssystem->updateI18n();
+	if (nebulas) nebulas->updateI18n();
+	if (hip_stars) hip_stars->updateI18n();
 }
 
 

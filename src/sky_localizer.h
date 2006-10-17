@@ -29,30 +29,7 @@ using namespace std;
 class SkyLocalizer
 {
 
-public:
-	SkyLocalizer(const string& cultureDir);
-	virtual ~SkyLocalizer();
 
-	//! returns newline delimited list of human readable culture names in english
-	string getSkyCultureListEnglish(void);
-	
-	//! returns newline delimited list of human readable culture names translated to current language
-	wstring getSkyCultureListI18(void);
-	
-	//! returns newline delimited hash of translated culture names and directories
-	wstring getSkyCultureHash(void);
-	
-	//! Get the culture name in english associated to the passed directory
-	string directoryToSkyCultureEnglish(const string& directory);
-	
-	//! Get the culture name translated to current language associated to the passed directory
-	wstring directoryToSkyCultureI18(const string& directory);
-	
-	//! Get the directory associated to the passed translated culture name
-	string skyCultureToDirectory(const wstring& cultureName);
-
-private:
-	stringHash_t dirToNameEnglish;
 };
 
 

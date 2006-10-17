@@ -32,16 +32,17 @@ using namespace std;
 #include "projector.h"
 #include "stelapp.h"
 #include "stelfontmgr.h"
+#include "stellocalemgr.h"
 
 SolarSystem::SolarSystem()
 	:sun(NULL),moon(NULL),earth(NULL), moonScale(1.), fontSize(14.),
-              planet_name_font(StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getAppLanguage(), fontSize)), tex_earth_shadow(NULL),
+planet_name_font(StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getLocaleMgr().getAppLanguage(), fontSize)), tex_earth_shadow(NULL),
              flagOrbits(false),flag_light_travel_time(false) {
 }
 
 void SolarSystem::setFontSize(float newFontSize)
 {
-	planet_name_font = StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getSkyLanguage(), fontSize);
+	planet_name_font = StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getLocaleMgr().getSkyLanguage(), fontSize);
 }
 
 SolarSystem::~SolarSystem()
@@ -532,16 +533,16 @@ vector<StelObject> SolarSystem::search_around(Vec3d v,
 	return result;
 }
 
-//! @brief Update i18 names from english names according to passed translator
-//! The translation is done using gettext with translated strings defined in translations.h
-void SolarSystem::updateLanguage(Translator& trans)
+// Update i18 names from english names according to passed translator
+void SolarSystem::updateI18n()
 {
+	Translator& trans = StelApp::getInstance().getLocaleMgr().getSkyTranslator();
 	vector<Planet*>::iterator iter;
 	for( iter = system_planets.begin(); iter < system_planets.end(); iter++ )
 	{
 		(*iter)->translateName(trans);
 	}
-	planet_name_font = StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getSkyLanguage(), fontSize);
+	planet_name_font = StelApp::getInstance().getFontManager().getStandardFont(trans.getTrueLocaleName(), fontSize);
 }
 
 vector<wstring> SolarSystem::getNamesI18(void)

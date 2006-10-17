@@ -30,6 +30,9 @@ class ScriptMgr;
 class StelUI;
 class ViewportDistorter;
 class StelFontMgr;
+class StelLocaleMgr;
+class SkyLocalizer;
+class StelSkyCultureMgr;
 
 //! Singleton main Stellarium application class.
 //! @author Fabien Chereau
@@ -77,24 +80,23 @@ public:
 	//! @return the fullpath to the texture file e.g /usr/local/share/stellarium/data/texture/jupiter.png.
 	string getTextureFilePath(const string& textureFileName) const;
 
-	//! @brief Set the application language. This applies to GUI etc..
-	//! This function has no permanent effect on the global locale.
-	//! @param newAppLocaleName the name of the language (e.g fr).
-	void setAppLanguage(const string& newAppLangName);
-
-	//! @brief Get the application language currently used for GUI etc..
-	//! This function has no permanent effect on the global locale.
-	//! @return the name of the language (e.g fr).
-	string getAppLanguage() const { return Translator::globalTranslator.getTrueLocaleName(); }
-
-	//! @brief Get the language currently used for sky objects..
-	//! This function has no permanent effect on the global locale.
-	//! @return the name of the language (e.g fr).
-	string getSkyLanguage() const;			   
-			   
+	//! @brief Get the locale manager to use for i18n & date/time localization
+	//! @return the font manager to use for loading fonts.
+	StelLocaleMgr& getLocaleMgr() { return *localeMgr;}
+	
+	//! Update translations and font everywhere in the program according to globals
+	void updateAppLanguage();
+	
+	//! Update translations and font for sky everywhere in the program  according to globals
+	void updateSkyLanguage();
+	
 	//! @brief Get the font manager to use for loading fonts.
 	//! @return the font manager to use for loading fonts.
 	StelFontMgr& getFontManager() { return *fontManager;}
+	
+	//! @brief Get the sky cultures manager
+	//! @return the sky cultures manager
+	StelSkyCultureMgr& getSkyCultureMgr() {return *skyCultureMgr;}
 	
 	//! Set flag for activating night vision mode
 	void setVisionModeNight(void);
@@ -116,41 +118,6 @@ public:
 	//! Required because stelcore doesn't have access to the script manager anymore!
 	//! Record a command if script recording is on
 	void recordCommand(string commandline);
-
-	string get_time_format_str(void) const {return s_time_format_to_string(time_format);}
-	void set_time_format_str(const string& tf) {time_format=string_to_s_time_format(tf);}
-	string get_date_format_str(void) const {return s_date_format_to_string(date_format);}
-	void set_date_format_str(const string& df) {date_format=string_to_s_date_format(df);}
-
-	void setCustomTimezone(string _time_zone) { set_custom_tz_name(_time_zone); }
-
-	//! Possible drawing modes
-	enum DRAWMODE { DM_NORMAL=0, DM_CHART, DM_NIGHT, DM_NIGHTCHART, DM_NONE };
-
-	enum S_TIME_FORMAT {S_TIME_24H,	S_TIME_12H,	S_TIME_SYSTEM_DEFAULT};
-	enum S_DATE_FORMAT {S_DATE_MMDDYYYY, S_DATE_DDMMYYYY, S_DATE_SYSTEM_DEFAULT, S_DATE_YYYYMMDD};
-
-	wstring get_printable_date_UTC(double JD) const;
-	wstring get_printable_date_local(double JD) const;
-	wstring get_printable_time_UTC(double JD) const;
-	wstring get_printable_time_local(double JD) const;
-
-	enum S_TZ_FORMAT
-	{
-	    S_TZ_CUSTOM,
-	    S_TZ_GMT_SHIFT,
-	    S_TZ_SYSTEM_DEFAULT
-	};
-
-	//! Return the current time shift at observator time zone with respect to GMT time
-	void set_GMT_shift(int t) {GMT_shift=t;}
-	float get_GMT_shift(double JD = 0, bool _local=0) const;
-	void set_custom_tz_name(const string& tzname);
-	string get_custom_tz_name(void) const {return custom_tz_name;}
-	S_TZ_FORMAT get_tz_format(void) const {return time_zone_mode;}
-
-	// Return the time in ISO 8601 format that is : %Y-%m-%d %H:%M:%S
-	string get_ISO8601_time_local(double JD) const;
 
 private:
 	//! Initialize application and core
@@ -177,7 +144,6 @@ private:
 
 	// n.b. - do not confuse this with sky time rate
 	int getTimeMultiplier() { return time_multiplier; }
-	;
 
 	// Initialize openGL screen with SDL
 	void initSDL(int w, int h, int bbpMode, bool fullScreen, string iconFile);
@@ -215,11 +181,14 @@ private:
 	string SelectedScript;  // script filename (without directory) selected in a UI to run when exit UI
 	string SelectedScriptDirectory;  // script directory for same
 
-	// Navigation
-	string PositionFile;
-
 	// Font manager for the application
 	StelFontMgr* fontManager;
+	
+	// Locale manager for the application
+	StelLocaleMgr* localeMgr;
+	
+	// Sky cultures manager for the application
+	StelSkyCultureMgr* skyCultureMgr;
 	
 	int FlagEnableMoveMouse;  // allow mouse at edge of screen to move view
 
@@ -257,24 +226,11 @@ private:
 	Uint32	LastCount;	// Used For The Tick Counter
 	SDL_Cursor *Cursor;
 
+	//! Possible drawing modes
+	enum DRAWMODE { DM_NORMAL=0, DM_CHART, DM_NIGHT, DM_NIGHTCHART, DM_NONE };
 	DRAWMODE draw_mode;					// Current draw mode
 	bool initialized;  // has the init method been called yet?
 
-	// Date and time variables
-	S_TIME_FORMAT time_format;
-	S_DATE_FORMAT date_format;
-	S_TZ_FORMAT time_zone_mode;		// Can be the system default or a user defined value
-
-	string custom_tz_name;			// Something like "Europe/Paris"
-	float GMT_shift;				// Time shift between GMT time and local time in hour. (positive for Est of GMT)
-
-	// Convert the time format enum to its associated string and reverse
-	S_TIME_FORMAT string_to_s_time_format(const string&) const;
-	string s_time_format_to_string(S_TIME_FORMAT) const;
-
-	// Convert the date format enum to its associated string and reverse
-	S_DATE_FORMAT string_to_s_date_format(const string& df) const;
-	string s_date_format_to_string(S_DATE_FORMAT df) const;
 };
 
 #endif

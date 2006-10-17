@@ -26,32 +26,50 @@
 #include "fader.h"
 #include "loadingbar.h"
 #include "translator.h"
+#include "stelobjectmgr.h"
 
+class ToneReproductor;
 class HipStarMgr;
 class Constellation;
 class Projector;
 class Navigator;
 
-class ConstellationMgr  
+class ConstellationMgr : public StelObjectMgr
 {
 public:
     ConstellationMgr(HipStarMgr *_hip_stars);
-    ~ConstellationMgr();
+	virtual ~ConstellationMgr();
     
-    //! Draw constellation lines, art, names and boundaries if activated
-    void draw(Projector* prj, Navigator* nav) const;
-    
-    //! Update faders
-	void update(int delta_time);
+	///////////////////////////////////////////////////////////////////////////
+	// Methods defined in the StelModule class
+	virtual void init(const InitParser& conf, LoadingBar& lb);
+	virtual string getModuleID() const {return "constellation";}
+	virtual double draw(Projector *prj, const Navigator *nav, ToneReproductor *eye); //! Draw constellation lines, art, names and boundaries
+	virtual void update(double deltaTime);
+	virtual void updateI18n();
+	virtual void updateSkyCulture(LoadingBar& lb);	
+	
+	///////////////////////////////////////////////////////////////////////////
+	// Methods defined in StelObjectManager class
+	virtual vector<StelObject> searchAround(const Vec3d& v, double limitFov, const Navigator * nav, const Projector * prj) const;
+	
+	//! Return the matching constellation object's pointer if exists or NULL
+	//! @param nameI18n The case sensistive constellation name
+	virtual StelObject searchByNameI18n(const wstring& nameI18n) const;
+	
+	//! @brief Find and return the list of at most maxNbItem objects auto-completing the passed object I18n name
+	//! @param objPrefix the case insensitive first letters of the searched object
+	//! @param maxNbItem the maximum number of returned object names
+	//! @return a vector of matching object name by order of relevance, or an empty vector if nothing match
+	virtual vector<wstring> listMatchingObjectsI18n(const wstring& objPrefix, unsigned int maxNbItem=5) const;
+	
+	///////////////////////////////////////////////////////////////////////////
+	// Properties setters and getters	
 	
 	//! @brief Read constellation names from the given file
 	//! @param namesFile Name of the file containing the constellation names in english
 	void loadNames(const string& names_file);
 	
-	//! @brief Update i18 names from english names according to current locale and update font
-	//! The translation is done using gettext with translated strings defined in translations.h
-	void updateLanguage(Translator& trans);
-		   
 	//! @brief Load constellation line shapes, art textures and boundaries shapes from data files
 	void loadLinesAndArt(const string& lines_file, const string& art_file, const string &boundaryfileName, LoadingBar& lb);
 	
@@ -117,20 +135,10 @@ public:
 	void setSelected(const StelObject &s) {if (!s) setSelectedConst(NULL); else setSelectedConst(is_star_in(s));}
 	
 	void setFlagGravityLabel(bool g);
-
-	//! Return the matching constellation object's pointer if exists or NULL
-	//! @param nameI18n The case sensistive constellation name
-	StelObject searchByNameI18n(const wstring& nameI18n) const;	
-
-	//! Find and return the list of at most maxNbItem objects auto-completing the passed object I18n name
-	//! @param objPrefix the case insensitive first letters of the searched object
-	//! @param maxNbItem the maximum number of returned object names
-	//! @return a vector of matching object name by order of relevance, or an empty vector if nothing match
-	vector<wstring> listMatchingObjectsI18n(const wstring& objPrefix, unsigned int maxNbItem=5) const;
 private:
 	bool loadBoundaries(const string& conCatFile);
 	void draw_lines(Projector * prj) const;
-	void draw_art(Projector * prj, Navigator * nav) const;
+	void draw_art(Projector * prj, const Navigator * nav) const;
 	void draw_names(Projector * prj) const;
 	void drawBoundaries(Projector* prj) const;	
 	void setSelectedConst(Constellation* c);
@@ -145,6 +153,8 @@ private:
 	bool isolateSelected;
 	vector<vector<Vec3f> *> allBoundarySegments;
 
+	string lastLoadedSkyCulture;	// Store the last loaded sky culture directory name
+	
 	// These are THE master settings - individual constellation settings can vary based on selection status
 	bool flagNames;
 	bool flagLines;

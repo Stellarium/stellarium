@@ -24,6 +24,7 @@
 
 #include "stelapp.h"
 #include "stelfontmgr.h"
+#include "stellocalemgr.h"
 #include "nebula_mgr.h"
 #include "nebula.h"
 #include "s_texture.h"
@@ -62,19 +63,17 @@ NebulaMgr::~NebulaMgr()
 }
 
 // read from stream
-bool NebulaMgr::init(LoadingBar& lb)
+void NebulaMgr::init(const InitParser& conf, LoadingBar& lb)
 {
 	loadNGC(StelApp::getInstance().getDataFilePath("ngc2000.dat"), lb);
 	loadNGCNames(StelApp::getInstance().getDataFilePath("ngc2000names.dat"));
 	loadTextures(StelApp::getInstance().getDataFilePath("nebula_textures.fab"), lb);
 
 	double fontSize = 12;
-	Nebula::nebula_font = &StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getSkyLanguage(), fontSize);
+	Nebula::nebula_font = &StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getLocaleMgr().getSkyLanguage(), fontSize);
 
 	if (!Nebula::tex_circle)
 		Nebula::tex_circle = new s_texture("neb.png");   // Load circle texture
-
-	return true;
 }
 
 // Draw all the Nebulae
@@ -84,16 +83,9 @@ double NebulaMgr::draw(Projector* prj, const Navigator * nav, ToneReproductor* e
 
 	glEnable(GL_TEXTURE_2D);
 	glEnable(GL_BLEND);
-	
 	glBlendFunc(GL_ONE, GL_ONE);
-	// if (draw_mode == DM_NORMAL) glBlendFunc(GL_ONE, GL_ONE);
-	// else glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // charting
 
 	Vec3f pXYZ;
-
-
-// 	vector<Nebula *>::iterator iter;
-// 	for(iter=neb_array.begin();iter!=neb_array.end();iter++)
 
 	// Find the star zones which are in the screen
 	int nbZones=0;
@@ -146,6 +138,9 @@ double NebulaMgr::draw(Projector* prj, const Navigator * nav, ToneReproductor* e
 
 	return 0;
 }
+
+void NebulaMgr::updateSkyCulture(LoadingBar& lb)
+{;}
 
 // search by name
 StelObject NebulaMgr::search(const string& name)
@@ -481,15 +476,16 @@ bool NebulaMgr::loadTextures(const string& fileName, LoadingBar& lb)
 
 //! @brief Update i18 names from english names according to passed translator
 //! The translation is done using gettext with translated strings defined in translations.h
-void NebulaMgr::updateLanguage(Translator& trans)
+void NebulaMgr::updateI18n()
 {
+	Translator trans = StelApp::getInstance().getLocaleMgr().getSkyTranslator();
 	vector<Nebula*>::iterator iter;
 	for( iter = neb_array.begin(); iter < neb_array.end(); iter++ )
 	{
 		(*iter)->translateName(trans);
 	}
 	double fontSize = 12;
-	Nebula::nebula_font = &StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getSkyLanguage(), fontSize);
+	Nebula::nebula_font = &StelApp::getInstance().getFontManager().getStandardFont(trans.getTrueLocaleName(), fontSize);
 }
 
 

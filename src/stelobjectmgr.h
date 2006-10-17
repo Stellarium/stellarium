@@ -26,7 +26,7 @@
 
 /**
  * Manage a collection of StelObject.
- * @author Fabien Chéreau <stellarium@free.fr>
+ * @author Fabien Chereau <stellarium@free.fr>
  */
 
 class StelObjectMgr : public StelModule
@@ -51,16 +51,6 @@ public:
 	//! @param maxNbItem the maximum number of returned object names
 	//! @return a vector of matching object name by order of relevance, or an empty vector if nothing matches
 	virtual vector<wstring> listMatchingObjectsI18n(const wstring& objPrefix, unsigned int maxNbItem=5) const = 0;
-	
-	//! Update i18n names of the sky objects from english names according to passed translator
-	//! The translation is done internally using gettext with translated strings defined in the .po files
-	virtual void updateLanguage(Translator& trans) = 0;
-	
-	//! Set the current sky culture from the passed directory
-	//! Reload and translate any data file for the given sky culture/translation if necessary
-	//! @param cultureDir the directory containing data files for the culture
-	//! @return true if the data for the culture was successfuly found, false otherwise
-	virtual bool setSkyCultureDir(const string& cultureDir) = 0;
 };
 
 #endif
