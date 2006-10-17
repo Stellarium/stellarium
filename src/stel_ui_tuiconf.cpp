@@ -26,6 +26,8 @@
 #include "stel_ui.h"
 #include "sky_localizer.h"
 #include "stelfontmgr.h"
+#include "stellocalemgr.h"
+#include "stelskyculturemgr.h"
 
 // Draw simple gravity text ui.
 void StelUI::draw_gravity_ui(void)
@@ -45,7 +47,7 @@ void StelUI::draw_gravity_ui(void)
 		double jd = core->getJDay();
 		wostringstream os;
 
-		os << app->get_printable_date_local(jd) << L" " << app->get_printable_time_local(jd);
+		os << app->getLocaleMgr().get_printable_date_local(jd) << L" " << app->getLocaleMgr().get_printable_time_local(jd);
 
 		// label location if not on earth
 		if(core->getObservatory().getHomePlanetEnglishName() != "Earth") {
@@ -124,7 +126,7 @@ void StelUI::init_tui(void)
 	tui_time_skytime->set_OnChangeCallback(callback<void>(this, &StelUI::tui_cb_sky_time));
 	tui_time_settmz = new s_tui::Time_zone_item(StelApp::getInstance().getDataFilePath("zone.tab"), wstring(L"2.2 ") );
 	tui_time_settmz->set_OnChangeCallback(callback<void>(this, &StelUI::tui_cb_settimezone));
-	tui_time_settmz->settz(app->get_custom_tz_name());
+	tui_time_settmz->settz(app->getLocaleMgr().get_custom_tz_name());
 	tui_time_presetskytime = new s_tui::Time_item(wstring(L"2.3 ") );
 	tui_time_presetskytime->set_OnChangeCallback(callback<void>(this, &StelUI::tui_cb1));
 	tui_time_startuptime = new s_tui::MultiSet2_item<wstring>(wstring(L"2.4 ") );
@@ -316,7 +318,7 @@ void StelUI::init_tui(void)
 void StelUI::localizeTui(void)
 {
 
-	cout << "Localizing TUI for locale: " << app->getAppLanguage() << endl;
+	cout << "Localizing TUI for locale: " << app->getLocaleMgr().getAppLanguage() << endl;
 
 	if(!tui_root) return;  // not initialized yet
 
@@ -350,7 +352,7 @@ void StelUI::localizeTui(void)
 
 	// sky culture goes here
 	tui_general_sky_culture->setLabel(wstring(L"3.1 ") + _("Sky Culture: "));
-	tui_general_sky_culture->replaceItemList(core->getSkyCultureHash(), 0);  // human readable names
+	tui_general_sky_culture->replaceItemList(app->getSkyCultureMgr().getSkyCultureHash(), 0);  // human readable names
 	// wcout << "sky culture list is: " << core->getSkyCultureHash() << endl;
 
 	tui_general_sky_locale->setLabel(wstring(L"3.2 ") + _("Sky Language: "));
@@ -458,16 +460,16 @@ void StelUI::tui_update_widgets(void)
 
 
 	// 2. Date & Time
-	tui_time_skytime->setJDay(core->getJDay() + app->get_GMT_shift(core->getJDay())*JD_HOUR);
-	tui_time_settmz->settz(app->get_custom_tz_name());
+	tui_time_skytime->setJDay(core->getJDay() + app->getLocaleMgr().get_GMT_shift(core->getJDay())*JD_HOUR);
+	tui_time_settmz->settz(app->getLocaleMgr().get_custom_tz_name());
 	tui_time_presetskytime->setJDay(app->PresetSkyTime);
 	tui_time_startuptime->setCurrent(StelUtils::stringToWstring(app->StartupTimeMode));
-	tui_time_displayformat->setCurrent(StelUtils::stringToWstring(app->get_time_format_str()));
-	tui_time_dateformat->setCurrent(StelUtils::stringToWstring(app->get_date_format_str()));
+	tui_time_displayformat->setCurrent(StelUtils::stringToWstring(app->getLocaleMgr().get_time_format_str()));
+	tui_time_dateformat->setCurrent(StelUtils::stringToWstring(app->getLocaleMgr().get_date_format_str()));
 
 	// 3. general
-	tui_general_sky_culture->setValue(StelUtils::stringToWstring(core->getSkyCultureDir()));
-	tui_general_sky_locale->setValue(StelUtils::stringToWstring(core->getSkyLanguage()));
+	tui_general_sky_culture->setValue(StelUtils::stringToWstring(app->getSkyCultureMgr().getSkyCultureDir()));
+	tui_general_sky_locale->setValue(StelUtils::stringToWstring(app->getLocaleMgr().getSkyLanguage()));
 
 	// 4. Stars
 	tui_stars_show->setValue(core->getFlagStars());
@@ -518,7 +520,7 @@ void StelUI::tui_update_widgets(void)
 	}
 
 	// 8. admin
-	tui_admin_setlocale->setValue( StelUtils::stringToWstring(app->getAppLanguage()) );
+	tui_admin_setlocale->setValue( StelUtils::stringToWstring(app->getLocaleMgr().getAppLanguage()) );
 
 }
 
@@ -530,14 +532,14 @@ void StelUI::tui_cb_settimezone(void)
 {
 	// Don't call the script anymore coz it's pointless
 	// system( ( core->getDataDir() + "script_set_time_zone " + tui_time_settmz->getCurrent() ).c_str() );
-	app->set_custom_tz_name(tui_time_settmz->gettz());
+	app->getLocaleMgr().set_custom_tz_name(tui_time_settmz->gettz());
 }
 
 // Set time format mode
 void StelUI::tui_cb_settimedisplayformat(void)
 {
-	app->set_time_format_str(StelUtils::wstringToString(tui_time_displayformat->getCurrent()));
-	app->set_date_format_str(StelUtils::wstringToString(tui_time_dateformat->getCurrent()));
+	app->getLocaleMgr().set_time_format_str(StelUtils::wstringToString(tui_time_displayformat->getCurrent()));
+	app->getLocaleMgr().set_date_format_str(StelUtils::wstringToString(tui_time_dateformat->getCurrent()));
 }
 
 // 7. Administration actions functions
@@ -632,7 +634,7 @@ void StelUI::tui_cb_scripts_local() {
 // change UI locale
 void StelUI::tui_cb_admin_set_locale() {
 
-	app->setAppLanguage(StelUtils::wstringToString(tui_admin_setlocale->getCurrent()));
+	app->getLocaleMgr().setAppLanguage(StelUtils::wstringToString(tui_admin_setlocale->getCurrent()));
 }
 
 

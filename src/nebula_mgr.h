@@ -32,7 +32,6 @@ class Nebula;
 class LoadingBar;
 class Translator;
 class ToneReproductor;
-class StelObjectMgr;
 
 //! Manage a collection of nebula. It display the NGC catalog with informations 
 //! and textures for some of them.
@@ -44,19 +43,19 @@ public:
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in the StelModule class
+	virtual void init(const InitParser& conf, LoadingBar& lb);
 	virtual string getModuleID() const {return "nebula";}
 	virtual double draw(Projector *prj, const Navigator *nav, ToneReproductor *eye);
 	virtual void update(double deltaTime) {hintsFader.update((int)deltaTime); flagShow.update((int)deltaTime);}
-	virtual bool init(LoadingBar& lb); 
-		
+	virtual void updateI18n();
+	virtual void updateSkyCulture(LoadingBar& lb);
+	
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in StelObjectManager class
 	virtual vector<StelObject> searchAround(const Vec3d& v, double limitFov, const Navigator * nav, const Projector * prj) const;
 	//! Return the matching Nebula object's pointer if exists or NULL
 	//! @param nameI18n The case sensistive nebula name or NGC M catalog name : format can be M31, M 31, NGC31 NGC 31
 	virtual StelObject searchByNameI18n(const wstring& nameI18n) const;
-	virtual void updateLanguage(Translator& trans);
-	virtual bool setSkyCultureDir(const string& cultureDir) {return true;}
 	
 	//! @brief Find and return the list of at most maxNbItem objects auto-completing the passed object I18n name
 	//! @param objPrefix the case insensitive first letters of the searched object
@@ -66,7 +65,6 @@ public:
 	
 	///////////////////////////////////////////////////////////////////////////
 	// Properties setters and getters
-	
 	void setNebulaCircleScale(float scale);
 	float getNebulaCircleScale(void) const;
 	

@@ -234,12 +234,9 @@ int main(int argc, char **argv)
 	// Find what are the main Data, Textures and Config directories
     setDirectories(argv[0]);
 
-	StelApp* app = new StelApp(CDIR, LDIR, DATA_ROOT);
+	StelApp app(CDIR, LDIR, DATA_ROOT);
 
-	app->startMainLoop();
-
-	// Clean memory
-	delete app;
+	app.startMainLoop();
 
 	return 0;
 }

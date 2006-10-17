@@ -24,6 +24,9 @@
 
 // class used to manage groups of Stars
 
+#include <string>
+#include <list>
+
 #include "hip_star_mgr.h"
 #include "stel_object.h"
 #include "stel_object_base.h"
@@ -37,9 +40,8 @@
 #include "geodesic_grid.h"
 #include "stelapp.h"
 #include "stelfontmgr.h"
-
-#include <string>
-#include <list>
+#include "stellocalemgr.h"
+#include "stelskyculturemgr.h"
 
 #define NR_OF_HIP 120404
 
@@ -946,11 +948,11 @@ wstring HipStarMgr::getSciName(int hip) {
   return L"";
 }
 
-void HipStarMgr::init(LoadingBar& lb) {
+void HipStarMgr::init(const InitParser& conf, LoadingBar& lb) {
   load_data(lb);
   starTexture = new s_texture("star16x16.png",TEX_LOAD_TYPE_PNG_SOLID,false);  // Load star texture no mipmap
   double fontSize = 12;
-  starFont = &StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getSkyLanguage(), fontSize);
+  starFont = &StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getLocaleMgr().getSkyLanguage(), fontSize);
 }
 
 void HipStarMgr::setGrid(void) {
@@ -1264,14 +1266,12 @@ int HipStarMgr::getMaxSearchLevel(const ToneReproductor *eye,
 
 
 // Draw all the stars
-void HipStarMgr::draw(const ToneReproductor *eye,
-                      const Projector *prj,
-                      const Navigator *nav) {
+double HipStarMgr::draw(Projector *prj, const Navigator *nav, ToneReproductor *eye) {
     current_JDay = nav->get_JDay();
 
     // If stars are turned off don't waste time below
     // projecting all stars just to draw disembodied labels
-    if(!starsFader.getInterstate()) return;
+    if(!starsFader.getInterstate()) return 0.;
 
     float fov_q = prj->get_fov();
     if (fov_q > 60) fov_q = 60;
@@ -1358,6 +1358,8 @@ void HipStarMgr::draw(const ToneReproductor *eye,
     exit_loop:
 //if ((count&63)==0) cout << endl;
     prj->reset_perspective_projection();
+	
+	return 0.;
 }
 
 
@@ -1369,8 +1371,9 @@ void HipStarMgr::draw(const ToneReproductor *eye,
 StelObject HipStarMgr::search(Vec3d pos) const {
 assert(0);
   pos.normalize();
-  vector<StelObject> v = search_around(pos,
-                                       0.8 // just an arbitrary number
+	vector<StelObject> v = searchAround(pos,
+                                       0.8, // just an arbitrary number
+                                       NULL, NULL
                                        );
   StelObject nearest;
   double cos_angle_nearest = -10.0;
@@ -1386,9 +1389,11 @@ assert(0);
 
 // Return a stl vector containing the stars located
 // inside the lim_fov circle around position v
-vector<StelObject> HipStarMgr::search_around(Vec3d v,
-                                             double lim_fov // degrees
+vector<StelObject> HipStarMgr::searchAround(const Vec3d& vv,
+                                             double lim_fov, // degrees
+                                            const Navigator * nav, const Projector * prj
                                              ) const {
+  Vec3d v(vv);
   v.normalize();
     // find any vectors h0 and h1 (length 1), so that h0*v=h1*v=h0*h1=0
   int i;
@@ -1472,7 +1477,8 @@ void SpecialZoneArray<Star>::searchAround(int index,const Vec3d &v,
 
 //! @brief Update i18 names from english names according to passed translator
 //! The translation is done using gettext with translated strings defined in translations.h
-void HipStarMgr::updateLanguage(Translator& trans) {
+void HipStarMgr::updateI18n() {
+	Translator trans = StelApp::getInstance().getLocaleMgr().getSkyTranslator();
   common_names_map_i18n.clear();
   common_names_index_i18n.clear();
   for (map<int,string>::iterator it(common_names_map.begin());
@@ -1484,7 +1490,7 @@ void HipStarMgr::updateLanguage(Translator& trans) {
     transform(t.begin(), t.end(), t_cap.begin(), ::toupper);
     common_names_index_i18n[t_cap] = i;
   }
-  starFont = &StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getSkyLanguage(), fontSize);
+	starFont = &StelApp::getInstance().getFontManager().getStandardFont(trans.getTrueLocaleName(), fontSize);
 }
 
 
@@ -1632,5 +1638,17 @@ vector<wstring> HipStarMgr::listMatchingObjectsI18n(
 //! Define font file name and size to use for star names display
 void HipStarMgr::setFontSize(double newFontSize) {
 	fontSize = newFontSize;
-	starFont = &StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getSkyLanguage(), fontSize);
+	starFont = &StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getLocaleMgr().getSkyLanguage(), fontSize);
+}
+
+void HipStarMgr::updateSkyCulture(LoadingBar& lb)
+{
+	string skyCultureDir = StelApp::getInstance().getSkyCultureMgr().getSkyCultureDir();
+	
+	// Load culture star names in english
+	load_common_names(StelApp::getInstance().getDataFilePath("sky_cultures/" + skyCultureDir + "/star_names.fab"));
+
+	// Turn on sci names/catalog names for western culture only
+	setFlagSciNames( skyCultureDir.compare(0, 7, "western") ==0 );
+	updateI18n();
 }

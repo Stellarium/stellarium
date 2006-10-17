@@ -75,20 +75,10 @@ public:
 		if (s=="") return L"";
 		return UTF8stringToWstring(translateUTF8(s));
 	}
-
-	/*
-	//! @brief Get translator locale name. This name can be used to create a translator.
-	//! Could be artificial "system" value for config file
-	//! @return Locale name e.g "fr_FR"
-	std::string getLocaleName(void)
-	{
-		return langName;
-	}
-	*/
 	
 	//! @brief Get true translator locale name. Actual locale, never "system" 
 	//! @return Locale name e.g "fr_FR"
-	std::string getTrueLocaleName(void)
+	const std::string& getTrueLocaleName(void) const
 	{
 		if (langName=="system" || langName=="system_default") {
 			return Translator::systemLangName;

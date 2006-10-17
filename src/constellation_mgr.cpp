@@ -30,6 +30,8 @@
 #include "stel_utility.h"
 #include "stelapp.h"
 #include "stelfontmgr.h"
+#include "stellocalemgr.h"
+#include "stelskyculturemgr.h"
 
 // constructor which loads all data from appropriate files
 ConstellationMgr::ConstellationMgr(HipStarMgr *_hip_stars) : 
@@ -54,15 +56,34 @@ ConstellationMgr::~ConstellationMgr()
 		delete(*iter);
 	}
 
-	if (asterFont) delete asterFont;
-	asterFont = NULL;
-
 	vector<vector<Vec3f> *>::iterator iter1;
 	for (iter1 = allBoundarySegments.begin(); iter1 != allBoundarySegments.end(); ++iter1)
 	{
 		delete (*iter1);
 	}
 	allBoundarySegments.clear();
+}
+
+void ConstellationMgr::init(const InitParser& conf, LoadingBar& lb)
+{
+	lastLoadedSkyCulture = "dummy";
+	updateSkyCulture(lb);
+}
+
+void ConstellationMgr::updateSkyCulture(LoadingBar& lb)
+{
+	// Check if the sky culture changed since last load
+	if (lastLoadedSkyCulture != StelApp::getInstance().getSkyCultureMgr().getSkyCultureDir())
+	{
+		lastLoadedSkyCulture = StelApp::getInstance().getSkyCultureMgr().getSkyCultureDir();
+		loadLinesAndArt(StelApp::getInstance().getDataFilePath("sky_cultures/" + lastLoadedSkyCulture + "/constellationship.fab"),
+			StelApp::getInstance().getDataFilePath("sky_cultures/" + lastLoadedSkyCulture + "/constellationsart.fab"),
+			StelApp::getInstance().getDataFilePath("constellations_boundaries.dat"), lb);
+		loadNames(StelApp::getInstance().getDataFilePath("sky_cultures/" + lastLoadedSkyCulture + "/constellation_names.eng.fab"));
+	
+		// Translated constellation names for the new sky culture
+		updateI18n();
+	}
 }
 
 void ConstellationMgr::setFlagGravityLabel(bool g) {Constellation::gravityLabel = g;}
@@ -78,7 +99,7 @@ Vec3f ConstellationMgr::getLabelColor() const {return Constellation::labelColor;
 
 void ConstellationMgr::setFontSize(double newFontSize)
 {
-	asterFont = &StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getSkyLanguage(), fontSize);
+	asterFont = &StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getLocaleMgr().getSkyLanguage(), fontSize);
 }
 
 // Load line and art data from files
@@ -219,7 +240,7 @@ void ConstellationMgr::loadLinesAndArt(const string &fileName, const string &art
 	
 }
 
-void ConstellationMgr::draw(Projector * prj, Navigator * nav) const
+double ConstellationMgr::draw(Projector * prj, const Navigator * nav, ToneReproductor *)
 {
 	prj->set_orthographic_projection();
 	draw_lines(prj);
@@ -227,10 +248,11 @@ void ConstellationMgr::draw(Projector * prj, Navigator * nav) const
 	draw_art(prj, nav);
 	drawBoundaries(prj);
 	prj->reset_perspective_projection();
+	return 0.;
 }
 
 // Draw constellations art textures
-void ConstellationMgr::draw_art(Projector * prj, Navigator * nav) const
+void ConstellationMgr::draw_art(Projector * prj, const Navigator * nav) const
 {
 	glBlendFunc(GL_ONE, GL_ONE);
 	glEnable(GL_TEXTURE_2D);
@@ -290,7 +312,7 @@ Constellation *ConstellationMgr::is_star_in(const StelObject &s) const
 	return NULL;
 }
 
-Constellation *ConstellationMgr::findFromAbbreviation(const string & abbreviation) const
+Constellation* ConstellationMgr::findFromAbbreviation(const string & abbreviation) const
 {
 	// search in uppercase only
 	string tname = abbreviation;
@@ -303,6 +325,13 @@ Constellation *ConstellationMgr::findFromAbbreviation(const string & abbreviatio
 			return (*iter);
 	}
 	return NULL;
+}
+
+// Can't find constellation from a position because it's not well localized
+vector<StelObject> ConstellationMgr::searchAround(const Vec3d& v, double limitFov, const Navigator * nav, const Projector * prj) const
+{
+	vector<StelObject> result;
+	return result;
 }
 
 
@@ -355,10 +384,11 @@ void ConstellationMgr::loadNames(const string& namesFile)
 
 }
 
-//! @brief Update i18 names from english names according to current locale, and update font for locale
+//! @brief Update i18n names from english names according to current locale, and update font for locale
 //! The translation is done using gettext with translated strings defined in translations.h
-void ConstellationMgr::updateLanguage(Translator& trans)
+void ConstellationMgr::updateI18n()
 {
+	Translator& trans = StelApp::getInstance().getLocaleMgr().getSkyTranslator();
 	vector < Constellation * >::const_iterator iter;
 	for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
 	{
@@ -368,12 +398,12 @@ void ConstellationMgr::updateLanguage(Translator& trans)
 }
 
 // update faders
-void ConstellationMgr::update(int delta_time)
+void ConstellationMgr::update(double delta_time)
 {
 	vector < Constellation * >::const_iterator iter;
 	for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
 	{
-		(*iter)->update(delta_time);
+		(*iter)->update((int)(delta_time*1000));
     }
 }
 

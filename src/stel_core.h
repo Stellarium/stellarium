@@ -72,22 +72,11 @@ public:
 	// moved since the previous update.
 	double draw(int delta_time);
 	
-	//! Set the sky culture from I18 name
-	//! Returns false and doesn't change if skyculture is invalid
-	bool setSkyCulture(const wstring& cultureName);
+	//! Update the sky culture for all the modules
+	void updateSkyCulture();
 	
-	//! Set the current sky culture from the passed directory
-	bool setSkyCultureDir(const string& culturedir);
-
-	string getSkyCultureDir() {return skyCultureDir;}
-		
-	//! Get the current sky culture I18 name
-	wstring getSkyCulture() const {return skyloc->directoryToSkyCultureI18(skyCultureDir);}
-	
-	//! Get the I18 available sky culture names
-	wstring getSkyCultureListI18() const {return skyloc->getSkyCultureListI18();}
-
-	wstring getSkyCultureHash() const {return skyloc->getSkyCultureHash();}
+	//! Set the sky locale and update the sky objects names for all the modules
+	void updateSkyLanguage();
 	
 	//! Set the landscape
 	bool setLandscape(const string& new_landscape_name);
@@ -95,15 +84,6 @@ public:
 	//! Load a landscape based on a hash of parameters mirroring the landscape.ini file
 	//! and make it the current landscape
 	bool loadLandscape(stringHash_t& param);
-
-	//! @brief Set the sky language and reload the sky objects names with the new translation
-	//! This function has no permanent effect on the global locale
-	//!@param newSkyLocaleName The name of the locale (e.g fr) to use for sky object labels
-	void setSkyLanguage(const string& newSkyLocaleName);
-
-	//! Get the current sky language used for sky object labels
-	//! @return The name of the locale (e.g fr)
-	string getSkyLanguage() {return skyTranslator.getTrueLocaleName();}
 
 	///////////////////////////////////////////////////////////////////////////////////////
 	// Navigation
@@ -676,9 +656,6 @@ private:
 	
 	//! Find in a "clever" way an object from its screen position
 	StelObject clever_find(int x, int y) const;	
-	
-	string skyCultureDir;				// The directory containing data for the culture used for constellations, etc.. 
-	Translator skyTranslator;			// The translator used for astronomical object naming
 		
 	// Main elements of the program
 	Navigator * navigation;				// Manage all navigation parameters, coordinate transformations etc..
@@ -700,7 +677,6 @@ private:
 	MeteorMgr * meteors;				// Manage meteor showers
 	Landscape * landscape;				// The landscape ie the fog, the ground and "decor"
 	ToneReproductor * tone_converter;	// Tones conversion between stellarium world and display device
-	SkyLocalizer *skyloc;				// for sky cultures and locales
 	ImageMgr * script_images;           // for script loaded image display
 	class TelescopeMgr *telescope_mgr;
 

@@ -24,13 +24,14 @@
 #include "planet.h"
 #include "stelapp.h"
 #include "stelfontmgr.h"
+#include "stellocalemgr.h"
 
 // rms added color as parameter
 SkyGrid::SkyGrid(SKY_GRID_TYPE grid_type, unsigned int _nb_meridian, unsigned int _nb_parallel, double _radius,
 	unsigned int _nb_alt_segment, unsigned int _nb_azi_segment) :
 	nb_meridian(_nb_meridian), nb_parallel(_nb_parallel), 	radius(_radius),
 	nb_alt_segment(_nb_alt_segment), nb_azi_segment(_nb_azi_segment), color(0.2,0.2,0.2), fontSize(12),
-	font(StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getAppLanguage(), fontSize))
+	font(StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getLocaleMgr().getAppLanguage(), fontSize))
 {
 	transparent_top = true;
 	gtype = grid_type;
@@ -86,7 +87,7 @@ SkyGrid::~SkyGrid()
 void SkyGrid::setFontSize(double newFontSize)
 {
 	fontSize = newFontSize;
-	font = StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getAppLanguage(), fontSize);
+	font = StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getLocaleMgr().getAppLanguage(), fontSize);
 }
 
 void SkyGrid::draw(const Projector* prj) const
@@ -267,7 +268,7 @@ void SkyGrid::draw(const Projector* prj) const
 
 SkyLine::SkyLine(SKY_LINE_TYPE _line_type, double _radius, unsigned int _nb_segment) :
 		radius(_radius), nb_segment(_nb_segment), color(0.f, 0.f, 1.f), fontSize(1.),
-	font(StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getAppLanguage(), fontSize))
+font(StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getLocaleMgr().getAppLanguage(), fontSize))
 {
 	float inclinaison = 0.f;
 	line_type = _line_type;
@@ -309,7 +310,7 @@ SkyLine::~SkyLine()
 void SkyLine::setFontSize(double newFontSize)
 {
 	fontSize = newFontSize;
-	font = StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getAppLanguage(), fontSize);
+	font = StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getLocaleMgr().getAppLanguage(), fontSize);
 }
 
 void SkyLine::draw(const Projector *prj,const Navigator *nav) const
@@ -507,7 +508,7 @@ void SkyLine::draw(const Projector *prj,const Navigator *nav) const
 
 
 Cardinals::Cardinals(float _radius) : radius(_radius), fontSize(30),
-		font(StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getAppLanguage(), fontSize)), color(0.6,0.2,0.2)
+font(StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getLocaleMgr().getAppLanguage(), fontSize)), color(0.6,0.2,0.2)
 {
 	// Default labels - if sky locale specified, loaded later
 	// Improvement for gettext translation
@@ -593,14 +594,14 @@ void Cardinals::draw(const Projector* prj, double latitude, bool gravityON) cons
 }
 
 // Translate cardinal labels with gettext to current sky language and update font for the language
-void Cardinals::updateLanguage(Translator& trans)
+void Cardinals::updateI18n()
 {
-		sNorth = trans.translate("N");
-		sSouth = trans.translate("S");
-		sEast = trans.translate("E");
-		sWest = trans.translate("W");
-		
-		font = StelApp::getInstance().getFontManager().getStandardFont(trans.getTrueLocaleName(), fontSize);
+	Translator& trans = StelApp::getInstance().getLocaleMgr().getSkyTranslator();
+	sNorth = trans.translate("N");
+	sSouth = trans.translate("S");
+	sEast = trans.translate("E");
+	sWest = trans.translate("W");	
+	font = StelApp::getInstance().getFontManager().getStandardFont(trans.getTrueLocaleName(), fontSize);
 }
 
 // Class which manages the displaying of the Milky Way

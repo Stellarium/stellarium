@@ -26,6 +26,8 @@
 #include "stel_core.h"
 #include "image.h"
 #include "stel_ui.h"
+#include "stellocalemgr.h"
+#include "stelskyculturemgr.h"
 
 using namespace std;
 
@@ -121,8 +123,8 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 		else if(args["moon_scale"]!="") {
 			stcore->setMoonScale(StelUtils::str_to_double(args["moon_scale"]));
 		}
-		else if(args["sky_culture"]!="") stcore->setSkyCultureDir(args["sky_culture"]);
-		else if(args["sky_locale"]!="") stcore->setSkyLanguage(args["sky_locale"]);
+		else if(args["sky_culture"]!="") stapp->getSkyCultureMgr().setSkyCultureDir(args["sky_culture"]);
+		else if(args["sky_locale"]!="") stapp->getLocaleMgr().setSkyLanguage(args["sky_locale"]);
 		else if(args["star_mag_scale"]!="") stcore->setStarMagScale(StelUtils::str_to_double(args["star_mag_scale"]));
 		else if(args["star_scale"]!="") {
 			float scale = StelUtils::str_to_double(args["star_scale"]);
@@ -135,7 +137,7 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 				stcore->setNebulaCircleScale(scale);
 			} 
 		else if(args["star_twinkle_amount"]!="") stcore->setStarTwinkleAmount(StelUtils::str_to_double(args["star_twinkle_amount"]));
-		else if(args["time_zone"]!="") stapp->setCustomTimezone(args["time_zone"]);
+		else if(args["time_zone"]!="") stapp->getLocaleMgr().setCustomTimezone(args["time_zone"]);
 		else if(args["milky_way_intensity"]!="") {
 			stcore->setMilkyWayIntensity(StelUtils::str_to_double(args["milky_way_intensity"]));
 			// safety feature to be able to turn back on
@@ -299,12 +301,12 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 
 			if(args["local"][0] == 'T') {
 				// set time only (don't change day)
-				string sky_date = stapp->get_ISO8601_time_local(stcore->getJDay());
+				string sky_date = stapp->getLocaleMgr().get_ISO8601_time_local(stcore->getJDay());
 				new_date = sky_date.substr(0,10) + args["local"];
 			} else new_date = args["local"];
 
 			if(string_to_jday( new_date, jd ) ) {
-				stcore->setJDay(jd - stapp->get_GMT_shift(jd) * JD_HOUR);
+				stcore->setJDay(jd - stapp->getLocaleMgr().get_GMT_shift(jd) * JD_HOUR);
 			} else {
 				debug_message = _("Error parsing date.");
 				status = 0;
@@ -330,7 +332,7 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 			// TODO: should this record as the actual date used?
 			if (stapp->StartupTimeMode=="preset" || stapp->StartupTimeMode=="Preset")
 				stcore->setJDay(stapp->PresetSkyTime -
-											 stapp->get_GMT_shift(stapp->PresetSkyTime) * JD_HOUR);
+				                stapp->getLocaleMgr().get_GMT_shift(stapp->PresetSkyTime) * JD_HOUR);
 			else stcore->setJDay(get_julian_from_sys());
 
 		} else status=0;
