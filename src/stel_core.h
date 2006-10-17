@@ -40,7 +40,6 @@
 #include "draw.h"
 #include "landscape.h"
 #include "meteor_mgr.h"
-#include "sky_localizer.h"
 #include "loadingbar.h"
 #include "image_mgr.h"
 #include "callbacks.hpp"
