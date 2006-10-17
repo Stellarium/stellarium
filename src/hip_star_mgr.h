@@ -26,6 +26,7 @@
 #include "fader.h"
 #include "loadingbar.h"
 #include "translator.h"
+#include "stelobjectmgr.h"
 
 using namespace std ;
 
@@ -37,39 +38,49 @@ class Navigator;
 class ZoneArray;
 class HipIndexStruct;
 
-class HipStarMgr {
+class HipStarMgr : public StelObjectMgr
+{
 public:
     HipStarMgr(void);
     ~HipStarMgr(void);
-
-    void init(LoadingBar& lb);
+	
+	///////////////////////////////////////////////////////////////////////////
+	// Methods defined in the StelModule class
+	virtual void init(const InitParser& conf, LoadingBar& lb);
+	virtual string getModuleID() const {return "stars";}
+	virtual double draw(Projector *prj, const Navigator *nav, ToneReproductor *eye); //! Draw all the stars
+	virtual void update(double deltaTime) {names_fader.update((int)(deltaTime*1000)); starsFader.update((int)(deltaTime*1000));}
+	virtual void updateI18n();
+	virtual void updateSkyCulture(LoadingBar& lb);
+	
+	///////////////////////////////////////////////////////////////////////////
+	// Methods defined in StelObjectManager class
+	//! Return a stl vector containing the stars located inside the lim_fov circle around position v
+	virtual vector<StelObject> searchAround(const Vec3d& v, double limitFov, const Navigator * nav, const Projector * prj) const;
+	
+	//! Return the matching Stars object's pointer if exists or NULL
+    //! @param nameI18n The case sensistive star common name or HP
+    //! catalog name (format can be HP1234 or HP 1234) or sci name
+	virtual StelObject searchByNameI18n(const wstring& nameI18n) const;
+	
+	//! @brief Find and return the list of at most maxNbItem objects auto-completing the passed object I18n name
+	//! @param objPrefix the case insensitive first letters of the searched object
+	//! @param maxNbItem the maximum number of returned object names
+	//! @return a vector of matching object name by order of relevance, or an empty vector if nothing match
+	virtual vector<wstring> listMatchingObjectsI18n(const wstring& objPrefix, unsigned int maxNbItem=5) const;
+	
+	///////////////////////////////////////////////////////////////////////////
+	// Properties setters and getters
     int getMaxGridLevel(void) const {return max_geodesic_grid_level;}
     void setGrid(void);
 
-    void update(int delta_time) {names_fader.update(delta_time); starsFader.update(delta_time);}
     int getMaxSearchLevel(const ToneReproductor *eye,
                           const Projector *prj) const;
-    void draw(const ToneReproductor *eye,
-              const Projector *prj,
-              const Navigator *nav); // Draw all the stars
    
     void set_names_fade_duration(float duration) {names_fader.set_duration((int) (duration * 1000.f));}
     int load_common_names(const string& commonNameFile);
     void load_sci_names(const string& sciNameFile);
-	void updateLanguage(Translator& trans);
-     
-    //! Find and return the list of at most maxNbItem objects
-    //! auto-completing the passed object I18n name
-    vector<wstring> listMatchingObjectsI18n(const wstring& objPrefix,
-                                            unsigned int maxNbItem) const;
-    
-    //! Return the matching Stars object's pointer if exists or NULL
-    //! @param nameI18n The case sensistive star common name or HP
-    //! catalog name (format can be HP1234 or HP 1234) or sci name
-    StelObject searchByNameI18n(const wstring &nameI18n) const;
-    
-    // Return a stl vector containing the stars located inside the lim_fov circle around position v
-    vector<StelObject> search_around(Vec3d v, double lim_fov) const;
+
     StelObject search(Vec3d Pos) const;     // Search the star by position
     StelObject search(const string&) const; // Search the star by string (incl catalog prefix)
     StelObject searchHP(int) const;         // Search the star by HP number

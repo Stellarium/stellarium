@@ -54,7 +54,7 @@ public:
 
 	//! @brief Update i18 names from english names according to passed translator
 	//! The translation is done using gettext with translated strings defined in translations.h
-	void updateLanguage(Translator& trans);
+	void updateI18n();
 
 	wstring getPlanetHashString();  // locale and ssystem.ini names, newline delimiter, for tui
 

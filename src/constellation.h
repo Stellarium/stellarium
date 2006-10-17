@@ -53,7 +53,7 @@ private:
     
     bool read(const string& record, HipStarMgr * _VouteCeleste);
     void draw_name(s_font * constfont, Projector* prj) const;
-    void draw_art(Projector* prj, Navigator* nav) const;
+    void draw_art(Projector* prj, const Navigator* nav) const;
     void draw_boundary_optim(Projector* prj) const;
     const Constellation* is_star_in(const StelObject&) const;
 	StelObject getBrightestStarInConstellation(void) const;
@@ -63,7 +63,7 @@ private:
     string getShortName(void) const {return abbreviation;}
 
     void draw_optim(Projector* prj) const;
-    void draw_art_optim(Projector* prj, Navigator* nav) const;
+    void draw_art_optim(Projector* prj, const Navigator* nav) const;
 	void update(int delta_time);
 	
 	void setFlagLines(bool b) {line_fader=b;}

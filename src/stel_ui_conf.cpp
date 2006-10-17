@@ -22,6 +22,8 @@
 #include "stelapp.h"
 #include "stel_core.h"
 #include "stelfontmgr.h"
+#include "stellocalemgr.h"
+#include "stelskyculturemgr.h"
 
 using namespace s_gui;
 
@@ -293,7 +295,7 @@ Component* StelUI::createConfigWindow(s_font& courierFont)
 	earth_map->setOnNearestCityCallback(callback<void>(this, &StelUI::setCityFromMap));
 	tab_location->addComponent(earth_map);
 	y+=earth_map->getSizey();
-	earth_map->set_font(&(StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getAppLanguage(), 9.5)));
+	earth_map->set_font(&(StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getLocaleMgr().getAppLanguage(), 9.5)));
 	load_cities(StelApp::getInstance().getDataFilePath("cities.fab"));
 	
 	y += 5;
@@ -463,7 +465,7 @@ Component* StelUI::createConfigWindow(s_font& courierFont)
 	language_lb->setSizex(200);
 	language_lb->addItemList(Translator::getAvailableLanguagesNamesNative(app->getLocaleDir()));
 	language_lb->setOnChangeCallback(callback<void>(this, &StelUI::setAppLanguage));
-	language_lb->setCurrent(StelUtils::stringToWstring(app->getAppLanguage()));
+	language_lb->setCurrent(StelUtils::stringToWstring(app->getLocaleMgr().getAppLanguage()));
 	tab_language->addComponent(language_lb);
 	
 	x=260; y=10;
@@ -479,7 +481,7 @@ Component* StelUI::createConfigWindow(s_font& courierFont)
 	languageSky_lb->setSizex(200);
 	languageSky_lb->addItemList(Translator::getAvailableLanguagesNamesNative(app->getLocaleDir()));
 	languageSky_lb->setOnChangeCallback(callback<void>(this, &StelUI::setSkyLanguage));
-	languageSky_lb->setCurrent(StelUtils::stringToWstring(core->getSkyLanguage()));
+	languageSky_lb->setCurrent(StelUtils::stringToWstring(app->getLocaleMgr().getSkyLanguage()));
 	tab_language->addComponent(languageSky_lb);
 
 	x=150;
@@ -495,9 +497,9 @@ Component* StelUI::createConfigWindow(s_font& courierFont)
 	skyculture_lb = new ListBox(5);
 	skyculture_lb->setSizex(200);
 	skyculture_lb->setPos(x,y);
-	skyculture_lb->addItemList(core->getSkyCultureListI18());
+	skyculture_lb->addItemList(app->getSkyCultureMgr().getSkyCultureListI18());
 	skyculture_lb->setOnChangeCallback(callback<void>(this, &StelUI::setSkyCulture));
-	skyculture_lb->setCurrent(core->getSkyCulture());
+	skyculture_lb->setCurrent(app->getSkyCultureMgr().getSkyCulture());
 	tab_language->addComponent(skyculture_lb);
 
 	LabeledButton* language_save_bt = new LabeledButton(_("Save as default"));
@@ -550,17 +552,17 @@ void StelUI::dialogCallback(void)
 
 void StelUI::setSkyLanguage(void)
 {
-	core->setSkyLanguage(Translator::nativeLanguageNameCodeToIso639_1(languageSky_lb->getCurrent()));
+	app->getLocaleMgr().setSkyLanguage(Translator::nativeLanguageNameCodeToIso639_1(languageSky_lb->getCurrent()));
 }
 
 void StelUI::setAppLanguage(void)
 {
-	app->setAppLanguage(Translator::nativeLanguageNameCodeToIso639_1(language_lb->getCurrent()));
+	app->getLocaleMgr().setAppLanguage(Translator::nativeLanguageNameCodeToIso639_1(language_lb->getCurrent()));
 }
 
 void StelUI::setSkyCulture(void)
 {
-	core->setSkyCulture(skyculture_lb->getCurrent());
+	app->getSkyCultureMgr().setSkyCulture(skyculture_lb->getCurrent());
 }
 
 void StelUI::load_cities(const string & fileName)
@@ -817,9 +819,9 @@ void StelUI::saveLanguageOptions(void)
 	cout << "Saving language in file " << app->getConfigFilePath() << endl;
 	InitParser conf;
 	conf.load(app->getConfigFilePath());
-	conf.set_str("localization:sky_locale", core->getSkyLanguage());
-	conf.set_str("localization:app_locale", app->getAppLanguage());
-	conf.set_str("localization:sky_culture", core->getSkyCultureDir());
+	conf.set_str("localization:sky_locale", app->getLocaleMgr().getSkyLanguage());
+	conf.set_str("localization:app_locale", app->getLocaleMgr().getAppLanguage());
+	conf.set_str("localization:sky_culture", app->getSkyCultureMgr().getSkyCultureDir());
 	conf.save(app->getConfigFilePath());
 }
 
@@ -990,7 +992,7 @@ void StelUI::updateConfigForm(void)
 		waitOnLocation = false;
 	}
 
-	time_current->setJDay(core->getJDay() + app->get_GMT_shift(core->getJDay())*JD_HOUR);
+	time_current->setJDay(core->getJDay() + app->getLocaleMgr().get_GMT_shift(core->getJDay())*JD_HOUR);
 	system_tz_lbl2->setLabel(L"(" + get_time_zone_name_from_system(core->getJDay()) + L")");
 
 	time_speed_lbl2->setLabel(wstring(L"\u2022 ")+_("Current Time Speed is x") + StelUtils::doubleToWstring(core->getTimeSpeed()/JD_SECOND));

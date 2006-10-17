@@ -22,7 +22,9 @@
 #include "stel_object.h"
 #include "projector.h"
 #include "init_parser.h"
-#include "s_font.h"
+#include "stelapp.h"
+#include "stelfontmgr.h"
+#include "stellocalemgr.h"
 
 #include <algorithm>
 
@@ -39,7 +41,7 @@ void TelescopeMgr::TelescopeMap::clear(void) {
   std::map<int,Telescope*>::clear();
 }
 
-TelescopeMgr::TelescopeMgr(void) : telescope_font(0),telescope_texture(0) {
+TelescopeMgr::TelescopeMgr(void) : telescope_font(NULL),telescope_texture(0) {
 #ifdef WIN32
   WSADATA wsaData;
   if (WSAStartup(0x202,&wsaData) == 0) {
@@ -57,7 +59,6 @@ TelescopeMgr::TelescopeMgr(void) : telescope_font(0),telescope_texture(0) {
 }
 
 TelescopeMgr::~TelescopeMgr(void) {
-  if (telescope_font) delete telescope_font;
   if (telescope_texture) delete telescope_texture;
 #ifdef WIN32
   if (wsa_ok) WSACleanup();
@@ -163,9 +164,7 @@ vector<wstring> TelescopeMgr::listMatchingObjectsI18n(
 }
 
 void TelescopeMgr::setFont(float font_size,const string &font_name) {
-  if (telescope_font) delete telescope_font;
-  telescope_font = new s_font(font_size, font_name);
-  assert(telescope_font);
+	telescope_font = &StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getLocaleMgr().getSkyLanguage(), font_size);
 }
 
 void TelescopeMgr::init(const InitParser &conf) {

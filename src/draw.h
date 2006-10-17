@@ -114,7 +114,7 @@ public:
 	void draw(const Projector* prj, double latitude, bool gravityON = false) const;
 	void setColor(const Vec3f& c) {color = c;}
 	Vec3f get_color() {return color;}
-	void updateLanguage(Translator& trans);  // for i18n
+	void updateI18n();
 	void update(int delta_time) {fader.update(delta_time);}
 	void set_fade_duration(float duration) {fader.set_duration((int)(duration*1000.f));}
 	void setFlagShow(bool b){fader = b;}

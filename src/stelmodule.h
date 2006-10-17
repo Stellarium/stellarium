@@ -36,6 +36,8 @@
 class Projector;
 class Navigator;
 class ToneReproductor;
+class LoadingBar;
+class InitParser;
 
 using namespace std;
 
@@ -48,12 +50,10 @@ public:
 	StelModule() {;}
 
 	virtual ~StelModule() {;}
-
-	//! Init itself from a .ini file
-	void loadProperties(const string& iniFile);
 	
-	//! Save itself into a .ini file for subsequent reload
-	void saveProperties(const string& iniFile) const;
+	//! Initialize itself from a configuration (.ini) file
+	//! If the initialization takes significant time, the progress should be displayed on the loading bar.
+	virtual void init(const InitParser& conf, LoadingBar& lb) = 0;
 	
 	//! Execute all the openGL drawing functions for this module.
 	//! @return the max squared distance in pixels any single object has moved since the previous update.
@@ -62,6 +62,14 @@ public:
 	//! Update the module with respect to the time.
 	//! @param delta_time the time increment in second since last call.
 	virtual void update(double deltaTime) {;}
+	
+	//! @brief Update i18n strings from english names according to current global sky and application language.
+	//! This method also reload the proper fonts depending on the language.
+	//! The translation shall be done using the Translator provided by the StelApp singleton instance.
+	virtual void updateI18n() = 0;
+		   
+	//! @brief Update sky culture, i.e. load data if necessary and translate them to current sky language if needed.
+	virtual void updateSkyCulture(LoadingBar& lb) = 0;
 	
 	//! Get the identifier of the module. Must be unique, it is also the name of the .so (or .dll) file
 	//! if the module comes from a shared library
@@ -75,6 +83,16 @@ public:
 	
 	//! Get the email adress of the module author
 	virtual string getAuthorEmail() {return "http://stellarium.org";}
+	
+	
+	///////////////////////////////////////////////////////////////////////////
+	// Properties managment
+	
+	//! Init itself from a .ini file
+	void loadProperties(const string& iniFile);
+	
+	//! Save itself into a .ini file for subsequent reload
+	void saveProperties(const string& iniFile) const;
 	
 	//! Set a property value from a string: try to cast the value as a bool, int, double, string, Vec3d
 	void setPropertyStr(const string& key, const string& value);

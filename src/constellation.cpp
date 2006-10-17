@@ -127,7 +127,7 @@ void Constellation::draw_name(s_font *constfont, Projector* prj) const
 }
 
 // Draw the art texture, optimized function to be called thru a constellation manager only
-void Constellation::draw_art_optim(Projector* prj, Navigator* nav) const
+void Constellation::draw_art_optim(Projector* prj, const Navigator* nav) const
 {
 	float intensity = art_fader.getInterstate(); 
 	if (art_tex && intensity) 
@@ -193,7 +193,7 @@ void Constellation::draw_art_optim(Projector* prj, Navigator* nav) const
 }
 
 // Draw the art texture
-void Constellation::draw_art(Projector* prj, Navigator* nav) const
+void Constellation::draw_art(Projector* prj, const Navigator* nav) const
 {
 	glBlendFunc(GL_ONE, GL_ONE);
 	glEnable(GL_TEXTURE_2D);

@@ -20,20 +20,19 @@
 #ifndef _S_UTILITY_H_
 #define _S_UTILITY_H_
 
-#include <iostream>
-#include <sstream>
 #include <string>
-#include <cmath>
 #include <map>
-#include <time.h>
-#include "vecmath.h"
+#include <ctime>
 
 using namespace std;
 
-typedef std::map< std::string, std::string > stringHash_t;
+// Predeclaration for compilation speed
+template<class T> class Vector3;
+typedef Vector3<float>	Vec3f;
+typedef Vector3<double>	Vec3d;
+
+typedef map< string, string > stringHash_t;
 typedef stringHash_t::const_iterator stringHashIter_t;
-typedef std::map< std::string, std::wstring > wstringHash_t;
-typedef wstringHash_t::const_iterator wstringHashIter_t;
 	
 namespace StelUtils {
 	
