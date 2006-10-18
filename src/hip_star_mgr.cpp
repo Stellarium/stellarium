@@ -954,6 +954,15 @@ void HipStarMgr::init(const InitParser& conf, LoadingBar& lb) {
   starTexture = new s_texture("star16x16.png",TEX_LOAD_TYPE_PNG_SOLID,false);  // Load star texture no mipmap
   double fontSize = 12;
   starFont = &StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getLocaleMgr().getSkyLanguage(), fontSize);
+  	setFlagStars(conf.get_boolean("astro:flag_stars"));
+	setFlagNames(conf.get_boolean("astro:flag_star_name"));	
+	setScale(conf.get_double ("stars:star_scale"));
+	setMagScale(conf.get_double ("stars:star_mag_scale"));
+	setTwinkleAmount(conf.get_double ("stars:star_twinkle_amount"));
+	setMaxMagName(conf.get_double ("stars:max_mag_star_name"));
+	setFlagTwinkle(conf.get_boolean("stars:flag_star_twinkle"));
+	setFlagPointStar(conf.get_boolean("stars:flag_point_star"));
+	setLimitingMag(conf.get_double("stars", "star_limiting_mag", 6.5f));
 }
 
 void HipStarMgr::setGrid(void) {

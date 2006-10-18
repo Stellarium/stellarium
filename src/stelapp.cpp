@@ -28,6 +28,7 @@
 #include "stelfontmgr.h"
 #include "stellocalemgr.h"
 #include "stelskyculturemgr.h"
+#include "hip_star_mgr.h"
 
 // Initialize static variables
 StelApp* StelApp::singleton = NULL;
@@ -510,7 +511,7 @@ void StelApp::saveCurrentConfig(const string& confFile)
 	}
 
 	// viewing section
-	ConstellationMgr* cmgr = (ConstellationMgr*)moduleMgr->getModule("constellation");
+	ConstellationMgr* cmgr = (ConstellationMgr*)moduleMgr->getModule("constellations");
 	conf.set_boolean("viewing:flag_constellation_drawing", cmgr->getFlagLines());
 	conf.set_boolean("viewing:flag_constellation_name", cmgr->getFlagNames());
 	conf.set_boolean("viewing:flag_constellation_art", cmgr->getFlagArt());
@@ -522,15 +523,15 @@ void StelApp::saveCurrentConfig(const string& confFile)
 	conf.set_str    ("color:const_names_color", StelUtils::vec3f_to_str(cmgr->getNamesColor()));
 	conf.set_str    ("color:const_boundary_color", StelUtils::vec3f_to_str(cmgr->getBoundariesColor()));
 		
-	conf.set_double("viewing:moon_scale", core->getMoonScale());
-	//conf.set_boolean("viewing:use_common_names", FlagUseCommonNames);
+	SolarSystem* ssmgr = (SolarSystem*)moduleMgr->getModule("ssystem");
+	conf.set_double("viewing:moon_scale", ssmgr->getMoonScale());
 	conf.set_boolean("viewing:flag_equatorial_grid", core->getFlagEquatorGrid());
 	conf.set_boolean("viewing:flag_azimutal_grid", core->getFlagAzimutalGrid());
 	conf.set_boolean("viewing:flag_equator_line", core->getFlagEquatorLine());
 	conf.set_boolean("viewing:flag_ecliptic_line", core->getFlagEclipticLine());
 	conf.set_boolean("viewing:flag_cardinal_points", core->getFlagCardinalsPoints());
 	conf.set_boolean("viewing:flag_meridian_line", core->getFlagMeridianLine());
-	conf.set_boolean("viewing:flag_moon_scaled", core->getFlagMoonScaled());
+	conf.set_boolean("viewing:flag_moon_scaled", ssmgr->getFlagMoonScale());
 
 	// Landscape section
 	conf.set_boolean("landscape:flag_landscape", core->getFlagLandscape());
@@ -539,37 +540,32 @@ void StelApp::saveCurrentConfig(const string& confFile)
 	//	conf.set_double ("viewing:atmosphere_fade_duration", core->getAtmosphereFadeDuration());
 
 	// Star section
-	conf.set_double ("stars:star_scale", core->getStarScale());
-	conf.set_double ("stars:star_mag_scale", core->getStarMagScale());
-	conf.set_boolean("stars:flag_point_star", core->getFlagPointStar());
-	conf.set_double("stars:max_mag_star_name", core->getMaxMagStarName());
-	conf.set_boolean("stars:flag_star_twinkle", core->getFlagStarTwinkle());
-	conf.set_double("stars:star_twinkle_amount", core->getStarTwinkleAmount());
-	//	conf.set_double("stars:star_limiting_mag", hip_stars->core->get_limiting_mag());
+	HipStarMgr* smgr = (HipStarMgr*)moduleMgr->getModule("stars");
+	conf.set_double ("stars:star_scale", smgr->getScale());
+	conf.set_double ("stars:star_mag_scale", smgr->getMagScale());
+	conf.set_boolean("stars:flag_point_star", smgr->getFlagPointStar());
+	conf.set_double ("stars:max_mag_star_name", smgr->getMaxMagName());
+	conf.set_boolean("stars:flag_star_twinkle", smgr->getFlagTwinkle());
+	conf.set_double ("stars:star_twinkle_amount", smgr->getTwinkleAmount());
+	conf.set_boolean("astro:flag_stars", smgr->getFlagStars());
+	conf.set_boolean("astro:flag_star_name", smgr->getFlagNames());
 
 	// Color section
+	NebulaMgr* nmgr = (NebulaMgr*)moduleMgr->getModule("nebulas");
 	conf.set_str    ("color:azimuthal_color", StelUtils::vec3f_to_str(core->getColorAzimutalGrid()));
 	conf.set_str    ("color:equatorial_color", StelUtils::vec3f_to_str(core->getColorEquatorGrid()));
 	conf.set_str    ("color:equator_color", StelUtils::vec3f_to_str(core->getColorEquatorLine()));
 	conf.set_str    ("color:ecliptic_color", StelUtils::vec3f_to_str(core->getColorEclipticLine()));
 	conf.set_str    ("color:meridian_color", StelUtils::vec3f_to_str(core->getColorMeridianLine()));
-	conf.set_str	("color:nebula_label_color", StelUtils::vec3f_to_str(core->getColorNebulaLabels()));
-	conf.set_str	("color:nebula_circle_color", StelUtils::vec3f_to_str(core->getColorNebulaCircle()));
+	conf.set_str	("color:nebula_label_color", StelUtils::vec3f_to_str(nmgr->getNamesColor()));
+	conf.set_str	("color:nebula_circle_color", StelUtils::vec3f_to_str(nmgr->getCirclesColor()));
 	conf.set_str    ("color:cardinal_color", StelUtils::vec3f_to_str(core->getColorCardinalPoints()));
-	conf.set_str    ("color:planet_names_color", StelUtils::vec3f_to_str(core->getColorPlanetsNames()));
-	conf.set_str    ("color:planet_orbits_color", StelUtils::vec3f_to_str(core->getColorPlanetsOrbits()));
-	conf.set_str    ("color:object_trails_color", StelUtils::vec3f_to_str(core->getColorPlanetsTrails()));
-	//  Are these used?
-	//	conf.set_str    ("color:star_label_color", StelUtils::vec3f_to_str(core->getColorStarNames()));
-	//  conf.set_str    ("color:star_circle_color", StelUtils::vec3f_to_str(core->getColorStarCircles()));
+	conf.set_str    ("color:planet_names_color", StelUtils::vec3f_to_str(ssmgr->getNamesColor()));
+	conf.set_str    ("color:planet_orbits_color", StelUtils::vec3f_to_str(ssmgr->getOrbitsColor()));
+	conf.set_str    ("color:object_trails_color", StelUtils::vec3f_to_str(ssmgr->getTrailsColor()));
 
 	// gui section
 	conf.set_double("gui:mouse_cursor_timeout",ui->getMouseCursorTimeout());
-
-	// not user settable yet
-	// conf.set_str	("gui:gui_base_color", StelUtils::vec3f_to_str(GuiBaseColor));
-	// conf.set_str	("gui:gui_text_color", StelUtils::vec3f_to_str(GuiTextColor));
-	// conf.set_double ("gui:base_font_size", BaseFontSize);
 
 	// Text ui section
 	conf.set_boolean("tui:flag_show_gravity_ui", ui->getFlagShowGravityUi());
@@ -584,16 +580,14 @@ void StelApp::saveCurrentConfig(const string& confFile)
 	conf.set_str	("navigation:startup_time_mode", StartupTimeMode);
 
 	// Astro section
-	conf.set_boolean("astro:flag_object_trails", core->getFlagPlanetsTrails());
-	conf.set_boolean("astro:flag_bright_nebulae", core->getFlagBrightNebulae());
-	conf.set_boolean("astro:flag_stars", core->getFlagStars());
-	conf.set_boolean("astro:flag_star_name", core->getFlagStarName());
-	conf.set_boolean("astro:flag_nebula", core->getFlagNebula());
-	conf.set_boolean("astro:flag_nebula_name", core->getFlagNebulaHints());
-	conf.set_double("astro:max_mag_nebula_name", core->getNebulaMaxMagHints());
-	conf.set_boolean("astro:flag_planets", core->getFlagPlanets());
-	conf.set_boolean("astro:flag_planets_hints", core->getFlagPlanetsHints());
-	conf.set_boolean("astro:flag_planets_orbits", core->getFlagPlanetsOrbits());
+	conf.set_boolean("astro:flag_object_trails", ssmgr->getFlagTrails());
+	conf.set_boolean("astro:flag_bright_nebulae", nmgr->getFlagBright());
+	conf.set_boolean("astro:flag_nebula", nmgr->getFlagShow());
+	conf.set_boolean("astro:flag_nebula_name", nmgr->getFlagHints());
+	conf.set_double("astro:max_mag_nebula_name", nmgr->getMaxMagHints());
+	conf.set_boolean("astro:flag_planets", ssmgr->getFlagPlanets());
+	conf.set_boolean("astro:flag_planets_hints", ssmgr->getFlagHints());
+	conf.set_boolean("astro:flag_planets_orbits", ssmgr->getFlagOrbits());
 
 	conf.set_boolean("astro:flag_milky_way", core->getFlagMilkyWay());
 	conf.set_double("astro:milky_way_intensity", core->getMilkyWayIntensity());

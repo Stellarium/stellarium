@@ -521,7 +521,7 @@ void StelUI::cbEditScriptExecute(void)
 ////////////////////////////////////////////////////////////////////////////////
 void StelUI::cb(void)
 {
-	ConstellationMgr* cmgr = (ConstellationMgr*)StelApp::getInstance().getModuleMgr().getModule("constellation");
+	ConstellationMgr* cmgr = (ConstellationMgr*)StelApp::getInstance().getModuleMgr().getModule("constellations");
 	cmgr->setFlagLines(bt_flag_constellation_draw->getState());
 	cmgr->setFlagNames(bt_flag_constellation_name->getState());
 	cmgr->setFlagArt(bt_flag_constellation_art->getState());
@@ -530,7 +530,9 @@ void StelUI::cb(void)
 	core->setFlagLandscape(bt_flag_ground->getState());
 	core->setFlagCardinalsPoints(bt_flag_cardinals->getState());
 	core->setFlagAtmosphere(bt_flag_atmosphere->getState());
-	core->setFlagNebulaHints( bt_flag_nebula_name->getState() );
+	
+	NebulaMgr* nmgr = (NebulaMgr*)StelApp::getInstance().getModuleMgr().getModule("nebulas");
+	nmgr->setFlagHints( bt_flag_nebula_name->getState() );
 	if (bt_flip_horz) core->setFlipHorz( bt_flip_horz->getState() );
 	if (bt_flip_vert) core->setFlipVert( bt_flip_vert->getState() );
 	FlagHelp 				= bt_flag_help->getState();
@@ -1078,11 +1080,12 @@ int StelUI::handle_keys(SDLKey key, SDLMod mod, Uint16 unicode, S_GUI_VALUE stat
               break;
             } // else fall through
           case SDLK_COMMA:
+            SolarSystem* ssmgr = (SolarSystem*)StelApp::getInstance().getModuleMgr().getModule("ssystem");
             if(!core->getFlagEclipticLine())
             {
                 app->commander->execute_command( "flag ecliptic_line on");
             }
-            else if( !core->getFlagPlanetsTrails())
+            else if( !ssmgr->getFlagTrails())
             {
                 app->commander->execute_command( "flag object_trails on");
             }
@@ -1175,11 +1178,12 @@ int StelUI::handle_keys(SDLKey key, SDLMod mod, Uint16 unicode, S_GUI_VALUE stat
             app->commander->execute_command( "flag star_names toggle");
             break;
           case SDLK_p:
-            if(!core->getFlagPlanetsHints())
+            SolarSystem* ssmgr2 = (SolarSystem*)StelApp::getInstance().getModuleMgr().getModule("ssystem");
+            if(!ssmgr2->getFlagHints())
             {
                 app->commander->execute_command("flag planet_names on");
             }
-            else if( !core->getFlagPlanetsOrbits())
+            else if( !ssmgr2->getFlagOrbits())
             {
                 app->commander->execute_command("flag planet_orbits on");
             }
@@ -1309,16 +1313,19 @@ void StelUI::gui_update_widgets(int delta_time)
 	bt_flag_ctr->setVisible(FlagMenu);
 	bt_time_control_ctr->setVisible(FlagMenu);
 
-	ConstellationMgr* cmgr = (ConstellationMgr*)StelApp::getInstance().getModuleMgr().getModule("constellation");
+	ConstellationMgr* cmgr = (ConstellationMgr*)StelApp::getInstance().getModuleMgr().getModule("constellations");
 	bt_flag_constellation_draw->setState(cmgr->getFlagLines());
 	bt_flag_constellation_name->setState(cmgr->getFlagNames());
 	bt_flag_constellation_art->setState(cmgr->getFlagArt());
+	
 	bt_flag_azimuth_grid->setState(core->getFlagAzimutalGrid());
 	bt_flag_equator_grid->setState(core->getFlagEquatorGrid());
 	bt_flag_ground->setState(core->getFlagLandscape());
 	bt_flag_cardinals->setState(core->getFlagCardinalsPoints());
 	bt_flag_atmosphere->setState(core->getFlagAtmosphere());
-	bt_flag_nebula_name->setState(core->getFlagNebulaHints());
+	
+	NebulaMgr* nmgr = (NebulaMgr*)StelApp::getInstance().getModuleMgr().getModule("nebulas");
+	bt_flag_nebula_name->setState(nmgr->getFlagHints());
 	bt_flag_help->setState(help_win->getVisible());
 	bt_flag_equatorial_mode->setState(core->getMountMode()==StelCore::MOUNT_EQUATORIAL);
 	bt_flag_config->setState(config_win->getVisible());
