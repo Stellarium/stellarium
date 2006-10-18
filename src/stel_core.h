@@ -204,7 +204,6 @@ public:
 	//! Does not deselect selected constellation
     void unSelect(void) {
       selected_object=NULL;
-      //asterisms->setSelected(NULL);
       ssystem->setSelected(StelObject());
     }
 
@@ -219,54 +218,6 @@ public:
 
 	//! Get a color used to display info about the currently selected object
 	Vec3f getSelectedObjectInfoColor(void) const;
-
-	///////////////////////////////////////////////////////////////////////////////////////
-	// Constellations methods
-	//! Set display flag of constellation lines
-	void setFlagConstellationLines(bool b) {asterisms->setFlagLines(b);}
-	//! Get display flag of constellation lines
-	bool getFlagConstellationLines(void) {return asterisms->getFlagLines();}
-
-	//! Set display flag of constellation art
-	void setFlagConstellationArt(bool b) {asterisms->setFlagArt(b);}
-	//! Get display flag of constellation art
-	bool getFlagConstellationArt(void) {return asterisms->getFlagArt();}
-
-	//! Set display flag of constellation names
-	void setFlagConstellationNames(bool b) {asterisms->setFlagNames(b);}
-	//! Get display flag of constellation names
-	bool getFlagConstellationNames(void) {return asterisms->getFlagNames();}
-
-	//! Set display flag of constellation boundaries
-	void setFlagConstellationBoundaries(bool b) {asterisms->setFlagBoundaries(b);}
-	//! Get display flag of constellation boundaries
-	bool getFlagConstellationBoundaries(void) {return asterisms->getFlagBoundaries();}
-	Vec3f getColorConstellationBoundaries(void) const {return asterisms->getBoundaryColor();}
-
-	//! Set constellation art intensity
-	void setConstellationArtIntensity(float f) {asterisms->setArtIntensity(f);}
-	//! Get constellation art intensity
-	float getConstellationArtIntensity(void) const {return asterisms->getArtIntensity();}
-
-	//! Set constellation art intensity
-	void setConstellationArtFadeDuration(float f) {asterisms->setArtFadeDuration(f);}
-	//! Get constellation art intensity
-	float getConstellationArtFadeDuration(void) const {return asterisms->getArtFadeDuration();}
-
-	//! Set whether selected constellation is drawn alone
-	void setFlagConstellationIsolateSelected(bool b) {asterisms->setFlagIsolateSelected(b);}
-	//! Get whether selected constellation is drawn alone
-	bool getFlagConstellationIsolateSelected(void) {return asterisms->getFlagIsolateSelected();}
-
-	//! Get constellation line color
-	Vec3f getColorConstellationLine() const {return asterisms->getLineColor();}
-	//! Set constellation line color
-	void setColorConstellationLine(const Vec3f& v) {asterisms->setLineColor(v);}
-
-	//! Get constellation names color
-	Vec3f getColorConstellationNames() const {return asterisms->getLabelColor();}
-	//! Set constellation names color
-	void setColorConstellationNames(const Vec3f& v) {asterisms->setLabelColor(v);}
 
 	//! Set display flag of telescopes
 	void setFlagTelescopes(bool b);
@@ -447,8 +398,6 @@ public:
 
 	///////////////////////////////////////////////////////////////////////////////////////
 	// Colors
-
-	void setColorConstellationBoundaries(const Vec3f& v) { asterisms->setBoundaryColor(v);}
 	void setColorPlanetsOrbits(const Vec3f& v) { ssystem->setOrbitColor(v);}
 	void setColorPlanetsNames(const Vec3f& v) { ssystem->setLabelColor(v);}
 	void setColorPlanetsTrails(const Vec3f& v) { ssystem->setTrailColor(v);}

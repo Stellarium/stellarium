@@ -108,8 +108,6 @@ private:
 	static Vec3f labelColor;
 	static Vec3f boundaryColor;
 
-    /** Whether labels are to be printed with gravity */
-	static bool gravityLabel;
 	static bool singleSelected;
 };
 

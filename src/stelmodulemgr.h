@@ -49,7 +49,7 @@ public:
 		// TODO use glib here
 	}	
 	
-	StelModule& getModule(const string& moduleID)
+	StelModule* getModule(const string& moduleID)
 	{
 		std::map<string, StelModule*>::const_iterator iter = modules.find(moduleID);
 		if (iter==modules.end())
@@ -57,7 +57,7 @@ public:
 			std::cerr << "Module \"" << moduleID << "\" does not exists or is not loaded." << std::endl;
 			assert(0);
 		}
-		return *((*iter).second);
+		return iter->second;
 	}
 	
 private:

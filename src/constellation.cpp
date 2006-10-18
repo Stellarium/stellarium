@@ -25,8 +25,6 @@
 #include "hip_star_mgr.h"
 #include "navigator.h"
 
-bool Constellation::gravityLabel = false;
-
 Vec3f Constellation::lineColor = Vec3f(.4,.4,.8);
 Vec3f Constellation::labelColor = Vec3f(.4,.4,.8);
 Vec3f Constellation::boundaryColor = Vec3f(0.8,0.3,0.3);

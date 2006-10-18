@@ -510,11 +510,18 @@ void StelApp::saveCurrentConfig(const string& confFile)
 	}
 
 	// viewing section
-	conf.set_boolean("viewing:flag_constellation_drawing", core->getFlagConstellationLines());
-	conf.set_boolean("viewing:flag_constellation_name", core->getFlagConstellationNames());
-	conf.set_boolean("viewing:flag_constellation_art", core->getFlagConstellationArt());
-	conf.set_boolean("viewing:flag_constellation_boundaries", core->getFlagConstellationBoundaries());
-	conf.set_boolean("viewing:flag_constellation_pick", core->getFlagConstellationIsolateSelected());
+	ConstellationMgr* cmgr = (ConstellationMgr*)moduleMgr->getModule("constellation");
+	conf.set_boolean("viewing:flag_constellation_drawing", cmgr->getFlagLines());
+	conf.set_boolean("viewing:flag_constellation_name", cmgr->getFlagNames());
+	conf.set_boolean("viewing:flag_constellation_art", cmgr->getFlagArt());
+	conf.set_boolean("viewing:flag_constellation_boundaries", cmgr->getFlagBoundaries());
+	conf.set_boolean("viewing:flag_constellation_pick", cmgr->getFlagIsolateSelected());
+	conf.set_double ("viewing:constellation_art_intensity", cmgr->getArtIntensity());
+	conf.set_double ("viewing:constellation_art_fade_duration", cmgr->getArtFadeDuration());
+	conf.set_str    ("color:const_lines_color", StelUtils::vec3f_to_str(cmgr->getLinesColor()));
+	conf.set_str    ("color:const_names_color", StelUtils::vec3f_to_str(cmgr->getNamesColor()));
+	conf.set_str    ("color:const_boundary_color", StelUtils::vec3f_to_str(cmgr->getBoundariesColor()));
+		
 	conf.set_double("viewing:moon_scale", core->getMoonScale());
 	//conf.set_boolean("viewing:use_common_names", FlagUseCommonNames);
 	conf.set_boolean("viewing:flag_equatorial_grid", core->getFlagEquatorGrid());
@@ -524,8 +531,6 @@ void StelApp::saveCurrentConfig(const string& confFile)
 	conf.set_boolean("viewing:flag_cardinal_points", core->getFlagCardinalsPoints());
 	conf.set_boolean("viewing:flag_meridian_line", core->getFlagMeridianLine());
 	conf.set_boolean("viewing:flag_moon_scaled", core->getFlagMoonScaled());
-	conf.set_double ("viewing:constellation_art_intensity", core->getConstellationArtIntensity());
-	conf.set_double ("viewing:constellation_art_fade_duration", core->getConstellationArtFadeDuration());
 
 	// Landscape section
 	conf.set_boolean("landscape:flag_landscape", core->getFlagLandscape());
@@ -548,9 +553,6 @@ void StelApp::saveCurrentConfig(const string& confFile)
 	conf.set_str    ("color:equator_color", StelUtils::vec3f_to_str(core->getColorEquatorLine()));
 	conf.set_str    ("color:ecliptic_color", StelUtils::vec3f_to_str(core->getColorEclipticLine()));
 	conf.set_str    ("color:meridian_color", StelUtils::vec3f_to_str(core->getColorMeridianLine()));
-	conf.set_str    ("color:const_lines_color", StelUtils::vec3f_to_str(core->getColorConstellationLine()));
-	conf.set_str    ("color:const_names_color", StelUtils::vec3f_to_str(core->getColorConstellationNames()));
-	conf.set_str    ("color:const_boundary_color", StelUtils::vec3f_to_str(core->getColorConstellationBoundaries()));
 	conf.set_str	("color:nebula_label_color", StelUtils::vec3f_to_str(core->getColorNebulaLabels()));
 	conf.set_str	("color:nebula_circle_color", StelUtils::vec3f_to_str(core->getColorNebulaCircle()));
 	conf.set_str    ("color:cardinal_color", StelUtils::vec3f_to_str(core->getColorCardinalPoints()));
