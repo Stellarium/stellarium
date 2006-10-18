@@ -33,6 +33,7 @@ class StelFontMgr;
 class StelLocaleMgr;
 class SkyLocalizer;
 class StelSkyCultureMgr;
+class StelModuleMgr;
 
 //! Singleton main Stellarium application class.
 //! @author Fabien Chereau
@@ -80,15 +81,13 @@ public:
 	//! @return the fullpath to the texture file e.g /usr/local/share/stellarium/data/texture/jupiter.png.
 	string getTextureFilePath(const string& textureFileName) const;
 
+	//! @brief Get the module manager to use for accessing any module loaded in the application
+	//! @return the module manager.
+	StelModuleMgr& getModuleMgr() {return *moduleMgr;}
+	
 	//! @brief Get the locale manager to use for i18n & date/time localization
 	//! @return the font manager to use for loading fonts.
 	StelLocaleMgr& getLocaleMgr() { return *localeMgr;}
-	
-	//! Update translations and font everywhere in the program according to globals
-	void updateAppLanguage();
-	
-	//! Update translations and font for sky everywhere in the program  according to globals
-	void updateSkyLanguage();
 	
 	//! @brief Get the font manager to use for loading fonts.
 	//! @return the font manager to use for loading fonts.
@@ -97,6 +96,15 @@ public:
 	//! @brief Get the sky cultures manager
 	//! @return the sky cultures manager
 	StelSkyCultureMgr& getSkyCultureMgr() {return *skyCultureMgr;}
+	
+	//! Update translations and font everywhere in the program
+	void updateAppLanguage();
+	
+	//! Update translations and font for sky everywhere in the program
+	void updateSkyLanguage();	
+	
+	//! Update and reload sky culture informations everywhere in the program
+	void updateSkyCulture();	
 	
 	//! Set flag for activating night vision mode
 	void setVisionModeNight(void);
@@ -181,6 +189,9 @@ private:
 	string SelectedScript;  // script filename (without directory) selected in a UI to run when exit UI
 	string SelectedScriptDirectory;  // script directory for same
 
+	// Module manager for the application
+	StelModuleMgr* moduleMgr;
+	
 	// Font manager for the application
 	StelFontMgr* fontManager;
 	

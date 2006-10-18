@@ -77,8 +77,8 @@ void ConstellationMgr::updateSkyCulture(LoadingBar& lb)
 	{
 		lastLoadedSkyCulture = StelApp::getInstance().getSkyCultureMgr().getSkyCultureDir();
 		loadLinesAndArt(StelApp::getInstance().getDataFilePath("sky_cultures/" + lastLoadedSkyCulture + "/constellationship.fab"),
-			StelApp::getInstance().getDataFilePath("sky_cultures/" + lastLoadedSkyCulture + "/constellationsart.fab"),
-			StelApp::getInstance().getDataFilePath("constellations_boundaries.dat"), lb);
+			StelApp::getInstance().getDataFilePath("sky_cultures/" + lastLoadedSkyCulture + "/constellationsart.fab"), lb);
+		if (lastLoadedSkyCulture=="western") loadBoundaries(StelApp::getInstance().getDataFilePath("constellations_boundaries.dat"));
 		loadNames(StelApp::getInstance().getDataFilePath("sky_cultures/" + lastLoadedSkyCulture + "/constellation_names.eng.fab"));
 	
 		// Translated constellation names for the new sky culture
@@ -103,7 +103,7 @@ void ConstellationMgr::setFontSize(double newFontSize)
 }
 
 // Load line and art data from files
-void ConstellationMgr::loadLinesAndArt(const string &fileName, const string &artfileName, const string &boundaryfileName, LoadingBar& lb)
+void ConstellationMgr::loadLinesAndArt(const string &fileName, const string &artfileName, LoadingBar& lb)
 {
 	selected = NULL;  // avoid segfault
 
@@ -149,8 +149,6 @@ void ConstellationMgr::loadLinesAndArt(const string &fileName, const string &art
 	setFlagLines(flagLines);
 	setFlagNames(flagNames);	
 	setFlagBoundaries(flagBoundaries);	
-
-	loadBoundaries(boundaryfileName);
 
 	FILE *fic = fopen(artfileName.c_str(), "r");
 	if (!fic)

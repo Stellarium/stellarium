@@ -19,11 +19,6 @@
 #ifndef _STEL_CORE_H_
 #define _STEL_CORE_H_
 
-// default font sizes
-#define FontSizeSolarSystem 14.
-#define FontSizeGeneral 12.
-#define FontSizeConstellations 16.
-
 #include <string>
 
 #include "navigator.h"

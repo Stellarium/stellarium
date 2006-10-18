@@ -24,6 +24,7 @@
 #include "callbacks.hpp"
 #include "stel_command_interface.h"
 #include "stel_ui.h"
+#include "stelmodulemgr.h"
 #include "stelfontmgr.h"
 #include "stellocalemgr.h"
 #include "stelskyculturemgr.h"
@@ -54,6 +55,8 @@ StelApp::StelApp(const string& CDIR, const string& LDIR, const string& DATA_ROOT
 	localeMgr = new StelLocaleMgr();
 	fontManager = new StelFontMgr(getDataFilePath("fontmap.dat"));
 	skyCultureMgr = new StelSkyCultureMgr(getDataFilePath("sky_cultures"));
+	
+	moduleMgr = new StelModuleMgr();
 	
 	core = new StelCore(LDIR, DATA_ROOT, boost::callback<void, string>(this, &StelApp::recordCommand));
 	ui = new StelUI(core, this);
@@ -608,15 +611,21 @@ void StelApp::recordCommand(string commandline)
 }
 
 
-// Update translations and font everywhere in the program according to globals
+// Update translations and font everywhere in the program
 void StelApp::updateAppLanguage()
 {
 	// update translations and font in tui
 	ui->localizeTui();
 }
 
-// Update translations and font for sky everywhere in the program according to globals
+// Update translations and font for sky everywhere in the program
 void StelApp::updateSkyLanguage()
 {
 	core->updateSkyLanguage();
+}
+
+// Update and reload sky culture informations everywhere in the program
+void StelApp::updateSkyCulture()
+{
+	core->updateSkyCulture();
 }
