@@ -109,32 +109,31 @@ public:
 	bool getFlagIsolateSelected(void) const { return isolateSelected;}
 	
 	//! Define line color
-	void setLineColor(const Vec3f& c);
+	void setLinesColor(const Vec3f& c);
 	//! Get line color
-	Vec3f getLineColor() const;
+	Vec3f getLinesColor() const;
 	
 	//! Define boundary color
-	void setBoundaryColor(const Vec3f& c);
+	void setBoundariesColor(const Vec3f& c);
 	//! Get current boundary color
-	Vec3f getBoundaryColor() const;
+	Vec3f getBoundariesColor() const;
 		
 	//! Set label color for names
-	void setLabelColor(const Vec3f& c);
+	void setNamesColor(const Vec3f& c);
 	//! Get label color for names
-	Vec3f getLabelColor() const;
+	Vec3f getNamesColor() const;
 	
 	//! Define font size to use for constellation names display
 	void setFontSize(double newFontSize);
 	
 	//! Define which constellation is selected from its abbreviation
 	void setSelected(const string& abbreviation) {setSelectedConst(findFromAbbreviation(abbreviation));}
-
-	StelObject getSelected(void) const;
 	
 	//! Define which constellation is selected from a star number
 	void setSelected(const StelObject &s) {if (!s) setSelectedConst(NULL); else setSelectedConst(is_star_in(s));}
 	
-	void setFlagGravityLabel(bool g);
+	StelObject getSelected(void) const;	
+
 private:
 	bool loadBoundaries(const string& conCatFile);
 	void draw_lines(Projector * prj) const;
@@ -147,8 +146,8 @@ private:
     Constellation* findFromAbbreviation(const string& abbreviation) const;		
     vector<Constellation*> asterisms;
 	double fontSize;
-    s_font *asterFont;
-    HipStarMgr *hipStarMgr;
+    s_font* asterFont;
+    HipStarMgr* hipStarMgr;
 	Constellation* selected;
 	bool isolateSelected;
 	vector<vector<Vec3f> *> allBoundarySegments;

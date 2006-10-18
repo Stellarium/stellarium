@@ -27,6 +27,7 @@
 #include "image.h"
 #include "stel_ui.h"
 #include "stellocalemgr.h"
+#include "stelmodulemgr.h"
 #include "stelskyculturemgr.h"
 
 using namespace std;
@@ -111,11 +112,12 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 		// set core variables
 
 		// TODO: some bounds/error checking here
-
+		ConstellationMgr* cmgr = (ConstellationMgr*)StelApp::getInstance().getModuleMgr().getModule("constellation");
+		
 		if(args["atmosphere_fade_duration"]!="") stcore->setAtmosphereFadeDuration(StelUtils::str_to_double(args["atmosphere_fade_duration"]));
 		else if(args["auto_move_duration"]!="") stcore->setAutomoveDuration( StelUtils::str_to_double(args["auto_move_duration"]));
-		else if(args["constellation_art_fade_duration"]!="") stcore->setConstellationArtFadeDuration(StelUtils::str_to_double(args["constellation_art_fade_duration"]));
-		else if(args["constellation_art_intensity"]!="") stcore->setConstellationArtIntensity(StelUtils::str_to_double(args["constellation_art_intensity"]));
+		else if(args["constellation_art_fade_duration"]!="") cmgr->setArtFadeDuration(StelUtils::str_to_double(args["constellation_art_fade_duration"]));
+		else if(args["constellation_art_intensity"]!="") cmgr->setArtIntensity(StelUtils::str_to_double(args["constellation_art_intensity"]));
 		else if(args["home_planet"]!="") stcore->setHomePlanet(args["home_planet"]);
 		else if(args["landscape_name"]!="") stcore->setLandscape(args["landscape_name"]);
 		else if(args["max_mag_nebula_name"]!="") stcore->setNebulaMaxMagHints(StelUtils::str_to_double(args["max_mag_nebula_name"]));
@@ -680,26 +682,26 @@ int StelCommandInterface::set_flag(string name, string value, bool &newval, bool
 
 		} else status = 0;
 
-
+		ConstellationMgr* cmgr = (ConstellationMgr*)StelApp::getInstance().getModuleMgr().getModule("constellation");
 		if(name=="constellation_drawing") {
-			newval = !stcore->getFlagConstellationLines();
-			stcore->setFlagConstellationLines(newval);
+			newval = !cmgr->getFlagLines();
+			cmgr->setFlagLines(newval);
 		} 
 		else if(name=="constellation_names") {
-			newval = !stcore->getFlagConstellationNames();
-			stcore->setFlagConstellationNames(newval);
+			newval = !cmgr->getFlagNames();
+			cmgr->setFlagNames(newval);
 		} 
 		else if(name=="constellation_art") {
-			newval = !stcore->getFlagConstellationArt();
-			stcore->setFlagConstellationArt(newval);
+			newval = !cmgr->getFlagArt();
+			cmgr->setFlagArt(newval);
 		} 
 		else if(name=="constellation_boundaries") {
-			newval = !stcore->getFlagConstellationBoundaries();
-			stcore->setFlagConstellationBoundaries(newval);
+			newval = !cmgr->getFlagBoundaries();
+			cmgr->setFlagBoundaries(newval);
 		} 
 		else if(name=="constellation_pick") { 
-             newval = !stcore->getFlagConstellationIsolateSelected();
-             stcore->setFlagConstellationIsolateSelected(newval);
+             newval = !cmgr->getFlagIsolateSelected();
+             cmgr->setFlagIsolateSelected(newval);
         }
 		else if(name=="star_twinkle") {
 			newval = !stcore->getFlagStarTwinkle();
@@ -851,11 +853,12 @@ int StelCommandInterface::set_flag(string name, string value, bool &newval, bool
 		
 		} else status = 0;
 
-		if(name=="constellation_drawing") stcore->setFlagConstellationLines(newval);
-		else if(name=="constellation_names") stcore->setFlagConstellationNames(newval);
-		else if(name=="constellation_art") stcore->setFlagConstellationArt(newval);
-		else if(name=="constellation_boundaries") stcore->setFlagConstellationBoundaries(newval);
-     	else if(name=="constellation_pick") stcore->setFlagConstellationIsolateSelected(newval);
+		ConstellationMgr* cmgr = (ConstellationMgr*)StelApp::getInstance().getModuleMgr().getModule("constellation");
+		if(name=="constellation_drawing") cmgr->setFlagLines(newval);
+		else if(name=="constellation_names") cmgr->setFlagNames(newval);
+		else if(name=="constellation_art") cmgr->setFlagArt(newval);
+		else if(name=="constellation_boundaries") cmgr->setFlagBoundaries(newval);
+     	else if(name=="constellation_pick") cmgr->setFlagIsolateSelected(newval);
 		else if(name=="star_twinkle") stcore->setFlagStarTwinkle(newval);
 		else if(name=="point_star") stcore->setFlagPointStar(newval);
 		else if(name=="show_selected_object_info") stapp->ui->FlagShowSelectedObjectInfo = newval;
