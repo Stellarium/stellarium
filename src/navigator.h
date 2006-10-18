@@ -34,6 +34,7 @@ extern const Mat4d mat_j2000_to_vsop87;
 extern const Mat4d mat_vsop87_to_j2000;
 
 class StelObject;
+class LoadingBar;
 
 // Class which manages a navigation context
 // Manage date/time, viewing direction/fov, observer position, and coordinate changes
@@ -49,6 +50,8 @@ public:
 	// Create and initialise to default a navigation context
 	Navigator(Observator* obs);
     virtual ~Navigator();
+
+	virtual void init(const InitParser& conf, LoadingBar& lb);
 
 	// Init the viewing matrix, setting the field of view, the clipping planes, and screen size
 	void init_project_matrix(int w, int h, double near, double far);
@@ -134,6 +137,8 @@ public:
 	VIEWING_MODE_TYPE get_viewing_mode(void) const {return viewing_mode;}
 	void switch_viewing_mode(void);
 
+	const Vec3d& getinitViewPos() {return initViewPos;}
+	
 private:
 
 	// Struct used to store data for auto mov
@@ -177,6 +182,8 @@ private:
 
 	// Position variables
 	Observator* position;
+
+	Vec3d initViewPos;				// Default viewing direction
 
 	VIEWING_MODE_TYPE viewing_mode;   // defines if view corrects for horizon, or uses equatorial coordinates
 };

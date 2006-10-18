@@ -71,19 +71,14 @@ StelCore::StelCore(const string& LDIR, const string& DATA_ROOT, const boost::cal
 	glFrontFace(projection->needGlFrontFaceCW()?GL_CW:GL_CCW);
 
 	tone_converter = new ToneReproductor();
-	atmosphere = new Atmosphere();
-
-	milky_way = new MilkyWay();
+	
 	equ_grid = new SkyGrid(SkyGrid::EQUATORIAL);
 	azi_grid = new SkyGrid(SkyGrid::ALTAZIMUTAL);
 	equator_line = new SkyLine(SkyLine::EQUATOR);
 	ecliptic_line = new SkyLine(SkyLine::ECLIPTIC);
 	meridian_line = new SkyLine(SkyLine::MERIDIAN, 1, 36);
-	cardinals_points = new Cardinals();
-	meteors = new MeteorMgr(10, 60);
-	landscape = new LandscapeOldStyle();
+	
 	script_images = new ImageMgr();
-	telescope_mgr = new TelescopeMgr();
 
 	object_pointer_visibility = true;
 }
@@ -131,7 +126,7 @@ StelCore::~StelCore()
 
 // Load core data and initialize with default values
 void StelCore::init(const InitParser& conf)
-{
+{	
 	// Video Section
 	setViewportSize(conf.get_int("video:screen_w"), conf.get_int("video:screen_h"));
 	setViewportHorizontalOffset(conf.get_int    ("video:horizontal_offset"));
@@ -162,26 +157,7 @@ void StelCore::init(const InitParser& conf)
 
 	// Navigator
 	navigation = new Navigator(observatory);
-	navigation->set_JDay(get_julian_from_sys());
-	navigation->set_local_vision(Vec3f(1,1e-05,0.2));
-	// Compute transform matrices between coordinates systems
-	navigation->update_transform_matrices();
-	navigation->update_model_view_mat();
-	tmpstr = conf.get_str("navigation:viewing_mode");
-	if (tmpstr=="equator")
-		navigation->set_viewing_mode(Navigator::VIEW_EQUATOR);
-	else
-	{
-		if (tmpstr=="horizon")
-			navigation->set_viewing_mode(Navigator::VIEW_HORIZON);
-		else
-		{
-			cerr << "ERROR : Unknown viewing mode type : " << tmpstr << endl;
-			assert(0);
-		}
-	}
-	InitViewPos = StelUtils::str_to_vec3f(conf.get_str("navigation:init_view_pos").c_str());
-	navigation->set_local_vision(InitViewPos);
+	navigation->init(conf, lb);
 	
 	// Load hipparcos stars & names
 	hip_stars = new HipStarMgr();
@@ -198,8 +174,16 @@ void StelCore::init(const InitParser& conf)
 	StelApp::getInstance().getModuleMgr().registerModule(nebulas);
 	
 	// Init milky way
+	milky_way = new MilkyWay();
 	milky_way->set_texture("milkyway.png");
+	setFlagMilkyWay(conf.get_boolean("astro:flag_milky_way"));
+	setMilkyWayIntensity(conf.get_double("astro","milky_way_intensity",1.));
+	
+	// Telescope manager
+	telescope_mgr = new TelescopeMgr();
 	telescope_mgr->init(conf);
+	setFlagTelescopes(conf.get_boolean("astro:flag_telescopes"));
+	setFlagTelescopeName(conf.get_boolean("astro:flag_telescope_name"));
 	
 	// Constellations
 	asterisms = new ConstellationMgr(hip_stars);
@@ -209,8 +193,6 @@ void StelCore::init(const InitParser& conf)
 	// Load the pointer textures
 	StelObject::init_textures();
 
-	tone_converter->set_world_adaptation_luminance(3.75f + atmosphere->get_intensity()*40000.f);
-
 	// Navigation
 	FlagEnableZoomKeys	= conf.get_boolean("navigation:flag_enable_zoom_keys");
 	FlagEnableMoveKeys  = conf.get_boolean("navigation:flag_enable_move_keys");
@@ -219,12 +201,15 @@ void StelCore::init(const InitParser& conf)
 	move_speed			= conf.get_double("navigation","move_speed",0.0004);
 	zoom_speed			= conf.get_double("navigation","zoom_speed", 0.0004);
 
-	// Landscape section
+	// Landscape, atmosphere & cardinal points section
+	atmosphere = new Atmosphere();
+	landscape = new LandscapeOldStyle();
 	setLandscape(observatory->get_landscape_name());
 	setFlagLandscape(conf.get_boolean("landscape", "flag_landscape", conf.get_boolean("landscape", "flag_ground", 1)));  // name change
 	setFlagFog(conf.get_boolean("landscape:flag_fog"));
 	setFlagAtmosphere(conf.get_boolean("landscape:flag_atmosphere"));
 	setAtmosphereFadeDuration(conf.get_double("landscape","atmosphere_fade_duration",1.5));
+	cardinals_points = new Cardinals();
 	cardinals_points->setFlagShow(conf.get_boolean("viewing:flag_cardinal_points"));
 	
 	// Grid and lines
@@ -234,14 +219,11 @@ void StelCore::init(const InitParser& conf)
 	setFlagEclipticLine(conf.get_boolean("viewing:flag_ecliptic_line"));
 	setFlagMeridianLine(conf.get_boolean("viewing:flag_meridian_line"));
 
-	// Telescope manager
-	setFlagTelescopes(conf.get_boolean("astro:flag_telescopes"));
-	setFlagTelescopeName(conf.get_boolean("astro:flag_telescope_name"));
-
-	setFlagMilkyWay(conf.get_boolean("astro:flag_milky_way"));
-	setMilkyWayIntensity(conf.get_double("astro","milky_way_intensity",1.));
-
+	// Meteors
+	meteors = new MeteorMgr(10, 60);
 	setMeteorsRate(conf.get_int("astro", "meteor_rate", 10));
+	
+	tone_converter->set_world_adaptation_luminance(3.75f + atmosphere->get_intensity()*40000.f);
 }
 
 // Update all the objects in function of the time
@@ -799,7 +781,7 @@ void StelCore::autoZoomOut(float move_duration, bool full)
 	}
 
 	projection->zoom_to(InitFov, move_duration);
-	navigation->move_to(InitViewPos, move_duration, true, -1);
+	navigation->move_to(navigation->getinitViewPos(), move_duration, true, -1);
 	navigation->set_flag_traking(false);
 	navigation->set_flag_lock_equ_pos(0);
 }
