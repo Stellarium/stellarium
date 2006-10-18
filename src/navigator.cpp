@@ -43,6 +43,30 @@ Navigator::Navigator(Observator* obs) : flag_traking(0), flag_lock_equ_pos(0), f
 Navigator::~Navigator()
 {}
 
+void Navigator::init(const InitParser& conf, LoadingBar& lb)
+{
+	set_JDay(get_julian_from_sys());
+	set_local_vision(Vec3f(1,1e-05,0.2));
+	// Compute transform matrices between coordinates systems
+	update_transform_matrices();
+	update_model_view_mat();
+	string tmpstr = conf.get_str("navigation:viewing_mode");
+	if (tmpstr=="equator")
+		set_viewing_mode(Navigator::VIEW_EQUATOR);
+	else
+	{
+		if (tmpstr=="horizon")
+			set_viewing_mode(Navigator::VIEW_HORIZON);
+		else
+		{
+			cerr << "ERROR : Unknown viewing mode type : " << tmpstr << endl;
+			assert(0);
+		}
+	}
+	initViewPos = StelUtils::str_to_vec3f(conf.get_str("navigation:init_view_pos"));
+	set_local_vision(initViewPos);
+}
+
 ////////////////////////////////////////////////////////////////////////////////
 void Navigator::update_vision_vector(int delta_time,const StelObject &selected)
 {

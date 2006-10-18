@@ -480,7 +480,6 @@ private:
 	double move_speed, zoom_speed;		// Speed of movement and zooming
 
 	float InitFov;						// Default viewing FOV
-	Vec3d InitViewPos;					// Default viewing direction
 	int FlagManualZoom;					// Define whether auto zoom can go further
 	float auto_move_duration;			// Duration of movement for the auto move to a selected objectin seconds
 
