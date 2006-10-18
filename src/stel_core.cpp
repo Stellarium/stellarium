@@ -23,11 +23,13 @@
 
 #include "stel_core.h"
 #include "stelapp.h"
+#include "stelmodulemgr.h"
 #include "stel_utility.h"
-
 #include "geodesic_grid.h"
 #include "hip_star_mgr.h"
 #include "telescope_mgr.h"
+
+#define LOADING_BAR_DEFAULT_FONT_SIZE 12.
 
 void StelCore::setFlagTelescopes(bool b)
 {
@@ -60,7 +62,7 @@ void StelCore::telescopeGoto(int nr)
 
 
 StelCore::StelCore(const string& LDIR, const string& DATA_ROOT, const boost::callback<void, string>& recordCallback) :
-		projection(NULL), selected_object(NULL), hip_stars(NULL),
+		projection(NULL), selected_object(NULL), hip_stars(NULL), asterisms(NULL),
 		nebulas(NULL), ssystem(NULL), milky_way(NULL), telescope_mgr(NULL),
 		deltaFov(0.),
 		deltaAlt(0.), deltaAz(0.), move_speed(0.00025), firstTime(1)
@@ -72,8 +74,6 @@ StelCore::StelCore(const string& LDIR, const string& DATA_ROOT, const boost::cal
 
 	tone_converter = new ToneReproductor();
 	atmosphere = new Atmosphere();
-	hip_stars = new HipStarMgr();
-	asterisms = new ConstellationMgr(hip_stars);
 	ssystem = new SolarSystem();
 	observatory = new Observator(*ssystem);
 	navigation = new Navigator(observatory);
@@ -150,13 +150,12 @@ void StelCore::init(const InitParser& conf)
 	const Projector::PROJECTOR_MASK_TYPE projMaskType = Projector::stringToMaskType(tmpstr);
 	projection->setMaskType(projMaskType);
 
-	LoadingBar lb(projection, FontSizeGeneral, "logo24bits.png",
+	LoadingBar lb(projection, LOADING_BAR_DEFAULT_FONT_SIZE, "logo24bits.png",
 	              getViewportWidth(), getViewportHeight(),
 	              StelUtils::stringToWstring(VERSION), 45, 320, 121);
 
 	// Init the solar system first
 	ssystem->init(lb);
-	setPlanetsScale(getStarScale());
 
 	observatory->load(conf, "init_location");
 
@@ -166,6 +165,7 @@ void StelCore::init(const InitParser& conf)
 	if(firstTime)
 	{
 		// Load hipparcos stars & names
+		hip_stars = new HipStarMgr();
 		hip_stars->init(conf, lb);
 		int grid_level = hip_stars->getMaxGridLevel();
 
@@ -179,7 +179,9 @@ void StelCore::init(const InitParser& conf)
 		milky_way->set_texture("milkyway.png");
 		telescope_mgr->init(conf);
 		
+		asterisms = new ConstellationMgr(hip_stars);
 		asterisms->init(conf, lb);
+		StelApp::getInstance().getModuleMgr().registerModule(asterisms);
 	}
 
 	setLandscape(observatory->get_landscape_name());
@@ -200,6 +202,7 @@ void StelCore::init(const InitParser& conf)
 	ssystem->computeTransMatrices(navigation->get_JDay(),
 	                              navigation->getHomePlanet());
 	setPlanetsSelected("");	// Fix a bug on macosX! Thanks Fumio!
+	setPlanetsScale(getStarScale());
 	
 	// Compute transform matrices between coordinates systems
 	navigation->update_transform_matrices();
@@ -254,7 +257,7 @@ void StelCore::init(const InitParser& conf)
 	setAtmosphereFadeDuration(conf.get_double("landscape","atmosphere_fade_duration",1.5));
 
 	// Viewing section
-	constellationFontSize = conf.get_double("viewing","constellation_font_size",FontSizeConstellations);
+	constellationFontSize = conf.get_double("viewing","constellation_font_size",16.);
 	setFlagConstellationLines(		conf.get_boolean("viewing:flag_constellation_drawing"));
 	setFlagConstellationNames(		conf.get_boolean("viewing:flag_constellation_name"));
 	setFlagConstellationBoundaries(	conf.get_boolean("viewing","flag_constellation_boundaries",false));
@@ -839,10 +842,8 @@ void StelCore::autoZoomIn(float move_duration, bool allow_manual_zoom)
 // Unzoom and go to the init position
 void StelCore::autoZoomOut(float move_duration, bool full)
 {
-
 	if (selected_object && !full)
 	{
-
 		// If the selected object has satellites, unzoom to satellites view
 		// unless specified otherwise
 		float satfov = selected_object.get_satellites_fov(navigation);
@@ -867,24 +868,23 @@ void StelCore::autoZoomOut(float move_duration, bool full)
 	navigation->move_to(InitViewPos, move_duration, true, -1);
 	navigation->set_flag_traking(false);
 	navigation->set_flag_lock_equ_pos(0);
-
 }
 
 // Update the sky culture for all the modules
 // TODO make generic
 void StelCore::updateSkyCulture()
 {
-	LoadingBar lb(projection, FontSizeGeneral, "logo24bits.png", getViewportWidth(), getViewportHeight(), StelUtils::stringToWstring(VERSION), 45, 320, 121);
+	LoadingBar lb(projection, LOADING_BAR_DEFAULT_FONT_SIZE, "logo24bits.png", getViewportWidth(), getViewportHeight(), StelUtils::stringToWstring(VERSION), 45, 320, 121);
 	if (asterisms) asterisms->updateSkyCulture(lb);
 	
 	// as constellations have changed, clear out any selection and retest for match!
 	if (selected_object && selected_object.get_type()==STEL_OBJECT_STAR)
 	{
-		asterisms->setSelected(selected_object);
+		if (asterisms) asterisms->setSelected(selected_object);
 	}
 	else
 	{
-		asterisms->setSelected(StelObject());
+		if (asterisms) asterisms->setSelected(StelObject());
 	}
 	
 	if (hip_stars) hip_stars->updateSkyCulture(lb);

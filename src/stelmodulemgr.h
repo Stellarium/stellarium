@@ -23,19 +23,15 @@
 #include "stelmodule.h"
 
 /**
- * Singleton instance used to manage a collection of StelModule
+ * Class used to manage a collection of StelModule
  * TODO : Manage drawing order, update order
  * @author Fabien Chereau <stellarium@free.fr>
  */
 class StelModuleMgr{
 public:
-    ~StelModuleMgr();
 	
-	//! Return the singleton StelModuleMgr instance
-	static StelModuleMgr& getInstance()
-	{
-		return singleton;
-	}
+	StelModuleMgr();
+    ~StelModuleMgr();
 	
 	//! Add a static (no dynamic linking) module which is already initialized
 	void registerModule(StelModule* m)
@@ -53,7 +49,7 @@ public:
 		// TODO use glib here
 	}	
 	
-	StelModule& getStelModule(const string& moduleID)
+	StelModule& getModule(const string& moduleID)
 	{
 		std::map<string, StelModule*>::const_iterator iter = modules.find(moduleID);
 		if (iter==modules.end())
@@ -66,13 +62,8 @@ public:
 	
 private:
 	
-	StelModuleMgr();
-	
 	//! The main module list
 	std::map<string, StelModule*> modules;
-	
-	//! The static singleton
-	static StelModuleMgr singleton;
 };
 
 #endif

@@ -19,6 +19,8 @@
 
 #include <iostream>
 #include <algorithm>
+#include "s_texture.h"
+#include "projector.h"
 #include "constellation.h"
 #include "hip_star_mgr.h"
 #include "navigator.h"

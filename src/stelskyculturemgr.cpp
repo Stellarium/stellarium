@@ -20,10 +20,11 @@
 #include <iostream>
 #include <fstream>
 #include <dirent.h>
+#include "stelskyculturemgr.h"
 #include "translator.h"
 #include "init_parser.h"
 #include <cassert>
-#include "stelskyculturemgr.h"
+#include "stelapp.h"
 
 StelSkyCultureMgr::StelSkyCultureMgr(const string& cultureDirPath)
 {
@@ -77,6 +78,7 @@ bool StelSkyCultureMgr::setSkyCultureDir(const string& cultureDir)
 		return false;
 	}
 	skyCultureDir = cultureDir;
+	StelApp::getInstance().updateSkyCulture();
 	return true;
 }
 

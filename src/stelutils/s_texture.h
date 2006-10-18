@@ -20,10 +20,6 @@
 #ifndef _S_TEXTURE_H_
 #define _S_TEXTURE_H_
 
-#ifdef HAVE_CONFIG_H
-# include "config.h"
-#endif
-
 #include <string>
 
 #include "SDL_opengl.h"

@@ -28,6 +28,7 @@
 #include "fader.h"
 #include "translator.h"
 
+class s_texture;
 class Navigator;
 class ToneReproductor;
 

@@ -20,8 +20,10 @@
 #ifndef _LOADINGBAR_H_
 #define _LOADINGBAR_H_
 
-#include "projector.h"
-#include "s_font.h"
+
+class s_font;
+class Projector;
+class s_texture;
 
 // Class which is used to display loading bar
 class LoadingBar
