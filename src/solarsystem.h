@@ -29,69 +29,48 @@
 #include "stellarium.h"
 #include "planet.h"
 #include "stel_object.h"
+#include "stelobjectmgr.h"
 
 class EllipticalOrbit;
 class LoadingBar;
 class Translator;
+class InitParser;
 
-class SolarSystem
+class SolarSystem : public StelObjectMgr
 {
 public:
     SolarSystem();
     virtual ~SolarSystem();
 
+	// TODO remove that!!!!!!!!
 	void update(int delta_time, Navigator* nav);
+
+	///////////////////////////////////////////////////////////////////////////
+	// Methods defined in the StelModule class
+	virtual void init(const InitParser& conf, LoadingBar& lb);
+	virtual string getModuleID() const {return "ssystem";}
+	//! Return the maximum squared distance in pixels that any planet has travelled since the last update.
+	virtual double draw(Projector *prj, const Navigator *nav, ToneReproductor *eye);
+	virtual void update(double deltaTime) {;}	// TODO do that!!!!!!!!
+	virtual void updateI18n();
+	virtual void updateSkyCulture(LoadingBar& lb) {;}
 	
-	// Draw all the elements of the solar system
-	// Return the maximum squared distance in pixels that any planet
-	// has travelled since the last update.
-    double draw(Projector * du, const Navigator * nav, 
-			  const ToneReproductor* eye, 
-			  bool flag_point);
-	
-	// Load the bodies data from a file
-	bool init(LoadingBar& lb);
-
-	//! @brief Update i18 names from english names according to passed translator
-	//! The translation is done using gettext with translated strings defined in translations.h
-	void updateI18n();
-
-	wstring getPlanetHashString();  // locale and ssystem.ini names, newline delimiter, for tui
-
-	void setFontSize(float newFontSize);
-	void setLabelColor(const Vec3f& c) {Planet::set_label_color(c);}
-	const Vec3f& getLabelColor(void) const {return Planet::getLabelColor();}
-	void setOrbitColor(const Vec3f& c) {Planet::set_orbit_color(c);}
-	Vec3f getOrbitColor(void) const {return Planet::getOrbitColor();}
- 
-	// Compute the position for every elements of the solar system.
-    // home_planet is needed for light travel time computation
-	void computePositions(double date,const Planet *home_planet);
-
-	// Compute the transformation matrix for every elements of the solar system.
-    // home_planet is needed for light travel time computation
-    void computeTransMatrices(double date,const Planet *home_planet);
-
-	// Search if any Planet is close to position given in earth equatorial position.
-	StelObject search(Vec3d, const Navigator * nav, const Projector * prj) const;
-
-	// Return a stl vector containing the planets located inside the lim_fov circle around position v
-	vector<StelObject> search_around(Vec3d v,
-                                     double lim_fov,
-                                     const Navigator * nav,
-                                     const Projector * prj) const;
-
-	//! Return the matching planet pointer if exists or NULL
-	Planet* searchByEnglishName(string planetEnglishName) const;
-	
+	///////////////////////////////////////////////////////////////////////////
+	// Methods defined in StelObjectManager class
+	//! Return a stl vector containing the planets located inside the limitFov circle around position v
+	virtual vector<StelObject> searchAround(const Vec3d& v, double limitFov, const Navigator * nav, const Projector * prj) const;
 	//! Return the matching planet pointer if exists or NULL
 	//! @param planetNameI18n The case sensistive translated planet name
-	StelObject searchByNamesI18(wstring planetNameI18n) const;
+	virtual StelObject searchByNameI18n(const wstring& nameI18n) const;
 	
-	Planet* getSun(void) const {return sun;}
-	Planet* getEarth(void) const {return earth;}
-	Planet* getMoon(void) const {return moon;}
-
+	//! @brief Find and return the list of at most maxNbItem objects auto-completing the passed object I18n name
+	//! @param objPrefix the case insensitive first letters of the searched object
+	//! @param maxNbItem the maximum number of returned object names
+	//! @return a vector of matching object name by order of relevance, or an empty vector if nothing match
+	virtual vector<wstring> listMatchingObjectsI18n(const wstring& objPrefix, unsigned int maxNbItem=5) const;
+	
+	///////////////////////////////////////////////////////////////////////////
+	// Properties setters and getters
 	//! Activate/Deactivate planets display
 	void setFlagPlanets(bool b) {Planet::setflagShow(b);}
 	bool getFlagPlanets(void) const {return Planet::getflagShow();}
@@ -108,19 +87,32 @@ public:
 	void setFlagOrbits(bool b);
 	bool getFlagOrbits(void) const {return flagOrbits;}
 
+	//! Activate/Deactivate light travel time correction
 	void setFlagLightTravelTime(bool b) {flag_light_travel_time = b;}
 	bool getFlagLightTravelTime(void) const {return flag_light_travel_time;}	
 	
-	//! Start/stop accumulating new trail data (clear old data)
-	void startTrails(bool b);
+	//! Set planet names font size
+	void setFontSize(float newFontSize);
 	
-	void setTrailColor(const Vec3f& c)  {Planet::set_trail_color(c);}
-	Vec3f getTrailColor(void) const {return Planet::getTrailColor();}
-	void updateTrails(const Navigator* nav);
+	//! Set/Get planets names color
+	void setNamesColor(const Vec3f& c) {Planet::set_label_color(c);}
+	const Vec3f& getNamesColor(void) const {return Planet::getLabelColor();}
+	
+	//! Set/Get orbits lines color
+	void setOrbitsColor(const Vec3f& c) {Planet::set_orbit_color(c);}
+	Vec3f getOrbitsColor(void) const {return Planet::getOrbitColor();}
+	
+	//! Set/Get planets trails color
+	void setTrailsColor(const Vec3f& c)  {Planet::set_trail_color(c);}
+	Vec3f getTrailsColor(void) const {return Planet::getTrailColor();}
 	
 	//! Set/Get base planets display scaling factor 
 	void setScale(float scale) {Planet::setScale(scale);}
 	float getScale(void) const {return Planet::getScale();}
+	
+	//! Activate/Deactivate display of planets halos as GLPoints
+	void setFlagPoint(bool b) {flagPoint = b;}
+	bool getFlagPoint() {return flagPoint;}
 	
 	//! Set/Get if Moon display is scaled
 	void setFlagMoonScale(bool b)
@@ -133,13 +125,35 @@ public:
 	void setMoonScale(float f) {moonScale = f; if (flagMoonScale) getMoon()->set_sphere_scale(moonScale);}
 	float getMoonScale(void) const {return moonScale;}		
 	
+	///////////////////////////////////////////////////////////////////////////
+	// Other public methods
+	wstring getPlanetHashString();  // locale and ssystem.ini names, newline delimiter, for tui
+ 
+	//! Compute the position and transform matrix for every elements of the solar system.
+    //! observerPos is needed for light travel time computation.
+    //! @param observerPos position of the observer in heliocentric ecliptic frame.
+	void computePositions(double date, const Vec3d& observerPos = Vec3d(0,0,0));
+
+	// Search if any Planet is close to position given in earth equatorial position.
+	StelObject search(Vec3d, const Navigator * nav, const Projector * prj) const;
+
+	//! Return the matching planet pointer if exists or NULL
+	Planet* searchByEnglishName(string planetEnglishName) const;
+	
+	Planet* getSun(void) const {return sun;}
+	Planet* getEarth(void) const {return earth;}
+	Planet* getMoon(void) const {return moon;}
+	
+	//! Start/stop accumulating new trail data (clear old data)
+	void startTrails(bool b);
+	
+	void updateTrails(const Navigator* nav);
+	
 	//! Get list of all the translated planets name
 	vector<wstring> getNamesI18(void);
 	
-	//! Find and return the list of at most maxNbItem objects auto-completing the passed object I18n name
-	vector<wstring> listMatchingObjectsI18n(const wstring& objPrefix, unsigned int maxNbItem) const;
-	
-	//! Set selected planet by english name or "" to select none
+	//! Set selected planets by englishName
+	//! @param englishName The planet name or "" to select no planet
 	void setSelected(const string& englishName) {setSelected(searchByEnglishName(englishName));}
 	
 	//! Set selected object from its pointer
@@ -149,6 +163,13 @@ public:
 	StelObject getSelected(void) const {return selected;}
 	
 private:
+	// Compute the transformation matrix for every elements of the solar system.
+    // observerPos is needed for light travel time computation
+    void computeTransMatrices(double date, const Vec3d& observerPos = Vec3d(0,0,0));
+
+	// Load the bodies data from a file
+	void loadPlanets(LoadingBar& lb);
+
 	Planet* sun;
 	Planet* moon;
 	Planet* earth;
@@ -164,6 +185,9 @@ private:
 
 	double fontSize;
 	s_font& planet_name_font;
+	
+	// Whether to display halo as GLpoints
+	bool flagPoint;
 	
 	vector<Planet*> system_planets;		// Vector containing all the bodies of the system
 	vector<EllipticalOrbit*> ell_orbits;// Pointers on created elliptical orbits

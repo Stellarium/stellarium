@@ -25,6 +25,7 @@
 #include "stellocalemgr.h"
 #include "stelskyculturemgr.h"
 #include "stelmodulemgr.h"
+#include "hip_star_mgr.h"
 
 using namespace s_gui;
 
@@ -58,29 +59,30 @@ Component* StelUI::createConfigWindow(s_font& courierFont)
 	Picture* pstar = new Picture(starp, x-50, y+5, 32, 32);
 	tab_render->addComponent(pstar);
 
-	stars_cbx = new LabeledCheckBox(core->getFlagStars(), _("Stars"));
+	HipStarMgr* smgr = (HipStarMgr*)StelApp::getInstance().getModuleMgr().getModule("stars");
+	stars_cbx = new LabeledCheckBox(smgr->getFlagStars(), _("Stars"));
 	stars_cbx->setOnPressCallback(callback<void>(this, &StelUI::updateConfigVariables));
 	tab_render->addComponent(stars_cbx);
 	stars_cbx->setPos(x,y); y+=15;
 
-	star_names_cbx = new LabeledCheckBox(core->getFlagStarName(), _("Star Names. Up to mag :"));
+	star_names_cbx = new LabeledCheckBox(smgr->getFlagNames(), _("Star Names. Up to mag :"));
 	star_names_cbx->setOnPressCallback(callback<void>(this, &StelUI::updateConfigVariables));
 	tab_render->addComponent(star_names_cbx);
 	star_names_cbx->setPos(x,y);
 
-	max_mag_star_name = new FloatIncDec(&courierFont, tex_up, tex_down, -1.5, 9, core->getMaxMagStarName(), 0.5);
+	max_mag_star_name = new FloatIncDec(&courierFont, tex_up, tex_down, -1.5, 9, smgr->getMaxMagName(), 0.5);
 	max_mag_star_name->setOnPressCallback(callback<void>(this, &StelUI::updateConfigVariables));
 	tab_render->addComponent(max_mag_star_name);
 	max_mag_star_name->setPos(x + 320,y);
 
 	y+=15;
 
-	star_twinkle_cbx = new LabeledCheckBox(core->getFlagStarTwinkle(), _("Star Twinkle. Amount :"));
+	star_twinkle_cbx = new LabeledCheckBox(smgr->getFlagTwinkle(), _("Star Twinkle. Amount :"));
 	star_twinkle_cbx->setOnPressCallback(callback<void>(this, &StelUI::updateConfigVariables));
 	tab_render->addComponent(star_twinkle_cbx);
 	star_twinkle_cbx->setPos(x,y);
 
-	star_twinkle_amount = new FloatIncDec(&courierFont, tex_up, tex_down, 0, 0.6, core->getStarTwinkleAmount(), 0.1);
+	star_twinkle_amount = new FloatIncDec(&courierFont, tex_up, tex_down, 0, 0.6, smgr->getTwinkleAmount(), 0.1);
 	star_twinkle_amount->setOnPressCallback(callback<void>(this, &StelUI::updateConfigVariables));
 	tab_render->addComponent(star_twinkle_amount);
 	star_twinkle_amount->setPos(x + 320,y);
@@ -122,8 +124,9 @@ Component* StelUI::createConfigWindow(s_font& courierFont)
 	tab_render->addComponent(nebulas_names_cbx);
 	nebulas_names_cbx->setPos(x,y);
 
+	NebulaMgr* nmgr = (NebulaMgr*)StelApp::getInstance().getModuleMgr().getModule("nebulas");
 	max_mag_nebula_name = new FloatIncDec(&courierFont, tex_up, tex_down, 0, 12,
-		core->getNebulaMaxMagHints(), 0.5);
+		nmgr->getMaxMagHints(), 0.5);
 	max_mag_nebula_name->setOnPressCallback(callback<void>(this, &StelUI::updateConfigVariables));
 	tab_render->addComponent(max_mag_nebula_name);
 	max_mag_nebula_name->setPos(x + 320,y);
@@ -710,6 +713,8 @@ void StelUI::gotoSearchedObject(void)
 
 void StelUI::updateConfigVariables(void)
 {
+	NebulaMgr* nmgr = (NebulaMgr*)StelApp::getInstance().getModuleMgr().getModule("nebulas");
+
 	app->commander->execute_command("flag stars ", stars_cbx->getState());
 	app->commander->execute_command("flag star_names ", star_names_cbx->getState());
 	app->commander->execute_command("set max_mag_star_name ", max_mag_star_name->getValue());
@@ -721,7 +726,7 @@ void StelUI::updateConfigVariables(void)
 	app->commander->execute_command("flag constellation_pick ", sel_constellation_cbx->getState());
 	app->commander->execute_command("flag nebula_names ", nebulas_names_cbx->getState());
 	app->commander->execute_command("set max_mag_nebula_name ", max_mag_nebula_name->getValue());
-	core->setFlagNebulaDisplayNoTexture(nebulas_no_texture_cbx->getState());
+	nmgr->setFlagDisplayNoTexture(nebulas_no_texture_cbx->getState());
 	app->commander->execute_command("flag planet_names ", planets_hints_cbx->getState());
 	app->commander->execute_command("flag moon_scaled ", moon_x4_cbx->getState());
 	app->commander->execute_command("flag equatorial_grid ", equator_grid_cbx->getState());
@@ -833,25 +838,31 @@ void StelUI::saveRenderOptions(void)
 	InitParser conf;
 	conf.load(app->getConfigFilePath());
 
-	conf.set_boolean("astro:flag_stars", core->getFlagStars());
-	conf.set_boolean("astro:flag_star_name", core->getFlagStarName());
-	conf.set_double("stars:max_mag_star_name", core->getMaxMagStarName());
-	conf.set_boolean("stars:flag_star_twinkle", core->getFlagStarTwinkle());
-	conf.set_double("stars:star_twinkle_amount", core->getStarTwinkleAmount());
+	HipStarMgr* smgr = (HipStarMgr*)StelApp::getInstance().getModuleMgr().getModule("stars");
+	ConstellationMgr* cmgr = (ConstellationMgr*)StelApp::getInstance().getModuleMgr().getModule("constellations");
+	NebulaMgr* nmgr = (NebulaMgr*)StelApp::getInstance().getModuleMgr().getModule("nebulas");
+	SolarSystem* ssmgr = (SolarSystem*)StelApp::getInstance().getModuleMgr().getModule("ssystem");
 	
-	ConstellationMgr* cmgr = (ConstellationMgr*)StelApp::getInstance().getModuleMgr().getModule("constellation");
+	conf.set_boolean("astro:flag_stars", smgr->getFlagStars());
+	conf.set_boolean("astro:flag_star_name", smgr->getFlagNames());
+	conf.set_double("stars:max_mag_star_name", smgr->getMaxMagName());
+	conf.set_boolean("stars:flag_star_twinkle", smgr->getFlagTwinkle());
+	conf.set_double("stars:star_twinkle_amount", smgr->getTwinkleAmount());
+	
 	conf.set_boolean("viewing:flag_constellation_drawing", cmgr->getFlagLines());
 	conf.set_boolean("viewing:flag_constellation_name", cmgr->getFlagNames());
 	conf.set_boolean("viewing:flag_constellation_boundaries", cmgr->getFlagBoundaries());
 	conf.set_boolean("viewing:flag_constellation_pick", cmgr->getFlagIsolateSelected());
-	conf.set_boolean("astro:flag_nebula", core->getFlagNebula());
-	conf.set_boolean("astro:flag_nebula_name", core->getFlagNebulaHints());
-	conf.set_double("astro:max_mag_nebula_name", core->getNebulaMaxMagHints());
-	conf.set_boolean("astro:flag_nebula_display_no_texture", core->getFlagNebulaDisplayNoTexture());
-	conf.set_boolean("astro:flag_planets", core->getFlagPlanets());
-	conf.set_boolean("astro:flag_planets_hints", core->getFlagPlanetsHints());
-	conf.set_double("viewing:moon_scale", core->getMoonScale());
-	conf.set_boolean("viewing:flag_moon_scaled", core->getFlagMoonScaled());
+	
+	conf.set_boolean("astro:flag_nebula", nmgr->getFlagShow());
+	conf.set_boolean("astro:flag_nebula_name", nmgr->getFlagHints());
+	conf.set_double("astro:max_mag_nebula_name", nmgr->getMaxMagHints());
+	conf.set_boolean("astro:flag_nebula_display_no_texture", nmgr->getFlagDisplayNoTexture());
+	
+	conf.set_boolean("astro:flag_planets", ssmgr->getFlagPlanets());
+	conf.set_boolean("astro:flag_planets_hints", ssmgr->getFlagHints());
+	conf.set_double("viewing:moon_scale", ssmgr->getMoonScale());
+	conf.set_boolean("viewing:flag_moon_scaled", ssmgr->getFlagMoonScale());
 	conf.set_boolean("viewing:flag_night", app->getVisionModeNight());
 	conf.set_boolean("viewing:flag_equatorial_grid", core->getFlagEquatorGrid());
 	conf.set_boolean("viewing:flag_azimutal_grid", core->getFlagAzimutalGrid());
@@ -925,23 +936,33 @@ void StelUI::updateVideoVariables(void)
 
 void StelUI::updateConfigForm(void)
 {
-	stars_cbx->setState(core->getFlagStars());
-	star_names_cbx->setState(core->getFlagStarName());
-	max_mag_star_name->setValue(core->getMaxMagStarName());
-	star_twinkle_cbx->setState(core->getFlagStarTwinkle());
-	star_twinkle_amount->setValue(core->getStarTwinkleAmount());
+	// Stars
+	HipStarMgr* smgr = (HipStarMgr*)StelApp::getInstance().getModuleMgr().getModule("stars");
+	ConstellationMgr* cmgr = (ConstellationMgr*)StelApp::getInstance().getModuleMgr().getModule("constellations");
+	NebulaMgr* nmgr = (NebulaMgr*)StelApp::getInstance().getModuleMgr().getModule("nebulas");
+	SolarSystem* ssmgr = (SolarSystem*)StelApp::getInstance().getModuleMgr().getModule("ssystem");
 	
-	ConstellationMgr* cmgr = (ConstellationMgr*)StelApp::getInstance().getModuleMgr().getModule("constellation");
+	stars_cbx->setState(smgr->getFlagStars());
+	star_names_cbx->setState(smgr->getFlagNames());
+	max_mag_star_name->setValue(smgr->getMaxMagName());
+	star_twinkle_cbx->setState(smgr->getFlagTwinkle());
+	star_twinkle_amount->setValue(smgr->getTwinkleAmount());
+	
+	// Constellations
 	constellation_cbx->setState(cmgr->getFlagLines());
 	constellation_name_cbx->setState(cmgr->getFlagNames());
 	constellation_boundaries_cbx->setState(cmgr->getFlagBoundaries());
 	sel_constellation_cbx->setState(cmgr->getFlagIsolateSelected());
-	nebulas_names_cbx->setState(core->getFlagNebulaHints());
-	max_mag_nebula_name->setValue(core->getNebulaMaxMagHints());
-	nebulas_no_texture_cbx->setState(core->getFlagNebulaDisplayNoTexture());
-	planets_cbx->setState(core->getFlagPlanets());
-	planets_hints_cbx->setState(core->getFlagPlanetsHints());
-	moon_x4_cbx->setState(core->getFlagMoonScaled());
+	
+	// Nebulas
+	nebulas_names_cbx->setState(nmgr->getFlagHints());
+	max_mag_nebula_name->setValue(nmgr->getMaxMagHints());
+	nebulas_no_texture_cbx->setState(nmgr->getFlagDisplayNoTexture());
+	
+	// Planets
+	planets_cbx->setState(ssmgr->getFlagPlanets());
+	planets_hints_cbx->setState(ssmgr->getFlagHints());
+	moon_x4_cbx->setState(ssmgr->getFlagMoonScale());
 	equator_grid_cbx->setState(core->getFlagEquatorGrid());
 	azimuth_grid_cbx->setState(core->getFlagAzimutalGrid());
 	equator_cbx->setState(core->getFlagEquatorLine());

@@ -97,19 +97,19 @@ public:
     bool getFlagStars(void) const {return starsFader==true;}    
     
     /** Set display flag for Star names */
-    void setFlagStarName(bool b) {names_fader=b;}
+    void setFlagNames(bool b) {names_fader=b;}
     /** Get display flag for Star names */
-    bool getFlagStarName(void) const {return names_fader==true;}
+    bool getFlagNames(void) const {return names_fader==true;}
     
     /** Set display flag for Star Scientific names */
-    void setFlagStarSciName(bool b) {flagStarSciName=b;}
+    void setFlagStarsSciNames(bool b) {flagStarSciName=b;}
     /** Get display flag for Star Scientific names */
-    bool getFlagStarSciName(void) const {return flagStarSciName;}    
+    bool getFlagStarsSciNames(void) const {return flagStarSciName;}    
     
     /** Set flag for Star twinkling */
-    void setFlagStarTwinkle(bool b) {flagStarTwinkle=b;}
+    void setFlagTwinkle(bool b) {flagStarTwinkle=b;}
     /** Get flag for Star twinkling */
-    bool getFlagStarTwinkle(void) const {return flagStarTwinkle;}    
+    bool getFlagTwinkle(void) const {return flagStarTwinkle;}    
         
     /** Set flag for displaying Star as GLpoints (faster but not so nice) */
     void setFlagPointStar(bool b) {flagPointStar=b;}
@@ -117,34 +117,34 @@ public:
     bool getFlagPointStar(void) const {return flagPointStar;}    
     
     /** Set maximum magnitude at which stars names are displayed */
-    void setMaxMagStarName(float b) {maxMagStarName=b;}
+    void setMaxMagName(float b) {maxMagStarName=b;}
     /** Get maximum magnitude at which stars names are displayed */
-    float getMaxMagStarName(void) const {return maxMagStarName;}    
+    float getMaxMagName(void) const {return maxMagStarName;}    
     
     /** Set maximum magnitude at which stars scientific names are displayed */
-    void setMaxMagStarSciName(float b) {maxMagStarSciName=b;}
+    void setMaxMagSciName(float b) {maxMagStarSciName=b;}
     /** Get maximum magnitude at which stars scientific names are displayed */
-    float getMaxMagStarSciName(void) const {return maxMagStarSciName;}    
+    float getMaxMagSciName(void) const {return maxMagStarSciName;}    
         
     /** Set base stars display scaling factor */
-    void setStarScale(float b) {starScale=b;}
+    void setScale(float b) {starScale=b;}
     /** Get base stars display scaling factor */
-    float getStarScale(void) const {return starScale;}            
+    float getScale(void) const {return starScale;}            
     
     /** Set stars display scaling factor wrt magnitude */
-    void setStarMagScale(float b) {starMagScale=b;}
+    void setMagScale(float b) {starMagScale=b;}
     /** Get base stars display scaling factor wrt magnitude */
-    float getStarMagScale(void) const {return starMagScale;}
+    float getMagScale(void) const {return starMagScale;}
 
     /** Set stars twinkle amount */
-    void setStarTwinkleAmount(float b) {twinkleAmount=b;}
+    void setTwinkleAmount(float b) {twinkleAmount=b;}
     /** Get stars twinkle amount */
-    float getStarTwinkleAmount(void) const {return twinkleAmount;}
+    float getTwinkleAmount(void) const {return twinkleAmount;}
     
     /** Set stars limiting display magnitude */
-    void setStarLimitingMag(float f) {limitingMag = f;}
+    void setLimitingMag(float f) {limitingMag = f;}
     /** Get stars limiting display magnitude */
-    float getStarLimitingMag(void) const {return limitingMag;}
+    float getLimitingMag(void) const {return limitingMag;}
         
     //! Define font size to use for star names display
 	void setFontSize(double newFontSize);

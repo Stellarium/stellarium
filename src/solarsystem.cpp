@@ -36,8 +36,10 @@ using namespace std;
 
 SolarSystem::SolarSystem()
 	:sun(NULL),moon(NULL),earth(NULL), moonScale(1.), fontSize(14.),
-planet_name_font(StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getLocaleMgr().getAppLanguage(), fontSize)), tex_earth_shadow(NULL),
-             flagOrbits(false),flag_light_travel_time(false) {
+	planet_name_font(StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getLocaleMgr().getAppLanguage(), fontSize)),
+	tex_earth_shadow(NULL), flagOrbits(false),flag_light_travel_time(false)
+{
+	flagPoint = false;
 }
 
 void SolarSystem::setFontSize(float newFontSize)
@@ -68,7 +70,28 @@ SolarSystem::~SolarSystem()
 
 
 // Init and load the solar system data
-bool SolarSystem::init(LoadingBar& lb)
+void SolarSystem::init(const InitParser& conf, LoadingBar& lb)
+{
+	loadPlanets(lb);	// Load planets data
+
+	// Compute position and matrix of sun and all the satellites (ie planets)
+	// for the first initialization assert that center is sun center (only impacts on light speed correction)
+	computePositions(get_julian_from_sys());
+	setSelected("");	// Fix a bug on macosX! Thanks Fumio!
+	setScale(conf.get_double ("stars:star_scale"));  // if reload config
+	setFlagMoonScale(conf.get_boolean("viewing", "flag_moon_scaled", conf.get_boolean("viewing", "flag_init_moon_scaled", false)));  // name change
+	setMoonScale(conf.get_double ("viewing","moon_scale",5.));
+	setFlagPlanets(conf.get_boolean("astro:flag_planets"));
+	setFlagHints(conf.get_boolean("astro:flag_planets_hints"));
+	setFlagOrbits(conf.get_boolean("astro:flag_planets_orbits"));
+	setFlagLightTravelTime(conf.get_boolean("astro:flag_light_travel_time"));
+	setFlagTrails(conf.get_boolean("astro", "flag_object_trails", false));
+	startTrails(conf.get_boolean("astro", "flag_object_trails", false));	
+	setFlagPoint(conf.get_boolean("stars:flag_point_star"));
+}
+
+// Init and load the solar system data
+void SolarSystem::loadPlanets(LoadingBar& lb)
 {
 	cout << "Loading Solar System data...";
 	InitParser pd;	// The Planet data ini file parser
@@ -98,7 +121,7 @@ bool SolarSystem::init(LoadingBar& lb)
 			if (parent == NULL)
 			{
 				cout << "ERROR : can't find parent for " << englishName << endl;
-				exit(-1);
+				assert(0);
 			}
 		}
 
@@ -309,25 +332,21 @@ bool SolarSystem::init(LoadingBar& lb)
 	tex_earth_shadow = new s_texture("earth-shadow.png", TEX_LOAD_TYPE_PNG_ALPHA);
 	
 	cout << "(loaded)" << endl;
-	return true;
 }
 
 // Compute the position for every elements of the solar system.
 // The order is not important since the position is computed relatively to the mother body
-void SolarSystem::computePositions(double date,const Planet *home_planet) {
+void SolarSystem::computePositions(double date, const Vec3d& observerPos) {
   if (flag_light_travel_time) {
     for (vector<Planet*>::const_iterator iter(system_planets.begin());
          iter!=system_planets.end();iter++) {
       (*iter)->computePositionWithoutOrbits(date);
     }
-    const Vec3d home_pos(home_planet->get_heliocentric_ecliptic_pos());
     for (vector<Planet*>::const_iterator iter(system_planets.begin());
          iter!=system_planets.end();iter++) {
       const double light_speed_correction =
-        ((*iter)->get_heliocentric_ecliptic_pos()-home_pos).length()
+        ((*iter)->get_heliocentric_ecliptic_pos()-observerPos).length()
         * (AU / (SPEED_OF_LIGHT * 86400));
-//cout << "SolarSystem::computePositions: " << (*iter)->getEnglishName()
-//     << ": " << (86400*light_speed_correction) << endl;
       (*iter)->compute_position(date-light_speed_correction);
     }
   } else {
@@ -336,18 +355,19 @@ void SolarSystem::computePositions(double date,const Planet *home_planet) {
       (*iter)->compute_position(date);
     }
   }
+  
+  computeTransMatrices(date, observerPos);
 }
 
 // Compute the transformation matrix for every elements of the solar system.
 // The elements have to be ordered hierarchically, eg. it's important to compute earth before moon.
-void SolarSystem::computeTransMatrices(double date,const Planet *home_planet) {
+void SolarSystem::computeTransMatrices(double date, const Vec3d& observerPos) {
   if (flag_light_travel_time) {
-    const Vec3d home_pos(home_planet->get_heliocentric_ecliptic_pos());
     for (vector<Planet*>::const_iterator iter(system_planets.begin());
          iter!=system_planets.end();iter++) {
       const double light_speed_correction =
-        ((*iter)->get_heliocentric_ecliptic_pos()-home_pos).length()
-        * (149597870000.0 / (299792458.0 * 86400));
+        ((*iter)->get_heliocentric_ecliptic_pos()-observerPos).length()
+        * (AU / (SPEED_OF_LIGHT * 86400));
       (*iter)->compute_trans_matrix(date-light_speed_correction);
     }
   } else {
@@ -360,7 +380,7 @@ void SolarSystem::computeTransMatrices(double date,const Planet *home_planet) {
 
 // Draw all the elements of the solar system
 // We are supposed to be in heliocentric coordinate
-double SolarSystem::draw(Projector * prj, const Navigator * nav, const ToneReproductor* eye, bool flag_point)
+double SolarSystem::draw(Projector * prj, const Navigator * nav, ToneReproductor* eye)
 {
 	Planet::set_font(&planet_name_font);
 	
@@ -405,7 +425,6 @@ double SolarSystem::draw(Projector * prj, const Navigator * nav, const ToneRepro
 		double squaredDistance = 0;
 		if(*iter==moon && near_lunar_eclipse(nav, prj))
 		{
-
 			// TODO: moon magnitude label during eclipse isn't accurate...
 
 			// special case to update stencil buffer for drawing lunar eclipses
@@ -415,12 +434,11 @@ double SolarSystem::draw(Projector * prj, const Navigator * nav, const ToneRepro
 			glStencilFunc(GL_ALWAYS, 0x1, 0x1);
 			glStencilOp(GL_ZERO, GL_REPLACE, GL_REPLACE);
 
-			squaredDistance = (*iter)->draw(prj, nav, eye, flag_point, 1);
-
+			squaredDistance = (*iter)->draw(prj, nav, eye, flagPoint, 1);
 		}
 		else
 		{
-			squaredDistance = (*iter)->draw(prj, nav, eye, flag_point, 0);
+			squaredDistance = (*iter)->draw(prj, nav, eye, flagPoint, 0);
 		}
 		if (squaredDistance > maxSquaredDistance)
 			maxSquaredDistance = squaredDistance;
@@ -461,16 +479,11 @@ Planet* SolarSystem::searchByEnglishName(string planetEnglishName) const
 	return NULL;
 }
 
-StelObject SolarSystem::searchByNamesI18(wstring planetNameI18) const
+StelObject SolarSystem::searchByNameI18n(const wstring& planetNameI18) const
 {
-
-	// side effect - bad?
-//	transform(planetNameI18.begin(), planetNameI18.end(), planetNameI18.begin(), ::tolower);
-
 	vector<Planet*>::const_iterator iter = system_planets.begin();
 	while (iter != system_planets.end())
 	{
-
 		if( (*iter)->getNameI18n() == planetNameI18 ) return (*iter);  // also check standard ini file names
 		++iter;
 	}
@@ -509,14 +522,15 @@ StelObject SolarSystem::search(Vec3d pos, const Navigator * nav,
 }
 
 // Return a stl vector containing the planets located inside the lim_fov circle around position v
-vector<StelObject> SolarSystem::search_around(Vec3d v,
-                                              double lim_fov,
+vector<StelObject> SolarSystem::searchAround(const Vec3d& vv,
+                                              double limitFov,
                                               const Navigator * nav,
                                               const Projector * prj) const
 {
 	vector<StelObject> result;
+	Vec3d v(vv);
 	v.normalize();
-	double cos_lim_fov = cos(lim_fov * M_PI/180.);
+	double cos_lim_fov = cos(limitFov * M_PI/180.);
 	static Vec3d equPos;
 
 	vector<Planet*>::const_iterator iter = system_planets.begin();
@@ -767,8 +781,6 @@ void SolarSystem::update(int delta_time, Navigator* nav)
 		(*iter)->update(delta_time);
 		iter++;
 	}
-
-
 }
 
 

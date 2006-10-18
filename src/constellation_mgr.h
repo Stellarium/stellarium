@@ -43,7 +43,7 @@ public:
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in the StelModule class
 	virtual void init(const InitParser& conf, LoadingBar& lb);
-	virtual string getModuleID() const {return "constellation";}
+	virtual string getModuleID() const {return "constellations";}
 	virtual double draw(Projector *prj, const Navigator *nav, ToneReproductor *eye); //! Draw constellation lines, art, names and boundaries
 	virtual void update(double deltaTime);
 	virtual void updateI18n();

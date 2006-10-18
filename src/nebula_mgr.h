@@ -44,7 +44,7 @@ public:
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in the StelModule class
 	virtual void init(const InitParser& conf, LoadingBar& lb);
-	virtual string getModuleID() const {return "nebula";}
+	virtual string getModuleID() const {return "nebulas";}
 	virtual double draw(Projector *prj, const Navigator *nav, ToneReproductor *eye);
 	virtual void update(double deltaTime) {hintsFader.update((int)deltaTime); flagShow.update((int)deltaTime);}
 	virtual void updateI18n();
@@ -65,22 +65,26 @@ public:
 	
 	///////////////////////////////////////////////////////////////////////////
 	// Properties setters and getters
-	void setNebulaCircleScale(float scale);
-	float getNebulaCircleScale(void) const;
+	//! Set Nebulae Hints circle scale
+	void setCircleScale(float scale);
+	//! Get Nebulae Hints circle scale
+	float getCircleScale(void) const;
 	
 	void setHintsFadeDuration(float duration) {hintsFader.set_duration((int) (duration * 1000.f));}
 	
+	//! Set flag for displaying Nebulae Hints
 	void setFlagHints(bool b) {hintsFader=b;}
+	//! Get flag for displaying Nebulae Hints
 	bool getFlagHints(void) const {return hintsFader;}
 	
 	void setFlagShow(bool b) { flagShow = b; }
 	bool getFlagShow(void) const { return flagShow; }
 
-	void setLabelColor(const Vec3f& c);
-	const Vec3f &getLabelColor(void) const;
+	void setNamesColor(const Vec3f& c);
+	const Vec3f &getNamesColor(void) const;
 	
-	void setCircleColor(const Vec3f& c);
-	const Vec3f &getCircleColor(void) const;
+	void setCirclesColor(const Vec3f& c);
+	const Vec3f &getCirclesColor(void) const;
 	
 	//! Set flag for displaying nebulae as bright to show all details
 	void setFlagBright(bool b);
