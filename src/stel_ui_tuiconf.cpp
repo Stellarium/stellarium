@@ -27,6 +27,7 @@
 #include "stelfontmgr.h"
 #include "stellocalemgr.h"
 #include "stelskyculturemgr.h"
+#include "stelmodulemgr.h"
 
 // Draw simple gravity text ui.
 void StelUI::draw_gravity_ui(void)
@@ -477,11 +478,12 @@ void StelUI::tui_update_widgets(void)
 	tui_star_magscale->setValue(core->getStarMagScale());
 
 	// 5. Colors
-	tui_colors_const_line_color->setVector(core->getColorConstellationLine());
-	tui_colors_const_label_color->setVector(core->getColorConstellationNames());
+	ConstellationMgr* cmgr = (ConstellationMgr*)StelApp::getInstance().getModuleMgr().getModule("constellation");
+	tui_colors_const_line_color->setVector(cmgr->getLinesColor());
+	tui_colors_const_label_color->setVector(cmgr->getNamesColor());
+	tui_colors_const_art_intensity->setValue(cmgr->getArtIntensity());
+	tui_colors_const_boundary_color->setVector(cmgr->getBoundariesColor());
 	tui_colors_cardinal_color->setVector(core->getColorCardinalPoints());
-	tui_colors_const_art_intensity->setValue(core->getConstellationArtIntensity());
-	tui_colors_const_boundary_color->setVector(core->getColorConstellationBoundaries());
 	tui_colors_planet_names_color->setVector(core->getColorPlanetsNames());
 	tui_colors_planet_orbits_color->setVector(core->getColorPlanetsOrbits());
 	tui_colors_object_trails_color->setVector(core->getColorPlanetsTrails());
@@ -723,13 +725,14 @@ void StelUI::tui_cb_effects_nebulae_label_magnitude()
 
 void StelUI::tui_cb_change_color()
 {
-	core->setColorConstellationLine( tui_colors_const_line_color->getVector() );
-	core->setColorConstellationNames( tui_colors_const_label_color->getVector() );
+	ConstellationMgr* cmgr = (ConstellationMgr*)StelApp::getInstance().getModuleMgr().getModule("constellation");
+	cmgr->setLinesColor( tui_colors_const_line_color->getVector() );
+	cmgr->setNamesColor( tui_colors_const_label_color->getVector() );
+	cmgr->setArtIntensity(tui_colors_const_art_intensity->getValue() );
+	cmgr->setBoundariesColor(tui_colors_const_boundary_color->getVector() );
+	
 	core->setColorCardinalPoints( tui_colors_cardinal_color->getVector() );
-	core->setConstellationArtIntensity(tui_colors_const_art_intensity->getValue() );
-	core->setColorConstellationBoundaries(tui_colors_const_boundary_color->getVector() );
-	// core->setColorStarNames(
-	// core->setColorStarCircles(
+	
 	core->setColorPlanetsOrbits(tui_colors_planet_orbits_color->getVector() );
 	core->setColorPlanetsNames(tui_colors_planet_names_color->getVector() );
 	core->setColorPlanetsTrails(tui_colors_object_trails_color->getVector() );

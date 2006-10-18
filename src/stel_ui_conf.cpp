@@ -24,6 +24,7 @@
 #include "stelfontmgr.h"
 #include "stellocalemgr.h"
 #include "stelskyculturemgr.h"
+#include "stelmodulemgr.h"
 
 using namespace s_gui;
 
@@ -837,10 +838,12 @@ void StelUI::saveRenderOptions(void)
 	conf.set_double("stars:max_mag_star_name", core->getMaxMagStarName());
 	conf.set_boolean("stars:flag_star_twinkle", core->getFlagStarTwinkle());
 	conf.set_double("stars:star_twinkle_amount", core->getStarTwinkleAmount());
-	conf.set_boolean("viewing:flag_constellation_drawing", core->getFlagConstellationLines());
-	conf.set_boolean("viewing:flag_constellation_name", core->getFlagConstellationNames());
-	conf.set_boolean("viewing:flag_constellation_boundaries", core->getFlagConstellationBoundaries());
-	conf.set_boolean("viewing:flag_constellation_pick", core->getFlagConstellationIsolateSelected());
+	
+	ConstellationMgr* cmgr = (ConstellationMgr*)StelApp::getInstance().getModuleMgr().getModule("constellation");
+	conf.set_boolean("viewing:flag_constellation_drawing", cmgr->getFlagLines());
+	conf.set_boolean("viewing:flag_constellation_name", cmgr->getFlagNames());
+	conf.set_boolean("viewing:flag_constellation_boundaries", cmgr->getFlagBoundaries());
+	conf.set_boolean("viewing:flag_constellation_pick", cmgr->getFlagIsolateSelected());
 	conf.set_boolean("astro:flag_nebula", core->getFlagNebula());
 	conf.set_boolean("astro:flag_nebula_name", core->getFlagNebulaHints());
 	conf.set_double("astro:max_mag_nebula_name", core->getNebulaMaxMagHints());
@@ -927,10 +930,12 @@ void StelUI::updateConfigForm(void)
 	max_mag_star_name->setValue(core->getMaxMagStarName());
 	star_twinkle_cbx->setState(core->getFlagStarTwinkle());
 	star_twinkle_amount->setValue(core->getStarTwinkleAmount());
-	constellation_cbx->setState(core->getFlagConstellationLines());
-	constellation_name_cbx->setState(core->getFlagConstellationNames());
-	constellation_boundaries_cbx->setState(core->getFlagConstellationBoundaries());
-	sel_constellation_cbx->setState(core->getFlagConstellationIsolateSelected());
+	
+	ConstellationMgr* cmgr = (ConstellationMgr*)StelApp::getInstance().getModuleMgr().getModule("constellation");
+	constellation_cbx->setState(cmgr->getFlagLines());
+	constellation_name_cbx->setState(cmgr->getFlagNames());
+	constellation_boundaries_cbx->setState(cmgr->getFlagBoundaries());
+	sel_constellation_cbx->setState(cmgr->getFlagIsolateSelected());
 	nebulas_names_cbx->setState(core->getFlagNebulaHints());
 	max_mag_nebula_name->setValue(core->getNebulaMaxMagHints());
 	nebulas_no_texture_cbx->setState(core->getFlagNebulaDisplayNoTexture());

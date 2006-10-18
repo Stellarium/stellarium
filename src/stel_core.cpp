@@ -257,15 +257,6 @@ void StelCore::init(const InitParser& conf)
 	setAtmosphereFadeDuration(conf.get_double("landscape","atmosphere_fade_duration",1.5));
 
 	// Viewing section
-	constellationFontSize = conf.get_double("viewing","constellation_font_size",16.);
-	setFlagConstellationLines(		conf.get_boolean("viewing:flag_constellation_drawing"));
-	setFlagConstellationNames(		conf.get_boolean("viewing:flag_constellation_name"));
-	setFlagConstellationBoundaries(	conf.get_boolean("viewing","flag_constellation_boundaries",false));
-	setFlagConstellationArt(		conf.get_boolean("viewing:flag_constellation_art"));
-	setFlagConstellationIsolateSelected(conf.get_boolean("viewing", "flag_constellation_isolate_selected",conf.get_boolean("viewing", "flag_constellation_pick", 0)));
-	setConstellationArtIntensity(conf.get_double("viewing","constellation_art_intensity", 0.5));
-	setConstellationArtFadeDuration(conf.get_double("viewing","constellation_art_fade_duration",2.));
-
 	setFlagAzimutalGrid(conf.get_boolean("viewing:flag_azimutal_grid"));
 	setFlagEquatorGrid(conf.get_boolean("viewing:flag_equatorial_grid"));
 	setFlagEquatorLine(conf.get_boolean("viewing:flag_equator_line"));
@@ -933,9 +924,9 @@ void StelCore::setColorScheme(const string& skinFile, const string& section)
 	ecliptic_line->setColor(StelUtils::str_to_vec3f(conf.get_str(section,"ecliptic_color", defaultColor)));
 	meridian_line->setColor(StelUtils::str_to_vec3f(conf.get_str(section,"meridian_color", defaultColor)));
 	cardinals_points->setColor(StelUtils::str_to_vec3f(conf.get_str(section,"cardinal_color", defaultColor)));
-	asterisms->setLineColor(StelUtils::str_to_vec3f(conf.get_str(section,"const_lines_color", defaultColor)));
-	asterisms->setBoundaryColor(StelUtils::str_to_vec3f(conf.get_str(section,"const_boundary_color", "0.8,0.3,0.3")));
-	asterisms->setLabelColor(StelUtils::str_to_vec3f(conf.get_str(section,"const_names_color", defaultColor)));
+	asterisms->setLinesColor(StelUtils::str_to_vec3f(conf.get_str(section,"const_lines_color", defaultColor)));
+	asterisms->setBoundariesColor(StelUtils::str_to_vec3f(conf.get_str(section,"const_boundary_color", "0.8,0.3,0.3")));
+	asterisms->setNamesColor(StelUtils::str_to_vec3f(conf.get_str(section,"const_names_color", defaultColor)));
 
 	chartColor = StelUtils::str_to_vec3f(conf.get_str(section,"chart_color", defaultColor));
 }

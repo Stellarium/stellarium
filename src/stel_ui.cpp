@@ -26,6 +26,7 @@
 #include "stelapp.h"
 #include "stelfontmgr.h"
 #include "stellocalemgr.h"
+#include "stelmodulemgr.h"
 
 ////////////////////////////////////////////////////////////////////////////////
 //								CLASS FUNCTIONS
@@ -520,9 +521,10 @@ void StelUI::cbEditScriptExecute(void)
 ////////////////////////////////////////////////////////////////////////////////
 void StelUI::cb(void)
 {
-	core->setFlagConstellationLines(bt_flag_constellation_draw->getState());
-	core->setFlagConstellationNames(bt_flag_constellation_name->getState());
-	core->setFlagConstellationArt(bt_flag_constellation_art->getState());
+	ConstellationMgr* cmgr = (ConstellationMgr*)StelApp::getInstance().getModuleMgr().getModule("constellation");
+	cmgr->setFlagLines(bt_flag_constellation_draw->getState());
+	cmgr->setFlagNames(bt_flag_constellation_name->getState());
+	cmgr->setFlagArt(bt_flag_constellation_art->getState());
 	core->setFlagAzimutalGrid(bt_flag_azimuth_grid->getState());
 	core->setFlagEquatorGrid(bt_flag_equator_grid->getState());
 	core->setFlagLandscape(bt_flag_ground->getState());
@@ -1307,9 +1309,10 @@ void StelUI::gui_update_widgets(int delta_time)
 	bt_flag_ctr->setVisible(FlagMenu);
 	bt_time_control_ctr->setVisible(FlagMenu);
 
-	bt_flag_constellation_draw->setState(core->getFlagConstellationLines());
-	bt_flag_constellation_name->setState(core->getFlagConstellationNames());
-	bt_flag_constellation_art->setState(core->getFlagConstellationArt());
+	ConstellationMgr* cmgr = (ConstellationMgr*)StelApp::getInstance().getModuleMgr().getModule("constellation");
+	bt_flag_constellation_draw->setState(cmgr->getFlagLines());
+	bt_flag_constellation_name->setState(cmgr->getFlagNames());
+	bt_flag_constellation_art->setState(cmgr->getFlagArt());
 	bt_flag_azimuth_grid->setState(core->getFlagAzimutalGrid());
 	bt_flag_equator_grid->setState(core->getFlagEquatorGrid());
 	bt_flag_ground->setState(core->getFlagLandscape());

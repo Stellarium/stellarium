@@ -68,6 +68,15 @@ void ConstellationMgr::init(const InitParser& conf, LoadingBar& lb)
 {
 	lastLoadedSkyCulture = "dummy";
 	updateSkyCulture(lb);
+	
+	fontSize = conf.get_double("viewing","constellation_font_size",16.);
+	setFlagLines(		conf.get_boolean("viewing:flag_constellation_drawing"));
+	setFlagNames(		conf.get_boolean("viewing:flag_constellation_name"));
+	setFlagBoundaries(	conf.get_boolean("viewing","flag_constellation_boundaries",false));
+	setFlagArt(			conf.get_boolean("viewing:flag_constellation_art"));
+	setFlagIsolateSelected(conf.get_boolean("viewing", "flag_constellation_isolate_selected",conf.get_boolean("viewing", "flag_constellation_pick", false)));
+	setArtIntensity(	conf.get_double("viewing","constellation_art_intensity", 0.5));
+	setArtFadeDuration(	conf.get_double("viewing","constellation_art_fade_duration",2.));
 }
 
 void ConstellationMgr::updateSkyCulture(LoadingBar& lb)
@@ -86,16 +95,14 @@ void ConstellationMgr::updateSkyCulture(LoadingBar& lb)
 	}
 }
 
-void ConstellationMgr::setFlagGravityLabel(bool g) {Constellation::gravityLabel = g;}
+void ConstellationMgr::setLinesColor(const Vec3f& c) {Constellation::lineColor = c;}
+Vec3f ConstellationMgr::getLinesColor() const {return Constellation::lineColor;}
 
-void ConstellationMgr::setLineColor(const Vec3f& c) {Constellation::lineColor = c;}
-Vec3f ConstellationMgr::getLineColor() const {return Constellation::lineColor;}
+void ConstellationMgr::setBoundariesColor(const Vec3f& c) {Constellation::boundaryColor = c;}
+Vec3f ConstellationMgr::getBoundariesColor() const {return Constellation::boundaryColor;}
 
-void ConstellationMgr::setBoundaryColor(const Vec3f& c) {Constellation::boundaryColor = c;}
-Vec3f ConstellationMgr::getBoundaryColor() const {return Constellation::boundaryColor;}
-
-void ConstellationMgr::setLabelColor(const Vec3f& c) {Constellation::labelColor = c;}
-Vec3f ConstellationMgr::getLabelColor() const {return Constellation::labelColor;}
+void ConstellationMgr::setNamesColor(const Vec3f& c) {Constellation::labelColor = c;}
+Vec3f ConstellationMgr::getNamesColor() const {return Constellation::labelColor;}
 
 void ConstellationMgr::setFontSize(double newFontSize)
 {
