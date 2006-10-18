@@ -28,6 +28,7 @@
 #include "stellocalemgr.h"
 #include "stelskyculturemgr.h"
 #include "stelmodulemgr.h"
+#include "hip_star_mgr.h"
 
 // Draw simple gravity text ui.
 void StelUI::draw_gravity_ui(void)
@@ -112,7 +113,8 @@ void StelUI::init_tui(void)
 	// Home planet only changed if hit enter to accept because
 	// switching planet instantaneously as select is hard on a planetarium audience
 	tui_location_planet = new s_tui::MultiSet2_item<wstring>(wstring(L"1.4 ") );
-	tui_location_planet->addItemList(core->getPlanetHashString());
+	SolarSystem* ssmgr = (SolarSystem*)StelApp::getInstance().getModuleMgr().getModule("ssystem");
+	tui_location_planet->addItemList(ssmgr->getPlanetHashString());
 	//	tui_location_planet->set_OnChangeCallback(callback<void>(this, &StelUI::tui_cb_location_change_planet));
 	tui_location_planet->set_OnTriggerCallback(callback<void>(this, &StelUI::tui_cb_location_change_planet));
 
@@ -336,7 +338,8 @@ void StelUI::localizeTui(void)
 	tui_location_longitude->setLabel(wstring(L"1.2 ") + _("Longitude: "));
 	tui_location_altitude->setLabel(wstring(L"1.3 ") + _("Altitude (m): "));
 	tui_location_planet->setLabel(wstring(L"1.4 ") + _("Solar System Body: "));
-	tui_location_planet->replaceItemList(core->getPlanetHashString(),0);
+	SolarSystem* ssmgr = (SolarSystem*)StelApp::getInstance().getModuleMgr().getModule("ssystem");
+	tui_location_planet->replaceItemList(ssmgr->getPlanetHashString(),0);
 
 	// 2. Time
 	tui_time_skytime->setLabel(wstring(L"2.1 ") + _("Sky Time: "));
@@ -453,6 +456,11 @@ void StelUI::tui_update_widgets(void)
 {
 	if (!FlagShowTuiMenu) return;
 	
+	HipStarMgr* smgr = (HipStarMgr*)StelApp::getInstance().getModuleMgr().getModule("stars");
+	ConstellationMgr* cmgr = (ConstellationMgr*)StelApp::getInstance().getModuleMgr().getModule("constellations");
+	NebulaMgr* nmgr = (NebulaMgr*)StelApp::getInstance().getModuleMgr().getModule("nebulas");
+	SolarSystem* ssmgr = (SolarSystem*)StelApp::getInstance().getModuleMgr().getModule("ssystem");
+	
 	// 1. Location
 	tui_location_latitude->setValue(core->getObservatory().get_latitude());
 	tui_location_longitude->setValue(core->getObservatory().get_longitude());
@@ -472,39 +480,38 @@ void StelUI::tui_update_widgets(void)
 	tui_general_sky_locale->setValue(StelUtils::stringToWstring(app->getLocaleMgr().getSkyLanguage()));
 
 	// 4. Stars
-	tui_stars_show->setValue(core->getFlagStars());
-	tui_star_labelmaxmag->setValue(core->getMaxMagStarName());
-	tui_stars_twinkle->setValue(core->getStarTwinkleAmount());
-	tui_star_magscale->setValue(core->getStarMagScale());
+	tui_stars_show->setValue(smgr->getFlagStars());
+	tui_star_labelmaxmag->setValue(smgr->getMaxMagName());
+	tui_stars_twinkle->setValue(smgr->getTwinkleAmount());
+	tui_star_magscale->setValue(smgr->getMagScale());
 
 	// 5. Colors
-	ConstellationMgr* cmgr = (ConstellationMgr*)StelApp::getInstance().getModuleMgr().getModule("constellation");
 	tui_colors_const_line_color->setVector(cmgr->getLinesColor());
 	tui_colors_const_label_color->setVector(cmgr->getNamesColor());
 	tui_colors_const_art_intensity->setValue(cmgr->getArtIntensity());
 	tui_colors_const_boundary_color->setVector(cmgr->getBoundariesColor());
 	tui_colors_cardinal_color->setVector(core->getColorCardinalPoints());
-	tui_colors_planet_names_color->setVector(core->getColorPlanetsNames());
-	tui_colors_planet_orbits_color->setVector(core->getColorPlanetsOrbits());
-	tui_colors_object_trails_color->setVector(core->getColorPlanetsTrails());
+	tui_colors_planet_names_color->setVector(ssmgr->getNamesColor());
+	tui_colors_planet_orbits_color->setVector(ssmgr->getOrbitsColor());
+	tui_colors_object_trails_color->setVector(ssmgr->getTrailsColor());
 	tui_colors_meridian_color->setVector(core->getColorMeridianLine());
 	tui_colors_azimuthal_color->setVector(core->getColorAzimutalGrid());
 	tui_colors_equatorial_color->setVector(core->getColorEquatorGrid());
 	tui_colors_equator_color->setVector(core->getColorEquatorLine());
 	tui_colors_ecliptic_color->setVector(core->getColorEclipticLine());
-	tui_colors_nebula_label_color->setVector(core->getColorNebulaLabels());
-	tui_colors_nebula_circle_color->setVector(core->getColorNebulaCircle());
+	tui_colors_nebula_label_color->setVector(nmgr->getNamesColor());
+	tui_colors_nebula_circle_color->setVector(nmgr->getCirclesColor());
 
 
 	// 6. effects
 	tui_effect_landscape->setValue(StelUtils::stringToWstring(core->getObservatory().get_landscape_name()));
-	tui_effect_pointobj->setValue(core->getFlagPointStar());
+	tui_effect_pointobj->setValue(smgr->getFlagPointStar());
 	tui_effect_zoom_duration->setValue(core->getAutomoveDuration());
 	tui_effect_manual_zoom->setValue(core->getFlagManualAutoZoom());
-	tui_effect_object_scale->setValue(core->getStarScale());
+	tui_effect_object_scale->setValue(smgr->getScale());
 	tui_effect_milkyway_intensity->setValue(core->getMilkyWayIntensity());
 	tui_effect_cursor_timeout->setValue(MouseCursorTimeout);
-	tui_effect_nebulae_label_magnitude->setValue(core->getNebulaMaxMagHints());
+	tui_effect_nebulae_label_magnitude->setValue(nmgr->getMaxMagHints());
 
 
 	// 7. Scripts
@@ -725,7 +732,10 @@ void StelUI::tui_cb_effects_nebulae_label_magnitude()
 
 void StelUI::tui_cb_change_color()
 {
-	ConstellationMgr* cmgr = (ConstellationMgr*)StelApp::getInstance().getModuleMgr().getModule("constellation");
+	ConstellationMgr* cmgr = (ConstellationMgr*)StelApp::getInstance().getModuleMgr().getModule("constellations");
+	NebulaMgr* nmgr = (NebulaMgr*)StelApp::getInstance().getModuleMgr().getModule("nebulas");
+	SolarSystem* ssmgr = (SolarSystem*)StelApp::getInstance().getModuleMgr().getModule("ssystem");
+	
 	cmgr->setLinesColor( tui_colors_const_line_color->getVector() );
 	cmgr->setNamesColor( tui_colors_const_label_color->getVector() );
 	cmgr->setArtIntensity(tui_colors_const_art_intensity->getValue() );
@@ -733,18 +743,17 @@ void StelUI::tui_cb_change_color()
 	
 	core->setColorCardinalPoints( tui_colors_cardinal_color->getVector() );
 	
-	core->setColorPlanetsOrbits(tui_colors_planet_orbits_color->getVector() );
-	core->setColorPlanetsNames(tui_colors_planet_names_color->getVector() );
-	core->setColorPlanetsTrails(tui_colors_object_trails_color->getVector() );
+	ssmgr->setOrbitsColor(tui_colors_planet_orbits_color->getVector() );
+	ssmgr->setNamesColor(tui_colors_planet_names_color->getVector() );
+	ssmgr->setTrailsColor(tui_colors_object_trails_color->getVector() );
 	core->setColorAzimutalGrid(tui_colors_azimuthal_color->getVector() );
 	core->setColorEquatorGrid(tui_colors_equatorial_color->getVector() );
 	core->setColorEquatorLine(tui_colors_equator_color->getVector() );
 	core->setColorEclipticLine(tui_colors_ecliptic_color->getVector() );
 	core->setColorMeridianLine(tui_colors_meridian_color->getVector() );
-	core->setColorNebulaLabels(tui_colors_nebula_label_color->getVector() );
-	core->setColorNebulaCircle(tui_colors_nebula_circle_color->getVector() );
-
-
+	
+	nmgr->setNamesColor(tui_colors_nebula_label_color->getVector() );
+	nmgr->setCirclesColor(tui_colors_nebula_circle_color->getVector() );
 }
 
 
@@ -765,6 +774,4 @@ void StelUI::tuiUpdateIndependentWidgets(void) {
 	// (can not do this in tui_update_widgets)
 
 	tui_location_planet->setValue(StelUtils::stringToWstring(core->getObservatory().getHomePlanetEnglishName()));
-
-
 }

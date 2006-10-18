@@ -157,30 +157,6 @@ void Observator::setConf(InitParser & conf, const string& section) const
 }
 
 
-// for platforms without built in timegm function
-// taken from the timegm man page
-//not valid on all platforms... substitute with mytimegm.h
-//time_t my_timegm (struct tm *tm) {
-//	time_t ret;
-//	char *tz;
-//	char tmpstr[255];
-//	tz = getenv("TZ");
-//	putenv("TZ=");
-//	tzset();
-//	ret = mktime(tm);
-//	if (tz)
-//	{
- //snprintf(tmpstr, 255, "TZ=%s", tz);
-//		putenv(tmpstr);
- //  }
-  //  else
-//		putenv("");
-//	tzset();
-//	return ret;
-//}
-
-
-
 // move gradually to a new observation location
 void Observator::move_to(double lat, double lon, double alt, int duration, const wstring& _name)
 {

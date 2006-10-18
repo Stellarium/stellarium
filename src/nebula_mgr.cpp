@@ -34,12 +34,12 @@
 
 #define RADIUS_NEB 1.
 
-void NebulaMgr::setLabelColor(const Vec3f& c) {Nebula::label_color = c;}
-const Vec3f &NebulaMgr::getLabelColor(void) const {return Nebula::label_color;}
-void NebulaMgr::setCircleColor(const Vec3f& c) {Nebula::circle_color = c;}
-const Vec3f &NebulaMgr::getCircleColor(void) const {return Nebula::circle_color;}
-void NebulaMgr::setNebulaCircleScale(float scale) {Nebula::circleScale = scale;}
-float NebulaMgr::getNebulaCircleScale(void) const {return Nebula::circleScale;}
+void NebulaMgr::setNamesColor(const Vec3f& c) {Nebula::label_color = c;}
+const Vec3f &NebulaMgr::getNamesColor(void) const {return Nebula::label_color;}
+void NebulaMgr::setCirclesColor(const Vec3f& c) {Nebula::circle_color = c;}
+const Vec3f &NebulaMgr::getCirclesColor(void) const {return Nebula::circle_color;}
+void NebulaMgr::setCircleScale(float scale) {Nebula::circleScale = scale;}
+float NebulaMgr::getCircleScale(void) const {return Nebula::circleScale;}
 void NebulaMgr::setFlagBright(bool b) {Nebula::flagBright = b;}
 bool NebulaMgr::getFlagBright(void) const {return Nebula::flagBright;}
 
@@ -74,6 +74,13 @@ void NebulaMgr::init(const InitParser& conf, LoadingBar& lb)
 
 	if (!Nebula::tex_circle)
 		Nebula::tex_circle = new s_texture("neb.png");   // Load circle texture
+		
+	setFlagShow(conf.get_boolean("astro:flag_nebula"));
+	setFlagHints(conf.get_boolean("astro:flag_nebula_name"));
+	setMaxMagHints(conf.get_double("astro", "max_mag_nebula_name", 99));
+	setCircleScale(conf.get_double("astro", "nebula_scale",1.0f));
+	setFlagDisplayNoTexture(conf.get_boolean("astro", "flag_nebula_display_no_texture", false));
+	setFlagBright(conf.get_boolean("astro:flag_bright_nebulae"));	
 }
 
 // Draw all the Nebulae
