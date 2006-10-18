@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: stellarium@free.fr\n"
-"POT-Creation-Date: 2006-10-11 08:39+0200\n"
-"PO-Revision-Date: 2006-06-21 13:09+0000\n"
-"Last-Translator: mallamanis <mallamanis@gmail.com>\n"
+"POT-Creation-Date: 2006-10-05 10:48+0200\n"
+"PO-Revision-Date: 2006-09-26 16:06+0000\n"
+"Last-Translator: Christos Sotiropoulos <csot@otenet.gr>\n"
 "Language-Team: Greek, Modern (1453-) <el@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -31,7 +31,7 @@ msgstr ""
 #: src/main.cpp:76
 #, c-format
 msgid "%s: Bad command line argument(s)\n"
-msgstr ""
+msgstr "%s: Λάθος γραμμής εντολής σύνοψης\n"
 
 #: src/main.cpp:77
 #, c-format
@@ -42,58 +42,38 @@ msgstr "Δοκιμάστε `%s --help' για περισσότερες πληρ�
 msgid "Loading Constellation Art: "
 msgstr "Φόρτωση Σχεδίων Αστερισμών: "
 
-#: src/hip_star.cpp:84 src/hip_star.cpp:140 src/hip_star_mgr.cpp:533
-#: src/hip_star_mgr.cpp:636 src/nebula.cpp:94 src/nebula.cpp:116
-#: src/planet.cpp:110 src/planet.cpp:156
+#: src/hip_star.cpp:85 src/hip_star.cpp:141 src/nebula.cpp:94
+#: src/nebula.cpp:116 src/planet.cpp:108 src/planet.cpp:154
 msgid "Magnitude: "
 msgstr "Μέγεθος: "
 
-#: src/hip_star.cpp:85 src/hip_star.cpp:141
+#: src/hip_star.cpp:86 src/hip_star.cpp:142
 msgid " (Variable)"
 msgstr " (Μεταβλητή)"
 
-#: src/hip_star.cpp:87 src/hip_star_mgr.cpp:535 src/hip_star_mgr.cpp:538
-#: src/hip_star_mgr.cpp:638 src/hip_star_mgr.cpp:644 src/nebula.cpp:96
-#: src/planet.cpp:114
-#, fuzzy
+#: src/hip_star.cpp:88 src/nebula.cpp:96 src/planet.cpp:112
 msgid "RA/DE: "
 msgstr "RA/DE: "
 
-#: src/hip_star.cpp:93 src/hip_star_mgr.cpp:547 src/hip_star_mgr.cpp:653
-#: src/nebula.cpp:102 src/planet.cpp:120
+#: src/hip_star.cpp:94 src/nebula.cpp:102 src/planet.cpp:118
 msgid "Az/Alt: "
 msgstr "Αζ/Υψ: "
 
-#: src/hip_star.cpp:95 src/hip_star_mgr.cpp:660 src/planet.cpp:123
-#: src/planet.cpp:160
+#: src/hip_star.cpp:96 src/planet.cpp:121 src/planet.cpp:158
 msgid "Distance: "
 msgstr "Απόσταση: "
 
-#: src/hip_star.cpp:97 src/hip_star.cpp:144 src/hip_star_mgr.cpp:663
+#: src/hip_star.cpp:98 src/hip_star.cpp:145
 msgid " Light Years"
 msgstr " Έτη Φωτός"
 
-#: src/hip_star.cpp:104 src/hip_star_mgr.cpp:667
-#, fuzzy
+#: src/hip_star.cpp:105
 msgid "Spectral Type: "
 msgstr "Τύπος φάσματος "
 
-#: src/hip_star_mgr.cpp:535 src/hip_star_mgr.cpp:638
-msgid "J2000"
-msgstr ""
-
-#: src/hip_star_mgr.cpp:538 src/hip_star_mgr.cpp:644
-msgid "Equ of date"
-msgstr ""
-
-#: src/hip_star_mgr.cpp:658
-msgid "Parallax: "
-msgstr ""
-
-#: src/hip_star_mgr.cpp:980
-#, fuzzy
-msgid "Loading catalog "
-msgstr "Φόρτωση καταλόγου NGC: "
+#: src/hip_star_mgr.cpp:134
+msgid "Loading Hipparcos catalog:"
+msgstr "Φόρτωση καταλόγου Hipparcos:"
 
 #: src/nebula.cpp:104
 msgid "Type: "
@@ -103,134 +83,133 @@ msgstr "Τύπος: "
 msgid "Size: "
 msgstr "Μέγεθος: "
 
-#: src/nebula_mgr.cpp:331
+#: src/nebula_mgr.cpp:328
 msgid "Loading NGC catalog: "
 msgstr "Φόρτωση καταλόγου NGC: "
 
-#: src/nebula_mgr.cpp:458
+#: src/nebula_mgr.cpp:455
 msgid "Loading Nebula Textures:"
 msgstr "Φόρτωση Γαλαξιακών Νεφελωμάτων:"
 
-#: src/planet.cpp:123 src/planet.cpp:160
+#: src/planet.cpp:121 src/planet.cpp:158
 msgid "AU"
-msgstr "AU (Αστρονομικές μονάδες)"
+msgstr "AU"
 
-#: src/stel_ui.cpp:515 src/stel_ui.cpp:645
+#: src/stel_ui.cpp:516 src/stel_ui.cpp:646
 msgid "Script commander"
-msgstr ""
+msgstr "Ρυθμιστής Σεναρίου"
 
-#: src/stel_ui.cpp:542
+#: src/stel_ui.cpp:543
 msgid "Invalid Script command"
 msgstr "Λανθασμένη εντολή Σεναριου"
 
-#: src/stel_ui.cpp:610
+#: src/stel_ui.cpp:611
 msgid "Drawing of the Constellations [C]"
 msgstr "Σχέδιο του Αστερισμού [C]"
 
-#: src/stel_ui.cpp:612
+#: src/stel_ui.cpp:613
 msgid "Names of the Constellations [V]"
 msgstr "Ονόματα των Αστερισμών [V]"
 
-#: src/stel_ui.cpp:614
+#: src/stel_ui.cpp:615
 msgid "Constellations Art [R]"
 msgstr "Σχέδια των Αστερισμών [R]"
 
-#: src/stel_ui.cpp:616
+#: src/stel_ui.cpp:617
 msgid "Azimuthal Grid [Z]"
 msgstr "Πλέγμα Αζιμούθιου [Z]"
 
-#: src/stel_ui.cpp:618
+#: src/stel_ui.cpp:619
 msgid "Equatorial Grid [E]"
 msgstr "Πλέγμα Ισημερινού [Ε]"
 
-#: src/stel_ui.cpp:620
+#: src/stel_ui.cpp:621
 msgid "Ground [G]"
 msgstr "Έδαφος [G]"
 
-#: src/stel_ui.cpp:622
+#: src/stel_ui.cpp:623
 msgid "Cardinal Points [Q]"
 msgstr "Σημεία του Ορίζοντα"
 
-#: src/stel_ui.cpp:624
+#: src/stel_ui.cpp:625
 msgid "Atmosphere [A]"
 msgstr "Ατμόσφαιρα [Α]"
 
-#: src/stel_ui.cpp:626
+#: src/stel_ui.cpp:627
 msgid "Nebulas [N]"
 msgstr "Γαλαξιακά Νεφελώματα [Ν]"
 
-#: src/stel_ui.cpp:628
+#: src/stel_ui.cpp:629
 msgid "Help [H]"
 msgstr "Βοήθεια [Η]"
 
-#: src/stel_ui.cpp:630
+#: src/stel_ui.cpp:631
 msgid "Equatorial/Altazimuthal Mount [ENTER]"
-msgstr ""
+msgstr "Ισημερινή/Αζιμουθιακή Στήριξη [ENTER]"
 
-#: src/stel_ui.cpp:632
+#: src/stel_ui.cpp:633
 msgid "Configuration window"
 msgstr "Παράθυρο ρυθμίσεων"
 
-#: src/stel_ui.cpp:635
+#: src/stel_ui.cpp:636
 msgid "Night (red) mode"
 msgstr "Κατάσταση νύχτας (κόκκινο)"
 
-#: src/stel_ui.cpp:638
+#: src/stel_ui.cpp:639
 msgid "Quit [CTRL + Q]"
 msgstr "Έξοδος [CTRL + Q]"
 
-#: src/stel_ui.cpp:640
+#: src/stel_ui.cpp:641
 msgid "Quit [CMD + Q]"
 msgstr "Έξοδος [CMD + Q]"
 
-#: src/stel_ui.cpp:643
+#: src/stel_ui.cpp:644
 msgid "Search for object"
 msgstr "Αναζήτηση για αντικείμενο"
 
-#: src/stel_ui.cpp:647
+#: src/stel_ui.cpp:648
 msgid "Goto selected object [SPACE]"
 msgstr "Πήγαινε στο επιλεγμένο αντικείμενο [ΚΕΝΟ]"
 
-#: src/stel_ui.cpp:649
-msgid "flip horizontally"
-msgstr ""
+#: src/stel_ui.cpp:650
+msgid "Flip horizontally"
+msgstr "Οριζόντια περιστροφή"
 
-#: src/stel_ui.cpp:651
-msgid "flip vertically"
-msgstr ""
+#: src/stel_ui.cpp:652
+msgid "Flip vertically"
+msgstr "Κάθετη περιστροφή"
 
-#: src/stel_ui.cpp:657
+#: src/stel_ui.cpp:658
 msgid "Decrease Time Speed [J]"
-msgstr "Μείωση Ταχύτητα Ώρας [J]"
+msgstr "Μείωση Ταχύτητα Χρόνου [J]"
 
-#: src/stel_ui.cpp:659
+#: src/stel_ui.cpp:660
 msgid "Real Time Speed [K]"
-msgstr "Πραγματική Ταχύτητας Ώρας [K]"
+msgstr "Πραγματική Ταχύτητας Χρόνου [K]"
 
-#: src/stel_ui.cpp:661
+#: src/stel_ui.cpp:662
 msgid "Increase Time Speed [L]"
-msgstr "Άυξηση Ταχύτητας Ώρας [L]"
+msgstr "Άυξηση Ταχύτητας Χρόνου[L]"
 
-#: src/stel_ui.cpp:663
+#: src/stel_ui.cpp:664
 msgid "Return to Current Time"
-msgstr "Επιστροφή στην Τρέχουσα Ώρα"
+msgstr "Επιστροφή στην Τρέχουσα Χρόνου"
 
-#: src/stel_ui.cpp:672
+#: src/stel_ui.cpp:673
 msgid ""
 "   Please check for newer versions and send bug reports\n"
 "    and comments to us at: http://www.stellarium.org\n"
 "\n"
 msgstr ""
-"   Παρακαλώ ελέξε για νέες εκδόσεις και στείλτε αναφορά σφάλματος\n"
+"   Παρακαλώ ελέγξτε για νέες εκδόσεις και στείλτε αναφορά σφάλματος\n"
 "    και σχόλια σε έμας στο: http://www.stellarium.org\n"
 "\n"
 
-#: src/stel_ui.cpp:691
+#: src/stel_ui.cpp:692
 msgid "Information"
 msgstr "Πληροφορίες"
 
-#: src/stel_ui.cpp:703
-#, fuzzy
+#: src/stel_ui.cpp:704
 msgid ""
 "Movement & selection:\n"
 "Arrow Keys       : Change viewing RA/DE\n"
@@ -245,13 +224,20 @@ msgid ""
 "\n"
 msgstr ""
 "Κίνηση & επιλογή:\n"
-"Πλήκτρα Βέλη\n"
+"Πλήκτρα Βέλη : Αλάξτε όψη RA/DE\n"
+"PAge Up/Down : Ζουμ\n"
+"CTRL+Up/Down : Ζουμ\n"
+"Αριστερό κλικ : Επιλέξτε αντικείμενο\n"
+"Δεξί κλικ : Ακύρωση επιλογής αντικειμένου\n"
+"CTRL+Αριστερό κλικ : Ακύρωση επιλογής αντικειμένου\n"
+"\\ : Μακρύτερη εμφάνιση (πλανήτη + φεγγάρια αν υπάρχουν)\n"
+"/ : Ζουμ στο επιλεγμένο αντικείμενο\n"
+"ΚΕΝΟ : Κεντράρισμα στο επιλεγμένο αντικείμενο\n"
 "\n"
 "...\n"
 "\n"
 
-#: src/stel_ui.cpp:714
-#, fuzzy
+#: src/stel_ui.cpp:715
 msgid ""
 "Display options:\n"
 "ENTER : Equatorial/altazimuthal mount\n"
@@ -267,19 +253,19 @@ msgid ""
 "\n"
 msgstr ""
 "Επιλογές προβολής:\n"
-"ENTER : Equatorial/altazimuthal mount\n"
+"ENTER : Ισημερινή/Αζιμουθιακή στήριξη\n"
 "F1 : Αλλαγή σε πλήρη οθόνη αν είναι δυνατόν.\n"
 "C : Γραμμές Αστερισμών  V : Ετικέτες αστερισμών\n"
-"R : Τέχνη Αστερισμών      E : Πλέγμα ισημερινού\n"
+"R : Καλλιτεχνία Αστερισμών      E : Πλέγμα ισημερινού\n"
 "Z : Πλέγμα Αζιμούθιου    N : Ονόματα γαλαξιακών νεφελωμάτων\n"
 "P : Ονόματα Πλανητών    G : Έδαφος\n"
 "A : Ατμόσφαιρα              F : Ομίχλη\n"
 "Q : Σημεία του ορίζοντα  O : Αλλαγή μεγένθυσης φεγγαριού\n"
 "T : Παρακολούθηση αντικειμένου S : Αστέρια\n"
-"4 , : Ecliptic line           5  : Γραμμή Ισημερινού\n"
+"4 , : Γραμμή Εκλειπτικής      5.  : Γραμμή Ισημερινού\n"
 "\n"
 
-#: src/stel_ui.cpp:726
+#: src/stel_ui.cpp:727
 msgid ""
 "Dialogs & other controls:\n"
 "H   : Help                      I   : About Stellarium\n"
@@ -289,9 +275,15 @@ msgid ""
 "CTRL + F : Toggle object finder\n"
 "\n"
 msgstr ""
+"Διάλογοι και άλλες ρυθμίσεις\n"
+"H : Βοήθεια | : Περί Stellarium\n"
+"M : Κείμενο Καταλόγου 1 (ένα) :Διαμόρφωση\n"
+"CTRL + S : Πάρτε φωτογραφία\n"
+"CTRL + R : Ενεργοποίηση / Απενεργοποίηση εγγραφής σεναρίου\n"
+"CTRL + F : Ενεργοποίηση / Απενεργοποίηση ερευνητή αντικειμένου\n"
+"\n"
 
-#: src/stel_ui.cpp:733
-#, fuzzy
+#: src/stel_ui.cpp:734
 msgid ""
 "Time & Date:\n"
 "6   : Time rate pause           7   : Time rate 0\n"
@@ -301,61 +293,81 @@ msgid ""
 "[   : Back 7 days               ]   : Forward 7 days\n"
 "\n"
 msgstr ""
-"Ώρα & Ημέρα:\n"
-"6 : Διακοπή ρυθμού ώρας 7 : Ρυθμός ώρας 0\n"
-"8\n"
+"Χρόνος & Ημερομηνία:\n"
+"6 : Παύση ρυθμού χρόνου 7 : Ρυθμός χρόνου 0\n"
+"8 : Ρυθμίστε τρέχων χρόνο J : Μειώστε ρυθμό χρόνου\n"
+"K: Κανονικός ρυθμός χρόνου L : Αυξήστε ρυθμό χρόνου\n"
+"- : Πίσω 24 ώρες = : Μπροστά 24 ώρες\n"
+"[ : Πίσω 7 ημέρες ] : Μπροστά 7 ημέρες\n"
 "\n"
 
-#: src/stel_ui.cpp:740
+#: src/stel_ui.cpp:741
 msgid ""
 "During Script Playback:\n"
 "CTRL + C : End Script\n"
 "6   : pause script              K   : resume script\n"
 "\n"
 msgstr ""
+"Κατά Την Διάρκεια Αναπαρωγής Σεναρίου\n"
+"CTRL + C : Τερματισμός Σεναρίου\n"
+"6 : παύση σεναρίου k : συνέχιση σεναρίου\n"
+"\n"
 
-#: src/stel_ui.cpp:744
+#: src/stel_ui.cpp:745
 msgid ""
 "Misc:\n"
 "9   : Toggle meteor shower rates\n"
-"CTRL + 0,..,9 : execute GOTO command for telescope 0,..,9\n"
-"CTRL + SHIFT + H: toggle horizontal image flipping\n"
-"CTRL + SHIFT + V: toggle vertical image flipping\n"
-"CTRL + Q : Quit\n"
-"CMD + Q  : Quit\n"
+"CTRL + 0,..,9 : Execute GOTO command for telescope 0,..,9\n"
+"CTRL + SHIFT + H: Toggle horizontal image flipping\n"
+"CTRL + SHIFT + V: Toggle vertical image flipping\n"
 msgstr ""
+"Διάφορα:\n"
+"9 : Ενεργοποίηση ρυθμού πτώσης διαττόντων\n"
+"CTRL + 0,..,9 : Εκτέλεση εντολοής GOTO για τηλεσκόπιο 0,..9\n"
+"CTRL + SHIFT + H: Ενεργοποίηση οριζόντιας περιστροφής οθόνης\n"
+"CTRL + SHIFT + V: Ενεργοποίηση κάθετης περιστροφής οθόνης\n"
 
-#: src/stel_ui.cpp:758
+#: src/stel_ui.cpp:751
+msgid "CTRL + Q : Quit\n"
+msgstr "CTRL + Q : Έξοδος\n"
+
+#: src/stel_ui.cpp:753
+msgid "CMD + Q : Quit\n"
+msgstr "CMD + Q : Κλείσιμο\n"
+
+#: src/stel_ui.cpp:760
 msgid "Help"
 msgstr "Βοήθεια"
 
-#: src/stel_ui.cpp:1037
+#: src/stel_ui.cpp:1039
 msgid "Command recording stopped."
 msgstr "Εντολή καταγραφής σταμάτησε."
 
-#: src/stel_ui.cpp:1045
-msgid "Recording commands to script file:\n"
-msgstr ""
-
 #: src/stel_ui.cpp:1047
+msgid "Recording commands to script file:\n"
+msgstr "Εγγραφή εντολών στο αρχείο σεναρίου\n"
+
+#: src/stel_ui.cpp:1049
 msgid "Hit CTRL-R again to stop.\n"
 msgstr "Πατήστε CTRL-R ξανά για να σταματήστε.\n"
 
-#: src/stel_ui.cpp:1051
+#: src/stel_ui.cpp:1053
 msgid "Error: Unable to open script file to record commands."
 msgstr ""
+"Λάθος: Δεν είναι δυνατόν να ανοίξει το αρχείο σεναρίου για την εγγραφή "
+"εντολών"
 
 #: src/stel_ui_conf.cpp:37
 msgid "Configuration"
-msgstr "Ρύθμιση"
+msgstr "Ρυθμίσεις"
 
 #: src/stel_ui_conf.cpp:57
 msgid "Stars"
-msgstr "Αστέρια"
+msgstr "Άστρα"
 
 #: src/stel_ui_conf.cpp:62
 msgid "Star Names. Up to mag :"
-msgstr "Ονόματα Αστεριών. Μέχρι το υψος :"
+msgstr "Ονόματα Άστρων. Μέχρι το μέγεθος:"
 
 #: src/stel_ui_conf.cpp:74
 msgid "Star Twinkle. Amount :"
@@ -367,7 +379,7 @@ msgstr "Γραμμές Αστερισμών"
 
 #: src/stel_ui_conf.cpp:95
 msgid "Constellations Names"
-msgstr "Όνοματα Αστερισμών"
+msgstr "Ονόματα Αστερισμών"
 
 #: src/stel_ui_conf.cpp:100
 msgid "Constellations Boundaries"
@@ -379,11 +391,11 @@ msgstr "Επιλεγμένοι Αστερισμοί Μόνο"
 
 #: src/stel_ui_conf.cpp:116
 msgid "Nebulas Names. Up to mag :"
-msgstr ""
+msgstr "Ονόματα νεφελωμάτων. Μέχρι το μέγεθος:"
 
 #: src/stel_ui_conf.cpp:129
 msgid "Also display Nebulas without textures"
-msgstr ""
+msgstr "Επίσης εμφάνιση νεφελωμάτων χωρίς σύσταση"
 
 #: src/stel_ui_conf.cpp:140
 msgid "Planets"
@@ -395,21 +407,21 @@ msgstr "Κλίμακα Φεγγαριού"
 
 #: src/stel_ui_conf.cpp:152
 msgid "Planets Hints"
-msgstr "Υπόδειξεις Πλανητών"
+msgstr "Υποδείξεις Πλανητών"
 
-#: src/stel_ui_conf.cpp:164 src/stel_ui_tuiconf.cpp:403
+#: src/stel_ui_conf.cpp:164 src/stel_ui_tuiconf.cpp:404
 msgid "Equatorial Grid"
 msgstr "Πλέγμα Ισημερινού"
 
-#: src/stel_ui_conf.cpp:169 src/stel_ui_tuiconf.cpp:402
+#: src/stel_ui_conf.cpp:169 src/stel_ui_tuiconf.cpp:403
 msgid "Azimuthal Grid"
 msgstr "Πλέγμα Αζιμούθιου"
 
-#: src/stel_ui_conf.cpp:174 src/stel_ui_tuiconf.cpp:404
+#: src/stel_ui_conf.cpp:174 src/stel_ui_tuiconf.cpp:405
 msgid "Equator Line"
 msgstr "Γραμμή Ισημερινού"
 
-#: src/stel_ui_conf.cpp:179 src/stel_ui_tuiconf.cpp:405
+#: src/stel_ui_conf.cpp:179 src/stel_ui_tuiconf.cpp:406
 msgid "Ecliptic Line"
 msgstr "Εκλειπτική Γραμμή"
 
@@ -417,7 +429,7 @@ msgstr "Εκλειπτική Γραμμή"
 msgid "Ground"
 msgstr "Έδαφος"
 
-#: src/stel_ui_conf.cpp:195 src/stel_ui_tuiconf.cpp:397
+#: src/stel_ui_conf.cpp:195 src/stel_ui_tuiconf.cpp:398
 msgid "Cardinal Points"
 msgstr "Σημεία του Ορίζοντα"
 
@@ -427,10 +439,10 @@ msgstr "Ατμόσφαιρα"
 
 #: src/stel_ui_conf.cpp:205
 msgid "Fog"
-msgstr "Ομίχή"
+msgstr "Ομίχλη"
 
-#: src/stel_ui_conf.cpp:235 src/stel_ui_conf.cpp:407 src/stel_ui_conf.cpp:444
-#: src/stel_ui_conf.cpp:503
+#: src/stel_ui_conf.cpp:235 src/stel_ui_conf.cpp:408 src/stel_ui_conf.cpp:445
+#: src/stel_ui_conf.cpp:504
 msgid "Save as default"
 msgstr "Αποθήκευση ως προεπιλεγμένο"
 
@@ -458,7 +470,7 @@ msgid ""
 msgstr ""
 "Χρησιμοποιείστε τα πλήκτρα J και L για να μειώστε και να αυξήστε\n"
 "   την ταχύτητα της ώρας.\n"
-"Χρησιμοποιείστε το πλήκτρο K για να επιστεψτε στην κανονική ταχύτητα ώρας."
+"Χρησιμοποιείστε το πλήκτρο K για να επιστρέψτε στην κανονική ταχύτητα ώρας."
 
 #: src/stel_ui_conf.cpp:300
 msgid "Cursor : "
@@ -466,7 +478,7 @@ msgstr "Κέρσορας : "
 
 #: src/stel_ui_conf.cpp:305
 msgid "Selected : "
-msgstr "Επιλέτηκε : "
+msgstr "Επιλεγμένο : "
 
 #: src/stel_ui_conf.cpp:310
 msgid "Longitude : "
@@ -490,7 +502,7 @@ msgstr "Προβολή :"
 
 #: src/stel_ui_conf.cpp:374
 msgid "Disk Viewport"
-msgstr ""
+msgstr "Άποψη δίσκου"
 
 #: src/stel_ui_conf.cpp:380
 msgid "Screen Resolution :"
@@ -504,73 +516,73 @@ msgstr "Επανεκίννηση προγράμματος για"
 msgid "change to apply."
 msgstr "αλλάξτε για εφαρμογή."
 
-#: src/stel_ui_conf.cpp:400
+#: src/stel_ui_conf.cpp:401
 msgid "For unlisted screen resolution, edit the file :"
-msgstr "Για μη καταγεγραμένη ανάλυση οθόνης, διωρθώστε το αρχείο:"
+msgstr "Για μη καταγεγραμμένη ανάλυση οθόνης, διορθώστε το αρχείο:"
 
-#: src/stel_ui_conf.cpp:417
+#: src/stel_ui_conf.cpp:418
 msgid "Choose landscapes:"
 msgstr "Επιλογή τοπίου:"
 
-#: src/stel_ui_conf.cpp:432 src/stel_ui_conf.cpp:897
+#: src/stel_ui_conf.cpp:433 src/stel_ui_conf.cpp:897
 msgid "Author: "
-msgstr ""
+msgstr "Συγγραφέας "
 
-#: src/stel_ui_conf.cpp:455
+#: src/stel_ui_conf.cpp:456
 msgid "Program Language: "
 msgstr "Γλώσσα Προγράμματος: "
 
-#: src/stel_ui_conf.cpp:471 src/stel_ui_tuiconf.cpp:384
+#: src/stel_ui_conf.cpp:472 src/stel_ui_tuiconf.cpp:385
 msgid "Sky Language: "
 msgstr "Γλώσσα Ουρανού: "
 
-#: src/stel_ui_conf.cpp:489 src/stel_ui_tuiconf.cpp:380
+#: src/stel_ui_conf.cpp:490 src/stel_ui_tuiconf.cpp:381
 msgid "Sky Culture: "
 msgstr "Πολιτισμός Ουρανού: "
 
-#: src/stel_ui_conf.cpp:510
+#: src/stel_ui_conf.cpp:511
 msgid "Language"
 msgstr "Γλώσσα"
 
-#: src/stel_ui_conf.cpp:511
+#: src/stel_ui_conf.cpp:512
 msgid "Date & Time"
 msgstr "Ημέρα & Ώρα"
 
-#: src/stel_ui_conf.cpp:512
+#: src/stel_ui_conf.cpp:513
 msgid "Location"
 msgstr "Τοποθεσία"
 
-#: src/stel_ui_conf.cpp:513
+#: src/stel_ui_conf.cpp:514
 msgid "Landscapes"
 msgstr "Τοπία"
 
-#: src/stel_ui_conf.cpp:514
+#: src/stel_ui_conf.cpp:515
 msgid "Video"
 msgstr "Βίντεο"
 
-#: src/stel_ui_conf.cpp:515
+#: src/stel_ui_conf.cpp:516
 msgid "Rendering"
 msgstr "Σχεδίαση και Διαμόρφωση Εικόνας"
 
-#: src/stel_ui_conf.cpp:647
+#: src/stel_ui_conf.cpp:648
 msgid "Object Search"
 msgstr "Αναζήτηση Αντικειμένου"
 
-#: src/stel_ui_conf.cpp:654
+#: src/stel_ui_conf.cpp:655
 msgid "Search for (eg. Saturn, Polaris, HP6218, Orion, M31):"
-msgstr "Αναζήτηση για (π.χ. Saturn, Polaris, HP6218, Orion, M31):"
+msgstr "Αναζήτηση για (π.χ. Κρόνο, Πολικό, HP6218, Ορίωνα, M31):"
 
-#: src/stel_ui_conf.cpp:671
+#: src/stel_ui_conf.cpp:672
 msgid "GO"
 msgstr "Πήγαινε"
 
-#: src/stel_ui_conf.cpp:800
+#: src/stel_ui_conf.cpp:799
 msgid "Enter observatory name"
 msgstr "Εισάγετε όνομα παρατηρητηρίου"
 
 #: src/stel_ui_conf.cpp:898
 msgid "Info: "
-msgstr ""
+msgstr "Πληροφορίες: "
 
 #: src/stel_ui_conf.cpp:950
 msgid ": Normal rate"
@@ -578,241 +590,239 @@ msgstr ": Κανονικός ρυθμός"
 
 #: src/stel_ui_conf.cpp:957
 msgid ": Standard Perseids rate"
-msgstr ": Κανονικός ρυθμός Περσίδων"
+msgstr ": Τυπικός ρυθμός Περσίδων"
 
 #: src/stel_ui_conf.cpp:964
 msgid ": Exceptional Leonid rate"
-msgstr ": Υπερβολικό ρυθμός Λεωνίδων"
+msgstr ": Ασυνήθης ρυθμός Λεοντίδων"
 
 #: src/stel_ui_conf.cpp:971
 msgid ": Highest rate ever (1966 Leonids)"
-msgstr ": Υψηλότερος ρυθμός στην ιστορία (1966 Λεωνίδες)"
+msgstr ": Υψηλότερος ρυθμός στην ιστορία (1966 Λεοντίδες)"
 
 #: src/stel_ui_conf.cpp:976
 msgid "Meteor Rate per minute"
 msgstr "Ρυθμός Μετεωρήτων ανα λεπτό"
 
-#: src/stel_ui_conf.cpp:996
+#: src/stel_ui_conf.cpp:997
 msgid "Current Time Speed is x"
-msgstr "Παρούσα Ταχύτητα ώρας είναι x"
+msgstr "Η Παρούσα Ταχύτητα χρόνου είναι x"
 
-#: src/stel_ui_tuiconf.cpp:271 src/stel_ui_tuiconf.cpp:414
+#: src/stel_ui_tuiconf.cpp:272 src/stel_ui_tuiconf.cpp:415
 msgid "Magnitude Sizing Multiplier: "
-msgstr ""
+msgstr "Πολλαπλασιαστής μεγέθους οπτικού μεγέθους αστέρα "
 
-#: src/stel_ui_tuiconf.cpp:351
+#: src/stel_ui_tuiconf.cpp:352
 msgid "Set Location "
 msgstr "Καθορισμός Τοποθεσίας: "
 
-#: src/stel_ui_tuiconf.cpp:352
+#: src/stel_ui_tuiconf.cpp:353
 msgid "Set Time "
 msgstr "Καθορισμός Ώρας "
 
-#: src/stel_ui_tuiconf.cpp:353
+#: src/stel_ui_tuiconf.cpp:354
 msgid "General "
 msgstr "Γενικά "
 
-#: src/stel_ui_tuiconf.cpp:354
+#: src/stel_ui_tuiconf.cpp:355
 msgid "Stars "
 msgstr "Αστέρια "
 
-#: src/stel_ui_tuiconf.cpp:355
+#: src/stel_ui_tuiconf.cpp:356
 msgid "Colors "
 msgstr "Χρώματα "
 
-#: src/stel_ui_tuiconf.cpp:356
+#: src/stel_ui_tuiconf.cpp:357
 msgid "Effects "
 msgstr "Εφέ "
 
-#: src/stel_ui_tuiconf.cpp:357
-msgid "Scripts "
-msgstr ""
-
 #: src/stel_ui_tuiconf.cpp:358
-#, fuzzy
+msgid "Scripts "
+msgstr "Σενάριο "
+
+#: src/stel_ui_tuiconf.cpp:359
 msgid "Administration "
 msgstr "Διεύθυνση "
 
-#: src/stel_ui_tuiconf.cpp:361
+#: src/stel_ui_tuiconf.cpp:362
 msgid "Latitude: "
 msgstr "Πλάτος: "
 
-#: src/stel_ui_tuiconf.cpp:362
+#: src/stel_ui_tuiconf.cpp:363
 msgid "Longitude: "
 msgstr "Μήκος: "
 
-#: src/stel_ui_tuiconf.cpp:363
-msgid "Altitude (m): "
-msgstr "Ύψος (m): "
-
 #: src/stel_ui_tuiconf.cpp:364
+msgid "Altitude (m): "
+msgstr "Ύψος (μ): "
+
+#: src/stel_ui_tuiconf.cpp:365
 msgid "Solar System Body: "
 msgstr "Σώμα Ηλικού Συστήματος: "
 
-#: src/stel_ui_tuiconf.cpp:368
+#: src/stel_ui_tuiconf.cpp:369
 msgid "Sky Time: "
 msgstr "Ώρα Ουρανού: "
 
-#: src/stel_ui_tuiconf.cpp:369
+#: src/stel_ui_tuiconf.cpp:370
 msgid "Set Time Zone: "
 msgstr "Καθορισμός Ώρας Ζώνης: "
 
-#: src/stel_ui_tuiconf.cpp:370
-msgid "Preset Sky Time: "
-msgstr "Παρουσίαση Ώρας Ουρανού: "
-
 #: src/stel_ui_tuiconf.cpp:371
+msgid "Preset Sky Time: "
+msgstr "Προκαθορισμένος Χρόνος Ουρανού: "
+
+#: src/stel_ui_tuiconf.cpp:372
 msgid "Sky Time At Start-up: "
 msgstr "Ώρα ουρανού κατά την εκκίνηση: "
 
-#: src/stel_ui_tuiconf.cpp:372
-msgid "Actual Time"
-msgstr ""
-
 #: src/stel_ui_tuiconf.cpp:373
-msgid "Preset Time"
-msgstr ""
+msgid "Actual Time"
+msgstr "Πραγματική 'Ωρα"
 
 #: src/stel_ui_tuiconf.cpp:374
+msgid "Preset Time"
+msgstr "Προκαθορισμένη Ώρα"
+
+#: src/stel_ui_tuiconf.cpp:375
 msgid "Time Display Format: "
 msgstr "Μορφή Παρουσίασης Ώρας: "
 
-#: src/stel_ui_tuiconf.cpp:375
+#: src/stel_ui_tuiconf.cpp:376
 msgid "Date Display Format: "
-msgstr "Μορφή Παρουσίασης Ημέρας: "
+msgstr "Μορφή Παρουσίασης Ημερομηνίας: "
 
-#: src/stel_ui_tuiconf.cpp:387
+#: src/stel_ui_tuiconf.cpp:388
 msgid "Show: "
 msgstr "Παρουσίαση: "
 
-#: src/stel_ui_tuiconf.cpp:387 src/stel_ui_tuiconf.cpp:412 src/s_gui.cpp:2232
+#: src/stel_ui_tuiconf.cpp:388 src/stel_ui_tuiconf.cpp:413 src/s_gui.cpp:2234
 msgid "Yes"
 msgstr "Ναι"
 
-#: src/stel_ui_tuiconf.cpp:387 src/stel_ui_tuiconf.cpp:412 src/s_gui.cpp:2213
+#: src/stel_ui_tuiconf.cpp:388 src/stel_ui_tuiconf.cpp:413 src/s_gui.cpp:2215
 msgid "No"
 msgstr "Όχι"
 
-#: src/stel_ui_tuiconf.cpp:388
+#: src/stel_ui_tuiconf.cpp:389
 msgid "Star Magnitude Multiplier: "
 msgstr "Πολλαπλασιαστής Μεγέθους Αστέρων: "
 
-#: src/stel_ui_tuiconf.cpp:389
+#: src/stel_ui_tuiconf.cpp:390
 msgid "Maximum Magnitude to Label: "
 msgstr "Μέγιστη Απόσταση παρουσίασης Ονομάτων: "
 
-#: src/stel_ui_tuiconf.cpp:390
+#: src/stel_ui_tuiconf.cpp:391
 msgid "Twinkling: "
 msgstr "Αναλαμπές: "
 
-#: src/stel_ui_tuiconf.cpp:393
-msgid "Constellation Lines"
-msgstr ""
-
 #: src/stel_ui_tuiconf.cpp:394
-msgid "Constellation Names"
-msgstr ""
+msgid "Constellation Lines"
+msgstr "Γραμμές Αστερισμών"
 
 #: src/stel_ui_tuiconf.cpp:395
-msgid "Constellation Art Intensity"
-msgstr ""
+msgid "Constellation Names"
+msgstr "Ονόματα Αστερισμών"
 
 #: src/stel_ui_tuiconf.cpp:396
-msgid "Constellation Boundaries"
-msgstr ""
+msgid "Constellation Art Intensity"
+msgstr "Ένταση Καλλιτεχνίας Αστερισμών"
 
-#: src/stel_ui_tuiconf.cpp:398
-msgid "Planet Names"
-msgstr ""
+#: src/stel_ui_tuiconf.cpp:397
+msgid "Constellation Boundaries"
+msgstr "Όρια Αστερισμών"
 
 #: src/stel_ui_tuiconf.cpp:399
-msgid "Planet Orbits"
-msgstr ""
+msgid "Planet Names"
+msgstr "Ονόματα Πλανητών"
 
 #: src/stel_ui_tuiconf.cpp:400
-msgid "Planet Trails"
-msgstr ""
+msgid "Planet Orbits"
+msgstr "Τροχιές Πλανητών"
 
 #: src/stel_ui_tuiconf.cpp:401
-msgid "Meridian Line"
-msgstr ""
+msgid "Planet Trails"
+msgstr "Ίχνη Πλανητών"
 
-#: src/stel_ui_tuiconf.cpp:406
-msgid "Nebula Names"
-msgstr ""
+#: src/stel_ui_tuiconf.cpp:402
+msgid "Meridian Line"
+msgstr "Μεσημβρινός"
 
 #: src/stel_ui_tuiconf.cpp:407
-msgid "Nebula Circles"
-msgstr ""
+msgid "Nebula Names"
+msgstr "Ονόματα Νεφελωμάτων"
 
-#: src/stel_ui_tuiconf.cpp:411
+#: src/stel_ui_tuiconf.cpp:408
+msgid "Nebula Circles"
+msgstr "Κύκλοι Νεφελωμάτων"
+
+#: src/stel_ui_tuiconf.cpp:412
 msgid "Landscape: "
 msgstr "Τοπίο: "
 
-#: src/stel_ui_tuiconf.cpp:412
+#: src/stel_ui_tuiconf.cpp:413
 msgid "Manual zoom: "
 msgstr "Χειροκίνητη εστιάση: "
 
-#: src/stel_ui_tuiconf.cpp:413
+#: src/stel_ui_tuiconf.cpp:414
 msgid "Object Sizing Rule: "
-msgstr ""
+msgstr "Κανόνας Εστίασης Αντικειμένων: "
 
-#: src/stel_ui_tuiconf.cpp:413
+#: src/stel_ui_tuiconf.cpp:414
 msgid "Point"
 msgstr "Σημείο"
 
-#: src/stel_ui_tuiconf.cpp:413
+#: src/stel_ui_tuiconf.cpp:414
 msgid "Magnitude"
 msgstr "Μέγεθος"
 
-#: src/stel_ui_tuiconf.cpp:415
+#: src/stel_ui_tuiconf.cpp:416
 msgid "Milky Way intensity: "
 msgstr "Φωτεινότητα Γαλαξία: "
 
-#: src/stel_ui_tuiconf.cpp:416
-msgid "Maximum Nebula Magnitude to Label: "
-msgstr ""
-
 #: src/stel_ui_tuiconf.cpp:417
+msgid "Maximum Nebula Magnitude to Label: "
+msgstr "Μέγιστη Φωτεινότητα Νεφελωμάτων για ετικέτα "
+
+#: src/stel_ui_tuiconf.cpp:418
 msgid "Zoom Duration: "
 msgstr "Διάρκεια Εστίασης: "
 
-#: src/stel_ui_tuiconf.cpp:418
+#: src/stel_ui_tuiconf.cpp:419
 msgid "Cursor Timeout: "
-msgstr ""
+msgstr "Τέλος χρονικού ορίου Κέρσορα "
 
-#: src/stel_ui_tuiconf.cpp:421
+#: src/stel_ui_tuiconf.cpp:422
 msgid "Local Script: "
-msgstr ""
+msgstr "Τοπικό Σενάριο "
 
-#: src/stel_ui_tuiconf.cpp:424
+#: src/stel_ui_tuiconf.cpp:425
 msgid "CD/DVD Script: "
-msgstr ""
-
-#: src/stel_ui_tuiconf.cpp:428
-msgid "Load Default Configuration: "
-msgstr "Φώρτωση Προεπιλεγμένων Ρυθμίσεων: "
+msgstr "Σενάριο CD/DVD "
 
 #: src/stel_ui_tuiconf.cpp:429
-msgid "Save Current Configuration as Default: "
-msgstr "Αποθήκευση Τρέχοντων Ρυθμίσεων ώς Προεπιλεγμένες "
+msgid "Load Default Configuration: "
+msgstr "Φόρτωση Προεπιλεγμένων Ρυθμίσεων: "
 
 #: src/stel_ui_tuiconf.cpp:430
-#, fuzzy
-msgid "Shut Down: "
-msgstr "Παρουσίαση: "
+msgid "Save Current Configuration as Default: "
+msgstr "Αποθήκευση Τρέχουσων Ρυθμίσεων ως Προεπιλεγμένες "
 
 #: src/stel_ui_tuiconf.cpp:431
-msgid "Update me via Internet: "
-msgstr "Ενημέρωση μέσω Internet: "
+msgid "Shut Down: "
+msgstr "Τερματισμός: "
 
 #: src/stel_ui_tuiconf.cpp:432
-msgid "Set UI Locale: "
-msgstr ""
+msgid "Update me via Internet: "
+msgstr "Ενημέρωση μέσω Διαδικτύου: "
 
-#: src/stel_ui_tuiconf.cpp:544
+#: src/stel_ui_tuiconf.cpp:433
+msgid "Set UI Locale: "
+msgstr "Ρύθμιση περιβάλλοντος διασύνδεσης χρήστη "
+
+#: src/stel_ui_tuiconf.cpp:545
 msgid "Arrow down to load list."
-msgstr ""
+msgstr "Βέλος προς τα κάτω για να φορτωθεί η λίστα"
 
 #: src/translations.h:33
 msgid "Sun"
@@ -832,7 +842,7 @@ msgstr "Γη"
 
 #: src/translations.h:37
 msgid "Moon"
-msgstr "Φεγγάρι"
+msgstr "Σελήνη"
 
 #: src/translations.h:38
 msgid "Mars"
@@ -840,11 +850,11 @@ msgstr "Άρης"
 
 #: src/translations.h:39
 msgid "Deimos"
-msgstr "Δήμος"
+msgstr "Δείμος"
 
 #: src/translations.h:40
 msgid "Phobos"
-msgstr "Φόιβος"
+msgstr "Φόβος"
 
 #: src/translations.h:41
 msgid "Jupiter"
@@ -860,7 +870,7 @@ msgstr "Ευρώπη"
 
 #: src/translations.h:44
 msgid "Ganymede"
-msgstr ""
+msgstr "Γανυμήδης"
 
 #: src/translations.h:45
 msgid "Callisto"
@@ -872,19 +882,19 @@ msgstr "Κρόνος"
 
 #: src/translations.h:47
 msgid "Mimas"
-msgstr ""
+msgstr "Μίμας"
 
 #: src/translations.h:48
 msgid "Enceladus"
-msgstr "Ενγκέλαδος"
+msgstr "Εγκέλαδος"
 
 #: src/translations.h:49
 msgid "Tethys"
-msgstr ""
+msgstr "Τήθυς"
 
 #: src/translations.h:50
 msgid "Dione"
-msgstr ""
+msgstr "Διώνη"
 
 #: src/translations.h:51
 msgid "Rhea"
@@ -895,13 +905,12 @@ msgid "Titan"
 msgstr "Τιτάνας"
 
 #: src/translations.h:53
-#, fuzzy
 msgid "Hyperion"
-msgstr "Υπερίωνας"
+msgstr "Υπερίων"
 
 #: src/translations.h:54
 msgid "Iapetus"
-msgstr ""
+msgstr "Ιαπετός"
 
 #: src/translations.h:55
 msgid "Phoebe"
@@ -927,54 +936,53 @@ msgstr "Χάρος"
 msgid "Solar System Observer"
 msgstr "Παρατηρητής Ηλιακού Συστήματος"
 
-#: src/translations.h:63 src/s_gui.cpp:2678
+#: src/translations.h:63 src/s_gui.cpp:2680
 msgid "N"
+msgstr "Β"
+
+#: src/translations.h:64 src/s_gui.cpp:2681
+msgid "S"
 msgstr "Ν"
 
-#: src/translations.h:64 src/s_gui.cpp:2679
-msgid "S"
-msgstr "S"
-
-#: src/translations.h:65 src/s_gui.cpp:2683
+#: src/translations.h:65 src/s_gui.cpp:2685
 msgid "E"
-msgstr "E"
+msgstr "Α"
 
-#: src/translations.h:66 src/s_gui.cpp:2684
+#: src/translations.h:66 src/s_gui.cpp:2686
 msgid "W"
-msgstr "W"
+msgstr "Δ"
 
 #: src/translations.h:69
 msgid "Chinese"
-msgstr ""
+msgstr "Κινέζικος"
 
 #: src/translations.h:70
 msgid "Western"
-msgstr ""
+msgstr "Δυτικός"
 
 #: src/translations.h:71
 msgid "Polynesian"
-msgstr ""
+msgstr "Πολυνήσιος"
 
 #: src/translations.h:72
 msgid "Egyptian"
-msgstr ""
+msgstr "Αιγυπτιακός"
 
 #: src/translations.h:75
 msgid "Aquila"
-msgstr ""
+msgstr "Αετός"
 
 #: src/translations.h:76
 msgid "Andromeda"
 msgstr "Ανδρόμεδα"
 
 #: src/translations.h:77
-#, fuzzy
 msgid "Sculptor"
 msgstr "Γλύπτης"
 
 #: src/translations.h:78
 msgid "Ara"
-msgstr ""
+msgstr "Βωμός"
 
 #: src/translations.h:79
 msgid "Libra"
@@ -982,19 +990,19 @@ msgstr "Ζυγός"
 
 #: src/translations.h:80
 msgid "Cetus"
-msgstr ""
+msgstr "Κήτος"
 
 #: src/translations.h:81
 msgid "Aries"
-msgstr ""
+msgstr "Κριός"
 
 #: src/translations.h:82 src/translations.h:152
 msgid "Scutum"
-msgstr ""
+msgstr "Ασπίδα"
 
 #: src/translations.h:83
 msgid "Pyxis"
-msgstr ""
+msgstr "Πυξίς"
 
 #: src/translations.h:84
 msgid "Bootes"
@@ -1002,11 +1010,11 @@ msgstr "Βοώτης"
 
 #: src/translations.h:85
 msgid "Caelum"
-msgstr ""
+msgstr "Γλυφείον"
 
 #: src/translations.h:86
 msgid "Chamaeleon"
-msgstr ""
+msgstr "Χαμαιλέων"
 
 #: src/translations.h:87
 msgid "Cancer"
@@ -1014,11 +1022,11 @@ msgstr "Καρκίνος"
 
 #: src/translations.h:88
 msgid "Capricornus"
-msgstr ""
+msgstr "Αιγόκερως"
 
 #: src/translations.h:89
 msgid "Carina"
-msgstr ""
+msgstr "Τρόπις"
 
 #: src/translations.h:90
 msgid "Cassiopeia"
@@ -1030,15 +1038,15 @@ msgstr "Κένταυρος"
 
 #: src/translations.h:92
 msgid "Cepheus"
-msgstr ""
+msgstr "Κηφέας"
 
 #: src/translations.h:93
 msgid "Coma Berenices"
-msgstr ""
+msgstr "Κόμη Βερενίκης"
 
 #: src/translations.h:94
 msgid "Canes Venatici"
-msgstr ""
+msgstr "Θηρευτικοί Κύνες"
 
 #: src/translations.h:95
 msgid "Auriga"
@@ -1046,11 +1054,11 @@ msgstr "Ηνίοχος"
 
 #: src/translations.h:96
 msgid "Columba"
-msgstr ""
+msgstr "Περιστέρα"
 
 #: src/translations.h:97
 msgid "Circinus"
-msgstr ""
+msgstr "Διαβήτης"
 
 #: src/translations.h:98
 msgid "Crater"
@@ -1058,55 +1066,55 @@ msgstr "Κρατήρας"
 
 #: src/translations.h:99
 msgid "Corona Australis"
-msgstr ""
+msgstr "Νότιος Στέφανος"
 
 #: src/translations.h:100
 msgid "Corona Borealis"
-msgstr ""
+msgstr "Βόρειος Στέφανος"
 
 #: src/translations.h:101
 msgid "Corvus"
-msgstr ""
+msgstr "Κοράκι"
 
 #: src/translations.h:102
 msgid "Crux"
-msgstr ""
+msgstr "Νότιος Σταυρός"
 
 #: src/translations.h:103
 msgid "Cygnus"
-msgstr ""
+msgstr "Κύκνος"
 
 #: src/translations.h:104
 msgid "Delphinus"
-msgstr ""
+msgstr "Δελφίνι"
 
 #: src/translations.h:105
 msgid "Dorado"
-msgstr ""
+msgstr "Δοράς"
 
 #: src/translations.h:106
 msgid "Draco"
-msgstr "Δρακοντας"
+msgstr "Δράκον"
 
 #: src/translations.h:107
 msgid "Norma"
-msgstr ""
+msgstr "Γνώμων"
 
 #: src/translations.h:108
 msgid "Eridanus"
-msgstr ""
+msgstr "Ηριδανός"
 
 #: src/translations.h:109
 msgid "Sagitta"
-msgstr "Τοξότης"
+msgstr "Βέλος"
 
 #: src/translations.h:110
 msgid "Fornax"
-msgstr ""
+msgstr "Κάμινος"
 
 #: src/translations.h:111
 msgid "Gemini"
-msgstr ""
+msgstr "Δίδυμοι"
 
 #: src/translations.h:112
 msgid "Camelopardalis"
@@ -1114,7 +1122,7 @@ msgstr "Καμηλοπάρδαλη"
 
 #: src/translations.h:113
 msgid "Canis Major"
-msgstr ""
+msgstr "Μέγας Κύων"
 
 #: src/translations.h:114
 msgid "Ursa Major"
@@ -1122,7 +1130,7 @@ msgstr "Μεγάλη Άρκτος"
 
 #: src/translations.h:115
 msgid "Grus"
-msgstr ""
+msgstr "Γερανός"
 
 #: src/translations.h:116
 msgid "Hercules"
@@ -1130,7 +1138,7 @@ msgstr "Ηρακλής"
 
 #: src/translations.h:117
 msgid "Horologium"
-msgstr ""
+msgstr "Ωρολόγιον"
 
 #: src/translations.h:118
 msgid "Hydra"
@@ -1138,15 +1146,15 @@ msgstr "Ύδρα"
 
 #: src/translations.h:119
 msgid "Hydrus"
-msgstr "Ήδρα"
+msgstr "Ύδρος"
 
 #: src/translations.h:120
 msgid "Indus"
-msgstr ""
+msgstr "Ινδός"
 
 #: src/translations.h:121
 msgid "Lacerta"
-msgstr ""
+msgstr "Σαύρα"
 
 #: src/translations.h:122
 msgid "Monoceros"
@@ -1154,7 +1162,7 @@ msgstr "Μονόκερος"
 
 #: src/translations.h:123
 msgid "Lepus"
-msgstr ""
+msgstr "Λαγωός"
 
 #: src/translations.h:124
 msgid "Leo"
@@ -1162,11 +1170,11 @@ msgstr "Λέων"
 
 #: src/translations.h:125
 msgid "Lupus"
-msgstr ""
+msgstr "Λύκος"
 
 #: src/translations.h:126
 msgid "Lynx"
-msgstr ""
+msgstr "Λυγξ"
 
 #: src/translations.h:127
 msgid "Lyra"
@@ -1174,35 +1182,35 @@ msgstr "Λύρα"
 
 #: src/translations.h:128
 msgid "Antlia"
-msgstr ""
+msgstr "Αντλία"
 
 #: src/translations.h:129
 msgid "Microscopium"
-msgstr ""
+msgstr "Μικροσκόπιο"
 
 #: src/translations.h:130
 msgid "Musca"
-msgstr ""
+msgstr "Μύγα"
 
 #: src/translations.h:131
 msgid "Octans"
-msgstr ""
+msgstr "Οκτάς"
 
 #: src/translations.h:132
 msgid "Apus"
-msgstr ""
+msgstr "Πτηνό"
 
 #: src/translations.h:133
 msgid "Ophiuchus"
-msgstr ""
+msgstr "Οφιούχος"
 
 #: src/translations.h:134
 msgid "Orion"
-msgstr "Ωρίονας"
+msgstr "Ωρίων"
 
 #: src/translations.h:135
 msgid "Pavo"
-msgstr ""
+msgstr "Ταώς"
 
 #: src/translations.h:136
 msgid "Pegasus"
@@ -1210,7 +1218,7 @@ msgstr "Πήγασος"
 
 #: src/translations.h:137
 msgid "Pictor"
-msgstr ""
+msgstr "Οκρίβας"
 
 #: src/translations.h:138
 msgid "Perseus"
@@ -1218,11 +1226,11 @@ msgstr "Περσέας"
 
 #: src/translations.h:139
 msgid "Equuleus"
-msgstr ""
+msgstr "Ιππάριον"
 
 #: src/translations.h:140
 msgid "Canis Minor"
-msgstr ""
+msgstr "Μικρός Κύων"
 
 #: src/translations.h:141
 msgid "Leo Minor"
@@ -1230,35 +1238,35 @@ msgstr "Μικρός Λέων"
 
 #: src/translations.h:142
 msgid "Vulpecula"
-msgstr ""
+msgstr "Αλώπηξ"
 
 #: src/translations.h:143
 msgid "Ursa Minor"
-msgstr ""
+msgstr "Μικρή Άρκτος"
 
 #: src/translations.h:144
 msgid "Phoenix"
-msgstr "Φοίνικας"
+msgstr "Φοίνιξ"
 
 #: src/translations.h:145
 msgid "Piscis Austrinus"
-msgstr ""
+msgstr "Νότιος Ιχθύς"
 
 #: src/translations.h:146
 msgid "Pisces"
-msgstr "Ιχθείς"
+msgstr "Ιχθύες"
 
 #: src/translations.h:147
 msgid "Volans"
-msgstr ""
+msgstr "Ιπτάμενος Ιχθύς"
 
 #: src/translations.h:148
 msgid "Puppis"
-msgstr ""
+msgstr "Πρύμνη"
 
 #: src/translations.h:149
 msgid "Reticulum"
-msgstr ""
+msgstr "Δίκτυον"
 
 #: src/translations.h:150
 msgid "Sagittarius"
@@ -1270,36 +1278,35 @@ msgstr "Σκορπίος"
 
 #: src/translations.h:153
 msgid "Serpens"
-msgstr ""
+msgstr "Όφις"
 
 #: src/translations.h:154
 msgid "Sextans"
-msgstr ""
+msgstr "Εξάς"
 
 #: src/translations.h:155
 msgid "Mensa"
-msgstr ""
+msgstr "Τράπεζα"
 
 #: src/translations.h:156
 msgid "Taurus"
 msgstr "Ταύρος"
 
 #: src/translations.h:157
-#, fuzzy
 msgid "Telescopium"
-msgstr "Τηλεσκόπιο"
+msgstr "Τηλεσκόπιον"
 
 #: src/translations.h:158
 msgid "Tucana"
-msgstr ""
+msgstr "Τουκάνα"
 
 #: src/translations.h:159
 msgid "Triangulum"
-msgstr ""
+msgstr "Τρίγωνον"
 
 #: src/translations.h:160
 msgid "Triangulum Australe"
-msgstr ""
+msgstr "Νότιο Τρίγωνο"
 
 #: src/translations.h:161
 msgid "Aquarius"
@@ -1307,19 +1314,19 @@ msgstr "Υδροχόος"
 
 #: src/translations.h:162
 msgid "Virgo"
-msgstr "Περθένος"
+msgstr "Παρθένος"
 
 #: src/translations.h:163
 msgid "Vela"
-msgstr ""
+msgstr "Ιστία"
 
 #: src/translations.h:166
 msgid "Bull's Foreleg"
-msgstr ""
+msgstr "Μπροστινό πόδι του Ταύρου"
 
 #: src/translations.h:167
 msgid "Two Poles"
-msgstr ""
+msgstr "Δύο Πόλοι"
 
 #: src/translations.h:168
 msgid "Lion"
@@ -1327,11 +1334,11 @@ msgstr "Λέων"
 
 #: src/translations.h:169
 msgid "Two Jaws"
-msgstr ""
+msgstr "Δύο Σαγόνια"
 
 #: src/translations.h:170
 msgid "Sah"
-msgstr ""
+msgstr "Σαχ"
 
 #: src/translations.h:171
 msgid "Bird"
@@ -1339,7 +1346,7 @@ msgstr "Πουλί"
 
 #: src/translations.h:172
 msgid "Sek"
-msgstr ""
+msgstr "Σεκ"
 
 #: src/translations.h:173
 msgid "Triangle"
@@ -1347,7 +1354,7 @@ msgstr "Τρίγωνο"
 
 #: src/translations.h:174
 msgid "Ferry Boat"
-msgstr ""
+msgstr "Καράβι"
 
 #: src/translations.h:175 src/translations.h:246
 msgid "Boat"
@@ -1359,20 +1366,19 @@ msgstr "Κροκόδειλος"
 
 #: src/translations.h:177
 msgid "Selkis"
-msgstr ""
+msgstr "Σέλκις"
 
 #: src/translations.h:178
 msgid "Prow"
-msgstr ""
+msgstr "Πλώρη"
 
 #: src/translations.h:179
-#, fuzzy
 msgid "Horus"
-msgstr "Χωρός"
+msgstr "Χόρους"
 
 #: src/translations.h:180
 msgid "Sheepfold"
-msgstr ""
+msgstr "Μαντρί"
 
 #: src/translations.h:181
 msgid "Giant"
@@ -1392,7 +1398,7 @@ msgstr "Ζευγάρι από αστέρια"
 
 #: src/translations.h:185
 msgid "Khanuwy Fish"
-msgstr ""
+msgstr "Ψάρι Κανούι"
 
 #: src/translations.h:186 src/translations.h:225
 msgid "Net"
@@ -1400,23 +1406,23 @@ msgstr "Δίκτυ"
 
 #: src/translations.h:187
 msgid "Jaw"
-msgstr ""
+msgstr "Σαγόνι"
 
 #: src/translations.h:188
 msgid "Mooring Post"
-msgstr ""
+msgstr "Αγκυροβόλημα"
 
 #: src/translations.h:189
 msgid "Kenemet"
-msgstr ""
+msgstr "Κενεμέτ"
 
 #: src/translations.h:190
 msgid "Chematy"
-msgstr ""
+msgstr "Χεμάτη"
 
 #: src/translations.h:191
 msgid "Waty Bekety"
-msgstr ""
+msgstr "Γουάτι Μπέκετι"
 
 #: src/translations.h:192
 msgid "Sheep"
@@ -1428,15 +1434,15 @@ msgstr "Αστέρια του Νερού"
 
 #: src/translations.h:196
 msgid "Northern Dipper"
-msgstr ""
+msgstr "Βόρεια Κουτάλα"
 
 #: src/translations.h:197
 msgid "Curved Array"
-msgstr ""
+msgstr "Καμπυλωμένη παράταξη"
 
 #: src/translations.h:198
 msgid "Coiled Thong"
-msgstr ""
+msgstr "Κουλουριασμένο λουρί"
 
 #: src/translations.h:199
 msgid "Wings"
@@ -1452,15 +1458,15 @@ msgstr "Ουρά"
 
 #: src/translations.h:202
 msgid "Winnowing Basket"
-msgstr ""
+msgstr "Κόσκινο"
 
 #: src/translations.h:203
 msgid "Dipper"
-msgstr ""
+msgstr "Κουτάλα"
 
 #: src/translations.h:204
 msgid "Drum"
-msgstr ""
+msgstr "Τύμπανο"
 
 #: src/translations.h:205
 msgid "Three Steps"
@@ -1468,7 +1474,7 @@ msgstr "Τρία Βήματα"
 
 #: src/translations.h:206
 msgid "Imperial Guards"
-msgstr ""
+msgstr "Αυτοκρατορικοί Φρουροί"
 
 #: src/translations.h:207
 msgid "Horn"
@@ -1476,11 +1482,11 @@ msgstr "Κέρατο"
 
 #: src/translations.h:208
 msgid "Willow"
-msgstr ""
+msgstr "Ιτιά"
 
 #: src/translations.h:209
 msgid "Imperial Passageway"
-msgstr ""
+msgstr "Αυτοκρατορικός Δρόμος"
 
 #: src/translations.h:210
 msgid "Kitchen"
@@ -1496,7 +1502,7 @@ msgstr "Στομάχι"
 
 #: src/translations.h:213
 msgid "Great General"
-msgstr ""
+msgstr "Μεγάλος Στρατηγός"
 
 #: src/translations.h:214
 msgid "Wall"
@@ -1504,7 +1510,7 @@ msgstr "Τοίχος"
 
 #: src/translations.h:215
 msgid "Legs"
-msgstr ""
+msgstr "Πόδια"
 
 #: src/translations.h:216
 msgid "Root"
@@ -1512,23 +1518,23 @@ msgstr "Ρίζα"
 
 #: src/translations.h:217
 msgid "Ramparts"
-msgstr ""
+msgstr "Προμαχώνες"
 
 #: src/translations.h:218
 msgid "Flying Corridor"
-msgstr ""
+msgstr "Ιπτάμενος Διάδρομος"
 
 #: src/translations.h:219
 msgid "Outer Fence"
-msgstr ""
+msgstr "Εξωτερικός Φράχτης"
 
 #: src/translations.h:220
 msgid "Ford"
-msgstr ""
+msgstr "Πόρος"
 
 #: src/translations.h:221
 msgid "Seven Excellencies"
-msgstr ""
+msgstr "Επτά Εξοχότητες"
 
 #: src/translations.h:222
 msgid "Market"
@@ -1536,11 +1542,11 @@ msgstr "Αγορά"
 
 #: src/translations.h:223
 msgid "Five Chariots"
-msgstr ""
+msgstr "Πέντε Άρματα"
 
 #: src/translations.h:224
 msgid "Rolled Tongue"
-msgstr ""
+msgstr "Τυλιγμένη Γλώσσα"
 
 #: src/translations.h:226
 msgid "Toilet"
@@ -1552,18 +1558,17 @@ msgstr "Οθόνη"
 
 #: src/translations.h:228
 msgid "Soldiers Market"
-msgstr ""
+msgstr "Αγορά Στρατιωτών"
 
 #: src/translations.h:229
 msgid "Square Granary"
-msgstr ""
+msgstr "Τετράγωνη Σιταποθήκη"
 
 #: src/translations.h:230
 msgid "Three Stars"
 msgstr "Τρία Αστέρια"
 
 #: src/translations.h:231
-#, fuzzy
 msgid "Four Channels"
 msgstr "Τέσσερα Κανάλια"
 
@@ -1581,52 +1586,51 @@ msgstr "Βόρειος Ποταμός"
 
 #: src/translations.h:235
 msgid "Five Feudal Kings"
-msgstr ""
+msgstr "Πέντε Φεουδάρχες"
 
 #: src/translations.h:236
-#, fuzzy
 msgid "Orchard"
-msgstr "Ορχιδέα"
+msgstr "Δενδρόκηπος"
 
 #: src/translations.h:237
 msgid "Meadows"
-msgstr ""
+msgstr "Λειβάδια"
 
 #: src/translations.h:238
 msgid "Circular Granary"
-msgstr ""
+msgstr "Κυκλική Σιταποθήκη"
 
 #: src/translations.h:239
 msgid "Purple Palace"
-msgstr ""
+msgstr "Πορφυρό Παλάτι"
 
 #: src/translations.h:240
 msgid "Extended Net"
-msgstr ""
+msgstr "Απλωμένο δίκτυ"
 
 #: src/translations.h:241
 msgid "Arsenal"
-msgstr ""
+msgstr "Οπλοστάσιο"
 
 #: src/translations.h:242
 msgid "Hook"
-msgstr ""
+msgstr "Γάντζος"
 
 #: src/translations.h:243
 msgid "Supreme Palace"
-msgstr ""
+msgstr "Ύψιστο Παλάτι"
 
 #: src/translations.h:244
 msgid "Jade Well"
-msgstr ""
+msgstr "Πηγάδι από Νεφρίτη"
 
 #: src/translations.h:245
 msgid "Lance"
-msgstr ""
+msgstr "Λόγχη"
 
 #: src/translations.h:247
 msgid "Mausoleum"
-msgstr "Μαυσολέιο"
+msgstr "Μαυσωλείο"
 
 #: src/translations.h:248
 msgid "Dog"
@@ -1634,43 +1638,43 @@ msgstr "Σκύλος"
 
 #: src/translations.h:249
 msgid "Earth God's Temple"
-msgstr ""
+msgstr "Ναός του Θεού στη Γη"
 
 #: src/translations.h:250
 msgid "Bow and Arrow"
-msgstr ""
+msgstr "Τόξο και Βέλος"
 
 #: src/translations.h:251
 msgid "Pestle"
-msgstr ""
+msgstr "Γουδοχέρι"
 
 #: src/translations.h:252
 msgid "Mortar"
-msgstr ""
+msgstr "Γουδί"
 
 #: src/translations.h:253
 msgid "Rooftop"
-msgstr ""
+msgstr "Σκεπή"
 
 #: src/translations.h:254
 msgid "Thunderbolt"
-msgstr ""
+msgstr "Κεραυνός"
 
 #: src/translations.h:255
 msgid "Chariot Yard"
-msgstr ""
+msgstr "Περίβολος Αρμάτων"
 
 #: src/translations.h:256
 msgid "Good Gourd"
-msgstr ""
+msgstr "Καλή κολοκύθα"
 
 #: src/translations.h:257
 msgid "Rotten Gourd"
-msgstr ""
+msgstr "Σάπια Κολοκύθα"
 
 #: src/translations.h:258
 msgid "Encampment"
-msgstr ""
+msgstr "Στρατόπεδο"
 
 #: src/translations.h:259
 msgid "Thunder and Lightning"
@@ -1678,32 +1682,31 @@ msgstr "Κεραυνός και Αστραπή"
 
 #: src/translations.h:260
 msgid "Palace Gate"
-msgstr ""
+msgstr "Πύλη του Παλατιού"
 
 #: src/translations.h:261
 msgid "Emptiness"
-msgstr ""
+msgstr "Κενότητα"
 
 #: src/translations.h:262
 msgid "Weaving Girl"
-msgstr ""
+msgstr "Υφάντρα"
 
 #: src/translations.h:263
 msgid "Girl"
 msgstr "Κορίτσι"
 
 #: src/translations.h:264
-#, fuzzy
 msgid "Ox"
-msgstr "Οξιά"
+msgstr "Βόδι"
 
 #: src/translations.h:265
 msgid "Heart"
-msgstr ""
+msgstr "Καρδιά"
 
 #: src/translations.h:266
 msgid "Room"
-msgstr ""
+msgstr "Αίθουσα"
 
 #: src/translations.h:267
 msgid "Spring"
@@ -1711,34 +1714,33 @@ msgstr "Άνοιξη"
 
 #: src/translations.h:268
 msgid "Establishment"
-msgstr ""
+msgstr "Εγκατάσταση"
 
 #: src/translations.h:269
 msgid "Flail"
-msgstr ""
+msgstr "Δάρτης"
 
 #: src/translations.h:270
 msgid "Spear"
-msgstr ""
+msgstr "Λόγχη"
 
 #: src/translations.h:271
 msgid "Right Flag"
-msgstr ""
+msgstr "Δεξιά Σημαία"
 
 #: src/translations.h:272
 msgid "Left Flag"
-msgstr ""
+msgstr "Αριστερή Σημαία"
 
 #: src/translations.h:273
 msgid "Drumstick"
-msgstr ""
+msgstr "Μπαγκέτα"
 
 #: src/translations.h:274
 msgid "Bond"
 msgstr "Δεσμός"
 
 #: src/translations.h:275
-#, fuzzy
 msgid "Woman's Bed"
 msgstr "Κρεβάτι Γυναίκας"
 
@@ -1752,7 +1754,7 @@ msgstr "Ανατολική Θύρα"
 
 #: src/translations.h:278
 msgid "Farmland"
-msgstr ""
+msgstr "Χωράφι"
 
 #: src/translations.h:279
 msgid "Star"
@@ -1764,7 +1766,7 @@ msgstr "Φαντάσματα"
 
 #: src/translations.h:281
 msgid "Xuanyuan"
-msgstr ""
+msgstr "Χουάνιαν"
 
 #: src/translations.h:282
 msgid "Tripod"
@@ -1772,31 +1774,31 @@ msgstr "Τρίποδας"
 
 #: src/translations.h:283
 msgid "Neck"
-msgstr "Λεμός"
+msgstr "Λαιμός"
 
 #: src/translations.h:284
 msgid "Zaofu"
-msgstr ""
+msgstr "Ζαοφού"
 
 #: src/translations.h:285
 msgid "Market Officer"
-msgstr ""
+msgstr "Υπάλληλος Αγοράς"
 
 #: src/translations.h:286
 msgid "Banner of Three Stars"
-msgstr ""
+msgstr "Λάβαρο των Τριών Αστεριών"
 
 #: src/translations.h:289
 msgid "Bailer"
-msgstr ""
+msgstr "Αντλία"
 
 #: src/translations.h:290
 msgid "Cat's Cradle"
-msgstr ""
+msgstr "Καλάθι της Γάτας"
 
 #: src/translations.h:291
 msgid "Voice of Joy"
-msgstr ""
+msgstr "Φωνή Χαράς"
 
 #: src/translations.h:292
 msgid "The Seven"
@@ -1804,23 +1806,23 @@ msgstr "Οι Επτά"
 
 #: src/translations.h:293
 msgid "Maui's Fishhook"
-msgstr ""
+msgstr "Αγκίστρι των Μαουί"
 
 #: src/translations.h:294
 msgid "Navigator's Triangle"
-msgstr ""
+msgstr "Τρίγωνο του Ναυτίλου"
 
 #: src/translations.h:295
 msgid "Kite of Kawelo"
-msgstr ""
+msgstr "Χαρταετός του Καγουίλο"
 
 #: src/translations.h:296
 msgid "Frigate Bird"
-msgstr ""
+msgstr "Πουλί Φρεγάτας"
 
 #: src/translations.h:297
 msgid "Cared for by Moon"
-msgstr ""
+msgstr "Φροντισμένο από το Φεγγάρι"
 
 #: src/translations.h:298
 msgid "Dolphin"
@@ -1828,39 +1830,36 @@ msgstr "Δελφίνη"
 
 #: src/translations.h:301
 msgid "Select and exit to run."
-msgstr ""
+msgstr "Επιλέξτε και κάντε έξοδο για εκτέλεση"
 
-#: src/s_gui.cpp:2219 src/s_gui.cpp:2265
+#: src/s_gui.cpp:2221 src/s_gui.cpp:2267
 msgid "Cancel"
 msgstr "Άκυρο"
 
-#: src/s_gui.cpp:2237 src/s_gui.cpp:2263
+#: src/s_gui.cpp:2239 src/s_gui.cpp:2265
 msgid "OK"
-msgstr "Ενάτξει"
+msgstr "Εντάξει"
 
-#: src/s_gui.cpp:2733
+#: src/s_gui.cpp:2735
 msgid "Year"
 msgstr "Έτος"
 
-#: src/s_gui.cpp:2736
+#: src/s_gui.cpp:2738
 msgid "Month"
 msgstr "Μήνας"
 
-#: src/s_gui.cpp:2739
+#: src/s_gui.cpp:2741
 msgid "Day"
 msgstr "Μέρα"
 
-#: src/s_gui.cpp:2742
+#: src/s_gui.cpp:2744
 msgid "Hour"
 msgstr "Ώρα"
 
-#: src/s_gui.cpp:2745
+#: src/s_gui.cpp:2747
 msgid "Minutes"
 msgstr "Λεπτά"
 
-#: src/s_gui.cpp:2748
+#: src/s_gui.cpp:2750
 msgid "Seconds"
 msgstr "Δευτερόλεπτα"
-
-#~ msgid "Loading Hipparcos catalog:"
-#~ msgstr "Φόρτωση καταλόγου Hipparcos:"
