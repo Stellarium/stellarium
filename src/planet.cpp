@@ -21,6 +21,7 @@
 #include <sstream>
 #include <iomanip>
 
+#include "s_texture.h"
 #include "planet.h"
 #include "navigator.h"
 #include "projector.h"

@@ -27,6 +27,7 @@
 #include <string>
 #include <list>
 
+#include "projector.h"
 #include "hip_star_mgr.h"
 #include "stel_object.h"
 #include "stel_object_base.h"

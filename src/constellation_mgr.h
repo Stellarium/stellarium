@@ -71,7 +71,7 @@ public:
 	void loadNames(const string& names_file);
 	
 	//! @brief Load constellation line shapes, art textures and boundaries shapes from data files
-	void loadLinesAndArt(const string& lines_file, const string& art_file, const string &boundaryfileName, LoadingBar& lb);
+	void loadLinesAndArt(const string& lines_file, const string& art_file, LoadingBar& lb);
 	
 	//! Set constellation art fade duration
 	void setArtFadeDuration(float duration);

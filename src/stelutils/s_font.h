@@ -29,7 +29,6 @@
 #include "SDL_opengl.h"
 
 #include "stel_utility.h"
-#include "s_texture.h"
 #include "typeface.h"
 
 class s_font
