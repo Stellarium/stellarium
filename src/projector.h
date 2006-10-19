@@ -24,8 +24,7 @@
 #include "vecmath.h"
 #include "s_font.h"
 
-
-
+class InitParser;
 
 // Class which handle projection modes and projection matrix
 // Overide some function usually handled by glu
@@ -60,24 +59,63 @@ public:
                              double _fov = 60.);
 	virtual ~Projector();
 
+	void init(const InitParser& conf);
+
 	virtual PROJECTOR_TYPE getType(void) const {return PERSPECTIVE_PROJECTOR;}
 	
 	//! Get the type of the mask if any
 	PROJECTOR_MASK_TYPE getMaskType(void) const {return maskType;}
 	void setMaskType(PROJECTOR_MASK_TYPE m) {maskType = m; }
 	
+	//! Set the projection type
+	void setProjectionType(const string& ptype);
+	//! Get the projection type
+	string getProjectionType(void) const {return Projector::typeToString(getType());}
+	
 	//! Get and set to define and get viewport size
 	virtual void setViewport(int x, int y, int w, int h);
+	void setViewportSize(int w, int h)
+	{
+		if (w==getViewportWidth() && h==getViewportHeight())
+			return;
+		setViewportWidth(w);
+		setViewportHeight(h);
+	}
 	void setViewport(const Vec4i& v) {setViewport(v[0], v[1], v[2], v[3]);}
+	
+	//! Set the horizontal viewport offset in pixels
 	void setViewportPosX(int x) {setViewport(x, vec_viewport[1], vec_viewport[2], vec_viewport[3]);}
+	int getViewportPosX(void) const {return vec_viewport[0];}
+	
+	//! Get/Set the vertical viewport offset in pixels
 	void setViewportPosY(int y) {setViewport(vec_viewport[0], y, vec_viewport[2], vec_viewport[3]);}
+	int getViewportPosY(void) const {return vec_viewport[1];}
+	
 	void setViewportWidth(int width) {setViewport(vec_viewport[0], vec_viewport[1], width, vec_viewport[3]);}
 	void setViewportHeight(int height) {setViewport(vec_viewport[0], vec_viewport[1], vec_viewport[2], height);}
-	int getViewportPosX(void) const {return vec_viewport[0];}
-	int getViewportPosY(void) const {return vec_viewport[1];}
+	
+
 	int getViewportWidth(void) const {return vec_viewport[2];}
 	int getViewportHeight(void) const {return vec_viewport[3];}
 	const Vec4i& getViewport(void) const {return vec_viewport;}
+	
+	//! Maximize viewport according to passed screen values
+	void setMaximizedViewport(int screenW, int screenH) {setViewport(0, 0, screenW, screenH);}
+
+	//! Set a centered squared viewport with passed vertical and horizontal offset
+	void setSquareViewport(int screenW, int screenH, int hoffset, int voffset)
+	{
+		int m = MY_MIN(screenW, screenH);
+		setViewport((screenW-m)/2+hoffset, (screenH-m)/2+voffset, m, m);
+	}
+	
+		//! Set whether a disk mask must be drawn over the viewport
+	void setViewportMaskDisk(void) {setMaskType(Projector::DISK);}
+	//! Get whether a disk mask must be drawn over the viewport
+	bool getViewportMaskDisk(void) const {return getMaskType()==Projector::DISK;}
+
+	//! Set whether no mask must be drawn over the viewport
+	void setViewportMaskNone(void) {setMaskType(Projector::NONE);}
 	
 	//! Set the current openGL viewport to projector's viewport
 	void applyViewport(void) const {glViewport(vec_viewport[0], vec_viewport[1], vec_viewport[2], vec_viewport[3]);}	
@@ -88,10 +126,12 @@ public:
 	void setFlipHorz(bool flip) {
 		flip_horz = flip ? -1.0 : 1.0;
 		init_project_matrix();
+		glFrontFace(needGlFrontFaceCW()?GL_CW:GL_CCW); 
 	}
 	void setFlipVert(bool flip) {
 		flip_vert = flip ? -1.0 : 1.0;
 		init_project_matrix();
+		glFrontFace(needGlFrontFaceCW()?GL_CW:GL_CCW); 
 	}
 	virtual bool needGlFrontFaceCW(void) const
 		{return (flip_horz*flip_vert < 0.0);}
@@ -252,6 +292,9 @@ public:
 	void setFlagGravityLabels(bool gravity) { gravityLabels = gravity; }
 	bool getFlagGravityLabels() const { return gravityLabels; }
 
+	//! Return the initial default FOV in degree
+	double getInitFov() const {return initFov;}
+	
 protected:
 	Projector(const Vec4i& viewport, double _fov = 60.);
 
@@ -271,6 +314,7 @@ protected:
 	//! The current projector mask
 	PROJECTOR_MASK_TYPE maskType;
 
+	double initFov;				// initial default FOV in degree
 	double fov;					// Field of view in degree
 	double min_fov;				// Minimum fov in degree
 	double max_fov;				// Maximum fov in degree

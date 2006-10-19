@@ -19,9 +19,11 @@
  */
 
 #include "viewport_distorter.h"
-#include "stel_core.h"
+#include "stelapp.h"
 #include "spheric_mirror_calculator.h"
 #include "init_parser.h"
+#include "stel_core.h"
+#include "stelmodulemgr.h"
 
 #include "SDL_opengl.h"
 
@@ -38,8 +40,7 @@ private:
 class ViewportDistorterFisheyeToSphericMirror : public ViewportDistorter {
 private:
   friend class ViewportDistorter;
-  ViewportDistorterFisheyeToSphericMirror(int screenW,int screenH,
-                                          StelCore *core);
+  ViewportDistorterFisheyeToSphericMirror(int screenW,int screenH);
   ~ViewportDistorterFisheyeToSphericMirror(void);
   string getType(void) const {return "fisheye_to_spheric_mirror";}
   void init(const InitParser &conf);
@@ -62,11 +63,12 @@ private:
 
 
 ViewportDistorterFisheyeToSphericMirror
-   ::ViewportDistorterFisheyeToSphericMirror(int screenW,int screenH,
-                                             StelCore *core)
+   ::ViewportDistorterFisheyeToSphericMirror(int screenW,int screenH)
     :screenW(screenW),screenH(screenH),trans_array(0) {
-  if (core->getProjectionType() == "fisheye") {
-    core->setMaxFov(175.0);
+    StelCore* core = StelApp::getInstance().getCore();
+    
+  if (core->getProjection()->getProjectionType() == "fisheye") {
+    core->getProjection()->setMaxFov(175.0);
   } else {
     cerr << "ViewportDistorterFisheyeToSphericMirror: "
          << "what are you doing? the projection type should be fisheye."
@@ -224,10 +226,9 @@ void ViewportDistorterFisheyeToSphericMirror::distort(void) const {
 }
 
 ViewportDistorter *ViewportDistorter::create(const string &type,
-                                             int width,int height,
-                                             StelCore *core) {
+                                             int width,int height) {
   if (type == "fisheye_to_spheric_mirror") {
-    return new ViewportDistorterFisheyeToSphericMirror(width,height,core);
+    return new ViewportDistorterFisheyeToSphericMirror(width,height);
   }
   return new ViewportDistorterDummy;
 }

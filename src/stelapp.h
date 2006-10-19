@@ -97,6 +97,10 @@ public:
 	//! @return the sky cultures manager
 	StelSkyCultureMgr& getSkyCultureMgr() {return *skyCultureMgr;}
 	
+	//! @brief Get the core of the program. It is the one which provide the projection, navigation and tone converter.
+	//! @return the StelCore instance of the program
+	StelCore* getCore() {return core;}
+	
 	//! Update translations and font everywhere in the program
 	void updateAppLanguage();
 	

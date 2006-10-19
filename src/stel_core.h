@@ -21,9 +21,7 @@
 
 #include <string>
 
-#include "navigator.h"
 #include "observator.h"
-#include "projector.h"
 #include "stel_object.h"
 #include "constellation_mgr.h"
 #include "nebula_mgr.h"
@@ -31,18 +29,15 @@
 #include "tone_reproductor.h"
 #include "solarsystem.h"
 #include "stel_utility.h"
-#include "init_parser.h"
 #include "draw.h"
 #include "landscape.h"
 #include "meteor_mgr.h"
-#include "loadingbar.h"
 #include "image_mgr.h"
 #include "callbacks.hpp"
 
 //!  @brief Main class for stellarium core processing.
 //!
-//! Manage all the objects to be used in the program.
-//! This class is the main API of the program. It must be documented using doxygen.
+//! Manage all the base modules which must be present in stellarium
 class StelCore
 {
 public:
@@ -71,7 +66,17 @@ public:
 	
 	//! Set the sky locale and update the sky objects names for all the modules
 	void updateSkyLanguage();
+
+	//! Get the current projector used in the core
+	Projector* getProjection() {return projection;}
 	
+	//! Get the current navigation (manages frame transformation) used in the core
+	Navigator* getNavigation() {return navigation;}
+
+	//! Get the current tone converter used in the core
+	ToneReproductor* getToneReproductor() {return tone_converter;}
+
+
 	//! Set the landscape
 	bool setLandscape(const string& new_landscape_name);
 
@@ -81,21 +86,10 @@ public:
 
 	///////////////////////////////////////////////////////////////////////////////////////
 	// Navigation
-	//! Set time speed in JDay/sec
-	void setTimeSpeed(double ts) {navigation->set_time_speed(ts);}
-	//! Get time speed in JDay/sec
-	double getTimeSpeed(void) const {return navigation->get_time_speed();}
-
 	//! Set stellarium time to current real world time
 	void setTimeNow();
 	//! Get wether the current stellarium time is the real world time
 	bool getIsTimeNow(void) const;
-
-
-	//! Set the current date in Julian Day
-	void setJDay(double JD) {navigation->set_JDay(JD);}
-	//! Get the current date in Julian Day
-	double getJDay(void) const {return navigation->get_JDay();}
 
 	//! Set object tracking
 	void setFlagTracking(bool b);
@@ -282,8 +276,6 @@ public:
 	//! Get Cardinals Points color
 	Vec3f getColorCardinalPoints(void) const {return cardinals_points->get_color();}
 
-	///////////////////////////////////////////////////////////////////////////////////////
-	// Colors
 	void setColorAzimutalGrid(const Vec3f& v) { azi_grid->setColor(v);}
 	void setColorEquatorGrid(const Vec3f& v) { equ_grid->setColor(v);}
 	void setColorEquatorLine(const Vec3f& v) { equator_line->setColor(v);}
@@ -292,64 +284,10 @@ public:
 
 	///////////////////////////////////////////////////////////////////////////////////////
 	// Projection
-	//! Set the horizontal viewport offset in pixels
-	void setViewportHorizontalOffset(int hoff) const {projection->setViewportPosX(hoff);}
-	//! Get the horizontal viewport offset in pixels
-	int getViewportHorizontalOffset(void) const {return projection->getViewportPosX();}
-
-	//! Set the vertical viewport offset in pixels
-	void setViewportVerticalOffset(int voff) const {projection->setViewportPosY(voff);}
-	//! Get the vertical viewport offset in pixels
-	int getViewportVerticalOffset(void) const {return projection->getViewportPosY();}
-
-	//! Maximize viewport according to passed screen values
-	void setMaximizedViewport(int screenW, int screenH) {projection->setViewport(0, 0, screenW, screenH);}
-
-	//! Set a centered squared viewport with passed vertical and horizontal offset
-	void setSquareViewport(int screenW, int screenH, int hoffset, int voffset)
-	{
-		int m = MY_MIN(screenW, screenH);
-		projection->setViewport((screenW-m)/2+hoffset, (screenH-m)/2+voffset, m, m);
-	}
-
-	//! Set whether a disk mask must be drawn over the viewport
-	void setViewportMaskDisk(void) {projection->setMaskType(Projector::DISK);}
-	//! Get whether a disk mask must be drawn over the viewport
-	bool getViewportMaskDisk(void) const {return projection->getMaskType()==Projector::DISK;}
-
-	//! Set whether no mask must be drawn over the viewport
-	void setViewportMaskNone(void) {projection->setMaskType(Projector::NONE);}
-
 	//! Set the projection type
 	void setProjectionType(const string& ptype);
 	//! Get the projection type
 	string getProjectionType(void) const {return Projector::typeToString(projection->getType());}
-
-	//! get/set horizontal/vertical image flip
-	bool getFlipHorz(void) const {return projection->getFlipHorz();}
-	bool getFlipVert(void) const {return projection->getFlipVert();}
-	void setFlipHorz(bool flip);
-	void setFlipVert(bool flip);
-
-	//! Set flag for enabling gravity labels
-	void setFlagGravityLabels(bool b) {projection->setFlagGravityLabels(b);}
-	//! Get flag for enabling gravity labels
-	bool getFlagGravityLabels(void) const {return projection->getFlagGravityLabels();}
-
-	//! Get viewport width
-	int getViewportWidth(void) const {return projection->getViewportWidth();}
-
-	//! Get viewport height
-	int getViewportHeight(void) const {return projection->getViewportHeight();}
-
-	//! Get viewport X position
-	int getViewportPosX(void) const {return projection->getViewportPosX();}
-
-	//! Get viewport Y position
-	int getViewportPosY(void) const {return projection->getViewportPosY();}
-
-	//! Set the viewport width and height
-	void setViewportSize(int w, int h);
 
 	//! Print the passed wstring so that it is oriented in the drection of the gravity
 	void printGravity(s_font* font, float x, float y, const wstring& str, bool speedOptimize = 1,
@@ -415,14 +353,8 @@ public:
 	//! Return the current image manager which display users images
 	ImageMgr* getImageMgr(void) const {return script_images;}
 
-
-
 	double getZoomSpeed() { return zoom_speed; }
 	float getAutoMoveDuration() { return auto_move_duration; }
-
-
-	void getFontForLocale(const string &_locale, string &_fontFile, float &_fontScale,
-						  string &_fixedFontFile, float &_fixedFontScale);
 
     string getLandscapeName(void) {return landscape->getName();}
     string getLandscapeAuthorName(void) {return landscape->getAuthorName();}

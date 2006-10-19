@@ -121,7 +121,7 @@ void StelApp::setViewPortDistorterType(const string &type)
 		delete distorter;
 		distorter = 0;
 	}
-	distorter = ViewportDistorter::create(type,screenW,screenH,core);
+	distorter = ViewportDistorter::create(type,screenW,screenH);
 	InitParser conf;
 	conf.load(configDir + "config.ini");
 	distorter->init(conf);
@@ -205,23 +205,6 @@ void StelApp::init(void)
 
 	core->init(conf);
 
-	string tmpstr = conf.get_str("projection:viewport");
-	if (tmpstr=="maximized") core->setMaximizedViewport(screenW, screenH);
-	else
-		if (tmpstr=="square" || tmpstr=="disk")
-		{
-			core->setSquareViewport(screenW, screenH,
-			                        conf.get_int("video:horizontal_offset"), conf.get_int("video:horizontal_offset"));
-			if (tmpstr=="disk") core->setViewportMaskDisk();
-
-		}
-		else
-		{
-
-			cerr << "ERROR : Unknown viewport type : " << tmpstr << endl;
-			exit(-1);
-		}
-
 	// Navigation section
 	PresetSkyTime 		= conf.get_double ("navigation","preset_sky_time",2451545.);
 	StartupTimeMode 	= conf.get_str("navigation:startup_time_mode");	// Can be "now" or "preset"
@@ -229,7 +212,7 @@ void StelApp::init(void)
 	MouseZoom			= conf.get_int("navigation","mouse_zoom",30);
 
 	if (StartupTimeMode=="preset" || StartupTimeMode=="Preset")
-		core->setJDay(PresetSkyTime - localeMgr->get_GMT_shift(PresetSkyTime) * JD_HOUR);
+		core->getNavigation()->setJDay(PresetSkyTime - localeMgr->get_GMT_shift(PresetSkyTime) * JD_HOUR);
 	else core->setTimeNow();
 
 	// initialisation of the User Interface
@@ -318,7 +301,7 @@ int StelApp::handleMove(int x, int y)
 			core->turn_left(1);
 			is_mouse_moving_horiz = true;
 		}
-		else if (x == core->getViewportWidth() - 1)
+		else if (x == core->getProjection()->getViewportWidth() - 1)
 		{
 			core->turn_right(1);
 			is_mouse_moving_horiz = true;
@@ -334,7 +317,7 @@ int StelApp::handleMove(int x, int y)
 			core->turn_up(1);
 			is_mouse_moving_vert = true;
 		}
-		else if (y == core->getViewportHeight() - 1)
+		else if (y == core->getProjection()->getViewportHeight() - 1)
 		{
 			core->turn_down(1);
 			is_mouse_moving_vert = true;
