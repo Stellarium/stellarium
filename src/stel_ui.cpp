@@ -27,6 +27,11 @@
 #include "stelfontmgr.h"
 #include "stellocalemgr.h"
 #include "stelmodulemgr.h"
+#include "constellation_mgr.h"
+#include "solarsystem.h"
+#include "nebula_mgr.h"
+#include "init_parser.h"
+#include "stel_command_interface.h"
 
 ////////////////////////////////////////////////////////////////////////////////
 //								CLASS FUNCTIONS

@@ -27,7 +27,6 @@
 #include "stellarium.h"
 #include "s_gui.h"
 #include "s_tui.h"
-#include "stel_command_interface.h"
 
 #define TUI_SCRIPT_MSG "Select and exit to run."
 
@@ -37,6 +36,7 @@ using namespace s_gui;
 class StelApp;
 class StelCore;
 class StelCommandInterface;
+class InitParser;
 
 class StelUI
 {

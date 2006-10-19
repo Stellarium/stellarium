@@ -29,6 +29,13 @@
 #include "stelskyculturemgr.h"
 #include "stelmodulemgr.h"
 #include "hip_star_mgr.h"
+#include "constellation_mgr.h"
+#include "solarsystem.h"
+#include "nebula_mgr.h"
+#include "stelapp.h"
+#include "stel_core.h"
+#include "script_mgr.h"
+#include "stel_command_interface.h"
 
 // Draw simple gravity text ui.
 void StelUI::draw_gravity_ui(void)

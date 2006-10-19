@@ -28,6 +28,9 @@
 #include "geodesic_grid.h"
 #include "hip_star_mgr.h"
 #include "telescope_mgr.h"
+#include "constellation_mgr.h"
+#include "solarsystem.h"
+#include "nebula_mgr.h"
 
 #define LOADING_BAR_DEFAULT_FONT_SIZE 12.
 
@@ -596,6 +599,13 @@ bool StelCore::findAndSelect(int x, int y)
 	Vec3d v;
 	projection->unproject_earth_equ(x,projection->getViewportHeight()-y,v);
 	return findAndSelect(v);
+}
+
+//! Deselect selected object if any
+//! Does not deselect selected constellation
+void StelCore::unSelect(void) {
+	selected_object=NULL;
+	ssystem->setSelected(StelObject());
 }
 
 // Find an object in a "clever" way
