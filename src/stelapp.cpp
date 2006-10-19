@@ -54,7 +54,7 @@ StelApp::StelApp(const string& CDIR, const string& LDIR, const string& DATA_ROOT
 	rootDir = DATA_ROOT + "/";
 	
 	// Set textures directory
-	s_texture::set_texDir(rootDir + "textures/");
+	STexture::set_texDir(rootDir + "textures/");
 	
 	localeMgr = new StelLocaleMgr();
 	fontManager = new StelFontMgr(getDataFilePath("fontmap.dat"));

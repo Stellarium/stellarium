@@ -85,7 +85,7 @@ protected:
 
 typedef struct
 {
-	s_texture* tex;
+	STexture* tex;
 	float tex_coords[4];
 } landscape_tex_coord;
 
@@ -101,13 +101,13 @@ private:
 	void draw_fog(ToneReproductor * eye, const Projector* prj, const Navigator* nav) const;
 	void draw_decor(ToneReproductor * eye, const Projector* prj, const Navigator* nav) const;
 	void draw_ground(ToneReproductor * eye, const Projector* prj, const Navigator* nav) const;
-	s_texture** side_texs;
+	STexture** side_texs;
 	int nb_side_texs;
 	int nb_side;
 	landscape_tex_coord* sides;
-	s_texture* fog_tex;
+	STexture* fog_tex;
 	landscape_tex_coord fog_tex_coord;
-	s_texture* ground_tex;
+	STexture* ground_tex;
 	landscape_tex_coord ground_tex_coord;
 	int nb_decor_repeat;
 	float fog_alt_angle;
@@ -130,7 +130,7 @@ public:
 	void create(const string _name, bool _fullpath, const string _maptex, double _texturefov);
 private:
 
-	s_texture* map_tex;
+	STexture* map_tex;
 	float tex_fov;
 };
 
@@ -145,7 +145,7 @@ public:
 	void create(const string _name, bool _fullpath, const string _maptex);
 private:
 
-	s_texture* map_tex;
+	STexture* map_tex;
 };
 
 #endif // _LANDSCAPE_H_

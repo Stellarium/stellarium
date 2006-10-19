@@ -26,8 +26,8 @@
 #include "stel_utility.h"
 #include "s_gui.h"
 
-s_texture * Nebula::tex_circle = NULL;
-s_font* Nebula::nebula_font = NULL;
+STexture * Nebula::tex_circle = NULL;
+SFont* Nebula::nebula_font = NULL;
 float Nebula::circleScale = 1.f;
 float Nebula::hints_brightness = 0;
 Vec3f Nebula::label_color = Vec3f(0.4,0.3,0.5);
@@ -189,7 +189,7 @@ bool Nebula::readTexture(const string& record)
 	// Calc the angular size in radian : TODO this should be independant of tex_angular_size
 	angular_size = tex_angular_size/2/60*M_PI/180;
 
-	neb_tex = new s_texture(tex_name, TEX_LOAD_TYPE_PNG_BLEND1, true);  // use mipmaps
+	neb_tex = new STexture(tex_name, TEX_LOAD_TYPE_PNG_BLEND1, true);  // use mipmaps
 
 	luminance = ToneReproductor::mag_to_luminance(mag, tex_angular_size*tex_angular_size*3600);
 

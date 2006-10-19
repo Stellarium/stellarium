@@ -146,7 +146,7 @@ private:
     Constellation* findFromAbbreviation(const string& abbreviation) const;		
     vector<Constellation*> asterisms;
 	double fontSize;
-    s_font* asterFont;
+    SFont* asterFont;
     HipStarMgr* hipStarMgr;
 	Constellation* selected;
 	bool isolateSelected;

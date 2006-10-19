@@ -29,7 +29,7 @@ using namespace std;
 
 class Navigator;
 class Projector;
-class s_texture;
+class STexture;
 
 class StelObjectBase {
 public:
@@ -84,10 +84,10 @@ protected:
                                    const Navigator *nav = NULL) {return 0;}
 private:
   static int local_time;
-  static s_texture * pointer_star;
-  static s_texture * pointer_planet;
-  static s_texture * pointer_nebula;
-  static s_texture * pointer_telescope;
+  static STexture * pointer_star;
+  static STexture * pointer_planet;
+  static STexture * pointer_nebula;
+  static STexture * pointer_telescope;
 };
 
 #endif

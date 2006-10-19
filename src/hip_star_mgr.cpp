@@ -241,7 +241,7 @@ public:
   virtual void draw(int index,bool is_inside,bool draw_point,
                     const float *rmag_table,const Projector *prj,
                     unsigned int max_mag_star_name,float names_brightness,
-                    s_font *starFont,
+                    SFont *starFont,
                     unsigned int star_texture_id) const = 0;
   bool isInitialized(void) const {return (nr_of_zones>0);}
   void initTriangle(int index,
@@ -286,7 +286,7 @@ private:
   void draw(int index,bool is_inside,bool draw_point,
             const float *rmag_table,const Projector *prj,
             unsigned int max_mag_star_name,float names_brightness,
-            s_font *starFont,unsigned int star_texture_id) const;
+            SFont *starFont,unsigned int star_texture_id) const;
 };
 
 struct HipIndexStruct {
@@ -951,7 +951,7 @@ wstring HipStarMgr::getSciName(int hip) {
 
 void HipStarMgr::init(const InitParser& conf, LoadingBar& lb) {
   load_data(lb);
-  starTexture = new s_texture("star16x16.png",TEX_LOAD_TYPE_PNG_SOLID,false);  // Load star texture no mipmap
+  starTexture = new STexture("star16x16.png",TEX_LOAD_TYPE_PNG_SOLID,false);  // Load star texture no mipmap
   double fontSize = 12;
   starFont = &StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getLocaleMgr().getSkyLanguage(), fontSize);
   	setFlagStars(conf.get_boolean("astro:flag_stars"));
@@ -1195,7 +1195,7 @@ void SpecialZoneArray<Star>::draw(int index,bool is_inside,
                                   const Projector *prj,
                                   unsigned int max_mag_star_name,
                                   float names_brightness,
-                                  s_font *starFont,
+                                  SFont *starFont,
                                   unsigned int star_texture_id) const {
   if (draw_point) {
     glDisable(GL_TEXTURE_2D);

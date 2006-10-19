@@ -117,7 +117,7 @@ void Constellation::draw_optim(Projector* prj) const
 }
 
 // Draw the name
-void Constellation::draw_name(s_font *constfont, Projector* prj) const
+void Constellation::draw_name(SFont *constfont, Projector* prj) const
 {
 	if(!name_fader.getInterstate()) return;
 	glColor4f(labelColor[0], labelColor[1], labelColor[2], name_fader.getInterstate());
@@ -138,15 +138,15 @@ void Constellation::draw_art_optim(Projector* prj, const Navigator* nav) const
 		bool b0, b1, b2, b3, b4, b5, b6, b7, b8; 
 
 		// If one of the point is in the screen
-		b0 = prj->project_j2000_check(art_vertex[0],v0) || (nav->get_prec_equ_vision().dot(art_vertex[0])>0.9);
-		b1 = prj->project_j2000_check(art_vertex[1],v1) || (nav->get_prec_equ_vision().dot(art_vertex[1])>0.9);
-		b2 = prj->project_j2000_check(art_vertex[2],v2) || (nav->get_prec_equ_vision().dot(art_vertex[2])>0.9);
-		b3 = prj->project_j2000_check(art_vertex[3],v3) || (nav->get_prec_equ_vision().dot(art_vertex[3])>0.9);
-		b4 = prj->project_j2000_check(art_vertex[4],v4) || (nav->get_prec_equ_vision().dot(art_vertex[4])>0.9);
-		b5 = prj->project_j2000_check(art_vertex[5],v5) || (nav->get_prec_equ_vision().dot(art_vertex[5])>0.9);
-		b6 = prj->project_j2000_check(art_vertex[6],v6) || (nav->get_prec_equ_vision().dot(art_vertex[6])>0.9);
-		b7 = prj->project_j2000_check(art_vertex[7],v7) || (nav->get_prec_equ_vision().dot(art_vertex[7])>0.9);
-		b8 = prj->project_j2000_check(art_vertex[8],v8) || (nav->get_prec_equ_vision().dot(art_vertex[8])>0.9);
+		b0 = prj->project_j2000_check(art_vertex[0],v0) || (nav->getPrecEquVision().dot(art_vertex[0])>0.9);
+		b1 = prj->project_j2000_check(art_vertex[1],v1) || (nav->getPrecEquVision().dot(art_vertex[1])>0.9);
+		b2 = prj->project_j2000_check(art_vertex[2],v2) || (nav->getPrecEquVision().dot(art_vertex[2])>0.9);
+		b3 = prj->project_j2000_check(art_vertex[3],v3) || (nav->getPrecEquVision().dot(art_vertex[3])>0.9);
+		b4 = prj->project_j2000_check(art_vertex[4],v4) || (nav->getPrecEquVision().dot(art_vertex[4])>0.9);
+		b5 = prj->project_j2000_check(art_vertex[5],v5) || (nav->getPrecEquVision().dot(art_vertex[5])>0.9);
+		b6 = prj->project_j2000_check(art_vertex[6],v6) || (nav->getPrecEquVision().dot(art_vertex[6])>0.9);
+		b7 = prj->project_j2000_check(art_vertex[7],v7) || (nav->getPrecEquVision().dot(art_vertex[7])>0.9);
+		b8 = prj->project_j2000_check(art_vertex[8],v8) || (nav->getPrecEquVision().dot(art_vertex[8])>0.9);
 			
 		if (b0 || b1 || b2 || b3 || b4 || b5 || b6 || b7 || b8)
 		{

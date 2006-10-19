@@ -29,7 +29,7 @@ using namespace std;
 
 class Navigator;
 class Projector;
-class s_texture;
+class STexture;
 class StelObjectBase;
 
 class StelObject {

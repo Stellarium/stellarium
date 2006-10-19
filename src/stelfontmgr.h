@@ -37,12 +37,12 @@ public:
 	//! Get the standard font associated to the given language ISO code.
 	//! @param langageName the ISO language name such as "fr" or "en" or "*" for default.
 	//! @param scale the scale with respect to the default size for the language.
-	s_font& getStandardFont(const string &langageName, double scale=1.);
+	SFont& getStandardFont(const string &langageName, double scale=1.);
 	
 	//! Get the fixed font associated to the given language ISO code.
 	//! @param langageName the ISO language name such as "fr" or "en" or "*" for default.
 	//! @param scale the scale with respect to the default size for the language.
-	s_font& getFixedFont(const string &langageName, double scale=1.);
+	SFont& getFixedFont(const string &langageName, double scale=1.);
 	
 private:
 	// Class which describes which font to use for a given langage ISO code.
@@ -85,7 +85,7 @@ private:
 	std::map<string, FontForLanguage> fontMapping;
 	
 	// Keep references on all loaded fonts
-	std::map<LoadedFont, s_font*, ltLoadedFont> loadedFonts;
+	std::map<LoadedFont, SFont*, ltLoadedFont> loadedFonts;
 };
 
 #endif

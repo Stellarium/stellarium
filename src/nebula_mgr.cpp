@@ -73,7 +73,7 @@ void NebulaMgr::init(const InitParser& conf, LoadingBar& lb)
 	Nebula::nebula_font = &StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getLocaleMgr().getSkyLanguage(), fontSize);
 
 	if (!Nebula::tex_circle)
-		Nebula::tex_circle = new s_texture("neb.png");   // Load circle texture
+		Nebula::tex_circle = new STexture("neb.png");   // Load circle texture
 		
 	setFlagShow(conf.get_boolean("astro:flag_nebula"));
 	setFlagHints(conf.get_boolean("astro:flag_nebula_name"));
@@ -99,7 +99,7 @@ double NebulaMgr::draw(Projector* prj, const Navigator * nav, ToneReproductor* e
 	// FOV is currently measured vertically, so need to adjust for wide screens
 	// TODO: projector should probably use largest measurement itself
 	float max_fov = MY_MAX( prj->get_fov(), prj->get_fov()*prj->getViewportWidth()/prj->getViewportHeight());
-	nbZones = nebGrid.Intersect(nav->get_prec_equ_vision(), max_fov*M_PI/180.f*1.2f);
+	nbZones = nebGrid.Intersect(nav->getPrecEquVision(), max_fov*M_PI/180.f*1.2f);
 	static int * zoneList = nebGrid.getResult();
 	
     prj->set_orthographic_projection();	// set 2D coordinate

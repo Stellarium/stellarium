@@ -35,7 +35,7 @@ extraTextFont(StelApp::getInstance().getFontManager().getStandardFont(StelApp::g
 	splashy = prj->getViewportPosY() + (screenh - height)/2;
 	barx = prj->getViewportPosX() + (screenw - barwidth)/2;
 	bary = splashy + 34;
-	if (!splash_tex.empty()) splash = new s_texture(splash_tex, TEX_LOAD_TYPE_PNG_ALPHA);
+	if (!splash_tex.empty()) splash = new STexture(splash_tex, TEX_LOAD_TYPE_PNG_ALPHA);
 	extraTextPos.set(extraTextPosx, extraTextPosy);
 }
 	

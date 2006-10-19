@@ -30,10 +30,10 @@ StelObject StelObjectBase::getBrightestStarInConstellation(void) const {
   return StelObject();
 }
 
-s_texture * StelObjectBase::pointer_star = NULL;
-s_texture * StelObjectBase::pointer_planet = NULL;
-s_texture * StelObjectBase::pointer_nebula = NULL;
-s_texture * StelObjectBase::pointer_telescope = NULL;
+STexture * StelObjectBase::pointer_star = NULL;
+STexture * StelObjectBase::pointer_planet = NULL;
+STexture * StelObjectBase::pointer_nebula = NULL;
+STexture * StelObjectBase::pointer_telescope = NULL;
 
 int StelObjectBase::local_time = 0;
 
@@ -132,10 +132,10 @@ void StelObjectBase::draw_pointer(int delta_time, const Projector* prj, const Na
 
 void StelObjectBase::init_textures(void)
 {
-	pointer_star = new s_texture("pointeur2.png");
-	pointer_planet = new s_texture("pointeur4.png");
-	pointer_nebula = new s_texture("pointeur5.png");
-	pointer_telescope = new s_texture("pointeur2.png");
+	pointer_star = new STexture("pointeur2.png");
+	pointer_planet = new STexture("pointeur4.png");
+	pointer_nebula = new STexture("pointeur5.png");
+	pointer_telescope = new STexture("pointeur2.png");
 }
 
 void StelObjectBase::delete_textures(void)
