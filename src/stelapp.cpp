@@ -29,6 +29,9 @@
 #include "stellocalemgr.h"
 #include "stelskyculturemgr.h"
 #include "hip_star_mgr.h"
+#include "constellation_mgr.h"
+#include "solarsystem.h"
+#include "nebula_mgr.h"
 
 // Initialize static variables
 StelApp* StelApp::singleton = NULL;
@@ -121,7 +124,7 @@ void StelApp::setViewPortDistorterType(const string &type)
 		delete distorter;
 		distorter = 0;
 	}
-	distorter = ViewportDistorter::create(type,screenW,screenH);
+	distorter = ViewportDistorter::create(type,screenW,screenH, core->getProjection());
 	InitParser conf;
 	conf.load(configDir + "config.ini");
 	distorter->init(conf);

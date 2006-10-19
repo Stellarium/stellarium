@@ -19,12 +19,12 @@
 
 
 #include <iostream>
-#include <string>
 #include <dirent.h>
 #include <cstdio>
 
 #include "script_mgr.h"
-
+#include "script.h"
+#include "stel_command_interface.h"
 
 using namespace std;
 

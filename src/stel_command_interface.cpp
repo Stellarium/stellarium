@@ -30,6 +30,9 @@
 #include "stelmodulemgr.h"
 #include "stelskyculturemgr.h"
 #include "hip_star_mgr.h"
+#include "constellation_mgr.h"
+#include "solarsystem.h"
+#include "nebula_mgr.h"
 
 using namespace std;
 

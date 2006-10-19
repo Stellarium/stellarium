@@ -21,19 +21,13 @@
 
 #include <string>
 
-#include "observator.h"
 #include "stel_object.h"
-#include "constellation_mgr.h"
-#include "nebula_mgr.h"
-#include "stel_atmosphere.h"
-#include "tone_reproductor.h"
-#include "solarsystem.h"
-#include "stel_utility.h"
 #include "draw.h"
 #include "landscape.h"
 #include "meteor_mgr.h"
 #include "image_mgr.h"
 #include "callbacks.hpp"
+#include "stel_atmosphere.h"
 
 //!  @brief Main class for stellarium core processing.
 //!
@@ -57,8 +51,7 @@ public:
 
 	//! Execute all the drawing functions
 	//! @param delta_time the time increment in ms.
-	// Returns the max squared distance in pixels any single object has
-	// moved since the previous update.
+	//! @returns the max squared distance in pixels any single object has moved since the previous update.
 	double draw(int delta_time);
 	
 	//! Update the sky culture for all the modules
@@ -196,10 +189,7 @@ public:
 
 	//! Deselect selected object if any
 	//! Does not deselect selected constellation
-    void unSelect(void) {
-      selected_object=NULL;
-      ssystem->setSelected(StelObject());
-    }
+    void unSelect(void);
 
 	//! Set whether a pointer is to be drawn over selected object
 	void setFlagSelectedObjectPointer(bool b) { object_pointer_visibility = b; }
@@ -383,10 +373,10 @@ private:
 	Projector * projection;				// Manage the projection mode and matrix
 	StelObject selected_object;			// The selected object in stellarium
 	class HipStarMgr * hip_stars;		// Manage the hipparcos stars
-	ConstellationMgr * asterisms;		// Manage constellations (boundaries, names etc..)
-	NebulaMgr * nebulas;				// Manage the nebulas
-	SolarSystem* ssystem;				// Manage the solar system
-	Atmosphere * atmosphere;			// Atmosphere
+	class ConstellationMgr * asterisms;		// Manage constellations (boundaries, names etc..)
+	class NebulaMgr * nebulas;				// Manage the nebulas
+	class SolarSystem* ssystem;				// Manage the solar system
+	class Atmosphere * atmosphere;			// Atmosphere
 	SkyGrid * equ_grid;					// Equatorial grid
 	SkyGrid * azi_grid;					// Azimutal grid
 	SkyLine * equator_line;				// Celestial Equator line
