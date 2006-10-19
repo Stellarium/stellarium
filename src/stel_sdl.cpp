@@ -288,7 +288,7 @@ void StelApp::startMainLoop()
 
 				case SDL_VIDEORESIZE:
 					// Recalculate The OpenGL Scene Data For The New Window
-					if (E.resize.h && E.resize.w) core->setViewportSize(E.resize.w, E.resize.h);
+					if (E.resize.h && E.resize.w) core->getProjection()->setViewportSize(E.resize.w, E.resize.h);
 					break;
 
 				case SDL_ACTIVEEVENT:

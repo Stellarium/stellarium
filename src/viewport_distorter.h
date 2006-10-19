@@ -35,8 +35,7 @@ class InitParser;
 class ViewportDistorter {
 public:
   static ViewportDistorter *create(const string &type,
-                                   int width,int height,
-                                   StelCore *core);
+                                   int width,int height);
     // StelCore is needed for getProjectionType and setMaxFov
   virtual ~ViewportDistorter(void) {}
   virtual string getType(void) const = 0;

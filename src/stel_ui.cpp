@@ -156,17 +156,17 @@ void StelUI::init(const InitParser& conf)
 	Painter p(baseTex, &baseFont, s_color(0.5, 0.5, 0.5), s_color(1., 1., 1.));
 	Component::setDefaultPainter(p);
 
-	Component::initScissor(core->getViewportWidth(), core->getViewportHeight());
+	Component::initScissor(core->getProjection()->getViewportWidth(), core->getProjection()->getViewportHeight());
 
 	desktop = new Container(true);
-	desktop->reshape(0,0,core->getViewportWidth(),core->getViewportHeight());
+	desktop->reshape(0,0,core->getProjection()->getViewportWidth(),core->getProjection()->getViewportHeight());
 
 	bt_flag_help_lbl = new Label(L"ERROR...");
-	bt_flag_help_lbl->setPos(3,core->getViewportHeight()-41-(int)baseFont.getDescent());
+	bt_flag_help_lbl->setPos(3,core->getProjection()->getViewportHeight()-41-(int)baseFont.getDescent());
 	bt_flag_help_lbl->setVisible(0);
 
 	bt_flag_time_control_lbl = new Label(L"ERROR...");
-	bt_flag_time_control_lbl->setPos(core->getViewportWidth()-210,core->getViewportHeight()-41-(int)baseFont.getDescent());
+	bt_flag_time_control_lbl->setPos(core->getProjection()->getViewportWidth()-210,core->getProjection()->getViewportHeight()-41-(int)baseFont.getDescent());
 	bt_flag_time_control_lbl->setVisible(0);
 
 	// Info on selected object
@@ -232,12 +232,12 @@ Component* StelUI::createTopBar(s_font& baseFont)
 {
 	top_bar_date_lbl = new Label(L"-", &baseFont);	top_bar_date_lbl->setPos(2,1);
 	top_bar_hour_lbl = new Label(L"-", &baseFont);	top_bar_hour_lbl->setPos(110,1);
-	top_bar_fps_lbl = new Label(L"-", &baseFont);	top_bar_fps_lbl->setPos(core->getViewportWidth()-100,1);
-	top_bar_fov_lbl = new Label(L"-", &baseFont);	top_bar_fov_lbl->setPos(core->getViewportWidth()-220,1);
+	top_bar_fps_lbl = new Label(L"-", &baseFont);	top_bar_fps_lbl->setPos(core->getProjection()->getViewportWidth()-100,1);
+	top_bar_fov_lbl = new Label(L"-", &baseFont);	top_bar_fov_lbl->setPos(core->getProjection()->getViewportWidth()-220,1);
 	top_bar_appName_lbl = new Label(StelUtils::stringToWstring(APP_NAME), &baseFont);
-	top_bar_appName_lbl->setPos(core->getViewportWidth()/2-top_bar_appName_lbl->getSizex()/2,1);
+	top_bar_appName_lbl->setPos(core->getProjection()->getViewportWidth()/2-top_bar_appName_lbl->getSizex()/2,1);
 	top_bar_ctr = new FilledContainer();
-	top_bar_ctr->reshape(0,0,core->getViewportWidth(),(int)(baseFont.getLineHeight()+0.5)+5);
+	top_bar_ctr->reshape(0,0,core->getProjection()->getViewportWidth(),(int)(baseFont.getLineHeight()+0.5)+5);
 	top_bar_ctr->addComponent(top_bar_date_lbl);
 	top_bar_ctr->addComponent(top_bar_hour_lbl);
 	top_bar_ctr->addComponent(top_bar_fps_lbl);
@@ -252,7 +252,7 @@ void StelUI::updateTopBar(void)
 	top_bar_ctr->setVisible(FlagShowTopBar);
 	if (!FlagShowTopBar) return;
 
-	double jd = core->getJDay();
+	double jd = core->getNavigation()->getJDay();
 
 	if (FlagShowDate)
 	{
@@ -413,7 +413,7 @@ Component* StelUI::createFlagButtons(const InitParser &conf)
 	bt_flag_ctr->addComponent(bt_flag_quit);			bt_flag_quit->setPos(x,0); x+=UI_BT;
 
 	bt_flag_ctr->setOnMouseInOutCallback(callback<void>(this, &StelUI::bt_flag_ctrOnMouseInOut));
-	bt_flag_ctr->reshape(0, core->getViewportHeight()-25, x-1, 25);
+	bt_flag_ctr->reshape(0, core->getProjection()->getViewportHeight()-25, x-1, 25);
 
 	return bt_flag_ctr;
 
@@ -446,39 +446,39 @@ Component* StelUI::createTimeControlButtons(void)
 	bt_time_control_ctr->addComponent(bt_time_now);			bt_time_now->setPos(75,0);
 
 	bt_time_control_ctr->setOnMouseInOutCallback(callback<void>(this, &StelUI::bt_time_control_ctrOnMouseInOut));
-	bt_time_control_ctr->reshape(core->getViewportWidth()-4*25-1, core->getViewportHeight()-25, 4*25, 25);
+	bt_time_control_ctr->reshape(core->getProjection()->getViewportWidth()-4*25-1, core->getProjection()->getViewportHeight()-25, 4*25, 25);
 
 	return bt_time_control_ctr;
 }
 
 void StelUI::bt_dec_time_speed_cb(void)
 {
-	double s = core->getTimeSpeed();
+	double s = core->getNavigation()->getTimeSpeed();
 	if (s>JD_SECOND) s/=10.;
 	else if (s<=-JD_SECOND) s*=10.;
 	else if (s>-JD_SECOND && s<=0.) s=-JD_SECOND;
 	else if (s>0. && s<=JD_SECOND) s=0.;
-	core->setTimeSpeed(s);
+	core->getNavigation()->setTimeSpeed(s);
 }
 
 void StelUI::bt_inc_time_speed_cb(void)
 {
-	double s = core->getTimeSpeed();
+	double s = core->getNavigation()->getTimeSpeed();
 	if (s>=JD_SECOND) s*=10.;
 	else if (s<-JD_SECOND) s/=10.;
 	else if (s>=0. && s<JD_SECOND) s=JD_SECOND;
 	else if (s>=-JD_SECOND && s<0.) s=0.;
-	core->setTimeSpeed(s);
+	core->getNavigation()->setTimeSpeed(s);
 }
 
 void StelUI::bt_real_time_speed_cb(void)
 {
-	core->setTimeSpeed(JD_SECOND);
+	core->getNavigation()->setTimeSpeed(JD_SECOND);
 }
 
 void StelUI::bt_time_now_cb(void)
 {
-	core->setJDay(get_julian_from_sys());
+	core->getNavigation()->setJDay(get_julian_from_sys());
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -533,8 +533,8 @@ void StelUI::cb(void)
 	
 	NebulaMgr* nmgr = (NebulaMgr*)StelApp::getInstance().getModuleMgr().getModule("nebulas");
 	nmgr->setFlagHints( bt_flag_nebula_name->getState() );
-	if (bt_flip_horz) core->setFlipHorz( bt_flip_horz->getState() );
-	if (bt_flip_vert) core->setFlipVert( bt_flip_vert->getState() );
+	if (bt_flip_horz) core->getProjection()->setFlipHorz( bt_flip_horz->getState() );
+	if (bt_flip_vert) core->getProjection()->setFlipVert( bt_flip_vert->getState() );
 	FlagHelp 				= bt_flag_help->getState();
 	help_win->setVisible(FlagHelp);
 	core->setMountMode(bt_flag_equatorial_mode->getState() ? StelCore::MOUNT_EQUATORIAL : StelCore::MOUNT_ALTAZIMUTAL);
@@ -768,7 +768,7 @@ void StelUI::draw(void)
 	Component::enableScissor();
 
 	glScalef(1, -1, 1);						// invert the y axis, down is positive
-	glTranslatef(0, -core->getViewportHeight(), 0);	// move the origin from the bottom left corner to the upper left corner
+	glTranslatef(0, -core->getProjection()->getViewportHeight(), 0);	// move the origin from the bottom left corner to the upper left corner
 
 	desktop->draw();
 
@@ -1137,7 +1137,7 @@ int StelUI::handle_keys(SDLKey key, SDLMod mod, Uint16 unicode, S_GUI_VALUE stat
 //                Fabien wants to toggle
 //              core->setFlipHorz(mod & KMOD_SHIFT);
               if (mod & KMOD_SHIFT) {
-                core->setFlipHorz(!core->getFlipHorz());
+                core->getProjection()->setFlipHorz(!core->getProjection()->getFlipHorz());
               }
             } else {
               FlagHelp=!FlagHelp;
@@ -1149,7 +1149,7 @@ int StelUI::handle_keys(SDLKey key, SDLMod mod, Uint16 unicode, S_GUI_VALUE stat
 //                Fabien wants to toggle
 //              core->setFlipVert(mod & KMOD_SHIFT);
               if (mod & KMOD_SHIFT) {
-                core->setFlipVert(!core->getFlipVert());
+                core->getProjection()->setFlipVert(!core->getProjection()->getFlipVert());
               }
             } else {
               app->commander->execute_command( "flag constellation_names toggle");
@@ -1329,22 +1329,21 @@ void StelUI::gui_update_widgets(int delta_time)
 	bt_flag_help->setState(help_win->getVisible());
 	bt_flag_equatorial_mode->setState(core->getMountMode()==StelCore::MOUNT_EQUATORIAL);
 	bt_flag_config->setState(config_win->getVisible());
-//	bt_flag_chart->setState(app->getVisionModeChart());
 	bt_flag_night->setState(app->getVisionModeNight());
 	bt_flag_search->setState(search_win->getVisible());
 	bt_flag_goto->setState(false);
-	if (bt_flip_horz) bt_flip_horz->setState(core->getFlipHorz());
-	if (bt_flip_vert) bt_flip_vert->setState(core->getFlipVert());
+	if (bt_flip_horz) bt_flip_horz->setState(core->getProjection()->getFlipHorz());
+	if (bt_flip_vert) bt_flip_vert->setState(core->getProjection()->getFlipVert());
 
-	bt_real_time_speed->setState(fabs(core->getTimeSpeed()-JD_SECOND)<0.000001);
-	bt_inc_time_speed->setState((core->getTimeSpeed()-JD_SECOND)>0.0001);
-	bt_dec_time_speed->setState((core->getTimeSpeed()-JD_SECOND)<-0.0001);
+	bt_real_time_speed->setState(fabs(core->getNavigation()->getTimeSpeed()-JD_SECOND)<0.000001);
+	bt_inc_time_speed->setState((core->getNavigation()->getTimeSpeed()-JD_SECOND)>0.0001);
+	bt_dec_time_speed->setState((core->getNavigation()->getTimeSpeed()-JD_SECOND)<-0.0001);
 	// cache last time to prevent to much slow system call
 	static double lastJD = 0;
-	if (fabs(lastJD-core->getJDay())>JD_SECOND/4)
+	if (fabs(lastJD-core->getNavigation()->getJDay())>JD_SECOND/4)
 	{
-		bt_time_now->setState(fabs(core->getJDay()-get_julian_from_sys())<JD_SECOND);
-		lastJD = core->getJDay();
+		bt_time_now->setState(fabs(core->getNavigation()->getJDay()-get_julian_from_sys())<JD_SECOND);
+		lastJD = core->getNavigation()->getJDay();
 	}
 	if (config_win->getVisible()) updateConfigForm();
 }
@@ -1371,7 +1370,7 @@ void StelUI::setTitleObservatoryName(const wstring& name)
 	{
 		top_bar_appName_lbl->setLabel(StelUtils::stringToWstring(APP_NAME) + L" (" + name + L")");
 	}
-	top_bar_appName_lbl->setPos(core->getViewportWidth()/2-top_bar_appName_lbl->getSizex()/2,1);
+	top_bar_appName_lbl->setPos(core->getProjection()->getViewportWidth()/2-top_bar_appName_lbl->getSizex()/2,1);
 }
 
 wstring StelUI::getTitleWithAltitude(void)

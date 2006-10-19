@@ -71,10 +71,15 @@ public:
 	void save_position(const string&);		// Save the position info in the file name given
 
 	// Time controls
-	void set_JDay(double JD) {JDay=JD;}
-	double get_JDay(void) const {return JDay;}
-	void set_time_speed(double ts) {time_speed=ts;}
-	double get_time_speed(void) const {return time_speed;}
+	//! Set the current date in Julian Day
+	void setJDay(double JD) {JDay=JD;}
+	//! Get the current date in Julian Day
+	double getJDay(void) const {return JDay;}
+	
+	//! Set time speed in JDay/sec
+	void setTimeSpeed(double ts) {time_speed=ts;}
+	//! Get time speed in JDay/sec
+	double getTimeSpeed(void) const {return time_speed;}
 
 	// Flags controls
 	void set_flag_traking(int v) {flag_traking=v;}

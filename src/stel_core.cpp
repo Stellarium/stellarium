@@ -127,23 +127,13 @@ StelCore::~StelCore()
 // Load core data and initialize with default values
 void StelCore::init(const InitParser& conf)
 {	
-	// Video Section
-	setViewportSize(conf.get_int("video:screen_w"), conf.get_int("video:screen_h"));
-	setViewportHorizontalOffset(conf.get_int    ("video:horizontal_offset"));
-	setViewportVerticalOffset(conf.get_int    ("video:vertical_offset"));
-
 	// Projector
 	string tmpstr = conf.get_str("projection:type");
 	setProjectionType(tmpstr);
-	tmpstr = conf.get_str("projection:viewport");
-	const Projector::PROJECTOR_MASK_TYPE projMaskType = Projector::stringToMaskType(tmpstr);
-	projection->setMaskType(projMaskType);
-	InitFov	= conf.get_double ("navigation","init_fov",60.);
-	projection->set_fov(InitFov);
-	setFlagGravityLabels( conf.get_boolean("viewing:flag_gravity_labels") );
+	projection->init(conf);
 
 	LoadingBar lb(projection, LOADING_BAR_DEFAULT_FONT_SIZE, "logo24bits.png",
-	              getViewportWidth(), getViewportHeight(),
+	              projection->getViewportWidth(), projection->getViewportHeight(),
 	              StelUtils::stringToWstring(VERSION), 45, 320, 121);
 	
 	// Init the solar system first
@@ -234,7 +224,7 @@ void StelCore::update(int delta_time)
 	navigation->update_time(delta_time);
 
 	// Position of sun and all the satellites (ie planets)
-	ssystem->computePositions(navigation->get_JDay(),
+	ssystem->computePositions(navigation->getJDay(),
 	                          navigation->getHomePlanet()->get_heliocentric_ecliptic_pos());
 
 	// communicate with the telescopes:
@@ -294,7 +284,7 @@ void StelCore::update(int delta_time)
 	                                    navigation->get_j2000_to_eye_mat());
 
 	// Compute the atmosphere color and intensity
-	atmosphere->compute_color(navigation->get_JDay(), sunPos, moonPos,
+	atmosphere->compute_color(navigation->getJDay(), sunPos, moonPos,
 	                          ssystem->getMoon()->get_phase(ssystem->getEarth()->get_heliocentric_ecliptic_pos()),
 	                          tone_converter, projection, observatory->get_latitude(), observatory->get_altitude(),
 	                          15.f, 40.f);	// Temperature = 15c, relative humidity = 40%
@@ -473,15 +463,6 @@ bool StelCore::loadLandscape(stringHash_t& param)
 	return 1;
 }
 
-
-void StelCore::setViewportSize(int w, int h)
-{
-	if (w==getViewportWidth() && h==getViewportHeight())
-		return;
-	projection->setViewportWidth(w);
-	projection->setViewportHeight(h);
-}
-
 StelObject StelCore::searchByNameI18n(const wstring &name) const
 {
 	StelObject rval;
@@ -613,7 +594,7 @@ bool StelCore::findAndSelect(const Vec3d& pos)
 bool StelCore::findAndSelect(int x, int y)
 {
 	Vec3d v;
-	projection->unproject_earth_equ(x,getViewportHeight()-y,v);
+	projection->unproject_earth_equ(x,projection->getViewportHeight()-y,v);
 	return findAndSelect(v);
 }
 
@@ -780,7 +761,7 @@ void StelCore::autoZoomOut(float move_duration, bool full)
 		}
 	}
 
-	projection->zoom_to(InitFov, move_duration);
+	projection->zoom_to(projection->getInitFov(), move_duration);
 	navigation->move_to(navigation->getinitViewPos(), move_duration, true, -1);
 	navigation->set_flag_traking(false);
 	navigation->set_flag_lock_equ_pos(0);
@@ -790,7 +771,7 @@ void StelCore::autoZoomOut(float move_duration, bool full)
 // TODO make generic
 void StelCore::updateSkyCulture()
 {
-	LoadingBar lb(projection, LOADING_BAR_DEFAULT_FONT_SIZE, "logo24bits.png", getViewportWidth(), getViewportHeight(), StelUtils::stringToWstring(VERSION), 45, 320, 121);
+	LoadingBar lb(projection, LOADING_BAR_DEFAULT_FONT_SIZE, "logo24bits.png", projection->getViewportWidth(), projection->getViewportHeight(), StelUtils::stringToWstring(VERSION), 45, 320, 121);
 	if (asterisms) asterisms->updateSkyCulture(lb);
 	
 	// as constellations have changed, clear out any selection and retest for match!
@@ -887,18 +868,6 @@ void StelCore::setProjectionType(const string& sptype)
 	glFrontFace(projection->needGlFrontFaceCW()?GL_CW:GL_CCW);
 }
 
-void StelCore::setFlipHorz(bool flip)
-{
-	projection->setFlipHorz(flip);
-	glFrontFace(projection->needGlFrontFaceCW()?GL_CW:GL_CCW);
-}
-
-void StelCore::setFlipVert(bool flip)
-{
-	projection->setFlipVert(flip);
-	glFrontFace(projection->needGlFrontFaceCW()?GL_CW:GL_CCW);
-}
-
 void StelCore::turn_right(int s)
 {
 	if (s && FlagEnableMoveKeys)
@@ -968,13 +937,13 @@ void StelCore::dragView(int x1, int y1, int x2, int y2)
 	double az1, alt1, az2, alt2;
 	if (navigation->get_viewing_mode()==Navigator::VIEW_HORIZON)
 	{
-		projection->unproject_local(x2,getViewportHeight()-y2, tempvec2);
-		projection->unproject_local(x1,getViewportHeight()-y1, tempvec1);
+		projection->unproject_local(x2,projection->getViewportHeight()-y2, tempvec2);
+		projection->unproject_local(x1,projection->getViewportHeight()-y1, tempvec1);
 	}
 	else
 	{
-		projection->unproject_earth_equ(x2,getViewportHeight()-y2, tempvec2);
-		projection->unproject_earth_equ(x1,getViewportHeight()-y1, tempvec1);
+		projection->unproject_earth_equ(x2,projection->getViewportHeight()-y2, tempvec2);
+		projection->unproject_earth_equ(x1,projection->getViewportHeight()-y1, tempvec1);
 	}
 	StelUtils::rect_to_sphe(&az1, &alt1, tempvec1);
 	StelUtils::rect_to_sphe(&az2, &alt2, tempvec2);
@@ -1076,19 +1045,19 @@ bool StelCore::setHomePlanet(string planet)
 //! Set stellarium time to current real world time
 void StelCore::setTimeNow()
 {
-	navigation->set_JDay(get_julian_from_sys());
+	navigation->setJDay(get_julian_from_sys());
 }
 
-//! Get wether the current stellarium time is the real world time
+//! Get whether the current stellarium time is the real world time
 bool StelCore::getIsTimeNow(void) const
 {
 	// cache last time to prevent to much slow system call
-	static double lastJD = getJDay();
-	static bool previousResult = (fabs(getJDay()-get_julian_from_sys())<JD_SECOND);
-	if (fabs(lastJD-getJDay())>JD_SECOND/4)
+	static double lastJD = navigation->getJDay();
+	static bool previousResult = (fabs(navigation->getJDay()-get_julian_from_sys())<JD_SECOND);
+	if (fabs(lastJD-navigation->getJDay())>JD_SECOND/4)
 	{
-		lastJD = getJDay();
-		previousResult = (fabs(getJDay()-get_julian_from_sys())<JD_SECOND);
+		lastJD = navigation->getJDay();
+		previousResult = (fabs(navigation->getJDay()-get_julian_from_sys())<JD_SECOND);
 	}
 	return previousResult;
 }
