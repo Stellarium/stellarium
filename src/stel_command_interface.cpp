@@ -256,42 +256,42 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 	} else if(command == "timerate") {   // NOTE: accuracy issue related to frame rate
 	  
 		if(args["rate"]!="") {
-			stcore->setTimeSpeed(StelUtils::str_to_double(args["rate"])*JD_SECOND);
+			stcore->getNavigation()->setTimeSpeed(StelUtils::str_to_double(args["rate"])*JD_SECOND);
 		  
 		} else if(args["action"]=="pause") {
 			// TODO why is this in stelapp?  should be in stelcore - Rob
 			stapp->FlagTimePause = !stapp->FlagTimePause;
 			if(stapp->FlagTimePause) {
 				// TODO pause should be all handled in core methods
-				stapp->temp_time_velocity = stcore->getTimeSpeed();
-				stcore->setTimeSpeed(0);
+				stapp->temp_time_velocity = stcore->getNavigation()->getTimeSpeed();
+				stcore->getNavigation()->setTimeSpeed(0);
 			} else {
-				stcore->setTimeSpeed(stapp->temp_time_velocity);
+				stcore->getNavigation()->setTimeSpeed(stapp->temp_time_velocity);
 			}
 		  
 		} else if(args["action"]=="resume") {
 			stapp->FlagTimePause = 0;
-			stcore->setTimeSpeed(stapp->temp_time_velocity);
+			stcore->getNavigation()->setTimeSpeed(stapp->temp_time_velocity);
 		  
 		} else if(args["action"]=="increment") {
 			// speed up time rate
-			double s = stcore->getTimeSpeed();
+			double s = stcore->getNavigation()->getTimeSpeed();
 			if (s>=JD_SECOND) s*=10.;
 			else if (s<-JD_SECOND) s/=10.;
 			else if (s>=0. && s<JD_SECOND) s=JD_SECOND;
 			else if (s>=-JD_SECOND && s<0.) s=0.;
-			stcore->setTimeSpeed(s);
+			stcore->getNavigation()->setTimeSpeed(s);
 		  
 			// for safest script replay, record as absolute amount
 			commandline = "timerate rate " + StelUtils::double_to_str(s/JD_SECOND);
 
 		} else if(args["action"]=="decrement") {
-			double s = stcore->getTimeSpeed();
+			double s = stcore->getNavigation()->getTimeSpeed();
 			if (s>JD_SECOND) s/=10.;
 			else if (s<=-JD_SECOND) s*=10.;
 			else if (s>-JD_SECOND && s<=0.) s=-JD_SECOND;
 			else if (s>0. && s<=JD_SECOND) s=0.;
-			stcore->setTimeSpeed(s);
+			stcore->getNavigation()->setTimeSpeed(s);
 
 			// for safest script replay, record as absolute amount
 			commandline = "timerate rate " + StelUtils::double_to_str(s/JD_SECOND);
@@ -305,12 +305,12 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 
 			if(args["local"][0] == 'T') {
 				// set time only (don't change day)
-				string sky_date = stapp->getLocaleMgr().get_ISO8601_time_local(stcore->getJDay());
+				string sky_date = stapp->getLocaleMgr().get_ISO8601_time_local(stcore->getNavigation()->getJDay());
 				new_date = sky_date.substr(0,10) + args["local"];
 			} else new_date = args["local"];
 
 			if(string_to_jday( new_date, jd ) ) {
-				stcore->setJDay(jd - stapp->getLocaleMgr().get_GMT_shift(jd) * JD_HOUR);
+				stcore->getNavigation()->setJDay(jd - stapp->getLocaleMgr().get_GMT_shift(jd) * JD_HOUR);
 			} else {
 				debug_message = _("Error parsing date.");
 				status = 0;
@@ -319,7 +319,7 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 		} else if(args["utc"]!="") {
 			double jd;
 			if(string_to_jday( args["utc"], jd ) ) {
-				stcore->setJDay(jd);
+				stcore->getNavigation()->setJDay(jd);
 			} else {
 				debug_message = _("Error parsing date.");
 				status = 0;
@@ -327,17 +327,17 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 		  
 		} else if(args["relative"]!="") {  // value is a float number of days
 			double days = StelUtils::str_to_double(args["relative"]);
-			stcore->setJDay(stcore->getJDay() + days );
+			stcore->getNavigation()->setJDay(stcore->getNavigation()->getJDay() + days );
 		} else if(args["load"]=="current") {
 			// set date to current date
-			stcore->setJDay(get_julian_from_sys());
+			stcore->getNavigation()->setJDay(get_julian_from_sys());
 		} else if(args["load"]=="preset") {
 			// set date to preset (or current) date, based on user setup
 			// TODO: should this record as the actual date used?
 			if (stapp->StartupTimeMode=="preset" || stapp->StartupTimeMode=="Preset")
-				stcore->setJDay(stapp->PresetSkyTime -
+				stcore->getNavigation()->setJDay(stapp->PresetSkyTime -
 				                stapp->getLocaleMgr().get_GMT_shift(stapp->PresetSkyTime) * JD_HOUR);
-			else stcore->setJDay(get_julian_from_sys());
+			else stcore->getNavigation()->setJDay(get_julian_from_sys());
 
 		} else status=0;
 	  

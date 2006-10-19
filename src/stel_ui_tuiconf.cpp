@@ -38,14 +38,14 @@ void StelUI::draw_gravity_ui(void)
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glEnable(GL_BLEND);
 
-	int x = core->getViewportPosX() + core->getViewportWidth()/2;
-	int y = core->getViewportPosY() + core->getViewportHeight()/2;
+	int x = core->getProjection()->getViewportPosX() + core->getProjection()->getViewportWidth()/2;
+	int y = core->getProjection()->getViewportPosY() + core->getProjection()->getViewportHeight()/2;
 	//	int shift = (int)(M_SQRT2 / 2 * MY_MIN(core->getViewportWidth()/2, core->getViewportHeight()/2));
-	int shift = MY_MIN(core->getViewportWidth()/2, core->getViewportHeight()/2);
+	int shift = MY_MIN(core->getProjection()->getViewportWidth()/2, core->getProjection()->getViewportHeight()/2);
 
 	if (FlagShowTuiDateTime)
 	{
-		double jd = core->getJDay();
+		double jd = core->getNavigation()->getJDay();
 		wostringstream os;
 
 		os << app->getLocaleMgr().get_printable_date_local(jd) << L" " << app->getLocaleMgr().get_printable_time_local(jd);
@@ -419,15 +419,15 @@ void StelUI::draw_tui(void)
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glEnable(GL_BLEND);
 	
-	int x = core->getViewportPosX() + core->getViewportWidth()/2;
-	int y = core->getViewportPosY() + core->getViewportHeight()/2;
-	int shift = (int)(M_SQRT2 / 2 * MY_MIN(core->getViewportWidth()/2, core->getViewportHeight()/2));
+	int x = core->getProjection()->getViewportPosX() + core->getProjection()->getViewportWidth()/2;
+	int y = core->getProjection()->getViewportPosY() + core->getProjection()->getViewportHeight()/2;
+	int shift = (int)(M_SQRT2 / 2 * MY_MIN(core->getProjection()->getViewportWidth()/2, core->getProjection()->getViewportHeight()/2));
 	
-	if(!core->getFlagGravityLabels()) {
+	if(!core->getProjection()->getFlagGravityLabels()) {
 		// for horizontal tui move to left edge of screen kludge
 		shift = 0;
-		x = core->getViewportPosX() + int(0.1*core->getViewportWidth());
-		y = core->getViewportPosY() + int(0.1*core->getViewportHeight());
+		x = core->getProjection()->getViewportPosX() + int(0.1*core->getProjection()->getViewportWidth());
+		y = core->getProjection()->getViewportPosY() + int(0.1*core->getProjection()->getViewportHeight());
 	}
 
 	if (tui_root)
@@ -468,7 +468,7 @@ void StelUI::tui_update_widgets(void)
 
 
 	// 2. Date & Time
-	tui_time_skytime->setJDay(core->getJDay() + app->getLocaleMgr().get_GMT_shift(core->getJDay())*JD_HOUR);
+	tui_time_skytime->setJDay(core->getNavigation()->getJDay() + app->getLocaleMgr().get_GMT_shift(core->getNavigation()->getJDay())*JD_HOUR);
 	tui_time_settmz->settz(app->getLocaleMgr().get_custom_tz_name());
 	tui_time_presetskytime->setJDay(app->PresetSkyTime);
 	tui_time_startuptime->setCurrent(StelUtils::stringToWstring(app->StartupTimeMode));

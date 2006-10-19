@@ -24,7 +24,7 @@
 #include "cylinder_projector.h"
 #include "stereographic_projector.h"
 #include "spheric_mirror_projector.h"
-
+#include "init_parser.h"
 
 const char *Projector::typeToString(PROJECTOR_TYPE type) {
   switch (type) {
@@ -91,6 +91,36 @@ Projector *Projector::create(PROJECTOR_TYPE type,
     // just shutup the compiler, this point will never be reached
   return rval;
 }
+
+void Projector::init(const InitParser& conf)
+{
+	// Video Section
+	setViewportSize(conf.get_int("video:screen_w"), conf.get_int("video:screen_h"));
+	setViewportPosX(conf.get_int    ("video:horizontal_offset"));
+	setViewportPosY(conf.get_int    ("video:vertical_offset"));
+	
+	string tmpstr = conf.get_str("projection:viewport");
+	const Projector::PROJECTOR_MASK_TYPE projMaskType = Projector::stringToMaskType(tmpstr);
+	setMaskType(projMaskType);
+	initFov	= conf.get_double ("navigation","init_fov",60.);
+	set_fov(initFov);
+	setFlagGravityLabels( conf.get_boolean("viewing:flag_gravity_labels") );
+	
+	tmpstr = conf.get_str("projection:viewport");
+	if (tmpstr=="maximized") setMaximizedViewport(getViewportWidth(),  getViewportHeight());
+	else
+		if (tmpstr=="square" || tmpstr=="disk")
+		{
+			setSquareViewport(getViewportWidth(), getViewportHeight(), conf.get_int("video:horizontal_offset"), conf.get_int("video:horizontal_offset"));
+			if (tmpstr=="disk") setViewportMaskDisk();
+		}
+		else
+		{
+			cerr << "ERROR : Unknown viewport type : " << tmpstr << endl;
+			exit(-1);
+		}
+}
+
 
 Projector::Projector(const Vec4i& viewport, double _fov)
           :maskType(NONE), fov(1.0), min_fov(0.0001), max_fov(100),

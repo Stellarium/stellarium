@@ -1032,7 +1032,7 @@ void Planet::update_trail(const Navigator* nav)
 {
 	if(!trail_on) return;
 
-	double date = nav->get_JDay();
+	double date = nav->getJDay();
 
 	int dt=0;
 	if(first_point || (dt=abs(int((date-last_trailJD)/DeltaTrail))) > MaxTrail)

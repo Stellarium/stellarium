@@ -563,7 +563,7 @@ protected:
               const SpecialZoneData<Star> *z,
               const Star *s) : a(a),z(z),s(s) {}
   Vec3d getObsJ2000Pos(const Navigator *nav) const {
-    if (nav) current_JDay = nav->get_JDay();
+    if (nav) current_JDay = nav->getJDay();
     return s->getJ2000Pos(z,
                   (M_PI/180)*(0.0001/3600)
                    * ((current_JDay-d2000)/365.25)
@@ -1277,7 +1277,7 @@ int HipStarMgr::getMaxSearchLevel(const ToneReproductor *eye,
 
 // Draw all the stars
 double HipStarMgr::draw(Projector *prj, const Navigator *nav, ToneReproductor *eye) {
-    current_JDay = nav->get_JDay();
+    current_JDay = nav->getJDay();
 
     // If stars are turned off don't waste time below
     // projecting all stars just to draw disembodied labels

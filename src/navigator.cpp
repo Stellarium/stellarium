@@ -45,7 +45,7 @@ Navigator::~Navigator()
 
 void Navigator::init(const InitParser& conf, LoadingBar& lb)
 {
-	set_JDay(get_julian_from_sys());
+	setJDay(get_julian_from_sys());
 	set_local_vision(Vec3f(1,1e-05,0.2));
 	// Compute transform matrices between coordinates systems
 	update_transform_matrices();

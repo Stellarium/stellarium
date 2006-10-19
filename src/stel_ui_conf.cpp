@@ -399,7 +399,7 @@ Component* StelUI::createConfigWindow(s_font& courierFont)
 	screen_size_sl->setSizex(200);
 	screen_size_sl->addItemList(StelUtils::stringToWstring(app->getVideoModeList()));
 	char vs[1000];
-	sprintf(vs, "%dx%d", core->getViewportWidth(), core->getViewportHeight());
+	sprintf(vs, "%dx%d", core->getProjection()->getViewportWidth(), core->getProjection()->getViewportHeight());
 	screen_size_sl->setCurrent(StelUtils::stringToWstring(vs));
 	tab_video->addComponent(screen_size_sl);
 
@@ -896,7 +896,7 @@ void StelUI::setVideoOption(void)
 	conf.set_str("video:distorter", app->getViewPortDistorterType());
 
 
-	if (core->getViewportMaskDisk()) conf.set_str("projection:viewport", "disk");
+	if (core->getProjection()->getViewportMaskDisk()) conf.set_str("projection:viewport", "disk");
 	else conf.set_str("projection:viewport", "maximized");
 
 	if ( w && h ) {   
@@ -924,13 +924,13 @@ void StelUI::updateVideoVariables(void)
         app->setViewPortDistorterType("none");
 	}
     
-	if (disk_viewport_cbx->getState() && !core->getViewportMaskDisk())
+	if (disk_viewport_cbx->getState() && !core->getProjection()->getViewportMaskDisk())
 	{
-		core->setViewportMaskDisk();
+		core->getProjection()->setViewportMaskDisk();
 	}
-	if (!disk_viewport_cbx->getState() && core->getViewportMaskDisk())
+	if (!disk_viewport_cbx->getState() && core->getProjection()->getViewportMaskDisk())
 	{
-		core->setViewportMaskNone();
+		core->getProjection()->setViewportMaskNone();
 	}
 }
 
@@ -1018,15 +1018,15 @@ void StelUI::updateConfigForm(void)
 		waitOnLocation = false;
 	}
 
-	time_current->setJDay(core->getJDay() + app->getLocaleMgr().get_GMT_shift(core->getJDay())*JD_HOUR);
-	system_tz_lbl2->setLabel(L"(" + get_time_zone_name_from_system(core->getJDay()) + L")");
+	time_current->setJDay(core->getNavigation()->getJDay() + app->getLocaleMgr().get_GMT_shift(core->getNavigation()->getJDay())*JD_HOUR);
+	system_tz_lbl2->setLabel(L"(" + get_time_zone_name_from_system(core->getNavigation()->getJDay()) + L")");
 
-	time_speed_lbl2->setLabel(wstring(L"\u2022 ")+_("Current Time Speed is x") + StelUtils::doubleToWstring(core->getTimeSpeed()/JD_SECOND));
+	time_speed_lbl2->setLabel(wstring(L"\u2022 ")+_("Current Time Speed is x") + StelUtils::doubleToWstring(core->getNavigation()->getTimeSpeed()/JD_SECOND));
 
 	projection_sl->setValue(CalculateProjectionSlValue(
-                              core->getProjectionType(),
+                              core->getProjection()->getProjectionType(),
                               app->getViewPortDistorterType()));
-	disk_viewport_cbx->setState(core->getViewportMaskDisk());
+	disk_viewport_cbx->setState(core->getProjection()->getViewportMaskDisk());
 }
 
 void StelUI::config_win_hideBtCallback(void)
