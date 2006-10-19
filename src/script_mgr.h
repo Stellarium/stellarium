@@ -24,10 +24,10 @@
 #ifndef _SCRIPT_MGR_H_
 #define _SCRIPT_MGR_H_
 
-#include <iostream>
+using namespace std;
+
+#include <string>
 #include <fstream>
-#include "stel_command_interface.h"
-#include "script.h"
 
 // predeclaration
 class StelCommandInterface;

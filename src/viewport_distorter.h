@@ -29,13 +29,13 @@ typedef std::string string;
 
 using namespace std;
 
-class StelCore;
+class Projector;
 class InitParser;
 
 class ViewportDistorter {
 public:
   static ViewportDistorter *create(const string &type,
-                                   int width,int height);
+                                   int width,int height, Projector* prj);
     // StelCore is needed for getProjectionType and setMaxFov
   virtual ~ViewportDistorter(void) {}
   virtual string getType(void) const = 0;

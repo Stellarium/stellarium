@@ -26,6 +26,10 @@
 #include "stelskyculturemgr.h"
 #include "stelmodulemgr.h"
 #include "hip_star_mgr.h"
+#include "constellation_mgr.h"
+#include "solarsystem.h"
+#include "nebula_mgr.h"
+#include "stel_command_interface.h"
 
 using namespace s_gui;
 
