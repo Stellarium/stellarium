@@ -172,7 +172,7 @@ void TelescopeMgr::init(const InitParser &conf) {
     delete telescope_texture;
     telescope_texture = 0;
   }
-  telescope_texture = new s_texture("telescope.png",TEX_LOAD_TYPE_PNG_SOLID);
+  telescope_texture = new STexture("telescope.png",TEX_LOAD_TYPE_PNG_SOLID);
 #ifdef WIN32
   if (!wsa_ok) return;
 #endif

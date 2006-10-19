@@ -28,7 +28,7 @@
 #include "s_font.h"
 #include "sideral_time.h"
 
-s_font* Planet::planet_name_font = NULL;
+SFont* Planet::planet_name_font = NULL;
 float Planet::object_scale = 1.f;
 Vec3f Planet::label_color = Vec3f(.4,.4,.8);
 Vec3f Planet::orbit_color = Vec3f(1,.6,1);
@@ -66,8 +66,8 @@ Planet::Planet(Planet *parent,
 	ecliptic_pos=Vec3d(0.,0.,0.);
     rot_local_to_parent = Mat4d::identity();
 	mat_local_to_parent = Mat4d::identity();
-	tex_map = new s_texture(tex_map_name, TEX_LOAD_TYPE_PNG_SOLID_REPEAT);
-	if (flagHalo) tex_halo = new s_texture(tex_halo_name);
+	tex_map = new STexture(tex_map_name, TEX_LOAD_TYPE_PNG_SOLID_REPEAT);
+	if (flagHalo) tex_halo = new STexture(tex_halo_name);
 
 	// 60 day trails
 	DeltaTrail = 1;
@@ -109,7 +109,7 @@ wstring Planet::getInfoString(const Navigator * nav) const
 	oss << endl;
 
 	oss.precision(2);
-	oss << _("Magnitude: ") << compute_magnitude(nav->get_observer_helio_pos()) << endl;
+	oss << _("Magnitude: ") << compute_magnitude(nav->getObserverHelioPos()) << endl;
 
 	Vec3d equPos = get_earth_equ_pos(nav);
 	StelUtils::rect_to_sphe(&tempRA,&tempDE,equPos);
@@ -155,7 +155,7 @@ wstring Planet::getShortInfoString(const Navigator * nav) const
 	if (sphere_scale != 1.f) oss << L" (x" << sphere_scale << L")";
 
 	oss.precision(2);
-	oss << L"  " << _("Magnitude: ") << compute_magnitude(nav->get_observer_helio_pos());
+	oss << L"  " << _("Magnitude: ") << compute_magnitude(nav->getObserverHelioPos());
 
 	Vec3d equPos = get_earth_equ_pos(nav);
 	oss.precision(5);
@@ -211,7 +211,7 @@ Vec3d Planet::get_earth_equ_pos(const Navigator * nav) const
 Vec3d Planet::getObsJ2000Pos(const Navigator *nav) const {
   return mat_vsop87_to_j2000.multiplyWithoutTranslation(
                                get_heliocentric_ecliptic_pos()
-                               - nav->get_observer_helio_pos());
+                               - nav->getObserverHelioPos());
 }
 
 
@@ -465,12 +465,12 @@ float Planet::compute_magnitude(Vec3d obs_pos) const {
 
 float Planet::compute_magnitude(const Navigator * nav) const
 {
-	return compute_magnitude(nav->get_observer_helio_pos());
+	return compute_magnitude(nav->getObserverHelioPos());
 }
 
 void Planet::set_big_halo(const string& halotexfile)
 {
-	tex_big_halo = new s_texture(halotexfile, TEX_LOAD_TYPE_PNG_SOLID);
+	tex_big_halo = new STexture(halotexfile, TEX_LOAD_TYPE_PNG_SOLID);
 }
 
 // Return the radius of a circle containing the object on screen
@@ -672,7 +672,7 @@ void Planet::draw_halo(const Navigator* nav, const Projector* prj, const ToneRep
     fov_q = 1.f/(fov_q*fov_q);
     rmag =
       sqrtf(eye->adapt_luminance(
-        expf(-0.92103f*(compute_magnitude(nav->get_observer_helio_pos())
+        expf(-0.92103f*(compute_magnitude(nav->getObserverHelioPos())
                          + 12.12331f)) * 108064.73f * fov_q)) * 30.f;
 
 //	rmag = eye->adapt_luminance(expf(-0.92103f*(compute_magnitude(nav->get_observer_helio_pos()) +
@@ -753,7 +753,7 @@ void Planet::draw_point_halo(const Navigator* nav, const Projector* prj, const T
     fov_q = 1.f/(fov_q*fov_q);
     rmag =
       sqrtf(eye->adapt_luminance(
-        expf(-0.92103f*(compute_magnitude(nav->get_observer_helio_pos())
+        expf(-0.92103f*(compute_magnitude(nav->getObserverHelioPos())
                          + 12.12331f)) * 108064.73f * fov_q)) * 6.f;
 
 //	rmag = eye->adapt_luminance(expf(-0.92103f*(compute_magnitude(nav->get_observer_helio_pos()) +
@@ -835,7 +835,7 @@ void Planet::draw_big_halo(const Navigator* nav, const Projector* prj, const Ton
 
 Ring::Ring(double radius_min,double radius_max,const string &texname)
      :radius_min(radius_min),radius_max(radius_max) {
-	tex = new s_texture(texname,TEX_LOAD_TYPE_PNG_ALPHA);
+	tex = new STexture(texname,TEX_LOAD_TYPE_PNG_ALPHA);
 }
 
 Ring::~Ring(void) {

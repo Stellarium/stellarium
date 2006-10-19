@@ -28,7 +28,7 @@
 #include "fader.h"
 #include "translator.h"
 
-class s_texture;
+class STexture;
 class Navigator;
 class ToneReproductor;
 
@@ -66,7 +66,7 @@ private:
 	Vec3f** azi_points;
 	bool (Projector::*proj_func)(const Vec3d&, Vec3d&) const;
 	double fontSize;
-	s_font& font;
+	SFont& font;
 	SKY_GRID_TYPE gtype;
 	LinearFader fader;
 };
@@ -103,7 +103,7 @@ private:
 	bool (Projector::*proj_func)(const Vec3d&, Vec3d&) const;
 	LinearFader fader;
 	double fontSize;
-	s_font& font;
+	SFont& font;
 };
 
 // Class which manages the cardinal points displaying
@@ -123,7 +123,7 @@ public:
 private:
 	float radius;
 	double fontSize;
-	s_font& font;
+	SFont& font;
 	Vec3f color;
 	wstring sNorth, sSouth, sEast, sWest;
 	LinearFader fader;
@@ -146,7 +146,7 @@ public:
 	bool getFlagShow(void) const {return fader;}
 private:
 	float radius;
-	s_texture* tex;
+	STexture* tex;
 	Vec3f color;
 	float intensity;
 	float tex_avg_luminance;

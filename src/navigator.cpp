@@ -46,17 +46,17 @@ Navigator::~Navigator()
 void Navigator::init(const InitParser& conf, LoadingBar& lb)
 {
 	setJDay(get_julian_from_sys());
-	set_local_vision(Vec3f(1,1e-05,0.2));
+	setLocalVision(Vec3f(1,1e-05,0.2));
 	// Compute transform matrices between coordinates systems
-	update_transform_matrices();
-	update_model_view_mat();
+	updateTransformMatrices();
+	updateModelViewMat();
 	string tmpstr = conf.get_str("navigation:viewing_mode");
 	if (tmpstr=="equator")
-		set_viewing_mode(Navigator::VIEW_EQUATOR);
+		setViewingMode(Navigator::VIEW_EQUATOR);
 	else
 	{
 		if (tmpstr=="horizon")
-			set_viewing_mode(Navigator::VIEW_HORIZON);
+			setViewingMode(Navigator::VIEW_HORIZON);
 		else
 		{
 			cerr << "ERROR : Unknown viewing mode type : " << tmpstr << endl;
@@ -64,11 +64,11 @@ void Navigator::init(const InitParser& conf, LoadingBar& lb)
 		}
 	}
 	initViewPos = StelUtils::str_to_vec3f(conf.get_str("navigation:init_view_pos"));
-	set_local_vision(initViewPos);
+	setLocalVision(initViewPos);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-void Navigator::update_vision_vector(int delta_time,const StelObject &selected)
+void Navigator::updateVisionVector(int delta_time,const StelObject &selected)
 {
 	if (flag_auto_move)
 	{
@@ -197,7 +197,7 @@ void Navigator::update_vision_vector(int delta_time,const StelObject &selected)
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-void Navigator::set_local_vision(const Vec3d& _pos)
+void Navigator::setLocalVision(const Vec3d& _pos)
 {
 	local_vision = _pos;
 	equ_vision=local_to_earth_equ(local_vision);
@@ -205,7 +205,7 @@ void Navigator::set_local_vision(const Vec3d& _pos)
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-void Navigator::update_move(double deltaAz, double deltaAlt)
+void Navigator::updateMove(double deltaAz, double deltaAlt)
 {
 	double azVision, altVision;
 
@@ -239,13 +239,13 @@ void Navigator::update_move(double deltaAz, double deltaAlt)
 	}
 
 	// Update the final modelview matrices
-	update_model_view_mat();
+	updateModelViewMat();
 
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // Increment time
-void Navigator::update_time(int delta_time)
+void Navigator::updateTime(int delta_time)
 {
 	JDay+=time_speed*(double)delta_time/1000.;
 
@@ -266,7 +266,7 @@ const Mat4d mat_j2000_to_vsop87(
 const Mat4d mat_vsop87_to_j2000(mat_j2000_to_vsop87.transpose());
 
 
-void Navigator::update_transform_matrices(void)
+void Navigator::updateTransformMatrices(void)
 {
 	mat_local_to_earth_equ = position->getRotLocalToEquatorial(JDay);
 	mat_earth_equ_to_local = mat_local_to_earth_equ.transpose();
@@ -298,7 +298,7 @@ void Navigator::update_transform_matrices(void)
 
 ////////////////////////////////////////////////////////////////////////////////
 // Update the modelview matrices
-void Navigator::update_model_view_mat(void)
+void Navigator::updateModelViewMat(void)
 {
 
 	Vec3d f;
@@ -346,7 +346,7 @@ void Navigator::update_model_view_mat(void)
 
 ////////////////////////////////////////////////////////////////////////////////
 // Return the observer heliocentric position
-Vec3d Navigator::get_observer_helio_pos(void) const
+Vec3d Navigator::getObserverHelioPos(void) const
 {
 	Vec3d v(0.,0.,0.);
 	return mat_local_to_helio*v;
@@ -354,7 +354,7 @@ Vec3d Navigator::get_observer_helio_pos(void) const
 
 ////////////////////////////////////////////////////////////////////////////////
 // Move to the given equatorial position
-void Navigator::move_to(const Vec3d& _aim, float move_duration, bool _local_pos, int zooming)
+void Navigator::moveTo(const Vec3d& _aim, float move_duration, bool _local_pos, int zooming)
 {
 	zooming_mode = zooming;
 	move.aim=_aim;
@@ -378,17 +378,11 @@ void Navigator::move_to(const Vec3d& _aim, float move_duration, bool _local_pos,
 
 ////////////////////////////////////////////////////////////////////////////////
 // Set type of viewing mode (align with horizon or equatorial coordinates)
-void Navigator::set_viewing_mode(VIEWING_MODE_TYPE view_mode)
+void Navigator::setViewingMode(VIEWING_MODE_TYPE view_mode)
 {
 	viewing_mode = view_mode;
 
 	// TODO: include some nice smoothing function trigger here to rotate between
 	// the two modes
 
-}
-
-void Navigator::switch_viewing_mode(void)
-{
-	if (viewing_mode==VIEW_HORIZON) set_viewing_mode(VIEW_EQUATOR);
-	else set_viewing_mode(VIEW_HORIZON);
 }

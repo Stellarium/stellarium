@@ -87,17 +87,17 @@ public:
 	//! Set object tracking
 	void setFlagTracking(bool b);
 	//! Get object tracking
-	bool getFlagTracking(void) {return navigation->get_flag_traking();}
+	bool getFlagTracking(void) {return navigation->getFlagTraking();}
 
 	//! Set whether sky position is to be locked
-	void setFlagLockSkyPosition(bool b) {navigation->set_flag_lock_equ_pos(b);}
+	void setFlagLockSkyPosition(bool b) {navigation->setFlagLockEquPos(b);}
 	//! Set whether sky position is locked
-	bool getFlagLockSkyPosition(void) {return navigation->get_flag_lock_equ_pos();}
+	bool getFlagLockSkyPosition(void) {return navigation->getFlagLockEquPos();}
 
 	//! Set current mount type
-	void setMountMode(MOUNT_MODE m) {navigation->set_viewing_mode((m==MOUNT_ALTAZIMUTAL) ? Navigator::VIEW_HORIZON : Navigator::VIEW_EQUATOR);}
+	void setMountMode(MOUNT_MODE m) {navigation->setViewingMode((m==MOUNT_ALTAZIMUTAL) ? Navigator::VIEW_HORIZON : Navigator::VIEW_EQUATOR);}
 	//! Get current mount type
-	MOUNT_MODE getMountMode(void) {return ((navigation->get_viewing_mode()==Navigator::VIEW_HORIZON) ? MOUNT_ALTAZIMUTAL : MOUNT_EQUATORIAL);}
+	MOUNT_MODE getMountMode(void) {return ((navigation->getViewingMode()==Navigator::VIEW_HORIZON) ? MOUNT_ALTAZIMUTAL : MOUNT_EQUATORIAL);}
 	//! Toggle current mount mode between equatorial and altazimutal
 	void toggleMountMode(void) {if (getMountMode()==MOUNT_ALTAZIMUTAL) setMountMode(MOUNT_EQUATORIAL); else setMountMode(MOUNT_ALTAZIMUTAL);}
 
@@ -107,7 +107,7 @@ public:
 	//! Go to the selected object
     void gotoSelectedObject(void) {
       if (selected_object)
-        navigation->move_to(
+        navigation->moveTo(
           selected_object.get_earth_equ_pos(navigation),
           auto_move_duration);
     }
@@ -115,7 +115,7 @@ public:
 	//! Move view in alt/az (or equatorial if in that mode) coordinates
 	void panView(double delta_az, double delta_alt)	{
 		setFlagTracking(0);
-		navigation->update_move(delta_az, delta_alt);
+		navigation->updateMove(delta_az, delta_alt);
 	}
 
 	//! Set automove duration in seconds
@@ -280,7 +280,7 @@ public:
 	string getProjectionType(void) const {return Projector::typeToString(projection->getType());}
 
 	//! Print the passed wstring so that it is oriented in the drection of the gravity
-	void printGravity(s_font* font, float x, float y, const wstring& str, bool speedOptimize = 1,
+	void printGravity(SFont* font, float x, float y, const wstring& str, bool speedOptimize = 1,
 			float xshift = 0, float yshift = 0) const
 		{projection->print_gravity180(font, x, y, str, speedOptimize, xshift, yshift);}
 
@@ -327,7 +327,7 @@ public:
 
 	//! Move to a new latitude and longitude on home planet
 	void moveObserver(double lat, double lon, double alt, int delay, const wstring& name) {
-		observatory->move_to(lat, lon, alt, delay, name);
+		observatory->moveTo(lat, lon, alt, delay, name);
 	}
 
 	//! Set Meteor Rate in number per hour

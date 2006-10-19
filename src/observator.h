@@ -56,7 +56,7 @@ public:
 	string get_landscape_name(void) const {return landscape_name;}
 
 
-	void move_to(double lat, double lon, double alt, int duration, const wstring& _name);  // duration in ms
+	void moveTo(double lat, double lon, double alt, int duration, const wstring& _name);  // duration in ms
 	void update(int delta_time);  // for moving observing position 
 
 private:

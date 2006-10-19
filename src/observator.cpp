@@ -158,7 +158,7 @@ void Observator::setConf(InitParser & conf, const string& section) const
 
 
 // move gradually to a new observation location
-void Observator::move_to(double lat, double lon, double alt, int duration, const wstring& _name)
+void Observator::moveTo(double lat, double lon, double alt, int duration, const wstring& _name)
 {
   flag_move_to = 1;
 

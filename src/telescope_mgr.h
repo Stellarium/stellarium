@@ -33,8 +33,8 @@ using namespace std;
 class InitParser;
 class Projector;
 class Navigator;
-class s_font;
-class s_texture;
+class SFont;
+class STexture;
 class StelObject;
 class Telescope;
 
@@ -86,8 +86,8 @@ private:
   LinearFader telescope_fader;
   Vec3f circle_color;
   Vec3f label_color;
-  s_font *telescope_font;
-  s_texture *telescope_texture;
+  SFont *telescope_font;
+  STexture *telescope_texture;
 
   class TelescopeMap : public std::map<int,Telescope*> {
   public:

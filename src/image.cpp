@@ -34,7 +34,7 @@ Image::Image( string filename, string name, IMAGE_POSITIONING pos_type) {
   // load image using alpha channel in image, otherwise no transparency
   // other than through set_alpha method -- could allow alpha load option from command 
 
-  image_tex = new s_texture(1, filename, TEX_LOAD_TYPE_PNG_ALPHA);  // what if it doesn't load?
+  image_tex = new STexture(1, filename, TEX_LOAD_TYPE_PNG_ALPHA);  // what if it doesn't load?
   //  image_tex = new s_texture(1, filename, TEX_LOAD_TYPE_PNG_BLEND3);  // black = transparent
 
   int img_w, img_h;
@@ -241,7 +241,7 @@ void Image::draw(const Navigator * nav, Projector * prj) {
 	  // alt az coords
 	  prj->reset_perspective_projection();
 
-	  nav->switch_to_local();
+	  nav->switchToLocal();
 	  Mat4d mat = nav->get_local_to_eye_mat();
 
 	  Vec3d gridpt;

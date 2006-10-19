@@ -135,12 +135,12 @@ namespace s_gui
     public:
         Painter();
 		~Painter();
-		Painter(const s_texture* _tex1, s_font* _font, const s_color& _baseColor, const s_color& _textColor);
+		Painter(const STexture* _tex1, SFont* _font, const s_color& _baseColor, const s_color& _textColor);
 		void drawSquareEdge(const s_vec2i& pos, const s_vec2i& sz) const;
 		void drawSquareEdge(const s_vec2i& pos, const s_vec2i& sz, const s_color& c) const;
 		void drawSquareFill(const s_vec2i& pos, const s_vec2i& sz) const;
 		void drawSquareFill(const s_vec2i& pos, const s_vec2i& sz, const s_color& c) const;
-		void drawSquareFill(const s_vec2i& pos, const s_vec2i& sz, const s_color& c, const s_texture * t) const;
+		void drawSquareFill(const s_vec2i& pos, const s_vec2i& sz, const s_color& c, const STexture * t) const;
 		void drawCross(const s_vec2i& pos, const s_vec2i& sz) const;
 		void drawLine(const s_vec2i& pos1, const s_vec2i& pos2) const;
 		void drawLine(const s_vec2i& pos1, const s_vec2i& pos2, const s_color& c) const;
@@ -148,17 +148,17 @@ namespace s_gui
 		void print(int x, int y, const string& str, const s_color& c);
 		void print(int x, int y, const wstring& str);
 		void print(int x, int y, const wstring& str, const s_color& c);		
-		void setTexture(const s_texture* tex) {tex1 = tex;}
-		void setFont(s_font* f) {font = f;}
+		void setTexture(const STexture* tex) {tex1 = tex;}
+		void setFont(SFont* f) {font = f;}
 		void setTextColor(const s_color& c) {textColor = c;}
 		void setBaseColor(const s_color& c) {baseColor = c;}
 		const s_color& getBaseColor(void) const {return baseColor;}
 		const s_color& getTextColor(void) const {return textColor;}
-		s_font* getFont(void) const {return font;}
+		SFont* getFont(void) const {return font;}
 		void setOpaque(bool _b) { opaque = _b; }
     private:
-		const s_texture* tex1;
-		s_font* font;
+		const STexture* tex1;
+		SFont* font;
 		s_color baseColor;
 		s_color textColor;
 		bool opaque;
@@ -204,9 +204,9 @@ namespace s_gui
 		virtual bool onClic(int, int, S_GUI_VALUE, S_GUI_VALUE) {return 0;}
 		virtual bool onMove(int, int) {return 0;}
 		virtual bool onKey(Uint16, S_GUI_VALUE) {return 0;}
-		virtual void setTexture(const s_texture* tex) {painter.setTexture(tex);}
-		virtual void setFont(s_font* f) {painter.setFont(f);}
-		s_font* getFont(void) const {return painter.getFont();}
+		virtual void setTexture(const STexture* tex) {painter.setTexture(tex);}
+		virtual void setFont(SFont* f) {painter.setFont(f);}
+		SFont* getFont(void) const {return painter.getFont();}
 		virtual void setTextColor(const s_color& c) {painter.setTextColor(c);}
 		virtual void setBaseColor(const s_color& c) {painter.setBaseColor(c);}
 		virtual void setPainter(const Painter& p) {painter = p;}
@@ -316,7 +316,7 @@ namespace s_gui
     class TexturedButton : public Button
     {
     public:
-		TexturedButton(const s_texture* tex = NULL);
+		TexturedButton(const STexture* tex = NULL);
         virtual void draw();
     protected:
     };
@@ -347,11 +347,11 @@ namespace s_gui
 	class FlagButton : public CheckBox
     {
     public:
-		FlagButton(int state = 0, const s_texture* tex = NULL, const string& specificTexName = "");
+		FlagButton(int state = 0, const STexture* tex = NULL, const string& specificTexName = "");
         virtual ~FlagButton();
 		virtual void draw();
     protected:
-		const s_texture* specific_tex;
+		const STexture* specific_tex;
     };
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -361,7 +361,7 @@ namespace s_gui
     class Label : public Component
     {
     public:
-        Label(const wstring& _label = L"", s_font* _font = NULL);
+        Label(const wstring& _label = L"", SFont* _font = NULL);
         virtual ~Label();
         virtual const wstring& getLabel() const {return label;}
         /** @brief Set new label */
@@ -383,13 +383,13 @@ namespace s_gui
     {
 		friend class TabContainer;
     public:
-        LabeledButton(const wstring& _label = L"", s_font* font = NULL, 
+        LabeledButton(const wstring& _label = L"", SFont* font = NULL, 
 			Justification _j = JUSTIFY_CENTER, bool _bright = false);
 		virtual ~LabeledButton();
         virtual void draw(void);
 		virtual void setColorScheme(const s_color& baseColor, const s_color& textColor);
 		virtual void setVisible(bool _visible);
-		virtual void setFont(s_font* f) {Button::setFont(f); label.setFont(f);}
+		virtual void setFont(SFont* f) {Button::setFont(f); label.setFont(f);}
 		virtual void setTextColor(const s_color& c) {Button::setTextColor(c); label.setTextColor(c);}
 		virtual void setPainter(const Painter& p) {Button::setPainter(p); label.setPainter(p);}
 		virtual void setJustification(Justification _j) { justification = _j; }
@@ -447,14 +447,14 @@ namespace s_gui
     class EditBox : public Button
     {
     public:
-        EditBox(const wstring& _label = L"", s_font* font = NULL);
+        EditBox(const wstring& _label = L"", SFont* font = NULL);
 		virtual ~EditBox();
 		virtual void setOnReturnKeyCallback(const callback<void>& c) {onReturnKeyCallback = c;}
 		virtual void setOnKeyCallback(const callback<void>& c) {onKeyCallback = c;}
 		virtual void setOnAutoCompleteCallback(const callback<void>& c) {onAutoCompleteCallback = c;}
         virtual void draw(void);
 		virtual void setColorScheme(const s_color& baseColor, const s_color& textColor);
-		virtual void setFont(s_font* f) {Button::setFont(f); label.setFont(f);}
+		virtual void setFont(SFont* f) {Button::setFont(f); label.setFont(f);}
 		virtual void setTextColor(const s_color& c) {Button::setTextColor(c); label.setTextColor(c);}
 		virtual void setPainter(const Painter& p) {Button::setPainter(p); label.setPainter(p);}
 		virtual bool onKey(Uint16, S_GUI_VALUE);
@@ -562,7 +562,7 @@ namespace s_gui
     class TextLabel : public Container
 	{
 	public:
-	    TextLabel(const wstring& _label = L"", s_font* _font = NULL);
+	    TextLabel(const wstring& _label = L"", SFont* _font = NULL);
 	    virtual ~TextLabel();
         virtual const wstring& getLabel() const {return label;}
         virtual void draw(void);
@@ -576,8 +576,8 @@ namespace s_gui
 	class IntIncDec : public Container
 	{
 	public:
-	    IntIncDec(s_font* _font = NULL, const s_texture* tex_up = NULL,
-			const s_texture* tex_down = NULL, int min = 0, int max = 9,
+	    IntIncDec(SFont* _font = NULL, const STexture* tex_up = NULL,
+			const STexture* tex_down = NULL, int min = 0, int max = 9,
 			int init_value = 0, int inc = 1, bool _loop = false);
 	    virtual ~IntIncDec();
 		virtual void draw();
@@ -596,8 +596,8 @@ namespace s_gui
 	class IntIncDecVert : public IntIncDec
 	{
 	public:
-	    IntIncDecVert(s_font* _font = NULL, const s_texture* tex_up = NULL,
-			const s_texture* tex_down = NULL, int min = 0, int max = 9,
+	    IntIncDecVert(SFont* _font = NULL, const STexture* tex_up = NULL,
+			const STexture* tex_down = NULL, int min = 0, int max = 9,
 			int init_value = 0, int inc = 1, bool _loop = false);
 	};
 
@@ -605,8 +605,8 @@ namespace s_gui
 	class FloatIncDec : public Container
 	{
 	public:
-	    FloatIncDec(s_font* _font = NULL, const s_texture* tex_up = NULL,
-			const s_texture* tex_down = NULL, float min = 0.f, float max = 1.0f,
+	    FloatIncDec(SFont* _font = NULL, const STexture* tex_up = NULL,
+			const STexture* tex_down = NULL, float min = 0.f, float max = 1.0f,
 			float init_value = 0.5f, float inc = 0.1f);
 	    virtual ~FloatIncDec();
 		virtual void draw();
@@ -627,8 +627,8 @@ namespace s_gui
     class Time_item : public Container
     {
     public:
-		Time_item(s_font* _font = NULL, const s_texture* tex_up = NULL,
-			const s_texture* tex_down = NULL, double _JD = 2451545.0);
+		Time_item(SFont* _font = NULL, const STexture* tex_up = NULL,
+			const STexture* tex_down = NULL, double _JD = 2451545.0);
 		double getJDay(void) const;
 		string getDateString(void);
 		void setJDay(double jd);
@@ -676,8 +676,8 @@ namespace s_gui
 	class StdWin : public FramedContainer
 	{
 	public:
-	    StdWin(const wstring& _title = L"", const s_texture* _header_tex = NULL,
-			s_font * _winfont = NULL, int headerSize = 18);
+	    StdWin(const wstring& _title = L"", const STexture* _header_tex = NULL,
+			SFont * _winfont = NULL, int headerSize = 18);
 	   	virtual void draw();
 	    virtual wstring getTitle() const {return titleLabel->getLabel();}
 	    virtual void setTitle(const wstring& _title);
@@ -686,7 +686,7 @@ namespace s_gui
 		virtual void setVisible(bool _visible);
 	protected:
 	    Label* titleLabel;
-		const s_texture* header_tex;
+		const STexture* header_tex;
 		int dragging;
 		s_vec2i oldPos;
 	};
@@ -709,8 +709,8 @@ namespace s_gui
 	{
 	public:
 		StdDlgWin(const wstring& _title = NULL,
-                  const s_texture* _header_tex = NULL,
-                  s_font * _winfont = NULL, int headerSize = 18);
+                  const STexture* _header_tex = NULL,
+                  SFont * _winfont = NULL, int headerSize = 18);
 		~StdDlgWin();
 		virtual void setDialogCallback(const callback<void>& c) {onCompleteCallback = c;}
 		void MessageBox(const wstring &_title, const wstring &_prompt, int _buttons, const string &_ID = "");
@@ -730,9 +730,9 @@ namespace s_gui
 		LabeledButton *firstBt, *secondBt;
 		TextLabel *messageLabel;
 		EditBox *inputEdit;
-		const s_texture *blankIcon;
-		const s_texture *questionIcon;
-		const s_texture *alertIcon;
+		const STexture *blankIcon;
+		const STexture *questionIcon;
+		const STexture *alertIcon;
 		Picture *picture;
 		wstring originalTitle;
 		bool hasIcon;
@@ -748,8 +748,8 @@ namespace s_gui
 	{
 	public:
 	    StdBtWin(const wstring& _title = NULL,
-                 const s_texture* _header_tex = NULL,
-			s_font * _winfont = NULL, int headerSize = 18);
+                 const STexture* _header_tex = NULL,
+			SFont * _winfont = NULL, int headerSize = 18);
 		virtual void draw();
 		virtual void setOnHideBtCallback(const callback<void>& c) {onHideBtCallback = c;}
 	protected:
@@ -763,8 +763,8 @@ namespace s_gui
 	{
 	public:
 	    StdTransBtWin(const wstring& _title = L"", int _time_out =0,
-                      const s_texture* _header_tex = NULL,
-			s_font * _winfont = NULL, int headerSize = 18);
+                      const STexture* _header_tex = NULL,
+			SFont * _winfont = NULL, int headerSize = 18);
 		virtual void update(int _delta_time);
 		virtual void set_timeout(int _time_out=0);
 	protected:
@@ -775,7 +775,7 @@ namespace s_gui
 	class TabHeader : public LabeledButton
 	{
 	public:
-		TabHeader(Component*, const wstring& _label = L"", s_font* _font = NULL);
+		TabHeader(Component*, const wstring& _label = L"", SFont* _font = NULL);
 		void draw(void);
 		void setActive(bool);
 	protected:
@@ -786,7 +786,7 @@ namespace s_gui
 	class TabContainer : public Container
 	{
 	public:
-		TabContainer(s_font* _font = NULL);
+		TabContainer(SFont* _font = NULL);
 		void addTab(Component* c, const wstring& name);
 		virtual void draw(void);
 		virtual bool onClic(int, int, S_GUI_VALUE, S_GUI_VALUE);
@@ -826,14 +826,14 @@ namespace s_gui
     class Picture : public CallbackComponent
 	{
 	public:
-	    Picture(const s_texture * _imageTex,
+	    Picture(const STexture * _imageTex,
                 int xpos = 0, int ypos = 0, int xsize = 32, int ysize = 32);
 		~Picture();
 		virtual void draw(void);
 		void setShowEdge(bool v) {showedges = v;}
 		void setImgColor(const s_color &c) {imgcolor = c;}
 	private:
-	    const s_texture * imageTex;
+	    const STexture * imageTex;
 		bool showedges;
 		s_color imgcolor;
 	};
@@ -888,9 +888,9 @@ namespace s_gui
     class MapPicture : public Picture
 	{
 	public:
-	    MapPicture(const s_texture *_imageTex,
-                   const s_texture *_pointerTex,
-                   const s_texture *_cityTex,
+	    MapPicture(const STexture *_imageTex,
+                   const STexture *_pointerTex,
+                   const STexture *_cityTex,
                    int xpos = 0, int ypos = 0, int xsize = 32, int ysize = 32);
 		~MapPicture();
 		virtual void setOnNearestCityCallback(const callback<void>& c) {onNearestCityCallback = c;}
@@ -899,7 +899,7 @@ namespace s_gui
 		virtual bool onMove(int, int);
 		virtual bool isIn(int x, int y);
 		bool onKey(Uint16 k, S_GUI_VALUE s);
-		void set_font(s_font* newFont) {city_name_font = newFont;}
+		void set_font(SFont* newFont) {city_name_font = newFont;}
 		double getPointerLongitude(void);
 		double getPointerLatitude(void);
 		int getPointerAltitude(void);
@@ -931,7 +931,7 @@ namespace s_gui
 		void setPointerSize(void);
 		Picture *pointer;
 		Picture *cityPointer;
-		s_font* city_name_font;
+		SFont* city_name_font;
 		s_vec2i pointerPos, oldPos;
 		s_vec2i originalSize, originalPos;
 		s_vec2i cursorPos;

@@ -184,7 +184,7 @@ private:
 	float moonScale;	// Moon scale value
 
 	double fontSize;
-	s_font& planet_name_font;
+	SFont& planet_name_font;
 	
 	// Whether to display halo as GLpoints
 	bool flagPoint;
@@ -202,7 +202,7 @@ private:
 		bool operator()(Planet* p1, Planet* p2) { return p1->get_distance() > p2->get_distance(); }
 	};
 
-	s_texture *tex_earth_shadow;  // for lunar eclipses
+	STexture *tex_earth_shadow;  // for lunar eclipses
 
 	// Master settings
 	bool flagOrbits;

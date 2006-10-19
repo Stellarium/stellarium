@@ -53,7 +53,6 @@ void usage(char **argv)
 }
 
 
-
 // Check command line arguments
 void check_command_line(int argc, char **argv)
 {

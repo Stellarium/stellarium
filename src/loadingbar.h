@@ -21,9 +21,9 @@
 #define _LOADINGBAR_H_
 
 
-class s_font;
+class SFont;
 class Projector;
-class s_texture;
+class STexture;
 
 // Class which is used to display loading bar
 class LoadingBar
@@ -40,9 +40,9 @@ private:
 	wstring message;
 	Projector* prj;
 	int splashx, splashy, barx, bary, width, height, barwidth, barheight;
-	s_font& barfont;
-	s_font& extraTextFont;
-	s_texture* splash;
+	SFont& barfont;
+	SFont& extraTextFont;
+	STexture* splash;
 	wstring extraText;
 	Vec2f extraTextPos;
 	int timeCounter;
