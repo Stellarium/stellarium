@@ -143,19 +143,19 @@ void StelUI::init(const InitParser& conf)
 	FlagShowTuiDateTime = conf.get_boolean("tui:flag_show_tui_datetime");
 	FlagShowTuiShortObjInfo = conf.get_boolean("tui:flag_show_tui_short_obj_info");
 
-	s_font& baseFont = StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getLocaleMgr().getAppLanguage(), baseFontSize);
+	SFont& baseFont = StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getLocaleMgr().getAppLanguage(), baseFontSize);
 	tuiFont = &(StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getLocaleMgr().getAppLanguage(), baseFontSize));
-	s_font& courierFont = StelApp::getInstance().getFontManager().getFixedFont(StelApp::getInstance().getLocaleMgr().getAppLanguage(), baseCFontSize);
+	SFont& courierFont = StelApp::getInstance().getFontManager().getFixedFont(StelApp::getInstance().getLocaleMgr().getAppLanguage(), baseCFontSize);
 
 	// set up mouse cursor timeout
 	MouseTimeLeft = MouseCursorTimeout*1000;
 
 	// Create standard texture
-	baseTex = new s_texture("backmenu.png", TEX_LOAD_TYPE_PNG_ALPHA);
-	flipBaseTex = new s_texture("backmenu_flip.png", TEX_LOAD_TYPE_PNG_ALPHA);
+	baseTex = new STexture("backmenu.png", TEX_LOAD_TYPE_PNG_ALPHA);
+	flipBaseTex = new STexture("backmenu_flip.png", TEX_LOAD_TYPE_PNG_ALPHA);
 
-	tex_up = new s_texture("up.png");
-	tex_down = new s_texture("down.png");
+	tex_up = new STexture("up.png");
+	tex_down = new STexture("down.png");
 	
 	// Set default Painter
 	Painter p(baseTex, &baseFont, s_color(0.5, 0.5, 0.5), s_color(1., 1., 1.));
@@ -233,7 +233,7 @@ void StelUI::show_message(wstring _message, int _time_out)
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-Component* StelUI::createTopBar(s_font& baseFont)
+Component* StelUI::createTopBar(SFont& baseFont)
 {
 	top_bar_date_lbl = new Label(L"-", &baseFont);	top_bar_date_lbl->setPos(2,1);
 	top_bar_hour_lbl = new Label(L"-", &baseFont);	top_bar_hour_lbl->setPos(110,1);
@@ -681,7 +681,7 @@ http://www.fsf.org");
 	return licence_win;
 }
 
-Component* StelUI::createHelpWindow(s_font& courierFont)
+Component* StelUI::createHelpWindow(SFont& courierFont)
 {
 	help_txtlbl = new TextLabel(
 wstring(_("Movement & selection:\n\

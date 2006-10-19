@@ -329,7 +329,7 @@ void SolarSystem::loadPlanets(LoadingBar& lb)
 	}
 
 	// special case: load earth shadow texture
-	tex_earth_shadow = new s_texture("earth-shadow.png", TEX_LOAD_TYPE_PNG_ALPHA);
+	tex_earth_shadow = new STexture("earth-shadow.png", TEX_LOAD_TYPE_PNG_ALPHA);
 	
 	cout << "(loaded)" << endl;
 }
@@ -399,12 +399,12 @@ double SolarSystem::draw(Projector * prj, const Navigator * nav, ToneReproductor
 	glMaterialfv(GL_FRONT,GL_SPECULAR, zero);
 
 	// Light pos in zero (sun)
-	nav->switch_to_heliocentric();
+	nav->switchToHeliocentric();
 	glLightfv(GL_LIGHT0,GL_POSITION,Vec4f(0.f,0.f,0.f,1.f));
 	glEnable(GL_LIGHT0);
 
 	// Compute each Planet distance to the observer
-	Vec3d obs_helio_pos = nav->get_observer_helio_pos();
+	Vec3d obs_helio_pos = nav->getObserverHelioPos();
 	
 	vector<Planet*>::iterator iter;
 	iter = system_planets.begin();
@@ -721,7 +721,7 @@ void SolarSystem::draw_earth_shadow(const Navigator * nav, Projector * prj)
 	shadow = mh + mdist*mscale;
 	r_penumbra *= mscale;
 
-	nav->switch_to_heliocentric();
+	nav->switchToHeliocentric();
 	glEnable(GL_STENCIL_TEST);
 	glStencilFunc(GL_EQUAL, 0x1, 0x1);
 	glStencilOp(GL_KEEP, GL_KEEP, GL_KEEP);

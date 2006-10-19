@@ -281,9 +281,9 @@ public:
 	virtual void sVertex3(double x, double y, double z, const Mat4d& mat) const
 	{glVertex3d(x,y,z);}
 
-	void print_gravity180(s_font* font, float x, float y, const wstring& str, 
+	void print_gravity180(SFont* font, float x, float y, const wstring& str, 
 			      bool speed_optimize = 1, float xshift = 0, float yshift = 0) const;
-	void print_gravity180(s_font* font, float x, float y, const string& str, 
+	void print_gravity180(SFont* font, float x, float y, const string& str, 
 			      bool speed_optimize = 1, float xshift = 0, float yshift = 0) const
 	{
 	   	print_gravity180(font, x, y, StelUtils::stringToWstring(str), speed_optimize, xshift, yshift);

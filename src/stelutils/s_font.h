@@ -31,11 +31,11 @@
 #include "stel_utility.h"
 #include "typeface.h"
 
-class s_font
+class SFont
 {
 public:
-    s_font(float size_i, const string& ttfFileName) : typeFace(ttfFileName, (size_t)(size_i), 72) {;}
-    virtual ~s_font() {;}
+    SFont(float size_i, const string& ttfFileName) : typeFace(ttfFileName, (size_t)(size_i), 72) {;}
+    virtual ~SFont() {;}
     
     void print(float x, float y, const string& s, int upsidedown = 1) {typeFace.render(StelUtils::stringToWstring(s), Vec2f(x, y), upsidedown==1);}
 	void print(float x, float y, const wstring& ws, int upsidedown = 1) {typeFace.render(ws, Vec2f(x, y), upsidedown==1);}
@@ -106,7 +106,7 @@ public:
     float getAscent(void) {return typeFace.ascent();}
     float getDescent(void) {return typeFace.descent();}
 	
-	static s_font nullFont;
+	static SFont nullFont;
 protected:
 	TypeFace typeFace;
 };

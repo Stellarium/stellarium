@@ -27,9 +27,9 @@
 #include "glpng.h"
 #include "s_texture.h"
 
-string s_texture::texDir = "./";
+string STexture::texDir = "./";
 
-s_texture::s_texture(const string& _textureName) : textureName(_textureName), texID(0),
+STexture::STexture(const string& _textureName) : textureName(_textureName), texID(0),
 	loadType(PNG_BLEND1), loadType2(GL_CLAMP)
 {
     load( texDir + textureName );
@@ -37,7 +37,7 @@ s_texture::s_texture(const string& _textureName) : textureName(_textureName), te
 
 
 // when need to load images outside texture directory
-s_texture::s_texture(bool full_path, const string& _textureName, int _loadType) : textureName(_textureName),
+STexture::STexture(bool full_path, const string& _textureName, int _loadType) : textureName(_textureName),
 	texID(0), loadType(PNG_BLEND1), loadType2(GL_CLAMP_TO_EDGE)
 {
     switch (_loadType)
@@ -58,7 +58,7 @@ s_texture::s_texture(bool full_path, const string& _textureName, int _loadType) 
 	else load( texDir + textureName );
 }
 
-s_texture::s_texture(bool full_path, const string& _textureName, int _loadType, const bool mipmap) : textureName(_textureName),
+STexture::STexture(bool full_path, const string& _textureName, int _loadType, const bool mipmap) : textureName(_textureName),
 	texID(0), loadType(PNG_BLEND1), loadType2(GL_CLAMP_TO_EDGE)
 {
     switch (_loadType)
@@ -80,7 +80,7 @@ s_texture::s_texture(bool full_path, const string& _textureName, int _loadType, 
 }
 
 
-s_texture::s_texture(const s_texture &t) {
+STexture::STexture(const STexture &t) {
   textureName = t.textureName;
   loadType = t.loadType;
   loadType2 = t.loadType2;
@@ -89,7 +89,7 @@ s_texture::s_texture(const s_texture &t) {
   load(texDir + textureName);
 }
 
-const s_texture &s_texture::operator=(const s_texture &t) {
+const STexture &STexture::operator=(const STexture &t) {
   unload();
   textureName = t.textureName;
   loadType = t.loadType;
@@ -100,7 +100,7 @@ const s_texture &s_texture::operator=(const s_texture &t) {
   return *this;
 }
 
-s_texture::s_texture(const string& _textureName, int _loadType, const bool mipmap) : textureName(_textureName),
+STexture::STexture(const string& _textureName, int _loadType, const bool mipmap) : textureName(_textureName),
 	texID(0), loadType(PNG_BLEND1), loadType2(GL_CLAMP_TO_EDGE)
 {
     switch (_loadType)
@@ -119,7 +119,7 @@ s_texture::s_texture(const string& _textureName, int _loadType, const bool mipma
     load( texDir + textureName, mipmap);
 }
 
-s_texture::s_texture(const string& _textureName, int _loadType) : textureName(_textureName),
+STexture::STexture(const string& _textureName, int _loadType) : textureName(_textureName),
 	texID(0), loadType(PNG_BLEND1), loadType2(GL_CLAMP_TO_EDGE)
 {
     switch (_loadType)
@@ -139,18 +139,18 @@ s_texture::s_texture(const string& _textureName, int _loadType) : textureName(_t
 }
 
 
-s_texture::~s_texture()
+STexture::~STexture()
 {
     unload();
 }
 
-int s_texture::load(string fullName) {
+int STexture::load(string fullName) {
 
 	// assume want mipmap (reduces alias artifacts)
 	return load(fullName, true);
 }
 
-int s_texture::load(string fullName, bool mipmap)
+int STexture::load(string fullName, bool mipmap)
 {
 
     FILE * tempFile = fopen(fullName.c_str(),"r");
@@ -179,12 +179,12 @@ int s_texture::load(string fullName, bool mipmap)
 	return (texID!=0);
 }
 
-void s_texture::unload()
+void STexture::unload()
 {   
     glDeleteTextures(1, &texID);	// Delete The Texture
 }
 
-int s_texture::reload()
+int STexture::reload()
 {
     unload();
 	if(whole_path) return load(textureName);
@@ -192,7 +192,7 @@ int s_texture::reload()
 }
 
 // Return the texture size in pixels
-int s_texture::getSize(void) const
+int STexture::getSize(void) const
 {
 	glBindTexture(GL_TEXTURE_2D, texID);
 	GLint w;
@@ -201,7 +201,7 @@ int s_texture::getSize(void) const
 }
 
 // Return the average texture luminance : 0 is black, 1 is white
-float s_texture::get_average_luminance(void) const
+float STexture::get_average_luminance(void) const
 {
 	glBindTexture(GL_TEXTURE_2D, texID);
 	GLint w, h;
@@ -246,7 +246,7 @@ float s_texture::get_average_luminance(void) const
 }
 
 
-void s_texture::getDimensions(int &width, int &height) const
+void STexture::getDimensions(int &width, int &height) const
 {
   glBindTexture(GL_TEXTURE_2D, texID);
 

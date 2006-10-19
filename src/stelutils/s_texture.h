@@ -35,17 +35,17 @@ using namespace std;
 #define TEX_LOAD_TYPE_PNG_REPEAT 3
 #define TEX_LOAD_TYPE_PNG_SOLID_REPEAT 4
 
-class s_texture
+class STexture
 {
 public:
-    s_texture(const string& _textureName);
-    s_texture(bool full_path, const string& _textureName, int _loadType);
-    s_texture(bool full_path, const string& _textureName, int _loadType, const bool mipmap);
-	s_texture(const string& _textureName, int _loadType);
-    s_texture(const string& _textureName, int _loadType, const bool mipmap);
-    virtual ~s_texture();
-    s_texture(const s_texture &t);
-    const s_texture &operator=(const s_texture &t);
+    STexture(const string& _textureName);
+    STexture(bool full_path, const string& _textureName, int _loadType);
+    STexture(bool full_path, const string& _textureName, int _loadType, const bool mipmap);
+	STexture(const string& _textureName, int _loadType);
+    STexture(const string& _textureName, int _loadType, const bool mipmap);
+    virtual ~STexture();
+    STexture(const STexture &t);
+    const STexture &operator=(const STexture &t);
     int load(string fullName);
 	int load(string fullName, bool mipmap);
     void unload();
@@ -55,7 +55,7 @@ public:
     float get_average_luminance(void) const;
     int getSize(void) const;
     void getDimensions(int &width, int &height) const;
-    static void set_texDir(const string& _texDir) {s_texture::texDir = _texDir;}
+    static void set_texDir(const string& _texDir) {STexture::texDir = _texDir;}
 
 private:
     string textureName;

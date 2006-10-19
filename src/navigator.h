@@ -53,22 +53,12 @@ public:
 
 	virtual void init(const InitParser& conf, LoadingBar& lb);
 
-	// Init the viewing matrix, setting the field of view, the clipping planes, and screen size
-	void init_project_matrix(int w, int h, double near, double far);
-
-	void update_time(int delta_time);
-	void update_transform_matrices(void);
-	void update_vision_vector(int delta_time,const StelObject &selected);
-
-	// Update the modelview matrices
-	void update_model_view_mat(void);
+	void updateTime(int delta_time);
+	void updateTransformMatrices(void);
+	void updateVisionVector(int delta_time,const StelObject &selected);
 
 	// Move to the given position in equatorial or local coordinate depending on _local_pos value
-	void move_to(const Vec3d& _aim, float move_duration = 1., bool _local_pos = false, int zooming = 0);
-
-	// Loads
-	void load_position(const string&);		// Load the position info in the file name given
-	void save_position(const string&);		// Save the position info in the file name given
+	void moveTo(const Vec3d& _aim, float move_duration = 1., bool _local_pos = false, int zooming = 0);
 
 	// Time controls
 	//! Set the current date in Julian Day
@@ -82,32 +72,29 @@ public:
 	double getTimeSpeed(void) const {return time_speed;}
 
 	// Flags controls
-	void set_flag_traking(int v) {flag_traking=v;}
-	int get_flag_traking(void) const {return flag_traking;}
-	void set_flag_lock_equ_pos(int v) {flag_lock_equ_pos=v;}
-	int get_flag_lock_equ_pos(void) const {return flag_lock_equ_pos;}
+	void setFlagTraking(int v) {flag_traking=v;}
+	int getFlagTraking(void) const {return flag_traking;}
+	void setFlagLockEquPos(int v) {flag_lock_equ_pos=v;}
+	int getFlagLockEquPos(void) const {return flag_lock_equ_pos;}
 
 	// Get vision direction
-	const Vec3d& get_equ_vision(void) const {return equ_vision;}
-	const Vec3d& get_prec_equ_vision(void) const {return prec_equ_vision;}
-	const Vec3d& get_local_vision(void) const {return local_vision;}
+	const Vec3d& getPrecEquVision(void) const {return prec_equ_vision;}
+	const Vec3d& getLocalVision(void) const {return local_vision;}
+	void setLocalVision(const Vec3d& _pos);
 
-	void set_local_vision(const Vec3d& _pos);
+	const Planet *getHomePlanet(void) const {return position->getHomePlanet();}
 
-	const Planet *getHomePlanet(void) const
-                      {return position->getHomePlanet();}
-                    // Return the observer heliocentric position
-	Vec3d get_observer_helio_pos(void) const;
+    // Return the observer heliocentric position
+	Vec3d getObserverHelioPos(void) const;
 
 	// Place openGL in earth equatorial coordinates
-	void switch_to_earth_equatorial(void) const { glLoadMatrixd(mat_earth_equ_to_eye); }
+	void switchToEarthEquatorial(void) const { glLoadMatrixd(mat_earth_equ_to_eye); }
 
 	// Place openGL in heliocentric ecliptical coordinates
-	void switch_to_heliocentric(void) const { glLoadMatrixd(mat_helio_to_eye); }
+	void switchToHeliocentric(void) const { glLoadMatrixd(mat_helio_to_eye); }
 
 	// Place openGL in local viewer coordinates (Usually somewhere on earth viewing in a specific direction)
-	void switch_to_local(void) const { glLoadMatrixd(mat_local_to_eye); }
-
+	void switchToLocal(void) const { glLoadMatrixd(mat_local_to_eye); }
 
 	// Transform vector from local coordinate to equatorial
 	Vec3d local_to_earth_equ(const Vec3d& v) const { return mat_local_to_earth_equ*v; }
@@ -136,15 +123,16 @@ public:
 	const Mat4d& get_local_to_eye_mat(void) const {return mat_local_to_eye;}
 	const Mat4d& get_j2000_to_eye_mat(void) const {return mat_j2000_to_eye;}
 
-	void update_move(double deltaAz, double deltaAlt);
+	void updateMove(double deltaAz, double deltaAlt);
 
-	void set_viewing_mode(VIEWING_MODE_TYPE view_mode);
-	VIEWING_MODE_TYPE get_viewing_mode(void) const {return viewing_mode;}
-	void switch_viewing_mode(void);
+	void setViewingMode(VIEWING_MODE_TYPE view_mode);
+	VIEWING_MODE_TYPE getViewingMode(void) const {return viewing_mode;}
 
 	const Vec3d& getinitViewPos() {return initViewPos;}
 	
 private:
+	// Update the modelview matrices
+	void updateModelViewMat(void);
 
 	// Struct used to store data for auto mov
 	typedef struct

@@ -34,7 +34,7 @@ float HipStar::names_brightness = 1.f;
 ToneReproductor* HipStar::eye = NULL;
 Projector* HipStar::proj = NULL;
 bool HipStar::gravity_label = false;
-s_font *HipStar::starFont = NULL;
+SFont *HipStar::starFont = NULL;
 
 Vec3f HipStar::circle_color = Vec3f(0.f,0.f,0.f);
 Vec3f HipStar::label_color = Vec3f(.8f,.8f,.8f);

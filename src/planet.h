@@ -76,7 +76,7 @@ public:
 private:
 	const double radius_min;
 	const double radius_max;
-	const s_texture *tex;
+	const STexture *tex;
 };
 
 
@@ -109,7 +109,7 @@ public:
 	double get_satellites_fov(const Navigator * nav) const;
 	double get_parent_satellites_fov(const Navigator * nav) const;
 	float get_mag(const Navigator * nav) const {return compute_magnitude(nav);}
-    const s_texture *getMapTexture(void) const {return tex_map;}
+    const STexture *getMapTexture(void) const {return tex_map;}
 
 	/** Translate planet name using the passed translator */
 	void translateName(Translator& trans) {nameI18 = trans.translate(englishName);}
@@ -178,7 +178,7 @@ public:
 	void set_big_halo(const string& halotexfile);
 	void set_halo_size(float s) {big_halo_size = s;}
 
-	static void set_font(s_font* f) {planet_name_font = f;}
+	static void set_font(SFont* f) {planet_name_font = f;}
 	
 	static void setScale(float s) {object_scale = s;}
 	static float getScale(void) {return object_scale;}
@@ -251,9 +251,9 @@ protected:
 	Mat4d rot_local_to_parent;
 	Mat4d mat_local_to_parent;		// Transfo matrix from local ecliptique to parent ecliptic
 	float axis_rotation;			// Rotation angle of the Planet on it's axis
-    s_texture * tex_map;			// Planet map texture
-	s_texture * tex_halo;			// Little halo texture
-	s_texture * tex_big_halo;		// Big halo texture
+    STexture * tex_map;			// Planet map texture
+	STexture * tex_halo;			// Little halo texture
+	STexture * tex_big_halo;		// Big halo texture
 
 	float big_halo_size;				// Halo size on screen
 
@@ -277,7 +277,7 @@ protected:
 	const Planet *const parent;				// Planet parent i.e. sun for earth
 	list<Planet *> satellites;		// satellites of the Planet
 
-	static s_font* planet_name_font;// Font for names
+	static SFont* planet_name_font;// Font for names
 	static float object_scale;
 	static Vec3f label_color;
 	static Vec3f orbit_color;

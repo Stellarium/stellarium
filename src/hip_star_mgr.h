@@ -179,7 +179,7 @@ private:
     bool gravityLabel;
     float limitingMag;                  // limiting magnitude at 60 degree fov
     
-    s_texture *starTexture;                // star texture
+    STexture *starTexture;                // star texture
 
     int max_geodesic_grid_level;
     int last_max_search_level;
@@ -208,7 +208,7 @@ private:
     static map<wstring,int> sci_names_index_i18n;
     
 	double fontSize;
-    s_font *starFont;
+    SFont *starFont;
     static bool flagSciNames;
     Vec3f label_color,circle_color;
     float twinkle_amount;

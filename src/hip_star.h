@@ -87,7 +87,7 @@ private:
 	static bool gravity_label;
 	static Vec3f circle_color, label_color;
 	static Vec3f ChartColors[20];
-	static s_font *starFont;
+	static SFont *starFont;
 
 	static bool flagSciNames;
 };

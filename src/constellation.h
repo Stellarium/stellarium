@@ -28,7 +28,7 @@
 #include <vector>
 
 class HipStarMgr;
-class s_font;
+class SFont;
 
 class Constellation : public StelObjectBase
 {
@@ -52,7 +52,7 @@ private:
 	float get_mag(const Navigator * nav) const {return 0.;} 
     
     bool read(const string& record, HipStarMgr * _VouteCeleste);
-    void draw_name(s_font * constfont, Projector* prj) const;
+    void draw_name(SFont * constfont, Projector* prj) const;
     void draw_art(Projector* prj, const Navigator* nav) const;
     void draw_boundary_optim(Projector* prj) const;
     const Constellation* is_star_in(const StelObject&) const;
@@ -94,7 +94,7 @@ private:
     /** List of stars forming the segments */
     StelObject* asterism;
    
-	s_texture* art_tex;
+	STexture* art_tex;
 	Vec3d art_vertex[9];
 	
 	/** Define whether art, lines, names and boundary must be drawn */

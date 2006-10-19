@@ -36,7 +36,7 @@ struct FT_BitmapGlyphRec_;
 //! Base class for gem type faces
 class TypeFace
 {
-	friend class s_font;
+	friend class SFont;
     // ----------------------------------------------------------------------------------------------
     //  Xstruction
     // ----------------------------------------------------------------------------------------------

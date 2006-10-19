@@ -89,10 +89,10 @@ private:
 	StelApp * app;			// The main application instance
 	
 	bool initialised;
-	s_texture * baseTex;	// The standard fill texture
-	s_texture * flipBaseTex;	// The standard fill texture
-	s_texture * tex_up;		// Up arrow texture
-	s_texture * tex_down;	// Down arrow texture
+	STexture * baseTex;	// The standard fill texture
+	STexture * flipBaseTex;	// The standard fill texture
+	STexture * tex_up;		// Up arrow texture
+	STexture * tex_down;	// Down arrow texture
 
 	// Flags and variables (moved from StelCore)
 	int FlagShowTopBar;
@@ -111,7 +111,7 @@ private:
 	
 	double baseFontSize;
 	double baseCFontSize;
-	s_font* tuiFont;
+	SFont* tuiFont;
 	
 	// Text UI
 	bool FlagEnableTuiMenu;
@@ -132,7 +132,7 @@ private:
 	Label * top_bar_fps_lbl;
 	Label * top_bar_appName_lbl;
 	Label * top_bar_fov_lbl;
-	Component* createTopBar(s_font& baseFont);
+	Component* createTopBar(SFont& baseFont);
 	void updateTopBar(void);
 
 	// Flags buttons (the buttons in the bottom left corner)
@@ -200,7 +200,7 @@ private:
 	// The window containing the help info
 	StdBtWin * help_win;
 	TextLabel * help_txtlbl;
-	Component* createHelpWindow(s_font& courierFont);
+	Component* createHelpWindow(SFont& courierFont);
 	void help_win_hideBtCallback(void);
 
 	// window for transient messages
@@ -209,7 +209,7 @@ private:
 
 	// The window managing the configuration
 	StdBtWin* config_win;
-	Component* createConfigWindow(s_font& courierFont);
+	Component* createConfigWindow(SFont& courierFont);
 	void config_win_hideBtCallback(void);
 
 	TabContainer * config_tab_ctr;

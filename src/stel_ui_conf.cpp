@@ -41,7 +41,7 @@ static string CalculateProjectionSlValue(
   return projection_type;
 }
 
-Component* StelUI::createConfigWindow(s_font& courierFont)
+Component* StelUI::createConfigWindow(SFont& courierFont)
 {
 	config_win = new StdBtWin(_("Configuration"));
 	//config_win->setOpaque(opaqueGUI);
@@ -59,7 +59,7 @@ Component* StelUI::createConfigWindow(s_font& courierFont)
 	FilledContainer* tab_render = new FilledContainer();
 	tab_render->setSize(config_tab_ctr->getSize());
 
-	const s_texture* starp = new s_texture("halo.png");
+	const STexture* starp = new STexture("halo.png");
 	Picture* pstar = new Picture(starp, x-50, y+5, 32, 32);
 	tab_render->addComponent(pstar);
 
@@ -93,7 +93,7 @@ Component* StelUI::createConfigWindow(s_font& courierFont)
 
 	y+=30;
 
-	const s_texture* constellp = new s_texture("bt_constellations.png");
+	const STexture* constellp = new STexture("bt_constellations.png");
 	Picture* pconstell = new Picture(constellp, x-50, y+10, 32, 32);
 	tab_render->addComponent(pconstell);
 
@@ -119,7 +119,7 @@ Component* StelUI::createConfigWindow(s_font& courierFont)
 
 	y+=30;
 
-	const s_texture* nebp = new s_texture("bt_nebula.png");
+	const STexture* nebp = new STexture("bt_nebula.png");
 	Picture* pneb = new Picture(nebp, x-50, y-13, 32, 32);
 	tab_render->addComponent(pneb);
 
@@ -144,7 +144,7 @@ Component* StelUI::createConfigWindow(s_font& courierFont)
 
 	y+=30;
 
-	const s_texture* planp = new s_texture("bt_planet.png");
+	const STexture* planp = new STexture("bt_planet.png");
 	Picture* pplan = new Picture(planp, x-50, y-7, 32, 32);
 	tab_render->addComponent(pplan);
 
@@ -168,7 +168,7 @@ Component* StelUI::createConfigWindow(s_font& courierFont)
 	
 	y+=30;
 
-	const s_texture* gridp = new s_texture("bt_eqgrid.png");
+	const STexture* gridp = new STexture("bt_eqgrid.png");
 	Picture* pgrid = new Picture(gridp, x-50, y-4, 32, 32);
 	tab_render->addComponent(pgrid);
 
@@ -194,7 +194,7 @@ Component* StelUI::createConfigWindow(s_font& courierFont)
 
 	y+=30;
 
-	const s_texture* groundp = new s_texture("bt_ground.png");
+	const STexture* groundp = new STexture("bt_ground.png");
 	Picture* pground = new Picture(groundp, x-50, y-4, 32, 32);
 	tab_render->addComponent(pground);
 
@@ -294,10 +294,10 @@ Component* StelUI::createConfigWindow(s_font& courierFont)
 	tab_location->setSize(config_tab_ctr->getSize());
 
 	x=5; y=5;
-	const s_texture *earth = new s_texture(
+	const STexture *earth = new STexture(
                                    *(core->getObservatory().getHomePlanet()->getMapTexture()));
-	const s_texture *pointertex = new s_texture("pointeur1.png");
-	const s_texture *citytex = new s_texture("city.png");
+	const STexture *pointertex = new STexture("pointeur1.png");
+	const STexture *citytex = new STexture("city.png");
 	earth_map = new MapPicture(earth, pointertex, citytex, x,y,tab_location->getSizex()-10, 250);
 	earth_map->setOnPressCallback(callback<void>(this, &StelUI::setObserverPositionFromMap));
 	earth_map->setOnNearestCityCallback(callback<void>(this, &StelUI::setCityFromMap));
@@ -667,7 +667,7 @@ Component* StelUI::createSearchWindow(void)
 
 	y+=30;
 
-	const s_texture* searchp = new s_texture("bt_search.png");
+	const STexture* searchp = new STexture("bt_search.png");
 	Picture* psearch = new Picture(searchp, x, y+1, 24, 24);
 	search_win->addComponent(psearch);
 	
