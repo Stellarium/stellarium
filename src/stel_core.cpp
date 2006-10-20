@@ -217,6 +217,17 @@ void StelCore::init(const InitParser& conf)
 	setMeteorsRate(conf.get_int("astro", "meteor_rate", 10));
 	
 	tone_converter->set_world_adaptation_luminance(3.75f + atmosphere->get_intensity()*40000.f);
+	
+	// Load dynamic modules TODO loop here
+	if (conf.find_entry("external_modules:module1"))
+	{
+		StelModule* m = StelApp::getInstance().getModuleMgr().loadExternalModule(conf.get_str("external_modules:module1"));
+		if (m!=NULL)
+		{
+			m->init(conf, lb);
+			StelApp::getInstance().getModuleMgr().registerModule(m);
+		}
+	}
 }
 
 // Update all the objects in function of the time

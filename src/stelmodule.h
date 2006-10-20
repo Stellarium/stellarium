@@ -84,7 +84,6 @@ public:
 	//! Get the email adress of the module author
 	virtual string getAuthorEmail() {return "http://stellarium.org";}
 	
-	
 	///////////////////////////////////////////////////////////////////////////
 	// Properties managment
 	
@@ -142,7 +141,6 @@ public:
 	}
 	
 protected:
-
 	//! Add a property to the property list
 #define	REGISTER_PROPERTY(type, key, getter, setter, comment) registerProperty<type>( (key) , boost::callback<type>(this, (getter) ), boost::callback<void, type>(this, (setter) ), (comment) )
 
@@ -157,7 +155,6 @@ protected:
 	}
 
 private:
-	
 	// Enable the access to setter and getter 
 	class propertyAccessor
 	{

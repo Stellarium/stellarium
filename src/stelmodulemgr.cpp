@@ -18,14 +18,62 @@
  */
  
 #include "stelmodulemgr.h"
+#include "stelapp.h"
+
+#if defined (HAVE_GMODULE) && defined (HAVE_GLIB)
+ #include <glib.h>
+ #include <gmodule.h>
+ // the function signature for getStelmodule()
+ typedef StelModule* (* getStelmoduleFunc) (void);
+ static getStelmoduleFunc getStelModule = NULL;
+#endif
 
 StelModuleMgr::StelModuleMgr()
 {
 }
 
-
 StelModuleMgr::~StelModuleMgr()
 {
 }
 
+StelModule* StelModuleMgr::loadExternalModule(const string& moduleID)
+{
+	string moduleFullPath = "modules/" + moduleID + "/" + moduleID;
+#ifdef WIN32
+	moduleFullPath += ".dll";
+#else
+	moduleFullPath += ".so";
+#endif
+	moduleFullPath = StelApp::getInstance().getFilePath(moduleFullPath);
+#if !defined (HAVE_GMODULE) || !defined (HAVE_GLIB)
+	cerr << "This version of stellarium was compiled without enabling dynamic loading of modules." << endl;
+	cerr << "Module " << moduleID << " will not be loaded." << endl;
+	return NULL;
+#else
+	if (g_module_supported()==FALSE)
+	{
+		cerr << "Dynamic loading of modules does not work on this plateform." << endl;
+		cerr << "Module " << moduleID << " will not be loaded." << endl;
+		return NULL;
+	}
+	// Load module
+	GModule* md = g_module_open(moduleFullPath.c_str(), G_MODULE_BIND_LAZY);
+	if (md==NULL)
+	{
+		cerr << "Couldn't find the dynamic library: " << moduleFullPath << endl;
+		cerr << "Module " << moduleID << " will not be loaded." << endl;
+		return NULL;
+	}
 
+	if (g_module_symbol(md, "getStelModule", (gpointer *)&getStelModule)!=TRUE)
+	{
+		cerr << "Couldn't find the getStelModule() function in the shared library: " << moduleID << ": " << g_module_error() << endl;
+		cerr << "Module " << moduleID << " will not be loaded." << endl;
+		g_module_close(md);
+		return NULL;
+	}
+	StelModule* sMod = getStelModule();
+	cout << "Loaded external module " << moduleID << "." << endl;
+	return sMod;
+#endif
+}
