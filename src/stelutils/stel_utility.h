@@ -123,7 +123,11 @@ namespace StelUtils {
 	void rect_to_sphe(double *lng, double *lat, const Vec3d& v);
 
 	//! Obtains Latitude, Longitude, RA or Declination from a string.
-	double get_dec_angle(const string&);	
+	double get_dec_angle(const string&);
+	
+	//! Check if a file exist
+	//! May require optimization
+	bool fileExists(const std::string& fileName);
 }
 
 // General Calendar Functions

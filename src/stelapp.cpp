@@ -48,7 +48,7 @@ StelApp::StelApp(const string& CDIR, const string& LDIR, const string& DATA_ROOT
 	assert(!singleton);
 	singleton = this;
 
-	configDir = CDIR;
+	dotStellariumDir = CDIR;
 	localeDir = LDIR;
 	dataDir = DATA_ROOT+"/data";
 	rootDir = DATA_ROOT + "/";
@@ -92,7 +92,27 @@ StelApp::~StelApp()
 *************************************************************************/
 string StelApp::getConfigFilePath(void) const
 {
-	return configDir + "config.ini";
+	return dotStellariumDir + "config.ini";
+}
+
+/*************************************************************************
+ Get the full path to a file.
+*************************************************************************/
+string StelApp::getFilePath(const string& fileName) const
+{
+	// Absolute path if starts by '/'
+	if (fileName!="" && fileName[0]=='/')
+		return fileName;
+	
+	if (StelUtils::fileExists(dotStellariumDir + fileName))
+		return dotStellariumDir + fileName;
+	
+	if (StelUtils::fileExists(rootDir + fileName))
+		return rootDir + fileName;
+	
+	cerr << "Can't find file " << fileName << endl;
+	
+	return "";
 }
 
 /*************************************************************************
@@ -104,7 +124,8 @@ string StelApp::getDataFilePath(const string& dataFileName) const
 	// Absolute path if starts by '/'
 	if (dataFileName!="" && dataFileName[0]=='/')
 		return dataFileName;
-	return dataDir + "/" + dataFileName;
+		
+	return getFilePath("data/" + dataFileName);
 }
 
 /*************************************************************************
@@ -126,7 +147,7 @@ void StelApp::setViewPortDistorterType(const string &type)
 	}
 	distorter = ViewportDistorter::create(type,screenW,screenH, core->getProjection());
 	InitParser conf;
-	conf.load(configDir + "config.ini");
+	conf.load(dotStellariumDir + "config.ini");
 	distorter->init(conf);
 }
 
@@ -157,7 +178,7 @@ void StelApp::init(void)
 	
 	// Initialize video device and other sdl parameters
 	InitParser conf;
-	conf.load(configDir + "config.ini");
+	conf.load(dotStellariumDir + "config.ini");
 
 	// Main section
 	string version = conf.get_str("main:version");
@@ -178,7 +199,7 @@ void StelApp::init(void)
 			// The config file is too old to try an importation
 			printf("The current config file is from a version too old for parameters to be imported (%s).\nIt will be replaced by the default config file.\n", version.empty() ? "<0.6.0" : version.c_str());
 			system( (string("cp -f ") + dataDir + "default_config.ini " + getConfigFilePath()).c_str() );
-			conf.load(configDir + "config.ini");  // Read new config!
+			conf.load(dotStellariumDir + "config.ini");  // Read new config!
 
 		}
 		else

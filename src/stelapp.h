@@ -62,24 +62,29 @@ public:
 
 	//! @brief Get the configuration file path.
 	//! @return the full path to Stellarium's main config.ini file
-	string getConfigFilePath(void) const;
+	string getConfigFilePath() const;
+
+	//! @brief Get the full path to a file.
+	//! This method will try to find the file in all valid data directories until it finds it.
+	//! @return the fullpath to the file.
+	string getFilePath(const string& fileName) const;
 
 	//! @brief Get the full path to a data file.
 	//! This method will try to find the file in all valid data directories until it finds it.
-	//! @param dataFileName the data file path relative to the main data directory (e.g font/myFont.ttf)
-	//! @return the fullpath to the data file e.g /usr/local/share/stellarium/data/font/myFont.ttf
+	//! @param dataFileName the data file path relative to the main data directory (e.g image/myImage.png)
+	//! @return the fullpath to the data file e.g /usr/local/share/stellarium/data/image/myImage.png
 	string getDataFilePath(const string& dataFileName) const;
-	
-	//! @brief Get the locale data directory path
-	//! @return the full path to the directory containing locale specific infos e.g. /usr/local/share/locale/.
-	//! This directory should e.g. contain fr/LC_MESSAGES/stellarium.mo so that french translations work.
-	const string& getLocaleDir() {return localeDir;}
 
 	//! @brief Get the full path to a texture file.
 	//! This method will try to find the file in all valid data directories until it finds it.
 	//! @param textureFileName the texture file path relative to the main data directory (e.g jupiter.png)
 	//! @return the fullpath to the texture file e.g /usr/local/share/stellarium/data/texture/jupiter.png.
 	string getTextureFilePath(const string& textureFileName) const;
+	
+	//! @brief Get the locale data directory path
+	//! @return the full path to the directory containing locale specific infos e.g. /usr/local/share/locale/.
+	//! This directory should e.g. contain fr/LC_MESSAGES/stellarium.mo so that french translations work.
+	const string& getLocaleDir() {return localeDir;}
 
 	//! @brief Get the module manager to use for accessing any module loaded in the application
 	//! @return the module manager.
@@ -181,7 +186,7 @@ private:
 	StelCore* core;
 
 	// Full path to config dir
-	string configDir;
+	string dotStellariumDir;
 	// Full path to locale dir
 	string localeDir;
 	// Full path to data dir
