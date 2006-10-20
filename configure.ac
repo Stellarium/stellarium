@@ -23,6 +23,12 @@ AC_ISC_POSIX
 AC_PROG_CXX
 AC_PROG_RANLIB
 
+PKG_CHECK_MODULES(GLIB, glib-2.0, [AC_DEFINE_UNQUOTED(HAVE_GLIB, 1, [Define if glib-2.0 is present.])], [AC_DEFINE_UNQUOTED(HAVE_GLIB, 0, [Define if glib-2.0 is present.])])
+CXXFLAGS="$CXXFLAGS $GLIB_CFLAGS"
+LIBS="$LIBS $GLIB_LIBS"
+PKG_CHECK_MODULES(GMODULE, gmodule-2.0, [AC_DEFINE_UNQUOTED(HAVE_GMODULE, 1, [Define if gmodule-2.0 is present.])], [AC_DEFINE_UNQUOTED(HAVE_GLIB, 0, [Define if gmodule-2.0 is present.])])
+CXXFLAGS="$CXXFLAGS $GMODULE_CFLAGS"
+LIBS="$LIBS $GMODULE_LIBS"
 
 # Check for freetype2
 # This macro won't work on my system?!... use the old way until the problem is fixed..

@@ -20,6 +20,7 @@
 
 #include <math.h> // fmod
 #include <sstream>
+#include <fstream>
 #include <cstdlib>
 #include <ctime>
 
@@ -390,7 +391,21 @@ namespace StelUtils {
 			pos = -pos;
 
 		return (pos);
-	}	
+	}
+	
+	// Check if a file exist
+	bool fileExists(const std::string& fileName)
+	{
+		std::fstream fin;
+		fin.open(fileName.c_str(),std::ios::in);
+		if(fin.is_open())
+		{
+			fin.close();
+			return true;
+		}
+		fin.close();
+		return false;
+	}
 }
 
 // convert string int ISO 8601-like format [+/-]YYYY-MM-DDThh:mm:ss (no timzone offset)
@@ -665,3 +680,4 @@ string get_ISO8601_time_UTC(double JD)
 	StelUtils::my_strftime(isotime, 254, "%Y-%m-%d %H:%M:%S", &time_utc);
 	return isotime;
 }
+

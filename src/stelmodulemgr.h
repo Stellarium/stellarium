@@ -33,7 +33,7 @@ public:
 	StelModuleMgr();
     ~StelModuleMgr();
 	
-	//! Add a static (no dynamic linking) module which is already initialized
+	//! Add a static (no dynamic linking) module.
 	void registerModule(StelModule* m)
 	{
 		if (modules.find(m->getModuleID()) != modules.end())
@@ -43,11 +43,11 @@ public:
 		modules.insert(std::pair<string, StelModule*>(m->getModuleID(), m));
 	}
 	
-	//! Load dynamically a module and initialize it
-	void registerModule(const string& moduleID)
-	{
-		// TODO use glib here
-	}	
+	//! Load dynamically a module
+	//! @param moduleID the name of the module = name of the dynamic library file without extension 
+	//! (e.g "mymodule" for mymodule.so or mymodule.dll)
+	//! @return the loaded module or NULL in case of error. The returned Stelmodule still needs to be initialized 
+	StelModule* loadExternalModule(const string& moduleID);
 	
 	StelModule* getModule(const string& moduleID)
 	{
