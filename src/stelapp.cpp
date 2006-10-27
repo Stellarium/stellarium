@@ -28,6 +28,7 @@
 #include "stelfontmgr.h"
 #include "stellocalemgr.h"
 #include "stelskyculturemgr.h"
+#include "StelTextureMgr.h"
 #include "hip_star_mgr.h"
 #include "constellation_mgr.h"
 #include "solarsystem.h"
@@ -53,9 +54,8 @@ StelApp::StelApp(const string& CDIR, const string& LDIR, const string& DATA_ROOT
 	dataDir = DATA_ROOT+"/data";
 	rootDir = DATA_ROOT + "/";
 	
-	// Set textures directory
 	STexture::set_texDir(rootDir + "textures/");
-	
+	textureMgr = new StelTextureMgr(rootDir + "textures/");
 	localeMgr = new StelLocaleMgr();
 	fontManager = new StelFontMgr(getDataFilePath("fontmap.dat"));
 	skyCultureMgr = new StelSkyCultureMgr(getDataFilePath("sky_cultures"));

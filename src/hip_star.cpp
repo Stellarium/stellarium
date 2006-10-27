@@ -211,7 +211,7 @@ int HipStar::read(FILE * catalog)
     XYZ*=RADIUS_STAR;
 
 	// Precomputation of a term used later
-	term1 = expf(-0.92103f*(Mag + 12.12331f)) * 108064.73f;
+	term1 = std::exp(-0.92103f*(Mag + 12.12331f)) * 108064.73f;
 
 	// distance
 	fread(&xLY.ui,4,1,catalog);
@@ -234,7 +234,7 @@ void HipStar::draw(const Vec3d &XY)
     // Compute the equivalent star luminance for a 5 arc min circle and convert it
 	// in function of the eye adaptation
 	float rmag = eye->adapt_luminance(term1)
-               * powf(proj->get_fov(),-0.85f) * 70.f;
+               * std::pow(proj->get_fov(),-0.85f) * 70.f;
 	float cmag = 1.f;
 	
     // if size of star is too small (blink) we put its size to 1.2 --> no more blink
@@ -281,7 +281,7 @@ void HipStar::draw_point(const Vec3d &XY)
     // Compute the equivalent star luminance for a 5 arc min circle and convert it
 	// in function of the eye adaptation
 	rmag = eye->adapt_luminance(term1);
-	rmag = rmag*powf(proj->get_fov(),-0.85f)*50.f;
+	rmag = rmag*std::pow(proj->get_fov(),-0.85f)*50.f;
 
     // if size of star is too small (blink) we put its size to 1.2 --> no more blink
     // And we compensate the difference of brighteness with cmag

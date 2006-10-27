@@ -34,6 +34,7 @@ class StelLocaleMgr;
 class SkyLocalizer;
 class StelSkyCultureMgr;
 class StelModuleMgr;
+class StelTextureMgr;
 
 //! Singleton main Stellarium application class.
 //! @author Fabien Chereau
@@ -92,15 +93,19 @@ public:
 	
 	//! @brief Get the locale manager to use for i18n & date/time localization
 	//! @return the font manager to use for loading fonts.
-	StelLocaleMgr& getLocaleMgr() { return *localeMgr;}
+	StelLocaleMgr& getLocaleMgr() {return *localeMgr;}
 	
 	//! @brief Get the font manager to use for loading fonts.
 	//! @return the font manager to use for loading fonts.
-	StelFontMgr& getFontManager() { return *fontManager;}
+	StelFontMgr& getFontManager() {return *fontManager;}
 	
 	//! @brief Get the sky cultures manager
 	//! @return the sky cultures manager
 	StelSkyCultureMgr& getSkyCultureMgr() {return *skyCultureMgr;}
+	
+	//! @brief Get the texture manager to use for loading textures.
+	//! @return the texture manager to use for loading textures.
+	StelTextureMgr& getTextureManager() {return *textureMgr;}
 	
 	//! @brief Get the core of the program. It is the one which provide the projection, navigation and tone converter.
 	//! @return the StelCore instance of the program
@@ -209,6 +214,9 @@ private:
 	
 	// Sky cultures manager for the application
 	StelSkyCultureMgr* skyCultureMgr;
+	
+	// Textures manager for the application
+	StelTextureMgr* textureMgr;
 	
 	int FlagEnableMoveMouse;  // allow mouse at edge of screen to move view
 

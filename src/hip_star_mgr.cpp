@@ -1136,9 +1136,9 @@ int HipStarMgr::drawStar(const Vec3d &XY,float rmag,const Vec3f &color) const {
     rmag=1.2f;
   } else {
 //if (rmag>4.f) {
-//  rmag=4.f+2.f*sqrtf(1.f+rmag-4.f)-2.f;
+//  rmag=4.f+2.f*std::sqrt(1.f+rmag-4.f)-2.f;
   if (rmag>8.f) {
-    rmag=8.f+2.f*sqrtf(1.f+rmag-8.f)-2.f;
+    rmag=8.f+2.f*std::sqrt(1.f+rmag-8.f)-2.f;
   }
 //}
 //    if (rmag > 5.f) {
@@ -1262,8 +1262,8 @@ int HipStarMgr::getMaxSearchLevel(const ToneReproductor *eye,
        it!=zone_arrays.end();it++) {
     const float mag_min = 0.001f*it->second->mag_min;
     const float rmag =
-      sqrtf(eye->adapt_luminance(
-        expf(-0.92103f*(mag_min + 12.12331f)) * 108064.73f * fov_q)) * 30.f;
+      std::sqrt(eye->adapt_luminance(
+        std::exp(-0.92103f*(mag_min + 12.12331f)) * 108064.73f * fov_q)) * 30.f;
     if (rmag<1.2f) {
       const float cmag = rmag*rmag/1.44f;
       if (rmag < 0.1f*star_scale ||
@@ -1328,11 +1328,11 @@ double HipStarMgr::draw(Projector *prj, const Navigator *nav, ToneReproductor *e
           // Compute the equivalent star luminance for a 5 arc min circle
           // and convert it in function of the eye adaptation
 //        rmag_table[i] =
-//          eye->adapt_luminance(expf(-0.92103f*(mag + 12.12331f)) * 108064.73f)
-//            * powf(prj->get_fov(),-0.85f) * 70.f;
+//          eye->adapt_luminance(std::exp(-0.92103f*(mag + 12.12331f)) * 108064.73f)
+//            * std::pow(prj->get_fov(),-0.85f) * 70.f;
         rmag_table[i] =
-          sqrtf(eye->adapt_luminance(
-            expf(-0.92103f*(mag + 12.12331f)) * 108064.73f * fov_q)) * 30.f;
+          std::sqrt(eye->adapt_luminance(
+            std::exp(-0.92103f*(mag + 12.12331f)) * 108064.73f * fov_q)) * 30.f;
         if (i==0 && rmag_table[0]<1.2f) {
           const float cmag = rmag_table[0]*rmag_table[0]/1.44f;
           if (rmag_table[0] < 0.1f*star_scale ||

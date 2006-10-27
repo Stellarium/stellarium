@@ -154,13 +154,13 @@ bool ViewportDistorterFisheyeToSphericMirror::distortXY(int &x,int &y) {
   const float f11 = (     dx)*(     dy);
   const VertexData *const v = trans_array + (j*(trans_width+1)+i);
   x = ((screenW-viewport_wh)>>1)
-    + (int)floorf(0.5f +
+    + (int)std::floor(0.5f +
                         (v[0].xy[0]*f00
                        + v[1].xy[0]*f01
                        + v[trans_width+1].xy[0]*f10
                        + v[trans_width+2].xy[0]*f11)*viewport_wh/texture_used);
   y = ((screenH-viewport_wh)>>1)
-    + (int)floorf(0.5f +
+    + (int)std::floor(0.5f +
                         ((v[0].xy[1]*f00
                        + v[1].xy[1]*f01
                        + v[trans_width+1].xy[1]*f10

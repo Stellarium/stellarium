@@ -20,6 +20,8 @@
 #ifndef _NAVIGATOR_H_
 #define _NAVIGATOR_H_
 
+#include "SDL_opengl.h"
+
 #include "stellarium.h"
 #include "observator.h"
 #include "vecmath.h"

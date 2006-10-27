@@ -189,7 +189,7 @@ bool Nebula::readTexture(const string& record)
 	// Calc the angular size in radian : TODO this should be independant of tex_angular_size
 	angular_size = tex_angular_size/2/60*M_PI/180;
 
-	neb_tex = new STexture(tex_name, TEX_LOAD_TYPE_PNG_BLEND1, true);  // use mipmaps
+	neb_tex = new STexture(tex_name, TEX_LOAD_TYPE_PNG_SOLID, true);  // use mipmaps
 
 	luminance = ToneReproductor::mag_to_luminance(mag, tex_angular_size*tex_angular_size*3600);
 
@@ -212,89 +212,6 @@ bool Nebula::readTexture(const string& record)
 	return true;
 }
 
-void Nebula::draw_chart(const Projector* prj, const Navigator * nav)
-{
-	bool lastState = glIsEnabled(GL_TEXTURE_2D);
-	float r = (get_on_screen_size(prj, nav)/2)* 1.2; // slightly bigger than actual!
-	if (r < 5) r = 5;
-	r *= circleScale;
-
-	glDisable(GL_TEXTURE_2D);
-	glLineWidth(1.0f);
-
-	glColor3fv(circle_color);
-	if (nType == NEB_UNKNOWN)
-	{
-		glCircle(XY,r);
-	}
-	else if (nType == NEB_N) // supernova reemnant
-	{
-		glCircle(XY,r);
-	}
-	else if (nType == NEB_PN) // planetary nebula
-	{
-		glCircle(XY,0.4*r);
-
-		glBegin(GL_LINE_LOOP);
-		glVertex3f(XY[0]-r, XY[1],0.f);
-		glVertex3f(XY[0]-0.4*r, XY[1],0.f);
-		glEnd();
-
-		glBegin(GL_LINE_LOOP);
-		glVertex3f(XY[0]+r, XY[1],0.f);
-		glVertex3f(XY[0]+0.4*r, XY[1],0.f);
-		glEnd();
-
-		glBegin(GL_LINE_LOOP);
-		glVertex3f(XY[0], XY[1]+r,0.f);
-		glVertex3f(XY[0], XY[1]+0.4*r,0.f);
-		glEnd();
-
-		glBegin(GL_LINE_LOOP);
-		glVertex3f(XY[0], XY[1]-r,0.f);
-		glVertex3f(XY[0], XY[1]-0.4*r,0.f);
-		glEnd();
-	}
-	else if (nType == NEB_OC) // open cluster
-	{
-		glLineStipple(2, 0x3333);
-		glEnable(GL_LINE_STIPPLE);
-		glCircle(XY,r);
-		glDisable(GL_LINE_STIPPLE);
-	}
-	else if (nType == NEB_GC) // Globular cluster
-	{
-		glCircle(XY,r);
-
-		glBegin(GL_LINE_LOOP);
-		glVertex3f(XY[0]-r, XY[1],0.f);
-		glVertex3f(XY[0]+r, XY[1],0.f);
-		glEnd();
-
-		glBegin(GL_LINE_LOOP);
-		glVertex3f(XY[0], XY[1]-r,0.f);
-		glVertex3f(XY[0], XY[1]+r,0.f);
-		glEnd();
-	}
-	else if (nType == NEB_DN) // Diffuse Nebula
-	{
-		glLineStipple(1, 0xAAAA);
-		glEnable(GL_LINE_STIPPLE);
-		glCircle(XY,r);
-		glDisable(GL_LINE_STIPPLE);
-	}
-	else if (nType == NEB_IG) // Irregular
-	{
-		glEllipse(XY,r,0.5);
-	}
-	else // not sure what type!!!
-	{
-		glCircle(XY,r);
-	}
-	glLineWidth(1.0f);
-
-	if (lastState) glEnable(GL_TEXTURE_2D);
-}
 
 void Nebula::draw_tex(const Projector* prj, const Navigator* nav, ToneReproductor* eye)
 {
@@ -343,7 +260,7 @@ void Nebula::draw_circle(const Projector* prj, const Navigator * nav)
 {
 	if (2.f/get_on_screen_size(prj, nav)<0.1) return;
 	inc_lum++;
-	float lum = MY_MIN(1,2.f/get_on_screen_size(prj, nav))*(0.8+0.2*sinf(inc_lum/10));
+	float lum = MY_MIN(1,2.f/get_on_screen_size(prj, nav))*(0.8+0.2*std::sin(inc_lum/10));
 	glColor4f(circle_color[0], circle_color[1], circle_color[2], lum*hints_brightness);
 	glBindTexture (GL_TEXTURE_2D, Nebula::tex_circle->getID());
 	glBegin(GL_TRIANGLE_STRIP);

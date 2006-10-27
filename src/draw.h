@@ -139,7 +139,7 @@ public:
 	void update(int delta_time) {fader.update(delta_time);}
 	void set_intensity(float _intensity);
 	float get_intensity() { return intensity; };
-	void set_texture(const string& tex_file, bool blend = false);
+	void set_texture(const string& tex_file);
 	void setColor(const Vec3f& c) { color=c;}
 	void draw_chart(ToneReproductor * eye, const Projector* prj, const Navigator* nav);
 	void setFlagShow(bool b){fader = b;}
