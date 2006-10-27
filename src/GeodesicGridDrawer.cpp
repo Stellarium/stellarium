@@ -71,7 +71,7 @@ double GeodesicGridDrawer::draw(Projector *prj, const Navigator *nav, ToneReprod
         center += win1;
         center*=0.33333;
         ostringstream os;
-        os << index;
+        os << index << " (" << grid->getPartnerTriangle(lev, index) << ")";
         glEnable(GL_TEXTURE_2D);
 		font->print(center[0]-6, center[1]+6, os.str());
 		glDisable(GL_TEXTURE_2D);
@@ -105,7 +105,7 @@ double GeodesicGridDrawer::draw(Projector *prj, const Navigator *nav, ToneReprod
         center += win1;
         center*=0.33333;
         ostringstream os;
-        os << index;
+        os << index << " (" << grid->getPartnerTriangle(lev, index) << ")";
         glEnable(GL_TEXTURE_2D);
 		font->print(center[0]-6, center[1]+6, os.str());
 		glDisable(GL_TEXTURE_2D);
