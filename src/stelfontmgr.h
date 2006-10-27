@@ -36,13 +36,13 @@ public:
 	
 	//! Get the standard font associated to the given language ISO code.
 	//! @param langageName the ISO language name such as "fr" or "en" or "*" for default.
-	//! @param scale the scale with respect to the default size for the language.
-	SFont& getStandardFont(const string &langageName, double scale=1.);
+	//! @param size the font size in pixels.
+	SFont& getStandardFont(const string &langageName, double size=12.);
 	
 	//! Get the fixed font associated to the given language ISO code.
 	//! @param langageName the ISO language name such as "fr" or "en" or "*" for default.
-	//! @param scale the scale with respect to the default size for the language.
-	SFont& getFixedFont(const string &langageName, double scale=1.);
+	//! @param size the font size in pixels.
+	SFont& getFixedFont(const string &langageName, double size=12.);
 	
 private:
 	// Class which describes which font to use for a given langage ISO code.
@@ -61,9 +61,9 @@ private:
 	class LoadedFont
 	{
 		public:
-			LoadedFont(string fileName, int scale);
+			LoadedFont(string fileName, int size);
 			string fileName;
-			int scale;	// floating point scale * 10
+			int size;	// floating point scale * 10
 	};
 	
 	// Comparator for sorting LoadedFonts
@@ -71,7 +71,7 @@ private:
 	{
 		bool operator()(const LoadedFont l1, const LoadedFont l2) const
 		{
-			return (l1.fileName<l2.fileName || (l1.fileName==l2.fileName && l1.scale<l2.scale));
+			return (l1.fileName<l2.fileName || (l1.fileName==l2.fileName && l1.size<l2.size));
 		}
 	};	
 	
