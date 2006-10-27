@@ -34,9 +34,8 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 #include "geodesic_grid.h"
 
-#include <math.h>
-#include <stdlib.h>
-
+#include <cmath>
+#include <cstdlib>
 #include <iostream>
 
 using namespace std;
@@ -64,28 +63,6 @@ struct TopLevelTriangle {
   int corners[3];   // index der Ecken
 };
 
-//static const TopLevelTriangle icosahedron_triangles[20] = {
-//  { 0, 1, 9}, // 0
-//  { 1, 0,10}, // 1
-//  { 2, 3, 8}, // 2
-//  { 3, 2,11}, // 3
-//  { 4, 5, 1}, // 4
-//  { 5, 4, 2}, // 5
-//  { 6, 7, 0}, // 6
-//  { 7, 6, 3}, // 7
-//  { 8, 9, 5}, // 8
-//  { 9, 8, 6}, // 9
-//  {10,11, 4}, // 10
-//  {11,10, 7}, // 11
-//  { 0, 9, 6}, // 12
-//  { 5, 9, 1}, // 13
-//  { 6, 8, 3}, // 14
-//  { 2, 8, 5}, // 15
-//  { 0, 7,10}, // 16
-//  { 4, 1,10}, // 17
-//  { 7, 3,11}, // 18
-//  { 2, 4,11}  // 19
-//};
 
 static const TopLevelTriangle icosahedron_triangles[20] = {
   { 0, 1,10}, // 1
@@ -109,9 +86,6 @@ static const TopLevelTriangle icosahedron_triangles[20] = {
   { 9, 5, 1}, // 13
   { 5, 9, 8} // 8
 };
-
-
-
 
 
 
@@ -192,9 +166,9 @@ int GeodesicGrid::getPartnerTriangle(int lev, int index) const
 	if (lev==0)
 	{
 		assert(index<20);
-		return (index%2==0) ? index+1 : index-1;
+		return (index&1) ? index+1 : index-1;
 	}
-	switch(index-8*(index/8))
+	switch(index&7)
 	{
 		case 2:
 		case 6:
@@ -203,13 +177,13 @@ int GeodesicGrid::getPartnerTriangle(int lev, int index) const
 		case 7:
 			return index-1;
 		case 0:
-			return (lev==1) ? index+5 : getPartnerTriangle(lev-1, index/4)*4+1;
+			return (lev==1) ? index+5 : (getPartnerTriangle(lev-1, index>>2)<<2)+1;
 		case 1:
-			return (lev==1) ? index+3 : getPartnerTriangle(lev-1, index/4)*4+0;
+			return (lev==1) ? index+3 : (getPartnerTriangle(lev-1, index>>2)<<2)+0;
 		case 4:
-			return (lev==1) ? index-3 : getPartnerTriangle(lev-1, index/4)*4+1;
+			return (lev==1) ? index-3 : (getPartnerTriangle(lev-1, index>>2)<<2)+1;
 		case 5:
-			return (lev==1) ? index-5 : getPartnerTriangle(lev-1, index/4)*4+0;
+			return (lev==1) ? index-5 : (getPartnerTriangle(lev-1, index>>2)<<2)+0;
 		default:
 			assert(0);
 	}
