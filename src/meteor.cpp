@@ -123,7 +123,7 @@ Meteor::Meteor(Projector *proj, Navigator* nav, ToneReproductor* eye, double v)
   mag = (5. + Mag) / 256.0;
   if (mag>250) mag = mag - 256;
 
-  float term1 = expf(-0.92103f*(mag + 12.12331f)) * 108064.73f;
+  float term1 = std::exp(-0.92103f*(mag + 12.12331f)) * 108064.73f;
 
   float cmag=1.f;
   float rmag;

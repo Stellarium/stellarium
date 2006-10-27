@@ -49,6 +49,7 @@ public:
 	//! @return the loaded module or NULL in case of error. The returned Stelmodule still needs to be initialized 
 	StelModule* loadExternalModule(const string& moduleID);
 	
+	//! Get the corresponding module, crashes if can't find it.
 	StelModule* getModule(const string& moduleID)
 	{
 		std::map<string, StelModule*>::const_iterator iter = modules.find(moduleID);

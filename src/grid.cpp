@@ -782,7 +782,7 @@ void Grid::Draw(void)
 int Grid::Intersect(Vec3f pos, float fieldAngle)
 {
 	pos.normalize();
-	float max = cosf(fieldAngle/2.f + Angle);
+	float max = std::cos(fieldAngle/2.f + Angle);
 
 	int nbResult=0;
 	for(int i=0;i<NbPoints;++i)

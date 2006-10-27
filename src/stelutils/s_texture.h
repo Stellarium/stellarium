@@ -28,11 +28,6 @@ using namespace std;
 
 #define TEX_LOAD_TYPE_PNG_ALPHA 0
 #define TEX_LOAD_TYPE_PNG_SOLID 1
-#define TEX_LOAD_TYPE_PNG_BLEND3 2
-#define TEX_LOAD_TYPE_PNG_BLEND8 5
-#define TEX_LOAD_TYPE_PNG_BLEND4 6
-#define TEX_LOAD_TYPE_PNG_BLEND1 7
-#define TEX_LOAD_TYPE_PNG_REPEAT 3
 #define TEX_LOAD_TYPE_PNG_SOLID_REPEAT 4
 
 class STexture
@@ -44,12 +39,8 @@ public:
 	STexture(const string& _textureName, int _loadType);
     STexture(const string& _textureName, int _loadType, const bool mipmap);
     virtual ~STexture();
-    STexture(const STexture &t);
-    const STexture &operator=(const STexture &t);
-    int load(string fullName);
-	int load(string fullName, bool mipmap);
-    void unload();
-    int reload();
+
+
     unsigned int getID(void) const {return texID;}
     // Return the average texture luminance : 0 is black, 1 is white
     float get_average_luminance(void) const;
@@ -58,6 +49,8 @@ public:
     static void set_texDir(const string& _texDir) {STexture::texDir = _texDir;}
 
 private:
+    int load(string fullName);
+	int load(string fullName, bool mipmap);
     string textureName;
     GLuint texID;
     int loadType;

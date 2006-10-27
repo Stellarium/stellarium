@@ -120,7 +120,7 @@ void Navigator::updateVisionVector(int delta_time,const StelObject &selected)
 				c =  pow(1.11*(move.coef-.1),3);
 			}
 		}
-		else c = atanf(smooth * 2.*move.coef-smooth)/atanf(smooth)/2+0.5;
+		else c = std::atan(smooth * 2.*move.coef-smooth)/std::atan(smooth)/2+0.5;
 
 
 		if (move.local_pos)
