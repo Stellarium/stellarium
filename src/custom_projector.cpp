@@ -218,13 +218,13 @@ const Mat4d& mat, int orient_inside) const
 		GLfloat x, y;
 		if (i == slices)
 		{
-			x = sinf(0.0);
-			y = cosf(0.0);
+			x = std::sin(0.0f);
+			y = std::cos(0.0f);
 		}
 		else
 		{
-			x = sinf(i * da);
-			y = cosf(i * da);
+			x = std::sin(i * da);
+			y = std::cos(i * da);
 		}
 		glNormal3f(x * nsign, y * nsign, 0);
 		glTexCoord2f(s, t);

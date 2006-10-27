@@ -19,6 +19,13 @@
 #include <cstdio>
 #include <cmath>
 
+#ifdef HAVE_CONFIG_H
+# include <config.h>
+#endif
+#ifndef HAVE_POW10
+# define pow10(x) pow(10,(x))
+#endif
+
 #include "tone_reproductor.h"
 
 // Set some values to prevent bugs in case of bad use
@@ -100,7 +107,7 @@ void ToneReproductor::xyY_to_RGB(float* color)
 	}
 
 	// 2. Adapt the luminance value and scale it to fit in the RGB range [2]
-	color[2] = powf(adapt_luminance(color[2]) * one_over_maxdL, one_over_gamma);
+	color[2] = std::pow(adapt_luminance(color[2]) * one_over_maxdL, one_over_gamma);
 
 	// Convert from xyY to XZY
 	float X = color[0] * color[2] / color[1];
@@ -116,5 +123,5 @@ void ToneReproductor::xyY_to_RGB(float* color)
 // Provide the luminance in cd/m^2 from the magnitude and the surface in arcmin^2
 float ToneReproductor::mag_to_luminance(float mag, float surface)
 {
-	return expf(-0.4f * 2.3025851f * (mag - (-2.5f * log10f(surface)))) * 108064.73f;
+	return std::exp(-0.4f * 2.3025851f * (mag - (-2.5f * log10f(surface)))) * 108064.73f;
 }

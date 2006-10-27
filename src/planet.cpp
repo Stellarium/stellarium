@@ -166,16 +166,16 @@ wstring Planet::getShortInfoString(const Navigator * nav) const
 
 double Planet::get_close_fov(const Navigator* nav) const
 {
-	return atanf(radius*sphere_scale*2.f/get_earth_equ_pos(nav).length())*180./M_PI * 4;
+	return std::atan(radius*sphere_scale*2.f/get_earth_equ_pos(nav).length())*180./M_PI * 4;
 }
 
 double Planet::get_satellites_fov(const Navigator * nav) const
 {
 	// TODO: calculate from satellite orbits rather than hard code
-	if (englishName=="Jupiter") return atanf(0.005/get_earth_equ_pos(nav).length())*180./M_PI * 4;
-	if (englishName=="Saturn") return atanf(0.005/get_earth_equ_pos(nav).length())*180./M_PI * 4;
-	if (englishName=="Mars") return atanf(0.0001/get_earth_equ_pos(nav).length())*180./M_PI * 4;
-	if (englishName=="Uranus") return atanf(0.002/get_earth_equ_pos(nav).length())*180./M_PI * 4;
+	if (englishName=="Jupiter") return std::atan(0.005f/get_earth_equ_pos(nav).length())*180./M_PI * 4;
+	if (englishName=="Saturn") return std::atan(0.005f/get_earth_equ_pos(nav).length())*180./M_PI * 4;
+	if (englishName=="Mars") return std::atan(0.0001f/get_earth_equ_pos(nav).length())*180./M_PI * 4;
+	if (englishName=="Uranus") return std::atan(0.002f/get_earth_equ_pos(nav).length())*180./M_PI * 4;
 	return -1.;
 }
 
@@ -480,7 +480,7 @@ float Planet::get_on_screen_size(const Projector* prj, const Navigator * nav)
 	if(rings) rad = rings->get_size();
 	else rad = radius;
 
-	return atanf(rad*sphere_scale*2.f/get_earth_equ_pos(nav).length())*180./M_PI/prj->get_fov()*prj->getViewportHeight();
+	return std::atan(rad*sphere_scale*2.f/get_earth_equ_pos(nav).length())*180./M_PI/prj->get_fov()*prj->getViewportHeight();
 }
 
 // Draw the Planet and all the related infos : name, circle etc..
@@ -670,14 +670,13 @@ void Planet::draw_halo(const Navigator* nav, const Projector* prj, const ToneRep
     if (fov_q > 60) fov_q = 60;
     else if (fov_q < 0.1) fov_q = 0.1;
     fov_q = 1.f/(fov_q*fov_q);
-    rmag =
-      sqrtf(eye->adapt_luminance(
-        expf(-0.92103f*(compute_magnitude(nav->getObserverHelioPos())
+    rmag = std::sqrt(eye->adapt_luminance(
+        std::exp(-0.92103f*(compute_magnitude(nav->getObserverHelioPos())
                          + 12.12331f)) * 108064.73f * fov_q)) * 30.f;
 
-//	rmag = eye->adapt_luminance(expf(-0.92103f*(compute_magnitude(nav->get_observer_helio_pos()) +
+//	rmag = eye->adapt_luminance(std::exp(-0.92103f*(compute_magnitude(nav->get_observer_helio_pos()) +
 //	                                            12.12331f)) * 108064.73f);
-//	rmag = rmag/powf(prj->get_fov(),0.85f)*50.f;
+//	rmag = rmag/std::pow(prj->get_fov(),0.85f)*50.f;
 
 	cmag = 1.f;
 
@@ -693,9 +692,9 @@ void Planet::draw_halo(const Navigator* nav, const Projector* prj, const ToneRep
 	{
 //  try this one if you want to see a bright moon:
 //if (rmag>4.f) {
-//  rmag=4.f+2.f*sqrtf(1.f+rmag-4.f)-2.f;
+//  rmag=4.f+2.f*std::sqrt(1.f+rmag-4.f)-2.f;
   if (rmag>8.f) {
-    rmag=8.f+2.f*sqrtf(1.f+rmag-8.f)-2.f;
+    rmag=8.f+2.f*std::sqrt(1.f+rmag-8.f)-2.f;
   }
 //}
 
@@ -752,13 +751,13 @@ void Planet::draw_point_halo(const Navigator* nav, const Projector* prj, const T
     if (fov_q > 60) fov_q = 60;
     fov_q = 1.f/(fov_q*fov_q);
     rmag =
-      sqrtf(eye->adapt_luminance(
-        expf(-0.92103f*(compute_magnitude(nav->getObserverHelioPos())
+      std::sqrt(eye->adapt_luminance(
+        std::exp(-0.92103f*(compute_magnitude(nav->getObserverHelioPos())
                          + 12.12331f)) * 108064.73f * fov_q)) * 6.f;
 
-//	rmag = eye->adapt_luminance(expf(-0.92103f*(compute_magnitude(nav->get_observer_helio_pos()) +
+//	rmag = eye->adapt_luminance(std::exp(-0.92103f*(compute_magnitude(nav->get_observer_helio_pos()) +
 //	                                            12.12331f)) * 108064.73f);
-//	rmag = rmag/powf(prj->get_fov(),0.85f)*10.f;
+//	rmag = rmag/std::pow(prj->get_fov(),0.85f)*10.f;
 
 	cmag = 1.f;
 

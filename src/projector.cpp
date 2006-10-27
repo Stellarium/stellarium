@@ -257,7 +257,7 @@ void Projector::update_auto_zoom(int delta_time)
     {
 		// Use a smooth function
 		float smooth = 3.f;
-		double c = atanf(smooth * 2.*zoom_move.coef-smooth)/atanf(smooth)/2+0.5;
+		double c = std::atan(smooth * 2.*zoom_move.coef-smooth)/std::atan(smooth)/2+0.5;
 		set_fov(zoom_move.start + (zoom_move.aim - zoom_move.start) * c);
         zoom_move.coef+=zoom_move.speed*delta_time;
         if (zoom_move.coef>=1.)
@@ -712,8 +712,8 @@ void Projector::print_gravity180(SFont* font, float x, float y, const wstring& w
 	if (d>MY_MAX(vec_viewport[3], vec_viewport[2])*2) return;
 
 
-	theta = M_PI + atan2f(dx, dy - 1);
-	psi = atan2f((float)font->getStrLen(ws)/ws.length(),d + 1) * 180./M_PI;
+	theta = M_PI + std::atan2(dx, dy - 1);
+	psi = std::atan2((float)font->getStrLen(ws)/ws.length(),d + 1) * 180./M_PI;
 
 	if (psi>5) psi = 5;
 	set_orthographic_projection();
@@ -750,7 +750,7 @@ void Projector::print_gravity180(SFont* font, float x, float y, const wstring& w
 			glTranslatef(font->getStrLen(ws.substr(i,1)) * 1.05, 0, 0);
 
 			if( !speed_optimize ) {
-				psi = atan2f((float)font->getStrLen(ws.substr(i,1))*1.05,d) * 180./M_PI;
+				psi = std::atan2((float)font->getStrLen(ws.substr(i,1))*1.05f,(float)d) * 180./M_PI;
 				if (psi>5) psi = 5;
 			}
 

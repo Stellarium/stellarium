@@ -23,9 +23,6 @@
 #include "SDL_timer.h"
 #include "s_gui.h"
 #include "stel_utility.h"
-#if !defined(powf)
-#include "fmath.h"
-#endif
 using namespace std;
 using namespace s_gui;
 
@@ -978,8 +975,8 @@ void Label::draw(float _intensity)
 
 void Label::adjustSize(void)
 {
-	size[0] = (int)ceilf(painter.getFont()->getStrLen(label));
-	size[1] = (int)ceilf(painter.getFont()->getLineHeight());
+	size[0] = (int)std::ceil(painter.getFont()->getStrLen(label));
+	size[1] = (int)std::ceil(painter.getFont()->getLineHeight());
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -2937,9 +2934,9 @@ int City_Mgr::getNearest(double _longitude, double _latitude)
     while (i < (int)cities.size())
     {
 		name = cities[i]->getName();
-		dist = powf(_latitude - cities[i]->getLatitude(),2.f) +
-			powf(_longitude - cities[i]->getLongitude(),2.f);
-		dist = powf(dist,0.5f);
+		dist = std::pow(_latitude - cities[i]->getLatitude(),2.) +
+			std::pow(_longitude - cities[i]->getLongitude(),2.);
+		dist = std::pow(dist,0.5);
 		if (index == -1) 
 		{
 			closest = dist;

@@ -24,7 +24,6 @@
 #include <cstdio>
 #include <cstdlib>
 
-#include "fmath.h"
 #include "skylight.h"
 
 Skylight::Skylight() : thetas(0.f), T(0.f)
@@ -49,10 +48,10 @@ void Skylight::set_params(float _sun_zenith_angle, float _turbidity)
 	compute_color_distribution_coefs();
 
 	// Precompute everything possible to increase the get_CIE_value() function speed
-	float cos_thetas = cosf(thetas);
-	term_x = zenith_color_x   / ((1.f + Ax * expf(Bx)) * (1.f + Cx * expf(Dx*thetas) + Ex * cos_thetas * cos_thetas));
-	term_y = zenith_color_y   / ((1.f + Ay * expf(By)) * (1.f + Cy * expf(Dy*thetas) + Ey * cos_thetas * cos_thetas));
-	term_Y = zenith_luminance / ((1.f + AY * expf(BY)) * (1.f + CY * expf(DY*thetas) + EY * cos_thetas * cos_thetas));
+	float cos_thetas = std::cos(thetas);
+	term_x = zenith_color_x   / ((1.f + Ax * std::exp(Bx)) * (1.f + Cx * std::exp(Dx*thetas) + Ex * cos_thetas * cos_thetas));
+	term_y = zenith_color_y   / ((1.f + Ay * std::exp(By)) * (1.f + Cy * std::exp(Dy*thetas) + Ey * cos_thetas * cos_thetas));
+	term_Y = zenith_luminance / ((1.f + AY * std::exp(BY)) * (1.f + CY * std::exp(DY*thetas) + EY * cos_thetas * cos_thetas));
 
 }
 
@@ -64,7 +63,7 @@ void Skylight::set_paramsv(const float * _sun_pos, float _turbidity)
 	sun_pos[2] = _sun_pos[2];
 
 	// Set the two main variables
-	thetas = M_PI_2 - asinf(sun_pos[2]);
+	thetas = M_PI_2 - std::asin((float)sun_pos[2]);
 	T = _turbidity;
 
 	// Precomputation of the distribution coefficients and zenith luminances/color
@@ -75,15 +74,15 @@ void Skylight::set_paramsv(const float * _sun_pos, float _turbidity)
 
 	// Precompute everything possible to increase the get_CIE_value() function speed
 	float cos_thetas = sun_pos[2];
-	term_x = zenith_color_x   / ((1.f + Ax * expf(Bx)) * (1.f + Cx * expf(Dx*thetas) + Ex * cos_thetas * cos_thetas));
-	term_y = zenith_color_y   / ((1.f + Ay * expf(By)) * (1.f + Cy * expf(Dy*thetas) + Ey * cos_thetas * cos_thetas));
-	term_Y = zenith_luminance / ((1.f + AY * expf(BY)) * (1.f + CY * expf(DY*thetas) + EY * cos_thetas * cos_thetas));
+	term_x = zenith_color_x   / ((1.f + Ax * std::exp(Bx)) * (1.f + Cx * std::exp(Dx*thetas) + Ex * cos_thetas * cos_thetas));
+	term_y = zenith_color_y   / ((1.f + Ay * std::exp(By)) * (1.f + Cy * std::exp(Dy*thetas) + Ey * cos_thetas * cos_thetas));
+	term_Y = zenith_luminance / ((1.f + AY * std::exp(BY)) * (1.f + CY * std::exp(DY*thetas) + EY * cos_thetas * cos_thetas));
 }
 
 // Compute CIE luminance for zenith in cd/m^2
 inline void Skylight::compute_zenith_luminance(void)
 {
-	zenith_luminance = 1000.f * ((4.0453f*T - 4.9710f) * tanf( (0.4444f - T/120.f) * (M_PI-2.f*thetas) ) -
+	zenith_luminance = 1000.f * ((4.0453f*T - 4.9710f) * std::tan( (0.4444f - T/120.f) * (M_PI-2.f*thetas) ) -
 		0.2155f*T + 2.4192f);
 	if (zenith_luminance<=0.f) zenith_luminance=0.00000000001;
 }
@@ -141,13 +140,13 @@ inline void Skylight::compute_color_distribution_coefs(void)
 // p.color[2] is CIE Y color component (luminance)
 void Skylight::get_xyY_value(skylight_struct * p)
 {
-	float cos_dist_sun = cosf(p->dist_sun);
-	float one_over_cos_zenith_angle = 1.f/cosf(p->zenith_angle);
-	p->color[0] = term_x * (1.f + Ax * expf(Bx * one_over_cos_zenith_angle)) * (1.f + Cx * expf(Dx*p->dist_sun) +
+	float cos_dist_sun = std::cos(p->dist_sun);
+	float one_over_cos_zenith_angle = 1.f/std::cos(p->zenith_angle);
+	p->color[0] = term_x * (1.f + Ax * std::exp(Bx * one_over_cos_zenith_angle)) * (1.f + Cx * std::exp(Dx*p->dist_sun) +
 		Ex * cos_dist_sun * cos_dist_sun);
-	p->color[1] = term_y * (1.f + Ay * expf(By * one_over_cos_zenith_angle)) * (1.f + Cy * expf(Dy*p->dist_sun) +
+	p->color[1] = term_y * (1.f + Ay * std::exp(By * one_over_cos_zenith_angle)) * (1.f + Cy * std::exp(Dy*p->dist_sun) +
 		Ey * cos_dist_sun * cos_dist_sun);
-	p->color[2] = term_Y * (1.f + AY * expf(BY * one_over_cos_zenith_angle)) * (1.f + CY * expf(DY*p->dist_sun) +
+	p->color[2] = term_Y * (1.f + AY * std::exp(BY * one_over_cos_zenith_angle)) * (1.f + CY * std::exp(DY*p->dist_sun) +
 		EY * cos_dist_sun * cos_dist_sun);
 }
 
@@ -159,13 +158,13 @@ void Skylight::get_xyY_valuev(skylight_struct2& p)
 {
 	float cos_dist_sun = sun_pos[0]*p.pos[0] + sun_pos[1]*p.pos[1] + sun_pos[2]*p.pos[2] - 0.0000001;
 	float one_over_cos_zenith_angle = 1.f/p.pos[2];
-	float dist_sun = acosf(cos_dist_sun);
+	float dist_sun = std::acos(cos_dist_sun);
 
-	p.color[0] = term_x * (1.f + Ax * expf(Bx*one_over_cos_zenith_angle)) * (1.f + Cx * expf(Dx*dist_sun) +
+	p.color[0] = term_x * (1.f + Ax * std::exp(Bx*one_over_cos_zenith_angle)) * (1.f + Cx * std::exp(Dx*dist_sun) +
 		Ex * cos_dist_sun * cos_dist_sun);
-	p.color[1] = term_y * (1.f + Ay * expf(By*one_over_cos_zenith_angle)) * (1.f + Cy * expf(Dy*dist_sun) +
+	p.color[1] = term_y * (1.f + Ay * std::exp(By*one_over_cos_zenith_angle)) * (1.f + Cy * std::exp(Dy*dist_sun) +
 		Ey * cos_dist_sun * cos_dist_sun);
-	p.color[2] = term_Y * (1.f + AY * expf(BY*one_over_cos_zenith_angle)) * (1.f + CY * expf(DY*dist_sun) +
+	p.color[2] = term_Y * (1.f + AY * std::exp(BY*one_over_cos_zenith_angle)) * (1.f + CY * std::exp(DY*dist_sun) +
 		EY * cos_dist_sun * cos_dist_sun);
 
 	if (p.color[2] < 0 || p.color[0] < 0 || p.color[1] < 0)

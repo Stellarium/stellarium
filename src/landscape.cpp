@@ -335,8 +335,8 @@ void LandscapeOldStyle::draw_fog(ToneReproductor * eye, const Projector* prj, co
 	glEnable(GL_BLEND);
 	glEnable(GL_CULL_FACE);
 	glBindTexture(GL_TEXTURE_2D, fog_tex->getID());
-	prj->sCylinder(radius, radius*sinf(fog_alt_angle*M_PI/180.), 128, 1, nav->get_local_to_eye_mat() *
-	               Mat4d::translation(Vec3d(0.,0.,radius*sinf(fog_angle_shift*M_PI/180.))), 1);
+	prj->sCylinder(radius, radius*std::sin(fog_alt_angle*M_PI/180.), 128, 1, nav->get_local_to_eye_mat() *
+	               Mat4d::translation(Vec3d(0.,0.,radius*std::sin(fog_angle_shift*M_PI/180.))), 1);
 	glDisable(GL_CULL_FACE);
 	glPopMatrix();
 }
@@ -353,8 +353,8 @@ void LandscapeOldStyle::draw_decor(ToneReproductor * eye, const Projector* prj, 
 	int subdiv = 128/(nb_decor_repeat*nb_side);
 	if (subdiv<=0) subdiv = 1;
 	float da = (2.*M_PI)/(nb_side*subdiv*nb_decor_repeat);
-	float dz = radius * sinf(decor_alt_angle*M_PI/180.f);
-	float z = radius*sinf(ground_angle_shift*M_PI/180.);
+	float dz = radius * std::sin(decor_alt_angle*M_PI/180.f);
+	float z = radius*std::sin(ground_angle_shift*M_PI/180.);
 	float x,y;
 	float a;
 
@@ -363,7 +363,7 @@ void LandscapeOldStyle::draw_decor(ToneReproductor * eye, const Projector* prj, 
 	glPushMatrix();
 	glLoadMatrixd(mat);
 
-	z=radius*sinf(decor_angle_shift*M_PI/180.);
+	z=radius*std::sin(decor_angle_shift*M_PI/180.);
 	glEnable(GL_BLEND);
 	glEnable(GL_CULL_FACE);
 
@@ -376,8 +376,8 @@ void LandscapeOldStyle::draw_decor(ToneReproductor * eye, const Projector* prj, 
 			glBegin(GL_QUAD_STRIP);
 			for (int j=0;j<=subdiv;++j)
 			{
-				x = radius * sinf(a + da * j + da * subdiv * i + decor_angle_rotatez*M_PI/180);
-				y = radius * cosf(a + da * j + da * subdiv * i + decor_angle_rotatez*M_PI/180);
+				x = radius * std::sin(a + da * j + da * subdiv * i + decor_angle_rotatez*M_PI/180);
+				y = radius * std::cos(a + da * j + da * subdiv * i + decor_angle_rotatez*M_PI/180);
 				glNormal3f(-x, -y, 0);
 				glTexCoord2f(sides[i].tex_coords[0] + (float)j/subdiv * (sides[i].tex_coords[2]-sides[i].tex_coords[0]),
 				             sides[i].tex_coords[3]);
@@ -398,7 +398,7 @@ void LandscapeOldStyle::draw_decor(ToneReproductor * eye, const Projector* prj, 
 void LandscapeOldStyle::draw_ground(ToneReproductor * eye, const Projector* prj, const Navigator* nav) const
 {
 	if (!land_fader.getInterstate()) return;
-	Mat4d mat = nav->get_local_to_eye_mat() * Mat4d::zrotation(ground_angle_rotatez*M_PI/180.f) * Mat4d::translation(Vec3d(0,0,radius*sinf(ground_angle_shift*M_PI/180.)));
+	Mat4d mat = nav->get_local_to_eye_mat() * Mat4d::zrotation(ground_angle_rotatez*M_PI/180.f) * Mat4d::translation(Vec3d(0,0,radius*std::sin(ground_angle_shift*M_PI/180.)));
 	glColor4f(sky_brightness, sky_brightness, sky_brightness, land_fader.getInterstate());
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glEnable(GL_CULL_FACE);

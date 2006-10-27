@@ -44,13 +44,8 @@ STexture::STexture(bool full_path, const string& _textureName, int _loadType) : 
     {
         case TEX_LOAD_TYPE_PNG_ALPHA : loadType=PNG_ALPHA;  break;
         case TEX_LOAD_TYPE_PNG_SOLID : loadType=PNG_SOLID; break;
-        case TEX_LOAD_TYPE_PNG_BLEND3: loadType=PNG_BLEND3; break;
-        case TEX_LOAD_TYPE_PNG_BLEND4: loadType=PNG_BLEND4; break;
-        case TEX_LOAD_TYPE_PNG_BLEND1: loadType=PNG_BLEND1; break;
-		case TEX_LOAD_TYPE_PNG_BLEND8: loadType=PNG_BLEND8; break;
-        case TEX_LOAD_TYPE_PNG_REPEAT: loadType=PNG_BLEND1; loadType2=GL_REPEAT; break;
         case TEX_LOAD_TYPE_PNG_SOLID_REPEAT: loadType=PNG_SOLID; loadType2=GL_REPEAT; break;
-        default : loadType=PNG_BLEND3;
+        default : assert(0);
     }
     texID=0;
 	whole_path = full_path;
@@ -65,13 +60,8 @@ STexture::STexture(bool full_path, const string& _textureName, int _loadType, co
     {
         case TEX_LOAD_TYPE_PNG_ALPHA : loadType=PNG_ALPHA;  break;
         case TEX_LOAD_TYPE_PNG_SOLID : loadType=PNG_SOLID; break;
-        case TEX_LOAD_TYPE_PNG_BLEND3: loadType=PNG_BLEND3; break;
-        case TEX_LOAD_TYPE_PNG_BLEND4: loadType=PNG_BLEND4; break;
-        case TEX_LOAD_TYPE_PNG_BLEND1: loadType=PNG_BLEND1; break;
-		case TEX_LOAD_TYPE_PNG_BLEND8: loadType=PNG_BLEND8; break;
-        case TEX_LOAD_TYPE_PNG_REPEAT: loadType=PNG_BLEND1; loadType2=GL_REPEAT; break;
         case TEX_LOAD_TYPE_PNG_SOLID_REPEAT: loadType=PNG_SOLID; loadType2=GL_REPEAT; break;
-        default : loadType=PNG_BLEND3;
+        default : assert(0);
     }
     texID=0;
 	whole_path = full_path;
@@ -80,25 +70,7 @@ STexture::STexture(bool full_path, const string& _textureName, int _loadType, co
 }
 
 
-STexture::STexture(const STexture &t) {
-  textureName = t.textureName;
-  loadType = t.loadType;
-  loadType2 = t.loadType2;
-  whole_path = t.whole_path;
-  texID=0;
-  load(texDir + textureName);
-}
 
-const STexture &STexture::operator=(const STexture &t) {
-  unload();
-  textureName = t.textureName;
-  loadType = t.loadType;
-  loadType2 = t.loadType2;
-  whole_path = t.whole_path;
-  texID=0;
-  load(texDir + textureName);
-  return *this;
-}
 
 STexture::STexture(const string& _textureName, int _loadType, const bool mipmap) : textureName(_textureName),
 	texID(0), loadType(PNG_BLEND1), loadType2(GL_CLAMP_TO_EDGE)
@@ -107,13 +79,8 @@ STexture::STexture(const string& _textureName, int _loadType, const bool mipmap)
     {
         case TEX_LOAD_TYPE_PNG_ALPHA : loadType=PNG_ALPHA;  break;
         case TEX_LOAD_TYPE_PNG_SOLID : loadType=PNG_SOLID; break;
-        case TEX_LOAD_TYPE_PNG_BLEND3: loadType=PNG_BLEND3; break;
-        case TEX_LOAD_TYPE_PNG_BLEND4: loadType=PNG_BLEND4; break;
-        case TEX_LOAD_TYPE_PNG_BLEND1: loadType=PNG_BLEND1; break;
-		case TEX_LOAD_TYPE_PNG_BLEND8: loadType=PNG_BLEND8; break;
-        case TEX_LOAD_TYPE_PNG_REPEAT: loadType=PNG_BLEND1; loadType2=GL_REPEAT; break;
         case TEX_LOAD_TYPE_PNG_SOLID_REPEAT: loadType=PNG_SOLID; loadType2=GL_REPEAT; break;
-        default : loadType=PNG_BLEND3;
+        default : assert(0);
     }
     texID=0;
     load( texDir + textureName, mipmap);
@@ -126,13 +93,8 @@ STexture::STexture(const string& _textureName, int _loadType) : textureName(_tex
     {
         case TEX_LOAD_TYPE_PNG_ALPHA : loadType=PNG_ALPHA;  break;
         case TEX_LOAD_TYPE_PNG_SOLID : loadType=PNG_SOLID; break;
-        case TEX_LOAD_TYPE_PNG_BLEND3: loadType=PNG_BLEND3; break;
-        case TEX_LOAD_TYPE_PNG_BLEND4: loadType=PNG_BLEND4; break;
-        case TEX_LOAD_TYPE_PNG_BLEND1: loadType=PNG_BLEND1; break;
-		case TEX_LOAD_TYPE_PNG_BLEND8: loadType=PNG_BLEND8; break;
-        case TEX_LOAD_TYPE_PNG_REPEAT: loadType=PNG_BLEND1; loadType2=GL_REPEAT; break;
         case TEX_LOAD_TYPE_PNG_SOLID_REPEAT: loadType=PNG_SOLID; loadType2=GL_REPEAT; break;
-        default : loadType=PNG_BLEND3;
+        default : assert(0);
     }
     texID=0;
     load( texDir + textureName);
@@ -141,7 +103,7 @@ STexture::STexture(const string& _textureName, int _loadType) : textureName(_tex
 
 STexture::~STexture()
 {
-    unload();
+    glDeleteTextures(1, &texID);	// Delete The Texture
 }
 
 int STexture::load(string fullName) {
@@ -179,17 +141,6 @@ int STexture::load(string fullName, bool mipmap)
 	return (texID!=0);
 }
 
-void STexture::unload()
-{   
-    glDeleteTextures(1, &texID);	// Delete The Texture
-}
-
-int STexture::reload()
-{
-    unload();
-	if(whole_path) return load(textureName);
-	else return load( texDir + textureName );
-}
 
 // Return the texture size in pixels
 int STexture::getSize(void) const
