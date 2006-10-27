@@ -61,25 +61,25 @@ bool StelFontMgr::FontForLanguage::operator == (const FontForLanguage & f) const
 /*************************************************************************
  Constructor for the LoadedFont class
 *************************************************************************/
-StelFontMgr::LoadedFont::LoadedFont(string afileName, int ascale) : 
-		fileName(afileName), scale(ascale)
+StelFontMgr::LoadedFont::LoadedFont(string afileName, int asize) : 
+		fileName(afileName), size(asize)
 {
 }
 
 /*************************************************************************
  Get the standard font associated to the given language ISO code.
 *************************************************************************/
-SFont& StelFontMgr::getStandardFont(const string &langageName, double scale)
+SFont& StelFontMgr::getStandardFont(const string &langageName, double size)
 {
 	FontForLanguage ffl = getFontForLanguage(langageName);
-	LoadedFont lf(ffl.fontFileName, (int)(ffl.fontScale*scale*10));
+	LoadedFont lf(ffl.fontFileName, (int)(ffl.fontScale*size*10));
 	if (loadedFonts.find(lf)!=loadedFonts.end())
 	{
 		return *(loadedFonts[lf]);
 	}
 	else
 	{
-		SFont* font = new SFont((double)lf.scale/10, StelApp::getInstance().getDataFilePath(lf.fileName));
+		SFont* font = new SFont((double)lf.size/10, StelApp::getInstance().getDataFilePath(lf.fileName));
 		loadedFonts[lf]=font;
 		return *font;
 	}
@@ -93,17 +93,17 @@ SFont& StelFontMgr::getStandardFont(const string &langageName, double scale)
 /*************************************************************************
  Get the fixed font associated to the given language ISO code.
 *************************************************************************/
-SFont& StelFontMgr::getFixedFont(const string &langageName, double scale)
+SFont& StelFontMgr::getFixedFont(const string &langageName, double size)
 {
 	FontForLanguage ffl = getFontForLanguage(langageName);
-	LoadedFont lf(ffl.fixedFontFileName, (int)(ffl.fixedFontScale*scale*10));
+	LoadedFont lf(ffl.fixedFontFileName, (int)(ffl.fixedFontScale*size*10));
 	if (loadedFonts.find(lf)!=loadedFonts.end())
 	{
 		return *(loadedFonts[lf]);
 	}
 	else
 	{
-		SFont* font = new SFont((double)lf.scale/10, StelApp::getInstance().getDataFilePath(lf.fileName));
+		SFont* font = new SFont((double)lf.size/10, StelApp::getInstance().getDataFilePath(lf.fileName));
 		loadedFonts[lf]=font;
 		return *font;
 	}

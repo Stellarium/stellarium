@@ -60,7 +60,10 @@ public:
   static int nrOfZones(int level)
     {return (20<<(level<<1));} // 20*4^level
   int getNrOfZones(void) const {return nrOfZones(max_level);}
-
+  void getTriangleCorners(int lev, int index, Vec3d& c0, Vec3d& c1, Vec3d& c2) const;
+    // Return the position of the 3 corners for the triangle at the given level and index
+  int getPartnerTriangle(int lev, int index) const;
+    // Return the index of the partner triangle with which to form a paralelogram
   typedef void (VisitFunc)(int lev,int index,
                            const Vec3d &c0,
                            const Vec3d &c1,
@@ -96,6 +99,7 @@ public:
     // for full search depth set max_search_level = max_level,
 
 private:
+  const Vec3d& getTriangleCorner(int lev, int index, int cornerNumber) const;
   void initTriangle(int lev,int index,
                     const Vec3d &c0,
                     const Vec3d &c1,

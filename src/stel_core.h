@@ -390,6 +390,8 @@ private:
 	ImageMgr * script_images;           // for script loaded image display
 	class TelescopeMgr *telescope_mgr;
 
+	class GeodesicGridDrawer* geoDrawer;
+
 	float sky_brightness;				// Current sky Brightness in ?
 	bool object_pointer_visibility;		// Should selected object pointer be drawn
 

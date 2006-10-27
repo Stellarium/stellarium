@@ -60,7 +60,7 @@ StelModule* StelModuleMgr::loadExternalModule(const string& moduleID)
 	GModule* md = g_module_open(moduleFullPath.c_str(), G_MODULE_BIND_LAZY);
 	if (md==NULL)
 	{
-		cerr << "Couldn't find the dynamic library: " << moduleFullPath << endl;
+		cerr << "Couldn't find the dynamic library: " << moduleFullPath << ": " << g_module_error() << endl;
 		cerr << "Module " << moduleID << " will not be loaded." << endl;
 		return NULL;
 	}

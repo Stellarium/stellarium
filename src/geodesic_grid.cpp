@@ -64,30 +64,51 @@ struct TopLevelTriangle {
   int corners[3];   // index der Ecken
 };
 
+//static const TopLevelTriangle icosahedron_triangles[20] = {
+//  { 0, 1, 9}, // 0
+//  { 1, 0,10}, // 1
+//  { 2, 3, 8}, // 2
+//  { 3, 2,11}, // 3
+//  { 4, 5, 1}, // 4
+//  { 5, 4, 2}, // 5
+//  { 6, 7, 0}, // 6
+//  { 7, 6, 3}, // 7
+//  { 8, 9, 5}, // 8
+//  { 9, 8, 6}, // 9
+//  {10,11, 4}, // 10
+//  {11,10, 7}, // 11
+//  { 0, 9, 6}, // 12
+//  { 5, 9, 1}, // 13
+//  { 6, 8, 3}, // 14
+//  { 2, 8, 5}, // 15
+//  { 0, 7,10}, // 16
+//  { 4, 1,10}, // 17
+//  { 7, 3,11}, // 18
+//  { 2, 4,11}  // 19
+//};
+
 static const TopLevelTriangle icosahedron_triangles[20] = {
-  { 0, 1, 9},
-  { 1, 0,10},
-  { 2, 3, 8},
-  { 3, 2,11},
-  { 4, 5, 1},
-  { 5, 4, 2},
-  { 6, 7, 0},
-  { 7, 6, 3},
-  { 8, 9, 5},
-  { 9, 8, 6},
-  {10,11, 4},
-  {11,10, 7},
-  { 0, 9, 6},
-  { 5, 9, 1},
-  { 6, 8, 3},
-  { 2, 8, 5},
-  { 0, 7,10},
-  { 4, 1,10},
-  { 7, 3,11},
-  { 2, 4,11}
+  { 0, 1,10}, // 1
+  { 1, 0, 9}, // 0
+  { 6, 9, 0}, // 12
+  { 9, 6, 8}, // 9
+  { 7, 0,10}, // 16
+  { 0, 7, 6}, // 6
+  { 3, 6, 7}, // 7
+  { 6, 3, 8}, // 14
+  { 11,7,10}, // 11
+  {7, 11, 3}, // 18
+  { 2, 3,11}, // 3
+  { 3, 2, 8}, // 2
+  {4, 11,10}, // 10
+  { 11,4, 2},  // 19
+  { 5, 2, 4}, // 5
+  { 2, 5, 8}, // 15
+  { 1, 4,10}, // 17
+  { 4, 1, 5}, // 4
+  { 9, 5, 1}, // 13
+  { 5, 9, 8} // 8
 };
-
-
 
 
 
@@ -122,6 +143,78 @@ GeodesicGrid::~GeodesicGrid(void) {
   }
 }
 
+void GeodesicGrid::getTriangleCorners(int lev,int index,
+                                      Vec3d &h0,
+                                      Vec3d &h1,
+                                      Vec3d &h2) const {
+  if (lev <= 0) {
+    const int *const corners = icosahedron_triangles[index].corners;
+    h0 = icosahedron_corners[corners[0]];
+    h1 = icosahedron_corners[corners[1]];
+    h2 = icosahedron_corners[corners[2]];
+  } else {
+    lev--;
+    const int i = index>>2;
+    Triangle &t(triangles[lev][i]);
+    switch (index&3) {
+      case 0: {
+        Vec3d c0,c1,c2;
+        getTriangleCorners(lev,i,c0,c1,c2);
+        h0 = c0;
+        h1 = t.e2;
+        h2 = t.e1;
+      } break;
+      case 1: {
+        Vec3d c0,c1,c2;
+        getTriangleCorners(lev,i,c0,c1,c2);
+        h0 = t.e2;
+        h1 = c1;
+        h2 = t.e0;
+      } break;
+      case 2: {
+        Vec3d c0,c1,c2;
+        getTriangleCorners(lev,i,c0,c1,c2);
+        h0 = t.e1;
+        h1 = t.e0;
+        h2 = c2;
+      } break;
+      case 3:
+        h0 = t.e0;
+        h1 = t.e1;
+        h2 = t.e2;
+        break;
+    }
+  }
+}
+
+int GeodesicGrid::getPartnerTriangle(int lev, int index) const
+{
+	if (lev==0)
+	{
+		assert(index<20);
+		return (index%2==0) ? index+1 : index-1;
+	}
+	switch(index-8*(index/8))
+	{
+		case 2:
+		case 6:
+			return index+1;
+		case 3:
+		case 7:
+			return index-1;
+		case 0:
+			return (lev==1) ? index+5 : getPartnerTriangle(lev-1, index/4)*4+1;
+		case 1:
+			return (lev==1) ? index+3 : getPartnerTriangle(lev-1, index/4)*4+0;
+		case 4:
+			return (lev==1) ? index-3 : getPartnerTriangle(lev-1, index/4)*4+1;
+		case 5:
+			return (lev==1) ? index-5 : getPartnerTriangle(lev-1, index/4)*4+0;
+		default:
+			assert(0);
+	}
+}
+
 void GeodesicGrid::initTriangle(int lev,int index,
                                 const Vec3d &c0,
                                 const Vec3d &c1,
@@ -137,8 +230,8 @@ void GeodesicGrid::initTriangle(int lev,int index,
   if (lev < max_level) {
     index *= 4;
     initTriangle(lev,index+0,c0,t.e2,t.e1);
-    initTriangle(lev,index+1,c1,t.e0,t.e2);
-    initTriangle(lev,index+2,c2,t.e1,t.e0);
+    initTriangle(lev,index+1,t.e2,c1,t.e0);
+    initTriangle(lev,index+2,t.e1,t.e0,c2);
     initTriangle(lev,index+3,t.e0,t.e1,t.e2);
   }
 }
@@ -173,8 +266,8 @@ void GeodesicGrid::visitTriangles(int lev,int index,
   if (lev <= max_visit_level) {
     index *= 4;
     visitTriangles(lev,index+0,c0,t.e2,t.e1,max_visit_level,func,context);
-    visitTriangles(lev,index+1,c1,t.e0,t.e2,max_visit_level,func,context);
-    visitTriangles(lev,index+2,c2,t.e1,t.e0,max_visit_level,func,context);
+    visitTriangles(lev,index+1,t.e2,c1,t.e0,max_visit_level,func,context);
+    visitTriangles(lev,index+2,t.e1,t.e0,c2,max_visit_level,func,context);
     visitTriangles(lev,index+3,t.e0,t.e1,t.e2,max_visit_level,func,context);
   }
 }
@@ -288,11 +381,11 @@ void GeodesicGrid::searchZones(int lev,int index,
                   inside_list,border_list,max_search_level);
       searchZones(lev,index+1,
                   half_spaces,nr_of_half_spaces,halfs_used,halfs_used_count,
-                  corner1_inside,edge0_inside,edge2_inside,
+                  edge2_inside,corner1_inside,edge0_inside,
                   inside_list,border_list,max_search_level);
       searchZones(lev,index+2,
                   half_spaces,nr_of_half_spaces,halfs_used,halfs_used_count,
-                  corner2_inside,edge1_inside,edge0_inside,
+                  edge1_inside,edge0_inside,corner2_inside,
                   inside_list,border_list,max_search_level);
       searchZones(lev,index+3,
                   half_spaces,nr_of_half_spaces,halfs_used,halfs_used_count,

@@ -31,6 +31,7 @@
 #include "constellation_mgr.h"
 #include "solarsystem.h"
 #include "nebula_mgr.h"
+#include "GeodesicGridDrawer.h"
 
 #define LOADING_BAR_DEFAULT_FONT_SIZE 12.
 
@@ -84,10 +85,13 @@ StelCore::StelCore(const string& LDIR, const string& DATA_ROOT, const boost::cal
 	script_images = new ImageMgr();
 
 	object_pointer_visibility = true;
+	
+	geoDrawer = new GeodesicGridDrawer(9);
 }
 
 StelCore::~StelCore()
 {
+	delete geoDrawer;
 	// release the previous StelObject:
 	selected_object = StelObject();
 	delete navigation;
@@ -374,6 +378,7 @@ double StelCore::draw(int delta_time)
 	// Draw the stars
 	hip_stars->draw(projection, navigation, tone_converter);
 
+geoDrawer->draw(projection,navigation, tone_converter);
 
 	// Draw the equatorial grid
 	equ_grid->draw(projection);
