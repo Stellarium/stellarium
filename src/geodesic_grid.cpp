@@ -36,6 +36,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 #include <cmath>
 #include <cstdlib>
+#include <cassert>
 #include <iostream>
 
 using namespace std;
@@ -65,26 +66,26 @@ struct TopLevelTriangle {
 
 
 static const TopLevelTriangle icosahedron_triangles[20] = {
-  { 0, 1,10}, // 1
-  { 1, 0, 9}, // 0
-  { 6, 9, 0}, // 12
-  { 9, 6, 8}, // 9
-  { 7, 0,10}, // 16
-  { 0, 7, 6}, // 6
-  { 3, 6, 7}, // 7
-  { 6, 3, 8}, // 14
-  { 11,7,10}, // 11
-  {7, 11, 3}, // 18
-  { 2, 3,11}, // 3
-  { 3, 2, 8}, // 2
-  {4, 11,10}, // 10
-  { 11,4, 2},  // 19
-  { 5, 2, 4}, // 5
-  { 2, 5, 8}, // 15
-  { 1, 4,10}, // 17
-  { 4, 1, 5}, // 4
-  { 9, 5, 1}, // 13
-  { 5, 9, 8} // 8
+  { 1, 0,10}, //  1
+  { 0, 1, 9}, //  0
+  { 0, 9, 6}, // 12
+  { 9, 8, 6}, //  9
+  { 0, 7,10}, // 16
+  { 6, 7, 0}, //  6
+  { 7, 6, 3}, //  7
+  { 6, 8, 3}, // 14
+  {11,10, 7}, // 11
+  { 7, 3,11}, // 18
+  { 3, 2,11}, //  3
+  { 2, 3, 8}, //  2
+  {10,11, 4}, // 10
+  { 2, 4,11}, // 19
+  { 5, 4, 2}, //  5
+  { 2, 8, 5}, // 15
+  { 4, 1,10}, // 17
+  { 4, 5, 1}, //  4
+  { 5, 9, 1}, // 13
+  { 8, 9, 5}  //  8
 };
 
 
@@ -193,6 +194,7 @@ void GeodesicGrid::initTriangle(int lev,int index,
                                 const Vec3d &c0,
                                 const Vec3d &c1,
                                 const Vec3d &c2) {
+  assert((c0^c1)*c2 >= 0.0);
   Triangle &t(triangles[lev][index]);
   t.e0 = c1+c2;
   t.e0.normalize();
