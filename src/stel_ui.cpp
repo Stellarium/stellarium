@@ -1085,21 +1085,23 @@ int StelUI::handle_keys(SDLKey key, SDLMod mod, Uint16 unicode, S_GUI_VALUE stat
               break;
             } // else fall through
           case SDLK_COMMA:
-            SolarSystem* ssmgr = (SolarSystem*)StelApp::getInstance().getModuleMgr().getModule("ssystem");
-            if(!core->getFlagEclipticLine())
-            {
-                app->commander->execute_command( "flag ecliptic_line on");
-            }
-            else if( !ssmgr->getFlagTrails())
-            {
-                app->commander->execute_command( "flag object_trails on");
-            }
-            else
-            {
-                app->commander->execute_command( "flag object_trails off");
-                app->commander->execute_command( "flag ecliptic_line off");
-            }
-            break;
+		  {
+			  SolarSystem* ssmgr = (SolarSystem*)StelApp::getInstance().getModuleMgr().getModule("ssystem");
+			  if(!core->getFlagEclipticLine())
+			  {
+				  app->commander->execute_command( "flag ecliptic_line on");
+			  }
+			  else if( !ssmgr->getFlagTrails())
+			  {
+				  app->commander->execute_command( "flag object_trails on");
+			  }
+			  else
+			  {
+				  app->commander->execute_command( "flag object_trails off");
+				  app->commander->execute_command( "flag ecliptic_line off");
+			  }
+			  break;
+		  }
 		  case SDLK_5:
             if (mod & COMPATIBLE_KMOD_CTRL) {
               core->telescopeGoto(5);
@@ -1183,21 +1185,23 @@ int StelUI::handle_keys(SDLKey key, SDLMod mod, Uint16 unicode, S_GUI_VALUE stat
             app->commander->execute_command( "flag star_names toggle");
             break;
           case SDLK_p:
-            SolarSystem* ssmgr2 = (SolarSystem*)StelApp::getInstance().getModuleMgr().getModule("ssystem");
-            if(!ssmgr2->getFlagHints())
-            {
-                app->commander->execute_command("flag planet_names on");
-            }
-            else if( !ssmgr2->getFlagOrbits())
-            {
-                app->commander->execute_command("flag planet_orbits on");
-            }
-            else
-            {
-                app->commander->execute_command("flag planet_orbits off");
-                app->commander->execute_command("flag planet_names off");
-            }
-            break;
+		  {
+			  SolarSystem* ssmgr2 = (SolarSystem*)StelApp::getInstance().getModuleMgr().getModule("ssystem");
+			  if(!ssmgr2->getFlagHints())
+			  {
+				  app->commander->execute_command("flag planet_names on");
+			  }
+			  else if( !ssmgr2->getFlagOrbits())
+			  {
+				  app->commander->execute_command("flag planet_orbits on");
+			  }
+			  else
+			  {
+				  app->commander->execute_command("flag planet_orbits off");
+				  app->commander->execute_command("flag planet_names off");
+			  }
+			  break;
+		  }
           case SDLK_z:
             if (core->getFlagMeridianLine()) {
               app->commander->execute_command( "flag meridian_line 0");
