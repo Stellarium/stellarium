@@ -20,6 +20,8 @@
 #include "landscape.h"
 #include "init_parser.h"
 
+#include <cassert>
+
 Landscape::Landscape(float _radius) : radius(_radius), sky_brightness(1.)
 {
 	valid_landscape = 0;
