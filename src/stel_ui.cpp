@@ -796,7 +796,9 @@ int StelUI::handle_move(int x, int y)
 	if (desktop->onMove(x, y)) return 1;
 	if (is_dragging)
 	{
-		if ((has_dragged || std::sqrt((x-previous_x)*(x-previous_x)+(y-previous_y)*(y-previous_y))>4.))
+		if (has_dragged ||
+		    (std::sqrt((double)((x-previous_x)*(x-previous_x)
+		                       +(y-previous_y)*(y-previous_y)))>4.))
 		{
 			has_dragged = true;
 			core->setFlagTracking(false);
