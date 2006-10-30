@@ -19,6 +19,7 @@
 
 #include <iostream>
 #include <cstdio>
+#include <cassert>
 #include "projector.h"
 #include "fisheye_projector.h"
 #include "cylinder_projector.h"
