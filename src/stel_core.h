@@ -101,8 +101,6 @@ public:
 	//! Toggle current mount mode between equatorial and altazimutal
 	void toggleMountMode(void) {if (getMountMode()==MOUNT_ALTAZIMUTAL) setMountMode(MOUNT_EQUATORIAL); else setMountMode(MOUNT_ALTAZIMUTAL);}
 
-	// TODO!
-	void loadObservatory();
 
 	//! Go to the selected object
     void gotoSelectedObject(void) {
@@ -279,10 +277,6 @@ public:
 	//! Get the projection type
 	string getProjectionType(void) const {return Projector::typeToString(projection->getType());}
 
-	//! Print the passed wstring so that it is oriented in the drection of the gravity
-	void printGravity(SFont* font, float x, float y, const wstring& str, bool speedOptimize = 1,
-			float xshift = 0, float yshift = 0) const
-		{projection->print_gravity180(font, x, y, str, speedOptimize, xshift, yshift);}
 
 	///////////////////////////////////////////////////////////////////////////////////////
 	// Landscape
@@ -307,18 +301,6 @@ public:
 	void setAtmosphereFadeDuration(float f) {atmosphere->setFadeDuration(f);}
 	//! Get atmosphere fade duration in s
 	float getAtmosphereFadeDuration(void) const {return atmosphere->getFadeDuration();}
-
-	///////////////////////////////////////////////////////////////////////////////////////
-	// Milky Way
-	//! Set flag for displaying Milky Way
-	void setFlagMilkyWay(bool b) {milky_way->setFlagShow(b);}
-	//! Get flag for displaying Milky Way
-	bool getFlagMilkyWay(void) const {return milky_way->getFlagShow();}
-
-	//! Set Milky Way intensity
-	void setMilkyWayIntensity(float f) {milky_way->set_intensity(f);}
-	//! Get Milky Way intensity
-	float getMilkyWayIntensity(void) const {return milky_way->get_intensity();}
 
 	///////////////////////////////////////////////////////////////////////////////////////
 	// Observator

@@ -595,8 +595,9 @@ void StelApp::saveCurrentConfig(const string& confFile)
 	conf.set_boolean("astro:flag_planets_hints", ssmgr->getFlagHints());
 	conf.set_boolean("astro:flag_planets_orbits", ssmgr->getFlagOrbits());
 
-	conf.set_boolean("astro:flag_milky_way", core->getFlagMilkyWay());
-	conf.set_double("astro:milky_way_intensity", core->getMilkyWayIntensity());
+	MilkyWay* mw = (MilkyWay*)moduleMgr->getModule("milkyway");
+	conf.set_boolean("astro:flag_milky_way", mw->getFlagShow());
+	conf.set_double("astro:milky_way_intensity", mw->getIntensity());
 
 	// Get landscape and other observatory info
 	// TODO: shouldn't observator already know what section to save in?

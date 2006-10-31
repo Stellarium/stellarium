@@ -44,7 +44,6 @@ public:
 	Landscape(float _radius = 2.);
 	virtual ~Landscape();
 	virtual void load(const string& file_name, const string& section_name) = 0;
-	void set_parameters(const Vec3f& sun_pos);
 	void set_sky_brightness(float b) {sky_brightness = b;}
 	
 	//! Set whether landscape is displayed (does not concern fog)
@@ -81,13 +80,14 @@ protected:
 	LinearFader fog_fader;
 	string author;
 	string description;
-};
-
+	
 typedef struct
 {
 	STexture* tex;
 	float tex_coords[4];
 } landscape_tex_coord;
+};
+
 
 class LandscapeOldStyle : public Landscape
 {
