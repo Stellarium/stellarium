@@ -38,14 +38,14 @@
 #include <vector>
 #include <map>
 
-#include "s_texture.h"
+#include "STexture.h"
 #include "s_font.h"
 #include "vecmath.h"
 #include "callbacks.hpp"
 
 #include "translator.h"
 
-void glCircle(const Vec3d& pos, float radius, float linewidth = 1.0);
+void glCircleGui(const Vec3d& pos, float radius, float linewidth = 1.0);
 void glEllipse(const Vec3d& pos, float radius, float y_ratio, float linewidth = 1.0);
 
 using namespace std;
@@ -347,7 +347,7 @@ namespace s_gui
 	class FlagButton : public CheckBox
     {
     public:
-		FlagButton(int state = 0, const STexture* tex = NULL, const string& specificTexName = "");
+		FlagButton(int state = 0, const STexture* tex = NULL, STexture* specificTex = NULL);
         virtual ~FlagButton();
 		virtual void draw();
     protected:
@@ -708,7 +708,7 @@ namespace s_gui
 	class StdDlgWin : public StdWin
 	{
 	public:
-		StdDlgWin(const wstring& _title = NULL,
+		StdDlgWin(const wstring& _title,  STexture* blankIconTex, STexture* questionIconTex, STexture* alertIconTex,
                   const STexture* _header_tex = NULL,
                   SFont * _winfont = NULL, int headerSize = 18);
 		~StdDlgWin();

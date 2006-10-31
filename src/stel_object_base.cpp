@@ -23,8 +23,10 @@
 #include "projector.h"
 #include "navigator.h"
 #include "stel_utility.h"
-#include "s_texture.h"
+#include "STexture.h"
 #include "planet.h"
+#include "stelapp.h"
+#include "StelTextureMgr.h"
 
 StelObject StelObjectBase::getBrightestStarInConstellation(void) const {
   return StelObject();
@@ -132,10 +134,11 @@ void StelObjectBase::draw_pointer(int delta_time, const Projector* prj, const Na
 
 void StelObjectBase::init_textures(void)
 {
-	pointer_star = new STexture("pointeur2.png");
-	pointer_planet = new STexture("pointeur4.png");
-	pointer_nebula = new STexture("pointeur5.png");
-	pointer_telescope = new STexture("pointeur2.png");
+	StelApp::getInstance().getTextureManager().setDefaultParams();
+	pointer_star = &StelApp::getInstance().getTextureManager().createTexture("pointeur2.png");
+	pointer_planet = &StelApp::getInstance().getTextureManager().createTexture("pointeur4.png");
+	pointer_nebula = &StelApp::getInstance().getTextureManager().createTexture("pointeur5.png");
+	pointer_telescope = &StelApp::getInstance().getTextureManager().createTexture("pointeur2.png");
 }
 
 void StelObjectBase::delete_textures(void)

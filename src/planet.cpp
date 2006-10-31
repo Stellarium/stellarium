@@ -21,12 +21,14 @@
 #include <sstream>
 #include <iomanip>
 
-#include "s_texture.h"
+#include "stelapp.h"
+#include "STexture.h"
 #include "planet.h"
 #include "navigator.h"
 #include "projector.h"
 #include "s_font.h"
 #include "sideral_time.h"
+#include "StelTextureMgr.h"
 
 SFont* Planet::planet_name_font = NULL;
 float Planet::object_scale = 1.f;
@@ -66,8 +68,11 @@ Planet::Planet(Planet *parent,
 	ecliptic_pos=Vec3d(0.,0.,0.);
     rot_local_to_parent = Mat4d::identity();
 	mat_local_to_parent = Mat4d::identity();
-	tex_map = new STexture(tex_map_name, TEX_LOAD_TYPE_PNG_SOLID_REPEAT);
-	if (flagHalo) tex_halo = new STexture(tex_halo_name);
+	StelApp::getInstance().getTextureManager().setDefaultParams();
+	StelApp::getInstance().getTextureManager().setWrapMode(GL_REPEAT);
+	tex_map = &StelApp::getInstance().getTextureManager().createTexture(tex_map_name);
+	StelApp::getInstance().getTextureManager().setDefaultParams();
+	if (flagHalo) tex_halo = &StelApp::getInstance().getTextureManager().createTexture(tex_halo_name);
 
 	// 60 day trails
 	DeltaTrail = 1;
@@ -470,7 +475,8 @@ float Planet::compute_magnitude(const Navigator * nav) const
 
 void Planet::set_big_halo(const string& halotexfile)
 {
-	tex_big_halo = new STexture(halotexfile, TEX_LOAD_TYPE_PNG_SOLID);
+	StelApp::getInstance().getTextureManager().setDefaultParams();
+	tex_big_halo = &StelApp::getInstance().getTextureManager().createTexture(halotexfile);
 }
 
 // Return the radius of a circle containing the object on screen
@@ -834,7 +840,7 @@ void Planet::draw_big_halo(const Navigator* nav, const Projector* prj, const Ton
 
 Ring::Ring(double radius_min,double radius_max,const string &texname)
      :radius_min(radius_min),radius_max(radius_max) {
-	tex = new STexture(texname,TEX_LOAD_TYPE_PNG_ALPHA);
+	tex = &StelApp::getInstance().getTextureManager().createTexture(texname);
 }
 
 Ring::~Ring(void) {

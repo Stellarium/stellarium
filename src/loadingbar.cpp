@@ -22,6 +22,7 @@
 #include "stelapp.h"
 #include "stelfontmgr.h"
 #include "stellocalemgr.h"
+#include "StelTextureMgr.h"
 
 LoadingBar::LoadingBar(Projector* _prj, float font_size, const string&  splash_tex, 
 	int screenw, int screenh, const wstring& extraTextString, float extraTextSize, 
@@ -35,7 +36,8 @@ extraTextFont(StelApp::getInstance().getFontManager().getStandardFont(StelApp::g
 	splashy = prj->getViewportPosY() + (screenh - height)/2;
 	barx = prj->getViewportPosX() + (screenw - barwidth)/2;
 	bary = splashy + 34;
-	if (!splash_tex.empty()) splash = new STexture(splash_tex, TEX_LOAD_TYPE_PNG_ALPHA);
+	StelApp::getInstance().getTextureManager().setDefaultParams();
+	if (!splash_tex.empty()) splash = &StelApp::getInstance().getTextureManager().createTexture(splash_tex);
 	extraTextPos.set(extraTextPosx, extraTextPosy);
 }
 	

@@ -27,10 +27,11 @@
 #include "stellocalemgr.h"
 #include "nebula_mgr.h"
 #include "nebula.h"
-#include "s_texture.h"
+#include "STexture.h"
 #include "navigator.h"
 #include "translator.h"
 #include "loadingbar.h"
+#include "StelTextureMgr.h"
 
 #define RADIUS_NEB 1.
 
@@ -72,8 +73,9 @@ void NebulaMgr::init(const InitParser& conf, LoadingBar& lb)
 	double fontSize = 12;
 	Nebula::nebula_font = &StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getLocaleMgr().getSkyLanguage(), fontSize);
 
+	StelApp::getInstance().getTextureManager().setDefaultParams();
 	if (!Nebula::tex_circle)
-		Nebula::tex_circle = new STexture("neb.png");   // Load circle texture
+		Nebula::tex_circle = &StelApp::getInstance().getTextureManager().createTexture("neb.png");   // Load circle texture
 		
 	setFlagShow(conf.get_boolean("astro:flag_nebula"));
 	setFlagHints(conf.get_boolean("astro:flag_nebula_name"));
