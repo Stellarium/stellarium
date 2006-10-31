@@ -70,13 +70,6 @@ public:
 	ToneReproductor* getToneReproductor() {return tone_converter;}
 
 
-	//! Set the landscape
-	bool setLandscape(const string& new_landscape_name);
-
-	//! Load a landscape based on a hash of parameters mirroring the landscape.ini file
-	//! and make it the current landscape
-	bool loadLandscape(stringHash_t& param);
-
 	///////////////////////////////////////////////////////////////////////////////////////
 	// Navigation
 	//! Set stellarium time to current real world time
@@ -280,6 +273,13 @@ public:
 
 	///////////////////////////////////////////////////////////////////////////////////////
 	// Landscape
+	//! Set the landscape
+	bool setLandscape(const string& new_landscape_name);
+
+	//! Load a landscape based on a hash of parameters mirroring the landscape.ini file
+	//! and make it the current landscape
+	bool loadLandscape(stringHash_t& param);
+	
 	//! Set flag for displaying Landscape
 	void setFlagLandscape(bool b) {landscape->setFlagShow(b);}
 	//! Get flag for displaying Landscape
