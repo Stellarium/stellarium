@@ -42,16 +42,13 @@ public:
     SolarSystem();
     virtual ~SolarSystem();
 
-	// TODO remove that!!!!!!!!
-	void update(int delta_time, Navigator* nav);
-
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in the StelModule class
 	virtual void init(const InitParser& conf, LoadingBar& lb);
 	virtual string getModuleID() const {return "ssystem";}
 	//! Return the maximum squared distance in pixels that any planet has travelled since the last update.
 	virtual double draw(Projector *prj, const Navigator *nav, ToneReproductor *eye);
-	virtual void update(double deltaTime) {assert(0);}	// TODO do that!!!!!!!!
+	virtual void update(double deltaTime);
 	virtual void updateI18n();
 	virtual void updateSkyCulture(LoadingBar& lb) {;}
 	

@@ -66,14 +66,14 @@ void StelUI::draw_gravity_ui(void)
 		if (FlagShowFps) os << L"  FPS " << app->fps;
 
 		glColor3f(0.5,1,0.5);
-		core->printGravity(tuiFont, x - shift + 38, y - 38, os.str(), 0);
+		core->getProjection()->print_gravity180(tuiFont, x - shift + 38, y - 38, os.str(), 0);
 	}
 
 	if (core->getFlagHasSelected() && FlagShowTuiShortObjInfo)
 	{
 	    wstring info = core->getSelectedObjectShortInfo();
 		glColor3fv(core->getSelectedObjectInfoColor());
-		core->printGravity(tuiFont, x + shift - 38, 
+		core->getProjection()->print_gravity180(tuiFont, x + shift - 38, 
 						   y + 38, info, 0);
 	}
 }
@@ -440,7 +440,7 @@ void StelUI::draw_tui(void)
 	if (tui_root)
 	{
 		glColor3f(0.5,1,0.5);
-		core->printGravity(tuiFont, x+shift - 30, y-shift + 38, s_tui::stop_active + tui_root->getString(), 0);
+		core->getProjection()->print_gravity180(tuiFont, x+shift - 30, y-shift + 38, s_tui::stop_active + tui_root->getString(), 0);
 	}
 }
 
@@ -467,6 +467,7 @@ void StelUI::tui_update_widgets(void)
 	ConstellationMgr* cmgr = (ConstellationMgr*)StelApp::getInstance().getModuleMgr().getModule("constellations");
 	NebulaMgr* nmgr = (NebulaMgr*)StelApp::getInstance().getModuleMgr().getModule("nebulas");
 	SolarSystem* ssmgr = (SolarSystem*)StelApp::getInstance().getModuleMgr().getModule("ssystem");
+	MilkyWay* mw = (MilkyWay*)StelApp::getInstance().getModuleMgr().getModule("milkyway");
 	
 	// 1. Location
 	tui_location_latitude->setValue(core->getObservatory().get_latitude());
@@ -516,7 +517,7 @@ void StelUI::tui_update_widgets(void)
 	tui_effect_zoom_duration->setValue(core->getAutomoveDuration());
 	tui_effect_manual_zoom->setValue(core->getFlagManualAutoZoom());
 	tui_effect_object_scale->setValue(smgr->getScale());
-	tui_effect_milkyway_intensity->setValue(core->getMilkyWayIntensity());
+	tui_effect_milkyway_intensity->setValue(mw->getIntensity());
 	tui_effect_cursor_timeout->setValue(MouseCursorTimeout);
 	tui_effect_nebulae_label_magnitude->setValue(nmgr->getMaxMagHints());
 

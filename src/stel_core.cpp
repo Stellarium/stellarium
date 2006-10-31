@@ -172,9 +172,8 @@ void StelCore::init(const InitParser& conf)
 	
 	// Init milky way
 	milky_way = new MilkyWay();
-	milky_way->set_texture("milkyway.png");
-	setFlagMilkyWay(conf.get_boolean("astro:flag_milky_way"));
-	setMilkyWayIntensity(conf.get_double("astro","milky_way_intensity",1.));
+	milky_way->init(conf, lb);
+	StelApp::getInstance().getModuleMgr().registerModule(milky_way);
 	
 	// Telescope manager
 	telescope_mgr = new TelescopeMgr();
@@ -256,7 +255,7 @@ void StelCore::update(int delta_time)
 	projection->update_auto_zoom(delta_time);
 
 	// update faders and Planet trails (call after nav is updated)
-	ssystem->update(delta_time, navigation);
+	ssystem->update((double)delta_time/1000);
 
 	// Move the view direction and/or fov
 	updateMove(delta_time);
@@ -345,7 +344,7 @@ double StelCore::draw(int delta_time)
 	glBlendFunc(GL_ONE, GL_ONE);
 
 	// Draw the milky way.
-	milky_way->draw(tone_converter, projection, navigation);
+	milky_way->draw(projection, navigation, tone_converter);
 
 	// Draw all the constellations
 	asterisms->draw(projection, navigation, tone_converter);
