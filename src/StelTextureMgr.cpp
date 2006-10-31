@@ -21,6 +21,7 @@
 #include <iostream>
 #include <string>
 #include <png.h>
+#include <jpeglib.h>
 #include "StelTextureMgr.h"
 #include "STexture.h"
 
@@ -76,7 +77,17 @@ STexture& StelTextureMgr::createTexture(const string& afilename)
 	fclose(tempFile);
 
 	ManagedSTexture* tex = new ManagedSTexture();
-	readPNGFromFile(filename, *tex);
+	
+	const string extension = filename.substr((filename.find_last_of('.', filename.size()))+1);
+	if (extension=="jpeg" || extension=="jpg" || extension=="JPEG" || extension=="JPG")
+		readJPEGFromFile(filename, *tex);
+	else if (extension=="png" || extension=="PNG")
+		readPNGFromFile(filename, *tex);
+	else
+	{
+		cerr << "Unknown image file extension: " << extension << endl;
+		return NULL_STEXTURE;
+	}
 
 	if (!tex->texels)
 		return NULL_STEXTURE;
@@ -290,6 +301,98 @@ bool StelTextureMgr::readPNGFromFile(const string& filename, ManagedSTexture& te
 
 	/* we don't need row pointers anymore */
 	free (row_pointers);
+
+	fclose (fp);
+	return true;
+}
+
+/*************************************************************************
+ Load a JPG image from a file.
+ Code borrowed from David HENRY with the following copyright notice:
+ * jpeg.c -- jpeg texture loader
+ * last modification: feb. 9, 2006
+ *
+ * Copyright (c) 2005-2006 David HENRY
+ *
+ * Permission is hereby granted, free of charge, to any person
+ * obtaining a copy of this software and associated documentation
+ * files (the "Software"), to deal in the Software without
+ * restriction, including without limitation the rights to use,
+ * copy, modify, merge, publish, distribute, sublicense, and/or
+ * sell copies of the Software, and to permit persons to whom the
+ * Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be
+ * included in all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+ * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+ * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+ * NONINFRINGEMENT.
+ * IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR
+ * ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+ * CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+ * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */
+bool StelTextureMgr::readJPEGFromFile (const string& filename, ManagedSTexture& texinfo)
+{
+	FILE *fp = NULL;
+	struct jpeg_decompress_struct cinfo;
+	struct jpeg_error_mgr jerr;
+	JSAMPROW j;
+	int i;
+
+	/* open image file */
+	fp = fopen (filename.c_str(), "rb");
+	if (!fp)
+	{
+		cerr << "error: couldn't open \"" << filename << "\"!\n";
+		return false;
+	}
+
+	/* create and configure decompressor */
+	jpeg_create_decompress (&cinfo);
+	cinfo.err = jpeg_std_error (&jerr);
+	jpeg_stdio_src (&cinfo, fp);
+
+	/*
+	 * NOTE: this is the simplest "readJpegFile" function. There
+	 * is no advanced error handling.  It would be a good idea to
+	 * setup an error manager with a setjmp/longjmp mechanism.
+	 * In this function, if an error occurs during reading the JPEG
+	 * file, the libjpeg abords the program.
+	 * See jpeg_mem.c (or RTFM) for an advanced error handling which
+	 * prevent this kind of behavior (http://tfc.duke.free.fr)
+	 */
+
+	/* read header and prepare for decompression */
+	jpeg_read_header (&cinfo, TRUE);
+	jpeg_start_decompress (&cinfo);
+
+	/* initialize image's member variables */
+	texinfo.width = cinfo.image_width;
+	texinfo.height = cinfo.image_height;
+	texinfo.internalFormat = cinfo.num_components;
+
+	if (cinfo.num_components == 1)
+		texinfo.format = GL_LUMINANCE;
+	else
+		texinfo.format = GL_RGB;
+
+	texinfo.texels = (GLubyte *)malloc (sizeof (GLubyte) * texinfo.width
+	                                    * texinfo.height * texinfo.internalFormat);
+
+	/* extract each scanline of the image */
+	for (i = 0; i < texinfo.height; ++i)
+	{
+		j = (texinfo.texels +
+		     ((texinfo.height - (i + 1)) * texinfo.width * texinfo.internalFormat));
+		jpeg_read_scanlines (&cinfo, &j, 1);
+	}
+
+	/* finish decompression and release memory */
+	jpeg_finish_decompress (&cinfo);
+	jpeg_destroy_decompress (&cinfo);
 
 	fclose (fp);
 	return true;

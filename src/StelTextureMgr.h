@@ -62,9 +62,11 @@ public:
 	//! Set default parameters for Mipmap mode, wrap mode, min and mag filters
 	void setDefaultParams();
 private:
-	//! Load a PNG image from a file.
+	//! Load a PNG image from a file. Can be LUMINANCE, LUMINANCE+ALPHA, RBG, RGBA. 
 	bool readPNGFromFile(const std::string& filename, class ManagedSTexture& texinfo);
-
+	//! Load a JPG image from a file. Can be LUMINANCE or RGB.
+	bool readJPEGFromFile (const std::string& filename, ManagedSTexture& texinfo);
+	
 	std::string textureDir;
 	bool mipmapsMode;
 	GLint wrapMode;
