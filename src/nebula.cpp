@@ -19,12 +19,14 @@
 
 #include <iostream>
 #include "nebula.h"
-#include "s_texture.h"
+#include "STexture.h"
 #include "stellarium.h"
 #include "s_font.h"
 #include "navigator.h"
 #include "stel_utility.h"
-#include "s_gui.h"
+//#include "s_gui.h"
+#include "stelapp.h"
+#include "StelTextureMgr.h"
 
 STexture * Nebula::tex_circle = NULL;
 SFont* Nebula::nebula_font = NULL;
@@ -189,12 +191,14 @@ bool Nebula::readTexture(const string& record)
 	// Calc the angular size in radian : TODO this should be independant of tex_angular_size
 	angular_size = tex_angular_size/2/60*M_PI/180;
 
-	neb_tex = new STexture(tex_name, TEX_LOAD_TYPE_PNG_SOLID, true);  // use mipmaps
+	StelApp::getInstance().getTextureManager().setDefaultParams();
+	StelApp::getInstance().getTextureManager().setMipmapsMode(true);
+	neb_tex = &StelApp::getInstance().getTextureManager().createTexture(tex_name);
 
 	luminance = ToneReproductor::mag_to_luminance(mag, tex_angular_size*tex_angular_size*3600);
 
 	// this is a huge performance drag if called every frame, so cache here
-	tex_avg_luminance = neb_tex->get_average_luminance();
+	tex_avg_luminance = neb_tex->getAverageLuminance();
 
 	float tex_size = RADIUS_NEB * sin(tex_angular_size/2/60*M_PI/180);
 

@@ -23,7 +23,7 @@ using namespace std;
 #include <iostream>
 #include <string>
 #include "solarsystem.h"
-#include "s_texture.h"
+#include "STexture.h"
 #include "stellplanet.h"
 #include "orbit.h"
 #include "stellarium.h" // AU,SPEED_OF_LIGHT
@@ -33,6 +33,7 @@ using namespace std;
 #include "stelapp.h"
 #include "stelfontmgr.h"
 #include "stellocalemgr.h"
+#include "StelTextureMgr.h"
 
 SolarSystem::SolarSystem()
 	:sun(NULL),moon(NULL),earth(NULL), moonScale(1.), fontSize(14.),
@@ -329,7 +330,8 @@ void SolarSystem::loadPlanets(LoadingBar& lb)
 	}
 
 	// special case: load earth shadow texture
-	tex_earth_shadow = new STexture("earth-shadow.png", TEX_LOAD_TYPE_PNG_ALPHA);
+	StelApp::getInstance().getTextureManager().setDefaultParams();
+	tex_earth_shadow = &StelApp::getInstance().getTextureManager().createTexture("earth-shadow.png");
 	
 	cout << "(loaded)" << endl;
 }

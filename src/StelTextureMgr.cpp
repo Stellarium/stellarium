@@ -22,17 +22,26 @@
 #include <string>
 #include <png.h>
 #include "StelTextureMgr.h"
+#include "STexture.h"
 
 using namespace std;
 
 // Initialize statics
-STexture2 StelTextureMgr::NULL_STEXTURE;
+STexture StelTextureMgr::NULL_STEXTURE;
 
+class ManagedSTexture : public STexture
+{
+	friend class StelTextureMgr;
+};
+	
 /*************************************************************************
  Constructor for the StelTextureMgr class
 *************************************************************************/
 StelTextureMgr::StelTextureMgr(const std::string& atextureDir) : textureDir(atextureDir)
-{}
+{
+	// Init default values
+	setDefaultParams();
+}
 
 /*************************************************************************
  Destructor for the StelTextureMgr class
@@ -40,11 +49,21 @@ StelTextureMgr::StelTextureMgr(const std::string& atextureDir) : textureDir(atex
 StelTextureMgr::~StelTextureMgr()
 {}
 
+/*************************************************************************
+ Set default parameters for Mipmap mode, wrap mode, min and mag filters
+*************************************************************************/
+void StelTextureMgr::setDefaultParams()
+{
+	setMipmapsMode();
+	setWrapMode();
+	setMinFilter();
+	setMagFilter();
+}
 
 /*************************************************************************
  Load an image from a file and create a new texture from it.
 *************************************************************************/
-STexture2& StelTextureMgr::createTexture(const string& afilename)
+STexture& StelTextureMgr::createTexture(const string& afilename)
 {
 	string filename = textureDir + afilename;
 	// Currently only PNG is supported
@@ -56,12 +75,12 @@ STexture2& StelTextureMgr::createTexture(const string& afilename)
 	}
 	fclose(tempFile);
 
-	STexture2* tex = new STexture2();
+	ManagedSTexture* tex = new ManagedSTexture();
 	readPNGFromFile(filename, *tex);
 
 	if (!tex->texels)
 		return NULL_STEXTURE;
-	
+
 	tex->minFilter = (mipmapsMode==true) ? GL_LINEAR_MIPMAP_NEAREST : minFilter;
 	tex->magFilter = magFilter;
 	tex->wrapMode = wrapMode;
@@ -69,14 +88,15 @@ STexture2& StelTextureMgr::createTexture(const string& afilename)
 	tex->mipmapsMode = mipmapsMode;
 	
 	// generate texture
-	glGenTextures (1, &tex->id);
+	glGenTextures (1, &(tex->id));
 	glBindTexture (GL_TEXTURE_2D, tex->id);
 
 	// setup some parameters for texture filters and mipmapping
 	glTexParameteri (GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, tex->minFilter);
 	glTexParameteri (GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, tex->magFilter);
-	glTexParameteri (GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, tex->wrapMode);
-	glTexParameteri (GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, tex->wrapMode);
+
+	//glTexParameteri (GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, tex->wrapMode);
+	//glTexParameteri (GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, tex->wrapMode);
 	glTexImage2D (GL_TEXTURE_2D, 0, tex->internalFormat, tex->width, tex->height, 0, tex->format, GL_UNSIGNED_BYTE, tex->texels);
 	if (mipmapsMode==true)
 		gluBuild2DMipmaps (GL_TEXTURE_2D, tex->internalFormat, tex->width, tex->height, tex->format, GL_UNSIGNED_BYTE, tex->texels);
@@ -84,15 +104,40 @@ STexture2& StelTextureMgr::createTexture(const string& afilename)
 	// OpenGL has its own copy of texture data
 	free (tex->texels);
 	tex->texels = NULL;
-	
+
 	return *tex;
 }
 
 
 /*************************************************************************
  Load a PNG image from a file.
+ Code borrowed from David HENRY with the following copyright notice:
+ * png.c -- png texture loader
+ * last modification: feb. 5, 2006
+ *
+ * Copyright (c) 2005-2006 David HENRY
+ *
+ * Permission is hereby granted, free of charge, to any person
+ * obtaining a copy of this software and associated documentation
+ * files (the "Software"), to deal in the Software without
+ * restriction, including without limitation the rights to use,
+ * copy, modify, merge, publish, distribute, sublicense, and/or
+ * sell copies of the Software, and to permit persons to whom the
+ * Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be
+ * included in all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+ * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+ * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+ * NONINFRINGEMENT.
+ * IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR
+ * ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+ * CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+ * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 *************************************************************************/
-bool StelTextureMgr::readPNGFromFile(const string& filename, STexture2& texinfo)
+bool StelTextureMgr::readPNGFromFile(const string& filename, ManagedSTexture& texinfo)
 {
 	png_byte magic[8];
 	png_structp png_ptr;

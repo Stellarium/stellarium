@@ -21,6 +21,8 @@
 
 #include <iostream>
 #include "image.h"
+#include "stelapp.h"
+#include "StelTextureMgr.h"
 
 Image::Image( string filename, string name, IMAGE_POSITIONING pos_type) {
   flag_alpha = flag_scale = flag_location = flag_rotation = 0;
@@ -31,10 +33,9 @@ Image::Image( string filename, string name, IMAGE_POSITIONING pos_type) {
   image_scale = 1;
   image_name = name;
 
-  // load image using alpha channel in image, otherwise no transparency
-  // other than through set_alpha method -- could allow alpha load option from command 
-
-  image_tex = new STexture(1, filename, TEX_LOAD_TYPE_PNG_ALPHA);  // what if it doesn't load?
+  // use alpha channel if present, otherwise use solid texture
+  StelApp::getInstance().getTextureManager().setDefaultParams();
+  image_tex = &StelApp::getInstance().getTextureManager().createTexture(filename);  // what if it doesn't load?
 
   int img_w, img_h;
   image_tex->getDimensions(img_w, img_h);

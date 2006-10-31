@@ -32,6 +32,7 @@
 #include "stelfontmgr.h"
 #include "stellocalemgr.h"
 #include "stelskyculturemgr.h"
+#include "StelTextureMgr.h"
 
 // constructor which loads all data from appropriate files
 ConstellationMgr::ConstellationMgr(HipStarMgr *_hip_stars) : 
@@ -186,6 +187,7 @@ void ConstellationMgr::loadLinesAndArt(const string &fileName, const string &art
 
 	int current = 0;
 
+	StelApp::getInstance().getTextureManager().setDefaultParams();
 	while (!feof(fic))
 	{
 		if (fscanf(fic, "%s %s %u %u %u %u %u %u %u %u %u\n", shortname, texfile, &x1, &y1, &hp1, &x2, &y2, &hp2, &x3, &y3, &hp3) != 11)
@@ -212,7 +214,8 @@ void ConstellationMgr::loadLinesAndArt(const string &fileName, const string &art
 		}
 		else
 		{
-			cons->art_tex = new STexture(texfile, TEX_LOAD_TYPE_PNG_SOLID, true);  // use mipmaps
+			StelApp::getInstance().getTextureManager().setDefaultParams();
+			cons->art_tex = &StelApp::getInstance().getTextureManager().createTexture(texfile);
 			texSize = cons->art_tex->getSize();
 
 			Vec3f s1 = hipStarMgr->searchHP(hp1).getObsJ2000Pos(0);

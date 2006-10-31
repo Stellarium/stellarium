@@ -28,7 +28,7 @@ using namespace s_gui;
 
 EditBox * EditBox::activeEditBox = NULL;
 		
-void glCircle(const Vec3d& pos, float radius, float line_width)
+void glCircleGui(const Vec3d& pos, float radius, float line_width)
 {
 	float angle, facets;
 	bool lastState = glIsEnabled(GL_TEXTURE_2D);
@@ -907,10 +907,10 @@ void LabeledCheckBox::draw(void)
 }
 
 FlagButton::FlagButton(int state, const STexture* tex,
-                       const string& specificTexName) : CheckBox(state)
+                       STexture* specificTex) : CheckBox(state)
 {
 	if (tex) setTexture(tex);
-	if (!specificTexName.empty()) specific_tex = new STexture(specificTexName);
+	specific_tex = specificTex;
 	setSize(24,24);
 }
 
@@ -2107,7 +2107,7 @@ void StdTransBtWin::set_timeout(int _time_out)
 #define STDDLGWIN_BT_ICON_LEFT 20
 #define STDDLGWIN_BT_ICON_TOP 20
 
-StdDlgWin::StdDlgWin(const wstring& _title, const STexture* _header_tex,
+StdDlgWin::StdDlgWin(const wstring& _title, STexture* blankIconTex, STexture* questionIconTex, STexture* alertIconTex, const STexture* _header_tex,
                      SFont * _winfont, int headerSize) :
 	StdWin(_title, _header_tex, _winfont, headerSize), firstBt(NULL), secondBt(NULL), messageLabel(NULL), 
 	inputEdit(NULL), hasIcon(false)
@@ -2126,9 +2126,9 @@ StdDlgWin::StdDlgWin(const wstring& _title, const STexture* _header_tex,
 	secondBt->setOnPressCallback(callback<void>(this, &StdDlgWin::onSecondBt));
 	addComponent(secondBt);
 
-	blankIcon = new STexture("bt_blank.png");
-	questionIcon = new STexture("bt_question.png");
-	alertIcon = new STexture("bt_alert.png");
+	blankIcon = blankIconTex;//new STexture("bt_blank.png");
+	questionIcon = questionIconTex;//new STexture("bt_question.png");
+	alertIcon = alertIconTex;//new STexture("bt_alert.png");
 	picture = new Picture(questionIcon, STDDLGWIN_BT_ICON_LEFT, STDDLGWIN_BT_ICON_TOP, 32, 32);
 	addComponent(picture);
 

@@ -23,26 +23,7 @@
 #include <string>
 #include "SDL_opengl.h"
 
-class STexture2
-{
-	friend class StelTextureMgr;
-public:
-	GLuint getID(void) const {return id;}
-private:
-	GLuint id;
-	GLsizei width;
-	GLsizei height;
-	
-	GLenum format;
-	GLint internalFormat;
-	GLubyte *texels;
-	
-	std::string fullPath;
-	bool mipmapsMode;
-	GLint wrapMode;
-	GLint minFilter;
-	GLint magFilter;
-};
+class STexture;
 
 /**
  * Class used to manage textures loading and manipulation.
@@ -57,7 +38,7 @@ public:
 	//! Load an image from a file and create a new texture from it
 	//! @param the texture file name, can be absolute path if starts with '/' otherwise
 	//! the file will be looked in stellarium standard textures directories.
-	STexture2& createTexture(const std::string& filename);
+	STexture& createTexture(const std::string& filename);
 	
 	//! Define if mipmaps must be created while creating textures
 	void setMipmapsMode(bool b = false) {mipmapsMode = b;}
@@ -78,9 +59,11 @@ public:
 	//! See doc for glTexParameter for more info.
 	void setMagFilter(GLint m = GL_LINEAR) {magFilter = m;}
 	
+	//! Set default parameters for Mipmap mode, wrap mode, min and mag filters
+	void setDefaultParams();
 private:
 	//! Load a PNG image from a file.
-	bool readPNGFromFile(const std::string& filename, STexture2& texinfo);
+	bool readPNGFromFile(const std::string& filename, class ManagedSTexture& texinfo);
 
 	std::string textureDir;
 	bool mipmapsMode;
@@ -88,7 +71,7 @@ private:
 	GLint minFilter;
 	GLint magFilter;
 	
-	static STexture2 NULL_STEXTURE;
+	static STexture NULL_STEXTURE;
 };
 
 #endif /*STELTEXTUREMGR_H_*/

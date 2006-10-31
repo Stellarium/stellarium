@@ -18,13 +18,14 @@
  */
 
 #include "draw.h"
-#include "s_texture.h"
+#include "STexture.h"
 #include "stel_utility.h"
 #include "navigator.h"
 #include "planet.h"
 #include "stelapp.h"
 #include "stelfontmgr.h"
 #include "stellocalemgr.h"
+#include "StelTextureMgr.h"
 
 // rms added color as parameter
 SkyGrid::SkyGrid(SKY_GRID_TYPE grid_type, unsigned int _nb_meridian, unsigned int _nb_parallel, double _radius,
@@ -619,10 +620,11 @@ MilkyWay::~MilkyWay()
 void MilkyWay::set_texture(const string& tex_file)
 {
 	if (tex) delete tex;
- 	tex = new STexture(tex_file,TEX_LOAD_TYPE_PNG_SOLID_REPEAT);
+	StelApp::getInstance().getTextureManager().setDefaultParams();
+	tex = &StelApp::getInstance().getTextureManager().createTexture(tex_file);
 
 	// big performance improvement to cache this
-	tex_avg_luminance = tex->get_average_luminance();
+	tex_avg_luminance = tex->getAverageLuminance();
 }
 
 

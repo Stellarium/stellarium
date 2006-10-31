@@ -31,7 +31,7 @@
 #include "hip_star_mgr.h"
 #include "stel_object.h"
 #include "stel_object_base.h"
-#include "s_texture.h"
+#include "STexture.h"
 #include "bytes.h"
 #include "stellarium.h" // AU,SPEED_OF_LIGHT
 #include "navigator.h"
@@ -43,6 +43,7 @@
 #include "stelfontmgr.h"
 #include "stellocalemgr.h"
 #include "stelskyculturemgr.h"
+#include "StelTextureMgr.h"
 
 #define NR_OF_HIP 120404
 
@@ -951,7 +952,8 @@ wstring HipStarMgr::getSciName(int hip) {
 
 void HipStarMgr::init(const InitParser& conf, LoadingBar& lb) {
   load_data(lb);
-  starTexture = new STexture("star16x16.png",TEX_LOAD_TYPE_PNG_SOLID,false);  // Load star texture no mipmap
+  StelApp::getInstance().getTextureManager().setDefaultParams();
+  starTexture = &StelApp::getInstance().getTextureManager().createTexture("star16x16.png");  // Load star texture no mipmap
   double fontSize = 12;
   starFont = &StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getLocaleMgr().getSkyLanguage(), fontSize);
   	setFlagStars(conf.get_boolean("astro:flag_stars"));
