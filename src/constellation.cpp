@@ -19,11 +19,12 @@
 
 #include <iostream>
 #include <algorithm>
-#include "s_texture.h"
+#include "STexture.h"
 #include "projector.h"
 #include "constellation.h"
 #include "hip_star_mgr.h"
 #include "navigator.h"
+#include "StelTextureMgr.h"
 
 Vec3f Constellation::lineColor = Vec3f(.4,.4,.8);
 Vec3f Constellation::labelColor = Vec3f(.4,.4,.8);
@@ -38,9 +39,6 @@ Constellation::~Constellation()
 {   
 	if (asterism) delete[] asterism;
     asterism = NULL;
-    
-	if (art_tex) delete art_tex;
-	art_tex = NULL;
 }
 
 // Read Constellation data record and grab cartesian positions of stars
@@ -150,7 +148,7 @@ void Constellation::draw_art_optim(Projector* prj, const Navigator* nav) const
 			
 		if (b0 || b1 || b2 || b3 || b4 || b5 || b6 || b7 || b8)
 		{
-			glBindTexture(GL_TEXTURE_2D, art_tex->getID());
+			art_tex->bind();
 		
 			if ((b0 || b1 || b2 || b3) && (v0[2]<1 && v1[2]<1 && v2[2]<1 && v3[2]<1))
 			{	

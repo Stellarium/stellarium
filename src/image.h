@@ -23,7 +23,6 @@
 #define _IMAGE_H_
 
 #include <string>
-#include "s_texture.h"
 #include "projector.h"
 #include "navigator.h"
 
@@ -53,7 +52,7 @@ class Image
   bool image_loaded() { return (image_ratio != -1); }  // was texture loaded from disk?
 
  private:
-  STexture * image_tex;
+  class STexture * image_tex;
   string image_name;
   IMAGE_POSITIONING image_pos_type;
   float image_scale, image_alpha, image_rotation;

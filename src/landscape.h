@@ -21,13 +21,14 @@
 #define _LANDSCAPE_H_
 
 #include <string>
-#include "s_texture.h"
 #include "vecmath.h"
 #include "tone_reproductor.h"
 #include "projector.h"
 #include "navigator.h"
 #include "fader.h"
 #include "stel_utility.h"
+
+class STexture;
 
 // Class which manages the displaying of the Landscape
 class Landscape

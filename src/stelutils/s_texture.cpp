@@ -207,5 +207,4 @@ void STexture::getDimensions(int &width, int &height) const
 
   width = w;
   height = h;
-
 }

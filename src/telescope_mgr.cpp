@@ -25,6 +25,7 @@
 #include "stelapp.h"
 #include "stelfontmgr.h"
 #include "stellocalemgr.h"
+#include "StelTextureMgr.h"
 
 #include <algorithm>
 
@@ -172,7 +173,8 @@ void TelescopeMgr::init(const InitParser &conf) {
     delete telescope_texture;
     telescope_texture = 0;
   }
-  telescope_texture = new STexture("telescope.png",TEX_LOAD_TYPE_PNG_SOLID);
+  StelApp::getInstance().getTextureManager().setDefaultParams();
+  telescope_texture = &StelApp::getInstance().getTextureManager().createTexture("telescope.png");
 #ifdef WIN32
   if (!wsa_ok) return;
 #endif

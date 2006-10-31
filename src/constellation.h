@@ -94,7 +94,7 @@ private:
     /** List of stars forming the segments */
     StelObject* asterism;
    
-	STexture* art_tex;
+	class STexture* art_tex;
 	Vec3d art_vertex[9];
 	
 	/** Define whether art, lines, names and boundary must be drawn */
