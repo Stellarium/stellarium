@@ -58,10 +58,10 @@ void StelObjectBase::draw_pointer(int delta_time, const Projector* prj, const Na
 		float radius;
 		if (get_type()==STEL_OBJECT_STAR) {
 			radius = 13.f;
-			glBindTexture (GL_TEXTURE_2D, pointer_star->getID());
+			pointer_star->bind();
 		} else {
 			radius = 25.f;
-			glBindTexture (GL_TEXTURE_2D, pointer_telescope->getID());
+			pointer_telescope->bind();
 		}
         glEnable(GL_TEXTURE_2D);
         glEnable(GL_BLEND);
@@ -82,9 +82,9 @@ void StelObjectBase::draw_pointer(int delta_time, const Projector* prj, const Na
     if (get_type()==STEL_OBJECT_NEBULA || get_type()==STEL_OBJECT_PLANET)
     {
 		if (get_type()==STEL_OBJECT_PLANET)
-			glBindTexture(GL_TEXTURE_2D, pointer_planet->getID());
+			pointer_planet->bind();
         if (get_type()==STEL_OBJECT_NEBULA)
-			glBindTexture(GL_TEXTURE_2D, pointer_nebula->getID());
+			pointer_nebula->bind();
 
         glEnable(GL_TEXTURE_2D);
         glEnable(GL_BLEND);

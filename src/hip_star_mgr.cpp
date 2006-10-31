@@ -243,7 +243,7 @@ public:
                     const float *rmag_table,const Projector *prj,
                     unsigned int max_mag_star_name,float names_brightness,
                     SFont *starFont,
-                    unsigned int star_texture_id) const = 0;
+                    STexture* starTexture) const = 0;
   bool isInitialized(void) const {return (nr_of_zones>0);}
   void initTriangle(int index,
                     const Vec3d &c0,
@@ -287,7 +287,7 @@ private:
   void draw(int index,bool is_inside,bool draw_point,
             const float *rmag_table,const Projector *prj,
             unsigned int max_mag_star_name,float names_brightness,
-            SFont *starFont,unsigned int star_texture_id) const;
+            SFont *starFont,STexture* starTexture) const;
 };
 
 struct HipIndexStruct {
@@ -1198,7 +1198,7 @@ void SpecialZoneArray<Star>::draw(int index,bool is_inside,
                                   unsigned int max_mag_star_name,
                                   float names_brightness,
                                   SFont *starFont,
-                                  unsigned int star_texture_id) const {
+                                  STexture* starTexture) const {
   if (draw_point) {
     glDisable(GL_TEXTURE_2D);
     glPointSize(0.1);
@@ -1238,7 +1238,7 @@ void SpecialZoneArray<Star>::draw(int index,bool is_inside,
           if (draw_point) {
             glDisable(GL_TEXTURE_2D);
           } else {
-            glBindTexture(GL_TEXTURE_2D,star_texture_id);
+            starTexture->bind();
           }
         }
       }
@@ -1311,7 +1311,7 @@ double HipStarMgr::draw(Projector *prj, const Navigator *nav, ToneReproductor *e
     prj->set_orthographic_projection();    // set 2D coordinate
 
     // Bind the star texture
-    glBindTexture (GL_TEXTURE_2D, starTexture->getID());
+    starTexture->bind();
 
     // Set the draw mode
     glBlendFunc(GL_ONE, GL_ONE);
@@ -1354,7 +1354,7 @@ double HipStarMgr::draw(Projector *prj, const Navigator *nav, ToneReproductor *e
            (zone = it1.next()) >= 0;) {
         it->second->draw(zone,true,flagPointStar,rmag_table,prj,
                          max_mag_star_name,names_brightness,
-                         starFont,starTexture->getID());
+                         starFont,starTexture);
 //if ((count&63)==0) cout << " " << zone;
       }
 //if ((count&63)==0) cout << endl << "border(" << it->first << "):";
@@ -1362,7 +1362,7 @@ double HipStarMgr::draw(Projector *prj, const Navigator *nav, ToneReproductor *e
            (zone = it1.next()) >= 0;) {
         it->second->draw(zone,false,flagPointStar,rmag_table,prj,
                          max_mag_star_name,names_brightness,
-                         starFont,starTexture->getID());
+                         starFont,starTexture);
 //if ((count&63)==0) cout << " " << zone;
       }
 //if ((count&63)==0) cout << endl;

@@ -187,7 +187,7 @@ void Image::draw(const Navigator * nav, Projector * prj) {
 
   glColor4f(1.0,1.0,1.0,image_alpha);
 
-  glBindTexture(GL_TEXTURE_2D, image_tex->getID());
+  image_tex->bind();
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
   float cx = vieww/2.f + prj->getViewportPosX();

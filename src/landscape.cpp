@@ -343,7 +343,7 @@ void LandscapeOldStyle::draw_fog(ToneReproductor * eye, const Projector* prj, co
 	glEnable(GL_TEXTURE_2D);
 	glEnable(GL_BLEND);
 	glEnable(GL_CULL_FACE);
-	glBindTexture(GL_TEXTURE_2D, fog_tex->getID());
+	fog_tex->bind();
 	prj->sCylinder(radius, radius*std::sin(fog_alt_angle*M_PI/180.), 128, 1, nav->get_local_to_eye_mat() *
 	               Mat4d::translation(Vec3d(0.,0.,radius*std::sin(fog_angle_shift*M_PI/180.))), 1);
 	glDisable(GL_CULL_FACE);
@@ -381,7 +381,7 @@ void LandscapeOldStyle::draw_decor(ToneReproductor * eye, const Projector* prj, 
 		a = 2.f*M_PI*n/nb_decor_repeat;
 		for (int i=0;i<nb_side;++i)
 		{
-			glBindTexture(GL_TEXTURE_2D, sides[i].tex->getID());
+			sides[i].tex->bind();
 			glBegin(GL_QUAD_STRIP);
 			for (int j=0;j<=subdiv;++j)
 			{
@@ -413,7 +413,7 @@ void LandscapeOldStyle::draw_ground(ToneReproductor * eye, const Projector* prj,
 	glEnable(GL_CULL_FACE);
 	glEnable(GL_TEXTURE_2D);
 	glEnable(GL_BLEND);
-	glBindTexture(GL_TEXTURE_2D, ground_tex->getID());
+	ground_tex->bind();
 	int subdiv = 128/(nb_decor_repeat*nb_side);
 	if (subdiv<=0) subdiv = 1;
 	prj->sDisk(radius,nb_side*subdiv*nb_decor_repeat,5, mat, 1);
@@ -472,7 +472,7 @@ void LandscapeFisheye::draw(ToneReproductor * eye, const Projector* prj, const N
 	glEnable(GL_CULL_FACE);
 	glEnable(GL_TEXTURE_2D);
 	glEnable(GL_BLEND);
-	glBindTexture(GL_TEXTURE_2D, map_tex->getID());
+	map_tex->bind();
 	prj->sSphere_map(radius,40,20, nav->get_local_to_eye_mat(), tex_fov, 1);
 
 	glDisable(GL_CULL_FACE);
@@ -543,7 +543,7 @@ void LandscapeSpherical::draw(ToneReproductor * eye, const Projector* prj, const
 	glEnable(GL_CULL_FACE);
 	glEnable(GL_TEXTURE_2D);
 	glEnable(GL_BLEND);
-	glBindTexture(GL_TEXTURE_2D, map_tex->getID());
+	map_tex->bind();
 
 	// TODO: verify that this works correctly for custom projections
 	// seam is at East
