@@ -39,6 +39,8 @@ Constellation::~Constellation()
 {   
 	if (asterism) delete[] asterism;
     asterism = NULL;
+    if (art_tex) delete art_tex;
+    art_tex = NULL;
 }
 
 // Read Constellation data record and grab cartesian positions of stars
