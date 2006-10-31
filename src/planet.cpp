@@ -653,7 +653,7 @@ void Planet::draw_sphere(const Projector* prj, const Mat4d& mat, float screen_sz
 		glDisable(GL_LIGHTING);
 		glColor3fv(color);
 	}
-	glBindTexture(GL_TEXTURE_2D, tex_map->getID());
+	tex_map->bind();
 
 
     // Rotate and add an extra quarter rotation so that the planet texture map
@@ -732,7 +732,7 @@ if (screen_r<1.f) screen_r=1.f;
 
 	prj->set_orthographic_projection();    	// 2D coordinate
 
-	glBindTexture(GL_TEXTURE_2D, tex_halo->getID());
+	tex_halo->bind();
 	glEnable(GL_BLEND);
 	glDisable(GL_LIGHTING);
 	glEnable(GL_TEXTURE_2D);
@@ -788,7 +788,7 @@ void Planet::draw_point_halo(const Navigator* nav, const Projector* prj, const T
 	}
 	prj->set_orthographic_projection();    	// 2D coordinate
 
-	glBindTexture(GL_TEXTURE_2D, tex_halo->getID());
+	tex_halo->bind();
 	glEnable(GL_BLEND);
 	glDisable(GL_LIGHTING);
 	glEnable(GL_TEXTURE_2D);
@@ -822,7 +822,7 @@ void Planet::draw_big_halo(const Navigator* nav, const Projector* prj, const Ton
 
 	prj->set_orthographic_projection();    	// 2D coordinate
 
-	glBindTexture(GL_TEXTURE_2D, tex_big_halo->getID());
+	tex_big_halo->bind();
 	glEnable(GL_BLEND);
 	glDisable(GL_LIGHTING);
 	glEnable(GL_TEXTURE_2D);
@@ -865,7 +865,7 @@ void Ring::draw(const Projector* prj,const Mat4d& mat,double screen_sz)
 	glEnable(GL_CULL_FACE);
 	glEnable(GL_BLEND);
 
-	glBindTexture (GL_TEXTURE_2D, tex->getID());
+	tex->bind();
 
 	// TODO: radial texture would look much better
 

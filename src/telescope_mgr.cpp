@@ -70,7 +70,7 @@ void TelescopeMgr::draw(const Projector *prj,const Navigator *nav) const {
   glEnable(GL_TEXTURE_2D);
   glEnable(GL_BLEND);
   prj->set_orthographic_projection();	// set 2D coordinate
-  glBindTexture (GL_TEXTURE_2D,telescope_texture->getID());
+  telescope_texture->bind();
   glBlendFunc(GL_ONE,GL_ONE);
   for (TelescopeMap::const_iterator it(telescope_map.begin());
        it!=telescope_map.end();it++) {
@@ -107,7 +107,7 @@ void TelescopeMgr::draw(const Projector *prj,const Navigator *nav) const {
           } else {
             telescope_font->print(XY[0]+6,XY[1]-4,it->second->getNameI18n());
           }
-          glBindTexture(GL_TEXTURE_2D,telescope_texture->getID());
+          telescope_texture->bind();
         }
       }
     }

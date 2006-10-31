@@ -65,7 +65,7 @@ void LoadingBar::Draw(float val)
 		glEnable(GL_TEXTURE_2D);
 		glColor3f(1, 1, 1);
 		glDisable(GL_CULL_FACE);
-		glBindTexture(GL_TEXTURE_2D, splash->getID());
+		splash->bind();
 
 		glBegin(GL_QUADS);
 			glTexCoord2i(0, 0);		// Bottom Left
