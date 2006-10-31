@@ -245,7 +245,7 @@ void Nebula::draw_tex(const Projector* prj, const Navigator* nav, ToneReproducto
 		//		printf("%s: lum %f ad_lum %f cmag %f angle %f\n", name.c_str(), luminance, ad_lum, cmag, angular_size);
 	}
 
-	glBindTexture(GL_TEXTURE_2D, neb_tex->getID());
+	neb_tex->bind();
 
 	Vec3d v;
     glBegin(GL_TRIANGLE_STRIP);
@@ -266,7 +266,7 @@ void Nebula::draw_circle(const Projector* prj, const Navigator * nav)
 	inc_lum++;
 	float lum = MY_MIN(1,2.f/get_on_screen_size(prj, nav))*(0.8+0.2*std::sin(inc_lum/10));
 	glColor4f(circle_color[0], circle_color[1], circle_color[2], lum*hints_brightness);
-	glBindTexture (GL_TEXTURE_2D, Nebula::tex_circle->getID());
+	Nebula::tex_circle->bind();
 	glBegin(GL_TRIANGLE_STRIP);
 		glTexCoord2i(1,0);              // Bottom Right
 		glVertex3f(XY[0] + 4, XY[1] - 4, 0.0f);
@@ -285,7 +285,7 @@ void Nebula::draw_no_tex(const Projector* prj, const Navigator * nav,ToneReprodu
 	float cmag = 0.20 * hints_brightness;
 
 	glColor3f(cmag,cmag,cmag);
-	glBindTexture(GL_TEXTURE_2D, tex_circle->getID());
+	tex_circle->bind();
 	glBegin(GL_QUADS);
 		glTexCoord2i(0,0);    glVertex2f(XY[0]-r,XY[1]-r);	// Bottom left
 		glTexCoord2i(1,0);    glVertex2f(XY[0]+r,XY[1]-r);	// Bottom right

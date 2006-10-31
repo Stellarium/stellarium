@@ -731,7 +731,7 @@ void SolarSystem::draw_earth_shadow(const Navigator * nav, Projector * prj)
 	Mat4d mat = nav->get_helio_to_eye_mat();
 
 	// shadow radial texture
-	glBindTexture(GL_TEXTURE_2D, tex_earth_shadow->getID());
+	tex_earth_shadow->bind();
 
 	Vec3d r, s;
 

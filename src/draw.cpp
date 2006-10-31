@@ -644,7 +644,7 @@ void MilkyWay::draw(ToneReproductor * eye, const Projector* prj, const Navigator
 	glEnable(GL_CULL_FACE);
 	glEnable(GL_TEXTURE_2D);
 	glDisable(GL_BLEND);
-	glBindTexture(GL_TEXTURE_2D, tex->getID());
+	tex->bind();
 
 	prj->sSphere(radius,1.0,20,20,
 		     nav->get_j2000_to_eye_mat()*
@@ -664,7 +664,7 @@ void MilkyWay::draw_chart(ToneReproductor * eye, const Projector* prj, const Nav
 	glEnable(GL_TEXTURE_2D); 
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	glBindTexture(GL_TEXTURE_2D, tex->getID());
+	tex->bind();
 
 	prj->sSphere(radius,1.0,20,20,
 		     nav->get_j2000_to_eye_mat()*

@@ -276,7 +276,7 @@ void Painter::drawSquareFill(const s_vec2i& pos, const s_vec2i& sz) const
 	if (opaque) glDisable(GL_BLEND);
 	else glEnable(GL_BLEND);
 
-    glBindTexture(GL_TEXTURE_2D, tex1->getID());
+    tex1->bind();
     glBegin(GL_QUADS );
         glTexCoord2s(0, 0); glVertex2i(pos[0]        , pos[1] + sz[1]);	// Bottom Left
         glTexCoord2s(1, 0); glVertex2i(pos[0] + sz[0], pos[1] + sz[1]);	// Bottom Right
@@ -295,7 +295,7 @@ void Painter::drawSquareFill(const s_vec2i& pos, const s_vec2i& sz, const s_colo
 	//else 
 	glEnable(GL_BLEND);
 
-    glBindTexture(GL_TEXTURE_2D, tex1->getID());
+    tex1->bind();
     glBegin(GL_QUADS );
         glTexCoord2s(0, 0); glVertex2i(pos[0]        , pos[1] + sz[1]);	// Bottom Left
         glTexCoord2s(1, 0); glVertex2i(pos[0] + sz[0], pos[1] + sz[1]);	// Bottom Right
@@ -313,7 +313,7 @@ void Painter::drawSquareFill(const s_vec2i& pos, const s_vec2i& sz,
 
 	glEnable(GL_BLEND);
 
-    glBindTexture(GL_TEXTURE_2D, t->getID());
+    t->bind();
     glBegin(GL_QUADS );
         glTexCoord2s(0, 0); glVertex2i(pos[0]        , pos[1] + sz[1]);	// Bottom Left
         glTexCoord2s(1, 0); glVertex2i(pos[0] + sz[0], pos[1] + sz[1]);	// Bottom Right
