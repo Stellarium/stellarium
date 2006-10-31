@@ -46,7 +46,7 @@ public:
 	virtual void init(const InitParser& conf, LoadingBar& lb);
 	virtual string getModuleID() const {return "nebulas";}
 	virtual double draw(Projector *prj, const Navigator *nav, ToneReproductor *eye);
-	virtual void update(double deltaTime) {hintsFader.update((int)deltaTime); flagShow.update((int)deltaTime);}
+	virtual void update(double deltaTime) {hintsFader.update((int)(deltaTime*1000)); flagShow.update((int)(deltaTime*1000));}
 	virtual void updateI18n();
 	virtual void updateSkyCulture(LoadingBar& lb);
 	

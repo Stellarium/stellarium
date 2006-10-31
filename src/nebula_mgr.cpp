@@ -82,7 +82,9 @@ void NebulaMgr::init(const InitParser& conf, LoadingBar& lb)
 	setMaxMagHints(conf.get_double("astro", "max_mag_nebula_name", 99));
 	setCircleScale(conf.get_double("astro", "nebula_scale",1.0f));
 	setFlagDisplayNoTexture(conf.get_boolean("astro", "flag_nebula_display_no_texture", false));
-	setFlagBright(conf.get_boolean("astro:flag_bright_nebulae"));	
+	setFlagBright(conf.get_boolean("astro:flag_bright_nebulae"));
+	
+	updateI18n();
 }
 
 // Draw all the Nebulae
