@@ -22,8 +22,7 @@ stellarium_SOURCES = projector.cpp projector.h stereographic_projector.cpp \
 	stellocalemgr.cpp stelskyculturemgr.cpp GeodesicGridDrawer.h GeodesicGridDrawer.cpp \
 	StelTextureMgr.h StelTextureMgr.cpp
 
-stellarium_LDADD = stelutils/glpng/libglpng.a \
-stelutils/iniparser/libiniparser.a \
+stellarium_LDADD = stelutils/iniparser/libiniparser.a \
 stelutils/libstelutils.a \
 planetsephems/libplanetsephems.a \
 @LIBINTL@
