@@ -134,8 +134,11 @@ double NebulaMgr::draw(Projector* prj, const Navigator * nav, ToneReproductor* e
 
 				if ( !prj->project_j2000_check(n->XYZ,n->XY) ) continue;
 	
-				if (n->hasTex()) n->draw_tex(prj, nav, eye);
-				else n->draw_no_tex(prj, nav, eye);
+				if (n->angular_size>size_limit)
+				{
+					if (n->hasTex()) n->draw_tex(prj, nav, eye);
+					else n->draw_no_tex(prj, nav, eye);
+				}
 	
 				if (hintsFader.getInterstate()>0.00001 && n->mag <= getMaxMagHints())
 				{
