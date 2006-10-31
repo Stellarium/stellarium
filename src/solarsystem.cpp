@@ -31,6 +31,7 @@ using namespace std;
 #include "navigator.h"
 #include "projector.h"
 #include "stelapp.h"
+#include "stel_core.h"
 #include "stelfontmgr.h"
 #include "stellocalemgr.h"
 #include "StelTextureMgr.h"
@@ -774,13 +775,14 @@ void SolarSystem::draw_earth_shadow(const Navigator * nav, Projector * prj)
 }
 
 
-void SolarSystem::update(int delta_time, Navigator* nav)
+void SolarSystem::update(double delta_time)
 {
+	Navigator* nav = StelApp::getInstance().getCore()->getNavigation();
 	vector<Planet*>::iterator iter = system_planets.begin();
 	while (iter != system_planets.end())
 	{
 		(*iter)->update_trail(nav);
-		(*iter)->update(delta_time);
+		(*iter)->update((int)(delta_time*1000));
 		iter++;
 	}
 }

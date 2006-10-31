@@ -116,7 +116,7 @@ void SkyGrid::draw(const Projector* prj) const
               const double dy = pt1[1]-pt2[1];
               const double dq = dx*dx+dy*dy;
               if (dq < 1024*1024) {
-				glColor4f(color[0],color[1],color[2],0.f);
+				glColor4f(color[0],color[1],color[2],0.3f);
 
 				glBegin (GL_LINES);
 					glVertex2f(pt1[0],pt1[1]);
@@ -212,7 +212,7 @@ void SkyGrid::draw(const Projector* prj) const
 				glColor4f(color[0],color[1],color[2],fader.getInterstate());
 				glBegin (GL_LINES);
 					glVertex2f(pt1[0],pt1[1]);
-					glColor4f(color[0],color[1],color[2],0.f);
+					glColor4f(color[0],color[1],color[2],0.3f);
 					glVertex2f(pt2[0],pt2[1]);
         		glEnd();
               }
@@ -606,7 +606,7 @@ void Cardinals::updateI18n()
 }
 
 // Class which manages the displaying of the Milky Way
-MilkyWay::MilkyWay(float _radius) : radius(_radius), color(1.f, 1.f, 1.f)
+MilkyWay::MilkyWay() : radius(1.f), color(1.f, 1.f, 1.f)
 {
 	tex = NULL;
 }
@@ -617,7 +617,14 @@ MilkyWay::~MilkyWay()
 	tex = NULL;
 }
 
-void MilkyWay::set_texture(const string& tex_file)
+void MilkyWay::init(const InitParser& conf, LoadingBar& lb)
+{
+	setTexture("milkyway.png");
+	setFlagShow(conf.get_boolean("astro:flag_milky_way"));
+	setIntensity(conf.get_double("astro","milky_way_intensity",1.));
+}
+
+void MilkyWay::setTexture(const string& tex_file)
 {
 	if (tex) delete tex;
 	StelApp::getInstance().getTextureManager().setDefaultParams();
@@ -628,12 +635,7 @@ void MilkyWay::set_texture(const string& tex_file)
 }
 
 
-void MilkyWay::set_intensity(float _intensity)
-{
-	intensity = _intensity;
-}
-
-void MilkyWay::draw(ToneReproductor * eye, const Projector* prj, const Navigator* nav) const
+double MilkyWay::draw(Projector *prj, const Navigator *nav, ToneReproductor *eye)
 {
 	assert(tex);	// A texture must be loaded before calling this
 	// Scotopic color = 0.25, 0.25 in xyY mode. Global stars luminance ~= 0.001 cd/m^2
@@ -653,26 +655,7 @@ void MilkyWay::draw(ToneReproductor * eye, const Projector* prj, const Navigator
 		     Mat4d::zrotation(M_PI/180*7), 1);
 
 	glDisable(GL_CULL_FACE);
-}
-
-void MilkyWay::draw_chart(ToneReproductor * eye, const Projector* prj, const Navigator* nav) 
-{
-	assert(tex);	// A texture must be loaded before calling this
-
-	glColor3fv(color);
-	glEnable(GL_CULL_FACE);
-	glEnable(GL_TEXTURE_2D); 
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	tex->bind();
-
-	prj->sSphere(radius,1.0,20,20,
-		     nav->get_j2000_to_eye_mat()*
-		     Mat4d::xrotation(M_PI/180*23)*
-		     Mat4d::yrotation(M_PI/180*120)*
-		     Mat4d::zrotation(M_PI/180*7), 1);
-
-	glDisable(GL_CULL_FACE);
+	return 0.;
 }
 
 // Draw a point... (used for tests)

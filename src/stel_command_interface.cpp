@@ -146,9 +146,10 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 		else if(args["star_twinkle_amount"]!="") smgr->setTwinkleAmount(StelUtils::str_to_double(args["star_twinkle_amount"]));
 		else if(args["time_zone"]!="") stapp->getLocaleMgr().setCustomTimezone(args["time_zone"]);
 		else if(args["milky_way_intensity"]!="") {
-			stcore->setMilkyWayIntensity(StelUtils::str_to_double(args["milky_way_intensity"]));
+			MilkyWay* mw = (MilkyWay*)stapp->moduleMgr->getModule("milkyway");
+			mw->setIntensity(StelUtils::str_to_double(args["milky_way_intensity"]));
 			// safety feature to be able to turn back on
-			if(stcore->getMilkyWayIntensity()) stcore->setFlagMilkyWay(true);
+			if(mw->getIntensity()) mw->setFlagShow(true);
 
 		} else status = 0;
 
@@ -810,8 +811,9 @@ int StelCommandInterface::set_flag(string name, string value, bool &newval, bool
 			nmgr->setFlagHints(newval);
 		}
 		else if(name=="milky_way") {
-			newval = !stcore->getFlagMilkyWay();
-			stcore->setFlagMilkyWay(newval);
+			MilkyWay* mw = (MilkyWay*)stapp->moduleMgr->getModule("milkyway");
+			newval = !mw->getFlagShow();
+			mw->setFlagShow(newval);
 		}
 		else if(name=="bright_nebulae") {
 			newval = !nmgr->getFlagBright();
@@ -908,7 +910,11 @@ int StelCommandInterface::set_flag(string name, string value, bool &newval, bool
 			nmgr->setFlagShow(true);  // make sure visible
 			nmgr->setFlagHints(newval);
 		}
-		else if(name=="milky_way") stcore->setFlagMilkyWay(newval);
+		else if(name=="milky_way")
+		{
+			MilkyWay* mw = (MilkyWay*)stapp->moduleMgr->getModule("milkyway");
+			mw->setFlagShow(newval);
+		}
 		else if(name=="bright_nebulae") nmgr->setFlagBright(newval);
 		else if(name=="object_trails") ssmgr->setFlagTrails(newval);
 		else if(name=="track_object") stcore->setFlagTracking(newval);
