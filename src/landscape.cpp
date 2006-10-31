@@ -195,10 +195,11 @@ void LandscapeOldStyle::load(const string& landscape_file, const string& section
 	nb_side_texs = pd.get_int(section_name, "nbsidetex", 0);
 	side_texs = new STexture*[nb_side_texs];
 	char tmp[255];
+	StelApp::getInstance().getTextureManager().setDefaultParams();
+	StelApp::getInstance().getTextureManager().setWrapMode(GL_CLAMP_TO_EDGE);
 	for (int i=0;i<nb_side_texs;++i)
 	{
 		sprintf(tmp,"tex%d",i);
-		StelApp::getInstance().getTextureManager().setDefaultParams();
 		side_texs[i] = &StelApp::getInstance().getTextureManager().createTexture(pd.get_str(section_name, tmp));
 	}
 
