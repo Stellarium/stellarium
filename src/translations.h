@@ -297,6 +297,43 @@ class Translations
         N_("Cared for by Moon");        // 010
         N_("Dolphin");  // 011
 
+		// Navajo Constellations
+        N_("Revolving Male");   // 001
+        N_("Revolving Female");     // 002
+        N_("Man with Feet Apart");     // 003
+        N_("Lizard");        // 004
+        N_("Dilyehe");        // 005
+        N_("First Big One");  // 006
+        N_("Rabbit Tracks");     // 007
+        N_("First Slim One");   // 008
+
+		// Inuit Constellations
+        N_("Two Sunbeams");   // 001
+        N_("Two Placed Far Apart");     // 002
+        N_("Dogs");     // 003
+        N_("Collarbones");        // 004
+        N_("Lamp Stand");        // 005
+        N_("Caribou");        // 006
+        N_("Two in Front");     // 007
+        N_("Breastbone");   // 008
+        N_("Runners");   // 009
+        N_("Blubber Container");   // 010
+
+		// Lakota Constellations
+        N_("Hand");   // 001
+        N_("Snake");     // 002
+        N_("Fireplace");     // 003
+        N_("Dipper");        // 004
+        N_("Race Track");        // 005
+        N_("Animal");  // 006
+        N_("Elk");     // 007
+        N_("Seven Little Girls");   // 008
+        N_("Dried Willow");   // 009
+        N_("Salamander");   // 010
+        N_("Turtle");   // 011
+        N_("Thunderbird");   // 012
+        N_("Bear's Lodge");   // 013
+
 		// TUI script message
 		N_("Select and exit to run.");
 		
