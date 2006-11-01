@@ -65,7 +65,7 @@ bool Constellation::read(const string& record, HipStarMgr * _VouteCeleste)
         istr >> HP;
 		if(HP == 0)
 		{
-			delete [] asterism;
+//			delete[] asterism;
 			return false;
 		}
 
@@ -73,7 +73,7 @@ bool Constellation::read(const string& record, HipStarMgr * _VouteCeleste)
 		if (!asterism[i])
 		{
 			cout << "Error in Constellation " << abbreviation << " asterism : can't find star HP= " << HP << endl;
-			delete [] asterism;
+//			delete[] asterism;
 			return false;
 		}
     }
