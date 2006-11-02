@@ -1102,7 +1102,13 @@ void HipStarMgr::load_sci_names(const string& sciNameFile) {
     line[i-1]=' ';
     string sci_name = tempc;
     sci_name.erase(sci_name.length()-1, 1);
-    const wstring sci_name_i18n = Translator::UTF8stringToWstring(sci_name);
+    wstring sci_name_i18n = Translator::UTF8stringToWstring(sci_name);
+
+    // remove underscores
+    for (wstring::size_type j=0;j<sci_name_i18n.length();++j) {
+      if (sci_name_i18n[j]==L'_') sci_name_i18n[j]=L' ';
+    }
+
     wstring sci_name_i18n_cap = sci_name_i18n;
     transform(sci_name_i18n.begin(), sci_name_i18n.end(),
               sci_name_i18n_cap.begin(), ::toupper);
@@ -1659,6 +1665,7 @@ void HipStarMgr::updateSkyCulture(LoadingBar& lb)
 	
 	// Load culture star names in english
 	load_common_names(StelApp::getInstance().getDataFilePath("sky_cultures/" + skyCultureDir + "/star_names.fab"));
+	load_sci_names(StelApp::getInstance().getDataFilePath("name.fab"));
 
 	// Turn on sci names/catalog names for western culture only
 	setFlagSciNames( skyCultureDir.compare(0, 7, "western") ==0 );
