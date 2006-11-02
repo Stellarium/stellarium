@@ -385,6 +385,8 @@ void SolarSystem::computeTransMatrices(double date, const Vec3d& observerPos) {
 // We are supposed to be in heliocentric coordinate
 double SolarSystem::draw(Projector * prj, const Navigator * nav, ToneReproductor* eye)
 {
+	if(!Planet::getflagShow()) return 0.0;
+	
 	Planet::set_font(&planet_name_font);
 	
 	// Set the light parameters taking sun as the light source
