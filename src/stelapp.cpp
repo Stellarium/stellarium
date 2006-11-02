@@ -227,6 +227,9 @@ void StelApp::init(void)
 	skyCultureMgr->init(conf);
 
 	core->init(conf);
+//ugly fix by johannes: call skyCultureMgr->init twice so that
+// star names are loaded again
+skyCultureMgr->init(conf);
 
 	// Navigation section
 	PresetSkyTime 		= conf.get_double ("navigation","preset_sky_time",2451545.);
