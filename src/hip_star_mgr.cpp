@@ -45,7 +45,7 @@
 #include "stelskyculturemgr.h"
 #include "StelTextureMgr.h"
 
-#define NR_OF_HIP 120404
+#define NR_OF_HIP 120416
 
 static
 const char *cat_file_names[] = {
