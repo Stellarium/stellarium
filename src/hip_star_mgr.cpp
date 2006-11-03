@@ -535,8 +535,8 @@ wstring StarWrapperBase::getInfoString(const Navigator *nav) const {
   oss << _("Magnitude: ") << get_mag(nav);
   oss << endl;
   oss << _("J2000") << L" " << _("RA/DE: ")
-      << StelUtils::printAngleHMS(ra_j2000)
-      << L"/" << StelUtils::printAngleDMS(dec_j2000) << endl;
+      << StelUtils::printAngleHMS(ra_j2000,true)
+      << L"/" << StelUtils::printAngleDMS(dec_j2000,true) << endl;
   oss << _("Equ of date") << L" " << _("RA/DE: ")
       << StelUtils::printAngleHMS(ra_equ)
       << L"/" << StelUtils::printAngleDMS(dec_equ) << endl;
@@ -638,8 +638,8 @@ wstring StarWrapper1::getInfoString(const Navigator *nav) const {
   oss << _("Magnitude: ") << get_mag(nav);
   oss << endl;
   oss << _("J2000") << L" " << _("RA/DE: ")
-      << StelUtils::printAngleHMS(ra_j2000)
-      << L"/" << StelUtils::printAngleDMS(dec_j2000) << endl;
+      << StelUtils::printAngleHMS(ra_j2000,true)
+      << L"/" << StelUtils::printAngleDMS(dec_j2000,true) << endl;
 ///  oss << "Motion J2000: " << s->dx0 << '/' << s->dx1 << endl;
 
 
