@@ -79,9 +79,12 @@ Windows/MacOSX and in $HOME/.stellarium/ on a unix system.
 	
 	Tony Furr for his work on the Graphical User Interface.
 
-    Valery Lainey for his L1 and MarsSat ephemeris and his prompt an kind help
-    with any question concerning planetary/satellite ephemeris.
+	Valery Lainey for his L1 and MarsSat ephemeris and his prompt an kind help
+	with any question concerning planetary/satellite ephemeris.
 
+	Norbert Zacharias from USNO for kindly sending a cut of the NOMAD catalogue
+	on 4 DVD, and answering NOMAD related questions.
+    
 	++ Thanks to ++
 	
 	Axel Mellinger who gave me the authorisation to use his impressive
@@ -167,12 +170,37 @@ Windows/MacOSX and in $HOME/.stellarium/ on a unix system.
 	3.1 The Hipparcos star catalog
 		From ESA (European Space Agency) and the Hipparcos mission.
 		ref. ESA, 1997, The Hipparcos and Tycho Catalogues, ESA SP-1200
+		http://cdsweb.u-strasbg.fr/ftp/cats/I/239
 	3.2 The solar system data mainly comes from IMCCE and partly from Celestia.
 	3.3 Polynesian constellations are based on diagrams from the Polynesian 
-        Voyaging Society
+		Voyaging Society
 	3.4 Chinese constellations are based on diagrams from the Hong Kong Space Museum
 	3.5 Egyptian constellations are based on the work of Juan Antonio Belmonte, 
-        Instituto de Astrofisica de Canarias
+		Instituto de Astrofisica de Canarias
+	3.6 The Tycho-2 Catalogue of the 2.5 Million Brightest Stars
+		Hog E., Fabricius C., Makarov V.V., Urban S., Corbin T.,
+		Wycoff G., Bastian U., Schwekendiek P., Wicenec A.
+		<Astron. Astrophys. 355, L27 (2000)>
+        http://cdsweb.u-strasbg.fr/ftp/cats/I/259
+	3.7 Naval Observatory Merged Astrometric Dataset (NOMAD) version 1
+		http://www.nofs.navy.mil/nomad
+		Norbert Zacharias writes:
+		"There are no fees, both UCAC and NOMAD are freely available
+		with the only requirement that the source of the data
+		(U.S. Naval Observatory) and original product name need to be
+		provided with any distribution, as well as a description about
+		any changes made to the data, if at all."
+		The changes made to the data are:
+		-) try to compute magnitude and color from the b,v,r values
+		-) compute nr_of_measurements = the number of valid b,v,r values
+		-) throw away or keep stars (depending on magnitude,
+           nr_of_measurements, combination of flags, tycho2 number)
+		-) add all stars from hiparcos and tycho2+1st supplement
+		-) reorganize the stars in several brigthness levels and triangular
+		   zones according to position and magnitude
+		The program that is used to generate the star files is called
+		"MakeCombinedCatalogue" and can be found in the util subdirectory
+		in source code.
 
 4. Graphics
 	4.1 All graphics are copyrighted by Fabien Chereau (GPL) except the ones
