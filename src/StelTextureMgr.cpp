@@ -20,8 +20,10 @@
 #include <cassert>
 #include <iostream>
 #include <string>
-#include <png.h>
+extern "C" {
 #include <jpeglib.h>
+}
+#include <png.h>
 #include "StelTextureMgr.h"
 #include "STexture.h"
 
