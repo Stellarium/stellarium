@@ -194,13 +194,17 @@ Windows/MacOSX and in $HOME/.stellarium/ on a unix system.
 		-) try to compute magnitude and color from the b,v,r values
 		-) compute nr_of_measurements = the number of valid b,v,r values
 		-) throw away or keep stars (depending on magnitude,
-           nr_of_measurements, combination of flags, tycho2 number)
+		   nr_of_measurements, combination of flags, tycho2 number)
 		-) add all stars from hiparcos and tycho2+1st supplement
 		-) reorganize the stars in several brigthness levels and triangular
 		   zones according to position and magnitude
 		The program that is used to generate the star files is called
 		"MakeCombinedCatalogue" and can be found in the util subdirectory
 		in source code.
+		The position, magnitudes, and proper motions of the stars
+		coming from NOMAD are unchanged, except for a possible
+		loss of precision, especially in magnitude. Also proper motions of
+		faint stars are neglected at all.
 
 4. Graphics
 	4.1 All graphics are copyrighted by Fabien Chereau (GPL) except the ones
