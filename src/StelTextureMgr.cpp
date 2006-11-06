@@ -70,7 +70,8 @@ void StelTextureMgr::setDefaultParams()
 STexture& StelTextureMgr::createTexture(const string& afilename)
 {
 	string filename;
-	if (afilename!="" && afilename[0]=='/')
+	if (afilename[0]=='/' ||
+		(afilename[0]=='.' && afilename[1]=='/'))
 		filename = afilename;
 	else
 		filename = textureDir + afilename;
