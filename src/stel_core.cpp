@@ -86,12 +86,12 @@ StelCore::StelCore(const string& LDIR, const string& DATA_ROOT, const boost::cal
 
 	object_pointer_visibility = true;
 	
-	geoDrawer = new GeodesicGridDrawer(9);
+	//geoDrawer = new GeodesicGridDrawer(9);
 }
 
 StelCore::~StelCore()
 {
-	delete geoDrawer;
+	//delete geoDrawer;
 	// release the previous StelObject:
 	selected_object = StelObject();
 	delete navigation;
@@ -377,7 +377,7 @@ double StelCore::draw(int delta_time)
 	// Draw the stars
 	hip_stars->draw(projection, navigation, tone_converter);
 
-geoDrawer->draw(projection,navigation, tone_converter);
+//geoDrawer->draw(projection,navigation, tone_converter);
 
 	// Draw the equatorial grid
 	equ_grid->draw(projection);

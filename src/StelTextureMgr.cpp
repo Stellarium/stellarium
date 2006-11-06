@@ -26,6 +26,7 @@ extern "C" {
 #include <png.h>
 #include "StelTextureMgr.h"
 #include "STexture.h"
+#include "stel_utility.h"
 
 using namespace std;
 
@@ -68,15 +69,16 @@ void StelTextureMgr::setDefaultParams()
 *************************************************************************/
 STexture& StelTextureMgr::createTexture(const string& afilename)
 {
-	string filename = textureDir + afilename;
-	// Currently only PNG is supported
-	FILE * tempFile = fopen(filename.c_str(),"r");
-	if (!tempFile)
+	string filename;
+	if (afilename!="" && afilename[0]=='/')
+		filename = afilename;
+	else
+		filename = textureDir + afilename;
+	if (!StelUtils::fileExists(filename))
 	{
 		cerr << "WARNING : Can't find texture file " << filename << "!" << endl;
 		return NULL_STEXTURE;
 	}
-	fclose(tempFile);
 
 	ManagedSTexture* tex = new ManagedSTexture();
 	

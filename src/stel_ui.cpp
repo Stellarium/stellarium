@@ -24,6 +24,7 @@
 #include <algorithm>
 #include "stel_ui.h"
 #include "stelapp.h"
+#include "stel_core.h"
 #include "stelfontmgr.h"
 #include "stellocalemgr.h"
 #include "stelmodulemgr.h"

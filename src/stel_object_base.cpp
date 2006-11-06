@@ -65,6 +65,7 @@ void StelObjectBase::draw_pointer(int delta_time, const Projector* prj, const Na
 		}
         glEnable(GL_TEXTURE_2D);
         glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
         glTranslatef(screenpos[0], screenpos[1], 0.0f);
         glRotatef((float)local_time/20.,0.,0.,1.);
         glBegin(GL_QUADS );

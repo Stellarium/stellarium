@@ -264,7 +264,7 @@ void LandscapeOldStyle::create(bool _fullpath, stringHash_t param)
 	// Load sides textures
 	nb_side_texs = StelUtils::str_to_int(param["nbsidetex"]);
 	side_texs = new STexture*[nb_side_texs];
-
+	
 	char tmp[255];
 	StelApp::getInstance().getTextureManager().setDefaultParams();
 	for (int i=0;i<nb_side_texs;++i)
