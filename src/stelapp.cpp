@@ -19,6 +19,7 @@
 
 #include "stelapp.h"
 
+#include "stel_core.h"
 #include "viewport_distorter.h"
 #include "stel_utility.h"
 #include "callbacks.hpp"
