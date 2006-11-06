@@ -28,7 +28,8 @@
 #include <cstring>
 #include <cstdio>
 #include <iostream>
-
+#include <cassert>
+ 
 template<class T> class Vector2;
 template<class T> class Vector3;
 template<class T> class Vector4;
