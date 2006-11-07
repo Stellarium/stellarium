@@ -18,7 +18,7 @@
  */
 
 #ifndef _METEOR_MGR_H_
-#define _METEOR__MGR_H_
+#define _METEOR_MGR_H_
 
 #include <vector>
 #include <functional>
@@ -26,19 +26,20 @@
 #include "projector.h"
 #include "navigator.h"
 #include "meteor.h"
+#include "stelmodule.h"
 
-class MeteorMgr
+class MeteorMgr : public StelModule
 {
 
  public:
   MeteorMgr(int zhr, int maxv );  // base_zhr is zenith hourly rate sans meteor shower
   virtual ~MeteorMgr();
+  virtual string getModuleID() const { return "meteors"; }
   void set_ZHR(int zhr);   // set zenith hourly rate
   int get_ZHR(void);   
   void set_max_velocity(int maxv);   // set maximum meteoroid velocity km/s
-  void update(Projector *proj, Navigator* nav, ToneReproductor* eye, int delta_time);          // update positions
-  void draw(Projector *proj, Navigator* nav);		// Draw the meteors
-
+  virtual void update(double delta_time);          // update positions
+  virtual double draw(Projector* prj, const Navigator * nav, ToneReproductor* eye);
 
  private:
   vector<Meteor*> active;		// Vector containing all active meteors

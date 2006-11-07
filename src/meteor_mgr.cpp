@@ -18,6 +18,8 @@
  */
 
 #include "meteor_mgr.h"
+#include "stelapp.h"
+#include "stel_core.h"
 
 MeteorMgr::MeteorMgr(int zhr, int maxv )
 {
@@ -51,8 +53,12 @@ void MeteorMgr::set_max_velocity(int maxv)
 	max_velocity = maxv;
 }
 
-void MeteorMgr::update(Projector *proj, Navigator* nav, ToneReproductor* eye, int delta_time)
+void MeteorMgr::update(double delta_time)
 {
+	Projector * proj = StelApp::getInstance().getCore()->getProjection();
+	Navigator * nav = StelApp::getInstance().getCore()->getNavigation();
+	ToneReproductor * eye = StelApp::getInstance().getCore()->getToneReproductor();
+	
 
 	// step through and update all active meteors
 	int n =0;
@@ -120,7 +126,7 @@ void MeteorMgr::update(Projector *proj, Navigator* nav, ToneReproductor* eye, in
 }
 
 
-void MeteorMgr::draw(Projector *proj, Navigator* nav)
+double MeteorMgr::draw(Projector *prj, const Navigator* nav, ToneReproductor* eye)
 {
 
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -130,9 +136,11 @@ void MeteorMgr::draw(Projector *proj, Navigator* nav)
 	// step through and draw all active meteors
 	for(vector<Meteor*>::iterator iter = active.begin(); iter != active.end(); ++iter)
 	{
-		(*iter)->draw(proj, nav);
+		(*iter)->draw(prj, nav);
 	}
 
 	glEnable(GL_TEXTURE_2D);
+	
+	return 0.0;  // TODO, actually calculate movement on screen
 
 }
