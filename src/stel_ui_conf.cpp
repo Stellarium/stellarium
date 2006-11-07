@@ -1008,7 +1008,7 @@ void StelUI::updateConfigForm(void)
 	}
 	else
 		meteor_rate_144000->setState(false);
-	meteorlbl->setLabel(_("Meteor Rate per minute")+meteorRate);
+	meteorlbl->setLabel(_("Meteor zenith hourly rate")+meteorRate);
 
 	earth_map->setPointerLongitude(core->getObservatory().get_longitude());
 	earth_map->setPointerLatitude(core->getObservatory().get_latitude());

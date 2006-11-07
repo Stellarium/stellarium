@@ -405,12 +405,12 @@ double StelCore::draw(int delta_time)
 	navigation->switchToLocal();
 
 	// Upade meteors
-	meteors->update(projection, navigation, tone_converter, delta_time);
+	meteors->update(delta_time);
 
 	if(!getFlagAtmosphere() || sky_brightness<0.1)
 	{
 		projection->set_orthographic_projection();
-		meteors->draw(projection, navigation);
+		meteors->draw(projection, navigation, tone_converter);
 		projection->reset_perspective_projection();
 	}
 

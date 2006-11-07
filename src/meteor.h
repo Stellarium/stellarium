@@ -36,8 +36,8 @@ class Meteor
  public:
   Meteor( Projector *proj, Navigator *nav, ToneReproductor* eye, double v);
   virtual ~Meteor();
-  bool update(int delta_time);  // update position
-  bool draw(Projector *proj, Navigator* nav);		// Draw the meteor
+  bool update(double delta_time);  // update position
+  bool draw(Projector *proj, const Navigator* nav);		// Draw the meteor
   bool is_alive(void);          // see if burned out yet
 
  private:

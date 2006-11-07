@@ -154,7 +154,7 @@ Meteor::~Meteor()
 }
 
 // returns true if alive
-bool Meteor::update(int delta_time)
+bool Meteor::update(double delta_time)
 {
 
   if(!alive) return(0);
@@ -163,19 +163,19 @@ bool Meteor::update(int delta_time)
     // burning has stopped so magnitude fades out
     // assume linear fade out
 
-    mag -= max_mag * (double)delta_time/500.0f;
+    mag -= max_mag * delta_time/500.0f;
     if( mag < 0 ) alive=0;  // no longer visible
 
   }
 
   // *** would need time direction multiplier to allow reverse time replay
-  position[2] = position[2] - velocity/1000.0f*(double)delta_time;
+  position[2] = position[2] - velocity/1000.0f*delta_time;
 
   // train doesn't extend beyond start of burn
   if( position[2] + velocity*0.5f > start_h ) {
     pos_train[2] = start_h ;
   } else {
-    pos_train[2] -= velocity*(double)delta_time/1000.0f;
+    pos_train[2] -= velocity*delta_time/1000.0f;
   }
 
   //printf("meteor position: %f delta_t %d\n", position[2], delta_time);
@@ -192,7 +192,7 @@ bool Meteor::update(int delta_time)
 
 
 // returns true if visible
-bool Meteor::draw(Projector *proj, Navigator* nav)
+bool Meteor::draw(Projector *proj, const Navigator* nav)
 {
 
 	if(!alive) return(0);
