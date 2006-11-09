@@ -57,6 +57,8 @@ const char *cat_file_names[] = {
   "stars5.cat",
   "stars6.cat",
   "stars7.cat",
+  "stars8.cat",
+  "stars9.cat",
   0
 };
 
@@ -147,6 +149,72 @@ struct ZoneData { // a single Triangle
 };
 
 
+#ifdef WORDS_BIGENDIAN
+
+static
+int UnpackInt(const char *addr,int bits_begin,const int bits_size) {
+  #error someone with a bigendian machine: please implement this
+  #error Parameters: addr,bits_begin,bits_size describe the bitfield as
+  #error implemented in gcc for littleendian machines
+}
+
+static
+unsigned int UnpackUInt(const char *addr,int bits_begin,const int bits_size) {
+}
+
+#else
+
+static
+int UnpackInt(const char *addr,int bits_begin,const int bits_size) {
+  while (bits_begin >= 8) {
+    bits_begin -= 8;
+    addr++;
+  }
+  int rval = ((const int*)addr)[0];
+  const int bits_end = bits_begin + bits_size;
+  if (bits_end <= 32) {
+    if (bits_end < 32) rval <<= (32-bits_end);
+    if (bits_size < 32) rval >>= (32-bits_size);
+  } else {
+    rval >>= bits_begin;
+    const int mask = (1<<(32-bits_begin))-1;
+    rval &= mask;
+    int rval_hi = ((const int*)addr)[1];
+    rval_hi <<= (64-bits_end);
+    rval_hi >>= (32-bits_size);
+    rval_hi &= ~mask;
+    rval |= rval_hi;
+  }
+  return rval;
+}
+
+static
+unsigned int UnpackUInt(const char *addr,int bits_begin,const int bits_size) {
+  while (bits_begin >= 8) {
+    bits_begin -= 8;
+    addr++;
+  }
+  unsigned int rval = ((const unsigned int*)addr)[0];
+  const int bits_end = bits_begin + bits_size;
+  if (bits_end <= 32) {
+    if (bits_begin > 0) rval >>= bits_begin;
+  } else {
+    rval >>= bits_begin;
+    const int mask = (((unsigned int)1)<<(32-bits_begin))-1;
+    rval &= mask;
+    unsigned int rval_hi = ((const unsigned int*)addr)[1];
+    rval_hi <<= (32-bits_begin);
+    rval_hi &= ~mask;
+    rval |= rval_hi;
+  }
+  if (bits_size < 32) rval &= ((((unsigned int)1)<<bits_size)-1);
+  return rval;
+}
+
+#endif
+
+
+
 struct Star3 {  // 6 byte
   int x0:18;
   int x1:18;
@@ -161,7 +229,19 @@ struct Star3 {  // 6 byte
     return pos;
   }
   wstring getNameI18n(void) const {return L"";}
+  void repack(void);
 } __attribute__ ((__packed__)) ;
+
+void Star3::repack(void) {
+  const int _x0  = UnpackInt((const char*)this, 0,18);
+  const int _x1  = UnpackInt((const char*)this,18,18);
+  const unsigned int _b_v = UnpackUInt((const char*)this,36, 7);
+  const unsigned int _mag = UnpackUInt((const char*)this,43, 5);
+  x0 = _x0;
+  x1 = _x1;
+  b_v = _b_v;
+  mag = _mag;
+}
 
 
 struct Star2 {  // 10 byte
@@ -182,10 +262,27 @@ struct Star2 {  // 10 byte
     return pos;
   }
   wstring getNameI18n(void) const {return L"";}
+  void repack(void);
 } __attribute__ ((__packed__));
 
+void Star2::repack(void) {
+  const int _x0  = UnpackInt((const char*)this, 0,20);
+  const int _x1  = UnpackInt((const char*)this,20,20);
+  const int _dx0 = UnpackInt((const char*)this,40,14);
+  const int _dx1 = UnpackInt((const char*)this,54,14);
+  const unsigned int _b_v = UnpackUInt((const char*)this,68, 7);
+  const unsigned int _mag = UnpackUInt((const char*)this,75, 5);
+  x0 = _x0;
+  x1 = _x1;
+  dx0 = _dx0;
+  dx1 = _dx1;
+  b_v = _b_v;
+  mag = _mag;
+}
 
-struct Star1 {
+
+
+struct Star1 { // 28 byte
   int hip:24;                  // 17 bits needed
   unsigned char component_ids; //  5 bits needed
   int x0;                      // 32 bits needed
@@ -202,10 +299,6 @@ struct Star1 {
               + (x0+movement_factor*dx0)*z->axis0
               + (x1+movement_factor*dx1)*z->axis1;
     pos.normalize();
-//    if (hip==87937) {
-//      cout << x0 << ", " << x1 << ", " << dx0 << ", " << dx1
-//           << ", " << movement_factor << endl;
-//    }
     return pos;
   }
   wstring getNameI18n(void) const {
@@ -220,7 +313,32 @@ struct Star1 {
     }
     return L"";
   }
+  void repack(void);
 } __attribute__ ((__packed__));
+
+void Star1::repack(void) {
+  const int _hip  = UnpackInt((const char*)this, 0,24);
+  const unsigned int _cids = UnpackUInt((const char*)this,24, 8);
+  const int _x0  = UnpackInt((const char*)this,32,32);
+  const int _x1  = UnpackInt((const char*)this,64,32);
+  const unsigned int _b_v = UnpackUInt((const char*)this, 96, 8);
+  const unsigned int _mag = UnpackUInt((const char*)this,104, 8);
+  const unsigned int _sp_int = UnpackUInt((const char*)this,112,16);
+  const int _dx0 = UnpackInt((const char*)this,128,32);
+  const int _dx1 = UnpackInt((const char*)this,160,32);
+  const int _plx = UnpackInt((const char*)this,192,32);
+  hip = _hip;
+  component_ids = _cids;
+  x0 = _x0;
+  x1 = _x1;
+  b_v = _b_v;
+  mag = _mag;
+  sp_int = _sp_int;
+  dx0 = _dx0;
+  dx1 = _dx1;
+  plx = _plx;
+}
+
 
 
 template <class Star>
@@ -756,6 +874,11 @@ ZoneArray *ZoneArray::create(const HipStarMgr &hip_star_mgr,
              type,level,mag_min,mag_range,mag_steps);
       switch (type) {
         case 0:
+            // When this assertion fails you must redefine Star1
+            // for your compiler.
+            // Because your compiler does not pack the data,
+            // which is crucial for this application.
+          assert(sizeof(Star1) == 28);
           rval = new ZoneArray1(f,hip_star_mgr,level,
                                 mag_min,mag_range,mag_steps);
           if (rval == 0) {
@@ -764,6 +887,11 @@ ZoneArray *ZoneArray::create(const HipStarMgr &hip_star_mgr,
           }
           break;
         case 1:
+            // When this assertion fails you must redefine Star2
+            // for your compiler.
+            // Because your compiler does not pack the data,
+            // which is crucial for this application.
+          assert(sizeof(Star2) == 10);
           rval = new SpecialZoneArray<Star2>(f,hip_star_mgr,level,
                                              mag_min,mag_range,mag_steps);
           if (rval == 0) {
@@ -772,6 +900,11 @@ ZoneArray *ZoneArray::create(const HipStarMgr &hip_star_mgr,
           }
           break;
         case 2:
+            // When this assertion fails you must redefine Star3
+            // for your compiler.
+            // Because your compiler does not pack the data,
+            // which is crucial for this application.
+          assert(sizeof(Star3) == 6);
           rval = new SpecialZoneArray<Star3>(f,hip_star_mgr,level,
                                              mag_min,mag_range,mag_steps);
           if (rval == 0) {
@@ -816,18 +949,6 @@ ZoneArray::ZoneArray(const HipStarMgr &hip_star_mgr,int level,
 struct TmpZoneData {
   int size;
 };
-
-//static inline
-//int DoubleToInt(double x) {
-//  return (int)floor(0.5+x*0x7FFFFFFF);
-//}
-
-//static inline
-//double IntToDouble(int x) {
-//  double rval = x;
-//  rval /= 0x7FFFFFFF;
-//  return rval;
-//}
 
 
 template<class Star>
@@ -883,6 +1004,10 @@ SpecialZoneArray<Star>::SpecialZoneArray(FILE *f,
           getZones()[z].stars = s;
           s += getZones()[z].size;
         }
+#if (defined(WORDS_BIGENDIAN) || !defined(__GNUC__))
+        s = stars;
+        for (int i=0;i<nr_of_stars;i++,s++) s->repack();
+#endif
       }
     }
   }
@@ -953,18 +1078,23 @@ wstring HipStarMgr::getSciName(int hip) {
 void HipStarMgr::init(const InitParser& conf, LoadingBar& lb) {
   load_data(lb);
   StelApp::getInstance().getTextureManager().setDefaultParams();
-  starTexture = &StelApp::getInstance().getTextureManager().createTexture("star16x16.png");  // Load star texture no mipmap
+    // Load star texture no mipmap:
+  starTexture = &StelApp::getInstance().getTextureManager()
+                  .createTexture("star16x16.png");
   double fontSize = 12;
-  starFont = &StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getLocaleMgr().getSkyLanguage(), fontSize);
-  	setFlagStars(conf.get_boolean("astro:flag_stars"));
-	setFlagNames(conf.get_boolean("astro:flag_star_name"));	
-	setScale(conf.get_double ("stars:star_scale"));
-	setMagScale(conf.get_double ("stars:star_mag_scale"));
-	setTwinkleAmount(conf.get_double ("stars:star_twinkle_amount"));
-	setMaxMagName(conf.get_double ("stars:max_mag_star_name"));
-	setFlagTwinkle(conf.get_boolean("stars:flag_star_twinkle"));
-	setFlagPointStar(conf.get_boolean("stars:flag_point_star"));
-	setLimitingMag(conf.get_double("stars", "star_limiting_mag", 6.5f));
+  starFont = &StelApp::getInstance().getFontManager()
+                .getStandardFont(StelApp::getInstance()
+                                   .getLocaleMgr().getSkyLanguage(),
+                                 fontSize);
+  setFlagStars(conf.get_boolean("astro:flag_stars"));
+  setFlagNames(conf.get_boolean("astro:flag_star_name"));
+  setScale(conf.get_double ("stars:star_scale"));
+  setMagScale(conf.get_double ("stars:star_mag_scale"));
+  setTwinkleAmount(conf.get_double ("stars:star_twinkle_amount"));
+  setMaxMagName(conf.get_double ("stars:max_mag_star_name"));
+  setFlagTwinkle(conf.get_boolean("stars:flag_star_twinkle"));
+  setFlagPointStar(conf.get_boolean("stars:flag_point_star"));
+  setLimitingMag(conf.get_double("stars", "star_limiting_mag", 6.5f));
 }
 
 void HipStarMgr::setGrid(void) {
@@ -1218,7 +1348,7 @@ void SpecialZoneArray<Star>::draw(int index,bool is_inside,
   for (const Star *s=z->getStars();s<end;s++) {
     if (is_inside
         ? prj->project_j2000(s->getJ2000Pos(z,movement_factor),xy)
-	    : prj->project_j2000_check(s->getJ2000Pos(z,movement_factor),xy)) {
+        : prj->project_j2000_check(s->getJ2000Pos(z,movement_factor),xy)) {
       if (0 > (draw_point ? hip_star_mgr.drawPointStar(xy,rmag_table[s->mag],
                                                        color_table[s->b_v])
                           : hip_star_mgr.drawStar(xy,rmag_table[s->mag],
@@ -1376,8 +1506,8 @@ double HipStarMgr::draw(Projector *prj, const Navigator *nav, ToneReproductor *e
     exit_loop:
 //if ((count&63)==0) cout << endl;
     prj->reset_perspective_projection();
-	
-	return 0.;
+
+    return 0.;
 }
 
 
@@ -1389,10 +1519,9 @@ double HipStarMgr::draw(Projector *prj, const Navigator *nav, ToneReproductor *e
 StelObject HipStarMgr::search(Vec3d pos) const {
 assert(0);
   pos.normalize();
-	vector<StelObject> v = searchAround(pos,
-                                       0.8, // just an arbitrary number
-                                       NULL, NULL
-                                       );
+  vector<StelObject> v = searchAround(pos,
+                                      0.8, // just an arbitrary number
+                                      NULL, NULL);
   StelObject nearest;
   double cos_angle_nearest = -10.0;
   for (vector<StelObject>::const_iterator it(v.begin());it!=v.end();it++) {
@@ -1408,9 +1537,9 @@ assert(0);
 // Return a stl vector containing the stars located
 // inside the lim_fov circle around position v
 vector<StelObject> HipStarMgr::searchAround(const Vec3d& vv,
-                                             double lim_fov, // degrees
-                                            const Navigator * nav, const Projector * prj
-                                             ) const {
+                                            double lim_fov, // degrees
+                                            const Navigator * nav,
+                                            const Projector * prj) const {
   Vec3d v(vv);
   v.normalize();
     // find any vectors h0 and h1 (length 1), so that h0*v=h1*v=h0*h1=0
@@ -1496,7 +1625,7 @@ void SpecialZoneArray<Star>::searchAround(int index,const Vec3d &v,
 //! @brief Update i18 names from english names according to passed translator
 //! The translation is done using gettext with translated strings defined in translations.h
 void HipStarMgr::updateI18n() {
-	Translator trans = StelApp::getInstance().getLocaleMgr().getSkyTranslator();
+  Translator trans = StelApp::getInstance().getLocaleMgr().getSkyTranslator();
   common_names_map_i18n.clear();
   common_names_index_i18n.clear();
   for (map<int,string>::iterator it(common_names_map.begin());
@@ -1508,7 +1637,7 @@ void HipStarMgr::updateI18n() {
     transform(t.begin(), t.end(), t_cap.begin(), ::toupper);
     common_names_index_i18n[t_cap] = i;
   }
-	starFont = &StelApp::getInstance().getFontManager().getStandardFont(trans.getTrueLocaleName(), fontSize);
+  starFont = &StelApp::getInstance().getFontManager().getStandardFont(trans.getTrueLocaleName(), fontSize);
 }
 
 
@@ -1655,8 +1784,10 @@ vector<wstring> HipStarMgr::listMatchingObjectsI18n(
 
 //! Define font file name and size to use for star names display
 void HipStarMgr::setFontSize(double newFontSize) {
-	fontSize = newFontSize;
-	starFont = &StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getLocaleMgr().getSkyLanguage(), fontSize);
+  fontSize = newFontSize;
+  starFont = &StelApp::getInstance().getFontManager().getStandardFont(
+               StelApp::getInstance().getLocaleMgr().getSkyLanguage(),
+               fontSize);
 }
 
 void HipStarMgr::updateSkyCulture(LoadingBar& lb)
