@@ -45,6 +45,12 @@
 #include "stelskyculturemgr.h"
 #include "StelTextureMgr.h"
 
+typedef int Int32;
+typedef unsigned int Uint32;
+typedef short int Int16;
+typedef unsigned short int Uint16;
+
+
 #define NR_OF_HIP 120416
 
 static
@@ -152,20 +158,20 @@ struct ZoneData { // a single Triangle
 #ifdef WORDS_BIGENDIAN
 
 static
-int UnpackInt(const char *addr,int bits_begin,const int bits_size) {
+int UnpackBits(const char *addr,int bits_begin,const int bits_size) {
   #error someone with a bigendian machine: please implement this
   #error Parameters: addr,bits_begin,bits_size describe the bitfield as
   #error implemented in gcc for littleendian machines
 }
 
 static
-unsigned int UnpackUInt(const char *addr,int bits_begin,const int bits_size) {
+unsigned int UnpackUBits(const char *addr,int bits_begin,const int bits_size) {
 }
 
 #else
 
 static
-int UnpackInt(const char *addr,int bits_begin,const int bits_size) {
+int UnpackBits(const char *addr,int bits_begin,const int bits_size) {
   while (bits_begin >= 8) {
     bits_begin -= 8;
     addr++;
@@ -189,7 +195,7 @@ int UnpackInt(const char *addr,int bits_begin,const int bits_size) {
 }
 
 static
-unsigned int UnpackUInt(const char *addr,int bits_begin,const int bits_size) {
+unsigned int UnpackUBits(const char *addr,int bits_begin,const int bits_size) {
   while (bits_begin >= 8) {
     bits_begin -= 8;
     addr++;
@@ -233,10 +239,10 @@ struct Star3 {  // 6 byte
 } __attribute__ ((__packed__)) ;
 
 void Star3::repack(void) {
-  const int _x0  = UnpackInt((const char*)this, 0,18);
-  const int _x1  = UnpackInt((const char*)this,18,18);
-  const unsigned int _b_v = UnpackUInt((const char*)this,36, 7);
-  const unsigned int _mag = UnpackUInt((const char*)this,43, 5);
+  const int _x0  = UnpackBits((const char*)this, 0,18);
+  const int _x1  = UnpackBits((const char*)this,18,18);
+  const unsigned int _b_v = UnpackUBits((const char*)this,36, 7);
+  const unsigned int _mag = UnpackUBits((const char*)this,43, 5);
   x0 = _x0;
   x1 = _x1;
   b_v = _b_v;
@@ -266,12 +272,12 @@ struct Star2 {  // 10 byte
 } __attribute__ ((__packed__));
 
 void Star2::repack(void) {
-  const int _x0  = UnpackInt((const char*)this, 0,20);
-  const int _x1  = UnpackInt((const char*)this,20,20);
-  const int _dx0 = UnpackInt((const char*)this,40,14);
-  const int _dx1 = UnpackInt((const char*)this,54,14);
-  const unsigned int _b_v = UnpackUInt((const char*)this,68, 7);
-  const unsigned int _mag = UnpackUInt((const char*)this,75, 5);
+  const int _x0  = UnpackBits((const char*)this, 0,20);
+  const int _x1  = UnpackBits((const char*)this,20,20);
+  const int _dx0 = UnpackBits((const char*)this,40,14);
+  const int _dx1 = UnpackBits((const char*)this,54,14);
+  const unsigned int _b_v = UnpackUBits((const char*)this,68, 7);
+  const unsigned int _mag = UnpackUBits((const char*)this,75, 5);
   x0 = _x0;
   x1 = _x1;
   dx0 = _dx0;
@@ -285,12 +291,12 @@ void Star2::repack(void) {
 struct Star1 { // 28 byte
   int hip:24;                  // 17 bits needed
   unsigned char component_ids; //  5 bits needed
-  int x0;                      // 32 bits needed
-  int x1;                      // 32 bits needed
+  Int32 x0;                    // 32 bits needed
+  Int32 x1;                    // 32 bits needed
   unsigned char b_v;           //  7 bits needed
   unsigned char mag;           //  8 bits needed
-  unsigned short sp_int;       // 14 bits needed
-  int dx0,dx1,plx;
+  Uint16 sp_int;               // 14 bits needed
+  Int32 dx0,dx1,plx;
   enum {max_pos_val=0x7FFFFFFF};
   StelObject createStelObject(const SpecialZoneArray<Star1> *a,
                               const SpecialZoneData<Star1> *z) const;
@@ -317,16 +323,16 @@ struct Star1 { // 28 byte
 } __attribute__ ((__packed__));
 
 void Star1::repack(void) {
-  const int _hip  = UnpackInt((const char*)this, 0,24);
-  const unsigned int _cids = UnpackUInt((const char*)this,24, 8);
-  const int _x0  = UnpackInt((const char*)this,32,32);
-  const int _x1  = UnpackInt((const char*)this,64,32);
-  const unsigned int _b_v = UnpackUInt((const char*)this, 96, 8);
-  const unsigned int _mag = UnpackUInt((const char*)this,104, 8);
-  const unsigned int _sp_int = UnpackUInt((const char*)this,112,16);
-  const int _dx0 = UnpackInt((const char*)this,128,32);
-  const int _dx1 = UnpackInt((const char*)this,160,32);
-  const int _plx = UnpackInt((const char*)this,192,32);
+  const int _hip  = UnpackBits((const char*)this, 0,24);
+  const unsigned int _cids = UnpackUBits((const char*)this,24, 8);
+  const int _x0  = UnpackBits((const char*)this,32,32);
+  const int _x1  = UnpackBits((const char*)this,64,32);
+  const unsigned int _b_v = UnpackUBits((const char*)this, 96, 8);
+  const unsigned int _mag = UnpackUBits((const char*)this,104, 8);
+  const unsigned int _sp_int = UnpackUBits((const char*)this,112,16);
+  const int _dx0 = UnpackBits((const char*)this,128,32);
+  const int _dx1 = UnpackBits((const char*)this,160,32);
+  const int _plx = UnpackBits((const char*)this,192,32);
   hip = _hip;
   component_ids = _cids;
   x0 = _x0;
