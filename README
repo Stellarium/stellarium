@@ -66,7 +66,7 @@ Windows/MacOSX and in $HOME/.stellarium/ on a unix system.
     support.  Have a look at http://digitaliseducation.com if you want to buy a 
 	planetarium projector running stellarium!
 
-	Johan Meuris for his stuning drawings of the constellations.
+	Johan Meuris for his stunning drawings of the constellations.
 	  (Johan is now an official member of the project)
 		
 	Johannes Gajdosik for his work on planets computation and projection.
@@ -92,7 +92,7 @@ Windows/MacOSX and in $HOME/.stellarium/ on a unix system.
 	Jesse Jones for his callback library.
 	The celestia project team from which I borrowed many code parts (GPL license).
 	The libnova team for their planet calculation algorithms (GPL license).
-	All the SDL team for their remarquable work.
+	All the SDL team for their remarkable work.
 	All the sourceforge team for hosting my project.
 	Cedric Delfosse for his precious help on debian port.
 	The GEPI team from the Observatoire Astronomique de Paris for 
@@ -209,7 +209,7 @@ Windows/MacOSX and in $HOME/.stellarium/ on a unix system.
 4. Graphics
 	4.1 All graphics are copyrighted by Fabien Chereau (GPL) except the ones
 		mentioned below :
-    4.2 The Earth texture was created by NASA (Reto Stockli, NASA Earth 
+    4.2 The "earthmap" texture was created by NASA (Reto Stockli, NASA Earth 
 		Observatory) using data from the MODIS instrument aboard the 
 		Terra satellite (Public Domain). See chapter 10.1 for full credits.
 	4.4 Moon texture map is Courtesy USGS Astrogeology Research Program,
@@ -236,11 +236,18 @@ Windows/MacOSX and in $HOME/.stellarium/ on a unix system.
    		(jomejome at users.sourceforge.net ) http://users.pandora.be/jomejom/
 		License: released under the Free Art License 
 		(http://artlibre.org/licence.php/lalgb.html)
+   4.11 The "earth-clouds" texture includes imagery owned by NASA.  
+        See NASA's Visible Earth project at http://visibleearth.nasa.gov/
+        License: 1. The imagery is free of licensing fees
+                 2. NASA requires that they be provided a credit 
+                    as the owners of the imagery
+        The cloud texturing was taken from Celestia (GPL), 
+        http://www.shatters.net/celestia/
    	
 --------------------------------------------------------------------------------
 9. LICENSE
 --------------------------------------------------------------------------------
-   Copyright (C) 2004 Fabien Chereau fab.chereau (at) free.fr
+   Copyright (C) 2004-2006 Fabien Chereau fab.chereau (at) free.fr
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU General Public License
@@ -369,3 +376,4 @@ Windows/MacOSX and in $HOME/.stellarium/ on a unix system.
 	notice appears in all copies. This software is provided "as is" without
 	express or implied warranty, and with no claim as to its suitability for
 	any purpose.
+
