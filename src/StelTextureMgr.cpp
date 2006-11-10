@@ -126,12 +126,14 @@ STexture& StelTextureMgr::createTexture(const string& afilename)
 	if (!tex->texels)
 		return NULL_STEXTURE;
 
+/* isNoPowerOfTwoAllowed does not seem to be related to square texture requirements - Rob
+
 	if (!isNoPowerOfTwoAllowed && tex->height!=tex->width)
 	{
 		cerr << "Can't load non squared textures for texture: " << filename << endl;
 		return NULL_STEXTURE;
 	}
-
+*/
 	if (!isNoPowerOfTwoAllowed && (!StelUtils::isPowerOfTwo(tex->height) || !StelUtils::isPowerOfTwo(tex->width)))
 	{
 		cerr << "Can't load non power of 2 textures for texture: " << filename << endl;
