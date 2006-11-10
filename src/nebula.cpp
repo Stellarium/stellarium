@@ -24,7 +24,6 @@
 #include "s_font.h"
 #include "navigator.h"
 #include "stel_utility.h"
-//#include "s_gui.h"
 #include "stelapp.h"
 #include "StelTextureMgr.h"
 

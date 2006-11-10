@@ -25,19 +25,15 @@ extern "C" {
 }
 #include <png.h>
 #include "StelTextureMgr.h"
-#include "STexture.h"
 #include "stel_utility.h"
 
 using namespace std;
 
 // Initialize statics
 STexture StelTextureMgr::NULL_STEXTURE;
+StelTextureMgr::PngLoader StelTextureMgr::pngLoader;
+StelTextureMgr::JpgLoader StelTextureMgr::jpgLoader;
 
-class ManagedSTexture : public STexture
-{
-	friend class StelTextureMgr;
-};
-	
 /*************************************************************************
  Constructor for the StelTextureMgr class
 *************************************************************************/
@@ -45,6 +41,14 @@ StelTextureMgr::StelTextureMgr(const std::string& atextureDir) : textureDir(atex
 {
 	// Init default values
 	setDefaultParams();
+	
+	// Add default loaders
+	registerImageLoader("png", &pngLoader);
+	registerImageLoader("PNG", &pngLoader);
+	registerImageLoader("jpeg", &jpgLoader);
+	registerImageLoader("JPEG", &jpgLoader);
+	registerImageLoader("jpg", &jpgLoader);
+	registerImageLoader("JPG", &jpgLoader);
 }
 
 /*************************************************************************
@@ -52,6 +56,31 @@ StelTextureMgr::StelTextureMgr(const std::string& atextureDir) : textureDir(atex
 *************************************************************************/
 StelTextureMgr::~StelTextureMgr()
 {}
+
+/*************************************************************************
+ Initialize some variable from the openGL context.
+ Must be called after the creation of the openGL context.
+*************************************************************************/
+void StelTextureMgr::init()
+{
+	// Check for extensions
+	const GLubyte * strExt = glGetString(GL_EXTENSIONS);
+	if (glGetError()!=GL_NO_ERROR)
+	{
+		cerr << "Error while requesting openGL extensions" << endl;
+		return;
+	}
+
+	// Get whether floating point textures are supported on this video card
+	// This enable for high dynamic range textures to be loaded
+	isFloatingPointTexAllowed = gluCheckExtension ((const GLubyte*)"GL_ARB_texture_float", strExt);
+	
+	// Get whether non-power-of-2 and non square 2D textures are supported on this video card
+	isNoPowerOfTwoAllowed = gluCheckExtension ((const GLubyte*)"GL_ARB_texture_non_power_of_two", strExt);
+	
+	// Get Maximum Texture Size Supported by the video card
+	glGetIntegerv(GL_MAX_TEXTURE_SIZE, &maxTextureSize);
+}
 
 /*************************************************************************
  Set default parameters for Mipmap mode, wrap mode, min and mag filters
@@ -83,19 +112,37 @@ STexture& StelTextureMgr::createTexture(const string& afilename)
 
 	ManagedSTexture* tex = new ManagedSTexture();
 	
-	const string extension = filename.substr((filename.find_last_of('.', filename.size()))+1);
-	if (extension=="jpeg" || extension=="jpg" || extension=="JPEG" || extension=="JPG")
-		readJPEGFromFile(filename, *tex);
-	else if (extension=="png" || extension=="PNG")
-		readPNGFromFile(filename, *tex);
+	const string extension = filename.substr((filename.find_last_of('.', filename.size()))+1);\
+	
+	std::map<std::string, ImageLoader*>::iterator loadFuncIter = imageLoaders.find(extension);
+	if (loadFuncIter!=imageLoaders.end())
+		loadFuncIter->second->loadImage(filename, *tex);
 	else
 	{
-		cerr << "Unknown image file extension: " << extension << endl;
+		cerr << "Unsupported image file extension: " << extension << " for file: " << filename << endl;
 		return NULL_STEXTURE;
 	}
 
 	if (!tex->texels)
 		return NULL_STEXTURE;
+
+	if (!isNoPowerOfTwoAllowed && tex->height!=tex->width)
+	{
+		cerr << "Can't load non squared textures for texture: " << filename << endl;
+		return NULL_STEXTURE;
+	}
+
+	if (!isNoPowerOfTwoAllowed && (!StelUtils::isPowerOfTwo(tex->height) || !StelUtils::isPowerOfTwo(tex->width)))
+	{
+		cerr << "Can't load non power of 2 textures for texture: " << filename << endl;
+		return NULL_STEXTURE;
+	}
+
+	// Check that the image size is compatible with the hardware 
+	if (tex->width>maxTextureSize)
+	{
+		cerr << "Warning: texture " << filename << " is larger than " << maxTextureSize << " pixels and might be not supported." << endl;
+	}
 
 	tex->minFilter = (mipmapsMode==true) ? GL_LINEAR_MIPMAP_NEAREST : minFilter;
 	tex->magFilter = magFilter;
@@ -152,7 +199,7 @@ STexture& StelTextureMgr::createTexture(const string& afilename)
  * CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 *************************************************************************/
-bool StelTextureMgr::readPNGFromFile(const string& filename, ManagedSTexture& texinfo)
+bool StelTextureMgr::PngLoader::loadImage(const string& filename, ManagedSTexture& texinfo)
 {
 	png_byte magic[8];
 	png_structp png_ptr;
@@ -296,7 +343,7 @@ bool StelTextureMgr::readPNGFromFile(const string& filename, ManagedSTexture& te
 		row_pointers[i] = (png_bytep)(texinfo.texels +
 		                              ((texinfo.height - (i + 1)) * texinfo.width * texinfo.internalFormat));
 	}
-
+	
 	/* read pixel data using row pointers */
 	png_read_image (png_ptr, row_pointers);
 
@@ -339,7 +386,7 @@ bool StelTextureMgr::readPNGFromFile(const string& filename, ManagedSTexture& te
  * CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-bool StelTextureMgr::readJPEGFromFile (const string& filename, ManagedSTexture& texinfo)
+bool StelTextureMgr::JpgLoader::loadImage(const string& filename, ManagedSTexture& texinfo)
 {
 	FILE *fp = NULL;
 	struct jpeg_decompress_struct cinfo;
@@ -365,7 +412,7 @@ bool StelTextureMgr::readJPEGFromFile (const string& filename, ManagedSTexture& 
 	 * is no advanced error handling.  It would be a good idea to
 	 * setup an error manager with a setjmp/longjmp mechanism.
 	 * In this function, if an error occurs during reading the JPEG
-	 * file, the libjpeg abords the program.
+	 * file, the libjpeg aborts the program.
 	 * See jpeg_mem.c (or RTFM) for an advanced error handling which
 	 * prevent this kind of behavior (http://tfc.duke.free.fr)
 	 */

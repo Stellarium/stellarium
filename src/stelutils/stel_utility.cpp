@@ -406,6 +406,9 @@ namespace StelUtils {
 		fin.close();
 		return false;
 	}
+	
+	//! Check if a number is a power of 2
+	bool isPowerOfTwo (int value) {return (value & -value) == value;}
 }
 
 // convert string int ISO 8601-like format [+/-]YYYY-MM-DDThh:mm:ss (no timzone offset)

@@ -21,9 +21,23 @@
 #define STELTEXTUREMGR_H_
 
 #include <string>
+#include <map>
 #include "SDL_opengl.h"
+#include "STexture.h"
 
-class STexture;
+class ManagedSTexture : public STexture
+{
+	friend class StelTextureMgr;
+	friend class ImageLoader;
+};
+
+class ImageLoader
+{
+public:
+	virtual bool loadImage(const std::string& filename, ManagedSTexture& texinfo) = 0;
+private:
+	void setWH(ManagedSTexture& texinfo, GLsizei w, GLsizei h) {texinfo.width = w; texinfo.height = h;}
+};
 
 /**
  * Class used to manage textures loading and manipulation.
@@ -34,6 +48,10 @@ class StelTextureMgr
 public:
 	StelTextureMgr(const std::string& textureDir);
 	virtual ~StelTextureMgr();
+	
+	//! Initialize some variable from the openGL contex.
+	//! Must be called after the creation of the GLContext.
+	void init();
 	
 	//! Load an image from a file and create a new texture from it
 	//! @param the texture file name, can be absolute path if starts with '/' otherwise
@@ -61,11 +79,16 @@ public:
 	
 	//! Set default parameters for Mipmap mode, wrap mode, min and mag filters
 	void setDefaultParams();
+	
+	//! Register a new image loader for a given image file extension
+	void registerImageLoader(const std::string& fileExtension, ImageLoader* loader)
+	{
+		imageLoaders[fileExtension] = loader;
+	}
 private:
-	//! Load a PNG image from a file. Can be LUMINANCE, LUMINANCE+ALPHA, RGB, RGBA. 
-	bool readPNGFromFile(const std::string& filename, class ManagedSTexture& texinfo);
-	//! Load a JPG image from a file. Can be LUMINANCE or RGB.
-	bool readJPEGFromFile (const std::string& filename, ManagedSTexture& texinfo);
+	
+	// List of image loaders providing image loading for the given files extensions
+	std::map<std::string, ImageLoader*> imageLoaders;
 	
 	std::string textureDir;
 	bool mipmapsMode;
@@ -73,7 +96,31 @@ private:
 	GLint minFilter;
 	GLint magFilter;
 	
+	// The maximum texture size supported by the video card
+	GLint maxTextureSize;
+	
+	// Whether GL_ARB_texture_float is supported on this card
+	bool isFloatingPointTexAllowed;
+	
+	// Whether ARB_texture_non_power_of_two is supported on this card
+	bool isNoPowerOfTwoAllowed;
+	
+	// The null texture to retrun in case of problems
 	static STexture NULL_STEXTURE;
+	
+	// Define a PNG loader. This implementation supports LUMINANCE, LUMINANCE+ALPHA, RGB, RGBA. 
+	class PngLoader : public ImageLoader
+	{
+		virtual bool loadImage(const std::string& filename, ManagedSTexture& texinfo);
+	};
+	static PngLoader pngLoader;
+	
+	// Define a JPG loader. This implementation supports LUMINANCE or RGB.
+	class JpgLoader : public ImageLoader
+	{
+		virtual bool loadImage(const std::string& filename, ManagedSTexture& texinfo);
+	};
+	static JpgLoader jpgLoader;
 };
 
 #endif /*STELTEXTUREMGR_H_*/
