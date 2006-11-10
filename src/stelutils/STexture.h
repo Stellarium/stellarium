@@ -41,14 +41,15 @@ public:
 	//! Return the average texture luminance.
 	//! @return 0 is black, 1 is white
     float getAverageLuminance(void) const;
-protected:
-	GLuint id;
-	GLsizei width;
+    
+    GLsizei width;
 	GLsizei height;
 	
 	GLenum format;
 	GLint internalFormat;
 	GLubyte *texels;
+protected:
+	GLuint id;
 	
 	std::string fullPath;
 	bool mipmapsMode;

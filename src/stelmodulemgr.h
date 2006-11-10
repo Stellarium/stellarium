@@ -60,7 +60,68 @@ public:
 		}
 		return iter->second;
 	}
-	
+
+	//! Implement map::forward_iterator so that we can easily iterate through registered modules
+   class Iterator : public std::iterator<std::forward_iterator_tag, StelModule*>
+	{
+   public:
+      Iterator(std::map<string, StelModule*>::iterator aiter) : iter(aiter) {}
+     ~Iterator() {}
+
+      // The assignment and relational operators are straightforward
+      Iterator& operator=(const Iterator& other)
+      {
+         iter = other.iter;
+         return(*this);
+      }
+
+      bool operator==(const Iterator& other)
+      {
+         return(iter == other.iter);
+      }
+
+      bool operator!=(const Iterator& other)
+      {
+         return(iter != other.iter);
+      }
+
+      Iterator& operator++()
+      {
+      	++iter;
+        return(*this);
+      }
+      
+      Iterator operator++(int)
+      {
+         Iterator tmp(*this);
+         ++(*this);
+         return(tmp);
+      }
+
+      // Return a reference to the StelModule*
+      StelModule& operator*()
+      {
+         return *(iter->second);
+      }
+
+      StelModule* operator->()
+      {
+         return &(operator*());
+      }
+
+   private:
+      std::map<string, StelModule*>::iterator iter;
+   };
+
+   Iterator begin()
+   {
+      return(Iterator(modules.begin()));
+   }
+
+   Iterator end()
+   {
+      return(Iterator(modules.end()));
+   }
 private:
 	
 	//! The main module list
