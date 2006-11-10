@@ -34,6 +34,7 @@ class ManagedSTexture : public STexture
 class ImageLoader
 {
 public:
+	virtual ~ImageLoader() {;}
 	virtual bool loadImage(const std::string& filename, ManagedSTexture& texinfo) = 0;
 private:
 	void setWH(ManagedSTexture& texinfo, GLsizei w, GLsizei h) {texinfo.width = w; texinfo.height = h;}
