@@ -43,8 +43,7 @@ StelApp* StelApp::singleton = NULL;
 *************************************************************************/
 StelApp::StelApp(const string& CDIR, const string& LDIR, const string& DATA_ROOT) :
 		frame(0), timefr(0), timeBase(0), fps(0), maxfps(10000.f),  FlagTimePause(0),
-		is_mouse_moving_horiz(false), is_mouse_moving_vert(false), draw_mode(StelApp::DM_NONE),
-		initialized(0)
+		is_mouse_moving_horiz(false), is_mouse_moving_vert(false), draw_mode(StelApp::DM_NORMAL)
 {
 	// Can't create 2 StelApp instances
 	assert(!singleton);
@@ -209,12 +208,12 @@ void StelApp::init(void)
 	}
 
 	// don't mess with SDL init if already initialized earlier
-	if(!initialized)
-	{
-		screenW = conf.get_int("video:screen_w");
-		screenH = conf.get_int("video:screen_h");
-		initSDL(screenW, screenH, conf.get_int("video:bbp_mode"), conf.get_boolean("video:fullscreen"), getDataFilePath("icon.bmp"));
-	}
+	screenW = conf.get_int("video:screen_w");
+	screenH = conf.get_int("video:screen_h");
+	initSDL(screenW, screenH, conf.get_int("video:bbp_mode"), conf.get_boolean("video:fullscreen"), getDataFilePath("icon.bmp"));
+
+	// Initialize after creation of openGL context
+	textureMgr->init();
 
 	// Clear screen, this fixes a strange artifact at loading time in the upper top corner.
 	glClear(GL_COLOR_BUFFER_BIT);
@@ -247,11 +246,10 @@ skyCultureMgr->init(conf);
 	// TODO: Need way to update settings from config without reinitializing whole gui
 	ui->init(conf);
 
-	if(!initialized) ui->init_tui();  // don't reinit tui since probably called from there
-	else ui->localizeTui();  // update translations/fonts as needed
+	ui->init_tui();  // don't reinit tui since probably called from there
 
 	// Initialisation of the color scheme
-	draw_mode = StelApp::DM_NONE;  // fool caching
+	draw_mode = StelApp::DM_NORMAL;  // fool caching
 	setVisionModeNormal();
 	if (conf.get_boolean("viewing:flag_night")) setVisionModeNight();
 
@@ -262,8 +260,6 @@ skyCultureMgr->init(conf);
 
 	// play startup script, if available
 	if(scripts) scripts->play_startup_script();
-
-	initialized = 1;
 }
 
 void StelApp::update(int delta_time)

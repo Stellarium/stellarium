@@ -21,12 +21,9 @@
 #define _METEOR_MGR_H_
 
 #include <vector>
-#include <functional>
-
-#include "projector.h"
-#include "navigator.h"
 #include "meteor.h"
 #include "stelmodule.h"
+
 
 class MeteorMgr : public StelModule
 {

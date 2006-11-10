@@ -23,13 +23,9 @@
 #include <string>
 #include <map>
 #include <ctime>
+#include "vecmath.h"
 
 using namespace std;
-
-// Predeclaration for compilation speed
-template<class T> class Vector3;
-typedef Vector3<float>	Vec3f;
-typedef Vector3<double>	Vec3d;
 
 typedef map< string, string > stringHash_t;
 typedef stringHash_t::const_iterator stringHashIter_t;
@@ -137,6 +133,9 @@ namespace StelUtils {
 	//! Check if a file exist
 	//! May require optimization
 	bool fileExists(const std::string& fileName);
+	
+	//! Check if a number is a power of 2
+	bool isPowerOfTwo (int value);
 }
 
 // General Calendar Functions

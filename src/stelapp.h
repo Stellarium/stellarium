@@ -255,10 +255,8 @@ private:
 	SDL_Cursor *Cursor;
 
 	//! Possible drawing modes
-	enum DRAWMODE { DM_NORMAL=0, DM_NIGHT, DM_NONE };
+	enum DRAWMODE { DM_NORMAL=0, DM_NIGHT};
 	DRAWMODE draw_mode;					// Current draw mode
-	bool initialized;  // has the init method been called yet?
-
 };
 
 #endif

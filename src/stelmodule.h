@@ -84,6 +84,10 @@ public:
 	//! Get the email adress of the module author
 	virtual string getAuthorEmail() {return "http://stellarium.org";}
 	
+	//! Get whether the module is an external module or if it belongs to the standard stellarium package
+	//! The draw and update method is automatically called for external modules
+	virtual bool isExternal() {return false;}
+	
 	///////////////////////////////////////////////////////////////////////////
 	// Properties managment
 	

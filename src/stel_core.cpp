@@ -129,6 +129,13 @@ StelCore::~StelCore()
 		delete geodesic_grid;
 		geodesic_grid = NULL;
 	}
+	
+	StelModuleMgr& mmgr = StelApp::getInstance().getModuleMgr();
+	for (StelModuleMgr::Iterator iter=mmgr.begin();iter!=mmgr.end();++iter)
+	{
+		if (iter->isExternal())
+			delete &(*iter);
+	}
 }
 
 // Load core data and initialize with default values
@@ -378,6 +385,12 @@ double StelCore::draw(int delta_time)
 	hip_stars->draw(projection, navigation, tone_converter);
 
 //geoDrawer->draw(projection,navigation, tone_converter);
+	StelModuleMgr& mmgr = StelApp::getInstance().getModuleMgr();
+	for (StelModuleMgr::Iterator iter=mmgr.begin();iter!=mmgr.end();++iter)
+	{
+		if (iter->isExternal())
+			iter->draw(projection, navigation, tone_converter);
+	}
 
 	// Draw the equatorial grid
 	equ_grid->draw(projection);
