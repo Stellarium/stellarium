@@ -288,7 +288,7 @@ bool ScriptMgr::play_startup_script() {
 		return 1;
 	} else {
 		// try in stellarium tree
-		return play_script(DataDir + "scripts/startup.sts", DataDir + "scripts/");
+		return play_script(DataDir + "/scripts/startup.sts", DataDir + "/scripts/");
 	} 
 
 }
