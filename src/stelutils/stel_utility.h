@@ -135,7 +135,13 @@ namespace StelUtils {
 	bool fileExists(const std::string& fileName);
 	
 	//! Check if a number is a power of 2
-	bool isPowerOfTwo (int value);
+	bool isPowerOfTwo(int value);
+	
+	//! Return the first power of two bigger than the given value 
+	int getBiggerPowerOfTwo(int value);
+	
+	//! Download the file from the given URL to the given name using libcurl
+	bool downloadFile(const std::string& url, const std::string& fullPath);
 }
 
 // General Calendar Functions

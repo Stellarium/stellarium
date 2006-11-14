@@ -21,6 +21,17 @@
 #include "STexture.h"
 
 /*************************************************************************
+ Constructor for the STexture class
+*************************************************************************/
+STexture::STexture()
+{
+	texCoordinates[0].set(1., 0.);
+	texCoordinates[1].set(0., 0.);
+	texCoordinates[2].set(1., 1.);
+	texCoordinates[3].set(0., 1.);
+}
+
+/*************************************************************************
  Destructor for the STexture class
 *************************************************************************/
 STexture::~STexture()

@@ -49,6 +49,9 @@ StelTextureMgr::StelTextureMgr(const std::string& atextureDir) : textureDir(atex
 	registerImageLoader("JPEG", &jpgLoader);
 	registerImageLoader("jpg", &jpgLoader);
 	registerImageLoader("JPG", &jpgLoader);
+	
+	// Used to correct a bug on some nvidia cards
+	isNoPowerOfTwoLUMINANCEAllowed = true;
 }
 
 /*************************************************************************
@@ -63,6 +66,13 @@ StelTextureMgr::~StelTextureMgr()
 *************************************************************************/
 void StelTextureMgr::init()
 {
+	// Check vendor and renderer
+	string glRenderer((char*)glGetString(GL_RENDERER));
+	string glVendor((char*)glGetString(GL_VENDOR));
+	string glVersion((char*)glGetString(GL_VERSION));
+	
+	cout << "VENDOR=" << glVendor << " RENDERER=" << glRenderer << " VERSION=" << glVersion << endl; 
+	
 	// Check for extensions
 	const GLubyte * strExt = glGetString(GL_EXTENSIONS);
 	if (glGetError()!=GL_NO_ERROR)
@@ -77,7 +87,14 @@ void StelTextureMgr::init()
 	
 	// Get whether non-power-of-2 and non square 2D textures are supported on this video card
 	isNoPowerOfTwoAllowed = gluCheckExtension ((const GLubyte*)"GL_ARB_texture_non_power_of_two", strExt);
-	
+	if (glVersion!="" && glVersion[0]=='2')
+		isNoPowerOfTwoAllowed = true;
+
+	if (glVendor=="NVIDIA Corporation" && glRenderer=="Quadro NVS 285/PCI/SSE2" && glVersion=="2.0.2 NVIDIA 87.74")
+		isNoPowerOfTwoLUMINANCEAllowed = false;
+	else
+		isNoPowerOfTwoLUMINANCEAllowed = isNoPowerOfTwoAllowed;
+		
 	// Get Maximum Texture Size Supported by the video card
 	glGetIntegerv(GL_MAX_TEXTURE_SIZE, &maxTextureSize);
 }
@@ -99,8 +116,7 @@ void StelTextureMgr::setDefaultParams()
 STexture& StelTextureMgr::createTexture(const string& afilename)
 {
 	string filename;
-	if (afilename[0]=='/' ||
-		(afilename[0]=='.' && afilename[1]=='/'))
+	if (afilename[0]=='/' || (afilename[0]=='.' && afilename[1]=='/'))
 		filename = afilename;
 	else
 		filename = textureDir + afilename;
@@ -115,29 +131,51 @@ STexture& StelTextureMgr::createTexture(const string& afilename)
 	const string extension = filename.substr((filename.find_last_of('.', filename.size()))+1);\
 	
 	std::map<std::string, ImageLoader*>::iterator loadFuncIter = imageLoaders.find(extension);
-	if (loadFuncIter!=imageLoaders.end())
-		loadFuncIter->second->loadImage(filename, *tex);
-	else
+	if (loadFuncIter==imageLoaders.end())
 	{
 		cerr << "Unsupported image file extension: " << extension << " for file: " << filename << endl;
+		delete tex;
 		return NULL_STEXTURE;
 	}
+
+	// Set parameters than can be set for this texture
+	tex->minFilter = (mipmapsMode==true) ? GL_LINEAR_MIPMAP_NEAREST : minFilter;
+	tex->magFilter = magFilter;
+	tex->wrapMode = wrapMode;
+	tex->fullPath = filename;
+	tex->mipmapsMode = mipmapsMode;
+
+	// Load the image
+	loadFuncIter->second->loadImage(filename, *tex);
 
 	if (!tex->texels)
-		return NULL_STEXTURE;
-
-/* isNoPowerOfTwoAllowed does not seem to be related to square texture requirements - Rob
-
-	if (!isNoPowerOfTwoAllowed && tex->height!=tex->width)
 	{
-		cerr << "Can't load non squared textures for texture: " << filename << endl;
+		delete tex;
 		return NULL_STEXTURE;
 	}
-*/
-	if (!isNoPowerOfTwoAllowed && (!StelUtils::isPowerOfTwo(tex->height) || !StelUtils::isPowerOfTwo(tex->width)))
+
+	if ((!isNoPowerOfTwoAllowed || (!isNoPowerOfTwoLUMINANCEAllowed && tex->format==GL_LUMINANCE)) && 
+		(!StelUtils::isPowerOfTwo(tex->height) || !StelUtils::isPowerOfTwo(tex->width)))
 	{
-		cerr << "Can't load non power of 2 textures for texture: " << filename << endl;
-		return NULL_STEXTURE;
+		cerr << "Can't load natively non power of 2 textures for texture: " << filename << endl;
+		int w = StelUtils::getBiggerPowerOfTwo(tex->width);
+		int h = StelUtils::getBiggerPowerOfTwo(tex->height);
+		cerr << "Resize to " << w << "x" << h << endl;
+		
+		GLubyte* texels2 = (GLubyte *)calloc (sizeof (GLubyte) * tex->internalFormat,  w*h);
+		// Copy data into the power of two buffer
+		for (int j=0;j<tex->height;++j)
+			memcpy(&(texels2[j*w*tex->internalFormat]), &(tex->texels[j*tex->width*tex->internalFormat]), tex->width*tex->internalFormat);
+		
+		// Update the texture coordinates because the new texture does not occupy the whole buffer
+		tex->texCoordinates[0].set((double)tex->width/w, 0.);
+		tex->texCoordinates[1].set(0., 0.);
+		tex->texCoordinates[2].set((double)tex->width/w, (double)tex->height/h);
+		tex->texCoordinates[3].set(0., (double)tex->height/h);
+		tex->width = w;
+		tex->height = h;
+		free(tex->texels);
+		tex->texels = texels2;
 	}
 
 	// Check that the image size is compatible with the hardware 
@@ -145,12 +183,6 @@ STexture& StelTextureMgr::createTexture(const string& afilename)
 	{
 		cerr << "Warning: texture " << filename << " is larger than " << maxTextureSize << " pixels and might be not supported." << endl;
 	}
-
-	tex->minFilter = (mipmapsMode==true) ? GL_LINEAR_MIPMAP_NEAREST : minFilter;
-	tex->magFilter = magFilter;
-	tex->wrapMode = wrapMode;
-	tex->fullPath = filename;
-	tex->mipmapsMode = mipmapsMode;
 	
 	// generate texture
 	glGenTextures (1, &(tex->id));

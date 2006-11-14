@@ -170,6 +170,8 @@ void StelApp::quit(void)
 
 void StelApp::init(void)
 {
+//	StelUtils::downloadFile("http://chereau.free.fr/", "/home/fchereau/Desktop/tmp.html");
+	
 	Translator::initSystemLanguage();
 
 	// Load language codes
@@ -184,7 +186,6 @@ void StelApp::init(void)
 
 	if (version!=string(VERSION))
 	{
-
 		std::istringstream istr(version);
 		char tmp;
 		int v1 =0;

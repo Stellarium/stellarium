@@ -23,9 +23,14 @@
 #include <fstream>
 #include <cstdlib>
 #include <ctime>
+#include <config.h>
 
 #if defined( CYGWIN )
  #include <malloc.h>
+#endif
+
+#ifdef HAVE_LIBCURL
+ #include <curl/curl.h>
 #endif
 
 #include "stel_utility.h"
@@ -407,8 +412,45 @@ namespace StelUtils {
 		return false;
 	}
 	
-	//! Check if a number is a power of 2
+	// Check if a number is a power of 2
 	bool isPowerOfTwo (int value) {return (value & -value) == value;}
+	
+	// Return the first power of two bigger than the given value 
+	int getBiggerPowerOfTwo(int value)
+	{
+		int p=1;
+		while (p<value)
+			p<<=1;
+		return p;
+	}
+	
+	//! Download the file from the given URL to the given name using libcurl
+	bool downloadFile(const std::string& url, const std::string& fullPath)
+	{
+#ifndef HAVE_LIBCURL
+		cerr << "Stellarium was compiled without libCurl support. Can't access remote URLs." << endl;
+		return false;
+#else
+		// Download the file using libCurl
+		CURL* handle = curl_easy_init();
+		curl_easy_setopt(handle, CURLOPT_URL, url.c_str());
+		FILE* fic = fopen(fullPath.c_str(), "wb");
+		if (!fic)
+		{
+			cerr << "Can't create file: " << fullPath << endl;
+			return false;
+		}
+		curl_easy_setopt(handle, CURLOPT_WRITEDATA, fic);
+		if (curl_easy_perform(handle)!=0)
+		{
+			cerr << "There was an error while getting file: " << url << endl;
+			fclose(fic);
+			return false;
+		}
+		
+		return true;
+#endif
+	}
 }
 
 // convert string int ISO 8601-like format [+/-]YYYY-MM-DDThh:mm:ss (no timzone offset)

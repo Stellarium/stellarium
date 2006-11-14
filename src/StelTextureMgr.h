@@ -105,6 +105,7 @@ private:
 	
 	// Whether ARB_texture_non_power_of_two is supported on this card
 	bool isNoPowerOfTwoAllowed;
+	bool isNoPowerOfTwoLUMINANCEAllowed;
 	
 	// The null texture to retrun in case of problems
 	static STexture NULL_STEXTURE;
