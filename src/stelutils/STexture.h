@@ -21,7 +21,7 @@
 #define _STEXTURE_H_
 
 #include <string>
-
+#include "vecmath.h"
 #include "SDL_opengl.h"
 
 /**
@@ -31,6 +31,7 @@
 class STexture
 {
 public:
+	STexture();
 	virtual ~STexture();
 	//! Bind the texture so that it can be used for openGL drawing (calls glBindTexture)
 	virtual void bind() const {glBindTexture(GL_TEXTURE_2D, id);}
@@ -48,6 +49,9 @@ public:
 	GLenum format;
 	GLint internalFormat;
 	GLubyte *texels;
+	
+	// Position of the 4 corners of the texture in texture coordinates
+	Vec2d texCoordinates[4];
 protected:
 	GLuint id;
 	
