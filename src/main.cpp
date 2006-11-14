@@ -30,6 +30,10 @@
 #include "StelConfig.h"
 #endif
 
+#ifdef HAVE_LIBCURL
+ #include <curl/curl.h>
+#endif
+
 using namespace std;
 
 string CDIR;	// Config Directory
@@ -233,9 +237,17 @@ int main(int argc, char **argv)
 	// Find what are the main Data, Textures and Config directories
     setDirectories(argv[0]);
 
+#ifdef HAVE_LIBCURL
+	curl_global_init(CURL_GLOBAL_ALL);
+#endif
+
 	StelApp app(CDIR, LDIR, DATA_ROOT);
 
 	app.startMainLoop();
+
+#ifdef HAVE_LIBCURL
+	curl_global_cleanup();
+#endif
 
 	return 0;
 }

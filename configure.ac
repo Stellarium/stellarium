@@ -45,6 +45,12 @@ LIBS="$LIBS $FT2_LIBS"
 
 AX_BOOST_BASE
 
+# Check for libcurl
+LIBCURL_CHECK_CONFIG
+CFLAGS="$CFLAGS $LIBCURL_CPPFLAGS"
+CXXFLAGS="$CXXFLAGS $LIBCURL_CPPFLAGS"
+LIBS="$LIBS -lcurl"
+
 dnl Can't find later libGLU if -lm not set here!?!??!
 AC_CHECK_LIB(m,fabs,LIBS="$LIBS -lm",AC_MSG_RESULT(math library not found))
 

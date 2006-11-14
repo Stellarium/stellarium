@@ -20,7 +20,7 @@ stellarium_SOURCES = projector.cpp projector.h stereographic_projector.cpp \
 	tone_reproductor.cpp tone_reproductor.h translations.h stelobjectmgr.cpp stelmodule.cpp \
 	stelmodule.h stelmodulemgr.cpp stelmodulemgr.h stelobjectmgr.h stelfontmgr.cpp \
 	stellocalemgr.cpp stelskyculturemgr.cpp GeodesicGridDrawer.h GeodesicGridDrawer.cpp \
-	StelTextureMgr.h StelTextureMgr.cpp
+	StelTextureMgr.h StelTextureMgr.cpp AstroImage.h AstroImage.cpp
 
 stellarium_LDADD = stelutils/iniparser/libiniparser.a \
 stelutils/libstelutils.a \
