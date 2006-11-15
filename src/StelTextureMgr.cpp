@@ -36,6 +36,7 @@ ManagedSTexture StelTextureMgr::NULL_STEXTURE;
 StelTextureMgr::PngLoader StelTextureMgr::pngLoader;
 StelTextureMgr::JpgLoader StelTextureMgr::jpgLoader;
 
+
 void ManagedSTexture::load(void)
 {
 	if (StelApp::getInstance().getTextureManager().loadTexture(this)==false)
@@ -54,7 +55,6 @@ void ManagedSTexture::lazyBind()
 {
 	if (loadState==0)
 	{
-		cout << "Lazy load " << this->fullPath << endl;
 		load();
 	}
 	bind();
