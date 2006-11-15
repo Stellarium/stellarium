@@ -23,7 +23,7 @@
 /*************************************************************************
  Constructor for the STexture class
 *************************************************************************/
-STexture::STexture()
+STexture::STexture() : texels(NULL)
 {
 	texCoordinates[0].set(1., 0.);
 	texCoordinates[1].set(0., 0.);

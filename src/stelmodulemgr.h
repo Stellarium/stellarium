@@ -21,6 +21,7 @@
 #define STELMODULEMGR_H
 
 #include "stelmodule.h"
+#include <boost/iterator/iterator_facade.hpp>
 
 /**
  * Class used to manage a collection of StelModule
@@ -61,71 +62,42 @@ public:
 		return iter->second;
 	}
 
-	//! Implement map::forward_iterator so that we can easily iterate through registered modules
-   class Iterator : public std::iterator<std::forward_iterator_tag, StelModule*>
+	//! Add iterator so that we can easily iterate through registered modules
+	class Iterator : public boost::iterator_facade<Iterator, StelModule*, boost::forward_traversal_tag>
 	{
-   public:
-      Iterator(std::map<string, StelModule*>::iterator aiter) : iter(aiter) {}
-     ~Iterator() {}
-
-      // The assignment and relational operators are straightforward
-      Iterator& operator=(const Iterator& other)
-      {
-         iter = other.iter;
-         return(*this);
-      }
-
-      bool operator==(const Iterator& other)
-      {
-         return(iter == other.iter);
-      }
-
-      bool operator!=(const Iterator& other)
-      {
-         return(iter != other.iter);
-      }
-
-      Iterator& operator++()
-      {
-      	++iter;
-        return(*this);
-      }
-      
-      Iterator operator++(int)
-      {
-         Iterator tmp(*this);
-         ++(*this);
-         return(tmp);
-      }
-
-      // Return a reference to the StelModule*
-      StelModule& operator*()
-      {
-         return *(iter->second);
-      }
-
-      StelModule* operator->()
-      {
-         return &(operator*());
-      }
-
-   private:
-      std::map<string, StelModule*>::iterator iter;
-   };
+	 public:
+	    Iterator() : mapIter(0) {}
+	 private:
+	    friend class boost::iterator_core_access;
+	    friend class StelModuleMgr;
+		Iterator(std::map<string, StelModule*>::iterator p) : mapIter(p) {}
+	    void increment() { ++mapIter; }
+	
+	    bool equal(Iterator const& other) const
+	    {
+	        return this->mapIter == other.mapIter;
+	    }
+	
+	    StelModule*& dereference() const { return mapIter->second; }
+	
+	    std::map<string, StelModule*>::iterator mapIter;
+	};
 
    Iterator begin()
    {
-      return(Iterator(modules.begin()));
+      return Iterator(modules.begin());
    }
 
-   Iterator end()
+   const Iterator& end()
    {
-      return(Iterator(modules.end()));
+      return endIter;
    }
 private:
 	
 	//! The main module list
 	std::map<string, StelModule*> modules;
+	
+	const Iterator endIter;
 };
 
 #endif

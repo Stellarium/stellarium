@@ -28,8 +28,8 @@
  static getStelmoduleFunc getStelModule = NULL;
 #endif
 
-StelModuleMgr::StelModuleMgr()
-{
+StelModuleMgr::StelModuleMgr() : endIter(modules.end())
+{ 
 }
 
 StelModuleMgr::~StelModuleMgr()
