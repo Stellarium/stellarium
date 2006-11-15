@@ -192,12 +192,10 @@ bool Nebula::readTexture(const string& record)
 
 	StelApp::getInstance().getTextureManager().setDefaultParams();
 	StelApp::getInstance().getTextureManager().setMipmapsMode(true);
-	neb_tex = &StelApp::getInstance().getTextureManager().createTexture(tex_name);
+	neb_tex = &StelApp::getInstance().getTextureManager().createTexture(tex_name, true);
 
 	luminance = ToneReproductor::mag_to_luminance(mag, tex_angular_size*tex_angular_size*3600);
 
-	// this is a huge performance drag if called every frame, so cache here
-	tex_avg_luminance = neb_tex->getAverageLuminance();
 
 	float tex_size = RADIUS_NEB * sin(tex_angular_size/2/60*M_PI/180);
 
@@ -218,13 +216,10 @@ bool Nebula::readTexture(const string& record)
 
 void Nebula::draw_tex(const Projector* prj, const Navigator* nav, ToneReproductor* eye)
 {
-	glEnable(GL_TEXTURE_2D);
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_ONE, GL_ONE);
-
-
 	if (!neb_tex) return;
 
+	neb_tex->lazyBind();
+	
 	// if start zooming in, turn up brightness to full for DSO images
 	// gradual change might be better
 
@@ -238,13 +233,15 @@ void Nebula::draw_tex(const Projector* prj, const Navigator* nav, ToneReproducto
 
 		// TODO this should be revisited to be less ad hoc
 		// 3 is a fudge factor since only about 1/3 of a texture is not black background
-		float cmag = 3 * ad_lum / tex_avg_luminance;
-		glColor4f(cmag,cmag,cmag,1.0);
+		float cmag = 3 * ad_lum / neb_tex->getAverageLuminance();
+		glColor3f(cmag,cmag,cmag);
 
 		//		printf("%s: lum %f ad_lum %f cmag %f angle %f\n", name.c_str(), luminance, ad_lum, cmag, angular_size);
 	}
 
-	neb_tex->bind();
+	glEnable(GL_TEXTURE_2D);
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_ONE, GL_ONE);
 
 	Vec3d v;
     glBegin(GL_TRIANGLE_STRIP);
