@@ -46,7 +46,7 @@ STexture::~STexture()
 /*************************************************************************
  Return the average texture luminance : 0 is black, 1 is white
 *************************************************************************/
-float STexture::getAverageLuminance(void) const
+float STexture::getAverageLuminance(void)
 {
 	int size = width*height;
 	glBindTexture(GL_TEXTURE_2D, id);

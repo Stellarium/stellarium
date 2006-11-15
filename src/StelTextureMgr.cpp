@@ -20,6 +20,8 @@
 #include <cassert>
 #include <iostream>
 #include <string>
+
+#include "stelapp.h"
 extern "C" {
 #include <jpeglib.h>
 }
@@ -30,9 +32,46 @@ extern "C" {
 using namespace std;
 
 // Initialize statics
-STexture StelTextureMgr::NULL_STEXTURE;
+ManagedSTexture StelTextureMgr::NULL_STEXTURE;
 StelTextureMgr::PngLoader StelTextureMgr::pngLoader;
 StelTextureMgr::JpgLoader StelTextureMgr::jpgLoader;
+
+void ManagedSTexture::load(void)
+{
+	if (StelApp::getInstance().getTextureManager().loadTexture(this)==false)
+	{
+		cerr << "Couldn't load texture " << this->fullPath << endl;
+		loadState = 2;
+		return;
+	}
+	loadState = 1;
+}
+
+/*************************************************************************
+ Bind the texture so that it can be used for openGL drawing (calls glBindTexture)
+ *************************************************************************/
+void ManagedSTexture::lazyBind()
+{
+	if (loadState==0)
+	{
+		cout << "Lazy load " << this->fullPath << endl;
+		load();
+	}
+	bind();
+}
+
+//! Return the average texture luminance.
+//! @return 0 is black, 1 is white
+float ManagedSTexture::getAverageLuminance(void)
+{
+	if (loadState==1)
+	{
+		if (avgLuminance<0)
+			avgLuminance = STexture::getAverageLuminance();
+		return avgLuminance;
+	}
+	return 0;
+};
 
 /*************************************************************************
  Constructor for the StelTextureMgr class
@@ -71,7 +110,7 @@ void StelTextureMgr::init()
 	string glVendor((char*)glGetString(GL_VENDOR));
 	string glVersion((char*)glGetString(GL_VERSION));
 	
-	cout << "VENDOR=" << glVendor << " RENDERER=" << glRenderer << " VERSION=" << glVersion << endl; 
+	// cout << "VENDOR=" << glVendor << " RENDERER=" << glRenderer << " VERSION=" << glVersion << endl; 
 	
 	// Check for extensions
 	const GLubyte * strExt = glGetString(GL_EXTENSIONS);
@@ -113,7 +152,7 @@ void StelTextureMgr::setDefaultParams()
 /*************************************************************************
  Load an image from a file and create a new texture from it.
 *************************************************************************/
-STexture& StelTextureMgr::createTexture(const string& afilename)
+ManagedSTexture& StelTextureMgr::createTexture(const string& afilename, bool lazyLoading)
 {
 	string filename;
 	if (afilename[0]=='/' || (afilename[0]=='.' && afilename[1]=='/'))
@@ -127,17 +166,6 @@ STexture& StelTextureMgr::createTexture(const string& afilename)
 	}
 
 	ManagedSTexture* tex = new ManagedSTexture();
-	
-	const string extension = filename.substr((filename.find_last_of('.', filename.size()))+1);\
-	
-	std::map<std::string, ImageLoader*>::iterator loadFuncIter = imageLoaders.find(extension);
-	if (loadFuncIter==imageLoaders.end())
-	{
-		cerr << "Unsupported image file extension: " << extension << " for file: " << filename << endl;
-		delete tex;
-		return NULL_STEXTURE;
-	}
-
 	// Set parameters than can be set for this texture
 	tex->minFilter = (mipmapsMode==true) ? GL_LINEAR_MIPMAP_NEAREST : minFilter;
 	tex->magFilter = magFilter;
@@ -145,22 +173,46 @@ STexture& StelTextureMgr::createTexture(const string& afilename)
 	tex->fullPath = filename;
 	tex->mipmapsMode = mipmapsMode;
 
-	// Load the image
-	loadFuncIter->second->loadImage(filename, *tex);
-
-	if (!tex->texels)
+	// Load only if lazyLoading is not true, else will load later
+	if (lazyLoading==false && loadTexture(tex)==false)
 	{
 		delete tex;
 		return NULL_STEXTURE;
+	}
+	return *tex;
+}
+
+/*************************************************************************
+ Actually load the texture in openGL memory
+*************************************************************************/
+bool StelTextureMgr::loadTexture(ManagedSTexture* tex)
+{
+	const string extension = tex->fullPath.substr((tex->fullPath.find_last_of('.', tex->fullPath.size()))+1);\
+	std::map<std::string, ImageLoader*>::iterator loadFuncIter = imageLoaders.find(extension);
+	if (loadFuncIter==imageLoaders.end())
+	{
+		cerr << "Unsupported image file extension: " << extension << " for file: " << tex->fullPath << endl;
+		tex->loadState = 2;	// texture can't be loaded
+		return false;
+	}
+
+	// Load the image
+	loadFuncIter->second->loadImage(tex->fullPath, *tex);
+
+	if (!tex->texels)
+	{
+		cerr << "Image loading failed for file: " << tex->fullPath << endl;
+		tex->loadState = 2;	// texture can't be loaded
+		return false;
 	}
 
 	if ((!isNoPowerOfTwoAllowed || (!isNoPowerOfTwoLUMINANCEAllowed && tex->format==GL_LUMINANCE)) && 
 		(!StelUtils::isPowerOfTwo(tex->height) || !StelUtils::isPowerOfTwo(tex->width)))
 	{
-		cerr << "Can't load natively non power of 2 textures for texture: " << filename << endl;
+		//cerr << "Can't load natively non power of 2 textures for texture: " << tex->fullPath << endl;
 		int w = StelUtils::getBiggerPowerOfTwo(tex->width);
 		int h = StelUtils::getBiggerPowerOfTwo(tex->height);
-		cerr << "Resize to " << w << "x" << h << endl;
+		//cerr << "Resize to " << w << "x" << h << endl;
 		
 		GLubyte* texels2 = (GLubyte *)calloc (sizeof (GLubyte) * tex->internalFormat,  w*h);
 		// Copy data into the power of two buffer
@@ -181,7 +233,7 @@ STexture& StelTextureMgr::createTexture(const string& afilename)
 	// Check that the image size is compatible with the hardware 
 	if (tex->width>maxTextureSize)
 	{
-		cerr << "Warning: texture " << filename << " is larger than " << maxTextureSize << " pixels and might be not supported." << endl;
+		cerr << "Warning: texture " << tex->fullPath << " is larger than " << maxTextureSize << " pixels and might be not supported." << endl;
 	}
 	
 	// generate texture
@@ -194,14 +246,15 @@ STexture& StelTextureMgr::createTexture(const string& afilename)
 	glTexParameteri (GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, tex->wrapMode);
 	glTexParameteri (GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, tex->wrapMode);
 	glTexImage2D (GL_TEXTURE_2D, 0, tex->internalFormat, tex->width, tex->height, 0, tex->format, GL_UNSIGNED_BYTE, tex->texels);
-	if (mipmapsMode==true)
+	if (tex->mipmapsMode==true)
 		gluBuild2DMipmaps (GL_TEXTURE_2D, tex->internalFormat, tex->width, tex->height, tex->format, GL_UNSIGNED_BYTE, tex->texels);
 
 	// OpenGL has its own copy of texture data
 	free (tex->texels);
 	tex->texels = NULL;
-
-	return *tex;
+	
+	tex->loadState = 1;	// texture loaded
+	return true;
 }
 
 

@@ -176,7 +176,6 @@ void ConstellationMgr::loadLinesAndArt(const string &fileName, const string &art
 	char shortname[20];
 	char texfile[255];
 	unsigned int x1, y1, x2, y2, x3, y3, hp1, hp2, hp3;
-	int texSize;
 	
 	char tmpstr[2000];
 	int total = 0;
@@ -216,7 +215,8 @@ void ConstellationMgr::loadLinesAndArt(const string &fileName, const string &art
 		{
 			StelApp::getInstance().getTextureManager().setDefaultParams();
 			cons->art_tex = &StelApp::getInstance().getTextureManager().createTexture(texfile);
-			texSize = cons->art_tex->getSize();
+			int texSizeX, texSizeY;
+			cons->art_tex->getDimensions(texSizeX, texSizeY);
 
 			Vec3f s1 = hipStarMgr->searchHP(hp1).getObsJ2000Pos(0);
 			Vec3f s2 = hipStarMgr->searchHP(hp2).getObsJ2000Pos(0);
@@ -228,18 +228,18 @@ void ConstellationMgr::loadLinesAndArt(const string &fileName, const string &art
 			// X = B inv(A)
 			Vec3f s4 = s1 + (s2 - s1) ^ (s3 - s1);
 			Mat4f B(s1[0], s1[1], s1[2], 1, s2[0], s2[1], s2[2], 1, s3[0], s3[1], s3[2], 1, s4[0], s4[1], s4[2], 1);
-			Mat4f A(x1, texSize - y1, 0.f, 1.f, x2, texSize - y2, 0.f, 1.f, x3, texSize - y3, 0.f, 1.f, x1, texSize - y1, texSize, 1.f);
+			Mat4f A(x1, texSizeY - y1, 0.f, 1.f, x2, texSizeY - y2, 0.f, 1.f, x3, texSizeY - y3, 0.f, 1.f, x1, texSizeY - y1, texSizeX, 1.f);
 			Mat4f X = B * A.inverse();
 
 			cons->art_vertex[0] = Vec3f(X * Vec3f(0, 0, 0));
-			cons->art_vertex[1] = Vec3f(X * Vec3f(texSize / 2, 0, 0));
-			cons->art_vertex[2] = Vec3f(X * Vec3f(texSize / 2, texSize / 2, 0));
-			cons->art_vertex[3] = Vec3f(X * Vec3f(0, texSize / 2, 0));
-			cons->art_vertex[4] = Vec3f(X * Vec3f(texSize / 2 + texSize / 2, 0, 0));
-			cons->art_vertex[5] = Vec3f(X * Vec3f(texSize / 2 + texSize / 2, texSize / 2, 0));
-			cons->art_vertex[6] = Vec3f(X * Vec3f(texSize / 2 + texSize / 2, texSize / 2 + texSize / 2, 0));
-			cons->art_vertex[7] = Vec3f(X * Vec3f(texSize / 2 + 0, texSize / 2 + texSize / 2, 0));
-			cons->art_vertex[8] = Vec3f(X * Vec3f(0, texSize / 2 + texSize / 2, 0));
+			cons->art_vertex[1] = Vec3f(X * Vec3f(texSizeX / 2, 0, 0));
+			cons->art_vertex[2] = Vec3f(X * Vec3f(texSizeX / 2, texSizeY / 2, 0));
+			cons->art_vertex[3] = Vec3f(X * Vec3f(0, texSizeY / 2, 0));
+			cons->art_vertex[4] = Vec3f(X * Vec3f(texSizeX / 2 + texSizeX / 2, 0, 0));
+			cons->art_vertex[5] = Vec3f(X * Vec3f(texSizeX / 2 + texSizeX / 2, texSizeY / 2, 0));
+			cons->art_vertex[6] = Vec3f(X * Vec3f(texSizeX / 2 + texSizeX / 2, texSizeY / 2 + texSizeY / 2, 0));
+			cons->art_vertex[7] = Vec3f(X * Vec3f(texSizeX / 2 + 0, texSizeY / 2 + texSizeY / 2, 0));
+			cons->art_vertex[8] = Vec3f(X * Vec3f(0, texSizeY / 2 + texSizeY / 2, 0));
 
 			current++;
 		}

@@ -29,6 +29,20 @@ class ManagedSTexture : public STexture
 {
 	friend class StelTextureMgr;
 	friend class ImageLoader;
+public:
+	//! Bind the texture so that it can be used for openGL drawing (calls glBindTexture)
+	//! If the texture was lazy loaded, load it now.
+	virtual void lazyBind();
+	//! Return the average texture luminance.
+	//! @return 0 is black, 1 is white
+    virtual float getAverageLuminance(void);
+private:
+	ManagedSTexture() : loadState(0), avgLuminance(-1.f) {;}
+	int loadState;
+	void load(void);
+	
+	// Cached average luminance
+	float avgLuminance;
 };
 
 class ImageLoader
@@ -57,7 +71,7 @@ public:
 	//! Load an image from a file and create a new texture from it
 	//! @param the texture file name, can be absolute path if starts with '/' otherwise
 	//! the file will be looked in stellarium standard textures directories.
-	STexture& createTexture(const std::string& filename);
+	ManagedSTexture& createTexture(const std::string& filename, bool lazyLoading=false);
 	
 	//! Define if mipmaps must be created while creating textures
 	void setMipmapsMode(bool b = false) {mipmapsMode = b;}
@@ -86,8 +100,10 @@ public:
 	{
 		imageLoaders[fileExtension] = loader;
 	}
-private:
 	
+	//! Actually load the texture in openGL memory
+	bool loadTexture(ManagedSTexture* tex);
+private:
 	// List of image loaders providing image loading for the given files extensions
 	std::map<std::string, ImageLoader*> imageLoaders;
 	
@@ -107,8 +123,8 @@ private:
 	bool isNoPowerOfTwoAllowed;
 	bool isNoPowerOfTwoLUMINANCEAllowed;
 	
-	// The null texture to retrun in case of problems
-	static STexture NULL_STEXTURE;
+	// The null texture to return in case of problems
+	static ManagedSTexture NULL_STEXTURE;
 	
 	// Define a PNG loader. This implementation supports LUMINANCE, LUMINANCE+ALPHA, RGB, RGBA. 
 	class PngLoader : public ImageLoader
