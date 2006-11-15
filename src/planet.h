@@ -76,7 +76,7 @@ public:
 private:
 	const double radius_min;
 	const double radius_max;
-	const STexture *tex;
+	STexture *tex;
 };
 
 

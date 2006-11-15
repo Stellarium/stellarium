@@ -35,13 +35,11 @@ public:
 	virtual ~STexture();
 	//! Bind the texture so that it can be used for openGL drawing (calls glBindTexture)
 	virtual void bind() const {glBindTexture(GL_TEXTURE_2D, id);}
-	//! Return the size of the squared texture
-	GLsizei getSize() const {return width;}
 	//! Return the width and heigth of the texture in pixels
 	void getDimensions(int &width, int &height) const;
 	//! Return the average texture luminance.
 	//! @return 0 is black, 1 is white
-    float getAverageLuminance(void) const;
+    virtual float getAverageLuminance(void);
     
     GLsizei width;
 	GLsizei height;

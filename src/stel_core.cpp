@@ -379,7 +379,7 @@ double StelCore::draw(int delta_time)
 	geodesic_search_result->search(e0,e1,e2,e3,max_search_level);
 
 	// Draw the nebula
-	//nebulas->draw(projection, navigation, tone_converter);
+	nebulas->draw(projection, navigation, tone_converter);
 
 	// Draw the stars
 	hip_stars->draw(projection, navigation, tone_converter);
