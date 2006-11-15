@@ -91,6 +91,14 @@ StelCore::StelCore(const string& LDIR, const string& DATA_ROOT, const boost::cal
 
 StelCore::~StelCore()
 {
+	// First delete external module
+	StelModuleMgr& mmgr = StelApp::getInstance().getModuleMgr();
+	for (StelModuleMgr::Iterator iter=mmgr.begin();iter!=mmgr.end();++iter)
+	{
+		if ((*iter)->isExternal())
+			delete *iter;
+	}
+	
 	//delete geoDrawer;
 	// release the previous StelObject:
 	selected_object = StelObject();
@@ -129,13 +137,6 @@ StelCore::~StelCore()
 		delete geodesic_grid;
 		geodesic_grid = NULL;
 	}
-	
-//	StelModuleMgr& mmgr = StelApp::getInstance().getModuleMgr();
-//	for (StelModuleMgr::Iterator iter=mmgr.begin();iter!=mmgr.end();++iter)
-//	{
-//		if (iter->isExternal())
-//			delete &(*iter);
-//	}
 }
 
 // Load core data and initialize with default values
@@ -388,8 +389,8 @@ double StelCore::draw(int delta_time)
 	StelModuleMgr& mmgr = StelApp::getInstance().getModuleMgr();
 	for (StelModuleMgr::Iterator iter=mmgr.begin();iter!=mmgr.end();++iter)
 	{
-		if (iter->isExternal())
-			iter->draw(projection, navigation, tone_converter);
+		if ((*iter)->isExternal())
+			(*iter)->draw(projection, navigation, tone_converter);
 	}
 
 	// Draw the equatorial grid
