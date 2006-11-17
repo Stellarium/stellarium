@@ -30,15 +30,15 @@ using namespace std;
 
 
 ScriptMgr::ScriptMgr(StelCommandInterface *command_interface, string _data_dir) : play_paused(false) {
-  commander = command_interface;
-  DataDir = _data_dir;
-  recording = 0;
-  playing = 0;
-  record_elapsed_time = 0;
+	commander = command_interface;
+	DataDir = _data_dir;
+	recording = 0;
+	playing = 0;
+	record_elapsed_time = 0;
 
-  // used when scripts are on a CD that needs to be mounted manually
-  RemoveableScriptDirectory = "";
-  RemoveableDirectoryMounted = 0;
+	// used when scripts are on a CD that needs to be mounted manually
+	RemoveableScriptDirectory = "";
+	RemoveableDirectoryMounted = 0;
 }
 
 ScriptMgr::~ScriptMgr() {
@@ -46,37 +46,37 @@ ScriptMgr::~ScriptMgr() {
 
 // path is used for loading script assets 
 bool ScriptMgr::play_script(string script_file, string script_path) {
-  // load script...
+	// load script...
 
-  if(playing){
-	  // cancel current script and start next (one script can call another)
-	  cancel_script();
-  }
+	if(playing){
+		// cancel current script and start next (one script can call another)
+		cancel_script();
+	}
 
-  set_gui_debug(0);  // Default off until script sets otherwise
+	set_gui_debug(0);  // Default off until script sets otherwise
 
-  //if (script) delete script;
-  script = new Script();
+	//if (script) delete script;
+	script = new Script();
 
-  // if script is on mountable disk, mount that now
-  if( RemoveableScriptDirectory != "" &&
-	  script_file.compare(0,RemoveableScriptDirectory.length(), RemoveableScriptDirectory) ==0) {
-	  system( ( DataDir + "script_mount_script_disk " ).c_str() );	  
-	  cout << "MOUNT DISK to read script\n";
+	// if script is on mountable disk, mount that now
+	if( RemoveableScriptDirectory != "" &&
+		script_file.compare(0,RemoveableScriptDirectory.length(), RemoveableScriptDirectory) ==0) {
+		system( ( DataDir + "script_mount_script_disk " ).c_str() );	  
+		cout << "MOUNT DISK to read script\n";
 		
-	  RemoveableDirectoryMounted = 1;
-  }
+		RemoveableDirectoryMounted = 1;
+	}
 
-  if( script->load(script_file, script_path) ) {
-    playing = 1;
-    play_paused = 0;
-    elapsed_time = wait_time = 0;
-	return 1;
+	if( script->load(script_file, script_path) ) {
+		playing = 1;
+		play_paused = 0;
+		elapsed_time = wait_time = 0;
+		return 1;
 
-  } else {
-	  cancel_script();
-	  return 0;
-  }
+	} else {
+		cancel_script();
+		return 0;
+	}
 }
 
 void ScriptMgr::cancel_script() {
@@ -96,9 +96,9 @@ void ScriptMgr::cancel_script() {
 
 
 void ScriptMgr::pause_script() {
-  play_paused = 1;
-  // need to pause time as well
-  commander->execute_command("timerate action pause");
+	play_paused = 1;
+	// need to pause time as well
+	commander->execute_command("timerate action pause");
 }
 
 void ScriptMgr::resume_script() { 
@@ -140,16 +140,16 @@ void ScriptMgr::record_script(string script_filename) {
 		char c[3];
 		FILE * fp;
 		for(int j=0; j<=100; ++j)
-			{
-				snprintf(c,3,"%d",j);
+		{
+			snprintf(c,3,"%d",j);
 
-				script_filename = sdir + "stellarium" + c + ".sts";
-				fp = fopen(script_filename.c_str(), "r");
-				if(fp == NULL)
-					break;
-				else
-					fclose(fp);
-			}
+			script_filename = sdir + "stellarium" + c + ".sts";
+			fp = fopen(script_filename.c_str(), "r");
+			if(fp == NULL)
+				break;
+			else
+				fclose(fp);
+		}
 	
 		rec_file.open(script_filename.c_str(), fstream::out);
 
@@ -169,19 +169,19 @@ void ScriptMgr::record_script(string script_filename) {
 
 void ScriptMgr::record_command(string commandline) {
 
-  if(recording) {
-    // write to file...
+	if(recording) {
+		// write to file...
 
-    if(record_elapsed_time) {
-      rec_file << "wait duration " << record_elapsed_time/1000.f << endl;
-      record_elapsed_time = 0;
-    }
+		if(record_elapsed_time) {
+			rec_file << "wait duration " << record_elapsed_time/1000.f << endl;
+			record_elapsed_time = 0;
+		}
     
-    rec_file << commandline << endl;
+		rec_file << commandline << endl;
 
-	// TEMPORARY for debugging
-    cout << commandline << endl;
-  }
+		// TEMPORARY for debugging
+		cout << commandline << endl;
+	}
 }
 
 void ScriptMgr::cancel_record_script() {
@@ -195,86 +195,90 @@ void ScriptMgr::cancel_record_script() {
 
 // runs maximum of one command per update 
 // note that waits can drift by up to 1/fps seconds
-void ScriptMgr::update(int delta_time) {
+void ScriptMgr::update(double delta_time) 
+{
 
-  if(recording) record_elapsed_time += delta_time;
+	if(recording) record_elapsed_time += (unsigned long int)delta_time;
 
-  if(playing && !play_paused) {
+	if(playing && !play_paused) 
+	{
 
-    elapsed_time += delta_time;  // time elapsed since last command (should have been) executed
+		elapsed_time += (unsigned long int) delta_time;  // time elapsed since last command (should have been) executed
 
-    if(elapsed_time >= wait_time) {
-      // now time to run next command
+		if(elapsed_time >= wait_time) 
+		{
+			// now time to run next command
 
 
-      //      cout << "dt " << delta_time << " et: " << elapsed_time << endl;
-      elapsed_time -= wait_time;
-      string comd;
-      unsigned long int wait;
-      if(script->next_command(comd)) {
-	commander->execute_command(comd, wait, 0);  // untrusted commands
-	wait_time = wait; 
+			//      cout << "dt " << delta_time << " et: " << elapsed_time << endl;
+			elapsed_time -= wait_time;
+			string comd;
+			unsigned long int wait;
+			if(script->next_command(comd)) 
+			{
+				commander->execute_command(comd, wait, 0);  // untrusted commands
+				wait_time = wait; 
 
-      } else {
-	// script done
-	cout << "Script completed." << endl;
-	commander->execute_command("script action end");
-      }
-    }
-  }
+			} else {
+				// script done
+				cout << "Script completed." << endl;
+				commander->execute_command("script action end");
+			}
+		}
+	}
 
 }  
 
 // get a list of script files from directory
 string ScriptMgr::get_script_list(string directory) {
 
-  // TODO: This is POSIX specific
+	// TODO: This is POSIX specific
 
-  struct dirent *entryp;
-  DIR *dp;
-  string result="";
-  string tmp;
+	struct dirent *entryp;
+	DIR *dp;
+	string result="";
+	string tmp;
 
-  // if directory is on mountable disk, mount that now
-  if( RemoveableScriptDirectory != "" &&
-	  directory.compare(0,RemoveableScriptDirectory.length(), RemoveableScriptDirectory) ==0) {
-	  system( ( DataDir + "script_mount_script_disk " ).c_str() );	  
-	  cout << "MOUNT DISK to read directory\n";
+	// if directory is on mountable disk, mount that now
+	if( RemoveableScriptDirectory != "" &&
+		directory.compare(0,RemoveableScriptDirectory.length(), RemoveableScriptDirectory) ==0) {
+		system( ( DataDir + "script_mount_script_disk " ).c_str() );	  
+		cout << "MOUNT DISK to read directory\n";
 		
-	  RemoveableDirectoryMounted = 1;
-  }
+		RemoveableDirectoryMounted = 1;
+	}
 
-  if ((dp = opendir(directory.c_str())) != NULL) {
+	if ((dp = opendir(directory.c_str())) != NULL) {
 
-	  // TODO: sort the directory
-	  while ((entryp = readdir(dp)) != NULL) {
-		  tmp = entryp->d_name;
+		// TODO: sort the directory
+		while ((entryp = readdir(dp)) != NULL) {
+			tmp = entryp->d_name;
 		  
-		  if(tmp.length()>4 && tmp.find(".sts", tmp.length()-4)!=string::npos ) {
-			  result += tmp + "\n";
-			  //cout << entryp->d_name << endl;
-		  }
-	  }
-	  closedir(dp);
-  } else {
-	  cout << "Unable to read script directory" << directory << endl;
-  }
+			if(tmp.length()>4 && tmp.find(".sts", tmp.length()-4)!=string::npos ) {
+				result += tmp + "\n";
+				//cout << entryp->d_name << endl;
+			}
+		}
+		closedir(dp);
+	} else {
+		cout << "Unable to read script directory" << directory << endl;
+	}
 
-  if(RemoveableDirectoryMounted) {
-	  // leave disk unmounted
-	  system( ( DataDir + "script_unmount_script_disk " ).c_str() );	  
-	  cout << "UNMOUNT DISK\n";
-	  RemoveableDirectoryMounted = 0;
-  }
+	if(RemoveableDirectoryMounted) {
+		// leave disk unmounted
+		system( ( DataDir + "script_unmount_script_disk " ).c_str() );	  
+		cout << "UNMOUNT DISK\n";
+		RemoveableDirectoryMounted = 0;
+	}
 
-  //cout << "Result = " << result;
-  return result;
+	//cout << "Result = " << result;
+	return result;
 
 }
 
 string ScriptMgr::get_script_path() { 
-  if(script) return script->get_path(); 
-  return ""; 
+	if(script) return script->get_path(); 
+	return ""; 
 }
 
 
@@ -284,7 +288,7 @@ bool ScriptMgr::play_startup_script() {
 	// first try on removeable directory
 	if(RemoveableScriptDirectory !="" &&
 	   play_script(RemoveableScriptDirectory + "scripts/startup.sts", 
-					RemoveableScriptDirectory + "scripts/")) {
+				   RemoveableScriptDirectory + "scripts/")) {
 		return 1;
 	} else {
 		// try in stellarium tree

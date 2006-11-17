@@ -28,6 +28,7 @@
 #include "stel_utility.h"
 #include "script_mgr.h"
 #include "audio.h"
+#include "stelmodule.h"
 
 using namespace std;
 
@@ -35,18 +36,19 @@ using namespace std;
 class StelCore;
 class StelApp;
 
-class StelCommandInterface : CommandInterface
+class StelCommandInterface : CommandInterface, public StelModule
 {
 
  public:
   StelCommandInterface(StelCore * core, StelApp * app);
   virtual ~StelCommandInterface();
+  virtual string getModuleID() const { return "command_interface"; }
   virtual int execute_command(string commandline);
   virtual int execute_command(string command, double arg);
   virtual int execute_command(string command, int arg);
   virtual int execute_command(string command, unsigned long int &wait, bool trusted);
   virtual int set_flag(string name, string value, bool &newval, bool trusted);
-  void update(int delta_time);
+  virtual void update(double delta_time);
 
  private:
   StelCore * stcore;

@@ -17,7 +17,6 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-// manages images for display from scripts
 
 #ifndef _IMAGE_MGR_H_
 #define _IMAGE_MGR_H_
@@ -25,6 +24,12 @@
 #include <vector>
 #include <string>
 #include "image.h"
+#include "stelmodule.h"
+
+/**
+ * Manage images displayed at the request of the command interface (scripts)
+ * @author Robert Spearman <rob@digitaliseducation.com>
+ */
 
 class ImageMgr
 {
@@ -32,12 +37,13 @@ class ImageMgr
 public:
     ImageMgr();
     virtual ~ImageMgr();
+	virtual string getModuleID() const { return "image_mgr"; }
     int load_image(string filename, string name, Image::IMAGE_POSITIONING position_type);
     int drop_image(string name);
     int drop_all_images();
     Image *get_image(string name);
-    void update(int delta_time);  // update properties
-    void draw(const Navigator * nav, Projector * prj);
+    virtual void update(double delta_time);  // update properties
+    virtual double draw(const Navigator * nav, Projector * prj);
 
 private:
     vector<Image*> active_images;
