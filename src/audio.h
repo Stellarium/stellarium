@@ -44,7 +44,7 @@ class Audio
   void increment_volume();
   void decrement_volume();
   std::string get_name() { return track_name; };
-  void update(int delta_time);
+  void update(double delta_time);
 
  private:
   Mix_Music *track;
@@ -69,7 +69,7 @@ class Audio
   void increment_volume() {;}
   void decrement_volume() {;}
   std::string get_name() { return "Compiled with no Audio!"; };
-  void update(int delta_time) {;}
+  void update(double delta_time) {;}
 
  private:
 };

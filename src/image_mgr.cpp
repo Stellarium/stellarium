@@ -90,7 +90,7 @@ Image * ImageMgr::get_image(string name)
     return NULL;
 }
 
-void ImageMgr::update(int delta_time)
+void ImageMgr::update(double delta_time)
 {
     for (vector<Image*>::iterator iter = active_images.begin(); iter != active_images.end(); ++iter)
     {
@@ -98,11 +98,12 @@ void ImageMgr::update(int delta_time)
     }
 }
 
-void ImageMgr::draw(const Navigator * nav, Projector * prj)
+double ImageMgr::draw(const Navigator * nav, Projector * prj)
 {
     for (vector<Image*>::iterator iter = active_images.begin(); iter != active_images.end(); ++iter)
     {
         (*iter)->draw(nav, prj);
     }
+	return 0.0;  // TODO: determine max pixel movement from images
 }
 

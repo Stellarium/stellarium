@@ -28,17 +28,19 @@ using namespace std;
 
 #include <string>
 #include <fstream>
+#include "stelmodule.h"
 
 // predeclaration
 class StelCommandInterface;
 class Script;
 
-class ScriptMgr
+class ScriptMgr : public StelModule
 {
 
  public:
   ScriptMgr(StelCommandInterface * command_interface, string _data_dir);
-  ~ScriptMgr();
+  virtual ~ScriptMgr();
+  virtual string getModuleID() const { return "script_mgr"; }
   bool play_script(string script_file, string script_path);
   bool play_startup_script();
   void cancel_script();  // stop playing current script
@@ -50,7 +52,7 @@ class ScriptMgr
   bool is_playing() { return playing; };     // is a script playing? 
   bool is_paused() { return play_paused; };     // is a script paused?
   bool is_recording() { return recording; };    // is a script being recorded? 
-  void update(int delta_time);  // execute commands in running script
+  virtual void update(double delta_time);  // execute commands in running script
   string get_script_list(string directory);  // get list of scripts in a directory
   string get_script_path();
   string get_record_filename() { return rec_filename; }  // file record is writing to

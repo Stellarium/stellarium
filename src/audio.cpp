@@ -72,7 +72,7 @@ void Audio::play(bool loop) {
 }
 
 // used solely to track elapsed seconds of play
-void Audio::update(int delta_time) {
+void Audio::update(double delta_time) {
 	
 	if(track) elapsed_seconds += delta_time/1000.f;
 

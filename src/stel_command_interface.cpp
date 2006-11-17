@@ -930,6 +930,6 @@ int StelCommandInterface::set_flag(string name, string value, bool &newval, bool
 }
 
 
-void StelCommandInterface::update(int delta_time) {
+void StelCommandInterface::update(double delta_time) {
 	if(audio) audio->update(delta_time);
 }

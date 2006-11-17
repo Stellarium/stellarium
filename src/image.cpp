@@ -111,7 +111,7 @@ void Image::set_location( float xpos, bool deltax, float ypos, bool deltay, floa
 }
 
 
-bool Image::update(int delta_time) {
+bool Image::update(double delta_time) {
 
   if(image_ratio < 0) return 0;
 
