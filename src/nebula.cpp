@@ -18,6 +18,7 @@
  */
 
 #include <iostream>
+#include <sstream>
 #include "nebula.h"
 #include "STexture.h"
 #include "stellarium.h"

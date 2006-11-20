@@ -77,14 +77,49 @@ namespace StelUtils {
 		return woss.str();
 	}
 	
-	double hms_to_rad( unsigned int h, unsigned int m, double s )
+	double hmsToRad(unsigned int h, unsigned int m, double s )
 	{
 		return (double)M_PI/24.*h*2.+(double)M_PI/12.*m/60.+s*M_PI/43200.;
 	}
 	
-	double dms_to_rad(int d, int m, double s)
+	double dmsToRad(int d, unsigned int m, double s)
 	{
-		return (double)M_PI/180.*d+(double)M_PI/10800.*m+s*M_PI/648000.;
+		if (d>=0)
+			return (double)M_PI/180.*d+(double)M_PI/10800.*m+s*M_PI/648000.;
+		return (double)M_PI/180.*d-(double)M_PI/10800.*m-s*M_PI/648000.;
+	}
+	
+	// Convert an angle in radian to hms format
+	void radToHms(double angle, unsigned int& h, unsigned int& m, double& s)
+	{
+		while (angle<0.0)
+			angle += 2.0*M_PI;
+		while (angle>2.0*M_PI)
+			angle -= 2.0*M_PI;
+			
+		angle *= 12./M_PI;
+
+		h = (unsigned int)angle;
+		m = (unsigned int)((angle-h)*60);
+		s = (angle-h)*3600.-60.*m;
+	}
+	
+	// Convert an angle in radian to dms format
+	void radToDms(double angle, bool& sign, unsigned int& d, unsigned int& m, double& s)
+	{
+		while (angle>2.0*M_PI)
+			angle -= 2.0*M_PI;
+		sign=true;
+		if (angle<0)
+		{
+			angle *= -1;
+			sign = false;
+		}
+		angle *= 180./M_PI;
+		
+		d = (unsigned int)angle;
+		m = (unsigned int)((angle - d)*60);
+		s = (angle-d)*3600-60*m;
 	}
 	
 	// Obtains a Vec3f from a string with the form x,y,z
@@ -104,7 +139,7 @@ namespace StelUtils {
 	}
 	
 		
-	//! @brief Print the passed angle with the format ddÃÆÃâÃâÃÂ°mm'ss(.ss)"
+	//! @brief Print the passed angle with the format dd�mm'ss(.ss)"
 	//! @param angle Angle in radian
 	//! @param decimal Define if 2 decimal must also be printed
 	//! @param useD Define if letter "d" must be used instead of ÃÂ°

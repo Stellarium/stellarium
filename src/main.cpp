@@ -25,6 +25,7 @@
 
 #include "stellarium.h"
 #include "stelapp.h"
+#include "translator.h"
 
 #if defined(MACOSX) && defined(XCODE)
 #include "StelConfig.h"

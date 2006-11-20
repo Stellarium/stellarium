@@ -465,15 +465,15 @@ CallbackComponent::CallbackComponent() : Component(), is_mouse_over(false), pres
 {
 }
 
-bool CallbackComponent::onClic(int x, int y, S_GUI_VALUE bt, S_GUI_VALUE state)
+bool CallbackComponent::onClic(int x, int y, Uint8 bt, Uint8 state)
 {
 	if (!visible) return false;
 	pressed = false;
-	if (state==S_GUI_PRESSED && bt==S_GUI_MOUSE_LEFT && isIn(x, y))
+	if (state==SDL_MOUSEBUTTONDOWN && bt==SDL_BUTTON_LEFT && isIn(x, y))
 	{
 		pressed = true;
 	}
-	if (state==S_GUI_RELEASED && bt==S_GUI_MOUSE_LEFT && isIn(x, y))
+	if (state==SDL_MOUSEBUTTONUP && bt==SDL_BUTTON_LEFT && isIn(x, y))
 	{
 		if (!onPressCallback.empty()) RUNCALLBACK(onPressCallback);
 	}
@@ -675,7 +675,7 @@ void Container::draw(void)
 	}
 }
 
-bool Container::onClic(int x, int y, S_GUI_VALUE button, S_GUI_VALUE state)
+bool Container::onClic(int x, int y, Uint8 button, Uint8 state)
 {
 	if (!visible) return false;
 
@@ -749,7 +749,7 @@ bool Container::onMove(int x, int y)
 	return CallbackComponent::onMove(x, y);
 }
 
-bool Container::onKey(Uint16 k, S_GUI_VALUE s)
+bool Container::onKey(Uint16 k, Uint8 s)
 {
 	bool hasFocus = false;
 	if (!visible) return false;
@@ -823,12 +823,12 @@ void Button::draw()
 	}
 }
 
-bool Button::onClic(int x, int y, S_GUI_VALUE bt, S_GUI_VALUE state)
+bool Button::onClic(int x, int y, Uint8 bt, Uint8 state)
 {
 	if (!visible) return false;
 
 	CallbackComponent::onClic(x,y,bt,state);
-	if (bt==S_GUI_MOUSE_LEFT && isIn(x, y)) return 1;
+	if (bt==SDL_BUTTON_LEFT && isIn(x, y)) return 1;
 	return 0;
 }
 
@@ -870,10 +870,10 @@ void CheckBox::draw()
 	Button::draw();
 }
 
-bool CheckBox::onClic(int x, int y, S_GUI_VALUE bt, S_GUI_VALUE state)
+bool CheckBox::onClic(int x, int y, Uint8 bt, Uint8 state)
 {
 	if (!visible) return false;
-	if (state==S_GUI_RELEASED && bt==S_GUI_MOUSE_LEFT && isIn(x, y))
+	if (state==SDL_MOUSEBUTTONUP && bt==SDL_BUTTON_LEFT && isIn(x, y))
 		isChecked = !isChecked;
 	return Button::onClic(x,y,bt,state);
 }
@@ -1099,10 +1099,10 @@ EditBox::~EditBox()
 	}
 }
 
-bool EditBox::onClic(int x, int y, S_GUI_VALUE bt, S_GUI_VALUE state)
+bool EditBox::onClic(int x, int y, Uint8 bt, Uint8 state)
 {
 	if (!visible) return false;
-	if (state==S_GUI_PRESSED && bt==S_GUI_MOUSE_LEFT)
+	if (state==SDL_MOUSEBUTTONDOWN && bt==SDL_BUTTON_LEFT)
 	{
 		if (isIn(x, y)) 
         {
@@ -1234,11 +1234,11 @@ wstring EditBox::getDefaultPrompt(void)
 #define SDLK_A 65
 #define SDLK_Z 90
 
-bool EditBox::onKey(Uint16 k, S_GUI_VALUE s)
+bool EditBox::onKey(Uint16 k, Uint8 s)
 {
     if (!isEditing) return false;
 
-	if (s==S_GUI_PRESSED)
+	if (s==SDL_KEYDOWN)
     { 
 		lastKey = k;
         if  (k==SDLK_RETURN)
@@ -1390,15 +1390,15 @@ void ScrollBar::draw(void)
 	glPopMatrix();
 }
 
-bool ScrollBar::onClic(int x, int y, S_GUI_VALUE bt, S_GUI_VALUE state)
+bool ScrollBar::onClic(int x, int y, Uint8 bt, Uint8 state)
 {
-	if (bt==S_GUI_MOUSE_LEFT && state==S_GUI_RELEASED)
+	if (bt==SDL_MOUSEBUTTONUP && state==SDL_MOUSEBUTTONUP)
 	{
 		dragging = false;
 		return false;
 	}
 	
-	if (visible && isIn(x,y) && state==S_GUI_PRESSED)
+	if (visible && isIn(x,y) && state==SDL_MOUSEBUTTONDOWN)
 	{
 		if (scrollBt.isIn(x-pos[0],y-pos[1])) 
 		{
@@ -1617,7 +1617,7 @@ void ListBox::setCurrent(const wstring& ws)
 	}
 }
 
-bool ListBox::onClic(int x, int y, S_GUI_VALUE button, S_GUI_VALUE state)
+bool ListBox::onClic(int x, int y, Uint8 button, Uint8 state)
 {
 	if (!visible) return false;
 	if (!isIn(x,y)) return false;
@@ -1629,7 +1629,7 @@ bool ListBox::onClic(int x, int y, S_GUI_VALUE button, S_GUI_VALUE state)
 		if (scrollBar.onClic(x, y, button, state)) return true;
 	}
 
-	if (state==S_GUI_PRESSED)
+	if (state==SDL_MOUSEBUTTONDOWN)
 	{
 		int i = firstItemIndex;
     	vector<LabeledButton*>::iterator iter = itemBt.begin();
@@ -1988,17 +1988,17 @@ void StdWin::draw()
 	FramedContainer::draw();
 }
 
-bool StdWin::onClic(int x, int y, S_GUI_VALUE bt, S_GUI_VALUE state)
+bool StdWin::onClic(int x, int y, Uint8 bt, Uint8 state)
 {
 	if (!visible) return false;
 	if (FramedContainer::onClic(x, y, bt, state)) return 1;
-	if (state==S_GUI_RELEASED && bt==S_GUI_MOUSE_LEFT)
+	if (state==SDL_MOUSEBUTTONUP && bt==SDL_BUTTON_LEFT)
 	{
 		dragging = false;
 	}
 	if (isIn(x, y))
 	{
-		if (state==S_GUI_PRESSED && bt==S_GUI_MOUSE_LEFT)
+		if (state==SDL_MOUSEBUTTONDOWN && bt==SDL_BUTTON_LEFT)
 		{
 			dragging = true;
 			oldPos.set(x,y);
@@ -2390,7 +2390,7 @@ int TabContainer::getHeadersSize(void)
 	return s;
 }
 
-bool TabContainer::onClic(int x, int y, S_GUI_VALUE button, S_GUI_VALUE state)
+bool TabContainer::onClic(int x, int y, Uint8 button, Uint8 state)
 {
 	if (!visible) return false;
 	list<TabHeader*>::iterator iter = headers.begin();
@@ -2505,15 +2505,15 @@ void CursorBar::setValue(float _value)
 	sized = false;
 }
 
-bool CursorBar::onClic(int x, int y, S_GUI_VALUE bt, S_GUI_VALUE state)
+bool CursorBar::onClic(int x, int y, Uint8 bt, Uint8 state)
 {
-	if (bt==S_GUI_MOUSE_LEFT && state==S_GUI_RELEASED)
+	if (bt==SDL_BUTTON_LEFT && state==SDL_MOUSEBUTTONUP)
 	{
 		dragging = false;
 		return false;
 	}
 	
-	if (visible && isIn(x,y) && state==S_GUI_PRESSED)
+	if (visible && isIn(x,y) && state==SDL_MOUSEBUTTONDOWN)
 	{
 		if (cursorBt.isIn(x-pos[0],y-pos[1])) 
 		{
@@ -3140,9 +3140,9 @@ bool MapPicture::isIn(int x, int y)
 	return (originalPos[0]<=x && (originalSize[0]+originalPos[0])>=x && originalPos[1]<=y && (originalPos[1]+originalSize[1])>=y);
 }
 
-bool MapPicture::onKey(Uint16 k, S_GUI_VALUE s)
+bool MapPicture::onKey(Uint16 k, Uint8 s)
 {
-	if (s==S_GUI_PRESSED)
+	if (s==SDL_KEYDOWN)
 	{
 		if (k == SDLK_PAGEUP) 
 			zoomInOut(1.f);
@@ -3186,7 +3186,7 @@ void MapPicture::calcPointerPos(int x, int y)
 	exact = false;
 }
 
-bool MapPicture::onClic(int x, int y, S_GUI_VALUE button, S_GUI_VALUE state)
+bool MapPicture::onClic(int x, int y, Uint8 button, Uint8 state)
 {
 	if (!visible) return false;
 
@@ -3197,9 +3197,9 @@ bool MapPicture::onClic(int x, int y, S_GUI_VALUE button, S_GUI_VALUE state)
 		return false;
 	}
 
-	if (button==S_GUI_MOUSE_LEFT)
+	if (button==SDL_BUTTON_LEFT)
 	{
-		if (state == S_GUI_PRESSED)
+		if (state == SDL_MOUSEBUTTONDOWN)
 		{
 			dragging = true;
 			calcPointerPos(x, y);
@@ -3208,9 +3208,9 @@ bool MapPicture::onClic(int x, int y, S_GUI_VALUE button, S_GUI_VALUE state)
 		else
 			dragging = false;
 	}
-	if (button==S_GUI_MOUSE_RIGHT)
+	if (button==SDL_BUTTON_RIGHT)
 	{
-		if (state == S_GUI_PRESSED)
+		if (state == SDL_MOUSEBUTTONDOWN)
 		{
 			panning = true;
 			oldPos.set(x,y);
@@ -3218,9 +3218,9 @@ bool MapPicture::onClic(int x, int y, S_GUI_VALUE button, S_GUI_VALUE state)
 		else
 			panning = false;
 	}
-	else if (button == 	S_GUI_MOUSE_WHEELUP)
+	else if (button == 	SDL_BUTTON_WHEELUP)
 		zoomInOut(0.5f); //polls twice - press and release I assume
-	else if (button == 	S_GUI_MOUSE_WHEELDOWN)
+	else if (button == 	SDL_BUTTON_WHEELDOWN)
 		zoomInOut(-0.5f);
 	return true;
 }
@@ -3422,9 +3422,9 @@ void StringList::draw(void)
 	}
 }
 
-bool StringList::onClic(int x, int y, S_GUI_VALUE button, S_GUI_VALUE state)
+bool StringList::onClic(int x, int y, Uint8 button, Uint8 state)
 {
-	if (!visible || state!=S_GUI_PRESSED || !isIn(x,y)) return 0;
+	if (!visible || state!=SDL_MOUSEBUTTONDOWN || !isIn(x,y)) return 0;
 	int poss = (y-pos[1])/itemSize;
 	if (items.begin()+poss == items.end() || (unsigned int)poss>items.size()) return 1;
 	current = items.begin()+poss;

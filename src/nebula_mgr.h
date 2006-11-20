@@ -109,12 +109,10 @@ private:
 	Nebula *searchM(unsigned int M);
 	Nebula *searchNGC(unsigned int NGC);
 	Nebula *searchIC(unsigned int IC);
-	/*Nebula *searchUGC(unsigned int UGC);*/
 	bool loadNGC(const string& fileName, LoadingBar& lb);
 	bool loadNGCNames(const string& fileName);
 	bool loadTextures(const string& fileName, LoadingBar& lb);
 
-	FILE *nebula_fic;
 	vector<Nebula*> neb_array;		// The nebulas list
 	LinearFader hintsFader;
 	LinearFader flagShow;
