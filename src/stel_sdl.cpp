@@ -21,15 +21,11 @@
 #endif
 
 #include "stelapp.h"
-#include "s_gui.h"
 #include "stel_core.h"
 
 #ifdef HAVE_SDL_MIXER_H
 #include "SDL_mixer.h"
 #endif
-
-using namespace s_gui;
-
 
 void StelApp::initSDL(int w, int h, int bbpMode, bool fullScreen, string iconFile)
 {
@@ -263,7 +259,6 @@ Uint32 mytimer_callback(Uint32 interval, void *param)
 void StelApp::startMainLoop()
 {
     bool AppVisible = true;			// At The Beginning, Our App Is Visible
-    enum S_GUI_VALUE bt;
     Uint32 last_event_time = SDL_GetTicks();
     // How fast the objects on-screen are moving, in pixels/millisecond.
     double animationSpeed = 0;
@@ -305,39 +300,19 @@ void StelApp::startMainLoop()
 					break;
 				
 				case SDL_MOUSEBUTTONDOWN:
-					// Convert the name from GLU to my GUI
-					switch (E.button.button)
-					{
-						case SDL_BUTTON_RIGHT : bt=S_GUI_MOUSE_RIGHT; break;
-						case SDL_BUTTON_LEFT :  bt=S_GUI_MOUSE_LEFT; break;
-						case SDL_BUTTON_MIDDLE : bt=S_GUI_MOUSE_MIDDLE; break;
-						case SDL_BUTTON_WHEELUP : bt=S_GUI_MOUSE_WHEELUP; break;
-						case SDL_BUTTON_WHEELDOWN : bt=S_GUI_MOUSE_WHEELDOWN; break;
-						default : bt=S_GUI_MOUSE_LEFT;
-					}
-					handleClick(E.button.x,E.button.y,bt,S_GUI_PRESSED);
+					handleClick(E.button.x,E.button.y,E.button.button,SDL_MOUSEBUTTONDOWN);
 					break;
 
 				case SDL_MOUSEBUTTONUP:
-					// Convert the name from GLU to my GUI
-					switch (E.button.button)
-					{
-						case SDL_BUTTON_RIGHT : bt=S_GUI_MOUSE_RIGHT; break;
-						case SDL_BUTTON_LEFT :  bt=S_GUI_MOUSE_LEFT; break;
-						case SDL_BUTTON_MIDDLE : bt=S_GUI_MOUSE_MIDDLE; break;
-						case SDL_BUTTON_WHEELUP : bt=S_GUI_MOUSE_WHEELUP; break;
-						case SDL_BUTTON_WHEELDOWN : bt=S_GUI_MOUSE_WHEELDOWN; break;
-						default : bt=S_GUI_MOUSE_LEFT;
-					}
-					handleClick(E.button.x,E.button.y,bt,S_GUI_RELEASED);
+					handleClick(E.button.x,E.button.y,E.button.button,SDL_MOUSEBUTTONUP);
 					break;
 
 				case SDL_KEYDOWN:
 					// Send the event to the gui and stop if it has been intercepted
 					// use unicode translation, since not keyboard dependent
 					// however, for non-printing keys must revert to just keysym... !
-					if ((E.key.keysym.unicode && !handleKeys(E.key.keysym.sym,E.key.keysym.mod,E.key.keysym.unicode,S_GUI_PRESSED)) ||
-						(!E.key.keysym.unicode && !handleKeys(E.key.keysym.sym,E.key.keysym.mod,E.key.keysym.sym,S_GUI_PRESSED)))
+					if ((E.key.keysym.unicode && !handleKeys(E.key.keysym.sym,E.key.keysym.mod,E.key.keysym.unicode,SDL_KEYDOWN)) ||
+						(!E.key.keysym.unicode && !handleKeys(E.key.keysym.sym,E.key.keysym.mod,E.key.keysym.sym,SDL_KEYDOWN)))
 					{
 
 						/* Fumio patch... can't use because ignores unicode values and hence is US keyboard specific.
@@ -435,7 +410,7 @@ void StelApp::startMainLoop()
 					break;
 
 				case SDL_KEYUP:
-					handleKeys(E.key.keysym.sym,E.key.keysym.mod,E.key.keysym.sym,S_GUI_RELEASED);
+					handleKeys(E.key.keysym.sym,E.key.keysym.mod,E.key.keysym.sym,SDL_KEYUP);
 			}
 		}
 		else  // No events to poll

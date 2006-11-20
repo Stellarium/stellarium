@@ -819,7 +819,7 @@ int StelUI::handle_move(int x, int y)
 }
 
 /*******************************************************************************/
-int StelUI::handle_clic(Uint16 x, Uint16 y, S_GUI_VALUE button, S_GUI_VALUE state)
+int StelUI::handle_clic(Uint16 x, Uint16 y, Uint8 button, Uint8 state)
 {
 	// Do not allow use of mouse while script is playing
 	// otherwise script can get confused
@@ -841,9 +841,9 @@ int StelUI::handle_clic(Uint16 x, Uint16 y, S_GUI_VALUE button, S_GUI_VALUE stat
 
 	switch (button)
 	{
-	case S_GUI_MOUSE_RIGHT : break;
-	case S_GUI_MOUSE_LEFT :
-		if (state==S_GUI_PRESSED)
+	case SDL_BUTTON_RIGHT : break;
+	case SDL_BUTTON_LEFT :
+		if (state==SDL_MOUSEBUTTONDOWN)
 		{
 			is_dragging = true;
 			has_dragged = false;
@@ -855,11 +855,11 @@ int StelUI::handle_clic(Uint16 x, Uint16 y, S_GUI_VALUE button, S_GUI_VALUE stat
 			is_dragging = false;
 		}
 		break;
-	case S_GUI_MOUSE_MIDDLE : break;
-	case S_GUI_MOUSE_WHEELUP :
+	case SDL_BUTTON_MIDDLE : break;
+	case SDL_BUTTON_WHEELUP :
 		core->zoomTo(core->getAimFov()-app->MouseZoom*core->getAimFov()/60., 0.2);
 		return 1;
-	case S_GUI_MOUSE_WHEELDOWN :
+	case SDL_BUTTON_WHEELDOWN :
 		core->zoomTo(core->getAimFov()+app->MouseZoom*core->getAimFov()/60., 0.2);
 		return 1;
 	default: break;
@@ -869,12 +869,12 @@ int StelUI::handle_clic(Uint16 x, Uint16 y, S_GUI_VALUE button, S_GUI_VALUE stat
 	{
 		//if (state==S_GUI_PRESSED) return 1;
 		// Deselect the selected object
-		if (button==S_GUI_MOUSE_RIGHT && state==S_GUI_RELEASED)
+		if (button==SDL_BUTTON_RIGHT && state==SDL_MOUSEBUTTONUP)
 		{
 			app->commander->execute_command("select");
 			return 1;
 		}
-		if (button==S_GUI_MOUSE_MIDDLE && state==S_GUI_RELEASED)
+		if (button==SDL_BUTTON_MIDDLE && state==SDL_MOUSEBUTTONUP)
 		{
 			if (core->getFlagHasSelected())
 			{
@@ -882,7 +882,7 @@ int StelUI::handle_clic(Uint16 x, Uint16 y, S_GUI_VALUE button, S_GUI_VALUE stat
 				core->setFlagTracking(true);
 			}
 		}
-		if (button==S_GUI_MOUSE_LEFT && state==S_GUI_RELEASED && !has_dragged)
+		if (button==SDL_BUTTON_LEFT && state==SDL_MOUSEBUTTONUP && !has_dragged)
 		{
 			// CTRL + left clic = right clic for 1 button mouse
 			if (SDL_GetModState() & KMOD_CTRL)
@@ -912,13 +912,13 @@ int StelUI::handle_clic(Uint16 x, Uint16 y, S_GUI_VALUE button, S_GUI_VALUE stat
 #endif
 
 
-int StelUI::handle_keys(SDLKey key, SDLMod mod, Uint16 unicode, S_GUI_VALUE state)
+int StelUI::handle_keys(SDLKey key, SDLMod mod, Uint16 unicode, Uint8 state)
 {
 
 	if (desktop->onKey(unicode, state))
 		return 1;
 
-	if (state==S_GUI_PRESSED)
+	if (state==SDL_KEYDOWN)
 	{
 //printf("handle_keys: '%c'(%d), %d, 0x%04x\n",key,(int)key,unicode,mod);
 		if (unicode >= 128) {

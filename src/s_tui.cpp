@@ -91,7 +91,7 @@ wstring Container::getString(void)
 }
 
 
-bool Container::onKey(Uint16 k, S_TUI_VALUE s)
+bool Container::onKey(Uint16 k, Uint8 s)
 {
 	list<Component*>::iterator iter = childs.begin();
 	while (iter != childs.end())
@@ -151,11 +151,11 @@ bool Branch::setValue_Specialslash(const wstring& s)
 	return false;
 }
 
-bool Branch::onKey(Uint16 k, S_TUI_VALUE v)
+bool Branch::onKey(Uint16 k, Uint8 v)
 {
 	if (!*current) return false;
-	if (v==S_TUI_RELEASED) return (*current)->onKey(k,v);
-	if (v==S_TUI_PRESSED)
+	if (v==SDL_KEYUP) return (*current)->onKey(k,v);
+	if (v==SDL_KEYDOWN)
 	{
 		if ((*current)->onKey(k,v)) return true;
 		else
@@ -182,14 +182,14 @@ MenuBranch::MenuBranch(const wstring& s) : Branch(), label(s), isNavigating(fals
 {
 }
 
-bool MenuBranch::onKey(Uint16 k, S_TUI_VALUE v)
+bool MenuBranch::onKey(Uint16 k, Uint8 v)
 {
 	if (isNavigating)
 	{
 		if (isEditing)
 		{
 			if ((*Branch::current)->onKey(k, v)) return true;
-			if (v==S_TUI_PRESSED && (k==SDLK_LEFT || k==SDLK_ESCAPE || k==SDLK_RETURN))
+			if (v==SDL_KEYDOWN && (k==SDLK_LEFT || k==SDLK_ESCAPE || k==SDLK_RETURN))
 			{
 				isEditing = false;
 				return true;
@@ -198,22 +198,22 @@ bool MenuBranch::onKey(Uint16 k, S_TUI_VALUE v)
 		}
 		else
 		{
-			if (v==S_TUI_PRESSED && k==SDLK_UP)
+			if (v==SDL_KEYDOWN && k==SDLK_UP)
 			{
 				if (Branch::current!=Branch::childs.begin()) --Branch::current;
 				return true;
 			}
-			if (v==S_TUI_PRESSED && k==SDLK_DOWN)
+			if (v==SDL_KEYDOWN && k==SDLK_DOWN)
 			{
 				if (Branch::current!=--Branch::childs.end()) ++Branch::current;
 				return true;
 			}
-			if (v==S_TUI_PRESSED && (k==SDLK_RIGHT || k==SDLK_RETURN))
+			if (v==SDL_KEYDOWN && (k==SDLK_RIGHT || k==SDLK_RETURN))
 			{
 				if ((*Branch::current)->isEditable()) isEditing = true;
 				return true;
 			}
-			if (v==S_TUI_PRESSED && (k==SDLK_LEFT || k==SDLK_ESCAPE))
+			if (v==SDL_KEYDOWN && (k==SDLK_LEFT || k==SDLK_ESCAPE))
 			{
 				isNavigating = false;
 				return true;
@@ -223,7 +223,7 @@ bool MenuBranch::onKey(Uint16 k, S_TUI_VALUE v)
 	}
 	else
 	{
-		if (v==S_TUI_PRESSED && (k==SDLK_RIGHT || k==SDLK_RETURN))
+		if (v==SDL_KEYDOWN && (k==SDLK_RIGHT || k==SDLK_RETURN))
 		{
 			isNavigating = true;
 			return true;
@@ -248,12 +248,12 @@ MenuBranch_item::MenuBranch_item(const wstring& s) : Branch(), label(s), isEditi
 {
 }
 
-bool MenuBranch_item::onKey(Uint16 k, S_TUI_VALUE v)
+bool MenuBranch_item::onKey(Uint16 k, Uint8 v)
 {
 	if (isEditing)
 	{
 		if ((*Branch::current)->onKey(k, v)) return true;
-		if (v==S_TUI_PRESSED && (k==SDLK_LEFT || k==SDLK_ESCAPE || k==SDLK_RETURN))
+		if (v==SDL_KEYDOWN && (k==SDLK_LEFT || k==SDLK_ESCAPE || k==SDLK_RETURN))
 		{
 			isEditing = false;
 			return true;
@@ -262,24 +262,24 @@ bool MenuBranch_item::onKey(Uint16 k, S_TUI_VALUE v)
 	}
 	else
 	{
-		if (v==S_TUI_PRESSED && k==SDLK_UP)
+		if (v==SDL_KEYDOWN && k==SDLK_UP)
 		{
 			if (Branch::current!=Branch::childs.begin()) --Branch::current;
 			if (!onChangeCallback.empty()) onChangeCallback();
 			return true;
 		}
-		if (v==S_TUI_PRESSED && k==SDLK_DOWN)
+		if (v==SDL_KEYDOWN && k==SDLK_DOWN)
 		{
 			if (Branch::current!=--Branch::childs.end()) ++Branch::current;
 			if (!onChangeCallback.empty()) onChangeCallback();
 			return true;
 		}
-		if (v==S_TUI_PRESSED && (k==SDLK_RIGHT || k==SDLK_RETURN))
+		if (v==SDL_KEYDOWN && (k==SDLK_RIGHT || k==SDLK_RETURN))
 		{
 			if ((*Branch::current)->isEditable()) isEditing = true;
 			return true;
 		}
-		if (v==S_TUI_PRESSED && (k==SDLK_LEFT || k==SDLK_ESCAPE))
+		if (v==SDL_KEYDOWN && (k==SDLK_LEFT || k==SDLK_ESCAPE))
 		{
 			return false;
 		}
@@ -304,9 +304,9 @@ Boolean_item::Boolean_item(bool init_state, const wstring& _label, const wstring
 	string_disabled = _string_disabled;
 }
 
-bool Boolean_item::onKey(Uint16 k, S_TUI_VALUE v)
+bool Boolean_item::onKey(Uint16 k, Uint8 v)
 {
-	if (v==S_TUI_PRESSED && (k==SDLK_UP || k==SDLK_DOWN) )
+	if (v==SDL_KEYDOWN && (k==SDLK_UP || k==SDLK_DOWN) )
 	{
 		state = !state;
 		if (!onChangeCallback.empty()) onChangeCallback();
@@ -332,9 +332,9 @@ wstring Decimal::getString(void)
 	return (active ? start_active : L"") + StelUtils::doubleToWstring(value) + (active ? stop_active : L"");
 }
 
-bool Integer_item::onKey(Uint16 k, S_TUI_VALUE v)
+bool Integer_item::onKey(Uint16 k, Uint8 v)
 {
-	if (v==S_TUI_RELEASED) return false;
+	if (v==SDL_KEYUP) return false;
 	if (!numInput)
 	{
 		if (k==SDLK_UP)
@@ -434,9 +434,9 @@ wstring Integer_item::getString(void)
 	else return label + (active ? start_active : L"") + StelUtils::doubleToWstring(value) + (active ? stop_active : L"");
 }
 
-bool Decimal_item::onKey(Uint16 k, S_TUI_VALUE v)
+bool Decimal_item::onKey(Uint16 k, Uint8 v)
 {
-	if (v==S_TUI_RELEASED) return false;
+	if (v==SDL_KEYUP) return false;
 	if (!numInput)
 	{
 		if (k==SDLK_UP)
@@ -566,9 +566,9 @@ Time_item::~Time_item()
 	delete s;
 }
 
-bool Time_item::onKey(Uint16 k, S_TUI_VALUE v)
+bool Time_item::onKey(Uint16 k, Uint8 v)
 {
-	if (v==S_TUI_RELEASED) return false;
+	if (v==SDL_KEYUP) return false;
 
 	if (current_edit->onKey(k,v))
 	{
@@ -756,9 +756,9 @@ Time_zone_item::Time_zone_item(const string& zonetab_file, const wstring& _label
 	current_edit=&continents_names;
 }
 
-bool Time_zone_item::onKey(Uint16 k, S_TUI_VALUE v)
+bool Time_zone_item::onKey(Uint16 k, Uint8 v)
 {
-	if (v==S_TUI_RELEASED) return false;
+	if (v==SDL_KEYUP) return false;
 
 	if (current_edit->onKey(k,v))
 	{
@@ -834,9 +834,9 @@ wstring Action_item::getString(void)
 	}
 }
 
-bool Action_item::onKey(Uint16 k, S_TUI_VALUE v)
+bool Action_item::onKey(Uint16 k, Uint8 v)
 {
-	if (v==S_TUI_PRESSED && k==SDLK_RETURN)
+	if (v==SDL_KEYDOWN && k==SDLK_RETURN)
 	{
 		// Call the callback if enter is pressed
 		if (!onChangeCallback.empty()) onChangeCallback();
@@ -862,9 +862,9 @@ wstring ActionConfirm_item::getString(void)
 	else return label + string_prompt1;
 }
 
-bool ActionConfirm_item::onKey(Uint16 k, S_TUI_VALUE v)
+bool ActionConfirm_item::onKey(Uint16 k, Uint8 v)
 {
-	if (v==S_TUI_PRESSED && k==SDLK_RETURN)
+	if (v==SDL_KEYDOWN && k==SDLK_RETURN)
 	{
 		if (isConfirming)
 		{
@@ -879,7 +879,7 @@ bool ActionConfirm_item::onKey(Uint16 k, S_TUI_VALUE v)
 			return true;
 		}
 	}
-	if (v==S_TUI_PRESSED && ( k==SDLK_ESCAPE || k==SDLK_LEFT) )
+	if (v==SDL_KEYDOWN && ( k==SDLK_ESCAPE || k==SDLK_LEFT) )
 	{
 		if (isConfirming)
 		{
@@ -911,9 +911,9 @@ Vector_item::~Vector_item()
 	delete c;
 }
 
-bool Vector_item::onKey(Uint16 k, S_TUI_VALUE v)
+bool Vector_item::onKey(Uint16 k, Uint8 v)
 {
-	if (v==S_TUI_RELEASED) return false;
+	if (v==SDL_KEYUP) return false;
 
 	if (current_edit->onKey(k,v))
 	{

@@ -34,12 +34,13 @@ public:
 	StelModuleMgr();
     ~StelModuleMgr();
 	
-	//! Add a static (no dynamic linking) module.
+	//! Register a new StelModule to the list
 	void registerModule(StelModule* m)
 	{
 		if (modules.find(m->getModuleID()) != modules.end())
 		{		
 			std::cerr << "Module \"" << m->getModuleID() << "\" is already loaded." << std::endl;
+			return;
 		}
 		modules.insert(std::pair<string, StelModule*>(m->getModuleID(), m));
 	}
@@ -50,14 +51,13 @@ public:
 	//! @return the loaded module or NULL in case of error. The returned Stelmodule still needs to be initialized 
 	StelModule* loadExternalModule(const string& moduleID);
 	
-	//! Get the corresponding module, crashes if can't find it.
+	//! Get the corresponding module or NULL if can't find it.
 	StelModule* getModule(const string& moduleID)
 	{
 		std::map<string, StelModule*>::const_iterator iter = modules.find(moduleID);
 		if (iter==modules.end())
 		{
-			std::cerr << "Module \"" << moduleID << "\" does not exists or is not loaded." << std::endl;
-			assert(0);
+			return NULL;
 		}
 		return iter->second;
 	}

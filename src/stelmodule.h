@@ -28,6 +28,15 @@
 #include <map>
 #include <vector>
 #include <boost/any.hpp>
+
+#include "SDL.h"
+// mac seems to use KMOD_META instead of KMOD_CTRL
+#ifdef MACOSX
+  #define COMPATIBLE_KMOD_CTRL KMOD_META
+#else
+  #define COMPATIBLE_KMOD_CTRL KMOD_CTRL
+#endif
+
 #include "callbacks.hpp"
 
 #include "stellarium.h"
@@ -71,8 +80,7 @@ public:
 	//! @brief Update sky culture, i.e. load data if necessary and translate them to current sky language if needed.
 	virtual void updateSkyCulture(LoadingBar& lb) {;}
 	
-	//! Get the identifier of the module. Must be unique, it is also the name of the .so (or .dll) file
-	//! if the module comes from a shared library
+	//! Get the identifier of the module. Must be unique.
 	virtual string getModuleID() const = 0;	
 	
 	//! Get the version of the module, default is stellarium main version
@@ -87,6 +95,29 @@ public:
 	//! Get whether the module is an external module or if it belongs to the standard stellarium package
 	//! The draw and update method is automatically called for external modules
 	virtual bool isExternal() {return false;}
+
+	//! Handle mouse clicks. Please note that most of the interactions will be done through the GUI. 
+	//! @param x X mouse position in pixels.
+	//! @param y Y mouse position in pixels.
+	//! @param button the mouse button. Can be SDL_BUTTON_LEFT, SDL_BUTTON_RIGHT, SDL_BUTTON_MIDDLE,
+	//!   SDL_BUTTON_WHEELUP, SDL_BUTTON_WHEELDOWN
+	//! @param state the state of the button. Can be SDL_MOUSEBUTTONDOWN, SDL_MOUSEBUTTONUP.
+	//! @return false if the event was not intercepted, true otherwise.
+	virtual bool handleMouseClicks(Uint16 x, Uint16 y, Uint8 button, Uint8 state) {return false;}
+	
+	//! Handle mouse moves. Please note that most of the interactions will be done through the GUI. 
+	//! @param x X mouse position in pixels.
+	//! @param y Y mouse position in pixels.
+	//! @return false if the event was not intercepted, true otherwise.
+	virtual bool handleMouseMoves(Uint16 x, Uint16 y) {return false;}
+	
+	//! Handle key events. Please note that most of the interactions will be done through the GUI.
+	//! @param key the SDL key code.
+	//! @param mod the current mod state, needed to determine whether e.g CTRL or SHIFT key are pressed.
+	//! @param unicode the unicode key code.
+	//! @param state the press state of the key. Can be SDL_KEYDOWN or SDL_KEYUP.
+	//! @return false if the event was not intercepted, true otherwise.
+	virtual bool handleKeys(SDLKey key, SDLMod mod, Uint16 unicode, Uint8 state) {return false;}
 	
 	///////////////////////////////////////////////////////////////////////////
 	// Properties managment

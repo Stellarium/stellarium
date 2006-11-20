@@ -49,14 +49,29 @@ namespace StelUtils {
 	//! @param m minute component
 	//!	@param s second component
 	//! @return angle in radian
-	double hms_to_rad(unsigned int h, unsigned int m, double s);
+	double hmsToRad(unsigned int h, unsigned int m, double s);
 			   
-	//! @brief Convert an angle in dms format to radian
+	//! @brief Convert an angle in +-dms format to radian
 	//! @param d degree component
 	//! @param m arcmin component
 	//!	@param s arcsec component
 	//! @return angle in radian
-	double dms_to_rad(int d, int m, double s);	  
+	double dmsToRad(int d, unsigned int m, double s);
+	
+	//! @brief Convert an angle in radian to hms format
+	//! @param rad input angle in radian
+	//! @param h hour component
+	//! @param m minute component
+	//!	@param s second component
+	void radToHms(double rad, unsigned int& h, unsigned int& m, double& s);
+	
+	//! @brief Convert an angle in radian to +-dms format
+	//! @param rad input angle in radian
+	//! @param sign true if positive, false otherwise
+	//! @param d degree component
+	//! @param m minute component
+	//!	@param s second component
+	void radToDms(double rad, bool& sign, unsigned int& d, unsigned int& m, double& s);	
 
 	//! @brief Obtains a Vec3f from a string
 	//! @param s the string describing the Vector with the form "x,y,z"
@@ -70,10 +85,10 @@ namespace StelUtils {
 	//! @deprecated Use the << operator from Vec3f class
 	string vec3f_to_str(const Vec3f& v);
 	
-	//! @brief Print the passed angle with the format ddÂ°mm'ss(.ss)"
+	//! @brief Print the passed angle with the format dd�mm'ss(.ss)"
 	//! @param angle Angle in radian
 	//! @param decimal Define if 2 decimal must also be printed
-	//! @param useD Define if letter "d" must be used instead of Â°
+	//! @param useD Define if letter "d" must be used instead of �
 	//! @return The corresponding string
 	wstring printAngleDMS(double angle, bool decimals = false, bool useD = false);
 	

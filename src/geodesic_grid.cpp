@@ -88,7 +88,29 @@ static const TopLevelTriangle icosahedron_triangles[20] = {
   { 8, 9, 5}  //  8
 };
 
-
+// Create a Convex from 4 vectors
+Convex::Convex(const Vec3d &e0,const Vec3d &e1,const Vec3d &e2,const Vec3d &e3) : halfSpaces(4)
+{
+  halfSpaces[0].d = e0*((e1-e0)^(e2-e0));
+  if (halfSpaces[0].d > 0)
+  {
+    halfSpaces[0].n = e0^e1;
+    halfSpaces[1].n = e1^e2;
+    halfSpaces[2].n = e2^e3;
+    halfSpaces[3].n = e3^e0;
+    halfSpaces[0].d = 0.0;
+    halfSpaces[1].d = 0.0;
+    halfSpaces[2].d = 0.0;
+    halfSpaces[3].d = 0.0;
+  }
+  else
+  {
+  	halfSpaces.pop_back();
+  	halfSpaces.pop_back();
+  	halfSpaces.pop_back();
+    halfSpaces[0].n = (e1-e0)^(e2-e0);
+  }
+}
 
 GeodesicGrid::GeodesicGrid(const int lev)
              :max_level(lev<0?0:lev) {
@@ -279,24 +301,23 @@ int GeodesicGrid::searchZone(const Vec3d &v,int search_level) const {
   return -1;
 }
 
-void GeodesicGrid::searchZones(const HalfSpace *half_spaces,
-                               const int nr_of_half_spaces,
+void GeodesicGrid::searchZones(const Convex& convex,
                                int **inside_list,int **border_list,
                                int max_search_level) const {
   if (max_search_level < 0) max_search_level = 0;
   else if (max_search_level > max_level) max_search_level = max_level;
-  int halfs_used[nr_of_half_spaces];
-  for (int h=0;h<nr_of_half_spaces;h++) {halfs_used[h] = h;}
-  bool corner_inside[12][nr_of_half_spaces];
-  for (int h=0;h<nr_of_half_spaces;h++) {
-    const HalfSpace &half_space(half_spaces[h]);
+  int halfs_used[convex.getNbHalfSpace()];
+  for (int h=0;h<(int)convex.getNbHalfSpace();h++) {halfs_used[h] = h;}
+  bool corner_inside[12][convex.getNbHalfSpace()];
+  for (size_t h=0;h<convex.getNbHalfSpace();h++) {
+    const HalfSpace &half_space(convex[h]);
     for (int i=0;i<12;i++) {
       corner_inside[i][h] = half_space.inside(icosahedron_corners[i]);
     }
   }
   for (int i=0;i<20;i++) {
     searchZones(0,i,
-                half_spaces,nr_of_half_spaces,halfs_used,nr_of_half_spaces,
+                convex,halfs_used,convex.getNbHalfSpace(),
                 corner_inside[icosahedron_triangles[i].corners[0]],
                 corner_inside[icosahedron_triangles[i].corners[1]],
                 corner_inside[icosahedron_triangles[i].corners[2]],
@@ -305,8 +326,7 @@ void GeodesicGrid::searchZones(const HalfSpace *half_spaces,
 }
 
 void GeodesicGrid::searchZones(int lev,int index,
-                               const HalfSpace *half_spaces,
-                               const int nr_of_half_spaces,
+                               const Convex& convex,
                                const int *index_of_used_half_spaces,
                                const int half_spaces_used,
                                const bool *corner0_inside,
@@ -341,30 +361,30 @@ void GeodesicGrid::searchZones(int lev,int index,
       index <<= 2;
       inside_list++;
       border_list++;
-      bool edge0_inside[nr_of_half_spaces];
-      bool edge1_inside[nr_of_half_spaces];
-      bool edge2_inside[nr_of_half_spaces];
+      bool edge0_inside[convex.getNbHalfSpace()];
+      bool edge1_inside[convex.getNbHalfSpace()];
+      bool edge2_inside[convex.getNbHalfSpace()];
       for (int h=0;h<halfs_used_count;h++) {
         const int i = halfs_used[h];
-        const HalfSpace &half_space(half_spaces[i]);
+        const HalfSpace &half_space(convex[i]);
         edge0_inside[i] = half_space.inside(t.e0);
         edge1_inside[i] = half_space.inside(t.e1);
         edge2_inside[i] = half_space.inside(t.e2);
       }
       searchZones(lev,index+0,
-                  half_spaces,nr_of_half_spaces,halfs_used,halfs_used_count,
+                  convex,halfs_used,halfs_used_count,
                   corner0_inside,edge2_inside,edge1_inside,
                   inside_list,border_list,max_search_level);
       searchZones(lev,index+1,
-                  half_spaces,nr_of_half_spaces,halfs_used,halfs_used_count,
+                  convex,halfs_used,halfs_used_count,
                   edge2_inside,corner1_inside,edge0_inside,
                   inside_list,border_list,max_search_level);
       searchZones(lev,index+2,
-                  half_spaces,nr_of_half_spaces,halfs_used,halfs_used_count,
+                  convex,halfs_used,halfs_used_count,
                   edge1_inside,edge0_inside,corner2_inside,
                   inside_list,border_list,max_search_level);
       searchZones(lev,index+3,
-                  half_spaces,nr_of_half_spaces,halfs_used,halfs_used_count,
+                  convex,halfs_used,halfs_used_count,
                   edge0_inside,edge1_inside,edge2_inside,
                   inside_list,border_list,max_search_level);
     }
@@ -392,35 +412,20 @@ GeodesicSearchResult::~GeodesicSearchResult(void) {
   delete zones;
 }
 
-void GeodesicSearchResult::search(const HalfSpace *half_spaces,
-                                  const int nr_of_half_spaces,
+void GeodesicSearchResult::search(const Convex& convex,
                                   int max_search_level) {
   for (int i=grid.getMaxLevel();i>=0;i--) {
     inside[i] = zones[i];
     border[i] = zones[i]+GeodesicGrid::nrOfZones(i);
   }
-  grid.searchZones(half_spaces,nr_of_half_spaces,inside,border,max_search_level);
+  grid.searchZones(convex,inside,border,max_search_level);
 }
 
 void GeodesicSearchResult::search(const Vec3d &e0,const Vec3d &e1,
                                   const Vec3d &e2,const Vec3d &e3,
                                   int max_search_level) {
-  HalfSpace half_spaces[4];
-  half_spaces[0].d = e0*((e1-e0)^(e2-e0));
-  if (half_spaces[0].d > 0) {
-    half_spaces[0].n = e0^e1;
-    half_spaces[1].n = e1^e2;
-    half_spaces[2].n = e2^e3;
-    half_spaces[3].n = e3^e0;
-    half_spaces[0].d = 0.0;
-    half_spaces[1].d = 0.0;
-    half_spaces[2].d = 0.0;
-    half_spaces[3].d = 0.0;
-    search(half_spaces,4,max_search_level);
-  } else {
-    half_spaces[0].n = (e1-e0)^(e2-e0);
-    search(half_spaces,1,max_search_level);
-  }
+  Convex c(e0, e1, e2, e3);
+  search(c,max_search_level);
 }
 
 

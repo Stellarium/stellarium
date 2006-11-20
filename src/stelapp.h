@@ -20,8 +20,9 @@
 #ifndef STELAPP_H
 #define STELAPP_H
 
+#include <string>
 #include "stellarium.h"
-#include "s_gui.h"
+#include "SDL.h"	// SDL is used only for the key codes types
 
 // Predeclaration of some classes
 class StelCore;
@@ -35,6 +36,8 @@ class SkyLocalizer;
 class StelSkyCultureMgr;
 class StelModuleMgr;
 class StelTextureMgr;
+
+using namespace std;
 
 //! Singleton main Stellarium application class.
 //! @author Fabien Chereau
@@ -157,12 +160,11 @@ private:
 	void quit(void);
 
 	// Handle mouse clics
-	int handleClick(int x, int y, s_gui::S_GUI_VALUE button, s_gui::S_GUI_VALUE state);
+	int handleClick(int x, int y, Uint8 button, Uint8 state);
 	// Handle mouse move
 	int handleMove(int x, int y);
 	// Handle key press and release
-	int handleKeys(SDLKey key, SDLMod mod,
-	               Uint16 unicode, s_gui::S_GUI_VALUE state);
+	int handleKeys(SDLKey key, SDLMod mod, Uint16 unicode, Uint8 state);
 
 	// n.b. - do not confuse this with sky time rate
 	int getTimeMultiplier() { return time_multiplier; }
@@ -199,10 +201,6 @@ private:
 	// Full path to root dir
 	string rootDir;
 
-	// Script related
-	string SelectedScript;  // script filename (without directory) selected in a UI to run when exit UI
-	string SelectedScriptDirectory;  // script directory for same
-
 	// Module manager for the application
 	StelModuleMgr* moduleMgr;
 	
@@ -228,9 +226,6 @@ private:
 	int frame, timefr, timeBase;		// Used for fps counter
 	float fps;
 	float minfps, maxfps;
-
-	int FlagTimePause;
-	double temp_time_velocity;			// Used to store time speed while in pause
 
 	// Flags for mouse movements
 	bool is_mouse_moving_horiz;
