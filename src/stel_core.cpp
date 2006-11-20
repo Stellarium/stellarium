@@ -862,9 +862,7 @@ void StelCore::setColorScheme(const string& skinFile, const string& section)
 	ssystem->setOrbitsColor(StelUtils::str_to_vec3f(conf.get_str(section,"planet_orbits_color", defaultColor)));
 	ssystem->setTrailsColor(StelUtils::str_to_vec3f(conf.get_str(section,"object_trails_color", defaultColor)));
 	equ_grid->setColor(StelUtils::str_to_vec3f(conf.get_str(section,"equatorial_color", defaultColor)));
-	//equ_grid->set_top_transparancy(draw_mode==DM_NORMAL);
 	azi_grid->setColor(StelUtils::str_to_vec3f(conf.get_str(section,"azimuthal_color", defaultColor)));
-	//azi_grid->set_top_transparancy(draw_mode==DM_NORMAL);
 	equator_line->setColor(StelUtils::str_to_vec3f(conf.get_str(section,"equator_color", defaultColor)));
 	ecliptic_line->setColor(StelUtils::str_to_vec3f(conf.get_str(section,"ecliptic_color", defaultColor)));
 	meridian_line->setColor(StelUtils::str_to_vec3f(conf.get_str(section,"meridian_color", defaultColor)));

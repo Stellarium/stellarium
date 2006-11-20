@@ -38,7 +38,7 @@
 using namespace std;
 
 
-StelCommandInterface::StelCommandInterface(StelCore * core, StelApp * app) {
+StelCommandInterface::StelCommandInterface(StelCore * core, StelApp * app) : FlagTimePause(0) {
   stcore = core;
   stapp = app;
   audio = NULL;
@@ -264,19 +264,17 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 			stcore->getNavigation()->setTimeSpeed(StelUtils::str_to_double(args["rate"])*JD_SECOND);
 		  
 		} else if(args["action"]=="pause") {
-			// TODO why is this in stelapp?  should be in stelcore - Rob
-			stapp->FlagTimePause = !stapp->FlagTimePause;
-			if(stapp->FlagTimePause) {
-				// TODO pause should be all handled in core methods
-				stapp->temp_time_velocity = stcore->getNavigation()->getTimeSpeed();
+			FlagTimePause = !FlagTimePause;
+			if(FlagTimePause) {
+				temp_time_velocity = stcore->getNavigation()->getTimeSpeed();
 				stcore->getNavigation()->setTimeSpeed(0);
 			} else {
-				stcore->getNavigation()->setTimeSpeed(stapp->temp_time_velocity);
+				stcore->getNavigation()->setTimeSpeed(temp_time_velocity);
 			}
 		  
 		} else if(args["action"]=="resume") {
-			stapp->FlagTimePause = 0;
-			stcore->getNavigation()->setTimeSpeed(stapp->temp_time_velocity);
+			FlagTimePause = 0;
+			stcore->getNavigation()->setTimeSpeed(temp_time_velocity);
 		  
 		} else if(args["action"]=="increment") {
 			// speed up time rate

@@ -18,8 +18,6 @@
  */
 
 // Class which handles a stellarium User Interface
-// TODO : get rid of the SDL macro def and types
-// need the creation of an interface between s_gui and SDL
 
 #ifndef _STEL_UI_H
 #define _STEL_UI_H
@@ -52,17 +50,17 @@ public:
 	void draw_gravity_ui(void);	// Draw simple gravity text ui.
 
 	// Handle mouse clics
-	int handle_clic(Uint16 x, Uint16 y, S_GUI_VALUE button, S_GUI_VALUE state);
+	int handle_clic(Uint16 x, Uint16 y, Uint8 button, Uint8 state);
 	// Handle mouse move
 	int handle_move(int x, int y);
 	// Handle key press and release
-	int handle_keys(SDLKey key, SDLMod mod, Uint16 unicode, S_GUI_VALUE state);
+	int handle_keys(SDLKey key, SDLMod mod, Uint16 unicode, Uint8 state);
 
 	// Text UI
 	void init_tui(void);
 	void localizeTui(void);
 	void draw_tui(void);		// Display the tui
-	int handle_keys_tui(Uint16 key, s_tui::S_TUI_VALUE state);
+	int handle_keys_tui(Uint16 key, Uint8 state);
 	// Update all the tui widgets with values taken from the core parameters
 	void tui_update_widgets(void);
 	void tuiUpdateIndependentWidgets(void); // For widgets that aren't tied directly to current settings
@@ -424,6 +422,10 @@ private:
 
 	bool ScriptDirectoryRead;
 	double MouseTimeLeft;  // for cursor timeout (seconds)
+	
+	// Script related
+	string SelectedScript;  // script filename (without directory) selected in a UI to run when exit UI
+	string SelectedScriptDirectory;  // script directory for same
 };
 
 #endif  //_STEL_UI_H

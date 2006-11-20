@@ -51,6 +51,9 @@ class StelCommandInterface : CommandInterface, public StelModule
   virtual void update(double delta_time);
 
  private:
+	int FlagTimePause;
+	double temp_time_velocity;			// Used to store time speed while in pause
+	
   StelCore * stcore;
   StelApp * stapp;
   Audio * audio;  // for audio track from script

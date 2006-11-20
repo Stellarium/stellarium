@@ -444,9 +444,28 @@ void StelUI::draw_tui(void)
 	}
 }
 
-int StelUI::handle_keys_tui(Uint16 key, s_tui::S_TUI_VALUE state)
+int StelUI::handle_keys_tui(Uint16 key, Uint8 state)
 {
-	return tui_root->onKey(key, state);
+	if (!FlagShowTuiMenu)
+	{
+		return 0;
+	}
+	if (state==SDL_KEYDOWN && key=='m')
+	{
+		// leave tui menu
+		FlagShowTuiMenu = false;
+
+		// If selected a script in tui, run that now
+		if(SelectedScript!="")
+			app->commander->execute_command("script action play filename " +  SelectedScript
+			                           + " path " + SelectedScriptDirectory);
+
+		// clear out now
+		SelectedScriptDirectory = SelectedScript = "";
+		return 1;
+	}
+	tui_root->onKey(key, state);
+	return 1;
 }
 
 // Update all the core parameters with values taken from the tui widgets
@@ -524,7 +543,7 @@ void StelUI::tui_update_widgets(void)
 
 	// 7. Scripts
 	// each fresh time enter needs to reset to select message
-	if(app->SelectedScript=="") {
+	if(SelectedScript=="") {
 		tui_scripts_local->setCurrent(_(TUI_SCRIPT_MSG));
 		
 		if(ScriptDirectoryRead) {
@@ -623,10 +642,10 @@ void StelUI::tui_cb_scripts_removeable() {
   } 
 
   if(tui_scripts_removeable->getCurrent()==_(TUI_SCRIPT_MSG)) {
-	  app->SelectedScript = "";
+	  SelectedScript = "";
   } else {
-	  app->SelectedScript = StelUtils::wstringToString(tui_scripts_removeable->getCurrent());
-	  app->SelectedScriptDirectory = SCRIPT_REMOVEABLE_DISK;
+	  SelectedScript = StelUtils::wstringToString(tui_scripts_removeable->getCurrent());
+	  SelectedScriptDirectory = SCRIPT_REMOVEABLE_DISK;
 	  // to avoid confusing user, clear out local script selection as well
 	  tui_scripts_local->setCurrent(_(TUI_SCRIPT_MSG));
   } 
@@ -637,12 +656,12 @@ void StelUI::tui_cb_scripts_removeable() {
 void StelUI::tui_cb_scripts_local() {
   
 	if(tui_scripts_local->getCurrent()!=_(TUI_SCRIPT_MSG)){
-    app->SelectedScript = StelUtils::wstringToString(tui_scripts_local->getCurrent());
-	app->SelectedScriptDirectory = StelApp::getInstance().getDataFilePath("scripts/");
+    SelectedScript = StelUtils::wstringToString(tui_scripts_local->getCurrent());
+	SelectedScriptDirectory = StelApp::getInstance().getDataFilePath("scripts/");
     // to reduce confusion for user, clear out removeable script selection as well
     if(ScriptDirectoryRead) tui_scripts_removeable->setCurrent(_(TUI_SCRIPT_MSG));
   } else {
-    app->SelectedScript = "";
+    SelectedScript = "";
   }
 }
 

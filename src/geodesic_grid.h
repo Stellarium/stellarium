@@ -36,6 +36,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #define _GEODESIC_GRID_H_
 
 #include "vecmath.h"
+#include <vector>
 
 using namespace std;
 
@@ -44,6 +45,17 @@ struct HalfSpace {
   Vec3d n;
   double d;
   bool inside(const Vec3d &x) const {return (x*n>=d);}
+};
+
+class Convex {
+	// Intersection of several HalfSpaces defining a region
+public:
+	Convex(const Vec3d &e0,const Vec3d &e1,const Vec3d &e2,const Vec3d &e3);
+	size_t getNbHalfSpace(void) const {return halfSpaces.size();}
+	const HalfSpace& operator[](size_t x) const {return halfSpaces[x];}
+	void addHalfSpace(const HalfSpace& h) {halfSpaces.push_back(h);}
+private:
+	std::vector<HalfSpace> halfSpaces;
 };
 
 class GeodesicGrid {
@@ -79,7 +91,7 @@ public:
     // one such zone is returned (always the same one,
     // because the algorithm is deterministic).
 
-  void searchZones(const HalfSpace *half_spaces,int nr_of_half_spaces,
+  void searchZones(const Convex& convex,
                    int **inside,int **border,int max_search_level) const;
     // find all zones that lie fully(inside) or partly(border)
     // in the intersection of the given half spaces.
@@ -112,8 +124,7 @@ private:
                       VisitFunc *func,
                       void *context) const;
   void searchZones(int lev,int index,
-                   const HalfSpace *half_spaces,
-                   const int nr_of_half_spaces,
+                   const Convex& convex,
                    const int *index_of_used_half_spaces,
                    const int half_spaces_used,
                    const bool *corner0_inside,
@@ -134,8 +145,7 @@ class GeodesicSearchResult {
 public:
   GeodesicSearchResult(const GeodesicGrid &grid);
   ~GeodesicSearchResult(void);
-  void search(const HalfSpace *half_spaces,
-              const int nr_of_half_spaces,
+  void search(const Convex& convex,
               int max_search_level);
   void search(const Vec3d &e0,const Vec3d &e1,const Vec3d &e2,const Vec3d &e3,
               int max_search_level);

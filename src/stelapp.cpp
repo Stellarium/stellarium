@@ -42,7 +42,7 @@ StelApp* StelApp::singleton = NULL;
  Create and initialize the main Stellarium application.
 *************************************************************************/
 StelApp::StelApp(const string& CDIR, const string& LDIR, const string& DATA_ROOT) :
-		frame(0), timefr(0), timeBase(0), fps(0), maxfps(10000.f),  FlagTimePause(0),
+		frame(0), timefr(0), timeBase(0), fps(0), maxfps(10000.f),
 		is_mouse_moving_horiz(false), is_mouse_moving_vert(false), draw_mode(StelApp::DM_NORMAL)
 {
 	// Can't create 2 StelApp instances
@@ -216,7 +216,7 @@ void StelApp::init(void)
 	// Initialize after creation of openGL context
 	textureMgr->init();
 
-	// Clear screen, this fixes a strange artifact at loading time in the upper top corner.
+	// Clear screen, this fixes a strange artifact at loading time in the upper corner.
 	glClear(GL_COLOR_BUFFER_BIT);
 
 	maxfps 				= conf.get_double ("video","maximum_fps",10000);
@@ -226,7 +226,7 @@ void StelApp::init(void)
 
 	localeMgr->init(conf);
 	skyCultureMgr->init(conf);
-
+	
 	core->init(conf);
 //ugly fix by johannes: call skyCultureMgr->init twice so that
 // star names are loaded again
@@ -250,7 +250,7 @@ skyCultureMgr->init(conf);
 	ui->init_tui();  // don't reinit tui since probably called from there
 
 	// Initialisation of the color scheme
-	draw_mode = StelApp::DM_NORMAL;  // fool caching
+	draw_mode = draw_mode=DM_NIGHT;  // fool caching
 	setVisionModeNormal();
 	if (conf.get_boolean("viewing:flag_night")) setVisionModeNight();
 
@@ -306,16 +306,33 @@ double StelApp::draw(int delta_time)
 }
 
 // Handle mouse clics
-int StelApp::handleClick(int x, int y, S_GUI_VALUE button, S_GUI_VALUE state)
+int StelApp::handleClick(int x, int y, Uint8 button, Uint8 state)
 {
 	distorter->distortXY(x,y);
-	return ui->handle_clic(x, y, button, state);
+	if (ui->handle_clic(x, y, button, state)) return 1;
+	
+	// Send the event to every StelModule
+	for (StelModuleMgr::Iterator iter=moduleMgr->begin();iter!=moduleMgr->end();++iter)
+	{
+		if ((*iter)->handleMouseMoves(x, y)==true)
+			return 1;
+	}
+	
+	return 0;
 }
 
 // Handle mouse move
 int StelApp::handleMove(int x, int y)
 {
 	distorter->distortXY(x,y);
+	
+	// Send the event to every StelModule
+	for (StelModuleMgr::Iterator iter=moduleMgr->begin();iter!=moduleMgr->end();++iter)
+	{
+		if ((*iter)->handleMouseMoves(x, y)==true)
+			return 1;
+	}
+	
 	// Turn if the mouse is at the edge of the screen.
 	// unless config asks otherwise
 	if(FlagEnableMoveMouse)
@@ -359,46 +376,19 @@ int StelApp::handleMove(int x, int y)
 
 
 // Handle key press and release
-int StelApp::handleKeys(SDLKey key, SDLMod mod,
-						Uint16 unicode, s_gui::S_GUI_VALUE state)
+int StelApp::handleKeys(SDLKey key, SDLMod mod, Uint16 unicode, Uint8 state)
 {
-#ifdef MACOSX
-		if ( key == SDLK_LEFT || 
-								key == SDLK_RIGHT || 
-								key == SDLK_UP || 
-								key == SDLK_DOWN || 
-								key == SDLK_BACKSPACE ) {
-							if (ui->handle_keys_tui(key, tuiv)) return 1;
-							if (ui->handle_keys(key, mod, key, state)) return 1;
-								}
-#endif
-	s_tui::S_TUI_VALUE tuiv;
-	if (state == s_gui::S_GUI_PRESSED) tuiv = s_tui::S_TUI_PRESSED;
-	else tuiv = s_tui::S_TUI_RELEASED;
-	if (ui->FlagShowTuiMenu)
+	// Send the event to every StelModule
+	for (StelModuleMgr::Iterator iter=moduleMgr->begin();iter!=moduleMgr->end();++iter)
 	{
-
-		if (state==S_GUI_PRESSED && unicode=='m')
-		{
-			// leave tui menu
-			ui->FlagShowTuiMenu = false;
-
-			// If selected a script in tui, run that now
-			if(SelectedScript!="")
-				commander->execute_command("script action play filename " +  SelectedScript
-				                           + " path " + SelectedScriptDirectory);
-
-			// clear out now
-			SelectedScriptDirectory = SelectedScript = "";
+		if ((*iter)->handleKeys(key, mod, unicode, state)==true)
 			return 1;
-		}
-		if (ui->handle_keys_tui(unicode, tuiv)) return 1;
-		return 1;
 	}
 
+	if (ui->handle_keys_tui(unicode, state)) return 1;
 	if (ui->handle_keys(key, mod, unicode, state)) return 1;
 
-	if (state == S_GUI_PRESSED)
+	if (state == SDL_KEYDOWN)
 	{
 		// Direction and zoom deplacements
 		if (key==SDLK_LEFT) core->turn_left(1);

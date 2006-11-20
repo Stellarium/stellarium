@@ -49,13 +49,6 @@ using namespace boost;
 
 namespace s_tui
 {
-	// tui Return Values:
-	enum S_TUI_VALUE
-	{
-		S_TUI_PRESSED,
-		S_TUI_RELEASED
-	};
-
 	// Caracters '\22' and '\21' correspond to the "change to color" blue and green special
 	// stelarium ascii code, thus inserting them in a string will result in color change for the
 	// next char until another color is set
@@ -72,7 +65,7 @@ namespace s_tui
 		virtual wstring getString(void) {return wstring();}
 		virtual wstring getCleanString(void);
 		// Return true if key signal intercepted, false if not
-		virtual bool onKey(Uint16, S_TUI_VALUE) {return false;}
+		virtual bool onKey(Uint16, Uint8) {return false;}
 		virtual bool isEditable(void) const {return false;}
 		void setActive(bool a) {active = a;}
 		bool getActive(void) const {return active;}
@@ -96,7 +89,7 @@ namespace s_tui
         virtual ~Container();
 		virtual wstring getString(void);
         virtual void addComponent(Component*);
-		virtual bool onKey(Uint16, S_TUI_VALUE);
+		virtual bool onKey(Uint16, Uint8);
     protected:
         list<Component*> childs;
     };
@@ -134,7 +127,7 @@ namespace s_tui
 		Boolean_item(bool init_state = false, const wstring& _label = wstring(),
 			const wstring& _string_activated = wstring(L"ON"),
 			const wstring& string_disabled  = wstring(L"OFF"));
-		virtual bool onKey(Uint16, S_TUI_VALUE);
+		virtual bool onKey(Uint16, Uint8);
 		virtual wstring getString(void);
 		virtual bool isEditable(void) const {return true;}
 		void setLabel(const wstring& _label, const wstring& _active, const wstring& _disabled) 
@@ -163,7 +156,7 @@ namespace s_tui
 			Integer(init_value), numInput(false), mmin(_min), mmax(_max), label(_label) {;}
 		virtual wstring getString(void);
 		virtual bool isEditable(void) const {return true;}
-		virtual bool onKey(Uint16, S_TUI_VALUE);
+		virtual bool onKey(Uint16, Uint8);
 		void setLabel(const wstring& _label) {label = _label;}
     protected:
 		bool numInput;
@@ -180,7 +173,7 @@ namespace s_tui
 			Decimal(init_value), numInput(false), mmin(_min), mmax(_max), label(_label), delta(_delta) {;}
 		virtual wstring getString(void);
 		virtual bool isEditable(void) const {return true;}
-		virtual bool onKey(Uint16, S_TUI_VALUE);
+		virtual bool onKey(Uint16, Uint8);
 		void setLabel(const wstring& _label) {label = _label;}
     protected:
 		bool numInput;
@@ -208,7 +201,7 @@ namespace s_tui
     public:
 		Branch();
 		virtual wstring getString(void);
-		virtual bool onKey(Uint16, S_TUI_VALUE);
+		virtual bool onKey(Uint16, Uint8);
         virtual void addComponent(Component*);
 		virtual Component* getCurrent(void) const {if (current==childs.end()) return NULL; else return *current;}
 		virtual bool setValue(const wstring&);
@@ -223,7 +216,7 @@ namespace s_tui
     {
     public:
 		MenuBranch(const wstring& s);
-		virtual bool onKey(Uint16, S_TUI_VALUE);
+		virtual bool onKey(Uint16, Uint8);
 		virtual wstring getString(void);
 		virtual bool isEditable(void) const {return true;}
 		wstring getLabel(void) const {return label;}
@@ -239,7 +232,7 @@ namespace s_tui
     {
     public:
 		MenuBranch_item(const wstring& s);
-		virtual bool onKey(Uint16, S_TUI_VALUE);
+		virtual bool onKey(Uint16, Uint8);
 		virtual wstring getString(void);
 		virtual bool isEditable(void) const {return true;}
 		wstring getLabel(void) const {return label;}
@@ -255,7 +248,7 @@ namespace s_tui
     public:
 		Time_item(const wstring& _label = wstring(), double _JD = 2451545.0);
 		~Time_item();
-		virtual bool onKey(Uint16, S_TUI_VALUE);
+		virtual bool onKey(Uint16, Uint8);
 		virtual wstring getString(void);
 		virtual wstring getDateString(void);
 		virtual bool isEditable(void) const {return true;}
@@ -280,7 +273,7 @@ namespace s_tui
     public:
 		Action_item(const wstring& _label = L"", const wstring& sp1 = _("Do"), const wstring& sp2 = _("Done")) :
 			CallbackComponent(), label(_label), string_prompt1(sp1), string_prompt2(sp2) {tempo = clock();}
-		virtual bool onKey(Uint16, S_TUI_VALUE);
+		virtual bool onKey(Uint16, Uint8);
 		virtual wstring getString(void);
 		virtual bool isEditable(void) const {return true;}
 		void setLabel(const wstring& _label) {label = _label;}
@@ -297,7 +290,7 @@ namespace s_tui
     public:
 		ActionConfirm_item(const wstring& _label = L"", const wstring& sp1 = _("Do"), const wstring& sp2 = _("Done"),	const wstring& sc = _("Are you sure ?")) :
 				Action_item(_label, sp1, sp2), isConfirming(false), string_confirm(sc) {;}
-		virtual bool onKey(Uint16, S_TUI_VALUE);
+		virtual bool onKey(Uint16, Uint8);
 		virtual wstring getString(void);
     protected:
 		bool isConfirming;
@@ -320,9 +313,9 @@ namespace s_tui
 			return label + (active ? start_active : L"") + *current + (active ? stop_active : L"");
 		}
 		virtual bool isEditable(void) const {return true;}
-		virtual bool onKey(Uint16 k, S_TUI_VALUE v)
+		virtual bool onKey(Uint16 k, Uint8 v)
 		{
-		  if (current==items.end() || v==S_TUI_RELEASED) return false;
+		  if (current==items.end() || v==SDL_KEYUP) return false;
 		        if (k==SDLK_RETURN)
 			{
 				if (!onTriggerCallback.empty()) onTriggerCallback();
@@ -416,9 +409,9 @@ namespace s_tui
 			return label + (active ? start_active : L"") + *current + (active ? stop_active : L"");
 		}
 		virtual bool isEditable(void) const {return true;}
-		virtual bool onKey(Uint16 k, S_TUI_VALUE v)
+		virtual bool onKey(Uint16 k, Uint8 v)
 		{
-		  if (current==items.end() || v==S_TUI_RELEASED) return false;
+		  if (current==items.end() || v==SDL_KEYUP) return false;
 		        if (k==SDLK_RETURN)
 			{
 				if (!onTriggerCallback.empty()) onTriggerCallback();
@@ -516,7 +509,7 @@ namespace s_tui
     {
     public:
 		Time_zone_item(const string& zonetab_file, const wstring& _label = wstring());
-		virtual bool onKey(Uint16, S_TUI_VALUE);
+		virtual bool onKey(Uint16, Uint8);
 		virtual wstring getString(void);
 		virtual bool isEditable(void) const {return true;}
 		string gettz(void); // should be const but gives a boring error...
@@ -536,7 +529,7 @@ namespace s_tui
     public:
 		Vector_item(const wstring& _label = wstring(), Vec3d _init_vector = Vec3d(0,0,0));
 		~Vector_item();
-		virtual bool onKey(Uint16, S_TUI_VALUE);
+		virtual bool onKey(Uint16, Uint8);
 		virtual wstring getString(void);
 		virtual bool isEditable(void) const {return true;}
 		Vec3d getVector(void) const { return Vec3d( a->getValue(), b->getValue(), c->getValue()); }
