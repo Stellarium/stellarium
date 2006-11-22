@@ -42,10 +42,10 @@ void ManagedSTexture::load(void)
 	if (StelApp::getInstance().getTextureManager().loadTexture(this)==false)
 	{
 		cerr << "Couldn't load texture " << this->fullPath << endl;
-		loadState = 2;
+		loadState = ManagedSTexture::ERROR;
 		return;
 	}
-	loadState = 1;
+	loadState = ManagedSTexture::LOADED;
 }
 
 /*************************************************************************
@@ -53,7 +53,7 @@ void ManagedSTexture::load(void)
  *************************************************************************/
 void ManagedSTexture::lazyBind()
 {
-	if (loadState==0)
+	if (loadState==ManagedSTexture::UNLOADED)
 	{
 		load();
 	}
@@ -64,7 +64,7 @@ void ManagedSTexture::lazyBind()
 //! @return 0 is black, 1 is white
 float ManagedSTexture::getAverageLuminance(void)
 {
-	if (loadState==1)
+	if (loadState==ManagedSTexture::LOADED)
 	{
 		if (avgLuminance<0)
 			avgLuminance = STexture::getAverageLuminance();
@@ -192,7 +192,7 @@ bool StelTextureMgr::loadTexture(ManagedSTexture* tex)
 	if (loadFuncIter==imageLoaders.end())
 	{
 		cerr << "Unsupported image file extension: " << extension << " for file: " << tex->fullPath << endl;
-		tex->loadState = 2;	// texture can't be loaded
+		tex->loadState = ManagedSTexture::ERROR;	// texture can't be loaded
 		return false;
 	}
 
@@ -202,7 +202,7 @@ bool StelTextureMgr::loadTexture(ManagedSTexture* tex)
 	if (!tex->texels)
 	{
 		cerr << "Image loading failed for file: " << tex->fullPath << endl;
-		tex->loadState = 2;	// texture can't be loaded
+		tex->loadState = ManagedSTexture::ERROR;	// texture can't be loaded
 		return false;
 	}
 
@@ -217,7 +217,19 @@ bool StelTextureMgr::loadTexture(ManagedSTexture* tex)
 		GLubyte* texels2 = (GLubyte *)calloc (sizeof (GLubyte) * tex->internalFormat,  w*h);
 		// Copy data into the power of two buffer
 		for (int j=0;j<tex->height;++j)
+		{
 			memcpy(&(texels2[j*w*tex->internalFormat]), &(tex->texels[j*tex->width*tex->internalFormat]), tex->width*tex->internalFormat);
+		}
+		// Copy the last line to all extra each lines to prevent problems with interpolation on textures sides
+		for (int j=tex->height;j<h;++j)
+		{
+			memcpy(&(texels2[j*w*tex->internalFormat]), &(texels2[(tex->height-1)*w*tex->internalFormat]), tex->width*tex->internalFormat);
+		}
+		for (int j=0;j<h;++j)
+		{
+			memset(&texels2[(j*w+tex->width)*tex->internalFormat], texels2[(j*w+tex->width-1)*tex->internalFormat], w-tex->width);
+		}
+		
 		
 		// Update the texture coordinates because the new texture does not occupy the whole buffer
 		tex->texCoordinates[0].set((double)tex->width/w, 0.);
@@ -253,7 +265,7 @@ bool StelTextureMgr::loadTexture(ManagedSTexture* tex)
 	free (tex->texels);
 	tex->texels = NULL;
 	
-	tex->loadState = 1;	// texture loaded
+	tex->loadState = ManagedSTexture::LOADED;	// texture loaded
 	return true;
 }
 

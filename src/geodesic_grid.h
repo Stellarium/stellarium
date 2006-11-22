@@ -35,28 +35,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #ifndef _GEODESIC_GRID_H_
 #define _GEODESIC_GRID_H_
 
-#include "vecmath.h"
-#include <vector>
-
-using namespace std;
-
-struct HalfSpace {
-    // all x with x*n-d >= 0
-  Vec3d n;
-  double d;
-  bool inside(const Vec3d &x) const {return (x*n>=d);}
-};
-
-class Convex {
-	// Intersection of several HalfSpaces defining a region
-public:
-	Convex(const Vec3d &e0,const Vec3d &e1,const Vec3d &e2,const Vec3d &e3);
-	size_t getNbHalfSpace(void) const {return halfSpaces.size();}
-	const HalfSpace& operator[](size_t x) const {return halfSpaces[x];}
-	void addHalfSpace(const HalfSpace& h) {halfSpaces.push_back(h);}
-private:
-	std::vector<HalfSpace> halfSpaces;
-};
+#include "SphereGeometry.h"
 
 class GeodesicGrid {
     // Grid of triangles (zones) on the sphere with radius 1,

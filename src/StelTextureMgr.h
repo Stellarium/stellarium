@@ -37,8 +37,16 @@ public:
 	//! @return 0 is black, 1 is white
     virtual float getAverageLuminance(void);
 private:
-	ManagedSTexture() : loadState(0), avgLuminance(-1.f) {;}
-	int loadState;
+	enum LoadState
+	{
+		UNLOADED=0,
+		LOADED=1,
+		ERROR,
+		LOADING_IMAGE
+	};
+
+	ManagedSTexture() : loadState(UNLOADED), avgLuminance(-1.f) {;}
+	LoadState loadState;
 	void load(void);
 	
 	// Cached average luminance
