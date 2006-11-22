@@ -2,7 +2,7 @@
 #define ASTROIMAGE_H_
 
 #include "STexture.h"
-#include "vecmath.h"
+#include "SphereGeometry.h"
 
 class Projector;
 class Navigator;
@@ -18,11 +18,14 @@ public:
 	
 	// Draw the image on the screen. Assume that we are in Orthographic projection mode.
 	void draw(Projector *prj, const Navigator *nav, ToneReproductor *eye);
+	
+	// Return the matching ConvexPolygon
+	const ConvexPolygon& getPolygon(void) const {return poly;}
 private:
 	STexture* tex;
 	
-	// Position of the 4 corners of the texture in texture coordinates
-	Vec3d vertex[4];
+	// Position of the 4 corners of the texture in sky coordinates
+	const ConvexPolygon poly;
 };
 
 #endif /*ASTROIMAGE_H_*/

@@ -335,6 +335,13 @@ void StelCore::update(int delta_time)
 
 	// TODO: should calculate dimming with solar eclipse even without atmosphere on
 	landscape->set_sky_brightness(sky_brightness+0.05);
+	
+	StelModuleMgr& mmgr = StelApp::getInstance().getModuleMgr();
+	for (StelModuleMgr::Iterator iter=mmgr.begin();iter!=mmgr.end();++iter)
+	{
+		if ((*iter)->isExternal())
+			(*iter)->update((double)delta_time/1000);
+	}
 }
 
 // Execute all the drawing functions
@@ -382,16 +389,18 @@ double StelCore::draw(int delta_time)
 	// Draw the nebula
 	nebulas->draw(projection, navigation, tone_converter);
 
-	// Draw the stars
-	hip_stars->draw(projection, navigation, tone_converter);
-
-//geoDrawer->draw(projection,navigation, tone_converter);
 	StelModuleMgr& mmgr = StelApp::getInstance().getModuleMgr();
 	for (StelModuleMgr::Iterator iter=mmgr.begin();iter!=mmgr.end();++iter)
 	{
 		if ((*iter)->isExternal())
 			(*iter)->draw(projection, navigation, tone_converter);
 	}
+
+	// Draw the stars
+	hip_stars->draw(projection, navigation, tone_converter);
+
+//geoDrawer->draw(projection,navigation, tone_converter);
+
 
 	// Draw the equatorial grid
 	equ_grid->draw(projection);
