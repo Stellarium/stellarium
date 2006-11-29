@@ -4,11 +4,12 @@
 </head>
 <body bgcolor="white">
 <h1>Stellarium Command Reference</h1>
-Version 1.2 - December 2, 2005<br>
+Version 1.21 - November 27, 2006<br>
 Robert Spearman<br>
 <br>
-This document outlines commands supported by Stellarium 0.7.0 for UI or
-script use.<br>
+This document outlines commands supported by Stellarium 0.8.2 for UI or
+script use.  
+<br>
 <br>
 Command format basics:<br>
 <ul>
@@ -36,13 +37,14 @@ ARGUMENT_VALUE2 ...<br>
   <li>flag atmosphere on</li>
   <li>date utc 1999-08-11T12:00:00</li>
   <li>wait duration 2.31</li>
-  <li>moveto lat 45.7 lon -122 duration 5<br>
+  <li>moveto lat 45.7 lon -122 duration 5</li>
+  <li>set home_planet "Solar System Observer"</li>
   </li>
 </ul>
 Below is a complete list of valid commands, along with their supported
 argument names and values. Lowercase values are literal, uppercase
 values are explanatory (i.e. replace SECONDS with the number of seconds
-desired).
+desired).  New or changed commands are bolded below.<br>
 <p>
 <table border="1">
   <tbody>
@@ -117,14 +119,13 @@ these will be turned off.<br>
       </td>
     </tr>
     <tr>
-      <td style="vertical-align: top;">configuration<br>
+      <td style="vertical-align: top;"><b>configuration</b><br>
       </td>
       <td style="vertical-align: top;">action</td>
       <td style="vertical-align: top;">load<br>
 reload<br>
       </td>
-      <td style="vertical-align: top;">Only reload is acceptable from a
-script.&nbsp; Reloads default settings.<br>
+      <td style="vertical-align: top;">Currently disabled.
       </td>
     </tr>
     <tr>
@@ -207,7 +208,6 @@ planets<br>
 planet_names<br>
 planet_orbits<br>
 point_star<br>
-script_gui_debug<br>
 show_appname<br>
 show_date<br>
 show_fov<br>
@@ -231,12 +231,7 @@ off<br>
 toggle </td>
       <td>Set rendering flags. One argument name per command allowed
 currently.
-      <p>track_object is only useful while an object is selected.<br>
-      </p>
-      <p>script_gui_debug determines whether a gui error message is
-shown at script errors. This must be set in a script and applies only
-for the scope of the script.<br>
-      </p>
+      <p>track_object is only useful while an object is selected. </p>
       <p>The following flags are key user settings and are not
 accessible from scripts:</p>
       <p>enable_move_keys<br>
@@ -276,7 +271,8 @@ drop<br>
       <td style="vertical-align: top;">ALTITUDE_ANGLE<br>
       </td>
       <td style="vertical-align: top;">For positioning the center of
-the image in horizontal coordinates. &nbsp;Zero is at the horizon, 90 is
+the image in horizontal coordinates. &nbsp;Zero is at the horizon, 90
+is
 at the zenith.<br>
       </td>
     </tr>
@@ -290,10 +286,12 @@ the image in horizontal coordinates. &nbsp;Zero is North, 90 is East.<br>
       </td>
     </tr>
     <tr>
-      <td style="vertical-align: top;">coordinate_system<br>
+      <td style="vertical-align: top;"><b>coordinate_system</b><br>
       </td>
       <td style="vertical-align: top;">viewport<br>
 horizontal<br>
+equatorial<br>
+j2000<br>
       </td>
       <td style="vertical-align: top;">What coordinate system to use to
 position the image. &nbsp;Must be defined at image load. &nbsp;Can not
@@ -322,7 +320,8 @@ command.<br>
       </td>
       <td style="vertical-align: top;">Used to refer to the image in
 later calls to manipulate the image. Images must be in PNG format. If
-images do not have dimensions that are powers of 2 (128, 256, etc.) they
+images do not have dimensions that are powers of 2 (128, 256, etc.)
+they
 are resized when loaded to meet this requirement.<br>
       </td>
     </tr>
@@ -456,7 +455,7 @@ If a script plays another script, the first will terminate.<br>
       </td>
     </tr>
     <tr>
-      <td colspan="1" rowspan="7" style="vertical-align: top;">select </td>
+      <td colspan="1" rowspan="6" style="vertical-align: top;">select </td>
       <td style="vertical-align: top;"><br>
       </td>
       <td style="vertical-align: top;"><br>
@@ -471,15 +470,6 @@ alone.)&nbsp; See deselect command.<br>
       <td style="vertical-align: top;">CONSTELLATION_SHORT_NAME</td>
       <td style="vertical-align: top;">3 character abbreviation from
 constellationship.fab, case insensitive.</td>
-    </tr>
-    <tr>
-      <td style="vertical-align: top;">constellation_star<br>
-      </td>
-      <td style="vertical-align: top;">CONSTELLATION_SHORT_NAME</td>
-      <td style="vertical-align: top;">Similar to constellation, but
-selects a star in the constellation as well.&nbsp; Useful for preparing
-to look towards the constellation.<br>
-      </td>
     </tr>
     <tr valign="top">
       <td>hp</td>
@@ -510,7 +500,7 @@ pointer around the selected object. &nbsp;Default is on.<br>
       </td>
     </tr>
     <tr>
-      <td colspan="1" rowspan="14" style="vertical-align: top;">set<br>
+      <td colspan="1" rowspan="15" style="vertical-align: top;">set<br>
       </td>
       <td style="vertical-align: top;">atmosphere_fade_duration</td>
       <td style="vertical-align: top;">SECONDS<br>
@@ -574,6 +564,14 @@ this<br>
       </td>
     </tr>
     <tr>
+      <td style="vertical-align: top;"><b>home_planet</b><br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;">Change viewing location, case sensitive<br>
+      </td>
+    </tr>
+    <tr>
       <td style="vertical-align: top;">sky_culture<br>
       </td>
       <td style="vertical-align: top;"><br>
@@ -583,12 +581,11 @@ skycultures.fab<br>
       </td>
     </tr>
     <tr>
-      <td style="vertical-align: top;">sky_locale<br>
+      <td style="vertical-align: top;"><b>sky_locale</b><br>
       </td>
       <td style="vertical-align: top;"><br>
       </td>
-      <td style="vertical-align: top;">3 letter code.&nbsp; eng, fra,
-etc.<br>
+      <td style="vertical-align: top;">locale code: fr, zh_HK, etc.<br>
       </td>
     </tr>
     <tr>
