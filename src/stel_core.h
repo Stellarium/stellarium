@@ -182,6 +182,10 @@ public:
 	//! Does not deselect selected constellation
     void unSelect(void);
 
+	//! Deselect all selected object if any
+	//! Does deselect selected constellations
+    void deselect(void);
+
 	//! Set whether a pointer is to be drawn over selected object
 	void setFlagSelectedObjectPointer(bool b) { object_pointer_visibility = b; }
 
