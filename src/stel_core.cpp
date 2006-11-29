@@ -646,6 +646,14 @@ void StelCore::unSelect(void) {
 	ssystem->setSelected(StelObject());
 }
 
+//! Deselect all selected objects if any
+//! Does deselect selected constellations
+void StelCore::deselect(void) {
+	unSelect();
+	asterisms->deselect();
+}
+
+
 // Find an object in a "clever" way
 StelObject StelCore::clever_find(const Vec3d& v) const
 {

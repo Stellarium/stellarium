@@ -221,7 +221,7 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
     
 
 	} else if (command == "deselect") {
-		stcore->unSelect();
+		stcore->deselect();
 
 	} else if(command == "look") {  // change direction of view
 		//	  double duration = str_to_pos_double(args["duration"]);

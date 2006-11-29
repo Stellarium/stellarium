@@ -104,7 +104,8 @@ public:
 	bool getFlagNames(void) const {return flagNames;}
 	
 	//! Set whether selected constellation must be displayed alone
-	void setFlagIsolateSelected(bool s) { isolateSelected = s; setSelectedConst(selected);}
+//	void setFlagIsolateSelected(bool s) { isolateSelected = s; setSelectedConst(selected);}
+	void setFlagIsolateSelected(bool s) { isolateSelected = s; }
 	//! Get whether selected constellation is displayed alone
 	bool getFlagIsolateSelected(void) const { return isolateSelected;}
 	
@@ -127,11 +128,14 @@ public:
 	void setFontSize(double newFontSize);
 	
 	//! Define which constellation is selected from its abbreviation
-	void setSelected(const string& abbreviation) {setSelectedConst(findFromAbbreviation(abbreviation));}
+	void setSelected(const string& abbreviation);
 	
 	//! Define which constellation is selected from a star number
 	void setSelected(const StelObject &s) {if (!s) setSelectedConst(NULL); else setSelectedConst(is_star_in(s));}
 	
+	//! Remove all selected constellations
+	void deselect() { setSelected(StelObject(NULL)); }
+
 	StelObject getSelected(void) const;	
 
 private:
@@ -148,7 +152,7 @@ private:
 	double fontSize;
     SFont* asterFont;
     HipStarMgr* hipStarMgr;
-	Constellation* selected;
+	vector<Constellation*> selected; // More than one can be selected at a time
 	bool isolateSelected;
 	vector<vector<Vec3f> *> allBoundarySegments;
 

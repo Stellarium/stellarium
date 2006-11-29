@@ -213,7 +213,12 @@ const Constellation* Constellation::is_star_in(const StelObject &s) const
 {
     for(unsigned int i=0;i<nb_segments*2;++i)
     {
-		if (asterism[i]==s) return this;
+
+		// asterism[i]==s test was not working
+		if (asterism[i].getEnglishName()==s.getEnglishName()) {
+//			cout << "Const matched. " << getEnglishName() << endl;
+			return this;
+		}
     }
 	return NULL;
 }
