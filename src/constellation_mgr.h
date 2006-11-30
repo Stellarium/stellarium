@@ -129,6 +129,9 @@ public:
 	
 	//! Define which constellation is selected from its abbreviation
 	void setSelected(const string& abbreviation);
+
+	//! Define which constellation is selected and return brightest star 
+	StelObject setSelectedStar(const string& abbreviation);
 	
 	//! Define which constellation is selected from a star number
 	void setSelected(const StelObject &s) {if (!s) setSelectedConst(NULL); else setSelectedConst(is_star_in(s));}

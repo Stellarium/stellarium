@@ -93,6 +93,8 @@ void ConstellationMgr::updateSkyCulture(LoadingBar& lb)
 	
 		// Translated constellation names for the new sky culture
 		updateI18n();
+
+		// TODO: If star is still selected, figure out what constellation to select
 	}
 }
 
@@ -513,7 +515,21 @@ void ConstellationMgr::setSelected(const string& abbreviation)
 	Constellation * c = findFromAbbreviation(abbreviation);
 
 	if(c != NULL) setSelectedConst(c);
+
 }
+
+//! Define which constellation is selected and return brightest star 
+StelObject ConstellationMgr::setSelectedStar(const string& abbreviation) 
+{
+	Constellation * c = findFromAbbreviation(abbreviation);
+
+	if(c != NULL) {
+		setSelectedConst(c);
+		return c->getBrightestStarInConstellation();
+	}
+	return NULL;
+}
+
 
 
 void ConstellationMgr::setSelectedConst(Constellation * c)
