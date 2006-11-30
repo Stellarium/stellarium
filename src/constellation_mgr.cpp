@@ -93,8 +93,6 @@ void ConstellationMgr::updateSkyCulture(LoadingBar& lb)
 	
 		// Translated constellation names for the new sky culture
 		updateI18n();
-
-		// TODO: If star is still selected, figure out what constellation to select
 	}
 }
 
@@ -505,7 +503,7 @@ void ConstellationMgr::setFlagNames(bool b)
 }
 
 StelObject ConstellationMgr::getSelected(void) const {
-	return *selected.begin();  // TODO return all @@@
+	return *selected.begin();  // TODO return all or just remove this method
 }
 
 
@@ -541,13 +539,7 @@ void ConstellationMgr::setSelectedConst(Constellation * c)
 
 		selected.push_back(c);
 
-/*
-		vector < Constellation * >::const_iterator iter;
-		for (iter = selected.begin(); iter != selected.end(); ++iter)
-			cout << "Have selected: " << (*iter)->getEnglishName() << endl;
-*/
-
-		// Propagate old parameters to newly selected constellation
+		// Propagate current settings to newly selected constellation
 		c->setFlagLines(getFlagLines());
 		c->setFlagName(getFlagNames());
 		c->setFlagArt(getFlagArt());
@@ -575,23 +567,11 @@ void ConstellationMgr::setSelectedConst(Constellation * c)
 					(*iter)->setFlagBoundaries(false);
 		        }
              }
-			Constellation::singleSelected = true;  // TODO @@@ what is this for?
+			Constellation::singleSelected = true;  // For boundaries
         }
 		else
 		{
-
-/*
-			vector < Constellation * >::const_iterator iter;
-			for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
-			{
-					(*iter)->setFlagLines(c->getFlagLines());
-					(*iter)->setFlagName(c->getFlagName());
-					(*iter)->setFlagArt(c->getFlagArt());
-		            (*iter)->setFlagBoundaries(c->getFlagBoundaries());
-			}
-*/
-
-			Constellation::singleSelected = false; // @@@ what?
+			Constellation::singleSelected = false; // For boundaries
 		}
 	}
 	else
