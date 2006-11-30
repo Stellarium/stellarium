@@ -32,6 +32,7 @@
 #include "solarsystem.h"
 #include "nebula_mgr.h"
 #include "GeodesicGridDrawer.h"
+#include "constellation.h"
 
 #define LOADING_BAR_DEFAULT_FONT_SIZE 12.
 
@@ -588,21 +589,8 @@ bool StelCore::selectObject(const string &type, const string &id)
 	else if(type=="constellation_star")
 	{
 		// For Find capability, select a star in constellation so can center view on constellation
-		asterisms->setSelected(id);
-		selected_object = asterisms->getSelected().getBrightestStarInConstellation();
-
-		/// what is this?
-		/// 1) Find the hp-number of the 1st star in the selected constellation,
-		/// 2) find the star of this hpnumber
-		/// 3) select the constellation of this star ???
-		///		const unsigned int hpnum = asterisms->getFirstSelectedHP();
-		///		selected_object = hip_stars->searchHP(hpnum);
-		///		asterisms->setSelected(selected_object);
-
+		selected_object = asterisms->setSelectedStar(id);
 		ssystem->setSelected("");
-
-		///		// Some stars are shared, so now force constellation
-		///		asterisms->setSelected(id);
 	}
 	else
 	{
