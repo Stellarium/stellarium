@@ -73,8 +73,8 @@ public:
   //! Get display flag for Telescope names
   bool getFlagTelescopeName(void) const {return name_fader==true;}
   
-  //! Define font file name and size to use for telescope names display
-  void setFont(float font_size,const string &font_name);
+  //! Define font size to use for telescope names display
+  void setFontSize(float font_size);
 
   //! send a J2000-goto-command to the specified telescope
   void telescopeGoto(int telescope_nr,const Vec3d &j2000_pos);

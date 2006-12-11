@@ -164,11 +164,14 @@ vector<wstring> TelescopeMgr::listMatchingObjectsI18n(
   return result;
 }
 
-void TelescopeMgr::setFont(float font_size,const string &font_name) {
-	telescope_font = &StelApp::getInstance().getFontManager().getStandardFont(StelApp::getInstance().getLocaleMgr().getSkyLanguage(), font_size);
+void TelescopeMgr::setFontSize(float font_size) {
+	telescope_font = &StelApp::getInstance().getFontManager()
+                       .getStandardFont(StelApp::getInstance()
+                                .getLocaleMgr().getSkyLanguage(), font_size);
 }
 
 void TelescopeMgr::init(const InitParser &conf) {
+  setFontSize(12.f);
   if (telescope_texture) {
     delete telescope_texture;
     telescope_texture = 0;
