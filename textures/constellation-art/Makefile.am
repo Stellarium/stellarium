@@ -17,3 +17,4 @@ canis-major.png     delphinus.png         libra.png      pisces.png            v
 canis-minor.png     dorado.png            lupus.png      piscis-austrinus.png  volans.png \
 capricornus.png     draco.png             lynx.png       pyxis.png             vulpecula.png
 EXTRA_DIST = $(pkgdata_DATA)
+SUBDIRS = inuit
