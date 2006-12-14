@@ -31,8 +31,13 @@
     <run>
       <mainprogram/>
       <directoryradio>custom</directoryradio>
+<<<<<<< .mine
+      <customdirectory>/home/fabien/prog/stellarium/</customdirectory>
+      <programargs/>
+=======
       <customdirectory>/scratch/prog/stellarium/trunk/stellarium/</customdirectory>
       <programargs/>
+>>>>>>> .r1618
       <terminal>false</terminal>
       <autocompile>true</autocompile>
       <envvars/>
@@ -211,8 +216,13 @@
     </tree>
   </kdevfileview>
   <ctagspart>
+<<<<<<< .mine
+    <customArguments/>
+    <customTagfilePath>/home/fabien/prog/stellarium/tags</customTagfilePath>
+=======
     <customArguments/>
     <customTagfilePath>/scratch/prog/stellarium/trunk/stellarium/tags</customTagfilePath>
+>>>>>>> .r1618
   </ctagspart>
   <dist>
     <custom>false</custom>

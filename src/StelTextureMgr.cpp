@@ -226,6 +226,25 @@ struct LoadQueueParam
 	bool* status;
 };
 
+
+int loadTextureThread(void* tparam)
+{
+	LoadQueueParam* param = (LoadQueueParam*)tparam;
+	
+	cout << "Loading texture in thread " <<  param->tex->fullPath << endl;
+	assert(param->tex->threadedLoading==true);
+	// Load the image
+	if (param->texMgr->loadImage(param->tex)==false)
+	{
+		param->tex->loadState = ManagedSTexture::ERROR;
+	}
+	// And add it to 
+	SDL_mutexP(param->loadQueueMutex);
+	param->loadQueue->push_back(param);
+	SDL_mutexV(param->loadQueueMutex);
+	return 0;
+}
+
 bool StelTextureMgr::createTextureThread(STexture** outTex, const std::string& filename, bool* status)
 {
 	*status = false;
@@ -252,23 +271,6 @@ bool StelTextureMgr::createTextureThread(STexture** outTex, const std::string& f
 	return true;
 }
 
-int loadTextureThread(void* tparam)
-{
-	LoadQueueParam* param = (LoadQueueParam*)tparam;
-	
-	cout << "Loading texture in thread " <<  param->tex->fullPath << endl;
-	assert(param->tex->threadedLoading==true);
-	// Load the image
-	if (param->texMgr->loadImage(param->tex)==false)
-	{
-		param->tex->loadState = ManagedSTexture::ERROR;
-	}
-	// And add it to 
-	SDL_mutexP(param->loadQueueMutex);
-	param->loadQueue->push_back(param);
-	SDL_mutexV(param->loadQueueMutex);
-	return 0;
-}
 
 /*************************************************************************
  Update loading of textures in threads

@@ -140,7 +140,7 @@ private:
 	friend class ManagedSTexture;
 
 	//! Internal
-	ManagedSTexture* StelTextureMgr::initTex(const string& afilename);
+	ManagedSTexture* initTex(const string& afilename);
 
 	//! Load the image memory. If we use threaded loading, the texture will
 	//! be uploaded to openGL memory at the next update() call.
