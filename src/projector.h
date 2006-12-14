@@ -140,7 +140,7 @@ public:
 	void set_fov(double f);
 	//! Get the Field of View in degree
 	double get_fov(void) const {return fov;}
-	double getRadPerPixel(void) const {return view_scaling_factor;}
+	double getPixelPerRad(void) const {return view_scaling_factor;}
 
 	//! Set the maximum Field of View in degree
 	void setMaxFov(double max);

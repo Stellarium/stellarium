@@ -107,19 +107,15 @@ void Observator::load(const InitParser& conf, const string& section)
 	latitude  = StelUtils::get_dec_angle(conf.get_str(section, "latitude"));
 	longitude = StelUtils::get_dec_angle(conf.get_str(section, "longitude"));
 	altitude = conf.get_int(section, "altitude");
-	set_landscape_name(conf.get_str(section, "landscape_name", "sea"));
-
-	printf(" (landscape is: \"%s\")\n", landscape_name.c_str());
-
 }
-
-void Observator::set_landscape_name(const string s) {
-
-	// need to lower case name because config file parser lowercases section names
-	string x = s;
-	transform(x.begin(), x.end(), x.begin(), ::tolower);
-	landscape_name = x;
-}
+//
+//void Observator::set_landscape_name(const string s) {
+//
+//	// need to lower case name because config file parser lowercases section names
+//	string x = s;
+//	transform(x.begin(), x.end(), x.begin(), ::tolower);
+//	landscape_name = x;
+//}
 
 void Observator::save(const string& file, const string& section) const
 {
@@ -137,7 +133,6 @@ void Observator::save(const string& file, const string& section) const
 // change settings but don't write to files
 void Observator::setConf(InitParser & conf, const string& section) const
 {
-
 	conf.set_str(section + ":name", StelUtils::wstringToString(name));
 	conf.set_str(section + ":home_planet", planet->getEnglishName());
 	conf.set_str(section + ":latitude",
@@ -150,7 +145,6 @@ void Observator::setConf(InitParser & conf, const string& section) const
 	                                          true, true)));
 
 	conf.set_int(section + ":altitude", altitude);
-	conf.set_str(section + ":landscape_name", landscape_name);
 
 	// TODO: clear out old timezone settings from this section
 	// if still in loaded conf?  Potential for confusion.

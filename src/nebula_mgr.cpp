@@ -91,7 +91,8 @@ void NebulaMgr::init(const InitParser& conf, LoadingBar& lb)
 double NebulaMgr::draw(Projector* prj, const Navigator * nav, ToneReproductor* eye)
 {
 	Nebula::hints_brightness = hintsFader.getInterstate()*flagShow.getInterstate();
-
+	Nebula::flagShowTexture = flagShowTexture;
+	
 	glEnable(GL_TEXTURE_2D);
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_ONE, GL_ONE);

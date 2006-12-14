@@ -36,6 +36,7 @@
 #include "stel_core.h"
 #include "script_mgr.h"
 #include "stel_command_interface.h"
+#include "LandscapeMgr.h"
 
 // Draw simple gravity text ui.
 void StelUI::draw_gravity_ui(void)
@@ -58,8 +59,8 @@ void StelUI::draw_gravity_ui(void)
 		os << app->getLocaleMgr().get_printable_date_local(jd) << L" " << app->getLocaleMgr().get_printable_time_local(jd);
 
 		// label location if not on earth
-		if(core->getObservatory().getHomePlanetEnglishName() != "Earth") {
-			os << L" " << _(core->getObservatory().getHomePlanetEnglishName());
+		if(core->getObservatory()->getHomePlanetEnglishName() != "Earth") {
+			os << L" " << _(core->getObservatory()->getHomePlanetEnglishName());
 		}
 
 		if (FlagShowFov) os << L" fov " << setprecision(3) << core->getFov();
@@ -83,6 +84,8 @@ void StelUI::draw_gravity_ui(void)
 // since lose states - try localizeTui() instead
 void StelUI::init_tui(void)
 {
+	LandscapeMgr* lmgr = (LandscapeMgr*)StelApp::getInstance().getModuleMgr().getModule("landscape");
+	
 	// Menu root branch
 	ScriptDirectoryRead = 0;
 
@@ -252,7 +255,7 @@ void StelUI::init_tui(void)
 
 	// 5. Effects
 	tui_effect_landscape = new s_tui::MultiSet_item<wstring>(wstring(L"5.1 ") );
-	tui_effect_landscape->addItemList(StelUtils::stringToWstring(Landscape::get_file_content(StelApp::getInstance().getDataFilePath( "landscapes.ini"))));
+	tui_effect_landscape->addItemList(StelUtils::stringToWstring(lmgr->getFileContent(StelApp::getInstance().getDataFilePath( "landscapes.ini"))));
 
 	tui_effect_landscape->set_OnChangeCallback(callback<void>(this, &StelUI::tui_cb_tui_effect_change_landscape));
 	tui_menu_effects->addComponent(tui_effect_landscape);
@@ -487,11 +490,12 @@ void StelUI::tui_update_widgets(void)
 	NebulaMgr* nmgr = (NebulaMgr*)StelApp::getInstance().getModuleMgr().getModule("nebulas");
 	SolarSystem* ssmgr = (SolarSystem*)StelApp::getInstance().getModuleMgr().getModule("ssystem");
 	MilkyWay* mw = (MilkyWay*)StelApp::getInstance().getModuleMgr().getModule("milkyway");
+	LandscapeMgr* lmgr = (LandscapeMgr*)StelApp::getInstance().getModuleMgr().getModule("landscape");
 	
 	// 1. Location
-	tui_location_latitude->setValue(core->getObservatory().get_latitude());
-	tui_location_longitude->setValue(core->getObservatory().get_longitude());
-	tui_location_altitude->setValue(core->getObservatory().get_altitude());
+	tui_location_latitude->setValue(core->getObservatory()->get_latitude());
+	tui_location_longitude->setValue(core->getObservatory()->get_longitude());
+	tui_location_altitude->setValue(core->getObservatory()->get_altitude());
 
 
 	// 2. Date & Time
@@ -517,7 +521,7 @@ void StelUI::tui_update_widgets(void)
 	tui_colors_const_label_color->setVector(cmgr->getNamesColor());
 	tui_colors_const_art_intensity->setValue(cmgr->getArtIntensity());
 	tui_colors_const_boundary_color->setVector(cmgr->getBoundariesColor());
-	tui_colors_cardinal_color->setVector(core->getColorCardinalPoints());
+	tui_colors_cardinal_color->setVector(lmgr->getColorCardinalPoints());
 	tui_colors_planet_names_color->setVector(ssmgr->getNamesColor());
 	tui_colors_planet_orbits_color->setVector(ssmgr->getOrbitsColor());
 	tui_colors_object_trails_color->setVector(ssmgr->getTrailsColor());
@@ -531,7 +535,7 @@ void StelUI::tui_update_widgets(void)
 
 
 	// 6. effects
-	tui_effect_landscape->setValue(StelUtils::stringToWstring(core->getObservatory().get_landscape_name()));
+	tui_effect_landscape->setValue(lmgr->getLandscapeName());
 	tui_effect_pointobj->setValue(smgr->getFlagPointStar());
 	tui_effect_zoom_duration->setValue(core->getAutomoveDuration());
 	tui_effect_manual_zoom->setValue(core->getFlagManualAutoZoom());
@@ -762,13 +766,14 @@ void StelUI::tui_cb_change_color()
 	ConstellationMgr* cmgr = (ConstellationMgr*)StelApp::getInstance().getModuleMgr().getModule("constellations");
 	NebulaMgr* nmgr = (NebulaMgr*)StelApp::getInstance().getModuleMgr().getModule("nebulas");
 	SolarSystem* ssmgr = (SolarSystem*)StelApp::getInstance().getModuleMgr().getModule("ssystem");
+	LandscapeMgr* lmgr = (LandscapeMgr*)StelApp::getInstance().getModuleMgr().getModule("landscape");
 	
 	cmgr->setLinesColor( tui_colors_const_line_color->getVector() );
 	cmgr->setNamesColor( tui_colors_const_label_color->getVector() );
 	cmgr->setArtIntensity(tui_colors_const_art_intensity->getValue() );
 	cmgr->setBoundariesColor(tui_colors_const_boundary_color->getVector() );
 	
-	core->setColorCardinalPoints( tui_colors_cardinal_color->getVector() );
+	lmgr->setColorCardinalPoints( tui_colors_cardinal_color->getVector() );
 	
 	ssmgr->setOrbitsColor(tui_colors_planet_orbits_color->getVector() );
 	ssmgr->setNamesColor(tui_colors_planet_names_color->getVector() );
@@ -800,5 +805,5 @@ void StelUI::tuiUpdateIndependentWidgets(void) {
 	// reset those options to the current values now
 	// (can not do this in tui_update_widgets)
 
-	tui_location_planet->setValue(StelUtils::stringToWstring(core->getObservatory().getHomePlanetEnglishName()));
+	tui_location_planet->setValue(StelUtils::stringToWstring(core->getObservatory()->getHomePlanetEnglishName()));
 }

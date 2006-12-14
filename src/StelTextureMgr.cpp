@@ -20,12 +20,15 @@
 #include <cassert>
 #include <iostream>
 #include <string>
+#include <vector>
 
 #include "stelapp.h"
 extern "C" {
 #include <jpeglib.h>
 }
 #include <png.h>
+#include "SDL_thread.h"
+
 #include "StelTextureMgr.h"
 #include "stel_utility.h"
 
@@ -39,13 +42,12 @@ StelTextureMgr::JpgLoader StelTextureMgr::jpgLoader;
 
 void ManagedSTexture::load(void)
 {
-	if (StelApp::getInstance().getTextureManager().loadTexture(this)==false)
+	if (StelApp::getInstance().getTextureManager().loadImage(this)==false || StelApp::getInstance().getTextureManager().glLoadTexture(this)==false)
 	{
 		cerr << "Couldn't load texture " << this->fullPath << endl;
 		loadState = ManagedSTexture::ERROR;
 		return;
 	}
-	loadState = ManagedSTexture::LOADED;
 }
 
 /*************************************************************************
@@ -53,11 +55,15 @@ void ManagedSTexture::load(void)
  *************************************************************************/
 void ManagedSTexture::lazyBind()
 {
+	if (loadState==ManagedSTexture::LOADED)
+	{
+		bind();
+		return;
+	}
 	if (loadState==ManagedSTexture::UNLOADED)
 	{
 		load();
 	}
-	bind();
 }
 
 //! Return the average texture luminance.
@@ -78,6 +84,8 @@ float ManagedSTexture::getAverageLuminance(void)
 *************************************************************************/
 StelTextureMgr::StelTextureMgr(const std::string& atextureDir) : textureDir(atextureDir)
 {
+	loadQueueMutex = SDL_CreateMutex();
+	
 	// Init default values
 	setDefaultParams();
 	
@@ -97,7 +105,10 @@ StelTextureMgr::StelTextureMgr(const std::string& atextureDir) : textureDir(atex
  Destructor for the StelTextureMgr class
 *************************************************************************/
 StelTextureMgr::~StelTextureMgr()
-{}
+{
+	SDL_DestroyMutex(loadQueueMutex);
+	loadQueueMutex = NULL;
+}
 
 /*************************************************************************
  Initialize some variable from the openGL context.
@@ -150,9 +161,9 @@ void StelTextureMgr::setDefaultParams()
 }
 
 /*************************************************************************
- Load an image from a file and create a new texture from it.
+ Internal
 *************************************************************************/
-ManagedSTexture& StelTextureMgr::createTexture(const string& afilename, bool lazyLoading)
+ManagedSTexture* StelTextureMgr::initTex(const string& afilename)
 {
 	string filename;
 	if (afilename[0]=='/' || (afilename[0]=='.' && afilename[1]=='/'))
@@ -162,7 +173,7 @@ ManagedSTexture& StelTextureMgr::createTexture(const string& afilename, bool laz
 	if (!StelUtils::fileExists(filename))
 	{
 		cerr << "WARNING : Can't find texture file " << filename << "!" << endl;
-		return NULL_STEXTURE;
+		return NULL;
 	}
 
 	ManagedSTexture* tex = new ManagedSTexture();
@@ -172,20 +183,141 @@ ManagedSTexture& StelTextureMgr::createTexture(const string& afilename, bool laz
 	tex->wrapMode = wrapMode;
 	tex->fullPath = filename;
 	tex->mipmapsMode = mipmapsMode;
+	
+	return tex;
+}
+
+/*************************************************************************
+ Load an image from a file and create a new texture from it.
+*************************************************************************/
+ManagedSTexture& StelTextureMgr::createTexture(const string& afilename, bool lazyLoading)
+{
+	ManagedSTexture* tex = initTex(afilename);
+	if (tex==NULL)
+		return NULL_STEXTURE;
 
 	// Load only if lazyLoading is not true, else will load later
-	if (lazyLoading==false && loadTexture(tex)==false)
+	if (lazyLoading==true)
+		return *tex;
+	
+	// Simply load everything
+	if (loadImage(tex) && glLoadTexture(tex))
+		return *tex;
+	else
 	{
 		delete tex;
 		return NULL_STEXTURE;
 	}
-	return *tex;
 }
 
 /*************************************************************************
- Actually load the texture in openGL memory
+ Structure used to pass parameter to loading threads
 *************************************************************************/
-bool StelTextureMgr::loadTexture(ManagedSTexture* tex)
+struct LoadQueueParam
+{
+	StelTextureMgr* texMgr;
+	std::vector<LoadQueueParam*>* loadQueue;
+	SDL_mutex* loadQueueMutex;
+	SDL_Thread* thread;
+	ManagedSTexture* tex;
+	
+	// those 2 are used to return the final texture and status. Only access them in the main thread!!
+	STexture** outTex;
+	bool* status;
+};
+
+bool StelTextureMgr::createTextureThread(STexture** outTex, const std::string& filename, bool* status)
+{
+	*status = false;
+	ManagedSTexture* tex = initTex(filename);
+	if (tex==NULL)
+	{
+		*status = true;	// indicate error
+		outTex = NULL;
+		return false;
+	}
+	
+	tex->threadedLoading = true;
+
+	LoadQueueParam* tparam = new LoadQueueParam();
+	tparam->texMgr = this;
+	tparam->loadQueue = &loadQueue;
+	tparam->loadQueueMutex = loadQueueMutex;
+	tparam->tex = tex;
+	tparam->outTex = outTex;
+	tparam->status=status;
+	tex->loadState = ManagedSTexture::LOADING_IMAGE;
+	SDL_Thread *thread = SDL_CreateThread(loadTextureThread, tparam);
+	tparam->thread = thread;
+	return true;
+}
+
+int loadTextureThread(void* tparam)
+{
+	LoadQueueParam* param = (LoadQueueParam*)tparam;
+	
+	cout << "Loading texture in thread " <<  param->tex->fullPath << endl;
+	assert(param->tex->threadedLoading==true);
+	// Load the image
+	if (param->texMgr->loadImage(param->tex)==false)
+	{
+		param->tex->loadState = ManagedSTexture::ERROR;
+	}
+	// And add it to 
+	SDL_mutexP(param->loadQueueMutex);
+	param->loadQueue->push_back(param);
+	SDL_mutexV(param->loadQueueMutex);
+	return 0;
+}
+
+/*************************************************************************
+ Update loading of textures in threads
+*************************************************************************/
+void StelTextureMgr::update()
+{
+	// Load the successfully loaded images to openGL, because openGL is not thread safe,
+	// this has to be done in the main thread.
+	SDL_mutexP(loadQueueMutex);
+	std::vector<LoadQueueParam*>::iterator iter = loadQueue.begin();
+	for (;iter!=loadQueue.end();++iter)
+	{
+		SDL_WaitThread((*iter)->thread, NULL);	// Ensure the thread is properly destroyed
+		if ((*iter)->tex->loadState==ManagedSTexture::ERROR)
+		{
+			// There was an error while loading the image
+			delete (*iter)->tex;
+			(*iter)->tex=NULL;
+			*((*iter)->outTex) = NULL;
+			*((*iter)->status) = true;
+		}
+		else
+		{
+			// Create openGL texture
+			if (glLoadTexture((*iter)->tex)==false)
+			{
+				// There was an error while loading the texture to openGL
+				delete (*iter)->tex;
+				(*iter)->tex=NULL;
+				*((*iter)->outTex) = NULL;
+				*((*iter)->status) = true;
+			}
+			else
+			{
+				*((*iter)->outTex) = (*iter)->tex;
+				*((*iter)->status) = true;
+			}
+		}
+		delete (*iter);
+	}
+	loadQueue.clear();
+	SDL_mutexV(loadQueueMutex);
+}
+
+
+/*************************************************************************
+  Load the image in memory
+*************************************************************************/
+bool StelTextureMgr::loadImage(ManagedSTexture* tex)
 {
 	const string extension = tex->fullPath.substr((tex->fullPath.find_last_of('.', tex->fullPath.size()))+1);\
 	std::map<std::string, ImageLoader*>::iterator loadFuncIter = imageLoaders.find(extension);
@@ -248,6 +380,18 @@ bool StelTextureMgr::loadTexture(ManagedSTexture* tex)
 		cerr << "Warning: texture " << tex->fullPath << " is larger than " << maxTextureSize << " pixels and might be not supported." << endl;
 	}
 	
+	// The glLoading will be done later in the main thread
+	return true;
+}
+
+/*************************************************************************
+ Actually load the texture already in the RAM to openGL memory
+*************************************************************************/
+bool StelTextureMgr::glLoadTexture(ManagedSTexture* tex)
+{
+	if (!tex->texels)
+		return false;
+	
 	// generate texture
 	glGenTextures (1, &(tex->id));
 	glBindTexture (GL_TEXTURE_2D, tex->id);
@@ -268,7 +412,6 @@ bool StelTextureMgr::loadTexture(ManagedSTexture* tex)
 	tex->loadState = ManagedSTexture::LOADED;	// texture loaded
 	return true;
 }
-
 
 /*************************************************************************
  Load a PNG image from a file.

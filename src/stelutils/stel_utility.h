@@ -149,6 +149,9 @@ namespace StelUtils {
 	//! May require optimization
 	bool fileExists(const std::string& fileName);
 	
+	//! Delete the file
+	bool deleteFile(const std::string& fileName);
+	
 	//! Check if a number is a power of 2
 	bool isPowerOfTwo(int value);
 	

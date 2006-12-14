@@ -20,8 +20,19 @@
 #include "stelmodule.h"
 #include "vecmath.h"
 #include "init_parser.h"
+#include "stelapp.h"
 
-//! Init itself from a .ini file
+/*************************************************************************
+ Return the full path to a data file belonging to the module
+*************************************************************************/
+std::string StelModule::getFilePath(const std::string& fileName) const 
+{
+	return StelApp::getInstance().getDotStellariumDir()+"modules/"+getModuleID()+"/"+fileName;
+}
+
+/*************************************************************************
+ Init itself from a .ini file
+*************************************************************************/
 void StelModule::loadProperties(const string& iniFile)
 {
 	InitParser conf;

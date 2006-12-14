@@ -33,6 +33,7 @@
 #include "nebula_mgr.h"
 #include "GeodesicGridDrawer.h"
 #include "constellation.h"
+#include "LandscapeMgr.h"
 
 #define LOADING_BAR_DEFAULT_FONT_SIZE 12.
 
@@ -113,21 +114,17 @@ StelCore::~StelCore()
 	delete equator_line;
 	delete ecliptic_line;
 	delete meridian_line;
-	delete cardinals_points;
-	delete landscape;
-	landscape = NULL;
 	delete observatory;
 	observatory = NULL;
 	delete milky_way;
 	delete meteors;
 	meteors = NULL;
-	delete atmosphere;
 	delete tone_converter;
 	delete ssystem;
 	delete script_images;
 	delete telescope_mgr;
 	StelObject::delete_textures(); // Unload the pointer textures
-
+	delete landscape;
 	if (geodesic_search_result)
 	{
 		delete geodesic_search_result;
@@ -207,15 +204,9 @@ void StelCore::init(const InitParser& conf)
 	zoom_speed			= conf.get_double("navigation","zoom_speed", 0.0004);
 
 	// Landscape, atmosphere & cardinal points section
-	atmosphere = new Atmosphere();
-	landscape = new LandscapeOldStyle();
-	setLandscape(observatory->get_landscape_name());
-	setFlagLandscape(conf.get_boolean("landscape", "flag_landscape", conf.get_boolean("landscape", "flag_ground", 1)));  // name change
-	setFlagFog(conf.get_boolean("landscape:flag_fog"));
-	setFlagAtmosphere(conf.get_boolean("landscape:flag_atmosphere"));
-	setAtmosphereFadeDuration(conf.get_double("landscape","atmosphere_fade_duration",1.5));
-	cardinals_points = new Cardinals();
-	cardinals_points->setFlagShow(conf.get_boolean("viewing:flag_cardinal_points"));
+	landscape = new LandscapeMgr();
+	landscape->init(conf, lb);
+	StelApp::getInstance().getModuleMgr().registerModule(landscape);
 	
 	// Grid and lines
 	setFlagAzimutalGrid(conf.get_boolean("viewing:flag_azimutal_grid"));
@@ -228,7 +219,7 @@ void StelCore::init(const InitParser& conf)
 	meteors = new MeteorMgr(10, 60);
 	setMeteorsRate(conf.get_int("astro", "meteor_rate", 10));
 	
-	tone_converter->set_world_adaptation_luminance(3.75f + atmosphere->get_intensity()*40000.f);
+	tone_converter->set_world_adaptation_luminance(3.75f + landscape->getLuminance()*40000.f);
 	
 	// Load dynamic modules TODO loop here
 	if (conf.find_entry("external_modules:module1"))
@@ -279,22 +270,11 @@ void StelCore::update(int delta_time)
 	ecliptic_line->update(delta_time);
 	meridian_line->update(delta_time);
 	asterisms->update((double)delta_time/1000);
-	atmosphere->update(delta_time);
-	landscape->update(delta_time);
 	hip_stars->update((double)delta_time/1000);
 	nebulas->update((double)delta_time/1000);
-	cardinals_points->update(delta_time);
 	milky_way->update(delta_time);
 	telescope_mgr->update(delta_time);
 
-	// Compute the sun position in local coordinate
-	Vec3d temp(0.,0.,0.);
-	Vec3d sunPos = navigation->helio_to_local(temp);
-
-
-	// Compute the moon position in local coordinate
-	Vec3d moon = ssystem->getMoon()->get_heliocentric_ecliptic_pos();
-	Vec3d moonPos = navigation->helio_to_local(moon);
 
 	// Give the updated standard projection matrices to the projector.
 	// atmosphere->compute_color needs the projection matrices, so we must
@@ -309,33 +289,7 @@ void StelCore::update(int delta_time)
 	                                    navigation->get_local_to_eye_mat(),
 	                                    navigation->get_j2000_to_eye_mat());
 
-	// Compute the atmosphere color and intensity
-	atmosphere->compute_color(navigation->getJDay(), sunPos, moonPos,
-	                          ssystem->getMoon()->get_phase(ssystem->getEarth()->get_heliocentric_ecliptic_pos()),
-	                          tone_converter, projection, observatory->get_latitude(), observatory->get_altitude(),
-	                          15.f, 40.f);	// Temperature = 15c, relative humidity = 40%
-	tone_converter->set_world_adaptation_luminance(atmosphere->get_world_adaptation_luminance());
-
-	sunPos.normalize();
-	moonPos.normalize();
-	// compute global sky brightness TODO : make this more "scientifically"
-	// TODO: also add moonlight illumination
-
-	if(sunPos[2] < -0.1/1.5 )
-		sky_brightness = 0.01;
-	else
-		sky_brightness = (0.01 + 1.5*(sunPos[2]+0.1/1.5));
-
-	// TODO make this more generic for non-atmosphere planets
-	if(atmosphere->get_fade_intensity() == 1)
-	{
-		// If the atmosphere is on, a solar eclipse might darken the sky
-		// otherwise we just use the sun position calculation above
-		sky_brightness *= (atmosphere->get_intensity()+0.1);
-	}
-
-	// TODO: should calculate dimming with solar eclipse even without atmosphere on
-	landscape->set_sky_brightness(sky_brightness+0.05);
+	landscape->update((double)delta_time/1000);
 	
 	StelModuleMgr& mmgr = StelApp::getInstance().getModuleMgr();
 	for (StelModuleMgr::Iterator iter=mmgr.begin();iter!=mmgr.end();++iter)
@@ -381,14 +335,10 @@ double StelCore::draw(int delta_time)
 		projection->unproject_j2000(v[0]+v[2],v[1],e3);
 	}
 
-	int max_search_level = hip_stars->getMaxSearchLevel(tone_converter,
-	                       projection);
+	int max_search_level = hip_stars->getMaxSearchLevel(tone_converter, projection);
 	// int h = nebulas->getMaxSearchLevel(tone_converter,projection);
 	// if (max_search_level < h) max_search_level = h;
 	geodesic_search_result->search(e0,e1,e2,e3,max_search_level);
-
-	// Draw the nebula
-	nebulas->draw(projection, navigation, tone_converter);
 
 	StelModuleMgr& mmgr = StelApp::getInstance().getModuleMgr();
 	for (StelModuleMgr::Iterator iter=mmgr.begin();iter!=mmgr.end();++iter)
@@ -397,11 +347,13 @@ double StelCore::draw(int delta_time)
 			(*iter)->draw(projection, navigation, tone_converter);
 	}
 
+	// Draw the nebula
+	nebulas->draw(projection, navigation, tone_converter);
+
 	// Draw the stars
 	hip_stars->draw(projection, navigation, tone_converter);
 
-//geoDrawer->draw(projection,navigation, tone_converter);
-
+	//geoDrawer->draw(projection,navigation, tone_converter);
 
 	// Draw the equatorial grid
 	equ_grid->draw(projection);
@@ -423,87 +375,30 @@ double StelCore::draw(int delta_time)
 
 	// Draw the pointer on the currently selected object
 	// TODO: this would be improved if pointer was drawn at same time as object for correct depth in scene
+	// FC: Why? The pointer should be drawn over everthing else I think
 	if (selected_object && object_pointer_visibility)
-		selected_object.draw_pointer(delta_time, projection, navigation);
+		selected_object.drawPointer(delta_time, projection, navigation);
 	// Set openGL drawings in local coordinates i.e. generally altazimuthal coordinates
 	navigation->switchToLocal();
 
 	// Upade meteors
 	meteors->update(delta_time);
 
-	if(!getFlagAtmosphere() || sky_brightness<0.1)
-	{
-		projection->set_orthographic_projection();
-		meteors->draw(projection, navigation, tone_converter);
-		projection->reset_perspective_projection();
-	}
-
-	// Draw the atmosphere
-	atmosphere->draw(projection, delta_time);
-
-	// Draw the landscape
-	landscape->draw(tone_converter, projection, navigation);
-
-	// Draw the cardinal points
-	//if (FlagCardinalPoints)
-	cardinals_points->draw(projection, observatory->get_latitude());
+	// TODO fix if(!landscape->getFlagAtmosphere() || sky_brightness<0.1)
+	meteors->draw(projection, navigation, tone_converter);
 
 	telescope_mgr->draw(projection,navigation);
 
-	// draw images loaded by a script
-	projection->set_orthographic_projection();
-	script_images->draw(navigation, projection);
+	landscape->draw(projection,navigation,tone_converter);
 
-	projection->reset_perspective_projection();
+	// draw images loaded by a script
+	script_images->draw(navigation, projection);
 
 	projection->draw_viewport_shape();
 
 	return squaredDistance;
 }
 
-bool StelCore::setLandscape(const string& new_landscape_name)
-{
-	if (new_landscape_name.empty())
-		return 0;
-	Landscape* newLandscape = Landscape::create_from_file(StelApp::getInstance().getDataFilePath("landscapes.ini"), new_landscape_name);
-
-	if(!newLandscape)
-		return 0;
-
-	if (landscape)
-	{
-		// Copy parameters from previous landscape to new one
-		newLandscape->setFlagShow(landscape->getFlagShow());
-		newLandscape->setFlagShowFog(landscape->getFlagShowFog());
-		delete landscape;
-		landscape = newLandscape;
-	}
-	observatory->set_landscape_name(new_landscape_name);
-	return 1;
-}
-
-
-//! Load a landscape based on a hash of parameters mirroring the landscape.ini file
-//! and make it the current landscape
-bool StelCore::loadLandscape(stringHash_t& param)
-{
-	Landscape* newLandscape = Landscape::create_from_hash(param);
-	if(!newLandscape)
-		return 0;
-
-	if (landscape)
-	{
-		// Copy parameters from previous landscape to new one
-		newLandscape->setFlagShow(landscape->getFlagShow());
-		newLandscape->setFlagShowFog(landscape->getFlagShowFog());
-		delete landscape;
-		landscape = newLandscape;
-	}
-	observatory->set_landscape_name(param["name"]);
-	// probably not particularly useful, as not in landscape.ini file
-
-	return 1;
-}
 
 StelObject StelCore::searchByNameI18n(const wstring &name) const
 {
@@ -703,7 +598,6 @@ StelObject StelCore::clever_find(const Vec3d& v) const
 			{
 				// make very easy to select IF LABELED
 				mag = -1;
-
 			}
 		}
 		if ((*iter).get_type()==STEL_OBJECT_PLANET)
@@ -835,11 +729,9 @@ void StelCore::updateSkyCulture()
 // Set the sky locale and update the sky objects names for all the modules
 void StelCore::updateSkyLanguage()
 {
-	if( !hip_stars || !cardinals_points || !asterisms)
+	if( !hip_stars || !asterisms)
 		return; // objects not initialized yet
 
-	// Translate all labels with the new language
-	if (cardinals_points) cardinals_points->updateI18n();
 	if (asterisms) asterisms->updateI18n();
 	if (ssystem) ssystem->updateI18n();
 	if (nebulas) nebulas->updateI18n();
@@ -871,7 +763,7 @@ void StelCore::setColorScheme(const string& skinFile, const string& section)
 	equator_line->setColor(StelUtils::str_to_vec3f(conf.get_str(section,"equator_color", defaultColor)));
 	ecliptic_line->setColor(StelUtils::str_to_vec3f(conf.get_str(section,"ecliptic_color", defaultColor)));
 	meridian_line->setColor(StelUtils::str_to_vec3f(conf.get_str(section,"meridian_color", defaultColor)));
-	cardinals_points->setColor(StelUtils::str_to_vec3f(conf.get_str(section,"cardinal_color", defaultColor)));
+	landscape->setColorCardinalPoints(StelUtils::str_to_vec3f(conf.get_str(section,"cardinal_color", defaultColor)));
 	asterisms->setLinesColor(StelUtils::str_to_vec3f(conf.get_str(section,"const_lines_color", defaultColor)));
 	asterisms->setBoundariesColor(StelUtils::str_to_vec3f(conf.get_str(section,"const_boundary_color", "0.8,0.3,0.3")));
 	asterisms->setNamesColor(StelUtils::str_to_vec3f(conf.get_str(section,"const_names_color", defaultColor)));

@@ -55,31 +55,26 @@ public:
 	//! Get whether fog is displayed
 	bool getFlagShowFog() const {return (bool)fog_fader;}
 	//! Get landscape name
-	string getName() const {return name;}
+	wstring getName() const {return name;}
 	//! Get landscape author name
-	string getAuthorName() const {return author;}
+	wstring getAuthorName() const {return author;}
 	//! Get landscape description
-	string getDescription() const {return description;}
+	wstring getDescription() const {return description;}
 	
-	void update(int delta_time) {land_fader.update(delta_time); fog_fader.update(delta_time);}
+	void update(double deltaTime) {land_fader.update((int)(deltaTime*1000)); fog_fader.update((int)(deltaTime*1000));}
 	virtual void draw(ToneReproductor * eye, const Projector* prj, const Navigator* nav) = 0;
-	
-	static Landscape* create_from_file(const string& landscape_file, const string& section_name);
-	static Landscape* create_from_hash(stringHash_t & param);
-	static string get_file_content(const string& landscape_file);
-	static string getLandscapeNames(const string& landscape_file);
-	static string nameToKey(const string& landscape_file, const string & name);
+
 protected:
 	//! Load attributes common to all landscapes
 	void loadCommon(const string& landscape_file, const string& section_name);
 	float radius;
-	string name;
+	wstring name;
 	float sky_brightness;
 	bool valid_landscape;   // was a landscape loaded properly?
 	LinearFader land_fader;
 	LinearFader fog_fader;
-	string author;
-	string description;
+	wstring author;
+	wstring description;
 	
 typedef struct
 {
@@ -127,7 +122,7 @@ public:
 	virtual ~LandscapeFisheye();
 	virtual void load(const string& fileName, const string& section_name);
 	virtual void draw(ToneReproductor * eye, const Projector* prj, const Navigator* nav);
-	void create(const string _name, bool _fullpath, const string _maptex, double _texturefov);
+	void create(const wstring _name, bool _fullpath, const string _maptex, double _texturefov);
 private:
 
 	STexture* map_tex;
@@ -142,7 +137,7 @@ public:
 	virtual ~LandscapeSpherical();
 	virtual void load(const string& fileName, const string& section_name);
 	virtual void draw(ToneReproductor * eye, const Projector* prj, const Navigator* nav);
-	void create(const string _name, bool _fullpath, const string _maptex);
+	void create(const wstring _name, bool _fullpath, const string _maptex);
 private:
 
 	STexture* map_tex;

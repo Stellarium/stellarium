@@ -34,6 +34,7 @@
 #include "constellation_mgr.h"
 #include "solarsystem.h"
 #include "nebula_mgr.h"
+#include "LandscapeMgr.h"
 
 using namespace std;
 
@@ -90,6 +91,12 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 
 	status = parse_command(commandline, command, args);
 
+	ConstellationMgr* cmgr = (ConstellationMgr*)StelApp::getInstance().getModuleMgr().getModule("constellations");
+	HipStarMgr* smgr = (HipStarMgr*)StelApp::getInstance().getModuleMgr().getModule("stars");
+	NebulaMgr* nmgr = (NebulaMgr*)StelApp::getInstance().getModuleMgr().getModule("nebulas");
+	SolarSystem* ssmgr = (SolarSystem*)StelApp::getInstance().getModuleMgr().getModule("ssystem");
+	LandscapeMgr* lmgr = (LandscapeMgr*)StelApp::getInstance().getModuleMgr().getModule("landscape");
+
 	// stellarium specific logic to run each command
 
 	if(command == "flag") {
@@ -117,17 +124,13 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 		// set core variables
 
 		// TODO: some bounds/error checking here
-		ConstellationMgr* cmgr = (ConstellationMgr*)StelApp::getInstance().getModuleMgr().getModule("constellations");
-		HipStarMgr* smgr = (HipStarMgr*)StelApp::getInstance().getModuleMgr().getModule("stars");
-		NebulaMgr* nmgr = (NebulaMgr*)StelApp::getInstance().getModuleMgr().getModule("nebulas");
-		SolarSystem* ssmgr = (SolarSystem*)StelApp::getInstance().getModuleMgr().getModule("ssystem");
 		
-		if(args["atmosphere_fade_duration"]!="") stcore->setAtmosphereFadeDuration(StelUtils::str_to_double(args["atmosphere_fade_duration"]));
+		if(args["atmosphere_fade_duration"]!="") lmgr->setAtmosphereFadeDuration(StelUtils::str_to_double(args["atmosphere_fade_duration"]));
 		else if(args["auto_move_duration"]!="") stcore->setAutomoveDuration( StelUtils::str_to_double(args["auto_move_duration"]));
 		else if(args["constellation_art_fade_duration"]!="") cmgr->setArtFadeDuration(StelUtils::str_to_double(args["constellation_art_fade_duration"]));
 		else if(args["constellation_art_intensity"]!="") cmgr->setArtIntensity(StelUtils::str_to_double(args["constellation_art_intensity"]));
 		else if(args["home_planet"]!="") stcore->setHomePlanet(args["home_planet"]);
-		else if(args["landscape_name"]!="") stcore->setLandscape(args["landscape_name"]);
+		else if(args["landscape_name"]!="") lmgr->setLandscape(args["landscape_name"]);
 		else if(args["max_mag_nebula_name"]!="") nmgr->setMaxMagHints(StelUtils::str_to_double(args["max_mag_nebula_name"]));
 		else if(args["max_mag_star_name"]!="") smgr->setMaxMagName(StelUtils::str_to_double(args["max_mag_star_name"]));
 		else if(args["moon_scale"]!="") ssmgr->setMoonScale(StelUtils::str_to_double(args["moon_scale"]));
@@ -348,11 +351,11 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 	  
 		if(args["lat"]!="" || args["lon"]!="" || args["alt"]!="") {
 
-			Observator observatory = stcore->getObservatory();
+			const Observator* observatory = stcore->getObservatory();
 
-			double lat = observatory.get_latitude();
-			double lon = observatory.get_longitude();
-			double alt = observatory.get_altitude();
+			double lat = observatory->get_latitude();
+			double lon = observatory->get_longitude();
+			double alt = observatory->get_altitude();
 			string name;
 			int delay;
 		  
@@ -561,7 +564,7 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 
 		// textures are relative to script
 		args["path"] = stapp->scripts->get_script_path();
-		stcore->loadLandscape(args);
+		lmgr->loadLandscape(args);
 	  
 	} else if(command=="meteors") {
 		if(args["zhr"]!="") {
@@ -691,6 +694,7 @@ int StelCommandInterface::set_flag(string name, string value, bool &newval, bool
 		HipStarMgr* smgr = (HipStarMgr*)StelApp::getInstance().getModuleMgr().getModule("stars");
 		NebulaMgr* nmgr = (NebulaMgr*)StelApp::getInstance().getModuleMgr().getModule("nebulas");
 		SolarSystem* ssmgr = (SolarSystem*)StelApp::getInstance().getModuleMgr().getModule("ssystem");
+		LandscapeMgr* lmgr = (LandscapeMgr*)StelApp::getInstance().getModuleMgr().getModule("landscape");
 		
 		if(name=="constellation_drawing") {
 			newval = !cmgr->getFlagLines();
@@ -728,13 +732,13 @@ int StelCommandInterface::set_flag(string name, string value, bool &newval, bool
 			stcore->setFlagManualAutoZoom(newval); }
 		else if(name=="show_script_bar") newval = (stapp->ui->FlagShowScriptBar = !stapp->ui->FlagShowScriptBar);
 		else if(name=="fog") {
-			newval = !stcore->getFlagFog();
-			stcore->setFlagFog(newval); 
+			newval = !lmgr->getFlagFog();
+			lmgr->setFlagFog(newval); 
 		}
 		else if(name=="atmosphere") {
-			newval = !stcore->getFlagAtmosphere();
-			stcore->setFlagAtmosphere(newval);
-			if(!newval) stcore->setFlagFog(false);  // turn off fog with atmosphere
+			newval = !lmgr->getFlagAtmosphere();
+			lmgr->setFlagAtmosphere(newval);
+			if(!newval) lmgr->setFlagFog(false);  // turn off fog with atmosphere
 		}
 		/*		else if(name=="chart") {
 			newval = !stapp->getVisionModeChart();
@@ -767,16 +771,16 @@ int StelCommandInterface::set_flag(string name, string value, bool &newval, bool
 		 stcore->setFlagMeridianLine(newval);
 		}
 		else if(name=="cardinal_points") {
-			newval = !stcore->getFlagCardinalsPoints();
-			stcore->setFlagCardinalsPoints(newval);
+			newval = !lmgr->getFlagCardinalsPoints();
+			lmgr->setFlagCardinalsPoints(newval);
 		}
 		else if(name=="moon_scaled") {
 			newval = !ssmgr->getFlagMoonScale();
 			ssmgr->setFlagMoonScale(newval);
 		}
 		else if(name=="landscape") {
-			newval = !stcore->getFlagLandscape();
-			stcore->setFlagLandscape(newval);
+			newval = !lmgr->getFlagLandscape();
+			lmgr->setFlagLandscape(newval);
 			}
 		else if(name=="stars") {
 			newval = !smgr->getFlagStars();
@@ -867,6 +871,7 @@ int StelCommandInterface::set_flag(string name, string value, bool &newval, bool
 		HipStarMgr* smgr = (HipStarMgr*)StelApp::getInstance().getModuleMgr().getModule("stars");
 		NebulaMgr* nmgr = (NebulaMgr*)StelApp::getInstance().getModuleMgr().getModule("nebulas");
 		SolarSystem* ssmgr = (SolarSystem*)StelApp::getInstance().getModuleMgr().getModule("ssystem");
+		LandscapeMgr* lmgr = (LandscapeMgr*)StelApp::getInstance().getModuleMgr().getModule("landscape");
 		
 		if(name=="constellation_drawing") cmgr->setFlagLines(newval);
 		else if(name=="constellation_names") cmgr->setFlagNames(newval);
@@ -880,19 +885,19 @@ int StelCommandInterface::set_flag(string name, string value, bool &newval, bool
 		else if(name=="show_tui_short_obj_info") stapp->ui->FlagShowTuiShortObjInfo = newval;
 		else if(name=="manual_zoom") stcore->setFlagManualAutoZoom(newval);
 		else if(name=="show_script_bar") stapp->ui->FlagShowScriptBar = newval;
-		else if(name=="fog") stcore->setFlagFog(newval);
+		else if(name=="fog") lmgr->setFlagFog(newval);
 		else if(name=="atmosphere") { 
-			stcore->setFlagAtmosphere ( newval);
-			if(!newval) stcore->setFlagFog(false);  // turn off fog with atmosphere
+			lmgr->setFlagAtmosphere ( newval);
+			if(!newval) lmgr->setFlagFog(false);  // turn off fog with atmosphere
 		}
 		else if(name=="azimuthal_grid") stcore->setFlagAzimutalGrid(newval);
 		else if(name=="equatorial_grid") stcore->setFlagEquatorGrid(newval);
 		else if(name=="equator_line") stcore->setFlagEquatorLine(newval);
 		else if(name=="ecliptic_line") stcore->setFlagEclipticLine(newval);
 		else if(name=="meridian_line") stcore->setFlagMeridianLine(newval);
-		else if(name=="cardinal_points") stcore->setFlagCardinalsPoints(newval);
+		else if(name=="cardinal_points") lmgr->setFlagCardinalsPoints(newval);
 		else if(name=="moon_scaled") ssmgr->setFlagMoonScale(newval);
-		else if(name=="landscape") stcore->setFlagLandscape(newval);
+		else if(name=="landscape") lmgr->setFlagLandscape(newval);
 		else if(name=="stars") smgr->setFlagStars(newval);
 		else if(name=="star_names") smgr->setFlagNames(newval);
 		else if(name=="planets") {

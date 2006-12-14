@@ -100,10 +100,12 @@ void ImageMgr::update(double delta_time)
 
 double ImageMgr::draw(const Navigator * nav, Projector * prj)
 {
+	prj->set_orthographic_projection();
     for (vector<Image*>::iterator iter = active_images.begin(); iter != active_images.end(); ++iter)
     {
         (*iter)->draw(nav, prj);
     }
+    prj->reset_perspective_projection();
 	return 0.0;  // TODO: determine max pixel movement from images
 }
 

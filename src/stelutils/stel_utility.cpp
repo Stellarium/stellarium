@@ -24,6 +24,7 @@
 #include <cstdlib>
 #include <ctime>
 #include <config.h>
+#include <cstdio>
 
 #if defined( CYGWIN )
  #include <malloc.h>
@@ -38,7 +39,7 @@
 #include "vecmath.h"
 
 namespace StelUtils {
-	
+
 	//! Dummy wrapper used to remove a boring warning when using strftime directly
 	size_t my_strftime(char *s, size_t max, const char *fmt, const struct tm *tm)
 	{
@@ -447,6 +448,16 @@ namespace StelUtils {
 		return false;
 	}
 	
+	// Delete the file
+	bool deleteFile(const std::string& fileName)
+	{
+		if (std::remove(fileName.c_str())==-1)
+		{
+			return false;
+		}
+		return true;
+	}
+
 	// Check if a number is a power of 2
 	bool isPowerOfTwo (int value) {return (value & -value) == value;}
 	
@@ -476,13 +487,14 @@ namespace StelUtils {
 			return false;
 		}
 		curl_easy_setopt(handle, CURLOPT_WRITEDATA, fic);
+		//curl_easy_setopt(handle, CURLOPT_VERBOSE, 1);
 		if (curl_easy_perform(handle)!=0)
 		{
 			cerr << "There was an error while getting file: " << url << endl;
 			fclose(fic);
 			return false;
 		}
-		
+		fclose(fic);
 		return true;
 #endif
 	}
