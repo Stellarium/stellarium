@@ -46,10 +46,14 @@ LIBS="$LIBS $FT2_LIBS"
 AX_BOOST_BASE
 
 # Check for libcurl
-LIBCURL_CHECK_CONFIG
-CFLAGS="$CFLAGS $LIBCURL_CPPFLAGS"
-CXXFLAGS="$CXXFLAGS $LIBCURL_CPPFLAGS"
-LIBS="$LIBS -lcurl"
+LIBCURL_CHECK_CONFIG([yes], , [haveCurl=yes], [haveCurl=no])
+if test "${haveCurl}" != yes; then
+	AC_MSG_ERROR([libcurl library not found, please install it to enable remote file download.])
+else
+	CFLAGS="$CFLAGS $LIBCURL_CPPFLAGS"
+	CXXFLAGS="$CXXFLAGS $LIBCURL_CPPFLAGS"
+	LIBS="$LIBS $LIBCURL"
+fi
 
 dnl Can't find later libGLU if -lm not set here!?!??!
 AC_CHECK_LIB(m,fabs,LIBS="$LIBS -lm",AC_MSG_RESULT(math library not found))
