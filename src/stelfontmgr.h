@@ -26,7 +26,8 @@
 using namespace std;
 
 //! Manage font for Stellarium. Take into account special font for special language.
-//! @author Fabien Chereau <stellarium@free.fr>
+//! It also load fonts and store them in a cache to prevent duplication.
+//! @author Fabien Chéreau <stellarium@free.fr>
 class StelFontMgr
 {
 public:
