@@ -21,6 +21,7 @@
 #define STELAPP_H
 
 #include <string>
+#include <cassert>
 #include "stellarium.h"
 #include "SDL.h"	// SDL is used only for the key codes types
 
@@ -67,6 +68,10 @@ public:
 	//! @brief Get the configuration file path.
 	//! @return the full path to Stellarium's main config.ini file
 	string getConfigFilePath() const;
+
+	//! @brief Get the (writable) .stellarium/ directory path, usually $HOME/.stellarium/
+	//! @return the full path to the (writable) .stellarium/ directory path
+	const std::string& getDotStellariumDir() const {return dotStellariumDir;}
 
 	//! @brief Get the full path to a file.
 	//! This method will try to find the file in all valid data directories until it finds it.

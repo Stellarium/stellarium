@@ -46,20 +46,21 @@ ConvexPolygon::ConvexPolygon(const Vec3d &e0,const Vec3d &e1,const Vec3d &e2,con
 }
 
 // Return true if the two convex intersect
-// TODO: this is false when polygons intersect without having points inside each others
-// Implement the O'rourke's algorithm
 bool ConvexPolygon::intersect(const ConvexPolygon& c) const
 {
-	vector<Vec3d>::const_iterator iter=vertex.begin();
-	for (;iter!=vertex.end();++iter)
+	vector<HalfSpace>::const_iterator iter=halfSpaces.begin();
+	for (;iter!=halfSpaces.end();++iter)
 	{
-		if (c.inside(*iter))
-			return true;
+		vector<Vec3d>::const_iterator iterv=c.vertex.begin();
+		for (;iterv!=c.vertex.end();++iterv)
+		{
+			if (iter->inside(*iterv))
+				break;
+		}
+		// If there is one side for which all the vertex of the other polygon 
+		// are outside, then the polygons don't intersect! 
+		if (iterv==c.vertex.end())
+			return false;
 	}
-	for (iter=c.vertex.begin();iter!=c.vertex.end();++iter)
-	{
-		if (inside(*iter))
-			return true;
-	}
-	return false;
+	return true;
 }

@@ -52,9 +52,6 @@ public:
 	double get_longitude(void) const {return longitude;}
 	void set_altitude(int a) {altitude=a;}
 	int get_altitude(void) const {return altitude;}
-	void set_landscape_name(const string s);
-	string get_landscape_name(void) const {return landscape_name;}
-
 
 	void moveTo(double lat, double lon, double alt, int duration, const wstring& _name);  // duration in ms
 	void update(int delta_time);  // for moving observing position 
@@ -66,7 +63,6 @@ private:
 	double longitude;		// Longitude in degree
 	double latitude;		// Latitude in degree
 	int altitude;			// Altitude in meter
-	string landscape_name;
 
 	// for changing position
 	bool flag_move_to;

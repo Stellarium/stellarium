@@ -56,10 +56,10 @@ void StelObject::update(void) {
   rep->update();
 }
 
-void StelObject::draw_pointer(int delta_time,
+void StelObject::drawPointer(int delta_time,
                               const Projector *prj,
                               const Navigator *nav) {
-  rep->draw_pointer(delta_time,prj,nav);
+  rep->drawPointer(delta_time,prj,nav);
 }
 
 wstring StelObject::getInfoString(const Navigator *nav) const {

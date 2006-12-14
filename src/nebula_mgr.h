@@ -96,6 +96,11 @@ public:
 	//! Get flag for displaying Nebulae without textures
 	bool getFlagDisplayNoTexture(void) const {return displayNoTexture;}	
 	
+	//! Display textures for nebulas which have one
+	void setFlagShowTexture(bool b) {flagShowTexture = b;}
+	//! Get whether textures are displayed for nebulas which have one
+	bool getFlagShowTexture(void) const {return flagShowTexture;}	
+	
 	//! Set maximum magnitude at which nebulae hints are displayed
 	void setMaxMagHints(float f) {maxMagHints = f;}
 	//! Get maximum magnitude at which nebulae hints are displayed
@@ -122,6 +127,7 @@ private:
 	
 	float maxMagHints;				// Define maximum magnitude at which nebulae hints are displayed
 	bool displayNoTexture;			// Define if nebulas without textures are to be displayed
+	bool flagShowTexture;			// Define if nebula textures are displayed
 };
 
 #endif // _NEBULA_MGR_H_

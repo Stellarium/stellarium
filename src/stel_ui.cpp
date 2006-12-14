@@ -34,6 +34,7 @@
 #include "init_parser.h"
 #include "stel_command_interface.h"
 #include "StelTextureMgr.h"
+#include "LandscapeMgr.h"
 
 ////////////////////////////////////////////////////////////////////////////////
 //								CLASS FUNCTIONS
@@ -534,16 +535,19 @@ void StelUI::cbEditScriptExecute(void)
 void StelUI::cb(void)
 {
 	ConstellationMgr* cmgr = (ConstellationMgr*)StelApp::getInstance().getModuleMgr().getModule("constellations");
+	NebulaMgr* nmgr = (NebulaMgr*)StelApp::getInstance().getModuleMgr().getModule("nebulas");
+	LandscapeMgr* lmgr = (LandscapeMgr*)StelApp::getInstance().getModuleMgr().getModule("landscape");
+	
 	cmgr->setFlagLines(bt_flag_constellation_draw->getState());
 	cmgr->setFlagNames(bt_flag_constellation_name->getState());
 	cmgr->setFlagArt(bt_flag_constellation_art->getState());
 	core->setFlagAzimutalGrid(bt_flag_azimuth_grid->getState());
 	core->setFlagEquatorGrid(bt_flag_equator_grid->getState());
-	core->setFlagLandscape(bt_flag_ground->getState());
-	core->setFlagCardinalsPoints(bt_flag_cardinals->getState());
-	core->setFlagAtmosphere(bt_flag_atmosphere->getState());
+	lmgr->setFlagLandscape(bt_flag_ground->getState());
+	lmgr->setFlagCardinalsPoints(bt_flag_cardinals->getState());
+	lmgr->setFlagAtmosphere(bt_flag_atmosphere->getState());
 	
-	NebulaMgr* nmgr = (NebulaMgr*)StelApp::getInstance().getModuleMgr().getModule("nebulas");
+	
 	nmgr->setFlagHints( bt_flag_nebula_name->getState() );
 	if (bt_flip_horz) core->getProjection()->setFlipHorz( bt_flip_horz->getState() );
 	if (bt_flip_vert) core->getProjection()->setFlipVert( bt_flip_vert->getState() );
@@ -1332,17 +1336,19 @@ void StelUI::gui_update_widgets(int delta_time)
 	bt_time_control_ctr->setVisible(FlagMenu);
 
 	ConstellationMgr* cmgr = (ConstellationMgr*)StelApp::getInstance().getModuleMgr().getModule("constellations");
+	NebulaMgr* nmgr = (NebulaMgr*)StelApp::getInstance().getModuleMgr().getModule("nebulas");
+	LandscapeMgr* lmgr = (LandscapeMgr*)StelApp::getInstance().getModuleMgr().getModule("landscape");
+	
 	bt_flag_constellation_draw->setState(cmgr->getFlagLines());
 	bt_flag_constellation_name->setState(cmgr->getFlagNames());
 	bt_flag_constellation_art->setState(cmgr->getFlagArt());
 	
 	bt_flag_azimuth_grid->setState(core->getFlagAzimutalGrid());
 	bt_flag_equator_grid->setState(core->getFlagEquatorGrid());
-	bt_flag_ground->setState(core->getFlagLandscape());
-	bt_flag_cardinals->setState(core->getFlagCardinalsPoints());
-	bt_flag_atmosphere->setState(core->getFlagAtmosphere());
+	bt_flag_ground->setState(lmgr->getFlagLandscape());
+	bt_flag_cardinals->setState(lmgr->getFlagCardinalsPoints());
+	bt_flag_atmosphere->setState(lmgr->getFlagAtmosphere());
 	
-	NebulaMgr* nmgr = (NebulaMgr*)StelApp::getInstance().getModuleMgr().getModule("nebulas");
 	bt_flag_nebula_name->setState(nmgr->getFlagHints());
 	bt_flag_help->setState(help_win->getVisible());
 	bt_flag_equatorial_mode->setState(core->getMountMode()==StelCore::MOUNT_EQUATORIAL);
@@ -1393,9 +1399,9 @@ void StelUI::setTitleObservatoryName(const wstring& name)
 
 wstring StelUI::getTitleWithAltitude(void)
 {
-	return core->getObservatory().getHomePlanetNameI18n() +
-        L", " + core->getObservatory().get_name() +
-        L" @ " + StelUtils::doubleToWstring(core->getObservatory().get_altitude()) + L"m";
+	return core->getObservatory()->getHomePlanetNameI18n() +
+        L", " + core->getObservatory()->get_name() +
+        L" @ " + StelUtils::doubleToWstring(core->getObservatory()->get_altitude()) + L"m";
 }
 
 void StelUI::setColorScheme(const string& skinFile, const string& section)

@@ -22,6 +22,7 @@
 
 #include <string>
 #include <map>
+#include <vector>
 #include "SDL_opengl.h"
 #include "STexture.h"
 
@@ -36,7 +37,18 @@ public:
 	//! Return the average texture luminance.
 	//! @return 0 is black, 1 is white
     virtual float getAverageLuminance(void);
+    
+    virtual ~ManagedSTexture()
+    {
+    	if (threadedLoading && loadState==ManagedSTexture::LOADING_IMAGE)
+    	{
+    		// TODO should search in the loading queue the matching thread and kill it 
+    		assert(0);
+    	}
+    }
 private:
+	friend int loadTextureThread(void* tparam);
+	
 	enum LoadState
 	{
 		UNLOADED=0,
@@ -45,12 +57,15 @@ private:
 		LOADING_IMAGE
 	};
 
-	ManagedSTexture() : loadState(UNLOADED), avgLuminance(-1.f) {;}
+	ManagedSTexture() : loadState(UNLOADED), avgLuminance(-1.f), threadedLoading(false) {;}
 	LoadState loadState;
 	void load(void);
 	
 	// Cached average luminance
 	float avgLuminance;
+	
+	// Define whether the loading must be done in a thread
+	bool threadedLoading;
 };
 
 class ImageLoader
@@ -76,10 +91,23 @@ public:
 	//! Must be called after the creation of the GLContext.
 	void init();
 	
+	//! Update loading of textures in threads
+	void update();
+	
 	//! Load an image from a file and create a new texture from it
-	//! @param the texture file name, can be absolute path if starts with '/' otherwise
-	//! the file will be looked in stellarium standard textures directories.
-	ManagedSTexture& createTexture(const std::string& filename, bool lazyLoading=false);
+	//! @param filename the texture file name, can be absolute path if starts with '/' otherwise
+	//!    the file will be looked in stellarium standard textures directories.
+	ManagedSTexture& createTexture(const std::string& afilename, bool lazyLoading=false);
+	
+	//! Load an image from a file and create a new texture from it in a new thread, the value of the return pointer
+	//!    and of the status boolean are only set in the update() method and therefore don't need to be protected
+	//!    by a Mutex.
+	//! @param tex the pointer where the loaded texture will be returned. In case of threaded loading, this pointer will
+	//!    remain to NULL until the texture is actually loaded.
+	//! @param filename the texture file name, can be absolute path if starts with '/' otherwise
+	//!    the file will be looked in stellarium standard textures directories.
+	//! @param status is set to false if the creation of the texture failed
+	bool createTextureThread(STexture** tex, const std::string& filename, bool* status);
 	
 	//! Define if mipmaps must be created while creating textures
 	void setMipmapsMode(bool b = false) {mipmapsMode = b;}
@@ -108,10 +136,19 @@ public:
 	{
 		imageLoaders[fileExtension] = loader;
 	}
-	
-	//! Actually load the texture in openGL memory
-	bool loadTexture(ManagedSTexture* tex);
 private:
+	friend class ManagedSTexture;
+
+	//! Internal
+	ManagedSTexture* StelTextureMgr::initTex(const string& afilename);
+
+	//! Load the image memory. If we use threaded loading, the texture will
+	//! be uploaded to openGL memory at the next update() call.
+	bool loadImage(ManagedSTexture* tex);
+	
+	//! Load the texture already in the RAM to openGL memory
+	bool glLoadTexture(ManagedSTexture* tex);
+	
 	// List of image loaders providing image loading for the given files extensions
 	std::map<std::string, ImageLoader*> imageLoaders;
 	
@@ -133,6 +170,12 @@ private:
 	
 	// The null texture to return in case of problems
 	static ManagedSTexture NULL_STEXTURE;
+	
+	// Everything used for the threaded loading
+	friend struct LoadQueueParam;
+	friend int loadTextureThread(void* tparam);
+	SDL_mutex * loadQueueMutex;
+	std::vector<class LoadQueueParam*> loadQueue;
 	
 	// Define a PNG loader. This implementation supports LUMINANCE, LUMINANCE+ALPHA, RGB, RGBA. 
 	class PngLoader : public ImageLoader

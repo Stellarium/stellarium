@@ -27,7 +27,7 @@ public:
 	void addHalfSpace(const HalfSpace& h) {halfSpaces.push_back(h);}
 	//! Return true if the vector is inside the convex
 	bool inside(const Vec3d& v) const;
-private:
+protected:
 	std::vector<HalfSpace> halfSpaces;
 };
 
@@ -41,6 +41,7 @@ public:
 	const Vec3d& getVertex(int i) const {return vertex[i];}
 	//! Return true if the two convex intersect
 	bool intersect(const ConvexPolygon& c) const;
+	bool intersect(const Vec3d& v) const {return inside(v);}
 private:
 	std::vector<Vec3d> vertex;
 };

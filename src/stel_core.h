@@ -23,11 +23,10 @@
 
 #include "stel_object.h"
 #include "draw.h"
-#include "landscape.h"
 #include "meteor_mgr.h"
 #include "image_mgr.h"
 #include "callbacks.hpp"
-#include "stel_atmosphere.h"
+
 
 //!  @brief Main class for stellarium core processing.
 //!
@@ -208,15 +207,12 @@ public:
 	//! Get display flag of telescope names
 	bool getFlagTelescopeName(void) const;
 
-
 	//! the telescope with the given number shall go to the selected object
 	void telescopeGoto(int nr);
-
 
 	///////////////////////////////////////////////////////////////////////////////////////
 	// Planets flags
 	bool setHomePlanet(string planet);
-
 
 	///////////////////////////////////////////////////////////////////////////////////////
 	// Grid and lines
@@ -251,16 +247,6 @@ public:
 	bool getFlagMeridianLine(void) const {return meridian_line->getFlagshow();}
 	Vec3f getColorMeridianLine(void) const {return meridian_line->getColor();}
 
-	//! Set flag for displaying Cardinals Points
-	void setFlagCardinalsPoints(bool b) {cardinals_points->setFlagShow(b);}
-	//! Get flag for displaying Cardinals Points
-	bool getFlagCardinalsPoints(void) const {return cardinals_points->getFlagShow();}
-
-	//! Set Cardinals Points color
-	void setColorCardinalPoints(const Vec3f& v) {cardinals_points->setColor(v); }
-	//! Get Cardinals Points color
-	Vec3f getColorCardinalPoints(void) const {return cardinals_points->get_color();}
-
 	void setColorAzimutalGrid(const Vec3f& v) { azi_grid->setColor(v);}
 	void setColorEquatorGrid(const Vec3f& v) { equ_grid->setColor(v);}
 	void setColorEquatorLine(const Vec3f& v) { equator_line->setColor(v);}
@@ -276,43 +262,13 @@ public:
 
 
 	///////////////////////////////////////////////////////////////////////////////////////
-	// Landscape
-	//! Set the landscape
-	bool setLandscape(const string& new_landscape_name);
-
-	//! Load a landscape based on a hash of parameters mirroring the landscape.ini file
-	//! and make it the current landscape
-	bool loadLandscape(stringHash_t& param);
-	
-	//! Set flag for displaying Landscape
-	void setFlagLandscape(bool b) {landscape->setFlagShow(b);}
-	//! Get flag for displaying Landscape
-	bool getFlagLandscape(void) const {return landscape->getFlagShow();}
-
-	//! Set flag for displaying Fog
-	void setFlagFog(bool b) {landscape->setFlagShowFog(b);}
-	//! Get flag for displaying Fog
-	bool getFlagFog(void) const {return landscape->getFlagShowFog();}
-
-	///////////////////////////////////////////////////////////////////////////////////////
-	// Atmosphere
-	//! Set flag for displaying Atmosphere
-	void setFlagAtmosphere(bool b) {atmosphere->setFlagShow(b);}
-	//! Get flag for displaying Atmosphere
-	bool getFlagAtmosphere(void) const {return atmosphere->getFlagShow();}
-
-	//! Set atmosphere fade duration in s
-	void setAtmosphereFadeDuration(float f) {atmosphere->setFadeDuration(f);}
-	//! Get atmosphere fade duration in s
-	float getAtmosphereFadeDuration(void) const {return atmosphere->getFadeDuration();}
-
-	///////////////////////////////////////////////////////////////////////////////////////
 	// Observator
 	//! Return the current observatory (as a const object)
-	const Observator& getObservatory(void) {return *observatory;}
+	const Observator* getObservatory(void) {return observatory;}
 
 	//! Move to a new latitude and longitude on home planet
-	void moveObserver(double lat, double lon, double alt, int delay, const wstring& name) {
+	void moveObserver(double lat, double lon, double alt, int delay, const wstring& name)
+	{
 		observatory->moveTo(lat, lon, alt, delay, name);
 	}
 
@@ -329,14 +285,10 @@ public:
 	//! Return the current image manager which display users images
 	ImageMgr* getImageMgr(void) const {return script_images;}
 
-	double getZoomSpeed() { return zoom_speed; }
-	float getAutoMoveDuration() { return auto_move_duration; }
-
-    string getLandscapeName(void) {return landscape->getName();}
-    string getLandscapeAuthorName(void) {return landscape->getAuthorName();}
-    string getLandscapeDescription(void) {return landscape->getDescription();}
+	double getZoomSpeed() {return zoom_speed;}
+	float getAutoMoveDuration() {return auto_move_duration;}
+	
 private:
-
 	//! Callback to record actions
 	boost::callback<void, string> recordActionCallback;
 
@@ -362,23 +314,20 @@ private:
 	class ConstellationMgr * asterisms;		// Manage constellations (boundaries, names etc..)
 	class NebulaMgr * nebulas;				// Manage the nebulas
 	class SolarSystem* ssystem;				// Manage the solar system
-	class Atmosphere * atmosphere;			// Atmosphere
 	SkyGrid * equ_grid;					// Equatorial grid
 	SkyGrid * azi_grid;					// Azimutal grid
 	SkyLine * equator_line;				// Celestial Equator line
 	SkyLine * ecliptic_line;			// Ecliptic line
 	SkyLine * meridian_line;			// Meridian line
-	Cardinals * cardinals_points;		// Cardinals points
+
 	MilkyWay * milky_way;				// Our galaxy
 	MeteorMgr * meteors;				// Manage meteor showers
-	Landscape * landscape;				// The landscape ie the fog, the ground and "decor"
 	ToneReproductor * tone_converter;	// Tones conversion between stellarium world and display device
 	ImageMgr * script_images;           // for script loaded image display
 	class TelescopeMgr *telescope_mgr;
-
+	class LandscapeMgr* landscape;
 	class GeodesicGridDrawer* geoDrawer;
 
-	float sky_brightness;				// Current sky Brightness in ?
 	bool object_pointer_visibility;		// Should selected object pointer be drawn
 
 	// Increment/decrement smoothly the vision field and position

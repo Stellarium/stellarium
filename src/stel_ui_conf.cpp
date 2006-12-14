@@ -31,6 +31,7 @@
 #include "nebula_mgr.h"
 #include "stel_command_interface.h"
 #include "StelTextureMgr.h"
+#include "LandscapeMgr.h"
 
 using namespace s_gui;
 
@@ -45,6 +46,11 @@ static string CalculateProjectionSlValue(
 Component* StelUI::createConfigWindow(SFont& courierFont)
 {
 	StelApp::getInstance().getTextureManager().setDefaultParams();
+	
+	HipStarMgr* smgr = (HipStarMgr*)StelApp::getInstance().getModuleMgr().getModule("stars");
+	NebulaMgr* nmgr = (NebulaMgr*)StelApp::getInstance().getModuleMgr().getModule("nebulas");
+	LandscapeMgr* lmgr = (LandscapeMgr*)StelApp::getInstance().getModuleMgr().getModule("landscape");
+	
 	config_win = new StdBtWin(_("Configuration"));
 	//config_win->setOpaque(opaqueGUI);
 	config_win->reshape(300,200,500,450);
@@ -65,7 +71,6 @@ Component* StelUI::createConfigWindow(SFont& courierFont)
 	Picture* pstar = new Picture(starp, x-50, y+5, 32, 32);
 	tab_render->addComponent(pstar);
 
-	HipStarMgr* smgr = (HipStarMgr*)StelApp::getInstance().getModuleMgr().getModule("stars");
 	stars_cbx = new LabeledCheckBox(smgr->getFlagStars(), _("Stars"));
 	stars_cbx->setOnPressCallback(callback<void>(this, &StelUI::updateConfigVariables));
 	tab_render->addComponent(stars_cbx);
@@ -130,7 +135,6 @@ Component* StelUI::createConfigWindow(SFont& courierFont)
 	tab_render->addComponent(nebulas_names_cbx);
 	nebulas_names_cbx->setPos(x,y);
 
-	NebulaMgr* nmgr = (NebulaMgr*)StelApp::getInstance().getModuleMgr().getModule("nebulas");
 	max_mag_nebula_name = new FloatIncDec(&courierFont, tex_up, tex_down, 0, 12,
 		nmgr->getMaxMagHints(), 0.5);
 	max_mag_nebula_name->setOnPressCallback(callback<void>(this, &StelUI::updateConfigVariables));
@@ -296,8 +300,7 @@ Component* StelUI::createConfigWindow(SFont& courierFont)
 	tab_location->setSize(config_tab_ctr->getSize());
 
 	x=5; y=5;
-	const STexture *earth = new STexture(
-                                   *(core->getObservatory().getHomePlanet()->getMapTexture()));
+	const STexture *earth = new STexture(*(core->getObservatory()->getHomePlanet()->getMapTexture()));
 	const STexture *pointertex = &StelApp::getInstance().getTextureManager().createTexture("pointeur1.png");
 	const STexture *citytex = &StelApp::getInstance().getTextureManager().createTexture("city.png");
 	earth_map = new MapPicture(earth, pointertex, citytex, x,y,tab_location->getSizex()-10, 250);
@@ -434,19 +437,19 @@ Component* StelUI::createConfigWindow(SFont& courierFont)
 
 	landscape_sl = new StringList();
 	landscape_sl->setPos(x,y);
-	landscape_sl->addItemList(Landscape::getLandscapeNames(StelApp::getInstance().getDataFilePath("landscapes.ini")));
+	landscape_sl->addItemList(lmgr->getLandscapeNames(StelApp::getInstance().getDataFilePath("landscapes.ini")));
 	landscape_sl->adjustSize();
-	sprintf(vs, "%s", core->getLandscapeName().c_str());
+	sprintf(vs, "%s", StelUtils::wstringToString(lmgr->getLandscapeName()).c_str());
 	landscape_sl->setValue(vs);
 	landscape_sl->setOnPressCallback(callback<void>(this, &StelUI::setLandscape));
 	tab_landscapes->addComponent(landscape_sl);
 
-	landscape_authorlb = new Label(_("Author: ") + StelUtils::stringToWstring(core->getLandscapeAuthorName()));
+	landscape_authorlb = new Label(_("Author: ") +lmgr->getLandscapeAuthorName());
 	landscape_authorlb->setPos(x+landscape_sl->getSizex()+20, y); 
 	landscape_authorlb->adjustSize();
 	tab_landscapes->addComponent(landscape_authorlb);
 	
-	landscape_descriptionlb = new TextLabel(StelUtils::stringToWstring(core->getLandscapeDescription()));
+	landscape_descriptionlb = new TextLabel(lmgr->getLandscapeDescription());
 	landscape_descriptionlb->setPos(x+landscape_sl->getSizex()+20, y+25); 
 	landscape_descriptionlb->adjustSize();
 	tab_landscapes->addComponent(landscape_descriptionlb);	
@@ -803,7 +806,7 @@ void StelUI::doSaveObserverPosition(const string& name)
 		<< " name " << location;
 	app->commander->execute_command(oss.str());
 
-	core->getObservatory().save(app->getConfigFilePath(), "init_location");
+	core->getObservatory()->save(app->getConfigFilePath(), "init_location");
 	app->ui->setTitleObservatoryName(app->ui->getTitleWithAltitude());
 }
 
@@ -823,7 +826,8 @@ void StelUI::saveLandscapeOptions(void)
 	cout << "Saving landscape name in file " << app->getConfigFilePath() << endl;
 	InitParser conf;
 	conf.load(app->getConfigFilePath());
-	conf.set_str("init_location:landscape_name", core->getObservatory().get_landscape_name());
+	LandscapeMgr* lmgr = (LandscapeMgr*)app->getModuleMgr().getModule("landscape");
+	conf.set_str("init_location:landscape_name", lmgr->getLandscapeSectionName());
 	conf.save(app->getConfigFilePath());
 }
 
@@ -849,6 +853,7 @@ void StelUI::saveRenderOptions(void)
 	ConstellationMgr* cmgr = (ConstellationMgr*)StelApp::getInstance().getModuleMgr().getModule("constellations");
 	NebulaMgr* nmgr = (NebulaMgr*)StelApp::getInstance().getModuleMgr().getModule("nebulas");
 	SolarSystem* ssmgr = (SolarSystem*)StelApp::getInstance().getModuleMgr().getModule("ssystem");
+	LandscapeMgr* lmgr = (LandscapeMgr*)StelApp::getInstance().getModuleMgr().getModule("landscape");
 	
 	conf.set_boolean("astro:flag_stars", smgr->getFlagStars());
 	conf.set_boolean("astro:flag_star_name", smgr->getFlagNames());
@@ -875,10 +880,10 @@ void StelUI::saveRenderOptions(void)
 	conf.set_boolean("viewing:flag_azimutal_grid", core->getFlagAzimutalGrid());
 	conf.set_boolean("viewing:flag_equator_line", core->getFlagEquatorLine());
 	conf.set_boolean("viewing:flag_ecliptic_line", core->getFlagEclipticLine());
-	conf.set_boolean("landscape:flag_landscape", core->getFlagLandscape());
-	conf.set_boolean("viewing:flag_cardinal_points", core->getFlagCardinalsPoints());
-	conf.set_boolean("landscape:flag_atmosphere", core->getFlagAtmosphere());
-	conf.set_boolean("landscape:flag_fog", core->getFlagFog());
+	conf.set_boolean("landscape:flag_landscape", lmgr->getFlagLandscape());
+	conf.set_boolean("viewing:flag_cardinal_points", lmgr->getFlagCardinalsPoints());
+	conf.set_boolean("landscape:flag_atmosphere", lmgr->getFlagAtmosphere());
+	conf.set_boolean("landscape:flag_fog", lmgr->getFlagFog());
 	conf.set_int("astro:meteor_rate", core->getMeteorsRate());
 	conf.save(app->getConfigFilePath());
 }
@@ -916,9 +921,10 @@ void StelUI::setVideoOption(void)
 
 void StelUI::setLandscape(void)
 {
-	core->setLandscape(Landscape::nameToKey(StelApp::getInstance().getDataFilePath("landscapes.ini"), landscape_sl->getValue()));
-	landscape_authorlb->setLabel(_("Author: ") + Translator::UTF8stringToWstring(core->getLandscapeAuthorName()));
-	landscape_descriptionlb->setLabel(_("Info: ") + Translator::UTF8stringToWstring(core->getLandscapeDescription()));
+	LandscapeMgr* lmgr = (LandscapeMgr*)StelApp::getInstance().getModuleMgr().getModule("landscape");
+	lmgr->setLandscape(lmgr->nameToKey(StelApp::getInstance().getDataFilePath("landscapes.ini"), landscape_sl->getValue()));
+	landscape_authorlb->setLabel(_("Author: ") + lmgr->getLandscapeAuthorName());
+	landscape_descriptionlb->setLabel(_("Info: ") + lmgr->getLandscapeDescription());
 }
 
 void StelUI::updateVideoVariables(void)
@@ -948,6 +954,7 @@ void StelUI::updateConfigForm(void)
 	ConstellationMgr* cmgr = (ConstellationMgr*)StelApp::getInstance().getModuleMgr().getModule("constellations");
 	NebulaMgr* nmgr = (NebulaMgr*)StelApp::getInstance().getModuleMgr().getModule("nebulas");
 	SolarSystem* ssmgr = (SolarSystem*)StelApp::getInstance().getModuleMgr().getModule("ssystem");
+	LandscapeMgr* lmgr = (LandscapeMgr*)StelApp::getInstance().getModuleMgr().getModule("landscape");
 	
 	stars_cbx->setState(smgr->getFlagStars());
 	star_names_cbx->setState(smgr->getFlagNames());
@@ -974,10 +981,10 @@ void StelUI::updateConfigForm(void)
 	azimuth_grid_cbx->setState(core->getFlagAzimutalGrid());
 	equator_cbx->setState(core->getFlagEquatorLine());
 	ecliptic_cbx->setState(core->getFlagEclipticLine());
-	ground_cbx->setState(core->getFlagLandscape());
-	cardinal_cbx->setState(core->getFlagCardinalsPoints());
-	atmosphere_cbx->setState(core->getFlagAtmosphere());
-	fog_cbx->setState(core->getFlagFog());
+	ground_cbx->setState(lmgr->getFlagLandscape());
+	cardinal_cbx->setState(lmgr->getFlagCardinalsPoints());
+	atmosphere_cbx->setState(lmgr->getFlagAtmosphere());
+	fog_cbx->setState(lmgr->getFlagFog());
 
 	wstring meteorRate;
 	if (core->getMeteorsRate()==10)
@@ -1010,17 +1017,17 @@ void StelUI::updateConfigForm(void)
 		meteor_rate_144000->setState(false);
 	meteorlbl->setLabel(_("Meteor zenith hourly rate")+meteorRate);
 
-	earth_map->setPointerLongitude(core->getObservatory().get_longitude());
-	earth_map->setPointerLatitude(core->getObservatory().get_latitude());
-	long_incdec->setValue(core->getObservatory().get_longitude());
-	lat_incdec->setValue(core->getObservatory().get_latitude());
-	alt_incdec->setValue(core->getObservatory().get_altitude());
+	earth_map->setPointerLongitude(core->getObservatory()->get_longitude());
+	earth_map->setPointerLatitude(core->getObservatory()->get_latitude());
+	long_incdec->setValue(core->getObservatory()->get_longitude());
+	lat_incdec->setValue(core->getObservatory()->get_latitude());
+	alt_incdec->setValue(core->getObservatory()->get_altitude());
 	lblMapLocation->setLabel(StelUtils::stringToWstring(earth_map->getCursorString()));
 	if (!waitOnLocation)
 		lblMapPointer->setLabel(StelUtils::stringToWstring(earth_map->getPositionString()));
 	else
 	{
-		earth_map->findPosition(core->getObservatory().get_longitude(),core->getObservatory().get_latitude());
+		earth_map->findPosition(core->getObservatory()->get_longitude(),core->getObservatory()->get_latitude());
 		lblMapPointer->setLabel(StelUtils::stringToWstring(earth_map->getPositionString()));
 		waitOnLocation = false;
 	}

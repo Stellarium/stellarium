@@ -16,7 +16,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
-
+ 
 #include "stelapp.h"
 
 #include "stel_core.h"
@@ -34,6 +34,7 @@
 #include "constellation_mgr.h"
 #include "solarsystem.h"
 #include "nebula_mgr.h"
+#include "LandscapeMgr.h"
 
 // Initialize static variables
 StelApp* StelApp::singleton = NULL;
@@ -91,7 +92,7 @@ StelApp::~StelApp()
 *************************************************************************/
 string StelApp::getConfigFilePath(void) const
 {
-	return dotStellariumDir + "config.ini";
+	return getDotStellariumDir() + "config.ini";
 }
 
 /*************************************************************************
@@ -265,6 +266,8 @@ skyCultureMgr->init(conf);
 
 void StelApp::update(int delta_time)
 {
+	textureMgr->update();
+	
 	++frame;
 	timefr+=delta_time;
 	if (timefr-timeBase > 1000)
@@ -475,8 +478,7 @@ void StelApp::setVisionModeNormal(void)
 }
 
 // For use by TUI - saves all current settings
-// TODO: Put in stel_core?
-
+// TODO: Put in stel_tui
 void StelApp::saveCurrentConfig(const string& confFile)
 {
 	// No longer resaves everything, just settings user can change through UI
@@ -521,19 +523,20 @@ void StelApp::saveCurrentConfig(const string& confFile)
 	conf.set_str    ("color:const_boundary_color", StelUtils::vec3f_to_str(cmgr->getBoundariesColor()));
 		
 	SolarSystem* ssmgr = (SolarSystem*)moduleMgr->getModule("ssystem");
+	LandscapeMgr* lmgr = (LandscapeMgr*)moduleMgr->getModule("landscape");
 	conf.set_double("viewing:moon_scale", ssmgr->getMoonScale());
 	conf.set_boolean("viewing:flag_equatorial_grid", core->getFlagEquatorGrid());
 	conf.set_boolean("viewing:flag_azimutal_grid", core->getFlagAzimutalGrid());
 	conf.set_boolean("viewing:flag_equator_line", core->getFlagEquatorLine());
 	conf.set_boolean("viewing:flag_ecliptic_line", core->getFlagEclipticLine());
-	conf.set_boolean("viewing:flag_cardinal_points", core->getFlagCardinalsPoints());
+	conf.set_boolean("viewing:flag_cardinal_points", lmgr->getFlagCardinalsPoints());
 	conf.set_boolean("viewing:flag_meridian_line", core->getFlagMeridianLine());
 	conf.set_boolean("viewing:flag_moon_scaled", ssmgr->getFlagMoonScale());
 
 	// Landscape section
-	conf.set_boolean("landscape:flag_landscape", core->getFlagLandscape());
-	conf.set_boolean("landscape:flag_atmosphere", core->getFlagAtmosphere());
-	conf.set_boolean("landscape:flag_fog", core->getFlagFog());
+	conf.set_boolean("landscape:flag_landscape", lmgr->getFlagLandscape());
+	conf.set_boolean("landscape:flag_atmosphere", lmgr->getFlagAtmosphere());
+	conf.set_boolean("landscape:flag_fog", lmgr->getFlagFog());
 	//	conf.set_double ("viewing:atmosphere_fade_duration", core->getAtmosphereFadeDuration());
 
 	// Star section
@@ -556,7 +559,7 @@ void StelApp::saveCurrentConfig(const string& confFile)
 	conf.set_str    ("color:meridian_color", StelUtils::vec3f_to_str(core->getColorMeridianLine()));
 	conf.set_str	("color:nebula_label_color", StelUtils::vec3f_to_str(nmgr->getNamesColor()));
 	conf.set_str	("color:nebula_circle_color", StelUtils::vec3f_to_str(nmgr->getCirclesColor()));
-	conf.set_str    ("color:cardinal_color", StelUtils::vec3f_to_str(core->getColorCardinalPoints()));
+	conf.set_str    ("color:cardinal_color", StelUtils::vec3f_to_str(lmgr->getColorCardinalPoints()));
 	conf.set_str    ("color:planet_names_color", StelUtils::vec3f_to_str(ssmgr->getNamesColor()));
 	conf.set_str    ("color:planet_orbits_color", StelUtils::vec3f_to_str(ssmgr->getOrbitsColor()));
 	conf.set_str    ("color:object_trails_color", StelUtils::vec3f_to_str(ssmgr->getTrailsColor()));
@@ -592,7 +595,7 @@ void StelApp::saveCurrentConfig(const string& confFile)
 
 	// Get landscape and other observatory info
 	// TODO: shouldn't observator already know what section to save in?
-	(core->getObservatory()).setConf(conf, "init_location");
+	core->getObservatory()->setConf(conf, "init_location");
 
 	conf.save(confFile);
 
