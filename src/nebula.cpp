@@ -34,6 +34,7 @@ float Nebula::circleScale = 1.f;
 float Nebula::hints_brightness = 0;
 Vec3f Nebula::label_color = Vec3f(0.4,0.3,0.5);
 Vec3f Nebula::circle_color = Vec3f(0.8,0.8,0.1);
+bool Nebula::flagShowTexture = false;
 bool Nebula::flagBright = false;
 const float Nebula::RADIUS_NEB = 1.f;
 
@@ -217,7 +218,7 @@ bool Nebula::readTexture(const string& record)
 
 void Nebula::draw_tex(const Projector* prj, const Navigator* nav, ToneReproductor* eye)
 {
-	if (!neb_tex) return;
+	if (!neb_tex || !flagShowTexture) return;
 
 	neb_tex->lazyBind();
 	
@@ -305,7 +306,7 @@ void Nebula::draw_name(const Projector* prj)
 		nebula_font->print(XY[0]+shift, XY[1]+shift, nebulaname);
 
 	// draw image credit, if it fits easily
-	if(credit != "" && size > nebula_font->getStrLen(credit))
+	if(flagShowTexture && credit != "" && size > nebula_font->getStrLen(credit))
 	{
 		if (prj->getFlagGravityLabels())
 			prj->print_gravity180(nebula_font, XY[0]-shift-40, XY[1]+-shift-40, credit, 1, 0, 0);

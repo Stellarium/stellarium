@@ -44,8 +44,8 @@ public:
 	void compute_color(double JD, Vec3d sunPos, Vec3d moonPos, float moon_phase, ToneReproductor * eye, Projector* prj,
 		float latitude = 45.f, float altitude = 200.f,
 		float temperature = 15.f, float relative_humidity = 40.f);
-	void draw(Projector* prj, int delta_time);
-	void update(int delta_time) {fader.update(delta_time);}
+	void draw(Projector* prj);
+	void update(double deltaTime) {fader.update((int)(deltaTime*1000));}
 	
 	//! Set fade in/out duration in seconds
 	void setFadeDuration(float duration) {fader.set_duration((int)(duration*1000.f));}

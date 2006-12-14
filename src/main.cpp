@@ -222,7 +222,6 @@ void setDirectories(const char* executableName)
 }
 
 
-
 // Main stellarium procedure
 int main(int argc, char **argv)
 {

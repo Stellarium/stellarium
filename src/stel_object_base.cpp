@@ -40,7 +40,7 @@ STexture * StelObjectBase::pointer_telescope = NULL;
 int StelObjectBase::local_time = 0;
 
 // Draw a nice animated pointer around the object
-void StelObjectBase::draw_pointer(int delta_time, const Projector* prj, const Navigator * nav)
+void StelObjectBase::drawPointer(int delta_time, const Projector* prj, const Navigator * nav)
 {
 	local_time+=delta_time;
 	Vec3d pos=get_earth_equ_pos(nav);

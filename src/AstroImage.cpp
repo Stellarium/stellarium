@@ -9,6 +9,10 @@ AstroImage::AstroImage(STexture* tex, const Vec3d& v0, const Vec3d& v1, const Ve
 {
 }
 
+AstroImage::AstroImage(const Vec3d& v0, const Vec3d& v1, const Vec3d& v2, const Vec3d& v3) : tex(NULL), poly(ConvexPolygon(v3, v2, v1, v0))
+{
+}
+
 AstroImage::~AstroImage()
 {
 	if (tex) delete tex;

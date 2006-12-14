@@ -122,8 +122,9 @@ private:
 	static float hints_brightness;
 
 	static Vec3f label_color, circle_color;
-	static float circleScale;		// Define the sclaing of the hints circle
+	static float circleScale;		// Define the scaling of the hints circle
 	static bool flagBright;			// Define if nebulae must be drawn in bright mode
+	static bool flagShowTexture;	// Define if textures must be drawn
 	
 	static const float RADIUS_NEB;
 };

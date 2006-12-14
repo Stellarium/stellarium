@@ -185,7 +185,7 @@ void Atmosphere::compute_color(double JD, Vec3d sunPos, Vec3d moonPos, float moo
 
 
 // Draw the atmosphere using the precalc values stored in tab_sky
-void Atmosphere::draw(Projector* prj, int delta_time)
+void Atmosphere::draw(Projector* prj)
 {
 	if(fader.getInterstate())
 	{

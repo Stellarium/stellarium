@@ -33,73 +33,16 @@ Landscape::Landscape(float _radius) : radius(_radius), sky_brightness(1.)
 Landscape::~Landscape()
 {}
 
-Landscape* Landscape::create_from_file(const string& landscape_file, const string& section_name)
-{
-	InitParser pd;	// The landscape data ini file parser
-	pd.load(landscape_file);
-	string s;
-	s = pd.get_str(section_name, "type");
-	Landscape* ldscp = NULL;
-	if (s=="old_style")
-	{
-		ldscp = new LandscapeOldStyle();
-	}
-	else if (s=="spherical")
-	{
-		ldscp = new LandscapeSpherical();
-	}
-	else if (s=="fisheye")
-	{
-		ldscp = new LandscapeFisheye();
-	}
-	else
-	{
-		cerr << "Unknown landscape type: " << s << endl;
-
-		// to avoid making this a fatal error, will load as a fisheye
-		// if this fails, it just won't draw
-		ldscp = new LandscapeFisheye();
-	}
-	
-	ldscp->load(landscape_file, section_name);
-	return ldscp;
-}
-
-// create landscape from parameters passed in a hash (same keys as with ini file)
-// NOTE: maptex must be full path and filename
-Landscape* Landscape::create_from_hash(stringHash_t & param)
-{
-
-	// NOTE: textures should be full filename (and path)
-	if (param["type"]=="old_style")
-	{
-		LandscapeOldStyle* ldscp = new LandscapeOldStyle();
-		ldscp->create(1, param);
-		return ldscp;
-	}
-	else if (param["type"]=="spherical")
-	{
-		LandscapeSpherical* ldscp = new LandscapeSpherical();
-		ldscp->create(param["name"], 1, param["path"] + param["maptex"]);
-		return ldscp;
-	}
-	else
-	{   //	if (s=="fisheye")
-		LandscapeFisheye* ldscp = new LandscapeFisheye();
-		ldscp->create(param["name"], 1, param["path"] + param["maptex"], StelUtils::str_to_double(param["texturefov"]));
-		return ldscp;
-	}
-}
 
 // Load attributes common to all landscapes
 void Landscape::loadCommon(const string& landscape_file, const string& section_name)
 {
 	InitParser pd;	// The landscape data ini file parser
 	pd.load(landscape_file);
-	name = pd.get_str(section_name, "name");
-	author = pd.get_str(section_name, "author");
-	description = pd.get_str(section_name, "description");
-	if(name == "" )
+	name = StelUtils::stringToWstring(pd.get_str(section_name, "name"));
+	author = StelUtils::stringToWstring(pd.get_str(section_name, "author"));
+	description = StelUtils::stringToWstring(pd.get_str(section_name, "description"));
+	if(name == L"" )
 	{
 		cerr << "No valid landscape definition found for section "<< section_name << " in file " << landscape_file << ". No landscape in use." << endl;
 		valid_landscape = 0;
@@ -109,47 +52,6 @@ void Landscape::loadCommon(const string& landscape_file, const string& section_n
 	{
 		valid_landscape = 1;
 	}
-}
-
-string Landscape::get_file_content(const string& landscape_file)
-{
-	InitParser pd;	// The landscape data ini file parser
-	pd.load(landscape_file);
-
-	string result;
-
-	for (int i=0; i<pd.get_nsec();i++)
-	{
-		result += pd.get_secname(i) + '\n';
-	}
-	return result;
-}
-
-string Landscape::getLandscapeNames(const string& landscape_file)
-{
-    InitParser pd;	// The landscape data ini file parser
-	pd.load(landscape_file);
-
-	string result;
-
-	for (int i=0; i<pd.get_nsec();i++)
-	{
-        result += pd.get_str(pd.get_secname(i), "name") + '\n';
-	}
-	return result;
-}
-
-string Landscape::nameToKey(const string& landscape_file, const string & name)
-{
-    InitParser pd;	// The landscape data ini file parser
-	pd.load(landscape_file);
-
-	for (int i=0; i<pd.get_nsec();i++)
-	{
-        if (name==pd.get_str(pd.get_secname(i), "name")) return pd.get_secname(i);
-	}
-	assert(0);
-	return "error";
 }
 
 LandscapeOldStyle::LandscapeOldStyle(float _radius) : Landscape(_radius), side_texs(NULL), sides(NULL), fog_tex(NULL), ground_tex(NULL)
@@ -258,7 +160,7 @@ void LandscapeOldStyle::load(const string& landscape_file, const string& section
 // create from a hash of parameters (no ini file needed)
 void LandscapeOldStyle::create(bool _fullpath, stringHash_t param)
 {
-	name = param["name"];
+	name = StelUtils::stringToWstring(param["name"]);
 	valid_landscape = 1;  // assume valid if got here
 
 	// Load sides textures
@@ -363,7 +265,7 @@ void LandscapeOldStyle::draw_decor(ToneReproductor * eye, const Projector* prj, 
 	if (subdiv<=0) subdiv = 1;
 	float da = (2.*M_PI)/(nb_side*subdiv*nb_decor_repeat);
 	float dz = radius * std::sin(decor_alt_angle*M_PI/180.f);
-	float z = radius*std::sin(ground_angle_shift*M_PI/180.);
+	float z;
 	float x,y;
 	float a;
 
@@ -448,7 +350,7 @@ void LandscapeFisheye::load(const string& landscape_file, const string& section_
 
 
 // create a fisheye landscape from basic parameters (no ini file needed)
-void LandscapeFisheye::create(const string _name, bool _fullpath, const string _maptex, double _texturefov)
+void LandscapeFisheye::create(const wstring _name, bool _fullpath, const string _maptex, double _texturefov)
 {
 	//	cout << _name << " " << _fullpath << " " << _maptex << " " << _texturefov << "\n";
 	valid_landscape = 1;  // assume ok...
@@ -511,7 +413,7 @@ void LandscapeSpherical::load(const string& landscape_file, const string& sectio
 
 
 // create a spherical landscape from basic parameters (no ini file needed)
-void LandscapeSpherical::create(const string _name, bool _fullpath, const string _maptex)
+void LandscapeSpherical::create(const wstring _name, bool _fullpath, const string _maptex)
 {
 	//	cout << _name << " " << _fullpath << " " << _maptex << " " << _texturefov << "\n";
 	valid_landscape = 1;  // assume ok...

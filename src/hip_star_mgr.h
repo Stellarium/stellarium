@@ -119,12 +119,7 @@ public:
     /** Set maximum magnitude at which stars names are displayed */
     void setMaxMagName(float b) {maxMagStarName=b;}
     /** Get maximum magnitude at which stars names are displayed */
-    float getMaxMagName(void) const {return maxMagStarName;}    
-    
-    /** Set maximum magnitude at which stars scientific names are displayed */
-    void setMaxMagSciName(float b) {maxMagStarSciName=b;}
-    /** Get maximum magnitude at which stars scientific names are displayed */
-    float getMaxMagSciName(void) const {return maxMagStarSciName;}    
+    float getMaxMagName(void) const {return maxMagStarName;} 
         
     /** Set base stars display scaling factor */
     void setScale(float b) {starScale=b;}
@@ -172,7 +167,6 @@ private:
     bool flagStarName;
     bool flagStarSciName;
     float maxMagStarName;
-    float maxMagStarSciName;
     bool flagStarTwinkle;
     float twinkleAmount;
     bool flagPointStar;

@@ -40,6 +40,8 @@ public:
 	//! Return the average texture luminance.
 	//! @return 0 is black, 1 is white
     virtual float getAverageLuminance(void);
+    //! Get the size of the texture data in memory in bytes
+    int getMemorySize() const {return width*height*internalFormat;}
     
     GLsizei width;
 	GLsizei height;

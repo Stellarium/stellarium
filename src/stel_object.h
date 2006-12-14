@@ -43,7 +43,7 @@ public:
   bool operator==(const StelObject &o) const;
 
   void update(void);
-  void draw_pointer(int delta_time,
+  void drawPointer(int delta_time,
                     const Projector *prj,
                     const Navigator *nav);
 

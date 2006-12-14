@@ -38,9 +38,9 @@ public:
   virtual void release(void) {}
 
   virtual void update(void) {}
-  void draw_pointer(int delta_time,
-                    const Projector* prj,
-                    const Navigator *nav);
+  
+  //! Draw a pointer around the object, for use e.g. when the object is selected
+  void drawPointer(int delta_time, const Projector* prj,const Navigator *nav);
 
   //! Write I18n information about the object in wstring. 
   virtual wstring getInfoString(const Navigator *nav) const = 0;
