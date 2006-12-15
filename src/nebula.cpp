@@ -261,9 +261,10 @@ void Nebula::draw_tex(const Projector* prj, const Navigator* nav, ToneReproducto
 void Nebula::draw_circle(const Projector* prj, const Navigator * nav)
 {
 	if (2.f/get_on_screen_size(prj, nav)<0.1) return;
+	glBlendFunc(GL_ONE, GL_ONE);
 	inc_lum++;
-	float lum = MY_MIN(1,2.f/get_on_screen_size(prj, nav))*(0.8+0.2*std::sin(inc_lum/10));
-	glColor4f(circle_color[0], circle_color[1], circle_color[2], lum*hints_brightness);
+	float lum = MY_MIN(1,2.f/get_on_screen_size(prj, nav))*(0.8+0.2*std::sin(inc_lum/2));
+	glColor3f(circle_color[0]*lum*hints_brightness, circle_color[1]*lum*hints_brightness, circle_color[2]*lum*hints_brightness);
 	Nebula::tex_circle->bind();
 	glBegin(GL_TRIANGLE_STRIP);
 		glTexCoord2i(1,0);              // Bottom Right
