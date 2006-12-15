@@ -331,9 +331,19 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 				status = 0;
 			}
 		  
-		} else if(args["relative"]!="") {  // value is a float number of days
+		} else if(args["relative"]!="") {  // value is a float number of earth days (24 hours)
 			double days = StelUtils::str_to_double(args["relative"]);
 			stcore->getNavigation()->setJDay(stcore->getNavigation()->getJDay() + days );
+
+		} else if(args["sidereal"]!="") {  // value is a float number of sidereal days
+			double days = StelUtils::str_to_double(args["sidereal"]);
+
+			const Planet* home = stcore->getObservatory()->getHomePlanet();
+			if (home->getEnglishName() != "Solar System Observer")
+				days *= home->getSiderealDay();
+
+			stcore->getNavigation()->setJDay(stcore->getNavigation()->getJDay() + days );
+
 		} else if(args["load"]=="current") {
 			// set date to current date
 			stcore->getNavigation()->setJDay(get_julian_from_sys());

@@ -100,6 +100,7 @@ public:
     ~Planet();
 
     double getRadius(void) const {return radius;}
+	double getSiderealDay(void) const {return re.period;}
 
 	// Return the information string "ready to print" :)
 	wstring getSkyLabel(const Navigator * nav) const;

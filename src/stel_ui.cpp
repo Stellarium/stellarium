@@ -41,49 +41,49 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 StelUI::StelUI(StelCore * _core, StelApp * _app) :
-		FlagHelp(false), FlagInfos(false), FlagConfig(false), FlagSearch(false), FlagShowTuiMenu(0),
+	FlagHelp(false), FlagInfos(false), FlagConfig(false), FlagSearch(false), FlagShowTuiMenu(0),
 
-		top_bar_ctr(NULL),
-		top_bar_date_lbl(NULL),
-		top_bar_hour_lbl(NULL),
-		top_bar_fps_lbl(NULL),
-		top_bar_appName_lbl(NULL),
-		top_bar_fov_lbl(NULL),
+	top_bar_ctr(NULL),
+	top_bar_date_lbl(NULL),
+	top_bar_hour_lbl(NULL),
+	top_bar_fps_lbl(NULL),
+	top_bar_appName_lbl(NULL),
+	top_bar_fov_lbl(NULL),
 
-		bt_flag_ctr(NULL),
-		bt_flag_constellation_draw(NULL),
-		bt_flag_constellation_name(NULL),
-		bt_flag_constellation_art(NULL),
-		bt_flag_azimuth_grid(NULL),
-		bt_flag_equator_grid(NULL),
-		bt_flag_ground(NULL),
-		bt_flag_cardinals(NULL),
-		bt_flag_atmosphere(NULL),
-		bt_flag_nebula_name(NULL),
-		bt_flag_help(NULL),
-		bt_flag_equatorial_mode(NULL),
-		bt_flag_config(NULL),
+	bt_flag_ctr(NULL),
+	bt_flag_constellation_draw(NULL),
+	bt_flag_constellation_name(NULL),
+	bt_flag_constellation_art(NULL),
+	bt_flag_azimuth_grid(NULL),
+	bt_flag_equator_grid(NULL),
+	bt_flag_ground(NULL),
+	bt_flag_cardinals(NULL),
+	bt_flag_atmosphere(NULL),
+	bt_flag_nebula_name(NULL),
+	bt_flag_help(NULL),
+	bt_flag_equatorial_mode(NULL),
+	bt_flag_config(NULL),
 //		bt_flag_chart(NULL),
-		bt_flag_night(NULL),
-		bt_flag_search(NULL),
-		bt_script(NULL),
-		bt_flag_goto(NULL),
-		bt_flip_horz(NULL),
-		bt_flip_vert(NULL),
-		bt_flag_help_lbl(NULL),
-		info_select_ctr(NULL),
-		info_select_txtlbl(NULL),
+	bt_flag_night(NULL),
+	bt_flag_search(NULL),
+	bt_script(NULL),
+	bt_flag_goto(NULL),
+	bt_flip_horz(NULL),
+	bt_flip_vert(NULL),
+	bt_flag_help_lbl(NULL),
+	info_select_ctr(NULL),
+	info_select_txtlbl(NULL),
 
-		licence_win(NULL),
-		licence_txtlbl(NULL),
+	licence_win(NULL),
+	licence_txtlbl(NULL),
 
-		help_win(NULL),
-		help_txtlbl(NULL),
+	help_win(NULL),
+	help_txtlbl(NULL),
 
-		config_win(NULL),
-		search_win(NULL),
-		dialog_win(NULL),
-		tui_root(NULL)
+	config_win(NULL),
+	search_win(NULL),
+	dialog_win(NULL),
+	tui_root(NULL)
 
 {
 	if (!_core)
@@ -206,8 +206,8 @@ void StelUI::init(const InitParser& conf)
 	desktop->addComponent(bt_flag_time_control_lbl);
 
 	dialog_win = new StdDlgWin(L"Stellarium", &StelApp::getInstance().getTextureManager().createTexture("bt_blank.png"),
-		&StelApp::getInstance().getTextureManager().createTexture("bt_question.png"),
-		&StelApp::getInstance().getTextureManager().createTexture("bt_alert.png"));
+							   &StelApp::getInstance().getTextureManager().createTexture("bt_question.png"),
+							   &StelApp::getInstance().getTextureManager().createTexture("bt_alert.png"));
 	//dialog_win->setOpaque(opaqueGUI);
 	dialog_win->setDialogCallback(callback<void>(this, &StelUI::dialogCallback));
 	desktop->addComponent(dialog_win);
@@ -632,7 +632,7 @@ void StelUI::cbr(void)
 #ifndef MACOSX
 		bt_flag_help_lbl->setLabel(_("Quit [CTRL + Q]"));
 #else
-		bt_flag_help_lbl->setLabel(_("Quit [CMD + Q]"));
+	bt_flag_help_lbl->setLabel(_("Quit [CMD + Q]"));
 #endif
 	if (bt_flag_search->getIsMouseOver())
 		bt_flag_help_lbl->setLabel(_("Search for object"));
@@ -662,22 +662,22 @@ void StelUI::tcbr(void)
 Component* StelUI::createLicenceWindow(void)
 {
 	licence_txtlbl = new TextLabel(
-wstring(L"                 \u2022   Stellarium  October 2006  \u2022\n\n") +
-L"\u2022   Copyright (c) 2000-2006 Fabien Chereau et al.\n\n" +
-L"\u2022" + _("   Please check for newer versions and send bug reports\n\
+		wstring(L"                 \u2022   Stellarium  October 2006  \u2022\n\n") +
+		L"\u2022   Copyright (c) 2000-2006 Fabien Chereau et al.\n\n" +
+		L"\u2022" + _("   Please check for newer versions and send bug reports\n\
     and comments to us at: http://www.stellarium.org\n\n") +
-L"\u2022   This program is free software; you can redistribute it and/or\n\
+		L"\u2022   This program is free software; you can redistribute it and/or\n\
 modify it under the terms of the GNU General Public License\n\
 as published by the Free Software Foundation; either version 2\n\
 of the License, or (at your option) any later version.\n\n" +
-L"This program is distributed in the hope that it will be useful, but\n\
+		L"This program is distributed in the hope that it will be useful, but\n\
 WITHOUT ANY WARRANTY; without even the implied\n\
 warranty of MERCHANTABILITY or FITNESS FOR A\n\
 PARTICULAR PURPOSE.  See the GNU General Public\n\
 License for more details.\n\n" +
-L"You should have received a copy of the GNU General Public\n\
+		L"You should have received a copy of the GNU General Public\n\
 License along with this program; if not, write to:\n" +
-L"Free Software Foundation, Inc.\n\
+		L"Free Software Foundation, Inc.\n\
 59 Temple Place - Suite 330\n\
 Boston, MA  02111-1307, USA.\n\
 http://www.fsf.org");
@@ -695,7 +695,7 @@ http://www.fsf.org");
 Component* StelUI::createHelpWindow(SFont& courierFont)
 {
 	help_txtlbl = new TextLabel(
-wstring(_("Movement & selection:\n\
+		wstring(_("Movement & selection:\n\
 Arrow Keys       : Change viewing RA/DE\n\
 Page Up/Down     : Zoom\n\
 CTRL+Up/Down     : Zoom\n\
@@ -706,7 +706,7 @@ CTRL+Left Click  : Unselect\n\
 /                : Zoom to selected object\n\
 SPACE            : Center on selected object\n\
 \n"))+
-wstring(_("Display options:\n\
+		wstring(_("Display options:\n\
 ENTER : Equatorial/altazimuthal mount\n\
 F1  : Toggle fullscreen if possible.\n\
 C   : Constellation lines       V   : Constellation labels\n\
@@ -718,35 +718,35 @@ Q   : Cardinal points           O   : Toggle moon scaling\n\
 T   : Object tracking           S   : Stars\n\
 4 , : Ecliptic line             5 . : Equator line\n\
 \n")) +
-wstring(_("Dialogs & other controls:\n\
+		wstring(_("Dialogs & other controls:\n\
 H   : Help                      I   : About Stellarium\n\
 M   : Text menu                 1 (one)  : Configuration\n\
 CTRL + S : Take a screenshot\n\
 CTRL + R : Toggle script recording\n\
 CTRL + F : Toggle object finder\n\
 \n")) + 
-wstring(_("Time & Date:\n\
+		wstring(_("Time & Date:\n\
 6   : Time rate pause           7   : Time rate 0\n\
 8   : Set current time          J   : Decrease time rate\n\
 K   : Normal time rate          L   : Increase time rate\n\
 -   : Back 24 hours             =   : Forward 24 hours\n\
 [   : Back 7 days               ]   : Forward 7 days\n\
 \n")) + 
-wstring(_("During Script Playback:\n\
+		wstring(_("During Script Playback:\n\
 CTRL + C : End Script\n\
 6   : pause script              K   : resume script\n\
 \n")) + 
-wstring(_("Misc:\n"
-"9   : Toggle meteor shower rates\n"
-"CTRL + 0,..,9 : Execute GOTO command for telescope 0,..,9\n"
-"CTRL + SHIFT + H: Toggle horizontal image flipping\n"
-"CTRL + SHIFT + V: Toggle vertical image flipping\n"))+
+		wstring(_("Misc:\n"
+				  "9   : Toggle meteor shower rates\n"
+				  "CTRL + 0,..,9 : Execute GOTO command for telescope 0,..,9\n"
+				  "CTRL + SHIFT + H: Toggle horizontal image flipping\n"
+				  "CTRL + SHIFT + V: Toggle vertical image flipping\n"))+
 #ifndef MACOSX
-wstring(_("CTRL + Q : Quit\n"))
+		wstring(_("CTRL + Q : Quit\n"))
 #else
-wstring(_("CMD + Q : Quit\n"))
+		wstring(_("CMD + Q : Quit\n"))
 #endif
-			,&courierFont);
+		,&courierFont);
 	
 	
 	//	help_txtlbl->adjustSize();
@@ -809,7 +809,7 @@ int StelUI::handle_move(int x, int y)
 	{
 		if (has_dragged ||
 		    (std::sqrt((double)((x-previous_x)*(x-previous_x)
-		                       +(y-previous_y)*(y-previous_y)))>4.))
+								+(y-previous_y)*(y-previous_y)))>4.))
 		{
 			has_dragged = true;
 			core->setFlagTracking(false);
@@ -910,9 +910,9 @@ int StelUI::handle_clic(Uint16 x, Uint16 y, Uint8 button, Uint8 state)
 
 // mac seems to use KMOD_META instead of KMOD_CTRL
 #ifdef MACOSX
-  #define COMPATIBLE_KMOD_CTRL KMOD_META
+#define COMPATIBLE_KMOD_CTRL KMOD_META
 #else
-  #define COMPATIBLE_KMOD_CTRL KMOD_CTRL
+#define COMPATIBLE_KMOD_CTRL KMOD_CTRL
 #endif
 
 
@@ -926,20 +926,20 @@ int StelUI::handle_keys(SDLKey key, SDLMod mod, Uint16 unicode, Uint8 state)
 	{
 //printf("handle_keys: '%c'(%d), %d, 0x%04x\n",key,(int)key,unicode,mod);
 		if (unicode >= 128) {
-		  // the user has entered an arkane symbol which cannot
-		  // be a key shortcut.
-		  return 0;
+			// the user has entered an arkane symbol which cannot
+			// be a key shortcut.
+			return 0;
 		}
 		if (unicode >= 32) {
 		    // the user has entered a printable ascii character
 		    // see SDL_keysyms.h: the keysyms are cleverly matched to ascii
-		  if ('A' <= unicode && unicode <='Z') unicode += ('a'-'A');
-		  key = (SDLKey)unicode;
+			if ('A' <= unicode && unicode <='Z') unicode += ('a'-'A');
+			key = (SDLKey)unicode;
 		    // the modifiers still contain the true modifier state
 		} else {
-		  // improper unicode translation (like Ctrl-H)
-		  // or impossible unicode translation:
-		  // forget the unicode and use keysym instead
+			// improper unicode translation (like Ctrl-H)
+			// or impossible unicode translation:
+			// forget the unicode and use keysym instead
 		}
 
 		if (key == SDLK_q && (mod & COMPATIBLE_KMOD_CTRL))
@@ -1053,7 +1053,7 @@ int StelUI::handle_keys(SDLKey key, SDLMod mod, Uint16 unicode, Uint8 state)
 		}
 
         switch (key) {
-          case SDLK_ESCAPE:
+		case SDLK_ESCAPE:
 	        // RFE 1310384, ESC closes dialogs
 	        // close search mode
 	        FlagSearch=false;
@@ -1072,236 +1072,247 @@ int StelUI::handle_keys(SDLKey key, SDLMod mod, Uint16 unicode, Uint8 state)
 	        licence_win->setVisible(FlagInfos);
 	        // END RFE 1310384
             break;
-		  case SDLK_0:
+		case SDLK_0:
             if (mod & COMPATIBLE_KMOD_CTRL)
-              core->telescopeGoto(0);
+				core->telescopeGoto(0);
             break;
-		  case SDLK_1:
+		case SDLK_1:
             if (mod & COMPATIBLE_KMOD_CTRL) {
-              core->telescopeGoto(1);
+				core->telescopeGoto(1);
             } else {
-              FlagConfig=!FlagConfig;
-              config_win->setVisible(FlagConfig);
+				FlagConfig=!FlagConfig;
+				config_win->setVisible(FlagConfig);
             }
             break;
-		  case SDLK_2:
+		case SDLK_2:
             if (mod & COMPATIBLE_KMOD_CTRL)
-              core->telescopeGoto(2);
+				core->telescopeGoto(2);
             break;
-		  case SDLK_3:
+		case SDLK_3:
             if (mod & COMPATIBLE_KMOD_CTRL)
-              core->telescopeGoto(3);
+				core->telescopeGoto(3);
             break;
-		  case SDLK_4:
+		case SDLK_4:
             if (mod & COMPATIBLE_KMOD_CTRL) {
-              core->telescopeGoto(4);
-              break;
+				core->telescopeGoto(4);
+				break;
             } // else fall through
-          case SDLK_COMMA:
-		  {
-			  SolarSystem* ssmgr = (SolarSystem*)StelApp::getInstance().getModuleMgr().getModule("ssystem");
-			  if(!core->getFlagEclipticLine())
-			  {
-				  app->commander->execute_command( "flag ecliptic_line on");
-			  }
-			  else if( !ssmgr->getFlagTrails())
-			  {
-				  app->commander->execute_command( "flag object_trails on");
-			  }
-			  else
-			  {
-				  app->commander->execute_command( "flag object_trails off");
-				  app->commander->execute_command( "flag ecliptic_line off");
-			  }
-			  break;
-		  }
-		  case SDLK_5:
+		case SDLK_COMMA:
+		{
+			SolarSystem* ssmgr = (SolarSystem*)StelApp::getInstance().getModuleMgr().getModule("ssystem");
+			if(!core->getFlagEclipticLine())
+			{
+				app->commander->execute_command( "flag ecliptic_line on");
+			}
+			else if( !ssmgr->getFlagTrails())
+			{
+				app->commander->execute_command( "flag object_trails on");
+			}
+			else
+			{
+				app->commander->execute_command( "flag object_trails off");
+				app->commander->execute_command( "flag ecliptic_line off");
+			}
+			break;
+		}
+		case SDLK_5:
             if (mod & COMPATIBLE_KMOD_CTRL) {
-              core->telescopeGoto(5);
-              break;
+				core->telescopeGoto(5);
+				break;
             } // else fall through
-          case SDLK_PERIOD:
+		case SDLK_PERIOD:
             app->commander->execute_command( "flag equator_line toggle");
             break;
-		  case SDLK_6:
+		case SDLK_6:
             if (mod & COMPATIBLE_KMOD_CTRL)
-              core->telescopeGoto(6);
+				core->telescopeGoto(6);
             break;
-		  case SDLK_7:
+		case SDLK_7:
             if (mod & COMPATIBLE_KMOD_CTRL)
-              core->telescopeGoto(7);
+				core->telescopeGoto(7);
             break;
-		  case SDLK_8:
+		case SDLK_8:
             if (mod & COMPATIBLE_KMOD_CTRL)
-              core->telescopeGoto(8);
+				core->telescopeGoto(8);
             break;
-		  case SDLK_9:
+		case SDLK_9:
             if (mod & COMPATIBLE_KMOD_CTRL) {
-              core->telescopeGoto(9);
+				core->telescopeGoto(9);
             } else {
-              const int zhr = core->getMeteorsRate();
-              if (zhr <= 10 ) {
-                app->commander->execute_command("meteors zhr 80");  // standard Perseids rate
-              } else if( zhr <= 80 ) {
-                app->commander->execute_command("meteors zhr 10000"); // exceptional Leonid rate
-              } else if( zhr <= 10000 ) {
-                app->commander->execute_command("meteors zhr 144000");  // highest ever recorded ZHR (1966 Leonids)
-              } else {
-                app->commander->execute_command("meteors zhr 10");  // set to default base rate (10 is normal, 0 would be none)
-              }
+				const int zhr = core->getMeteorsRate();
+				if (zhr <= 10 ) {
+					app->commander->execute_command("meteors zhr 80");  // standard Perseids rate
+				} else if( zhr <= 80 ) {
+					app->commander->execute_command("meteors zhr 10000"); // exceptional Leonid rate
+				} else if( zhr <= 10000 ) {
+					app->commander->execute_command("meteors zhr 144000");  // highest ever recorded ZHR (1966 Leonids)
+				} else {
+					app->commander->execute_command("meteors zhr 10");  // set to default base rate (10 is normal, 0 would be none)
+				}
             }
             break;
 
-          case SDLK_h:
+		case SDLK_h:
             if (mod & COMPATIBLE_KMOD_CTRL) {
 //                Fabien wants to toggle
 //              core->setFlipHorz(mod & KMOD_SHIFT);
-              if (mod & KMOD_SHIFT) {
-                core->getProjection()->setFlipHorz(!core->getProjection()->getFlipHorz());
-              }
+				if (mod & KMOD_SHIFT) {
+					core->getProjection()->setFlipHorz(!core->getProjection()->getFlipHorz());
+				}
             } else {
-              FlagHelp=!FlagHelp;
-              help_win->setVisible(FlagHelp);
+				FlagHelp=!FlagHelp;
+				help_win->setVisible(FlagHelp);
             }
             break;
-          case SDLK_v:
+		case SDLK_v:
             if (mod & COMPATIBLE_KMOD_CTRL) {
 //                Fabien wants to toggle
 //              core->setFlipVert(mod & KMOD_SHIFT);
-              if (mod & KMOD_SHIFT) {
-                core->getProjection()->setFlipVert(!core->getProjection()->getFlipVert());
-              }
+				if (mod & KMOD_SHIFT) {
+					core->getProjection()->setFlipVert(!core->getProjection()->getFlipVert());
+				}
             } else {
-              app->commander->execute_command( "flag constellation_names toggle");
+				app->commander->execute_command( "flag constellation_names toggle");
             }
             break;
 
-          case SDLK_f:
+		case SDLK_f:
             if (mod & COMPATIBLE_KMOD_CTRL) {
-              FlagSearch = !FlagSearch;
-              search_win->setVisible(FlagSearch);
+				FlagSearch = !FlagSearch;
+				search_win->setVisible(FlagSearch);
             } else {
-              app->commander->execute_command( "flag fog toggle");
+				app->commander->execute_command( "flag fog toggle");
             }
-          break;
+			break;
 
-          case SDLK_r:
+		case SDLK_r:
             app->commander->execute_command( "flag constellation_art toggle");
             break;
-          case SDLK_c:
+		case SDLK_c:
             app->commander->execute_command( "flag constellation_drawing toggle");
             break;
-          case SDLK_b:
+		case SDLK_b:
             app->commander->execute_command( "flag constellation_boundaries toggle");
             break;
-          case SDLK_d:
+		case SDLK_d:
             app->commander->execute_command( "flag star_names toggle");
             break;
-          case SDLK_p:
-		  {
-			  SolarSystem* ssmgr2 = (SolarSystem*)StelApp::getInstance().getModuleMgr().getModule("ssystem");
-			  if(!ssmgr2->getFlagHints())
-			  {
-				  app->commander->execute_command("flag planet_names on");
-			  }
-			  else if( !ssmgr2->getFlagOrbits())
-			  {
-				  app->commander->execute_command("flag planet_orbits on");
-			  }
-			  else
-			  {
-				  app->commander->execute_command("flag planet_orbits off");
-				  app->commander->execute_command("flag planet_names off");
-			  }
-			  break;
-		  }
-          case SDLK_z:
+		case SDLK_p:
+		{
+			SolarSystem* ssmgr2 = (SolarSystem*)StelApp::getInstance().getModuleMgr().getModule("ssystem");
+			if(!ssmgr2->getFlagHints())
+			{
+				app->commander->execute_command("flag planet_names on");
+			}
+			else if( !ssmgr2->getFlagOrbits())
+			{
+				app->commander->execute_command("flag planet_orbits on");
+			}
+			else
+			{
+				app->commander->execute_command("flag planet_orbits off");
+				app->commander->execute_command("flag planet_names off");
+			}
+			break;
+		}
+		case SDLK_z:
             if (core->getFlagMeridianLine()) {
-              app->commander->execute_command( "flag meridian_line 0");
-              app->commander->execute_command( "flag azimuthal_grid 1");
+				app->commander->execute_command( "flag meridian_line 0");
+				app->commander->execute_command( "flag azimuthal_grid 1");
             } else {
-              if (core->getFlagAzimutalGrid()) app->commander->execute_command( "flag azimuthal_grid 0");
-              else app->commander->execute_command( "flag meridian_line 1");
+				if (core->getFlagAzimutalGrid()) app->commander->execute_command( "flag azimuthal_grid 0");
+				else app->commander->execute_command( "flag meridian_line 1");
             }
             break;
-          case SDLK_e:
+		case SDLK_e:
             app->commander->execute_command( "flag equatorial_grid toggle");
             break;
-          case SDLK_n:
+		case SDLK_n:
             app->commander->execute_command( "flag nebula_names toggle");
             break;
-          case SDLK_g:
+		case SDLK_g:
             app->commander->execute_command( "flag landscape toggle");
             break;
-          case SDLK_q:
+		case SDLK_q:
             app->commander->execute_command( "flag cardinal_points toggle");
             break;
-          case SDLK_a:
+		case SDLK_a:
             app->commander->execute_command( "flag atmosphere toggle");
             break;
 
-          case SDLK_t:
+		case SDLK_t:
             core->setFlagLockSkyPosition(!core->getFlagLockSkyPosition());
             break;
-          case SDLK_s:
+		case SDLK_s:
             if (!(mod & COMPATIBLE_KMOD_CTRL))
-              app->commander->execute_command( "flag stars toggle");
+				app->commander->execute_command( "flag stars toggle");
             break;
-          case SDLK_SPACE:
+		case SDLK_SPACE:
             app->commander->execute_command("flag track_object on");
             break;
-          case SDLK_i:
+		case SDLK_i:
             FlagInfos=!FlagInfos;
             licence_win->setVisible(FlagInfos);
             break;
-          case SDLK_EQUALS:
-            app->commander->execute_command( "date relative 1");
+		case SDLK_EQUALS:
+			if (SDL_GetModState() & KMOD_ALT)
+				app->commander->execute_command( "date sidereal 1");
+			else
+				app->commander->execute_command( "date relative 1");
+			break;
+		case SDLK_MINUS:
+			if (SDL_GetModState() & KMOD_ALT)
+				app->commander->execute_command( "date sidereal -1");
+			else 
+				app->commander->execute_command( "date relative -1");
             break;
-          case SDLK_MINUS:
-            app->commander->execute_command( "date relative -1");
-            break;
-          case SDLK_m:
+		case SDLK_m:
             if (FlagEnableTuiMenu) setFlagShowTuiMenu(true);  // not recorded
             break;
-          case SDLK_o:
+		case SDLK_o:
             app->commander->execute_command( "flag moon_scaled toggle");
             break;
-          case SDLK_LEFTBRACKET:
-            app->commander->execute_command( "date relative -7");
+		case SDLK_LEFTBRACKET:
+			if (SDL_GetModState() & KMOD_ALT)
+				app->commander->execute_command( "date sidereal -7");
+			else 
+				app->commander->execute_command( "date relative -7");
             break;
-          case SDLK_RIGHTBRACKET:
-            app->commander->execute_command( "date relative 7");
+		case SDLK_RIGHTBRACKET:
+			if (SDL_GetModState() & KMOD_ALT)
+				app->commander->execute_command( "date sidereal 7");
+			else 
+				app->commander->execute_command( "date relative 7");
             break;
-          case SDLK_SLASH:
+		case SDLK_SLASH:
             if (mod & COMPATIBLE_KMOD_CTRL) {
-              app->commander->execute_command( "zoom auto out");
+				app->commander->execute_command( "zoom auto out");
             } else {
-              // here we help script recorders by selecting the right type of zoom option
-              // based on current settings of manual or full auto zoom
-              if(core->getFlagManualAutoZoom()) app->commander->execute_command( "zoom auto in manual 1");
-              else app->commander->execute_command( "zoom auto in");
+				// here we help script recorders by selecting the right type of zoom option
+				// based on current settings of manual or full auto zoom
+				if(core->getFlagManualAutoZoom()) app->commander->execute_command( "zoom auto in manual 1");
+				else app->commander->execute_command( "zoom auto in");
             }
             break;
-          case SDLK_BACKSLASH:
+		case SDLK_BACKSLASH:
             app->commander->execute_command( "zoom auto out");
             break;
-          case SDLK_x:
+		case SDLK_x:
             app->commander->execute_command( "flag show_tui_datetime toggle");
 
-              // keep these in sync.  Maybe this should just be one flag.
+			// keep these in sync.  Maybe this should just be one flag.
             if(FlagShowTuiDateTime) app->commander->execute_command( "flag show_tui_short_obj_info on");
             else app->commander->execute_command( "flag show_tui_short_obj_info off");
             break;
-          case SDLK_RETURN:
+		case SDLK_RETURN:
             core->toggleMountMode();
             break;
-          default:
+		default:
             break;
         }
 	}
 	return 0;
 }
-
 
 // Update changing values
 void StelUI::gui_update_widgets(int delta_time)
