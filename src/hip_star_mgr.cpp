@@ -635,9 +635,8 @@ protected:
 	}
 	wstring getNameI18n(void) const = 0;
 	wstring getInfoString(const Navigator *nav) const;
-	wstring getShortInfoString(const Navigator *nav) const {
-		return getShortInfoString(nav);
-	}
+	wstring getShortInfoString(const Navigator *nav) const;
+
 private:
 	int ref_count;
 	void retain(void) {assert(ref_count>=0);ref_count++;}
@@ -674,6 +673,16 @@ wstring StarWrapperBase::getInfoString(const Navigator *nav) const {
 
   return oss.str();
 }
+
+wstring StarWrapperBase::getShortInfoString(const Navigator *nav) const {
+	wostringstream oss;
+	oss.setf(ios::fixed);
+	oss.precision(2);
+	oss << _("Magnitude: ") << get_mag(nav);
+
+	return oss.str();
+}
+
 
 static const double d2000 = 2451545.0;
 static double current_JDay = d2000;
