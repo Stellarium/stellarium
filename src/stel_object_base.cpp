@@ -25,7 +25,7 @@
 #include "stel_utility.h"
 #include "STexture.h"
 #include "planet.h"
-#include "stelapp.h"
+#include "StelApp.h"
 #include "StelTextureMgr.h"
 
 StelObject StelObjectBase::getBrightestStarInConstellation(void) const {

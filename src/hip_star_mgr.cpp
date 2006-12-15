@@ -39,7 +39,7 @@
 #include "tone_reproductor.h"
 #include "translator.h"
 #include "geodesic_grid.h"
-#include "stelapp.h"
+#include "StelApp.h"
 #include "StelTextureMgr.h"
 
 typedef int Int32;

@@ -19,7 +19,7 @@
 
 #include "projector.h"
 #include "loadingbar.h"
-#include "stelapp.h"
+#include "StelApp.h"
 #include "StelTextureMgr.h"
 
 LoadingBar::LoadingBar(Projector* _prj, float font_size, const string&  splash_tex, 

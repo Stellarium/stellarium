@@ -20,7 +20,7 @@
 #include <sstream>
 #include "GeodesicGridDrawer.h"
 #include "projector.h"
-#include "stelapp.h"
+#include "StelApp.h"
 
 GeodesicGridDrawer::GeodesicGridDrawer(int maxLevel)
 {

@@ -21,7 +21,7 @@
 
 #include <iostream>
 #include "image.h"
-#include "stelapp.h"
+#include "StelApp.h"
 #include "StelTextureMgr.h"
 
 Image::Image( string filename, string name, IMAGE_POSITIONING pos_type) {

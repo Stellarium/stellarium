@@ -28,7 +28,7 @@
 #include "hip_star_mgr.h"
 #include "hip_star.h"
 #include "stel_utility.h"
-#include "stelapp.h"
+#include "StelApp.h"
 #include "StelTextureMgr.h"
 
 // constructor which loads all data from appropriate files

@@ -21,7 +21,7 @@ using namespace std;
 
 #include "StelLocaleMgr.h"
 #include "stellarium.h"
-#include "stelapp.h"
+#include "StelApp.h"
 #include "stel_utility.h"
 #include "init_parser.h"
 

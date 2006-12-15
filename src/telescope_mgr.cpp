@@ -22,7 +22,7 @@
 #include "stel_object.h"
 #include "projector.h"
 #include "init_parser.h"
-#include "stelapp.h"
+#include "StelApp.h"
 #include "StelTextureMgr.h"
 
 #include <algorithm>

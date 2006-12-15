@@ -22,7 +22,7 @@
 #include "projector.h"
 #include "navigator.h"
 #include "meteor_mgr.h"
-#include "stelapp.h"
+#include "StelApp.h"
 #include "stel_core.h"
 #include "meteor.h"
 

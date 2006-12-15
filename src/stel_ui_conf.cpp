@@ -19,7 +19,7 @@
 
 #include "stel_ui.h"
 #include "stel_utility.h"
-#include "stelapp.h"
+#include "StelApp.h"
 #include "stel_core.h"
 #include "hip_star_mgr.h"
 #include "constellation_mgr.h"
