@@ -968,31 +968,10 @@ void StelCore::updateMove(int delta_time)
 
 bool StelCore::setHomePlanet(string planet)
 {
-
 	// reset planet trails due to changed perspective
 	ssystem->startTrails( ssystem->getFlagTrails() );
 
 	return observatory->setHomePlanet(planet);
-}
-
-//! Set stellarium time to current real world time
-void StelCore::setTimeNow()
-{
-	navigation->setJDay(get_julian_from_sys());
-}
-
-//! Get whether the current stellarium time is the real world time
-bool StelCore::getIsTimeNow(void) const
-{
-	// cache last time to prevent to much slow system call
-	static double lastJD = navigation->getJDay();
-	static bool previousResult = (fabs(navigation->getJDay()-get_julian_from_sys())<JD_SECOND);
-	if (fabs(lastJD-navigation->getJDay())>JD_SECOND/4)
-	{
-		lastJD = navigation->getJDay();
-		previousResult = (fabs(navigation->getJDay()-get_julian_from_sys())<JD_SECOND);
-	}
-	return previousResult;
 }
 
 //! Select passed object

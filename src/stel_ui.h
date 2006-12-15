@@ -81,7 +81,8 @@ public:
 	void setFlagShowTuiMenu(const bool flag);
 	bool getFlagShowTuiMenu() { return FlagShowTuiMenu; }
 
-
+	// for use by TUI
+	void saveCurrentConfig(const string& confFile);
 private:
 	StelCore * core;		// The main core can be accessed because StelUI is a friend class (TODO fix that)
 	StelApp * app;			// The main application instance

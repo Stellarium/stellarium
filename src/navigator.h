@@ -132,6 +132,19 @@ public:
 
 	const Vec3d& getinitViewPos() {return initViewPos;}
 	
+	//! Set stellarium time to current real world time
+	void setTimeNow();
+	//! Get wether the current stellarium time is the real world time
+	bool getIsTimeNow(void) const;
+	
+	//! Return the preset sky time in JD
+	double getPresetSkyTime() const {return PresetSkyTime;}
+	void setPresetSkyTime(double d) {PresetSkyTime=d;}
+	
+	//! Return the startupe mode, can be preset|Preset or anything else
+	string getStartupTimeMode() {return StartupTimeMode;}
+	void setStartupTimeMode(const string& s) {StartupTimeMode = s;}
+	
 private:
 	// Update the modelview matrices
 	void updateModelViewMat(void);
@@ -174,6 +187,9 @@ private:
 	// Time variable
     double time_speed;				// Positive : forward, Negative : Backward, 1 = 1sec/sec
 	double JDay;        			// Curent time in Julian day
+
+	double PresetSkyTime;
+	string StartupTimeMode;
 
 	// Position variables
 	Observator* position;

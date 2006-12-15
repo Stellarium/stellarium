@@ -187,9 +187,6 @@ private:
 	//! Restore previous projection mode
 	void restoreFrom2DfullscreenProjection(void) const;
 
-	// for use by TUI
-	void saveCurrentConfig(const string& confFile);
-
 	// The StelApp singleton
 	static StelApp* singleton;
 
@@ -224,9 +221,6 @@ private:
 	StelTextureMgr* textureMgr;
 	
 	int FlagEnableMoveMouse;  // allow mouse at edge of screen to move view
-
-	double PresetSkyTime;
-	string StartupTimeMode;
 
 	int MouseZoom;
 
