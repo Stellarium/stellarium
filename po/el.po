@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: stellarium@free.fr\n"
-"POT-Creation-Date: 2006-11-15 08:46-0800\n"
+"POT-Creation-Date: 2006-12-15 10:42-0800\n"
 "PO-Revision-Date: 2006-09-26 16:06+0000\n"
 "Last-Translator: Christos Sotiropoulos <csot@otenet.gr>\n"
 "Language-Team: Greek, Modern (1453-) <el@li.org>\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: src/main.cpp:56
+#: src/main.cpp:57
 #, c-format
 msgid ""
 "Usage: %s [OPTION] ...\n"
@@ -28,23 +28,23 @@ msgstr ""
 "έξοδος.\n"
 "-h, --help Παρουσιάζει αυτή τη βοήθεια και μετά γίνεται έξοδος.\n"
 
-#: src/main.cpp:79
+#: src/main.cpp:80
 #, c-format
 msgid "%s: Bad command line argument(s)\n"
 msgstr "%s: Λάθος γραμμής εντολής σύνοψης\n"
 
-#: src/main.cpp:80
+#: src/main.cpp:81
 #, c-format
 msgid "Try `%s --help' for more information.\n"
 msgstr "Δοκιμάστε `%s --help' για περισσότερες πληροφορίες.\n"
 
-#: src/constellation_mgr.cpp:205
+#: src/constellation_mgr.cpp:202
 msgid "Loading Constellation Art: "
 msgstr "Φόρτωση Σχεδίων Αστερισμών: "
 
-#: src/hip_star.cpp:84 src/hip_star.cpp:140 src/hip_star_mgr.cpp:659
-#: src/hip_star_mgr.cpp:762 src/nebula.cpp:95 src/nebula.cpp:117
-#: src/planet.cpp:117 src/planet.cpp:163
+#: src/hip_star.cpp:84 src/hip_star.cpp:140 src/hip_star_mgr.cpp:657
+#: src/hip_star_mgr.cpp:760 src/hip_star_mgr.cpp:822 src/nebula.cpp:97
+#: src/nebula.cpp:119 src/planet.cpp:117 src/planet.cpp:163
 msgid "Magnitude: "
 msgstr "Μέγεθος: "
 
@@ -52,52 +52,53 @@ msgstr "Μέγεθος: "
 msgid " (Variable)"
 msgstr " (Μεταβλητή)"
 
-#: src/hip_star.cpp:87 src/hip_star_mgr.cpp:661 src/hip_star_mgr.cpp:664
-#: src/hip_star_mgr.cpp:764 src/hip_star_mgr.cpp:770 src/nebula.cpp:97
+#: src/hip_star.cpp:87 src/hip_star_mgr.cpp:659 src/hip_star_mgr.cpp:662
+#: src/hip_star_mgr.cpp:762 src/hip_star_mgr.cpp:768 src/nebula.cpp:99
 #: src/planet.cpp:121
 msgid "RA/DE: "
 msgstr "RA/DE: "
 
-#: src/hip_star.cpp:93 src/hip_star_mgr.cpp:673 src/hip_star_mgr.cpp:779
-#: src/nebula.cpp:103 src/planet.cpp:127
+#: src/hip_star.cpp:93 src/hip_star_mgr.cpp:671 src/hip_star_mgr.cpp:777
+#: src/nebula.cpp:105 src/planet.cpp:127
 msgid "Az/Alt: "
 msgstr "Αζ/Υψ: "
 
-#: src/hip_star.cpp:95 src/hip_star_mgr.cpp:786 src/planet.cpp:130
-#: src/planet.cpp:167
+#: src/hip_star.cpp:95 src/hip_star_mgr.cpp:784 src/hip_star_mgr.cpp:827
+#: src/planet.cpp:130 src/planet.cpp:167
 msgid "Distance: "
 msgstr "Απόσταση: "
 
-#: src/hip_star.cpp:97 src/hip_star.cpp:144 src/hip_star_mgr.cpp:789
+#: src/hip_star.cpp:97 src/hip_star.cpp:144 src/hip_star_mgr.cpp:787
+#: src/hip_star_mgr.cpp:830
 msgid " Light Years"
 msgstr " Έτη Φωτός"
 
-#: src/hip_star.cpp:104 src/hip_star_mgr.cpp:793
+#: src/hip_star.cpp:104 src/hip_star_mgr.cpp:791 src/hip_star_mgr.cpp:834
 msgid "Spectral Type: "
 msgstr "Τύπος φάσματος "
 
-#: src/hip_star_mgr.cpp:661 src/hip_star_mgr.cpp:764
+#: src/hip_star_mgr.cpp:659 src/hip_star_mgr.cpp:762
 msgid "J2000"
 msgstr ""
 
-#: src/hip_star_mgr.cpp:664 src/hip_star_mgr.cpp:770
+#: src/hip_star_mgr.cpp:662 src/hip_star_mgr.cpp:768
 msgid "Equ of date"
 msgstr ""
 
-#: src/hip_star_mgr.cpp:784
+#: src/hip_star_mgr.cpp:782
 msgid "Parallax: "
 msgstr ""
 
-#: src/hip_star_mgr.cpp:1123
+#: src/hip_star_mgr.cpp:1164
 #, fuzzy
 msgid "Loading catalog "
 msgstr "Φόρτωση καταλόγου NGC: "
 
-#: src/nebula.cpp:105
+#: src/nebula.cpp:107
 msgid "Type: "
 msgstr "Τύπος: "
 
-#: src/nebula.cpp:106
+#: src/nebula.cpp:108
 msgid "Size: "
 msgstr "Μέγεθος: "
 
@@ -113,107 +114,107 @@ msgstr "Φόρτωση Γαλαξιακών Νεφελωμάτων:"
 msgid "AU"
 msgstr "AU"
 
-#: src/stel_ui.cpp:503 src/stel_ui.cpp:636
+#: src/stel_ui.cpp:501 src/stel_ui.cpp:637
 msgid "Script commander"
 msgstr "Ρυθμιστής Σεναρίου"
 
-#: src/stel_ui.cpp:530
+#: src/stel_ui.cpp:528
 msgid "Invalid Script command"
 msgstr "Λανθασμένη εντολή Σεναριου"
 
-#: src/stel_ui.cpp:601
+#: src/stel_ui.cpp:602
 msgid "Drawing of the Constellations [C]"
 msgstr "Σχέδιο του Αστερισμού [C]"
 
-#: src/stel_ui.cpp:603
+#: src/stel_ui.cpp:604
 msgid "Names of the Constellations [V]"
 msgstr "Ονόματα των Αστερισμών [V]"
 
-#: src/stel_ui.cpp:605
+#: src/stel_ui.cpp:606
 msgid "Constellations Art [R]"
 msgstr "Σχέδια των Αστερισμών [R]"
 
-#: src/stel_ui.cpp:607
+#: src/stel_ui.cpp:608
 msgid "Azimuthal Grid [Z]"
 msgstr "Πλέγμα Αζιμούθιου [Z]"
 
-#: src/stel_ui.cpp:609
+#: src/stel_ui.cpp:610
 msgid "Equatorial Grid [E]"
 msgstr "Πλέγμα Ισημερινού [Ε]"
 
-#: src/stel_ui.cpp:611
+#: src/stel_ui.cpp:612
 msgid "Ground [G]"
 msgstr "Έδαφος [G]"
 
-#: src/stel_ui.cpp:613
+#: src/stel_ui.cpp:614
 msgid "Cardinal Points [Q]"
 msgstr "Σημεία του Ορίζοντα"
 
-#: src/stel_ui.cpp:615
+#: src/stel_ui.cpp:616
 msgid "Atmosphere [A]"
 msgstr "Ατμόσφαιρα [Α]"
 
-#: src/stel_ui.cpp:617
+#: src/stel_ui.cpp:618
 msgid "Nebulas [N]"
 msgstr "Γαλαξιακά Νεφελώματα [Ν]"
 
-#: src/stel_ui.cpp:619
+#: src/stel_ui.cpp:620
 msgid "Help [H]"
 msgstr "Βοήθεια [Η]"
 
-#: src/stel_ui.cpp:621
+#: src/stel_ui.cpp:622
 msgid "Equatorial/Altazimuthal Mount [ENTER]"
 msgstr "Ισημερινή/Αζιμουθιακή Στήριξη [ENTER]"
 
-#: src/stel_ui.cpp:623
+#: src/stel_ui.cpp:624
 msgid "Configuration window"
 msgstr "Παράθυρο ρυθμίσεων"
 
-#: src/stel_ui.cpp:626
+#: src/stel_ui.cpp:627
 msgid "Night (red) mode"
 msgstr "Κατάσταση νύχτας (κόκκινο)"
 
-#: src/stel_ui.cpp:629
+#: src/stel_ui.cpp:630
 msgid "Quit [CTRL + Q]"
 msgstr "Έξοδος [CTRL + Q]"
 
-#: src/stel_ui.cpp:631
+#: src/stel_ui.cpp:632
 msgid "Quit [CMD + Q]"
 msgstr "Έξοδος [CMD + Q]"
 
-#: src/stel_ui.cpp:634
+#: src/stel_ui.cpp:635
 msgid "Search for object"
 msgstr "Αναζήτηση για αντικείμενο"
 
-#: src/stel_ui.cpp:638
+#: src/stel_ui.cpp:639
 msgid "Goto selected object [SPACE]"
 msgstr "Πήγαινε στο επιλεγμένο αντικείμενο [ΚΕΝΟ]"
 
-#: src/stel_ui.cpp:640
+#: src/stel_ui.cpp:641
 msgid "Flip horizontally"
 msgstr "Οριζόντια περιστροφή"
 
-#: src/stel_ui.cpp:642
+#: src/stel_ui.cpp:643
 msgid "Flip vertically"
 msgstr "Κάθετη περιστροφή"
 
-#: src/stel_ui.cpp:648
+#: src/stel_ui.cpp:649
 msgid "Decrease Time Speed [J]"
 msgstr "Μείωση Ταχύτητα Χρόνου [J]"
 
-#: src/stel_ui.cpp:650
+#: src/stel_ui.cpp:651
 msgid "Real Time Speed [K]"
 msgstr "Πραγματική Ταχύτητας Χρόνου [K]"
 
-#: src/stel_ui.cpp:652
+#: src/stel_ui.cpp:653
 msgid "Increase Time Speed [L]"
 msgstr "Άυξηση Ταχύτητας Χρόνου[L]"
 
-#: src/stel_ui.cpp:654
+#: src/stel_ui.cpp:655
 msgid "Return to Current Time"
 msgstr "Επιστροφή στην Τρέχουσα Χρόνου"
 
-#: src/stel_ui.cpp:663
+#: src/stel_ui.cpp:664
 msgid ""
 "   Please check for newer versions and send bug reports\n"
 "    and comments to us at: http://www.stellarium.org\n"
@@ -223,11 +224,11 @@ msgstr ""
 "    και σχόλια σε έμας στο: http://www.stellarium.org\n"
 "\n"
 
-#: src/stel_ui.cpp:682
+#: src/stel_ui.cpp:683
 msgid "Information"
 msgstr "Πληροφορίες"
 
-#: src/stel_ui.cpp:694
+#: src/stel_ui.cpp:695
 msgid ""
 "Movement & selection:\n"
 "Arrow Keys       : Change viewing RA/DE\n"
@@ -255,7 +256,7 @@ msgstr ""
 "...\n"
 "\n"
 
-#: src/stel_ui.cpp:705
+#: src/stel_ui.cpp:706
 msgid ""
 "Display options:\n"
 "ENTER : Equatorial/altazimuthal mount\n"
@@ -283,7 +284,7 @@ msgstr ""
 "4 , : Γραμμή Εκλειπτικής      5.  : Γραμμή Ισημερινού\n"
 "\n"
 
-#: src/stel_ui.cpp:717
+#: src/stel_ui.cpp:718
 msgid ""
 "Dialogs & other controls:\n"
 "H   : Help                      I   : About Stellarium\n"
@@ -301,7 +302,7 @@ msgstr ""
 "CTRL + F : Ενεργοποίηση / Απενεργοποίηση ερευνητή αντικειμένου\n"
 "\n"
 
-#: src/stel_ui.cpp:724
+#: src/stel_ui.cpp:725
 msgid ""
 "Time & Date:\n"
 "6   : Time rate pause           7   : Time rate 0\n"
@@ -319,7 +320,7 @@ msgstr ""
 "[ : Πίσω 7 ημέρες ] : Μπροστά 7 ημέρες\n"
 "\n"
 
-#: src/stel_ui.cpp:731
+#: src/stel_ui.cpp:732
 msgid ""
 "During Script Playback:\n"
 "CTRL + C : End Script\n"
@@ -331,7 +332,7 @@ msgstr ""
 "6 : παύση σεναρίου k : συνέχιση σεναρίου\n"
 "\n"
 
-#: src/stel_ui.cpp:735
+#: src/stel_ui.cpp:736
 msgid ""
 "Misc:\n"
 "9   : Toggle meteor shower rates\n"
@@ -345,69 +346,69 @@ msgstr ""
 "CTRL + SHIFT + H: Ενεργοποίηση οριζόντιας περιστροφής οθόνης\n"
 "CTRL + SHIFT + V: Ενεργοποίηση κάθετης περιστροφής οθόνης\n"
 
-#: src/stel_ui.cpp:741
+#: src/stel_ui.cpp:742
 msgid "CTRL + Q : Quit\n"
 msgstr "CTRL + Q : Έξοδος\n"
 
-#: src/stel_ui.cpp:743
+#: src/stel_ui.cpp:744
 msgid "CMD + Q : Quit\n"
 msgstr "CMD + Q : Κλείσιμο\n"
 
-#: src/stel_ui.cpp:750
+#: src/stel_ui.cpp:751
 msgid "Help"
 msgstr "Βοήθεια"
 
-#: src/stel_ui.cpp:1031
+#: src/stel_ui.cpp:1032
 msgid "Command recording stopped."
 msgstr "Εντολή καταγραφής σταμάτησε."
 
-#: src/stel_ui.cpp:1039
+#: src/stel_ui.cpp:1040
 msgid "Recording commands to script file:\n"
 msgstr "Εγγραφή εντολών στο αρχείο σεναρίου\n"
 
-#: src/stel_ui.cpp:1041
+#: src/stel_ui.cpp:1042
 msgid "Hit CTRL-R again to stop.\n"
 msgstr "Πατήστε CTRL-R ξανά για να σταματήστε.\n"
 
-#: src/stel_ui.cpp:1045
+#: src/stel_ui.cpp:1046
 msgid "Error: Unable to open script file to record commands."
 msgstr ""
 "Λάθος: Δεν είναι δυνατόν να ανοίξει το αρχείο σεναρίου για την εγγραφή "
 "εντολών"
 
-#: src/stel_ui_conf.cpp:48
+#: src/stel_ui_conf.cpp:50
 msgid "Configuration"
 msgstr "Ρυθμίσεις"
 
-#: src/stel_ui_conf.cpp:69
+#: src/stel_ui_conf.cpp:70
 msgid "Stars"
 msgstr "Άστρα"
 
-#: src/stel_ui_conf.cpp:74
+#: src/stel_ui_conf.cpp:75
 msgid "Star Names. Up to mag :"
 msgstr "Ονόματα Άστρων. Μέχρι το μέγεθος:"
 
-#: src/stel_ui_conf.cpp:86
+#: src/stel_ui_conf.cpp:87
 msgid "Star Twinkle. Amount :"
 msgstr "Αναλαμπές Άστρων. Ποσοστό :"
 
-#: src/stel_ui_conf.cpp:102
+#: src/stel_ui_conf.cpp:103
 msgid "Constellations Lines"
 msgstr "Γραμμές Αστερισμών"
 
-#: src/stel_ui_conf.cpp:107
+#: src/stel_ui_conf.cpp:108
 msgid "Constellations Names"
 msgstr "Ονόματα Αστερισμών"
 
-#: src/stel_ui_conf.cpp:112
+#: src/stel_ui_conf.cpp:113
 msgid "Constellations Boundaries"
 msgstr "Όρια Αστερισμών"
 
-#: src/stel_ui_conf.cpp:117
+#: src/stel_ui_conf.cpp:118
 msgid "Selected Constellation Only"
 msgstr "Επιλεγμένοι Αστερισμοί Μόνο"
 
-#: src/stel_ui_conf.cpp:128
+#: src/stel_ui_conf.cpp:129
 msgid "Nebulas Names. Up to mag :"
 msgstr "Ονόματα νεφελωμάτων. Μέχρι το μέγεθος:"
 
@@ -427,19 +428,19 @@ msgstr "Κλίμακα Φεγγαριού"
 msgid "Planets Hints"
 msgstr "Υποδείξεις Πλανητών"
 
-#: src/stel_ui_conf.cpp:177 src/stel_ui_tuiconf.cpp:387
+#: src/stel_ui_conf.cpp:177 src/stel_ui_tuiconf.cpp:386
 msgid "Equatorial Grid"
 msgstr "Πλέγμα Ισημερινού"
 
-#: src/stel_ui_conf.cpp:182 src/stel_ui_tuiconf.cpp:386
+#: src/stel_ui_conf.cpp:182 src/stel_ui_tuiconf.cpp:385
 msgid "Azimuthal Grid"
 msgstr "Πλέγμα Αζιμούθιου"
 
-#: src/stel_ui_conf.cpp:187 src/stel_ui_tuiconf.cpp:388
+#: src/stel_ui_conf.cpp:187 src/stel_ui_tuiconf.cpp:387
 msgid "Equator Line"
 msgstr "Γραμμή Ισημερινού"
 
-#: src/stel_ui_conf.cpp:192 src/stel_ui_tuiconf.cpp:389
+#: src/stel_ui_conf.cpp:192 src/stel_ui_tuiconf.cpp:388
 msgid "Ecliptic Line"
 msgstr "Εκλειπτική Γραμμή"
 
@@ -447,7 +448,7 @@ msgstr "Εκλειπτική Γραμμή"
 msgid "Ground"
 msgstr "Έδαφος"
 
-#: src/stel_ui_conf.cpp:208 src/stel_ui_tuiconf.cpp:381
+#: src/stel_ui_conf.cpp:208 src/stel_ui_tuiconf.cpp:380
 msgid "Cardinal Points"
 msgstr "Σημεία του Ορίζοντα"
 
@@ -459,8 +460,8 @@ msgstr "Ατμόσφαιρα"
 msgid "Fog"
 msgstr "Ομίχλη"
 
-#: src/stel_ui_conf.cpp:248 src/stel_ui_conf.cpp:419 src/stel_ui_conf.cpp:456
-#: src/stel_ui_conf.cpp:515
+#: src/stel_ui_conf.cpp:248 src/stel_ui_conf.cpp:418 src/stel_ui_conf.cpp:455
+#: src/stel_ui_conf.cpp:514
 msgid "Save as default"
 msgstr "Αποθήκευση ως προεπιλεγμένο"
 
@@ -490,355 +491,355 @@ msgstr ""
 "   την ταχύτητα της ώρας.\n"
 "Χρησιμοποιείστε το πλήκτρο K για να επιστρέψτε στην κανονική ταχύτητα ώρας."
 
-#: src/stel_ui_conf.cpp:312
+#: src/stel_ui_conf.cpp:311
 msgid "Cursor : "
 msgstr "Κέρσορας : "
 
-#: src/stel_ui_conf.cpp:317
+#: src/stel_ui_conf.cpp:316
 msgid "Selected : "
 msgstr "Επιλεγμένο : "
 
-#: src/stel_ui_conf.cpp:322
+#: src/stel_ui_conf.cpp:321
 msgid "Longitude : "
 msgstr "Γεωγραφικό Μήκος : "
 
-#: src/stel_ui_conf.cpp:330
+#: src/stel_ui_conf.cpp:329
 msgid "Latitude : "
 msgstr "Γεωγραφικό Πλάτος : "
 
-#: src/stel_ui_conf.cpp:338
+#: src/stel_ui_conf.cpp:337
 msgid "Altitude : "
 msgstr "Ύψος : "
 
-#: src/stel_ui_conf.cpp:345
+#: src/stel_ui_conf.cpp:344
 msgid "Save location"
 msgstr "Αποθήκευση τοποθεσίας"
 
-#: src/stel_ui_conf.cpp:367
+#: src/stel_ui_conf.cpp:366
 msgid "Projection :"
 msgstr "Προβολή :"
 
-#: src/stel_ui_conf.cpp:386
+#: src/stel_ui_conf.cpp:385
 msgid "Disk Viewport"
 msgstr "Άποψη δίσκου"
 
-#: src/stel_ui_conf.cpp:392
+#: src/stel_ui_conf.cpp:391
 msgid "Screen Resolution :"
 msgstr "Ανάλυση Οθόνης:"
 
-#: src/stel_ui_conf.cpp:396
+#: src/stel_ui_conf.cpp:395
 msgid "Restart program for"
 msgstr "Επανεκίννηση προγράμματος για"
 
-#: src/stel_ui_conf.cpp:397
+#: src/stel_ui_conf.cpp:396
 msgid "change to apply."
 msgstr "αλλάξτε για εφαρμογή."
 
-#: src/stel_ui_conf.cpp:412
+#: src/stel_ui_conf.cpp:411
 msgid "For unlisted screen resolution, edit the file :"
 msgstr "Για μη καταγεγραμμένη ανάλυση οθόνης, διορθώστε το αρχείο:"
 
-#: src/stel_ui_conf.cpp:429
+#: src/stel_ui_conf.cpp:428
 msgid "Choose landscapes:"
 msgstr "Επιλογή τοπίου:"
 
-#: src/stel_ui_conf.cpp:444 src/stel_ui_conf.cpp:920
+#: src/stel_ui_conf.cpp:443 src/stel_ui_conf.cpp:922
 msgid "Author: "
 msgstr "Συγγραφέας "
 
-#: src/stel_ui_conf.cpp:467
+#: src/stel_ui_conf.cpp:466
 msgid "Program Language: "
 msgstr "Γλώσσα Προγράμματος: "
 
-#: src/stel_ui_conf.cpp:483 src/stel_ui_tuiconf.cpp:368
+#: src/stel_ui_conf.cpp:482 src/stel_ui_tuiconf.cpp:367
 msgid "Sky Language: "
 msgstr "Γλώσσα Ουρανού: "
 
-#: src/stel_ui_conf.cpp:501 src/stel_ui_tuiconf.cpp:364
+#: src/stel_ui_conf.cpp:500 src/stel_ui_tuiconf.cpp:363
 msgid "Sky Culture: "
 msgstr "Πολιτισμός Ουρανού: "
 
-#: src/stel_ui_conf.cpp:522
+#: src/stel_ui_conf.cpp:521
 msgid "Language"
 msgstr "Γλώσσα"
 
-#: src/stel_ui_conf.cpp:523
+#: src/stel_ui_conf.cpp:522
 msgid "Date & Time"
 msgstr "Ημέρα & Ώρα"
 
-#: src/stel_ui_conf.cpp:524
+#: src/stel_ui_conf.cpp:523
 msgid "Location"
 msgstr "Τοποθεσία"
 
-#: src/stel_ui_conf.cpp:525
+#: src/stel_ui_conf.cpp:524
 msgid "Landscapes"
 msgstr "Τοπία"
 
-#: src/stel_ui_conf.cpp:526
+#: src/stel_ui_conf.cpp:525
 msgid "Video"
 msgstr "Βίντεο"
 
-#: src/stel_ui_conf.cpp:527
+#: src/stel_ui_conf.cpp:526
 msgid "Rendering"
 msgstr "Σχεδίαση και Διαμόρφωση Εικόνας"
 
-#: src/stel_ui_conf.cpp:659
+#: src/stel_ui_conf.cpp:658
 msgid "Object Search"
 msgstr "Αναζήτηση Αντικειμένου"
 
-#: src/stel_ui_conf.cpp:666
+#: src/stel_ui_conf.cpp:665
 msgid "Search for (eg. Saturn, Polaris, HP6218, Orion, M31):"
 msgstr "Αναζήτηση για (π.χ. Κρόνο, Πολικό, HP6218, Ορίωνα, M31):"
 
-#: src/stel_ui_conf.cpp:684
+#: src/stel_ui_conf.cpp:683
 msgid "GO"
 msgstr "Πήγαινε"
 
-#: src/stel_ui_conf.cpp:815
+#: src/stel_ui_conf.cpp:814
 msgid "Enter observatory name"
 msgstr "Εισάγετε όνομα παρατηρητηρίου"
 
-#: src/stel_ui_conf.cpp:921
+#: src/stel_ui_conf.cpp:923
 msgid "Info: "
 msgstr "Πληροφορίες: "
 
-#: src/stel_ui_conf.cpp:985
+#: src/stel_ui_conf.cpp:988
 msgid ": Normal rate"
 msgstr ": Κανονικός ρυθμός"
 
-#: src/stel_ui_conf.cpp:992
+#: src/stel_ui_conf.cpp:995
 msgid ": Standard Perseids rate"
 msgstr ": Τυπικός ρυθμός Περσίδων"
 
-#: src/stel_ui_conf.cpp:999
+#: src/stel_ui_conf.cpp:1002
 msgid ": Exceptional Leonid rate"
 msgstr ": Ασυνήθης ρυθμός Λεοντίδων"
 
-#: src/stel_ui_conf.cpp:1006
+#: src/stel_ui_conf.cpp:1009
 msgid ": Highest rate ever (1966 Leonids)"
 msgstr ": Υψηλότερος ρυθμός στην ιστορία (1966 Λεοντίδες)"
 
-#: src/stel_ui_conf.cpp:1011
+#: src/stel_ui_conf.cpp:1014
 msgid "Meteor zenith hourly rate"
 msgstr ""
 
-#: src/stel_ui_conf.cpp:1031
+#: src/stel_ui_conf.cpp:1034
 msgid "Current Time Speed is x"
 msgstr "Η Παρούσα Ταχύτητα χρόνου είναι x"
 
-#: src/stel_ui_tuiconf.cpp:268 src/stel_ui_tuiconf.cpp:398
+#: src/stel_ui_tuiconf.cpp:267 src/stel_ui_tuiconf.cpp:397
 msgid "Magnitude Sizing Multiplier: "
 msgstr "Πολλαπλασιαστής μεγέθους οπτικού μεγέθους αστέρα "
 
-#: src/stel_ui_tuiconf.cpp:334
+#: src/stel_ui_tuiconf.cpp:333
 msgid "Set Location "
 msgstr "Καθορισμός Τοποθεσίας: "
 
-#: src/stel_ui_tuiconf.cpp:335
+#: src/stel_ui_tuiconf.cpp:334
 msgid "Set Time "
 msgstr "Καθορισμός Ώρας "
 
-#: src/stel_ui_tuiconf.cpp:336
+#: src/stel_ui_tuiconf.cpp:335
 msgid "General "
 msgstr "Γενικά "
 
-#: src/stel_ui_tuiconf.cpp:337
+#: src/stel_ui_tuiconf.cpp:336
 msgid "Stars "
 msgstr "Αστέρια "
 
-#: src/stel_ui_tuiconf.cpp:338
+#: src/stel_ui_tuiconf.cpp:337
 msgid "Colors "
 msgstr "Χρώματα "
 
-#: src/stel_ui_tuiconf.cpp:339
+#: src/stel_ui_tuiconf.cpp:338
 msgid "Effects "
 msgstr "Εφέ "
 
-#: src/stel_ui_tuiconf.cpp:340
+#: src/stel_ui_tuiconf.cpp:339
 msgid "Scripts "
 msgstr "Σενάριο "
 
-#: src/stel_ui_tuiconf.cpp:341
+#: src/stel_ui_tuiconf.cpp:340
 msgid "Administration "
 msgstr "Διεύθυνση "
 
-#: src/stel_ui_tuiconf.cpp:344
+#: src/stel_ui_tuiconf.cpp:343
 msgid "Latitude: "
 msgstr "Πλάτος: "
 
-#: src/stel_ui_tuiconf.cpp:345
+#: src/stel_ui_tuiconf.cpp:344
 msgid "Longitude: "
 msgstr "Μήκος: "
 
-#: src/stel_ui_tuiconf.cpp:346
+#: src/stel_ui_tuiconf.cpp:345
 msgid "Altitude (m): "
 msgstr "Ύψος (μ): "
 
-#: src/stel_ui_tuiconf.cpp:347
+#: src/stel_ui_tuiconf.cpp:346
 msgid "Solar System Body: "
 msgstr "Σώμα Ηλικού Συστήματος: "
 
-#: src/stel_ui_tuiconf.cpp:352
+#: src/stel_ui_tuiconf.cpp:351
 msgid "Sky Time: "
 msgstr "Ώρα Ουρανού: "
 
-#: src/stel_ui_tuiconf.cpp:353
+#: src/stel_ui_tuiconf.cpp:352
 msgid "Set Time Zone: "
 msgstr "Καθορισμός Ώρας Ζώνης: "
 
-#: src/stel_ui_tuiconf.cpp:354
+#: src/stel_ui_tuiconf.cpp:353
 msgid "Preset Sky Time: "
 msgstr "Προκαθορισμένος Χρόνος Ουρανού: "
 
-#: src/stel_ui_tuiconf.cpp:355
+#: src/stel_ui_tuiconf.cpp:354
 msgid "Sky Time At Start-up: "
 msgstr "Ώρα ουρανού κατά την εκκίνηση: "
 
-#: src/stel_ui_tuiconf.cpp:356
+#: src/stel_ui_tuiconf.cpp:355
 msgid "Actual Time"
 msgstr "Πραγματική 'Ωρα"
 
-#: src/stel_ui_tuiconf.cpp:357
+#: src/stel_ui_tuiconf.cpp:356
 msgid "Preset Time"
 msgstr "Προκαθορισμένη Ώρα"
 
-#: src/stel_ui_tuiconf.cpp:358
+#: src/stel_ui_tuiconf.cpp:357
 msgid "Time Display Format: "
 msgstr "Μορφή Παρουσίασης Ώρας: "
 
-#: src/stel_ui_tuiconf.cpp:359
+#: src/stel_ui_tuiconf.cpp:358
 msgid "Date Display Format: "
 msgstr "Μορφή Παρουσίασης Ημερομηνίας: "
 
-#: src/stel_ui_tuiconf.cpp:371
+#: src/stel_ui_tuiconf.cpp:370
 msgid "Show: "
 msgstr "Παρουσίαση: "
 
-#: src/stel_ui_tuiconf.cpp:371 src/stel_ui_tuiconf.cpp:396 src/s_gui.cpp:2231
+#: src/stel_ui_tuiconf.cpp:370 src/stel_ui_tuiconf.cpp:395 src/s_gui.cpp:2231
 msgid "Yes"
 msgstr "Ναι"
 
-#: src/stel_ui_tuiconf.cpp:371 src/stel_ui_tuiconf.cpp:396 src/s_gui.cpp:2212
+#: src/stel_ui_tuiconf.cpp:370 src/stel_ui_tuiconf.cpp:395 src/s_gui.cpp:2212
 msgid "No"
 msgstr "Όχι"
 
-#: src/stel_ui_tuiconf.cpp:372
+#: src/stel_ui_tuiconf.cpp:371
 msgid "Star Magnitude Multiplier: "
 msgstr "Πολλαπλασιαστής Μεγέθους Αστέρων: "
 
-#: src/stel_ui_tuiconf.cpp:373
+#: src/stel_ui_tuiconf.cpp:372
 msgid "Maximum Magnitude to Label: "
 msgstr "Μέγιστη Απόσταση παρουσίασης Ονομάτων: "
 
-#: src/stel_ui_tuiconf.cpp:374
+#: src/stel_ui_tuiconf.cpp:373
 msgid "Twinkling: "
 msgstr "Αναλαμπές: "
 
-#: src/stel_ui_tuiconf.cpp:377
+#: src/stel_ui_tuiconf.cpp:376
 msgid "Constellation Lines"
 msgstr "Γραμμές Αστερισμών"
 
-#: src/stel_ui_tuiconf.cpp:378
+#: src/stel_ui_tuiconf.cpp:377
 msgid "Constellation Names"
 msgstr "Ονόματα Αστερισμών"
 
-#: src/stel_ui_tuiconf.cpp:379
+#: src/stel_ui_tuiconf.cpp:378
 msgid "Constellation Art Intensity"
 msgstr "Ένταση Καλλιτεχνίας Αστερισμών"
 
-#: src/stel_ui_tuiconf.cpp:380
+#: src/stel_ui_tuiconf.cpp:379
 msgid "Constellation Boundaries"
 msgstr "Όρια Αστερισμών"
 
-#: src/stel_ui_tuiconf.cpp:382
+#: src/stel_ui_tuiconf.cpp:381
 msgid "Planet Names"
 msgstr "Ονόματα Πλανητών"
 
-#: src/stel_ui_tuiconf.cpp:383
+#: src/stel_ui_tuiconf.cpp:382
 msgid "Planet Orbits"
 msgstr "Τροχιές Πλανητών"
 
-#: src/stel_ui_tuiconf.cpp:384
+#: src/stel_ui_tuiconf.cpp:383
 msgid "Planet Trails"
 msgstr "Ίχνη Πλανητών"
 
-#: src/stel_ui_tuiconf.cpp:385
+#: src/stel_ui_tuiconf.cpp:384
 msgid "Meridian Line"
 msgstr "Μεσημβρινός"
 
-#: src/stel_ui_tuiconf.cpp:390
+#: src/stel_ui_tuiconf.cpp:389
 msgid "Nebula Names"
 msgstr "Ονόματα Νεφελωμάτων"
 
-#: src/stel_ui_tuiconf.cpp:391
+#: src/stel_ui_tuiconf.cpp:390
 msgid "Nebula Circles"
 msgstr "Κύκλοι Νεφελωμάτων"
 
-#: src/stel_ui_tuiconf.cpp:395
+#: src/stel_ui_tuiconf.cpp:394
 msgid "Landscape: "
 msgstr "Τοπίο: "
 
-#: src/stel_ui_tuiconf.cpp:396
+#: src/stel_ui_tuiconf.cpp:395
 msgid "Manual zoom: "
 msgstr "Χειροκίνητη εστιάση: "
 
-#: src/stel_ui_tuiconf.cpp:397
+#: src/stel_ui_tuiconf.cpp:396
 msgid "Object Sizing Rule: "
 msgstr "Κανόνας Εστίασης Αντικειμένων: "
 
-#: src/stel_ui_tuiconf.cpp:397
+#: src/stel_ui_tuiconf.cpp:396
 msgid "Point"
 msgstr "Σημείο"
 
-#: src/stel_ui_tuiconf.cpp:397
+#: src/stel_ui_tuiconf.cpp:396
 msgid "Magnitude"
 msgstr "Μέγεθος"
 
-#: src/stel_ui_tuiconf.cpp:399
+#: src/stel_ui_tuiconf.cpp:398
 msgid "Milky Way intensity: "
 msgstr "Φωτεινότητα Γαλαξία: "
 
-#: src/stel_ui_tuiconf.cpp:400
+#: src/stel_ui_tuiconf.cpp:399
 msgid "Maximum Nebula Magnitude to Label: "
 msgstr "Μέγιστη Φωτεινότητα Νεφελωμάτων για ετικέτα "
 
-#: src/stel_ui_tuiconf.cpp:401
+#: src/stel_ui_tuiconf.cpp:400
 msgid "Zoom Duration: "
 msgstr "Διάρκεια Εστίασης: "
 
-#: src/stel_ui_tuiconf.cpp:402
+#: src/stel_ui_tuiconf.cpp:401
 msgid "Cursor Timeout: "
 msgstr "Τέλος χρονικού ορίου Κέρσορα "
 
-#: src/stel_ui_tuiconf.cpp:405
+#: src/stel_ui_tuiconf.cpp:404
 msgid "Local Script: "
 msgstr "Τοπικό Σενάριο "
 
-#: src/stel_ui_tuiconf.cpp:408
+#: src/stel_ui_tuiconf.cpp:407
 msgid "CD/DVD Script: "
 msgstr "Σενάριο CD/DVD "
 
-#: src/stel_ui_tuiconf.cpp:412
+#: src/stel_ui_tuiconf.cpp:411
 msgid "Load Default Configuration: "
 msgstr "Φόρτωση Προεπιλεγμένων Ρυθμίσεων: "
 
-#: src/stel_ui_tuiconf.cpp:413
+#: src/stel_ui_tuiconf.cpp:412
 msgid "Save Current Configuration as Default: "
 msgstr "Αποθήκευση Τρέχουσων Ρυθμίσεων ως Προεπιλεγμένες "
 
-#: src/stel_ui_tuiconf.cpp:414
+#: src/stel_ui_tuiconf.cpp:413
 msgid "Shut Down: "
 msgstr "Τερματισμός: "
 
-#: src/stel_ui_tuiconf.cpp:415
+#: src/stel_ui_tuiconf.cpp:414
 msgid "Update me via Internet: "
 msgstr "Ενημέρωση μέσω Διαδικτύου: "
 
-#: src/stel_ui_tuiconf.cpp:416
+#: src/stel_ui_tuiconf.cpp:415
 msgid "Set UI Locale: "
 msgstr "Ρύθμιση περιβάλλοντος διασύνδεσης χρήστη "
 
-#: src/stel_ui_tuiconf.cpp:534
+#: src/stel_ui_tuiconf.cpp:552
 msgid "Arrow down to load list."
 msgstr "Βέλος προς τα κάτω για να φορτωθεί η λίστα"
 
