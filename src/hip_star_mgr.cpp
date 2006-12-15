@@ -626,21 +626,22 @@ const Vec3f color_table[128] = {
 
 class StarWrapperBase : public StelObjectBase {
 protected:
-  StarWrapperBase(void) : ref_count(0) {}
-  virtual ~StarWrapperBase(void) {}
-  STEL_OBJECT_TYPE get_type(void) const {return STEL_OBJECT_STAR;}
+	StarWrapperBase(void) : ref_count(0) {}
+	virtual ~StarWrapperBase(void) {}
+	STEL_OBJECT_TYPE get_type(void) const {return STEL_OBJECT_STAR;}
 
-  string getEnglishName(void) const {
-    return "";
-  }
-  wstring getNameI18n(void) const = 0;
-  wstring getInfoString(const Navigator *nav) const;
-  wstring getShortInfoString(const Navigator *nav) const
-    {return getInfoString(nav);}
+	string getEnglishName(void) const {
+		return "";
+	}
+	wstring getNameI18n(void) const = 0;
+	wstring getInfoString(const Navigator *nav) const;
+	wstring getShortInfoString(const Navigator *nav) const {
+		return getShortInfoString(nav);
+	}
 private:
-  int ref_count;
-  void retain(void) {assert(ref_count>=0);ref_count++;}
-  void release(void) {assert(ref_count>0);if (--ref_count==0) delete this;}
+	int ref_count;
+	void retain(void) {assert(ref_count>=0);ref_count++;}
+	void release(void) {assert(ref_count>0);if (--ref_count==0) delete this;}
 };
 
 wstring StarWrapperBase::getInfoString(const Navigator *nav) const {
@@ -668,12 +669,11 @@ wstring StarWrapperBase::getInfoString(const Navigator *nav) const {
   az = 3*M_PI - az;  // N is zero, E is 90 degrees
   if(az > M_PI*2) az -= M_PI*2;    
   oss << _("Az/Alt: ") << StelUtils::printAngleDMS(az)
-      << L"/" << StelUtils::printAngleDMS(alt) << endl;
+      << L"/" << StelUtils::printAngleDMS(alt) << L" TEST " << endl;
   oss.precision(2);
 
   return oss.str();
 }
-
 
 static const double d2000 = 2451545.0;
 static double current_JDay = d2000;
@@ -716,6 +716,7 @@ public:
                const SpecialZoneData<Star1> *z,
                const Star1 *s) : StarWrapper<Star1>(a,z,s) {}
   wstring getInfoString(const Navigator *nav) const;
+  wstring getShortInfoString(const Navigator *nav) const;
   string getEnglishName(void) const;
 };
 
@@ -793,6 +794,49 @@ wstring StarWrapper1::getInfoString(const Navigator *nav) const {
   oss.precision(2);
 
   return oss.str();
+}
+
+
+wstring StarWrapper1::getShortInfoString(const Navigator *nav) const {
+	wostringstream oss;
+	if (s->hip) {
+		const wstring commonNameI18 = HipStarMgr::getCommonName(s->hip);
+		const wstring sciName = HipStarMgr::getSciName(s->hip);
+		if (commonNameI18!=L"" || sciName!=L"") {
+			oss << commonNameI18 << (commonNameI18 == L"" ? L"" : L" ");
+			if (commonNameI18!=L"" && sciName!=L"") oss << L"(";
+			oss << wstring(sciName==L"" ? L"" : sciName);
+			if (commonNameI18!=L"" && sciName!=L"") oss << L")";
+			oss << L"  ";
+		}
+		oss << L"HP " << s->hip;
+		if (s->component_ids) {
+			oss << L" "
+				<< convertToComponentIds(s->component_ids).c_str();
+		}
+		oss << L"  ";
+	}
+	
+	oss.setf(ios::fixed);
+	oss.precision(2);
+	oss << _("Magnitude: ") << get_mag(nav);
+	oss << L"  ";
+
+	if (s->plx) {
+		oss.precision(2);
+		oss << _("Distance: ")
+			<< (AU/(SPEED_OF_LIGHT*86400*365.25))
+			/ (s->plx*((0.00001/3600)*(M_PI/180)))
+			<< _(" Light Years") << L"  ";
+	}
+	
+	if (s->sp_int) {
+		oss << _("Spectral Type: ")
+			<< convertToSpectralType(s->sp_int).c_str();
+	}
+	oss.precision(2);
+	
+	return oss.str();
 }
 
 
