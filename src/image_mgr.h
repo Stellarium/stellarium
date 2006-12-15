@@ -24,7 +24,7 @@
 #include <vector>
 #include <string>
 #include "image.h"
-#include "stelmodule.h"
+#include "StelModule.h"
 
 /**
  * Manage images displayed at the request of the command interface (scripts)

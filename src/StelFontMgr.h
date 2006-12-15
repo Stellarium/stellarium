@@ -21,13 +21,14 @@
 
 #include <map>
 #include <string>
-#include "s_font.h"
 
 using namespace std;
 
+class SFont;
+
 //! Manage font for Stellarium. Take into account special font for special language.
 //! It also load fonts and store them in a cache to prevent duplication.
-//! @author Fabien Chéreau <stellarium@free.fr>
+//! @author Fabien Chereau <stellarium@free.fr>
 class StelFontMgr
 {
 public:

@@ -21,9 +21,9 @@
 #define _METEOR_MGR_H_
 
 #include <vector>
-#include "meteor.h"
-#include "stelmodule.h"
+#include "StelModule.h"
 
+class Meteor;
 
 class MeteorMgr : public StelModule
 {

@@ -32,8 +32,6 @@ using namespace std;
 #include "projector.h"
 #include "stelapp.h"
 #include "stel_core.h"
-#include "stelfontmgr.h"
-#include "stellocalemgr.h"
 #include "StelTextureMgr.h"
 
 SolarSystem::SolarSystem()

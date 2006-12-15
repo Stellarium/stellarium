@@ -24,6 +24,7 @@
 #include "meteor_mgr.h"
 #include "stelapp.h"
 #include "stel_core.h"
+#include "meteor.h"
 
 MeteorMgr::MeteorMgr(int zhr, int maxv )
 {

@@ -27,7 +27,7 @@
 #include "projector.h"
 #include "fader.h"
 #include "translator.h"
-#include "stelmodule.h"
+#include "StelModule.h"
 
 class STexture;
 class Navigator;
@@ -142,7 +142,7 @@ private:
 	LinearFader fader;
 };
 
-// Class which manages the displaying of the Milky Way
+
 class Draw
 {
 public:

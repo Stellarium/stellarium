@@ -28,7 +28,7 @@
 #include "stel_utility.h"
 #include "script_mgr.h"
 #include "audio.h"
-#include "stelmodule.h"
+#include "StelModule.h"
 
 using namespace std;
 

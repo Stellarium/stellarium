@@ -17,7 +17,7 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
  
-#include "stelmodulemgr.h"
+#include "StelModuleMgr.h"
 #include "stelapp.h"
 
 #if defined (HAVE_GMODULE) && defined (HAVE_GLIB)

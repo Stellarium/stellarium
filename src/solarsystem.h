@@ -29,7 +29,7 @@
 #include "stellarium.h"
 #include "planet.h"
 #include "stel_object.h"
-#include "stelobjectmgr.h"
+#include "StelObjectMgr.h"
 
 class EllipticalOrbit;
 class LoadingBar;

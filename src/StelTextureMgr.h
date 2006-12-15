@@ -174,7 +174,7 @@ private:
 	// Everything used for the threaded loading
 	friend struct LoadQueueParam;
 	friend int loadTextureThread(void* tparam);
-	SDL_mutex * loadQueueMutex;
+	struct SDL_mutex* loadQueueMutex;
 	std::vector<class LoadQueueParam*> loadQueue;
 	
 	// Define a PNG loader. This implementation supports LUMINANCE, LUMINANCE+ALPHA, RGB, RGBA. 

@@ -21,10 +21,7 @@
 #include "landscape.h"
 #include "stel_atmosphere.h"
 #include "stelapp.h"
-#include "stelmodulemgr.h"
 #include "solarsystem.h"
-#include "stellocalemgr.h"
-#include "stelfontmgr.h"
 #include "stel_core.h"
 
 // Class which manages the cardinal points displaying

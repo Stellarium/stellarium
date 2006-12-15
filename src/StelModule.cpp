@@ -17,7 +17,7 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
  
-#include "stelmodule.h"
+#include "StelModule.h"
 #include "vecmath.h"
 #include "init_parser.h"
 #include "stelapp.h"

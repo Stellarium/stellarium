@@ -40,9 +40,6 @@
 #include "translator.h"
 #include "geodesic_grid.h"
 #include "stelapp.h"
-#include "stelfontmgr.h"
-#include "stellocalemgr.h"
-#include "stelskyculturemgr.h"
 #include "StelTextureMgr.h"
 
 typedef int Int32;
