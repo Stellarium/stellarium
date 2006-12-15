@@ -801,9 +801,16 @@ void StelUI::tui_cb_location_change_planet()
 // Update widgets that don't always match current settings with current settings
 void StelUI::tuiUpdateIndependentWidgets(void) { 
 
+	// Called when open tui menu
+
 	// Since some tui options don't immediately affect actual settings
 	// reset those options to the current values now
 	// (can not do this in tui_update_widgets)
 
 	tui_location_planet->setValue(StelUtils::stringToWstring(core->getObservatory()->getHomePlanetEnglishName()));
+
+	// Reread local script directory (in case new files)
+	tui_scripts_local->replaceItemList(_(TUI_SCRIPT_MSG) + wstring(L"\n") 
+			+ StelUtils::stringToWstring(app->scripts->get_script_list(StelApp::getInstance().getDataFilePath("scripts/"))), 0); 
+
 }
