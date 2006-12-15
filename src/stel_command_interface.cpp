@@ -347,9 +347,9 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 		} else if(args["load"]=="preset") {
 			// set date to preset (or current) date, based on user setup
 			// TODO: should this record as the actual date used?
-			if (stapp->StartupTimeMode=="preset" || stapp->StartupTimeMode=="Preset")
-				stcore->getNavigation()->setJDay(stapp->PresetSkyTime -
-				                stapp->getLocaleMgr().get_GMT_shift(stapp->PresetSkyTime) * JD_HOUR);
+			if (stcore->getNavigation()->getStartupTimeMode()=="preset" || stcore->getNavigation()->getStartupTimeMode()=="Preset")
+				stcore->getNavigation()->setJDay(stcore->getNavigation()->getPresetSkyTime() -
+				                stapp->getLocaleMgr().get_GMT_shift(stcore->getNavigation()->getPresetSkyTime()) * JD_HOUR);
 			else stcore->getNavigation()->setJDay(get_julian_from_sys());
 
 		} else status=0;

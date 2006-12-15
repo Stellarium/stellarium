@@ -65,6 +65,33 @@ void Navigator::init(const InitParser& conf, LoadingBar& lb)
 	}
 	initViewPos = StelUtils::str_to_vec3f(conf.get_str("navigation:init_view_pos"));
 	setLocalVision(initViewPos);
+	
+	// Navigation section
+	PresetSkyTime 		= conf.get_double ("navigation","preset_sky_time",2451545.);
+	StartupTimeMode 	= conf.get_str("navigation:startup_time_mode");	// Can be "now" or "preset"
+	if (StartupTimeMode=="preset" || StartupTimeMode=="Preset")
+		setJDay(PresetSkyTime - get_GMT_shift_from_system(PresetSkyTime,0) * JD_HOUR);
+	else setTimeNow();
+}
+
+//! Set stellarium time to current real world time
+void Navigator::setTimeNow()
+{
+	setJDay(get_julian_from_sys());
+}
+
+//! Get whether the current stellarium time is the real world time
+bool Navigator::getIsTimeNow(void) const
+{
+	// cache last time to prevent to much slow system call
+	static double lastJD = getJDay();
+	static bool previousResult = (fabs(getJDay()-get_julian_from_sys())<JD_SECOND);
+	if (fabs(lastJD-getJDay())>JD_SECOND/4)
+	{
+		lastJD = getJDay();
+		previousResult = (fabs(getJDay()-get_julian_from_sys())<JD_SECOND);
+	}
+	return previousResult;
 }
 
 ////////////////////////////////////////////////////////////////////////////////

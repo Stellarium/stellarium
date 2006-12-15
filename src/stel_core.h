@@ -71,10 +71,6 @@ public:
 
 	///////////////////////////////////////////////////////////////////////////////////////
 	// Navigation
-	//! Set stellarium time to current real world time
-	void setTimeNow();
-	//! Get wether the current stellarium time is the real world time
-	bool getIsTimeNow(void) const;
 
 	//! Set object tracking
 	void setFlagTracking(bool b);
