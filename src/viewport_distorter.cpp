@@ -23,7 +23,6 @@
 #include "spheric_mirror_calculator.h"
 #include "init_parser.h"
 #include "projector.h"
-#include "stelmodulemgr.h"
 
 #include "SDL_opengl.h"
 

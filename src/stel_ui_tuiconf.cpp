@@ -24,10 +24,6 @@
 #include <iomanip>
 #include <string>
 #include "stel_ui.h"
-#include "stelfontmgr.h"
-#include "stellocalemgr.h"
-#include "stelskyculturemgr.h"
-#include "stelmodulemgr.h"
 #include "hip_star_mgr.h"
 #include "constellation_mgr.h"
 #include "solarsystem.h"

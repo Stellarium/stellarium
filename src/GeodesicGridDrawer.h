@@ -21,7 +21,7 @@
 #define GEODESICGRIDDRAWER_H_
 
 #include "geodesic_grid.h"
-#include "stelmodule.h"
+#include "StelModule.h"
 
 class SFont;
 

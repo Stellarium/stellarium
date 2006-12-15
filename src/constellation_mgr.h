@@ -26,7 +26,7 @@
 #include "fader.h"
 #include "loadingbar.h"
 #include "translator.h"
-#include "stelobjectmgr.h"
+#include "StelObjectMgr.h"
 
 class ToneReproductor;
 class HipStarMgr;

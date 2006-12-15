@@ -20,7 +20,7 @@
 #ifndef LANDSCAPEMGR_H_
 #define LANDSCAPEMGR_H_
 
-#include "stelmodule.h"
+#include "StelModule.h"
 #include "stel_utility.h"
 
 class Landscape;

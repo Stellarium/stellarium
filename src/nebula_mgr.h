@@ -24,7 +24,7 @@
 #include "stel_object.h"
 #include "fader.h"
 #include "grid.h"
-#include "stelobjectmgr.h"
+#include "StelObjectMgr.h"
 
 using namespace std;
 
