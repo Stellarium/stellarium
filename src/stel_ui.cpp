@@ -23,7 +23,7 @@
 #include <iomanip>
 #include <algorithm>
 #include "stel_ui.h"
-#include "stelapp.h"
+#include "StelApp.h"
 #include "stel_core.h"
 #include "constellation_mgr.h"
 #include "solarsystem.h"

@@ -22,7 +22,7 @@
 #include <fstream>
 #include <algorithm>
 
-#include "stelapp.h"
+#include "StelApp.h"
 #include "nebula_mgr.h"
 #include "nebula.h"
 #include "STexture.h"

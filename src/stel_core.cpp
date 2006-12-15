@@ -22,7 +22,7 @@
 #include <algorithm>
 
 #include "stel_core.h"
-#include "stelapp.h"
+#include "StelApp.h"
 #include "stel_utility.h"
 #include "geodesic_grid.h"
 #include "hip_star_mgr.h"

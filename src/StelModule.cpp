@@ -20,7 +20,7 @@
 #include "StelModule.h"
 #include "vecmath.h"
 #include "init_parser.h"
-#include "stelapp.h"
+#include "StelApp.h"
 
 /*************************************************************************
  Return the full path to a data file belonging to the module

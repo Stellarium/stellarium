@@ -24,7 +24,7 @@
 
 #include "stel_command_interface.h"
 #include "stel_core.h"
-#include "stelapp.h"
+#include "StelApp.h"
 #include "image.h"
 #include "stel_ui.h"
 #include "hip_star_mgr.h"

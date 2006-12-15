@@ -19,7 +19,7 @@
  */
 
 #include "viewport_distorter.h"
-#include "stelapp.h"
+#include "StelApp.h"
 #include "spheric_mirror_calculator.h"
 #include "init_parser.h"
 #include "projector.h"
