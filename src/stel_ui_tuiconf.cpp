@@ -28,7 +28,7 @@
 #include "constellation_mgr.h"
 #include "solarsystem.h"
 #include "nebula_mgr.h"
-#include "stelapp.h"
+#include "StelApp.h"
 #include "stel_core.h"
 #include "script_mgr.h"
 #include "stel_command_interface.h"

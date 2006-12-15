@@ -30,7 +30,7 @@ using namespace std;
 #include "init_parser.h"
 #include "navigator.h"
 #include "projector.h"
-#include "stelapp.h"
+#include "StelApp.h"
 #include "stel_core.h"
 #include "StelTextureMgr.h"
 

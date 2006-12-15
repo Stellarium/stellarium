@@ -21,7 +21,7 @@
 #include <sstream>
 #include <iomanip>
 
-#include "stelapp.h"
+#include "StelApp.h"
 #include "STexture.h"
 #include "planet.h"
 #include "navigator.h"

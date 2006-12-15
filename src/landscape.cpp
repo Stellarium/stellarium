@@ -20,7 +20,7 @@
 #include "landscape.h"
 #include "init_parser.h"
 #include "STexture.h"
-#include "stelapp.h"
+#include "StelApp.h"
 #include "StelTextureMgr.h"
 
 #include <cassert>

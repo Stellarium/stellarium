@@ -22,7 +22,7 @@
 #include <string>
 #include <vector>
 
-#include "stelapp.h"
+#include "StelApp.h"
 extern "C" {
 #include <jpeglib.h>
 }

@@ -18,7 +18,7 @@
  */
  
 #include "StelModuleMgr.h"
-#include "stelapp.h"
+#include "StelApp.h"
 
 #if defined (HAVE_GMODULE) && defined (HAVE_GLIB)
  #include <glib.h>

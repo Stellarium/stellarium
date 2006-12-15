@@ -25,7 +25,7 @@
 #include "s_font.h"
 #include "navigator.h"
 #include "stel_utility.h"
-#include "stelapp.h"
+#include "StelApp.h"
 #include "StelTextureMgr.h"
 
 STexture * Nebula::tex_circle = NULL;
