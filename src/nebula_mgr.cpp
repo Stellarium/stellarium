@@ -23,8 +23,6 @@
 #include <algorithm>
 
 #include "stelapp.h"
-#include "stelfontmgr.h"
-#include "stellocalemgr.h"
 #include "nebula_mgr.h"
 #include "nebula.h"
 #include "STexture.h"

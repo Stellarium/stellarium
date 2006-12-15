@@ -17,9 +17,9 @@ stellarium_SOURCES = projector.cpp projector.h stereographic_projector.cpp \
 	audio.cpp audio.h command_interface.cpp command_interface.h \
 	stel_command_interface.cpp stel_command_interface.h stel_core.cpp stel_core.h stellarium.h \
 	stel_ui_conf.cpp stel_ui.cpp stel_ui.h stel_ui_tuiconf.cpp s_tui.cpp s_tui.h \
-	tone_reproductor.cpp tone_reproductor.h translations.h stelobjectmgr.cpp stelmodule.cpp \
-	stelmodule.h stelmodulemgr.cpp stelmodulemgr.h stelobjectmgr.h stelfontmgr.cpp \
-	stellocalemgr.cpp stelskyculturemgr.cpp GeodesicGridDrawer.h GeodesicGridDrawer.cpp \
+	tone_reproductor.cpp tone_reproductor.h translations.h StelObjectMgr.h StelObjectMgr.cpp \
+	StelModule.h StelModule.cpp StelModuleMgr.cpp StelModuleMgr.h StelFontMgr.h StelFontMgr.cpp \
+	StelLocaleMgr.h StelLocaleMgr.cpp StelSkyCultureMgr.h StelSkyCultureMgr.cpp GeodesicGridDrawer.h GeodesicGridDrawer.cpp \
 	StelTextureMgr.h StelTextureMgr.cpp AstroImage.h AstroImage.cpp LandscapeMgr.h LandscapeMgr.cpp
 
 stellarium_LDADD = stelutils/iniparser/libiniparser.a \
@@ -30,5 +30,4 @@ planetsephems/libplanetsephems.a \
 INCLUDES = -I$(top_srcdir)/src/planetsephems -I$(top_srcdir)/src/stelutils -I$(top_srcdir)/intl
 
 SUBDIRS = planetsephems stelutils
-noinst_HEADERS = stelobjectmgr.h stelfontmgr.h stellocalemgr.h \
-	stelskyculturemgr.h
+noinst_HEADERS = 

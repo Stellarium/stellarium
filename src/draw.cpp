@@ -23,8 +23,6 @@
 #include "navigator.h"
 #include "planet.h"
 #include "stelapp.h"
-#include "stelfontmgr.h"
-#include "stellocalemgr.h"
 #include "StelTextureMgr.h"
 
 // rms added color as parameter

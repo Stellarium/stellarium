@@ -20,10 +20,10 @@
 #include <iostream>
 #include <fstream>
 #include <dirent.h>
-#include "stelskyculturemgr.h"
+#include <cassert>
 #include "translator.h"
 #include "init_parser.h"
-#include <cassert>
+
 #include "stelapp.h"
 
 StelSkyCultureMgr::StelSkyCultureMgr(const string& cultureDirPath)

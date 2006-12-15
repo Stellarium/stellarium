@@ -20,7 +20,7 @@
 #ifndef STELOBJECTMGR_H
 #define STELOBJECTMGR_H
 
-#include "stelmodule.h"
+#include "StelModule.h"
 #include "stel_object.h"
 #include "translator.h"
 

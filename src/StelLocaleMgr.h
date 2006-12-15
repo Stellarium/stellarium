@@ -28,10 +28,8 @@ using namespace std;
 // Predeclaration of some classes
 class InitParser;
 
-/**
-	Manage i18n operation such as messages translations and date/time localization.
-	@author Fabien Chereau
-*/
+//!	Manage i18n operation such as messages translations and date/time localization.
+//! @author Fabien Chereau
 class StelLocaleMgr{
 public:
     StelLocaleMgr();
@@ -92,8 +90,8 @@ public:
 	enum S_TZ_FORMAT
 	{
 		S_TZ_CUSTOM,
-			S_TZ_GMT_SHIFT,
-			S_TZ_SYSTEM_DEFAULT
+		S_TZ_GMT_SHIFT,
+		S_TZ_SYSTEM_DEFAULT
 	};
 	
 	//! Return the current time shift at observator time zone with respect to GMT time
