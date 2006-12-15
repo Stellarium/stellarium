@@ -281,6 +281,22 @@ void StelApp::update(int delta_time)
 //! Main drawinf function called at each frame
 double StelApp::draw(int delta_time)
 {
+
+    // clear areas not redrawn by main viewport (i.e. fisheye square viewport)
+	// (because ui can draw outside the main viewport)
+    glDisable(GL_BLEND);
+	glColor3f(0.f,0.f,0.f);
+	set2DfullscreenProjection();
+	glBegin(GL_QUADS);
+    {
+        glVertex2f(0,screenH);
+        glVertex2f(screenW,screenH);
+        glVertex2f(screenW,0);
+		glVertex2f(0,0);
+	}
+	glEnd();
+	restoreFrom2DfullscreenProjection();
+
 	// Render all the main objects of stellarium
 	double squaredDistance = core->draw(delta_time);
 
