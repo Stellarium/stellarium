@@ -87,6 +87,9 @@ void check_command_line(int argc, char **argv)
 // Set the data, textures, and config directories in core.global : test the default
 // installation dir and try to find the files somewhere else if not found there
 // This enable to launch stellarium from the local directory without installing it
+
+#define CHECK_FILE "data/ssystem.ini"
+
 void setDirectories(const char* executableName)
 {
 #if !defined(MACOSX) && !defined(XCODE)
@@ -97,14 +100,14 @@ void setDirectories(const char* executableName)
 #if !defined(MACOSX) || ( defined(MACOSX) && !defined(XCODE) )
 	// Check the presence of a file in possible data directories and set the
 	// dataRoot string if the directory was found.
-	tempFile = fopen((string(CONFIG_DATA_DIR) + "/data/hipparcos.fab").c_str(),"r");
+	tempFile = fopen((string(CONFIG_DATA_DIR) + "/"CHECK_FILE).c_str(),"r");
 	if (tempFile)
 	{
 		DATA_ROOT = string(CONFIG_DATA_DIR);
 	}
 	else
 	{
-		tempFile = fopen("./data/hipparcos.fab","r");
+		tempFile = fopen("./"CHECK_FILE,"r");
 		if (tempFile)
 		{
 			DATA_ROOT = ".";
@@ -112,7 +115,7 @@ void setDirectories(const char* executableName)
 		}
 		else
 		{
-			tempFile = fopen("../data/hipparcos.fab","r");
+			tempFile = fopen("../"CHECK_FILE,"r");
 			if (tempFile)
 			{
 				DATA_ROOT = "..";
