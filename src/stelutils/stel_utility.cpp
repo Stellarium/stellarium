@@ -37,6 +37,7 @@
 #include "stel_utility.h"
 #include "translator.h"
 #include "vecmath.h"
+#include "SDL_opengl.h"
 
 namespace StelUtils {
 
@@ -760,8 +761,6 @@ wstring get_time_zone_name_from_system(double JD)
 	return StelUtils::stringToWstring(timez);
 }
 
-
-
 // Return the time in ISO 8601 format that is : %Y-%m-%d %H:%M:%S
 string get_ISO8601_time_UTC(double JD)
 {
@@ -773,3 +772,14 @@ string get_ISO8601_time_UTC(double JD)
 	return isotime;
 }
 
+// Draw a point... (used for tests)
+void Draw::drawPoint(float X,float Y,float Z)
+{       
+	glColor3f(0.8, 1.0, 0.8);
+	glDisable(GL_TEXTURE_2D);
+	//glEnable(GL_BLEND);
+	glPointSize(20.);
+	glBegin(GL_POINTS);
+		glVertex3f(X,Y,Z);
+	glEnd();
+}
