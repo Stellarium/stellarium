@@ -292,17 +292,11 @@ double StelCore::draw(int delta_time)
 	// Init viewport to current projector values
 	projection->applyViewport();
 
-	// Set openGL drawings in equatorial coordinates
-	navigation->switchToEarthEquatorial();
-
-	glBlendFunc(GL_ONE, GL_ONE);
-
 	// Draw the milky way.
 	milky_way->draw(projection, navigation, tone_converter);
 
 	// Draw all the constellations
 	asterisms->draw(projection, navigation, tone_converter);
-
 
 	const Vec4i &v(projection->getViewport());
 	Vec3d e0,e1,e2,e3;
@@ -324,6 +318,7 @@ double StelCore::draw(int delta_time)
 	// if (max_search_level < h) max_search_level = h;
 	geodesic_search_result->search(e0,e1,e2,e3,max_search_level);
 
+	// Draw all external modules
 	StelModuleMgr& mmgr = StelApp::getInstance().getModuleMgr();
 	for (StelModuleMgr::Iterator iter=mmgr.begin();iter!=mmgr.end();++iter)
 	{
@@ -349,8 +344,6 @@ double StelCore::draw(int delta_time)
 	// FC: Why? The pointer should be drawn over everthing else I think
 	if (selected_object && object_pointer_visibility)
 		selected_object.drawPointer(delta_time, projection, navigation);
-	// Set openGL drawings in local coordinates i.e. generally altazimuthal coordinates
-	navigation->switchToLocal();
 
 	// Upade meteors
 	meteors->update(delta_time);
