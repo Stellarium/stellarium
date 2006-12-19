@@ -1,29 +1,87 @@
-/*
- * Stellarium
- * Copyright (C) 2002 Fabien Chereau
- *
- * This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU General Public License
- * as published by the Free Software Foundation; either version 2
- * of the License, or (at your option) any later version.
- * 
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
- */
+#include "GridLinesMgr.h"
 
-#include "draw.h"
-#include "STexture.h"
-#include "stel_utility.h"
-#include "navigator.h"
-#include "planet.h"
 #include "StelApp.h"
-#include "StelTextureMgr.h"
+#include "navigator.h"
+#include "translator.h"
+#include "projector.h"
+#include "loadingbar.h"
+#include "fader.h"
+#include "planet.h"
+
+// Class which manages a grid to display in the sky
+class SkyGrid
+{
+public:
+	enum SKY_GRID_TYPE
+	{
+		EQUATORIAL,
+		ALTAZIMUTAL
+	};
+	// Create and precompute positions of a SkyGrid
+	SkyGrid(SKY_GRID_TYPE grid_type = EQUATORIAL, unsigned int _nb_meridian = 24, unsigned int _nb_parallel = 17,
+	 double _radius = 1., unsigned int _nb_alt_segment = 18, unsigned int _nb_azi_segment = 50);
+    virtual ~SkyGrid();
+	void draw(const Projector* prj) const;
+	void setFontSize(double newFontSize);
+	void setColor(const Vec3f& c) {color = c;}
+	const Vec3f& getColor() {return color;}
+	void update(double deltaTime) {fader.update((int)(deltaTime*1000));}
+	void set_fade_duration(float duration) {fader.set_duration((int)(duration*1000.f));}
+	void setFlagshow(bool b){fader = b;}
+	bool getFlagshow(void) const {return fader;}
+	void set_top_transparancy(bool b) { transparent_top= b; }
+private:
+	unsigned int nb_meridian;
+	unsigned int nb_parallel;
+	double radius;
+	unsigned int nb_alt_segment;
+	unsigned int nb_azi_segment;
+	bool transparent_top;
+	Vec3f color;
+	Vec3f** alt_points;
+	Vec3f** azi_points;
+	bool (Projector::*proj_func)(const Vec3d&, Vec3d&) const;
+	double fontSize;
+	SFont& font;
+	SKY_GRID_TYPE gtype;
+	LinearFader fader;
+};
+
+
+// Class which manages a line to display around the sky like the ecliptic line
+class SkyLine
+{
+public:
+	enum SKY_LINE_TYPE
+	{
+		EQUATOR,
+		ECLIPTIC,
+		LOCAL,
+		MERIDIAN
+	};
+	// Create and precompute positions of a SkyGrid
+	SkyLine(SKY_LINE_TYPE _line_type = EQUATOR, double _radius = 1., unsigned int _nb_segment = 48);
+    virtual ~SkyLine();
+	void draw(const Projector *prj,const Navigator *nav) const;
+	void setColor(const Vec3f& c) {color = c;}
+	const Vec3f& getColor() {return color;}
+	void update(double deltaTime) {fader.update((int)(deltaTime*1000));}
+	void set_fade_duration(float duration) {fader.set_duration((int)(duration*1000.f));}
+	void setFlagshow(bool b){fader = b;}
+	bool getFlagshow(void) const {return fader;}
+	void setFontSize(double newSize);
+private:
+	double radius;
+	unsigned int nb_segment;
+	SKY_LINE_TYPE line_type;
+	Vec3f color;
+	Vec3f* points;
+	bool (Projector::*proj_func)(const Vec3d&, Vec3d&) const;
+	LinearFader fader;
+	double fontSize;
+	SFont& font;
+};
+
 
 // rms added color as parameter
 SkyGrid::SkyGrid(SKY_GRID_TYPE grid_type, unsigned int _nb_meridian, unsigned int _nb_parallel, double _radius,
@@ -468,35 +526,6 @@ void SkyLine::draw(const Projector *prj,const Navigator *nav) const
 
 			}
 
-			// Draw months on ecliptic
-			/*
-			if(line_type == ECLIPTIC && (i+3) % 4 == 0) {
-
-				const double d = sqrt(dq);
-				  
-				angle = acos((pt1[1]-pt2[1])/d);
-				if( pt1[0] < pt2[0] ) {
-					angle *= -1;
-				}
-
-				// draw text label
-				std::ostringstream oss;	
-
-				oss << (i+3)/4;
-
-				glPushMatrix();
-				glTranslatef(pt2[0],pt2[1],0);
-				glRotatef(-90+angle*180./M_PI,0,0,-1);
-				
-				glEnable(GL_TEXTURE_2D);
-
-				font.print(0,-2,oss.str());
-				glPopMatrix();
-				glDisable(GL_TEXTURE_2D);
-
-			}
-			*/
-
 		  }
 
 		}
@@ -506,68 +535,91 @@ void SkyLine::draw(const Projector *prj,const Navigator *nav) const
 }
 
 
-
-// Class which manages the displaying of the Milky Way
-MilkyWay::MilkyWay() : radius(1.f), color(1.f, 1.f, 1.f)
+GridLinesMgr::GridLinesMgr()
 {
-	tex = NULL;
+	equ_grid = new SkyGrid(SkyGrid::EQUATORIAL);
+	azi_grid = new SkyGrid(SkyGrid::ALTAZIMUTAL);
+	equator_line = new SkyLine(SkyLine::EQUATOR);
+	ecliptic_line = new SkyLine(SkyLine::ECLIPTIC);
+	meridian_line = new SkyLine(SkyLine::MERIDIAN, 1, 36);
 }
 
-MilkyWay::~MilkyWay()
+GridLinesMgr::~GridLinesMgr()
 {
-	if (tex) delete tex;
-	tex = NULL;
+	delete equ_grid;
+	delete azi_grid;
+	delete equator_line;
+	delete ecliptic_line;
+	delete meridian_line;
 }
 
-void MilkyWay::init(const InitParser& conf, LoadingBar& lb)
+void GridLinesMgr::init(const InitParser& conf, LoadingBar& lb)
 {
-	setTexture("milkyway.png");
-	setFlagShow(conf.get_boolean("astro:flag_milky_way"));
-	setIntensity(conf.get_double("astro","milky_way_intensity",1.));
+	setFlagAzimutalGrid(conf.get_boolean("viewing:flag_azimutal_grid"));
+	setFlagEquatorGrid(conf.get_boolean("viewing:flag_equatorial_grid"));
+	setFlagEquatorLine(conf.get_boolean("viewing:flag_equator_line"));
+	setFlagEclipticLine(conf.get_boolean("viewing:flag_ecliptic_line"));
+	setFlagMeridianLine(conf.get_boolean("viewing:flag_meridian_line"));
+}	
+	
+void GridLinesMgr::update(double deltaTime)
+{
+	// Update faders
+	equ_grid->update(deltaTime);
+	azi_grid->update(deltaTime);
+	equator_line->update(deltaTime);
+	ecliptic_line->update(deltaTime);
+	meridian_line->update(deltaTime);
 }
 
-void MilkyWay::setTexture(const string& tex_file)
+double GridLinesMgr::draw(Projector *prj, const Navigator *nav, ToneReproductor *eye)
 {
-	if (tex) delete tex;
-	StelApp::getInstance().getTextureManager().setDefaultParams();
-	tex = &StelApp::getInstance().getTextureManager().createTexture(tex_file);
-
-	// big performance improvement to cache this
-	tex_avg_luminance = tex->getAverageLuminance();
-}
-
-
-double MilkyWay::draw(Projector *prj, const Navigator *nav, ToneReproductor *eye)
-{
-	assert(tex);	// A texture must be loaded before calling this
-	// Scotopic color = 0.25, 0.25 in xyY mode. Global stars luminance ~= 0.001 cd/m^2
-	Vec3f c = Vec3f(0.25f*fader.getInterstate(), 0.25f*fader.getInterstate(),
-                    intensity*0.002f*fader.getInterstate()/tex_avg_luminance);
-	eye->xyY_to_RGB(c);
-	glColor3fv(c);
-	glEnable(GL_CULL_FACE);
-	glEnable(GL_TEXTURE_2D);
-	glDisable(GL_BLEND);
-	tex->bind();
-
-	prj->sSphere(radius,1.0,20,20,
-		     nav->get_j2000_to_eye_mat()*
-		     Mat4d::xrotation(M_PI/180*23)*
-		     Mat4d::yrotation(M_PI/180*120)*
-		     Mat4d::zrotation(M_PI/180*7), 1);
-
-	glDisable(GL_CULL_FACE);
+	// Draw the equatorial grid
+	equ_grid->draw(prj);
+	// Draw the altazimutal grid
+	azi_grid->draw(prj);
+	// Draw the celestial equator line
+	equator_line->draw(prj,nav);
+	// Draw the ecliptic line
+	ecliptic_line->draw(prj,nav);
+	// Draw the meridian line
+	meridian_line->draw(prj,nav);
 	return 0.;
 }
 
-// Draw a point... (used for tests)
-void Draw::drawPoint(float X,float Y,float Z)
-{       
-	glColor3f(0.8, 1.0, 0.8);
-	glDisable(GL_TEXTURE_2D);
-	//glEnable(GL_BLEND);
-	glPointSize(20.);
-	glBegin(GL_POINTS);
-		glVertex3f(X,Y,Z);
-	glEnd();
-}
+//! Set flag for displaying Azimutal Grid
+void GridLinesMgr::setFlagAzimutalGrid(bool b) {azi_grid->setFlagshow(b);}
+//! Get flag for displaying Azimutal Grid
+bool GridLinesMgr::getFlagAzimutalGrid(void) const {return azi_grid->getFlagshow();}
+Vec3f GridLinesMgr::getColorAzimutalGrid(void) const {return azi_grid->getColor();}
+
+//! Set flag for displaying Equatorial Grid
+void GridLinesMgr::setFlagEquatorGrid(bool b) {equ_grid->setFlagshow(b);}
+//! Get flag for displaying Equatorial Grid
+bool GridLinesMgr::getFlagEquatorGrid(void) const {return equ_grid->getFlagshow();}
+Vec3f GridLinesMgr::getColorEquatorGrid(void) const {return equ_grid->getColor();}
+
+//! Set flag for displaying Equatorial Line
+void GridLinesMgr::setFlagEquatorLine(bool b) {equator_line->setFlagshow(b);}
+//! Get flag for displaying Equatorial Line
+bool GridLinesMgr::getFlagEquatorLine(void) const {return equator_line->getFlagshow();}
+Vec3f GridLinesMgr::getColorEquatorLine(void) const {return equator_line->getColor();}
+
+//! Set flag for displaying Ecliptic Line
+void GridLinesMgr::setFlagEclipticLine(bool b) {ecliptic_line->setFlagshow(b);}
+//! Get flag for displaying Ecliptic Line
+bool GridLinesMgr::getFlagEclipticLine(void) const {return ecliptic_line->getFlagshow();}
+Vec3f GridLinesMgr::getColorEclipticLine(void) const {return ecliptic_line->getColor();}
+
+
+//! Set flag for displaying Meridian Line
+void GridLinesMgr::setFlagMeridianLine(bool b) {meridian_line->setFlagshow(b);}
+//! Get flag for displaying Meridian Line
+bool GridLinesMgr::getFlagMeridianLine(void) const {return meridian_line->getFlagshow();}
+Vec3f GridLinesMgr::getColorMeridianLine(void) const {return meridian_line->getColor();}
+
+void GridLinesMgr::setColorAzimutalGrid(const Vec3f& v) { azi_grid->setColor(v);}
+void GridLinesMgr::setColorEquatorGrid(const Vec3f& v) { equ_grid->setColor(v);}
+void GridLinesMgr::setColorEquatorLine(const Vec3f& v) { equator_line->setColor(v);}
+void GridLinesMgr::setColorEclipticLine(const Vec3f& v) { ecliptic_line->setColor(v);}
+void GridLinesMgr::setColorMeridianLine(const Vec3f& v) { meridian_line->setColor(v);}

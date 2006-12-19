@@ -33,6 +33,8 @@
 #include "script_mgr.h"
 #include "stel_command_interface.h"
 #include "LandscapeMgr.h"
+#include "GridLinesMgr.h"
+#include "MilkyWay.h"
 
 // Draw simple gravity text ui.
 void StelUI::draw_gravity_ui(void)
@@ -486,6 +488,7 @@ void StelUI::tui_update_widgets(void)
 	SolarSystem* ssmgr = (SolarSystem*)StelApp::getInstance().getModuleMgr().getModule("ssystem");
 	MilkyWay* mw = (MilkyWay*)StelApp::getInstance().getModuleMgr().getModule("milkyway");
 	LandscapeMgr* lmgr = (LandscapeMgr*)StelApp::getInstance().getModuleMgr().getModule("landscape");
+	GridLinesMgr* grlmgr = (GridLinesMgr*)StelApp::getInstance().getModuleMgr().getModule("gridlines");
 	
 	// 1. Location
 	tui_location_latitude->setValue(core->getObservatory()->get_latitude());
@@ -520,11 +523,11 @@ void StelUI::tui_update_widgets(void)
 	tui_colors_planet_names_color->setVector(ssmgr->getNamesColor());
 	tui_colors_planet_orbits_color->setVector(ssmgr->getOrbitsColor());
 	tui_colors_object_trails_color->setVector(ssmgr->getTrailsColor());
-	tui_colors_meridian_color->setVector(core->getColorMeridianLine());
-	tui_colors_azimuthal_color->setVector(core->getColorAzimutalGrid());
-	tui_colors_equatorial_color->setVector(core->getColorEquatorGrid());
-	tui_colors_equator_color->setVector(core->getColorEquatorLine());
-	tui_colors_ecliptic_color->setVector(core->getColorEclipticLine());
+	tui_colors_meridian_color->setVector(grlmgr->getColorMeridianLine());
+	tui_colors_azimuthal_color->setVector(grlmgr->getColorAzimutalGrid());
+	tui_colors_equatorial_color->setVector(grlmgr->getColorEquatorGrid());
+	tui_colors_equator_color->setVector(grlmgr->getColorEquatorLine());
+	tui_colors_ecliptic_color->setVector(grlmgr->getColorEclipticLine());
 	tui_colors_nebula_label_color->setVector(nmgr->getNamesColor());
 	tui_colors_nebula_circle_color->setVector(nmgr->getCirclesColor());
 
@@ -762,6 +765,7 @@ void StelUI::tui_cb_change_color()
 	NebulaMgr* nmgr = (NebulaMgr*)StelApp::getInstance().getModuleMgr().getModule("nebulas");
 	SolarSystem* ssmgr = (SolarSystem*)StelApp::getInstance().getModuleMgr().getModule("ssystem");
 	LandscapeMgr* lmgr = (LandscapeMgr*)StelApp::getInstance().getModuleMgr().getModule("landscape");
+	GridLinesMgr* grlmgr = (GridLinesMgr*)StelApp::getInstance().getModuleMgr().getModule("gridlines");
 	
 	cmgr->setLinesColor( tui_colors_const_line_color->getVector() );
 	cmgr->setNamesColor( tui_colors_const_label_color->getVector() );
@@ -773,11 +777,11 @@ void StelUI::tui_cb_change_color()
 	ssmgr->setOrbitsColor(tui_colors_planet_orbits_color->getVector() );
 	ssmgr->setNamesColor(tui_colors_planet_names_color->getVector() );
 	ssmgr->setTrailsColor(tui_colors_object_trails_color->getVector() );
-	core->setColorAzimutalGrid(tui_colors_azimuthal_color->getVector() );
-	core->setColorEquatorGrid(tui_colors_equatorial_color->getVector() );
-	core->setColorEquatorLine(tui_colors_equator_color->getVector() );
-	core->setColorEclipticLine(tui_colors_ecliptic_color->getVector() );
-	core->setColorMeridianLine(tui_colors_meridian_color->getVector() );
+	grlmgr->setColorAzimutalGrid(tui_colors_azimuthal_color->getVector() );
+	grlmgr->setColorEquatorGrid(tui_colors_equatorial_color->getVector() );
+	grlmgr->setColorEquatorLine(tui_colors_equator_color->getVector() );
+	grlmgr->setColorEclipticLine(tui_colors_ecliptic_color->getVector() );
+	grlmgr->setColorMeridianLine(tui_colors_meridian_color->getVector() );
 	
 	nmgr->setNamesColor(tui_colors_nebula_label_color->getVector() );
 	nmgr->setCirclesColor(tui_colors_nebula_circle_color->getVector() );
@@ -818,6 +822,7 @@ void StelUI::saveCurrentConfig(const string& confFile)
 	StelSkyCultureMgr* skyCultureMgr = &StelApp::getInstance().getSkyCultureMgr();
 	StelLocaleMgr* localeMgr = &StelApp::getInstance().getLocaleMgr();
 	StelModuleMgr* moduleMgr = &StelApp::getInstance().getModuleMgr();
+	GridLinesMgr* grlmgr = (GridLinesMgr*)StelApp::getInstance().getModuleMgr().getModule("gridlines");
 	
 	cout << "Saving configuration file " << confFile << " ..." << endl;
 	InitParser conf;
@@ -861,12 +866,12 @@ void StelUI::saveCurrentConfig(const string& confFile)
 	SolarSystem* ssmgr = (SolarSystem*)moduleMgr->getModule("ssystem");
 	LandscapeMgr* lmgr = (LandscapeMgr*)moduleMgr->getModule("landscape");
 	conf.set_double("viewing:moon_scale", ssmgr->getMoonScale());
-	conf.set_boolean("viewing:flag_equatorial_grid", core->getFlagEquatorGrid());
-	conf.set_boolean("viewing:flag_azimutal_grid", core->getFlagAzimutalGrid());
-	conf.set_boolean("viewing:flag_equator_line", core->getFlagEquatorLine());
-	conf.set_boolean("viewing:flag_ecliptic_line", core->getFlagEclipticLine());
+	conf.set_boolean("viewing:flag_equatorial_grid", grlmgr->getFlagEquatorGrid());
+	conf.set_boolean("viewing:flag_azimutal_grid", grlmgr->getFlagAzimutalGrid());
+	conf.set_boolean("viewing:flag_equator_line", grlmgr->getFlagEquatorLine());
+	conf.set_boolean("viewing:flag_ecliptic_line", grlmgr->getFlagEclipticLine());
 	conf.set_boolean("viewing:flag_cardinal_points", lmgr->getFlagCardinalsPoints());
-	conf.set_boolean("viewing:flag_meridian_line", core->getFlagMeridianLine());
+	conf.set_boolean("viewing:flag_meridian_line", grlmgr->getFlagMeridianLine());
 	conf.set_boolean("viewing:flag_moon_scaled", ssmgr->getFlagMoonScale());
 
 	// Landscape section
@@ -888,11 +893,11 @@ void StelUI::saveCurrentConfig(const string& confFile)
 
 	// Color section
 	NebulaMgr* nmgr = (NebulaMgr*)moduleMgr->getModule("nebulas");
-	conf.set_str    ("color:azimuthal_color", StelUtils::vec3f_to_str(core->getColorAzimutalGrid()));
-	conf.set_str    ("color:equatorial_color", StelUtils::vec3f_to_str(core->getColorEquatorGrid()));
-	conf.set_str    ("color:equator_color", StelUtils::vec3f_to_str(core->getColorEquatorLine()));
-	conf.set_str    ("color:ecliptic_color", StelUtils::vec3f_to_str(core->getColorEclipticLine()));
-	conf.set_str    ("color:meridian_color", StelUtils::vec3f_to_str(core->getColorMeridianLine()));
+	conf.set_str    ("color:azimuthal_color", StelUtils::vec3f_to_str(grlmgr->getColorAzimutalGrid()));
+	conf.set_str    ("color:equatorial_color", StelUtils::vec3f_to_str(grlmgr->getColorEquatorGrid()));
+	conf.set_str    ("color:equator_color", StelUtils::vec3f_to_str(grlmgr->getColorEquatorLine()));
+	conf.set_str    ("color:ecliptic_color", StelUtils::vec3f_to_str(grlmgr->getColorEclipticLine()));
+	conf.set_str    ("color:meridian_color", StelUtils::vec3f_to_str(grlmgr->getColorMeridianLine()));
 	conf.set_str	("color:nebula_label_color", StelUtils::vec3f_to_str(nmgr->getNamesColor()));
 	conf.set_str	("color:nebula_circle_color", StelUtils::vec3f_to_str(nmgr->getCirclesColor()));
 	conf.set_str    ("color:cardinal_color", StelUtils::vec3f_to_str(lmgr->getColorCardinalPoints()));

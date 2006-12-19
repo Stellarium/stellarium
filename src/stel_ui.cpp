@@ -32,6 +32,7 @@
 #include "stel_command_interface.h"
 #include "StelTextureMgr.h"
 #include "LandscapeMgr.h"
+#include "GridLinesMgr.h"
 
 ////////////////////////////////////////////////////////////////////////////////
 //								CLASS FUNCTIONS
@@ -534,12 +535,13 @@ void StelUI::cb(void)
 	ConstellationMgr* cmgr = (ConstellationMgr*)StelApp::getInstance().getModuleMgr().getModule("constellations");
 	NebulaMgr* nmgr = (NebulaMgr*)StelApp::getInstance().getModuleMgr().getModule("nebulas");
 	LandscapeMgr* lmgr = (LandscapeMgr*)StelApp::getInstance().getModuleMgr().getModule("landscape");
+	GridLinesMgr* grlmgr = (GridLinesMgr*)StelApp::getInstance().getModuleMgr().getModule("gridlines");
 	
 	cmgr->setFlagLines(bt_flag_constellation_draw->getState());
 	cmgr->setFlagNames(bt_flag_constellation_name->getState());
 	cmgr->setFlagArt(bt_flag_constellation_art->getState());
-	core->setFlagAzimutalGrid(bt_flag_azimuth_grid->getState());
-	core->setFlagEquatorGrid(bt_flag_equator_grid->getState());
+	grlmgr->setFlagAzimutalGrid(bt_flag_azimuth_grid->getState());
+	grlmgr->setFlagEquatorGrid(bt_flag_equator_grid->getState());
 	lmgr->setFlagLandscape(bt_flag_ground->getState());
 	lmgr->setFlagCardinalsPoints(bt_flag_cardinals->getState());
 	lmgr->setFlagAtmosphere(bt_flag_atmosphere->getState());
@@ -1097,7 +1099,8 @@ int StelUI::handle_keys(SDLKey key, SDLMod mod, Uint16 unicode, Uint8 state)
 		case SDLK_COMMA:
 		{
 			SolarSystem* ssmgr = (SolarSystem*)StelApp::getInstance().getModuleMgr().getModule("ssystem");
-			if(!core->getFlagEclipticLine())
+			GridLinesMgr* grlmgr = (GridLinesMgr*)StelApp::getInstance().getModuleMgr().getModule("gridlines");
+			if(!grlmgr->getFlagEclipticLine())
 			{
 				app->commander->execute_command( "flag ecliptic_line on");
 			}
@@ -1213,11 +1216,12 @@ int StelUI::handle_keys(SDLKey key, SDLMod mod, Uint16 unicode, Uint8 state)
 			break;
 		}
 		case SDLK_z:
-            if (core->getFlagMeridianLine()) {
+			GridLinesMgr* grlmgr = (GridLinesMgr*)StelApp::getInstance().getModuleMgr().getModule("gridlines");
+            if (grlmgr->getFlagMeridianLine()) {
 				app->commander->execute_command( "flag meridian_line 0");
 				app->commander->execute_command( "flag azimuthal_grid 1");
             } else {
-				if (core->getFlagAzimutalGrid()) app->commander->execute_command( "flag azimuthal_grid 0");
+				if (grlmgr->getFlagAzimutalGrid()) app->commander->execute_command( "flag azimuthal_grid 0");
 				else app->commander->execute_command( "flag meridian_line 1");
             }
             break;
@@ -1346,13 +1350,14 @@ void StelUI::gui_update_widgets(int delta_time)
 	ConstellationMgr* cmgr = (ConstellationMgr*)StelApp::getInstance().getModuleMgr().getModule("constellations");
 	NebulaMgr* nmgr = (NebulaMgr*)StelApp::getInstance().getModuleMgr().getModule("nebulas");
 	LandscapeMgr* lmgr = (LandscapeMgr*)StelApp::getInstance().getModuleMgr().getModule("landscape");
+	GridLinesMgr* grlmgr = (GridLinesMgr*)StelApp::getInstance().getModuleMgr().getModule("gridlines");
 	
 	bt_flag_constellation_draw->setState(cmgr->getFlagLines());
 	bt_flag_constellation_name->setState(cmgr->getFlagNames());
 	bt_flag_constellation_art->setState(cmgr->getFlagArt());
 	
-	bt_flag_azimuth_grid->setState(core->getFlagAzimutalGrid());
-	bt_flag_equator_grid->setState(core->getFlagEquatorGrid());
+	bt_flag_azimuth_grid->setState(grlmgr->getFlagAzimutalGrid());
+	bt_flag_equator_grid->setState(grlmgr->getFlagEquatorGrid());
 	bt_flag_ground->setState(lmgr->getFlagLandscape());
 	bt_flag_cardinals->setState(lmgr->getFlagCardinalsPoints());
 	bt_flag_atmosphere->setState(lmgr->getFlagAtmosphere());

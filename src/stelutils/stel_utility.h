@@ -199,4 +199,12 @@ string get_ISO8601_time_UTC(double JD);
 // convert string in ISO 8601-like format [+/-]YYYY-MM-DDThh:mm:ss (no timezone offset) to julian day
 int string_to_jday(string date, double &jd);
 
+
+class Draw
+{
+public:
+	// Draw a point... (used for tests)
+	static void drawPoint(float X,float Y,float Z);
+};
+
 #endif

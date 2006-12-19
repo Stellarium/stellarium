@@ -114,8 +114,7 @@ private:
 	class ManagedSTexture* neb_tex;			// Texture
 	Vec3f tex_quad_vertex[4];		// The 4 vertex used to draw the nebula texture
 	float luminance;			// Object luminance to use (value computed to compensate
-						// the texture avergae luminosity)
-	float inc_lum;					// Local counter for symbol animation
+						// the texture average luminosity)
 	
 	static STexture * tex_circle;	// The symbolic circle texture
 	static SFont* nebula_font;		// Font used for names printing
