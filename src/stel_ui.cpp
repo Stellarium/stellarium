@@ -1216,15 +1216,17 @@ int StelUI::handle_keys(SDLKey key, SDLMod mod, Uint16 unicode, Uint8 state)
 			break;
 		}
 		case SDLK_z:
+		{
 			GridLinesMgr* grlmgr = (GridLinesMgr*)StelApp::getInstance().getModuleMgr().getModule("gridlines");
-            if (grlmgr->getFlagMeridianLine()) {
+			if (grlmgr->getFlagMeridianLine()) {
 				app->commander->execute_command( "flag meridian_line 0");
 				app->commander->execute_command( "flag azimuthal_grid 1");
-            } else {
+			} else {
 				if (grlmgr->getFlagAzimutalGrid()) app->commander->execute_command( "flag azimuthal_grid 0");
 				else app->commander->execute_command( "flag meridian_line 1");
-            }
-            break;
+			}
+			break;
+		}
 		case SDLK_e:
             app->commander->execute_command( "flag equatorial_grid toggle");
             break;
