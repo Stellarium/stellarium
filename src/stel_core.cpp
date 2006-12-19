@@ -33,6 +33,8 @@
 #include "GeodesicGridDrawer.h"
 #include "constellation.h"
 #include "LandscapeMgr.h"
+#include "GridLinesMgr.h"
+#include "MilkyWay.h"
 
 #define LOADING_BAR_DEFAULT_FONT_SIZE 12.
 
@@ -77,12 +79,6 @@ StelCore::StelCore(const string& LDIR, const string& DATA_ROOT, const boost::cal
 
 	tone_converter = new ToneReproductor();
 	
-	equ_grid = new SkyGrid(SkyGrid::EQUATORIAL);
-	azi_grid = new SkyGrid(SkyGrid::ALTAZIMUTAL);
-	equator_line = new SkyLine(SkyLine::EQUATOR);
-	ecliptic_line = new SkyLine(SkyLine::ECLIPTIC);
-	meridian_line = new SkyLine(SkyLine::MERIDIAN, 1, 36);
-	
 	script_images = new ImageMgr();
 
 	object_pointer_visibility = true;
@@ -108,11 +104,6 @@ StelCore::~StelCore()
 	delete asterisms;
 	delete hip_stars;
 	delete nebulas;
-	delete equ_grid;
-	delete azi_grid;
-	delete equator_line;
-	delete ecliptic_line;
-	delete meridian_line;
 	delete observatory;
 	observatory = NULL;
 	delete milky_way;
@@ -124,6 +115,7 @@ StelCore::~StelCore()
 	delete telescope_mgr;
 	StelObject::delete_textures(); // Unload the pointer textures
 	delete landscape;
+	delete gridLines;
 	if (geodesic_search_result)
 	{
 		delete geodesic_search_result;
@@ -206,14 +198,11 @@ void StelCore::init(const InitParser& conf)
 	landscape = new LandscapeMgr();
 	landscape->init(conf, lb);
 	StelApp::getInstance().getModuleMgr().registerModule(landscape);
-	
-	// Grid and lines
-	setFlagAzimutalGrid(conf.get_boolean("viewing:flag_azimutal_grid"));
-	setFlagEquatorGrid(conf.get_boolean("viewing:flag_equatorial_grid"));
-	setFlagEquatorLine(conf.get_boolean("viewing:flag_equator_line"));
-	setFlagEclipticLine(conf.get_boolean("viewing:flag_ecliptic_line"));
-	setFlagMeridianLine(conf.get_boolean("viewing:flag_meridian_line"));
 
+	gridLines = new GridLinesMgr();
+	gridLines->init(conf, lb);
+	StelApp::getInstance().getModuleMgr().registerModule(gridLines);
+	
 	// Meteors
 	meteors = new MeteorMgr(10, 60);
 	setMeteorsRate(conf.get_int("astro", "meteor_rate", 10));
@@ -263,11 +252,6 @@ void StelCore::update(int delta_time)
 	selected_object.update();
 
 	// Update faders
-	equ_grid->update(delta_time);
-	azi_grid->update(delta_time);
-	equator_line->update(delta_time);
-	ecliptic_line->update(delta_time);
-	meridian_line->update(delta_time);
 	asterisms->update((double)delta_time/1000);
 	hip_stars->update((double)delta_time/1000);
 	nebulas->update((double)delta_time/1000);
@@ -288,6 +272,7 @@ void StelCore::update(int delta_time)
 	                                    navigation->get_local_to_eye_mat(),
 	                                    navigation->get_j2000_to_eye_mat());
 
+	gridLines->update((double)delta_time/1000);
 	landscape->update((double)delta_time/1000);
 	
 	StelModuleMgr& mmgr = StelApp::getInstance().getModuleMgr();
@@ -353,22 +338,9 @@ double StelCore::draw(int delta_time)
 	hip_stars->draw(projection, navigation, tone_converter);
 
 	//geoDrawer->draw(projection,navigation, tone_converter);
-
-	// Draw the equatorial grid
-	equ_grid->draw(projection);
-
-	// Draw the altazimutal grid
-	azi_grid->draw(projection);
-
-	// Draw the celestial equator line
-	equator_line->draw(projection,navigation);
-
-	// Draw the ecliptic line
-	ecliptic_line->draw(projection,navigation);
-
-	// Draw the meridian line
-	meridian_line->draw(projection,navigation);
-
+	
+	gridLines->draw(projection, navigation, tone_converter);
+	
 	// Draw the planets
 	double squaredDistance = ssystem->draw(projection, navigation, tone_converter);
 
@@ -757,11 +729,11 @@ void StelCore::setColorScheme(const string& skinFile, const string& section)
 	ssystem->setNamesColor(StelUtils::str_to_vec3f(conf.get_str(section,"planet_names_color", defaultColor)));
 	ssystem->setOrbitsColor(StelUtils::str_to_vec3f(conf.get_str(section,"planet_orbits_color", defaultColor)));
 	ssystem->setTrailsColor(StelUtils::str_to_vec3f(conf.get_str(section,"object_trails_color", defaultColor)));
-	equ_grid->setColor(StelUtils::str_to_vec3f(conf.get_str(section,"equatorial_color", defaultColor)));
-	azi_grid->setColor(StelUtils::str_to_vec3f(conf.get_str(section,"azimuthal_color", defaultColor)));
-	equator_line->setColor(StelUtils::str_to_vec3f(conf.get_str(section,"equator_color", defaultColor)));
-	ecliptic_line->setColor(StelUtils::str_to_vec3f(conf.get_str(section,"ecliptic_color", defaultColor)));
-	meridian_line->setColor(StelUtils::str_to_vec3f(conf.get_str(section,"meridian_color", defaultColor)));
+	gridLines->setColorEquatorGrid(StelUtils::str_to_vec3f(conf.get_str(section,"equatorial_color", defaultColor)));
+	gridLines->setColorAzimutalGrid(StelUtils::str_to_vec3f(conf.get_str(section,"azimuthal_color", defaultColor)));
+	gridLines->setColorEquatorLine(StelUtils::str_to_vec3f(conf.get_str(section,"equator_color", defaultColor)));
+	gridLines->setColorEclipticLine(StelUtils::str_to_vec3f(conf.get_str(section,"ecliptic_color", defaultColor)));
+	gridLines->setColorMeridianLine(StelUtils::str_to_vec3f(conf.get_str(section,"meridian_color", defaultColor)));
 	landscape->setColorCardinalPoints(StelUtils::str_to_vec3f(conf.get_str(section,"cardinal_color", defaultColor)));
 	asterisms->setLinesColor(StelUtils::str_to_vec3f(conf.get_str(section,"const_lines_color", defaultColor)));
 	asterisms->setBoundariesColor(StelUtils::str_to_vec3f(conf.get_str(section,"const_boundary_color", "0.8,0.3,0.3")));

@@ -4,7 +4,7 @@ stellarium_SOURCES = projector.cpp projector.h stereographic_projector.cpp \
 	cylinder_projector.h fisheye_projector.cpp fisheye_projector.h spheric_mirror_calculator.cpp \
 	spheric_mirror_calculator.h spheric_mirror_projector.cpp spheric_mirror_projector.h \
 	viewport_distorter.cpp viewport_distorter.h navigator.cpp navigator.h observator.cpp \
-	observator.h draw.cpp draw.h grid.cpp grid.h geodesic_grid.cpp geodesic_grid.h \
+	observator.h grid.cpp grid.h geodesic_grid.cpp geodesic_grid.h \
 	stel_object_base.cpp stel_object_base.h stel_object.cpp stel_object.h stel_object_type.h \
 	hip_star_mgr.cpp hip_star_mgr.h nebula.cpp nebula.h nebula_mgr.cpp nebula_mgr.h \
 	constellation.cpp constellation.h constellation_mgr.cpp constellation_mgr.h meteor.cpp \
@@ -20,7 +20,8 @@ stellarium_SOURCES = projector.cpp projector.h stereographic_projector.cpp \
 	tone_reproductor.cpp tone_reproductor.h translations.h StelObjectMgr.h StelObjectMgr.cpp \
 	StelModule.h StelModule.cpp StelModuleMgr.cpp StelModuleMgr.h StelFontMgr.h StelFontMgr.cpp \
 	StelLocaleMgr.h StelLocaleMgr.cpp StelSkyCultureMgr.h StelSkyCultureMgr.cpp GeodesicGridDrawer.h GeodesicGridDrawer.cpp \
-	StelTextureMgr.h StelTextureMgr.cpp AstroImage.h AstroImage.cpp LandscapeMgr.h LandscapeMgr.cpp
+	StelTextureMgr.h StelTextureMgr.cpp AstroImage.h AstroImage.cpp LandscapeMgr.h LandscapeMgr.cpp \
+	GridLinesMgr.h GridLinesMgr.cpp MilkyWay.h MilkyWay.cpp
 
 stellarium_LDADD = stelutils/iniparser/libiniparser.a \
 stelutils/libstelutils.a \

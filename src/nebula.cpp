@@ -45,7 +45,6 @@ Nebula::Nebula() :
 		/*UGC_nb(0),*/
 		neb_tex(NULL)
 {
-	inc_lum = rand()/RAND_MAX*M_PI;
 	nameI18 = L"";
 }
 
@@ -262,8 +261,7 @@ void Nebula::draw_circle(const Projector* prj, const Navigator * nav)
 {
 	if (2.f/get_on_screen_size(prj, nav)<0.1) return;
 	glBlendFunc(GL_ONE, GL_ONE);
-	inc_lum++;
-	float lum = MY_MIN(1,2.f/get_on_screen_size(prj, nav))*(0.8+0.2*std::sin(inc_lum/2));
+	float lum = MY_MIN(1,2.f/get_on_screen_size(prj, nav))*0.8;
 	glColor3f(circle_color[0]*lum*hints_brightness, circle_color[1]*lum*hints_brightness, circle_color[2]*lum*hints_brightness);
 	Nebula::tex_circle->bind();
 	glBegin(GL_TRIANGLE_STRIP);

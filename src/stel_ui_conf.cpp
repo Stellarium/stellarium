@@ -28,6 +28,7 @@
 #include "stel_command_interface.h"
 #include "StelTextureMgr.h"
 #include "LandscapeMgr.h"
+#include "GridLinesMgr.h"
 
 using namespace s_gui;
 
@@ -850,6 +851,7 @@ void StelUI::saveRenderOptions(void)
 	NebulaMgr* nmgr = (NebulaMgr*)StelApp::getInstance().getModuleMgr().getModule("nebulas");
 	SolarSystem* ssmgr = (SolarSystem*)StelApp::getInstance().getModuleMgr().getModule("ssystem");
 	LandscapeMgr* lmgr = (LandscapeMgr*)StelApp::getInstance().getModuleMgr().getModule("landscape");
+	GridLinesMgr* grlmgr = (GridLinesMgr*)StelApp::getInstance().getModuleMgr().getModule("gridlines");
 	
 	conf.set_boolean("astro:flag_stars", smgr->getFlagStars());
 	conf.set_boolean("astro:flag_star_name", smgr->getFlagNames());
@@ -872,10 +874,10 @@ void StelUI::saveRenderOptions(void)
 	conf.set_double("viewing:moon_scale", ssmgr->getMoonScale());
 	conf.set_boolean("viewing:flag_moon_scaled", ssmgr->getFlagMoonScale());
 	conf.set_boolean("viewing:flag_night", app->getVisionModeNight());
-	conf.set_boolean("viewing:flag_equatorial_grid", core->getFlagEquatorGrid());
-	conf.set_boolean("viewing:flag_azimutal_grid", core->getFlagAzimutalGrid());
-	conf.set_boolean("viewing:flag_equator_line", core->getFlagEquatorLine());
-	conf.set_boolean("viewing:flag_ecliptic_line", core->getFlagEclipticLine());
+	conf.set_boolean("viewing:flag_equatorial_grid", grlmgr->getFlagEquatorGrid());
+	conf.set_boolean("viewing:flag_azimutal_grid", grlmgr->getFlagAzimutalGrid());
+	conf.set_boolean("viewing:flag_equator_line", grlmgr->getFlagEquatorLine());
+	conf.set_boolean("viewing:flag_ecliptic_line", grlmgr->getFlagEclipticLine());
 	conf.set_boolean("landscape:flag_landscape", lmgr->getFlagLandscape());
 	conf.set_boolean("viewing:flag_cardinal_points", lmgr->getFlagCardinalsPoints());
 	conf.set_boolean("landscape:flag_atmosphere", lmgr->getFlagAtmosphere());
@@ -951,6 +953,7 @@ void StelUI::updateConfigForm(void)
 	NebulaMgr* nmgr = (NebulaMgr*)StelApp::getInstance().getModuleMgr().getModule("nebulas");
 	SolarSystem* ssmgr = (SolarSystem*)StelApp::getInstance().getModuleMgr().getModule("ssystem");
 	LandscapeMgr* lmgr = (LandscapeMgr*)StelApp::getInstance().getModuleMgr().getModule("landscape");
+	GridLinesMgr* grlmgr = (GridLinesMgr*)StelApp::getInstance().getModuleMgr().getModule("gridlines");
 	
 	stars_cbx->setState(smgr->getFlagStars());
 	star_names_cbx->setState(smgr->getFlagNames());
@@ -973,10 +976,10 @@ void StelUI::updateConfigForm(void)
 	planets_cbx->setState(ssmgr->getFlagPlanets());
 	planets_hints_cbx->setState(ssmgr->getFlagHints());
 	moon_x4_cbx->setState(ssmgr->getFlagMoonScale());
-	equator_grid_cbx->setState(core->getFlagEquatorGrid());
-	azimuth_grid_cbx->setState(core->getFlagAzimutalGrid());
-	equator_cbx->setState(core->getFlagEquatorLine());
-	ecliptic_cbx->setState(core->getFlagEclipticLine());
+	equator_grid_cbx->setState(grlmgr->getFlagEquatorGrid());
+	azimuth_grid_cbx->setState(grlmgr->getFlagAzimutalGrid());
+	equator_cbx->setState(grlmgr->getFlagEquatorLine());
+	ecliptic_cbx->setState(grlmgr->getFlagEclipticLine());
 	ground_cbx->setState(lmgr->getFlagLandscape());
 	cardinal_cbx->setState(lmgr->getFlagCardinalsPoints());
 	atmosphere_cbx->setState(lmgr->getFlagAtmosphere());

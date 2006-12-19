@@ -32,6 +32,8 @@
 #include "solarsystem.h"
 #include "nebula_mgr.h"
 #include "LandscapeMgr.h"
+#include "GridLinesMgr.h"
+#include "MilkyWay.h"
 
 using namespace std;
 
@@ -702,6 +704,7 @@ int StelCommandInterface::set_flag(string name, string value, bool &newval, bool
 		NebulaMgr* nmgr = (NebulaMgr*)StelApp::getInstance().getModuleMgr().getModule("nebulas");
 		SolarSystem* ssmgr = (SolarSystem*)StelApp::getInstance().getModuleMgr().getModule("ssystem");
 		LandscapeMgr* lmgr = (LandscapeMgr*)StelApp::getInstance().getModuleMgr().getModule("landscape");
+		GridLinesMgr* grlmgr = (GridLinesMgr*)StelApp::getInstance().getModuleMgr().getModule("gridlines");
 		
 		if(name=="constellation_drawing") {
 			newval = !cmgr->getFlagLines();
@@ -758,24 +761,24 @@ int StelCommandInterface::set_flag(string name, string value, bool &newval, bool
 		*/
 		//else if(name=="use_common_names") newval = (stcore->FlagUseCommonNames = !stcore->FlagUseCommonNames);
 		else if(name=="azimuthal_grid") {
-		newval = !stcore->getFlagAzimutalGrid();
-		stcore->setFlagAzimutalGrid(newval);
+		newval = !grlmgr->getFlagAzimutalGrid();
+		grlmgr->setFlagAzimutalGrid(newval);
 		}
 		else if(name=="equatorial_grid") {
-		newval = !stcore->getFlagEquatorGrid();
-		stcore->setFlagEquatorGrid(newval);
+		newval = !grlmgr->getFlagEquatorGrid();
+		grlmgr->setFlagEquatorGrid(newval);
 		}
 		else if(name=="equator_line") {
-		newval = !stcore->getFlagEquatorLine();
-		stcore->setFlagEquatorLine(newval);
+		newval = !grlmgr->getFlagEquatorLine();
+		grlmgr->setFlagEquatorLine(newval);
 		}
 		else if(name=="ecliptic_line") {
-		newval = !stcore->getFlagEclipticLine();
-		stcore->setFlagEclipticLine(newval);
+		newval = !grlmgr->getFlagEclipticLine();
+		grlmgr->setFlagEclipticLine(newval);
 		}
 		else if(name=="meridian_line") {
-		newval = !stcore->getFlagMeridianLine();
-		 stcore->setFlagMeridianLine(newval);
+		newval = !grlmgr->getFlagMeridianLine();
+		 grlmgr->setFlagMeridianLine(newval);
 		}
 		else if(name=="cardinal_points") {
 			newval = !lmgr->getFlagCardinalsPoints();
@@ -879,6 +882,7 @@ int StelCommandInterface::set_flag(string name, string value, bool &newval, bool
 		NebulaMgr* nmgr = (NebulaMgr*)StelApp::getInstance().getModuleMgr().getModule("nebulas");
 		SolarSystem* ssmgr = (SolarSystem*)StelApp::getInstance().getModuleMgr().getModule("ssystem");
 		LandscapeMgr* lmgr = (LandscapeMgr*)StelApp::getInstance().getModuleMgr().getModule("landscape");
+		GridLinesMgr* grlmgr = (GridLinesMgr*)StelApp::getInstance().getModuleMgr().getModule("gridlines");
 		
 		if(name=="constellation_drawing") cmgr->setFlagLines(newval);
 		else if(name=="constellation_names") cmgr->setFlagNames(newval);
@@ -897,11 +901,11 @@ int StelCommandInterface::set_flag(string name, string value, bool &newval, bool
 			lmgr->setFlagAtmosphere ( newval);
 			if(!newval) lmgr->setFlagFog(false);  // turn off fog with atmosphere
 		}
-		else if(name=="azimuthal_grid") stcore->setFlagAzimutalGrid(newval);
-		else if(name=="equatorial_grid") stcore->setFlagEquatorGrid(newval);
-		else if(name=="equator_line") stcore->setFlagEquatorLine(newval);
-		else if(name=="ecliptic_line") stcore->setFlagEclipticLine(newval);
-		else if(name=="meridian_line") stcore->setFlagMeridianLine(newval);
+		else if(name=="azimuthal_grid") grlmgr->setFlagAzimutalGrid(newval);
+		else if(name=="equatorial_grid") grlmgr->setFlagEquatorGrid(newval);
+		else if(name=="equator_line") grlmgr->setFlagEquatorLine(newval);
+		else if(name=="ecliptic_line") grlmgr->setFlagEclipticLine(newval);
+		else if(name=="meridian_line") grlmgr->setFlagMeridianLine(newval);
 		else if(name=="cardinal_points") lmgr->setFlagCardinalsPoints(newval);
 		else if(name=="moon_scaled") ssmgr->setFlagMoonScale(newval);
 		else if(name=="landscape") lmgr->setFlagLandscape(newval);

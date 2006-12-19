@@ -22,7 +22,6 @@
 #include <string>
 
 #include "stel_object.h"
-#include "draw.h"
 #include "meteor_mgr.h"
 #include "image_mgr.h"
 #include "callbacks.hpp"
@@ -210,44 +209,6 @@ public:
 	// Planets flags
 	bool setHomePlanet(string planet);
 
-	///////////////////////////////////////////////////////////////////////////////////////
-	// Grid and lines
-	//! Set flag for displaying Azimutal Grid
-	void setFlagAzimutalGrid(bool b) {azi_grid->setFlagshow(b);}
-	//! Get flag for displaying Azimutal Grid
-	bool getFlagAzimutalGrid(void) const {return azi_grid->getFlagshow();}
-	Vec3f getColorAzimutalGrid(void) const {return azi_grid->getColor();}
-
-	//! Set flag for displaying Equatorial Grid
-	void setFlagEquatorGrid(bool b) {equ_grid->setFlagshow(b);}
-	//! Get flag for displaying Equatorial Grid
-	bool getFlagEquatorGrid(void) const {return equ_grid->getFlagshow();}
-	Vec3f getColorEquatorGrid(void) const {return equ_grid->getColor();}
-
-	//! Set flag for displaying Equatorial Line
-	void setFlagEquatorLine(bool b) {equator_line->setFlagshow(b);}
-	//! Get flag for displaying Equatorial Line
-	bool getFlagEquatorLine(void) const {return equator_line->getFlagshow();}
-	Vec3f getColorEquatorLine(void) const {return equator_line->getColor();}
-
-	//! Set flag for displaying Ecliptic Line
-	void setFlagEclipticLine(bool b) {ecliptic_line->setFlagshow(b);}
-	//! Get flag for displaying Ecliptic Line
-	bool getFlagEclipticLine(void) const {return ecliptic_line->getFlagshow();}
-	Vec3f getColorEclipticLine(void) const {return ecliptic_line->getColor();}
-
-
-	//! Set flag for displaying Meridian Line
-	void setFlagMeridianLine(bool b) {meridian_line->setFlagshow(b);}
-	//! Get flag for displaying Meridian Line
-	bool getFlagMeridianLine(void) const {return meridian_line->getFlagshow();}
-	Vec3f getColorMeridianLine(void) const {return meridian_line->getColor();}
-
-	void setColorAzimutalGrid(const Vec3f& v) { azi_grid->setColor(v);}
-	void setColorEquatorGrid(const Vec3f& v) { equ_grid->setColor(v);}
-	void setColorEquatorLine(const Vec3f& v) { equator_line->setColor(v);}
-	void setColorEclipticLine(const Vec3f& v) { ecliptic_line->setColor(v);}
-	void setColorMeridianLine(const Vec3f& v) { meridian_line->setColor(v);}
 
 	///////////////////////////////////////////////////////////////////////////////////////
 	// Projection
@@ -310,20 +271,15 @@ private:
 	class ConstellationMgr * asterisms;		// Manage constellations (boundaries, names etc..)
 	class NebulaMgr * nebulas;				// Manage the nebulas
 	class SolarSystem* ssystem;				// Manage the solar system
-	SkyGrid * equ_grid;					// Equatorial grid
-	SkyGrid * azi_grid;					// Azimutal grid
-	SkyLine * equator_line;				// Celestial Equator line
-	SkyLine * ecliptic_line;			// Ecliptic line
-	SkyLine * meridian_line;			// Meridian line
 
-	MilkyWay * milky_way;				// Our galaxy
+	class MilkyWay* milky_way;				// Our galaxy
 	MeteorMgr * meteors;				// Manage meteor showers
 	ToneReproductor * tone_converter;	// Tones conversion between stellarium world and display device
 	ImageMgr * script_images;           // for script loaded image display
 	class TelescopeMgr *telescope_mgr;
 	class LandscapeMgr* landscape;
 	class GeodesicGridDrawer* geoDrawer;
-
+	class GridLinesMgr* gridLines;
 	bool object_pointer_visibility;		// Should selected object pointer be drawn
 
 	// Increment/decrement smoothly the vision field and position
