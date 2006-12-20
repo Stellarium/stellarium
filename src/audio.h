@@ -28,7 +28,7 @@
 #include "SDL.h"
 
 #ifdef HAVE_SDL_MIXER_H
-# include "SDL_mixer.h"
+#include "SDL_mixer.h"
 
 class Audio
 {

@@ -317,7 +317,7 @@ int StelApp::handleClick(int x, int y, Uint8 button, Uint8 state)
 	// Send the event to every StelModule
 	for (StelModuleMgr::Iterator iter=moduleMgr->begin();iter!=moduleMgr->end();++iter)
 	{
-		if ((*iter)->handleMouseMoves(x, y)==true)
+		if ((*iter)->handleMouseClicks(x, y, button, state)==true)
 			return 1;
 	}
 	
