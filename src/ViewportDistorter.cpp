@@ -18,9 +18,9 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#include "viewport_distorter.h"
+#include "ViewportDistorter.hpp"
 #include "StelApp.hpp"
-#include "spheric_mirror_calculator.h"
+#include "SphericMirrorCalculator.hpp"
 #include "InitParser.hpp"
 #include "Projector.hpp"
 

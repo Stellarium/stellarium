@@ -17,7 +17,7 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#include "cylinder_projector.h"
+#include "CylinderProjector.hpp"
 
 
 CylinderProjector::CylinderProjector(const Vec4i& viewport,

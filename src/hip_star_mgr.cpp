@@ -38,7 +38,7 @@
 #include "StelUtils.hpp"
 #include "ToneReproducer.hpp"
 #include "Translator.hpp"
-#include "geodesic_grid.h"
+#include "GeodesicGrid.hpp"
 #include "StelApp.hpp"
 #include "StelTextureMgr.hpp"
 

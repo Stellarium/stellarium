@@ -20,7 +20,7 @@
 #include "StelApp.hpp"
 
 #include "StelCore.hpp"
-#include "viewport_distorter.h"
+#include "ViewportDistorter.hpp"
 #include "StelUtils.hpp"
 #include "callbacks.hpp"
 #include "stel_command_interface.h"

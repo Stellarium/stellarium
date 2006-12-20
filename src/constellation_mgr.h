@@ -24,7 +24,7 @@
 
 #include "StelObject.hpp"
 #include "Fader.hpp"
-#include "loadingbar.h"
+#include "LoadingBar.hpp"
 #include "Translator.hpp"
 #include "StelObjectMgr.hpp"
 

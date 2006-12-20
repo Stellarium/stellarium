@@ -24,7 +24,7 @@
 #include "StelCore.hpp"
 #include "StelApp.hpp"
 #include "StelUtils.hpp"
-#include "geodesic_grid.h"
+#include "GeodesicGrid.hpp"
 #include "hip_star_mgr.h"
 #include "telescope_mgr.h"
 #include "constellation_mgr.h"
