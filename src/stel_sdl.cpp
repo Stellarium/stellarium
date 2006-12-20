@@ -20,7 +20,7 @@
 #include "shlobj.h"
 #endif
 
-#include "StelApp.h"
+#include "StelApp.hpp"
 #include "StelCore.hpp"
 
 #ifdef HAVE_SDL_MIXER_H

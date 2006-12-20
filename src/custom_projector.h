@@ -20,7 +20,7 @@
 #ifndef _CUSTOM_PROJECTOR_H_
 #define _CUSTOM_PROJECTOR_H_
 
-#include "projector.h"
+#include "Projector.hpp"
 
 // Class which handle projection modes and projection matrix
 // Overide some function usually handled by glu

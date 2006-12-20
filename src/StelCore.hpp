@@ -21,7 +21,7 @@
 
 #include <string>
 
-#include "stel_object.h"
+#include "StelObject.hpp"
 #include "meteor_mgr.h"
 #include "image_mgr.h"
 #include "callbacks.hpp"
@@ -65,7 +65,7 @@ public:
 	Navigator* getNavigation() {return navigation;}
 
 	//! Get the current tone converter used in the core
-	ToneReproductor* getToneReproductor() {return tone_converter;}
+	ToneReproducer* getToneReproductor() {return tone_converter;}
 
 
 	///////////////////////////////////////////////////////////////////////////////////////
@@ -219,9 +219,9 @@ public:
 
 
 	///////////////////////////////////////////////////////////////////////////////////////
-	// Observator
+	// Observer
 	//! Return the current observatory (as a const object)
-	const Observator* getObservatory(void) {return observatory;}
+	const Observer* getObservatory(void) {return observatory;}
 
 	//! Move to a new latitude and longitude on home planet
 	void moveObserver(double lat, double lon, double alt, int delay, const wstring& name)
@@ -264,7 +264,7 @@ private:
 		
 	// Main elements of the program
 	Navigator * navigation;				// Manage all navigation parameters, coordinate transformations etc..
-	Observator * observatory;			// Manage observer position
+	Observer * observatory;			// Manage observer position
 	Projector * projection;				// Manage the projection mode and matrix
 	StelObject selected_object;			// The selected object in stellarium
 	class HipStarMgr * hip_stars;		// Manage the hipparcos stars
@@ -274,7 +274,7 @@ private:
 
 	class MilkyWay* milky_way;				// Our galaxy
 	MeteorMgr * meteors;				// Manage meteor showers
-	ToneReproductor * tone_converter;	// Tones conversion between stellarium world and display device
+	ToneReproducer * tone_converter;	// Tones conversion between stellarium world and display device
 	ImageMgr * script_images;           // for script loaded image display
 	class TelescopeMgr *telescope_mgr;
 	class LandscapeMgr* landscape;

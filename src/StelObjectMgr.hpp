@@ -20,8 +20,8 @@
 #ifndef STELOBJECTMGR_H
 #define STELOBJECTMGR_H
 
-#include "StelModule.h"
-#include "stel_object.h"
+#include "StelModule.hpp"
+#include "StelObject.hpp"
 #include "Translator.hpp"
 
 /**

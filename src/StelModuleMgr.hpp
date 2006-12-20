@@ -20,7 +20,7 @@
 #ifndef STELMODULEMGR_H
 #define STELMODULEMGR_H
 
-#include "StelModule.h"
+#include "StelModule.hpp"
 #include <boost/iterator/iterator_facade.hpp>
 
 /**

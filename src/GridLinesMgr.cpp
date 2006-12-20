@@ -1,9 +1,9 @@
 #include "GridLinesMgr.h"
 
-#include "StelApp.h"
+#include "StelApp.hpp"
 #include "navigator.h"
 #include "Translator.hpp"
-#include "projector.h"
+#include "Projector.hpp"
 #include "loadingbar.h"
 #include "Fader.hpp"
 #include "planet.h"
@@ -572,7 +572,7 @@ void GridLinesMgr::update(double deltaTime)
 	meridian_line->update(deltaTime);
 }
 
-double GridLinesMgr::draw(Projector *prj, const Navigator *nav, ToneReproductor *eye)
+double GridLinesMgr::draw(Projector *prj, const Navigator *nav, ToneReproducer *eye)
 {
 	// Draw the equatorial grid
 	equ_grid->draw(prj);

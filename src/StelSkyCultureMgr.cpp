@@ -24,7 +24,7 @@
 #include "Translator.hpp"
 #include "InitParser.hpp"
 
-#include "StelApp.h"
+#include "StelApp.hpp"
 
 StelSkyCultureMgr::StelSkyCultureMgr(const string& cultureDirPath)
 {

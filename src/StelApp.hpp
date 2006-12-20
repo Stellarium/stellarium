@@ -25,10 +25,10 @@
 #include "SDL.h"	// SDL is used only for the key codes types
 #include "stellarium.h"
 
-#include "StelFontMgr.h"
-#include "StelLocaleMgr.h"
-#include "StelModuleMgr.h"
-#include "StelSkyCultureMgr.h"
+#include "StelFontMgr.hpp"
+#include "StelLocaleMgr.hpp"
+#include "StelModuleMgr.hpp"
+#include "StelSkyCultureMgr.hpp"
 
 // Predeclaration of some classes
 class StelCore;

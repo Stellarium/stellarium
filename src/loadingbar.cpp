@@ -17,10 +17,10 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#include "projector.h"
+#include "Projector.hpp"
 #include "loadingbar.h"
-#include "StelApp.h"
-#include "StelTextureMgr.h"
+#include "StelApp.hpp"
+#include "StelTextureMgr.hpp"
 
 LoadingBar::LoadingBar(Projector* _prj, float font_size, const string&  splash_tex, 
 	int screenw, int screenh, const wstring& extraTextString, float extraTextSize, 

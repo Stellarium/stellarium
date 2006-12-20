@@ -20,7 +20,7 @@
 #include "LandscapeMgr.h"
 #include "landscape.h"
 #include "stel_atmosphere.h"
-#include "StelApp.h"
+#include "StelApp.hpp"
 #include "solarsystem.h"
 #include "StelCore.hpp"
 
@@ -169,8 +169,8 @@ void LandscapeMgr::update(double deltaTime)
 	SolarSystem* ssystem = (SolarSystem*)StelApp::getInstance().getModuleMgr().getModule("ssystem");
 	Navigator* nav = StelApp::getInstance().getCore()->getNavigation();
 	Projector* prj = StelApp::getInstance().getCore()->getProjection();
-	const Observator* obs = StelApp::getInstance().getCore()->getObservatory();
-	ToneReproductor* eye = StelApp::getInstance().getCore()->getToneReproductor();
+	const Observer* obs = StelApp::getInstance().getCore()->getObservatory();
+	ToneReproducer* eye = StelApp::getInstance().getCore()->getToneReproductor();
 	
 	Vec3d sunPos = nav->helio_to_local(ssystem->getSun()->get_heliocentric_ecliptic_pos());
 	// Compute the moon position in local coordinate
@@ -203,7 +203,7 @@ void LandscapeMgr::update(double deltaTime)
 	landscape->set_sky_brightness(sky_brightness+0.05);
 }
 
-double LandscapeMgr::draw(Projector *prj, const Navigator *nav, ToneReproductor *eye)
+double LandscapeMgr::draw(Projector *prj, const Navigator *nav, ToneReproducer *eye)
 {
 	// Draw the atmosphere
 	atmosphere->draw(prj);

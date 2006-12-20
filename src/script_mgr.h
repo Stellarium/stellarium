@@ -28,7 +28,7 @@ using namespace std;
 
 #include <string>
 #include <fstream>
-#include "StelModule.h"
+#include "StelModule.hpp"
 
 // predeclaration
 class StelCommandInterface;

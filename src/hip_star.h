@@ -23,12 +23,12 @@
 #include <functional>
 #include <algorithm>
 
-#include "stel_object_base.h"
+#include "StelObjectBase.hpp"
 #include "stellarium.h"
 #include "StelUtils.hpp"
 #include "SFont.hpp"
-#include "tone_reproductor.h"
-#include "projector.h"
+#include "ToneReproducer.hpp"
+#include "Projector.hpp"
 #include "navigator.h"
 
 
@@ -81,7 +81,7 @@ private:
 	static float star_scale;
 	static float star_mag_scale;
 	static float names_brightness;
-	static ToneReproductor* eye;
+	static ToneReproducer* eye;
 	static Projector* proj;
 	static bool gravity_label;
 	static Vec3f circle_color, label_color;

@@ -20,12 +20,12 @@
 #include "navigator.h"
 #include "stellarium.h"
 #include "StelUtils.hpp"
-#include "stel_object.h"
+#include "StelObject.hpp"
 #include "solarsystem.h"
 
 
 ////////////////////////////////////////////////////////////////////////////////
-Navigator::Navigator(Observator* obs) : flag_traking(0), flag_lock_equ_pos(0), flag_auto_move(0),
+Navigator::Navigator(Observer* obs) : flag_traking(0), flag_lock_equ_pos(0), flag_auto_move(0),
 		time_speed(JD_SECOND), JDay(0.), position(obs)
 {
 	if (!position)

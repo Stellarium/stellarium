@@ -1,5 +1,5 @@
-#include "AstroImage.h"
-#include "projector.h"
+#include "AstroImage.hpp"
+#include "Projector.hpp"
 
 AstroImage::AstroImage() : tex(NULL)
 {
@@ -19,7 +19,7 @@ AstroImage::~AstroImage()
 	tex = NULL;
 }
 
-void AstroImage::draw(Projector *prj, const Navigator *nav, ToneReproductor *eye)
+void AstroImage::draw(Projector *prj, const Navigator *nav, ToneReproducer *eye)
 {
 	if (!tex) return;
 	

@@ -17,7 +17,7 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
  
-#include "StelApp.h"
+#include "StelApp.hpp"
 
 #include "StelCore.hpp"
 #include "viewport_distorter.h"
@@ -25,7 +25,7 @@
 #include "callbacks.hpp"
 #include "stel_command_interface.h"
 #include "stel_ui.h"
-#include "StelTextureMgr.h"
+#include "StelTextureMgr.hpp"
 
 // Initialize static variables
 StelApp* StelApp::singleton = NULL;

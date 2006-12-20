@@ -26,10 +26,10 @@
 # define pow10(x) pow(10,(x))
 #endif
 
-#include "tone_reproductor.h"
+#include "ToneReproducer.hpp"
 
 // Set some values to prevent bugs in case of bad use
-ToneReproductor::ToneReproductor() : Lda(50.f), Lwa(40000.f), one_over_maxdL(1.f/100.f), one_over_gamma(1.f/2.3f)
+ToneReproducer::ToneReproducer() : Lda(50.f), Lwa(40000.f), one_over_maxdL(1.f/100.f), one_over_gamma(1.f/2.3f)
 {
 	// Update alpha_da and beta_da values
 	float log10Lwa = log10f(Lwa);
@@ -40,13 +40,13 @@ ToneReproductor::ToneReproductor() : Lda(50.f), Lwa(40000.f), one_over_maxdL(1.f
 	set_world_adaptation_luminance(Lwa);
 }
 
-ToneReproductor::~ToneReproductor()
+ToneReproducer::~ToneReproducer()
 {
 }
 
 // Set the eye adaptation luminance for the display and precompute what can be
 // Usual luminance range is 1-100 cd/m^2 for a CRT screen
-void ToneReproductor::set_display_adaptation_luminance(float _Lda)
+void ToneReproducer::set_display_adaptation_luminance(float _Lda)
 {
 	Lda = _Lda;
 
@@ -61,7 +61,7 @@ void ToneReproductor::set_display_adaptation_luminance(float _Lda)
 }
 
 // Set the eye adaptation luminance for the world and precompute what can be
-void ToneReproductor::set_world_adaptation_luminance(float _Lwa)
+void ToneReproducer::set_world_adaptation_luminance(float _Lwa)
 {
 	Lwa = _Lwa;
 
@@ -79,7 +79,7 @@ void ToneReproductor::set_world_adaptation_luminance(float _Lwa)
 
 // Convert from xyY color system to RGB according to the adaptation
 // The Y component is in cd/m^2
-void ToneReproductor::xyY_to_RGB(float* color)
+void ToneReproducer::xyY_to_RGB(float* color)
 {
 	// 1. Hue conversion
 	float log10Y = log10f(color[2]);
@@ -121,7 +121,7 @@ void ToneReproductor::xyY_to_RGB(float* color)
 }
 
 // Provide the luminance in cd/m^2 from the magnitude and the surface in arcmin^2
-float ToneReproductor::mag_to_luminance(float mag, float surface)
+float ToneReproducer::mag_to_luminance(float mag, float surface)
 {
 	return std::exp(-0.4f * 2.3025851f * (mag - (-2.5f * log10f(surface)))) * 108064.73f;
 }

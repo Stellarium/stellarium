@@ -23,12 +23,12 @@
 #include "InitParser.hpp"
 #include "vecmath.h"
 
-class Observator
+class Observer
 {
 public:
 
-	Observator(const class SolarSystem &ssystem);
-	~Observator();
+	Observer(const class SolarSystem &ssystem);
+	~Observer();
     bool setHomePlanet(const string &english_name);
     const class Planet *getHomePlanet(void) const {return planet;}
     string getHomePlanetEnglishName(void) const;

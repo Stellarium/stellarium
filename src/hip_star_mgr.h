@@ -26,12 +26,12 @@
 #include "Fader.hpp"
 #include "loadingbar.h"
 #include "Translator.hpp"
-#include "StelObjectMgr.h"
+#include "StelObjectMgr.hpp"
 
 using namespace std ;
 
 class StelObject;
-class ToneReproductor;
+class ToneReproducer;
 class Projector;
 class Navigator;
 
@@ -48,7 +48,7 @@ public:
 	// Methods defined in the StelModule class
 	virtual void init(const InitParser& conf, LoadingBar& lb);
 	virtual string getModuleID() const {return "stars";}
-	virtual double draw(Projector *prj, const Navigator *nav, ToneReproductor *eye); //! Draw all the stars
+	virtual double draw(Projector *prj, const Navigator *nav, ToneReproducer *eye); //! Draw all the stars
 	virtual void update(double deltaTime) {names_fader.update((int)(deltaTime*1000)); starsFader.update((int)(deltaTime*1000));}
 	virtual void updateI18n();
 	virtual void updateSkyCulture(LoadingBar& lb);
@@ -74,7 +74,7 @@ public:
     int getMaxGridLevel(void) const {return max_geodesic_grid_level;}
     void setGrid(void);
 
-    int getMaxSearchLevel(const ToneReproductor *eye,
+    int getMaxSearchLevel(const ToneReproducer *eye,
                           const Projector *prj) const;
    
     void set_names_fade_duration(float duration) {names_fader.set_duration((int) (duration * 1000.f));}

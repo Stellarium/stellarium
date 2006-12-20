@@ -17,10 +17,10 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
  
-#include "StelModule.h"
+#include "StelModule.hpp"
 #include "vecmath.h"
 #include "InitParser.hpp"
-#include "StelApp.h"
+#include "StelApp.hpp"
 
 /*************************************************************************
  Return the full path to a data file belonging to the module

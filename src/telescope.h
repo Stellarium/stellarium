@@ -20,7 +20,7 @@
 #ifndef _TELESCOPE_H_
 #define _TELESCOPE_H_
 
-#include "stel_object_base.h"
+#include "StelObjectBase.hpp"
 #include "navigator.h"
 
 long long int GetNow(void);

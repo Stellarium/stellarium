@@ -21,14 +21,14 @@
 #include <sstream>
 #include <iomanip>
 
-#include "StelApp.h"
+#include "StelApp.hpp"
 #include "STexture.h"
 #include "planet.h"
 #include "navigator.h"
-#include "projector.h"
+#include "Projector.hpp"
 #include "SFont.hpp"
 #include "sideral_time.h"
-#include "StelTextureMgr.h"
+#include "StelTextureMgr.hpp"
 
 SFont* Planet::planet_name_font = NULL;
 float Planet::object_scale = 1.f;
@@ -490,7 +490,7 @@ float Planet::get_on_screen_size(const Projector* prj, const Navigator * nav)
 }
 
 // Draw the Planet and all the related infos : name, circle etc..
-double Planet::draw(Projector* prj, const Navigator * nav, const ToneReproductor* eye, int flag_point, bool stencil)
+double Planet::draw(Projector* prj, const Navigator * nav, const ToneReproducer* eye, int flag_point, bool stencil)
 {
 	if (hidden) return 0;
 
@@ -667,7 +667,7 @@ void Planet::draw_sphere(const Projector* prj, const Mat4d& mat, float screen_sz
 
 }
 
-void Planet::draw_halo(const Navigator* nav, const Projector* prj, const ToneReproductor* eye)
+void Planet::draw_halo(const Navigator* nav, const Projector* prj, const ToneReproducer* eye)
 {
 	float cmag;
 	float rmag;
@@ -748,7 +748,7 @@ if (screen_r<1.f) screen_r=1.f;
 	prj->reset_perspective_projection();		// Restore the other coordinate
 }
 
-void Planet::draw_point_halo(const Navigator* nav, const Projector* prj, const ToneReproductor* eye)
+void Planet::draw_point_halo(const Navigator* nav, const Projector* prj, const ToneReproducer* eye)
 {
 	float cmag;
 	float rmag;
@@ -804,7 +804,7 @@ void Planet::draw_point_halo(const Navigator* nav, const Projector* prj, const T
 	prj->reset_perspective_projection();		// Restore the other coordinate
 }
 
-void Planet::draw_big_halo(const Navigator* nav, const Projector* prj, const ToneReproductor* eye)
+void Planet::draw_big_halo(const Navigator* nav, const Projector* prj, const ToneReproducer* eye)
 {
 	glBlendFunc(GL_ONE, GL_ONE);
 	float screen_r = get_on_screen_size(prj, nav);

@@ -19,9 +19,9 @@
 
 using namespace std;
 
-#include "StelLocaleMgr.h"
+#include "StelLocaleMgr.hpp"
 #include "stellarium.h"
-#include "StelApp.h"
+#include "StelApp.hpp"
 #include "StelUtils.hpp"
 #include "InitParser.hpp"
 

@@ -21,9 +21,9 @@
 #include <iostream>
 #include <sstream>
 
-#include "StelFontMgr.h"
+#include "StelFontMgr.hpp"
 #include "SFont.hpp"
-#include "StelApp.h"
+#include "StelApp.hpp"
 
 using namespace std;
 

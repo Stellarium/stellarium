@@ -19,10 +19,10 @@
 
 #include <functional>
 
-#include "projector.h"
+#include "Projector.hpp"
 #include "navigator.h"
 #include "meteor_mgr.h"
-#include "StelApp.h"
+#include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "meteor.h"
 
@@ -62,7 +62,7 @@ void MeteorMgr::update(double delta_time)
 {
 	Projector * proj = StelApp::getInstance().getCore()->getProjection();
 	Navigator * nav = StelApp::getInstance().getCore()->getNavigation();
-	ToneReproductor * eye = StelApp::getInstance().getCore()->getToneReproductor();
+	ToneReproducer * eye = StelApp::getInstance().getCore()->getToneReproductor();
 	
 
 	// step through and update all active meteors
@@ -131,7 +131,7 @@ void MeteorMgr::update(double delta_time)
 }
 
 
-double MeteorMgr::draw(Projector *prj, const Navigator* nav, ToneReproductor* eye)
+double MeteorMgr::draw(Projector *prj, const Navigator* nav, ToneReproducer* eye)
 {
 	prj->set_orthographic_projection();
 	

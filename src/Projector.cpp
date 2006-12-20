@@ -20,7 +20,7 @@
 #include <iostream>
 #include <cstdio>
 #include <cassert>
-#include "projector.h"
+#include "Projector.hpp"
 #include "fisheye_projector.h"
 #include "cylinder_projector.h"
 #include "stereographic_projector.h"

@@ -21,12 +21,12 @@
 #define __MILKYWAY_H__
 
 #include <string>
-#include "StelModule.h"
+#include "StelModule.hpp"
 #include "vecmath.h"
 
 class STexture;
 class Navigator;
-class ToneReproductor;
+class ToneReproducer;
 class LoadingBar;
 
 // Class which manages the displaying of the Milky Way
@@ -40,7 +40,7 @@ public:
 	// Methods defined in the StelModule class
 	virtual void init(const InitParser& conf, LoadingBar& lb);
 	virtual string getModuleID() const {return "milkyway";}
-	virtual double draw(Projector *prj, const Navigator *nav, ToneReproductor *eye);
+	virtual double draw(Projector *prj, const Navigator *nav, ToneReproducer *eye);
 	virtual void update(double deltaTime);
 	virtual void updateI18n() {;}
 	virtual void updateSkyCulture(LoadingBar& lb) {;}

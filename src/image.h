@@ -23,7 +23,7 @@
 #define _IMAGE_H_
 
 #include <string>
-#include "projector.h"
+#include "Projector.hpp"
 #include "navigator.h"
 
 
