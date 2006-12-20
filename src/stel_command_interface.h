@@ -27,7 +27,6 @@
 #include "command_interface.h"
 #include "stel_utility.h"
 #include "script_mgr.h"
-#include "audio.h"
 #include "StelModule.h"
 
 using namespace std;
@@ -56,7 +55,7 @@ class StelCommandInterface : CommandInterface, public StelModule
 	
   StelCore * stcore;
   StelApp * stapp;
-  Audio * audio;  // for audio track from script
+  class Audio * audio;  // for audio track from script
 };
 
 
