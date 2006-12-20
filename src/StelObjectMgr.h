@@ -22,7 +22,7 @@
 
 #include "StelModule.h"
 #include "stel_object.h"
-#include "translator.h"
+#include "Translator.hpp"
 
 /**
  * Manage a collection of StelObject.

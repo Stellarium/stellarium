@@ -28,7 +28,7 @@
 
 #include "SDL_opengl.h"
 
-#include "stel_utility.h"
+#include "StelUtils.hpp"
 #include "typeface.h"
 
 class SFont

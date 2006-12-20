@@ -22,7 +22,7 @@
 #include <iostream>
 #include "audio.h"
 #include "stellarium.h"
-#include "translator.h"
+#include "Translator.hpp"
 
 #ifdef HAVE_SDL_MIXER_H
 

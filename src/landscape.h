@@ -25,8 +25,8 @@
 #include "tone_reproductor.h"
 #include "projector.h"
 #include "navigator.h"
-#include "fader.h"
-#include "stel_utility.h"
+#include "Fader.hpp"
+#include "StelUtils.hpp"
 
 class STexture;
 

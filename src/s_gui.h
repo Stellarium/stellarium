@@ -38,11 +38,11 @@
 #include <map>
 
 #include "STexture.h"
-#include "s_font.h"
+#include "SFont.hpp"
 #include "vecmath.h"
 #include "callbacks.hpp"
 
-#include "translator.h"
+#include "Translator.hpp"
 
 void glCircleGui(const Vec3d& pos, float radius, float linewidth = 1.0);
 void glEllipse(const Vec3d& pos, float radius, float y_ratio, float linewidth = 1.0);

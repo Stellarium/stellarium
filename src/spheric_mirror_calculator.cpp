@@ -19,7 +19,7 @@
  */
 
 #include "spheric_mirror_calculator.h"
-#include "init_parser.h"
+#include "InitParser.hpp"
 
 // This code slow and ugly and I know it.
 // Yet it might be useful for playing around.

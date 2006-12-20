@@ -21,7 +21,7 @@
 #define STELLOCALEMGR_H
 
 #include <string>
-#include "translator.h"
+#include "Translator.hpp"
 
 using namespace std;
 

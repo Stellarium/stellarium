@@ -22,7 +22,7 @@
 #include <fstream>
 #include "SDL_timer.h"
 #include "s_gui.h"
-#include "stel_utility.h"
+#include "StelUtils.hpp"
 using namespace std;
 using namespace s_gui;
 

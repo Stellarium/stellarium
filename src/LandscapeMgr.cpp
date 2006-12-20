@@ -22,7 +22,7 @@
 #include "stel_atmosphere.h"
 #include "StelApp.h"
 #include "solarsystem.h"
-#include "stel_core.h"
+#include "StelCore.hpp"
 
 // Class which manages the cardinal points displaying
 class Cardinals

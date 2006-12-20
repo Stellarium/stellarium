@@ -22,8 +22,8 @@ using namespace std;
 #include "StelLocaleMgr.h"
 #include "stellarium.h"
 #include "StelApp.h"
-#include "stel_utility.h"
-#include "init_parser.h"
+#include "StelUtils.hpp"
+#include "InitParser.hpp"
 
 StelLocaleMgr::StelLocaleMgr() : skyTranslator(APP_NAME, LOCALEDIR, ""), GMT_shift(0)
 {}

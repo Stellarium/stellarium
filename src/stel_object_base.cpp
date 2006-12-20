@@ -22,7 +22,7 @@
 #include "stellarium.h"
 #include "projector.h"
 #include "navigator.h"
-#include "stel_utility.h"
+#include "StelUtils.hpp"
 #include "STexture.h"
 #include "planet.h"
 #include "StelApp.h"

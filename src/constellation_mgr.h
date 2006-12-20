@@ -23,9 +23,9 @@
 #include <vector>
 
 #include "stel_object.h"
-#include "fader.h"
+#include "Fader.hpp"
 #include "loadingbar.h"
-#include "translator.h"
+#include "Translator.hpp"
 #include "StelObjectMgr.h"
 
 class ToneReproductor;

@@ -23,7 +23,7 @@
 #include <algorithm>
 
 #include "stel_command_interface.h"
-#include "stel_core.h"
+#include "StelCore.hpp"
 #include "StelApp.h"
 #include "audio.h"
 #include "image.h"

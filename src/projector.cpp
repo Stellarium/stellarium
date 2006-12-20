@@ -25,7 +25,7 @@
 #include "cylinder_projector.h"
 #include "stereographic_projector.h"
 #include "spheric_mirror_projector.h"
-#include "init_parser.h"
+#include "InitParser.hpp"
 
 const char *Projector::typeToString(PROJECTOR_TYPE type) {
   switch (type) {
