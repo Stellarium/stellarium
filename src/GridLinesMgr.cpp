@@ -4,7 +4,7 @@
 #include "navigator.h"
 #include "Translator.hpp"
 #include "Projector.hpp"
-#include "loadingbar.h"
+#include "LoadingBar.hpp"
 #include "Fader.hpp"
 #include "planet.h"
 

@@ -28,7 +28,7 @@
 #include "STexture.h"
 #include "navigator.h"
 #include "Translator.hpp"
-#include "loadingbar.h"
+#include "LoadingBar.hpp"
 #include "StelTextureMgr.hpp"
 
 #define RADIUS_NEB 1.

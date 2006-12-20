@@ -18,7 +18,7 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#include "spheric_mirror_calculator.h"
+#include "SphericMirrorCalculator.hpp"
 #include "InitParser.hpp"
 
 // This code slow and ugly and I know it.
