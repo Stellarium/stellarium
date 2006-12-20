@@ -19,11 +19,11 @@
 
 #include "telescope_mgr.h"
 #include "telescope.h"
-#include "stel_object.h"
-#include "projector.h"
+#include "StelObject.hpp"
+#include "Projector.hpp"
 #include "InitParser.hpp"
-#include "StelApp.h"
-#include "StelTextureMgr.h"
+#include "StelApp.hpp"
+#include "StelTextureMgr.hpp"
 
 #include <algorithm>
 

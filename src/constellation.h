@@ -21,8 +21,8 @@
 #define _CONSTELLATION_H_
 
 #include "stellarium.h"
-#include "stel_object_base.h"
-#include "stel_object.h"
+#include "StelObjectBase.hpp"
+#include "StelObject.hpp"
 #include "StelUtils.hpp"
 #include "Fader.hpp"
 #include <vector>

@@ -20,12 +20,12 @@
 #ifndef _NEBULA_H_
 #define _NEBULA_H_
 
-#include "stel_object_base.h"
+#include "StelObjectBase.hpp"
 #include "stellarium.h"
-#include "projector.h"
+#include "Projector.hpp"
 #include "navigator.h"
 #include "SFont.hpp"
-#include "tone_reproductor.h"
+#include "ToneReproducer.hpp"
 #include "Translator.hpp"
 
 /*
@@ -92,8 +92,8 @@ protected:
 
 private:
 	void draw_chart(const Projector* prj, const Navigator * nav);
-	void draw_tex(const Projector* prj, const Navigator * nav, ToneReproductor* eye);
-	void draw_no_tex(const Projector* prj, const Navigator * nav, ToneReproductor* eye);
+	void draw_tex(const Projector* prj, const Navigator * nav, ToneReproducer* eye);
+	void draw_no_tex(const Projector* prj, const Navigator * nav, ToneReproducer* eye);
     void draw_name(const Projector* prj);
     void draw_circle(const Projector* prj, const Navigator * nav);
     bool hasTex(void) { return (neb_tex != NULL); }

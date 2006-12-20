@@ -24,7 +24,7 @@
 
 #include "stel_command_interface.h"
 #include "StelCore.hpp"
-#include "StelApp.h"
+#include "StelApp.hpp"
 #include "audio.h"
 #include "image.h"
 #include "stel_ui.h"
@@ -361,7 +361,7 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 	  
 		if(args["lat"]!="" || args["lon"]!="" || args["alt"]!="") {
 
-			const Observator* observatory = stcore->getObservatory();
+			const Observer* observatory = stcore->getObservatory();
 
 			double lat = observatory->get_latitude();
 			double lon = observatory->get_longitude();

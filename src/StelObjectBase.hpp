@@ -21,7 +21,7 @@
 #define _STEL_OBJECT_BASE_H_
 
 #include "vecmath.h"
-#include "stel_object_type.h"
+#include "StelObjectType.hpp"
 
 #include <iostream>
 

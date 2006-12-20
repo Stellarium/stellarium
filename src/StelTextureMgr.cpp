@@ -22,14 +22,14 @@
 #include <string>
 #include <vector>
 
-#include "StelApp.h"
+#include "StelApp.hpp"
 extern "C" {
 #include <jpeglib.h>
 }
 #include <png.h>
 #include "SDL_thread.h"
 
-#include "StelTextureMgr.h"
+#include "StelTextureMgr.hpp"
 #include "StelUtils.hpp"
 
 using namespace std;

@@ -19,14 +19,14 @@
 
 #include "stel_ui.h"
 #include "StelUtils.hpp"
-#include "StelApp.h"
+#include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "hip_star_mgr.h"
 #include "constellation_mgr.h"
 #include "solarsystem.h"
 #include "nebula_mgr.h"
 #include "stel_command_interface.h"
-#include "StelTextureMgr.h"
+#include "StelTextureMgr.hpp"
 #include "LandscapeMgr.h"
 #include "GridLinesMgr.h"
 

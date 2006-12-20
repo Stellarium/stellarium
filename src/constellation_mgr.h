@@ -22,13 +22,13 @@
 
 #include <vector>
 
-#include "stel_object.h"
+#include "StelObject.hpp"
 #include "Fader.hpp"
 #include "loadingbar.h"
 #include "Translator.hpp"
-#include "StelObjectMgr.h"
+#include "StelObjectMgr.hpp"
 
-class ToneReproductor;
+class ToneReproducer;
 class HipStarMgr;
 class Constellation;
 class Projector;
@@ -44,7 +44,7 @@ public:
 	// Methods defined in the StelModule class
 	virtual void init(const InitParser& conf, LoadingBar& lb);
 	virtual string getModuleID() const {return "constellations";}
-	virtual double draw(Projector *prj, const Navigator *nav, ToneReproductor *eye); //! Draw constellation lines, art, names and boundaries
+	virtual double draw(Projector *prj, const Navigator *nav, ToneReproducer *eye); //! Draw constellation lines, art, names and boundaries
 	virtual void update(double deltaTime);
 	virtual void updateI18n();
 	virtual void updateSkyCulture(LoadingBar& lb);	

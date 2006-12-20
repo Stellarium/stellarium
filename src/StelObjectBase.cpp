@@ -1,6 +1,7 @@
 /*
  * Stellarium
- * Copyright (C) 2002 Fabien Chereau
+ * Copyright (C) Fabien Chereau
+ * Author 2006 Johannes Gajdosik
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,16 +18,16 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#include "stel_object_base.h"
-#include "stel_object.h"
+#include "StelObjectBase.hpp"
+#include "StelObject.hpp"
 #include "stellarium.h"
-#include "projector.h"
+#include "Projector.hpp"
 #include "navigator.h"
 #include "StelUtils.hpp"
 #include "STexture.h"
 #include "planet.h"
-#include "StelApp.h"
-#include "StelTextureMgr.h"
+#include "StelApp.hpp"
+#include "StelTextureMgr.hpp"
 
 StelObject StelObjectBase::getBrightestStarInConstellation(void) const {
   return StelObject();

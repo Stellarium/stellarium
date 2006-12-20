@@ -44,7 +44,7 @@
 // Predeclaration
 class Projector;
 class Navigator;
-class ToneReproductor;
+class ToneReproducer;
 class LoadingBar;
 class InitParser;
 
@@ -66,7 +66,7 @@ public:
 	
 	//! Execute all the openGL drawing functions for this module.
 	//! @return the max squared distance in pixels any single object has moved since the previous update.
-	virtual double draw(Projector* prj, const Navigator * nav, ToneReproductor* eye) {return 0;}
+	virtual double draw(Projector* prj, const Navigator * nav, ToneReproducer* eye) {return 0;}
 	
 	//! Update the module with respect to the time.
 	//! @param delta_time the time increment in second since last call.

@@ -20,11 +20,11 @@
 #include <iostream>
 #include <algorithm>
 #include "STexture.h"
-#include "projector.h"
+#include "Projector.hpp"
 #include "constellation.h"
 #include "hip_star_mgr.h"
 #include "navigator.h"
-#include "StelTextureMgr.h"
+#include "StelTextureMgr.hpp"
 
 Vec3f Constellation::lineColor = Vec3f(.4,.4,.8);
 Vec3f Constellation::labelColor = Vec3f(.4,.4,.8);

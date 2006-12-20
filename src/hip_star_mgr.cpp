@@ -27,20 +27,20 @@
 #include <string>
 #include <list>
 
-#include "projector.h"
+#include "Projector.hpp"
 #include "hip_star_mgr.h"
-#include "stel_object.h"
-#include "stel_object_base.h"
+#include "StelObject.hpp"
+#include "StelObjectBase.hpp"
 #include "STexture.h"
 #include "bytes.h"
 #include "stellarium.h" // AU,SPEED_OF_LIGHT
 #include "navigator.h"
 #include "StelUtils.hpp"
-#include "tone_reproductor.h"
+#include "ToneReproducer.hpp"
 #include "Translator.hpp"
 #include "geodesic_grid.h"
-#include "StelApp.h"
-#include "StelTextureMgr.h"
+#include "StelApp.hpp"
+#include "StelTextureMgr.hpp"
 
 typedef int Int32;
 typedef unsigned int Uint32;
@@ -1445,7 +1445,7 @@ void SpecialZoneArray<Star>::draw(int index,bool is_inside,
 
 
 
-int HipStarMgr::getMaxSearchLevel(const ToneReproductor *eye,
+int HipStarMgr::getMaxSearchLevel(const ToneReproducer *eye,
                                   const Projector *prj) const {
   int rval = -1;
   float fov_q = prj->get_fov();
@@ -1470,7 +1470,7 @@ int HipStarMgr::getMaxSearchLevel(const ToneReproductor *eye,
 
 
 // Draw all the stars
-double HipStarMgr::draw(Projector *prj, const Navigator *nav, ToneReproductor *eye) {
+double HipStarMgr::draw(Projector *prj, const Navigator *nav, ToneReproducer *eye) {
     current_JDay = nav->getJDay();
 
     // If stars are turned off don't waste time below

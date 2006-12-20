@@ -45,14 +45,14 @@
 // Range Scenes", G.W. Larson, H. Rushmeier, C. Piatko
 
 
-#ifndef _TONE_REPRODUCTOR_H_
-#define _TONE_REPRODUCTOR_H_
+#ifndef _TONE_REPRODUCER_H_
+#define _TONE_REPRODUCER_H_
 
-class ToneReproductor
+class ToneReproducer
 {
 public:
-    ToneReproductor();
-    virtual ~ToneReproductor();
+    ToneReproducer();
+    virtual ~ToneReproducer();
 
 	// Set the eye adaptation luminance for the display (and precompute what can be)
 	// Usual luminance range is 1-100 cd/m^2 for a CRT screen
@@ -101,4 +101,4 @@ private:
 	float term2;
 };
 
-#endif // _TONE_REPRODUCTOR_H_
+#endif // _TONE_REPRODUCER_H_

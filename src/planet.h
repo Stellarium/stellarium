@@ -20,11 +20,11 @@
 #ifndef _PLANET_H_
 #define _PLANET_H_
 
-#include "stel_object_base.h"
+#include "StelObjectBase.hpp"
 #include "stellarium.h"
 #include "StelUtils.hpp"
 #include "SFont.hpp"
-#include "tone_reproductor.h"
+#include "ToneReproducer.hpp"
 #include "vecmath.h"
 #include "callbacks.hpp"
 #include "Fader.hpp"
@@ -136,7 +136,7 @@ public:
 	// Draw the Planet, if hint_ON is != 0 draw a circle and the name as well
 	// Return the squared distance in pixels between the current and the
 	// previous position this planet was drawn at.
-	double draw(Projector* prj, const Navigator* nav, const ToneReproductor* eye, 
+	double draw(Projector* prj, const Navigator* nav, const ToneReproducer* eye, 
 		  int flag_point, bool stencil);
 
 	// Set the orbital elements
@@ -223,16 +223,16 @@ protected:
 	void draw_sphere(const Projector* prj, const Mat4d& mat, float screen_sz);
 
 	// Draw the small star-like 2D halo
-	void draw_halo(const Navigator* nav, const Projector* prj, const ToneReproductor* eye);
+	void draw_halo(const Navigator* nav, const Projector* prj, const ToneReproducer* eye);
 
 	// Draw the small star-like point
-	void draw_point_halo(const Navigator* nav, const Projector* prj, const ToneReproductor* eye);
+	void draw_point_halo(const Navigator* nav, const Projector* prj, const ToneReproducer* eye);
 
 	// Draw the circle and name of the Planet
 	void draw_hints(const Navigator* nav, const Projector* prj);
 
 	// Draw the big halo (for sun or moon)
-	void draw_big_halo(const Navigator* nav, const Projector* prj, const ToneReproductor* eye);
+	void draw_big_halo(const Navigator* nav, const Projector* prj, const ToneReproducer* eye);
 
 
 	string englishName; // english planet name

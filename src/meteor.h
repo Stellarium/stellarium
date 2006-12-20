@@ -20,9 +20,9 @@
 #ifndef _METEOR_H_
 #define _METEOR_H_
 
-#include "projector.h"
+#include "Projector.hpp"
 #include "navigator.h"
-#include "tone_reproductor.h"
+#include "ToneReproducer.hpp"
 
 // all in km - altitudes make up meteor range
 #define EARTH_RADIUS 6369.f
@@ -34,7 +34,7 @@ class Meteor
 {
 
  public:
-  Meteor( Projector *proj, Navigator *nav, ToneReproductor* eye, double v);
+  Meteor( Projector *proj, Navigator *nav, ToneReproducer* eye, double v);
   virtual ~Meteor();
   bool update(double delta_time);  // update position
   bool draw(Projector *proj, const Navigator* nav);		// Draw the meteor
