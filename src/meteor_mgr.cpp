@@ -23,7 +23,7 @@
 #include "navigator.h"
 #include "meteor_mgr.h"
 #include "StelApp.h"
-#include "stel_core.h"
+#include "StelCore.hpp"
 #include "meteor.h"
 
 MeteorMgr::MeteorMgr(int zhr, int maxv )

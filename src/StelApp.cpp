@@ -19,9 +19,9 @@
  
 #include "StelApp.h"
 
-#include "stel_core.h"
+#include "StelCore.hpp"
 #include "viewport_distorter.h"
-#include "stel_utility.h"
+#include "StelUtils.hpp"
 #include "callbacks.hpp"
 #include "stel_command_interface.h"
 #include "stel_ui.h"

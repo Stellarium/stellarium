@@ -34,8 +34,8 @@
  #include <curl/curl.h>
 #endif
 
-#include "stel_utility.h"
-#include "translator.h"
+#include "StelUtils.hpp"
+#include "Translator.hpp"
 #include "vecmath.h"
 #include "SDL_opengl.h"
 

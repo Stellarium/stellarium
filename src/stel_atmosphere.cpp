@@ -24,7 +24,7 @@
 
 #include "stel_atmosphere.h"
 #include "stellarium.h"
-#include "stel_utility.h"
+#include "StelUtils.hpp"
 #include "projector.h"
 
 Atmosphere::Atmosphere() : sky_resolution(48), tab_sky(NULL), world_adaptation_luminance(0.f), atm_intensity(0)

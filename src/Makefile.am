@@ -15,7 +15,7 @@ stellarium_SOURCES = projector.cpp projector.h stereographic_projector.cpp \
 	script.cpp script.h script_mgr.cpp script_mgr.h s_gui.cpp s_gui.h skybright.cpp \
 	skybright.h skylight.cpp skylight.h solve.h StelApp.cpp StelApp.h stel_sdl.cpp \
 	audio.cpp audio.h command_interface.cpp command_interface.h \
-	stel_command_interface.cpp stel_command_interface.h stel_core.cpp stel_core.h stellarium.h \
+	stel_command_interface.cpp stel_command_interface.h StelCore.cpp StelCore.hpp stellarium.h \
 	stel_ui_conf.cpp stel_ui.cpp stel_ui.h stel_ui_tuiconf.cpp s_tui.cpp s_tui.h \
 	tone_reproductor.cpp tone_reproductor.h translations.h StelObjectMgr.h StelObjectMgr.cpp \
 	StelModule.h StelModule.cpp StelModuleMgr.cpp StelModuleMgr.h StelFontMgr.h StelFontMgr.cpp \

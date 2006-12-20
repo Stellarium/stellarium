@@ -21,8 +21,8 @@
 #include <fstream>
 #include <dirent.h>
 #include <cassert>
-#include "translator.h"
-#include "init_parser.h"
+#include "Translator.hpp"
+#include "InitParser.hpp"
 
 #include "StelApp.h"
 

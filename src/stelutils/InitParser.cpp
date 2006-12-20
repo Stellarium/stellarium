@@ -22,7 +22,7 @@
 #include <sstream>
 #include <iomanip>
 
-#include "init_parser.h"
+#include "InitParser.hpp"
 #include "iniparser.h"
 
 InitParser::InitParser(void) : dico(NULL)

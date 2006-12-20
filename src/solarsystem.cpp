@@ -27,11 +27,11 @@ using namespace std;
 #include "stellplanet.h"
 #include "orbit.h"
 #include "stellarium.h" // AU,SPEED_OF_LIGHT
-#include "init_parser.h"
+#include "InitParser.hpp"
 #include "navigator.h"
 #include "projector.h"
 #include "StelApp.h"
-#include "stel_core.h"
+#include "StelCore.hpp"
 #include "StelTextureMgr.h"
 
 SolarSystem::SolarSystem()

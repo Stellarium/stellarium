@@ -2,10 +2,10 @@
 
 #include "StelApp.h"
 #include "navigator.h"
-#include "translator.h"
+#include "Translator.hpp"
 #include "projector.h"
 #include "loadingbar.h"
-#include "fader.h"
+#include "Fader.hpp"
 #include "planet.h"
 
 // Class which manages a grid to display in the sky

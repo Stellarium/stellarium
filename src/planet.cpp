@@ -26,7 +26,7 @@
 #include "planet.h"
 #include "navigator.h"
 #include "projector.h"
-#include "s_font.h"
+#include "SFont.hpp"
 #include "sideral_time.h"
 #include "StelTextureMgr.h"
 

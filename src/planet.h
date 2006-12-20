@@ -22,13 +22,13 @@
 
 #include "stel_object_base.h"
 #include "stellarium.h"
-#include "stel_utility.h"
-#include "s_font.h"
+#include "StelUtils.hpp"
+#include "SFont.hpp"
 #include "tone_reproductor.h"
 #include "vecmath.h"
 #include "callbacks.hpp"
-#include "fader.h"
-#include "translator.h"
+#include "Fader.hpp"
+#include "Translator.hpp"
 
 #include <list>
 #include <string>

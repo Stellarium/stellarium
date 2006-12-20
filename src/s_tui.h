@@ -26,8 +26,8 @@
 # include <config.h>
 #endif
 
-#include "stel_utility.h"
-#include "translator.h"
+#include "StelUtils.hpp"
+#include "Translator.hpp"
 
 // SDL is used only for the key codes, i'm lasy to redefine them
 // This is TODO to make the s_ library independent

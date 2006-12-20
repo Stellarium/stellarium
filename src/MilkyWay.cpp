@@ -18,9 +18,9 @@
  */
 
 #include "MilkyWay.h"
-#include "fader.h"
+#include "Fader.hpp"
 #include "STexture.h"
-#include "stel_utility.h"
+#include "StelUtils.hpp"
 #include "navigator.h"
 #include "projector.h"
 #include "tone_reproductor.h"

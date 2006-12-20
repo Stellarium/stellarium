@@ -21,7 +21,7 @@
 #define LANDSCAPEMGR_H_
 
 #include "StelModule.h"
-#include "stel_utility.h"
+#include "StelUtils.hpp"
 
 class Landscape;
 class Atmosphere;

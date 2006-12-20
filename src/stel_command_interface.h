@@ -25,7 +25,7 @@
 #define _STEL_COMMAND_INTERFACE_H_
 
 #include "command_interface.h"
-#include "stel_utility.h"
+#include "StelUtils.hpp"
 #include "script_mgr.h"
 #include "StelModule.h"
 

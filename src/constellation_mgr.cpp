@@ -26,10 +26,11 @@
 #include "constellation_mgr.h"
 #include "constellation.h"
 #include "hip_star_mgr.h"
-#include "hip_star.h"
-#include "stel_utility.h"
+#include "StelUtils.hpp"
 #include "StelApp.h"
 #include "StelTextureMgr.h"
+#include "InitParser.hpp"
+#include "projector.h"
 
 // constructor which loads all data from appropriate files
 ConstellationMgr::ConstellationMgr(HipStarMgr *_hip_stars) : 

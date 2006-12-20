@@ -35,9 +35,9 @@
 #include "bytes.h"
 #include "stellarium.h" // AU,SPEED_OF_LIGHT
 #include "navigator.h"
-#include "stel_utility.h"
+#include "StelUtils.hpp"
 #include "tone_reproductor.h"
-#include "translator.h"
+#include "Translator.hpp"
 #include "geodesic_grid.h"
 #include "StelApp.h"
 #include "StelTextureMgr.h"

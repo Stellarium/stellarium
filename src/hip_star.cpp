@@ -21,7 +21,7 @@
 #include "bytes.h"
 #include "stellarium.h"
 #include "navigator.h"
-#include "stel_utility.h"
+#include "StelUtils.hpp"
 #include "s_gui.h"  //circle
 
 #define RADIUS_STAR 1.

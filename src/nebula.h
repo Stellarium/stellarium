@@ -24,9 +24,9 @@
 #include "stellarium.h"
 #include "projector.h"
 #include "navigator.h"
-#include "s_font.h"
+#include "SFont.hpp"
 #include "tone_reproductor.h"
-#include "translator.h"
+#include "Translator.hpp"
 
 /*
 Gx Galaxy

@@ -22,7 +22,7 @@
 #include <sstream>
 
 #include "StelFontMgr.h"
-#include "s_font.h"
+#include "SFont.hpp"
 #include "StelApp.h"
 
 using namespace std;

@@ -23,7 +23,7 @@
 using namespace std;
 
 #include <string>
-#include "stel_utility.h"
+#include "StelUtils.hpp"
 
 class InitParser;
 

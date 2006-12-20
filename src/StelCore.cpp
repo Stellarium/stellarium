@@ -21,9 +21,9 @@
 
 #include <algorithm>
 
-#include "stel_core.h"
+#include "StelCore.hpp"
 #include "StelApp.h"
-#include "stel_utility.h"
+#include "StelUtils.hpp"
 #include "geodesic_grid.h"
 #include "hip_star_mgr.h"
 #include "telescope_mgr.h"
