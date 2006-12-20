@@ -20,7 +20,7 @@
 #ifndef LANDSCAPEMGR_H_
 #define LANDSCAPEMGR_H_
 
-#include "StelModule.h"
+#include "StelModule.hpp"
 #include "StelUtils.hpp"
 
 class Landscape;
@@ -41,7 +41,7 @@ public:
 	// Methods defined in the StelModule class
 	virtual void init(const InitParser& conf, LoadingBar& lb);
 	virtual string getModuleID() const {return "landscape";}
-	virtual double draw(Projector *prj, const Navigator *nav, ToneReproductor *eye);
+	virtual double draw(Projector *prj, const Navigator *nav, ToneReproducer *eye);
 	virtual void update(double deltaTime);
 	virtual void updateI18n();
 	virtual void updateSkyCulture(LoadingBar& lb) {;}

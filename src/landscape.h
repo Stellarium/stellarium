@@ -22,8 +22,8 @@
 
 #include <string>
 #include "vecmath.h"
-#include "tone_reproductor.h"
-#include "projector.h"
+#include "ToneReproducer.hpp"
+#include "Projector.hpp"
 #include "navigator.h"
 #include "Fader.hpp"
 #include "StelUtils.hpp"
@@ -62,7 +62,7 @@ public:
 	wstring getDescription() const {return description;}
 	
 	void update(double deltaTime) {land_fader.update((int)(deltaTime*1000)); fog_fader.update((int)(deltaTime*1000));}
-	virtual void draw(ToneReproductor * eye, const Projector* prj, const Navigator* nav) = 0;
+	virtual void draw(ToneReproducer * eye, const Projector* prj, const Navigator* nav) = 0;
 
 protected:
 	//! Load attributes common to all landscapes
@@ -90,12 +90,12 @@ public:
 	LandscapeOldStyle(float _radius = 2.);
     virtual ~LandscapeOldStyle();
 	virtual void load(const string& fileName, const string& section_name);
-	virtual void draw(ToneReproductor * eye, const Projector* prj, const Navigator* nav);
+	virtual void draw(ToneReproducer * eye, const Projector* prj, const Navigator* nav);
 	void create(bool _fullpath, stringHash_t param);
 private:
-	void draw_fog(ToneReproductor * eye, const Projector* prj, const Navigator* nav) const;
-	void draw_decor(ToneReproductor * eye, const Projector* prj, const Navigator* nav) const;
-	void draw_ground(ToneReproductor * eye, const Projector* prj, const Navigator* nav) const;
+	void draw_fog(ToneReproducer * eye, const Projector* prj, const Navigator* nav) const;
+	void draw_decor(ToneReproducer * eye, const Projector* prj, const Navigator* nav) const;
+	void draw_ground(ToneReproducer * eye, const Projector* prj, const Navigator* nav) const;
 	STexture** side_texs;
 	int nb_side_texs;
 	int nb_side;
@@ -121,7 +121,7 @@ public:
 	LandscapeFisheye(float _radius = 1.);
 	virtual ~LandscapeFisheye();
 	virtual void load(const string& fileName, const string& section_name);
-	virtual void draw(ToneReproductor * eye, const Projector* prj, const Navigator* nav);
+	virtual void draw(ToneReproducer * eye, const Projector* prj, const Navigator* nav);
 	void create(const wstring _name, bool _fullpath, const string _maptex, double _texturefov);
 private:
 
@@ -136,7 +136,7 @@ public:
 	LandscapeSpherical(float _radius = 1.);
 	virtual ~LandscapeSpherical();
 	virtual void load(const string& fileName, const string& section_name);
-	virtual void draw(ToneReproductor * eye, const Projector* prj, const Navigator* nav);
+	virtual void draw(ToneReproducer * eye, const Projector* prj, const Navigator* nav);
 	void create(const wstring _name, bool _fullpath, const string _maptex);
 private:
 

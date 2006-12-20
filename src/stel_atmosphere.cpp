@@ -25,7 +25,7 @@
 #include "stel_atmosphere.h"
 #include "stellarium.h"
 #include "StelUtils.hpp"
-#include "projector.h"
+#include "Projector.hpp"
 
 Atmosphere::Atmosphere() : sky_resolution(48), tab_sky(NULL), world_adaptation_luminance(0.f), atm_intensity(0)
 {
@@ -48,7 +48,7 @@ Atmosphere::~Atmosphere()
 }
 
 void Atmosphere::compute_color(double JD, Vec3d sunPos, Vec3d moonPos, float moon_phase,
-                               ToneReproductor * eye, Projector* prj,
+                               ToneReproducer * eye, Projector* prj,
                                float latitude, float altitude, float temperature, float relative_humidity)
 {
 

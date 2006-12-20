@@ -3,11 +3,11 @@
 
 #include <string>
 #include "vecmath.h"
-#include "StelModule.h"
+#include "StelModule.hpp"
 
 class LoadingBar;
 class Translator;
-class ToneReproductor;
+class ToneReproducer;
 class Navigator;
 class Projector;
 class InitParser;
@@ -27,7 +27,7 @@ public:
 	// Methods defined in the StelModule class
 	virtual void init(const InitParser& conf, LoadingBar& lb);
 	virtual string getModuleID() const {return "gridlines";}
-	virtual double draw(Projector *prj, const Navigator *nav, ToneReproductor *eye);
+	virtual double draw(Projector *prj, const Navigator *nav, ToneReproducer *eye);
 	virtual void update(double deltaTime);
 	
 

@@ -27,10 +27,10 @@
 #include "constellation.h"
 #include "hip_star_mgr.h"
 #include "StelUtils.hpp"
-#include "StelApp.h"
-#include "StelTextureMgr.h"
+#include "StelApp.hpp"
+#include "StelTextureMgr.hpp"
 #include "InitParser.hpp"
-#include "projector.h"
+#include "Projector.hpp"
 
 // constructor which loads all data from appropriate files
 ConstellationMgr::ConstellationMgr(HipStarMgr *_hip_stars) : 
@@ -246,7 +246,7 @@ void ConstellationMgr::loadLinesAndArt(const string &fileName, const string &art
 	
 }
 
-double ConstellationMgr::draw(Projector * prj, const Navigator * nav, ToneReproductor *)
+double ConstellationMgr::draw(Projector * prj, const Navigator * nav, ToneReproducer *)
 {
 	prj->set_orthographic_projection();
 	draw_lines(prj);

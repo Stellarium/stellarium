@@ -25,8 +25,8 @@
 #include "SFont.hpp"
 #include "navigator.h"
 #include "StelUtils.hpp"
-#include "StelApp.h"
-#include "StelTextureMgr.h"
+#include "StelApp.hpp"
+#include "StelTextureMgr.hpp"
 
 STexture * Nebula::tex_circle = NULL;
 SFont* Nebula::nebula_font = NULL;
@@ -195,7 +195,7 @@ bool Nebula::readTexture(const string& record)
 	StelApp::getInstance().getTextureManager().setMipmapsMode(true);
 	neb_tex = &StelApp::getInstance().getTextureManager().createTexture(tex_name, true);
 
-	luminance = ToneReproductor::mag_to_luminance(mag, tex_angular_size*tex_angular_size*3600);
+	luminance = ToneReproducer::mag_to_luminance(mag, tex_angular_size*tex_angular_size*3600);
 
 
 	float tex_size = RADIUS_NEB * sin(tex_angular_size/2/60*M_PI/180);
@@ -215,7 +215,7 @@ bool Nebula::readTexture(const string& record)
 }
 
 
-void Nebula::draw_tex(const Projector* prj, const Navigator* nav, ToneReproductor* eye)
+void Nebula::draw_tex(const Projector* prj, const Navigator* nav, ToneReproducer* eye)
 {
 	if (!neb_tex || !flagShowTexture) return;
 
@@ -276,7 +276,7 @@ void Nebula::draw_circle(const Projector* prj, const Navigator * nav)
 	glEnd ();
 }
 
-void Nebula::draw_no_tex(const Projector* prj, const Navigator * nav,ToneReproductor* eye)
+void Nebula::draw_no_tex(const Projector* prj, const Navigator * nav,ToneReproducer* eye)
 {
 	float r = (get_on_screen_size(prj, nav)/2);
 	float cmag = 0.20 * hints_brightness;
@@ -359,7 +359,7 @@ bool Nebula::readNGC(char *recordstr)
 
 	angular_size = tex_angular_size/2/60*M_PI/180;
 
-	luminance = ToneReproductor::mag_to_luminance(mag, tex_angular_size*tex_angular_size*3600);
+	luminance = ToneReproducer::mag_to_luminance(mag, tex_angular_size*tex_angular_size*3600);
 	if (luminance < 0)
 		luminance = .0075;
 

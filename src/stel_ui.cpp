@@ -23,14 +23,14 @@
 #include <iomanip>
 #include <algorithm>
 #include "stel_ui.h"
-#include "StelApp.h"
+#include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "constellation_mgr.h"
 #include "solarsystem.h"
 #include "nebula_mgr.h"
 #include "InitParser.hpp"
 #include "stel_command_interface.h"
-#include "StelTextureMgr.h"
+#include "StelTextureMgr.hpp"
 #include "LandscapeMgr.h"
 #include "GridLinesMgr.h"
 

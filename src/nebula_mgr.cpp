@@ -22,14 +22,14 @@
 #include <fstream>
 #include <algorithm>
 
-#include "StelApp.h"
+#include "StelApp.hpp"
 #include "nebula_mgr.h"
 #include "nebula.h"
 #include "STexture.h"
 #include "navigator.h"
 #include "Translator.hpp"
 #include "loadingbar.h"
-#include "StelTextureMgr.h"
+#include "StelTextureMgr.hpp"
 
 #define RADIUS_NEB 1.
 
@@ -86,7 +86,7 @@ void NebulaMgr::init(const InitParser& conf, LoadingBar& lb)
 }
 
 // Draw all the Nebulae
-double NebulaMgr::draw(Projector* prj, const Navigator * nav, ToneReproductor* eye)
+double NebulaMgr::draw(Projector* prj, const Navigator * nav, ToneReproducer* eye)
 {
 	Nebula::hints_brightness = hintsFader.getInterstate()*flagShow.getInterstate();
 	Nebula::flagShowTexture = flagShowTexture;

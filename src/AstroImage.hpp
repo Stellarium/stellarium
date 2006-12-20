@@ -6,7 +6,7 @@
 
 class Projector;
 class Navigator;
-class ToneReproductor;
+class ToneReproducer;
 
 //! Base class for any astro image with a fixed position
 class AstroImage
@@ -18,7 +18,7 @@ public:
 	virtual ~AstroImage();
 	
 	//! Draw the image on the screen. Assume that we are in Orthographic projection mode.
-	void draw(Projector *prj, const Navigator *nav, ToneReproductor *eye);
+	void draw(Projector *prj, const Navigator *nav, ToneReproducer *eye);
 	
 	//! Return the matching ConvexPolygon
 	const ConvexPolygon& getPolygon(void) const {return poly;}

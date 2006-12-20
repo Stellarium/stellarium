@@ -24,12 +24,12 @@
 #include "stellarium.h"
 #include "StelUtils.hpp"
 #include "InitParser.hpp"
-#include "observator.h"
+#include "Observer.hpp"
 #include "solarsystem.h"
 #include "planet.h"
 #include "Translator.hpp"
 
-Observator::Observator(const SolarSystem &ssystem)
+Observer::Observer(const SolarSystem &ssystem)
            :ssystem(ssystem), planet(0),
             longitude(0.), latitude(0.), altitude(0)
 {
@@ -37,19 +37,19 @@ Observator::Observator(const SolarSystem &ssystem)
 	flag_move_to = 0;
 }
 
-Observator::~Observator()
+Observer::~Observer()
 {
 }
 
-Vec3d Observator::getCenterVsop87Pos(void) const {
+Vec3d Observer::getCenterVsop87Pos(void) const {
   return planet->get_heliocentric_ecliptic_pos();
 }
 
-double Observator::getDistanceFromCenter(void) const {
+double Observer::getDistanceFromCenter(void) const {
   return planet->getRadius() + (altitude/(1000*AU));
 }
 
-Mat4d Observator::getRotLocalToEquatorial(double jd) const {
+Mat4d Observer::getRotLocalToEquatorial(double jd) const {
   double lat = latitude;
   // TODO: Figure out how to keep continuity in sky as reach poles
   // otherwise sky jumps in rotation when reach poles in equatorial mode
@@ -60,11 +60,11 @@ Mat4d Observator::getRotLocalToEquatorial(double jd) const {
        * Mat4d::yrotation((90.-lat)*(M_PI/180.));
 }
 
-Mat4d Observator::getRotEquatorialToVsop87(void) const {
+Mat4d Observer::getRotEquatorialToVsop87(void) const {
   return planet->getRotEquatorialToVsop87();
 }
 
-void Observator::load(const string& file, const string& section)
+void Observer::load(const string& file, const string& section)
 {
 	InitParser conf;
 	conf.load(file);
@@ -76,7 +76,7 @@ void Observator::load(const string& file, const string& section)
 	load(conf, section);
 }
 
-bool Observator::setHomePlanet(const string &english_name) {
+bool Observer::setHomePlanet(const string &english_name) {
   Planet *p = ssystem.searchByEnglishName(english_name);
   if (p) {
     planet = p;
@@ -86,7 +86,7 @@ bool Observator::setHomePlanet(const string &english_name) {
 }
 
 
-void Observator::load(const InitParser& conf, const string& section)
+void Observer::load(const InitParser& conf, const string& section)
 {
 	name = _(conf.get_str(section, "name").c_str());
 
@@ -109,7 +109,7 @@ void Observator::load(const InitParser& conf, const string& section)
 	altitude = conf.get_int(section, "altitude");
 }
 //
-//void Observator::set_landscape_name(const string s) {
+//void Observer::set_landscape_name(const string s) {
 //
 //	// need to lower case name because config file parser lowercases section names
 //	string x = s;
@@ -117,7 +117,7 @@ void Observator::load(const InitParser& conf, const string& section)
 //	landscape_name = x;
 //}
 
-void Observator::save(const string& file, const string& section) const
+void Observer::save(const string& file, const string& section) const
 {
 	printf("Saving location %s to file %s\n",StelUtils::wstringToString(name).c_str(), file.c_str());
 
@@ -131,7 +131,7 @@ void Observator::save(const string& file, const string& section) const
 
 
 // change settings but don't write to files
-void Observator::setConf(InitParser & conf, const string& section) const
+void Observer::setConf(InitParser & conf, const string& section) const
 {
 	conf.set_str(section + ":name", StelUtils::wstringToString(name));
 	conf.set_str(section + ":home_planet", planet->getEnglishName());
@@ -152,7 +152,7 @@ void Observator::setConf(InitParser & conf, const string& section) const
 
 
 // move gradually to a new observation location
-void Observator::moveTo(double lat, double lon, double alt, int duration, const wstring& _name)
+void Observer::moveTo(double lat, double lon, double alt, int duration, const wstring& _name)
 {
   flag_move_to = 1;
 
@@ -172,22 +172,22 @@ void Observator::moveTo(double lat, double lon, double alt, int duration, const 
   //  printf("coef = %f\n", move_to_coef);
 }
 
-wstring Observator::get_name(void) const
+wstring Observer::get_name(void) const
 {
 	return name;
 }
 
-string Observator::getHomePlanetEnglishName(void) const {
+string Observer::getHomePlanetEnglishName(void) const {
   return planet ? planet->getEnglishName() : "";
 }
 
-wstring Observator::getHomePlanetNameI18n(void) const {
+wstring Observer::getHomePlanetNameI18n(void) const {
   return planet ? planet->getNameI18n() : L"";
 }
 
 // for moving observator position gradually
 // TODO need to work on direction of motion...
-void Observator::update(int delta_time) {
+void Observer::update(int delta_time) {
   if(flag_move_to) {
     move_to_mult += move_to_coef*delta_time;
 

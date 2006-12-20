@@ -20,8 +20,8 @@
 #include "landscape.h"
 #include "InitParser.hpp"
 #include "STexture.h"
-#include "StelApp.h"
-#include "StelTextureMgr.h"
+#include "StelApp.hpp"
+#include "StelTextureMgr.hpp"
 
 #include <cassert>
 
@@ -225,7 +225,7 @@ void LandscapeOldStyle::create(bool _fullpath, stringHash_t param)
 	draw_ground_first = StelUtils::str_to_int(param["draw_ground_first"]);
 }
 
-void LandscapeOldStyle::draw(ToneReproductor * eye, const Projector* prj, const Navigator* nav)
+void LandscapeOldStyle::draw(ToneReproducer * eye, const Projector* prj, const Navigator* nav)
 {
 	if(!valid_landscape) return;
 	if (draw_ground_first) draw_ground(eye, prj, nav);
@@ -236,7 +236,7 @@ void LandscapeOldStyle::draw(ToneReproductor * eye, const Projector* prj, const 
 
 
 // Draw the horizon fog
-void LandscapeOldStyle::draw_fog(ToneReproductor * eye, const Projector* prj, const Navigator* nav) const
+void LandscapeOldStyle::draw_fog(ToneReproducer * eye, const Projector* prj, const Navigator* nav) const
 {
 	if(!fog_fader.getInterstate()) return;
 	glBlendFunc(GL_ONE, GL_ONE);
@@ -253,7 +253,7 @@ void LandscapeOldStyle::draw_fog(ToneReproductor * eye, const Projector* prj, co
 }
 
 // Draw the mountains with a few pieces of texture
-void LandscapeOldStyle::draw_decor(ToneReproductor * eye, const Projector* prj, const Navigator* nav) const
+void LandscapeOldStyle::draw_decor(ToneReproducer * eye, const Projector* prj, const Navigator* nav) const
 {
 	if (!land_fader.getInterstate()) return;
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -306,7 +306,7 @@ void LandscapeOldStyle::draw_decor(ToneReproductor * eye, const Projector* prj, 
 
 
 // Draw the ground
-void LandscapeOldStyle::draw_ground(ToneReproductor * eye, const Projector* prj, const Navigator* nav) const
+void LandscapeOldStyle::draw_ground(ToneReproducer * eye, const Projector* prj, const Navigator* nav) const
 {
 	if (!land_fader.getInterstate()) return;
 	Mat4d mat = nav->get_local_to_eye_mat() * Mat4d::zrotation(ground_angle_rotatez*M_PI/180.f) * Mat4d::translation(Vec3d(0,0,radius*std::sin(ground_angle_shift*M_PI/180.)));
@@ -361,7 +361,7 @@ void LandscapeFisheye::create(const wstring _name, bool _fullpath, const string 
 }
 
 
-void LandscapeFisheye::draw(ToneReproductor * eye, const Projector* prj, const Navigator* nav)
+void LandscapeFisheye::draw(ToneReproducer * eye, const Projector* prj, const Navigator* nav)
 {
 	if(!valid_landscape) return;
 	if(!land_fader.getInterstate()) return;
@@ -423,7 +423,7 @@ void LandscapeSpherical::create(const wstring _name, bool _fullpath, const strin
 }
 
 
-void LandscapeSpherical::draw(ToneReproductor * eye, const Projector* prj, const Navigator* nav)
+void LandscapeSpherical::draw(ToneReproducer * eye, const Projector* prj, const Navigator* nav)
 {
 	if(!valid_landscape) return;
 	if(!land_fader.getInterstate()) return;

@@ -23,7 +23,7 @@
 #include "SDL_opengl.h"
 
 #include "stellarium.h"
-#include "observator.h"
+#include "Observer.hpp"
 #include "vecmath.h"
 
 // Conversion in standar Julian time format
@@ -50,7 +50,7 @@ public:
 		VIEW_EQUATOR
 	};
 	// Create and initialise to default a navigation context
-	Navigator(Observator* obs);
+	Navigator(Observer* obs);
     virtual ~Navigator();
 
 	virtual void init(const InitParser& conf, LoadingBar& lb);
@@ -161,10 +161,10 @@ private:
 
 
 	// Matrices used for every coordinate transfo
-	Mat4d mat_helio_to_local;		// Transform from Heliocentric to Observator local coordinate
-	Mat4d mat_local_to_helio;		// Transform from Observator local coordinate to Heliocentric
-	Mat4d mat_local_to_earth_equ;	// Transform from Observator local coordinate to Earth Equatorial
-	Mat4d mat_earth_equ_to_local;	// Transform from Observator local coordinate to Earth Equatorial
+	Mat4d mat_helio_to_local;		// Transform from Heliocentric to Observer local coordinate
+	Mat4d mat_local_to_helio;		// Transform from Observer local coordinate to Heliocentric
+	Mat4d mat_local_to_earth_equ;	// Transform from Observer local coordinate to Earth Equatorial
+	Mat4d mat_earth_equ_to_local;	// Transform from Observer local coordinate to Earth Equatorial
 	Mat4d mat_helio_to_earth_equ;	// Transform from Heliocentric to earth equatorial coordinate
 	Mat4d mat_earth_equ_to_j2000;
 	Mat4d mat_j2000_to_earth_equ;
@@ -192,7 +192,7 @@ private:
 	string StartupTimeMode;
 
 	// Position variables
-	Observator* position;
+	Observer* position;
 
 	Vec3d initViewPos;				// Default viewing direction
 

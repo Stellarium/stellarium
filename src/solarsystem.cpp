@@ -29,10 +29,10 @@ using namespace std;
 #include "stellarium.h" // AU,SPEED_OF_LIGHT
 #include "InitParser.hpp"
 #include "navigator.h"
-#include "projector.h"
-#include "StelApp.h"
+#include "Projector.hpp"
+#include "StelApp.hpp"
 #include "StelCore.hpp"
-#include "StelTextureMgr.h"
+#include "StelTextureMgr.hpp"
 
 SolarSystem::SolarSystem()
 	:sun(NULL),moon(NULL),earth(NULL), moonScale(1.), fontSize(14.),
@@ -381,7 +381,7 @@ void SolarSystem::computeTransMatrices(double date, const Vec3d& observerPos) {
 
 // Draw all the elements of the solar system
 // We are supposed to be in heliocentric coordinate
-double SolarSystem::draw(Projector * prj, const Navigator * nav, ToneReproductor* eye)
+double SolarSystem::draw(Projector * prj, const Navigator * nav, ToneReproducer* eye)
 {
 	if(!Planet::getflagShow()) return 0.0;
 	

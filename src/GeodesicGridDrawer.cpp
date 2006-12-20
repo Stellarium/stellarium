@@ -19,8 +19,8 @@
  
 #include <sstream>
 #include "GeodesicGridDrawer.h"
-#include "projector.h"
-#include "StelApp.h"
+#include "Projector.hpp"
+#include "StelApp.hpp"
 
 GeodesicGridDrawer::GeodesicGridDrawer(int maxLevel)
 {
@@ -40,7 +40,7 @@ void GeodesicGridDrawer::init(const InitParser& conf, LoadingBar& lb)
 }
 
 
-double GeodesicGridDrawer::draw(Projector *prj, const Navigator *nav, ToneReproductor *eye)
+double GeodesicGridDrawer::draw(Projector *prj, const Navigator *nav, ToneReproducer *eye)
 {
 	glDisable(GL_TEXTURE_2D);
 	glEnable(GL_BLEND);	

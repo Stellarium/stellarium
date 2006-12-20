@@ -22,10 +22,10 @@
 #include "STexture.h"
 #include "StelUtils.hpp"
 #include "navigator.h"
-#include "projector.h"
-#include "tone_reproductor.h"
-#include "StelApp.h"
-#include "StelTextureMgr.h"
+#include "Projector.hpp"
+#include "ToneReproducer.hpp"
+#include "StelApp.hpp"
+#include "StelTextureMgr.hpp"
 
 // Class which manages the displaying of the Milky Way
 MilkyWay::MilkyWay() : radius(1.f), color(1.f, 1.f, 1.f)
@@ -64,7 +64,7 @@ void MilkyWay::update(double deltaTime) {fader->update((int)(deltaTime*1000));}
 void MilkyWay::setFlagShow(bool b){*fader = b;}
 bool MilkyWay::getFlagShow(void) const {return *fader;}
 	
-double MilkyWay::draw(Projector *prj, const Navigator *nav, ToneReproductor *eye)
+double MilkyWay::draw(Projector *prj, const Navigator *nav, ToneReproducer *eye)
 {
 	assert(tex);	// A texture must be loaded before calling this
 

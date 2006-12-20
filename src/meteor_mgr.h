@@ -21,7 +21,7 @@
 #define _METEOR_MGR_H_
 
 #include <vector>
-#include "StelModule.h"
+#include "StelModule.hpp"
 
 class Meteor;
 
@@ -36,7 +36,7 @@ class MeteorMgr : public StelModule
   int get_ZHR(void);   
   void set_max_velocity(int maxv);   // set maximum meteoroid velocity km/s
   virtual void update(double delta_time);          // update positions
-  virtual double draw(Projector* prj, const Navigator * nav, ToneReproductor* eye);
+  virtual double draw(Projector* prj, const Navigator * nav, ToneReproducer* eye);
 
  private:
   vector<Meteor*> active;		// Vector containing all active meteors
