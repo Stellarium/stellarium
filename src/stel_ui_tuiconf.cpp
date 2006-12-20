@@ -29,7 +29,7 @@
 #include "solarsystem.h"
 #include "nebula_mgr.h"
 #include "StelApp.h"
-#include "stel_core.h"
+#include "StelCore.hpp"
 #include "script_mgr.h"
 #include "stel_command_interface.h"
 #include "LandscapeMgr.h"

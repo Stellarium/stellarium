@@ -21,7 +21,7 @@
 #define _TELESCOPE_MGR_H_
 
 
-#include "fader.h"
+#include "Fader.hpp"
 #include "vecmath.h"
 
 #include <vector>

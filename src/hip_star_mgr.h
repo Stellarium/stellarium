@@ -23,9 +23,9 @@
 #include <vector>
 #include <map>
 #include <string>
-#include "fader.h"
+#include "Fader.hpp"
 #include "loadingbar.h"
-#include "translator.h"
+#include "Translator.hpp"
 #include "StelObjectMgr.h"
 
 using namespace std ;

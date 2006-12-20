@@ -22,12 +22,12 @@
 #include <algorithm>
 
 #include "stellarium.h"
-#include "stel_utility.h"
-#include "init_parser.h"
+#include "StelUtils.hpp"
+#include "InitParser.hpp"
 #include "observator.h"
 #include "solarsystem.h"
 #include "planet.h"
-#include "translator.h"
+#include "Translator.hpp"
 
 Observator::Observator(const SolarSystem &ssystem)
            :ssystem(ssystem), planet(0),

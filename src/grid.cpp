@@ -18,7 +18,7 @@
  */
 
 #include "grid.h"
-#include "stel_utility.h"
+#include "StelUtils.hpp"
 
 void moy(Vec3f * p, int a, int b, int c)
 {

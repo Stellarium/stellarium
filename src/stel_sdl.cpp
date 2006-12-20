@@ -21,7 +21,7 @@
 #endif
 
 #include "StelApp.h"
-#include "stel_core.h"
+#include "StelCore.hpp"
 
 #ifdef HAVE_SDL_MIXER_H
 #include "SDL_mixer.h"

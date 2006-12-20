@@ -25,12 +25,11 @@
 
 #include "stel_object_base.h"
 #include "stellarium.h"
-#include "stel_utility.h"
-#include "s_font.h"
+#include "StelUtils.hpp"
+#include "SFont.hpp"
 #include "tone_reproductor.h"
 #include "projector.h"
 #include "navigator.h"
-#include "stel_utility.h"
 
 
 class HipStar : public StelObjectBase

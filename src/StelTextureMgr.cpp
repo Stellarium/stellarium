@@ -30,7 +30,7 @@ extern "C" {
 #include "SDL_thread.h"
 
 #include "StelTextureMgr.h"
-#include "stel_utility.h"
+#include "StelUtils.hpp"
 
 using namespace std;
 

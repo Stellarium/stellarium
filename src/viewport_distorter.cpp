@@ -21,7 +21,7 @@
 #include "viewport_distorter.h"
 #include "StelApp.h"
 #include "spheric_mirror_calculator.h"
-#include "init_parser.h"
+#include "InitParser.hpp"
 #include "projector.h"
 
 #include "SDL_opengl.h"

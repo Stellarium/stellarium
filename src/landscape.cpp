@@ -18,7 +18,7 @@
  */
 
 #include "landscape.h"
-#include "init_parser.h"
+#include "InitParser.hpp"
 #include "STexture.h"
 #include "StelApp.h"
 #include "StelTextureMgr.h"

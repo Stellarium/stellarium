@@ -24,11 +24,11 @@
 #include <algorithm>
 #include "stel_ui.h"
 #include "StelApp.h"
-#include "stel_core.h"
+#include "StelCore.hpp"
 #include "constellation_mgr.h"
 #include "solarsystem.h"
 #include "nebula_mgr.h"
-#include "init_parser.h"
+#include "InitParser.hpp"
 #include "stel_command_interface.h"
 #include "StelTextureMgr.h"
 #include "LandscapeMgr.h"

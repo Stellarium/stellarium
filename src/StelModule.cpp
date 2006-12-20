@@ -19,7 +19,7 @@
  
 #include "StelModule.h"
 #include "vecmath.h"
-#include "init_parser.h"
+#include "InitParser.hpp"
 #include "StelApp.h"
 
 /*************************************************************************

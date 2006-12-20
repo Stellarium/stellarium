@@ -22,9 +22,9 @@
 #include "nebula.h"
 #include "STexture.h"
 #include "stellarium.h"
-#include "s_font.h"
+#include "SFont.hpp"
 #include "navigator.h"
-#include "stel_utility.h"
+#include "StelUtils.hpp"
 #include "StelApp.h"
 #include "StelTextureMgr.h"
 

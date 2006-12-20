@@ -18,9 +18,9 @@
  */
 
 #include "stel_ui.h"
-#include "stel_utility.h"
+#include "StelUtils.hpp"
 #include "StelApp.h"
-#include "stel_core.h"
+#include "StelCore.hpp"
 #include "hip_star_mgr.h"
 #include "constellation_mgr.h"
 #include "solarsystem.h"

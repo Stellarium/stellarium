@@ -21,7 +21,7 @@
 #include "telescope.h"
 #include "stel_object.h"
 #include "projector.h"
-#include "init_parser.h"
+#include "InitParser.hpp"
 #include "StelApp.h"
 #include "StelTextureMgr.h"
 

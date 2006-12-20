@@ -25,8 +25,8 @@
 #include <fstream>
 
 #include "bytes.h"
-#include "stel_utility.h"
-#include "translator.h"
+#include "StelUtils.hpp"
+#include "Translator.hpp"
 
 // Init static members
 Translator* Translator::lastUsed = NULL;

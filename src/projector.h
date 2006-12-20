@@ -22,7 +22,7 @@
 
 #include "stellarium.h"
 #include "vecmath.h"
-#include "s_font.h"
+#include "SFont.hpp"
 
 class InitParser;
 

@@ -18,7 +18,7 @@
  */
 
 #include "telescope.h"
-#include "stel_utility.h"
+#include "StelUtils.hpp"
 
 #include <sstream>
 #include <iostream>

@@ -30,7 +30,7 @@
 #include "navigator.h"
 #include "tone_reproductor.h"
 #include "skybright.h"
-#include "fader.h"
+#include "Fader.hpp"
 
 using namespace std;
 

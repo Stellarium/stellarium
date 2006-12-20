@@ -23,8 +23,8 @@
 #include "stellarium.h"
 #include "stel_object_base.h"
 #include "stel_object.h"
-#include "stel_utility.h"
-#include "fader.h"
+#include "StelUtils.hpp"
+#include "Fader.hpp"
 #include <vector>
 
 class HipStarMgr;

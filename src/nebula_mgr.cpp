@@ -27,7 +27,7 @@
 #include "nebula.h"
 #include "STexture.h"
 #include "navigator.h"
-#include "translator.h"
+#include "Translator.hpp"
 #include "loadingbar.h"
 #include "StelTextureMgr.h"
 
