@@ -19,7 +19,7 @@
 
 #include <cstdio>
 #include <iostream>
-#include "custom_projector.h"
+#include "CustomProjector.hpp"
 
 
 CustomProjector::CustomProjector(const Vec4i& viewport, double _fov)

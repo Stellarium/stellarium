@@ -21,10 +21,10 @@
 #include <cstdio>
 #include <cassert>
 #include "Projector.hpp"
-#include "fisheye_projector.h"
-#include "cylinder_projector.h"
-#include "stereographic_projector.h"
-#include "spheric_mirror_projector.h"
+#include "FisheyeProjector.hpp"
+#include "CylinderProjector.hpp"
+#include "StereographicProjector.hpp"
+#include "SphericMirrorProjector.hpp"
 #include "InitParser.hpp"
 
 const char *Projector::typeToString(PROJECTOR_TYPE type) {

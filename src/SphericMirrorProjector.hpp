@@ -1,6 +1,7 @@
 /*
  * Stellarium
  * Copyright (C) 2002 Fabien Chereau
+ * Author 2006 Johannes Gajdosik
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,18 +18,24 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#ifndef _CYLINDER_PROJECTOR_H_
-#define _CYLINDER_PROJECTOR_H_
+#ifndef _SPHERIC_MIRROR_PROJECTOR_H_
+#define _SPHERIC_MIRROR_PROJECTOR_H_
 
-#include "custom_projector.h"
+#include "CustomProjector.hpp"
+#include "SphericMirrorCalculator.hpp"
 
-class CylinderProjector : public CustomProjector {
+class SphericMirrorProjector : public CustomProjector {
 public:
-  CylinderProjector(const Vec4i& viewport ,double _fov);
+  SphericMirrorProjector(const Vec4i &viewport,double _fov);
 private:
-  PROJECTOR_TYPE getType(void) const {return CYLINDER_PROJECTOR;}
+  PROJECTOR_TYPE getType(void) const {return SPHERIC_MIRROR_PROJECTOR;}
+  void setViewport(int x, int y, int w, int h);
   bool project_custom(const Vec3d &v, Vec3d &win, const Mat4d &mat) const;
   void unproject(double x, double y, const Mat4d& m, Vec3d& v) const;
+  bool needGlFrontFaceCW(void) const
+    {return !CustomProjector::needGlFrontFaceCW();}
+private:
+  SphericMirrorCalculator calc;
 };
 
 

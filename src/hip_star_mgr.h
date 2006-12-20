@@ -24,7 +24,7 @@
 #include <map>
 #include <string>
 #include "Fader.hpp"
-#include "loadingbar.h"
+#include "LoadingBar.hpp"
 #include "Translator.hpp"
 #include "StelObjectMgr.hpp"
 

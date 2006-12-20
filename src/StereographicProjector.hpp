@@ -21,7 +21,7 @@
 #ifndef _STEREOGRAPHIC_PROJECTOR_H_
 #define _STEREOGRAPHIC_PROJECTOR_H_
 
-#include "custom_projector.h"
+#include "CustomProjector.hpp"
 
 class StereographicProjector : public CustomProjector {
 public:

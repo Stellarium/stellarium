@@ -18,7 +18,7 @@
  */
 
 #include "Projector.hpp"
-#include "loadingbar.h"
+#include "LoadingBar.hpp"
 #include "StelApp.hpp"
 #include "StelTextureMgr.hpp"
 
