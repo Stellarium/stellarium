@@ -27,6 +27,9 @@
 #include "stel_ui.h"
 #include "StelTextureMgr.hpp"
 
+//#include "LoadingBar.hpp"
+//#include "CeguiGui.hpp"
+
 // Initialize static variables
 StelApp* StelApp::singleton = NULL;
 
@@ -162,7 +165,6 @@ void StelApp::quit(void)
 void StelApp::init(void)
 {
 //	StelUtils::downloadFile("http://chereau.free.fr/", "/home/fchereau/Desktop/tmp.html");
-	
 	Translator::initSystemLanguage();
 
 	// Load language codes
@@ -186,12 +188,10 @@ void StelApp::init(void)
 		// Config versions less than 0.6.0 are not supported, otherwise we will try to use it
 		if( v1 == 0 && v2 < 6 )
 		{
-
 			// The config file is too old to try an importation
 			printf("The current config file is from a version too old for parameters to be imported (%s).\nIt will be replaced by the default config file.\n", version.empty() ? "<0.6.0" : version.c_str());
 			system( (string("cp -f ") + dataDir + "default_config.ini " + getConfigFilePath()).c_str() );
 			conf.load(dotStellariumDir + "config.ini");  // Read new config!
-
 		}
 		else
 		{
@@ -223,7 +223,11 @@ void StelApp::init(void)
 // star names are loaded again
 	skyCultureMgr->init(conf);
 
-	// initialisation of the User Interface
+//	LoadingBar dummy(core->getProjection(), 12, "logo24bits.png", 0, 0,StelUtils::stringToWstring(VERSION), 45, 320, 121);
+//	// New CEGUI widgets
+//	CeguiGui* ceguiGui = new CeguiGui();
+//	ceguiGui->init(conf, dummy);
+//	getModuleMgr().registerModule(ceguiGui);
 
 	// TODO: Need way to update settings from config without reinitializing whole gui
 	ui->init(conf);
@@ -412,10 +416,15 @@ void StelApp::updateAppLanguage()
 	ui->localizeTui();
 }
 
+
 // Update translations and font for sky everywhere in the program
 void StelApp::updateSkyLanguage()
 {
-	core->updateSkyLanguage();
+	// Send the event to every StelModule
+	for (StelModuleMgr::Iterator iter=moduleMgr->begin();iter!=moduleMgr->end();++iter)
+	{
+		(*iter)->updateI18n();
+	}
 }
 
 // Update and reload sky culture informations everywhere in the program

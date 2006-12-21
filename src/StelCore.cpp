@@ -126,6 +126,7 @@ StelCore::~StelCore()
 		delete geodesic_grid;
 		geodesic_grid = NULL;
 	}
+	delete movementMgr;
 }
 
 // Load core data and initialize with default values
@@ -605,20 +606,6 @@ void StelCore::updateSkyCulture()
 	
 	if (hip_stars) hip_stars->updateSkyCulture(lb);
 }
-
-
-// Set the sky locale and update the sky objects names for all the modules
-void StelCore::updateSkyLanguage()
-{
-	if( !hip_stars || !asterisms)
-		return; // objects not initialized yet
-
-	if (asterisms) asterisms->updateI18n();
-	if (ssystem) ssystem->updateI18n();
-	if (nebulas) nebulas->updateI18n();
-	if (hip_stars) hip_stars->updateI18n();
-}
-
 
 // Please keep saveCurrentSettings up to date with any new color settings added here
 void StelCore::setColorScheme(const string& skinFile, const string& section)
