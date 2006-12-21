@@ -1198,9 +1198,11 @@ int StelUI::handle_keys(SDLKey key, SDLMod mod, Uint16 unicode, Uint8 state)
             break;
 
 		case SDLK_t:
+		{
 			MovementMgr* mvmgr = (MovementMgr*)StelApp::getInstance().getModuleMgr().getModule("movements");
             mvmgr->setFlagLockEquPos(!mvmgr->getFlagLockEquPos());
             break;
+		}
 		case SDLK_s:
             if (!(mod & COMPATIBLE_KMOD_CTRL))
 				app->commander->execute_command( "flag stars toggle");
