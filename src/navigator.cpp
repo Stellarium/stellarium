@@ -25,8 +25,7 @@
 
 
 ////////////////////////////////////////////////////////////////////////////////
-Navigator::Navigator(Observer* obs) : flag_traking(0), flag_lock_equ_pos(0), flag_auto_move(0),
-		time_speed(JD_SECOND), JDay(0.), position(obs)
+Navigator::Navigator(Observer* obs) : time_speed(JD_SECOND), JDay(0.), position(obs)
 {
 	if (!position)
 	{
@@ -45,7 +44,7 @@ Navigator::~Navigator()
 
 void Navigator::init(const InitParser& conf, LoadingBar& lb)
 {
-	setJDay(get_julian_from_sys());
+	setTimeNow();
 	setLocalVision(Vec3f(1,1e-05,0.2));
 	// Compute transform matrices between coordinates systems
 	updateTransformMatrices();
@@ -94,134 +93,6 @@ bool Navigator::getIsTimeNow(void) const
 	return previousResult;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-void Navigator::updateVisionVector(int delta_time,const StelObject &selected)
-{
-	if (flag_auto_move)
-	{
-		double ra_aim, de_aim, ra_start, de_start, ra_now, de_now;
-
-		if( zooming_mode == 1 && selected)
-		{
-			// if zooming in, object may be moving so be sure to zoom to latest position
-			move.aim = selected.get_earth_equ_pos(this);
-			move.aim.normalize();
-			move.aim*=2.;
-		}
-
-		// Use a smooth function
-		float smooth = 4.f;
-		double c;
-
-		if (zooming_mode == 1)
-		{
-			if( move.coef > .9 )
-			{
-				c = 1;
-			}
-			else
-			{
-				c = 1 - pow(1.-1.11*(move.coef),3);
-			}
-		}
-		else if(zooming_mode == -1)
-		{
-			if( move.coef < 0.1 )
-			{
-				// keep in view at first as zoom out
-				c = 0;
-
-				/* could track as moves too, but would need to know if start was actually
-				   a zoomed in view on the object or an extraneous zoom out command
-				   if(move.local_pos) {
-				   move.start=earth_equ_to_local(selected.get_earth_equ_pos(this));
-				   } else {
-				   move.start=selected.get_earth_equ_pos(this);
-				   }
-				   move.start.normalize();
-				*/
-
-			}
-			else
-			{
-				c =  pow(1.11*(move.coef-.1),3);
-			}
-		}
-		else c = std::atan(smooth * 2.*move.coef-smooth)/std::atan(smooth)/2+0.5;
-
-
-		if (move.local_pos)
-		{
-			StelUtils::rect_to_sphe(&ra_aim, &de_aim, move.aim);
-			StelUtils::rect_to_sphe(&ra_start, &de_start, move.start);
-		}
-		else
-		{
-			StelUtils::rect_to_sphe(&ra_aim, &de_aim, earth_equ_to_local(move.aim));
-			StelUtils::rect_to_sphe(&ra_start, &de_start, earth_equ_to_local(move.start));
-		}
-		
-		// Trick to choose the good moving direction and never travel on a distance > PI
-		if (ra_aim-ra_start > M_PI)
-		{
-			ra_aim -= 2.*M_PI;
-		}
-		else if (ra_aim-ra_start < -M_PI)
-		{
-			ra_aim += 2.*M_PI;
-		}
-		
-		de_now = de_aim*c + de_start*(1. - c);
-		ra_now = ra_aim*c + ra_start*(1. - c);
-		
-		StelUtils::sphe_to_rect(ra_now, de_now, local_vision);
-		equ_vision = local_to_earth_equ(local_vision);
-
-		move.coef+=move.speed*delta_time;
-		if (move.coef>=1.)
-		{
-			flag_auto_move=0;
-			if (move.local_pos)
-			{
-				local_vision=move.aim;
-				equ_vision=local_to_earth_equ(local_vision);
-			}
-			else
-			{
-				equ_vision=move.aim;
-				local_vision=earth_equ_to_local(equ_vision);
-			}
-		}
-	}
-	else
-	{
-		if (flag_traking && selected) // Equatorial vision vector locked on selected object
-		{
-			equ_vision=selected.get_earth_equ_pos(this);
-			// Recalc local vision vector
-
-			local_vision=earth_equ_to_local(equ_vision);
-
-		}
-		else
-		{
-			if (flag_lock_equ_pos) // Equatorial vision vector locked
-			{
-				// Recalc local vision vector
-				local_vision=earth_equ_to_local(equ_vision);
-			}
-			else // Local vision vector locked
-			{
-				// Recalc equatorial vision vector
-				equ_vision=local_to_earth_equ(local_vision);
-			}
-		}
-	}
-
-	prec_equ_vision = mat_earth_equ_to_j2000*equ_vision;
-
-
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 void Navigator::setLocalVision(const Vec3d& _pos)
@@ -232,42 +103,19 @@ void Navigator::setLocalVision(const Vec3d& _pos)
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-void Navigator::updateMove(double deltaAz, double deltaAlt)
+void Navigator::setEquVision(const Vec3d& _pos)
 {
-	double azVision, altVision;
+	equ_vision = _pos;
+	prec_equ_vision = mat_earth_equ_to_j2000*equ_vision;
+	local_vision = earth_equ_to_local(equ_vision);
+}
 
-	if( viewing_mode == VIEW_EQUATOR) StelUtils::rect_to_sphe(&azVision,&altVision,equ_vision);
-	else StelUtils::rect_to_sphe(&azVision,&altVision,local_vision);
-
-	// if we are moving in the Azimuthal angle (left/right)
-	if (deltaAz) azVision-=deltaAz;
-	if (deltaAlt)
-	{
-		if (altVision+deltaAlt <= M_PI_2 && altVision+deltaAlt >= -M_PI_2) altVision+=deltaAlt;
-		if (altVision+deltaAlt > M_PI_2) altVision = M_PI_2 - 0.000001;		// Prevent bug
-		if (altVision+deltaAlt < -M_PI_2) altVision = -M_PI_2 + 0.000001;	// Prevent bug
-	}
-
-	// recalc all the position variables
-	if (deltaAz || deltaAlt)
-	{
-		if( viewing_mode == VIEW_EQUATOR)
-		{
-			StelUtils::sphe_to_rect(azVision, altVision, equ_vision);
-			local_vision=earth_equ_to_local(equ_vision);
-		}
-		else
-		{
-			StelUtils::sphe_to_rect(azVision, altVision, local_vision);
-			// Calc the equatorial coordinate of the direction of vision wich was in Altazimuthal coordinate
-			equ_vision=local_to_earth_equ(local_vision);
-			prec_equ_vision = mat_earth_equ_to_j2000*equ_vision;
-		}
-	}
-
-	// Update the final modelview matrices
-	updateModelViewMat();
-
+////////////////////////////////////////////////////////////////////////////////
+void Navigator::setPrecEquVision(const Vec3d& _pos)
+{
+	prec_equ_vision = _pos;
+	equ_vision = mat_j2000_to_earth_equ*prec_equ_vision;
+	local_vision = earth_equ_to_local(equ_vision);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -379,33 +227,11 @@ Vec3d Navigator::getObserverHelioPos(void) const
 	return mat_local_to_helio*v;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-// Move to the given equatorial position
-void Navigator::moveTo(const Vec3d& _aim, float move_duration, bool _local_pos, int zooming)
-{
-	zooming_mode = zooming;
-	move.aim=_aim;
-	move.aim.normalize();
-	move.aim*=2.;
-	if (_local_pos)
-	{
-		move.start=local_vision;
-	}
-	else
-	{
-		move.start=equ_vision;
-	}
-	move.start.normalize();
-	move.speed=1.f/(move_duration*1000);
-	move.coef=0.;
-	move.local_pos = _local_pos;
-	flag_auto_move = true;
-}
 
 
 ////////////////////////////////////////////////////////////////////////////////
 // Set type of viewing mode (align with horizon or equatorial coordinates)
-void Navigator::setViewingMode(VIEWING_MODE_TYPE view_mode)
+void Navigator::setViewingMode(ViewingModeType view_mode)
 {
 	viewing_mode = view_mode;
 

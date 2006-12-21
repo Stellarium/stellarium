@@ -26,7 +26,7 @@ StereographicProjector::StereographicProjector(const Vec4i& viewport,
                        :CustomProjector(viewport, _fov) {
   min_fov = 0.001;
   max_fov = 270.00001;
-  set_fov(_fov);
+  setFov(_fov);
 }
 
 bool StereographicProjector::project_custom(const Vec3d &v,

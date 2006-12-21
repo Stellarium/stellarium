@@ -88,7 +88,7 @@ protected:
 	float get_on_screen_size(const Projector* prj,
 	                         const Navigator * nav = NULL)
 	  {return angular_size * (180./M_PI)
-	                       * (prj->getViewportHeight()/prj->get_fov());}
+	                       * (prj->getViewportHeight()/prj->getFov());}
 
 private:
 	void draw_chart(const Projector* prj, const Navigator * nav);

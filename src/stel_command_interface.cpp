@@ -35,6 +35,7 @@
 #include "LandscapeMgr.h"
 #include "GridLinesMgr.h"
 #include "MilkyWay.h"
+#include "MovementMgr.hpp"
 
 using namespace std;
 
@@ -96,7 +97,8 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 	NebulaMgr* nmgr = (NebulaMgr*)StelApp::getInstance().getModuleMgr().getModule("nebulas");
 	SolarSystem* ssmgr = (SolarSystem*)StelApp::getInstance().getModuleMgr().getModule("ssystem");
 	LandscapeMgr* lmgr = (LandscapeMgr*)StelApp::getInstance().getModuleMgr().getModule("landscape");
-
+	MovementMgr* mvmgr = (MovementMgr*)StelApp::getInstance().getModuleMgr().getModule("movements");
+	
 	// stellarium specific logic to run each command
 
 	if(command == "flag") {
@@ -126,7 +128,7 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 		// TODO: some bounds/error checking here
 		
 		if(args["atmosphere_fade_duration"]!="") lmgr->setAtmosphereFadeDuration(StelUtils::str_to_double(args["atmosphere_fade_duration"]));
-		else if(args["auto_move_duration"]!="") stcore->setAutomoveDuration( StelUtils::str_to_double(args["auto_move_duration"]));
+		else if(args["auto_move_duration"]!="") mvmgr->setAutomoveDuration( StelUtils::str_to_double(args["auto_move_duration"]));
 		else if(args["constellation_art_fade_duration"]!="") cmgr->setArtFadeDuration(StelUtils::str_to_double(args["constellation_art_fade_duration"]));
 		else if(args["constellation_art_intensity"]!="") cmgr->setArtIntensity(StelUtils::str_to_double(args["constellation_art_intensity"]));
 		else if(args["home_planet"]!="") stcore->setHomePlanet(args["home_planet"]);
@@ -231,7 +233,7 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 
 		if(args["delta_az"]!="" || args["delta_alt"]!="") {
 			// immediately change viewing direction
-			stcore->panView(StelUtils::str_to_double(args["delta_az"]),
+			mvmgr->panView(StelUtils::str_to_double(args["delta_az"]),
 							StelUtils::str_to_double(args["delta_alt"]));
 		}	else status = 0;
 
@@ -245,19 +247,19 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 
 		if(args["auto"]!="") {
 			// auto zoom using specified or default duration
-			if(args["duration"]=="") duration = stcore->getAutoMoveDuration();
+			if(args["duration"]=="") duration = mvmgr->getAutoMoveDuration();
 		  		  
-			if(args["auto"]=="out") stcore->autoZoomOut(duration, 0);
-			else if(args["auto"]=="initial") stcore->autoZoomOut(duration, 1);
+			if(args["auto"]=="out") mvmgr->autoZoomOut(duration, 0);
+			else if(args["auto"]=="initial") mvmgr->autoZoomOut(duration, 1);
 			else if(args["manual"]=="1") {
-				stcore->autoZoomIn(duration, 1);  // have to explicity allow possible manual zoom 
-			} else stcore->autoZoomIn(duration, 0);  
+				mvmgr->autoZoomIn(duration, 1);  // have to explicity allow possible manual zoom 
+			} else mvmgr->autoZoomIn(duration, 0);  
 
 		} else if (args["fov"]!="") {
 			// zoom to specific field of view
-			stcore->zoomTo( StelUtils::str_to_double(args["fov"]), StelUtils::str_to_double(args["duration"]));
+			mvmgr->zoomTo( StelUtils::str_to_double(args["fov"]), StelUtils::str_to_double(args["duration"]));
 
-		} else if (args["delta_fov"]!="") stcore->setFov(stcore->getFov() + StelUtils::str_to_double(args["delta_fov"]));
+		} else if (args["delta_fov"]!="") stcore->getProjection()->setFov(stcore->getProjection()->getFov() + StelUtils::str_to_double(args["delta_fov"]));
 		// should we record absolute fov instead of delta? isn't usually smooth playback
 		else status = 0;
 
@@ -706,6 +708,7 @@ int StelCommandInterface::set_flag(string name, string value, bool &newval, bool
 		SolarSystem* ssmgr = (SolarSystem*)StelApp::getInstance().getModuleMgr().getModule("ssystem");
 		LandscapeMgr* lmgr = (LandscapeMgr*)StelApp::getInstance().getModuleMgr().getModule("landscape");
 		GridLinesMgr* grlmgr = (GridLinesMgr*)StelApp::getInstance().getModuleMgr().getModule("gridlines");
+		MovementMgr* mvmgr = (MovementMgr*)StelApp::getInstance().getModuleMgr().getModule("movements");
 		
 		if(name=="constellation_drawing") {
 			newval = !cmgr->getFlagLines();
@@ -739,8 +742,8 @@ int StelCommandInterface::set_flag(string name, string value, bool &newval, bool
 		else if(name=="show_tui_datetime") newval = (stapp->ui->FlagShowTuiDateTime = !stapp->ui->FlagShowTuiDateTime);
 		else if(name=="show_tui_short_obj_info") newval = (stapp->ui->FlagShowTuiShortObjInfo = !stapp->ui->FlagShowTuiShortObjInfo);
 		else if(name=="manual_zoom") {
-			newval = !stcore->getFlagManualAutoZoom();  
-			stcore->setFlagManualAutoZoom(newval); }
+			newval = !mvmgr->getFlagManualAutoZoom();  
+			mvmgr->setFlagManualAutoZoom(newval); }
 		else if(name=="show_script_bar") newval = (stapp->ui->FlagShowScriptBar = !stapp->ui->FlagShowScriptBar);
 		else if(name=="fog") {
 			newval = !lmgr->getFlagFog();
@@ -839,8 +842,8 @@ int StelCommandInterface::set_flag(string name, string value, bool &newval, bool
 		ssmgr->setFlagTrails(newval);
 		}
 		else if(name=="track_object") {
-			newval = !stcore->getFlagTracking();
-			stcore->setFlagTracking(newval);
+			newval = !mvmgr->getFlagTracking();
+			mvmgr->setFlagTracking(newval);
 		}
 		else if(name=="script_gui_debug") {  // Not written to config - script specific
 			newval = !stapp->scripts->get_gui_debug();
@@ -884,6 +887,7 @@ int StelCommandInterface::set_flag(string name, string value, bool &newval, bool
 		SolarSystem* ssmgr = (SolarSystem*)StelApp::getInstance().getModuleMgr().getModule("ssystem");
 		LandscapeMgr* lmgr = (LandscapeMgr*)StelApp::getInstance().getModuleMgr().getModule("landscape");
 		GridLinesMgr* grlmgr = (GridLinesMgr*)StelApp::getInstance().getModuleMgr().getModule("gridlines");
+		MovementMgr* mvmgr = (MovementMgr*)StelApp::getInstance().getModuleMgr().getModule("movements");
 		
 		if(name=="constellation_drawing") cmgr->setFlagLines(newval);
 		else if(name=="constellation_names") cmgr->setFlagNames(newval);
@@ -895,7 +899,7 @@ int StelCommandInterface::set_flag(string name, string value, bool &newval, bool
 		else if(name=="show_selected_object_info") stapp->ui->FlagShowSelectedObjectInfo = newval;
 		else if(name=="show_tui_datetime") stapp->ui->FlagShowTuiDateTime = newval;
 		else if(name=="show_tui_short_obj_info") stapp->ui->FlagShowTuiShortObjInfo = newval;
-		else if(name=="manual_zoom") stcore->setFlagManualAutoZoom(newval);
+		else if(name=="manual_zoom") mvmgr->setFlagManualAutoZoom(newval);
 		else if(name=="show_script_bar") stapp->ui->FlagShowScriptBar = newval;
 		else if(name=="fog") lmgr->setFlagFog(newval);
 		else if(name=="atmosphere") { 
@@ -933,7 +937,7 @@ int StelCommandInterface::set_flag(string name, string value, bool &newval, bool
 		}
 		else if(name=="bright_nebulae") nmgr->setFlagBright(newval);
 		else if(name=="object_trails") ssmgr->setFlagTrails(newval);
-		else if(name=="track_object") stcore->setFlagTracking(newval);
+		else if(name=="track_object") mvmgr->setFlagTracking(newval);
 		else if(name=="script_gui_debug") stapp->scripts->set_gui_debug(newval); // Not written to config - script specific
 		else return(status);
 

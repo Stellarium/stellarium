@@ -25,7 +25,7 @@ FisheyeProjector::FisheyeProjector(const Vec4i& viewport, double _fov)
 {
 	min_fov = 0.0001;
 	max_fov = 180.00001;
-	set_fov(_fov);
+	setFov(_fov);
 }
 /*
 bool FisheyeProjector::project_custom(const Vec3d &v,Vec3d &win,
