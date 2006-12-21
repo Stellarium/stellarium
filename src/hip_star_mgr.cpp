@@ -1448,7 +1448,7 @@ void SpecialZoneArray<Star>::draw(int index,bool is_inside,
 int HipStarMgr::getMaxSearchLevel(const ToneReproducer *eye,
                                   const Projector *prj) const {
   int rval = -1;
-  float fov_q = prj->get_fov();
+  float fov_q = prj->getFov();
   if (fov_q > 60) fov_q = 60;
   else if (fov_q < 0.1) fov_q = 0.1;
   fov_q = 1.f/(fov_q*fov_q);
@@ -1477,7 +1477,7 @@ double HipStarMgr::draw(Projector *prj, const Navigator *nav, ToneReproducer *ey
     // projecting all stars just to draw disembodied labels
     if(!starsFader.getInterstate()) return 0.;
 
-    float fov_q = prj->get_fov();
+    float fov_q = prj->getFov();
     if (fov_q > 60) fov_q = 60;
     else if (fov_q < 0.1) fov_q = 0.1;
     fov_q = 1.f/(fov_q*fov_q);
@@ -1495,9 +1495,9 @@ double HipStarMgr::draw(Projector *prj, const Navigator *nav, ToneReproducer *ey
     // FOV is currently measured vertically, so need to adjust for wide screens
     // TODO: projector should probably use largest measurement itself
 //    const float max_fov =
-//      MY_MAX( prj->get_fov(),
-//              prj->get_fov()*prj->getViewportWidth()/prj->getViewportHeight());
-    //    float maxMag = limiting_mag-1 + 60.f/prj->get_fov();
+//      MY_MAX( prj->getFov(),
+//              prj->getFov()*prj->getViewportWidth()/prj->getViewportHeight());
+    //    float maxMag = limiting_mag-1 + 60.f/prj->getFov();
 //    const float maxMag = limitingMag-1 + 60.f/max_fov;
 
     prj->set_orthographic_projection();    // set 2D coordinate
@@ -1523,7 +1523,7 @@ double HipStarMgr::draw(Projector *prj, const Navigator *nav, ToneReproducer *ey
           // and convert it in function of the eye adaptation
 //        rmag_table[i] =
 //          eye->adapt_luminance(std::exp(-0.92103f*(mag + 12.12331f)) * 108064.73f)
-//            * std::pow(prj->get_fov(),-0.85f) * 70.f;
+//            * std::pow(prj->getFov(),-0.85f) * 70.f;
         rmag_table[i] =
           std::sqrt(eye->adapt_luminance(
             std::exp(-0.92103f*(mag + 12.12331f)) * 108064.73f * fov_q)) * 30.f;

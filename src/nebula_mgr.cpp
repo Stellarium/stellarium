@@ -101,7 +101,7 @@ double NebulaMgr::draw(Projector* prj, const Navigator * nav, ToneReproducer* ey
 	int nbZones=0;
 	// FOV is currently measured vertically, so need to adjust for wide screens
 	// TODO: projector should probably use largest measurement itself
-	float max_fov = MY_MAX( prj->get_fov(), prj->get_fov()*prj->getViewportWidth()/prj->getViewportHeight());
+	float max_fov = MY_MAX( prj->getFov(), prj->getFov()*prj->getViewportWidth()/prj->getViewportHeight());
 	nbZones = nebGrid.Intersect(nav->getPrecEquVision(), max_fov*M_PI/180.f*1.2f);
 	static int * zoneList = nebGrid.getResult();
 	
@@ -114,7 +114,7 @@ double NebulaMgr::draw(Projector* prj, const Navigator * nav, ToneReproducer* ey
 
 	  // speed up the computation of n->get_on_screen_size(prj, nav)>5:
 	const float size_limit = 5.0 * (M_PI/180.0)
-	                             * (prj->get_fov()/prj->getViewportHeight());
+	                             * (prj->getFov()/prj->getViewportHeight());
 
 	for(int i=0;i<nbZones;++i)
 	{

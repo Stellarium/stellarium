@@ -104,7 +104,7 @@ void Projector::init(const InitParser& conf)
 	const Projector::PROJECTOR_MASK_TYPE projMaskType = Projector::stringToMaskType(tmpstr);
 	setMaskType(projMaskType);
 	initFov	= conf.get_double ("navigation","init_fov",60.);
-	set_fov(initFov);
+	setFov(initFov);
 	setFlagGravityLabels( conf.get_boolean("viewing:flag_gravity_labels") );
 	
 	tmpstr = conf.get_str("projection:viewport");
@@ -127,12 +127,12 @@ Projector::Projector(const Vec4i& viewport, double _fov)
           :maskType(NONE), fov(1.0), min_fov(0.0001), max_fov(100),
            zNear(0.1), zFar(10000),
            vec_viewport(viewport),
-           flag_auto_zoom(0), gravityLabels(0)
+           gravityLabels(0)
 {
 	flip_horz = 1.0;
 	flip_vert = 1.0;
 	setViewport(viewport);
-	set_fov(_fov);
+	setFov(_fov);
 }
 
 Projector::~Projector()
@@ -166,7 +166,7 @@ void Projector::setViewport(int x, int y, int w, int h)
 	init_project_matrix();
 }
 
-void Projector::set_fov(double f)
+void Projector::setFov(double f)
 {
 	fov = f;
 	if (f>max_fov) fov = max_fov;
@@ -176,7 +176,7 @@ void Projector::set_fov(double f)
 }
 
 void Projector::setMaxFov(double max) {
-  if (fov > max) set_fov(max);
+  if (fov > max) setFov(max);
   max_fov = max;
 }
 
@@ -202,13 +202,6 @@ void Projector::set_clipping_planes(double znear, double zfar)
 	init_project_matrix();
 }
 
-void Projector::change_fov(double deltaFov)
-{
-  // if we are zooming in or out
-  if (deltaFov) set_fov(fov+deltaFov);
-}
-
-
 // Set the standard modelview matrices used for projection
 void Projector::set_modelview_matrices(	const Mat4d& _mat_earth_equ_to_eye,
 					const Mat4d& _mat_helio_to_eye,
@@ -224,59 +217,6 @@ void Projector::set_modelview_matrices(	const Mat4d& _mat_earth_equ_to_eye,
 	inv_mat_j2000_to_eye = (mat_projection*mat_j2000_to_eye).inverse();
 	inv_mat_helio_to_eye = (mat_projection*mat_helio_to_eye).inverse();
 	inv_mat_local_to_eye = (mat_projection*mat_local_to_eye).inverse();	
-}
-
-// Update auto_zoom if activated
-void Projector::update_auto_zoom(int delta_time)
-{
-	if (flag_auto_zoom)
-	{
-		// Use a smooth function
-		double c;
-
-		if( zoom_move.start > zoom_move.aim )
-		{
-			// slow down as approach final view
-			c = 1 - (1-zoom_move.coef)*(1-zoom_move.coef)*(1-zoom_move.coef);
-		}
-		else
-		{
-			// speed up as leave zoom target
-			c = (zoom_move.coef)*(zoom_move.coef)*(zoom_move.coef);
-		}
-
-		set_fov(zoom_move.start + (zoom_move.aim - zoom_move.start) * c);
-		zoom_move.coef+=zoom_move.speed*delta_time;
-		if (zoom_move.coef>=1.)
-		{
-			flag_auto_zoom = 0;
-			set_fov(zoom_move.aim);
-		}
-	}
-	/*
-    if (flag_auto_zoom)
-    {
-		// Use a smooth function
-		float smooth = 3.f;
-		double c = std::atan(smooth * 2.*zoom_move.coef-smooth)/std::atan(smooth)/2+0.5;
-		set_fov(zoom_move.start + (zoom_move.aim - zoom_move.start) * c);
-        zoom_move.coef+=zoom_move.speed*delta_time;
-        if (zoom_move.coef>=1.)
-        {
-			flag_auto_zoom = 0;
-            set_fov(zoom_move.aim);
-        }
-    }*/
-}
-
-// Zoom to the given field of view
-void Projector::zoom_to(double aim_fov, float move_duration)
-{
-	zoom_move.aim=aim_fov;
-    zoom_move.start=fov;
-    zoom_move.speed=1.f/(move_duration*1000);
-    zoom_move.coef=0.;
-    flag_auto_zoom = true;
 }
 
 

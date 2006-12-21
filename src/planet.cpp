@@ -486,7 +486,7 @@ float Planet::get_on_screen_size(const Projector* prj, const Navigator * nav)
 	if(rings) rad = rings->get_size();
 	else rad = radius;
 
-	return std::atan(rad*sphere_scale*2.f/get_earth_equ_pos(nav).length())*180./M_PI/prj->get_fov()*prj->getViewportHeight();
+	return std::atan(rad*sphere_scale*2.f/get_earth_equ_pos(nav).length())*180./M_PI/prj->getFov()*prj->getViewportHeight();
 }
 
 // Draw the Planet and all the related infos : name, circle etc..
@@ -524,7 +524,7 @@ double Planet::draw(Projector* prj, const Navigator * nav, const ToneReproducer*
 	{
 		// Draw the name, and the circle if it's not too close from the body it's turning around
 		// this prevents name overlaping (ie for jupiter satellites)
-		float ang_dist = 300.f*atan(get_ecliptic_pos().length()/get_earth_equ_pos(nav).length())/prj->get_fov();
+		float ang_dist = 300.f*atan(get_ecliptic_pos().length()/get_earth_equ_pos(nav).length())/prj->getFov();
 		if (ang_dist==0.f) ang_dist = 1.f; // if ang_dist == 0, the Planet is sun..
 
 		// by putting here, only draw orbit if Planet is visible for clarity
@@ -672,7 +672,7 @@ void Planet::draw_halo(const Navigator* nav, const Projector* prj, const ToneRep
 	float cmag;
 	float rmag;
 
-    float fov_q = prj->get_fov();
+    float fov_q = prj->getFov();
     if (fov_q > 60) fov_q = 60;
     else if (fov_q < 0.1) fov_q = 0.1;
     fov_q = 1.f/(fov_q*fov_q);
@@ -682,7 +682,7 @@ void Planet::draw_halo(const Navigator* nav, const Projector* prj, const ToneRep
 
 //	rmag = eye->adapt_luminance(std::exp(-0.92103f*(compute_magnitude(nav->get_observer_helio_pos()) +
 //	                                            12.12331f)) * 108064.73f);
-//	rmag = rmag/std::pow(prj->get_fov(),0.85f)*50.f;
+//	rmag = rmag/std::pow(prj->getFov(),0.85f)*50.f;
 
 	cmag = 1.f;
 
@@ -753,7 +753,7 @@ void Planet::draw_point_halo(const Navigator* nav, const Projector* prj, const T
 	float cmag;
 	float rmag;
 
-    float fov_q = prj->get_fov();
+    float fov_q = prj->getFov();
     if (fov_q > 60) fov_q = 60;
     fov_q = 1.f/(fov_q*fov_q);
     rmag =
@@ -763,7 +763,7 @@ void Planet::draw_point_halo(const Navigator* nav, const Projector* prj, const T
 
 //	rmag = eye->adapt_luminance(std::exp(-0.92103f*(compute_magnitude(nav->get_observer_helio_pos()) +
 //	                                            12.12331f)) * 108064.73f);
-//	rmag = rmag/std::pow(prj->get_fov(),0.85f)*10.f;
+//	rmag = rmag/std::pow(prj->getFov(),0.85f)*10.f;
 
 	cmag = 1.f;
 

@@ -35,6 +35,7 @@
 #include "LandscapeMgr.h"
 #include "GridLinesMgr.h"
 #include "MilkyWay.h"
+#include "MovementMgr.hpp"
 
 #define LOADING_BAR_DEFAULT_FONT_SIZE 12.
 
@@ -69,8 +70,7 @@ void StelCore::telescopeGoto(int nr)
 
 StelCore::StelCore(const string& LDIR, const string& DATA_ROOT, const boost::callback<void, string>& recordCallback) :
 		projection(NULL), selected_object(NULL), hip_stars(NULL), asterisms(NULL),
-		nebulas(NULL), ssystem(NULL), milky_way(NULL), telescope_mgr(NULL),
-		deltaFov(0.), deltaAlt(0.), deltaAz(0.), move_speed(0.00025)
+		nebulas(NULL), ssystem(NULL), milky_way(NULL), telescope_mgr(NULL)
 {
 	recordActionCallback = recordCallback;
 
@@ -153,6 +153,10 @@ void StelCore::init(const InitParser& conf)
 	navigation = new Navigator(observatory);
 	navigation->init(conf, lb);
 	
+	movementMgr = new MovementMgr(this);
+	movementMgr->init(conf, lb);
+	StelApp::getInstance().getModuleMgr().registerModule(movementMgr);
+	
 	// Load hipparcos stars & names
 	hip_stars = new HipStarMgr();
 	hip_stars->init(conf, lb);
@@ -185,15 +189,7 @@ void StelCore::init(const InitParser& conf)
 
 	// Load the pointer textures
 	StelObject::init_textures();
-
-	// Navigation
-	FlagEnableZoomKeys	= conf.get_boolean("navigation:flag_enable_zoom_keys");
-	FlagEnableMoveKeys  = conf.get_boolean("navigation:flag_enable_move_keys");
-	FlagManualZoom		= conf.get_boolean("navigation:flag_manual_zoom");
-	auto_move_duration	= conf.get_double ("navigation","auto_move_duration",1.5);
-	move_speed			= conf.get_double("navigation","move_speed",0.0004);
-	zoom_speed			= conf.get_double("navigation","zoom_speed", 0.0004);
-
+	
 	// Landscape, atmosphere & cardinal points section
 	landscape = new LandscapeMgr();
 	landscape->init(conf, lb);
@@ -237,16 +233,12 @@ void StelCore::update(int delta_time)
 
 	// Transform matrices between coordinates systems
 	navigation->updateTransformMatrices();
-	// Direction of vision
-	navigation->updateVisionVector(delta_time, selected_object);
-	// Field of view
-	projection->update_auto_zoom(delta_time);
+	
+	// Update direction of vision/Zoom level
+	movementMgr->update((double)delta_time/1000);
 
 	// update faders and Planet trails (call after nav is updated)
 	ssystem->update((double)delta_time/1000);
-
-	// Move the view direction and/or fov
-	updateMove(delta_time);
 
 	// Update info about selected object
 	selected_object.update();
@@ -265,7 +257,7 @@ void StelCore::update(int delta_time)
 	// the first image will be rendered with invalid (nan)
 	// inverse projection matrices.
 	// On the other hand it must be called after ssystem->update
-	// and updateMove in order to have the new observers position
+	// and panView in order to have the new observers position
 	// and not interfere with vision vector movement.
 	projection->set_modelview_matrices(	navigation->get_earth_equ_to_eye_mat(),
 	                                    navigation->get_helio_to_eye_mat(),
@@ -460,9 +452,9 @@ bool StelCore::selectObject(const string &type, const string &id)
 
 	if (selected_object)
 	{
-		if (navigation->getFlagTraking())
-			navigation->setFlagLockEquPos(1);
-		navigation->setFlagTraking(0);
+		if (movementMgr->getFlagTracking())
+			movementMgr->setFlagLockEquPos(true);
+		movementMgr->setFlagTracking(false);
 
 		return 1;
 	}
@@ -509,7 +501,7 @@ StelObject StelCore::clever_find(const Vec3d& v) const
 	vector<StelObject> temp;
 
 	// Field of view for a 30 pixel diameter circle on screen
-	float fov_around = projection->get_fov()/MY_MIN(projection->getViewportWidth(), projection->getViewportHeight()) * 30.f;
+	float fov_around = projection->getFov()/MY_MIN(projection->getViewportWidth(), projection->getViewportHeight()) * 30.f;
 
 	// Collect the planets inside the range
 	if (ssystem->getFlagPlanets())
@@ -592,81 +584,6 @@ StelObject StelCore::clever_find(int x, int y) const
 	Vec3d v;
 	projection->unproject_earth_equ(x,y,v);
 	return clever_find(v);
-}
-
-// Go and zoom to the selected object.
-void StelCore::autoZoomIn(float move_duration, bool allow_manual_zoom)
-{
-	float manual_move_duration;
-
-	if (!selected_object)
-		return;
-
-	if (!navigation->getFlagTraking())
-	{
-		navigation->setFlagTraking(true);
-		navigation->moveTo(selected_object.get_earth_equ_pos(navigation),
-		                    move_duration, false, 1);
-		manual_move_duration = move_duration;
-	}
-	else
-	{
-		// faster zoom in manual zoom mode once object is centered
-		manual_move_duration = move_duration*.66f;
-	}
-
-	if( allow_manual_zoom && FlagManualZoom )
-	{
-		// if manual zoom mode, user can zoom in incrementally
-		float newfov = projection->get_fov()*0.5f;
-		projection->zoom_to(newfov, manual_move_duration);
-
-	}
-	else
-	{
-		float satfov = selected_object.get_satellites_fov(navigation);
-
-		if (satfov>0.0 && projection->get_fov()*0.9>satfov)
-			projection->zoom_to(satfov, move_duration);
-		else
-		{
-			float closefov = selected_object.get_close_fov(navigation);
-			if (projection->get_fov()>closefov)
-				projection->zoom_to(closefov, move_duration);
-		}
-	}
-}
-
-
-// Unzoom and go to the init position
-void StelCore::autoZoomOut(float move_duration, bool full)
-{
-	if (selected_object && !full)
-	{
-		// If the selected object has satellites, unzoom to satellites view
-		// unless specified otherwise
-		float satfov = selected_object.get_satellites_fov(navigation);
-
-		if (satfov>0.0 && projection->get_fov()<=satfov*0.9)
-		{
-			projection->zoom_to(satfov, move_duration);
-			return;
-		}
-
-		// If the selected object is part of a Planet subsystem (other than sun),
-		// unzoom to subsystem view
-		satfov = selected_object.get_parent_satellites_fov(navigation);
-		if (satfov>0.0 && projection->get_fov()<=satfov*0.9)
-		{
-			projection->zoom_to(satfov, move_duration);
-			return;
-		}
-	}
-
-	projection->zoom_to(projection->getInitFov(), move_duration);
-	navigation->moveTo(navigation->getinitViewPos(), move_duration, true, -1);
-	navigation->setFlagTraking(false);
-	navigation->setFlagLockEquPos(0);
 }
 
 // Update the sky culture for all the modules
@@ -758,176 +675,12 @@ void StelCore::setProjectionType(const string& sptype)
 		return;
 	Projector *const ptemp = Projector::create(pType,
 	                         projection->getViewport(),
-	                         projection->get_fov());
+	                         projection->getFov());
 	ptemp->setMaskType(projection->getMaskType());
 	ptemp->setFlagGravityLabels(projection->getFlagGravityLabels());
 	delete projection;
 	projection = ptemp;
 	glFrontFace(projection->needGlFrontFaceCW()?GL_CW:GL_CCW);
-}
-
-void StelCore::turn_right(int s)
-{
-	if (s && FlagEnableMoveKeys)
-	{
-		deltaAz = 1;
-		setFlagTracking(false);
-		setFlagLockSkyPosition(false);
-	}
-	else
-		deltaAz = 0;
-}
-
-void StelCore::turn_left(int s)
-{
-	if (s && FlagEnableMoveKeys)
-	{
-		deltaAz = -1;
-		setFlagTracking(false);
-		setFlagLockSkyPosition(false);
-
-	}
-	else
-		deltaAz = 0;
-}
-
-void StelCore::turn_up(int s)
-{
-	if (s && FlagEnableMoveKeys)
-	{
-		deltaAlt = 1;
-		setFlagTracking(false);
-		setFlagLockSkyPosition(false);
-	}
-	else
-		deltaAlt = 0;
-}
-
-void StelCore::turn_down(int s)
-{
-	if (s && FlagEnableMoveKeys)
-	{
-		deltaAlt = -1;
-		setFlagTracking(false);
-		setFlagLockSkyPosition(false);
-	}
-	else
-		deltaAlt = 0;
-}
-
-
-void StelCore::zoom_in(int s)
-{
-	if (FlagEnableZoomKeys)
-		deltaFov = -1*(s!=0);
-}
-
-void StelCore::zoom_out(int s)
-{
-	if (FlagEnableZoomKeys)
-		deltaFov = (s!=0);
-}
-
-//! Make the first screen position correspond to the second (useful for mouse dragging)
-void StelCore::dragView(int x1, int y1, int x2, int y2)
-{
-	Vec3d tempvec1, tempvec2;
-	double az1, alt1, az2, alt2;
-	if (navigation->getViewingMode()==Navigator::VIEW_HORIZON)
-	{
-		projection->unproject_local(x2,projection->getViewportHeight()-y2, tempvec2);
-		projection->unproject_local(x1,projection->getViewportHeight()-y1, tempvec1);
-	}
-	else
-	{
-		projection->unproject_earth_equ(x2,projection->getViewportHeight()-y2, tempvec2);
-		projection->unproject_earth_equ(x1,projection->getViewportHeight()-y1, tempvec1);
-	}
-	StelUtils::rect_to_sphe(&az1, &alt1, tempvec1);
-	StelUtils::rect_to_sphe(&az2, &alt2, tempvec2);
-	navigation->updateMove(az2-az1, alt1-alt2);
-	setFlagTracking(false);
-	setFlagLockSkyPosition(false);
-}
-
-// Increment/decrement smoothly the vision field and position
-void StelCore::updateMove(int delta_time)
-{
-	// the more it is zoomed, the more the mooving speed is low (in angle)
-	double depl=move_speed*delta_time*projection->get_fov();
-	double deplzoom=zoom_speed*delta_time*projection->get_fov();
-	if (deltaAz<0)
-	{
-		deltaAz = -depl/30;
-		if (deltaAz<-0.2)
-			deltaAz = -0.2;
-	}
-	else
-	{
-		if (deltaAz>0)
-		{
-			deltaAz = (depl/30);
-			if (deltaAz>0.2)
-				deltaAz = 0.2;
-		}
-	}
-	if (deltaAlt<0)
-	{
-		deltaAlt = -depl/30;
-		if (deltaAlt<-0.2)
-			deltaAlt = -0.2;
-	}
-	else
-	{
-		if (deltaAlt>0)
-		{
-			deltaAlt = depl/30;
-			if (deltaAlt>0.2)
-				deltaAlt = 0.2;
-		}
-	}
-
-	if (deltaFov<0)
-	{
-		deltaFov = -deplzoom*5;
-		if (deltaFov<-0.15*projection->get_fov())
-			deltaFov = -0.15*projection->get_fov();
-	}
-	else
-	{
-		if (deltaFov>0)
-		{
-			deltaFov = deplzoom*5;
-			if (deltaFov>20)
-				deltaFov = 20;
-		}
-	}
-
-	//	projection->change_fov(deltaFov);
-	//	navigation->update_move(deltaAz, deltaAlt);
-
-	if(deltaFov != 0 )
-	{
-		projection->change_fov(deltaFov);
-		std::ostringstream oss;
-		oss << "zoom delta_fov " << deltaFov;
-		if (!recordActionCallback.empty())
-			recordActionCallback(oss.str());
-	}
-
-	if(deltaAz != 0 || deltaAlt != 0)
-	{
-		navigation->updateMove(deltaAz, deltaAlt);
-		std::ostringstream oss;
-		oss << "look delta_az " << deltaAz << " delta_alt " << deltaAlt;
-		if (!recordActionCallback.empty())
-			recordActionCallback(oss.str());
-	}
-	else
-	{
-		// must perform call anyway, but don't record!
-		navigation->updateMove(deltaAz, deltaAlt);
-	}
 }
 
 
@@ -962,9 +715,9 @@ bool StelCore::selectObject(const StelObject &obj)
 		if (selected_object)
 		{
 			// If an object was selected keep the earth following
-			if (getFlagTracking())
-				navigation->setFlagLockEquPos(1);
-			setFlagTracking(false);
+			if (movementMgr->getFlagTracking())
+				movementMgr->setFlagLockEquPos(true);
+			movementMgr->setFlagTracking(false);
 
 			if (selected_object.get_type()==STEL_OBJECT_STAR)
 			{
@@ -1047,21 +800,4 @@ vector<wstring> StelCore::listMatchingObjectsI18n(const wstring& objPrefix, unsi
 	sort(result.begin(), result.end());
 
 	return result;
-}
-
-
-void StelCore::setFlagTracking(bool b)
-{
-
-	if(!b || !selected_object)
-	{
-		navigation->setFlagTraking(0);
-	}
-	else
-	{
-		navigation->moveTo(selected_object.get_earth_equ_pos(navigation),
-		                    getAutomoveDuration());
-		navigation->setFlagTraking(1);
-	}
-
 }

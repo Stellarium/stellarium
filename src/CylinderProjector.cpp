@@ -25,7 +25,7 @@ CylinderProjector::CylinderProjector(const Vec4i& viewport,
                   :CustomProjector(viewport, _fov) {
   min_fov = 0.001;
   max_fov = 500.00001;
-  set_fov(_fov);
+  setFov(_fov);
 }
 
 /*

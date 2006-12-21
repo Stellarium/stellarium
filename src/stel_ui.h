@@ -313,10 +313,6 @@ private:
 	void setSkyLanguage(void);
 	void setSkyCulture(void);
 
-	// Mouse control options
-	bool is_dragging, has_dragged;
-	int previous_x, previous_y;
-
 	////////////////////////////////////////////////////////////////////////////
 	// Text UI components
 	s_tui::Branch* tui_root;
