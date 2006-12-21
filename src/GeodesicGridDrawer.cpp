@@ -48,7 +48,7 @@ double GeodesicGridDrawer::draw(Projector *prj, const Navigator *nav, ToneReprod
 	prj->set_orthographic_projection();	// set 2D coordinate
 	glColor4f(0.2,0.3,0.2,1);
 	
-	int lev = (int)(7./pow(prj->get_fov(), 0.4))+2;
+	int lev = (int)(7./pow(prj->getFov(), 0.4))+2;
 	if (lev>grid->getMaxLevel()) lev = grid->getMaxLevel();
 	Vec3d e0, e1, e2, e3;
 	Vec3d win1, win2;

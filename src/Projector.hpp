@@ -137,27 +137,15 @@ public:
 		{return (flip_horz*flip_vert < 0.0);}
 
 	//! Set the Field of View in degree
-	void set_fov(double f);
+	void setFov(double f);
 	//! Get the Field of View in degree
-	double get_fov(void) const {return fov;}
+	double getFov(void) const {return fov;}
 	double getPixelPerRad(void) const {return view_scaling_factor;}
 
 	//! Set the maximum Field of View in degree
 	void setMaxFov(double max);
 	//! Get the maximum Field of View in degree
 	double getMaxFov(void) const {return max_fov;}
-    
-    //! If is currently zooming, return the target FOV, otherwise return current FOV
-    double getAimFov(void) const
-	  {return (flag_auto_zoom ? zoom_move.aim : fov);}
-    
-    void change_fov(double deltaFov);
-
-	// Update auto_zoom if activated
-	void update_auto_zoom(int delta_time);
-
-	// Zoom to the given field of view in degree
-	void zoom_to(double aim_fov, float move_duration = 1.);
 
 	// Fill with black around the circle
 	void draw_viewport_shape(void);
@@ -298,15 +286,6 @@ public:
 protected:
 	Projector(const Vec4i& viewport, double _fov = 60.);
 
-	// Struct used to store data for auto mov
-	typedef struct
-	{
-		double start;
-	    double aim;
-	    float speed;
-	    float coef;
-	}auto_zoom;
-
 	// Init the viewing matrix from the fov, the clipping planes and screen ratio
 	// The function is a reimplementation of gluPerspective
 	virtual void init_project_matrix(void);
@@ -345,10 +324,6 @@ protected:
 				1.0);
 		v.transfo4d(m);
 	}
-	
-	// Automove
-	auto_zoom zoom_move;		// Current auto movement
-	bool flag_auto_zoom;		// Define if autozoom is on or off
 	bool gravityLabels;			// should label text align with the horizon?
 };
 

@@ -35,7 +35,7 @@ StelApp* StelApp::singleton = NULL;
 *************************************************************************/
 StelApp::StelApp(const string& CDIR, const string& LDIR, const string& DATA_ROOT) :
 		frame(0), timefr(0), timeBase(0), fps(0), maxfps(10000.f),
-		is_mouse_moving_horiz(false), is_mouse_moving_vert(false), draw_mode(StelApp::DM_NORMAL)
+	 draw_mode(StelApp::DM_NORMAL)
 {
 	// Can't create 2 StelApp instances
 	assert(!singleton);
@@ -50,7 +50,6 @@ StelApp::StelApp(const string& CDIR, const string& LDIR, const string& DATA_ROOT
 	localeMgr = new StelLocaleMgr();
 	fontManager = new StelFontMgr(getDataFilePath("fontmap.dat"));
 	skyCultureMgr = new StelSkyCultureMgr(getDataFilePath("sky_cultures"));
-	
 	moduleMgr = new StelModuleMgr();
 	
 	core = new StelCore(LDIR, DATA_ROOT, boost::callback<void, string>(this, &StelApp::recordCommand));
@@ -224,9 +223,6 @@ void StelApp::init(void)
 // star names are loaded again
 	skyCultureMgr->init(conf);
 
-	FlagEnableMoveMouse	= conf.get_boolean("navigation","flag_enable_move_mouse",1);
-	MouseZoom			= conf.get_int("navigation","mouse_zoom",30);
-
 	// initialisation of the User Interface
 
 	// TODO: Need way to update settings from config without reinitializing whole gui
@@ -336,45 +332,7 @@ int StelApp::handleMove(int x, int y)
 			return 1;
 	}
 	
-	// Turn if the mouse is at the edge of the screen.
-	// unless config asks otherwise
-	if(FlagEnableMoveMouse)
-	{
-		if (x == 0)
-		{
-			core->turn_left(1);
-			is_mouse_moving_horiz = true;
-		}
-		else if (x == core->getProjection()->getViewportWidth() - 1)
-		{
-			core->turn_right(1);
-			is_mouse_moving_horiz = true;
-		}
-		else if (is_mouse_moving_horiz)
-		{
-			core->turn_left(0);
-			is_mouse_moving_horiz = false;
-		}
-
-		if (y == 0)
-		{
-			core->turn_up(1);
-			is_mouse_moving_vert = true;
-		}
-		else if (y == core->getProjection()->getViewportHeight() - 1)
-		{
-			core->turn_down(1);
-			is_mouse_moving_vert = true;
-		}
-		else if (is_mouse_moving_vert)
-		{
-			core->turn_up(0);
-			is_mouse_moving_vert = false;
-		}
-	}
-
 	return ui->handle_move(x, y);
-
 }
 
 
@@ -391,42 +349,6 @@ int StelApp::handleKeys(SDLKey key, SDLMod mod, Uint16 unicode, Uint8 state)
 	if (ui->handle_keys_tui(unicode, state)) return 1;
 	if (ui->handle_keys(key, mod, unicode, state)) return 1;
 
-	if (state == SDL_KEYDOWN)
-	{
-		// Direction and zoom deplacements
-		if (key==SDLK_LEFT) core->turn_left(1);
-		if (key==SDLK_RIGHT) core->turn_right(1);
-		if (key==SDLK_UP)
-		{
-			if (mod & KMOD_CTRL) core->zoom_in(1);
-			else core->turn_up(1);
-		}
-		if (key==SDLK_DOWN)
-		{
-			if (mod & KMOD_CTRL) core->zoom_out(1);
-			else core->turn_down(1);
-		}
-		if (key==SDLK_PAGEUP) core->zoom_in(1);
-		if (key==SDLK_PAGEDOWN) core->zoom_out(1);
-	}
-	else
-	{
-		// When a deplacement key is released stop mooving
-		if (key==SDLK_LEFT) core->turn_left(0);
-		if (key==SDLK_RIGHT) core->turn_right(0);
-		if (mod & KMOD_CTRL)
-		{
-			if (key==SDLK_UP) core->zoom_in(0);
-			if (key==SDLK_DOWN) core->zoom_out(0);
-		}
-		else
-		{
-			if (key==SDLK_UP) core->turn_up(0);
-			if (key==SDLK_DOWN) core->turn_down(0);
-		}
-		if (key==SDLK_PAGEUP) core->zoom_in(0);
-		if (key==SDLK_PAGEDOWN) core->zoom_out(0);
-	}
 	return 0;
 }
 

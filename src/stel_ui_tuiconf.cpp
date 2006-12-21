@@ -35,6 +35,7 @@
 #include "LandscapeMgr.h"
 #include "GridLinesMgr.h"
 #include "MilkyWay.h"
+#include "MovementMgr.hpp"
 
 // Draw simple gravity text ui.
 void StelUI::draw_gravity_ui(void)
@@ -61,7 +62,7 @@ void StelUI::draw_gravity_ui(void)
 			os << L" " << _(core->getObservatory()->getHomePlanetEnglishName());
 		}
 
-		if (FlagShowFov) os << L" fov " << setprecision(3) << core->getFov();
+		if (FlagShowFov) os << L" fov " << setprecision(3) << core->getProjection()->getFov();
 		if (FlagShowFps) os << L"  FPS " << app->fps;
 
 		glColor3f(0.5,1,0.5);
@@ -489,6 +490,7 @@ void StelUI::tui_update_widgets(void)
 	MilkyWay* mw = (MilkyWay*)StelApp::getInstance().getModuleMgr().getModule("milkyway");
 	LandscapeMgr* lmgr = (LandscapeMgr*)StelApp::getInstance().getModuleMgr().getModule("landscape");
 	GridLinesMgr* grlmgr = (GridLinesMgr*)StelApp::getInstance().getModuleMgr().getModule("gridlines");
+	MovementMgr* mvmgr = (MovementMgr*)StelApp::getInstance().getModuleMgr().getModule("movements");
 	
 	// 1. Location
 	tui_location_latitude->setValue(core->getObservatory()->get_latitude());
@@ -535,8 +537,8 @@ void StelUI::tui_update_widgets(void)
 	// 6. effects
 	tui_effect_landscape->setValue(lmgr->getLandscapeName());
 	tui_effect_pointobj->setValue(smgr->getFlagPointStar());
-	tui_effect_zoom_duration->setValue(core->getAutomoveDuration());
-	tui_effect_manual_zoom->setValue(core->getFlagManualAutoZoom());
+	tui_effect_zoom_duration->setValue(mvmgr->getAutomoveDuration());
+	tui_effect_manual_zoom->setValue(mvmgr->getFlagManualAutoZoom());
 	tui_effect_object_scale->setValue(smgr->getScale());
 	tui_effect_milkyway_intensity->setValue(mw->getIntensity());
 	tui_effect_cursor_timeout->setValue(MouseCursorTimeout);
@@ -823,6 +825,7 @@ void StelUI::saveCurrentConfig(const string& confFile)
 	StelLocaleMgr* localeMgr = &StelApp::getInstance().getLocaleMgr();
 	StelModuleMgr* moduleMgr = &StelApp::getInstance().getModuleMgr();
 	GridLinesMgr* grlmgr = (GridLinesMgr*)StelApp::getInstance().getModuleMgr().getModule("gridlines");
+	MovementMgr* mvmgr = (MovementMgr*)StelApp::getInstance().getModuleMgr().getModule("movements");
 	
 	cout << "Saving configuration file " << confFile << " ..." << endl;
 	InitParser conf;
@@ -914,9 +917,9 @@ void StelUI::saveCurrentConfig(const string& confFile)
 	conf.set_boolean("tui:flag_show_tui_short_obj_info", getFlagShowTuiShortObjInfo());
 
 	// Navigation section
-	conf.set_boolean("navigation:flag_manual_zoom", core->getFlagManualAutoZoom());
-	conf.set_double ("navigation:auto_move_duration", core->getAutoMoveDuration());
-	conf.set_double ("navigation:zoom_speed", core->getZoomSpeed());
+	conf.set_boolean("navigation:flag_manual_zoom", mvmgr->getFlagManualAutoZoom());
+	conf.set_double ("navigation:auto_move_duration", mvmgr->getAutoMoveDuration());
+	conf.set_double ("navigation:zoom_speed", mvmgr->getZoomSpeed());
 	conf.set_double ("navigation:preset_sky_time", core->getNavigation()->getPresetSkyTime());
 	conf.set_str	("navigation:startup_time_mode", core->getNavigation()->getStartupTimeMode());
 

@@ -29,6 +29,7 @@
 #include "StelTextureMgr.hpp"
 #include "LandscapeMgr.h"
 #include "GridLinesMgr.h"
+#include "MovementMgr.hpp"
 
 using namespace s_gui;
 
@@ -703,11 +704,13 @@ void StelUI::autoCompleteSearchedObject(void)
 
 void StelUI::gotoSearchedObject(void)
 {
+	MovementMgr* mvmgr = (MovementMgr*)StelApp::getInstance().getModuleMgr().getModule("movements");
+	
 	if (core->findAndSelectI18n(star_edit->getText()))
 	{
 		star_edit->clearText();
-		core->gotoSelectedObject();
-		core->setFlagTracking(true);
+		mvmgr->gotoSelectedObject();
+		mvmgr->setFlagTracking(true);
 		lblSearchMessage->setLabel(L"");
 		  // johannes
 		search_win->setVisible(false);

@@ -33,6 +33,7 @@
 #include "StelTextureMgr.hpp"
 #include "LandscapeMgr.h"
 #include "GridLinesMgr.h"
+#include "MovementMgr.hpp"
 
 ////////////////////////////////////////////////////////////////////////////////
 //								CLASS FUNCTIONS
@@ -91,7 +92,6 @@ StelUI::StelUI(StelCore * _core, StelApp * _app) :
 	}
 	core = _core;
 	app = _app;
-	is_dragging = false;
 	waitOnLocation = true;
 	opaqueGUI = true;
 	initialised = false;
@@ -282,7 +282,7 @@ void StelUI::updateTopBar(void)
 	if (FlagShowFov)
 	{
 		wstringstream wos;
-		wos << L"FOV=" << setprecision(3) << core->getFov() << L"\u00B0";
+		wos << L"FOV=" << setprecision(3) << core->getProjection()->getFov() << L"\u00B0";
 		top_bar_fov_lbl->setLabel(wos.str());
 		top_bar_fov_lbl->adjustSize();
 	}
@@ -536,6 +536,7 @@ void StelUI::cb(void)
 	NebulaMgr* nmgr = (NebulaMgr*)StelApp::getInstance().getModuleMgr().getModule("nebulas");
 	LandscapeMgr* lmgr = (LandscapeMgr*)StelApp::getInstance().getModuleMgr().getModule("landscape");
 	GridLinesMgr* grlmgr = (GridLinesMgr*)StelApp::getInstance().getModuleMgr().getModule("gridlines");
+	MovementMgr* mvmgr = (MovementMgr*)StelApp::getInstance().getModuleMgr().getModule("movements");
 	
 	cmgr->setFlagLines(bt_flag_constellation_draw->getState());
 	cmgr->setFlagNames(bt_flag_constellation_name->getState());
@@ -580,7 +581,7 @@ void StelUI::cb(void)
 
 	FlagSearch			= bt_flag_search->getState();
 	search_win->setVisible(FlagSearch);
-	if (bt_flag_goto->getState()) core->gotoSelectedObject();
+	if (bt_flag_goto->getState()) mvmgr->gotoSelectedObject();
 	bt_flag_goto->setState(false);
 
 	if (!bt_flag_quit->getState()) app->quit();
@@ -804,20 +805,7 @@ int StelUI::handle_move(int x, int y)
 	MouseTimeLeft = MouseCursorTimeout*1000;
 
 	if (desktop->onMove(x, y)) return 1;
-	if (is_dragging)
-	{
-		if (has_dragged ||
-		    (std::sqrt((double)((x-previous_x)*(x-previous_x)
-								+(y-previous_y)*(y-previous_y)))>4.))
-		{
-			has_dragged = true;
-			core->setFlagTracking(false);
-			core->dragView(previous_x, previous_y, x, y);
-			previous_x = x;
-			previous_y = y;
-			return 1;
-		}
-	}
+
 	return 0;
 }
 
@@ -837,55 +825,21 @@ int StelUI::handle_clic(Uint16 x, Uint16 y, Uint8 button, Uint8 state)
 
 	if (desktop->onClic((int)x, (int)y, button, state))
 	{
-		has_dragged = false;
-		is_dragging = false;
+		MovementMgr* mvmgr = (MovementMgr*)StelApp::getInstance().getModuleMgr().getModule("movements");
+		mvmgr->stopDragging();
 		return 1;
-	}
-
-	switch (button)
-	{
-	case SDL_BUTTON_RIGHT : break;
-	case SDL_BUTTON_LEFT :
-		if (state==SDL_MOUSEBUTTONDOWN)
-		{
-			is_dragging = true;
-			has_dragged = false;
-			previous_x = x;
-			previous_y = y;
-		}
-		else
-		{
-			is_dragging = false;
-		}
-		break;
-	case SDL_BUTTON_MIDDLE : break;
-	case SDL_BUTTON_WHEELUP :
-		core->zoomTo(core->getAimFov()-app->MouseZoom*core->getAimFov()/60., 0.2);
-		return 1;
-	case SDL_BUTTON_WHEELDOWN :
-		core->zoomTo(core->getAimFov()+app->MouseZoom*core->getAimFov()/60., 0.2);
-		return 1;
-	default: break;
 	}
 
 	// Manage the event for the main window
 	{
-		//if (state==S_GUI_PRESSED) return 1;
 		// Deselect the selected object
 		if (button==SDL_BUTTON_RIGHT && state==SDL_MOUSEBUTTONUP)
 		{
 			app->commander->execute_command("select");
 			return 1;
 		}
-		if (button==SDL_BUTTON_MIDDLE && state==SDL_MOUSEBUTTONUP)
-		{
-			if (core->getFlagHasSelected())
-			{
-				core->gotoSelectedObject();
-				core->setFlagTracking(true);
-			}
-		}
-		if (button==SDL_BUTTON_LEFT && state==SDL_MOUSEBUTTONUP && !has_dragged)
+		MovementMgr* mvmgr = (MovementMgr*)StelApp::getInstance().getModuleMgr().getModule("movements");
+		if (button==SDL_BUTTON_LEFT && state==SDL_MOUSEBUTTONUP && !mvmgr->getHasDragged())
 		{
 			// CTRL + left clic = right clic for 1 button mouse
 			if (SDL_GetModState() & KMOD_CTRL)
@@ -1244,7 +1198,8 @@ int StelUI::handle_keys(SDLKey key, SDLMod mod, Uint16 unicode, Uint8 state)
             break;
 
 		case SDLK_t:
-            core->setFlagLockSkyPosition(!core->getFlagLockSkyPosition());
+			MovementMgr* mvmgr = (MovementMgr*)StelApp::getInstance().getModuleMgr().getModule("movements");
+            mvmgr->setFlagLockEquPos(!mvmgr->getFlagLockEquPos());
             break;
 		case SDLK_s:
             if (!(mod & COMPATIBLE_KMOD_CTRL))
@@ -1291,9 +1246,10 @@ int StelUI::handle_keys(SDLKey key, SDLMod mod, Uint16 unicode, Uint8 state)
             if (mod & COMPATIBLE_KMOD_CTRL) {
 				app->commander->execute_command( "zoom auto out");
             } else {
+            	MovementMgr* mvmgr = (MovementMgr*)StelApp::getInstance().getModuleMgr().getModule("movements");
 				// here we help script recorders by selecting the right type of zoom option
 				// based on current settings of manual or full auto zoom
-				if(core->getFlagManualAutoZoom()) app->commander->execute_command( "zoom auto in manual 1");
+				if(mvmgr->getFlagManualAutoZoom()) app->commander->execute_command( "zoom auto in manual 1");
 				else app->commander->execute_command( "zoom auto in");
             }
             break;

@@ -21,7 +21,7 @@ stellarium_SOURCES = Projector.cpp Projector.hpp StereographicProjector.cpp \
 	StelModule.hpp StelModule.cpp StelModuleMgr.cpp StelModuleMgr.hpp StelFontMgr.hpp StelFontMgr.cpp \
 	StelLocaleMgr.hpp StelLocaleMgr.cpp StelSkyCultureMgr.hpp StelSkyCultureMgr.cpp GeodesicGridDrawer.h GeodesicGridDrawer.cpp \
 	StelTextureMgr.hpp StelTextureMgr.cpp AstroImage.hpp AstroImage.cpp LandscapeMgr.h LandscapeMgr.cpp \
-	GridLinesMgr.h GridLinesMgr.cpp MilkyWay.h MilkyWay.cpp
+	GridLinesMgr.h GridLinesMgr.cpp MilkyWay.h MilkyWay.cpp MovementMgr.hpp MovementMgr.cpp
 
 stellarium_LDADD = stelutils/iniparser/libiniparser.a \
 stelutils/libstelutils.a \

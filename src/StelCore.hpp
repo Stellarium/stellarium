@@ -67,83 +67,12 @@ public:
 	//! Get the current tone converter used in the core
 	ToneReproducer* getToneReproductor() {return tone_converter;}
 
-
-	///////////////////////////////////////////////////////////////////////////////////////
-	// Navigation
-
-	//! Set object tracking
-	void setFlagTracking(bool b);
-	//! Get object tracking
-	bool getFlagTracking(void) {return navigation->getFlagTraking();}
-
-	//! Set whether sky position is to be locked
-	void setFlagLockSkyPosition(bool b) {navigation->setFlagLockEquPos(b);}
-	//! Set whether sky position is locked
-	bool getFlagLockSkyPosition(void) {return navigation->getFlagLockEquPos();}
-
 	//! Set current mount type
 	void setMountMode(MOUNT_MODE m) {navigation->setViewingMode((m==MOUNT_ALTAZIMUTAL) ? Navigator::VIEW_HORIZON : Navigator::VIEW_EQUATOR);}
 	//! Get current mount type
 	MOUNT_MODE getMountMode(void) {return ((navigation->getViewingMode()==Navigator::VIEW_HORIZON) ? MOUNT_ALTAZIMUTAL : MOUNT_EQUATORIAL);}
 	//! Toggle current mount mode between equatorial and altazimutal
 	void toggleMountMode(void) {if (getMountMode()==MOUNT_ALTAZIMUTAL) setMountMode(MOUNT_EQUATORIAL); else setMountMode(MOUNT_ALTAZIMUTAL);}
-
-
-	//! Go to the selected object
-    void gotoSelectedObject(void) {
-      if (selected_object)
-        navigation->moveTo(
-          selected_object.get_earth_equ_pos(navigation),
-          auto_move_duration);
-    }
-
-	//! Move view in alt/az (or equatorial if in that mode) coordinates
-	void panView(double delta_az, double delta_alt)	{
-		setFlagTracking(0);
-		navigation->updateMove(delta_az, delta_alt);
-	}
-
-	//! Set automove duration in seconds
-	void setAutomoveDuration(float f) {auto_move_duration = f;}
-	//! Get automove duration in seconds
-	float getAutomoveDuration(void) const {return auto_move_duration;}
-
-	//! Zoom to the given FOV (in degree)
-	void zoomTo(double aim_fov, float move_duration = 1.) {projection->zoom_to(aim_fov, move_duration);}
-
-	//! Get current FOV (in degree)
-	float getFov(void) const {return projection->get_fov();}
-
-    //! If is currently zooming, return the target FOV, otherwise return current FOV
-	double getAimFov(void) const {return projection->getAimFov();}
-
-	//! Set the current FOV (in degree)
-	void setFov(double f) {projection->set_fov(f);}
-
-	//! Set the maximum FOV (in degree)
-	void setMaxFov(double f) {projection->setMaxFov(f);}
-
-	//! Go and zoom temporarily to the selected object.
-	void autoZoomIn(float move_duration = 1.f, bool allow_manual_zoom = 1);
-
-	//! Unzoom to the previous position
-	void autoZoomOut(float move_duration = 1.f, bool full = 0);
-
-	//! Set whether auto zoom can go further than normal
-	void setFlagManualAutoZoom(bool b) {FlagManualZoom = b;}
-	//! Get whether auto zoom can go further than normal
-	bool getFlagManualAutoZoom(void) {return FlagManualZoom;}
-
-	// Viewing direction function : 1 move, 0 stop.
-	void turn_right(int);
-	void turn_left(int);
-	void turn_up(int);
-	void turn_down(int);
-	void zoom_in(int);
-	void zoom_out(int);
-
-	//! Make the first screen position correspond to the second (useful for mouse dragging)
-	void dragView(int x1, int y1, int x2, int y2);
 
 	//! Find and select an object near given equatorial position
 	//! @return true if a object was found at position (this does not necessarily means it is selected)
@@ -192,6 +121,18 @@ public:
 	//! Get a color used to display info about the currently selected object
 	Vec3f getSelectedObjectInfoColor(void) const;
 
+	//! Get the earth centered equatorial position of the currently selected object
+	Vec3f getSelectedObjectEarthEquPos(void) const {return selected_object.get_earth_equ_pos(navigation);}
+
+	//! Get the size of the FoV best suited for seeing the selected object from close view
+	double getSelectedObjectCloseFov(void) const {return selected_object.get_close_fov(navigation);}
+
+	//! Get the size of the FoV best suited for seeing the selected object + its satellites if any
+	double getSelectedObjectSatelliteFov(void) const {return selected_object.get_satellites_fov(navigation);}
+	
+	//! Get the size of the FoV best suited for seeing the selected object + its parent satellites
+	double getSelectedObjectParentSatelliteFov(void) const {return selected_object.get_parent_satellites_fov(navigation);}
+	
 	//! Set display flag of telescopes
 	void setFlagTelescopes(bool b);
 	//! Get display flag of telescopes
@@ -242,9 +183,6 @@ public:
 	//! Return the current image manager which display users images
 	ImageMgr* getImageMgr(void) const {return script_images;}
 
-	double getZoomSpeed() {return zoom_speed;}
-	float getAutoMoveDuration() {return auto_move_duration;}
-	
 private:
 	//! Callback to record actions
 	boost::callback<void, string> recordActionCallback;
@@ -267,6 +205,7 @@ private:
 	Observer * observatory;			// Manage observer position
 	Projector * projection;				// Manage the projection mode and matrix
 	StelObject selected_object;			// The selected object in stellarium
+	class MovementMgr* movementMgr;
 	class HipStarMgr * hip_stars;		// Manage the hipparcos stars
 	class ConstellationMgr * asterisms;		// Manage constellations (boundaries, names etc..)
 	class NebulaMgr * nebulas;				// Manage the nebulas
@@ -281,19 +220,6 @@ private:
 	class GeodesicGridDrawer* geoDrawer;
 	class GridLinesMgr* gridLines;
 	bool object_pointer_visibility;		// Should selected object pointer be drawn
-
-	// Increment/decrement smoothly the vision field and position
-	void updateMove(int delta_time);
-	int FlagEnableZoomKeys;
-	int FlagEnableMoveKeys;
-
-	double deltaFov,deltaAlt,deltaAz;	// View movement
-	double move_speed, zoom_speed;		// Speed of movement and zooming
-
-	float InitFov;						// Default viewing FOV
-	int FlagManualZoom;					// Define whether auto zoom can go further
-	float auto_move_duration;			// Duration of movement for the auto move to a selected objectin seconds
-
 };
 
 #endif // _STEL_CORE_H_

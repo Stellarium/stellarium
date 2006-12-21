@@ -25,7 +25,7 @@ SphericMirrorProjector::SphericMirrorProjector(const Vec4i& viewport,
                        :CustomProjector(viewport, _fov) {
   min_fov = 0.001;
   max_fov = 180.00001;
-  set_fov(_fov);
+  setFov(_fov);
 }
 
 void SphericMirrorProjector::setViewport(int x, int y, int w, int h)

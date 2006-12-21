@@ -151,6 +151,8 @@ public:
 	//! Record a command if script recording is on
 	void recordCommand(string commandline);
 
+	// n.b. - do not confuse this with sky time rate
+	int getTimeMultiplier() { return time_multiplier; }
 private:
 	//! Initialize application and core
 	void init(void);
@@ -172,9 +174,6 @@ private:
 	int handleMove(int x, int y);
 	// Handle key press and release
 	int handleKeys(SDLKey key, SDLMod mod, Uint16 unicode, Uint8 state);
-
-	// n.b. - do not confuse this with sky time rate
-	int getTimeMultiplier() { return time_multiplier; }
 
 	// Initialize openGL screen with SDL
 	void initSDL(int w, int h, int bbpMode, bool fullScreen, string iconFile);
@@ -220,19 +219,11 @@ private:
 	// Textures manager for the application
 	StelTextureMgr* textureMgr;
 	
-	int FlagEnableMoveMouse;  // allow mouse at edge of screen to move view
-
-	int MouseZoom;
 
 	int frame, timefr, timeBase;		// Used for fps counter
 	float fps;
 	float minfps, maxfps;
-
-	// Flags for mouse movements
-	bool is_mouse_moving_horiz;
-	bool is_mouse_moving_vert;
-	int time_multiplier;  // used for adjusting delta_time for script speeds
-
+	
 	// Main elements of the stel_app
 	StelCommandInterface * commander;       // interface to perform all UI and scripting actions
 	ScriptMgr * scripts;                    // manage playing and recording scripts
@@ -250,6 +241,8 @@ private:
 	Uint32	LastCount;	// Used For The Tick Counter
 	SDL_Cursor *Cursor;
 
+	int time_multiplier;  // used for adjusting delta_time for script speeds
+	
 	//! Possible drawing modes
 	enum DRAWMODE { DM_NORMAL=0, DM_NIGHT};
 	DRAWMODE draw_mode;					// Current draw mode
