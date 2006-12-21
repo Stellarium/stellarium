@@ -54,9 +54,7 @@ public:
 	
 	//! Update the sky culture for all the modules
 	void updateSkyCulture();
-	
-	//! Set the sky locale and update the sky objects names for all the modules
-	void updateSkyLanguage();
+
 
 	//! Get the current projector used in the core
 	Projector* getProjection() {return projection;}
@@ -98,6 +96,9 @@ public:
 	//! @return a vector of matching object name by order of relevance, or an empty vector if nothing match
 	vector<wstring> listMatchingObjectsI18n(const wstring& objPrefix, unsigned int maxNbItem=5) const;
 
+	///////////////////////////////////////////////////////////////////////////////////////
+	// Selection things: TODO move into a new SelectionMgr class?
+	
 	//! Return whether an object is currently selected
 	bool getFlagHasSelected(void) {return selected_object;}
 
@@ -133,6 +134,8 @@ public:
 	//! Get the size of the FoV best suited for seeing the selected object + its parent satellites
 	double getSelectedObjectParentSatelliteFov(void) const {return selected_object.get_parent_satellites_fov(navigation);}
 	
+	///////////////////////////////////////////////////////////////////////////////////////
+	// Telescope things: TODO move into the TelescopeMgr class
 	//! Set display flag of telescopes
 	void setFlagTelescopes(bool b);
 	//! Get display flag of telescopes
