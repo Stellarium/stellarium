@@ -541,11 +541,19 @@ bool StelTextureMgr::PngLoader::loadImage(const string& filename, ManagedSTextur
 	png_read_update_info (png_ptr, info_ptr);
 
 	/* retrieve updated information */
+	/* retrieve updated information */
+	// johannes: never make pointer casts between pointers to int and long,
+	// because long is 64 bit on AMD64:
+	//   (png_uint_32*)(&texinfo.width)
+	// is evel, and does not work for AMD64
+	png_uint_32 width,height;
 	png_get_IHDR (png_ptr, info_ptr,
-	              (png_uint_32*)(&texinfo.width),
-	              (png_uint_32*)(&texinfo.height),
+	              &width,
+	              &height,
 	              &bit_depth, &color_type,
 	              NULL, NULL, NULL);
+	texinfo.width = width;
+	texinfo.height = height;
 
 	/* get image format and components per pixel */
 	switch (color_type)
