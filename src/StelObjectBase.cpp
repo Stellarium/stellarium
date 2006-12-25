@@ -53,7 +53,7 @@ void StelObjectBase::drawPointer(int delta_time, const Projector* prj, const Nav
 	if (get_type()==STEL_OBJECT_NEBULA) glColor3f(0.4f,0.5f,0.8f);
 	if (get_type()==STEL_OBJECT_PLANET) glColor3f(1.0f,0.3f,0.3f);
 
-    if (get_type()==STEL_OBJECT_STAR||get_type()==STEL_OBJECT_TELESCOPE)
+    if (get_type()==STEL_OBJECT_STAR || get_type()==STEL_OBJECT_TELESCOPE)
     {
 		glColor3fv(get_RGB());
 		float radius;
@@ -66,7 +66,7 @@ void StelObjectBase::drawPointer(int delta_time, const Projector* prj, const Nav
 		}
         glEnable(GL_TEXTURE_2D);
         glEnable(GL_BLEND);
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
         glTranslatef(screenpos[0], screenpos[1], 0.0f);
         glRotatef((float)local_time/20.,0.,0.,1.);
         glBegin(GL_QUADS );
@@ -90,6 +90,7 @@ void StelObjectBase::drawPointer(int delta_time, const Projector* prj, const Nav
 
         glEnable(GL_TEXTURE_2D);
         glEnable(GL_BLEND);
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
         glTranslatef(screenpos[0], screenpos[1], 0.0f);
         if (get_type()==STEL_OBJECT_PLANET) glRotatef((float)local_time/100,0,0,-1);
 
