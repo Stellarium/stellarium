@@ -70,6 +70,7 @@ void TelescopeMgr::draw(const Projector *prj,const Navigator *nav) const {
   prj->set_orthographic_projection();	// set 2D coordinate
   telescope_texture->bind();
   glBlendFunc(GL_ONE,GL_ONE);
+  glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
   for (TelescopeMap::const_iterator it(telescope_map.begin());
        it!=telescope_map.end();it++) {
     if (it->second->isConnected() && it->second->hasKnownPosition()) {
