@@ -29,6 +29,6 @@
 #  include <windows.h>
 #endif
 
-#define APP_NAME "Stellarium "VERSION
+#define APP_NAME "Stellarium "PACKAGE_VERSION
 
 #endif /*_STELLARIUM_H_*/

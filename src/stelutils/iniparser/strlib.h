@@ -4,7 +4,7 @@
   @file     strlib.h
   @author   N. Devillard
   @date     Jan 2001
-  @version  $Revision: 247 $
+  @version  $Revision: 1662 $
   @brief    Various string handling routines to complement the C lib.
 
   This modules adds a few complementary string routines usually missing
@@ -13,14 +13,18 @@
 /*--------------------------------------------------------------------------*/
 
 /*
-	$Id: strlib.h 247 2003-08-02 22:58:01Z xalioth $
+	$Id: strlib.h 1662 2006-12-26 17:32:59Z xalioth $
 	$Author: xalioth $
-	$Date: 2003-08-02 23:58:01 +0100 (Sat, 02 Aug 2003) $
-	$Revision: 247 $
+	$Date: 2006-12-26 17:32:59 +0000 (Tue, 26 Dec 2006) $
+	$Revision: 1662 $
 */
 
 #ifndef _STRLIB_H_
 #define _STRLIB_H_
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 /*---------------------------------------------------------------------------
    								Includes
@@ -104,5 +108,9 @@ const char * strcrop(const char * s);
  */
 /*--------------------------------------------------------------------------*/
 const char * strstrip(const char * s) ;
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

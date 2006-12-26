@@ -19,13 +19,14 @@
 
 using namespace std;
 
+#include <config.h>
 #include "StelLocaleMgr.hpp"
 #include "stellarium.h"
 #include "StelApp.hpp"
 #include "StelUtils.hpp"
 #include "InitParser.hpp"
 
-StelLocaleMgr::StelLocaleMgr() : skyTranslator(APP_NAME, LOCALEDIR, ""), GMT_shift(0)
+StelLocaleMgr::StelLocaleMgr() : skyTranslator(PACKAGE_NAME, LOCALEDIR, ""), GMT_shift(0)
 {}
 
 
@@ -71,7 +72,7 @@ void StelLocaleMgr::init(const InitParser& conf)
 void StelLocaleMgr::setAppLanguage(const string& newAppLanguageName)
 {
 	// Update the translator with new locale name
-	Translator::globalTranslator = Translator(PACKAGE, StelApp::getInstance().getLocaleDir(), newAppLanguageName);
+	Translator::globalTranslator = Translator(PACKAGE_NAME, StelApp::getInstance().getLocaleDir(), newAppLanguageName);
 	cout << "Application language is " << Translator::globalTranslator.getTrueLocaleName() << endl;
 
 	StelApp::getInstance().updateAppLanguage();
@@ -83,7 +84,7 @@ void StelLocaleMgr::setAppLanguage(const string& newAppLanguageName)
 void StelLocaleMgr::setSkyLanguage(const string& newSkyLanguageName)
 {
 	// Update the translator with new locale name
-	skyTranslator = Translator(PACKAGE, StelApp::getInstance().getLocaleDir(), newSkyLanguageName);
+	skyTranslator = Translator(PACKAGE_NAME, StelApp::getInstance().getLocaleDir(), newSkyLanguageName);
 	cout << "Sky language is " << skyTranslator.getTrueLocaleName() << endl;
 	
 	StelApp::getInstance().updateSkyLanguage();

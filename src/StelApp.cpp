@@ -164,7 +164,6 @@ void StelApp::quit(void)
 
 void StelApp::init(void)
 {
-//	StelUtils::downloadFile("http://chereau.free.fr/", "/home/fchereau/Desktop/tmp.html");
 	Translator::initSystemLanguage();
 
 	// Load language codes
@@ -177,7 +176,7 @@ void StelApp::init(void)
 	// Main section
 	string version = conf.get_str("main:version");
 
-	if (version!=string(VERSION))
+	if (version!=string(PACKAGE_VERSION))
 	{
 		std::istringstream istr(version);
 		char tmp;
@@ -223,7 +222,7 @@ void StelApp::init(void)
 // star names are loaded again
 	skyCultureMgr->init(conf);
 
-//	LoadingBar dummy(core->getProjection(), 12, "logo24bits.png", 0, 0,StelUtils::stringToWstring(VERSION), 45, 320, 121);
+//	LoadingBar dummy(core->getProjection(), 12, "logo24bits.png", 0, 0,StelUtils::stringToWstring(PACKAGE_VERSION), 45, 320, 121);
 //	// New CEGUI widgets
 //	CeguiGui* ceguiGui = new CeguiGui();
 //	ceguiGui->init(conf, dummy);

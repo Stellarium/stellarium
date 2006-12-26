@@ -832,7 +832,7 @@ void StelUI::saveCurrentConfig(const string& confFile)
 	conf.load(confFile);
 
 	// Main section
-	conf.set_str	("main:version", string(VERSION));
+	conf.set_str	("main:version", string(PACKAGE_VERSION));
 
 	// localization section
 	conf.set_str    ("localization:sky_culture", skyCultureMgr->getSkyCultureDir());

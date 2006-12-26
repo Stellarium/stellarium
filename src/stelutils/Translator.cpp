@@ -35,7 +35,7 @@ map<string, wstring> Translator::iso639codes;
 string Translator::systemLangName = "C";
 
 // Use system locale language by default
-Translator Translator::globalTranslator = Translator(PACKAGE, LOCALEDIR, "system");
+Translator Translator::globalTranslator = Translator(PACKAGE_NAME, LOCALEDIR, "system");
 
 #ifdef WIN32
 # include <windows.h>
@@ -106,7 +106,8 @@ void Translator::reload()
 	//printf("Setting locale: %s\n", envstr);
 	putenv(envstr);
 	setlocale(LC_MESSAGES, "");
-
+	cerr << domain << endl;
+	assert(domain=="stellarium");
 	std::string result = bind_textdomain_codeset(domain.c_str(), "UTF-8");
 	assert(result=="UTF-8");
 	bindtextdomain (domain.c_str(), moDirectory.c_str());

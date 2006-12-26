@@ -139,7 +139,7 @@ void StelCore::init(const InitParser& conf)
 
 	LoadingBar lb(projection, LOADING_BAR_DEFAULT_FONT_SIZE, "logo24bits.png",
 	              projection->getViewportWidth(), projection->getViewportHeight(),
-	              StelUtils::stringToWstring(VERSION), 45, 320, 121);
+	              StelUtils::stringToWstring(PACKAGE_VERSION), 45, 320, 121);
 	
 	// Init the solar system first
 	ssystem = new SolarSystem();
@@ -591,7 +591,7 @@ StelObject StelCore::clever_find(int x, int y) const
 // TODO make generic
 void StelCore::updateSkyCulture()
 {
-	LoadingBar lb(projection, LOADING_BAR_DEFAULT_FONT_SIZE, "logo24bits.png", projection->getViewportWidth(), projection->getViewportHeight(), StelUtils::stringToWstring(VERSION), 45, 320, 121);
+	LoadingBar lb(projection, LOADING_BAR_DEFAULT_FONT_SIZE, "logo24bits.png", projection->getViewportWidth(), projection->getViewportHeight(), StelUtils::stringToWstring(PACKAGE_VERSION), 45, 320, 121);
 	if (asterisms) asterisms->updateSkyCulture(lb);
 	
 	// as constellations have changed, clear out any selection and retest for match!
