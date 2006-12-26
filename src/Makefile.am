@@ -23,8 +23,8 @@ stellarium_SOURCES = Projector.cpp Projector.hpp StereographicProjector.cpp \
 	StelTextureMgr.hpp StelTextureMgr.cpp AstroImage.hpp AstroImage.cpp LandscapeMgr.h LandscapeMgr.cpp \
 	GridLinesMgr.h GridLinesMgr.cpp MilkyWay.h MilkyWay.cpp MovementMgr.hpp MovementMgr.cpp 
 
-stellarium_LDADD = stelutils/iniparser/libiniparser.a \
-stelutils/libstelutils.a \
+stellarium_LDADD = stelutils/libstelutils.a \
+stelutils/iniparser/libiniparser.a \
 planetsephems/libplanetsephems.a \
 @LIBINTL@
 
