@@ -457,8 +457,36 @@ float Planet::compute_magnitude(Vec3d obs_pos) const {
   const double cos_chi = (pq + Rq - sq)/(2.0*sqrt(pq*Rq));
   const double phase = (1.0 - acos(cos_chi)/M_PI) * cos_chi
                        + sqrt(1.0 - cos_chi*cos_chi) / M_PI;
-  const float F = 2.0 * albedo * radius * radius * phase / (3.0*pq*Rq);
-  const float rval = -26.73f - 2.5f * log10f(F);
+  double F = 2.0 * albedo * radius * radius * phase / (3.0*pq*Rq);
+
+    // Check if the satellite is inside the inner shadow of the parent planet:
+  if (parent->parent != 0) {
+    const Vec3d parent_heliopos = parent->get_heliocentric_ecliptic_pos();
+    const double parent_Rq = parent_heliopos.lengthSquared();
+    const double pos_times_parent_pos = heliopos * parent_heliopos;
+    if (pos_times_parent_pos > parent_Rq) {
+        // The satellite is farther away from the sun than the parent planet.
+      const double sun_radius = parent->parent->radius;
+      const double sun_minus_parent_radius = sun_radius - parent->radius;
+      const double quot = pos_times_parent_pos/parent_Rq;
+        // compute d = distance from satellite center to border
+        // of inner shadow. d>0 means inside the shadow cone.
+      double d = sun_radius - sun_minus_parent_radius*quot
+               - sqrt( (1.0-sun_minus_parent_radius/sqrt(parent_Rq))
+                     * (Rq-pos_times_parent_pos*quot) );
+      if (d >= radius) {
+          // The satellite is totally inside the inner shadow.
+        F *= 1e-9;
+      } else if (d > -radius) {
+          // The satellite is partly inside the inner shadow,
+          // compute a fantasy value for the magnitude:
+        d /= radius;
+        F *= (0.5 - (asin(d)+d*sqrt(1.0-d*d))/M_PI);
+      }
+    }
+  }
+
+  const double rval = -26.73 - 2.5 * log10(F);
 //cout << "Planet(" << getEnglishName()
 //     << ")::compute_magnitude(" << obs_pos << "): "
 //        "phase: " << phase
