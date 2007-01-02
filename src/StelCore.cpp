@@ -74,9 +74,6 @@ StelCore::StelCore(const string& LDIR, const string& DATA_ROOT, const boost::cal
 {
 	recordActionCallback = recordCallback;
 
-	projection = Projector::create(Projector::PERSPECTIVE_PROJECTOR, Vec4i(0,0,800,600), 60);
-	glFrontFace(projection->needGlFrontFaceCW()?GL_CW:GL_CCW);
-
 	tone_converter = new ToneReproducer();
 	
 	script_images = new ImageMgr();
@@ -133,6 +130,8 @@ StelCore::~StelCore()
 void StelCore::init(const InitParser& conf)
 {	
 	// Projector
+	projection = Projector::create(Projector::PERSPECTIVE_PROJECTOR, Vec4i(0,0,800,600), 60);
+	glFrontFace(projection->needGlFrontFaceCW()?GL_CW:GL_CCW);
 	string tmpstr = conf.get_str("projection:type");
 	setProjectionType(tmpstr);
 	projection->init(conf);
