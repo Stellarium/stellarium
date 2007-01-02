@@ -32,7 +32,7 @@ LIBS="$LIBS $GMODULE_LIBS"
 
 # Check for freetype2
 # This macro won't work on my system?!... use the old way until the problem is fixed..
-# AC_CHECK_FT2(2.0.4,,)
+#AC_CHECK_FT2(2.0.4,,)
 AC_CHECK_LIB(freetype, FT_Init_FreeType,,AC_MSG_ERROR(freetype library not found, please install libfreetype.))
 FT2_CFLAGS="`freetype-config --cflags`"
 FT2_LIBS="`freetype-config --libs`"
@@ -92,20 +92,24 @@ AC_CHECK_LIB(SDL_mixer, Mix_OpenAudio,[AC_CHECK_HEADER(SDL_mixer.h,LIBS="$LIBS -
 
 AC_CHECK_HEADERS(byteswap.h SDL_mixer.h)
 
+# Fix a bug in recent autoconf versions..
+if test $prefix = "NONE"; then
+	prefix=$ac_default_prefix
+fi
+datadir=`eval echo "${datadir}"`
+datadir=`eval echo "${datadir}"`
+
 dnl assign the package directory variable
 case "$host" in
 *-*-darwin*)
 PKGDATADIR="Stellarium.app/Contents/Resources"
 ;;
 *)
-if test "$prefix" = "NONE" ; then
-   prefix=$ac_default_prefix
-fi
 PKGDATADIR=`eval echo "${datadir}/$PACKAGE"`
 ;;
 esac
 
-AC_DEFINE_UNQUOTED(CONFIG_DATA_DIR, "$PKGDATADIR", [Set the directory where the datas (as textures or star catalogs) are stored.])
+AC_DEFINE_UNQUOTED(CONFIG_DATA_DIR, "$PKGDATADIR", [Set the directory where the data (as textures or star catalogs) are stored.])
 
 localedir=`eval echo "${datadir}/locale"`
 AC_DEFINE_UNQUOTED(LOCALEDIR, "$localedir", [Set the directory where the locales (translations) are stored.])
