@@ -48,7 +48,7 @@ AX_BOOST_BASE
 # Check for libcurl
 LIBCURL_CHECK_CONFIG([yes], , [haveCurl=yes], [haveCurl=no])
 if test "${haveCurl}" != yes; then
-	AC_MSG_ERROR([libcurl library not found, please install it to enable remote file download.])
+	AC_MSG_WARN([libcurl library not found, please install it to enable remote file download.])
 else
 	CFLAGS="$CFLAGS $LIBCURL_CPPFLAGS"
 	CXXFLAGS="$CXXFLAGS $LIBCURL_CPPFLAGS"
