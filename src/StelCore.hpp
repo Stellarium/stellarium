@@ -43,6 +43,9 @@ public:
 	//! Init and load all main core components from the passed config file.
 	void init(const InitParser& conf);
 
+	//! Init projection temp TODO remove
+	void initProj(const InitParser& conf);
+
 	//! Update all the objects with respect to the time.
 	//! @param delta_time the time increment in ms.
 	void update(int delta_time);

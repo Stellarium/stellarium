@@ -127,15 +127,19 @@ StelCore::~StelCore()
 }
 
 // Load core data and initialize with default values
-void StelCore::init(const InitParser& conf)
-{	
+void StelCore::initProj(const InitParser& conf)
+{
 	// Projector
 	projection = Projector::create(Projector::PERSPECTIVE_PROJECTOR, Vec4i(0,0,800,600), 60);
 	glFrontFace(projection->needGlFrontFaceCW()?GL_CW:GL_CCW);
 	string tmpstr = conf.get_str("projection:type");
 	setProjectionType(tmpstr);
 	projection->init(conf);
+}
 
+// Load core data and initialize with default values
+void StelCore::init(const InitParser& conf)
+{	
 	LoadingBar lb(projection, LOADING_BAR_DEFAULT_FONT_SIZE, "logo24bits.png",
 	              projection->getViewportWidth(), projection->getViewportHeight(),
 	              StelUtils::stringToWstring(PACKAGE_VERSION), 45, 320, 121);
