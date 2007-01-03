@@ -1,7 +1,8 @@
 #include "CeguiGui.hpp"
 #include "SDL_opengl.h"
-#include "RendererModules/OpenGLGUIRenderer/openglrenderer.h"
-#include "CEGUI.h"
+#include "StelApp.hpp"
+#include <CEGUI.h>
+#include <renderers/OpenGLGUIRenderer/openglrenderer.h>
 
 CeguiGui::CeguiGui()
 {
@@ -11,30 +12,57 @@ CeguiGui::~CeguiGui()
 {
 }
 
+#include <CEGUIDefaultResourceProvider.h>
+class StellariumResourceProvider : public CEGUI::DefaultResourceProvider
+{
+	void loadRawDataContainer(const CEGUI::String& filename, CEGUI::RawDataContainer& output, const CEGUI::String& resourceGroup)
+	{
+		CEGUI::DefaultResourceProvider::loadRawDataContainer(StelApp::getInstance().getDataFilePath(filename.c_str()), output, resourceGroup);
+	}
+};
+
 void CeguiGui::init(const InitParser& conf, LoadingBar& lb)
 {
-	glEnable(GL_CULL_FACE);
-	glDisable(GL_FOG);
-	glClearColor(0.0f,0.0f,0.0f,1.0f);
-	glViewport(0,0, 800,600);
-	CEGUI::OpenGLRenderer* renderer = new CEGUI::OpenGLRenderer(0,800,600);
-	new CEGUI::System(renderer);
-	
-	using namespace CEGUI;
-	try
-	{
-		// load in the scheme file, which auto-loads the TaharezLook imageset
-		CEGUI::SchemeManager::getSingleton().loadScheme("../datafiles/schemes/TaharezLook.scheme");
-		
-		// load in a font.  The first font loaded automatically becomes the default font.
-		CEGUI::FontManager::getSingleton().createFont("../datafiles/fonts/Commonwealth-10.font");
+// 	glEnable(GL_CULL_FACE);
+// 	glDisable(GL_FOG);
+// 	glClearColor(0.0f,0.0f,0.0f,1.0f);
+// 	glViewport(0,0, 800,600);
+// 	CEGUI::OpenGLRenderer* renderer = new CEGUI::OpenGLRenderer(0,800,600);
+// 	new CEGUI::System(renderer);
+// 	
+// 	using namespace CEGUI;
+// 	try
+// 	{
+// 		// load in the scheme file, which auto-loads the TaharezLook imageset
+// 		CEGUI::SchemeManager::getSingleton().loadScheme("../datafiles/schemes/TaharezLook.scheme");
+// 		
+// 		// load in a font.  The first font loaded automatically becomes the default font.
+// 		CEGUI::FontManager::getSingleton().createFont("../datafiles/fonts/Commonwealth-10.font");
+// 
+// 		Window* myRoot = WindowManager::getSingleton().loadWindowLayout("test.layout");
+// 		System::getSingleton().setGUISheet(myRoot);
+// 	}
+// 	catch (CEGUI::Exception& e)
+// 	{
+// 		fprintf(stderr,"CEGUI Exception occured: %s\n", e.getMessage().c_str());
+// 	}
 
-		Window* myRoot = WindowManager::getSingleton().loadWindowLayout("test.layout");
-		System::getSingleton().setGUISheet(myRoot);
+	using namespace CEGUI;
+
+	CEGUI::OpenGLRenderer* myRenderer = new CEGUI::OpenGLRenderer(0);
+	StellariumResourceProvider* resourceProvider = new StellariumResourceProvider();
+	new CEGUI::System(myRenderer, resourceProvider);
+	
+	CEGUI::SchemeManager::getSingleton().loadScheme("../datafiles/schemes/VanillaSkin.scheme");
+	CEGUI::FontManager::getSingleton().createFont("../datafiles/fonts/DejaVuSans-10.font");
+	
+	Window* root;
+	try{
+		root = WindowManager::getSingleton().loadWindowLayout("../datafiles/layouts/main.layout");
 	}
-	catch (CEGUI::Exception& e)
+	catch (CEGUI::Exception e)
 	{
-		fprintf(stderr,"CEGUI Exception occured: %s\n", e.getMessage().c_str());
+		cerr << e.getMessage() << endl;
 	}
 
 }
