@@ -214,10 +214,13 @@ void StelApp::init(void)
 
 	scripts->set_allow_ui( conf.get_boolean("gui","flag_script_allow_ui",0) );
 
+	core->initProj(conf);
+
 	localeMgr->init(conf);
 	skyCultureMgr->init(conf);
 	
 	core->init(conf);
+
 //ugly fix by johannes: call skyCultureMgr->init twice so that
 // star names are loaded again
 	skyCultureMgr->init(conf);
