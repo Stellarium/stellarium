@@ -7,6 +7,6 @@ libstelutils_a_SOURCES = bytes.h gettext.h InitParser.cpp InitParser.hpp SFont.h
 
 INCLUDES = -I$(top_srcdir)/src/stelutils/iniparser
 
-libstelutils_a_LIBADD = $(top_srcdir)/src/stelutils/iniparser/libiniparser.a
+libstelutils_a_LIBADD = iniparser/libiniparser.a
 
 SUBDIRS = iniparser
