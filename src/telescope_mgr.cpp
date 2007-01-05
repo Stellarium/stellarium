@@ -64,7 +64,7 @@ TelescopeMgr::~TelescopeMgr(void) {
 #endif
 }
 
-void TelescopeMgr::draw(const Projector *prj,const Navigator *nav) const {
+double TelescopeMgr::draw(Projector *prj, const Navigator *nav, ToneReproducer *eye) {
   glEnable(GL_TEXTURE_2D);
   glEnable(GL_BLEND);
   prj->set_orthographic_projection();	// set 2D coordinate
@@ -112,11 +112,12 @@ void TelescopeMgr::draw(const Projector *prj,const Navigator *nav) const {
     }
   }
   prj->reset_perspective_projection();
+  return 0.;
 }
 
-void TelescopeMgr::update(int delta_time) {
-  name_fader.update(delta_time);
-  telescope_fader.update(delta_time);
+void TelescopeMgr::update(double deltaTime) {
+  name_fader.update((int)(deltaTime*1000));
+  telescope_fader.update((int)(deltaTime*1000));
 }
 
 vector<StelObject> TelescopeMgr::search_around(Vec3d pos,
@@ -169,7 +170,8 @@ void TelescopeMgr::setFontSize(float font_size) {
                                 .getLocaleMgr().getSkyLanguage(), font_size);
 }
 
-void TelescopeMgr::init(const InitParser &conf) {
+
+void TelescopeMgr::init(const InitParser& conf, LoadingBar& lb) {
   setFontSize(12.f);
   if (telescope_texture) {
     delete telescope_texture;
@@ -191,6 +193,10 @@ void TelescopeMgr::init(const InitParser &conf) {
       }
     }
   }
+  
+	setFlagTelescopes(conf.get_boolean("astro:flag_telescopes"));
+	setFlagTelescopeName(conf.get_boolean("astro:flag_telescope_name"));  
+  
 }
 
 void TelescopeMgr::telescopeGoto(int telescope_nr,const Vec3d &j2000_pos) {

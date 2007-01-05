@@ -31,12 +31,17 @@ class MeteorMgr : public StelModule
  public:
   MeteorMgr(int zhr, int maxv );  // base_zhr is zenith hourly rate sans meteor shower
   virtual ~MeteorMgr();
-  virtual string getModuleID() const { return "meteors"; }
-  void set_ZHR(int zhr);   // set zenith hourly rate
-  int get_ZHR(void);   
+  
+	///////////////////////////////////////////////////////////////////////////
+	// Methods defined in the StelModule class
+	virtual void init(const InitParser& conf, LoadingBar& lb);
+	virtual string getModuleID() const {return "meteors";}
+	virtual double draw(Projector *prj, const Navigator *nav, ToneReproducer *eye);
+	virtual void update(double deltaTime);
+
+  void setZHR(int zhr);   // set zenith hourly rate
+  int getZHR(void);   
   void set_max_velocity(int maxv);   // set maximum meteoroid velocity km/s
-  virtual void update(double delta_time);          // update positions
-  virtual double draw(Projector* prj, const Navigator * nav, ToneReproducer* eye);
 
  private:
   vector<Meteor*> active;		// Vector containing all active meteors

@@ -20,7 +20,7 @@
 #ifndef _TELESCOPE_MGR_H_
 #define _TELESCOPE_MGR_H_
 
-
+#include "StelModule.hpp"
 #include "Fader.hpp"
 #include "vecmath.h"
 
@@ -38,13 +38,18 @@ class STexture;
 class StelObject;
 class Telescope;
 
-class TelescopeMgr {
+class TelescopeMgr : public StelModule {
 public:
   TelescopeMgr(void);
   virtual ~TelescopeMgr(void);
-  void init(const InitParser &conf);
-  void update(int delta_time);
-  void draw(const Projector *prj,const Navigator *nav) const;
+  
+	///////////////////////////////////////////////////////////////////////////
+	// Methods defined in the StelModule class
+	virtual void init(const InitParser& conf, LoadingBar& lb);
+	virtual string getModuleID() const {return "telescopes";}
+	virtual double draw(Projector *prj, const Navigator *nav, ToneReproducer *eye);
+	virtual void update(double deltaTime);
+
   void communicate(void);
    
   void set_names_fade_duration(float duration)

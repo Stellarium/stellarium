@@ -724,6 +724,7 @@ void StelUI::gotoSearchedObject(void)
 void StelUI::updateConfigVariables(void)
 {
 	NebulaMgr* nmgr = (NebulaMgr*)StelApp::getInstance().getModuleMgr().getModule("nebulas");
+	MeteorMgr* metmgr = (MeteorMgr*)StelApp::getInstance().getModuleMgr().getModule("meteors");
 
 	app->commander->execute_command("flag stars ", stars_cbx->getState());
 	app->commander->execute_command("flag star_names ", star_names_cbx->getState());
@@ -747,13 +748,13 @@ void StelUI::updateConfigVariables(void)
 	app->commander->execute_command("flag cardinal_points ", cardinal_cbx->getState());
 	app->commander->execute_command("flag atmosphere ", atmosphere_cbx->getState());
 	app->commander->execute_command("flag fog ", fog_cbx->getState());
-	if (meteor_rate_10->getState() && core->getMeteorsRate()!=10)
+	if (meteor_rate_10->getState() && metmgr->getZHR()!=10)
 		app->commander->execute_command("meteors zhr 10");
-	else if (meteor_rate_80->getState() && core->getMeteorsRate()!=80)
+	else if (meteor_rate_80->getState() && metmgr->getZHR()!=80)
 		app->commander->execute_command("meteors zhr 80");
-	else if (meteor_rate_10000->getState() && core->getMeteorsRate()!=10000)
+	else if (meteor_rate_10000->getState() && metmgr->getZHR()!=10000)
 		app->commander->execute_command("meteors zhr 10000");
-	else if (meteor_rate_144000->getState() && core->getMeteorsRate()!=144000)
+	else if (meteor_rate_144000->getState() && metmgr->getZHR()!=144000)
 		app->commander->execute_command("meteors zhr 144000");
 }
 
@@ -855,6 +856,7 @@ void StelUI::saveRenderOptions(void)
 	SolarSystem* ssmgr = (SolarSystem*)StelApp::getInstance().getModuleMgr().getModule("ssystem");
 	LandscapeMgr* lmgr = (LandscapeMgr*)StelApp::getInstance().getModuleMgr().getModule("landscape");
 	GridLinesMgr* grlmgr = (GridLinesMgr*)StelApp::getInstance().getModuleMgr().getModule("gridlines");
+	MeteorMgr* metmgr = (MeteorMgr*)StelApp::getInstance().getModuleMgr().getModule("meteors");
 	
 	conf.set_boolean("astro:flag_stars", smgr->getFlagStars());
 	conf.set_boolean("astro:flag_star_name", smgr->getFlagNames());
@@ -885,7 +887,7 @@ void StelUI::saveRenderOptions(void)
 	conf.set_boolean("viewing:flag_cardinal_points", lmgr->getFlagCardinalsPoints());
 	conf.set_boolean("landscape:flag_atmosphere", lmgr->getFlagAtmosphere());
 	conf.set_boolean("landscape:flag_fog", lmgr->getFlagFog());
-	conf.set_int("astro:meteor_rate", core->getMeteorsRate());
+	conf.set_int("astro:meteor_rate", metmgr->getZHR());
 	conf.save(app->getConfigFilePath());
 }
 
@@ -957,6 +959,7 @@ void StelUI::updateConfigForm(void)
 	SolarSystem* ssmgr = (SolarSystem*)StelApp::getInstance().getModuleMgr().getModule("ssystem");
 	LandscapeMgr* lmgr = (LandscapeMgr*)StelApp::getInstance().getModuleMgr().getModule("landscape");
 	GridLinesMgr* grlmgr = (GridLinesMgr*)StelApp::getInstance().getModuleMgr().getModule("gridlines");
+	MeteorMgr* metmgr = (MeteorMgr*)StelApp::getInstance().getModuleMgr().getModule("meteors");
 	
 	stars_cbx->setState(smgr->getFlagStars());
 	star_names_cbx->setState(smgr->getFlagNames());
@@ -989,28 +992,28 @@ void StelUI::updateConfigForm(void)
 	fog_cbx->setState(lmgr->getFlagFog());
 
 	wstring meteorRate;
-	if (core->getMeteorsRate()==10)
+	if (metmgr->getZHR()==10)
 	{
 		meteorRate = _(": Normal rate");
 		meteor_rate_10->setState(true);
 	}
 	else
 		meteor_rate_10->setState(false);
-	if (core->getMeteorsRate()==80)
+	if (metmgr->getZHR()==80)
 	{
 		meteorRate = _(": Standard Perseids rate");
 		meteor_rate_80->setState(true);
 	}
 	else
 		meteor_rate_80->setState(false);
-	if (core->getMeteorsRate()==10000)
+	if (metmgr->getZHR()==10000)
 	{
 		meteorRate = _(": Exceptional Leonid rate");
 		meteor_rate_10000->setState(true);
 	}
 	else
 		meteor_rate_10000->setState(false);
-	if (core->getMeteorsRate()==144000)
+	if (metmgr->getZHR()==144000)
 	{
 		meteorRate = _(": Highest rate ever (1966 Leonids)");
 		meteor_rate_144000->setState(true);

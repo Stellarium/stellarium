@@ -37,25 +37,6 @@
 #include "MilkyWay.h"
 #include "MovementMgr.hpp"
 
-void StelCore::setFlagTelescopes(bool b)
-{
-	telescope_mgr->setFlagTelescopes(b);
-}
-
-bool StelCore::getFlagTelescopes(void) const
-{
-	return telescope_mgr->getFlagTelescopes();
-}
-
-void StelCore::setFlagTelescopeName(bool b)
-{
-	telescope_mgr->setFlagTelescopeName(b);
-}
-
-bool StelCore::getFlagTelescopeName(void) const
-{
-	return telescope_mgr->getFlagTelescopeName();
-}
 
 void StelCore::telescopeGoto(int nr)
 {
@@ -176,9 +157,8 @@ void StelCore::init(const InitParser& conf, LoadingBar& lb)
 	
 	// Telescope manager
 	telescope_mgr = new TelescopeMgr();
-	telescope_mgr->init(conf);
-	setFlagTelescopes(conf.get_boolean("astro:flag_telescopes"));
-	setFlagTelescopeName(conf.get_boolean("astro:flag_telescope_name"));
+	telescope_mgr->init(conf, lb);
+	StelApp::getInstance().getModuleMgr().registerModule(telescope_mgr);
 	
 	// Constellations
 	asterisms = new ConstellationMgr(hip_stars);
@@ -199,7 +179,8 @@ void StelCore::init(const InitParser& conf, LoadingBar& lb)
 	
 	// Meteors
 	meteors = new MeteorMgr(10, 60);
-	setMeteorsRate(conf.get_int("astro", "meteor_rate", 10));
+	meteors->init(conf, lb);
+	StelApp::getInstance().getModuleMgr().registerModule(meteors);
 	
 	tone_converter->set_world_adaptation_luminance(3.75f + landscape->getLuminance()*40000.f);
 }
@@ -328,7 +309,7 @@ double StelCore::draw(int delta_time)
 	// TODO fix if(!landscape->getFlagAtmosphere() || sky_brightness<0.1)
 	meteors->draw(projection, navigation, tone_converter);
 
-	telescope_mgr->draw(projection,navigation);
+	telescope_mgr->draw(projection, navigation, tone_converter);
 
 	landscape->draw(projection,navigation,tone_converter);
 
@@ -512,7 +493,7 @@ StelObject StelCore::clever_find(const Vec3d& v) const
 		candidates.insert(candidates.begin(), temp.begin(), temp.end());
 	}
 
-	if (getFlagTelescopes())
+	if (telescope_mgr->getFlagTelescopes())
 	{
 		temp = telescope_mgr->search_around(p, fov_around);
 		candidates.insert(candidates.begin(), temp.begin(), temp.end());

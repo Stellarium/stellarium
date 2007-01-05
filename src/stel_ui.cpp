@@ -1093,7 +1093,8 @@ int StelUI::handle_keys(SDLKey key, SDLMod mod, Uint16 unicode, Uint8 state)
             if (mod & COMPATIBLE_KMOD_CTRL) {
 				core->telescopeGoto(9);
             } else {
-				const int zhr = core->getMeteorsRate();
+            	MeteorMgr* metmgr = (MeteorMgr*)StelApp::getInstance().getModuleMgr().getModule("meteors");
+				const int zhr = metmgr->getZHR();
 				if (zhr <= 10 ) {
 					app->commander->execute_command("meteors zhr 80");  // standard Perseids rate
 				} else if( zhr <= 80 ) {
