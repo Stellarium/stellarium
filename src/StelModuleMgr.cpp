@@ -29,7 +29,13 @@
 #endif
 
 StelModuleMgr::StelModuleMgr() : endIter(modules.end())
-{ 
+{
+	// Initialize empty call lists for each possible actions
+	callOrders["draw"]=std::vector<StelModule*>();
+	callOrders["update"]=std::vector<StelModule*>();
+	callOrders["handleMouseClicks"]=std::vector<StelModule*>();
+	callOrders["handleMouseMoves"]=std::vector<StelModule*>();
+	callOrders["handleKeys"]=std::vector<StelModule*>();
 }
 
 StelModuleMgr::~StelModuleMgr()
@@ -76,4 +82,60 @@ StelModule* StelModuleMgr::loadExternalModule(const string& moduleID)
 	cout << "Loaded external module " << moduleID << "." << endl;
 	return sMod;
 #endif
+}
+
+
+// Generate properly sorted calling lists for each action (e,g, draw, update)
+// according to modules orders dependencies
+void StelModuleMgr::generateCallingLists()
+{
+	std::map<string, std::vector<StelModule*> >::iterator mc;
+	std::map<string, StelModule*>::iterator m;
+	
+	// For each actions (e.g. "draw", "update", etc..)
+	for (mc=callOrders.begin();mc!=callOrders.end();++mc)
+	{
+		// Flush previous call orders
+		mc->second.clear();
+		// and init them with modules in creation order
+		for (m=modules.begin();m!=modules.end();++m)
+		{
+			mc->second.push_back(m->second);
+		}
+		// Order them now according to dependencies
+		for (m=modules.begin();m!=modules.end();++m)
+		{
+			StelModule::DependenciesOrderT::iterator tmp = m->second->dependenciesOrder.find(mc->first);
+			if (tmp!=m->second->dependenciesOrder.end() && tmp->second.size()!=0)
+			{
+				// There is a dependency
+				const string& dep = tmp->second;
+				std::vector<StelModule*>& list = mc->second;
+				
+				// Remove the module we want to sort
+				std::vector<StelModule*>::iterator thisIdx;
+				for (thisIdx=list.begin(); (*thisIdx)!=m->second && thisIdx!=list.end(); ++thisIdx){;}
+				assert(thisIdx!=list.end());
+				list.erase(thisIdx);
+				
+				// And insert it after the dependent module
+				std::vector<StelModule*>::iterator depIdx;
+				if (dep=="first")
+				{
+					depIdx = list.begin();
+				}
+				else if (dep=="last")
+				{
+					depIdx = list.end();
+				}
+				else
+				{
+					for (depIdx=list.begin(); (*depIdx)->getModuleID()!=dep && depIdx!=list.end(); ++depIdx){;}
+					assert(depIdx!=list.end());
+					++depIdx;
+				}
+				list.insert(depIdx, m->second);
+			}
+		}
+	}
 }

@@ -37,8 +37,6 @@
 #include "MilkyWay.h"
 #include "MovementMgr.hpp"
 
-#define LOADING_BAR_DEFAULT_FONT_SIZE 12.
-
 void StelCore::setFlagTelescopes(bool b)
 {
 	telescope_mgr->setFlagTelescopes(b);
@@ -138,12 +136,8 @@ void StelCore::initProj(const InitParser& conf)
 }
 
 // Load core data and initialize with default values
-void StelCore::init(const InitParser& conf)
+void StelCore::init(const InitParser& conf, LoadingBar& lb)
 {	
-	LoadingBar lb(projection, LOADING_BAR_DEFAULT_FONT_SIZE, "logo24bits.png",
-	              projection->getViewportWidth(), projection->getViewportHeight(),
-	              StelUtils::stringToWstring(PACKAGE_VERSION), 45, 320, 121);
-	
 	// Init the solar system first
 	ssystem = new SolarSystem();
 	ssystem->init(conf, lb);
@@ -208,17 +202,6 @@ void StelCore::init(const InitParser& conf)
 	setMeteorsRate(conf.get_int("astro", "meteor_rate", 10));
 	
 	tone_converter->set_world_adaptation_luminance(3.75f + landscape->getLuminance()*40000.f);
-	
-	// Load dynamic modules TODO loop here
-	if (conf.find_entry("external_modules:module1"))
-	{
-		StelModule* m = StelApp::getInstance().getModuleMgr().loadExternalModule(conf.get_str("external_modules:module1"));
-		if (m!=NULL)
-		{
-			m->init(conf, lb);
-			StelApp::getInstance().getModuleMgr().registerModule(m);
-		}
-	}
 }
 
 // Update all the objects in function of the time
@@ -229,32 +212,14 @@ void StelCore::update(int delta_time)
 	navigation->updateTime(delta_time);
 
 	// Position of sun and all the satellites (ie planets)
-	ssystem->computePositions(navigation->getJDay(),
-	                          navigation->getHomePlanet()->get_heliocentric_ecliptic_pos());
-
-	// communicate with the telescopes:
-	telescope_mgr->communicate();
+	ssystem->computePositions(navigation->getJDay(), navigation->getHomePlanet()->get_heliocentric_ecliptic_pos());
 
 	// Transform matrices between coordinates systems
 	navigation->updateTransformMatrices();
 	
 	// Update direction of vision/Zoom level
-	movementMgr->update((double)delta_time/1000);
-
-	// update faders and Planet trails (call after nav is updated)
-	ssystem->update((double)delta_time/1000);
-
-	// Update info about selected object
-	selected_object.update();
-
-	// Update faders
-	asterisms->update((double)delta_time/1000);
-	hip_stars->update((double)delta_time/1000);
-	nebulas->update((double)delta_time/1000);
-	milky_way->update(delta_time);
-	telescope_mgr->update(delta_time);
-
-
+	movementMgr->update((double)delta_time/1000);	
+	
 	// Give the updated standard projection matrices to the projector.
 	// atmosphere->compute_color needs the projection matrices, so we must
 	// set them before calling atmosphere->compute_color, otherwise
@@ -266,10 +231,29 @@ void StelCore::update(int delta_time)
 	projection->set_modelview_matrices(	navigation->get_earth_equ_to_eye_mat(),
 	                                    navigation->get_helio_to_eye_mat(),
 	                                    navigation->get_local_to_eye_mat(),
-	                                    navigation->get_j2000_to_eye_mat());
+	                                    navigation->get_j2000_to_eye_mat());	
+	
+	// Update info about selected object
+	selected_object.update();	
+	
+	// communicate with the telescopes:
+	telescope_mgr->communicate();
+
+	// update faders and Planet trails (call after nav is updated)
+	ssystem->update((double)delta_time/1000);
+
+	// Update faders
+	asterisms->update((double)delta_time/1000);
+	hip_stars->update((double)delta_time/1000);
+	nebulas->update((double)delta_time/1000);
+	milky_way->update(delta_time);
+	telescope_mgr->update(delta_time);
 
 	gridLines->update((double)delta_time/1000);
 	landscape->update((double)delta_time/1000);
+	
+	// Upade meteors
+	meteors->update(delta_time);
 	
 	StelModuleMgr& mmgr = StelApp::getInstance().getModuleMgr();
 	for (StelModuleMgr::Iterator iter=mmgr.begin();iter!=mmgr.end();++iter)
@@ -287,12 +271,6 @@ double StelCore::draw(int delta_time)
 
 	// Init viewport to current projector values
 	projection->applyViewport();
-
-	// Draw the milky way.
-	milky_way->draw(projection, navigation, tone_converter);
-
-	// Draw all the constellations
-	asterisms->draw(projection, navigation, tone_converter);
 
 	const Vec4i &v(projection->getViewport());
 	Vec3d e0,e1,e2,e3;
@@ -313,6 +291,13 @@ double StelCore::draw(int delta_time)
 	// int h = nebulas->getMaxSearchLevel(tone_converter,projection);
 	// if (max_search_level < h) max_search_level = h;
 	geodesic_search_result->search(e0,e1,e2,e3,max_search_level);
+
+
+	// Draw the milky way.
+	milky_way->draw(projection, navigation, tone_converter);
+
+	// Draw all the constellations
+	asterisms->draw(projection, navigation, tone_converter);
 
 	// Draw all external modules
 	StelModuleMgr& mmgr = StelApp::getInstance().getModuleMgr();
@@ -337,12 +322,8 @@ double StelCore::draw(int delta_time)
 
 	// Draw the pointer on the currently selected object
 	// TODO: this would be improved if pointer was drawn at same time as object for correct depth in scene
-	// FC: Why? The pointer should be drawn over everthing else I think
 	if (selected_object && object_pointer_visibility)
 		selected_object.drawPointer(delta_time, projection, navigation);
-
-	// Upade meteors
-	meteors->update(delta_time);
 
 	// TODO fix if(!landscape->getFlagAtmosphere() || sky_brightness<0.1)
 	meteors->draw(projection, navigation, tone_converter);
@@ -594,7 +575,7 @@ StelObject StelCore::clever_find(int x, int y) const
 // TODO make generic
 void StelCore::updateSkyCulture()
 {
-	LoadingBar lb(projection, LOADING_BAR_DEFAULT_FONT_SIZE, "logo24bits.png", projection->getViewportWidth(), projection->getViewportHeight(), StelUtils::stringToWstring(PACKAGE_VERSION), 45, 320, 121);
+	LoadingBar lb(projection, 12., "logo24bits.png", projection->getViewportWidth(), projection->getViewportHeight(), StelUtils::stringToWstring(PACKAGE_VERSION), 45, 320, 121);
 	if (asterisms) asterisms->updateSkyCulture(lb);
 	
 	// as constellations have changed, clear out any selection and retest for match!
