@@ -98,6 +98,7 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 	SolarSystem* ssmgr = (SolarSystem*)StelApp::getInstance().getModuleMgr().getModule("ssystem");
 	LandscapeMgr* lmgr = (LandscapeMgr*)StelApp::getInstance().getModuleMgr().getModule("landscape");
 	MovementMgr* mvmgr = (MovementMgr*)StelApp::getInstance().getModuleMgr().getModule("movements");
+	MeteorMgr* metmgr = (MeteorMgr*)StelApp::getInstance().getModuleMgr().getModule("meteors");
 	
 	// stellarium specific logic to run each command
 
@@ -580,7 +581,7 @@ int StelCommandInterface::execute_command(string commandline, unsigned long int 
 	  
 	} else if(command=="meteors") {
 		if(args["zhr"]!="") {
-			stcore->setMeteorsRate(StelUtils::str_to_int(args["zhr"]));
+			metmgr->setZHR(StelUtils::str_to_int(args["zhr"]));
 		} else status =0;
 
 	} else if(command=="configuration") {

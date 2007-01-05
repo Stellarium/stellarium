@@ -57,6 +57,7 @@ public:
 		std::map<string, StelModule*>::const_iterator iter = modules.find(moduleID);
 		if (iter==modules.end())
 		{
+			cerr << "Warning can't find module called " << moduleID << "." << endl;
 			return NULL;
 		}
 		return iter->second;
@@ -66,6 +67,7 @@ public:
 	//! according to modules orders dependencies
 	void generateCallingLists();
 
+	//! Get the list of modules in the correct order for calling the given action
 	const std::vector<StelModule*>& getCallOrders(const std::string& action)
 	{
 		return callOrders[action];

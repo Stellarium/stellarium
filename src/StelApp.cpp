@@ -361,7 +361,6 @@ int StelApp::handleMove(int x, int y)
 	return ui->handle_move(x, y);
 }
 
-
 // Handle key press and release
 int StelApp::handleKeys(SDLKey key, SDLMod mod, Uint16 unicode, Uint8 state)
 {

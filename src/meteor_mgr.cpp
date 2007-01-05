@@ -43,12 +43,17 @@ MeteorMgr::MeteorMgr(int zhr, int maxv )
 MeteorMgr::~MeteorMgr()
 {}
 
-void MeteorMgr::set_ZHR(int zhr)
+void MeteorMgr::init(const InitParser& conf, LoadingBar& lb)
+{
+	setZHR(conf.get_int("astro", "meteor_rate", 10));
+}
+
+void MeteorMgr::setZHR(int zhr)
 {
 	ZHR = zhr;
 }
 
-int MeteorMgr::get_ZHR()
+int MeteorMgr::getZHR()
 {
 	return ZHR;
 }
