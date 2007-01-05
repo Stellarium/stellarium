@@ -26,9 +26,7 @@
 #include "stel_command_interface.h"
 #include "stel_ui.h"
 #include "StelTextureMgr.hpp"
-
-//#include "LoadingBar.hpp"
-//#include "CeguiGui.hpp"
+#include "LoadingBar.hpp"
 
 // Initialize static variables
 StelApp* StelApp::singleton = NULL;
@@ -198,7 +196,7 @@ void StelApp::init(void)
 		}
 	}
 
-	// don't mess with SDL init if already initialized earlier
+	// Create openGL context first
 	screenW = conf.get_int("video:screen_w");
 	screenH = conf.get_int("video:screen_h");
 	initSDL(screenW, screenH, conf.get_int("video:bbp_mode"), conf.get_boolean("video:fullscreen"), getDataFilePath("icon.bmp"));
@@ -216,20 +214,18 @@ void StelApp::init(void)
 
 	core->initProj(conf);
 
+	LoadingBar lb(core->getProjection(), 12., "logo24bits.png",
+	              core->getProjection()->getViewportWidth(), core->getProjection()->getViewportHeight(),
+	              StelUtils::stringToWstring(PACKAGE_VERSION), 45, 320, 121);
+
 	localeMgr->init(conf);
 	skyCultureMgr->init(conf);
 	
-	core->init(conf);
+	core->init(conf, lb);
 
 //ugly fix by johannes: call skyCultureMgr->init twice so that
 // star names are loaded again
 	skyCultureMgr->init(conf);
-
-//	LoadingBar dummy(core->getProjection(), 12, "logo24bits.png", 0, 0,StelUtils::stringToWstring(PACKAGE_VERSION), 45, 320, 121);
-//	// New CEGUI widgets
-//	CeguiGui* ceguiGui = new CeguiGui();
-//	ceguiGui->init(conf, dummy);
-//	getModuleMgr().registerModule(ceguiGui);
 
 	// TODO: Need way to update settings from config without reinitializing whole gui
 	ui->init(conf);
@@ -246,6 +242,29 @@ void StelApp::init(void)
 		setViewPortDistorterType(conf.get_str("video","distorter","none"));
 	}
 
+	// Load dynamic external modules
+	int i=1;
+	while (true)
+	{
+		ostringstream oss;
+		oss << "external_modules:module" << i; 
+		if (conf.find_entry(oss.str()))
+		{
+			StelModule* m = moduleMgr->loadExternalModule(conf.get_str(oss.str()));
+			if (m!=NULL)
+			{
+				m->init(conf, lb);
+				moduleMgr->registerModule(m);
+			}
+		}
+		else
+			break;
+		i++;
+	}
+	
+	// Generate dependency Lists for all modules
+	moduleMgr->generateCallingLists();
+	
 	// play startup script, if available
 	if(scripts) scripts->play_startup_script();
 }
@@ -315,14 +334,14 @@ int StelApp::handleClick(int x, int y, Uint8 button, Uint8 state)
 {
 	distorter->distortXY(x,y);
 	if (ui->handle_clic(x, y, button, state)) return 1;
-	
+
 	// Send the event to every StelModule
-	for (StelModuleMgr::Iterator iter=moduleMgr->begin();iter!=moduleMgr->end();++iter)
+	std::vector<StelModule*> modList = moduleMgr->getCallOrders("handleMouseClicks");
+	for (std::vector<StelModule*>::iterator i=modList.begin();i!=modList.end();++i)
 	{
-		if ((*iter)->handleMouseClicks(x, y, button, state)==true)
-			return 1;
-	}
-	
+		if ((*i)->handleMouseClicks(x, y, button, state)==true)
+		return 1;
+	}	
 	return 0;
 }
 
@@ -332,9 +351,10 @@ int StelApp::handleMove(int x, int y)
 	distorter->distortXY(x,y);
 	
 	// Send the event to every StelModule
-	for (StelModuleMgr::Iterator iter=moduleMgr->begin();iter!=moduleMgr->end();++iter)
+	std::vector<StelModule*> modList = moduleMgr->getCallOrders("handleMouseMoves");
+	for (std::vector<StelModule*>::iterator i=modList.begin();i!=modList.end();++i)
 	{
-		if ((*iter)->handleMouseMoves(x, y)==true)
+		if ((*i)->handleMouseMoves(x, y)==true)
 			return 1;
 	}
 	
@@ -346,9 +366,10 @@ int StelApp::handleMove(int x, int y)
 int StelApp::handleKeys(SDLKey key, SDLMod mod, Uint16 unicode, Uint8 state)
 {
 	// Send the event to every StelModule
-	for (StelModuleMgr::Iterator iter=moduleMgr->begin();iter!=moduleMgr->end();++iter)
+	std::vector<StelModule*> modList = moduleMgr->getCallOrders("handleKeys");
+	for (std::vector<StelModule*>::iterator i=modList.begin();i!=modList.end();++i)
 	{
-		if ((*iter)->handleKeys(key, mod, unicode, state)==true)
+		if ((*i)->handleKeys(key, mod, unicode, state)==true)
 			return 1;
 	}
 
