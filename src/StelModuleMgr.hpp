@@ -62,6 +62,15 @@ public:
 		return iter->second;
 	}
 
+	//! Generate properly sorted calling lists for each action (e,g, draw, update)
+	//! according to modules orders dependencies
+	void generateCallingLists();
+
+	const std::vector<StelModule*>& getCallOrders(const std::string& action)
+	{
+		return callOrders[action];
+	}
+
 	//! Add iterator so that we can easily iterate through registered modules
 	class Iterator : public boost::iterator_facade<Iterator, StelModule*, boost::forward_traversal_tag>
 	{
@@ -94,8 +103,11 @@ public:
    }
 private:
 	
-	//! The main module list
+	//! The main module list associating name:pointer
 	std::map<string, StelModule*> modules;
+	
+	//! The list of all module in the correct order for each action
+	std::map<string, std::vector<StelModule*> > callOrders;
 	
 	const Iterator endIter;
 };

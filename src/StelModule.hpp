@@ -122,6 +122,17 @@ public:
 	//! Return the full path to a data file belonging to the module
 	std::string getFilePath(const std::string& fileName) const;
 	
+protected:
+	friend class StelModuleMgr;
+
+	// Each value is the name of a module for which the action must be called before
+	// For example if DependenciesOrderT["draw"] == "stars", the stars module will be drawn before the module
+	typedef std::map<std::string, std::string> DependenciesOrderT;
+	
+	//! The list of dependencies defining for example if this module must be drawn before another one
+	DependenciesOrderT dependenciesOrder;
+	
+public:
 	///////////////////////////////////////////////////////////////////////////
 	// Properties managment
 	

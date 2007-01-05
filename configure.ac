@@ -157,12 +157,6 @@ dnl OTHER SYSTEMS
 ;;
 esac
 
-# Check for CEGUI - TODO...
-# CFLAGS="$CFLAGS -I/home/fchereau/Desktop/ceguiInstall/include/CEGUI "
-# CXXFLAGS="$CXXFLAGS -I/home/fchereau/Desktop/ceguiInstall/include/CEGUI "
-# LIBS="$LIBS -L/home/fchereau/Desktop/ceguiInstall/lib -lCEGUIBase -lCEGUIOpenGLRenderer -lpcre"
-
-
 dnl Checks for library functions.
 AC_CHECK_FUNCS(toupper strcasecmp strdup putenv setlocale tzset strchr pow10 timegm)
 

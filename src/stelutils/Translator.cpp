@@ -106,7 +106,6 @@ void Translator::reload()
 	//printf("Setting locale: %s\n", envstr);
 	putenv(envstr);
 	setlocale(LC_MESSAGES, "");
-	cerr << domain << endl;
 	assert(domain=="stellarium");
 	std::string result = bind_textdomain_codeset(domain.c_str(), "UTF-8");
 	assert(result=="UTF-8");
