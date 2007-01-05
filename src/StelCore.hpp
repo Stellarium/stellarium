@@ -139,16 +139,6 @@ public:
 	
 	///////////////////////////////////////////////////////////////////////////////////////
 	// Telescope things: TODO move into the TelescopeMgr class
-	//! Set display flag of telescopes
-	void setFlagTelescopes(bool b);
-	//! Get display flag of telescopes
-	bool getFlagTelescopes(void) const;
-
-	//! Set display flag of telescope names
-	void setFlagTelescopeName(bool b);
-	//! Get display flag of telescope names
-	bool getFlagTelescopeName(void) const;
-
 	//! the telescope with the given number shall go to the selected object
 	void telescopeGoto(int nr);
 
@@ -175,11 +165,6 @@ public:
 	{
 		observatory->moveTo(lat, lon, alt, delay, name);
 	}
-
-	//! Set Meteor Rate in number per hour
-	void setMeteorsRate(int f) {meteors->set_ZHR(f);}
-	//! Get Meteor Rate in number per hour
-	int getMeteorsRate(void) const {return meteors->get_ZHR();}
 
 	///////////////////////////////////////////////////////////////////////////////////////
 	// Others
