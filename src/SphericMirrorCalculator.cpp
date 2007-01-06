@@ -25,7 +25,7 @@
 // Yet it might be useful for playing around.
 
 SphericMirrorCalculator::SphericMirrorCalculator(void) {
-  setParams(Vec3d(0,-2,15),Vec3d(0,0,20),1,25,0.0/8.0,1.0);
+  setParams(Vec3d(0,-0.2,1.0),Vec3d(0,0,2.0),0.25,2.5,0.125,0.8,true,false);
 }
 
 void SphericMirrorCalculator::init(const InitParser &conf) {
@@ -45,30 +45,42 @@ void SphericMirrorCalculator::init(const InitParser &conf) {
                                         "zenith_y",0.125));
   const double scaling_factor(conf.get_double("spheric_mirror",
                                               "scaling_factor",0.8));
+  const double flip_horz(conf.get_boolean("spheric_mirror",
+                                          "flip_horz",true));
+  const double flip_vert(conf.get_boolean("spheric_mirror",
+                                          "flip_vert",false));
   setParams(projector_position,
             mirror_position,
             mirror_radius,
             dome_radius,
             zenith_y,
-            scaling_factor);
+            scaling_factor,
+            flip_horz,
+            flip_vert);
 }
 
 void SphericMirrorCalculator::setParams(const Vec3d &projector_position,
-               const Vec3d &mirror_position,
-               double mirror_radius,
-               double dome_radius,
-               double zenith_y,
-               double scaling_factor) {
+                                        const Vec3d &mirror_position,
+                                        double mirror_radius,
+                                        double dome_radius,
+                                        double zenith_y,
+                                        double scaling_factor,
+                                        const bool flip_horz,
+                                        const bool flip_vert) {
   DomeCenter = (- mirror_position) * (1.0/mirror_radius);
   DomeRadius = dome_radius / mirror_radius;
   P = (projector_position - mirror_position) * (1.0/mirror_radius);
   PP = P.dot(P);
-  zoom_factor = sqrt(PP-1.0) * scaling_factor;
   lP = sqrt(PP);
   p = P * (1.0/lP);
+  const double zoom_factor = sqrt(PP-1.0) * scaling_factor;
+  horz_zoom_factor = flip_horz ? (-zoom_factor) : zoom_factor;
+  vert_zoom_factor = flip_vert ? (-zoom_factor) : zoom_factor;
   cos_alpha = 1.0;
   sin_alpha = 0.0;
   double x,y;
+    // before calling transform() horz_zoom_factor,vert_zoom_factor,
+    // cos_alpha,sin_alpha must already be initialized
   transform(Vec3d(0,1,0),x,y);
   double alpha = atan(y/zoom_factor) - atan(zenith_y/zoom_factor);
   cos_alpha = cos(alpha);
@@ -76,7 +88,7 @@ void SphericMirrorCalculator::setParams(const Vec3d &projector_position,
 }
 
 bool SphericMirrorCalculator::transform(const Vec3d &v,
-                                       double &xb,double &yb) const {
+                                        double &xb,double &yb) const {
   const Vec3d S = DomeCenter + (v * (DomeRadius/v.length()));
   const Vec3d SmP = S - P;
   const double P_SmP = P.dot(SmP);
@@ -105,15 +117,15 @@ bool SphericMirrorCalculator::transform(const Vec3d &v,
   const double zb = (cos_alpha*x[2] + sin_alpha*x[1]);
 
     // rotate
-  xb = zoom_factor * x[0]/zb;
-  yb = zoom_factor * (cos_alpha*x[1] - sin_alpha*x[2])/zb;
+  xb = horz_zoom_factor * x[0]/zb;
+  yb = vert_zoom_factor * (cos_alpha*x[1] - sin_alpha*x[2])/zb;
   return rval;
 }
 
 
 bool SphericMirrorCalculator::retransform(double x,double y,Vec3d &v) const {
-  x /= zoom_factor;
-  y /= zoom_factor;
+  x /= horz_zoom_factor;
+  y /= vert_zoom_factor;
   v[0] = x;
   v[1] =   y*cos_alpha + sin_alpha;
   v[2] =  -y*sin_alpha + cos_alpha;
@@ -137,10 +149,10 @@ bool SphericMirrorCalculator::retransform(double x,double y,Vec3d &v) const {
 bool SphericMirrorCalculator::retransform(double x,double y,
                                           Vec3d &v,
                                           Vec3d &v_x,Vec3d &v_y) const {
-  x /= zoom_factor;
-  const double dx = 1.0/zoom_factor;
-  y /= zoom_factor;
-  const double dy = 1.0/zoom_factor;
+  x /= horz_zoom_factor;
+  const double dx = 1.0/horz_zoom_factor;
+  y /= vert_zoom_factor;
+  const double dy = 1.0/vert_zoom_factor;
 
   v[0] = x;
   v[1] =   y*cos_alpha + sin_alpha;

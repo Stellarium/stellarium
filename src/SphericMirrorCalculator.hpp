@@ -34,7 +34,11 @@ public:
                  double mirror_radius,
                  double dome_radius,
                  double zenith_y,
-                 double scaling_factor);
+                 double scaling_factor,
+                 bool flip_horz,
+                 bool flip_vert);
+  double getHorzZoomFactor(void) const {return horz_zoom_factor;}
+  double getVertZoomFactor(void) const {return vert_zoom_factor;}
   bool transform(const Vec3d &v,double &x,double &y) const;
   bool retransform(double x,double y,Vec3d &v) const;
     // for calculating partial derivatives:
@@ -47,7 +51,8 @@ private:
   double lP;
   Vec3d p;
   double cos_alpha,sin_alpha;
-  double zoom_factor;
+  double horz_zoom_factor;
+  double vert_zoom_factor;
 };
 
 #endif
