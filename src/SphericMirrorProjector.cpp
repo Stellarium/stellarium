@@ -28,6 +28,12 @@ SphericMirrorProjector::SphericMirrorProjector(const Vec4i& viewport,
   setFov(_fov);
 }
 
+bool SphericMirrorProjector::needGlFrontFaceCW(void) const {
+  return (calc.getHorzZoomFactor()*calc.getVertZoomFactor() > 0.0)
+          ? CustomProjector::needGlFrontFaceCW()
+          : !CustomProjector::needGlFrontFaceCW();
+}
+
 void SphericMirrorProjector::setViewport(int x, int y, int w, int h)
 {
 	Projector::setViewport(x, y, w, h);
@@ -47,8 +53,8 @@ bool SphericMirrorProjector::project_custom(const Vec3d &v,
   
   const bool rval = calc.transform(S,x[0],x[1]);
 
-  x[0] = center[0] - flip_horz * x[0] * (5*view_scaling_factor);
-  x[1] = center[1] + flip_vert * x[1] * (5*view_scaling_factor);
+  x[0] = center[0] + flip_horz * x[0] * (3*view_scaling_factor);
+  x[1] = center[1] + flip_vert * x[1] * (3*view_scaling_factor);
   x[2] = rval ? ((-z - zNear) / (zFar-zNear)) : -1000;
   return rval;
 }
@@ -56,8 +62,8 @@ bool SphericMirrorProjector::project_custom(const Vec3d &v,
 
 void SphericMirrorProjector::unproject(double x, double y,
                                        const Mat4d& m, Vec3d& v) const {
-  x = - flip_horz * (x - center[0]) / (5*view_scaling_factor);
-  y = flip_vert * (y - center[1]) / (5*view_scaling_factor);
+  x = flip_horz * (x - center[0]) / (3*view_scaling_factor);
+  y = flip_vert * (y - center[1]) / (3*view_scaling_factor);
 
   calc.retransform(x,y,v);
 

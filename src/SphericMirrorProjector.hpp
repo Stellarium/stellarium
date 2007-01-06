@@ -32,8 +32,7 @@ private:
   void setViewport(int x, int y, int w, int h);
   bool project_custom(const Vec3d &v, Vec3d &win, const Mat4d &mat) const;
   void unproject(double x, double y, const Mat4d& m, Vec3d& v) const;
-  bool needGlFrontFaceCW(void) const
-    {return !CustomProjector::needGlFrontFaceCW();}
+  bool needGlFrontFaceCW(void) const;
 private:
   SphericMirrorCalculator calc;
 };
