@@ -107,7 +107,6 @@ void ViewportDistorterFisheyeToSphericMirror::init(const InitParser &conf) {
                         (j-(trans_height>>1))/(double)trans_height,
                         v,v_x,v_y);
       data.h = rc ? (v_x^v_y).length() : 0.0;
-      v[0] = -v[0];
       const double h = v[1];
       v[1] = v[2];
       v[2] = -h;
