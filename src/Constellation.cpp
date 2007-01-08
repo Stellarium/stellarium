@@ -21,7 +21,7 @@
 #include <algorithm>
 #include "STexture.h"
 #include "Projector.hpp"
-#include "constellation.h"
+#include "Constellation.h"
 #include "hip_star_mgr.h"
 #include "navigator.h"
 #include "StelTextureMgr.hpp"

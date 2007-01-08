@@ -7,7 +7,7 @@ stellarium_SOURCES = Projector.cpp Projector.hpp StereographicProjector.cpp \
 	Observer.hpp grid.cpp grid.h GeodesicGrid.cpp GeodesicGrid.hpp \
 	StelObjectBase.cpp StelObjectBase.hpp StelObject.cpp StelObject.hpp StelObjectType.hpp \
 	hip_star_mgr.cpp hip_star_mgr.h nebula.cpp nebula.h nebula_mgr.cpp nebula_mgr.h \
-	constellation.cpp constellation.h constellation_mgr.cpp constellation_mgr.h meteor.cpp \
+	Constellation.cpp Constellation.h ConstellationMgr.cpp ConstellationMgr.hpp meteor.cpp \
 	meteor.h meteor_mgr.cpp meteor_mgr.h planet.cpp planet.h orbit.cpp orbit.h \
 	solarsystem.cpp solarsystem.h telescope.cpp telescope.h telescope_mgr.cpp \
 	telescope_mgr.h stel_atmosphere.cpp stel_atmosphere.h image.cpp image.h image_mgr.cpp \
