@@ -157,6 +157,7 @@ dnl OTHER SYSTEMS
 ;;
 esac
 
+
 dnl Checks for library functions.
 AC_CHECK_FUNCS(toupper strcasecmp strdup putenv setlocale tzset strchr pow10 timegm)
 

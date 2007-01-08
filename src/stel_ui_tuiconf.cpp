@@ -25,7 +25,7 @@
 #include <string>
 #include "stel_ui.h"
 #include "hip_star_mgr.h"
-#include "constellation_mgr.h"
+#include "ConstellationMgr.hpp"
 #include "solarsystem.h"
 #include "nebula_mgr.h"
 #include "StelApp.hpp"
