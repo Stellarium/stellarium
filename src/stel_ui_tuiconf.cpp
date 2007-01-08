@@ -27,14 +27,14 @@
 #include "hip_star_mgr.h"
 #include "ConstellationMgr.hpp"
 #include "solarsystem.h"
-#include "nebula_mgr.h"
+#include "NebulaMgr.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "script_mgr.h"
 #include "stel_command_interface.h"
-#include "LandscapeMgr.h"
-#include "GridLinesMgr.h"
-#include "MilkyWay.h"
+#include "LandscapeMgr.hpp"
+#include "GridLinesMgr.hpp"
+#include "MilkyWay.hpp"
 #include "MovementMgr.hpp"
 
 // Draw simple gravity text ui.

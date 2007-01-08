@@ -23,7 +23,7 @@
 #include "StelObjectBase.hpp"
 #include "stellarium.h"
 #include "Projector.hpp"
-#include "navigator.h"
+#include "Navigator.hpp"
 #include "SFont.hpp"
 #include "ToneReproducer.hpp"
 #include "Translator.hpp"

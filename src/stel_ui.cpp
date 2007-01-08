@@ -27,12 +27,12 @@
 #include "StelCore.hpp"
 #include "ConstellationMgr.hpp"
 #include "solarsystem.h"
-#include "nebula_mgr.h"
+#include "NebulaMgr.hpp"
 #include "InitParser.hpp"
 #include "stel_command_interface.h"
 #include "StelTextureMgr.hpp"
-#include "LandscapeMgr.h"
-#include "GridLinesMgr.h"
+#include "LandscapeMgr.hpp"
+#include "GridLinesMgr.hpp"
 #include "MovementMgr.hpp"
 
 ////////////////////////////////////////////////////////////////////////////////

@@ -27,7 +27,7 @@
 
 #include "skylight.h"
 #include "vecmath.h"
-#include "navigator.h"
+#include "Navigator.hpp"
 #include "ToneReproducer.hpp"
 #include "skybright.h"
 #include "Fader.hpp"

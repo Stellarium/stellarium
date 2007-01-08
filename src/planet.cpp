@@ -24,7 +24,7 @@
 #include "StelApp.hpp"
 #include "STexture.h"
 #include "planet.h"
-#include "navigator.h"
+#include "Navigator.hpp"
 #include "Projector.hpp"
 #include "SFont.hpp"
 #include "sideral_time.h"

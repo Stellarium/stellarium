@@ -20,7 +20,7 @@
 #include <functional>
 
 #include "Projector.hpp"
-#include "navigator.h"
+#include "Navigator.hpp"
 #include "meteor_mgr.h"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
