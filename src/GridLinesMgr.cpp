@@ -1,7 +1,7 @@
-#include "GridLinesMgr.h"
+#include "GridLinesMgr.hpp"
 
 #include "StelApp.hpp"
-#include "navigator.h"
+#include "Navigator.hpp"
 #include "Translator.hpp"
 #include "Projector.hpp"
 #include "LoadingBar.hpp"

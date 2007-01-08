@@ -34,7 +34,7 @@
 #include "STexture.h"
 #include "bytes.h"
 #include "stellarium.h" // AU,SPEED_OF_LIGHT
-#include "navigator.h"
+#include "Navigator.hpp"
 #include "StelUtils.hpp"
 #include "ToneReproducer.hpp"
 #include "Translator.hpp"

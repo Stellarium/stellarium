@@ -23,10 +23,10 @@
 #include <algorithm>
 
 #include "StelApp.hpp"
-#include "nebula_mgr.h"
-#include "nebula.h"
+#include "NebulaMgr.hpp"
+#include "Nebula.hpp"
 #include "STexture.h"
-#include "navigator.h"
+#include "Navigator.hpp"
 #include "Translator.hpp"
 #include "LoadingBar.hpp"
 #include "StelTextureMgr.hpp"

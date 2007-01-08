@@ -26,6 +26,10 @@
 #include "image_mgr.h"
 #include "callbacks.hpp"
 
+#include "Navigator.hpp"
+#include "Projector.hpp"
+
+class Observer;
 
 //!  @brief Main class for stellarium core processing.
 //!

@@ -31,10 +31,10 @@
 #include "hip_star_mgr.h"
 #include "ConstellationMgr.hpp"
 #include "solarsystem.h"
-#include "nebula_mgr.h"
-#include "LandscapeMgr.h"
-#include "GridLinesMgr.h"
-#include "MilkyWay.h"
+#include "NebulaMgr.hpp"
+#include "LandscapeMgr.hpp"
+#include "GridLinesMgr.hpp"
+#include "MilkyWay.hpp"
 #include "MovementMgr.hpp"
 
 using namespace std;

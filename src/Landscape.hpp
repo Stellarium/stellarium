@@ -24,7 +24,7 @@
 #include "vecmath.h"
 #include "ToneReproducer.hpp"
 #include "Projector.hpp"
-#include "navigator.h"
+#include "Navigator.hpp"
 #include "Fader.hpp"
 #include "StelUtils.hpp"
 
