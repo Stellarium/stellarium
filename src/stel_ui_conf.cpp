@@ -22,7 +22,7 @@
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "hip_star_mgr.h"
-#include "constellation_mgr.h"
+#include "ConstellationMgr.hpp"
 #include "solarsystem.h"
 #include "nebula_mgr.h"
 #include "stel_command_interface.h"

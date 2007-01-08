@@ -23,8 +23,8 @@
 #include <fstream>
 #include <vector>
 
-#include "constellation_mgr.h"
-#include "constellation.h"
+#include "ConstellationMgr.hpp"
+#include "Constellation.h"
 #include "hip_star_mgr.h"
 #include "StelUtils.hpp"
 #include "StelApp.hpp"
