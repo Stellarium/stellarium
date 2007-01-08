@@ -28,7 +28,7 @@ using namespace std;
 #include "orbit.h"
 #include "stellarium.h" // AU,SPEED_OF_LIGHT
 #include "InitParser.hpp"
-#include "navigator.h"
+#include "Navigator.hpp"
 #include "Projector.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"

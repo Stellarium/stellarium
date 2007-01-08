@@ -21,7 +21,7 @@
 #define _METEOR_H_
 
 #include "Projector.hpp"
-#include "navigator.h"
+#include "Navigator.hpp"
 #include "ToneReproducer.hpp"
 
 // all in km - altitudes make up meteor range

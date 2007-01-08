@@ -23,9 +23,9 @@
 #define _IMAGE_H_
 
 #include <string>
-#include "Projector.hpp"
-#include "navigator.h"
 
+class Projector;
+class Navigator;
 
 class Image
 {
@@ -39,7 +39,7 @@ class Image
 		POS_J2000
 	};
 
-  Image(string filename, string name, IMAGE_POSITIONING pos_type);
+  Image(std::string filename, std::string name, IMAGE_POSITIONING pos_type);
   virtual ~Image();
   //  int drop(string image_name);
   void set_alpha(float alpha, float duration);
@@ -48,12 +48,12 @@ class Image
   void set_location(float xpos, bool deltax, float ypos, bool deltay, float duration);
   bool update(double delta_time);  // update properties
   void draw(const Navigator * nav, Projector * prj);
-  string get_name() { return image_name; };
+  std::string get_name() { return image_name; };
   bool image_loaded() { return (image_ratio != -1); }  // was texture loaded from disk?
 
  private:
   class STexture * image_tex;
-  string image_name;
+  std::string image_name;
   IMAGE_POSITIONING image_pos_type;
   float image_scale, image_alpha, image_rotation;
   float image_ratio, image_xpos, image_ypos;

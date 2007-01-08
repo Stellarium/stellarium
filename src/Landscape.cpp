@@ -17,7 +17,7 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#include "landscape.h"
+#include "Landscape.hpp"
 #include "InitParser.hpp"
 #include "STexture.h"
 #include "StelApp.hpp"

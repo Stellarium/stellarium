@@ -21,7 +21,7 @@
 #define _TELESCOPE_H_
 
 #include "StelObjectBase.hpp"
-#include "navigator.h"
+#include "Navigator.hpp"
 
 long long int GetNow(void);
 

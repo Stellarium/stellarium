@@ -17,8 +17,8 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
  
-#include "LandscapeMgr.h"
-#include "landscape.h"
+#include "LandscapeMgr.hpp"
+#include "Landscape.hpp"
 #include "stel_atmosphere.h"
 #include "StelApp.hpp"
 #include "solarsystem.h"

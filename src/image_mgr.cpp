@@ -21,7 +21,8 @@
 
 #include <iostream>
 #include "image_mgr.h"
-
+#include "Projector.hpp"
+#include "Navigator.hpp"
 
 ImageMgr::ImageMgr()
 {}

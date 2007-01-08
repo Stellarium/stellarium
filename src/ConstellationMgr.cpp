@@ -24,7 +24,7 @@
 #include <vector>
 
 #include "ConstellationMgr.hpp"
-#include "Constellation.h"
+#include "Constellation.hpp"
 #include "hip_star_mgr.h"
 #include "StelUtils.hpp"
 #include "StelApp.hpp"

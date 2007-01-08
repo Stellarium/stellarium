@@ -23,6 +23,8 @@
 #include "image.h"
 #include "StelApp.hpp"
 #include "StelTextureMgr.hpp"
+#include "Projector.hpp"
+#include "Navigator.hpp"
 
 Image::Image( string filename, string name, IMAGE_POSITIONING pos_type) {
   flag_alpha = flag_scale = flag_location = flag_rotation = 0;

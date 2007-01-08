@@ -19,11 +19,11 @@
 
 #include <iostream>
 #include <sstream>
-#include "nebula.h"
+#include "Nebula.hpp"
 #include "STexture.h"
 #include "stellarium.h"
 #include "SFont.hpp"
-#include "navigator.h"
+#include "Navigator.hpp"
 #include "StelUtils.hpp"
 #include "StelApp.hpp"
 #include "StelTextureMgr.hpp"

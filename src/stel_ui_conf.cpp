@@ -24,11 +24,11 @@
 #include "hip_star_mgr.h"
 #include "ConstellationMgr.hpp"
 #include "solarsystem.h"
-#include "nebula_mgr.h"
+#include "NebulaMgr.hpp"
 #include "stel_command_interface.h"
 #include "StelTextureMgr.hpp"
-#include "LandscapeMgr.h"
-#include "GridLinesMgr.h"
+#include "LandscapeMgr.hpp"
+#include "GridLinesMgr.hpp"
 #include "MovementMgr.hpp"
 
 using namespace s_gui;
