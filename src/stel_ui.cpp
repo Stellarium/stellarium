@@ -233,6 +233,7 @@ void StelUI::show_message(wstring _message, int _time_out)
 	message_txtlbl->setLabel(_message);
 	message_txtlbl->adjustSize();
 	message_win->set_timeout(_time_out);
+	message_win->reshape(150,300,700,200);
 	message_win->setVisible(1);
 }
 
