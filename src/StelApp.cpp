@@ -364,6 +364,13 @@ int StelApp::handleMove(int x, int y)
 // Handle key press and release
 int StelApp::handleKeys(SDLKey key, SDLMod mod, Uint16 unicode, Uint8 state)
 {
+
+	// Standard keys should not be able to be hijacked by modules - Rob
+	// (this could be debated)
+	if (ui->handle_keys_tui(unicode, state)) return 1;
+
+	if (ui->handle_keys(key, mod, unicode, state)) return 1;
+
 	// Send the event to every StelModule
 	std::vector<StelModule*> modList = moduleMgr->getCallOrders("handleKeys");
 	for (std::vector<StelModule*>::iterator i=modList.begin();i!=modList.end();++i)
@@ -371,9 +378,6 @@ int StelApp::handleKeys(SDLKey key, SDLMod mod, Uint16 unicode, Uint8 state)
 		if ((*i)->handleKeys(key, mod, unicode, state)==true)
 			return 1;
 	}
-
-	if (ui->handle_keys_tui(unicode, state)) return 1;
-	if (ui->handle_keys(key, mod, unicode, state)) return 1;
 
 	return 0;
 }
