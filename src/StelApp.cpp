@@ -27,6 +27,7 @@
 #include "stel_ui.h"
 #include "StelTextureMgr.hpp"
 #include "LoadingBar.hpp"
+#include "StelObjectDB.hpp"
 
 // Initialize static variables
 StelApp* StelApp::singleton = NULL;
@@ -53,7 +54,7 @@ StelApp::StelApp(const string& CDIR, const string& LDIR, const string& DATA_ROOT
 	skyCultureMgr = new StelSkyCultureMgr(getDataFilePath("sky_cultures"));
 	moduleMgr = new StelModuleMgr();
 	
-	core = new StelCore(LDIR, DATA_ROOT, boost::callback<void, string>(this, &StelApp::recordCommand));
+	core = new StelCore(boost::callback<void, string>(this, &StelApp::recordCommand));
 	ui = new StelUI(core, this);
 	commander = new StelCommandInterface(core, this);
 	scripts = new ScriptMgr(commander, dataDir);
@@ -76,6 +77,7 @@ StelApp::~StelApp()
 	delete skyCultureMgr;
 	delete localeMgr;
 	delete fontManager;
+	delete globalObjectMgr;
 }
 
 /*************************************************************************
@@ -173,7 +175,6 @@ void StelApp::init(void)
 
 	// Main section
 	string version = conf.get_str("main:version");
-
 	if (version!=string(PACKAGE_VERSION))
 	{
 		std::istringstream istr(version);
@@ -201,7 +202,7 @@ void StelApp::init(void)
 	screenH = conf.get_int("video:screen_h");
 	initSDL(screenW, screenH, conf.get_int("video:bbp_mode"), conf.get_boolean("video:fullscreen"), getDataFilePath("icon.bmp"));
 
-	// Initialize after creation of openGL context
+	// Initialize AFTER creation of openGL context
 	textureMgr->init();
 
 	// Clear screen, this fixes a strange artifact at loading time in the upper corner.
@@ -218,6 +219,10 @@ void StelApp::init(void)
 	              core->getProjection()->getViewportWidth(), core->getProjection()->getViewportHeight(),
 	              StelUtils::stringToWstring(PACKAGE_VERSION), 45, 320, 121);
 
+	// Stel Object Data Base manager
+	globalObjectMgr = new StelObjectDB();
+	globalObjectMgr->init(conf, lb);
+
 	localeMgr->init(conf);
 	skyCultureMgr->init(conf);
 	
@@ -229,7 +234,6 @@ void StelApp::init(void)
 
 	// TODO: Need way to update settings from config without reinitializing whole gui
 	ui->init(conf);
-
 	ui->init_tui();  // don't reinit tui since probably called from there
 
 	// Initialisation of the color scheme
@@ -237,10 +241,10 @@ void StelApp::init(void)
 	setVisionModeNormal();
 	if (conf.get_boolean("viewing:flag_night")) setVisionModeNight();
 
-	if (distorter == 0)
-	{
-		setViewPortDistorterType(conf.get_str("video","distorter","none"));
-	}
+	setViewPortDistorterType(conf.get_str("video","distorter","none"));
+
+	// Load standard modules TODO
+
 
 	// Load dynamic external modules
 	int i=1;
@@ -266,7 +270,7 @@ void StelApp::init(void)
 	moduleMgr->generateCallingLists();
 	
 	// play startup script, if available
-	if(scripts) scripts->play_startup_script();
+	scripts->play_startup_script();
 }
 
 void StelApp::update(int delta_time)
@@ -297,6 +301,8 @@ void StelApp::update(int delta_time)
 	if(!scripts->is_paused()) core->getImageMgr()->update(delta_time);
 
 	core->update(delta_time);
+	
+	globalObjectMgr->update((double)delta_time/1000);
 }
 
 //! Main drawinf function called at each frame
@@ -320,6 +326,8 @@ double StelApp::draw(int delta_time)
 
 	// Render all the main objects of stellarium
 	double squaredDistance = core->draw(delta_time);
+
+	globalObjectMgr->draw(core->getProjection(), core->getNavigation(), core->getToneReproductor());
 
 	// Draw the Graphical ui and the Text ui
 	ui->draw();

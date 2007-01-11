@@ -50,7 +50,7 @@ public:
 	virtual double draw(Projector *prj, const Navigator *nav, ToneReproducer *eye);
 	virtual void update(double deltaTime);
 	virtual void updateI18n();
-	virtual void updateSkyCulture(LoadingBar& lb) {;}
+	virtual void selectedObjectChangeCallBack();
 	
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in StelObjectManager class
@@ -149,16 +149,6 @@ public:
 	//! Get list of all the translated planets name
 	vector<wstring> getNamesI18(void);
 	
-	//! Set selected planets by englishName
-	//! @param englishName The planet name or "" to select no planet
-	void setSelected(const string& englishName) {setSelected(searchByEnglishName(englishName));}
-	
-	//! Set selected object from its pointer
-	void setSelected(const StelObject &obj);
-	
-	//! Get selected object's pointer
-	StelObject getSelected(void) const {return selected;}
-	
 private:
 	// Compute the transformation matrix for every elements of the solar system.
     // observerPos is needed for light travel time computation
@@ -171,6 +161,13 @@ private:
 	Planet* moon;
 	Planet* earth;
 	
+	//! Set selected planets by englishName
+	//! @param englishName The planet name or "" to select no planet
+	void setSelected(const string& englishName) {setSelected(searchByEnglishName(englishName));}
+	//! Set selected object from its pointer
+	void setSelected(const StelObject &obj);	
+	//! Get selected object's pointer
+	StelObject getSelected(void) const {return selected;}	
 	//! The currently selected planet
 	StelObject selected;
 

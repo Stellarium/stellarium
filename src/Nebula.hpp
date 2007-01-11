@@ -64,6 +64,9 @@ public:
 	Vec3d getObsJ2000Pos(const Navigator *nav) const {return XYZ;}
 	double get_close_fov(const Navigator * nav = NULL) const;
 	float get_mag(const Navigator * nav = NULL) const {return mag;}
+	float getSelectPriority(const Navigator *nav) const;
+
+	virtual Vec3f getInfoColor(void) const;
 
 	void setLabelColor(const Vec3f& v) {label_color = v;}
 	void setCircleColor(const Vec3f& v) {circle_color = v;}

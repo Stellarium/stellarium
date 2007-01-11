@@ -23,27 +23,32 @@
 
 #include <vector>
 #include <string>
-#include "image.h"
 #include "StelModule.hpp"
-
+#include "image.h"
 /**
  * Manage images displayed at the request of the command interface (scripts)
  * @author Robert Spearman <rob@digitaliseducation.com>
  */
 
-class ImageMgr
+
+class ImageMgr : public StelModule
 {
 
 public:
     ImageMgr();
     virtual ~ImageMgr();
+    
+	///////////////////////////////////////////////////////////////////////////
+	// Methods defined in the StelModule class
+	virtual void init(const InitParser& conf, LoadingBar& lb) {return;}
 	virtual string getModuleID() const { return "image_mgr"; }
+	virtual double draw(Projector *prj, const Navigator *nav, ToneReproducer *eye);
+	virtual void update(double deltaTime);
+	
     int load_image(string filename, string name, Image::IMAGE_POSITIONING position_type);
     int drop_image(string name);
     int drop_all_images();
     Image *get_image(string name);
-    virtual void update(double delta_time);  // update properties
-    virtual double draw(const Navigator * nav, Projector * prj);
 
 private:
     vector<Image*> active_images;

@@ -48,6 +48,7 @@ public:
 	virtual void update(double deltaTime);
 	virtual void updateI18n();
 	virtual void updateSkyCulture(LoadingBar& lb);	
+	virtual void selectedObjectChangeCallBack();
 	
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in StelObjectManager class
@@ -126,20 +127,6 @@ public:
 	
 	//! Define font size to use for constellation names display
 	void setFontSize(double newFontSize);
-	
-	//! Define which constellation is selected from its abbreviation
-	void setSelected(const string& abbreviation);
-
-	//! Define which constellation is selected and return brightest star 
-	StelObject setSelectedStar(const string& abbreviation);
-	
-	//! Define which constellation is selected from a star number
-	void setSelected(const StelObject &s) {if (!s) setSelectedConst(NULL); else setSelectedConst(is_star_in(s));}
-	
-	//! Remove all selected constellations
-	void deselect() { setSelected(StelObject(NULL)); }
-
-	StelObject getSelected(void) const;	
 
 private:
 	bool loadBoundaries(const string& conCatFile);
@@ -147,15 +134,26 @@ private:
 	void draw_art(Projector * prj, const Navigator * nav) const;
 	void draw_names(Projector * prj) const;
 	void drawBoundaries(Projector* prj) const;	
+	
 	void setSelectedConst(Constellation* c);
-
+	//! Define which constellation is selected from its abbreviation
+	void setSelected(const string& abbreviation);
+	//! Define which constellation is selected and return brightest star 
+	StelObject setSelectedStar(const string& abbreviation);
+	//! Define which constellation is selected from a star number
+	void setSelected(const StelObject &s) {if (!s) setSelectedConst(NULL); else setSelectedConst(is_star_in(s));}
+	//! Remove all selected constellations
+	void deselect() { setSelected(StelObject(NULL)); }
+	StelObject getSelected(void) const;	
+	vector<Constellation*> selected; // More than one can be selected at a time
+	
     Constellation* is_star_in(const StelObject &s) const;
     Constellation* findFromAbbreviation(const string& abbreviation) const;		
     vector<Constellation*> asterisms;
 	double fontSize;
     SFont* asterFont;
     HipStarMgr* hipStarMgr;
-	vector<Constellation*> selected; // More than one can be selected at a time
+	
 	bool isolateSelected;
 	vector<vector<Vec3f> *> allBoundarySegments;
 

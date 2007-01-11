@@ -31,6 +31,7 @@
 #include "StelTextureMgr.hpp"
 #include "InitParser.hpp"
 #include "Projector.hpp"
+#include "StelObjectDB.hpp"
 
 // constructor which loads all data from appropriate files
 ConstellationMgr::ConstellationMgr(HipStarMgr *_hip_stars) : 
@@ -76,6 +77,8 @@ void ConstellationMgr::init(const InitParser& conf, LoadingBar& lb)
 	setFlagIsolateSelected(conf.get_boolean("viewing", "flag_constellation_isolate_selected",conf.get_boolean("viewing", "flag_constellation_pick", false)));
 	setArtIntensity(	conf.get_double("viewing","constellation_art_intensity", 0.5));
 	setArtFadeDuration(	conf.get_double("viewing","constellation_art_fade_duration",2.));
+	
+	StelApp::getInstance().getGlobalObjectMgr().registerStelObjectMgr(this);
 }
 
 void ConstellationMgr::updateSkyCulture(LoadingBar& lb)
@@ -91,6 +94,37 @@ void ConstellationMgr::updateSkyCulture(LoadingBar& lb)
 	
 		// Translated constellation names for the new sky culture
 		updateI18n();
+		
+		// as constellations have changed, clear out any selection and retest for match!
+		selectedObjectChangeCallBack();
+	}
+}
+
+
+/*************************************************************************
+ The selected objects changed, check if some stars are selected and display the 
+ matching constellations if isolate_selected mode is activated
+*************************************************************************/ 
+void ConstellationMgr::selectedObjectChangeCallBack()
+{
+	if (!StelApp::getInstance().getGlobalObjectMgr().getFlagHasSelected())
+	{
+		setSelected(StelObject());
+		return;
+	}
+	
+	if (StelApp::getInstance().getGlobalObjectMgr().getSelectedObject().get_type()==STEL_OBJECT_CONSTELLATION)
+	{
+		const Constellation* c = (const Constellation*)&(StelApp::getInstance().getGlobalObjectMgr().getSelectedObject());
+		StelApp::getInstance().getGlobalObjectMgr().selectObject(c->getBrightestStarInConstellation());
+	}
+	else if (StelApp::getInstance().getGlobalObjectMgr().getSelectedObject().get_type()==STEL_OBJECT_STAR)
+	{
+		setSelected(StelApp::getInstance().getGlobalObjectMgr().getSelectedObject());
+	}
+	else
+	{
+		setSelected(StelObject());
 	}
 }
 

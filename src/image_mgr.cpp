@@ -99,7 +99,7 @@ void ImageMgr::update(double delta_time)
     }
 }
 
-double ImageMgr::draw(const Navigator * nav, Projector * prj)
+double ImageMgr::draw(Projector *prj, const Navigator *nav, ToneReproducer *eye)
 {
 	prj->set_orthographic_projection();
     for (vector<Image*>::iterator iter = active_images.begin(); iter != active_images.end(); ++iter)

@@ -42,6 +42,9 @@ class StelCommandInterface : CommandInterface, public StelModule
   StelCommandInterface(StelCore * core, StelApp * app);
   virtual ~StelCommandInterface();
   virtual string getModuleID() const { return "command_interface"; }
+  virtual void init(const InitParser& conf, LoadingBar& lb) {return;}
+  virtual double draw(Projector* prj, const Navigator * nav, ToneReproducer* eye) {return 0;}
+  
   virtual int execute_command(string commandline);
   virtual int execute_command(string command, double arg);
   virtual int execute_command(string command, int arg);

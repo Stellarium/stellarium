@@ -39,7 +39,7 @@ class InitParser;
 class StelUI
 {
 friend class StelCommandInterface;
-friend class StelApp;
+
 public:
 	StelUI(StelCore *, StelApp * _app);	// Create a stellarium ui. Need to call init() before use
     virtual ~StelUI();		// Delete the ui

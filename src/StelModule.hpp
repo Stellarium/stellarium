@@ -62,15 +62,15 @@ public:
 	
 	//! Initialize itself from a configuration (.ini) file
 	//! If the initialization takes significant time, the progress should be displayed on the loading bar.
-	virtual void init(const InitParser& conf, LoadingBar& lb) {;}
+	virtual void init(const InitParser& conf, LoadingBar& lb) = 0;
 	
 	//! Execute all the openGL drawing functions for this module.
 	//! @return the max squared distance in pixels any single object has moved since the previous update.
-	virtual double draw(Projector* prj, const Navigator * nav, ToneReproducer* eye) {return 0;}
+	virtual double draw(Projector* prj, const Navigator * nav, ToneReproducer* eye) = 0;
 	
 	//! Update the module with respect to the time.
 	//! @param delta_time the time increment in second since last call.
-	virtual void update(double deltaTime) {;}
+	virtual void update(double deltaTime) = 0;
 	
 	//! @brief Update i18n strings from english names according to current global sky and application language.
 	//! This method also reload the proper fonts depending on the language.
@@ -121,6 +121,9 @@ public:
 	
 	//! Return the full path to a data file belonging to the module
 	std::string getFilePath(const std::string& fileName) const;
+	
+	//! Indicate that selected StelObjects changed. This can be used by some modules to update themself.
+	virtual void selectedObjectChangeCallBack() {;}
 	
 protected:
 	friend class StelModuleMgr;

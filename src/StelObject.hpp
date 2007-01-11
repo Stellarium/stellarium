@@ -42,15 +42,15 @@ public:
   operator bool(void) const;
   bool operator==(const StelObject &o) const;
 
-  void update(void);
-  void drawPointer(int delta_time,
-                    const Projector *prj,
+  void update(double deltaTime);
+  void drawPointer(const Projector *prj,
                     const Navigator *nav);
 
-  //! Write I18n information about the object in wstring. 
+	//! Get a multiline string describing the currently selected object
   wstring getInfoString(const Navigator *nav) const;
 
-  //! The returned wstring can typically be used for object labeling in the sky
+	//! Get a 1 line string briefly describing the currently selected object
+	//! It can typically be used for object labeling in the sky
   wstring getShortInfoString(const Navigator *nav) const;
 
   //! Return object's type
@@ -60,7 +60,7 @@ public:
   string getEnglishName(void) const;
   wstring getNameI18n(void) const;
 
-  //! Get position in earth equatorial frame
+  //! Get the earth centered equatorial position of the object
   Vec3d get_earth_equ_pos(const Navigator *nav) const;
 
   //! observer centered J2000 coordinates
@@ -69,17 +69,25 @@ public:
   //! Return object's magnitude
   float get_mag(const Navigator *nav) const;
 
-  //! Get object main color, used to display infos
+  //! Return a priority value which is used to discriminate objects by priority
+  //! As for magnitudes, the lower is the higher priority 
+  float getSelectPriority(const Navigator *nav) const;
+
+  //! Get the object'color
   Vec3f get_RGB(void) const;
-
-  StelObject getBrightestStarInConstellation(void) const;
-
-    // only needed for AutoZoomIn/Out, whatever this is:
-  //! Return the best FOV in degree to use for a close view of the object
+  
+  //! Get a color used to display info about the object
+  Vec3f getInfoColor(void) const;
+  
+  // only needed for AutoZoomIn/Out, whatever this is:
+    
+  //! Get the size of the FoV in degree best suited for seeing the object from close view
   double get_close_fov(const Navigator *nav) const;
-  //! Return the best FOV in degree to use for a global view
-  //! of the object satellite system (if there are satellites)
+  
+  //! Return the best FOV in degree to use for a global view of the object satellite system (if there are satellites)
   double get_satellites_fov(const Navigator *nav) const;
+  
+  //! Get the size of the FoV best suited for seeing the object + its parent satellites
   double get_parent_satellites_fov(const Navigator *nav) const;
 
   static void init_textures(void);

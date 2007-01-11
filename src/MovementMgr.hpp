@@ -19,6 +19,7 @@ public:
 	virtual bool handleKeys(SDLKey key, SDLMod mod, Uint16 unicode, Uint8 state);
 	virtual bool handleMouseMoves(Uint16 x, Uint16 y);
 	virtual bool handleMouseClicks(Uint16 x, Uint16 y, Uint8 button, Uint8 state);
+	virtual void selectedObjectChangeCallBack();
 	
 	double getZoomSpeed() {return zoom_speed;}
 	
@@ -32,13 +33,6 @@ public:
 	void setFlagTracking(bool b);
 	//! Get object tracking
 	bool getFlagTracking(void) const {return flagTracking;}
-	
-	//! Go to the selected object
-    void gotoSelectedObject(void)
-    {
-		if (core->getFlagHasSelected())
-			moveTo(core->getSelectedObjectEarthEquPos(),auto_move_duration);
-    }
 
 	//! Move view in alt/az (or equatorial if in that mode) coordinates
 	void panView(double deltaAz, double deltaAlt);

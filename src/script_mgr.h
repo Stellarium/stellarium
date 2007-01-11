@@ -41,6 +41,10 @@ class ScriptMgr : public StelModule
   ScriptMgr(StelCommandInterface * command_interface, string _data_dir);
   virtual ~ScriptMgr();
   virtual string getModuleID() const { return "script_mgr"; }
+  
+  virtual void init(const InitParser& conf, LoadingBar& lb) {return;}
+  virtual double draw(Projector* prj, const Navigator * nav, ToneReproducer* eye) {return 0;}
+  
   bool play_script(string script_file, string script_path);
   bool play_startup_script();
   void cancel_script();  // stop playing current script

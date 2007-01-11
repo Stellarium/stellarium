@@ -20,6 +20,7 @@
 #include <iostream>
 #include <sstream>
 #include "Nebula.hpp"
+#include "NebulaMgr.hpp"
 #include "STexture.h"
 #include "stellarium.h"
 #include "SFont.hpp"
@@ -138,6 +139,24 @@ wstring Nebula::getShortInfoString(const Navigator*) const
 	// All nebula have at least an NGC or IC number
 	assert(false);
 	return L"";
+}
+
+ float Nebula::getSelectPriority(const Navigator *nav) const
+ {
+	if( ((NebulaMgr*)StelApp::getInstance().getModuleMgr().getModule("nebulas"))->getFlagHints() )
+	{
+		// make very easy to select IF LABELED
+		return -1;
+	}
+	else
+	{
+		return get_mag(nav);
+	}
+ }
+
+Vec3f Nebula::getInfoColor(void) const
+{
+	return ((NebulaMgr*)StelApp::getInstance().getModuleMgr().getModule("nebulas"))->getNamesColor();
 }
 
 double Nebula::get_close_fov(const Navigator*) const

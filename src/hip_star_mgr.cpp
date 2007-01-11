@@ -41,6 +41,7 @@
 #include "GeodesicGrid.hpp"
 #include "StelApp.hpp"
 #include "StelTextureMgr.hpp"
+#include "StelObjectDB.hpp"
 
 typedef int Int32;
 typedef unsigned int Uint32;
@@ -1151,6 +1152,8 @@ void HipStarMgr::init(const InitParser& conf, LoadingBar& lb) {
   setFlagTwinkle(conf.get_boolean("stars:flag_star_twinkle"));
   setFlagPointStar(conf.get_boolean("stars:flag_point_star"));
   setLimitingMag(conf.get_double("stars", "star_limiting_mag", 6.5f));
+  
+  StelApp::getInstance().getGlobalObjectMgr().registerStelObjectMgr(this);
 }
 
 void HipStarMgr::setGrid(void) {
@@ -1596,6 +1599,10 @@ vector<StelObject> HipStarMgr::searchAround(const Vec3d& vv,
                                             double lim_fov, // degrees
                                             const Navigator * nav,
                                             const Projector * prj) const {
+  vector<StelObject> result;
+  if (!getFlagStars())
+  	return result;
+  	
   Vec3d v(vv);
   v.normalize();
     // find any vectors h0 and h1 (length 1), so that h0*v=h1*v=h0*h1=0
@@ -1637,7 +1644,6 @@ vector<StelObject> HipStarMgr::searchAround(const Vec3d& vv,
   geodesic_search_result->search(e0,e1,e2,e3,last_max_search_level);
     // iterate over the stars inside the triangles:
   f = cos(lim_fov * M_PI/180.);
-  vector<StelObject> result;
   for (ZoneArrayMap::const_iterator it(zone_arrays.begin());
        it!=zone_arrays.end();it++) {
 //cout << "search inside(" << it->first << "):";

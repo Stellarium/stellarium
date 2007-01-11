@@ -22,7 +22,6 @@
 
 #include "StelModule.hpp"
 #include "StelObject.hpp"
-#include "Translator.hpp"
 
 /**
  * Manage a collection of StelObject.
@@ -37,9 +36,10 @@ public:
     ~StelObjectMgr();
 	
 	//! Search for StelObject in the disk of diameter limitFov centered on the given position
+	//! Only visible objects (i.e curretly displayed on screen should be returned)
 	//! @param v equatorial position at epoch J2000
 	//! @param limitFov angular diameter of the searching zone in degree
-	//! @return the list of all the objects contained in the defined zone
+	//! @return the list of all the displayed objects contained in the defined zone
 	virtual vector<StelObject> searchAround(const Vec3d& v, double limitFov, const Navigator * nav, const Projector * prj) const = 0;
 	
 	//! Return the matching StelObject if exists or the empty StelObject if not found
