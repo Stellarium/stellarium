@@ -22,6 +22,7 @@
 #include <iomanip>
 
 #include "StelApp.hpp"
+#include "solarsystem.h"
 #include "STexture.h"
 #include "planet.h"
 #include "Navigator.hpp"
@@ -168,6 +169,25 @@ wstring Planet::getShortInfoString(const Navigator * nav) const
 
 	return oss.str();
 }
+
+float Planet::getSelectPriority(const Navigator *nav) const
+{
+	if( ((SolarSystem*)StelApp::getInstance().getModuleMgr().getModule("ssystem"))->getFlagHints() )
+	{
+	// easy to select, especially pluto
+		return get_mag(nav)-15.f;
+	}
+	else
+	{
+		return get_mag(nav) - 8.f;
+	}
+}
+
+Vec3f Planet::getInfoColor(void) const
+{
+	return ((SolarSystem*)StelApp::getInstance().getModuleMgr().getModule("ssystem"))->getNamesColor();
+}
+
 
 double Planet::get_close_fov(const Navigator* nav) const
 {

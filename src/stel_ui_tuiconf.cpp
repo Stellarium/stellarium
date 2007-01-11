@@ -36,6 +36,7 @@
 #include "GridLinesMgr.hpp"
 #include "MilkyWay.hpp"
 #include "MovementMgr.hpp"
+#include "StelObjectDB.hpp"
 
 // Draw simple gravity text ui.
 void StelUI::draw_gravity_ui(void)
@@ -69,10 +70,10 @@ void StelUI::draw_gravity_ui(void)
 		core->getProjection()->print_gravity180(tuiFont, x - shift + 38, y - 38, os.str(), 0);
 	}
 
-	if (core->getFlagHasSelected() && FlagShowTuiShortObjInfo)
+	if (StelApp::getInstance().getGlobalObjectMgr().getFlagHasSelected() && FlagShowTuiShortObjInfo)
 	{
-	    wstring info = core->getSelectedObjectShortInfo();
-		glColor3fv(core->getSelectedObjectInfoColor());
+	    wstring info = StelApp::getInstance().getGlobalObjectMgr().getSelectedObject().getShortInfoString(core->getNavigation());
+		glColor3fv(StelApp::getInstance().getGlobalObjectMgr().getSelectedObject().getInfoColor());
 		core->getProjection()->print_gravity180(tuiFont, x + shift - 38, 
 						   y + 38, info, 0);
 	}

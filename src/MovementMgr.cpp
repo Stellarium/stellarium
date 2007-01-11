@@ -1,4 +1,6 @@
 #include "MovementMgr.hpp"
+#include "StelObjectDB.hpp"
+#include "StelApp.hpp"
 
 MovementMgr::MovementMgr(StelCore* acore) : core(acore), flag_lock_equ_pos(false), flagTracking(false), is_mouse_moving_horiz(false), is_mouse_moving_vert(false), 
 	flag_auto_move(0), deltaFov(0.), deltaAlt(0.), deltaAz(0.), move_speed(0.00025), flag_auto_zoom(0)
@@ -159,9 +161,9 @@ bool MovementMgr::handleMouseClicks(Uint16 x, Uint16 y, Uint8 button, Uint8 stat
 	case SDL_BUTTON_MIDDLE :
 		if (state==SDL_MOUSEBUTTONUP)
 		{
-			if (core->getFlagHasSelected())
+			if (StelApp::getInstance().getGlobalObjectMgr().getFlagHasSelected())
 			{
-				gotoSelectedObject();
+				moveTo(StelApp::getInstance().getGlobalObjectMgr().getSelectedObject().get_earth_equ_pos(core->getNavigation()),auto_move_duration);
 				setFlagTracking(true);
 			}
 		}
@@ -170,6 +172,20 @@ bool MovementMgr::handleMouseClicks(Uint16 x, Uint16 y, Uint8 button, Uint8 stat
 	}
 	
 	return false;
+}
+
+/*************************************************************************
+ The selected objects changed, follow it it we were already following another one
+*************************************************************************/ 
+void MovementMgr::selectedObjectChangeCallBack()
+{
+	// If an object was selected keep the earth following
+	if (StelApp::getInstance().getGlobalObjectMgr().getFlagHasSelected())
+	{
+		if (getFlagTracking())
+			setFlagLockEquPos(true);
+		setFlagTracking(false);
+	}
 }
 
 void MovementMgr::turn_right(int s)
@@ -320,7 +336,7 @@ void MovementMgr::autoZoomIn(float move_duration, bool allow_manual_zoom)
 {
 	Projector* proj = core->getProjection();
 	
-	if (!core->getFlagHasSelected())
+	if (!StelApp::getInstance().getGlobalObjectMgr().getFlagHasSelected())
 		return;
 		
 	float manual_move_duration;
@@ -328,7 +344,7 @@ void MovementMgr::autoZoomIn(float move_duration, bool allow_manual_zoom)
 	if (!getFlagTracking())
 	{
 		setFlagTracking(true);
-		moveTo(core->getSelectedObjectEarthEquPos(), move_duration, false, 1);
+		moveTo(StelApp::getInstance().getGlobalObjectMgr().getSelectedObject().get_earth_equ_pos(core->getNavigation()), move_duration, false, 1);
 		manual_move_duration = move_duration;
 	}
 	else
@@ -345,13 +361,13 @@ void MovementMgr::autoZoomIn(float move_duration, bool allow_manual_zoom)
 	}
 	else
 	{
-		float satfov = core->getSelectedObjectSatelliteFov();
+		float satfov = StelApp::getInstance().getGlobalObjectMgr().getSelectedObject().get_satellites_fov(core->getNavigation());
 
 		if (satfov>0.0 && proj->getFov()*0.9>satfov)
 			zoomTo(satfov, move_duration);
 		else
 		{
-			float closefov = core->getSelectedObjectCloseFov();
+			float closefov = StelApp::getInstance().getGlobalObjectMgr().getSelectedObject().get_close_fov(core->getNavigation());
 			if (proj->getFov()>closefov)
 				zoomTo(closefov, move_duration);
 		}
@@ -365,11 +381,11 @@ void MovementMgr::autoZoomOut(float move_duration, bool full)
 	Navigator* nav = core->getNavigation();
 	Projector* proj = core->getProjection();
 	
-	if (core->getFlagHasSelected() && !full)
+	if (StelApp::getInstance().getGlobalObjectMgr().getFlagHasSelected() && !full)
 	{
 		// If the selected object has satellites, unzoom to satellites view
 		// unless specified otherwise
-		float satfov = core->getSelectedObjectSatelliteFov();
+		float satfov = StelApp::getInstance().getGlobalObjectMgr().getSelectedObject().get_satellites_fov(core->getNavigation());
 
 		if (satfov>0.0 && proj->getFov()<=satfov*0.9)
 		{
@@ -379,7 +395,7 @@ void MovementMgr::autoZoomOut(float move_duration, bool full)
 
 		// If the selected object is part of a Planet subsystem (other than sun),
 		// unzoom to subsystem view
-		satfov = core->getSelectedObjectParentSatelliteFov();
+		satfov = StelApp::getInstance().getGlobalObjectMgr().getSelectedObject().get_parent_satellites_fov((core->getNavigation()));
 		if (satfov>0.0 && proj->getFov()<=satfov*0.9)
 		{
 			zoomTo(satfov, move_duration);
@@ -396,13 +412,13 @@ void MovementMgr::autoZoomOut(float move_duration, bool full)
 
 void MovementMgr::setFlagTracking(bool b)
 {
-	if(!b || !core->getFlagHasSelected())
+	if(!b || !StelApp::getInstance().getGlobalObjectMgr().getFlagHasSelected())
 	{
 		flagTracking=false;
 	}
 	else
 	{
-		moveTo(core->getSelectedObjectEarthEquPos(), getAutomoveDuration());
+		moveTo(StelApp::getInstance().getGlobalObjectMgr().getSelectedObject().get_earth_equ_pos(core->getNavigation()), getAutomoveDuration());
 		flagTracking=true;
 	}
 }
@@ -441,10 +457,10 @@ void MovementMgr::updateVisionVector(double deltaTime)
 	{
 		double ra_aim, de_aim, ra_start, de_start, ra_now, de_now;
 
-		if( zooming_mode == 1 && core->getFlagHasSelected())
+		if( zooming_mode == 1 && StelApp::getInstance().getGlobalObjectMgr().getFlagHasSelected())
 		{
 			// if zooming in, object may be moving so be sure to zoom to latest position
-			move.aim = core->getSelectedObjectEarthEquPos();
+			move.aim = StelApp::getInstance().getGlobalObjectMgr().getSelectedObject().get_earth_equ_pos(core->getNavigation());
 			move.aim.normalize();
 			move.aim*=2.;
 		}
@@ -534,9 +550,9 @@ void MovementMgr::updateVisionVector(double deltaTime)
 	}
 	else
 	{
-		if (flagTracking && core->getFlagHasSelected()) // Equatorial vision vector locked on selected object
+		if (flagTracking && StelApp::getInstance().getGlobalObjectMgr().getFlagHasSelected()) // Equatorial vision vector locked on selected object
 		{
-			nav->setEquVision(core->getSelectedObjectEarthEquPos());
+			nav->setEquVision(StelApp::getInstance().getGlobalObjectMgr().getSelectedObject().get_earth_equ_pos(core->getNavigation()));
 		}
 		else
 		{

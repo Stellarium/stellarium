@@ -24,6 +24,7 @@
 #include "InitParser.hpp"
 #include "StelApp.hpp"
 #include "StelTextureMgr.hpp"
+#include "StelObjectDB.hpp"
 
 #include <algorithm>
 
@@ -120,14 +121,17 @@ void TelescopeMgr::update(double deltaTime) {
   telescope_fader.update((int)(deltaTime*1000));
 }
 
-vector<StelObject> TelescopeMgr::search_around(Vec3d pos,
-                                               double lim_fov) const {
+vector<StelObject> TelescopeMgr::searchAround(const Vec3d& vv, double limitFov, const Navigator * nav, const Projector * prj) const
+{
   vector<StelObject> result;
-  pos.normalize();
-  double cos_lim_fov = cos(lim_fov * M_PI/180.);
+  if (!getFlagTelescopes())
+  	return result;
+  Vec3d v(vv);
+  v.normalize();
+  double cos_lim_fov = cos(limitFov * M_PI/180.);
   for (TelescopeMap::const_iterator it(telescope_map.begin());
        it!=telescope_map.end();it++) {
-    if (it->second->getObsJ2000Pos(0).dot(pos) >= cos_lim_fov) {
+    if (it->second->getObsJ2000Pos(0).dot(v) >= cos_lim_fov) {
       result.push_back(it->second);
     }
   }
@@ -197,6 +201,7 @@ void TelescopeMgr::init(const InitParser& conf, LoadingBar& lb) {
 	setFlagTelescopes(conf.get_boolean("astro:flag_telescopes"));
 	setFlagTelescopeName(conf.get_boolean("astro:flag_telescope_name"));  
   
+  StelApp::getInstance().getGlobalObjectMgr().registerStelObjectMgr(this);
 }
 
 void TelescopeMgr::telescopeGoto(int telescope_nr,const Vec3d &j2000_pos) {

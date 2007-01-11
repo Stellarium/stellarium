@@ -29,9 +29,6 @@
 #include "StelApp.hpp"
 #include "StelTextureMgr.hpp"
 
-StelObject StelObjectBase::getBrightestStarInConstellation(void) const {
-  return StelObject();
-}
 
 STexture * StelObjectBase::pointer_star = NULL;
 STexture * StelObjectBase::pointer_planet = NULL;
@@ -40,10 +37,14 @@ STexture * StelObjectBase::pointer_telescope = NULL;
 
 int StelObjectBase::local_time = 0;
 
-// Draw a nice animated pointer around the object
-void StelObjectBase::drawPointer(int delta_time, const Projector* prj, const Navigator * nav)
+void StelObjectBase::update(double deltaTime)
 {
-	local_time+=delta_time;
+	local_time+=(int)(deltaTime*1000);
+}
+
+// Draw a nice animated pointer around the object
+void StelObjectBase::drawPointer(const Projector* prj, const Navigator * nav)
+{
 	Vec3d pos=get_earth_equ_pos(nav);
 	Vec3d screenpos;
 	// Compute 2D pos and return if outside screen

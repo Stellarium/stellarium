@@ -33,6 +33,7 @@ using namespace std;
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "StelTextureMgr.hpp"
+#include "StelObjectDB.hpp"
 
 SolarSystem::SolarSystem()
 	:sun(NULL),moon(NULL),earth(NULL), moonScale(1.), fontSize(14.),
@@ -88,6 +89,8 @@ void SolarSystem::init(const InitParser& conf, LoadingBar& lb)
 	setFlagTrails(conf.get_boolean("astro", "flag_object_trails", false));
 	startTrails(conf.get_boolean("astro", "flag_object_trails", false));	
 	setFlagPoint(conf.get_boolean("stars:flag_point_star"));
+	
+	StelApp::getInstance().getGlobalObjectMgr().registerStelObjectMgr(this);
 }
 
 // Init and load the solar system data
@@ -531,7 +534,10 @@ vector<StelObject> SolarSystem::searchAround(const Vec3d& vv,
                                               const Projector * prj) const
 {
 	vector<StelObject> result;
-	Vec3d v(vv);
+	if (!getFlagPlanets())
+		return result;
+		
+	Vec3d v = nav->j2000_to_earth_equ(vv);
 	v.normalize();
 	double cos_lim_fov = cos(limitFov * M_PI/180.);
 	static Vec3d equPos;
@@ -834,4 +840,15 @@ vector<wstring> SolarSystem::listMatchingObjectsI18n(const wstring& objPrefix, u
 		}
 	}
 	return result;
+}
+
+void SolarSystem::selectedObjectChangeCallBack()
+{
+	if (StelApp::getInstance().getGlobalObjectMgr().getSelectedObject().get_type()==STEL_OBJECT_PLANET)
+	{
+		setSelected(StelApp::getInstance().getGlobalObjectMgr().getSelectedObject());
+//			// potentially record this action
+//			if (!recordActionCallback.empty())
+//				recordActionCallback("select planet " + selected_object.getEnglishName());
+	}
 }

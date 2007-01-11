@@ -34,6 +34,8 @@
 #include "LandscapeMgr.hpp"
 #include "GridLinesMgr.hpp"
 #include "MovementMgr.hpp"
+#include "StelObjectDB.hpp"
+#include "telescope_mgr.h"
 
 ////////////////////////////////////////////////////////////////////////////////
 //								CLASS FUNCTIONS
@@ -548,7 +550,6 @@ void StelUI::cb(void)
 	lmgr->setFlagCardinalsPoints(bt_flag_cardinals->getState());
 	lmgr->setFlagAtmosphere(bt_flag_atmosphere->getState());
 	
-	
 	nmgr->setFlagHints( bt_flag_nebula_name->getState() );
 	if (bt_flip_horz) core->getProjection()->setFlipHorz( bt_flip_horz->getState() );
 	if (bt_flip_vert) core->getProjection()->setFlipVert( bt_flip_vert->getState() );
@@ -582,7 +583,11 @@ void StelUI::cb(void)
 
 	FlagSearch			= bt_flag_search->getState();
 	search_win->setVisible(FlagSearch);
-	if (bt_flag_goto->getState()) mvmgr->gotoSelectedObject();
+	if (bt_flag_goto->getState())
+	{
+		if (StelApp::getInstance().getGlobalObjectMgr().getFlagHasSelected())
+			mvmgr->moveTo(StelApp::getInstance().getGlobalObjectMgr().getSelectedObject().get_earth_equ_pos(core->getNavigation()),mvmgr->getAutoMoveDuration());
+	}
 	bt_flag_goto->setState(false);
 
 	if (!bt_flag_quit->getState()) app->quit();
@@ -818,7 +823,7 @@ int StelUI::handle_clic(Uint16 x, Uint16 y, Uint8 button, Uint8 state)
 	if(app->scripts->is_playing()) return 0;
 
 	// Make sure object pointer is turned on (script may have turned off)
-	core->setFlagSelectedObjectPointer(true);
+	StelApp::getInstance().getGlobalObjectMgr().setFlagSelectedObjectPointer(true);
 
 	// Show cursor
 	SDL_ShowCursor(1);
@@ -833,6 +838,8 @@ int StelUI::handle_clic(Uint16 x, Uint16 y, Uint8 button, Uint8 state)
 
 	// Manage the event for the main window
 	{
+		
+		
 		// Deselect the selected object
 		if (button==SDL_BUTTON_RIGHT && state==SDL_MOUSEBUTTONUP)
 		{
@@ -850,10 +857,10 @@ int StelUI::handle_clic(Uint16 x, Uint16 y, Uint8 button, Uint8 state)
 			}
 
 			// Try to select object at that position
-			core->findAndSelect(x, y);
+			StelApp::getInstance().getGlobalObjectMgr().findAndSelect(core, x, y);
 
 			// If an object was selected update informations
-			if (core->getFlagHasSelected()) updateInfoSelectString();
+			if (StelApp::getInstance().getGlobalObjectMgr().getFlagHasSelected()) updateInfoSelectString();
 		}
 	}
 	return 0;
@@ -1005,7 +1012,7 @@ int StelUI::handle_keys(SDLKey key, SDLMod mod, Uint16 unicode, Uint8 state)
 			}
             return 0;
 		}
-
+		TelescopeMgr* telmgr = (TelescopeMgr*)StelApp::getInstance().getModuleMgr().getModule("telescopes");
         switch (key) {
 		case SDLK_ESCAPE:
 	        // RFE 1310384, ESC closes dialogs
@@ -1028,11 +1035,14 @@ int StelUI::handle_keys(SDLKey key, SDLMod mod, Uint16 unicode, Uint8 state)
             break;
 		case SDLK_0:
             if (mod & COMPATIBLE_KMOD_CTRL)
-				core->telescopeGoto(0);
+            {
+            	
+            	telmgr->telescopeGoto(0,StelApp::getInstance().getGlobalObjectMgr().getSelectedObject().getObsJ2000Pos(core->getNavigation()));
+            }
             break;
 		case SDLK_1:
             if (mod & COMPATIBLE_KMOD_CTRL) {
-				core->telescopeGoto(1);
+            	telmgr->telescopeGoto(1,StelApp::getInstance().getGlobalObjectMgr().getSelectedObject().getObsJ2000Pos(core->getNavigation()));
             } else {
 				FlagConfig=!FlagConfig;
 				config_win->setVisible(FlagConfig);
@@ -1040,15 +1050,19 @@ int StelUI::handle_keys(SDLKey key, SDLMod mod, Uint16 unicode, Uint8 state)
             break;
 		case SDLK_2:
             if (mod & COMPATIBLE_KMOD_CTRL)
-				core->telescopeGoto(2);
+            {
+            	telmgr->telescopeGoto(2,StelApp::getInstance().getGlobalObjectMgr().getSelectedObject().getObsJ2000Pos(core->getNavigation()));
+            }
             break;
 		case SDLK_3:
             if (mod & COMPATIBLE_KMOD_CTRL)
-				core->telescopeGoto(3);
+            {
+            	telmgr->telescopeGoto(3,StelApp::getInstance().getGlobalObjectMgr().getSelectedObject().getObsJ2000Pos(core->getNavigation()));
+            }
             break;
 		case SDLK_4:
             if (mod & COMPATIBLE_KMOD_CTRL) {
-				core->telescopeGoto(4);
+            	telmgr->telescopeGoto(4,StelApp::getInstance().getGlobalObjectMgr().getSelectedObject().getObsJ2000Pos(core->getNavigation()));
 				break;
             } // else fall through
 		case SDLK_COMMA:
@@ -1072,7 +1086,7 @@ int StelUI::handle_keys(SDLKey key, SDLMod mod, Uint16 unicode, Uint8 state)
 		}
 		case SDLK_5:
             if (mod & COMPATIBLE_KMOD_CTRL) {
-				core->telescopeGoto(5);
+            	telmgr->telescopeGoto(5,StelApp::getInstance().getGlobalObjectMgr().getSelectedObject().getObsJ2000Pos(core->getNavigation()));
 				break;
             } // else fall through
 		case SDLK_PERIOD:
@@ -1080,19 +1094,25 @@ int StelUI::handle_keys(SDLKey key, SDLMod mod, Uint16 unicode, Uint8 state)
             break;
 		case SDLK_6:
             if (mod & COMPATIBLE_KMOD_CTRL)
-				core->telescopeGoto(6);
+            {
+            	telmgr->telescopeGoto(6,StelApp::getInstance().getGlobalObjectMgr().getSelectedObject().getObsJ2000Pos(core->getNavigation()));
+            }
             break;
 		case SDLK_7:
             if (mod & COMPATIBLE_KMOD_CTRL)
-				core->telescopeGoto(7);
+            {
+            	telmgr->telescopeGoto(7,StelApp::getInstance().getGlobalObjectMgr().getSelectedObject().getObsJ2000Pos(core->getNavigation()));
+            }
             break;
 		case SDLK_8:
             if (mod & COMPATIBLE_KMOD_CTRL)
-				core->telescopeGoto(8);
+            {
+            	telmgr->telescopeGoto(8,StelApp::getInstance().getGlobalObjectMgr().getSelectedObject().getObsJ2000Pos(core->getNavigation()));
+            }
             break;
 		case SDLK_9:
             if (mod & COMPATIBLE_KMOD_CTRL) {
-				core->telescopeGoto(9);
+            	telmgr->telescopeGoto(9,StelApp::getInstance().getGlobalObjectMgr().getSelectedObject().getObsJ2000Pos(core->getNavigation()));
             } else {
             	MeteorMgr* metmgr = (MeteorMgr*)StelApp::getInstance().getModuleMgr().getModule("meteors");
 				const int zhr = metmgr->getZHR();
@@ -1296,9 +1316,14 @@ void StelUI::gui_update_widgets(int delta_time)
 
 	// update message win
 	message_win->update(delta_time);
+	
+	ConstellationMgr* cmgr = (ConstellationMgr*)StelApp::getInstance().getModuleMgr().getModule("constellations");
+	NebulaMgr* nmgr = (NebulaMgr*)StelApp::getInstance().getModuleMgr().getModule("nebulas");
+	LandscapeMgr* lmgr = (LandscapeMgr*)StelApp::getInstance().getModuleMgr().getModule("landscape");
+	GridLinesMgr* grlmgr = (GridLinesMgr*)StelApp::getInstance().getModuleMgr().getModule("gridlines");
 
-
-	if (FlagShowSelectedObjectInfo && core->getFlagHasSelected())
+	
+	if (FlagShowSelectedObjectInfo && StelApp::getInstance().getGlobalObjectMgr().getFlagHasSelected())
 	{
 		info_select_ctr->setVisible(true);
 		updateInfoSelectString();
@@ -1308,11 +1333,6 @@ void StelUI::gui_update_widgets(int delta_time)
 
 	bt_flag_ctr->setVisible(FlagMenu);
 	bt_time_control_ctr->setVisible(FlagMenu);
-
-	ConstellationMgr* cmgr = (ConstellationMgr*)StelApp::getInstance().getModuleMgr().getModule("constellations");
-	NebulaMgr* nmgr = (NebulaMgr*)StelApp::getInstance().getModuleMgr().getModule("nebulas");
-	LandscapeMgr* lmgr = (LandscapeMgr*)StelApp::getInstance().getModuleMgr().getModule("landscape");
-	GridLinesMgr* grlmgr = (GridLinesMgr*)StelApp::getInstance().getModuleMgr().getModule("gridlines");
 	
 	bt_flag_constellation_draw->setState(cmgr->getFlagLines());
 	bt_flag_constellation_name->setState(cmgr->getFlagNames());
@@ -1356,9 +1376,9 @@ void StelUI::updateInfoSelectString(void)
 	}
 	else
 	{
-		info_select_txtlbl->setTextColor(core->getSelectedObjectInfoColor());
+		info_select_txtlbl->setTextColor(StelApp::getInstance().getGlobalObjectMgr().getSelectedObject().getInfoColor());
 	}
-	info_select_txtlbl->setLabel(core->getSelectedObjectInfo());
+	info_select_txtlbl->setLabel(StelApp::getInstance().getGlobalObjectMgr().getSelectedObject().getInfoString(core->getNavigation()));
 }
 
 void StelUI::setTitleObservatoryName(const wstring& name)

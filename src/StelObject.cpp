@@ -72,14 +72,13 @@ bool StelObject::operator==(const StelObject &o) const {
   return (rep == o.rep);
 }
 
-void StelObject::update(void) {
-  rep->update();
+void StelObject::update(double deltaTime) {
+  rep->update(deltaTime);
 }
 
-void StelObject::drawPointer(int delta_time,
-                              const Projector *prj,
+void StelObject::drawPointer(const Projector *prj,
                               const Navigator *nav) {
-  rep->drawPointer(delta_time,prj,nav);
+  rep->drawPointer(prj,nav);
 }
 
 wstring StelObject::getInfoString(const Navigator *nav) const {
@@ -114,12 +113,16 @@ float StelObject::get_mag(const Navigator *nav) const {
   return rep->get_mag(nav);
 }
 
+float StelObject::getSelectPriority(const Navigator *nav) const {
+	return rep->getSelectPriority(nav);
+}
+
 Vec3f StelObject::get_RGB(void) const {
   return rep->get_RGB();
 }
 
-StelObject StelObject::getBrightestStarInConstellation(void) const {
-  return rep->getBrightestStarInConstellation();
+Vec3f StelObject::getInfoColor(void) const {
+	return rep->getInfoColor();
 }
 
 double StelObject::get_close_fov(const Navigator *nav) const {
